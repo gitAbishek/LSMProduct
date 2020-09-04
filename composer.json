@@ -1,0 +1,52 @@
+{
+  "name": "themegrill/masteriyo",
+  "description": "An WordPress LMS plugin",
+  "version": "0.1.0",
+  "homepage": "https://example.com",
+  "license": "GPL-2.0-or-later",
+  "type": "wordpress-plugin",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "authors": [
+    {
+      "name": "wpeverest",
+      "email": "support@wpeverest.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ThemeGrill\\Masteriyo\\": "includes/"
+    }
+  },
+  "require": {},
+  "require-dev": {
+    "wp-cli/i18n-command": "2.2",
+    "wp-coding-standards/wpcs": "2.3.0",
+		"dealerdirect/phpcodesniffer-composer-installer": "0.7.0",
+    "phpcompatibility/phpcompatibility-wp": "2.1.0",
+    "sirbrillig/phpcs-variable-analysis": "2.8",
+    "phpunit/phpunit": "7.5.20"
+  },
+  "scripts": {
+		"phpcs": [
+			"phpcs"
+		],
+		"phpcbf": [
+			"phpcbf"
+		],
+		"makepot-audit": [
+			"wp i18n make-pot . --slug=wp-plugin-starter"
+		],
+		"makepot": [
+			"@makepot-audit --skip-audit"
+		]
+	},
+  "extra": {
+		"scripts-description": {
+			"phpcs": "Analyze code against the WordPress coding standard with PHP_CodeSniffer",
+			"phpcbf": "Fix coding standards warnings/errors automattically with PHP Code Beautifier",
+			"makepot-audit": "Generate langauges/wp-plugin-starter.pot file and run audit",
+			"makepot": "Generate langauges/wp-plugin-starter.pot file"
+		}
+	}
+}

@@ -19,7 +19,7 @@ export default class App extends Component {
 				<div className="masteriyo">
 					<nav>
 						<header className="masteriyo-header">
-							{ __( 'Masteriyo', 'masteriyo' ) }
+							{ __( 'Masteriyo Live Reload Test', 'masteriyo' ) }
 						</header>
 					</nav>
 

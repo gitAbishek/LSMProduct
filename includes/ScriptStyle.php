@@ -141,6 +141,13 @@ class ScriptStyle {
 				'type'     => 'admin',
 				'callback' => ''
 			),
+			'livereload' => array(
+				'src' => 'http://localhost:35729/livereload.js',
+				'deps' => array(),
+				'version' => $version,
+				'type' => 'admin',
+				'callback' => ''
+			),
 			'masteriyo-public' => array(
 				'src'      => $this->get_asset_url( '/assets/build/public.js' ),
 				'deps'     => array( 'wp-polyfill' ),

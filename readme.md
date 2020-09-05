@@ -16,6 +16,7 @@
 
 ```sh
 yarn install
+composer install
 ```
 
 ## Usage

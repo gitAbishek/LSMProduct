@@ -6,8 +6,6 @@ import { __ } from '@wordpress/i18n';
 
 export default class Tags extends Component {
 	render() {
-		return (
-			<h1>{ __( 'Tags', 'masteriyo' ) }</h1>
-		);
+		return <h1>{ __( 'Tags', 'masteriyo' ) }</h1>;
 	}
 }

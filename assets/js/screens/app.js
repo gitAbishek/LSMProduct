@@ -3,14 +3,13 @@
  */
 import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { HashRouter as Router, Route, Link, Switch, NavLink } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Categories from './categories';
 import Tags from './tags';
 import Courses from './courses';
 import Dashboard from './dashboard';
 import Masteriyo from './masteriyo';
-
 
 export default class App extends Component {
 	render() {
@@ -34,7 +33,7 @@ export default class App extends Component {
 							<Categories />
 						</Route>
 						<Route path="/tags">
-							<Tags/>
+							<Tags />
 						</Route>
 						<Route>
 							<Masteriyo />

@@ -2,12 +2,11 @@
  * External dependencies
  */
 import { render } from '@wordpress/element';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 /**
  * Internal dependencies
  */
-import App from './components/app';
+import App from './screens/app';
 
 const appRoot = document.getElementById( 'masteriyo' );
 

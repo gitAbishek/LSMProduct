@@ -3,7 +3,7 @@
  */
 import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { Button } from 'antd';
+import Button from '../components/common/button';
 import 'antd/dist/antd.less';
 
 export default class Dashboard extends Component {

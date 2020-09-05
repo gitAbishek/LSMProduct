@@ -1,5 +1,6 @@
-const path          = require( 'path' );
+const path = require( 'path' );
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 module.exports = {
 	...defaultConfig,
@@ -9,6 +10,42 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		path: path.resolve( process.cwd(), 'assets/build' )
-	}
-}
+		path: path.resolve( process.cwd(), 'assets/build' ),
+	},
+	module: {
+		...defaultConfig.module,
+		rules: [
+			...defaultConfig.module.rules,
+			{
+				test: /\.less$/,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+					},
+					{
+						loader: 'css-loader',
+					},
+					{
+						loader: 'less-loader',
+						options: {
+							lessOptions: {
+								modifyVars: {
+									'primary-color': '#1DA57A',
+									'link-color': '#1DA57A',
+									'border-radius-base': '2px',
+								},
+								javascriptEnabled: true,
+							},
+						},
+					},
+				],
+			},
+		],
+	},
+	plugins: [
+		...defaultConfig.plugins,
+		new MiniCssExtractPlugin( {
+			filename: '[name].css',
+		} ),
+	],
+};

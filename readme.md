@@ -24,12 +24,6 @@ yarn install
 yarn run start
 ```
 
-## Run tests
-
-```sh
-yarn test
-```
-
 ## Author
 
 👤 **Themegrill**
@@ -41,5 +35,3 @@ yarn test
 Give a ⭐️ if this project helped you!
 
 ---
-
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

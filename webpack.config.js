@@ -2,12 +2,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { isProduction, isDevelopment } = require('webpack-mode');
 
 const config = {
 	entry: {
 		app: path.resolve(process.cwd(), 'assets/js/src', 'index.js'),
 	},
+
 	output: {
 		filename: '[name].js',
 		path: path.resolve(process.cwd(), 'assets/js/build'),
@@ -39,6 +42,7 @@ const config = {
 			},
 		],
 	},
+
 	plugins: [
 		isDevelopment &&
 			new HtmlWebpackPlugin({
@@ -47,10 +51,12 @@ const config = {
 
 		// Extracts CSS in separate css file
 		isProduction && new MiniCSSExtractPlugin({ filename: '[name].css' }),
-
 		// Extracts dependencies on php file,which can be enqueued seperately in WordPress
 		isProduction &&
 			new DependencyExtractionWebpackPlugin({ injectPolyfill: true }),
+		isProduction && new BundleAnalyzerPlugin(),
+
+		isProduction && new CleanWebpackPlugin(),
 	].filter(Boolean),
 };
 

@@ -135,7 +135,7 @@ class ScriptStyle {
 
 		$scripts = apply_filters( 'masteriyo_enqueue_scripts', array(
 			'masteriyo-admin' => array(
-				'src'      => $this->get_asset_url( '/assets/build/admin.js' ),
+				'src'      => $this->get_asset_url( '/assets/js/build/app.js' ),
 				'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 				'version'  => $version,
 				'type'     => 'admin',
@@ -149,7 +149,7 @@ class ScriptStyle {
 				'callback' => ''
 			),
 			'masteriyo-public' => array(
-				'src'      => $this->get_asset_url( '/assets/build/public.js' ),
+				'src'      => $this->get_asset_url( '/assets/js/build/public.js' ),
 				'deps'     => array( 'wp-polyfill' ),
 				'version'  => $version,
 				'type'     => 'public',

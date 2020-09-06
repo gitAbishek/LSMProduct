@@ -1,82 +1,31 @@
 {
-	"name": "masteriyo",
-	"version": "0.1.0",
-	"description": "WordPress Learning Management System(LMS) pluign",
-	"author": "Themegrill",
-	"license": "GPL-2.0-or-later",
-	"keywords": [
-		"lms",
-		"wordpress",
-		"learning management system",
-		"plugin"
-	],
-	"homepage": "https://github.com/wpeverest/wordpress-lms",
-	"repository": "https://github.com/wpeverest/wordpress-lms/issues",
-	"bugs": "https://github.com/wpeverest/wordpress-lms/issues",
-	"engines": {
-		"node": ">=10.0.0",
-		"npm": ">=6.9.0"
-	},
-	"main": "assets/js/admin.js",
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged",
-			"pre-push": "./bin/pre-push.sh",
-			"post-merge": "./bin/post-merge.sh"
-		}
-	},
-	"lint-staged": {
-		"*.scss": [
-			"wp-scripts lint-style"
-		],
-		"*.js": [
-			"wp-scripts format-js",
-			"wp-scripts lint-js"
-		],
-		"*.php": [
-			"php -d display_errors=1 -l",
-			"composer run-script phpcs"
-		],
-		"package.json": [
-			"wp-scripts lint-pkg-json"
-		]
-	},
-	"dependencies": {
-		"@wordpress/components": "10.0.6",
-		"@wordpress/element": "2.16.0",
-		"@wordpress/i18n": "3.14.0",
-		"antd": "4.6.2",
-		"less": "3.12.2",
-		"less-loader": "7.0.1",
-		"mini-css-extract-plugin": "0.11.0",
-		"react-router-dom": "5.2.0",
-		"style-loader": "1.2.1",
-		"styled-components": "5.2.0"
-	},
-	"devDependencies": {
-		"@babel/cli": "7.10.5",
-		"@babel/core": "7.11.1",
-		"@babel/preset-env": "7.11.0",
-		"@babel/preset-react": "7.10.4",
-		"@wordpress/browserslist-config": "2.7.0",
-		"@wordpress/eslint-plugin": "7.1.0",
-		"@wordpress/scripts": "12.1.1",
-		"babel-plugin-transform-remove-console": "6.9.4",
-		"babel-plugin-transform-remove-debugger": "6.9.4",
-		"husky": "4.2.5",
-		"lint-staged": "10.2.11"
-	},
-	"scripts": {
-		"build": "wp-scripts build",
-		"check-engines": "wp-scripts check-engines",
-		"check-licenses": "wp-scripts check-licenses",
-		"format:js": "wp-scripts format-js",
-		"lint:js": "wp-scripts lint-js",
-		"lint:js-fix": "npm run lint:js -- --fix",
-		"lint:css": "wp-scripts lint-style",
-		"lint:css-fix": "npm run lint:css -- --fix",
-		"lint:php": "composer run-script phpcs includes",
-		"lint": "npm run lint:php && npm run lint:js && npm run lint:css",
-		"start": "wp-scripts start"
-	}
+  "name": "wordpress-lms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Sanjeev Shrestha <sethstha@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@wordpress/babel-preset-default": "^4.18.0",
+    "@wordpress/element": "^2.17.0",
+    "@wordpress/i18n": "^3.15.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.8.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^4.2.2",
+    "html-webpack-plugin": "^4.4.1",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production"
+  }
 }

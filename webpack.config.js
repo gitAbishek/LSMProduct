@@ -1,51 +1,35 @@
-const path = require( 'path' );
-const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
-const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	...defaultConfig,
-	entry: {
-		public: path.resolve( process.cwd(), 'assets/js', 'public.js' ),
-		admin: path.resolve( process.cwd(), 'assets/js', 'admin.js' ),
-	},
-	output: {
-		filename: '[name].js',
-		path: path.resolve( process.cwd(), 'assets/build' ),
-	},
-	module: {
-		...defaultConfig.module,
-		rules: [
-			...defaultConfig.module.rules,
-			{
-				test: /\.less$/,
-				use: [
-					{
-						loader: MiniCssExtractPlugin.loader,
-					},
-					{
-						loader: 'css-loader',
-					},
-					{
-						loader: 'less-loader',
-						options: {
-							lessOptions: {
-								modifyVars: {
-									'primary-color': '#787DFF',
-									'link-color': '#787DFF',
-									'border-radius-base': '2px',
-								},
-								javascriptEnabled: true,
-							},
-						},
-					},
-				],
-			},
-		],
-	},
-	plugins: [
-		...defaultConfig.plugins,
-		new MiniCssExtractPlugin( {
-			filename: '[name].css',
-		} ),
-	],
+  entry: {
+    app: path.resolve(process.cwd(), 'assets/js/src', 'index.js'),
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(process.cwd(), 'assets/js/build'),
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: ['styled-loader', 'css-loader'],
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './assets/js/src/index.html',
+    }),
+  ],
 };

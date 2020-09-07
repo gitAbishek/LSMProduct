@@ -56,8 +56,8 @@ const config = {
 						options: {
 							lessOptions: {
 								modifyVars: {
-									'primary-color': '#1DA57A',
-									'link-color': '#1DA57A',
+									'primary-color': '#787DFF',
+									'link-color': '#787DFF',
 									'border-radius-base': '3px',
 								},
 								javascriptEnabled: true,

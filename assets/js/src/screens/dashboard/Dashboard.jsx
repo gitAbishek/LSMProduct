@@ -1,15 +1,24 @@
 import { Component } from '@wordpress/element';
 import { Link } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 
+const { Header, Content, Footer } = Layout;
 export default class Dashboard extends Component {
 	render() {
 		return (
-			<div>
-				<h1>Hello</h1>
-				<Link tp="/">this is home</Link>
-				<Button>This is ant button</Button>
-			</div>
+			<Layout>
+				<Header style={{ padding: 0 }}>
+					<Menu mode="horizontal">
+						<Menu.Item key="course">Course</Menu.Item>
+						<Menu.Item key="course-builder">
+							Course Builder
+						</Menu.Item>
+						<Menu.Item key="settings">Settings</Menu.Item>
+					</Menu>
+				</Header>
+				<Content></Content>
+				<Footer></Footer>
+			</Layout>
 		);
 	}
 }

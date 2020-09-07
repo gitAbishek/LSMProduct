@@ -5,7 +5,5 @@ import App from './App';
 const appRoot = document.getElementById('masteriyo');
 
 if (appRoot) {
-  render(<App />, appRoot);
-} else {
-  console.log('not found');
+	render(<App />, appRoot);
 }

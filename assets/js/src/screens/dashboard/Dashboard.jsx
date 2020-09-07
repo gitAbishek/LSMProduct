@@ -1,6 +1,7 @@
 import { Component } from '@wordpress/element';
 import { Link } from 'react-router-dom';
 import { Button, Layout, Menu } from 'antd';
+import './style.css';
 
 const { Header, Content, Footer } = Layout;
 export default class Dashboard extends Component {

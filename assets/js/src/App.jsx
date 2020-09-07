@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import * as screens from './screens';
-import { Link } from 'react-router-dom';
 
 export default class App extends Component {
 	render() {

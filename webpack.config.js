@@ -19,7 +19,7 @@ const config = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
@@ -58,6 +58,8 @@ const config = {
 
 		isProduction && new CleanWebpackPlugin(),
 	].filter(Boolean),
+
+	resolve: { extensions: ['.js', '.jsx'] },
 };
 
 module.exports = config;

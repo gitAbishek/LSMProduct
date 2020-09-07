@@ -5,10 +5,10 @@ import './style.css';
 export default class Dashboard extends Component {
 	render() {
 		return (
-			<>
+			<div>
 				<h1>Hello</h1>
-				<Link tp="/">home</Link>
-			</>
+				<Link tp="/">this is home</Link>
+			</div>
 		);
 	}
 }

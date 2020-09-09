@@ -93,7 +93,10 @@ const config = {
 
 		isProduction && new CleanWebpackPlugin(),
 		isDevelopment && new webpack.HotModuleReplacementPlugin(),
-		isDevelopment && new ReactRefreshWebpackPlugin(),
+		isDevelopment &&
+			new ReactRefreshWebpackPlugin({
+				overlay: false,
+			}),
 		isDevelopment && new ErrorOverlayPlugin(),
 	].filter(Boolean),
 
@@ -109,8 +112,7 @@ const config = {
 	},
 
 	devServer: {
-		port: 3000,
-		overlay: true,
+		port: 4000,
 	},
 
 	devtool: isDevelopment ? 'cheap-module-source-map' : false,

@@ -6,7 +6,6 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { isProduction, isDevelopment } = require('webpack-mode');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const webpack = require('webpack');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 
 const config = {
@@ -55,7 +54,9 @@ const config = {
 				test: /\.less$/,
 				use: [
 					{
-						loader: 'style-loader',
+						loader: isProduction
+							? MiniCSSExtractPlugin.loader
+							: 'style-loader',
 					},
 					{
 						loader: 'css-loader',

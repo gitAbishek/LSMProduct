@@ -1,7 +1,6 @@
 import { Component } from '@wordpress/element';
 import { Link } from 'react-router-dom';
-import { Button, Layout, Menu } from 'antd';
-import './style.css';
+import { Button, Layout, Menu, Icon } from 'antd';
 
 const { Header, Content, Footer } = Layout;
 export default class Dashboard extends Component {
@@ -9,12 +8,13 @@ export default class Dashboard extends Component {
 		return (
 			<Layout>
 				<Header style={{ padding: 0 }}>
+					<Icon type="expand" />
 					<Menu mode="horizontal">
 						<Menu.Item key="course">Course</Menu.Item>
 						<Menu.Item key="course-builder">
 							Course Builder
 						</Menu.Item>
-						<Menu.Item key="settings">Settings</Menu.Item>
+						<Menu.Item key="settings">Ok</Menu.Item>
 					</Menu>
 				</Header>
 				<Content></Content>

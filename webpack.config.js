@@ -5,6 +5,8 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { isProduction, isDevelopment } = require('webpack-mode');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const webpack = require('webpack');
 
 const config = {
 	entry: {
@@ -23,6 +25,12 @@ const config = {
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
+					options: {
+						plugins: [
+							isDevelopment &&
+								require.resolve('react-refresh/babel'),
+						].filter(Boolean),
+					},
 				},
 			},
 
@@ -83,9 +91,23 @@ const config = {
 		isProduction && new BundleAnalyzerPlugin(),
 
 		isProduction && new CleanWebpackPlugin(),
+		isDevelopment && new webpack.HotModuleReplacementPlugin(),
+		isDevelopment && new ReactRefreshWebpackPlugin(),
 	].filter(Boolean),
 
-	resolve: { extensions: ['.js', '.jsx'] },
-};
+	resolve: {
+		alias: {
+			'@ant-design/icons/lib/dist$': path.resolve(
+				process.cwd(),
+				'assets/js/src/assets/icons',
+				'index.js'
+			),
+		},
+		extensions: ['.js', '.jsx'],
+	},
 
+	devServer: {
+		port: 3000,
+	},
+};
 module.exports = config;

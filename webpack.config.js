@@ -92,7 +92,6 @@ const config = {
 		isProduction && new BundleAnalyzerPlugin(),
 
 		isProduction && new CleanWebpackPlugin(),
-		isDevelopment && new webpack.HotModuleReplacementPlugin(),
 		isDevelopment &&
 			new ReactRefreshWebpackPlugin({
 				overlay: false,
@@ -101,16 +100,6 @@ const config = {
 	].filter(Boolean),
 
 	resolve: {
-		alias: {
-			InnerComponents: path.resolve(
-				__dirname,
-				'assets/js/src/mycomponents/index.js'
-			),
-			'@ant-design/icons/lib/dist$': path.resolve(
-				__dirname,
-				'assets/js/src/assets/icons/index.js'
-			),
-		},
 		extensions: ['.js', '.jsx'],
 	},
 

@@ -10,7 +10,7 @@ export default class Dashboard extends Component {
 				<Header style={{ padding: 0 }}>
 					<Icon type="expand" />
 					<Menu mode="horizontal">
-						<Menu.Item key="course">{Course.lyang}</Menu.Item>
+						<Menu.Item key="course">Course</Menu.Item>
 						<Menu.Item key="course-builder">
 							Course Builder
 						</Menu.Item>

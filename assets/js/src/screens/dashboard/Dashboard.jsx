@@ -1,14 +1,20 @@
 import { Component } from '@wordpress/element';
 import { Link } from 'react-router-dom';
 import { Button, Layout, Menu, Icon } from 'antd';
+import testComp from '../../mycomponents';
 
 const { Header, Content, Footer } = Layout;
 export default class Dashboard extends Component {
 	render() {
 		return (
-			<Layout>
+			<div>
 				<Header style={{ padding: 0 }}>
-					<Icon type="expand" />
+					<testComp />
+					<Icon
+						type="expand"
+						theme="outline"
+						style={{ backgroundColor: 'red' }}
+					/>
 					<Menu mode="horizontal">
 						<Menu.Item key="course">Course</Menu.Item>
 						<Menu.Item key="course-builder">
@@ -19,7 +25,7 @@ export default class Dashboard extends Component {
 				</Header>
 				<Content></Content>
 				<Footer></Footer>
-			</Layout>
+			</div>
 		);
 	}
 }

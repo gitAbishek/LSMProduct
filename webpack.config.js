@@ -30,13 +30,6 @@ const config = {
 						plugins: [
 							isDevelopment &&
 								require.resolve('react-refresh/babel'),
-							isDevelopment && [
-								'import',
-								{
-									libraryName: 'antd',
-									style: true,
-								},
-							],
 						].filter(Boolean),
 					},
 				},
@@ -109,9 +102,13 @@ const config = {
 
 	resolve: {
 		alias: {
+			InnerComponents: path.resolve(
+				__dirname,
+				'assets/js/src/mycomponents/index.js'
+			),
 			'@ant-design/icons/lib/dist$': path.resolve(
 				__dirname,
-				'assets/src/assets/icons/'
+				'assets/js/src/assets/icons/index.js'
 			),
 		},
 		extensions: ['.js', '.jsx'],

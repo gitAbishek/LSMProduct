@@ -7,6 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { isProduction, isDevelopment } = require('webpack-mode');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const webpack = require('webpack');
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 
 const config = {
 	entry: {
@@ -93,6 +94,7 @@ const config = {
 		isProduction && new CleanWebpackPlugin(),
 		isDevelopment && new webpack.HotModuleReplacementPlugin(),
 		isDevelopment && new ReactRefreshWebpackPlugin(),
+		isDevelopment && new ErrorOverlayPlugin(),
 	].filter(Boolean),
 
 	resolve: {
@@ -108,6 +110,9 @@ const config = {
 
 	devServer: {
 		port: 3000,
+		overlay: true,
 	},
+
+	devtool: isDevelopment ? 'cheap-module-source-map' : false,
 };
 module.exports = config;

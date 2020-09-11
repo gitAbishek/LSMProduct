@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default styled.div`
+const Flex = styled.div`
 	display: flex;
 	flex: ${(props) => props.flex};
 	flex-direction: ${(props) => props.direction || 'column'};
@@ -9,3 +9,5 @@ export default styled.div`
 	flex-wrap: ${(props) => props.wrap || null};
 	align-self: ${(props) => props.alignSelf || null};
 `;
+
+export default Flex;

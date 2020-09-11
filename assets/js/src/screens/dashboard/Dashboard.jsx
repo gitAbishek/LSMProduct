@@ -1,12 +1,12 @@
-import * as React from '@wordpress/element';
-import Header from '../../components/common/Layout';
+import { React, Fragment } from '@wordpress/element';
+import MainToolbar from './../layouts/MainToolbar';
 
-export default class Dashboard extends React.Component {
-	render() {
-		return (
-			<div>
-				<Header>This is header</Header>
-			</div>
-		);
-	}
-}
+const Dashboard = () => {
+	return (
+		<Fragment>
+			<MainToolbar />
+		</Fragment>
+	);
+};
+
+export default Dashboard;

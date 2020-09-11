@@ -1,4 +1,4 @@
-import { render } from '@wordpress/element';
+import { React, render } from '@wordpress/element';
 
 import App from './App';
 

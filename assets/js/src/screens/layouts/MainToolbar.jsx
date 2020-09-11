@@ -30,4 +30,6 @@ const LogoContainer = styled(Flex)`
 		max-width: 100%;
 	}
 `;
-const HeaderLeftContent = styled(Flex)``;
+const HeaderLeftContent = styled(Flex)`
+	padding: 24px 16px;
+`;

@@ -9,6 +9,8 @@ import {
 
 import * as screens from './screens';
 
+import './app.css';
+
 const App = () => {
 	return (
 		<Router>

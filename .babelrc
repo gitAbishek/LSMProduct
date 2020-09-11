@@ -1,13 +1,3 @@
 {
-	"presets": ["@babel/preset-env", "@wordpress/default"],
-	"plugins": [
-		[
-			"import",
-			{
-				"libraryName": "antd",
-				"libraryDirectory": "es",
-				"style": true
-			}
-		]
-	]
+	"presets": ["@babel/preset-env", "@wordpress/default"]
 }

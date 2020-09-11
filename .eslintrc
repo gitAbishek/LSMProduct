@@ -13,5 +13,6 @@
 		"indent": 0,
 		"no-console": 1
 	},
-	"parser": "babel-eslint"
+	"parser": "babel-eslint",
+	"extends": ["eslint:recommended", "plugin:react/recommended"]
 }

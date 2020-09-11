@@ -1,12 +1,15 @@
-import { Component } from '@wordpress/element';
+import * as React from '@wordpress/element';
 
-import { __ } from '@wordpress/i18n';
-
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+	HashRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from 'react-router-dom';
 
 import * as screens from './screens';
 
-export default class App extends Component {
+export default class App extends React.Component {
 	render() {
 		return (
 			<Router>
@@ -14,6 +17,9 @@ export default class App extends Component {
 					<Switch>
 						<Route path="/dashboard">
 							<screens.Dashboard />
+						</Route>
+						<Route exact path="/">
+							<Redirect to="/dashboard" />
 						</Route>
 					</Switch>
 				</div>

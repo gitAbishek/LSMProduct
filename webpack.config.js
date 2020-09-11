@@ -48,34 +48,6 @@ const config = {
 					},
 				],
 			},
-
-			// less loader for ant design
-			{
-				test: /\.less$/,
-				use: [
-					{
-						loader: isProduction
-							? MiniCSSExtractPlugin.loader
-							: 'style-loader',
-					},
-					{
-						loader: 'css-loader',
-					},
-					{
-						loader: 'less-loader',
-						options: {
-							lessOptions: {
-								modifyVars: {
-									'primary-color': '#787DFF',
-									'link-color': '#787DFF',
-									'border-radius-base': '3px',
-								},
-								javascriptEnabled: true,
-							},
-						},
-					},
-				],
-			},
 		],
 	},
 

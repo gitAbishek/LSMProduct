@@ -3,6 +3,7 @@ import colors from './../../config/colors';
 import styled from 'styled-components';
 import Flex from './../../components/common/Flex';
 import LogoImg from '../../../../img/logo.png';
+import Button from './../../components/common/Button';
 
 const MainToolbar = () => {
 	return (
@@ -12,6 +13,9 @@ const MainToolbar = () => {
 					<img src={LogoImg} alt="Masteriyo Logo" />
 				</LogoContainer>
 			</HeaderLeftContent>
+			<HeaderRightContent>
+				<Button>This is default</Button>
+			</HeaderRightContent>
 		</Header>
 	);
 };
@@ -32,4 +36,9 @@ const LogoContainer = styled(Flex)`
 `;
 const HeaderLeftContent = styled(Flex)`
 	padding: 24px 16px;
+`;
+
+const HeaderRightContent = styled(Flex)`
+	margin-left: auto;
+	justify-content: flex-end;
 `;

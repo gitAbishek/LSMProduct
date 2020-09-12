@@ -4,6 +4,7 @@ import colors from './../../config/colors';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
 import fontSize from '../../config/fontSize';
+import defaultStyle from '../../config/defaultStyle';
 
 const Button = (props) => {
 	const { icon, type, size, children } = props;
@@ -30,7 +31,15 @@ const StyledButton = styled.button`
 	border: 1px solid ${colors.border};
 	padding: 10px 12px;
 	font-weight: bold;
+	font-size: ${fontSize.SMALL};
+	border-radius: ${defaultStyle.borderRadius};
 
+	&:hover {
+		color: ${colors.PRIMARY};
+		border-color: ${colors.PRIMARY};
+	}
+
+	background-color: ${colors.WHITE};
 	${(props) =>
 		props.type === 'primary' &&
 		css`
@@ -52,5 +61,5 @@ const StyledButton = styled.button`
 			&:hover {
 				background-color: ${lighten(0.05, colors.SECONDARY)};
 			}
-		`}
+		`};
 `;

@@ -14,7 +14,7 @@ const MainToolbar = () => {
 				</LogoContainer>
 			</HeaderLeftContent>
 			<HeaderRightContent>
-				<Button>This is default</Button>
+				<Button type="secondary">This is default</Button>
 			</HeaderRightContent>
 		</Header>
 	);

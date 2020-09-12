@@ -1,20 +1,16 @@
 import { React } from '@wordpress/element';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import colors from './../../config/colors';
 import PropTypes from 'prop-types';
+import { lighten } from 'polished';
+import fontSize from '../../config/fontSize';
 
 const Button = (props) => {
-	const { icon, type } = props;
-	const buttonColor =
-		type === 'primary'
-			? colors.PRIMARY
-			: type === 'secondary'
-			? colors.SECONDARY
-			: 'transparent';
+	const { icon, type, size, children } = props;
 	return (
-		<StyledButton color={buttonColor} type={type}>
+		<StyledButton type={type} size={size}>
 			{icon && <i>{icon}</i>}
-			<span>{props.children}</span>
+			<span>{children}</span>
 		</StyledButton>
 	);
 };
@@ -22,25 +18,39 @@ const Button = (props) => {
 Button.propTypes = {
 	icon: PropTypes.string,
 	type: PropTypes.string,
+	size: PropTypes.string,
+	children: PropTypes.any,
 };
 
 export default Button;
 
 const StyledButton = styled.button`
 	cursor: pointer;
-	background-color: ${(props) => props.buttonColor || 'transparent'};
-	padding: 16px;
-	border: 1px solid
-		${(props) =>
-			props.type === 'primary'
-				? colors.PRIMARY
-				: props.type === 'secondary'
-				? colors.SECONDARY
-				: colors.BORDER};
-	color: ${(props) =>
-		props.type === 'primary'
-			? colors.LIGHT
-			: props.type === 'secondary'
-			? colors.LIGHT
-			: colors.TEXT};
+	transition: all 0.35s ease-in-out;
+	border: 1px solid ${colors.border};
+	padding: 10px 12px;
+	font-weight: bold;
+
+	${(props) =>
+		props.type === 'primary' &&
+		css`
+			color: ${colors.WHITE};
+			border-color: ${colors.PRIMARY};
+			background-color: ${colors.PRIMARY};
+
+			&:hover {
+				background-color: ${lighten(0.05, colors.PRIMARY)};
+			}
+		`}
+	${(props) =>
+		props.type === 'secondary' &&
+		css`
+			color: ${colors.WHITE};
+			border-color: ${colors.SECONDARY};
+			background-color: ${colors.SECONDARY};
+
+			&:hover {
+				background-color: ${lighten(0.05, colors.SECONDARY)};
+			}
+		`}
 `;

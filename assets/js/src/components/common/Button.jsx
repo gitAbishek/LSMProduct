@@ -33,13 +33,8 @@ const StyledButton = styled.button`
 	font-weight: bold;
 	font-size: ${fontSize.SMALL};
 	border-radius: ${defaultStyle.borderRadius};
-
-	&:hover {
-		color: ${colors.PRIMARY};
-		border-color: ${colors.PRIMARY};
-	}
-
 	background-color: ${colors.WHITE};
+
 	${(props) =>
 		props.type === 'primary' &&
 		css`
@@ -52,14 +47,20 @@ const StyledButton = styled.button`
 			}
 		`}
 	${(props) =>
-		props.type === 'secondary' &&
-		css`
-			color: ${colors.WHITE};
-			border-color: ${colors.SECONDARY};
-			background-color: ${colors.SECONDARY};
+		(props.type === 'secondary' &&
+			css`
+				color: ${colors.WHITE};
+				border-color: ${colors.SECONDARY};
+				background-color: ${colors.SECONDARY};
 
+				&:hover {
+					background-color: ${lighten(0.05, colors.SECONDARY)};
+				}
+			`) ||
+		css`
 			&:hover {
-				background-color: ${lighten(0.05, colors.SECONDARY)};
+				color: ${colors.PRIMARY};
+				border-color: ${colors.PRIMARY};
 			}
 		`};
 `;

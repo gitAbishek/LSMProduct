@@ -1,5 +1,5 @@
 const colors = {
-	PRIMARY: '#787DFF',
+	PRIMARY: '#78aaff',
 	SECONDARY: '#FD739C',
 	HEADING: '#07092F',
 	TEXT: '#424360',
@@ -9,7 +9,7 @@ const colors = {
 	BORDER: '#F2F3FA',
 	LIGHT_BLUEISH_GRAY: '#FAFBFF',
 	LIGHT_GRAY: '#f9f9f9',
-	LIGHT: '#FFFFFF',
+	WHITE: '#FFFFFF',
 	ALERT_BORDER: '#FFA8A8',
 	ALERT: '#ff8787',
 };

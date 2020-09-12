@@ -23,6 +23,7 @@ composer install
 
 ```sh
 yarn start
+docker-compose up -d
 ```
 
 ## Author

@@ -28,25 +28,26 @@ export default Button;
 const StyledButton = styled.button`
 	cursor: pointer;
 	transition: all 0.35s ease-in-out;
-	border: 1px solid ${colors.border};
+	border: 1px solid ${colors.BORDER};
 	padding: 10px 12px;
-	font-weight: bold;
-	font-size: ${fontSize.SMALL};
+	font-weight: 500;
+	font-size: ${fontSize.MEDIUM};
 	border-radius: ${defaultStyle.borderRadius};
 	background-color: ${colors.WHITE};
+	color: ${colors.TEXT};
 
+	/* Button Types */
 	${(props) =>
-		props.type === 'primary' &&
-		css`
-			color: ${colors.WHITE};
-			border-color: ${colors.PRIMARY};
-			background-color: ${colors.PRIMARY};
+		(props.type === 'primary' &&
+			css`
+				color: ${colors.WHITE};
+				border-color: ${colors.PRIMARY};
+				background-color: ${colors.PRIMARY};
 
-			&:hover {
-				background-color: ${lighten(0.05, colors.PRIMARY)};
-			}
-		`}
-	${(props) =>
+				&:hover {
+					background-color: ${lighten(0.05, colors.PRIMARY)};
+				}
+			`) ||
 		(props.type === 'secondary' &&
 			css`
 				color: ${colors.WHITE};
@@ -63,4 +64,16 @@ const StyledButton = styled.button`
 				border-color: ${colors.PRIMARY};
 			}
 		`};
+	/* Button Size */
+	${(props) =>
+		(props.size === 'small' &&
+			css`
+				padding: 6px 8px;
+				font-size: ${fontSize.SMALL};
+			`) ||
+		(props.size === 'large' &&
+			css`
+				padding: 14px 16px;
+				font-size: ${fontSize.LARGE};
+			`)}
 `;

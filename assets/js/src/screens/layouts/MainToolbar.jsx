@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Flex from './../../components/common/Flex';
 import LogoImg from '../../../../img/logo.png';
 import Button from './../../components/common/Button';
+import FlexRow from '../../components/common/FlexRow';
 
 const MainToolbar = () => {
 	return (
@@ -14,7 +15,9 @@ const MainToolbar = () => {
 				</LogoContainer>
 			</HeaderLeftContent>
 			<HeaderRightContent>
-				<Button>This is default</Button>
+				<Button size="large" type="primary">
+					This is default
+				</Button>
 			</HeaderRightContent>
 		</Header>
 	);
@@ -34,11 +37,11 @@ const LogoContainer = styled(Flex)`
 		max-width: 100%;
 	}
 `;
-const HeaderLeftContent = styled(Flex)`
+const HeaderLeftContent = styled(FlexRow)`
 	padding: 24px 16px;
 `;
 
-const HeaderRightContent = styled(Flex)`
+const HeaderRightContent = styled(FlexRow)`
 	margin-left: auto;
 	justify-content: flex-end;
 `;

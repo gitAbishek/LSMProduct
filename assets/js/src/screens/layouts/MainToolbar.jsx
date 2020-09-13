@@ -15,9 +15,7 @@ const MainToolbar = () => {
 				</LogoContainer>
 			</HeaderLeftContent>
 			<HeaderRightContent>
-				<Button size="large" type="primary">
-					This is default
-				</Button>
+				<Button type="primary">This is default</Button>
 			</HeaderRightContent>
 		</Header>
 	);

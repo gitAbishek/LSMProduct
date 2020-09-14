@@ -5,12 +5,14 @@ import PropTypes from 'prop-types';
 import { lighten } from 'polished';
 import fontSize from '../../config/fontSize';
 import defaultStyle from '../../config/defaultStyle';
+import Icon from './Icon';
+import { BiChevronDown } from 'react-icons/bi';
 
 const Button = (props) => {
 	const { icon, type, size, children } = props;
 	return (
 		<StyledButton type={type} size={size}>
-			{icon && <i>{icon}</i>}
+			{icon && <Icon icon={<BiChevronDown />} />}
 			<span>{children}</span>
 		</StyledButton>
 	);
@@ -64,6 +66,7 @@ const StyledButton = styled.button`
 				border-color: ${colors.PRIMARY};
 			}
 		`};
+
 	/* Button Size */
 	${(props) =>
 		(props.size === 'small' &&

@@ -5,6 +5,7 @@ import Flex from './../../components/common/Flex';
 import LogoImg from '../../../../img/logo.png';
 import Button from './../../components/common/Button';
 import FlexRow from '../../components/common/FlexRow';
+import Icon from '../../components/common/Icon';
 
 const MainToolbar = () => {
 	return (
@@ -15,7 +16,10 @@ const MainToolbar = () => {
 				</LogoContainer>
 			</HeaderLeftContent>
 			<HeaderRightContent>
-				<Button type="primary">This is default</Button>
+				<Button type="primary" icon="chevron-left">
+					This is default
+				</Button>
+				<Icon type="ChevronLeft" />
 			</HeaderRightContent>
 		</Header>
 	);

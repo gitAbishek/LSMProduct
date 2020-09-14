@@ -6,13 +6,12 @@ import { lighten } from 'polished';
 import fontSize from '../../config/fontSize';
 import defaultStyle from '../../config/defaultStyle';
 import Icon from './Icon';
-import { FiChevronUp } from 'react-icons/fi';
 
 const Button = (props) => {
 	const { icon, type, size, children } = props;
 	return (
 		<StyledButton type={type} size={size}>
-			{icon && <Icon icon={<FiChevronUp />} />}
+			{icon && <Icon icon={icon} />}
 			<span>{children}</span>
 		</StyledButton>
 	);

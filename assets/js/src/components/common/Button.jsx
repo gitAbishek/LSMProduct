@@ -6,13 +6,13 @@ import { lighten } from 'polished';
 import fontSize from '../../config/fontSize';
 import defaultStyle from '../../config/defaultStyle';
 import Icon from './Icon';
-import { BiChevronDown } from 'react-icons/bi';
+import { FiChevronUp } from 'react-icons/fi';
 
 const Button = (props) => {
 	const { icon, type, size, children } = props;
 	return (
 		<StyledButton type={type} size={size}>
-			{icon && <Icon icon={<BiChevronDown />} />}
+			{icon && <Icon icon={<FiChevronUp />} />}
 			<span>{children}</span>
 		</StyledButton>
 	);
@@ -37,6 +37,9 @@ const StyledButton = styled.button`
 	border-radius: ${defaultStyle.borderRadius};
 	background-color: ${colors.WHITE};
 	color: ${colors.TEXT};
+	line-height: 1;
+	display: flex;
+	align-items: center;
 
 	/* Button Types */
 	${(props) =>

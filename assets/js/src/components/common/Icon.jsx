@@ -18,8 +18,8 @@ Icon.propTypes = {
 };
 
 const StyledIcon = styled.i`
-	font-size: 14px;
-	color: red;
+	font-size: ${(props) => props.size || 'inherit'};
+	color: ${(props) => props.color || 'inherit'};
 `;
 
 export default Icon;

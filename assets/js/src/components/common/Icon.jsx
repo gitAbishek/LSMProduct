@@ -18,6 +18,7 @@ Icon.propTypes = {
 };
 
 const StyledIcon = styled.i`
+	display: flex;
 	font-size: ${(props) => props.size || 'inherit'};
 	color: ${(props) => props.color || 'inherit'};
 `;

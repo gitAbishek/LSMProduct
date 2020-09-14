@@ -1,5 +1,5 @@
 const defaultStyle = {
-	borderRadius: '2px',
+	borderRadius: '3px',
 };
 
 export const BaseLine = 8;

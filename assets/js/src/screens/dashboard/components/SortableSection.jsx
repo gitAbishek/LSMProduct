@@ -10,17 +10,37 @@ import colors from '../../../config/colors';
 import defaultStyle from '../../../config/defaultStyle';
 import styled from 'styled-components';
 import Icon from '../../../components/common/Icon';
-import { FaGripVertical } from 'react-icons/fa';
+import {
+	BiImageAdd,
+	BiTrash,
+	BiCopy,
+	BiGridVertical,
+	BiAlignLeft,
+} from 'react-icons/bi';
 import fontSize from '../../../config/fontSize';
+import FlexRow from '../../../components/common/FlexRow';
+import Flex from '../../../components/common/Flex';
+import Sortable from '../../../assets/icons/Sortable';
 
 const DragHandle = SortableHandle(() => (
-	<SortableIcon icon={<FaGripVertical />}></SortableIcon>
+	<SortableIcon icon={<Sortable />}></SortableIcon>
 ));
 
 const SortableItem = SortableElement(({ value }) => (
 	<StyledSortableItem>
-		<DragHandle />
-		<span>{value}</span>
+		<FlexRow>
+			<DragHandle />
+			<Type>
+				<Icon icon={<BiAlignLeft />}></Icon>
+			</Type>
+			<span>{value}</span>
+		</FlexRow>
+
+		<Actions>
+			<Icon icon={<BiImageAdd />}></Icon>
+			<Icon icon={<BiCopy />}></Icon>
+			<Icon icon={<BiTrash />}></Icon>
+		</Actions>
 	</StyledSortableItem>
 ));
 
@@ -59,10 +79,12 @@ const SortableSection = () => {
 };
 
 const StyledSortable = styled.ul`
+	margin: 0;
+	padding: 0;
 	list-style-type: none;
 
 	li {
-		margin-bottom: ${BaseLine * 2}px;
+		margin-bottom: ${BaseLine * 1.5}px;
 	}
 `;
 
@@ -70,16 +92,15 @@ const StyledSortableItem = styled.li`
 	display: flex;
 	align-items: center;
 	list-style: none;
-	padding: ${BaseLine * 2}px;
+	padding: ${BaseLine * 1.3}px;
 	border: 1px solid ${colors.BORDER};
 	border-radius: ${defaultStyle.borderRadius};
 `;
 
 const SortableIcon = styled(Icon)`
-	display: flex;
-	margin-right: ${BaseLine * 2}px;
+	margin-right: ${BaseLine * 1.3}px;
 	color: ${colors.DISABLED};
-	font-size: ${fontSize.HUGE};
+	font-size: ${fontSize.EXTRA_LARGE};
 
 	&:hover {
 		cursor: move;
@@ -87,6 +108,22 @@ const SortableIcon = styled(Icon)`
 
 	&:active {
 		cursor: move;
+	}
+`;
+
+const Actions = styled(FlexRow)`
+	margin-left: auto;
+
+	i {
+		font-size: ${fontSize.HUGE};
+		margin-left: ${BaseLine}px;
+		color: ${colors.LIGHT_TEXT};
+	}
+`;
+
+const Type = styled(Flex)`
+	i {
+		font-size: ${fontSize.HUGE};
 	}
 `;
 export default SortableSection;

@@ -1,9 +1,9 @@
 import { React } from '@wordpress/element';
-import Flex from './../../components/common/Flex';
-import styled from 'styled-components';
-import colors from './../../config/colors';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { BaseLine } from '../../config/defaultStyle';
+import Flex from './../../components/common/Flex';
+import colors from './../../config/colors';
 
 const MainLayout = (props) => {
 	const { children } = props;

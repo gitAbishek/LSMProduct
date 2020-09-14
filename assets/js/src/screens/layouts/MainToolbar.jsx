@@ -16,9 +16,7 @@ const MainToolbar = () => {
 				</LogoContainer>
 			</HeaderLeftContent>
 			<HeaderRightContent>
-				<Button type="primary" icon="chevron-left">
-					This is default
-				</Button>
+				<Button type="primary">This is default</Button>
 				<Icon type="ChevronLeft" />
 			</HeaderRightContent>
 		</Header>
@@ -29,6 +27,7 @@ export default MainToolbar;
 
 const Header = styled.header`
 	display: flex;
+	background-color: ${colors.WHITE};
 	border-bottom: 1px solid ${colors.BORDER};
 `;
 

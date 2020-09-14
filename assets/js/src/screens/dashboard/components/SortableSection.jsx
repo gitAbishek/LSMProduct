@@ -11,6 +11,7 @@ import defaultStyle from '../../../config/defaultStyle';
 import styled from 'styled-components';
 import Icon from '../../../components/common/Icon';
 import { FaGripVertical } from 'react-icons/fa';
+import fontSize from '../../../config/fontSize';
 
 const DragHandle = SortableHandle(() => (
 	<SortableIcon icon={<FaGripVertical />}></SortableIcon>
@@ -19,7 +20,7 @@ const DragHandle = SortableHandle(() => (
 const SortableItem = SortableElement(({ value }) => (
 	<StyledSortableItem>
 		<DragHandle />
-		{value}
+		<span>{value}</span>
 	</StyledSortableItem>
 ));
 
@@ -37,12 +38,19 @@ const SortableSection = () => {
 		'Item 6',
 	]);
 
+	const onSortStart = () => {
+		document.body.style.cursor = 'move';
+	};
 	const onSortEnd = ({ oldIndex, newIndex }) => {
+		document.body.style.cursor = 'default';
 		setItem(arrayMove(items, oldIndex, newIndex));
 	};
 
 	return (
-		<SortableSectionContainer onSortEnd={onSortEnd} useDragHandle>
+		<SortableSectionContainer
+			onSortStart={onSortStart}
+			onSortEnd={onSortEnd}
+			useDragHandle>
 			{items.map((value, index) => (
 				<SortableItem key={`item-${value}`} index={index} value={value} />
 			))}
@@ -59,6 +67,8 @@ const StyledSortable = styled.ul`
 `;
 
 const StyledSortableItem = styled.li`
+	display: flex;
+	align-items: center;
 	list-style: none;
 	padding: ${BaseLine * 2}px;
 	border: 1px solid ${colors.BORDER};
@@ -66,6 +76,17 @@ const StyledSortableItem = styled.li`
 `;
 
 const SortableIcon = styled(Icon)`
-	color: red;
+	display: flex;
+	margin-right: ${BaseLine * 2}px;
+	color: ${colors.DISABLED};
+	font-size: ${fontSize.HUGE};
+
+	&:hover {
+		cursor: move;
+	}
+
+	&:active {
+		cursor: move;
+	}
 `;
 export default SortableSection;

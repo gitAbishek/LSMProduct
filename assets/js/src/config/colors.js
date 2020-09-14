@@ -9,6 +9,7 @@ const colors = {
 	BORDER: '#F2F3FA',
 	LIGHT_BLUEISH_GRAY: '#FAFBFF',
 	LIGHT_GRAY: '#f9f9f9',
+	DISABLED: '#BFBFBF',
 	WHITE: '#FFFFFF',
 	ALERT_BORDER: '#FFA8A8',
 	ALERT: '#ff8787',

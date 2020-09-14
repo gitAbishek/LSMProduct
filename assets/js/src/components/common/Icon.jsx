@@ -1,11 +1,11 @@
-import { React } from '@wordpress/element';
+import { React, memo } from '@wordpress/element';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Icon = (props) => {
 	const { icon, size, color } = props;
 	return (
-		<StyledIcon size={size} color={color}>
+		<StyledIcon size={size} color={color} {...props}>
 			{icon}
 		</StyledIcon>
 	);
@@ -22,4 +22,4 @@ const StyledIcon = styled.i`
 	color: ${(props) => props.color || 'inherit'};
 `;
 
-export default Icon;
+export default memo(Icon);

@@ -10,17 +10,12 @@ import colors from '../../../config/colors';
 import defaultStyle from '../../../config/defaultStyle';
 import styled from 'styled-components';
 import Icon from '../../../components/common/Icon';
-import {
-	BiImageAdd,
-	BiTrash,
-	BiCopy,
-	BiGridVertical,
-	BiAlignLeft,
-} from 'react-icons/bi';
+import { BiImageAdd, BiTrash, BiCopy, BiAlignLeft } from 'react-icons/bi';
 import fontSize from '../../../config/fontSize';
 import FlexRow from '../../../components/common/FlexRow';
 import Flex from '../../../components/common/Flex';
 import Sortable from '../../../assets/icons/Sortable';
+import Tooltip from 'rc-tooltip';
 
 const DragHandle = SortableHandle(() => (
 	<SortableIcon icon={<Sortable />}></SortableIcon>
@@ -37,7 +32,6 @@ const SortableItem = SortableElement(({ value }) => (
 		</FlexRow>
 
 		<Actions>
-			<Icon icon={<BiImageAdd />}></Icon>
 			<Icon icon={<BiCopy />}></Icon>
 			<Icon icon={<BiTrash />}></Icon>
 		</Actions>
@@ -67,14 +61,24 @@ const SortableSection = () => {
 	};
 
 	return (
-		<SortableSectionContainer
-			onSortStart={onSortStart}
-			onSortEnd={onSortEnd}
-			useDragHandle>
-			{items.map((value, index) => (
-				<SortableItem key={`item-${value}`} index={index} value={value} />
-			))}
-		</SortableSectionContainer>
+		<>
+			<Tooltip
+				placement="left"
+				trigger={['click']}
+				overlay={<span>tooltip</span>}>
+				<a href="#">hover</a>
+			</Tooltip>
+
+			<SortableSectionContainer
+				onSortStart={onSortStart}
+				onSortEnd={onSortEnd}
+				useDragHandle
+				helperClass="sortable-dragging">
+				{items.map((value, index) => (
+					<SortableItem key={`item-${value}`} index={index} value={value} />
+				))}
+			</SortableSectionContainer>
+		</>
 	);
 };
 
@@ -95,6 +99,7 @@ const StyledSortableItem = styled.li`
 	padding: ${BaseLine * 1.8}px;
 	border: 1px solid ${colors.BORDER};
 	border-radius: ${defaultStyle.borderRadius};
+	background-color: ${colors.WHITE};
 `;
 
 const SortableIcon = styled(Icon)`

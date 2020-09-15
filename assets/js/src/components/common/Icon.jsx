@@ -12,7 +12,7 @@ const Icon = (props) => {
 };
 
 Icon.propTypes = {
-	icon: PropTypes.object.isRequired,
+	icon: PropTypes.object,
 	size: PropTypes.string,
 	color: PropTypes.string,
 };

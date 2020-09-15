@@ -92,13 +92,13 @@ const StyledSortableItem = styled.li`
 	display: flex;
 	align-items: center;
 	list-style: none;
-	padding: ${BaseLine * 1.3}px;
+	padding: ${BaseLine * 1.8}px;
 	border: 1px solid ${colors.BORDER};
 	border-radius: ${defaultStyle.borderRadius};
 `;
 
 const SortableIcon = styled(Icon)`
-	margin-right: ${BaseLine * 1.3}px;
+	margin-right: ${BaseLine * 2}px;
 	color: ${colors.DISABLED};
 	font-size: ${fontSize.EXTRA_LARGE};
 
@@ -122,7 +122,9 @@ const Actions = styled(FlexRow)`
 `;
 
 const Type = styled(Flex)`
+	margin-right: ${BaseLine * 2}px;
 	i {
+		color: ${colors.TEXT};
 		font-size: ${fontSize.HUGE};
 	}
 `;

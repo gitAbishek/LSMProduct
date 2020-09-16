@@ -42,14 +42,29 @@ const config = {
 			},
 
 			{
-				test: /\.css$/,
-				// include: /node_modules/,
+				test: /\.css$/i,
+				exclude: /node_modules/,
 				use: [
 					{
 						loader: isProduction ? MiniCSSExtractPlugin.loader : 'style-loader',
 					},
 					{
 						loader: 'css-loader',
+					},
+				],
+			},
+			{
+				test: /\.(scss|sass)$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: isProduction ? MiniCSSExtractPlugin.loader : 'style-loader',
+					},
+					{
+						loader: 'css-loader',
+					},
+					{
+						loader: 'sass-loader',
 					},
 				],
 			},
@@ -78,7 +93,7 @@ const config = {
 	].filter(Boolean),
 
 	resolve: {
-		extensions: ['.js', '.jsx', '.css'],
+		extensions: ['.js', '.jsx'],
 	},
 
 	devServer: {

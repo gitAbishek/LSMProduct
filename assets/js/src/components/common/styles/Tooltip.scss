@@ -1,0 +1,235 @@
+//colors
+$white: #fff;
+$color_mine_shaft_approx: #373737;
+$black_17: rgba(0, 0, 0, 0.17);
+$color_royal_purple_approx: rebeccapurple;
+
+//@extend-elements
+//original selectors
+//.rc-tooltip-zoom-enter, .rc-tooltip-zoom-appear
+%extend_1 {
+	opacity: 0;
+	animation-duration: 0.3s;
+	animation-fill-mode: both;
+	animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+	animation-play-state: paused;
+}
+
+.rc-tooltip {
+	position: absolute;
+	z-index: 1070;
+	display: block;
+	visibility: visible;
+	font-size: 12px;
+	line-height: 1.5;
+	opacity: 0.9;
+	&.rc-tooltip-zoom-enter {
+		display: block;
+	}
+	&.rc-tooltip-zoom-leave {
+		display: block;
+	}
+}
+.rc-tooltip-zoom-enter {
+	@extend %extend_1;
+	&.rc-tooltip-zoom-enter-active {
+		animation-name: rcToolTipZoomIn;
+		animation-play-state: running;
+	}
+}
+.rc-tooltip-zoom-appear {
+	@extend %extend_1;
+	&.rc-tooltip-zoom-appear-active {
+		animation-name: rcToolTipZoomIn;
+		animation-play-state: running;
+	}
+}
+.rc-tooltip-zoom-leave {
+	animation-duration: 0.3s;
+	animation-fill-mode: both;
+	animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);
+	animation-play-state: paused;
+	&.rc-tooltip-zoom-leave-active {
+		animation-name: rcToolTipZoomOut;
+		animation-play-state: running;
+	}
+}
+@keyframes rcToolTipZoomIn {
+	0% {
+		opacity: 0;
+		//Instead of the line below you could use @include transform-origin($origin-x, $origin-y, $origin-z, $only3d)
+		transform-origin: 50% 50%;
+		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+		transform: scale(0, 0);
+	}
+	100% {
+		opacity: 1;
+		//Instead of the line below you could use @include transform-origin($origin-x, $origin-y, $origin-z, $only3d)
+		transform-origin: 50% 50%;
+		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+		transform: scale(1, 1);
+	}
+}
+@keyframes rcToolTipZoomOut {
+	0% {
+		opacity: 1;
+		//Instead of the line below you could use @include transform-origin($origin-x, $origin-y, $origin-z, $only3d)
+		transform-origin: 50% 50%;
+		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+		transform: scale(1, 1);
+	}
+	100% {
+		opacity: 0;
+		//Instead of the line below you could use @include transform-origin($origin-x, $origin-y, $origin-z, $only3d)
+		transform-origin: 50% 50%;
+		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+		transform: scale(0, 0);
+	}
+}
+.rc-tooltip-hidden {
+	display: none;
+}
+.rc-tooltip-placement-top {
+	padding: 5px 0 9px;
+	.rc-tooltip-arrow {
+		bottom: 4px;
+		margin-left: -5px;
+		border-width: 5px 5px 0;
+		border-top-color: $color_mine_shaft_approx;
+		left: 50%;
+	}
+}
+.rc-tooltip-placement-topLeft {
+	padding: 5px 0 9px;
+	.rc-tooltip-arrow {
+		bottom: 4px;
+		margin-left: -5px;
+		border-width: 5px 5px 0;
+		border-top-color: $color_mine_shaft_approx;
+		left: 15%;
+	}
+}
+.rc-tooltip-placement-topRight {
+	padding: 5px 0 9px;
+	.rc-tooltip-arrow {
+		bottom: 4px;
+		margin-left: -5px;
+		border-width: 5px 5px 0;
+		border-top-color: $color_mine_shaft_approx;
+		right: 15%;
+	}
+}
+.rc-tooltip-placement-right {
+	padding: 0 5px 0 9px;
+	.rc-tooltip-arrow {
+		left: 4px;
+		margin-top: -5px;
+		border-width: 5px 5px 5px 0;
+		border-right-color: $color_mine_shaft_approx;
+		top: 50%;
+	}
+}
+.rc-tooltip-placement-rightTop {
+	padding: 0 5px 0 9px;
+	.rc-tooltip-arrow {
+		left: 4px;
+		margin-top: -5px;
+		border-width: 5px 5px 5px 0;
+		border-right-color: $color_mine_shaft_approx;
+		top: 15%;
+		margin-top: 0;
+	}
+}
+.rc-tooltip-placement-rightBottom {
+	padding: 0 5px 0 9px;
+	.rc-tooltip-arrow {
+		left: 4px;
+		margin-top: -5px;
+		border-width: 5px 5px 5px 0;
+		border-right-color: $color_mine_shaft_approx;
+		bottom: 15%;
+	}
+}
+.rc-tooltip-placement-bottom {
+	padding: 9px 0 5px;
+	.rc-tooltip-arrow {
+		top: 4px;
+		margin-left: -5px;
+		border-width: 0 5px 5px;
+		border-bottom-color: $color_mine_shaft_approx;
+		left: 50%;
+	}
+}
+.rc-tooltip-placement-bottomLeft {
+	padding: 9px 0 5px;
+	.rc-tooltip-arrow {
+		top: 4px;
+		margin-left: -5px;
+		border-width: 0 5px 5px;
+		border-bottom-color: $color_mine_shaft_approx;
+		left: 15%;
+	}
+}
+.rc-tooltip-placement-bottomRight {
+	padding: 9px 0 5px;
+	.rc-tooltip-arrow {
+		top: 4px;
+		margin-left: -5px;
+		border-width: 0 5px 5px;
+		border-bottom-color: $color_mine_shaft_approx;
+		right: 15%;
+	}
+}
+.rc-tooltip-placement-left {
+	padding: 0 9px 0 5px;
+	.rc-tooltip-arrow {
+		right: 4px;
+		margin-top: -5px;
+		border-width: 5px 0 5px 5px;
+		border-left-color: $color_mine_shaft_approx;
+		top: 50%;
+	}
+}
+.rc-tooltip-placement-leftTop {
+	padding: 0 9px 0 5px;
+	.rc-tooltip-arrow {
+		right: 4px;
+		margin-top: -5px;
+		border-width: 5px 0 5px 5px;
+		border-left-color: $color_mine_shaft_approx;
+		top: 15%;
+		margin-top: 0;
+	}
+}
+.rc-tooltip-placement-leftBottom {
+	padding: 0 9px 0 5px;
+	.rc-tooltip-arrow {
+		right: 4px;
+		margin-top: -5px;
+		border-width: 5px 0 5px 5px;
+		border-left-color: $color_mine_shaft_approx;
+		bottom: 15%;
+	}
+}
+.rc-tooltip-inner {
+	padding: 8px 10px;
+	color: $white;
+	text-align: left;
+	text-decoration: none;
+	background-color: $color_mine_shaft_approx;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 6px;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 0 4px $black_17;
+	min-height: 34px;
+}
+.rc-tooltip-arrow {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+}
+.test {
+	color: $color_royal_purple_approx;
+}

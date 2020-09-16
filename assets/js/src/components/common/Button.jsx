@@ -42,7 +42,6 @@ const StyledButton = styled.button`
 
 	i {
 		margin-right: ${BaseLine}px;
-		font-size: ${fontSize.MEDIUM};
 	}
 
 	/* Button Types */

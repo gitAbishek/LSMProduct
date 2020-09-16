@@ -6,19 +6,22 @@ import LogoImg from '../../../../img/logo.png';
 import Button from './../../components/common/Button';
 import FlexRow from '../../components/common/FlexRow';
 import Icon from '../../components/common/Icon';
+import { ContainerFluid } from '../../components/common/Container';
 
 const MainToolbar = () => {
 	return (
 		<Header>
-			<HeaderLeftContent>
-				<LogoContainer>
-					<img src={LogoImg} alt="Masteriyo Logo" />
-				</LogoContainer>
-			</HeaderLeftContent>
-			<HeaderRightContent>
-				<Button type="primary">This is default</Button>
-				<Icon type="ChevronLeft" />
-			</HeaderRightContent>
+			<ContainerFluid>
+				<HeaderLeftContent>
+					<LogoContainer>
+						<img src={LogoImg} alt="Masteriyo Logo" />
+					</LogoContainer>
+				</HeaderLeftContent>
+				<HeaderRightContent>
+					<Button type="primary">This is default</Button>
+					<Icon type="ChevronLeft" />
+				</HeaderRightContent>
+			</ContainerFluid>
 		</Header>
 	);
 };
@@ -26,7 +29,6 @@ const MainToolbar = () => {
 export default MainToolbar;
 
 const Header = styled.header`
-	display: flex;
 	background-color: ${colors.WHITE};
 	border-bottom: 1px solid ${colors.BORDER};
 `;

@@ -26,14 +26,20 @@ const SortableItem = SortableElement(({ value }) => (
 		<FlexRow>
 			<DragHandle />
 			<Type>
-				<Icon icon={<BiAlignLeft />}></Icon>
+				<Tooltip placement="topLeft" overlay="Lesson">
+					<Icon icon={<BiAlignLeft />}></Icon>
+				</Tooltip>
 			</Type>
 			<span>{value}</span>
 		</FlexRow>
 
 		<Actions>
-			<Icon icon={<BiCopy />}></Icon>
-			<Icon icon={<BiTrash />}></Icon>
+			<Tooltip placement="topRight" overlay="Duplicate">
+				<Icon icon={<BiCopy />}></Icon>
+			</Tooltip>
+			<Tooltip placement="topRight" overlay="Delete">
+				<Icon icon={<BiTrash />}></Icon>
+			</Tooltip>
 		</Actions>
 	</StyledSortableItem>
 ));
@@ -61,24 +67,15 @@ const SortableSection = () => {
 	};
 
 	return (
-		<>
-			<Tooltip
-				placement="left"
-				trigger={['click']}
-				overlay={<span>tooltip</span>}>
-				<a href="#">hover</a>
-			</Tooltip>
-
-			<SortableSectionContainer
-				onSortStart={onSortStart}
-				onSortEnd={onSortEnd}
-				useDragHandle
-				helperClass="sortable-dragging">
-				{items.map((value, index) => (
-					<SortableItem key={`item-${value}`} index={index} value={value} />
-				))}
-			</SortableSectionContainer>
-		</>
+		<SortableSectionContainer
+			onSortStart={onSortStart}
+			onSortEnd={onSortEnd}
+			useDragHandle
+			helperClass="sortable-dragging">
+			{items.map((value, index) => (
+				<SortableItem key={`item-${value}`} index={index} value={value} />
+			))}
+		</SortableSectionContainer>
 	);
 };
 

@@ -9,6 +9,8 @@
 
 namespace ThemeGrill\Masteriyo;
 
+use ThemeGrill\Masteriyo\PostType\RegisterPostTypes;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -58,7 +60,7 @@ final class Masteriyo {
 	 * @return ThemeGrill\Masteriyo\Masteriyo
 	 */
 	public static function instance() {
-		if ( is_null(self::$instance ) ) {
+		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
 
@@ -106,6 +108,8 @@ final class Masteriyo {
 		$this->ajax         = new Ajax();
 		$this->script_style = new ScriptStyle();
 		$this->admin_menu   = new AdminMenu();
+
+		RegisterPostTypes::register();
 
 		// After init action.
 		do_action( 'after_masteriyo_init' );

@@ -1,4 +1,3 @@
-import { React } from '@wordpress/element';
 import styled from 'styled-components';
 import { BaseLine } from '../../config/defaultStyle';
 

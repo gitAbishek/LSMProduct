@@ -15,7 +15,7 @@ import fontSize from '../../../config/fontSize';
 import FlexRow from '../../../components/common/FlexRow';
 import Flex from '../../../components/common/Flex';
 import Sortable from '../../../assets/icons/Sortable';
-import Tooltip from 'rc-tooltip';
+import Tooltip from '../../../components/common/Tooltip';
 
 const DragHandle = SortableHandle(() => (
 	<SortableIcon icon={<Sortable />}></SortableIcon>

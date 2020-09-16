@@ -1,17 +1,14 @@
-import { React } from '@wordpress/element';
-import styled from 'styled-components';
+import { React, memo } from '@wordpress/element';
 import RcTooltip from 'rc-tooltip';
 import PropTypes from 'prop-types';
-import 'rc-tooltip/assets/bootstrap_white.css';
+import 'rc-tooltip/assets/bootstrap.css';
+
 const Tooltip = (props) => {
-	return <StyledTooltip {...props}>{props.children}</StyledTooltip>;
+	return <RcTooltip {...props}>{props.children}</RcTooltip>;
 };
 
 Tooltip.propTypes = {
 	children: PropTypes.object,
 };
 
-const StyledTooltip = styled(RcTooltip)`
-	/* style */
-`;
-export default Tooltip;
+export default memo(Tooltip);

@@ -27,8 +27,7 @@ const config = {
 					loader: 'babel-loader',
 					options: {
 						plugins: [
-							isDevelopment &&
-								require.resolve('react-refresh/babel'),
+							isDevelopment && require.resolve('react-refresh/babel'),
 						].filter(Boolean),
 					},
 				},
@@ -44,12 +43,10 @@ const config = {
 
 			{
 				test: /\.css$/,
-				exclude: /node_modules/,
+				// include: /node_modules/,
 				use: [
 					{
-						loader: isProduction
-							? MiniCSSExtractPlugin.loader
-							: 'style-loader',
+						loader: isProduction ? MiniCSSExtractPlugin.loader : 'style-loader',
 					},
 					{
 						loader: 'css-loader',
@@ -81,7 +78,7 @@ const config = {
 	].filter(Boolean),
 
 	resolve: {
-		extensions: ['.js', '.jsx'],
+		extensions: ['.js', '.jsx', '.css'],
 	},
 
 	devServer: {

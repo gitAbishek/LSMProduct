@@ -1,6 +1,7 @@
 import { React, memo } from '@wordpress/element';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+// import './style.css';
 
 const Icon = (props) => {
 	const { icon, size, color } = props;

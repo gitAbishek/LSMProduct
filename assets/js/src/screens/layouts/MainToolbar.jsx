@@ -9,7 +9,7 @@ import Icon from '../../components/common/Icon';
 import { ContainerFluid } from '../../components/common/Container';
 import { BaseLine } from '../../config/defaultStyle';
 import { BiShow } from 'react-icons/bi';
-
+import Menu, { MenuItem } from 'rc-menu';
 const MainToolbar = () => {
 	return (
 		<Header>
@@ -18,6 +18,11 @@ const MainToolbar = () => {
 					<LogoContainer>
 						<img src={LogoImg} alt="Masteriyo Logo" />
 					</LogoContainer>
+					<Menu>
+						<MenuItem>Course</MenuItem>
+						<MenuItem>Course Builder</MenuItem>
+						<MenuItem>Settings</MenuItem>
+					</Menu>
 				</HeaderLeftContent>
 				<HeaderRightContent>
 					<HeaderActions>

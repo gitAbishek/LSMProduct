@@ -26,9 +26,7 @@ const SortableItem = SortableElement(({ value }) => (
 		<FlexRow>
 			<DragHandle />
 			<Type>
-				<Tooltip placement="topLeft" overlay="Lesson">
-					<Icon icon={<BiAlignLeft />}></Icon>
-				</Tooltip>
+				<Icon icon={<BiAlignLeft />}></Icon>
 			</Type>
 			<span>{value}</span>
 		</FlexRow>

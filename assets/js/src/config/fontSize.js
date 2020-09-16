@@ -1,5 +1,5 @@
 const fontSize = {
-	SMALL: '12px',
+	SMALL: '13px',
 	MEDIUM: '14px',
 	LARGE: '16px',
 	EXTRA_LARGE: '18px',

@@ -10,7 +10,7 @@ import Icon from './Icon';
 const Button = (props) => {
 	const { icon, type, size, children } = props;
 	return (
-		<StyledButton type={type} size={size}>
+		<StyledButton type={type} size={size} {...props}>
 			{icon && <Icon icon={icon} />}
 			<span>{children}</span>
 		</StyledButton>
@@ -30,9 +30,9 @@ const StyledButton = styled.button`
 	cursor: pointer;
 	transition: all 0.35s ease-in-out;
 	border: 1px solid ${colors.BORDER};
-	padding: 10px 12px;
+	padding: 12px 16px;
 	font-weight: 500;
-	font-size: ${fontSize.MEDIUM};
+	font-size: ${fontSize.SMALL};
 	border-radius: ${defaultStyle.borderRadius};
 	background-color: ${colors.WHITE};
 	color: ${colors.TEXT};

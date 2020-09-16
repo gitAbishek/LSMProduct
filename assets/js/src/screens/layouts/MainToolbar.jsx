@@ -7,6 +7,7 @@ import Button from './../../components/common/Button';
 import FlexRow from '../../components/common/FlexRow';
 import Icon from '../../components/common/Icon';
 import { ContainerFluid } from '../../components/common/Container';
+import { BaseLine } from '../../config/defaultStyle';
 
 const MainToolbar = () => {
 	return (
@@ -18,8 +19,11 @@ const MainToolbar = () => {
 					</LogoContainer>
 				</HeaderLeftContent>
 				<HeaderRightContent>
-					<Button type="primary">This is default</Button>
-					<Icon type="ChevronLeft" />
+					<HeaderActions>
+						<Button type="default">Preview</Button>
+						<Button type="primary">Save</Button>
+						<Icon type="ChevronLeft" />
+					</HeaderActions>
 				</HeaderRightContent>
 			</ContainerFluid>
 		</Header>
@@ -47,4 +51,10 @@ const HeaderLeftContent = styled(FlexRow)`
 const HeaderRightContent = styled(FlexRow)`
 	margin-left: auto;
 	justify-content: flex-end;
+`;
+
+const HeaderActions = styled(FlexRow)`
+	button {
+		margin-left: ${BaseLine * 2}px;
+	}
 `;

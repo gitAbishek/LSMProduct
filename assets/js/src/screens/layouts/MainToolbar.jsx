@@ -8,6 +8,7 @@ import FlexRow from '../../components/common/FlexRow';
 import Icon from '../../components/common/Icon';
 import { ContainerFluid } from '../../components/common/Container';
 import { BaseLine } from '../../config/defaultStyle';
+import { BiShow } from 'react-icons/bi';
 
 const MainToolbar = () => {
 	return (
@@ -20,9 +21,10 @@ const MainToolbar = () => {
 				</HeaderLeftContent>
 				<HeaderRightContent>
 					<HeaderActions>
-						<Button type="default">Preview</Button>
+						<Button type="default" icon={<BiShow />}>
+							Preview
+						</Button>
 						<Button type="primary">Save</Button>
-						<Icon type="ChevronLeft" />
 					</HeaderActions>
 				</HeaderRightContent>
 			</ContainerFluid>

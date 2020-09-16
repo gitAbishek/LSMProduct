@@ -4,7 +4,7 @@ import colors from './../../config/colors';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
 import fontSize from '../../config/fontSize';
-import defaultStyle from '../../config/defaultStyle';
+import defaultStyle, { BaseLine } from '../../config/defaultStyle';
 import Icon from './Icon';
 
 const Button = (props) => {
@@ -39,6 +39,11 @@ const StyledButton = styled.button`
 	line-height: 1;
 	display: flex;
 	align-items: center;
+
+	i {
+		margin-right: ${BaseLine}px;
+		font-size: ${fontSize.MEDIUM};
+	}
 
 	/* Button Types */
 	${(props) =>

@@ -21,7 +21,9 @@ const MainToolbar = () => {
 					<Menu>
 						<MenuItem icon={<BiBookAlt />}>Course</MenuItem>
 						<MenuItem icon={<BiEdit />}>Course Builder</MenuItem>
-						<MenuItem icon={<BiCog />}>Settings</MenuItem>
+						<MenuItem icon={<BiCog />} active>
+							Settings
+						</MenuItem>
 					</Menu>
 				</HeaderLeftContent>
 				<HeaderRightContent>

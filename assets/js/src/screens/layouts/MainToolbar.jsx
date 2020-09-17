@@ -1,5 +1,5 @@
 import { React } from '@wordpress/element';
-import { BiShow } from 'react-icons/bi';
+import { BiShow, BiCog, BiBookAlt, BiEdit } from 'react-icons/bi';
 import styled from 'styled-components';
 import LogoImg from '../../../../img/logo.png';
 import { ContainerFluid } from '../../components/common/Container';
@@ -19,9 +19,9 @@ const MainToolbar = () => {
 						<img src={LogoImg} alt="Masteriyo Logo" />
 					</LogoContainer>
 					<Menu>
-						<MenuItem>Course</MenuItem>
-						<MenuItem>Course Builder</MenuItem>
-						<MenuItem icon={<BiShow />}>Settings</MenuItem>
+						<MenuItem icon={<BiBookAlt />}>Course</MenuItem>
+						<MenuItem icon={<BiEdit />}>Course Builder</MenuItem>
+						<MenuItem icon={<BiCog />}>Settings</MenuItem>
 					</Menu>
 				</HeaderLeftContent>
 				<HeaderRightContent>
@@ -42,7 +42,7 @@ export default MainToolbar;
 const Header = styled.header`
 	background-color: ${colors.WHITE};
 	border-bottom: 1px solid ${colors.BORDER};
-	height: 64px;
+	height: ${BaseLine * 8}px;
 `;
 
 const LogoContainer = styled(Flex)`

@@ -19,10 +19,11 @@ const Menu = styled.ul`
 		font-size: ${fontSize.MEDIUM};
 		display: flex;
 		font-weight: 500;
-		margin-right: ${BaseLine * 3}px;
+		margin-right: ${BaseLine * 5}px;
 		transition: all 0.35s ease-in-out;
 		color: ${colors.TEXT};
-		padding: 24px 0;
+		padding: ${BaseLine * 3}px 0;
+		cursor: pointer;
 
 		&:before {
 			content: '';
@@ -51,12 +52,8 @@ const Menu = styled.ul`
 		}
 
 		i {
-			margin-right: ${BaseLine}px;
+			margin-right: ${BaseLine * 0.7}px;
 			font-size: ${fontSize.LARGE};
-		}
-
-		span {
-			cursor: pointer;
 		}
 	}
 `;

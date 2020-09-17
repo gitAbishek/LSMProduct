@@ -18,7 +18,7 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-	icon: PropTypes.string,
+	icon: PropTypes.object,
 	type: PropTypes.string,
 	size: PropTypes.string,
 	children: PropTypes.any,

@@ -1,13 +1,15 @@
 import { React } from '@wordpress/element';
-import colors from './../../config/colors';
-import styled from 'styled-components';
-import Flex from './../../components/common/Flex';
-import LogoImg from '../../../../img/logo.png';
-import Button from './../../components/common/Button';
-import FlexRow from '../../components/common/FlexRow';
-import { ContainerFluid } from '../../components/common/Container';
-import { BaseLine } from '../../config/defaultStyle';
 import { BiShow } from 'react-icons/bi';
+import styled from 'styled-components';
+import LogoImg from '../../../../img/logo.png';
+import { ContainerFluid } from '../../components/common/Container';
+import FlexRow from '../../components/common/FlexRow';
+import { BaseLine } from '../../config/defaultStyle';
+import Button from './../../components/common/Button';
+import Flex from './../../components/common/Flex';
+import colors from './../../config/colors';
+import Menu, { MenuItem } from '../../components/common/Menu';
+
 const MainToolbar = () => {
 	return (
 		<Header>
@@ -19,7 +21,7 @@ const MainToolbar = () => {
 					<Menu>
 						<MenuItem>Course</MenuItem>
 						<MenuItem>Course Builder</MenuItem>
-						<MenuItem>Settings</MenuItem>
+						<MenuItem icon={<BiShow />}>Settings</MenuItem>
 					</Menu>
 				</HeaderLeftContent>
 				<HeaderRightContent>
@@ -40,6 +42,7 @@ export default MainToolbar;
 const Header = styled.header`
 	background-color: ${colors.WHITE};
 	border-bottom: 1px solid ${colors.BORDER};
+	height: 64px;
 `;
 
 const LogoContainer = styled(Flex)`
@@ -49,9 +52,7 @@ const LogoContainer = styled(Flex)`
 		max-width: 100%;
 	}
 `;
-const HeaderLeftContent = styled(FlexRow)`
-	padding: 24px 16px;
-`;
+const HeaderLeftContent = styled(FlexRow)``;
 
 const HeaderRightContent = styled(FlexRow)`
 	margin-left: auto;

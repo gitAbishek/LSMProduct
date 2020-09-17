@@ -6,6 +6,7 @@ import propTypes from 'prop-types';
 import fontSize from '../../config/fontSize';
 import colors from '../../config/colors';
 import { BaseLine } from '../../config/defaultStyle';
+import { NavLink } from 'react-router-dom';
 
 const Menu = styled.ul`
 	list-style-type: none;
@@ -18,53 +19,68 @@ const Menu = styled.ul`
 const MenuItem = (props) => {
 	const { icon, children } = props;
 	return (
-		<StyledLi {...props}>
-			{icon && <Icon icon={icon} />}
-			<span>{children}</span>
+		<StyledLi>
+			<NavLink {...props}>
+				{icon && <Icon icon={icon} />}
+				{children}
+			</NavLink>
 		</StyledLi>
 	);
 };
 
 const StyledLi = styled.li`
-	position: relative;
-	font-size: ${fontSize.MEDIUM};
-	display: flex;
-	font-weight: 500;
 	margin-right: ${BaseLine * 5}px;
-	transition: all 0.35s ease-in-out;
-	color: ${(props) => (props.active ? colors.PRIMARY : colors.TEXT)};
-	padding: ${BaseLine * 3}px 0;
-	cursor: pointer;
-
-	&:before {
-		content: '';
-		position: absolute;
-		height: 2px;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: ${colors.PRIMARY};
-		visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
-		opacity: ${(props) => (props.active ? '1' : '0')};
-		transition: all 0.35s ease-in-out;
-	}
 
 	&:last-child {
 		margin-right: 0;
 	}
 
-	&:hover {
-		color: ${colors.PRIMARY};
+	> a {
+		position: relative;
+		font-size: ${fontSize.MEDIUM};
+		display: flex;
+		font-weight: 500;
+		transition: all 0.35s ease-in-out;
+		color: ${colors.TEXT};
+		padding: ${BaseLine * 3}px 0;
+		cursor: pointer;
+		text-decoration: none;
 
-		&::before {
-			visibility: visible;
-			opacity: 1;
+		&:before {
+			content: '';
+			position: absolute;
+			height: 2px;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: ${colors.PRIMARY};
+			visibility: hidden;
+			opacity: 0;
+			transition: all 0.35s ease-in-out;
 		}
-	}
 
-	i {
-		margin-right: ${BaseLine * 0.7}px;
-		font-size: ${fontSize.LARGE};
+		&:hover {
+			color: ${colors.PRIMARY};
+
+			&::before {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+
+		&.active {
+			color: ${colors.PRIMARY};
+
+			&::before {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+
+		i {
+			margin-right: ${BaseLine * 0.7}px;
+			font-size: ${fontSize.LARGE};
+		}
 	}
 `;
 

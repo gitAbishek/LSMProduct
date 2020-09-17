@@ -10,6 +10,8 @@
 namespace ThemeGrill\Masteriyo;
 
 use ThemeGrill\Masteriyo\PostType\RegisterPostTypes;
+use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
+
 
 defined( 'ABSPATH' ) || exit;
 
@@ -110,6 +112,7 @@ final class Masteriyo {
 		$this->admin_menu   = new AdminMenu();
 
 		RegisterPostTypes::register();
+		RegisterTaxonomies::register();
 
 		// After init action.
 		do_action( 'after_masteriyo_init' );

@@ -34,6 +34,7 @@
     "react-sortable-hoc": "1.11.0",
     "sass": "1.26.10",
     "sass-loader": "10.0.2",
+    "semistandard": "14.2.3",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "4.1.0",
     "url-loader": "4.1.0",

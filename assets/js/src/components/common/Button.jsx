@@ -4,13 +4,13 @@ import colors from './../../config/colors';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
 import fontSize from '../../config/fontSize';
-import defaultStyle from '../../config/defaultStyle';
+import defaultStyle, { BaseLine } from '../../config/defaultStyle';
 import Icon from './Icon';
 
 const Button = (props) => {
 	const { icon, type, size, children } = props;
 	return (
-		<StyledButton type={type} size={size}>
+		<StyledButton type={type} size={size} {...props}>
 			{icon && <Icon icon={icon} />}
 			<span>{children}</span>
 		</StyledButton>
@@ -18,7 +18,7 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-	icon: PropTypes.string,
+	icon: PropTypes.object,
 	type: PropTypes.string,
 	size: PropTypes.string,
 	children: PropTypes.any,
@@ -30,15 +30,19 @@ const StyledButton = styled.button`
 	cursor: pointer;
 	transition: all 0.35s ease-in-out;
 	border: 1px solid ${colors.BORDER};
-	padding: 10px 12px;
+	padding: 12px 16px;
 	font-weight: 500;
-	font-size: ${fontSize.MEDIUM};
+	font-size: ${fontSize.SMALL};
 	border-radius: ${defaultStyle.borderRadius};
 	background-color: ${colors.WHITE};
 	color: ${colors.TEXT};
 	line-height: 1;
 	display: flex;
 	align-items: center;
+
+	i {
+		margin-right: ${BaseLine}px;
+	}
 
 	/* Button Types */
 	${(props) =>

@@ -15,7 +15,7 @@ const Dashboard = () => {
 		<Fragment>
 			<MainToolbar />
 			<MainLayout>
-				<FlexRow>
+				<FlexRow align="flex-start">
 					<Flex style={{ width: 'calc(60% - 16px)' }}>
 						<form action="">
 							<FormGroup>

@@ -61,11 +61,6 @@ const StyledLi = styled.li`
 
 		&:hover {
 			color: ${colors.PRIMARY};
-
-			&::before {
-				visibility: visible;
-				opacity: 1;
-			}
 		}
 
 		&.active {

@@ -8,6 +8,7 @@ import Input from '../../components/common/Input';
 import FormGroup from '../../components/common/FormGroup';
 import Label from '../../components/common/Label';
 import Textarea from '../../components/common/Textarea';
+import Select from '../../components/common/Select';
 
 const Dashboard = () => {
 	return (
@@ -15,7 +16,7 @@ const Dashboard = () => {
 			<MainToolbar />
 			<MainLayout>
 				<FlexRow>
-					<Flex>
+					<Flex style={{ width: 'calc(60% - 16px)' }}>
 						<form action="">
 							<FormGroup>
 								<Label htmlFor="">Course Title</Label>
@@ -23,8 +24,28 @@ const Dashboard = () => {
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">Course Title</Label>
+								<Label htmlFor="">Course Description</Label>
 								<Textarea placeholder="Your Course Title"></Textarea>
+							</FormGroup>
+						</form>
+					</Flex>
+
+					<Flex style={{ width: 'calc(40% - 16px)', marginLeft: 32 }}>
+						<form action="">
+							<FormGroup>
+								<Label htmlFor="">Course Title</Label>
+								<Input placeholder="Your Course Title"></Input>
+							</FormGroup>
+
+							<FormGroup>
+								<Label htmlFor="">Categories</Label>
+								<Select
+									options={[
+										{ value: 'chocolate', label: 'Chocolate' },
+										{ value: 'strawberry', label: 'Strawberry' },
+										{ value: 'vanilla', label: 'Vanilla' },
+									]}
+								/>
 							</FormGroup>
 						</form>
 					</Flex>

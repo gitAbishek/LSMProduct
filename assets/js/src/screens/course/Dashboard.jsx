@@ -6,6 +6,8 @@ import MainLayout from '../layouts/MainLayout';
 import MainToolbar from './../layouts/MainToolbar';
 import Input from '../../components/common/Input';
 import FormGroup from '../../components/common/FormGroup';
+import Label from '../../components/common/Label';
+
 const Dashboard = () => {
 	return (
 		<Fragment>
@@ -15,7 +17,7 @@ const Dashboard = () => {
 					<Flex>
 						<form action="">
 							<FormGroup>
-								<label htmlFor="">Course Title</label>
+								<Label htmlFor="">Course Title</Label>
 								<Input placeholder="Your Course Title"></Input>
 							</FormGroup>
 						</form>

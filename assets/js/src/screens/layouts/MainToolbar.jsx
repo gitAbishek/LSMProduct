@@ -13,7 +13,7 @@ import Menu, { MenuItem } from '../../components/common/Menu';
 const MainToolbar = () => {
 	return (
 		<Header>
-			<ContainerFluid>
+			<ContainerFluid flex>
 				<HeaderLeftContent>
 					<LogoContainer>
 						<img src={LogoImg} alt="Masteriyo Logo" />

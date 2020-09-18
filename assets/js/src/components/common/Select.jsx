@@ -5,13 +5,21 @@ import defaultStyle, { BaseLine } from '../../config/defaultStyle';
 
 const Select = (props) => {
 	const customStyles = {
-		control: () => ({
-			backgroundColor: colors.WHITE,
+		control: (provided) => ({
+			...provided,
 			height: BaseLine * 6,
 			boxShadow: `0 1px 0 ${colors.SHADOW}`,
 			border: `1px solid ${colors.BORDER}`,
-			display: 'flex',
 			borderRadius: defaultStyle.borderRadius,
+		}),
+		placeholder: (provided) => ({
+			...provided,
+			color: colors.PLACEHOLDER,
+			marginLeft: BaseLine,
+		}),
+		indicatorSeparator: (provided) => ({
+			...provided,
+			backgroundColor: colors.BORDER,
 		}),
 	};
 	return <ReactSelect {...props} styles={customStyles} />;

@@ -19,6 +19,12 @@ const App = () => {
 					<Route path="/dashboard">
 						<screens.Dashboard />
 					</Route>
+					<Route path="/builder">
+						<screens.CourseBuilder />
+					</Route>
+					<Route path="/builder">
+						<screens.Settings />
+					</Route>
 					<Route exact path="/">
 						<Redirect to="/dashboard" />
 					</Route>

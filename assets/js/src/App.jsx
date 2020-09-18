@@ -1,15 +1,12 @@
 import { React } from '@wordpress/element';
-
 import {
 	HashRouter as Router,
-	Switch,
-	Route,
 	Redirect,
+	Route,
+	Switch,
 } from 'react-router-dom';
-
-import * as screens from './screens';
-
 import './app.css';
+import * as screens from './screens';
 
 const App = () => {
 	return (

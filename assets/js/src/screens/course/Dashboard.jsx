@@ -9,6 +9,7 @@ import FormGroup from '../../components/common/FormGroup';
 import Label from '../../components/common/Label';
 import Textarea from '../../components/common/Textarea';
 import Select from '../../components/common/Select';
+import DropPlace from '../../components/common/DropPlace';
 
 const Dashboard = () => {
 	return (
@@ -26,6 +27,10 @@ const Dashboard = () => {
 							<FormGroup>
 								<Label htmlFor="">Course Description</Label>
 								<Textarea placeholder="Your Course Title"></Textarea>
+							</FormGroup>
+							<FormGroup>
+								<Label htmlFor="">Categories</Label>
+								<DropPlace />
 							</FormGroup>
 						</form>
 					</Flex>

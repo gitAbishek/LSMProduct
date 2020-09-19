@@ -40,6 +40,7 @@ const Dashboard = () => {
 							<FormGroup>
 								<Label htmlFor="">Categories</Label>
 								<Select
+									isDisabled
 									options={[
 										{ value: 'chocolate', label: 'Chocolate' },
 										{ value: 'strawberry', label: 'Strawberry' },

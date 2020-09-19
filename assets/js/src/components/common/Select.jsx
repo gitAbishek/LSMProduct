@@ -12,13 +12,17 @@ const Select = (props) => {
 			boxShadow: `0 1px 0 ${colors.SHADOW}`,
 			borderRadius: defaultStyle.borderRadius,
 			borderColor: state.isDisabled
-				? colors.DISABLED
+				? colors.BORDER
 				: state.isFocused
 				? colors.PRIMARY
 				: colors.BORDER,
 			paddingLeft: BaseLine,
 			transition: 'all 0.35s ease-in-out',
-
+			backgroundColor: state.isDisabled
+				? colors.LIGHT_GRAY
+				: state.isFocused
+				? colors.LIGHT_BLUEISH_GRAY
+				: colors.WHITE,
 			'&:hover': {
 				borderColor: colors.PRIMARY,
 			},

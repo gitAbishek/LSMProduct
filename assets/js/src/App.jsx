@@ -19,7 +19,7 @@ const App = () => {
 					<Route path="/builder">
 						<screens.CourseBuilder />
 					</Route>
-					<Route path="/builder">
+					<Route path="/settings">
 						<screens.Settings />
 					</Route>
 					<Route exact path="/">

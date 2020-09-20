@@ -13,14 +13,6 @@ import fontSize from '../../config/fontSize';
 const ImageUpload = (props) => {
 	const { style, className, title, multiple } = props;
 	const [files, setFiles] = useState([]);
-	const {
-		getRootProps,
-		getInputProps,
-		isDragActive,
-		isDragAccept,
-		isDragReject,
-	} = useDropzone({ onDrop, accept: 'image/*' });
-
 	const onDrop = useCallback((acceptedFiles) => {
 		setFiles(
 			acceptedFiles.map((file) =>
@@ -28,6 +20,14 @@ const ImageUpload = (props) => {
 			)
 		);
 	});
+
+	const {
+		getRootProps,
+		getInputProps,
+		isDragActive,
+		isDragAccept,
+		isDragReject,
+	} = useDropzone({ onDrop, accept: 'image/*' });
 
 	return (
 		<Container style={style} className={className}>

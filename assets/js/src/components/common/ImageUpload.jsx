@@ -66,6 +66,7 @@ const InputContainer = styled(Flex)`
 	border: 1px dashed ${colors.PLACEHOLDER};
 	background-position: 50%;
 	background-size: cover;
+	background-color: ${colors.GRAY};
 	background-image: ${(props) => `url("${props.backgroundImage}")`};
 `;
 

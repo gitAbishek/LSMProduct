@@ -12,14 +12,16 @@ import fontSize from '../../config/fontSize';
 
 const ImageUpload = (props) => {
 	const { style, className, title, multiple } = props;
-	const [files, setFiles] = useState([]);
+	const [file, setFiles] = useState();
 	const onDrop = useCallback((acceptedFiles) => {
 		setFiles(
-			acceptedFiles.map((file) =>
-				Object.assign(file, { preview: URL.createObjectURL(file) })
-			)
+			Object.assign(acceptedFiles[0], {
+				image: URL.createObjectURL(acceptedFiles[0]),
+			})
 		);
 	});
+
+	console.log(file);
 
 	const {
 		getRootProps,
@@ -32,7 +34,8 @@ const ImageUpload = (props) => {
 	return (
 		<Container style={style} className={className}>
 			<InputContainer
-				{...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
+				{...getRootProps({ isDragActive, isDragAccept, isDragReject })}
+				backgroundImage={file?.image}>
 				<input {...getInputProps()} multiple={multiple || false} />
 				<ContentContainer>
 					<FlexRow justify="center">
@@ -61,6 +64,9 @@ const InputContainer = styled(Flex)`
 	cursor: pointer;
 	align-items: center;
 	border: 1px dashed ${colors.PLACEHOLDER};
+	background-position: 50%;
+	background-size: cover;
+	background-image: ${(props) => `url("${props.backgroundImage}")`};
 `;
 
 const ContentContainer = styled(Flex)`
@@ -72,7 +78,7 @@ const ContentContainer = styled(Flex)`
 		if (props.isDragReject) {
 			return colors.ALERT;
 		}
-		return colors.LIGHT_GRAY;
+		return 'transparent';
 	}};
 	padding: ${BaseLine * 3}px ${BaseLine * 4}px;
 	width: 100%;

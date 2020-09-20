@@ -13,8 +13,8 @@ const App = () => {
 		<Router>
 			<div className="masteriyo">
 				<Switch>
-					<Route path="/dashboard">
-						<screens.Dashboard />
+					<Route path="/course">
+						<screens.Course />
 					</Route>
 					<Route path="/builder">
 						<screens.CourseBuilder />
@@ -23,7 +23,7 @@ const App = () => {
 						<screens.Settings />
 					</Route>
 					<Route exact path="/">
-						<Redirect to="/dashboard" />
+						<Redirect to="/course" />
 					</Route>
 				</Switch>
 			</div>

@@ -19,7 +19,7 @@ const MainToolbar = () => {
 						<img src={LogoImg} alt="Masteriyo Logo" />
 					</LogoContainer>
 					<Menu>
-						<MenuItem to="/dashboard" icon={<BiBookAlt />}>
+						<MenuItem to="/course" icon={<BiBookAlt />}>
 							Course
 						</MenuItem>
 						<MenuItem to="/builder" icon={<BiEdit />}>

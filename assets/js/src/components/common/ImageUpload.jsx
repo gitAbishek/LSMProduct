@@ -11,7 +11,7 @@ import FlexRow from './FlexRow';
 import fontSize from '../../config/fontSize';
 
 const ImageUpload = (props) => {
-	const { style, className, title } = props;
+	const { style, className, title, multiple } = props;
 	const [files, setFiles] = useState([]);
 	const {
 		getRootProps,
@@ -33,7 +33,7 @@ const ImageUpload = (props) => {
 		<Container style={style} className={className}>
 			<InputContainer
 				{...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
-				<input {...getInputProps()} />
+				<input {...getInputProps()} multiple={multiple || false} />
 				<ContentContainer>
 					<FlexRow justify="center">
 						<span>
@@ -51,6 +51,7 @@ ImageUpload.propTypes = {
 	style: PropTypes.object,
 	className: PropTypes.string,
 	title: PropTypes.any,
+	multiple: PropTypes.bool,
 };
 
 const Container = styled.div``;

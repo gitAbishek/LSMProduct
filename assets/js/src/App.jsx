@@ -1,15 +1,12 @@
 import { React } from '@wordpress/element';
-
 import {
 	HashRouter as Router,
-	Switch,
-	Route,
 	Redirect,
+	Route,
+	Switch,
 } from 'react-router-dom';
-
-import * as screens from './screens';
-
 import './app.css';
+import * as screens from './screens';
 
 const App = () => {
 	return (
@@ -18,6 +15,12 @@ const App = () => {
 				<Switch>
 					<Route path="/dashboard">
 						<screens.Dashboard />
+					</Route>
+					<Route path="/builder">
+						<screens.CourseBuilder />
+					</Route>
+					<Route path="/settings">
+						<screens.Settings />
 					</Route>
 					<Route exact path="/">
 						<Redirect to="/dashboard" />

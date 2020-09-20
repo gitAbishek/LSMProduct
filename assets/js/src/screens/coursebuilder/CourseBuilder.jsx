@@ -1,8 +1,8 @@
 import { Fragment, React } from '@wordpress/element';
 
 import MainLayout from '../layouts/MainLayout';
-import MainToolbar from './../layouts/MainToolbar';
-import SortableSection from './components/SortableSection';
+import MainToolbar from '../layouts/MainToolbar';
+import SortableSection from '../course/components/SortableSection';
 const Dashboard = () => {
 	return (
 		<Fragment>

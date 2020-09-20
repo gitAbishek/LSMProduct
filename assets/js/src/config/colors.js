@@ -13,6 +13,7 @@ const colors = {
 	WHITE: '#FFFFFF',
 	ALERT_BORDER: '#FFA8A8',
 	ALERT: '#ff8787',
+	SHADOW: '#EFF0F6',
 };
 
 export default colors;

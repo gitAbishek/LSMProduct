@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BaseLine } from '../../config/defaultStyle';
 
 const Container = styled.div`
-	display: flex;
+	display: ${(props) => (props.flex ? 'flex' : 'block')};
 	padding-right: ${BaseLine * 2}px;
 	padding-left: ${BaseLine * 2}px;
 
@@ -28,7 +28,7 @@ const Container = styled.div`
 `;
 
 export const ContainerFluid = styled.div`
-	display: flex;
+	display: ${(props) => (props.flex ? 'flex' : 'block')};
 	padding-right: ${BaseLine * 2}px;
 	padding-left: ${BaseLine * 2}px;
 `;

@@ -9,7 +9,7 @@ import FormGroup from '../../components/common/FormGroup';
 import Label from '../../components/common/Label';
 import Textarea from '../../components/common/Textarea';
 import Select from '../../components/common/Select';
-import DropPlace from '../../components/common/DropPlace';
+import ImageUpload from '../../components/common/ImageUpload';
 
 const Dashboard = () => {
 	return (
@@ -30,7 +30,7 @@ const Dashboard = () => {
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="">Categories</Label>
-								<DropPlace />
+								<ImageUpload title="Select files or click to upload" />
 							</FormGroup>
 						</form>
 					</Flex>

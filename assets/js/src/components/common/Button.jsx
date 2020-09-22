@@ -39,6 +39,7 @@ const StyledButton = styled.button`
 	line-height: 1;
 	display: flex;
 	align-items: center;
+	outline: none;
 
 	i {
 		margin-right: ${BaseLine}px;

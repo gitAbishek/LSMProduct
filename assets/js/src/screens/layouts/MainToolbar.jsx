@@ -32,10 +32,10 @@ const MainToolbar = () => {
 				</HeaderLeftContent>
 				<HeaderRightContent>
 					<HeaderActions>
-						<Button type="default" icon={<BiShow />}>
+						<Button icon={<BiShow />}>
 							Preview
 						</Button>
-						<Button type="primary">Save</Button>
+						<Button primary>Save</Button>
 					</HeaderActions>
 				</HeaderRightContent>
 			</ContainerFluid>

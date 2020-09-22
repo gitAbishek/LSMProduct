@@ -32,7 +32,7 @@ const Course = () => {
 								<Textarea placeholder="Your Course Title" rows="5"></Textarea>
 							</FormGroup>
 							<FlexRow>
-								<Button type="primary">Start Adding Lessons</Button>
+								<Button primary>Start Adding Lessons</Button>
 							</FlexRow>
 						</CourseLeftContainer>
 
@@ -53,7 +53,7 @@ const Course = () => {
 								<ImageUpload title="Drag image or click to upload" />
 								<FeaturedImageActions>
 									<Button>Remove Featured Image</Button>
-									<Button type="primary">Add New</Button>
+									<Button primary>Add New</Button>
 								</FeaturedImageActions>
 							</FormGroup>
 						</CourseRightContainer>

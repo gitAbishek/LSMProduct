@@ -47,7 +47,7 @@ const StyledButton = styled.button`
 
 	/* Button Types */
 	${(props) =>
-		(props.type === 'primary' &&
+		(props.primary  &&
 			css`
 				color: ${colors.WHITE};
 				border-color: ${colors.PRIMARY};
@@ -57,7 +57,7 @@ const StyledButton = styled.button`
 					background-color: ${lighten(0.05, colors.PRIMARY)};
 				}
 			`) ||
-		(props.type === 'secondary' &&
+		(props.secondary &&
 			css`
 				color: ${colors.WHITE};
 				border-color: ${colors.SECONDARY};

@@ -16,6 +16,8 @@ const Textarea = styled.textarea`
 	}
 
 	&:focus {
+		border-color: ${colors.PRIMARY};
+		outline: none;
 		background-color: ${colors.LIGHT_BLUEISH_GRAY};
 	}
 

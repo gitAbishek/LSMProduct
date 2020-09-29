@@ -9,6 +9,12 @@ import styled from 'styled-components';
 import FlexRow from '../../../components/common/FlexRow';
 import colors from '../../../config/colors';
 import { BaseLine } from '../../../config/defaultStyle';
+import Sortable from '../../../assets/icons/Sortable';
+import arrayMove from 'array-move';
+import fontSize from '../../../config/fontSize';
+import Icon from '../../../components/common/Icon';
+import Tooltip from 'rc-tooltip';
+import Flex from '../../../components/common/Flex';
 
 const DragHandle = SortableHandle(() => (
 	<SortableIcon icon={<Sortable />}></SortableIcon>
@@ -22,20 +28,18 @@ const SortableItem = SortableElement(({ value }) => (
 	<SortablesectionItem>
 		<FlexRow>
 			<DragHandle />
-			<Type>
-				<Icon icon={<BiAlignLeft />}></Icon>
-			</Type>
+			<Icon icon={<BiAlignLeft />}></Icon>
 			<span>{value}</span>
 		</FlexRow>
 
-		<Actions>
+		<FlexRow>
 			<Tooltip placement="topRight" overlay="Duplicate">
 				<Icon icon={<BiCopy />}></Icon>
 			</Tooltip>
 			<Tooltip placement="topRight" overlay="Delete">
 				<Icon icon={<BiTrash />}></Icon>
 			</Tooltip>
-		</Actions>
+		</FlexRow>
 	</SortablesectionItem>
 ));
 
@@ -70,13 +74,18 @@ const SortableSection = () => {
 	);
 };
 
-const SortableSectionItem = styled.li`
-	padding: ${BaseLine * 6}px;
-	background-color: ${colors.WHITE};
+const StyledSortable = styled.ul`
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+
+	li {
+		margin-bottom: ${BaseLine * 1.5}px;
+	}
 `;
 
-const SortableSectionHeader = styled(FlexRow)`
-	justify-content: space-between;
+const SortablesectionItem = styled(Flex)`
+	background-color: ${colors.WHITE};
 `;
 
 const SortableIcon = styled(Icon)`

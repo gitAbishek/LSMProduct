@@ -15,33 +15,7 @@ import fontSize from '../../../config/fontSize';
 import Icon from '../../../components/common/Icon';
 import Tooltip from 'rc-tooltip';
 import Flex from '../../../components/common/Flex';
-
-const DragHandle = SortableHandle(() => (
-	<SortableIcon icon={<Sortable />}></SortableIcon>
-));
-
-const SortableSectionContainer = SortableContainer(({ children }) => {
-	return <StyledSortable>{children}</StyledSortable>;
-});
-
-const SortableItem = SortableElement(({ value }) => (
-	<SortablesectionItem>
-		<FlexRow>
-			<DragHandle />
-			<Icon icon={<BiAlignLeft />}></Icon>
-			<span>{value}</span>
-		</FlexRow>
-
-		<FlexRow>
-			<Tooltip placement="topRight" overlay="Duplicate">
-				<Icon icon={<BiCopy />}></Icon>
-			</Tooltip>
-			<Tooltip placement="topRight" overlay="Delete">
-				<Icon icon={<BiTrash />}></Icon>
-			</Tooltip>
-		</FlexRow>
-	</SortablesectionItem>
-));
+import Container from '../../../components/common/Container';
 
 const SortableSection = () => {
 	const [items, setItem] = useState([
@@ -53,6 +27,32 @@ const SortableSection = () => {
 		'Section 6',
 	]);
 
+	const DragHandle = SortableHandle(() => (
+		<SortableIcon icon={<Sortable />}></SortableIcon>
+	));
+
+	const SortableSectionContainer = SortableContainer(({ children }) => {
+		return <StyledSortable>{children}</StyledSortable>;
+	});
+
+	const SortableItem = SortableElement(({ value }) => (
+		<SortablesectionItem>
+			<FlexRow>
+				<DragHandle />
+				<span>{value}</span>
+			</FlexRow>
+
+			<FlexRow>
+				<Tooltip placement="topRight" overlay="Duplicate">
+					<Icon icon={<BiCopy />}></Icon>
+				</Tooltip>
+				<Tooltip placement="topRight" overlay="Delete">
+					<Icon icon={<BiTrash />}></Icon>
+				</Tooltip>
+			</FlexRow>
+		</SortablesectionItem>
+	));
+
 	const onSortStart = () => {
 		document.body.style.cursor = 'move';
 	};
@@ -62,15 +62,17 @@ const SortableSection = () => {
 	};
 
 	return (
-		<SortableSectionContainer
-			onSortStart={onSortStart}
-			onSortEnd={onSortEnd}
-			useDragHandle
-			helperClass="sortable-dragging">
-			{items.map((value, index) => (
-				<SortableItem key={`item-${value}`} index={index} value={value} />
-			))}
-		</SortableSectionContainer>
+		<Container>
+			<SortableSectionContainer
+				onSortStart={onSortStart}
+				onSortEnd={onSortEnd}
+				useDragHandle
+				helperClass="sortable-dragging">
+				{items.map((value, index) => (
+					<SortableItem key={`item-${value}`} index={index} value={value} />
+				))}
+			</SortableSectionContainer>
+		</Container>
 	);
 };
 
@@ -86,6 +88,8 @@ const StyledSortable = styled.ul`
 
 const SortablesectionItem = styled(Flex)`
 	background-color: ${colors.WHITE};
+	padding: ${BaseLine * 5}px;
+	margin-bottom: ${BaseLine * 4}px;
 `;
 
 const SortableIcon = styled(Icon)`

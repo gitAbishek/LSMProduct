@@ -5,6 +5,7 @@ const Container = styled.div`
 	display: ${(props) => (props.flex ? 'flex' : 'block')};
 	padding-right: ${BaseLine * 2}px;
 	padding-left: ${BaseLine * 2}px;
+	margin: 0 auto;
 
 	@media (min-width: 576px) {
 		max-width: 540px;

@@ -1,6 +1,5 @@
 import { React, useState } from '@wordpress/element';
-import { BiAlignLeft, BiCopy, BiTrash } from 'react-icons/bi';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 import Sections from './Sections';
 import Container from '../../../components/common/Container';
 
@@ -20,19 +19,23 @@ const SortableSection = () => {
 		sectionOrder: ['section-1'],
 	});
 
-	// console.log(list);
+	const onDragEnd = (result) => {
+		return;
+	};
 
 	return (
 		<Container>
-			{list.sectionOrder.map((sectionId) => {
-				const section = list.sections[sectionId];
-				const contents = section.contentIds.map(
-					(contentId) => list.contents[contentId]
-				);
-				return (
-					<Sections key={section.id} section={section} contents={contents} />
-				);
-			})}
+			<DragDropContext onDragEnd={onDragEnd}>
+				{list.sectionOrder.map((sectionId) => {
+					const section = list.sections[sectionId];
+					const contents = section.contentIds.map(
+						(contentId) => list.contents[contentId]
+					);
+					return (
+						<Sections key={section.id} section={section} contents={contents} />
+					);
+				})}
+			</DragDropContext>
 		</Container>
 	);
 };

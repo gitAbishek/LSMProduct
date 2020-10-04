@@ -6,21 +6,30 @@ import FlexRow from '../../../components/common/FlexRow';
 import DragHandle from './DragHandle';
 import defaultStyle, { BaseLine } from '../../../config/defaultStyle';
 import fontSize from '../../../config/fontSize';
+import { Draggable } from 'react-beautiful-dnd';
 
 const Content = (props) => {
-	const { title } = props;
+	const { content, index } = props;
 	return (
-		<Container>
-			<FlexRow>
-				<DragHandle />
-				<ContentTitle> {title}</ContentTitle>
-			</FlexRow>
-		</Container>
+		<Draggable draggableId={content.id} index={index}>
+			{(provided) => (
+				<Container
+					ref={provided.innerRef}
+					{...provided.draggableProps}
+					{...provided.dragHandleProps}>
+					<FlexRow>
+						<DragHandle />
+						<ContentTitle>{content.title}</ContentTitle>
+					</FlexRow>
+				</Container>
+			)}
+		</Draggable>
 	);
 };
 
 Content.propTypes = {
-	title: PropTypes.string,
+	content: PropTypes.object,
+	index: PropTypes.any,
 };
 
 const Container = styled.div`

@@ -7,9 +7,10 @@ import defaultStyle, { BaseLine } from '../../../config/defaultStyle';
 import DragHandle from './DragHandle';
 import FlexRow from '../../../components/common/FlexRow';
 import fontSize from '../../../config/fontSize';
+import { Droppable } from 'react-beautiful-dnd';
 
 const Sections = (props) => {
-	const { contents, section } = props;
+	const { section, contents } = props;
 
 	return (
 		<Container>
@@ -20,11 +21,16 @@ const Sections = (props) => {
 				</FlexRow>
 			</SectionHeader>
 
-			<div>
-				{contents.map((content) => (
-					<Content key={content.id} title={content.title}></Content>
-				))}
-			</div>
+			<Droppable droppableId={section.id}>
+				{(provided) => (
+					<DroppableArea ref={provided.innerRef} {...provided.droppableProps}>
+						{contents.map((content, index) => (
+							<Content key={content.id} content={content} index={index} />
+						))}
+						{provided.placeholder}
+					</DroppableArea>
+				)}
+			</Droppable>
 		</Container>
 	);
 };
@@ -50,5 +56,9 @@ const SectionTitle = styled.h3`
 	font-size: ${fontSize.EXTRA_LARGE};
 	font-weight: 500;
 	margin: 0;
+`;
+
+const DroppableArea = styled.div`
+	background-color: ${colors.LIGHT_BLUEISH_GRAY};
 `;
 export default Sections;

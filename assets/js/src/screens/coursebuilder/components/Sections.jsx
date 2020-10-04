@@ -65,5 +65,6 @@ const DroppableArea = styled.div`
 	padding: ${BaseLine}px;
 	background-color: ${(props) =>
 		props.isDraggingOver ? colors.LIGHT_BLUEISH_GRAY : colors.WHITE};
+	min-height: 100px;
 `;
 export default Sections;

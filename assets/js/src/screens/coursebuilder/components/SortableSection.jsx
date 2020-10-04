@@ -7,7 +7,7 @@ const SortableSection = () => {
 	const [list, setList] = useState({
 		contents: {
 			'content-1': { id: 'content-1', title: 'hello world' },
-			'content-2': { id: 'content-2', title: 'section-2 content' },
+			'content-2': { id: 'content-2', title: 'Content for section' },
 		},
 		sections: {
 			'section-1': {
@@ -15,8 +15,18 @@ const SortableSection = () => {
 				title: 'Section 1',
 				contentIds: ['content-1', 'content-2'],
 			},
+			'section-2': {
+				id: 'section-2',
+				title: 'Section 2',
+				contentIds: [],
+			},
+			'section-3': {
+				id: 'section-3',
+				title: 'Section 3',
+				contentIds: [],
+			},
 		},
-		sectionOrder: ['section-1'],
+		sectionOrder: ['section-1', 'section-2', 'section-3'],
 	});
 
 	const onDragEnd = (result) => {
@@ -25,28 +35,49 @@ const SortableSection = () => {
 			return;
 		}
 
-		if (
-			(destination.draggableId =
-				source.droppableId && destination.index === source.index)
-		) {
+		const start = list.sections[source.droppableId];
+		const finish = list.sections[destination.droppableId];
+
+		if (start === finish) {
+			const newContentIds = Array.from(start.contentIds);
+			newContentIds.splice(source.index, 1);
+			newContentIds.splice(destination.index, 0, draggableId);
+
+			const newSection = {
+				...start,
+				contentIds: newContentIds,
+			};
+
+			setList({
+				...list,
+				sections: {
+					...list.sections,
+					[newSection.id]: newSection,
+				},
+			});
 			return;
 		}
 
-		const section = list.sections[source.droppableId];
-		const newContentIds = Array.from(section.contentIds);
-		newContentIds.splice(source.index, 1);
-		newContentIds.splice(destination.index, 0, draggableId);
+		const startContentIds = Array.from(start.contentIds);
+		startContentIds.splice(source.index, 1);
+		const newStart = {
+			...start,
+			contentIds: startContentIds,
+		};
 
-		const newSection = {
-			...section,
-			contentIds: newContentIds,
+		const finishContentIds = Array.from(finish.contentIds);
+		finishContentIds.splice(destination.index, 0, draggableId);
+		const newFinish = {
+			...finish,
+			contentIds: finishContentIds,
 		};
 
 		setList({
 			...list,
 			sections: {
 				...list.sections,
-				[newSection.id]: newSection,
+				[newStart.id]: newStart,
+				[newFinish.id]: newFinish,
 			},
 		});
 	};

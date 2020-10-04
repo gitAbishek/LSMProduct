@@ -20,7 +20,35 @@ const SortableSection = () => {
 	});
 
 	const onDragEnd = (result) => {
-		return;
+		const { destination, source, draggableId } = result;
+		if (!destination) {
+			return;
+		}
+
+		if (
+			(destination.draggableId =
+				source.droppableId && destination.index === source.index)
+		) {
+			return;
+		}
+
+		const section = list.sections[source.droppableId];
+		const newContentIds = Array.from(section.contentIds);
+		newContentIds.splice(source.index, 1);
+		newContentIds.splice(destination.index, 0, draggableId);
+
+		const newSection = {
+			...section,
+			contentIds: newContentIds,
+		};
+
+		setList({
+			...list,
+			sections: {
+				...list.sections,
+				[newSection.id]: newSection,
+			},
+		});
 	};
 
 	return (

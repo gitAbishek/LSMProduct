@@ -13,12 +13,9 @@ const Content = (props) => {
 	return (
 		<Draggable draggableId={content.id} index={index}>
 			{(provided) => (
-				<Container
-					ref={provided.innerRef}
-					{...provided.draggableProps}
-					{...provided.dragHandleProps}>
+				<Container ref={provided.innerRef} {...provided.draggableProps}>
 					<FlexRow>
-						<DragHandle />
+						<DragHandle {...provided.dragHandleProps} />
 						<ContentTitle>{content.title}</ContentTitle>
 					</FlexRow>
 				</Container>

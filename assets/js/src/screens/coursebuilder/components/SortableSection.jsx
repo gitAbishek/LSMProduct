@@ -2,6 +2,7 @@ import { React, useState } from '@wordpress/element';
 import { BiAlignLeft, BiCopy, BiTrash } from 'react-icons/bi';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Sections from './Sections';
+import Container from '../../../components/common/Container';
 
 const SortableSection = () => {
 	const [list, setList] = useState({
@@ -22,8 +23,7 @@ const SortableSection = () => {
 	// console.log(list);
 
 	return (
-		<div>
-			<h2>nonono</h2>
+		<Container>
 			{list.sectionOrder.map((sectionId) => {
 				const section = list.sections[sectionId];
 				const contents = section.contentIds.map(
@@ -33,7 +33,7 @@ const SortableSection = () => {
 					<Sections key={section.id} section={section} contents={contents} />
 				);
 			})}
-		</div>
+		</Container>
 	);
 };
 

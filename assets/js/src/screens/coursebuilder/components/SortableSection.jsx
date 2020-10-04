@@ -1,7 +1,9 @@
 import { React, useState } from '@wordpress/element';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Sections from './Sections';
 import Container from '../../../components/common/Container';
+import styled from 'styled-components';
+import colors from '../../../config/colors';
 
 const SortableSection = () => {
 	const [list, setList] = useState({
@@ -30,8 +32,18 @@ const SortableSection = () => {
 	});
 
 	const onDragEnd = (result) => {
-		const { destination, source, draggableId } = result;
+		const { destination, source, draggableId, type } = result;
 		if (!destination) {
+			return;
+		}
+
+		// Reorder section move
+		if (type === 'section') {
+			console.log('section is moving');
+			const newSectionOrder = Array.from(list.sectionOrder);
+			newSectionOrder.splice(source.index, 1);
+			newSectionOrder.splice(destination.index, 0, draggableId);
+			setList({ ...list, sectionOrder: newSectionOrder });
 			return;
 		}
 
@@ -85,15 +97,27 @@ const SortableSection = () => {
 	return (
 		<Container>
 			<DragDropContext onDragEnd={onDragEnd}>
-				{list.sectionOrder.map((sectionId) => {
-					const section = list.sections[sectionId];
-					const contents = section.contentIds.map(
-						(contentId) => list.contents[contentId]
-					);
-					return (
-						<Sections key={section.id} section={section} contents={contents} />
-					);
-				})}
+				<Droppable type="section" droppableId="main-droppable-container">
+					{(provided) => (
+						<div {...provided.droppableProps} ref={provided.innerRef} i>
+							{list.sectionOrder.map((sectionId, index) => {
+								const section = list.sections[sectionId];
+								const contents = section.contentIds.map(
+									(contentId) => list.contents[contentId]
+								);
+								return (
+									<Sections
+										key={section.id}
+										section={section}
+										contents={contents}
+										index={index}
+									/>
+								);
+							})}
+							{provided.placeholder}
+						</div>
+					)}
+				</Droppable>
 			</DragDropContext>
 		</Container>
 	);

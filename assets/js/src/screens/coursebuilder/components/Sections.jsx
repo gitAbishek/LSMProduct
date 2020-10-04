@@ -7,40 +7,48 @@ import defaultStyle, { BaseLine } from '../../../config/defaultStyle';
 import DragHandle from './DragHandle';
 import FlexRow from '../../../components/common/FlexRow';
 import fontSize from '../../../config/fontSize';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 const Sections = (props) => {
-	const { section, contents } = props;
+	const { section, contents, index } = props;
 
 	return (
-		<Container>
-			<SectionHeader>
-				<FlexRow>
-					<DragHandle />
-					<SectionTitle>{section.title}</SectionTitle>
-				</FlexRow>
-			</SectionHeader>
+		<Draggable draggableId={section.id} index={index}>
+			{(provided, snapshot) => (
+				<Container
+					{...provided.draggableProps}
+					ref={provided.innerRef}
+					isDragging={snapshot.isDragging}>
+					<SectionHeader>
+						<FlexRow>
+							<DragHandle {...provided.dragHandleProps} />
+							<SectionTitle>{section.title}</SectionTitle>
+						</FlexRow>
+					</SectionHeader>
 
-			<Droppable droppableId={section.id}>
-				{(provided, snapshot) => (
-					<DroppableArea
-						ref={provided.innerRef}
-						{...provided.droppableProps}
-						isDraggingOver={snapshot.isDraggingOver}>
-						{contents.map((content, index) => (
-							<Content key={content.id} content={content} index={index} />
-						))}
-						{provided.placeholder}
-					</DroppableArea>
-				)}
-			</Droppable>
-		</Container>
+					<Droppable droppableId={section.id} type="content">
+						{(provided, snapshot) => (
+							<DroppableArea
+								ref={provided.innerRef}
+								{...provided.droppableProps}
+								isDraggingOver={snapshot.isDraggingOver}>
+								{contents.map((content, index) => (
+									<Content key={content.id} content={content} index={index} />
+								))}
+								{provided.placeholder}
+							</DroppableArea>
+						)}
+					</Droppable>
+				</Container>
+			)}
+		</Draggable>
 	);
 };
 
 Sections.propTypes = {
 	contents: PropTypes.array,
 	section: PropTypes.object,
+	index: PropTypes.any,
 };
 
 const Container = styled.div`
@@ -48,6 +56,8 @@ const Container = styled.div`
 	border-radius: ${defaultStyle.borderRadius};
 	padding: ${BaseLine * 4}px;
 	margin-top: ${BaseLine * 6}px;
+	box-shadow: ${(props) =>
+		props.isDragging ? '0 0 15px rgba(0, 0, 0, 0.1)' : 'none'};
 `;
 
 const SectionHeader = styled.header`

@@ -1,51 +1,39 @@
 import { React, useState } from '@wordpress/element';
 import { BiAlignLeft, BiCopy, BiTrash } from 'react-icons/bi';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import Sections from './Sections';
 
 const SortableSection = () => {
-	const [items, setItems] = useState([
-		{
-			id: '1122',
-			label: 'This is label',
-			datas: ['First Data', 'Second data'],
+	const [list, setList] = useState({
+		contents: {
+			'content-1': { id: 'content-1', title: 'hello world' },
+			'content-2': { id: 'content-2', title: 'section-2 content' },
 		},
-		{
-			id: '1111',
-			label: 'Second Droppable',
-			data: ['second data one', 'second data 2'],
+		sections: {
+			'section-1': {
+				id: 'section-1',
+				title: 'Section 1',
+				contentIds: ['content-1', 'content-2'],
+			},
 		},
-	]);
+		sectionOrder: ['section-1'],
+	});
 
-	const onDragEnd = () => {
-		return;
-	};
+	// console.log(list);
 
 	return (
-		<DragDropContext onDragEnd={onDragEnd}>
-			<Droppable droppableId="uniqueID">
-				{(dropProvided) => (
-					<div
-						ref={dropProvided.innerRef}
-						{...dropProvided.draggableProps}
-						{...dropProvided.dragHandleProps}>
-						{items.map((item, index) => (
-							<Draggable key={item.id} draggableId={item.id} index={index}>
-								{(dragProvided) => (
-									<span
-										ref={dragProvided.innerRef}
-										{...dragProvided.draggableProps}
-										{...dragProvided.dragHandleProps}>
-										{item.label}
-									</span>
-								)}
-							</Draggable>
-						))}
-
-						{dropProvided.placeholder}
-					</div>
-				)}
-			</Droppable>
-		</DragDropContext>
+		<div>
+			<h2>nonono</h2>
+			{list.sectionOrder.map((sectionId) => {
+				const section = list.sections[sectionId];
+				const contents = section.contentIds.map(
+					(contentId) => list.contents[contentId]
+				);
+				return (
+					<Sections key={section.id} section={section} contents={contents} />
+				);
+			})}
+		</div>
 	);
 };
 

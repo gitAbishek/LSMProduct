@@ -12,8 +12,11 @@ const Content = (props) => {
 	const { content, index } = props;
 	return (
 		<Draggable draggableId={content.id} index={index}>
-			{(provided) => (
-				<Container ref={provided.innerRef} {...provided.draggableProps}>
+			{(provided, snapshot) => (
+				<Container
+					ref={provided.innerRef}
+					{...provided.draggableProps}
+					isDragging={snapshot.isDragging}>
 					<FlexRow>
 						<DragHandle {...provided.dragHandleProps} />
 						<ContentTitle>{content.title}</ContentTitle>
@@ -31,6 +34,8 @@ Content.propTypes = {
 
 const Container = styled.div`
 	background-color: ${colors.WHITE};
+	box-shadow: ${(props) =>
+		props.isDragging ? '0 0 15px rgba(0, 0, 0, 0.1)' : 'none'};
 	border: 1px solid ${colors.BORDER};
 	padding: ${BaseLine * 2}px;
 	border-radius: ${defaultStyle.borderRadius};

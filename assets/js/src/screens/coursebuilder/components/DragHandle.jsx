@@ -6,8 +6,8 @@ import colors from '../../../config/colors';
 import { BaseLine } from '../../../config/defaultStyle';
 import fontSize from '../../../config/fontSize';
 
-const DragHandle = (props) => {
-	return <SortableIcon icon={<Sortable />} {...props} />;
+const DragHandle = () => {
+	return <SortableIcon icon={<Sortable />} />;
 };
 
 const SortableIcon = styled(Icon)`

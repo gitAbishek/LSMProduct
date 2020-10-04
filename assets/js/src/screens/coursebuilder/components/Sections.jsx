@@ -43,6 +43,7 @@ const Container = styled.div`
 
 const SectionHeader = styled.header`
 	display: flex;
+	margin-bottom: ${BaseLine * 4}px;
 `;
 
 const SectionTitle = styled.h3`

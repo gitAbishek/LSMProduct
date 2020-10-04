@@ -22,8 +22,11 @@ const Sections = (props) => {
 			</SectionHeader>
 
 			<Droppable droppableId={section.id}>
-				{(provided) => (
-					<DroppableArea ref={provided.innerRef} {...provided.droppableProps}>
+				{(provided, snapshot) => (
+					<DroppableArea
+						ref={provided.innerRef}
+						{...provided.droppableProps}
+						isDraggingOver={snapshot.isDraggingOver}>
 						{contents.map((content, index) => (
 							<Content key={content.id} content={content} index={index} />
 						))}
@@ -59,6 +62,8 @@ const SectionTitle = styled.h3`
 `;
 
 const DroppableArea = styled.div`
-	background-color: ${colors.LIGHT_BLUEISH_GRAY};
+	padding: ${BaseLine}px;
+	background-color: ${(props) =>
+		props.isDraggingOver ? colors.LIGHT_BLUEISH_GRAY : colors.WHITE};
 `;
 export default Sections;

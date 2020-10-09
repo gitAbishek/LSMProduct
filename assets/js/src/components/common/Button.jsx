@@ -47,7 +47,7 @@ const StyledButton = styled.button`
 
 	/* Button Types */
 	${(props) =>
-		(props.primary  &&
+		(props.primary &&
 			css`
 				color: ${colors.WHITE};
 				border-color: ${colors.PRIMARY};

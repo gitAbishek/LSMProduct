@@ -8,10 +8,19 @@ import DragHandle from './DragHandle';
 import FlexRow from '../../../components/common/FlexRow';
 import fontSize from '../../../config/fontSize';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import Button from '../../../components/common/Button';
+import { BiDotsVerticalRounded } from 'react-icons/bi';
+import Dropdown from 'rc-dropdown';
 
 const Sections = (props) => {
 	const { section, contents, index } = props;
-
+	const OptionMenu = (
+		<ul>
+			<li>
+				<a href="">Delete</a>
+			</li>
+		</ul>
+	);
 	return (
 		<Draggable draggableId={section.id} index={index}>
 			{(provided, snapshot) => (
@@ -23,6 +32,11 @@ const Sections = (props) => {
 						<FlexRow>
 							<DragHandle {...provided.dragHandleProps} />
 							<SectionTitle>{section.title}</SectionTitle>
+						</FlexRow>
+						<FlexRow>
+							<Dropdown overlay={OptionMenu}>
+								<OptionButton icon={<BiDotsVerticalRounded />} />
+							</Dropdown>
 						</FlexRow>
 					</SectionHeader>
 
@@ -63,6 +77,7 @@ const Container = styled.div`
 const SectionHeader = styled.header`
 	display: flex;
 	margin-bottom: ${BaseLine * 4}px;
+	justify-content: space-between;
 `;
 
 const SectionTitle = styled.h3`
@@ -77,4 +92,11 @@ const DroppableArea = styled.div`
 		props.isDraggingOver ? colors.LIGHT_BLUEISH_GRAY : colors.WHITE};
 	min-height: 100px;
 `;
+
+const OptionButton = styled(Button)`
+	i {
+		margin-right: 0;
+	}
+`;
+
 export default Sections;

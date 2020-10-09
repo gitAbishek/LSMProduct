@@ -2,8 +2,6 @@ import { React, useState } from '@wordpress/element';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Sections from './Sections';
 import Container from '../../../components/common/Container';
-import styled from 'styled-components';
-import colors from '../../../config/colors';
 
 const SortableSection = () => {
 	const [list, setList] = useState({
@@ -39,7 +37,6 @@ const SortableSection = () => {
 
 		// Reorder section move
 		if (type === 'section') {
-			console.log('section is moving');
 			const newSectionOrder = Array.from(list.sectionOrder);
 			newSectionOrder.splice(source.index, 1);
 			newSectionOrder.splice(destination.index, 0, draggableId);
@@ -99,7 +96,7 @@ const SortableSection = () => {
 			<DragDropContext onDragEnd={onDragEnd}>
 				<Droppable type="section" droppableId="main-droppable-container">
 					{(provided) => (
-						<div {...provided.droppableProps} ref={provided.innerRef} i>
+						<div {...provided.droppableProps} ref={provided.innerRef}>
 							{list.sectionOrder.map((sectionId, index) => {
 								const section = list.sections[sectionId];
 								const contents = section.contentIds.map(

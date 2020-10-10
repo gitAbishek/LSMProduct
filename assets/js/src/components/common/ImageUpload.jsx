@@ -21,8 +21,6 @@ const ImageUpload = (props) => {
 		);
 	});
 
-	console.log(file);
-
 	const {
 		getRootProps,
 		getInputProps,

@@ -13,6 +13,7 @@ import DropdownOverlay from '../../../components/common/DropdownOverlay';
 import Icon from '../../../components/common/Icon';
 import { BiTrash } from 'react-icons/bi';
 import Lesson from './content/lesson';
+import Quiz from './content/quiz';
 
 const Section = (props) => {
 	const { id, title, contents, index } = props;
@@ -56,14 +57,22 @@ const Section = (props) => {
 								isDraggingOver={snapshot.isDraggingOver}>
 								{contents.map(
 									(content, index) =>
-										content.type === 'lesson' && (
+										(content.type === 'lesson' && (
 											<Lesson
 												key={content.id}
 												id={content.id}
 												title={content.title}
 												index={index}
 											/>
-										)
+										)) ||
+										(content.type === 'quiz' && (
+											<Quiz
+												key={content.id}
+												id={content.id}
+												title={content.title}
+												index={index}
+											/>
+										))
 								)}
 								{provided.placeholder}
 							</ContentDroppableArea>

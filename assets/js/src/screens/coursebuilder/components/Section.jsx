@@ -102,7 +102,7 @@ const SectionContainer = styled.div`
 
 const SectionHeader = styled.header`
 	display: flex;
-	margin-bottom: ${BaseLine * 4}px;
+	margin-bottom: ${BaseLine * 3}px;
 	justify-content: space-between;
 `;
 
@@ -113,10 +113,9 @@ const SectionTitle = styled.h3`
 `;
 
 const ContentDroppableArea = styled.div`
-	padding: ${BaseLine}px;
 	background-color: ${(props) =>
 		props.isDraggingOver ? colors.LIGHT_BLUEISH_GRAY : colors.WHITE};
-	min-height: 100px;
+	min-height: ${BaseLine * 4}px;
 `;
 
 export default Section;

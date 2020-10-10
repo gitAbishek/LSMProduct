@@ -5,7 +5,7 @@ import {
 	Route,
 	Switch,
 } from 'react-router-dom';
-import './app.css';
+import './assets/scss/style.scss';
 import * as screens from './screens';
 
 const App = () => {

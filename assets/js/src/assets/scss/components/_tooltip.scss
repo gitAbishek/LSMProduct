@@ -1,13 +1,5 @@
-//colors
-$white: #fff;
-$bg-inner: #07092f;
-$background: rgba(0, 0, 0, 0.17);
-$color_royal_purple_approx: rebeccapurple;
-
-//@extend-elements
-//original selectors
-//.rc-tooltip-zoom-enter, .rc-tooltip-zoom-appear
-%extend_1 {
+.rc-tooltip-zoom-enter,
+.rc-tooltip-zoom-appear {
 	opacity: 0;
 	animation-duration: 0.3s;
 	animation-fill-mode: both;
@@ -23,204 +15,220 @@ $color_royal_purple_approx: rebeccapurple;
 	font-size: 12px;
 	line-height: 1.5;
 	opacity: 0.9;
-	&.rc-tooltip-zoom-enter {
-		display: block;
-	}
+
+	&.rc-tooltip-zoom-enter,
 	&.rc-tooltip-zoom-leave {
 		display: block;
 	}
 }
-.rc-tooltip-zoom-enter {
-	@extend %extend_1;
-	&.rc-tooltip-zoom-enter-active {
-		animation-name: rcToolTipZoomIn;
-		animation-play-state: running;
-	}
+
+.rc-tooltip-zoom-enter.rc-tooltip-zoom-enter-active,
+.rc-tooltip-zoom-appear.rc-tooltip-zoom-appear-active {
+	animation-name: rcToolTipZoomIn;
+	animation-play-state: running;
 }
-.rc-tooltip-zoom-appear {
-	@extend %extend_1;
-	&.rc-tooltip-zoom-appear-active {
-		animation-name: rcToolTipZoomIn;
-		animation-play-state: running;
-	}
-}
+
 .rc-tooltip-zoom-leave {
 	animation-duration: 0.3s;
 	animation-fill-mode: both;
 	animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);
 	animation-play-state: paused;
+
 	&.rc-tooltip-zoom-leave-active {
 		animation-name: rcToolTipZoomOut;
 		animation-play-state: running;
 	}
 }
+
 @keyframes rcToolTipZoomIn {
 	0% {
 		opacity: 0;
-		//Instead of the line below you could use @include transform-origin($origin-x, $origin-y, $origin-z, $only3d)
 		transform-origin: 50% 50%;
-		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
 		transform: scale(0, 0);
 	}
+
 	100% {
 		opacity: 1;
-		//Instead of the line below you could use @include transform-origin($origin-x, $origin-y, $origin-z, $only3d)
 		transform-origin: 50% 50%;
-		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
 		transform: scale(1, 1);
 	}
 }
+
 @keyframes rcToolTipZoomOut {
 	0% {
 		opacity: 1;
-		//Instead of the line below you could use @include transform-origin($origin-x, $origin-y, $origin-z, $only3d)
 		transform-origin: 50% 50%;
-		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
 		transform: scale(1, 1);
 	}
+
 	100% {
 		opacity: 0;
-		//Instead of the line below you could use @include transform-origin($origin-x, $origin-y, $origin-z, $only3d)
 		transform-origin: 50% 50%;
-		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
 		transform: scale(0, 0);
 	}
 }
+
 .rc-tooltip-hidden {
 	display: none;
 }
+
 .rc-tooltip-placement-top {
 	padding: 5px 0 9px;
+
 	.rc-tooltip-arrow {
 		bottom: 4px;
 		margin-left: -5px;
 		border-width: 5px 5px 0;
-		border-top-color: $bg-inner;
+		border-top-color: #07092f;
 		left: 50%;
 	}
 }
+
 .rc-tooltip-placement-topLeft {
 	padding: 5px 0 9px;
+
 	.rc-tooltip-arrow {
 		bottom: 4px;
 		margin-left: -5px;
 		border-width: 5px 5px 0;
-		border-top-color: $bg-inner;
+		border-top-color: #07092f;
 		left: 15%;
 	}
 }
+
 .rc-tooltip-placement-topRight {
 	padding: 5px 0 9px;
+
 	.rc-tooltip-arrow {
 		bottom: 4px;
 		margin-left: -5px;
 		border-width: 5px 5px 0;
-		border-top-color: $bg-inner;
+		border-top-color: #07092f;
 		right: 15%;
 	}
 }
+
 .rc-tooltip-placement-right {
 	padding: 0 5px 0 9px;
+
 	.rc-tooltip-arrow {
 		left: 4px;
 		margin-top: -5px;
 		border-width: 5px 5px 5px 0;
-		border-right-color: $bg-inner;
+		border-right-color: #07092f;
 		top: 50%;
 	}
 }
+
 .rc-tooltip-placement-rightTop {
 	padding: 0 5px 0 9px;
+
 	.rc-tooltip-arrow {
 		left: 4px;
 		margin-top: -5px;
 		border-width: 5px 5px 5px 0;
-		border-right-color: $bg-inner;
+		border-right-color: #07092f;
 		top: 15%;
 		margin-top: 0;
 	}
 }
+
 .rc-tooltip-placement-rightBottom {
 	padding: 0 5px 0 9px;
+
 	.rc-tooltip-arrow {
 		left: 4px;
 		margin-top: -5px;
 		border-width: 5px 5px 5px 0;
-		border-right-color: $bg-inner;
+		border-right-color: #07092f;
 		bottom: 15%;
 	}
 }
+
 .rc-tooltip-placement-bottom {
 	padding: 9px 0 5px;
+
 	.rc-tooltip-arrow {
 		top: 4px;
 		margin-left: -5px;
 		border-width: 0 5px 5px;
-		border-bottom-color: $bg-inner;
+		border-bottom-color: #07092f;
 		left: 50%;
 	}
 }
+
 .rc-tooltip-placement-bottomLeft {
 	padding: 9px 0 5px;
+
 	.rc-tooltip-arrow {
 		top: 4px;
 		margin-left: -5px;
 		border-width: 0 5px 5px;
-		border-bottom-color: $bg-inner;
+		border-bottom-color: #07092f;
 		left: 15%;
 	}
 }
+
 .rc-tooltip-placement-bottomRight {
 	padding: 9px 0 5px;
+
 	.rc-tooltip-arrow {
 		top: 4px;
 		margin-left: -5px;
 		border-width: 0 5px 5px;
-		border-bottom-color: $bg-inner;
+		border-bottom-color: #07092f;
 		right: 15%;
 	}
 }
+
 .rc-tooltip-placement-left {
 	padding: 0 9px 0 5px;
+
 	.rc-tooltip-arrow {
 		right: 4px;
 		margin-top: -5px;
 		border-width: 5px 0 5px 5px;
-		border-left-color: $bg-inner;
+		border-left-color: #07092f;
 		top: 50%;
 	}
 }
+
 .rc-tooltip-placement-leftTop {
 	padding: 0 9px 0 5px;
+
 	.rc-tooltip-arrow {
 		right: 4px;
 		margin-top: -5px;
 		border-width: 5px 0 5px 5px;
-		border-left-color: $bg-inner;
+		border-left-color: #07092f;
 		top: 15%;
 		margin-top: 0;
 	}
 }
+
 .rc-tooltip-placement-leftBottom {
 	padding: 0 9px 0 5px;
+
 	.rc-tooltip-arrow {
 		right: 4px;
 		margin-top: -5px;
 		border-width: 5px 0 5px 5px;
-		border-left-color: $bg-inner;
+		border-left-color: #07092f;
 		bottom: 15%;
 	}
 }
+
 .rc-tooltip-inner {
 	padding: 8px 10px;
-	color: $white;
+	color: #fff;
 	text-align: left;
 	text-decoration: none;
-	background-color: $bg-inner;
+	background-color: #07092f;
 	border-radius: 3px;
-	box-shadow: 0 0 4px $background;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.17);
 	min-height: 20px;
 }
+
 .rc-tooltip-arrow {
 	position: absolute;
 	width: 0;
@@ -228,6 +236,7 @@ $color_royal_purple_approx: rebeccapurple;
 	border-color: transparent;
 	border-style: solid;
 }
+
 .test {
-	color: $color_royal_purple_approx;
+	color: rebeccapurple;
 }

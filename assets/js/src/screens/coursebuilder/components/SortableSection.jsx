@@ -111,7 +111,8 @@ const SortableSection = () => {
 								return (
 									<Section
 										key={section.id}
-										section={section}
+										id={section.id}
+										title={section.title}
 										contents={contents}
 										index={index}
 									/>

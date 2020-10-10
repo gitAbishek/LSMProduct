@@ -6,9 +6,9 @@ import { Draggable } from 'react-beautiful-dnd';
 import { ContentContainer, ContentTitle } from './styled';
 
 const Content = (props) => {
-	const { content, index } = props;
+	const { id, title, index } = props;
 	return (
-		<Draggable draggableId={content.id} index={index}>
+		<Draggable draggableId={id} index={index}>
 			{(provided, snapshot) => (
 				<ContentContainer
 					ref={provided.innerRef}
@@ -16,7 +16,7 @@ const Content = (props) => {
 					isDragging={snapshot.isDragging}>
 					<FlexRow>
 						<DragHandle {...provided.dragHandleProps} />
-						<ContentTitle>{content.title}</ContentTitle>
+						<ContentTitle>{title}</ContentTitle>
 					</FlexRow>
 				</ContentContainer>
 			)}
@@ -25,8 +25,9 @@ const Content = (props) => {
 };
 
 Content.propTypes = {
-	content: PropTypes.object,
-	index: PropTypes.any,
+	id: PropTypes.string,
+	title: PropTypes.string,
+	index: PropTypes.number,
 };
 
 export default Content;

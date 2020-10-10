@@ -15,10 +15,10 @@ import Icon from '../../../components/common/Icon';
 import { BiTrash } from 'react-icons/bi';
 
 const Section = (props) => {
-	const { section, contents, index } = props;
+	const { id, title, contents, index } = props;
 
 	return (
-		<Draggable draggableId={section.id} index={index}>
+		<Draggable draggableId={id} index={index}>
 			{(sectionProvided, snapshot) => (
 				<SectionContainer
 					{...sectionProvided.draggableProps}
@@ -27,7 +27,7 @@ const Section = (props) => {
 					<SectionHeader>
 						<FlexRow>
 							<DragHandle {...sectionProvided.dragHandleProps} />
-							<SectionTitle>{section.title}</SectionTitle>
+							<SectionTitle>{title}</SectionTitle>
 						</FlexRow>
 						<FlexRow>
 							<Dropdown
@@ -48,7 +48,7 @@ const Section = (props) => {
 						</FlexRow>
 					</SectionHeader>
 
-					<Droppable droppableId={section.id} type="content">
+					<Droppable droppableId={id} type="content">
 						{(provided, snapshot) => (
 							<ContentDroppableArea
 								ref={provided.innerRef}
@@ -57,7 +57,8 @@ const Section = (props) => {
 								{contents.map((content, index) => (
 									<Content
 										key={content.id}
-										content={content}
+										id={content.id}
+										title={content.title}
 										index={index}
 										type={content.type}
 									/>
@@ -73,9 +74,10 @@ const Section = (props) => {
 };
 
 Section.propTypes = {
+	id: PropTypes.string,
+	title: PropTypes.string,
 	contents: PropTypes.array,
-	section: PropTypes.object,
-	index: PropTypes.any,
+	index: PropTypes.number,
 };
 
 const SectionContainer = styled.div`

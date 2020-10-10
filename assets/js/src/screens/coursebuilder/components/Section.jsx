@@ -14,6 +14,7 @@ import Icon from '../../../components/common/Icon';
 import { BiTrash } from 'react-icons/bi';
 import Lesson from './content/lesson';
 import Quiz from './content/quiz';
+import AddNewButton from '../../../components/common/AddNewButton';
 
 const Section = (props) => {
 	const { id, title, contents, index } = props;
@@ -75,6 +76,7 @@ const Section = (props) => {
 											/>
 										))
 								)}
+								<AddNewButton>Add New Content</AddNewButton>
 								{provided.placeholder}
 							</ContentDroppableArea>
 						)}

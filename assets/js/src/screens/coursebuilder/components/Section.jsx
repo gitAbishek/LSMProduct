@@ -60,7 +60,6 @@ const Section = (props) => {
 										id={content.id}
 										title={content.title}
 										index={index}
-										type={content.type}
 									/>
 								))}
 								{provided.placeholder}

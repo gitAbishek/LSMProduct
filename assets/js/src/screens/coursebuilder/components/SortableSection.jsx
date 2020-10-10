@@ -1,33 +1,39 @@
 import { React, useState } from '@wordpress/element';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import Sections from './Sections';
+import Section from './Section';
 import Container from '../../../components/common/Container';
 
+const dummyData = {
+	contents: {
+		'content-1': { id: 'content-1', title: 'hello world', type: 'lesson' },
+		'content-2': {
+			id: 'content-2',
+			title: 'Content for section',
+			type: 'quiz',
+		},
+	},
+	sections: {
+		'section-1': {
+			id: 'section-1',
+			title: 'Section 1',
+			contentIds: ['content-1', 'content-2'],
+		},
+		'section-2': {
+			id: 'section-2',
+			title: 'Section 2',
+			contentIds: [],
+		},
+		'section-3': {
+			id: 'section-3',
+			title: 'Section 3',
+			contentIds: [],
+		},
+	},
+	sectionOrder: ['section-1', 'section-2', 'section-3'],
+};
+
 const SortableSection = () => {
-	const [list, setList] = useState({
-		contents: {
-			'content-1': { id: 'content-1', title: 'hello world' },
-			'content-2': { id: 'content-2', title: 'Content for section' },
-		},
-		sections: {
-			'section-1': {
-				id: 'section-1',
-				title: 'Section 1',
-				contentIds: ['content-1', 'content-2'],
-			},
-			'section-2': {
-				id: 'section-2',
-				title: 'Section 2',
-				contentIds: [],
-			},
-			'section-3': {
-				id: 'section-3',
-				title: 'Section 3',
-				contentIds: [],
-			},
-		},
-		sectionOrder: ['section-1', 'section-2', 'section-3'],
-	});
+	const [data, setData] = useState(dummyData);
 
 	const onDragEnd = (result) => {
 		const { destination, source, draggableId, type } = result;
@@ -37,15 +43,15 @@ const SortableSection = () => {
 
 		// Reorder section move
 		if (type === 'section') {
-			const newSectionOrder = Array.from(list.sectionOrder);
+			const newSectionOrder = Array.from(data.sectionOrder);
 			newSectionOrder.splice(source.index, 1);
 			newSectionOrder.splice(destination.index, 0, draggableId);
-			setList({ ...list, sectionOrder: newSectionOrder });
+			setData({ ...data, sectionOrder: newSectionOrder });
 			return;
 		}
 
-		const start = list.sections[source.droppableId];
-		const finish = list.sections[destination.droppableId];
+		const start = data.sections[source.droppableId];
+		const finish = data.sections[destination.droppableId];
 
 		if (start === finish) {
 			const newContentIds = Array.from(start.contentIds);
@@ -57,10 +63,10 @@ const SortableSection = () => {
 				contentIds: newContentIds,
 			};
 
-			setList({
-				...list,
+			setData({
+				...data,
 				sections: {
-					...list.sections,
+					...data.sections,
 					[newSection.id]: newSection,
 				},
 			});
@@ -81,10 +87,10 @@ const SortableSection = () => {
 			contentIds: finishContentIds,
 		};
 
-		setList({
-			...list,
+		setData({
+			...data,
 			sections: {
-				...list.sections,
+				...data.sections,
 				[newStart.id]: newStart,
 				[newFinish.id]: newFinish,
 			},
@@ -94,16 +100,16 @@ const SortableSection = () => {
 	return (
 		<Container>
 			<DragDropContext onDragEnd={onDragEnd}>
-				<Droppable type="section" droppableId="main-droppable-container">
+				<Droppable type="section" droppableId="course-builder">
 					{(provided) => (
 						<div {...provided.droppableProps} ref={provided.innerRef}>
-							{list.sectionOrder.map((sectionId, index) => {
-								const section = list.sections[sectionId];
+							{data.sectionOrder.map((sectionId, index) => {
+								const section = data.sections[sectionId];
 								const contents = section.contentIds.map(
-									(contentId) => list.contents[contentId]
+									(contentId) => data.contents[contentId]
 								);
 								return (
-									<Sections
+									<Section
 										key={section.id}
 										section={section}
 										contents={contents}

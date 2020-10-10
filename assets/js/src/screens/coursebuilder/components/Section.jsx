@@ -8,64 +8,77 @@ import DragHandle from './DragHandle';
 import FlexRow from '../../../components/common/FlexRow';
 import fontSize from '../../../config/fontSize';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import Button from '../../../components/common/Button';
-import { BiDotsVerticalRounded } from 'react-icons/bi';
 import Dropdown from 'rc-dropdown';
+import OptionButton from '../../../components/common/OptionButton';
+import DropdownOverlay from '../../../components/common/DropdownOverlay';
+import Icon from '../../../components/common/Icon';
+import { BiTrash } from 'react-icons/bi';
 
-const Sections = (props) => {
+const Section = (props) => {
 	const { section, contents, index } = props;
-	const OptionMenu = (
-		<ul>
-			<li>
-				<a href="">Delete</a>
-			</li>
-		</ul>
-	);
+
 	return (
 		<Draggable draggableId={section.id} index={index}>
-			{(provided, snapshot) => (
-				<Container
-					{...provided.draggableProps}
-					ref={provided.innerRef}
+			{(sectionProvided, snapshot) => (
+				<SectionContainer
+					{...sectionProvided.draggableProps}
+					ref={sectionProvided.innerRef}
 					isDragging={snapshot.isDragging}>
 					<SectionHeader>
 						<FlexRow>
-							<DragHandle {...provided.dragHandleProps} />
+							<DragHandle {...sectionProvided.dragHandleProps} />
 							<SectionTitle>{section.title}</SectionTitle>
 						</FlexRow>
 						<FlexRow>
-							<Dropdown overlay={OptionMenu}>
-								<OptionButton icon={<BiDotsVerticalRounded />} />
+							<Dropdown
+								trigger={'click'}
+								placement={'bottomRight'}
+								overlay={
+									<DropdownOverlay>
+										<ul>
+											<li>
+												<Icon icon={<BiTrash />} />
+												Delete
+											</li>
+										</ul>
+									</DropdownOverlay>
+								}>
+								<OptionButton />
 							</Dropdown>
 						</FlexRow>
 					</SectionHeader>
 
 					<Droppable droppableId={section.id} type="content">
 						{(provided, snapshot) => (
-							<DroppableArea
+							<ContentDroppableArea
 								ref={provided.innerRef}
 								{...provided.droppableProps}
 								isDraggingOver={snapshot.isDraggingOver}>
 								{contents.map((content, index) => (
-									<Content key={content.id} content={content} index={index} />
+									<Content
+										key={content.id}
+										content={content}
+										index={index}
+										type={content.type}
+									/>
 								))}
 								{provided.placeholder}
-							</DroppableArea>
+							</ContentDroppableArea>
 						)}
 					</Droppable>
-				</Container>
+				</SectionContainer>
 			)}
 		</Draggable>
 	);
 };
 
-Sections.propTypes = {
+Section.propTypes = {
 	contents: PropTypes.array,
 	section: PropTypes.object,
 	index: PropTypes.any,
 };
 
-const Container = styled.div`
+const SectionContainer = styled.div`
 	background-color: ${colors.WHITE};
 	border-radius: ${defaultStyle.borderRadius};
 	padding: ${BaseLine * 4}px;
@@ -86,17 +99,11 @@ const SectionTitle = styled.h3`
 	margin: 0;
 `;
 
-const DroppableArea = styled.div`
+const ContentDroppableArea = styled.div`
 	padding: ${BaseLine}px;
 	background-color: ${(props) =>
 		props.isDraggingOver ? colors.LIGHT_BLUEISH_GRAY : colors.WHITE};
 	min-height: 100px;
 `;
 
-const OptionButton = styled(Button)`
-	i {
-		margin-right: 0;
-	}
-`;
-
-export default Sections;
+export default Section;

@@ -3,8 +3,19 @@ import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 import FlexRow from '../../../../components/common/FlexRow';
 import DragHandle from '../DragHandle';
-import { ContentContainer, ContentIcon, ContentTitle } from '../styled';
-import { BiTimer } from 'react-icons/bi';
+import {
+	ActionContainer,
+	ContentContainer,
+	ContentHeader,
+	ContentIcon,
+	ContentTitle,
+} from '../styled';
+import { BiTimer, BiTrash } from 'react-icons/bi';
+import Button from '../../../../components/common/Button';
+import Dropdown from 'rc-dropdown';
+import DropdownOverlay from '../../../../components/common/DropdownOverlay';
+import Icon from '../../../../components/common/Icon';
+import OptionButton from '../../../../components/common/OptionButton';
 
 const Quiz = (props) => {
 	const { id, title, index } = props;
@@ -15,11 +26,34 @@ const Quiz = (props) => {
 					ref={provided.innerRef}
 					{...provided.draggableProps}
 					isDragging={snapshot.isDragging}>
-					<FlexRow>
-						<DragHandle {...provided.dragHandleProps} />
-						<ContentIcon icon={<BiTimer />} />
-						<ContentTitle>{title}</ContentTitle>
-					</FlexRow>
+					<ContentHeader>
+						<FlexRow>
+							<DragHandle {...provided.dragHandleProps} />
+							<ContentIcon icon={<BiTimer />} />
+							<ContentTitle>{title}</ContentTitle>
+						</FlexRow>
+						<FlexRow>
+							<ActionContainer>
+								<Button>Edit</Button>
+								<Dropdown
+									trigger={'click'}
+									placement={'bottomRight'}
+									animation={'slide-up'}
+									overlay={
+										<DropdownOverlay>
+											<ul>
+												<li>
+													<Icon icon={<BiTrash />} />
+													Delete
+												</li>
+											</ul>
+										</DropdownOverlay>
+									}>
+									<OptionButton />
+								</Dropdown>
+							</ActionContainer>
+						</FlexRow>
+					</ContentHeader>
 				</ContentContainer>
 			)}
 		</Draggable>

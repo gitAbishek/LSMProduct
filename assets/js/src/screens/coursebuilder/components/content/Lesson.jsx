@@ -38,6 +38,7 @@ const Lesson = (props) => {
 								<Dropdown
 									trigger={'click'}
 									placement={'bottomRight'}
+									animation={'slide-up'}
 									overlay={
 										<DropdownOverlay>
 											<ul>

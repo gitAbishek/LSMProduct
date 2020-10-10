@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import colors from "../../../config/colors";
-import defaultStyle, { BaseLine } from "../../../config/defaultStyle";
-import fontSize from "../../../config/fontSize";
+import styled from 'styled-components';
+import Icon from '../../../components/common/Icon';
+import colors from '../../../config/colors';
+import defaultStyle, { BaseLine } from '../../../config/defaultStyle';
+import fontSize from '../../../config/fontSize';
 
 export const ContentContainer = styled.div`
 	background-color: ${colors.WHITE};
@@ -17,4 +18,11 @@ export const ContentTitle = styled.h5`
 	margin: 0;
 	font-weight: 400;
 	font-size: ${fontSize.LARGE};
+	color: ${colors.TEXT};
+`;
+
+export const ContentIcon = styled(Icon)`
+	font-size: ${fontSize.HUGE};
+	margin-right: ${BaseLine}px;
+	color: ${colors.TEXT};
 `;

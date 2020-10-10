@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 import FlexRow from '../../../../components/common/FlexRow';
 import DragHandle from '../DragHandle';
-import { ContentContainer, ContentTitle } from '../styled';
+import { ContentContainer, ContentIcon, ContentTitle } from '../styled';
+import { BiTimer } from 'react-icons/bi';
+
 const Quiz = (props) => {
 	const { id, title, index } = props;
 	return (
@@ -15,6 +17,7 @@ const Quiz = (props) => {
 					isDragging={snapshot.isDragging}>
 					<FlexRow>
 						<DragHandle {...provided.dragHandleProps} />
+						<ContentIcon icon={<BiTimer />} />
 						<ContentTitle>{title}</ContentTitle>
 					</FlexRow>
 				</ContentContainer>

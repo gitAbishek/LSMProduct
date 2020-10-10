@@ -11,7 +11,7 @@ const DragHandle = (props) => {
 };
 
 const SortableIcon = styled(Icon)`
-	margin-right: ${BaseLine * 2}px;
+	margin-right: ${BaseLine}px;
 	color: ${colors.DISABLED};
 	font-size: ${fontSize.EXTRA_LARGE};
 

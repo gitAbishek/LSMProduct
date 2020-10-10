@@ -1,9 +1,11 @@
 import { React } from '@wordpress/element';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
+import { BiAlignLeft } from 'react-icons/bi';
 import FlexRow from '../../../../components/common/FlexRow';
 import DragHandle from '../DragHandle';
-import { ContentContainer, ContentTitle } from '../styled';
+import { ContentContainer, ContentIcon, ContentTitle } from '../styled';
+
 const Lesson = (props) => {
 	const { id, title, index } = props;
 	return (
@@ -15,6 +17,7 @@ const Lesson = (props) => {
 					isDragging={snapshot.isDragging}>
 					<FlexRow>
 						<DragHandle {...provided.dragHandleProps} />
+						<ContentIcon icon={<BiAlignLeft />} />
 						<ContentTitle>{title}</ContentTitle>
 					</FlexRow>
 				</ContentContainer>

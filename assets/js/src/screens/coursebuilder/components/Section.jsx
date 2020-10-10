@@ -1,7 +1,6 @@
 import { React } from '@wordpress/element';
 import styled from 'styled-components';
 import colors from '../../../config/colors';
-import Content from './Content';
 import PropTypes from 'prop-types';
 import defaultStyle, { BaseLine } from '../../../config/defaultStyle';
 import DragHandle from './DragHandle';
@@ -13,6 +12,7 @@ import OptionButton from '../../../components/common/OptionButton';
 import DropdownOverlay from '../../../components/common/DropdownOverlay';
 import Icon from '../../../components/common/Icon';
 import { BiTrash } from 'react-icons/bi';
+import Lesson from './content/lesson';
 
 const Section = (props) => {
 	const { id, title, contents, index } = props;
@@ -54,14 +54,17 @@ const Section = (props) => {
 								ref={provided.innerRef}
 								{...provided.droppableProps}
 								isDraggingOver={snapshot.isDraggingOver}>
-								{contents.map((content, index) => (
-									<Content
-										key={content.id}
-										id={content.id}
-										title={content.title}
-										index={index}
-									/>
-								))}
+								{contents.map(
+									(content, index) =>
+										content.type === 'lesson' && (
+											<Lesson
+												key={content.id}
+												id={content.id}
+												title={content.title}
+												index={index}
+											/>
+										)
+								)}
 								{provided.placeholder}
 							</ContentDroppableArea>
 						)}

@@ -63,6 +63,7 @@ class Course extends Model {
 		'date_created'       => null,
 		'date_modified'      => null,
 		'status'             => false,
+		'menu_order'         => 0,
 		'featured'           => false,
 		'catalog_visibility' => 'visibile',
 		'description'        => '',

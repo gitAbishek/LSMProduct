@@ -1,0 +1,73 @@
+<?php
+/**
+ * Lessons class.
+ */
+
+namespace ThemeGrill\Masteriyo\PostType;
+
+class Lessons extends PostType {
+	/**
+	 * Post slug.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $slug = 'lesson';
+
+	public function __construct() {
+		$this->labels = array(
+			'name'                  => _x( 'Lessons', 'Lesson General Name', 'masteriyo' ),
+			'singular_name'         => _x( 'Lesson', 'Lesson Singular Name', 'masteriyo' ),
+			'menu_name'             => __( 'Lessons', 'masteriyo' ),
+			'name_admin_bar'        => __( 'Lesson', 'masteriyo' ),
+			'archives'              => __( 'Lesson Archives', 'masteriyo' ),
+			'attributes'            => __( 'Lesson Attributes', 'masteriyo' ),
+			'parent_item_colon'     => __( 'Parent Lesson:', 'masteriyo' ),
+			'all_items'             => __( 'All Lessons', 'masteriyo' ),
+			'add_new_item'          => __( 'Add New Item', 'masteriyo' ),
+			'add_new'               => __( 'Add New', 'masteriyo' ),
+			'new_item'              => __( 'New Lesson', 'masteriyo' ),
+			'edit_item'             => __( 'Edit Lesson', 'masteriyo' ),
+			'update_item'           => __( 'Update Lesson', 'masteriyo' ),
+			'view_item'             => __( 'View Lesson', 'masteriyo' ),
+			'view_items'            => __( 'View Lessons', 'masteriyo' ),
+			'search_items'          => __( 'Search Lesson', 'masteriyo' ),
+			'not_found'             => __( 'Not found', 'masteriyo' ),
+			'not_found_in_trash'    => __( 'Not found in Trash', 'masteriyo' ),
+			'featured_image'        => __( 'Featured Image', 'masteriyo' ),
+			'set_featured_image'    => __( 'Set featured image', 'masteriyo' ),
+			'remove_featured_image' => __( 'Remove featured image', 'masteriyo' ),
+			'use_featured_image'    => __( 'Use as featured image', 'masteriyo' ),
+			'insert_into_item'      => __( 'Insert into lesson', 'masteriyo' ),
+			'uploaded_to_this_item' => __( 'Uploaded to this lesson', 'masteriyo' ),
+			'items_list'            => __( 'Lessons list', 'masteriyo' ),
+			'items_list_navigation' => __( 'Lessons list navigation', 'masteriyo' ),
+			'filter_items_list'     => __( 'Filter lessons list', 'masteriyo' ),
+		);
+
+		$this->args = array(
+			'label'               => __ ( 'Lessons', 'masteriyo' ),
+			'description'         => __( 'Lessons Description', 'masteriyo' ),
+			'labels'              => $this->labels,
+			'supports'            => false,
+			'taxonomies'          => array( ),
+			'hierarchical'        => false,
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_menu'        => true,
+			'menu_position'       => 5,
+			'show_in_admin_bar'   => true,
+			'show_in_nav_menus'   => true,
+			'can_export'          => true,
+			'show_in_rest'        => true,
+			'has_archive'         => true,
+			'map_meta_cap'        => false,
+			'exclude_from_search' => false,
+			'publicly_queryable'  => true,
+			'capability_type'     => 'post',
+			'can_export'          => true,
+			'delete_with_user'    => null
+		);
+	}
+}

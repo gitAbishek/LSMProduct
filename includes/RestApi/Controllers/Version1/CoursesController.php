@@ -483,6 +483,33 @@ class CoursesController extends CrudController {
 						),
 					),
 				),
+				'difficulties'                  => array(
+					'description' => __( 'List of difficulties.', 'masteriyo' ),
+					'type'        => 'array',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'       => 'object',
+						'properties' => array(
+							'id'   => array(
+								'description' => __( 'Difficulty ID.', 'masteriyo' ),
+								'type'        => 'integer',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'name' => array(
+								'description' => __( 'Difficulty name.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+								'readonly'    => true,
+							),
+							'slug' => array(
+								'description' => __( 'Difficulty slug.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+								'readonly'    => true,
+							),
+						),
+					),
+				),
 				'menu_order'            => array(
 					'description' => __( 'Menu order, used to custom sort courses.', 'masteriyo' ),
 					'type'        => 'integer',
@@ -567,7 +594,7 @@ class CoursesController extends CrudController {
 
 
 	/**
-	 * Prepare a single product for create or update.
+	 * Prepare a single course for create or update.
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
@@ -621,7 +648,7 @@ class CoursesController extends CrudController {
 			$course->set_reviews_allowed( $request['reviews_allowed'] );
 		}
 
-		// Featured Product.
+		// Featured Course.
 		if ( isset( $request['featured'] ) ) {
 			$course->set_featured( $request['featured'] );
 		}
@@ -636,19 +663,24 @@ class CoursesController extends CrudController {
 			$course->set_sale_price( $request['sale_price'] );
 		}
 
-		// Product parent ID.
+		// Course parent ID.
 		if ( isset( $request['parent_id'] ) ) {
 			$course->set_parent_id( $request['parent_id'] );
 		}
 
-		// Product categories.
+		// Course categories.
 		if ( isset( $request['categories'] ) && is_array( $request['categories'] ) ) {
 			$course = $this->save_taxonomy_terms( $course, $request['categories'] );
 		}
 
-		// Product tags.
+		// Course tags.
 		if ( isset( $request['tags'] ) && is_array( $request['tags'] ) ) {
 			$course = $this->save_taxonomy_terms( $course, $request['tags'], 'tag' );
+		}
+
+		// Course difficulties.
+		if ( isset( $request['difficulties'] ) && is_array( $request['difficulties'] ) ) {
+			$course = $this->save_taxonomy_terms( $course, $request['difficulties'], 'difficulty' );
 		}
 
 		// Allow set meta_data.
@@ -657,7 +689,6 @@ class CoursesController extends CrudController {
 				$course->update_meta_data( $meta['key'], $meta['value'], isset( $meta['id'] ) ? $meta['id'] : '' );
 			}
 		}
-
 
 		/**
 		 * Filters an object before it is inserted via the REST API.
@@ -677,7 +708,7 @@ class CoursesController extends CrudController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Course $course  Product instance.
+	 * @param Course $course  Course instance.
 	 * @param array      $terms    Terms data.
 	 * @param string     $taxonomy Taxonomy name.
 	 *

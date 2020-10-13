@@ -13,13 +13,13 @@ import Menu, { MenuItem } from '../../components/common/Menu';
 const MainToolbar = () => {
 	return (
 		<Header>
-			<ContainerFluid>
+			<ContainerFluid flex>
 				<HeaderLeftContent>
 					<LogoContainer>
 						<img src={LogoImg} alt="Masteriyo Logo" />
 					</LogoContainer>
 					<Menu>
-						<MenuItem to="/dashboard" icon={<BiBookAlt />}>
+						<MenuItem to="/course" icon={<BiBookAlt />}>
 							Course
 						</MenuItem>
 						<MenuItem to="/builder" icon={<BiEdit />}>
@@ -32,10 +32,8 @@ const MainToolbar = () => {
 				</HeaderLeftContent>
 				<HeaderRightContent>
 					<HeaderActions>
-						<Button type="default" icon={<BiShow />}>
-							Preview
-						</Button>
-						<Button type="primary">Save</Button>
+						<Button icon={<BiShow />}>Preview</Button>
+						<Button primary>Save</Button>
 					</HeaderActions>
 				</HeaderRightContent>
 			</ContainerFluid>

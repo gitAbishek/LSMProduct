@@ -1,26 +1,29 @@
 import { React } from '@wordpress/element';
-
 import {
 	HashRouter as Router,
-	Switch,
-	Route,
 	Redirect,
+	Route,
+	Switch,
 } from 'react-router-dom';
-
+import './assets/scss/style.scss';
 import * as screens from './screens';
-
-import './app.css';
 
 const App = () => {
 	return (
 		<Router>
 			<div className="masteriyo">
 				<Switch>
-					<Route path="/dashboard">
-						<screens.Dashboard />
+					<Route path="/course">
+						<screens.Course />
+					</Route>
+					<Route path="/builder">
+						<screens.CourseBuilder />
+					</Route>
+					<Route path="/settings">
+						<screens.Settings />
 					</Route>
 					<Route exact path="/">
-						<Redirect to="/dashboard" />
+						<Redirect to="/course" />
 					</Route>
 				</Switch>
 			</div>

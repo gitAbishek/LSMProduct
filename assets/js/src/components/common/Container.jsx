@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { BaseLine } from '../../config/defaultStyle';
 
 const Container = styled.div`
-	display: flex;
+	display: ${(props) => (props.flex ? 'flex' : 'block')};
 	padding-right: ${BaseLine * 2}px;
 	padding-left: ${BaseLine * 2}px;
+	margin: 0 auto;
 
 	@media (min-width: 576px) {
 		max-width: 540px;
@@ -28,7 +29,7 @@ const Container = styled.div`
 `;
 
 export const ContainerFluid = styled.div`
-	display: flex;
+	display: ${(props) => (props.flex ? 'flex' : 'block')};
 	padding-right: ${BaseLine * 2}px;
 	padding-left: ${BaseLine * 2}px;
 `;

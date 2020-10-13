@@ -48,7 +48,7 @@ $masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\CourseRepository::cl
 	return apply_filters( 'masteriyo_course_repository', new CourseRepository );
 } );
 
-$masteriyo_container->add( 'course', \ThemeGrill\Masteriyo\Models\Lesson::class )
+$masteriyo_container->add( 'lesson', \ThemeGrill\Masteriyo\Models\Lesson::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\LessonRepository::class );
 
 $masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\LessonRepository::class, function() {

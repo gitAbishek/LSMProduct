@@ -62,12 +62,13 @@ class Lessons extends PostType {
 			'can_export'          => true,
 			'show_in_rest'        => true,
 			'has_archive'         => true,
-			'map_meta_cap'        => false,
+			'map_meta_cap'        => true,
 			'exclude_from_search' => false,
 			'publicly_queryable'  => true,
 			'capability_type'     => 'post',
 			'can_export'          => true,
-			'delete_with_user'    => null
+			'delete_with_user'    => null,
+			'rest_controller_class' => 'ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\LessonsController',
 		);
 	}
 }

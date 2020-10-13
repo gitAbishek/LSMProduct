@@ -1,6 +1,6 @@
 <?php
 /**
- * Repository
+ * Lesson Repository
  */
 
 namespace ThemeGrill\Masteriyo\Repository;
@@ -13,14 +13,21 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 3.0.0
+	 * @since 0.1.0
+	 *
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'_featured'       => 'featured',
-		'_category_ids'   => 'category_ids',
-		'_tag_ids'       => 'tag_ids',
-		'_thumbnail_id'   => 'featured_image'
+		'_featured'            => 'featured',
+		'_category_ids'        => 'category_ids',
+		'_tag_ids'             => 'tag_ids',
+		'_thumbnail_id'        => 'featured_image',
+		'_video_source'        => 'video_source',
+		'_video_source_url'    => 'video_source_url',
+		'_video_playback_time' => 'video_playback_time',
+		'_rating_counts'       => 'rating_counts',
+		'_average_rating'      => 'average_rating',
+		'_review_count'        => 'review_count'
 	);
 
 	/**
@@ -224,7 +231,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 * @since 0.1.0
 	 *
 	 * @param Model $model Model object.
-	 * @param bool       $force Force update. Used during create.
+	 * @param bool  $force Force update. Used during create.
 	 */
 	protected function update_terms( &$model, $force = false ) {
 		$changes     = $model->get_changes();
@@ -241,10 +248,6 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 
 		if ( $force || array_key_exists( 'tag_ids', $changes ) ) {
 			wp_set_post_terms( $model->get_id(), $model->get_tag_ids( 'edit' ), "lesson_tag", false );
-		}
-
-		if ( $force || array_key_exists( 'difficulty_ids', $changes ) ) {
-			wp_set_post_terms( $model->get_id(), $model->get_difficulty_ids( 'edit' ), "lesson_difficulty", false );
 		}
 	}
 
@@ -272,7 +275,6 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 
 		$set_props['category_ids']   = $this->get_term_ids( $lesson, 'lesson_cat' );
 		$set_props['tag_ids']        = $this->get_term_ids( $lesson, 'lesson_tag' );
-		$set_props['difficulty_ids'] = $this->get_term_ids( $lesson, 'lesson_difficulty' );
 
 		$lesson->set_props( $set_props );
 	}

@@ -57,25 +57,32 @@ class Lesson extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'name'               => '',
-		'slug'               => '',
-		'date_created'       => null,
-		'date_modified'      => null,
-		'status'             => false,
-		'menu_order'         => 0,
-		'catalog_visibility' => 'visibile',
-		'description'        => '',
-		'short_description'  => '',
-		'post_password'      => '',
-		'parent_id'          => 0,
-		'reviews_allowed'    => true,
-		'category_ids'       => array(),
-		'tag_ids'            => array(),
-		'featured_image'     => ''
+		'name'                => '',
+		'slug'                => '',
+		'date_created'        => null,
+		'date_modified'       => null,
+		'status'              => false,
+		'menu_order'          => 0,
+		'featured'            => false,
+		'catalog_visibility'  => 'visibile',
+		'description'         => '',
+		'short_description'   => '',
+		'post_password'       => '',
+		'parent_id'           => 0,
+		'reviews_allowed'     => true,
+		'category_ids'        => array(),
+		'tag_ids'             => array(),
+		'featured_image'      => '',
+		'video_source'        => '',
+		'video_source_url'    => '',
+		'video_playback_time' => 0,
+		'rating_counts'       => array(),
+		'average_rating'      => 0,
+		'review_count'        => 0,
 	);
 
 	/**
-	 * Get the lesson if ID
+	 * Get the lesson if ID.
 	 *
 	 * @since 0.1.0
 	 *
@@ -94,6 +101,8 @@ class Lesson extends Model {
 	/**
 	 * Get the product's title. For products this is the product name.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return string
 	 */
 	public function get_title() {
@@ -102,6 +111,8 @@ class Lesson extends Model {
 
 	/**
 	 * Product permalink.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return string
 	 */
@@ -112,12 +123,13 @@ class Lesson extends Model {
 	/**
 	 * Returns the children IDs if applicable. Overridden by child classes.
 	 *
-	 * @return array of IDs
+	 * @since 0.1.0
+	 *
+	 * @return array Array of IDs.
 	 */
 	public function get_children() {
 		return array();
 	}
-
 
 	/*
 	|--------------------------------------------------------------------------
@@ -128,9 +140,9 @@ class Lesson extends Model {
 	/**
 	 * Get lesson name.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
 	 * @return string
 	 */
@@ -141,9 +153,9 @@ class Lesson extends Model {
 	/**
 	 * Get lesson slug.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
 	 * @return string
 	 */
@@ -154,9 +166,9 @@ class Lesson extends Model {
 	/**
 	 * Get lesson created date.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
 	 * @return string object if the date is set or null if there is no date.
 	 */
@@ -167,11 +179,11 @@ class Lesson extends Model {
 	/**
 	 * Get lesson modified date.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string object if the date is set or null if there is no date.
+	 * @return string Object if the date is set or null if there is no date.
 	 */
 	public function get_date_modified( $context = 'view' ) {
 		return $this->get_prop( 'date_modified', $context );
@@ -180,9 +192,9 @@ class Lesson extends Model {
 	/**
 	 * Get lesson status.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
 	 * @return string
 	 */
@@ -193,9 +205,9 @@ class Lesson extends Model {
 	/**
 	 * Get catalog visibility.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
 	 * @return string
 	 */
@@ -206,9 +218,9 @@ class Lesson extends Model {
 	/**
 	 * Get lesson description.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
 	 * @return string
 	 */
@@ -219,9 +231,9 @@ class Lesson extends Model {
 	/**
 	 * Get lesson short description.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
 	 * @return string
 	 */
@@ -232,11 +244,11 @@ class Lesson extends Model {
 	/**
 	 * Returns the lesson's password.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string price
+	 * @return string Lesson's password.
 	 */
 	public function get_post_password( $context = 'view' ) {
 		return $this->get_prop( 'post_password', $context );
@@ -245,10 +257,11 @@ class Lesson extends Model {
 	/**
 	 * Returns whether review is allowed or not..
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 * @return string price
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return bool
 	 *
 	 */
 	public function get_reviews_allowed( $context = 'view' ) {
@@ -258,11 +271,11 @@ class Lesson extends Model {
 	/**
 	 * Returns lesson parent id.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string price
+	 * @return int Lesson parent id.
 	 */
 	public function get_parent_id( $context = 'view' ) {
 		return $this->get_prop( 'parent_id', $context );
@@ -271,11 +284,11 @@ class Lesson extends Model {
 	/**
 	 * Returns lesson menu order.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string price
+	 * @return int Lesson menu order.
 	 */
 	public function get_menu_order( $context = 'view' ) {
 		return $this->get_prop( 'menu_order', $context );
@@ -284,11 +297,11 @@ class Lesson extends Model {
 	/**
 	 * Returns lesson category ids.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string price
+	 * @return array Lesson category ids.
 	 */
 	public function get_category_ids( $context = 'view' ) {
 		return $this->get_prop( 'category_ids', $context );
@@ -297,38 +310,24 @@ class Lesson extends Model {
 	/**
 	 * Returns lesson tag ids.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
-	 *
-	 * @return string price
+	 * @return array Lesson tag ids.
 	 */
 	public function get_tag_ids( $context = 'view' ) {
 		return $this->get_prop( 'tag_ids', $context );
 	}
 
 	/**
-	 * Returns lesson difficulty ids.
+	 * Returns lesson featured image.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string price
-	 */
-	public function get_difficulty_ids( $context = 'view' ) {
-		return $this->get_prop( 'difficulty_ids', $context );
-	}
-
-	/**
-	 * Returns lesson tag ids.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string price
+	 * @return string Lesson featured image.
 	 */
 	public function get_featured_image( $context = 'view' ) {
 		return $this->get_prop( 'featured_image', $context );
@@ -337,14 +336,92 @@ class Lesson extends Model {
 	/**
 	 * Check whether the lesson is featured or not.
 	 *
-	 * @since  0.1.0
+	 * @since 0.1.0
 	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
 	 * @return bool
 	 */
 	public function get_featured( $context = 'view' ) {
-		return  $this->get_prop( 'featured', $context );
+		return $this->get_prop( 'featured', $context );
+	}
+
+	/**
+	 * Get video source.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_video_source( $context = 'view' ) {
+		return $this->get_prop( 'video_source', $context );
+	}
+
+	/**
+	 * Get video source.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_video_source_url( $context = 'view' ) {
+		return $this->get_prop( 'video_source_url', $context );
+	}
+
+	/**
+	 * Get video playback time.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return int
+	 */
+	public function get_video_playback_time( $context = 'view' ) {
+		return $this->get_prop( 'video_playback_time', $context );
+	}
+
+	/**
+	 * Get rating count.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return array of counts
+	 */
+	public function get_rating_counts( $context = 'view' ) {
+		return $this->get_prop( 'rating_counts', $context );
+	}
+
+	/**
+	 * Get average rating.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return float
+	 */
+	public function get_average_rating( $context = 'view' ) {
+		return $this->get_prop( 'average_rating', $context );
+	}
+
+	/**
+	 * Get review count.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return int
+	 */
+	public function get_review_count( $context = 'view' ) {
+		return $this->get_prop( 'review_count', $context );
 	}
 
 	/**
@@ -432,7 +509,7 @@ class Lesson extends Model {
 	 * @param string $password Password.
 	 */
 	public function set_post_password( $password ) {
-		$this->set_prop( 'post_password',  $password );
+		$this->set_prop( 'post_password', $password );
 	}
 
 	/**
@@ -443,7 +520,7 @@ class Lesson extends Model {
 	 * @param string $reviews_allowed Reviews allowed.( Value can be 'open' or 'closed')
 	 */
 	public function set_reviews_allowed( $reviews_allowed ) {
-		$this->set_prop( 'reviews_allowed',  $reviews_allowed );
+		$this->set_prop( 'reviews_allowed', $reviews_allowed );
 	}
 
 	/**
@@ -454,7 +531,7 @@ class Lesson extends Model {
 	 * @param string $parent Parent id.
 	 */
 	public function set_parent_id( $parent ) {
-		$this->set_prop( 'parent_id',  $parent );
+		$this->set_prop( 'parent_id', $parent );
 	}
 
 	/**
@@ -465,7 +542,7 @@ class Lesson extends Model {
 	 * @param string $menu_order Menu order id.
 	 */
 	public function set_menu_order( $menu_order ) {
-		$this->set_prop( 'menu_order',  $menu_order );
+		$this->set_prop( 'menu_order', $menu_order );
 	}
 
 	/**
@@ -487,7 +564,7 @@ class Lesson extends Model {
 	 * @param array $tag_ids Tag ids.
 	 */
 	public function set_tag_ids( $tag_ids ) {
-		$this->set_prop( 'tag_ids', array_unique( array_map( 'intval',  $tag_ids ) ) );
+		$this->set_prop( 'tag_ids', array_unique( array_map( 'intval', $tag_ids ) ) );
 	}
 
 	/**
@@ -510,5 +587,72 @@ class Lesson extends Model {
 	 */
 	public function set_featured( $featured ) {
 		$this->set_prop( 'featured', Utils::string_to_bool( $featured ) );
+	}
+
+	/**
+	 * Set video source.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $video_source Video source.
+	 */
+	public function set_video_source( $video_source ) {
+		$this->set_prop( 'video_source', $video_source );
+	}
+
+	/**
+	 * Set video source url.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $video_source_url Video source url.
+	 */
+	public function set_video_source_url( $video_source_url ) {
+		$this->set_prop( 'video_source_url', $video_source_url );
+	}
+
+	/**
+	 * Set video playback time.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $video_playback_time Video playback time.
+	 */
+	public function set_video_playback_time( $video_playback_time ) {
+		$this->set_prop( 'video_playback_time', absint( $video_playback_time ) );
+	}
+
+	/**
+	 * Set rating counts. Read only.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $counts Product rating counts.
+	 */
+	public function set_rating_counts( $counts ) {
+		$counts = array_map( 'absint', ( array ) $counts );
+		$this->set_prop( 'rating_counts', array_filter( $counts ) );
+	}
+
+	/**
+	 * Set average rating. Read only.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param float $average Product average rating.
+	 */
+	public function set_average_rating( $average ) {
+		$this->set_prop( 'average_rating', round( floatval( $average ), 2 ) );
+	}
+
+	/**
+	 * Set review count. Read only.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $count Product review count.
+	 */
+	public function set_review_count( $count ) {
+		$this->set_prop( 'review_count', absint( $count ) );
 	}
 }

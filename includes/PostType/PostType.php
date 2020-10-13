@@ -119,7 +119,7 @@ class PostType {
 	}
 
 	/**
-	 * Set args.
+	 * Set arg.
 	 *
 	 * @since 0.1.0
 	 *
@@ -129,11 +129,7 @@ class PostType {
 	 *
 	 * @return Masteriyo\Masteriyo\PostType
 	 */
-	public function set_args( $arg, $value, $strict = true ) {
-		if ( $strict && ! isset( $this->supports[ $arg ] ) ) {
-			throw new Exception( 'Invalid args name.' );
-		}
-
+	public function set_arg( $arg, $value, $strict = true ) {
 		$this->args[ $arg ] = $value;
 		return $this;
 	}
@@ -189,23 +185,26 @@ class PostType {
 	protected function get_default_args( $labels ) {
 		// phpcs:disable WordPress.WP.I18n.TextDomainMismatch
 		return array(
-			'label'                 => __ ( 'Post Type', 'text_domain' ),
-			'description'           => __( 'Post Type Description', 'text_domain' ),
-			'labels'                => $labels,
-			'supports'              => false,
-			'taxonomies'            => array( ),
-			'hierarchical'          => false,
-			'public'                => true,
-			'show_ui'               => true,
-			'show_in_menu'          => true,
-			'menu_position'         => 5,
-			'show_in_admin_bar'     => true,
-			'show_in_nav_menus'     => true,
-			'can_export'            => true,
-			'has_archive'           => true,
-			'exclude_from_search'   => false,
-			'publicly_queryable'    => true,
-			'capability_type'       => 'post'
+			'label'               => __ ( 'Post Type', 'text_domain' ),
+			'description'         => __( 'Post Type Description', 'text_domain' ),
+			'labels'              => $labels,
+			'supports'            => false,
+			'taxonomies'          => array( ),
+			'hierarchical'        => false,
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_menu'        => true,
+			'menu_position'       => 5,
+			'show_in_admin_bar'   => true,
+			'show_in_nav_menus'   => true,
+			'can_export'          => true,
+			'has_archive'         => true,
+			'map_meta_cap'        => false,
+			'exclude_from_search' => false,
+			'publicly_queryable'  => true,
+			'capability_type'     => 'post',
+			'can_export' => true,
+			'delete_with_user' => null
 		);
 		// phpcs:enable
 	}

@@ -3,7 +3,7 @@
  * Courses Course difficulties.
  */
 
-namespace ThemeGrill\Masteriyo\Taxonomy\Courses;
+namespace ThemeGrill\Masteriyo\Taxonomy\Course;
 
 use ThemeGrill\Masteriyo\Taxonomy\Taxonomy;
 
@@ -15,7 +15,7 @@ class Difficulties extends Taxonomy {
 	 * @since 0.1.0
 	 */
 	public function __construct() {
-		parent::__construct( 'courses_difficulty' );
+		parent::__construct( 'course_difficulty' );
 	}
 
 	/**
@@ -28,7 +28,7 @@ class Difficulties extends Taxonomy {
 	 * @return void
 	 */
 	public function register( $object_type = 'post' ) {
-		parent::register( 'masteriyo_courses' );
+		parent::register( 'course' );
 	}
 
 	/**
@@ -63,7 +63,6 @@ class Difficulties extends Taxonomy {
 		);
 	}
 
-
 	/**
 	 * Get args.
 	 *
@@ -72,16 +71,8 @@ class Difficulties extends Taxonomy {
 	 * @return array
 	 */
 	public function get_args( $labels ) {
-		return array(
-			'labels'             => $labels,
-			'description'        => '',
-			'hierarchical'       => true,
-			'public'             => true,
-			'show_ui'            => true,
-			'show_admin_column'  => true,
-			'show_in_nav_menus'  => true,
-			'show_in_quick_edit' => true,
-			'show_tagcloud'      => true,
-		);
+		$args = parent::get_args( $labels );
+		$args['hierarchial'] = true;
+		return $args;
 	}
 }

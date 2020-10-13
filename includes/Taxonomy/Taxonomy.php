@@ -74,7 +74,7 @@ abstract class Taxonomy {
 	 *
 	 * @return mixed|null
 	 */
-	public function get_label( $lable ) {
+	public function get_label( $label ) {
 		if ( isset( $this->labels[ $label ] ) ) {
 			return $this->labels[ $label ];
 		}
@@ -112,7 +112,7 @@ abstract class Taxonomy {
 	 */
 	public function set_label( $label, $value, $strict = true ) {
 		if ( $strict && ! isset( $this->labels[ $label ] ) ) {
-			throw new Exception( 'Invalid label name.' );
+			throw new \Exception( 'Invalid label name.' );
 		}
 
 		$this->labels[ $label ] = $value;
@@ -133,7 +133,7 @@ abstract class Taxonomy {
 	 */
 	public function set_arg( $arg, $value, $strict = true ) {
 		if ( $strict && ! isset( $this->args[ $arg ] ) ) {
-			throw new Exception( 'Invalid args name.' );
+			throw new \Exception( 'Invalid args name.' );
 		}
 
 		$this->args[ $arg ] = $value;
@@ -166,6 +166,7 @@ abstract class Taxonomy {
 			'hierarchical'       => false,
 			'public'             => true,
 			'show_ui'            => true,
+			'show_in_rest'       => true,
 			'show_admin_column'  => true,
 			'show_in_nav_menus'  => true,
 			'show_in_quick_edit' => true,

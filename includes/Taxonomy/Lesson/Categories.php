@@ -3,7 +3,7 @@
  * Lessons Lesson categories.
  */
 
-namespace ThemeGrill\Masteriyo\Taxonomy\Lessons;
+namespace ThemeGrill\Masteriyo\Taxonomy\Lesson;
 
 use ThemeGrill\Masteriyo\Taxonomy\Taxonomy;
 
@@ -15,7 +15,7 @@ class Categories extends Taxonomy {
 	 * @since 0.1.0
 	 */
 	public function __construct() {
-		parent::__construct( 'lessons_cat' );
+		parent::__construct( 'lesson_cat' );
 	}
 
 	/**
@@ -28,7 +28,7 @@ class Categories extends Taxonomy {
 	 * @return void
 	 */
 	public function register( $object_type = 'post' ) {
-		parent::register( 'masteriyo_lessons' );
+		parent::register( 'lessons' );
 	}
 
 	/**
@@ -63,7 +63,6 @@ class Categories extends Taxonomy {
 		);
 	}
 
-
 	/**
 	 * Get args.
 	 *
@@ -72,16 +71,8 @@ class Categories extends Taxonomy {
 	 * @return array
 	 */
 	public function get_args( $labels ) {
-		return array(
-			'labels'             => $labels,
-			'description'        => '',
-			'hierarchical'       => true,
-			'public'             => true,
-			'show_ui'            => true,
-			'show_admin_column'  => true,
-			'show_in_nav_menus'  => true,
-			'show_in_quick_edit' => true,
-			'show_tagcloud'      => true,
-		);
+		$args = parent::get_args( $labels );
+		$args['hierarchial'] = true;
+		return $args;
 	}
 }

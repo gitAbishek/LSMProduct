@@ -16,10 +16,10 @@ class RegisterTaxonomies {
 	 * @return void
 	 */
 	public static function register() {
-		TaxonomyFactory::create( 'courses_cat' )->register();
-		TaxonomyFactory::create( 'courses_tag' )->register();
-		TaxonomyFactory::create( 'courses_difficulty' )->register();
-		TaxonomyFactory::create( 'lessons_cat' )->register();
-		TaxonomyFactory::create( 'lessons_tag' )->register();
+		TaxonomyFactory::create( 'course_cat' )->register();
+		TaxonomyFactory::create( 'course_tag' )->register();
+		TaxonomyFactory::create( 'course_difficulty' )->register();
+		TaxonomyFactory::create( 'lesson_cat' )->register();
+		TaxonomyFactory::create( 'lesson_tag' )->register();
 	}
 }

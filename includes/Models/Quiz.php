@@ -48,7 +48,7 @@ class Quiz extends Model {
 	 *
 	 * @var string
 	 */
-	protected $cache_group = 'quizs';
+	protected $cache_group = 'quizes';
 
 	/**
 	 * Stores quiz data.

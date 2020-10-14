@@ -1,6 +1,10 @@
 <?php
 /**
- * Repository
+ * Quiz repository.
+ *
+ * @since 0.1.0
+ *
+ * @package ThemeGrill\Repository
  */
 
 namespace ThemeGrill\Masteriyo\Repository;
@@ -8,12 +12,18 @@ namespace ThemeGrill\Masteriyo\Repository;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\Quiz;
 
+/**
+ * Quiz repository class.
+ *
+ * @since 0.1.0
+ */
 class QuizRepository extends AbstractRepository implements RepositoryInterface {
 
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
 	 * @since 0.1.0
+	 * 
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(

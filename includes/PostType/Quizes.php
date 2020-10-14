@@ -1,10 +1,19 @@
 <?php
 /**
- * Quizes class.
+ * Quizes post type.
+ *
+ * @since 0.1.0
+ *
+ * @package ThemeGrill\PostType;
  */
 
 namespace ThemeGrill\Masteriyo\PostType;
 
+/**
+ * Quizes post type.
+ *
+ * @since 0.1.0
+ */
 class Quizes extends PostType {
 	/**
 	 * Post slug.
@@ -13,7 +22,7 @@ class Quizes extends PostType {
 	 *
 	 * @var string
 	 */
-	protected $slug = 'quize';
+	protected $slug = 'quiz';
 
 	public function __construct() {
 		$this->labels = array(
@@ -47,27 +56,28 @@ class Quizes extends PostType {
 		);
 
 		$this->args = array(
-			'label'               => __ ( 'Quizes', 'masteriyo' ),
-			'description'         => __( 'Quizes Description', 'masteriyo' ),
-			'labels'              => $this->labels,
-			'supports'            => false,
-			'taxonomies'          => array( ),
-			'hierarchical'        => false,
-			'public'              => true,
-			'show_ui'             => true,
-			'show_in_menu'        => true,
-			'menu_position'       => 5,
-			'show_in_admin_bar'   => true,
-			'show_in_nav_menus'   => true,
-			'can_export'          => true,
-			'show_in_rest'        => true,
-			'has_archive'         => true,
-			'map_meta_cap'        => false,
-			'exclude_from_search' => false,
-			'publicly_queryable'  => true,
-			'capability_type'     => 'post',
-			'can_export'          => true,
-			'delete_with_user'    => null
+			'label'                 => __ ( 'Quizes', 'masteriyo' ),
+			'description'           => __( 'Quizes Description', 'masteriyo' ),
+			'labels'                => $this->labels,
+			'supports'              => false,
+			'taxonomies'            => array( ),
+			'hierarchical'          => false,
+			'public'                => true,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'menu_position'         => 5,
+			'show_in_admin_bar'     => true,
+			'show_in_nav_menus'     => true,
+			'can_export'            => true,
+			'show_in_rest'          => true,
+			'has_archive'           => true,
+			'map_meta_cap'          => true,
+			'exclude_from_search'   => false,
+			'publicly_queryable'    => true,
+			'capability_type'       => 'post',
+			'can_export'            => true,
+			'delete_with_user'      => null,
+			'rest_controller_class' => 'ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\QuizesController',
 		);
 	}
 

@@ -71,6 +71,4 @@ class Courses extends PostType {
 			'rest_controller_class' => 'ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CoursesController',
 		);
 	}
-
-
 }

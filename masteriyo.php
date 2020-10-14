@@ -15,6 +15,7 @@
 use ThemeGrill\Masteriyo\Masteriyo;
 use ThemeGrill\Masteriyo\Repository\CourseRepository;
 use ThemeGrill\Masteriyo\Repository\LessonRepository;
+use ThemeGrill\Masteriyo\Repository\QuizRepository;
 use League\Container\Container;
 use ThemeGrill\Masteriyo\Cache\Cache;
 
@@ -53,6 +54,13 @@ $masteriyo_container->add( 'lesson', \ThemeGrill\Masteriyo\Models\Lesson::class 
 
 $masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\LessonRepository::class, function() {
 	return apply_filters( 'masteriyo_lesson_repository', new LessonRepository );
+} );
+
+$masteriyo_container->add( 'quiz', \ThemeGrill\Masteriyo\Models\Quiz::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\QuizRepository::class );
+
+$masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\QuizRepository::class, function() {
+	return apply_filters( 'masteriyo_quiz_repository', new QuizRepository );
 } );
 
 $_GLOBALS['masteriyo_container'] = $masteriyo_container;

@@ -2,6 +2,8 @@ import { React, useState } from '@wordpress/element';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Section from './Section';
 import Container from '../../../components/common/Container';
+import AddNewButton from '../../../components/common/AddNewButton';
+import styled from 'styled-components';
 
 const dummyData = {
 	contents: {
@@ -17,22 +19,25 @@ const dummyData = {
 			id: 'section-1',
 			title: 'Section 1',
 			contentIds: ['content-1', 'content-2'],
+			editing: false,
 		},
 		'section-2': {
 			id: 'section-2',
 			title: 'Section 2',
 			contentIds: [],
+			editing: false,
 		},
 		'section-3': {
 			id: 'section-3',
 			title: 'Section 3',
 			contentIds: [],
+			editing: false,
 		},
 	},
 	sectionOrder: ['section-1', 'section-2', 'section-3'],
 };
 
-const SortableSection = () => {
+const SortableSections = () => {
 	const [data, setData] = useState(dummyData);
 
 	const onDragEnd = (result) => {
@@ -97,6 +102,21 @@ const SortableSection = () => {
 		});
 	};
 
+	const addNewSection = () => {
+		setData({
+			...data,
+			sectionOrder: [...data.sectionOrder, 'section-4'],
+			sections: {
+				...data.sections,
+				'section-4': {
+					id: 'section-4',
+					title: 'Section 4',
+					contentIds: [],
+					editing: true,
+				},
+			},
+		});
+	};
 	return (
 		<Container>
 			<DragDropContext onDragEnd={onDragEnd}>
@@ -115,6 +135,7 @@ const SortableSection = () => {
 										title={section.title}
 										contents={contents}
 										index={index}
+										editing={section.editing}
 									/>
 								);
 							})}
@@ -122,9 +143,17 @@ const SortableSection = () => {
 						</div>
 					)}
 				</Droppable>
+				<AddSectionContainer>
+					<AddNewButton onClick={addNewSection}>Add New Section</AddNewButton>
+				</AddSectionContainer>
 			</DragDropContext>
 		</Container>
 	);
 };
 
-export default SortableSection;
+export default SortableSections;
+
+const AddSectionContainer = styled.div`
+	display: flex;
+	justify-content: center;
+`;

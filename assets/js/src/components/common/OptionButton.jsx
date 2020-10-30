@@ -18,7 +18,7 @@ const StyledButton = styled.button`
 	cursor: pointer;
 	transition: all 0.35s ease-in-out;
 	border: 1px solid ${colors.BORDER};
-	padding: 10px 12px;
+	padding: 9px 12px;
 	font-weight: 500;
 	font-size: ${fontSize.EXTRA_LARGE};
 	border-radius: ${defaultStyle.borderRadius};

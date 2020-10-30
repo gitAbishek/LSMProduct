@@ -3,7 +3,7 @@
  * Courses Course tags.
  */
 
-namespace ThemeGrill\Masteriyo\Taxonomy\Courses;
+namespace ThemeGrill\Masteriyo\Taxonomy\Course;
 
 use ThemeGrill\Masteriyo\Taxonomy\Taxonomy;
 
@@ -15,7 +15,7 @@ class Tags extends Taxonomy {
 	 * @since 0.1.0
 	 */
 	public function __construct() {
-		parent::__construct( 'courses_tag' );
+		parent::__construct( 'course_tag' );
 	}
 
 	/**
@@ -28,7 +28,7 @@ class Tags extends Taxonomy {
 	 * @return void
 	 */
 	public function register( $object_type = 'post' ) {
-		parent::register( 'masteriyo_courses' );
+		parent::register( 'course' );
 	}
 
 	/**
@@ -60,28 +60,6 @@ class Tags extends Taxonomy {
 			'no_terms'                   => __( 'No course tags', 'masteriyo' ),
 			'items_list'                 => __( 'Course Tags list', 'masteriyo' ),
 			'items_list_navigation'      => __( 'Course Tags list navigation', 'masteriyo' ),
-		);
-	}
-
-
-	/**
-	 * Get args.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return array
-	 */
-	public function get_args( $labels ) {
-		return array(
-			'labels'             => $labels,
-			'description'        => '',
-			'hierarchical'       => false,
-			'public'             => true,
-			'show_ui'            => true,
-			'show_admin_column'  => true,
-			'show_in_nav_menus'  => true,
-			'show_in_quick_edit' => true,
-			'show_tagcloud'      => true,
 		);
 	}
 }

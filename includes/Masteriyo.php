@@ -111,8 +111,9 @@ final class Masteriyo {
 		$this->script_style = new ScriptStyle();
 		$this->admin_menu   = new AdminMenu();
 
-		RegisterPostTypes::register();
+		RegisterPostTypes::instance();
 		RegisterTaxonomies::register();
+		Install::init();
 
 		// After init action.
 		do_action( 'after_masteriyo_init' );

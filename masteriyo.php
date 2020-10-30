@@ -13,6 +13,11 @@
  */
 
 use ThemeGrill\Masteriyo\Masteriyo;
+use ThemeGrill\Masteriyo\Repository\CourseRepository;
+use ThemeGrill\Masteriyo\Repository\LessonRepository;
+use ThemeGrill\Masteriyo\Repository\QuizRepository;
+use League\Container\Container;
+use ThemeGrill\Masteriyo\Cache\Cache;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,6 +30,40 @@ define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
 define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
 
 require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+
+$masteriyo_container = new Container();
+
+// register the reflection container as a delegate to enable auto wiring
+$masteriyo_container->delegate(
+    new League\Container\ReflectionContainer
+);
+
+$masteriyo_container->add( \ThemeGrill\Masteriyo\Cache\CacheInterface::class, function() {
+	return apply_filters( 'masteriyo_cache', Cache::instance() );
+} );
+
+$masteriyo_container->add( 'course', \ThemeGrill\Masteriyo\Models\Course::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\CourseRepository::class );
+
+$masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\CourseRepository::class, function() {
+	return apply_filters( 'masteriyo_course_repository', new CourseRepository );
+} );
+
+$masteriyo_container->add( 'lesson', \ThemeGrill\Masteriyo\Models\Lesson::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\LessonRepository::class );
+
+$masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\LessonRepository::class, function() {
+	return apply_filters( 'masteriyo_lesson_repository', new LessonRepository );
+} );
+
+$masteriyo_container->add( 'quiz', \ThemeGrill\Masteriyo\Models\Quiz::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\QuizRepository::class );
+
+$masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\QuizRepository::class, function() {
+	return apply_filters( 'masteriyo_quiz_repository', new QuizRepository );
+} );
+
+$_GLOBALS['masteriyo_container'] = $masteriyo_container;
 
 /**
  * Returns the main instance of Masteriyo.

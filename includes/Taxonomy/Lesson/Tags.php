@@ -3,7 +3,7 @@
  * Lessons Lesson tags.
  */
 
-namespace ThemeGrill\Masteriyo\Taxonomy\Lessons;
+namespace ThemeGrill\Masteriyo\Taxonomy\Lesson;
 
 use ThemeGrill\Masteriyo\Taxonomy\Taxonomy;
 
@@ -15,7 +15,7 @@ class Tags extends Taxonomy {
 	 * @since 0.1.0
 	 */
 	public function __construct() {
-		parent::__construct( 'lessons_tag' );
+		parent::__construct( 'lesson_tag' );
 	}
 
 	/**
@@ -28,7 +28,7 @@ class Tags extends Taxonomy {
 	 * @return void
 	 */
 	public function register( $object_type = 'post' ) {
-		parent::register( 'masteriyo_lessons' );
+		parent::register( 'lessons' );
 	}
 
 	/**
@@ -60,28 +60,6 @@ class Tags extends Taxonomy {
 			'no_terms'                   => __( 'No lesson tags', 'masteriyo' ),
 			'items_list'                 => __( 'Lesson Tags list', 'masteriyo' ),
 			'items_list_navigation'      => __( 'Lesson Tags list navigation', 'masteriyo' ),
-		);
-	}
-
-
-	/**
-	 * Get args.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return array
-	 */
-	public function get_args( $labels ) {
-		return array(
-			'labels'             => $labels,
-			'description'        => '',
-			'hierarchical'       => false,
-			'public'             => true,
-			'show_ui'            => true,
-			'show_admin_column'  => true,
-			'show_in_nav_menus'  => true,
-			'show_in_quick_edit' => true,
-			'show_tagcloud'      => true,
 		);
 	}
 }

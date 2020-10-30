@@ -14,18 +14,28 @@
     }
   ],
   "autoload": {
+    "files": [
+      "vendor/woocommerce/action-scheduler/action-scheduler.php"
+    ],
     "psr-4": {
       "ThemeGrill\\Masteriyo\\": "includes/"
     }
   },
-  "require": {},
+  "require": {
+    "monolog/monolog": "1.25.5",
+    "woocommerce/action-scheduler": "3.1.6",
+    "league/container": "3.3",
+    "nesbot/carbon": "1.39.1"
+  },
   "require-dev": {
     "wp-cli/i18n-command": "2.2",
     "wp-coding-standards/wpcs": "2.3.0",
 		"dealerdirect/phpcodesniffer-composer-installer": "0.7.0",
     "phpcompatibility/phpcompatibility-wp": "2.1.0",
     "sirbrillig/phpcs-variable-analysis": "2.8",
-    "phpunit/phpunit": "7.5.20"
+    "phpunit/phpunit": "7.5.20",
+    "php-stubs/wordpress-stubs": "^5.5",
+    "php-stubs/woocommerce-stubs": "^4.5"
   },
   "scripts": {
 		"phpcs": [

@@ -2,6 +2,8 @@ import { React, useState } from '@wordpress/element';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Section from './Section';
 import Container from '../../../components/common/Container';
+import AddNewButton from '../../../components/common/AddNewButton';
+import styled from 'styled-components';
 
 const dummyData = {
 	contents: {
@@ -97,6 +99,23 @@ const SortableSections = () => {
 		});
 	};
 
+	const addNewSection = () => {
+		console.log(data);
+
+		setData({
+			...data,
+			sectionOrder: [...data.sectionOrder, 'section-4'],
+			sections: {
+				...data.sections,
+				'section-4': {
+					id: 'section-4',
+					title: 'Section 4',
+					contentIds: [],
+				},
+			},
+		});
+		console.log(data);
+	};
 	return (
 		<Container>
 			<DragDropContext onDragEnd={onDragEnd}>
@@ -122,9 +141,17 @@ const SortableSections = () => {
 						</div>
 					)}
 				</Droppable>
+				<AddSectionContainer>
+					<AddNewButton onClick={addNewSection}>Add New Section</AddNewButton>
+				</AddSectionContainer>
 			</DragDropContext>
 		</Container>
 	);
 };
 
 export default SortableSections;
+
+const AddSectionContainer = styled.div`
+	display: flex;
+	justify-content: center;
+`;

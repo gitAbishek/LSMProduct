@@ -19,16 +19,19 @@ const dummyData = {
 			id: 'section-1',
 			title: 'Section 1',
 			contentIds: ['content-1', 'content-2'],
+			editing: false,
 		},
 		'section-2': {
 			id: 'section-2',
 			title: 'Section 2',
 			contentIds: [],
+			editing: false,
 		},
 		'section-3': {
 			id: 'section-3',
 			title: 'Section 3',
 			contentIds: [],
+			editing: false,
 		},
 	},
 	sectionOrder: ['section-1', 'section-2', 'section-3'],
@@ -100,8 +103,6 @@ const SortableSections = () => {
 	};
 
 	const addNewSection = () => {
-		console.log(data);
-
 		setData({
 			...data,
 			sectionOrder: [...data.sectionOrder, 'section-4'],
@@ -111,10 +112,10 @@ const SortableSections = () => {
 					id: 'section-4',
 					title: 'Section 4',
 					contentIds: [],
+					editing: true,
 				},
 			},
 		});
-		console.log(data);
 	};
 	return (
 		<Container>
@@ -134,6 +135,7 @@ const SortableSections = () => {
 										title={section.title}
 										contents={contents}
 										index={index}
+										editing={section.editing}
 									/>
 								);
 							})}

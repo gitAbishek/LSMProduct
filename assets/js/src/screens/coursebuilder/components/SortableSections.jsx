@@ -32,7 +32,7 @@ const dummyData = {
 	sectionOrder: ['section-1', 'section-2', 'section-3'],
 };
 
-const SortableSection = () => {
+const SortableSections = () => {
 	const [data, setData] = useState(dummyData);
 
 	const onDragEnd = (result) => {
@@ -127,4 +127,4 @@ const SortableSection = () => {
 	);
 };
 
-export default SortableSection;
+export default SortableSections;

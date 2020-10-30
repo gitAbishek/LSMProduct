@@ -1,4 +1,4 @@
-import { React } from '@wordpress/element';
+import { React, useState } from '@wordpress/element';
 import styled from 'styled-components';
 import colors from '../../../config/colors';
 import PropTypes from 'prop-types';
@@ -11,7 +11,7 @@ import Dropdown from 'rc-dropdown';
 import OptionButton from '../../../components/common/OptionButton';
 import DropdownOverlay from '../../../components/common/DropdownOverlay';
 import Icon from '../../../components/common/Icon';
-import { BiTrash } from 'react-icons/bi';
+import { BiEdit, BiTrash } from 'react-icons/bi';
 import Lesson from './content/lesson';
 import Quiz from './content/quiz';
 import AddNewButton from '../../../components/common/AddNewButton';
@@ -24,7 +24,7 @@ import Button from '../../../components/common/Button';
 const Section = (props) => {
 	const { id, title, contents, index, editing } = props;
 
-	const mode = editing ? 'editing' : 'normal';
+	const [mode, setMode] = useState(editing ? 'editing' : 'normal');
 
 	return (
 		<Draggable draggableId={id} index={index}>
@@ -46,6 +46,10 @@ const Section = (props) => {
 								overlay={
 									<DropdownOverlay>
 										<ul>
+											<li onClick={() => setMode('editing')}>
+												<Icon icon={<BiEdit />} />
+												Edit
+											</li>
 											<li>
 												<Icon icon={<BiTrash />} />
 												Delete
@@ -74,7 +78,9 @@ const Section = (props) => {
 
 							<SectionFooter>
 								<FlexRow>
-									<Button primary>Save</Button>
+									<Button primary onClick={() => setMode('normal')}>
+										Save
+									</Button>
 									<Button style={{ marginLeft: BaseLine * 2 }}>Cancel</Button>
 								</FlexRow>
 							</SectionFooter>

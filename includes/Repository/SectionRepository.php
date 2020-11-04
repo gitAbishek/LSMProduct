@@ -1,4 +1,11 @@
 <?php
+/**
+ * SectionRepository class.
+ *
+ * @since 0.1.0
+ *
+ * @package ThemeGrill\Masteriyo\Repository;
+ */
 
 namespace ThemeGrill\Masteriyo\Repository;
 

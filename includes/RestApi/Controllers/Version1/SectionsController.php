@@ -1,4 +1,11 @@
 <?php
+/**
+ * SectionsController class.
+ *
+ * @since 0.1.0
+ *
+ * @package ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+ */
 
 namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 

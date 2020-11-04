@@ -1,4 +1,11 @@
 <?php
+/**
+ * Sections class.
+ *
+ * @since 0.1.0
+ *
+ * @package ThemeGrill\Masteriyo\PostType;
+ */
 
 namespace ThemeGrill\Masteriyo\PostType;
 

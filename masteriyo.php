@@ -18,6 +18,7 @@ use ThemeGrill\Masteriyo\Repository\SectionRepository;
 use ThemeGrill\Masteriyo\Repository\LessonRepository;
 use ThemeGrill\Masteriyo\Repository\QuizRepository;
 use ThemeGrill\Masteriyo\Repository\CourseCategoryRepository;
+use ThemeGrill\Masteriyo\Repository\CourseTagRepository;
 use League\Container\Container;
 use ThemeGrill\Masteriyo\Cache\Cache;
 
@@ -90,9 +91,22 @@ $masteriyo_container->add(
 $masteriyo_container->add( 'course_cat', \ThemeGrill\Masteriyo\Models\CourseCategory::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\CourseCategoryRepository::class );
 
-$masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\CourseCategoryRepository::class, function() {
-	return apply_filters( 'masteriyo_course_category_repository', new CourseCategoryRepository );
-} );
+$masteriyo_container->add(
+	\ThemeGrill\Masteriyo\Repository\CourseCategoryRepository::class,
+	function() {
+		return apply_filters( 'masteriyo_course_category_repository', new CourseCategoryRepository() );
+	}
+);
+
+$masteriyo_container->add( 'course_tag', \ThemeGrill\Masteriyo\Models\CourseTag::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\CourseTagRepository::class );
+
+$masteriyo_container->add(
+	\ThemeGrill\Masteriyo\Repository\CourseTagRepository::class,
+	function() {
+		return apply_filters( 'masteriyo_course_tag_repository', new CourseTagRepository() );
+	}
+);
 
 $_GLOBALS['masteriyo_container'] = $masteriyo_container;
 

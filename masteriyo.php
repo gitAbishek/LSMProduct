@@ -17,6 +17,7 @@ use ThemeGrill\Masteriyo\Repository\CourseRepository;
 use ThemeGrill\Masteriyo\Repository\SectionRepository;
 use ThemeGrill\Masteriyo\Repository\LessonRepository;
 use ThemeGrill\Masteriyo\Repository\QuizRepository;
+use ThemeGrill\Masteriyo\Repository\CourseCategoryRepository;
 use League\Container\Container;
 use ThemeGrill\Masteriyo\Cache\Cache;
 
@@ -85,6 +86,13 @@ $masteriyo_container->add(
 		return apply_filters( 'masteriyo_quiz_repository', new QuizRepository() );
 	}
 );
+
+$masteriyo_container->add( 'course_cat', \ThemeGrill\Masteriyo\Models\CourseCategory::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\CourseCategoryRepository::class );
+
+$masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\CourseCategoryRepository::class, function() {
+	return apply_filters( 'masteriyo_course_category_repository', new CourseCategoryRepository );
+} );
 
 $_GLOBALS['masteriyo_container'] = $masteriyo_container;
 

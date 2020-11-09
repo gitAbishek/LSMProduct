@@ -73,8 +73,9 @@ class RestApi {
 	 */
 	protected function get_v1_controllers() {
 		return array(
-			'course-categories' => '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CourseCategoriesController',
-			'course-tags'       => '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CourseTagsController',
+			'course-categories'   => '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CourseCategoriesController',
+			'course-tags'         => '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CourseTagsController',
+			'course-difficulties' => '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CourseDifficultiesController',
 		);
 	}
 

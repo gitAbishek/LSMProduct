@@ -22,7 +22,6 @@ class RestApi {
 	 * @since 0.1.0
 	 *
 	 * @var array
-	 *
 	 */
 	protected $controllers = array();
 
@@ -31,9 +30,9 @@ class RestApi {
 	 *
 	 * @since 0.1.0
 	 */
-	 public function init() {
-		 add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
-	 }
+	public function init() {
+		add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
+	}
 
 	/**
 	 * Register REST API routes.
@@ -49,7 +48,7 @@ class RestApi {
 		}
 	}
 
-	 /**
+	/**
 	 * Get API namespaces - new namespaces should be registered here.
 	 *
 	 * @since 0.1.0
@@ -74,7 +73,8 @@ class RestApi {
 	 */
 	protected function get_v1_controllers() {
 		return array(
-			'course-categories' => '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CourseCategoriesController'
+			'course-categories' => '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CourseCategoriesController',
+			'course-tags'       => '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CourseTagsController',
 		);
 	}
 

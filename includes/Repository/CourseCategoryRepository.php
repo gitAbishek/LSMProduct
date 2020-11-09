@@ -1,6 +1,10 @@
 <?php
 /**
- * Repository
+ * CourseCategoryRepository class.
+ *
+ * @since 0.1.0
+ *
+ * @package ThemeGrill\Masteriyo\Repository;
  */
 
 namespace ThemeGrill\Masteriyo\Repository;
@@ -8,6 +12,9 @@ namespace ThemeGrill\Masteriyo\Repository;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\CourseCategory;
 
+/**
+ * CourseCategoryRepository class.
+ */
 class CourseCategoryRepository extends AbstractRepository implements RepositoryInterface {
 
 	/**
@@ -74,7 +81,8 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	 * @since 0.1.0
 	 *
 	 * @param Model $course_cat Cource object.
-	 * @throws Exception If invalid course_cat.
+	 *
+	 * @throws \Exception If invalid course_cat.
 	 */
 	public function read( Model &$course_cat ) {
 		$term = get_term( $course_cat->get_id() );
@@ -167,7 +175,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	 * @since 0.1.0
 	 *
 	 * @param Model $course_cat Course_cat object.
-	 * @param array $args   Array of args to pass.alert-danger
+	 * @param array $args   Array of args to pass.alert-danger.
 	 */
 	public function delete( Model &$course_cat, $args = array() ) {
 		$id          = $course_cat->get_id();
@@ -189,7 +197,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Course_cat $course_cat course_cat object.
+	 * @param CourseCategory $course_cat course_cat object.
 	 */
 	protected function read_course_cat_data( &$course_cat ) {
 		$id          = $course_cat->get_id();
@@ -219,7 +227,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Course_cat $course_cat course_cat object.
+	 * @param CourseCategory $course_cat course_cat object.
 	 */
 	protected function read_extra_data( &$course_cat ) {
 		$meta_values = $this->read_meta( $course_cat );

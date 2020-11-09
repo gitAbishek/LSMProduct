@@ -38,7 +38,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	 */
 	public function create( Model &$course_cat ) {
 
-		$id = wp_insert_term(
+		$ids = wp_insert_term(
 			$course_cat->get_name(),
 			'course_cat',
 			apply_filters(
@@ -46,24 +46,24 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 				array(
 					'description' => $course_cat->get_description(),
 					'parent'      => $course_cat->get_parent_id(),
-					'slug'        => $course_cat->get_slug( 'edit' )
+					'slug'        => $course_cat->get_slug( 'edit' ),
 				),
 				$course_cat
 			)
 		);
 
-		if ( $id && ! is_wp_error( $id ) ) {
-			$course_cat->set_id( $id );
+		if ( $ids && ! is_wp_error( $ids ) ) {
+			$course_cat->set_id( isset( $ids['term_id'] ) ? $ids['term_id'] : 0 );
 			$this->update_term_meta( $course_cat, true );
 			// TODO Invalidate caches.
 
 			$course_cat->save_meta_data();
 			$course_cat->apply_changes();
 
-			do_action( 'masteriyo_new_course_cat', $id, $course_cat );
-		} elseif ( isset( $id->error_data['term_exists'] ) ) {
-			$course_cat->set_id( $id->error_data['term_exists'] );
-			do_action( 'masteriyo_old_course_cat', $id, $course_cat );
+			do_action( 'masteriyo_new_course_cat', $ids, $course_cat );
+		} elseif ( isset( $ids->error_data['term_exists'] ) ) {
+			$course_cat->set_id( $ids->error_data['term_exists'] );
+			do_action( 'masteriyo_old_course_cat', $ids, $course_cat );
 		}
 
 	}
@@ -83,16 +83,18 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 			throw new \Exception( __( 'Invalid course_cat.', 'masteriyo' ) );
 		}
 
-		$course_cat->set_props( array(
-			'name'             => $term->name,
-			'slug'             => $term->slug,
-			'term_group'       => $term->term_group,
-			'term_taxonomy_id' => $term->term_taxonomy_id,
-			'taxonomy'         => $term->taxonomy,
-			'description'      => $term->description,
-			'parent_id'        => $term->parent,
-			'count'            => $term->count
-		) );
+		$course_cat->set_props(
+			array(
+				'name'             => $term->name,
+				'slug'             => $term->slug,
+				'term_group'       => $term->term_group,
+				'term_taxonomy_id' => $term->term_taxonomy_id,
+				'taxonomy'         => $term->taxonomy,
+				'description'      => $term->description,
+				'parent_id'        => $term->parent,
+				'count'            => $term->count,
+			)
+		);
 
 		$this->read_course_cat_data( $course_cat );
 		$this->read_extra_data( $course_cat );
@@ -165,7 +167,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	 * @since 0.1.0
 	 *
 	 * @param Model $course_cat Course_cat object.
-	 * @param array $args	Array of args to pass.alert-danger
+	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$course_cat, $args = array() ) {
 		$id          = $course_cat->get_id();
@@ -190,16 +192,21 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	 * @param Course_cat $course_cat course_cat object.
 	 */
 	protected function read_course_cat_data( &$course_cat ) {
-		$id              = $course_cat->get_id();
-		$meta_values     = $this->read_meta( $course_cat );;
-		$set_props       = array();
+		$id          = $course_cat->get_id();
+		$meta_values = $this->read_meta( $course_cat );
 
-		$meta_values = array_reduce( $meta_values, function( $result, $meta_value ) {
-			$result[ $meta_value->key ][] = $meta_value->value;
-			return $result;
-		}, array() );
+		$set_props = array();
 
-		foreach( $this->internal_meta_keys as $meta_key => $prop ) {
+		$meta_values = array_reduce(
+			$meta_values,
+			function( $result, $meta_value ) {
+				$result[ $meta_value->key ][] = $meta_value->value;
+				return $result;
+			},
+			array()
+		);
+
+		foreach ( $this->internal_meta_keys as $meta_key => $prop ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
 			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
 		}

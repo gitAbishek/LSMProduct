@@ -29,13 +29,13 @@ class QuizesController extends CrudController {
 	protected $rest_base = 'quizes';
 
 	/**
-	 * Post type.
+	 * Object type.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'quiz';
+	protected $object_type = 'quiz';
 
 	/**
 	 * If object is hierarchical.
@@ -198,7 +198,7 @@ class QuizesController extends CrudController {
 		/**
 		 * Filter the data for a response.
 		 *
-		 * The dynamic portion of the hook name, $this->post_type,
+		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
 	 	 * @since 0.1.0
@@ -207,7 +207,7 @@ class QuizesController extends CrudController {
 		 * @param WC_Data          $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
-		return apply_filters( "masteriyo_rest_prepare_{$this->post_type}_object", $response, $object, $request );
+		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
 	}
 
 	/**
@@ -328,7 +328,7 @@ class QuizesController extends CrudController {
 	public function get_item_schema() {
 		$schema = array(
 			'$schema'    => 'http://json-schema.org/draft-04/schema#',
-			'title'      => $this->post_type,
+			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
 				'id'                    => array(
@@ -435,7 +435,7 @@ class QuizesController extends CrudController {
 	 */
 	public function create_item_permissions_check( $request ) {
 		// TODO Uncomment this and implement it.
-		// if ( ! wc_rest_check_post_permissions( $this->post_type, 'create' ) ) {
+		// if ( ! wc_rest_check_post_permissions( $this->object_type, 'create' ) ) {
 		// 	return new WP_Error( 'masteriyo_rest_cannot_create', __( 'Sorry, you are not allowed to create resources.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
 		// }
 
@@ -528,14 +528,14 @@ class QuizesController extends CrudController {
 		/**
 		 * Filters an object before it is inserted via the REST API.
 		 *
-		 * The dynamic portion of the hook name, `$this->post_type`,
+		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
 		 * @param WC_Data         $quiz  Object object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */
-		return apply_filters( "masteriyo_rest_pre_insert_{$this->post_type}_object", $quiz, $request, $creating );
+		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $quiz, $request, $creating );
 	}
 
 	/**

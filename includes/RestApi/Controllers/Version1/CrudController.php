@@ -41,7 +41,6 @@ abstract class CrudController extends RestController {
 	 */
 	protected $public = false;
 
-
 	/**
 	 * Get object.
 	 *
@@ -200,7 +199,7 @@ abstract class CrudController extends RestController {
 	public function create_item( $request ) {
 		if ( ! empty( $request['id'] ) ) {
 			/* translators: %s: post type */
-			return new \WP_Error( "masteriyo_rest_{$this->post_type}_exists", sprintf( __( 'Cannot create existing %s.', 'masteriyo' ), $this->post_type ), array( 'status' => 400 ) );
+			return new \WP_Error( "masteriyo_rest_{$this->object_type}_exists", sprintf( __( 'Cannot create existing %s.', 'masteriyo' ), $this->object_type ), array( 'status' => 400 ) );
 		}
 
 		$object = $this->save_object( $request, true );
@@ -219,7 +218,7 @@ abstract class CrudController extends RestController {
 			 * @param WP_REST_Request $request   Request object.
 			 * @param boolean         $creating  True when creating object, false when updating.
 			 */
-			do_action( "masteriyo_rest_insert_{$this->post_type}_object", $object, $request, true );
+			do_action( "masteriyo_rest_insert_{$this->object_type}_object", $object, $request, true );
 		} catch ( ModelException $e ) {
 			$object->delete();
 			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
@@ -266,7 +265,7 @@ abstract class CrudController extends RestController {
 			 * @param WP_REST_Request $request   Request object.
 			 * @param boolean         $creating  True when creating object, false when updating.
 			 */
-			do_action( "masteriyo_rest_insert_{$this->post_type}_object", $object, $request, false );
+			do_action( "masteriyo_rest_insert_{$this->object_type}_object", $object, $request, false );
 		} catch ( ModelException $e ) {
 			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
 		} catch ( \WC_REST_Exception $e ) {
@@ -543,7 +542,7 @@ abstract class CrudController extends RestController {
 		$result = false;
 
 		if ( ! $object || 0 === $object->get_id() ) {
-			return new \WP_Error( "masteriyo_rest_{$this->post_type}_invalid_id", __( 'Invalid ID.', 'masteriyo' ), array( 'status' => 404 ) );
+			return new \WP_Error( "masteriyo_rest_{$this->object_type}_invalid_id", __( 'Invalid ID.', 'masteriyo' ), array( 'status' => 404 ) );
 		}
 
 		$supports_trash = EMPTY_TRASH_DAYS > 0 && is_callable( array( $object, 'get_status' ) );
@@ -556,12 +555,13 @@ abstract class CrudController extends RestController {
 		 * @param boolean $supports_trash Whether the object type support trashing.
 		 * @param Model $object         The object being considered for trashing support.
 		 */
-		$supports_trash = apply_filters( "masteriyo_rest_{$this->post_type}_object_trashable", $supports_trash, $object );
+		$supports_trash = apply_filters( "masteriyo_rest_{$this->object_type}_object_trashable", $supports_trash, $object );
 
-		if ( ! wc_rest_check_post_permissions( $this->post_type, 'delete', $object->get_id() ) ) {
-			/* translators: %s: post type */
-			return new \WP_Error( "masteriyo_rest_user_cannot_delete_{$this->post_type}", sprintf( __( 'Sorry, you are not allowed to delete %s.', 'masteriyo' ), $this->post_type ), array( 'status' => rest_authorization_required_code() ) );
-		}
+		// TODO Check for permission
+		// if ( ! wc_rest_check_post_permissions( $this->post_type, 'delete', $object->get_id() ) ) {
+		// 	/* translators: %s: post type */
+		// 	return new \WP_Error( "masteriyo_rest_user_cannot_delete_{$this->post_type}", sprintf( __( 'Sorry, you are not allowed to delete %s.', 'masteriyo' ), $this->post_type ), array( 'status' => rest_authorization_required_code() ) );
+		// }
 
 		$request->set_param( 'context', 'edit' );
 		$response = $this->prepare_object_for_response( $object, $request );
@@ -574,14 +574,14 @@ abstract class CrudController extends RestController {
 			// If we don't support trashing for this type, error out.
 			if ( ! $supports_trash ) {
 				/* translators: %s: post type */
-				return new \WP_Error( 'masteriyo_rest_trash_not_supported', sprintf( __( 'The %s does not support trashing.', 'masteriyo' ), $this->post_type ), array( 'status' => 501 ) );
+				return new \WP_Error( 'masteriyo_rest_trash_not_supported', sprintf( __( 'The %s does not support trashing.', 'masteriyo' ), $this->object_type ), array( 'status' => 501 ) );
 			}
 
 			// Otherwise, only trash if we haven't already.
 			if ( is_callable( array( $object, 'get_status' ) ) ) {
 				if ( 'trash' === $object->get_status() ) {
 					/* translators: %s: post type */
-					return new \WP_Error( 'masteriyo_rest_already_trashed', sprintf( __( 'The %s has already been deleted.', 'masteriyo' ), $this->post_type ), array( 'status' => 410 ) );
+					return new \WP_Error( 'masteriyo_rest_already_trashed', sprintf( __( 'The %s has already been deleted.', 'masteriyo' ), $this->object_type ), array( 'status' => 410 ) );
 				}
 
 				$object->delete();
@@ -591,7 +591,7 @@ abstract class CrudController extends RestController {
 
 		if ( ! $result ) {
 			/* translators: %s: post type */
-			return new \WP_Error( 'masteriyo_rest_cannot_delete', sprintf( __( 'The %s cannot be deleted.', 'masteriyo' ), $this->post_type ), array( 'status' => 500 ) );
+			return new \WP_Error( 'masteriyo_rest_cannot_delete', sprintf( __( 'The %s cannot be deleted.', 'masteriyo' ), $this->object_type ), array( 'status' => 500 ) );
 		}
 
 		/**
@@ -601,7 +601,7 @@ abstract class CrudController extends RestController {
 		 * @param WP_REST_Response $response The response data.
 		 * @param WP_REST_Request  $request  The request sent to the API.
 		 */
-		do_action( "masteriyo_rest_delete_{$this->post_type}_object", $object, $response, $request );
+		do_action( "masteriyo_rest_delete_{$this->object_type}_object", $object, $response, $request );
 
 		return $response;
 	}
@@ -741,16 +741,16 @@ abstract class CrudController extends RestController {
 		/**
 		 * Filter collection parameters for the posts controller.
 		 *
-		 * The dynamic part of the filter `$this->post_type` refers to the post
+		 * The dynamic part of the filter `$this->object_type` refers to the post
 		 * type slug for the controller.
 		 *
 		 * This filter registers the collection parameter, but does not map the
 		 * collection parameter to an internal WP_Query parameter. Use the
-		 * `rest_{$this->post_type}_query` filter to set WP_Query parameters.
+		 * `rest_{$this->object_type}_query` filter to set WP_Query parameters.
 		 *
 		 * @param array        $query_params JSON Schema-formatted collection parameters.
-		 * @param WP_Post_Type $post_type    Post type object.
+		 * @param WP_object_type $object_type    Post type object.
 		 */
-		return apply_filters( "rest_{$this->post_type}_collection_params", $params, $this->post_type );
+		return apply_filters( "rest_{$this->object_type}_collection_params", $params, $this->object_type );
 	}
 }

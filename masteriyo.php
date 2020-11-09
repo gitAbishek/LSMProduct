@@ -19,6 +19,7 @@ use ThemeGrill\Masteriyo\Repository\LessonRepository;
 use ThemeGrill\Masteriyo\Repository\QuizRepository;
 use ThemeGrill\Masteriyo\Repository\CourseCategoryRepository;
 use ThemeGrill\Masteriyo\Repository\CourseTagRepository;
+use ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository;
 use League\Container\Container;
 use ThemeGrill\Masteriyo\Cache\Cache;
 
@@ -105,6 +106,16 @@ $masteriyo_container->add(
 	\ThemeGrill\Masteriyo\Repository\CourseTagRepository::class,
 	function() {
 		return apply_filters( 'masteriyo_course_tag_repository', new CourseTagRepository() );
+	}
+);
+
+$masteriyo_container->add( 'course_difficulty', \ThemeGrill\Masteriyo\Models\CourseDifficulty::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository::class );
+
+$masteriyo_container->add(
+	\ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository::class,
+	function() {
+		return apply_filters( 'masteriyo_course_difficulty_repository', new CourseDifficultyRepository() );
 	}
 );
 

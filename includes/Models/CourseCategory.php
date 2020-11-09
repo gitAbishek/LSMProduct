@@ -75,7 +75,7 @@ class CourseCategory extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param CourseCategoryRepository $course_category_repository Course Category Repository,
+	 * @param CourseCategoryRepository $course_category_repository Course Category Repository.
 	 */
 	public function __construct( CourseCategoryRepository $course_category_repository ) {
 		$this->repository = $course_category_repository;
@@ -88,7 +88,7 @@ class CourseCategory extends Model {
 	*/
 
 	/**
-	 * Get the couse category's title. For couse categorys this is the couse category name.
+	 * Get the course category's title. For course categorys this is the course category name.
 	 *
 	 * @since 0.1.0
 	 *
@@ -99,7 +99,7 @@ class CourseCategory extends Model {
 	}
 
 	/**
-	 * couse category permalink.
+	 * Course category permalink.
 	 *
 	 * @since 0.1.0
 	 *
@@ -270,7 +270,7 @@ class CourseCategory extends Model {
 	 * @param string $name Course category name.
 	 */
 	public function set_name( $name ) {
-		 $this->set_prop( 'name', $name );
+		$this->set_prop( 'name', $name );
 	}
 
 	/**
@@ -280,8 +280,8 @@ class CourseCategory extends Model {
 	 *
 	 * @param string $slug Course cateogy slug.
 	 */
-	public function set_slug( $slug) {
-		 $this->set_prop( 'slug', $slug );
+	public function set_slug( $slug ) {
+		$this->set_prop( 'slug', $slug );
 	}
 
 	/**
@@ -292,7 +292,7 @@ class CourseCategory extends Model {
 	 * @param string $description Course category description.
 	 */
 	public function set_description( $description ) {
-		 $this->set_prop( 'description', $description );
+		$this->set_prop( 'description', $description );
 	}
 
 	/**
@@ -303,7 +303,7 @@ class CourseCategory extends Model {
 	 * @param int $parent_id Course category parent id.
 	 */
 	public function set_parent_id( $parent_id ) {
-		 $this->set_prop( 'parent_id', absint( $parent_id ) );
+		$this->set_prop( 'parent_id', absint( $parent_id ) );
 	}
 
 	/**
@@ -314,7 +314,7 @@ class CourseCategory extends Model {
 	 * @param int $term_group Course category term group.
 	 */
 	public function set_term_group( $term_group ) {
-		 $this->set_prop( 'term_group', absint( $term_group ) );
+		$this->set_prop( 'term_group', absint( $term_group ) );
 	}
 
 	/**
@@ -325,7 +325,7 @@ class CourseCategory extends Model {
 	 * @param int $term_taxonomy_id Course category term taxonomy id.
 	 */
 	public function set_term_taxonomy_id( $term_taxonomy_id ) {
-		 $this->set_prop( 'term_taxonomy_id', absint( $term_taxonomy_id ) );
+		$this->set_prop( 'term_taxonomy_id', absint( $term_taxonomy_id ) );
 	}
 
 	/**
@@ -336,7 +336,7 @@ class CourseCategory extends Model {
 	 * @param  string $taxonomy Course category taxonomy.
 	 */
 	public function set_taxonomy( $taxonomy ) {
-		 $this->set_prop( 'taxonomy', $taxonomy );
+		$this->set_prop( 'taxonomy', $taxonomy );
 	}
 
 	/**
@@ -346,8 +346,8 @@ class CourseCategory extends Model {
 	 *
 	 * @param int $count Number of posts for the course category term.
 	 */
-	public function set_count( $context = 'view' ) {
-		$this->set_prop( 'count', absint( $context ) );
+	public function set_count( $count ) {
+		$this->set_prop( 'count', absint( $count ) );
 	}
 
 	/**

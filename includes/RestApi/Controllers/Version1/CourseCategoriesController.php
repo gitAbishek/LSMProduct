@@ -89,7 +89,7 @@ class CourseCategoriesController extends RestTermsController {
 						'sanitize_callback' => 'sanitize_title',
 					),
 				),
-				'parent_id'      => array(
+				'parent_id'   => array(
 					'description' => __( 'The ID for the parent of the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
@@ -138,7 +138,7 @@ class CourseCategoriesController extends RestTermsController {
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		global $masteriyo_container;
 
-		$id     = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
+		$id         = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
 		$course_cat = $masteriyo_container->get( 'course_cat' );
 
 		if ( 0 !== $id ) {
@@ -189,12 +189,12 @@ class CourseCategoriesController extends RestTermsController {
 	protected function get_object( $id ) {
 		global $masteriyo_container;
 		try {
-			$id     = $id instanceof \WP_Term ? $id->term_id : $id;
+			$id         = $id instanceof \WP_Term ? $id->term_id : $id;
 			$course_cat = $masteriyo_container->get( 'course_cat' );
 			$course_cat->set_id( $id );
 			$course_cat_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\CourseCategoryRepository::class );
 			$course_cat_repo->read( $course_cat );
-		} catch( \Exception $e ){
+		} catch ( \Exception $e ) {
 			return false;
 		}
 
@@ -206,7 +206,7 @@ class CourseCategoriesController extends RestTermsController {
 	 *
 	 * @since  0.1.0
 	 *
-	 * @param  Model         $object  Model object.
+	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
@@ -238,8 +238,7 @@ class CourseCategoriesController extends RestTermsController {
 	 * @since 0.1.0
 	 *
 	 * @param CourseCategory $course_cat Course instance.
-	 * @param string     $context Request context.
-	 *                            Options: 'view' and 'edit'.
+	 * @param string         $context Request context. Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
@@ -253,7 +252,7 @@ class CourseCategoriesController extends RestTermsController {
 			'description' => 'view' === $context ? wpautop( do_shortcode( $course_cat->get_description() ) ) : $course_cat->get_description( $context ),
 			'parent_id'   => $course_cat->get_parent_id( $context ),
 			'count'       => $course_cat->get_count( $context ),
-			'display'     => $course_cat->get_display( $context )
+			'display'     => $course_cat->get_display( $context ),
 		);
 
 		return $data;

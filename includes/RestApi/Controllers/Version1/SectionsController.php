@@ -39,6 +39,13 @@ class SectionsController extends CrudController {
 	protected $post_type = 'section';
 
 	/**
+	 * Object type.
+	 *
+	 * @var string
+	 */
+	protected $object_type = 'section';
+
+	/**
 	 * If object is hierarchical.
 	 *
 	 * @var bool
@@ -218,7 +225,7 @@ class SectionsController extends CrudController {
 	public function get_item_schema() {
 		$schema = array(
 			'$schema'    => 'http://json-schema.org/draft-04/schema#',
-			'title'      => $this->post_type,
+			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
 				'id'                => array(

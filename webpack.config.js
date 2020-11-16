@@ -94,6 +94,10 @@ const config = {
 
 	resolve: {
 		extensions: ['.js', '.jsx'],
+		alias: {
+			Components: path.resolve(process.cwd(), 'assets/js/src/components'),
+			Config: path.resolve(process.cwd(), 'assets/js/src/config'),
+		},
 	},
 
 	devServer: {

@@ -11,7 +11,8 @@
 	"rules": {
 		"camelcase": 0,
 		"indent": 0,
-		"no-console": 1
+		"no-console": 1,
+		"requireConfigFile": false
 	},
 	"parser": "@babel/eslint-parser",
 	"extends": ["eslint:recommended", "plugin:import/errors", "plugin:import/warnings", "plugin:react/recommended" ],

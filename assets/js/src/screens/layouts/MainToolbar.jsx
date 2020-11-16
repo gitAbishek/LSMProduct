@@ -2,13 +2,13 @@ import { React } from '@wordpress/element';
 import { BiShow, BiCog, BiBookAlt, BiEdit } from 'react-icons/bi';
 import styled from 'styled-components';
 import LogoImg from '../../../../img/logo.png';
-import { ContainerFluid } from '../../components/common/Container';
-import FlexRow from '../../components/common/FlexRow';
-import { BaseLine } from '../../config/defaultStyle';
-import Button from './../../components/common/Button';
-import Flex from './../../components/common/Flex';
-import colors from './../../config/colors';
-import Menu, { MenuItem } from '../../components/common/Menu';
+import { ContainerFluid } from 'Components/common/Container';
+import FlexRow from 'Components/common/FlexRow';
+import { BaseLine } from 'Config/defaultStyle';
+import Button from 'Components/common/Button';
+import Flex from 'Components/common/Flex';
+import colors from 'Config/colors';
+import Menu, { MenuItem } from 'Components/common/Menu';
 
 const MainToolbar = () => {
 	return (

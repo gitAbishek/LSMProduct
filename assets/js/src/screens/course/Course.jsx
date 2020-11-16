@@ -1,18 +1,18 @@
 import { Fragment, React } from '@wordpress/element';
-import FlexRow from '../../components/common/FlexRow';
-import Flex from '../../components/common/Flex';
+import FlexRow from 'Components/common/FlexRow';
+import Flex from 'Components/common/Flex';
 
-import MainLayout from '../layouts/MainLayout';
-import MainToolbar from '../layouts/MainToolbar';
-import Input from '../../components/common/Input';
-import FormGroup from '../../components/common/FormGroup';
-import Label from '../../components/common/Label';
-import Textarea from '../../components/common/Textarea';
-import Select from '../../components/common/Select';
-import ImageUpload from '../../components/common/ImageUpload';
+import MainLayout from 'Layouts/MainLayout';
+import MainToolbar from 'Layouts/MainToolbar';
+import Input from 'Components/common/Input';
+import FormGroup from 'Components/common/FormGroup';
+import Label from 'Components/common/Label';
+import Textarea from 'Components/common/Textarea';
+import Select from 'Components/common/Select';
+import ImageUpload from 'Components/common/ImageUpload';
 import styled from 'styled-components';
-import { BaseLine } from '../../config/defaultStyle';
-import Button from '../../components/common/Button';
+import { BaseLine } from 'Config/defaultStyle';
+import Button from 'Components/common/Button';
 
 const Course = () => {
 	return (

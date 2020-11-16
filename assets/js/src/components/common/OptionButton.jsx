@@ -1,9 +1,9 @@
 import { React } from '@wordpress/element';
 import styled from 'styled-components';
-import colors from '../../config/colors';
-import defaultStyle from '../../config/defaultStyle';
-import fontSize from '../../config/fontSize';
-import Icon from './Icon';
+import colors from 'Config/colors';
+import defaultStyle from 'Config/defaultStyle';
+import fontSize from 'Config/fontSize';
+import Icon from 'Components/common/Icon';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 
 const OptionButton = (props) => {

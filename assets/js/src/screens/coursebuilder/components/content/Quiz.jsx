@@ -1,7 +1,7 @@
 import { React } from '@wordpress/element';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
-import FlexRow from '../../../../components/common/FlexRow';
+import FlexRow from 'Components/common/FlexRow';
 import DragHandle from '../DragHandle';
 import {
 	ActionContainer,
@@ -11,11 +11,11 @@ import {
 	ContentTitle,
 } from '../styled';
 import { BiTimer, BiTrash } from 'react-icons/bi';
-import Button from '../../../../components/common/Button';
+import Button from 'Components/common/Button';
 import Dropdown from 'rc-dropdown';
-import DropdownOverlay from '../../../../components/common/DropdownOverlay';
-import Icon from '../../../../components/common/Icon';
-import OptionButton from '../../../../components/common/OptionButton';
+import DropdownOverlay from 'Components/common/DropdownOverlay';
+import Icon from 'Components/common/Icon';
+import OptionButton from 'Components/common/OptionButton';
 
 const Quiz = (props) => {
 	const { id, title, index } = props;

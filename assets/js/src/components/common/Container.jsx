@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseLine } from '../../config/defaultStyle';
+import { BaseLine } from 'Config/defaultStyle';
 
 const Container = styled.div`
 	display: ${(props) => (props.flex ? 'flex' : 'block')};

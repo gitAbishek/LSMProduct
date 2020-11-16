@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Flex from './Flex';
-import { BaseLine } from '../../config/defaultStyle';
+import Flex from 'Components/common/Flex';
+import { BaseLine } from 'Config/defaultStyle';
 
 const FormGroup = styled(Flex)`
 	margin-bottom: ${BaseLine * 4}px;

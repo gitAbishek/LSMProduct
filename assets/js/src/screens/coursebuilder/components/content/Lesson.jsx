@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import Dropdown from 'rc-dropdown';
 import { Draggable } from 'react-beautiful-dnd';
 import { BiAlignLeft, BiTrash } from 'react-icons/bi';
-import Button from '../../../../components/common/Button';
-import DropdownOverlay from '../../../../components/common/DropdownOverlay';
-import FlexRow from '../../../../components/common/FlexRow';
-import Icon from '../../../../components/common/Icon';
-import OptionButton from '../../../../components/common/OptionButton';
+import Button from 'Components/common/Button';
+import DropdownOverlay from 'Components/common/DropdownOverlay';
+import FlexRow from 'Components/common/FlexRow';
+import Icon from 'Components/common/Icon';
+import OptionButton from 'Components/common/OptionButton';
 import DragHandle from '../DragHandle';
 import {
 	ActionContainer,

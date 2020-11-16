@@ -1,8 +1,8 @@
 import { React, useState } from '@wordpress/element';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Section from './Section';
-import Container from '../../../components/common/Container';
-import AddNewButton from '../../../components/common/AddNewButton';
+import Container from 'Components/common/Container';
+import AddNewButton from 'Components/common/AddNewButton';
 import styled from 'styled-components';
 
 const dummyData = {

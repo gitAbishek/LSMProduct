@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "Components/*" : ["./assets/js/src/components/*"],
+      "Config/*" : ["./assets/js/src/config/*"],
+      "Icons/*" : ["./assets/js/src/components/icons/*"],
+      "Layouts/*" : ["./assets/js/src/screens/layouts/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

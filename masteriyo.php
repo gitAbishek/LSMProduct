@@ -62,6 +62,11 @@ $masteriyo_container->add(
 $masteriyo_container->add( 'section', \ThemeGrill\Masteriyo\Models\Section::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\SectionRepository::class );
 
+$masteriyo_container->add( 'section_repository',
+	function() {
+		return apply_filters( 'masteriyo_section_repository', new SectionRepository() );
+	}
+);
 $masteriyo_container->add(
 	\ThemeGrill\Masteriyo\Repository\SectionRepository::class,
 	function() {
@@ -72,8 +77,13 @@ $masteriyo_container->add(
 $masteriyo_container->add( 'lesson', \ThemeGrill\Masteriyo\Models\Lesson::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\LessonRepository::class );
 
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Repository\LessonRepository::class,
+$masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\LessonRepository::class,
+	function() {
+		return apply_filters( 'masteriyo_lesson_repository', new LessonRepository() );
+	}
+);
+
+$masteriyo_container->add( 'lesson_repository',
 	function() {
 		return apply_filters( 'masteriyo_lesson_repository', new LessonRepository() );
 	}
@@ -81,6 +91,12 @@ $masteriyo_container->add(
 
 $masteriyo_container->add( 'quiz', \ThemeGrill\Masteriyo\Models\Quiz::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\QuizRepository::class );
+
+$masteriyo_container->add( 'quiz_repository',
+	function() {
+		return apply_filters( 'masteriyo_quiz_repository', new QuizRepository() );
+	}
+);
 
 $masteriyo_container->add(
 	\ThemeGrill\Masteriyo\Repository\QuizRepository::class,

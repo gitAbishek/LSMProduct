@@ -72,10 +72,14 @@ class RestApi {
 	 * @return array
 	 */
 	protected function get_v1_controllers() {
+		$namespace = '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1';
+
 		return array(
-			'course-categories'   => '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CourseCategoriesController',
-			'course-tags'         => '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CourseTagsController',
-			'course-difficulties' => '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\CourseDifficultiesController',
+			'course-categories'   => "{$namespace}\\CourseCategoriesController",
+			'course-tags'         => "{$namespace}\\CourseTagsController",
+			'course-difficulties' => "{$namespace}\\CourseDifficultiesController",
+			'course-children'     => "{$namespace}\\CourseChildrenController",
+			'section-children'    => "{$namespace}\\SectionChildrenController"
 		);
 	}
 

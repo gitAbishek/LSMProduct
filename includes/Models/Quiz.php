@@ -58,13 +58,15 @@ class Quiz extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'name'               => '',
-		'slug'               => '',
-		'date_created'       => null,
-		'date_modified'      => null,
-		'status'             => false,
-		'description'        => '',
-		'short_description'  => '',
+		'name'              => '',
+		'slug'              => '',
+		'date_created'      => null,
+		'date_modified'     => null,
+		'parent_id'         => 0,
+		'menu_order'        => 0,
+		'status'            => false,
+		'description'       => '',
+		'short_description' => '',
 	);
 
 	/**
@@ -203,6 +205,32 @@ class Quiz extends Model {
 	}
 
 	/**
+	 * Returns quiz parent id.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return int Quiz parent id.
+	 */
+	public function get_parent_id( $context = 'view' ) {
+		return $this->get_prop( 'parent_id', $context );
+	}
+
+	/**
+	 * Returns quiz menu order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return int Quiz menu order.
+	 */
+	public function get_menu_order( $context = 'view' ) {
+		return $this->get_prop( 'menu_order', $context );
+	}
+
+	/**
 	 * Set quiz name.
 	 *
 	 * @since 0.1.0
@@ -277,5 +305,27 @@ class Quiz extends Model {
 	 */
 	public function set_short_description( $short_description ) {
 		$this->set_prop( 'short_description', $short_description );
+	}
+
+	/**
+	 * Set the quiz parent id.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $parent Parent id.
+	 */
+	public function set_parent_id( $parent ) {
+		$this->set_prop( 'parent_id', absint( $parent ) );
+	}
+
+	/**
+	 * Set the quiz menu order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $menu_order menu order.
+	 */
+	public function set_menu_order( $menu_order ) {
+		$this->set_prop( 'menu_order', absint( $menu_order ) );
 	}
 }

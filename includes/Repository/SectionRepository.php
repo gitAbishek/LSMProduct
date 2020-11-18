@@ -44,7 +44,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 					'post_type'      => 'section',
 					'post_status'    => 'publish',
 					'post_author'    => get_current_user_id(),
-					'post_title'     => $section->get_title(),
+					'post_title'     => $section->get_name(),
 					'post_content'   => $section->get_description(),
 					'post_parent'    => $section->get_parent_id(),
 					'comment_status' => 'closed',
@@ -87,7 +87,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 
 		$section->set_props(
 			array(
-				'title'         => $section_post->post_title,
+				'name'         => $section_post->post_title,
 				'date_created'  => $section_post->post_date_gmt,
 				'date_modified' => $section_post->post_modified_gmt,
 				'description'   => $section_post->post_content,
@@ -128,7 +128,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 		if ( array_intersect( $post_data_keys, array_keys( $changes ) ) ) {
 			$post_data = array(
 				'post_content'   => $section->get_description( 'edit' ),
-				'post_title'     => $section->get_title( 'edit' ),
+				'post_title'     => $section->get_name( 'edit' ),
 				'post_parent'    => $section->get_parent_id( 'edit' ),
 				'comment_status' => 'closed',
 				'post_status'    => 'publish',

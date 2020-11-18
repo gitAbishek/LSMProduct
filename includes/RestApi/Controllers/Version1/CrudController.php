@@ -4,7 +4,7 @@
  *
  * @class    CrudController
  * @package ThemeGrill/Masteriyo/RestApi
- * @version  3.0.0
+ * @version  0.1.0
  */
 
 namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
@@ -117,7 +117,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  3.0.0
+	 * @since  0.1.0
 	 * @param  Model         $object  Object data.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -130,7 +130,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Prepares one object for create or update operation.
 	 *
-	 * @since  3.0.0
+	 * @since  0.1.0
 	 * @param  WP_REST_Request $request Request object.
 	 * @param  bool            $creating If is creating a new object.
 	 * @return WP_Error|Model The prepared item, or WP_Error object on failure.
@@ -167,7 +167,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Save an object data.
 	 *
-	 * @since  3.0.0
+	 * @since  0.1.0
 	 * @param  WP_REST_Request $request  Full details about the request.
 	 * @param  bool            $creating If is creating a new object.
 	 * @return Model|WP_Error
@@ -280,7 +280,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Prepare objects query.
 	 *
-	 * @since  3.0.0
+	 * @since  0.1.0
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return array
 	 */
@@ -388,7 +388,7 @@ abstract class CrudController extends RestController {
 		$valid_vars = apply_filters( 'query_vars', $wp->public_query_vars );
 
 		$post_type_obj = get_post_type_object( $this->post_type );
-		if ( current_user_can( $post_type_obj->cap->edit_posts ) ) {
+		if ( null !== $post_type_obj && current_user_can( $post_type_obj->cap->edit_posts ) ) {
 			/**
 			 * Filter the allowed 'private' query vars for authorized users.
 			 *
@@ -446,7 +446,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Get objects.
 	 *
-	 * @since  3.0.0
+	 * @since  0.1.0
 	 * @param  array $query_args Query args.
 	 * @return array
 	 */
@@ -473,6 +473,8 @@ abstract class CrudController extends RestController {
 	/**
 	 * Get a collection of posts.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|WP_REST_Response
 	 */
@@ -498,19 +500,6 @@ abstract class CrudController extends RestController {
 		$response->header( 'X-WP-TotalPages', (int) $max_pages );
 
 		$base          = $this->rest_base;
-		$attrib_prefix = '(?P<';
-		if ( strpos( $base, $attrib_prefix ) !== false ) {
-			$attrib_names = array();
-			preg_match( '/\(\?P<[^>]+>.*\)/', $base, $attrib_names, PREG_OFFSET_CAPTURE );
-			foreach ( $attrib_names as $attrib_name_match ) {
-				$beginning_offset = strlen( $attrib_prefix );
-				$attrib_name_end  = strpos( $attrib_name_match[0], '>', $attrib_name_match[1] );
-				$attrib_name      = substr( $attrib_name_match[0], $beginning_offset, $attrib_name_end - $beginning_offset );
-				if ( isset( $request[ $attrib_name ] ) ) {
-					$base  = str_replace( "(?P<$attrib_name>[\d]+)", $request[ $attrib_name ], $base );
-				}
-			}
-		}
 		$base = add_query_arg( $request->get_query_params(), rest_url( sprintf( '/%s/%s', $this->namespace, $base ) ) );
 
 		if ( $page > 1 ) {
@@ -713,6 +702,7 @@ abstract class CrudController extends RestController {
 				'title',
 				'slug',
 				'modified',
+				'menu_order'
 			),
 			'validate_callback'  => 'rest_validate_request_arg',
 		);

@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 0.1.0
  */
-class Question extends Model {
+abstract class Question extends Model implements QuestionInterface {
 
 	/**
 	 * This is the name of this object type.
@@ -77,7 +77,7 @@ class Question extends Model {
 		'points'            => 0,
 		'positive_feedback' => '',
 		'negative_feedback' => '',
-		'feedback'          => ''
+		'feedback'          => '',
 	);
 
 	/**
@@ -89,6 +89,18 @@ class Question extends Model {
 	 */
 	public function __construct( QuestionRepository $question_repository ) {
 		$this->repository = $question_repository;
+	}
+
+	/**
+	 * Check whether the chosen answer is correct or not.
+	 *
+	 * @param mixed  $chosen_answer Answer chosen by user.
+	 * @param string $context Options: 'edit', 'view'.
+	 *
+	 * @return bool
+	 */
+	public function check_answer( $chosen_answer, $context = 'edit' ) {
+		return false;
 	}
 
 	/*
@@ -445,8 +457,8 @@ class Question extends Model {
 	 *
 	 * @param string $positive_feedback Positive feedback.
 	 */
-	public function set_positive_feedback ( $positive_feedback  ) {
-		$this->set_prop( 'positive_feedback', $positive_feedback  );
+	public function set_positive_feedback( $positive_feedback ) {
+		$this->set_prop( 'positive_feedback', $positive_feedback );
 	}
 
 	/**
@@ -456,8 +468,8 @@ class Question extends Model {
 	 *
 	 * @param string $negative_feedback Negative feedback.
 	 */
-	public function set_negative_feedback ( $negative_feedback  ) {
-		$this->set_prop( 'negative_feedback', $negative_feedback  );
+	public function set_negative_feedback( $negative_feedback ) {
+		$this->set_prop( 'negative_feedback', $negative_feedback );
 	}
 
 	/**
@@ -467,7 +479,7 @@ class Question extends Model {
 	 *
 	 * @param string $feedback feedback.
 	 */
-	public function set_feedback ( $feedback  ) {
-		$this->set_prop( 'feedback', $feedback  );
+	public function set_feedback( $feedback ) {
+		$this->set_prop( 'feedback', $feedback );
 	}
 }

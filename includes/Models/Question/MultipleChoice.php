@@ -27,4 +27,25 @@ class MultipleChoice extends Question {
 	 * @var string $type Question type.
 	 */
 	protected $type = 'multiple-choice';
+
+	/**
+	 * Check whether the chosen answer is correct or not.
+	 *
+	 * @param array  $chosen_answers Answer chosen by user.
+	 * @param string $context Options: 'edit', 'view'.
+	 *
+	 * @return bool
+	 */
+	public function check_answer( $chosen_answers, $context = 'edit' ) {
+		$answers        = $this->get_answers( 'edit' );
+		$chosen_answers = (array) $chosen_answers;
+
+		foreach ( $answers as $answer => $is_correct ) {
+			if ( $is_correct && ! in_array( $answer, $chosen_answers ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

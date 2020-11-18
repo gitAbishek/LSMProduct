@@ -131,6 +131,69 @@ class QuestionsController extends CrudController {
 				'schema' => array( $this, 'get_public_item_schema' ),
 			)
 		);
+
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/check_answer',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'check_answer' ),
+					'permission_callback' => array( $this, 'check_answer_permissions_check' ),
+					'args'                => array(
+						'id'            => array(
+							'description'       => __( 'Question ID.', 'masteriyo' ),
+							'type'              => 'integer',
+							'required'          => true,
+							'sanitize_callback' => 'absint',
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+						'chosen_answer' => array(
+							'description' => __( 'Chosen answer or answers.', 'masteriyo' ),
+							'type'        => 'any',
+							'required'    => true,
+						),
+					),
+				),
+			)
+		);
+	}
+
+	/**
+	 * Check if a given request has access to check correct answers.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function check_answer_permissions_check( $request ) {
+		return true;
+	}
+
+	/**
+	 * Check given answer if it's correct or not.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|WP_REST_Response
+	 */
+	public function check_answer( $request ) {
+		$object = $this->get_object( intval( $request['id'] ) );
+
+		if ( ! $object || 0 === $object->get_id() ) {
+			return new \WP_Error( "masteriyo_rest_{$this->post_type}_invalid_id", __( 'Invalid ID.', 'masteriyo' ), array( 'status' => 404 ) );
+		}
+
+		$chosen_answer        = isset( $request['chosen_answer'] ) ? $request['chosen_answer'] : null;
+		$is_correct           = $object->check_answer( $chosen_answer, 'view' );
+		$correct_answer_msg   = __( 'The answer is correct.', 'masteriyo' );
+		$incorrect_answer_msg = __( 'The answer is incorrect.', 'masteriyo' );
+		$response             = array(
+			'is_correct' => $is_correct,
+			'message'    => $is_correct ? $correct_answer_msg : $incorrect_answer_msg,
+		);
+
+		return apply_filters( 'masteriyo_answer_check_rest_reponse', $response );
 	}
 
 	/**
@@ -432,6 +495,11 @@ class QuestionsController extends CrudController {
 					'type'        => 'boolean',
 					'context'     => array( 'view', 'edit' ),
 				),
+				'answers'           => array(
+					'description' => __( 'Given answer list for the question.', 'masteriyo' ),
+					'type'        => 'object',
+					'context'     => array( 'view', 'edit' ),
+				),
 				'points'            => array(
 					'description' => __( 'Points for the correct answer.', 'masteriyo' ),
 					'type'        => 'number',
@@ -555,7 +623,7 @@ class QuestionsController extends CrudController {
 
 		// Post answers.
 		if ( isset( $request['answers'] ) ) {
-			$question->set_answers( wp_filter_post_kses( $request['answers'] ) );
+			$question->set_answers( $request['answers'] );
 		}
 
 		// Post status.

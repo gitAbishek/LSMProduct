@@ -27,4 +27,18 @@ class SingleChoice extends Question {
 	 * @var string $type Question type.
 	 */
 	protected $type = 'single-choice';
+
+	/**
+	 * Check whether the chosen answer is correct or not.
+	 *
+	 * @param string $chosen_answer Answer chosen by user.
+	 * @param string $context Options: 'edit', 'view'.
+	 *
+	 * @return bool
+	 */
+	public function check_answer( $chosen_answer, $context = 'edit' ) {
+		$answers = $this->get_answers( 'edit' );
+
+		return isset( $answers[ $chosen_answer ] ) && ! ! $answers[ $chosen_answer ];
+	}
 }

@@ -27,4 +27,22 @@ class TrueFalse extends Question {
 	 * @var string $type Question type.
 	 */
 	protected $type = 'true-false';
+
+	/**
+	 * Check whether the chosen answer is correct or not.
+	 *
+	 * @param bool   $chosen_answer Answer chosen by user.
+	 * @param string $context Options: 'edit', 'view'.
+	 *
+	 * @return bool
+	 */
+	public function check_answer( $chosen_answer, $context = 'edit' ) {
+		$answers = $this->get_answers( 'edit' );
+
+		if ( is_bool( $chosen_answer ) ) {
+			$chosen_answer = $chosen_answer ? 'true' : 'false';
+		}
+
+		return isset( $answers[ $chosen_answer ] ) && ! ! $answers[ $chosen_answer ];
+	}
 }

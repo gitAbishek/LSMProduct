@@ -38,6 +38,15 @@ class QuizesController extends CrudController {
 	protected $object_type = 'quiz';
 
 	/**
+	 * Post type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $post_type = 'quiz';
+
+	/**
 	 * If object is hierarchical.
 	 *
 	 * @since 0.1.0
@@ -227,6 +236,8 @@ class QuizesController extends CrudController {
 			'name'              => $quiz->get_name( $context ),
 			'slug'              => $quiz->get_slug( $context ),
 			'permalink'         => $quiz->get_permalink(),
+			'parent_id'         => $quiz->get_parent_id( $context ),
+			'menu_order'        => $quiz->get_menu_order( $context ),
 			'status'            => $quiz->get_status( $context ),
 			'description'       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
 			'short_description' => 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description( $context ),
@@ -518,6 +529,16 @@ class QuizesController extends CrudController {
 			$quiz->set_slug( $request['slug'] );
 		}
 
+		// Post parent id.
+		if ( isset( $request['parent_id'] ) ) {
+			$quiz->set_parent_id( $request['parent_id'] );
+		}
+
+		// Post menu order.
+		if ( isset( $request['menu_order'] ) ) {
+			$quiz->set_menu_order( $request['menu_order'] );
+		}
+
 		// Allow set meta_data.
 		if ( isset( $request['meta_data'] ) && is_array( $request['meta_data'] ) ) {
 			foreach ( $request['meta_data'] as $meta ) {
@@ -536,30 +557,5 @@ class QuizesController extends CrudController {
 		 * @param bool            $creating If is creating a new object.
 		 */
 		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $quiz, $request, $creating );
-	}
-
-	/**
-	 * Save taxonomy terms.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Quiz $quiz  Quiz instance.
-	 * @param array      $terms    Terms data.
-	 * @param string     $taxonomy Taxonomy name.
-	 *
-	 * @return Quiz
-	 */
-	protected function save_taxonomy_terms( $quiz, $terms, $taxonomy = 'cat' ) {
-		$term_ids = wp_list_pluck( $terms, 'id' );
-
-		if ( 'cat' === $taxonomy ) {
-			$quiz->set_category_ids( $term_ids );
-		} elseif ( 'tag' === $taxonomy ) {
-			$quiz->set_tag_ids( $term_ids );
-		} elseif( 'difficulty' === $taxonomy ) {
-			$quiz->set_difficulty_ids( $term_ids );
-		}
-
-		return $quiz;
 	}
 }

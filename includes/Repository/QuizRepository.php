@@ -23,7 +23,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 * Data stored in meta keys, but not considered "meta".
 	 *
 	 * @since 0.1.0
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
@@ -45,16 +45,18 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			apply_filters(
 				'masteriyo_new_quiz_data',
 				array(
-					'post_type'      => 'quiz',
-					'post_status'    => $quiz->get_status() ? $quiz->get_status() : 'publish',
-					'post_author'    => get_current_user_id(),
-					'post_title'     => $quiz->get_name() ? $quiz->get_name() : __( 'Quiz', 'masteriyo' ),
-					'post_content'   => $quiz->get_description(),
-					'post_excerpt'   => $quiz->get_short_description(),
-					'ping_status'    => 'closed',
-					'post_date'      => $quiz->get_date_created( 'edit' ),
-					'post_date_gmt'  => $quiz->get_date_created( 'edit' ),
-					'post_name'      => $quiz->get_slug( 'edit' )
+					'post_type'     => 'quiz',
+					'post_status'   => $quiz->get_status() ? $quiz->get_status() : 'publish',
+					'post_author'   => get_current_user_id(),
+					'post_title'    => $quiz->get_name() ? $quiz->get_name() : __( 'Quiz', 'masteriyo' ),
+					'post_content'  => $quiz->get_description(),
+					'post_excerpt'  => $quiz->get_short_description(),
+					'post_parent'   => $quiz->get_parent_id(),
+					'ping_status'   => 'closed',
+					'menu_order'    => $quiz->get_menu_order(),
+					'post_date'     => $quiz->get_date_created( 'edit' ),
+					'post_date_gmt' => $quiz->get_date_created( 'edit' ),
+					'post_name'     => $quiz->get_slug( 'edit' )
 				),
 				$quiz
 			)
@@ -95,6 +97,8 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			'date_created'      => $quiz_post->post_date_gmt,
 			'date_modified'     => $quiz_post->post_modified_gmt,
 			'status'            => $quiz_post->post_status,
+			'parent_id'         => $quiz_post->post_parent,
+			'menu_order'        => $quiz_post->menu_order,
 			'description'       => $quiz_post->post_content,
 			'short_description' => $quiz_post->post_excerpt,
 		) );
@@ -122,6 +126,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			'description',
 			'short_description',
 			'name',
+			'parent_id',
 			'status',
 			'date_created',
 			'date_modified',
@@ -131,12 +136,13 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 		// Only update the post when the post data changes.
 		if ( array_intersect( $post_data_keys, array_keys( $changes ) ) ) {
 			$post_data = array(
-				'post_content'   => $quiz->get_description( 'edit' ),
-				'post_excerpt'   => $quiz->get_short_description( 'edit' ),
-				'post_title'     => $quiz->get_name( 'edit' ),
-				'post_status'    => $quiz->get_status( 'edit' ) ? $quiz->get_status( 'edit' ) : 'publish',
-				'post_name'      => $quiz->get_slug( 'edit' ),
-				'post_type'      => 'quiz',
+				'post_content' => $quiz->get_description( 'edit' ),
+				'post_excerpt' => $quiz->get_short_description( 'edit' ),
+				'post_title'   => $quiz->get_name( 'edit' ),
+				'post_status'  => $quiz->get_status( 'edit' ) ? $quiz->get_status( 'edit' ) : 'publish',
+				'post_name'    => $quiz->get_slug( 'edit' ),
+				'post_parent'  => $quiz->get_parent_id(),
+				'post_type'    => 'quiz',
 			);
 
 			/**

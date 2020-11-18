@@ -58,12 +58,13 @@ class Section extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'title'         => '',
+		'name'          => '',
 		'description'   => '',
 		'menu_order'    => 0,
 		'parent_id'     => 0,
 		'date_created'  => null,
 		'date_modified' => null,
+		'children'      => array(),
 		'status'        => false,
 	);
 
@@ -90,7 +91,7 @@ class Section extends Model {
 	 * @return array of IDs
 	 */
 	public function get_children() {
-		return array();
+		return get_children( $this->get_id() );
 	}
 
 	/*
@@ -100,7 +101,7 @@ class Section extends Model {
 	*/
 
 	/**
-	 * Get section title.
+	 * Get section name.
 	 *
 	 * @since  0.1.0
 	 *
@@ -108,8 +109,8 @@ class Section extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_title( $context = 'view' ) {
-		return apply_filters( 'masteriyo_section_title', $this->get_prop( 'title', $context ), $this );
+	public function get_name( $context = 'view' ) {
+		return apply_filters( 'masteriyo_section_name', $this->get_prop( 'name', $context ), $this );
 	}
 
 	/**
@@ -197,14 +198,14 @@ class Section extends Model {
 	*/
 
 	/**
-	 * Set section title.
+	 * Set section name.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $title section title.
+	 * @param string $name section name.
 	 */
-	public function set_title( $title ) {
-		$this->set_prop( 'title', $title );
+	public function set_name( $name ) {
+		$this->set_prop( 'name', $name );
 	}
 
 	/**
@@ -245,10 +246,10 @@ class Section extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $parent Parent id.
+	 * @param int $parent Parent id.
 	 */
 	public function set_parent_id( $parent ) {
-		$this->set_prop( 'parent_id', $parent );
+		$this->set_prop( 'parent_id', absint( $parent ) );
 	}
 
 	/**
@@ -256,10 +257,10 @@ class Section extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $menu_order Menu order id.
+	 * @param int $menu_order Menu order id.
 	 */
 	public function set_menu_order( $menu_order ) {
-		$this->set_prop( 'menu_order', $menu_order );
+		$this->set_prop( 'menu_order', absint( $menu_order ) );
 	}
 
 	/**

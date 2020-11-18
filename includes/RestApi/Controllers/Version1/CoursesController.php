@@ -32,6 +32,13 @@ class CoursesController extends CrudController {
 	protected $object_type = 'course';
 
 	/**
+	 * Post type.
+	 *
+	 * @var string
+	 */
+	protected $post_type = 'course';
+
+	/**
 	 * If object is hierarchical.
 	 *
 	 * @var bool

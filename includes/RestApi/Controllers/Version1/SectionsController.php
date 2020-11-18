@@ -165,6 +165,7 @@ class SectionsController extends CrudController {
 		$data     = $this->add_additional_fields_to_object( $data, $request );
 		$data     = $this->filter_response_by_context( $data, $context );
 		$response = rest_ensure_response( $data );
+		$response->add_links( $this->prepare_links( $object, $request ) );
 
 		/**
 		 * Filter the data for a response.
@@ -176,7 +177,7 @@ class SectionsController extends CrudController {
 		 * @param WC_Data          $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
-		return apply_filters( "masteriyo_rest_prepare_{$this->post_type}_object", $response, $object, $request );
+		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
 	}
 
 	/**
@@ -191,7 +192,9 @@ class SectionsController extends CrudController {
 	protected function get_section_data( $section, $context = 'view' ) {
 		$data = array(
 			'id'          => $section->get_id(),
-			'title'       => $section->get_title( $context ),
+			'name'        => $section->get_name( $context ),
+			'menu_order'  => $section->get_menu_order( $context ),
+			'parent_id'   => $section->get_parent_id( $context ),
 			'description' => 'view' === $context ? wpautop( do_shortcode( $section->get_description() ) ) : $section->get_description( $context ),
 		);
 
@@ -234,8 +237,8 @@ class SectionsController extends CrudController {
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'title'             => array(
-					'description' => __( 'Section title.', 'masteriyo' ),
+				'name'             => array(
+					'description' => __( 'Section name.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -375,8 +378,8 @@ class SectionsController extends CrudController {
 		}
 
 		// Post title.
-		if ( isset( $request['title'] ) ) {
-			$section->set_title( wp_filter_post_kses( $request['title'] ) );
+		if ( isset( $request['name'] ) ) {
+			$section->set_name( wp_filter_post_kses( $request['name'] ) );
 		}
 
 		// Post content.

@@ -47,12 +47,18 @@ class QuestionsController extends CrudController {
 	protected $hierarchical = true;
 
 	/**
-	 * Get question types.
+	 * Question types.
 	 *
-	 * @return void
+	 * @var array
 	 */
 	protected $types = array(
-		'true-false'
+		'true-false',
+		'single-choice',
+		'multiple-choice',
+		'fill-blanks',
+		'short-answer',
+		'image-matching',
+		'sortable',
 	);
 
 	/**
@@ -71,7 +77,7 @@ class QuestionsController extends CrudController {
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_items' ),
 					'permission_callback' => array( $this, 'get_items_permissions_check' ),
-					'args'                => $this->get_collection_params()
+					'args'                => $this->get_collection_params(),
 				),
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
@@ -180,7 +186,7 @@ class QuestionsController extends CrudController {
 			$question->set_id( $id );
 			$question_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
 			$question_repo->read( $question );
-		} catch( \Exception $e ){
+		} catch ( \Exception $e ) {
 			return false;
 		}
 
@@ -193,7 +199,7 @@ class QuestionsController extends CrudController {
 	 *
 	 * @since  0.1.0
 	 *
-	 * @param  Model         $object  Model object.
+	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -213,7 +219,7 @@ class QuestionsController extends CrudController {
 		 * The dynamic portion of the hook name, $this->post_type,
 		 * refers to object type being prepared for the response.
 		 *
-	 	 * @since 0.1.0
+		 * @since 0.1.0
 		 *
 		 * @param WP_REST_Response $response The response object.
 		 * @param WC_Data          $object   Object data.
@@ -228,8 +234,8 @@ class QuestionsController extends CrudController {
 	 * @since 0.1.0
 	 *
 	 * @param Question $question Question instance.
-	 * @param string     $context Request context.
-	 *                            Options: 'view' and 'edit'.
+	 * @param string   $context Request context.
+	 *                          Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
@@ -260,20 +266,23 @@ class QuestionsController extends CrudController {
 	 * @since 0.1.0
 	 *
 	 * @param Question $question Question object.
-	 * @param string $taxonomy Taxonomy slug.
+	 * @param string   $taxonomy Taxonomy slug.
 	 *
 	 * @return array
 	 */
-	protected function get_taxonomy_terms ( $question, $taxonomy = 'cat' ) {
+	protected function get_taxonomy_terms( $question, $taxonomy = 'cat' ) {
 		$terms = Utils::get_object_terms( $question->get_id(), 'question_' . $taxonomy );
 
-		$terms =  array_map( function( $term ) {
-			return array(
-				'id' => $term->term_id,
-				'name' => $term->name,
-				'slug' => $term->slug
-			);
-		}, $terms );
+		$terms = array_map(
+			function( $term ) {
+				return array(
+					'id'   => $term->term_id,
+					'name' => $term->name,
+					'slug' => $term->slug,
+				);
+			},
+			$terms
+		);
 
 		return $terms;
 	}
@@ -350,75 +359,90 @@ class QuestionsController extends CrudController {
 			'title'      => $this->post_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'                    => array(
+				'id'                => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name'                  => array(
+				'name'              => array(
 					'description' => __( 'Question name.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'slug'                  => array(
+				'slug'              => array(
 					'description' => __( 'Question slug.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'permalink'             => array(
+				'permalink'         => array(
 					'description' => __( 'Question URL.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_created'          => array(
+				'date_created'      => array(
 					'description' => __( "The date the question was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_created_gmt'      => array(
+				'date_created_gmt'  => array(
 					'description' => __( 'The date the question was created, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_modified'         => array(
+				'date_modified'     => array(
 					'description' => __( "The date the question was last modified, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_modified_gmt'     => array(
+				'date_modified_gmt' => array(
 					'description' => __( 'The date the question was last modified, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'status'                => array(
+				'status'            => array(
 					'description' => __( 'Question status (post status).', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'publish',
 					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'description'           => array(
+				'description'       => array(
 					'description' => __( 'Question description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'short_description'     => array(
+				'short_description' => array(
 					'description' => __( 'Question short description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'type'     => array(
+				'type'              => array(
 					'description' => __( 'Question type.', 'masteriyo' ),
 					'type'        => 'string',
 					'enum'        => apply_filters( 'masteriyo_question_types', $this->get_types() ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'meta_data'             => array(
+				'answer_required'   => array(
+					'description' => __( 'Whether the question is required or not.', 'masteriyo' ),
+					'type'        => 'boolean',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'points'            => array(
+					'description' => __( 'Points for the correct answer.', 'masteriyo' ),
+					'type'        => 'number',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'randomize'         => array(
+					'description' => __( 'Whether to the answers.', 'masteriyo' ),
+					'type'        => 'boolean',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'meta_data'         => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -444,7 +468,7 @@ class QuestionsController extends CrudController {
 						),
 					),
 				),
-			)
+			),
 		);
 
 		return $schema;
@@ -461,7 +485,7 @@ class QuestionsController extends CrudController {
 	public function create_item_permissions_check( $request ) {
 		// TODO Uncomment this and implement it.
 		// if ( ! wc_rest_check_post_permissions( $this->post_type, 'create' ) ) {
-		// 	return new WP_Error( 'masteriyo_rest_cannot_create', __( 'Sorry, you are not allowed to create resources.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
+		// return new WP_Error( 'masteriyo_rest_cannot_create', __( 'Sorry, you are not allowed to create resources.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
 		// }
 
 		return true;
@@ -509,8 +533,8 @@ class QuestionsController extends CrudController {
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		global $masteriyo_container;
 
-		$id   = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$type = isset( $request['type'] ) ? $request['type'] : 'true-false';
+		$id       = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
+		$type     = isset( $request['type'] ) ? $request['type'] : 'true-false';
 		$question = $masteriyo_container->get( $type );
 
 		if ( 0 !== $id ) {
@@ -605,8 +629,8 @@ class QuestionsController extends CrudController {
 	 * @since 0.1.0
 	 *
 	 * @param Question $question  Question instance.
-	 * @param array      $terms    Terms data.
-	 * @param string     $taxonomy Taxonomy name.
+	 * @param array    $terms    Terms data.
+	 * @param string   $taxonomy Taxonomy name.
 	 *
 	 * @return Question
 	 */
@@ -617,7 +641,7 @@ class QuestionsController extends CrudController {
 			$question->set_category_ids( $term_ids );
 		} elseif ( 'tag' === $taxonomy ) {
 			$question->set_tag_ids( $term_ids );
-		} elseif( 'difficulty' === $taxonomy ) {
+		} elseif ( 'difficulty' === $taxonomy ) {
 			$question->set_difficulty_ids( $term_ids );
 		}
 

@@ -139,12 +139,33 @@ $masteriyo_container->add(
 $masteriyo_container->add( 'true-false', \ThemeGrill\Masteriyo\Models\Question\TrueFalse::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
 
+$masteriyo_container->add( 'single-choice', \ThemeGrill\Masteriyo\Models\Question\SingleChoice::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
+
+$masteriyo_container->add( 'multiple-choice', \ThemeGrill\Masteriyo\Models\Question\MultipleChoice::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
+
+$masteriyo_container->add( 'fill-blanks', \ThemeGrill\Masteriyo\Models\Question\FillBlanks::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
+
+$masteriyo_container->add( 'short-answer', \ThemeGrill\Masteriyo\Models\Question\ShortAnswer::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
+
+$masteriyo_container->add( 'image-matching', \ThemeGrill\Masteriyo\Models\Question\ImageMatching::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
+
+$masteriyo_container->add( 'sortable', \ThemeGrill\Masteriyo\Models\Question\Sortable::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
+
 $masteriyo_container->add( 'question', \ThemeGrill\Masteriyo\Models\Question\Question::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
 
-$masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class, function() {
-	return apply_filters( 'masteriyo_question_repository', new QuestionRepository );
-} );
+$masteriyo_container->add(
+	\ThemeGrill\Masteriyo\Repository\QuestionRepository::class,
+	function() {
+		return apply_filters( 'masteriyo_question_repository', new QuestionRepository() );
+	}
+);
 
 $_GLOBALS['masteriyo_container'] = $masteriyo_container;
 

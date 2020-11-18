@@ -30,6 +30,12 @@ class LessonsController extends CrudController {
 	 */
 	protected $object_type = 'lesson';
 
+	/** Post type.
+	 *
+	 * @var string
+	 */
+	protected $post_type = 'lesson';
+
 	/**
 	 * If object is hierarchical.
 	 *
@@ -212,7 +218,9 @@ class LessonsController extends CrudController {
 			'featured'            => $lesson->get_featured( $context ),
 			'description'         => 'view' === $context ? wpautop( do_shortcode( $lesson->get_description() ) ) : $lesson->get_description( $context ),
 			'short_description'   => 'view' === $context ? apply_filters( 'masteriyo_short_description', $lesson->get_short_description() ) : $lesson->get_short_description( $context ),
+			'menu_order'          => $lesson->get_menu_order( $context ),
 			'reviews_allowed'     => $lesson->get_reviews_allowed( $context ),
+			'parent_id'           => $lesson->get_parent_id( $context ),
 			'categories'          => $this->get_taxonomy_terms( $lesson ),
 			'tags'                => $this->get_taxonomy_terms( $lesson, 'tag' ),
 			'video_source'        => $lesson->get_video_source( $context ),

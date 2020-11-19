@@ -100,7 +100,12 @@ abstract class Question extends Model implements QuestionInterface {
 	 * @return bool
 	 */
 	public function check_answer( $chosen_answer, $context = 'edit' ) {
-		return false;
+		// translators: %s: Class method name.
+		return new \WP_Error(
+			'invalid-method',
+			sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'masteriyo' ), __METHOD__ ),
+			array( 'status' => 405 )
+		);
 	}
 
 	/*

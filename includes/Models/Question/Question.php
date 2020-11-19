@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 0.1.0
  */
-abstract class Question extends Model implements QuestionInterface {
+abstract class Question extends Model {
 
 	/**
 	 * This is the name of this object type.
@@ -78,6 +78,7 @@ abstract class Question extends Model implements QuestionInterface {
 		'positive_feedback' => '',
 		'negative_feedback' => '',
 		'feedback'          => '',
+		'menu_order'        => 0,
 	);
 
 	/**
@@ -89,23 +90,6 @@ abstract class Question extends Model implements QuestionInterface {
 	 */
 	public function __construct( QuestionRepository $question_repository ) {
 		$this->repository = $question_repository;
-	}
-
-	/**
-	 * Check whether the chosen answer is correct or not.
-	 *
-	 * @param mixed  $chosen_answer Answer chosen by user.
-	 * @param string $context Options: 'edit', 'view'.
-	 *
-	 * @return bool
-	 */
-	public function check_answer( $chosen_answer, $context = 'edit' ) {
-		// translators: %s: Class method name.
-		return new \WP_Error(
-			'invalid-method',
-			sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'masteriyo' ), __METHOD__ ),
-			array( 'status' => 405 )
-		);
 	}
 
 	/*
@@ -147,7 +131,7 @@ abstract class Question extends Model implements QuestionInterface {
 
 	/*
 	|--------------------------------------------------------------------------
-	| CRUD Getters and Setters
+	| CRUD Getters
 	|--------------------------------------------------------------------------
 	*/
 
@@ -335,6 +319,25 @@ abstract class Question extends Model implements QuestionInterface {
 	}
 
 	/**
+	 * Returns question menu order.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string price
+	 */
+	public function get_menu_order( $context = 'view' ) {
+		return $this->get_prop( 'menu_order', $context );
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| CRUD Setters
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
 	 * Set question name.
 	 *
 	 * @since 0.1.0
@@ -486,5 +489,16 @@ abstract class Question extends Model implements QuestionInterface {
 	 */
 	public function set_feedback( $feedback ) {
 		$this->set_prop( 'feedback', $feedback );
+	}
+
+	/**
+	 * Set the question menu order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $menu_order Menu order id.
+	 */
+	public function set_menu_order( $menu_order ) {
+		$this->set_prop( 'menu_order', $menu_order );
 	}
 }

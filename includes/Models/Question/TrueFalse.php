@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 0.1.0
  */
-class TrueFalse extends Question {
+class TrueFalse extends Question implements QuestionInterface {
 	/**
 	 * Question type.
 	 *

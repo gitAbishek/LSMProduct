@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 0.1.0
  */
-class MultipleChoice extends Question {
+class MultipleChoice extends Question implements QuestionInterface {
 	/**
 	 * Question type.
 	 *

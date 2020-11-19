@@ -52,16 +52,17 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			apply_filters(
 				'masteriyo_new_question_data',
 				array(
-					'post_type'      => 'question',
-					'post_status'    => $question->get_status() ? $question->get_status() : 'publish',
-					'post_author'    => get_current_user_id(),
-					'post_title'     => $question->get_name() ? $question->get_name() : __( 'Question', 'masteriyo' ),
-					'post_content'   => serialize( $question->get_answers() ),
-					'post_excerpt'   => $question->get_description(),
-					'ping_status'    => 'closed',
-					'post_date'      => $question->get_date_created( 'edit' ),
-					'post_date_gmt'  => $question->get_date_created( 'edit' ),
-					'post_name'      => $question->get_slug( 'edit' )
+					'post_type'     => 'question',
+					'post_status'   => $question->get_status() ? $question->get_status() : 'publish',
+					'post_author'   => get_current_user_id(),
+					'post_title'    => $question->get_name() ? $question->get_name() : __( 'Question', 'masteriyo' ),
+					'post_content'  => serialize( $question->get_answers() ),
+					'post_excerpt'  => $question->get_description(),
+					'ping_status'   => 'closed',
+					'menu_order'    => $question->get_menu_order(),
+					'post_date'     => $question->get_date_created( 'edit' ),
+					'post_date_gmt' => $question->get_date_created( 'edit' ),
+					'post_name'     => $question->get_slug( 'edit' ),
 				),
 				$question
 			)
@@ -95,15 +96,18 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			throw new \Exception( __( 'Invalid question.', 'masteriyo' ) );
 		}
 
-		$question->set_props( array(
-			'name'          => $question_post->post_title,
-			'slug'          => $question_post->post_name,
-			'date_created'  => $question_post->post_date_gmt,
-			'date_modified' => $question_post->post_modified_gmt,
-			'status'        => $question_post->post_status,
-			'answers'       => maybe_unserialize( $question_post->post_content ),
-			'description'   => $question_post->post_excerpt,
-		) );
+		$question->set_props(
+			array(
+				'name'          => $question_post->post_title,
+				'slug'          => $question_post->post_name,
+				'date_created'  => $question_post->post_date_gmt,
+				'date_modified' => $question_post->post_modified_gmt,
+				'status'        => $question_post->post_status,
+				'answers'       => maybe_unserialize( $question_post->post_content ),
+				'description'   => $question_post->post_excerpt,
+				'menu_order'    => $question_post->menu_order,
+			)
+		);
 
 		$this->read_question_data( $question );
 		$this->read_extra_data( $question );
@@ -131,18 +135,20 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			'status',
 			'date_created',
 			'date_modified',
-			'slug'
+			'slug',
+			'menu_order',
 		);
 
 		// Only update the post when the post data changes.
 		if ( array_intersect( $post_data_keys, array_keys( $changes ) ) ) {
 			$post_data = array(
-				'post_content'   => $question->get_answers( 'edit' ),
-				'post_excerpt'   => $question->get_description( 'edit' ),
-				'post_title'     => $question->get_name( 'edit' ),
-				'post_status'    => $question->get_status( 'edit' ) ? $question->get_status( 'edit' ) : 'publish',
-				'post_name'      => $question->get_slug( 'edit' ),
-				'post_type'      => 'question',
+				'post_content' => $question->get_answers( 'edit' ),
+				'post_excerpt' => $question->get_description( 'edit' ),
+				'post_title'   => $question->get_name( 'edit' ),
+				'post_status'  => $question->get_status( 'edit' ) ? $question->get_status( 'edit' ) : 'publish',
+				'menu_order'   => $question->get_menu_order( 'edit' ),
+				'post_name'    => $question->get_slug( 'edit' ),
+				'post_type'    => 'question',
 			);
 
 			/**
@@ -188,15 +194,18 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	 * @since 0.1.0
 	 *
 	 * @param Model $question Question object.
-	 * @param array $args	Array of args to pass.alert-danger
+	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$question, $args = array() ) {
 		$id          = $question->get_id();
 		$object_type = $question->get_object_type();
 
-		$args = array_merge( array(
-			'force_delete' => false,
-		), $args );
+		$args = array_merge(
+			array(
+				'force_delete' => false,
+			),
+			$args
+		);
 
 		if ( ! $id ) {
 			return;
@@ -221,23 +230,23 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	 * @since 0.1.0
 	 *
 	 * @param Model $model Model object.
-	 * @param bool       $force Force update. Used during create.
+	 * @param bool  $force Force update. Used during create.
 	 */
 	protected function update_terms( &$model, $force = false ) {
-		$changes     = $model->get_changes();
+		$changes = $model->get_changes();
 
 		if ( $force || array_key_exists( 'category_ids', $changes ) ) {
 			$categories = $model->get_category_ids( 'edit' );
 
-			if ( empty( $categories ) && get_option( "default_question_cat", 0 ) ) {
-				$categories = array( get_option( "default_question_cat", 0 ) );
+			if ( empty( $categories ) && get_option( 'default_question_cat', 0 ) ) {
+				$categories = array( get_option( 'default_question_cat', 0 ) );
 			}
 
-			wp_set_post_terms( $model->get_id(), $categories, "question_cat", false );
+			wp_set_post_terms( $model->get_id(), $categories, 'question_cat', false );
 		}
 
 		if ( $force || array_key_exists( 'tag_ids', $changes ) ) {
-			wp_set_post_terms( $model->get_id(), $model->get_tag_ids( 'edit' ), "question_tag", false );
+			wp_set_post_terms( $model->get_id(), $model->get_tag_ids( 'edit' ), 'question_tag', false );
 		}
 	}
 
@@ -249,16 +258,20 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	 * @param Question $question question object.
 	 */
 	protected function read_question_data( &$question ) {
-		$id              = $question->get_id();
-		$meta_values     = $this->read_meta( $question );
-		$set_props       = array();
+		$id          = $question->get_id();
+		$meta_values = $this->read_meta( $question );
+		$set_props   = array();
 
-		$meta_values = array_reduce( $meta_values, function( $result, $meta_value ) {
-			$result[ $meta_value->key ][] = $meta_value->value;
-			return $result;
-		}, array() );
+		$meta_values = array_reduce(
+			$meta_values,
+			function( $result, $meta_value ) {
+				$result[ $meta_value->key ][] = $meta_value->value;
+				return $result;
+			},
+			array()
+		);
 
-		foreach( $this->internal_meta_keys as $meta_key => $prop ) {
+		foreach ( $this->internal_meta_keys as $meta_key => $prop ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
 			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
 		}

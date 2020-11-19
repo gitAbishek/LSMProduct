@@ -311,7 +311,7 @@ class QuestionsController extends CrudController {
 			'status'            => $question->get_status( $context ),
 			'description'       => 'view' === $context ? apply_filters( 'masteriyo_description', $question->get_description() ) : $question->get_description( $context ),
 			'type'              => $question->get_type( $context ),
-			'answers'           => 'view' === $context ? maybe_unserialize( $question->get_answers() ) : $question->get_answers( $context ),
+			'answers'           => 'view' === $context ? $this->process_answers( maybe_unserialize( $question->get_answers() ), $question ) : $question->get_answers( $context ),
 			'answer_required'   => $question->get_answer_required( $context ),
 			'randomize'         => $question->get_randomize( $context ),
 			'points'            => $question->get_points( $context ),
@@ -321,6 +321,20 @@ class QuestionsController extends CrudController {
 		);
 
 		return $data;
+	}
+
+	/**
+	 * Process answers based on user roles.
+	 *
+	 * @param mixed    $answers Available answer(s).
+	 * @param Question $question Question object.
+	 */
+	protected function process_answers( $answers, $question ) {
+		switch ( $question->get_type( 'edit' ) ) {
+			// TODO: Filter the correct answers data according to the user role.
+		}
+
+		return $answers;
 	}
 
 	/**
@@ -472,6 +486,11 @@ class QuestionsController extends CrudController {
 					'type'        => 'string',
 					'default'     => 'publish',
 					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
+					'context'     => array( 'view', 'edit' ),
+				),
+				'menu_order'        => array(
+					'description' => __( 'Menu order, used to custom sort questions.', 'masteriyo' ),
+					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'description'       => array(
@@ -634,6 +653,11 @@ class QuestionsController extends CrudController {
 		// Post slug.
 		if ( isset( $request['slug'] ) ) {
 			$question->set_slug( $request['slug'] );
+		}
+
+		// Menu order.
+		if ( isset( $request['menu_order'] ) ) {
+			$course->set_menu_order( $request['menu_order'] );
 		}
 
 		// Post type.

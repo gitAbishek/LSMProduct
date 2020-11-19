@@ -25,6 +25,8 @@ class RegisterPostTypes {
 		'lessons'  => 'ThemeGrill\Masteriyo\PostType\Lessons',
 		'sections' => 'ThemeGrill\Masteriyo\PostType\Sections',
 		'quizes'   => 'ThemeGrill\Masteriyo\PostType\Quizes',
+		'question' => 'ThemeGrill\Masteriyo\PostType\Question',
+
 	);
 
 	/**

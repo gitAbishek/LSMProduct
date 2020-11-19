@@ -75,10 +75,14 @@ class RestApi {
 		$namespace = '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1';
 
 		return array(
+			'courses'             => "{$namespace}\\CoursesController",
 			'course-categories'   => "{$namespace}\\CourseCategoriesController",
 			'course-tags'         => "{$namespace}\\CourseTagsController",
 			'course-difficulties' => "{$namespace}\\CourseDifficultiesController",
 			'course-children'     => "{$namespace}\\CourseChildrenController",
+			'lessons'             => "{$namespace}\\LessonsController",
+			'quizes'              => "{$namespace}\\QuizesController",
+			'sections'            => "{$namespace}\\SectionsController",
 			'section-children'    => "{$namespace}\\SectionChildrenController"
 		);
 	}

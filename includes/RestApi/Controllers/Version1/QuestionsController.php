@@ -38,6 +38,16 @@ class QuestionsController extends CrudController {
 	protected $post_type = 'question';
 
 	/**
+	 * Object type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $object_type = 'question';
+
+
+	/**
 	 * If object is hierarchical.
 	 *
 	 * @since 0.1.0

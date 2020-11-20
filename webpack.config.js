@@ -97,7 +97,7 @@ const config = {
 		alias: {
 			Components: path.resolve(process.cwd(), 'assets/js/src/components'),
 			Config: path.resolve(process.cwd(), 'assets/js/src/config'),
-			Icons: path.resolve(process.cwd(), 'assets/js/src/assets/icons'),
+			Icons: path.resolve(process.cwd(), 'assets/js/src/components/icons'),
 			Layouts: path.resolve(process.cwd(), 'assets/js/src/screens/layouts'),
 		},
 	},

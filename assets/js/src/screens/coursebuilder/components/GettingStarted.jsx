@@ -40,7 +40,7 @@ const ActionButtons = styled(FlexRow)`
 	margin-right: -8px;
 	margin-bottom: ${BaseLine * 3}px;
 
-	Button {
+	${Button} {
 		margin-left: 8px;
 		margin-right: 8px;
 	}

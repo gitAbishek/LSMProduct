@@ -2,7 +2,7 @@ import { React } from '@wordpress/element';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 import FlexRow from 'Components/common/FlexRow';
-import DragHandle from '../DragHandle';
+import DragHandle from '../components/DragHandle';
 import {
 	ActionContainer,
 	ContentContainer,

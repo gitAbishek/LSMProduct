@@ -1,0 +1,207 @@
+<?php
+/**
+ * REST API section children controller
+ *
+ * Handles requests to the sections/children endpoint.
+ *
+ * @author   mi5t4n
+ * @category API
+ * @package Masteriyo\RestApi
+ * @since    0.1.0
+ */
+
+namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * REST API section children controller class.
+ *
+ * @package Masteriyo\RestApi
+ * @extends CrudController
+ */
+class SectionChildrenController extends CrudController {
+
+	/**
+	 * Endpoint namespace.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $namespace = 'masteriyo/v1';
+
+	/**
+	 * Route base.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $rest_base = 'sections/children';
+
+	/**
+	 * Object type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $object_type = 'section_item';
+
+	/**
+	 * Post type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $post_type = 'any';
+
+	/**
+	 * Register the routes for terms.
+	 *
+	 * @since 0.1.0
+	 */
+	public function register_routes() {
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base,
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_items' ),
+					'permission_callback' => array( $this, 'get_items_permissions_check' ),
+					'args'                => $this->get_collection_params(),
+				),
+				'schema' => array( $this, 'get_public_item_schema' ),
+			)
+		);
+	}
+
+	/**
+	 * Check if a given request has access to read the terms.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function get_items_permissions_check( $request ) {
+		return true;
+
+		// TODO Check permission
+	}
+
+	/**
+	 * Get the query params for collections
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	public function get_collection_params() {
+		$params = parent::get_collection_params();
+
+		$params['context']['default'] = 'view';
+
+		$params['section'] = array(
+			'description'       => __( 'Limit result set to resources assigned to a specific section.', 'masteriyo' ),
+			'type'              => 'integer',
+			'default'           => null,
+			'required'          => true,
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		return $params;
+	}
+
+	/**
+	 * Prepare objects query.
+	 *
+	 * @since  0.1.0
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return array
+	 */
+	protected function prepare_objects_query( $request ) {
+		$args = parent::prepare_objects_query( $request );
+		$args['post_parent'] = $request['section'];
+		return $args;
+	}
+
+	/**
+	 * Get object.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_Post $post Post object.
+	 * @return object Model object or WP_Error object.
+	 */
+	protected function get_object( $post ) {
+		global $masteriyo_container;
+		try {
+			$item = $masteriyo_container->get( $post->post_type );
+			$item->set_id( $post->ID );
+			$item_repo = $masteriyo_container->get( "{$post->post_type}_repository" );
+			$item_repo->read( $item );
+		} catch( \Exception $e ){
+			return false;
+		}
+
+		return $item;
+	}
+
+	/**
+	 * Prepares the object for the REST response.
+	 *
+	 * @since  0.1.0
+	 * @param  Model         $object  Model object.
+	 * @param  WP_REST_Request $request Request object.
+	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
+	 */
+	protected function prepare_object_for_response( $object, $request ) {
+		$context = ! empty( $request['context'] ) ? $request['context'] : 'view';
+		$data    = $this->get_section_items( $object, $context );
+
+		$data     = $this->add_additional_fields_to_object( $data, $request );
+		$data     = $this->filter_response_by_context( $data, $context );
+		$response = rest_ensure_response( $data );
+		$response->add_links( $this->prepare_links( $object, $request ) );
+
+		/**
+		 * Filter the data for a response.
+		 *
+		 * The dynamic portion of the hook name, $this->object_type,
+		 * refers to object type being prepared for the response.
+		 *
+		 * @param WP_REST_Response $response The response object.
+		 * @param WC_Data          $object   Object data.
+		 * @param WP_REST_Request  $request  Request object.
+		 */
+		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
+	}
+
+
+	/**
+	 * Get section data.
+	 *
+	 * @param Model $section Section instance.
+	 * @param string     $context Request context.
+	 *                            Options: 'view' and 'edit'.
+	 *
+	 * @return array
+	 */
+	protected function get_section_items( $section_item, $context = 'view' ) {
+		$data = array(
+			'id'         => $section_item->get_id(),
+			'name'       => $section_item->get_name( $context ),
+			'type'       => $section_item->get_object_type(),
+			'parent_id'  => $section_item->get_parent_id(),
+			'menu_order' => $section_item->get_menu_order(),
+		);
+
+		return $data;
+	}
+}

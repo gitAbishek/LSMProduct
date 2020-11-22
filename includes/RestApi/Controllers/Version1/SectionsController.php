@@ -1,6 +1,10 @@
 <?php
 /**
- * Quiz rest controller.
+ * SectionsController class.
+ *
+ * @since 0.1.0
+ *
+ * @package ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
  */
 
 namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
@@ -9,11 +13,12 @@ defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Utils;
 
-class QuizesController extends CrudController {
+/**
+ * SectionsController class.
+ */
+class SectionsController extends CrudController {
 	/**
 	 * Endpoint namespace.
-	 *
-	 * @since 0.1.0
 	 *
 	 * @var string
 	 */
@@ -22,46 +27,31 @@ class QuizesController extends CrudController {
 	/**
 	 * Route base.
 	 *
-	 * @since 0.1.0
-	 *
 	 * @var string
 	 */
-	protected $rest_base = 'quizes';
-
-	/**
-	 * Object type.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	protected $object_type = 'quiz';
+	protected $rest_base = 'sections';
 
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @var string
+	 */
+	protected $post_type = 'section';
+
+	/**
+	 * Object type.
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'quiz';
+	protected $object_type = 'section';
 
 	/**
 	 * If object is hierarchical.
-	 *
-	 * @since 0.1.0
 	 *
 	 * @var bool
 	 */
 	protected $hierarchical = true;
 
-	/**
-	 * Register routes.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return void
-	 */
 	public function register_routes() {
 		register_rest_route(
 			$this->namespace,
@@ -71,7 +61,7 @@ class QuizesController extends CrudController {
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_items' ),
 					'permission_callback' => array( $this, 'get_items_permissions_check' ),
-					'args'                => $this->get_collection_params()
+					'args'                => $this->get_collection_params(),
 				),
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
@@ -117,7 +107,7 @@ class QuizesController extends CrudController {
 					'args'                => array(
 						'force' => array(
 							'default'     => false,
-							'description' => __( 'Whether to bypass trash and force deletion.', 'woocommerce' ),
+							'description' => __( 'Whether to bypass trash and force deletion.', 'masteriyo' ),
 							'type'        => 'boolean',
 						),
 					),
@@ -135,36 +125,11 @@ class QuizesController extends CrudController {
 	 * @return array
 	 */
 	public function get_collection_params() {
-		$params = parent::get_collection_params();
-
-		$params['slug'] = array(
-			'description'       => __( 'Limit result set to quizes with a specific slug.', 'masteriyo' ),
-			'type'              => 'string',
-			'validate_callback' => 'rest_validate_request_arg',
-		);
-		$params['status'] = array(
-			'default'           => 'any',
-			'description'       => __( 'Limit result set to quizes assigned a specific status.', 'masteriyo' ),
-			'type'              => 'string',
-			'enum'              => array_merge( array( 'any', 'future' ), array_keys( get_post_statuses() ) ),
-			'sanitize_callback' => 'sanitize_key',
-			'validate_callback' => 'rest_validate_request_arg',
-		);
-		$params['type'] = array(
-			'description'       => __( 'Limit result set to quizes assigned a specific type.', 'masteriyo' ),
-			'type'              => 'string',
-			'enum'              => array_keys( array( 'hello' => 'hello' ) ),
-			'sanitize_callback' => 'sanitize_key',
-			'validate_callback' => 'rest_validate_request_arg',
-		);
-
-		return $params;
+		return parent::get_collection_params();
 	}
 
 	/**
 	 * Get object.
-	 *
-	 * @since 0.1.0
 	 *
 	 * @param  int|WP_Post $id Object ID.
 	 * @return object Model object or WP_Error object.
@@ -172,32 +137,30 @@ class QuizesController extends CrudController {
 	protected function get_object( $id ) {
 		global $masteriyo_container;
 		try {
-			$id     = $id instanceof \WP_Post ? $id->ID : $id;
-			$quiz = $masteriyo_container->get( 'quiz' );
-			$quiz->set_id( $id );
-			$quiz_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\QuizRepository::class );
-			$quiz_repo->read( $quiz );
-		} catch( \Exception $e ){
+			$id      = $id instanceof \WP_Post ? $id->ID : $id;
+			$section = $masteriyo_container->get( 'section' );
+			$section->set_id( $id );
+			$section_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\SectionRepository::class );
+			$section_repo->read( $section );
+		} catch ( \Exception $e ) {
 			return false;
 		}
 
-		return $quiz;
+		return $section;
 	}
 
 
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
-	 *
-	 * @param  Model         $object  Model object.
+	 * @since  3.0.0
+	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
-	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
 		$context = ! empty( $request['context'] ) ? $request['context'] : 'view';
-		$data    = $this->get_quiz_data( $object, $context );
+		$data    = $this->get_section_data( $object, $context );
 
 		$data     = $this->add_additional_fields_to_object( $data, $request );
 		$data     = $this->filter_response_by_context( $data, $context );
@@ -207,10 +170,8 @@ class QuizesController extends CrudController {
 		/**
 		 * Filter the data for a response.
 		 *
-		 * The dynamic portion of the hook name, $this->object_type,
+		 * The dynamic portion of the hook name, $this->post_type,
 		 * refers to object type being prepared for the response.
-		 *
-	 	 * @since 0.1.0
 		 *
 		 * @param WP_REST_Response $response The response object.
 		 * @param WC_Data          $object   Object data.
@@ -220,54 +181,24 @@ class QuizesController extends CrudController {
 	}
 
 	/**
-	 * Get quiz data.
+	 * Get section data.
 	 *
-	 * @since 0.1.0
-	 *
-	 * @param Quiz $quiz Quiz instance.
-	 * @param string     $context Request context.
-	 *                            Options: 'view' and 'edit'.
+	 * @param Section $section section instance.
+	 * @param string  $context Request context.
+	 *                         Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
-	protected function get_quiz_data( $quiz, $context = 'view' ) {
+	protected function get_section_data( $section, $context = 'view' ) {
 		$data = array(
-			'id'                => $quiz->get_id(),
-			'name'              => $quiz->get_name( $context ),
-			'slug'              => $quiz->get_slug( $context ),
-			'permalink'         => $quiz->get_permalink(),
-			'parent_id'         => $quiz->get_parent_id( $context ),
-			'menu_order'        => $quiz->get_menu_order( $context ),
-			'status'            => $quiz->get_status( $context ),
-			'description'       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
-			'short_description' => 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description( $context ),
+			'id'          => $section->get_id(),
+			'name'        => $section->get_name( $context ),
+			'menu_order'  => $section->get_menu_order( $context ),
+			'parent_id'   => $section->get_parent_id( $context ),
+			'description' => 'view' === $context ? wpautop( do_shortcode( $section->get_description() ) ) : $section->get_description( $context ),
 		);
 
 		return $data;
-	}
-
-	/**
-	 * Get taxonomy terms.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Quiz $quiz Quiz object.
-	 * @param string $taxonomy Taxonomy slug.
-	 *
-	 * @return array
-	 */
-	protected function get_taxonomy_terms ( $quiz, $taxonomy = 'cat' ) {
-		$terms = Utils::get_object_terms( $quiz->get_id(), 'quiz_' . $taxonomy );
-
-		$terms =  array_map( function( $term ) {
-			return array(
-				'id' => $term->term_id,
-				'name' => $term->name,
-				'slug' => $term->slug
-			);
-		}, $terms );
-
-		return $terms;
 	}
 
 	/**
@@ -275,62 +206,20 @@ class QuizesController extends CrudController {
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
-	 * @since  0.1.0
-	 *
+	 * @since  3.0.0
 	 * @return array
 	 */
 	protected function prepare_objects_query( $request ) {
 		$args = parent::prepare_objects_query( $request );
 
 		// Set post_status.
-		$args['post_status'] = $request['status'];
-
-		// Taxonomy query to filter quizes by type, category,
-		// tag, shipping class, and attribute.
-		$tax_query = array();
-
-		// Map between taxonomy name and arg's key.
-		$taxonomies = array(
-			'quiz_cat'        => 'category',
-			'quiz_tag'        => 'tag',
-			'quiz_difficulty' => 'difficulty',
-		);
-
-		// Set tax_query for each passed arg.
-		foreach ( $taxonomies as $taxonomy => $key ) {
-			if ( ! empty( $request[ $key ] ) ) {
-				$tax_query[] = array(
-					'taxonomy' => $taxonomy,
-					'field'    => 'term_id',
-					'terms'    => $request[ $key ],
-				);
-			}
-		}
-
-		// Filter quiz type by slug.
-		if ( ! empty( $request['type'] ) ) {
-			$tax_query[] = array(
-				'taxonomy' => 'quiz_type',
-				'field'    => 'slug',
-				'terms'    => $request['type'],
-			);
-		}
-
-		// Filter featured.
-		if ( is_bool( $request['featured'] ) ) {
-			$args['tax_query'][] = array(
-				'taxonomy' => 'quiz_visibility',
-				'field'    => 'name',
-				'terms'    => 'featured',
-				'operator' => true === $request['featured'] ? 'IN' : 'NOT IN',
-			);
-		}
+		$args['post_status'] = 'publish';
 
 		return $args;
 	}
 
 	/**
-	 * Get the quizes'schema, conforming to JSON Schema.
+	 * Get the sections'schema, conforming to JSON Schema.
 	 *
 	 * @since 0.1.0
 	 *
@@ -342,69 +231,55 @@ class QuizesController extends CrudController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'                    => array(
+				'id'                => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name'                  => array(
-					'description' => __( 'Quiz name.', 'masteriyo' ),
+				'name'             => array(
+					'description' => __( 'Section name.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'slug'                  => array(
-					'description' => __( 'Quiz slug.', 'masteriyo' ),
+				'date_created'      => array(
+					'description' => __( "The date the section was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'permalink'             => array(
-					'description' => __( 'Quiz URL.', 'masteriyo' ),
-					'type'        => 'string',
-					'format'      => 'uri',
-					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
-				),
-				'date_created'          => array(
-					'description' => __( "The date the quiz was created, in the site's timezone.", 'masteriyo' ),
+				'date_created_gmt'  => array(
+					'description' => __( 'The date the section was created, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_created_gmt'      => array(
-					'description' => __( 'The date the quiz was created, as GMT.', 'masteriyo' ),
-					'type'        => 'string',
-					'context'     => array( 'view', 'edit' ),
-				),
-				'date_modified'         => array(
-					'description' => __( "The date the quiz was last modified, in the site's timezone.", 'masteriyo' ),
+				'date_modified'     => array(
+					'description' => __( "The date the section was last modified, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_modified_gmt'     => array(
-					'description' => __( 'The date the quiz was last modified, as GMT.', 'masteriyo' ),
+				'date_modified_gmt' => array(
+					'description' => __( 'The date the section was last modified, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'status'                => array(
-					'description' => __( 'Quiz status (post status).', 'masteriyo' ),
-					'type'        => 'string',
-					'default'     => 'publish',
-					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
-					'context'     => array( 'view', 'edit' ),
-				),
-				'description'           => array(
-					'description' => __( 'Quiz description.', 'masteriyo' ),
+				'description'       => array(
+					'description' => __( 'Section description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'short_description'     => array(
-					'description' => __( 'Quiz short description.', 'masteriyo' ),
-					'type'        => 'string',
+				'parent_id'         => array(
+					'description' => __( 'Section parent ID.', 'masteriyo' ),
+					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'meta_data'             => array(
+				'menu_order'        => array(
+					'description' => __( 'Menu order, used to custom sort sections.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'meta_data'         => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -430,7 +305,7 @@ class QuizesController extends CrudController {
 						),
 					),
 				),
-			)
+			),
 		);
 
 		return $schema;
@@ -446,8 +321,8 @@ class QuizesController extends CrudController {
 	 */
 	public function create_item_permissions_check( $request ) {
 		// TODO Uncomment this and implement it.
-		// if ( ! wc_rest_check_post_permissions( $this->object_type, 'create' ) ) {
-		// 	return new WP_Error( 'masteriyo_rest_cannot_create', __( 'Sorry, you are not allowed to create resources.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
+		// if ( ! wc_rest_check_post_permissions( $this->post_type, 'create' ) ) {
+		// return new WP_Error( 'masteriyo_rest_cannot_create', __( 'Sorry, you are not allowed to create resources.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
 		// }
 
 		return true;
@@ -483,9 +358,7 @@ class QuizesController extends CrudController {
 
 
 	/**
-	 * Prepare a single quiz for create or update.
-	 *
-	 * @since 0.1.0
+	 * Prepare a single section for create or update.
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
@@ -495,67 +368,57 @@ class QuizesController extends CrudController {
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		global $masteriyo_container;
 
-		$id     = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$quiz = $masteriyo_container->get( 'quiz' );
+		$id      = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
+		$section = $masteriyo_container->get( 'section' );
 
 		if ( 0 !== $id ) {
-			$quiz->set_id( $id );
-			$quiz_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\QuizRepository::class );
-			$quiz_repo->read( $quiz );
+			$section->set_id( $id );
+			$section_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\SectionRepository::class );
+			$section_repo->read( $section );
 		}
 
 		// Post title.
 		if ( isset( $request['name'] ) ) {
-			$quiz->set_name( wp_filter_post_kses( $request['name'] ) );
+			$section->set_name( wp_filter_post_kses( $request['name'] ) );
 		}
 
 		// Post content.
 		if ( isset( $request['description'] ) ) {
-			$quiz->set_description( wp_filter_post_kses( $request['description'] ) );
-		}
-
-		// Post excerpt.
-		if ( isset( $request['short_description'] ) ) {
-			$quiz->set_short_description( wp_filter_post_kses( $request['short_description'] ) );
+			$section->set_description( wp_filter_post_kses( $request['description'] ) );
 		}
 
 		// Post status.
 		if ( isset( $request['status'] ) ) {
-			$quiz->set_status( get_post_status_object( $request['status'] ) ? $request['status'] : 'draft' );
+			$section->set_status( 'publish' );
 		}
 
-		// Post slug.
-		if ( isset( $request['slug'] ) ) {
-			$quiz->set_slug( $request['slug'] );
-		}
-
-		// Post parent id.
-		if ( isset( $request['parent_id'] ) ) {
-			$quiz->set_parent_id( $request['parent_id'] );
-		}
-
-		// Post menu order.
+		// Menu order.
 		if ( isset( $request['menu_order'] ) ) {
-			$quiz->set_menu_order( $request['menu_order'] );
+			$section->set_menu_order( $request['menu_order'] );
+		}
+
+		// Section parent ID.
+		if ( isset( $request['parent_id'] ) ) {
+			$section->set_parent_id( $request['parent_id'] );
 		}
 
 		// Allow set meta_data.
 		if ( isset( $request['meta_data'] ) && is_array( $request['meta_data'] ) ) {
 			foreach ( $request['meta_data'] as $meta ) {
-				$quiz->update_meta_data( $meta['key'], $meta['value'], isset( $meta['id'] ) ? $meta['id'] : '' );
+				$section->update_meta_data( $meta['key'], $meta['value'], isset( $meta['id'] ) ? $meta['id'] : '' );
 			}
 		}
 
 		/**
 		 * Filters an object before it is inserted via the REST API.
 		 *
-		 * The dynamic portion of the hook name, `$this->object_type`,
+		 * The dynamic portion of the hook name, `$this->post_type`,
 		 * refers to the object type slug.
 		 *
-		 * @param WC_Data         $quiz  Object object.
+		 * @param WC_Data         $section  Object object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */
-		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $quiz, $request, $creating );
+		return apply_filters( "masteriyo_rest_pre_insert_{$this->post_type}_object", $section, $request, $creating );
 	}
 }

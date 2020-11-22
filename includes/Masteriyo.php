@@ -11,7 +11,7 @@ namespace ThemeGrill\Masteriyo;
 
 use ThemeGrill\Masteriyo\PostType\RegisterPostTypes;
 use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
-
+use ThemeGrill\Masteriyo\RestApi\RestApi;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -114,6 +114,7 @@ final class Masteriyo {
 		RegisterPostTypes::instance();
 		RegisterTaxonomies::register();
 		Install::init();
+		RestApi::instance()->init();
 
 		// After init action.
 		do_action( 'after_masteriyo_init' );

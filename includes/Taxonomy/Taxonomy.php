@@ -159,7 +159,6 @@ abstract class Taxonomy {
 	 * @return array
 	 */
 	protected function get_args( $labels ) {
-		// phpcs:disable WordPress.WP.I18n.TextDomainMismatch
 		return array(
 			'labels'             => $labels,
 			'description'        => '',
@@ -172,6 +171,5 @@ abstract class Taxonomy {
 			'show_in_quick_edit' => true,
 			'show_tagcloud'      => true,
 		);
-		// phpcs:enable
 	}
 }

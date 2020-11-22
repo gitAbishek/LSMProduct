@@ -492,7 +492,7 @@ class Course extends Model {
 	 * @param string $parent Parent id.
 	 */
 	public function set_parent_id( $parent ) {
-		$this->set_prop( 'parent_id',  $parent );
+		$this->set_prop( 'parent_id', absint( $parent ) );
 	}
 
 	/**
@@ -503,7 +503,7 @@ class Course extends Model {
 	 * @param string $menu_order Menu order id.
 	 */
 	public function set_menu_order( $menu_order ) {
-		$this->set_prop( 'menu_order',  $menu_order );
+		$this->set_prop( 'menu_order', absint( $menu_order ) );
 	}
 
 	/**

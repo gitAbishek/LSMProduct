@@ -63,7 +63,6 @@ class Categories extends Taxonomy {
 		);
 	}
 
-
 	/**
 	 * Get args.
 	 *
@@ -73,7 +72,7 @@ class Categories extends Taxonomy {
 	 */
 	public function get_args( $labels ) {
 		$args = parent::get_args( $labels );
-		$args['hierarchial'] = true;
+		$args['hierarchical'] = true;
 		return $args;
 	}
 }

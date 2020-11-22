@@ -5,7 +5,7 @@ import {
 	ContentIcon,
 	ContentTitle,
 } from '../styled';
-import { BiAlignLeft, BiTrash } from 'react-icons/bi';
+import { AlignLeft, Trash } from 'Icons';
 
 import Button from 'Components/common/Button';
 import DragHandle from '../components/DragHandle';
@@ -30,7 +30,7 @@ const Lesson = (props) => {
 					<ContentHeader>
 						<FlexRow>
 							<DragHandle {...provided.dragHandleProps} />
-							<ContentIcon icon={<BiAlignLeft />} />
+							<ContentIcon icon={<AlignLeft />} />
 							<ContentTitle>{title}</ContentTitle>
 						</FlexRow>
 						<FlexRow>
@@ -44,7 +44,7 @@ const Lesson = (props) => {
 										<DropdownOverlay>
 											<ul>
 												<li>
-													<Icon icon={<BiTrash />} />
+													<Icon icon={<Trash />} />
 													Delete
 												</li>
 											</ul>

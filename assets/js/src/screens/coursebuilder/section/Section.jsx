@@ -1,5 +1,5 @@
-import { BiEdit, BiTrash } from 'react-icons/bi';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { Edit, Trash } from 'Icons';
 import { React, useState } from '@wordpress/element';
 import defaultStyle, { BaseLine } from 'Config/defaultStyle';
 
@@ -48,11 +48,11 @@ const Section = (props) => {
 									<DropdownOverlay>
 										<ul>
 											<li onClick={() => setMode('editing')}>
-												<Icon icon={<BiEdit />} />
+												<Icon icon={<Edit />} />
 												Edit
 											</li>
 											<li>
-												<Icon icon={<BiTrash />} />
+												<Icon icon={<Trash />} />
 												Delete
 											</li>
 										</ul>

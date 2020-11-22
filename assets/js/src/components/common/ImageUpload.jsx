@@ -1,14 +1,15 @@
-import { React, useState, memo, useCallback } from '@wordpress/element';
-import { useDropzone } from 'react-dropzone';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import colors from 'Config/colors';
+import { React, memo, useCallback, useState } from '@wordpress/element';
+
 import { BaseLine } from 'Config/defaultStyle';
 import Flex from 'Components/common/Flex';
-import Icon from 'Components/common/Icon';
-import { BiPlus } from 'react-icons/bi';
 import FlexRow from 'Components/common/FlexRow';
+import Icon from 'Components/common/Icon';
+import { Plus } from 'Icons';
+import PropTypes from 'prop-types';
+import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
+import styled from 'styled-components';
+import { useDropzone } from 'react-dropzone';
 
 const ImageUpload = (props) => {
 	const { style, className, title, multiple } = props;
@@ -38,7 +39,7 @@ const ImageUpload = (props) => {
 				<ContentContainer>
 					<FlexRow justify="center">
 						<span>
-							<Icon icon={<BiPlus />}></Icon>
+							<Icon icon={<Plus />}></Icon>
 						</span>
 						<span>{title}</span>
 					</FlexRow>

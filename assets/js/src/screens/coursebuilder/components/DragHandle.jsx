@@ -1,7 +1,7 @@
 import { BaseLine } from 'Config/defaultStyle';
 import Icon from 'Components/common/Icon';
 import { React } from '@wordpress/element';
-import Sortable from 'Icons/Sortable';
+import { Sortable } from 'Icons';
 import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
 import styled from 'styled-components';

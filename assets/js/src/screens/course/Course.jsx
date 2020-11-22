@@ -14,6 +14,8 @@ import styled from 'styled-components';
 import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';
 
+import TestIcon from '../../assets/icons/icon.svg';
+
 const Course = () => {
 	return (
 		<Fragment>
@@ -22,6 +24,7 @@ const Course = () => {
 				<form action="">
 					<CourseContainer>
 						<CourseLeftContainer>
+							<TestIcon style={{ fill: 'red' }} />
 							<FormGroup>
 								<Label htmlFor="">Course Title</Label>
 								<Input placeholder="Your Course Title"></Input>

@@ -1,4 +1,4 @@
 {
-	"presets": ["@babel/preset-env", "@wordpress/default"],
+	"presets": ["@babel/preset-env", "@wordpress/default", "@dr.pogodin/babel-preset-svgr"],
 	"plugins": ["babel-plugin-styled-components"]
 }

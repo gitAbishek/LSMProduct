@@ -1,33 +1,40 @@
 {
-	"root": true,
-	"env": {
-		"es6": true,
-		"browser": true,
-		"node": true
-	},
-	"globals": {
-		"wp": true
-	},
-	"rules": {
-		"camelcase": 0,
-		"indent": 0,
-		"no-console": 1,
-		"requireConfigFile": false
-	},
-	"parser": "@babel/eslint-parser",
-	"extends": ["eslint:recommended", "plugin:import/errors", "plugin:import/warnings", "plugin:react/recommended" ],
-	"settings": {
-		"react": {
-			"version": "detect"
-		},
-		"import/resolver": {
+  "root": true,
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "wp": true
+  },
+  "rules": {
+    "camelcase": 0,
+    "indent": 0,
+    "no-console": 1
+  },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
       "node": {
         "extensions": [".js", ".jsx"]
-			},
-			"webpack": {
-				"config": "webpack.config.js"
-			}
+      },
+      "webpack": {
+        "config": "webpack.config.js"
+      }
     }
-	},
-	"plugins": ["import"]
+  },
+  "plugins": ["import"]
 }

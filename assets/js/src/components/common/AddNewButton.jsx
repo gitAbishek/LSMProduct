@@ -1,17 +1,17 @@
-import { React } from '@wordpress/element';
-import { BiPlus } from 'react-icons/bi';
-import styled from 'styled-components';
-import Icon from 'Components/common/Icon';
 import { BaseLine } from 'Config/defaultStyle';
-import fontSize from 'Config/fontSize';
-import colors from 'Config/colors';
-import { lighten } from 'polished';
+import Icon from 'Components/common/Icon';
+import { Plus } from 'Icons/index';
 import PropTypes from 'prop-types';
+import { React } from '@wordpress/element';
+import colors from 'Config/colors';
+import fontSize from 'Config/fontSize';
+import { lighten } from 'polished';
+import styled from 'styled-components';
 
 const AddNewButton = (props) => {
 	return (
 		<StyledButton {...props}>
-			<Icon icon={<BiPlus />} />
+			<Icon icon={<Plus />} />
 			{props.children}
 		</StyledButton>
 	);

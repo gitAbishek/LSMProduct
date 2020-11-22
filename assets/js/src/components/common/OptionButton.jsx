@@ -1,15 +1,15 @@
+import { DotsVertical } from 'Icons';
+import Icon from 'Components/common/Icon';
 import { React } from '@wordpress/element';
-import styled from 'styled-components';
 import colors from 'Config/colors';
 import defaultStyle from 'Config/defaultStyle';
 import fontSize from 'Config/fontSize';
-import Icon from 'Components/common/Icon';
-import { BiDotsVerticalRounded } from 'react-icons/bi';
+import styled from 'styled-components';
 
 const OptionButton = (props) => {
 	return (
 		<StyledButton {...props}>
-			<Icon icon={<BiDotsVerticalRounded />} />
+			<Icon icon={<DotsVertical />} />
 		</StyledButton>
 	);
 };

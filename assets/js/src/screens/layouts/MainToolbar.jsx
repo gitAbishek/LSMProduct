@@ -1,14 +1,15 @@
-import { React } from '@wordpress/element';
-import { BiShow, BiCog, BiBookAlt, BiEdit } from 'react-icons/bi';
-import styled from 'styled-components';
-import LogoImg from '../../../../img/logo.png';
-import { ContainerFluid } from 'Components/common/Container';
-import FlexRow from 'Components/common/FlexRow';
+import { Book, Cog, Edit, Show } from 'Icons';
+import Menu, { MenuItem } from 'Components/common/Menu';
+
 import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';
+import { ContainerFluid } from 'Components/common/Container';
 import Flex from 'Components/common/Flex';
+import FlexRow from 'Components/common/FlexRow';
+import LogoImg from '../../../../img/logo.png';
+import { React } from '@wordpress/element';
 import colors from 'Config/colors';
-import Menu, { MenuItem } from 'Components/common/Menu';
+import styled from 'styled-components';
 
 const MainToolbar = () => {
 	return (
@@ -19,20 +20,20 @@ const MainToolbar = () => {
 						<img src={LogoImg} alt="Masteriyo Logo" />
 					</LogoContainer>
 					<Menu>
-						<MenuItem to="/course" icon={<BiBookAlt />}>
+						<MenuItem to="/course" icon={<Book />}>
 							Course
 						</MenuItem>
-						<MenuItem to="/builder" icon={<BiEdit />}>
+						<MenuItem to="/builder" icon={<Edit />}>
 							Course Builder
 						</MenuItem>
-						<MenuItem to="/settings" icon={<BiCog />}>
+						<MenuItem to="/settings" icon={<Cog />}>
 							Settings
 						</MenuItem>
 					</Menu>
 				</HeaderLeftContent>
 				<HeaderRightContent>
 					<HeaderActions>
-						<Button icon={<BiShow />}>Preview</Button>
+						<Button icon={<Show />}>Preview</Button>
 						<Button primary>Save</Button>
 					</HeaderActions>
 				</HeaderRightContent>

@@ -1,8 +1,3 @@
-import { React } from '@wordpress/element';
-import PropTypes from 'prop-types';
-import { Draggable } from 'react-beautiful-dnd';
-import FlexRow from 'Components/common/FlexRow';
-import DragHandle from '../components/DragHandle';
 import {
 	ActionContainer,
 	ContentContainer,
@@ -10,12 +5,18 @@ import {
 	ContentIcon,
 	ContentTitle,
 } from '../styled';
-import { BiTimer, BiTrash } from 'react-icons/bi';
+import { Timer, Trash } from 'Icons';
+
 import Button from 'Components/common/Button';
+import DragHandle from '../components/DragHandle';
+import { Draggable } from 'react-beautiful-dnd';
 import Dropdown from 'rc-dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
+import FlexRow from 'Components/common/FlexRow';
 import Icon from 'Components/common/Icon';
 import OptionButton from 'Components/common/OptionButton';
+import PropTypes from 'prop-types';
+import { React } from '@wordpress/element';
 
 const Quiz = (props) => {
 	const { id, title, index } = props;
@@ -29,7 +30,7 @@ const Quiz = (props) => {
 					<ContentHeader>
 						<FlexRow>
 							<DragHandle {...provided.dragHandleProps} />
-							<ContentIcon icon={<BiTimer />} />
+							<ContentIcon icon={<Timer />} />
 							<ContentTitle>{title}</ContentTitle>
 						</FlexRow>
 						<FlexRow>
@@ -43,7 +44,7 @@ const Quiz = (props) => {
 										<DropdownOverlay>
 											<ul>
 												<li>
-													<Icon icon={<BiTrash />} />
+													<Icon icon={<Trash />} />
 													Delete
 												</li>
 											</ul>

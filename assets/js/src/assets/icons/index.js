@@ -1,0 +1,10 @@
+export { default as DotsVertical } from './dots-vertical.svg';
+export { default as Plus } from './plus.svg';
+export { default as Sortable } from './sortable.svg';
+export { default as Trash } from './trash.svg';
+export { default as AlignLeft } from './align-left.svg';
+export { default as Timer } from './timer.svg';
+export { default as Edit } from './edit.svg';
+export { default as Show } from './show.svg';
+export { default as Cog } from './cog.svg';
+export { default as Book } from './book.svg';

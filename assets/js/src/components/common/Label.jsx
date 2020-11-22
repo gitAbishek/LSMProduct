@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import colors from '../../config/colors';
-import { BaseLine } from '../../config/defaultStyle';
+import colors from 'Config/colors';
+import { BaseLine } from 'Config/defaultStyle';
 
 const Label = styled.label`
 	color: ${colors.HEADING};

@@ -1,7 +1,7 @@
 import { React } from '@wordpress/element';
 import ReactSelect from 'react-select';
-import colors from '../../config/colors';
-import defaultStyle, { BaseLine } from '../../config/defaultStyle';
+import colors from 'Config/colors';
+import defaultStyle, { BaseLine } from 'Config/defaultStyle';
 import { lighten } from 'polished';
 
 const Select = (props) => {

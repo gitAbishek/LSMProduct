@@ -2,13 +2,13 @@ import { React, useState, memo, useCallback } from '@wordpress/element';
 import { useDropzone } from 'react-dropzone';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import colors from '../../config/colors';
-import { BaseLine } from '../../config/defaultStyle';
-import Flex from './Flex';
-import Icon from './Icon';
+import colors from 'Config/colors';
+import { BaseLine } from 'Config/defaultStyle';
+import Flex from 'Components/common/Flex';
+import Icon from 'Components/common/Icon';
 import { BiPlus } from 'react-icons/bi';
-import FlexRow from './FlexRow';
-import fontSize from '../../config/fontSize';
+import FlexRow from 'Components/common/FlexRow';
+import fontSize from 'Config/fontSize';
 
 const ImageUpload = (props) => {
 	const { style, className, title, multiple } = props;

@@ -1,15 +1,16 @@
 import { Fragment, React, useState } from '@wordpress/element';
 
-import MainToolbar from '../layouts/MainToolbar';
-import SortableSections from './components/SortableSections';
 import GettingStarted from './components/GettingStarted';
+import MainToolbar from '../layouts/MainToolbar';
+import SectionBuilder from './section/SectionBuilder';
+
 const Dashboard = () => {
-	const [courseMode, setCourseMode] = useState('courseBuilder');
+	const [courseMode] = useState('courseBuilder');
 	return (
 		<Fragment>
 			<MainToolbar />
 			{courseMode === 'gettingStarted' && <GettingStarted />}
-			{courseMode === 'courseBuilder' && <SortableSections />}
+			{courseMode === 'courseBuilder' && <SectionBuilder />}
 		</Fragment>
 	);
 };

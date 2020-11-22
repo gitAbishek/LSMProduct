@@ -1,10 +1,10 @@
 import { React } from '@wordpress/element';
 import { BiPlus } from 'react-icons/bi';
 import styled from 'styled-components';
-import Icon from './Icon';
-import { BaseLine } from '../../config/defaultStyle';
-import fontSize from '../../config/fontSize';
-import colors from '../../config/colors';
+import Icon from 'Components/common/Icon';
+import { BaseLine } from 'Config/defaultStyle';
+import fontSize from 'Config/fontSize';
+import colors from 'Config/colors';
 import { lighten } from 'polished';
 import PropTypes from 'prop-types';
 

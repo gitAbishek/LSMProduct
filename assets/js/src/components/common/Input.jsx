@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import colors from '../../config/colors';
-import defaultStyle, { BaseLine } from '../../config/defaultStyle';
+import colors from 'Config/colors';
+import defaultStyle, { BaseLine } from 'Config/defaultStyle';
 
 const Input = styled.input`
 	height: ${BaseLine * 6}px;

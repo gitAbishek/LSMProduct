@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import FlexRow from '../../../components/common/FlexRow';
-import Icon from '../../../components/common/Icon';
-import colors from '../../../config/colors';
-import defaultStyle, { BaseLine } from '../../../config/defaultStyle';
-import fontSize from '../../../config/fontSize';
+import FlexRow from 'Components/common/FlexRow';
+import Icon from 'Components/common/Icon';
+import colors from 'Config/colors';
+import defaultStyle, { BaseLine } from 'Config/defaultStyle';
+import fontSize from 'Config/fontSize';
 
 export const ContentContainer = styled.div`
 	background-color: ${colors.WHITE};

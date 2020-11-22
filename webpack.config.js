@@ -21,7 +21,7 @@ const config = {
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx)$/,
+				test: /\.(js|jsx|svg)$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
@@ -94,6 +94,12 @@ const config = {
 
 	resolve: {
 		extensions: ['.js', '.jsx'],
+		alias: {
+			Components: path.resolve(process.cwd(), 'assets/js/src/components'),
+			Config: path.resolve(process.cwd(), 'assets/js/src/config'),
+			Icons: path.resolve(process.cwd(), 'assets/js/src/components/icons'),
+			Layouts: path.resolve(process.cwd(), 'assets/js/src/screens/layouts'),
+		},
 	},
 
 	devServer: {

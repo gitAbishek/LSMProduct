@@ -1,11 +1,10 @@
 import { React } from '@wordpress/element';
-import Icon from './Icon';
+import Icon from 'Components/common/Icon';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import propTypes from 'prop-types';
-import fontSize from '../../config/fontSize';
-import colors from '../../config/colors';
-import { BaseLine } from '../../config/defaultStyle';
+import fontSize from 'Config/fontSize';
+import colors from 'Config/colors';
+import { BaseLine } from 'Config/defaultStyle';
 import { NavLink } from 'react-router-dom';
 
 const Menu = styled.ul`
@@ -81,7 +80,7 @@ const StyledLi = styled.li`
 
 MenuItem.propTypes = {
 	icon: PropTypes.object,
-	children: propTypes.any,
+	children: PropTypes.any,
 };
 
 export { MenuItem };

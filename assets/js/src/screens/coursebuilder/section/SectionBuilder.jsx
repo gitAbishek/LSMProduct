@@ -1,8 +1,9 @@
-import { React, useState } from '@wordpress/element';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { React, useState } from '@wordpress/element';
+
+import AddNewButton from 'Components/common/AddNewButton';
+import Container from 'Components/common/Container';
 import Section from './Section';
-import Container from '../../../components/common/Container';
-import AddNewButton from '../../../components/common/AddNewButton';
 import styled from 'styled-components';
 
 const dummyData = {
@@ -37,7 +38,7 @@ const dummyData = {
 	sectionOrder: ['section-1', 'section-2', 'section-3'],
 };
 
-const SortableSections = () => {
+const SectionBuilder = () => {
 	const [data, setData] = useState(dummyData);
 
 	const onDragEnd = (result) => {
@@ -151,7 +152,7 @@ const SortableSections = () => {
 	);
 };
 
-export default SortableSections;
+export default SectionBuilder;
 
 const AddSectionContainer = styled.div`
 	display: flex;

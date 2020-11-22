@@ -1,11 +1,11 @@
 import { React } from '@wordpress/element';
-import Button from '../../../components/common/Button';
-import Flex from '../../../components/common/Flex';
-import FlexRow from '../../../components/common/FlexRow';
+import Button from 'Components/common/Button';
+import Flex from 'Components/common/Flex';
+import FlexRow from 'Components/common/FlexRow';
 import styled from 'styled-components';
-import fontSize from '../../../config/fontSize';
-import colors from '../../../config/colors';
-import { BaseLine } from '../../../config/defaultStyle';
+import fontSize from 'Config/fontSize';
+import colors from 'Config/colors';
+import { BaseLine } from 'Config/defaultStyle';
 
 const GettingStarted = () => {
 	return (
@@ -40,7 +40,7 @@ const ActionButtons = styled(FlexRow)`
 	margin-right: -8px;
 	margin-bottom: ${BaseLine * 3}px;
 
-	Button {
+	${Button} {
 		margin-left: 8px;
 		margin-right: 8px;
 	}

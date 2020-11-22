@@ -1,8 +1,3 @@
-import { React } from '@wordpress/element';
-import PropTypes from 'prop-types';
-import { Draggable } from 'react-beautiful-dnd';
-import FlexRow from '../../../../components/common/FlexRow';
-import DragHandle from '../DragHandle';
 import {
 	ActionContainer,
 	ContentContainer,
@@ -10,14 +5,20 @@ import {
 	ContentIcon,
 	ContentTitle,
 } from '../styled';
-import { BiTimer, BiTrash } from 'react-icons/bi';
-import Button from '../../../../components/common/Button';
-import Dropdown from 'rc-dropdown';
-import DropdownOverlay from '../../../../components/common/DropdownOverlay';
-import Icon from '../../../../components/common/Icon';
-import OptionButton from '../../../../components/common/OptionButton';
+import { BiAlignLeft, BiTrash } from 'react-icons/bi';
 
-const Quiz = (props) => {
+import Button from 'Components/common/Button';
+import DragHandle from '../components/DragHandle';
+import { Draggable } from 'react-beautiful-dnd';
+import Dropdown from 'rc-dropdown';
+import DropdownOverlay from 'Components/common/DropdownOverlay';
+import FlexRow from 'Components/common/FlexRow';
+import Icon from 'Components/common/Icon';
+import OptionButton from 'Components/common/OptionButton';
+import PropTypes from 'prop-types';
+import { React } from '@wordpress/element';
+
+const Lesson = (props) => {
 	const { id, title, index } = props;
 	return (
 		<Draggable draggableId={id} index={index}>
@@ -29,7 +30,7 @@ const Quiz = (props) => {
 					<ContentHeader>
 						<FlexRow>
 							<DragHandle {...provided.dragHandleProps} />
-							<ContentIcon icon={<BiTimer />} />
+							<ContentIcon icon={<BiAlignLeft />} />
 							<ContentTitle>{title}</ContentTitle>
 						</FlexRow>
 						<FlexRow>
@@ -60,10 +61,10 @@ const Quiz = (props) => {
 	);
 };
 
-Quiz.propTypes = {
+Lesson.propTypes = {
 	id: PropTypes.string,
 	title: PropTypes.string,
 	index: PropTypes.number,
 };
 
-export default Quiz;
+export default Lesson;

@@ -76,4 +76,107 @@ class Utils {
 
 		return is_null( $field ) ? $terms : wp_list_pluck( $terms, $field, $index_key );
 	}
+
+	/**
+	 * Wrapper for _doing_it_wrong().
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param string $function Function used.
+	 * @param string $message Message to log.
+	 * @param string $version Version the message was added in.
+	 */
+	public static function doing_it_wrong( $function, $message, $version ) {
+		// @codingStandardsIgnoreStart
+		$message .= ' Backtrace: ' . wp_debug_backtrace_summary();
+
+		if ( is_ajax() || MSYO()->is_rest_api_request() ) {
+			do_action( 'doing_it_wrong_run', $function, $message, $version );
+			error_log( "{$function} was called incorrectly. {$message}. This message was added in version {$version}." );
+		} else {
+			_doing_it_wrong( $function, $message, $version );
+		}
+		// @codingStandardsIgnoreEnd
+	}
+
+	/**
+	 * Given a path, this will convert any of the subpaths into their corresponding tokens.
+	 *
+	 * @since 0.1.0
+	 * @param string $path The absolute path to tokenize.
+	 * @param array  $path_tokens An array keyed with the token, containing paths that should be replaced.
+	 * @return string The tokenized path.
+	 */
+	public static function tokenize_path( $path, $path_tokens ) {
+		// Order most to least specific so that the token can encompass as much of the path as possible.
+		uasort(
+			$path_tokens,
+			function ( $a, $b ) {
+				$a = strlen( $a );
+				$b = strlen( $b );
+
+				if ( $a > $b ) {
+					return -1;
+				}
+
+				if ( $b > $a ) {
+					return 1;
+				}
+
+				return 0;
+			}
+		);
+
+		foreach ( $path_tokens as $token => $token_path ) {
+			if ( 0 !== strpos( $path, $token_path ) ) {
+				continue;
+			}
+
+			$path = str_replace( $token_path, '{{' . $token . '}}', $path );
+		}
+
+		return $path;
+	}
+
+	/**
+	 * Given a tokenized path, this will expand the tokens to their full path.
+	 *
+	 * @since 0.1.0
+	 * @param string $path The absolute path to expand.
+	 * @param array  $path_tokens An array keyed with the token, containing paths that should be expanded.
+	 * @return string The absolute path.
+	 */
+	public static function untokenize_path( $path, $path_tokens ) {
+		foreach ( $path_tokens as $token => $token_path ) {
+			$path = str_replace( '{{' . $token . '}}', $token_path, $path );
+		}
+
+		return $path;
+	}
+
+	/**
+	 * Fetches an array containing all of the configurable path constants to be used in tokenization.
+	 *
+	 * @return array The key is the define and the path is the constant.
+	 */
+	public static function get_path_define_tokens() {
+		$defines = array(
+			'ABSPATH',
+			'WP_CONTENT_DIR',
+			'WP_PLUGIN_DIR',
+			'WPMU_PLUGIN_DIR',
+			'PLUGINDIR',
+			'WP_THEME_DIR',
+		);
+
+		$path_tokens = array();
+
+		foreach ( $defines as $define ) {
+			if ( defined( $define ) ) {
+				$path_tokens[ $define ] = constant( $define );
+			}
+		}
+
+		return apply_filters( 'masteriyo_get_path_define_tokens', $path_tokens );
+	}
 }

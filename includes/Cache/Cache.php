@@ -75,14 +75,14 @@ class Cache implements CacheInterface{
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param int|string $key	The cache key to use for retrieval later.
-	 * @param mixed $data		The contents to store in the cache.
-	 * @param string $group		Where to group the cache contents. Enables the same key to be used across groups.
-	 * @param int $expire		When to expire the cache contents, in seconds. Default 0 (no expiration).
+	 * @param int|string $key   The cache key to use for retrieval later.
+	 * @param mixed      $data       The contents to store in the cache.
+	 * @param string     $group     Where to group the cache contents. Enables the same key to be used across groups.
+	 * @param int        $expire       When to expire the cache contents, in seconds. Default 0 (no expiration).
 	 *
 	 * @return bool True on success, false on failure.
 	 */
-	public function set( $key, $data, $group = '', $expire ) {
+	public function set( $key, $data, $group = '', $expire = 0 ) {
 		return wp_cache_set( $key, $data, $group, $expire );
 	}
 

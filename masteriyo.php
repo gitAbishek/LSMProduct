@@ -35,9 +35,9 @@ define( 'MASTERIYO_ASSETS', dirname( __FILE__ ) . '/assets' );
 define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
 define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
 
-Constants::set_constant( 'MASTERIYO_TEMPLATE_DEBUG_MODE', true );
-
 require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+
+Constants::set_constant( 'MASTERIYO_TEMPLATE_DEBUG_MODE', true );
 
 $masteriyo_container = new Container();
 

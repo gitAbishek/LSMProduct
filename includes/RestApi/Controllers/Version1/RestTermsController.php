@@ -258,7 +258,7 @@ abstract class RestTermsController extends CrudController {
 		}
 
 		// Check permissions for a single term.
-		$id = intval( $request['id'] );
+		$id = (int) $request['id'];
 		if ( $id ) {
 			$term = get_term( $id, $taxonomy );
 

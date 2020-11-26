@@ -188,7 +188,7 @@ class QuestionsController extends CrudController {
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function check_answer( $request ) {
-		$object = $this->get_object( intval( $request['id'] ) );
+		$object = $this->get_object( (int) $request['id'] );
 
 		if ( ! $object || 0 === $object->get_id() ) {
 			return new \WP_Error( "masteriyo_rest_{$this->post_type}_invalid_id", __( 'Invalid ID.', 'masteriyo' ), array( 'status' => 404 ) );

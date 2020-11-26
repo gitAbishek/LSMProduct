@@ -57,54 +57,6 @@ abstract class CrudController extends RestController {
 	}
 
 	/**
-	 * Check if a given request has access to read items.
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return WP_Error|boolean
-	 */
-	public function get_items_permissions_check( $request ) {
-		// TODO Uncomment this
-		// if ( ! current_user_can( 'read_posts', $this->post_type ) ) {
-		// 	return new \WP_Error( 'masteriyo_rest_cannot_view', __( 'Sorry, you cannot list resources.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
-		// }
-
-		return true;
-	}
-
-	/**
-	 * Check if a given request has access to read an item.
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return WP_Error|boolean
-	 */
-	public function get_item_permissions_check( $request ) {
-		$object = $this->get_object( intval( $request['id'] ) );
-
-		// TODO Uncomment this
-		// if ( $object && 0 !== $object->get_id() && ! wc_rest_check_post_permissions( $this->post_type, 'read', $object->get_id() ) ) {
-		// 	return new \WP_Error( 'masteriyo_rest_cannot_view', __( 'Sorry, you cannot view this resource.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
-		// }
-
-		return true;
-	}
-
-	/**
-	 * Check if a given request has access to delete an item.
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return bool|WP_Error
-	 */
-	public function delete_item_permissions_check( $request ) {
-		$object = $this->get_object( intval( $request['id'] ) );
-
-		if ( $object && 0 !== $object->get_id() && ! wc_rest_check_post_permissions( $this->post_type, 'delete', $object->get_id() ) ) {
-			return new \WP_Error( 'masteriyo_rest_cannot_delete', __( 'Sorry, you are not allowed to delete this resource.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
-		}
-
-		return true;
-	}
-
-	/**
 	 * Get object permalink.
 	 *
 	 * @param  object $object Object.
@@ -140,15 +92,16 @@ abstract class CrudController extends RestController {
 		return new \WP_Error( 'invalid-method', sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'masteriyo' ), __METHOD__ ), array( 'status' => 405 ) );
 	}
 
-
 	/**
 	 * Get a single item.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_item( $request ) {
-		$object = $this->get_object( intval( $request['id'] ) );
+		$object = $this->get_object( (int) $request['id'] );
 
 		if ( ! $object || 0 === $object->get_id() ) {
 			return new \WP_Error( "masteriyo_rest_{$this->post_type}_invalid_id", __( 'Invalid ID.', 'masteriyo' ), array( 'status' => 404 ) );
@@ -213,6 +166,8 @@ abstract class CrudController extends RestController {
 
 			/**
 			 * Fires after a single object is created or updated via the REST API.
+			 *
+			 * @since 0.1.0
 			 *
 			 * @param Model         $object    Inserted object.
 			 * @param WP_REST_Request $request   Request object.
@@ -423,7 +378,7 @@ abstract class CrudController extends RestController {
 			'meta_compare',
 			'meta_value_num',
 		);
-		$valid_vars = array_merge( $valid_vars, $rest_valid );
+		$valid_vars =  array_merge( $valid_vars, $rest_valid );
 
 		/**
 		 * Filter allowed query vars for the REST API.
@@ -439,6 +394,7 @@ abstract class CrudController extends RestController {
 		 * }
 		 */
 		$valid_vars = apply_filters( 'masteriyo_rest_query_vars', $valid_vars );
+		$valid_vars = array_values( array_unique( $valid_vars ) );
 
 		return $valid_vars;
 	}
@@ -484,9 +440,9 @@ abstract class CrudController extends RestController {
 
 		$objects = array();
 		foreach ( $query_results['objects'] as $object ) {
-			// if ( ! wc_rest_check_post_permissions( $this->post_type, 'read', $object->get_id() ) ) {
-			// 	continue;
-			// }
+			if ( ! $this->permission->rest_check_post_permissions( $object->get_object_type(), 'read', $object->get_id() ) ) {
+				continue;
+			}
 
 			$data = $this->prepare_object_for_response( $object, $request );
 			$objects[] = $this->prepare_response_for_collection( $data );
@@ -545,12 +501,6 @@ abstract class CrudController extends RestController {
 		 * @param Model $object         The object being considered for trashing support.
 		 */
 		$supports_trash = apply_filters( "masteriyo_rest_{$this->object_type}_object_trashable", $supports_trash, $object );
-
-		// TODO Check for permission
-		// if ( ! wc_rest_check_post_permissions( $this->post_type, 'delete', $object->get_id() ) ) {
-		// 	/* translators: %s: post type */
-		// 	return new \WP_Error( "masteriyo_rest_user_cannot_delete_{$this->post_type}", sprintf( __( 'Sorry, you are not allowed to delete %s.', 'masteriyo' ), $this->post_type ), array( 'status' => rest_authorization_required_code() ) );
-		// }
 
 		$request->set_param( 'context', 'edit' );
 		$response = $this->prepare_object_for_response( $object, $request );

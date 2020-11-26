@@ -31,7 +31,7 @@ class Template {
 
 		if ( ! $template ) {
 			if ( $name ) {
-				$template = MASTERIYO_TEMPLATE_DEBUG_MODE ? '' : locate_template(
+				$template = Constants::get_constant( 'MASTERIYO_TEMPLATE_DEBUG_MODE' ) ? '' : locate_template(
 					array(
 						"{$slug}-{$name}.php",
 						Utils::template_path() . "{$slug}-{$name}.php",
@@ -46,7 +46,7 @@ class Template {
 
 			if ( ! $template ) {
 				// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/masteriyo/slug.php.
-				$template = MASTERIYO_TEMPLATE_DEBUG_MODE ? '' : locate_template(
+				$template = Constants::get_constant( 'MASTERIYO_TEMPLATE_DEBUG_MODE' ) ? '' : locate_template(
 					array(
 						"{$slug}.php",
 						Utils::template_path() . "{$slug}.php",
@@ -223,7 +223,7 @@ class Template {
 		);
 
 		// Get default template/.
-		if ( ! $template || MASTERIYO_TEMPLATE_DEBUG_MODE ) {
+		if ( ! $template || Constants::get_constant( 'MASTERIYO_TEMPLATE_DEBUG_MODE' ) ) {
 			$template = $default_path . $template_name;
 		}
 

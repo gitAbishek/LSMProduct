@@ -23,6 +23,7 @@ use ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository;
 use League\Container\Container;
 use ThemeGrill\Masteriyo\Cache\Cache;
 use ThemeGrill\Masteriyo\Repository\QuestionRepository;
+use ThemeGrill\Masteriyo\Constants;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -32,8 +33,9 @@ define( 'MASTERIYO_PLUGIN_FILE', __FILE__ );
 define( 'MASTERIYO_PLUGIN_DIR', dirname( __FILE__ ) );
 define( 'MASTERIYO_ASSETS', dirname( __FILE__ ) . '/assets' );
 define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
-define( 'MASTERIYO_TEMPLATE_DEBUG_MODE', false );
 define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
+
+Constants::set_constant( 'MASTERIYO_TEMPLATE_DEBUG_MODE', true );
 
 require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 

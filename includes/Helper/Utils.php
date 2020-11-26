@@ -90,7 +90,7 @@ class Utils {
 		// @codingStandardsIgnoreStart
 		$message .= ' Backtrace: ' . wp_debug_backtrace_summary();
 
-		if ( is_ajax() || MSYO()->is_rest_api_request() ) {
+		if ( is_ajax() || self::is_rest_api_request() ) {
 			do_action( 'doing_it_wrong_run', $function, $message, $version );
 			error_log( "{$function} was called incorrectly. {$message}. This message was added in version {$version}." );
 		} else {
@@ -178,5 +178,32 @@ class Utils {
 		}
 
 		return apply_filters( 'masteriyo_get_path_define_tokens', $path_tokens );
+	}
+
+	/**
+	 * Get the template path.
+	 *
+	 * @return string
+	 */
+	public static function template_path() {
+		return apply_filters( 'masteriyo_template_path', 'wordpress-lms/' );
+	}
+
+	/**
+	 * Returns true if the request is a non-legacy REST API request.
+	 *
+	 * Legacy REST requests should still run some extra code for backwards compatibility.
+	 *
+	 * @return bool
+	 */
+	public static function is_rest_api_request() {
+		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+			return false;
+		}
+
+		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
+		$is_rest_api_request = ( false !== strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		return apply_filters( 'masteriyo_is_rest_api_request', $is_rest_api_request );
 	}
 }

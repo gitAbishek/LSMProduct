@@ -34,7 +34,7 @@ class Template {
 				$template = MASTERIYO_TEMPLATE_DEBUG_MODE ? '' : locate_template(
 					array(
 						"{$slug}-{$name}.php",
-						MSYO()->template_path() . "{$slug}-{$name}.php",
+						Utils::template_path() . "{$slug}-{$name}.php",
 					)
 				);
 
@@ -49,7 +49,7 @@ class Template {
 				$template = MASTERIYO_TEMPLATE_DEBUG_MODE ? '' : locate_template(
 					array(
 						"{$slug}.php",
-						MSYO()->template_path() . "{$slug}.php",
+						Utils::template_path() . "{$slug}.php",
 					)
 				);
 			}
@@ -207,7 +207,7 @@ class Template {
 	 */
 	public static function locate_template( $template_name, $template_path = '', $default_path = '' ) {
 		if ( ! $template_path ) {
-			$template_path = MSYO()->template_path();
+			$template_path = Utils::template_path();
 		}
 
 		if ( ! $default_path ) {

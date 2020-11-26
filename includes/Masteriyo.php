@@ -179,33 +179,6 @@ final class Masteriyo {
 	}
 
 	/**
-	 * Get the template path.
-	 *
-	 * @return string
-	 */
-	public function template_path() {
-		return apply_filters( 'masteriyo_template_path', 'wordpress-lms/' );
-	}
-
-	/**
-	 * Returns true if the request is a non-legacy REST API request.
-	 *
-	 * Legacy REST requests should still run some extra code for backwards compatibility.
-	 *
-	 * @return bool
-	 */
-	public function is_rest_api_request() {
-		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
-			return false;
-		}
-
-		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
-		$is_rest_api_request = ( false !== strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
-		return apply_filters( 'masteriyo_is_rest_api_request', $is_rest_api_request );
-	}
-
-	/**
 	 * Update the plugin version.
 	 *
 	 * @since 0.1.0

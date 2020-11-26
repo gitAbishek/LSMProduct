@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Template functions wrapper class.
  */
-class Template {
+class Template implements TemplateInterface {
 	/**
 	 * Get template part.
 	 *

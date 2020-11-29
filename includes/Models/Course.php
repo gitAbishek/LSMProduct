@@ -10,7 +10,7 @@
 namespace ThemeGrill\Masteriyo\Models;
 
 use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Repository\CourseRepository;
+use ThemeGrill\Masteriyo\Repository\RepositoryInterface;
 use ThemeGrill\Masteriyo\Helper\Utils;
 use ThemeGrill\Masteriyo\Cache\CacheInterface;
 
@@ -90,9 +90,9 @@ class Course extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param CourseRepository $course_repository Course Repository,
+	 * @param RepositoryInterface $course_repository Course Repository,
 	 */
-	public function __construct( CourseRepository $course_repository ) {
+	public function __construct( RepositoryInterface $course_repository ) {
 		$this->repository = $course_repository;
 	}
 

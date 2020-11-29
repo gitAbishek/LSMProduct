@@ -41,10 +41,9 @@ require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 
 Constants::set( 'MASTERIYO_TEMPLATE_DEBUG_MODE', true );
 
-$masteriyo_container = new Container();
+$masteriyo = require_once dirname( __FILE__ ) . '/bootstrap/app.php';
 
-// register the reflection container as a delegate to enable auto wiring
-$masteriyo_container->delegate(
+$masteriyo->delegate(
 	new League\Container\ReflectionContainer()
 );
 

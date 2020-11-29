@@ -62,7 +62,7 @@ class CoursesController extends PostsController {
 	 *
 	 * @param Permission $permission
 	 */
-	public function __construct( Permission $permission = null ) {
+	public function __construct( Permission $permission ) {
 		$this->permission = $permission;
 	}
 
@@ -195,7 +195,7 @@ class CoursesController extends PostsController {
 			$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
 			$course = $masteriyo_container->get( 'course' );
 			$course->set_id( $id );
-			$course_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\CourseRepository::class );
+			$course_repo = $masteriyo->get( 'course.store' );
 			$course_repo->read( $course );
 		} catch ( \Exception $e ) {
 			return false;
@@ -602,14 +602,14 @@ class CoursesController extends PostsController {
 	 * @return WP_Error|WC_Data
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		global $masteriyo_container;
+		global $masteriyo;
 
 		$id     = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$course = $masteriyo_container->get( 'course' );
+		$course = $masteriyo->get( 'course' );
 
 		if ( 0 !== $id ) {
 			$course->set_id( $id );
-			$course_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\CourseRepository::class );
+			$course_repo = $masteriyo->get( \ThemeGrill\Masteriyo\Repository\CourseRepository::class );
 			$course_repo->read( $course );
 		}
 

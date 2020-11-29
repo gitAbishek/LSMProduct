@@ -30,10 +30,11 @@ class RegisterPostTypes {
 	);
 
 	/**
-	 * Default constructor.
+	 * Register post types
 	 */
-	private function __construct() {
-		foreach ( $this->post_types as $post_type => $class ) {
+	public function register() {
+		$post_types = apply_filters( 'masteriyo_register_post_types', $this->post_types );
+		foreach ( $post_types as $post_type => $class ) {
 			$post_type = new $class();
 			$post_type->register();
 		}

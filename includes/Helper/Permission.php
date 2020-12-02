@@ -39,6 +39,48 @@ class Permission {
 	}
 
 	/**
+	 * Check permissions for terms on REST API.
+	 *
+	 * @since 0.1.0
+	 * @param string $taxonomy  Taxonomy.
+	 * @param string $context   Request context.
+	 * @param int    $object_id Term ID.
+	 * @return bool
+	 */
+	public function rest_check_term_permissions( $taxonomy, $context = 'read', $object_id = 0 ) {
+		$contexts = array(
+			'read'   => 'manage_terms',
+			'create' => 'edit_terms',
+			'edit'   => 'edit_terms',
+			'delete' => 'delete_terms',
+			'batch'  => 'edit_terms',
+		);
+
+		if ( 'revision' === $taxonomy ) {
+			$permission = false;
+		} else {
+			$cap             = $contexts[ $context ];
+			$taxonomy_object = get_taxonomy( $taxonomy );
+			$permission      = current_user_can( $taxonomy_object->cap->$cap, $object_id );
+		}
+
+		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, $taxonomy );
+	}
+
+	/**
+	 * Check permissions for checking answers on REST API.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return bool
+	 */
+	public function rest_check_answer_check_permissions() {
+		$permission = current_user_can( 'publish_posts' );
+
+		return apply_filters( 'masteriyo_rest_check_permissions', $permission );
+	}
+
+	/**
 	 * Check manager permissions on REST API.
 	 *
 	 * @since 0.1.0

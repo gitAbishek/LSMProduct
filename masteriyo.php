@@ -174,12 +174,6 @@ $masteriyo_container->add(
 	}
 );
 
-$masteriyo_container->add( \ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CoursesController::class )
-	->addArgument( \ThemeGrill\Masteriyo\Helper\Permission::class);
-
-$masteriyo_container->add( \ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseChildrenController::class )
-	->addArgument( \ThemeGrill\Masteriyo\Helper\Permission::class);
-
 $masteriyo_container->add( 'Permission', \ThemeGrill\Masteriyo\Helper\Utils\Permission::class, true );
 
 $_GLOBALS['masteriyo_container'] = $masteriyo_container;

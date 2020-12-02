@@ -9,6 +9,7 @@
 namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 
 use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CrudController;
+use ThemeGrill\Masteriyo\Helper\Permission;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,6 +26,26 @@ abstract class RestTermsController extends CrudController {
 	 * @var string
 	 */
 	protected $taxonomy = '';
+
+	/**
+	 * Permission class.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 */
+	protected $permission = null;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Permission $permission
+	 */
+	public function __construct( Permission $permission = null ) {
+		$this->permission = $permission;
+	}
 
 	/**
 	 * Register the routes for terms.
@@ -115,16 +136,27 @@ abstract class RestTermsController extends CrudController {
 	}
 
 	/**
+	 * Check permissions for an item.
+	 *
+	 * @since 0.1.0
+	 * @param string $object_type Object type.
+	 * @param string $context   Request context.
+	 * @param int    $object_id Post ID.
+	 * @return bool
+	 */
+	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
+		return true;
+	}
+
+	/**
 	 * Check if a given request has access to read the terms.
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function get_items_permissions_check( $request ) {
-		return true;
-
-		// TODO Check permission
 		$permissions = $this->check_permissions( $request, 'read' );
+
 		if ( is_wp_error( $permissions ) ) {
 			return $permissions;
 		}
@@ -143,10 +175,8 @@ abstract class RestTermsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function create_item_permissions_check( $request ) {
-		return true;
-
-		// TODO Check permission
 		$permissions = $this->check_permissions( $request, 'create' );
+
 		if ( is_wp_error( $permissions ) ) {
 			return $permissions;
 		}
@@ -165,10 +195,8 @@ abstract class RestTermsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function get_item_permissions_check( $request ) {
-		return true;
-
-		// TODO check permission.
 		$permissions = $this->check_permissions( $request, 'read' );
+
 		if ( is_wp_error( $permissions ) ) {
 			return $permissions;
 		}
@@ -187,10 +215,8 @@ abstract class RestTermsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function update_item_permissions_check( $request ) {
-		return true;
-
-		// TODO check permission
 		$permissions = $this->check_permissions( $request, 'edit' );
+
 		if ( is_wp_error( $permissions ) ) {
 			return $permissions;
 		}
@@ -209,10 +235,8 @@ abstract class RestTermsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function delete_item_permissions_check( $request ) {
-		return true;
-
-		// TODO check permission
 		$permissions = $this->check_permissions( $request, 'delete' );
+
 		if ( is_wp_error( $permissions ) ) {
 			return $permissions;
 		}
@@ -232,6 +256,7 @@ abstract class RestTermsController extends CrudController {
 	 */
 	public function batch_items_permissions_check( $request ) {
 		$permissions = $this->check_permissions( $request, 'batch' );
+
 		if ( is_wp_error( $permissions ) ) {
 			return $permissions;
 		}
@@ -259,6 +284,7 @@ abstract class RestTermsController extends CrudController {
 
 		// Check permissions for a single term.
 		$id = (int) $request['id'];
+
 		if ( $id ) {
 			$term = get_term( $id, $taxonomy );
 
@@ -266,10 +292,10 @@ abstract class RestTermsController extends CrudController {
 				return new \WP_Error( 'masteriyo_rest_term_invalid', __( 'Resource does not exist.', 'masteriyo' ), array( 'status' => 404 ) );
 			}
 
-			return wc_rest_check_course_term_permissions( $taxonomy, $context, $term->term_id );
+			return $this->permission->rest_check_term_permissions( $taxonomy, $context, $term->term_id );
 		}
 
-		return wc_rest_check_course_term_permissions( $taxonomy, $context );
+		return $this->permission->rest_check_term_permissions( $taxonomy, $context );
 	}
 
 	/**
@@ -277,7 +303,7 @@ abstract class RestTermsController extends CrudController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model          $term   Model object.
+	 * @param Model           $term   Model object.
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return array Links for the given term.
 	 */
@@ -330,7 +356,7 @@ abstract class RestTermsController extends CrudController {
 			'posts_per_page' => $request['per_page'],
 			'slug'           => $request['slug'],
 			'hide_empty'     => $request['hide_empty'],
-			's'              => $request['search']
+			's'              => $request['search'],
 		);
 
 		if ( isset( $request['course'] ) ) {
@@ -501,7 +527,7 @@ abstract class RestTermsController extends CrudController {
 			'default'           => null,
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['slug']    = array(
+		$params['slug']   = array(
 			'description'       => __( 'Limit result set to resources with a specific slug.', 'masteriyo' ),
 			'type'              => 'string',
 			'validate_callback' => 'rest_validate_request_arg',

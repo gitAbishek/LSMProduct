@@ -1,26 +1,26 @@
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { Edit, Trash } from 'Icons';
 import { React, useState } from '@wordpress/element';
+import AddNewButton from 'Components/common/AddNewButton';
 import defaultStyle, { BaseLine } from 'Config/defaultStyle';
 
-import AddNewButton from 'Components/common/AddNewButton';
 import Button from 'Components/common/Button';
 import DragHandle from '../components/DragHandle';
 import Dropdown from 'rc-dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
-import FlexRow from 'Components/common/FlexRow';
 import FormGroup from 'Components/common/FormGroup';
+import FlexRow from 'Components/common/FlexRow';
 import Icon from 'Components/common/Icon';
 import Input from 'Components/common/Input';
-import Label from 'Components/common/Label';
 import Lesson from '../lesson/Lesson';
+import Label from 'Components/common/Label';
 import OptionButton from 'Components/common/OptionButton';
 import PropTypes from 'prop-types';
 import Quiz from '../quiz/Quiz';
 import Textarea from 'Components/common/Textarea';
 import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Section = (props) => {
 	const { id, title, contents, index, editing } = props;

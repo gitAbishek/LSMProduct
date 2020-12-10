@@ -1,11 +1,12 @@
-import { React } from '@wordpress/element';
-import styled, { css } from 'styled-components';
-import colors from 'Config/colors';
-import PropTypes from 'prop-types';
-import { lighten } from 'polished';
-import fontSize from 'Config/fontSize';
 import defaultStyle, { BaseLine } from 'Config/defaultStyle';
+import styled, { css } from 'styled-components';
+
 import Icon from './Icon';
+import PropTypes from 'prop-types';
+import { React } from '@wordpress/element';
+import colors from 'Config/colors';
+import fontSize from 'Config/fontSize';
+import { lighten } from 'polished';
 
 const Button = (props) => {
 	const { icon, type, size, children } = props;

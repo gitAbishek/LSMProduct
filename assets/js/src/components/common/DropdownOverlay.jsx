@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import colors from 'Config/colors';
 import { BaseLine } from 'Config/defaultStyle';
+import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
+import styled from 'styled-components';
 
 const DropdownOverlay = styled.div`
 	background-color: ${colors.WHITE};

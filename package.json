@@ -9,9 +9,11 @@
     "@wordpress/i18n": "^3.15.0",
     "dante2": "0.5.0-rc1",
     "rc-dropdown": "3.2.0",
+    "rc-slider": "9.6.5",
     "rc-tooltip": "4.2.3",
     "react-beautiful-dnd": "13.0.0",
     "react-dropzone": "11.2.0",
+    "react-grid-system": "7.1.1",
     "react-select": "3.1.0",
     "styled-components": "5.2.0"
   },
@@ -34,8 +36,10 @@
     "eslint-plugin-react": "7.20.6",
     "eslint-webpack-plugin": "2.3.0",
     "html-webpack-plugin": "^4.4.1",
+    "import-sort-style-eslint": "6.0.0",
     "mini-css-extract-plugin": "0.11.0",
     "polished": "3.6.6",
+    "prettier-plugin-import-sort": "0.0.6",
     "prop-types": "15.7.2",
     "react-refresh": "0.8.3",
     "react-router-dom": "^5.2.0",
@@ -53,5 +57,10 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --hot --open",
     "build": "webpack --mode production"
+  },
+  "importSort": {
+    ".js, .jsx": {
+      "style": "eslint"
+    }
   }
 }

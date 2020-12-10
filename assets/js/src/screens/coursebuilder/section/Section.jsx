@@ -1,26 +1,30 @@
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { Edit, Trash } from 'Icons';
 import { React, useState } from '@wordpress/element';
-import AddNewButton from 'Components/common/AddNewButton';
+import {
+	SectionHeader,
+	SectionTitle,
+} from 'Components/common/GlobalComponents';
 import defaultStyle, { BaseLine } from 'Config/defaultStyle';
 
+import AddNewButton from 'Components/common/AddNewButton';
 import Button from 'Components/common/Button';
 import DragHandle from '../components/DragHandle';
 import Dropdown from 'rc-dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
-import FormGroup from 'Components/common/FormGroup';
 import FlexRow from 'Components/common/FlexRow';
+import FormGroup from 'Components/common/FormGroup';
 import Icon from 'Components/common/Icon';
 import Input from 'Components/common/Input';
-import Lesson from '../lesson/Lesson';
 import Label from 'Components/common/Label';
+import Lesson from '../lesson/Lesson';
+import { NavLink } from 'react-router-dom';
 import OptionButton from 'Components/common/OptionButton';
 import PropTypes from 'prop-types';
 import Quiz from '../quiz/Quiz';
 import Textarea from 'Components/common/Textarea';
 import colors from 'Config/colors';
-import fontSize from 'Config/fontSize';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Section = (props) => {
 	const { id, title, contents, index, editing } = props;
@@ -114,7 +118,11 @@ const Section = (props) => {
 												/>
 											))
 									)}
-									<AddNewButton>Add New Content</AddNewButton>
+									<AddNewButton>
+										<NavLink to={`/:${id}/add-new-lesson`}>
+											Add New Content
+										</NavLink>
+									</AddNewButton>
 									{provided.placeholder}
 								</ContentDroppableArea>
 							)}
@@ -141,18 +149,6 @@ const SectionContainer = styled.div`
 	margin-top: ${BaseLine * 6}px;
 	box-shadow: ${(props) =>
 		props.isDragging ? '0 0 15px rgba(0, 0, 0, 0.1)' : 'none'};
-`;
-
-const SectionHeader = styled.header`
-	display: flex;
-	margin-bottom: ${BaseLine * 3}px;
-	justify-content: space-between;
-`;
-
-const SectionTitle = styled.h3`
-	font-size: ${fontSize.EXTRA_LARGE};
-	font-weight: 500;
-	margin: 0;
 `;
 
 const ContentDroppableArea = styled.div`

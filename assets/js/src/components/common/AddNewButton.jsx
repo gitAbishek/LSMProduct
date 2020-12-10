@@ -43,6 +43,11 @@ const StyledButton = styled.button`
 		margin-right: ${BaseLine}px;
 	}
 
+	a {
+		text-decoration: none;
+		color: ${colors.HEADING};
+	}
+
 	&:hover {
 		color: ${colors.PRIMARY};
 		i {

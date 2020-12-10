@@ -9,9 +9,11 @@
     "@wordpress/i18n": "^3.15.0",
     "dante2": "0.5.0-rc1",
     "rc-dropdown": "3.2.0",
+    "rc-slider": "9.6.5",
     "rc-tooltip": "4.2.3",
     "react-beautiful-dnd": "13.0.0",
     "react-dropzone": "11.2.0",
+    "react-grid-system": "7.1.1",
     "react-select": "3.1.0",
     "styled-components": "5.2.0"
   },

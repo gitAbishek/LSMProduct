@@ -2497,7 +2497,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@2.x, classnames@^2.2.1, classnames@^2.2.4, classnames@^2.2.6:
+classnames@2.x, classnames@^2.2.1, classnames@^2.2.4, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -6920,6 +6920,17 @@ rc-motion@^2.0.0:
     classnames "^2.2.1"
     rc-util "^5.2.1"
 
+rc-slider@9.6.5:
+  version "9.6.5"
+  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-9.6.5.tgz#826cd7ba69d87c48b258baa3422a25b7f8c5620c"
+  integrity sha512-XRUJDK668hy8MwGnHzZlXCQXXIOUnEs4m2vwk1jgDILVBxI0GwGOlC6T499pYY+NEWg8YgdCOAucFs/+X5WHpg==
+  dependencies:
+    "@babel/runtime" "^7.10.1"
+    classnames "^2.2.5"
+    rc-tooltip "^5.0.1"
+    rc-util "^5.0.0"
+    shallowequal "^1.1.0"
+
 rc-tooltip@4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/rc-tooltip/-/rc-tooltip-4.2.3.tgz#f6fb2a6d9e76ef64295a1d9b5a1618f8634c0645"
@@ -6927,6 +6938,14 @@ rc-tooltip@4.2.3:
   dependencies:
     "@babel/runtime" "^7.11.2"
     rc-trigger "^4.2.1"
+
+rc-tooltip@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/rc-tooltip/-/rc-tooltip-5.0.1.tgz#b82c4259604d2cb62ca610ed7932dd37fc6ef61d"
+  integrity sha512-3AnxhUS0j74xAV3khrKw8o6rg+Ima3nw09DJBezMPnX3ImQUAnayWsPSlN1mEnihjA43rcFkGM1emiKE+CXyMQ==
+  dependencies:
+    "@babel/runtime" "^7.11.2"
+    rc-trigger "^5.0.0"
 
 rc-trigger@^4.2.1:
   version "4.4.3"
@@ -6940,6 +6959,17 @@ rc-trigger@^4.2.1:
     rc-motion "^1.0.0"
     rc-util "^5.0.1"
 
+rc-trigger@^5.0.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/rc-trigger/-/rc-trigger-5.2.0.tgz#a17f1a5cba6b8faff62e658a5c9a21f97af2ef06"
+  integrity sha512-fpC1ZkM/IgIIDfF6XHx3Hb2zXy9wvdI5eMh+6DdLygk6Z3HGmkri6ZCXg9a0wfF9AFuzlYTeBLS1uRASZRsnMQ==
+  dependencies:
+    "@babel/runtime" "^7.11.2"
+    classnames "^2.2.6"
+    rc-align "^4.0.0"
+    rc-motion "^2.0.0"
+    rc-util "^5.5.0"
+
 rc-trigger@^5.0.4:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/rc-trigger/-/rc-trigger-5.1.2.tgz#f0f89bba2318699e704492bddb20506ecd8f8916"
@@ -6950,6 +6980,14 @@ rc-trigger@^5.0.4:
     rc-align "^4.0.0"
     rc-motion "^2.0.0"
     rc-util "^5.5.0"
+
+rc-util@^5.0.0:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-5.5.1.tgz#8c75a115c09bd9b80ce17eb3457c9b221df6f526"
+  integrity sha512-lnkBptu1RX65GO6jf28scbDMM/9MVl/hYI0uMEVM+cQ0ALLhFChDzgv7ciNpjayCH88wSDHTp6582es4tzJHhA==
+  dependencies:
+    react-is "^16.12.0"
+    shallowequal "^1.1.0"
 
 rc-util@^5.0.1, rc-util@^5.0.6, rc-util@^5.2.1, rc-util@^5.3.0, rc-util@^5.5.0:
   version "5.5.0"
@@ -7068,6 +7106,13 @@ react-error-overlay@^6.0.1, react-error-overlay@^6.0.3:
   version "6.0.8"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.8.tgz#474ed11d04fc6bda3af643447d85e9127ed6b5de"
   integrity sha512-HvPuUQnLp5H7TouGq3kzBeioJmXms1wHy9EGjz2OURWBp4qZO6AfGEcnxts1D/CbwPLRAgTMPCEgYhA3sEM4vw==
+
+react-grid-system@7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-7.1.1.tgz#bab6770e889f7377c9a8ca3898126046af8d309e"
+  integrity sha512-ttKTdme+eW0fyFX7LKQmc9M/ujHfs99Kiv5zgid7htdEPxUbjuBbEDgi1FaWwcciCgkRgBJguQ+WYqsGGJdGRw==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-input-autosize@^2.1.2, react-input-autosize@^2.2.2:
   version "2.2.2"

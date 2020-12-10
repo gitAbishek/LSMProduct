@@ -1,18 +1,18 @@
 import { Fragment, React } from '@wordpress/element';
-import FlexRow from 'Components/common/FlexRow';
-import Flex from 'Components/common/Flex';
 
-import MainLayout from 'Layouts/MainLayout';
-import MainToolbar from 'Layouts/MainToolbar';
-import Input from 'Components/common/Input';
-import FormGroup from 'Components/common/FormGroup';
-import Label from 'Components/common/Label';
-import Textarea from 'Components/common/Textarea';
-import Select from 'Components/common/Select';
-import ImageUpload from 'Components/common/ImageUpload';
-import styled from 'styled-components';
 import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';
+import Flex from 'Components/common/Flex';
+import FlexRow from 'Components/common/FlexRow';
+import FormGroup from 'Components/common/FormGroup';
+import ImageUpload from 'Components/common/ImageUpload';
+import Input from 'Components/common/Input';
+import Label from 'Components/common/Label';
+import MainLayout from 'Layouts/MainLayout';
+import MainToolbar from 'Layouts/MainToolbar';
+import Select from 'Components/common/Select';
+import Textarea from 'Components/common/Textarea';
+import styled from 'styled-components';
 
 const Course = () => {
 	return (
@@ -74,6 +74,7 @@ const CourseInner = styled(Flex)`
 	padding-left: ${BaseLine * 2}px;
 	padding-right: ${BaseLine * 2}px;
 `;
+
 const CourseLeftContainer = styled(CourseInner)`
 	flex: 1;
 `;
@@ -81,8 +82,10 @@ const CourseLeftContainer = styled(CourseInner)`
 const CourseRightContainer = styled(CourseInner)`
 	flex-basis: 400px;
 `;
+
 const FeaturedImageActions = styled(FlexRow)`
 	justify-content: space-between;
 	margin-top: ${BaseLine * 3}px;
 `;
+
 export default Course;

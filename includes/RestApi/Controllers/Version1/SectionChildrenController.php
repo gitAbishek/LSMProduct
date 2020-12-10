@@ -12,9 +12,9 @@
 
 namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
+
+use ThemeGrill\Masteriyo\Helper\Permission;
 
 /**
  * REST API section children controller class.
@@ -61,6 +61,26 @@ class SectionChildrenController extends CrudController {
 	protected $post_type = 'any';
 
 	/**
+	 * Permission class.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 */
+	protected $permission = null;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Permission $permission
+	 */
+	public function __construct( Permission $permission = null ) {
+		$this->permission = $permission;
+	}
+
+	/**
 	 * Register the routes for terms.
 	 *
 	 * @since 0.1.0
@@ -90,9 +110,24 @@ class SectionChildrenController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function get_items_permissions_check( $request ) {
-		return true;
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
 
-		// TODO Check permission
+		if ( ! $this->permission->rest_check_post_permissions( 'section', 'read' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
 	}
 
 	/**
@@ -126,7 +161,7 @@ class SectionChildrenController extends CrudController {
 	 * @return array
 	 */
 	protected function prepare_objects_query( $request ) {
-		$args = parent::prepare_objects_query( $request );
+		$args                = parent::prepare_objects_query( $request );
 		$args['post_parent'] = $request['section'];
 		return $args;
 	}
@@ -146,7 +181,7 @@ class SectionChildrenController extends CrudController {
 			$item->set_id( $post->ID );
 			$item_repo = $masteriyo_container->get( "{$post->post_type}_repository" );
 			$item_repo->read( $item );
-		} catch( \Exception $e ){
+		} catch ( \Exception $e ) {
 			return false;
 		}
 
@@ -157,7 +192,7 @@ class SectionChildrenController extends CrudController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  0.1.0
-	 * @param  Model         $object  Model object.
+	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
@@ -187,9 +222,9 @@ class SectionChildrenController extends CrudController {
 	/**
 	 * Get section data.
 	 *
-	 * @param Model $section Section instance.
-	 * @param string     $context Request context.
-	 *                            Options: 'view' and 'edit'.
+	 * @param Model  $section Section instance.
+	 * @param string $context Request context.
+	 *                        Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */

@@ -142,7 +142,7 @@ final class Masteriyo {
 			$locale = is_admin() ? get_user_locale() : get_locale();
 		}
 
-		$locale = apply_filters( 'plugin_locale', $locale, 'masteriyo');
+		$locale = apply_filters( 'plugin_locale', $locale, 'masteriyo' );
 
 		unload_textdomain( 'masteriyo' );
 		load_textdomain(

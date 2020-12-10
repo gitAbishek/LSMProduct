@@ -12,9 +12,9 @@
 
 namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
+
+use ThemeGrill\Masteriyo\Helper\Permission;
 
 /**
  * REST API course children controller class.
@@ -61,6 +61,26 @@ class CourseChildrenController extends CrudController {
 	protected $post_type = 'any';
 
 	/**
+	 * Permission class.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 */
+	protected $permission = null;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Permission $permission
+	 */
+	public function __construct( Permission $permission = null ) {
+		$this->permission = $permission;
+	}
+
+	/**
 	 * Register the routes for terms.
 	 *
 	 * @since 0.1.0
@@ -90,9 +110,24 @@ class CourseChildrenController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function get_items_permissions_check( $request ) {
-		return true;
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
 
-		// TODO Check permission
+		if(  ! $this->permission->rest_check_post_permissions( 'course', 'read' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		return true;
 	}
 
 	/**

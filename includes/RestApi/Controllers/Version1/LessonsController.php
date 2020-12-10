@@ -8,6 +8,7 @@ namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Utils;
+use ThemeGrill\Masteriyo\Helper\Permission;
 
 class LessonsController extends CrudController {
 	/**
@@ -44,9 +45,31 @@ class LessonsController extends CrudController {
 	protected $hierarchical = true;
 
 	/**
+	 * Permission class.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 */
+	protected $permission = null;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Permission $permission
+	 */
+	public function __construct( Permission $permission = null ) {
+		$this->permission = $permission;
+	}
+
+	/**
 	 * Register routes.
 	 *
 	 * @since 0.1.0
+	 *
+	 * @return void
 	 */
 	public function register_routes() {
 		register_rest_route(
@@ -57,7 +80,7 @@ class LessonsController extends CrudController {
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_items' ),
 					'permission_callback' => array( $this, 'get_items_permissions_check' ),
-					'args'                => $this->get_collection_params()
+					'args'                => $this->get_collection_params(),
 				),
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
@@ -123,12 +146,12 @@ class LessonsController extends CrudController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['slug'] = array(
+		$params['slug']       = array(
 			'description'       => __( 'Limit result set to lessons with a specific slug.', 'masteriyo' ),
 			'type'              => 'string',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['status'] = array(
+		$params['status']     = array(
 			'default'           => 'any',
 			'description'       => __( 'Limit result set to lessons assigned a specific status.', 'masteriyo' ),
 			'type'              => 'string',
@@ -136,11 +159,22 @@ class LessonsController extends CrudController {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['type'] = array(
-			'description'       => __( 'Limit result set to lessons assigned a specific type.', 'masteriyo' ),
+		$params['category']   = array(
+			'description'       => __( 'Limit result set to lessons assigned a specific category ID.', 'masteriyo' ),
 			'type'              => 'string',
-			'enum'              => array_keys( array( 'hello' => 'hello' ) ),
-			'sanitize_callback' => 'sanitize_key',
+			'sanitize_callback' => 'wp_parse_id_list',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+		$params['tag']        = array(
+			'description'       => __( 'Limit result set to lessons assigned a specific tag ID.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'wp_parse_id_list',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+		$params['difficulty'] = array(
+			'description'       => __( 'Limit result set to lessons assigned a specific difficulty ID.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
@@ -161,7 +195,7 @@ class LessonsController extends CrudController {
 			$lesson->set_id( $id );
 			$lesson_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\LessonRepository::class );
 			$lesson_repo->read( $lesson );
-		} catch( \Exception $e ){
+		} catch ( \Exception $e ) {
 			return false;
 		}
 
@@ -173,7 +207,7 @@ class LessonsController extends CrudController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since   0.1.0
-	 * @param  Model         $object  Model object.
+	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
@@ -203,8 +237,8 @@ class LessonsController extends CrudController {
 	 * Get lesson data.
 	 *
 	 * @param Lesson $lesson Lesson instance.
-	 * @param string     $context Request context.
-	 *                            Options: 'view' and 'edit'.
+	 * @param string $context Request context.
+	 *                        Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
@@ -225,7 +259,7 @@ class LessonsController extends CrudController {
 			'tags'                => $this->get_taxonomy_terms( $lesson, 'tag' ),
 			'video_source'        => $lesson->get_video_source( $context ),
 			'video_source_url'    => $lesson->get_video_source_url( $context ),
-			'video_playback_time' => $lesson->get_video_playback_time( $context )
+			'video_playback_time' => $lesson->get_video_playback_time( $context ),
 		);
 
 		return $data;
@@ -241,16 +275,19 @@ class LessonsController extends CrudController {
 	 *
 	 * @return array
 	 */
-	protected function get_taxonomy_terms ( $lesson, $taxonomy = 'cat' ) {
+	protected function get_taxonomy_terms( $lesson, $taxonomy = 'cat' ) {
 		$terms = Utils::get_object_terms( $lesson->get_id(), 'lesson_' . $taxonomy );
 
-		$terms =  array_map( function( $term ) {
-			return array(
-				'id' => $term->term_id,
-				'name' => $term->name,
-				'slug' => $term->slug
-			);
-		}, $terms );
+		$terms = array_map(
+			function( $term ) {
+				return array(
+					'id'   => $term->term_id,
+					'name' => $term->name,
+					'slug' => $term->slug,
+				);
+			},
+			$terms
+		);
 
 		return $terms;
 	}
@@ -269,14 +306,13 @@ class LessonsController extends CrudController {
 		// Set post_status.
 		$args['post_status'] = $request['status'];
 
-		// Taxonomy query to filter lessons by type, category,
-		// tag, shipping class, and attribute.
+		// Taxonomy query to filter lessons by category, tag and difficult.
 		$tax_query = array();
 
 		// Map between taxonomy name and arg's key.
 		$taxonomies = array(
-			'lesson_cat'        => 'category',
-			'lesson_tag'        => 'tag'
+			'lesson_cat' => 'category',
+			'lesson_tag' => 'tag',
 		);
 
 		// Set tax_query for each passed arg.
@@ -290,13 +326,13 @@ class LessonsController extends CrudController {
 			}
 		}
 
-		// Filter lesson type by slug.
-		if ( ! empty( $request['type'] ) ) {
-			$tax_query[] = array(
-				'taxonomy' => 'lesson_type',
-				'field'    => 'slug',
-				'terms'    => $request['type'],
-			);
+		// Build tax_query if taxonomies are set.
+		if ( ! empty( $tax_query ) ) {
+			if ( ! empty( $args['tax_query'] ) ) {
+				$args['tax_query'] = array_merge( $tax_query, $args['tax_query'] ); // WPCS: slow query ok.
+			} else {
+				$args['tax_query'] = $tax_query; // WPCS: slow query ok.
+			}
 		}
 
 		// Filter featured.
@@ -325,105 +361,105 @@ class LessonsController extends CrudController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'                    => array(
+				'id'                  => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name'                  => array(
+				'name'                => array(
 					'description' => __( 'Lesson name.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'slug'                  => array(
+				'slug'                => array(
 					'description' => __( 'Lesson slug.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'permalink'             => array(
+				'permalink'           => array(
 					'description' => __( 'Lesson URL.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_created'          => array(
+				'date_created'        => array(
 					'description' => __( "The date the lesson was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_created_gmt'      => array(
+				'date_created_gmt'    => array(
 					'description' => __( 'The date the lesson was created, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_modified'         => array(
+				'date_modified'       => array(
 					'description' => __( "The date the lesson was last modified, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_modified_gmt'     => array(
+				'date_modified_gmt'   => array(
 					'description' => __( 'The date the lesson was last modified, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'status'                => array(
+				'status'              => array(
 					'description' => __( 'Lesson status (post status).', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'publish',
 					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'featured'              => array(
+				'featured'            => array(
 					'description' => __( 'Featured lesson.', 'masteriyo' ),
 					'type'        => 'boolean',
 					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'catalog_visibility'    => array(
+				'catalog_visibility'  => array(
 					'description' => __( 'Catalog visibility.', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'visible',
 					'enum'        => array( 'visible', 'catalog', 'search', 'hidden' ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'description'           => array(
+				'description'         => array(
 					'description' => __( 'Lesson description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'short_description'     => array(
+				'short_description'   => array(
 					'description' => __( 'Lesson short description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'reviews_allowed'       => array(
+				'reviews_allowed'     => array(
 					'description' => __( 'Allow reviews.', 'masteriyo' ),
 					'type'        => 'boolean',
 					'default'     => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'average_rating'        => array(
+				'average_rating'      => array(
 					'description' => __( 'Reviews average rating.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'rating_count'          => array(
+				'rating_count'        => array(
 					'description' => __( 'Amount of reviews that the lesson have.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'parent_id'             => array(
+				'parent_id'           => array(
 					'description' => __( 'Lesson parent ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'categories'            => array(
+				'categories'          => array(
 					'description' => __( 'List of categories.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -450,7 +486,7 @@ class LessonsController extends CrudController {
 						),
 					),
 				),
-				'tags'                  => array(
+				'tags'                => array(
 					'description' => __( 'List of tags.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -477,27 +513,27 @@ class LessonsController extends CrudController {
 						),
 					),
 				),
-				'menu_order'            => array(
+				'menu_order'          => array(
 					'description' => __( 'Menu order, used to custom sort lessons.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'video_source'            => array(
+				'video_source'        => array(
 					'description' => __( 'Video source.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'video_source_url'            => array(
+				'video_source_url'    => array(
 					'description' => __( 'Video source URL.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'video_playback_time'            => array(
+				'video_playback_time' => array(
 					'description' => __( 'Video playback time.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'meta_data'             => array(
+				'meta_data'           => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -523,10 +559,68 @@ class LessonsController extends CrudController {
 						),
 					),
 				),
-			)
+			),
 		);
 
 		return $schema;
+	}
+
+	/**
+	 * Checks if a given request has access to get a specific item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
+	 */
+	public function get_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$post = get_post( (int) $request['id'] );
+
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->object_type, 'read', $request['id'] ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to read items.
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function get_items_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'read' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
 	}
 
 	/**
@@ -538,10 +632,22 @@ class LessonsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function create_item_permissions_check( $request ) {
-		// TODO Uncomment this and implement it.
-		// if ( ! wc_rest_check_post_permissions( $this->object_type, 'create' ) ) {
-		// 	return new WP_Error( 'masteriyo_rest_cannot_create', __( 'Sorry, you are not allowed to create resources.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
-		// }
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'create' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
 
 		return true;
 	}
@@ -555,7 +661,24 @@ class LessonsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function delete_item_permissions_check( $request ) {
-		// TODO Check for permission.
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$post = get_post( (int) $request['id'] );
+
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'delete', $post->ID ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_delete',
+				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
 
 		return true;
 	}
@@ -569,7 +692,24 @@ class LessonsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function update_item_permissions_check( $request ) {
-		// TODO Check for permission.
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$post = get_post( (int) $request['id'] );
+
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'update', $post->ID ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
 
 		return true;
 	}
@@ -674,7 +814,6 @@ class LessonsController extends CrudController {
 			}
 		}
 
-
 		/**
 		 * Filters an object before it is inserted via the REST API.
 		 *
@@ -694,8 +833,8 @@ class LessonsController extends CrudController {
 	 * @since 0.1.0
 	 *
 	 * @param Lesson $lesson  Lesson instance.
-	 * @param array      $terms    Terms data.
-	 * @param string     $taxonomy Taxonomy name.
+	 * @param array  $terms    Terms data.
+	 * @param string $taxonomy Taxonomy name.
 	 *
 	 * @return Lesson
 	 */
@@ -706,7 +845,7 @@ class LessonsController extends CrudController {
 			$lesson->set_category_ids( $term_ids );
 		} elseif ( 'tag' === $taxonomy ) {
 			$lesson->set_tag_ids( $term_ids );
-		} elseif( 'difficulty' === $taxonomy ) {
+		} elseif ( 'difficulty' === $taxonomy ) {
 			$lesson->set_difficulty_ids( $term_ids );
 		}
 

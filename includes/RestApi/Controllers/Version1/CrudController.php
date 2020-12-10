@@ -11,7 +11,7 @@ namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 
 use ThemeGrill\Masteriyo\ModelException;
 
-defined( 'ABSPATH' ) ||	exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * CrudController class.
@@ -57,54 +57,6 @@ abstract class CrudController extends RestController {
 	}
 
 	/**
-	 * Check if a given request has access to read items.
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return WP_Error|boolean
-	 */
-	public function get_items_permissions_check( $request ) {
-		// TODO Uncomment this
-		// if ( ! current_user_can( 'read_posts', $this->post_type ) ) {
-		// 	return new \WP_Error( 'masteriyo_rest_cannot_view', __( 'Sorry, you cannot list resources.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
-		// }
-
-		return true;
-	}
-
-	/**
-	 * Check if a given request has access to read an item.
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return WP_Error|boolean
-	 */
-	public function get_item_permissions_check( $request ) {
-		$object = $this->get_object( intval( $request['id'] ) );
-
-		// TODO Uncomment this
-		// if ( $object && 0 !== $object->get_id() && ! wc_rest_check_post_permissions( $this->post_type, 'read', $object->get_id() ) ) {
-		// 	return new \WP_Error( 'masteriyo_rest_cannot_view', __( 'Sorry, you cannot view this resource.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
-		// }
-
-		return true;
-	}
-
-	/**
-	 * Check if a given request has access to delete an item.
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return bool|WP_Error
-	 */
-	public function delete_item_permissions_check( $request ) {
-		$object = $this->get_object( intval( $request['id'] ) );
-
-		if ( $object && 0 !== $object->get_id() && ! wc_rest_check_post_permissions( $this->post_type, 'delete', $object->get_id() ) ) {
-			return new \WP_Error( 'masteriyo_rest_cannot_delete', __( 'Sorry, you are not allowed to delete this resource.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
-		}
-
-		return true;
-	}
-
-	/**
 	 * Get object permalink.
 	 *
 	 * @param  object $object Object.
@@ -118,7 +70,7 @@ abstract class CrudController extends RestController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  0.1.0
-	 * @param  Model         $object  Object data.
+	 * @param  Model           $object  Object data.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
@@ -140,15 +92,16 @@ abstract class CrudController extends RestController {
 		return new \WP_Error( 'invalid-method', sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'masteriyo' ), __METHOD__ ), array( 'status' => 405 ) );
 	}
 
-
 	/**
 	 * Get a single item.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_item( $request ) {
-		$object = $this->get_object( intval( $request['id'] ) );
+		$object = $this->get_object( (int) $request['id'] );
 
 		if ( ! $object || 0 === $object->get_id() ) {
 			return new \WP_Error( "masteriyo_rest_{$this->post_type}_invalid_id", __( 'Invalid ID.', 'masteriyo' ), array( 'status' => 404 ) );
@@ -213,6 +166,8 @@ abstract class CrudController extends RestController {
 
 			/**
 			 * Fires after a single object is created or updated via the REST API.
+			 *
+			 * @since 0.1.0
 			 *
 			 * @param Model         $object    Inserted object.
 			 * @param WP_REST_Request $request   Request object.
@@ -296,7 +251,7 @@ abstract class CrudController extends RestController {
 			'name'                => $request['slug'],
 			'post_parent__in'     => $request['parent'],
 			'post_parent__not_in' => $request['parent_exclude'],
-			's'                   => $request['search']
+			's'                   => $request['search'],
 		);
 
 		if ( 'date' === $args['orderby'] ) {
@@ -402,7 +357,7 @@ abstract class CrudController extends RestController {
 			 * @param array $private_query_vars Array of allowed query vars for authorized users.
 			 * }
 			 */
-			$private = apply_filters( 'masteriyo_rest_private_query_vars', $wp->private_query_vars );
+			$private    = apply_filters( 'masteriyo_rest_private_query_vars', $wp->private_query_vars );
 			$valid_vars = array_merge( $valid_vars, $private );
 		}
 		// Define our own in addition to WP's normal vars.
@@ -439,6 +394,7 @@ abstract class CrudController extends RestController {
 		 * }
 		 */
 		$valid_vars = apply_filters( 'masteriyo_rest_query_vars', $valid_vars );
+		$valid_vars = array_values( array_unique( $valid_vars ) );
 
 		return $valid_vars;
 	}
@@ -471,6 +427,19 @@ abstract class CrudController extends RestController {
 	}
 
 	/**
+	 * Check permissions for an item.
+	 *
+	 * @since 0.1.0
+	 * @param string $object_type Object type.
+	 * @param string $context   Request context.
+	 * @param int    $object_id Post ID.
+	 * @return bool
+	 */
+	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
+		return $this->permission->rest_check_post_permissions( $object_type, 'read', $object_id );
+	}
+
+	/**
 	 * Get a collection of posts.
 	 *
 	 * @since 0.1.0
@@ -484,11 +453,11 @@ abstract class CrudController extends RestController {
 
 		$objects = array();
 		foreach ( $query_results['objects'] as $object ) {
-			// if ( ! wc_rest_check_post_permissions( $this->post_type, 'read', $object->get_id() ) ) {
-			// 	continue;
-			// }
+			if ( ! $this->check_item_permission( $object->get_object_type(), 'read', $object->get_id() ) ) {
+				continue;
+			}
 
-			$data = $this->prepare_object_for_response( $object, $request );
+			$data      = $this->prepare_object_for_response( $object, $request );
 			$objects[] = $this->prepare_response_for_collection( $data );
 		}
 
@@ -499,7 +468,7 @@ abstract class CrudController extends RestController {
 		$response->header( 'X-WP-Total', $query_results['total'] );
 		$response->header( 'X-WP-TotalPages', (int) $max_pages );
 
-		$base          = $this->rest_base;
+		$base = $this->rest_base;
 		$base = add_query_arg( $request->get_query_params(), rest_url( sprintf( '/%s/%s', $this->namespace, $base ) ) );
 
 		if ( $page > 1 ) {
@@ -545,12 +514,6 @@ abstract class CrudController extends RestController {
 		 * @param Model $object         The object being considered for trashing support.
 		 */
 		$supports_trash = apply_filters( "masteriyo_rest_{$this->object_type}_object_trashable", $supports_trash, $object );
-
-		// TODO Check for permission
-		// if ( ! wc_rest_check_post_permissions( $this->post_type, 'delete', $object->get_id() ) ) {
-		// 	/* translators: %s: post type */
-		// 	return new \WP_Error( "masteriyo_rest_user_cannot_delete_{$this->post_type}", sprintf( __( 'Sorry, you are not allowed to delete %s.', 'masteriyo' ), $this->post_type ), array( 'status' => rest_authorization_required_code() ) );
-		// }
 
 		$request->set_param( 'context', 'edit' );
 		$response = $this->prepare_object_for_response( $object, $request );
@@ -598,13 +561,13 @@ abstract class CrudController extends RestController {
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @param Model         $object  Object data.
+	 * @param Model           $object  Object data.
 	 * @param WP_REST_Request $request Request object.
 	 * @return array                   Links for the given post.
 	 */
 	protected function prepare_links( $object, $request ) {
 		$links = array(
-			'self' => array(
+			'self'       => array(
 				'href' => rest_url( sprintf( '/%s/%s/%d', $this->namespace, $this->rest_base, $object->get_id() ) ),
 			),
 			'collection' => array(
@@ -625,94 +588,94 @@ abstract class CrudController extends RestController {
 		$params['context']            = $this->get_context_param();
 		$params['context']['default'] = 'view';
 
-		$params['page'] = array(
-			'description'        => __( 'Current page of the collection.', 'masteriyo' ),
-			'type'               => 'integer',
-			'default'            => 1,
-			'sanitize_callback'  => 'absint',
-			'validate_callback'  => 'rest_validate_request_arg',
-			'minimum'            => 1,
+		$params['page']     = array(
+			'description'       => __( 'Current page of the collection.', 'masteriyo' ),
+			'type'              => 'integer',
+			'default'           => 1,
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
+			'minimum'           => 1,
 		);
 		$params['per_page'] = array(
-			'description'        => __( 'Maximum number of items to be returned in result set.', 'masteriyo' ),
-			'type'               => 'integer',
-			'default'            => 10,
-			'minimum'            => 1,
-			'maximum'            => 100,
-			'sanitize_callback'  => 'absint',
-			'validate_callback'  => 'rest_validate_request_arg',
+			'description'       => __( 'Maximum number of items to be returned in result set.', 'masteriyo' ),
+			'type'              => 'integer',
+			'default'           => 10,
+			'minimum'           => 1,
+			'maximum'           => 100,
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['search'] = array(
-			'description'        => __( 'Limit results to those matching a string.', 'masteriyo' ),
-			'type'               => 'string',
-			'sanitize_callback'  => 'sanitize_text_field',
-			'validate_callback'  => 'rest_validate_request_arg',
+		$params['search']   = array(
+			'description'       => __( 'Limit results to those matching a string.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_text_field',
+			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['after'] = array(
-			'description'        => __( 'Limit response to resources published after a given ISO8601 compliant date.', 'masteriyo' ),
-			'type'               => 'string',
-			'format'             => 'date-time',
-			'validate_callback'  => 'rest_validate_request_arg',
+		$params['after']    = array(
+			'description'       => __( 'Limit response to resources published after a given ISO8601 compliant date.', 'masteriyo' ),
+			'type'              => 'string',
+			'format'            => 'date-time',
+			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['before'] = array(
-			'description'        => __( 'Limit response to resources published before a given ISO8601 compliant date.', 'masteriyo' ),
-			'type'               => 'string',
-			'format'             => 'date-time',
-			'validate_callback'  => 'rest_validate_request_arg',
+		$params['before']   = array(
+			'description'       => __( 'Limit response to resources published before a given ISO8601 compliant date.', 'masteriyo' ),
+			'type'              => 'string',
+			'format'            => 'date-time',
+			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['exclude'] = array(
+		$params['exclude']  = array(
 			'description'       => __( 'Ensure result set excludes specific IDs.', 'masteriyo' ),
 			'type'              => 'array',
 			'items'             => array(
-				'type'          => 'integer',
+				'type' => 'integer',
 			),
 			'default'           => array(),
 			'sanitize_callback' => 'wp_parse_id_list',
 		);
-		$params['include'] = array(
+		$params['include']  = array(
 			'description'       => __( 'Limit result set to specific ids.', 'masteriyo' ),
 			'type'              => 'array',
 			'items'             => array(
-				'type'          => 'integer',
+				'type' => 'integer',
 			),
 			'default'           => array(),
 			'sanitize_callback' => 'wp_parse_id_list',
 		);
-		$params['offset'] = array(
-			'description'        => __( 'Offset the result set by a specific number of items.', 'masteriyo' ),
-			'type'               => 'integer',
-			'sanitize_callback'  => 'absint',
-			'validate_callback'  => 'rest_validate_request_arg',
+		$params['offset']   = array(
+			'description'       => __( 'Offset the result set by a specific number of items.', 'masteriyo' ),
+			'type'              => 'integer',
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['order'] = array(
-			'description'        => __( 'Order sort attribute ascending or descending.', 'masteriyo' ),
-			'type'               => 'string',
-			'default'            => 'desc',
-			'enum'               => array( 'asc', 'desc' ),
-			'validate_callback'  => 'rest_validate_request_arg',
+		$params['order']    = array(
+			'description'       => __( 'Order sort attribute ascending or descending.', 'masteriyo' ),
+			'type'              => 'string',
+			'default'           => 'desc',
+			'enum'              => array( 'asc', 'desc' ),
+			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['orderby'] = array(
-			'description'        => __( 'Sort collection by object attribute.', 'masteriyo' ),
-			'type'               => 'string',
-			'default'            => 'date',
-			'enum'               => array(
+		$params['orderby']  = array(
+			'description'       => __( 'Sort collection by object attribute.', 'masteriyo' ),
+			'type'              => 'string',
+			'default'           => 'date',
+			'enum'              => array(
 				'date',
 				'id',
 				'include',
 				'title',
 				'slug',
 				'modified',
-				'menu_order'
+				'menu_order',
 			),
-			'validate_callback'  => 'rest_validate_request_arg',
+			'validate_callback' => 'rest_validate_request_arg',
 		);
 
 		if ( $this->hierarchical ) {
-			$params['parent'] = array(
+			$params['parent']         = array(
 				'description'       => __( 'Limit result set to those of particular parent IDs.', 'masteriyo' ),
 				'type'              => 'array',
 				'items'             => array(
-					'type'          => 'integer',
+					'type' => 'integer',
 				),
 				'sanitize_callback' => 'wp_parse_id_list',
 				'default'           => array(),
@@ -721,7 +684,7 @@ abstract class CrudController extends RestController {
 				'description'       => __( 'Limit result set to all items except those of a particular parent ID.', 'masteriyo' ),
 				'type'              => 'array',
 				'items'             => array(
-					'type'          => 'integer',
+					'type' => 'integer',
 				),
 				'sanitize_callback' => 'wp_parse_id_list',
 				'default'           => array(),

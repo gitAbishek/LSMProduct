@@ -23,6 +23,7 @@ use ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository;
 use League\Container\Container;
 use ThemeGrill\Masteriyo\Cache\Cache;
 use ThemeGrill\Masteriyo\Repository\QuestionRepository;
+use ThemeGrill\Masteriyo\Constants;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -35,6 +36,8 @@ define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
 define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
 
 require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+
+Constants::set_constant( 'MASTERIYO_TEMPLATE_DEBUG_MODE', true );
 
 $masteriyo_container = new Container();
 
@@ -63,7 +66,8 @@ $masteriyo_container->add(
 $masteriyo_container->add( 'section', \ThemeGrill\Masteriyo\Models\Section::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\SectionRepository::class );
 
-$masteriyo_container->add( 'section_repository',
+$masteriyo_container->add(
+	'section_repository',
 	function() {
 		return apply_filters( 'masteriyo_section_repository', new SectionRepository() );
 	}
@@ -78,13 +82,15 @@ $masteriyo_container->add(
 $masteriyo_container->add( 'lesson', \ThemeGrill\Masteriyo\Models\Lesson::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\LessonRepository::class );
 
-$masteriyo_container->add( \ThemeGrill\Masteriyo\Repository\LessonRepository::class,
+$masteriyo_container->add(
+	\ThemeGrill\Masteriyo\Repository\LessonRepository::class,
 	function() {
 		return apply_filters( 'masteriyo_lesson_repository', new LessonRepository() );
 	}
 );
 
-$masteriyo_container->add( 'lesson_repository',
+$masteriyo_container->add(
+	'lesson_repository',
 	function() {
 		return apply_filters( 'masteriyo_lesson_repository', new LessonRepository() );
 	}
@@ -93,7 +99,8 @@ $masteriyo_container->add( 'lesson_repository',
 $masteriyo_container->add( 'quiz', \ThemeGrill\Masteriyo\Models\Quiz::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\QuizRepository::class );
 
-$masteriyo_container->add( 'quiz_repository',
+$masteriyo_container->add(
+	'quiz_repository',
 	function() {
 		return apply_filters( 'masteriyo_quiz_repository', new QuizRepository() );
 	}
@@ -166,6 +173,8 @@ $masteriyo_container->add(
 		return apply_filters( 'masteriyo_question_repository', new QuestionRepository() );
 	}
 );
+
+$masteriyo_container->add( 'Permission', \ThemeGrill\Masteriyo\Helper\Utils\Permission::class, true );
 
 $_GLOBALS['masteriyo_container'] = $masteriyo_container;
 

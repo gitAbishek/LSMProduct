@@ -81,7 +81,7 @@ abstract class PostsController extends RestController {
 	 * @return WP_Error|boolean
 	 */
 	public function get_item_permissions_check( $request ) {
-		$post = get_post( intval( $request['id'] ) );
+		$post = get_post( (int) $request['id'] );
 
 		if ( $post && ! wc_rest_check_post_permissions( $this->post_type, 'read', $post->ID ) ) {
 			return new\WP_Error( 'masteriyo_rest_cannot_view', __( 'Sorry, you cannot view this resource.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
@@ -97,7 +97,7 @@ abstract class PostsController extends RestController {
 	 * @return WP_Error|boolean
 	 */
 	public function update_item_permissions_check( $request ) {
-		$post = get_post( intval( $request['id'] ) );
+		$post = get_post( (int) $request['id'] );
 
 		if ( $post && ! wc_rest_check_post_permissions( $this->post_type, 'edit', $post->ID ) ) {
 			return new \WP_Error( 'masteriyo_rest_cannot_edit', __( 'Sorry, you are not allowed to edit this resource.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
@@ -113,7 +113,7 @@ abstract class PostsController extends RestController {
 	 * @return bool|WP_Error
 	 */
 	public function delete_item_permissions_check( $request ) {
-		$post = get_post( intval( $request['id'] ) );
+		$post = get_post( (int) $request['id'] );
 
 		if ( $post && ! wc_rest_check_post_permissions( $this->post_type, 'delete', $post->ID ) ) {
 			return new \WP_Error( 'masteriyo_rest_cannot_delete', __( 'Sorry, you are not allowed to delete this resource.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
@@ -144,7 +144,7 @@ abstract class PostsController extends RestController {
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_item( $request ) {
-		$id   = intval( $request['id'] );
+		$id   = (int) $request['id'] ;
 		$post = get_post( $id );
 
 		if ( ! empty( $post->post_type ) && 'product_variation' === $post->post_type && 'product' === $this->post_type ) {
@@ -251,7 +251,7 @@ abstract class PostsController extends RestController {
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function update_item( $request ) {
-		$id   = intval( $request['id'] );
+		$id   = (int) $request['id'];
 		$post = get_post( $id );
 
 		if ( ! empty( $post->post_type ) && 'product_variation' === $post->post_type && 'product' === $this->post_type ) {

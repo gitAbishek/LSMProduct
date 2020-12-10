@@ -374,10 +374,10 @@ abstract class RestController extends \WP_REST_Controller {
 
 		$current = $setting['value'];
 		if ( isset( $values['width'] ) ) {
-			$current['width'] = intval( $values['width'] );
+			$current['width'] = (int) $values['width'];
 		}
 		if ( isset( $values['height'] ) ) {
-			$current['height'] = intval( $values['height'] );
+			$current['height'] = (int) $values['height'];
 		}
 		if ( isset( $values['crop'] ) ) {
 			$current['crop'] = (bool) $values['crop'];

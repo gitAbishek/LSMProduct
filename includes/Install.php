@@ -18,7 +18,7 @@ class Install {
 	 */
 	public static function init() {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-		// self::create_roles();
+		self::create_roles();
 		self::init_db();
 	}
 
@@ -77,18 +77,9 @@ class Install {
 	 * @return void
 	 */
 	private static function create_roles() {
-		$editor_cap = get_role( 'editor' )->capabilities;
-		$author_cap = get_role( 'author' )->capabilities;
-
-		add_role( 'masteriyo_student', 'Masteriyo Student', $author_cap );
-		add_role( 'masteriyo_instructor', 'Masteriyo Instructor', $editor_cap );
-	}
-
-	private function get_student_capabilities() {
-		return apply_filters( 'masteriyo_get_student_capabilities', array(
-			'delete_courses',
-			
-		) );
+		foreach( self::get_roles() as $role_slug => $role ) {
+			add_role( $role_slug, $role['display_name'], $role['capabilities'] );
+		}
 	}
 
 	/**
@@ -96,14 +87,23 @@ class Install {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return void
+	 * @return array
 	 */
-	public function get_roles() {
-		return array(
-			'masteriyo_manager',
-			'masteriyo_instructor',
-			'masteriyo_student'
-		);
+	public static function get_roles() {
+		return apply_filters( 'masteriyo_get_roles', array(
+			'masteriyo_manager' => array(
+				'display_name' => esc_html__( 'Masteriyo Manager', 'masteriyo' ),
+				'capabilities' => get_role( 'editor' )->capabilities,
+			),
+			'masteriyo_instructor' => array(
+				'display_name' => esc_html__( 'Masteriyo Instructor', 'masteriyo' ),
+				'capabilities' => get_role( 'author' )->capabilities,
+			),
+			'masteriyo_student' => array(
+				'display_name' => esc_html__( 'Masteriyo Student', 'masteriyo' ),
+				'capabilities' => get_role( 'contributor' )->capabilities,
+			)
+		) );
 	}
 
 	/**

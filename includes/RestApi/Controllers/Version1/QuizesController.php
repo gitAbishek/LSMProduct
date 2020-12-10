@@ -8,6 +8,7 @@ namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Utils;
+use ThemeGrill\Masteriyo\Helper\Permission;
 
 class QuizesController extends CrudController {
 	/**
@@ -56,6 +57,26 @@ class QuizesController extends CrudController {
 	protected $hierarchical = true;
 
 	/**
+	 * Permission class.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 */
+	protected $permission = null;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Permission $permission
+	 */
+	public function __construct( Permission $permission = null ) {
+		$this->permission = $permission;
+	}
+
+	/**
 	 * Register routes.
 	 *
 	 * @since 0.1.0
@@ -71,7 +92,7 @@ class QuizesController extends CrudController {
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_items' ),
 					'permission_callback' => array( $this, 'get_items_permissions_check' ),
-					'args'                => $this->get_collection_params()
+					'args'                => $this->get_collection_params(),
 				),
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
@@ -137,12 +158,12 @@ class QuizesController extends CrudController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['slug'] = array(
+		$params['slug']       = array(
 			'description'       => __( 'Limit result set to quizes with a specific slug.', 'masteriyo' ),
 			'type'              => 'string',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['status'] = array(
+		$params['status']     = array(
 			'default'           => 'any',
 			'description'       => __( 'Limit result set to quizes assigned a specific status.', 'masteriyo' ),
 			'type'              => 'string',
@@ -150,11 +171,22 @@ class QuizesController extends CrudController {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['type'] = array(
-			'description'       => __( 'Limit result set to quizes assigned a specific type.', 'masteriyo' ),
+		$params['category']   = array(
+			'description'       => __( 'Limit result set to quizes assigned a specific category ID.', 'masteriyo' ),
 			'type'              => 'string',
-			'enum'              => array_keys( array( 'hello' => 'hello' ) ),
-			'sanitize_callback' => 'sanitize_key',
+			'sanitize_callback' => 'wp_parse_id_list',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+		$params['tag']        = array(
+			'description'       => __( 'Limit result set to quizes assigned a specific tag ID.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'wp_parse_id_list',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+		$params['difficulty'] = array(
+			'description'       => __( 'Limit result set to quizes assigned a specific difficulty ID.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
@@ -172,12 +204,12 @@ class QuizesController extends CrudController {
 	protected function get_object( $id ) {
 		global $masteriyo_container;
 		try {
-			$id     = $id instanceof \WP_Post ? $id->ID : $id;
+			$id   = $id instanceof \WP_Post ? $id->ID : $id;
 			$quiz = $masteriyo_container->get( 'quiz' );
 			$quiz->set_id( $id );
 			$quiz_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\QuizRepository::class );
 			$quiz_repo->read( $quiz );
-		} catch( \Exception $e ){
+		} catch ( \Exception $e ) {
 			return false;
 		}
 
@@ -190,7 +222,7 @@ class QuizesController extends CrudController {
 	 *
 	 * @since  0.1.0
 	 *
-	 * @param  Model         $object  Model object.
+	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -210,7 +242,7 @@ class QuizesController extends CrudController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
-	 	 * @since 0.1.0
+		 * @since 0.1.0
 		 *
 		 * @param WP_REST_Response $response The response object.
 		 * @param WC_Data          $object   Object data.
@@ -224,9 +256,9 @@ class QuizesController extends CrudController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Quiz $quiz Quiz instance.
-	 * @param string     $context Request context.
-	 *                            Options: 'view' and 'edit'.
+	 * @param Quiz   $quiz Quiz instance.
+	 * @param string $context Request context.
+	 *                        Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
@@ -251,21 +283,24 @@ class QuizesController extends CrudController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Quiz $quiz Quiz object.
+	 * @param Quiz   $quiz Quiz object.
 	 * @param string $taxonomy Taxonomy slug.
 	 *
 	 * @return array
 	 */
-	protected function get_taxonomy_terms ( $quiz, $taxonomy = 'cat' ) {
+	protected function get_taxonomy_terms( $quiz, $taxonomy = 'cat' ) {
 		$terms = Utils::get_object_terms( $quiz->get_id(), 'quiz_' . $taxonomy );
 
-		$terms =  array_map( function( $term ) {
-			return array(
-				'id' => $term->term_id,
-				'name' => $term->name,
-				'slug' => $term->slug
-			);
-		}, $terms );
+		$terms = array_map(
+			function( $term ) {
+				return array(
+					'id'   => $term->term_id,
+					'name' => $term->name,
+					'slug' => $term->slug,
+				);
+			},
+			$terms
+		);
 
 		return $terms;
 	}
@@ -307,13 +342,13 @@ class QuizesController extends CrudController {
 			}
 		}
 
-		// Filter quiz type by slug.
-		if ( ! empty( $request['type'] ) ) {
-			$tax_query[] = array(
-				'taxonomy' => 'quiz_type',
-				'field'    => 'slug',
-				'terms'    => $request['type'],
-			);
+		// Build tax_query if taxonomies are set.
+		if ( ! empty( $tax_query ) ) {
+			if ( ! empty( $args['tax_query'] ) ) {
+				$args['tax_query'] = array_merge( $tax_query, $args['tax_query'] ); // WPCS: slow query ok.
+			} else {
+				$args['tax_query'] = $tax_query; // WPCS: slow query ok.
+			}
 		}
 
 		// Filter featured.
@@ -342,69 +377,69 @@ class QuizesController extends CrudController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'                    => array(
+				'id'                => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name'                  => array(
+				'name'              => array(
 					'description' => __( 'Quiz name.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'slug'                  => array(
+				'slug'              => array(
 					'description' => __( 'Quiz slug.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'permalink'             => array(
+				'permalink'         => array(
 					'description' => __( 'Quiz URL.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_created'          => array(
+				'date_created'      => array(
 					'description' => __( "The date the quiz was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_created_gmt'      => array(
+				'date_created_gmt'  => array(
 					'description' => __( 'The date the quiz was created, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_modified'         => array(
+				'date_modified'     => array(
 					'description' => __( "The date the quiz was last modified, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_modified_gmt'     => array(
+				'date_modified_gmt' => array(
 					'description' => __( 'The date the quiz was last modified, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'status'                => array(
+				'status'            => array(
 					'description' => __( 'Quiz status (post status).', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'publish',
 					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'description'           => array(
+				'description'       => array(
 					'description' => __( 'Quiz description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'short_description'     => array(
+				'short_description' => array(
 					'description' => __( 'Quiz short description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'meta_data'             => array(
+				'meta_data'         => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -430,10 +465,68 @@ class QuizesController extends CrudController {
 						),
 					),
 				),
-			)
+			),
 		);
 
 		return $schema;
+	}
+
+	/**
+	 * Checks if a given request has access to get a specific item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
+	 */
+	public function get_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$post = get_post( (int) $request['id'] );
+
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->object_type, 'read', $request['id'] ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to read items.
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function get_items_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'read' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
 	}
 
 	/**
@@ -445,10 +538,22 @@ class QuizesController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function create_item_permissions_check( $request ) {
-		// TODO Uncomment this and implement it.
-		// if ( ! wc_rest_check_post_permissions( $this->object_type, 'create' ) ) {
-		// 	return new WP_Error( 'masteriyo_rest_cannot_create', __( 'Sorry, you are not allowed to create resources.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
-		// }
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'create' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
 
 		return true;
 	}
@@ -462,7 +567,24 @@ class QuizesController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function delete_item_permissions_check( $request ) {
-		// TODO Check for permission.
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$post = get_post( (int) $request['id'] );
+
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'delete', $post->ID ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_delete',
+				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
 
 		return true;
 	}
@@ -476,7 +598,24 @@ class QuizesController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function update_item_permissions_check( $request ) {
-		// TODO Check for permission.
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$post = get_post( (int) $request['id'] );
+
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'update', $post->ID ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
 
 		return true;
 	}
@@ -495,7 +634,7 @@ class QuizesController extends CrudController {
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		global $masteriyo_container;
 
-		$id     = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
+		$id   = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
 		$quiz = $masteriyo_container->get( 'quiz' );
 
 		if ( 0 !== $id ) {

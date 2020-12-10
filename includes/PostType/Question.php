@@ -49,11 +49,11 @@ class Question extends PostType {
 		);
 
 		$this->args = array(
-			'label'               => __ ( 'Questions', 'masteriyo' ),
+			'label'               => __( 'Questions', 'masteriyo' ),
 			'description'         => __( 'Questions Description', 'masteriyo' ),
 			'labels'              => $this->labels,
-			'supports'            => false,
-			'taxonomies'          => array( ),
+			'supports'            => array( 'title', 'editor', 'author' ),
+			'taxonomies'          => array(),
 			'hierarchical'        => false,
 			'public'              => true,
 			'show_ui'             => true,
@@ -69,8 +69,7 @@ class Question extends PostType {
 			'publicly_queryable'  => true,
 			'capability_type'     => 'post',
 			'can_export'          => true,
-			'delete_with_user'    => null,
-			'rest_controller_class' => 'ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1\\QuestionsController',
+			'delete_with_user'    => true,
 		);
 	}
 }

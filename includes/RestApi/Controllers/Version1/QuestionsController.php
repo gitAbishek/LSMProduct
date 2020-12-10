@@ -8,6 +8,7 @@ namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Utils;
+use ThemeGrill\Masteriyo\Helper\Permission;
 
 class QuestionsController extends CrudController {
 	/**
@@ -70,6 +71,26 @@ class QuestionsController extends CrudController {
 		'image-matching',
 		'sortable',
 	);
+
+	/**
+	 * Permission class.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 */
+	protected $permission = null;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Permission $permission
+	 */
+	public function __construct( Permission $permission ) {
+		$this->permission = $permission;
+	}
 
 	/**
 	 * Register routes.
@@ -178,6 +199,23 @@ class QuestionsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function check_answer_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_answer_check_permissions() ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
 		return true;
 	}
 
@@ -188,7 +226,7 @@ class QuestionsController extends CrudController {
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function check_answer( $request ) {
-		$object = $this->get_object( intval( $request['id'] ) );
+		$object = $this->get_object( (int) $request['id'] );
 
 		if ( ! $object || 0 === $object->get_id() ) {
 			return new \WP_Error( "masteriyo_rest_{$this->post_type}_invalid_id", __( 'Invalid ID.', 'masteriyo' ), array( 'status' => 404 ) );
@@ -231,11 +269,23 @@ class QuestionsController extends CrudController {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
-		$params['type'] = array(
+		$params['type']     = array(
 			'description'       => __( 'Limit result set to questiones assigned a specific type.', 'masteriyo' ),
 			'type'              => 'string',
 			'enum'              => apply_filters( 'masteriyo_question_types', $this->get_types() ),
 			'sanitize_callback' => 'sanitize_key',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+		$params['category'] = array(
+			'description'       => __( 'Limit result set to courses assigned a specific category ID.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'wp_parse_id_list',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+		$params['tag']      = array(
+			'description'       => __( 'Limit result set to courses assigned a specific tag ID.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
@@ -572,6 +622,64 @@ class QuestionsController extends CrudController {
 	}
 
 	/**
+	 * Checks if a given request has access to get a specific item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
+	 */
+	public function get_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$post = get_post( (int) $request['id'] );
+
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->object_type, 'read', $request['id'] ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to read items.
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function get_items_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'read' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
 	 * Check if a given request has access to create an item.
 	 *
 	 * @since 0.1.0
@@ -580,10 +688,22 @@ class QuestionsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function create_item_permissions_check( $request ) {
-		// TODO Uncomment this and implement it.
-		// if ( ! wc_rest_check_post_permissions( $this->post_type, 'create' ) ) {
-		// return new WP_Error( 'masteriyo_rest_cannot_create', __( 'Sorry, you are not allowed to create resources.', 'masteriyo' ), array( 'status' => rest_authorization_required_code() ) );
-		// }
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'create' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
 
 		return true;
 	}
@@ -597,7 +717,24 @@ class QuestionsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function delete_item_permissions_check( $request ) {
-		// TODO Check for permission.
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$post = get_post( (int) $request['id'] );
+
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'delete', $post->ID ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_delete',
+				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
 
 		return true;
 	}
@@ -611,7 +748,24 @@ class QuestionsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function update_item_permissions_check( $request ) {
-		// TODO Check for permission.
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$post = get_post( (int) $request['id'] );
+
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'update', $post->ID ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
 
 		return true;
 	}

@@ -47,11 +47,11 @@ class Courses extends PostType {
 		);
 
 		$this->args = array(
-			'label'               => __ ( 'Courses', 'masteriyo' ),
+			'label'               => __( 'Courses', 'masteriyo' ),
 			'description'         => __( 'Courses Description', 'masteriyo' ),
 			'labels'              => $this->labels,
-			'supports'            => false,
-			'taxonomies'          => array( ),
+			'supports'            => array( 'title', 'editor', 'author', 'thumbnail', 'comments', 'custom-fields', 'page-attributes', 'post-formats' ),
+			'taxonomies'          => array(),
 			'hierarchical'        => false,
 			'public'              => true,
 			'show_ui'             => true,
@@ -67,7 +67,7 @@ class Courses extends PostType {
 			'publicly_queryable'  => true,
 			'capability_type'     => 'post',
 			'can_export'          => true,
-			'delete_with_user'    => null,
+			'delete_with_user'    => true,
 		);
 	}
 }

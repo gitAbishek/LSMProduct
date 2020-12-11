@@ -124,29 +124,4 @@ class Permission {
 
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'course_review' );
 	}
-
-	/**
-	 * Check permissions of course terms on REST API.
-	 *
-	 * @since 0.1.0
-	 * @param string $taxonomy  Taxonomy.
-	 * @param string $context   Request context.
-	 * @param int    $object_id Post ID.
-	 * @return bool
-	 */
-	function rest_check_course_term_permissions( $taxonomy, $context = 'read', $object_id = 0 ) {
-		$contexts = array(
-			'read'   => 'manage_terms',
-			'create' => 'edit_terms',
-			'edit'   => 'edit_terms',
-			'delete' => 'delete_terms',
-			'batch'  => 'edit_terms',
-		);
-
-		$cap             = $contexts[ $context ];
-		$taxonomy_object = get_taxonomy( $taxonomy );
-		$permission      = current_user_can( $taxonomy_object->cap->$cap, $object_id );
-
-		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, $taxonomy );
-	}
 }

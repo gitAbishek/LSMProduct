@@ -13,6 +13,7 @@
  */
 
 use ThemeGrill\Masteriyo\Masteriyo;
+use ThemeGrill\Masteriyo\Repository\OrderRepository;
 use ThemeGrill\Masteriyo\Repository\CourseRepository;
 use ThemeGrill\Masteriyo\Repository\SectionRepository;
 use ThemeGrill\Masteriyo\Repository\LessonRepository;
@@ -50,6 +51,16 @@ $masteriyo_container->add(
 	\ThemeGrill\Masteriyo\Cache\CacheInterface::class,
 	function() {
 		return apply_filters( 'masteriyo_cache', Cache::instance() );
+	}
+);
+
+$masteriyo_container->add( 'order', \ThemeGrill\Masteriyo\Models\Order::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\OrderRepository::class );
+
+$masteriyo_container->add(
+	\ThemeGrill\Masteriyo\Repository\OrderRepository::class,
+	function() {
+		return apply_filters( 'masteriyo_order_repository', new OrderRepository() );
 	}
 );
 

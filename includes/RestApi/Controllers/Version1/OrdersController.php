@@ -171,6 +171,12 @@ class OrdersController extends CrudController {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
+		$params['user_id']      = array(
+			'description'       => __( 'Filter orders by customer ID.', 'masteriyo' ),
+			'type'              => 'number',
+			'sanitize_callback' => 'sanitize_key',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
 
 		return $params;
 	}
@@ -246,6 +252,7 @@ class OrdersController extends CrudController {
 			'currency'     => $order->get_currency( $context ),
 			'product_ids'  => $order->get_product_ids( $context ),
 			'expiry_date'  => $order->get_expiry_date( $context ),
+			'user_id'      => $order->get_user_id( $context ),
 		);
 
 		return $data;
@@ -267,11 +274,16 @@ class OrdersController extends CrudController {
 
 		// Set order status.
 		$args['meta_query'] = array(
-			'relation' => 'OR',
+			'relation' => 'AND',
 			array(
 				'key'     => '_order_status',
 				'value'   => $request['order_status'],
-				'compare' => 'LIKE',
+				'compare' => '=',
+			),
+			array(
+				'key'     => '_user_id',
+				'value'   => ! empty( $request['user_id'] ) ? $request['user_id'] : get_current_user_id(),
+				'compare' => '=',
 			),
 		);
 
@@ -365,6 +377,11 @@ class OrdersController extends CrudController {
 				),
 				'expiry_date'       => array(
 					'description' => __( 'Expiry date of this order.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'user_id'           => array(
+					'description' => __( 'Customer ID.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -603,6 +620,13 @@ class OrdersController extends CrudController {
 		// Order's expiry date.
 		if ( isset( $request['expiry_date'] ) ) {
 			$order->set_expiry_date( $request['expiry_date'] );
+		}
+
+		// Customer/User ID.
+		if ( isset( $request['user_id'] ) ) {
+			$order->set_user_id( $request['user_id'] );
+		} else {
+			$order->set_user_id( get_current_user_id() );
 		}
 
 		// Allow set meta_data.

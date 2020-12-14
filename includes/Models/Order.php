@@ -67,6 +67,7 @@ class Order extends Model {
 		'expiry_date'   => '',
 		'date_created'  => null,
 		'date_modified' => null,
+		'user_id'       => null,
 	);
 
 	/**
@@ -227,6 +228,19 @@ class Order extends Model {
 		return $this->get_prop( 'date_modified', $context );
 	}
 
+	/**
+	 * Get customer/user ID.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_user_id( $context = 'view' ) {
+		return $this->get_prop( 'user_id', $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -330,5 +344,16 @@ class Order extends Model {
 	 */
 	public function set_date_modified( $date = null ) {
 		$this->set_prop( 'date_modified', $date );
+	}
+
+	/**
+	 * Set customer/user ID.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param integer $id Customer/User ID.
+	 */
+	public function set_user_id( $id ) {
+		$this->set_prop( 'user_id', $id );
 	}
 }

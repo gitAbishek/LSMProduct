@@ -32,6 +32,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 		'_expiry_date'   => 'expiry_date',
 		'_date_created'  => 'date_created',
 		'_date_modified' => 'date_modified',
+		'_user_id'       => 'user_id',
 	);
 
 	/**

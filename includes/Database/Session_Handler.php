@@ -26,12 +26,16 @@ class Session_Handler extends Session {
 	/**
 	 * Cookie name used for the session.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var string cookie name
 	 */
 	protected $_cookie;
 
 	/**
 	 * Session expiry.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @var string Session due to expire - Timestamp.
 	 */
@@ -40,12 +44,16 @@ class Session_Handler extends Session {
 	/**
 	 * Session expiration timestamp.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var string
 	 */
 	protected $_session_expiration;
 
 	/**
 	 * True when the cookie exists.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @var bool Based on whether a cookie exists.
 	 */
@@ -54,12 +62,16 @@ class Session_Handler extends Session {
 	/**
 	 * Table name for session data.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var string Custom session table name
 	 */
 	protected $_table;
 
 	/**
 	 * Constructor for the session class.
+	 *
+	 * @since 0.1.0
 	 */
 	public function __construct() {
 		$this->_cookie = apply_filters( 'masteriyo_cookie', 'wp_masteriyo_session_' . COOKIEHASH );
@@ -69,7 +81,7 @@ class Session_Handler extends Session {
 	/**
 	 * Init hooks and session data.
 	 *
-	 * @since 3.3.0
+	 * @since 0.1.0
 	 */
 	public function init() {
 		$this->init_session_cookie();
@@ -120,6 +132,8 @@ class Session_Handler extends Session {
 	 *
 	 * Warning: Cookies will only be set if this is called before the headers are sent.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param bool $set Should the session cookie be set.
 	 */
 	public function set_customer_session_cookie( $set ) {
@@ -149,6 +163,8 @@ class Session_Handler extends Session {
 	/**
 	 * Return true if the current user has an active session, i.e. a cookie to retrieve values.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return bool
 	 */
 	public function has_session() {
@@ -157,6 +173,8 @@ class Session_Handler extends Session {
 
 	/**
 	 * Set session expiration.
+	 *
+	 * @since 0.1.0
 	 */
 	public function set_session_expiration() {
 		$this->_session_expiring   = time() + intval( apply_filters( 'masteriyo_session_expiring', 60 * 60 * 47 ) ); // 47 Hours.
@@ -167,6 +185,8 @@ class Session_Handler extends Session {
 	 * Generate a unique customer ID for guests, or return user ID if logged in.
 	 *
 	 * Uses Portable PHP password hashing framework to generate a unique cryptographically strong ID.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return string
 	 */
@@ -190,6 +210,8 @@ class Session_Handler extends Session {
 	 * Get the session cookie, if set. Otherwise return false.
 	 *
 	 * Session cookies without a customer ID are invalid.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return bool|array
 	 */
@@ -220,6 +242,8 @@ class Session_Handler extends Session {
 	/**
 	 * Get session data.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return array
 	 */
 	public function get_session_data() {
@@ -228,6 +252,8 @@ class Session_Handler extends Session {
 
 	/**
 	 * Save data and delete guest session.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param integer $old_session_key session ID before user logs in.
 	 */
@@ -256,6 +282,8 @@ class Session_Handler extends Session {
 	/**
 	 * Set a cookie - wrapper for setcookie using WP constants.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param  string  $name   Name of the cookie being set.
 	 * @param  string  $value  Value of the cookie.
 	 * @param  integer $expire Expiry of the cookie.
@@ -273,6 +301,8 @@ class Session_Handler extends Session {
 
 	/**
 	 * Destroy all session data.
+	 *
+	 * @since 0.1.0
 	 */
 	public function destroy_session() {
 		$this->delete_session( $this->_customer_id );
@@ -281,6 +311,8 @@ class Session_Handler extends Session {
 
 	/**
 	 * Forget all session data without destroying it.
+	 *
+	 * @since 0.1.0
 	 */
 	public function forget_session() {
 		$this->setcookie( $this->_cookie, '', time() - YEAR_IN_SECONDS, $this->use_secure_cookie(), true );
@@ -294,6 +326,8 @@ class Session_Handler extends Session {
 
 	/**
 	 * Cleanup session data from the database.
+	 *
+	 * @since 0.1.0
 	 */
 	public function cleanup_sessions() {
 		global $wpdb;
@@ -303,6 +337,8 @@ class Session_Handler extends Session {
 
 	/**
 	 * Returns the session.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $customer_id Custo ID.
 	 * @param mixed  $default Default session value.
@@ -328,6 +364,8 @@ class Session_Handler extends Session {
 	/**
 	 * Delete the session from the database.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param int $customer_id Customer ID.
 	 */
 	public function delete_session( $customer_id ) {
@@ -343,6 +381,8 @@ class Session_Handler extends Session {
 
 	/**
 	 * Update the session expiry timestamp.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $customer_id Customer ID.
 	 * @param int    $timestamp Timestamp to expire the cookie.

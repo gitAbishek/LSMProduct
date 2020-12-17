@@ -206,4 +206,15 @@ class Utils {
 
 		return apply_filters( 'masteriyo_is_rest_api_request', $is_rest_api_request );
 	}
+
+	/**
+	 * Check if the home URL is https. If it is, we don't need to do things such as 'force ssl'.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @return bool
+	 */
+	public static function is_https_site() {
+		return false !== strstr( get_option( 'home' ), 'https:' );
+	}
 }

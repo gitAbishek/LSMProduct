@@ -36,17 +36,18 @@ class Install {
 		$base_prefix     = $wpdb->base_prefix;
 
 		dbDelta( self::get_question_table_schema( $charset_collate, $base_prefix ) );
+		dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
 	}
 
 	/**
-	 * Initialize question table.
+	 * Get question table schema.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $charset_collate	Database charset collate.
-	 * @param string $base_prefix		Table prefix.
+	 * @param string $charset_collate   Database charset collate.
+	 * @param string $base_prefix       Table prefix.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	private static function get_question_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_questions` (
@@ -70,6 +71,29 @@ class Install {
 	}
 
 	/**
+	 * Get session table schema.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $charset_collate   Database charset collate.
+	 * @param string $base_prefix       Table prefix.
+	 *
+	 * @return string
+	 */
+	private static function get_session_table_schema( $charset_collate, $base_prefix ) {
+		$sql = "CREATE TABLE `{$base_prefix}masteriyo_sessions` (
+			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			session_key char(32) NOT NULL,
+			session_value LONGTEXT NOT NULL,
+			session_expiry BIGINT UNSIGNED NOT NULL,
+			PRIMARY KEY (id),
+  			UNIQUE KEY session_key (session_key)
+		) $charset_collate;";
+
+		return $sql;
+	}
+
+	/**
 	 * Create roles.
 	 *
 	 * @since 0.1.0
@@ -77,7 +101,7 @@ class Install {
 	 * @return void
 	 */
 	private static function create_roles() {
-		foreach( self::get_roles() as $role_slug => $role ) {
+		foreach ( self::get_roles() as $role_slug => $role ) {
 			add_role( $role_slug, $role['display_name'], $role['capabilities'] );
 		}
 	}
@@ -90,20 +114,23 @@ class Install {
 	 * @return array
 	 */
 	public static function get_roles() {
-		return apply_filters( 'masteriyo_get_roles', array(
-			'masteriyo_manager' => array(
-				'display_name' => esc_html__( 'Masteriyo Manager', 'masteriyo' ),
-				'capabilities' => get_role( 'editor' )->capabilities,
-			),
-			'masteriyo_instructor' => array(
-				'display_name' => esc_html__( 'Masteriyo Instructor', 'masteriyo' ),
-				'capabilities' => get_role( 'author' )->capabilities,
-			),
-			'masteriyo_student' => array(
-				'display_name' => esc_html__( 'Masteriyo Student', 'masteriyo' ),
-				'capabilities' => get_role( 'contributor' )->capabilities,
+		return apply_filters(
+			'masteriyo_get_roles',
+			array(
+				'masteriyo_manager'    => array(
+					'display_name' => esc_html__( 'Masteriyo Manager', 'masteriyo' ),
+					'capabilities' => get_role( 'editor' )->capabilities,
+				),
+				'masteriyo_instructor' => array(
+					'display_name' => esc_html__( 'Masteriyo Instructor', 'masteriyo' ),
+					'capabilities' => get_role( 'author' )->capabilities,
+				),
+				'masteriyo_student'    => array(
+					'display_name' => esc_html__( 'Masteriyo Student', 'masteriyo' ),
+					'capabilities' => get_role( 'contributor' )->capabilities,
+				),
 			)
-		) );
+		);
 	}
 
 	/**
@@ -118,7 +145,7 @@ class Install {
 
 		return array(
 			"{$wpdb->prefix}masteriyo_questions",
-			"{$wpdb->prefix}masteriyo_answers"
+			"{$wpdb->prefix}masteriyo_answers",
 		);
 	}
 
@@ -135,7 +162,7 @@ class Install {
 		$tables = self::get_tables();
 
 		foreach ( $tables as $table ) {
-			$wpdb->query( 'DROP TABLE IF EXISTS ' . esc_sql( $table) );
+			$wpdb->query( 'DROP TABLE IF EXISTS ' . esc_sql( $table ) );
 		}
 	}
 }

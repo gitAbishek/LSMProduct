@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 0.1.0
  */
 
-class Cache implements CacheInterface{
+class Cache implements CacheInterface {
 	use Singleton;
 
 	/**

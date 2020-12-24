@@ -167,7 +167,7 @@ $masteriyo_container->add( 'fill-blanks', \ThemeGrill\Masteriyo\Models\Question\
 	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
 
 $masteriyo_container->add( 'short-answer', \ThemeGrill\Masteriyo\Models\Question\ShortAnswer::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
+	->addArgument( \ThemeGrill\Maswwteriyo\Repository\QuestionRepository::class );
 
 $masteriyo_container->add( 'image-matching', \ThemeGrill\Masteriyo\Models\Question\ImageMatching::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
@@ -186,6 +186,9 @@ $masteriyo_container->add(
 );
 
 $masteriyo_container->add( 'Permission', \ThemeGrill\Masteriyo\Helper\Utils\Permission::class, true );
+
+$masteriyo_container->add( 'session', \ThemeGrill\Masteriyo\Session\SessionHandler::class, true )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\SessionRepository::class );
 
 $_GLOBALS['masteriyo_container'] = $masteriyo_container;
 

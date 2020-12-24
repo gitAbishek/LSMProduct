@@ -15,6 +15,9 @@ use ThemeGrill\Masteriyo\Contracts\Session\Session as SessionInterface;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Abstract session class.
+ */
 abstract class Session extends Model implements SessionInterface {
 
 	/**
@@ -53,7 +56,7 @@ abstract class Session extends Model implements SessionInterface {
 	 */
 	protected $data = array(
 		'data'   => array(),
-		'expiry' => 0
+		'expiry' => 0,
 	);
 
 	/**
@@ -131,9 +134,9 @@ abstract class Session extends Model implements SessionInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $key		Session item key.
-	 * @param mixed $default	Session item default value.
-	 * @param string $context	What the value is for. Valid values are view and edit.
+	 * @param string $key     Session item key.
+	 * @param mixed $default  Session item default value.
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
 	 * @return mixed
 	 */

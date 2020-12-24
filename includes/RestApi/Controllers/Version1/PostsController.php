@@ -26,14 +26,14 @@ abstract class PostsController extends CrudController {
 	protected $post_type = '';
 
 	/**
-     * Checks if a given request has access to get a specific item.
-     *
-     * @since 0.1.0
-     *
-     * @param WP_REST_Request $request Full details about the request.
-     * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
-     */
-    public function get_item_permissions_check( $request ) {
+	 * Checks if a given request has access to get a specific item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
+	 */
+	public function get_item_permissions_check( $request ) {
 		if ( is_null( $this->permission ) ) {
 			return new \WP_Error(
 				'masteriyo_null_permission',
@@ -43,7 +43,7 @@ abstract class PostsController extends CrudController {
 
 		$post = get_post( (int) $request['id'] );
 
-		if( $post && ! $this->permission->rest_check_post_permissions( $this->object_type, 'read', $request['id'] ) ) {
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->object_type, 'read', $request['id'] ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
@@ -70,7 +70,7 @@ abstract class PostsController extends CrudController {
 			);
 		}
 
-		if(  ! $this->permission->rest_check_post_permissions( $this->post_type, 'read' ) ) {
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'read' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
@@ -100,7 +100,7 @@ abstract class PostsController extends CrudController {
 		}
 
 
-		if( ! $this->permission->rest_check_post_permissions( $this->post_type, 'create' ) ) {
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
@@ -131,7 +131,7 @@ abstract class PostsController extends CrudController {
 
 		$post = get_post( (int) $request['id'] );
 
-		if( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'delete', $post->ID ) ) {
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'delete', $post->ID ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
@@ -162,7 +162,7 @@ abstract class PostsController extends CrudController {
 
 		$post = get_post( (int) $request['id'] );
 
-		if( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'update', $post->ID ) ) {
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'update', $post->ID ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),

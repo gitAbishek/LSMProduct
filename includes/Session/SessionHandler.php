@@ -15,6 +15,9 @@ use ThemeGrill\Masteriyo\Constants;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Session handler.
+ */
 class SessionHandler extends Session {
 
 	/**
@@ -22,7 +25,7 @@ class SessionHandler extends Session {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var string cookie name
+	 * @var string cookie name.
 	 */
 	protected $cookie;
 
@@ -40,12 +43,14 @@ class SessionHandler extends Session {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var string Custom session table name
+	 * @var string Custom session table name.
 	 */
 	protected $table;
 
 	/**
 	 * Constructor for the session class.
+	 *
+	 * @param ThemeGrill\Masteriyo\Repository\SessionRepository $session_repository Session repository.
 	 *
 	 * @since 0.1.0
 	 */
@@ -73,7 +78,7 @@ class SessionHandler extends Session {
 	}
 
 	/**
-	 * Should the session cookie be secure ?
+	 * Should the session cookie be secure?
 	 *
 	 * @since 0.1.0
 	 *
@@ -197,7 +202,7 @@ class SessionHandler extends Session {
 			$cookie_value     = $this->user_id . '||' . $this->session_expiration . '||' . $this->session_expiring . '||' . $cookie_hash;
 			$this->has_cookie = true;
 
-			if ( ! isset( $COOKIE[ $this->cookie ] ) || $COOKIE[ $this->cookie ] !== $cookie_value ) {
+			if ( ! isset( $_COOKIE[ $this->cookie ] ) || $_COOKIE[ $this->cookie ] !== $cookie_value ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 				$this->set_cookie( $this->cookie, $cookie_value, $this->session_expiration, $this->use_securecookie(), true );
 			}
 		}
@@ -269,7 +274,6 @@ class SessionHandler extends Session {
 		return isset( $_COOKIE[ $this->cookie ] ) || $this->has_cookie;
 	}
 
-
 	/**
 	 * Get the name of the session.
 	 *
@@ -279,15 +283,6 @@ class SessionHandler extends Session {
 	 */
 	public function get_name() {
 		return $this->cookie;
-	}
-
-	/**
-	 * Save the session data to storage.
-	 *
-	 * @return void
-	 */
-	public function save() {
-		return true;
 	}
 
 	/**

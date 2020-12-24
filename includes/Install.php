@@ -82,12 +82,10 @@ class Install {
 	 */
 	private static function get_session_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_sessions` (
-			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-			session_key char(32) NOT NULL,
-			session_value LONGTEXT NOT NULL,
-			session_expiry BIGINT UNSIGNED NOT NULL,
-			PRIMARY KEY (id),
-  			UNIQUE KEY session_key (session_key)
+			`id` CHAR(32) NOT NULL,
+			`data` LONGTEXT NOT NULL,
+			`expiry` BIGINT UNSIGNED NOT NULL,
+			PRIMARY KEY (id)
 		) $charset_collate;";
 
 		return $sql;

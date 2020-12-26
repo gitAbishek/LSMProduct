@@ -128,7 +128,7 @@ class CoursesController extends PostsController {
 					'args'                => array(
 						'force' => array(
 							'default'     => false,
-							'description' => __( 'Whether to bypass trash and force deletion.', 'woocommerce' ),
+							'description' => __( 'Whether to bypass trash and force deletion.', 'masteriyo' ),
 							'type'        => 'boolean',
 						),
 					),
@@ -148,12 +148,12 @@ class CoursesController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['slug'] = array(
+		$params['slug']       = array(
 			'description'       => __( 'Limit result set to courses with a specific slug.', 'masteriyo' ),
 			'type'              => 'string',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['status'] = array(
+		$params['status']     = array(
 			'default'           => 'any',
 			'description'       => __( 'Limit result set to courses assigned a specific status.', 'masteriyo' ),
 			'type'              => 'string',
@@ -161,13 +161,13 @@ class CoursesController extends PostsController {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['category'] = array(
+		$params['category']   = array(
 			'description'       => __( 'Limit result set to courses assigned a specific category ID.', 'masteriyo' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['tag'] = array(
+		$params['tag']        = array(
 			'description'       => __( 'Limit result set to courses assigned a specific tag ID.', 'masteriyo' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'wp_parse_id_list',
@@ -197,7 +197,7 @@ class CoursesController extends PostsController {
 			$course->set_id( $id );
 			$course_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\CourseRepository::class );
 			$course_repo->read( $course );
-		} catch( \Exception $e ){
+		} catch ( \Exception $e ) {
 			return false;
 		}
 
@@ -721,7 +721,7 @@ class CoursesController extends PostsController {
 			$course->set_category_ids( $term_ids );
 		} elseif ( 'tag' === $taxonomy ) {
 			$course->set_tag_ids( $term_ids );
-		} elseif( 'difficulty' === $taxonomy ) {
+		} elseif ( 'difficulty' === $taxonomy ) {
 			$course->set_difficulty_ids( $term_ids );
 		}
 

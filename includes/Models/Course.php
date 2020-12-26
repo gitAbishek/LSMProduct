@@ -470,7 +470,7 @@ class Course extends Model {
 	 * @param string $password Password.
 	 */
 	public function set_post_password( $password ) {
-		$this->set_prop( 'post_password',  $password );
+		$this->set_prop( 'post_password', $password );
 	}
 
 	/**
@@ -481,7 +481,7 @@ class Course extends Model {
 	 * @param string $reviews_allowed Reviews allowed.( Value can be 'open' or 'closed')
 	 */
 	public function set_reviews_allowed( $reviews_allowed ) {
-		$this->set_prop( 'reviews_allowed',  $reviews_allowed );
+		$this->set_prop( 'reviews_allowed', $reviews_allowed );
 	}
 
 	/**
@@ -514,7 +514,7 @@ class Course extends Model {
 	 * @param string $price Price.
 	 */
 	public function set_price( $price ) {
-		$this->set_prop( 'price',  $price );
+		$this->set_prop( 'price', $price );
 	}
 
 	/**
@@ -525,7 +525,7 @@ class Course extends Model {
 	 * @param string $price Regular price.
 	 */
 	public function set_regular_price( $price ) {
-		$this->set_prop( 'regular_price',  $price );
+		$this->set_prop( 'regular_price', $price );
 	}
 
 	/**
@@ -536,7 +536,7 @@ class Course extends Model {
 	 * @param string $price Sale price.
 	 */
 	public function set_sale_price( $price ) {
-		$this->set_prop( 'sale_price',  $price );
+		$this->set_prop( 'sale_price', $price );
 	}
 
 	/**
@@ -558,7 +558,7 @@ class Course extends Model {
 	 * @param array $tag_ids Tag ids.
 	 */
 	public function set_tag_ids( $tag_ids ) {
-		$this->set_prop( 'tag_ids', array_unique( array_map( 'intval',  $tag_ids ) ) );
+		$this->set_prop( 'tag_ids', array_unique( array_map( 'intval', $tag_ids ) ) );
 	}
 
 	/**

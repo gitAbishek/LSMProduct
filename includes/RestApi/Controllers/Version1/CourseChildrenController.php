@@ -117,7 +117,7 @@ class CourseChildrenController extends CrudController {
 			);
 		}
 
-		if(  ! $this->permission->rest_check_post_permissions( 'course', 'read' ) ) {
+		if (  ! $this->permission->rest_check_post_permissions( 'course', 'read' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
@@ -161,7 +161,7 @@ class CourseChildrenController extends CrudController {
 	 * @return array
 	 */
 	protected function prepare_objects_query( $request ) {
-		$args = parent::prepare_objects_query( $request );
+		$args                = parent::prepare_objects_query( $request );
 		$args['post_parent'] = $request['course'];
 		return $args;
 	}
@@ -181,7 +181,7 @@ class CourseChildrenController extends CrudController {
 			$item->set_id( $post->ID );
 			$item_repo = $masteriyo_container->get( "{$post->post_type}_repository" );
 			$item_repo->read( $item );
-		} catch( \Exception $e ){
+		} catch ( \Exception $e ) {
 			return false;
 		}
 

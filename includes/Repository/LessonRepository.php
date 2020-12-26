@@ -234,20 +234,20 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 * @param bool  $force Force update. Used during create.
 	 */
 	protected function update_terms( &$model, $force = false ) {
-		$changes     = $model->get_changes();
+		$changes = $model->get_changes();
 
 		if ( $force || array_key_exists( 'category_ids', $changes ) ) {
 			$categories = $model->get_category_ids( 'edit' );
 
-			if ( empty( $categories ) && get_option( "default_lesson_cat", 0 ) ) {
-				$categories = array( get_option( "default_lesson_cat", 0 ) );
+			if ( empty( $categories ) && get_option( 'default_lesson_cat', 0 ) ) {
+				$categories = array( get_option( 'default_lesson_cat', 0 ) );
 			}
 
-			wp_set_post_terms( $model->get_id(), $categories, "lesson_cat", false );
+			wp_set_post_terms( $model->get_id(), $categories, 'lesson_cat', false );
 		}
 
 		if ( $force || array_key_exists( 'tag_ids', $changes ) ) {
-			wp_set_post_terms( $model->get_id(), $model->get_tag_ids( 'edit' ), "lesson_tag", false );
+			wp_set_post_terms( $model->get_id(), $model->get_tag_ids( 'edit' ), 'lesson_tag', false );
 		}
 	}
 
@@ -259,22 +259,23 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 * @param Lesson $lesson lesson object.
 	 */
 	protected function read_lesson_data( &$lesson ) {
-		$id              = $lesson->get_id();
-		$meta_values     = $this->read_meta( $lesson );;
-		$set_props       = array();
+		$id          = $lesson->get_id();
+		$meta_values = $this->read_meta( $lesson );
+
+		$set_props = array();
 
 		$meta_values = array_reduce( $meta_values, function( $result, $meta_value ) {
 			$result[ $meta_value->key ][] = $meta_value->value;
 			return $result;
 		}, array() );
 
-		foreach( $this->internal_meta_keys as $meta_key => $prop ) {
+		foreach ( $this->internal_meta_keys as $meta_key => $prop ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
 			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
 		}
 
-		$set_props['category_ids']   = $this->get_term_ids( $lesson, 'lesson_cat' );
-		$set_props['tag_ids']        = $this->get_term_ids( $lesson, 'lesson_tag' );
+		$set_props['category_ids'] = $this->get_term_ids( $lesson, 'lesson_cat' );
+		$set_props['tag_ids']      = $this->get_term_ids( $lesson, 'lesson_tag' );
 
 		$lesson->set_props( $set_props );
 	}

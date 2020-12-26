@@ -154,7 +154,7 @@ class QuestionsController extends PostsController {
 					'args'                => array(
 						'force' => array(
 							'default'     => false,
-							'description' => __( 'Whether to bypass trash and force deletion.', 'woocommerce' ),
+							'description' => __( 'Whether to bypass trash and force deletion.', 'masteriyo' ),
 							'type'        => 'boolean',
 						),
 					),
@@ -390,7 +390,7 @@ class QuestionsController extends PostsController {
 	 * @param Question $question Question object.
 	 */
 	protected function process_answers( $answers, $question ) {
-		switch ( $question->get_type( 'edit' ) ) {
+		switch ( $question->get_type( 'edit' ) ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedSwitch
 			// TODO: Filter the correct answers data according to the user role.
 		}
 

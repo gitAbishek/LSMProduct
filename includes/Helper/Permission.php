@@ -108,7 +108,7 @@ class Permission {
 	 * @param string $object_id Object ID.
 	 * @return bool
 	 */
-	function rest_check_course_reviews_permissions( $context = 'read', $object_id = 0 ) {
+	public function rest_check_course_reviews_permissions( $context = 'read', $object_id = 0 ) {
 		$permission = false;
 		$contexts   = array(
 			'read'   => 'moderate_comments',

@@ -87,7 +87,7 @@ class Utils {
 	 * @param string $version Version the message was added in.
 	 */
 	public static function doing_it_wrong( $function, $message, $version ) {
-		// @codingStandardsIgnoreStart
+		// phpcs:disable
 		$message .= ' Backtrace: ' . wp_debug_backtrace_summary();
 
 		if ( is_ajax() || self::is_rest_api_request() ) {
@@ -96,7 +96,7 @@ class Utils {
 		} else {
 			_doing_it_wrong( $function, $message, $version );
 		}
-		// @codingStandardsIgnoreEnd
+		// @phpcs:enable
 	}
 
 	/**

@@ -48,9 +48,9 @@ abstract class CrudController extends RestController {
 	 * @return object Model object or WP_Error object.
 	 */
 	protected function get_object( $id ) {
-		// translators: %s: Class method name.
 		return new \WP_Error(
 			'invalid-method',
+			// translators: %s: Class method name.
 			sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'masteriyo' ), __METHOD__ ),
 			array( 'status' => 405 )
 		);

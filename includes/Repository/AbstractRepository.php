@@ -141,11 +141,12 @@ abstract class AbstractRepository {
 
 		$raw_meta_data = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT {$meta_table_info['meta_id_field']} as meta_id, meta_key, meta_value
-				FROM {$meta_table_info['table']}
-				WHERE {$meta_table_info['object_id_field']} = %d
-				ORDER BY {$meta_table_info['meta_id_field']}",
-				$model->get_id()
+				'SELECT %s as meta_id, meta_key, meta_value FROM %s WHERE %s = %d ORDER BY %s',
+				$meta_table_info['meta_id_field'],
+				$meta_table_info['table'],
+				$meta_table_info['object_id_field'],
+				$model->get_id(),
+				$meta_table_info['meta_id_field']
 			)
 		);
 
@@ -229,7 +230,7 @@ abstract class AbstractRepository {
 		global $wpdb;
 
 		$meta_id_field = 'meta_id';
-		$table = $wpdb->prefix;
+		$table         = $wpdb->prefix;
 
 		// If we are dealing with a type of metadata that is not a core type, the table should be prefixed.
 		if ( ! in_array( $this->meta_type, array( 'post', 'user', 'comment', 'term' ), true ) ) {
@@ -274,7 +275,7 @@ abstract class AbstractRepository {
 					_x(
 						'about,an,are,as,at,be,by,com,for,from,how,in,is,it,of,on,or,that,the,this,to,was,what,when,where,who,will,with,www',
 						'Comma-separated list of search stopwords in your language',
-						'woocommerce'
+						'masteriyo'
 					)
 				)
 			)

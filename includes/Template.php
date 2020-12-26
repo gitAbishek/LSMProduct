@@ -127,7 +127,7 @@ class Template implements TemplateInterface {
 				);
 				unset( $args['action_args'] );
 			}
-			extract( $args ); // @codingStandardsIgnoreLine
+			extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 		}
 
 		do_action( 'masteriyo_before_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );

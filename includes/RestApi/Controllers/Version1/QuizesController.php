@@ -138,7 +138,7 @@ class QuizesController extends PostsController {
 					'args'                => array(
 						'force' => array(
 							'default'     => false,
-							'description' => __( 'Whether to bypass trash and force deletion.', 'woocommerce' ),
+							'description' => __( 'Whether to bypass trash and force deletion.', 'masteriyo' ),
 							'type'        => 'boolean',
 						),
 					),

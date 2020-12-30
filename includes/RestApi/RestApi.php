@@ -62,8 +62,24 @@ class RestApi {
 		return apply_filters(
 			'masteriyo_rest_api_get_rest_namespaces',
 			array(
-				'masteriyo/v1' => $this->get_v1_controllers(),
+				'masteriyo/v1'    => $this->get_v1_controllers(),
+				'masteriyo/store' => $this->get_store_controllers(),
 			)
+		);
+	}
+
+	/**
+	 * Store controllers (cart and checkout).
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	protected function get_store_controllers() {
+		$namespace = '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Store';
+
+		return array(
+			'cart-items' => "{$namespace}\\CartItemsController",
 		);
 	}
 

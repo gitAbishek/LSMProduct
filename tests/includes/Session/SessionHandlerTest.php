@@ -102,6 +102,8 @@ class SessionHandlerTest extends WP_UnitTestCase {
 		$_COOKIE[ $this->session_handler->get_name() ] = "1||1234||4567||{$cookie_hash}";
 		$diff = array_diff( $this->session_handler->get_session_cookie(), explode( '||', $_COOKIE[ $this->session_handler->get_name() ] ) );
 		$this->assertTrue( empty( $diff ) );
+
+		unset( $_COOKIE[ $this->session_handler->get_name() ] );
 	}
 
 	/**

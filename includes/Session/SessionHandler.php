@@ -135,7 +135,7 @@ class SessionHandler extends Session {
 
 			$current_user_id = (string) get_current_user_id();
 			if ( $current_user_id !== $old_session_id && ! is_object( get_user_by( 'id', $old_session_id ) ) ) {
-				$this->repository->delete( $old_session_id );
+				$this->repository->delete( $this );
 			}
 		}
 	}

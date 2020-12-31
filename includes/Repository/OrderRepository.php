@@ -24,7 +24,6 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'_order_status'  => 'order_status',
 		'_total'         => 'total',
 		'_discount'      => 'discount',
 		'_currency'      => 'currency',
@@ -32,7 +31,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 		'_expiry_date'   => 'expiry_date',
 		'_date_created'  => 'date_created',
 		'_date_modified' => 'date_modified',
-		'_user_id'       => 'user_id',
+		'_customer_id'   => 'customer_id',
 	);
 
 	/**
@@ -52,7 +51,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 				'masteriyo_new_order_data',
 				array(
 					'post_type'      => 'masteriyo_order',
-					'post_status'    => $order->get_status() ? $order->get_status() : 'publish',
+					'post_status'    => $order->get_status() ? $order->get_status() : 'pending',
 					'post_author'    => get_current_user_id(),
 					'post_title'     => __( 'Order', 'masteriyo' ),
 					'post_content'   => __( 'Order', 'masteriyo' ),
@@ -119,18 +118,48 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 	 * @return void
 	 */
 	public function update( Model &$order ) {
-		// Only update post modified time to record this save event.
-		$GLOBALS['wpdb']->update(
-			$GLOBALS['wpdb']->posts,
-			array(
-				'post_modified'     => current_time( 'mysql' ),
-				'post_modified_gmt' => current_time( 'mysql', true ),
-			),
-			array(
-				'ID' => $order->get_id(),
-			)
+		$changes = $order->get_changes();
+
+		$post_data_keys = array(
+			'status',
 		);
-		clean_post_cache( $order->get_id() );
+
+		// Only update the post when the post data changes.
+		if ( array_intersect( $post_data_keys, array_keys( $changes ) ) ) {
+			$post_data = array(
+				'post_status' => $order->get_status( 'edit' ),
+				'post_type'   => 'masteriyo_order',
+			);
+
+			/**
+			 * When updating this object, to prevent infinite loops, use $wpdb
+			 * to update data, since wp_update_post spawns more calls to the
+			 * save_post action.
+			 *
+			 * This ensures hooks are fired by either WP itself (admin screen save),
+			 * or an update purely from CRUD.
+			 */
+			if ( doing_action( 'save_post' ) ) {
+				// TODO Abstract the $wpdb WordPress class.
+				$GLOBALS['wpdb']->update( $GLOBALS['wpdb']->posts, $post_data, array( 'ID' => $order->get_id() ) );
+				clean_post_cache( $order->get_id() );
+			} else {
+				wp_update_post( array_merge( array( 'ID' => $order->get_id() ), $post_data ) );
+			}
+			$order->read_meta_data( true ); // Refresh internal meta data, in case things were hooked into `save_post` or another WP hook.
+		} else { // Only update post modified time to record this save event.
+			$GLOBALS['wpdb']->update(
+				$GLOBALS['wpdb']->posts,
+				array(
+					'post_modified'     => current_time( 'mysql' ),
+					'post_modified_gmt' => current_time( 'mysql', true ),
+				),
+				array(
+					'ID' => $order->get_id(),
+				)
+			);
+			clean_post_cache( $order->get_id() );
+		}
 
 		$this->update_post_meta( $order );
 
@@ -190,7 +219,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 
 		$meta_values = array_reduce(
 			$meta_values,
-			function( $result, $meta_value ) {
+			function ( $result, $meta_value ) {
 				$result[ $meta_value->key ][] = $meta_value->value;
 				return $result;
 			},

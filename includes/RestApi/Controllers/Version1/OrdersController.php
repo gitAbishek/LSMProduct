@@ -11,13 +11,13 @@ namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Helper\Utils;
 use ThemeGrill\Masteriyo\Helper\Permission;
 
 /**
  * OrdersController class.
  */
 class OrdersController extends PostsController {
+
 	/**
 	 * Endpoint namespace.
 	 *
@@ -155,23 +155,15 @@ class OrdersController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['order_status'] = array(
-			'description'       => __( 'Limit result set to orders assigned a specific order status.', 'masteriyo' ),
+		$params['status']      = array(
+			'description'       => __( 'Limit result set to orders assigned a specific status.', 'masteriyo' ),
 			'type'              => 'string',
 			'enum'              => array( 'pending', 'processing', 'completed', 'cancelled', 'refunded', 'failed' ),
 			'default'           => 'pending',
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['status']       = array(
-			'default'           => 'any',
-			'description'       => __( 'Limit result set to orders assigned a specific post status.', 'masteriyo' ),
-			'type'              => 'string',
-			'enum'              => array_merge( array( 'any', 'future' ), array_keys( get_post_statuses() ) ),
-			'sanitize_callback' => 'sanitize_key',
-			'validate_callback' => 'rest_validate_request_arg',
-		);
-		$params['user_id']      = array(
+		$params['customer_id'] = array(
 			'description'       => __( 'Filter orders by customer ID.', 'masteriyo' ),
 			'type'              => 'number',
 			'sanitize_callback' => 'sanitize_key',
@@ -252,7 +244,7 @@ class OrdersController extends PostsController {
 			'currency'     => $order->get_currency( $context ),
 			'product_ids'  => $order->get_product_ids( $context ),
 			'expiry_date'  => $order->get_expiry_date( $context ),
-			'user_id'      => $order->get_user_id( $context ),
+			'customer_id'  => $order->get_customer_id( $context ),
 		);
 
 		return $data;
@@ -269,7 +261,7 @@ class OrdersController extends PostsController {
 	protected function prepare_objects_query( $request ) {
 		$args = parent::prepare_objects_query( $request );
 
-		// Set post_status.
+		// Set order status.
 		$args['post_status'] = $request['status'];
 
 		// Set order status.
@@ -281,8 +273,8 @@ class OrdersController extends PostsController {
 				'compare' => '=',
 			),
 			array(
-				'key'     => '_user_id',
-				'value'   => ! empty( $request['user_id'] ) ? $request['user_id'] : get_current_user_id(),
+				'key'     => '_customer_id',
+				'value'   => ! empty( $request['customer_id'] ) ? $request['customer_id'] : get_current_user_id(),
 				'compare' => '=',
 			),
 		);
@@ -339,13 +331,6 @@ class OrdersController extends PostsController {
 					'readonly'    => true,
 				),
 				'status'            => array(
-					'description' => __( 'Post status.', 'masteriyo' ),
-					'type'        => 'string',
-					'default'     => 'publish',
-					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
-					'context'     => array( 'view', 'edit' ),
-				),
-				'order_status'      => array(
 					'description' => __( 'Order status.', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'pending',
@@ -380,7 +365,7 @@ class OrdersController extends PostsController {
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'user_id'           => array(
+				'customer_id'       => array(
 					'description' => __( 'Customer ID.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -437,14 +422,9 @@ class OrdersController extends PostsController {
 			$order_repo->read( $order );
 		}
 
-		// Post status.
+		// Order status.
 		if ( isset( $request['status'] ) ) {
 			$order->set_status( $request['status'] );
-		}
-
-		// Order status.
-		if ( isset( $request['order_status'] ) ) {
-			$order->set_order_status( $request['order_status'] );
 		}
 
 		// Total Price.
@@ -473,10 +453,10 @@ class OrdersController extends PostsController {
 		}
 
 		// Customer/User ID.
-		if ( isset( $request['user_id'] ) ) {
-			$order->set_user_id( $request['user_id'] );
+		if ( isset( $request['customer_id'] ) ) {
+			$order->set_customer_id( $request['customer_id'] );
 		} else {
-			$order->set_user_id( get_current_user_id() );
+			$order->set_customer_id( get_current_user_id() );
 		}
 
 		// Allow set meta_data.

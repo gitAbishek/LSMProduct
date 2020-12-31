@@ -66,7 +66,7 @@ class Order extends Model {
 		'expiry_date'   => '',
 		'date_created'  => null,
 		'date_modified' => null,
-		'user_id'       => null,
+		'customer_id'   => null,
 	);
 
 	/**
@@ -223,8 +223,8 @@ class Order extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_user_id( $context = 'view' ) {
-		return $this->get_prop( 'user_id', $context );
+	public function get_customer_id( $context = 'view' ) {
+		return $this->get_prop( 'customer_id', $context );
 	}
 
 	/*
@@ -328,7 +328,7 @@ class Order extends Model {
 	 *
 	 * @param integer $id Customer/User ID.
 	 */
-	public function set_user_id( $id ) {
-		$this->set_prop( 'user_id', $id );
+	public function set_customer_id( $id ) {
+		$this->set_prop( 'customer_id', $id );
 	}
 }

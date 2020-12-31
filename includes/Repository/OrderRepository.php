@@ -24,13 +24,21 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'_total'         => 'total',
-		'_discount'      => 'discount',
-		'_currency'      => 'currency',
-		'_expiry_date'   => 'expiry_date',
-		'_date_created'  => 'date_created',
-		'_date_modified' => 'date_modified',
-		'_customer_id'   => 'customer_id',
+		'_total'               => 'total',
+		'_discount'            => 'discount',
+		'_currency'            => 'currency',
+		'_expiry_date'         => 'expiry_date',
+		'_date_created'        => 'date_created',
+		'_date_modified'       => 'date_modified',
+		'_customer_id'         => 'customer_id',
+		'_payment_method'      => 'payment_method',
+		'_transaction_id'      => 'transaction_id',
+		'_date_paid'           => 'date_paid',
+		'_date_completed'      => 'date_completed',
+		'_created_via'         => 'created_via',
+		'_customer_ip_address' => 'customer_ip_address',
+		'_customer_user_agent' => 'customer_user_agent',
+		'_total_tax'           => 'total_tax',
 	);
 
 	/**

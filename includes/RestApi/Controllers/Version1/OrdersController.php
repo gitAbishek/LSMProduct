@@ -235,15 +235,23 @@ class OrdersController extends PostsController {
 	 */
 	protected function get_order_data( $order, $context = 'view' ) {
 		$data = array(
-			'id'           => $order->get_id(),
-			'permalink'    => $order->get_permalink(),
-			'status'       => $order->get_status( $context ),
-			'order_status' => $order->get_order_status( $context ),
-			'total'        => $order->get_total( $context ),
-			'discount'     => $order->get_discount( $context ),
-			'currency'     => $order->get_currency( $context ),
-			'expiry_date'  => $order->get_expiry_date( $context ),
-			'customer_id'  => $order->get_customer_id( $context ),
+			'id'                  => $order->get_id(),
+			'permalink'           => $order->get_permalink(),
+			'status'              => $order->get_status( $context ),
+			'order_status'        => $order->get_order_status( $context ),
+			'total'               => $order->get_total( $context ),
+			'discount'            => $order->get_discount( $context ),
+			'currency'            => $order->get_currency( $context ),
+			'expiry_date'         => $order->get_expiry_date( $context ),
+			'customer_id'         => $order->get_customer_id( $context ),
+			'payment_method'      => $order->get_payment_method( $context ),
+			'transaction_id'      => $order->get_transaction_id( $context ),
+			'date_paid'           => $order->get_date_paid( $context ),
+			'date_completed'      => $order->get_date_completed( $context ),
+			'created_via'         => $order->get_created_via( $context ),
+			'customer_ip_address' => $order->get_customer_ip_address( $context ),
+			'customer_user_agent' => $order->get_customer_user_agent( $context ),
+			'total_tax'           => $order->get_total_tax( $context ),
 		);
 
 		return $data;
@@ -294,74 +302,116 @@ class OrdersController extends PostsController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'                => array(
+				'id'                  => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'permalink'         => array(
+				'permalink'           => array(
 					'description' => __( 'Order URL.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_created'      => array(
+				'date_created'        => array(
 					'description' => __( "The date the Order was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_created_gmt'  => array(
+				'date_created_gmt'    => array(
 					'description' => __( 'The date the Order was created, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_modified'     => array(
+				'date_modified'       => array(
 					'description' => __( "The date the Order was last modified, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_modified_gmt' => array(
+				'date_modified_gmt'   => array(
 					'description' => __( 'The date the Order was last modified, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'status'            => array(
+				'status'              => array(
 					'description' => __( 'Order status.', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'pending',
 					'enum'        => array( 'pending', 'processing', 'completed', 'cancelled', 'refunded', 'failed' ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'total'             => array(
+				'total'               => array(
 					'description' => __( 'Total amount of the order.', 'masteriyo' ),
 					'type'        => 'number',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'discount'          => array(
+				'discount'            => array(
 					'description' => __( 'Discount for the order.', 'masteriyo' ),
 					'type'        => 'number',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'currency'          => array(
+				'currency'            => array(
 					'description' => __( 'Currency.', 'masteriyo' ),
 					'type'        => 'number',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'expiry_date'       => array(
+				'expiry_date'         => array(
 					'description' => __( 'Expiry date of this order.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'customer_id'       => array(
+				'customer_id'         => array(
 					'description' => __( 'Customer ID.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'meta_data'         => array(
+				'payment_method'      => array(
+					'description' => __( 'Payment method.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+					'default'     => 'paypal',
+					'enum'        => array( 'paypal' ),
+				),
+				'transaction_id'      => array(
+					'description' => __( 'Transaction ID.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'date_paid'           => array(
+					'description' => __( 'Date of payment.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'date_completed'      => array(
+					'description' => __( 'Date of order completion.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'created_via'         => array(
+					'description' => __( 'Method of order creation.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'customer_ip_address' => array(
+					'description' => __( 'Customer IP address.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'customer_user_agent' => array(
+					'description' => __( 'Customer user agent.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'total_tax'           => array(
+					'description' => __( 'Total tax.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'meta_data'           => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -438,11 +488,51 @@ class OrdersController extends PostsController {
 			$order->set_expiry_date( $request['expiry_date'] );
 		}
 
-		// Customer/User ID.
+		// Customer ID.
 		if ( isset( $request['customer_id'] ) ) {
 			$order->set_customer_id( $request['customer_id'] );
 		} else {
 			$order->set_customer_id( get_current_user_id() );
+		}
+
+		// Set payment method.
+		if ( isset( $request['payment_method'] ) ) {
+			$order->set_payment_method( $request['payment_method'] );
+		}
+
+		// Set transaction ID.
+		if ( isset( $request['transaction_id'] ) ) {
+			$order->set_transaction_id( $request['transaction_id'] );
+		}
+
+		// Set date of payment.
+		if ( isset( $request['date_paid'] ) ) {
+			$order->set_date_paid( $request['date_paid'] );
+		}
+
+		// Set date of order completion.
+		if ( isset( $request['date_completed'] ) ) {
+			$order->set_date_completed( $request['date_completed'] );
+		}
+
+		// Set method of order creation.
+		if ( isset( $request['created_via'] ) ) {
+			$order->set_created_via( $request['created_via'] );
+		}
+
+		// Set customer IP address.
+		if ( isset( $request['customer_ip_address'] ) ) {
+			$order->set_customer_ip_address( $request['customer_ip_address'] );
+		}
+
+		// Set customer user agent.
+		if ( isset( $request['customer_user_agent'] ) ) {
+			$order->set_customer_user_agent( $request['customer_user_agent'] );
+		}
+
+		// Set total tax.
+		if ( isset( $request['total_tax'] ) ) {
+			$order->set_total_tax( $request['total_tax'] );
 		}
 
 		// Allow set meta_data.

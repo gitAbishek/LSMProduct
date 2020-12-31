@@ -58,14 +58,22 @@ class Order extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'status'        => false,
-		'total'         => 0,
-		'discount'      => 0,
-		'currency'      => '',
-		'expiry_date'   => '',
-		'date_created'  => null,
-		'date_modified' => null,
-		'customer_id'   => null,
+		'status'              => false,
+		'total'               => 0,
+		'discount'            => 0,
+		'currency'            => '',
+		'expiry_date'         => '',
+		'date_created'        => null,
+		'date_modified'       => null,
+		'customer_id'         => null,
+		'payment_method'      => '',
+		'transaction_id'      => '',
+		'date_paid'           => '',
+		'date_completed'      => '',
+		'created_via'         => '',
+		'customer_ip_address' => '',
+		'customer_user_agent' => '',
+		'total_tax'           => 0,
 	);
 
 	/**
@@ -213,6 +221,110 @@ class Order extends Model {
 		return $this->get_prop( 'customer_id', $context );
 	}
 
+	/**
+	 * Get the payment method.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_payment_method( $context = 'view' ) {
+		return $this->get_prop( 'payment_method', $context );
+	}
+
+	/**
+	 * Get the transaction id.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_transaction_id( $context = 'view' ) {
+		return $this->get_prop( 'transaction_id', $context );
+	}
+
+	/**
+	 * Get the date of the payment.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_date_paid( $context = 'view' ) {
+		return $this->get_prop( 'date_paid', $context );
+	}
+
+	/**
+	 * Get the date of order completion.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_date_completed( $context = 'view' ) {
+		return $this->get_prop( 'date_completed', $context );
+	}
+
+	/**
+	 * Get the order creation method. It might be admin, checkout, or any other way.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_created_via( $context = 'view' ) {
+		return $this->get_prop( 'created_via', $context );
+	}
+
+	/**
+	 * Get the customer IP address.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_customer_ip_address( $context = 'view' ) {
+		return $this->get_prop( 'customer_ip_address', $context );
+	}
+
+	/**
+	 * Get the customer's user agent.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_customer_user_agent( $context = 'view' ) {
+		return $this->get_prop( 'customer_user_agent', $context );
+	}
+
+	/**
+	 * Get the total tax.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_total_tax( $context = 'view' ) {
+		return $this->get_prop( 'total_tax', $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -305,5 +417,93 @@ class Order extends Model {
 	 */
 	public function set_customer_id( $id ) {
 		$this->set_prop( 'customer_id', $id );
+	}
+
+	/**
+	 * Set payment method.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $payment_method Payment method.
+	 */
+	public function set_payment_method( $payment_method ) {
+		$this->set_prop( 'payment_method', $payment_method );
+	}
+
+	/**
+	 * Set transaction ID.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $transaction_id Transaction ID.
+	 */
+	public function set_transaction_id( $transaction_id ) {
+		$this->set_prop( 'transaction_id', $transaction_id );
+	}
+
+	/**
+	 * Set date of payment.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $date_paid Date.
+	 */
+	public function set_date_paid( $date_paid ) {
+		$this->set_prop( 'date_paid', $date_paid );
+	}
+
+	/**
+	 * Set date of order completion.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $date_completed Date.
+	 */
+	public function set_date_completed( $date_completed ) {
+		$this->set_prop( 'date_completed', $date_completed );
+	}
+
+	/**
+	 * Set method of order creation. Like admin, checkout etc.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $created_via Method.
+	 */
+	public function set_created_via( $created_via ) {
+		$this->set_prop( 'created_via', $created_via );
+	}
+
+	/**
+	 * Set customer's IP address.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $customer_ip_address IP address.
+	 */
+	public function set_customer_ip_address( $customer_ip_address ) {
+		$this->set_prop( 'customer_ip_address', $customer_ip_address );
+	}
+
+	/**
+	 * Set customer's user agent.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $customer_user_agent User agent.
+	 */
+	public function set_customer_user_agent( $customer_user_agent ) {
+		$this->set_prop( 'customer_user_agent', $customer_user_agent );
+	}
+
+	/**
+	 * Set total tax.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $total_tax Total tax.
+	 */
+	public function set_total_tax( $total_tax ) {
+		$this->set_prop( 'total_tax', $total_tax );
 	}
 }

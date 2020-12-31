@@ -27,7 +27,6 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 		'_total'         => 'total',
 		'_discount'      => 'discount',
 		'_currency'      => 'currency',
-		'_product_ids'   => 'product_ids',
 		'_expiry_date'   => 'expiry_date',
 		'_date_created'  => 'date_created',
 		'_date_modified' => 'date_modified',

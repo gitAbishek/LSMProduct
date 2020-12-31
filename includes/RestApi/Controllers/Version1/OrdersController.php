@@ -242,7 +242,6 @@ class OrdersController extends PostsController {
 			'total'        => $order->get_total( $context ),
 			'discount'     => $order->get_discount( $context ),
 			'currency'     => $order->get_currency( $context ),
-			'product_ids'  => $order->get_product_ids( $context ),
 			'expiry_date'  => $order->get_expiry_date( $context ),
 			'customer_id'  => $order->get_customer_id( $context ),
 		);
@@ -352,14 +351,6 @@ class OrdersController extends PostsController {
 					'type'        => 'number',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'product_ids'       => array(
-					'description' => __( 'IDs of the products under this order.', 'masteriyo' ),
-					'type'        => 'array',
-					'items'       => array(
-						'type' => 'integer',
-					),
-					'context'     => array( 'view', 'edit' ),
-				),
 				'expiry_date'       => array(
 					'description' => __( 'Expiry date of this order.', 'masteriyo' ),
 					'type'        => 'string',
@@ -440,11 +431,6 @@ class OrdersController extends PostsController {
 		// Currency.
 		if ( isset( $request['currency'] ) ) {
 			$order->set_currency( $request['currency'] );
-		}
-
-		// Products IDs.
-		if ( isset( $request['product_ids'] ) ) {
-			$order->set_product_ids( $request['product_ids'] );
 		}
 
 		// Order's expiry date.

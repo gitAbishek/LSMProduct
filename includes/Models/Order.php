@@ -62,7 +62,6 @@ class Order extends Model {
 		'total'         => 0,
 		'discount'      => 0,
 		'currency'      => '',
-		'product_ids'   => array(),
 		'expiry_date'   => '',
 		'date_created'  => null,
 		'date_modified' => null,
@@ -176,19 +175,6 @@ class Order extends Model {
 	}
 
 	/**
-	 * Get the product ids.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return array
-	 */
-	public function get_product_ids( $context = 'view' ) {
-		return $this->get_prop( 'product_ids', $context );
-	}
-
-	/**
 	 * Get order created date.
 	 *
 	 * @since  0.1.0
@@ -275,17 +261,6 @@ class Order extends Model {
 	 */
 	public function set_currency( $currency ) {
 		$this->set_prop( 'currency', $currency );
-	}
-
-	/**
-	 * Set ids of products in the order.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param array $product_ids order product_ids.
-	 */
-	public function set_product_ids( $product_ids ) {
-		$this->set_prop( 'product_ids', $product_ids );
 	}
 
 	/**

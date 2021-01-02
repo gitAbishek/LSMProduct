@@ -103,6 +103,7 @@ class RestApi {
 			'sections.children'    => "{$namespace}\\SectionChildrenController",
 			'faqs'                 => "{$namespace}\\FaqsController",
 			'orders'               => "{$namespace}\\OrdersController",
+			'orders.items'         => "{$namespace}\\OrderItemsController",
 			'users'                => "{$namespace}\\UsersController",
 			'settings'             => "{$namespace}\\SettingsController",
 			'courses.reviews'      => "{$namespace}\\CourseReviewsController",

@@ -68,6 +68,30 @@ class Permission {
 	}
 
 	/**
+	 * Check permissions for manipulating users on REST API.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context Request context.
+	 *
+	 * @return bool
+	 */
+	public function rest_check_users_manipulation_permissions( $context = 'read' ) {
+		$contexts   = array(
+			'read'    => 'list_users',
+			'create'  => 'create_users',
+			'edit'    => 'edit_users',
+			'delete'  => 'delete_users',
+			'promote' => 'promote_users',
+			'batch'   => 'edit_users',
+		);
+		$cap        = $contexts[ $context ];
+		$permission = current_user_can( $cap );
+
+		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context );
+	}
+
+	/**
 	 * Check permissions for checking answers on REST API.
 	 *
 	 * @since 0.1.0

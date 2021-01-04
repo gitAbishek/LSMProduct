@@ -21,6 +21,7 @@ use ThemeGrill\Masteriyo\Repository\QuizRepository;
 use ThemeGrill\Masteriyo\Repository\CourseCategoryRepository;
 use ThemeGrill\Masteriyo\Repository\CourseTagRepository;
 use ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository;
+use ThemeGrill\Masteriyo\Repository\UserRepository;
 use League\Container\Container;
 use ThemeGrill\Masteriyo\Cache\Cache;
 use ThemeGrill\Masteriyo\Repository\QuestionRepository;
@@ -151,6 +152,16 @@ $masteriyo_container->add(
 	\ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository::class,
 	function() {
 		return apply_filters( 'masteriyo_course_difficulty_repository', new CourseDifficultyRepository() );
+	}
+);
+
+$masteriyo_container->add( 'user', \ThemeGrill\Masteriyo\Models\User::class )
+	->addArgument( \ThemeGrill\Masteriyo\Repository\UserRepository::class );
+
+$masteriyo_container->add(
+	\ThemeGrill\Masteriyo\Repository\UserRepository::class,
+	function() {
+		return apply_filters( 'masteriyo_user_repository', new UserRepository() );
 	}
 );
 

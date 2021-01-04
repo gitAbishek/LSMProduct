@@ -134,8 +134,13 @@ abstract class CrudController extends RestController {
 			}
 
 			$object->save();
+			$new_object = $this->get_object( $object->get_id() );
 
-			return $this->get_object( $object->get_id() );
+			if ( ! $new_object ) {
+				throw new ModelException( 'masteriyo_rest_object_not_read', __( 'Faild to read an object!', 'masteriyo' ) );
+			}
+
+			return $new_object;
 		} catch ( ModelException $e ) {
 			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
 		} catch ( \WC_REST_Exception $e ) {
@@ -422,7 +427,7 @@ abstract class CrudController extends RestController {
 		return array(
 			'objects' => array_filter( array_map( array( $this, 'get_object' ), $result ) ),
 			'total'   => (int) $total_posts,
-			'pages'   => (int) ceil( $total_posts / (int) $query->query_vars['posts_per_page'] ),
+			'pages'   => (int) ceil( $total_posts / (int) $query_args['number'] ),
 		);
 	}
 

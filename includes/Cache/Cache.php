@@ -9,6 +9,7 @@
 
 namespace ThemeGrill\Masteriyo\Cache;
 
+use ThemeGrill\Masteriyo\Contracts\Cache as CacheInterface;
 use ThemeGrill\Masteriyo\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;

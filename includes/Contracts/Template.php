@@ -7,11 +7,11 @@
  * @package ThemeGrill\Masteriyo
  */
 
-namespace ThemeGrill\Masteriyo;
+namespace ThemeGrill\Masteriyo\Contracts;
 
 defined( 'ABSPATH' ) || exit;
 
-interface TemplateInterface {
+interface Template {
 	/**
 	 * Get template part.
 	 *
@@ -22,7 +22,7 @@ interface TemplateInterface {
 	 * @param mixed  $slug Template slug.
 	 * @param string $name Template name (default: '').
 	 */
-	public function get_template_part( $slug, $name = '' );
+	public function get_part( $slug, $name = '' );
 
 	/**
 	 * Get other templates and include the file.
@@ -34,7 +34,7 @@ interface TemplateInterface {
 	 * @param string $template_path Template path. (default: '').
 	 * @param string $default_path  Default path. (default: '').
 	 */
-	public function get_template( $template_name, $args = array(), $template_path = '', $default_path = '' );
+	public function get( $template_name, $args = array(), $template_path = '', $default_path = '' );
 
 	/**
 	 * Like get_template, but returns the HTML instead of outputting.
@@ -49,7 +49,7 @@ interface TemplateInterface {
 	 *
 	 * @return string
 	 */
-	public function get_template_html( $template_name, $args = array(), $template_path = '', $default_path = '' );
+	public function get_html( $template_name, $args = array(), $template_path = '', $default_path = '' );
 
 	/**
 	 * Add a template to the template cache.
@@ -59,7 +59,7 @@ interface TemplateInterface {
 	 * @param string $cache_key Object cache key.
 	 * @param string $template Located template.
 	 */
-	public function set_template_cache( $cache_key, $template );
+	public function set_cache( $cache_key, $template );
 
 	/**
 	 * Get template cache.
@@ -70,7 +70,7 @@ interface TemplateInterface {
 	 *
 	 * @return string
 	 */
-	public function get_template_cache( $cache_key );
+	public function get_cache( $cache_key );
 
 	/**
 	 * Locate a template and return the path for inclusion.
@@ -89,5 +89,5 @@ interface TemplateInterface {
 	 *
 	 * @return string
 	 */
-	public function locate_template( $template_name, $template_path = '', $default_path = '' );
+	public function locate( $template_name, $template_path = '', $default_path = '' );
 }

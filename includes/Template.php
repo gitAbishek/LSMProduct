@@ -12,6 +12,7 @@ namespace ThemeGrill\Masteriyo;
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Utils;
+use ThemeGrill\Masteriyo\Contracts\Template as TemplateInterface;
 
 /**
  * Template functions wrapper class.
@@ -27,9 +28,9 @@ class Template implements TemplateInterface {
 	 * @param mixed  $slug Template slug.
 	 * @param string $name Template name (default: '').
 	 */
-	public function get_template_part( $slug, $name = '' ) {
+	public function get_part( $slug, $name = '' ) {
 		$cache_key = sanitize_key( implode( '-', array( 'template-part', $slug, $name, Constants::get_constant( 'MASTERIYO_VERSION' ) ) ) );
-		$template  = $this->get_template_cache( $cache_key );
+		$template  = $this->get_cache( $cache_key );
 
 		if ( ! $template ) {
 			if ( $name ) {
@@ -59,7 +60,7 @@ class Template implements TemplateInterface {
 			// Don't cache the absolute path so that it can be shared between web servers with different paths.
 			$tokenized_template_path = Utils::tokenize_path( $template, Utils::get_path_define_tokens() );
 
-			$this->set_template_cache( $cache_key, $tokenized_template_path );
+			$this->set_cache( $cache_key, $tokenized_template_path );
 		} else {
 			// Make sure that the absolute path to the template is resolved.
 			$template = Utils::untokenize_path( $template, Utils::get_path_define_tokens() );
@@ -83,17 +84,17 @@ class Template implements TemplateInterface {
 	 * @param string $template_path Template path. (default: '').
 	 * @param string $default_path  Default path. (default: '').
 	 */
-	public function get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+	public function get( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
 		$cache_key = sanitize_key( implode( '-', array( 'template', $template_name, $template_path, $default_path, Constants::get_constant( 'MASTERIYO_VERSION' ) ) ) );
-		$template  = $this->get_template_cache( $cache_key );
+		$template  = $this->get_cache( $cache_key );
 
 		if ( ! $template ) {
-			$template = $this->locate_template( $template_name, $template_path, $default_path );
+			$template = $this->locate( $template_name, $template_path, $default_path );
 
 			// Don't cache the absolute path so that it can be shared between web servers with different paths.
 			$tokenized_template_path = Utils::tokenize_path( $template, Utils::get_path_define_tokens() );
 
-			$this->set_template_cache( $cache_key, $tokenized_template_path );
+			$this->set_cache( $cache_key, $tokenized_template_path );
 		} else {
 			// Make sure that the absolute path to the template is resolved.
 			$template = Utils::untokenize_path( $template, Utils::get_path_define_tokens() );
@@ -151,9 +152,9 @@ class Template implements TemplateInterface {
 	 *
 	 * @return string
 	 */
-	public function get_template_html( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+	public function get_html( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
 		ob_start();
-		$this->get_template( $template_name, $args, $template_path, $default_path );
+		$this->get( $template_name, $args, $template_path, $default_path );
 		return ob_get_clean();
 	}
 
@@ -165,7 +166,7 @@ class Template implements TemplateInterface {
 	 * @param string $cache_key Object cache key.
 	 * @param string $template Located template.
 	 */
-	public function set_template_cache( $cache_key, $template ) {
+	public function set_cache( $cache_key, $template ) {
 		global $masteriyo_container;
 		$cache = $masteriyo_container->get( \ThemeGrill\Masteriyo\Cache\CacheInterface::class );
 
@@ -191,7 +192,7 @@ class Template implements TemplateInterface {
 	 *
 	 * @return string
 	 */
-	public function get_template_cache( $cache_key ) {
+	public function get_cache( $cache_key ) {
 		global $masteriyo_container;
 		$cache = $masteriyo_container->get( \ThemeGrill\Masteriyo\Cache\CacheInterface::class );
 
@@ -215,7 +216,7 @@ class Template implements TemplateInterface {
 	 *
 	 * @return string
 	 */
-	public function locate_template( $template_name, $template_path = '', $default_path = '' ) {
+	public function locate( $template_name, $template_path = '', $default_path = '' ) {
 		if ( ! $template_path ) {
 			$template_path = Utils::template_path();
 		}

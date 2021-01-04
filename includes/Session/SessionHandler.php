@@ -9,7 +9,7 @@
 
 namespace ThemeGrill\Masteriyo\Session;
 
-use ThemeGrill\Masteriyo\Abstracts\Session\Session;
+use ThemeGrill\Masteriyo\Abstracts\Session;
 use ThemeGrill\Masteriyo\Repository\SessionRepository;
 use ThemeGrill\Masteriyo\Constants;
 

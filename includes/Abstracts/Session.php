@@ -8,7 +8,7 @@
  * @subpackage Session;
  */
 
-namespace ThemeGrill\Masteriyo\Abstracts\Session;
+namespace ThemeGrill\Masteriyo\Abstracts;
 
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Contracts\Session\Session as SessionInterface;

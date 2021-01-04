@@ -190,6 +190,9 @@ $masteriyo_container->add( 'Permission', \ThemeGrill\Masteriyo\Helper\Utils\Perm
 $masteriyo_container->add( 'session', \ThemeGrill\Masteriyo\Session\SessionHandler::class, true )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\SessionRepository::class );
 
+
+$masteriyo_container->add( 'notice', \ThemeGrill\Masteriyo\Notice::class, true );
+
 $_GLOBALS['masteriyo_container'] = $masteriyo_container; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 /**

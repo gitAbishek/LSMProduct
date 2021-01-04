@@ -78,11 +78,12 @@ class Permission {
 	 */
 	public function rest_check_users_manipulation_permissions( $context = 'read' ) {
 		$contexts   = array(
-			'read'   => 'level_10',
-			'create' => 'level_10',
-			'edit'   => 'level_10',
-			'delete' => 'level_10',
-			'batch'  => 'level_10',
+			'read'    => 'list_users',
+			'create'  => 'create_users',
+			'edit'    => 'edit_users',
+			'delete'  => 'delete_users',
+			'promote' => 'promote_users',
+			'batch'   => 'edit_users',
 		);
 		$cap        = $contexts[ $context ];
 		$permission = current_user_can( $cap );

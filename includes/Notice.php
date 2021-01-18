@@ -10,7 +10,7 @@ namespace ThemeGrill\Masteriyo;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Abstracts\Session\Session;
+use ThemeGrill\Masteriyo\Session\SessionHandler;
 use ThemeGrill\Masteriyo\Contracts\Template;
 
 /**
@@ -59,7 +59,7 @@ class Notice {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Abstracts\Session\Session
+	 * @var ThemeGrill\Masteriyo\Session\SessionHandler
 	 */
 	private $session;
 
@@ -72,7 +72,7 @@ class Notice {
 	 */
 	private $template_loader;
 
-	public function __construct( Session $session, Template $template_loader ) {
+	public function __construct( SessionHandler $session, Template $template_loader ) {
 		$this->session         = $session;
 		$this->template_loader = $template_loader;
 	}

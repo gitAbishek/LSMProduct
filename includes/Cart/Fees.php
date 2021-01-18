@@ -1,0 +1,163 @@
+<?php
+/**
+ * Cart fees API.
+ *
+ * @package ThemeGrill\Masteriyo\Classes
+ * @version 0.1.0
+ */
+
+namespace ThemeGrill\Masteriyo\Cart;
+
+defined( 'ABSPATH' ) || exit;
+
+use ThemeGrill\Masteriyo\Helper\Utils;
+
+/**
+ * Fees class.
+ *
+ * @since 0.1.0
+ */
+class Fees {
+
+	/**
+	 * An array of fee objects.
+	 *
+	 * @since 0.1.0
+	 * @var object[]
+	 */
+	private $fees = array();
+
+	/**
+	 * Reference to cart object.
+	 *
+	 * @since 0.1.0
+	 * @var Cart
+	 */
+	private $cart;
+
+	/**
+	 * New fees are made out of these props.
+	 *
+	 * @since 0.1.0
+	 * @var array
+	 */
+	private $default_props = array(
+		'id'        => '',
+		'name'      => '',
+		'tax_class' => '',
+		'taxable'   => false,
+		'amount'    => 0,
+		'total'     => 0,
+	);
+
+	/**
+	 * Constructor. Reference to the cart.
+	 *
+	 * @since 0.1.0
+	 * @throws Exception If missing Cart object.
+	 * @param Cart $cart Cart object.
+	 */
+	public function __construct( &$cart ) {
+		if ( ! is_a( $cart, 'Cart' ) ) {
+			throw new Exception( 'A valid Cart object is required' );
+		}
+
+		$this->cart = $cart;
+	}
+
+	/**
+	 * Add a fee. Fee IDs must be unique.
+	 *
+	 * @since 0.1.0
+	 * @param array $args Array of fee properties.
+	 * @return object Either a fee object if added, or a WP_Error if it failed.
+	 */
+	public function add( $args = array() ) {
+		$fee_props            = (object) wp_parse_args( $args, $this->default_props );
+		$fee_props->name      = $fee_props->name ? $fee_props->name : __( 'Fee', 'masteriyo' );
+		$fee_props->tax_class = in_array( $fee_props->tax_class, array_merge( WC_Tax::get_tax_classes(), WC_Tax::get_tax_class_slugs() ), true ) ? $fee_props->tax_class : '';
+		$fee_props->taxable   = Utils::string_to_bool( $fee_props->taxable );
+		$fee_props->amount    = wc_format_decimal( $fee_props->amount );
+
+		if ( empty( $fee_props->id ) ) {
+			$fee_props->id = $this->generate_id( $fee_props );
+		}
+
+		if ( array_key_exists( $fee_props->id, $this->fees ) ) {
+			return new WP_Error( 'fee_exists', __( 'Fee has already been added.', 'masteriyo' ) );
+		}
+
+		$this->fees[ $fee_props->id ] = $fee_props;
+
+		return $this->fees[ $fee_props->id ];
+	}
+
+	/**
+	 * Get fees.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	public function get() {
+		uasort( $this->fees, array( $this, 'sort_fees_callback' ) );
+
+		return $this->fees;
+	}
+
+	/**
+	 * Set fees.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param object[] $raw_fees Array of fees.
+	 */
+	public function set( $raw_fees = array() ) {
+		$this->fees = array();
+
+		foreach ( $raw_fees as $raw_fee ) {
+			$this->add( $raw_fee );
+		}
+	}
+
+	/**
+	 * Remove all fees.
+	 *
+	 * @since 0.1.0
+	 */
+	public function remove_all() {
+		$this->set();
+	}
+
+	/**
+	 * Sort fees by amount.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param stdClass $a Fee object.
+	 * @param stdClass $b Fee object.
+	 * @return int
+	 */
+	protected function sort_fees_callback( $a, $b ) {
+		/**
+		 * Filter sort fees callback.
+		 *
+		 * @since 0.1.0
+		 * @param int Sort order, -1 or 1.
+		 * @param stdClass $a Fee object.
+		 * @param stdClass $b Fee object.
+		 */
+		return apply_filters( 'masteriyo_sort_fees_callback', $a->amount > $b->amount ? -1 : 1, $a, $b );
+	}
+
+	/**
+	 * Generate a unique ID for the fee being added.
+	 *
+	 * @since 0.1.0
+	 * @param string $fee Fee object.
+	 * @return string fee key.
+	 */
+	protected function generate_id( $fee ) {
+		return sanitize_title( $fee->name );
+	}
+}

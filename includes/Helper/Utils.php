@@ -7,6 +7,7 @@
 
 namespace ThemeGrill\Masteriyo\Helper;
 
+use ThemeGrill\Masteriyo\Constants;
 class Utils {
 
 	/**
@@ -216,5 +217,44 @@ class Utils {
 	 */
 	public static function is_https_site() {
 		return false !== strstr( get_option( 'home' ), 'https:' );
+	}
+
+	/**
+	 * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
+	 * Non-scalar values are ignored.
+	 *
+	 * @since 0.1.0s
+	 *
+	 * @param string|array $var Data to sanitize.
+	 * @return string|array
+	 */
+	public static function clean( $var ) {
+		if ( is_array( $var ) ) {
+			return array_map( array( __CLASS__, 'clean' ), $var );
+		} else {
+			return is_scalar( $var ) ? sanitize_text_field( $var ) : $var;
+		}
+	}
+
+	/**
+	 * Set a cookie - wrapper for setcookie using WP constants.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string  $name   Name of the cookie being set.
+	 * @param  string  $value  Value of the cookie.
+	 * @param  integer $expire Expiry of the cookie.
+	 * @param  bool    $secure Whether the cookie should be served only over https.
+	 * @param  bool    $httponly Whether the cookie is only accessible over HTTP, not scripting languages like JavaScript.
+	 */
+	public static function set_cookie( $name, $value, $expire = 0, $secure = false, $httponly = false ) {
+		if ( ! headers_sent() ) {
+			$cookie_path = COOKIEPATH ? COOKIEPATH : '/';
+			$http_only   = apply_filters( 'masteriyo_cookie_httponly', $httponly, $name, $value, $expire, $secure );
+			setcookie( $name, $value, $expire, $cookie_path , COOKIE_DOMAIN, $secure, $http_only );
+		} elseif ( Constants::is_true( 'WP_DEBUG' ) ) {
+			headers_sent( $file, $line );
+			trigger_error( "{$name} cookie cannot be set - headers already sent by {$file} on line {$line}", E_USER_NOTICE ); // @phpcs:ignore
+		}
 	}
 }

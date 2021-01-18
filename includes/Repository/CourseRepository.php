@@ -9,6 +9,7 @@ namespace ThemeGrill\Masteriyo\Repository;
 
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\Course;
+use ThemeGrill\Masteriyo\Helper\Number;
 
 /**
  * Course repository class.
@@ -22,14 +23,19 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'_price'          => 'price',
-		'_regular_price'  => 'regular_price',
-		'_sale_price'     => 'sale_price',
-		'_featured'       => 'featured',
-		'_category_ids'   => 'category_ids',
-		'_tag_ids'       => 'tag_ids',
-		'_difficulty_ids' => 'difficulty_ids',
-		'_thumbnail_id'   => 'featured_image'
+		'_price'             => 'price',
+		'_regular_price'     => 'regular_price',
+		'_sale_price'        => 'sale_price',
+		'_featured'          => 'featured',
+		'_category_ids'      => 'category_ids',
+		'_tag_ids'           => 'tag_ids',
+		'_difficulty_ids'    => 'difficulty_ids',
+		'_thumbnail_id'      => 'featured_image',
+		'_rating_counts'     => 'rating_counts',
+		'_average_rating'    => 'average_rating',
+		'_review_count'      => 'review_count',
+		'_date_on_sale_from' => 'date_on_sale_from',
+		'_date_on_sale_to'   => 'date_on_sale_to',
 	);
 
 	/**
@@ -71,6 +77,8 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			$course->set_id( $id );
 			$this->update_post_meta( $course, true );
 			$this->update_terms( $course, true );
+			$this->update_visibility( $course, true );
+			$this->handle_updated_props( $course );
 			// TODO Invalidate caches.
 
 			$course->save_meta_data();
@@ -188,6 +196,9 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		}
 
 		$this->update_post_meta( $course );
+		$this->update_terms( $course );
+		$this->update_visibility( $course );
+		$this->handle_updated_props( $course );
 
 		$course->apply_changes();
 
@@ -256,6 +267,80 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			wp_set_post_terms( $model->get_id(), $model->get_difficulty_ids( 'edit' ), 'course_difficulty', false );
 		}
 	}
+
+	/**
+	 * Handle updated meta props after updating meta data.
+	 *
+	 * @since 0.1.0
+	 * @param Course $course Course Object.
+	 */
+	protected function handle_updated_props( $course ) {
+		if ( in_array( 'regular_price', $this->updated_props, true ) || in_array( 'sale_price', $this->updated_props, true ) ) {
+			if ( $course->get_sale_price( 'edit' ) >= $course->get_regular_price( 'edit' ) ) {
+				update_post_meta( $course->get_id(), '_sale_price', '' );
+				$course->set_sale_price( '' );
+			}
+		}
+
+		if ( in_array( 'date_on_sale_from', $this->updated_props, true ) || in_array( 'date_on_sale_to', $this->updated_props, true )
+			|| in_array( 'regular_price', $this->updated_props, true ) || in_array( 'sale_price', $this->updated_props, true ) ) {
+			if ( $course->is_on_sale( 'edit' ) ) {
+				update_post_meta( $course->get_id(), '_price', $course->get_sale_price( 'edit' ) );
+				$course->set_price( $course->get_sale_price( 'edit' ) );
+			} else {
+				update_post_meta( $course->get_id(), '_price', $course->get_regular_price( 'edit' ) );
+				$course->set_price( $course->get_regular_price( 'edit' ) );
+			}
+		}
+	}
+
+	/**
+	 * Update visibility terms based on props.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Course $course Course object.
+	 * @param bool       $force Force update. Used during create.
+	 */
+	protected function update_visibility( &$course, $force = false ) {
+		$changes = $course->get_changes();
+
+		if ( $force || array_intersect( array( 'featured', 'stock_status', 'average_rating', 'catalog_visibility' ), array_keys( $changes ) ) ) {
+			$terms = array();
+
+			if ( $course->get_featured() ) {
+				$terms[] = 'featured';
+			}
+
+			if ( 'outofstock' === $course->get_stock_status() ) {
+				$terms[] = 'outofstock';
+			}
+
+			$rating = min( 5, Number::round( $course->get_average_rating(), 0 ) );
+
+			if ( $rating > 0 ) {
+				$terms[] = 'rated-' . $rating;
+			}
+
+			switch ( $course->get_catalog_visibility() ) {
+				case 'hidden':
+					$terms[] = 'exclude-from-search';
+					$terms[] = 'exclude-from-catalog';
+					break;
+				case 'catalog':
+					$terms[] = 'exclude-from-search';
+					break;
+				case 'search':
+					$terms[] = 'exclude-from-catalog';
+					break;
+			}
+
+			if ( ! is_wp_error( wp_set_post_terms( $course->get_id(), $terms, 'course_visibility', false ) ) ) {
+				do_action( 'masteriyo_course_set_visibility', $course->get_id(), $course->get_catalog_visibility() );
+			}
+		}
+	}
+
 
 	/**
 	 * Read course data. Can be overridden by child classes to load other props.

@@ -39,7 +39,7 @@ define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
 
 require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 
-Constants::set_constant( 'MASTERIYO_TEMPLATE_DEBUG_MODE', true );
+Constants::set( 'MASTERIYO_TEMPLATE_DEBUG_MODE', true );
 
 $masteriyo_container = new Container();
 
@@ -67,6 +67,12 @@ $masteriyo_container->add(
 
 $masteriyo_container->add( 'course', \ThemeGrill\Masteriyo\Models\Course::class )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\CourseRepository::class );
+
+$masteriyo_container->add( 'course_repository',
+	function() {
+		return apply_filters( 'masteriyo_course_repository', new CourseRepository() );
+	}
+);
 
 $masteriyo_container->add(
 	\ThemeGrill\Masteriyo\Repository\CourseRepository::class,
@@ -198,11 +204,17 @@ $masteriyo_container->add(
 
 $masteriyo_container->add( 'Permission', \ThemeGrill\Masteriyo\Helper\Utils\Permission::class, true );
 
+$masteriyo_container->add( 'template', \ThemeGrill\Masteriyo\Template::class, true );
+
 $masteriyo_container->add( 'session', \ThemeGrill\Masteriyo\Session\SessionHandler::class, true )
 	->addArgument( \ThemeGrill\Masteriyo\Repository\SessionRepository::class );
 
+$masteriyo_container->add( 'notice', \ThemeGrill\Masteriyo\Notice::class, true )
+	->addArgument( 'session' )->addArgument( 'template' );
 
-$masteriyo_container->add( 'notice', \ThemeGrill\Masteriyo\Notice::class, true );
+$masteriyo_container->add( 'cart', \ThemeGrill\Masteriyo\Cart\Cart::class, true )
+	->addArgument( 'session' )
+	->addArgument( 'notice' );
 
 $_GLOBALS['masteriyo_container'] = $masteriyo_container; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 

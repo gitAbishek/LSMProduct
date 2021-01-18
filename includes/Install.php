@@ -19,7 +19,7 @@ class Install {
 	public static function init() {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		self::create_roles();
-		self::init_db();
+		// self::init_db();
 	}
 
 	/**
@@ -82,7 +82,8 @@ class Install {
 	 */
 	private static function get_session_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_sessions` (
-			`id` CHAR(32) NOT NULL,
+			`id` BIGINT UNSIGNED AUTO_INCREMENT,
+			`key` CHAR(32) UNIQUE NOT NULL,
 			`data` LONGTEXT NOT NULL,
 			`expiry` BIGINT UNSIGNED NOT NULL,
 			PRIMARY KEY (id)

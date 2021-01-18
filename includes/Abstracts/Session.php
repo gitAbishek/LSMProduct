@@ -11,7 +11,7 @@
 namespace ThemeGrill\Masteriyo\Abstracts;
 
 use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Contracts\Session\Session as SessionInterface;
+use ThemeGrill\Masteriyo\Contracts\Session as SessionInterface;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,13 +21,31 @@ defined( 'ABSPATH' ) || exit;
 abstract class Session extends Model implements SessionInterface {
 
 	/**
-	 * Session expiry.
+	 * User ID.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var string Session due to expire - Timestamp.
+	 * @var int $user_id User ID.
+	 */
+	protected $user_id;
+
+	/**
+	 * Stores session expiry.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string session due to expire timestamp
 	 */
 	protected $expiring;
+
+	/**
+	 * Stores session due to expire timestamp.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string session expiration timestamp
+	 */
+	protected $expiration;
 
 	/**
 	 * This is the name of this object type.
@@ -55,12 +73,13 @@ abstract class Session extends Model implements SessionInterface {
 	 * @var array
 	 */
 	protected $data = array(
+		'key'    => '',
 		'data'   => array(),
 		'expiry' => 0,
 	);
 
 	/**
-	 * Generate a unique customer ID for guests, or return user ID if logged in.
+	 * Generate a unique user ID for guests, or return user ID if logged in.
 	 *
 	 * Uses Portable PHP password hashing framework to generate a unique cryptographically strong ID.
 	 *
@@ -68,20 +87,20 @@ abstract class Session extends Model implements SessionInterface {
 	 *
 	 * @return string
 	 */
-	public function generate_id() {
-		$id = '';
+	public function generate_user_id() {
+		$user_id = '';
 
 		if ( is_user_logged_in() ) {
-			$id = strval( get_current_user_id() );
+			$user_id = strval( get_current_user_id() );
 		}
 
-		if ( empty( $id ) ) {
+		if ( empty( $user_id ) ) {
 			require_once ABSPATH . 'wp-includes/class-phpass.php';
-			$hasher = new \PasswordHash( 8, false );
-			$id     = md5( $hasher->get_random_bytes( 32 ) );
+			$hasher  = new \PasswordHash( 8, false );
+			$user_id = md5( $hasher->get_random_bytes( 32 ) );
 		}
 
-		return $id;
+		return $user_id;
 	}
 
 	/**
@@ -101,8 +120,50 @@ abstract class Session extends Model implements SessionInterface {
 	 * @param string $id Set the session ID.
 	 */
 	public function set_id( $id ) {
-		$this->id = (string) $id;
+		$this->id = (int) $id;
 	}
+
+
+	/**
+	 * Get the current session key.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_key() {
+		return $this->get_prop( 'key' );
+	}
+
+	/**
+	 * Set the session key.
+	 *
+	 * @param string $key Set the session key.
+	 */
+	public function set_key( $key ) {
+		$this->set_prop( 'key', (string) $key );
+	}
+
+	/**
+	 * Get the current session data.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_data() {
+		return $this->get_prop( 'data' );
+	}
+
+	/**
+	 * Set the session data.
+	 *
+	 * @param string $data Set the session data.
+	 */
+	public function set_data( $data ) {
+		$this->set_prop( 'data', $data );
+	}
+
 
 	/**
 	 * Get session expiry.
@@ -148,6 +209,8 @@ abstract class Session extends Model implements SessionInterface {
 
 	/**
 	 * Put a key/value pair in the session.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $key	Session item key.
 	 * @param mixed $value	Session item value.
@@ -267,5 +330,14 @@ abstract class Session extends Model implements SessionInterface {
 	 */
 	public function is_dirty() {
 		return ! empty( $this->changes );
+	}
+
+	/**
+	 * Get user ID.
+	 *
+	 * @return int
+	 */
+	public function get_user_id() {
+		return $this->user_id;
 	}
 }

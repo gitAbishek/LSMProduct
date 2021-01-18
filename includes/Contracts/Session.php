@@ -15,7 +15,7 @@ interface Session {
 	 *
 	 * @return string
 	 */
-	public function generate_id();
+	public function generate_user_id();
 
 	/**
 	 * Get the name of the session.
@@ -45,6 +45,26 @@ interface Session {
 	 * @return string
 	 */
 	public function set_id( $id );
+
+	/**
+	 * Get the current session key.
+	 *
+	 * @since 0.1.0
+	 *r
+	 * @return string
+	 */
+	public function get_key();
+
+	/**
+	 * Set the current session key.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $key Set the session key.
+	 *
+	 * @return string
+	 */
+	public function set_key( $key );
 
 	/**
 	 * Start the session, reading the data from a handler.
@@ -161,4 +181,12 @@ interface Session {
 	 * @return boolean
 	 */
 	public function is_dirty();
+
+
+	/**
+	 * Get user ID.
+	 *
+	 * @return int
+	 */
+	public function get_user_id();
 }

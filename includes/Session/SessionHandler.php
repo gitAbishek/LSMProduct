@@ -12,6 +12,7 @@ namespace ThemeGrill\Masteriyo\Session;
 use ThemeGrill\Masteriyo\Abstracts\Session;
 use ThemeGrill\Masteriyo\Repository\SessionRepository;
 use ThemeGrill\Masteriyo\Constants;
+use ThemeGrill\Masteriyo\Helper\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -104,21 +105,21 @@ class SessionHandler extends Session {
 			return false;
 		}
 
-		list( $user_id, $session_expiration, $session_expiring, $cookie_hash ) = explode( '||', $cookie_value );
+		list( $user_id, $expiration, $expiring, $cookie_hash ) = explode( '||', $cookie_value );
 
 		if ( empty( $user_id ) ) {
 			return false;
 		}
 
 		// Validate hash.
-		$to_hash = $user_id . '|' . $session_expiration;
+		$to_hash = $user_id . '|' . $expiration;
 		$hash    = hash_hmac( 'md5', $to_hash, wp_hash( $to_hash ) );
 
 		if ( empty( $cookie_hash ) || ! hash_equals( $hash, $cookie_hash ) ) {
 			return false;
 		}
 
-		return array( $user_id, $session_expiration, $session_expiring, $cookie_hash );
+		return array( $user_id, $expiration, $expiring, $cookie_hash );
 	}
 
 	/**
@@ -126,17 +127,12 @@ class SessionHandler extends Session {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param integer $old_session_id session ID before user logs in.
+	 * @param integer $old_session_key session Key before user logs in.
 	 */
-	public function save_data( $old_session_id = 0 ) {
+	public function save_data( $old_session_key = 0 ) {
 		// Dirty if something changed - prevents saving nothing new.
 		if ( $this->is_started() ) {
 			$this->save();
-
-			$current_user_id = (string) get_current_user_id();
-			if ( $current_user_id !== $old_session_id && ! is_object( get_user_by( 'id', $old_session_id ) ) ) {
-				$this->repository->delete( $this );
-			}
 		}
 	}
 
@@ -159,29 +155,32 @@ class SessionHandler extends Session {
 		$cookie = $this->get_session_cookie();
 
 		if ( $cookie ) {
-			$this->id                 = $cookie[0];
-			$this->session_expiration = $cookie[1];
-			$this->session_expiring   = $cookie[2];
-			$this->has_cookie         = true;
-			$this->set_prop( 'data', $this->all() );
+			$this->user_id    = $cookie[0];
+			$this->expiration = (int) $cookie[1];
+			$this->expiring   = (int) $cookie[2];
+			$this->has_cookie = true;
+			$this->set_key( $this->user_id );
+			$this->read();
 
 			// If the user logs in, update session.
-			if ( is_user_logged_in() && strval( get_current_user_id() ) !== $this->id ) {
-				$guest_session_id = $this->id;
-				$this->id         = strval( get_current_user_id() );
+			if ( is_user_logged_in() && strval( get_current_user_id() ) !== $this->user_id ) {
+				$guest_session_id = $this->user_id;
+				$this->user_id    = strval( get_current_user_id() );
+				$this->set_key( $this->user_id );
 				$this->save_data( $guest_session_id );
 				$this->set_user_session_cookie( true );
 			}
 
 			// Update session if it's close to expiring.
-			if ( time() > $this->session_expiring ) {
+			if ( time() > $this->expiring ) {
 				$this->set_session_expiration();
-				$this->set_expiry( $this->session_expiration );
+				$this->set_expiry( $this->expiration );
 				$this->save();
 			}
 		} else {
 			$this->set_session_expiration();
-			$this->id = $this->generate_id();
+			$this->user_id = $this->generate_user_id();
+			$this->set_prop( 'key', $this->user_id );
 			$this->set_prop( 'data', $this->all() );
 		}
 	}
@@ -197,13 +196,13 @@ class SessionHandler extends Session {
 	 */
 	public function set_user_session_cookie( $set ) {
 		if ( $set ) {
-			$to_hash          = $this->user_id . '|' . $this->session_expiration;
+			$to_hash          = $this->user_id . '|' . $this->expiration;
 			$cookie_hash      = hash_hmac( 'md5', $to_hash, wp_hash( $to_hash ) );
-			$cookie_value     = $this->user_id . '||' . $this->session_expiration . '||' . $this->session_expiring . '||' . $cookie_hash;
+			$cookie_value     = $this->user_id . '||' . $this->expiration . '||' . $this->expiring . '||' . $cookie_hash;
 			$this->has_cookie = true;
 
 			if ( ! isset( $_COOKIE[ $this->cookie ] ) || $_COOKIE[ $this->cookie ] !== $cookie_value ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-				$this->set_cookie( $this->cookie, $cookie_value, $this->session_expiration, $this->use_securecookie(), true );
+				$this->set_cookie( $this->cookie, $cookie_value, $this->expiration, $this->use_securecookie(), true );
 			}
 		}
 	}
@@ -248,7 +247,8 @@ class SessionHandler extends Session {
 		$expiring   = time() + (int) apply_filters( 'masteriyo_session_expiring', 47 * HOUR_IN_SECONDS );
 		$expiration = time() + (int) apply_filters( 'masteriyo_session_expiration', 48 * HOUR_IN_SECONDS );
 
-		$this->expiring = $expiring;
+		$this->expiring   = $expiring;
+		$this->expiration = $expiration;
 		$this->set_prop( 'expiry', $expiration );
 	}
 

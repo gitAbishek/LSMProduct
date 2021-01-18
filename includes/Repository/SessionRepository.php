@@ -26,15 +26,20 @@ class SessionRepository implements RepositoryInterface {
 	public function create( Model &$session ) {
 		global $wpdb;
 
+		error_log( __FUNCTION__ );
+
 		$session_table = $session->get_table();
-		$wpdb->insert(
-			"{$session_table}",
+		$wpdb->replace(
+			$session_table,
 			array(
-				'data' => maybe_serialize( $session->all() ),
+				'key'     => $session->get_key(),
+				'data'   => maybe_serialize( $session->all() ),
 				'expiry' => $session->get_expiry()
 			),
-			array( '%s', '%d' )
+			array( '%s', '%s', '%d' )
 		);
+		$session->set_id( $wpdb->insert_id );
+		$session->set_object_read( true );
 	}
 
 	/**
@@ -50,7 +55,7 @@ class SessionRepository implements RepositoryInterface {
 
 		if ( $session->get_id() ) {
 			$session_table = $session->get_table();
-			$wpdb->delte( $session, array( 'id' => $session->get_id() ) );
+			$wpdb->delete( $session_table, array( 'id' => $session->get_id() ) );
 		}
 	}
 
@@ -65,15 +70,21 @@ class SessionRepository implements RepositoryInterface {
 	public function read( Model &$session ) {
 		global $wpdb;
 
-		if ( $session->get_id() ) {
-			$session_table = $session->get_table();
-			$query         = $wpdb->prepare( 'SELECT * FROM %s WHERE id = %s', $session_table, $session->get_id() );
-			$result        = $wpdb->get_row( $query, OBJECT ); // phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		if ( ! empty( $session->get_key() ) ) {
+			$session_table = esc_sql( $session->get_table() );
+			$query         = $wpdb->prepare( "SELECT * FROM {$session_table} WHERE `key` = %s", $session->get_key() );
+			$result        = $wpdb->get_row( $query ); // phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
 
-			$session->set_props( array(
-				'data' => maybe_unserialize( $result->data ),
-				'expiry' => $result->expiry
-			) );
+			if ( ! is_null( $result ) ) {
+				$session->set_props( array(
+					'key'    => $result->key,
+					'data'   => maybe_unserialize( $result->data ),
+					'expiry' => $result->expiry
+				) );
+
+				$session->set_id( $result->id );
+				$session->set_object_read( true );
+			}
 		}
 	}
 
@@ -90,16 +101,22 @@ class SessionRepository implements RepositoryInterface {
 		global $wpdb;
 
 		$session_table = $session->get_table();
-		$wpdb->update(
-			"{$session_table}",
-			array(
-				'data'   => maybe_serialize( $session->all() ),
-				'expiry' => $session->get_expiry()
-			),
-			array( 'id' => $session->get_id() ),
-			array( '%s', '%d' ),
-			array( '%s' )
-		);
+
+		if ( $session->is_dirty() ) {
+			\error_log( __FUNCTION__ );
+			$wpdb->update(
+				$session_table,
+				array(
+					'key'    => $session->get_key(),
+					'data'   => maybe_serialize( $session->all() ),
+					'expiry' => $session->get_expiry()
+				),
+				array( 'id' => $session->get_id() ),
+				array( '%s', '%s', '%d' ),
+				array( '%d' )
+			);
+		}
+
 	}
 
 	/**

@@ -141,12 +141,11 @@ abstract class AbstractRepository {
 
 		$raw_meta_data = $wpdb->get_results(
 			$wpdb->prepare(
-				'SELECT %s as meta_id, meta_key, meta_value FROM %s WHERE %s = %d ORDER BY %s',
-				$meta_table_info['meta_id_field'],
-				$meta_table_info['table'],
-				$meta_table_info['object_id_field'],
-				$model->get_id(),
-				$meta_table_info['meta_id_field']
+				"SELECT {$meta_table_info['meta_id_field']} as  meta_id, meta_key, meta_value
+				FROM {$meta_table_info['table']}
+				WHERE {$meta_table_info['object_id_field']} = %d
+				ORDER BY {$meta_table_info['meta_id_field']}",
+				$model->get_id()
 			)
 		);
 

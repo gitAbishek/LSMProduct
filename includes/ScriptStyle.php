@@ -88,7 +88,7 @@ class ScriptStyle {
 	 * @return array
 	 */
 	public function get_styles( $type = 'none' ) {
-		$version = Constants::get_constant( 'MASTERIYO_VERSION' );
+		$version = Constants::get( 'MASTERIYO_VERSION' );
 
 		$styles = apply_filters( 'masteriyo_enqueue_styles', array(
 			'masteriyo-admin' => array(
@@ -131,7 +131,7 @@ class ScriptStyle {
 	 * @return array
 	 */
 	public function get_scripts( $type = 'none' ) {
-		$version = Constants::get_constant( 'MASTERIYO_VERSION' );
+		$version = Constants::get( 'MASTERIYO_VERSION' );
 
 		$scripts = apply_filters( 'masteriyo_enqueue_scripts', array(
 			'masteriyo-admin' => array(

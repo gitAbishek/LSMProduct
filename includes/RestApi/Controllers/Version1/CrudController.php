@@ -427,7 +427,7 @@ abstract class CrudController extends RestController {
 		return array(
 			'objects' => array_filter( array_map( array( $this, 'get_object' ), $result ) ),
 			'total'   => (int) $total_posts,
-			'pages'   => (int) ceil( $total_posts / (int) $query_args['number'] ),
+			'pages'   => (int) ceil( $total_posts / (int) $query_args['posts_per_page'] ),
 		);
 	}
 

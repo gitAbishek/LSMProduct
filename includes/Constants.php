@@ -68,7 +68,7 @@ class Constants {
 	 *
 	 * @return mixed null if the constant does not exist or the value of the constant.
 	 */
-	public static function get_constant( $name ) {
+	public static function get( $name ) {
 		if ( array_key_exists( $name, self::$set_constants ) ) {
 			return self::$set_constants[ $name ];
 		}
@@ -96,7 +96,7 @@ class Constants {
 	 * @param string $name The name of the constant.
 	 * @param string $value The value of the constant.
 	 */
-	public static function set_constant( $name, $value ) {
+	public static function set( $name, $value ) {
 		self::$set_constants[ $name ] = $value;
 	}
 
@@ -109,7 +109,7 @@ class Constants {
 	 *
 	 * @return bool Whether the constant was removed.
 	 */
-	public static function clear_single_constant( $name ) {
+	public static function clear( $name ) {
 		if ( ! array_key_exists( $name, self::$set_constants ) ) {
 			return false;
 		}
@@ -124,7 +124,7 @@ class Constants {
 	 *
 	 * @since 0.1.0
 	 */
-	public static function clear_constants() {
+	public static function clear_all() {
 		self::$set_constants = array();
 	}
 }

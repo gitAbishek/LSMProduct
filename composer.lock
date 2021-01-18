@@ -655,12 +655,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mi5t4n/wp_mock.git",
-                "reference": "ea5d186e9693f7655d6611329cf64cada79c4cae"
+                "reference": "7da05e6cf81290308af5da1346ca15b8f41e5fe1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mi5t4n/wp_mock/zipball/ea5d186e9693f7655d6611329cf64cada79c4cae",
-                "reference": "ea5d186e9693f7655d6611329cf64cada79c4cae",
+                "url": "https://api.github.com/repos/mi5t4n/wp_mock/zipball/7da05e6cf81290308af5da1346ca15b8f41e5fe1",
+                "reference": "7da05e6cf81290308af5da1346ca15b8f41e5fe1",
                 "shasum": ""
             },
             "require": {
@@ -709,7 +709,7 @@
             "support": {
                 "source": "https://github.com/mi5t4n/wp_mock/tree/enhance/allow-to-enable-disable-mock-constants-functions"
             },
-            "time": "2020-12-20T06:23:29+00:00"
+            "time": "2021-01-05T07:50:28+00:00"
         },
         {
             "name": "antecedent/patchwork",
@@ -1370,16 +1370,16 @@
         },
         {
             "name": "php-stubs/woocommerce-stubs",
-            "version": "4.7.1",
+            "version": "v4.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-stubs/woocommerce-stubs.git",
-                "reference": "6ebe8ba752d354e9434e65ab5d7d01eab26e521e"
+                "reference": "86523c0fc7838347605fdd4fbaa6b8a67c644f5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-stubs/woocommerce-stubs/zipball/6ebe8ba752d354e9434e65ab5d7d01eab26e521e",
-                "reference": "6ebe8ba752d354e9434e65ab5d7d01eab26e521e",
+                "url": "https://api.github.com/repos/php-stubs/woocommerce-stubs/zipball/86523c0fc7838347605fdd4fbaa6b8a67c644f5c",
+                "reference": "86523c0fc7838347605fdd4fbaa6b8a67c644f5c",
                 "shasum": ""
             },
             "require": {
@@ -1406,7 +1406,7 @@
                 "woocommerce",
                 "wordpress"
             ],
-            "time": "2020-11-25T12:40:15+00:00"
+            "time": "2020-12-08T17:43:23+00:00"
         },
         {
             "name": "php-stubs/wordpress-stubs",

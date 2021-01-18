@@ -14,6 +14,9 @@
     }
   ],
   "autoload": {
+    "files": [
+      "includes/Helper/Core.php"
+    ],
     "psr-4": {
       "ThemeGrill\\Masteriyo\\": "includes/"
     }
@@ -37,8 +40,8 @@
   },
   "repositories": [
     {
-        "type": "vcs",
-        "url": "git@github.com:mi5t4n/wp_mock.git"
+      "type": "vcs",
+      "url": "git@github.com:mi5t4n/wp_mock.git"
     }
   ],
   "scripts": {

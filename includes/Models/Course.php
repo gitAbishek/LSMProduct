@@ -71,13 +71,18 @@ class Course extends Model {
 		'post_password'      => '',
 		'parent_id'          => 0,
 		'reviews_allowed'    => true,
+		'date_on_sale_from'  => null,
+		'date_on_sale_to'    => null,
 		'price'              => '',
 		'regular_price'      => '',
 		'sale_price'         => '',
 		'category_ids'       => array(),
 		'tag_ids'            => array(),
 		'difficulty_ids'     => array(),
-		'featured_image'     => ''
+		'featured_image'     => '',
+		'rating_counts'      => array(),
+		'average_rating'     => 0,
+		'review_count'       => 0,
 	);
 
 	/**
@@ -98,7 +103,7 @@ class Course extends Model {
 	*/
 
 	/**
-	 * Get the product's title. For products this is the product name.
+	 * Get the course's title. For courses this is the course name.
 	 *
 	 * @return string
 	 */
@@ -107,7 +112,7 @@ class Course extends Model {
 	}
 
 	/**
-	 * Product permalink.
+	 * Course permalink.
 	 *
 	 * @return string
 	 */
@@ -254,6 +259,29 @@ class Course extends Model {
 		return $this->get_prop( 'reviews_allowed', $context );
 	}
 
+
+	/**
+	 * Get date on sale from.
+	 *
+	 * @since  0.1.0
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return string|NULL object if the date is set or null if there is no date.
+	 */
+	public function get_date_on_sale_from( $context = 'view' ) {
+		return $this->get_prop( 'date_on_sale_from', $context );
+	}
+
+	/**
+	 * Get date on sale to.
+	 *
+	 * @since  0.1.0
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return WC_DateTime|NULL object if the date is set or null if there is no date.
+	 */
+	public function get_date_on_sale_to( $context = 'view' ) {
+		return $this->get_prop( 'date_on_sale_to', $context );
+	}
+
 	/**
 	 * Returns course parent id.
 	 *
@@ -383,6 +411,39 @@ class Course extends Model {
 	 */
 	public function get_featured( $context = 'view' ) {
 		return  $this->get_prop( 'featured', $context );
+	}
+
+	/**
+	 * Get rating count.
+	 *
+	 * @since  0.1.0
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return array of counts
+	 */
+	public function get_rating_counts( $context = 'view' ) {
+		return $this->get_prop( 'rating_counts', $context );
+	}
+
+	/**
+	 * Get average rating.
+	 *
+	 * @since  0.1.0
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return float
+	 */
+	public function get_average_rating( $context = 'view' ) {
+		return $this->get_prop( 'average_rating', $context );
+	}
+
+	/**
+	 * Get review count.
+	 *
+	 * @since  0.1.0
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return int
+	 */
+	public function get_review_count( $context = 'view' ) {
+		return $this->get_prop( 'review_count', $context );
 	}
 
 	/**
@@ -540,6 +601,26 @@ class Course extends Model {
 	}
 
 	/**
+	 * Set date on sale from.
+	 *
+	 * @since 0.1.0
+	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
+	 */
+	public function set_date_on_sale_from( $date = null ) {
+		$this->set_date_prop( 'date_on_sale_from', $date );
+	}
+
+	/**
+	 * Set date on sale to.
+	 *
+	 * @since 0.1.0
+	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
+	 */
+	public function set_date_on_sale_to( $date = null ) {
+		$this->set_date_prop( 'date_on_sale_to', $date );
+	}
+
+	/**
 	 * Set the course category ids.
 	 *
 	 * @since 0.1.0
@@ -592,5 +673,85 @@ class Course extends Model {
 	 */
 	public function set_featured( $featured ) {
 		$this->set_prop( 'featured', Utils::string_to_bool( $featured ) );
+	}
+
+
+	/**
+	 * Set rating counts. Read only.
+	 *
+	 * @since 0.1.0
+	 * @param array $counts Course rating counts.
+	 */
+	public function set_rating_counts( $counts ) {
+		$this->set_prop( 'rating_counts', array_filter( array_map( 'absint', (array) $counts ) ) );
+	}
+
+	/**
+	 * Set average rating. Read only.
+	 *
+	 * @since 0.1.0
+	 * @param float $average Course average rating.
+	 */
+	public function set_average_rating( $average ) {
+		$this->set_prop( 'average_rating', wc_format_decimal( $average ) );
+	}
+
+	/**
+	 * Set review count. Read only.
+	 *
+	 * @since 0.1.0
+	 * @param int $count Course review count.
+	 */
+	public function set_review_count( $count ) {
+		$this->set_prop( 'review_count', absint( $count ) );
+	}
+
+	 /**
+	 * Returns whether or not the course is on sale.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return bool
+	 */
+	public function is_on_sale( $context = 'view' ) {
+		if ( '' !== (string) $this->get_sale_price( $context ) && $this->get_regular_price( $context ) > $this->get_sale_price( $context ) ) {
+			$on_sale = true;
+
+			if ( $this->get_date_on_sale_from( $context ) && $this->get_date_on_sale_from( $context )->getTimestamp() > time() ) {
+				$on_sale = false;
+			}
+
+			if ( $this->get_date_on_sale_to( $context ) && $this->get_date_on_sale_to( $context )->getTimestamp() < time() ) {
+				$on_sale = false;
+			}
+		} else {
+			$on_sale = false;
+		}
+		return 'view' === $context ? apply_filters( 'masteriyo_course_is_on_sale', $on_sale, $this ) : $on_sale;
+	}
+
+	/**
+	 * Returns false if the course cannot be bought.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_purchasable() {
+		return apply_filters(
+			'masteriyo_is_purchasable',
+			( 'publish' === $this->get_status() || current_user_can( 'edit_post', $this->get_id() ) ) && '' !== $this->get_price(),
+			$this
+		);
+	}
+
+	/**
+	 * Check whether the course exists in the database or not.
+	 *
+	 * @return void
+	 */
+	public function exists() {
+		return false !== $this->get_status();
 	}
 }

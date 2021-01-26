@@ -216,6 +216,12 @@ $masteriyo_container->add( 'cart', \ThemeGrill\Masteriyo\Cart\Cart::class, true 
 	->addArgument( 'session' )
 	->addArgument( 'notice' );
 
+
+$masteriyo_container->add( 'setting-repository', \ThemeGrill\Masteriyo\Repository\SettingRepository::class);
+
+$masteriyo_container->add( 'setting', \ThemeGrill\Masteriyo\Models\Setting::class)
+	->addArgument( 'setting-repository');
+
 $_GLOBALS['masteriyo_container'] = $masteriyo_container; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 /**

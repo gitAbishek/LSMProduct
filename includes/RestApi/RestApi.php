@@ -42,6 +42,10 @@ class RestApi {
 	public function register_rest_routes() {
 		global $masteriyo_container;
 
+		if ( is_null( $masteriyo_container ) ) {
+			return;
+		}
+
 		foreach ( $this->get_rest_namespaces() as $namespace => $controllers ) {
 			foreach ( $controllers as $controller_name => $controller_class ) {
 				// $this->controllers[ $namespace ][ $controller_name ] = new $controller_class;
@@ -95,17 +99,18 @@ class RestApi {
 
 		return array(
 			'courses'             => "{$namespace}\\CoursesController",
-			'course-categories'   => "{$namespace}\\CourseCategoriesController",
-			'course-tags'         => "{$namespace}\\CourseTagsController",
-			'course-difficulties' => "{$namespace}\\CourseDifficultiesController",
-			'course-children'     => "{$namespace}\\CourseChildrenController",
+			'course.categories'   => "{$namespace}\\CourseCategoriesController",
+			'course.tags'         => "{$namespace}\\CourseTagsController",
+			'course.difficulties' => "{$namespace}\\CourseDifficultiesController",
+			'course.children'     => "{$namespace}\\CourseChildrenController",
 			'lessons'             => "{$namespace}\\LessonsController",
 			'questions'           => "{$namespace}\\QuestionsController",
 			'quizes'              => "{$namespace}\\QuizesController",
 			'sections'            => "{$namespace}\\SectionsController",
-			'section-children'    => "{$namespace}\\SectionChildrenController",
+			'section.children'    => "{$namespace}\\SectionChildrenController",
 			'orders'              => "{$namespace}\\OrdersController",
 			'users'               => "{$namespace}\\UsersController",
+			'settings'            => "{$namespace}\\SettingsController",
 		);
 	}
 

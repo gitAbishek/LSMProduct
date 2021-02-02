@@ -3,6 +3,6 @@
  * Create the application.
  */
 
-$masteriyo = new ThemeGrill\Masteriyo\Masteriyo;
+$masteriyo = new ThemeGrill\Masteriyo\Masteriyo();
 
 return $masteriyo;

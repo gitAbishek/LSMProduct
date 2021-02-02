@@ -13,19 +13,7 @@
  */
 
 use ThemeGrill\Masteriyo\Masteriyo;
-use ThemeGrill\Masteriyo\Repository\OrderRepository;
-use ThemeGrill\Masteriyo\Repository\CourseRepository;
-use ThemeGrill\Masteriyo\Repository\SectionRepository;
-use ThemeGrill\Masteriyo\Repository\LessonRepository;
-use ThemeGrill\Masteriyo\Repository\QuizRepository;
-use ThemeGrill\Masteriyo\Repository\CourseCategoryRepository;
-use ThemeGrill\Masteriyo\Repository\CourseTagRepository;
-use ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository;
-use ThemeGrill\Masteriyo\Repository\UserRepository;
 use League\Container\Container;
-use ThemeGrill\Masteriyo\Cache\Cache;
-use ThemeGrill\Masteriyo\Repository\QuestionRepository;
-use ThemeGrill\Masteriyo\Constants;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -37,201 +25,26 @@ define( 'MASTERIYO_ASSETS', dirname( __FILE__ ) . '/assets' );
 define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
 define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
 
+/**
+ * Include the autoloader.
+ */
 require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 
-Constants::set( 'MASTERIYO_TEMPLATE_DEBUG_MODE', true );
-
+/**
+ * Bootstrap the appplication.
+ */
 $masteriyo = require_once dirname( __FILE__ ) . '/bootstrap/app.php';
 
-$masteriyo->delegate(
-	new League\Container\ReflectionContainer()
-);
-
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Cache\CacheInterface::class,
-	function() {
-		return apply_filters( 'masteriyo_cache', Cache::instance() );
-	}
-);
-
-$masteriyo_container->add( 'order', \ThemeGrill\Masteriyo\Models\Order::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\OrderRepository::class );
-
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Repository\OrderRepository::class,
-	function() {
-		return apply_filters( 'masteriyo_order_repository', new OrderRepository() );
-	}
-);
-
-$masteriyo_container->add( 'course', \ThemeGrill\Masteriyo\Models\Course::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\CourseRepository::class );
-
-$masteriyo_container->add( 'course_repository',
-	function() {
-		return apply_filters( 'masteriyo_course_repository', new CourseRepository() );
-	}
-);
-
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Repository\CourseRepository::class,
-	function() {
-		return apply_filters( 'masteriyo_course_repository', new CourseRepository() );
-	}
-);
-
-$masteriyo_container->add( 'section', \ThemeGrill\Masteriyo\Models\Section::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\SectionRepository::class );
-
-$masteriyo_container->add(
-	'section_repository',
-	function() {
-		return apply_filters( 'masteriyo_section_repository', new SectionRepository() );
-	}
-);
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Repository\SectionRepository::class,
-	function() {
-		return apply_filters( 'masteriyo_section_repository', new SectionRepository() );
-	}
-);
-
-$masteriyo_container->add( 'lesson', \ThemeGrill\Masteriyo\Models\Lesson::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\LessonRepository::class );
-
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Repository\LessonRepository::class,
-	function() {
-		return apply_filters( 'masteriyo_lesson_repository', new LessonRepository() );
-	}
-);
-
-$masteriyo_container->add(
-	'lesson_repository',
-	function() {
-		return apply_filters( 'masteriyo_lesson_repository', new LessonRepository() );
-	}
-);
-
-$masteriyo_container->add( 'quiz', \ThemeGrill\Masteriyo\Models\Quiz::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\QuizRepository::class );
-
-$masteriyo_container->add(
-	'quiz_repository',
-	function() {
-		return apply_filters( 'masteriyo_quiz_repository', new QuizRepository() );
-	}
-);
-
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Repository\QuizRepository::class,
-	function() {
-		return apply_filters( 'masteriyo_quiz_repository', new QuizRepository() );
-	}
-);
-
-$masteriyo_container->add( 'course_cat', \ThemeGrill\Masteriyo\Models\CourseCategory::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\CourseCategoryRepository::class );
-
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Repository\CourseCategoryRepository::class,
-	function() {
-		return apply_filters( 'masteriyo_course_category_repository', new CourseCategoryRepository() );
-	}
-);
-
-$masteriyo_container->add( 'course_tag', \ThemeGrill\Masteriyo\Models\CourseTag::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\CourseTagRepository::class );
-
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Repository\CourseTagRepository::class,
-	function() {
-		return apply_filters( 'masteriyo_course_tag_repository', new CourseTagRepository() );
-	}
-);
-
-$masteriyo_container->add( 'course_difficulty', \ThemeGrill\Masteriyo\Models\CourseDifficulty::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository::class );
-
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository::class,
-	function() {
-		return apply_filters( 'masteriyo_course_difficulty_repository', new CourseDifficultyRepository() );
-	}
-);
-
-$masteriyo_container->add( 'user', \ThemeGrill\Masteriyo\Models\User::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\UserRepository::class );
-
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Repository\UserRepository::class,
-	function() {
-		return apply_filters( 'masteriyo_user_repository', new UserRepository() );
-	}
-);
-
-$masteriyo_container->add( 'true-false', \ThemeGrill\Masteriyo\Models\Question\TrueFalse::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
-
-$masteriyo_container->add( 'single-choice', \ThemeGrill\Masteriyo\Models\Question\SingleChoice::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
-
-$masteriyo_container->add( 'multiple-choice', \ThemeGrill\Masteriyo\Models\Question\MultipleChoice::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
-
-$masteriyo_container->add( 'fill-blanks', \ThemeGrill\Masteriyo\Models\Question\FillBlanks::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
-
-$masteriyo_container->add( 'short-answer', \ThemeGrill\Masteriyo\Models\Question\ShortAnswer::class )
-	->addArgument( \ThemeGrill\Maswwteriyo\Repository\QuestionRepository::class );
-
-$masteriyo_container->add( 'image-matching', \ThemeGrill\Masteriyo\Models\Question\ImageMatching::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
-
-$masteriyo_container->add( 'sortable', \ThemeGrill\Masteriyo\Models\Question\Sortable::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
-
-$masteriyo_container->add( 'question', \ThemeGrill\Masteriyo\Models\Question\Question::class )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
-
-$masteriyo_container->add(
-	\ThemeGrill\Masteriyo\Repository\QuestionRepository::class,
-	function() {
-		return apply_filters( 'masteriyo_question_repository', new QuestionRepository() );
-	}
-);
-
-$masteriyo_container->add( 'Permission', \ThemeGrill\Masteriyo\Helper\Utils\Permission::class, true );
-
-$masteriyo_container->add( 'template', \ThemeGrill\Masteriyo\Template::class, true );
-
-$masteriyo_container->add( 'session', \ThemeGrill\Masteriyo\Session\SessionHandler::class, true )
-	->addArgument( \ThemeGrill\Masteriyo\Repository\SessionRepository::class );
-
-$masteriyo_container->add( 'notice', \ThemeGrill\Masteriyo\Notice::class, true )
-	->addArgument( 'session' )->addArgument( 'template' );
-
-$masteriyo_container->add( 'cart', \ThemeGrill\Masteriyo\Cart\Cart::class, true )
-	->addArgument( 'session' )
-	->addArgument( 'notice' );
-
-
-$masteriyo_container->add( 'setting-repository', \ThemeGrill\Masteriyo\Repository\SettingRepository::class);
-
-$masteriyo_container->add( 'setting', \ThemeGrill\Masteriyo\Models\Setting::class)
-	->addArgument( 'setting-repository');
-
-$_GLOBALS['masteriyo_container'] = $masteriyo_container; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-
 /**
- * Returns the main instance of Masteriyo.
+ * Return the service container.
  *
  * @since 0.1.0
  *
+ * @param string $class Class name or alias.
  * @return ThemeGrill\Masteriyo\Masteriyo
  */
-function MSYO() {
-	return Masteriyo::instance();
-}
+function masteriyo( $class = '' ) {
+	global $masteriyo;
 
-MSYO();
+	return empty( $class ) ? $masteriyo : $masteriyo->get( $class );
+ }

@@ -67,7 +67,7 @@ class RestApi {
 			'masteriyo_rest_api_get_rest_namespaces',
 			array(
 				'masteriyo/v1'    => $this->get_v1_controllers(),
-				'masteriyo/store' => $this->get_store_controllers(),
+				// 'masteriyo/store' => $this->get_store_controllers(),
 			)
 		);
 	}
@@ -98,19 +98,19 @@ class RestApi {
 		$namespace = '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1';
 
 		return array(
-			'courses'             => "{$namespace}\\CoursesController",
-			'course.categories'   => "{$namespace}\\CourseCategoriesController",
-			'course.tags'         => "{$namespace}\\CourseTagsController",
-			'course.difficulties' => "{$namespace}\\CourseDifficultiesController",
-			'course.children'     => "{$namespace}\\CourseChildrenController",
-			'lessons'             => "{$namespace}\\LessonsController",
-			'questions'           => "{$namespace}\\QuestionsController",
-			'quizes'              => "{$namespace}\\QuizesController",
-			'sections'            => "{$namespace}\\SectionsController",
-			'section.children'    => "{$namespace}\\SectionChildrenController",
-			'orders'              => "{$namespace}\\OrdersController",
-			'users'               => "{$namespace}\\UsersController",
-			'settings'            => "{$namespace}\\SettingsController",
+			'courses'              => "{$namespace}\\CoursesController",
+			'courses.categories'   => "{$namespace}\\CourseCategoriesController",
+			'courses.tags'         => "{$namespace}\\CourseTagsController",
+			'courses.difficulties' => "{$namespace}\\CourseDifficultiesController",
+			'courses.children'     => "{$namespace}\\CourseChildrenController",
+			'lessons'              => "{$namespace}\\LessonsController",
+			'questions'            => "{$namespace}\\QuestionsController",
+			'quizes'               => "{$namespace}\\QuizesController",
+			'sections'             => "{$namespace}\\SectionsController",
+			'sections.children'    => "{$namespace}\\SectionChildrenController",
+			'orders'               => "{$namespace}\\OrdersController",
+			'users'                => "{$namespace}\\UsersController",
+			'settings'             => "{$namespace}\\SettingsController",
 		);
 	}
 

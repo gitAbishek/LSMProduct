@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  * @class ThemeGrill\Masteriyo\Masteriyo
  */
 
-class Masteriyo extends Container{
+class Masteriyo extends Container {
 	/**
 	 * Masteriyo version.
 	 *
@@ -33,7 +33,7 @@ class Masteriyo extends Container{
 	public function __construct() {
 		parent::__construct();
 
-		$this->registerServiceProviders();
+		$this->register_service_providers();
 		RestApi::instance()->init();
 
 		add_action( 'init', array( $this, 'init' ) );
@@ -57,8 +57,8 @@ class Masteriyo extends Container{
 	 *
 	 * @return void
 	 */
-	private function registerServiceProviders() {
-		foreach( $this->getServiceProviders() as $p ) {
+	private function register_service_providers() {
+		foreach ( $this->get_service_providers() as $p ) {
 			$this->addServiceProvider( $p );
 		}
 	}
@@ -70,10 +70,11 @@ class Masteriyo extends Container{
 	 *
 	 * @return void
 	 */
-	private function getServiceProviders() {
+	private function get_service_providers() {
+		$namespace = 'ThemeGrill\\Masteriyo\\Providers';
 		return apply_filters( 'masteriyo_get_service_providers', array(
-			'ThemeGrill\Masteriyo\Providers\CourseServiceProvider',
-			'ThemeGrill\Masteriyo\Providers\PermissionServiceProvider'
+			"{$namespace}\\CourseServiceProvider",
+			"{$namespace}\\PermissionServiceProvider"
 		) );
 	}
 

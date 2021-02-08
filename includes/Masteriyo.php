@@ -10,9 +10,9 @@
 namespace ThemeGrill\Masteriyo;
 
 use League\Container\Container;
+use ThemeGrill\Masteriyo\RestApi\RestApi;
 use ThemeGrill\Masteriyo\PostType\RegisterPostTypes;
 use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
-use ThemeGrill\Masteriyo\RestApi\RestApi;
 
 defined( 'ABSPATH' ) || exit;
 

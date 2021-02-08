@@ -74,7 +74,8 @@ class Masteriyo extends Container {
 		$namespace = 'ThemeGrill\\Masteriyo\\Providers';
 		return apply_filters( 'masteriyo_get_service_providers', array(
 			"{$namespace}\\CourseServiceProvider",
-			"{$namespace}\\PermissionServiceProvider"
+			"{$namespace}\\PermissionServiceProvider",
+			"{$namespace}\\SessionServiceProvider",
 		) );
 	}
 

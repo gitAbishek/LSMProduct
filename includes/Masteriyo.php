@@ -23,30 +23,60 @@ defined( 'ABSPATH' ) || exit;
  */
 
 class Masteriyo extends Container {
-	/**
-	 * Masteriyo version.
-	 *
-	 * @var string
-	 */
-	const VERSION = '0.1.0';
 
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1.0
+	 */
 	public function __construct() {
 		parent::__construct();
 
-		$this->register_service_providers();
-		RestApi::instance()->init();
-
-		add_action( 'init', array( $this, 'init' ) );
+		$this->init();
 	}
 
 	/**
-	 * Initialization.
+	 * Get applicaiton version.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return void
+	 * @return string
 	 */
-	public function init() {
+	public function version() {
+		return MASTERIYO_VERSION;
+	}
+
+	/**
+	 * Initialize the applicaiton.
+	 *
+	 * @since 0.1.0
+	 */
+	protected function init() {
+		// Register service providers.
+		$this->register_service_providers();
+
+		// Initialize the rest api controllers.
+		RestApi::instance()->init();
+
+		// Initilize the hooks.
+		$this->init_hooks();
+	}
+
+	/**
+	 * Initialize hooks.
+	 *
+	 * @since 0.1.0
+	 */
+	protected function init_hooks() {
+		add_action( 'init', array( $this, 'after_wp_init' ) );
+	}
+
+	/**
+	 * Initialization after WordPress is initialized.
+	 *
+	 * @since 0.1.0
+	 */
+	public function after_wp_init() {
 		RegisterPostTypes::instance()->register();
 	}
 
@@ -54,8 +84,6 @@ class Masteriyo extends Container {
 	 * Register service providers.
 	 *
 	 * @since 0.1.0
-	 *
-	 * @return void
 	 */
 	private function register_service_providers() {
 		foreach ( $this->get_service_providers() as $p ) {
@@ -68,7 +96,7 @@ class Masteriyo extends Container {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return void
+	 * @return array
 	 */
 	private function get_service_providers() {
 		$namespace = 'ThemeGrill\\Masteriyo\\Providers';
@@ -86,7 +114,6 @@ class Masteriyo extends Container {
 			"{$namespace}\\CourseDifficultyServiceProvider",
 		) );
 	}
-
 }
 
 

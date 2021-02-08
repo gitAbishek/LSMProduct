@@ -195,7 +195,7 @@ class CoursesController extends PostsController {
 			$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
 			$course = $masteriyo_container->get( 'course' );
 			$course->set_id( $id );
-			$course_repo = $masteriyo->get( 'course.store' );
+			$course_repo = masteriyo( 'course.store' );
 			$course_repo->read( $course );
 		} catch ( \Exception $e ) {
 			return false;
@@ -605,11 +605,11 @@ class CoursesController extends PostsController {
 		global $masteriyo;
 
 		$id     = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$course = $masteriyo->get( 'course' );
+		$course = masteriyo( 'course' );
 
 		if ( 0 !== $id ) {
 			$course->set_id( $id );
-			$course_repo = $masteriyo->get( \ThemeGrill\Masteriyo\Repository\CourseRepository::class );
+			$course_repo = masteriyo( \ThemeGrill\Masteriyo\Repository\CourseRepository::class );
 			$course_repo->read( $course );
 		}
 

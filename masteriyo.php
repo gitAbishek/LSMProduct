@@ -36,12 +36,10 @@ require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 $masteriyo = require_once dirname( __FILE__ ) . '/bootstrap/app.php';
 
 /**
- * Return the service container.
- *
- * @since 0.1.0
+ * Return the service container or class.
  *
  * @param string $class Class name or alias.
- * @return ThemeGrill\Masteriyo\Masteriyo
+ * @return void
  */
 function masteriyo( $class = '' ) {
 	global $masteriyo;

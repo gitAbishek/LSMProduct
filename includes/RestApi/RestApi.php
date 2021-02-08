@@ -49,7 +49,7 @@ class RestApi {
 		foreach ( $this->get_rest_namespaces() as $namespace => $controllers ) {
 			foreach ( $controllers as $controller_name => $controller_class ) {
 				// $this->controllers[ $namespace ][ $controller_name ] = new $controller_class;
-				$this->controllers[ $namespace ][ $controller_name ] = $masteriyo->get( $controller_class );
+				$this->controllers[ $namespace ][ $controller_name ] = masteriyo( $controller_class );
 				$this->controllers[ $namespace ][ $controller_name ]->register_routes();
 			}
 		}

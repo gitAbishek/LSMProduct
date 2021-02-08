@@ -80,6 +80,7 @@ class Masteriyo extends Container {
 			"{$namespace}\\QuizServiceProvider",
 			"{$namespace}\\SectionServiceProvider",
 			"{$namespace}\\UserServiceProvider",
+			"{$namespace}\\OrderServiceProvider",
 		) );
 	}
 

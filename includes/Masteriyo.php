@@ -83,6 +83,7 @@ class Masteriyo extends Container {
 			"{$namespace}\\OrderServiceProvider",
 			"{$namespace}\\CourseTagServiceProvider",
 			"{$namespace}\\CourseCategoryServiceProvider",
+			"{$namespace}\\CourseDifficultyServiceProvider",
 		) );
 	}
 

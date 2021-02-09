@@ -184,16 +184,22 @@ class LessonsController extends PostsController {
 	/**
 	 * Get object.
 	 *
-	 * @param  int|WP_Post $id Object ID.
+	 * @since 0.1.0
+	 *
+	 * @param  int|WP_Post|Model $object Object ID or WP_Post or Model.
+	 *
 	 * @return object Model object or WP_Error object.
 	 */
-	protected function get_object( $id ) {
-		global $masteriyo_container;
+	protected function get_object( $object ) {
 		try {
-			$id     = $id instanceof \WP_Post ? $id->ID : $id;
-			$lesson = $masteriyo_container->get( 'lesson' );
+			if ( is_int( $object ) ) {
+				$id = $object;
+			} else {
+				$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
+			}
+			$lesson = masteriyo( 'lesson' );
 			$lesson->set_id( $id );
-			$lesson_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\LessonRepository::class );
+			$lesson_repo = masteriyo( 'lesson.store' );
 			$lesson_repo->read( $lesson );
 		} catch ( \Exception $e ) {
 			return false;
@@ -576,14 +582,12 @@ class LessonsController extends PostsController {
 	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		global $masteriyo_container;
-
 		$id     = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$lesson = $masteriyo_container->get( 'lesson' );
+		$lesson = masteriyo( 'lesson' );
 
 		if ( 0 !== $id ) {
 			$lesson->set_id( $id );
-			$lesson_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\LessonRepository::class );
+			$lesson_repo = masteriyo( 'lesson.store' );
 			$lesson_repo->read( $lesson );
 		}
 

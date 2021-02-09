@@ -190,10 +190,13 @@ class CoursesController extends PostsController {
 	 * @return object Model object or WP_Error object.
 	 */
 	protected function get_object( $object ) {
-		global $masteriyo_container;
 		try {
-			$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
-			$course = $masteriyo_container->get( 'course' );
+			if ( is_int( $object ) ) {
+				$id = $object;
+			} else {
+				$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
+			}
+			$course = masteriyo( 'course' );
 			$course->set_id( $id );
 			$course_repo = masteriyo( 'course.store' );
 			$course_repo->read( $course );

@@ -175,11 +175,10 @@ class CourseChildrenController extends CrudController {
 	 * @return object Model object or WP_Error object.
 	 */
 	protected function get_object( $post ) {
-		global $masteriyo_container;
 		try {
-			$item = $masteriyo_container->get( $post->post_type );
+			$item = masteriyo( $post->post_type );
 			$item->set_id( $post->ID );
-			$item_repo = $masteriyo_container->get( "{$post->post_type}_repository" );
+			$item_repo = masteriyo( "{$post->post_type}_repository" );
 			$item_repo->read( $item );
 		} catch ( \Exception $e ) {
 			return false;

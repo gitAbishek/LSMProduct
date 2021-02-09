@@ -79,6 +79,8 @@ class Masteriyo extends Container {
 	public function after_wp_init() {
 		RegisterPostTypes::instance()->register();
 		RegisterTaxonomies::register();
+
+		do_action( 'masteriyo_init' );
 	}
 
 	/**

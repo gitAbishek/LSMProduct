@@ -25,9 +25,9 @@ class CourseCategoryServiceProvider extends AbstractServiceProvider {
 	 * @var array
 	 */
 	 protected $provides = array(
-		'coursecategory',
-		'coursecategory.store',
-		'coursecategory.rest',
+		'course_cat',
+		'course_cat.store',
+		'course_cat.rest',
 		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController'
 	 );
 
@@ -40,15 +40,15 @@ class CourseCategoryServiceProvider extends AbstractServiceProvider {
 	  * @since 0.1.0
 	  */
 	 public function register() {
-		 $this->getContainer()->add( 'coursecategory.store', CourseCategoryRepository::class );
+		 $this->getContainer()->add( 'course_cat.store', CourseCategoryRepository::class );
 
-		 $this->getContainer()->add( 'coursecategory.rest', CourseCategoriesController::class )
+		 $this->getContainer()->add( 'course_cat.rest', CourseCategoriesController::class )
 			->addArgument( 'permission');
 
 		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController' )
 			->addArgument( 'permission');
 
-		 $this->getContainer()->add( 'coursecategory', CourseCategory::class )
-			->addArgument( 'coursecategory.store');
+		 $this->getContainer()->add( 'course_cat', CourseCategory::class )
+			->addArgument( 'course_cat.store');
 	 }
 }

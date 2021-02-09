@@ -9,6 +9,14 @@ defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use ThemeGrill\Masteriyo\Models\Question;
+use ThemeGrill\Masteriyo\Models\Question\TrueFalse;
+use ThemeGrill\Masteriyo\Models\Question\SingleChoice;
+use ThemeGrill\Masteriyo\Models\Question\MultipleChoice;
+use ThemeGrill\Masteriyo\Models\Question\ShortAnswer;
+use ThemeGrill\Masteriyo\Models\Question\ImageMatching;
+use ThemeGrill\Masteriyo\Models\Question\Sortable;
+
+
 use ThemeGrill\Masteriyo\Repository\QuestionRepository;
 use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuestionsController;
 
@@ -60,19 +68,19 @@ class QuestionServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'question.true-false', TrueFalse::class )
 			->addArgument( 'question.store' );
 
-		$this->getContainer()->add( 'question.single-choice', TrueFalse::class )
+		$this->getContainer()->add( 'question.single-choice', SingleChoice::class )
 			->addArgument( 'question.store' );
 
-		$this->getContainer()->add( 'question.multiple-choice', TrueFalse::class )
+		$this->getContainer()->add( 'question.multiple-choice', MultipleChoice::class )
 			->addArgument( 'question.store' );
 
-		$this->getContainer()->add( 'question.short-answer', TrueFalse::class )
+		$this->getContainer()->add( 'question.short-answer', ShortAnswer::class )
 			->addArgument( 'question.store' );
 
-		$this->getContainer()->add( 'question.image-matching', TrueFalse::class )
+		$this->getContainer()->add( 'question.image-matching', ImageMatching::class )
 			->addArgument( 'question.store' );
 
-		$this->getContainer()->add( 'question.sortable', TrueFalse::class )
+		$this->getContainer()->add( 'question.sortable', Sortable::class )
 			->addArgument( 'question.store' );
 	 }
 }

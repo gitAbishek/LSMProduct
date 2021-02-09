@@ -297,17 +297,21 @@ class QuestionsController extends PostsController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param  int|WP_Post $id Object ID.
+	 * @param  int|WP_Post|Model $object Object ID or WP_Post or Model.
+	 *
 	 * @return object Model object or WP_Error object.
 	 */
-	protected function get_object( $id ) {
-		global $masteriyo_container;
+	protected function get_object( $object ) {
 		try {
-			$id       = $id instanceof \WP_Post ? $id->ID : $id;
+			if ( is_int( $object ) ) {
+				$id = $object;
+			} else {
+				$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
+			}
 			$type     = get_post_meta( $id, '_type', true );
-			$question = $masteriyo_container->get( $type );
+			$question = masteriyo( "question.${type}" );
 			$question->set_id( $id );
-			$question_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
+			$question_repo = masteriyo( 'question.store' );
 			$question_repo->read( $question );
 		} catch ( \Exception $e ) {
 			return false;
@@ -632,15 +636,13 @@ class QuestionsController extends PostsController {
 	 * @return WP_Error|WC_Data
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		global $masteriyo_container;
-
 		$id       = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
 		$type     = isset( $request['type'] ) ? $request['type'] : 'true-false';
-		$question = $masteriyo_container->get( $type );
+		$question = masteriyo( "question.${type}" );
 
 		if ( 0 !== $id ) {
 			$question->set_id( $id );
-			$question_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\QuestionRepository::class );
+			$question_repo = masteriyo( 'question.store' );
 			$question_repo->read( $question );
 		}
 

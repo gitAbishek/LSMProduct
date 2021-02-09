@@ -207,7 +207,7 @@ class SectionsController extends PostsController {
 		 * refers to object type being prepared for the response.
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param WC_Data          $object   Object data.
+		 * @param Model          $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -350,7 +350,7 @@ class SectionsController extends PostsController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|WC_Data
+	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id      = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -400,7 +400,7 @@ class SectionsController extends PostsController {
 		 * The dynamic portion of the hook name, `$this->post_type`,
 		 * refers to the object type slug.
 		 *
-		 * @param WC_Data         $section  Object object.
+		 * @param Model         $section  Object object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */

@@ -287,7 +287,7 @@ abstract class AbstractRepository {
 	 * Get and store terms from a taxonomy.
 	 *
 	 * @since  0.1.0
-	 * @param  Model|integer $model WC_Data model or model ID.
+	 * @param  Model|integer $model Model model or model ID.
 	 * @param  string          $taxonomy Taxonomy name e.g. model_cat.
 	 * @return array of terms
 	 */

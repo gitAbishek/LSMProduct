@@ -349,7 +349,7 @@ class QuestionsController extends PostsController {
 		 * @since 0.1.0
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param WC_Data          $object   Object data.
+		 * @param Model          $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->post_type}_object", $response, $object, $request );
@@ -633,7 +633,7 @@ class QuestionsController extends PostsController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|WC_Data
+	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id       = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -724,7 +724,7 @@ class QuestionsController extends PostsController {
 		 * The dynamic portion of the hook name, `$this->post_type`,
 		 * refers to the object type slug.
 		 *
-		 * @param WC_Data         $question  Object object.
+		 * @param Model         $question  Object object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */

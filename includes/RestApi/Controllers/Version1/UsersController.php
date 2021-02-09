@@ -165,21 +165,25 @@ class UsersController extends PostsController {
 
 		return $params;
 	}
-
 	/**
 	 * Get object.
 	 *
-	 * @param  int|WP_User $id Object ID.
+	 * @since 0.1.0
+	 *
+	 * @param  int|WP_user|Model $object Object ID or WP_user or Model.
 	 *
 	 * @return object Model object or WP_Error object.
 	 */
-	protected function get_object( $id ) {
-		global $masteriyo_container;
+	protected function get_object( $object ) {
 		try {
-			$id   = $id instanceof \WP_User ? $id->ID : $id;
-			$user = $masteriyo_container->get( 'user' );
+			if ( is_int( $object ) ) {
+				$id = $object;
+			} else {
+				$id = is_a( $object, '\WP_user' ) ? $object->ID : $object->get_id();
+			}
+			$user = masteriyo( 'user' );
 			$user->set_id( $id );
-			$user_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\UserRepository::class );
+			$user_repo = masteriyo( 'user.store' );
 			$user_repo->read( $user );
 		} catch ( \Exception $e ) {
 			return false;

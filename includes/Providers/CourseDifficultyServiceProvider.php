@@ -25,9 +25,9 @@ class CourseDifficultyServiceProvider extends AbstractServiceProvider {
 	 * @var array
 	 */
 	 protected $provides = array(
-		'coursedifficulty',
-		'coursedifficulty.store',
-		'coursedifficulty.rest',
+		'course_difficulty',
+		'course_difficulty.store',
+		'course_difficulty.rest',
 		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseDifficultiesController'
 	 );
 
@@ -40,15 +40,15 @@ class CourseDifficultyServiceProvider extends AbstractServiceProvider {
 	  * @since 0.1.0
 	  */
 	 public function register() {
-		 $this->getContainer()->add( 'coursedifficulty.store', CourseDifficultyRepository::class );
+		 $this->getContainer()->add( 'course_difficulty.store', CourseDifficultyRepository::class );
 
-		 $this->getContainer()->add( 'coursedifficulty.rest', CourseDifficultiesController::class )
+		 $this->getContainer()->add( 'course_difficulty.rest', CourseDifficultiesController::class )
 			->addArgument( 'permission');
 
 		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseDifficultiesController' )
 			->addArgument( 'permission');
 
-		 $this->getContainer()->add( 'coursedifficulty', CourseDifficulty::class )
-			->addArgument( 'coursedifficulty.store');
+		 $this->getContainer()->add( 'course_difficulty', CourseDifficulty::class )
+			->addArgument( 'course_difficulty.store');
 	 }
 }

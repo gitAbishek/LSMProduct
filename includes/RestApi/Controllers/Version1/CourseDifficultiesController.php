@@ -130,14 +130,12 @@ class CourseDifficultiesController extends RestTermsController {
 	 * @return WP_Error|WC_Data
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		global $masteriyo_container;
-
 		$id                = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$course_difficulty = $masteriyo_container->get( 'course_difficulty' );
+		$course_difficulty = masteriyo( 'course_difficulty' );
 
 		if ( 0 !== $id ) {
 			$course_difficulty->set_id( $id );
-			$course_difficulty_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository::class );
+			$course_difficulty_repo = masteriyo( 'course_difficulty.store' );
 			$course_difficulty_repo->read( $course_difficulty );
 		}
 
@@ -164,20 +162,26 @@ class CourseDifficultiesController extends RestTermsController {
 		return $course_difficulty;
 	}
 
+
 	/**
 	 * Get object.
 	 *
-	 * @param  int|WP_Term $id Object ID.
+	 * @since 0.1.0
+	 *
+	 * @param  int|WP_Term|Model $object Object ID or WP_Term or Model.
+	 *
 	 * @return object Model object or WP_Error object.
 	 */
-	protected function get_object( $id ) {
-		global $masteriyo_container;
-
+	protected function get_object( $object ) {
 		try {
-			$id                = $id instanceof \WP_Term ? $id->term_id : $id;
-			$course_difficulty = $masteriyo_container->get( 'course_difficulty' );
+			if ( is_int( $object ) ) {
+				$id = $object;
+			} else {
+				$id = is_a( $object, '\WP_Term' ) ? $object->term_id : $object->get_id();
+			}
+			$course_difficulty = masteriyo( 'course_difficulty' );
 			$course_difficulty->set_id( $id );
-			$course_difficulty_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\CourseDifficultyRepository::class );
+			$course_difficulty_repo = masteriyo( 'course_difficulty.store' );
 			$course_difficulty_repo->read( $course_difficulty );
 		} catch ( \Exception $e ) {
 			return false;

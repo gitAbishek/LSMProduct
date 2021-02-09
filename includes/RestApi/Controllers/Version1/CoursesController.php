@@ -186,13 +186,13 @@ class CoursesController extends PostsController {
 	/**
 	 * Get object.
 	 *
-	 * @param  int|WP_Post $id Object ID.
+	 * @param  Model|WP_Post $object Model or WP_Post object.
 	 * @return object Model object or WP_Error object.
 	 */
-	protected function get_object( $id ) {
+	protected function get_object( $object ) {
 		global $masteriyo_container;
 		try {
-			$id     = $id instanceof \WP_Post ? $id->ID : $id;
+			$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
 			$course = $masteriyo_container->get( 'course' );
 			$course->set_id( $id );
 			$course_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\CourseRepository::class );

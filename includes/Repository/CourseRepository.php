@@ -312,32 +312,32 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 				$terms[] = 'featured';
 			}
 
-			if ( 'outofstock' === $course->get_stock_status() ) {
-				$terms[] = 'outofstock';
-			}
+			// if ( 'outofstock' === $course->get_stock_status() ) {
+			// 	$terms[] = 'outofstock';
+			// }
 
-			$rating = min( 5, Number::round( $course->get_average_rating(), 0 ) );
+			// $rating = min( 5, Number::round( $course->get_average_rating(), 0 ) );
 
-			if ( $rating > 0 ) {
-				$terms[] = 'rated-' . $rating;
-			}
+			// if ( $rating > 0 ) {
+			// 	$terms[] = 'rated-' . $rating;
+			// }
 
-			switch ( $course->get_catalog_visibility() ) {
-				case 'hidden':
-					$terms[] = 'exclude-from-search';
-					$terms[] = 'exclude-from-catalog';
-					break;
-				case 'catalog':
-					$terms[] = 'exclude-from-search';
-					break;
-				case 'search':
-					$terms[] = 'exclude-from-catalog';
-					break;
-			}
+			// switch ( $course->get_catalog_visibility() ) {
+			// 	case 'hidden':
+			// 		$terms[] = 'exclude-from-search';
+			// 		$terms[] = 'exclude-from-catalog';
+			// 		break;
+			// 	case 'catalog':
+			// 		$terms[] = 'exclude-from-search';
+			// 		break;
+			// 	case 'search':
+			// 		$terms[] = 'exclude-from-catalog';
+			// 		break;
+			// }
 
-			if ( ! is_wp_error( wp_set_post_terms( $course->get_id(), $terms, 'course_visibility', false ) ) ) {
-				do_action( 'masteriyo_course_set_visibility', $course->get_id(), $course->get_catalog_visibility() );
-			}
+			// if ( ! is_wp_error( wp_set_post_terms( $course->get_id(), $terms, 'course_visibility', false ) ) ) {
+			// 	do_action( 'masteriyo_course_set_visibility', $course->get_id(), $course->get_catalog_visibility() );
+			// }
 		}
 	}
 

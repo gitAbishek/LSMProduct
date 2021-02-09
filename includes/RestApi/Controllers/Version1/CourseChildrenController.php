@@ -178,7 +178,7 @@ class CourseChildrenController extends CrudController {
 		try {
 			$item = masteriyo( $post->post_type );
 			$item->set_id( $post->ID );
-			$item_repo = masteriyo( "{$post->post_type}_repository" );
+			$item_repo = masteriyo( "{$post->post_type}.store" );
 			$item_repo->read( $item );
 		} catch ( \Exception $e ) {
 			return false;

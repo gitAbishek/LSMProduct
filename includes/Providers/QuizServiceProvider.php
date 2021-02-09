@@ -45,7 +45,7 @@ class QuizServiceProvider extends AbstractServiceProvider {
 		 $this->getContainer()->add( 'quiz.rest', QuizesController::class )
 			->addArgument( 'permission');
 
-		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuizsController' )
+		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuizesController' )
 			->addArgument( 'permission');
 
 		 $this->getContainer()->add( 'quiz', Quiz::class )

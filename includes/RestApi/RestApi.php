@@ -40,15 +40,8 @@ class RestApi {
 	 * @since 0.1.0
 	 */
 	public function register_rest_routes() {
-		global $masteriyo;
-
-		if ( is_null( $masteriyo_container ) ) {
-			return;
-		}
-
 		foreach ( $this->get_rest_namespaces() as $namespace => $controllers ) {
 			foreach ( $controllers as $controller_name => $controller_class ) {
-				// $this->controllers[ $namespace ][ $controller_name ] = new $controller_class;
 				$this->controllers[ $namespace ][ $controller_name ] = masteriyo( $controller_class );
 				$this->controllers[ $namespace ][ $controller_name ]->register_routes();
 			}

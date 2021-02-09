@@ -25,9 +25,9 @@ class CourseTagServiceProvider extends AbstractServiceProvider {
 	 * @var array
 	 */
 	 protected $provides = array(
-		'coursetag',
-		'coursetag.store',
-		'coursetag.rest',
+		'course_tag',
+		'course_tag.store',
+		'course_tag.rest',
 		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseTagsController'
 	 );
 
@@ -40,15 +40,15 @@ class CourseTagServiceProvider extends AbstractServiceProvider {
 	  * @since 0.1.0
 	  */
 	 public function register() {
-		 $this->getContainer()->add( 'coursetag.store', CourseTagRepository::class );
+		 $this->getContainer()->add( 'course_tag.store', CourseTagRepository::class );
 
-		 $this->getContainer()->add( 'coursetag.rest', CourseTagsController::class )
+		 $this->getContainer()->add( 'course_tag.rest', CourseTagsController::class )
 			->addArgument( 'permission');
 
 		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseTagsController' )
 			->addArgument( 'permission');
 
-		 $this->getContainer()->add( 'coursetag', CourseTag::class )
-			->addArgument( 'coursetag.store');
+		 $this->getContainer()->add( 'course_tag', CourseTag::class )
+			->addArgument( 'course_tag.store');
 	 }
 }

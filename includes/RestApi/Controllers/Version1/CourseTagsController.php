@@ -133,11 +133,11 @@ class CourseTagsController extends RestTermsController {
 		global $masteriyo_container;
 
 		$id         = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$course_tag = $masteriyo_container->get( 'course_tag' );
+		$course_tag = masteriyo( 'course_tag' );
 
 		if ( 0 !== $id ) {
 			$course_tag->set_id( $id );
-			$course_tag_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\CourseTagRepository::class );
+			$course_tag_repo = masteriyo( 'course_cat.store' );
 			$course_tag_repo->read( $course_tag );
 		}
 
@@ -167,17 +167,22 @@ class CourseTagsController extends RestTermsController {
 	/**
 	 * Get object.
 	 *
-	 * @param  int|WP_Term $id Object ID.
+	 * @since 0.1.0
+	 *
+	 * @param  int|WP_Term|Model $object Object ID or WP_Term or Model.
+	 *
 	 * @return object Model object or WP_Error object.
 	 */
-	protected function get_object( $id ) {
-		global $masteriyo_container;
-
+	protected function get_object( $object ) {
 		try {
-			$id         = $id instanceof \WP_Term ? $id->term_id : $id;
-			$course_tag = $masteriyo_container->get( 'course_tag' );
+			if ( is_int( $object ) ) {
+				$id = $object;
+			} else {
+				$id = is_a( $object, '\WP_Term' ) ? $object->term_id : $object->get_id();
+			}
+			$course_tag = masteriyo( 'course_tag' );
 			$course_tag->set_id( $id );
-			$course_tag_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\CourseTagRepository::class );
+			$course_tag_repo = masteriyo( 'course_tag.store' );
 			$course_tag_repo->read( $course_tag );
 		} catch ( \Exception $e ) {
 			return false;

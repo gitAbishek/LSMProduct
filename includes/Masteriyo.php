@@ -13,6 +13,7 @@ use League\Container\Container;
 use ThemeGrill\Masteriyo\RestApi\RestApi;
 use ThemeGrill\Masteriyo\PostType\RegisterPostTypes;
 use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
+use ThemeGrill\Masteriyo\AdminMenu;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -57,6 +58,9 @@ class Masteriyo extends Container {
 
 		// Initialize the rest api controllers.
 		RestApi::instance()->init();
+
+		// Register admin menus
+		AdminMenu::instance()->init();
 
 		// Initilize the hooks.
 		$this->init_hooks();

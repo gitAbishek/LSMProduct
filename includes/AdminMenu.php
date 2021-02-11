@@ -11,6 +11,8 @@ namespace ThemeGrill\Masteriyo;
 
 defined( 'ABSPATH' ) || exit;
 
+use ThemeGrill\Masteriyo\Traits\Singleton;
+
 /**
  * Aajx class.
  *
@@ -18,14 +20,7 @@ defined( 'ABSPATH' ) || exit;
  */
 
 class AdminMenu {
-	/**
-	 * Constructor.
-	 *
-	 * @since 0.1.0
-	 */
-	public function __construct() {
-		$this->init();
-	}
+	use Singleton;
 
 	/**
 	 * Initialize.
@@ -34,7 +29,7 @@ class AdminMenu {
 	 *
 	 * @return void
 	 */
-	private function init() {
+	public function init() {
 		$this->init_hooks();
 	}
 

@@ -62,6 +62,9 @@ class Masteriyo extends Container {
 		// Register admin menus
 		AdminMenu::instance()->init();
 
+		// Register scripts and styles.
+		ScriptStyle::instance()->init();
+
 		// Initilize the hooks.
 		$this->init_hooks();
 	}

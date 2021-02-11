@@ -9,6 +9,8 @@
 
 namespace ThemeGrill\Masteriyo;
 
+use ThemeGrill\Masteriyo\Traits\Singleton;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -18,6 +20,7 @@ defined( 'ABSPATH' ) || exit;
  */
 
 class ScriptStyle {
+	use Singleton;
 
 	/**
 	 * Scripts.
@@ -45,17 +48,6 @@ class ScriptStyle {
 	 * @var array
 	 */
 	public $localized_scripts = array();
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 0.1.0
-	 *
-	 */
-	public function __construct() {
-		$this->init();
-	}
-
 
 	/**
 	 * Initialization.
@@ -92,7 +84,7 @@ class ScriptStyle {
 
 		$styles = apply_filters( 'masteriyo_enqueue_styles', array(
 			'masteriyo-admin' => array(
-				'src'      => $this->get_asset_url( '/assets/build/admin.css' ),
+				'src'      => $this->get_asset_url( '/assets/js/build/app.css' ),
 				'deps'     => '',
 				'version'  => $version,
 				'media'    => 'all',

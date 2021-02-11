@@ -24,3 +24,5 @@ const urls = {
 	user: `${baseUrl}/users/:id`,
 	settings: `${baseUrl}/settings`,
 };
+
+export default urls;

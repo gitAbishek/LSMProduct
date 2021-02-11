@@ -9,6 +9,8 @@
 
 namespace ThemeGrill\Masteriyo;
 
+use ThemeGrill\Masteriyo\Constants;
+
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Traits\Singleton;
@@ -114,6 +116,6 @@ class AdminMenu {
 	 * @return void
 	 */
 	public function display_main_page() {
-		require_once MSYO()->plugin_path() . '/templates/masteriyo.php';
+		require_once Constants::get( 'MASTERIYO_PLUGIN_DIR' ). '/templates/masteriyo.php';
 	}
 }

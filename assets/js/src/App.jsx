@@ -32,6 +32,9 @@ const App = () => {
 						<Route path="/:courseId/add-new-lesson" exact>
 							<screens.AddNewLesson />
 						</Route>
+						<Route path="/" exact>
+							<Redirect to="/course" />
+						</Route>
 					</Switch>
 				</div>
 			</Router>

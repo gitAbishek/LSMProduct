@@ -12,9 +12,18 @@ import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
+import { fetchCourses } from '../../utils/api';
 import styled from 'styled-components';
+import { useQuery } from 'react-query';
 
 const Course = () => {
+	const {
+		data: courses,
+		isLoading: loadingCourses,
+		refetch: refectCourses,
+	} = useQuery('courses', fetchCourses);
+
+	console.log(courses);
 	return (
 		<Fragment>
 			<MainToolbar />

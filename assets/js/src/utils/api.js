@@ -12,15 +12,17 @@ const makeRequest = async (url, method, data, headers) => {
 
 	return response;
 };
-
 axios.interceptors.request.use(async function (config) {
-	const token = 'dummytoken';
-
 	config.headers = {
 		...config.headers,
-		Authorization: `Bearer ${token}`,
+		'Content-Type': 'application/json',
 	};
 
+	config.auth = {
+		...config.auth,
+		username: 'sethstha',
+		password: 'Password@123',
+	};
 	return config;
 });
 

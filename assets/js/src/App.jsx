@@ -23,6 +23,9 @@ const App = () => {
 						<Route path="/course" exact>
 							<screens.Course />
 						</Route>
+						<Route path="/courses" exact>
+							<screens.Courses />
+						</Route>
 						<Route path="/builder" exact>
 							<screens.CourseBuilder />
 						</Route>
@@ -33,7 +36,7 @@ const App = () => {
 							<screens.AddNewLesson />
 						</Route>
 						<Route path="/" exact>
-							<Redirect to="/course" />
+							<Redirect to="/courses" />
 						</Route>
 					</Switch>
 				</div>

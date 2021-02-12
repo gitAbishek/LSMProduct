@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost/masteriyo/wp-json/masteriyo/v1';
+const baseUrl = process.env.baseUrl;
 
 const urls = {
 	courses: `${baseUrl}/courses`,

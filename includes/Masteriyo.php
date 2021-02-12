@@ -63,8 +63,7 @@ class Masteriyo extends Container {
 		AdminMenu::instance()->init();
 
 		// Register scripts and styles.
-		ScriptStyle::instance()->init();
-
+		$this->get( 'script-style');
 		// Initilize the hooks.
 		$this->init_hooks();
 	}
@@ -126,6 +125,7 @@ class Masteriyo extends Container {
 			"{$namespace}\\CartServiceProvider",
 			"{$namespace}\\TemplateServiceProvider",
 			"{$namespace}\\QuestionServiceProvider",
+			"{$namespace}\\ScriptStyleServiceProvider",
 		) );
 	}
 }

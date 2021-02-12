@@ -9,8 +9,6 @@
 
 namespace ThemeGrill\Masteriyo;
 
-use ThemeGrill\Masteriyo\Traits\Singleton;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -20,7 +18,6 @@ defined( 'ABSPATH' ) || exit;
  */
 
 class ScriptStyle {
-	use Singleton;
 
 	/**
 	 * Scripts.
@@ -50,12 +47,21 @@ class ScriptStyle {
 	public $localized_scripts = array();
 
 	/**
+	 * Constructor.
+	 */
+	public function __construct() {
+		$this->init();
+	}
+
+	/**
 	 * Initialization.
 	 *
 	 * @since 0.1.0
 	 */
-	public function init() {
+	protected function init() {
 		$this->init_hooks();
+		$this->init_scripts();
+		$this->init_styles();
 	}
 
 	/**
@@ -68,6 +74,74 @@ class ScriptStyle {
 	private function init_hooks() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_public_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_localized_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_localized_scripts' ) );
+	}
+
+	/**
+	 * Get application version.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	private function get_version() {
+		return Constants::get( 'MASTERIYO_VERSION' );
+	}
+
+	/**
+	 * Initialize the scripts.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	private function init_scripts() {
+		$this->scripts = apply_filters( 'masteriyo_enqueue_scripts', array(
+			'masteriyo-admin' => array(
+				'src'      => $this->get_asset_url( '/assets/js/build/app.js' ),
+				'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
+				'version'  => $this->get_version(),
+				'type'     => 'admin',
+				'callback' => ''
+			),
+			'masteriyo-public' => array(
+				'src'      => $this->get_asset_url( '/assets/js/build/public.js' ),
+				'deps'     => $this->get_version( 'wp-polyfill' ),
+				'version'  => $this->get_version(),
+				'type'     => 'public',
+				'callback' => ''
+			),
+		) );
+	}
+
+
+	/**
+	 * Initialize the styles.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	private function init_styles() {
+		$this->styles = apply_filters( 'masteriyo_enqueue_styles', array(
+			'masteriyo-admin' => array(
+				'src'      => $this->get_asset_url( '/assets/js/build/app.css' ),
+				'deps'     => '',
+				'version'  => $this->get_version(),
+				'media'    => 'all',
+				'has_rtl' => true,
+				'type'     => 'admin'
+			),
+			'masteriyo-public' => array(
+				'src'      => $this->get_asset_url( '/assets/build/public.css' ),
+				'deps'     => '',
+				'version'  => $this->get_version(),
+				'media'    => 'all',
+				'has_rtl' => true,
+				'type'     => 'public'
+			),
+		) );
 	}
 
 	/**
@@ -80,31 +154,9 @@ class ScriptStyle {
 	 * @return array
 	 */
 	public function get_styles( $type = 'none' ) {
-		$version = Constants::get( 'MASTERIYO_VERSION' );
-
-		$styles = apply_filters( 'masteriyo_enqueue_styles', array(
-			'masteriyo-admin' => array(
-				'src'      => $this->get_asset_url( '/assets/js/build/app.css' ),
-				'deps'     => '',
-				'version'  => $version,
-				'media'    => 'all',
-				'has_rtl' => true,
-				'type'     => 'admin'
-			),
-			'masteriyo-public' => array(
-				'src'      => $this->get_asset_url( '/assets/build/public.css' ),
-				'deps'     => '',
-				'version'  => $version,
-				'media'    => 'all',
-				'has_rtl' => true,
-				'type'     => 'public'
-			),
-		) );
-
-
 		// Filter according to admin or public type.
 		if ( 'admin' === $type || 'public' === $type ) {
-			$styles = array_filter( $styles, function( $style )  use( $type ) {
+			$styles = array_filter( $this->styles, function( $style )  use( $type ) {
 				$style = array_replace_recursive( $this->get_default_style_options(), $style );
 				return $style['type'] === $type;
 			} );
@@ -123,36 +175,10 @@ class ScriptStyle {
 	 * @return array
 	 */
 	public function get_scripts( $type = 'none' ) {
-		$version = Constants::get( 'MASTERIYO_VERSION' );
-
-		$scripts = apply_filters( 'masteriyo_enqueue_scripts', array(
-			'masteriyo-admin' => array(
-				'src'      => $this->get_asset_url( '/assets/js/build/app.js' ),
-				'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
-				'version'  => $version,
-				'type'     => 'admin',
-				'callback' => ''
-			),
-			'livereload' => array(
-				'src' => 'http://localhost:35729/livereload.js',
-				'deps' => array(),
-				'version' => $version,
-				'type' => 'admin',
-				'callback' => ''
-			),
-			'masteriyo-public' => array(
-				'src'      => $this->get_asset_url( '/assets/js/build/public.js' ),
-				'deps'     => array( 'wp-polyfill' ),
-				'version'  => $version,
-				'type'     => 'public',
-				'callback' => ''
-			),
-		) );
-
 		// Set default values.
 		$scripts = array_map( function( $script ) {
 			return array_replace_recursive( $this->get_default_script_options(), $script );
-		}, $scripts );
+		}, $this->scripts );
 
 		// Filter according to admin or public type.
 		if ( 'admin' === $type || 'public' === $type ) {
@@ -320,8 +346,7 @@ class ScriptStyle {
 
 		foreach ( $scripts as $handle => $script ) {
 			if ( is_callable( $script ) ) {
-				$this->register_script(
-					$handle, $script['src'], $script['deps'], $script['version'] );
+				$this->register_script( $handle, $script['src'], $script['deps'], $script['version'] );
 			} else {
 				$this->enqueue_script( $handle, $script['src'], $script['deps'], $script['version'] );
 			}
@@ -335,4 +360,26 @@ class ScriptStyle {
 			}
 		}
 	}
+
+	/**
+	 * Load localized scripts.
+	 *
+	 * @since 0.1.1
+	 */
+	public function load_localized_scripts() {
+		$this->localized_scripts = apply_filters( 'masteriyo_localized_scripts', array(
+			'masteriyo-admin' => array(
+				'name' => 'masteriyo',
+				'data' => array(
+					'rootapiurl' => esc_url_raw( rest_url() ),
+					'nonce'      => wp_create_nonce( 'wp_rest' )
+				),
+			),
+		) );
+
+		foreach( $this->localized_scripts as $handle => $script ) {
+			\wp_localize_script( $handle, $script['name'], $script['data'] );
+		}
+	}
+
 }

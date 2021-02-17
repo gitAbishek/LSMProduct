@@ -38,6 +38,9 @@ const App = () => {
 						<Route path="/" exact>
 							<Redirect to="/courses" />
 						</Route>
+						<Route>
+							<Redirect to ="/courses" />
+						</Route>
 					</Switch>
 				</div>
 			</Router>

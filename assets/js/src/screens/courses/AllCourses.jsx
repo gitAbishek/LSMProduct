@@ -10,7 +10,7 @@ import { fetchCourses } from '../../utils/api';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
 
-const Courses = () => {
+const AllCourses = () => {
 	const { data: coursesData, isLoading } = useQuery('courseData', fetchCourses);
 	const renderCategories = (categories) => {
 		return (
@@ -59,28 +59,9 @@ const Courses = () => {
 	);
 };
 
-const CourseContainer = styled(FlexRow)`
-	align-items: flex-start;
-	margin-left: -${BaseLine * 2}px;
-	margin-right: -${BaseLine * 2}px;
-`;
-
 const CourseInner = styled(Flex)`
 	padding-left: ${BaseLine * 2}px;
 	padding-right: ${BaseLine * 2}px;
 `;
 
-const CourseLeftContainer = styled(CourseInner)`
-	flex: 1;
-`;
-
-const CourseRightContainer = styled(CourseInner)`
-	flex-basis: 400px;
-`;
-
-const FeaturedImageActions = styled(FlexRow)`
-	justify-content: space-between;
-	margin-top: ${BaseLine * 3}px;
-`;
-
-export default Courses;
+export default AllCourses;

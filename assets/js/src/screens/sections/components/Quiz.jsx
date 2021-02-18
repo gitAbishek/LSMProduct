@@ -4,8 +4,8 @@ import {
 	ContentHeader,
 	ContentIcon,
 	ContentTitle,
-} from '../styled';
-import { AlignLeft, Trash } from 'Icons';
+} from './styled';
+import { Timer, Trash } from 'Icons';
 
 import Button from 'Components/common/Button';
 import DragHandle from '../components/DragHandle';
@@ -18,7 +18,7 @@ import OptionButton from 'Components/common/OptionButton';
 import PropTypes from 'prop-types';
 import { React } from '@wordpress/element';
 
-const Lesson = (props) => {
+const Quiz = (props) => {
 	const { id, title, index } = props;
 	return (
 		<Draggable draggableId={id} index={index}>
@@ -30,7 +30,7 @@ const Lesson = (props) => {
 					<ContentHeader>
 						<FlexRow>
 							<DragHandle {...provided.dragHandleProps} />
-							<ContentIcon icon={<AlignLeft />} />
+							<ContentIcon icon={<Timer />} />
 							<ContentTitle>{title}</ContentTitle>
 						</FlexRow>
 						<FlexRow>
@@ -61,10 +61,10 @@ const Lesson = (props) => {
 	);
 };
 
-Lesson.propTypes = {
+Quiz.propTypes = {
 	id: PropTypes.string,
 	title: PropTypes.string,
 	index: PropTypes.number,
 };
 
-export default Lesson;
+export default Quiz;

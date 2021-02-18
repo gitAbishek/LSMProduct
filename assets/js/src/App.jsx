@@ -20,16 +20,16 @@ const App = () => {
 			<Router>
 				<div className="masteriyo">
 					<Switch>
-						<Route path="/course" exact>
-							<screens.Course />
-						</Route>
 						<Route path="/courses" exact>
-							<screens.Courses />
+							<screens.AllCourses />
 						</Route>
-						<Route path="/builder" exact>
-							<screens.CourseBuilder />
+						<Route path="/courses/add-new-course" exact>
+							<screens.AddNewCourse />
 						</Route>
-						<Route path="/settings" exact>
+						<Route path="/courses/:courseId" exact>
+							<screens.SectionBuilder />
+						</Route>
+						{/* <Route path="/settings" exact>
 							<screens.Settings />
 						</Route>
 						<Route path="/:courseId/add-new-lesson" exact>
@@ -39,8 +39,8 @@ const App = () => {
 							<Redirect to="/courses" />
 						</Route>
 						<Route>
-							<Redirect to ="/courses" />
-						</Route>
+							<Redirect to="/courses" />
+						</Route> */}
 					</Switch>
 				</div>
 			</Router>

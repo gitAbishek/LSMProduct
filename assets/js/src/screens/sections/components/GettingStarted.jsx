@@ -1,11 +1,11 @@
-import { React } from '@wordpress/element';
+import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';
 import Flex from 'Components/common/Flex';
 import FlexRow from 'Components/common/FlexRow';
-import styled from 'styled-components';
-import fontSize from 'Config/fontSize';
+import { React } from '@wordpress/element';
 import colors from 'Config/colors';
-import { BaseLine } from 'Config/defaultStyle';
+import fontSize from 'Config/fontSize';
+import styled from 'styled-components';
 
 const GettingStarted = () => {
 	return (
@@ -48,7 +48,7 @@ const ActionButtons = styled(FlexRow)`
 
 const GettingStartedTitle = styled.h1`
 	font-size: ${fontSize.HUGE};
-	colors: ${colors.HEADING};
+	color: ${colors.HEADING};
 	font-weight: 500;
 	margin: 0;
 	margin-bottom: ${BaseLine}px;

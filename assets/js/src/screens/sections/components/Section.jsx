@@ -21,7 +21,7 @@ import Lesson from './Lesson';
 import { NavLink } from 'react-router-dom';
 import OptionButton from 'Components/common/OptionButton';
 import PropTypes from 'prop-types';
-import Quiz from '../quiz/Quiz';
+import Quiz from './Quiz';
 import Textarea from 'Components/common/Textarea';
 import colors from 'Config/colors';
 import styled from 'styled-components';

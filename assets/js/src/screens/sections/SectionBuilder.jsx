@@ -5,7 +5,10 @@ import AddNewButton from 'Components/common/AddNewButton';
 import Container from 'Components/common/Container';
 import MainToolbar from 'Layouts/MainToolbar';
 import Section from './components/Section';
+import { fetchCourse } from '../../utils/api';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
 const dummyData = {
 	contents: {
@@ -42,6 +45,27 @@ const dummyData = {
 const SectionBuilder = () => {
 	const [data, setData] = useState(dummyData);
 
+	const { courseId } = useParams();
+
+	const { data: courseData, isError, isLoading, error } = useQuery(
+		['course', courseId],
+		() => fetchCourse(courseId),
+		{
+			enabled: true,
+		}
+	);
+
+	if (isError) {
+		return (
+			<>
+				<h1>Course Not Found with id: {courseId}</h1>
+			</>
+		);
+	}
+
+	if (isLoading) {
+		return <h1>Loading</h1>;
+	}
 	const onDragEnd = (result) => {
 		const { destination, source, draggableId, type } = result;
 		if (!destination) {

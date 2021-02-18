@@ -29,3 +29,9 @@ axios.interceptors.request.use(async function (config) {
 export const fetchCourses = async () => {
 	return makeRequest(urls.courses, 'GET').then((response) => response.data);
 };
+
+export const fetchCourse = async (id) => {
+	return makeRequest(urls.course.replace(':id', id), 'GET').then(
+		(response) => response.data
+	);
+};

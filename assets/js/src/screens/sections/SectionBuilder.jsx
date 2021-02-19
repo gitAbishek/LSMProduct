@@ -1,11 +1,11 @@
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { React, useState } from '@wordpress/element';
+import { fetchCourse, fetchLessons } from '../../utils/api';
 
 import AddNewButton from 'Components/common/AddNewButton';
 import Container from 'Components/common/Container';
 import MainToolbar from 'Layouts/MainToolbar';
 import Section from './components/Section';
-import { fetchCourse } from '../../utils/api';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
@@ -47,25 +47,27 @@ const SectionBuilder = () => {
 
 	const { courseId } = useParams();
 
-	const { data: courseData, isError, isLoading, error } = useQuery(
-		['course', courseId],
+	const { data: courseData, isError, isLoading } = useQuery(
+		[`course${courseId}`, courseId],
 		() => fetchCourse(courseId),
 		{
 			enabled: true,
 		}
 	);
 
-	if (isError) {
-		return (
-			<>
-				<h1>Course Not Found with id: {courseId}</h1>
-			</>
-		);
-	}
+	const { data: lessonData, isLessonError, isLessonLoading } = useQuery(
+		['lessons', courseId],
+		() => fetchLessons(courseId),
+		{
+			enabled: true,
+		}
+	);
 
 	if (isLoading) {
 		return <h1>Loading</h1>;
 	}
+
+	console.log(lessonData);
 	const onDragEnd = (result) => {
 		const { destination, source, draggableId, type } = result;
 		if (!destination) {

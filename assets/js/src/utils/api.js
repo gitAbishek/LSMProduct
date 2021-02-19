@@ -35,3 +35,9 @@ export const fetchCourse = async (id) => {
 		(response) => response.data
 	);
 };
+
+export const fetchLessons = async (courseId) => {
+	return makeRequest(urls.lessons + `?parent=${courseId}`, 'GET').then(
+		(response) => response.data
+	);
+};

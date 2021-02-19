@@ -41,3 +41,11 @@ export const fetchLessons = async (courseId) => {
 		(response) => response.data
 	);
 };
+
+export const fetchSections = async (courseId) => {
+	return makeRequest(urls.sections + `?parent=${courseId}`, 'GET').then(
+		(response) => response.data
+	);
+};
+
+// export const addLesson = async(name, parentId, videoSource, videoSourceUrl, videPlayBack )

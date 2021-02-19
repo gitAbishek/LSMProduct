@@ -1,4 +1,3 @@
-import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { Edit, Trash } from 'Icons';
 import { React, useState } from '@wordpress/element';
 import {
@@ -24,118 +23,98 @@ import PropTypes from 'prop-types';
 import Quiz from './Quiz';
 import Textarea from 'Components/common/Textarea';
 import colors from 'Config/colors';
+import { fetchLessons } from '../../../utils/api';
 import styled from 'styled-components';
+import { useQuery } from 'react-query';
 
 const Section = (props) => {
-	const { id, title, contents, index, editing } = props;
+	const { id, title, contents, index, editing, courseId } = props;
 
 	const [mode, setMode] = useState(editing ? 'editing' : 'normal');
 
+	const { data: lessonData, isError: isLessonError } = useQuery(
+		['lessons', courseId],
+		() => fetchLessons(courseId),
+		{
+			enabled: true,
+		}
+	);
+
 	return (
-		<Draggable draggableId={id} index={index}>
-			{(sectionProvided, snapshot) => (
-				<SectionContainer
-					{...sectionProvided.draggableProps}
-					ref={sectionProvided.innerRef}
-					isDragging={snapshot.isDragging}>
-					<SectionHeader>
-						<FlexRow>
-							<DragHandle {...sectionProvided.dragHandleProps} />
-							<SectionTitle>{title}</SectionTitle>
-						</FlexRow>
-						<FlexRow>
-							<Dropdown
-								trigger={'click'}
-								placement={'bottomRight'}
-								animation={'slide-up'}
-								overlay={
-									<DropdownOverlay>
-										<ul>
-											<li onClick={() => setMode('editing')}>
-												<Icon icon={<Edit />} />
-												Edit
-											</li>
-											<li>
-												<Icon icon={<Trash />} />
-												Delete
-											</li>
-										</ul>
-									</DropdownOverlay>
-								}>
-								<OptionButton />
-							</Dropdown>
-						</FlexRow>
-					</SectionHeader>
-					{mode === 'editing' && (
-						<>
-							<EditSection>
-								<form action="">
-									<FormGroup>
-										<Label htmlFor="">Section Name</Label>
-										<Input placeholder="Your Section Name"></Input>
-									</FormGroup>
-									<FormGroup>
-										<Label htmlFor="">Section Description</Label>
-										<Textarea rows="4" placeholder="short summary" />
-									</FormGroup>
-								</form>
-							</EditSection>
+		<SectionContainer>
+			<SectionHeader>
+				<FlexRow>
+					<DragHandle />
+					<SectionTitle>{title}</SectionTitle>
+				</FlexRow>
+				<FlexRow>
+					<Dropdown
+						trigger={'click'}
+						placement={'bottomRight'}
+						animation={'slide-up'}
+						overlay={
+							<DropdownOverlay>
+								<ul>
+									<li onClick={() => setMode('editing')}>
+										<Icon icon={<Edit />} />
+										Edit
+									</li>
+									<li>
+										<Icon icon={<Trash />} />
+										Delete
+									</li>
+								</ul>
+							</DropdownOverlay>
+						}>
+						<OptionButton />
+					</Dropdown>
+				</FlexRow>
+			</SectionHeader>
+			{mode === 'editing' && (
+				<>
+					<EditSection>
+						<form action="">
+							<FormGroup>
+								<Label htmlFor="">Section Name</Label>
+								<Input placeholder="Your Section Name"></Input>
+							</FormGroup>
+							<FormGroup>
+								<Label htmlFor="">Section Description</Label>
+								<Textarea rows="4" placeholder="short summary" />
+							</FormGroup>
+						</form>
+					</EditSection>
 
-							<SectionFooter>
-								<FlexRow>
-									<Button primary onClick={() => setMode('normal')}>
-										Save
-									</Button>
-									<Button style={{ marginLeft: BaseLine * 2 }}>Cancel</Button>
-								</FlexRow>
-							</SectionFooter>
-						</>
-					)}
-
-					{mode === 'normal' && (
-						<Droppable droppableId={id} type="content">
-							{(provided, snapshot) => (
-								<ContentDroppableArea
-									ref={provided.innerRef}
-									{...provided.droppableProps}
-									isDraggingOver={snapshot.isDraggingOver}>
-									{contents.map(
-										(content, index) =>
-											(content.type === 'lesson' && (
-												<Lesson
-													key={content.id}
-													id={content.id}
-													title={content.title}
-													index={index}
-												/>
-											)) ||
-											(content.type === 'quiz' && (
-												<Quiz
-													key={content.id}
-													id={content.id}
-													title={content.title}
-													index={index}
-												/>
-											))
-									)}
-									<AddNewButton>
-										<NavLink to={`/:${id}/add-new-lesson`}>
-											Add New Content
-										</NavLink>
-									</AddNewButton>
-									{provided.placeholder}
-								</ContentDroppableArea>
-							)}
-						</Droppable>
-					)}
-				</SectionContainer>
+					<SectionFooter>
+						<FlexRow>
+							<Button primary onClick={() => setMode('normal')}>
+								Save
+							</Button>
+							<Button style={{ marginLeft: BaseLine * 2 }}>Cancel</Button>
+						</FlexRow>
+					</SectionFooter>
+				</>
 			)}
-		</Draggable>
+
+			<ContentDroppableArea>
+				{lessonData?.map((content, index) => (
+					<Lesson
+						key={content.id}
+						id={content.id}
+						title={content.name}
+						index={index}
+					/>
+				))}
+				<AddNewButton>
+					<NavLink to={`/:${id}/add-new-lesson`}>Add New Content</NavLink>
+				</AddNewButton>
+			</ContentDroppableArea>
+		</SectionContainer>
 	);
 };
 
 Section.propTypes = {
-	id: PropTypes.string,
+	id: PropTypes.number,
 	title: PropTypes.string,
 	contents: PropTypes.array,
 	index: PropTypes.number,

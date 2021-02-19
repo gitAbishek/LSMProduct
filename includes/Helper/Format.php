@@ -27,9 +27,9 @@ class Format {
 	 * @param  bool         $trim_zeros From end of string.
 	 * @return string
 	 */
-	public function decimal( $number, $dp = false, $trim_zeros = false ) {
+	public static function decimal( $number, $dp = false, $trim_zeros = false ) {
 		$locale   = localeconv();
-		$decimals = array( $this->get_price_decimal_separator(), $locale['decimal_point'], $locale['mon_decimal_point'] );
+		$decimals = array( self::get_price_decimal_separator(), $locale['decimal_point'], $locale['mon_decimal_point'] );
 
 		// Remove locale from string.
 		if ( ! is_float( $number ) ) {
@@ -40,11 +40,11 @@ class Format {
 		}
 
 		if ( false !== $dp ) {
-			$dp     = intval( '' === $dp ? $this->get_price_decimals() : $dp );
+			$dp     = intval( '' === $dp ? self::get_price_decimals() : $dp );
 			$number = number_format( floatval( $number ), $dp, '.', '' );
 		} elseif ( is_float( $number ) ) {
 			// DP is false - don't use number format, just return a string using whatever is given. Remove scientific notation using sprintf.
-			$number = str_replace( $decimals, '.', sprintf( '%.' . $this->get_rounding_precision() . 'f', $number ) );
+			$number = str_replace( $decimals, '.', sprintf( '%.' . self::get_rounding_precision() . 'f', $number ) );
 			// We already had a float, so trailing zeros are not needed.
 			$trim_zeros = true;
 		}
@@ -62,7 +62,7 @@ class Format {
 	 * @since  0.1.0
 	 * @return string
 	 */
-	public function get_price_decimal_separator() {
+	public static function get_price_decimal_separator() {
 		$separator = get_option( 'masteriyo_price_decimal_sep' );
 		$separator = apply_filters( 'masteriyo_get_price_decimal_separator', $separator );
 		return $separator ? stripslashes( $separator ) : '.';
@@ -74,7 +74,7 @@ class Format {
 	 * @since  0.1.0
 	 * @return int
 	 */
-	public function get_price_decimals() {
+	public static function get_price_decimals() {
 		$num_decimals = get_option( 'masteriyo_price_num_decimals', 2 );
 		$num_decimals = apply_filters( 'masteriyo_get_price_decimals', $num_decimals );
 		return absint( $num_decimals );
@@ -103,7 +103,7 @@ class Format {
 	 * }
 	 * @return string
 	 */
-	public function price( $price, $args = array() ) {
+	public static function price( $price, $args = array() ) {
 		$args = apply_filters(
 			'masteriyo_price_args',
 			wp_parse_args(
@@ -111,9 +111,9 @@ class Format {
 				array(
 					'ex_tax_label'       => false,
 					'currency'           => '',
-					'decimal_separator'  => $this->get_price_decimal_separator(),
-					'thousand_separator' => $this->get_price_thousand_separator(),
-					'decimals'           => $this->get_price_decimals(),
+					'decimal_separator'  => self::get_price_decimal_separator(),
+					'thousand_separator' => self::get_price_thousand_separator(),
+					'decimals'           => self::get_price_decimals(),
 					'price_format'       => get_masteriyo_price_format(),
 				)
 			)
@@ -155,7 +155,7 @@ class Format {
 	 *
 	 * @return string
 	 */
-	public function get_price_format() {
+	public static function get_price_format() {
 		$currency_pos = get_option( 'masteriyo_currency_pos' );
 		$format       = '%1$s%2$s';
 
@@ -183,8 +183,8 @@ class Format {
 	 * @since 0.1.0
 	 * @return int
 	 */
-	public function get_rounding_precision() {
-		$precision          = $this->get_price_decimals() + 2;
+	public static function get_rounding_precision() {
+		$precision          = self::get_price_decimals() + 2;
 		$rounding_precision = absint( Constants::get( 'MASTERIYO_ROUNDING_PRECISION' ) );
 
 		$precision = ( $rounding_precision > $precision ) ? $rounding_precision : $precision;

@@ -30,5 +30,5 @@
     "webpack",
     "jest"
   ],
-  "include": ["assets/js/src"]
+  "include": ["assets/js/src", "assets/js/src/types/custom.d.ts"]
 }

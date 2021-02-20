@@ -1,27 +1,15 @@
 import React, { Fragment } from 'react';
 
-import { BaseLine } from 'Config/defaultStyle';
 import ContentLoader from 'react-content-loader';
-import Flex from 'Components/common/Flex';
-import FlexRow from 'Components/common/FlexRow';
 import { Link } from 'react-router-dom';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
 import { fetchCourses } from '../../utils/api';
-import styled from 'styled-components';
 import { useQuery } from 'react-query';
 
 const AllCourses = () => {
 	const { data: coursesData, isLoading } = useQuery('courseData', fetchCourses);
-	const renderCategories = (categories) => {
-		return (
-			<ul style={{ margin: 0, padding: 0 }}>
-				{categories?.map(({ id, name }) => (
-					<li key={id}>{name}</li>
-				))}
-			</ul>
-		);
-	};
+
 	console.log(coursesData);
 	return (
 		<Fragment>
@@ -45,14 +33,14 @@ const AllCourses = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{coursesData?.map(({ id, name, categories, price }) => (
-							<tr key={id}>
-								<td>{id}</td>
+						{coursesData?.map((course: any) => (
+							<tr key={course.id}>
+								<td>{course.id}</td>
 								<td>
-									<Link to={`/courses/${id}`}>{name}</Link>
+									<Link to={`/courses/${course.id}`}>{course.name}</Link>
 								</td>
-								<td>{renderCategories(categories)}</td>
-								<td>{price}</td>
+								<td></td>
+								<td>{course.price}</td>
 							</tr>
 						))}
 					</tbody>
@@ -61,10 +49,5 @@ const AllCourses = () => {
 		</Fragment>
 	);
 };
-
-const CourseInner = styled(Flex)`
-	padding-left: ${BaseLine * 2}px;
-	padding-right: ${BaseLine * 2}px;
-`;
 
 export default AllCourses;

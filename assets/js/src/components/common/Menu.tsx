@@ -1,11 +1,10 @@
-import { React } from '@wordpress/element';
-import Icon from 'Components/common/Icon';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import fontSize from 'Config/fontSize';
-import colors from 'Config/colors';
 import { BaseLine } from 'Config/defaultStyle';
+import Icon from 'Components/common/Icon';
 import { NavLink } from 'react-router-dom';
+import React from 'react';
+import colors from 'Config/colors';
+import fontSize from 'Config/fontSize';
+import styled from 'styled-components';
 
 const Menu = styled.ul`
 	list-style-type: none;
@@ -15,13 +14,18 @@ const Menu = styled.ul`
 	margin-left: ${BaseLine * 8}px;
 `;
 
-const MenuItem = (props) => {
-	const { icon, children } = props;
+interface MenuItemProps {
+	icon?: any;
+	to: any;
+}
+
+const MenuItem: React.FC<MenuItemProps> = (props) => {
+	const { icon } = props;
 	return (
 		<StyledLi>
 			<NavLink {...props}>
 				{icon && <Icon icon={icon} />}
-				{children}
+				{props.children}
 			</NavLink>
 		</StyledLi>
 	);
@@ -77,11 +81,6 @@ const StyledLi = styled.li`
 		}
 	}
 `;
-
-MenuItem.propTypes = {
-	icon: PropTypes.object,
-	children: PropTypes.any,
-};
 
 export { MenuItem };
 export default Menu;

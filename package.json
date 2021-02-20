@@ -5,6 +5,7 @@
   "author": "ThemeGrill <themegrill@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/react-router-dom": "5.1.7",
     "@wordpress/i18n": "^3.15.0",
     "axios": "0.21.1",
     "rc-dropdown": "3.2.0",

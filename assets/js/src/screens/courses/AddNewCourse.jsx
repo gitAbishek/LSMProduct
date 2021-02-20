@@ -14,7 +14,7 @@ import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
 import styled from 'styled-components';
 
-const Course = () => {
+const AddNewCourse = () => {
 	return (
 		<Fragment>
 			<MainToolbar />
@@ -32,7 +32,7 @@ const Course = () => {
 								<Textarea placeholder="Your Course Title" rows="5"></Textarea>
 							</FormGroup>
 							<FlexRow>
-								<Button primary>Start Adding Lessons</Button>
+								<Button primary>Add Course</Button>
 							</FlexRow>
 						</CourseLeftContainer>
 
@@ -88,4 +88,4 @@ const FeaturedImageActions = styled(FlexRow)`
 	margin-top: ${BaseLine * 3}px;
 `;
 
-export default Course;
+export default AddNewCourse;

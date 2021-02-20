@@ -7,6 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { isProduction, isDevelopment } = require('webpack-mode');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
 	entry: {
@@ -90,6 +91,7 @@ const config = {
 				overlay: false,
 			}),
 		isDevelopment && new ErrorOverlayPlugin(),
+		new Dotenv(),
 	].filter(Boolean),
 
 	resolve: {

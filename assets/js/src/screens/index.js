@@ -1,4 +1,4 @@
-export { default as Course } from './course/Course';
-export { default as CourseBuilder } from './coursebuilder/CourseBuilder';
-export { default as Settings } from './settings/Settings';
-export { default as AddNewLesson } from './lesson/AddNewLesson';
+export { default as AllCourses } from './courses/AllCourses';
+export { default as AddNewCourse } from './courses/AddNewCourse';
+export { default as SectionBuilder } from './sections/SectionBuilder';
+export { default as AddNewLesson } from './lessons/AddNewLesson';

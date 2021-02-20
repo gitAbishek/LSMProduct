@@ -29,11 +29,11 @@ const App = () => {
 						<Route path="/courses/:courseId" exact>
 							<screens.SectionBuilder />
 						</Route>
+						<Route path="/courses/:courseId/add-new-lesson" exact>
+							<screens.AddNewLesson />
+						</Route>
 						{/* <Route path="/settings" exact>
 							<screens.Settings />
-						</Route>
-						<Route path="/:courseId/add-new-lesson" exact>
-							<screens.AddNewLesson />
 						</Route>
 						<Route path="/" exact>
 							<Redirect to="/courses" />

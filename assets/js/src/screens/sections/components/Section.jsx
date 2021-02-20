@@ -106,7 +106,9 @@ const Section = (props) => {
 					/>
 				))}
 				<AddNewButton>
-					<NavLink to={`/:${id}/add-new-lesson`}>Add New Content</NavLink>
+					<NavLink to={`/courses/${courseId}/add-new-lesson`}>
+						Add New Content
+					</NavLink>
 				</AddNewButton>
 			</ContentDroppableArea>
 		</SectionContainer>

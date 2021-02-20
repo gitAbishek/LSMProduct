@@ -4,6 +4,7 @@ import { BaseLine } from 'Config/defaultStyle';
 import ContentLoader from 'react-content-loader';
 import Flex from 'Components/common/Flex';
 import FlexRow from 'Components/common/FlexRow';
+import { Link } from 'react-router-dom';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
 import { fetchCourses } from '../../utils/api';
@@ -47,7 +48,9 @@ const AllCourses = () => {
 						{coursesData?.map(({ id, name, categories, price }) => (
 							<tr key={id}>
 								<td>{id}</td>
-								<td>{name}</td>
+								<td>
+									<Link to={`/courses/${id}`}>{name}</Link>
+								</td>
 								<td>{renderCategories(categories)}</td>
 								<td>{price}</td>
 							</tr>

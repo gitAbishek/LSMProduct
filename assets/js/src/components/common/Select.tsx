@@ -1,11 +1,11 @@
+import ReactSelect, { Props as ReactSelectProps } from 'react-select';
 import defaultStyle, { BaseLine } from 'Config/defaultStyle';
 
 import React from 'react';
-import ReactSelect from 'react-select';
 import colors from 'Config/colors';
 import { lighten } from 'polished';
 
-interface Props {}
+interface Props extends ReactSelectProps {}
 
 const Select: React.FC<Props> = (props) => {
 	const customStyles = {

@@ -29,10 +29,10 @@ const AddNewCourse = () => {
 
 							<FormGroup>
 								<Label htmlFor="">Course Description</Label>
-								<Textarea placeholder="Your Course Title" rows="5"></Textarea>
+								<Textarea placeholder="Your Course Title" rows={5}></Textarea>
 							</FormGroup>
 							<FlexRow>
-								<Button primary>Add Course</Button>
+								<Button appearance="primary">Add Course</Button>
 							</FlexRow>
 						</CourseLeftContainer>
 
@@ -53,7 +53,7 @@ const AddNewCourse = () => {
 								<ImageUpload title="Drag image or click to upload" />
 								<FeaturedImageActions>
 									<Button>Remove Featured Image</Button>
-									<Button primary>Add New</Button>
+									<Button appearance="primary">Add New</Button>
 								</FeaturedImageActions>
 							</FormGroup>
 						</CourseRightContainer>

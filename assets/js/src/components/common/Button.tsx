@@ -7,7 +7,7 @@ import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
 import { lighten } from 'polished';
 
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<any> {
 	icon?: any;
 	appearance?: 'default' | 'primary' | 'secondary';
 	size?: 'small' | 'medium' | 'large';

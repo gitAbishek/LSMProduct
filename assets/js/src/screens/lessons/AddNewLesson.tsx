@@ -19,17 +19,20 @@ import Label from 'Components/common/Label';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
 import OptionButton from 'Components/common/OptionButton';
-import PropTypes from 'prop-types';
 import Select from 'Components/common/Select';
 import Slider from 'rc-slider';
 import Textarea from 'Components/common/Textarea';
 import styled from 'styled-components';
 
-const AddNewLesson = (props) => {
-	const { id } = props;
+interface Props {
+	sectionId: number;
+}
+
+const AddNewLesson: React.FC<Props> = (props) => {
+	const { sectionId } = props;
 	const [playBackTime, setPlayBackTime] = useState(3);
 
-	const playBackTimeOnChange = (value) => {
+	const playBackTimeOnChange = (value: number) => {
 		setPlayBackTime(value);
 	};
 
@@ -65,7 +68,7 @@ const AddNewLesson = (props) => {
 
 							<FormGroup>
 								<Label htmlFor="">Description</Label>
-								<Textarea placeholder="Your course description" rows="5" />
+								<Textarea placeholder="Your course description" rows={5} />
 							</FormGroup>
 
 							<FormGroup>
@@ -109,14 +112,14 @@ const AddNewLesson = (props) => {
 										<Input
 											type="number"
 											value={playBackTime}
-											onChange={playBackTimeOnChange}
+											onChange={() => playBackTimeOnChange}
 										/>
 									</Col>
 								</Row>
 							</FormGroup>
 							<SectionFooter>
 								<FlexRow>
-									<Button primary style={{ marginRight: 16 }}>
+									<Button appearance="primary" style={{ marginRight: 16 }}>
 										Add New Lesson
 									</Button>
 									<Button>Cancel</Button>
@@ -128,10 +131,6 @@ const AddNewLesson = (props) => {
 			</MainLayout>
 		</Fragment>
 	);
-};
-
-AddNewLesson.propTypes = {
-	id: PropTypes.string,
 };
 
 const AddNewLessonContainer = styled.div``;

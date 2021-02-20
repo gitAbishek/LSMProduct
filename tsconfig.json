@@ -12,6 +12,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
+    "strict": true,
     "strictNullChecks": true,
     "paths": {
       "Components/*": ["./assets/js/src/components/*"],

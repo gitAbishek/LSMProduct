@@ -1,9 +1,9 @@
-import { React, render } from '@wordpress/element';
-
 import App from './App';
+import React from 'react';
+import ReactDom from 'react-dom';
 
 const appRoot = document.getElementById('masteriyo');
 
 if (appRoot) {
-	render(<App />, appRoot);
+	ReactDom.render(<App />, appRoot);
 }

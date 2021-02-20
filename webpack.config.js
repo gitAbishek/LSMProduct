@@ -11,7 +11,7 @@ const Dotenv = require('dotenv-webpack');
 
 const config = {
 	entry: {
-		app: path.resolve(process.cwd(), 'assets/js/src', 'index.js'),
+		app: path.resolve(process.cwd(), 'assets/js/src', 'index.tsx'),
 	},
 
 	output: {

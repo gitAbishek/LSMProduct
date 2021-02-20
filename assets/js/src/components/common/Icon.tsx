@@ -1,9 +1,13 @@
-import { React, memo } from '@wordpress/element';
-import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
-// import './style.css';
 
-const Icon = (props) => {
+interface Props {
+	icon?: any;
+	size?: string;
+	color?: string;
+}
+
+const Icon: React.FC<Props> = (props) => {
 	const { icon, size, color } = props;
 	return (
 		<StyledIcon size={size} color={color} {...props}>
@@ -12,16 +16,10 @@ const Icon = (props) => {
 	);
 };
 
-Icon.propTypes = {
-	icon: PropTypes.object,
-	size: PropTypes.string,
-	color: PropTypes.string,
-};
-
 const StyledIcon = styled.i`
 	display: flex;
-	font-size: ${(props) => props.size || 'inherit'};
-	color: ${(props) => props.color || 'inherit'};
+	font-size: ${(props: Props) => props.size || 'inherit'};
+	color: ${(props: Props) => props.color || 'inherit'};
 `;
 
-export default memo(Icon);
+export default Icon;

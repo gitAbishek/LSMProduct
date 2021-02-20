@@ -1,4 +1,4 @@
-import { Book, Cog, Edit, Show } from 'Icons';
+import { Book, Cog, Edit, Show } from '../../assets/icons';
 import Menu, { MenuItem } from 'Components/common/Menu';
 
 import { BaseLine } from 'Config/defaultStyle';
@@ -34,7 +34,7 @@ const MainToolbar = () => {
 				<HeaderRightContent>
 					<HeaderActions>
 						<Button icon={<Show />}>Preview</Button>
-						<Button primary>Save</Button>
+						<Button appearance="primary">Save</Button>
 					</HeaderActions>
 				</HeaderRightContent>
 			</ContainerFluid>

@@ -1,7 +1,6 @@
-import Dante from 'dante2';
 import styled from 'styled-components';
 
-const Editor = styled(Dante)`
+const Editor = styled.textarea`
 	background-color: red;
 `;
 

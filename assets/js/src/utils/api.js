@@ -1,6 +1,6 @@
-import axios, { Method } from 'axios';
 import { isDevelopment, isProduction } from './helper';
 
+import axios from 'axios';
 import urls from '../constants/urls';
 
 axios.interceptors.request.use(async function (config) {
@@ -38,9 +38,9 @@ export const fetchCourse = async (id) => {
 		.then((response) => response.data);
 };
 
-export const fetchLessons = async (courseId) => {
+export const fetchSections = async (courseId) => {
 	return axios
-		.get(urls.lessons, {
+		.get(urls.sections, {
 			params: {
 				parent: courseId,
 			},
@@ -48,9 +48,9 @@ export const fetchLessons = async (courseId) => {
 		.then((response) => response.data);
 };
 
-export const fetchSections = async (courseId) => {
+export const fetchLessons = async (courseId) => {
 	return axios
-		.get(urls.sections, {
+		.get(urls.lessons, {
 			params: {
 				parent: courseId,
 			},

@@ -18,7 +18,6 @@
     "paths": {
       "Components/*": ["./assets/js/src/components/*"],
       "Config/*": ["./assets/js/src/config/*"],
-      "Icons/*": ["./assets/js/src/assets/icons/*"],
       "Layouts/*": ["./assets/js/src/screens/layouts/*"]
     }
   },

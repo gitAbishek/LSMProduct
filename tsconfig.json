@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "outDir": "assets/js/build",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "sourceMap": true,
+    "allowJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "rootDir": "assets/js/src",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "paths": {
+      "Components/*": ["./assets/js/src/components/*"],
+      "Config/*": ["./assets/js/src/config/*"],
+      "Icons/*": ["./assets/js/src/assets/icons/*"],
+      "Layouts/*": ["./assets/js/src/screens/layouts/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest"
+  ]
+}

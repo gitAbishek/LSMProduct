@@ -10,7 +10,7 @@ axios.interceptors.request.use(async function (config) {
 	};
 
 	// Sets nonce to run API on WordPress Dashboard
-	if (isProduction) {
+	if (isProduction()) {
 		config.headers = {
 			...config.headers,
 			'X-WP-Nonce': masteriyo.nonce,
@@ -18,7 +18,7 @@ axios.interceptors.request.use(async function (config) {
 	}
 
 	// Basic Auth for the local development, required basic auth plugin
-	if (isDevelopment) {
+	if (isDevelopment()) {
 		config.auth = {
 			...config.auth,
 			username: 'sethstha',

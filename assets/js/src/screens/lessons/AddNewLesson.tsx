@@ -1,5 +1,5 @@
 import { Col, Row } from 'react-grid-system';
-import { Fragment, React, useState } from '@wordpress/element';
+import React, { Fragment, useState } from 'react';
 import {
 	SectionAction,
 	SectionBody,

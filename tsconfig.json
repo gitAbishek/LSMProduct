@@ -1,19 +1,20 @@
 {
   "compilerOptions": {
-    "outDir": "assets/js/build",
-    "module": "commonjs",
     "target": "es5",
-    "lib": ["es6", "dom"],
-    "sourceMap": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    "jsx": "react",
-    "moduleResolution": "node",
-    "rootDir": "assets/js/src",
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react",
     "paths": {
       "Components/*": ["./assets/js/src/components/*"],
       "Config/*": ["./assets/js/src/config/*"],
@@ -28,5 +29,6 @@
     "acceptance-tests",
     "webpack",
     "jest"
-  ]
+  ],
+  "include": ["assets/js/src"]
 }

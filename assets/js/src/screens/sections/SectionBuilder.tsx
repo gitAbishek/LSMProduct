@@ -1,4 +1,4 @@
-import { React, useState } from '@wordpress/element';
+import React, { useState } from 'react';
 import { fetchCourse, fetchLessons, fetchSections } from '../../utils/api';
 
 import AddNewButton from 'Components/common/AddNewButton';

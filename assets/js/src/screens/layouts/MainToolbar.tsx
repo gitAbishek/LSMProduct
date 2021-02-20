@@ -7,7 +7,7 @@ import { ContainerFluid } from 'Components/common/Container';
 import Flex from 'Components/common/Flex';
 import FlexRow from 'Components/common/FlexRow';
 import LogoImg from '../../../../img/logo.png';
-import { React } from '@wordpress/element';
+import React from 'react';
 import colors from 'Config/colors';
 import styled from 'styled-components';
 

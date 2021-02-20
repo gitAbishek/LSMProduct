@@ -1,4 +1,4 @@
-import { Fragment, React } from '@wordpress/element';
+import React, { Fragment } from 'react';
 
 import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';

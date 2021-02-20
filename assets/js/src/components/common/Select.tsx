@@ -1,12 +1,15 @@
-import { React } from '@wordpress/element';
+import defaultStyle, { BaseLine } from 'Config/defaultStyle';
+
+import React from 'react';
 import ReactSelect from 'react-select';
 import colors from 'Config/colors';
-import defaultStyle, { BaseLine } from 'Config/defaultStyle';
 import { lighten } from 'polished';
 
-const Select = (props) => {
+interface Props {}
+
+const Select: React.FC<Props> = (props) => {
 	const customStyles = {
-		control: (provided, state) => ({
+		control: (provided: any, state: any) => ({
 			...provided,
 			height: BaseLine * 6,
 			boxShadow: `0 1px 0 ${colors.SHADOW}`,
@@ -28,18 +31,18 @@ const Select = (props) => {
 			},
 		}),
 
-		placeholder: (provided) => ({
+		placeholder: (provided: any) => ({
 			...provided,
 			color: colors.PLACEHOLDER,
 			marginLeft: 0,
 		}),
 
-		indicatorSeparator: (provided) => ({
+		indicatorSeparator: (provided: any) => ({
 			...provided,
 			backgroundColor: colors.BORDER,
 		}),
 
-		option: (provided, state) => ({
+		option: (provided: any, state: any) => ({
 			...provided,
 			backgroundColor: state.isSelected
 				? colors.PRIMARY
@@ -48,7 +51,7 @@ const Select = (props) => {
 				: 'transparent',
 		}),
 
-		menu: (provided) => ({
+		menu: (provided: any) => ({
 			...provided,
 			borderRadius: defaultStyle,
 		}),

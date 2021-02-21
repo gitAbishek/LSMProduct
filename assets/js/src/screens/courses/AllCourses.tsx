@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
 
 import ContentLoader from 'react-content-loader';
+import Icon from 'Components/common/Icon';
 import { Link } from 'react-router-dom';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
+import { Trash } from '../../assets/icons';
 import { fetchCourses } from '../../utils/api';
 import { useQuery } from 'react-query';
 
@@ -38,6 +40,9 @@ const AllCourses = () => {
 							<th className="masteriyo-px-6 masteriyo-py-3 masteriyo-text-left masteriyo-text-xs masteriyo-font-medium masteriyo-text-gray-500 masteriyo-uppercase masteriyo-tracking-wider">
 								Price
 							</th>
+							<th className="masteriyo-px-6 masteriyo-py-3 masteriyo-text-left masteriyo-text-xs masteriyo-font-medium masteriyo-text-gray-500 masteriyo-uppercase masteriyo-tracking-wider">
+								Actions
+							</th>
 						</tr>
 					</thead>
 					<tbody className="masteriyo-bg-white masteriyo-divide-y masteriyo-divide-gray-200">
@@ -52,6 +57,13 @@ const AllCourses = () => {
 								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap"></td>
 								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap">
 									{course.price}
+								</td>
+								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap">
+									<ul className="masteriyo-flex masteriyo-list-none masteriyo-text-xs">
+										<li>
+											<Icon icon={<Trash />} />
+										</li>
+									</ul>
 								</td>
 							</tr>
 						))}

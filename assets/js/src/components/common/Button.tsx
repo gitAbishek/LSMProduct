@@ -16,7 +16,11 @@ interface Props extends React.ButtonHTMLAttributes<any> {
 const Button: React.FC<Props> = (props) => {
 	const { icon, appearance, size } = props;
 	return (
-		<StyledButton appearance={appearance} size={size} {...props}>
+		<StyledButton
+			appearance={appearance}
+			size={size}
+			className="masteriyo-button"
+			{...props}>
 			{icon && <Icon icon={icon} />}
 			<span>{props.children}</span>
 		</StyledButton>

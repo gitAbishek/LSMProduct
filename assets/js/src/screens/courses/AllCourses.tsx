@@ -23,24 +23,36 @@ const AllCourses = () => {
 						<rect height="6" width="100%"></rect>
 					</ContentLoader>
 				)}
-				<table style={{ width: '100%', textAlign: 'left' }}>
+				<table className="masteriyo-min-w-full masteriyo-divide-y masteriyo-divide-gray-200">
 					<thead>
 						<tr>
-							<th>id</th>
-							<th>Title</th>
-							<th>Categories</th>
-							<th>Price</th>
+							<th className="masteriyo-px-6 masteriyo-py-3 masteriyo-text-left masteriyo-text-xs masteriyo-font-medium masteriyo-text-gray-500 masteriyo-uppercase masteriyo-tracking-wider">
+								id
+							</th>
+							<th className="masteriyo-px-6 masteriyo-py-3 masteriyo-text-left masteriyo-text-xs masteriyo-font-medium masteriyo-text-gray-500 masteriyo-uppercase masteriyo-tracking-wider">
+								Title
+							</th>
+							<th className="masteriyo-px-6 masteriyo-py-3 masteriyo-text-left masteriyo-text-xs masteriyo-font-medium masteriyo-text-gray-500 masteriyo-uppercase masteriyo-tracking-wider">
+								Categories
+							</th>
+							<th className="masteriyo-px-6 masteriyo-py-3 masteriyo-text-left masteriyo-text-xs masteriyo-font-medium masteriyo-text-gray-500 masteriyo-uppercase masteriyo-tracking-wider">
+								Price
+							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody className="masteriyo-bg-white masteriyo-divide-y masteriyo-divide-gray-200">
 						{coursesData?.map((course: any) => (
 							<tr key={course.id}>
-								<td>{course.id}</td>
-								<td>
+								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap">
+									{course.id}
+								</td>
+								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap">
 									<Link to={`/courses/${course.id}`}>{course.name}</Link>
 								</td>
-								<td></td>
-								<td>{course.price}</td>
+								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap"></td>
+								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap">
+									{course.price}
+								</td>
 							</tr>
 						))}
 					</tbody>

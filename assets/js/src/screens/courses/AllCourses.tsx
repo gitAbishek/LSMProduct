@@ -1,4 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import { dropCourse, fetchCourses } from '../../utils/api';
+import { useMutation, useQuery } from 'react-query';
 
 import Button from 'Components/common/Button';
 import ContentLoader from 'react-content-loader';
@@ -7,12 +9,19 @@ import { Link } from 'react-router-dom';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
 import { Trash } from '../../assets/icons';
-import { fetchCourses } from '../../utils/api';
-import { useQuery } from 'react-query';
 
 const AllCourses = () => {
-	const { data: coursesData, isLoading } = useQuery('courseData', fetchCourses);
-	const [showDeleteModal, setShowDeleteModal] = useState(true);
+	const { data: coursesData, isLoading, refetch: refectCourses } = useQuery(
+		'courseData',
+		fetchCourses
+	);
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+	const deleteCourse = useMutation((courseId) => dropCourse(courseId), {
+		onSuccess: () => {
+			refectCourses();
+		},
+	});
 
 	return (
 		<Fragment>
@@ -61,7 +70,9 @@ const AllCourses = () => {
 								</td>
 								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap">
 									<ul className="masteriyo-flex masteriyo-list-none masteriyo-text-base masteriyo-justify-center">
-										<li className="masteriyo-text-gray-800 hover:masteriyo-text-red-600 masteriyo-cursor-pointer ">
+										<li
+											onClick={() => deleteCourse.mutate(course.id)}
+											className="masteriyo-text-gray-800 hover:masteriyo-text-red-600 masteriyo-cursor-pointer ">
 											<Icon icon={<Trash />} />
 										</li>
 									</ul>

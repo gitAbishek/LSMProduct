@@ -1,8 +1,12 @@
-import styled from 'styled-components';
 import { BaseLine } from 'Config/defaultStyle';
+import styled from 'styled-components';
+
+interface StyledProps {
+	flex?: boolean;
+}
 
 const Container = styled.div`
-	display: ${(props) => (props.flex ? 'flex' : 'block')};
+	display: ${(props: StyledProps) => (props.flex ? 'flex' : 'block')};
 	padding-right: ${BaseLine * 2}px;
 	padding-left: ${BaseLine * 2}px;
 	margin: 0 auto;
@@ -29,7 +33,7 @@ const Container = styled.div`
 `;
 
 export const ContainerFluid = styled.div`
-	display: ${(props) => (props.flex ? 'flex' : 'block')};
+	display: ${(props: StyledProps) => (props.flex ? 'flex' : 'block')};
 	padding-right: ${BaseLine * 2}px;
 	padding-left: ${BaseLine * 2}px;
 `;

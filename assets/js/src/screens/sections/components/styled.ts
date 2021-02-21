@@ -6,9 +6,13 @@ import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
 import styled from 'styled-components';
 
+interface StyledProps {
+	isDragging?: boolean;
+}
+
 export const ContentContainer = styled.div`
 	background-color: ${colors.WHITE};
-	box-shadow: ${(props) =>
+	box-shadow: ${(props:StyledProps) =>
 		props.isDragging ? '0 0 15px rgba(0, 0, 0, 0.1)' : 'none'};
 	border: 1px solid ${colors.BORDER};
 	padding: ${BaseLine * 1.3}px ${BaseLine * 2}px;

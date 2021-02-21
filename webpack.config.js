@@ -11,7 +11,7 @@ const Dotenv = require('dotenv-webpack');
 
 const config = {
 	entry: {
-		app: path.resolve(process.cwd(), 'assets/js/src', 'index.js'),
+		app: path.resolve(process.cwd(), 'assets/js/src', 'index.tsx'),
 	},
 
 	output: {
@@ -22,7 +22,7 @@ const config = {
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx|svg)$/,
+				test: /\.(js|jsx|svg|ts|tsx)$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
@@ -95,7 +95,7 @@ const config = {
 	].filter(Boolean),
 
 	resolve: {
-		extensions: ['.js', '.jsx'],
+		extensions: ['.js', '.jsx', '.ts', '.tsx'],
 		alias: {
 			Components: path.resolve(process.cwd(), 'assets/js/src/components'),
 			Config: path.resolve(process.cwd(), 'assets/js/src/config'),

@@ -10,7 +10,7 @@ import {
 	Switch,
 } from 'react-router-dom';
 
-import { React } from '@wordpress/element';
+import React from 'react';
 
 const App = () => {
 	const queryClient = new QueryClient();

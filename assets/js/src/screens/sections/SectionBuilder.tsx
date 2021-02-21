@@ -1,9 +1,9 @@
-import { React, useState } from '@wordpress/element';
-import { fetchCourse, fetchLessons, fetchSections } from '../../utils/api';
+import { fetchCourse, fetchSections } from '../../utils/api';
 
 import AddNewButton from 'Components/common/AddNewButton';
 import Container from 'Components/common/Container';
 import MainToolbar from 'Layouts/MainToolbar';
+import React from 'react';
 import Section from './components/Section';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
@@ -42,7 +42,7 @@ import { useQuery } from 'react-query';
 // };
 
 const SectionBuilder = () => {
-	const { courseId } = useParams();
+	const { courseId }: any = useParams();
 	const { data: courseData, isError: isError, isLoading: isLoading } = useQuery(
 		[`course${courseId}`, courseId],
 		() => fetchCourse(courseId),
@@ -150,7 +150,7 @@ const SectionBuilder = () => {
 					<Droppable type="section" droppableId="course-builder">
 						{(provided) => (
 							<div {...provided.droppableProps} ref={provided.innerRef}> */}
-				{sectionsData?.map((section, index) => (
+				{sectionsData?.map((section: any, index: number) => (
 					<Section
 						key={section.id}
 						id={section.id}

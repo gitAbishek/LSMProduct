@@ -10,15 +10,15 @@ axios.interceptors.request.use(async function (config) {
 	};
 
 	// Sets nonce to run API on WordPress Dashboard
-	if (isProduction) {
+	if (isProduction()) {
 		config.headers = {
 			...config.headers,
-			'X-WP-Nonce': masteriyo.nonce,
+			'X-WP-Nonce': 'masteriyo.nonce',
 		};
 	}
 
 	// Basic Auth for the local development, required basic auth plugin
-	if (isDevelopment) {
+	if (isDevelopment()) {
 		config.auth = {
 			...config.auth,
 			username: 'sethstha',
@@ -32,13 +32,13 @@ export const fetchCourses = async () => {
 	return axios.get(urls.courses).then((response) => response.data);
 };
 
-export const fetchCourse = async (id) => {
+export const fetchCourse = async (id:any) => {
 	return axios
 		.get(urls.course.replace(':id', id))
 		.then((response) => response.data);
 };
 
-export const fetchSections = async (courseId) => {
+export const fetchSections = async (courseId:number) => {
 	return axios
 		.get(urls.sections, {
 			params: {
@@ -48,7 +48,7 @@ export const fetchSections = async (courseId) => {
 		.then((response) => response.data);
 };
 
-export const fetchLessons = async (courseId) => {
+export const fetchLessons = async (courseId:number) => {
 	return axios
 		.get(urls.lessons, {
 			params: {

@@ -1,12 +1,15 @@
-import { DotsVertical } from 'Icons';
+import React, { ReactPropTypes } from 'react';
+
+import { DotsVertical } from '../../assets/icons';
 import Icon from 'Components/common/Icon';
-import { React } from '@wordpress/element';
 import colors from 'Config/colors';
 import defaultStyle from 'Config/defaultStyle';
 import fontSize from 'Config/fontSize';
 import styled from 'styled-components';
 
-const OptionButton = (props) => {
+interface Props extends React.ComponentProps<any> {}
+
+const OptionButton: React.FC<Props> = (props) => {
 	return (
 		<StyledButton {...props}>
 			<Icon icon={<DotsVertical />} />

@@ -2,13 +2,15 @@ import { BaseLine } from 'Config/defaultStyle';
 import Icon from 'Components/common/Icon';
 import { Plus } from 'Icons/index';
 import PropTypes from 'prop-types';
-import { React } from '@wordpress/element';
+import React from 'react';
 import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
 import { lighten } from 'polished';
 import styled from 'styled-components';
 
-const AddNewButton = (props) => {
+interface Props {}
+
+const AddNewButton: React.FC<Props> = (props) => {
 	return (
 		<StyledButton {...props}>
 			<Icon icon={<Plus />} />

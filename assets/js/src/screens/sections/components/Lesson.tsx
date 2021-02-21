@@ -5,7 +5,7 @@ import {
 	ContentIcon,
 	ContentTitle,
 } from './styled';
-import { AlignLeft, Trash } from 'Icons';
+import { AlignLeft, Trash } from '../../../assets/icons';
 
 import Button from 'Components/common/Button';
 import DragHandle from '../components/DragHandle';
@@ -14,10 +14,15 @@ import DropdownOverlay from 'Components/common/DropdownOverlay';
 import FlexRow from 'Components/common/FlexRow';
 import Icon from 'Components/common/Icon';
 import OptionButton from 'Components/common/OptionButton';
-import PropTypes from 'prop-types';
-import { React } from '@wordpress/element';
+import React from 'react';
 
-const Lesson = (props) => {
+interface Props {
+	id: number;
+	title: string;
+	index: number;
+}
+
+const Lesson: React.FC<Props> = (props) => {
 	const { id, title, index } = props;
 	return (
 		<ContentContainer>
@@ -51,12 +56,6 @@ const Lesson = (props) => {
 			</ContentHeader>
 		</ContentContainer>
 	);
-};
-
-Lesson.propTypes = {
-	id: PropTypes.string,
-	title: PropTypes.string,
-	index: PropTypes.number,
 };
 
 export default Lesson;

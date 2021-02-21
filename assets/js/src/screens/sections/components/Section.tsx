@@ -1,5 +1,5 @@
-import { Edit, Trash } from 'Icons';
-import { React, useState } from '@wordpress/element';
+import { Edit, Trash } from '../../../assets/icons';
+import React, { useState } from 'react';
 import {
 	SectionHeader,
 	SectionTitle,
@@ -19,15 +19,22 @@ import Label from 'Components/common/Label';
 import Lesson from './Lesson';
 import { NavLink } from 'react-router-dom';
 import OptionButton from 'Components/common/OptionButton';
-import PropTypes from 'prop-types';
-import Quiz from './Quiz';
 import Textarea from 'Components/common/Textarea';
 import colors from 'Config/colors';
 import { fetchLessons } from '../../../utils/api';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
 
-const Section = (props) => {
+interface Props {
+	id: number;
+	title: string;
+	contents?: any;
+	editing?: boolean;
+	index: number;
+	courseId: number;
+}
+
+const Section: React.FC<Props> = (props) => {
 	const { id, title, contents, index, editing, courseId } = props;
 
 	const [mode, setMode] = useState(editing ? 'editing' : 'normal');
@@ -80,14 +87,14 @@ const Section = (props) => {
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="">Section Description</Label>
-								<Textarea rows="4" placeholder="short summary" />
+								<Textarea rows={4} placeholder="short summary" />
 							</FormGroup>
 						</form>
 					</EditSection>
 
 					<SectionFooter>
 						<FlexRow>
-							<Button primary onClick={() => setMode('normal')}>
+							<Button appearance="primary" onClick={() => setMode('normal')}>
 								Save
 							</Button>
 							<Button style={{ marginLeft: BaseLine * 2 }}>Cancel</Button>
@@ -97,7 +104,7 @@ const Section = (props) => {
 			)}
 
 			<ContentDroppableArea>
-				{lessonData?.map((content, index) => (
+				{lessonData?.map((content: any, index: number) => (
 					<Lesson
 						key={content.id}
 						id={content.id}
@@ -115,25 +122,22 @@ const Section = (props) => {
 	);
 };
 
-Section.propTypes = {
-	id: PropTypes.number,
-	title: PropTypes.string,
-	contents: PropTypes.array,
-	index: PropTypes.number,
-	editing: PropTypes.bool,
-};
+interface StyledProps {
+	isDragging?: boolean;
+	isDraggingOver?: boolean;
+}
 
 const SectionContainer = styled.div`
 	background-color: ${colors.WHITE};
 	border-radius: ${defaultStyle.borderRadius};
 	padding: ${BaseLine * 4}px;
 	margin-top: ${BaseLine * 6}px;
-	box-shadow: ${(props) =>
+	box-shadow: ${(props: StyledProps) =>
 		props.isDragging ? '0 0 15px rgba(0, 0, 0, 0.1)' : 'none'};
 `;
 
 const ContentDroppableArea = styled.div`
-	background-color: ${(props) =>
+	background-color: ${(props: StyledProps) =>
 		props.isDraggingOver ? colors.LIGHT_BLUEISH_GRAY : colors.WHITE};
 	min-height: ${BaseLine * 4}px;
 `;

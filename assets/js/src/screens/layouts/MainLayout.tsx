@@ -1,21 +1,17 @@
 import { BaseLine } from 'Config/defaultStyle';
 import Container from 'Components/common/Container';
-import PropTypes from 'prop-types';
-import { React } from '@wordpress/element';
+import React from 'react';
 import colors from 'Config/colors';
 import styled from 'styled-components';
 
-const MainLayout = (props) => {
-	const { children } = props;
+interface Props {}
+
+const MainLayout: React.FC<Props> = (props) => {
 	return (
 		<Container>
-			<MainContainer>{children}</MainContainer>
+			<MainContainer>{props.children}</MainContainer>
 		</Container>
 	);
-};
-
-MainLayout.propTypes = {
-	children: PropTypes.object,
 };
 
 const MainContainer = styled(Container)`

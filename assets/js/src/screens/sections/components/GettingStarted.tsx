@@ -2,7 +2,7 @@ import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';
 import Flex from 'Components/common/Flex';
 import FlexRow from 'Components/common/FlexRow';
-import { React } from '@wordpress/element';
+import React from 'react';
 import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
 import styled from 'styled-components';
@@ -15,9 +15,9 @@ const GettingStarted = () => {
 				Upload your content, quiz, assignment
 			</GettingStartedInfo>
 			<ActionButtons>
-				<Button primary>Add Section</Button>
-				<Button primary>Add Assignment</Button>
-				<Button primary>Add Quiz</Button>
+				<Button appearance="primary">Add Section</Button>
+				<Button appearance="primary">Add Assignment</Button>
+				<Button appearance="primary">Add Quiz</Button>
 			</ActionButtons>
 			<GettingStartedInfo>
 				Not sure how to get started? <br />
@@ -40,7 +40,7 @@ const ActionButtons = styled(FlexRow)`
 	margin-right: -8px;
 	margin-bottom: ${BaseLine * 3}px;
 
-	${Button} {
+	.masteriyo-button {
 		margin-left: 8px;
 		margin-right: 8px;
 	}

@@ -1,4 +1,4 @@
-import { Book, Cog, Edit, Show } from 'Icons';
+import { Book, Cog, Edit, Show } from '../../assets/icons';
 import Menu, { MenuItem } from 'Components/common/Menu';
 
 import { BaseLine } from 'Config/defaultStyle';
@@ -7,7 +7,7 @@ import { ContainerFluid } from 'Components/common/Container';
 import Flex from 'Components/common/Flex';
 import FlexRow from 'Components/common/FlexRow';
 import LogoImg from '../../../../img/logo.png';
-import { React } from '@wordpress/element';
+import React from 'react';
 import colors from 'Config/colors';
 import styled from 'styled-components';
 
@@ -34,7 +34,7 @@ const MainToolbar = () => {
 				<HeaderRightContent>
 					<HeaderActions>
 						<Button icon={<Show />}>Preview</Button>
-						<Button primary>Save</Button>
+						<Button appearance="primary">Save</Button>
 					</HeaderActions>
 				</HeaderRightContent>
 			</ContainerFluid>

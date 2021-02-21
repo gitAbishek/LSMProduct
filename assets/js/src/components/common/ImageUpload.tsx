@@ -1,26 +1,32 @@
-import { React, memo, useCallback, useState } from '@wordpress/element';
+import React, { useCallback, useState } from 'react';
 
 import { BaseLine } from 'Config/defaultStyle';
 import Flex from 'Components/common/Flex';
 import FlexRow from 'Components/common/FlexRow';
 import Icon from 'Components/common/Icon';
-import { Plus } from 'Icons';
-import PropTypes from 'prop-types';
+import { Plus } from '../../assets/icons';
 import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
 import styled from 'styled-components';
 import { useDropzone } from 'react-dropzone';
 
-const ImageUpload = (props) => {
+interface Props {
+	style?: any;
+	className?: string;
+	title: string;
+	multiple?: boolean;
+}
+
+const ImageUpload: React.FC<Props> = (props) => {
 	const { style, className, title, multiple } = props;
-	const [file, setFiles] = useState();
+	const [file, setFiles] = useState<any>(null);
 	const onDrop = useCallback((acceptedFiles) => {
 		setFiles(
 			Object.assign(acceptedFiles[0], {
 				image: URL.createObjectURL(acceptedFiles[0]),
 			})
 		);
-	});
+	}, []);
 
 	const {
 		getRootProps,
@@ -49,12 +55,11 @@ const ImageUpload = (props) => {
 	);
 };
 
-ImageUpload.propTypes = {
-	style: PropTypes.object,
-	className: PropTypes.string,
-	title: PropTypes.any,
-	multiple: PropTypes.bool,
-};
+interface StyledProps {
+	backgroundImage?: string;
+	isDragAccept?: boolean;
+	isDragReject?: boolean;
+}
 
 const Container = styled.div``;
 
@@ -65,13 +70,14 @@ const InputContainer = styled(Flex)`
 	border: 1px dashed ${colors.PLACEHOLDER};
 	background-position: 50%;
 	background-size: cover;
-	background-color: ${colors.GRAY};
-	background-image: ${(props) => `url("${props.backgroundImage}")`};
+	background-color: ${colors.LIGHT_GRAY};
+	background-image: ${(props: StyledProps) =>
+		`url("${props.backgroundImage}")`};
 `;
 
 const ContentContainer = styled(Flex)`
 	position: relative;
-	background-color: ${(props) => {
+	background-color: ${(props: StyledProps) => {
 		if (props.isDragAccept) {
 			return colors.PRIMARY;
 		}
@@ -93,4 +99,4 @@ const ContentContainer = styled(Flex)`
 	}
 `;
 
-export default memo(ImageUpload);
+export default ImageUpload;

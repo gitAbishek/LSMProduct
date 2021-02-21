@@ -1,12 +1,14 @@
 import { BaseLine } from 'Config/defaultStyle';
 import Icon from 'Components/common/Icon';
-import { React } from '@wordpress/element';
-import { Sortable } from 'Icons';
+import React from 'react';
+import { Sortable } from '../../../assets/icons';
 import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
 import styled from 'styled-components';
 
-const DragHandle = (props) => {
+interface Props {}
+
+const DragHandle: React.FC<Props> = (props) => {
 	return <SortableIcon icon={<Sortable />} {...props} />;
 };
 

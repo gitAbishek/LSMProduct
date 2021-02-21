@@ -24,12 +24,9 @@ import Slider from 'rc-slider';
 import Textarea from 'Components/common/Textarea';
 import styled from 'styled-components';
 
-interface Props {
-	sectionId: number;
-}
+interface Props {}
 
 const AddNewLesson: React.FC<Props> = (props) => {
-	const { sectionId } = props;
 	const [playBackTime, setPlayBackTime] = useState(3);
 
 	const playBackTimeOnChange = (value: number) => {

@@ -26,53 +26,47 @@ const AllCourses = () => {
 	return (
 		<Fragment>
 			<MainToolbar />
+
 			<MainLayout>
-				{isLoading && (
-					<ContentLoader
-						backgroundColor="#f3f3f3"
-						foregroundColor="#ecebeb"
-						height={6}>
-						<rect height="6" width="100%"></rect>
-					</ContentLoader>
-				)}
-				<table className="masteriyo-min-w-full masteriyo-divide-y masteriyo-divide-gray-200">
+				<div className=""></div>
+				<table className="mto-min-w-full mto-divide-y mto-divide-gray-200">
 					<thead>
 						<tr>
-							<th className="masteriyo-px-6 masteriyo-py-3 masteriyo-text-left masteriyo-text-xs masteriyo-font-medium masteriyo-text-gray-500 masteriyo-uppercase masteriyo-tracking-wider">
+							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
 								id
 							</th>
-							<th className="masteriyo-px-6 masteriyo-py-3 masteriyo-text-left masteriyo-text-xs masteriyo-font-medium masteriyo-text-gray-500 masteriyo-uppercase masteriyo-tracking-wider">
+							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
 								Title
 							</th>
-							<th className="masteriyo-px-6 masteriyo-py-3 masteriyo-text-left masteriyo-text-xs masteriyo-font-medium masteriyo-text-gray-500 masteriyo-uppercase masteriyo-tracking-wider">
+							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
 								Categories
 							</th>
-							<th className="masteriyo-px-6 masteriyo-py-3 masteriyo-text-left masteriyo-text-xs masteriyo-font-medium masteriyo-text-gray-500 masteriyo-uppercase masteriyo-tracking-wider">
+							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
 								Price
 							</th>
-							<th className="masteriyo-px-6 masteriyo-py-3 masteriyo-text-left masteriyo-text-xs masteriyo-font-medium masteriyo-text-gray-500 masteriyo-uppercase masteriyo-tracking-wider">
+							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
 								Actions
 							</th>
 						</tr>
 					</thead>
-					<tbody className="masteriyo-bg-white masteriyo-divide-y masteriyo-divide-gray-200">
+					<tbody className="mto-bg-white mto-divide-y mto-divide-gray-200">
 						{coursesData?.map((course: any) => (
 							<tr key={course.id}>
-								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap">
+								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap">
 									{course.id}
 								</td>
-								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap">
+								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap">
 									<Link to={`/courses/${course.id}`}>{course.name}</Link>
 								</td>
-								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap"></td>
-								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap">
+								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap"></td>
+								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap">
 									{course.price}
 								</td>
-								<td className="masteriyo-px-6 masteriyo-py-4 masteriyo-whitespace-nowrap">
-									<ul className="masteriyo-flex masteriyo-list-none masteriyo-text-base masteriyo-justify-center">
+								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap">
+									<ul className="mto-flex mto-list-none mto-text-base mto-justify-center">
 										<li
 											onClick={() => deleteCourse.mutate(course.id)}
-											className="masteriyo-text-gray-800 hover:masteriyo-text-red-600 masteriyo-cursor-pointer ">
+											className="mto-text-gray-800 hover:mto-text-red-600 mto-cursor-pointer ">
 											<Icon icon={<Trash />} />
 										</li>
 									</ul>

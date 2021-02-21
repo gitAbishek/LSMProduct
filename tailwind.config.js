@@ -8,5 +8,5 @@ module.exports = {
 		extend: {},
 	},
 	plugins: [],
-	prefix: 'masteriyo-',
+	prefix: 'mto-',
 };

@@ -55,7 +55,8 @@ const EditCourse = () => {
 			<MainLayout>
 				{isUpdated && (
 					<div className="mto-p-4 mto-bg-green-100 mto-rounded-sm mto-mb-10 mto-text-green-700">
-						Course `<strong>{courseData?.name}</strong>` is successfully updated
+						Course `<strong>{courseData?.name}</strong>` is successfully
+						updated. You can keep editing.
 					</div>
 				)}
 				<form onSubmit={handleSubmit(onSubmit)}>

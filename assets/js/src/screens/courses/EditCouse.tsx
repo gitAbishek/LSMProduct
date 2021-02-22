@@ -4,7 +4,7 @@ import {
 	CourseRightContainer,
 	FeaturedImageActions,
 } from './AddNewCourse';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { fetchCourse, updateCourse } from '../../utils/api';
 import { useMutation, useQuery } from 'react-query';
 
@@ -29,6 +29,7 @@ const EditCourse = () => {
 	}
 
 	const { courseId }: any = useParams();
+	const [isUpdated, setIsUpdated] = useState(false);
 
 	const { data: courseData } = useQuery([`course${courseId}`, courseId], () =>
 		fetchCourse(courseId)
@@ -43,13 +44,22 @@ const EditCourse = () => {
 	});
 
 	const onSubmit = (data: any) => {
-		addMutation.mutate(data);
+		addMutation.mutate(data, {
+			onSuccess: () => {
+				setIsUpdated(true);
+			},
+		});
 	};
 
 	return (
 		<Fragment>
 			<MainToolbar />
 			<MainLayout>
+				{isUpdated && (
+					<div className="mto-p-4 mto-bg-green-100 mto-rounded-sm mto-mb-10 mto-text-green-700">
+						Course `<strong>{courseData?.name}</strong>` is successfully updated
+					</div>
+				)}
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<CourseContainer>
 						<CourseLeftContainer>

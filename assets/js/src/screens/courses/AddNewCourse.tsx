@@ -22,7 +22,7 @@ const AddNewCourse = () => {
 		categories?: any;
 	}
 
-	const { register, handleSubmit, control } = useForm<Inputs>();
+	const { register, handleSubmit } = useForm<Inputs>();
 
 	const onSubmit = (data: any) => {
 		console.log(data);
@@ -61,19 +61,12 @@ const AddNewCourse = () => {
 						<CourseRightContainer>
 							<FormGroup>
 								<Label htmlFor="">Course Category</Label>
-								<Controller
-									name="categories"
-									control={control}
-									render={(props) => (
-										<Select
-											options={[
-												{ value: 'chocolate', label: 'Chocolate' },
-												{ value: 'strawberry', label: 'Strawberry' },
-												{ value: 'vanilla', label: 'Vanilla' },
-											]}
-											{...props}
-										/>
-									)}
+								<Select
+									options={[
+										{ value: 'chocolate', label: 'Chocolate' },
+										{ value: 'strawberry', label: 'Strawberry' },
+										{ value: 'vanilla', label: 'Vanilla' },
+									]}
 								/>
 							</FormGroup>
 

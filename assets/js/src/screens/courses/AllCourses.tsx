@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { dropCourse, fetchCourses } from '../../utils/api';
+import { deleteCourse, fetchCourses } from '../../utils/api';
 import { useMutation, useQuery } from 'react-query';
 
 import Button from 'Components/common/Button';
@@ -10,14 +10,14 @@ import MainToolbar from 'Layouts/MainToolbar';
 import { Trash } from '../../assets/icons';
 
 const AllCourses = () => {
-	const { data: coursesData, isLoading, refetch: refectCourses } = useQuery(
+	const { data: coursesData, refetch: refectCourses } = useQuery(
 		'courseData',
 		fetchCourses
 	);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [removableCourse, setRemovableCourse] = useState(Object);
 
-	const deleteMutation = useMutation((courseId) => dropCourse(courseId), {
+	const deleteMutation = useMutation((courseId) => deleteCourse(courseId), {
 		onSuccess: () => {
 			refectCourses();
 		},

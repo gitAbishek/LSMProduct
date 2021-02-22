@@ -58,7 +58,7 @@ export const fetchLessons = async (courseId: number) => {
 		.then((response) => response.data);
 };
 
-export const dropCourse = async (courseId: any) => {
+export const deleteCourse = async (courseId: any) => {
 	return axios
 		.delete(urls.course.replace(':id', courseId.toString()))
 		.then((response) => response.data);

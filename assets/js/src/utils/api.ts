@@ -13,7 +13,8 @@ axios.interceptors.request.use(async function (config) {
 	if (isProduction()) {
 		config.headers = {
 			...config.headers,
-			'X-WP-Nonce': 'masteriyo.nonce',
+			//@ts-ignore
+			'X-WP-Nonce': masteriyo.nonce,
 		};
 	}
 

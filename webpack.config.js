@@ -7,10 +7,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { isProduction, isDevelopment } = require('webpack-mode');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
 	entry: {
-		app: path.resolve(process.cwd(), 'assets/js/src', 'index.js'),
+		app: path.resolve(process.cwd(), 'assets/js/src', 'index.tsx'),
 	},
 
 	output: {
@@ -21,7 +22,7 @@ const config = {
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx|svg)$/,
+				test: /\.(js|jsx|svg|ts|tsx)$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
@@ -50,6 +51,9 @@ const config = {
 					},
 					{
 						loader: 'css-loader',
+					},
+					{
+						loader: 'postcss-loader',
 					},
 				],
 			},
@@ -90,10 +94,11 @@ const config = {
 				overlay: false,
 			}),
 		isDevelopment && new ErrorOverlayPlugin(),
+		new Dotenv(),
 	].filter(Boolean),
 
 	resolve: {
-		extensions: ['.js', '.jsx'],
+		extensions: ['.js', '.jsx', '.ts', '.tsx'],
 		alias: {
 			Components: path.resolve(process.cwd(), 'assets/js/src/components'),
 			Config: path.resolve(process.cwd(), 'assets/js/src/config'),

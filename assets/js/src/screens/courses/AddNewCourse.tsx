@@ -15,6 +15,7 @@ import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
 import { addCourse } from '../../utils/api';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from 'react-query';
 
 const AddNewCourse = () => {
@@ -23,15 +24,16 @@ const AddNewCourse = () => {
 		description?: string;
 		categories?: any;
 	}
-
+	const history = useHistory();
 	const { register, handleSubmit } = useForm<Inputs>();
+
 	const addMutation = useMutation((data) => addCourse(data), {
-		onSuccess: () => {
-			console.log('successfully added');
+		onSuccess: (data) => {
+			history.push(`/courses/${data?.id}`);
 		},
 	});
+
 	const onSubmit = (data: any) => {
-		console.log(data);
 		addMutation.mutate(data);
 	};
 

@@ -1,3 +1,4 @@
+import { Controller, useForm } from 'react-hook-form';
 import React, { Fragment } from 'react';
 
 import { BaseLine } from 'Config/defaultStyle';
@@ -13,20 +14,19 @@ import MainToolbar from 'Layouts/MainToolbar';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
 import styled from 'styled-components';
-import {useForm} from 'react-hook-form';
 
 const AddNewCourse = () => {
 	interface Inputs {
 		name: string;
 		description?: string;
-		categories?: any
+		categories?: any;
 	}
 
-	const {register, handleSubmit, watch, errors} = useForm<Inputs>();
+	const { register, handleSubmit, control } = useForm<Inputs>();
 
-	const onSubmit = (data:any) => {
+	const onSubmit = (data: any) => {
 		console.log(data);
-	}
+	};
 
 	return (
 		<Fragment>
@@ -39,28 +39,42 @@ const AddNewCourse = () => {
 								<Label htmlFor="">Course Name</Label>
 								<Input
 									placeholder="Your Course Name"
-									ref={register({required: true})} name="name"></Input>
+									ref={register({ required: true })}
+									name="name"></Input>
 							</FormGroup>
 
 							<FormGroup>
 								<Label htmlFor="">Course Description</Label>
-								<Textarea placeholder="Your Course Title" rows={5} ref={register} name="description"></Textarea>
+								<Textarea
+									placeholder="Your Course Title"
+									rows={5}
+									ref={register}
+									name="description"></Textarea>
 							</FormGroup>
 							<FlexRow>
-								<Button appearance="primary" type="submit">Add Course</Button>
+								<Button appearance="primary" type="submit">
+									Add Course
+								</Button>
 							</FlexRow>
 						</CourseLeftContainer>
 
 						<CourseRightContainer>
 							<FormGroup>
 								<Label htmlFor="">Course Category</Label>
-								<Select
-									options={[
-										{ value: 'chocolate', label: 'Chocolate' },
-										{ value: 'strawberry', label: 'Strawberry' },
-										{ value: 'vanilla', label: 'Vanilla' },
-									]}
-								  name="categories"/>
+								<Controller
+									name="categories"
+									control={control}
+									render={(props) => (
+										<Select
+											options={[
+												{ value: 'chocolate', label: 'Chocolate' },
+												{ value: 'strawberry', label: 'Strawberry' },
+												{ value: 'vanilla', label: 'Vanilla' },
+											]}
+											{...props}
+										/>
+									)}
+								/>
 							</FormGroup>
 
 							<FormGroup>

@@ -67,3 +67,9 @@ export const deleteCourse = async (courseId: any) => {
 export const addCourse = async (data: any) => {
 	return axios.post(urls.courses, data).then((response) => response.data);
 };
+
+export const updateCourse = async (courseId: any, data: any) => {
+	return axios
+		.patch(urls.course.replace(':id', courseId.toString()), data)
+		.then((response) => response.data);
+};

@@ -32,13 +32,13 @@ export const fetchCourses = async () => {
 	return axios.get(urls.courses).then((response) => response.data);
 };
 
-export const fetchCourse = async (id:any) => {
+export const fetchCourse = async (id: any) => {
 	return axios
 		.get(urls.course.replace(':id', id))
 		.then((response) => response.data);
 };
 
-export const fetchSections = async (courseId:number) => {
+export const fetchSections = async (courseId: number) => {
 	return axios
 		.get(urls.sections, {
 			params: {
@@ -48,7 +48,7 @@ export const fetchSections = async (courseId:number) => {
 		.then((response) => response.data);
 };
 
-export const fetchLessons = async (courseId:number) => {
+export const fetchLessons = async (courseId: number) => {
 	return axios
 		.get(urls.lessons, {
 			params: {
@@ -58,4 +58,18 @@ export const fetchLessons = async (courseId:number) => {
 		.then((response) => response.data);
 };
 
-// export const addLesson = async(name, parentId, videoSource, videoSourceUrl, videPlayBack )
+export const deleteCourse = async (courseId: any) => {
+	return axios
+		.delete(urls.course.replace(':id', courseId.toString()))
+		.then((response) => response.data);
+};
+
+export const addCourse = async (data: any) => {
+	return axios.post(urls.courses, data).then((response) => response.data);
+};
+
+export const updateCourse = async (courseId: any, data: any) => {
+	return axios
+		.patch(urls.course.replace(':id', courseId.toString()), data)
+		.then((response) => response.data);
+};

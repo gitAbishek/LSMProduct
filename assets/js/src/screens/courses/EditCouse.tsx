@@ -1,9 +1,14 @@
-import { Controller, useForm } from 'react-hook-form';
-import React, { Fragment } from 'react';
+import {
+	CourseContainer,
+	CourseLeftContainer,
+	CourseRightContainer,
+	FeaturedImageActions,
+} from './AddNewCourse';
+import React, { Fragment, useState } from 'react';
+import { fetchCourse, updateCourse } from '../../utils/api';
+import { useMutation, useQuery } from 'react-query';
 
-import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';
-import Flex from 'Components/common/Flex';
 import FlexRow from 'Components/common/FlexRow';
 import FormGroup from 'Components/common/FormGroup';
 import ImageUpload from 'Components/common/ImageUpload';
@@ -13,23 +18,30 @@ import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
-import { addCourse } from '../../utils/api';
-import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-import { useMutation } from 'react-query';
+import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 
-const AddNewCourse = () => {
+const EditCourse = () => {
 	interface Inputs {
 		name: string;
 		description?: string;
 		categories?: any;
 	}
-	const history = useHistory();
+
+	const { courseId }: any = useParams();
+	const [isUpdated, setIsUpdated] = useState(false);
+
+	const { data: courseData, refetch: refectCourseData } = useQuery(
+		[`course${courseId}`, courseId],
+		() => fetchCourse(courseId)
+	);
+
 	const { register, handleSubmit } = useForm<Inputs>();
 
-	const addMutation = useMutation((data) => addCourse(data), {
-		onSuccess: (data) => {
-			history.push(`/courses/${data?.id}`);
+	const addMutation = useMutation((data) => updateCourse(courseId, data), {
+		onSuccess: () => {
+			setIsUpdated(true);
+			refectCourseData();
 		},
 	});
 
@@ -41,6 +53,12 @@ const AddNewCourse = () => {
 		<Fragment>
 			<MainToolbar />
 			<MainLayout>
+				{isUpdated && (
+					<div className="mto-p-4 mto-bg-green-100 mto-rounded-sm mto-mb-10 mto-text-green-700">
+						Course `<strong>{courseData?.name}</strong>` is successfully
+						updated. You can keep editing.
+					</div>
+				)}
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<CourseContainer>
 						<CourseLeftContainer>
@@ -49,7 +67,8 @@ const AddNewCourse = () => {
 								<Input
 									placeholder="Your Course Name"
 									ref={register({ required: true })}
-									name="name"></Input>
+									name="name"
+									defaultValue={courseData?.name}></Input>
 							</FormGroup>
 
 							<FormGroup>
@@ -58,7 +77,8 @@ const AddNewCourse = () => {
 									placeholder="Your Course Title"
 									rows={5}
 									ref={register}
-									name="description"></Textarea>
+									name="description"
+									defaultValue={courseData?.description}></Textarea>
 							</FormGroup>
 							<FlexRow>
 								<Button appearance="primary" type="submit">
@@ -95,28 +115,4 @@ const AddNewCourse = () => {
 	);
 };
 
-export const CourseContainer = styled(FlexRow)`
-	align-items: flex-start;
-	margin-left: -${BaseLine * 2}px;
-	margin-right: -${BaseLine * 2}px;
-`;
-
-export const CourseInner = styled(Flex)`
-	padding-left: ${BaseLine * 2}px;
-	padding-right: ${BaseLine * 2}px;
-`;
-
-export const CourseLeftContainer = styled(CourseInner)`
-	flex: 1;
-`;
-
-export const CourseRightContainer = styled(CourseInner)`
-	flex-basis: 400px;
-`;
-
-export const FeaturedImageActions = styled(FlexRow)`
-	justify-content: space-between;
-	margin-top: ${BaseLine * 3}px;
-`;
-
-export default AddNewCourse;
+export default EditCourse;

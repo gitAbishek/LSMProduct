@@ -32,13 +32,13 @@ const App = () => {
 						<Route path="/courses/:courseId/add-new-lesson" exact>
 							<screens.AddNewLesson />
 						</Route>
-						{/* <Route path="/settings" exact>
+						<Route path="/courses/edit/:courseId" exact>
+							<screens.EditCourse />
+						</Route>
+						<Route path="/settings" exact>
 							<screens.Settings />
 						</Route>
-						<Route path="/" exact>
-							<Redirect to="/courses" />
-						</Route>
-						*/}
+
 						<Route>
 							<Redirect to="/courses" />
 						</Route>

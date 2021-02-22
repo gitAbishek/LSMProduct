@@ -20,10 +20,10 @@ const MainToolbar = () => {
 						<img src={LogoImg} alt="Masteriyo Logo" />
 					</LogoContainer>
 					<Menu>
-						<MenuItem to="/course" icon={<Book />}>
-							Course
+						<MenuItem to="/courses" icon={<Book />}>
+							Courses
 						</MenuItem>
-						<MenuItem to="/builder" icon={<Edit />}>
+						<MenuItem to="/courses/add-new-course" icon={<Edit />}>
 							Course Builder
 						</MenuItem>
 						<MenuItem to="/settings" icon={<Cog />}>

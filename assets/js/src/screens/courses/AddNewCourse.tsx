@@ -13,7 +13,9 @@ import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
+import { addCourse } from '../../utils/api';
 import styled from 'styled-components';
+import { useMutation } from 'react-query';
 
 const AddNewCourse = () => {
 	interface Inputs {
@@ -23,9 +25,14 @@ const AddNewCourse = () => {
 	}
 
 	const { register, handleSubmit } = useForm<Inputs>();
-
+	const addMutation = useMutation((data) => addCourse(data), {
+		onSuccess: () => {
+			console.log('successfully added');
+		},
+	});
 	const onSubmit = (data: any) => {
 		console.log(data);
+		addMutation.mutate(data);
 	};
 
 	return (

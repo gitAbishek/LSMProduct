@@ -63,3 +63,7 @@ export const deleteCourse = async (courseId: any) => {
 		.delete(urls.course.replace(':id', courseId.toString()))
 		.then((response) => response.data);
 };
+
+export const addCourse = async (data: any) => {
+	return axios.post(urls.courses, data).then((response) => response.data);
+};

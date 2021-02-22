@@ -12,6 +12,7 @@ namespace ThemeGrill\Masteriyo\Models;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Repository\RepositoryInterface;
 use ThemeGrill\Masteriyo\Helper\Utils;
+use ThemeGrill\Masteriyo\Helper\Format;
 use ThemeGrill\Masteriyo\Cache\CacheInterface;
 
 defined( 'ABSPATH' ) || exit;
@@ -693,7 +694,7 @@ class Course extends Model {
 	 * @param float $average Course average rating.
 	 */
 	public function set_average_rating( $average ) {
-		$this->set_prop( 'average_rating', wc_format_decimal( $average ) );
+		$this->set_prop( 'average_rating', Format::decimal( $average ) );
 	}
 
 	/**

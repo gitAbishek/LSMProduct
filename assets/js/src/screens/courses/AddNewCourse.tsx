@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 
 import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';
@@ -13,38 +13,41 @@ import MainToolbar from 'Layouts/MainToolbar';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
 import styled from 'styled-components';
+import {useForm} from 'react-hook-form';
 
 const AddNewCourse = () => {
-	const handleSubmit = (e: any) => {
-		e.preventDefault();
-	};
+	interface Inputs {
+		name: string;
+		description?: string;
+		categories?: any
+	}
 
-	const [formData, setFormData] = useState(Object);
+	const {register, handleSubmit, watch, errors} = useForm<Inputs>();
 
-	const handleChange = (e: any) => {
-		setFormData({ ...setFormData, [e.target.name]: e.target.value });
-	};
+	const onSubmit = (data:any) => {
+		console.log(data);
+	}
 
 	return (
 		<Fragment>
 			<MainToolbar />
 			<MainLayout>
-				<form>
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<CourseContainer>
 						<CourseLeftContainer>
 							<FormGroup>
 								<Label htmlFor="">Course Name</Label>
 								<Input
 									placeholder="Your Course Name"
-									value={formData?.name}></Input>
+									ref={register({required: true})} name="name"></Input>
 							</FormGroup>
 
 							<FormGroup>
 								<Label htmlFor="">Course Description</Label>
-								<Textarea placeholder="Your Course Title" rows={5}></Textarea>
+								<Textarea placeholder="Your Course Title" rows={5} ref={register} name="description"></Textarea>
 							</FormGroup>
 							<FlexRow>
-								<Button appearance="primary">Add Course</Button>
+								<Button appearance="primary" type="submit">Add Course</Button>
 							</FlexRow>
 						</CourseLeftContainer>
 
@@ -57,11 +60,11 @@ const AddNewCourse = () => {
 										{ value: 'strawberry', label: 'Strawberry' },
 										{ value: 'vanilla', label: 'Vanilla' },
 									]}
-								/>
+								  name="categories"/>
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">Categories</Label>
+								<Label htmlFor="">Featured Image</Label>
 								<ImageUpload title="Drag image or click to upload" />
 								<FeaturedImageActions>
 									<Button>Remove Featured Image</Button>

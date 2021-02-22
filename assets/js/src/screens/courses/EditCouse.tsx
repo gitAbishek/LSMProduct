@@ -59,7 +59,7 @@ const EditCourse = () => {
 									placeholder="Your Course Name"
 									ref={register({ required: true })}
 									name="name"
-									value={courseData?.name}></Input>
+									defaultValue={courseData?.name}></Input>
 							</FormGroup>
 
 							<FormGroup>
@@ -69,7 +69,7 @@ const EditCourse = () => {
 									rows={5}
 									ref={register}
 									name="description"
-									value={courseData?.description}></Textarea>
+									defaultValue={courseData?.description}></Textarea>
 							</FormGroup>
 							<FlexRow>
 								<Button appearance="primary" type="submit">

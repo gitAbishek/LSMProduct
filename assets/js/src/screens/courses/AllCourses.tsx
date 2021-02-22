@@ -1,13 +1,13 @@
+import { Edit, Trash } from '../../assets/icons';
+import { Link, useHistory } from 'react-router-dom';
 import React, { Fragment, useState } from 'react';
 import { deleteCourse, fetchCourses } from '../../utils/api';
 import { useMutation, useQuery } from 'react-query';
 
 import Button from 'Components/common/Button';
 import Icon from 'Components/common/Icon';
-import { Link } from 'react-router-dom';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
-import { Trash } from '../../assets/icons';
 
 const AllCourses = () => {
 	const { data: coursesData, refetch: refectCourses } = useQuery(
@@ -16,6 +16,8 @@ const AllCourses = () => {
 	);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [removableCourse, setRemovableCourse] = useState(Object);
+
+	const history = useHistory();
 
 	const deleteMutation = useMutation((courseId) => deleteCourse(courseId), {
 		onSuccess: () => {
@@ -26,6 +28,10 @@ const AllCourses = () => {
 	const onDeletePress = (courseId: any, courseName: string) => {
 		setRemovableCourse({ id: courseId, name: courseName });
 		setShowDeleteModal(true);
+	};
+
+	const onEditPress = (courseId: any) => {
+		history.push(`/courses/edit/${courseId}`);
 	};
 
 	return (
@@ -73,10 +79,15 @@ const AllCourses = () => {
 									{course.price}
 								</td>
 								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500">
-									<ul className="mto-flex mto-list-none mto-text-base mto-justify-center">
+									<ul className="mto-flex mto-list-none mto-text-base">
+										<li
+											onClick={() => onEditPress(course.id)}
+											className="mto-text-gray-800 hover:mto-text-blue-500 mto-cursor-pointer mto-mr-4">
+											<Icon icon={<Edit />} />
+										</li>
 										<li
 											onClick={() => onDeletePress(course.id, course.name)}
-											className="mto-text-gray-800 hover:mto-text-red-600 mto-cursor-pointer ">
+											className="mto-text-gray-800 hover:mto-text-red-600 mto-cursor-pointer mto-mr-4">
 											<Icon icon={<Trash />} />
 										</li>
 									</ul>

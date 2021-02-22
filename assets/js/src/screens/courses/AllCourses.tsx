@@ -35,7 +35,9 @@ const AllCourses = () => {
 			<MainLayout>
 				<div className="mto-flex mto-justify-between mto-mb-10">
 					<h1 className="mto-text-xl mto-m-0 mto-font-medium">Courses</h1>
-					<Button appearance="primary">Add New Course</Button>
+					<Button appearance="primary">
+						<Link to="/courses/add-new-course">Add New Course</Link>
+					</Button>
 				</div>
 				<table className="mto-min-w-full mto-divide-y mto-divide-gray-200 mto-text-gray-700">
 					<thead>

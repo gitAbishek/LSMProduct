@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';
@@ -15,16 +15,28 @@ import Textarea from 'Components/common/Textarea';
 import styled from 'styled-components';
 
 const AddNewCourse = () => {
+	const handleSubmit = (e: any) => {
+		e.preventDefault();
+	};
+
+	const [formData, setFormData] = useState(Object);
+
+	const handleChange = (e: any) => {
+		setFormData({ ...setFormData, [e.target.name]: e.target.value });
+	};
+
 	return (
 		<Fragment>
 			<MainToolbar />
 			<MainLayout>
-				<form action="">
+				<form>
 					<CourseContainer>
 						<CourseLeftContainer>
 							<FormGroup>
-								<Label htmlFor="">Course Title</Label>
-								<Input placeholder="Your Course Title"></Input>
+								<Label htmlFor="">Course Name</Label>
+								<Input
+									placeholder="Your Course Name"
+									value={formData?.name}></Input>
 							</FormGroup>
 
 							<FormGroup>

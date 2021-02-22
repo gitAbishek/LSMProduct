@@ -35,13 +35,10 @@ const App = () => {
 						<Route path="/courses/edit/:courseId" exact>
 							<screens.EditCourse />
 						</Route>
-						{/* <Route path="/settings" exact>
+						<Route path="/settings" exact>
 							<screens.Settings />
 						</Route>
-						<Route path="/" exact>
-							<Redirect to="/courses" />
-						</Route>
-						*/}
+
 						<Route>
 							<Redirect to="/courses" />
 						</Route>

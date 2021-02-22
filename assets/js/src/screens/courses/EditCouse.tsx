@@ -31,24 +31,22 @@ const EditCourse = () => {
 	const { courseId }: any = useParams();
 	const [isUpdated, setIsUpdated] = useState(false);
 
-	const { data: courseData } = useQuery([`course${courseId}`, courseId], () =>
-		fetchCourse(courseId)
+	const { data: courseData, refetch: refectCourseData } = useQuery(
+		[`course${courseId}`, courseId],
+		() => fetchCourse(courseId)
 	);
 
 	const { register, handleSubmit } = useForm<Inputs>();
 
 	const addMutation = useMutation((data) => updateCourse(courseId, data), {
-		onSuccess: (data) => {
-			console.log(data);
+		onSuccess: () => {
+			setIsUpdated(true);
+			refectCourseData();
 		},
 	});
 
 	const onSubmit = (data: any) => {
-		addMutation.mutate(data, {
-			onSuccess: () => {
-				setIsUpdated(true);
-			},
-		});
+		addMutation.mutate(data);
 	};
 
 	return (

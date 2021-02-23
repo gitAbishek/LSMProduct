@@ -5,5 +5,8 @@
     "@babel/preset-typescript",
     "@dr.pogodin/babel-preset-svgr"
   ],
-  "plugins": ["babel-plugin-styled-components"]
+  "plugins": [
+    "babel-plugin-styled-components",
+    ["@wordpress/babel-plugin-makepot", { "output": "languages/masteriyo.pot" }]
+  ]
 }

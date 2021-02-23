@@ -9,7 +9,6 @@ import Icon from 'Components/common/Icon';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
 import { __ } from '@wordpress/i18n';
-import { translationDomain } from 'Config/i18n';
 
 const AllCourses = () => {
 	const { data: coursesData, refetch: refectCourses } = useQuery(
@@ -43,11 +42,11 @@ const AllCourses = () => {
 			<MainLayout>
 				<div className="mto-flex mto-justify-between mto-mb-10">
 					<h1 className="mto-text-xl mto-m-0 mto-font-medium">
-						{__('Courses', translationDomain)}
+						{__('Courses', 'masteriyo')}
 					</h1>
 					<Button appearance="primary">
 						<Link to="/courses/add-new-course">
-							{__('Add New Course', translationDomain)}
+							{__('Add New Course', 'masteriyo')}
 						</Link>
 					</Button>
 				</div>
@@ -55,16 +54,16 @@ const AllCourses = () => {
 					<thead>
 						<tr>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Title', translationDomain)}
+								{__('Title', 'masteriyo')}
 							</th>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Categories', translationDomain)}
+								{__('Categories', 'masteriyo')}
 							</th>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Price', translationDomain)}
+								{__('Price', 'masteriyo')}
 							</th>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Actions', translationDomain)}
+								{__('Actions', 'masteriyo')}
 							</th>
 						</tr>
 					</thead>

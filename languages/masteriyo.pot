@@ -3,26 +3,26 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: assets/js/src/screens/courses/AllCourses.tsx:46
+#: assets/js/src/screens/courses/AllCourses.tsx:45
 msgid "Courses"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:50
+#: assets/js/src/screens/courses/AllCourses.tsx:49
 msgid "Add New Course"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:58
+#: assets/js/src/screens/courses/AllCourses.tsx:57
 msgid "Title"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:61
+#: assets/js/src/screens/courses/AllCourses.tsx:60
 msgid "Categories"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:64
+#: assets/js/src/screens/courses/AllCourses.tsx:63
 msgid "Price"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:67
+#: assets/js/src/screens/courses/AllCourses.tsx:66
 msgid "Actions"
 msgstr ""

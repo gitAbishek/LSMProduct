@@ -7,6 +7,6 @@
   ],
   "plugins": [
     "babel-plugin-styled-components",
-    ["@wordpress/babel-plugin-makepot", { "output": "languages/masteriyo.pot" }]
+    ["@wordpress/babel-plugin-makepot", { "output": "i18n/languages/masteriyo.pot" }]
   ]
 }

@@ -55,28 +55,22 @@ const AllCourses = () => {
 					<thead>
 						<tr>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								id
+								{__('Title', translationDomain)}
 							</th>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								Title
+								{__('Categories', translationDomain)}
 							</th>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								Categories
+								{__('Price', translationDomain)}
 							</th>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								Price
-							</th>
-							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								Actions
+								{__('Actions', translationDomain)}
 							</th>
 						</tr>
 					</thead>
 					<tbody className="mto-bg-white mto-divide-y mto-divide-gray-200">
 						{coursesData?.map((course: any) => (
 							<tr key={course.id}>
-								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500">
-									{course.id}
-								</td>
 								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500">
 									<Link to={`/courses/${course.id}`}>{course.name}</Link>
 								</td>

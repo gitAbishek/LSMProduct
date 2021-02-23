@@ -10,3 +10,19 @@ msgstr ""
 #: assets/js/src/screens/courses/AllCourses.tsx:50
 msgid "Add New Course"
 msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:58
+msgid "Title"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:61
+msgid "Categories"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:64
+msgid "Price"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:67
+msgid "Actions"
+msgstr ""

@@ -5,32 +5,53 @@
 ![Prerequisite](https://img.shields.io/badge/npm-%3E%3D6.9.0-blue.svg)
 [![License: GPL--2.0+](https://img.shields.io/badge/License-GPL--2.0+-yellow.svg)](#)
 
-> WordPress Learning Management System(LMS) pluign
+# Masteriyo
 
 ## Prerequisites
 
--   node >=10.0.0
--   npm >=6.9.0
+- node >=10.0.0
+- npm >=6.9.0
+- composer >=2.0.0
+- yarn >=1.0.1
 
-## Install
+## Local Development
+
+Clone repo to your `plugins` folder of WordPress installation
+
+```sh
+git clone https://github.com/wpeverest/wordpress-lms.git
+```
+
+Make sure you have `node`, `yarn` and `composer` installed. Install packages.
+
+Note: Use `yarn` instead of `npm` to generate only one lock file.
 
 ```sh
 yarn install
-composer install
+composer update
 ```
 
-## Usage
+Once successfully installed you can run Local Development server using. This will open Webpack development server.
 
 ```sh
 yarn start
-docker-compose up -d
 ```
+
+## Runnig Masteriyo on Dashboard
+
+We can't run development server on WordPress Dashboard. We need to build our app first
+
+```sh
+yarn build
+```
+
+Now you can use Masteriyo from WordPress Dashboard
 
 ## Author
 
 👤 **Themegrill**
 
--   Website: https://themegrill.com
+- Website: https://themegrill.com
 
 ## Show your support
 

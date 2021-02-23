@@ -1,0 +1,12 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: assets/js/src/screens/courses/AllCourses.tsx:46
+msgid "Courses"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:50
+msgid "Add New Course"
+msgstr ""

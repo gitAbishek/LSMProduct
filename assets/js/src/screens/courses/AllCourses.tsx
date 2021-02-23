@@ -8,6 +8,8 @@ import Button from 'Components/common/Button';
 import Icon from 'Components/common/Icon';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
+import { __ } from '@wordpress/i18n';
+import { translationDomain } from 'Config/i18n';
 
 const AllCourses = () => {
 	const { data: coursesData, refetch: refectCourses } = useQuery(
@@ -40,9 +42,13 @@ const AllCourses = () => {
 
 			<MainLayout>
 				<div className="mto-flex mto-justify-between mto-mb-10">
-					<h1 className="mto-text-xl mto-m-0 mto-font-medium">Courses</h1>
+					<h1 className="mto-text-xl mto-m-0 mto-font-medium">
+						{__('Courses', translationDomain)}
+					</h1>
 					<Button appearance="primary">
-						<Link to="/courses/add-new-course">Add New Course</Link>
+						<Link to="/courses/add-new-course">
+							{__('Add New Course', translationDomain)}
+						</Link>
 					</Button>
 				</div>
 				<table className="mto-min-w-full mto-divide-y mto-divide-gray-200 mto-text-gray-700">

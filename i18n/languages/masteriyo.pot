@@ -3,7 +3,100 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:49
+#: assets/js/src/screens/courses/EditCouse.tsx:72
+msgid "Course Name"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:51
+#: assets/js/src/screens/courses/EditCouse.tsx:74
+msgid "Your Course Name"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:57
+#: assets/js/src/screens/courses/EditCouse.tsx:81
+msgid "Course Description"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:59
+#: assets/js/src/screens/courses/EditCouse.tsx:83
+msgid "Your Course Title"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:66
+#: assets/js/src/screens/courses/EditCouse.tsx:91
+msgid "Add Course"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:73
+#: assets/js/src/screens/courses/EditCouse.tsx:98
+msgid "Course Category"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:76
+#: assets/js/src/screens/courses/EditCouse.tsx:101
+msgid "Chocolate"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:77
+#: assets/js/src/screens/courses/EditCouse.tsx:102
+msgid "Strawberry"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:78
+#: assets/js/src/screens/courses/EditCouse.tsx:103
+msgid "Vanilla"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:84
+#: assets/js/src/screens/courses/EditCouse.tsx:109
+#: assets/js/src/screens/courses/EditCouse.tsx:110
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:73
+msgid "Featured Image"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:85
+#: assets/js/src/screens/courses/EditCouse.tsx:110
+#: assets/js/src/screens/courses/EditCouse.tsx:111
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:74
+msgid "Drag image or click to upload"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:87
+#: assets/js/src/screens/courses/EditCouse.tsx:112
+msgid "Remove Featured Image"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:88
+#: assets/js/src/screens/courses/EditCouse.tsx:113
+msgid "Add New"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:108
+msgid "Delete Course"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:111
+msgid ""
+"Are you sure want to delete this course. You won't be able to recover it "
+"back"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:117
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:123
+#: assets/js/src/screens/sections/components/Section.tsx:101
+msgid "Cancel"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:126
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:52
+#: assets/js/src/screens/sections/components/Lesson.tsx:48
+#: assets/js/src/screens/sections/components/Section.tsx:72
+msgid "Delete"
+msgstr ""
+
 #: assets/js/src/screens/courses/AllCourses.tsx:45
+#: assets/js/src/screens/layouts/MainToolbar.tsx:25
 msgid "Courses"
 msgstr ""
 
@@ -25,4 +118,103 @@ msgstr ""
 
 #: assets/js/src/screens/courses/AllCourses.tsx:66
 msgid "Actions"
+msgstr ""
+
+#: assets/js/src/screens/courses/EditCouse.tsx:62
+#. %s course name
+msgid "Course `%s` is successfully updated. You can keep editing."
+msgstr ""
+
+#: assets/js/src/screens/layouts/MainToolbar.tsx:28
+msgid "Course Builder"
+msgstr ""
+
+#: assets/js/src/screens/layouts/MainToolbar.tsx:31
+msgid "Settings"
+msgstr ""
+
+#: assets/js/src/screens/layouts/MainToolbar.tsx:37
+msgid "Preview"
+msgstr ""
+
+#: assets/js/src/screens/layouts/MainToolbar.tsx:38
+#: assets/js/src/screens/sections/components/Section.tsx:99
+msgid "Save"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:121
+msgid "Add New Lesson"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:63
+msgid "Lesson Name"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:64
+msgid "Your topic title"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:68
+msgid "Description"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:69
+msgid "Your course description"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:79
+msgid "Video Source"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:82
+msgid "Select Video Source"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:83
+msgid "Youtube"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:84
+msgid "Vimeo"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:85
+msgid "Custom"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:92
+msgid "Video URL"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:99
+msgid "Video Playback Time"
+msgstr ""
+
+#: assets/js/src/screens/sections/SectionBuilder.tsx:168
+msgid "Add New Section"
+msgstr ""
+
+#: assets/js/src/screens/sections/components/Lesson.tsx:38
+#: assets/js/src/screens/sections/components/Section.tsx:68
+msgid "Edit"
+msgstr ""
+
+#: assets/js/src/screens/sections/components/Section.tsx:118
+msgid "Add New Content"
+msgstr ""
+
+#: assets/js/src/screens/sections/components/Section.tsx:86
+msgid "Section Name"
+msgstr ""
+
+#: assets/js/src/screens/sections/components/Section.tsx:87
+msgid "Your Section Name"
+msgstr ""
+
+#: assets/js/src/screens/sections/components/Section.tsx:90
+msgid "Section Description"
+msgstr ""
+
+#: assets/js/src/screens/sections/components/Section.tsx:91
+msgid "short summary"
 msgstr ""

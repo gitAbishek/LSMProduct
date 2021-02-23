@@ -22,8 +22,8 @@ axios.interceptors.request.use(async function (config) {
 	if (isDevelopment()) {
 		config.auth = {
 			...config.auth,
-			username: 'sethstha',
-			password: 'Password@123',
+			username: process.env.username || '',
+			password: process.env.password || '',
 		};
 	}
 	return config;

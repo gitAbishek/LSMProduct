@@ -31,6 +31,9 @@ yarn install
 composer update
 ```
 
+This step is only necessary in development mode, make a copy of .env.example as .env
+Set the administrator username and password, and set the base wp-json URL.
+
 Once successfully installed you can run Local Development server using. This will open Webpack development server.
 
 ```sh

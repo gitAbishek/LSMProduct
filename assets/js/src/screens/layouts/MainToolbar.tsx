@@ -10,6 +10,7 @@ import LogoImg from '../../../../img/logo.png';
 import React from 'react';
 import colors from 'Config/colors';
 import styled from 'styled-components';
+import { __ } from '@wordpress/i18n';
 
 const MainToolbar = () => {
 	return (
@@ -21,20 +22,20 @@ const MainToolbar = () => {
 					</LogoContainer>
 					<Menu>
 						<MenuItem to="/courses" icon={<Book />}>
-							Courses
+							{__( 'Courses', 'masteriyo' )}
 						</MenuItem>
 						<MenuItem to="/courses/add-new-course" icon={<Edit />}>
-							Course Builder
+							{__( 'Course Builder', 'masteriyo' )}
 						</MenuItem>
 						<MenuItem to="/settings" icon={<Cog />}>
-							Settings
+							{__( 'Settings', 'masteriyo' )}
 						</MenuItem>
 					</Menu>
 				</HeaderLeftContent>
 				<HeaderRightContent>
 					<HeaderActions>
-						<Button icon={<Show />}>Preview</Button>
-						<Button appearance="primary">Save</Button>
+						<Button icon={<Show />}>{__( 'Preview', 'masteriyo' )}</Button>
+						<Button appearance="primary">{__( 'Save', 'masteriyo' )}</Button>
 					</HeaderActions>
 				</HeaderRightContent>
 			</ContainerFluid>

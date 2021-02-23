@@ -15,6 +15,7 @@ import FlexRow from 'Components/common/FlexRow';
 import Icon from 'Components/common/Icon';
 import OptionButton from 'Components/common/OptionButton';
 import React from 'react';
+import { __ } from '@wordpress/i18n';
 
 interface Props {
 	id: number;
@@ -34,7 +35,7 @@ const Lesson: React.FC<Props> = (props) => {
 				</FlexRow>
 				<FlexRow>
 					<ActionContainer>
-						<Button>Edit</Button>
+						<Button>{__( 'Edit', 'masteriyo' )}</Button>
 						<Dropdown
 							trigger={'click'}
 							placement={'bottomRight'}
@@ -44,7 +45,7 @@ const Lesson: React.FC<Props> = (props) => {
 									<ul>
 										<li>
 											<Icon icon={<Trash />} />
-											Delete
+											{__( 'Delete', 'masteriyo' )}
 										</li>
 									</ul>
 								</DropdownOverlay>

@@ -105,17 +105,16 @@ const AllCourses = () => {
 									</div>
 									<div>
 										<h3 className="mto-ml-4 mto-text-xl mto-mb-3">
-											Delete Course {removableCourse.name}
+											{__( 'Delete Course', 'masteriyo' )} {removableCourse.name}
 										</h3>
 										<p className="mto-ml-4 mto-text-md mto-text-gray-500">
-											Are you sure want to delete this course. You won't be able
-											to recover it back
+											{__( "Are you sure want to delete this course. You won't be able to recover it back", 'masteriyo' )}
 										</p>
 									</div>
 								</div>
 								<footer className="mto-px-8 mto-py-4 mto-flex mto-justify-end mto-bg-gray-100">
 									<Button onClick={() => setShowDeleteModal(false)}>
-										Cancel
+										{__( 'Cancel', 'masteriyo' )}
 									</Button>
 									<Button
 										appearance="secondary"
@@ -124,7 +123,7 @@ const AllCourses = () => {
 											deleteMutation.mutate(removableCourse.id);
 											setShowDeleteModal(false);
 										}}>
-										Delete
+										{__( 'Delete', 'masteriyo' )}
 									</Button>
 								</footer>
 							</div>

@@ -17,6 +17,7 @@ import Icon from 'Components/common/Icon';
 import OptionButton from 'Components/common/OptionButton';
 import PropTypes from 'prop-types';
 import { React } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 const Quiz = (props) => {
 	const { id, title, index } = props;
@@ -35,7 +36,7 @@ const Quiz = (props) => {
 						</FlexRow>
 						<FlexRow>
 							<ActionContainer>
-								<Button>Edit</Button>
+								<Button>{__( 'Edit', 'masteriyo' )}</Button>
 								<Dropdown
 									trigger={'click'}
 									placement={'bottomRight'}
@@ -45,7 +46,7 @@ const Quiz = (props) => {
 											<ul>
 												<li>
 													<Icon icon={<Trash />} />
-													Delete
+													{__( 'Delete', 'masteriyo' )}
 												</li>
 											</ul>
 										</DropdownOverlay>

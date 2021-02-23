@@ -8,6 +8,7 @@ import Section from './components/Section';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { __ } from '@wordpress/i18n';
 
 // const dummyData = {
 // 	contents: {
@@ -164,7 +165,7 @@ const SectionBuilder = () => {
 						)}
 					</Droppable> */}
 				<AddSectionContainer>
-					<AddNewButton>Add New Section</AddNewButton>
+					<AddNewButton>{__( 'Add New Section', 'masteriyo' )}</AddNewButton>
 				</AddSectionContainer>
 				{/* </DragDropContext> */}
 			</Container>

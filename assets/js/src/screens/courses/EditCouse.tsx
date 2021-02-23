@@ -20,6 +20,7 @@ import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
+import { sprintf, __ } from '@wordpress/i18n';
 
 const EditCourse = () => {
 	interface Inputs {
@@ -55,26 +56,31 @@ const EditCourse = () => {
 			<MainLayout>
 				{isUpdated && (
 					<div className="mto-p-4 mto-bg-green-100 mto-rounded-sm mto-mb-10 mto-text-green-700">
-						Course `<strong>{courseData?.name}</strong>` is successfully
-						updated. You can keep editing.
+						{
+							sprintf(
+								/* translators: %s course name */
+								__( 'Course `%s` is successfully updated. You can keep editing.', 'masteriyo' ),
+								courseData?.name
+							)
+						}
 					</div>
 				)}
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<CourseContainer>
 						<CourseLeftContainer>
 							<FormGroup>
-								<Label htmlFor="">Course Name</Label>
+								<Label htmlFor="">{__( 'Course Name', 'masteriyo' )}</Label>
 								<Input
-									placeholder="Your Course Name"
+									placeholder={__( 'Your Course Name', 'masteriyo' )}
 									ref={register({ required: true })}
 									name="name"
 									defaultValue={courseData?.name}></Input>
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">Course Description</Label>
+								<Label htmlFor="">{__( 'Course Description', 'masteriyo' )}</Label>
 								<Textarea
-									placeholder="Your Course Title"
+									placeholder={__( 'Your Course Title', 'masteriyo' )}
 									rows={5}
 									ref={register}
 									name="description"
@@ -82,29 +88,29 @@ const EditCourse = () => {
 							</FormGroup>
 							<FlexRow>
 								<Button appearance="primary" type="submit">
-									Add Course
+									{__( 'Add Course', 'masteriyo' )}
 								</Button>
 							</FlexRow>
 						</CourseLeftContainer>
 
 						<CourseRightContainer>
 							<FormGroup>
-								<Label htmlFor="">Course Category</Label>
+								<Label htmlFor="">{__( 'Course Category', 'masteriyo' )}</Label>
 								<Select
 									options={[
-										{ value: 'chocolate', label: 'Chocolate' },
-										{ value: 'strawberry', label: 'Strawberry' },
-										{ value: 'vanilla', label: 'Vanilla' },
+										{ value: 'chocolate', label: __( 'Chocolate', 'masteriyo' ) },
+										{ value: 'strawberry', label: __( 'Strawberry', 'masteriyo' ) },
+										{ value: 'vanilla', label: __( 'Vanilla', 'masteriyo' ) },
 									]}
 								/>
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">Featured Image</Label>
-								<ImageUpload title="Drag image or click to upload" />
+								<Label htmlFor="">{__( 'Featured Image', 'masteriyo' )}</Label>
+								<ImageUpload title={__( 'Drag image or click to upload', 'masteriyo' )} />
 								<FeaturedImageActions>
-									<Button>Remove Featured Image</Button>
-									<Button appearance="primary">Add New</Button>
+									<Button>{__( 'Remove Featured Image', 'masteriyo' )}</Button>
+									<Button appearance="primary">{__( 'Add New', 'masteriyo' )}</Button>
 								</FeaturedImageActions>
 							</FormGroup>
 						</CourseRightContainer>

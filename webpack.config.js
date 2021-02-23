@@ -108,7 +108,7 @@ const config = {
 	},
 
 	devServer: {
-		port: 4000,
+		port: 3000,
 	},
 
 	devtool: isDevelopment ? 'cheap-module-source-map' : false,

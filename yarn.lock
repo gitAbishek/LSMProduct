@@ -1862,6 +1862,19 @@
     webpack "^4.8.3"
     webpack-sources "^1.3.0"
 
+"@wordpress/element@2.19.1":
+  version "2.19.1"
+  resolved "https://registry.yarnpkg.com/@wordpress/element/-/element-2.19.1.tgz#1f66a4cc39d45db3bc1b928e4aaf3885bdd29e32"
+  integrity sha512-mjgFYJzSCNlQBFXvVP806pJiKh9nSIB+NeAVUVwMOntek4aCdKk+t4aTU2cRmktZI2QRySmy+lyDrY2aVkwdyg==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@types/react" "^16.9.0"
+    "@types/react-dom" "^16.9.0"
+    "@wordpress/escape-html" "^1.11.1"
+    lodash "^4.17.19"
+    react "^16.13.1"
+    react-dom "^16.13.1"
+
 "@wordpress/element@^2.18.0":
   version "2.18.0"
   resolved "https://registry.yarnpkg.com/@wordpress/element/-/element-2.18.0.tgz#6ccdaf05f49831058103ec111ab4744df030c335"
@@ -1881,6 +1894,13 @@
   integrity sha512-peG+Ypnw8L3YiUWSe/3Nmyzlaoqqbn5JaBaLpL0o6pBxFvGwKr00fFJoi+Yq2yZ3LEFDrHBHlVYAB6A2aYIbew==
   dependencies:
     "@babel/runtime" "^7.11.2"
+
+"@wordpress/escape-html@^1.11.1":
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/@wordpress/escape-html/-/escape-html-1.11.1.tgz#831b54ad20d9cf55f1b6d97adfdc0dd1ba024913"
+  integrity sha512-kthpdAijVY1tSGnSy1kuKM5+L/u7uxzSBNDusqKcfeSgczfHlfKwkkA82SMHzsSR/WicXDaWBfcEMqfb4PENiQ==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
 
 "@wordpress/hooks@^2.11.1":
   version "2.11.1"

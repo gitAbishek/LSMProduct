@@ -1,6 +1,6 @@
 import { BaseLine } from 'Config/defaultStyle';
 import Icon from 'Components/common/Icon';
-import { Plus } from 'Icons/index';
+import { Plus } from '../../assets/icons';
 import PropTypes from 'prop-types';
 import React from 'react';
 import colors from 'Config/colors';

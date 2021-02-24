@@ -4,7 +4,7 @@ import {
 	CourseRightContainer,
 	FeaturedImageActions,
 } from './AddNewCourse';
-import React, { Fragment, createElement, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import { fetchCourse, updateCourse } from '../../utils/api';
 import { useMutation, useQuery } from 'react-query';
@@ -19,7 +19,6 @@ import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
-import createInterpolateElement from '../../helpers/createInterpolateElements';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
@@ -57,8 +56,8 @@ const EditCourse = () => {
 			<MainLayout>
 				{isUpdated && (
 					<div className="mto-p-4 mto-bg-green-100 mto-rounded-sm mto-mb-10 mto-text-green-700">
-						{createInterpolateElement(
-							sprintf(
+						{
+							(sprintf(
 								/* translators: %s course name */
 								__(
 									'Course `<strong>%s</strong>` is successfully updated. You can keep editing.',
@@ -66,8 +65,8 @@ const EditCourse = () => {
 								),
 								courseData?.name
 							),
-							{ strong: <strong /> }
-						)}
+							{ strong: <strong /> })
+						}
 					</div>
 				)}
 				<form onSubmit={handleSubmit(onSubmit)}>

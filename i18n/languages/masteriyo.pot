@@ -50,20 +50,12 @@ msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:84
 #: assets/js/src/screens/courses/EditCouse.tsx:109
-#: assets/js/src/screens/courses/EditCouse.tsx:112
-#: assets/js/src/screens/courses/EditCouse.tsx:111
-#: assets/js/src/screens/courses/EditCouse.tsx:119
-#: assets/js/src/screens/courses/EditCouse.tsx:118
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:73
 msgid "Featured Image"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:85
 #: assets/js/src/screens/courses/EditCouse.tsx:111
-#: assets/js/src/screens/courses/EditCouse.tsx:114
-#: assets/js/src/screens/courses/EditCouse.tsx:113
-#: assets/js/src/screens/courses/EditCouse.tsx:121
-#: assets/js/src/screens/courses/EditCouse.tsx:120
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:74
 msgid "Drag image or click to upload"
 msgstr ""

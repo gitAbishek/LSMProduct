@@ -6,7 +6,6 @@
     "@dr.pogodin/babel-preset-svgr"
   ],
   "plugins": [
-    "babel-plugin-styled-components",
-    ["@wordpress/babel-plugin-makepot", { "output": "i18n/languages/masteriyo.pot" }]
+    "babel-plugin-styled-components"
   ]
 }

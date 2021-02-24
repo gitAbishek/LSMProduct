@@ -86,6 +86,8 @@ class Masteriyo extends Container {
 		RegisterPostTypes::instance()->register();
 		RegisterTaxonomies::register();
 
+		$this->load_text_domain();
+
 		do_action( 'masteriyo_init' );
 	}
 
@@ -127,6 +129,17 @@ class Masteriyo extends Container {
 			"{$namespace}\\QuestionServiceProvider",
 			"{$namespace}\\ScriptStyleServiceProvider",
 		) );
+	}
+
+	/**
+	 * Load plugin textdomain.
+	 */
+	private function load_text_domain() {
+		load_plugin_textdomain(
+			'masteriyo',
+			false,
+			dirname(plugin_basename( Constants::get('MASTERIYO_PLUGIN_FILE') ) ) . '/' . Constants::get('MASTERIYO_PLUGIN_REL_LANGUAGES_PATH')
+		);
 	}
 }
 

@@ -359,6 +359,8 @@ class ScriptStyle {
 				$this->enqueue_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
 			}
 		}
+
+		wp_set_script_translations( 'masteriyo-admin', 'masteriyo', Constants::get('MASTERIYO_LANGUAGES') );
 	}
 
 	/**

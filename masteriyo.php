@@ -7,7 +7,7 @@
  * Author URI:      https://example.com
  * Version:         0.1.0
  * Text Domain:     masteriyo
- * Domain Path:     /languages
+ * Domain Path:     /i18n/languages
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -24,6 +24,7 @@ define( 'MASTERIYO_PLUGIN_DIR', dirname( __FILE__ ) );
 define( 'MASTERIYO_ASSETS', dirname( __FILE__ ) . '/assets' );
 define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
 define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
+define( 'MASTERIYO_PLUGIN_REL_LANGUAGES_PATH', 'i18n/languages' );
 
 /**
  * Include the autoloader.

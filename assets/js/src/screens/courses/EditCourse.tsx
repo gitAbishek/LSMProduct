@@ -85,7 +85,7 @@ const EditCourse = () => {
 							</FormGroup>
 							<FlexRow>
 								<Button appearance="primary" type="submit">
-									{__('Add Course', 'masteriyo')}
+									{__('Update', 'masteriyo')}
 								</Button>
 							</FlexRow>
 						</CourseLeftContainer>
@@ -113,7 +113,7 @@ const EditCourse = () => {
 								<FeaturedImageActions>
 									<Button>{__('Remove Featured Image', 'masteriyo')}</Button>
 									<Button appearance="primary">
-										{__('Add New', 'masteriyo')}
+										{__('Add New Image', 'masteriyo')}
 									</Button>
 								</FeaturedImageActions>
 							</FormGroup>

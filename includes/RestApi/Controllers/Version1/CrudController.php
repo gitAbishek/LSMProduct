@@ -500,7 +500,7 @@ abstract class CrudController extends RestController {
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function delete_item( $request ) {
-		$force  = (bool) $request['force'];
+		$force  = isset( $request['force'] ) ? (bool) $request['force'] : true;
 		$object = $this->get_object( (int) $request['id'] );
 		$result = false;
 

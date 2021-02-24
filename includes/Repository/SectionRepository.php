@@ -185,28 +185,14 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 		$id          = $section->get_id();
 		$object_type = $section->get_object_type();
 
-		$args = array_merge(
-			array(
-				'force_delete' => false,
-			),
-			$args
-		);
-
 		if ( ! $id ) {
 			return;
 		}
 
-		if ( $args['force_delete'] ) {
-			do_action( 'masteriyo_before_delete_' . $object_type, $id, $section );
-			wp_delete_post( $id );
-			$section->set_id( 0 );
-			do_action( 'masteriyo_after_delete_' . $object_type, $id, $section );
-		} else {
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $section );
-			wp_trash_post( $id );
-			$section->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $section );
-		}
+		do_action( 'masteriyo_before_delete_' . $object_type, $id, $section );
+		wp_delete_post( $id );
+		$section->set_id( 0 );
+		do_action( 'masteriyo_after_delete_' . $object_type, $id, $section );
 	}
 
 	/**

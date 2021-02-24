@@ -194,25 +194,14 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 		$id          = $quiz->get_id();
 		$object_type = $quiz->get_object_type();
 
-		$args = array_merge( array(
-			'force_delete' => false,
-		), $args );
-
 		if ( ! $id ) {
 			return;
 		}
 
-		if ( $args['force_delete'] ) {
-			do_action( 'masteriyo_before_delete_' . $object_type, $id, $quiz );
-			wp_delete_post( $id );
-			$quiz->set_id( 0 );
-			do_action( 'masteriyo_after_delete_' . $object_type, $id, $quiz );
-		} else {
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $quiz );
-			wp_trash_post( $id );
-			$quiz->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $quiz );
-		}
+		do_action( 'masteriyo_before_delete_' . $object_type, $id, $quiz );
+		wp_delete_post( $id );
+		$quiz->set_id( 0 );
+		do_action( 'masteriyo_after_delete_' . $object_type, $id, $quiz );
 	}
 
 	/**

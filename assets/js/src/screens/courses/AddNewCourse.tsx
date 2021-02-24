@@ -17,6 +17,7 @@ import { addCourse } from '../../utils/api';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from 'react-query';
+import { __ } from '@wordpress/i18n';
 
 const AddNewCourse = () => {
 	interface Inputs {
@@ -45,46 +46,46 @@ const AddNewCourse = () => {
 					<CourseContainer>
 						<CourseLeftContainer>
 							<FormGroup>
-								<Label htmlFor="">Course Name</Label>
+								<Label htmlFor="">{__( 'Course Name', 'masteriyo' ) }</Label>
 								<Input
-									placeholder="Your Course Name"
+									placeholder={__( 'Your Course Name', 'masteriyo' )}
 									ref={register({ required: true })}
 									name="name"></Input>
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">Course Description</Label>
+								<Label htmlFor="">{__( 'Course Description', 'masteriyo' )}</Label>
 								<Textarea
-									placeholder="Your Course Title"
+									placeholder={__( 'Your Course Title', 'masteriyo' )}
 									rows={5}
 									ref={register}
 									name="description"></Textarea>
 							</FormGroup>
 							<FlexRow>
 								<Button appearance="primary" type="submit">
-									Add Course
+									{__( 'Add Course', 'masteriyo' )}
 								</Button>
 							</FlexRow>
 						</CourseLeftContainer>
 
 						<CourseRightContainer>
 							<FormGroup>
-								<Label htmlFor="">Course Category</Label>
+								<Label htmlFor="">{__( 'Course Category', 'masteriyo' )}</Label>
 								<Select
 									options={[
-										{ value: 'chocolate', label: 'Chocolate' },
-										{ value: 'strawberry', label: 'Strawberry' },
-										{ value: 'vanilla', label: 'Vanilla' },
+										{ value: 'chocolate', label: __( 'Chocolate', 'masteriyo' ) },
+										{ value: 'strawberry', label: __( 'Strawberry', 'masteriyo' ) },
+										{ value: 'vanilla', label: __( 'Vanilla', 'masteriyo' ) },
 									]}
 								/>
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">Featured Image</Label>
-								<ImageUpload title="Drag image or click to upload" />
+								<Label htmlFor="">{__( 'Featured Image', 'masteriyo' )}</Label>
+								<ImageUpload title={__( 'Drag image or click to upload', 'masteriyo' )} />
 								<FeaturedImageActions>
-									<Button>Remove Featured Image</Button>
-									<Button appearance="primary">Add New</Button>
+									<Button>{__( 'Remove Featured Image', 'masteriyo' )}</Button>
+									<Button appearance="primary">{__( 'Add New', 'masteriyo' )}</Button>
 								</FeaturedImageActions>
 							</FormGroup>
 						</CourseRightContainer>

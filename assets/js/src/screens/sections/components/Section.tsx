@@ -24,6 +24,7 @@ import colors from 'Config/colors';
 import { fetchLessons } from '../../../utils/api';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
+import { __ } from '@wordpress/i18n';
 
 interface Props {
 	id: number;
@@ -64,11 +65,11 @@ const Section: React.FC<Props> = (props) => {
 								<ul>
 									<li onClick={() => setMode('editing')}>
 										<Icon icon={<Edit />} />
-										Edit
+										{__( 'Edit', 'masteriyo' )}
 									</li>
 									<li>
 										<Icon icon={<Trash />} />
-										Delete
+										{__( 'Delete', 'masteriyo' )}
 									</li>
 								</ul>
 							</DropdownOverlay>
@@ -82,12 +83,12 @@ const Section: React.FC<Props> = (props) => {
 					<EditSection>
 						<form action="">
 							<FormGroup>
-								<Label htmlFor="">Section Name</Label>
-								<Input placeholder="Your Section Name"></Input>
+								<Label htmlFor="">{__( 'Section Name', 'masteriyo' )}</Label>
+								<Input placeholder={__( 'Your Section Name', 'masteriyo' )}></Input>
 							</FormGroup>
 							<FormGroup>
-								<Label htmlFor="">Section Description</Label>
-								<Textarea rows={4} placeholder="short summary" />
+								<Label htmlFor="">{__( 'Section Description', 'masteriyo' )}</Label>
+								<Textarea rows={4} placeholder={__( 'short summary', 'masteriyo' )} />
 							</FormGroup>
 						</form>
 					</EditSection>
@@ -95,9 +96,9 @@ const Section: React.FC<Props> = (props) => {
 					<SectionFooter>
 						<FlexRow>
 							<Button appearance="primary" onClick={() => setMode('normal')}>
-								Save
+								{__( 'Save', 'masteriyo' )}
 							</Button>
-							<Button style={{ marginLeft: BaseLine * 2 }}>Cancel</Button>
+							<Button style={{ marginLeft: BaseLine * 2 }}>{__( 'Cancel', 'masteriyo' )}</Button>
 						</FlexRow>
 					</SectionFooter>
 				</>
@@ -114,7 +115,7 @@ const Section: React.FC<Props> = (props) => {
 				))}
 				<AddNewButton>
 					<NavLink to={`/courses/${courseId}/add-new-lesson`}>
-						Add New Content
+						{__( 'Add New Content', 'masteriyo' )}
 					</NavLink>
 				</AddNewButton>
 			</ContentDroppableArea>

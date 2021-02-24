@@ -8,6 +8,7 @@ import Button from 'Components/common/Button';
 import Icon from 'Components/common/Icon';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
+import { __ } from '@wordpress/i18n';
 
 const AllCourses = () => {
 	const { data: coursesData, refetch: refectCourses } = useQuery(
@@ -40,37 +41,35 @@ const AllCourses = () => {
 
 			<MainLayout>
 				<div className="mto-flex mto-justify-between mto-mb-10">
-					<h1 className="mto-text-xl mto-m-0 mto-font-medium">Courses</h1>
+					<h1 className="mto-text-xl mto-m-0 mto-font-medium">
+						{__('Courses', 'masteriyo')}
+					</h1>
 					<Button appearance="primary">
-						<Link to="/courses/add-new-course">Add New Course</Link>
+						<Link to="/courses/add-new-course">
+							{__('Add New Course', 'masteriyo')}
+						</Link>
 					</Button>
 				</div>
 				<table className="mto-min-w-full mto-divide-y mto-divide-gray-200 mto-text-gray-700">
 					<thead>
 						<tr>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								id
+								{__('Title', 'masteriyo')}
 							</th>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								Title
+								{__('Categories', 'masteriyo')}
 							</th>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								Categories
+								{__('Price', 'masteriyo')}
 							</th>
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								Price
-							</th>
-							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								Actions
+								{__('Actions', 'masteriyo')}
 							</th>
 						</tr>
 					</thead>
 					<tbody className="mto-bg-white mto-divide-y mto-divide-gray-200">
 						{coursesData?.map((course: any) => (
 							<tr key={course.id}>
-								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500">
-									{course.id}
-								</td>
 								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500">
 									<Link to={`/courses/${course.id}`}>{course.name}</Link>
 								</td>
@@ -106,17 +105,16 @@ const AllCourses = () => {
 									</div>
 									<div>
 										<h3 className="mto-ml-4 mto-text-xl mto-mb-3">
-											Delete Course {removableCourse.name}
+											{__( 'Delete Course', 'masteriyo' )} {removableCourse.name}
 										</h3>
 										<p className="mto-ml-4 mto-text-md mto-text-gray-500">
-											Are you sure want to delete this course. You won't be able
-											to recover it back
+											{__( "Are you sure want to delete this course. You won't be able to recover it back", 'masteriyo' )}
 										</p>
 									</div>
 								</div>
 								<footer className="mto-px-8 mto-py-4 mto-flex mto-justify-end mto-bg-gray-100">
 									<Button onClick={() => setShowDeleteModal(false)}>
-										Cancel
+										{__( 'Cancel', 'masteriyo' )}
 									</Button>
 									<Button
 										appearance="secondary"
@@ -125,7 +123,7 @@ const AllCourses = () => {
 											deleteMutation.mutate(removableCourse.id);
 											setShowDeleteModal(false);
 										}}>
-										Delete
+										{__( 'Delete', 'masteriyo' )}
 									</Button>
 								</footer>
 							</div>

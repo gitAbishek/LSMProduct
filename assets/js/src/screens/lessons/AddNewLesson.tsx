@@ -23,6 +23,7 @@ import Select from 'Components/common/Select';
 import Slider from 'rc-slider';
 import Textarea from 'Components/common/Textarea';
 import styled from 'styled-components';
+import { __ } from '@wordpress/i18n';
 
 interface Props {}
 
@@ -39,7 +40,7 @@ const AddNewLesson: React.FC<Props> = (props) => {
 			<MainLayout>
 				<AddNewLessonContainer>
 					<SectionHeader>
-						<SectionTitle>Add New Lesson</SectionTitle>
+						<SectionTitle>{__( 'Add New Lesson', 'masteriyo' )}</SectionTitle>
 						<SectionAction>
 							<Dropdown
 								trigger={'click'}
@@ -48,7 +49,7 @@ const AddNewLesson: React.FC<Props> = (props) => {
 								overlay={
 									<DropdownOverlay>
 										<ul>
-											<li>Delete</li>
+											<li>{__( 'Delete', 'masteriyo' )}</li>
 										</ul>
 									</DropdownOverlay>
 								}>
@@ -59,43 +60,43 @@ const AddNewLesson: React.FC<Props> = (props) => {
 					<SectionBody>
 						<form action="">
 							<FormGroup>
-								<Label htmlFor="">Lesson Name</Label>
-								<Input placeholder="Your topic title" />
+								<Label htmlFor="">{__( 'Lesson Name', 'masteriyo' )}</Label>
+								<Input placeholder={__( 'Your topic title', 'masteriyo' )} />
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">Description</Label>
-								<Textarea placeholder="Your course description" rows={5} />
+								<Label htmlFor="">{__( 'Description', 'masteriyo' )}</Label>
+								<Textarea placeholder={__( 'Your course description', 'masteriyo' )} rows={5} />
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">Featured Image</Label>
-								<ImageUpload title="Drag image or click to upload" />
+								<Label htmlFor="">{__( 'Featured Image', 'masteriyo' )}</Label>
+								<ImageUpload title={__( 'Drag image or click to upload', 'masteriyo' )} />
 							</FormGroup>
 							<Row>
 								<Col>
 									<FormGroup>
-										<Label htmlFor="">Video Source</Label>
+										<Label htmlFor="">{__( 'Video Source', 'masteriyo' )}</Label>
 										<Select
 											options={[
-												{ value: 'source', label: 'Select Video Source' },
-												{ value: 'youtube', label: 'Youtube' },
-												{ value: 'vimeo', label: 'Vimeo' },
-												{ value: 'custom', label: 'Custom' },
+												{ value: 'source', label: __( 'Select Video Source', 'masteriyo' ) },
+												{ value: 'youtube', label: __( 'Youtube', 'masteriyo' ) },
+												{ value: 'vimeo', label: __( 'Vimeo', 'masteriyo' ) },
+												{ value: 'custom', label: __( 'Custom', 'masteriyo' ) },
 											]}
 										/>
 									</FormGroup>
 								</Col>
 								<Col>
 									<FormGroup>
-										<Label htmlFor="">Video URL</Label>
+										<Label htmlFor="">{__( 'Video URL', 'masteriyo' )}</Label>
 										<Input placeholder="video url" />
 									</FormGroup>
 								</Col>
 							</Row>
 
 							<FormGroup>
-								<Label htmlFor="">Video Playback Time</Label>
+								<Label htmlFor="">{__( 'Video Playback Time', 'masteriyo' )}</Label>
 								<Row align="center">
 									<Col sm={10}>
 										<Slider
@@ -117,9 +118,9 @@ const AddNewLesson: React.FC<Props> = (props) => {
 							<SectionFooter>
 								<FlexRow>
 									<Button appearance="primary" style={{ marginRight: 16 }}>
-										Add New Lesson
+										{__( 'Add New Lesson', 'masteriyo' )}
 									</Button>
-									<Button>Cancel</Button>
+									<Button>{__( 'Cancel', 'masteriyo' )}</Button>
 								</FlexRow>
 							</SectionFooter>
 						</form>

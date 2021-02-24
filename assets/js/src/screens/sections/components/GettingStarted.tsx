@@ -6,23 +6,24 @@ import React from 'react';
 import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
 import styled from 'styled-components';
+import { __ } from '@wordpress/i18n';
 
 const GettingStarted = () => {
 	return (
 		<GettingStartedContainer>
-			<GettingStartedTitle>Add your content</GettingStartedTitle>
+			<GettingStartedTitle>{__( 'Add your content', 'masteriyo' )}</GettingStartedTitle>
 			<GettingStartedInfo>
-				Upload your content, quiz, assignment
+				{__( 'Upload your content, quiz, assignment', 'masteriyo' )}
 			</GettingStartedInfo>
 			<ActionButtons>
-				<Button appearance="primary">Add Section</Button>
-				<Button appearance="primary">Add Assignment</Button>
-				<Button appearance="primary">Add Quiz</Button>
+				<Button appearance="primary">{__( 'Add Section', 'masteriyo' )}</Button>
+				<Button appearance="primary">{__( 'Add Assignment', 'masteriyo' )}</Button>
+				<Button appearance="primary">{__( 'Add Quiz', 'masteriyo' )}</Button>
 			</ActionButtons>
 			<GettingStartedInfo>
-				Not sure how to get started? <br />
-				Learn about it in our{' '}
-				<a href="themegrill.com/masteriyo/getting-started">Documentation</a>
+				{__( 'Not sure how to get started?', 'masteriyo' )} <br />
+				{__( 'Learn about it in our', 'masteriyo' )}{' '}
+				<a href="themegrill.com/masteriyo/getting-started">{__( 'Documentation', 'masteriyo' )}</a>
 			</GettingStartedInfo>
 		</GettingStartedContainer>
 	);

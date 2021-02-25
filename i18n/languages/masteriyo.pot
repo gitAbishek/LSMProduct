@@ -82,14 +82,12 @@ msgstr ""
 
 #: assets/js/src/screens/courses/AllCourses.tsx:120
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:132
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:123
 #: assets/js/src/screens/sections/components/Section.tsx:101
 msgid "Cancel"
 msgstr ""
 
 #: assets/js/src/screens/courses/AllCourses.tsx:129
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:51
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:52
 #: assets/js/src/screens/sections/components/Lesson.tsx:48
 #: assets/js/src/screens/sections/components/Section.tsx:72
 msgid "Delete"
@@ -138,8 +136,6 @@ msgid "Preview"
 msgstr ""
 
 #: assets/js/src/screens/layouts/MainToolbar.tsx:38
-#: assets/js/src/screens/layouts/MainToolbar.tsx:37
-#: assets/js/src/screens/layouts/MainToolbar.tsx:39
 #: assets/js/src/screens/sections/components/Section.tsx:99
 msgid "Save"
 msgstr ""

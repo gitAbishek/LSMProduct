@@ -5,7 +5,6 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	icon?: any;
 	appearance?: 'default' | 'primary' | 'accent';
 	size?: 'small' | 'medium' | 'large';
-	className?: string;
 }
 
 const Button: React.ForwardRefRenderFunction<HTMLButtonElement, Props> = (

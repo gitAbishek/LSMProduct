@@ -4,121 +4,69 @@ msgstr ""
 "X-Generator: babel-plugin-makepot\n"
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:49
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:67
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:76
->>>>>>> Create button component using tailwind
 msgid "Course Name"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:51
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:69
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:78
->>>>>>> Create button component using tailwind
 msgid "Your Course Name"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:57
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:77
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:86
->>>>>>> Create button component using tailwind
 msgid "Course Description"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:59
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:80
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:89
->>>>>>> Create button component using tailwind
 msgid "Your Course Title"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:66
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:88
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:97
->>>>>>> Create button component using tailwind
 msgid "Add Course"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:73
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:95
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:104
->>>>>>> Create button component using tailwind
 msgid "Course Category"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:76
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:98
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:107
->>>>>>> Create button component using tailwind
 msgid "Chocolate"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:77
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:101
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:110
->>>>>>> Create button component using tailwind
 msgid "Strawberry"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:78
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:103
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:112
->>>>>>> Create button component using tailwind
 msgid "Vanilla"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:84
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:109
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:118
->>>>>>> Create button component using tailwind
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:73
 msgid "Featured Image"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:85
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:111
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:120
->>>>>>> Create button component using tailwind
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:74
 msgid "Drag image or click to upload"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:87
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:114
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:123
->>>>>>> Create button component using tailwind
 msgid "Remove Featured Image"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:88
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:116
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:125
->>>>>>> Create button component using tailwind
 msgid "Add New"
 msgstr ""
 
@@ -170,14 +118,9 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-<<<<<<< HEAD
-#: assets/js/src/screens/courses/EditCouse.tsx:60
-msgid " is successfully updated. You can keep editing."
-=======
 #: assets/js/src/screens/courses/EditCouse.tsx:62
 #. %s course name
 msgid "Course `<strong>%s</strong>` is successfully updated. You can keep editing."
->>>>>>> Create button component using tailwind
 msgstr ""
 
 #: assets/js/src/screens/layouts/MainToolbar.tsx:28

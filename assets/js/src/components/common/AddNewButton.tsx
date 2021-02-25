@@ -1,8 +1,8 @@
 import { BaseLine } from 'Config/defaultStyle';
 import Icon from 'Components/common/Icon';
 import { Plus } from '../../assets/icons';
-import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
 import colors from 'Config/colors';
 import fontSize from 'Config/fontSize';
 import { lighten } from 'polished';
@@ -12,15 +12,18 @@ interface Props {}
 
 const AddNewButton: React.FC<Props> = (props) => {
 	return (
-		<StyledButton {...props}>
-			<Icon icon={<Plus />} />
+		<button
+			{...props}
+			className={classNames(
+				'mto-mt-8 mto-flex mto-items-center mto-cursor-pointer mto-transition-all'
+			)}>
+			<Icon
+				icon={<Plus />}
+				className="mto-w-8 mto-h-8 mto-bg-primary mto-rounded-full mto-flex mto-justify-center mto-items-center mto-text-white"
+			/>
 			{props.children}
-		</StyledButton>
+		</button>
 	);
-};
-
-AddNewButton.propTypes = {
-	children: PropTypes.any,
 };
 
 const StyledButton = styled.button`

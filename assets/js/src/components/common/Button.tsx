@@ -10,7 +10,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	size?: 'small' | 'medium' | 'large';
 }
 
-const Button: React.FC<Props> = (props) => {
+const Button = React.forwardRef<HTMLButtonElement, Props>((props, ref) => {
 	const { icon, layout, size, className, ...other } = props;
 	const {
 		theme: { button },
@@ -25,6 +25,6 @@ const Button: React.FC<Props> = (props) => {
 			<span>{props.children}</span>
 		</button>
 	);
-};
+});
 
 export default Button;

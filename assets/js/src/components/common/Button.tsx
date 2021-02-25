@@ -1,14 +1,17 @@
 import Icon from './Icon';
 import React from 'react';
 import classNames from 'classnames';
-interface Props extends React.ButtonHTMLAttributes<any> {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	icon?: any;
 	appearance?: 'default' | 'primary' | 'accent';
 	size?: 'small' | 'medium' | 'large';
 	className?: string;
 }
 
-const Button: React.FC<Props> = (props) => {
+const Button: React.ForwardRefRenderFunction<HTMLButtonElement, Props> = (
+	props,
+	ref
+) => {
 	const { icon, appearance, size, className } = props;
 
 	return (

@@ -9,9 +9,14 @@ const Icon: React.ForwardRefRenderFunction<HTMLElement, Props> = (
 	props,
 	ref
 ) => {
-	const { icon, className } = props;
+	const { icon, className, ...other } = props;
 	return (
-		<i className={classNames('mto-block mto-text-sm', className)}>{icon}</i>
+		<i
+			className={classNames('mto-block mto-text-sm', className)}
+			ref={ref}
+			{...other}>
+			{icon}
+		</i>
 	);
 };
 

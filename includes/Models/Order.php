@@ -58,7 +58,6 @@ class Order extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'order_status'  => null,
 		'status'        => false,
 		'total'         => 0,
 		'discount'      => 0,
@@ -112,20 +111,7 @@ class Order extends Model {
 	*/
 
 	/**
-	 * Get order order status.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_order_status( $context = 'view' ) {
-		return $this->get_prop( 'order_status', $context );
-	}
-
-	/**
-	 * Get post status.
+	 * Get order status.
 	 *
 	 * @since  0.1.0
 	 *
@@ -248,22 +234,11 @@ class Order extends Model {
 	*/
 
 	/**
-	 * Set order order status.
+	 * Set order status.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $order_status Order status.
-	 */
-	public function set_order_status( $order_status ) {
-		$this->set_prop( 'order_status', $order_status );
-	}
-
-	/**
-	 * Set post status.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $status post status.
+	 * @param string $status Order status.
 	 */
 	public function set_status( $status ) {
 		$this->set_prop( 'status', $status );

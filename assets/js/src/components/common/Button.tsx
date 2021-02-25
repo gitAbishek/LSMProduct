@@ -1,29 +1,36 @@
-import defaultStyle, { BaseLine } from 'Config/defaultStyle';
-import styled, { css } from 'styled-components';
-
 import Icon from './Icon';
 import React from 'react';
-import colors from 'Config/colors';
-import fontSize from 'Config/fontSize';
-import { lighten } from 'polished';
-
+import classNames from 'classnames';
 interface Props extends React.ButtonHTMLAttributes<any> {
 	icon?: any;
-	appearance?: 'default' | 'primary' | 'secondary';
+	appearance?: 'default' | 'primary' | 'accent';
 	size?: 'small' | 'medium' | 'large';
+	className?: string;
 }
 
 const Button: React.FC<Props> = (props) => {
-	const { icon, appearance, size } = props;
+	const { icon, appearance, size, className } = props;
+
 	return (
-		<StyledButton
-			appearance={appearance}
-			size={size}
-			className="masteriyo-button"
-			{...props}>
-			{icon && <Icon icon={icon} />}
+		<button
+			{...props}
+			className={classNames(
+				'mto-flex mto-justify-center mto-items-center mto-border mto-border-solid mto-font-medium mto-rounded-sm mto-transition-all mto-duration-300 mto-ease-in-out',
+				{
+					'mto-px-2 mto-py-2 mto-text-xs': size === 'small',
+					'mto-px-4 mto-py-3 mto-text-xs': size === 'medium',
+					'mto-px-5 mto-py-4 mto-text-s': size === 'large',
+					'mto-border-gray-300 hover:mto-border-primary hover:mto-text-primary':
+						appearance === 'default',
+					'mto-border-primary mto-bg-primary mto-text-white hover:mto-bg-primary-600 hover:mto-border-primary-700':
+						appearance === 'primary',
+					'mto-border-accent mto-bg-accent mto-text-white hover:mto-bg-accent-600 hover:mto-border-accent-700':
+						appearance === 'accent',
+				}
+			)}>
+			{icon && <Icon icon={icon} className="mto-mr-1" />}
 			<span>{props.children}</span>
-		</StyledButton>
+		</button>
 	);
 };
 
@@ -33,77 +40,3 @@ Button.defaultProps = {
 };
 
 export default Button;
-
-const StyledButton = styled.button`
-	cursor: pointer;
-	transition: all 0.35s ease-in-out;
-	border: 1px solid transparent;
-	font-weight: 500;
-	font-size: ${fontSize.SMALL};
-	border-radius: ${defaultStyle.borderRadius};
-	line-height: 1;
-	display: flex;
-	align-items: center;
-	outline: none;
-
-	i {
-		margin-right: ${BaseLine}px;
-	}
-
-	${(props: Props) =>
-		props.appearance === 'default' &&
-		css`
-			color: ${colors.TEXT};
-			border-color: ${colors.BORDER};
-			background-color: ${colors.WHITE};
-
-			&:hover {
-				background-color: ${lighten(0.05, colors.PRIMARY)};
-			}
-		`}
-
-	${(props: Props) =>
-		props.appearance === 'primary' &&
-		css`
-			color: ${colors.WHITE};
-			border-color: ${colors.PRIMARY};
-			background-color: ${colors.PRIMARY};
-
-			&:hover {
-				background-color: ${lighten(0.05, colors.PRIMARY)};
-			}
-		`}
-
-	${(props: Props) =>
-		props.appearance === 'secondary' &&
-		css`
-			color: ${colors.WHITE};
-				border-color: ${colors.SECONDARY};
-				background-color: ${colors.SECONDARY};
-
-				&:hover {
-					background-color: ${lighten(0.05, colors.SECONDARY)};
-				}
-			}
-		`}
-		
-	${(props: Props) =>
-		props.size === 'medium' &&
-		css`
-			padding: 12px 16px;
-		`}
-
-	${(props: Props) =>
-		props.size === 'small' &&
-		css`
-			padding: 6px 8px;
-			font-size: ${fontSize.SMALL};
-		`}
-	
-	${(props: Props) =>
-		props.size === 'large' &&
-		css`
-			padding: 14px 16px;
-			font-size: ${fontSize.LARGE};
-		`}
-`;

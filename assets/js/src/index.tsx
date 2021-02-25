@@ -3,9 +3,15 @@ import './assets/css/masteriyo.css';
 import App from './App';
 import React from 'react';
 import ReactDom from 'react-dom';
+import { ThemeProvider } from './context/ThemeContext';
 
 const appRoot = document.getElementById('masteriyo');
 
 if (appRoot) {
-	ReactDom.render(<App />, appRoot);
+	ReactDom.render(
+		<ThemeProvider>
+			<App />
+		</ThemeProvider>,
+		appRoot
+	);
 }

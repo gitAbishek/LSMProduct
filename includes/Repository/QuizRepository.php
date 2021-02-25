@@ -199,7 +199,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 		}
 
 		do_action( 'masteriyo_before_delete_' . $object_type, $id, $quiz );
-		wp_delete_post( $id );
+		wp_delete_post( $id, true );
 		$quiz->set_id( 0 );
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $quiz );
 	}

@@ -15,7 +15,7 @@ interface ThemeProviderProps {
 	value?: any;
 }
 
-export const ThemeProvder: React.FC<ThemeProviderProps> = ({
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 	children,
 	value,
 }) => {

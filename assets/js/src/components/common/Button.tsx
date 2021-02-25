@@ -37,9 +37,4 @@ const Button: React.ForwardRefRenderFunction<HTMLButtonElement, Props> = (
 	);
 };
 
-Button.defaultProps = {
-	appearance: 'default',
-	size: 'medium',
-};
-
 export default Button;

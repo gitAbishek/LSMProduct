@@ -164,7 +164,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 
 		if ( $args['force_delete'] ) {
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $order );
-			wp_delete_post( $id );
+			wp_delete_post( $id, true );
 			$order->set_id( 0 );
 			do_action( 'masteriyo_after_delete_' . $object_type, $id, $order );
 		} else {

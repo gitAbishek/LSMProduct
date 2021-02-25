@@ -3,42 +3,42 @@ import Menu, { MenuItem } from 'Components/common/Menu';
 
 import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';
-import { ContainerFluid } from 'Components/common/Container';
+import Container from 'Components/common/Container';
 import Flex from 'Components/common/Flex';
 import FlexRow from 'Components/common/FlexRow';
 import LogoImg from '../../../../img/logo.png';
 import React from 'react';
+import { __ } from '@wordpress/i18n';
 import colors from 'Config/colors';
 import styled from 'styled-components';
-import { __ } from '@wordpress/i18n';
 
 const MainToolbar = () => {
 	return (
 		<Header>
-			<ContainerFluid flex>
+			<Container>
 				<HeaderLeftContent>
 					<LogoContainer>
 						<img src={LogoImg} alt="Masteriyo Logo" />
 					</LogoContainer>
 					<Menu>
 						<MenuItem to="/courses" icon={<Book />}>
-							{__( 'Courses', 'masteriyo' )}
+							{__('Courses', 'masteriyo')}
 						</MenuItem>
 						<MenuItem to="/courses/add-new-course" icon={<Edit />}>
-							{__( 'Course Builder', 'masteriyo' )}
+							{__('Course Builder', 'masteriyo')}
 						</MenuItem>
 						<MenuItem to="/settings" icon={<Cog />}>
-							{__( 'Settings', 'masteriyo' )}
+							{__('Settings', 'masteriyo')}
 						</MenuItem>
 					</Menu>
 				</HeaderLeftContent>
 				<HeaderRightContent>
 					<HeaderActions>
-						<Button icon={<Show />}>{__( 'Preview', 'masteriyo' )}</Button>
-						<Button appearance="primary">{__( 'Save', 'masteriyo' )}</Button>
+						<Button icon={<Show />}>{__('Preview', 'masteriyo')}</Button>
+						<Button appearance="primary">{__('Save', 'masteriyo')}</Button>
 					</HeaderActions>
 				</HeaderRightContent>
-			</ContainerFluid>
+			</Container>
 		</Header>
 	);
 };

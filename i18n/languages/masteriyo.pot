@@ -50,13 +50,13 @@ msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:84
 #: assets/js/src/screens/courses/EditCouse.tsx:118
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:73
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:75
 msgid "Featured Image"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:85
 #: assets/js/src/screens/courses/EditCouse.tsx:120
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:74
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:77
 msgid "Drag image or click to upload"
 msgstr ""
 
@@ -81,12 +81,14 @@ msgid ""
 msgstr ""
 
 #: assets/js/src/screens/courses/AllCourses.tsx:120
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:132
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:123
 #: assets/js/src/screens/sections/components/Section.tsx:101
 msgid "Cancel"
 msgstr ""
 
 #: assets/js/src/screens/courses/AllCourses.tsx:129
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:51
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:52
 #: assets/js/src/screens/sections/components/Lesson.tsx:48
 #: assets/js/src/screens/sections/components/Section.tsx:72
@@ -136,23 +138,29 @@ msgid "Preview"
 msgstr ""
 
 #: assets/js/src/screens/layouts/MainToolbar.tsx:38
+#: assets/js/src/screens/layouts/MainToolbar.tsx:37
+#: assets/js/src/screens/layouts/MainToolbar.tsx:39
 #: assets/js/src/screens/sections/components/Section.tsx:99
 msgid "Save"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:121
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:107
+msgid "Video Playback Time"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:130
 msgid "Add New Lesson"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:63
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:62
 msgid "Lesson Name"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:64
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:63
 msgid "Your topic title"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:68
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:67
 msgid "Description"
 msgstr ""
 
@@ -160,32 +168,28 @@ msgstr ""
 msgid "Your course description"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:79
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:83
 msgid "Video Source"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:82
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:88
 msgid "Select Video Source"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:83
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:90
 msgid "Youtube"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:84
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:91
 msgid "Vimeo"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:85
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:92
 msgid "Custom"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:92
-msgid "Video URL"
-msgstr ""
-
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:99
-msgid "Video Playback Time"
+msgid "Video URL"
 msgstr ""
 
 #: assets/js/src/screens/sections/SectionBuilder.tsx:168

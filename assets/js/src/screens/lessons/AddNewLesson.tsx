@@ -1,4 +1,3 @@
-import { Col, Row } from 'react-grid-system';
 import React, { Fragment, useState } from 'react';
 import {
 	SectionAction,
@@ -22,8 +21,8 @@ import OptionButton from 'Components/common/OptionButton';
 import Select from 'Components/common/Select';
 import Slider from 'rc-slider';
 import Textarea from 'Components/common/Textarea';
-import styled from 'styled-components';
 import { __ } from '@wordpress/i18n';
+import styled from 'styled-components';
 
 interface Props {}
 
@@ -40,7 +39,7 @@ const AddNewLesson: React.FC<Props> = (props) => {
 			<MainLayout>
 				<AddNewLessonContainer>
 					<SectionHeader>
-						<SectionTitle>{__( 'Add New Lesson', 'masteriyo' )}</SectionTitle>
+						<SectionTitle>{__('Add New Lesson', 'masteriyo')}</SectionTitle>
 						<SectionAction>
 							<Dropdown
 								trigger={'click'}
@@ -49,7 +48,7 @@ const AddNewLesson: React.FC<Props> = (props) => {
 								overlay={
 									<DropdownOverlay>
 										<ul>
-											<li>{__( 'Delete', 'masteriyo' )}</li>
+											<li>{__('Delete', 'masteriyo')}</li>
 										</ul>
 									</DropdownOverlay>
 								}>
@@ -60,67 +59,77 @@ const AddNewLesson: React.FC<Props> = (props) => {
 					<SectionBody>
 						<form action="">
 							<FormGroup>
-								<Label htmlFor="">{__( 'Lesson Name', 'masteriyo' )}</Label>
-								<Input placeholder={__( 'Your topic title', 'masteriyo' )} />
+								<Label htmlFor="">{__('Lesson Name', 'masteriyo')}</Label>
+								<Input placeholder={__('Your topic title', 'masteriyo')} />
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">{__( 'Description', 'masteriyo' )}</Label>
-								<Textarea placeholder={__( 'Your course description', 'masteriyo' )} rows={5} />
+								<Label htmlFor="">{__('Description', 'masteriyo')}</Label>
+								<Textarea
+									placeholder={__('Your course description', 'masteriyo')}
+									rows={5}
+								/>
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">{__( 'Featured Image', 'masteriyo' )}</Label>
-								<ImageUpload title={__( 'Drag image or click to upload', 'masteriyo' )} />
+								<Label htmlFor="">{__('Featured Image', 'masteriyo')}</Label>
+								<ImageUpload
+									title={__('Drag image or click to upload', 'masteriyo')}
+								/>
 							</FormGroup>
-							<Row>
-								<Col>
+							<div>
+								<div>
 									<FormGroup>
-										<Label htmlFor="">{__( 'Video Source', 'masteriyo' )}</Label>
+										<Label htmlFor="">{__('Video Source', 'masteriyo')}</Label>
 										<Select
 											options={[
-												{ value: 'source', label: __( 'Select Video Source', 'masteriyo' ) },
-												{ value: 'youtube', label: __( 'Youtube', 'masteriyo' ) },
-												{ value: 'vimeo', label: __( 'Vimeo', 'masteriyo' ) },
-												{ value: 'custom', label: __( 'Custom', 'masteriyo' ) },
+												{
+													value: 'source',
+													label: __('Select Video Source', 'masteriyo'),
+												},
+												{ value: 'youtube', label: __('Youtube', 'masteriyo') },
+												{ value: 'vimeo', label: __('Vimeo', 'masteriyo') },
+												{ value: 'custom', label: __('Custom', 'masteriyo') },
 											]}
 										/>
 									</FormGroup>
-								</Col>
-								<Col>
+								</div>
+								<div>
 									<FormGroup>
-										<Label htmlFor="">{__( 'Video URL', 'masteriyo' )}</Label>
+										<Label htmlFor="">{__('Video URL', 'masteriyo')}</Label>
 										<Input placeholder="video url" />
 									</FormGroup>
-								</Col>
-							</Row>
+								</div>
+							</div>
 
 							<FormGroup>
-								<Label htmlFor="">{__( 'Video Playback Time', 'masteriyo' )}</Label>
-								<Row align="center">
-									<Col sm={10}>
+								<Label htmlFor="">
+									{__('Video Playback Time', 'masteriyo')}
+								</Label>
+								<DeviceRotationRate>
+									<div>
 										<Slider
 											min={0}
 											max={20}
 											defaultValue={playBackTime}
 											onChange={playBackTimeOnChange}
 										/>
-									</Col>
-									<Col sm={2}>
+									</div>
+									<div>
 										<Input
 											type="number"
 											value={playBackTime}
 											onChange={() => playBackTimeOnChange}
 										/>
-									</Col>
-								</Row>
+									</div>
+								</DeviceRotationRate>
 							</FormGroup>
 							<SectionFooter>
 								<FlexRow>
 									<Button appearance="primary" style={{ marginRight: 16 }}>
-										{__( 'Add New Lesson', 'masteriyo' )}
+										{__('Add New Lesson', 'masteriyo')}
 									</Button>
-									<Button>{__( 'Cancel', 'masteriyo' )}</Button>
+									<Button>{__('Cancel', 'masteriyo')}</Button>
 								</FlexRow>
 							</SectionFooter>
 						</form>

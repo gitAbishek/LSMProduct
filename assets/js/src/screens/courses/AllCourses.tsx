@@ -44,7 +44,7 @@ const AllCourses = () => {
 					<h1 className="mto-text-xl mto-m-0 mto-font-medium">
 						{__('Courses', 'masteriyo')}
 					</h1>
-					<Button appearance="primary" className="ok">
+					<Button appearance="primary">
 						<Link to="/courses/add-new-course">
 							{__('Add New Course', 'masteriyo')}
 						</Link>

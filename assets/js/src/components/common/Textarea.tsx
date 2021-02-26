@@ -3,7 +3,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import classNames from 'classnames';
 import { useContext } from 'react';
 
-interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
+interface Props extends React.ComponentPropsWithRef<'textarea'> {
 	disabled?: boolean;
 }
 

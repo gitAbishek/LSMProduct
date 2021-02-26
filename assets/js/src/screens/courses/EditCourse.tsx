@@ -10,7 +10,6 @@ import { fetchCourse, updateCourse } from '../../utils/api';
 import { useMutation, useQuery } from 'react-query';
 
 import Button from 'Components/common/Button';
-import FlexRow from 'Components/common/FlexRow';
 import FormGroup from 'Components/common/FormGroup';
 import ImageUpload from 'Components/common/ImageUpload';
 import Input from 'Components/common/Input';
@@ -83,11 +82,11 @@ const EditCourse = () => {
 									name="description"
 									defaultValue={courseData?.description}></Textarea>
 							</FormGroup>
-							<FlexRow>
+							<div className="mto-flex-row">
 								<Button appearance="primary" type="submit">
 									{__('Update', 'masteriyo')}
 								</Button>
-							</FlexRow>
+							</div>
 						</CourseLeftContainer>
 
 						<CourseRightContainer>

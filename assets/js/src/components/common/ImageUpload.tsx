@@ -1,24 +1,16 @@
 import React, { useCallback, useState } from 'react';
 
-import { BaseLine } from 'Config/defaultStyle';
-import Flex from 'Components/common/Flex';
-import FlexRow from 'Components/common/FlexRow';
 import Icon from 'Components/common/Icon';
 import { Plus } from '../../assets/icons';
-import colors from 'Config/colors';
-import fontSize from 'Config/fontSize';
-import styled from 'styled-components';
+import classNames from 'classnames';
 import { useDropzone } from 'react-dropzone';
 
-interface Props {
-	style?: any;
-	className?: string;
-	title: string;
+interface Props extends React.HTMLAttributes<HTMLElement> {
 	multiple?: boolean;
 }
 
-const ImageUpload: React.FC<Props> = (props) => {
-	const { style, className, title, multiple } = props;
+const ImageUpload = React.forwardRef<HTMLElement, Props>((props, ref) => {
+	const { multiple, className, ...other } = props;
 	const [file, setFiles] = useState<any>(null);
 	const onDrop = useCallback((acceptedFiles) => {
 		setFiles(
@@ -36,67 +28,32 @@ const ImageUpload: React.FC<Props> = (props) => {
 		isDragReject,
 	} = useDropzone({ onDrop, accept: 'image/*' });
 
-	return (
-		<Container style={style} className={className}>
-			<InputContainer
-				{...getRootProps({ isDragActive, isDragAccept, isDragReject })}
-				backgroundImage={file?.image}>
-				<input {...getInputProps()} multiple={multiple || false} />
-				<ContentContainer>
-					<FlexRow justify="center">
-						<span>
-							<Icon icon={<Plus />}></Icon>
-						</span>
-						<span>{title}</span>
-					</FlexRow>
-				</ContentContainer>
-			</InputContainer>
-		</Container>
+	const baseStyle =
+		'mto-flex mto-items-center mto-w-full mto-cursor-pointer mto-bg-cover mto-bg-center mto-bg-gray-300';
+	const acceptStyle = 'mto-bg-green-300';
+	const rejectStyle = 'mto-bg-red-300';
+
+	const cls = classNames(
+		baseStyle,
+		isDragAccept && acceptStyle,
+		isDragReject && rejectStyle,
+		className
 	);
-};
-
-interface StyledProps {
-	backgroundImage?: string;
-	isDragAccept?: boolean;
-	isDragReject?: boolean;
-}
-
-const Container = styled.div``;
-
-const InputContainer = styled(Flex)`
-	width: 100%;
-	cursor: pointer;
-	align-items: center;
-	border: 1px dashed ${colors.PLACEHOLDER};
-	background-position: 50%;
-	background-size: cover;
-	background-color: ${colors.LIGHT_GRAY};
-	background-image: ${(props: StyledProps) =>
-		`url("${props.backgroundImage}")`};
-`;
-
-const ContentContainer = styled(Flex)`
-	position: relative;
-	background-color: ${(props: StyledProps) => {
-		if (props.isDragAccept) {
-			return colors.PRIMARY;
-		}
-		if (props.isDragReject) {
-			return colors.ALERT;
-		}
-		return 'transparent';
-	}};
-	padding: ${BaseLine * 3}px ${BaseLine * 4}px;
-	width: 100%;
-	color: ${colors.PRIMARY};
-	font-weight: 500;
-	height: ${BaseLine * 15}px;
-	justify-content: center;
-
-	i {
-		font-size: ${fontSize.HUGE};
-		margin-right: ${BaseLine * 0.5}px;
-	}
-`;
+	return (
+		<div
+			className={cls}
+			{...other}
+			{...getRootProps({ isDragActive, isDragAccept, isDragReject })}
+			style={{ backgroundImage: file?.image }}>
+			<input {...getInputProps()} multiple={multiple || false} />
+			<div className="mto-flex mto-justify-center mto-relative mto-py-3 mto-px-4">
+				<span>
+					<Icon icon={<Plus />}></Icon>
+				</span>
+				<span>{props.children}</span>
+			</div>
+		</div>
+	);
+});
 
 export default ImageUpload;

@@ -3,68 +3,101 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:46
+#: assets/js/src/screens/courses/AddNewCourse.tsx:47
 #: assets/js/src/screens/courses/AddNewCourse.tsx:49
 #: assets/js/src/screens/courses/EditCouse.tsx:76
 msgid "Course Name"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:48
+#: assets/js/src/screens/courses/AddNewCourse.tsx:49
 #: assets/js/src/screens/courses/AddNewCourse.tsx:51
 #: assets/js/src/screens/courses/EditCouse.tsx:78
 msgid "Your Course Name"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:55
+#: assets/js/src/screens/courses/AddNewCourse.tsx:56
+#: assets/js/src/screens/courses/AddNewCourse.tsx:58
 #: assets/js/src/screens/courses/AddNewCourse.tsx:57
 #: assets/js/src/screens/courses/EditCouse.tsx:86
 msgid "Course Description"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:58
 #: assets/js/src/screens/courses/AddNewCourse.tsx:59
+#: assets/js/src/screens/courses/AddNewCourse.tsx:61
 #: assets/js/src/screens/courses/EditCouse.tsx:89
 msgid "Your Course Title"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:65
 #: assets/js/src/screens/courses/AddNewCourse.tsx:66
+#: assets/js/src/screens/courses/AddNewCourse.tsx:68
 #: assets/js/src/screens/courses/EditCouse.tsx:97
 msgid "Add Course"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:72
 #: assets/js/src/screens/courses/AddNewCourse.tsx:73
+#: assets/js/src/screens/courses/AddNewCourse.tsx:75
 #: assets/js/src/screens/courses/EditCouse.tsx:104
 msgid "Course Category"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:75
 #: assets/js/src/screens/courses/AddNewCourse.tsx:76
+#: assets/js/src/screens/courses/AddNewCourse.tsx:78
 #: assets/js/src/screens/courses/EditCouse.tsx:107
 msgid "Chocolate"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:78
+#: assets/js/src/screens/courses/AddNewCourse.tsx:79
+#: assets/js/src/screens/courses/AddNewCourse.tsx:81
 #: assets/js/src/screens/courses/AddNewCourse.tsx:77
 #: assets/js/src/screens/courses/EditCouse.tsx:110
 msgid "Strawberry"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:80
+#: assets/js/src/screens/courses/AddNewCourse.tsx:81
+#: assets/js/src/screens/courses/AddNewCourse.tsx:83
 #: assets/js/src/screens/courses/AddNewCourse.tsx:78
 #: assets/js/src/screens/courses/EditCouse.tsx:112
 msgid "Vanilla"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:86
+#: assets/js/src/screens/courses/AddNewCourse.tsx:87
+#: assets/js/src/screens/courses/AddNewCourse.tsx:89
 #: assets/js/src/screens/courses/AddNewCourse.tsx:84
 #: assets/js/src/screens/courses/EditCouse.tsx:118
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:75
 msgid "Featured Image"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:88
+#: assets/js/src/screens/courses/AddNewCourse.tsx:89
+#: assets/js/src/screens/courses/AddNewCourse.tsx:91
 #: assets/js/src/screens/courses/AddNewCourse.tsx:85
 #: assets/js/src/screens/courses/EditCouse.tsx:120
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:77
 msgid "Drag image or click to upload"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:91
+#: assets/js/src/screens/courses/AddNewCourse.tsx:92
+#: assets/js/src/screens/courses/AddNewCourse.tsx:94
 #: assets/js/src/screens/courses/AddNewCourse.tsx:87
 #: assets/js/src/screens/courses/EditCouse.tsx:123
 msgid "Remove Featured Image"
 msgstr ""
 
+#: assets/js/src/screens/courses/AddNewCourse.tsx:92
+#: assets/js/src/screens/courses/AddNewCourse.tsx:94
+#: assets/js/src/screens/courses/AddNewCourse.tsx:96
 #: assets/js/src/screens/courses/AddNewCourse.tsx:88
 #: assets/js/src/screens/courses/EditCouse.tsx:125
 msgid "Add New"

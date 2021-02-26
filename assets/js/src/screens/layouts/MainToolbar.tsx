@@ -6,7 +6,9 @@ import Button from 'Components/common/Button';
 import Container from 'Components/common/Container';
 import Flex from 'Components/common/Flex';
 import FlexRow from 'Components/common/FlexRow';
+import Icon from 'Components/common/Icon';
 import LogoImg from '../../../../img/logo.png';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { __ } from '@wordpress/i18n';
 import colors from 'Config/colors';
@@ -20,17 +22,26 @@ const MainToolbar = () => {
 					<div>
 						<img src={LogoImg} alt="Masteriyo Logo" />
 					</div>
-					<Menu>
-						<MenuItem to="/courses" icon={<Book />}>
-							{__('Courses', 'masteriyo')}
-						</MenuItem>
-						<MenuItem to="/courses/add-new-course" icon={<Edit />}>
-							{__('Course Builder', 'masteriyo')}
-						</MenuItem>
-						<MenuItem to="/settings" icon={<Cog />}>
-							{__('Settings', 'masteriyo')}
-						</MenuItem>
-					</Menu>
+					<ul>
+						<li>
+							<NavLink to="/courses">
+								<Icon icon={<Book />} />
+								{__('Courses', 'masteriyo')}
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to="/courses/add-new-course">
+								<Icon icon={<Edit />} />
+								{__('Course Builder', 'masteriyo')}
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to="/settings">
+								<Icon icon={<Cog />} />
+								{__('Settings', 'masteriyo')}
+							</NavLink>
+						</li>
+					</ul>
 				</div>
 				<div>
 					<div className="mto-flex">

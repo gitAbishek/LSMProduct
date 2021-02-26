@@ -135,6 +135,7 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
+#: assets/js/src/screens/layouts/MainToolbar.tsx:39
 #: assets/js/src/screens/layouts/MainToolbar.tsx:38
 #: assets/js/src/screens/sections/components/Section.tsx:99
 msgid "Save"

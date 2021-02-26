@@ -14,12 +14,12 @@ import styled from 'styled-components';
 
 const MainToolbar = () => {
 	return (
-		<Header>
-			<Container>
-				<HeaderLeftContent>
-					<LogoContainer>
+		<header className="mto-bg-white mto-shadow-sm">
+			<div className="mto-container mto-mx-auto mto-flex mto-justify-between mto-items-center">
+				<div className="mto-flex mto-items-center">
+					<div>
 						<img src={LogoImg} alt="Masteriyo Logo" />
-					</LogoContainer>
+					</div>
 					<Menu>
 						<MenuItem to="/courses" icon={<Book />}>
 							{__('Courses', 'masteriyo')}
@@ -31,42 +31,18 @@ const MainToolbar = () => {
 							{__('Settings', 'masteriyo')}
 						</MenuItem>
 					</Menu>
-				</HeaderLeftContent>
-				<HeaderRightContent>
-					<HeaderActions>
+				</div>
+				<div>
+					<div className="mto-flex">
 						<Button icon={<Show />}>{__('Preview', 'masteriyo')}</Button>
-						<Button appearance="primary">{__('Save', 'masteriyo')}</Button>
-					</HeaderActions>
-				</HeaderRightContent>
-			</Container>
-		</Header>
+						<Button layout="primary" className="mto-ml-4">
+							{__('Save', 'masteriyo')}
+						</Button>
+					</div>
+				</div>
+			</div>
+		</header>
 	);
 };
 
 export default MainToolbar;
-
-const Header = styled.header`
-	background-color: ${colors.WHITE};
-	border-bottom: 1px solid ${colors.BORDER};
-	height: ${BaseLine * 8}px;
-`;
-
-const LogoContainer = styled(Flex)`
-	max-width: 100px;
-
-	img {
-		max-width: 100%;
-	}
-`;
-const HeaderLeftContent = styled(FlexRow)``;
-
-const HeaderRightContent = styled(FlexRow)`
-	margin-left: auto;
-	justify-content: flex-end;
-`;
-
-const HeaderActions = styled(FlexRow)`
-	button {
-		margin-left: ${BaseLine * 2}px;
-	}
-`;

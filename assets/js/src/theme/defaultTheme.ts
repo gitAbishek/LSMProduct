@@ -24,4 +24,8 @@ export default {
 			disbabled: 'mto-bg-gray-50 mto-border-gray-200 mto-text-gray-200',
 		},
 	},
+	input: {
+		base:
+			'mto-p-3 mto-border mto-border-solid mto-border-gray-300 mto-shadow-sm mto-transition-all hover:mto-border-primary focus:mto-border-primary focus:mto-bg-primary-50',
+	},
 };

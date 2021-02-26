@@ -5,10 +5,10 @@ import Container from 'Components/common/Container';
 import MainToolbar from 'Layouts/MainToolbar';
 import React from 'react';
 import Section from './components/Section';
+import { __ } from '@wordpress/i18n';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { __ } from '@wordpress/i18n';
 
 // const dummyData = {
 // 	contents: {
@@ -146,7 +146,7 @@ const SectionBuilder = () => {
 	return (
 		<>
 			<MainToolbar />
-			<Container>
+			<div className="mto-container mto-mx-auto">
 				{/* <DragDropContext>
 					<Droppable type="section" droppableId="course-builder">
 						{(provided) => (
@@ -165,10 +165,10 @@ const SectionBuilder = () => {
 						)}
 					</Droppable> */}
 				<AddSectionContainer>
-					<AddNewButton>{__( 'Add New Section', 'masteriyo' )}</AddNewButton>
+					<AddNewButton>{__('Add New Section', 'masteriyo')}</AddNewButton>
 				</AddSectionContainer>
 				{/* </DragDropContext> */}
-			</Container>
+			</div>
 		</>
 	);
 };

@@ -11,17 +11,17 @@ export default {
 		primary: {
 			base: 'mto-border-primary mto-bg-primary mto-text-white',
 			active: 'hover:mto-bg-primary-600 hover:mto-border-primary-700',
-			disabled: 'bg-gray-50 border-gray-200 text-gray-200',
+			disabled: 'mto-bg-gray-50 mto-border-gray-200 mto-text-gray-200',
 		},
 		accent: {
 			base: 'mto-border-accent mto-bg-accent mto-text-white',
 			active: 'hover:mto-bg-accent-600 hover:mto-border-accent-700',
-			disbabled: 'bg-gray-50 border-gray-200 text-gray-200',
+			disbabled: 'mto-bg-gray-50 mto-border-gray-200 mto-text-gray-200',
 		},
 		outline: {
-			base: 'mto-border-gray-300 text-gray-700',
+			base: 'mto-border-gray-300 mto-text-gray-700',
 			active: 'hover:mto-border-primary hover:mto-text-primary',
-			disbabled: 'bg-gray-50 border-gray-200 text-gray-200',
+			disbabled: 'mto-bg-gray-50 mto-border-gray-200 mto-text-gray-200',
 		},
 	},
 };

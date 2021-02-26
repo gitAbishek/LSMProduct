@@ -14,7 +14,7 @@ const OptionButton = React.forwardRef<HTMLButtonElement, Props>(
 		const cls = classNames(baseStyle, className);
 
 		return (
-			<button {...other} className={cls} ref={ref}>
+			<button className={cls} ref={ref} {...other}>
 				<Icon icon={<DotsVertical />} />
 			</button>
 		);

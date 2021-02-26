@@ -17,7 +17,15 @@ const Input = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
 	const baseStyle = input.base;
 	const cls = classNames(baseStyle, className);
 
-	return <input className={cls} type={type} ref={ref} disabled={disabled} />;
+	return (
+		<input
+			className={cls}
+			type={type}
+			ref={ref}
+			disabled={disabled}
+			{...other}
+		/>
+	);
 });
 
 export default Input;

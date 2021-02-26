@@ -1,7 +1,6 @@
 import { fetchCourse, fetchSections } from '../../utils/api';
 
 import AddNewButton from 'Components/common/AddNewButton';
-import Container from 'Components/common/Container';
 import MainToolbar from 'Layouts/MainToolbar';
 import React from 'react';
 import Section from './components/Section';
@@ -164,9 +163,9 @@ const SectionBuilder = () => {
 							</div>
 						)}
 					</Droppable> */}
-				<AddSectionContainer>
+				<div className="mto-flex mto-justify-center">
 					<AddNewButton>{__('Add New Section', 'masteriyo')}</AddNewButton>
-				</AddSectionContainer>
+				</div>
 				{/* </DragDropContext> */}
 			</div>
 		</>
@@ -174,8 +173,3 @@ const SectionBuilder = () => {
 };
 
 export default SectionBuilder;
-
-const AddSectionContainer = styled.div`
-	display: flex;
-	justify-content: center;
-`;

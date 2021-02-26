@@ -1,16 +1,7 @@
 import React, { Fragment, useState } from 'react';
-import {
-	SectionAction,
-	SectionBody,
-	SectionFooter,
-	SectionHeader,
-	SectionTitle,
-} from 'Components/common/GlobalComponents';
 
 import Button from 'Components/common/Button';
 import Dropdown from 'rc-dropdown';
-import DropdownOverlay from 'Components/common/DropdownOverlay';
-import FlexRow from 'Components/common/FlexRow';
 import FormGroup from 'Components/common/FormGroup';
 import ImageUpload from 'Components/common/ImageUpload';
 import Input from 'Components/common/Input';
@@ -22,7 +13,6 @@ import Select from 'Components/common/Select';
 import Slider from 'rc-slider';
 import Textarea from 'Components/common/Textarea';
 import { __ } from '@wordpress/i18n';
-import styled from 'styled-components';
 
 interface Props {}
 
@@ -37,8 +27,8 @@ const AddNewLesson: React.FC<Props> = (props) => {
 		<Fragment>
 			<MainToolbar />
 			<MainLayout>
-				<AddNewLessonContainer>
-					<SectionHeader>
+				<div>
+					{/* <SectionHeader>
 						<SectionTitle>{__('Add New Lesson', 'masteriyo')}</SectionTitle>
 						<SectionAction>
 							<Dropdown
@@ -133,13 +123,11 @@ const AddNewLesson: React.FC<Props> = (props) => {
 								</FlexRow>
 							</SectionFooter>
 						</form>
-					</SectionBody>
-				</AddNewLessonContainer>
+					</SectionBody> */}
+				</div>
 			</MainLayout>
 		</Fragment>
 	);
 };
-
-const AddNewLessonContainer = styled.div``;
 
 export default AddNewLesson;

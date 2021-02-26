@@ -4,98 +4,77 @@ msgstr ""
 "X-Generator: babel-plugin-makepot\n"
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:45
-#: assets/js/src/screens/courses/AddNewCourse.tsx:43
-#: assets/js/src/screens/courses/AddNewCourse.tsx:46
-#: assets/js/src/screens/courses/EditCouse.tsx:75
+#: assets/js/src/screens/courses/EditCouse.tsx:69
 msgid "Course Name"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:47
-#: assets/js/src/screens/courses/AddNewCourse.tsx:45
-#: assets/js/src/screens/courses/AddNewCourse.tsx:48
-#: assets/js/src/screens/courses/EditCouse.tsx:77
+#: assets/js/src/screens/courses/EditCouse.tsx:71
 msgid "Your Course Name"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:53
-#: assets/js/src/screens/courses/AddNewCourse.tsx:54
-#: assets/js/src/screens/courses/AddNewCourse.tsx:52
-#: assets/js/src/screens/courses/AddNewCourse.tsx:55
-#: assets/js/src/screens/courses/EditCouse.tsx:85
+#: assets/js/src/screens/courses/EditCouse.tsx:79
 msgid "Course Description"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:55
-#: assets/js/src/screens/courses/AddNewCourse.tsx:57
-#: assets/js/src/screens/courses/AddNewCourse.tsx:58
-#: assets/js/src/screens/courses/EditCouse.tsx:88
+#: assets/js/src/screens/courses/EditCouse.tsx:82
 msgid "Your Course Title"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:62
-#: assets/js/src/screens/courses/AddNewCourse.tsx:64
-#: assets/js/src/screens/courses/AddNewCourse.tsx:65
-#: assets/js/src/screens/courses/EditCouse.tsx:96
+#: assets/js/src/screens/courses/EditCouse.tsx:90
 msgid "Add Course"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:69
-#: assets/js/src/screens/courses/AddNewCourse.tsx:71
-#: assets/js/src/screens/courses/AddNewCourse.tsx:72
-#: assets/js/src/screens/courses/EditCouse.tsx:103
+#: assets/js/src/screens/courses/EditCouse.tsx:97
 msgid "Course Category"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:72
-#: assets/js/src/screens/courses/AddNewCourse.tsx:74
-#: assets/js/src/screens/courses/AddNewCourse.tsx:75
-#: assets/js/src/screens/courses/EditCouse.tsx:106
+#: assets/js/src/screens/courses/EditCouse.tsx:100
 msgid "Chocolate"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:75
-#: assets/js/src/screens/courses/AddNewCourse.tsx:77
-#: assets/js/src/screens/courses/AddNewCourse.tsx:78
-#: assets/js/src/screens/courses/EditCouse.tsx:109
+#: assets/js/src/screens/courses/EditCouse.tsx:103
 msgid "Strawberry"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:77
-#: assets/js/src/screens/courses/AddNewCourse.tsx:79
-#: assets/js/src/screens/courses/AddNewCourse.tsx:80
-#: assets/js/src/screens/courses/EditCouse.tsx:111
+#: assets/js/src/screens/courses/EditCouse.tsx:105
 msgid "Vanilla"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:83
+#: assets/js/src/screens/courses/EditCouse.tsx:111
+#: assets/js/src/screens/courses/EditCouse.tsx:117
 #: assets/js/src/screens/courses/AddNewCourse.tsx:85
 #: assets/js/src/screens/courses/AddNewCourse.tsx:86
-#: assets/js/src/screens/courses/EditCouse.tsx:117
 #: assets/js/src/screens/courses/EditCouse.tsx:118
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:75
 msgid "Featured Image"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:85
+#: assets/js/src/screens/courses/EditCouse.tsx:113
+#: assets/js/src/screens/courses/EditCouse.tsx:119
 #: assets/js/src/screens/courses/AddNewCourse.tsx:87
 #: assets/js/src/screens/courses/AddNewCourse.tsx:88
-#: assets/js/src/screens/courses/EditCouse.tsx:119
 #: assets/js/src/screens/courses/EditCouse.tsx:120
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:77
 msgid "Drag image or click to upload"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:88
-#: assets/js/src/screens/courses/AddNewCourse.tsx:90
-#: assets/js/src/screens/courses/AddNewCourse.tsx:91
-#: assets/js/src/screens/courses/EditCouse.tsx:122
+#: assets/js/src/screens/courses/EditCouse.tsx:116
 msgid "Remove Featured Image"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:89
-#: assets/js/src/screens/courses/AddNewCourse.tsx:91
-#: assets/js/src/screens/courses/AddNewCourse.tsx:92
-#: assets/js/src/screens/courses/EditCouse.tsx:124
+#: assets/js/src/screens/courses/EditCouse.tsx:117
 msgid "Add New"
 msgstr ""
 
@@ -147,7 +126,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: assets/js/src/screens/courses/EditCouse.tsx:61
+#: assets/js/src/screens/courses/EditCouse.tsx:55
 #. %s course name
 msgid "Course `<strong>%s</strong>` is successfully updated. You can keep editing."
 msgstr ""

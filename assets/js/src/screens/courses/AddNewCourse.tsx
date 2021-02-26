@@ -1,5 +1,3 @@
-import React, { Fragment } from 'react';
-
 import Button from 'Components/common/Button';
 import FormGroup from 'Components/common/FormGroup';
 import ImageUpload from 'Components/common/ImageUpload';
@@ -7,6 +5,7 @@ import Input from 'Components/common/Input';
 import Label from 'Components/common/Label';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
+import React from 'react';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
 import { __ } from '@wordpress/i18n';
@@ -35,7 +34,7 @@ const AddNewCourse = () => {
 	};
 
 	return (
-		<Fragment>
+		<>
 			<MainToolbar />
 			<MainLayout>
 				<form onSubmit={handleSubmit(onSubmit)}>
@@ -93,7 +92,7 @@ const AddNewCourse = () => {
 					</div>
 				</form>
 			</MainLayout>
-		</Fragment>
+		</>
 	);
 };
 

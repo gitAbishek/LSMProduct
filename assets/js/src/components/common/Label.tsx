@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-interface Props extends React.HTMLAttributes<HTMLLabelElement> {}
+interface Props extends React.ComponentPropsWithRef<'label'> {}
 
 const Label = React.forwardRef<HTMLLabelElement, Props>((props, ref) => {
 	const { className, children, ...other } = props;

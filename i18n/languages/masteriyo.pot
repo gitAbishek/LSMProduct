@@ -94,7 +94,7 @@ msgid "Delete"
 msgstr ""
 
 #: assets/js/src/screens/courses/AllCourses.tsx:45
-#: assets/js/src/screens/layouts/MainToolbar.tsx:31
+#: assets/js/src/screens/layouts/MainToolbar.tsx:24
 msgid "Courses"
 msgstr ""
 
@@ -123,18 +123,19 @@ msgstr ""
 msgid "Course `<strong>%s</strong>` is successfully updated. You can keep editing."
 msgstr ""
 
-#: assets/js/src/screens/layouts/MainToolbar.tsx:39
+#: assets/js/src/screens/layouts/MainToolbar.tsx:32
 msgid "Course Builder"
 msgstr ""
 
-#: assets/js/src/screens/layouts/MainToolbar.tsx:47
+#: assets/js/src/screens/layouts/MainToolbar.tsx:40
 msgid "Settings"
 msgstr ""
 
-#: assets/js/src/screens/layouts/MainToolbar.tsx:54
+#: assets/js/src/screens/layouts/MainToolbar.tsx:47
 msgid "Preview"
 msgstr ""
 
+#: assets/js/src/screens/layouts/MainToolbar.tsx:49
 #: assets/js/src/screens/layouts/MainToolbar.tsx:56
 #: assets/js/src/screens/layouts/MainToolbar.tsx:52
 #: assets/js/src/screens/layouts/MainToolbar.tsx:50

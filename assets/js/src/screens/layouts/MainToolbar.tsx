@@ -1,18 +1,11 @@
 import { Book, Cog, Edit, Show } from '../../assets/icons';
-import Menu, { MenuItem } from 'Components/common/Menu';
 
-import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';
-import Container from 'Components/common/Container';
-import Flex from 'Components/common/Flex';
-import FlexRow from 'Components/common/FlexRow';
 import Icon from 'Components/common/Icon';
 import LogoImg from '../../../../img/logo.png';
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { __ } from '@wordpress/i18n';
-import colors from 'Config/colors';
-import styled from 'styled-components';
 
 const MainToolbar = () => {
 	return (

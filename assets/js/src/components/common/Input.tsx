@@ -1,10 +1,7 @@
 import React, { useContext } from 'react';
-import defaultStyle, { BaseLine } from 'Config/defaultStyle';
 
 import { ThemeContext } from '../../context/ThemeContext';
 import classNames from 'classnames';
-import colors from 'Config/colors';
-import styled from 'styled-components';
 
 interface Props extends React.ComponentPropsWithRef<'input'> {
 	disabled?: boolean;

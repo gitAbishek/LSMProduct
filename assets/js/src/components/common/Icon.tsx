@@ -9,7 +9,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 const Icon = React.forwardRef<HTMLElement, Props>((props, ref) => {
 	const { icon, className, ...other } = props;
 
-	const cls = classNames('mto-block mto-text-sm', className);
+	const cls = classNames('mto-icon mto-block mto-text-sm', className);
 
 	return (
 		<i className={cls} ref={ref} {...other}>

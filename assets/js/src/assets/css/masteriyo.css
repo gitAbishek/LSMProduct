@@ -7,3 +7,9 @@
 .mto-nav-link.active {
 	@apply mto-border-b-2 mto-border-solid mto-border-primary mto-text-primary;
 }
+
+.mto-icon svg {
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
+}

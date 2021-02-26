@@ -87,6 +87,7 @@ msgid "Cancel"
 msgstr ""
 
 #: assets/js/src/screens/courses/AllCourses.tsx:129
+#: assets/js/src/screens/courses/AllCourses.tsx:130
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:51
 #: assets/js/src/screens/sections/components/Lesson.tsx:48
 #: assets/js/src/screens/sections/components/Section.tsx:72

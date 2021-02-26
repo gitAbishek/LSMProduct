@@ -3,3 +3,7 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.mto-nav-link.active {
+	@apply mto-border-b-2 mto-border-solid mto-border-primary mto-text-primary;
+}

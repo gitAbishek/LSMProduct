@@ -22,22 +22,28 @@ const MainToolbar = () => {
 					<div>
 						<img src={LogoImg} alt="Masteriyo Logo" />
 					</div>
-					<ul>
+					<ul className="mto-flex mto-ml-10">
 						<li>
-							<NavLink to="/courses">
-								<Icon icon={<Book />} />
+							<NavLink
+								to="/courses"
+								className="mto-flex mto-items-center mto-ml-12 mto-py-7 mto-font-medium mto-nav-link">
+								<Icon className="mto-mr-1" icon={<Book />} />
 								{__('Courses', 'masteriyo')}
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to="/courses/add-new-course">
-								<Icon icon={<Edit />} />
+							<NavLink
+								to="/courses/add-new-course"
+								className="mto-flex mto-items-center mto-ml-12 mto-py-7 mto-font-medium mto-nav-link">
+								<Icon className="mto-mr-1" icon={<Edit />} />
 								{__('Course Builder', 'masteriyo')}
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to="/settings">
-								<Icon icon={<Cog />} />
+							<NavLink
+								to="/settings"
+								className="mto-flex mto-items-center mto-ml-12 mto-py-7 mto-font-medium mto-nav-link">
+								<Icon className="mto-mr-1" icon={<Cog />} />
 								{__('Settings', 'masteriyo')}
 							</NavLink>
 						</li>

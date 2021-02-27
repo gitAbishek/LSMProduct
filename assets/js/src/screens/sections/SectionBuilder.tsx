@@ -5,7 +5,6 @@ import MainToolbar from 'Layouts/MainToolbar';
 import React from 'react';
 import Section from './components/Section';
 import { __ } from '@wordpress/i18n';
-import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 

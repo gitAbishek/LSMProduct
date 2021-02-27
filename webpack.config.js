@@ -28,7 +28,7 @@ const config = {
 					loader: 'babel-loader',
 					options: {
 						plugins: [
-							isDevelopment && require.resolve('react-refr`esh/babel'),
+							isDevelopment && require.resolve('react-refresh/babel'),
 							isProduction && [
 								require.resolve('@wordpress/babel-plugin-makepot'),
 								{ output: 'i18n/languages/masteriyo.pot' },

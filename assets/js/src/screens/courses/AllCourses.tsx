@@ -44,7 +44,7 @@ const AllCourses = () => {
 					<h1 className="mto-text-xl mto-m-0 mto-font-medium">
 						{__('Courses', 'masteriyo')}
 					</h1>
-					<Button appearance="primary">
+					<Button layout="primary">
 						<Link to="/courses/add-new-course">
 							{__('Add New Course', 'masteriyo')}
 						</Link>
@@ -62,7 +62,7 @@ const AllCourses = () => {
 							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
 								{__('Price', 'masteriyo')}
 							</th>
-							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
+							<th className="mto-px-6 mto-py-3 mto-text-right mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
 								{__('Actions', 'masteriyo')}
 							</th>
 						</tr>
@@ -78,15 +78,15 @@ const AllCourses = () => {
 									{course.price}
 								</td>
 								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500">
-									<ul className="mto-flex mto-list-none mto-text-base">
+									<ul className="mto-flex mto-list-none mto-text-base mto-justify-end">
 										<li
 											onClick={() => onEditPress(course.id)}
-											className="mto-text-gray-800 hover:mto-text-blue-500 mto-cursor-pointer mto-mr-4">
+											className="mto-text-gray-800 hover:mto-text-blue-500 mto-cursor-pointer mto-ml-4">
 											<Icon icon={<Edit />} />
 										</li>
 										<li
 											onClick={() => onDeletePress(course.id, course.name)}
-											className="mto-text-gray-800 hover:mto-text-red-600 mto-cursor-pointer mto-mr-4">
+											className="mto-text-gray-800 hover:mto-text-red-600 mto-cursor-pointer mto-ml-4">
 											<Icon icon={<Trash />} />
 										</li>
 									</ul>
@@ -105,25 +105,28 @@ const AllCourses = () => {
 									</div>
 									<div>
 										<h3 className="mto-ml-4 mto-text-xl mto-mb-3">
-											{__( 'Delete Course', 'masteriyo' )} {removableCourse.name}
+											{__('Delete Course', 'masteriyo')} {removableCourse.name}
 										</h3>
 										<p className="mto-ml-4 mto-text-md mto-text-gray-500">
-											{__( "Are you sure want to delete this course. You won't be able to recover it back", 'masteriyo' )}
+											{__(
+												"Are you sure want to delete this course. You won't be able to recover it back",
+												'masteriyo'
+											)}
 										</p>
 									</div>
 								</div>
 								<footer className="mto-px-8 mto-py-4 mto-flex mto-justify-end mto-bg-gray-100">
 									<Button onClick={() => setShowDeleteModal(false)}>
-										{__( 'Cancel', 'masteriyo' )}
+										{__('Cancel', 'masteriyo')}
 									</Button>
 									<Button
-										appearance="secondary"
+										layout="accent"
 										className="mto-ml-3"
 										onClick={() => {
 											deleteMutation.mutate(removableCourse.id);
 											setShowDeleteModal(false);
 										}}>
-										{__( 'Delete', 'masteriyo' )}
+										{__('Delete', 'masteriyo')}
 									</Button>
 								</footer>
 							</div>

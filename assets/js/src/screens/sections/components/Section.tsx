@@ -1,17 +1,11 @@
 import { Edit, Trash } from '../../../assets/icons';
 import React, { useState } from 'react';
-import {
-	SectionHeader,
-	SectionTitle,
-} from 'Components/common/GlobalComponents';
-import defaultStyle, { BaseLine } from 'Config/defaultStyle';
 
 import AddNewButton from 'Components/common/AddNewButton';
 import Button from 'Components/common/Button';
 import DragHandle from '../components/DragHandle';
 import Dropdown from 'rc-dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
-import FlexRow from 'Components/common/FlexRow';
 import FormGroup from 'Components/common/FormGroup';
 import Icon from 'Components/common/Icon';
 import Input from 'Components/common/Input';
@@ -20,11 +14,9 @@ import Lesson from './Lesson';
 import { NavLink } from 'react-router-dom';
 import OptionButton from 'Components/common/OptionButton';
 import Textarea from 'Components/common/Textarea';
-import colors from 'Config/colors';
-import { fetchLessons } from '../../../utils/api';
-import styled from 'styled-components';
-import { useQuery } from 'react-query';
 import { __ } from '@wordpress/i18n';
+import { fetchLessons } from '../../../utils/api';
+import { useQuery } from 'react-query';
 
 interface Props {
 	id: number;
@@ -49,13 +41,13 @@ const Section: React.FC<Props> = (props) => {
 	);
 
 	return (
-		<SectionContainer>
-			<SectionHeader>
-				<FlexRow>
+		<div className="mto-bg-white mto-rounded-sm mto-shadow-md mto-py-8">
+			<header className="mto-flex">
+				<div className="mto-flex">
 					<DragHandle />
-					<SectionTitle>{title}</SectionTitle>
-				</FlexRow>
-				<FlexRow>
+					<h1>{title}</h1>
+				</div>
+				<div className="mto-flex">
 					<Dropdown
 						trigger={'click'}
 						placement={'bottomRight'}
@@ -65,46 +57,52 @@ const Section: React.FC<Props> = (props) => {
 								<ul>
 									<li onClick={() => setMode('editing')}>
 										<Icon icon={<Edit />} />
-										{__( 'Edit', 'masteriyo' )}
+										{__('Edit', 'masteriyo')}
 									</li>
 									<li>
 										<Icon icon={<Trash />} />
-										{__( 'Delete', 'masteriyo' )}
+										{__('Delete', 'masteriyo')}
 									</li>
 								</ul>
 							</DropdownOverlay>
 						}>
 						<OptionButton />
 					</Dropdown>
-				</FlexRow>
-			</SectionHeader>
+				</div>
+			</header>
 			{mode === 'editing' && (
 				<>
-					<EditSection>
+					<div className="mto-mt-8">
 						<form action="">
 							<FormGroup>
-								<Label htmlFor="">{__( 'Section Name', 'masteriyo' )}</Label>
-								<Input placeholder={__( 'Your Section Name', 'masteriyo' )}></Input>
+								<Label htmlFor="">{__('Section Name', 'masteriyo')}</Label>
+								<Input
+									placeholder={__('Your Section Name', 'masteriyo')}></Input>
 							</FormGroup>
 							<FormGroup>
-								<Label htmlFor="">{__( 'Section Description', 'masteriyo' )}</Label>
-								<Textarea rows={4} placeholder={__( 'short summary', 'masteriyo' )} />
+								<Label htmlFor="">
+									{__('Section Description', 'masteriyo')}
+								</Label>
+								<Textarea
+									rows={4}
+									placeholder={__('short summary', 'masteriyo')}
+								/>
 							</FormGroup>
 						</form>
-					</EditSection>
+					</div>
 
-					<SectionFooter>
-						<FlexRow>
-							<Button appearance="primary" onClick={() => setMode('normal')}>
-								{__( 'Save', 'masteriyo' )}
+					<div className="mto-mt-9 mto-pt-8 mto-border-t mto-border-solid mto-border-gray-300">
+						<div className="mto-flex">
+							<Button layout="primary" onClick={() => setMode('normal')}>
+								{__('Save', 'masteriyo')}
 							</Button>
-							<Button style={{ marginLeft: BaseLine * 2 }}>{__( 'Cancel', 'masteriyo' )}</Button>
-						</FlexRow>
-					</SectionFooter>
+							<Button className="mto-mr-4">{__('Cancel', 'masteriyo')}</Button>
+						</div>
+					</div>
 				</>
 			)}
 
-			<ContentDroppableArea>
+			<div className="mto-bg-gray-50 mto-h-8">
 				{lessonData?.map((content: any, index: number) => (
 					<Lesson
 						key={content.id}
@@ -115,42 +113,12 @@ const Section: React.FC<Props> = (props) => {
 				))}
 				<AddNewButton>
 					<NavLink to={`/courses/${courseId}/add-new-lesson`}>
-						{__( 'Add New Content', 'masteriyo' )}
+						{__('Add New Content', 'masteriyo')}
 					</NavLink>
 				</AddNewButton>
-			</ContentDroppableArea>
-		</SectionContainer>
+			</div>
+		</div>
 	);
 };
-
-interface StyledProps {
-	isDragging?: boolean;
-	isDraggingOver?: boolean;
-}
-
-const SectionContainer = styled.div`
-	background-color: ${colors.WHITE};
-	border-radius: ${defaultStyle.borderRadius};
-	padding: ${BaseLine * 4}px;
-	margin-top: ${BaseLine * 6}px;
-	box-shadow: ${(props: StyledProps) =>
-		props.isDragging ? '0 0 15px rgba(0, 0, 0, 0.1)' : 'none'};
-`;
-
-const ContentDroppableArea = styled.div`
-	background-color: ${(props: StyledProps) =>
-		props.isDraggingOver ? colors.LIGHT_BLUEISH_GRAY : colors.WHITE};
-	min-height: ${BaseLine * 4}px;
-`;
-
-const EditSection = styled.div`
-	margin-top: ${BaseLine * 4}px;
-`;
-
-const SectionFooter = styled.footer`
-	margin-top: ${BaseLine * 5}px;
-	padding-top: ${BaseLine * 4}px;
-	border-top: 1px solid ${colors.BORDER};
-`;
 
 export default Section;

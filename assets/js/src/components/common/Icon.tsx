@@ -1,25 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
+import classNames from 'classnames';
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLElement> {
 	icon?: any;
-}
+	className?: string;
+} //
 
-const Icon: React.FC<Props> = (props) => {
-	const { icon } = props;
-	return <StyledIcon {...props}>{icon}</StyledIcon>;
-};
+const Icon = React.forwardRef<HTMLElement, Props>((props, ref) => {
+	const { icon, className, ...other } = props;
 
-const StyledIcon = styled.i`
-	display: flex;
-	font-size: inherit;
-	color: inherit;
+	const cls = classNames('mto-icon mto-block mto-text-sm', className);
 
-	svg {
-		height: 1em;
-		width: 1em;
-		fill: currentColor;
-	}
-`;
+	return (
+		<i className={cls} ref={ref} {...other}>
+			{icon}
+		</i>
+	);
+});
 
 export default Icon;

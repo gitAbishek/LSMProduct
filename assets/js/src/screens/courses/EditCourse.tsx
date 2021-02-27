@@ -1,16 +1,9 @@
-import {
-	CourseContainer,
-	CourseLeftContainer,
-	CourseRightContainer,
-	FeaturedImageActions,
-} from './AddNewCourse';
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import { fetchCourse, updateCourse } from '../../utils/api';
 import { useMutation, useQuery } from 'react-query';
 
 import Button from 'Components/common/Button';
-import FlexRow from 'Components/common/FlexRow';
 import FormGroup from 'Components/common/FormGroup';
 import ImageUpload from 'Components/common/ImageUpload';
 import Input from 'Components/common/Input';
@@ -51,7 +44,7 @@ const EditCourse = () => {
 	};
 
 	return (
-		<Fragment>
+		<>
 			<MainToolbar />
 			<MainLayout>
 				{isUpdated && (
@@ -61,8 +54,8 @@ const EditCourse = () => {
 					</div>
 				)}
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<CourseContainer>
-						<CourseLeftContainer>
+					<div className="mto-flex">
+						<div className="mto-w-1/2">
 							<FormGroup>
 								<Label htmlFor="">{__('Course Name', 'masteriyo')}</Label>
 								<Input
@@ -83,14 +76,14 @@ const EditCourse = () => {
 									name="description"
 									defaultValue={courseData?.description}></Textarea>
 							</FormGroup>
-							<FlexRow>
-								<Button appearance="primary" type="submit">
-									{__('Update', 'masteriyo')}
+							<div className="mto-flex-row">
+								<Button layout="primary" type="submit">
+									{__('Add Course', 'masteriyo')}
 								</Button>
-							</FlexRow>
-						</CourseLeftContainer>
+							</div>
+						</div>
 
-						<CourseRightContainer>
+						<div className="mto-w-1/2">
 							<FormGroup>
 								<Label htmlFor="">{__('Course Category', 'masteriyo')}</Label>
 								<Select
@@ -110,18 +103,16 @@ const EditCourse = () => {
 								<ImageUpload
 									title={__('Drag image or click to upload', 'masteriyo')}
 								/>
-								<FeaturedImageActions>
+								<div className="mto-flex-row">
 									<Button>{__('Remove Featured Image', 'masteriyo')}</Button>
-									<Button appearance="primary">
-										{__('Add New Image', 'masteriyo')}
-									</Button>
-								</FeaturedImageActions>
+									<Button layout="primary">{__('Add New', 'masteriyo')}</Button>
+								</div>
 							</FormGroup>
-						</CourseRightContainer>
-					</CourseContainer>
+						</div>
+					</div>
 				</form>
 			</MainLayout>
-		</Fragment>
+		</>
 	);
 };
 

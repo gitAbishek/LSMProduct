@@ -1,35 +1,22 @@
-import { BaseLine } from 'Config/defaultStyle';
-import colors from 'Config/colors';
-import fontSize from 'Config/fontSize';
-import styled from 'styled-components';
+import React from 'react';
+import classNames from 'classnames';
 
-const DropdownOverlay = styled.div`
-	background-color: ${colors.WHITE};
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.04);
-	border: 1px solid ${colors.BORDER};
+interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
-	ul {
-		margin: 0;
-		padding: 0;
-		list-style-type: none;
+const DropdownOverlay = React.forwardRef<HTMLDivElement, Props>(
+	(props, ref) => {
+		const { className, children, ...other } = props;
 
-		li {
-			display: flex;
-			align-items: center;
-			padding: ${BaseLine * 1.5}px ${BaseLine * 2}px;
-			cursor: pointer;
-			transition: all 0.35s ease-in-out;
+		const baseStyle =
+			'mto-bg-white mto-shadow-sm mto-border mto-border-solid mto-border-gray-300';
+		const cls = classNames(baseStyle, className);
 
-			&:hover {
-				background-color: ${colors.LIGHT_BLUEISH_GRAY};
-			}
-
-			i {
-				font-size: ${fontSize.LARGE};
-				margin-right: ${BaseLine * 0.5}px;
-			}
-		}
+		return (
+			<div className={cls} ref={ref} {...other}>
+				{children}
+			</div>
+		);
 	}
-`;
+);
 
 export default DropdownOverlay;

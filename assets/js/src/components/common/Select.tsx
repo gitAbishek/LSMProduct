@@ -3,7 +3,6 @@ import defaultStyle, { BaseLine } from 'Config/defaultStyle';
 
 import React from 'react';
 import colors from 'Config/colors';
-import { lighten } from 'polished';
 
 interface Props extends ReactSelectProps {}
 
@@ -47,7 +46,7 @@ const Select: React.FC<Props> = (props) => {
 			backgroundColor: state.isSelected
 				? colors.PRIMARY
 				: state.isFocused
-				? lighten(0.11, colors.PRIMARY)
+				? colors.PRIMARY
 				: 'transparent',
 		}),
 

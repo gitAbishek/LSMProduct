@@ -1,29 +1,31 @@
-import styled from 'styled-components';
-import colors from 'Config/colors';
-import defaultStyle, { BaseLine } from 'Config/defaultStyle';
+import React, { useContext } from 'react';
 
-const Input = styled.input`
-	height: ${BaseLine * 6}px;
-	border-radius: ${defaultStyle.borderRadius};
-	padding: ${BaseLine * 2}px;
-	border: 1px solid ${colors.BORDER};
-	box-shadow: 0 1px 0 ${colors.SHADOW};
-	transition: all 0.35s ease-in-out;
-	background-color: ${colors.WHITE};
+import { ThemeContext } from '../../context/ThemeContext';
+import classNames from 'classnames';
 
-	&:hover {
-		border-color: ${colors.PRIMARY};
-	}
+interface Props extends React.ComponentPropsWithRef<'input'> {
+	disabled?: boolean;
+}
 
-	&:focus {
-		border-color: ${colors.PRIMARY};
-		outline: none;
-		background-color: ${colors.LIGHT_BLUEISH_GRAY};
-	}
+const Input = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
+	const { className, type = 'text', disabled, ...other } = props;
 
-	&::placeholder {
-		color: ${colors.PLACEHOLDER};
-	}
-`;
+	const {
+		theme: { input },
+	} = useContext(ThemeContext);
+
+	const baseStyle = input.base;
+	const cls = classNames(baseStyle, className);
+
+	return (
+		<input
+			className={cls}
+			type={type}
+			ref={ref}
+			disabled={disabled}
+			{...other}
+		/>
+	);
+});
 
 export default Input;

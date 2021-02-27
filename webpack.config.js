@@ -61,21 +61,6 @@ const config = {
 					},
 				],
 			},
-			{
-				test: /\.(scss|sass)$/,
-				exclude: /node_modules/,
-				use: [
-					{
-						loader: isProduction ? MiniCSSExtractPlugin.loader : 'style-loader',
-					},
-					{
-						loader: 'css-loader',
-					},
-					{
-						loader: 'sass-loader',
-					},
-				],
-			},
 		],
 	},
 

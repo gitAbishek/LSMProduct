@@ -135,7 +135,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: assets/js/src/screens/sections/SectionBuilder.tsx:80
+#: assets/js/src/screens/sections/SectionBuilder.tsx:79
 msgid "Add New Section"
 msgstr ""
 

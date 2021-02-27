@@ -5,5 +5,6 @@ module.exports = {
 		tailwindcss('./tailwind.config.js'),
 		require('postcss-nested'),
 		require('autoprefixer'),
+		require('cssnano'),
 	],
 };

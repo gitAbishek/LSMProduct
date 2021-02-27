@@ -29,6 +29,10 @@ const config = {
 					options: {
 						plugins: [
 							isDevelopment && require.resolve('react-refresh/babel'),
+							isProduction && [
+								require.resolve('@wordpress/babel-plugin-makepot'),
+								{ output: 'i18n/languages/masteriyo.pot' },
+							],
 						].filter(Boolean),
 					},
 				},

@@ -56,17 +56,8 @@ const EditCourse = () => {
 			<MainLayout>
 				{isUpdated && (
 					<div className="mto-p-4 mto-bg-green-100 mto-rounded-sm mto-mb-10 mto-text-green-700">
-						{
-							(sprintf(
-								/* translators: %s course name */
-								__(
-									'Course `<strong>%s</strong>` is successfully updated. You can keep editing.',
-									'masteriyo'
-								),
-								courseData?.name
-							),
-							{ strong: <strong /> })
-						}
+						<strong>{courseData?.name}</strong>
+						{__(' is successfully updated. You can keep editing.', 'masteriyo')}
 					</div>
 				)}
 				<form onSubmit={handleSubmit(onSubmit)}>
@@ -94,7 +85,7 @@ const EditCourse = () => {
 							</FormGroup>
 							<FlexRow>
 								<Button appearance="primary" type="submit">
-									{__('Add Course', 'masteriyo')}
+									{__('Update', 'masteriyo')}
 								</Button>
 							</FlexRow>
 						</CourseLeftContainer>
@@ -122,7 +113,7 @@ const EditCourse = () => {
 								<FeaturedImageActions>
 									<Button>{__('Remove Featured Image', 'masteriyo')}</Button>
 									<Button appearance="primary">
-										{__('Add New', 'masteriyo')}
+										{__('Add New Image', 'masteriyo')}
 									</Button>
 								</FeaturedImageActions>
 							</FormGroup>

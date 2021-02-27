@@ -38,8 +38,8 @@ const AddNewCourse = () => {
 			<MainToolbar />
 			<MainLayout>
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<div className="mto-flex mto-flex-wrap mto--px-4">
-						<div className="mto-w-1/2">
+					<div className="mto-flex mto-flex-wrap mto--mx-4">
+						<div className="mto-w-1/2 mto-px-4">
 							<FormGroup>
 								<Label>{__('Course Name', 'masteriyo')}</Label>
 								<Input
@@ -63,7 +63,7 @@ const AddNewCourse = () => {
 							</div>
 						</div>
 
-						<div className="mto-w-1/2">
+						<div className="mto-w-1/2 mto-px-4">
 							<FormGroup>
 								<Label>{__('Course Category', 'masteriyo')}</Label>
 								<Select

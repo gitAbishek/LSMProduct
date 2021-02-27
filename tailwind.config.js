@@ -31,6 +31,9 @@ module.exports = {
 					900: '#A20232',
 				},
 			},
+			boxShadow: {
+				input: '0 1px 0 #EFF0F6',
+			},
 		},
 	},
 	variants: {

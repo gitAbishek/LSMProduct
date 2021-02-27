@@ -28,7 +28,7 @@ const config = {
 					loader: 'babel-loader',
 					options: {
 						plugins: [
-							isDevelopment && require.resolve('react-refresh/babel'),
+							isDevelopment && require.resolve('react-refr`esh/babel'),
 							isProduction && [
 								require.resolve('@wordpress/babel-plugin-makepot'),
 								{ output: 'i18n/languages/masteriyo.pot' },
@@ -58,21 +58,6 @@ const config = {
 					},
 					{
 						loader: 'postcss-loader',
-					},
-				],
-			},
-			{
-				test: /\.(scss|sass)$/,
-				exclude: /node_modules/,
-				use: [
-					{
-						loader: isProduction ? MiniCSSExtractPlugin.loader : 'style-loader',
-					},
-					{
-						loader: 'css-loader',
-					},
-					{
-						loader: 'sass-loader',
 					},
 				],
 			},

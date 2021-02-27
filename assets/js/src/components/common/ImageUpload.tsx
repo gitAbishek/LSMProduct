@@ -29,7 +29,7 @@ const ImageUpload = React.forwardRef<HTMLElement, Props>((props, ref) => {
 	} = useDropzone({ onDrop, accept: 'image/*' });
 
 	const baseStyle =
-		'mto-flex mto-items-center mto-w-full mto-cursor-pointer mto-bg-cover mto-bg-center mto-bg-gray-300';
+		'mto-flex mto-items-center mto-justify-center mto-h-20 mto-w-full mto-cursor-pointer mto-bg-cover mto-bg-center mto-bg-gray-50 mto-border mto-border-dashed mto-border-gray-300';
 	const acceptStyle = 'mto-bg-green-300';
 	const rejectStyle = 'mto-bg-red-300';
 

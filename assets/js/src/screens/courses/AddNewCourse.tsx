@@ -38,7 +38,7 @@ const AddNewCourse = () => {
 			<MainToolbar />
 			<MainLayout>
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<div className="mto-flex">
+					<div className="mto-flex mto-flex-wrap mto--px-4">
 						<div className="mto-w-1/2">
 							<FormGroup>
 								<Label>{__('Course Name', 'masteriyo')}</Label>
@@ -81,9 +81,10 @@ const AddNewCourse = () => {
 							<FormGroup>
 								<Label>{__('Featured Image', 'masteriyo')}</Label>
 								<ImageUpload
+									className="mto-mb-8"
 									title={__('Drag image or click to upload', 'masteriyo')}
 								/>
-								<div className="mto-flex-row">
+								<div className="mto-flex mto-justify-between">
 									<Button>{__('Remove Featured Image', 'masteriyo')}</Button>
 									<Button layout="primary">{__('Add New', 'masteriyo')}</Button>
 								</div>

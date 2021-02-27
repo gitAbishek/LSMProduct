@@ -26,6 +26,6 @@ export default {
 	},
 	input: {
 		base:
-			'mto-p-3 mto-border mto-border-solid mto-border-gray-300 mto-shadow-sm mto-transition-all hover:mto-border-primary focus:mto-border-primary focus:mto-bg-primary-50',
+			'mto-p-3 mto-border mto-border-solid mto-border-gray-200 mto-shadow-sm mto-transition-all mto-duration-300 mto-ease-in-out hover:mto-border-primary focus:mto-border-primary focus:mto-bg-primary-50 mto-w-full mto-outline-none mto-rounded-sm',
 	},
 };

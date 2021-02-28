@@ -40,7 +40,6 @@ const SectionBuilder = () => {
 		return <h1>Loading</h1>;
 	}
 
-	console.log(sectionQuery?.data);
 	return (
 		<>
 			<MainToolbar />
@@ -49,8 +48,8 @@ const SectionBuilder = () => {
 					<Section
 						key={section.id}
 						id={section.id}
-						title={section.name}
-						index={index}
+						name={section.name}
+						description={section.description}
 						courseId={courseId}
 					/>
 				))}

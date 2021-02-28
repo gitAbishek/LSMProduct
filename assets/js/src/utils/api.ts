@@ -79,6 +79,12 @@ export const addSection = async (data: any) => {
 	return axios.post(urls.sections, data).then((response) => response.data);
 };
 
+export const updateSection = async (id: number, data: any) => {
+	return axios
+		.patch(urls.section.replace(':id', id.toString()), data)
+		.then((response) => response.data);
+};
+
 export const deleteSection = async (id: number) => {
 	return axios
 		.delete(urls.section.replace(':id', id.toString()))

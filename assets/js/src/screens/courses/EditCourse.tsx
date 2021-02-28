@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { __, sprintf } from '@wordpress/i18n';
 import { fetchCourse, updateCourse } from '../../utils/api';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import Button from 'Components/common/Button';
 import FormGroup from 'Components/common/FormGroup';
@@ -12,6 +11,7 @@ import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
+import { __ } from '@wordpress/i18n';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
@@ -24,10 +24,10 @@ const EditCourse = () => {
 
 	const { courseId }: any = useParams();
 	const [isUpdated, setIsUpdated] = useState(false);
+	const queryClient = useQueryClient();
 
-	const { data: courseData, refetch: refectCourseData } = useQuery(
-		[`course${courseId}`, courseId],
-		() => fetchCourse(courseId)
+	const courseQuery = useQuery([`course${courseId}`, courseId], () =>
+		fetchCourse(courseId)
 	);
 
 	const { register, handleSubmit } = useForm<Inputs>();
@@ -35,7 +35,7 @@ const EditCourse = () => {
 	const addMutation = useMutation((data) => updateCourse(courseId, data), {
 		onSuccess: () => {
 			setIsUpdated(true);
-			refectCourseData();
+			queryClient.invalidateQueries(`course${courseId}`);
 		},
 	});
 
@@ -49,7 +49,7 @@ const EditCourse = () => {
 			<MainLayout>
 				{isUpdated && (
 					<div className="mto-p-4 mto-bg-green-100 mto-rounded-sm mto-mb-10 mto-text-green-700">
-						<strong>{courseData?.name}</strong>
+						<strong>{courseQuery?.data?.name}</strong>
 						{__(' is successfully updated. You can keep editing.', 'masteriyo')}
 					</div>
 				)}
@@ -62,7 +62,7 @@ const EditCourse = () => {
 									placeholder={__('Your Course Name', 'masteriyo')}
 									ref={register({ required: true })}
 									name="name"
-									defaultValue={courseData?.name}></Input>
+									defaultValue={courseQuery?.data?.name}></Input>
 							</FormGroup>
 
 							<FormGroup>
@@ -74,7 +74,7 @@ const EditCourse = () => {
 									rows={5}
 									ref={register}
 									name="description"
-									defaultValue={courseData?.description}></Textarea>
+									defaultValue={courseQuery?.data?.description}></Textarea>
 							</FormGroup>
 							<div className="mto-flex-row">
 								<Button layout="primary" type="submit">

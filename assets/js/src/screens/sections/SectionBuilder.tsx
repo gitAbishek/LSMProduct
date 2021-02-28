@@ -1,4 +1,5 @@
-import { fetchCourse, fetchSections } from '../../utils/api';
+import { addSection, fetchCourse, fetchSections } from '../../utils/api';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import AddNewButton from 'Components/common/AddNewButton';
 import MainToolbar from 'Layouts/MainToolbar';
@@ -6,16 +7,26 @@ import React from 'react';
 import Section from './components/Section';
 import { __ } from '@wordpress/i18n';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
 
 const SectionBuilder = () => {
 	const { courseId }: any = useParams();
-	const courseQuery = useQuery([`builderCourse`, courseId], () =>
+	const queryClient = useQueryClient();
+
+	const courseQuery = useQuery(['builderCourse', courseId], () =>
 		fetchCourse(courseId)
 	);
 
-	const sectionQuery = useQuery(['buidlerSection', courseId], () =>
+	const sectionQuery = useQuery(['buidlerSections', courseId], () =>
 		fetchSections(courseId)
+	);
+
+	const addSectionMutation = useMutation(
+		(newSection) => addSection(newSection),
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries('builderSections');
+			},
+		}
 	);
 
 	if (courseQuery.isLoading) {

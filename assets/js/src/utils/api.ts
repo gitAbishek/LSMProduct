@@ -74,3 +74,7 @@ export const updateCourse = async (courseId: any, data: any) => {
 		.patch(urls.course.replace(':id', courseId.toString()), data)
 		.then((response) => response.data);
 };
+
+export const addSection = async (data: any) => {
+	return axios.post(urls.sections, data).then((response) => response.data);
+};

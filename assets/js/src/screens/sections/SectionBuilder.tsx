@@ -16,12 +16,12 @@ const SectionBuilder = () => {
 		fetchCourse(courseId)
 	);
 
-	const sectionQuery = useQuery(['buidlerSections', courseId], () =>
+	const sectionQuery = useQuery(['builderSections', courseId], () =>
 		fetchSections(courseId)
 	);
 
 	const addSectionMutation = useMutation(
-		(newSection) => addSection(newSection),
+		(newSection: any) => addSection(newSection),
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries('builderSections');
@@ -29,10 +29,18 @@ const SectionBuilder = () => {
 		}
 	);
 
+	const onAddNewSectionClick = () => {
+		addSectionMutation.mutate({
+			parent_id: courseId,
+			name: 'New Section',
+		});
+	};
+
 	if (courseQuery.isLoading) {
 		return <h1>Loading</h1>;
 	}
 
+	console.log(sectionQuery?.data);
 	return (
 		<>
 			<MainToolbar />
@@ -47,7 +55,9 @@ const SectionBuilder = () => {
 					/>
 				))}
 				<div className="mto-flex mto-justify-center mto-p-12">
-					<AddNewButton>{__('Add New Section', 'masteriyo')}</AddNewButton>
+					<AddNewButton onClick={onAddNewSectionClick}>
+						{__('Add New Section', 'masteriyo')}
+					</AddNewButton>
 				</div>
 			</div>
 		</>

@@ -78,3 +78,9 @@ export const updateCourse = async (courseId: any, data: any) => {
 export const addSection = async (data: any) => {
 	return axios.post(urls.sections, data).then((response) => response.data);
 };
+
+export const deleteSection = async (id: number) => {
+	return axios
+		.delete(urls.section.replace(':id', id.toString()))
+		.then((response) => response.data);
+};

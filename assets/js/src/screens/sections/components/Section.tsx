@@ -1,10 +1,12 @@
 import { Edit, Trash } from '../../../assets/icons';
 import React, { useState } from 'react';
+import { deleteSection, fetchLessons } from '../../../utils/api';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import AddNewButton from 'Components/common/AddNewButton';
 import Button from 'Components/common/Button';
 import DragHandle from '../components/DragHandle';
-import Dropdown from 'rc-dropdown';
+import Dropdown from 'Components/common/Dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
 import FormGroup from 'Components/common/FormGroup';
 import Icon from 'Components/common/Icon';
@@ -15,8 +17,7 @@ import { NavLink } from 'react-router-dom';
 import OptionButton from 'Components/common/OptionButton';
 import Textarea from 'Components/common/Textarea';
 import { __ } from '@wordpress/i18n';
-import { fetchLessons } from '../../../utils/api';
-import { useQuery } from 'react-query';
+import { useToasts } from 'react-toast-notifications';
 
 interface Props {
 	id: number;
@@ -29,16 +30,31 @@ interface Props {
 
 const Section: React.FC<Props> = (props) => {
 	const { id, title, contents, index, editing, courseId } = props;
-
 	const [mode, setMode] = useState(editing ? 'editing' : 'normal');
 
-	const { data: lessonData, isError: isLessonError } = useQuery(
-		['lessons', courseId],
-		() => fetchLessons(courseId),
-		{
-			enabled: true,
-		}
+	const queryClient = useQueryClient();
+	const { addToast } = useToasts();
+
+	const lessonQuery = useQuery(['lessons', courseId], () =>
+		fetchLessons(courseId)
 	);
+	const deleteMutation = useMutation((id: number) => deleteSection(id), {
+		onSuccess: (data) => {
+			console.log(data);
+		},
+	});
+
+	const onDeletePress = () => {
+		console.log('clicked');
+		deleteMutation.mutate(id, {
+			onSuccess: () => {
+				addToast(title + __('has been deleted successfully'), {
+					appearance: 'success',
+				});
+				queryClient.invalidateQueries('builderSections');
+			},
+		});
+	};
 
 	return (
 		<div className="mto-bg-white mto-shadow-sm mto-p-8 mto-mt-12 mto-rounded-sm">
@@ -49,18 +65,20 @@ const Section: React.FC<Props> = (props) => {
 				</div>
 				<div className="mto-flex">
 					<Dropdown
-						trigger={'click'}
-						placement={'bottomRight'}
-						animation={'slide-up'}
-						overlay={
+						align="end"
+						content={
 							<DropdownOverlay>
-								<ul>
-									<li onClick={() => setMode('editing')}>
-										<Icon icon={<Edit />} />
+								<ul className="mto-w-36 mto-text-gray-700 mto-m-4 ">
+									<li
+										className="mto-flex mto-items-center mto-text-sm mto-mb-4 hover:mto-text-primary mto-cursor-pointer"
+										onClick={() => setMode('editing')}>
+										<Icon className="mto-mr-1" icon={<Edit />} />
 										{__('Edit', 'masteriyo')}
 									</li>
-									<li>
-										<Icon icon={<Trash />} />
+									<li
+										className="mto-flex mto-items-center mto-text-sm hover:mto-text-primary mto-cursor-pointer"
+										onClick={() => onDeletePress()}>
+										<Icon className="mto-mr-1" icon={<Trash />} />
 										{__('Delete', 'masteriyo')}
 									</li>
 								</ul>
@@ -103,7 +121,7 @@ const Section: React.FC<Props> = (props) => {
 			)}
 
 			<div className="mto-h-8">
-				{lessonData?.map((content: any, index: number) => (
+				{lessonQuery?.data?.map((content: any, index: number) => (
 					<Lesson
 						key={content.id}
 						id={content.id}

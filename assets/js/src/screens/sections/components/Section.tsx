@@ -41,9 +41,9 @@ const Section: React.FC<Props> = (props) => {
 	);
 
 	return (
-		<div className="mto-bg-white mto-rounded-sm mto-shadow-md mto-py-8">
-			<header className="mto-flex">
-				<div className="mto-flex">
+		<div className="mto-bg-white mto-shadow-sm mto-p-8 mto-mt-12 mto-rounded-sm">
+			<header className="mto-flex mto-justify-between mto-items-center">
+				<div className="mto-flex mto-items-center">
 					<DragHandle />
 					<h1>{title}</h1>
 				</div>
@@ -102,7 +102,7 @@ const Section: React.FC<Props> = (props) => {
 				</>
 			)}
 
-			<div className="mto-bg-gray-50 mto-h-8">
+			<div className="mto-h-8">
 				{lessonData?.map((content: any, index: number) => (
 					<Lesson
 						key={content.id}

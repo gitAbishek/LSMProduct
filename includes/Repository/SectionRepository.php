@@ -117,7 +117,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 
 		$post_data_keys = array(
 			'description',
-			'title',
+			'name',
 			'parent_id',
 			'menu_order',
 			'date_created',

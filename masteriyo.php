@@ -47,4 +47,4 @@ function masteriyo( $class = '' ) {
 	global $masteriyo;
 
 	return empty( $class ) ? $masteriyo : $masteriyo->get( $class );
- }
+}

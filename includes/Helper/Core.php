@@ -142,7 +142,7 @@ function mto_get_order( $order ) {
 
 	if ( is_a( $order, 'ThemeGrill\Masteriyo\Models\Order' ) ) {
 		$id = $order->get_id();
-	} elseif ( is_a( $order, 'ThemeGrill\Masteriyo\Models\Order' ) ) {
+	} elseif ( is_a( $order, 'WP_Post' ) ) {
 		$id = $order->ID;
 	} else {
 		$id = $order;
@@ -172,14 +172,14 @@ function mto_get_question( $question ) {
 
 	if ( is_a( $question, 'ThemeGrill\Masteriyo\Models\Question' ) ) {
 		$id = $question->get_id();
-	} elseif ( is_a( $question, 'ThemeGrill\Masteriyo\Models\Question' ) ) {
+	} elseif ( is_a( $question, 'WP_Post' ) ) {
 		$id = $question->ID;
 	} else {
 		$id = $question;
 	}
 
 	try {
-		$id   = absint( $id );
+		$id = absint( $id );
 		$question_obj->set_id( $id );
 		$question_store->read( $question_obj );
 	} catch ( \Exception $e) {
@@ -187,4 +187,97 @@ function mto_get_question( $question ) {
 	}
 
 	return $question_obj;
+}
+
+/**
+ * Get course category.
+ *
+ * @since 0.1.0
+ *
+ * @param int|CourseCategory|WP_Term $course_cat Course Category id or Course Category Model or Term.
+ * @return CourseCategory|null
+ */
+function mto_get_course_cat( $course_cat ) {
+	$course_cat_obj   = masteriyo( 'course_cat' );
+	$course_cat_store = masteriyo( 'course_cat.store' );
+
+	if ( is_a( $course_cat, 'ThemeGrill\Masteriyo\Models\CourseCategory' ) ) {
+		$id = $course_cat->get_id();
+	} elseif ( is_a( $course_cat, 'WP_Term' ) ) {
+		$id = $course_cat->ID;
+	} else {
+		$id = $course_cat;
+	}
+
+	try {
+		$id = absint( $id );
+		$course_cat_obj->set_id( $id );
+		$course_cat_store->read( $course_cat_obj );
+	} catch ( \Exception $e) {
+		return null;
+	}
+
+	return $course_cat_obj;
+}
+
+/**
+ * Get course tag.
+ *
+ * @since 0.1.0
+ *
+ * @param int|CourseTag|WP_Term $course_tag Course Tag id or Course Tag Model or Term.
+ * @return CourseTag|null
+ */
+function mto_get_course_tag( $course_tag ) {
+	$course_tag_obj   = masteriyo( 'course_tag' );
+	$course_tag_store = masteriyo( 'course_tag.store' );
+
+	if ( is_a( $course_tag, 'ThemeGrill\Masteriyo\Models\CourseTag' ) ) {
+		$id = $course_tag->get_id();
+	} elseif ( is_a( $course_tag, 'WP_Term' ) ) {
+		$id = $course_tag->ID;
+	} else {
+		$id = $course_tag;
+	}
+
+	try {
+		$id = absint( $id );
+		$course_tag_obj->set_id( $id );
+		$course_tag_store->read( $course_tag_obj );
+	} catch ( \Exception $e) {
+		return null;
+	}
+
+	return $course_tag_obj;
+}
+
+/**
+ * Get course difficulty.
+ *
+ * @since 0.1.0
+ *
+ * @param int|CourseDifficulty|WP_Term $course_difficulty Course Difficulty id or Course Difficulty Model or Term.
+ * @return CourseDifficulty|null
+ */
+function mto_get_course_difficulty( $course_difficulty ) {
+	$course_difficulty_obj   = masteriyo( 'course_difficulty' );
+	$course_difficulty_store = masteriyo( 'course_difficulty.store' );
+
+	if ( is_a( $course_difficulty, 'ThemeGrill\Masteriyo\Models\CourseDifficulty' ) ) {
+		$id = $course_difficulty->get_id();
+	} elseif ( is_a( $course_difficulty, 'WP_Term' ) ) {
+		$id = $course_difficulty->ID;
+	} else {
+		$id = $course_difficulty;
+	}
+
+	try {
+		$id = absint( $id );
+		$course_difficulty_obj->set_id( $id );
+		$course_difficulty_store->read( $course_difficulty_obj );
+	} catch ( \Exception $e) {
+		return null;
+	}
+
+	return $course_difficulty_obj;
 }

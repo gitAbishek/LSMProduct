@@ -1,17 +1,9 @@
-import {
-	ActionContainer,
-	ContentContainer,
-	ContentHeader,
-	ContentIcon,
-	ContentTitle,
-} from './styled';
 import { AlignLeft, Trash } from '../../../assets/icons';
 
 import Button from 'Components/common/Button';
 import DragHandle from '../components/DragHandle';
 import Dropdown from 'rc-dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
-import FlexRow from 'Components/common/FlexRow';
 import Icon from 'Components/common/Icon';
 import OptionButton from 'Components/common/OptionButton';
 import React from 'react';
@@ -26,16 +18,16 @@ interface Props {
 const Lesson: React.FC<Props> = (props) => {
 	const { id, title, index } = props;
 	return (
-		<ContentContainer>
-			<ContentHeader>
-				<FlexRow>
+		<div className="mto-bg-white mto-shadow-md mto-border mto-border-solid mto-border-gray-300 mto-px-4 mto-py-3">
+			<header className="mto-flex mto-justify-between">
+				<div className="mto-flex">
 					<DragHandle />
-					<ContentIcon icon={<AlignLeft />} />
-					<ContentTitle>{title}</ContentTitle>
-				</FlexRow>
-				<FlexRow>
-					<ActionContainer>
-						<Button>{__( 'Edit', 'masteriyo' )}</Button>
+					<Icon className="mto-text-lg mto-mr-4" icon={<AlignLeft />} />
+					<h5>{title}</h5>
+				</div>
+				<div className="mto-flex">
+					<div className="mto-flex">
+						<Button className="mto-ml-4">{__('Edit', 'masteriyo')}</Button>
 						<Dropdown
 							trigger={'click'}
 							placement={'bottomRight'}
@@ -45,17 +37,17 @@ const Lesson: React.FC<Props> = (props) => {
 									<ul>
 										<li>
 											<Icon icon={<Trash />} />
-											{__( 'Delete', 'masteriyo' )}
+											{__('Delete', 'masteriyo')}
 										</li>
 									</ul>
 								</DropdownOverlay>
 							}>
 							<OptionButton />
 						</Dropdown>
-					</ActionContainer>
-				</FlexRow>
-			</ContentHeader>
-		</ContentContainer>
+					</div>
+				</div>
+			</header>
+		</div>
 	);
 };
 

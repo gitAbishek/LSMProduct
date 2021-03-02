@@ -1,23 +1,18 @@
-import { Controller, useForm } from 'react-hook-form';
-import React, { Fragment } from 'react';
-
-import { BaseLine } from 'Config/defaultStyle';
 import Button from 'Components/common/Button';
-import Flex from 'Components/common/Flex';
-import FlexRow from 'Components/common/FlexRow';
 import FormGroup from 'Components/common/FormGroup';
 import ImageUpload from 'Components/common/ImageUpload';
 import Input from 'Components/common/Input';
 import Label from 'Components/common/Label';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
+import React from 'react';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
+import { __ } from '@wordpress/i18n';
 import { addCourse } from '../../utils/api';
-import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from 'react-query';
-import { __ } from '@wordpress/i18n';
 
 const AddNewCourse = () => {
 	interface Inputs {
@@ -39,85 +34,67 @@ const AddNewCourse = () => {
 	};
 
 	return (
-		<Fragment>
+		<>
 			<MainToolbar />
 			<MainLayout>
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<CourseContainer>
-						<CourseLeftContainer>
+					<div className="mto-flex mto-flex-wrap mto--mx-4">
+						<div className="mto-w-1/2 mto-px-4">
 							<FormGroup>
-								<Label htmlFor="">{__( 'Course Name', 'masteriyo' ) }</Label>
+								<Label>{__('Course Name', 'masteriyo')}</Label>
 								<Input
-									placeholder={__( 'Your Course Name', 'masteriyo' )}
+									placeholder={__('Your Course Name', 'masteriyo')}
 									ref={register({ required: true })}
 									name="name"></Input>
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">{__( 'Course Description', 'masteriyo' )}</Label>
+								<Label>{__('Course Description', 'masteriyo')}</Label>
 								<Textarea
-									placeholder={__( 'Your Course Title', 'masteriyo' )}
+									placeholder={__('Your Course Title', 'masteriyo')}
 									rows={5}
 									ref={register}
 									name="description"></Textarea>
 							</FormGroup>
-							<FlexRow>
-								<Button appearance="primary" type="submit">
-									{__( 'Add Course', 'masteriyo' )}
+							<div className="mto-flex-row">
+								<Button layout="primary" type="submit">
+									{__('Add Course', 'masteriyo')}
 								</Button>
-							</FlexRow>
-						</CourseLeftContainer>
+							</div>
+						</div>
 
-						<CourseRightContainer>
+						<div className="mto-w-1/2 mto-px-4">
 							<FormGroup>
-								<Label htmlFor="">{__( 'Course Category', 'masteriyo' )}</Label>
+								<Label>{__('Course Category', 'masteriyo')}</Label>
 								<Select
 									options={[
-										{ value: 'chocolate', label: __( 'Chocolate', 'masteriyo' ) },
-										{ value: 'strawberry', label: __( 'Strawberry', 'masteriyo' ) },
-										{ value: 'vanilla', label: __( 'Vanilla', 'masteriyo' ) },
+										{ value: 'chocolate', label: __('Chocolate', 'masteriyo') },
+										{
+											value: 'strawberry',
+											label: __('Strawberry', 'masteriyo'),
+										},
+										{ value: 'vanilla', label: __('Vanilla', 'masteriyo') },
 									]}
 								/>
 							</FormGroup>
 
 							<FormGroup>
-								<Label htmlFor="">{__( 'Featured Image', 'masteriyo' )}</Label>
-								<ImageUpload title={__( 'Drag image or click to upload', 'masteriyo' )} />
-								<FeaturedImageActions>
-									<Button>{__( 'Remove Featured Image', 'masteriyo' )}</Button>
-									<Button appearance="primary">{__( 'Add New', 'masteriyo' )}</Button>
-								</FeaturedImageActions>
+								<Label>{__('Featured Image', 'masteriyo')}</Label>
+								<ImageUpload
+									className="mto-mb-8"
+									title={__('Drag image or click to upload', 'masteriyo')}
+								/>
+								<div className="mto-flex mto-justify-between">
+									<Button>{__('Remove Featured Image', 'masteriyo')}</Button>
+									<Button layout="primary">{__('Add New', 'masteriyo')}</Button>
+								</div>
 							</FormGroup>
-						</CourseRightContainer>
-					</CourseContainer>
+						</div>
+					</div>
 				</form>
 			</MainLayout>
-		</Fragment>
+		</>
 	);
 };
-
-export const CourseContainer = styled(FlexRow)`
-	align-items: flex-start;
-	margin-left: -${BaseLine * 2}px;
-	margin-right: -${BaseLine * 2}px;
-`;
-
-export const CourseInner = styled(Flex)`
-	padding-left: ${BaseLine * 2}px;
-	padding-right: ${BaseLine * 2}px;
-`;
-
-export const CourseLeftContainer = styled(CourseInner)`
-	flex: 1;
-`;
-
-export const CourseRightContainer = styled(CourseInner)`
-	flex-basis: 400px;
-`;
-
-export const FeaturedImageActions = styled(FlexRow)`
-	justify-content: space-between;
-	margin-top: ${BaseLine * 3}px;
-`;
 
 export default AddNewCourse;

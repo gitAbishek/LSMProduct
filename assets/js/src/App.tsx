@@ -1,5 +1,3 @@
-import './assets/scss/style.scss';
-
 import * as screens from './screens';
 
 import { QueryClient, QueryClientProvider } from 'react-query';

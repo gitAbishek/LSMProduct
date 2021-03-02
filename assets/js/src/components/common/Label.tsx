@@ -1,11 +1,19 @@
-import styled from 'styled-components';
-import colors from 'Config/colors';
-import { BaseLine } from 'Config/defaultStyle';
+import React from 'react';
+import classNames from 'classnames';
 
-const Label = styled.label`
-	color: ${colors.HEADING};
-	font-weight: 500;
-	margin-bottom: ${BaseLine * 2}px;
-`;
+interface Props extends React.ComponentPropsWithRef<'label'> {}
+
+const Label = React.forwardRef<HTMLLabelElement, Props>((props, ref) => {
+	const { className, children, ...other } = props;
+
+	const baseStyle = 'mto-font-medium mto-mb-3 mto-block';
+	const cls = classNames(baseStyle, className);
+
+	return (
+		<label className={cls} ref={ref} {...other}>
+			{children}
+		</label>
+	);
+});
 
 export default Label;

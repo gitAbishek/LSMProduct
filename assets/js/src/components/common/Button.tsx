@@ -1,109 +1,69 @@
-import defaultStyle, { BaseLine } from 'Config/defaultStyle';
-import styled, { css } from 'styled-components';
+import React, { ReactNode, useContext } from 'react';
 
 import Icon from './Icon';
-import React from 'react';
-import colors from 'Config/colors';
-import fontSize from 'Config/fontSize';
-import { lighten } from 'polished';
+import { ThemeContext } from '../../context/ThemeContext';
+import classNames from 'classnames';
 
-interface Props extends React.ButtonHTMLAttributes<any> {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	icon?: any;
-	appearance?: 'default' | 'primary' | 'secondary';
+	layout?: 'primary' | 'accent' | 'outline';
 	size?: 'small' | 'medium' | 'large';
+	disabled?: boolean;
+	block?: boolean;
 }
 
-const Button: React.FC<Props> = (props) => {
-	const { icon, appearance, size } = props;
-	return (
-		<StyledButton
-			appearance={appearance}
-			size={size}
-			className="masteriyo-button"
-			{...props}>
-			{icon && <Icon icon={icon} />}
-			<span>{props.children}</span>
-		</StyledButton>
-	);
-};
+const Button = React.forwardRef<HTMLButtonElement, Props>((props, ref) => {
+	const {
+		icon,
+		layout = 'outline',
+		size = 'medium',
+		disabled = false,
+		block = false,
+		className,
+		...other
+	} = props;
+	const {
+		theme: { button },
+	} = useContext(ThemeContext);
 
-Button.defaultProps = {
-	appearance: 'default',
-	size: 'medium',
-};
+	const baseStyle = button.base;
+	const blockStyle = button.block;
+	const sizeStyles = {
+		small: button.size.small,
+		medium: button.size.medium,
+		large: button.size.large,
+	};
+	const layoutStyles = {
+		primary: button.primary.base,
+		accent: button.accent.base,
+		outline: button.outline.base,
+	};
+	const activeStyles = {
+		primary: button.primary.active,
+		accent: button.accent.active,
+		outline: button.outline.active,
+	};
+	const disabledStyles = {
+		primary: button.primary.disabled,
+		accent: button.accent.disabled,
+		outline: button.outline.disabled,
+	};
+
+	const cls = classNames(
+		baseStyle,
+		layoutStyles[layout],
+		sizeStyles[size],
+		block && blockStyle,
+		disabled ? disabledStyles[layout] : activeStyles[layout],
+		className
+	);
+
+	return (
+		<button className={cls} {...other}>
+			{icon && <Icon icon={icon} className="mto-mr-1" />}
+			<span>{props.children}</span>
+		</button>
+	);
+});
 
 export default Button;
-
-const StyledButton = styled.button`
-	cursor: pointer;
-	transition: all 0.35s ease-in-out;
-	border: 1px solid transparent;
-	font-weight: 500;
-	font-size: ${fontSize.SMALL};
-	border-radius: ${defaultStyle.borderRadius};
-	line-height: 1;
-	display: flex;
-	align-items: center;
-	outline: none;
-
-	i {
-		margin-right: ${BaseLine}px;
-	}
-
-	${(props: Props) =>
-		props.appearance === 'default' &&
-		css`
-			color: ${colors.TEXT};
-			border-color: ${colors.BORDER};
-			background-color: ${colors.WHITE};
-
-			&:hover {
-				background-color: ${lighten(0.05, colors.PRIMARY)};
-			}
-		`}
-
-	${(props: Props) =>
-		props.appearance === 'primary' &&
-		css`
-			color: ${colors.WHITE};
-			border-color: ${colors.PRIMARY};
-			background-color: ${colors.PRIMARY};
-
-			&:hover {
-				background-color: ${lighten(0.05, colors.PRIMARY)};
-			}
-		`}
-
-	${(props: Props) =>
-		props.appearance === 'secondary' &&
-		css`
-			color: ${colors.WHITE};
-				border-color: ${colors.SECONDARY};
-				background-color: ${colors.SECONDARY};
-
-				&:hover {
-					background-color: ${lighten(0.05, colors.SECONDARY)};
-				}
-			}
-		`}
-		
-	${(props: Props) =>
-		props.size === 'medium' &&
-		css`
-			padding: 12px 16px;
-		`}
-
-	${(props: Props) =>
-		props.size === 'small' &&
-		css`
-			padding: 6px 8px;
-			font-size: ${fontSize.SMALL};
-		`}
-	
-	${(props: Props) =>
-		props.size === 'large' &&
-		css`
-			padding: 14px 16px;
-			font-size: ${fontSize.LARGE};
-		`}
-`;

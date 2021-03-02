@@ -33,7 +33,7 @@ function mto_get_course( $course ) {
 		return null;
 	}
 
-	return $course_obj;
+	return apply_filters( 'masteriyo_get_course', $course_obj, $course );
 }
 
 /**
@@ -63,7 +63,8 @@ function mto_get_lesson( $lesson ) {
 	} catch ( \Exception $e) {
 		return null;
 	}
-	return $lesson_obj;
+	return apply_filters( 'masteriyo_get_lesson', $lesson_obj, $lesson );
+
 }
 
 /**
@@ -94,7 +95,7 @@ function mto_get_section( $section ) {
 		return null;
 	}
 
-	return $section_obj;
+	return apply_filters( 'masteriyo_get_section', $section_obj, $section );
 }
 
 /**
@@ -125,7 +126,7 @@ function mto_get_quiz( $quiz ) {
 		return null;
 	}
 
-	return $quiz_obj;
+	return apply_filters( 'masteriyo_get_quiz', $quiz_obj, $quiz );
 }
 
 /**
@@ -155,7 +156,7 @@ function mto_get_order( $order ) {
 	} catch ( \Exception $e) {
 		return null;
 	}
-	return $order_obj;
+	return apply_filters( 'masteriyo_get_order', $order_obj, $order );
 }
 
 /**
@@ -186,7 +187,7 @@ function mto_get_question( $question ) {
 		return null;
 	}
 
-	return $question_obj;
+	return apply_filters( 'masteriyo_get_question', $question_obj, $question );
 }
 
 /**
@@ -217,7 +218,7 @@ function mto_get_course_cat( $course_cat ) {
 		return null;
 	}
 
-	return $course_cat_obj;
+	return apply_filters( 'masteriyo_get_course_cat', $course_cat_obj, $course_cat );
 }
 
 /**
@@ -248,7 +249,7 @@ function mto_get_course_tag( $course_tag ) {
 		return null;
 	}
 
-	return $course_tag_obj;
+	return apply_filters( 'masteriyo_get_course_tag', $course_tag_obj, $course_tag );
 }
 
 /**
@@ -279,7 +280,7 @@ function mto_get_course_difficulty( $course_difficulty ) {
 		return null;
 	}
 
-	return $course_difficulty_obj;
+	return apply_filters( 'masteriyo_get_course_difficulty', $course_difficulty_obj, $course_difficulty );
 }
 
 /**
@@ -310,5 +311,5 @@ function mto_get_user( $user ) {
 		return null;
 	}
 
-	return $user_obj;
+	return apply_filters( 'masteriyo_get_user', $user_obj, $user );
 }

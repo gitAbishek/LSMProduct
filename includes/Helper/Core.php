@@ -13,7 +13,7 @@
  * @param int|Course|WP_Post $course Course id or Course Model or Post.
  * @return Course|null
  */
-function mto_get_course( $course ) {
+function masteriyo_get_course( $course ) {
 	$course_obj   = masteriyo( 'course' );
 	$course_store = masteriyo( 'course.store' );
 
@@ -44,7 +44,7 @@ function mto_get_course( $course ) {
  * @param int|Lesson|WP_Post $lesson Lesson id or Lesson Model or Post.
  * @return Lesson|null
  */
-function mto_get_lesson( $lesson ) {
+function masteriyo_get_lesson( $lesson ) {
 	$lesson_obj   = masteriyo( 'lesson' );
 	$lesson_store = masteriyo( 'lesson.store' );
 
@@ -75,7 +75,7 @@ function mto_get_lesson( $lesson ) {
  * @param int|Section|WP_Post $section Section id or Section Model or Post.
  * @return Section|null
  */
-function mto_get_section( $section ) {
+function masteriyo_get_section( $section ) {
 	$section_obj   = masteriyo( 'section' );
 	$section_store = masteriyo( 'section.store' );
 
@@ -106,7 +106,7 @@ function mto_get_section( $section ) {
  * @param int|Quiz|WP_Post $quiz Quiz id or Quiz Model or Post.
  * @return Quiz|null
  */
-function mto_get_quiz( $quiz ) {
+function masteriyo_get_quiz( $quiz ) {
 	$quiz_obj   = masteriyo( 'quiz' );
 	$quiz_store = masteriyo( 'quiz.store' );
 
@@ -137,7 +137,7 @@ function mto_get_quiz( $quiz ) {
  * @param int|Order|WP_Post $order Order id or Order Model or Post.
  * @return Order|null
  */
-function mto_get_order( $order ) {
+function masteriyo_get_order( $order ) {
 	$order_obj   = masteriyo( 'order' );
 	$order_store = masteriyo( 'order.store' );
 
@@ -167,7 +167,7 @@ function mto_get_order( $order ) {
  * @param int|Question|WP_Post $question Question id or Question Model or Post.
  * @return Question|null
  */
-function mto_get_question( $question ) {
+function masteriyo_get_question( $question ) {
 	$question_obj   = masteriyo( 'question' );
 	$question_store = masteriyo( 'question.store' );
 
@@ -198,7 +198,7 @@ function mto_get_question( $question ) {
  * @param int|CourseCategory|WP_Term $course_cat Course Category id or Course Category Model or Term.
  * @return CourseCategory|null
  */
-function mto_get_course_cat( $course_cat ) {
+function masteriyo_get_course_cat( $course_cat ) {
 	$course_cat_obj   = masteriyo( 'course_cat' );
 	$course_cat_store = masteriyo( 'course_cat.store' );
 
@@ -229,7 +229,7 @@ function mto_get_course_cat( $course_cat ) {
  * @param int|CourseTag|WP_Term $course_tag Course Tag id or Course Tag Model or Term.
  * @return CourseTag|null
  */
-function mto_get_course_tag( $course_tag ) {
+function masteriyo_get_course_tag( $course_tag ) {
 	$course_tag_obj   = masteriyo( 'course_tag' );
 	$course_tag_store = masteriyo( 'course_tag.store' );
 
@@ -260,7 +260,7 @@ function mto_get_course_tag( $course_tag ) {
  * @param int|CourseDifficulty|WP_Term $course_difficulty Course Difficulty id or Course Difficulty Model or Term.
  * @return CourseDifficulty|null
  */
-function mto_get_course_difficulty( $course_difficulty ) {
+function masteriyo_get_course_difficulty( $course_difficulty ) {
 	$course_difficulty_obj   = masteriyo( 'course_difficulty' );
 	$course_difficulty_store = masteriyo( 'course_difficulty.store' );
 
@@ -291,7 +291,7 @@ function mto_get_course_difficulty( $course_difficulty ) {
  * @param int|User|WP_User $user User  id or User Model or WP+User.
  * @return User|null
  */
-function mto_get_user( $user ) {
+function masteriyo_get_user( $user ) {
 	$user_obj   = masteriyo( 'user' );
 	$user_store = masteriyo( 'user.store' );
 

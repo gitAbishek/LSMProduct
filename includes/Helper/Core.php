@@ -281,3 +281,34 @@ function mto_get_course_difficulty( $course_difficulty ) {
 
 	return $course_difficulty_obj;
 }
+
+/**
+ * Get user.
+ *
+ * @since 0.1.0
+ *
+ * @param int|User|WP_User $user User  id or User Model or WP+User.
+ * @return User|null
+ */
+function mto_get_user( $user ) {
+	$user_obj   = masteriyo( 'user' );
+	$user_store = masteriyo( 'user.store' );
+
+	if ( is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ) {
+		$id = $user->get_id();
+	} elseif ( is_a( $user, 'WP_User' ) ) {
+		$id = $user->ID;
+	} else {
+		$id = $user;
+	}
+
+	try {
+		$id = absint( $id );
+		$user_obj->set_id( $id );
+		$user_store->read( $user_obj );
+	} catch ( \Exception $e) {
+		return null;
+	}
+
+	return $user_obj;
+}

@@ -19,21 +19,20 @@ function mto_get_course( $course ) {
 
 	if ( is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ) {
 		$id = $course->get_id();
-	} elseif ( is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ) {
+	} elseif ( is_a( $course, 'WP_Post' ) ) {
 		$id = $course->ID;
 	} else {
 		$id = $course;
 	}
 
-	$id   = absint( $id );
-	$post = get_post( $id );
-
-	if ( is_null( $post ) ) {
+	try {
+		$id = absint( $id );
+		$course_obj->set_id( $id );
+		$course_store->read( $course_obj );
+	} catch ( \Exception $e) {
 		return null;
 	}
 
-	$course_obj->set_id( $id );
-	$course_store->read( $course_obj );
 	return $course_obj;
 }
 
@@ -51,21 +50,19 @@ function mto_get_lesson( $lesson ) {
 
 	if ( is_a( $lesson, 'ThemeGrill\Masteriyo\Models\Lesson' ) ) {
 		$id = $lesson->get_id();
-	} elseif ( is_a( $lesson, 'ThemeGrill\Masteriyo\Models\Lesson' ) ) {
+	} elseif ( is_a( $lesson, 'WP_Post' ) ) {
 		$id = $lesson->ID;
 	} else {
 		$id = $lesson;
 	}
 
-	$id   = absint( $id );
-	$post = get_post( $id );
-
-	if ( is_null( $post ) ) {
+	try {
+		$id = absint( $id );
+		$lesson_obj->set_id( $id );
+		$lesson_store->read( $lesson_obj );
+	} catch ( \Exception $e) {
 		return null;
 	}
-
-	$lesson_obj->set_id( $id );
-	$lesson_store->read( $lesson_obj );
 	return $lesson_obj;
 }
 
@@ -83,21 +80,20 @@ function mto_get_section( $section ) {
 
 	if ( is_a( $section, 'ThemeGrill\Masteriyo\Models\Section' ) ) {
 		$id = $section->get_id();
-	} elseif ( is_a( $section, 'ThemeGrill\Masteriyo\Models\Section' ) ) {
+	} elseif ( is_a( $section, 'WP_Post' ) ) {
 		$id = $section->ID;
 	} else {
 		$id = $section;
 	}
 
-	$id   = absint( $id );
-	$post = get_post( $id );
-
-	if ( is_null( $post ) ) {
+	try {
+		$id = absint( $id );
+		$section_obj->set_id( $id );
+		$section_store->read( $section_obj );
+	} catch ( \Exception $e) {
 		return null;
 	}
 
-	$section_obj->set_id( $id );
-	$section_store->read( $section_obj );
 	return $section_obj;
 }
 
@@ -115,21 +111,20 @@ function mto_get_quiz( $quiz ) {
 
 	if ( is_a( $quiz, 'ThemeGrill\Masteriyo\Models\Quiz' ) ) {
 		$id = $quiz->get_id();
-	} elseif ( is_a( $quiz, 'ThemeGrill\Masteriyo\Models\Quiz' ) ) {
+	} elseif ( is_a( $quiz, 'WP_Post' ) ) {
 		$id = $quiz->ID;
 	} else {
 		$id = $quiz;
 	}
 
-	$id   = absint( $id );
-	$post = get_post( $id );
-
-	if ( is_null( $post ) ) {
+	try {
+		$id = absint( $id );
+		$quiz_obj->set_id( $id );
+		$quiz_store->read( $quiz_obj );
+	} catch ( \Exception $e) {
 		return null;
 	}
 
-	$quiz_obj->set_id( $id );
-	$quiz_store->read( $quiz_obj );
 	return $quiz_obj;
 }
 
@@ -153,15 +148,13 @@ function mto_get_order( $order ) {
 		$id = $order;
 	}
 
-	$id   = absint( $id );
-	$post = get_post( $id );
-
-	if ( is_null( $post ) ) {
+	try {
+		$id = absint( $id );
+		$order_obj->set_id( $id );
+		$order_store->read( $order_obj );
+	} catch ( \Exception $e) {
 		return null;
 	}
-
-	$order_obj->set_id( $id );
-	$order_store->read( $order_obj );
 	return $order_obj;
 }
 
@@ -185,14 +178,13 @@ function mto_get_question( $question ) {
 		$id = $question;
 	}
 
-	$id   = absint( $id );
-	$post = get_post( $id );
-
-	if ( is_null( $post ) ) {
+	try {
+		$id   = absint( $id );
+		$question_obj->set_id( $id );
+		$question_store->read( $question_obj );
+	} catch ( \Exception $e) {
 		return null;
 	}
 
-	$question_obj->set_id( $id );
-	$question_store->read( $question_obj );
 	return $question_obj;
 }

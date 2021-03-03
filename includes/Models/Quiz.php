@@ -63,6 +63,7 @@ class Quiz extends Model {
 		'date_created'      => null,
 		'date_modified'     => null,
 		'parent_id'         => 0,
+		'course_id'         => 0,
 		'menu_order'        => 0,
 		'status'            => false,
 		'description'       => '',
@@ -218,6 +219,19 @@ class Quiz extends Model {
 	}
 
 	/**
+	 * Returns the quiz's course id.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_course_id( $context = 'view' ) {
+		return $this->get_prop( 'course_id', $context );
+	}
+
+	/**
 	 * Returns quiz menu order.
 	 *
 	 * @since 0.1.0
@@ -316,6 +330,17 @@ class Quiz extends Model {
 	 */
 	public function set_parent_id( $parent ) {
 		$this->set_prop( 'parent_id', absint( $parent ) );
+	}
+
+	/**
+	 * Set the quiz's course id.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $course_id Course id.
+	 */
+	public function set_course_id( $course_id ) {
+		$this->set_prop( 'course_id', absint( $course_id ) );
 	}
 
 	/**

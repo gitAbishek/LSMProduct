@@ -9,6 +9,8 @@
 
 namespace ThemeGrill\Masteriyo\Shortcodes;
 
+use ThemeGrill\Masteriyo\Abstracts\Shortcode;
+
 defined( 'ABSPATH' ) || exit;
 
 /**

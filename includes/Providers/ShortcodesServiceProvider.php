@@ -26,7 +26,10 @@ class ShortcodesServiceProvider extends AbstractServiceProvider {
 	 * @var array
 	 */
 	protected $provides = array(
-		'profile-shortcode',
+		'shortcode.profile',
+		'shortcode.courses-list',
+		'shortcode.checkout',
+		'shortcode.cart',
 		'\ThemeGrill\Masteriyo\Shortcodes\ProfileShortcode',
 		'\ThemeGrill\Masteriyo\Shortcodes\CoursesListShortcode',
 		'\ThemeGrill\Masteriyo\Shortcodes\CartShortcode',
@@ -42,10 +45,10 @@ class ShortcodesServiceProvider extends AbstractServiceProvider {
 	 * @since 0.1.0
 	 */
 	public function register() {
-		$this->getContainer()->add( 'profile-shortcode', ProfileShortcode::class );
-		$this->getContainer()->add( 'courses-list-shortcode', CoursesListShortcode::class );
-		$this->getContainer()->add( 'checkout-shortcode', CheckoutShortcode::class );
-		$this->getContainer()->add( 'cart-shortcode', CartShortcode::class );
+		$this->getContainer()->add( 'shortcode.profile', ProfileShortcode::class );
+		$this->getContainer()->add( 'shortcode.courses-list', CoursesListShortcode::class );
+		$this->getContainer()->add( 'shortcode.checkout', CheckoutShortcode::class );
+		$this->getContainer()->add( 'shortcode.cart', CartShortcode::class );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Shortcodes\ProfileShortcode' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Shortcodes\CoursesListShortcode' );

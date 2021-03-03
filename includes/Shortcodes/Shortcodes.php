@@ -42,11 +42,11 @@ class Shortcodes {
 	protected function get_shortcodes() {
 		$namespace = '\\ThemeGrill\\Masteriyo\\Shortcodes';
 
-		return array(
+		return apply_filters( 'masteriyo_shortcodes', array(
 			'profile'      => "{$namespace}\\ProfileShortcode",
 			'courses-list' => "{$namespace}\\CoursesListShortcode",
 			'checkout'     => "{$namespace}\\CheckoutShortcode",
 			'cart'         => "{$namespace}\\CartShortcode",
-		);
+		) );
 	}
 }

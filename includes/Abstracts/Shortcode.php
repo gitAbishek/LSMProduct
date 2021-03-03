@@ -4,10 +4,10 @@
  *
  * @since 0.1.0
  * @class Shortcode
- * @package ThemeGrill\Masteriyo\Shortcodes
+ * @package ThemeGrill\Masteriyo\Abstracts
  */
 
-namespace ThemeGrill\Masteriyo\Shortcodes;
+namespace ThemeGrill\Masteriyo\Abstracts;
 
 defined( 'ABSPATH' ) || exit;
 

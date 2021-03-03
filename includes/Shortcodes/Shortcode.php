@@ -121,6 +121,8 @@ abstract class Shortcode {
 	/**
 	 * Get rendered html after injecting the data.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param array $data Data to inject.
 	 * @param string $file_path Path of the php file containing HTML.
 	 *
@@ -128,7 +130,7 @@ abstract class Shortcode {
 	 */
 	protected function get_rendered_html( $data, $file_path ) {
 		ob_start();
-		extract( $data );
+		extract( $data ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 		include $file_path;
 		return ob_get_clean();
 	}

@@ -36,6 +36,6 @@ class TemplateServiceProvider extends AbstractServiceProvider {
 	  * @since 0.1.0
 	  */
 	 public function register() {
-		$this->getContainer()->add( 'template', Template::class, true );
+		 $this->getContainer()->add( 'template', Template::class, true );
 	 }
 }

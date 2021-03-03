@@ -14,6 +14,7 @@ use ThemeGrill\Masteriyo\RestApi\RestApi;
 use ThemeGrill\Masteriyo\PostType\RegisterPostTypes;
 use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
 use ThemeGrill\Masteriyo\AdminMenu;
+use ThemeGrill\Masteriyo\Shortcodes\Shortcodes;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -85,6 +86,7 @@ class Masteriyo extends Container {
 	public function after_wp_init() {
 		RegisterPostTypes::instance()->register();
 		RegisterTaxonomies::register();
+		Shortcodes::instance()->register_shortcodes();
 
 		$this->load_text_domain();
 
@@ -128,6 +130,7 @@ class Masteriyo extends Container {
 			"{$namespace}\\TemplateServiceProvider",
 			"{$namespace}\\QuestionServiceProvider",
 			"{$namespace}\\ScriptStyleServiceProvider",
+			"{$namespace}\\ShortcodesServiceProvider",
 		) );
 	}
 

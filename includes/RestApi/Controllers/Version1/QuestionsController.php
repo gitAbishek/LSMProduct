@@ -253,6 +253,12 @@ class QuestionsController extends PostsController {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
+		$params['course_id']       = array(
+			'description'       => __( 'Limit result by course id.', 'masteriyo' ),
+			'type'              => 'string',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
 		$params['status'] = array(
 			'default'           => 'any',
 			'description'       => __( 'Limit result set to questiones assigned a specific status.', 'masteriyo' ),
@@ -364,6 +370,7 @@ class QuestionsController extends PostsController {
 			'id'                => $question->get_id(),
 			'name'              => $question->get_name( $context ),
 			'slug'              => $question->get_slug( $context ),
+			'course_id'         => $question->get_course_id( $context ),
 			'permalink'         => $question->get_permalink(),
 			'status'            => $question->get_status( $context ),
 			'description'       => 'view' === $context ? apply_filters( 'masteriyo_description', $question->get_description() ) : $question->get_description( $context ),
@@ -436,6 +443,17 @@ class QuestionsController extends PostsController {
 		// Set post_status.
 		$args['post_status'] = $request['status'];
 
+		if ( ! empty( $request['course_id'] ) ) {
+			$args['meta_query'] = array(
+				'relation' => 'AND',
+				array(
+					'key'     => '_course_id',
+					'value'   => sanitize_key( $request['course_id'] ),
+					'compare' => '=',
+				),
+			);
+		}
+
 		// Taxonomy query to filter questiones by type, category,
 		// tag, shipping class, and attribute.
 		$tax_query = array();
@@ -507,6 +525,11 @@ class QuestionsController extends PostsController {
 				'slug'              => array(
 					'description' => __( 'Question slug.', 'masteriyo' ),
 					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'course_id'         => array(
+					'description' => __( 'Course ID.', 'masteriyo' ),
+					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'permalink'         => array(
@@ -647,6 +670,11 @@ class QuestionsController extends PostsController {
 		// Post content.
 		if ( isset( $request['description'] ) ) {
 			$question->set_description( wp_filter_post_kses( $request['description'] ) );
+		}
+
+		// Course ID.
+		if ( isset( $request['course_id'] ) ) {
+			$question->set_course_id( $request['course_id'] );
 		}
 
 		// Post answers.

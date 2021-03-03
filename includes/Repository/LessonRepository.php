@@ -27,7 +27,8 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 		'_video_playback_time' => 'video_playback_time',
 		'_rating_counts'       => 'rating_counts',
 		'_average_rating'      => 'average_rating',
-		'_review_count'        => 'review_count'
+		'_review_count'        => 'review_count',
+		'_course_id'           => 'course_id',
 	);
 
 	/**

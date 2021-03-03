@@ -69,6 +69,7 @@ class Lesson extends Model {
 		'short_description'   => '',
 		'post_password'       => '',
 		'parent_id'           => 0,
+		'course_id'           => 0,
 		'reviews_allowed'     => true,
 		'category_ids'        => array(),
 		'tag_ids'             => array(),
@@ -279,6 +280,19 @@ class Lesson extends Model {
 	 */
 	public function get_parent_id( $context = 'view' ) {
 		return $this->get_prop( 'parent_id', $context );
+	}
+
+	/**
+	 * Returns the section's course id.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_course_id( $context = 'view' ) {
+		return $this->get_prop( 'course_id', $context );
 	}
 
 	/**
@@ -532,6 +546,17 @@ class Lesson extends Model {
 	 */
 	public function set_parent_id( $parent ) {
 		$this->set_prop( 'parent_id', absint( $parent ) );
+	}
+
+	/**
+	 * Set the lesson's course id.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $course_id Course id.
+	 */
+	public function set_course_id( $course_id ) {
+		$this->set_prop( 'course_id', absint( $course_id ) );
 	}
 
 	/**

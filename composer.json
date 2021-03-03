@@ -28,7 +28,7 @@
     "nesbot/carbon": "1.39.1"
   },
   "require-dev": {
-    "wp-cli/i18n-command": "2.2",
+    "wp-cli/i18n-command": "^2.2",
     "wp-coding-standards/wpcs": "2.3.0",
 		"dealerdirect/phpcodesniffer-composer-installer": "0.7.0",
     "phpcompatibility/phpcompatibility-wp": "2.1.0",
@@ -36,7 +36,8 @@
     "phpunit/phpunit": "7.5.20",
     "php-stubs/wordpress-stubs": "^5.5",
     "php-stubs/woocommerce-stubs": "^4.5",
-    "10up/wp_mock": "dev-enhance/allow-to-enable-disable-mock-constants-functions"
+    "10up/wp_mock": "dev-enhance/allow-to-enable-disable-mock-constants-functions",
+    "wp-cli/wp-cli": "^2.4"
   },
   "repositories": [
     {
@@ -58,7 +59,7 @@
 			"wp i18n make-pot . --slug=wp-plugin-starter"
 		],
 		"makepot": [
-			"@makepot-audit --skip-audit"
+      "\"vendor/bin/wp\" i18n make-pot . ./i18n/languages/masteriyo.pot --include=\"assets/js/build/app.js,includes\""
 		]
 	},
   "extra": {

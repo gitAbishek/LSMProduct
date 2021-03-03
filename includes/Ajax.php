@@ -9,6 +9,8 @@
 
 namespace ThemeGrill\Masteriyo;
 
+use ThemeGrill\Masteriyo\Query\CourseQuery;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -72,7 +74,11 @@ class Ajax {
 	 * @return void
 	 */
 	public static function test() {
-
+		$course_query = new CourseQuery();
+		$courses      = $course_query->get_courses( array(
+			'page' => 1,
+			'status' => 'publish'
+		));
 	}
 }
 

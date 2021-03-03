@@ -65,6 +65,8 @@ class Masteriyo extends Container {
 
 		// Register scripts and styles.
 		$this->get( 'script-style');
+		Ajax::init();
+
 		// Initilize the hooks.
 		$this->init_hooks();
 	}

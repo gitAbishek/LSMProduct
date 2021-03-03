@@ -390,4 +390,182 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			}
 		}
 	}
+
+	/**
+	 * Fetch courses.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $query_vars Query vars.
+	 * @return Course[]
+	 */
+	public function query( $query_vars ) {
+		$args = $this->get_wp_query_args( $query_vars );
+
+		if ( ! empty( $args['errors'] ) ) {
+			$query = (object) array(
+				'posts'         => array(),
+				'found_posts'   => 0,
+				'max_num_pages' => 0,
+			);
+		} else {
+			$query = new \WP_Query( $args );
+		}
+
+		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
+			// Prime caches before grabbing objects.
+			update_post_caches( $query->posts, array( 'course' ) );
+		}
+
+		$courses = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_course', $query->posts ) );
+
+		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
+			return (object) array(
+				'courses'      => $courses,
+				'total'         => $query->found_posts,
+				'max_num_pages' => $query->max_num_pages,
+			);
+		}
+
+		return $courses;
+	}
+
+	/**
+	 * Get valid WP_Query args from a CourseQuery's query variables.
+	 *
+	 * @since 0.1.0
+	 * @param array $query_vars Query vars from a CourseQuery.
+	 * @return array
+	 */
+	protected function get_wp_query_args( $query_vars ) {
+		// Map query vars to ones that get_wp_query_args or WP_Query recognize.
+		$key_mapping = array(
+			'status'         => 'post_status',
+			'page'           => 'paged',
+			'include'        => 'post__in',
+			'average_rating' => '_average_rating',
+			'review_count'   => '_review_count',
+		);
+
+		foreach ( $key_mapping as $query_key => $db_key ) {
+			if ( isset( $query_vars[ $query_key ] ) ) {
+				$query_vars[ $db_key ] = $query_vars[ $query_key ];
+				unset( $query_vars[ $query_key ] );
+			}
+		}
+
+		// These queries cannot be auto-generated so we have to remove them and build them manually.
+		$manual_queries = array(
+			'sku'        => '',
+			'featured'   => '',
+			'visibility' => '',
+		);
+		foreach ( $manual_queries as $key => $manual_query ) {
+			if ( isset( $query_vars[ $key ] ) ) {
+				$manual_queries[ $key ] = $query_vars[ $key ];
+				unset( $query_vars[ $key ] );
+			}
+		}
+
+		$query_vars['post_type'] = 'course';
+
+		$wp_query_args = parent::get_wp_query_args( $query_vars );
+		if ( ! isset( $wp_query_args['date_query'] ) ) {
+			$wp_query_args['date_query'] = array();
+		}
+		if ( ! isset( $wp_query_args['meta_query'] ) ) {
+			$wp_query_args['meta_query'] = array(); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+		}
+
+		// Handle course categories.
+		if ( ! empty( $query_vars['category'] ) ) {
+			$wp_query_args['tax_query'][] = array(
+				'taxonomy' => 'course_cat',
+				'field'    => 'slug',
+				'terms'    => $query_vars['category'],
+			);
+		}
+
+		// Handle course tags.
+		if ( ! empty( $query_vars['tag'] ) ) {
+			unset( $wp_query_args['tag'] );
+			$wp_query_args['tax_query'][] = array(
+				'taxonomy' => 'course_tag',
+				'field'    => 'slug',
+				'terms'    => $query_vars['tag'],
+			);
+		}
+
+		// Handle course difficultyies.
+		if ( ! empty( $query_vars['difficulty'] ) ) {
+			unset( $wp_query_args['difficulty'] );
+			$wp_query_args['tax_query'][] = array(
+				'taxonomy' => 'course_difficulty',
+				'field'    => 'slug',
+				'terms'    => $query_vars['difficulty'],
+			);
+		}
+
+		// Handle featured.
+		if ( '' !== $manual_queries['featured'] ) {
+			$course_visibility_term_ids = masteriyo_get_course_visibility_term_ids();
+			if ( $manual_queries['featured'] ) {
+				$wp_query_args['tax_query'][] = array(
+					'taxonomy' => 'course_visibility',
+					'field'    => 'term_taxonomy_id',
+					'terms'    => array( $course_visibility_term_ids['featured'] ),
+				);
+				$wp_query_args['tax_query'][] = array(
+					'taxonomy' => 'course_visibility',
+					'field'    => 'term_taxonomy_id',
+					'terms'    => array( $course_visibility_term_ids['exclude-from-catalog'] ),
+					'operator' => 'NOT IN',
+				);
+			} else {
+				$wp_query_args['tax_query'][] = array(
+					'taxonomy' => 'course_visibility',
+					'field'    => 'term_taxonomy_id',
+					'terms'    => array( $course_visibility_term_ids['featured'] ),
+					'operator' => 'NOT IN',
+				);
+			}
+		}
+
+		// Handle date queries.
+		$date_queries = array(
+			'date_created'      => 'post_date',
+			'date_modified'     => 'post_modified',
+			'date_on_sale_from' => '_sale_price_dates_from',
+			'date_on_sale_to'   => '_sale_price_dates_to',
+		);
+		foreach ( $date_queries as $query_var_key => $db_key ) {
+			if ( isset( $query_vars[ $query_var_key ] ) && '' !== $query_vars[ $query_var_key ] ) {
+
+				// Remove any existing meta queries for the same keys to prevent conflicts.
+				$existing_queries = wp_list_pluck( $wp_query_args['meta_query'], 'key', true );
+				foreach ( $existing_queries as $query_index => $query_contents ) {
+					unset( $wp_query_args['meta_query'][ $query_index ] );
+				}
+
+				$wp_query_args = $this->parse_date_for_wp_query( $query_vars[ $query_var_key ], $db_key, $wp_query_args );
+			}
+		}
+
+		// Handle paginate.
+		if ( ! isset( $query_vars['paginate'] ) || ! $query_vars['paginate'] ) {
+			$wp_query_args['no_found_rows'] = true;
+		}
+
+		// Handle reviews_allowed.
+		if ( isset( $query_vars['reviews_allowed'] ) && is_bool( $query_vars['reviews_allowed'] ) ) {
+			add_filter( 'posts_where', array( $this, 'reviews_allowed_query_where' ), 10, 2 );
+		}
+
+		// Handle orderby.
+		if ( isset( $query_vars['orderby'] ) && 'include' === $query_vars['orderby'] ) {
+			$wp_query_args['orderby'] = 'post__in';
+		}
+
+		return apply_filters( 'woocommerce_product_data_store_cpt_get_products_query', $wp_query_args, $query_vars, $this );
+	}
 }

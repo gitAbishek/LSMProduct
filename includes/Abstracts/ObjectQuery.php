@@ -7,6 +7,8 @@
  * @package  ThemeGrill\Masteriyo\Abstracts
  */
 
+namespace ThemeGrill\Masteriyo\Abstracts;
+
 defined( 'ABSPATH' )  || exit;
 
 /**

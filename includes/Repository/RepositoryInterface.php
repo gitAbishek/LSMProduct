@@ -94,4 +94,12 @@ interface RepositoryInterface {
 	 * @param  MetaData  $meta Meta object (containing ->id, ->key and ->value).
 	 */
 	public function update_meta( Model &$model, MetaData $meta );
+
+	// /**
+	//  * Fetch the records.
+	//  *
+	//  * @since 0.1.0
+	//  * @param array $args Arguments.
+	//  */
+	// public function query( $args );
 }

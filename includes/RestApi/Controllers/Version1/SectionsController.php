@@ -149,9 +149,10 @@ class SectionsController extends PostsController {
 		$params = parent::get_collection_params();
 
 		$params['course_id']       = array(
-			'description'       => __( 'Limit sections by course id.', 'masteriyo' ),
-			'type'              => 'string',
+			'description'       => __( 'Limit result by course id.', 'masteriyo' ),
+			'type'              => 'integer',
 			'validate_callback' => 'rest_validate_request_arg',
+			'sanitize_callback' => 'absint',
 		);
 
 		return $params;
@@ -255,7 +256,7 @@ class SectionsController extends PostsController {
 				'relation' => 'AND',
 				array(
 					'key'     => '_course_id',
-					'value'   => sanitize_key( $request['course_id'] ),
+					'value'   => absint( $request['course_id'] ),
 					'compare' => '=',
 				),
 			);

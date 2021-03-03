@@ -255,7 +255,8 @@ class QuestionsController extends PostsController {
 
 		$params['course_id']       = array(
 			'description'       => __( 'Limit result by course id.', 'masteriyo' ),
-			'type'              => 'string',
+			'type'              => 'integer',
+			'sanitize_callback' => 'absint',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
@@ -448,7 +449,7 @@ class QuestionsController extends PostsController {
 				'relation' => 'AND',
 				array(
 					'key'     => '_course_id',
-					'value'   => sanitize_key( $request['course_id'] ),
+					'value'   => absint( $request['course_id'] ),
 					'compare' => '=',
 				),
 			);

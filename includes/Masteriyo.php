@@ -76,6 +76,7 @@ class Masteriyo extends Container {
 	 */
 	protected function init_hooks() {
 		add_action( 'init', array( $this, 'after_wp_init' ) );
+		add_action( 'admin_bar_menu', array( $this, 'add_course_list_page_link' ), 35 );
 	}
 
 	/**
@@ -131,6 +132,7 @@ class Masteriyo extends Container {
 			"{$namespace}\\QuestionServiceProvider",
 			"{$namespace}\\ScriptStyleServiceProvider",
 			"{$namespace}\\ShortcodesServiceProvider",
+			"{$namespace}\\SettingsServiceProvider",
 		) );
 	}
 
@@ -142,6 +144,34 @@ class Masteriyo extends Container {
 			'masteriyo',
 			false,
 			dirname(plugin_basename( Constants::get('MASTERIYO_PLUGIN_FILE') ) ) . '/' . Constants::get('MASTERIYO_PLUGIN_REL_LANGUAGES_PATH')
+		);
+	}
+
+	/**
+	 * Add the "Course List" link in admin bar main menu.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_Admin_Bar $wp_admin_bar Admin bar instance.
+	 */
+	public function add_course_list_page_link( $wp_admin_bar ) {
+		if ( ! is_admin() || ! is_admin_bar_showing() ) {
+			return;
+		}
+
+		// Show only when the user is a member of this site, or they're a super admin.
+		if ( ! is_user_member_of_blog() && ! is_super_admin() ) {
+			return;
+		}
+
+		// Add an option to visit the course list page.
+		$wp_admin_bar->add_node(
+			array(
+				'parent' => 'site-name',
+				'id'     => 'course-list-page',
+				'title'  => __( 'Course List', 'masteriyo' ),
+				'href'   => masteriyo_get_page_permalink( 'course-list' ),
+			)
 		);
 	}
 }

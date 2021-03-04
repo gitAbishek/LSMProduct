@@ -3,8 +3,8 @@
  * Plugin Name:     Masteriyo LMS
  * Plugin URI:      https://example.com
  * Description:     WordPress Learing Mangement System(LMS) plugin.
- * Author:          wp-plugin
- * Author URI:      https://example.com
+ * Author:          ThemeGrill
+ * Author URI:      https://themegrill.com
  * Version:         0.1.0
  * Text Domain:     masteriyo
  * Domain Path:     /i18n/languages
@@ -20,6 +20,7 @@ defined( 'ABSPATH' ) || exit;
 define( 'MASTERIYO_SLUG', 'masteriyo' );
 define( 'MASTERIYO_VERSION', '0.1.0' );
 define( 'MASTERIYO_PLUGIN_FILE', __FILE__ );
+define( 'MASTERIYO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'MASTERIYO_PLUGIN_DIR', dirname( __FILE__ ) );
 define( 'MASTERIYO_ASSETS', dirname( __FILE__ ) . '/assets' );
 define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );

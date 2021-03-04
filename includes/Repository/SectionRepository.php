@@ -23,7 +23,9 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	 * @since 0.1.0
 	 * @var array
 	 */
-	protected $internal_meta_keys = array();
+	protected $internal_meta_keys = array(
+		'_course_id' => 'course_id',
+	);
 
 	/**
 	 * Create a section in the database.

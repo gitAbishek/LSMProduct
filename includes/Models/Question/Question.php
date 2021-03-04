@@ -79,6 +79,7 @@ abstract class Question extends Model {
 		'negative_feedback' => '',
 		'feedback'          => '',
 		'menu_order'        => 0,
+		'course_id'         => 0,
 	);
 
 	/**
@@ -160,6 +161,19 @@ abstract class Question extends Model {
 	 */
 	public function get_slug( $context = 'view' ) {
 		return $this->get_prop( 'slug', $context );
+	}
+
+	/**
+	 * Returns the question's course id.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_course_id( $context = 'view' ) {
+		return $this->get_prop( 'course_id', $context );
 	}
 
 	/**
@@ -357,6 +371,17 @@ abstract class Question extends Model {
 	 */
 	public function set_slug( $slug ) {
 		$this->set_prop( 'slug', $slug );
+	}
+
+	/**
+	 * Set the question's course id.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $course_id Course id.
+	 */
+	public function set_course_id( $course_id ) {
+		$this->set_prop( 'course_id', absint( $course_id ) );
 	}
 
 	/**

@@ -139,6 +139,12 @@ class LessonsController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
+		$params['course_id']  = array(
+			'description'       => __( 'Limit lessons by course id.', 'masteriyo' ),
+			'type'              => 'integer',
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
 		$params['slug']       = array(
 			'description'       => __( 'Limit result set to lessons with a specific slug.', 'masteriyo' ),
 			'type'              => 'string',
@@ -254,6 +260,7 @@ class LessonsController extends PostsController {
 			'menu_order'          => $lesson->get_menu_order( $context ),
 			'reviews_allowed'     => $lesson->get_reviews_allowed( $context ),
 			'parent_id'           => $lesson->get_parent_id( $context ),
+			'course_id'           => $lesson->get_course_id( $context ),
 			'categories'          => $this->get_taxonomy_terms( $lesson ),
 			'tags'                => $this->get_taxonomy_terms( $lesson, 'tag' ),
 			'video_source'        => $lesson->get_video_source( $context ),
@@ -304,6 +311,17 @@ class LessonsController extends PostsController {
 
 		// Set post_status.
 		$args['post_status'] = $request['status'];
+
+		if ( ! empty( $request['course_id'] ) ) {
+			$args['meta_query'] = array(
+				'relation' => 'AND',
+				array(
+					'key'     => '_course_id',
+					'value'   => absint( $request['course_id'] ),
+					'compare' => '=',
+				),
+			);
+		}
 
 		// Taxonomy query to filter lessons by category, tag and difficult.
 		$tax_query = array();
@@ -455,6 +473,11 @@ class LessonsController extends PostsController {
 				),
 				'parent_id'           => array(
 					'description' => __( 'Lesson parent ID.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'course_id'         => array(
+					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -627,6 +650,11 @@ class LessonsController extends PostsController {
 		// Lesson parent ID.
 		if ( isset( $request['parent_id'] ) ) {
 			$lesson->set_parent_id( $request['parent_id'] );
+		}
+
+		// Course ID.
+		if ( isset( $request['course_id'] ) ) {
+			$lesson->set_course_id( $request['course_id'] );
 		}
 
 		// Lesson video source.

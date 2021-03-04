@@ -34,6 +34,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 		'_positive_feedback' => 'positive_feedback',
 		'_negative_feedback' => 'negative_feedback',
 		'_feedback'          => 'feedback',
+		'_course_id'         => 'course_id',
 	);
 
 	/**

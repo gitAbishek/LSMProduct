@@ -27,6 +27,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
+		'_course_id' => 'course_id',
 	);
 
 	/**

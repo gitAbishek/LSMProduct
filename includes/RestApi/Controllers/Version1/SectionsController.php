@@ -146,7 +146,16 @@ class SectionsController extends PostsController {
 	 * @return array
 	 */
 	public function get_collection_params() {
-		return parent::get_collection_params();
+		$params = parent::get_collection_params();
+
+		$params['course_id'] = array(
+			'description'       => __( 'Limit result by course id.', 'masteriyo' ),
+			'type'              => 'integer',
+			'validate_callback' => 'rest_validate_request_arg',
+			'sanitize_callback' => 'absint',
+		);
+
+		return $params;
 	}
 
 	/**
@@ -221,6 +230,7 @@ class SectionsController extends PostsController {
 			'name'        => $section->get_name( $context ),
 			'menu_order'  => $section->get_menu_order( $context ),
 			'parent_id'   => $section->get_parent_id( $context ),
+			'course_id'   => $section->get_course_id( $context ),
 			'description' => 'view' === $context ? wpautop( do_shortcode( $section->get_description() ) ) : $section->get_description( $context ),
 		);
 
@@ -240,6 +250,17 @@ class SectionsController extends PostsController {
 
 		// Set post_status.
 		$args['post_status'] = 'publish';
+
+		if ( ! empty( $request['course_id'] ) ) {
+			$args['meta_query'] = array(
+				'relation' => 'AND',
+				array(
+					'key'     => '_course_id',
+					'value'   => absint( $request['course_id'] ),
+					'compare' => '=',
+				),
+			);
+		}
 
 		return $args;
 	}
@@ -297,6 +318,11 @@ class SectionsController extends PostsController {
 				),
 				'parent_id'         => array(
 					'description' => __( 'Section parent ID.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'course_id'         => array(
+					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -378,6 +404,11 @@ class SectionsController extends PostsController {
 		// Section parent ID.
 		if ( isset( $request['parent_id'] ) ) {
 			$section->set_parent_id( $request['parent_id'] );
+		}
+
+		// Course ID.
+		if ( isset( $request['course_id'] ) ) {
+			$section->set_course_id( $request['course_id'] );
 		}
 
 		// Allow set meta_data.

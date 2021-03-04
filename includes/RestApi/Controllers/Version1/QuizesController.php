@@ -164,6 +164,12 @@ class QuizesController extends PostsController {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
+		$params['course_id']       = array(
+			'description'       => __( 'Limit results by course id.', 'masteriyo' ),
+			'type'              => 'integer',
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
 		$params['category']   = array(
 			'description'       => __( 'Limit result set to quizes assigned a specific category ID.', 'masteriyo' ),
 			'type'              => 'string',
@@ -266,6 +272,7 @@ class QuizesController extends PostsController {
 			'slug'              => $quiz->get_slug( $context ),
 			'permalink'         => $quiz->get_permalink(),
 			'parent_id'         => $quiz->get_parent_id( $context ),
+			'course_id'         => $quiz->get_course_id( $context ),
 			'menu_order'        => $quiz->get_menu_order( $context ),
 			'status'            => $quiz->get_status( $context ),
 			'description'       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
@@ -316,6 +323,17 @@ class QuizesController extends PostsController {
 
 		// Set post_status.
 		$args['post_status'] = $request['status'];
+
+		if ( ! empty( $request['course_id'] ) ) {
+			$args['meta_query'] = array(
+				'relation' => 'AND',
+				array(
+					'key'     => '_course_id',
+					'value'   => absint( $request['course_id'] ),
+					'compare' => '=',
+				),
+			);
+		}
 
 		// Taxonomy query to filter quizes by type, category,
 		// tag, shipping class, and attribute.
@@ -388,6 +406,11 @@ class QuizesController extends PostsController {
 				'slug'              => array(
 					'description' => __( 'Quiz slug.', 'masteriyo' ),
 					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'course_id'         => array(
+					'description' => __( 'Course ID.', 'masteriyo' ),
+					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'permalink'         => array(
@@ -516,6 +539,11 @@ class QuizesController extends PostsController {
 		// Post parent id.
 		if ( isset( $request['parent_id'] ) ) {
 			$quiz->set_parent_id( $request['parent_id'] );
+		}
+
+		// Course ID.
+		if ( isset( $request['course_id'] ) ) {
+			$quiz->set_course_id( $request['course_id'] );
 		}
 
 		// Post menu order.

@@ -81,6 +81,20 @@ abstract class ObjectQuery {
 	}
 
 	/**
+	 * Set a query variables.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $query_vars Query variables to set.
+	 */
+	public function set_args( $query_vars ) {
+		foreach ( $query_vars as $query_var => $value ) {
+			$this->set( $query_var, $value );
+		}
+		return $this;
+	}
+
+	/**
 	 * Get the default allowed query vars.
 	 *
 	 * @since 0.1.0

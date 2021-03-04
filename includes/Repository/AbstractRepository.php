@@ -496,7 +496,7 @@ abstract class AbstractRepository {
 			$props_to_update =  $this->get_props_to_update( $model, $this->get_internal_meta_keys() );
 		}
 
-		foreach ( $props_to_update as $meta_key => $prop ) {
+		foreach ( $props_to_update as $prop => $meta_key ) {
 			$value = $model->{"get_$prop"}( 'edit' );
 			$value = is_string( $value ) ? wp_slash( $value ) : $value;
 			switch ( $prop ) {

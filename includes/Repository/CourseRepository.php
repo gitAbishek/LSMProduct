@@ -23,19 +23,19 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'_price'             => 'price',
-		'_regular_price'     => 'regular_price',
-		'_sale_price'        => 'sale_price',
-		'_featured'          => 'featured',
-		'_category_ids'      => 'category_ids',
-		'_tag_ids'           => 'tag_ids',
-		'_difficulty_ids'    => 'difficulty_ids',
-		'_thumbnail_id'      => 'featured_image',
-		'_rating_counts'     => 'rating_counts',
-		'_average_rating'    => 'average_rating',
-		'_review_count'      => 'review_count',
-		'_date_on_sale_from' => 'date_on_sale_from',
-		'_date_on_sale_to'   => 'date_on_sale_to',
+		'price'             => '_price',
+		'regular_price'     => '_regular_price',
+		'sale_price'        => '_sale_price',
+		'featured'          => '_featured',
+		'category_ids'      => '_category_ids',
+		'tag_ids'           => '_tag_ids',
+		'difficulty_ids'    => '_difficulty_ids',
+		'featured_image'    => '_thumbnail_id',
+		'rating_counts'     => '_rating_counts',
+		'average_rating'    => '_average_rating',
+		'review_count'      => '_review_count',
+		'date_on_sale_from' => '_date_on_sale_from',
+		'date_on_sale_to'   => '_date_on_sale_to',
 	);
 
 	/**
@@ -360,7 +360,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			return $result;
 		}, array() );
 
-		foreach ( $this->internal_meta_keys as $meta_key => $prop ) {
+		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
 			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
 		}

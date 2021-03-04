@@ -139,7 +139,7 @@ class LessonsController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['course_id']       = array(
+		$params['course_id']  = array(
 			'description'       => __( 'Limit lessons by course id.', 'masteriyo' ),
 			'type'              => 'integer',
 			'sanitize_callback' => 'absint',

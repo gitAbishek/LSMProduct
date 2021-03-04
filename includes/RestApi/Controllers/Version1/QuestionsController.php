@@ -253,7 +253,7 @@ class QuestionsController extends PostsController {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
-		$params['course_id']       = array(
+		$params['course_id'] = array(
 			'description'       => __( 'Limit result by course id.', 'masteriyo' ),
 			'type'              => 'integer',
 			'sanitize_callback' => 'absint',

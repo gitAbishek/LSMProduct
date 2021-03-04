@@ -148,7 +148,7 @@ class SectionsController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['course_id']       = array(
+		$params['course_id'] = array(
 			'description'       => __( 'Limit result by course id.', 'masteriyo' ),
 			'type'              => 'integer',
 			'validate_callback' => 'rest_validate_request_arg',

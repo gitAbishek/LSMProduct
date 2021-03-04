@@ -101,6 +101,21 @@ function masteriyo_get_section( $section ) {
 }
 
 /**
+ * Get sections.
+ *
+ * @since 0.1.0
+ *
+ * @param array $args Query arguments.
+ *
+ * @return object|array[Section]
+ */
+function masteriyo_get_sections( $args = array() ) {
+	$sections = masteriyo( 'query.sections' )->set_args( $args )->get_sections();
+
+	return apply_filters( 'masteriyo_get_sections', $sections, $args );
+}
+
+/**
  * Get quiz.
  *
  * @since 0.1.0

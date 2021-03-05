@@ -71,7 +71,7 @@ const AllCourses = () => {
 						{coursesData?.map((course: any) => (
 							<tr key={course.id}>
 								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500">
-									<Link to={`/courses/${course.id}`}>{course.name}</Link>
+									<Link to={`/builder/${course.id}`}>{course.name}</Link>
 								</td>
 								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500"></td>
 								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500">

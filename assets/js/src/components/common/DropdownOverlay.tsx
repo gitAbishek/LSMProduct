@@ -8,7 +8,7 @@ const DropdownOverlay = React.forwardRef<HTMLDivElement, Props>(
 		const { className, children, ...other } = props;
 
 		const baseStyle =
-			'mto-bg-white mto-shadow-sm mto-border mto-border-solid mto-border-gray-300';
+			'mto-bg-white mto-shadow-sm mto-border mto-border-solid mto-border-gray-300 mto-mt-2 mto-shadow-md';
 		const cls = classNames(baseStyle, className);
 
 		return (

@@ -11,19 +11,18 @@ import { __ } from '@wordpress/i18n';
 
 interface Props {
 	id: number;
-	title: string;
-	index: number;
+	name: string;
 }
 
 const Lesson: React.FC<Props> = (props) => {
-	const { id, title, index } = props;
+	const { id, name } = props;
 	return (
 		<div className="mto-bg-white mto-shadow-md mto-border mto-border-solid mto-border-gray-300 mto-px-4 mto-py-3">
 			<header className="mto-flex mto-justify-between">
 				<div className="mto-flex">
 					<DragHandle />
 					<Icon className="mto-text-lg mto-mr-4" icon={<AlignLeft />} />
-					<h5>{title}</h5>
+					<h5>{name}</h5>
 				</div>
 				<div className="mto-flex">
 					<div className="mto-flex">

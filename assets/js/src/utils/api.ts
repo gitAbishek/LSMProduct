@@ -74,3 +74,23 @@ export const updateCourse = async (courseId: any, data: any) => {
 		.patch(urls.course.replace(':id', courseId.toString()), data)
 		.then((response) => response.data);
 };
+
+export const addSection = async (data: any) => {
+	return axios.post(urls.sections, data).then((response) => response.data);
+};
+
+export const updateSection = async (id: number, data: any) => {
+	return axios
+		.patch(urls.section.replace(':id', id.toString()), data)
+		.then((response) => response.data);
+};
+
+export const deleteSection = async (id: number) => {
+	return axios
+		.delete(urls.section.replace(':id', id.toString()))
+		.then((response) => response.data);
+};
+
+export const addNewLesson = async (data: any) => {
+	return axios.post(urls.lessons, data).then((response) => response.data);
+};

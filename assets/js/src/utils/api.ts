@@ -90,3 +90,7 @@ export const deleteSection = async (id: number) => {
 		.delete(urls.section.replace(':id', id.toString()))
 		.then((response) => response.data);
 };
+
+export const addNewLesson = async (data: any) => {
+	return axios.post(urls.lessons, data).then((response) => response.data);
+};

@@ -26,7 +26,7 @@ const App = () => {
 							<Route path="/courses/add-new-course" exact>
 								<screens.AddNewCourse />
 							</Route>
-							<Route path="/courses/:courseId" exact>
+							<Route path="/builder/:courseId" exact>
 								<screens.SectionBuilder />
 							</Route>
 							<Route path="/courses/:courseId/add-new-lesson" exact>

@@ -26,7 +26,7 @@ const MainToolbar = () => {
 						</li>
 						<li>
 							<NavLink
-								to="/courses/add-new-course"
+								to="/builder"
 								className="mto-flex mto-items-center mto-ml-12 mto-py-7 mto-font-medium mto-nav-link">
 								<Icon className="mto-mr-1" icon={<Edit />} />
 								{__('Course Builder', 'masteriyo')}

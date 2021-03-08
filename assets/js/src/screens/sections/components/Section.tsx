@@ -144,16 +144,15 @@ const Section: React.FC<Props> = (props) => {
 					</form>
 				</div>
 			)}
-
-			<div className="mto-h-8">
-				{/* {lessonQuery?.data?.map((content: any) => (
-					<Lesson key={content.id} id={content.id} name={content.name} />
+			<div>
+				{contentQuery?.data?.map((content: any, index: number) => (
+					<Lesson key={index} id={content.id} name={content.name} />
 				))}
 				<AddNewButton>
 					<NavLink to={`/courses/${courseId}/add-new-lesson`}>
 						{__('Add New Content', 'masteriyo')}
 					</NavLink>
-				</AddNewButton> */}
+				</AddNewButton>
 			</div>
 		</div>
 	);

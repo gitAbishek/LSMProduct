@@ -18,6 +18,7 @@ const urls = {
 	quiz: `${baseUrl}/quizes/:id`,
 	sections: `${baseUrl}/sections`,
 	section: `${baseUrl}/sections/:id`,
+	contents: `${baseUrl}/sections/children`,
 	orders: `${baseUrl}/orders`,
 	order: `${baseUrl}/orders/:id`,
 	users: `${baseUrl}/users`,

@@ -49,6 +49,12 @@ export const fetchSections = async (courseId: number) => {
 		.then((response) => response.data);
 };
 
+export const fetchContents = async (sectionId: number) => {
+	return axios
+		.get(urls.contents, { params: { section: sectionId } })
+		.then((response) => response.data);
+};
+
 export const fetchLessons = async (courseId: number) => {
 	return axios
 		.get(urls.lessons, {

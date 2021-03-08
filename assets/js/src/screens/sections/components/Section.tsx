@@ -1,6 +1,11 @@
 import { Edit, Trash } from '../../../assets/icons';
 import React, { useState } from 'react';
-import { deleteSection, fetchLessons, updateSection } from '../../../utils/api';
+import {
+	deleteSection,
+	fetchContents,
+	fetchLessons,
+	updateSection,
+} from '../../../utils/api';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import AddNewButton from 'Components/common/AddNewButton';
@@ -33,7 +38,6 @@ const Section: React.FC<Props> = (props) => {
 		name?: string;
 		description?: any;
 	};
-
 	const { id, name, editing = false, courseId, description } = props;
 	const [sectionEditing, setSectionEditing] = useState(editing);
 
@@ -41,9 +45,7 @@ const Section: React.FC<Props> = (props) => {
 	const { addToast } = useToasts();
 	const { register, handleSubmit } = useForm<SectionInputs>();
 
-	const lessonQuery = useQuery(['lessons', courseId], () =>
-		fetchLessons(courseId)
-	);
+	const contentQuery = useQuery(['contents', id], () => fetchContents(id));
 
 	const deleteMutation = useMutation((id: number) => deleteSection(id), {
 		onSuccess: (data) => {
@@ -71,7 +73,6 @@ const Section: React.FC<Props> = (props) => {
 	};
 
 	const onUpdate = (data: any) => {
-		console.log(data);
 		updateMutation.mutate(data);
 	};
 
@@ -145,14 +146,14 @@ const Section: React.FC<Props> = (props) => {
 			)}
 
 			<div className="mto-h-8">
-				{lessonQuery?.data?.map((content: any) => (
+				{/* {lessonQuery?.data?.map((content: any) => (
 					<Lesson key={content.id} id={content.id} name={content.name} />
 				))}
 				<AddNewButton>
 					<NavLink to={`/courses/${courseId}/add-new-lesson`}>
 						{__('Add New Content', 'masteriyo')}
 					</NavLink>
-				</AddNewButton>
+				</AddNewButton> */}
 			</div>
 		</div>
 	);

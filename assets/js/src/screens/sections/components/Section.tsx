@@ -77,7 +77,7 @@ const Section: React.FC<Props> = (props) => {
 
 	return (
 		<div className="mto-bg-white mto-shadow-sm mto-p-8 mto-mt-12 mto-rounded-sm">
-			<header className="mto-flex mto-justify-between mto-items-center">
+			<header className="mto-flex mto-justify-between mto-items-center mto-mb-4">
 				<div className="mto-flex mto-items-center">
 					<DragHandle />
 					<h1>{name}</h1>

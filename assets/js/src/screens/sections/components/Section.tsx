@@ -34,12 +34,8 @@ const Section: React.FC<Props> = (props) => {
 		description?: any;
 	};
 
-	const { id, name, editing, courseId, description } = props;
-	const [mode, setMode] = useState(editing ? 'editing' : 'normal');
-	const [updateData, setUpdatedData] = useState({
-		name: name,
-		description: description,
-	});
+	const { id, name, editing = false, courseId, description } = props;
+	const [sectionEditing, setSectionEditing] = useState(editing);
 
 	const queryClient = useQueryClient();
 	const { addToast } = useToasts();
@@ -94,7 +90,7 @@ const Section: React.FC<Props> = (props) => {
 								<ul className="mto-w-36 mto-text-gray-700 mto-m-4 ">
 									<li
 										className="mto-flex mto-items-center mto-text-sm mto-mb-4 hover:mto-text-primary mto-cursor-pointer"
-										onClick={() => setMode('editing')}>
+										onClick={() => setSectionEditing(true)}>
 										<Icon className="mto-mr-1" icon={<Edit />} />
 										{__('Edit', 'masteriyo')}
 									</li>
@@ -111,7 +107,7 @@ const Section: React.FC<Props> = (props) => {
 					</Dropdown>
 				</div>
 			</header>
-			{mode === 'editing' && (
+			{sectionEditing && (
 				<div className="mto-mt-8">
 					<form onSubmit={handleSubmit(onUpdate)}>
 						<FormGroup>
@@ -137,7 +133,9 @@ const Section: React.FC<Props> = (props) => {
 								<Button layout="primary" type="submit">
 									{__('Save', 'masteriyo')}
 								</Button>
-								<Button className="mto-mr-4" onClick={() => setMode('normal')}>
+								<Button
+									className="mto-mr-4"
+									onClick={() => setSectionEditing(false)}>
 									{__('Cancel', 'masteriyo')}
 								</Button>
 							</div>

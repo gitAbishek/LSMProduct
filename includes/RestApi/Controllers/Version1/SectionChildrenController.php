@@ -233,6 +233,7 @@ class SectionChildrenController extends CrudController {
 			'name'       => $section_item->get_name( $context ),
 			'type'       => $section_item->get_object_type(),
 			'parent_id'  => $section_item->get_parent_id(),
+			'course_id'  => $section_item->get_course_id(),
 			'menu_order' => $section_item->get_menu_order(),
 		);
 

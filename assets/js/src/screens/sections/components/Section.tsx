@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import {
 	deleteSection,
 	fetchContents,
-	fetchLessons,
 	updateSection,
 } from '../../../utils/api';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import AddNewButton from 'Components/common/AddNewButton';
 import Button from 'Components/common/Button';
+import Content from './content';
 import DragHandle from '../components/DragHandle';
 import Dropdown from 'Components/common/Dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
@@ -17,7 +17,6 @@ import FormGroup from 'Components/common/FormGroup';
 import Icon from 'Components/common/Icon';
 import Input from 'Components/common/Input';
 import Label from 'Components/common/Label';
-import Lesson from './Lesson';
 import { NavLink } from 'react-router-dom';
 import OptionButton from 'Components/common/OptionButton';
 import Textarea from 'Components/common/Textarea';
@@ -146,7 +145,12 @@ const Section: React.FC<Props> = (props) => {
 			)}
 			<div>
 				{contentQuery?.data?.map((content: any, index: number) => (
-					<Lesson key={index} id={content.id} name={content.name} />
+					<Content
+						key={index}
+						id={content.id}
+						name={content.name}
+						type={content.type}
+					/>
 				))}
 				<AddNewButton>
 					<NavLink to={`/courses/${courseId}/add-new-lesson`}>

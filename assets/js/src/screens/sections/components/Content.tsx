@@ -2,7 +2,7 @@ import { AlignLeft, Timer, Trash } from '../../../assets/icons';
 
 import Button from 'Components/common/Button';
 import DragHandle from './DragHandle';
-import Dropdown from 'rc-dropdown';
+import Dropdown from 'Components/common/Dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
 import Icon from 'Components/common/Icon';
 import OptionButton from 'Components/common/OptionButton';
@@ -33,14 +33,12 @@ const Content: React.FC<Props> = (props) => {
 						{__('Edit', 'masteriyo')}
 					</Button>
 					<Dropdown
-						trigger={'click'}
-						placement={'bottomRight'}
-						animation={'slide-up'}
-						overlay={
+						align={'end'}
+						content={
 							<DropdownOverlay>
-								<ul>
-									<li>
-										<Icon icon={<Trash />} />
+								<ul className="mto-w-36 mto-text-gray-700 mto-m-4">
+									<li className="mto-flex mto-items-center mto-text-sm mto-mb-4 hover:mto-text-primary mto-cursor-pointer">
+										<Icon className="mto-mr-1" icon={<Trash />} />
 										{__('Delete', 'masteriyo')}
 									</li>
 								</ul>

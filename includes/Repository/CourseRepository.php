@@ -26,7 +26,6 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		'price'             => '_price',
 		'regular_price'     => '_regular_price',
 		'sale_price'        => '_sale_price',
-		'featured'          => '_featured',
 		'category_ids'      => '_category_ids',
 		'tag_ids'           => '_tag_ids',
 		'difficulty_ids'    => '_difficulty_ids',
@@ -118,6 +117,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			'reviews_allowed'   => 'open' === $course_post->comment_status,
 		) );
 
+		$this->read_visibility( $course );
 		$this->read_course_data( $course );
 		$this->read_extra_data( $course );
 		$course->set_object_read( true );
@@ -312,32 +312,28 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 				$terms[] = 'featured';
 			}
 
-			// if ( 'outofstock' === $course->get_stock_status() ) {
-			// 	$terms[] = 'outofstock';
-			// }
+			$rating = min( 5, Number::round( $course->get_average_rating(), 0 ) );
 
-			// $rating = min( 5, Number::round( $course->get_average_rating(), 0 ) );
+			if ( $rating > 0 ) {
+				$terms[] = 'rated-' . $rating;
+			}
 
-			// if ( $rating > 0 ) {
-			// 	$terms[] = 'rated-' . $rating;
-			// }
+			switch ( $course->get_catalog_visibility() ) {
+				case 'hidden':
+					$terms[] = 'exclude-from-search';
+					$terms[] = 'exclude-from-catalog';
+					break;
+				case 'catalog':
+					$terms[] = 'exclude-from-search';
+					break;
+				case 'search':
+					$terms[] = 'exclude-from-catalog';
+					break;
+			}
 
-			// switch ( $course->get_catalog_visibility() ) {
-			// 	case 'hidden':
-			// 		$terms[] = 'exclude-from-search';
-			// 		$terms[] = 'exclude-from-catalog';
-			// 		break;
-			// 	case 'catalog':
-			// 		$terms[] = 'exclude-from-search';
-			// 		break;
-			// 	case 'search':
-			// 		$terms[] = 'exclude-from-catalog';
-			// 		break;
-			// }
-
-			// if ( ! is_wp_error( wp_set_post_terms( $course->get_id(), $terms, 'course_visibility', false ) ) ) {
-			// 	do_action( 'masteriyo_course_set_visibility', $course->get_id(), $course->get_catalog_visibility() );
-			// }
+			if ( ! is_wp_error( wp_set_post_terms( $course->get_id(), $terms, 'course_visibility', false ) ) ) {
+				do_action( 'masteriyo_course_set_visibility', $course->get_id(), $course->get_catalog_visibility() );
+			}
 		}
 	}
 
@@ -431,6 +427,38 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	}
 
 	/**
+	 * Convert visibility terms to props.
+	 * Catalog visibility valid values are 'visible', 'catalog', 'search', and 'hidden'.
+	 *
+	 * @param Course $course Course object.
+	 * @since 3.0.0
+	 */
+	protected function read_visibility( &$course ) {
+		$terms           = get_the_terms( $course->get_id(), 'course_visibility' );
+		$term_names      = is_array( $terms ) ? wp_list_pluck( $terms, 'name' ) : array();
+		$featured        = in_array( 'featured', $term_names, true );
+		$exclude_search  = in_array( 'exclude-from-search', $term_names, true );
+		$exclude_catalog = in_array( 'exclude-from-catalog', $term_names, true );
+
+		if ( $exclude_search && $exclude_catalog ) {
+			$catalog_visibility = 'hidden';
+		} elseif ( $exclude_search ) {
+			$catalog_visibility = 'catalog';
+		} elseif ( $exclude_catalog ) {
+			$catalog_visibility = 'search';
+		} else {
+			$catalog_visibility = 'visible';
+		}
+
+		$course->set_props(
+			array(
+				'featured'           => $featured,
+				'catalog_visibility' => $catalog_visibility,
+			)
+		);
+	}
+
+	/**
 	 * Get valid WP_Query args from a CourseQuery's query variables.
 	 *
 	 * @since 0.1.0
@@ -438,28 +466,12 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	 * @return array
 	 */
 	protected function get_wp_query_args( $query_vars ) {
-		// Map query vars to ones that get_wp_query_args or WP_Query recognize.
-		$key_mapping = array(
-			'status'         => 'post_status',
-			'page'           => 'paged',
-			'include'        => 'post__in',
-			'average_rating' => '_average_rating',
-			'review_count'   => '_review_count',
-		);
-
-		foreach ( $key_mapping as $query_key => $db_key ) {
-			if ( isset( $query_vars[ $query_key ] ) ) {
-				$query_vars[ $db_key ] = $query_vars[ $query_key ];
-				unset( $query_vars[ $query_key ] );
-			}
-		}
-
 		// These queries cannot be auto-generated so we have to remove them and build them manually.
 		$manual_queries = array(
-			'sku'        => '',
 			'featured'   => '',
 			'visibility' => '',
 		);
+
 		foreach ( $manual_queries as $key => $manual_query ) {
 			if ( isset( $query_vars[ $key ] ) ) {
 				$manual_queries[ $key ] = $query_vars[ $key ];
@@ -467,9 +479,8 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			}
 		}
 
-		$query_vars['post_type'] = 'course';
-
 		$wp_query_args = parent::get_wp_query_args( $query_vars );
+
 		if ( ! isset( $wp_query_args['date_query'] ) ) {
 			$wp_query_args['date_query'] = array();
 		}
@@ -508,13 +519,15 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 
 		// Handle featured.
 		if ( '' !== $manual_queries['featured'] ) {
-			$course_visibility_term_ids = masteriyo_get_course_visibility_term_ids();
 			if ( $manual_queries['featured'] ) {
+				$course_visibility_term_ids = masteriyo_get_course_visibility_term_ids();
+
 				$wp_query_args['tax_query'][] = array(
 					'taxonomy' => 'course_visibility',
 					'field'    => 'term_taxonomy_id',
 					'terms'    => array( $course_visibility_term_ids['featured'] ),
 				);
+
 				$wp_query_args['tax_query'][] = array(
 					'taxonomy' => 'course_visibility',
 					'field'    => 'term_taxonomy_id',
@@ -566,6 +579,6 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			$wp_query_args['orderby'] = 'post__in';
 		}
 
-		return apply_filters( 'woocommerce_product_data_store_cpt_get_products_query', $wp_query_args, $query_vars, $this );
+		return apply_filters( 'masteriyo_course_data_store_cpt_get_courses_query', $wp_query_args, $query_vars, $this );
 	}
 }

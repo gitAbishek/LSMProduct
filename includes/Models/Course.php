@@ -415,6 +415,17 @@ class Course extends Model {
 	}
 
 	/**
+	 * Returns whether or not the course is featured.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_featured() {
+		return true === $this->get_featured();
+	}
+
+	/**
 	 * Get rating count.
 	 *
 	 * @since  0.1.0

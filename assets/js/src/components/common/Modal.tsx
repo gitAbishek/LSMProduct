@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Backdrop from './Backdrop';
 import FocusLock from 'react-focus-lock';
-import { ThemeContext } from './context/ThemeContext';
 import Transition from './Transition';
 import { createPortal } from 'react-dom';
 
@@ -22,12 +21,6 @@ const Modal = React.forwardRef<HTMLDivElement, Props>(function Modal(
 	ref
 ) {
 	const { children, onClose, isOpen, ...other } = props;
-
-	const {
-		theme: { modal },
-	} = useContext(ThemeContext);
-
-	const baseStyle = modal.base;
 
 	function handleEsc(e: KeyboardEvent) {
 		if (e.key === 'Esc' || e.key === 'Escape') {
@@ -52,34 +45,36 @@ const Modal = React.forwardRef<HTMLDivElement, Props>(function Modal(
 		<Transition show={isOpen}>
 			<>
 				<Transition
-					enter="transition ease-out duration-150"
-					enterFrom="opacity-0"
-					enterTo="opacity-100"
-					leave="transition ease-in duration-150"
-					leaveFrom="opacity-100"
-					leaveTo="opacity-0">
+					enter="mto-transition mto-ease-out mto-duration-150"
+					enterFrom="mto-opacity-0"
+					enterTo="mto-opacity-100"
+					leave="mto-transition mto-ease-in mto-duration-150"
+					leaveFrom="mto-opacity-100"
+					leaveTo="mto-opacity-0">
 					<Backdrop onClick={onClose}>
 						<Transition
-							enter="transition ease-out duration-150"
-							enterFrom="opacity-0 transform translate-y-1/2"
-							enterTo="opacity-100"
-							leave="transition ease-in duration-150"
-							leaveFrom="opacity-100"
-							leaveTo="opacity-0  transform translate-y-1/2">
+							enter="mto-transition mto-ease-out mto-duration-150"
+							enterFrom="mto-opacity-0 mto-transform mto-translate-y-1/2"
+							enterTo="mto-opacity-100"
+							leave="mto-transition mto-ease-in mto-duration-150"
+							leaveFrom="mto-opacity-100"
+							leaveTo="mto-opacity-0  mto-transform mto-translate-y-1/2">
 							<div
-								className={baseStyle}
+								className={
+									'mto-w-full mto-px-6 mto-py-4 mto-overflow-hidden mto-bg-white mto-rounded-t-lg sm:mto-rounded-lg sm:mto-m-4 sm:mto-max-w-xl'
+								}
 								role="dialog"
 								onClick={(e) => e.stopPropagation()}
 								ref={ref}
 								{...other}>
 								<FocusLock returnFocus>
-									<header className="flex justify-end">
+									<header className="mto-flex mto-justify-end">
 										<button
-											className="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover: hover:text-gray-700"
+											className="mto-inline-flex mto-items-center mto-justify-center mto-w-6 mto-h-6 mto-text-gray-400 mto-transition-colors mto-duration-150 mto-rounded hover:mto-text-gray-700"
 											aria-label="close"
 											onClick={onClose}>
 											<svg
-												className="w-4 h-4"
+												className="mto-w-4 mto-h-4"
 												fill="currentColor"
 												viewBox="0 0 20 20"
 												role="img"

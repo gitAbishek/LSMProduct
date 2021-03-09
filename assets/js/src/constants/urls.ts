@@ -10,7 +10,7 @@ const urls = {
 	difficulties: `${baseUrl}/courses/difficulties`,
 	difficulty: `${baseUrl}/courses/difficulties/:id`,
 	lessons: `${baseUrl}/lessons`,
-	lesson: `${baseUrl}//lessons/:id`,
+	lesson: `${baseUrl}/lessons/:id`,
 	questions: `${baseUrl}/questions`,
 	question: `${baseUrl}/questions/:id`,
 	checkAnswer: `${baseUrl}/questions/check_answer/:id/answer`,

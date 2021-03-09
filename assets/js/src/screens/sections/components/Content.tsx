@@ -1,5 +1,6 @@
 import { AlignLeft, Timer, Trash } from '../../../assets/icons';
 import React, { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 
 import Button from 'Components/common/Button';
 import DragHandle from './DragHandle';
@@ -12,6 +13,7 @@ import ModalFooter from 'Components/common/ModalFooter';
 import ModalHeader from 'Components/common/ModalHeader';
 import OptionButton from 'Components/common/OptionButton';
 import { __ } from '@wordpress/i18n';
+import { deleteLesson } from '../../../utils/api';
 
 interface Props {
 	id: number;
@@ -22,9 +24,25 @@ interface Props {
 const Content: React.FC<Props> = (props) => {
 	const { id, name, type } = props;
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const queryClient = useQueryClient();
+
+	const deleteLessonMutation = useMutation((id: number) => deleteLesson(id), {
+		onSuccess: () => {
+			queryClient.invalidateQueries('contents');
+		},
+	});
 
 	const onDeletePress = () => {
 		setIsModalOpen(true);
+	};
+
+	const deleteContent = () => {
+		console.log('clicked on delete');
+		if (type === 'lesson') {
+			console.log(id);
+			deleteLessonMutation.mutate(id);
+		}
+		setIsModalOpen(false);
 	};
 	return (
 		<>
@@ -83,10 +101,7 @@ const Content: React.FC<Props> = (props) => {
 					<Button
 						layout="accent"
 						className="mto-w-full sm:mto-w-auto"
-						onClick={() => {
-							// deleteMutation.mutate(removableCourse.id);
-							// setShowDeleteModal(false);
-						}}>
+						onClick={() => deleteContent()}>
 						{__('Delete', 'masteriyo')}
 					</Button>
 				</ModalFooter>

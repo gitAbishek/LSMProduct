@@ -101,8 +101,8 @@ export const addNewLesson = async (data: any) => {
 	return axios.post(urls.lessons, data).then((response) => response.data);
 };
 
-export const deleteLessom = async (id: number) => {
+export const deleteLesson = async (id: number) => {
 	return axios
-		.delete(urls.lessons.replace(':id', id.toString()))
+		.delete(urls.lesson.replace(':id', id.toString()))
 		.then((response) => response.data);
 };

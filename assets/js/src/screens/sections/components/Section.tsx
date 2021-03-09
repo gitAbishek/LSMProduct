@@ -153,7 +153,7 @@ const Section: React.FC<Props> = (props) => {
 					/>
 				))}
 				<AddNewButton>
-					<NavLink to={`/courses/${courseId}/add-new-lesson`}>
+					<NavLink to={`/courses/${courseId}/${id}/add-new-lesson`}>
 						{__('Add New Content', 'masteriyo')}
 					</NavLink>
 				</AddNewButton>

@@ -1,9 +1,10 @@
 import React, { Fragment, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
 
 import Button from 'Components/common/Button';
-import Dropdown from 'rc-dropdown';
+import Dropdown from 'Components/common/Dropdown';
+import DropdownOverlay from 'Components/common/DropdownOverlay';
 import FormGroup from 'Components/common/FormGroup';
-import ImageUpload from 'Components/common/ImageUpload';
 import Input from 'Components/common/Input';
 import Label from 'Components/common/Label';
 import MainLayout from 'Layouts/MainLayout';
@@ -13,14 +14,43 @@ import Select from 'Components/common/Select';
 import Slider from 'rc-slider';
 import Textarea from 'Components/common/Textarea';
 import { __ } from '@wordpress/i18n';
+import { addLesson } from '../../utils/api';
+import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { useToasts } from 'react-toast-notifications';
 
-interface Props {}
+const AddNewLesson: React.FC = () => {
+	const { courseId, parentId }: any = useParams();
+	interface Inputs {
+		name: string;
+		description?: string;
+		categories?: any;
+	}
 
-const AddNewLesson: React.FC<Props> = (props) => {
+	const { register, handleSubmit } = useForm<Inputs>();
 	const [playBackTime, setPlayBackTime] = useState(3);
+	const { addToast } = useToasts();
+	const { push } = useHistory();
 
 	const playBackTimeOnChange = (value: number) => {
 		setPlayBackTime(value);
+	};
+
+	const addLessonMutation = useMutation(
+		(data: object) =>
+			addLesson({ ...data, course_id: courseId, parent_id: parentId }),
+		{
+			onSuccess: (data: any) => {
+				addToast(data?.name + __(' has been added successfully'), {
+					appearance: 'success',
+					autoDismiss: true,
+				});
+				push(`/builder/${courseId}`);
+			},
+		}
+	);
+	const onSubmit = (data: object) => {
+		addLessonMutation.mutate(data);
 	};
 
 	return (
@@ -28,14 +58,14 @@ const AddNewLesson: React.FC<Props> = (props) => {
 			<MainToolbar />
 			<MainLayout>
 				<div>
-					{/* <SectionHeader>
-						<SectionTitle>{__('Add New Lesson', 'masteriyo')}</SectionTitle>
-						<SectionAction>
+					<div className="mto-flex mto-justify-between mto-mb-10">
+						<h1 className="mto-text-xl mto-m-0 mto-font-medium">
+							{__('Add New Lesson', 'masteriyo')}
+						</h1>
+						<div>
 							<Dropdown
-								trigger={'click'}
-								placement={'bottomRight'}
-								animation={'slide-up'}
-								overlay={
+								align="end"
+								content={
 									<DropdownOverlay>
 										<ul>
 											<li>{__('Delete', 'masteriyo')}</li>
@@ -44,13 +74,17 @@ const AddNewLesson: React.FC<Props> = (props) => {
 								}>
 								<OptionButton />
 							</Dropdown>
-						</SectionAction>
-					</SectionHeader>
-					<SectionBody>
-						<form action="">
+						</div>
+					</div>
+					<div>
+						<form onSubmit={handleSubmit(onSubmit)}>
 							<FormGroup>
 								<Label htmlFor="">{__('Lesson Name', 'masteriyo')}</Label>
-								<Input placeholder={__('Your topic title', 'masteriyo')} />
+								<Input
+									placeholder={__('Your topic title', 'masteriyo')}
+									ref={register({ required: true })}
+									name="name"
+								/>
 							</FormGroup>
 
 							<FormGroup>
@@ -58,14 +92,13 @@ const AddNewLesson: React.FC<Props> = (props) => {
 								<Textarea
 									placeholder={__('Your course description', 'masteriyo')}
 									rows={5}
+									ref={register}
+									name="description"
 								/>
 							</FormGroup>
 
 							<FormGroup>
 								<Label htmlFor="">{__('Featured Image', 'masteriyo')}</Label>
-								<ImageUpload
-									title={__('Drag image or click to upload', 'masteriyo')}
-								/>
 							</FormGroup>
 							<div>
 								<div>
@@ -87,7 +120,11 @@ const AddNewLesson: React.FC<Props> = (props) => {
 								<div>
 									<FormGroup>
 										<Label htmlFor="">{__('Video URL', 'masteriyo')}</Label>
-										<Input placeholder="video url" />
+										<Input
+											placeholder="video url"
+											ref={register}
+											name="video_source_url"
+										/>
 									</FormGroup>
 								</div>
 							</div>
@@ -96,34 +133,33 @@ const AddNewLesson: React.FC<Props> = (props) => {
 								<Label htmlFor="">
 									{__('Video Playback Time', 'masteriyo')}
 								</Label>
-								<DeviceRotationRate>
-									<div>
-										<Slider
-											min={0}
-											max={20}
-											defaultValue={playBackTime}
-											onChange={playBackTimeOnChange}
-										/>
-									</div>
-									<div>
-										<Input
-											type="number"
-											value={playBackTime}
-											onChange={() => playBackTimeOnChange}
-										/>
-									</div>
-								</DeviceRotationRate>
+
+								<div>
+									<Slider
+										min={0}
+										max={20}
+										defaultValue={playBackTime}
+										onChange={playBackTimeOnChange}
+									/>
+								</div>
+								<div>
+									<Input
+										type="number"
+										value={playBackTime}
+										onChange={() => playBackTimeOnChange}
+									/>
+								</div>
 							</FormGroup>
-							<SectionFooter>
-								<FlexRow>
-									<Button appearance="primary" style={{ marginRight: 16 }}>
+							<div>
+								<div className="mto-flex">
+									<Button layout="primary" style={{ marginRight: 16 }}>
 										{__('Add New Lesson', 'masteriyo')}
 									</Button>
 									<Button>{__('Cancel', 'masteriyo')}</Button>
-								</FlexRow>
-							</SectionFooter>
+								</div>
+							</div>
 						</form>
-					</SectionBody> */}
+					</div>
 				</div>
 			</MainLayout>
 		</Fragment>

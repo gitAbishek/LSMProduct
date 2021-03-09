@@ -97,7 +97,7 @@ export const deleteSection = async (id: number) => {
 		.then((response) => response.data);
 };
 
-export const addNewLesson = async (data: any) => {
+export const addLesson = async (data: any) => {
 	return axios.post(urls.lessons, data).then((response) => response.data);
 };
 

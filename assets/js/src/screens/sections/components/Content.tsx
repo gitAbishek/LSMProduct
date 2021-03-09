@@ -1,5 +1,6 @@
 import { AlignLeft, Timer, Trash } from '../../../assets/icons';
 import React, { useState } from 'react';
+import { deleteLesson, deleteQuiz } from '../../../utils/api';
 import { useMutation, useQueryClient } from 'react-query';
 
 import Button from 'Components/common/Button';
@@ -13,7 +14,6 @@ import ModalFooter from 'Components/common/ModalFooter';
 import ModalHeader from 'Components/common/ModalHeader';
 import OptionButton from 'Components/common/OptionButton';
 import { __ } from '@wordpress/i18n';
-import { deleteLesson } from '../../../utils/api';
 
 interface Props {
 	id: number;
@@ -31,19 +31,25 @@ const Content: React.FC<Props> = (props) => {
 			queryClient.invalidateQueries('contents');
 		},
 	});
+	const deleteQuizMutation = useMutation((id: number) => deleteQuiz(id), {
+		onSuccess: () => {
+			queryClient.invalidateQueries('contents');
+		},
+	});
 
 	const onDeletePress = () => {
 		setIsModalOpen(true);
 	};
 
 	const deleteContent = () => {
-		console.log('clicked on delete');
 		if (type === 'lesson') {
-			console.log(id);
 			deleteLessonMutation.mutate(id);
+		} else if (type === 'quiz') {
+			deleteQuizMutation.mutate(id);
 		}
 		setIsModalOpen(false);
 	};
+
 	return (
 		<>
 			<div className="mto-bg-white mto-border mto-border-solid mto-border-gray-200 mto-px-4 mto-py-3 mto-flex mto-justify-between mto-items-center mto-mb-2">

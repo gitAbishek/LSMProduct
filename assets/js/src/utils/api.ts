@@ -106,3 +106,9 @@ export const deleteLesson = async (id: number) => {
 		.delete(urls.lesson.replace(':id', id.toString()))
 		.then((response) => response.data);
 };
+
+export const deleteQuiz = async (id: number) => {
+	return axios
+		.delete(urls.quiz.replace(':id', id.toString()))
+		.then((response) => response.data);
+};

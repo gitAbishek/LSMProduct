@@ -140,6 +140,8 @@ class Masteriyo extends Container {
 
 	/**
 	 * Load plugin textdomain.
+	 *
+	 * @since 0.1.0
 	 */
 	private function load_text_domain() {
 		load_plugin_textdomain(
@@ -179,6 +181,8 @@ class Masteriyo extends Container {
 
 	/**
 	 * Add plugin links on the plugins screen.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param mixed $links Plugin Row Meta.
 	 * @param mixed $file  Plugin Base file.
@@ -222,6 +226,8 @@ class Masteriyo extends Container {
 
 	/**
 	 * Add action links on the plugins screen.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param mixed $links Plugin Action links.
 	 *

@@ -6,6 +6,7 @@
  */
 
 use ThemeGrill\Masteriyo\DateTime;
+use ThemeGrill\Masteriyo\Constants;
 
 /**
  * Get course.
@@ -666,4 +667,30 @@ function masteriyo_get_page_permalink( $page, $fallback = null ) {
 	}
 
 	return apply_filters( 'masteriyo_get_' . $page . '_page_permalink', $permalink );
+}
+
+/**
+ * Check if the current page is a single course page.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function mto_is_single_course_page() {
+	return is_singular( 'course' );
+}
+
+/**
+ * Get image asset URL.
+ *
+ * @since 0.1.0
+ *
+ * @param string $file Image file name.
+ *
+ * @return string
+ */
+function mto_img_url( $file ) {
+	$plugin_dir = plugin_dir_url( Constants::get('MASTERIYO_PLUGIN_FILE') );
+
+	return "{$plugin_dir}assets/img/{$file}";
 }

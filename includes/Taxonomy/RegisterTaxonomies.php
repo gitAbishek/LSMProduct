@@ -19,6 +19,7 @@ class RegisterTaxonomies {
 		TaxonomyFactory::create( 'course_cat' )->register();
 		TaxonomyFactory::create( 'course_tag' )->register();
 		TaxonomyFactory::create( 'course_difficulty' )->register();
+		TaxonomyFactory::create( 'course_visibility' )->register();
 		TaxonomyFactory::create( 'lesson_cat' )->register();
 		TaxonomyFactory::create( 'lesson_tag' )->register();
 	}

@@ -23,6 +23,8 @@ class TaxonomyFactory {
 			return new Course\Tags();
 		} elseif ( 'course_difficulty' === $taxonomy ) {
 			return new Course\Difficulties();
+		} elseif ( 'course_visibility' === $taxonomy ) {
+			return new Course\Visibilities();
 		} elseif ( 'lesson_cat' === $taxonomy) {
 			return new Lesson\Categories();
 		} elseif ( 'lesson_tag' === $taxonomy ) {

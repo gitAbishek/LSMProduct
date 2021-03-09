@@ -112,6 +112,13 @@ class ScriptStyle {
 				'type'     => 'public',
 				'callback' => ''
 			),
+			'masteriyo-single-course' => array(
+				'src'      => $this->get_asset_url( '/assets/js/single-course.js' ),
+				'deps'     => array(),
+				'version'  => $this->get_version(),
+				'type'     => 'public',
+				'callback' => ''
+			),
 		) );
 	}
 
@@ -139,6 +146,14 @@ class ScriptStyle {
 				'version'  => $this->get_version(),
 				'media'    => 'all',
 				'has_rtl' => true,
+				'type'     => 'public'
+			),
+			'masteriyo-single-course' => array(
+				'src'      => $this->get_asset_url( '/assets/css/single-course.css' ),
+				'deps'     => '',
+				'version'  => $this->get_version(),
+				'media'    => 'all',
+				'has_rtl'  => true,
 				'type'     => 'public'
 			),
 		) );
@@ -321,17 +336,43 @@ class ScriptStyle {
 	}
 
 	/**
-	 * Load public scripts and styles.
+	 * Register scripts.
 	 *
-	 * @since 0.1.1
+	 * @since 0.1.0
 	 */
-	public function load_public_scripts() {
-		$scripts = $this->get_scripts( 'public' );
+	private function register_scripts() {
+		$scripts = $this->get_scripts( is_admin() ? 'admin' : 'public' );
 
 		foreach ( $scripts as $handle => $script ) {
-			if ( ! \is_callable( $script ) ) {
-				$a = 1;
-			}
+			$this->register_script( $handle, $script['src'], $script['deps'], $script['version'], $script['in_footer'] );
+		}
+	}
+
+	/**
+	 * Register styles.
+	 *
+	 * @since 0.1.0
+	 */
+	private function register_styles() {
+		$scripts = $this->get_styles( is_admin() ? 'admin' : 'public' );
+
+		foreach ( $scripts as $handle => $script ) {
+			$this->register_style( $handle, $script['src'], $script['deps'], $script['version'], $script['media'] );
+		}
+	}
+
+	/**
+	 * Load public scripts and styles.
+	 *
+	 * @since 0.1.0
+	 */
+	public function load_public_scripts() {
+		$this->register_scripts();
+		$this->register_styles();
+
+		if ( mto_is_single_course_page() ) {
+			$this->enqueue_script( 'masteriyo-single-course' );
+			$this->enqueue_style( 'masteriyo-single-course' );
 		}
 	}
 

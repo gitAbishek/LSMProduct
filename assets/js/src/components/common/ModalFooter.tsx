@@ -11,12 +11,10 @@ const ModalFooter = React.forwardRef<HTMLElement, Props>(function ModalFooter(
 
 	return (
 		<footer
-			className={
-				(classNames(
-					'mto-flex mto-flex-col mto-items-center mto-justify-end mto-px-6 mto--mx-6 mto--mb-4 mto-space-y-4 sm:mto-space-x-6 sm:mto-flex-row mto-bg-gray-50'
-				),
-				className)
-			}
+			className={classNames(
+				'mto-flex mto-flex-col mto-items-center mto-justify-end mto-px-6  mto-py-2 mto--mx-6 mto--mb-4 mto-space-x-4 sm:mto-flex-row mto-bg-gray-50',
+				className
+			)}
 			ref={ref}
 			{...other}>
 			{children}

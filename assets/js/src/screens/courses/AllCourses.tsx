@@ -114,12 +114,14 @@ const AllCourses = () => {
 						</p>
 					</ModalBody>
 					<ModalFooter>
-						<Button onClick={() => setShowDeleteModal(false)}>
+						<Button
+							className="mto-w-full sm:mto-w-auto"
+							onClick={() => setShowDeleteModal(false)}>
 							{__('Cancel', 'masteriyo')}
 						</Button>
 						<Button
 							layout="accent"
-							className="mto-ml-3"
+							className="mto-w-full sm:mto-w-auto"
 							onClick={() => {
 								deleteMutation.mutate(removableCourse.id);
 								setShowDeleteModal(false);

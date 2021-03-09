@@ -11,7 +11,7 @@ const Backdrop = React.forwardRef<HTMLDivElement, Props>(function Backdrop(
 	return (
 		<div
 			className={classNames(
-				'mto-fixed mto-inset-0 mto-z-40 mto-items-end mto-bg-black mto-bg-opacity-50 sm:mto-items-center sm:mto-justify-center',
+				'mto-fixed mto-inset-0 mto-z-40 mto-flex mto-items-end mto-bg-black mto-bg-opacity-50 sm:mto-items-center sm:mto-justify-center',
 				className
 			)}
 			ref={ref}

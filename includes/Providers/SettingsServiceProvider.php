@@ -45,6 +45,7 @@ class SettingsServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'setting', Setting::class )
 			->addArgument( 'setting.store');
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\SettingsController' );
+		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\SettingsController' )
+			->addArgument( 'permission');
 	}
 }

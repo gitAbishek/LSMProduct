@@ -106,7 +106,7 @@ const AllCourses = () => {
 						{__('Delete Course', 'masteriyo')} {removableCourse.name}
 					</ModalHeader>
 					<ModalBody>
-						<p className="mto-ml-4 mto-text-md mto-text-gray-500">
+						<p className="mto-text-md mto-text-gray-500">
 							{__(
 								"Are you sure want to delete this course. You won't be able to recover it back",
 								'masteriyo'

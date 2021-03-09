@@ -10,7 +10,7 @@ const ModalHeader = React.forwardRef<HTMLParagraphElement, Props>(
 		return (
 			<p
 				className={classNames(
-					'mto-mt-4 mto-mb-2 mto-text-lg mto-font-semibold mto-text-gray-700',
+					'mto-mb-4 mto-text-lg mto-font-semibold mto-text-gray-700',
 					className
 				)}
 				ref={ref}

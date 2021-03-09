@@ -77,6 +77,8 @@ class Masteriyo extends Container {
 	protected function init_hooks() {
 		add_action( 'init', array( $this, 'after_wp_init' ) );
 		add_action( 'admin_bar_menu', array( $this, 'add_course_list_page_link' ), 35 );
+		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_links' ), 10, 2 );
+		add_filter( 'plugin_action_links_' . Constants::get( 'MASTERIYO_PLUGIN_BASENAME' ), array( $this, 'add_plugin_action_links' ) );
 	}
 
 	/**
@@ -138,6 +140,8 @@ class Masteriyo extends Container {
 
 	/**
 	 * Load plugin textdomain.
+	 *
+	 * @since 0.1.0
 	 */
 	private function load_text_domain() {
 		load_plugin_textdomain(
@@ -173,6 +177,82 @@ class Masteriyo extends Container {
 				'href'   => masteriyo_get_page_permalink( 'course-list' ),
 			)
 		);
+	}
+
+	/**
+	 * Add plugin links on the plugins screen.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param mixed $links Plugin Row Meta.
+	 * @param mixed $file  Plugin Base file.
+	 *
+	 * @return array
+	 */
+	public static function add_plugin_links( $links, $file ) {
+		if ( Constants::get( 'MASTERIYO_PLUGIN_BASENAME' ) !== $file ) {
+			return $links;
+		}
+
+		$masteriyo_links = array(
+			'docs' => array(
+				'url'        => apply_filters( 'masteriyo_docs_url', '#' ),
+				'label'      => __( 'Docs', 'masteriyo' ),
+				'aria-label' => __( 'View masteriyo documentation', 'masteriyo' ),
+			),
+			'apidocs' => array(
+				'url'        => apply_filters( 'masteriyo_apidocs_url', '#' ),
+				'label'      => __( 'API docs', 'masteriyo' ),
+				'aria-label' => __( 'View masteriyo API docs', 'masteriyo' ),
+			),
+			'support' => array(
+				'url'        => apply_filters( 'masteriyo_community_support_url', 'https://wordpress.org/support/plugin/masteriyo/' ),
+				'label'      => __( 'Community Support', 'masteriyo' ),
+				'aria-label' => __( 'Visit community forums', 'masteriyo' ),
+			),
+		);
+
+		foreach ( $masteriyo_links as $key => $link ) {
+			$links[ $key ] = sprintf(
+				'<a href="%s" aria-label="%s">%s</a>',
+				esc_url( $link['url'] ),
+				esc_attr( $link['aria-label'] ),
+				esc_html( $link['label'] )
+			);
+		}
+
+		return $links;
+	}
+
+	/**
+	 * Add action links on the plugins screen.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param mixed $links Plugin Action links.
+	 *
+	 * @return array
+	 */
+	public static function add_plugin_action_links( $links ) {
+		$action_links = array(
+			'settings' => array(
+				'url'        => admin_url( 'admin.php?page=masteriyo' ),
+				'label'      => __( 'Settings', 'masteriyo' ),
+				'aria-label' => __( 'View masteriyo settings', 'masteriyo' ),
+			),
+		);
+		$action_link_htmls = array();
+
+		foreach ( $action_links as $key => $link ) {
+			$action_link_htmls[ $key ] = sprintf(
+				'<a href="%s" aria-label="%s">%s</a>',
+				esc_url( $link['url'] ),
+				esc_attr( $link['aria-label'] ),
+				esc_html( $link['label'] )
+			);
+		}
+
+		return array_merge( $action_link_htmls, $links );
 	}
 }
 

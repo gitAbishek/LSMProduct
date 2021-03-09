@@ -405,3 +405,43 @@ function masteriyo_get_template_cache( $cache_key ) {
 function masteriyo_locate_template( $template_name, $template_path = '', $default_path = '' ) {
 	return masteriyo( 'template' )->locate( $template_name, $template_path, $default_path );
 }
+
+/**
+ * Retrieve page ids - used for pages like course list. returns -1 if no page is found.
+ *
+ * @since 0.1.0
+ *
+ * @param string $page Page slug.
+ *
+ * @return int
+ */
+function masteriyo_get_page_id( $page ) {
+	$setting = masteriyo( 'setting' );
+
+	$setting->set_name( 'masteriyo_' . $page . '_page_id' );
+
+	masteriyo( 'setting.store' )->read( $setting );
+
+	$page = apply_filters( 'masteriyo_get_' . $page . '_page_id', $setting->get_value() );
+
+	return $page ? absint( $page ) : -1;
+}
+
+/**
+ * Retrieve page permalink.
+ *
+ * @param string      $page page slug.
+ * @param string|bool $fallback Fallback URL if page is not set. Defaults to home URL.
+ *
+ * @return string
+ */
+function masteriyo_get_page_permalink( $page, $fallback = null ) {
+	$page_id   = masteriyo_get_page_id( $page );
+	$permalink = 0 < $page_id ? get_permalink( $page_id ) : '';
+
+	if ( ! $permalink ) {
+		$permalink = is_null( $fallback ) ? get_home_url() : $fallback;
+	}
+
+	return apply_filters( 'masteriyo_get_' . $page . '_page_permalink', $permalink );
+}

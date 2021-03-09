@@ -29,6 +29,7 @@ class CourseQuery extends ObjectQuery {
 		return array_merge(
 			parent::get_default_query_vars(),
 			array(
+				'type'              => 'course',
 				'status'            => array( 'draft', 'pending', 'private', 'publish' ),
 				'limit'             => get_option( 'posts_per_page' ),
 				'include'           => array(),

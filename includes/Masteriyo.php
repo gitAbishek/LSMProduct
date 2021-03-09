@@ -81,6 +81,7 @@ class Masteriyo extends Container {
 		add_action( 'admin_bar_menu', array( $this, 'add_course_list_page_link' ), 35 );
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_links' ), 10, 2 );
 		add_filter( 'plugin_action_links_' . Constants::get( 'MASTERIYO_PLUGIN_BASENAME' ), array( $this, 'add_plugin_action_links' ) );
+		add_filter( 'template_include', array( $this, 'template_loader' ) );
 	}
 
 	/**
@@ -256,6 +257,25 @@ class Masteriyo extends Container {
 		}
 
 		return array_merge( $action_link_htmls, $links );
+	}
+
+	/**
+	 * Load a template.
+	 *
+	 * Handles template usage so that we can use our own templates instead of the theme's.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $template Template to load.
+	 *
+	 * @return string
+	 */
+	public function template_loader( $template ) {
+		if ( mto_is_single_course_page() ) {
+			$template = masteriyo( 'template' )->locate( 'single-course.php' );
+		}
+
+		return $template;
 	}
 }
 

@@ -9,7 +9,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import AddNewButton from 'Components/common/AddNewButton';
 import Button from 'Components/common/Button';
-import Content from './content';
+import Content from './Content';
 import DragHandle from '../components/DragHandle';
 import Dropdown from 'Components/common/Dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';

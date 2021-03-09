@@ -161,6 +161,12 @@ class CoursesController extends PostsController {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
+		$params['featured']       = array(
+			'description'       => __( 'Limit result set to featured courses.', 'woocommerce' ),
+			'type'              => 'boolean',
+			'sanitize_callback' => 'wc_string_to_bool',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
 		$params['category']   = array(
 			'description'       => __( 'Limit result set to courses assigned a specific category ID.', 'masteriyo' ),
 			'type'              => 'string',

@@ -116,6 +116,21 @@ function masteriyo_get_sections( $args = array() ) {
 }
 
 /**
+ * Get lessons.
+ *
+ * @since 0.1.0
+ *
+ * @param array $args Query arguments.
+ *
+ * @return object|array[Lesson]
+ */
+function masteriyo_get_lessons( $args = array() ) {
+	$lessons = masteriyo( 'query.lessons' )->set_args( $args )->get_lessons();
+
+	return apply_filters( 'masteriyo_get_lessons', $lessons, $args );
+}
+
+/**
  * Get quiz.
  *
  * @since 0.1.0

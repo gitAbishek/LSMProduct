@@ -25,10 +25,6 @@ class TaxonomyFactory {
 			return new Course\Difficulties();
 		} elseif ( 'course_visibility' === $taxonomy ) {
 			return new Course\Visibilities();
-		} elseif ( 'lesson_cat' === $taxonomy) {
-			return new Lesson\Categories();
-		} elseif ( 'lesson_tag' === $taxonomy ) {
-			return new Lesson\Tags();
 		}
 	}
 }

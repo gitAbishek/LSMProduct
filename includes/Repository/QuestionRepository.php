@@ -27,14 +27,13 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'_type'              => 'type',
-		'_answer_required'   => 'answer_required',
-		'_randomize'         => 'randomize',
-		'_points'            => 'points',
-		'_positive_feedback' => 'positive_feedback',
-		'_negative_feedback' => 'negative_feedback',
-		'_feedback'          => 'feedback',
-		'_course_id'         => 'course_id',
+		'type'              => '_type',
+		'answer_required'   => '_answer_required',
+		'randomize'         => '_randomize',
+		'points'            => '_points',
+		'positive_feedback' => '_positive_feedback',
+		'negative_feedback' => '_negative_feedback',
+		'feedback'          => '_feedback',
 	);
 
 	/**

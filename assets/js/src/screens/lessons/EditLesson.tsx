@@ -51,6 +51,9 @@ const EditLesson: React.FC = () => {
 			addToast(data?.name + __(' has been updated successfully'), {
 				appearance: 'success',
 				autoDismiss: true,
+				onDismiss: () => {
+					push(`/builder/${lessonQuery?.data?.course_id}`);
+				},
 			});
 		},
 	});

@@ -8,6 +8,10 @@ import Button from 'Components/common/Button';
 import Icon from 'Components/common/Icon';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
+import Modal from 'Components/common/Modal';
+import ModalBody from 'Components/common/ModalBody';
+import ModalFooter from 'Components/common/ModalFooter';
+import ModalHeader from 'Components/common/ModalHeader';
 import { __ } from '@wordpress/i18n';
 
 const AllCourses = () => {
@@ -95,44 +99,37 @@ const AllCourses = () => {
 						))}
 					</tbody>
 				</table>
-				{showDeleteModal && removableCourse && (
-					<div className="mto-fixed mto-z-10 mto-overflow-y-auto mto-bg-gray-600 mto-bg-opacity-80 mto-shadow-lg mto-inset-0">
-						<div className="mto-flex mto-items-center mto-justify-center mto-w-full mto-h-full">
-							<div className="mto-bg-white mto-rounded-md mto-shadow-xl mto-overflow-hidden mto-w-3/12">
-								<div className="mto-p-8 mto-flex">
-									<div className="mto-rounded-full mto-flex-shrink-0 mto-bg-red-200 mto-w-10 mto-h-10 mto-flex mto-items-center mto-justify-center mto-text-xl mto-text-red-600">
-										<Icon icon={<Trash />} />
-									</div>
-									<div>
-										<h3 className="mto-ml-4 mto-text-xl mto-mb-3">
-											{__('Delete Course', 'masteriyo')} {removableCourse.name}
-										</h3>
-										<p className="mto-ml-4 mto-text-md mto-text-gray-500">
-											{__(
-												"Are you sure want to delete this course. You won't be able to recover it back",
-												'masteriyo'
-											)}
-										</p>
-									</div>
-								</div>
-								<footer className="mto-px-8 mto-py-4 mto-flex mto-justify-end mto-bg-gray-100">
-									<Button onClick={() => setShowDeleteModal(false)}>
-										{__('Cancel', 'masteriyo')}
-									</Button>
-									<Button
-										layout="accent"
-										className="mto-ml-3"
-										onClick={() => {
-											deleteMutation.mutate(removableCourse.id);
-											setShowDeleteModal(false);
-										}}>
-										{__('Delete', 'masteriyo')}
-									</Button>
-								</footer>
-							</div>
-						</div>
-					</div>
-				)}
+				<Modal
+					isOpen={showDeleteModal}
+					onClose={() => setShowDeleteModal(false)}>
+					<ModalHeader>
+						{__('Delete Course', 'masteriyo')} {removableCourse.name}
+					</ModalHeader>
+					<ModalBody>
+						<p className="mto-text-md mto-text-gray-500">
+							{__(
+								"Are you sure want to delete this course. You won't be able to recover it back",
+								'masteriyo'
+							)}
+						</p>
+					</ModalBody>
+					<ModalFooter>
+						<Button
+							className="mto-w-full sm:mto-w-auto"
+							onClick={() => setShowDeleteModal(false)}>
+							{__('Cancel', 'masteriyo')}
+						</Button>
+						<Button
+							layout="accent"
+							className="mto-w-full sm:mto-w-auto"
+							onClick={() => {
+								deleteMutation.mutate(removableCourse.id);
+								setShowDeleteModal(false);
+							}}>
+							{__('Delete', 'masteriyo')}
+						</Button>
+					</ModalFooter>
+				</Modal>
 			</MainLayout>
 		</Fragment>
 	);

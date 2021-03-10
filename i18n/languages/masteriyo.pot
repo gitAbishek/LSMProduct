@@ -1,2285 +1,251 @@
-# Copyright (C) 2021 wp-plugin
-# This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Masteriyo LMS 0.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-lms\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-03-02T10:39:14+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.4.0\n"
-"X-Domain: masteriyo\n"
-
-#. Plugin Name of the plugin
-msgid "Masteriyo LMS"
-msgstr ""
-
-#. Plugin URI of the plugin
-#. Author URI of the plugin
-msgid "https://example.com"
-msgstr ""
-
-#. Description of the plugin
-msgid "WordPress Learing Mangement System(LMS) plugin."
-msgstr ""
-
-#. Author of the plugin
-msgid "wp-plugin"
-msgstr ""
-
-#: includes/AdminMenu.php:47
-#: includes/AdminMenu.php:48
-#: includes/AdminMenu.php:56
-#: includes/AdminMenu.php:57
-msgid "Masteriyo"
-msgstr ""
-
-#: includes/AdminMenu.php:65
-#: includes/AdminMenu.php:66
-msgid "Dashboard"
-msgstr ""
-
-#: includes/AdminMenu.php:74
-#: includes/AdminMenu.php:75
-#: includes/PostType/Courses.php:22
-#: includes/PostType/Courses.php:50
-#: assets/js/build/app.js:14
-msgid "Courses"
-msgstr ""
-
-#: includes/AdminMenu.php:83
-#: includes/AdminMenu.php:84
-#: assets/js/build/app.js:14
-msgid "Categories"
-msgstr ""
-
-#: includes/AdminMenu.php:92
-#: includes/AdminMenu.php:93
-msgid "Tags"
-msgstr ""
-
-#. translators: %s: product name
-#: includes/Cart/Cart.php:237
-msgid "%s has been removed from your cart because it can no longer be purchased. Please contact us if you need assistance."
-msgstr ""
-
-#. translators: %1$s: product name. %2$s product permalink
-#: includes/Cart/Cart.php:253
-msgid "%1$s has been removed from your cart because it has since been modified. You can add it back to your cart <a href=\"%2$s\">here</a>."
-msgstr ""
-
-#. translators: %d item count
-#: includes/Cart/Cart.php:404
-msgid "%d item from your previous order is currently unavailable and could not be added to your cart."
-msgid_plural "%d items from your previous order are currently unavailable and could not be added to your cart."
-msgstr[0] ""
-msgstr[1] ""
-
-#: includes/Cart/Cart.php:417
-msgid "The cart has been filled with the items from your previous order."
-msgstr ""
-
-#: includes/Cart/Cart.php:786
-msgid "Get cart should not be called before the wp_loaded action."
-msgstr ""
-
-#: includes/Cart/Cart.php:898
-msgid "An item which is no longer available was removed from your cart."
-msgstr ""
-
-#. translators: %s: course name
-#: includes/Cart/Cart.php:921
-msgid "Sorry, \"%s\" is not in stock. Please edit your cart and try again. We apologize for any inconvenience caused."
-msgstr ""
-
-#. translators: 1: course name 2: quantity in stock
-#: includes/Cart/Cart.php:944
-msgid "Sorry, we do not have enough \"%1$s\" in stock to fulfill your order (%2$s available). We apologize for any inconvenience caused."
-msgstr ""
-
-#: includes/Cart/Cart.php:1154
-msgid "Sorry, this course cannot be purchased."
-msgstr ""
-
-#: includes/Cart/Fees.php:77
-msgid "Fee"
-msgstr ""
-
-#: includes/Cart/Fees.php:87
-msgid "Fee has already been added."
-msgstr ""
-
-#: includes/Install.php:120
-msgid "Masteriyo Manager"
-msgstr ""
-
-#: includes/Install.php:124
-msgid "Masteriyo Instructor"
-msgstr ""
-
-#: includes/Install.php:128
-msgid "Masteriyo Student"
-msgstr ""
-
-#: includes/PostType/Courses.php:20
-msgctxt "Course General Name"
-msgid "Courses"
-msgstr ""
-
-#: includes/PostType/Courses.php:21
-msgctxt "Course Singular Name"
-msgid "Course"
-msgstr ""
-
-#: includes/PostType/Courses.php:23
-#: includes/Repository/CourseRepository.php:60
-msgid "Course"
-msgstr ""
-
-#: includes/PostType/Courses.php:24
-msgid "Course Archives"
-msgstr ""
-
-#: includes/PostType/Courses.php:25
-msgid "Course Attributes"
-msgstr ""
-
-#: includes/PostType/Courses.php:26
-msgid "Parent Course:"
-msgstr ""
-
-#: includes/PostType/Courses.php:27
-msgid "All Courses"
-msgstr ""
-
-#: includes/PostType/Courses.php:28
-#: includes/PostType/Lessons.php:28
-#: includes/PostType/Orders.php:38
-#: includes/PostType/Question.php:30
-#: includes/PostType/Quizes.php:37
-#: includes/PostType/Sections.php:38
-msgid "Add New Item"
-msgstr ""
-
-#: includes/PostType/Courses.php:29
-#: includes/PostType/Lessons.php:29
-#: includes/PostType/Orders.php:39
-#: includes/PostType/Question.php:31
-#: includes/PostType/Quizes.php:38
-#: includes/PostType/Sections.php:39
-#: assets/js/build/app.js:28
-msgid "Add New"
-msgstr ""
-
-#: includes/PostType/Courses.php:30
-msgid "New Course"
-msgstr ""
-
-#: includes/PostType/Courses.php:31
-msgid "Edit Course"
-msgstr ""
-
-#: includes/PostType/Courses.php:32
-msgid "Update Course"
-msgstr ""
-
-#: includes/PostType/Courses.php:33
-msgid "View Course"
-msgstr ""
-
-#: includes/PostType/Courses.php:34
-msgid "View Courses"
-msgstr ""
-
-#: includes/PostType/Courses.php:35
-msgid "Search Course"
-msgstr ""
-
-#: includes/PostType/Courses.php:36
-#: includes/PostType/Lessons.php:36
-#: includes/PostType/Orders.php:46
-#: includes/PostType/Question.php:38
-#: includes/PostType/Quizes.php:45
-#: includes/PostType/Sections.php:46
-msgid "Not found"
-msgstr ""
-
-#: includes/PostType/Courses.php:37
-#: includes/PostType/Lessons.php:37
-#: includes/PostType/Orders.php:47
-#: includes/PostType/Question.php:39
-#: includes/PostType/Quizes.php:46
-#: includes/PostType/Sections.php:47
-msgid "Not found in Trash"
-msgstr ""
-
-#: includes/PostType/Courses.php:38
-#: includes/PostType/Lessons.php:38
-#: includes/PostType/Orders.php:48
-#: includes/PostType/Question.php:40
-#: includes/PostType/Quizes.php:47
-#: includes/PostType/Sections.php:48
-#: assets/js/build/app.js:28
-msgid "Featured Image"
-msgstr ""
-
-#: includes/PostType/Courses.php:39
-#: includes/PostType/Lessons.php:39
-#: includes/PostType/Orders.php:49
-#: includes/PostType/Question.php:41
-#: includes/PostType/Quizes.php:48
-#: includes/PostType/Sections.php:49
-msgid "Set featured image"
-msgstr ""
-
-#: includes/PostType/Courses.php:40
-#: includes/PostType/Lessons.php:40
-#: includes/PostType/Orders.php:50
-#: includes/PostType/Question.php:42
-#: includes/PostType/Quizes.php:49
-#: includes/PostType/Sections.php:50
-msgid "Remove featured image"
-msgstr ""
-
-#: includes/PostType/Courses.php:41
-#: includes/PostType/Lessons.php:41
-#: includes/PostType/Orders.php:51
-#: includes/PostType/Question.php:43
-#: includes/PostType/Quizes.php:50
-#: includes/PostType/Sections.php:51
-msgid "Use as featured image"
-msgstr ""
-
-#: includes/PostType/Courses.php:42
-msgid "Insert into course"
-msgstr ""
-
-#: includes/PostType/Courses.php:43
-msgid "Uploaded to this course"
-msgstr ""
-
-#: includes/PostType/Courses.php:44
-msgid "Courses list"
-msgstr ""
-
-#: includes/PostType/Courses.php:45
-msgid "Courses list navigation"
-msgstr ""
-
-#: includes/PostType/Courses.php:46
-msgid "Filter courses list"
-msgstr ""
-
-#: includes/PostType/Courses.php:51
-msgid "Courses Description"
-msgstr ""
-
-#: includes/PostType/Lessons.php:20
-msgctxt "Lesson General Name"
-msgid "Lessons"
-msgstr ""
-
-#: includes/PostType/Lessons.php:21
-msgctxt "Lesson Singular Name"
-msgid "Lesson"
-msgstr ""
-
-#: includes/PostType/Lessons.php:22
-#: includes/PostType/Lessons.php:50
-msgid "Lessons"
-msgstr ""
-
-#: includes/PostType/Lessons.php:23
-#: includes/Repository/LessonRepository.php:52
-msgid "Lesson"
-msgstr ""
-
-#: includes/PostType/Lessons.php:24
-msgid "Lesson Archives"
-msgstr ""
-
-#: includes/PostType/Lessons.php:25
-msgid "Lesson Attributes"
-msgstr ""
-
-#: includes/PostType/Lessons.php:26
-msgid "Parent Lesson:"
-msgstr ""
-
-#: includes/PostType/Lessons.php:27
-msgid "All Lessons"
-msgstr ""
-
-#: includes/PostType/Lessons.php:30
-msgid "New Lesson"
-msgstr ""
-
-#: includes/PostType/Lessons.php:31
-msgid "Edit Lesson"
-msgstr ""
-
-#: includes/PostType/Lessons.php:32
-msgid "Update Lesson"
-msgstr ""
-
-#: includes/PostType/Lessons.php:33
-msgid "View Lesson"
-msgstr ""
-
-#: includes/PostType/Lessons.php:34
-msgid "View Lessons"
-msgstr ""
-
-#: includes/PostType/Lessons.php:35
-msgid "Search Lesson"
-msgstr ""
-
-#: includes/PostType/Lessons.php:42
-msgid "Insert into lesson"
-msgstr ""
-
-#: includes/PostType/Lessons.php:43
-msgid "Uploaded to this lesson"
-msgstr ""
-
-#: includes/PostType/Lessons.php:44
-msgid "Lessons list"
-msgstr ""
-
-#: includes/PostType/Lessons.php:45
-msgid "Lessons list navigation"
-msgstr ""
-
-#: includes/PostType/Lessons.php:46
-msgid "Filter lessons list"
-msgstr ""
-
-#: includes/PostType/Lessons.php:51
-msgid "Lessons Description"
-msgstr ""
-
-#: includes/PostType/Orders.php:30
-msgctxt "Order General Name"
-msgid "Orders"
-msgstr ""
-
-#: includes/PostType/Orders.php:31
-msgctxt "Order Singular Name"
-msgid "Order"
-msgstr ""
-
-#: includes/PostType/Orders.php:32
-#: includes/PostType/Orders.php:60
-msgid "Orders"
-msgstr ""
-
-#: includes/PostType/Orders.php:33
-#: includes/Repository/OrderRepository.php:57
-#: includes/Repository/OrderRepository.php:58
-#: includes/Repository/OrderRepository.php:59
-msgid "Order"
-msgstr ""
-
-#: includes/PostType/Orders.php:34
-msgid "Order Archives"
-msgstr ""
-
-#: includes/PostType/Orders.php:35
-msgid "Order Attributes"
-msgstr ""
-
-#: includes/PostType/Orders.php:36
-msgid "Parent Order:"
-msgstr ""
-
-#: includes/PostType/Orders.php:37
-msgid "All Orders"
-msgstr ""
-
-#: includes/PostType/Orders.php:40
-msgid "New Order"
-msgstr ""
-
-#: includes/PostType/Orders.php:41
-msgid "Edit Order"
-msgstr ""
-
-#: includes/PostType/Orders.php:42
-msgid "Update Order"
-msgstr ""
-
-#: includes/PostType/Orders.php:43
-msgid "View Order"
-msgstr ""
-
-#: includes/PostType/Orders.php:44
-msgid "View Orders"
-msgstr ""
-
-#: includes/PostType/Orders.php:45
-msgid "Search Order"
-msgstr ""
-
-#: includes/PostType/Orders.php:52
-msgid "Insert into order"
-msgstr ""
-
-#: includes/PostType/Orders.php:53
-msgid "Uploaded to this order"
-msgstr ""
-
-#: includes/PostType/Orders.php:54
-msgid "Orders list"
-msgstr ""
-
-#: includes/PostType/Orders.php:55
-msgid "Orders list navigation"
-msgstr ""
-
-#: includes/PostType/Orders.php:56
-msgid "Filter orders list"
-msgstr ""
-
-#: includes/PostType/Orders.php:61
-msgid "Orders Description"
-msgstr ""
-
-#: includes/PostType/Question.php:22
-msgctxt "Question General Name"
-msgid "Questions"
-msgstr ""
-
-#: includes/PostType/Question.php:23
-msgctxt "Question Singular Name"
-msgid "Question"
-msgstr ""
-
-#: includes/PostType/Question.php:24
-#: includes/PostType/Question.php:52
-msgid "Questions"
-msgstr ""
-
-#: includes/PostType/Question.php:25
-#: includes/Repository/QuestionRepository.php:58
-msgid "Question"
-msgstr ""
-
-#: includes/PostType/Question.php:26
-msgid "Question Archives"
-msgstr ""
-
-#: includes/PostType/Question.php:27
-msgid "Question Attributes"
-msgstr ""
-
-#: includes/PostType/Question.php:28
-msgid "Parent Question:"
-msgstr ""
-
-#: includes/PostType/Question.php:29
-msgid "All Questions"
-msgstr ""
-
-#: includes/PostType/Question.php:32
-msgid "New Question"
-msgstr ""
-
-#: includes/PostType/Question.php:33
-msgid "Edit Question"
-msgstr ""
-
-#: includes/PostType/Question.php:34
-msgid "Update Question"
-msgstr ""
-
-#: includes/PostType/Question.php:35
-msgid "View Question"
-msgstr ""
-
-#: includes/PostType/Question.php:36
-msgid "View Questions"
-msgstr ""
-
-#: includes/PostType/Question.php:37
-msgid "Search Question"
-msgstr ""
-
-#: includes/PostType/Question.php:44
-msgid "Insert into question"
-msgstr ""
-
-#: includes/PostType/Question.php:45
-msgid "Uploaded to this question"
-msgstr ""
-
-#: includes/PostType/Question.php:46
-msgid "Questions list"
-msgstr ""
-
-#: includes/PostType/Question.php:47
-msgid "Questions list navigation"
-msgstr ""
-
-#: includes/PostType/Question.php:48
-msgid "Filter questions list"
-msgstr ""
-
-#: includes/PostType/Question.php:53
-msgid "Questions Description"
-msgstr ""
-
-#: includes/PostType/Quizes.php:29
-msgctxt "Quize General Name"
-msgid "Quizes"
-msgstr ""
-
-#: includes/PostType/Quizes.php:30
-msgctxt "Quize Singular Name"
-msgid "Quiz"
-msgstr ""
-
-#: includes/PostType/Quizes.php:31
-#: includes/PostType/Quizes.php:59
-msgid "Quizes"
-msgstr ""
-
-#: includes/PostType/Quizes.php:32
-#: includes/Repository/QuizRepository.php:51
-msgid "Quiz"
-msgstr ""
-
-#: includes/PostType/Quizes.php:33
-msgid "Quize Archives"
-msgstr ""
-
-#: includes/PostType/Quizes.php:34
-msgid "Quize Attributes"
-msgstr ""
-
-#: includes/PostType/Quizes.php:35
-msgid "Parent Quize:"
-msgstr ""
-
-#: includes/PostType/Quizes.php:36
-msgid "All Quizes"
-msgstr ""
-
-#: includes/PostType/Quizes.php:39
-msgid "New Quiz"
-msgstr ""
-
-#: includes/PostType/Quizes.php:40
-msgid "Edit Quiz"
-msgstr ""
-
-#: includes/PostType/Quizes.php:41
-msgid "Update Quiz"
-msgstr ""
-
-#: includes/PostType/Quizes.php:42
-msgid "View Quiz"
-msgstr ""
-
-#: includes/PostType/Quizes.php:43
-msgid "View Quizes"
-msgstr ""
-
-#: includes/PostType/Quizes.php:44
-msgid "Search Quiz"
-msgstr ""
-
-#: includes/PostType/Quizes.php:51
-msgid "Insert into quiz"
-msgstr ""
-
-#: includes/PostType/Quizes.php:52
-msgid "Uploaded to this quiz"
-msgstr ""
-
-#: includes/PostType/Quizes.php:53
-msgid "Quizes list"
-msgstr ""
-
-#: includes/PostType/Quizes.php:54
-msgid "Quizes list navigation"
-msgstr ""
-
-#: includes/PostType/Quizes.php:55
-msgid "Filter quizes list"
-msgstr ""
-
-#: includes/PostType/Quizes.php:60
-msgid "Quizes Description"
-msgstr ""
-
-#: includes/PostType/Sections.php:30
-msgctxt "Section General Name"
-msgid "Sections"
-msgstr ""
-
-#: includes/PostType/Sections.php:31
-msgctxt "Section Singular Name"
-msgid "Section"
-msgstr ""
-
-#: includes/PostType/Sections.php:32
-#: includes/PostType/Sections.php:60
-msgid "Sections"
-msgstr ""
-
-#: includes/PostType/Sections.php:33
-msgid "Section"
-msgstr ""
-
-#: includes/PostType/Sections.php:34
-msgid "Section Archives"
-msgstr ""
-
-#: includes/PostType/Sections.php:35
-msgid "Section Attributes"
-msgstr ""
-
-#: includes/PostType/Sections.php:36
-msgid "Parent Section:"
-msgstr ""
-
-#: includes/PostType/Sections.php:37
-msgid "All Sections"
-msgstr ""
-
-#: includes/PostType/Sections.php:40
-msgid "New Section"
-msgstr ""
-
-#: includes/PostType/Sections.php:41
-msgid "Edit Section"
-msgstr ""
-
-#: includes/PostType/Sections.php:42
-msgid "Update Section"
-msgstr ""
-
-#: includes/PostType/Sections.php:43
-msgid "View Section"
-msgstr ""
-
-#: includes/PostType/Sections.php:44
-msgid "View Sections"
-msgstr ""
-
-#: includes/PostType/Sections.php:45
-msgid "Search Section"
-msgstr ""
-
-#: includes/PostType/Sections.php:52
-msgid "Insert into section"
-msgstr ""
-
-#: includes/PostType/Sections.php:53
-msgid "Uploaded to this section"
-msgstr ""
-
-#: includes/PostType/Sections.php:54
-msgid "Sections list"
-msgstr ""
-
-#: includes/PostType/Sections.php:55
-msgid "Sections list navigation"
-msgstr ""
-
-#: includes/PostType/Sections.php:56
-msgid "Filter sections list"
-msgstr ""
-
-#: includes/PostType/Sections.php:61
-msgid "Sections Description"
-msgstr ""
-
-#: includes/Repository/AbstractRepository.php:274
-msgctxt "Comma-separated list of search stopwords in your language"
-msgid "about,an,are,as,at,be,by,com,for,from,how,in,is,it,of,on,or,that,the,this,to,was,what,when,where,who,will,with,www"
-msgstr ""
-
-#: includes/Repository/CourseCategoryRepository.php:91
-msgid "Invalid course_cat."
-msgstr ""
-
-#: includes/Repository/CourseDifficultyRepository.php:87
-msgid "Invalid course_difficulty."
-msgstr ""
-
-#: includes/Repository/CourseRepository.php:104
-msgid "Invalid course."
-msgstr ""
-
-#: includes/Repository/CourseTagRepository.php:87
-msgid "Invalid course_tag."
-msgstr ""
-
-#: includes/Repository/LessonRepository.php:94
-msgid "Invalid lesson."
-msgstr ""
-
-#: includes/Repository/OrderRepository.php:94
-msgid "Invalid order."
-msgstr ""
-
-#: includes/Repository/QuestionRepository.php:96
-msgid "Invalid question."
-msgstr ""
-
-#: includes/Repository/QuizRepository.php:91
-msgid "Invalid quiz."
-msgstr ""
-
-#: includes/Repository/SectionRepository.php:85
-msgid "Invalid section."
-msgstr ""
-
-#: includes/Repository/SettingRepository.php:53
-msgid "Invalid setting."
-msgstr ""
-
-#. translators: %s: Class method name.
-#: includes/Repository/SettingRepository.php:79
-#: includes/Repository/SettingRepository.php:96
-msgid "Method '%s' not implemented."
-msgstr ""
-
-#: includes/Repository/UserRepository.php:108
-msgid "Invalid user."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:88
-#: includes/RestApi/Controllers/Store/CartItemsController.php:353
-#: includes/RestApi/Controllers/Store/CheckoutController.php:88
-#: includes/RestApi/Controllers/Store/CheckoutController.php:353
-#: includes/RestApi/Controllers/Version1/CourseCategoriesController.php:71
-#: includes/RestApi/Controllers/Version1/CourseDifficultiesController.php:77
-#: includes/RestApi/Controllers/Version1/CoursesController.php:102
-#: includes/RestApi/Controllers/Version1/CoursesController.php:368
-#: includes/RestApi/Controllers/Version1/CourseTagsController.php:77
-#: includes/RestApi/Controllers/Version1/LessonsController.php:100
-#: includes/RestApi/Controllers/Version1/LessonsController.php:364
-#: includes/RestApi/Controllers/Version1/OrdersController.php:109
-#: includes/RestApi/Controllers/Version1/OrdersController.php:307
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:128
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:497
-#: includes/RestApi/Controllers/Version1/QuizesController.php:112
-#: includes/RestApi/Controllers/Version1/QuizesController.php:378
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:89
-#: includes/RestApi/Controllers/Version1/SectionsController.php:109
-#: includes/RestApi/Controllers/Version1/SectionsController.php:261
-#: includes/RestApi/Controllers/Version1/SettingsController.php:224
-#: includes/RestApi/Controllers/Version1/UsersController.php:102
-#: includes/RestApi/Controllers/Version1/UsersController.php:341
-msgid "Unique identifier for the resource."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:117
-#: includes/RestApi/Controllers/Store/CheckoutController.php:117
-#: includes/RestApi/Controllers/Version1/CoursesController.php:131
-#: includes/RestApi/Controllers/Version1/OrdersController.php:138
-msgid "Whether to bypass trash and force deletion."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:138
-#: includes/RestApi/Controllers/Store/CheckoutController.php:138
-#: includes/RestApi/Controllers/Version1/LessonsController.php:143
-msgid "Limit result set to lessons with a specific slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:144
-#: includes/RestApi/Controllers/Store/CheckoutController.php:144
-#: includes/RestApi/Controllers/Version1/LessonsController.php:149
-msgid "Limit result set to lessons assigned a specific status."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:151
-#: includes/RestApi/Controllers/Store/CheckoutController.php:151
-#: includes/RestApi/Controllers/Version1/LessonsController.php:156
-msgid "Limit result set to lessons assigned a specific category ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:157
-#: includes/RestApi/Controllers/Store/CheckoutController.php:157
-#: includes/RestApi/Controllers/Version1/LessonsController.php:162
-msgid "Limit result set to lessons assigned a specific tag ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:163
-#: includes/RestApi/Controllers/Store/CheckoutController.php:163
-#: includes/RestApi/Controllers/Version1/LessonsController.php:168
-msgid "Limit result set to lessons assigned a specific difficulty ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:359
-#: includes/RestApi/Controllers/Store/CheckoutController.php:359
-#: includes/RestApi/Controllers/Version1/LessonsController.php:370
-msgid "Lesson name."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:364
-#: includes/RestApi/Controllers/Store/CheckoutController.php:364
-#: includes/RestApi/Controllers/Version1/LessonsController.php:375
-msgid "Lesson slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:369
-#: includes/RestApi/Controllers/Store/CheckoutController.php:369
-#: includes/RestApi/Controllers/Version1/LessonsController.php:380
-msgid "Lesson URL."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:376
-#: includes/RestApi/Controllers/Store/CheckoutController.php:376
-#: includes/RestApi/Controllers/Version1/LessonsController.php:387
-msgid "The date the lesson was created, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:381
-#: includes/RestApi/Controllers/Store/CheckoutController.php:381
-#: includes/RestApi/Controllers/Version1/LessonsController.php:392
-msgid "The date the lesson was created, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:386
-#: includes/RestApi/Controllers/Store/CheckoutController.php:386
-#: includes/RestApi/Controllers/Version1/LessonsController.php:397
-msgid "The date the lesson was last modified, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:392
-#: includes/RestApi/Controllers/Store/CheckoutController.php:392
-#: includes/RestApi/Controllers/Version1/LessonsController.php:403
-msgid "The date the lesson was last modified, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:398
-#: includes/RestApi/Controllers/Store/CheckoutController.php:398
-#: includes/RestApi/Controllers/Version1/LessonsController.php:409
-msgid "Lesson status (post status)."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:405
-#: includes/RestApi/Controllers/Store/CheckoutController.php:405
-#: includes/RestApi/Controllers/Version1/LessonsController.php:416
-msgid "Featured lesson."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:411
-#: includes/RestApi/Controllers/Store/CheckoutController.php:411
-#: includes/RestApi/Controllers/Version1/CoursesController.php:426
-#: includes/RestApi/Controllers/Version1/LessonsController.php:422
-msgid "Catalog visibility."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:418
-#: includes/RestApi/Controllers/Store/CheckoutController.php:418
-#: includes/RestApi/Controllers/Version1/LessonsController.php:429
-msgid "Lesson description."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:423
-#: includes/RestApi/Controllers/Store/CheckoutController.php:423
-#: includes/RestApi/Controllers/Version1/LessonsController.php:434
-msgid "Lesson short description."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:428
-#: includes/RestApi/Controllers/Store/CheckoutController.php:428
-#: includes/RestApi/Controllers/Version1/CoursesController.php:459
-#: includes/RestApi/Controllers/Version1/LessonsController.php:439
-msgid "Allow reviews."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:434
-#: includes/RestApi/Controllers/Store/CheckoutController.php:434
-#: includes/RestApi/Controllers/Version1/CoursesController.php:465
-#: includes/RestApi/Controllers/Version1/LessonsController.php:445
-msgid "Reviews average rating."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:440
-#: includes/RestApi/Controllers/Store/CheckoutController.php:440
-#: includes/RestApi/Controllers/Version1/LessonsController.php:451
-msgid "Amount of reviews that the lesson have."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:446
-#: includes/RestApi/Controllers/Store/CheckoutController.php:446
-#: includes/RestApi/Controllers/Version1/LessonsController.php:457
-msgid "Lesson parent ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:451
-#: includes/RestApi/Controllers/Store/CheckoutController.php:451
-#: includes/RestApi/Controllers/Version1/CoursesController.php:482
-#: includes/RestApi/Controllers/Version1/LessonsController.php:462
-msgid "List of categories."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:458
-#: includes/RestApi/Controllers/Store/CheckoutController.php:458
-#: includes/RestApi/Controllers/Version1/CoursesController.php:489
-#: includes/RestApi/Controllers/Version1/LessonsController.php:469
-msgid "Category ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:463
-#: includes/RestApi/Controllers/Store/CheckoutController.php:463
-#: includes/RestApi/Controllers/Version1/CourseCategoriesController.php:77
-#: includes/RestApi/Controllers/Version1/CoursesController.php:494
-#: includes/RestApi/Controllers/Version1/LessonsController.php:474
-msgid "Category name."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:469
-#: includes/RestApi/Controllers/Store/CheckoutController.php:469
-#: includes/RestApi/Controllers/Version1/CoursesController.php:500
-#: includes/RestApi/Controllers/Version1/LessonsController.php:480
-msgid "Category slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:478
-#: includes/RestApi/Controllers/Store/CheckoutController.php:478
-#: includes/RestApi/Controllers/Version1/CoursesController.php:509
-#: includes/RestApi/Controllers/Version1/LessonsController.php:489
-msgid "List of tags."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:485
-#: includes/RestApi/Controllers/Store/CheckoutController.php:485
-#: includes/RestApi/Controllers/Version1/CoursesController.php:516
-#: includes/RestApi/Controllers/Version1/LessonsController.php:496
-msgid "Tag ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:490
-#: includes/RestApi/Controllers/Store/CheckoutController.php:490
-#: includes/RestApi/Controllers/Version1/CoursesController.php:521
-#: includes/RestApi/Controllers/Version1/CourseTagsController.php:83
-#: includes/RestApi/Controllers/Version1/LessonsController.php:501
-msgid "Tag name."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:496
-#: includes/RestApi/Controllers/Store/CheckoutController.php:496
-#: includes/RestApi/Controllers/Version1/CoursesController.php:527
-#: includes/RestApi/Controllers/Version1/LessonsController.php:507
-msgid "Tag slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:505
-#: includes/RestApi/Controllers/Store/CheckoutController.php:505
-#: includes/RestApi/Controllers/Version1/LessonsController.php:516
-msgid "Menu order, used to custom sort lessons."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:510
-#: includes/RestApi/Controllers/Store/CheckoutController.php:510
-#: includes/RestApi/Controllers/Version1/LessonsController.php:521
-msgid "Video source."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:515
-#: includes/RestApi/Controllers/Store/CheckoutController.php:515
-#: includes/RestApi/Controllers/Version1/LessonsController.php:526
-msgid "Video source URL."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:520
-#: includes/RestApi/Controllers/Store/CheckoutController.php:520
-#: includes/RestApi/Controllers/Version1/LessonsController.php:531
-msgid "Video playback time."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:525
-#: includes/RestApi/Controllers/Store/CheckoutController.php:525
-#: includes/RestApi/Controllers/Version1/CoursesController.php:568
-#: includes/RestApi/Controllers/Version1/LessonsController.php:536
-#: includes/RestApi/Controllers/Version1/OrdersController.php:389
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:590
-#: includes/RestApi/Controllers/Version1/QuizesController.php:440
-#: includes/RestApi/Controllers/Version1/SectionsController.php:309
-#: includes/RestApi/Controllers/Version1/UsersController.php:460
-msgid "Meta data."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:532
-#: includes/RestApi/Controllers/Store/CheckoutController.php:532
-#: includes/RestApi/Controllers/Version1/CoursesController.php:575
-#: includes/RestApi/Controllers/Version1/LessonsController.php:543
-#: includes/RestApi/Controllers/Version1/OrdersController.php:396
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:597
-#: includes/RestApi/Controllers/Version1/QuizesController.php:447
-#: includes/RestApi/Controllers/Version1/SectionsController.php:316
-#: includes/RestApi/Controllers/Version1/UsersController.php:467
-msgid "Meta ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:538
-#: includes/RestApi/Controllers/Store/CheckoutController.php:538
-#: includes/RestApi/Controllers/Version1/CoursesController.php:581
-#: includes/RestApi/Controllers/Version1/LessonsController.php:549
-#: includes/RestApi/Controllers/Version1/OrdersController.php:402
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:603
-#: includes/RestApi/Controllers/Version1/QuizesController.php:453
-#: includes/RestApi/Controllers/Version1/SectionsController.php:322
-#: includes/RestApi/Controllers/Version1/UsersController.php:473
-msgid "Meta key."
-msgstr ""
-
-#: includes/RestApi/Controllers/Store/CartItemsController.php:543
-#: includes/RestApi/Controllers/Store/CheckoutController.php:543
-#: includes/RestApi/Controllers/Version1/CoursesController.php:586
-#: includes/RestApi/Controllers/Version1/LessonsController.php:554
-#: includes/RestApi/Controllers/Version1/OrdersController.php:407
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:608
-#: includes/RestApi/Controllers/Version1/QuizesController.php:458
-#: includes/RestApi/Controllers/Version1/SectionsController.php:327
-#: includes/RestApi/Controllers/Version1/UsersController.php:478
-msgid "Meta value."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CourseCategoriesController.php:85
-#: includes/RestApi/Controllers/Version1/CourseDifficultiesController.php:91
-#: includes/RestApi/Controllers/Version1/CourseTagsController.php:91
-msgid "An alphanumeric identifier for the resource unique to its type."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CourseCategoriesController.php:93
-msgid "The ID for the parent of the resource."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CourseCategoriesController.php:98
-#: includes/RestApi/Controllers/Version1/CourseDifficultiesController.php:99
-#: includes/RestApi/Controllers/Version1/CourseTagsController.php:99
-msgid "HTML description of the resource."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CourseCategoriesController.php:106
-msgid "Category archive display type."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CourseCategoriesController.php:113
-#: includes/RestApi/Controllers/Version1/CourseDifficultiesController.php:107
-#: includes/RestApi/Controllers/Version1/CourseTagsController.php:107
-msgid "Term order, used to custom sort the resource."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CourseCategoriesController.php:118
-#: includes/RestApi/Controllers/Version1/CourseDifficultiesController.php:112
-#: includes/RestApi/Controllers/Version1/CourseTagsController.php:112
-msgid "Number of published courses for the resource."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CourseChildrenController.php:116
-#: includes/RestApi/Controllers/Version1/PostsController.php:40
-#: includes/RestApi/Controllers/Version1/PostsController.php:69
-#: includes/RestApi/Controllers/Version1/PostsController.php:98
-#: includes/RestApi/Controllers/Version1/PostsController.php:128
-#: includes/RestApi/Controllers/Version1/PostsController.php:159
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:198
-#: includes/RestApi/Controllers/Version1/SectionChildrenController.php:116
-#: includes/RestApi/Controllers/Version1/SettingsController.php:111
-#: includes/RestApi/Controllers/Version1/SettingsController.php:130
-#: includes/RestApi/Controllers/Version1/UsersController.php:638
-#: includes/RestApi/Controllers/Version1/UsersController.php:670
-#: includes/RestApi/Controllers/Version1/UsersController.php:700
-#: includes/RestApi/Controllers/Version1/UsersController.php:730
-#: includes/RestApi/Controllers/Version1/UsersController.php:771
-msgid "Sorry, the permission object for this resource is null."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CourseChildrenController.php:123
-#: includes/RestApi/Controllers/Version1/PostsController.php:76
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:165
-#: includes/RestApi/Controllers/Version1/SectionChildrenController.php:123
-#: includes/RestApi/Controllers/Version1/UsersController.php:677
-msgid "Sorry, you cannot list resources."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CourseChildrenController.php:146
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:525
-msgid "Limit result set to resources assigned to a specific course."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CourseDifficultiesController.php:83
-#: includes/RestApi/Controllers/Version1/CoursesController.php:548
-msgid "Difficulty name."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:152
-msgid "Limit result set to courses with a specific slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:158
-msgid "Limit result set to courses assigned a specific status."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:165
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:273
-msgid "Limit result set to courses assigned a specific category ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:171
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:279
-msgid "Limit result set to courses assigned a specific tag ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:177
-msgid "Limit result set to courses assigned a specific difficulty ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:374
-msgid "Course name."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:379
-msgid "Course slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:384
-msgid "Course URL."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:391
-msgid "The date the course was created, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:396
-msgid "The date the course was created, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:401
-msgid "The date the course was last modified, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:407
-msgid "The date the course was last modified, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:413
-msgid "Course status (post status)."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:420
-msgid "Featured course."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:433
-msgid "Course description."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:438
-msgid "Course short description."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:443
-msgid "Current course price."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:449
-msgid "Course regular price."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:454
-msgid "Course sale price."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:471
-msgid "Amount of reviews that the course have."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:477
-msgid "Course parent ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:536
-msgid "List of difficulties."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:543
-msgid "Difficulty ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:554
-msgid "Difficulty slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CoursesController.php:563
-msgid "Menu order, used to custom sort courses."
-msgstr ""
-
-#. translators: %s: Class method name.
-#: includes/RestApi/Controllers/Version1/CrudController.php:54
-#: includes/RestApi/Controllers/Version1/CrudController.php:79
-#: includes/RestApi/Controllers/Version1/CrudController.php:92
-msgid "Method '%s' not implemented. Must be overridden in subclass."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:107
-#: includes/RestApi/Controllers/Version1/CrudController.php:209
-#: includes/RestApi/Controllers/Version1/CrudController.php:508
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:225
-msgid "Invalid ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:140
-msgid "Faild to read an object!"
-msgstr ""
-
-#. translators: %s: post type
-#: includes/RestApi/Controllers/Version1/CrudController.php:160
-msgid "Cannot create existing %s."
-msgstr ""
-
-#. translators: %s: post type
-#: includes/RestApi/Controllers/Version1/CrudController.php:534
-msgid "The %s does not support trashing."
-msgstr ""
-
-#. translators: %s: post type
-#: includes/RestApi/Controllers/Version1/CrudController.php:541
-msgid "The %s has already been deleted."
-msgstr ""
-
-#. translators: %s: post type
-#: includes/RestApi/Controllers/Version1/CrudController.php:551
-msgid "The %s cannot be deleted."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:597
-#: includes/RestApi/Controllers/Version1/SettingsController.php:150
-msgid "Current page of the collection."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:605
-#: includes/RestApi/Controllers/Version1/SettingsController.php:158
-msgid "Maximum number of items to be returned in result set."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:614
-#: includes/RestApi/Controllers/Version1/SettingsController.php:167
-msgid "Limit results to those matching a string."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:620
-msgid "Limit response to resources published after a given ISO8601 compliant date."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:626
-msgid "Limit response to resources published before a given ISO8601 compliant date."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:632
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:458
-#: includes/RestApi/Controllers/Version1/SettingsController.php:174
-msgid "Ensure result set excludes specific IDs."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:641
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:467
-#: includes/RestApi/Controllers/Version1/SettingsController.php:183
-msgid "Limit result set to specific ids."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:650
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:477
-msgid "Offset the result set by a specific number of items."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:656
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:484
-msgid "Order sort attribute ascending or descending."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:663
-msgid "Sort collection by object attribute."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:680
-msgid "Limit result set to those of particular parent IDs."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/CrudController.php:689
-msgid "Limit result set to all items except those of a particular parent ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:159
-msgid "Limit result set to orders assigned a specific order status."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:168
-msgid "Limit result set to orders assigned a specific post status."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:175
-msgid "Filter orders by customer ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:313
-msgid "Order URL."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:320
-msgid "The date the Order was created, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:325
-msgid "The date the Order was created, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:330
-msgid "The date the Order was last modified, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:336
-msgid "The date the Order was last modified, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:342
-msgid "Post status."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:349
-msgid "Order status."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:356
-msgid "Total amount of the order."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:361
-msgid "Discount for the order."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:366
-msgid "Currency."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:371
-msgid "IDs of the products under this order."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:379
-msgid "Expiry date of this order."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/OrdersController.php:384
-msgid "Customer ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/PostsController.php:49
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:205
-#: includes/RestApi/Controllers/Version1/UsersController.php:647
-msgid "Sorry, you are not allowed to read resources."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/PostsController.php:106
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:185
-#: includes/RestApi/Controllers/Version1/UsersController.php:707
-msgid "Sorry, you are not allowed to create resources."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/PostsController.php:137
-#: includes/RestApi/Controllers/Version1/UsersController.php:748
-msgid "Sorry, you are not allowed to delete resources."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/PostsController.php:168
-#: includes/RestApi/Controllers/Version1/UsersController.php:780
-msgid "Sorry, you are not allowed to update resources."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:169
-msgid "Question ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:176
-msgid "Chosen answer or answers."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:230
-msgid "The answer is correct."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:231
-msgid "The answer is incorrect."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:251
-msgid "Limit result set to questiones with a specific slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:258
-msgid "Limit result set to questiones assigned a specific status."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:266
-msgid "Limit result set to questiones assigned a specific type."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:503
-msgid "Question name."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:508
-msgid "Question slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:513
-msgid "Question URL."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:520
-msgid "The date the question was created, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:525
-msgid "The date the question was created, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:530
-msgid "The date the question was last modified, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:536
-msgid "The date the question was last modified, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:542
-msgid "Question status (post status)."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:549
-msgid "Menu order, used to custom sort questions."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:554
-msgid "Question description."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:559
-msgid "Question short description."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:564
-msgid "Question type."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:570
-msgid "Whether the question is required or not."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:575
-msgid "Given answer list for the question."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:580
-msgid "Points for the correct answer."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuestionsController.php:585
-msgid "Whether to the answers."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:155
-msgid "Limit result set to quizes with a specific slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:161
-msgid "Limit result set to quizes assigned a specific status."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:168
-msgid "Limit result set to quizes assigned a specific category ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:174
-msgid "Limit result set to quizes assigned a specific tag ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:180
-msgid "Limit result set to quizes assigned a specific difficulty ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:384
-msgid "Quiz name."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:389
-msgid "Quiz slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:394
-msgid "Quiz URL."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:401
-msgid "The date the quiz was created, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:406
-msgid "The date the quiz was created, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:411
-msgid "The date the quiz was last modified, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:417
-msgid "The date the quiz was last modified, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:423
-msgid "Quiz status (post status)."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:430
-msgid "Quiz description."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/QuizesController.php:435
-msgid "Quiz short description."
-msgstr ""
-
-#. translators: %s: items limit
-#: includes/RestApi/Controllers/Version1/RestController.php:182
-msgid "Unable to accept more than %s items for this request."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestController.php:331
-#: includes/RestApi/Controllers/Version1/RestController.php:349
-#: includes/RestApi/Controllers/Version1/RestController.php:372
-#: includes/RestApi/Controllers/Version1/RestController.php:415
-msgid "An invalid setting value was passed."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestController.php:475
-msgid "List of created resources."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestController.php:483
-msgid "List of updated resources."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestController.php:491
-msgid "List of delete resources."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:73
-msgid "Name for the resource."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:115
-msgid "Required to be true, as resource does not support trashing."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:205
-msgid "Sorry, you cannot view this resource."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:225
-msgid "Sorry, you are not allowed to edit this resource."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:245
-msgid "Sorry, you are not allowed to delete this resource."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:265
-msgid "Sorry, you are not allowed to batch manipulate this resource."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:282
-msgid "Taxonomy does not exist."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:292
-msgid "Resource does not exist."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:495
-msgid "Sort collection by resource attribute."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:511
-msgid "Whether to hide resources not assigned to any courses."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:518
-msgid "Limit result set to resources assigned to a specific parent."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/RestTermsController.php:531
-msgid "Limit result set to resources with a specific slug."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SectionChildrenController.php:146
-msgid "Limit result set to resources assigned to a specific section."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SectionsController.php:267
-msgid "Section name."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SectionsController.php:272
-msgid "The date the section was created, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SectionsController.php:277
-msgid "The date the section was created, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SectionsController.php:282
-msgid "The date the section was last modified, in the site's timezone."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SectionsController.php:288
-msgid "The date the section was last modified, as GMT."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SectionsController.php:294
-msgid "Section description."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SectionsController.php:299
-msgid "Section parent ID."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SectionsController.php:304
-msgid "Menu order, used to custom sort sections."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SettingsController.php:230
-msgid "The group option belongs to."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SettingsController.php:235
-msgid "Option name"
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/SettingsController.php:240
-msgid "Option value"
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:132
-msgid "Required to be true, as the resource does not support trashing."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:152
-msgid "Limit result by role."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:158
-msgid "Number of users per page."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:347
-msgid "User login."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:352
-msgid "User nicename."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:357
-msgid "User email."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:362
-msgid "Site url of the user."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:367
-msgid "User registered date"
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:373
-msgid "User activation key."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:379
-msgid "User status."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:384
-msgid "Display name."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:389
-msgid "User nickname."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:394
-msgid "User first name."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:399
-msgid "User last name."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:404
-msgid "User description."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:409
-msgid "Enable rich editing."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:415
-msgid "Enable syntax highlighting."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:421
-msgid "Enable comment shortcuts."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:427
-msgid "Use SSL."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:432
-msgid "Whether to show the admin bar on the frontend."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:438
-msgid "User specific locale."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:443
-msgid "List of roles."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:451
-msgid "List of all the capabilities of the user."
-msgstr ""
-
-#: includes/RestApi/Controllers/Version1/UsersController.php:739
-msgid "Sorry, you cannot delete yourself."
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:43
-msgctxt "Taxonomy General Name"
-msgid "Course Categories"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:44
-msgctxt "Taxonomy Singular Name"
-msgid "Course Category"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:45
-#: assets/js/build/app.js:28
-msgid "Course Category"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:46
-msgid "All Course Categories"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:47
-msgid "Parent Course Category"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:48
-msgid "Parent Course Category:"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:49
-msgid "New Course Category Name"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:50
-msgid "Add New Course Category"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:51
-msgid "Edit Course Category"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:52
-msgid "Update Course Category"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:53
-msgid "View Course Category"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:54
-msgid "Separate course categories with commas"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:55
-msgid "Add or remove course categories"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:56
-#: includes/Taxonomy/Course/Difficulties.php:56
-#: includes/Taxonomy/Course/Tags.php:56
-#: includes/Taxonomy/Lesson/Categories.php:56
-#: includes/Taxonomy/Lesson/Tags.php:56
-msgid "Choose from the most used"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:57
-msgid "Popular Course Categories"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:58
-msgid "Search Course Categories"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:59
-#: includes/Taxonomy/Course/Difficulties.php:59
-#: includes/Taxonomy/Course/Tags.php:59
-#: includes/Taxonomy/Lesson/Categories.php:59
-#: includes/Taxonomy/Lesson/Tags.php:59
-msgid "Not Found"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:60
-msgid "No course categories"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:61
-msgid "Course Categories list"
-msgstr ""
-
-#: includes/Taxonomy/Course/Categories.php:62
-msgid "Course Categories list navigation"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:43
-msgctxt "Taxonomy General Name"
-msgid "Course Difficulties"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:44
-msgctxt "Taxonomy Singular Name"
-msgid "Course Difficulty"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:45
-msgid "Course Difficulty"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:46
-msgid "All Course Difficulties"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:47
-msgid "Parent Course Difficulty"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:48
-msgid "Parent Course Difficulty:"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:49
-msgid "New Course Difficulty Name"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:50
-msgid "Add New Course Difficulty"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:51
-msgid "Edit Course Difficulty"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:52
-msgid "Update Course Difficulty"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:53
-msgid "View Course Difficulty"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:54
-msgid "Separate course difficulties with commas"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:55
-msgid "Add or remove course difficulties"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:57
-msgid "Popular Course Difficulties"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:58
-msgid "Search Course Difficulties"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:60
-msgid "No course difficulties"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:61
-msgid "Course Difficulties list"
-msgstr ""
-
-#: includes/Taxonomy/Course/Difficulties.php:62
-msgid "Course Difficulties list navigation"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:43
-msgctxt "Taxonomy General Name"
-msgid "Course Tags"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:44
-msgctxt "Taxonomy Singular Name"
-msgid "Course Tag"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:45
-msgid "Course Tag"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:46
-msgid "All Course Tags"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:47
-msgid "Parent Course Tag"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:48
-msgid "Parent Course Tag:"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:49
-msgid "New Course Tag Name"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:50
-msgid "Add New Course Tag"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:51
-msgid "Edit Course Tag"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:52
-msgid "Update Course Tag"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:53
-msgid "View Course Tag"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:54
-msgid "Separate course tags with commas"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:55
-msgid "Add or remove course tags"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:57
-msgid "Popular Course Tags"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:58
-msgid "Search Course Tags"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:60
-msgid "No course tags"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:61
-msgid "Course Tags list"
-msgstr ""
-
-#: includes/Taxonomy/Course/Tags.php:62
-msgid "Course Tags list navigation"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:43
-msgctxt "Taxonomy General Name"
-msgid "Lesson Categories"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:44
-msgctxt "Taxonomy Singular Name"
-msgid "Lesson Category"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:45
-msgid "Lesson Category"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:46
-msgid "All Lesson Categories"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:47
-msgid "Parent Lesson Category"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:48
-msgid "Parent Lesson Category:"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:49
-msgid "New Lesson Category Name"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:50
-msgid "Add New Lesson Category"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:51
-msgid "Edit Lesson Category"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:52
-msgid "Update Lesson Category"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:53
-msgid "View Lesson Category"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:54
-msgid "Separate lesson categories with commas"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:55
-msgid "Add or remove lesson categories"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:57
-msgid "Popular Lesson Categories"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:58
-msgid "Search Lesson Categories"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:60
-msgid "No lesson categories"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:61
-msgid "Lesson Categories list"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Categories.php:62
-msgid "Lesson Categories list navigation"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:43
-msgctxt "Taxonomy General Name"
-msgid "Lesson Tags"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:44
-msgctxt "Taxonomy Singular Name"
-msgid "Lesson Tag"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:45
-msgid "Lesson Tag"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:46
-msgid "All Lesson Tags"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:47
-msgid "Parent Lesson Tag"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:48
-msgid "Parent Lesson Tag:"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:49
-msgid "New Lesson Tag Name"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:50
-msgid "Add New Lesson Tag"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:51
-msgid "Edit Lesson Tag"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:52
-msgid "Update Lesson Tag"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:53
-msgid "View Lesson Tag"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:54
-msgid "Separate lesson tags with commas"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:55
-msgid "Add or remove lesson tags"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:57
-msgid "Popular Lesson Tags"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:58
-msgid "Search Lesson Tags"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:60
-msgid "No lesson tags"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:61
-msgid "Lesson Tags list"
-msgstr ""
-
-#: includes/Taxonomy/Lesson/Tags.php:62
-msgid "Lesson Tags list navigation"
-msgstr ""
-
-#. translators: %s template
-#: includes/Template.php:109
-msgid "%s does not exist."
-msgstr ""
-
-#: includes/Template.php:126
-msgid "action_args should not be overwritten when calling get_template."
-msgstr ""
-
-#: assets/js/build/app.js:14
-msgid "Course Builder"
-msgstr ""
-
-#: assets/js/build/app.js:14
-msgid "Settings"
-msgstr ""
-
-#: assets/js/build/app.js:14
-msgid "Preview"
-msgstr ""
-
-#: assets/js/build/app.js:14
-#: assets/js/build/app.js:28
-msgid "Save"
-msgstr ""
-
-#: assets/js/build/app.js:14
-msgid "Add New Course"
-msgstr ""
-
-#: assets/js/build/app.js:14
-msgid "Title"
-msgstr ""
-
-#: assets/js/build/app.js:14
-msgid "Price"
-msgstr ""
-
-#: assets/js/build/app.js:14
-msgid "Actions"
-msgstr ""
-
-#: assets/js/build/app.js:14
-msgid "Delete Course"
-msgstr ""
-
-#: assets/js/build/app.js:14
-msgid "Are you sure want to delete this course. You won't be able to recover it back"
-msgstr ""
-
-#: assets/js/build/app.js:14
-#: assets/js/build/app.js:28
-msgid "Cancel"
-msgstr ""
-
-#: assets/js/build/app.js:14
-#: assets/js/build/app.js:28
-msgid "Delete"
-msgstr ""
-
-#: assets/js/build/app.js:28
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:44
+#: assets/js/src/screens/courses/EditCourse.tsx:60
 msgid "Course Name"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/courses/AddNewCourse.tsx:46
+#: assets/js/src/screens/courses/EditCourse.tsx:62
 msgid "Your Course Name"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/courses/AddNewCourse.tsx:52
+#: assets/js/src/screens/courses/EditCourse.tsx:70
 msgid "Course Description"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/courses/AddNewCourse.tsx:54
+#: assets/js/src/screens/courses/EditCourse.tsx:73
 msgid "Your Course Title"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/courses/AddNewCourse.tsx:61
+#: assets/js/src/screens/courses/EditCourse.tsx:81
 msgid "Add Course"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/courses/AddNewCourse.tsx:68
+#: assets/js/src/screens/courses/EditCourse.tsx:88
+msgid "Course Category"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:71
+#: assets/js/src/screens/courses/EditCourse.tsx:91
 msgid "Chocolate"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/courses/AddNewCourse.tsx:74
+#: assets/js/src/screens/courses/EditCourse.tsx:94
 msgid "Strawberry"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/courses/AddNewCourse.tsx:76
+#: assets/js/src/screens/courses/EditCourse.tsx:96
 msgid "Vanilla"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/courses/AddNewCourse.tsx:82
+#: assets/js/src/screens/courses/EditCourse.tsx:102
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:111
+#: assets/js/src/screens/lessons/EditLesson.tsx:111
+msgid "Featured Image"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:85
+#: assets/js/src/screens/courses/EditCourse.tsx:104
 msgid "Drag image or click to upload"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/courses/AddNewCourse.tsx:88
+#: assets/js/src/screens/courses/EditCourse.tsx:107
 msgid "Remove Featured Image"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/courses/AddNewCourse.tsx:89
+#: assets/js/src/screens/courses/EditCourse.tsx:108
+msgid "Add New"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:106
+#: assets/js/src/screens/sections/components/Content.tsx:96
+msgid "Delete Course"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:110
+#: assets/js/src/screens/sections/components/Content.tsx:100
+msgid ""
+"Are you sure want to delete this course. You won't be able to recover it "
+"back"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:120
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:168
+#: assets/js/src/screens/lessons/EditLesson.tsx:175
+#: assets/js/src/screens/sections/components/Content.tsx:110
+#: assets/js/src/screens/sections/components/Section.tsx:139
+msgid "Cancel"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:129
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:81
+#: assets/js/src/screens/lessons/EditLesson.tsx:79
+#: assets/js/src/screens/sections/components/Content.tsx:116
+#: assets/js/src/screens/sections/components/Section.tsx:101
+msgid "Delete"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:49
+#: assets/js/src/screens/layouts/MainToolbar.tsx:24
+msgid "Courses"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:53
+msgid "Add New Course"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:61
+msgid "Title"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:64
+msgid "Categories"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:67
+msgid "Price"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:70
+msgid "Actions"
+msgstr ""
+
+#: assets/js/src/screens/courses/EditCourse.tsx:53
 msgid " is successfully updated. You can keep editing."
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/layouts/MainToolbar.tsx:32
+msgid "Course Builder"
+msgstr ""
+
+#: assets/js/src/screens/layouts/MainToolbar.tsx:40
+msgid "Settings"
+msgstr ""
+
+#: assets/js/src/screens/layouts/MainToolbar.tsx:47
+msgid "Preview"
+msgstr ""
+
+#: assets/js/src/screens/layouts/MainToolbar.tsx:49
+#: assets/js/src/screens/sections/components/Section.tsx:134
+msgid "Save"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:101
+#: assets/js/src/screens/lessons/EditLesson.tsx:100
+msgid "Description"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:103
+#: assets/js/src/screens/lessons/EditLesson.tsx:102
+msgid "Your course description"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:116
+#: assets/js/src/screens/lessons/EditLesson.tsx:116
+msgid "Video Source"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:121
+#: assets/js/src/screens/lessons/EditLesson.tsx:121
+msgid "Select Video Source"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:123
+#: assets/js/src/screens/lessons/EditLesson.tsx:123
+msgid "Youtube"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:124
+#: assets/js/src/screens/lessons/EditLesson.tsx:124
+msgid "Vimeo"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:125
+#: assets/js/src/screens/lessons/EditLesson.tsx:125
+msgid "Custom"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:132
+#: assets/js/src/screens/lessons/EditLesson.tsx:132
+msgid "Video URL"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:144
+#: assets/js/src/screens/lessons/EditLesson.tsx:144
+msgid "Video Playback Time"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:166
+#: assets/js/src/screens/lessons/EditLesson.tsx:71
+msgid "Add New Lesson"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:54
+msgid " has been added successfully"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:92
+#: assets/js/src/screens/lessons/EditLesson.tsx:90
+msgid "Lesson Name"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:94
+#: assets/js/src/screens/lessons/EditLesson.tsx:92
+msgid "Your topic title"
+msgstr ""
+
+#: assets/js/src/screens/lessons/EditLesson.tsx:169
+msgid "Update"
+msgstr ""
+
+#: assets/js/src/screens/lessons/EditLesson.tsx:51
+#: assets/js/src/screens/sections/components/Section.tsx:62
+msgid " has been updated successfully"
+msgstr ""
+
+#: assets/js/src/screens/sections/SectionBuilder.tsx:58
+msgid "Add New Section"
+msgstr ""
+
+#: assets/js/src/screens/sections/components/Content.tsx:72
+#: assets/js/src/screens/sections/components/Section.tsx:95
 msgid "Edit"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/sections/components/Section.tsx:114
 msgid "Section Name"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/sections/components/Section.tsx:116
 msgid "Your Section Name"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/sections/components/Section.tsx:122
 msgid "Section Description"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/sections/components/Section.tsx:128
 msgid "short summary"
 msgstr ""
 
-#: assets/js/build/app.js:28
+#: assets/js/src/screens/sections/components/Section.tsx:157
 msgid "Add New Content"
 msgstr ""
 
-#: assets/js/build/app.js:28
-msgid "Add New Section"
+#: assets/js/src/screens/sections/components/Section.tsx:51
+msgid " has been deleted successfully"
 msgstr ""

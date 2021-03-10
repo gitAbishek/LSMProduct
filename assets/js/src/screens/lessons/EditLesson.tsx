@@ -1,5 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import { addLesson, fetchSection } from '../../utils/api';
+import {
+	addLesson,
+	fetchLesson,
+	fetchLessons,
+	fetchSection,
+	updateLesson,
+} from '../../utils/api';
 import { useHistory, useParams } from 'react-router';
 import { useMutation, useQuery } from 'react-query';
 
@@ -19,8 +25,9 @@ import { __ } from '@wordpress/i18n';
 import { useForm } from 'react-hook-form';
 import { useToasts } from 'react-toast-notifications';
 
-const AddNewLesson: React.FC = () => {
-	const { sectionId }: any = useParams();
+const EditLesson: React.FC = () => {
+	const { lessonId }: any = useParams();
+	const { push } = useHistory();
 	interface Inputs {
 		name: string;
 		description?: string;
@@ -30,35 +37,26 @@ const AddNewLesson: React.FC = () => {
 	const { register, handleSubmit } = useForm<Inputs>();
 	const [playBackTime, setPlayBackTime] = useState(3);
 	const { addToast } = useToasts();
-	const { push } = useHistory();
 
 	const playBackTimeOnChange = (value: number) => {
 		setPlayBackTime(value);
 	};
 
-	const sectionQuery = useQuery([`section${sectionId}`, sectionId], () =>
-		fetchSection(sectionId)
+	const lessonQuery = useQuery([`section${lessonId}`, lessonId], () =>
+		fetchLesson(lessonId)
 	);
 
-	const courseId = sectionQuery?.data?.parent_id;
-
-	const addLessonMutation = useMutation(
-		(data: object) =>
-			addLesson({
-				...data,
-				parent_id: sectionId,
-				course_id: courseId,
-			}),
-		{
-			onSuccess: (data: any) => {
-				addToast(data?.name + __(' has been added successfully'), {
-					appearance: 'success',
-					autoDismiss: true,
-				});
-				push(`/builder/${courseId}`);
-			},
-		}
-	);
+	const addLessonMutation = useMutation((data: object) => addLesson(data), {
+		onSuccess: (data: any) => {
+			addToast(data?.name + __(' has been updated successfully'), {
+				appearance: 'success',
+				autoDismiss: true,
+				onDismiss: () => {
+					push(`/builder/${lessonQuery?.data?.course_id}`);
+				},
+			});
+		},
+	});
 	const onSubmit = (data: object) => {
 		addLessonMutation.mutate(data);
 	};
@@ -93,6 +91,7 @@ const AddNewLesson: React.FC = () => {
 								<Input
 									placeholder={__('Your topic title', 'masteriyo')}
 									ref={register({ required: true })}
+									defaultValue={lessonQuery?.data?.name}
 									name="name"
 								/>
 							</FormGroup>
@@ -104,6 +103,7 @@ const AddNewLesson: React.FC = () => {
 									rows={5}
 									ref={register}
 									name="description"
+									defaultValue={lessonQuery?.data?.description}
 								/>
 							</FormGroup>
 
@@ -162,10 +162,18 @@ const AddNewLesson: React.FC = () => {
 							</FormGroup>
 							<div>
 								<div className="mto-flex">
-									<Button layout="primary" style={{ marginRight: 16 }}>
-										{__('Add New Lesson', 'masteriyo')}
+									<Button
+										type="submit"
+										layout="primary"
+										style={{ marginRight: 16 }}>
+										{__('Update', 'masteriyo')}
 									</Button>
-									<Button>{__('Cancel', 'masteriyo')}</Button>
+									<Button
+										onClick={() =>
+											push(`/builder/${lessonQuery?.data?.course_id}`)
+										}>
+										{__('Cancel', 'masteriyo')}
+									</Button>
 								</div>
 							</div>
 						</form>
@@ -176,4 +184,4 @@ const AddNewLesson: React.FC = () => {
 	);
 };
 
-export default AddNewLesson;
+export default EditLesson;

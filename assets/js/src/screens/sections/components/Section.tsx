@@ -1,10 +1,15 @@
 import { Edit, Trash } from '../../../assets/icons';
 import React, { useState } from 'react';
-import { deleteSection, fetchLessons, updateSection } from '../../../utils/api';
+import {
+	deleteSection,
+	fetchContents,
+	updateSection,
+} from '../../../utils/api';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import AddNewButton from 'Components/common/AddNewButton';
 import Button from 'Components/common/Button';
+import Content from './Content';
 import DragHandle from '../components/DragHandle';
 import Dropdown from 'Components/common/Dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
@@ -12,7 +17,6 @@ import FormGroup from 'Components/common/FormGroup';
 import Icon from 'Components/common/Icon';
 import Input from 'Components/common/Input';
 import Label from 'Components/common/Label';
-import Lesson from './Lesson';
 import { NavLink } from 'react-router-dom';
 import OptionButton from 'Components/common/OptionButton';
 import Textarea from 'Components/common/Textarea';
@@ -33,21 +37,14 @@ const Section: React.FC<Props> = (props) => {
 		name?: string;
 		description?: any;
 	};
-
-	const { id, name, editing, courseId, description } = props;
-	const [mode, setMode] = useState(editing ? 'editing' : 'normal');
-	const [updateData, setUpdatedData] = useState({
-		name: name,
-		description: description,
-	});
+	const { id, name, editing = false, courseId, description } = props;
+	const [sectionEditing, setSectionEditing] = useState(editing);
 
 	const queryClient = useQueryClient();
 	const { addToast } = useToasts();
 	const { register, handleSubmit } = useForm<SectionInputs>();
 
-	const lessonQuery = useQuery(['lessons', courseId], () =>
-		fetchLessons(courseId)
-	);
+	const contentQuery = useQuery(['contents', id], () => fetchContents(id));
 
 	const deleteMutation = useMutation((id: number) => deleteSection(id), {
 		onSuccess: (data) => {
@@ -75,13 +72,12 @@ const Section: React.FC<Props> = (props) => {
 	};
 
 	const onUpdate = (data: any) => {
-		console.log(data);
 		updateMutation.mutate(data);
 	};
 
 	return (
 		<div className="mto-bg-white mto-shadow-sm mto-p-8 mto-mt-12 mto-rounded-sm">
-			<header className="mto-flex mto-justify-between mto-items-center">
+			<header className="mto-flex mto-justify-between mto-items-center mto-mb-4">
 				<div className="mto-flex mto-items-center">
 					<DragHandle />
 					<h1>{name}</h1>
@@ -94,7 +90,7 @@ const Section: React.FC<Props> = (props) => {
 								<ul className="mto-w-36 mto-text-gray-700 mto-m-4 ">
 									<li
 										className="mto-flex mto-items-center mto-text-sm mto-mb-4 hover:mto-text-primary mto-cursor-pointer"
-										onClick={() => setMode('editing')}>
+										onClick={() => setSectionEditing(true)}>
 										<Icon className="mto-mr-1" icon={<Edit />} />
 										{__('Edit', 'masteriyo')}
 									</li>
@@ -111,7 +107,7 @@ const Section: React.FC<Props> = (props) => {
 					</Dropdown>
 				</div>
 			</header>
-			{mode === 'editing' && (
+			{sectionEditing && (
 				<div className="mto-mt-8">
 					<form onSubmit={handleSubmit(onUpdate)}>
 						<FormGroup>
@@ -137,7 +133,9 @@ const Section: React.FC<Props> = (props) => {
 								<Button layout="primary" type="submit">
 									{__('Save', 'masteriyo')}
 								</Button>
-								<Button className="mto-mr-4" onClick={() => setMode('normal')}>
+								<Button
+									className="mto-mr-4"
+									onClick={() => setSectionEditing(false)}>
 									{__('Cancel', 'masteriyo')}
 								</Button>
 							</div>
@@ -145,13 +143,17 @@ const Section: React.FC<Props> = (props) => {
 					</form>
 				</div>
 			)}
-
-			<div className="mto-h-8">
-				{lessonQuery?.data?.map((content: any) => (
-					<Lesson key={content.id} id={content.id} name={content.name} />
+			<div>
+				{contentQuery?.data?.map((content: any, index: number) => (
+					<Content
+						key={index}
+						id={content.id}
+						name={content.name}
+						type={content.type}
+					/>
 				))}
 				<AddNewButton>
-					<NavLink to={`/courses/${courseId}/add-new-lesson`}>
+					<NavLink to={`/courses/${id}/add-new-lesson`}>
 						{__('Add New Content', 'masteriyo')}
 					</NavLink>
 				</AddNewButton>

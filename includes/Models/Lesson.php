@@ -63,16 +63,12 @@ class Lesson extends Model {
 		'date_modified'       => null,
 		'status'              => false,
 		'menu_order'          => 0,
-		'featured'            => false,
-		'catalog_visibility'  => 'visibile',
 		'description'         => '',
 		'short_description'   => '',
 		'post_password'       => '',
 		'parent_id'           => 0,
 		'course_id'           => 0,
 		'reviews_allowed'     => true,
-		'category_ids'        => array(),
-		'tag_ids'             => array(),
 		'featured_image'      => '',
 		'video_source'        => '',
 		'video_source_url'    => '',
@@ -309,32 +305,6 @@ class Lesson extends Model {
 	}
 
 	/**
-	 * Returns lesson category ids.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return array Lesson category ids.
-	 */
-	public function get_category_ids( $context = 'view' ) {
-		return $this->get_prop( 'category_ids', $context );
-	}
-
-	/**
-	 * Returns lesson tag ids.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return array Lesson tag ids.
-	 */
-	public function get_tag_ids( $context = 'view' ) {
-		return $this->get_prop( 'tag_ids', $context );
-	}
-
-	/**
 	 * Returns lesson featured image.
 	 *
 	 * @since 0.1.0
@@ -345,19 +315,6 @@ class Lesson extends Model {
 	 */
 	public function get_featured_image( $context = 'view' ) {
 		return $this->get_prop( 'featured_image', $context );
-	}
-
-	/**
-	 * Check whether the lesson is featured or not.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return bool
-	 */
-	public function get_featured( $context = 'view' ) {
-		return $this->get_prop( 'featured', $context );
 	}
 
 	/**
@@ -571,28 +528,6 @@ class Lesson extends Model {
 	}
 
 	/**
-	 * Set the lesson category ids.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param array $category_ids Category ids.
-	 */
-	public function set_category_ids( $category_ids ) {
-		$this->set_prop( 'category_ids', array_unique( array_map( 'intval', $category_ids ) ) );
-	}
-
-	/**
-	 * Set the lesson tag ids.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param array $tag_ids Tag ids.
-	 */
-	public function set_tag_ids( $tag_ids ) {
-		$this->set_prop( 'tag_ids', array_unique( array_map( 'intval', $tag_ids ) ) );
-	}
-
-	/**
 	 * Set the featured image, in other words thumbnail post id.
 	 *
 	 * @since 0.1.0
@@ -601,17 +536,6 @@ class Lesson extends Model {
 	 */
 	public function set_featured_image( $featured_image ) {
 		$this->set_prop( 'featured_image', absint( $featured_image ) ) ;
-	}
-
-	/**
-	 * Set the featured.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param bool $featured Featured.
-	 */
-	public function set_featured( $featured ) {
-		$this->set_prop( 'featured', Utils::string_to_bool( $featured ) );
 	}
 
 	/**

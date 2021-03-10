@@ -18,8 +18,6 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'category_ids'        => '_category_ids',
-		'tag_ids'             => '_tag_ids',
 		'featured_image'      => '_thumbnail_id',
 		'video_source'        => '_video_source',
 		'video_source_url'    => '_video_source_url',
@@ -67,7 +65,6 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 		if ( $id && ! is_wp_error( $id ) ) {
 			$lesson->set_id( $id );
 			$this->update_post_meta( $lesson, true );
-			$this->update_terms( $lesson, true );
 			// TODO Invalidate caches.
 
 			$lesson->save_meta_data();
@@ -213,31 +210,6 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $lesson );
 	}
 
-	/**
-	 * For all stored terms in all taxonomies, save them to the DB.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Model $model Model object.
-	 * @param bool  $force Force update. Used during create.
-	 */
-	protected function update_terms( &$model, $force = false ) {
-		$changes = $model->get_changes();
-
-		if ( $force || array_key_exists( 'category_ids', $changes ) ) {
-			$categories = $model->get_category_ids( 'edit' );
-
-			if ( empty( $categories ) && get_option( 'default_lesson_cat', 0 ) ) {
-				$categories = array( get_option( 'default_lesson_cat', 0 ) );
-			}
-
-			wp_set_post_terms( $model->get_id(), $categories, 'lesson_cat', false );
-		}
-
-		if ( $force || array_key_exists( 'tag_ids', $changes ) ) {
-			wp_set_post_terms( $model->get_id(), $model->get_tag_ids( 'edit' ), 'lesson_tag', false );
-		}
-	}
 
 	/**
 	 * Read lesson data. Can be overridden by child classes to load other props.

@@ -309,7 +309,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 
 		$query_vars['post_type'] = 'section';
 
-		$wp_query_args = $query_vars;
+		$wp_query_args = parent::get_wp_query_args( $query_vars );
 
 		if ( ! isset( $wp_query_args['date_query'] ) ) {
 			$wp_query_args['date_query'] = array();

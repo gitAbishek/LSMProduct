@@ -14,6 +14,7 @@ import ModalFooter from 'Components/common/ModalFooter';
 import ModalHeader from 'Components/common/ModalHeader';
 import OptionButton from 'Components/common/OptionButton';
 import { __ } from '@wordpress/i18n';
+import { useHistory } from 'react-router';
 
 interface Props {
 	id: number;
@@ -25,6 +26,7 @@ const Content: React.FC<Props> = (props) => {
 	const { id, name, type } = props;
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const queryClient = useQueryClient();
+	const { push } = useHistory();
 
 	const deleteLessonMutation = useMutation((id: number) => deleteLesson(id), {
 		onSuccess: () => {
@@ -63,7 +65,10 @@ const Content: React.FC<Props> = (props) => {
 				</div>
 				<div className="mto-flex">
 					<div className="mto-flex">
-						<Button className="mto-mr-2" size="small">
+						<Button
+							className="mto-mr-2"
+							size="small"
+							onClick={() => push(`/builder/lesson/${id}`)}>
 							{__('Edit', 'masteriyo')}
 						</Button>
 						<Dropdown

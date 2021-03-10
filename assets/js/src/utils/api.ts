@@ -61,16 +61,6 @@ export const fetchContents = (sectionId: number) => {
 		.then((response) => response.data);
 };
 
-export const fetchLessons = (courseId: number) => {
-	return axios
-		.get(urls.lessons, {
-			params: {
-				parent: courseId,
-			},
-		})
-		.then((response) => response.data);
-};
-
 export const deleteCourse = (courseId: any) => {
 	return axios
 		.delete(urls.course.replace(':id', courseId.toString()))
@@ -103,8 +93,29 @@ export const deleteSection = (id: number) => {
 		.then((response) => response.data);
 };
 
+export const fetchLessons = (courseId: number) => {
+	return axios
+		.get(urls.lessons, {
+			params: {
+				parent: courseId,
+			},
+		})
+		.then((response) => response.data);
+};
+
+export const fetchLesson = (lessonId: number) => {
+	return axios
+		.get(urls.lesson.replace(':id', lessonId.toString()))
+		.then((response) => response.data);
+};
 export const addLesson = (data: any) => {
 	return axios.post(urls.lessons, data).then((response) => response.data);
+};
+
+export const updateLesson = (id: number, data: any) => {
+	return axios
+		.patch(urls.lesson.replace(':id', id.toString()), data)
+		.then((response) => response.data);
 };
 
 export const deleteLesson = (id: number) => {

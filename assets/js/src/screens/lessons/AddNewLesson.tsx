@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react';
+import { addLesson, fetchSection } from '../../utils/api';
 import { useHistory, useParams } from 'react-router';
+import { useMutation, useQuery } from 'react-query';
 
 import Button from 'Components/common/Button';
 import Dropdown from 'Components/common/Dropdown';
@@ -14,13 +16,11 @@ import Select from 'Components/common/Select';
 import Slider from 'rc-slider';
 import Textarea from 'Components/common/Textarea';
 import { __ } from '@wordpress/i18n';
-import { addLesson } from '../../utils/api';
 import { useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 
 const AddNewLesson: React.FC = () => {
-	const { courseId, parentId }: any = useParams();
+	const { sectionId }: any = useParams();
 	interface Inputs {
 		name: string;
 		description?: string;
@@ -36,9 +36,19 @@ const AddNewLesson: React.FC = () => {
 		setPlayBackTime(value);
 	};
 
+	const sectionQuery = useQuery([`section${sectionId}`, sectionId], () =>
+		fetchSection(sectionId)
+	);
+
+	const courseId = sectionQuery?.data?.parent_id;
+
 	const addLessonMutation = useMutation(
 		(data: object) =>
-			addLesson({ ...data, course_id: courseId, parent_id: parentId }),
+			addLesson({
+				...data,
+				parent_id: sectionId,
+				course_id: courseId,
+			}),
 		{
 			onSuccess: (data: any) => {
 				addToast(data?.name + __(' has been added successfully'), {

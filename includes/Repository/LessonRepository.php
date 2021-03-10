@@ -18,17 +18,15 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'_featured'            => 'featured',
-		'_category_ids'        => 'category_ids',
-		'_tag_ids'             => 'tag_ids',
-		'_thumbnail_id'        => 'featured_image',
-		'_video_source'        => 'video_source',
-		'_video_source_url'    => 'video_source_url',
-		'_video_playback_time' => 'video_playback_time',
-		'_rating_counts'       => 'rating_counts',
-		'_average_rating'      => 'average_rating',
-		'_review_count'        => 'review_count',
-		'_course_id'           => 'course_id',
+		'category_ids'        => '_category_ids',
+		'tag_ids'             => '_tag_ids',
+		'featured_image'      => '_thumbnail_id',
+		'video_source'        => '_video_source',
+		'video_source_url'    => '_video_source_url',
+		'video_playback_time' => '_video_playback_time',
+		'rating_counts'       => '_rating_counts',
+		'average_rating'      => '_average_rating',
+		'review_count'        => '_review_count'
 	);
 
 	/**

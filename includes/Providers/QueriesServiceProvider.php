@@ -8,6 +8,7 @@ namespace ThemeGrill\Masteriyo\Providers;
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
+use ThemeGrill\Masteriyo\Query\LessonQuery;
 use ThemeGrill\Masteriyo\Query\SectionQuery;
 
 class QueriesServiceProvider extends AbstractServiceProvider {
@@ -24,7 +25,10 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 	 */
 	protected $provides = array(
 		'query.sections',
+		'query.lessons',
+
 		'\ThemeGrill\Masteriyo\Query\SectionQuery',
+		'\ThemeGrill\Masteriyo\Query\LessonQuery',
 	);
 
 	/**
@@ -37,7 +41,9 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 	 */
 	public function register() {
 		$this->getContainer()->add( 'query.sections', SectionQuery::class );
+		$this->getContainer()->add( 'query.lessons', LessonQuery::class );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\SectionQuery' );
+		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\LessonQuery' );
 	}
 }

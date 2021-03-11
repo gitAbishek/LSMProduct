@@ -38,13 +38,8 @@ class LessonQuery extends ObjectQuery {
 				'short_description'   => '',
 				'parent_id'           => '',
 				'course_id'           => '',
-				'featured_image'      => '',
-				'video_source'        => '',
-				'video_source_url'    => '',
 				'video_playback_time' => '',
-				'rating_counts'       => array(),
 				'average_rating'      => '',
-				'review_count'        => '',
 			)
 		);
 	}

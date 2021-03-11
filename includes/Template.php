@@ -11,6 +11,7 @@ namespace ThemeGrill\Masteriyo;
 
 defined( 'ABSPATH' ) || exit;
 
+use ThemeGrill\Masteriyo\Cache\Cache;
 use ThemeGrill\Masteriyo\Helper\Utils;
 use ThemeGrill\Masteriyo\Contracts\Template as TemplateInterface;
 
@@ -29,12 +30,12 @@ class Template implements TemplateInterface {
 	 * @param string $name Template name (default: '').
 	 */
 	public function get_part( $slug, $name = '' ) {
-		$cache_key = sanitize_key( implode( '-', array( 'template-part', $slug, $name, Constants::get_constant( 'MASTERIYO_VERSION' ) ) ) );
+		$cache_key = sanitize_key( implode( '-', array( 'template-part', $slug, $name, Constants::get( 'MASTERIYO_VERSION' ) ) ) );
 		$template  = $this->get_cache( $cache_key );
 
 		if ( ! $template ) {
 			if ( $name ) {
-				$template = Constants::get_constant( 'MASTERIYO_TEMPLATE_DEBUG_MODE' ) ? '' : locate_template(
+				$template = Constants::get( 'MASTERIYO_TEMPLATE_DEBUG_MODE' ) ? '' : locate_template(
 					array(
 						"{$slug}-{$name}.php",
 						Utils::template_path() . "{$slug}-{$name}.php",
@@ -49,7 +50,7 @@ class Template implements TemplateInterface {
 
 			if ( ! $template ) {
 				// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/masteriyo/slug.php.
-				$template = Constants::get_constant( 'MASTERIYO_TEMPLATE_DEBUG_MODE' ) ? '' : locate_template(
+				$template = Constants::get( 'MASTERIYO_TEMPLATE_DEBUG_MODE' ) ? '' : locate_template(
 					array(
 						"{$slug}.php",
 						Utils::template_path() . "{$slug}.php",
@@ -85,7 +86,7 @@ class Template implements TemplateInterface {
 	 * @param string $default_path  Default path. (default: '').
 	 */
 	public function get( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
-		$cache_key = sanitize_key( implode( '-', array( 'template', $template_name, $template_path, $default_path, Constants::get_constant( 'MASTERIYO_VERSION' ) ) ) );
+		$cache_key = sanitize_key( implode( '-', array( 'template', $template_name, $template_path, $default_path, Constants::get( 'MASTERIYO_VERSION' ) ) ) );
 		$template  = $this->get_cache( $cache_key );
 
 		if ( ! $template ) {
@@ -167,8 +168,7 @@ class Template implements TemplateInterface {
 	 * @param string $template Located template.
 	 */
 	public function set_cache( $cache_key, $template ) {
-		global $masteriyo_container;
-		$cache = $masteriyo_container->get( \ThemeGrill\Masteriyo\Cache\CacheInterface::class );
+		$cache = Cache::instance();
 
 		$cache->set( $cache_key, $template, 'masteriyo' );
 
@@ -193,8 +193,7 @@ class Template implements TemplateInterface {
 	 * @return string
 	 */
 	public function get_cache( $cache_key ) {
-		global $masteriyo_container;
-		$cache = $masteriyo_container->get( \ThemeGrill\Masteriyo\Cache\CacheInterface::class );
+		$cache = Cache::instance();
 
 		return (string) $cache->get( $cache_key, 'masteriyo' );
 	}
@@ -234,7 +233,7 @@ class Template implements TemplateInterface {
 		);
 
 		// Get default template/.
-		if ( ! $template || Constants::get_constant( 'MASTERIYO_TEMPLATE_DEBUG_MODE' ) ) {
+		if ( ! $template || Constants::get( 'MASTERIYO_TEMPLATE_DEBUG_MODE' ) ) {
 			$template = $default_path . $template_name;
 		}
 

@@ -7,7 +7,7 @@
  * @package Masteriyo\Interfaces
  */
 
-namespace ThemeGrill\Masteriyo\Cache;
+namespace ThemeGrill\Masteriyo\Contracts;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 0.1.0
  */
 
-interface CacheInterface {
+interface Cache {
 	/**
 	 * Get prefix for use with wp_cache_set. Allows all cache in a group to be invalidated at once.
 	 *

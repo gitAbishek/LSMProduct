@@ -35,6 +35,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		'review_count'      => '_review_count',
 		'date_on_sale_from' => '_date_on_sale_from',
 		'date_on_sale_to'   => '_date_on_sale_to',
+		'featured'          => '_featured',
 	);
 
 	/**
@@ -112,6 +113,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			'description'       => $course_post->post_content,
 			'short_description' => $course_post->post_excerpt,
 			'parent_id'         => $course_post->post_parent,
+			'author_id'         => $course_post->post_author,
 			'menu_order'        => $course_post->menu_order,
 			'post_password'     => $course_post->post_password,
 			'reviews_allowed'   => 'open' === $course_post->comment_status,

@@ -70,6 +70,7 @@ class Course extends Model {
 		'description'        => '',
 		'short_description'  => '',
 		'post_password'      => '',
+		'author_id'          => 0,
 		'parent_id'          => 0,
 		'reviews_allowed'    => true,
 		'date_on_sale_from'  => null,
@@ -281,6 +282,19 @@ class Course extends Model {
 	 */
 	public function get_date_on_sale_to( $context = 'view' ) {
 		return $this->get_prop( 'date_on_sale_to', $context );
+	}
+
+	/**
+	 * Returns course author id.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string price
+	 */
+	public function get_author_id( $context = 'view' ) {
+		return $this->get_prop( 'author_id', $context );
 	}
 
 	/**
@@ -555,6 +569,17 @@ class Course extends Model {
 	 */
 	public function set_reviews_allowed( $reviews_allowed ) {
 		$this->set_prop( 'reviews_allowed', $reviews_allowed );
+	}
+
+	/**
+	 * Set the course author id.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $author_id Author id.
+	 */
+	public function set_author_id( $author_id ) {
+		$this->set_prop( 'author_id', absint( $author_id ) );
 	}
 
 	/**

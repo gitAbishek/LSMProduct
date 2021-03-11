@@ -21,7 +21,6 @@ defined( 'ABSPATH' ) || exit;
  */
 
 class Cache implements CacheInterface {
-	use Singleton;
 
 	/**
 	 * Get prefix for use with wp_cache_set. Allows all cache in a group to be invalidated at once.

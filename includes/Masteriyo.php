@@ -65,7 +65,10 @@ class Masteriyo extends Container {
 
 		// Register scripts and styles.
 		$this->get( 'script-style');
+
 		Ajax::init();
+
+		$this->get( 'query.frontend' );
 
 		// Initilize the hooks.
 		$this->init_hooks();
@@ -120,6 +123,9 @@ class Masteriyo extends Container {
 	private function get_service_providers() {
 		$namespace = 'ThemeGrill\\Masteriyo\\Providers';
 		return apply_filters( 'masteriyo_service_providers', array(
+			"{$namespace}\\CacheServiceProvider",
+			"{$namespace}\\NoticeServiceProvider",
+			"{$namespace}\\FrontendQueryServiceProvider",
 			"{$namespace}\\CourseServiceProvider",
 			"{$namespace}\\PermissionServiceProvider",
 			"{$namespace}\\SessionServiceProvider",
@@ -131,7 +137,6 @@ class Masteriyo extends Container {
 			"{$namespace}\\CourseTagServiceProvider",
 			"{$namespace}\\CourseCategoryServiceProvider",
 			"{$namespace}\\CourseDifficultyServiceProvider",
-			"{$namespace}\\NoticeServiceProvider",
 			"{$namespace}\\CartServiceProvider",
 			"{$namespace}\\TemplateServiceProvider",
 			"{$namespace}\\QuestionServiceProvider",
@@ -272,12 +277,17 @@ class Masteriyo extends Container {
 	 * @return string
 	 */
 	public function template_loader( $template ) {
+<<<<<<< HEAD
 		global $post;
 
 		if ( masteriyo_is_single_course_page() ) {
 			masteriyo_setup_course_data( $post );
 
 			$template = masteriyo( 'template' )->locate( 'single-course.php' );
+=======
+		if ( masteriyo_is_archive_course_page() ) {
+			$template = masteriyo( 'template' )->locate( 'archive-course.php' );
+>>>>>>> Implementing course list page.
 		}
 
 		return $template;

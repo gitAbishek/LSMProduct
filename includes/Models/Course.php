@@ -66,7 +66,7 @@ class Course extends Model {
 		'status'             => false,
 		'menu_order'         => 0,
 		'featured'           => false,
-		'catalog_visibility' => 'visibile',
+		'catalog_visibility' => 'visible',
 		'description'        => '',
 		'short_description'  => '',
 		'post_password'      => '',
@@ -311,7 +311,7 @@ class Course extends Model {
 	 *
 	 * @since  0.1.0
 	 * @param  string $context What the value is for. Valid values are view and edit.
-	 * @return WC_DateTime|NULL object if the date is set or null if there is no date.
+	 * @return MASTERIYO_DateTime|NULL object if the date is set or null if there is no date.
 	 */
 	public function get_date_on_sale_to( $context = 'view' ) {
 		return $this->get_prop( 'date_on_sale_to', $context );
@@ -837,5 +837,36 @@ class Course extends Model {
 	 */
 	public function exists() {
 		return false !== $this->get_status();
+	}
+
+		/**
+	 * Returns whether or not the course is visible in the catalog.
+	 *
+	 * @return bool
+	 */
+	public function is_visible() {
+		$visible = $this->is_visible_core();
+		return apply_filters( 'masteriyo_course_is_visible', $visible, $this->get_id() );
+	}
+
+	/**
+	 * Returns whether or not the course is visible in the catalog (doesn't trigger filters).
+	 *
+	 * @return bool
+	 */
+	protected function is_visible_core() {
+		$visible = 'visible' === $this->get_catalog_visibility() || ( is_search() && 'search' === $this->get_catalog_visibility() ) || ( ! is_search() && 'catalog' === $this->get_catalog_visibility() );
+
+		if ( 'trash' === $this->get_status() ) {
+			$visible = false;
+		} elseif ( 'publish' !== $this->get_status() && ! current_user_can( 'edit_post', $this->get_id() ) ) {
+			$visible = false;
+		}
+
+		if ( 'yes' === get_option( 'masteriyo_hide_out_of_stock_items' ) ) {
+			$visible = false;
+		}
+
+		return $visible;
 	}
 }

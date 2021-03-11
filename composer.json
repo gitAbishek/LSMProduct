@@ -15,7 +15,10 @@
   ],
   "autoload": {
     "files": [
-      "includes/Helper/Core.php"
+      "includes/Helper/Core.php",
+      "includes/Helper/Term.php",
+      "includes/Helper/Template.php",
+      "includes/Helper/Page.php"
     ],
     "psr-4": {
       "ThemeGrill\\Masteriyo\\": "includes/"

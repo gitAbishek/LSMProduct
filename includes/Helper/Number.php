@@ -16,7 +16,7 @@ class Number {
 	 * (so it will convert it to 0 in most cases).
 	 *
 	 * This is needed because in PHP 7 applying `round` to a non-numeric value returns 0,
-	 * but in PHP 8 it throws an error. Specifically, in WooCommerce we have a few places where
+	 * but in PHP 8 it throws an error. Specifically, in Masteriyo we have a few places where
 	 * round('') is often executed.
 	 *
 	 * @param mixed $val The value to round.

@@ -286,8 +286,8 @@ function masteriyo_get_question( $question ) {
 	} else {
 		$id = is_a( $question, '\WP_Post' ) ? $question->ID : $question->get_id();
 	}
-	$type     = get_post_meta( $id, '_type', true );
-	$question_obj = masteriyo( "question.${type}" );
+	$type           = get_post_meta( $id, '_type', true );
+	$question_obj   = masteriyo( "question.${type}" );
 	$question_store = masteriyo( 'question.store' );
 
 	if ( is_a( $question, 'ThemeGrill\Masteriyo\Models\Question' ) ) {
@@ -603,7 +603,7 @@ function masteriyo_timezone_offset() {
 /**
  * Convert mysql datetime to PHP timestamp, forcing UTC. Wrapper for strtotime.
  *
- * Based on wcs_strtotime_dark_knight() from WC Subscriptions by Prospress.
+ * Based on masteriyos_strtotime_dark_knight() from MASTERIYO Subscriptions by Prospress.
  *
  * @since  0.1.0
  * @param  string   $time_string    Time string.
@@ -774,9 +774,10 @@ function masteriyo_setup_course_data( $course_id ) {
  * @return void|string
  */
 function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
-	$rating = (float) $rating;
+	$rating     = (float) $rating;
+	$html       = '';
 	$max_rating = apply_filters( 'masteriyo_max_course_rating', 5 );
-	$stars = apply_filters( 'masteriyo_rating_indicators_html', array(
+	$stars      = apply_filters( 'masteriyo_rating_indicators_html', array(
 		'full_star' =>
 			"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
 				<path d='M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z'/>
@@ -791,18 +792,23 @@ function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
 			</svg>",
 	), $rating, $max_rating );
 
-	ob_start();
+	$rating_floor = floor( $rating );
+	for ( $i = 1; $i <= $rating_floor; $i++ ) {
+		$html .= $stars['full_star'];
+	}
+	if ( $rating_floor !== $rating ) {
+		$html .= $stars['half_star'];
+	}
 
-	for ( $i = 1; $i <= floor($rating); $i++ ) echo $stars['full_star'];
-	if ( floor( $rating ) != $rating ) echo $stars['half_star'];
-	for ( $i = ceil( $rating ); $i < $max_rating; $i++ ) echo $stars['empty_star'];
+	$rating_ceil = ceil( $rating );
+	for ( $i = $rating_ceil; $i < $max_rating; $i++ ) {
+		$html .= $stars['empty_star'];
+	}
 
-	$html = ob_get_clean();
-
-	if ( $echo === true ) {
-		echo $html;
+	if ( true === $echo ) {
+		echo $html; // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 	} else {
-		return ob_get_clean();
+		return $html;
 	}
 }
 
@@ -829,7 +835,7 @@ function masteriyo_get_related_courses( $course ) {
 	/**
 	 * Ref: https://www.wpbeginner.com/wp-tutorials/how-to-display-related-posts-in-wordpress/
 	 */
-	$args = array(
+	$args            = array(
 		'tax_query' => array(
 			'relation' => 'AND',
 			array(
@@ -841,7 +847,7 @@ function masteriyo_get_related_courses( $course ) {
 		'posts_per_page' => $max_related_posts,
 		'post_type' => 'course',
 	);
-	$query = new WP_Query($args);
+	$query           = new WP_Query($args);
 	$related_courses = array_map( 'masteriyo_get_course', $query->posts );
 
 	return apply_filters( 'masteriyo_get_related_courses', $related_courses, $query );
@@ -883,17 +889,17 @@ function masteriyo_get_lessons_count( $course ) {
  */
 function masteriyo_minutes_to_time_length_string( $minutes, $format = null ) {
 	$minutes = absint( $minutes );
-	$hours = absint( $minutes / 60 );
-	$mins = $minutes - $hours * 60;
-	$str = '';
+	$hours   = absint( $minutes / 60 );
+	$mins    = $minutes - $hours * 60;
+	$str     = '';
 
 	if ( is_string( $format ) ) {
 		$str = str_replace( '%H%', $hours, $format );
 		$str = str_replace( '%M%', $mins, $str );
 	} else {
-		$str .= $hours > 0 ? sprintf( '%d %s ', $hours, _nx( 'hour', 'hours', $hours, 'masteriyo' ) ) : '';
-		$str .= $mins > 0 ? sprintf( ' %d %s', $mins, _nx( 'min', 'mins', $mins, 'masteriyo' ) ) : '';
-		$str = $minutes > 0 ? $str : __( '0 mins', 'masteriyo' );
+		$str .= $hours > 0 ? sprintf( '%d %s ', $hours, _nx( 'hour', 'hours', $hours, 'hour', 'masteriyo' ) ) : '';
+		$str .= $mins > 0 ? sprintf( ' %d %s', $mins, _nx( 'min', 'mins', $mins, 'minutes', 'masteriyo' ) ) : '';
+		$str  = $minutes > 0 ? $str : __( '0 mins', 'masteriyo' );
 	}
 
 	return $str;
@@ -920,7 +926,7 @@ function masteriyo_get_lecture_hours( $course, $format = null ) {
 	$lessons = masteriyo_get_lessons(array(
 		'course_id' => $course->get_id(),
 	));
-	$mins = 0;
+	$mins    = 0;
 
 	foreach ( $lessons as $lesson ) {
 		$mins += $lesson->get_video_playback_time();
@@ -950,7 +956,7 @@ function masteriyo_get_lecture_hours_of_section( $section, $format = null ) {
 	$lessons = masteriyo_get_lessons(array(
 		'parent_id' => $section->get_id(),
 	));
-	$mins = 0;
+	$mins    = 0;
 
 	foreach ( $lessons as $lesson ) {
 		$mins += $lesson->get_video_playback_time();
@@ -1000,11 +1006,70 @@ function masteriyo_make_section_to_lessons_dictionary( $course ) {
 		$lessons_dictionary[ $section_id ][] = $lesson;
 	}
 
-	foreach( $sections as $section ) {
+	foreach ( $sections as $section ) {
 		if ( ! isset( $lessons_dictionary[ $section->get_id() ] ) ) {
 			$lessons_dictionary[ $section->get_id() ] = array();
 		}
 	}
 
 	return array( $sections, $lessons, $lessons_dictionary );
+}
+
+/** Return "theme support" values from the current theme, if set.
+ *
+ * @since  0.1.0
+ * @param  string $prop Name of prop (or key::subkey for arrays of props) if you want a specific value. Leave blank to get all props as an array.
+ * @param  mixed  $default Optional value to return if the theme does not declare support for a prop.
+ * @return mixed  Value of prop(s).
+ */
+function masteriyo_get_theme_support( $prop = '', $default = null ) {
+	$theme_support = get_theme_support( 'masteriyo' );
+	$theme_support = is_array( $theme_support ) ? $theme_support[0] : false;
+
+	if ( ! $theme_support ) {
+		return $default;
+	}
+
+	if ( $prop ) {
+		$prop_stack = explode( '::', $prop );
+		$prop_key   = array_shift( $prop_stack );
+
+		if ( isset( $theme_support[ $prop_key ] ) ) {
+			$value = $theme_support[ $prop_key ];
+
+			if ( count( $prop_stack ) ) {
+				foreach ( $prop_stack as $prop_key ) {
+					if ( is_array( $value ) && isset( $value[ $prop_key ] ) ) {
+						$value = $value[ $prop_key ];
+					} else {
+						$value = $default;
+						break;
+					}
+				}
+			}
+		} else {
+			$value = $default;
+		}
+
+		return $value;
+	}
+
+	return $theme_support;
+}
+
+/**
+ * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
+ * Non-scalar values are ignored.
+ *
+ * @since 0.1.0
+ *
+ * @param string|array $var Data to sanitize.
+ * @return string|array
+ */
+function masteriyo_clean( $var ) {
+	if ( is_array( $var ) ) {
+		return array_map( 'masteriyo_clean', $var );
+	} else {
+		return is_scalar( $var ) ? sanitize_text_field( $var ) : $var;
+	}
 }

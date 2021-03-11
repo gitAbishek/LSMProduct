@@ -141,7 +141,7 @@ class ScriptStyle {
 				'type'     => 'admin'
 			),
 			'masteriyo-public' => array(
-				'src'      => $this->get_asset_url( '/assets/build/public.css' ),
+				'src'      => $this->get_asset_url( '/assets/js/build/app.css' ),
 				'deps'     => '',
 				'version'  => $this->get_version(),
 				'media'    => 'all',
@@ -373,6 +373,25 @@ class ScriptStyle {
 		if ( masteriyo_is_single_course_page() ) {
 			$this->enqueue_script( 'masteriyo-single-course' );
 			$this->enqueue_style( 'masteriyo-single-course' );
+		}
+		
+		$scripts = $this->get_scripts( 'public' );
+		$styles  = $this->get_styles( 'public' );
+
+		foreach ( $scripts as $handle => $script ) {
+			if ( is_callable( $script ) ) {
+				$this->register_script( $handle, $script['src'], $script['deps'], $script['version'] );
+			} else {
+				$this->enqueue_script( $handle, $script['src'], $script['deps'], $script['version'] );
+			}
+		}
+
+		foreach ( $styles as $handle => $style ) {
+			if ( is_callable( $style ) ) {
+				$this->register_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
+			} else {
+				$this->enqueue_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
+			}
 		}
 	}
 

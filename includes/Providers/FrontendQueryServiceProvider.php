@@ -1,6 +1,6 @@
 <?php
 /**
- * Notice model service provider.
+ * Cache model service provider.
  */
 
 namespace ThemeGrill\Masteriyo\Providers;
@@ -8,9 +8,9 @@ namespace ThemeGrill\Masteriyo\Providers;
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Notice;
+use ThemeGrill\Masteriyo\FrontendQuery;
 
-class NoticeServiceProvider extends AbstractServiceProvider {
+class FrontendQueryServiceProvider extends AbstractServiceProvider {
 	/**
 	 * The provided array is a way to let the container
 	 * know that a service is provided by this service
@@ -23,8 +23,8 @@ class NoticeServiceProvider extends AbstractServiceProvider {
 	 * @var array
 	 */
 	 protected $provides = array(
-		'notice',
-		'\ThemeGrill\Masteriyo\Notice'
+		'query.frontend',
+		'\ThemeGrill\Masteriyo\FrontendQuery'
 	 );
 
 	 /**
@@ -37,8 +37,7 @@ class NoticeServiceProvider extends AbstractServiceProvider {
 	  */
 	 public function register() {
 		 $this->getContainer()
-			->add( 'notice', Notice::class, true )
-			->addArgument( 'session' )
-			->addArgument( 'template' );
+		 	->add( 'query.frontend', FrontendQuery::class, true )
+		 	->addArgument( 'notice' );
 	 }
 }

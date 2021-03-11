@@ -9,6 +9,8 @@ defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use ThemeGrill\Masteriyo\Session\SessionHandler;
+use ThemeGrill\Masteriyo\Repository\SessionRepository;
+
 
 class SessionServiceProvider extends AbstractServiceProvider {
 	/**
@@ -24,7 +26,9 @@ class SessionServiceProvider extends AbstractServiceProvider {
 	 */
 	protected $provides = array(
 		'session',
-		'\ThemeGrill\Masteriyo\Session\SessionHandler'
+		'session.store',
+		'\ThemeGrill\Masteriyo\Session\SessionHandler',
+		'\ThemeGrill\Masteriyo\Repository\SessionRepository',
 	);
 
 	/**
@@ -36,6 +40,11 @@ class SessionServiceProvider extends AbstractServiceProvider {
 	 * @since 0.1.0
 	 */
 	public function register() {
-		$this->getContainer()->add( 'session', SessionHandler::class );
+		$this->getContainer()
+			->add( 'session.store', SessionRepository::class );
+
+		$this->getContainer()
+			->add( 'session', SessionHandler::class )
+			->addArgument( 'session.store');
 	}
 }

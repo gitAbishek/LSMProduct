@@ -8,7 +8,7 @@
  */
 function masteriyo_get_course_visibility_term_ids() {
 	if ( ! taxonomy_exists( 'course_visibility' ) ) {
-		// masteriyo_doing_it_wrong( __FUNCTION__, 'masteriyo_get_course_visibility_term_ids should not be called before taxonomies are registered (woocommerce_after_register_post_type action).', '3.1' );
+		// masteriyo_doing_it_wrong( __FUNCTION__, 'masteriyo_get_course_visibility_term_ids should not be called before taxonomies are registered (masteriyo_after_register_post_type action).', '3.1' );
 		return array();
 	}
 

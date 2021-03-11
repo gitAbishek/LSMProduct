@@ -13,6 +13,7 @@ defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Cache\Cache;
 use ThemeGrill\Masteriyo\Helper\Utils;
+use ThemeGrill\Masteriyo\Constants;
 use ThemeGrill\Masteriyo\Contracts\Template as TemplateInterface;
 
 /**
@@ -168,7 +169,11 @@ class Template implements TemplateInterface {
 	 * @param string $template Located template.
 	 */
 	public function set_cache( $cache_key, $template ) {
+<<<<<<< HEAD
 		$cache = Cache::instance();
+=======
+		$cache = masteriyo( 'cache' );
+>>>>>>> Implementing course list page.
 
 		$cache->set( $cache_key, $template, 'masteriyo' );
 
@@ -193,7 +198,11 @@ class Template implements TemplateInterface {
 	 * @return string
 	 */
 	public function get_cache( $cache_key ) {
+<<<<<<< HEAD
 		$cache = Cache::instance();
+=======
+		$cache = masteriyo( 'cache' );
+>>>>>>> Implementing course list page.
 
 		return (string) $cache->get( $cache_key, 'masteriyo' );
 	}

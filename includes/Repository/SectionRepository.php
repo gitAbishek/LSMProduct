@@ -24,7 +24,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'_course_id' => 'course_id',
+		'course_id' => '_course_id',
 	);
 
 	/**
@@ -298,6 +298,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 		$key_mapping = array(
 			'status' => 'post_status',
 			'page'   => 'paged',
+			'parent_id' => 'post_parent',
 		);
 
 		foreach ( $key_mapping as $query_key => $db_key ) {

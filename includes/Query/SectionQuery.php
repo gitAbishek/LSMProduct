@@ -32,6 +32,7 @@ class SectionQuery extends ObjectQuery {
 				'description'   => '',
 				'menu_order'    => '',
 				'parent_id'     => '',
+				'course_id'     => '',
 				'date_created'  => '',
 				'date_modified' => '',
 				'status'        => array( 'draft', 'pending', 'publish', 'ongoing', 'completed' ),

@@ -7,6 +7,7 @@
 
 use ThemeGrill\Masteriyo\DateTime;
 use ThemeGrill\Masteriyo\Constants;
+use ThemeGrill\Masteriyo\Models\Course;
 
 /**
  * Get course.
@@ -393,7 +394,7 @@ function masteriyo_get_user( $user ) {
  * @param mixed  $slug Template slug.
  * @param string $name Template name (default: '').
  */
-function masteriyo_get_part( $slug, $name = '' ) {
+function masteriyo_get_template_part( $slug, $name = '' ) {
 	return masteriyo( 'template' )->get_part( $slug, $name );
 }
 
@@ -693,4 +694,57 @@ function mto_img_url( $file ) {
 	$plugin_dir = plugin_dir_url( Constants::get('MASTERIYO_PLUGIN_FILE') );
 
 	return "{$plugin_dir}assets/img/{$file}";
+}
+
+/**
+ * Put course data into a global.
+ *
+ * @param int|Course|WP_Post $course_id Course id or Course object or course wp post.
+ *
+ * @return Course
+ */
+function masteriyo_setup_course_data( $course_id = null ) {
+	$course = masteriyo_get_course( $course_id );
+	$cats = array_map( 'masteriyo_get_course_cat', $course->get_category_ids() );
+	$tags = array_map( 'masteriyo_get_course_tag', $course->get_tag_ids() );
+	$difficulties = array_map( 'masteriyo_get_course_difficulty', $course->get_difficulty_ids() );
+	$course_featured_image_url = wp_get_attachment_url( $course->get_featured_image() );
+
+	$GLOBALS['course'] = $course;
+	$GLOBALS['course_categories'] = $cats;
+	$GLOBALS['course_tags'] = $tags;
+	$GLOBALS['course_difficulties'] = $difficulties;
+	$GLOBALS['course_featured_image_url'] = $course_featured_image_url;
+
+	return $GLOBALS['course'];
+}
+
+/**
+ * Render stars based on rating.
+ *
+ * @param int|float $rating Given rating.
+ * @param int $out_of Max allowed rating.
+ * @param string $full_star Full star icon html.
+ * @param string $half_star Half star icon html.
+ * @param string $no_star Empty star html.
+ *
+ * @return void|string
+ */
+function masteriyo_render_stars( $rating, $out_of, $full_star, $half_star, $no_star, $return = false ) {
+	ob_start();
+	for ( $i = 1; $i <= floor($rating); $i++ ) {
+		echo $full_star;
+	}
+	if ( floor( $rating ) != $rating ) {
+		echo $half_star;
+	}
+	for ( $i = ceil( $rating ); $i < $out_of; $i++ ) {
+		echo $no_star;
+	}
+
+	if ( $return === true ) {
+		return ob_get_clean();
+	} else {
+		echo ob_get_clean();
+	}
 }

@@ -731,7 +731,10 @@ function masteriyo_setup_course_data( $course_id = null ) {
  * @return void|string
  */
 function masteriyo_render_stars( $rating, $out_of, $full_star, $half_star, $no_star, $return = false ) {
+	$rating = (float) $rating;
+
 	ob_start();
+
 	for ( $i = 1; $i <= floor($rating); $i++ ) {
 		echo $full_star;
 	}
@@ -747,4 +750,32 @@ function masteriyo_render_stars( $rating, $out_of, $full_star, $half_star, $no_s
 	} else {
 		echo ob_get_clean();
 	}
+}
+
+/**
+ * Get related courses.
+ *
+ * @param Course $course
+ *
+ * @return array[Course]
+ */
+function masteriyo_get_related_courses( $course ) {
+	/**
+	 * Ref: https://www.wpbeginner.com/wp-tutorials/how-to-display-related-posts-in-wordpress/
+	 */
+	$args = array(
+		'tax_query' => array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'course_tag',
+				'terms'    => $course->get_tag_ids(),
+			),
+		),
+		'post__not_in' => array( $course->get_id() ),
+		'posts_per_page' => 5,
+		'post_type' => 'course',
+	);
+	$query = new WP_Query($args);
+
+	return array_map( 'masteriyo_get_course', $query->posts );
 }

@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Login */
+@layer components {
+    .mto-login-wrapper{
+        @apply
+        mto-w-4/5 md:mto-w-3/5 lg:mto-w-1/2
+        xl:mto-w-2/5 mto-p-6 md:mto-p-12
+        mto-bg-white mto-rounded mto-shadow-lg ;
+    }
+    .mto-login-wrapper h2 {
+        @apply
+        mto-font-semibold mto-text-2xl mto-mb-10 md:mto-mb-10;
+    }
+    button.sign-in{
+        @apply mto-w-full md:mto-w-auto
+        mto-py-2 mto-px-4 mto-text-sm mto-font-medium mto-rounded
+        mto-text-white mto-bg-textColor hover:mto-bg-textColor
+        hover:mto-bg-opacity-95 mto-shadow-lg hover:mto-shadow-none;
+    }
+    /* Course Card */
+    .mto-course-list{
+        @apply mto-container mto-mx-auto;
+    }
+    .course-card{
+        @apply
+        mto-relative mto-w-1/4 2xl:mto-w-1/5 mto-max-w-sm mto-rounded
+        mto-overflow-hidden mto-bg-white mto-shadow-md;
+    }
+    .course-image span.price-tag{
+        @apply
+        mto-absolute mto-text-white mto-text-lg
+        mto-font-medium mto-bg-primary mto-px-4
+        mto-py-2 mto-rounded-br-2xl;
+    }
+    a.course-author-readmore{
+        @apply
+        mto-inline-block mto-text-center mto-w-full
+        mto-font-bold mto-uppercase
+        mto-text-sm md:mto-w-auto
+        mto-py-2 mto-px-4 mto-rounded-full 
+        mto-text-textColor mto-bg-white;
+    }
+    .course-card{
+        @apply mto-m-4 mto-flex-grow;
+    }
+    .course-card .price-tag{
+        @apply mto-absolute mto-text-white mto-text-lg
+        mto-font-medium mto-bg-primary
+        mto-px-4 mto-py-2 mto-rounded-br-2xl;
+    }
+    .course-overlay{
+        @apply  mto-absolute mto-inset-0 mto-z-50 mto-flex-col mto-justify-between mto-bg-primary;
+    }
+    .hide-overlay{
+        @apply mto-hidden;
+    }
+    .show-overlay:hover + .hide-overlay{
+        @apply mto-block mto-transform mto-transition-all mto-delay-300 mto-ease-in-out;
+    }
+    .course-time-share{
+        @apply  mto-flex mto-flex-col md:mto-flex-row mto-justify-between md:mto-items-center mto-mt-3;
+    }
+    .btn,.course-enroll a{
+        @apply
+        mto-transition mto-duration-300 mto-ease-in-out mto-transform-gpu hover:mto--translate-y-1
+        mto-inline-block mto-text-center mto-w-full hover:mto-bg-primary-600
+        mto-text-xs mto-font-medium mto-uppercase
+        mto-mt-4 md:mto-mt-0 md:mto-w-auto mto-py-2
+        mto-px-4 mto-rounded-full mto-text-white mto-bg-primary;
+    }
+    .active-tab{
+        @apply mto-text-primary mto-border-b-2 mto-border-primary;
+    }
+    p{
+        @apply mto-pb-5 mto-text-gray-800;
+    }
+    .mto-icon{
+        @apply mto-w-6 mto-h-6;
+    }
+    /* Tab */
+    .tab-content{
+        @apply mto-mt-8 mto-mb-3 md:mto-mb-16;
+    }
+    /* FAQ accourdion */
+    .faq-accordion-item-header{
+        @apply mto-cursor-pointer mto-font-semibold mto-text-base mto-pl-8 mto-py-4;
+    }
+    .faq-accordion-item{
+        @apply mto-border-b last:mto-border-b-0;
+    }
+    .faq-accordion-item .active{
+        @apply mto-border-b mto-border-gray-300;
+    }
+    .curr-accordion-item-body,
+    .faq-accordion-item-body {
+        @apply mto-max-h-0 mto-text-sm  mto-overflow-hidden mto-transform mto-duration-500 mto-ease-in-out;
+    }
+    .faq-accordion-item-body-content{
+        @apply  mto-border-gray-300 mto-leading-6 mto-pt-5;
+    }
+    .curr-details ul li::marker{
+        @apply mto-text-primary;
+    }
+    .curr-accordion-item-header{
+        @apply mto-text-gray-700 mto-p-4 mto-pl-0 mto-border-b last:mto-border-b-0 mto-cursor-pointer
+        hover:mto-bg-primary-50 mto-transform mto-duration-300 mto-ease-in-out;
+    }
+    .curr-accordion-item-header:hover{
+        @apply mto-pl-4;
+    }
+    .curr-accordion-item-header.active{
+        @apply mto-bg-primary mto-text-white mto-p-4 mto-rounded-t mto-pl-4;
+    }
+    .curr-accordion-item-header.active svg{
+        @apply mto-bg-white mto-p-0.5 mto-shadow-sm mto-rounded-full;
+    }
+    .curr-accordion-item-header.active .expand-accordion{
+        @apply mto-hidden;
+    }
+    .curr-accordion-item-header.active .collapse-accordion{
+        @apply mto-block;
+    }
+    /* Dashboard Main SideBar */
+    aside.sidebar-wrapper ul li a{
+        @apply mto-flex mto-items-center mto-cursor-pointer mto-bg-white
+        mto-border mto-border-r-0 mto-border-white 
+        mto-py-4 mto-px-6 mto-rounded mto-space-x-4 mto-text-pColor mto-font-semibold;
+    }
+    aside.sidebar-wrapper ul li a.active, aside.sidebar-wrapper ul li a:hover{
+        @apply mto-border-gray-200 mto--mr-0.5 mto-text-textColor mto-font-semibold;
+    }
+    /* Admin Pannel */
+    .mto-card-wrapper{
+        @apply mto-block mto-space-y-8 md:mto-flex md:mto-w-full md:mto-space-x-8 md:mto-space-y-0;
+    }
+    .mto-card{
+        @apply mto-flex-grow mto-border mto-rounded mto-p-8 mto-space-y-3;
+    }
+    .mto-card-header{
+        @apply mto-font-bold mto-text-textColor mto-text-base;
+    }
+    .mto-notify-message{
+        @apply mto-p-4 mto-my-4 mto-bg-primary-50 mto-font-bold mto-text-primary mto-rounded mto-border mto-border-primary;
+    }
+    .certificate-list ul li{
+        @apply mto-border-b mto-py-4;
+    }
+    .certificate-list ul li:last-child{
+        @apply mto-border-0;
+    }
+}

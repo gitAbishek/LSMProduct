@@ -5,7 +5,9 @@
   "author": "ThemeGrill <themegrill@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@tailwindcss/forms": "0.2.1",
+    "@tailwindcss/aspect-ratio": "^0.2.0",
+    "@tailwindcss/forms": "^0.2.1",
+    "@tailwindcss/line-clamp": "^0.2.0",
     "@types/react-router-dom": "5.1.7",
     "@types/react-select": "4.0.13",
     "@wordpress/i18n": "3.18.0",
@@ -71,7 +73,8 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --hot --open",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "build:css:public": "tailwindcss build ./assets/css/public.css -o ./assets/dist/public.css"
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {

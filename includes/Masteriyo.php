@@ -278,6 +278,7 @@ class Masteriyo extends Container {
 	 */
 	public function template_loader( $template ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		global $post;
 
 		if ( masteriyo_is_single_course_page() ) {
@@ -286,6 +287,9 @@ class Masteriyo extends Container {
 			$template = masteriyo( 'template' )->locate( 'single-course.php' );
 =======
 		if ( masteriyo_is_archive_course_page() ) {
+=======
+		if ( \masteriyo_is_archive_course_page() ) {
+>>>>>>> Public css configured.
 			$template = masteriyo( 'template' )->locate( 'archive-course.php' );
 >>>>>>> Implementing course list page.
 		}

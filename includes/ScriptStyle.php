@@ -141,7 +141,7 @@ class ScriptStyle {
 				'type'     => 'admin'
 			),
 			'masteriyo-public' => array(
-				'src'      => $this->get_asset_url( '/assets/js/build/app.css' ),
+				'src'      => $this->get_asset_url( '/assets/dist/public.css' ),
 				'deps'     => '',
 				'version'  => $this->get_version(),
 				'media'    => 'all',

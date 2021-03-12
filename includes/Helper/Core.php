@@ -146,6 +146,21 @@ function masteriyo_get_quizes( $args = array() ) {
 }
 
 /**
+ * Get questions
+ *
+ * @since 0.1.0
+ *
+ * @param array $args Query arguments.
+ *
+ * @return object|array[Question]
+ */
+function masteriyo_get_questions( $args = array() ) {
+	$questions = masteriyo( 'query.questions' )->set_args( $args )->get_questions();
+
+	return apply_filters( 'masteriyo_get_questions', $questions, $args );
+}
+
+/**
  * Get quiz.
  *
  * @since 0.1.0

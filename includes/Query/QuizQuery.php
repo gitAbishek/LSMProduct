@@ -1,0 +1,57 @@
+<?php
+/**
+ * Class for parameter-based Quiz querying
+ *
+ * @package  ThemeGrill\Masteriyo\Query
+ * @version 0.1.0
+ * @since   0.1.0
+ */
+
+namespace ThemeGrill\Masteriyo\Query;
+
+use ThemeGrill\Masteriyo\Abstracts\ObjectQuery;
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Quiz query class.
+ */
+class QuizQuery extends ObjectQuery {
+
+	/**
+	 * Valid query vars for quizes.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	protected function get_default_query_vars() {
+		return array_merge(
+			parent::get_default_query_vars(),
+			array(
+				'slug'                => '',
+				'date_created'        => null,
+				'date_modified'       => null,
+				'status'              => array( 'draft', 'pending', 'private', 'publish' ),
+				'menu_order'          => '',
+				'description'         => '',
+				'short_description'   => '',
+				'parent_id'           => '',
+				'course_id'           => '',
+			)
+		);
+	}
+
+	/**
+	 * Get quizes matching the current query vars.
+	 *
+	 * @since 0.0.1
+	 *
+	 * @return array|Model quiz objects
+	 */
+	public function get_quizes() {
+		$args    = apply_filters( 'masteriyo_quiz_object_query_args', $this->get_query_vars() );
+		$results = masteriyo('quiz.store' )->query( $args );
+		return apply_filters( 'masteriyo_quiz_object_query', $results, $args );
+	}
+}

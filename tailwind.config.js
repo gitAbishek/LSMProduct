@@ -2,10 +2,6 @@ const { transitionProperty } = require('tailwindcss/defaultTheme');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: {
-    mode: 'layers',
-    content: ['./public/**/*.html'],
-  },
 	darkMode: false, // or 'media' or 'class'
 	theme: {
 		extend: {

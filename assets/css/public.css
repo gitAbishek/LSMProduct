@@ -27,7 +27,7 @@
     }
     .course-card{
         @apply
-        mto-relative mto-w-1/4 2xl:mto-w-1/5 mto-max-w-sm mto-rounded
+        mto-relative mto-w-full md:mto-w-1/3 lg:mto-w-1/4 2xl:mto-w-1/5 mto-max-w-sm mto-rounded
         mto-overflow-hidden mto-bg-white mto-shadow-md;
     }
     .course-image span.price-tag{
@@ -64,13 +64,16 @@
     .course-time-share{
         @apply  mto-flex mto-flex-col md:mto-flex-row mto-justify-between md:mto-items-center mto-mt-3;
     }
-    .btn,.course-enroll a{
+    .btn{
         @apply
         mto-transition mto-duration-300 mto-ease-in-out mto-transform-gpu hover:mto--translate-y-1
         mto-inline-block mto-text-center mto-w-full hover:mto-bg-primary-600
         mto-text-xs mto-font-medium mto-uppercase
         mto-mt-4 md:mto-mt-0 md:mto-w-auto mto-py-2
         mto-px-4 mto-rounded-full mto-text-white mto-bg-primary;
+    }
+    a:focus{
+        @apply mto-bg-transparent mto-no-underline mto-outline-none !important;
     }
     .active-tab{
         @apply mto-text-primary mto-border-b-2 mto-border-primary;

@@ -8,7 +8,7 @@ namespace ThemeGrill\Masteriyo\Providers;
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\Question;
+use ThemeGrill\Masteriyo\Models\Question\Question;
 use ThemeGrill\Masteriyo\Models\Question\TrueFalse;
 use ThemeGrill\Masteriyo\Models\Question\SingleChoice;
 use ThemeGrill\Masteriyo\Models\Question\MultipleChoice;

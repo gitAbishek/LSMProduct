@@ -215,7 +215,13 @@ function masteriyo_get_order( $order ) {
  * @return Question|null
  */
 function masteriyo_get_question( $question ) {
-	$question_obj   = masteriyo( 'question' );
+	if ( is_int( $question ) ) {
+		$id = $question;
+	} else {
+		$id = is_a( $question, '\WP_Post' ) ? $question->ID : $question->get_id();
+	}
+	$type     = get_post_meta( $id, '_type', true );
+	$question_obj = masteriyo( "question.${type}" );
 	$question_store = masteriyo( 'question.store' );
 
 	if ( is_a( $question, 'ThemeGrill\Masteriyo\Models\Question' ) ) {

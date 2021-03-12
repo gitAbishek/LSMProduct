@@ -1,3 +1,4 @@
+import { BiAlignLeft, BiTimer } from 'react-icons/bi';
 import { Edit, Trash } from '../../../assets/icons';
 import React, { useState } from 'react';
 import {
@@ -152,11 +153,31 @@ const Section: React.FC<Props> = (props) => {
 						type={content.type}
 					/>
 				))}
-				<AddNewButton>
-					<NavLink to={`/courses/${id}/add-new-lesson`}>
-						{__('Add New Content', 'masteriyo')}
-					</NavLink>
-				</AddNewButton>
+				<Dropdown
+					content={
+						<DropdownOverlay>
+							<ul className="mto-w-36 mto-text-gray-700 mto-m-4 ">
+								<li className="mto-flex mto-items-center mto-text-sm mto-mb-4 hover:mto-text-primary mto-cursor-pointer">
+									<NavLink
+										className="mto-flex mto-items-center"
+										to={`/courses/${id}/add-new-lesson`}>
+										<Icon className="mto-mr-1" icon={<BiAlignLeft />} />
+										{__('Lesson', 'masteriyo')}
+									</NavLink>
+								</li>
+								<li className="mto-flex mto-items-center mto-text-sm hover:mto-text-primary mto-cursor-pointer">
+									<NavLink
+										className="mto-flex mto-items-center"
+										to={`/courses/${id}/add-new-quiz`}>
+										<Icon className="mto-mr-1" icon={<BiTimer />} />
+										{__('Quiz', 'masteriyo')}
+									</NavLink>
+								</li>
+							</ul>
+						</DropdownOverlay>
+					}>
+					<AddNewButton>{__('Add New Content', 'masteriyo')}</AddNewButton>
+				</Dropdown>
 			</div>
 		</div>
 	);

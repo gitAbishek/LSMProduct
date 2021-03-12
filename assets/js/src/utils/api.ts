@@ -108,6 +108,7 @@ export const fetchLesson = (lessonId: number) => {
 		.get(urls.lesson.replace(':id', lessonId.toString()))
 		.then((response) => response.data);
 };
+
 export const addLesson = (data: any) => {
 	return axios.post(urls.lessons, data).then((response) => response.data);
 };
@@ -122,6 +123,10 @@ export const deleteLesson = (id: number) => {
 	return axios
 		.delete(urls.lesson.replace(':id', id.toString()))
 		.then((response) => response.data);
+};
+
+export const addQuiz = (data: any) => {
+	return axios.post(urls.quizes, data).then((response) => response.data);
 };
 
 export const deleteQuiz = (id: number) => {

@@ -72,19 +72,6 @@ const AddNewLesson: React.FC = () => {
 						<h1 className="mto-text-xl mto-m-0 mto-font-medium">
 							{__('Add New Lesson', 'masteriyo')}
 						</h1>
-						<div>
-							<Dropdown
-								align="end"
-								content={
-									<DropdownOverlay>
-										<ul>
-											<li>{__('Delete', 'masteriyo')}</li>
-										</ul>
-									</DropdownOverlay>
-								}>
-								<OptionButton />
-							</Dropdown>
-						</div>
 					</div>
 					<div>
 						<form onSubmit={handleSubmit(onSubmit)}>

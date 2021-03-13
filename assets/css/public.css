@@ -5,6 +5,12 @@
 
 /* Login */
 @layer components {
+    /* General */
+    .hover-effect{
+        @apply   mto-transition mto-duration-300 mto-ease-in-out
+        mto-transform-gpu hover:mto--translate-y-0.5;   
+       }
+    /* Login */
     .mto-login-wrapper{
         @apply
         mto-w-4/5 md:mto-w-3/5 lg:mto-w-1/2
@@ -44,6 +50,9 @@
         mto-py-2 mto-px-4 mto-rounded-full 
         mto-text-textColor mto-bg-white;
     }
+    .course-author-detail p{
+        @apply mto-text-white;
+    }
     .course-card{
         @apply mto-m-4 mto-flex-grow;
     }
@@ -55,14 +64,8 @@
     .course-overlay{
         @apply  mto-absolute mto-inset-0 mto-z-50 mto-flex-col mto-justify-between mto-bg-primary;
     }
-    .hide-overlay{
-        @apply mto-hidden;
-    }
-    .show-overlay:hover + .hide-overlay{
-        @apply mto-block mto-transform mto-transition-all mto-delay-300 mto-ease-in-out;
-    }
     .course-time-share{
-        @apply  mto-flex mto-flex-col md:mto-flex-row mto-justify-between md:mto-items-center mto-mt-3;
+        @apply mto-flex mto-flex-col md:mto-flex-row mto-justify-between md:mto-items-center mto-mt-3;
     }
     .btn{
         @apply

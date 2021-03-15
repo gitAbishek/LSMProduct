@@ -33,9 +33,6 @@ class QuizQuery extends ObjectQuery {
 				'date_created'        => null,
 				'date_modified'       => null,
 				'status'              => array( 'draft', 'pending', 'private', 'publish' ),
-				'menu_order'          => '',
-				'description'         => '',
-				'short_description'   => '',
 				'parent_id'           => '',
 				'course_id'           => '',
 			)

@@ -371,11 +371,6 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			$wp_query_args['no_found_rows'] = true;
 		}
 
-		// Handle reviews_allowed.
-		if ( isset( $query_vars['reviews_allowed'] ) && is_bool( $query_vars['reviews_allowed'] ) ) {
-			add_filter( 'posts_where', array( $this, 'reviews_allowed_query_where' ), 10, 2 );
-		}
-
 		// Handle orderby.
 		if ( isset( $query_vars['orderby'] ) && 'include' === $query_vars['orderby'] ) {
 			$wp_query_args['orderby'] = 'post__in';

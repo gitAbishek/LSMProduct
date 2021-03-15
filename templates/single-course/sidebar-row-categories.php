@@ -7,9 +7,13 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
+$categories = $GLOBALS['course']->get_categories();
+
+if ( empty( $categories ) ) return;
+
 echo '<div class="mto-py-4 mto-border-b mto-border-gray-200">';
 
-foreach ( $GLOBALS['course']->get_categories() as $index => $cat ) {
+foreach ( $categories as $index => $cat ) {
 	if ( ($index + 1) % 2 === 1 ) {
 		// Red badge.
 		printf(

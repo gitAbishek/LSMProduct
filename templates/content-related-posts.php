@@ -9,17 +9,6 @@ defined( 'ABSPATH' ) || exit;
 
 $related_courses = masteriyo_get_related_courses( $GLOBALS['course'] );
 
-$render_first_course_category = function( $course ) {
-	$red_badge = '<a href="%s" class="mto-inline-block md:mto-block lg:mto-inline-block mto-bg-secondary mto-rounded-full mto-mb-3 lg:mto-mb-0 mto-px-4 mto-py-1 mto-text-xs mto-uppercase mto-font-medium mto-text-white mto-ml-2">%s</a>';
-
-	if ( count( $course->get_category_ids() ) > 0 ) {
-		$cat = masteriyo_get_course_cat( $course->get_category_ids()[0] );
-		$term_link = get_term_link( $cat->get_id(), $cat->get_taxonomy() );
-
-		printf( $red_badge, $term_link, $cat->get_name() );
-	}
-};
-
 do_action( 'masteriyo_before_related_posts_content' );
 
 ?>
@@ -55,7 +44,17 @@ do_action( 'masteriyo_before_related_posts_content' );
 							?>
 						</span>
 
-						<?php $render_first_course_category( $course ); ?>
+						<?php
+						if ( count( $course->get_category_ids() ) > 0 ) {
+							$cat = masteriyo_get_course_cat( $course->get_category_ids()[0] );
+
+							printf(
+								'<a href="%s" class="mto-inline-block md:mto-block lg:mto-inline-block mto-bg-secondary mto-rounded-full mto-mb-3 lg:mto-mb-0 mto-px-4 mto-py-1 mto-text-xs mto-uppercase mto-font-medium mto-text-white mto-ml-2">%s</a>',
+								$cat->get_permalink(),
+								$cat->get_name()
+							);
+						}
+						?>
 					</div>
 
 					<h2 class="mto-font-bold mto-text-white mto-text-base mto-capitalize mb-2"><?php echo $course->get_name(); ?></h2>
@@ -79,7 +78,9 @@ do_action( 'masteriyo_before_related_posts_content' );
 							<path d="M13 7h-2v6h6v-2h-4z"/>
 						</svg>
 
-						<time class="mto-inline-block mto-text-sm mto-text-white">10 hrs</time>
+						<time class="mto-inline-block mto-text-sm mto-text-white">
+							<?php echo masteriyo_get_lecture_hours( $course, '%H%h %M%m' ) ?>
+						</time>
 					</div>
 
 
@@ -130,7 +131,17 @@ do_action( 'masteriyo_before_related_posts_content' );
 						?>
 					</span>
 
-					<?php $render_first_course_category( $course ); ?>
+					<?php
+					if ( count( $course->get_category_ids() ) > 0 ) {
+						$cat = masteriyo_get_course_cat( $course->get_category_ids()[0] );
+
+						printf(
+							'<a href="%s" class="mto-inline-block md:mto-block lg:mto-inline-block mto-bg-secondary mto-rounded-full mto-mb-3 lg:mto-mb-0 mto-px-4 mto-py-1 mto-text-xs mto-uppercase mto-font-medium mto-text-white mto-ml-2">%s</a>',
+							$cat->get_permalink(),
+							$cat->get_name()
+						);
+					}
+					?>
 				</div>
 				<h2 class="mto-font-bold mto-text-base mto-capitalize mb-2"><?php echo $course->get_name(); ?></h2>
 				<div class="course-time-share mto-mt-4">
@@ -140,7 +151,9 @@ do_action( 'masteriyo_before_related_posts_content' );
 							<path d="M13 7h-2v6h6v-2h-4z"/>
 						</svg>
 
-						<time class="group-hover:mto-text-white mto-inline-block mto-text-sm">10:00 min</time>
+						<time class="group-hover:mto-text-white mto-inline-block mto-text-sm">
+							<?php echo masteriyo_get_lecture_hours( $course, '%H%h %M%m' ) ?>
+						</time>
 					</div>
 					<div class="btn">
 						<a href="#" class="hover:mto-bg-primary-700 mto-transition mto-delay-150 mto-duration-300 mto-ease-in-out focus:mto-outline-none">Enroll Now</a>

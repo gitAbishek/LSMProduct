@@ -9,6 +9,8 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 global $course_difficulties;
 
+if ( empty( $course_difficulties ) ) return;
+
 ?>
 
 <div class="mto-py-4 mto-border-b mto-border-gray-200">

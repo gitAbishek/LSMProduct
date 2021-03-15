@@ -7,39 +7,7 @@
 
 defined('ABSPATH') || exit; // Exit if accessed directly.
 
-global $course;
-
-$sections = masteriyo_get_sections(array(
-	'order' => 'asc',
-	'order_by' => 'menu_order',
-	'parent_id' => $course->get_id(),
-));
-$lessons = masteriyo_get_lessons(array(
-	'order' => 'asc',
-	'order_by' => 'menu_order',
-	'course_id' => $course->get_id(),
-));
-
-$lessons_dictionary = array();
-
-foreach ( $lessons as $lesson ) {
-	$section_id = $lesson->get_parent_id();
-
-	if ( ! isset( $lessons_dictionary[ $section_id ] ) ) {
-		$lessons_dictionary[ $section_id ] = array();
-	}
-
-	$lessons_dictionary[ $section_id ][] = $lesson;
-}
-
-$get_lessons = function ( $section ) use( $lessons_dictionary ) {
-	$section_id = $section->get_id();
-
-	if ( isset( $lessons_dictionary[ $section_id ] ) ) {
-		return $lessons_dictionary[ $section_id ];
-	}
-	return array();
-};
+[$sections, $lessons, $dictionary] = mto_make_section_to_lessons_dictionary( $GLOBALS['course'] );
 
 /**
  * masteriyo_before_single_course_curriculum_content hook.
@@ -52,10 +20,10 @@ do_action('masteriyo_before_single_course_curriculum_content');
 	<div class="curr-details mto-flex mto-justify-between">
 		<ul class="mto-flex mto-flex-row mto-list-disc mto-space-x-8 mto-mb-8">
 			<li class="mto-list-none"><?php echo count( $sections ); ?> section(s)</li>
-			<li>200 Lectures</li>
-			<li> 20h 12m total length</li>
+			<li><?php echo count( $lessons ) ?> Lecture(s)</li>
+			<li><?php echo masteriyo_get_lecture_hours( $GLOBALS['course'] ) ?> total length</li>
 		</ul>
-		<span class="curr-expand-collape-all mto-cursor-pointer mto-text-primary mto-text-sm  mto-font-bold mto-uppercase">Expand all lessions</span>
+		<span id="mto-expand-collape-all" class="curr-expand-collape-all mto-cursor-pointer mto-text-primary mto-text-sm  mto-font-bold mto-uppercase">Expand all lessons</span>
 	</div>
 
 	<?php foreach ( $sections as $section ) { ?>
@@ -64,8 +32,8 @@ do_action('masteriyo_before_single_course_curriculum_content');
 				<div class="mto-flex mto-justify-between">
 					<h3 class="mto-font-semibold mto-text-base"><?php echo $section->get_name(); ?></h3>
 					<div class="mto-flex mto-items-center mto-space-x-3">
-						<span><?php echo count( $get_lessons( $section ) ); ?> lessions</span>
-						<span>20min</span>
+						<span><?php echo count( $dictionary[$section->get_id()] ); ?> lessons</span>
+						<span><?php echo masteriyo_get_lecture_hours_of_section( $section ) ?></span>
 						<span class="expand-accordion mto-block">
 							<svg class="mto-w-6 mto-h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 								<path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z" />
@@ -83,7 +51,7 @@ do_action('masteriyo_before_single_course_curriculum_content');
 			<div class="curr-accordion-item-body">
 				<div class="curr-accordion-item-body-content">
 					<ol class="mto-rounded-b mto-list-decimal">
-						<?php foreach ( $get_lessons( $section ) as $lesson ) { ?>
+						<?php foreach ( $dictionary[$section->get_id()] as $lesson ) { ?>
 							<li>
 								<div class="mto-flex mto-justify-between mto-items-center mto-border mto-border-t-0 mto-border-gray-300 mto-p-4">
 									<div><a href="#"><?php echo $lesson->get_name(); ?></a></div>
@@ -93,7 +61,9 @@ do_action('masteriyo_before_single_course_curriculum_content');
 												<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z" />
 												<path d="M13 7h-2v6h6v-2h-4z" />
 											</svg>
-											<time class="mto-inline-block">10 hours</time>
+											<time class="mto-inline-block">
+												<?php echo masteriyo_minutes_to_time_length_string( $lesson->get_video_playback_time() ); ?>
+											</time>
 										</span>
 										<a href="#" class="btn">preview</a>
 									</div>

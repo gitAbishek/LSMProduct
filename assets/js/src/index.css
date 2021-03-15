@@ -1,7 +1,34 @@
 #masteriyo {
 	margin-left: -20px;
 
+	.mto-nav-link.active {
+		@apply mto-border-b-2 mto-border-solid mto-border-primary mto-text-primary;
+	}
+
+	.mto-icon svg {
+		width: 1em;
+		height: 1em;
+		fill: currentColor;
+	}
+
 	.rc-tabs {
-		border: none;
+		@apply mto-border-none;
+
+		.rc-tabs-ink-bar {
+			@apply mto-bg-primary;
+			height: 2px;
+		}
+
+		.rc-tabs-nav-wrap {
+			@apply mto-justify-center mto-border-b mto-border-gray-100;
+		}
+
+		.rc-tabs-tab {
+			@apply mto-font-medium mto-text-base mto-py-4 mto-px-6;
+
+			&-active {
+				@apply mto-font-medium;
+			}
+		}
 	}
 }

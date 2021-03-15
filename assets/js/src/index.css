@@ -20,14 +20,14 @@
 		}
 
 		.rc-tabs-nav-wrap {
-			@apply mto-justify-center mto-border-b mto-border-gray-100;
+			@apply mto-justify-center mto-border-b mto-border-gray-100 mto-mb-10;
 		}
 
 		.rc-tabs-tab {
-			@apply mto-font-medium mto-text-base mto-py-4 mto-px-6;
+			@apply mto-font-medium mto-text-base mto-py-4 mto-px-6 mto-transition-colors;
 
 			&-active {
-				@apply mto-font-medium;
+				@apply mto-font-medium mto-text-primary;
 			}
 		}
 	}

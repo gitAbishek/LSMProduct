@@ -65,6 +65,7 @@ const Section: React.FC<Props> = (props) => {
 				autoDismiss: true,
 			});
 			queryClient.invalidateQueries('builderSections');
+			setSectionEditing(false);
 		},
 	});
 
@@ -81,7 +82,7 @@ const Section: React.FC<Props> = (props) => {
 			<header className="mto-flex mto-justify-between mto-items-center mto-mb-4">
 				<div className="mto-flex mto-items-center">
 					<DragHandle />
-					<h1>{name}</h1>
+					<h1 className="mto-text-lg">{name}</h1>
 				</div>
 				<div className="mto-flex">
 					<Dropdown
@@ -131,12 +132,10 @@ const Section: React.FC<Props> = (props) => {
 						</FormGroup>
 						<div className="mto-mt-9 mto-pt-8 mto-border-t mto-border-solid mto-border-gray-300">
 							<div className="mto-flex">
-								<Button layout="primary" type="submit">
+								<Button layout="primary" type="submit" className="mto-mr-4">
 									{__('Save', 'masteriyo')}
 								</Button>
-								<Button
-									className="mto-mr-4"
-									onClick={() => setSectionEditing(false)}>
+								<Button onClick={() => setSectionEditing(false)}>
 									{__('Cancel', 'masteriyo')}
 								</Button>
 							</div>

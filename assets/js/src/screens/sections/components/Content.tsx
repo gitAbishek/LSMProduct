@@ -61,7 +61,7 @@ const Content: React.FC<Props> = (props) => {
 						className="mto-text-lg mto-mr-4"
 						icon={type === 'lesson' ? <AlignLeft /> : <Timer />}
 					/>
-					<h5>{name}</h5>
+					<h5 className="mto-text-base">{name}</h5>
 				</div>
 				<div className="mto-flex">
 					<div className="mto-flex">

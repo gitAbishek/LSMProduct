@@ -149,10 +149,12 @@ const AddNewLesson: React.FC = () => {
 							</FormGroup>
 							<div>
 								<div className="mto-flex">
-									<Button layout="primary" style={{ marginRight: 16 }}>
+									<Button layout="primary" className="mto-mr-4" type="submit">
 										{__('Add New Lesson', 'masteriyo')}
 									</Button>
-									<Button>{__('Cancel', 'masteriyo')}</Button>
+									<Button onClick={() => push(`/builder/${courseId}`)}>
+										{__('Cancel', 'masteriyo')}
+									</Button>
 								</div>
 							</div>
 						</form>

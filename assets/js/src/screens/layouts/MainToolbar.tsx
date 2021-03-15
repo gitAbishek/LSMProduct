@@ -16,7 +16,7 @@ const MainToolbar = () => {
 						<img src={LogoImg} alt="Masteriyo Logo" />
 					</div>
 					<ul className="mto-flex mto-ml-10">
-						<li>
+						<li className="mto-mb-0 mto-text-base">
 							<NavLink
 								to="/courses"
 								className="mto-flex mto-items-center mto-ml-12 mto-py-7 mto-font-medium mto-nav-link">
@@ -24,7 +24,7 @@ const MainToolbar = () => {
 								{__('Courses', 'masteriyo')}
 							</NavLink>
 						</li>
-						<li>
+						<li className="mto-mb-0 mto-text-base">
 							<NavLink
 								to="/builder"
 								className="mto-flex mto-items-center mto-ml-12 mto-py-7 mto-font-medium mto-nav-link">
@@ -32,7 +32,7 @@ const MainToolbar = () => {
 								{__('Course Builder', 'masteriyo')}
 							</NavLink>
 						</li>
-						<li>
+						<li className="mto-mb-0 mto-text-base">
 							<NavLink
 								to="/settings"
 								className="mto-flex mto-items-center mto-ml-12 mto-py-7 mto-font-medium mto-nav-link">

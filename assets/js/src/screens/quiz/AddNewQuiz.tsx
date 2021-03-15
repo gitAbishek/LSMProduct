@@ -217,13 +217,12 @@ const AddNewQuiz: React.FC = () => {
 								)}
 							</div>
 							<footer className="mto-pt-8 mto-flex mto-border-t mto-border-gray-100 mto-mt-12">
-								<Button
-									layout="primary"
-									style={{ marginRight: 16 }}
-									type="submit">
+								<Button layout="primary" className="mto-mr-4" type="submit">
 									{__('Add', 'masteriyo')}
 								</Button>
-								<Button>{__('Cancel', 'masteriyo')}</Button>
+								<Button onClick={() => push(`/builder/${courseId}`)}>
+									{__('Cancel', 'masteriyo')}
+								</Button>
 							</footer>
 						</form>
 					</div>

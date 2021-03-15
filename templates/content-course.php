@@ -25,7 +25,9 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 ?>
 <div class="course-card md:flex-grow mto-min-h-429">
 	<div class="mto-group course-image mto-relative mto-overflow-hidden">
-		<span class="price-tag"><?php echo $course->get_price(); ?>$69</span>
+		<span class="price-tag">
+			<?php echo masteriyo_price( $course->get_price() ); ?>
+		</span>
 		<img class="mto-absoulte mto-w-full mto-h-full mto-object-cover" src="https://via.placeholder.com/150" alt="You are your only limit">
 		<!-- Hidden Card -->
 		<div class="mto-hidden group-hover:mto-block course-overlay">

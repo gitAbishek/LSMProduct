@@ -3,12 +3,12 @@ function selectTab(tabIndex) {
     //Hide All Tabs
     for(countTab=1;countTab<=4;countTab++){
         document.getElementById('tab'+ countTab+'Content').style.display="none";
-        document.getElementById('tab' + countTab).classList.remove("active-tab");  
+        document.getElementById('tab' + countTab).classList.remove("active-tab");
     }
 
     //Show the Selected Tab
     document.getElementById('tab' + tabIndex + 'Content').style.display="block";
-    document.getElementById('tab' + tabIndex).classList.add("active-tab");  
+    document.getElementById('tab' + tabIndex).classList.add("active-tab");
 }
 
 // FAQ Accordion
@@ -38,17 +38,31 @@ accordionFaqHeaders.forEach(accordionFaqHeader => {
 
 // Curriculum Accordion
 const accordionCurrHeaders = document.querySelectorAll(".curr-accordion-item-header");
+const toggle_accordion_item = function( accordionCurrHeader ) {
+	accordionCurrHeader.classList.toggle("active");
+	const accordionCurrBody = accordionCurrHeader.nextElementSibling;
+	if(accordionCurrHeader.classList.contains("active")) {
+		accordionCurrBody.style.maxHeight = accordionCurrBody.scrollHeight + "px";
+	}
+	else {
+		accordionCurrBody.style.maxHeight = 0;
+	}
+}
 
 accordionCurrHeaders.forEach(accordionCurrHeader => {
-    accordionCurrHeader.addEventListener("click", event => {
-
-        accordionCurrHeader.classList.toggle("active");
-        const accordionCurrBody = accordionCurrHeader.nextElementSibling;
-        if(accordionCurrHeader.classList.contains("active")) {
-            accordionCurrBody.style.maxHeight = accordionCurrBody.scrollHeight + "px";
-        }
-        else {
-            accordionCurrBody.style.maxHeight = 0;
-        }
+    accordionCurrHeader.addEventListener("click", () => {
+		toggle_accordion_item( accordionCurrHeader );
     });
+});
+
+let isExpanded = false;
+
+document.getElementById( 'mto-expand-collape-all' ).addEventListener( 'click', (e) => {
+	isExpanded = ! isExpanded;
+
+	accordionCurrHeaders.forEach(accordionCurrHeader => {
+		toggle_accordion_item( accordionCurrHeader );
+	});
+
+	e.currentTarget.innerText = isExpanded ? 'Collapse All Lessons' : 'Expand All Lessons';
 });

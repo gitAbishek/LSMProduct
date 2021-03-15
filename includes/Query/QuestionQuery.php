@@ -34,16 +34,12 @@ class QuestionQuery extends ObjectQuery {
 				'date_modified'     => null,
 				'status'            => array( 'draft', 'pending', 'private', 'publish' ),
 				'menu_order'        => '',
-				'description'       => '',
-				'short_description' => '',
 				'parent_id'         => '',
 				'course_id'         => '',
 				'type'              => '',
 				'answer_required'   => '',
 				'randomize'         => '',
 				'points'            => '',
-				'positive_feedback' => '',
-				'negative_feedback' => '',
 			)
 		);
 	}

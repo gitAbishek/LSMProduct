@@ -98,6 +98,39 @@ class Course extends Model {
 		$this->repository = $course_repository;
 	}
 
+	/**
+	 * Get featured image URL.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_featured_image_url() {
+		return wp_get_attachment_url( $this->get_featured_image() );
+	}
+
+	/**
+	 * Get category list (CourseCategory objects).
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array[CourseCategory]
+	 */
+	public function get_categories() {
+		$cat_ids = $this->get_category_ids();
+		$categories = array();
+		$store = masteriyo( 'course_cat.store' );
+
+		foreach( $cat_ids as $cat_id ) {
+			$cat_obj = masteriyo( 'course_cat' );
+			$cat_obj->set_id( $cat_id );
+			$store->read( $cat_obj );
+			$categories[] = apply_filters( 'masteriyo_get_course_cat', $cat_obj, $cat_id );
+		}
+
+		return $categories;
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Non-CRUD Getters
@@ -369,7 +402,7 @@ class Course extends Model {
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string price
+	 * @return array[integer] Category IDs.
 	 */
 	public function get_category_ids( $context = 'view' ) {
 		return $this->get_prop( 'category_ids', $context );

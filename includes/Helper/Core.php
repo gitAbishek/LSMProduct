@@ -654,6 +654,8 @@ function masteriyo_get_page_id( $page ) {
 /**
  * Retrieve page permalink.
  *
+ * @since 0.1.0
+ *
  * @param string      $page page slug.
  * @param string|bool $fallback Fallback URL if page is not set. Defaults to home URL.
  *
@@ -699,28 +701,26 @@ function mto_img_url( $file ) {
 /**
  * Put course data into a global.
  *
+ * @since 0.1.0
+ *
  * @param int|Course|WP_Post $course_id Course id or Course object or course wp post.
  *
  * @return Course
  */
-function masteriyo_setup_course_data( $course_id = null ) {
+function masteriyo_setup_course_data( $course_id ) {
 	$course = masteriyo_get_course( $course_id );
-	$cats = array_map( 'masteriyo_get_course_cat', $course->get_category_ids() );
-	$tags = array_map( 'masteriyo_get_course_tag', $course->get_tag_ids() );
 	$difficulties = array_map( 'masteriyo_get_course_difficulty', $course->get_difficulty_ids() );
-	$course_featured_image_url = wp_get_attachment_url( $course->get_featured_image() );
 
 	$GLOBALS['course'] = $course;
-	$GLOBALS['course_categories'] = $cats;
-	$GLOBALS['course_tags'] = $tags;
 	$GLOBALS['course_difficulties'] = $difficulties;
-	$GLOBALS['course_featured_image_url'] = $course_featured_image_url;
 
-	return $GLOBALS['course'];
+	return $course;
 }
 
 /**
  * Render stars based on rating.
+ *
+ * @since 0.1.0
  *
  * @param int|float $rating Given rating.
  * @param int $out_of Max allowed rating.
@@ -755,6 +755,8 @@ function masteriyo_render_stars( $rating, $out_of, $full_star, $half_star, $no_s
 /**
  * Get related courses.
  *
+ * @since 0.1.0
+ *
  * @param Course $course
  *
  * @return array[Course]
@@ -767,11 +769,8 @@ function masteriyo_get_related_courses( $course ) {
 	masteriyo( 'setting.store' )->read( $setting );
 
 	$max_related_posts = apply_filters( 'masteriyo_max_related_posts_count', $setting->get_value() );
-
-	if ( empty( $max_related_posts ) || ! is_numeric( $max_related_posts ) ) {
-		$max_related_posts = 5;
-	}
 	$max_related_posts = absint( $max_related_posts );
+	$max_related_posts = max( $max_related_posts, 5 );
 
 	/**
 	 * Ref: https://www.wpbeginner.com/wp-tutorials/how-to-display-related-posts-in-wordpress/
@@ -789,6 +788,138 @@ function masteriyo_get_related_courses( $course ) {
 		'post_type' => 'course',
 	);
 	$query = new WP_Query($args);
+	$related_courses = array_map( 'masteriyo_get_course', $query->posts );
 
-	return array_map( 'masteriyo_get_course', $query->posts );
+	return apply_filters( 'masteriyo_get_related_courses', $related_courses, $query );
+}
+
+/**
+ * Get lessons count for a course.
+ *
+ * @since 0.1.0
+ *
+ * @param int|Course|WP_Post $course
+ *
+ * @return integer
+ */
+function masteriyo_get_lessons_count( $course ) {
+	$lessons = masteriyo_get_lessons(array(
+		'course_id' => masteriyo_get_course( $course )->get_id(),
+	));
+
+	return count( $lessons );
+}
+
+/**
+ * Convert minutes to time length string to display on screen.
+ *
+ * @since 0.1.0
+ *
+ * @param int $minutes Total length in minutes.
+ * @param string $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
+ *
+ * @return string
+ */
+function masteriyo_minutes_to_time_length_string( $minutes, $format = null ) {
+	$minutes = absint( $minutes );
+	$hours = absint( $minutes / 60 );
+	$mins = $minutes - $hours * 60;
+	$str = '';
+
+	if ( is_string( $format ) ) {
+		$str = str_replace( '%H%', $hours, $format );
+		$str = str_replace( '%M%', $mins, $str );
+	} else {
+		$str .= $hours > 0 ? sprintf( '%d %s ', $hours, __( 'hours', 'masteriyo' ) ) : '';
+		$str .= $mins > 0 ? sprintf( ' %d %s', $mins, __( 'mins', 'masteriyo' ) ) : '';
+		$str = $minutes > 0 ? $str : __( '0 mins', 'masteriyo' );
+	}
+
+	return $str;
+}
+
+/**
+ * Get lecture hours for a course as string to display on screen.
+ *
+ * @since 0.1.0
+ *
+ * @param int|Course|WP_Post $course
+ * @param string $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
+ *
+ * @return string
+ */
+function masteriyo_get_lecture_hours( $course, $format = null ) {
+	$lessons = masteriyo_get_lessons(array(
+		'course_id' => masteriyo_get_course( $course )->get_id(),
+	));
+	$mins = 0;
+
+	foreach ( $lessons as $lesson ) {
+		$mins += $lesson->get_video_playback_time();
+	}
+
+	return masteriyo_minutes_to_time_length_string( $mins, $format );
+}
+
+/**
+ * Get lecture hours for a section as string to display on screen.
+ *
+ * @since 0.1.0
+ *
+ * @param int|Section|WP_Post $course
+ * @param string $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
+ *
+ * @return string
+ */
+function masteriyo_get_lecture_hours_of_section( $section, $format = null ) {
+	$lessons = masteriyo_get_lessons(array(
+		'parent_id' => masteriyo_get_section( $section )->get_id(),
+	));
+	$mins = 0;
+
+	foreach ( $lessons as $lesson ) {
+		$mins += $lesson->get_video_playback_time();
+	}
+
+	return masteriyo_minutes_to_time_length_string( $mins, $format );
+}
+
+/**
+ * Make a dictionary with section id as key and its lessons as value from a course.
+ *
+ * @since 0.1.0
+ *
+ * @param int|Course|WP_Post $course
+ *
+ * @return array
+ */
+function mto_make_section_to_lessons_dictionary( $course ) {
+	$course = masteriyo_get_course( $course );
+	$sections = masteriyo_get_sections(array(
+		'order' => 'asc',
+		'order_by' => 'menu_order',
+		'parent_id' => $course->get_id(),
+	));
+	$lessons = masteriyo_get_lessons(array(
+		'order' => 'asc',
+		'order_by' => 'menu_order',
+		'course_id' => $course->get_id(),
+	));
+	$lessons_dictionary = array();
+
+	foreach ( $lessons as $lesson ) {
+		$section_id = $lesson->get_parent_id();
+
+		if ( ! isset( $lessons_dictionary[ $section_id ] ) ) {
+			$lessons_dictionary[ $section_id ] = array();
+		}
+
+		$lessons_dictionary[ $section_id ][] = $lesson;
+	}
+	foreach( $sections as $section ) {
+		if ( ! isset( $lessons_dictionary[ $section->get_id() ] ) ) {
+			$lessons_dictionary[ $section->get_id() ] = array();
+		}
+	}
+	return array( $sections, $lessons, $lessons_dictionary );
 }

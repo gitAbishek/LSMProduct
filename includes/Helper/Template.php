@@ -265,3 +265,21 @@ function masteriyo_setup_course_data( $post ) {
 	return $GLOBALS['course'];
 }
 function_exists( 'add_action') && add_action( 'the_post', 'masteriyo_setup_course_data' );
+
+/**
+ * Add class to the body tag.
+ *
+ * @since 0.1.0
+ *
+ * @param string[] $classes An array of body class names.
+ * @param string[] $class   An array of additional class names added to the body.
+ * @return string[]
+ */
+function masteriyo_add_body_class( $classes, $class ) {
+	if ( masteriyo_is_archive_course_page() ) {
+		$classes[] = 'masteriyo-courses-list-page';
+	}
+
+	return $classes;
+}
+function_exists( 'add_filter' ) && add_filter( 'body_class', 'masteriyo_add_body_class', 10, 2 );

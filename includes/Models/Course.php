@@ -777,7 +777,7 @@ class Course extends Model {
 	 * @param float $average Course average rating.
 	 */
 	public function set_average_rating( $average ) {
-		$this->set_prop( 'average_rating', Format::decimal( $average ) );
+		$this->set_prop( 'average_rating', masteriyo_format_decimal( $average ) );
 	}
 
 	/**

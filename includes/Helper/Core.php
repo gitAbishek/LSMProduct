@@ -526,160 +526,6 @@ function masteriyo_locate_template( $template_name, $template_path = '', $defaul
 }
 
 /**
- * Converts a string (e.g. 'yes' or 'no') to a bool.
- *
- * @since 0.1.0
- * @param string|bool $string String to convert. If a bool is passed it will be returned as-is.
- * @return bool
- */
-function masteriyo_string_to_bool( $string ) {
-	if ( is_bool( $string ) ) {
-		return $string;
-	}
-
-	$string = strtolower( $string );
-
-	return ( 'yes' === $string || 1 === $string || 'true' === $string || '1' === $string );
-}
-
-/**
- * Converts a bool to a 'yes' or 'no'.
- *
- * @since 0.1.0
- * @param bool|string $bool Bool to convert. If a string is passed it will first be converted to a bool.
- * @return string
- */
-function masteriyo_bool_to_string( $bool ) {
-	if ( ! is_bool( $bool ) ) {
-		$bool = masteriyo_string_to_bool( $bool );
-	}
-	return true === $bool ? 'yes' : 'no';
-}
-
-/**
- * Convert a date string to a DateTime.
- *
- * @since  0.1.0
- * @param  string $time_string Time string.
- * @return ThemeGrill\Masteriyo\DateTime
- */
-function masteriyo_string_to_datetime( $time_string ) {
-	// Strings are defined in local WP timezone. Convert to UTC.
-	if ( 1 === preg_match( '/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(Z|((-|\+)\d{2}:\d{2}))$/', $time_string, $date_bits ) ) {
-		$offset    = ! empty( $date_bits[7] ) ? iso8601_timezone_to_offset( $date_bits[7] ) : masteriyo_timezone_offset();
-		$timestamp = gmmktime( $date_bits[4], $date_bits[5], $date_bits[6], $date_bits[2], $date_bits[3], $date_bits[1] ) - $offset;
-	} else {
-		$timestamp = masteriyo_string_to_timestamp( get_gmt_from_date( gmdate( 'Y-m-d H:i:s', masteriyo_string_to_timestamp( $time_string ) ) ) );
-	}
-	$datetime = new DateTime( "@{$timestamp}", new DateTimeZone( 'UTC' ) );
-
-	// Set local timezone or offset.
-	if ( get_option( 'timezone_string' ) ) {
-		$datetime->setTimezone( new DateTimeZone( masteriyo_timezone_string() ) );
-	} else {
-		$datetime->set_utc_offset( masteriyo_timezone_offset() );
-	}
-
-	return $datetime;
-}
-
-/**
- * Get timezone offset in seconds.
- *
- * @since  0.1.0
- * @return float
- */
-function masteriyo_timezone_offset() {
-	$timezone = get_option( 'timezone_string' );
-
-	if ( $timezone ) {
-		$timezone_object = new DateTimeZone( $timezone );
-		return $timezone_object->getOffset( new DateTime( 'now' ) );
-	} else {
-		return floatval( get_option( 'gmt_offset', 0 ) ) * HOUR_IN_SECONDS;
-	}
-}
-
-/**
- * Convert mysql datetime to PHP timestamp, forcing UTC. Wrapper for strtotime.
- *
- * Based on masteriyos_strtotime_dark_knight() from MASTERIYO Subscriptions by Prospress.
- *
- * @since  0.1.0
- * @param  string   $time_string    Time string.
- * @param  int|null $from_timestamp Timestamp to convert from.
- * @return int
- */
-function masteriyo_string_to_timestamp( $time_string, $from_timestamp = null ) {
-	$original_timezone = date_default_timezone_get();
-
-	// @codingStandardsIgnoreStart
-	date_default_timezone_set( 'UTC' );
-
-	if ( null === $from_timestamp ) {
-		$next_timestamp = strtotime( $time_string );
-	} else {
-		$next_timestamp = strtotime( $time_string, $from_timestamp );
-	}
-
-	date_default_timezone_set( $original_timezone );
-	// @codingStandardsIgnoreEnd
-
-	return $next_timestamp;
-}
-
-
-/**
- * Masteriyo Timezone - helper to retrieve the timezone string for a site until.
- * a WP core method exists (see https://core.trac.wordpress.org/ticket/24730).
- *
- * Adapted from https://secure.php.net/manual/en/function.timezone-name-from-abbr.php#89155.
- *
- * @since 0.1.0
- * @return string PHP timezone string for the site
- */
-function masteriyo_timezone_string() {
-	// Added in WordPress 5.3 Ref https://developer.wordpress.org/reference/functions/wp_timezone_string/.
-	if ( function_exists( 'wp_timezone_string' ) ) {
-		return wp_timezone_string();
-	}
-
-	// If site timezone string exists, return it.
-	$timezone = get_option( 'timezone_string' );
-	if ( $timezone ) {
-		return $timezone;
-	}
-
-	// Get UTC offset, if it isn't set then return UTC.
-	$utc_offset = floatval( get_option( 'gmt_offset', 0 ) );
-	if ( ! is_numeric( $utc_offset ) || 0.0 === $utc_offset ) {
-		return 'UTC';
-	}
-
-	// Adjust UTC offset from hours to seconds.
-	$utc_offset = (int) ( $utc_offset * 3600 );
-
-	// Attempt to guess the timezone string from the UTC offset.
-	$timezone = timezone_name_from_abbr( '', $utc_offset );
-	if ( $timezone ) {
-		return $timezone;
-	}
-
-	// Last try, guess timezone string manually.
-	foreach ( timezone_abbreviations_list() as $abbr ) {
-		foreach ( $abbr as $city ) {
-			// WordPress restrict the use of date(), since it's affected by timezone settings, but in this case is just what we need to guess the correct timezone.
-			if ( (bool) date( 'I' ) === (bool) $city['dst'] && $city['timezone_id'] && intval( $city['offset'] ) === $utc_offset ) { // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
-				return $city['timezone_id'];
-			}
-		}
-	}
-
-	// Fallback to UTC.
-	return 'UTC';
-}
-
-/**
  * Retrieve page ids - used for pages like course list. returns -1 if no page is found.
  *
  * @since 0.1.0
@@ -1072,4 +918,402 @@ function masteriyo_clean( $var ) {
 	} else {
 		return is_scalar( $var ) ? sanitize_text_field( $var ) : $var;
 	}
+}
+
+/**
+ * Get Currency symbol.
+ *
+ * Currency symbols and names should follow the Unicode CLDR recommendation (http://cldr.unicode.org/translation/currency-names)
+ *
+ * @param string $currency Currency. (default: '').
+ * @return string
+ */
+function masteriyo_get_currency_symbol( $currency = '' ) {
+	if ( ! $currency ) {
+		$currency = masteriyo_get_currency();
+	}
+
+	$symbols = masteriyo_get_currency_symbols();
+
+	$currency_symbol = isset( $symbols[ $currency ] ) ? $symbols[ $currency ] : '';
+
+	return apply_filters( 'masteriyo_currency_symbol', $currency_symbol, $currency );
+}
+
+/**
+ * Get Base Currency Code.
+ *
+ * @return string
+ */
+function masteriyo_get_currency() {
+	return apply_filters( 'masteriyo_currency', get_option( 'masteriyo_currency', 'USD' ) );
+}
+
+/**
+ * Get all available Currency symbols.
+ *
+ * Currency symbols and names should follow the Unicode CLDR recommendation (http://cldr.unicode.org/translation/currency-names)
+ *
+ * @since 4.1.0
+ * @return array
+ */
+function masteriyo_get_currency_symbols() {
+
+	$symbols = apply_filters(
+		'masteriyo_currency_symbols',
+		array(
+			'AED' => '&#x62f;.&#x625;',
+			'AFN' => '&#x60b;',
+			'ALL' => 'L',
+			'AMD' => 'AMD',
+			'ANG' => '&fnof;',
+			'AOA' => 'Kz',
+			'ARS' => '&#36;',
+			'AUD' => '&#36;',
+			'AWG' => 'Afl.',
+			'AZN' => 'AZN',
+			'BAM' => 'KM',
+			'BBD' => '&#36;',
+			'BDT' => '&#2547;&nbsp;',
+			'BGN' => '&#1083;&#1074;.',
+			'BHD' => '.&#x62f;.&#x628;',
+			'BIF' => 'Fr',
+			'BMD' => '&#36;',
+			'BND' => '&#36;',
+			'BOB' => 'Bs.',
+			'BRL' => '&#82;&#36;',
+			'BSD' => '&#36;',
+			'BTC' => '&#3647;',
+			'BTN' => 'Nu.',
+			'BWP' => 'P',
+			'BYR' => 'Br',
+			'BYN' => 'Br',
+			'BZD' => '&#36;',
+			'CAD' => '&#36;',
+			'CDF' => 'Fr',
+			'CHF' => '&#67;&#72;&#70;',
+			'CLP' => '&#36;',
+			'CNY' => '&yen;',
+			'COP' => '&#36;',
+			'CRC' => '&#x20a1;',
+			'CUC' => '&#36;',
+			'CUP' => '&#36;',
+			'CVE' => '&#36;',
+			'CZK' => '&#75;&#269;',
+			'DJF' => 'Fr',
+			'DKK' => 'DKK',
+			'DOP' => 'RD&#36;',
+			'DZD' => '&#x62f;.&#x62c;',
+			'EGP' => 'EGP',
+			'ERN' => 'Nfk',
+			'ETB' => 'Br',
+			'EUR' => '&euro;',
+			'FJD' => '&#36;',
+			'FKP' => '&pound;',
+			'GBP' => '&pound;',
+			'GEL' => '&#x20be;',
+			'GGP' => '&pound;',
+			'GHS' => '&#x20b5;',
+			'GIP' => '&pound;',
+			'GMD' => 'D',
+			'GNF' => 'Fr',
+			'GTQ' => 'Q',
+			'GYD' => '&#36;',
+			'HKD' => '&#36;',
+			'HNL' => 'L',
+			'HRK' => 'kn',
+			'HTG' => 'G',
+			'HUF' => '&#70;&#116;',
+			'IDR' => 'Rp',
+			'ILS' => '&#8362;',
+			'IMP' => '&pound;',
+			'INR' => '&#8377;',
+			'IQD' => '&#x639;.&#x62f;',
+			'IRR' => '&#xfdfc;',
+			'IRT' => '&#x062A;&#x0648;&#x0645;&#x0627;&#x0646;',
+			'ISK' => 'kr.',
+			'JEP' => '&pound;',
+			'JMD' => '&#36;',
+			'JOD' => '&#x62f;.&#x627;',
+			'JPY' => '&yen;',
+			'KES' => 'KSh',
+			'KGS' => '&#x441;&#x43e;&#x43c;',
+			'KHR' => '&#x17db;',
+			'KMF' => 'Fr',
+			'KPW' => '&#x20a9;',
+			'KRW' => '&#8361;',
+			'KWD' => '&#x62f;.&#x643;',
+			'KYD' => '&#36;',
+			'KZT' => '&#8376;',
+			'LAK' => '&#8365;',
+			'LBP' => '&#x644;.&#x644;',
+			'LKR' => '&#xdbb;&#xdd4;',
+			'LRD' => '&#36;',
+			'LSL' => 'L',
+			'LYD' => '&#x644;.&#x62f;',
+			'MAD' => '&#x62f;.&#x645;.',
+			'MDL' => 'MDL',
+			'MGA' => 'Ar',
+			'MKD' => '&#x434;&#x435;&#x43d;',
+			'MMK' => 'Ks',
+			'MNT' => '&#x20ae;',
+			'MOP' => 'P',
+			'MRU' => 'UM',
+			'MUR' => '&#x20a8;',
+			'MVR' => '.&#x783;',
+			'MWK' => 'MK',
+			'MXN' => '&#36;',
+			'MYR' => '&#82;&#77;',
+			'MZN' => 'MT',
+			'NAD' => 'N&#36;',
+			'NGN' => '&#8358;',
+			'NIO' => 'C&#36;',
+			'NOK' => '&#107;&#114;',
+			'NPR' => '&#8360;',
+			'NZD' => '&#36;',
+			'OMR' => '&#x631;.&#x639;.',
+			'PAB' => 'B/.',
+			'PEN' => 'S/',
+			'PGK' => 'K',
+			'PHP' => '&#8369;',
+			'PKR' => '&#8360;',
+			'PLN' => '&#122;&#322;',
+			'PRB' => '&#x440;.',
+			'PYG' => '&#8370;',
+			'QAR' => '&#x631;.&#x642;',
+			'RMB' => '&yen;',
+			'RON' => 'lei',
+			'RSD' => '&#1088;&#1089;&#1076;',
+			'RUB' => '&#8381;',
+			'RWF' => 'Fr',
+			'SAR' => '&#x631;.&#x633;',
+			'SBD' => '&#36;',
+			'SCR' => '&#x20a8;',
+			'SDG' => '&#x62c;.&#x633;.',
+			'SEK' => '&#107;&#114;',
+			'SGD' => '&#36;',
+			'SHP' => '&pound;',
+			'SLL' => 'Le',
+			'SOS' => 'Sh',
+			'SRD' => '&#36;',
+			'SSP' => '&pound;',
+			'STN' => 'Db',
+			'SYP' => '&#x644;.&#x633;',
+			'SZL' => 'L',
+			'THB' => '&#3647;',
+			'TJS' => '&#x405;&#x41c;',
+			'TMT' => 'm',
+			'TND' => '&#x62f;.&#x62a;',
+			'TOP' => 'T&#36;',
+			'TRY' => '&#8378;',
+			'TTD' => '&#36;',
+			'TWD' => '&#78;&#84;&#36;',
+			'TZS' => 'Sh',
+			'UAH' => '&#8372;',
+			'UGX' => 'UGX',
+			'USD' => '&#36;',
+			'UYU' => '&#36;',
+			'UZS' => 'UZS',
+			'VEF' => 'Bs F',
+			'VES' => 'Bs.S',
+			'VND' => '&#8363;',
+			'VUV' => 'Vt',
+			'WST' => 'T',
+			'XAF' => 'CFA',
+			'XCD' => '&#36;',
+			'XOF' => 'CFA',
+			'XPF' => 'Fr',
+			'YER' => '&#xfdfc;',
+			'ZAR' => '&#82;',
+			'ZMW' => 'ZK',
+		)
+	);
+
+	return $symbols;
+}
+
+/**
+ * Get full list of currency codes.
+ *
+ * Currency symbols and names should follow the Unicode CLDR recommendation (http://cldr.unicode.org/translation/currency-names)
+ *
+ * @return array
+ */
+function get_masteriyo_currencies() {
+	static $currencies;
+
+	if ( ! isset( $currencies ) ) {
+		$currencies = array_unique(
+			apply_filters(
+				'masteriyo_currencies',
+				array(
+					'AED' => __( 'United Arab Emirates dirham', 'masteriyo' ),
+					'AFN' => __( 'Afghan afghani', 'masteriyo' ),
+					'ALL' => __( 'Albanian lek', 'masteriyo' ),
+					'AMD' => __( 'Armenian dram', 'masteriyo' ),
+					'ANG' => __( 'Netherlands Antillean guilder', 'masteriyo' ),
+					'AOA' => __( 'Angolan kwanza', 'masteriyo' ),
+					'ARS' => __( 'Argentine peso', 'masteriyo' ),
+					'AUD' => __( 'Australian dollar', 'masteriyo' ),
+					'AWG' => __( 'Aruban florin', 'masteriyo' ),
+					'AZN' => __( 'Azerbaijani manat', 'masteriyo' ),
+					'BAM' => __( 'Bosnia and Herzegovina convertible mark', 'masteriyo' ),
+					'BBD' => __( 'Barbadian dollar', 'masteriyo' ),
+					'BDT' => __( 'Bangladeshi taka', 'masteriyo' ),
+					'BGN' => __( 'Bulgarian lev', 'masteriyo' ),
+					'BHD' => __( 'Bahraini dinar', 'masteriyo' ),
+					'BIF' => __( 'Burundian franc', 'masteriyo' ),
+					'BMD' => __( 'Bermudian dollar', 'masteriyo' ),
+					'BND' => __( 'Brunei dollar', 'masteriyo' ),
+					'BOB' => __( 'Bolivian boliviano', 'masteriyo' ),
+					'BRL' => __( 'Brazilian real', 'masteriyo' ),
+					'BSD' => __( 'Bahamian dollar', 'masteriyo' ),
+					'BTC' => __( 'Bitcoin', 'masteriyo' ),
+					'BTN' => __( 'Bhutanese ngultrum', 'masteriyo' ),
+					'BWP' => __( 'Botswana pula', 'masteriyo' ),
+					'BYR' => __( 'Belarusian ruble (old)', 'masteriyo' ),
+					'BYN' => __( 'Belarusian ruble', 'masteriyo' ),
+					'BZD' => __( 'Belize dollar', 'masteriyo' ),
+					'CAD' => __( 'Canadian dollar', 'masteriyo' ),
+					'CDF' => __( 'Congolese franc', 'masteriyo' ),
+					'CHF' => __( 'Swiss franc', 'masteriyo' ),
+					'CLP' => __( 'Chilean peso', 'masteriyo' ),
+					'CNY' => __( 'Chinese yuan', 'masteriyo' ),
+					'COP' => __( 'Colombian peso', 'masteriyo' ),
+					'CRC' => __( 'Costa Rican col&oacute;n', 'masteriyo' ),
+					'CUC' => __( 'Cuban convertible peso', 'masteriyo' ),
+					'CUP' => __( 'Cuban peso', 'masteriyo' ),
+					'CVE' => __( 'Cape Verdean escudo', 'masteriyo' ),
+					'CZK' => __( 'Czech koruna', 'masteriyo' ),
+					'DJF' => __( 'Djiboutian franc', 'masteriyo' ),
+					'DKK' => __( 'Danish krone', 'masteriyo' ),
+					'DOP' => __( 'Dominican peso', 'masteriyo' ),
+					'DZD' => __( 'Algerian dinar', 'masteriyo' ),
+					'EGP' => __( 'Egyptian pound', 'masteriyo' ),
+					'ERN' => __( 'Eritrean nakfa', 'masteriyo' ),
+					'ETB' => __( 'Ethiopian birr', 'masteriyo' ),
+					'EUR' => __( 'Euro', 'masteriyo' ),
+					'FJD' => __( 'Fijian dollar', 'masteriyo' ),
+					'FKP' => __( 'Falkland Islands pound', 'masteriyo' ),
+					'GBP' => __( 'Pound sterling', 'masteriyo' ),
+					'GEL' => __( 'Georgian lari', 'masteriyo' ),
+					'GGP' => __( 'Guernsey pound', 'masteriyo' ),
+					'GHS' => __( 'Ghana cedi', 'masteriyo' ),
+					'GIP' => __( 'Gibraltar pound', 'masteriyo' ),
+					'GMD' => __( 'Gambian dalasi', 'masteriyo' ),
+					'GNF' => __( 'Guinean franc', 'masteriyo' ),
+					'GTQ' => __( 'Guatemalan quetzal', 'masteriyo' ),
+					'GYD' => __( 'Guyanese dollar', 'masteriyo' ),
+					'HKD' => __( 'Hong Kong dollar', 'masteriyo' ),
+					'HNL' => __( 'Honduran lempira', 'masteriyo' ),
+					'HRK' => __( 'Croatian kuna', 'masteriyo' ),
+					'HTG' => __( 'Haitian gourde', 'masteriyo' ),
+					'HUF' => __( 'Hungarian forint', 'masteriyo' ),
+					'IDR' => __( 'Indonesian rupiah', 'masteriyo' ),
+					'ILS' => __( 'Israeli new shekel', 'masteriyo' ),
+					'IMP' => __( 'Manx pound', 'masteriyo' ),
+					'INR' => __( 'Indian rupee', 'masteriyo' ),
+					'IQD' => __( 'Iraqi dinar', 'masteriyo' ),
+					'IRR' => __( 'Iranian rial', 'masteriyo' ),
+					'IRT' => __( 'Iranian toman', 'masteriyo' ),
+					'ISK' => __( 'Icelandic kr&oacute;na', 'masteriyo' ),
+					'JEP' => __( 'Jersey pound', 'masteriyo' ),
+					'JMD' => __( 'Jamaican dollar', 'masteriyo' ),
+					'JOD' => __( 'Jordanian dinar', 'masteriyo' ),
+					'JPY' => __( 'Japanese yen', 'masteriyo' ),
+					'KES' => __( 'Kenyan shilling', 'masteriyo' ),
+					'KGS' => __( 'Kyrgyzstani som', 'masteriyo' ),
+					'KHR' => __( 'Cambodian riel', 'masteriyo' ),
+					'KMF' => __( 'Comorian franc', 'masteriyo' ),
+					'KPW' => __( 'North Korean won', 'masteriyo' ),
+					'KRW' => __( 'South Korean won', 'masteriyo' ),
+					'KWD' => __( 'Kuwaiti dinar', 'masteriyo' ),
+					'KYD' => __( 'Cayman Islands dollar', 'masteriyo' ),
+					'KZT' => __( 'Kazakhstani tenge', 'masteriyo' ),
+					'LAK' => __( 'Lao kip', 'masteriyo' ),
+					'LBP' => __( 'Lebanese pound', 'masteriyo' ),
+					'LKR' => __( 'Sri Lankan rupee', 'masteriyo' ),
+					'LRD' => __( 'Liberian dollar', 'masteriyo' ),
+					'LSL' => __( 'Lesotho loti', 'masteriyo' ),
+					'LYD' => __( 'Libyan dinar', 'masteriyo' ),
+					'MAD' => __( 'Moroccan dirham', 'masteriyo' ),
+					'MDL' => __( 'Moldovan leu', 'masteriyo' ),
+					'MGA' => __( 'Malagasy ariary', 'masteriyo' ),
+					'MKD' => __( 'Macedonian denar', 'masteriyo' ),
+					'MMK' => __( 'Burmese kyat', 'masteriyo' ),
+					'MNT' => __( 'Mongolian t&ouml;gr&ouml;g', 'masteriyo' ),
+					'MOP' => __( 'Macanese pataca', 'masteriyo' ),
+					'MRU' => __( 'Mauritanian ouguiya', 'masteriyo' ),
+					'MUR' => __( 'Mauritian rupee', 'masteriyo' ),
+					'MVR' => __( 'Maldivian rufiyaa', 'masteriyo' ),
+					'MWK' => __( 'Malawian kwacha', 'masteriyo' ),
+					'MXN' => __( 'Mexican peso', 'masteriyo' ),
+					'MYR' => __( 'Malaysian ringgit', 'masteriyo' ),
+					'MZN' => __( 'Mozambican metical', 'masteriyo' ),
+					'NAD' => __( 'Namibian dollar', 'masteriyo' ),
+					'NGN' => __( 'Nigerian naira', 'masteriyo' ),
+					'NIO' => __( 'Nicaraguan c&oacute;rdoba', 'masteriyo' ),
+					'NOK' => __( 'Norwegian krone', 'masteriyo' ),
+					'NPR' => __( 'Nepalese rupee', 'masteriyo' ),
+					'NZD' => __( 'New Zealand dollar', 'masteriyo' ),
+					'OMR' => __( 'Omani rial', 'masteriyo' ),
+					'PAB' => __( 'Panamanian balboa', 'masteriyo' ),
+					'PEN' => __( 'Sol', 'masteriyo' ),
+					'PGK' => __( 'Papua New Guinean kina', 'masteriyo' ),
+					'PHP' => __( 'Philippine peso', 'masteriyo' ),
+					'PKR' => __( 'Pakistani rupee', 'masteriyo' ),
+					'PLN' => __( 'Polish z&#x142;oty', 'masteriyo' ),
+					'PRB' => __( 'Transnistrian ruble', 'masteriyo' ),
+					'PYG' => __( 'Paraguayan guaran&iacute;', 'masteriyo' ),
+					'QAR' => __( 'Qatari riyal', 'masteriyo' ),
+					'RON' => __( 'Romanian leu', 'masteriyo' ),
+					'RSD' => __( 'Serbian dinar', 'masteriyo' ),
+					'RUB' => __( 'Russian ruble', 'masteriyo' ),
+					'RWF' => __( 'Rwandan franc', 'masteriyo' ),
+					'SAR' => __( 'Saudi riyal', 'masteriyo' ),
+					'SBD' => __( 'Solomon Islands dollar', 'masteriyo' ),
+					'SCR' => __( 'Seychellois rupee', 'masteriyo' ),
+					'SDG' => __( 'Sudanese pound', 'masteriyo' ),
+					'SEK' => __( 'Swedish krona', 'masteriyo' ),
+					'SGD' => __( 'Singapore dollar', 'masteriyo' ),
+					'SHP' => __( 'Saint Helena pound', 'masteriyo' ),
+					'SLL' => __( 'Sierra Leonean leone', 'masteriyo' ),
+					'SOS' => __( 'Somali shilling', 'masteriyo' ),
+					'SRD' => __( 'Surinamese dollar', 'masteriyo' ),
+					'SSP' => __( 'South Sudanese pound', 'masteriyo' ),
+					'STN' => __( 'S&atilde;o Tom&eacute; and Pr&iacute;ncipe dobra', 'masteriyo' ),
+					'SYP' => __( 'Syrian pound', 'masteriyo' ),
+					'SZL' => __( 'Swazi lilangeni', 'masteriyo' ),
+					'THB' => __( 'Thai baht', 'masteriyo' ),
+					'TJS' => __( 'Tajikistani somoni', 'masteriyo' ),
+					'TMT' => __( 'Turkmenistan manat', 'masteriyo' ),
+					'TND' => __( 'Tunisian dinar', 'masteriyo' ),
+					'TOP' => __( 'Tongan pa&#x2bb;anga', 'masteriyo' ),
+					'TRY' => __( 'Turkish lira', 'masteriyo' ),
+					'TTD' => __( 'Trinidad and Tobago dollar', 'masteriyo' ),
+					'TWD' => __( 'New Taiwan dollar', 'masteriyo' ),
+					'TZS' => __( 'Tanzanian shilling', 'masteriyo' ),
+					'UAH' => __( 'Ukrainian hryvnia', 'masteriyo' ),
+					'UGX' => __( 'Ugandan shilling', 'masteriyo' ),
+					'USD' => __( 'United States (US) dollar', 'masteriyo' ),
+					'UYU' => __( 'Uruguayan peso', 'masteriyo' ),
+					'UZS' => __( 'Uzbekistani som', 'masteriyo' ),
+					'VEF' => __( 'Venezuelan bol&iacute;var', 'masteriyo' ),
+					'VES' => __( 'Bol&iacute;var soberano', 'masteriyo' ),
+					'VND' => __( 'Vietnamese &#x111;&#x1ed3;ng', 'masteriyo' ),
+					'VUV' => __( 'Vanuatu vatu', 'masteriyo' ),
+					'WST' => __( 'Samoan t&#x101;l&#x101;', 'masteriyo' ),
+					'XAF' => __( 'Central African CFA franc', 'masteriyo' ),
+					'XCD' => __( 'East Caribbean dollar', 'masteriyo' ),
+					'XOF' => __( 'West African CFA franc', 'masteriyo' ),
+					'XPF' => __( 'CFP franc', 'masteriyo' ),
+					'YER' => __( 'Yemeni rial', 'masteriyo' ),
+					'ZAR' => __( 'South African rand', 'masteriyo' ),
+					'ZMW' => __( 'Zambian kwacha', 'masteriyo' ),
+				)
+			)
+		);
+	}
+
+	return $currencies;
 }

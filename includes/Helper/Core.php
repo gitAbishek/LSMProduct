@@ -708,13 +708,9 @@ function mto_img_url( $file ) {
  * @return Course
  */
 function masteriyo_setup_course_data( $course_id ) {
-	$course = masteriyo_get_course( $course_id );
-	$difficulties = array_map( 'masteriyo_get_course_difficulty', $course->get_difficulty_ids() );
+	$GLOBALS['course'] =  masteriyo_get_course( $course_id );
 
-	$GLOBALS['course'] = $course;
-	$GLOBALS['course_difficulties'] = $difficulties;
-
-	return $course;
+	return $GLOBALS['course'];
 }
 
 /**

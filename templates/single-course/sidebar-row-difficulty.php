@@ -7,9 +7,7 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-global $course_difficulties;
-
-if ( empty( $course_difficulties ) ) return;
+if ( empty( $GLOBALS['course']->get_difficulty() ) ) return;
 
 ?>
 
@@ -19,7 +17,7 @@ if ( empty( $course_difficulties ) ) return;
 		<path d="M15.293 14.707a.999.999 0 001.414 0l5-5-1.414-1.414L16 12.586l-2.293-2.293a.999.999 0 00-1.414 0l-5 5 1.414 1.414L13 12.414l2.293 2.293z"/>
 	  </svg>
 	<span class="mto-inline-block mto-text-xs mto-font-medium mto-text-gray-800 mto-ml-1">
-		<?php echo implode( ' | ', array_map(function( $dif ) { return $dif->get_name(); }, $course_difficulties )); ?>
+		<?php echo $GLOBALS['course']->get_difficulty()->get_name(); ?>
 	</span>
 </div>
 

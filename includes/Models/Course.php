@@ -80,7 +80,7 @@ class Course extends Model {
 		'sale_price'         => '',
 		'category_ids'       => array(),
 		'tag_ids'            => array(),
-		'difficulty_ids'     => array(),
+		'difficulty_id'      => 0,
 		'featured_image'     => '',
 		'rating_counts'      => array(),
 		'average_rating'     => 0,
@@ -423,16 +423,30 @@ class Course extends Model {
 	}
 
 	/**
-	 * Returns course difficulty ids.
+	 * Returns course difficulty id.
 	 *
 	 * @since  0.1.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string price
+	 * @return integer
 	 */
-	public function get_difficulty_ids( $context = 'view' ) {
-		return $this->get_prop( 'difficulty_ids', $context );
+	public function get_difficulty_id( $context = 'view' ) {
+		return $this->get_prop( 'difficulty_id', $context );
+	}
+
+	public function get_difficulty() {
+		$difficulty = masteriyo( 'course_difficulty' );
+		$store = masteriyo( 'course_difficulty.store' );
+
+		try {
+			$difficulty->set_id( $this->get_difficulty_id() );
+			$store->read( $difficulty );
+		} catch ( \Exception $e) {
+			return null;
+		}
+
+		return apply_filters( 'masteriyo_get_course_difficulty_object', $difficulty, $this->get_difficulty_id(), $this );
 	}
 
 	/**
@@ -713,14 +727,14 @@ class Course extends Model {
 	}
 
 	/**
-	 * Set the course difficulty ids.
+	 * Set the course difficulty id.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param array $difficulty_ids Difficulty ids.
+	 * @param array $difficulty_id Difficulty id.
 	 */
-	public function set_difficulty_ids( $difficulty_ids ) {
-		$this->set_prop( 'difficulty_ids', array_unique( array_map( 'intval', $difficulty_ids ) ) ) ;
+	public function set_difficulty_id( $difficulty_id ) {
+		$this->set_prop( 'difficulty_id', absint( $difficulty_id ) );
 	}
 
 	/**

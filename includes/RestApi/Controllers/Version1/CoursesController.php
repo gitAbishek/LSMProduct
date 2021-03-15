@@ -731,7 +731,7 @@ class CoursesController extends PostsController {
 		} elseif ( 'tag' === $taxonomy ) {
 			$course->set_tag_ids( $term_ids );
 		} elseif ( 'difficulty' === $taxonomy ) {
-			$course->set_difficulty_ids( $term_ids );
+			$course->set_difficulty_id( array_shift( $term_ids ) );
 		}
 
 		return $course;

@@ -48,7 +48,6 @@ const config = {
 
 			{
 				test: /\.css$/i,
-				exclude: /node_modules/,
 				use: [
 					{
 						loader: isProduction ? MiniCSSExtractPlugin.loader : 'style-loader',

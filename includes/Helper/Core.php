@@ -723,32 +723,74 @@ function masteriyo_setup_course_data( $course_id ) {
  * @since 0.1.0
  *
  * @param int|float $rating Given rating.
- * @param int $out_of Max allowed rating.
- * @param string $full_star Full star icon html.
- * @param string $half_star Half star icon html.
- * @param string $no_star Empty star html.
+ * @param string $location Location where the stars are being rendered, used to determine which svg to use.
+ * @param string $echo Whether to echo or return the html.
  *
  * @return void|string
  */
-function masteriyo_render_stars( $rating, $out_of, $full_star, $half_star, $no_star, $return = false ) {
+function masteriyo_render_stars( $rating, $location, $echo = true ) {
 	$rating = (float) $rating;
+	$max_rating = apply_filters( 'masteriyo_max_course_rating', 5 );
+	$htmls = array(
+		'single-course-page--related-post--normal' => array(
+			'full_star' =>
+				'<svg class="mto-inline-block mto-fill-current mto-text-white mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+				</svg>',
+			'half_star' =>
+				'<svg class="mto-inline-block mto-fill-current mto-text-white mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
+				</svg>',
+			'empty_star' =>
+				'<svg class="mto-inline-block mto-fill-current mto-text-primary mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M6.516 14.323l-1.49 6.452a.998.998 0 001.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822 0L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 00.832-.586L12 5.43l1.799 3.981a.998.998 0 00.832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 00-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 00-.276-.94l-3.038-2.962 4.09-.326z"/>
+				</svg>',
+		),
+		'single-course-page--related-post--hovered' => array(
+			'full_star' =>
+				'<svg class="mto-inline-block mto-fill-current mto-text-gray-800 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+				</svg>',
+			'half_star' =>
+				'<svg class=" mto-inline-block mto-fill-current mto-text-gray-800 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
+				</svg>',
+			'empty_star' =>
+				'<svg class=" mto-inline-block mto-fill-current mto-text-primary mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M6.516 14.323l-1.49 6.452a.998.998 0 001.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822 0L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 00.832-.586L12 5.43l1.799 3.981a.998.998 0 00.832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 00-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 00-.276-.94l-3.038-2.962 4.09-.326z"/>
+				</svg>',
+		),
+		'single-course-page--sidebar-row' => array(
+			'full_star' =>
+				'<svg class="rating mto-inline-block mto-fill-current mto-text-primary mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+				</svg>',
+			'half_star' =>
+				'<svg class="mto-inline-block mto-fill-current mto-text-primary mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
+				</svg>',
+			'empty_star' =>
+				'<svg class="mto-inline-block mto-fill-current mto-text-primary mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M6.516 14.323l-1.49 6.452a.998.998 0 001.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822 0L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 00.832-.586L12 5.43l1.799 3.981a.998.998 0 00.832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 00-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 00-.276-.94l-3.038-2.962 4.09-.326z"/>
+				</svg>'
+		),
+	);
 
+	if ( ! isset( $htmls[ $location ] ) ) return;
+
+	$stars = apply_filters( "masteriyo_stars_html_{$location}", $htmls[ $location ] );
 	ob_start();
 
-	for ( $i = 1; $i <= floor($rating); $i++ ) {
-		echo $full_star;
-	}
-	if ( floor( $rating ) != $rating ) {
-		echo $half_star;
-	}
-	for ( $i = ceil( $rating ); $i < $out_of; $i++ ) {
-		echo $no_star;
-	}
+	for ( $i = 1; $i <= floor($rating); $i++ ) echo $stars['full_star'];
+	if ( floor( $rating ) != $rating ) echo $stars['half_star'];
+	for ( $i = ceil( $rating ); $i < $max_rating; $i++ ) echo $stars['empty_star'];
 
-	if ( $return === true ) {
-		return ob_get_clean();
+	$html = ob_get_clean();
+
+	if ( $echo === true ) {
+		echo $html;
 	} else {
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 

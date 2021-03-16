@@ -34,6 +34,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 		'positive_feedback' => '_positive_feedback',
 		'negative_feedback' => '_negative_feedback',
 		'feedback'          => '_feedback',
+		'course_id'         => '_course_id',
 	);
 
 	/**
@@ -257,7 +258,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			array()
 		);
 
-		foreach ( $this->internal_meta_keys as $meta_key => $prop ) {
+		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
 			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
 		}
@@ -282,5 +283,108 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 				$question->{$function}( $meta_values[ '_' . $key ] );
 			}
 		}
+	}
+
+	/**
+	 * Fetch questions.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $query_vars Query vars.
+	 * @return Question[]
+	 */
+	public function query( $query_vars ) {
+		$args = $this->get_wp_query_args( $query_vars );
+
+		if ( ! empty( $args['errors'] ) ) {
+			$query = (object) array(
+				'posts'         => array(),
+				'found_posts'   => 0,
+				'max_num_pages' => 0,
+			);
+		} else {
+			$query = new \WP_Query( $args );
+		}
+
+		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
+			// Prime caches before grabbing objects.
+			update_post_caches( $query->posts, array( 'question' ) );
+		}
+
+		$questions = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_question', $query->posts ) );
+
+		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
+			return (object) array(
+				'questions'      => $questions,
+				'total'         => $query->found_posts,
+				'max_num_pages' => $query->max_num_pages,
+			);
+		}
+
+		return $questions;
+	}
+
+	/**
+	 * Get valid WP_Query args from a QuestionQuery's query variables.
+	 *
+	 * @since 0.1.0
+	 * @param array $query_vars Query vars from a QuestionQuery.
+	 * @return array
+	 */
+	protected function get_wp_query_args( $query_vars ) {
+		// Map query vars to ones that get_wp_query_args or WP_Query recognize.
+		$key_mapping = array(
+			'status' => 'post_status',
+			'page'   => 'paged',
+			'parent_id' => 'post_parent',
+		);
+
+		foreach ( $key_mapping as $query_key => $db_key ) {
+			if ( isset( $query_vars[ $query_key ] ) ) {
+				$query_vars[ $db_key ] = $query_vars[ $query_key ];
+				unset( $query_vars[ $query_key ] );
+			}
+		}
+
+		$query_vars['post_type'] = 'question';
+
+		$wp_query_args = parent::get_wp_query_args( $query_vars );
+
+		if ( ! isset( $wp_query_args['date_query'] ) ) {
+			$wp_query_args['date_query'] = array();
+		}
+		if ( ! isset( $wp_query_args['meta_query'] ) ) {
+			$wp_query_args['meta_query'] = array(); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+		}
+
+		// Handle date queries.
+		$date_queries = array(
+			'date_created'      => 'post_date',
+			'date_modified'     => 'post_modified',
+		);
+		foreach ( $date_queries as $query_var_key => $db_key ) {
+			if ( isset( $query_vars[ $query_var_key ] ) && '' !== $query_vars[ $query_var_key ] ) {
+
+				// Remove any existing meta queries for the same keys to prevent conflicts.
+				$existing_queries = wp_list_pluck( $wp_query_args['meta_query'], 'key', true );
+				foreach ( $existing_queries as $query_index => $query_contents ) {
+					unset( $wp_query_args['meta_query'][ $query_index ] );
+				}
+
+				$wp_query_args = $this->parse_date_for_wp_query( $query_vars[ $query_var_key ], $db_key, $wp_query_args );
+			}
+		}
+
+		// Handle paginate.
+		if ( ! isset( $query_vars['paginate'] ) || ! $query_vars['paginate'] ) {
+			$wp_query_args['no_found_rows'] = true;
+		}
+
+		// Handle orderby.
+		if ( isset( $query_vars['orderby'] ) && 'include' === $query_vars['orderby'] ) {
+			$wp_query_args['orderby'] = 'post__in';
+		}
+
+		return apply_filters( 'masteriyo_question_data_store_cpt_get_questions_query', $wp_query_args, $query_vars, $this );
 	}
 }

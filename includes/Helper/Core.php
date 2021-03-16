@@ -811,14 +811,16 @@ function masteriyo_get_related_courses( $course ) {
 function masteriyo_get_lessons_count( $course ) {
 	$course = masteriyo_get_course( $course );
 
-	if ( is_a( $course, Course::class ) ) {
-		$lessons = masteriyo_get_lessons(array(
-			'course_id' => $course->get_id(),
-		));
-
-		return count( $lessons );
+	// Bail early if the course is null.
+	if ( is_null( $course ) ) {
+		return 0;
 	}
-	return 0;
+
+	$lessons = masteriyo_get_lessons(array(
+		'course_id' => $course->get_id(),
+	));
+
+	return count( $lessons );
 }
 
 /**
@@ -862,19 +864,21 @@ function masteriyo_minutes_to_time_length_string( $minutes, $format = null ) {
 function masteriyo_get_lecture_hours( $course, $format = null ) {
 	$course = masteriyo_get_course( $course );
 
-	if ( is_a( $course, Course::class ) ) {
-		$lessons = masteriyo_get_lessons(array(
-			'course_id' => $course->get_id(),
-		));
-		$mins = 0;
-
-		foreach ( $lessons as $lesson ) {
-			$mins += $lesson->get_video_playback_time();
-		}
-
-		return masteriyo_minutes_to_time_length_string( $mins, $format );
+	// Bail early if the course is null.
+	if ( is_null( $course ) ) {
+		return '';
 	}
-	return '';
+
+	$lessons = masteriyo_get_lessons(array(
+		'course_id' => $course->get_id(),
+	));
+	$mins = 0;
+
+	foreach ( $lessons as $lesson ) {
+		$mins += $lesson->get_video_playback_time();
+	}
+
+	return masteriyo_minutes_to_time_length_string( $mins, $format );
 }
 
 /**
@@ -890,19 +894,21 @@ function masteriyo_get_lecture_hours( $course, $format = null ) {
 function masteriyo_get_lecture_hours_of_section( $section, $format = null ) {
 	$section = masteriyo_get_section( $section );
 
-	if ( is_a( $section, Section::class ) ) {
-		$lessons = masteriyo_get_lessons(array(
-			'parent_id' => $section->get_id(),
-		));
-		$mins = 0;
-
-		foreach ( $lessons as $lesson ) {
-			$mins += $lesson->get_video_playback_time();
-		}
-
-		return masteriyo_minutes_to_time_length_string( $mins, $format );
+	// Bail early if the section is null.
+	if ( is_null( $section ) ) {
+		return '';
 	}
-	return '';
+
+	$lessons = masteriyo_get_lessons(array(
+		'parent_id' => $section->get_id(),
+	));
+	$mins = 0;
+
+	foreach ( $lessons as $lesson ) {
+		$mins += $lesson->get_video_playback_time();
+	}
+
+	return masteriyo_minutes_to_time_length_string( $mins, $format );
 }
 
 /**

@@ -370,7 +370,7 @@ class ScriptStyle {
 		$this->register_scripts();
 		$this->register_styles();
 
-		if ( mto_is_single_course_page() ) {
+		if ( masteriyo_is_single_course_page() ) {
 			$this->enqueue_script( 'masteriyo-single-course' );
 			$this->enqueue_style( 'masteriyo-single-course' );
 		}

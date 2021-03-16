@@ -7,7 +7,7 @@
 
 defined('ABSPATH') || exit; // Exit if accessed directly.
 
-[$sections, $lessons, $dictionary] = mto_make_section_to_lessons_dictionary( $GLOBALS['course'] );
+[$sections, $lessons, $dictionary] = masteriyo_make_section_to_lessons_dictionary( $GLOBALS['course'] );
 
 /**
  * masteriyo_before_single_course_curriculum_content hook.
@@ -23,7 +23,9 @@ do_action('masteriyo_before_single_course_curriculum_content');
 			<li><?php echo count( $lessons ) ?> Lecture(s)</li>
 			<li><?php echo masteriyo_get_lecture_hours( $GLOBALS['course'] ) ?> total length</li>
 		</ul>
+		<?php if ( count( $sections ) > 0 ): ?>
 		<span id="mto-expand-collape-all" class="curr-expand-collape-all mto-cursor-pointer mto-text-primary mto-text-sm  mto-font-bold mto-uppercase">Expand all lessons</span>
+		<?php endif; ?>
 	</div>
 
 	<?php foreach ( $sections as $section ) { ?>

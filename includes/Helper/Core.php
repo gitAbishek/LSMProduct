@@ -8,6 +8,7 @@
 use ThemeGrill\Masteriyo\DateTime;
 use ThemeGrill\Masteriyo\Constants;
 use ThemeGrill\Masteriyo\Models\Course;
+use ThemeGrill\Masteriyo\Models\Section;
 
 /**
  * Get course.
@@ -679,7 +680,7 @@ function masteriyo_get_page_permalink( $page, $fallback = null ) {
  *
  * @return boolean
  */
-function mto_is_single_course_page() {
+function masteriyo_is_single_course_page() {
 	return is_singular( 'course' );
 }
 
@@ -692,7 +693,7 @@ function mto_is_single_course_page() {
  *
  * @return string
  */
-function mto_img_url( $file ) {
+function masteriyo_img_url( $file ) {
 	$plugin_dir = plugin_dir_url( Constants::get('MASTERIYO_PLUGIN_FILE') );
 
 	return "{$plugin_dir}assets/img/{$file}";
@@ -719,62 +720,29 @@ function masteriyo_setup_course_data( $course_id ) {
  * @since 0.1.0
  *
  * @param int|float $rating Given rating.
- * @param string $location Location where the stars are being rendered, used to determine which svg to use.
+ * @param string $classes Extra classes to add to the svgs.
  * @param string $echo Whether to echo or return the html.
  *
  * @return void|string
  */
-function masteriyo_render_stars( $rating, $location, $echo = true ) {
+function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
 	$rating = (float) $rating;
 	$max_rating = apply_filters( 'masteriyo_max_course_rating', 5 );
-	$htmls = array(
-		'single-course-page--related-post--normal' => array(
-			'full_star' =>
-				'<svg class="mto-inline-block mto-fill-current mto-text-white mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-				</svg>',
-			'half_star' =>
-				'<svg class="mto-inline-block mto-fill-current mto-text-white mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
-				</svg>',
-			'empty_star' =>
-				'<svg class="mto-inline-block mto-fill-current mto-text-primary mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M6.516 14.323l-1.49 6.452a.998.998 0 001.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822 0L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 00.832-.586L12 5.43l1.799 3.981a.998.998 0 00.832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 00-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 00-.276-.94l-3.038-2.962 4.09-.326z"/>
-				</svg>',
-		),
-		'single-course-page--related-post--hovered' => array(
-			'full_star' =>
-				'<svg class="mto-inline-block mto-fill-current mto-text-gray-800 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-				</svg>',
-			'half_star' =>
-				'<svg class=" mto-inline-block mto-fill-current mto-text-gray-800 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
-				</svg>',
-			'empty_star' =>
-				'<svg class=" mto-inline-block mto-fill-current mto-text-primary mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M6.516 14.323l-1.49 6.452a.998.998 0 001.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822 0L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 00.832-.586L12 5.43l1.799 3.981a.998.998 0 00.832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 00-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 00-.276-.94l-3.038-2.962 4.09-.326z"/>
-				</svg>',
-		),
-		'single-course-page--sidebar-row' => array(
-			'full_star' =>
-				'<svg class="rating mto-inline-block mto-fill-current mto-text-primary mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-				</svg>',
-			'half_star' =>
-				'<svg class="mto-inline-block mto-fill-current mto-text-primary mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
-				</svg>',
-			'empty_star' =>
-				'<svg class="mto-inline-block mto-fill-current mto-text-primary mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M6.516 14.323l-1.49 6.452a.998.998 0 001.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822 0L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 00.832-.586L12 5.43l1.799 3.981a.998.998 0 00.832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 00-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 00-.276-.94l-3.038-2.962 4.09-.326z"/>
-				</svg>'
-		),
-	);
+	$stars = apply_filters( 'masteriyo_rating_indicators_html', array(
+		'full_star' =>
+			"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+				<path d='M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z'/>
+			</svg>",
+		'half_star' =>
+			"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+				<path d='M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z'/>
+			</svg>",
+		'empty_star' =>
+			"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+				<path d='M6.516 14.323l-1.49 6.452a.998.998 0 001.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822 0L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 00.832-.586L12 5.43l1.799 3.981a.998.998 0 00.832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 00-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 00-.276-.94l-3.038-2.962 4.09-.326z'/>
+			</svg>",
+	));
 
-	if ( ! isset( $htmls[ $location ] ) ) return;
-
-	$stars = apply_filters( "masteriyo_stars_html_{$location}", $htmls[ $location ] );
 	ob_start();
 
 	for ( $i = 1; $i <= floor($rating); $i++ ) echo $stars['full_star'];
@@ -841,11 +809,16 @@ function masteriyo_get_related_courses( $course ) {
  * @return integer
  */
 function masteriyo_get_lessons_count( $course ) {
-	$lessons = masteriyo_get_lessons(array(
-		'course_id' => masteriyo_get_course( $course )->get_id(),
-	));
+	$course = masteriyo_get_course( $course );
 
-	return count( $lessons );
+	if ( is_a( $course, Course::class ) ) {
+		$lessons = masteriyo_get_lessons(array(
+			'course_id' => $course->get_id(),
+		));
+
+		return count( $lessons );
+	}
+	return 0;
 }
 
 /**
@@ -868,8 +841,8 @@ function masteriyo_minutes_to_time_length_string( $minutes, $format = null ) {
 		$str = str_replace( '%H%', $hours, $format );
 		$str = str_replace( '%M%', $mins, $str );
 	} else {
-		$str .= $hours > 0 ? sprintf( '%d %s ', $hours, __( 'hours', 'masteriyo' ) ) : '';
-		$str .= $mins > 0 ? sprintf( ' %d %s', $mins, __( 'mins', 'masteriyo' ) ) : '';
+		$str .= $hours > 0 ? sprintf( '%d %s ', $hours, _nx( 'hour', 'hours', $hours, 'masteriyo' ) ) : '';
+		$str .= $mins > 0 ? sprintf( ' %d %s', $mins, _nx( 'min', 'mins', $mins, 'masteriyo' ) ) : '';
 		$str = $minutes > 0 ? $str : __( '0 mins', 'masteriyo' );
 	}
 
@@ -887,16 +860,21 @@ function masteriyo_minutes_to_time_length_string( $minutes, $format = null ) {
  * @return string
  */
 function masteriyo_get_lecture_hours( $course, $format = null ) {
-	$lessons = masteriyo_get_lessons(array(
-		'course_id' => masteriyo_get_course( $course )->get_id(),
-	));
-	$mins = 0;
+	$course = masteriyo_get_course( $course );
 
-	foreach ( $lessons as $lesson ) {
-		$mins += $lesson->get_video_playback_time();
+	if ( is_a( $course, Course::class ) ) {
+		$lessons = masteriyo_get_lessons(array(
+			'course_id' => $course->get_id(),
+		));
+		$mins = 0;
+
+		foreach ( $lessons as $lesson ) {
+			$mins += $lesson->get_video_playback_time();
+		}
+
+		return masteriyo_minutes_to_time_length_string( $mins, $format );
 	}
-
-	return masteriyo_minutes_to_time_length_string( $mins, $format );
+	return '';
 }
 
 /**
@@ -910,16 +888,21 @@ function masteriyo_get_lecture_hours( $course, $format = null ) {
  * @return string
  */
 function masteriyo_get_lecture_hours_of_section( $section, $format = null ) {
-	$lessons = masteriyo_get_lessons(array(
-		'parent_id' => masteriyo_get_section( $section )->get_id(),
-	));
-	$mins = 0;
+	$section = masteriyo_get_section( $section );
 
-	foreach ( $lessons as $lesson ) {
-		$mins += $lesson->get_video_playback_time();
+	if ( is_a( $section, Section::class ) ) {
+		$lessons = masteriyo_get_lessons(array(
+			'parent_id' => $section->get_id(),
+		));
+		$mins = 0;
+
+		foreach ( $lessons as $lesson ) {
+			$mins += $lesson->get_video_playback_time();
+		}
+
+		return masteriyo_minutes_to_time_length_string( $mins, $format );
 	}
-
-	return masteriyo_minutes_to_time_length_string( $mins, $format );
+	return '';
 }
 
 /**
@@ -931,33 +914,37 @@ function masteriyo_get_lecture_hours_of_section( $section, $format = null ) {
  *
  * @return array
  */
-function mto_make_section_to_lessons_dictionary( $course ) {
+function masteriyo_make_section_to_lessons_dictionary( $course ) {
 	$course = masteriyo_get_course( $course );
-	$sections = masteriyo_get_sections(array(
-		'order' => 'asc',
-		'order_by' => 'menu_order',
-		'parent_id' => $course->get_id(),
-	));
-	$lessons = masteriyo_get_lessons(array(
-		'order' => 'asc',
-		'order_by' => 'menu_order',
-		'course_id' => $course->get_id(),
-	));
-	$lessons_dictionary = array();
 
-	foreach ( $lessons as $lesson ) {
-		$section_id = $lesson->get_parent_id();
+	if ( is_a( $course, Course::class ) ) {
+		$sections = masteriyo_get_sections(array(
+			'order' => 'asc',
+			'order_by' => 'menu_order',
+			'parent_id' => $course->get_id(),
+		));
+		$lessons = masteriyo_get_lessons(array(
+			'order' => 'asc',
+			'order_by' => 'menu_order',
+			'course_id' => $course->get_id(),
+		));
+		$lessons_dictionary = array();
 
-		if ( ! isset( $lessons_dictionary[ $section_id ] ) ) {
-			$lessons_dictionary[ $section_id ] = array();
+		foreach ( $lessons as $lesson ) {
+			$section_id = $lesson->get_parent_id();
+
+			if ( ! isset( $lessons_dictionary[ $section_id ] ) ) {
+				$lessons_dictionary[ $section_id ] = array();
+			}
+
+			$lessons_dictionary[ $section_id ][] = $lesson;
 		}
-
-		$lessons_dictionary[ $section_id ][] = $lesson;
-	}
-	foreach( $sections as $section ) {
-		if ( ! isset( $lessons_dictionary[ $section->get_id() ] ) ) {
-			$lessons_dictionary[ $section->get_id() ] = array();
+		foreach( $sections as $section ) {
+			if ( ! isset( $lessons_dictionary[ $section->get_id() ] ) ) {
+				$lessons_dictionary[ $section->get_id() ] = array();
+			}
 		}
+		return array( $sections, $lessons, $lessons_dictionary );
 	}
-	return array( $sections, $lessons, $lessons_dictionary );
+	return array();
 }

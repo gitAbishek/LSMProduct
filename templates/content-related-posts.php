@@ -27,7 +27,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 				<div class="mto-px-4 mto-py-4">
 					<div class="mto-mt-4 mto-mb-3">
 						<span class="mto-inline-block">
-							<?php masteriyo_render_stars( $course->get_average_rating(), 'single-course-page--related-post--normal' );?>
+							<?php masteriyo_render_stars( $course->get_average_rating(), 'mto-text-white mto-w-4 mto-h-4' );?>
 						</span>
 
 						<?php
@@ -100,7 +100,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 			<div class="course-detail mto-bg-white mto-px-4 mto-py-4 mto-w-full">
 				<div class="mto-mb-3">
 					<span class="mto-inline-block">
-						<?php masteriyo_render_stars( $course->get_average_rating(), 'single-course-page--related-post--hovered' );?>
+						<?php masteriyo_render_stars( $course->get_average_rating(), 'mto-text-gray-800 mto-w-4 mto-h-4' );?>
 					</span>
 
 					<?php

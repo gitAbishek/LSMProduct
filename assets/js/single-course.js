@@ -56,13 +56,16 @@ accordionCurrHeaders.forEach(accordionCurrHeader => {
 });
 
 let isExpanded = false;
+const exandAllBtn = document.getElementById( 'mto-expand-collape-all' );
 
-document.getElementById( 'mto-expand-collape-all' ).addEventListener( 'click', (e) => {
-	isExpanded = ! isExpanded;
+if ( exandAllBtn ) {
+	exandAllBtn.addEventListener( 'click', (e) => {
+		isExpanded = ! isExpanded;
 
-	accordionCurrHeaders.forEach(accordionCurrHeader => {
-		toggle_accordion_item( accordionCurrHeader );
+		accordionCurrHeaders.forEach(accordionCurrHeader => {
+			toggle_accordion_item( accordionCurrHeader );
+		});
+
+		e.currentTarget.innerText = isExpanded ? 'Collapse All Lessons' : 'Expand All Lessons';
 	});
-
-	e.currentTarget.innerText = isExpanded ? 'Collapse All Lessons' : 'Expand All Lessons';
-});
+}

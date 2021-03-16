@@ -273,7 +273,7 @@ class Masteriyo extends Container {
 	public function template_loader( $template ) {
 		global $post;
 
-		if ( mto_is_single_course_page() ) {
+		if ( masteriyo_is_single_course_page() ) {
 			masteriyo_setup_course_data( $post );
 
 			$template = masteriyo( 'template' )->locate( 'single-course.php' );

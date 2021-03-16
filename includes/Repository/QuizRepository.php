@@ -27,7 +27,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'_course_id' => 'course_id',
+		'course_id' => '_course_id',
 	);
 
 	/**
@@ -249,7 +249,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			return $result;
 		}, array() );
 
-		foreach ( $this->internal_meta_keys as $meta_key => $prop ) {
+		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
 			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
 		}
@@ -274,5 +274,108 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 				$quiz->{$function}( $meta_values[ '_' . $key ] );
 			}
 		}
+	}
+
+	/**
+	 * Fetch quizes.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $query_vars Query vars.
+	 * @return Quiz[]
+	 */
+	public function query( $query_vars ) {
+		$args = $this->get_wp_query_args( $query_vars );
+
+		if ( ! empty( $args['errors'] ) ) {
+			$query = (object) array(
+				'posts'         => array(),
+				'found_posts'   => 0,
+				'max_num_pages' => 0,
+			);
+		} else {
+			$query = new \WP_Query( $args );
+		}
+
+		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
+			// Prime caches before grabbing objects.
+			update_post_caches( $query->posts, array( 'quiz' ) );
+		}
+
+		$quizes = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_quiz', $query->posts ) );
+
+		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
+			return (object) array(
+				'quizes'        => $quizes,
+				'total'         => $query->found_posts,
+				'max_num_pages' => $query->max_num_pages,
+			);
+		}
+
+		return $quizes;
+	}
+
+	/**
+	 * Get valid WP_Query args from a QuizQuery's query variables.
+	 *
+	 * @since 0.1.0
+	 * @param array $query_vars Query vars from a QuizQuery.
+	 * @return array
+	 */
+	protected function get_wp_query_args( $query_vars ) {
+		// Map query vars to ones that get_wp_query_args or WP_Query recognize.
+		$key_mapping = array(
+			'status' => 'post_status',
+			'page'   => 'paged',
+			'parent_id' => 'post_parent',
+		);
+
+		foreach ( $key_mapping as $query_key => $db_key ) {
+			if ( isset( $query_vars[ $query_key ] ) ) {
+				$query_vars[ $db_key ] = $query_vars[ $query_key ];
+				unset( $query_vars[ $query_key ] );
+			}
+		}
+
+		$query_vars['post_type'] = 'quiz';
+
+		$wp_query_args = parent::get_wp_query_args( $query_vars );
+
+		if ( ! isset( $wp_query_args['date_query'] ) ) {
+			$wp_query_args['date_query'] = array();
+		}
+		if ( ! isset( $wp_query_args['meta_query'] ) ) {
+			$wp_query_args['meta_query'] = array(); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+		}
+
+		// Handle date queries.
+		$date_queries = array(
+			'date_created'      => 'post_date',
+			'date_modified'     => 'post_modified',
+		);
+		foreach ( $date_queries as $query_var_key => $db_key ) {
+			if ( isset( $query_vars[ $query_var_key ] ) && '' !== $query_vars[ $query_var_key ] ) {
+
+				// Remove any existing meta queries for the same keys to prevent conflicts.
+				$existing_queries = wp_list_pluck( $wp_query_args['meta_query'], 'key', true );
+				foreach ( $existing_queries as $query_index => $query_contents ) {
+					unset( $wp_query_args['meta_query'][ $query_index ] );
+				}
+
+				$wp_query_args = $this->parse_date_for_wp_query( $query_vars[ $query_var_key ], $db_key, $wp_query_args );
+			}
+		}
+
+		// Handle paginate.
+		if ( ! isset( $query_vars['paginate'] ) || ! $query_vars['paginate'] ) {
+			$wp_query_args['no_found_rows'] = true;
+		}
+
+		// Handle orderby.
+		if ( isset( $query_vars['orderby'] ) && 'include' === $query_vars['orderby'] ) {
+			$wp_query_args['orderby'] = 'post__in';
+		}
+
+		return apply_filters( 'masteriyo_quiz_data_store_cpt_get_quizes_query', $wp_query_args, $query_vars, $this );
 	}
 }

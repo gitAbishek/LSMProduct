@@ -9,6 +9,7 @@ use ThemeGrill\Masteriyo\DateTime;
 use ThemeGrill\Masteriyo\Constants;
 use ThemeGrill\Masteriyo\Models\Course;
 use ThemeGrill\Masteriyo\Models\Section;
+use ThemeGrill\Masteriyo\Models\FAQ;
 
 /**
  * Get course.
@@ -104,6 +105,38 @@ function masteriyo_get_section( $section ) {
 }
 
 /**
+ * Get FAQ.
+ *
+ * @since 0.1.0
+ *
+ * @param int|FAQ|WP_Post $faq FAQ id or FAQ Model or Post.
+ *
+ * @return FAQ|null
+ */
+function masteriyo_get_faq( $faq ) {
+	$faq_obj   = masteriyo( 'faq' );
+	$faq_store = masteriyo( 'faq.store' );
+
+	if ( is_a( $faq, 'ThemeGrill\Masteriyo\Models\FAQ' ) ) {
+		$id = $faq->get_id();
+	} elseif ( is_a( $faq, 'WP_Post' ) ) {
+		$id = $faq->ID;
+	} else {
+		$id = $faq;
+	}
+
+	try {
+		$id = absint( $id );
+		$faq_obj->set_id( $id );
+		$faq_store->read( $faq_obj );
+	} catch ( \Exception $e) {
+		return null;
+	}
+
+	return apply_filters( 'masteriyo_get_faq', $faq_obj, $faq );
+}
+
+/**
  * Get sections.
  *
  * @since 0.1.0
@@ -161,6 +194,21 @@ function masteriyo_get_questions( $args = array() ) {
 	$questions = masteriyo( 'query.questions' )->set_args( $args )->get_questions();
 
 	return apply_filters( 'masteriyo_get_questions', $questions, $args );
+}
+
+/**
+ * Get FAQs
+ *
+ * @since 0.1.0
+ *
+ * @param array $args Query arguments.
+ *
+ * @return object|array[FAQ]
+ */
+function masteriyo_get_faqs( $args = array() ) {
+	$faqs = masteriyo( 'query.faqs' )->set_args( $args )->get_faqs();
+
+	return apply_filters( 'masteriyo_get_faqs', $faqs, $args );
 }
 
 /**

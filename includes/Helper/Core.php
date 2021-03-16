@@ -917,34 +917,40 @@ function masteriyo_get_lecture_hours_of_section( $section, $format = null ) {
 function masteriyo_make_section_to_lessons_dictionary( $course ) {
 	$course = masteriyo_get_course( $course );
 
-	if ( is_a( $course, Course::class ) ) {
-		$sections = masteriyo_get_sections(array(
-			'order' => 'asc',
-			'order_by' => 'menu_order',
-			'parent_id' => $course->get_id(),
-		));
-		$lessons = masteriyo_get_lessons(array(
-			'order' => 'asc',
-			'order_by' => 'menu_order',
-			'course_id' => $course->get_id(),
-		));
-		$lessons_dictionary = array();
-
-		foreach ( $lessons as $lesson ) {
-			$section_id = $lesson->get_parent_id();
-
-			if ( ! isset( $lessons_dictionary[ $section_id ] ) ) {
-				$lessons_dictionary[ $section_id ] = array();
-			}
-
-			$lessons_dictionary[ $section_id ][] = $lesson;
-		}
-		foreach( $sections as $section ) {
-			if ( ! isset( $lessons_dictionary[ $section->get_id() ] ) ) {
-				$lessons_dictionary[ $section->get_id() ] = array();
-			}
-		}
-		return array( $sections, $lessons, $lessons_dictionary );
+	// Bail early if the course is null.
+	if ( is_null( $course) ) {
+		return array();
 	}
-	return array();
+
+	$sections = masteriyo_get_sections( array(
+		'order'     => 'asc',
+		'order_by'  => 'menu_order',
+		'parent_id' => $course->get_id(),
+	) );
+
+	$lessons = masteriyo_get_lessons(array(
+		'order'     => 'asc',
+		'order_by'  => 'menu_order',
+		'course_id' => $course->get_id(),
+	));
+
+	$lessons_dictionary = array();
+
+	foreach ( $lessons as $lesson ) {
+		$section_id = $lesson->get_parent_id();
+
+		if ( ! isset( $lessons_dictionary[ $section_id ] ) ) {
+			$lessons_dictionary[ $section_id ] = array();
+		}
+
+		$lessons_dictionary[ $section_id ][] = $lesson;
+	}
+
+	foreach( $sections as $section ) {
+		if ( ! isset( $lessons_dictionary[ $section->get_id() ] ) ) {
+			$lessons_dictionary[ $section->get_id() ] = array();
+		}
+	}
+
+	return array( $sections, $lessons, $lessons_dictionary );
 }

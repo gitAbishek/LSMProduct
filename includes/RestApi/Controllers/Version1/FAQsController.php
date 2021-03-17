@@ -196,7 +196,7 @@ class FAQsController extends PostsController {
 	/**
 	 * Get faq data.
 	 *
-	 * @param FAQ $faq FAQ instance.
+	 * @param Faq $faq FAQ instance.
 	 * @param string  $context Request context.
 	 *                         Options: 'view' and 'edit'.
 	 *
@@ -207,7 +207,7 @@ class FAQsController extends PostsController {
 			'id'          => $faq->get_id(),
 			'name'        => $faq->get_name( $context ),
 			'menu_order'  => $faq->get_menu_order( $context ),
-			'parent_id'   => $faq->get_parent_id( $context ),
+			'parent_id'   => $faq->get_course_id( $context ),
 			'description' => 'view' === $context ? wpautop( do_shortcode( $faq->get_description() ) ) : $faq->get_description( $context ),
 		);
 
@@ -326,11 +326,6 @@ class FAQsController extends PostsController {
 			$faq->set_description( wp_filter_post_kses( $request['description'] ) );
 		}
 
-		// Post status.
-		if ( isset( $request['status'] ) ) {
-			$faq->set_status( 'publish' );
-		}
-
 		// Menu order.
 		if ( isset( $request['menu_order'] ) ) {
 			$faq->set_menu_order( $request['menu_order'] );
@@ -338,7 +333,7 @@ class FAQsController extends PostsController {
 
 		// FAQ parent ID.
 		if ( isset( $request['parent_id'] ) ) {
-			$faq->set_parent_id( $request['parent_id'] );
+			$faq->set_course_id( $request['parent_id'] );
 		}
 
 		// Course ID.

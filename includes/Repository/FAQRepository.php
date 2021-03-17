@@ -10,7 +10,7 @@
 namespace ThemeGrill\Masteriyo\Repository;
 
 use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Models\FAQ;
+use ThemeGrill\Masteriyo\Models\Faq;
 
 /**
  * FAQRepository class.
@@ -195,7 +195,7 @@ class FAQRepository extends AbstractRepository implements RepositoryInterface {
 	 * @since 0.1.0
 	 *
 	 * @param array $query_vars Query vars.
-	 * @return FAQ[]
+	 * @return Faq[]
 	 */
 	public function query( $query_vars ) {
 		$args = $this->get_wp_query_args( $query_vars );

@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 0.1.0
  */
-class FAQ extends Model {
+class Faq extends Model {
 
 	/**
 	 * This is the name of this object type.
@@ -62,8 +62,6 @@ class FAQ extends Model {
 		'course_id'     => 0,
 		'date_created'  => null,
 		'date_modified' => null,
-		'children'      => array(),
-		'status'        => false,
 	);
 
 	/**
@@ -187,19 +185,6 @@ class FAQ extends Model {
 		return $this->get_prop( 'menu_order', $context );
 	}
 
-	/**
-	 * Get faq status.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_status( $context = 'view' ) {
-		return $this->get_prop( 'status', $context );
-	}
-
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -282,16 +267,5 @@ class FAQ extends Model {
 	 */
 	public function set_menu_order( $menu_order ) {
 		$this->set_prop( 'menu_order', absint( $menu_order ) );
-	}
-
-	/**
-	 * Set faq status.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $status FAQ status.
-	 */
-	public function set_status( $status ) {
-		$this->set_prop( 'status', $status );
 	}
 }

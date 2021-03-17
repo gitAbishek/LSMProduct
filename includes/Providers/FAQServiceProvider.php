@@ -8,7 +8,7 @@ namespace ThemeGrill\Masteriyo\Providers;
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\FAQ;
+use ThemeGrill\Masteriyo\Models\Faq;
 use ThemeGrill\Masteriyo\Repository\FAQRepository;
 use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\FAQsController;
 
@@ -48,7 +48,7 @@ class FAQServiceProvider extends AbstractServiceProvider {
 		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\FAQsController' )
 			->addArgument( 'permission');
 
-		 $this->getContainer()->add( 'faq', FAQ::class )
+		 $this->getContainer()->add( 'faq', Faq::class )
 			->addArgument( 'faq.store');
 	 }
 }

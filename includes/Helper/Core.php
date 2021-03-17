@@ -9,7 +9,7 @@ use ThemeGrill\Masteriyo\DateTime;
 use ThemeGrill\Masteriyo\Constants;
 use ThemeGrill\Masteriyo\Models\Course;
 use ThemeGrill\Masteriyo\Models\Section;
-use ThemeGrill\Masteriyo\Models\FAQ;
+use ThemeGrill\Masteriyo\Models\Faq;
 
 /**
  * Get course.
@@ -109,15 +109,15 @@ function masteriyo_get_section( $section ) {
  *
  * @since 0.1.0
  *
- * @param int|FAQ|WP_Post $faq FAQ id or FAQ Model or Post.
+ * @param int|Faq|WP_Post $faq FAQ id or FAQ Model or Post.
  *
- * @return FAQ|null
+ * @return Faq|null
  */
 function masteriyo_get_faq( $faq ) {
 	$faq_obj   = masteriyo( 'faq' );
 	$faq_store = masteriyo( 'faq.store' );
 
-	if ( is_a( $faq, 'ThemeGrill\Masteriyo\Models\FAQ' ) ) {
+	if ( is_a( $faq, 'ThemeGrill\Masteriyo\Models\Faq' ) ) {
 		$id = $faq->get_id();
 	} elseif ( is_a( $faq, 'WP_Post' ) ) {
 		$id = $faq->ID;
@@ -203,7 +203,7 @@ function masteriyo_get_questions( $args = array() ) {
  *
  * @param array $args Query arguments.
  *
- * @return object|array[FAQ]
+ * @return object|array[Faq]
  */
 function masteriyo_get_faqs( $args = array() ) {
 	$faqs = masteriyo( 'query.faqs' )->set_args( $args )->get_faqs();

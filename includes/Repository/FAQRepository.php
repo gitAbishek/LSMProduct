@@ -47,6 +47,7 @@ class FAQRepository extends AbstractRepository implements RepositoryInterface {
 					'post_title'     => $faq->get_name(),
 					'post_content'   => $faq->get_description(),
 					'post_parent'    => $faq->get_parent_id(),
+					'post_name'      => '',
 					'comment_status' => 'closed',
 					'ping_status'    => 'closed',
 					'menu_order'     => $faq->get_menu_order(),

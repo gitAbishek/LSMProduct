@@ -19,7 +19,9 @@ do_action( 'masteriyo_before_related_posts_content' );
 	<?php foreach ( $related_courses as $course ) { ?>
 		<div class="mto-group course-card mto-ml-0 mto-max-h-429 mto-overflow-hidden">
 			<div class="mto-relative">
-				<span class="price-tag">$<?php echo $course->get_price(); ?></span>
+				<?php if ( is_numeric( $course->get_price() ) ): ?>
+					<span class="price-tag">$<?php echo $course->get_price(); ?></span>
+				<?php endif; ?>
 				<img class="mto-w-full" src="<?php echo wp_get_attachment_url( $course->get_featured_image() ) ?>" alt="Course featured image" />
 			</div>
 			<!-- Hidden Card -->

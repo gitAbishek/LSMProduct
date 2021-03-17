@@ -28,7 +28,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		'sale_price'        => '_sale_price',
 		'category_ids'      => '_category_ids',
 		'tag_ids'           => '_tag_ids',
-		'difficulty_ids'    => '_difficulty_ids',
+		'difficulty_id'    => '_difficulty_id',
 		'featured_image'    => '_thumbnail_id',
 		'rating_counts'     => '_rating_counts',
 		'average_rating'    => '_average_rating',
@@ -112,6 +112,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			'description'       => $course_post->post_content,
 			'short_description' => $course_post->post_excerpt,
 			'parent_id'         => $course_post->post_parent,
+			'author_id'         => $course_post->post_author,
 			'menu_order'        => $course_post->menu_order,
 			'post_password'     => $course_post->post_password,
 			'reviews_allowed'   => 'open' === $course_post->comment_status,
@@ -263,8 +264,8 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			wp_set_post_terms( $model->get_id(), $model->get_tag_ids( 'edit' ), 'course_tag', false );
 		}
 
-		if ( $force || array_key_exists( 'difficulty_ids', $changes ) ) {
-			wp_set_post_terms( $model->get_id(), $model->get_difficulty_ids( 'edit' ), 'course_difficulty', false );
+		if ( $force || array_key_exists( 'difficulty_id', $changes ) ) {
+			wp_set_post_terms( $model->get_id(), $model->get_difficulty_id( 'edit' ), 'course_difficulty', false );
 		}
 	}
 
@@ -363,7 +364,9 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 
 		$set_props['category_ids']   = $this->get_term_ids( $course, 'course_cat' );
 		$set_props['tag_ids']        = $this->get_term_ids( $course, 'course_tag' );
-		$set_props['difficulty_ids'] = $this->get_term_ids( $course, 'course_difficulty' );
+		$set_props['difficulty_id']  = $this->get_term_ids( $course, 'course_difficulty' );
+
+		$set_props['difficulty_id'] = count( $set_props['difficulty_id'] ) > 0 ? $set_props['difficulty_id'][0] : array();
 
 		$course->set_props( $set_props );
 	}

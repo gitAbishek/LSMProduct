@@ -24,7 +24,8 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 		'video_playback_time' => '_video_playback_time',
 		'rating_counts'       => '_rating_counts',
 		'average_rating'      => '_average_rating',
-		'review_count'        => '_review_count'
+		'review_count'        => '_review_count',
+		'course_id'           => '_course_id',
 	);
 
 	/**
@@ -229,7 +230,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			return $result;
 		}, array() );
 
-		foreach ( $this->internal_meta_keys as $meta_key => $prop ) {
+		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
 			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
 		}

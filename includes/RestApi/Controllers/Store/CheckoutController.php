@@ -684,7 +684,7 @@ class CheckoutController extends CrudController {
 		} elseif ( 'tag' === $taxonomy ) {
 			$lesson->set_tag_ids( $term_ids );
 		} elseif ( 'difficulty' === $taxonomy ) {
-			$lesson->set_difficulty_ids( $term_ids );
+			$lesson->set_difficulty_id( array_shift( $term_ids ) );
 		}
 
 		return $lesson;

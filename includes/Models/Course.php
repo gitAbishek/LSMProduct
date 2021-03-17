@@ -70,6 +70,7 @@ class Course extends Model {
 		'description'        => '',
 		'short_description'  => '',
 		'post_password'      => '',
+		'author_id'          => 0,
 		'parent_id'          => 0,
 		'reviews_allowed'    => true,
 		'date_on_sale_from'  => null,
@@ -79,7 +80,7 @@ class Course extends Model {
 		'sale_price'         => '',
 		'category_ids'       => array(),
 		'tag_ids'            => array(),
-		'difficulty_ids'     => array(),
+		'difficulty_id'      => 0,
 		'featured_image'     => '',
 		'rating_counts'      => array(),
 		'average_rating'     => 0,
@@ -95,6 +96,39 @@ class Course extends Model {
 	 */
 	public function __construct( RepositoryInterface $course_repository ) {
 		$this->repository = $course_repository;
+	}
+
+	/**
+	 * Get featured image URL.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_featured_image_url() {
+		return wp_get_attachment_url( $this->get_featured_image() );
+	}
+
+	/**
+	 * Get category list (CourseCategory objects).
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array[CourseCategory]
+	 */
+	public function get_categories() {
+		$cat_ids = $this->get_category_ids();
+		$categories = array();
+		$store = masteriyo( 'course_cat.store' );
+
+		foreach( $cat_ids as $cat_id ) {
+			$cat_obj = masteriyo( 'course_cat' );
+			$cat_obj->set_id( $cat_id );
+			$store->read( $cat_obj );
+			$categories[] = apply_filters( 'masteriyo_get_course_cat', $cat_obj, $cat_id );
+		}
+
+		return $categories;
 	}
 
 	/*
@@ -284,6 +318,19 @@ class Course extends Model {
 	}
 
 	/**
+	 * Returns course author id.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string price
+	 */
+	public function get_author_id( $context = 'view' ) {
+		return $this->get_prop( 'author_id', $context );
+	}
+
+	/**
 	 * Returns course parent id.
 	 *
 	 * @since  0.1.0
@@ -355,7 +402,7 @@ class Course extends Model {
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string price
+	 * @return array[integer] Category IDs.
 	 */
 	public function get_category_ids( $context = 'view' ) {
 		return $this->get_prop( 'category_ids', $context );
@@ -376,16 +423,30 @@ class Course extends Model {
 	}
 
 	/**
-	 * Returns course difficulty ids.
+	 * Returns course difficulty id.
 	 *
 	 * @since  0.1.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string price
+	 * @return integer
 	 */
-	public function get_difficulty_ids( $context = 'view' ) {
-		return $this->get_prop( 'difficulty_ids', $context );
+	public function get_difficulty_id( $context = 'view' ) {
+		return $this->get_prop( 'difficulty_id', $context );
+	}
+
+	public function get_difficulty() {
+		$difficulty = masteriyo( 'course_difficulty' );
+		$store = masteriyo( 'course_difficulty.store' );
+
+		try {
+			$difficulty->set_id( $this->get_difficulty_id() );
+			$store->read( $difficulty );
+		} catch ( \Exception $e) {
+			return null;
+		}
+
+		return apply_filters( 'masteriyo_get_course_difficulty_object', $difficulty, $this->get_difficulty_id(), $this );
 	}
 
 	/**
@@ -558,6 +619,17 @@ class Course extends Model {
 	}
 
 	/**
+	 * Set the course author id.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $author_id Author id.
+	 */
+	public function set_author_id( $author_id ) {
+		$this->set_prop( 'author_id', absint( $author_id ) );
+	}
+
+	/**
 	 * Set the course parent id.
 	 *
 	 * @since 0.1.0
@@ -655,14 +727,14 @@ class Course extends Model {
 	}
 
 	/**
-	 * Set the course difficulty ids.
+	 * Set the course difficulty id.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param array $difficulty_ids Difficulty ids.
+	 * @param array $difficulty_id Difficulty id.
 	 */
-	public function set_difficulty_ids( $difficulty_ids ) {
-		$this->set_prop( 'difficulty_ids', array_unique( array_map( 'intval', $difficulty_ids ) ) ) ;
+	public function set_difficulty_id( $difficulty_id ) {
+		$this->set_prop( 'difficulty_id', absint( $difficulty_id ) );
 	}
 
 	/**

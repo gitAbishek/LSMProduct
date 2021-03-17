@@ -6,6 +6,9 @@
  */
 
 use ThemeGrill\Masteriyo\DateTime;
+use ThemeGrill\Masteriyo\Constants;
+use ThemeGrill\Masteriyo\Models\Course;
+use ThemeGrill\Masteriyo\Models\Section;
 
 /**
  * Get course.
@@ -392,7 +395,7 @@ function masteriyo_get_user( $user ) {
  * @param mixed  $slug Template slug.
  * @param string $name Template name (default: '').
  */
-function masteriyo_get_part( $slug, $name = '' ) {
+function masteriyo_get_template_part( $slug, $name = '' ) {
 	return masteriyo( 'template' )->get_part( $slug, $name );
 }
 
@@ -652,6 +655,8 @@ function masteriyo_get_page_id( $page ) {
 /**
  * Retrieve page permalink.
  *
+ * @since 0.1.0
+ *
  * @param string      $page page slug.
  * @param string|bool $fallback Fallback URL if page is not set. Defaults to home URL.
  *
@@ -666,4 +671,292 @@ function masteriyo_get_page_permalink( $page, $fallback = null ) {
 	}
 
 	return apply_filters( 'masteriyo_get_' . $page . '_page_permalink', $permalink );
+}
+
+/**
+ * Check if the current page is a single course page.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_single_course_page() {
+	return is_singular( 'course' );
+}
+
+/**
+ * Get image asset URL.
+ *
+ * @since 0.1.0
+ *
+ * @param string $file Image file name.
+ *
+ * @return string
+ */
+function masteriyo_img_url( $file ) {
+	$plugin_dir = plugin_dir_url( Constants::get('MASTERIYO_PLUGIN_FILE') );
+
+	return "{$plugin_dir}assets/img/{$file}";
+}
+
+/**
+ * Put course data into a global.
+ *
+ * @since 0.1.0
+ *
+ * @param int|Course|WP_Post $course_id Course id or Course object or course wp post.
+ *
+ * @return Course
+ */
+function masteriyo_setup_course_data( $course_id ) {
+	$GLOBALS['course'] =  masteriyo_get_course( $course_id );
+
+	return $GLOBALS['course'];
+}
+
+/**
+ * Render stars based on rating.
+ *
+ * @since 0.1.0
+ *
+ * @param int|float $rating Given rating.
+ * @param string $classes Extra classes to add to the svgs.
+ * @param string $echo Whether to echo or return the html.
+ *
+ * @return void|string
+ */
+function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
+	$rating = (float) $rating;
+	$max_rating = apply_filters( 'masteriyo_max_course_rating', 5 );
+	$stars = apply_filters( 'masteriyo_rating_indicators_html', array(
+		'full_star' =>
+			"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+				<path d='M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z'/>
+			</svg>",
+		'half_star' =>
+			"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+				<path d='M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z'/>
+			</svg>",
+		'empty_star' =>
+			"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+				<path d='M6.516 14.323l-1.49 6.452a.998.998 0 001.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822 0L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 00.832-.586L12 5.43l1.799 3.981a.998.998 0 00.832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 00-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 00-.276-.94l-3.038-2.962 4.09-.326z'/>
+			</svg>",
+	), $rating, $max_rating );
+
+	ob_start();
+
+	for ( $i = 1; $i <= floor($rating); $i++ ) echo $stars['full_star'];
+	if ( floor( $rating ) != $rating ) echo $stars['half_star'];
+	for ( $i = ceil( $rating ); $i < $max_rating; $i++ ) echo $stars['empty_star'];
+
+	$html = ob_get_clean();
+
+	if ( $echo === true ) {
+		echo $html;
+	} else {
+		return ob_get_clean();
+	}
+}
+
+/**
+ * Get related courses.
+ *
+ * @since 0.1.0
+ *
+ * @param Course $course
+ *
+ * @return array[Course]
+ */
+function masteriyo_get_related_courses( $course ) {
+	$setting = masteriyo( 'setting' );
+
+	$setting->set_name( 'masteriyo_max_related_posts_count' );
+
+	masteriyo( 'setting.store' )->read( $setting );
+
+	$max_related_posts = apply_filters( 'masteriyo_max_related_posts_count', $setting->get_value() );
+	$max_related_posts = absint( $max_related_posts );
+	$max_related_posts = max( $max_related_posts, 5 );
+
+	/**
+	 * Ref: https://www.wpbeginner.com/wp-tutorials/how-to-display-related-posts-in-wordpress/
+	 */
+	$args = array(
+		'tax_query' => array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'course_tag',
+				'terms'    => $course->get_tag_ids(),
+			),
+		),
+		'post__not_in' => array( $course->get_id() ),
+		'posts_per_page' => $max_related_posts,
+		'post_type' => 'course',
+	);
+	$query = new WP_Query($args);
+	$related_courses = array_map( 'masteriyo_get_course', $query->posts );
+
+	return apply_filters( 'masteriyo_get_related_courses', $related_courses, $query );
+}
+
+/**
+ * Get lessons count for a course.
+ *
+ * @since 0.1.0
+ *
+ * @param int|Course|WP_Post $course
+ *
+ * @return integer
+ */
+function masteriyo_get_lessons_count( $course ) {
+	$course = masteriyo_get_course( $course );
+
+	// Bail early if the course is null.
+	if ( is_null( $course ) ) {
+		return 0;
+	}
+
+	$lessons = masteriyo_get_lessons(array(
+		'course_id' => $course->get_id(),
+	));
+
+	return count( $lessons );
+}
+
+/**
+ * Convert minutes to time length string to display on screen.
+ *
+ * @since 0.1.0
+ *
+ * @param int $minutes Total length in minutes.
+ * @param string $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
+ *
+ * @return string
+ */
+function masteriyo_minutes_to_time_length_string( $minutes, $format = null ) {
+	$minutes = absint( $minutes );
+	$hours = absint( $minutes / 60 );
+	$mins = $minutes - $hours * 60;
+	$str = '';
+
+	if ( is_string( $format ) ) {
+		$str = str_replace( '%H%', $hours, $format );
+		$str = str_replace( '%M%', $mins, $str );
+	} else {
+		$str .= $hours > 0 ? sprintf( '%d %s ', $hours, _nx( 'hour', 'hours', $hours, 'masteriyo' ) ) : '';
+		$str .= $mins > 0 ? sprintf( ' %d %s', $mins, _nx( 'min', 'mins', $mins, 'masteriyo' ) ) : '';
+		$str = $minutes > 0 ? $str : __( '0 mins', 'masteriyo' );
+	}
+
+	return $str;
+}
+
+/**
+ * Get lecture hours for a course as string to display on screen.
+ *
+ * @since 0.1.0
+ *
+ * @param int|Course|WP_Post $course
+ * @param string $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
+ *
+ * @return string
+ */
+function masteriyo_get_lecture_hours( $course, $format = null ) {
+	$course = masteriyo_get_course( $course );
+
+	// Bail early if the course is null.
+	if ( is_null( $course ) ) {
+		return '';
+	}
+
+	$lessons = masteriyo_get_lessons(array(
+		'course_id' => $course->get_id(),
+	));
+	$mins = 0;
+
+	foreach ( $lessons as $lesson ) {
+		$mins += $lesson->get_video_playback_time();
+	}
+
+	return masteriyo_minutes_to_time_length_string( $mins, $format );
+}
+
+/**
+ * Get lecture hours for a section as string to display on screen.
+ *
+ * @since 0.1.0
+ *
+ * @param int|Section|WP_Post $course
+ * @param string $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
+ *
+ * @return string
+ */
+function masteriyo_get_lecture_hours_of_section( $section, $format = null ) {
+	$section = masteriyo_get_section( $section );
+
+	// Bail early if the section is null.
+	if ( is_null( $section ) ) {
+		return '';
+	}
+
+	$lessons = masteriyo_get_lessons(array(
+		'parent_id' => $section->get_id(),
+	));
+	$mins = 0;
+
+	foreach ( $lessons as $lesson ) {
+		$mins += $lesson->get_video_playback_time();
+	}
+
+	return masteriyo_minutes_to_time_length_string( $mins, $format );
+}
+
+/**
+ * Make a dictionary with section id as key and its lessons as value from a course.
+ *
+ * @since 0.1.0
+ *
+ * @param int|Course|WP_Post $course
+ *
+ * @return array
+ */
+function masteriyo_make_section_to_lessons_dictionary( $course ) {
+	$course = masteriyo_get_course( $course );
+
+	// Bail early if the course is null.
+	if ( is_null( $course) ) {
+		return array();
+	}
+
+	$sections = masteriyo_get_sections( array(
+		'order'     => 'asc',
+		'order_by'  => 'menu_order',
+		'parent_id' => $course->get_id(),
+	) );
+
+	$lessons = masteriyo_get_lessons(array(
+		'order'     => 'asc',
+		'order_by'  => 'menu_order',
+		'course_id' => $course->get_id(),
+	));
+
+	$lessons_dictionary = array();
+
+	foreach ( $lessons as $lesson ) {
+		$section_id = $lesson->get_parent_id();
+
+		if ( ! isset( $lessons_dictionary[ $section_id ] ) ) {
+			$lessons_dictionary[ $section_id ] = array();
+		}
+
+		$lessons_dictionary[ $section_id ][] = $lesson;
+	}
+
+	foreach( $sections as $section ) {
+		if ( ! isset( $lessons_dictionary[ $section->get_id() ] ) ) {
+			$lessons_dictionary[ $section->get_id() ] = array();
+		}
+	}
+
+	return array( $sections, $lessons, $lessons_dictionary );
 }

@@ -110,6 +110,19 @@ class FAQ extends Model {
 	}
 
 	/**
+	 * Get FAQ title. Alias for get_name().
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_title( $context = 'view' ) {
+		return $this->get_name( $context );
+	}
+
+	/**
 	 * Get faq created date.
 	 *
 	 * @since  0.1.0
@@ -202,6 +215,18 @@ class FAQ extends Model {
 	 */
 	public function set_name( $name ) {
 		$this->set_prop( 'name', $name );
+	}
+
+
+	/**
+	 * Set faq title. Alias for set_name().
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $title faq title.
+	 */
+	public function set_title( $title ) {
+		$this->set_prop( 'name', $title );
 	}
 
 	/**

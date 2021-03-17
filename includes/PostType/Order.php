@@ -12,7 +12,7 @@ namespace ThemeGrill\Masteriyo\PostType;
 /**
  * Orders class.
  */
-class Orders extends PostType {
+class Order extends PostType {
 	/**
 	 * Post slug.
 	 *

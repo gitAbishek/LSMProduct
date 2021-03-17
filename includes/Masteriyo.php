@@ -11,7 +11,7 @@ namespace ThemeGrill\Masteriyo;
 
 use League\Container\Container;
 use ThemeGrill\Masteriyo\RestApi\RestApi;
-use ThemeGrill\Masteriyo\PostType\RegisterPostTypes;
+use ThemeGrill\Masteriyo\PostType\RegisterPostType;
 use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
 use ThemeGrill\Masteriyo\AdminMenu;
 use ThemeGrill\Masteriyo\Shortcodes\Shortcodes;
@@ -93,7 +93,7 @@ class Masteriyo extends Container {
 	 * @since 0.1.0
 	 */
 	public function after_wp_init() {
-		RegisterPostTypes::instance()->register();
+		RegisterPostType::instance()->register();
 		RegisterTaxonomies::register();
 		Shortcodes::instance()->register_shortcodes();
 

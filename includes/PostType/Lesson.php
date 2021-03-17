@@ -5,7 +5,7 @@
 
 namespace ThemeGrill\Masteriyo\PostType;
 
-class Lessons extends PostType {
+class Lesson extends PostType {
 	/**
 	 * Post slug.
 	 *

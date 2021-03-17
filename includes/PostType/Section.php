@@ -12,7 +12,7 @@ namespace ThemeGrill\Masteriyo\PostType;
 /**
  * Sections class.
  */
-class Sections extends PostType {
+class Section extends PostType {
 	/**
 	 * Post slug.
 	 *

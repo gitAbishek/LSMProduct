@@ -14,7 +14,7 @@ namespace ThemeGrill\Masteriyo\PostType;
  *
  * @since 0.1.0
  */
-class Quizes extends PostType {
+class Quiz extends PostType {
 	/**
 	 * Post slug.
 	 *

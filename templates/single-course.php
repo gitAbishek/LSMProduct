@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-get_header();
+get_header( 'masteriyo-course' );
 
 /**
  * masteriyo_before_single_course hook.
@@ -33,4 +33,4 @@ masteriyo_get_template_part( 'content', 'related-posts' );
  */
 do_action( 'masteriyo_after_related_posts' );
 
-get_footer();
+get_footer( 'masteriyo-course' );

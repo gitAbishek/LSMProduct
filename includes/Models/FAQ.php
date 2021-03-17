@@ -59,7 +59,7 @@ class FAQ extends Model {
 		'name'          => '',
 		'description'   => '',
 		'menu_order'    => 0,
-		'parent_id'     => 0,
+		'course_id'     => 0,
 		'date_created'  => null,
 		'date_modified' => null,
 		'children'      => array(),
@@ -157,8 +157,8 @@ class FAQ extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_parent_id( $context = 'view' ) {
-		return $this->get_prop( 'parent_id', $context );
+	public function get_course_id( $context = 'view' ) {
+		return $this->get_prop( 'course_id', $context );
 	}
 
 	/**
@@ -244,8 +244,8 @@ class FAQ extends Model {
 	 *
 	 * @param int $parent Parent id.
 	 */
-	public function set_parent_id( $parent ) {
-		$this->set_prop( 'parent_id', absint( $parent ) );
+	public function set_course_id( $parent ) {
+		$this->set_prop( 'course_id', absint( $parent ) );
 	}
 
 	/**

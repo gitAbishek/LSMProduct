@@ -46,7 +46,7 @@ class FAQRepository extends AbstractRepository implements RepositoryInterface {
 					'post_author'    => get_current_user_id(),
 					'post_title'     => $faq->get_name(),
 					'post_content'   => $faq->get_description(),
-					'post_parent'    => $faq->get_parent_id(),
+					'post_parent'    => $faq->get_course_id(),
 					'post_name'      => '',
 					'comment_status' => 'closed',
 					'ping_status'    => 'closed',
@@ -90,7 +90,7 @@ class FAQRepository extends AbstractRepository implements RepositoryInterface {
 				'date_created'  => $faq_post->post_date_gmt,
 				'date_modified' => $faq_post->post_modified_gmt,
 				'description'   => $faq_post->post_content,
-				'parent_id'     => $faq_post->post_parent,
+				'course_id'     => $faq_post->post_parent,
 				'menu_order'    => $faq_post->menu_order,
 			)
 		);
@@ -125,7 +125,7 @@ class FAQRepository extends AbstractRepository implements RepositoryInterface {
 			$post_data = array(
 				'post_content'   => $faq->get_description( 'edit' ),
 				'post_title'     => $faq->get_name( 'edit' ),
-				'post_parent'    => $faq->get_parent_id( 'edit' ),
+				'post_parent'    => $faq->get_course_id( 'edit' ),
 				'comment_status' => 'closed',
 				'post_status'    => 'publish',
 				'menu_order'     => $faq->get_menu_order( 'edit' ),

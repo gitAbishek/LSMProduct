@@ -1317,3 +1317,73 @@ function get_masteriyo_currencies() {
 
 	return $currencies;
 }
+
+/**
+ * Get permalink settings for things like courses and taxonomies.
+ *
+ * @since  0.1.0
+ *
+ * @param string $id Permalink id.
+ *
+ * @return array
+ */
+function masteriyo_get_permalink_structure( $id = '' ) {
+	$saved_permalinks = (array) get_option( 'masteriyo_permalinks', array() );
+	$permalinks       = wp_parse_args(
+		array_filter( $saved_permalinks ),
+		array(
+			'course_base'            => _x( 'course', 'slug', 'masteriyo' ),
+			'course_category_base'   => _x( 'course-category', 'slug', 'masteriyo' ),
+			'course_tag_base'        => _x( 'course-tag', 'slug', 'masteriyo' ),
+			'course_difficulty_base' => _x( 'course-difficulty', 'slug', 'masteriyo' ),
+			'use_verbose_page_rules' => false,
+		)
+	);
+
+	if ( $saved_permalinks !== $permalinks ) {
+		update_option( 'masteriyo_permalinks', $permalinks );
+	}
+
+	$permalinks['course_rewrite_slug']            = untrailingslashit( $permalinks['course_base'] );
+	$permalinks['course_category_rewrite_slug']   = untrailingslashit( $permalinks['course_category_base'] );
+	$permalinks['course_tag_rewrite_slug']        = untrailingslashit( $permalinks['course_tag_base'] );
+	$permalinks['course_difficulty_rewrite_slug'] = untrailingslashit( $permalinks['course_difficulty_base'] );
+
+	$permalinks = isset( $permalinks[ $id ] ) ? $permalinks[ $id ] : $permalinks;
+
+	return $permalinks;
+}
+
+/**
+ * Switch WooCommerce to site language.
+ *
+ * @since 0.1.0
+ */
+function masteriyo_switch_to_site_locale() {
+	if ( function_exists( 'switch_to_locale' ) ) {
+		switch_to_locale( get_locale() );
+
+		// Filter on plugin_locale so load_plugin_textdomain loads the correct locale.
+		add_filter( 'plugin_locale', 'get_locale' );
+
+		// Init masteriyo locale.
+		masteriyo()->load_text_domain();
+	}
+}
+
+/**
+ * Switch WooCommerce language to original.
+ *
+ * @since 0.1.0
+ */
+function masteriyo_restore_locale() {
+	if ( function_exists( 'restore_previous_locale' ) ) {
+		restore_previous_locale();
+
+		// Remove filter.
+		remove_filter( 'plugin_locale', 'get_locale' );
+
+		// Init masteriyo locale.
+		masteriyo()->load_text_domain();
+	}
+}

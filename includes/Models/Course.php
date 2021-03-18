@@ -833,14 +833,18 @@ class Course extends Model {
 	/**
 	 * Check whether the course exists in the database or not.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return void
 	 */
 	public function exists() {
 		return false !== $this->get_status();
 	}
 
-		/**
+	/**
 	 * Returns whether or not the course is visible in the catalog.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return bool
 	 */
@@ -868,5 +872,70 @@ class Course extends Model {
 		}
 
 		return $visible;
+	}
+
+	/**
+	 * Get the taxonomy terms
+	 *
+	 * @since 0.10
+	 *
+	 * @param string $taxonomy Taxonomy.
+	 * @param string $field    WP_Term field.
+	 * @return WP_Term[]|string[]|false
+	 */
+	protected function get_terms( $taxonomy, $field ) {
+		$terms = get_the_terms( $this->get_id(), $taxonomy );
+
+		if ( false === $terms || is_wp_error( $terms ) ) {
+			return array();
+		}
+
+		if ( ! is_null( $terms ) ) {
+			$terms = wp_list_pluck( $terms, $field );
+		}
+
+		return $terms;
+	}
+
+	/**
+	 * Get course categories.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $field WP_Term field.
+	 *
+	 * @return WP_Term[]|string[]|false
+	 */
+	public function get_categories( $field = null ) {
+		$categories = $this->get_terms( 'course_cat', $field );
+		return apply_filters( 'masteriyo_course_categories', $categories, $field, $this );
+	}
+
+	/**
+	 * Get course tags.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $field WP_Term field.
+	 *
+	 * @return WP_Term[]|string[]|false
+	 */
+	public function get_tags( $field = null ) {
+		$tags = $this->get_terms( 'course_cat', $field );
+		return apply_filters( "masteriyo_course_tags", $tags, $field, $this );
+	}
+
+	/**
+	 * Get course difficulties.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $field WP_Term field.
+	 *
+	 * @return WP_Term[]|string[]|false
+	 */
+	public function get_difficulties( $field = null ) {
+		$difficulties = $this->get_terms( 'course_difficulty', $field );
+		return apply_filters( 'masteriyo_course_difficulties', $difficulties, $field, $this );
 	}
 }

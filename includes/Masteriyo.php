@@ -63,12 +63,15 @@ class Masteriyo extends Container {
 		// Register admin menus
 		AdminMenu::instance()->init();
 
+		Ajax::init();
+
+		PermalinkSettings::instance()->init();
+
 		// Register scripts and styles.
 		$this->get( 'script-style');
 
-		Ajax::init();
-
 		$this->get( 'query.frontend' );
+
 
 		// Initilize the hooks.
 		$this->init_hooks();
@@ -153,7 +156,7 @@ class Masteriyo extends Container {
 	 *
 	 * @since 0.1.0
 	 */
-	private function load_text_domain() {
+	public function load_text_domain() {
 		load_plugin_textdomain(
 			'masteriyo',
 			false,
@@ -277,21 +280,14 @@ class Masteriyo extends Container {
 	 * @return string
 	 */
 	public function template_loader( $template ) {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 		global $post;
 
 		if ( masteriyo_is_single_course_page() ) {
 			masteriyo_setup_course_data( $post );
-
 			$template = masteriyo( 'template' )->locate( 'single-course.php' );
-=======
-		if ( masteriyo_is_archive_course_page() ) {
-=======
-		if ( \masteriyo_is_archive_course_page() ) {
->>>>>>> Public css configured.
+		} elseif ( masteriyo_is_archive_course_page() ) {
 			$template = masteriyo( 'template' )->locate( 'archive-course.php' );
->>>>>>> Implementing course list page.
 		}
 
 		return $template;

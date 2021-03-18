@@ -28,6 +28,8 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 		<span class="price-tag">
 			<?php echo masteriyo_price( $course->get_price() ); ?>
 		</span>
+		<!-- Featured Image -->
+		<?php //echo wp_get_attachment_image( $course->get_featured_image() ); ?>
 		<img class="mto-absoulte mto-w-full mto-h-full mto-object-cover" src="https://via.placeholder.com/150" alt="You are your only limit">
 		<!-- Hidden Card -->
 		<div class="mto-hidden group-hover:mto-block course-overlay">
@@ -38,14 +40,18 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 				<div class="course-author-detail">
 					<div class="mto-flex mto-flex-row mto-items-center mto-mt-4">
 						<img src="./img/author-pic.jpg" class="mto-rounded-full mto-border-2 mto-border-white mto-w-7 mto-h-7" alt="">
-						<span class="mto-ml-1.5 mto-font-medium mto-text-sm mto-text-white">Morris Perera</span>
+						<span class="mto-ml-1.5 mto-font-medium mto-text-sm mto-text-white">
+							<?php echo esc_html( get_the_author_meta( 'display_name', $course->get_id() ) ); ?>
+						</span>
 					</div>
 
 					<div class="mto-font-sm mto-text-white mto-my-4 mto-line-clamp-3">
-						<?php echo $course->get_description(); ?>
+						<?php echo $course->get_short_description(); ?>
 					</div>
 
-					<a href="#" class="btn course-author-readmore hover:mto-bg-white">Read More</a>
+					<a href="<?php echo esc_url( $course->get_permalink() ); ?>" class="btn course-author-readmore hover:mto-bg-white">
+						<?php esc_html_e( apply_filters( 'masteriyo_read_more', 'Read More' ), 'masteriyo' ); ?>
+					</a>
 				</div>
 			</div>
 			<div class="course-time-share mto-bg-primary mto-absolute mto-bottom-0 mto-right-0 mto-left-0 mto-border mto-border-opacity-10">
@@ -103,7 +109,11 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 				</svg>
 			</span>
 
-			<span class="mto-inline-block mto-bg-secondary mto-rounded-full mto-px-4 mto-py-1 mto-text-xs mto-uppercase mto-font-medium mto-text-white mto-ml-2">Book</span>
+		<?php foreach( $course->get_categories( 'name' ) as $category ): ?>
+			<span class="mto-inline-block mto-bg-secondary mto-rounded-full mto-px-4 mto-py-1 mto-text-xs mto-uppercase mto-font-medium mto-text-white mto-ml-2">
+			<?php echo esc_html( $category ); ?>
+			</span>
+		<?php endforeach; ?>
 		</div>
 		<h2 class="mto-font-bold mto-text-base mto-capitalize mb-2 mto-h-12 mto-line-clamp-2">
 			<?php echo esc_html( $course->get_name() ); ?>
@@ -119,7 +129,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 			</div>
 			<div class="btn">
 				<a href="#" class="mto-text-white">
-					<?php esc_html_e( 'Enroll Now', 'masteriyo' ); ?>
+					<?php esc_html_e( apply_filters( 'masteriyo_enroll_now', 'Enroll Now' ), 'masteriyo' ); ?>
 				</a>
 			</div>
 		</div>

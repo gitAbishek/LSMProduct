@@ -5,6 +5,9 @@
  * @since 0.1.0
  */
 
+if ( ! function_exists( 'add_action' ) && function_exists( 'add_filter' ) ) {
+	return;
+}
 
 /**
  * Handle redirects before content is output - hooked into template_redirect so is_page works.
@@ -21,15 +24,25 @@ function masteriyo_template_redirect() {
 		exit;
 	}
 	// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+	// Redirect to the course page if we have a single course.
+	if ( is_search() && is_post_type_archive( 'course' ) && apply_filters( 'masteriyo_redirect_single_search_result', true ) && 1 === absint( $wp_query->found_posts ) ) {
+		$course = masteriyo_get_course( $wp_query->post );
+
+		if ( $course && $course->is_visible() ) {
+			wp_safe_redirect( $course->get_permalink(), 302 );
+			exit;
+		}
+	}
 }
-function_exists( 'add_action') && add_action( 'template_redirect', 'masteriyo_template_redirect' );
+add_action( 'template_redirect', 'masteriyo_template_redirect' );
 
 /**
  * Should the Masteriyo loop be displayed?
  *
  * This will return true if we have posts (courses) or if we have subcats to display.
  *
- * @since 3.4.0
+ * @since 0.1.0
  * @return bool
  */
 function masteriyo_course_loop() {
@@ -40,6 +53,8 @@ if ( ! function_exists( 'masteriyo_course_loop_start' ) ) {
 
 	/**
 	 * Output the start of a course loop. By default this is a UL.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param bool $echo Should echo?.
 	 * @return stringe
@@ -67,6 +82,8 @@ if ( ! function_exists( 'masteriyo_course_loop_end' ) ) {
 	/**
 	 * Output the end of a course loop. By default this is a UL.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param bool $echo Should echo?.
 	 * @return string
 	 */
@@ -90,6 +107,8 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 
 	/**
 	 * Page Title function.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param  bool $echo Should echo title.
 	 * @return string
@@ -125,7 +144,7 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 /**
  * Sets up the masteriyo_loop global from the passed args or from the main query.
  *
- * @since 3.3.0
+ * @since 0.1.0
  * @param array $args Args to pass into the global.
  */
 function masteriyo_setup_loop( $args = array() ) {
@@ -165,12 +184,12 @@ function masteriyo_setup_loop( $args = array() ) {
 
 	$GLOBALS['masteriyo_loop'] = wp_parse_args( $args, $default_args );
 }
-function_exists( 'add_action') && add_action( 'masteriyo_before_shop_loop', 'masteriyo_setup_loop' );
+add_action( 'masteriyo_before_shop_loop', 'masteriyo_setup_loop' );
 
 /**
  * Get the default columns setting - this is how many courses will be shown per row in loops.
  *
- * @since 3.3.0
+ * @since 0
  * @return int
  */
 function masteriyo_get_default_courses_per_row() {
@@ -247,7 +266,7 @@ function masteriyo_get_loop_prop( $prop, $default = '' ) {
  * When the_post is called, put course data into a global.
  *
  * @param mixed $post Post Object.
- * @return MASTERIYO_Course
+ * @return Course
  */
 function masteriyo_setup_course_data( $post ) {
 	unset( $GLOBALS['course'] );
@@ -264,7 +283,7 @@ function masteriyo_setup_course_data( $post ) {
 
 	return $GLOBALS['course'];
 }
-function_exists( 'add_action') && add_action( 'the_post', 'masteriyo_setup_course_data' );
+add_action( 'the_post', 'masteriyo_setup_course_data' );
 
 /**
  * Add class to the body tag.
@@ -282,4 +301,4 @@ function masteriyo_add_body_class( $classes, $class ) {
 
 	return $classes;
 }
-function_exists( 'add_filter' ) && add_filter( 'body_class', 'masteriyo_add_body_class', 10, 2 );
+add_filter( 'body_class', 'masteriyo_add_body_class', 10, 2 );

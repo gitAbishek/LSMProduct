@@ -413,3 +413,26 @@ function masteriyo_time_format() {
 	}
 	return apply_filters( 'masteriyo_time_format', $time_format );
 }
+
+/**
+ * Sanitize permalink values before insertion into DB.
+ *
+ * Cannot use masteriyo_clean because it sometimes strips % chars and breaks the user's setting.
+ *
+ * @since  0.1.0
+ * @param  string $value Permalink.
+ * @return string
+ */
+function masteriyo_sanitize_permalink( $value ) {
+	global $wpdb;
+
+	$value = $wpdb->strip_invalid_text_for_column( $wpdb->options, 'option_value', $value );
+
+	if ( is_wp_error( $value ) ) {
+		$value = '';
+	}
+
+	$value = esc_url_raw( trim( $value ) );
+	$value = str_replace( 'http://', '', $value );
+	return untrailingslashit( $value );
+}

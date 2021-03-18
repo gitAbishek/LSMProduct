@@ -1,6 +1,6 @@
 <?php
 /**
- * FAQsController class.
+ * FaqsController class.
  *
  * @since 0.1.0
  *
@@ -14,9 +14,9 @@ defined( 'ABSPATH' ) || exit;
 use ThemeGrill\Masteriyo\Helper\Permission;
 
 /**
- * FAQsController class.
+ * FaqsController class.
  */
-class FAQsController extends PostsController {
+class FaqsController extends PostsController {
 	/**
 	 * Endpoint namespace.
 	 *
@@ -196,7 +196,7 @@ class FAQsController extends PostsController {
 	/**
 	 * Get faq data.
 	 *
-	 * @param Faq $faq FAQ instance.
+	 * @param Faq $faq Faq instance.
 	 * @param string  $context Request context.
 	 *                         Options: 'view' and 'edit'.
 	 *
@@ -232,7 +232,7 @@ class FAQsController extends PostsController {
 	}
 
 	/**
-	 * Get the FAQs'schema, conforming to JSON Schema.
+	 * Get the Faqs'schema, conforming to JSON Schema.
 	 *
 	 * @since 0.1.0
 	 *
@@ -251,44 +251,44 @@ class FAQsController extends PostsController {
 					'readonly'    => true,
 				),
 				'name'              => array(
-					'description' => __( 'FAQ name.', 'masteriyo' ),
+					'description' => __( 'Faq name.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_created'      => array(
-					'description' => __( "The date the FAQ was created, in the site's timezone.", 'masteriyo' ),
+					'description' => __( "The date the Faq was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_created_gmt'  => array(
-					'description' => __( 'The date the FAQ was created, as GMT.', 'masteriyo' ),
+					'description' => __( 'The date the Faq was created, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_modified'     => array(
-					'description' => __( "The date the FAQ was last modified, in the site's timezone.", 'masteriyo' ),
+					'description' => __( "The date the Faq was last modified, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'date_modified_gmt' => array(
-					'description' => __( 'The date the FAQ was last modified, as GMT.', 'masteriyo' ),
+					'description' => __( 'The date the Faq was last modified, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'description'       => array(
-					'description' => __( 'FAQ description.', 'masteriyo' ),
+					'description' => __( 'Faq description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'parent_id'         => array(
-					'description' => __( 'FAQ parent ID.', 'masteriyo' ),
+					'description' => __( 'Faq parent ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'menu_order'        => array(
-					'description' => __( 'Menu order, used to custom sort FAQs.', 'masteriyo' ),
+					'description' => __( 'Menu order, used to custom sort Faqs.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -299,7 +299,7 @@ class FAQsController extends PostsController {
 	}
 
 	/**
-	 * Prepare a single FAQ for create or update.
+	 * Prepare a single Faq for create or update.
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
@@ -331,7 +331,7 @@ class FAQsController extends PostsController {
 			$faq->set_menu_order( $request['menu_order'] );
 		}
 
-		// FAQ parent ID.
+		// Faq parent ID.
 		if ( isset( $request['parent_id'] ) ) {
 			$faq->set_course_id( $request['parent_id'] );
 		}

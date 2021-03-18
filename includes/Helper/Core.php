@@ -105,11 +105,11 @@ function masteriyo_get_section( $section ) {
 }
 
 /**
- * Get FAQ.
+ * Get Faq.
  *
  * @since 0.1.0
  *
- * @param int|Faq|WP_Post $faq FAQ id or FAQ Model or Post.
+ * @param int|Faq|WP_Post $faq Faq id or Faq Model or Post.
  *
  * @return Faq|null
  */
@@ -197,7 +197,7 @@ function masteriyo_get_questions( $args = array() ) {
 }
 
 /**
- * Get FAQs
+ * Get Faqs
  *
  * @since 0.1.0
  *

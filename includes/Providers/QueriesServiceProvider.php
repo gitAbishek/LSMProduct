@@ -8,7 +8,7 @@ namespace ThemeGrill\Masteriyo\Providers;
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Query\FAQsQuery;
+use ThemeGrill\Masteriyo\Query\FaqsQuery;
 use ThemeGrill\Masteriyo\Query\LessonQuery;
 use ThemeGrill\Masteriyo\Query\QuizQuery;
 use ThemeGrill\Masteriyo\Query\QuestionQuery;
@@ -37,7 +37,7 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		'\ThemeGrill\Masteriyo\Query\LessonQuery',
 		'\ThemeGrill\Masteriyo\Query\QuizQuery',
 		'\ThemeGrill\Masteriyo\Query\QuestionQuery',
-		'\ThemeGrill\Masteriyo\Query\FAQsQuery',
+		'\ThemeGrill\Masteriyo\Query\FaqsQuery',
 	);
 
 	/**
@@ -53,12 +53,12 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'query.lessons', LessonQuery::class );
 		$this->getContainer()->add( 'query.quizes', QuizQuery::class );
 		$this->getContainer()->add( 'query.questions', QuestionQuery::class );
-		$this->getContainer()->add( 'query.faqs', FAQsQuery::class );
+		$this->getContainer()->add( 'query.faqs', FaqsQuery::class );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\SectionQuery' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\LessonQuery' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\QuizQuery' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\QuestionQuery' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\FAQsQuery' );
+		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\FaqsQuery' );
 	}
 }

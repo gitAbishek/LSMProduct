@@ -1,6 +1,6 @@
 <?php
 /**
- * FAQ model.
+ * Faq model.
  *
  * @since 0.1.0
  *
@@ -10,12 +10,12 @@
 namespace ThemeGrill\Masteriyo\Models;
 
 use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Repository\FAQRepository;
+use ThemeGrill\Masteriyo\Repository\FaqRepository;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * FAQ model (post type).
+ * Faq model (post type).
  *
  * @since 0.1.0
  */
@@ -49,7 +49,7 @@ class Faq extends Model {
 	protected $cache_group = 'faq';
 
 	/**
-	 * Stores FAQ data.
+	 * Stores Faq data.
 	 *
 	 * @since 0.1.0
 	 *
@@ -69,9 +69,9 @@ class Faq extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param FAQRepository $faq_repository FAQ Repository.
+	 * @param FaqRepository $faq_repository Faq Repository.
 	 */
-	public function __construct( FAQRepository $faq_repository ) {
+	public function __construct( FaqRepository $faq_repository ) {
 		$this->repository = $faq_repository;
 	}
 
@@ -81,13 +81,6 @@ class Faq extends Model {
 	|--------------------------------------------------------------------------
 	*/
 
-	/**
-	 * Returns the children IDs if applicable. Overridden by child classes.
-	 *
-	 * @return array of IDs
-	 */
-	public function get_children() {}
-
 	/*
 	|--------------------------------------------------------------------------
 	| Getters
@@ -95,7 +88,7 @@ class Faq extends Model {
 	*/
 
 	/**
-	 * Get FAQ name.
+	 * Get Faq name.
 	 *
 	 * @since  0.1.0
 	 *
@@ -108,7 +101,7 @@ class Faq extends Model {
 	}
 
 	/**
-	 * Get FAQ title. Alias for get_name().
+	 * Get Faq title. Alias for get_name().
 	 *
 	 * @since  0.1.0
 	 *
@@ -241,7 +234,7 @@ class Faq extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $description FAQ description.
+	 * @param string $description Faq description.
 	 */
 	public function set_description( $description ) {
 		$this->set_prop( 'description', $description );

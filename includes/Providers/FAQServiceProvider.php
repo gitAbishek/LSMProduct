@@ -1,6 +1,6 @@
 <?php
 /**
- * FAQ model service provider.
+ * Faq model service provider.
  */
 
 namespace ThemeGrill\Masteriyo\Providers;
@@ -9,10 +9,10 @@ defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use ThemeGrill\Masteriyo\Models\Faq;
-use ThemeGrill\Masteriyo\Repository\FAQRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\FAQsController;
+use ThemeGrill\Masteriyo\Repository\FaqRepository;
+use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\FaqsController;
 
-class FAQServiceProvider extends AbstractServiceProvider {
+class FaqServiceProvider extends AbstractServiceProvider {
 	/**
 	 * The provided array is a way to let the container
 	 * know that a service is provided by this service
@@ -28,7 +28,7 @@ class FAQServiceProvider extends AbstractServiceProvider {
 		'faq',
 		'faq.store',
 		'faq.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\FAQsController'
+		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\FaqsController'
 	 );
 
 	 /**
@@ -40,12 +40,12 @@ class FAQServiceProvider extends AbstractServiceProvider {
 	  * @since 0.1.0
 	  */
 	 public function register() {
-		 $this->getContainer()->add( 'faq.store', FAQRepository::class );
+		 $this->getContainer()->add( 'faq.store', FaqRepository::class );
 
-		 $this->getContainer()->add( 'faq.rest', FAQsController::class )
+		 $this->getContainer()->add( 'faq.rest', FaqsController::class )
 			->addArgument( 'permission');
 
-		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\FAQsController' )
+		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\FaqsController' )
 			->addArgument( 'permission');
 
 		 $this->getContainer()->add( 'faq', Faq::class )

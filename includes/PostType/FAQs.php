@@ -1,6 +1,6 @@
 <?php
 /**
- * FAQs class.
+ * Faqs class.
  *
  * @since 0.1.0
  *
@@ -10,9 +10,9 @@
 namespace ThemeGrill\Masteriyo\PostType;
 
 /**
- * FAQs class.
+ * Faqs class.
  */
-class FAQs extends PostType {
+class Faqs extends PostType {
 	/**
 	 * Post slug.
 	 *
@@ -27,38 +27,38 @@ class FAQs extends PostType {
 	 */
 	public function __construct() {
 		$this->labels = array(
-			'name'                  => _x( 'FAQs', 'FAQ General Name', 'masteriyo' ),
-			'singular_name'         => _x( 'FAQ', 'FAQ Singular Name', 'masteriyo' ),
-			'menu_name'             => __( 'FAQs', 'masteriyo' ),
-			'name_admin_bar'        => __( 'FAQ', 'masteriyo' ),
-			'archives'              => __( 'FAQ Archives', 'masteriyo' ),
-			'attributes'            => __( 'FAQ Attributes', 'masteriyo' ),
-			'parent_item_colon'     => __( 'Parent FAQ:', 'masteriyo' ),
-			'all_items'             => __( 'All FAQs', 'masteriyo' ),
+			'name'                  => _x( 'Faqs', 'Faq General Name', 'masteriyo' ),
+			'singular_name'         => _x( 'Faq', 'Faq Singular Name', 'masteriyo' ),
+			'menu_name'             => __( 'Faqs', 'masteriyo' ),
+			'name_admin_bar'        => __( 'Faq', 'masteriyo' ),
+			'archives'              => __( 'Faq Archives', 'masteriyo' ),
+			'attributes'            => __( 'Faq Attributes', 'masteriyo' ),
+			'parent_item_colon'     => __( 'Parent Faq:', 'masteriyo' ),
+			'all_items'             => __( 'All Faqs', 'masteriyo' ),
 			'add_new_item'          => __( 'Add New Item', 'masteriyo' ),
 			'add_new'               => __( 'Add New', 'masteriyo' ),
-			'new_item'              => __( 'New FAQ', 'masteriyo' ),
-			'edit_item'             => __( 'Edit FAQ', 'masteriyo' ),
-			'update_item'           => __( 'Update FAQ', 'masteriyo' ),
-			'view_item'             => __( 'View FAQ', 'masteriyo' ),
-			'view_items'            => __( 'View FAQs', 'masteriyo' ),
-			'search_items'          => __( 'Search FAQ', 'masteriyo' ),
+			'new_item'              => __( 'New Faq', 'masteriyo' ),
+			'edit_item'             => __( 'Edit Faq', 'masteriyo' ),
+			'update_item'           => __( 'Update Faq', 'masteriyo' ),
+			'view_item'             => __( 'View Faq', 'masteriyo' ),
+			'view_items'            => __( 'View Faqs', 'masteriyo' ),
+			'search_items'          => __( 'Search Faq', 'masteriyo' ),
 			'not_found'             => __( 'Not found', 'masteriyo' ),
 			'not_found_in_trash'    => __( 'Not found in Trash', 'masteriyo' ),
 			'featured_image'        => __( 'Featured Image', 'masteriyo' ),
 			'set_featured_image'    => __( 'Set featured image', 'masteriyo' ),
 			'remove_featured_image' => __( 'Remove featured image', 'masteriyo' ),
 			'use_featured_image'    => __( 'Use as featured image', 'masteriyo' ),
-			'insert_into_item'      => __( 'Insert into FAQ', 'masteriyo' ),
-			'uploaded_to_this_item' => __( 'Uploaded to this FAQ', 'masteriyo' ),
-			'items_list'            => __( 'FAQs list', 'masteriyo' ),
-			'items_list_navigation' => __( 'FAQs list navigation', 'masteriyo' ),
-			'filter_items_list'     => __( 'Filter FAQs list', 'masteriyo' ),
+			'insert_into_item'      => __( 'Insert into Faq', 'masteriyo' ),
+			'uploaded_to_this_item' => __( 'Uploaded to this Faq', 'masteriyo' ),
+			'items_list'            => __( 'Faqs list', 'masteriyo' ),
+			'items_list_navigation' => __( 'Faqs list navigation', 'masteriyo' ),
+			'filter_items_list'     => __( 'Filter Faqs list', 'masteriyo' ),
 		);
 
 		$this->args = array(
-			'label'               => __( 'FAQs', 'masteriyo' ),
-			'description'         => __( 'FAQs Description', 'masteriyo' ),
+			'label'               => __( 'Faqs', 'masteriyo' ),
+			'description'         => __( 'Faqs Description', 'masteriyo' ),
 			'labels'              => $this->labels,
 			'supports'            => array( 'title', 'editor', 'author', 'page-attributes' ),
 			'taxonomies'          => array(),

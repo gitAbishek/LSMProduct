@@ -1,6 +1,6 @@
 <?php
 /**
- * Class for parameter-based FAQ querying
+ * Class for parameter-based Faq querying
  *
  * @package  ThemeGrill\Masteriyo\Query
  * @version 0.1.0
@@ -14,12 +14,12 @@ use ThemeGrill\Masteriyo\Abstracts\ObjectQuery;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * FAQ query class.
+ * Faq query class.
  */
-class FAQsQuery extends ObjectQuery {
+class FaqsQuery extends ObjectQuery {
 
 	/**
-	 * Valid query vars for FAQs.
+	 * Valid query vars for Faqs.
 	 *
 	 * @since 0.1.0
 	 *
@@ -38,11 +38,11 @@ class FAQsQuery extends ObjectQuery {
 	}
 
 	/**
-	 * Get FAQs matching the current query vars.
+	 * Get Faqs matching the current query vars.
 	 *
 	 * @since 0.0.1
 	 *
-	 * @return array|Model FAQ objects
+	 * @return array|Model Faq objects
 	 */
 	public function get_faqs() {
 		$args    = apply_filters( 'masteriyo_faq_object_query_args', $this->get_query_vars() );

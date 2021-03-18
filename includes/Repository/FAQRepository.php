@@ -1,6 +1,6 @@
 <?php
 /**
- * FAQRepository class.
+ * FaqRepository class.
  *
  * @since 0.1.0
  *
@@ -13,9 +13,9 @@ use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\Faq;
 
 /**
- * FAQRepository class.
+ * FaqRepository class.
  */
-class FAQRepository extends AbstractRepository implements RepositoryInterface {
+class FaqRepository extends AbstractRepository implements RepositoryInterface {
 
 	/**
 	 * Data stored in meta keys, but not considered "meta".
@@ -30,7 +30,7 @@ class FAQRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $faq FAQ object.
+	 * @param Model $faq Faq object.
 	 */
 	public function create( Model &$faq ) {
 		if ( ! $faq->get_date_created( 'edit' ) ) {
@@ -70,18 +70,18 @@ class FAQRepository extends AbstractRepository implements RepositoryInterface {
 	}
 
 	/**
-	 * Read a FAQ.
+	 * Read a Faq.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $faq FAQ object.
+	 * @param Model $faq Faq object.
 	 * @throws \Exception If invalid faq.
 	 */
 	public function read( Model &$faq ) {
 		$faq_post = get_post( $faq->get_id() );
 
 		if ( ! $faq->get_id() || ! $faq_post || 'faq' !== $faq_post->post_type ) {
-			throw new \Exception( __( 'Invalid FAQ.', 'masteriyo' ) );
+			throw new \Exception( __( 'Invalid Faq.', 'masteriyo' ) );
 		}
 
 		$faq->set_props(
@@ -104,7 +104,7 @@ class FAQRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $faq FAQ object.
+	 * @param Model $faq Faq object.
 	 *
 	 * @return void
 	 */
@@ -168,11 +168,11 @@ class FAQRepository extends AbstractRepository implements RepositoryInterface {
 	}
 
 	/**
-	 * Delete a FAQ from the database.
+	 * Delete a Faq from the database.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $faq FAQ object.
+	 * @param Model $faq Faq object.
 	 * @param array $args   Array of args to pass.alert-danger.
 	 */
 	public function delete( Model &$faq, $args = array() ) {
@@ -229,10 +229,10 @@ class FAQRepository extends AbstractRepository implements RepositoryInterface {
 	}
 
 	/**
-	 * Get valid WP_Query args from a FAQQuery's query variables.
+	 * Get valid WP_Query args from a FaqQuery's query variables.
 	 *
 	 * @since 0.1.0
-	 * @param array $query_vars Query vars from a FAQQuery.
+	 * @param array $query_vars Query vars from a FaqQuery.
 	 * @return array
 	 */
 	protected function get_wp_query_args( $query_vars ) {

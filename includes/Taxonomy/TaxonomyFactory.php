@@ -18,13 +18,13 @@ class TaxonomyFactory {
 	 */
 	public static function create( $taxonomy, $labels = array(), $args = array() ) {
 		if ( 'course_cat' === $taxonomy) {
-			return new Course\Categories();
+			return new Course\Category();
 		} elseif ( 'course_tag' === $taxonomy ) {
-			return new Course\Tags();
+			return new Course\Tag();
 		} elseif ( 'course_difficulty' === $taxonomy ) {
-			return new Course\Difficulties();
+			return new Course\Difficulty();
 		} elseif ( 'course_visibility' === $taxonomy ) {
-			return new Course\Visibilities();
+			return new Course\Visibility();
 		}
 	}
 }

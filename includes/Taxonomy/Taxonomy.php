@@ -16,53 +16,38 @@ abstract class Taxonomy {
 	protected $taxonomy;
 
 	/**
-	 * An array of labels for this taxonomy. If not set, taxonomy labels are inherited for non-hierarchicals and page labels for hierarchical ones.
+	 * Post type the taxonomy belongs to.
 	 *
 	 * @since 0.1.0
-	 *
-	 * @var array
 	 */
-	protected $labels;
-
-	/**
-	 * Array or string of arguments for registering a taxonomy.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var array
-	 */
-	protected $args;
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $taxonomy Taxonomy taxonomy.
-	 * @param array $labels	An array of labels for this taxonomy. If not set, taxonomy labels are inherited for non-hierarchicals and page labels for hierarchical ones.
-	 * @param array $args	Array or string of arguments for registering a taxonomy.
-	 *
-	 * @return Masteriyo\Masteriyo\Taxonomy
-	 */
-	public function __construct( $taxonomy, $labels = array(), $args = array() ) {
-		$this->taxonomy = $taxonomy;
-		$this->labels   = array_merge( $this->get_labels(), $labels );
-		$this->args     = array_merge( $this->get_args( $this->labels ), $args );
-
-		return $this;
-	}
+	protected $post_type = 'post';
 
 	/**
 	 * Register taxonomy.
 	 *
 	 * @since 0.1.0
-	 *
-	 * @param string|array $object_type (Required) Object type or array of object types with which the taxonomy should be associated.
-	 *
-	 * @return void
 	 */
-	public function register( $object_type = 'post' ) {
-		register_taxonomy( $this->taxonomy, $object_type, $this->args );
+	public function register( ) {
+		register_taxonomy(
+			$this->taxonomy,
+			apply_filters( "masteriyo_taxonomy_objects_{$this->taxonomy}", array( $this->post_type ) ),
+			$this->get_args()
+		);
+	}
+
+	/**
+	 * Get all labels.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	public function get_labels() {
+		$args = $this->get_args();
+
+		$labels = isset( $args['labels'] ) ? $args['labels'] : array();
+
+		return apply_filters( "masteriyo_taxonomy_{$taxonomy}_labels", $labels );
 	}
 
 	/**
@@ -75,28 +60,11 @@ abstract class Taxonomy {
 	 * @return mixed|null
 	 */
 	public function get_label( $label ) {
-		if ( isset( $this->labels[ $label ] ) ) {
-			return $this->labels[ $label ];
-		}
+		$labels = $this->get_labels();
 
-		return null;
-	}
+		$value = isset( $labels[ $label ] ) ? $value = $labels[ $label ] : '';
 
-	/**
-	 * Get label.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $arg Arguments. (e.g. label, args, menu_position, etc )
-	 *
-	 * @return mixed|null
-	 */
-	public function get_arg( $arg ) {
-		if ( isset( $this->args[ $arg ] ) ) {
-			return $this->args[ $arg ];
-		}
-
-		return null;
+		return apply_filters( "masteriyo_taxonomy_{$taxonomy}_label", $value, $label );
 	}
 
 	/**
@@ -111,65 +79,49 @@ abstract class Taxonomy {
 	 * @return Masteriyo\Masteriyo\Taxonomy
 	 */
 	public function set_label( $label, $value, $strict = true ) {
-		if ( $strict && ! isset( $this->labels[ $label ] ) ) {
+		$labels = $this->get_labels();
+
+		if ( $strict && ! isset( $labels[ $label ] ) ) {
 			throw new \Exception( 'Invalid label name.' );
 		}
 
-		$this->labels[ $label ] = $value;
-		$this->args[ 'labels' ] = $this->labels;
-		return $this;
+		$labels[ $label ] = $value;
+		$args[ 'labels' ] = $labels;
 	}
 
+
+
 	/**
-	 * Set args.
+	 * Get arg.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $arg Arguments. (e.g. label, args, menu_position, etc )
-	 * @param string $value Arguments value.
-	 * @param bool $strict	Strict check the label.(Default: true)
+	 * @param string $name Arg name. (e.g. label, args, menu_position, etc )
 	 *
-	 * @return Masteriyo\Masteriyo\Taxonomy
+	 * @return mixed|null
 	 */
-	public function set_arg( $arg, $value, $strict = true ) {
-		if ( $strict && ! isset( $this->args[ $arg ] ) ) {
-			throw new \Exception( 'Invalid args name.' );
-		}
+	public function get_arg( $name ) {
+		$args  = $this->get_args();
 
-		$this->args[ $arg ] = $value;
-		return $this;
+		$value = ( isset( $arg[ $name ] ) ) ?$arg[ $name ] : null;
+
+		return apply_filters( "masteriyo_taxonomy_{$taxonomy}_arg", $value, $name );
 	}
 
-	/**
-	 * Get labels.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return array
-	 */
-	protected function get_labels() {
-		return array();
-	}
 
 	/**
-	 * Get args.
+	 * Get taxonomy args which includes labels and other args.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return array
 	 */
-	protected function get_args( $labels ) {
-		return array(
-			'labels'             => $labels,
-			'description'        => '',
-			'hierarchical'       => false,
-			'public'             => true,
-			'show_ui'            => true,
-			'show_in_rest'       => true,
-			'show_admin_column'  => true,
-			'show_in_nav_menus'  => true,
-			'show_in_quick_edit' => true,
-			'show_tagcloud'      => true,
+	protected function get_args() {
+		return new \WP_Error(
+			'invalid-method',
+			// translators: %s: Class method name.
+			sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'masteriyo' ), __METHOD__ ),
+			array( 'status' => 405 )
 		);
 	}
 }

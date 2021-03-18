@@ -10,6 +10,7 @@ use ThemeGrill\Masteriyo\Constants;
 use ThemeGrill\Masteriyo\Models\Course;
 use ThemeGrill\Masteriyo\Models\Section;
 use ThemeGrill\Masteriyo\Models\Faq;
+use ThemeGrill\Masteriyo\Models\User;
 
 /**
  * Get course.
@@ -595,6 +596,38 @@ function masteriyo_img_url( $file ) {
 	$plugin_dir = plugin_dir_url( Constants::get('MASTERIYO_PLUGIN_FILE') );
 
 	return "{$plugin_dir}assets/img/{$file}";
+}
+
+/**
+ * Put course data into a global.
+ *
+ * @since 0.1.0
+ *
+ * @param int|Course|WP_Post $course_id Course id or Course object or course wp post.
+ *
+ * @return Course
+ */
+function masteriyo_setup_course_data( $course_id ) {
+	$GLOBALS['course'] =  masteriyo_get_course( $course_id );
+
+	return $GLOBALS['course'];
+}
+
+/**
+ * Put current logged in user data into a global.
+ *
+ * @since 0.1.0
+ *
+ * @return User
+ */
+function masteriyo_setup_current_user_data() {
+	if ( is_user_logged_in() ) {
+		$GLOBALS['user'] =  masteriyo_get_user( get_current_user_id() );
+	} else {
+		$GLOBALS['user'] = null;
+	}
+
+	return $GLOBALS['user'];
 }
 
 /**
@@ -1385,4 +1418,26 @@ function masteriyo_is_admin_page() {
  */
 function masteriyo_is_debug_enabled() {
 	return (bool) Constants::get( 'MASTERIYO_DEBUG' );
+}
+
+/**
+ * Get current tab in the profile page.
+ *
+ * @since 0.1.0
+ *
+ * @return string
+ */
+function masteriyo_get_current_profile_page_tab() {
+	$tabs = array(
+		'edit-profile',
+		'dashboard',
+		'my-courses',
+		'my-grades',
+		'my-memberships',
+		'my-certificates',
+		'my-order-history',
+	);
+	$tab = isset( $_GET['tab'] ) && in_array( $_GET['tab'], $tabs, true ) ? $_GET['tab'] : 'edit-profile';
+
+	return $tab;
 }

@@ -114,6 +114,13 @@ class ScriptStyle {
 				'context'  => 'public',
 				'callback' => 'masteriyo_is_single_course_page'
 			),
+			'masteriyo-profile-page' => array(
+				'src'      => $this->get_asset_url( '/assets/js/profile-page.js' ),
+				'deps'     => array( 'jquery' ),
+				'version'  => $this->get_version(),
+				'type'     => 'public',
+				'callback' => ''
+			),
 		) );
 	}
 
@@ -143,6 +150,14 @@ class ScriptStyle {
 				'has_rtl'  => true,
 				'context'  => 'public',
 				'callback' => 'masteriyo_is_single_course_page'
+			),
+			'masteriyo-profile-page' => array(
+				'src'      => $this->get_asset_url( '/assets/css/profile-page.css' ),
+				'deps'     => '',
+				'version'  => $this->get_version(),
+				'media'    => 'all',
+				'has_rtl'  => true,
+				'type'     => 'public'
 			),
 		) );
 	}
@@ -427,6 +442,18 @@ class ScriptStyle {
 	 * @since 0.1.1
 	 */
 	public function load_public_localized_scripts() {
-	}
+		$this->localized_scripts = apply_filters( 'masteriyo_localized_scripts', array(
+			'masteriyo-profile-page' => array(
+				'name' => 'masteriyo_data',
+				'data' => array(
+					'users_api_urls' => masteriyo( 'user.rest' )->get_api_urls(),
+					'nonce' => wp_create_nonce( 'wp_rest' )
+				),
+			),
+		) );
 
+		foreach ( $this->localized_scripts as $handle => $script ) {
+			\wp_localize_script( "masteriyo-{$handle}", $script['name'], $script['data'] );
+		}
+	}
 }

@@ -44,7 +44,11 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		'use_ssl'              => 'use_ssl',
 		'show_admin_bar_front' => 'show_admin_bar_front',
 		'locale'               => 'locale',
-		'roles'                => 'wp_capabilities',
+		'address'              => '_address',
+		'city'                 => '_city',
+		'state'                => '_state',
+		'zip_code'             => '_zip_code',
+		'country'              => '_country',
 	);
 
 	/**
@@ -124,7 +128,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 			)
 		);
 
-		$this->read_user_data( $user_obj );
+		$this->read_user_data( $user );
 		$this->read_extra_data( $user );
 		$user->set_object_read( true );
 
@@ -185,12 +189,13 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 				'use_ssl'              => $user->get_use_ssl( 'edit' ),
 				'show_admin_bar_front' => $user->get_show_admin_bar_front( 'edit' ),
 				'locale'               => $user->get_locale( 'edit' ),
-				'role'                 => $user->get_roles( 'edit' ),
+				// 'role'                 => $user->get_roles( 'edit' )[0],
 			);
 
 			wp_update_user( array_merge( array( 'ID' => $user->get_id() ), $user_data ) );
 		}
 
+		$this->update_user_meta( $user );
 		$user->apply_changes();
 
 		do_action( 'masteriyo_update_user', $user->get_id(), $user );
@@ -233,7 +238,24 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @param User $user User object.
 	 */
-	protected function read_user_data( &$user ) {}
+	protected function read_user_data( &$user ) {
+		$id          = $user->get_id();
+		$meta_values = $this->read_meta( $user );
+
+		$set_props = array();
+
+		$meta_values = array_reduce( $meta_values, function( $result, $meta_value ) {
+			$result[ $meta_value->key ][] = $meta_value->value;
+			return $result;
+		}, array() );
+
+		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
+			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
+			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
+		}
+
+		$user->set_props( $set_props );
+	}
 
 	/**
 	 * Read extra data associated with the user.

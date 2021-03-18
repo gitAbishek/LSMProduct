@@ -281,6 +281,11 @@ class UsersController extends PostsController {
 			'show_admin_bar_front' => $user->get_show_admin_bar_front(),
 			'locale'               => $user->get_locale(),
 			'roles'                => $user->get_roles(),
+			'address'              => $user->get_address(),
+			'city'                 => $user->get_city(),
+			'state'                => $user->get_state(),
+			'zip_code'             => $user->get_zip_code(),
+			'country'              => $user->get_country(),
 		);
 
 		return $data;
@@ -456,6 +461,31 @@ class UsersController extends PostsController {
 					),
 					'readonly'    => true,
 				),
+				'address'              => array(
+					'description' => __( 'User\'s address.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'city'              => array(
+					'description' => __( 'User\'s city.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'state'              => array(
+					'description' => __( 'User\'s state.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'zip_code'              => array(
+					'description' => __( 'User\'s zip code.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'country'              => array(
+					'description' => __( 'User\'s country.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
 				'meta_data'            => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
@@ -497,14 +527,12 @@ class UsersController extends PostsController {
 	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		global $masteriyo_container;
-
 		$id   = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$user = $masteriyo_container->get( 'user' );
+		$user = masteriyo( 'user' );
 
 		if ( 0 !== $id ) {
 			$user->set_id( $id );
-			$user_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\UserRepository::class );
+			$user_repo = masteriyo( \ThemeGrill\Masteriyo\Repository\UserRepository::class );
 			$user_repo->read( $user );
 		}
 
@@ -601,6 +629,31 @@ class UsersController extends PostsController {
 		// User's role.
 		if ( isset( $request['roles'] ) ) {
 			$user->set_roles( $request['roles'] );
+		}
+
+		// User's address.
+		if ( isset( $request['address'] ) ) {
+			$user->set_address( $request['address'] );
+		}
+
+		// User's city.
+		if ( isset( $request['city'] ) ) {
+			$user->set_city( $request['city'] );
+		}
+
+		// User's state.
+		if ( isset( $request['state'] ) ) {
+			$user->set_state( $request['state'] );
+		}
+
+		// User's zip_code.
+		if ( isset( $request['zip_code'] ) ) {
+			$user->set_zip_code( $request['zip_code'] );
+		}
+
+		// User's country.
+		if ( isset( $request['country'] ) ) {
+			$user->set_country( $request['country'] );
 		}
 
 		// Allow set meta_data.
@@ -774,7 +827,7 @@ class UsersController extends PostsController {
 
 		$user = get_user_by( 'id', (int) $request['id'] );
 
-		if ( $user && ! $this->permission->rest_check_users_manipulation_permissions( 'edit' ) ) {
+		if (! $user || ! $this->permission->rest_check_users_manipulation_permissions( 'edit' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),

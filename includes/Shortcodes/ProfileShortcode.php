@@ -45,6 +45,17 @@ class ProfileShortcode extends Shortcode {
 	 */
 	public function get_content() {
 		/**
+		 * Enqueue assets.
+		 */
+		wp_enqueue_script( 'masteriyo-profile-page' );
+		wp_enqueue_style( 'masteriyo-profile-page' );
+
+		/**
+		 * Setup current logged in user data.
+		 */
+		masteriyo_setup_current_user_data();
+
+		/**
 		 * Prepare Template.
 		 */
 		$template_path = masteriyo( 'template' )->locate( 'profile.php' );

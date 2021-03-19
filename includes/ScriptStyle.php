@@ -121,6 +121,13 @@ class ScriptStyle {
 				'type'     => 'public',
 				'callback' => ''
 			),
+			'masteriyo-login-form' => array(
+				'src'      => $this->get_asset_url( '/assets/js/login-form.js' ),
+				'deps'     => array( 'jquery' ),
+				'version'  => $this->get_version(),
+				'type'     => 'public',
+				'callback' => ''
+			),
 		) );
 	}
 
@@ -448,6 +455,13 @@ class ScriptStyle {
 				'data' => array(
 					'users_api_urls' => masteriyo( 'user.rest' )->get_api_urls(),
 					'nonce' => wp_create_nonce( 'wp_rest' )
+				),
+			),
+			'masteriyo-login-form' => array(
+				'name' => 'masteriyo_data',
+				'data' => array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'nonce' => wp_create_nonce( 'masteriyo_login_nonce' ),
 				),
 			),
 		) );

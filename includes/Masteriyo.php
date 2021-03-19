@@ -139,6 +139,7 @@ class Masteriyo extends Container {
 			"{$namespace}\\ShortcodesServiceProvider",
 			"{$namespace}\\SettingsServiceProvider",
 			"{$namespace}\\QueriesServiceProvider",
+			"{$namespace}\\FaqServiceProvider",
 		) );
 	}
 

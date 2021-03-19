@@ -34,7 +34,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 		'positive_feedback' => '_positive_feedback',
 		'negative_feedback' => '_negative_feedback',
 		'feedback'          => '_feedback',
-		'course_id'         => '_course_id',
+		'course_id'         => '_course_id'
 	);
 
 	/**
@@ -59,6 +59,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 					'post_title'    => $question->get_name() ? $question->get_name() : __( 'Question', 'masteriyo' ),
 					'post_content'  => serialize( $question->get_answers() ),
 					'post_excerpt'  => $question->get_description(),
+					'post_parent'   => $question->get_parent_id(),
 					'ping_status'   => 'closed',
 					'menu_order'    => $question->get_menu_order(),
 					'post_date'     => $question->get_date_created( 'edit' ),
@@ -87,7 +88,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $question Cource object.
+	 * @param Model $question Question object.
 	 * @throws Exception If invalid question.
 	 */
 	public function read( Model &$question ) {
@@ -107,6 +108,8 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 				'answers'       => maybe_unserialize( $question_post->post_content ),
 				'description'   => $question_post->post_excerpt,
 				'menu_order'    => $question_post->menu_order,
+			'parent_id'         => $question_post->post_parent,
+
 			)
 		);
 
@@ -149,6 +152,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 				'post_status'  => $question->get_status( 'edit' ) ? $question->get_status( 'edit' ) : 'publish',
 				'menu_order'   => $question->get_menu_order( 'edit' ),
 				'post_name'    => $question->get_slug( 'edit' ),
+				'post_parent'  => $question->get_parent_id( 'edit' ),
 				'post_type'    => 'question',
 			);
 
@@ -334,8 +338,8 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	protected function get_wp_query_args( $query_vars ) {
 		// Map query vars to ones that get_wp_query_args or WP_Query recognize.
 		$key_mapping = array(
-			'status' => 'post_status',
-			'page'   => 'paged',
+			'status'    => 'post_status',
+			'page'      => 'paged',
 			'parent_id' => 'post_parent',
 		);
 

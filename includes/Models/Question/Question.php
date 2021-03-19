@@ -71,6 +71,7 @@ abstract class Question extends Model {
 		'type'              => '',
 		'status'            => false,
 		'description'       => '',
+		'parent_id'          => 0,
 		'answers'           => array(),
 		'answer_required'   => true,
 		'randomize'         => false,
@@ -175,6 +176,20 @@ abstract class Question extends Model {
 	public function get_course_id( $context = 'view' ) {
 		return $this->get_prop( 'course_id', $context );
 	}
+
+	/**
+	 * Returns question parent id (quiz id ).
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string price
+	 */
+	public function get_parent_id( $context = 'view' ) {
+		return $this->get_prop( 'parent_id', $context );
+	}
+
 
 	/**
 	 * Get question created date.
@@ -437,6 +452,17 @@ abstract class Question extends Model {
 	 */
 	public function set_type( $type ) {
 		$this->set_prop( 'type', $this->type );
+	}
+
+	/**
+	 * Set the question parent id(quiz id).
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $parent Parent id.
+	 */
+	public function set_parent_id( $parent ) {
+		$this->set_prop( 'parent_id', absint( $parent ) );
 	}
 
 	/**

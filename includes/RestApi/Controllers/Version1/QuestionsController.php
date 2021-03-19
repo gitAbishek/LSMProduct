@@ -276,6 +276,7 @@ class QuestionsController extends PostsController {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
+
 		$params['category'] = array(
 			'description'       => __( 'Limit result set to courses assigned a specific category ID.', 'masteriyo' ),
 			'type'              => 'string',
@@ -376,6 +377,7 @@ class QuestionsController extends PostsController {
 			'status'            => $question->get_status( $context ),
 			'description'       => 'view' === $context ? apply_filters( 'masteriyo_description', $question->get_description() ) : $question->get_description( $context ),
 			'type'              => $question->get_type( $context ),
+			'parent_id'         => $question->get_parent_id( $context ),
 			'answers'           => 'view' === $context ? $this->process_answers( maybe_unserialize( $question->get_answers() ), $question ) : $question->get_answers( $context ),
 			'answer_required'   => $question->get_answer_required( $context ),
 			'randomize'         => $question->get_randomize( $context ),
@@ -569,6 +571,11 @@ class QuestionsController extends PostsController {
 					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
 					'context'     => array( 'view', 'edit' ),
 				),
+				'parent_id'             => array(
+					'description' => __( 'Course parent ID.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
 				'menu_order'        => array(
 					'description' => __( 'Menu order, used to custom sort questions.', 'masteriyo' ),
 					'type'        => 'integer',
@@ -695,12 +702,17 @@ class QuestionsController extends PostsController {
 
 		// Menu order.
 		if ( isset( $request['menu_order'] ) ) {
-			$course->set_menu_order( $request['menu_order'] );
+			$question->set_menu_order( $request['menu_order'] );
 		}
 
 		// Post type.
 		if ( isset( $request['type'] ) ) {
 			$question->set_type( $request['type'] );
+		}
+
+		// Question parent ID.
+		if ( isset( $request['parent_id'] ) ) {
+			$question->set_parent_id( $request['parent_id'] );
 		}
 
 		// Post answer required.

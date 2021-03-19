@@ -6,7 +6,6 @@ import React from 'react';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
 import { __ } from '@wordpress/i18n';
-import { useForm } from 'react-hook-form';
 
 interface Props {
 	question?: any;
@@ -14,7 +13,6 @@ interface Props {
 
 const Question: React.FC<Props> = (props) => {
 	const { question } = props;
-	const { register } = useForm();
 
 	return (
 		<div className="mto-p-4">

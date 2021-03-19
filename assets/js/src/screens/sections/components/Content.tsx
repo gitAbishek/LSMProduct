@@ -68,7 +68,13 @@ const Content: React.FC<Props> = (props) => {
 						<Button
 							className="mto-mr-2"
 							size="small"
-							onClick={() => push(`/builder/lesson/${id}`)}>
+							onClick={() =>
+								push(
+									type === 'lesson'
+										? `/builder/lesson/${id}`
+										: `/quiz/${id}/edit`
+								)
+							}>
 							{__('Edit', 'masteriyo')}
 						</Button>
 						<Dropdown

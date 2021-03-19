@@ -37,7 +37,7 @@ const App = () => {
 							<Route path="/courses/:sectionId/add-new-quiz" exact>
 								<AddNewQuiz />
 							</Route>
-							<Route path="/quiz/:quizId/edit/:step" exact>
+							<Route path="/quiz/:quizId/edit/:step?" exact>
 								<EditQuiz />
 							</Route>
 							<Route path="/builder/lesson/:lessonId" exact>
@@ -50,9 +50,9 @@ const App = () => {
 								<screens.Settings />
 							</Route>
 
-							<Route>
+							{/* <Route>
 								<Redirect to="/courses" />
-							</Route>
+							</Route> */}
 						</Switch>
 					</div>
 				</Router>

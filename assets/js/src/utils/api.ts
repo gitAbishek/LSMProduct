@@ -156,3 +156,13 @@ export const fetchQuestions = (quizId: number) => {
 		})
 		.then((response) => response.data);
 };
+
+export const addQuestion = (data: any) => {
+	return axios.post(urls.questions, data).then((response) => response.data);
+};
+
+export const deleteQuestion = (id: number) => {
+	return axios
+		.delete(urls.question.replace(':id', id.toString()))
+		.then((response) => response.data);
+};

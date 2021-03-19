@@ -7,10 +7,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 
 import Button from 'Components/common/Button';
-import Info from '../lessons/components/Info';
+import Info from './components/Info';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
-import Questions from '../lessons/components/Questions';
+import Questions from './components/Questions';
 import { __ } from '@wordpress/i18n';
 import { useForm } from 'react-hook-form';
 import { useToasts } from 'react-toast-notifications';
@@ -70,9 +70,7 @@ const AddNewQuiz: React.FC = () => {
 								<TabPane tab="Info" key="1">
 									<Info register={register} />
 								</TabPane>
-								<TabPane tab="Questions" key="2" disabled>
-									<Questions />
-								</TabPane>
+								<TabPane tab="Questions" key="2" disabled></TabPane>
 							</Tabs>
 							<footer className="mto-pt-8 mto-flex mto-border-t mto-border-gray-100 mto-mt-12">
 								<Button layout="primary" className="mto-mr-4" type="submit">

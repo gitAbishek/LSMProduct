@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { deleteLesson, deleteQuiz } from '../../../utils/api';
 import { useMutation, useQueryClient } from 'react-query';
 
+import { BiTrash } from 'react-icons/bi';
 import Button from 'Components/common/Button';
 import DragHandle from './DragHandle';
 import Dropdown from 'Components/common/Dropdown';
@@ -79,13 +80,14 @@ const Content: React.FC<Props> = (props) => {
 						</Button>
 						<Dropdown
 							align={'end'}
+							autoClose
 							content={
 								<DropdownOverlay>
 									<ul className="mto-w-36 mto-text-gray-700 mto-m-4">
 										<li
 											className="mto-flex mto-items-center mto-text-sm mto-mb-4 hover:mto-text-primary mto-cursor-pointer"
 											onClick={() => onDeletePress()}>
-											<Icon className="mto-mr-1" icon={<Trash />} />
+											<Icon className="mto-mr-1" icon={<BiTrash />} />
 											{__('Delete', 'masteriyo')}
 										</li>
 									</ul>

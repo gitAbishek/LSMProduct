@@ -1,5 +1,4 @@
-import { BiAlignLeft, BiTimer } from 'react-icons/bi';
-import { Edit, Trash } from '../../../assets/icons';
+import { BiAlignLeft, BiTimer, BiTrash } from 'react-icons/bi';
 import React, { useState } from 'react';
 import {
 	deleteSection,
@@ -14,6 +13,7 @@ import Content from './Content';
 import DragHandle from '../components/DragHandle';
 import Dropdown from 'Components/common/Dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
+import { Edit } from '../../../assets/icons';
 import FormGroup from 'Components/common/FormGroup';
 import Icon from 'Components/common/Icon';
 import Input from 'Components/common/Input';
@@ -87,6 +87,7 @@ const Section: React.FC<Props> = (props) => {
 				<div className="mto-flex">
 					<Dropdown
 						align="end"
+						autoClose
 						content={
 							<DropdownOverlay>
 								<ul className="mto-w-36 mto-text-gray-700 mto-m-4 ">
@@ -99,7 +100,7 @@ const Section: React.FC<Props> = (props) => {
 									<li
 										className="mto-flex mto-items-center mto-text-sm hover:mto-text-primary mto-cursor-pointer"
 										onClick={() => onDeletePress()}>
-										<Icon className="mto-mr-1" icon={<Trash />} />
+										<Icon className="mto-mr-1" icon={<BiTrash />} />
 										{__('Delete', 'masteriyo')}
 									</li>
 								</ul>

@@ -44,21 +44,34 @@ class ProfileShortcode extends Shortcode {
 	 * @return string
 	 */
 	public function get_content() {
-		/**
-		 * Enqueue assets.
-		 */
-		wp_enqueue_script( 'masteriyo-profile-page' );
-		wp_enqueue_style( 'masteriyo-profile-page' );
+		if ( is_user_logged_in() ) {
+			/**
+			 * Enqueue profile page assets.
+			 */
+			wp_enqueue_script( 'masteriyo-profile-page' );
+			wp_enqueue_style( 'masteriyo-profile-page' );
 
-		/**
-		 * Setup current logged in user data.
-		 */
-		masteriyo_setup_current_user_data();
+			/**
+			 * Setup current logged in user data.
+			 */
+			masteriyo_setup_current_user_data();
 
-		/**
-		 * Prepare Template.
-		 */
-		$template_path = masteriyo( 'template' )->locate( 'profile.php' );
+			/**
+			 * Find Template.
+			 */
+			$template_path = masteriyo( 'template' )->locate( 'profile.php' );
+		} else {
+			/**
+			 * Enqueue login form assets.
+			 */
+			wp_enqueue_script( 'masteriyo-login-form' );
+			wp_enqueue_style( 'masteriyo-profile-page' );
+
+			/**
+			 * Find Template.
+			 */
+			$template_path = masteriyo( 'template' )->locate( 'login-form.php' );
+		}
 
 		/**
 		 * Render the template.

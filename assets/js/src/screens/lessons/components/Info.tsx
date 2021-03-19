@@ -4,9 +4,9 @@ import Label from 'Components/common/Label';
 import React from 'react';
 import Textarea from 'Components/common/Textarea';
 import { __ } from '@wordpress/i18n';
-import { useForm } from 'react-hook-form';
 
 interface InfoProps {
+	register: any;
 	name?: string;
 	description?: string;
 }
@@ -18,9 +18,7 @@ interface Inputs {
 }
 
 const Info: React.FC<InfoProps> = (props) => {
-	const { name, description } = props;
-	const { register, handleSubmit } = useForm<Inputs>();
-
+	const { name, description, register } = props;
 	return (
 		<>
 			<FormGroup>
@@ -28,6 +26,7 @@ const Info: React.FC<InfoProps> = (props) => {
 				<Input
 					placeholder={__('Your quiz title', 'masteriyo')}
 					ref={register({ required: true })}
+					required
 					name="name"
 					defaultValue={name}
 				/>

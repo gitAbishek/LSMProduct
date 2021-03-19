@@ -125,12 +125,34 @@ export const deleteLesson = (id: number) => {
 		.then((response) => response.data);
 };
 
+export const fetchQuiz = (id: number) => {
+	return axios
+		.get(urls.quiz.replace(':id', id.toString()))
+		.then((response) => response.data);
+};
+
 export const addQuiz = (data: any) => {
 	return axios.post(urls.quizes, data).then((response) => response.data);
+};
+
+export const updateQuiz = (id: number, data: any) => {
+	return axios
+		.patch(urls.quiz.replace(':id', id.toString()), data)
+		.then((response) => response.data);
 };
 
 export const deleteQuiz = (id: number) => {
 	return axios
 		.delete(urls.quiz.replace(':id', id.toString()))
+		.then((response) => response.data);
+};
+
+export const fetchQuestions = (quizId: number) => {
+	return axios
+		.get(urls.questions, {
+			params: {
+				parent: quizId,
+			},
+		})
 		.then((response) => response.data);
 };

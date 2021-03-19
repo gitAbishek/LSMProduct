@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 
 import AddNewQuiz from './screens/quiz/AddNewQuiz';
+import EditQuiz from './screens/quiz/EditQuiz';
 import React from 'react';
 import { ToastProvider } from 'react-toast-notifications';
 
@@ -35,6 +36,9 @@ const App = () => {
 							</Route>
 							<Route path="/courses/:sectionId/add-new-quiz" exact>
 								<AddNewQuiz />
+							</Route>
+							<Route path="/quiz/:quizId/edit/:step" exact>
+								<EditQuiz />
 							</Route>
 							<Route path="/builder/lesson/:lessonId" exact>
 								<screens.EditLesson />

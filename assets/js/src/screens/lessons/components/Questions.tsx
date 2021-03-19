@@ -1,3 +1,5 @@
+import 'rc-collapse/assets/index.css';
+
 import Collapse, { Panel } from 'rc-collapse';
 
 import AddNewButton from 'Components/common/AddNewButton';
@@ -9,10 +11,21 @@ import React from 'react';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
 import { __ } from '@wordpress/i18n';
+import { fetchQuestions } from '../../../utils/api';
+import { useQuery } from 'react-query';
 
-interface QuestionsProps {}
+interface QuestionsProps {
+	quizId: number;
+}
 
-const Questions: React.FC<QuestionsProps> = () => {
+const Questions: React.FC<QuestionsProps> = (props) => {
+	const { quizId } = props;
+
+	const questionQuery = useQuery([`questions${quizId}`, quizId], () =>
+		fetchQuestions(quizId)
+	);
+
+	console.log(questionQuery?.data);
 	return (
 		<>
 			<div className="mto-flex mto-justify-between mto-mb-10 mto-border-b mto-border-gray-100 mto-pb-4">

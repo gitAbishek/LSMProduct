@@ -1,8 +1,8 @@
 import 'rc-tabs/assets/index.css';
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import Tabs, { TabPane } from 'rc-tabs';
-import { addQuiz, fetchSection } from '../../utils/api';
+import { fetchQuiz, updateQuiz } from '../../utils/api';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 
@@ -15,8 +15,11 @@ import { __ } from '@wordpress/i18n';
 import { useForm } from 'react-hook-form';
 import { useToasts } from 'react-toast-notifications';
 
-const AddNewQuiz: React.FC = () => {
-	const { sectionId }: any = useParams();
+const EditQuiz: React.FC = () => {
+	const { quizId, step }: any = useParams();
+	const [currentTab, setCurrentTab] = useState(
+		step === 'questions' ? '2' : '1'
+	);
 	interface Inputs {
 		name: string;
 		description?: string;
@@ -27,31 +30,37 @@ const AddNewQuiz: React.FC = () => {
 	const { addToast } = useToasts();
 	const { push } = useHistory();
 
-	const sectionQuery = useQuery([`section${sectionId}`, sectionId], () =>
-		fetchSection(sectionId)
+	const quizQuery = useQuery([`quiz${quizId}`, quizId], () =>
+		fetchQuiz(quizId)
 	);
 
-	const courseId = sectionQuery?.data?.parent_id;
+	const courseId = quizQuery?.data?.parent_id;
 
-	const addQuizMutation = useMutation(
-		(data: object) =>
-			addQuiz({
-				...data,
-				parent_id: sectionId,
-				course_id: courseId,
-			}),
+	const updateQuizMutation = useMutation(
+		(data: object) => updateQuiz(quizId, data),
 		{
 			onSuccess: (data: any) => {
-				addToast(data?.name + __(' has been added successfully'), {
+				addToast(data?.name + __(' has been updated successfully'), {
 					appearance: 'success',
 					autoDismiss: true,
 				});
-				push(`/quiz/${data.id}/edit/questions`);
 			},
 		}
 	);
 	const onSubmit = (data: object) => {
-		addQuizMutation.mutate(data);
+		updateQuizMutation.mutate(data);
+	};
+
+	const navigateTab = () => {
+		if (currentTab === '1') {
+			setCurrentTab('2');
+		} else if (currentTab === '2') {
+			setCurrentTab('3');
+		}
+	};
+
+	const onTabChange = (activeKey: string) => {
+		setCurrentTab(activeKey);
 	};
 
 	return (
@@ -66,16 +75,28 @@ const AddNewQuiz: React.FC = () => {
 					</div>
 					<div>
 						<form onSubmit={handleSubmit(onSubmit)}>
-							<Tabs defaultActiveKey={'1'} animated>
+							<Tabs
+								defaultActiveKey={'1'}
+								activeKey={currentTab}
+								animated
+								onChange={onTabChange}>
 								<TabPane tab="Info" key="1">
-									<Info register={register} />
+									<Info
+										register={register}
+										name={quizQuery?.data?.name}
+										description={quizQuery?.data?.description}
+									/>
 								</TabPane>
-								<TabPane tab="Questions" key="2" disabled>
-									<Questions />
+								<TabPane tab="Questions" key="2">
+									<Questions quizId={quizId} />
 								</TabPane>
 							</Tabs>
 							<footer className="mto-pt-8 mto-flex mto-border-t mto-border-gray-100 mto-mt-12">
-								<Button layout="primary" className="mto-mr-4" type="submit">
+								<Button
+									layout="primary"
+									className="mto-mr-4"
+									type="submit"
+									onClick={navigateTab}>
 									{__('Next', 'masteriyo')}
 								</Button>
 								<Button onClick={() => push(`/builder/${courseId}`)}>
@@ -90,4 +111,4 @@ const AddNewQuiz: React.FC = () => {
 	);
 };
 
-export default AddNewQuiz;
+export default EditQuiz;

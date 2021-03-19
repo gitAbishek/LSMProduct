@@ -31,4 +31,8 @@
 			}
 		}
 	}
+
+	.Collapsible {
+		@apply mto-border mto-border-gray-100 mto-rounded-sm mto-mb-4;
+	}
 }

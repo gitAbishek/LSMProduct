@@ -12,9 +12,7 @@ defined( 'ABSPATH' ) || exit;
  */
 do_action( 'masteriyo_before_profile' );
 
-if ( is_user_logged_in() ) {
-	masteriyo_get_template_part( 'content', 'profile-page' );
-}
+masteriyo_get_template_part( 'content', 'profile-page' );
 
 /**
  * masteriyo_after_profile hook.

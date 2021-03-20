@@ -1,4 +1,4 @@
-import { Edit, Trash } from '../../../assets/icons';
+import { BiAlignLeft, BiTimer, BiTrash } from 'react-icons/bi';
 import React, { useState } from 'react';
 import {
 	deleteSection,
@@ -13,6 +13,7 @@ import Content from './Content';
 import DragHandle from '../components/DragHandle';
 import Dropdown from 'Components/common/Dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
+import { Edit } from '../../../assets/icons';
 import FormGroup from 'Components/common/FormGroup';
 import Icon from 'Components/common/Icon';
 import Input from 'Components/common/Input';
@@ -64,6 +65,7 @@ const Section: React.FC<Props> = (props) => {
 				autoDismiss: true,
 			});
 			queryClient.invalidateQueries('builderSections');
+			setSectionEditing(false);
 		},
 	});
 
@@ -80,11 +82,12 @@ const Section: React.FC<Props> = (props) => {
 			<header className="mto-flex mto-justify-between mto-items-center mto-mb-4">
 				<div className="mto-flex mto-items-center">
 					<DragHandle />
-					<h1>{name}</h1>
+					<h1 className="mto-text-lg">{name}</h1>
 				</div>
 				<div className="mto-flex">
 					<Dropdown
 						align="end"
+						autoClose
 						content={
 							<DropdownOverlay>
 								<ul className="mto-w-36 mto-text-gray-700 mto-m-4 ">
@@ -97,7 +100,7 @@ const Section: React.FC<Props> = (props) => {
 									<li
 										className="mto-flex mto-items-center mto-text-sm hover:mto-text-primary mto-cursor-pointer"
 										onClick={() => onDeletePress()}>
-										<Icon className="mto-mr-1" icon={<Trash />} />
+										<Icon className="mto-mr-1" icon={<BiTrash />} />
 										{__('Delete', 'masteriyo')}
 									</li>
 								</ul>
@@ -130,12 +133,10 @@ const Section: React.FC<Props> = (props) => {
 						</FormGroup>
 						<div className="mto-mt-9 mto-pt-8 mto-border-t mto-border-solid mto-border-gray-300">
 							<div className="mto-flex">
-								<Button layout="primary" type="submit">
+								<Button layout="primary" type="submit" className="mto-mr-4">
 									{__('Save', 'masteriyo')}
 								</Button>
-								<Button
-									className="mto-mr-4"
-									onClick={() => setSectionEditing(false)}>
+								<Button onClick={() => setSectionEditing(false)}>
 									{__('Cancel', 'masteriyo')}
 								</Button>
 							</div>
@@ -152,11 +153,31 @@ const Section: React.FC<Props> = (props) => {
 						type={content.type}
 					/>
 				))}
-				<AddNewButton>
-					<NavLink to={`/courses/${id}/add-new-lesson`}>
-						{__('Add New Content', 'masteriyo')}
-					</NavLink>
-				</AddNewButton>
+				<Dropdown
+					content={
+						<DropdownOverlay>
+							<ul className="mto-w-36 mto-text-gray-700 mto-m-4 ">
+								<li className="mto-flex mto-items-center mto-text-sm mto-mb-4 hover:mto-text-primary mto-cursor-pointer">
+									<NavLink
+										className="mto-flex mto-items-center"
+										to={`/courses/${id}/add-new-lesson`}>
+										<Icon className="mto-mr-1" icon={<BiAlignLeft />} />
+										{__('Lesson', 'masteriyo')}
+									</NavLink>
+								</li>
+								<li className="mto-flex mto-items-center mto-text-sm hover:mto-text-primary mto-cursor-pointer">
+									<NavLink
+										className="mto-flex mto-items-center"
+										to={`/courses/${id}/add-new-quiz`}>
+										<Icon className="mto-mr-1" icon={<BiTimer />} />
+										{__('Quiz', 'masteriyo')}
+									</NavLink>
+								</li>
+							</ul>
+						</DropdownOverlay>
+					}>
+					<AddNewButton>{__('Add New Content', 'masteriyo')}</AddNewButton>
+				</Dropdown>
 			</div>
 		</div>
 	);

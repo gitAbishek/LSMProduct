@@ -74,14 +74,14 @@ const AllCourses = () => {
 					<tbody className="mto-bg-white mto-divide-y mto-divide-gray-200">
 						{coursesData?.map((course: any) => (
 							<tr key={course.id}>
-								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500">
+								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
 									<Link to={`/builder/${course.id}`}>{course.name}</Link>
 								</td>
-								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500"></td>
-								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500">
+								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base"></td>
+								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
 									{course.price}
 								</td>
-								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500">
+								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
 									<ul className="mto-flex mto-list-none mto-text-base mto-justify-end">
 										<li
 											onClick={() => onEditPress(course.id)}

@@ -72,19 +72,6 @@ const AddNewLesson: React.FC = () => {
 						<h1 className="mto-text-xl mto-m-0 mto-font-medium">
 							{__('Add New Lesson', 'masteriyo')}
 						</h1>
-						<div>
-							<Dropdown
-								align="end"
-								content={
-									<DropdownOverlay>
-										<ul>
-											<li>{__('Delete', 'masteriyo')}</li>
-										</ul>
-									</DropdownOverlay>
-								}>
-								<OptionButton />
-							</Dropdown>
-						</div>
 					</div>
 					<div>
 						<form onSubmit={handleSubmit(onSubmit)}>
@@ -162,10 +149,12 @@ const AddNewLesson: React.FC = () => {
 							</FormGroup>
 							<div>
 								<div className="mto-flex">
-									<Button layout="primary" style={{ marginRight: 16 }}>
+									<Button layout="primary" className="mto-mr-4" type="submit">
 										{__('Add New Lesson', 'masteriyo')}
 									</Button>
-									<Button>{__('Cancel', 'masteriyo')}</Button>
+									<Button onClick={() => push(`/builder/${courseId}`)}>
+										{__('Cancel', 'masteriyo')}
+									</Button>
 								</div>
 							</div>
 						</form>

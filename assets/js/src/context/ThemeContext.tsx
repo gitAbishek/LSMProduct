@@ -5,7 +5,7 @@ import defaultTheme from '../theme/defaultTheme';
 import { mergeDeep } from '../utils/mergeDeep';
 
 interface ThemeContextInterface {
-	theme: any;
+	theme?: any;
 }
 
 export const ThemeContext = React.createContext<ThemeContextInterface>({
@@ -15,7 +15,7 @@ export const ThemeContext = React.createContext<ThemeContextInterface>({
 interface ThemeProviderProps {
 	children: React.ReactNode;
 	value?: any;
-	theme: object;
+	theme?: object;
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({

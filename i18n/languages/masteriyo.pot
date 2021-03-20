@@ -35,22 +35,25 @@ msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:71
 #: assets/js/src/screens/courses/EditCourse.tsx:91
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:158
 msgid "Chocolate"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:74
 #: assets/js/src/screens/courses/EditCourse.tsx:94
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:162
 msgid "Strawberry"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:76
 #: assets/js/src/screens/courses/EditCourse.tsx:96
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:166
 msgid "Vanilla"
 msgstr ""
 
 #: assets/js/src/screens/courses/AddNewCourse.tsx:82
 #: assets/js/src/screens/courses/EditCourse.tsx:102
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:111
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:98
 #: assets/js/src/screens/lessons/EditLesson.tsx:111
 msgid "Featured Image"
 msgstr ""
@@ -83,18 +86,18 @@ msgid ""
 msgstr ""
 
 #: assets/js/src/screens/courses/AllCourses.tsx:120
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:168
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:156
 #: assets/js/src/screens/lessons/EditLesson.tsx:175
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:224
 #: assets/js/src/screens/sections/components/Content.tsx:110
 #: assets/js/src/screens/sections/components/Section.tsx:139
 msgid "Cancel"
 msgstr ""
 
 #: assets/js/src/screens/courses/AllCourses.tsx:129
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:81
 #: assets/js/src/screens/lessons/EditLesson.tsx:79
 #: assets/js/src/screens/sections/components/Content.tsx:116
-#: assets/js/src/screens/sections/components/Section.tsx:101
+#: assets/js/src/screens/sections/components/Section.tsx:103
 msgid "Delete"
 msgstr ""
 
@@ -140,72 +143,74 @@ msgid "Preview"
 msgstr ""
 
 #: assets/js/src/screens/layouts/MainToolbar.tsx:49
-#: assets/js/src/screens/sections/components/Section.tsx:134
+#: assets/js/src/screens/sections/components/Section.tsx:136
 msgid "Save"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:101
-#: assets/js/src/screens/lessons/EditLesson.tsx:100
-msgid "Description"
-msgstr ""
-
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:103
-#: assets/js/src/screens/lessons/EditLesson.tsx:102
-msgid "Your course description"
-msgstr ""
-
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:116
 #: assets/js/src/screens/lessons/EditLesson.tsx:116
 msgid "Video Source"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:121
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:108
 #: assets/js/src/screens/lessons/EditLesson.tsx:121
 msgid "Select Video Source"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:123
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:110
 #: assets/js/src/screens/lessons/EditLesson.tsx:123
 msgid "Youtube"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:124
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:111
 #: assets/js/src/screens/lessons/EditLesson.tsx:124
 msgid "Vimeo"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:125
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:112
 #: assets/js/src/screens/lessons/EditLesson.tsx:125
 msgid "Custom"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:132
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:119
 #: assets/js/src/screens/lessons/EditLesson.tsx:132
 msgid "Video URL"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:144
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:131
 #: assets/js/src/screens/lessons/EditLesson.tsx:144
 msgid "Video Playback Time"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:166
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:153
 #: assets/js/src/screens/lessons/EditLesson.tsx:71
 msgid "Add New Lesson"
 msgstr ""
 
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:54
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:51
 msgid " has been added successfully"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:92
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:79
 #: assets/js/src/screens/lessons/EditLesson.tsx:90
 msgid "Lesson Name"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:94
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:81
 #: assets/js/src/screens/lessons/EditLesson.tsx:92
 msgid "Your topic title"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:88
+#: assets/js/src/screens/lessons/EditLesson.tsx:100
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:182
+msgid "Description"
+msgstr ""
+
+#: assets/js/src/screens/lessons/AddNewLesson.tsx:90
+#: assets/js/src/screens/lessons/EditLesson.tsx:102
+msgid "Your course description"
 msgstr ""
 
 #: assets/js/src/screens/lessons/EditLesson.tsx:169
@@ -213,8 +218,64 @@ msgid "Update"
 msgstr ""
 
 #: assets/js/src/screens/lessons/EditLesson.tsx:51
-#: assets/js/src/screens/sections/components/Section.tsx:62
+#: assets/js/src/screens/sections/components/Section.tsx:63
 msgid " has been updated successfully"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:108
+msgid "Quiz Name"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:110
+msgid "Your quiz title"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:119
+msgid "Your quiz description"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:132
+msgid "Questions"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:138
+msgid "Question"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:143
+msgid "What is your question?"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:146
+msgid "Write your question"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:153
+msgid "Question Type"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:173
+msgid "Points"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:176
+msgid "Points for answer"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:185
+msgid "Write Description about your quiz"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:194
+msgid "Answer"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:221
+msgid "Add"
+msgstr ""
+
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:71
+msgid "Add New Quiz"
 msgstr ""
 
 #: assets/js/src/screens/sections/SectionBuilder.tsx:58
@@ -222,30 +283,38 @@ msgid "Add New Section"
 msgstr ""
 
 #: assets/js/src/screens/sections/components/Content.tsx:72
-#: assets/js/src/screens/sections/components/Section.tsx:95
+#: assets/js/src/screens/sections/components/Section.tsx:97
 msgid "Edit"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:114
+#: assets/js/src/screens/sections/components/Section.tsx:116
 msgid "Section Name"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:116
+#: assets/js/src/screens/sections/components/Section.tsx:118
 msgid "Your Section Name"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:122
+#: assets/js/src/screens/sections/components/Section.tsx:124
 msgid "Section Description"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:128
+#: assets/js/src/screens/sections/components/Section.tsx:130
 msgid "short summary"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:157
+#: assets/js/src/screens/sections/components/Section.tsx:164
+msgid "Lesson"
+msgstr ""
+
+#: assets/js/src/screens/sections/components/Section.tsx:172
+msgid "Quiz"
+msgstr ""
+
+#: assets/js/src/screens/sections/components/Section.tsx:178
 msgid "Add New Content"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:51
+#: assets/js/src/screens/sections/components/Section.tsx:52
 msgid " has been deleted successfully"
 msgstr ""

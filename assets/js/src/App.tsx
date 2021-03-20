@@ -50,9 +50,9 @@ const App = () => {
 								<screens.Settings />
 							</Route>
 
-							{/* <Route>
+							<Route>
 								<Redirect to="/courses" />
-							</Route> */}
+							</Route>
 						</Switch>
 					</div>
 				</Router>

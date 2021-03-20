@@ -161,6 +161,12 @@ export const addQuestion = (data: any) => {
 	return axios.post(urls.questions, data).then((response) => response.data);
 };
 
+export const updateQuestion = (id: number, data: any) => {
+	return axios
+		.patch(urls.question.replace(':id', id.toString()), data)
+		.then((response) => response.data);
+};
+
 export const deleteQuestion = (id: number) => {
 	return axios
 		.delete(urls.question.replace(':id', id.toString()))

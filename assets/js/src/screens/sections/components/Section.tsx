@@ -1,4 +1,5 @@
 import { BiAlignLeft, BiTimer, BiTrash } from 'react-icons/bi';
+import Box, { BoxContent, BoxHeader } from 'Components/layout/Box';
 import React, { useState } from 'react';
 import {
 	deleteSection,
@@ -78,8 +79,8 @@ const Section: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<div className="mto-bg-white mto-shadow-sm mto-p-8 mto-mt-12 mto-rounded-sm">
-			<header className="mto-flex mto-justify-between mto-items-center mto-mb-4">
+		<Box>
+			<BoxHeader>
 				<div className="mto-flex mto-items-center">
 					<DragHandle />
 					<h1 className="mto-text-lg">{name}</h1>
@@ -109,42 +110,8 @@ const Section: React.FC<Props> = (props) => {
 						<OptionButton />
 					</Dropdown>
 				</div>
-			</header>
-			{sectionEditing && (
-				<div className="mto-mt-8">
-					<form onSubmit={handleSubmit(onUpdate)}>
-						<FormGroup>
-							<Label htmlFor="">{__('Section Name', 'masteriyo')}</Label>
-							<Input
-								placeholder={__('Your Section Name', 'masteriyo')}
-								ref={register({ required: true })}
-								name="name"
-								defaultValue={name}></Input>
-						</FormGroup>
-						<FormGroup>
-							<Label htmlFor="">{__('Section Description', 'masteriyo')}</Label>
-							<Textarea
-								name="description"
-								defaultValue={description}
-								ref={register()}
-								rows={4}
-								placeholder={__('short summary', 'masteriyo')}
-							/>
-						</FormGroup>
-						<div className="mto-mt-9 mto-pt-8 mto-border-t mto-border-solid mto-border-gray-300">
-							<div className="mto-flex">
-								<Button layout="primary" type="submit" className="mto-mr-4">
-									{__('Save', 'masteriyo')}
-								</Button>
-								<Button onClick={() => setSectionEditing(false)}>
-									{__('Cancel', 'masteriyo')}
-								</Button>
-							</div>
-						</div>
-					</form>
-				</div>
-			)}
-			<div>
+			</BoxHeader>
+			<BoxContent>
 				{contentQuery?.data?.map((content: any, index: number) => (
 					<Content
 						key={index}
@@ -178,8 +145,8 @@ const Section: React.FC<Props> = (props) => {
 					}>
 					<AddNewButton>{__('Add New Content', 'masteriyo')}</AddNewButton>
 				</Dropdown>
-			</div>
-		</div>
+			</BoxContent>
+		</Box>
 	);
 };
 

@@ -401,23 +401,23 @@ class ScriptStyle {
 	}
 
 	/**
-	 * Load localized scripts.
+	 * Load admin localized scripts.
 	 *
 	 * @since 0.1.1
 	 */
-	public function load_localized_scripts() {
+	public function load_admin_localized_scripts() {
 		$this->localized_scripts = apply_filters( 'masteriyo_localized_scripts', array(
-		'masteriyo-admin' => array(
-		'name' => 'masteriyo',
-		'data' => array(
-			'rootApiUrl' => esc_url_raw( rest_url() ),
-			'nonce'      => wp_create_nonce( 'wp_rest' )
-		),
-		),
+			'admin' => array(
+				'name' => 'masteriyo',
+				'data' => array(
+					'rootApiUrl' => esc_url_raw( rest_url() ),
+					'nonce'      => wp_create_nonce( 'wp_rest' )
+				),
+			),
 		) );
 
 		foreach ( $this->localized_scripts as $handle => $script ) {
-			\wp_localize_script( $handle, $script['name'], $script['data'] );
+			\wp_localize_script( "masteriyo-{$handle}", $script['name'], $script['data'] );
 		}
 	}
 

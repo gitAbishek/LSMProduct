@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Faq query class.
  */
-class FaqsQuery extends ObjectQuery {
+class FaqQuery extends ObjectQuery {
 
 	/**
 	 * Valid query vars for Faqs.

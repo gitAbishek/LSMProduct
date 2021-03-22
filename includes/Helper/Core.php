@@ -1387,3 +1387,19 @@ function masteriyo_restore_locale() {
 		masteriyo()->load_text_domain();
 	}
 }
+
+/**
+ * Is masteriyo admin page.
+ *
+ * @since 0.1.0
+ *
+ * @return bool
+ */
+function masteriyo_is_admin_page() {
+	if ( ! is_admin() ) {
+		return false;
+	}
+
+	$screen = get_current_screen();
+	return 'toplevel_page_masteriyo' === $screen->id ? true: false;
+}

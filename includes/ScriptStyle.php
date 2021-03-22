@@ -72,10 +72,10 @@ class ScriptStyle {
 	 * @return void
 	 */
 	private function init_hooks() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_public_scripts' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_localized_scripts' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'load_localized_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_public_scripts_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_public_localized_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_localized_scripts' ) );
 	}
 
 	/**
@@ -98,26 +98,21 @@ class ScriptStyle {
 	 */
 	private function init_scripts() {
 		$this->scripts = apply_filters( 'masteriyo_enqueue_scripts', array(
-			'masteriyo-admin' => array(
+			'admin' => array(
 				'src'      => $this->get_asset_url( '/assets/js/build/app.js' ),
 				'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
-				'version'  => $this->get_version(),
-				'type'     => 'admin',
-				'callback' => ''
+				'context'  => 'admin',
+				'callback' => 'masteriyo_is_admin_page'
 			),
-			'masteriyo-public' => array(
-				'src'      => $this->get_asset_url( '/assets/js/build/public.js' ),
-				'deps'     => $this->get_version( 'wp-polyfill' ),
-				'version'  => $this->get_version(),
-				'type'     => 'public',
-				'callback' => ''
+			'public' => array(
+				'src'     => $this->get_asset_url( '/assets/js/build/public.js' ),
+				'deps'    => array( 'wp-polyfill' ),
+				'context' => 'public',
 			),
-			'masteriyo-single-course' => array(
+			'single-course' => array(
 				'src'      => $this->get_asset_url( '/assets/js/single-course.js' ),
-				'deps'     => array(),
-				'version'  => $this->get_version(),
-				'type'     => 'public',
-				'callback' => ''
+				'context'  => 'public',
+				'callback' => 'masteriyo_is_single_course_page'
 			),
 		) );
 	}
@@ -132,50 +127,45 @@ class ScriptStyle {
 	 */
 	private function init_styles() {
 		$this->styles = apply_filters( 'masteriyo_enqueue_styles', array(
-			'masteriyo-admin' => array(
+			'admin' => array(
 				'src'      => $this->get_asset_url( '/assets/js/build/app.css' ),
-				'deps'     => '',
-				'version'  => $this->get_version(),
-				'media'    => 'all',
-				'has_rtl' => true,
-				'type'     => 'admin'
-			),
-			'masteriyo-public' => array(
-				'src'      => $this->get_asset_url( '/assets/dist/public.css' ),
-				'deps'     => '',
-				'version'  => $this->get_version(),
-				'media'    => 'all',
-				'has_rtl' => true,
-				'type'     => 'public'
-			),
-			'masteriyo-single-course' => array(
-				'src'      => $this->get_asset_url( '/assets/css/single-course.css' ),
-				'deps'     => '',
-				'version'  => $this->get_version(),
-				'media'    => 'all',
 				'has_rtl'  => true,
-				'type'     => 'public'
+				'context'  => 'admin',
+				'callback' => 'masteriyo_is_admin_page'
+			),
+			'public' => array(
+				'src'     => $this->get_asset_url( '/assets/dist/public.css' ),
+				'has_rtl' => true,
+				'context' => 'public'
+			),
+			'single-course' => array(
+				'src'      => $this->get_asset_url( '/assets/css/single-course.css' ),
+				'has_rtl'  => true,
+				'context'  => 'public',
+				'callback' => 'masteriyo_is_single_course_page'
 			),
 		) );
 	}
 
 	/**
-	 * Get styles.
+	 * Get styles according to context.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $type Style/Script type. (admin, public, none).
+	 * @param string $context Style/Script context (admin, public, none, etc.)
 	 *
 	 * @return array
 	 */
-	public function get_styles( $type = 'none' ) {
-		// Filter according to admin or public type.
-		if ( 'admin' === $type || 'public' === $type ) {
-			$styles = array_filter( $this->styles, function( $style )  use( $type ) {
-				$style = array_replace_recursive( $this->get_default_style_options(), $style );
-				return $style['type'] === $type;
-			} );
-		}
+	public function get_styles( $context ) {
+		// Set default values.
+		$styles = array_map( function( $style ) {
+			return array_replace_recursive( $this->get_default_style_options(), $style );
+		}, $this->styles );
+
+		// Filter according to admin or public context.
+		$styles = array_filter( $styles, function( $style )  use( $context ) {
+			return $style['context'] === $context;
+		} );
 
 		return $styles;
 	}
@@ -185,22 +175,20 @@ class ScriptStyle {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $type Style/Script type. (admin, public, none).
+	 * @param string $context Script context. (admin, public, none).
 	 *
 	 * @return array
 	 */
-	public function get_scripts( $type = 'none' ) {
+	public function get_scripts( $context) {
 		// Set default values.
 		$scripts = array_map( function( $script ) {
 			return array_replace_recursive( $this->get_default_script_options(), $script );
 		}, $this->scripts );
 
-		// Filter according to admin or public type.
-		if ( 'admin' === $type || 'public' === $type ) {
-			$scripts = array_filter( $scripts, function( $script )  use( $type ) {
-				return $script['type'] === $type;
-			} );
-		}
+		// Filter according to admin or public context.
+		$scripts = array_filter( $scripts, function( $script )  use( $context ) {
+			return $script['context'] === $context;
+		} );
 
 		return $scripts;
 	}
@@ -214,12 +202,13 @@ class ScriptStyle {
 	 */
 	public function get_default_script_options() {
 		return apply_filters( 'masteriyo_get_default_script_options', array(
-			'src'       => '',
-			'deps'      => array( 'jquery' ),
-			'version'   => '',
-			'type'      => 'none',
-			'in_footer' => true,
-			'callback'  => ''
+			'src'           => '',
+			'deps'          => array( 'jquery' ),
+			'version'       => $this->get_version(),
+			'context'       => 'none',
+			'in_footer'     => true,
+			'register_only' => false,
+			'callback'      => ''
 		) );
 	}
 
@@ -232,14 +221,15 @@ class ScriptStyle {
 	 */
 	public function get_default_style_options() {
 		return apply_filters( 'masteriyo_get_default_style_options', array(
-			'src'       => '',
-			'deps'      => array(),
-			'version'   => '',
-			'media'     => 'all',
-			'has_rtl'   => false,
-			'type'      => 'none',
-			'in_footer' => true,
-			'callback'  => ''
+			'src'           => '',
+			'deps'          => array(),
+			'version'       => $this->get_version(),
+			'media'         => 'all',
+			'has_rtl'       => false,
+			'context'       => 'none',
+			'in_footer'     => true,
+			'register_only' => false,
+			'callback'      => ''
 		) );
 	}
 
@@ -253,7 +243,7 @@ class ScriptStyle {
 	 * @return string
 	 */
 	private function get_asset_url( $path ) {
-		return apply_filters( 'masteriyo_get_asset_url', plugins_url( $path, MASTERIYO_PLUGIN_FILE ), $path );
+		return apply_filters( 'masteriyo_get_asset_url', plugins_url( $path, Constants::get( 'MASTERIYO_PLUGIN_FILE' ) ), $path );
 	}
 
 	/**
@@ -269,8 +259,7 @@ class ScriptStyle {
 	 * @param  boolean  $in_footer Whether to enqueue the script before </body> instead of in the <head>. Default 'false'.
 	 */
 	private function register_script( $handle, $path, $deps = array( 'jquery' ), $version = '', $in_footer = true ) {
-		$scripts = $handle;
-		wp_register_script( $handle, $path, $deps, $version, $in_footer );
+		wp_register_script( "masteriyo-{$handle}", $path, $deps, $version, $in_footer );
 	}
 
 	/**
@@ -287,9 +276,9 @@ class ScriptStyle {
 	 */
 	private function enqueue_script( $handle, $path = '', $deps = array( 'jquery' ), $version = '', $in_footer = true ) {
 		if ( ! in_array( $handle, $this->scripts, true ) && $path ) {
-			wp_register_script( $handle, $path, $deps, $version, $in_footer );
+			wp_register_script( "masteriyo-{$handle}", $path, $deps, $version, $in_footer );
 		}
-		wp_enqueue_script( $handle );
+		wp_enqueue_script( "masteriyo-{$handle}" );
 	}
 
 	/**
@@ -308,10 +297,10 @@ class ScriptStyle {
 	 */
 	private function register_style( $handle, $path, $deps = array(), $version = '', $media = 'all', $has_rtl = false ) {
 		$this->styles[] = $handle;
-		wp_register_style( $handle, $path, $deps, $version, $media );
+		wp_register_style( "masteriyo-{$handle}", $path, $deps, $version, $media );
 
 		if ( $has_rtl ) {
-			wp_style_add_data( $handle, 'rtl', 'replace' );
+			wp_style_add_data( "masteriyo-{$handle}", 'rtl', 'replace' );
 		}
 	}
 
@@ -332,33 +321,7 @@ class ScriptStyle {
 		if ( ! in_array( $handle, $this->styles, true ) && $path ) {
 			$this->register_style( $handle, $path, $deps, $version, $media, $has_rtl );
 		}
-		wp_enqueue_style( $handle );
-	}
-
-	/**
-	 * Register scripts.
-	 *
-	 * @since 0.1.0
-	 */
-	private function register_scripts() {
-		$scripts = $this->get_scripts( is_admin() ? 'admin' : 'public' );
-
-		foreach ( $scripts as $handle => $script ) {
-			$this->register_script( $handle, $script['src'], $script['deps'], $script['version'], $script['in_footer'] );
-		}
-	}
-
-	/**
-	 * Register styles.
-	 *
-	 * @since 0.1.0
-	 */
-	private function register_styles() {
-		$scripts = $this->get_styles( is_admin() ? 'admin' : 'public' );
-
-		foreach ( $scripts as $handle => $script ) {
-			$this->register_style( $handle, $script['src'], $script['deps'], $script['version'], $script['media'] );
-		}
+		wp_enqueue_style( "masteriyo-{$handle}" );
 	}
 
 	/**
@@ -366,30 +329,33 @@ class ScriptStyle {
 	 *
 	 * @since 0.1.0
 	 */
-	public function load_public_scripts() {
-		$this->register_scripts();
-		$this->register_styles();
-
-		if ( masteriyo_is_single_course_page() ) {
-			$this->enqueue_script( 'masteriyo-single-course' );
-			$this->enqueue_style( 'masteriyo-single-course' );
-		}
-		
+	public function load_public_scripts_styles() {
 		$scripts = $this->get_scripts( 'public' );
 		$styles  = $this->get_styles( 'public' );
 
+
 		foreach ( $scripts as $handle => $script ) {
-			if ( is_callable( $script ) ) {
+			if ( true === (bool) $script['register_only'] ) {
 				$this->register_script( $handle, $script['src'], $script['deps'], $script['version'] );
-			} else {
+				continue;
+			}
+
+			if ( empty( $script['callback'] ) ) {
+				$this->enqueue_script( $handle, $script['src'], $script['deps'], $script['version'] );
+			} elseif ( is_callable( $script['callback'] ) && call_user_func_array( $script['callback'], array() )) {
 				$this->enqueue_script( $handle, $script['src'], $script['deps'], $script['version'] );
 			}
 		}
 
 		foreach ( $styles as $handle => $style ) {
-			if ( is_callable( $style ) ) {
+			if ( true === (bool) $style['register_only'] ) {
 				$this->register_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
-			} else {
+				continue;
+			}
+
+			if ( empty( $style['callback'] ) ) {
+				$this->enqueue_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
+			} elseif ( is_callable( $style['callback'] ) && call_user_func_array( $style['callback'], array() ) ) {
 				$this->enqueue_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
 			}
 		}
@@ -400,22 +366,33 @@ class ScriptStyle {
 	 *
 	 * @since 0.1.1
 	 */
-	public function load_admin_scripts() {
+	public function load_admin_scripts_styles() {
 		$scripts = $this->get_scripts( 'admin' );
 		$styles  = $this->get_styles( 'admin' );
 
+
 		foreach ( $scripts as $handle => $script ) {
-			if ( is_callable( $script ) ) {
+			if ( true === (bool) $script['register_only'] ) {
 				$this->register_script( $handle, $script['src'], $script['deps'], $script['version'] );
-			} else {
+				continue;
+			}
+
+			if ( empty( $script['callback'] ) ) {
+				$this->enqueue_script( $handle, $script['src'], $script['deps'], $script['version'] );
+			} elseif ( is_callable( $script['callback'] ) && call_user_func_array( $script['callback'], array() ) ) {
 				$this->enqueue_script( $handle, $script['src'], $script['deps'], $script['version'] );
 			}
 		}
 
 		foreach ( $styles as $handle => $style ) {
-			if ( is_callable( $style ) ) {
+			if ( true === (bool) $style['register_only'] ) {
 				$this->register_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
-			} else {
+				continue;
+			}
+
+			if ( empty( $style['callback'] ) ) {
+				$this->enqueue_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
+			} elseif ( is_callable( $style['callback'] ) && call_user_func_array( $style['callback'], array() ) ) {
 				$this->enqueue_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
 			}
 		}
@@ -430,13 +407,13 @@ class ScriptStyle {
 	 */
 	public function load_localized_scripts() {
 		$this->localized_scripts = apply_filters( 'masteriyo_localized_scripts', array(
-			'masteriyo-admin' => array(
-				'name' => 'masteriyo',
-				'data' => array(
-					'rootApiUrl' => esc_url_raw( rest_url() ),
-					'nonce'      => wp_create_nonce( 'wp_rest' )
-				),
-			),
+		'masteriyo-admin' => array(
+		'name' => 'masteriyo',
+		'data' => array(
+			'rootApiUrl' => esc_url_raw( rest_url() ),
+			'nonce'      => wp_create_nonce( 'wp_rest' )
+		),
+		),
 		) );
 
 		foreach ( $this->localized_scripts as $handle => $script ) {

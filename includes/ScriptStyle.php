@@ -414,13 +414,13 @@ class ScriptStyle {
 			'masteriyo-admin' => array(
 				'name' => 'masteriyo',
 				'data' => array(
-					'rootapiurl' => esc_url_raw( rest_url() ),
+					'rootApiUrl' => esc_url_raw( rest_url() ),
 					'nonce'      => wp_create_nonce( 'wp_rest' )
 				),
 			),
 		) );
 
-		foreach( $this->localized_scripts as $handle => $script ) {
+		foreach ( $this->localized_scripts as $handle => $script ) {
 			\wp_localize_script( $handle, $script['name'], $script['data'] );
 		}
 	}

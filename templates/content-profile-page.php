@@ -26,10 +26,10 @@ do_action( 'masteriyo_before_profile_page_content' );
 
 ?>
 <div class="mto-flex mto-flex-col md:mto-flex-row">
-	<div class="mto-flex mto-w-full md:mto-w-1/5 2xl:mto-w-1/6 mto-h-screen">
+	<div class="mto-flex-none mto-hidden md:mto-flex mto-w-full md:mto-w-64 md:mto-h-screen mto-sticky mto-top-0">
 		<?php masteriyo_get_template( 'profile/sidebar-content.php' ); ?>
 	</div>
-	<main class="mto-flex-1 md:mto-w-4/5 mto-p-4 md:mto-p-16 mto-space-y-6 md:mto-space-y-12">
+	<main class="mto-flex-auto mto-w-full md:mto-flex-1 md:mto-w-4/5 mto-p-4 md:mto-p-16 mto-space-y-6 md:mto-space-y-12">
 		<?php masteriyo_get_template( $template ); ?>
 	</main>
 </div>

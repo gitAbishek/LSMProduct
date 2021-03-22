@@ -27,7 +27,7 @@ do_action( 'masteriyo_before_edit_profile_tab_content' );
 				<a href="#" aria-label="Change Profile Picture">
 					<div class="mto-group mto-w-24 mto-h-24 mto-bg-cover mto-bg-center mto-rounded-full mto-border-4 mto-shadow-md mto-relative mto-overflow-hidden">
 						<form action="/action_page.php">
-							<label for="img" class="mto-hidden group-hover:mto-block mto-absolute mto-inset-5 mto-bg-white mto-bg-opacity-20 mto-p-3 mto-rounded-full mto-cursor-pointer">
+							<label for="img" class="mto-hidden group-hover:mto-block mto-absolute mto-inset-5 mto-w-12 mto-h-12 mto-bg-gray-900 mto-opacity-50 mto-p-3 mto-rounded-full mto-cursor-pointer">
 								<svg class="mto-w-6 mto-h-6 mto-fill-current mto-text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12,8c-2.168,0-4,1.832-4,4c0,2.168,1.832,4,4,4s4-1.832,4-4C16,9.832,14.168,8,12,8z M12,14c-1.065,0-2-0.935-2-2 s0.935-2,2-2s2,0.935,2,2S13.065,14,12,14z"></path><path d="M20,5h-2.586l-2.707-2.707C14.52,2.105,14.266,2,14,2h-4C9.734,2,9.48,2.105,9.293,2.293L6.586,5H4C2.897,5,2,5.897,2,7v11 c0,1.103,0.897,2,2,2h16c1.103,0,2-0.897,2-2V7C22,5.897,21.103,5,20,5z M4,18V7h3c0.266,0,0.52-0.105,0.707-0.293L10.414,4h3.172 l2.707,2.707C16.48,6.895,16.734,7,17,7h3l0.002,11H4z"></path></svg>
 							</label>
 							<input class="mto-hidden" type="file" id="img" name="img" accept="image/*">
@@ -47,7 +47,7 @@ do_action( 'masteriyo_before_edit_profile_tab_content' );
 					</div>
 
 					<div class="mto-flex-grow">
-						<label for="user-last-name" class="mto-block mto-text-sm mto-font-semibold mto-pb-4">Last Name</label>
+						<label for="user-last-name" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">Last Name</label>
 						<input value="<?php echo $user->get_last_name(); ?>" id="user-last-name" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
@@ -70,7 +70,7 @@ do_action( 'masteriyo_before_edit_profile_tab_content' );
 					</div>
 
 					<div class="mto-flex-grow">
-						<label for="user-state" class="mto-block mto-text-sm mto-font-semibold mto-pb-4">State</label>
+						<label for="user-state" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">State</label>
 						<input value="<?php echo $user->get_state(); ?>" id="user-state" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
@@ -81,7 +81,7 @@ do_action( 'masteriyo_before_edit_profile_tab_content' );
 					</div>
 
 					<div class="mto-flex-grow">
-						<label for="user-country" class="mto-block mto-text-sm mto-font-semibold mto-pb-4">Country</label>
+						<label for="user-country" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">Country</label>
 						<input value="<?php echo $user->get_country(); ?>" id="user-country" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>

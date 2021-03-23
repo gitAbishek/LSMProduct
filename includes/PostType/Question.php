@@ -18,6 +18,8 @@ class Question extends PostType {
 	protected $slug = 'question';
 
 	public function __construct() {
+		$debug = masteriyo_is_debug_enabled();
+
 		$this->labels = array(
 			'name'                  => _x( 'Questions', 'Question General Name', 'masteriyo' ),
 			'singular_name'         => _x( 'Question', 'Question Singular Name', 'masteriyo' ),
@@ -55,9 +57,7 @@ class Question extends PostType {
 			'supports'            => array( 'title', 'editor', 'author' ),
 			'taxonomies'          => array(),
 			'hierarchical'        => false,
-			'public'              => true,
-			'show_ui'             => true,
-			'show_in_menu'        => true,
+			'public'              => $debug,
 			'menu_position'       => 5,
 			'show_in_admin_bar'   => true,
 			'show_in_nav_menus'   => true,
@@ -66,7 +66,7 @@ class Question extends PostType {
 			'has_archive'         => true,
 			'map_meta_cap'        => true,
 			'exclude_from_search' => false,
-			'publicly_queryable'  => true,
+			'publicly_queryable'  => false,
 			'capability_type'     => 'post',
 			'can_export'          => true,
 			'delete_with_user'    => true,

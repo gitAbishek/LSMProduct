@@ -16,6 +16,8 @@ class Lesson extends PostType {
 	protected $slug = 'lesson';
 
 	public function __construct() {
+		$debug = masteriyo_is_debug_enabled();
+
 		$this->labels = array(
 			'name'                  => _x( 'Lessons', 'Lesson General Name', 'masteriyo' ),
 			'singular_name'         => _x( 'Lesson', 'Lesson Singular Name', 'masteriyo' ),
@@ -54,7 +56,7 @@ class Lesson extends PostType {
 			'taxonomies'          => array(),
 			'hierarchical'        => false,
 			'public'              => true,
-			'show_ui'             => true,
+			'show_ui'             => $debug,
 			'show_in_menu'        => true,
 			'menu_position'       => 5,
 			'show_in_admin_bar'   => true,

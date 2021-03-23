@@ -25,6 +25,8 @@ class Quiz extends PostType {
 	protected $slug = 'quiz';
 
 	public function __construct() {
+		$debug = masteriyo_is_debug_enabled();
+
 		$this->labels = array(
 			'name'                  => _x( 'Quizes', 'Quize General Name', 'masteriyo' ),
 			'singular_name'         => _x( 'Quiz', 'Quize Singular Name', 'masteriyo' ),
@@ -63,14 +65,14 @@ class Quiz extends PostType {
 			'taxonomies'          => array(),
 			'hierarchical'        => false,
 			'public'              => true,
-			'show_ui'             => true,
+			'show_ui'             => $debug,
 			'show_in_menu'        => true,
 			'menu_position'       => 5,
 			'show_in_admin_bar'   => true,
 			'show_in_nav_menus'   => true,
 			'can_export'          => true,
 			'show_in_rest'        => true,
-			'has_archive'         => true,
+			'has_archive'         => false,
 			'map_meta_cap'        => true,
 			'exclude_from_search' => false,
 			'publicly_queryable'  => true,

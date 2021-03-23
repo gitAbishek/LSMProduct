@@ -26,6 +26,8 @@ class Faqs extends PostType {
 	 * Constructor.
 	 */
 	public function __construct() {
+		$debug = masteriyo_is_debug_enabled();
+
 		$this->labels = array(
 			'name'                  => _x( 'Faqs', 'Faq General Name', 'masteriyo' ),
 			'singular_name'         => _x( 'Faq', 'Faq Singular Name', 'masteriyo' ),
@@ -64,17 +66,17 @@ class Faqs extends PostType {
 			'taxonomies'          => array(),
 			'hierarchical'        => true,
 			'public'              => true,
-			'show_ui'             => true,
+			'show_ui'             => $debug,
 			'show_in_menu'        => true,
 			'menu_position'       => 5,
-			'show_in_admin_bar'   => true,
-			'show_in_nav_menus'   => true,
+			'show_in_admin_bar'   => false,
+			'show_in_nav_menus'   => false,
 			'can_export'          => true,
 			'show_in_rest'        => true,
-			'has_archive'         => true,
+			'has_archive'         => false,
 			'map_meta_cap'        => true,
-			'exclude_from_search' => false,
-			'publicly_queryable'  => true,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => false,
 			'capability_type'     => 'post',
 			'can_export'          => true,
 			'delete_with_user'    => true,

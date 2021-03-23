@@ -26,6 +26,8 @@ class Order extends PostType {
 	 * Constructor.
 	 */
 	public function __construct() {
+		$debug = masteriyo_is_debug_enabled();
+
 		$this->labels = array(
 			'name'                  => _x( 'Orders', 'Order General Name', 'masteriyo' ),
 			'singular_name'         => _x( 'Order', 'Order Singular Name', 'masteriyo' ),
@@ -62,10 +64,8 @@ class Order extends PostType {
 			'labels'              => $this->labels,
 			'supports'            => array( 'title', 'editor', 'author', 'custom-fields', 'post-formats' ),
 			'taxonomies'          => array(),
-			'hierarchical'        => false,
-			'public'              => true,
-			'show_ui'             => true,
-			'show_in_menu'        => true,
+			'hierarchical'        => true,
+			'public'              => $debug,
 			'menu_position'       => 5,
 			'show_in_admin_bar'   => true,
 			'show_in_nav_menus'   => true,
@@ -74,7 +74,7 @@ class Order extends PostType {
 			'has_archive'         => true,
 			'map_meta_cap'        => true,
 			'exclude_from_search' => false,
-			'publicly_queryable'  => true,
+			'publicly_queryable'  => is_admin(),
 			'capability_type'     => 'post',
 			'can_export'          => true,
 			'delete_with_user'    => true,

@@ -16,15 +16,16 @@ class Course extends PostType {
 	protected $slug = 'course';
 
 	public function __construct() {
+		$debug                = masteriyo_is_debug_enabled();
 		$permalinks           = masteriyo_get_permalink_structure();
 		$courses_list_page_id = masteriyo_get_page_id( 'courses_list' );
 		$supports             = array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'publicize', 'wpcom-markdown' );
 
 		if ( $courses_list_page_id && get_post( $courses_list_page_id ) ) {
 			$has_archive = urldecode( get_page_uri( $courses_list_page_id ) );
-		 } else {
+		} else {
 			$has_archive = 'courses-list';
-		 }
+		}
 
 
 		$this->labels = array(
@@ -62,19 +63,19 @@ class Course extends PostType {
 			'description'         => __( 'Courses Description', 'masteriyo' ),
 			'labels'              => $this->labels,
 			'supports'            => $supports,
-			'taxonomies'          => array(),
-			'hierarchical'        => false,
+			'taxonomies'          => array( 'course_cat', 'course_tag', 'course_difficulty', 'course_visibility' ),
+			'hierarchical'        => true,
 			'public'              => true,
-			'show_ui'             => true,
+			'show_ui'             => $debug,
+			'publicly_queryable'  => true,
 			'show_in_menu'        => true,
+			'exclude_from_search' => false,
 			'menu_position'       => 5,
 			'show_in_admin_bar'   => true,
 			'show_in_nav_menus'   => true,
 			'can_export'          => true,
 			'show_in_rest'        => true,
 			'map_meta_cap'        => true,
-			'exclude_from_search' => false,
-			'publicly_queryable'  => true,
 			'capability_type'     => 'post',
 			'rewrite'             => $permalinks['course_rewrite_slug'] ? array(
 				'slug'       => $permalinks['course_rewrite_slug'],

@@ -26,6 +26,8 @@ class Section extends PostType {
 	 * Constructor.
 	 */
 	public function __construct() {
+		$debug = masteriyo_is_debug_enabled();
+
 		$this->labels = array(
 			'name'                  => _x( 'Sections', 'Section General Name', 'masteriyo' ),
 			'singular_name'         => _x( 'Section', 'Section Singular Name', 'masteriyo' ),
@@ -64,7 +66,7 @@ class Section extends PostType {
 			'taxonomies'          => array(),
 			'hierarchical'        => false,
 			'public'              => true,
-			'show_ui'             => true,
+			'show_ui'             => $debug,
 			'show_in_menu'        => true,
 			'menu_position'       => 5,
 			'show_in_admin_bar'   => true,

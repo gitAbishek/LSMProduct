@@ -6,10 +6,10 @@
 	 * API Urls.
 	 */
 	const urls = {
-		users: mto_data.users_api_urls,
+		...mto_data.urls,
 		get: function( api_name, endpoint, params = {} ) {
-			if ( mto_data[api_name][endpoint] ) {
-				let url = mto_data[api_name][endpoint];
+			if ( mto_data.urls[api_name][endpoint] ) {
+				let url = mto_data.urls[api_name][endpoint];
 
 				if ( typeof params === 'object' ) {
 					Object.entries(params).forEach(([key, value]) => {

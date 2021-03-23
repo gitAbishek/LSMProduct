@@ -453,7 +453,9 @@ class ScriptStyle {
 			'masteriyo-profile-page' => array(
 				'name' => 'masteriyo_data',
 				'data' => array(
-					'users_api_urls' => masteriyo( 'user.rest' )->get_api_urls(),
+					'urls' => array(
+						'users' => masteriyo( 'user.rest' )->get_api_urls(),
+					),
 					'nonce' => wp_create_nonce( 'wp_rest' )
 				),
 			),

@@ -594,21 +594,6 @@ function masteriyo_img_url( $file ) {
 }
 
 /**
- * Put course data into a global.
- *
- * @since 0.1.0
- *
- * @param int|Course|WP_Post $course_id Course id or Course object or course wp post.
- *
- * @return Course
- */
-function masteriyo_setup_course_data( $course_id ) {
-	$GLOBALS['course'] =  masteriyo_get_course( $course_id );
-
-	return $GLOBALS['course'];
-}
-
-/**
  * Render stars based on rating.
  *
  * @since 0.1.0
@@ -1402,4 +1387,16 @@ function masteriyo_is_admin_page() {
 
 	$screen = get_current_screen();
 	return 'toplevel_page_masteriyo' === $screen->id ? true: false;
+}
+
+
+/**
+ * Is masteriyo in debug enabled.
+ *
+ * @since 0.1.0
+ *
+ * @return bool
+ */
+function masteriyo_is_debug_enabled() {
+	return Constants::get( 'MASTERIYO_DEBUG_MODE' );
 }

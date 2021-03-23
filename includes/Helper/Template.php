@@ -35,7 +35,7 @@ function masteriyo_template_redirect() {
 		}
 	}
 }
-add_action( 'template_redirect', 'masteriyo_template_redirect' );
+function_exists( 'add_action' ) && add_action( 'template_redirect', 'masteriyo_template_redirect' );
 
 /**
  * Should the Masteriyo loop be displayed?
@@ -184,7 +184,7 @@ function masteriyo_setup_loop( $args = array() ) {
 
 	$GLOBALS['masteriyo_loop'] = wp_parse_args( $args, $default_args );
 }
-add_action( 'masteriyo_before_shop_loop', 'masteriyo_setup_loop' );
+function_exists( 'add_action' ) && add_action( 'masteriyo_before_shop_loop', 'masteriyo_setup_loop' );
 
 /**
  * Get the default columns setting - this is how many courses will be shown per row in loops.
@@ -283,7 +283,7 @@ function masteriyo_setup_course_data( $post ) {
 
 	return $GLOBALS['course'];
 }
-add_action( 'the_post', 'masteriyo_setup_course_data' );
+function_exists( 'add_action' ) && add_action( 'the_post', 'masteriyo_setup_course_data' );
 
 /**
  * Add class to the body tag.
@@ -301,4 +301,4 @@ function masteriyo_add_body_class( $classes, $class ) {
 
 	return $classes;
 }
-add_filter( 'body_class', 'masteriyo_add_body_class', 10, 2 );
+function_exists( 'add_filter' ) && add_filter( 'body_class', 'masteriyo_add_body_class', 10, 2 );

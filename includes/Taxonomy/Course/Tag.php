@@ -18,7 +18,6 @@ class Tag extends Taxonomy {
 	 */
 	protected $taxonomy = 'course_tag';
 
-
 	/**
 	 * Post type the taxonomy belongs to.
 	 *
@@ -33,20 +32,16 @@ class Tag extends Taxonomy {
 	 *
 	 * @return array
 	 */
-	public function get_labels() {
+	protected function get_args() {
 		return apply_filters(
 			'masteriyo_taxonomy_args_course_cat',
 			array(
-				'hierarchical' => false,
-				'label'        => __( 'Course Tags', 'masteriyo' ),
-				'show_ui'      => true,
-				'query_var'    => true,
-				'capabilities' => array(
-					'manage_terms' => 'manage_course_terms',
-					'edit_terms'   => 'edit_course_terms',
-					'delete_terms' => 'delete_course_terms',
-					'assign_terms' => 'assign_course_terms',
-				),
+				'hierarchical'      => false,
+				'show_ui'           => true,
+				'show_admin_column' => true,
+				'show_in_nav_menus' => true,
+				'show_tag_cloud'    => true,
+				'query_var'         => true,
 				'rewrite'               => array(
 					'slug'         => \masteriyo_get_permalink_structure('course_tag_rewrite_slug'),
 					'with_front'   => false,
@@ -74,7 +69,7 @@ class Tag extends Taxonomy {
 					'items_list'                 => __( 'Course Tags list', 'masteriyo' ),
 					'items_list_navigation'      => __( 'Course Tags list navigation', 'masteriyo' ),
 				),
-			),
+			)
 		);
 	}
 }

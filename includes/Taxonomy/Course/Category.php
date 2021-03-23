@@ -35,16 +35,13 @@ class Category extends Taxonomy {
 		return apply_filters(
 			'masteriyo_taxonomy_args_course_cat',
 			array(
-				'hierarchical'          => true,
-				'label'                 => __( 'Categories', 'masteriyo' ),
-				'show_ui'               => true,
-				'query_var'             => true,
-				'capabilities'          => array(
-					'manage_terms' => 'manage_course_terms',
-					'edit_terms'   => 'edit_course_terms',
-					'delete_terms' => 'delete_course_terms',
-					'assign_terms' => 'assign_course_terms',
-				),
+				'hierarchical'      => true,
+				'public'            => true,
+				'show_ui'           => true,
+				'show_admin_column' => true,
+				'show_in_nav_menus' => true,
+				'show_tag_cloud'    => true,
+				'query_var'         => true,
 				'rewrite'               => array(
 					'slug'         => \masteriyo_get_permalink_structure('course_category_rewrite_slug'),
 					'with_front'   => false,
@@ -72,7 +69,7 @@ class Category extends Taxonomy {
 					'items_list'                 => __( 'Course Categories list', 'masteriyo' ),
 					'items_list_navigation'      => __( 'Course Categories list navigation', 'masteriyo' )
 				),
-			),
+			)
 		);
 	}
 }

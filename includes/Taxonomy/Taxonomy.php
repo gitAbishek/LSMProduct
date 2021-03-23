@@ -27,7 +27,7 @@ abstract class Taxonomy {
 	 *
 	 * @since 0.1.0
 	 */
-	public function register( ) {
+	public function register() {
 		register_taxonomy(
 			$this->taxonomy,
 			apply_filters( "masteriyo_taxonomy_objects_{$this->taxonomy}", array( $this->post_type ) ),
@@ -101,7 +101,7 @@ abstract class Taxonomy {
 	 * @return mixed|null
 	 */
 	public function get_arg( $name ) {
-		$args  = $this->get_args();
+		$args = $this->get_args();
 
 		$value = ( isset( $arg[ $name ] ) ) ?$arg[ $name ] : null;
 

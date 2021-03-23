@@ -32,12 +32,11 @@ class Visibility extends Taxonomy {
 	 *
 	 * @return array
 	 */
-	protected function get_settings() {
+	protected function get_args() {
 		return apply_filters(
 			'masteriyo_taxonomy_args_course_cat',
 			array(
 				'hierarchical' => false,
-				'label'        => __( 'Course Tags', 'masteriyo' ),
 				'show_ui'      => true,
 				'rewrite'      => false,
 				'public'       => false,
@@ -64,7 +63,7 @@ class Visibility extends Taxonomy {
 					'items_list'                 => __( 'Course Visibilities list', 'masteriyo' ),
 					'items_list_navigation'      => __( 'Course Visibilities list navigation', 'masteriyo' ),
 				),
-			),
+			)
 		);
 	}
 }

@@ -8,7 +8,7 @@ namespace ThemeGrill\Masteriyo\Taxonomy\Course;
 use ThemeGrill\Masteriyo\Taxonomy\Taxonomy;
 
 class Difficulty extends Taxonomy {
-/**
+	/**
 	 * Taxonomy.
 	 *
 	 * @since 0.1.0
@@ -32,21 +32,18 @@ class Difficulty extends Taxonomy {
 	 *
 	 * @return array
 	 */
-	public function get_settings() {
+	protected function get_args() {
 		return apply_filters(
 			'masteriyo_taxonomy_args_course_difficulty',
 			array(
-				'hierarchical' => false,
-				'label'        => __( 'Course Difficulties', 'masteriyo' ),
-				'show_ui'      => true,
-				'query_var'    => true,
-				'capabilities' => array(
-					'manage_terms' => 'manage_course_terms',
-					'edit_terms'   => 'edit_course_terms',
-					'delete_terms' => 'delete_course_terms',
-					'assign_terms' => 'assign_course_terms',
-				),
-				'rewrite'               => array(
+				'hierarchical'      => false,
+				'label'             => __( 'Course Difficulties', 'masteriyo' ),
+				'show_ui'           => true,
+				'show_admin_column' => true,
+				'show_in_nav_menus' => true,
+				'show_tag_cloud'    => true,
+				'query_var'         => true,
+				'rewrite'           => array(
 					'slug'         => \masteriyo_get_permalink_structure('course_difficulty_rewrite_slug'),
 					'with_front'   => false,
 					'hierarchical' => true,
@@ -73,7 +70,7 @@ class Difficulty extends Taxonomy {
 					'items_list'                 => __( 'Course Difficulties list', 'masteriyo' ),
 					'items_list_navigation'      => __( 'Course Difficulties list navigation', 'masteriyo' ),
 				),
-			),
+			)
 		);
 	}
 }

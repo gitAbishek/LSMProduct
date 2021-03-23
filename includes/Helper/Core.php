@@ -1389,7 +1389,6 @@ function masteriyo_is_admin_page() {
 	return 'toplevel_page_masteriyo' === $screen->id ? true: false;
 }
 
-
 /**
  * Is masteriyo in debug enabled.
  *
@@ -1398,5 +1397,5 @@ function masteriyo_is_admin_page() {
  * @return bool
  */
 function masteriyo_is_debug_enabled() {
-	return Constants::get( 'MASTERIYO_DEBUG_MODE' );
+	return (bool) Constants::get( 'MASTERIYO_DEBUG' );
 }

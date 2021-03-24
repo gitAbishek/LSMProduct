@@ -158,7 +158,7 @@ abstract class AbstractRepository {
 			) );
 		}, $raw_meta_data );
 
-		$this->internal_meta_keys = array_merge( $model->get_data_keys(), $this->internal_meta_keys );
+		$this->internal_meta_keys = array_merge( array_map( array( $this, 'prefix_key' ), $model->get_data_keys() ), $this->internal_meta_keys );
 		return apply_filters( "masteriyo_repository_{$this->meta_type}_read_meta", $meta_data, $model, $this );
 	}
 
@@ -498,11 +498,15 @@ abstract class AbstractRepository {
 		}
 
 		foreach ( $props_to_update as $prop => $meta_key ) {
+			if ( ! is_callable( array( $model, "get_{$prop}" ) ) ) {
+				continue;
+			}
+
 			$value = $model->{"get_$prop"}( 'edit' );
 			$value = is_string( $value ) ? wp_slash( $value ) : $value;
 			switch ( $prop ) {
 				case 'featured':
-					$value = Utils::bool_to_string( $value );
+					$value = masteriyo_bool_to_string( $value );
 					break;
 			}
 

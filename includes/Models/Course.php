@@ -864,7 +864,7 @@ class Course extends Model {
 		$categories = array();
 		$store      = masteriyo( 'course_cat.store' );
 
-		$categories = array_map( function( $cat_id ) {
+		$categories = array_map( function( $cat_id ) use ( $store ) {
 			$cat_obj = masteriyo( 'course_cat' );
 			$cat_obj->set_id( $cat_id );
 			$store->read( $cat_obj );
@@ -886,7 +886,7 @@ class Course extends Model {
 		$tags    = array();
 		$store   = masteriyo( 'course_tag.store' );
 
-		$tags = array_map( function( $tag_id ) {
+		$tags = array_map( function( $tag_id ) use( $store) {
 			$tag_obj = masteriyo( 'course_tag' );
 			$tag_obj->set_id( $tag_id );
 			$store->read( $tag_obj );

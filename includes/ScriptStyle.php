@@ -421,4 +421,12 @@ class ScriptStyle {
 		}
 	}
 
+	/**
+	 * Load public localized scripts.
+	 *
+	 * @since 0.1.1
+	 */
+	public function load_public_localized_scripts() {
+	}
+
 }

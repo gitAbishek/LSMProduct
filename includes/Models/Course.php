@@ -109,28 +109,6 @@ class Course extends Model {
 		return wp_get_attachment_url( $this->get_featured_image() );
 	}
 
-	/**
-	 * Get category list (CourseCategory objects).
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return array[CourseCategory]
-	 */
-	public function get_categories() {
-		$cat_ids = $this->get_category_ids();
-		$categories = array();
-		$store = masteriyo( 'course_cat.store' );
-
-		foreach( $cat_ids as $cat_id ) {
-			$cat_obj = masteriyo( 'course_cat' );
-			$cat_obj->set_id( $cat_id );
-			$store->read( $cat_obj );
-			$categories[] = apply_filters( 'masteriyo_get_course_cat', $cat_obj, $cat_id );
-		}
-
-		return $categories;
-	}
-
 	/*
 	|--------------------------------------------------------------------------
 	| Non-CRUD Getters
@@ -437,7 +415,7 @@ class Course extends Model {
 
 	public function get_difficulty() {
 		$difficulty = masteriyo( 'course_difficulty' );
-		$store = masteriyo( 'course_difficulty.store' );
+		$store      = masteriyo( 'course_difficulty.store' );
 
 		try {
 			$difficulty->set_id( $this->get_difficulty_id() );
@@ -875,67 +853,64 @@ class Course extends Model {
 	}
 
 	/**
-	 * Get the taxonomy terms
-	 *
-	 * @since 0.10
-	 *
-	 * @param string $taxonomy Taxonomy.
-	 * @param string $field    WP_Term field.
-	 * @return WP_Term[]|string[]|false
-	 */
-	protected function get_terms( $taxonomy, $field ) {
-		$terms = get_the_terms( $this->get_id(), $taxonomy );
-
-		if ( false === $terms || is_wp_error( $terms ) ) {
-			return array();
-		}
-
-		if ( ! is_null( $terms ) ) {
-			$terms = wp_list_pluck( $terms, $field );
-		}
-
-		return $terms;
-	}
-
-	/**
-	 * Get course categories.
+	 * Get course category list (CourseCategory objects).
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $field WP_Term field.
-	 *
-	 * @return WP_Term[]|string[]|false
+	 * @return array[CourseCategory]
 	 */
-	public function get_categories( $field = null ) {
-		$categories = $this->get_terms( 'course_cat', $field );
-		return apply_filters( 'masteriyo_course_categories', $categories, $field, $this );
+	public function get_categories() {
+		$cat_ids    = $this->get_category_ids();
+		$categories = array();
+		$store      = masteriyo( 'course_cat.store' );
+
+		$categories = array_map( function( $cat_id ) {
+			$cat_obj = masteriyo( 'course_cat' );
+			$cat_obj->set_id( $cat_id );
+			$store->read( $cat_obj );
+			return $cat_obj;
+		}, $cat_ids );
+
+		return apply_filters( 'masteriyo_course_categories_objects', $categories, $this );
 	}
 
 	/**
-	 * Get course tags.
+	 * Get course tag list (CourseTag objects).
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $field WP_Term field.
-	 *
-	 * @return WP_Term[]|string[]|false
+	 * @return array[CourseTag]
 	 */
-	public function get_tags( $field = null ) {
-		$tags = $this->get_terms( 'course_cat', $field );
-		return apply_filters( "masteriyo_course_tags", $tags, $field, $this );
+	public function get_tags() {
+		$tag_ids = $this->get_tags_ids();
+		$tags    = array();
+		$store   = masteriyo( 'course_tag.store' );
+
+		$tags = array_map( function( $tag_id ) {
+			$tag_obj = masteriyo( 'course_tag' );
+			$tag_obj->set_id( $tag_id );
+			$store->read( $tag_obj );
+			return $tag_obj;
+		}, $tag_ids );
+
+		return apply_filters( 'masteriyo_course_categories_objects', $tags, $this );
 	}
 
 	/**
-	 * Get course difficulties.
+	 * Get course difficulties list (Coursedifficulties objects).
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $field WP_Term field.
-	 *
-	 * @return WP_Term[]|string[]|false
+	 * @return array[Coursedifficulties]
 	 */
-	public function get_difficulties( $field = null ) {
-		$difficulties = $this->get_terms( 'course_difficulty', $field );
-		return apply_filters( 'masteriyo_course_difficulties', $difficulties, $field, $this );
+	public function get_difficulties() {
+		$difficulty_id = $this->get_difficulty_id();
+		$store         = masteriyo( 'course_difficulty.store' );
+
+		$difficulty_obj = masteriyo( 'course_difficulty' );
+		$difficulty_obj->set_id( $difficulty_id );
+		$store->read( $difficulty_obj );
+
+		return apply_filters( 'masteriyo_course_categories_objects', $difficulty_obj, $this );
 	}
 }

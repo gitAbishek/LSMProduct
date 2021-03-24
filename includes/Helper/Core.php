@@ -889,23 +889,6 @@ function masteriyo_get_theme_support( $prop = '', $default = null ) {
 }
 
 /**
- * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
- * Non-scalar values are ignored.
- *
- * @since 0.1.0
- *
- * @param string|array $var Data to sanitize.
- * @return string|array
- */
-function masteriyo_clean( $var ) {
-	if ( is_array( $var ) ) {
-		return array_map( 'masteriyo_clean', $var );
-	} else {
-		return is_scalar( $var ) ? sanitize_text_field( $var ) : $var;
-	}
-}
-
-/**
  * Get Currency symbol.
  *
  * Currency symbols and names should follow the Unicode CLDR recommendation (http://cldr.unicode.org/translation/currency-names)

@@ -771,7 +771,7 @@ class Cart {
 	public function get_taxes() {
 		return apply_filters(
 			'masteriyo_cart_get_taxes',
-			Arr::merge_recursive_numeric( $this->get_cart_contents_taxes(), $this->get_fee_taxes() ),
+			masteriyo_array_merge_recursive_numeric( $this->get_cart_contents_taxes(), $this->get_fee_taxes() ),
 			$this
 		);
 	}
@@ -1522,7 +1522,7 @@ class Cart {
 	 * @return float amount
 	 */
 	public function get_tax_amount( $tax_rate_id ) {
-		$taxes = wc_array_merge_recursive_numeric( $this->get_cart_contents_taxes(), $this->get_fee_taxes() );
+		$taxes = masteriyo_array_merge_recursive_numeric( $this->get_cart_contents_taxes(), $this->get_fee_taxes() );
 		return isset( $taxes[ $tax_rate_id ] ) ? $taxes[ $tax_rate_id ] : 0;
 	}
 

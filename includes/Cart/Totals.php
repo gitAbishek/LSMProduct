@@ -277,7 +277,7 @@ final class Totals {
 							}
 							$proportion               = $tax_class_cost / $total_cost;
 							$cart_discount_proportion = $fee->total * $proportion;
-							$fee->taxes               = wc_array_merge_recursive_numeric( $fee->taxes, WC_Tax::calc_tax( $fee->total * $proportion, WC_Tax::get_rates( $tax_class ) ) );
+							$fee->taxes               = masteriyo_array_merge_recursive_numeric( $fee->taxes, WC_Tax::calc_tax( $fee->total * $proportion, WC_Tax::get_rates( $tax_class ) ) );
 						}
 					}
 				} elseif ( $fee->object->taxable ) {

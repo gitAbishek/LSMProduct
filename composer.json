@@ -16,6 +16,7 @@
   "autoload": {
     "files": [
       "includes/Helper/Core.php",
+      "includes/Helper/Arr.php",
       "includes/Helper/Term.php",
       "includes/Helper/Template.php",
       "includes/Helper/Page.php"

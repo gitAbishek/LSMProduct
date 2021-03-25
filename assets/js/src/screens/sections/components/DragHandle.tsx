@@ -1,17 +1,22 @@
 import Icon from 'Components/common/Icon';
 import React from 'react';
 import { Sortable } from '../../../assets/icons';
+import tw from 'tailwind-styled-components';
 
 interface Props {}
 
 const DragHandle: React.FC<Props> = (props) => {
 	return (
-		<div
-			className="mto-mr-3 mto-text-lg mto-text-gray-300 mto-cursor-move"
-			{...props}>
+		<DragHandleContainer {...props}>
 			<Icon icon={<Sortable />} />
-		</div>
+		</DragHandleContainer>
 	);
 };
 
+const DragHandleContainer = tw.div`
+	mto-mr-3
+	mto-cursor-move
+	mto-text-2xl
+	mto-text-gray-700
+`;
 export default DragHandle;

@@ -1,5 +1,10 @@
 import { BiAlignLeft, BiTimer, BiTrash } from 'react-icons/bi';
-import Box, { BoxContent, BoxHeader } from 'Components/layout/Box';
+import Box, {
+	BoxContent,
+	BoxFooter,
+	BoxHeader,
+	BoxTitle,
+} from 'Components/layout/Box';
 import React, { useState } from 'react';
 import {
 	deleteSection,
@@ -83,7 +88,7 @@ const Section: React.FC<Props> = (props) => {
 			<BoxHeader>
 				<div className="mto-flex mto-items-center">
 					<DragHandle />
-					<h1 className="mto-text-lg">{name}</h1>
+					<BoxTitle>{name}</BoxTitle>
 				</div>
 				<div className="mto-flex">
 					<Dropdown
@@ -120,6 +125,8 @@ const Section: React.FC<Props> = (props) => {
 						type={content.type}
 					/>
 				))}
+			</BoxContent>
+			<BoxFooter>
 				<Dropdown
 					content={
 						<DropdownOverlay>
@@ -145,7 +152,7 @@ const Section: React.FC<Props> = (props) => {
 					}>
 					<AddNewButton>{__('Add New Content', 'masteriyo')}</AddNewButton>
 				</Dropdown>
-			</BoxContent>
+			</BoxFooter>
 		</Box>
 	);
 };

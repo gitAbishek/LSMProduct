@@ -5,6 +5,10 @@ import Box, {
 	BoxHeader,
 	BoxTitle,
 } from 'Components/layout/Box';
+import Dropdown, {
+	DropdownMenu,
+	DropdownMenuItem,
+} from 'Components/common/Dropdown';
 import React, { useState } from 'react';
 import {
 	deleteSection,
@@ -17,7 +21,6 @@ import AddNewButton from 'Components/common/AddNewButton';
 import Button from 'Components/common/Button';
 import Content from './Content';
 import DragHandle from '../components/DragHandle';
-import Dropdown from 'Components/common/Dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
 import { Edit } from '../../../assets/icons';
 import FormGroup from 'Components/common/FormGroup';
@@ -95,22 +98,16 @@ const Section: React.FC<Props> = (props) => {
 						align="end"
 						autoClose
 						content={
-							<DropdownOverlay>
-								<ul className="mto-w-36 mto-text-gray-700 mto-m-4 ">
-									<li
-										className="mto-flex mto-items-center mto-text-sm mto-mb-4 hover:mto-text-primary mto-cursor-pointer"
-										onClick={() => setSectionEditing(true)}>
-										<Icon className="mto-mr-1" icon={<Edit />} />
-										{__('Edit', 'masteriyo')}
-									</li>
-									<li
-										className="mto-flex mto-items-center mto-text-sm hover:mto-text-primary mto-cursor-pointer"
-										onClick={() => onDeletePress()}>
-										<Icon className="mto-mr-1" icon={<BiTrash />} />
-										{__('Delete', 'masteriyo')}
-									</li>
-								</ul>
-							</DropdownOverlay>
+							<DropdownMenu>
+								<DropdownMenuItem onClick={() => setSectionEditing(true)}>
+									<Icon className="mto-mr-1" icon={<Edit />} />
+									{__('Edit', 'masteriyo')}
+								</DropdownMenuItem>
+								<DropdownMenuItem onClick={() => onDeletePress()}>
+									<Icon className="mto-mr-1" icon={<BiTrash />} />
+									{__('Delete', 'masteriyo')}
+								</DropdownMenuItem>
+							</DropdownMenu>
 						}>
 						<OptionButton />
 					</Dropdown>

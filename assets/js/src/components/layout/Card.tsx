@@ -8,9 +8,19 @@ export const Card = tw.div`
 `;
 
 export const CardHeader = tw.header`
+  mto-card-header
   mto-p-4
 `;
 
 export const CardContent = tw.div`
+  mto-card-content
   mto-p-4
+`;
+
+export const CardHeaderLeft = tw.div`
+  mto-card-header-left
+`;
+
+export const CardHeaderRight = tw.div`
+  mto-card-header-right
 `;

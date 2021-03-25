@@ -67,4 +67,10 @@
 			.after(`<div class="mto-notify-message"><span>Successfully updated user profile.</span></div>`)
 		});
 	});
+	$('.menu-open').click(function(){
+		$('#slide-menu').removeClass('mto--ml-96');
+	});
+	$('.menu-close').click(function(){
+		$('#slide-menu').addClass('mto--ml-96');
+	});
 })(jQuery, window.masteriyo_data);

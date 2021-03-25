@@ -126,26 +126,24 @@ const Section: React.FC<Props> = (props) => {
 			<BoxFooter>
 				<Dropdown
 					content={
-						<DropdownOverlay>
-							<ul className="mto-w-36 mto-text-gray-700 mto-m-4 ">
-								<li className="mto-flex mto-items-center mto-text-sm mto-mb-4 hover:mto-text-primary mto-cursor-pointer">
-									<NavLink
-										className="mto-flex mto-items-center"
-										to={`/courses/${id}/add-new-lesson`}>
-										<Icon className="mto-mr-1" icon={<BiAlignLeft />} />
-										{__('Lesson', 'masteriyo')}
-									</NavLink>
-								</li>
-								<li className="mto-flex mto-items-center mto-text-sm hover:mto-text-primary mto-cursor-pointer">
-									<NavLink
-										className="mto-flex mto-items-center"
-										to={`/courses/${id}/add-new-quiz`}>
-										<Icon className="mto-mr-1" icon={<BiTimer />} />
-										{__('Quiz', 'masteriyo')}
-									</NavLink>
-								</li>
-							</ul>
-						</DropdownOverlay>
+						<DropdownMenu>
+							<DropdownMenuItem>
+								<NavLink
+									className="mto-flex mto-items-center"
+									to={`/courses/${id}/add-new-lesson`}>
+									<Icon className="mto-mr-1" icon={<BiAlignLeft />} />
+									{__('Lesson', 'masteriyo')}
+								</NavLink>
+							</DropdownMenuItem>
+							<DropdownMenuItem>
+								<NavLink
+									className="mto-flex mto-items-center"
+									to={`/courses/${id}/add-new-quiz`}>
+									<Icon className="mto-mr-1" icon={<BiTimer />} />
+									{__('Quiz', 'masteriyo')}
+								</NavLink>
+							</DropdownMenuItem>
+						</DropdownMenu>
 					}>
 					<AddNewButton>{__('Add New Content', 'masteriyo')}</AddNewButton>
 				</Dropdown>

@@ -45,7 +45,7 @@ do_action( 'masteriyo_before_login_form_content' );
 							</div>
 
 							<div class="mto-text-sm">
-								<a href="#" class="mto-font-medium mto-text-primary-800 hover:mto-text-primary-700 hover:mto-underline">
+								<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'reset-password' ) ); ?>" class="mto-font-medium mto-text-primary-800 hover:mto-text-primary-700 hover:mto-underline">
 								Forgot your password?
 								</a>
 							</div>

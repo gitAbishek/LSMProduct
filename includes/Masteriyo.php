@@ -25,6 +25,12 @@ defined( 'ABSPATH' ) || exit;
  */
 
 class Masteriyo extends Container {
+	/**
+	 * Query instance.
+	 *
+	 * @var Query
+	 */
+	public $query = null;
 
 	/**
 	 * Constructor.
@@ -35,6 +41,8 @@ class Masteriyo extends Container {
 		parent::__construct();
 
 		$this->init();
+
+		$this->query = new Query();
 	}
 
 	/**

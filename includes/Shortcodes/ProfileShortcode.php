@@ -44,7 +44,18 @@ class ProfileShortcode extends Shortcode {
 	 * @return string
 	 */
 	public function get_content() {
-		if ( is_user_logged_in() ) {
+		if ( masteriyo_is_lost_password_page() ) {
+			/**
+			 * Enqueue profile page assets.
+			 */
+			wp_enqueue_script( 'masteriyo-reset-password' );
+			wp_enqueue_style( 'masteriyo-reset-password' );
+
+			/**
+			 * Find Template.
+			 */
+			$template_path = masteriyo( 'template' )->locate( 'profile/form-reset-password.php' );
+		} elseif ( is_user_logged_in() ) {
 			/**
 			 * Enqueue profile page assets.
 			 */

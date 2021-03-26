@@ -254,7 +254,6 @@ class LessonsController extends PostsController {
 			'slug'                => $lesson->get_slug( $context ),
 			'permalink'           => $lesson->get_permalink(),
 			'status'              => $lesson->get_status( $context ),
-			'featured'            => $lesson->get_featured( $context ),
 			'description'         => 'view' === $context ? wpautop( do_shortcode( $lesson->get_description() ) ) : $lesson->get_description( $context ),
 			'short_description'   => 'view' === $context ? apply_filters( 'masteriyo_short_description', $lesson->get_short_description() ) : $lesson->get_short_description( $context ),
 			'menu_order'          => $lesson->get_menu_order( $context ),
@@ -640,11 +639,6 @@ class LessonsController extends PostsController {
 		// Comment status.
 		if ( isset( $request['reviews_allowed'] ) ) {
 			$lesson->set_reviews_allowed( $request['reviews_allowed'] );
-		}
-
-		// Featured Lesson.
-		if ( isset( $request['featured'] ) ) {
-			$lesson->set_featured( $request['featured'] );
 		}
 
 		// Lesson parent ID.

@@ -599,21 +599,6 @@ function masteriyo_img_url( $file ) {
 }
 
 /**
- * Put course data into a global.
- *
- * @since 0.1.0
- *
- * @param int|Course|WP_Post $course_id Course id or Course object or course wp post.
- *
- * @return Course
- */
-function masteriyo_setup_course_data( $course_id ) {
-	$GLOBALS['course'] =  masteriyo_get_course( $course_id );
-
-	return $GLOBALS['course'];
-}
-
-/**
  * Put current logged in user data into a global.
  *
  * @since 0.1.0
@@ -1694,4 +1679,19 @@ function masteriyo_is_lost_password_page() {
 	$page_id = masteriyo_get_page_id( 'myaccount' );
 
 	return ( $page_id && is_page( $page_id ) && isset( $wp->query_vars['reset-password'] ) );
+}
+
+/**
+ * Check if the current page is signup page.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_signup_page() {
+	global $wp;
+
+	$page_id = masteriyo_get_page_id( 'myaccount' );
+
+	return ( $page_id && is_page( $page_id ) && isset( $wp->query_vars['signup'] ) );
 }

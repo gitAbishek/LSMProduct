@@ -120,14 +120,15 @@ class Query {
 			'add-payment-method'         => get_option( 'masteriyo_myaccount_add_payment_method_endpoint', 'add-payment-method' ),
 			'delete-payment-method'      => get_option( 'masteriyo_myaccount_delete_payment_method_endpoint', 'delete-payment-method' ),
 			'set-default-payment-method' => get_option( 'masteriyo_myaccount_set_default_payment_method_endpoint', 'set-default-payment-method' ),
-			'edit-profile'               => get_option( 'masteriyo_myaccount__endpoint', 'edit-profile' ),
-			'dashboard'                  => get_option( 'masteriyo_myaccount__endpoint', 'dashboard' ),
-			'my-courses'                 => get_option( 'masteriyo_myaccount__endpoint', 'my-courses' ),
-			'my-grades'                  => get_option( 'masteriyo_myaccount__endpoint', 'my-grades' ),
-			'my-memberships'             => get_option( 'masteriyo_myaccount__endpoint', 'my-memberships' ),
-			'my-certificates'            => get_option( 'masteriyo_myaccount__endpoint', 'my-certificates' ),
-			'my-order-history'           => get_option( 'masteriyo_myaccount__endpoint', 'my-order-history' ),
-			'reset-password'             => get_option( 'masteriyo_myaccount__endpoint', 'reset-password' ),
+			'edit-profile'               => get_option( 'masteriyo_myaccount_edit-profile_endpoint', 'edit-profile' ),
+			'dashboard'                  => get_option( 'masteriyo_myaccount_dashboard_endpoint', 'dashboard' ),
+			'my-courses'                 => get_option( 'masteriyo_myaccount_my-courses_endpoint', 'my-courses' ),
+			'my-grades'                  => get_option( 'masteriyo_myaccount_my-grades_endpoint', 'my-grades' ),
+			'my-memberships'             => get_option( 'masteriyo_myaccount_my-memberships_endpoint', 'my-memberships' ),
+			'my-certificates'            => get_option( 'masteriyo_myaccount_my-certificates_endpoint', 'my-certificates' ),
+			'my-order-history'           => get_option( 'masteriyo_myaccount_my-order-history_endpoint', 'my-order-history' ),
+			'reset-password'             => get_option( 'masteriyo_myaccount_reset-password_endpoint', 'reset-password' ),
+			'signup'                     => get_option( 'masteriyo_myaccount_signup_endpoint', 'signup' ),
 		);
 	}
 

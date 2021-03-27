@@ -58,7 +58,10 @@ do_action( 'masteriyo_before_login_form_content' );
 
 							<div class="mto-text-sm mto-mt-6 md:mto-my-0 mto-text-center md:mto-text-right">
 								Don't have an account?
-								<a href="#" class="mto-font-medium mto-text-primary-800 hover:mto-text-primary-700 hover:mto-underline">
+								<a
+									href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'signup' ) ); ?>"
+									class="mto-font-medium mto-text-primary-800 hover:mto-text-primary-700 hover:mto-underline"
+								>
 									Sign Up Now
 								</a>
 							</div>

@@ -21,7 +21,8 @@
       "includes/Helper/Conditional.php",
       "includes/Helper/Format.php",
       "includes/Helper/Template.php",
-      "includes/Helper/Page.php"
+      "includes/Helper/Page.php",
+      "includes/Helper/Format.php"
     ],
     "psr-4": {
       "ThemeGrill\\Masteriyo\\": "includes/"

@@ -18,8 +18,8 @@
       "includes/Helper/Core.php",
       "includes/Helper/Arr.php",
       "includes/Helper/Term.php",
-      "includes/Helper/Format.php",
       "includes/Helper/Conditional.php",
+      "includes/Helper/Format.php",
       "includes/Helper/Template.php",
       "includes/Helper/Page.php"
     ],

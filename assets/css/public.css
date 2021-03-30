@@ -32,7 +32,7 @@
         @apply mto-no-underline mto-outline-none !important;
     }
     /* Login */
-    .mto-login-wrapper{
+    .mto-form-wrapper{
         @apply
         mto-w-4/5 md:mto-w-3/5 lg:mto-w-1/2
         xl:mto-w-2/5 mto-p-6 md:mto-p-12

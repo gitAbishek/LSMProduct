@@ -17,20 +17,18 @@ do_action( 'masteriyo_before_login_form_content' );
 <section class="login mto-container mto-mx-auto">
 	<div class="mto-flex mto-justify-center mto-items-center mto-h-screen">
 
-		<div class="mto-login-wrapper">
+		<div class="mto-form-wrapper">
 			<h2>Sign In</h2>
 
-			<div class="login-form">
-				<div class="mto-w-full">
 					<form id="mto-login-form">
 						<input type="hidden" name="remember" value="true">
-						<div class="mto-rounded-md mtoshadow-sm mto-space-y-px">
-							<div class="username mto-mb-6">
+						<div class="mto-rounded-md mtoshadow-sm mto-space-y-6">
+							<div class="username">
 								<label for="username-email-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">Username or Email</label>
 								<input id="username-email-address" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 							</div>
 
-							<div class="password mto-mb-6">
+							<div class="password">
 								<label for="password" class="mto-block mto-text-sm mto-font-semibold mto-pb-4">Password</label>
 								<input id="password" name="password" type="password" autocomplete="current-password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 							</div>
@@ -69,9 +67,7 @@ do_action( 'masteriyo_before_login_form_content' );
 
 						<div id="mto-login-error-msg" class="mto-text-red-700 mto-hidden"></div>
 					</form>
-				</div>
-				
-			</div>
+
 		</div>
 	</div>
 </section>

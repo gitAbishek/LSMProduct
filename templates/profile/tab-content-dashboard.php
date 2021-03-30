@@ -10,27 +10,28 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <div class="welcome-note mto-bg-primary mto-rounded mto-p-8 mto-relative mto-text-white">
-	<span class="mto-absolute hover:mto-bg-white hover:mto-bg-opacity-20 mto-rounded-full mto-top-4 mto-right-4 mto-cursor-pointer mto-transform hover:mto-scale-125 mto-transition-all">
-
+	<span class="close mto-absolute hover:mto-bg-white hover:mto-bg-opacity-20 mto-rounded-full mto-top-4 mto-right-4 mto-cursor-pointer mto-transform hover:mto-scale-125 mto-transition-all">
 		<svg class="mto-icon mto-fill-current mto-text-white"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 			<path d="M16.192 6.344l-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"/>
 		</svg>
 	</span>
-	<h2 class="mto-font-bold mto-text-2xl">Hello, <span class="mto-font-normal">Jamie</span></h2>
-	<p class="mto-text-white mto-text-base mto-mt-4 mto-mb-4">Welcome to your dashboard here you can view your overview and your stats</p>
-		<a
-			class="btn mto-px-6 mto-py-3 mto-bg-white mto-inline-flex mto-justify-center mto-items-center mto-text-sm mto-text-pColor mto-uppercase hover:mto-bg-white"
+
+	<h2 class="mto-font-semibold mto-text-white mto-text-2xl">Hello, <span class="mto-font-normal">Jamie</span></h2>
+	
+	<p class="mto-text-white mto-text-base mto-mt-4">Welcome to your dashboard here you can view your overview and your stats</p>
+
+	<a class="view-profile btn mto-px-6 mto-py-3 mto-bg-white mto-inline-flex mto-justify-center mto-items-center mto-text-sm mto-uppercase hover:mto-bg-white"
 			href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'edit-profile' ) ); ?>"
 		>
-			<span>View Profile</span>
-			<svg class="mto-icon mto-fill-current mto--mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-				<path d="M10.707 17.707L16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/>
-			</svg>
-		</a>
+		<span class="mto-text-pColor">View Profile</span>
+		<svg class="mto-icon mto-fill-current mto-text-pColor mto--mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+			<path d="M10.707 17.707L16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/>
+		</svg>
+	</a>
 </div>
 
-<div class="mto-card-wrapper">
-	<div class="mto-card hover:mto-shadow-lg">
+<div class="user-counter mto-card-wrapper">
+	<div class="user-inprogress mto-card hover:mto-shadow-lg">
 		<div class="mto-flex mto-items-center mto-space-x-4">
 			<span class="mto-bg-green-50 mto-rounded-full mto-p-4">
 				<svg class="mto-fill-current mto-text-green-500 mto-w-8 mto-h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -43,7 +44,7 @@ defined( 'ABSPATH' ) || exit;
 		<div class="mto-text-gray-700">Courses</div>
 	</div>
 
-	<div class="mto-card hover:mto-shadow-lg">
+	<div class="user-scores mto-card hover:mto-shadow-lg">
 		<div class="mto-flex mto-items-center mto-space-x-4">
 			<span class="mto-bg-secondary-50 mto-rounded-full mto-p-3">
 				<svg class="mto-fill-current mto-text-secondary mto-w-8 mto-h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -56,7 +57,7 @@ defined( 'ABSPATH' ) || exit;
 		<div class="mto-text-gray-700">Reward Points</div>
 	</div>
 
-	<div class="mto-card hover:mto-shadow-lg">
+	<div class="user-certificates mto-card hover:mto-shadow-lg">
 		<div class="mto-flex mto-items-center mto-space-x-4">
 			<span class="mto-bg-primary-50 mto-rounded-full mto-p-3">
 				<svg class="mto-fill-current mto-text-primary mto-w-8 mto-h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -72,7 +73,7 @@ defined( 'ABSPATH' ) || exit;
 </div>
 
 <div class="mto-card-wrapper">
-	<div class="mto-card mto-full md:mto-w-3/4 hover:mto-shadow-lg">
+	<div class="user-statistic mto-card mto-full md:mto-w-3/4 hover:mto-shadow-lg">
 		<div class="card-header">
 			<span class="mto-block mto-text-textColor mto-text-4xl mto-font-bold">24.33</span>
 			<span class="mto-block mto-font-bold mto-text-textColor mto-text-base">Hours spend last week</span>
@@ -82,7 +83,7 @@ defined( 'ABSPATH' ) || exit;
 		</div>
 	</div>
 
-	<div class="mto-card hover:mto-shadow-lg mto-space-y-10">
+	<div class="db-popular-course-list mto-card hover:mto-shadow-lg mto-space-y-10">
 		<div class="mto-card-header">
 			<h4 class="mto-card-header">Popular Course</h4>
 		</div>
@@ -123,180 +124,180 @@ defined( 'ABSPATH' ) || exit;
 </div>
 
 <div class="study-wrapper md:mto-mt-0 mto-space-y-8">
-<div class="mto-flex mto-flex-row mto-mt-16 md:mto-justify-between">
-	<h2 class="mto-font-bold mto-text-2xl mto-text-textColor">Continue Studying</h2>
-	<a class="btn mto-font-semibold mto-text-sm mto-text-pColor hover:mto-text-white mto-bg-white mto-border hover:mto-border-0" href="#">
-		<span class="mto-inline-flex">Show All</span>
-		<svg class="mto-inline-flex mto-icon mto-fill-current mto--mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-			<path d="M10.707 17.707L16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/>
-		</svg>
-	</a>
-</div>
-<div class="study-list">
-	<ul class="mto-space-y-6">
-		<li>
-			<div class="mto-card mto-flex md:mto-flex-row mto-items-center md:mto-space-x-4">
-				<img class="mto-w-20" src="./img/cstudy1.jpg" alt="">
-				<div class="mto-space-y-1 mto-flex-row md:mto-flex-none">
-					<span class="mto-inline-block">
-						<svg class="mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
-						</svg>
-					</span>
+	<div class="study-header mto-flex mto-flex-row mto-mt-16 md:mto-justify-between">
+		<h2 class="mto-font-bold mto-text-2xl mto-text-textColor">Continue Studying</h2>
+		<a class="btn mto-font-semibold mto-text-sm mto-text-pColor hover:mto-text-white mto-bg-white mto-border hover:mto-border-0" href="#">
+			<span class="mto-inline-flex">Show All</span>
+			<svg class="mto-inline-flex mto-icon mto-fill-current mto--mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+				<path d="M10.707 17.707L16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/>
+			</svg>
+		</a>
+	</div>
+	<div class="study-list">
+		<ul class="mto-space-y-6">
+			<li>
+				<div class="mto-card mto-flex md:mto-flex-row mto-items-center md:mto-space-x-4">
+					<img class="mto-w-20" src="./img/cstudy1.jpg" alt="">
+					<div class="mto-space-y-1 mto-flex-row md:mto-flex-none">
+						<span class="mto-inline-block">
+							<svg class="mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
+							</svg>
+						</span>
 
-					<h3 class="mto-font-bold mto-text-textColor mto-text-base">Swift Couses</h3>
+						<h3 class="mto-font-bold mto-text-textColor mto-text-base">Swift Couses</h3>
 
-					<div class="mto-w-full mto-flex mto-space-x-1">
-						<svg class="mto-inline-block mto-fill-current mto-text-textColor mto-w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
-							<path d="M13 7h-2v6h6v-2h-4z"/>
-						</svg>
+						<div class="mto-w-full mto-flex mto-space-x-1">
+							<svg class="mto-inline-block mto-fill-current mto-text-textColor mto-w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
+								<path d="M13 7h-2v6h6v-2h-4z"/>
+							</svg>
 
-						<time class="mto-inline-block mto-text-sm mto-text-textColor">10 hrs</time>
+							<time class="mto-inline-block mto-text-sm mto-text-textColor">10 hrs</time>
+						</div>
+
 					</div>
-
-				</div>
-				<div>
-					<span class="md:mto-inline-block mto-bg-secondary mto-rounded-full mto-px-4 mto-py-1 mto-text-xs mto-uppercase mto-font-medium mto-text-white mto-ml-2">Book</span>
-				</div>
-				<div class="mto-block mto-flex-grow mto-space-y-2 mto-px-4">
-					<div class="mto-shadow mto-w-full mto-bg-primary-100 mto-rounded">
-						<div class="mto-bg-primary mto-text-xs mto-leading-none mto-py-1 mto-text-center mto-text-white mto-rounded" style="width: 40%"></div>
+					<div>
+						<span class="md:mto-inline-block mto-bg-secondary mto-rounded-full mto-px-4 mto-py-1 mto-text-xs mto-uppercase mto-font-medium mto-text-white mto-ml-2">Book</span>
 					</div>
-					<div class="mto-block mto-text-xs mto-text-pColor">
-						Started Jan 5, 2020
+					<div class="mto-block mto-flex-grow mto-space-y-2 mto-px-4">
+						<div class="mto-shadow mto-w-full mto-bg-primary-100 mto-rounded">
+							<div class="mto-bg-primary mto-text-xs mto-leading-none mto-py-1 mto-text-center mto-text-white mto-rounded" style="width: 40%"></div>
+						</div>
+						<div class="mto-block mto-text-xs mto-text-pColor">
+							Started Jan 5, 2020
+						</div>
 					</div>
-				</div>
-				<div class="mto-font-semibold mto-text-textColor mto-text-xs">15% Complete</div>
-				<div>
-					<a class="btn mto-uppercase" href="#">
-						<span class="mto-inline-flex">Show All</span>
-					</a>
-				</div>
-			</div>
-		</li>
-
-		<li>
-			<div class="mto-card mto-flex md:mto-flex-row mto-items-center md:mto-space-x-4">
-				<img class="mto-w-20" src="./img/cstudy2.jpg" alt="">
-				<div class="mto-space-y-1 mto-flex-row md:mto-flex-none">
-					<span class="mto-inline-block">
-						<svg class="mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
-						</svg>
-					</span>
-
-					<h3 class="mto-font-bold mto-text-textColor mto-text-base">Swift Couses</h3>
-
-					<div class="mto-w-full mto-flex mto-space-x-1">
-						<svg class="mto-inline-block mto-fill-current mto-text-textColor mto-w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
-							<path d="M13 7h-2v6h6v-2h-4z"/>
-						</svg>
-
-						<time class="mto-inline-block mto-text-sm mto-text-textColor">10 hrs</time>
-					</div>
-
-				</div>
-				<div>
-					<span class="md:mto-inline-block mto-bg-secondary mto-rounded-full mto-px-4 mto-py-1 mto-text-xs mto-uppercase mto-font-medium mto-text-white mto-ml-2">Book</span>
-				</div>
-				<div class="mto-block mto-flex-grow mto-space-y-2 mto-px-4">
-					<div class="mto-shadow mto-w-full mto-bg-primary-100 mto-rounded">
-						<div class="mto-bg-primary mto-text-xs mto-leading-none mto-py-1 mto-text-center mto-text-white mto-rounded" style="width: 40%"></div>
-					</div>
-					<div class="mto-block mto-text-xs mto-text-pColor">
-						Started Jan 5, 2020
+					<div class="mto-font-semibold mto-text-textColor mto-text-xs">15% Complete</div>
+					<div>
+						<a class="btn mto-uppercase" href="#">
+							<span class="mto-text-white mto-inline-flex">Continue</span>
+						</a>
 					</div>
 				</div>
-				<div class="mto-font-semibold mto-text-textColor mto-text-xs">15% Complete</div>
-				<div>
-					<a class="btn mto-uppercase" href="#">
-						<span class="mto-inline-flex">Show All</span>
-					</a>
-				</div>
-			</div>
-		</li>
+			</li>
 
-		<li>
-			<div class="mto-card mto-flex md:mto-flex-row mto-items-center md:mto-space-x-4">
-				<img class="mto-w-20" src="./img/cstudy3.jpg" alt="">
-				<div class="mto-space-y-1 mto-flex-row md:mto-flex-none">
-					<span class="mto-inline-block">
-						<svg class="mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-						</svg>
-						<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
-						</svg>
-					</span>
+			<li>
+				<div class="mto-card mto-flex md:mto-flex-row mto-items-center md:mto-space-x-4">
+					<img class="mto-w-20" src="./img/cstudy2.jpg" alt="">
+					<div class="mto-space-y-1 mto-flex-row md:mto-flex-none">
+						<span class="mto-inline-block">
+							<svg class="mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
+							</svg>
+						</span>
 
-					<h3 class="mto-font-bold mto-text-textColor mto-text-base">Swift Couses</h3>
+						<h3 class="mto-font-bold mto-text-textColor mto-text-base">Swift Couses</h3>
 
-					<div class="mto-w-full mto-flex mto-space-x-1">
-						<svg class="mto-inline-block mto-fill-current mto-text-textColor mto-w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
-							<path d="M13 7h-2v6h6v-2h-4z"/>
-						</svg>
+						<div class="mto-w-full mto-flex mto-space-x-1">
+							<svg class="mto-inline-block mto-fill-current mto-text-textColor mto-w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
+								<path d="M13 7h-2v6h6v-2h-4z"/>
+							</svg>
 
-						<time class="mto-inline-block mto-text-sm mto-text-textColor">10 hrs</time>
+							<time class="mto-inline-block mto-text-sm mto-text-textColor">10 hrs</time>
+						</div>
+
 					</div>
+					<div>
+						<span class="md:mto-inline-block mto-bg-secondary mto-rounded-full mto-px-4 mto-py-1 mto-text-xs mto-uppercase mto-font-medium mto-text-white mto-ml-2">Book</span>
+					</div>
+					<div class="mto-block mto-flex-grow mto-space-y-2 mto-px-4">
+						<div class="mto-shadow mto-w-full mto-bg-primary-100 mto-rounded">
+							<div class="mto-bg-primary mto-text-xs mto-leading-none mto-py-1 mto-text-center mto-text-white mto-rounded" style="width: 40%"></div>
+						</div>
+						<div class="mto-block mto-text-xs mto-text-pColor">
+							Started Jan 5, 2020
+						</div>
+					</div>
+					<div class="mto-font-semibold mto-text-textColor mto-text-xs">15% Complete</div>
+					<div>
+						<a class="btn mto-uppercase" href="#">
+							<span class="mto-text-white mto-inline-flex">Continue</span>
+						</a>
+					</div>
+				</div>
+			</li>
 
-				</div>
-				<div>
-					<span class="md:mto-inline-block mto-bg-secondary mto-rounded-full mto-px-4 mto-py-1 mto-text-xs mto-uppercase mto-font-medium mto-text-white mto-ml-2">Book</span>
-				</div>
-				<div class="mto-block mto-flex-grow mto-space-y-2 mto-px-4">
-					<div class="mto-shadow mto-w-full mto-bg-primary-100 mto-rounded">
-						<div class="mto-bg-primary mto-text-xs mto-leading-none mto-py-1 mto-text-center mto-text-white mto-rounded" style="width: 40%"></div>
+			<li>
+				<div class="mto-card mto-flex md:mto-flex-row mto-items-center md:mto-space-x-4">
+					<img class="mto-w-20" src="./img/cstudy3.jpg" alt="">
+					<div class="mto-space-y-1 mto-flex-row md:mto-flex-none">
+						<span class="mto-inline-block">
+							<svg class="mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
+							</svg>
+							<svg class=" mto-inline-block mto-fill-current mto-text-gray-700 mto-w-4 mto-h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
+							</svg>
+						</span>
+
+						<h3 class="mto-font-bold mto-text-textColor mto-text-base">Swift Couses</h3>
+
+						<div class="mto-w-full mto-flex mto-space-x-1">
+							<svg class="mto-inline-block mto-fill-current mto-text-textColor mto-w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
+								<path d="M13 7h-2v6h6v-2h-4z"/>
+							</svg>
+
+							<time class="mto-inline-block mto-text-sm mto-text-textColor">10 hrs</time>
+						</div>
+
 					</div>
-					<div class="mto-block mto-text-xs mto-text-pColor">
-						Started Jan 5, 2020
+					<div>
+						<span class="md:mto-inline-block mto-bg-secondary mto-rounded-full mto-px-4 mto-py-1 mto-text-xs mto-uppercase mto-font-medium mto-text-white mto-ml-2">Book</span>
+					</div>
+					<div class="mto-block mto-flex-grow mto-space-y-2 mto-px-4">
+						<div class="mto-shadow mto-w-full mto-bg-primary-100 mto-rounded">
+							<div class="mto-bg-primary mto-text-xs mto-leading-none mto-py-1 mto-text-center mto-text-white mto-rounded" style="width: 40%"></div>
+						</div>
+						<div class="mto-block mto-text-xs mto-text-pColor">
+							Started Jan 5, 2020
+						</div>
+					</div>
+					<div class="mto-font-semibold mto-text-textColor mto-text-xs">15% Complete</div>
+					<div>
+						<a class="btn mto-uppercase" href="#">
+							<span class="mto-text-white mto-inline-flex">Continue</span>
+						</a>
 					</div>
 				</div>
-				<div class="mto-font-semibold mto-text-textColor mto-text-xs">15% Complete</div>
-				<div>
-					<a class="btn mto-uppercase" href="#">
-						<span class="mto-inline-flex">Show All</span>
-					</a>
-				</div>
-			</div>
-		</li>
-	</ul>
-</div>
+			</li>
+		</ul>
+	</div>
 </div>
 
 <?php

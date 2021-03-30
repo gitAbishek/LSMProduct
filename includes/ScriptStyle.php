@@ -155,13 +155,13 @@ class ScriptStyle {
 				'context' => 'public'
 			),
 			'single-course' => array(
-				'src'      => $this->get_asset_url( '/assets/css/single-course.css' ),
+				'src'      => $this->get_asset_url( '/assets/css/public.css' ),
 				'has_rtl'  => true,
 				'context'  => 'public',
 				'callback' => 'masteriyo_is_single_course_page'
 			),
 			'myaccount' => array(
-				'src'      => $this->get_asset_url( '/assets/dist/myaccount.css' ),
+				'src'      => $this->get_asset_url( '/assets/dist/public.css' ),
 				'deps'     => '',
 				'version'  => $this->get_version(),
 				'media'    => 'all',
@@ -170,7 +170,7 @@ class ScriptStyle {
 				'register_only' => true,
 			),
 			'reset-form' => array(
-				'src'      => $this->get_asset_url( '/assets/dist/reset-form.css' ),
+				'src'      => $this->get_asset_url( '/assets/dist/public.css' ),
 				'deps'     => '',
 				'version'  => $this->get_version(),
 				'media'    => 'all',
@@ -179,7 +179,7 @@ class ScriptStyle {
 				'register_only' => true,
 			),
 			'signup-form' => array(
-				'src'      => $this->get_asset_url( '/assets/dist/signup-form.css' ),
+				'src'      => $this->get_asset_url( '/assets/dist/public.css' ),
 				'deps'     => '',
 				'version'  => $this->get_version(),
 				'media'    => 'all',

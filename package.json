@@ -83,10 +83,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --hot --open",
     "build": "webpack --mode production",
-    "build:css:public": "tailwindcss build ./assets/css/public.css -o ./assets/dist/public.css",
-    "build:css:myaccount": "tailwindcss build ./assets/css/myaccount.css -o ./assets/dist/myaccount.css",
-    "build:css:reset-form": "tailwindcss build ./assets/css/reset-form.css -o ./assets/dist/reset-form.css",
-    "build:css:signup": "tailwindcss build ./assets/css/signup-form.css -o ./assets/dist/signup-form.css"
+    "build:css:public": "tailwindcss build ./assets/css/public.css -o ./assets/dist/public.css"
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {

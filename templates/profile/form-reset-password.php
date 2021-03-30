@@ -11,7 +11,7 @@ do_action( 'masteriyo_before_password_reset_form' );
 
 ?>
 
-<div>Masteriyo Password Reset Form.</div>
+<div class="reset">Masteriyo Password Reset Form.</div>
 
 <?php
 

@@ -7,8 +7,6 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-if ( empty( $GLOBALS['course']->get_difficulty() ) ) return;
-
 ?>
 
 <div class="mto-py-4 mto-border-b mto-border-gray-200">
@@ -17,7 +15,7 @@ if ( empty( $GLOBALS['course']->get_difficulty() ) ) return;
 		<path d="M15.293 14.707a.999.999 0 001.414 0l5-5-1.414-1.414L16 12.586l-2.293-2.293a.999.999 0 00-1.414 0l-5 5 1.414 1.414L13 12.414l2.293 2.293z"/>
 	  </svg>
 	<span class="mto-inline-block mto-text-xs mto-font-medium mto-text-gray-800 mto-ml-1">
-		<?php echo $GLOBALS['course']->get_difficulty()->get_name(); ?>
+		<?php echo esc_html( $difficulty ); ?>
 	</span>
 </div>
 

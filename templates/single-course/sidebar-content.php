@@ -12,21 +12,10 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  */
 do_action( 'masteriyo_before_single_course_sidebar_content' );
 
-
-masteriyo_get_template( 'single-course/enroll-now-button.php' );
-
-masteriyo_get_template( 'single-course/sidebar-row-reviews.php' );
-
-masteriyo_get_template( 'single-course/sidebar-row-categories.php' );
-
-masteriyo_get_template( 'single-course/sidebar-row-enrolled-students.php' );
-
-masteriyo_get_template( 'single-course/sidebar-row-hours.php' );
-
-masteriyo_get_template( 'single-course/sidebar-row-lectures.php' );
-
-masteriyo_get_template( 'single-course/sidebar-row-difficulty.php' );
-
+/**
+ * masteriyo_single_course_sidebar_content
+ */
+do_action( 'masteriyo_single_course_sidebar_content' );
 
 /**
  * masteriyo_before_single_course_sidebar_content hook.

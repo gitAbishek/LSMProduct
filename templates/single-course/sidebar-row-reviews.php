@@ -8,10 +8,6 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 global $course;
-
-$review_count = $course->get_review_count();
-$rating = $course->get_average_rating();
-
 ?>
 
 <div class="mto-py-4 mto-border-b mto-border-gray-200">
@@ -19,7 +15,9 @@ $rating = $course->get_average_rating();
 		<?php masteriyo_render_stars( $rating, 'mto-text-primary mto-w-4 mto-h-4' );?>
 	</span>
 
-	<span class="mto-inline-block mto-text-xs mto-font-medium mto-text-gray-600 mto-ml-2"><?php echo $review_count; ?> reviews</span>
+	<span class="mto-inline-block mto-text-xs mto-font-medium mto-text-gray-600 mto-ml-2">
+		<?php echo esc_html( $review_count ); ?> <?php echo esc_html( $review_text ) ?>
+	</span>
 </div>
 
 <?php

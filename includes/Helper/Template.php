@@ -302,3 +302,143 @@ function masteriyo_add_body_class( $classes, $class ) {
 	return $classes;
 }
 function_exists( 'add_filter' ) && add_filter( 'body_class', 'masteriyo_add_body_class', 10, 2 );
+
+
+if( ! function_exists( 'masteriyo_template_sidebar_enroll_now_button' ) ) {
+	/**
+	 * Show enroll now button
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_template_sidebar_enroll_now_button() {
+		global $course;
+
+		$data = array(
+			'link'       => untrailingslashit( $course->get_permalink() ) . '?masteriyo-enroll-now=' . $course->get_id(),
+			'enroll_now' => apply_filters( 'masteriyo_enroll_now_text', __( 'Enroll Now', 'masteriyo' ) )
+		);
+
+		masteriyo_get_template( 'single-course/enroll-now-button.php', $data );
+	}
+}
+
+if( ! function_exists( 'masteriyo_template_sidebar_row_reviews' ) ) {
+	/**
+	 * Show row reviews.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_template_sidebar_row_reviews() {
+		global $course;
+
+		$data = array(
+			'review_count' => $course->get_review_count(),
+			'rating'       => $course->get_average_rating(),
+			'review_text'  => apply_filters( 'masteriyo_reviews_txt', __( 'reviews', 'masteriyo' ) )
+		);
+
+		masteriyo_get_template( 'single-course/sidebar-row-reviews.php', $data );
+	}
+}
+
+if( ! function_exists( 'masteriyo_template_sidebar_row_categories' ) ) {
+	/**
+	 * Show course categories.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_template_sidebar_row_categories() {
+		global $course;
+
+		$categories = $course->get_categories();
+
+		if ( empty( $categories ) ) {
+			return;
+		}
+
+		$data = array(
+			'categories' => $categories
+		);
+
+		masteriyo_get_template( 'single-course/sidebar-row-categories.php', $data );
+	}
+}
+
+
+if( ! function_exists( 'masteriyo_template_sidebar_row_enrolled_students' ) ) {
+	/**
+	 * Show enrolled students.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_template_sidebar_row_enrolled_students() {
+		global $course;
+
+		masteriyo_get_template( 'single-course/sidebar-row-enrolled-students.php' );
+	}
+}
+
+if( ! function_exists( 'masteriyo_template_sidebar_row_hours' ) ) {
+	/**
+	 * Show course hours.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_template_sidebar_row_hours() {
+		global $course;
+
+		$hours = masteriyo_get_lecture_hours( $course );
+		if ( empty( $hours ) ) {
+			return;
+		}
+
+		$data = array(
+			'hours' => $hours
+		);
+
+		masteriyo_get_template( 'single-course/sidebar-row-hours.php', $data );
+	}
+}
+
+if( ! function_exists( 'masteriyo_template_sidebar_row_lectures' ) ) {
+	/**
+	 * Show course lectures.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_template_sidebar_row_lectures() {
+		global $course;
+
+		$data = array(
+			'lessons_count' => masteriyo_get_lessons_count( $course )
+		);
+
+		masteriyo_get_template( 'single-course/sidebar-row-lectures.php', $data );
+	}
+}
+
+
+if( ! function_exists( 'masteriyo_template_sidebar_row_difficulty' ) ) {
+	/**
+	 * Show course difficulty
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_template_sidebar_row_difficulty() {
+		global $course;
+
+		// Bail early if difficulty is not set.
+		$difficulty = $course->get_difficulty()->get_name();
+		if( empty( $difficulty ) ) {
+			return;
+		}
+
+		$data = array(
+			'difficulty' => $difficulty
+		);
+
+		masteriyo_get_template( 'single-course/sidebar-row-difficulty.php', $data );
+
+	}
+}
+

@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 		<path d="M13 7h-2v6h6v-2h-4z"/>
 	</svg>
 	<span class="mto-inline-block mto-text-xs mto-font-medium mto-text-gray-800 mto-ml-1">
-		<?php echo masteriyo_get_lecture_hours( $GLOBALS['course'] ) ?>
+		<?php echo esc_html( $hours ); ?>
 	</span>
 </div>
 

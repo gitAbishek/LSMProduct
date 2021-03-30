@@ -6,6 +6,10 @@
 /* Login */
 @layer components {
     /* General */
+    h2 {
+        @apply
+        mto-font-semibold mto-text-2xl mto-mb-10;
+    }
     .hover-effect{
         @apply mto-transition mto-duration-300 mto-ease-in-out
         mto-transform-gpu hover:mto--translate-y-0.5;   
@@ -34,10 +38,7 @@
         xl:mto-w-2/5 mto-p-6 md:mto-p-12
         mto-bg-white mto-rounded mto-shadow-lg ;
     }
-    .mto-login-wrapper h2 {
-        @apply
-        mto-font-semibold mto-text-2xl mto-mb-10 md:mto-mb-10;
-    }
+    
     button.sign-in{
         @apply mto-w-full md:mto-w-auto
         mto-py-2 mto-px-4 mto-text-sm mto-font-medium mto-rounded

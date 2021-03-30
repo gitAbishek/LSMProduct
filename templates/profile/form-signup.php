@@ -18,23 +18,24 @@ do_action( 'masteriyo_before_sign_up_form_content' );
 	<div class="mto-flex mto-justify-center mto-items-center mto-h-screen">
 
 		<div class="mto-form-wrapper">
-			<h2>Create Your Account</h2>
+			<h2 class="mto-font-semibold mto-text-2xl mto-mb-4">Create Your Account</h2>
+      <p>*Note: All fields are required.</p>
 
-					<form id="mto-signup-form">
+					<form id="mto-signup-form" class="mto-mt-10">
 						<input type="hidden" name="remember" value="true">
 						<div class="mto-rounded-md mtoshadow-sm mto-space-y-6">
 							<div class="fullname">
-								<label for="fullname" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">Full Name</label>
+								<label for="fullname" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Full Name</label>
 								<input id="fullname" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 							</div>
 
               <div class="email">
-								<label for="email-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">Email Address</label>
+								<label for="email-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Email Address</label>
 								<input id="email-address" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 							</div>
             
 							<div class="password">
-								<label for="password" class="mto-block mto-text-sm mto-font-semibold mto-pb-4">Password</label>
+								<label for="password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Password</label>
 								<input id="password" name="password" type="password" autocomplete="current-password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
                 <p>
                   Use 10 or more characters that are a mixture of letters, numbers, and symbols
@@ -42,7 +43,7 @@ do_action( 'masteriyo_before_sign_up_form_content' );
               </div>
               
               <div class="confirm-password">
-								<label for="confirm-password" class="mto-block mto-text-sm mto-font-semibold mto-pb-4">Confirm Password</label>
+								<label for="confirm-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Confirm Password</label>
 								<input id="confirm-password" name="password" type="password" autocomplete="current-password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
               </div>
 						</div>

@@ -125,7 +125,7 @@ defined( 'ABSPATH' ) || exit;
 
 <div class="study-wrapper md:mto-mt-0 mto-space-y-8">
 	<div class="study-header mto-flex mto-flex-row mto-mt-16 md:mto-justify-between">
-		<h2 class="mto-font-bold mto-text-2xl mto-text-textColor">Continue Studying</h2>
+		<h2 class="mto-font-bold mto-text-2xl mto-text-textColor mto-mb-0">Continue Studying</h2>
 		<a class="btn mto-font-semibold mto-text-sm mto-text-pColor hover:mto-text-white mto-bg-white mto-border hover:mto-border-0" href="#">
 			<span class="mto-inline-flex">Show All</span>
 			<svg class="mto-inline-flex mto-icon mto-fill-current mto--mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

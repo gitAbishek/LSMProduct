@@ -6,10 +6,6 @@
 /* Login */
 @layer components {
     /* General */
-    h2 {
-        @apply
-        mto-font-semibold mto-text-2xl mto-mb-10;
-    }
     .hover-effect{
         @apply mto-transition mto-duration-300 mto-ease-in-out
         mto-transform-gpu hover:mto--translate-y-0.5;   

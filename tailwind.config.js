@@ -74,8 +74,11 @@ module.exports = {
 				429: '429px',
 			},
 			transitionProperty: {
-				maxHeight: 'maxHeight',
+				'maxHeight': 'maxHeight',
 			},
+			margin: {
+				'-9999': '-600rem',
+			}
 		},
 	},
 	variants: {

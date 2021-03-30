@@ -42,46 +42,46 @@ do_action( 'masteriyo_before_edit_profile_tab_content' );
 			<div class="mto-space-y-6 md:mto-space-y-8">
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0 md:mto-space-x-8">
 					<div class="mto-flex-grow">
-						<label for="user-first-name" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">First Name</label>
+						<label for="user-first-name" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">First Name</label>
 						<input value="<?php echo $user->get_first_name(); ?>" id="user-first-name" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 
 					<div class="mto-flex-grow">
-						<label for="user-last-name" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">Last Name</label>
+						<label for="user-last-name" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Last Name</label>
 						<input value="<?php echo $user->get_last_name(); ?>" id="user-last-name" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0">
 					<div class="mto-flex-grow">
-						<label for="user-email" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">Email</label>
+						<label for="user-email" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Email</label>
 						<input value="<?php echo $user->get_email(); ?>" id="user-email" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0">
 					<div class="mto-flex-grow">
-						<label for="user-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">Address</label>
+						<label for="user-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Address</label>
 						<input value="<?php echo $user->get_address(); ?>" id="user-address" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0 md:mto-space-x-8">
 					<div class="mto-flex-grow">
-						<label for="user-city" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">City</label>
+						<label for="user-city" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">City</label>
 						<input value="<?php echo $user->get_city(); ?>" id="user-city" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 
 					<div class="mto-flex-grow">
-						<label for="user-state" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">State</label>
+						<label for="user-state" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">State</label>
 						<input value="<?php echo $user->get_state(); ?>" id="user-state" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0 md:mto-space-x-8">
 					<div class="mto-flex-grow">
-						<label for="user-zip-code" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">Zip Code</label>
+						<label for="user-zip-code" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Zip Code</label>
 						<input value="<?php echo $user->get_zip_code(); ?>" id="user-zip-code" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 
 					<div class="mto-flex-grow">
-						<label for="user-country" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">Country</label>
+						<label for="user-country" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Country</label>
 						<input value="<?php echo $user->get_country(); ?>" id="user-country" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>

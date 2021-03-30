@@ -15,14 +15,14 @@ do_action( 'masteriyo_before_password_reset_form' );
 	<div class="mto-flex mto-justify-center mto-items-center mto-h-screen">
 
 		<div class="mto-form-wrapper">
-			<h2 class="mto-mb-4">Reset Password</h2>
+			<h2 class="mto-font-semibold mto-text-2xl mto-mb-4">Reset Password</h2>
       <p>Enter your user account's verified email address and we will send you a password reset link.</p>
 
-					<form id="mto-reset-form mto-mt-2">
+					<form id="mto-reset-form" class="mto-mt-10">
 						<input type="hidden" name="remember" value="true">
 						<div class="mto-rounded-md mtoshadow-sm">
 							<div class="reset-username mto-mb-6">
-								<label for="reset-username-email-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-4">Username or Email</label>
+								<label for="reset-username-email-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Username or Email</label>
 								<input id="reset-username-email-address" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 							</div>
 						</div>

@@ -68,9 +68,9 @@
 		});
 	});
 	$('.menu-open').click(function(){
-		$('#vertical-menu').removeClass('mto--ml-96');
+		$('#vertical-menu').removeClass('mto--ml-9999');
 	});
 	$('.menu-close').click(function(){
-		$('#vertical-menu').addClass('mto--ml-96');
+		$('#vertical-menu').addClass('mto--ml-9999');
 	});
 })(jQuery, window.masteriyo_data);

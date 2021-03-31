@@ -1,4 +1,5 @@
-const baseUrl = process.env.baseUrl;
+import { isProduction } from './../utils/helper';
+const baseUrl = isProduction() ?  process.env.baseUrl;
 
 const urls = {
 	courses: `${baseUrl}/courses`,

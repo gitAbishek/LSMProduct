@@ -12,13 +12,11 @@ import Modal from 'Components/common/Modal';
 import ModalBody from 'Components/common/ModalBody';
 import ModalFooter from 'Components/common/ModalFooter';
 import ModalHeader from 'Components/common/ModalHeader';
+import Spinner from 'Components/common/Spinner';
 import { __ } from '@wordpress/i18n';
 
 const AllCourses = () => {
-	const { data: coursesData, refetch: refectCourses } = useQuery(
-		'courseData',
-		fetchCourses
-	);
+	const courseQuery = useQuery('courseData', fetchCourses);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [removableCourse, setRemovableCourse] = useState(Object);
 
@@ -54,51 +52,55 @@ const AllCourses = () => {
 						</Link>
 					</Button>
 				</div>
-				<table className="mto-min-w-full mto-divide-y mto-divide-gray-200 mto-text-gray-700">
-					<thead>
-						<tr>
-							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Title', 'masteriyo')}
-							</th>
-							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Categories', 'masteriyo')}
-							</th>
-							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Price', 'masteriyo')}
-							</th>
-							<th className="mto-px-6 mto-py-3 mto-text-right mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Actions', 'masteriyo')}
-							</th>
-						</tr>
-					</thead>
-					<tbody className="mto-bg-white mto-divide-y mto-divide-gray-200">
-						{coursesData?.map((course: any) => (
-							<tr key={course.id}>
-								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
-									<Link to={`/builder/${course.id}`}>{course.name}</Link>
-								</td>
-								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base"></td>
-								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
-									{course.price}
-								</td>
-								<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
-									<ul className="mto-flex mto-list-none mto-text-base mto-justify-end">
-										<li
-											onClick={() => onEditPress(course.id)}
-											className="mto-text-gray-800 hover:mto-text-blue-500 mto-cursor-pointer mto-ml-4">
-											<Icon icon={<Edit />} />
-										</li>
-										<li
-											onClick={() => onDeletePress(course.id, course.name)}
-											className="mto-text-gray-800 hover:mto-text-red-600 mto-cursor-pointer mto-ml-4">
-											<Icon icon={<Trash />} />
-										</li>
-									</ul>
-								</td>
+				{courseQuery.isLoading ? (
+					<Spinner />
+				) : (
+					<table className="mto-min-w-full mto-divide-y mto-divide-gray-200 mto-text-gray-700">
+						<thead>
+							<tr>
+								<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
+									{__('Title', 'masteriyo')}
+								</th>
+								<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
+									{__('Categories', 'masteriyo')}
+								</th>
+								<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
+									{__('Price', 'masteriyo')}
+								</th>
+								<th className="mto-px-6 mto-py-3 mto-text-right mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
+									{__('Actions', 'masteriyo')}
+								</th>
 							</tr>
-						))}
-					</tbody>
-				</table>
+						</thead>
+						<tbody className="mto-bg-white mto-divide-y mto-divide-gray-200">
+							{courseQuery?.data?.map((course: any) => (
+								<tr key={course.id}>
+									<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
+										<Link to={`/builder/${course.id}`}>{course.name}</Link>
+									</td>
+									<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base"></td>
+									<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
+										{course.price}
+									</td>
+									<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
+										<ul className="mto-flex mto-list-none mto-text-base mto-justify-end">
+											<li
+												onClick={() => onEditPress(course.id)}
+												className="mto-text-gray-800 hover:mto-text-blue-500 mto-cursor-pointer mto-ml-4">
+												<Icon icon={<Edit />} />
+											</li>
+											<li
+												onClick={() => onDeletePress(course.id, course.name)}
+												className="mto-text-gray-800 hover:mto-text-red-600 mto-cursor-pointer mto-ml-4">
+												<Icon icon={<Trash />} />
+											</li>
+										</ul>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				)}
 				<Modal
 					isOpen={showDeleteModal}
 					onClose={() => setShowDeleteModal(false)}>

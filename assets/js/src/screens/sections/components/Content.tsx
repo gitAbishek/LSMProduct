@@ -1,4 +1,10 @@
 import { AlignLeft, Timer, Trash } from '../../../assets/icons';
+import {
+	Card,
+	CardActions,
+	CardHeader,
+	CardHeading,
+} from 'Components/layout/Card';
 import React, { useState } from 'react';
 import { deleteLesson, deleteQuiz } from '../../../utils/api';
 import { useMutation, useQueryClient } from 'react-query';
@@ -55,19 +61,19 @@ const Content: React.FC<Props> = (props) => {
 
 	return (
 		<>
-			<div className="mto-bg-white mto-border mto-border-solid mto-border-gray-200 mto-px-4 mto-py-3 mto-flex mto-justify-between mto-items-center mto-mb-2">
-				<div className="mto-flex mto-items-center">
-					<DragHandle />
-					<Icon
-						className="mto-text-lg mto-mr-4"
-						icon={type === 'lesson' ? <AlignLeft /> : <Timer />}
-					/>
-					<h5 className="mto-text-base">{name}</h5>
-				</div>
-				<div className="mto-flex">
-					<div className="mto-flex">
+			<Card>
+				<CardHeader>
+					<CardHeading>
+						<DragHandle />
+						<Icon
+							className="mto-text-2xl mto-mr-4"
+							icon={type === 'lesson' ? <AlignLeft /> : <Timer />}
+						/>
+						<h5 className="mto-text-base mto-text-gray-800">{name}</h5>
+					</CardHeading>
+					<CardActions>
 						<Button
-							className="mto-mr-2"
+							className="mto-mr-2 mto-h-10 mto-px-3"
 							size="small"
 							onClick={() =>
 								push(
@@ -95,9 +101,9 @@ const Content: React.FC<Props> = (props) => {
 							}>
 							<OptionButton />
 						</Dropdown>
-					</div>
-				</div>
-			</div>
+					</CardActions>
+				</CardHeader>
+			</Card>
 
 			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
 				<ModalHeader>

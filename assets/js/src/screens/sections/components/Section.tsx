@@ -10,49 +10,35 @@ import Dropdown, {
 	DropdownMenuItem,
 } from 'Components/common/Dropdown';
 import React, { useState } from 'react';
-import {
-	deleteSection,
-	fetchContents,
-	updateSection,
-} from '../../../utils/api';
+import { deleteSection, fetchContents } from '../../../utils/api';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import AddNewButton from 'Components/common/AddNewButton';
-import Button from 'Components/common/Button';
+import { Collapse } from 'react-collapse';
 import Content from './Content';
 import DragHandle from '../components/DragHandle';
-import DropdownOverlay from 'Components/common/DropdownOverlay';
 import { Edit } from '../../../assets/icons';
-import FormGroup from 'Components/common/FormGroup';
+import EditSection from './EditSection';
 import Icon from 'Components/common/Icon';
-import Input from 'Components/common/Input';
-import Label from 'Components/common/Label';
 import { NavLink } from 'react-router-dom';
 import OptionButton from 'Components/common/OptionButton';
-import Textarea from 'Components/common/Textarea';
+import Spinner from 'Components/common/Spinner';
 import { __ } from '@wordpress/i18n';
-import { useForm } from 'react-hook-form';
 import { useToasts } from 'react-toast-notifications';
 
 interface Props {
 	id: number;
 	name: string;
-	editing?: boolean;
 	courseId: number;
 	description?: any;
 }
 
 const Section: React.FC<Props> = (props) => {
-	type SectionInputs = {
-		name?: string;
-		description?: any;
-	};
-	const { id, name, editing = false, courseId, description } = props;
-	const [sectionEditing, setSectionEditing] = useState(editing);
+	const { id, name, courseId, description } = props;
+	const [isEditing, setIsEditing] = useState(false);
 
 	const queryClient = useQueryClient();
 	const { addToast } = useToasts();
-	const { register, handleSubmit } = useForm<SectionInputs>();
 
 	const contentQuery = useQuery(['contents', id], () => fetchContents(id));
 
@@ -66,24 +52,8 @@ const Section: React.FC<Props> = (props) => {
 		},
 	});
 
-	const updateMutation = useMutation((data: any) => updateSection(id, data), {
-		onSuccess: (data) => {
-			console.log(data);
-			addToast(data?.name + __(' has been updated successfully'), {
-				appearance: 'success',
-				autoDismiss: true,
-			});
-			queryClient.invalidateQueries('builderSections');
-			setSectionEditing(false);
-		},
-	});
-
 	const onDeletePress = () => {
 		deleteMutation.mutate(id);
-	};
-
-	const onUpdate = (data: any) => {
-		updateMutation.mutate(data);
 	};
 
 	return (
@@ -99,7 +69,7 @@ const Section: React.FC<Props> = (props) => {
 						autoClose
 						content={
 							<DropdownMenu>
-								<DropdownMenuItem onClick={() => setSectionEditing(true)}>
+								<DropdownMenuItem onClick={() => setIsEditing(true)}>
 									<Icon className="mto-mr-1" icon={<Edit />} />
 									{__('Edit', 'masteriyo')}
 								</DropdownMenuItem>
@@ -114,14 +84,27 @@ const Section: React.FC<Props> = (props) => {
 				</div>
 			</BoxHeader>
 			<BoxContent>
-				{contentQuery?.data?.map((content: any, index: number) => (
-					<Content
-						key={index}
-						id={content.id}
-						name={content.name}
-						type={content.type}
+				<Collapse isOpened={isEditing}>
+					<EditSection
+						id={id}
+						name={name}
+						description={description}
+						onSave={() => setIsEditing(false)}
+						onCancel={() => setIsEditing(false)}
 					/>
-				))}
+				</Collapse>
+				{contentQuery.isLoading ? (
+					<Spinner />
+				) : (
+					contentQuery?.data?.map((content: any, index: number) => (
+						<Content
+							key={index}
+							id={content.id}
+							name={content.name}
+							type={content.type}
+						/>
+					))
+				)}
 			</BoxContent>
 			<BoxFooter>
 				<Dropdown

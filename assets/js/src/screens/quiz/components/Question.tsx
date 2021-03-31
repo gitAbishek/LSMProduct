@@ -1,8 +1,12 @@
+import React, { useState } from 'react';
+
+import AnswerMultiChoice from './AnswerMultiChoice';
+import AnswerTrueFalse from './AnswerTrueFalse';
 import Button from 'Components/common/Button';
 import FormGroup from 'Components/common/FormGroup';
 import Input from 'Components/common/Input';
 import Label from 'Components/common/Label';
-import React from 'react';
+import OptionButton from 'Components/common/OptionButton';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
 import { __ } from '@wordpress/i18n';
@@ -19,6 +23,7 @@ const Question: React.FC<Props> = (props) => {
 	const { question } = props;
 	const { addToast } = useToasts();
 	const { register, handleSubmit } = useForm();
+	const [questionType, setQuestionType] = useState<string>();
 
 	const updateQuestionMutation = useMutation(
 		(data: object) => updateQuestion(question.id, data),
@@ -60,18 +65,19 @@ const Question: React.FC<Props> = (props) => {
 						<Select
 							options={[
 								{
-									value: 'Yes No',
-									label: __('Chocolate', 'masteriyo'),
+									value: 'true-false',
+									label: __('True False', 'masteriyo'),
 								},
 								{
-									value: 'Single Choice',
-									label: __('Strawberry', 'masteriyo'),
+									value: 'single-choice',
+									label: __('Single Choice', 'masteriyo'),
 								},
 								{
-									value: 'Multiple Choice',
-									label: __('Vanilla', 'masteriyo'),
+									value: 'multi-choice',
+									label: __('Multiple Choice', 'masteriyo'),
 								},
 							]}
+							onChange={(value) => setQuestionType(value?.value)}
 						/>
 					</FormGroup>
 					<FormGroup>
@@ -99,12 +105,10 @@ const Question: React.FC<Props> = (props) => {
 					<h2 className="mto-text-l mto-m-0 mto-font-medium">
 						{__('Answer', 'masteriyo')}
 					</h2>
+					<OptionButton />
 				</div>
-				<footer className="mto-pt-8 mto-flex mto-border-t mto-border-gray-100 mto-mt-12">
-					<Button layout="primary" className="mto-mr-4">
-						{__('Update', 'masteriyo')}
-					</Button>
-				</footer>
+				{questionType === 'true-false' && <AnswerTrueFalse />}
+				{questionType === 'multi-choice' && <AnswerMultiChoice />}
 			</form>
 		</div>
 	);

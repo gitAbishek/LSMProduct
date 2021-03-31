@@ -1,3 +1,5 @@
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
 import * as screens from './screens';
 
 import { QueryClient, QueryClientProvider } from 'react-query';

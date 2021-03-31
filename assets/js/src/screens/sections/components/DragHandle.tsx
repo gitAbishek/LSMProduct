@@ -16,7 +16,7 @@ const DragHandle: React.FC<Props> = (props) => {
 const DragHandleContainer = tw.div`
 	mto-mr-3
 	mto-cursor-move
-	mto-text-2xl
+	mto-text-xl
 	mto-text-gray-700
 `;
 export default DragHandle;

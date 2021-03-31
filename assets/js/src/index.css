@@ -35,4 +35,13 @@
 	.Collapsible {
 		@apply mto-border mto-border-gray-100 mto-rounded-sm mto-mb-4;
 	}
+
+	.ReactCollapse--collapse {
+		transition: height 0.35s;
+	}
+
+	[type='checkbox']:checked,
+	[type='radio']:checked {
+		@apply mto-bg-green-400;
+	}
 }

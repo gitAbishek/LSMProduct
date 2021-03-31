@@ -95,7 +95,37 @@ do_action( 'masteriyo_before_edit_profile_tab_content' );
 		</form>
 	</div>
 	<div id="password-security-tab" class="tab-content mto-hidden">
-		<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In reiciendis eveniet culpa minima veniam aut iste modi repudiandae, incidunt voluptas reprehenderit expedita porro veritatis voluptatibus debitis quae exercitationem sit aspernatur.</p>
+		<div class="password-security mto-w-full lg:mto-w-2/5">
+			<h2 class="password--security--title mto-font-semibold mto-text-2xl">Change Password</h2>
+
+				<form id="password-security-form" class="mto-mt-10">
+					<input type="hidden" name="remember" value="true">
+					<div class="mto-rounded-md mtoshadow-sm mto-space-y-6">
+						<div class="current-password">
+							<label for="current-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Current Password</label>
+							<input id="current-password" name="password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						</div>
+
+						<div class="new-password">
+							<label for="new-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">New Password</label>
+							<input id="new-password" name="password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						</div>
+						
+						<div class="confirm-password">
+							<label for="confirm-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Confirm Password</label>
+							<input id="confirm-password" name="password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						</div>
+					</div>
+
+					<div class="password-security-btn mto-mt-10">
+						<button type="submit" class="change-password btn mto-text-sm mto-py-3 mto-px-6 mto-uppercase">
+							Change Password
+						</button>
+					</div>
+
+					<div id="mto-login-error-msg" class="mto-text-red-700 mto-hidden"></div>
+				</form>
+		</div>
 	</div>
 </div>
 

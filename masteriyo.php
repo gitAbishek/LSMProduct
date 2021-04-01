@@ -27,10 +27,6 @@ define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
 define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
 define( 'MASTERIYO_PLUGIN_REL_LANGUAGES_PATH', 'i18n/languages' );
 
-add_filter( 'masteriyo_get_myaccount_page_id', function() {
-	return 69;
-});
-
 /**
  * Include the autoloader.
  */

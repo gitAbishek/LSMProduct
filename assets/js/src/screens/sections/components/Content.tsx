@@ -11,14 +11,11 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import { BiTrash } from 'react-icons/bi';
 import Button from 'Components/common/Button';
+import DeleteModal from 'Components/layout/DeleteModal';
 import DragHandle from './DragHandle';
 import Dropdown from 'Components/common/Dropdown';
 import DropdownOverlay from 'Components/common/DropdownOverlay';
 import Icon from 'Components/common/Icon';
-import Modal from 'Components/common/Modal';
-import ModalBody from 'Components/common/ModalBody';
-import ModalFooter from 'Components/common/ModalFooter';
-import ModalHeader from 'Components/common/ModalHeader';
 import OptionButton from 'Components/common/OptionButton';
 import { __ } from '@wordpress/i18n';
 import { useHistory } from 'react-router';
@@ -46,11 +43,17 @@ const Content: React.FC<Props> = (props) => {
 		},
 	});
 
+	const onModalClose = () => {
+		setIsModalOpen(false);
+	};
+
 	const onDeletePress = () => {
+		console.log('Delete Pressed');
 		setIsModalOpen(true);
 	};
 
 	const deleteContent = () => {
+		console.log('delete content');
 		if (type === 'lesson') {
 			deleteLessonMutation.mutate(id);
 		} else if (type === 'quiz') {
@@ -104,33 +107,11 @@ const Content: React.FC<Props> = (props) => {
 					</CardActions>
 				</CardHeader>
 			</Card>
-
-			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-				<ModalHeader>
-					{__('Delete Course', 'masteriyo')} {name}
-				</ModalHeader>
-				<ModalBody>
-					<p className="mto-text-md mto-text-gray-500">
-						{__(
-							"Are you sure want to delete this course. You won't be able to recover it back",
-							'masteriyo'
-						)}
-					</p>
-				</ModalBody>
-				<ModalFooter>
-					<Button
-						className="mto-w-full sm:mto-w-auto"
-						onClick={() => setIsModalOpen(false)}>
-						{__('Cancel', 'masteriyo')}
-					</Button>
-					<Button
-						layout="accent"
-						className="mto-w-full sm:mto-w-auto"
-						onClick={() => deleteContent()}>
-						{__('Delete', 'masteriyo')}
-					</Button>
-				</ModalFooter>
-			</Modal>
+			<DeleteModal
+				isOpen={isModalOpen}
+				onDeletePress={deleteContent}
+				onClose={onModalClose}
+			/>
 		</>
 	);
 };

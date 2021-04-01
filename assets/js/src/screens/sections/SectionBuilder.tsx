@@ -2,7 +2,6 @@ import { addSection, fetchCourse, fetchSections } from '../../utils/api';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import AddNewButton from 'Components/common/AddNewButton';
-import Loader from 'react-loader-spinner';
 import MainToolbar from 'Layouts/MainToolbar';
 import React from 'react';
 import Section from './components/Section';

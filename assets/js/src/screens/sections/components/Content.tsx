@@ -48,12 +48,10 @@ const Content: React.FC<Props> = (props) => {
 	};
 
 	const onDeletePress = () => {
-		console.log('Delete Pressed');
 		setIsModalOpen(true);
 	};
 
 	const deleteContent = () => {
-		console.log('delete content');
 		if (type === 'lesson') {
 			deleteLessonMutation.mutate(id);
 		} else if (type === 'quiz') {

@@ -34,7 +34,7 @@ interface Props {
 }
 
 const Section: React.FC<Props> = (props) => {
-	const { id, name, courseId, description } = props;
+	const { id, name, description } = props;
 	const [isEditing, setIsEditing] = useState(false);
 
 	const queryClient = useQueryClient();

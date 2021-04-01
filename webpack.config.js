@@ -74,7 +74,7 @@ const config = {
 		// Extracts dependencies on php file,which can be enqueued seperately in WordPress
 		isProduction &&
 			new DependencyExtractionWebpackPlugin({ injectPolyfill: true }),
-		isProduction && new BundleAnalyzerPlugin(),
+		// isProduction && new BundleAnalyzerPlugin(),
 
 		isProduction && new CleanWebpackPlugin(),
 		isDevelopment &&

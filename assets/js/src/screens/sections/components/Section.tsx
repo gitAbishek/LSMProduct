@@ -36,6 +36,7 @@ interface Props {
 const Section: React.FC<Props> = (props) => {
 	const { id, name, description } = props;
 	const [isEditing, setIsEditing] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const queryClient = useQueryClient();
 	const { addToast } = useToasts();

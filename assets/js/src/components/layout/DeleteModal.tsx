@@ -11,20 +11,21 @@ interface DeleteModalProps {
 	isOpen: boolean;
 	onDeletePress: () => void;
 	onClose: () => void;
+	title: string;
 }
 
 const DeleteModal: React.FC<DeleteModalProps> = (props) => {
-	const { isOpen, onDeletePress, onClose } = props;
+	const { isOpen, onDeletePress, onClose, title } = props;
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
 			<ModalHeader>
-				{__('Delete Course', 'masteriyo')} {name}
+				{__('Delete', 'masteriyo')} {title}
 			</ModalHeader>
 			<ModalBody>
 				<p className="mto-text-md mto-text-gray-500">
 					{__(
-						"Are you sure want to delete this course. You won't be able to recover it back",
+						"Are you sure want to delete. You won't be able to recover it back",
 						'masteriyo'
 					)}
 				</p>

@@ -1,4 +1,9 @@
-const baseUrl = process.env.baseUrl;
+import { isProduction } from './../utils/helper';
+
+const baseUrl = isProduction()
+	? //@ts-ignore
+	  masteriyo.rootApiUrl + '/masteriyo/v1'
+	: process.env.baseUrl;
 
 const urls = {
 	courses: `${baseUrl}/courses`,

@@ -12,7 +12,7 @@ const AddNewButton = React.forwardRef<HTMLButtonElement, Props>(
 			<button
 				ref={ref}
 				className={classNames(
-					'mto-mt-8 mto-flex mto-items-center mto-cursor-pointer mto-transition-all mto-duration-300 mto-ease-in-out hover:mto-text-primary',
+					'mto-flex mto-items-center mto-cursor-pointer mto-transition-all mto-duration-300 mto-ease-in-out hover:mto-text-primary',
 					classNames
 				)}
 				{...other}>

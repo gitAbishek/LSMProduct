@@ -3,6 +3,7 @@ import FormGroup from 'Components/common/FormGroup';
 import ImageUpload from 'Components/common/ImageUpload';
 import Input from 'Components/common/Input';
 import Label from 'Components/common/Label';
+import Loader from 'react-loader-spinner';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
 import React from 'react';
@@ -58,7 +59,16 @@ const AddNewCourse = () => {
 							</FormGroup>
 							<div className="mto-flex-row">
 								<Button layout="primary" type="submit">
-									{__('Add Course', 'masteriyo')}
+									{addMutation.isLoading ? (
+										<Loader
+											type="ThreeDots"
+											height={14}
+											width={20}
+											color="#fff"
+										/>
+									) : (
+										__('Add Course', 'masteriyo')
+									)}
 								</Button>
 							</div>
 						</div>

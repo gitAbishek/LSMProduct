@@ -74,11 +74,6 @@ class ProfileShortcode extends Shortcode {
 			wp_enqueue_style( 'masteriyo-myaccount' );
 
 			/**
-			 * Setup current logged in user data.
-			 */
-			masteriyo_setup_current_user_data();
-
-			/**
 			 * Find Template.
 			 */
 			$template_path = masteriyo( 'template' )->locate( 'profile.php' );

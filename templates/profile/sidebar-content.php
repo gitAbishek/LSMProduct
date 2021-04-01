@@ -7,8 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-global $user;
-
+$user = masteriyo_get_current_user_data();
 $tab = masteriyo_get_current_myaccount_tab();
 
 /**
@@ -31,7 +30,7 @@ do_action( 'masteriyo_before_profile_page_sidebar_content' );
 					</svg>
 				</a>
 			</h2>
-			
+
 			<span class="mto-text-xs mto-text-pColor">Gold Member</span>
 		</div>
 	</div>

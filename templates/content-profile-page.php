@@ -29,7 +29,7 @@ do_action( 'masteriyo_before_profile_page_content' );
 		<?php masteriyo_get_template( 'profile/sidebar-content.php' ); ?>
 	</div>
 	<main class="mto-flex-auto mto-w-full md:mto-flex-1 md:mto-w-4/5 mto-p-4 md:mto-p-16 mto-space-y-6 md:mto-space-y-12">
-		<?php masteriyo_get_template( masteriyo_get_current_myaccount_content_template() ); ?>
+		<?php include masteriyo_get_current_myaccount_content_template(); ?>
 	</main>
 </div>
 

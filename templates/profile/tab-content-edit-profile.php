@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-global $user;
+$user = masteriyo_get_current_user_data();
 
 /**
  * masteriyo_before_edit_profile_tab_content hook.
@@ -110,7 +110,7 @@ do_action( 'masteriyo_before_edit_profile_tab_content' );
 							<label for="new-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">New Password</label>
 							<input id="new-password" name="password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 						</div>
-						
+
 						<div class="confirm-password">
 							<label for="confirm-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Confirm Password</label>
 							<input id="confirm-password" name="password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">

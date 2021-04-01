@@ -599,20 +599,17 @@ function masteriyo_img_url( $file ) {
 }
 
 /**
- * Put current logged in user data into a global.
+ * Get current logged in user.
  *
  * @since 0.1.0
  *
  * @return User
  */
-function masteriyo_setup_current_user_data() {
+function masteriyo_get_current_user_data() {
 	if ( is_user_logged_in() ) {
-		$GLOBALS['user'] =  masteriyo_get_user( get_current_user_id() );
-	} else {
-		$GLOBALS['user'] = null;
+		return masteriyo_get_user( get_current_user_id() );
 	}
-
-	return $GLOBALS['user'];
+	return null;
 }
 
 /**
@@ -1444,13 +1441,13 @@ function masteriyo_get_current_myaccount_tab() {
  */
 function masteriyo_get_myaccount_templates() {
 	return apply_filters( 'masteriyo_profile_page_templates', array(
-		'dashboard'        => 'profile/tab-content-dashboard.php',
-		'edit-profile'     => 'profile/tab-content-edit-profile.php',
-		'my-courses'       => 'profile/tab-content-my-courses.php',
-		'my-grades'        => 'profile/tab-content-my-grades.php',
-		'my-memberships'   => 'profile/tab-content-my-memberships.php',
-		'my-certificates'  => 'profile/tab-content-my-certificates.php',
-		'my-order-history' => 'profile/tab-content-my-order-history.php',
+		'dashboard'     => masteriyo_locate_template( 'profile/tab-content-dashboard.php' ),
+		'edit-profile'  => masteriyo_locate_template( 'profile/tab-content-edit-profile.php' ),
+		'courses'       => masteriyo_locate_template( 'profile/tab-content-courses.php' ),
+		'grades'        => masteriyo_locate_template( 'profile/tab-content-grades.php' ),
+		'memberships'   => masteriyo_locate_template( 'profile/tab-content-memberships.php' ),
+		'certificates'  => masteriyo_locate_template( 'profile/tab-content-certificates.php' ),
+		'order-history' => masteriyo_locate_template( 'profile/tab-content-order-history.php' ),
 	) );
 }
 
@@ -1486,7 +1483,7 @@ function masteriyo_get_account_endpoint_url( $endpoint ) {
 		return masteriyo_get_page_permalink( 'myaccount', get_permalink( $GLOBALS['post'] ) );
 	}
 
-	if ( 'customer-logout' === $endpoint ) {
+	if ( 'user-logout' === $endpoint ) {
 		return masteriyo_logout_url();
 	}
 
@@ -1551,7 +1548,7 @@ function masteriyo_logout_url( $redirect = '' ) {
 	$redirect = $redirect ? $redirect : apply_filters( 'masteriyo_logout_default_redirect_url', masteriyo_get_page_permalink( 'myaccount' ) );
 
 	if ( get_option( 'masteriyo_logout_endpoint' ) ) {
-		return wp_nonce_url( masteriyo_get_endpoint_url( 'customer-logout', '', $redirect ), 'customer-logout' );
+		return wp_nonce_url( masteriyo_get_endpoint_url( 'user-logout', '', $redirect ), 'user-logout' );
 	}
 
 	return wp_logout_url( $redirect );
@@ -1567,12 +1564,12 @@ function masteriyo_logout_url( $redirect = '' ) {
 function masteriyo_get_account_endpoints() {
 	return apply_filters( 'masteriyo_account_endpoints', array(
 		'dashboard' => get_option( 'masteriyo_myaccount_dashboard_endpoint', 'dashboard' ),
-		'my-courses' => get_option( 'masteriyo_myaccount_my_courses_endpoint', 'my-courses' ),
-		'my-grades' => get_option( 'masteriyo_myaccount_my_grades_endpoint', 'my-grades' ),
-		'my-memberships' => get_option( 'masteriyo_myaccount_my_memberships_endpoint', 'my-memberships' ),
-		'my-certificates' => get_option( 'masteriyo_myaccount_my_certificates_endpoint', 'my-certificates' ),
-		'my-order-history' => get_option( 'masteriyo_myaccount_my_order_history_endpoint', 'my-order-history' ),
-		'customer-logout' => get_option( 'masteriyo_logout_endpoint', 'customer-logout' ),
+		'courses' => get_option( 'masteriyo_myaccount_my_courses_endpoint', 'courses' ),
+		'grades' => get_option( 'masteriyo_myaccount_my_grades_endpoint', 'grades' ),
+		'memberships' => get_option( 'masteriyo_myaccount_my_memberships_endpoint', 'memberships' ),
+		'certificates' => get_option( 'masteriyo_myaccount_my_certificates_endpoint', 'certificates' ),
+		'order-history' => get_option( 'masteriyo_myaccount_my_order_history_endpoint', 'order-history' ),
+		'user-logout' => get_option( 'masteriyo_logout_endpoint', 'user-logout' ),
 	) );
 }
 
@@ -1594,7 +1591,7 @@ function masteriyo_get_account_menu_items() {
 					<path d="M9 21h12V3H3v18h6zm10-4v2h-6v-6h6v4zM15 5h4v6h-6V5h2zM5 7V5h6v6H5V7zm0 12v-6h6v6H5z"/>
 				</svg>',
 		),
-		'my-courses' => array(
+		'courses' => array(
 			'label' => __( 'My Courses', 'masteriyo' ),
 			'icon' =>
 				'<svg class="mto-fill-current mto-w-6 mto-h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -1602,14 +1599,14 @@ function masteriyo_get_account_menu_items() {
 					<path d="M8 6h9v2H8z"/>
 				</svg>',
 		),
-		'my-grades' => array(
+		'grades' => array(
 			'label' => __( 'My Grades', 'masteriyo' ),
 			'icon' =>
 				'<svg class="mto-fill-current mto-w-6 mto-h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path d="M22.8 7.6l-9.7-3.2c-.7-.2-1.4-.2-2.2 0L1.2 7.6C.5 7.9 0 8.6 0 9.4s.5 1.5 1.2 1.8l.8.3c-.1.2-.2.4-.2.7-.4.2-.7.6-.7 1.2 0 .4.2.8.5 1L.6 19c-.1.4.2.8.6.8h2.1c.4 0 .7-.4.6-.8l-1-4.6c.3-.2.5-.6.5-1s-.2-.8-.5-1c0-.1.1-.3.2-.4l2.1.7-.5 4.6c0 1.4 3.2 2.6 7.2 2.6s7.2-1.2 7.2-2.6l-.5-4.6 4.1-1.4c.7-.2 1.2-1 1.2-1.8.1-.9-.4-1.6-1.1-1.9zm-5.5 9.2c-2.2 1.4-8.5 1.4-10.7 0l.4-3.6 3.8 1.3c.4.1 1.2.3 2.2 0l3.8-1.3.5 3.6zm-4.8-4.2c-.4.1-.7.1-1.1 0l-5.7-1.9L12 9.4c.3-.1.5-.4.5-.8-.1-.4-.4-.6-.7-.5L4.2 9.7c-.2 0-.4.1-.7.2L2 9.4l9.5-3.1c.4-.1.7-.1 1.1 0L22 9.4l-9.5 3.2z"/>
 				</svg>',
 		),
-		'my-memberships' => array(
+		'memberships' => array(
 			'label' => __( 'My Memberships', 'masteriyo' ),
 			'icon' =>
 				'<svg class="mto-fill-current mto-w-6 mto-h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -1617,7 +1614,7 @@ function masteriyo_get_account_menu_items() {
 					<path d="M19 8h-2v3h-3v2h3v3h2v-3h3v-2h-3zM4 8c0 2.28 1.72 4 4 4s4-1.72 4-4-1.72-4-4-4-4 1.72-4 4zm6 0c0 1.178-.822 2-2 2s-2-.822-2-2 .822-2 2-2 2 .822 2 2zM4 18c0-1.654 1.346-3 3-3h2c1.654 0 3 1.346 3 3v1h2v-1c0-2.757-2.243-5-5-5H7c-2.757 0-5 2.243-5 5v1h2v-1z"/>
 				</svg>',
 		),
-		'my-certificates' => array(
+		'certificates' => array(
 			'label' => __( 'My Certificaties', 'masteriyo' ),
 			'icon' =>
 				'<svg class="mto-fill-current mto-w-6 mto-h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -1625,7 +1622,7 @@ function masteriyo_get_account_menu_items() {
 					<path d="M10.019 15.811l-.468 2.726L12 17.25l2.449 1.287-.468-2.726 1.982-1.932-2.738-.398L12 11l-1.225 2.481-2.738.398z"/>
 				</svg>',
 		),
-		'my-order-history' => array(
+		'order-history' => array(
 			'label' => __( 'My Order History', 'masteriyo' ),
 			'icon' =>
 				'<svg class="mto-fill-current mto-w-6 mto-h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -1633,7 +1630,7 @@ function masteriyo_get_account_menu_items() {
 					<path d="M21.292 8.497a8.957 8.957 0 00-1.928-2.862 9.004 9.004 0 00-4.55-2.452 9.09 9.09 0 00-3.626 0 8.965 8.965 0 00-4.552 2.453 9.048 9.048 0 00-1.928 2.86A8.963 8.963 0 004 12l.001.025H2L5 16l3-3.975H6.001L6 12a6.957 6.957 0 011.195-3.913 7.066 7.066 0 011.891-1.892 7.034 7.034 0 012.503-1.054 7.003 7.003 0 018.269 5.445 7.117 7.117 0 010 2.824 6.936 6.936 0 01-1.054 2.503c-.25.371-.537.72-.854 1.036a7.058 7.058 0 01-2.225 1.501 6.98 6.98 0 01-1.313.408 7.117 7.117 0 01-2.823 0 6.957 6.957 0 01-2.501-1.053 7.066 7.066 0 01-1.037-.855l-1.414 1.414A8.985 8.985 0 0013 21a9.05 9.05 0 003.503-.707 9.009 9.009 0 003.959-3.26A8.968 8.968 0 0022 12a8.928 8.928 0 00-.708-3.503z"/>
 				</svg>',
 		),
-		'customer-logout' => array(
+		'user-logout' => array(
 			'label' => __( 'Logout', 'masteriyo' ),
 			'icon' =>
 				'<svg class="mto-fill-current mto-w-6 mto-h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

@@ -109,6 +109,7 @@ const Content: React.FC<Props> = (props) => {
 				isOpen={isModalOpen}
 				onDeletePress={deleteContent}
 				onClose={onModalClose}
+				title={name}
 			/>
 		</>
 	);

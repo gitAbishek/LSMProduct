@@ -10,6 +10,7 @@ node_modules/
 *.min.css
 *.min.js
 *.babel.*
+*.zip.*
 
 /vendor/
 build/

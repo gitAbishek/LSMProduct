@@ -172,3 +172,7 @@ export const deleteQuestion = (id: number) => {
 		.delete(urls.question.replace(':id', id.toString()))
 		.then((response) => response.data);
 };
+
+export const fetchCategories = () => {
+	return axios.get(urls.categories).then((response) => response.data);
+};

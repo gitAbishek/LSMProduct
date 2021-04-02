@@ -1,4 +1,6 @@
 import { Controller, useForm } from 'react-hook-form';
+import { addCourse, fetchCategories } from '../../utils/api';
+import { useMutation, useQuery } from 'react-query';
 
 import Button from 'Components/common/Button';
 import FormGroup from 'Components/common/FormGroup';
@@ -12,9 +14,7 @@ import React from 'react';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
 import { __ } from '@wordpress/i18n';
-import { addCourse } from '../../utils/api';
 import { useHistory } from 'react-router-dom';
-import { useMutation } from 'react-query';
 
 const AddNewCourse = () => {
 	interface Inputs {
@@ -84,6 +84,9 @@ const AddNewCourse = () => {
 									defaultValue=""
 									render={({ onChange, value }) => (
 										<Select
+											closeMenuOnSelect={false}
+											hideSelectedOptions={false}
+											isMulti
 											onChange={onChange}
 											value={value}
 											options={[

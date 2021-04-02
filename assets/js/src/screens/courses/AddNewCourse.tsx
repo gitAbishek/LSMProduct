@@ -25,6 +25,15 @@ const AddNewCourse = () => {
 	const history = useHistory();
 	const { register, handleSubmit, control } = useForm<Inputs>();
 
+	const categoryQuery = useQuery('categoryLists', () => fetchCategories());
+
+	const categoriesOption = categoryQuery?.data?.map((category: any) => {
+		return {
+			value: category.id,
+			label: category.name,
+		};
+	});
+
 	const addMutation = useMutation((data) => addCourse(data), {
 		onSuccess: (data) => {
 			history.push(`/courses/${data?.id}`);
@@ -85,21 +94,10 @@ const AddNewCourse = () => {
 									render={({ onChange, value }) => (
 										<Select
 											closeMenuOnSelect={false}
-											hideSelectedOptions={false}
 											isMulti
 											onChange={onChange}
 											value={value}
-											options={[
-												{
-													value: 'chocolate',
-													label: __('Chocolate', 'masteriyo'),
-												},
-												{
-													value: 'strawberry',
-													label: __('Strawberry', 'masteriyo'),
-												},
-												{ value: 'vanilla', label: __('Vanilla', 'masteriyo') },
-											]}
+											options={categoriesOption}
 										/>
 									)}
 								/>

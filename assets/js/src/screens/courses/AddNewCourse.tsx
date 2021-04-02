@@ -42,7 +42,7 @@ const AddNewCourse = () => {
 
 	const onSubmit = (data: any) => {
 		console.log(data);
-		// addMutation.mutate(data);
+		addMutation.mutate(data);
 	};
 
 	return (

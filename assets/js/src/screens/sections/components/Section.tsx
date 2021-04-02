@@ -106,9 +106,9 @@ const Section: React.FC<Props> = (props) => {
 				{contentQuery.isLoading ? (
 					<Spinner />
 				) : (
-					contentQuery?.data?.map((content: any, index: number) => (
+					contentQuery?.data?.map((content: any) => (
 						<Content
-							key={index}
+							key={content.id}
 							id={content.id}
 							name={content.name}
 							type={content.type}

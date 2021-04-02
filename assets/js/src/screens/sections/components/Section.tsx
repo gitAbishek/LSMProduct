@@ -16,6 +16,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import AddNewButton from 'Components/common/AddNewButton';
 import { Collapse } from 'react-collapse';
 import Content from './Content';
+import DeleteModal from 'Components/layout/DeleteModal';
 import DragHandle from '../components/DragHandle';
 import { Edit } from '../../../assets/icons';
 import EditSection from './EditSection';
@@ -54,6 +55,14 @@ const Section: React.FC<Props> = (props) => {
 	});
 
 	const onDeletePress = () => {
+		setIsModalOpen(true);
+	};
+
+	const onModalClose = () => {
+		setIsModalOpen(false);
+	};
+
+	const onDeleteConfirm = () => {
 		deleteMutation.mutate(id);
 	};
 
@@ -74,7 +83,7 @@ const Section: React.FC<Props> = (props) => {
 									<Icon className="mto-mr-1" icon={<Edit />} />
 									{__('Edit', 'masteriyo')}
 								</DropdownMenuItem>
-								<DropdownMenuItem onClick={() => onDeletePress()}>
+								<DropdownMenuItem onClick={onDeletePress}>
 									<Icon className="mto-mr-1" icon={<BiTrash />} />
 									{__('Delete', 'masteriyo')}
 								</DropdownMenuItem>
@@ -132,6 +141,12 @@ const Section: React.FC<Props> = (props) => {
 					<AddNewButton>{__('Add New Content', 'masteriyo')}</AddNewButton>
 				</Dropdown>
 			</BoxFooter>
+			<DeleteModal
+				isOpen={isModalOpen}
+				onDeletePress={onDeleteConfirm}
+				onClose={onModalClose}
+				title={name}
+			/>
 		</Box>
 	);
 };

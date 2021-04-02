@@ -11,9 +11,11 @@ interface Props {
 	id: number;
 	name: string;
 	price?: any;
+	categories?: any;
 }
+
 const CourseList: React.FC<Props> = (props) => {
-	const { id, name, price } = props;
+	const { id, name, price, categories } = props;
 	const history = useHistory();
 	const queryClient = useQueryClient();
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,7 +48,15 @@ const CourseList: React.FC<Props> = (props) => {
 				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
 					<Link to={`/builder/${id}`}>{name}</Link>
 				</td>
-				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base"></td>
+				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
+					{categories.map((category: any) => (
+						<span
+							key={category.id}
+							className="mto-bg-primary mto-rounded-full mto-text-white mto-text-sm mto-px-3 mto-py-1 mto-inline-block mto-mr-1">
+							{category.name}
+						</span>
+					))}
+				</td>
 				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
 					{price}
 				</td>

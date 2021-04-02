@@ -57,6 +57,7 @@ const AllCourses = () => {
 									id={course.id}
 									name={course.name}
 									price={course.price}
+									categories={course.categories}
 									key={course.id}
 								/>
 							))}

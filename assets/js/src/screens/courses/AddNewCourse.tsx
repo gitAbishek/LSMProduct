@@ -41,8 +41,17 @@ const AddNewCourse = () => {
 	});
 
 	const onSubmit = (data: any) => {
-		console.log(data);
-		addMutation.mutate(data);
+		const categories = data.categories.map((category: any) => ({
+			id: category.value,
+		}));
+
+		const newData: any = {
+			name: data.name,
+			description: data.description,
+			categories: categories,
+		};
+
+		addMutation.mutate(newData);
 	};
 
 	return (

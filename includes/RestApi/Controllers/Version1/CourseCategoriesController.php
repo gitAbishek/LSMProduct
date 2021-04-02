@@ -267,7 +267,7 @@ class CourseCategoriesController extends RestTermsController {
 	/**
 	 * Get objects.
 	 *
-	 * @since  3.0.0
+	 * @since  0.1.0
 	 * @param  array $query_args Query args.
 	 * @return array
 	 */

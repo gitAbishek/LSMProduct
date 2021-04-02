@@ -49,6 +49,8 @@ abstract class RestTermsController extends CrudController {
 
 	/**
 	 * Register the routes for terms.
+	 *
+	 * @since 0.1.0
 	 */
 	public function register_routes() {
 		register_rest_route(
@@ -231,6 +233,8 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Check if a given request has access to delete a term.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
@@ -270,6 +274,8 @@ abstract class RestTermsController extends CrudController {
 
 	/**
 	 * Check permissions.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @param string          $context Request context.
@@ -381,6 +387,8 @@ abstract class RestTermsController extends CrudController {
 	 * Determine the allowed query_vars for a get_items() response and
 	 * prepare for WP_Query.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param array           $prepared_args Prepared arguments.
 	 * @param WP_REST_Request $request Request object.
 	 * @return array          $query_args
@@ -392,7 +400,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Get objects.
 	 *
-	 * @since  3.0.0
+	 * @since  0.1.0
 	 * @param  array $query_args Query args.
 	 * @return array
 	 */
@@ -421,6 +429,8 @@ abstract class RestTermsController extends CrudController {
 	 *
 	 * Uses `$this->sort_column` to determine field to sort by.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param stdClass $left Term object.
 	 * @param stdClass $right Term object.
 	 * @return int <0 if left is higher "priority" than right, 0 if equal, >0 if right is higher "priority" than left.
@@ -439,6 +449,8 @@ abstract class RestTermsController extends CrudController {
 
 	/**
 	 * Get the query params for collections
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return array
 	 */
@@ -525,7 +537,7 @@ abstract class RestTermsController extends CrudController {
 			'description'       => __( 'Limit result set to resources assigned to a specific course.', 'masteriyo' ),
 			'type'              => 'integer',
 			'default'           => null,
-			'validate_callback' => 'rest_validate_request_arg',
+			'validate_callback' => array( $this, 'validate_course' ),
 		);
 		$params['slug']   = array(
 			'description'       => __( 'Limit result set to resources with a specific slug.', 'masteriyo' ),
@@ -539,6 +551,8 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Get taxonomy.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return int|WP_Error
 	 */
@@ -546,4 +560,26 @@ abstract class RestTermsController extends CrudController {
 		return $this->taxonomy;
 	}
 
+	/**
+	 * Validate course id.
+	 *
+	 * @since 0.1.0.
+	 *
+	 * @param int $course_id Course Id.
+	 * @return boolean|WP_Error
+	 */
+	public function validate_course( $course_id ) {
+		if ( ! is_numeric( $course_id ) ) {
+			return new \WP_Error( 'rest_invalid_type', 'course is not of type integer' );
+		}
+
+		$course_id = absint( $course_id );
+		$course    = get_post( $course_id );
+
+		if ( is_null( $course ) || 'course' !== $course->post_type ) {
+			return new \WP_Error('rest_invalid_course', 'invalid course id');
+		}
+
+		return true;
+	}
 }

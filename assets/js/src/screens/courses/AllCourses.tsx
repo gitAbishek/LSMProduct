@@ -2,7 +2,7 @@ import { Edit, Trash } from '../../assets/icons';
 import { Link, useHistory } from 'react-router-dom';
 import React, { Fragment, useState } from 'react';
 import { deleteCourse, fetchCourses } from '../../utils/api';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import Button from 'Components/common/Button';
 import Icon from 'Components/common/Icon';
@@ -16,15 +16,16 @@ import Spinner from 'Components/common/Spinner';
 import { __ } from '@wordpress/i18n';
 
 const AllCourses = () => {
-	const courseQuery = useQuery('courseData', fetchCourses);
+	const courseQuery = useQuery('courseList', fetchCourses);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [removableCourse, setRemovableCourse] = useState(Object);
+	const queryClient = useQueryClient();
 
 	const history = useHistory();
 
 	const deleteMutation = useMutation((courseId) => deleteCourse(courseId), {
 		onSuccess: () => {
-			refectCourses();
+			queryClient.invalidateQueries('courseList');
 		},
 	});
 

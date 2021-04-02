@@ -61,9 +61,9 @@ export const fetchContents = (sectionId: number) => {
 		.then((response) => response.data);
 };
 
-export const deleteCourse = (courseId: any) => {
+export const deleteCourse = (id: any) => {
 	return axios
-		.delete(urls.course.replace(':id', courseId.toString()))
+		.delete(urls.course.replace(':id', id.toString()))
 		.then((response) => response.data);
 };
 

@@ -6,7 +6,7 @@ import colors from 'Config/colors';
 
 interface Props extends ReactSelectProps {}
 
-const Select: React.FC<Props> = (props) => {
+const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 	const customStyles = {
 		control: (provided: any, state: any) => ({
 			...provided,
@@ -57,6 +57,6 @@ const Select: React.FC<Props> = (props) => {
 	};
 
 	return <ReactSelect {...props} styles={customStyles} />;
-};
+});
 
 export default Select;

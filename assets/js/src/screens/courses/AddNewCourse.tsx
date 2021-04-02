@@ -1,3 +1,7 @@
+import { Controller, useForm } from 'react-hook-form';
+import { addCourse, fetchCategories } from '../../utils/api';
+import { useMutation, useQuery } from 'react-query';
+
 import Button from 'Components/common/Button';
 import FormGroup from 'Components/common/FormGroup';
 import ImageUpload from 'Components/common/ImageUpload';
@@ -10,10 +14,7 @@ import React from 'react';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
 import { __ } from '@wordpress/i18n';
-import { addCourse } from '../../utils/api';
-import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { useMutation } from 'react-query';
 
 const AddNewCourse = () => {
 	interface Inputs {
@@ -22,7 +23,16 @@ const AddNewCourse = () => {
 		categories?: any;
 	}
 	const history = useHistory();
-	const { register, handleSubmit } = useForm<Inputs>();
+	const { register, handleSubmit, control } = useForm<Inputs>();
+
+	const categoryQuery = useQuery('categoryLists', () => fetchCategories());
+
+	const categoriesOption = categoryQuery?.data?.map((category: any) => {
+		return {
+			value: category.id,
+			label: category.name,
+		};
+	});
 
 	const addMutation = useMutation((data) => addCourse(data), {
 		onSuccess: (data) => {
@@ -31,7 +41,17 @@ const AddNewCourse = () => {
 	});
 
 	const onSubmit = (data: any) => {
-		addMutation.mutate(data);
+		const categories = data.categories.map((category: any) => ({
+			id: category.value,
+		}));
+
+		const newData: any = {
+			name: data.name,
+			description: data.description,
+			categories: categories,
+		};
+
+		addMutation.mutate(newData);
 	};
 
 	return (
@@ -76,24 +96,28 @@ const AddNewCourse = () => {
 						<div className="mto-w-1/2 mto-px-4">
 							<FormGroup>
 								<Label>{__('Course Category', 'masteriyo')}</Label>
-								<Select
-									options={[
-										{ value: 'chocolate', label: __('Chocolate', 'masteriyo') },
-										{
-											value: 'strawberry',
-											label: __('Strawberry', 'masteriyo'),
-										},
-										{ value: 'vanilla', label: __('Vanilla', 'masteriyo') },
-									]}
+								<Controller
+									control={control}
+									name="categories"
+									defaultValue=""
+									render={({ onChange, value }) => (
+										<Select
+											closeMenuOnSelect={false}
+											isMulti
+											onChange={onChange}
+											value={value}
+											options={categoriesOption}
+										/>
+									)}
 								/>
 							</FormGroup>
 
 							<FormGroup>
 								<Label>{__('Featured Image', 'masteriyo')}</Label>
-								<ImageUpload
+								{/* <ImageUpload
 									className="mto-mb-8"
 									title={__('Drag image or click to upload', 'masteriyo')}
-								/>
+								/> */}
 								<div className="mto-flex mto-justify-between">
 									<Button>{__('Remove Featured Image', 'masteriyo')}</Button>
 									<Button layout="primary">{__('Add New', 'masteriyo')}</Button>

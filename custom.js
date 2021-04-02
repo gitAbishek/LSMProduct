@@ -196,8 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
 						e.preventDefault();
 						this.parentElement.classList.add('focus');
 					}
-
-					console.log('clicked');
 				});
 			});
 		}

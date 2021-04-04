@@ -537,6 +537,10 @@ function masteriyo_locate_template( $template_name, $template_path = '', $defaul
 function masteriyo_get_page_id( $page ) {
 	$setting = masteriyo( 'setting' );
 
+	if( is_null( $setting ) ) {
+		return -1;
+	}
+
 	$setting->set_name( 'masteriyo_' . $page . '_page_id' );
 
 	masteriyo( 'setting.store' )->read( $setting );

@@ -25,4 +25,15 @@ add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sideb
 add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_lectures', 60 );
 add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_difficulty', 70 );
 
+/**
+ * My account page.
+ */
+add_action( 'masteriyo_myaccount_sidebar_content', 'masteriyo_myaccount_sidebar_content' );
+add_action( 'masteriyo_myaccount_main_content', 'masteriyo_myaccount_main_content' );
+add_action( 'masteriyo_account_edit-profile_endpoint', 'masteriyo_account_edit_profile_endpoint' );
+add_action( 'masteriyo_account_courses_endpoint', 'masteriyo_account_courses_endpoint' );
+add_action( 'masteriyo_account_grades_endpoint', 'masteriyo_account_grades_endpoint' );
+add_action( 'masteriyo_account_memberships_endpoint', 'masteriyo_account_memberships_endpoint' );
+add_action( 'masteriyo_account_certificates_endpoint', 'masteriyo_account_certificates_endpoint' );
+add_action( 'masteriyo_account_order-history_endpoint', 'masteriyo_account_order_history_endpoint' );
 

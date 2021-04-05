@@ -442,3 +442,109 @@ if( ! function_exists( 'masteriyo_template_sidebar_row_difficulty' ) ) {
 	}
 }
 
+if( ! function_exists( 'masteriyo_myaccount_sidebar_content' ) ) {
+	/**
+	 * Show sidebar on myaccount page.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_myaccount_sidebar_content() {
+		$data = array(
+			'menu_items'       => masteriyo_get_account_menu_items(),
+			'user'             => masteriyo_get_current_user(),
+			'current_endpoint' => masteriyo_get_current_myaccount_endpoint(),
+		);
+
+		masteriyo_get_template( 'profile/sidebar-content.php', $data );
+	}
+}
+
+if( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
+	/**
+	 * Show sidebar on myaccount page.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_account_courses_endpoint() {
+		masteriyo_get_template( 'profile/tab-content-courses.php' );
+	}
+}
+
+if( ! function_exists( 'masteriyo_account_edit_profile_endpoint' ) ) {
+	/**
+	 * Show sidebar on myaccount page.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_account_edit_profile_endpoint() {
+		$data = array(
+			'user' => masteriyo_get_current_user(),
+		);
+
+		masteriyo_get_template( 'profile/tab-content-edit-profile.php', $data );
+	}
+}
+
+if( ! function_exists( 'masteriyo_account_grades_endpoint' ) ) {
+	/**
+	 * Show sidebar on myaccount page.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_account_grades_endpoint() {
+		masteriyo_get_template( 'profile/tab-content-grades.php' );
+	}
+}
+
+if( ! function_exists( 'masteriyo_account_memberships_endpoint' ) ) {
+	/**
+	 * Show sidebar on myaccount page.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_account_memberships_endpoint() {
+		masteriyo_get_template( 'profile/tab-content-memberships.php' );
+	}
+}
+
+if( ! function_exists( 'masteriyo_account_certificates_endpoint' ) ) {
+	/**
+	 * Show sidebar on myaccount page.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_account_certificates_endpoint() {
+		masteriyo_get_template( 'profile/tab-content-certificates.php' );
+	}
+}
+
+if( ! function_exists( 'masteriyo_account_order_history_endpoint' ) ) {
+	/**
+	 * Show sidebar on myaccount page.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_account_order_history_endpoint() {
+		masteriyo_get_template( 'profile/tab-content-order-history.php' );
+	}
+}
+
+if( ! function_exists( 'masteriyo_myaccount_main_content' ) ) {
+	/**
+	 * Show sidebar on myaccount page.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_myaccount_main_content() {
+		$current_endpoint = masteriyo_get_current_myaccount_endpoint();
+
+		if ( has_action( 'masteriyo_account_' . $current_endpoint . '_endpoint' ) ) {
+			do_action( 'masteriyo_account_' . $current_endpoint . '_endpoint', $current_endpoint );
+			return;
+		}
+
+		// No endpoint found? Default to dashboard.
+		masteriyo_get_template( 'profile/tab-content-dashboard.php' );
+	}
+}
+

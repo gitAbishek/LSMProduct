@@ -7,8 +7,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$user = masteriyo_get_current_user_data();
-
 /**
  * masteriyo_before_edit_profile_tab_content hook.
  */

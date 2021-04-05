@@ -105,30 +105,13 @@ class Query {
 	 */
 	public function init_query_vars() {
 		// Query vars to add to WP.
-		$this->query_vars = array(
-			// Checkout actions.
-			'order-pay'                  => get_option( 'masteriyo_checkout_pay_endpoint', 'order-pay' ),
-			'order-received'             => get_option( 'masteriyo_checkout_order_received_endpoint', 'order-received' ),
-			// My account actions.
-			'orders'                     => get_option( 'masteriyo_myaccount_orders_endpoint', 'orders' ),
-			'view-order'                 => get_option( 'masteriyo_myaccount_view_order_endpoint', 'view-order' ),
-			'edit-account'               => get_option( 'masteriyo_myaccount_edit_account_endpoint', 'edit-account' ),
-			'edit-address'               => get_option( 'masteriyo_myaccount_edit_address_endpoint', 'edit-address' ),
-			'payment-methods'            => get_option( 'masteriyo_myaccount_payment_methods_endpoint', 'payment-methods' ),
-			'lost-password'              => get_option( 'masteriyo_myaccount_lost_password_endpoint', 'lost-password' ),
-			'user-logout'                => get_option( 'masteriyo_logout_endpoint', 'user-logout' ),
-			'add-payment-method'         => get_option( 'masteriyo_myaccount_add_payment_method_endpoint', 'add-payment-method' ),
-			'delete-payment-method'      => get_option( 'masteriyo_myaccount_delete_payment_method_endpoint', 'delete-payment-method' ),
-			'set-default-payment-method' => get_option( 'masteriyo_myaccount_set_default_payment_method_endpoint', 'set-default-payment-method' ),
-			'edit-profile'               => get_option( 'masteriyo_myaccount_edit-profile_endpoint', 'edit-profile' ),
-			'dashboard'                  => get_option( 'masteriyo_myaccount_dashboard_endpoint', 'dashboard' ),
-			'courses'                    => get_option( 'masteriyo_myaccount_courses_endpoint', 'courses' ),
-			'grades'                     => get_option( 'masteriyo_myaccount_grades_endpoint', 'grades' ),
-			'memberships'                => get_option( 'masteriyo_myaccount_memberships_endpoint', 'memberships' ),
-			'certificates'               => get_option( 'masteriyo_myaccount_certificates_endpoint', 'certificates' ),
-			'order-history'              => get_option( 'masteriyo_myaccount_order-history_endpoint', 'order-history' ),
-			'reset-password'             => get_option( 'masteriyo_myaccount_reset-password_endpoint', 'reset-password' ),
-			'signup'                     => get_option( 'masteriyo_myaccount_signup_endpoint', 'signup' ),
+		$this->query_vars = array_merge(
+			array(
+				// Checkout actions.
+				'order-pay'                  => get_option( 'masteriyo_checkout_pay_endpoint', 'order-pay' ),
+				'order-received'             => get_option( 'masteriyo_checkout_order_received_endpoint', 'order-received' ),
+			),
+			masteriyo_get_endpoint_slugs()
 		);
 	}
 

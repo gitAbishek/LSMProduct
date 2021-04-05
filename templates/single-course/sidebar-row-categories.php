@@ -7,7 +7,6 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-global $course;
 ?>
 
 <div class="mto-py-4 mto-border-b mto-border-gray-200">

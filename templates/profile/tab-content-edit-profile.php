@@ -38,6 +38,12 @@ do_action( 'masteriyo_before_edit_profile_tab_content' );
 
 		<form id="mto-edit-profile-form">
 			<div class="mto-space-y-6 md:mto-space-y-8">
+				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0">
+					<div class="mto-flex-grow">
+						<label for="user-email" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Username</label>
+						<input value="<?php echo $user->get_display_name(); ?>" id="username" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+					</div>
+				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0 md:mto-space-x-8">
 					<div class="mto-flex-grow">
 						<label for="user-first-name" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">First Name</label>
@@ -52,7 +58,7 @@ do_action( 'masteriyo_before_edit_profile_tab_content' );
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0">
 					<div class="mto-flex-grow">
 						<label for="user-email" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Email</label>
-						<input value="<?php echo $user->get_email(); ?>" id="user-email" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						<input value="<?php echo $user->get_email(); ?>" id="user-email" name="text" type="email" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0">

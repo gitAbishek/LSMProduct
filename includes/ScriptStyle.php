@@ -474,10 +474,12 @@ class ScriptStyle {
 			'myaccount' => array(
 				'name' => 'masteriyo_data',
 				'data' => array(
-					'urls' => array(
-						'users' => masteriyo( 'user.rest' )->get_api_urls(),
+					'rootApiUrl' => esc_url_raw( rest_url() ),
+					'current_user_id' => get_current_user_id(),
+					'nonce' => wp_create_nonce( 'wp_rest' ),
+					'labels' => array(
+						'profile_update_success' => __( 'Your profile was updated successfully', 'masteriyo' ),
 					),
-					'nonce' => wp_create_nonce( 'wp_rest' )
 				),
 			),
 			'login-form' => array(

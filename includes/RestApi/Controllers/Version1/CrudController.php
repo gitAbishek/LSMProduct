@@ -584,22 +584,6 @@ abstract class CrudController extends RestController {
 	}
 
 	/**
-	 * Get api endpoint urls for this controller.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return array[string]
-	 */
-	public function get_api_urls() {
-		return array(
-			'get_item' => rest_url( "/{$this->namespace}/{$this->rest_base}/:id" ),
-			'get_items' => rest_url( "/{$this->namespace}/{$this->rest_base}" ),
-			'update_item' => rest_url( "/{$this->namespace}/{$this->rest_base}/:id" ),
-			'delete_item' => rest_url( "/{$this->namespace}/{$this->rest_base}/:id" ),
-		);
-	}
-
-	/**
 	 * Get the query params for collections of attachments.
 	 *
 	 * @return array

@@ -2,25 +2,7 @@
  * global masteriyo_data
  */
 (function( $, mto_data ) {
-	/**
-	 * API Urls.
-	 */
-	const urls = {
-		...mto_data.urls,
-		get: function( api_name, endpoint, params = {} ) {
-			if ( mto_data.urls[api_name][endpoint] ) {
-				let url = mto_data.urls[api_name][endpoint];
-
-				if ( typeof params === 'object' ) {
-					Object.entries(params).forEach(([key, value]) => {
-						url = url.replace( `:${key}`, value );
-					});
-				}
-				return url;
-			}
-			return '';
-		},
-	};
+	let isSaving = false;
 
 	/**
 	 * Tabs handler.
@@ -38,7 +20,12 @@
 	$( document.body ).on( 'submit', 'form#mto-edit-profile-form', function(e) {
 		e.preventDefault();
 
+		if ( isSaving ) return;
+
+		isSaving = true;
+
 		const userData = {
+			display_name: $('#mto-edit-profile-form #username').val().trim(),
 			first_name: $('#mto-edit-profile-form #user-first-name').val(),
 			last_name: $('#mto-edit-profile-form #user-last-name').val(),
 			user_email: $('#mto-edit-profile-form #user-email').val(),
@@ -49,11 +36,12 @@
 			country: $('#mto-edit-profile-form #user-country').val(),
 		};
 
+		// Show saving process indicator.
 		$('#mto-btn-submit-edit-profile-form')
 		.text('Saving...')
-		.siblings('.mto-notify-message').first().remove();
+		.siblings('.mto-notify-message').remove();
 
-		fetch( urls.get( 'users', 'update_item', { id: 1 }), {
+		fetch( `${mto_data.rootApiUrl}masteriyo/v1/users/${mto_data.current_user_id}`, {
 			method: 'post',
 			headers: new Headers({
 				'Content-Type': 'application/json',
@@ -61,12 +49,35 @@
 			}),
 			body: JSON.stringify(userData),
 		})
-		.finally( () => {
+		.then(async res => {
+			if ( ! res.ok ) {
+				throw (await res.json()).message;
+			}
+			res = await res.json();
+
+			// Update username on the sidebar.
+			$('#label-username').text( res.display_name );
+
+			// Show success message.
 			$('#mto-btn-submit-edit-profile-form')
-			.text('Save')
-			.after(`<div class="mto-notify-message"><span>Successfully updated user profile.</span></div>`)
+			.after(`<div class="mto-notify-message mto-success-msg"><span>${mto_data.labels.profile_update_success}</span></div>`);
+		})
+		.catch(reason => {
+			// Show failure message.
+			$('#mto-btn-submit-edit-profile-form')
+			.after(`<div class="mto-notify-message mto-warning-msg mto-text-red-700 mto-bg-red-100 mto-border-red-300"><span>${reason}</span></div>`);
+		})
+		.finally(() => {
+			isSaving = false;
+
+			// Remove saving process indicator.
+			$('#mto-btn-submit-edit-profile-form').text('Save');
 		});
 	});
+
+	/**
+	 * Mobile view sidebar menu toggler.
+	 */
 	$('.menu-open').click(function(){
 		$('#vertical-menu').removeClass('mto--ml-9999');
 	});

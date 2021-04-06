@@ -10,7 +10,7 @@ namespace ThemeGrill\Masteriyo;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Session\SessionHandler;
+use ThemeGrill\Masteriyo\Session\Session;
 
 /**
  * Notice class.
@@ -59,9 +59,10 @@ class Notice {
 	 * @since 0.1.0
 	 *
 	 * @var ThemeGrill\Masteriyo\Session\Session
-*/
+	 */
 	private $session;
-	public function __construct( SessionHandler $session ) {
+
+	public function __construct( Session $session ) {
 		$this->session = $session;
 	}
 	/**

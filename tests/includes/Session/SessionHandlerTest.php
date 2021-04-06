@@ -5,20 +5,20 @@
  * @package ThemeGrill\Masteriyo
  */
 
-use ThemeGrill\Masteriyo\Session\SessionHandler;
+use ThemeGrill\Masteriyo\Session\Session;
 use ThemeGrill\Masteriyo\Repository\SessionRepository;
 
 /**
- * SessionHandler test class.
+ * Session test class.
  */
-class SessionHandlerTest extends WP_UnitTestCase {
+class SessionTest extends WP_UnitTestCase {
 
 	/**
 	 * Session instance.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Session\SessionHandler
+	 * @var ThemeGrill\Masteriyo\Session\Session
 	 */
 	private $session_handler;
 
@@ -30,7 +30,7 @@ class SessionHandlerTest extends WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
 		\WP_Mock::setUp();
-		$this->session_handler = new SessionHandler( new SessionRepository() );
+		$this->session_handler = new Session( new SessionRepository() );
 	}
 
 	/**
@@ -52,7 +52,7 @@ class SessionHandlerTest extends WP_UnitTestCase {
 	 */
 	public function test_start() {
 		// Test actions are added.
-		$mock_session_handler = $this->getMockBuilder( SessionHandler::class )
+		$mock_session_handler = $this->getMockBuilder( Session::class )
 			->setConstructorArgs( [ new SessionRepository ] )
 			->setMethods( ['init_session_cookie'] )->getMock();
 		$mock_session_handler->method( 'init_session_cookie' )->willReturn( true );
@@ -113,7 +113,7 @@ class SessionHandlerTest extends WP_UnitTestCase {
 	 */
 	public function test_init_session_cookie() {
 		// Return true, when there is cookie is set.
-		$mock_session_handler = $this->getMockBuilder( SessionHandler::class )
+		$mock_session_handler = $this->getMockBuilder( Session::class )
 			->setConstructorArgs( [ new SessionRepository ] )
 			->setMethods( ['get_session_cookie'] )->getMock();
 		$mock_session_handler->method( 'get_session_cookie' )->willReturn( false );
@@ -130,7 +130,7 @@ class SessionHandlerTest extends WP_UnitTestCase {
 	 */
 	public function test_is_started() {
 		// Return true, when there is cookie is set.
-		$mock_session_handler = $this->getMockBuilder( SessionHandler::class )
+		$mock_session_handler = $this->getMockBuilder( Session::class )
 			->setConstructorArgs( [ new SessionRepository ] )
 			->setMethods( ['has_cookie'] )->getMock();
 		$mock_session_handler->method( 'has_cookie' )->willReturn( true );
@@ -148,7 +148,7 @@ class SessionHandlerTest extends WP_UnitTestCase {
 			'times' => 1,
 			'return' => false,
 		) );
-		$mock_session_handler = $this->getMockBuilder( SessionHandler::class )
+		$mock_session_handler = $this->getMockBuilder( Session::class )
 			->setConstructorArgs( [ new SessionRepository ] )
 			->setMethods( ['has_cookie'] )->getMock();
 		$mock_session_handler->method( 'has_cookie' )->willReturn( false );

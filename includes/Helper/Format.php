@@ -447,3 +447,13 @@ function masteriyo_sanitize_permalink( $value ) {
 function masteriyo_strtolower( $string ) {
 	return function_exists( 'mb_strtolower' ) ? mb_strtolower( $string ) : strtolower( $string );
 }
+
+/**
+ * Formats a stock amount by running it through a filter.
+ *
+ * @param  int|float $amount Stock amount.
+ * @return int|float
+ */
+function masteriyo_stock_amount( $amount ) {
+	return apply_filters( 'masteriyo_stock_amount', $amount );
+}

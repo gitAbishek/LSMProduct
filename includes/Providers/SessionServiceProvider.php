@@ -8,7 +8,7 @@ namespace ThemeGrill\Masteriyo\Providers;
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Session\SessionHandler;
+use ThemeGrill\Masteriyo\Session\Session;
 use ThemeGrill\Masteriyo\Repository\SessionRepository;
 
 
@@ -27,7 +27,7 @@ class SessionServiceProvider extends AbstractServiceProvider {
 	protected $provides = array(
 		'session',
 		'session.store',
-		'\ThemeGrill\Masteriyo\Session\SessionHandler',
+		'\ThemeGrill\Masteriyo\Session\Session',
 		'\ThemeGrill\Masteriyo\Repository\SessionRepository',
 	);
 

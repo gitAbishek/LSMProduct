@@ -30,7 +30,7 @@ function masteriyo_get_course( $course ) {
 	} elseif ( is_a( $course, 'WP_Post' ) ) {
 		$id = $course->ID;
 	} else {
-		$id = $course;
+		$id = absint( $course );
 	}
 
 	try {
@@ -534,17 +534,6 @@ function masteriyo_get_page_permalink( $page, $fallback = null ) {
 	}
 
 	return apply_filters( 'masteriyo_get_' . $page . '_page_permalink', $permalink );
-}
-
-/**
- * Check if the current page is a single course page.
- *
- * @since 0.1.0
- *
- * @return boolean
- */
-function masteriyo_is_single_course_page() {
-	return is_singular( 'course' );
 }
 
 /**
@@ -1321,7 +1310,7 @@ function masteriyo_get_permalink_structure( $id = '' ) {
 }
 
 /**
- * Switch WooCommerce to site language.
+ * Switch Masteriyo to site language.
  *
  * @since 0.1.0
  */
@@ -1338,7 +1327,7 @@ function masteriyo_switch_to_site_locale() {
 }
 
 /**
- * Switch WooCommerce language to original.
+ * Switch Masteriyo language to original.
  *
  * @since 0.1.0
  */
@@ -1355,30 +1344,76 @@ function masteriyo_restore_locale() {
 }
 
 /**
- * Is masteriyo admin page.
+ * Define a constant if it is not already defined.
+ *
+ * @since 0.1.0
+ * @param string $name  Constant name.
+ * @param mixed  $value Value.
+ */
+function masteriyo_maybe_define_constant( $name, $value ) {
+	if ( ! defined( $name ) ) {
+		define( $name, $value );
+	}
+}
+
+
+/**
+ * Wrapper for nocache_headers which also disables page caching.
+ *
+ * @since 0.1.0
+ */
+function masteriyo_nocache_headers() {
+	masteriyo_set_nocache_constants();
+	nocache_headers();
+}
+
+
+/**
+ * Set constants to prevent caching by some plugins.
  *
  * @since 0.1.0
  *
- * @return bool
+ * @param  mixed $return Value to return. Previously hooked into a filter.
+ * @return mixed
  */
-function masteriyo_is_admin_page() {
-	if ( ! is_admin() ) {
-		return false;
-	}
-
-	$screen = get_current_screen();
-	return 'toplevel_page_masteriyo' === $screen->id ? true : false;
+function masteriyo_set_nocache_constants( $return = true ) {
+	masteriyo_maybe_define_constant( 'DONOTCACHEPAGE', true );
+	masteriyo_maybe_define_constant( 'DONOTCACHEOBJECT', true );
+	masteriyo_maybe_define_constant( 'DONOTCACHEDB', true );
+	return $return;
 }
 
 /**
- * Is masteriyo in debug enabled.
+ * Gets the url to the cart page.
  *
- * @since 0.1.0
+ * @since  0.1.0
  *
- * @return bool
+ * @return string Url to cart page
  */
-function masteriyo_is_debug_enabled() {
-	return (bool) Constants::get( 'MASTERIYO_DEBUG' );
+function masteriyo_get_cart_url() {
+	return apply_filters( 'masteriyo_get_cart_url', masteriyo_get_page_permalink( 'cart' ) );
+}
+
+/**
+ * Gets the url to the checkout page.
+ *
+ * @since  0.1.0
+ *
+ * @return string Url to checkout page
+ */
+function masteriyo_get_checkout_url() {
+	return apply_filters( 'masteriyo_get_checkout_url', masteriyo_get_page_permalink( 'checkout' ) );
+}
+
+/**
+ * Gets the url to the course list page.
+ *
+ * @since  0.1.0
+ *
+ * @return string Url to course list page
+ */
+function masteriyo_get_course_list_url() {
+	return apply_filters( 'masteriyo_get_course_list_url', masteriyo_get_page_permalink( 'course_list' ) );
 }
 
 /**
@@ -1945,27 +1980,6 @@ function masteriyo_get_course_review( $course_review ) {
 	}
 
 	return apply_filters( 'masteriyo_get_course_review', $course_review_obj, $course_review );
-}
-
-/**
- * Set constants to prevent caching by some plugins.
- *
- * @since 0.1.0
- */
-function masteriyo_set_nocache_constants() {
-	Constants::set( 'DONOTCACHEPAGE', true );
-	Constants::set( 'DONOTCACHEOBJECT', true );
-	Constants::set( 'DONOTCACHEDB', true );
-}
-
-/**
- * Wrapper for nocache_headers which also disables page caching.
- *
- * @since 0.1.0
- */
-function masteriyo_nocache_headers() {
-	masteriyo_set_nocache_constants();
-	nocache_headers();
 }
 
 /**

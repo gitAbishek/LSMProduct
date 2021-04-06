@@ -97,38 +97,41 @@ class ScriptStyle {
 	 * @return array
 	 */
 	private function init_scripts() {
-		$this->scripts = apply_filters( 'masteriyo_enqueue_scripts', array(
-			'admin' => array(
-				'src'      => $this->get_asset_url( '/assets/js/build/app.js' ),
-				'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
-				'context'  => 'admin',
-				'callback' => 'masteriyo_is_admin_page'
-			),
-			'public' => array(
-				'src'     => $this->get_asset_url( '/assets/js/build/public.js' ),
-				'deps'    => array( 'wp-polyfill' ),
-				'context' => 'public',
-			),
-			'single-course' => array(
-				'src'      => $this->get_asset_url( '/assets/js/single-course.js' ),
-				'context'  => 'public',
-				'callback' => 'masteriyo_is_single_course_page'
-			),
-			'edit-myaccount' => array(
-				'src'      => $this->get_asset_url( '/assets/js/edit-myaccount.js' ),
-				'deps'     => array( 'jquery' ),
-				'version'  => $this->get_version(),
-				'context'  => 'public',
-				'callback' => 'masteriyo_is_edit_myaccount_page',
-			),
-			'login-form' => array(
-				'src'      => $this->get_asset_url( '/assets/js/login-form.js' ),
-				'deps'     => array( 'jquery' ),
-				'version'  => $this->get_version(),
-				'context'  => 'public',
-				'callback' => 'masteriyo_is_load_login_form_assets',
-			),
-		) );
+		$this->scripts = apply_filters(
+			'masteriyo_enqueue_scripts',
+			array(
+				'admin'          => array(
+					'src'      => $this->get_asset_url( '/assets/js/build/app.js' ),
+					'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
+					'context'  => 'admin',
+					'callback' => 'masteriyo_is_admin_page',
+				),
+				'public'         => array(
+					'src'     => $this->get_asset_url( '/assets/js/build/public.js' ),
+					'deps'    => array( 'wp-polyfill' ),
+					'context' => 'public',
+				),
+				'single-course'  => array(
+					'src'      => $this->get_asset_url( '/assets/js/single-course.js' ),
+					'context'  => 'public',
+					'callback' => 'masteriyo_is_single_course_page',
+				),
+				'edit-myaccount' => array(
+					'src'      => $this->get_asset_url( '/assets/js/edit-myaccount.js' ),
+					'deps'     => array( 'jquery' ),
+					'version'  => $this->get_version(),
+					'context'  => 'public',
+					'callback' => 'masteriyo_is_edit_myaccount_page',
+				),
+				'login-form'     => array(
+					'src'      => $this->get_asset_url( '/assets/js/login-form.js' ),
+					'deps'     => array( 'jquery' ),
+					'version'  => $this->get_version(),
+					'context'  => 'public',
+					'callback' => 'masteriyo_is_load_login_form_assets',
+				),
+			)
+		);
 	}
 
 
@@ -140,19 +143,22 @@ class ScriptStyle {
 	 * @return array
 	 */
 	private function init_styles() {
-		$this->styles = apply_filters( 'masteriyo_enqueue_styles', array(
-			'admin' => array(
-				'src'      => $this->get_asset_url( '/assets/js/build/app.css' ),
-				'has_rtl'  => true,
-				'context'  => 'admin',
-				'callback' => 'masteriyo_is_admin_page'
-			),
-			'public' => array(
-				'src'     => $this->get_asset_url( '/assets/css/public.css' ),
-				'has_rtl' => true,
-				'context' => 'public'
-			),
-		) );
+		$this->styles = apply_filters(
+			'masteriyo_enqueue_styles',
+			array(
+				'admin'  => array(
+					'src'      => $this->get_asset_url( '/assets/js/build/app.css' ),
+					'has_rtl'  => true,
+					'context'  => 'admin',
+					'callback' => 'masteriyo_is_admin_page',
+				),
+				'public' => array(
+					'src'     => $this->get_asset_url( '/assets/css/public.css' ),
+					'has_rtl' => true,
+					'context' => 'public',
+				),
+			)
+		);
 	}
 
 	/**
@@ -166,14 +172,20 @@ class ScriptStyle {
 	 */
 	public function get_styles( $context ) {
 		// Set default values.
-		$styles = array_map( function( $style ) {
-			return array_replace_recursive( $this->get_default_style_options(), $style );
-		}, $this->styles );
+		$styles = array_map(
+			function( $style ) {
+				return array_replace_recursive( $this->get_default_style_options(), $style );
+			},
+			$this->styles
+		);
 
 		// Filter according to admin or public context.
-		$styles = array_filter( $styles, function( $style )  use( $context ) {
-			return $style['context'] === $context;
-		} );
+		$styles = array_filter(
+			$styles,
+			function( $style ) use ( $context ) {
+				return $style['context'] === $context;
+			}
+		);
 
 		return $styles;
 	}
@@ -187,16 +199,22 @@ class ScriptStyle {
 	 *
 	 * @return array
 	 */
-	public function get_scripts( $context) {
+	public function get_scripts( $context ) {
 		// Set default values.
-		$scripts = array_map( function( $script ) {
-			return array_replace_recursive( $this->get_default_script_options(), $script );
-		}, $this->scripts );
+		$scripts = array_map(
+			function( $script ) {
+				return array_replace_recursive( $this->get_default_script_options(), $script );
+			},
+			$this->scripts
+		);
 
 		// Filter according to admin or public context.
-		$scripts = array_filter( $scripts, function( $script )  use( $context ) {
-			return $script['context'] === $context;
-		} );
+		$scripts = array_filter(
+			$scripts,
+			function( $script ) use ( $context ) {
+				return $script['context'] === $context;
+			}
+		);
 
 		return $scripts;
 	}
@@ -209,15 +227,18 @@ class ScriptStyle {
 	 * @return array
 	 */
 	public function get_default_script_options() {
-		return apply_filters( 'masteriyo_get_default_script_options', array(
-			'src'           => '',
-			'deps'          => array( 'jquery' ),
-			'version'       => $this->get_version(),
-			'context'       => 'none',
-			'in_footer'     => true,
-			'register_only' => false,
-			'callback'      => ''
-		) );
+		return apply_filters(
+			'masteriyo_get_default_script_options',
+			array(
+				'src'           => '',
+				'deps'          => array( 'jquery' ),
+				'version'       => $this->get_version(),
+				'context'       => 'none',
+				'in_footer'     => true,
+				'register_only' => false,
+				'callback'      => '',
+			)
+		);
 	}
 
 	/**
@@ -228,17 +249,20 @@ class ScriptStyle {
 	 * @return array
 	 */
 	public function get_default_style_options() {
-		return apply_filters( 'masteriyo_get_default_style_options', array(
-			'src'           => '',
-			'deps'          => array(),
-			'version'       => $this->get_version(),
-			'media'         => 'all',
-			'has_rtl'       => false,
-			'context'       => 'none',
-			'in_footer'     => true,
-			'register_only' => false,
-			'callback'      => ''
-		) );
+		return apply_filters(
+			'masteriyo_get_default_style_options',
+			array(
+				'src'           => '',
+				'deps'          => array(),
+				'version'       => $this->get_version(),
+				'media'         => 'all',
+				'has_rtl'       => false,
+				'context'       => 'none',
+				'in_footer'     => true,
+				'register_only' => false,
+				'callback'      => '',
+			)
+		);
 	}
 
 	/**
@@ -341,7 +365,6 @@ class ScriptStyle {
 		$scripts = $this->get_scripts( 'public' );
 		$styles  = $this->get_styles( 'public' );
 
-
 		foreach ( $scripts as $handle => $script ) {
 			if ( true === (bool) $script['register_only'] ) {
 				$this->register_script( $handle, $script['src'], $script['deps'], $script['version'] );
@@ -350,7 +373,7 @@ class ScriptStyle {
 
 			if ( empty( $script['callback'] ) ) {
 				$this->enqueue_script( $handle, $script['src'], $script['deps'], $script['version'] );
-			} elseif ( is_callable( $script['callback'] ) && call_user_func_array( $script['callback'], array() )) {
+			} elseif ( is_callable( $script['callback'] ) && call_user_func_array( $script['callback'], array() ) ) {
 				$this->enqueue_script( $handle, $script['src'], $script['deps'], $script['version'] );
 			}
 		}
@@ -378,7 +401,6 @@ class ScriptStyle {
 		$scripts = $this->get_scripts( 'admin' );
 		$styles  = $this->get_styles( 'admin' );
 
-
 		foreach ( $scripts as $handle => $script ) {
 			if ( true === (bool) $script['register_only'] ) {
 				$this->register_script( $handle, $script['src'], $script['deps'], $script['version'] );
@@ -405,7 +427,7 @@ class ScriptStyle {
 			}
 		}
 
-		wp_set_script_translations( 'masteriyo-admin', 'masteriyo', Constants::get('MASTERIYO_LANGUAGES') );
+		wp_set_script_translations( 'masteriyo-admin', 'masteriyo', Constants::get( 'MASTERIYO_LANGUAGES' ) );
 	}
 
 	/**
@@ -414,15 +436,18 @@ class ScriptStyle {
 	 * @since 0.1.1
 	 */
 	public function load_admin_localized_scripts() {
-		$this->localized_scripts = apply_filters( 'masteriyo_localized_scripts', array(
-			'admin' => array(
-				'name' => 'masteriyo',
-				'data' => array(
-					'rootApiUrl' => esc_url_raw( untrailingslashit( rest_url() ) ),
-					'nonce'      => wp_create_nonce( 'wp_rest' )
+		$this->localized_scripts = apply_filters(
+			'masteriyo_localized_scripts',
+			array(
+				'admin' => array(
+					'name' => 'masteriyo',
+					'data' => array(
+						'rootApiUrl' => esc_url_raw( untrailingslashit( rest_url() ) ),
+						'nonce'      => wp_create_nonce( 'wp_rest' ),
+					),
 				),
-			),
-		) );
+			)
+		);
 
 		foreach ( $this->localized_scripts as $handle => $script ) {
 			\wp_localize_script( "masteriyo-{$handle}", $script['name'], $script['data'] );
@@ -435,28 +460,31 @@ class ScriptStyle {
 	 * @since 0.1.1
 	 */
 	public function load_public_localized_scripts() {
-		$this->localized_scripts = apply_filters( 'masteriyo_localized_scripts', array(
-			'edit-myaccount' => array(
-				'name' => 'masteriyo_data',
-				'data' => array(
-					'rootApiUrl' => esc_url_raw( rest_url() ),
-					'current_user_id' => get_current_user_id(),
-					'nonce' => wp_create_nonce( 'wp_rest' ),
-					'labels' => array(
-						'save'   => __( 'Save', 'masteriyo' ),
-						'saving' => __( 'Saving...', 'masteriyo' ),
-						'profile_update_success' => __( 'Your profile was updated successfully', 'masteriyo' ),
+		$this->localized_scripts = apply_filters(
+			'masteriyo_localized_scripts',
+			array(
+				'edit-myaccount' => array(
+					'name' => 'masteriyo_data',
+					'data' => array(
+						'rootApiUrl'      => esc_url_raw( rest_url() ),
+						'current_user_id' => get_current_user_id(),
+						'nonce'           => wp_create_nonce( 'wp_rest' ),
+						'labels'          => array(
+							'save'                   => __( 'Save', 'masteriyo' ),
+							'saving'                 => __( 'Saving...', 'masteriyo' ),
+							'profile_update_success' => __( 'Your profile was updated successfully', 'masteriyo' ),
+						),
 					),
 				),
-			),
-			'login-form' => array(
-				'name' => 'masteriyo_data',
-				'data' => array(
-					'ajax_url' => admin_url( 'admin-ajax.php' ),
-					'nonce' => wp_create_nonce( 'masteriyo_login_nonce' ),
+				'login-form'     => array(
+					'name' => 'masteriyo_data',
+					'data' => array(
+						'ajax_url' => admin_url( 'admin-ajax.php' ),
+						'nonce'    => wp_create_nonce( 'masteriyo_login_nonce' ),
+					),
 				),
-			),
-		) );
+			)
+		);
 
 		foreach ( $this->localized_scripts as $handle => $script ) {
 			\wp_localize_script( "masteriyo-{$handle}", $script['name'], $script['data'] );

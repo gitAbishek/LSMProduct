@@ -137,36 +137,34 @@ class Masteriyo extends Container {
 	 */
 	private function get_service_providers() {
 		$namespace = 'ThemeGrill\\Masteriyo\\Providers';
-		return apply_filters(
-			'masteriyo_service_providers',
-			array(
-				"{$namespace}\\CacheServiceProvider",
-				"{$namespace}\\NoticeServiceProvider",
-				"{$namespace}\\FrontendQueryServiceProvider",
-				"{$namespace}\\CourseServiceProvider",
-				"{$namespace}\\PermissionServiceProvider",
-				"{$namespace}\\SessionServiceProvider",
-				"{$namespace}\\LessonServiceProvider",
-				"{$namespace}\\QuizServiceProvider",
-				"{$namespace}\\SectionServiceProvider",
-				"{$namespace}\\UserServiceProvider",
-				"{$namespace}\\OrderServiceProvider",
-				"{$namespace}\\CourseTagServiceProvider",
-				"{$namespace}\\CourseCategoryServiceProvider",
-				"{$namespace}\\CourseDifficultyServiceProvider",
-				"{$namespace}\\CartServiceProvider",
-				"{$namespace}\\TemplateServiceProvider",
-				"{$namespace}\\QuestionServiceProvider",
-				"{$namespace}\\ScriptStyleServiceProvider",
-				"{$namespace}\\ShortcodesServiceProvider",
-				"{$namespace}\\SettingsServiceProvider",
-				"{$namespace}\\QueriesServiceProvider",
-				"{$namespace}\\FaqServiceProvider",
-				"{$namespace}\\EmailsServiceProvider",
-				"{$namespace}\\CourseReviewServiceProvider",
-				"{$namespace}\\FormHandlersServiceProvider",
-			)
-		);
+		return apply_filters( 'masteriyo_service_providers', array(
+			"{$namespace}\\CacheServiceProvider",
+			"{$namespace}\\NoticeServiceProvider",
+			"{$namespace}\\FrontendQueryServiceProvider",
+			"{$namespace}\\CourseServiceProvider",
+			"{$namespace}\\PermissionServiceProvider",
+			"{$namespace}\\SessionServiceProvider",
+			"{$namespace}\\LessonServiceProvider",
+			"{$namespace}\\QuizServiceProvider",
+			"{$namespace}\\SectionServiceProvider",
+			"{$namespace}\\UserServiceProvider",
+			"{$namespace}\\OrderServiceProvider",
+			"{$namespace}\\CourseTagServiceProvider",
+			"{$namespace}\\CourseCategoryServiceProvider",
+			"{$namespace}\\CourseDifficultyServiceProvider",
+			"{$namespace}\\CartServiceProvider",
+			"{$namespace}\\TemplateServiceProvider",
+			"{$namespace}\\QuestionServiceProvider",
+			"{$namespace}\\ScriptStyleServiceProvider",
+			"{$namespace}\\ShortcodesServiceProvider",
+			"{$namespace}\\SettingsServiceProvider",
+			"{$namespace}\\QueriesServiceProvider",
+			"{$namespace}\\FaqServiceProvider",
+			"{$namespace}\\EmailsServiceProvider",
+			"{$namespace}\\CourseReviewServiceProvider",
+			"{$namespace}\\FrontendQueryServiceProvider",
+			"{$namespace}\\FormHandlersServiceProvider",
+		) );
 	}
 
 	/**

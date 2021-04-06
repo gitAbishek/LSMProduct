@@ -16,7 +16,7 @@ if ( ! ( function_exists( 'add_filter' ) && function_exists( 'add_action' ) ) ) 
 /**
  * Single product sidebar.
  */
-add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_enroll_now_button', 10 );
+add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_enroll', 10 );
 add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_reviews', 20 );
 add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_categories', 30 );
 add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_enrolled_students', 40 );

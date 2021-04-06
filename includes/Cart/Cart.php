@@ -11,7 +11,7 @@
 
 namespace ThemeGrill\Masteriyo\Cart;
 
-use ThemeGrill\Masteriyo\Session\SessionHandler;
+use ThemeGrill\Masteriyo\Session\Session;
 use ThemeGrill\Masteriyo\Helper\Utils;
 use ThemeGrill\Masteriyo\Helper\Arr;
 use ThemeGrill\Masteriyo\Notice;
@@ -98,7 +98,7 @@ class Cart {
 	 * @param \ThemeGrill\Masteriyo\Notice                 $notice Notice.
 	 *
 	 */
-	public function __construct( SessionHandler $session, Notice $notice ) {
+	public function __construct( Session $session, Notice $notice ) {
 		$this->session = $session;
 		$this->notice  = $notice;
 
@@ -187,6 +187,7 @@ class Cart {
 	 */
 	public function get_cart_from_session() {
 		do_action( 'masteriyo_load_cart_from_session' );
+
 		$this->set_totals( $this->session->get( 'cart_totals', null ) );
 		$this->set_removed_cart_contents( $this->session->get( 'removed_cart_contents', array() ) );
 
@@ -221,7 +222,7 @@ class Cart {
 			/**
 			 * Allow 3rd parties to validate this item before it's added to cart and add their own notices.
 			 *
-			 * @since 3.6.0
+			 * @since 0.1.0
 			 *
 			 * @param bool $remove_cart_item_from_session If true, the item will not be added to the cart. Default: false.
 			 * @param string $key Cart item key.
@@ -1122,14 +1123,9 @@ class Cart {
 	 * @return string|bool $cart_item_key
 	 */
 	public function add_to_cart( $course_id = 0, $quantity = 1, $cart_item_data = array() ) {
-		global $masteriyo_container;
 
 		try {
-			$course_id = absint( $course_id );
-			$course    = $masteriyo_container->get('course');
-			$course->set_id( $course_id );
-			$course_repo = $masteriyo_container->get('course_repository');
-			$course_repo->read( $course );
+			$course   = masteriyo_get_course( $course_id );
 			$quantity = apply_filters( 'masteriyo_add_to_cart_quantity', $quantity, $course_id, $course );
 
 			if ( $quantity <= 0 || ! $course || 'trash' === $course->get_status() ) {
@@ -1160,7 +1156,7 @@ class Cart {
 				 * @param Course $course Course data.
 				 */
 				$message = apply_filters( 'masteriyo_cart_course_cannot_be_purchased_message', $message, $course );
-				throw new Exception( $message );
+				throw new \Exception( $message );
 			}
 
 			// If cart_item_key is set, the item is already in the cart.
@@ -1193,7 +1189,7 @@ class Cart {
 
 			return $cart_item_key;
 
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			if ( $e->getMessage() ) {
 				$this->notice->add( $e->getMessage(), Notice::ERROR );
 			}
@@ -1307,7 +1303,7 @@ class Cart {
 		$this->reset_totals();
 
 		if ( $this->is_empty() ) {
-			$this->session->set_session();
+			$this->session->start();
 			return;
 		}
 

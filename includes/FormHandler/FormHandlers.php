@@ -31,6 +31,7 @@ class FormHandlers {
 				"{$namespace}\\RequestPasswordResetFormHandler",
 				"{$namespace}\\PasswordResetFormHandler",
 				"{$namespace}\\ChangePasswordFormHandler",
+				"{$namespace}\\EnrollFormHandler"
 			)
 		);
 	}

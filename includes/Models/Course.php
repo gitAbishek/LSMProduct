@@ -913,4 +913,71 @@ class Course extends Model {
 
 		return apply_filters( 'masteriyo_course_categories_objects', $difficulty_obj, $this );
 	}
+
+
+	/**
+	 * Get enroll now button text for the single page.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function single_enroll_text() {
+		return apply_filters( 'masteriyo_single_course_enroll_text', __( 'Enroll Now', 'masteriyo' ), $this );
+	}
+
+	/**
+	 * Get enroll url.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function enroll_url() {
+		$url = $this->get_permalink();
+
+		if( $this->is_purchasable() ) {
+			$base_url = ( function_exists( 'is_feed' ) && is_feed() ) || ( function_exists( 'is_404' ) && is_404() ) ? $this->get_permalink() : '';
+
+			$url = add_query_arg( array(
+				'enroll' => $this->get_id()
+			), $base_url );
+		}
+
+		return apply_filters( 'masteriyo_course_enroll_url', $url, $this );
+	}
+
+	/**
+	 * Get enroll text.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function enroll_text() {
+		$text = __( 'Read more', 'mastriyo' );
+
+		if( $this->is_purchasable() ) {
+			$text = __( 'Enroll Now', 'masteriyo' );
+		}
+
+		return apply_filters( 'masteriyo_course_enroll_text', $text, $this );
+	}
+
+
+	/**
+	 * Get enroll  button text description - used in aria tags.
+	 *
+	 * @since 0.1.0
+	 * @return string
+	 */
+	public function enroll_description() {
+		$text = __( 'Read more about &ldquo;%s&rdquo;', 'masteriyo' );
+		/* translators: %s: Product title */
+		if ( $this->is_purchasable() ) {
+			$text = __( 'Enroll &ldquo;%s&rdquo; course', 'masteriyo' ) ;
+		}
+
+		return apply_filters( 'masteriyo_course_enroll_description', sprintf( $text, $this->get_name() ), $this );
+	}
 }

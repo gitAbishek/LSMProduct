@@ -6,12 +6,12 @@
  */
 
 use ThemeGrill\Masteriyo\Notice;
-use ThemeGrill\Masteriyo\Session\SessionHandler;
+use ThemeGrill\Masteriyo\Session\Session;
 use ThemeGrill\Masteriyo\Repository\SessionRepository;
 use ThemeGrill\Masteriyo\Template;
 
 /**
- * SessionHandler test class.
+ * Session test class.
  */
 class NoticeTest extends WP_UnitTestCase {
 
@@ -34,7 +34,7 @@ class NoticeTest extends WP_UnitTestCase {
 		\WP_Mock::setUp();
 
 		// Test actions are added.
-		$mock_session_handler = $this->getMockBuilder( SessionHandler::class )
+		$mock_session_handler = $this->getMockBuilder( Session::class )
 			->setConstructorArgs( [ new SessionRepository ] )
 			->setMethods( ['get', 'set'] )->getMock();
 
@@ -124,7 +124,7 @@ class NoticeTest extends WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_add() {
-		$session_handler = $this->getMockBuilder( SessionHandler::class )
+		$session_handler = $this->getMockBuilder( Session::class )
 			->setConstructorArgs( [ new SessionRepository ] )
 			->setMethods( ['get', 'set'] )->getMock();
 

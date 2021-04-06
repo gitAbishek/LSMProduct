@@ -2,7 +2,7 @@
 /**
  * Contains the query functions for Masteriyo which alter the front-end post queries and loops
  *
- * @version 3.2.0
+ * @version 0.1.0
  * @package ThemeGrill\Masteriyo\Classes
  */
 
@@ -83,6 +83,7 @@ class FrontendQuery {
 	 */
 	private function init_hooks() {
 		add_action( 'init', array( $this, 'add_endpoints' ) );
+
 		if ( ! is_admin() ) {
 			add_action( 'wp_loaded', array( $this, 'get_errors' ), 20 );
 			add_filter( 'query_vars', array( $this, 'add_query_vars' ), 0 );
@@ -174,7 +175,7 @@ class FrontendQuery {
 
 	/**
 	 * Init query vars by loading options.
-	 *
+	 *r
 	 * @since 0.1.0
 	 */
 	public function init_query_vars() {
@@ -191,9 +192,6 @@ class FrontendQuery {
 			'payment-methods'            => get_option( 'masteriyo_profile_payment_methods_endpoint', 'payment-methods' ),
 			'lost-password'              => get_option( 'masteriyo_profile_lost_password_endpoint', 'lost-password' ),
 			'customer-logout'            => get_option( 'masteriyo_logout_endpoint', 'customer-logout' ),
-			'add-payment-method'         => get_option( 'masteriyo_profile_add_payment_method_endpoint', 'add-payment-method' ),
-			'delete-payment-method'      => get_option( 'masteriyo_profile_delete_payment_method_endpoint', 'delete-payment-method' ),
-			'set-default-payment-method' => get_option( 'masteriyo_profile_set_default_payment_method_endpoint', 'set-default-payment-method' ),
 		);
 	}
 

@@ -63,7 +63,6 @@ abstract class Shortcode {
 	 */
 	public function set_attributes( $attributes ) {
 		$this->attributes = $this->parse_attributes( $attributes );
-		return $this;
 	}
 
 	/**
@@ -137,7 +136,8 @@ abstract class Shortcode {
 	 * @return string
 	 */
 	public function shortcode_callback( $attributes = array() ) {
-		return $this->set_attributes( $attributes )->get_content();
+		$this->set_attributes( $attributes );
+		return $this->get_content();
 	}
 
 	/**

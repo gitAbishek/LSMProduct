@@ -23,9 +23,9 @@
       "includes/Helper/Template.php",
       "includes/Helper/TemplateHooks.php",
       "includes/Helper/Page.php",
-      "includes/Helper/Format.php",
       "includes/Helper/Notice.php",
-      "includes/Helper/Order.php"
+      "includes/Helper/Order.php",
+      "includes/Helper/Notice.php"
     ],
     "psr-4": {
       "ThemeGrill\\Masteriyo\\": "includes/"
@@ -40,7 +40,7 @@
   "require-dev": {
     "wp-cli/i18n-command": "^2.2",
     "wp-coding-standards/wpcs": "2.3.0",
-		"dealerdirect/phpcodesniffer-composer-installer": "0.7.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "0.7.0",
     "phpcompatibility/phpcompatibility-wp": "2.1.0",
     "sirbrillig/phpcs-variable-analysis": "2.8",
     "phpunit/phpunit": "7.5.20",
@@ -57,25 +57,25 @@
     "test:php:unit": [
       "./vendor/bin/phpunit"
     ],
-		"phpcs": [
-			"phpcs"
-		],
-		"phpcbf": [
-			"phpcbf"
-		],
-		"makepot-audit": [
-			"wp i18n make-pot . --slug=wp-plugin-starter"
-		],
-		"makepot": [
+    "phpcs": [
+      "phpcs"
+    ],
+    "phpcbf": [
+      "phpcbf"
+    ],
+    "makepot-audit": [
+      "wp i18n make-pot . --slug=wp-plugin-starter"
+    ],
+    "makepot": [
       "\"vendor/bin/wp\" i18n make-pot . ./i18n/languages/masteriyo.pot --include=\"assets/js/build/app.js,includes\""
-		]
-	},
+    ]
+  },
   "extra": {
-		"scripts-description": {
-			"phpcs": "Analyze code against the WordPress coding standard with PHP_CodeSniffer",
-			"phpcbf": "Fix coding standards warnings/errors automattically with PHP Code Beautifier",
-			"makepot-audit": "Generate langauges/wp-plugin-starter.pot file and run audit",
-			"makepot": "Generate langauges/wp-plugin-starter.pot file"
-		}
-	}
+    "scripts-description": {
+      "phpcs": "Analyze code against the WordPress coding standard with PHP_CodeSniffer",
+      "phpcbf": "Fix coding standards warnings/errors automattically with PHP Code Beautifier",
+      "makepot-audit": "Generate langauges/wp-plugin-starter.pot file and run audit",
+      "makepot": "Generate langauges/wp-plugin-starter.pot file"
+    }
+  }
 }

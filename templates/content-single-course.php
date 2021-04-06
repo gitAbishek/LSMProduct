@@ -7,6 +7,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+global $course;
+
 /**
  * masteriyo_before_single_course_content hook.
  */
@@ -14,7 +16,7 @@ do_action( 'masteriyo_before_single_course_content' );
 
 ?>
 
-<div class="antialiased mto-w-full mto-bg-gray-50">
+<div id="course-<?php the_ID(); ?>" class="antialiased mto-bg-gray-50">
     <div class="mto-container mto-flex mto-flex-col md:mto-flex-row mto-my-20 mto-mx-auto">
         <div class="mto-w-full md:mto-w-9/12 md:mto-mr-4">
 			<?php masteriyo_get_template( 'single-course/main-content.php' ); ?>

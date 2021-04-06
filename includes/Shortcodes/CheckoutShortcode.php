@@ -46,14 +46,9 @@ class CheckoutShortcode extends Shortcode {
 	 * @return string
 	 */
 	public function get_content() {
-		/**
-		 * Prepare Template.
-		 */
-		$template_path = masteriyo( 'template' )->locate( 'checkout.php' );
+		      $data   = $this->get_attributes();
+		$data['cart'] = \masteriyo( 'cart' );
 
-		/**
-		 * Render the template.
-		 */
-		return $this->get_rendered_html( $this->get_attributes(), $template_path );
+		return \masteriyo_get_template_html( 'checkout/form-checkout.php', $data );
 	}
 }

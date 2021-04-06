@@ -19,20 +19,31 @@ function masteriyo_template_redirect() {
 
 	// phpcs:disable WordPress.Security.NonceVerification.Recommended
 	// When default permalinks are enabled, redirect courses list page to post type archive url.
-	if ( ! empty( $_GET['page_id'] ) && '' === get_option( 'permalink_structure' ) && masteriyo_get_page_id( 'course-list' ) === absint( $_GET['page_id'] ) && get_post_type_archive_link( 'course' ) ) {
-		wp_safe_redirect( get_post_type_archive_link( 'course' ) );
-		exit;
+	if ( ! empty( $_GET['page_id'] ) && '' === get_option( 'permalink_structure' )
+		&& masteriyo_get_page_id( 'courses_list' ) === absint( $_GET['page_id'] )
+		&& get_post_type_archive_link( 'course' ) ) {
+			wp_safe_redirect( get_post_type_archive_link( 'course' ) );
+			exit;
 	}
 	// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
-	// Redirect to the course page if we have a single course.
-	if ( is_search() && is_post_type_archive( 'course' ) && apply_filters( 'masteriyo_redirect_single_search_result', true ) && 1 === absint( $wp_query->found_posts ) ) {
-		$course = masteriyo_get_course( $wp_query->post );
-
-		if ( $course && $course->is_visible() ) {
-			wp_safe_redirect( $course->get_permalink(), 302 );
+	// When on the checkout with an empty cart, redirect to courses list page.
+	if ( is_page( masteriyo_get_page_id( 'checkout' ) ) && masteriyo_get_page_id( 'checkout' ) !== masteriyo_get_page_id( 'cart' )
+		&& masteriyo( 'cart' )->is_empty() && empty( $wp->query_vars['order-pay'] ) && ! isset( $wp->query_vars['order-received'] )
+		&& ! is_customize_preview() && apply_filters( 'masteriyo_checkout_redirect_empty_cart', true ) ) {
+			wp_safe_redirect( masteriyo_get_course_list_url() );
 			exit;
-		}
+	}
+
+	// Redirect to the course page if we have a single course.
+	if ( is_search() && is_post_type_archive( 'course' )
+		&& apply_filters( 'masteriyo_redirect_single_search_result', true ) && 1 === absint( $wp_query->found_posts ) ) {
+			$course = masteriyo_get_course( $wp_query->post );
+
+			if ( $course && $course->is_visible() ) {
+				wp_safe_redirect( $course->get_permalink(), 302 );
+				exit;
+			}
 	}
 }
 function_exists( 'add_action' ) && add_action( 'template_redirect', 'masteriyo_template_redirect' );
@@ -304,21 +315,16 @@ function masteriyo_add_body_class( $classes, $class ) {
 function_exists( 'add_filter' ) && add_filter( 'body_class', 'masteriyo_add_body_class', 10, 2 );
 
 
-if( ! function_exists( 'masteriyo_template_sidebar_enroll_now_button' ) ) {
+if( ! function_exists( 'masteriyo_template_sidebar_enroll' ) ) {
 	/**
 	 * Show enroll now button
 	 *
 	 * @since 0.1.0
 	 */
-	function masteriyo_template_sidebar_enroll_now_button() {
+	function masteriyo_template_sidebar_enroll() {
 		global $course;
 
-		$data = array(
-			'link'       => untrailingslashit( $course->get_permalink() ) . '?masteriyo-enroll-now=' . $course->get_id(),
-			'enroll_now' => apply_filters( 'masteriyo_enroll_now_text', __( 'Enroll Now', 'masteriyo' ) )
-		);
-
-		masteriyo_get_template( 'single-course/enroll-now-button.php', $data );
+		masteriyo_get_template( 'single-course/enroll.php' );
 	}
 }
 
@@ -331,13 +337,14 @@ if( ! function_exists( 'masteriyo_template_sidebar_row_reviews' ) ) {
 	function masteriyo_template_sidebar_row_reviews() {
 		global $course;
 
-		$data = array(
-			'review_count' => $course->get_review_count(),
-			'rating'       => $course->get_average_rating(),
-			'review_text'  => apply_filters( 'masteriyo_reviews_txt', __( 'reviews', 'masteriyo' ) )
+		masteriyo_get_template(
+			'single-course/sidebar-row-reviews.php',
+			array(
+				'review_count' => $course->get_review_count(),
+				'rating'       => $course->get_average_rating(),
+				'review_text'  => apply_filters( 'masteriyo_reviews_txt', __( 'reviews', 'masteriyo' ) )
+			)
 		);
-
-		masteriyo_get_template( 'single-course/sidebar-row-reviews.php', $data );
 	}
 }
 
@@ -356,11 +363,12 @@ if( ! function_exists( 'masteriyo_template_sidebar_row_categories' ) ) {
 			return;
 		}
 
-		$data = array(
-			'categories' => $categories
+		masteriyo_get_template(
+			'single-course/sidebar-row-categories.php',
+			array(
+				'categories' => $categories
+			)
 		);
-
-		masteriyo_get_template( 'single-course/sidebar-row-categories.php', $data );
 	}
 }
 
@@ -388,15 +396,17 @@ if( ! function_exists( 'masteriyo_template_sidebar_row_hours' ) ) {
 		global $course;
 
 		$hours = masteriyo_get_lecture_hours( $course );
+
 		if ( empty( $hours ) ) {
 			return;
 		}
 
-		$data = array(
-			'hours' => $hours
+		masteriyo_get_template(
+			'single-course/sidebar-row-hours.php',
+			array(
+				'hours' => $hours
+			)
 		);
-
-		masteriyo_get_template( 'single-course/sidebar-row-hours.php', $data );
 	}
 }
 
@@ -409,11 +419,12 @@ if( ! function_exists( 'masteriyo_template_sidebar_row_lectures' ) ) {
 	function masteriyo_template_sidebar_row_lectures() {
 		global $course;
 
-		$data = array(
-			'lessons_count' => masteriyo_get_lessons_count( $course )
+		masteriyo_get_template(
+			'single-course/sidebar-row-lectures.php',
+			array(
+				'lessons_count' => masteriyo_get_lessons_count( $course )
+			)
 		);
-
-		masteriyo_get_template( 'single-course/sidebar-row-lectures.php', $data );
 	}
 }
 
@@ -429,16 +440,18 @@ if( ! function_exists( 'masteriyo_template_sidebar_row_difficulty' ) ) {
 
 		// Bail early if difficulty is not set.
 		$difficulty = $course->get_difficulty();
+
+		// Bail early if difficulty is not set.
 		if( empty( $difficulty ) ) {
 			return;
 		}
 
-		$data = array(
-			'difficulty' => $difficulty
+		masteriyo_get_template(
+			'single-course/sidebar-row-difficulty.php',
+			array(
+				'difficulty' => $difficulty->get_name()
+			)
 		);
-
-		masteriyo_get_template( 'single-course/sidebar-row-difficulty.php', $data );
-
 	}
 }
 

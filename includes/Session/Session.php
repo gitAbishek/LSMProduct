@@ -9,7 +9,7 @@
 
 namespace ThemeGrill\Masteriyo\Session;
 
-use ThemeGrill\Masteriyo\Abstracts\Session;
+use ThemeGrill\Masteriyo\Abstracts\Session as AbstractSession;
 use ThemeGrill\Masteriyo\Repository\SessionRepository;
 use ThemeGrill\Masteriyo\Constants;
 use ThemeGrill\Masteriyo\Helper\Utils;
@@ -17,9 +17,9 @@ use ThemeGrill\Masteriyo\Helper\Utils;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Session handler.
+ * Session.
  */
-class SessionHandler extends Session {
+class Session extends AbstractSession {
 
 	/**
 	 * Cookie name used for the session.
@@ -139,7 +139,7 @@ class SessionHandler extends Session {
 	/**
 	 * Get the session based on the ID.
 	 *
-	 * @return \ThemeGrill\Masteriyo\Session\SessionHandler
+	 * @return \ThemeGrill\Masteriyo\Session\Session
 	 */
 	public function read() {
 		$this->repository->read( $this );

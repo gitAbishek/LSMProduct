@@ -9,7 +9,7 @@ use ThemeGrill\Masteriyo\Helper\Format;
 use ThemeGrill\Masteriyo\Constants;
 
 /**
- * SessionHandler test class.
+ * Session test class.
  */
 class FormatTest extends WP_UnitTestCase {
 

@@ -11,7 +11,7 @@
 		$(this).siblings('.mto-tab').removeClass('active-tab');
 		$(this).addClass('active-tab');
 		$('.tab-content').addClass('mto-hidden');
-		$(`#${ $(this).data('tab') }`).removeClass('mto-hidden');
+		$('#' + $(this).data('tab')).removeClass('mto-hidden');
 	});
 
 	/**
@@ -41,37 +41,34 @@
 		.text('Saving...')
 		.siblings('.mto-notify-message').remove();
 
-		fetch( `${mto_data.rootApiUrl}masteriyo/v1/users/${mto_data.current_user_id}`, {
-			method: 'post',
-			headers: new Headers({
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			headers: {
 				'Content-Type': 'application/json',
 				'X-WP-Nonce': mto_data.nonce,
-			}),
-			body: JSON.stringify(userData),
-		})
-		.then(async res => {
-			if ( ! res.ok ) {
-				throw (await res.json()).message;
-			}
-			res = await res.json();
+			},
+			url: mto_data.rootApiUrl + 'masteriyo/v1/users/' + mto_data.current_user_id,
+			data: JSON.stringify(userData),
+			success: function( res ) {
+				// Update username on the sidebar.
+				$('#label-username').text( res.display_name );
 
-			// Update username on the sidebar.
-			$('#label-username').text( res.display_name );
+				// Show success message.
+				$('#mto-btn-submit-edit-profile-form')
+				.after('<div class="mto-notify-message mto-success-msg"><span>' + mto_data.labels.profile_update_success + '</span></div>');
+			},
+			error: function( xhr ) {
+				// Show failure message.
+				$('#mto-btn-submit-edit-profile-form')
+				.after('<div class="mto-notify-message mto-warning-msg mto-text-red-700 mto-bg-red-100 mto-border-red-300"><span>' + xhr.responseJSON.message + '</span></div>');
+			},
+			complete: function() {
+				isSaving = false;
 
-			// Show success message.
-			$('#mto-btn-submit-edit-profile-form')
-			.after(`<div class="mto-notify-message mto-success-msg"><span>${mto_data.labels.profile_update_success}</span></div>`);
-		})
-		.catch(reason => {
-			// Show failure message.
-			$('#mto-btn-submit-edit-profile-form')
-			.after(`<div class="mto-notify-message mto-warning-msg mto-text-red-700 mto-bg-red-100 mto-border-red-300"><span>${reason}</span></div>`);
-		})
-		.finally(() => {
-			isSaving = false;
-
-			// Remove saving process indicator.
-			$('#mto-btn-submit-edit-profile-form').text('Save');
+				// Remove saving process indicator.
+				$('#mto-btn-submit-edit-profile-form').text('Save');
+			},
 		});
 	});
 

@@ -14,12 +14,13 @@ import { ToastProvider } from 'react-toast-notifications';
 import * as screens from './screens';
 import AddNewQuiz from './screens/quiz/AddNewQuiz';
 import EditQuiz from './screens/quiz/EditQuiz';
+import theme from './theme/theme';
 
 const App = () => {
 	const queryClient = new QueryClient();
 
 	return (
-		<ChakraProvider>
+		<ChakraProvider theme={theme}>
 			<ToastProvider>
 				<QueryClientProvider client={queryClient}>
 					<Router>

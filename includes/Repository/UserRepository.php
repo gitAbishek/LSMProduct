@@ -189,7 +189,6 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 				'use_ssl'              => $user->get_use_ssl( 'edit' ),
 				'show_admin_bar_front' => $user->get_show_admin_bar_front( 'edit' ),
 				'locale'               => $user->get_locale( 'edit' ),
-				// 'role'                 => $user->get_roles( 'edit' )[0],
 			);
 
 			wp_update_user( array_merge( array( 'ID' => $user->get_id() ), $user_data ) );

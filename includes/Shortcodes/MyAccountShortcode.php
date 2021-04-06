@@ -1,9 +1,9 @@
 <?php
 /**
- * Profile page shortcode.
+ * Myaccount shortcode.
  *
  * @since 0.1.0
- * @class ProfileShortcode
+ * @class MyAccountShortcode
  * @package ThemeGrill\Masteriyo\Shortcodes
  */
 
@@ -14,9 +14,9 @@ use ThemeGrill\Masteriyo\Abstracts\Shortcode;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Profile page shortcode.
+ * Myaccount shortcode.
  */
-class ProfileShortcode extends Shortcode {
+class MyAccountShortcode extends Shortcode {
 
 	/**
 	 * Shortcode tag.
@@ -25,7 +25,7 @@ class ProfileShortcode extends Shortcode {
 	 *
 	 * @var string
 	 */
-	protected $tag = 'masteriyo_profile';
+	protected $tag = 'masteriyo_myaccount';
 
 	/**
 	 * Shortcode attributes with default values.
@@ -52,17 +52,24 @@ class ProfileShortcode extends Shortcode {
 		return $this->get_rendered_html( $this->get_attributes(), $template_path );
 	}
 
+	/**
+	 * Get template path to render.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @return string
+	 */
 	protected function get_template_path() {
 		if ( masteriyo_is_signup_page() ) {
-			return masteriyo( 'template' )->locate( 'profile/form-signup.php' );
+			return masteriyo( 'template' )->locate( 'myaccount/form-signup.php' );
 		}
 		if ( masteriyo_is_lost_password_page() ) {
-			return masteriyo( 'template' )->locate( 'profile/form-reset-password.php' );
+			return masteriyo( 'template' )->locate( 'myaccount/form-reset-password.php' );
 		}
 		if ( is_user_logged_in() ) {
-			return masteriyo( 'template' )->locate( 'profile.php' );
+			return masteriyo( 'template' )->locate( 'myaccount.php' );
 		}
 
-		return masteriyo( 'template' )->locate( 'profile/form-login.php' );
+		return masteriyo( 'template' )->locate( 'myaccount/form-login.php' );
 	}
 }

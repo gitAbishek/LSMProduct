@@ -455,7 +455,7 @@ if( ! function_exists( 'masteriyo_myaccount_sidebar_content' ) ) {
 			'current_endpoint' => masteriyo_get_current_myaccount_endpoint(),
 		);
 
-		masteriyo_get_template( 'profile/sidebar-content.php', $data );
+		masteriyo_get_template( 'myaccount/sidebar-content.php', $data );
 	}
 }
 
@@ -466,7 +466,7 @@ if( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_account_courses_endpoint() {
-		masteriyo_get_template( 'profile/tab-content-courses.php' );
+		masteriyo_get_template( 'myaccount/my-courses.php' );
 	}
 }
 
@@ -481,7 +481,7 @@ if( ! function_exists( 'masteriyo_account_edit_profile_endpoint' ) ) {
 			'user' => masteriyo_get_current_user(),
 		);
 
-		masteriyo_get_template( 'profile/tab-content-edit-profile.php', $data );
+		masteriyo_get_template( 'myaccount/edit-profile.php', $data );
 	}
 }
 
@@ -496,7 +496,7 @@ if( ! function_exists( 'masteriyo_account_view_profile_endpoint' ) ) {
 			'user' => masteriyo_get_current_user(),
 		);
 
-		masteriyo_get_template( 'profile/view-profile.php', $data );
+		masteriyo_get_template( 'myaccount/view-profile.php', $data );
 	}
 }
 
@@ -507,7 +507,7 @@ if( ! function_exists( 'masteriyo_account_grades_endpoint' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_account_grades_endpoint() {
-		masteriyo_get_template( 'profile/tab-content-grades.php' );
+		masteriyo_get_template( 'myaccount/my-grades.php' );
 	}
 }
 
@@ -518,7 +518,7 @@ if( ! function_exists( 'masteriyo_account_memberships_endpoint' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_account_memberships_endpoint() {
-		masteriyo_get_template( 'profile/tab-content-memberships.php' );
+		masteriyo_get_template( 'myaccount/my-memberships.php' );
 	}
 }
 
@@ -529,7 +529,7 @@ if( ! function_exists( 'masteriyo_account_certificates_endpoint' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_account_certificates_endpoint() {
-		masteriyo_get_template( 'profile/tab-content-certificates.php' );
+		masteriyo_get_template( 'myaccount/my-certificates.php' );
 	}
 }
 
@@ -540,7 +540,7 @@ if( ! function_exists( 'masteriyo_account_order_history_endpoint' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_account_order_history_endpoint() {
-		masteriyo_get_template( 'profile/tab-content-order-history.php' );
+		masteriyo_get_template( 'myaccount/my-order-history.php' );
 	}
 }
 
@@ -559,7 +559,7 @@ if( ! function_exists( 'masteriyo_myaccount_main_content' ) ) {
 		}
 
 		// No endpoint found? Default to dashboard.
-		masteriyo_get_template( 'profile/tab-content-dashboard.php' );
+		masteriyo_get_template( 'myaccount/dashboard.php' );
 	}
 }
 

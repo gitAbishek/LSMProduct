@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying user profile.
+ * The template for displaying myaccount.
  *
  * @version 0.1.0
  */
@@ -8,9 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_profile_page_content hook.
+ * masteriyo_before_myaccount_content hook.
  */
-do_action( 'masteriyo_before_profile_page_content' );
+do_action( 'masteriyo_before_myaccount_content' );
 
 ?>
 <div class="mto-flex mto-flex-col md:mto-flex-row">
@@ -35,6 +35,6 @@ do_action( 'masteriyo_before_profile_page_content' );
 <?php
 
 /**
- * masteriyo_after_profile_page_content hook.
+ * masteriyo_after_myaccount_content hook.
  */
-do_action( 'masteriyo_after_profile_page_content' );
+do_action( 'masteriyo_after_myaccount_content' );

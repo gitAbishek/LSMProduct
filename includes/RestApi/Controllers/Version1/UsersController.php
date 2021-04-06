@@ -532,7 +532,7 @@ class UsersController extends PostsController {
 
 		if ( 0 !== $id ) {
 			$user->set_id( $id );
-			$user_repo = masteriyo( \ThemeGrill\Masteriyo\Repository\UserRepository::class );
+			$user_repo = masteriyo( 'user.store' );
 			$user_repo->read( $user );
 		}
 

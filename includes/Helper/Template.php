@@ -461,7 +461,7 @@ if( ! function_exists( 'masteriyo_myaccount_sidebar_content' ) ) {
 
 if( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 	/**
-	 * Show sidebar on myaccount page.
+	 * Show courses on myaccount page.
 	 *
 	 * @since 0.1.0
 	 */
@@ -472,7 +472,7 @@ if( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 
 if( ! function_exists( 'masteriyo_account_edit_profile_endpoint' ) ) {
 	/**
-	 * Show sidebar on myaccount page.
+	 * Edit profile on myaccount page.
 	 *
 	 * @since 0.1.0
 	 */
@@ -487,7 +487,7 @@ if( ! function_exists( 'masteriyo_account_edit_profile_endpoint' ) ) {
 
 if( ! function_exists( 'masteriyo_account_view_profile_endpoint' ) ) {
 	/**
-	 * Show sidebar on myaccount page.
+	 * View profile on myaccount page.
 	 *
 	 * @since 0.1.0
 	 */
@@ -502,7 +502,7 @@ if( ! function_exists( 'masteriyo_account_view_profile_endpoint' ) ) {
 
 if( ! function_exists( 'masteriyo_account_grades_endpoint' ) ) {
 	/**
-	 * Show sidebar on myaccount page.
+	 * Show grades on myaccount page.
 	 *
 	 * @since 0.1.0
 	 */
@@ -513,7 +513,7 @@ if( ! function_exists( 'masteriyo_account_grades_endpoint' ) ) {
 
 if( ! function_exists( 'masteriyo_account_memberships_endpoint' ) ) {
 	/**
-	 * Show sidebar on myaccount page.
+	 * Show memberships on myaccount page.
 	 *
 	 * @since 0.1.0
 	 */
@@ -524,7 +524,7 @@ if( ! function_exists( 'masteriyo_account_memberships_endpoint' ) ) {
 
 if( ! function_exists( 'masteriyo_account_certificates_endpoint' ) ) {
 	/**
-	 * Show sidebar on myaccount page.
+	 * Show certificates on myaccount page.
 	 *
 	 * @since 0.1.0
 	 */
@@ -535,7 +535,7 @@ if( ! function_exists( 'masteriyo_account_certificates_endpoint' ) ) {
 
 if( ! function_exists( 'masteriyo_account_order_history_endpoint' ) ) {
 	/**
-	 * Show sidebar on myaccount page.
+	 * Show order history on myaccount page.
 	 *
 	 * @since 0.1.0
 	 */
@@ -546,7 +546,7 @@ if( ! function_exists( 'masteriyo_account_order_history_endpoint' ) ) {
 
 if( ! function_exists( 'masteriyo_myaccount_main_content' ) ) {
 	/**
-	 * Show sidebar on myaccount page.
+	 * Handle myaccount page's main content.
 	 *
 	 * @since 0.1.0
 	 */

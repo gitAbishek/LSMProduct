@@ -1412,7 +1412,7 @@ function masteriyo_is_debug_enabled() {
 function masteriyo_get_current_myaccount_endpoint() {
 	global $wp;
 
-	$slugs = masteriyo_get_endpoint_slugs();
+	$slugs = masteriyo_get_endpoints();
 
 	if ( ! empty( $wp->query_vars ) ) {
 		foreach ( $wp->query_vars as $key => $value ) {
@@ -1438,8 +1438,8 @@ function masteriyo_get_current_myaccount_endpoint() {
  *
  * @return array
  */
-function masteriyo_get_endpoint_slugs() {
-	return apply_filters( 'masteriyo_myaccount_endpoint_slugs', array(
+function masteriyo_get_endpoints() {
+	return apply_filters( 'masteriyo_myaccount_endpoints', array(
 		'view-profile'   => get_option( 'masteriyo_myaccount_view-profile_endpoint', 'view-profile' ),
 		'edit-profile'   => get_option( 'masteriyo_myaccount_edit-profile_endpoint', 'edit-profile' ),
 		'dashboard'      => get_option( 'masteriyo_myaccount_dashboard_endpoint', 'dashboard' ),
@@ -1570,17 +1570,8 @@ function masteriyo_get_svg( $name, $echo = false ) {
  * @return array
  */
 function masteriyo_get_account_menu_items() {
-	$endpoints = array(
-		'dashboard' => get_option( 'masteriyo_myaccount_dashboard_endpoint', 'dashboard' ),
-		'courses' => get_option( 'masteriyo_myaccount_my_courses_endpoint', 'courses' ),
-		'grades' => get_option( 'masteriyo_myaccount_my_grades_endpoint', 'grades' ),
-		'memberships' => get_option( 'masteriyo_myaccount_my_memberships_endpoint', 'memberships' ),
-		'certificates' => get_option( 'masteriyo_myaccount_my_certificates_endpoint', 'certificates' ),
-		'order-history' => get_option( 'masteriyo_myaccount_my_order_history_endpoint', 'order-history' ),
-		'user-logout' => get_option( 'masteriyo_logout_endpoint', 'user-logout' ),
-	);
-
-	$items = array(
+	$endpoints = masteriyo_get_endpoints();
+	$items     = array(
 		'dashboard' => array(
 			'label' => __( 'Dashboard', 'masteriyo' ),
 			'icon' => masteriyo_get_svg( 'dashboard' ),

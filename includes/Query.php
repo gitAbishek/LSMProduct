@@ -111,7 +111,7 @@ class Query {
 				'order-pay'                  => get_option( 'masteriyo_checkout_pay_endpoint', 'order-pay' ),
 				'order-received'             => get_option( 'masteriyo_checkout_order_received_endpoint', 'order-received' ),
 			),
-			masteriyo_get_endpoint_slugs()
+			masteriyo_get_endpoints()
 		);
 	}
 

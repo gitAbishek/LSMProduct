@@ -44,55 +44,25 @@ class ProfileShortcode extends Shortcode {
 	 * @return string
 	 */
 	public function get_content() {
-		if ( masteriyo_is_signup_page() ) {
-			/**
-			 * Enqueue assets.
-			 */
-			wp_enqueue_script( 'masteriyo-signup-form' );
-			wp_enqueue_style( 'masteriyo-signup-form' );
-
-			/**
-			 * Find Template.
-			 */
-			$template_path = masteriyo( 'template' )->locate( 'profile/form-signup.php' );
-		} elseif ( masteriyo_is_lost_password_page() ) {
-			/**
-			 * Enqueue assets.
-			 */
-			wp_enqueue_script( 'masteriyo-reset-form' );
-			wp_enqueue_style( 'masteriyo-reset-form' );
-
-			/**
-			 * Find Template.
-			 */
-			$template_path = masteriyo( 'template' )->locate( 'profile/form-reset-password.php' );
-		} elseif ( is_user_logged_in() ) {
-			/**
-			 * Enqueue assets.
-			 */
-			wp_enqueue_script( 'masteriyo-myaccount' );
-			wp_enqueue_style( 'masteriyo-myaccount' );
-
-			/**
-			 * Find Template.
-			 */
-			$template_path = masteriyo( 'template' )->locate( 'profile.php' );
-		} else {
-			/**
-			 * Enqueue login form assets.
-			 */
-			wp_enqueue_script( 'masteriyo-login-form' );
-			wp_enqueue_style( 'masteriyo-myaccount' );
-
-			/**
-			 * Find Template.
-			 */
-			$template_path = masteriyo( 'template' )->locate( 'profile/form-login.php' );
-		}
+		$template_path = $this->get_template_path();
 
 		/**
 		 * Render the template.
 		 */
 		return $this->get_rendered_html( $this->get_attributes(), $template_path );
+	}
+
+	protected function get_template_path() {
+		if ( masteriyo_is_signup_page() ) {
+			return masteriyo( 'template' )->locate( 'profile/form-signup.php' );
+		}
+		if ( masteriyo_is_lost_password_page() ) {
+			return masteriyo( 'template' )->locate( 'profile/form-reset-password.php' );
+		}
+		if ( is_user_logged_in() ) {
+			return masteriyo( 'template' )->locate( 'profile.php' );
+		}
+
+		return masteriyo( 'template' )->locate( 'profile/form-login.php' );
 	}
 }

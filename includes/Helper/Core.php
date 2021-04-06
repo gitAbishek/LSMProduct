@@ -1636,6 +1636,24 @@ function masteriyo_echo_if( $bool, $str = '' ) {
 }
 
 /**
+ * Check if the current page is the myaccount page.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_myaccount_page() {
+	global $post;
+
+	if ( $post instanceof \WP_Post ) {
+		$page_id = masteriyo_get_page_id( 'myaccount' );
+
+		return $post->ID === $page_id;
+	}
+	return false;
+}
+
+/**
  * Check if the current page is password reset page.
  *
  * @since 0.1.0
@@ -1643,11 +1661,7 @@ function masteriyo_echo_if( $bool, $str = '' ) {
  * @return boolean
  */
 function masteriyo_is_lost_password_page() {
-	global $wp;
-
-	$page_id = masteriyo_get_page_id( 'myaccount' );
-
-	return ( $page_id && is_page( $page_id ) && isset( $wp->query_vars['reset-password'] ) );
+	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['reset-password'] );
 }
 
 /**
@@ -1658,11 +1672,7 @@ function masteriyo_is_lost_password_page() {
  * @return boolean
  */
 function masteriyo_is_signup_page() {
-	global $wp;
-
-	$page_id = masteriyo_get_page_id( 'myaccount' );
-
-	return ( $page_id && is_page( $page_id ) && isset( $wp->query_vars['signup'] ) );
+	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['signup'] );
 }
 
 /**
@@ -1673,9 +1683,27 @@ function masteriyo_is_signup_page() {
  * @return boolean
  */
 function masteriyo_is_view_profile_page() {
-	global $wp;
+	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['view-profile'] );
+}
 
-	$page_id = masteriyo_get_page_id( 'myaccount' );
+/**
+ * Check if the current page is edit profile page.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_edit_profile_page() {
+	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['edit-profile'] );
+}
 
-	return ( $page_id && is_page( $page_id ) && isset( $wp->query_vars['view-profile'] ) );
+/**
+ * Check if assets for login form should be loaded.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_load_login_form_assets() {
+	return ! is_user_logged_in() && masteriyo_is_myaccount_page();
 }

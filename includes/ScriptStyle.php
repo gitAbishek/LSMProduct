@@ -114,21 +114,19 @@ class ScriptStyle {
 				'context'  => 'public',
 				'callback' => 'masteriyo_is_single_course_page'
 			),
-			'myaccount' => array(
-				'src'      => $this->get_asset_url( '/assets/js/myaccount.js' ),
+			'edit-profile' => array(
+				'src'      => $this->get_asset_url( '/assets/js/edit-profile.js' ),
 				'deps'     => array( 'jquery' ),
 				'version'  => $this->get_version(),
-				'context'     => 'public',
-				'callback' => '',
-				'register_only' => true,
+				'context'  => 'public',
+				'callback' => 'masteriyo_is_edit_profile_page',
 			),
 			'login-form' => array(
 				'src'      => $this->get_asset_url( '/assets/js/login-form.js' ),
 				'deps'     => array( 'jquery' ),
 				'version'  => $this->get_version(),
-				'context'     => 'public',
-				'callback' => '',
-				'register_only' => true,
+				'context'  => 'public',
+				'callback' => 'masteriyo_is_load_login_form_assets',
 			),
 		) );
 	}
@@ -153,39 +151,6 @@ class ScriptStyle {
 				'src'     => $this->get_asset_url( '/assets/dist/public.css' ),
 				'has_rtl' => true,
 				'context' => 'public'
-			),
-			'single-course' => array(
-				'src'      => $this->get_asset_url( '/assets/css/public.css' ),
-				'has_rtl'  => true,
-				'context'  => 'public',
-				'callback' => 'masteriyo_is_single_course_page'
-			),
-			'myaccount' => array(
-				'src'      => $this->get_asset_url( '/assets/dist/public.css' ),
-				'deps'     => '',
-				'version'  => $this->get_version(),
-				'media'    => 'all',
-				'has_rtl'  => true,
-				'context'     => 'public',
-				'register_only' => true,
-			),
-			'reset-form' => array(
-				'src'      => $this->get_asset_url( '/assets/dist/public.css' ),
-				'deps'     => '',
-				'version'  => $this->get_version(),
-				'media'    => 'all',
-				'has_rtl'  => true,
-				'context'  => 'public',
-				'register_only' => true,
-			),
-			'signup-form' => array(
-				'src'      => $this->get_asset_url( '/assets/dist/public.css' ),
-				'deps'     => '',
-				'version'  => $this->get_version(),
-				'media'    => 'all',
-				'has_rtl'  => true,
-				'context'  => 'public',
-				'register_only' => true,
 			),
 		) );
 	}
@@ -471,7 +436,7 @@ class ScriptStyle {
 	 */
 	public function load_public_localized_scripts() {
 		$this->localized_scripts = apply_filters( 'masteriyo_localized_scripts', array(
-			'myaccount' => array(
+			'edit-profile' => array(
 				'name' => 'masteriyo_data',
 				'data' => array(
 					'rootApiUrl' => esc_url_raw( rest_url() ),

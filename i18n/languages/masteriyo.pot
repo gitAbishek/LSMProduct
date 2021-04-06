@@ -179,39 +179,6 @@ msgstr ""
 msgid " has been added successfully"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:79
-#: assets/js/src/screens/lessons/EditLesson.tsx:90
-msgid "Lesson Name"
-msgstr ""
-
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:81
-#: assets/js/src/screens/lessons/EditLesson.tsx:92
-msgid "Your topic title"
-msgstr ""
-
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:88
-#: assets/js/src/screens/lessons/EditLesson.tsx:100
-#: assets/js/src/screens/quiz/components/Info.tsx:35
-#: assets/js/src/screens/quiz/components/Question.tsx:94
-msgid "Description"
-msgstr ""
-
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:90
-#: assets/js/src/screens/lessons/EditLesson.tsx:102
-msgid "Your course description"
-msgstr ""
-
-#: assets/js/src/screens/lessons/EditLesson.tsx:169
-msgid "Update"
-msgstr ""
-
-#: assets/js/src/screens/lessons/EditLesson.tsx:51
-#: assets/js/src/screens/quiz/EditQuiz.tsx:43
-#: assets/js/src/screens/quiz/components/Question.tsx:32
-#: assets/js/src/screens/sections/components/EditSection.tsx:35
-msgid " has been updated successfully"
-msgstr ""
-
 #: assets/js/src/screens/quiz/AddNewQuiz.tsx:64
 #: assets/js/src/screens/quiz/EditQuiz.tsx:73
 msgid "Add New Quiz"
@@ -332,4 +299,11 @@ msgstr ""
 
 #: assets/js/src/screens/sections/components/Section.tsx:141
 msgid "Add New Content"
+#: assets/js/src/screens/quiz/AddNewQuiz.tsx:80
+#: assets/js/src/screens/quiz/EditQuiz.tsx:106
+msgid "Cancel"
+msgstr ""
+
+#: assets/js/src/screens/quiz/EditQuiz.tsx:43
+msgid " has been updated successfully"
 msgstr ""

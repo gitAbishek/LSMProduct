@@ -1440,6 +1440,7 @@ function masteriyo_get_current_myaccount_endpoint() {
  */
 function masteriyo_get_endpoint_slugs() {
 	return apply_filters( 'masteriyo_myaccount_endpoint_slugs', array(
+		'view-profile'   => get_option( 'masteriyo_myaccount_view-profile_endpoint', 'view-profile' ),
 		'edit-profile'   => get_option( 'masteriyo_myaccount_edit-profile_endpoint', 'edit-profile' ),
 		'dashboard'      => get_option( 'masteriyo_myaccount_dashboard_endpoint', 'dashboard' ),
 		'courses'        => get_option( 'masteriyo_myaccount_courses_endpoint', 'courses' ),
@@ -1662,4 +1663,19 @@ function masteriyo_is_signup_page() {
 	$page_id = masteriyo_get_page_id( 'myaccount' );
 
 	return ( $page_id && is_page( $page_id ) && isset( $wp->query_vars['signup'] ) );
+}
+
+/**
+ * Check if the current page is view profile page.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_view_profile_page() {
+	global $wp;
+
+	$page_id = masteriyo_get_page_id( 'myaccount' );
+
+	return ( $page_id && is_page( $page_id ) && isset( $wp->query_vars['view-profile'] ) );
 }

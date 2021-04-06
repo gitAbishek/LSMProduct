@@ -24,7 +24,12 @@ do_action( 'masteriyo_before_profile_page_sidebar_content' );
 		<img class="mto-inline-block mto-h-10 mto-w-10 mto-rounded-full mto-ring-2 mto-ring-white mto-shadow-lg" src="<?php echo $user->get_avatar_url(); ?>" alt="" />
 		<div>
 			<h2 class="mto-flex mto-font-semibold mto-text-sm mto-space-x-2">
-				<span id="label-username"><?php echo $user->get_display_name(); ?></span>
+				<a
+					id="label-username"
+					href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'view-profile' ) ); ?>"
+				>
+					<?php echo $user->get_display_name(); ?>
+				</a>
 				<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'edit-profile' ) ); ?>">
 					<svg class="mto-fill-current mto-text-gray-400 hover:mto-text-primary mto-w-5 mto-h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path fill="none" d="M16.589 9l-1.586-1.586-9.097 9.097-.529 2.114 2.114-.528zM19.588 6l-1.586 1.586L16.416 6l1.586-1.586z"/>

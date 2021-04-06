@@ -485,6 +485,21 @@ if( ! function_exists( 'masteriyo_account_edit_profile_endpoint' ) ) {
 	}
 }
 
+if( ! function_exists( 'masteriyo_account_view_profile_endpoint' ) ) {
+	/**
+	 * Show sidebar on myaccount page.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_account_view_profile_endpoint() {
+		$data = array(
+			'user' => masteriyo_get_current_user(),
+		);
+
+		masteriyo_get_template( 'profile/view-profile.php', $data );
+	}
+}
+
 if( ! function_exists( 'masteriyo_account_grades_endpoint' ) ) {
 	/**
 	 * Show sidebar on myaccount page.

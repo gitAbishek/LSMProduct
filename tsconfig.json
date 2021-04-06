@@ -15,7 +15,6 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": "./assets/js/src",
     "paths": {
       "Components/*": ["./assets/js/src/components/*"],
       "Config/*": ["./assets/js/src/config/*"],

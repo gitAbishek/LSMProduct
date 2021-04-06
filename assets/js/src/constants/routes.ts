@@ -1,22 +1,19 @@
 const routes = {
 	courses: {
-		list: '/courses/list',
+		list: '/courses',
 		add: '/courses/add',
 		edit: '/courses/:courseId',
 	},
-	builder: {
-		course: {
-			edit: '/builder/courses/:courseId',
-		},
-		lesson: {
-			add: '/builder/lesson/:sectionId/add-new-lesson',
-			edit: '/builder/lesson/:lessonId',
-		},
-		quiz: {
-			add: '/builder/quiz/add-new-quiz',
-			edit: '/builder/quiz/:quizId',
-		},
+	section: '/builder/courses/:courseId',
+	lesson: {
+		add: '/builder/lesson/:sectionId/add-new-lesson',
+		edit: '/builder/lesson/edit/:lessonId',
 	},
+	quiz: {
+		add: '/builder/quiz/add-new-quiz',
+		edit: '/builder/quiz/edit/:quizId/:step?',
+	},
+
 	settings: '/settings',
 };
 

@@ -1,16 +1,9 @@
 <?php
 /**
-<<<<<<< HEAD:includes/Shortcodes/CartShortcode.php
  * Cart page shortcode.
  *
  * @since 0.1.0
  * @class CartShortcode
-=======
- * My Account page shortcode.
- *
- * @since 0.1.0
- * @class MyAccountShortcode
->>>>>>> Implementing order system.:includes/Shortcodes/MyAccountShortcode.php
  * @package ThemeGrill\Masteriyo\Shortcodes
  */
 
@@ -21,15 +14,9 @@ use ThemeGrill\Masteriyo\Abstracts\Shortcode;
 defined( 'ABSPATH' ) || exit;
 
 /**
-<<<<<<< HEAD:includes/Shortcodes/CartShortcode.php
  * Cart page shortcode.
  */
 class CartShortcode extends Shortcode {
-=======
- * My Account page shortcode.
- */
-class MyAccountShortcode extends Shortcode {
->>>>>>> Implementing order system.:includes/Shortcodes/MyAccountShortcode.php
 
 	/**
 	 * Shortcode tag.
@@ -38,11 +25,7 @@ class MyAccountShortcode extends Shortcode {
 	 *
 	 * @var string
 	 */
-<<<<<<< HEAD:includes/Shortcodes/CartShortcode.php
 	protected $tag = 'masteriyo_cart';
-=======
-	protected $tag = 'masteriyo_myaccount';
->>>>>>> Implementing order system.:includes/Shortcodes/MyAccountShortcode.php
 
 	/**
 	 * Shortcode attributes with default values.
@@ -64,11 +47,7 @@ class MyAccountShortcode extends Shortcode {
 		/**
 		 * Prepare Template.
 		 */
-<<<<<<< HEAD:includes/Shortcodes/CartShortcode.php
 		$template_path = masteriyo( 'template' )->locate( 'cart.php' );
-=======
-		$template_path = masteriyo( 'template' )->locate( 'myaccount.php' );
->>>>>>> Implementing order system.:includes/Shortcodes/MyAccountShortcode.php
 
 		/**
 		 * Render the template.

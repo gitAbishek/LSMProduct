@@ -1492,6 +1492,7 @@ function masteriyo_get_account_endpoint_url( $endpoint ) {
 	return masteriyo_get_endpoint_url( $endpoint, '', masteriyo_get_page_permalink( 'myaccount' ) );
 }
 
+
 /**
  * Get endpoint URL.
  *

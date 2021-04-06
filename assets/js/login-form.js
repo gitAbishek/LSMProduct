@@ -39,7 +39,9 @@
 				}
 			},
 			error: function( xhr, status, error ) {
-				$( '#mto-login-error-msg' ).show().text( error );
+				var message = xhr.responseJSON.message ? xhr.responseJSON.message : error;
+
+				$( '#mto-login-error-msg' ).show().text( message );
 			},
 			complete: function() {
 				$this.find('button.sign-in').text('Sign In');

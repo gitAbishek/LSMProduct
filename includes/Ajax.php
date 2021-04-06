@@ -77,10 +77,13 @@ class Ajax {
 	 * @since 0.1.0
 	 */
 	public static function login() {
-		if ( isset( $_POST['nonce'], $_POST['payload'] ) && is_array( $_POST['payload'] ) ) {
+		if ( isset( $_POST['nonce'] ) ) {
 			try {
 				if ( ! wp_verify_nonce( $_POST['nonce'], 'masteriyo_login_nonce' ) ) {
 					throw new Exception( __( 'Invalid nonce. Maybe you should reload the page.', 'masteriyo' ) );
+				}
+				if ( ! isset( $_POST['payload'] ) || ! is_array( $_POST['payload'] ) ) {
+					throw new Exception( __( 'Missing login credentials.', 'masteriyo' ) );
 				}
 
 				$username = isset( $_POST['payload']['username'] ) ? $_POST['payload']['username'] : '';
@@ -114,6 +117,9 @@ class Ajax {
 				$user = wp_signon( $creds, is_ssl() );
 
 				if ( is_wp_error( $user ) ) {
+					if ( 'incorrect_password' === $user->get_error_code() ) {
+						throw new Exception( __( 'Incorrect password. Please try again.', 'masteriyo' ) );
+					}
 					throw new Exception( $user->get_error_message() );
 				}
 
@@ -133,7 +139,7 @@ class Ajax {
 
 		wp_send_json_error(
 			array(
-				'message' => __( 'There are missing parameters. Please make sure nonce and user credentials are provided.', 'masteriyo' ),
+				'message' => __( 'Nonce is required.', 'masteriyo' ),
 			)
 		);
 	}

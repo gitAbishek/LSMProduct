@@ -6,7 +6,6 @@ import {
 	Stack,
 	Table,
 	Tbody,
-	Text,
 	Th,
 	Thead,
 	Tr,
@@ -14,8 +13,9 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
+import routes from '../../constants/routes';
 import { SkeletonCourseList } from '../../skeleton';
 import { fetchCourses } from '../../utils/api';
 import CourseList from './components/CourseList';
@@ -28,11 +28,11 @@ const AllCourses = () => {
 			<Stack direction="column" spacing="8">
 				<Flex justify="space-between" aling="center">
 					<Heading as="h1">{__('Courses', 'masteriyo')}</Heading>
-					<Button colorScheme="blue">
-						<Link to="/courses/add-new-course">
+					<RouterLink to={routes.courses.add}>
+						<Button colorScheme="blue">
 							{__('Add New Course', 'masteriyo')}
-						</Link>
-					</Button>
+						</Button>
+					</RouterLink>
 				</Flex>
 
 				<Table>

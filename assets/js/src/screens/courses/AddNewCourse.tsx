@@ -1,20 +1,19 @@
-import { Controller, useForm } from 'react-hook-form';
-import { addCourse, fetchCategories } from '../../utils/api';
-import { useMutation, useQuery } from 'react-query';
-
+import { Box } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import Button from 'Components/common/Button';
 import FormGroup from 'Components/common/FormGroup';
 import ImageUpload from 'Components/common/ImageUpload';
 import Input from 'Components/common/Input';
 import Label from 'Components/common/Label';
-import Loader from 'react-loader-spinner';
-import MainLayout from 'Layouts/MainLayout';
-import MainToolbar from 'Layouts/MainToolbar';
-import React from 'react';
 import Select from 'Components/common/Select';
 import Textarea from 'Components/common/Textarea';
-import { __ } from '@wordpress/i18n';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import Loader from 'react-loader-spinner';
+import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
+
+import { addCourse, fetchCategories } from '../../utils/api';
 
 const AddNewCourse = () => {
 	interface Inputs {
@@ -56,8 +55,7 @@ const AddNewCourse = () => {
 
 	return (
 		<>
-			<MainToolbar />
-			<MainLayout>
+			<Box>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className="mto-flex mto-flex-wrap mto--mx-4">
 						<div className="mto-w-1/2 mto-px-4">
@@ -126,7 +124,7 @@ const AddNewCourse = () => {
 						</div>
 					</div>
 				</form>
-			</MainLayout>
+			</Box>
 		</>
 	);
 };

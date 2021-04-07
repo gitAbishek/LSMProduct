@@ -2,13 +2,17 @@ import { Box, Container, Stack } from '@chakra-ui/react';
 import MainToolbar from 'Layouts/MainToolbar';
 import React from 'react';
 
-const Main: React.FC = (props) => {
+import MasteriyoRouter from '../../router/MasteriyoRouter';
+
+const Main: React.FC = () => {
 	return (
 		<Box id="masteriyo">
 			<Stack direction="column" spacing="8">
 				<MainToolbar />
 				<Container>
-					<Box>{props.children}</Box>
+					<Box>
+						<MasteriyoRouter />
+					</Box>
 				</Container>
 			</Stack>
 		</Box>

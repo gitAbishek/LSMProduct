@@ -1,4 +1,12 @@
-import { Badge, Icon, Stack, Td, Tooltip, Tr } from '@chakra-ui/react';
+import {
+	Badge,
+	ButtonGroup,
+	IconButton,
+	Stack,
+	Td,
+	Tooltip,
+	Tr,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import DeleteModal from 'Components/layout/DeleteModal';
 import React, { useState } from 'react';
@@ -59,14 +67,28 @@ const CourseList: React.FC<Props> = (props) => {
 				</Td>
 				<Td>{price}</Td>
 				<Td>
-					<Stack direction="row">
+					<ButtonGroup>
 						<Tooltip label={__('Edit Course', 'masteriyo')}>
-							<Icon as={BiEdit} onClick={() => onEditPress()} />
+							<IconButton
+								icon={<BiEdit />}
+								colorScheme="blue"
+								variant="link"
+								size="lg"
+								aria-label={__('Edit Course', 'masteriyo')}
+								onClick={() => onEditPress()}
+							/>
 						</Tooltip>
 						<Tooltip label={__('Delete Course', 'masteriyo')}>
-							<Icon as={BiTrash} onClick={() => onDeletePress()} />
+							<IconButton
+								icon={<BiTrash />}
+								colorScheme="red"
+								variant="link"
+								size="lg"
+								aria-label={__('Delete Course', 'masteriyo')}
+								onClick={() => onDeletePress()}
+							/>
 						</Tooltip>
-					</Stack>
+					</ButtonGroup>
 				</Td>
 			</Tr>
 			<DeleteModal

@@ -1,10 +1,11 @@
-import { BiEdit, BiTrash } from 'react-icons/bi';
-import { Link, useHistory } from 'react-router-dom';
-import React, { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
-
-import DeleteModal from 'Components/layout/DeleteModal';
+import { Td, Tr } from '@chakra-ui/table';
 import Icon from 'Components/common/Icon';
+import DeleteModal from 'Components/layout/DeleteModal';
+import React, { useState } from 'react';
+import { BiEdit, BiTrash } from 'react-icons/bi';
+import { useMutation, useQueryClient } from 'react-query';
+import { Link, useHistory } from 'react-router-dom';
+
 import { deleteCourse } from '../../../utils/api';
 
 interface Props {
@@ -44,11 +45,11 @@ const CourseList: React.FC<Props> = (props) => {
 
 	return (
 		<>
-			<tr key={id}>
-				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
+			<Tr key={id}>
+				<Td>
 					<Link to={`/builder/${id}`}>{name}</Link>
-				</td>
-				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
+				</Td>
+				<Td>
 					{categories.map((category: any) => (
 						<span
 							key={category.id}
@@ -56,11 +57,9 @@ const CourseList: React.FC<Props> = (props) => {
 							{category.name}
 						</span>
 					))}
-				</td>
-				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
-					{price}
-				</td>
-				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
+				</Td>
+				<Td>{price}</Td>
+				<Td>
 					<ul className="mto-flex mto-list-none mto-text-base mto-justify-end">
 						<li
 							onClick={() => onEditPress(id)}
@@ -73,8 +72,8 @@ const CourseList: React.FC<Props> = (props) => {
 							<Icon icon={<BiTrash />} />
 						</li>
 					</ul>
-				</td>
-			</tr>
+				</Td>
+			</Tr>
 			<DeleteModal
 				isOpen={isModalOpen}
 				onClose={onModalClose}

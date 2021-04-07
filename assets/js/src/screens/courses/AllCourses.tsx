@@ -1,54 +1,49 @@
+import {
+	Box,
+	Button,
+	Flex,
+	Heading,
+	Stack,
+	Table,
+	Tbody,
+	Text,
+	Th,
+	Thead,
+	Tr,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Button from 'Components/common/Button';
-import Icon from 'Components/common/Icon';
-import Spinner from 'Components/common/Spinner';
-import DeleteModal from 'Components/layout/DeleteModal';
-import MainLayout from 'Layouts/MainLayout';
-import MainToolbar from 'Layouts/MainToolbar';
-import React, { Fragment, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
-import { Edit, Trash } from '../../assets/icons';
-import { deleteCourse, fetchCourses } from '../../utils/api';
+import { fetchCourses } from '../../utils/api';
 import CourseList from './components/CourseList';
 
 const AllCourses = () => {
 	const courseQuery = useQuery('courseList', fetchCourses);
 
 	return (
-		<Fragment>
-			<div className="mto-flex mto-justify-between mto-mb-10">
-				<h1 className="mto-text-xl mto-m-0 mto-font-medium">
-					{__('Courses', 'masteriyo')}
-				</h1>
-				<Button layout="primary">
-					<Link to="/courses/add-new-course">
-						{__('Add New Course', 'masteriyo')}
-					</Link>
-				</Button>
-			</div>
-			{courseQuery.isLoading ? (
-				<Spinner />
-			) : (
-				<table className="mto-min-w-full mto-divide-y mto-divide-gray-200 mto-text-gray-700">
-					<thead>
-						<tr>
-							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Title', 'masteriyo')}
-							</th>
-							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Categories', 'masteriyo')}
-							</th>
-							<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Price', 'masteriyo')}
-							</th>
-							<th className="mto-px-6 mto-py-3 mto-text-right mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-								{__('Actions', 'masteriyo')}
-							</th>
-						</tr>
-					</thead>
-					<tbody className="mto-bg-white mto-divide-y mto-divide-gray-200">
+		<Box bg="white" p="12" shadow="box">
+			<Stack direction="column" spacing="8">
+				<Flex justify="space-between" aling="center">
+					<Heading as="h1">{__('Courses', 'masteriyo')}</Heading>
+					<Button colorScheme="blue">
+						<Link to="/courses/add-new-course">
+							{__('Add New Course', 'masteriyo')}
+						</Link>
+					</Button>
+				</Flex>
+
+				<Table>
+					<Thead>
+						<Tr>
+							<Th>{__('Title', 'masteriyo')}</Th>
+							<Th>{__('Categories', 'masteriyo')}</Th>
+							<Th>{__('Price', 'masteriyo')}</Th>
+							<Th>{__('Actions', 'masteriyo')}</Th>
+						</Tr>
+					</Thead>
+					<Tbody>
 						{courseQuery?.data?.map((course: any) => (
 							<CourseList
 								id={course.id}
@@ -58,10 +53,10 @@ const AllCourses = () => {
 								key={course.id}
 							/>
 						))}
-					</tbody>
-				</table>
-			)}
-		</Fragment>
+					</Tbody>
+				</Table>
+			</Stack>
+		</Box>
 	);
 };
 

@@ -3,16 +3,16 @@ import { extendTheme } from '@chakra-ui/react';
 const theme = extendTheme({
 	colors: {
 		blue: {
-			50: '#f2f8ff',
-			100: '#dbeafe',
-			200: '#bfdbfe',
-			300: '#93c5fd',
-			400: '#60a5fa',
-			500: '#3b82f6',
-			600: '#2563eb',
-			700: '#1d4ed8',
-			800: '#1e40af',
-			900: '#1e3a8a',
+			50: '#EBF2FF',
+			100: '#DEE9FF',
+			200: '#C4D8FF',
+			300: '#ABC8FF',
+			400: '#92B7FF',
+			500: '#78A6FF',
+			600: '#4584FF',
+			700: '#1263FF',
+			800: '#004CDE',
+			900: '#003AAB',
 		},
 	},
 	styles: {
@@ -37,6 +37,11 @@ const theme = extendTheme({
 		Button: {
 			baseStyle: {
 				borderRadius: 'sm',
+			},
+			sizes: {
+				md: {
+					fontSize: 'sm',
+				},
 			},
 		},
 		Input: {

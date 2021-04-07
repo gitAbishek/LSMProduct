@@ -1,17 +1,18 @@
-import { Book, Cog, Edit, Show } from '../../assets/icons';
-
+import { Box, Container, Flex, Stack } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import Button from 'Components/common/Button';
 import Icon from 'Components/common/Icon';
-import LogoImg from '../../../../img/logo.png';
-import { NavLink } from 'react-router-dom';
 import React from 'react';
-import { __ } from '@wordpress/i18n';
+import { NavLink } from 'react-router-dom';
+
+import LogoImg from '../../../../img/logo.png';
+import { Book, Cog, Edit, Show } from '../../assets/icons';
 
 const MainToolbar = () => {
 	return (
-		<header className="mto-bg-white mto-shadow-sm">
-			<div className="mto-container mto-mx-auto mto-flex mto-justify-between mto-items-center">
-				<div className="mto-flex mto-items-center">
+		<Box bg="white">
+			<Container maxW="container.xl">
+				<Stack direction="column">
 					<div>
 						<img src={LogoImg} alt="Masteriyo Logo" />
 					</div>
@@ -41,17 +42,18 @@ const MainToolbar = () => {
 							</NavLink>
 						</li>
 					</ul>
-				</div>
-				<div>
-					<div className="mto-flex">
-						<Button icon={<Show />}>{__('Preview', 'masteriyo')}</Button>
-						<Button layout="primary" className="mto-ml-4">
-							{__('Save', 'masteriyo')}
-						</Button>
+
+					<div>
+						<div className="mto-flex">
+							<Button icon={<Show />}>{__('Preview', 'masteriyo')}</Button>
+							<Button layout="primary" className="mto-ml-4">
+								{__('Save', 'masteriyo')}
+							</Button>
+						</div>
 					</div>
-				</div>
-			</div>
-		</header>
+				</Stack>
+			</Container>
+		</Box>
 	);
 };
 

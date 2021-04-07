@@ -7,7 +7,7 @@ class API {
 		this.uri = `${uri}/`;
 	}
 
-	list(query?: any) {
+	async list(query?: any) {
 		return http({
 			url: this.uri,
 			method: 'get',
@@ -15,14 +15,14 @@ class API {
 		}).then((res) => res.data);
 	}
 
-	get(id: number) {
+	async get(id: number) {
 		return http({
 			url: `${this.uri}/${id}`,
 			method: 'get',
 		}).then((res) => res.data);
 	}
 
-	store(data: any) {
+	async store(data: any) {
 		return http({
 			url: this.uri,
 			method: 'post',
@@ -30,7 +30,7 @@ class API {
 		}).then((res) => res.data);
 	}
 
-	update(id: number, data: any) {
+	async update(id: number, data: any) {
 		return http({
 			url: `${this.uri}/${id}`,
 			method: 'patch',
@@ -38,7 +38,7 @@ class API {
 		}).then((res) => res.data);
 	}
 
-	delete(id: number) {
+	async delete(id: number) {
 		return http({
 			url: `${this.uri}/${id}`,
 			method: 'delete',

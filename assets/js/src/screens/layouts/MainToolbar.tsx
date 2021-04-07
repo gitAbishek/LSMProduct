@@ -4,6 +4,7 @@ import {
 	ButtonGroup,
 	Container,
 	Flex,
+	Icon,
 	Image,
 	Link,
 	List,
@@ -13,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
+import { BiBook, BiCog, BiEdit, BiShowAlt } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
 
 import LogoImg from '../../../../img/logo.png';
@@ -78,7 +79,11 @@ const MainToolbar = () => {
 					</Stack>
 
 					<ButtonGroup>
-						<Button variant="outline">{__('Preview', 'masteriyo')}</Button>
+						<Button
+							leftIcon={<Icon as={BiShowAlt} w="4" h="4" />}
+							variant="outline">
+							{__('Preview', 'masteriyo')}
+						</Button>
 						<Button colorScheme="blue">{__('Save', 'masteriyo')}</Button>
 					</ButtonGroup>
 				</Flex>

@@ -40,7 +40,7 @@ const theme = extendTheme({
 			},
 			sizes: {
 				md: {
-					fontSize: 'sm',
+					fontSize: 'xs',
 				},
 			},
 		},

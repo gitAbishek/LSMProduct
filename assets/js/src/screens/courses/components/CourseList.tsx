@@ -1,11 +1,12 @@
-import { Td, Tr } from '@chakra-ui/table';
-import Icon from 'Components/common/Icon';
+import { Badge, Icon, Stack, Td, Tooltip, Tr } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import DeleteModal from 'Components/layout/DeleteModal';
 import React, { useState } from 'react';
 import { BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link, useHistory } from 'react-router-dom';
 
+import routes from '../../../constants/routes';
 import { deleteCourse } from '../../../utils/api';
 
 interface Props {
@@ -39,8 +40,8 @@ const CourseList: React.FC<Props> = (props) => {
 		deleteMutation.mutate(id);
 	};
 
-	const onEditPress = (id: any) => {
-		history.push(`/courses/edit/${id}`);
+	const onEditPress = () => {
+		history.push(routes.courses.edit.replace(':courseId', id.toString()));
 	};
 
 	return (
@@ -50,28 +51,22 @@ const CourseList: React.FC<Props> = (props) => {
 					<Link to={`/builder/${id}`}>{name}</Link>
 				</Td>
 				<Td>
-					{categories.map((category: any) => (
-						<span
-							key={category.id}
-							className="mto-bg-primary mto-rounded-full mto-text-white mto-text-sm mto-px-3 mto-py-1 mto-inline-block mto-mr-1">
-							{category.name}
-						</span>
-					))}
+					<Stack direction="row">
+						{categories.map((category: any) => (
+							<Badge>{category.name}</Badge>
+						))}
+					</Stack>
 				</Td>
 				<Td>{price}</Td>
 				<Td>
-					<ul className="mto-flex mto-list-none mto-text-base mto-justify-end">
-						<li
-							onClick={() => onEditPress(id)}
-							className="mto-text-gray-800 hover:mto-text-blue-500 mto-cursor-pointer mto-ml-4">
-							<Icon icon={<BiEdit />} />
-						</li>
-						<li
-							onClick={() => onDeletePress()}
-							className="mto-text-gray-800 hover:mto-text-red-600 mto-cursor-pointer mto-ml-4">
-							<Icon icon={<BiTrash />} />
-						</li>
-					</ul>
+					<Stack direction="row">
+						<Tooltip label={__('Edit Course', 'masteriyo')}>
+							<Icon as={BiEdit} onClick={() => onEditPress()} />
+						</Tooltip>
+						<Tooltip label={__('Delete Course', 'masteriyo')}>
+							<Icon as={BiTrash} onClick={() => onDeletePress()} />
+						</Tooltip>
+					</Stack>
 				</Td>
 			</Tr>
 			<DeleteModal

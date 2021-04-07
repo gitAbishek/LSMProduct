@@ -57,7 +57,11 @@ const CourseList: React.FC<Props> = (props) => {
 		<>
 			<Tr key={id}>
 				<Td>
-					<Link as={RouterLink} to={`/builder/${id}`}>
+					<Link
+						as={RouterLink}
+						to={`/builder/${id}`}
+						fontWeight="semibold"
+						_hover={{ color: 'blue.500' }}>
 						{name}
 					</Link>
 				</Td>

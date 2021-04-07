@@ -2,6 +2,7 @@ import {
 	Badge,
 	ButtonGroup,
 	IconButton,
+	Link,
 	Stack,
 	Td,
 	Tooltip,
@@ -12,7 +13,7 @@ import DeleteModal from 'Components/layout/DeleteModal';
 import React, { useState } from 'react';
 import { BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
-import { Link, useHistory } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 
 import routes from '../../../constants/routes';
 import { deleteCourse } from '../../../utils/api';
@@ -56,7 +57,9 @@ const CourseList: React.FC<Props> = (props) => {
 		<>
 			<Tr key={id}>
 				<Td>
-					<Link to={`/builder/${id}`}>{name}</Link>
+					<Link as={RouterLink} to={`/builder/${id}`}>
+						{name}
+					</Link>
 				</Td>
 				<Td>
 					<Stack direction="row">

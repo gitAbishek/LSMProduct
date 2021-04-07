@@ -82,6 +82,8 @@ const CourseList: React.FC<Props> = (props) => {
 								colorScheme="blue"
 								variant="link"
 								size="lg"
+								padding="0"
+								minW="0"
 								aria-label={__('Edit Course', 'masteriyo')}
 								onClick={() => onEditPress()}
 							/>
@@ -92,6 +94,7 @@ const CourseList: React.FC<Props> = (props) => {
 								colorScheme="red"
 								variant="link"
 								size="lg"
+								padding="0"
 								aria-label={__('Delete Course', 'masteriyo')}
 								onClick={() => onDeletePress()}
 							/>

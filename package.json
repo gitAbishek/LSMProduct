@@ -94,8 +94,7 @@
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {
-      "style": "module",
-      "parser": "typescript"
+      "style": "module"
     }
   }
 }

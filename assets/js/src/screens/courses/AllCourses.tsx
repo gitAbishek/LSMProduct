@@ -1,17 +1,17 @@
-import { Edit, Trash } from '../../assets/icons';
-import { Link, useHistory } from 'react-router-dom';
-import React, { Fragment, useState } from 'react';
-import { deleteCourse, fetchCourses } from '../../utils/api';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-
+import { __ } from '@wordpress/i18n';
 import Button from 'Components/common/Button';
-import CourseList from './components/CourseList';
-import DeleteModal from 'Components/layout/DeleteModal';
 import Icon from 'Components/common/Icon';
+import Spinner from 'Components/common/Spinner';
+import DeleteModal from 'Components/layout/DeleteModal';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
-import Spinner from 'Components/common/Spinner';
-import { __ } from '@wordpress/i18n';
+import React, { Fragment, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { Link, useHistory } from 'react-router-dom';
+
+import { Edit, Trash } from '../../assets/icons';
+import { deleteCourse, fetchCourses } from '../../utils/api';
+import CourseList from './components/CourseList';
 
 const AllCourses = () => {
 	const courseQuery = useQuery('courseList', fetchCourses);

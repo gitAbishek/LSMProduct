@@ -1,44 +1,49 @@
 import http from './http';
 
-export const listData = async (uri: string, params: any) => {
-	const res = await http({
-		url: uri,
-		method: 'GET',
-		params: params,
-	});
-	return res;
-};
+class API {
+	uri: string;
 
-export const getData = async (uri: string) => {
-	const res = await http({
-		url: uri,
-		method: 'GET',
-	});
-	return res;
-};
+	constructor(uri: string) {
+		this.uri = uri;
+	}
 
-export const storeData = async (uri: string, data: any) => {
-	const res = await http({
-		url: uri,
-		method: 'POST',
-		data: data,
-	});
-	return res;
-};
+	list(query: any) {
+		return http({
+			url: this.uri,
+			method: 'get',
+			params: query,
+		});
+	}
 
-export const updateData = async (uri: string, data: any) => {
-	const res = await http({
-		url: uri,
-		method: 'PATCH',
-		data: data,
-	});
-	return res;
-};
+	get(id: number) {
+		return http({
+			url: `${this.uri}/${id}`,
+			method: 'get',
+		});
+	}
 
-export const deleteData = async(uri:string) {
-	const res = await http({
-		url: uri,
-		method: 'DELETE'
-	})
-	return res;
+	store(data: any) {
+		return http({
+			url: this.uri,
+			method: 'post',
+			data: data,
+		});
+	}
+
+	update(id: number, data: any) {
+		return http({
+			url: `${this.uri}/${id}`,
+			method: 'patch',
+			data: data,
+		});
+	}
+
+	delete(id: number) {
+		return http({
+			url: `${this.uri}/${id}`,
+			method: 'delete',
+		});
+	}
 }
+
+export default API;

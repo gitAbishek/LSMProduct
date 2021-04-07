@@ -16,6 +16,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
+import { SkeletonCourseList } from '../../skeleton';
 import { fetchCourses } from '../../utils/api';
 import CourseList from './components/CourseList';
 
@@ -44,15 +45,19 @@ const AllCourses = () => {
 						</Tr>
 					</Thead>
 					<Tbody>
-						{courseQuery?.data?.map((course: any) => (
-							<CourseList
-								id={course.id}
-								name={course.name}
-								price={course.price}
-								categories={course.categories}
-								key={course.id}
-							/>
-						))}
+						{courseQuery.isLoading ? (
+							<SkeletonCourseList />
+						) : (
+							courseQuery?.data?.map((course: any) => (
+								<CourseList
+									id={course.id}
+									name={course.name}
+									price={course.price}
+									categories={course.categories}
+									key={course.id}
+								/>
+							))
+						)}
 					</Tbody>
 				</Table>
 			</Stack>

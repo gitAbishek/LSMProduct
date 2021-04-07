@@ -33,6 +33,7 @@ const CourseList: React.FC<Props> = (props) => {
 
 	const deleteMutation = useMutation((id: number) => deleteCourse(id), {
 		onSuccess: () => {
+			setIsModalOpen(false);
 			queryClient.invalidateQueries('courseList');
 		},
 	});
@@ -103,6 +104,7 @@ const CourseList: React.FC<Props> = (props) => {
 				onClose={onModalClose}
 				onDeletePress={onDeleteConfirm}
 				title={name}
+				isDeleting={deleteMutation.isLoading}
 			/>
 		</>
 	);

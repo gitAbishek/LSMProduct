@@ -1,6 +1,6 @@
 import { isProduction } from './../utils/helper';
 
-const baseUrl = isProduction()
+export const baseUrl = isProduction()
 	? //@ts-ignore
 	  masteriyo.rootApiUrl + '/masteriyo/v1'
 	: process.env.baseUrl;

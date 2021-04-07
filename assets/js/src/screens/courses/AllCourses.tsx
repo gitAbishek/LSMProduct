@@ -16,13 +16,14 @@ import { useQuery } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
 
 import routes from '../../constants/routes';
+import urls from '../../constants/urls';
 import { SkeletonCourseList } from '../../skeleton';
-import { fetchCourses } from '../../utils/api';
+import API from '../../utils/api';
 import CourseList from './components/CourseList';
 
 const AllCourses = () => {
-	const courseQuery = useQuery('courseList', fetchCourses);
-
+	const courseAPI = new API(urls.courses);
+	const courseQuery = useQuery('courseList', () => courseAPI.list());
 	return (
 		<Box bg="white" p="12" shadow="box">
 			<Stack direction="column" spacing="8">
@@ -48,7 +49,7 @@ const AllCourses = () => {
 						{courseQuery.isLoading ? (
 							<SkeletonCourseList />
 						) : (
-							courseQuery?.data?.map((course: any) => (
+							courseQuery.data.map((course: any) => (
 								<CourseList
 									id={course.id}
 									name={course.name}

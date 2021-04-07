@@ -1,7 +1,7 @@
-import { isDevelopment, isProduction } from './helper';
-
 import axios from 'axios';
+
 import urls from '../constants/urls';
+import { isDevelopment, isProduction } from './helper';
 
 axios.interceptors.request.use(function (config) {
 	config.headers = {
@@ -10,7 +10,7 @@ axios.interceptors.request.use(function (config) {
 	};
 
 	// Sets nonce to run API on WordPress Dashboard
-	if (isProduction()) {
+	if (isProduction) {
 		config.headers = {
 			...config.headers,
 			//@ts-ignore
@@ -19,7 +19,7 @@ axios.interceptors.request.use(function (config) {
 	}
 
 	// Basic Auth for the local development, required basic auth plugin
-	if (isDevelopment()) {
+	if (isDevelopment) {
 		config.auth = {
 			...config.auth,
 			username: process.env.username || '',

@@ -1,34 +1,30 @@
 import { isProduction } from './../utils/helper';
 
-export const baseUrl = isProduction()
-	? //@ts-ignore
-	  masteriyo.rootApiUrl + '/masteriyo/v1'
-	: process.env.baseUrl;
-
 const urls = {
-	courses: `${baseUrl}/courses`,
-	course: `${baseUrl}/courses/:id`,
-	categories: `${baseUrl}/courses/categories`,
-	category: `${baseUrl}/courses/categories/:id`,
-	tags: `${baseUrl}/courses/tags`,
-	tag: `${baseUrl}/courses/tags/:id`,
-	difficulties: `${baseUrl}/courses/difficulties`,
-	difficulty: `${baseUrl}/courses/difficulties/:id`,
-	lessons: `${baseUrl}/lessons`,
-	lesson: `${baseUrl}/lessons/:id`,
-	questions: `${baseUrl}/questions`,
-	question: `${baseUrl}/questions/:id`,
-	checkAnswer: `${baseUrl}/questions/check_answer/:id/answer`,
-	quizes: `${baseUrl}/quizes`,
-	quiz: `${baseUrl}/quizes/:id`,
-	sections: `${baseUrl}/sections`,
-	section: `${baseUrl}/sections/:id`,
-	contents: `${baseUrl}/sections/children`,
-	orders: `${baseUrl}/orders`,
-	order: `${baseUrl}/orders/:id`,
-	users: `${baseUrl}/users`,
-	user: `${baseUrl}/users/:id`,
-	settings: `${baseUrl}/settings`,
+	base: process.env.baseUrl || '/',
+	courses: `courses`,
+	course: `courses/:id`,
+	categories: `courses/categories`,
+	category: `courses/categories/:id`,
+	tags: `courses/tags`,
+	tag: `courses/tags/:id`,
+	difficulties: `courses/difficulties`,
+	difficulty: `courses/difficulties/:id`,
+	lessons: `lessons`,
+	lesson: `lessons/:id`,
+	questions: `questions`,
+	question: `questions/:id`,
+	checkAnswer: `questions/check_answer/:id/answer`,
+	quizes: `quizes`,
+	quiz: `quizes/:id`,
+	sections: `sections`,
+	section: `sections/:id`,
+	contents: `sections/children`,
+	orders: `orders`,
+	order: `orders/:id`,
+	users: `users`,
+	user: `users/:id`,
+	settings: `settings`,
 };
 
 export default urls;

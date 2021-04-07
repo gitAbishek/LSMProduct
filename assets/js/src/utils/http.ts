@@ -1,9 +1,20 @@
 import axios from 'axios';
 
-import { baseUrl } from './../constants/urls';
+import urls from '../constants/urls';
+import { isProduction } from './helper';
 
-const http = axios.create({
-	baseURL: baseUrl,
+const configProduction = {
+	//@ts-ignore
+	baseURL: masteriyo.rootApiUrl + '/masteriyo/v1',
+	headers: {
+		'Content-Type': 'application/json',
+		//@ts-ignore
+		'X-WP-Nonce': masteriyo.nonce,
+	},
+};
+
+const configDevelopment = {
+	baseURL: urls.base,
 	headers: {
 		'Content-Type': 'application/json',
 	},
@@ -11,6 +22,10 @@ const http = axios.create({
 		username: process.env.username || '',
 		password: process.env.password || '',
 	},
-});
+};
+
+const config = isProduction ? configProduction : configDevelopment;
+
+const http = axios.create(config);
 
 export default http;

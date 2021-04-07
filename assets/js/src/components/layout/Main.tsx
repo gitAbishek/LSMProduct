@@ -7,13 +7,16 @@ import MasteriyoRouter from '../../router/MasteriyoRouter';
 const Main: React.FC = () => {
 	return (
 		<Box id="masteriyo">
-			<Stack direction="column" spacing="8">
+			<Stack direction="column" spacing="12">
 				<MainToolbar />
-				<Container>
-					<Box>
-						<MasteriyoRouter />
-					</Box>
-				</Container>
+
+				<Box w="full">
+					<Container maxW="container.xl" centerContent>
+						<Box w="full">
+							<MasteriyoRouter />
+						</Box>
+					</Container>
+				</Box>
 			</Stack>
 		</Box>
 	);

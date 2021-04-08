@@ -32,7 +32,7 @@ class API {
 
 	async update(id: number, data: any) {
 		return http({
-			url: `${this.uri}/${id}`,
+			url: this.uri + id,
 			method: 'patch',
 			data: data,
 		}).then((res) => res.data);
@@ -40,7 +40,7 @@ class API {
 
 	async delete(id: number) {
 		return http({
-			url: `${this.uri}/${id}`,
+			url: this.uri + id,
 			method: 'delete',
 		}).then((res) => res.data);
 	}

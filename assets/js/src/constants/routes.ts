@@ -14,7 +14,7 @@ const routes = {
 		edit: '/builder/quiz/edit/:quizId/:step?',
 	},
 
-	settings: '/settings',
+	settings: 'settings',
 };
 
 export default routes;

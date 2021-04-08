@@ -16,7 +16,8 @@ import { useMutation, useQueryClient } from 'react-query';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 
 import routes from '../../../constants/routes';
-import { deleteCourse } from '../../../utils/api';
+import urls from '../../../constants/urls';
+import API from '../../../utils/api';
 
 interface Props {
 	id: number;
@@ -30,8 +31,9 @@ const CourseList: React.FC<Props> = (props) => {
 	const history = useHistory();
 	const queryClient = useQueryClient();
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const courseAPI = new API(urls.courses);
 
-	const deleteMutation = useMutation((id: number) => deleteCourse(id), {
+	const deleteMutation = useMutation((id: number) => courseAPI.delete(id), {
 		onSuccess: () => {
 			setIsModalOpen(false);
 			queryClient.invalidateQueries('courseList');
@@ -55,61 +57,59 @@ const CourseList: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<>
-			<Tr key={id}>
-				<Td>
-					<Link
-						as={RouterLink}
-						to={`/builder/${id}`}
-						fontWeight="semibold"
-						_hover={{ color: 'blue.500' }}>
-						{name}
-					</Link>
-				</Td>
-				<Td>
-					<Stack direction="row">
-						{categories.map((category: any) => (
-							<Badge>{category.name}</Badge>
-						))}
-					</Stack>
-				</Td>
-				<Td>{price}</Td>
-				<Td>
-					<ButtonGroup>
-						<Tooltip label={__('Edit Course', 'masteriyo')}>
-							<IconButton
-								icon={<BiEdit />}
-								colorScheme="blue"
-								variant="link"
-								size="lg"
-								padding="0"
-								minW="0"
-								aria-label={__('Edit Course', 'masteriyo')}
-								onClick={() => onEditPress()}
-							/>
-						</Tooltip>
-						<Tooltip label={__('Delete Course', 'masteriyo')}>
-							<IconButton
-								icon={<BiTrash />}
-								colorScheme="red"
-								variant="link"
-								size="lg"
-								padding="0"
-								aria-label={__('Delete Course', 'masteriyo')}
-								onClick={() => onDeletePress()}
-							/>
-						</Tooltip>
-					</ButtonGroup>
-				</Td>
-			</Tr>
-			<DeleteModal
-				isOpen={isModalOpen}
-				onClose={onModalClose}
-				onDeletePress={onDeleteConfirm}
-				title={name}
-				isDeleting={deleteMutation.isLoading}
-			/>
-		</>
+		<Tr>
+			<Td>
+				<Link
+					as={RouterLink}
+					to={`/builder/${id}`}
+					fontWeight="semibold"
+					_hover={{ color: 'blue.500' }}>
+					{name}
+				</Link>
+			</Td>
+			<Td>
+				<Stack direction="row">
+					{categories.map((category: any, index: any) => (
+						<Badge key={index}>{category.name}</Badge>
+					))}
+				</Stack>
+			</Td>
+			<Td>{price}</Td>
+			<Td>
+				<ButtonGroup>
+					<Tooltip label={__('Edit Course', 'masteriyo')}>
+						<IconButton
+							icon={<BiEdit />}
+							colorScheme="blue"
+							variant="link"
+							size="lg"
+							padding="0"
+							minW="0"
+							aria-label={__('Edit Course', 'masteriyo')}
+							onClick={() => onEditPress()}
+						/>
+					</Tooltip>
+					<Tooltip label={__('Delete Course', 'masteriyo')}>
+						<IconButton
+							icon={<BiTrash />}
+							colorScheme="red"
+							variant="link"
+							size="lg"
+							padding="0"
+							aria-label={__('Delete Course', 'masteriyo')}
+							onClick={() => onDeletePress()}
+						/>
+					</Tooltip>
+				</ButtonGroup>
+				<DeleteModal
+					isOpen={isModalOpen}
+					onClose={onModalClose}
+					onDeletePress={onDeleteConfirm}
+					title={name}
+					isDeleting={deleteMutation.isLoading}
+				/>
+			</Td>
+		</Tr>
 	);
 };
 

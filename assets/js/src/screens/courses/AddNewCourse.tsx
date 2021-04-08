@@ -1,7 +1,11 @@
 import {
 	Box,
+	Button,
+	ButtonGroup,
+	Divider,
 	Flex,
 	FormControl,
+	FormErrorMessage,
 	FormLabel,
 	Heading,
 	Input,
@@ -16,6 +20,9 @@ import { Controller, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
+import urls from '../../constants/urls';
+import API from '../../utils/api';
+
 const AddNewCourse: React.FC = () => {
 	interface Inputs {
 		name: string;
@@ -23,9 +30,10 @@ const AddNewCourse: React.FC = () => {
 		categories?: any;
 	}
 	const history = useHistory();
-	const { register, handleSubmit, control } = useForm<Inputs>();
-
-	const categoryQuery = useQuery('categoryLists', () => fetchCategories());
+	const { register, handleSubmit, control, errors } = useForm<Inputs>();
+	const courseAPI = new API(urls.courses);
+	const categoryAPI = new API(urls.categories);
+	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
 
 	const categoriesOption = categoryQuery?.data?.map((category: any) => {
 		return {
@@ -34,7 +42,7 @@ const AddNewCourse: React.FC = () => {
 		};
 	});
 
-	const addMutation = useMutation((data) => addCourse(data), {
+	const addMutation = useMutation((data) => courseAPI.store(data), {
 		onSuccess: (data) => {
 			history.push(`/courses/${data?.id}`);
 		},
@@ -57,32 +65,35 @@ const AddNewCourse: React.FC = () => {
 	return (
 		<>
 			<Box p="12" shadow="box" bg="white">
-				<Stack direction="column" spacing="8">
-					<Flex justify="space-between" aling="center">
-						<Heading as="h1">{__('Add New Course', 'masteriyo')}</Heading>
-					</Flex>
-					<form onSubmit={handleSubmit(onSubmit)}>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<Stack direction="column" spacing="8">
+						<Flex justify="space-between" aling="center">
+							<Heading as="h1">{__('Add New Course', 'masteriyo')}</Heading>
+						</Flex>
 						<Stack direction="column" spacing="6">
-							<FormControl>
+							<FormControl isInvalid={!!errors.name}>
 								<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
 								<Input
 									placeholder={__('Your Course Name', 'masteriyo')}
+									name="name"
 									ref={register({
 										required: __(
 											'You must provide name for the course',
 											'masteriyo'
 										),
 									})}
-									name="name"
 								/>
+								<FormErrorMessage>
+									{errors.name && errors.name.message}
+								</FormErrorMessage>
 							</FormControl>
 
 							<FormControl>
 								<FormLabel>{__('Course Description', 'masteriyo')}</FormLabel>
 								<Textarea
+									name="description"
 									placeholder={__('Your Course Description', 'masteriyo')}
 									ref={register({ required: true })}
-									name="name"
 								/>
 							</FormControl>
 
@@ -104,8 +115,17 @@ const AddNewCourse: React.FC = () => {
 								/>
 							</FormControl>
 						</Stack>
-					</form>
-				</Stack>
+						<Divider />
+						<ButtonGroup>
+							<Button type="submit" colorScheme="blue">
+								Add New Course
+							</Button>
+							<Button variant="outline" onClick={() => history.goBack()}>
+								Cancel
+							</Button>
+						</ButtonGroup>
+					</Stack>
+				</form>
 			</Box>
 		</>
 	);

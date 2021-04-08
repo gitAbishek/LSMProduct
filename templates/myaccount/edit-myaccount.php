@@ -16,8 +16,8 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 
 <div class="mto-tabs mto-px-4 md:mto-px-0">
 	<div class="tab-menu mto-flex mto-font-bold mto-text-base mto-border-b-2 mto-border-gray-2 mto-mb-10">
-		<div data-tab="edit-profile-tab" class="mto-tab active-tab mto-pt-6 mto-pb-4 mto--mb-0.5 mto-cursor-pointer">Edit Profile</div>
-		<div data-tab="password-security-tab" class="mto-tab mto-pt-6 mto-pb-4 mto--mb-0.5 mto-ml-12 mto-cursor-pointer">Password & Security</div>
+		<div data-tab="edit-profile-tab" class="mto-tab active-tab mto-pt-6 mto-pb-4 mto--mb-0.5 mto-cursor-pointer"><?php echo esc_html__( 'Edit Profile', 'masteriyo' ); ?></div>
+		<div data-tab="password-security-tab" class="mto-tab mto-pt-6 mto-pb-4 mto--mb-0.5 mto-ml-12 mto-cursor-pointer"><?php echo esc_html__( 'Password & Security', 'masteriyo' ); ?></div>
 	</div>
 	<div id="edit-profile-tab" class="tab-content mto-block">
 		<div class="edit-profile mto-my-20">
@@ -40,59 +40,59 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 			<div class="mto-space-y-6 md:mto-space-y-8">
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0">
 					<div class="mto-flex-grow">
-						<label for="user-email" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Username</label>
+						<label for="user-email" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Username', 'masteriyo' ); ?></label>
 						<input value="<?php echo esc_attr( $user->get_display_name() ); ?>" id="username" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0 md:mto-space-x-8">
 					<div class="mto-flex-grow">
-						<label for="user-first-name" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">First Name</label>
+						<label for="user-first-name" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'First Name', 'masteriyo' ); ?></label>
 						<input value="<?php echo esc_attr( $user->get_first_name() ); ?>" id="user-first-name" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 
 					<div class="mto-flex-grow">
-						<label for="user-last-name" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Last Name</label>
+						<label for="user-last-name" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Last Name', 'masteriyo' ); ?></label>
 						<input value="<?php echo esc_attr( $user->get_last_name() ); ?>" id="user-last-name" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0">
 					<div class="mto-flex-grow">
-						<label for="user-email" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Email</label>
+						<label for="user-email" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Email', 'masteriyo' ); ?></label>
 						<input value="<?php echo esc_attr( $user->get_email() ); ?>" id="user-email" name="text" type="email" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0">
 					<div class="mto-flex-grow">
-						<label for="user-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Address</label>
+						<label for="user-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Address', 'masteriyo' ); ?></label>
 						<input value="<?php echo esc_attr( $user->get_address() ); ?>" id="user-address" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0 md:mto-space-x-8">
 					<div class="mto-flex-grow">
-						<label for="user-city" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">City</label>
+						<label for="user-city" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'City', 'masteriyo' ); ?></label>
 						<input value="<?php echo esc_attr( $user->get_city() ); ?>" id="user-city" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 
 					<div class="mto-flex-grow">
-						<label for="user-state" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">State</label>
+						<label for="user-state" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'State', 'masteriyo' ); ?></label>
 						<input value="<?php echo esc_attr( $user->get_state() ); ?>" id="user-state" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0 md:mto-space-x-8">
 					<div class="mto-flex-grow">
-						<label for="user-zip-code" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Zip Code</label>
+						<label for="user-zip-code" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Zip Code', 'masteriyo' ); ?></label>
 						<input value="<?php echo esc_attr( $user->get_zip_code() ); ?>" id="user-zip-code" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 
 					<div class="mto-flex-grow">
-						<label for="user-country" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Country</label>
+						<label for="user-country" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Country', 'masteriyo' ); ?></label>
 						<input value="<?php echo esc_attr( $user->get_country() ); ?>" id="user-country" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 
 				<div>
 					<button id="mto-btn-submit-edit-profile-form" type="submit" class="btn mto-text-sm mto-py-3 mto-px-6">
-						Save
+						<?php echo esc_html__( 'Save', 'masteriyo' ); ?>
 					</button>
 				</div>
 			</div>
@@ -100,30 +100,30 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 	</div>
 	<div id="password-security-tab" class="tab-content mto-hidden">
 		<div class="password-security mto-w-full lg:mto-w-2/5">
-			<h2 class="password--security--title mto-font-semibold mto-text-2xl">Change Password</h2>
+			<h2 class="password--security--title mto-font-semibold mto-text-2xl"><?php echo esc_html__( 'Change Password', 'masteriyo' ); ?></h2>
 
 				<form id="password-security-form" class="mto-mt-10">
 					<input type="hidden" name="remember" value="true">
 					<div class="mto-rounded-md mtoshadow-sm mto-space-y-6">
 						<div class="current-password">
-							<label for="current-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Current Password</label>
+							<label for="current-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Current Password', 'masteriyo' ); ?></label>
 							<input id="current-password" name="password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 						</div>
 
 						<div class="new-password">
-							<label for="new-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">New Password</label>
+							<label for="new-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'New Password', 'masteriyo' ); ?></label>
 							<input id="new-password" name="password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 						</div>
 
 						<div class="confirm-password">
-							<label for="confirm-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Confirm Password</label>
+							<label for="confirm-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Confirm Password', 'masteriyo' ); ?></label>
 							<input id="confirm-password" name="password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 						</div>
 					</div>
 
 					<div class="password-security-btn mto-mt-10">
 						<button type="submit" class="change-password btn mto-text-sm mto-py-3 mto-px-6 mto-uppercase">
-							Change Password
+							<?php echo esc_html__( 'Change Password', 'masteriyo' ); ?>
 						</button>
 					</div>
 

@@ -15,8 +15,8 @@ do_action( 'masteriyo_before_password_reset_form' );
 	<div class="mto-flex mto-justify-center mto-items-center mto-h-screen">
 
 		<div class="mto-form-wrapper">
-			<h2 class="mto-font-semibold mto-text-2xl mto-mb-4">Reset Password</h2>
-      <p>Enter your user account's verified email address and we will send you a password reset link.</p>
+			<h2 class="mto-font-semibold mto-text-2xl mto-mb-4"><?php echo esc_html__( 'Reset Password', 'masteriyo' ); ?></h2>
+			<p><?php echo esc_html__( "Enter your user account's verified email address and we will send you a password reset link.", 'masteriyo' ); ?></p>
 
 					<form id="mto-reset-form" class="mto-mt-10">
 						<input type="hidden" name="remember" value="true">
@@ -29,7 +29,7 @@ do_action( 'masteriyo_before_password_reset_form' );
 
 						<div class="mto-block md:mto-flex mto-items-center md:mto-space-x-6">
 							<button type="submit" class="btn mto-capitalize sign-in">
-                Send Reset Email
+								<?php echo esc_html__( 'Send Reset Email', 'masteriyo' ); ?>
 							</button>
 
 							<div class="go-back mto-text-sm mto-mt-6 md:mto-my-0 mto-text-center md:mto-text-left">
@@ -37,7 +37,7 @@ do_action( 'masteriyo_before_password_reset_form' );
 									href="#"
 									class="mto-font-medium mto-text-primary-800 hover:mto-text-primary-700 hover:mto-underline"
 								>
-									Go back to sign-in
+									<?php echo esc_html__( 'Go back to sign-in', 'masteriyo' ); ?>
 								</a>
 							</div>
 						</div>

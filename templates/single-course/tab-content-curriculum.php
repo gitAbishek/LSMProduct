@@ -67,7 +67,7 @@ do_action('masteriyo_before_single_course_curriculum_content');
 												<?php echo masteriyo_minutes_to_time_length_string( $lesson->get_video_playback_time() ); ?>
 											</time>
 										</span>
-										<a href="#" class="btn">preview</a>
+										<a href="#" class="btn"><?php echo esc_html__( 'preview', 'masteriyo' ); ?></a>
 									</div>
 								</div>
 							</li>

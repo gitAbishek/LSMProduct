@@ -28,7 +28,10 @@ do_action( 'masteriyo_before_single_course_reviews_content' );
 			<span class="mto-inline-block mto-ml-4 mto-text-base mto-font-medium mto-text-gray-500 "><?php echo esc_html( $rating ); ?> out of 5</span>
 		</div>
 </div>
-<p class="mto-text-center mto-text-sm mto-text-gray-500 mto-mt-4"><?php echo esc_html( $review_count ); ?> user ratings</span>
+<p class="mto-text-center mto-text-sm mto-text-gray-500 mto-mt-4">
+	<?php /* translators: %s: Review Count */ ?>
+	<span><?php printf( esc_html__( '%s user ratings', 'masteriyo' ), esc_html( $review_count ) ); ?></span>
+</p>
 
 <?php
 

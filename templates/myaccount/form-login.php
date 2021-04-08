@@ -18,18 +18,18 @@ do_action( 'masteriyo_before_login_form_content' );
 	<div class="mto-flex mto-justify-center mto-items-center mto-h-screen">
 
 		<div class="mto-form-wrapper">
-			<h2 class="mto-font-semibold mto-text-2xl">Sign In</h2>
+			<h2 class="mto-font-semibold mto-text-2xl"><?php echo esc_html__( 'Sign In', 'masteriyo' ); ?></h2>
 
 					<form id="mto-login-form" class="mto-mt-10">
 						<input type="hidden" name="remember" value="true">
 						<div class="mto-rounded-md mtoshadow-sm mto-space-y-6">
 							<div class="username">
-								<label for="username-email-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Username or Email</label>
+								<label for="username-email-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Username or Email', 'masteriyo' ); ?></label>
 								<input id="username-email-address" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 							</div>
 
 							<div class="password">
-								<label for="password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2">Password</label>
+								<label for="password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Password', 'masteriyo' ); ?></label>
 								<input id="password" name="password" type="password" autocomplete="current-password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 							</div>
 						</div>
@@ -38,29 +38,29 @@ do_action( 'masteriyo_before_login_form_content' );
 							<div class="remember-me mto-flex mto-items-center">
 								<input id="remember_me" name="remember_me" type="checkbox" class="mto-h-4 mto-w-4 mto-text-primary-600 focus:mto-primary-500 mto-border-gray-300 mto-rounded">
 								<label for="remember_me" class="mto-mb-0 mto-block mto-text-sm mto-text-gray-900">
-								Remember me
+								<?php echo esc_html__( 'Remember me', 'masteriyo' ); ?>
 								</label>
 							</div>
 
 							<div class="forgot-password mto-text-sm">
 								<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'reset-password' ) ); ?>" class="mto-font-medium mto-text-primary-800 hover:mto-text-primary-700 hover:mto-underline">
-								Forgot your password?
+								<?php echo esc_html__( 'Forgot your password?', 'masteriyo' ); ?>
 								</a>
 							</div>
 						</div>
 
 						<div class="mto-block md:mto-flex mto-items-center mto-justify-between">
 							<button type="submit" class="btn mto-capitalize sign-in">
-								Sign in
+								<?php echo esc_html__( 'Sign in', 'masteriyo' ); ?>
 							</button>
 
 							<div class="sign-up mto-text-sm mto-mt-6 md:mto-my-0 mto-text-center md:mto-text-right">
-								<span>Don't have an account?</span>
+								<span><?php echo esc_html__( 'Don\'t have an account?', 'masteriyo' ); ?></span>
 								<a
 									href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'signup' ) ); ?>"
 									class="mto-font-medium mto-text-primary-800 hover:mto-text-primary-700 hover:mto-underline"
 								>
-									Sign Up Now
+									<?php echo esc_html__( 'Sign Up Now', 'masteriyo' ); ?>
 								</a>
 							</div>
 						</div>

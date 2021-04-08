@@ -63,7 +63,7 @@ const AddNewCourse: React.FC = () => {
 					</Flex>
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<Stack direction="column" spacing="6">
-							<FormControl borderColor="gray.100">
+							<FormControl>
 								<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
 								<Input
 									placeholder={__('Your Course Name', 'masteriyo')}
@@ -77,7 +77,7 @@ const AddNewCourse: React.FC = () => {
 								/>
 							</FormControl>
 
-							<FormControl borderColor="gray.100">
+							<FormControl>
 								<FormLabel>{__('Course Description', 'masteriyo')}</FormLabel>
 								<Textarea
 									placeholder={__('Your Course Description', 'masteriyo')}
@@ -86,7 +86,7 @@ const AddNewCourse: React.FC = () => {
 								/>
 							</FormControl>
 
-							<FormControl borderColor="gray.100">
+							<FormControl>
 								<FormLabel>{__('Categories', 'masteriyo')}</FormLabel>
 								<Controller
 									control={control}

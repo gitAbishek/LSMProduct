@@ -27,6 +27,7 @@ const theme = extendTheme({
 	},
 	shadows: {
 		box: '0px 0px 60px rgba(0, 0, 0, 0.06)',
+		input: '0px 1px 0px #EFF0F6',
 	},
 	components: {
 		Popover: {
@@ -52,6 +53,7 @@ const theme = extendTheme({
 				md: {
 					field: {
 						borderRadius: 'sm',
+						shadow: 'input',
 					},
 				},
 			},
@@ -66,6 +68,7 @@ const theme = extendTheme({
 			sizes: {
 				md: {
 					borderRadius: 'sm',
+					shadow: 'input',
 				},
 			},
 		},

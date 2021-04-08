@@ -410,7 +410,7 @@ class ScriptStyle {
 			'admin' => array(
 				'name' => 'masteriyo',
 				'data' => array(
-					'rootApiUrl' => esc_url_raw( rest_url() ),
+					'rootApiUrl' => esc_url_raw( untrailingslashit( rest_url() ) ),
 					'nonce'      => wp_create_nonce( 'wp_rest' )
 				),
 			),

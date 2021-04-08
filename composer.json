@@ -32,7 +32,8 @@
   "require": {
     "php": ">=7.0.0",
     "woocommerce/action-scheduler": "3.1.6",
-    "league/container": "3.3"
+    "league/container": "3.3",
+    "pelago/emogrifier": "3.1.0"
   },
   "require-dev": {
     "wp-cli/i18n-command": "^2.2",

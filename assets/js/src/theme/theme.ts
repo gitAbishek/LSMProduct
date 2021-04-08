@@ -20,6 +20,9 @@ const theme = extendTheme({
 			'html,body': {
 				bg: 'gray.50',
 			},
+			'::placeholder': {
+				fontSize: 'sm',
+			},
 		},
 	},
 	shadows: {
@@ -51,6 +54,26 @@ const theme = extendTheme({
 						borderRadius: 'sm',
 					},
 				},
+			},
+
+			defaultProps: {
+				_placeholder: {
+					color: 'red',
+				},
+			},
+		},
+		Textarea: {
+			sizes: {
+				md: {
+					borderRadius: 'sm',
+				},
+			},
+		},
+		FormLabel: {
+			baseStyle: {
+				fontSize: 'sm',
+				fontWeight: 'semibold',
+				mb: '3',
 			},
 		},
 		Checkbox: {

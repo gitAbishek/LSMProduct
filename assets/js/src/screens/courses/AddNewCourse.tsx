@@ -1,21 +1,22 @@
-import { Box } from '@chakra-ui/react';
+import {
+	Box,
+	Flex,
+	FormControl,
+	FormLabel,
+	Heading,
+	Input,
+	Stack,
+	Textarea,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Button from 'Components/common/Button';
-import FormGroup from 'Components/common/FormGroup';
 import ImageUpload from 'Components/common/ImageUpload';
-import Input from 'Components/common/Input';
-import Label from 'Components/common/Label';
 import Select from 'Components/common/Select';
-import Textarea from 'Components/common/Textarea';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import Loader from 'react-loader-spinner';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
-import { addCourse, fetchCategories } from '../../utils/api';
-
-const AddNewCourse = () => {
+const AddNewCourse: React.FC = () => {
 	interface Inputs {
 		name: string;
 		description?: string;
@@ -55,45 +56,38 @@ const AddNewCourse = () => {
 
 	return (
 		<>
-			<Box>
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<div className="mto-flex mto-flex-wrap mto--mx-4">
-						<div className="mto-w-1/2 mto-px-4">
-							<FormGroup>
-								<Label>{__('Course Name', 'masteriyo')}</Label>
+			<Box p="12" shadow="box" bg="white">
+				<Stack direction="column" spacing="8">
+					<Flex justify="space-between" aling="center">
+						<Heading as="h1">{__('Add New Course', 'masteriyo')}</Heading>
+					</Flex>
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<Stack direction="column" spacing="6">
+							<FormControl borderColor="gray.100">
+								<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
 								<Input
 									placeholder={__('Your Course Name', 'masteriyo')}
-									ref={register({ required: true })}
-									name="name"></Input>
-							</FormGroup>
+									ref={register({
+										required: __(
+											'You must provide name for the course',
+											'masteriyo'
+										),
+									})}
+									name="name"
+								/>
+							</FormControl>
 
-							<FormGroup>
-								<Label>{__('Course Description', 'masteriyo')}</Label>
+							<FormControl borderColor="gray.100">
+								<FormLabel>{__('Course Description', 'masteriyo')}</FormLabel>
 								<Textarea
-									placeholder={__('Your Course Title', 'masteriyo')}
-									rows={5}
-									ref={register}
-									name="description"></Textarea>
-							</FormGroup>
-							<div className="mto-flex-row">
-								<Button layout="primary" type="submit">
-									{addMutation.isLoading ? (
-										<Loader
-											type="ThreeDots"
-											height={14}
-											width={20}
-											color="#fff"
-										/>
-									) : (
-										__('Add Course', 'masteriyo')
-									)}
-								</Button>
-							</div>
-						</div>
+									placeholder={__('Your Course Description', 'masteriyo')}
+									ref={register({ required: true })}
+									name="name"
+								/>
+							</FormControl>
 
-						<div className="mto-w-1/2 mto-px-4">
-							<FormGroup>
-								<Label>{__('Course Category', 'masteriyo')}</Label>
+							<FormControl borderColor="gray.100">
+								<FormLabel>{__('Categories', 'masteriyo')}</FormLabel>
 								<Controller
 									control={control}
 									name="categories"
@@ -108,22 +102,10 @@ const AddNewCourse = () => {
 										/>
 									)}
 								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label>{__('Featured Image', 'masteriyo')}</Label>
-								{/* <ImageUpload
-									className="mto-mb-8"
-									title={__('Drag image or click to upload', 'masteriyo')}
-								/> */}
-								<div className="mto-flex mto-justify-between">
-									<Button>{__('Remove Featured Image', 'masteriyo')}</Button>
-									<Button layout="primary">{__('Add New', 'masteriyo')}</Button>
-								</div>
-							</FormGroup>
-						</div>
-					</div>
-				</form>
+							</FormControl>
+						</Stack>
+					</form>
+				</Stack>
 			</Box>
 		</>
 	);

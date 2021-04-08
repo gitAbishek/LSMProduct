@@ -105,6 +105,7 @@ class RestApi {
 			'orders'               => "{$namespace}\\OrdersController",
 			'users'                => "{$namespace}\\UsersController",
 			'settings'             => "{$namespace}\\SettingsController",
+			'comments'             => "{$namespace}\\CommentsController",
 		);
 	}
 

@@ -44,10 +44,12 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 * @since 0.1.0
 	 *
 	 * @param Model $setting Cource object.
+	 * @param mixed $default Default value.
+	 *
 	 * @throws Exception If invalid setting.
 	 */
-	public function read( Model &$setting ) {
-		$value = get_option( $setting->get_name() );
+	public function read( Model &$setting, $default = null ) {
+		$value = get_option( $setting->get_name(), $default );
 
 		if ( ! $setting->get_name() ) {
 			throw new \Exception( __( 'Invalid setting.', 'masteriyo' ) );

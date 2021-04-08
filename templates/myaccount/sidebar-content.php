@@ -21,14 +21,14 @@ do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 </div>
 <div class="md:mto-w-full mto-p-8 mto-pr-0 md:mto-border-r">
 	<div class="mto-flex mto-w-full mto-items-center mto-space-x-4 mto-mb-10">
-		<img class="mto-inline-block mto-h-10 mto-w-10 mto-rounded-full mto-ring-2 mto-ring-white mto-shadow-lg" src="<?php echo $user->get_avatar_url(); ?>" alt="" />
+		<img class="mto-inline-block mto-h-10 mto-w-10 mto-rounded-full mto-ring-2 mto-ring-white mto-shadow-lg" src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" alt="" />
 		<div>
 			<h2 class="mto-flex mto-font-semibold mto-text-sm mto-space-x-2">
 				<a
 					id="label-username"
 					href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'view-myaccount' ) ); ?>"
 				>
-					<?php echo $user->get_display_name(); ?>
+					<?php echo esc_attr( $user->get_display_name() ); ?>
 				</a>
 				<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'edit-myaccount' ) ); ?>">
 					<svg class="mto-fill-current mto-text-gray-400 hover:mto-text-primary mto-w-5 mto-h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@ do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 						<span class="mto-inline-block">
 							<?php echo $endpoint['icon']; ?>
 						</span>
-						<div class="mto-inline-block"><?php echo $endpoint['label']; ?></div>
+						<div class="mto-inline-block"><?php echo esc_html( $endpoint['label'] ); ?></div>
 					</a>
 				</li>
 			<?php endforeach; ?>

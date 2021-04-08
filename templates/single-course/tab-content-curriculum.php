@@ -32,7 +32,7 @@ do_action('masteriyo_before_single_course_curriculum_content');
 		<div class="curr-accordion-item">
 			<div class="curr-accordion-item-header">
 				<div class="mto-flex mto-justify-between">
-					<h3 class="mto-font-semibold mto-text-base"><?php echo $section->get_name(); ?></h3>
+					<h3 class="mto-font-semibold mto-text-base"><?php echo esc_html( $section->get_name() ); ?></h3>
 					<div class="mto-flex mto-items-center mto-space-x-3">
 						<span><?php echo count( $dictionary[$section->get_id()] ); ?> lessons</span>
 						<span><?php echo masteriyo_get_lecture_hours_of_section( $section ) ?></span>
@@ -56,7 +56,7 @@ do_action('masteriyo_before_single_course_curriculum_content');
 						<?php foreach ( $dictionary[$section->get_id()] as $lesson ) { ?>
 							<li>
 								<div class="mto-flex mto-justify-between mto-items-center mto-border mto-border-t-0 mto-border-gray-300 mto-p-4">
-									<div><a href="#"><?php echo $lesson->get_name(); ?></a></div>
+									<div><a href="#"><?php echo esc_html( $lesson->get_name() ); ?></a></div>
 									<div class="mto-flex mto-items-center mto-space-x-8">
 										<span class="mto-flex mto-items-center mto-space-x-1">
 											<svg class="mto-inline-block mto-fill-current mto-text-gray-800 mto-w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

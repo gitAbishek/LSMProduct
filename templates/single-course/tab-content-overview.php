@@ -14,7 +14,7 @@ global $course;
  */
 do_action( 'masteriyo_before_single_course_overview_content' );
 
-echo $course->get_description();
+echo esc_html( $course->get_description() );
 
 /**
  * masteriyo_after_single_course_overview_content hook.

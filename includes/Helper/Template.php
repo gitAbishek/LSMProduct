@@ -470,33 +470,33 @@ if( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 	}
 }
 
-if( ! function_exists( 'masteriyo_account_edit_profile_endpoint' ) ) {
+if( ! function_exists( 'masteriyo_account_edit_myaccount_endpoint' ) ) {
 	/**
-	 * Edit profile on myaccount page.
+	 * Edit myaccount on myaccount page.
 	 *
 	 * @since 0.1.0
 	 */
-	function masteriyo_account_edit_profile_endpoint() {
+	function masteriyo_account_edit_myaccount_endpoint() {
 		$data = array(
 			'user' => masteriyo_get_current_user(),
 		);
 
-		masteriyo_get_template( 'myaccount/edit-profile.php', $data );
+		masteriyo_get_template( 'myaccount/edit-myaccount.php', $data );
 	}
 }
 
-if( ! function_exists( 'masteriyo_account_view_profile_endpoint' ) ) {
+if( ! function_exists( 'masteriyo_account_view_myaccount_endpoint' ) ) {
 	/**
 	 * View profile on myaccount page.
 	 *
 	 * @since 0.1.0
 	 */
-	function masteriyo_account_view_profile_endpoint() {
+	function masteriyo_account_view_myaccount_endpoint() {
 		$data = array(
 			'user' => masteriyo_get_current_user(),
 		);
 
-		masteriyo_get_template( 'myaccount/view-profile.php', $data );
+		masteriyo_get_template( 'myaccount/view-myaccount.php', $data );
 	}
 }
 

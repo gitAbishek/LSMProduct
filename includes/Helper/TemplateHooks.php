@@ -30,8 +30,8 @@ add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sideb
  */
 add_action( 'masteriyo_myaccount_sidebar_content', 'masteriyo_myaccount_sidebar_content' );
 add_action( 'masteriyo_myaccount_main_content', 'masteriyo_myaccount_main_content' );
-add_action( 'masteriyo_account_edit-profile_endpoint', 'masteriyo_account_edit_profile_endpoint' );
-add_action( 'masteriyo_account_view-profile_endpoint', 'masteriyo_account_view_profile_endpoint' );
+add_action( 'masteriyo_account_edit-myaccount_endpoint', 'masteriyo_account_edit_myaccount_endpoint' );
+add_action( 'masteriyo_account_view-myaccount_endpoint', 'masteriyo_account_view_myaccount_endpoint' );
 add_action( 'masteriyo_account_courses_endpoint', 'masteriyo_account_courses_endpoint' );
 add_action( 'masteriyo_account_grades_endpoint', 'masteriyo_account_grades_endpoint' );
 add_action( 'masteriyo_account_memberships_endpoint', 'masteriyo_account_memberships_endpoint' );

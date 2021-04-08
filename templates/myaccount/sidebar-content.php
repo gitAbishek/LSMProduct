@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying user profile.
+ * The template for sidebar in myaccount.
  *
  * @version 0.1.0
  */
@@ -8,9 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_profile_page_sidebar_content hook.
+ * masteriyo_before_myaccount_page_sidebar_content hook.
  */
-do_action( 'masteriyo_before_profile_page_sidebar_content' );
+do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 
 ?>
 
@@ -26,11 +26,11 @@ do_action( 'masteriyo_before_profile_page_sidebar_content' );
 			<h2 class="mto-flex mto-font-semibold mto-text-sm mto-space-x-2">
 				<a
 					id="label-username"
-					href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'view-profile' ) ); ?>"
+					href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'view-myaccount' ) ); ?>"
 				>
 					<?php echo $user->get_display_name(); ?>
 				</a>
-				<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'edit-profile' ) ); ?>">
+				<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'edit-myaccount' ) ); ?>">
 					<svg class="mto-fill-current mto-text-gray-400 hover:mto-text-primary mto-w-5 mto-h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path fill="none" d="M16.589 9l-1.586-1.586-9.097 9.097-.529 2.114 2.114-.528zM19.588 6l-1.586 1.586L16.416 6l1.586-1.586z"/>
   				<path d="M4.003 21c.081 0 .162-.01.242-.03l4-1c.176-.044.337-.135.465-.263L21.003 7.414c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414L19.417 3c-.756-.756-2.072-.756-2.828 0L4.296 15.293a1.003 1.003 0 00-.263.464l-1 4A1 1 0 004.003 21zm14-16.586L19.589 6l-1.586 1.586L16.417 6l1.586-1.586zM5.906 16.511l9.097-9.097L16.589 9l-9.098 9.097-2.114.528.529-2.114z"/>
@@ -60,6 +60,6 @@ do_action( 'masteriyo_before_profile_page_sidebar_content' );
 <?php
 
 /**
- * masteriyo_after_profile_page_sidebar_content hook.
+ * masteriyo_after_myaccount_page_sidebar_content hook.
  */
-do_action( 'masteriyo_after_profile_page_sidebar_content' );
+do_action( 'masteriyo_after_myaccount_page_sidebar_content' );

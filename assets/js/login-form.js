@@ -8,14 +8,14 @@
 	$( document.body ).on( 'submit', 'form#mto-login-form', function(e) {
 		e.preventDefault();
 
-		const $this = $(this);
+		const $form = $(this);
 		const userData = {
 			username: $(this).find('#username-email-address').val(),
 			password: $(this).find('#password').val(),
 			remember: $(this).find('#remember_me').is(':checked') ? 'yes' : 'no',
 		};
 
-		$this
+		$form
 			.find('button.sign-in')
 			.text('Signing In...')
 			.siblings('.mto-notify-message').first().remove();
@@ -44,7 +44,7 @@
 				$( '#mto-login-error-msg' ).show().text( message );
 			},
 			complete: function() {
-				$this.find('button.sign-in').text('Sign In');
+				$form.find('button.sign-in').text('Sign In');
 			},
 		 });
 	});

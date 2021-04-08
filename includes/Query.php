@@ -111,7 +111,7 @@ class Query {
 				'order-pay'                  => get_option( 'masteriyo_checkout_pay_endpoint', 'order-pay' ),
 				'order-received'             => get_option( 'masteriyo_checkout_order_received_endpoint', 'order-received' ),
 			),
-			masteriyo_get_endpoints()
+			masteriyo_get_myaccount_endpoints()
 		);
 	}
 
@@ -143,9 +143,9 @@ class Query {
 				}
 				break;
 			case 'view-order':
-				$order = wc_get_order( $wp->query_vars['view-order'] );
+				// $order = wc_get_order( $wp->query_vars['view-order'] );
 				/* translators: %s: order number */
-				$title = ( $order ) ? sprintf( __( 'Order #%s', 'masteriyo' ), $order->get_order_number() ) : '';
+				// $title = ( $order ) ? sprintf( __( 'Order #%s', 'masteriyo' ), $order->get_order_number() ) : '';
 				break;
 			case 'downloads':
 				$title = __( 'Downloads', 'masteriyo' );

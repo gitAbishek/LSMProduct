@@ -114,12 +114,12 @@ class ScriptStyle {
 				'context'  => 'public',
 				'callback' => 'masteriyo_is_single_course_page'
 			),
-			'edit-profile' => array(
-				'src'      => $this->get_asset_url( '/assets/js/edit-profile.js' ),
+			'edit-myaccount' => array(
+				'src'      => $this->get_asset_url( '/assets/js/edit-myaccount.js' ),
 				'deps'     => array( 'jquery' ),
 				'version'  => $this->get_version(),
 				'context'  => 'public',
-				'callback' => 'masteriyo_is_edit_profile_page',
+				'callback' => 'masteriyo_is_edit_myaccount_page',
 			),
 			'login-form' => array(
 				'src'      => $this->get_asset_url( '/assets/js/login-form.js' ),
@@ -436,7 +436,7 @@ class ScriptStyle {
 	 */
 	public function load_public_localized_scripts() {
 		$this->localized_scripts = apply_filters( 'masteriyo_localized_scripts', array(
-			'edit-profile' => array(
+			'edit-myaccount' => array(
 				'name' => 'masteriyo_data',
 				'data' => array(
 					'rootApiUrl' => esc_url_raw( rest_url() ),

@@ -21,8 +21,8 @@ defined( 'ABSPATH' ) || exit;
 	<p class="mto-text-white mto-text-base mto-mt-4">Welcome to your dashboard here you can view your overview and your stats</p>
 
 	<a
-		class="view-profile btn mto-px-6 mto-py-3 mto-bg-white mto-inline-flex mto-justify-center mto-items-center mto-text-sm mto-uppercase hover:mto-bg-white"
-		href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'view-profile' ) ); ?>"
+		class="view-myaccount btn mto-px-6 mto-py-3 mto-bg-white mto-inline-flex mto-justify-center mto-items-center mto-text-sm mto-uppercase hover:mto-bg-white"
+		href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'view-myaccount' ) ); ?>"
 	>
 		<span class="mto-text-pColor">View Profile</span>
 		<svg class="mto-icon mto-fill-current mto-text-pColor mto--mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

@@ -1412,7 +1412,7 @@ function masteriyo_is_debug_enabled() {
 function masteriyo_get_current_myaccount_endpoint() {
 	global $wp;
 
-	$slugs = masteriyo_get_endpoints();
+	$slugs = masteriyo_get_myaccount_endpoints();
 
 	if ( ! empty( $wp->query_vars ) ) {
 		foreach ( $wp->query_vars as $key => $value ) {
@@ -1438,10 +1438,10 @@ function masteriyo_get_current_myaccount_endpoint() {
  *
  * @return array
  */
-function masteriyo_get_endpoints() {
+function masteriyo_get_myaccount_endpoints() {
 	return apply_filters( 'masteriyo_myaccount_endpoints', array(
-		'view-profile'   => get_option( 'masteriyo_myaccount_view-profile_endpoint', 'view-profile' ),
-		'edit-profile'   => get_option( 'masteriyo_myaccount_edit-profile_endpoint', 'edit-profile' ),
+		'view-myaccount'   => get_option( 'masteriyo_myaccount_view-myaccount_endpoint', 'view-myaccount' ),
+		'edit-myaccount'   => get_option( 'masteriyo_myaccount_edit-myaccount_endpoint', 'edit-myaccount' ),
 		'dashboard'      => get_option( 'masteriyo_myaccount_dashboard_endpoint', 'dashboard' ),
 		'courses'        => get_option( 'masteriyo_myaccount_courses_endpoint', 'courses' ),
 		'grades'         => get_option( 'masteriyo_myaccount_grades_endpoint', 'grades' ),
@@ -1570,7 +1570,7 @@ function masteriyo_get_svg( $name, $echo = false ) {
  * @return array
  */
 function masteriyo_get_account_menu_items() {
-	$endpoints = masteriyo_get_endpoints();
+	$endpoints = masteriyo_get_myaccount_endpoints();
 	$items     = array(
 		'dashboard' => array(
 			'label' => __( 'Dashboard', 'masteriyo' ),
@@ -1667,25 +1667,25 @@ function masteriyo_is_signup_page() {
 }
 
 /**
- * Check if the current page is view profile page.
+ * Check if the current page is view myaccount page.
  *
  * @since 0.1.0
  *
  * @return boolean
  */
-function masteriyo_is_view_profile_page() {
-	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['view-profile'] );
+function masteriyo_is_view_myaccount_page() {
+	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['view-myaccount'] );
 }
 
 /**
- * Check if the current page is edit profile page.
+ * Check if the current page is edit myaccount page.
  *
  * @since 0.1.0
  *
  * @return boolean
  */
-function masteriyo_is_edit_profile_page() {
-	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['edit-profile'] );
+function masteriyo_is_edit_myaccount_page() {
+	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['edit-myaccount'] );
 }
 
 /**

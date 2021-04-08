@@ -8,9 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_edit_profile_tab_content hook.
+ * masteriyo_before_edit_myaccount_tab_content hook.
  */
-do_action( 'masteriyo_before_edit_profile_tab_content' );
+do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 
 ?>
 
@@ -136,6 +136,6 @@ do_action( 'masteriyo_before_edit_profile_tab_content' );
 <?php
 
 /**
- * masteriyo_after_edit_profile_tab_content hook.
+ * masteriyo_after_edit_myaccount_tab_content hook.
  */
-do_action( 'masteriyo_after_edit_profile_tab_content' );
+do_action( 'masteriyo_after_edit_myaccount_tab_content' );

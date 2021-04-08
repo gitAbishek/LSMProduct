@@ -563,3 +563,22 @@ if( ! function_exists( 'masteriyo_myaccount_main_content' ) ) {
 	}
 }
 
+if ( ! function_exists( 'masteriyo_email_header' ) ) {
+	/**
+	 * Get the email header.
+	 *
+	 * @param mixed $email_heading Heading for the email.
+	 */
+	function masteriyo_email_header( $email_heading ) {
+		masteriyo_get_template( 'emails/email-header.php', array( 'email_heading' => $email_heading ) );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_email_footer' ) ) {
+	/**
+	 * Get the email footer.
+	 */
+	function masteriyo_email_footer() {
+		masteriyo_get_template( 'emails/email-footer.php' );
+	}
+}

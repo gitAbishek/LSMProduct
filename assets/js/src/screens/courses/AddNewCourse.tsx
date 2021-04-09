@@ -85,76 +85,88 @@ const AddNewCourse: React.FC = () => {
 
 	return (
 		<>
-			<Box p="12" shadow="box" bg="white">
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<Stack direction="column" spacing="8">
-						<Flex justify="space-between" aling="center">
-							<Heading as="h1">{__('Add New Course', 'masteriyo')}</Heading>
-						</Flex>
-						<Stack direction="column" spacing="6">
-							<FormControl isInvalid={!!errors.name}>
-								<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
-								<Input
-									placeholder={__('Your Course Name', 'masteriyo')}
-									name="name"
-									ref={register({
-										required: __(
-											'You must provide name for the course',
-											'masteriyo'
-										),
-									})}
-								/>
-								<FormErrorMessage>
-									{errors.name && errors.name.message}
-								</FormErrorMessage>
-							</FormControl>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<Stack direction="column" spacing="8">
+					<Heading as="h1">{__('Add New Course', 'masteriyo')}</Heading>
 
-							<FormControl>
-								<FormLabel>{__('Course Description', 'masteriyo')}</FormLabel>
-								<Textarea
-									name="description"
-									placeholder={__('Your Course Description', 'masteriyo')}
-									ref={register()}
-								/>
-							</FormControl>
+					<Stack direction="row" spacing="8">
+						<Box
+							flex="1"
+							bg="white"
+							p="10"
+							shadow="box"
+							d="flex"
+							flexDirection="column"
+							justifyContent="space-between">
+							<Stack direction="column" spacing="6">
+								<FormControl isInvalid={!!errors.name}>
+									<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
+									<Input
+										placeholder={__('Your Course Name', 'masteriyo')}
+										name="name"
+										ref={register({
+											required: __(
+												'You must provide name for the course',
+												'masteriyo'
+											),
+										})}
+									/>
+									<FormErrorMessage>
+										{errors.name && errors.name.message}
+									</FormErrorMessage>
+								</FormControl>
 
-							<FormControl>
-								<FormLabel>{__('Categories', 'masteriyo')}</FormLabel>
-								<Controller
-									control={control}
-									name="categories"
-									defaultValue=""
-									render={({ onChange, value }) => (
-										<Select
-											closeMenuOnSelect={false}
-											isMulti
-											onChange={onChange}
-											value={value}
-											options={categoriesOption}
-										/>
-									)}
-								/>
-							</FormControl>
-							<FormControl>
-								<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-								<ImageUpload setFile={setFile} />
-							</FormControl>
-						</Stack>
-						<Divider />
-						<ButtonGroup>
-							<Button
-								type="submit"
-								colorScheme="blue"
-								isLoading={addMutation.isLoading || addImageMutation.isLoading}>
-								Add New Course
-							</Button>
-							<Button variant="outline" onClick={() => history.goBack()}>
-								Cancel
-							</Button>
-						</ButtonGroup>
+								<FormControl>
+									<FormLabel>{__('Course Description', 'masteriyo')}</FormLabel>
+									<Textarea
+										name="description"
+										placeholder={__('Your Course Description', 'masteriyo')}
+										ref={register()}
+									/>
+								</FormControl>
+							</Stack>
+							<ButtonGroup>
+								<Button
+									type="submit"
+									colorScheme="blue"
+									isLoading={
+										addMutation.isLoading || addImageMutation.isLoading
+									}>
+									{__('Add Course', 'masteriyo')}
+								</Button>
+								<Button variant="outline" onClick={() => history.goBack()}>
+									{__('Cancel', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</Box>
+						<Box w="400px" bg="white" p="10" shadow="box">
+							<Stack direction="column" spacing="6">
+								<FormControl>
+									<FormLabel>{__('Categories', 'masteriyo')}</FormLabel>
+									<Controller
+										control={control}
+										name="categories"
+										defaultValue=""
+										render={({ onChange, value }) => (
+											<Select
+												closeMenuOnSelect={false}
+												isMulti
+												onChange={onChange}
+												value={value}
+												options={categoriesOption}
+											/>
+										)}
+									/>
+								</FormControl>
+								<FormControl>
+									<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
+									<ImageUpload setFile={setFile} />
+								</FormControl>
+							</Stack>
+						</Box>
 					</Stack>
-				</form>
-			</Box>
+				</Stack>
+			</form>
 		</>
 	);
 };

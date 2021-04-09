@@ -48,7 +48,7 @@ jobs:
       - name: Build the application
         run: |
           yarn build
-          yarn buld:css:public
+          yarn build:css:public
 
       - name: Zip the application
         run: grunt release

@@ -70,6 +70,11 @@ class User extends Model {
 		'locale'               => '',
 		'roles'                => array(),
 		'allcaps'              => array(),
+		'address'              => '',
+		'city'                 => '',
+		'state'                => '',
+		'zip_code'             => '',
+		'country'              => '',
 	);
 
 	/**
@@ -81,6 +86,10 @@ class User extends Model {
 	 */
 	public function __construct( UserRepository $user_repository ) {
 		$this->repository = $user_repository;
+	}
+
+	public function get_avatar_url() {
+		return get_avatar_url( $this->get_id() );
 	}
 
 	/*
@@ -138,6 +147,19 @@ class User extends Model {
 	 * @return string
 	 */
 	public function get_user_email( $context = 'view' ) {
+		return $this->get_prop( 'user_email', $context );
+	}
+
+	/**
+	 * Get user's email.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_email( $context = 'view' ) {
 		return $this->get_prop( 'user_email', $context );
 	}
 
@@ -362,6 +384,71 @@ class User extends Model {
 		return $this->get_prop( 'allcaps', $context );
 	}
 
+	/**
+	 * Get address.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_address( $context = 'view' ) {
+		return $this->get_prop( 'address', $context );
+	}
+
+	/**
+	 * Get city.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_city( $context = 'view' ) {
+		return $this->get_prop( 'city', $context );
+	}
+
+	/**
+	 * Get state.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_state( $context = 'view' ) {
+		return $this->get_prop( 'state', $context );
+	}
+
+	/**
+	 * Get zip_code.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_zip_code( $context = 'view' ) {
+		return $this->get_prop( 'zip_code', $context );
+	}
+
+	/**
+	 * Get country.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_country( $context = 'view' ) {
+		return $this->get_prop( 'country', $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -410,6 +497,17 @@ class User extends Model {
 	 */
 	public function set_user_email( $user_email ) {
 		$this->set_prop( 'user_email', $user_email );
+	}
+
+	/**
+	 * Set user's email.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $email User's email.
+	 */
+	public function set_email( $email ) {
+		$this->set_prop( 'user_email', $email );
 	}
 
 	/**
@@ -597,5 +695,60 @@ class User extends Model {
 	 */
 	public function set_allcaps( $allcaps ) {
 		$this->set_prop( 'allcaps', $allcaps );
+	}
+
+	/**
+	 * Set address.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $address User's address.
+	 */
+	public function set_address( $address ) {
+		$this->set_prop( 'address', $address );
+	}
+
+	/**
+	 * Set city.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $city User's city.
+	 */
+	public function set_city( $city ) {
+		$this->set_prop( 'city', $city );
+	}
+
+	/**
+	 * Set state.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $state User's state.
+	 */
+	public function set_state( $state ) {
+		$this->set_prop( 'state', $state );
+	}
+
+	/**
+	 * Set zip_code.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $zip_code User's zip_code.
+	 */
+	public function set_zip_code( $zip_code ) {
+		$this->set_prop( 'zip_code', $zip_code );
+	}
+
+	/**
+	 * Set country.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $country User's country.
+	 */
+	public function set_country( $country ) {
+		$this->set_prop( 'country', $country );
 	}
 }

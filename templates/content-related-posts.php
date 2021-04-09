@@ -20,7 +20,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 		<div class="mto-group course-card mto-ml-0 mto-max-h-429 mto-overflow-hidden">
 			<div class="mto-relative">
 				<?php if ( is_numeric( $course->get_price() ) ): ?>
-					<span class="price-tag">$<?php echo $course->get_price(); ?></span>
+					<span class="price-tag">$<?php echo esc_html( $course->get_price() ); ?></span>
 				<?php endif; ?>
 				<img class="mto-w-full" src="<?php echo wp_get_attachment_url( $course->get_featured_image() ) ?>" alt="Course featured image" />
 			</div>
@@ -45,7 +45,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 						?>
 					</div>
 
-					<h2 class="mto-font-bold mto-text-white mto-text-base mto-capitalize mb-2"><?php echo $course->get_name(); ?></h2>
+					<h2 class="mto-font-bold mto-text-white mto-text-base mto-capitalize mb-2"><?php echo esc_html( $course->get_name() ); ?></h2>
 					<div class="course-author-detail">
 						<div class="mto-flex mto-flex-row mto-items-center mto-mt-4">
 							<img src="<?php echo get_avatar_url( $course->get_author_id() ); ?>" class="mto-rounded-full mto-border-2 mto-border-white mto-w-7 mto-h-7" alt="" />
@@ -53,7 +53,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 						</div>
 
 						<p class="mto-font-sm mto-text-white mto-mt-4">
-							<?php echo $course->get_short_description(); ?>
+							<?php echo esc_html( $course->get_short_description() ); ?>
 						</p>
 
 						<a href="<?php echo get_permalink( $course->get_id() ); ?>" class="btn course-author-readmore hover:mto-bg-white">Read More</a>
@@ -117,7 +117,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 					}
 					?>
 				</div>
-				<h2 class="mto-font-bold mto-text-base mto-capitalize mb-2"><?php echo $course->get_name(); ?></h2>
+				<h2 class="mto-font-bold mto-text-base mto-capitalize mb-2"><?php echo esc_html( $course->get_name() ); ?></h2>
 				<div class="course-time-share mto-mt-4">
 					<div class="course-readtime">
 						<svg class="mto-inline-block mto-fill-current mto-text-gray-800 mto-w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

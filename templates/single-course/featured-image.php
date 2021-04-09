@@ -12,7 +12,7 @@ global $course;
 ?>
 
 <div class="mto-relative aspect-w-16 aspect-h-9">
-	<img class="mto-h-480 mto-w-full" src="<?php echo $course->get_featured_image_url(); ?>" alt="Developing your first impressive portfolio">
+	<img class="mto-h-480 mto-w-full" src="<?php echo esc_html( $course->get_featured_image_url() ); ?>" alt="Developing your first impressive portfolio">
 	<?php if ( ! empty( $course->get_price() ) ): ?>
 		<span class="mto-absolute mto-top-0 mto-left-0 mto-text-white mto-text-lg mto-font-medium mto-bg-primary mto-px-4 mto-py-2 mto-rounded-br-2xl">
 			<?php echo masteriyo_price( $course->get_price() ); ?>

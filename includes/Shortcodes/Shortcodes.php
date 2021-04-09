@@ -43,7 +43,7 @@ class Shortcodes {
 		$namespace = '\\ThemeGrill\\Masteriyo\\Shortcodes';
 
 		return apply_filters( 'masteriyo_shortcodes', array(
-			'profile'      => "{$namespace}\\ProfileShortcode",
+			'myaccount'    => "{$namespace}\\MyAccountShortcode",
 			'courses-list' => "{$namespace}\\CoursesListShortcode",
 			'checkout'     => "{$namespace}\\CheckoutShortcode",
 			'cart'         => "{$namespace}\\CartShortcode",

@@ -10,6 +10,7 @@ use ThemeGrill\Masteriyo\Constants;
 use ThemeGrill\Masteriyo\Models\Course;
 use ThemeGrill\Masteriyo\Models\Section;
 use ThemeGrill\Masteriyo\Models\Faq;
+use ThemeGrill\Masteriyo\Models\User;
 
 /**
  * Get course.
@@ -535,19 +536,18 @@ function masteriyo_locate_template( $template_name, $template_path = '', $defaul
  * @return int
  */
 function masteriyo_get_page_id( $page ) {
+	$page_id = -1;
 	$setting = masteriyo( 'setting' );
 
-	if( is_null( $setting ) ) {
-		return -1;
+	if( ! is_null( $setting ) ) {
+		$setting->set_name( 'masteriyo_' . $page . '_page_id' );
+		masteriyo( 'setting.store' )->read( $setting );
+		$page_id = $setting->get_value();
 	}
 
-	$setting->set_name( 'masteriyo_' . $page . '_page_id' );
+	$page_id = apply_filters( 'masteriyo_get_' . $page . '_page_id',  $page_id );
 
-	masteriyo( 'setting.store' )->read( $setting );
-
-	$page = apply_filters( 'masteriyo_get_' . $page . '_page_id', $setting->get_value() );
-
-	return $page ? absint( $page ) : -1;
+	return $page_id ? absint( $page_id ) : -1;
 }
 
 /**
@@ -595,6 +595,20 @@ function masteriyo_img_url( $file ) {
 	$plugin_dir = plugin_dir_url( Constants::get('MASTERIYO_PLUGIN_FILE') );
 
 	return "{$plugin_dir}assets/img/{$file}";
+}
+
+/**
+ * Get current logged in user.
+ *
+ * @since 0.1.0
+ *
+ * @return User
+ */
+function masteriyo_get_current_user() {
+	if ( is_user_logged_in() ) {
+		return masteriyo_get_user( get_current_user_id() );
+	}
+	return null;
 }
 
 /**
@@ -1385,4 +1399,301 @@ function masteriyo_is_admin_page() {
  */
 function masteriyo_is_debug_enabled() {
 	return (bool) Constants::get( 'MASTERIYO_DEBUG' );
+}
+
+/**
+ * Get current endpoint in the myaccount page.
+ *
+ * @since 0.1.0
+ *
+ * @return string
+ */
+function masteriyo_get_current_myaccount_endpoint() {
+	global $wp;
+
+	$slugs = masteriyo_get_myaccount_endpoints();
+
+	if ( ! empty( $wp->query_vars ) ) {
+		foreach ( $wp->query_vars as $key => $value ) {
+			// Ignore pagename param.
+			if ( 'pagename' === $key ) {
+				continue;
+			}
+
+			if ( in_array( $key, $slugs, true ) ) {
+				return $key;
+			}
+		}
+	}
+
+	// No endpoint found? Default to dashboard.
+	return 'dashboard';
+}
+
+/**
+ * Get my account endpoints' slugs.
+ *
+ * @since 0.1.0
+ *
+ * @return array
+ */
+function masteriyo_get_myaccount_endpoints() {
+	return apply_filters( 'masteriyo_myaccount_endpoints', array(
+		'view-myaccount'   => get_option( 'masteriyo_myaccount_view-myaccount_endpoint', 'view-myaccount' ),
+		'edit-myaccount'   => get_option( 'masteriyo_myaccount_edit-myaccount_endpoint', 'edit-myaccount' ),
+		'dashboard'      => get_option( 'masteriyo_myaccount_dashboard_endpoint', 'dashboard' ),
+		'courses'        => get_option( 'masteriyo_myaccount_courses_endpoint', 'courses' ),
+		'grades'         => get_option( 'masteriyo_myaccount_grades_endpoint', 'grades' ),
+		'memberships'    => get_option( 'masteriyo_myaccount_memberships_endpoint', 'memberships' ),
+		'certificates'   => get_option( 'masteriyo_myaccount_certificates_endpoint', 'certificates' ),
+		'order-history'  => get_option( 'masteriyo_myaccount_order-history_endpoint', 'order-history' ),
+		'reset-password' => get_option( 'masteriyo_myaccount_reset-password_endpoint', 'reset-password' ),
+		'signup'         => get_option( 'masteriyo_myaccount_signup_endpoint', 'signup' ),
+		'user-logout'    => get_option( 'masteriyo_logout_endpoint', 'user-logout' ),
+	) );
+}
+
+/**
+ * Get account endpoint URL.
+ *
+ * @since 0.1.0
+ *
+ * @param string $endpoint Endpoint.
+ *
+ * @return string
+ */
+function masteriyo_get_account_endpoint_url( $endpoint ) {
+	if ( 'dashboard' === $endpoint ) {
+		return masteriyo_get_page_permalink( 'myaccount', get_permalink( $GLOBALS['post'] ) );
+	}
+
+	if ( 'user-logout' === $endpoint ) {
+		return masteriyo_logout_url();
+	}
+
+	return masteriyo_get_endpoint_url( $endpoint, '', masteriyo_get_page_permalink( 'myaccount', get_permalink( $GLOBALS['post'] ) ) );
+}
+
+/**
+ * Get endpoint URL.
+ *
+ * Gets the URL for an endpoint, which varies depending on permalink settings.
+ *
+ * @since 0.1.0
+ *
+ * @param  string $endpoint  Endpoint slug.
+ * @param  string $value     Query param value.
+ * @param  string $permalink Permalink.
+ *
+ * @return string
+ */
+function masteriyo_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
+	if ( ! $permalink ) {
+		$permalink = get_permalink();
+	}
+
+	// Map endpoint to options.
+	$query_vars = masteriyo()->query->get_query_vars();
+	$endpoint   = ! empty( $query_vars[ $endpoint ] ) ? $query_vars[ $endpoint ] : $endpoint;
+
+	if ( get_option( 'permalink_structure' ) ) {
+		if ( strstr( $permalink, '?' ) ) {
+			$query_string = '?' . wp_parse_url( $permalink, PHP_URL_QUERY );
+			$permalink    = current( explode( '?', $permalink ) );
+		} else {
+			$query_string = '';
+		}
+		$url = trailingslashit( $permalink );
+
+		if ( $value ) {
+			$url .= trailingslashit( $endpoint ) . user_trailingslashit( $value );
+		} else {
+			$url .= user_trailingslashit( $endpoint );
+		}
+
+		$url .= $query_string;
+	} else {
+		$url = add_query_arg( $endpoint, $value, $permalink );
+	}
+
+	return apply_filters( 'masteriyo_get_endpoint_url', $url, $endpoint, $value, $permalink );
+}
+
+/**
+ * Get logout endpoint.
+ *
+ * @since 0.1.0
+ *
+ * @param string $redirect Redirect URL.
+ *
+ * @return string
+ */
+function masteriyo_logout_url( $redirect = '' ) {
+	$redirect = $redirect ? $redirect : apply_filters( 'masteriyo_logout_default_redirect_url', masteriyo_get_page_permalink( 'myaccount' ) );
+
+	if ( get_option( 'masteriyo_logout_endpoint' ) ) {
+		return wp_nonce_url( masteriyo_get_endpoint_url( 'user-logout', '', $redirect ), 'user-logout' );
+	}
+
+	return wp_logout_url( $redirect );
+}
+
+/**
+ * Get a svg file contents.
+ *
+ * @since 0.1.0
+ *
+ * @param string $name SVG filename.
+ * @param boolean $echo Whether to echo the contents or not.
+ *
+ * @return void|string
+ */
+function masteriyo_get_svg( $name, $echo = false ) {
+	$file_name = Constants::get('MASTERIYO_ASSETS') . "/svg/{$name}.svg";
+
+	if ( file_exists( $file_name ) && is_readable( $file_name ) ) {
+		if ( $echo ) {
+			readfile( $file_name );
+		} else {
+			return file_get_contents( $file_name );
+		}
+	}
+	return '';
+}
+
+/**
+ * Get My Account menu items.
+ *
+ * @since 0.1.0
+ *
+ * @return array
+ */
+function masteriyo_get_account_menu_items() {
+	$endpoints = masteriyo_get_myaccount_endpoints();
+	$items     = array(
+		'dashboard' => array(
+			'label' => __( 'Dashboard', 'masteriyo' ),
+			'icon' => masteriyo_get_svg( 'dashboard' ),
+		),
+		'courses' => array(
+			'label' => __( 'My Courses', 'masteriyo' ),
+			'icon' => masteriyo_get_svg( 'courses' ),
+		),
+		'grades' => array(
+			'label' => __( 'My Grades', 'masteriyo' ),
+			'icon' => masteriyo_get_svg( 'grades' ),
+		),
+		'memberships' => array(
+			'label' => __( 'My Memberships', 'masteriyo' ),
+			'icon' => masteriyo_get_svg( 'memberships' ),
+		),
+		'certificates' => array(
+			'label' => __( 'My Certificaties', 'masteriyo' ),
+			'icon' => masteriyo_get_svg( 'certificates' ),
+		),
+		'order-history' => array(
+			'label' => __( 'My Order History', 'masteriyo' ),
+			'icon' => masteriyo_get_svg( 'order-history' ),
+		),
+		'user-logout' => array(
+			'label' => __( 'Logout', 'masteriyo' ),
+			'icon' => masteriyo_get_svg( 'user-logout' ),
+		),
+	);
+
+	// Remove missing endpoints.
+	foreach ( $endpoints as $endpoint_id => $endpoint ) {
+		if ( empty( $endpoint ) ) {
+			unset( $items[ $endpoint_id ] );
+		}
+	}
+
+	return apply_filters( 'masteriyo_account_menu_items', $items, $endpoints );
+}
+
+/**
+ * Echo a string if value of the first argument is truish.
+ *
+ * @since 0.1.0
+ *
+ * @param boolean $bool
+ * @param string $str
+ */
+function masteriyo_echo_if( $bool, $str = '' ) {
+	if ( !! $bool ) {
+		echo $str;
+	}
+}
+
+/**
+ * Check if the current page is the myaccount page.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_myaccount_page() {
+	global $post;
+
+	if ( $post instanceof \WP_Post ) {
+		$page_id = masteriyo_get_page_id( 'myaccount' );
+
+		return $post->ID === $page_id;
+	}
+	return false;
+}
+
+/**
+ * Check if the current page is password reset page.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_lost_password_page() {
+	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['reset-password'] );
+}
+
+/**
+ * Check if the current page is signup page.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_signup_page() {
+	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['signup'] );
+}
+
+/**
+ * Check if the current page is view myaccount page.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_view_myaccount_page() {
+	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['view-myaccount'] );
+}
+
+/**
+ * Check if the current page is edit myaccount page.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_edit_myaccount_page() {
+	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['edit-myaccount'] );
+}
+
+/**
+ * Check if assets for login form should be loaded.
+ *
+ * @since 0.1.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_load_login_form_assets() {
+	return ! is_user_logged_in() && masteriyo_is_myaccount_page();
 }

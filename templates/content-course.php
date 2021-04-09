@@ -46,7 +46,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 					</div>
 
 					<div class="mto-font-sm mto-text-white mto-my-4 mto-line-clamp-3">
-						<?php echo $course->get_short_description(); ?>
+						<?php echo esc_html( $course->get_short_description() ); ?>
 					</div>
 
 					<a href="<?php echo esc_url( $course->get_permalink() ); ?>" class="btn course-author-readmore hover:mto-bg-white">

@@ -7,26 +7,41 @@
 @layer components {
     /* General */
     .hover-effect{
-        @apply   mto-transition mto-duration-300 mto-ease-in-out
+        @apply mto-transition mto-duration-300 mto-ease-in-out
         mto-transform-gpu hover:mto--translate-y-0.5;   
        }
+    .btn{
+        @apply
+        mto-transition mto-duration-300 mto-ease-in-out mto-transform-gpu hover:mto--translate-y-1
+        mto-inline-block mto-text-center mto-w-full hover:mto-bg-primary-600
+        mto-text-xs mto-font-medium mto-uppercase
+        mto-mt-4 md:mto-mt-0 md:mto-w-auto mto-py-2
+        mto-px-4 mto-rounded-full mto-text-white mto-bg-primary;
+    }
+    p{
+        @apply mto-text-pColor;
+    }
+    .mto-icon{
+        @apply mto-w-6 mto-h-6;
+    }
+    a:focus{
+        @apply mto-no-underline mto-outline-none !important;
+    }
     /* Login */
-    .mto-login-wrapper{
+    .mto-form-wrapper{
         @apply
         mto-w-4/5 md:mto-w-3/5 lg:mto-w-1/2
         xl:mto-w-2/5 mto-p-6 md:mto-p-12
         mto-bg-white mto-rounded mto-shadow-lg ;
     }
-    .mto-login-wrapper h2 {
-        @apply
-        mto-font-semibold mto-text-2xl mto-mb-10 md:mto-mb-10;
-    }
+    
     button.sign-in{
         @apply mto-w-full md:mto-w-auto
         mto-py-2 mto-px-4 mto-text-sm mto-font-medium mto-rounded
         mto-text-white mto-bg-textColor hover:mto-bg-textColor
         hover:mto-bg-opacity-95 mto-shadow-lg hover:mto-shadow-none;
     }
+
     /* Course Card */
     .mto-course-list{
         @apply mto-container mto-mx-auto;
@@ -59,7 +74,7 @@
     .course-card .price-tag{
         @apply mto-absolute mto-text-white mto-text-lg
         mto-font-medium mto-bg-primary
-        mto-px-4 mto-py-2 mto-rounded-br-2xl;
+        /* mto-px-4 mto-py-2 mto-rounded-br-2xl;pro */
     }
     .course-overlay{
         @apply  mto-absolute mto-inset-0 mto-z-50 mto-flex-col mto-justify-between mto-bg-primary;
@@ -67,26 +82,10 @@
     .course-time-share{
         @apply mto-flex mto-flex-col md:mto-flex-row mto-justify-between md:mto-items-center mto-mt-3;
     }
-    .btn{
-        @apply
-        mto-transition mto-duration-300 mto-ease-in-out mto-transform-gpu hover:mto--translate-y-1
-        mto-inline-block mto-text-center mto-w-full hover:mto-bg-primary-600
-        mto-text-xs mto-font-medium mto-uppercase
-        mto-mt-4 md:mto-mt-0 md:mto-w-auto mto-py-2
-        mto-px-4 mto-rounded-full mto-text-white mto-bg-primary;
-    }
-    a:focus{
-        @apply mto-bg-transparent mto-no-underline mto-outline-none !important;
-    }
     .active-tab{
         @apply mto-text-primary mto-border-b-2 mto-border-primary;
     }
-    p{
-        @apply mto-pb-5 mto-text-gray-800;
-    }
-    .mto-icon{
-        @apply mto-w-6 mto-h-6;
-    }
+  
     /* Tab */
     .tab-content{
         @apply mto-mt-8 mto-mb-3 md:mto-mb-16;
@@ -130,6 +129,7 @@
     .curr-accordion-item-header.active .collapse-accordion{
         @apply mto-block;
     }
+
     /* Dashboard Main SideBar */
     aside.sidebar-wrapper ul li a{
         @apply mto-flex mto-items-center mto-cursor-pointer mto-bg-white
@@ -139,6 +139,7 @@
     aside.sidebar-wrapper ul li a.active, aside.sidebar-wrapper ul li a:hover{
         @apply mto-border-gray-200 mto--mr-0.5 mto-text-textColor mto-font-semibold;
     }
+
     /* Admin Pannel */
     .mto-card-wrapper{
         @apply mto-block mto-space-y-8 md:mto-flex md:mto-w-full md:mto-space-x-8 md:mto-space-y-0;

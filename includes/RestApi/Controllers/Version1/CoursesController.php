@@ -484,6 +484,11 @@ class CoursesController extends PostsController {
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
+				'featured_image'             => array(
+					'description' => __( 'Course featured image.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
 				'categories'            => array(
 					'description' => __( 'List of categories.', 'masteriyo' ),
 					'type'        => 'array',
@@ -676,6 +681,12 @@ class CoursesController extends PostsController {
 		if ( isset( $request['parent_id'] ) ) {
 			$course->set_parent_id( $request['parent_id'] );
 		}
+
+		// Course featured image.
+		if ( isset( $request['featured_image'] ) ) {
+			$course->set_featured_image( $request['featured_image'] );
+		}
+
 
 		// Course categories.
 		if ( isset( $request['categories'] ) && is_array( $request['categories'] ) ) {

@@ -268,6 +268,7 @@ class CoursesController extends PostsController {
 			'price'             => $course->get_price( $context ),
 			'regular_price'     => $course->get_regular_price( $context ),
 			'sale_price'        => $course->get_sale_price( $context ),
+			'featured_image'    => $course->get_featured_image( $context ),
 			'categories'        => $this->get_taxonomy_terms( $course ),
 			'tags'              => $this->get_taxonomy_terms( $course, 'tag' ),
 			'difficulties'      => $this->get_taxonomy_terms( $course, 'difficulty' ),

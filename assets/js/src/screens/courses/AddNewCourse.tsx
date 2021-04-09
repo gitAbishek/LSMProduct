@@ -2,8 +2,6 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Divider,
-	Flex,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
@@ -13,7 +11,6 @@ import {
 	Textarea,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import axios from 'axios';
 import ImageUpload from 'Components/common/ImageUpload';
 import Select from 'Components/common/Select';
 import React, { useState } from 'react';

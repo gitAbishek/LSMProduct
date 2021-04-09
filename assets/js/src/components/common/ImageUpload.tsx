@@ -14,6 +14,7 @@ import {
 	ModalHeader,
 	ModalOverlay,
 	Text,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
@@ -29,6 +30,7 @@ interface Props {
 
 const ImageUpload: React.FC<Props> = (props) => {
 	const { setFile } = props;
+	const toast = useToast();
 	const [preview, setPreview] = useState<any>(null);
 	const [isEditorOpen, setIsEditorOpen] = useState(false);
 	const cropperRef = useRef<HTMLImageElement>(null);
@@ -49,6 +51,15 @@ const ImageUpload: React.FC<Props> = (props) => {
 			setFile(acceptedFiles[0]);
 			setPreview(URL.createObjectURL(acceptedFiles[0]));
 			setIsEditorOpen(true);
+		} else {
+			toast({
+				title: __('Please upload Image files', 'masteriyo'),
+				description: __(
+					'Media files jpeg, png are only supported',
+					'masteriyo'
+				),
+				status: 'error',
+			});
 		}
 	};
 

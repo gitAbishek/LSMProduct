@@ -13,6 +13,7 @@ import {
 	ModalFooter,
 	ModalHeader,
 	ModalOverlay,
+	Stack,
 	Text,
 	useToast,
 } from '@chakra-ui/react';
@@ -59,6 +60,7 @@ const ImageUpload: React.FC<Props> = (props) => {
 					'masteriyo'
 				),
 				status: 'error',
+				isClosable: true,
 			});
 		}
 	};
@@ -71,54 +73,77 @@ const ImageUpload: React.FC<Props> = (props) => {
 
 	return (
 		<>
-			<Box
-				transition="ease-in-out"
-				border="1px"
-				borderStyle="dashed"
-				borderColor="gray.300"
-				bg={isDragAccept ? 'green.50' : isDragReject ? 'red.50' : 'gray.50'}
-				position="relative"
-				h="48"
-				{...getRootProps()}>
-				{preview && <Image src={preview} objectFit="cover" maxH="full" />}
-				<input {...getInputProps()} multiple={false} />
-				{!preview && (
-					<Flex
-						direction="column"
-						align="center"
-						justify="center"
-						position="absolute"
-						left="0"
-						right="0"
-						top="0"
-						bottom="0">
-						<Box>
-							<Icon
-								as={BiPlus}
-								h="12"
-								w="12"
-								color={isDragActive ? 'blue.500' : 'gray.500'}
-							/>
-						</Box>
-						<Text>{__('Upload an Image here', 'masteriyo')}</Text>
-					</Flex>
-				)}
-			</Box>
-			<Modal isOpen={isEditorOpen} onClose={() => setIsEditorOpen(false)}>
+			<Stack direction="column" spacing="6">
+				<Box maxH="48" overflow="hidden">
+					{preview && <Image src={preview} objectFit="cover" w="full" />}
+				</Box>
+				<ButtonGroup>
+					<Button colorScheme="blue" onClick={() => setIsEditorOpen(true)}>
+						Upload featured Image
+					</Button>
+				</ButtonGroup>
+			</Stack>
+
+			<Modal
+				size="lg"
+				isOpen={isEditorOpen}
+				onClose={() => setIsEditorOpen(false)}>
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader>Edit Image</ModalHeader>
-					<ModalCloseButton />
+					<ModalHeader
+						bg="gray.800"
+						borderTopRightRadius="xs"
+						borderTopLeftRadius="xs"
+						color="white"
+						fontSize="sm">
+						Edit Image
+					</ModalHeader>
+					<ModalCloseButton color="white" />
 					<ModalBody>
-						<Cropper
-							src={preview}
-							initialAspectRatio={16 / 9}
-							guides={false}
-							crop={onCrop}
-							ref={cropperRef}
-						/>
+						<Stack direction="column" spacing="8" p="8">
+							<Box
+								transition="ease-in-out"
+								border="2px"
+								borderStyle="dashed"
+								borderColor="gray.300"
+								bg={
+									isDragAccept
+										? 'green.50'
+										: isDragReject
+										? 'red.50'
+										: 'gray.50'
+								}
+								position="relative"
+								h="36"
+								{...getRootProps()}>
+								{preview && (
+									<Image src={preview} objectFit="cover" maxH="full" />
+								)}
+								<input {...getInputProps()} multiple={false} />
+								{!preview && (
+									<Flex
+										align="center"
+										justify="center"
+										position="absolute"
+										left="0"
+										right="0"
+										top="0"
+										bottom="0">
+										<Box>
+											<Icon
+												as={BiPlus}
+												h="10"
+												w="10"
+												color={isDragActive ? 'blue.500' : 'gray.500'}
+											/>
+										</Box>
+										<Text>{__('Upload an Image here', 'masteriyo')}</Text>
+									</Flex>
+								)}
+							</Box>
+						</Stack>
 					</ModalBody>
-					<ModalFooter>
+					<ModalFooter bg="gray.50" borderTop="1px" borderColor="gray.100">
 						<ButtonGroup>
 							<Button colorScheme="blue" onClick={() => setIsEditorOpen(false)}>
 								Crop

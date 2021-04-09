@@ -1,24 +1,17 @@
-import React, { useCallback, useState } from 'react';
-
+import { Box, Center, Image } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import Icon from 'Components/common/Icon';
-import { Plus } from '../../assets/icons';
-import classNames from 'classnames';
+import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+
+import { Plus } from '../../assets/icons';
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
 	multiple?: boolean;
 }
 
-const ImageUpload = React.forwardRef<HTMLElement, Props>((props, ref) => {
-	const { multiple, className, ...other } = props;
+const ImageUpload: React.FC = () => {
 	const [file, setFiles] = useState<any>(null);
-	const onDrop = useCallback((acceptedFiles) => {
-		setFiles(
-			Object.assign(acceptedFiles[0], {
-				image: URL.createObjectURL(acceptedFiles[0]),
-			})
-		);
-	}, []);
 
 	const {
 		getRootProps,
@@ -26,34 +19,47 @@ const ImageUpload = React.forwardRef<HTMLElement, Props>((props, ref) => {
 		isDragActive,
 		isDragAccept,
 		isDragReject,
-	} = useDropzone({ onDrop, accept: 'image/*' });
+	} = useDropzone({
+		accept: 'image/jpeg, image/png',
+		onDrop: (acceptedFiles) => onDrop(acceptedFiles),
+	});
 
-	const baseStyle =
-		'mto-flex mto-items-center mto-justify-center mto-h-20 mto-w-full mto-cursor-pointer mto-bg-cover mto-bg-center mto-bg-gray-50 mto-border mto-border-dashed mto-border-gray-300';
-	const acceptStyle = 'mto-bg-green-300';
-	const rejectStyle = 'mto-bg-red-300';
+	const onDrop = (acceptedFiles: any) => {
+		if (isDragAccept) {
+			setFiles(
+				Object.assign(acceptedFiles[0], {
+					image: URL.createObjectURL(acceptedFiles[0]),
+				})
+			);
+		}
+	};
 
-	const cls = classNames(
-		baseStyle,
-		isDragAccept && acceptStyle,
-		isDragReject && rejectStyle,
-		className
-	);
+	console.log(file);
+
+	const boxStyles = {
+		transition: 'ease-in-out',
+		border: '1px',
+		borderStyle: 'dashed',
+		borderColor: 'gray.300',
+
+		bg: isDragAccept ? 'green.100' : isDragReject ? 'red.100' : 'gray.50',
+		h: 'xs',
+	};
+
 	return (
-		<div
-			className={cls}
-			{...other}
-			{...getRootProps({ isDragActive, isDragAccept, isDragReject })}
-			style={{ backgroundImage: file?.image }}>
-			<input {...getInputProps()} multiple={multiple || false} />
-			<div className="mto-flex mto-justify-center mto-relative mto-py-3 mto-px-4">
-				<span>
-					<Icon icon={<Plus />}></Icon>
-				</span>
-				<span>{props.children}</span>
-			</div>
-		</div>
+		<Box sx={boxStyles} {...getRootProps()}>
+			{file && <Image src={file.image} objectFit="cover" maxH="full" />}
+			<input {...getInputProps()} multiple={false} name="image" />
+			{!file && (
+				<Center>
+					<span>
+						<Icon icon={<Plus />}></Icon>
+					</span>
+					<span>{__('Upload an Image here', 'masteriyo')}</span>
+				</Center>
+			)}
+		</Box>
 	);
-});
+};
 
 export default ImageUpload;

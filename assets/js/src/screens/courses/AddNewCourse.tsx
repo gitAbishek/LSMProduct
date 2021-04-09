@@ -114,6 +114,10 @@ const AddNewCourse: React.FC = () => {
 									)}
 								/>
 							</FormControl>
+							<FormControl>
+								<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
+								<ImageUpload />
+							</FormControl>
 						</Stack>
 						<Divider />
 						<ButtonGroup>

@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
-import { fetchCourse, updateCourse } from '../../utils/api';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-
-import Button from 'Components/common/Button';
-import FormGroup from 'Components/common/FormGroup';
+import {
+	Box,
+	Button,
+	ButtonGroup,
+	FormControl,
+	FormErrorMessage,
+	FormLabel,
+	Heading,
+	Img,
+	Stack,
+	Textarea,
+} from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import ImageUpload from 'Components/common/ImageUpload';
 import Input from 'Components/common/Input';
-import Label from 'Components/common/Label';
-import MainLayout from 'Layouts/MainLayout';
-import MainToolbar from 'Layouts/MainToolbar';
 import Select from 'Components/common/Select';
-import Textarea from 'Components/common/Textarea';
-import { __ } from '@wordpress/i18n';
-import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useHistory, useParams } from 'react-router-dom';
+
+import urls from '../../constants/urls';
+import API from '../../utils/api';
 
 const EditCourse = () => {
 	interface Inputs {
@@ -23,95 +30,137 @@ const EditCourse = () => {
 	}
 
 	const { courseId }: any = useParams();
-	const [isUpdated, setIsUpdated] = useState(false);
+	const history = useHistory();
 	const queryClient = useQueryClient();
+	const { register, handleSubmit, errors, control } = useForm<Inputs>();
 
+	const courseAPI = new API(urls.courses);
+	const categoryAPI = new API(urls.categories);
+
+	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
 	const courseQuery = useQuery([`course${courseId}`, courseId], () =>
-		fetchCourse(courseId)
+		courseAPI.get(courseId)
 	);
 
-	const { register, handleSubmit } = useForm<Inputs>();
+	const categoriesOption = categoryQuery?.data?.map((category: any) => {
+		return {
+			value: category.id,
+			label: category.name,
+		};
+	});
 
-	const addMutation = useMutation((data) => updateCourse(courseId, data), {
+	const updateCourse = useMutation((data) => courseAPI.update(courseId, data), {
 		onSuccess: () => {
-			setIsUpdated(true);
 			queryClient.invalidateQueries(`course${courseId}`);
 		},
 	});
 
 	const onSubmit = (data: any) => {
-		addMutation.mutate(data);
+		updateCourse.mutate(data);
 	};
 
 	return (
 		<>
-			<MainToolbar />
-			<MainLayout>
-				{isUpdated && (
-					<div className="mto-p-4 mto-bg-green-100 mto-rounded-sm mto-mb-10 mto-text-green-700">
-						<strong>{courseQuery?.data?.name}</strong>
-						{__(' is successfully updated. You can keep editing.', 'masteriyo')}
-					</div>
-				)}
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<div className="mto-flex">
-						<div className="mto-w-1/2">
-							<FormGroup>
-								<Label htmlFor="">{__('Course Name', 'masteriyo')}</Label>
-								<Input
-									placeholder={__('Your Course Name', 'masteriyo')}
-									ref={register({ required: true })}
-									name="name"
-									defaultValue={courseQuery?.data?.name}></Input>
-							</FormGroup>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<Stack direction="column" spacing="8">
+					<Heading as="h1">{__('Add New Course', 'masteriyo')}</Heading>
 
-							<FormGroup>
-								<Label htmlFor="">
-									{__('Course Description', 'masteriyo')}
-								</Label>
-								<Textarea
-									placeholder={__('Your Course Title', 'masteriyo')}
-									rows={5}
-									ref={register}
-									name="description"
-									defaultValue={courseQuery?.data?.description}></Textarea>
-							</FormGroup>
-							<div className="mto-flex-row">
-								<Button layout="primary" type="submit">
+					<Stack direction="row" spacing="8">
+						<Box
+							flex="1"
+							bg="white"
+							p="10"
+							shadow="box"
+							d="flex"
+							flexDirection="column"
+							justifyContent="space-between">
+							<Stack direction="column" spacing="6">
+								<FormControl isInvalid={!!errors.name}>
+									<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
+									<Input
+										placeholder={__('Your Course Name', 'masteriyo')}
+										name="name"
+										ref={register({
+											required: __(
+												'You must provide name for the course',
+												'masteriyo'
+											),
+										})}
+										defaultValue={courseQuery?.data?.name}
+									/>
+									<FormErrorMessage>
+										{errors.name && errors.name.message}
+									</FormErrorMessage>
+								</FormControl>
+
+								<FormControl>
+									<FormLabel>{__('Course Description', 'masteriyo')}</FormLabel>
+									<Textarea
+										name="description"
+										placeholder={__('Your Course Description', 'masteriyo')}
+										ref={register()}
+										defaultValue={courseQuery?.data?.description}
+									/>
+								</FormControl>
+							</Stack>
+							<ButtonGroup>
+								<Button
+									type="submit"
+									colorScheme="blue"
+									isLoading={updateCourse.isLoading}>
 									{__('Add Course', 'masteriyo')}
 								</Button>
-							</div>
-						</div>
-
-						<div className="mto-w-1/2">
-							<FormGroup>
-								<Label htmlFor="">{__('Course Category', 'masteriyo')}</Label>
-								<Select
-									options={[
-										{ value: 'chocolate', label: __('Chocolate', 'masteriyo') },
-										{
-											value: 'strawberry',
-											label: __('Strawberry', 'masteriyo'),
-										},
-										{ value: 'vanilla', label: __('Vanilla', 'masteriyo') },
-									]}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label htmlFor="">{__('Featured Image', 'masteriyo')}</Label>
-								<ImageUpload
-									title={__('Drag image or click to upload', 'masteriyo')}
-								/>
-								<div className="mto-flex-row">
-									<Button>{__('Remove Featured Image', 'masteriyo')}</Button>
-									<Button layout="primary">{__('Add New', 'masteriyo')}</Button>
-								</div>
-							</FormGroup>
-						</div>
-					</div>
-				</form>
-			</MainLayout>
+								<Button variant="outline" onClick={() => history.goBack()}>
+									{__('Cancel', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</Box>
+						<Box w="400px" bg="white" p="10" shadow="box">
+							<Stack direction="column" spacing="6">
+								<FormControl>
+									<FormLabel>{__('Categories', 'masteriyo')}</FormLabel>
+									<Controller
+										control={control}
+										name="categories"
+										defaultValue=""
+										render={({ onChange, value }) => (
+											<Select
+												closeMenuOnSelect={false}
+												isMulti
+												onChange={onChange}
+												value={value}
+												options={categoriesOption}
+											/>
+										)}
+									/>
+								</FormControl>
+								<FormControl>
+									<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
+									{/* {preview ? (
+										<Stack direction="column" spacing="4">
+											<Box
+												border="1px"
+												borderColor="gray.100"
+												h="36"
+												overflow="hidden">
+												<Img src={preview} objectFit="cover" w="full" />
+											</Box>
+											<Button
+												colorScheme="red"
+												variant="outline"
+												onClick={onRemoveFeaturedImage}>
+												{__('Remove featured Image', 'masteriyo')}
+											</Button>
+										</Stack>
+									) : (
+										<ImageUpload setFile={setFile} setPreview={setPreview} />
+									)} */}
+								</FormControl>
+							</Stack>
+						</Box>
+					</Stack>
+				</Stack>
+			</form>
 		</>
 	);
 };

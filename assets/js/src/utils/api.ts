@@ -17,7 +17,7 @@ class API {
 
 	async get(id: number) {
 		return http({
-			url: `${this.uri}/${id}`,
+			url: this.uri + id,
 			method: 'get',
 		}).then((res) => res.data);
 	}

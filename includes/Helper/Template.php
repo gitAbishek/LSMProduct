@@ -428,7 +428,7 @@ if( ! function_exists( 'masteriyo_template_sidebar_row_difficulty' ) ) {
 		global $course;
 
 		// Bail early if difficulty is not set.
-		$difficulty = $course->get_difficulty()->get_name();
+		$difficulty = $course->get_difficulty();
 		if( empty( $difficulty ) ) {
 			return;
 		}
@@ -580,5 +580,35 @@ if ( ! function_exists( 'masteriyo_email_footer' ) ) {
 	 */
 	function masteriyo_email_footer() {
 		masteriyo_get_template( 'emails/email-footer.php' );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_single_course_faqs_content' ) ) {
+	/**
+	 * Show course FAQs.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_single_course_faqs_content() {
+		global $course;
+
+		$faqs = masteriyo_get_faqs(
+			array(
+				'parent_id' => $course->get_id(),
+				'order' => 'asc',
+			)
+		);
+
+		// Bail early if the course doesn't have any FAQs.
+		if( empty( $faqs ) ) {
+			return;
+		}
+
+		$data = array(
+			'faqs' => $faqs
+		);
+
+		masteriyo_get_template( 'single-course/tab-content-faq.php', $data );
+
 	}
 }

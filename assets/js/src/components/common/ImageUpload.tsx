@@ -1,10 +1,8 @@
-import { Box, Center, Image } from '@chakra-ui/react';
+import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Icon from 'Components/common/Icon';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-
-import { Plus } from '../../assets/icons';
+import { BiPlus } from 'react-icons/bi';
 
 interface Props {
 	setFile: any;
@@ -19,6 +17,7 @@ const ImageUpload: React.FC<Props> = (props) => {
 		getInputProps,
 		isDragAccept,
 		isDragReject,
+		isDragActive,
 	} = useDropzone({
 		accept: 'image/jpeg, image/png',
 		onDrop: (acceptedFiles) => onDrop(acceptedFiles),
@@ -31,27 +30,38 @@ const ImageUpload: React.FC<Props> = (props) => {
 		}
 	};
 
-	const boxStyles = {
-		transition: 'ease-in-out',
-		border: '1px',
-		borderStyle: 'dashed',
-		borderColor: 'gray.300',
-
-		bg: isDragAccept ? 'green.100' : isDragReject ? 'red.100' : 'gray.50',
-		h: 'xs',
-	};
-
 	return (
-		<Box sx={boxStyles} {...getRootProps()}>
+		<Box
+			transition="ease-in-out"
+			border="1px"
+			borderStyle="dashed"
+			borderColor="gray.300"
+			bg={isDragAccept ? 'green.50' : isDragReject ? 'red.50' : 'gray.50'}
+			position="relative"
+			h="48"
+			{...getRootProps()}>
 			{preview && <Image src={preview} objectFit="cover" maxH="full" />}
 			<input {...getInputProps()} multiple={false} />
 			{!preview && (
-				<Center>
-					<span>
-						<Icon icon={<Plus />}></Icon>
-					</span>
-					<span>{__('Upload an Image here', 'masteriyo')}</span>
-				</Center>
+				<Flex
+					direction="column"
+					align="center"
+					justify="center"
+					position="absolute"
+					left="0"
+					right="0"
+					top="0"
+					bottom="0">
+					<Box>
+						<Icon
+							as={BiPlus}
+							h="12"
+							w="12"
+							color={isDragActive ? 'blue.500' : 'gray.500'}
+						/>
+					</Box>
+					<Text>{__('Upload an Image here', 'masteriyo')}</Text>
+				</Flex>
 			)}
 		</Box>
 	);

@@ -54,18 +54,20 @@ const AddNewCourse: React.FC = () => {
 
 	const addImageMutation = useMutation((image: any) => imageAPi.store(image));
 
-	const addCourse = (data: any, media: any) => {
-		const categories = data?.categories?.map((category: any) => ({
+	const addCourse = (data: any, media?: any) => {
+		const categories = data.categories.map((category: any) => ({
 			id: category.value,
 		}));
+
 		const newData: any = {
 			name: data.name,
 			description: data.description,
-			categories: categories,
-			featured_image: media.id,
+			...(data.categories.length && { categories: categories }),
+			...(media && { featured_image: media.id }),
 		};
 		addMutation.mutate(newData);
 	};
+
 	const onSubmit = (data: any) => {
 		if (file) {
 			let formData = new FormData();
@@ -76,6 +78,8 @@ const AddNewCourse: React.FC = () => {
 					addCourse(data, media);
 				},
 			});
+		} else {
+			addCourse(data);
 		}
 	};
 
@@ -110,7 +114,7 @@ const AddNewCourse: React.FC = () => {
 								<Textarea
 									name="description"
 									placeholder={__('Your Course Description', 'masteriyo')}
-									ref={register({ required: true })}
+									ref={register()}
 								/>
 							</FormControl>
 
@@ -138,7 +142,10 @@ const AddNewCourse: React.FC = () => {
 						</Stack>
 						<Divider />
 						<ButtonGroup>
-							<Button type="submit" colorScheme="blue">
+							<Button
+								type="submit"
+								colorScheme="blue"
+								isLoading={addMutation.isLoading || addImageMutation.isLoading}>
 								Add New Course
 							</Button>
 							<Button variant="outline" onClick={() => history.goBack()}>

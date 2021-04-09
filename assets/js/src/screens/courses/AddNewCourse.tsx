@@ -6,6 +6,7 @@ import {
 	FormErrorMessage,
 	FormLabel,
 	Heading,
+	Img,
 	Input,
 	Stack,
 	Textarea,
@@ -18,6 +19,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
+import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import MediaAPI from '../../utils/media';
@@ -43,26 +45,26 @@ const AddNewCourse: React.FC = () => {
 		};
 	});
 
-	const addMutation = useMutation((data) => courseAPI.store(data), {
-		onSuccess: (data) => {
-			history.push(`/courses/${data?.id}`);
-		},
-	});
+	const addMutation = useMutation((data) => courseAPI.store(data));
 
 	const addImageMutation = useMutation((image: any) => imageAPi.store(image));
 
 	const addCourse = (data: any, media?: any) => {
-		const categories = data.categories.map((category: any) => ({
-			id: category.value,
-		}));
-
 		const newData: any = {
 			name: data.name,
 			description: data.description,
-			...(data.categories.length && { categories: categories }),
+			...(data.categories.length && {
+				categories: data.categories.map((category: any) => ({
+					id: category.value,
+				})),
+			}),
 			...(media && { featured_image: media.id }),
 		};
-		addMutation.mutate(newData);
+		addMutation.mutate(newData, {
+			onSuccess: (data) => {
+				history.push(routes.courses.edit.replace(':courseId', data.id));
+			},
+		});
 	};
 
 	const onSubmit = (data: any) => {
@@ -80,7 +82,11 @@ const AddNewCourse: React.FC = () => {
 		}
 	};
 
-	console.log(preview);
+	const onRemoveFeaturedImage = () => {
+		setPreview(null);
+		setFile(null);
+	};
+
 	return (
 		<>
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -158,7 +164,25 @@ const AddNewCourse: React.FC = () => {
 								</FormControl>
 								<FormControl>
 									<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-									<ImageUpload setFile={setFile} setPreview={setPreview} />
+									{preview ? (
+										<Stack direction="column" spacing="4">
+											<Box
+												border="1px"
+												borderColor="gray.100"
+												h="36"
+												overflow="hidden">
+												<Img src={preview} objectFit="cover" w="full" />
+											</Box>
+											<Button
+												colorScheme="red"
+												variant="outline"
+												onClick={onRemoveFeaturedImage}>
+												{__('Remove featured Image', 'masteriyo')}
+											</Button>
+										</Stack>
+									) : (
+										<ImageUpload setFile={setFile} setPreview={setPreview} />
+									)}
 								</FormControl>
 							</Stack>
 						</Box>

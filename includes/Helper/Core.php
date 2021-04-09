@@ -1721,3 +1721,20 @@ function masteriyo_get_setting_value( $setting_name, $default = null ) {
 
 	return apply_filters( "masteriyo_setting_{$setting_name}_value", $setting->get_value() );
 }
+
+/**
+ * See if a course has FAQs.
+ *
+ * @param integer $course_id
+ *
+ * @return boolean
+ */
+function masteriyo_has_faqs( $course_id ) {
+	$faqs = masteriyo_get_faqs(
+		array(
+			'parent_id' => $course_id,
+		)
+	);
+
+	return count( $faqs ) > 0;
+}

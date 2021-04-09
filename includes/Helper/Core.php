@@ -536,19 +536,18 @@ function masteriyo_locate_template( $template_name, $template_path = '', $defaul
  * @return int
  */
 function masteriyo_get_page_id( $page ) {
+	$page_id = -1;
 	$setting = masteriyo( 'setting' );
 
-	if( is_null( $setting ) ) {
-		return -1;
+	if( ! is_null( $setting ) ) {
+		$setting->set_name( 'masteriyo_' . $page . '_page_id' );
+		masteriyo( 'setting.store' )->read( $setting );
+		$page_id = $setting->get_value();
 	}
 
-	$setting->set_name( 'masteriyo_' . $page . '_page_id' );
+	$page_id = apply_filters( 'masteriyo_get_' . $page . '_page_id',  $page_id );
 
-	masteriyo( 'setting.store' )->read( $setting );
-
-	$page = apply_filters( 'masteriyo_get_' . $page . '_page_id', $setting->get_value() );
-
-	return $page ? absint( $page ) : -1;
+	return $page_id ? absint( $page_id ) : -1;
 }
 
 /**

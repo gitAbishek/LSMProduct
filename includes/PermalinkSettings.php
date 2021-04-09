@@ -158,11 +158,11 @@ class PermalinkSettings {
 
 		$permalinks['course_base'] = masteriyo_sanitize_permalink( $course_base );
 
-		// Shop base may require verbose page rules if nesting pages.
-		$courses_list_page_id   = masteriyo_get_page_id( 'shop' );
-		$courses_list_permalink = ( $courses_list_page_id > 0 && get_post( $courses_list_page_id ) ) ? get_page_uri( $courses_list_page_id ) : _x( 'courses-list', 'default-slug', 'masteriyo' );
+		// course_list base may require verbose page rules if nesting pages.
+		$course_list_page_id   = masteriyo_get_page_id( course_list );
+		$course_list_permalink = ( $course_list_page_id > 0 && get_post( $course_list_page_id ) ) ? get_page_uri( $course_list_page_id ) : _x( 'course-list', 'default-slug', 'masteriyo' );
 
-		if ( $courses_list_page_id && stristr( trim( $permalinks['course_base'], '/' ), $courses_list_permalink ) ) {
+		if ( $course_list_page_id && stristr( trim( $permalinks['course_base'], '/' ), $course_list_permalink ) ) {
 			$permalinks['use_verbose_page_rules'] = true;
 		}
 
@@ -176,10 +176,10 @@ class PermalinkSettings {
 
 	public function display_course_permalink_structure_settings() {
 		/* translators: %s: Home URL */
-		echo wp_kses_post( wpautop( sprintf( __( 'If you like, you may enter custom structures for your course URLs here. For example, using <code>courses-list</code> would make your course links like <code>%scourses-list/sample-course/</code>. This setting affects course URLs only, not things such as course categories.', 'masteriyo' ), esc_url( home_url( '/' ) ) ) ) );
+		echo wp_kses_post( wpautop( sprintf( __( 'If you like, you may enter custom structures for your course URLs here. For example, using <code>course-list</code> would make your course links like <code>%scourse-list/sample-course/</code>. This setting affects course URLs only, not things such as course categories.', 'masteriyo' ), esc_url( home_url( '/' ) ) ) ) );
 
-		$courses_list_page_id = masteriyo_get_page_id( 'courses_list' );
-		$base_slug            = urldecode( ( $courses_list_page_id > 0 && get_post( $courses_list_page_id ) ) ? get_page_uri( $courses_list_page_id ) : _x( 'Courses list', 'default-base', 'masteriyo' ) );
+		$course_list_page_id = masteriyo_get_page_id( 'course_list' );
+		$base_slug            = urldecode( ( $course_list_page_id > 0 && get_post( $course_list_page_id ) ) ? get_page_uri( $course_list_page_id ) : _x( 'Courses list', 'default-base', 'masteriyo' ) );
 		$course_base          = _x( 'course', 'default-base', 'masteriyo' );
 
 		$saved_course_base = trailingslashit( \masteriyo_get_permalink_structure( 'course_base' ) );
@@ -209,7 +209,7 @@ class PermalinkSettings {
 						</code>
 					</td>
 				</tr>
-				<?php if ( $courses_list_page_id ) : ?>
+				<?php if ( $course_list_page_id ) : ?>
 					<tr>
 						<th>
 							<label>

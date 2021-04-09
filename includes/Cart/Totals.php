@@ -374,7 +374,7 @@ final class Totals {
 				$base_tax_rates = $item->tax_rates;
 			}
 
-			// Work out a new base price without the shop's base tax.
+			// Work out a new base price without the course_list's base tax.
 			$taxes = WC_Tax::calc_tax( $item->price, $base_tax_rates, true );
 
 			// Now we have a new item price (excluding TAX).
@@ -401,7 +401,7 @@ final class Totals {
 			$base_tax_rates = WC_Tax::get_base_tax_rates( $item->product->get_tax_class( 'unfiltered' ) );
 
 			if ( $item->tax_rates !== $base_tax_rates ) {
-				// Work out a new base price without the shop's base tax.
+				// Work out a new base price without the course_list's base tax.
 				$taxes     = WC_Tax::calc_tax( $item->price, $base_tax_rates, true );
 				$new_taxes = WC_Tax::calc_tax( $item->price - array_sum( $taxes ), $item->tax_rates, false );
 

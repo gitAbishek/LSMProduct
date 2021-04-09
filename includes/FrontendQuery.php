@@ -295,7 +295,7 @@ class FrontendQuery {
 			}
 
 			// When orderby is set, WordPress shows posts on the front-page. Get around that here.
-			if ( $this->page_on_front_is( masteriyo_get_page_id( 'shop' ) ) ) {
+			if ( $this->page_on_front_is( masteriyo_get_page_id( course_list ) ) ) {
 				$_query = wp_parse_args( $q->query );
 				if ( empty( $_query ) || ! array_diff( array_keys( $_query ), array( 'preview', 'page', 'paged', 'cpage', 'orderby' ) ) ) {
 					$q->set( 'page_id', (int) get_option( 'page_on_front' ) );
@@ -322,9 +322,9 @@ class FrontendQuery {
 			$q->is_comment_feed = false;
 		}
 
-		// Special check for shops with the COURSE POST TYPE ARCHIVE on front.
-		if ( current_theme_supports( 'cmasteriyo' ) && $q->is_page() && 'page' === get_option( 'show_on_front' ) && absint( $q->get( 'page_id' ) ) === masteriyo_get_page_id( 'shop' ) ) {
-			// This is a front-page shop.
+		// Special check for course_lists with the COURSE POST TYPE ARCHIVE on front.
+		if ( current_theme_supports( 'cmasteriyo' ) && $q->is_page() && 'page' === get_option( 'show_on_front' ) && absint( $q->get( 'page_id' ) ) === masteriyo_get_page_id( course_list ) ) {
+			// This is a front-page course_list.
 			$q->set( 'post_type', 'course' );
 			$q->set( 'page_id', '' );
 
@@ -332,20 +332,20 @@ class FrontendQuery {
 				$q->set( 'paged', $q->query['paged'] );
 			}
 
-			// Define a variable so we know this is the front page shop later on.
-			masteriyo_maybe_define_constant( 'SHOP_IS_ON_FRONT', true );
+			// Define a variable so we know this is the front page course_list later on.
+			masteriyo_maybe_define_constant( 'COURSE_LIST_IS_ON_FRONT', true );
 
 			// Get the actual WP page to avoid errors and let us use is_front_page().
 			// This is hacky but works. Awaiting https://core.trac.wordpress.org/ticket/21096.
 			global $wp_post_types;
 
-			$shop_page = get_post( masteriyo_get_page_id( 'shop' ) );
+			$course_list_page = get_post( masteriyo_get_page_id( course_list ) );
 
-			$wp_post_types['course']->ID         = $shop_page->ID;
-			$wp_post_types['course']->post_title = $shop_page->post_title;
-			$wp_post_types['course']->post_name  = $shop_page->post_name;
-			$wp_post_types['course']->post_type  = $shop_page->post_type;
-			$wp_post_types['course']->ancestors  = get_ancestors( $shop_page->ID, $shop_page->post_type );
+			$wp_post_types['course']->ID         = $course_list_page->ID;
+			$wp_post_types['course']->post_title = $course_list_page->post_title;
+			$wp_post_types['course']->post_name  = $course_list_page->post_name;
+			$wp_post_types['course']->post_type  = $course_list_page->post_type;
+			$wp_post_types['course']->ancestors  = get_ancestors( $course_list_page->ID, $course_list_page->post_type );
 
 			// Fix conditional Functions like is_front_page.
 			$q->is_singular          = false;
@@ -362,7 +362,7 @@ class FrontendQuery {
 				add_filter( 'wpseo_metakey', array( $this, 'wpseo_metakey' ) );
 			}
 		} elseif ( ! $q->is_post_type_archive( 'course' ) && ! $q->is_tax( get_object_taxonomies( 'course' ) ) ) {
-			// Only apply to course categories, the course post archive, the shop page, course tags, and course attribute taxonomies.
+			// Only apply to course categories, the course post archive, the course_list page, course tags, and course attribute taxonomies.
 			return;
 		}
 
@@ -392,10 +392,10 @@ class FrontendQuery {
 		$q->set( 'meta_query', $this->get_meta_query( $q->get( 'meta_query' ), true ) );
 		$q->set( 'tax_query', $this->get_tax_query( $q->get( 'tax_query' ), true ) );
 		$q->set( 'masteriyo_query', 'course_query' );
-		$q->set( 'post__in', array_unique( (array) apply_filters( 'loop_shop_post_in', array() ) ) );
+		$q->set( 'post__in', array_unique( (array) apply_filters( 'loop_course_list_post_in', array() ) ) );
 
 		// Work out how many courses to query.
-		$q->set( 'posts_per_page', $q->get( 'posts_per_page' ) ? $q->get( 'posts_per_page' ) : apply_filters( 'loop_shop_per_page', \masteriyo_get_default_courses_per_row() * \masteriyo_get_default_course_rows_per_page() ) );
+		$q->set( 'posts_per_page', $q->get( 'posts_per_page' ) ? $q->get( 'posts_per_page' ) : apply_filters( 'loop_course_list_per_page', \masteriyo_get_default_courses_per_row() * \masteriyo_get_default_course_rows_per_page() ) );
 
 		// Store reference to this query.
 		self::$course_query = $q;

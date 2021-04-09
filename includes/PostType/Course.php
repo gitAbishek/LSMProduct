@@ -18,11 +18,11 @@ class Course extends PostType {
 	public function __construct() {
 		$debug                = masteriyo_is_debug_enabled();
 		$permalinks           = masteriyo_get_permalink_structure();
-		$courses_list_page_id = masteriyo_get_page_id( 'courses_list' );
+		$course_list_page_id = masteriyo_get_page_id( 'course_list' );
 		$supports             = array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'publicize', 'wpcom-markdown' );
 
-		if ( $courses_list_page_id && get_post( $courses_list_page_id ) ) {
-			$has_archive = urldecode( get_page_uri( $courses_list_page_id ) );
+		if ( $course_list_page_id && get_post( $course_list_page_id ) ) {
+			$has_archive = urldecode( get_page_uri( $course_list_page_id ) );
 		} else {
 			$has_archive = 'courses-list';
 		}

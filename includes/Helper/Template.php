@@ -19,7 +19,7 @@ function masteriyo_template_redirect() {
 
 	// phpcs:disable WordPress.Security.NonceVerification.Recommended
 	// When default permalinks are enabled, redirect courses list page to post type archive url.
-	if ( ! empty( $_GET['page_id'] ) && '' === get_option( 'permalink_structure' ) && masteriyo_get_page_id( 'courses_list' ) === absint( $_GET['page_id'] ) && get_post_type_archive_link( 'course' ) ) {
+	if ( ! empty( $_GET['page_id'] ) && '' === get_option( 'permalink_structure' ) && masteriyo_get_page_id( 'course_list' ) === absint( $_GET['page_id'] ) && get_post_type_archive_link( 'course' ) ) {
 		wp_safe_redirect( get_post_type_archive_link( 'course' ) );
 		exit;
 	}
@@ -126,8 +126,8 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 		} elseif ( is_tax() ) {
 			$page_title = single_term_title( '', false );
 		} else {
-			$courses_list_page_id = masteriyo_get_page_id( 'courses_list' );
-			$page_title           = get_the_title( $courses_list_page_id );
+			$course_list_page_id = masteriyo_get_page_id( 'course_list' );
+			$page_title           = get_the_title( $course_list_page_id );
 		}
 
 		$page_title = apply_filters( 'masteriyo_page_title', $page_title );
@@ -184,7 +184,7 @@ function masteriyo_setup_loop( $args = array() ) {
 
 	$GLOBALS['masteriyo_loop'] = wp_parse_args( $args, $default_args );
 }
-function_exists( 'add_action' ) && add_action( 'masteriyo_before_shop_loop', 'masteriyo_setup_loop' );
+function_exists( 'add_action' ) && add_action( 'masteriyo_before_course_list_loop', 'masteriyo_setup_loop' );
 
 /**
  * Get the default columns setting - this is how many courses will be shown per row in loops.
@@ -208,7 +208,7 @@ function masteriyo_get_default_courses_per_row() {
 
 	$columns = max(1, absint( $columns ) );
 
-	return apply_filters( 'masteriyo_loop_shop_columns', $columns );
+	return apply_filters( 'masteriyo_loop_course_list_columns', $columns );
 }
 
 /**
@@ -257,7 +257,7 @@ function masteriyo_set_loop_prop( $prop, $value = '' ) {
  * @return mixed
  */
 function masteriyo_get_loop_prop( $prop, $default = '' ) {
-	masteriyo_setup_loop(); // Ensure shop loop is setup.
+	masteriyo_setup_loop(); // Ensure course_list loop is setup.
 
 	return isset( $GLOBALS['masteriyo_loop'], $GLOBALS['masteriyo_loop'][ $prop ] ) ? $GLOBALS['masteriyo_loop'][ $prop ] : $default;
 }
@@ -296,7 +296,7 @@ function_exists( 'add_action' ) && add_action( 'the_post', 'masteriyo_setup_cour
  */
 function masteriyo_add_body_class( $classes, $class ) {
 	if ( masteriyo_is_archive_course_page() ) {
-		$classes[] = 'masteriyo-courses-list-page';
+		$classes[] = 'masteriyo-course-list-page';
 	}
 
 	return $classes;

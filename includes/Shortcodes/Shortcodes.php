@@ -44,7 +44,7 @@ class Shortcodes {
 
 		return apply_filters( 'masteriyo_shortcodes', array(
 			'profile'      => "{$namespace}\\ProfileShortcode",
-			'courses-list' => "{$namespace}\\CoursesListShortcode",
+			'course-list' => "{$namespace}\\CoursesListShortcode",
 			'checkout'     => "{$namespace}\\CheckoutShortcode",
 			'cart'         => "{$namespace}\\CartShortcode",
 		) );

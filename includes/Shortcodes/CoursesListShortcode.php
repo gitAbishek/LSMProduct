@@ -25,7 +25,7 @@ class CoursesListShortcode extends Shortcode {
 	 *
 	 * @var string
 	 */
-	protected $tag = 'masteriyo_courses_list';
+	protected $tag = 'masteriyo_course_list';
 
 	/**
 	 * Shortcode attributes with default values.
@@ -49,7 +49,7 @@ class CoursesListShortcode extends Shortcode {
 		/**
 		 * Prepare Template.
 		 */
-		$template_path = masteriyo( 'template' )->locate( 'courses-list.php' );
+		$template_path = masteriyo( 'template' )->locate( 'course-list.php' );
 
 		/**
 		 * Render the template.

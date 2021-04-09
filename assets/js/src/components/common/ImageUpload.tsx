@@ -1,22 +1,22 @@
 import { Box, Center, Image } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import Icon from 'Components/common/Icon';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import { Plus } from '../../assets/icons';
 
-interface Props extends React.HTMLAttributes<HTMLElement> {
-	multiple?: boolean;
+interface Props {
+	onChange: any;
 }
 
-const ImageUpload: React.FC = () => {
+const ImageUpload: React.FC<Props> = (props) => {
+	const { onChange } = props;
 	const [file, setFiles] = useState<any>(null);
 
 	const {
 		getRootProps,
 		getInputProps,
-		isDragActive,
 		isDragAccept,
 		isDragReject,
 	} = useDropzone({
@@ -34,8 +34,6 @@ const ImageUpload: React.FC = () => {
 		}
 	};
 
-	console.log(file);
-
 	const boxStyles = {
 		transition: 'ease-in-out',
 		border: '1px',
@@ -49,7 +47,7 @@ const ImageUpload: React.FC = () => {
 	return (
 		<Box sx={boxStyles} {...getRootProps()}>
 			{file && <Image src={file.image} objectFit="cover" maxH="full" />}
-			<input {...getInputProps()} multiple={false} name="image" />
+			<input {...getInputProps({ onChange })} multiple={false} />
 			{!file && (
 				<Center>
 					<span>

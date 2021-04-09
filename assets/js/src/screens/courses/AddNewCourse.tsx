@@ -49,17 +49,18 @@ const AddNewCourse: React.FC = () => {
 	});
 
 	const onSubmit = (data: any) => {
-		const categories = data.categories.map((category: any) => ({
-			id: category.value,
-		}));
+		// const categories = data.categories.map((category: any) => ({
+		// 	id: category.value,
+		// }));
 
-		const newData: any = {
-			name: data.name,
-			description: data.description,
-			categories: categories,
-		};
+		// const newData: any = {
+		// 	name: data.name,
+		// 	description: data.description,
+		// 	categories: categories,
+		// };
 
-		addMutation.mutate(newData);
+		// addMutation.mutate(newData);
+		console.log(data);
 	};
 
 	return (
@@ -116,7 +117,11 @@ const AddNewCourse: React.FC = () => {
 							</FormControl>
 							<FormControl>
 								<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-								<ImageUpload />
+								<Controller
+									render={({ onChange }) => <ImageUpload onChange={onChange} />}
+									name="image"
+									control={control}
+								/>
 							</FormControl>
 						</Stack>
 						<Divider />

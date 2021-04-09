@@ -35,7 +35,7 @@ const AddNewCourse: React.FC = () => {
 	const imageAPi = new MediaAPI();
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
 	const [file, setFile] = useState<any>(null);
-
+	const [preview, setPreview] = useState<any>(null);
 	const categoriesOption = categoryQuery?.data?.map((category: any) => {
 		return {
 			value: category.id,
@@ -80,6 +80,7 @@ const AddNewCourse: React.FC = () => {
 		}
 	};
 
+	console.log(preview);
 	return (
 		<>
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -157,7 +158,7 @@ const AddNewCourse: React.FC = () => {
 								</FormControl>
 								<FormControl>
 									<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-									<ImageUpload setFile={setFile} />
+									<ImageUpload setFile={setFile} setPreview={setPreview} />
 								</FormControl>
 							</Stack>
 						</Box>

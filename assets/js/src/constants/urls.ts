@@ -1,5 +1,6 @@
 const urls = {
-	base: process.env.baseUrl || '/',
+	base: process.env.baseUrl + '/masteriyo/v1' || '/',
+	wpMedia: process.env.baseUrl + '/wp/v2/media',
 	courses: 'courses',
 	categories: 'courses/categories',
 	tags: 'courses/tags',

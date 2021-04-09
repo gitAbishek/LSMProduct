@@ -1,18 +1,18 @@
 import { Box, Center, Image } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import Icon from 'Components/common/Icon';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import { Plus } from '../../assets/icons';
 
 interface Props {
-	onChange: any;
+	setFile: any;
 }
 
 const ImageUpload: React.FC<Props> = (props) => {
-	const { onChange } = props;
-	const [file, setFiles] = useState<any>(null);
+	const { setFile } = props;
+	const [preview, setPreview] = useState<any>(null);
 
 	const {
 		getRootProps,
@@ -25,12 +25,9 @@ const ImageUpload: React.FC<Props> = (props) => {
 	});
 
 	const onDrop = (acceptedFiles: any) => {
-		if (isDragAccept) {
-			setFiles(
-				Object.assign(acceptedFiles[0], {
-					image: URL.createObjectURL(acceptedFiles[0]),
-				})
-			);
+		if (acceptedFiles.length) {
+			setFile(acceptedFiles[0]);
+			setPreview(URL.createObjectURL(acceptedFiles[0]));
 		}
 	};
 
@@ -46,9 +43,9 @@ const ImageUpload: React.FC<Props> = (props) => {
 
 	return (
 		<Box sx={boxStyles} {...getRootProps()}>
-			{file && <Image src={file.image} objectFit="cover" maxH="full" />}
-			<input {...getInputProps({ onChange })} multiple={false} />
-			{!file && (
+			{preview && <Image src={preview} objectFit="cover" maxH="full" />}
+			<input {...getInputProps()} multiple={false} />
+			{!preview && (
 				<Center>
 					<span>
 						<Icon icon={<Plus />}></Icon>

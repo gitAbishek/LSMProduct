@@ -13,15 +13,17 @@ import {
 	Textarea,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import axios from 'axios';
 import ImageUpload from 'Components/common/ImageUpload';
 import Select from 'Components/common/Select';
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
 import urls from '../../constants/urls';
 import API from '../../utils/api';
+import MediaAPI from '../../utils/media';
 
 const AddNewCourse: React.FC = () => {
 	interface Inputs {
@@ -33,7 +35,9 @@ const AddNewCourse: React.FC = () => {
 	const { register, handleSubmit, control, errors } = useForm<Inputs>();
 	const courseAPI = new API(urls.courses);
 	const categoryAPI = new API(urls.categories);
+	const imageAPi = new MediaAPI();
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
+	const [file, setFile] = useState<any>(null);
 
 	const categoriesOption = categoryQuery?.data?.map((category: any) => {
 		return {
@@ -48,19 +52,31 @@ const AddNewCourse: React.FC = () => {
 		},
 	});
 
+	const addImageMutation = useMutation((image: any) => imageAPi.store(image), {
+		onSuccess: (data) => {
+			console.log(data);
+		},
+	});
+
 	const onSubmit = (data: any) => {
-		// const categories = data.categories.map((category: any) => ({
-		// 	id: category.value,
-		// }));
+		const categories = data?.categories?.map((category: any) => ({
+			id: category.value,
+		}));
 
-		// const newData: any = {
-		// 	name: data.name,
-		// 	description: data.description,
-		// 	categories: categories,
-		// };
+		let formData = new FormData();
+		formData.append('file', file);
 
-		// addMutation.mutate(newData);
-		console.log(data);
+		addImageMutation.mutate(formData, {
+			onSuccess: (media) => {
+				const newData: any = {
+					name: data.name,
+					description: data.description,
+					categories: categories,
+					featured_image: media.id,
+				};
+				addMutation.mutate(newData);
+			},
+		});
 	};
 
 	return (
@@ -117,11 +133,7 @@ const AddNewCourse: React.FC = () => {
 							</FormControl>
 							<FormControl>
 								<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-								<Controller
-									render={({ onChange }) => <ImageUpload onChange={onChange} />}
-									name="image"
-									control={control}
-								/>
+								<ImageUpload setFile={setFile} />
 							</FormControl>
 						</Stack>
 						<Divider />

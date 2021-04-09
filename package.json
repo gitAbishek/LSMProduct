@@ -83,7 +83,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --hot --open",
     "build": "webpack --mode production",
-    "build:css:public": "tailwindcss build ./assets/css/public.css -o ./assets/dist/public.css"
+    "build:css:public": "tailwindcss build ./assets/css/public.css -o ./assets/dist/public.css --mode development"
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {

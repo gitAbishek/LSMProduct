@@ -8,7 +8,6 @@ msgid "Are you sure want to delete. You won't be able to recover it back"
 msgstr ""
 
 #: assets/js/src/components/layout/DeleteModal.tsx:35
-#: assets/js/src/screens/courses/AllCourses.tsx:122
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:156
 #: assets/js/src/screens/lessons/EditLesson.tsx:175
 #: assets/js/src/screens/quiz/AddNewQuiz.tsx:80
@@ -19,120 +18,103 @@ msgid "Cancel"
 msgstr ""
 
 #: assets/js/src/components/layout/DeleteModal.tsx:41
-#: assets/js/src/screens/courses/AllCourses.tsx:131
 #: assets/js/src/screens/lessons/EditLesson.tsx:79
 #: assets/js/src/screens/quiz/components/Questions.tsx:138
 #: assets/js/src/screens/sections/components/Content.tsx:98
-#: assets/js/src/screens/sections/components/Section.tsx:79
+#: assets/js/src/screens/sections/components/Section.tsx:88
 msgid "Delete"
 msgstr ""
 
-#: assets/js/src/screens/courses/AddNewCourse.tsx:45
-#: assets/js/src/screens/courses/EditCourse.tsx:60
-msgid "Course Name"
-msgstr ""
-
-#: assets/js/src/screens/courses/AddNewCourse.tsx:47
-#: assets/js/src/screens/courses/EditCourse.tsx:62
-msgid "Your Course Name"
-msgstr ""
-
-#: assets/js/src/screens/courses/AddNewCourse.tsx:53
-#: assets/js/src/screens/courses/EditCourse.tsx:70
-msgid "Course Description"
-msgstr ""
-
-#: assets/js/src/screens/courses/AddNewCourse.tsx:55
-#: assets/js/src/screens/courses/EditCourse.tsx:73
-msgid "Your Course Title"
-msgstr ""
-
-#: assets/js/src/screens/courses/AddNewCourse.tsx:70
-#: assets/js/src/screens/courses/EditCourse.tsx:81
-msgid "Add Course"
-msgstr ""
-
-#: assets/js/src/screens/courses/AddNewCourse.tsx:78
-#: assets/js/src/screens/courses/EditCourse.tsx:88
-msgid "Course Category"
-msgstr ""
-
-#: assets/js/src/screens/courses/AddNewCourse.tsx:81
-#: assets/js/src/screens/courses/EditCourse.tsx:91
-msgid "Chocolate"
-msgstr ""
-
-#: assets/js/src/screens/courses/AddNewCourse.tsx:84
-#: assets/js/src/screens/courses/EditCourse.tsx:94
-msgid "Strawberry"
-msgstr ""
-
-#: assets/js/src/screens/courses/AddNewCourse.tsx:86
-#: assets/js/src/screens/courses/EditCourse.tsx:96
-msgid "Vanilla"
-msgstr ""
-
-#: assets/js/src/screens/courses/AddNewCourse.tsx:92
+#: assets/js/src/screens/courses/AddNewCourse.tsx:116
 #: assets/js/src/screens/courses/EditCourse.tsx:102
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:98
 #: assets/js/src/screens/lessons/EditLesson.tsx:111
 msgid "Featured Image"
 msgstr ""
 
-#: assets/js/src/screens/courses/AddNewCourse.tsx:95
-#: assets/js/src/screens/courses/EditCourse.tsx:104
-msgid "Drag image or click to upload"
-msgstr ""
-
-#: assets/js/src/screens/courses/AddNewCourse.tsx:98
+#: assets/js/src/screens/courses/AddNewCourse.tsx:122
 #: assets/js/src/screens/courses/EditCourse.tsx:107
 msgid "Remove Featured Image"
 msgstr ""
 
-#: assets/js/src/screens/courses/AddNewCourse.tsx:99
+#: assets/js/src/screens/courses/AddNewCourse.tsx:123
 #: assets/js/src/screens/courses/EditCourse.tsx:108
 msgid "Add New"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:108
-#: assets/js/src/screens/quiz/components/Questions.tsx:118
-msgid "Delete Course"
+#: assets/js/src/screens/courses/AddNewCourse.tsx:65
+#: assets/js/src/screens/courses/EditCourse.tsx:60
+msgid "Course Name"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:112
-#: assets/js/src/screens/quiz/components/Questions.tsx:122
-msgid ""
-"Are you sure want to delete this course. You won't be able to recover it "
-"back"
+#: assets/js/src/screens/courses/AddNewCourse.tsx:67
+#: assets/js/src/screens/courses/EditCourse.tsx:62
+msgid "Your Course Name"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:47
+#: assets/js/src/screens/courses/AddNewCourse.tsx:73
+#: assets/js/src/screens/courses/EditCourse.tsx:70
+msgid "Course Description"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:75
+#: assets/js/src/screens/courses/EditCourse.tsx:73
+msgid "Your Course Title"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:90
+#: assets/js/src/screens/courses/EditCourse.tsx:81
+msgid "Add Course"
+msgstr ""
+
+#: assets/js/src/screens/courses/AddNewCourse.tsx:98
+#: assets/js/src/screens/courses/EditCourse.tsx:88
+msgid "Course Category"
+msgstr ""
+
+#: assets/js/src/screens/courses/AllCourses.tsx:26
 #: assets/js/src/screens/layouts/MainToolbar.tsx:24
 msgid "Courses"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:51
+#: assets/js/src/screens/courses/AllCourses.tsx:30
 msgid "Add New Course"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:62
+#: assets/js/src/screens/courses/AllCourses.tsx:41
 msgid "Title"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:65
+#: assets/js/src/screens/courses/AllCourses.tsx:44
 msgid "Categories"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:68
+#: assets/js/src/screens/courses/AllCourses.tsx:47
 msgid "Price"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:71
+#: assets/js/src/screens/courses/AllCourses.tsx:50
 msgid "Actions"
+msgstr ""
+
+#: assets/js/src/screens/courses/EditCourse.tsx:104
+msgid "Drag image or click to upload"
 msgstr ""
 
 #: assets/js/src/screens/courses/EditCourse.tsx:53
 msgid " is successfully updated. You can keep editing."
+msgstr ""
+
+#: assets/js/src/screens/courses/EditCourse.tsx:91
+msgid "Chocolate"
+msgstr ""
+
+#: assets/js/src/screens/courses/EditCourse.tsx:94
+msgid "Strawberry"
+msgstr ""
+
+#: assets/js/src/screens/courses/EditCourse.tsx:96
+msgid "Vanilla"
 msgstr ""
 
 #: assets/js/src/screens/layouts/MainToolbar.tsx:32
@@ -300,8 +282,18 @@ msgstr ""
 msgid "Questions"
 msgstr ""
 
+#: assets/js/src/screens/quiz/components/Questions.tsx:118
+msgid "Delete Course"
+msgstr ""
+
+#: assets/js/src/screens/quiz/components/Questions.tsx:122
+msgid ""
+"Are you sure want to delete this course. You won't be able to recover it "
+"back"
+msgstr ""
+
 #: assets/js/src/screens/quiz/components/Questions.tsx:62
-#: assets/js/src/screens/sections/components/Section.tsx:48
+#: assets/js/src/screens/sections/components/Section.tsx:49
 msgid " has been deleted successfully"
 msgstr ""
 
@@ -310,7 +302,7 @@ msgid "Add New Section"
 msgstr ""
 
 #: assets/js/src/screens/sections/components/Content.tsx:86
-#: assets/js/src/screens/sections/components/Section.tsx:75
+#: assets/js/src/screens/sections/components/Section.tsx:84
 msgid "Edit"
 msgstr ""
 
@@ -330,14 +322,14 @@ msgstr ""
 msgid "short summary"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:119
+#: assets/js/src/screens/sections/components/Section.tsx:128
 msgid "Lesson"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:127
+#: assets/js/src/screens/sections/components/Section.tsx:136
 msgid "Quiz"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:132
+#: assets/js/src/screens/sections/components/Section.tsx:141
 msgid "Add New Content"
 msgstr ""

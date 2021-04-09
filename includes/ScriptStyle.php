@@ -114,6 +114,20 @@ class ScriptStyle {
 				'context'  => 'public',
 				'callback' => 'masteriyo_is_single_course_page'
 			),
+			'edit-myaccount' => array(
+				'src'      => $this->get_asset_url( '/assets/js/edit-myaccount.js' ),
+				'deps'     => array( 'jquery' ),
+				'version'  => $this->get_version(),
+				'context'  => 'public',
+				'callback' => 'masteriyo_is_edit_myaccount_page',
+			),
+			'login-form' => array(
+				'src'      => $this->get_asset_url( '/assets/js/login-form.js' ),
+				'deps'     => array( 'jquery' ),
+				'version'  => $this->get_version(),
+				'context'  => 'public',
+				'callback' => 'masteriyo_is_load_login_form_assets',
+			),
 		) );
 	}
 
@@ -137,12 +151,6 @@ class ScriptStyle {
 				'src'     => $this->get_asset_url( '/assets/dist/public.css' ),
 				'has_rtl' => true,
 				'context' => 'public'
-			),
-			'single-course' => array(
-				'src'      => $this->get_asset_url( '/assets/css/single-course.css' ),
-				'has_rtl'  => true,
-				'context'  => 'public',
-				'callback' => 'masteriyo_is_single_course_page'
 			),
 		) );
 	}
@@ -427,6 +435,29 @@ class ScriptStyle {
 	 * @since 0.1.1
 	 */
 	public function load_public_localized_scripts() {
-	}
+		$this->localized_scripts = apply_filters( 'masteriyo_localized_scripts', array(
+			'edit-myaccount' => array(
+				'name' => 'masteriyo_data',
+				'data' => array(
+					'rootApiUrl' => esc_url_raw( rest_url() ),
+					'current_user_id' => get_current_user_id(),
+					'nonce' => wp_create_nonce( 'wp_rest' ),
+					'labels' => array(
+						'profile_update_success' => __( 'Your profile was updated successfully', 'masteriyo' ),
+					),
+				),
+			),
+			'login-form' => array(
+				'name' => 'masteriyo_data',
+				'data' => array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'nonce' => wp_create_nonce( 'masteriyo_login_nonce' ),
+				),
+			),
+		) );
 
+		foreach ( $this->localized_scripts as $handle => $script ) {
+			\wp_localize_script( "masteriyo-{$handle}", $script['name'], $script['data'] );
+		}
+	}
 }

@@ -46,7 +46,9 @@ jobs:
         run: composer install
 
       - name: Build the application
-        run: yarn build
+        run: |
+          yarn build
+          yarn buld:css:public
 
       - name: Zip the application
         run: grunt release

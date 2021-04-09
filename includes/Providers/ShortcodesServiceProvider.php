@@ -10,7 +10,6 @@ defined( 'ABSPATH' ) || exit;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use ThemeGrill\Masteriyo\Shortcodes\CartShortcode;
 use ThemeGrill\Masteriyo\Shortcodes\CheckoutShortcode;
-use ThemeGrill\Masteriyo\Shortcodes\CoursesListShortcode;
 use ThemeGrill\Masteriyo\Shortcodes\MyAccountShortcode;
 
 class ShortcodesServiceProvider extends AbstractServiceProvider {

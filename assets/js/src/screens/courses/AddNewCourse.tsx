@@ -52,31 +52,31 @@ const AddNewCourse: React.FC = () => {
 		},
 	});
 
-	const addImageMutation = useMutation((image: any) => imageAPi.store(image), {
-		onSuccess: (data) => {
-			console.log(data);
-		},
-	});
+	const addImageMutation = useMutation((image: any) => imageAPi.store(image));
 
-	const onSubmit = (data: any) => {
+	const addCourse = (data: any, media: any) => {
 		const categories = data?.categories?.map((category: any) => ({
 			id: category.value,
 		}));
+		const newData: any = {
+			name: data.name,
+			description: data.description,
+			categories: categories,
+			featured_image: media.id,
+		};
+		addMutation.mutate(newData);
+	};
+	const onSubmit = (data: any) => {
+		if (file) {
+			let formData = new FormData();
+			formData.append('file', file);
 
-		let formData = new FormData();
-		formData.append('file', file);
-
-		addImageMutation.mutate(formData, {
-			onSuccess: (media) => {
-				const newData: any = {
-					name: data.name,
-					description: data.description,
-					categories: categories,
-					featured_image: media.id,
-				};
-				addMutation.mutate(newData);
-			},
-		});
+			addImageMutation.mutate(formData, {
+				onSuccess: (media) => {
+					addCourse(data, media);
+				},
+			});
+		}
 	};
 
 	return (

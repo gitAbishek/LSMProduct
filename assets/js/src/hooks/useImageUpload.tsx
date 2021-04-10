@@ -1,6 +1,6 @@
 import { Box, Flex, Icon, Text, useToast } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { BiPlus } from 'react-icons/bi';
 

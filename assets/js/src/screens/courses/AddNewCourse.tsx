@@ -12,15 +12,15 @@ import {
 	Textarea,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import useImageUpload from 'Components/common/ImageUpload';
 import Select from 'Components/common/Select';
-import React, { useState } from 'react';
+import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import useImageUpload from '../../hooks/useImageUpload';
 import API from '../../utils/api';
 import MediaAPI from '../../utils/media';
 

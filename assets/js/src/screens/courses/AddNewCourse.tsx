@@ -75,11 +75,6 @@ const AddNewCourse: React.FC = () => {
 		addCourse(data);
 	};
 
-	// const onRemoveFeaturedImage = () => {
-	// 	setPreview(null);
-	// 	setFile(null);
-	// };
-
 	return (
 		<>
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -155,7 +150,7 @@ const AddNewCourse: React.FC = () => {
 								</FormControl>
 								<FormControl>
 									<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-									{isUploading || isDeleting ? (
+									{isUploading && (
 										<Center
 											border="1px"
 											borderColor="gray.100"
@@ -163,7 +158,7 @@ const AddNewCourse: React.FC = () => {
 											overflow="hidden">
 											<Spinner />
 										</Center>
-									) : null}
+									)}
 									{!isUploading && preview && (
 										<Stack direction="column" spacing="4">
 											<Box
@@ -176,12 +171,12 @@ const AddNewCourse: React.FC = () => {
 											<Button
 												colorScheme="red"
 												variant="outline"
-												onClick={deleteImage}>
+												onClick={deleteImage}
+												isLoading={isDeleting}>
 												{__('Remove featured Image', 'masteriyo')}
 											</Button>
 										</Stack>
 									)}
-
 									{!isUploading && !preview && <ImageUpload />}
 								</FormControl>
 							</Stack>

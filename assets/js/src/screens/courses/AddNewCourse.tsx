@@ -12,7 +12,7 @@ import {
 	Textarea,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import ImageUpload from 'Components/common/ImageUpload';
+import useImageUpload from 'Components/common/ImageUpload';
 import Select from 'Components/common/Select';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -36,8 +36,7 @@ const AddNewCourse: React.FC = () => {
 	const categoryAPI = new API(urls.categories);
 	const imageAPi = new MediaAPI();
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
-	const [file, setFile] = useState<any>(null);
-	const [preview, setPreview] = useState<any>(null);
+	const { file, preview, ImageUpload } = useImageUpload();
 	const categoriesOption = categoryQuery?.data?.map((category: any) => {
 		return {
 			value: category.id,
@@ -82,10 +81,10 @@ const AddNewCourse: React.FC = () => {
 		}
 	};
 
-	const onRemoveFeaturedImage = () => {
-		setPreview(null);
-		setFile(null);
-	};
+	// const onRemoveFeaturedImage = () => {
+	// 	setPreview(null);
+	// 	setFile(null);
+	// };
 
 	return (
 		<>
@@ -173,15 +172,12 @@ const AddNewCourse: React.FC = () => {
 												overflow="hidden">
 												<Img src={preview} objectFit="cover" w="full" />
 											</Box>
-											<Button
-												colorScheme="red"
-												variant="outline"
-												onClick={onRemoveFeaturedImage}>
+											<Button colorScheme="red" variant="outline">
 												{__('Remove featured Image', 'masteriyo')}
 											</Button>
 										</Stack>
 									) : (
-										<ImageUpload setFile={setFile} setPreview={setPreview} />
+										<ImageUpload />
 									)}
 								</FormControl>
 							</Stack>

@@ -26,6 +26,11 @@ const useImageUpload = () => {
 		}
 	};
 
+	const removeImage = () => {
+		setFile(null);
+		setPreview(null);
+	};
+
 	const ImageUpload = () => {
 		return (
 			<Dropzone onDrop={onDrop}>
@@ -71,7 +76,7 @@ const useImageUpload = () => {
 		);
 	};
 
-	return { file, preview, ImageUpload };
+	return { file, preview, ImageUpload, removeImage };
 };
 
 export default useImageUpload;

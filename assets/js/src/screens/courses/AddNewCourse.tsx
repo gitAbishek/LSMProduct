@@ -36,7 +36,7 @@ const AddNewCourse: React.FC = () => {
 	const categoryAPI = new API(urls.categories);
 	const imageAPi = new MediaAPI();
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
-	const { file, preview, ImageUpload } = useImageUpload();
+	const { file, preview, ImageUpload, removeImage } = useImageUpload();
 	const categoriesOption = categoryQuery?.data?.map((category: any) => {
 		return {
 			value: category.id,
@@ -172,7 +172,10 @@ const AddNewCourse: React.FC = () => {
 												overflow="hidden">
 												<Img src={preview} objectFit="cover" w="full" />
 											</Box>
-											<Button colorScheme="red" variant="outline">
+											<Button
+												colorScheme="red"
+												variant="outline"
+												onClick={removeImage}>
 												{__('Remove featured Image', 'masteriyo')}
 											</Button>
 										</Stack>

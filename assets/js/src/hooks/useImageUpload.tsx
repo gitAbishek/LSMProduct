@@ -3,19 +3,42 @@ import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { BiPlus } from 'react-icons/bi';
+import { useMutation } from 'react-query';
+
+import MediaAPI from '../utils/media';
+
+interface ImageUploadProps {
+	uploadOn: 'click' | 'drop';
+}
 
 const useImageUpload = () => {
 	const toast = useToast();
+	const imageAPi = new MediaAPI();
 	const [file, setFile] = useState<any>(null);
 	const [preview, setPreview] = useState<any>(null);
+	const [uploadedMediaData, setUploadedMediaData] = useState<any>(null);
+	const uploadMedia = useMutation((image: any) => imageAPi.store(image));
 
-	const onDrop = (acceptedFiles: any) => {
+	const uploadImage = (file: any) => {
+		let formData = new FormData();
+		formData.append('file', file);
+
+		uploadMedia.mutate(formData, {
+			onSuccess: (mediaData) => {
+				console.log(mediaData);
+				setUploadedMediaData(mediaData);
+				setPreview(mediaData.source_url);
+			},
+		});
+	};
+
+	const onDrop = (uploadOn: string, acceptedFiles: any) => {
 		if (acceptedFiles.length) {
 			setFile(acceptedFiles[0]);
-			setPreview(URL.createObjectURL(acceptedFiles[0]));
+			uploadImage(acceptedFiles[0]);
 		} else {
 			toast({
-				title: __('Please upload Image files', 'masteriyo'),
+				title: __('Please upload Valid Image files', 'masteriyo'),
 				description: __(
 					'Media files jpeg, png are only supported',
 					'masteriyo'
@@ -31,9 +54,13 @@ const useImageUpload = () => {
 		setPreview(null);
 	};
 
-	const ImageUpload = () => {
+	const ImageUpload: React.FC<ImageUploadProps> = (props) => {
+		const { uploadOn = 'drop' } = props;
+
 		return (
-			<Dropzone onDrop={onDrop}>
+			<Dropzone
+				onDrop={(acceptedFiles) => onDrop(uploadOn, acceptedFiles)}
+				accept="image/jpeg, image/png">
 				{({
 					getRootProps,
 					getInputProps,
@@ -76,7 +103,7 @@ const useImageUpload = () => {
 		);
 	};
 
-	return { file, preview, ImageUpload, removeImage };
+	return { file, preview, ImageUpload, removeImage, uploadedMediaData };
 };
 
 export default useImageUpload;

@@ -180,7 +180,7 @@ const AddNewCourse: React.FC = () => {
 											</Button>
 										</Stack>
 									) : (
-										<ImageUpload />
+										<ImageUpload uploadOn="drop" />
 									)}
 								</FormControl>
 							</Stack>

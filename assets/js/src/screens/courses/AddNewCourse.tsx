@@ -43,6 +43,7 @@ const AddNewCourse: React.FC = () => {
 		deleteImage,
 		isUploading,
 		isDeleting,
+		uploadedMediaData,
 	} = useImageUpload();
 	const categoriesOption = categoryQuery?.data?.map((category: any) => {
 		return {
@@ -53,7 +54,7 @@ const AddNewCourse: React.FC = () => {
 
 	const addMutation = useMutation((data) => courseAPI.store(data));
 
-	const addCourse = (data: any, media?: any) => {
+	const addCourse = (data: any) => {
 		const newData: any = {
 			name: data.name,
 			description: data.description,
@@ -62,7 +63,7 @@ const AddNewCourse: React.FC = () => {
 					id: category.value,
 				})),
 			}),
-			...(media && { featured_image: media.id }),
+			...(uploadedMediaData && { featured_image: uploadedMediaData.id }),
 		};
 		addMutation.mutate(newData, {
 			onSuccess: (data) => {

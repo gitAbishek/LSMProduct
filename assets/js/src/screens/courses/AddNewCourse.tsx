@@ -2,12 +2,14 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
+	Center,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
 	Heading,
 	Img,
 	Input,
+	Spinner,
 	Stack,
 	Textarea,
 } from '@chakra-ui/react';
@@ -34,9 +36,8 @@ const AddNewCourse: React.FC = () => {
 	const { register, handleSubmit, control, errors } = useForm<Inputs>();
 	const courseAPI = new API(urls.courses);
 	const categoryAPI = new API(urls.categories);
-	const imageAPi = new MediaAPI();
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
-	const { file, preview, ImageUpload, removeImage } = useImageUpload();
+	const { preview, ImageUpload, removeImage, isUploading } = useImageUpload();
 	const categoriesOption = categoryQuery?.data?.map((category: any) => {
 		return {
 			value: category.id,
@@ -45,8 +46,6 @@ const AddNewCourse: React.FC = () => {
 	});
 
 	const addMutation = useMutation((data) => courseAPI.store(data));
-
-	const addImageMutation = useMutation((image: any) => imageAPi.store(image));
 
 	const addCourse = (data: any, media?: any) => {
 		const newData: any = {
@@ -67,18 +66,7 @@ const AddNewCourse: React.FC = () => {
 	};
 
 	const onSubmit = (data: any) => {
-		if (file) {
-			let formData = new FormData();
-			formData.append('file', file);
-
-			addImageMutation.mutate(formData, {
-				onSuccess: (media) => {
-					addCourse(data, media);
-				},
-			});
-		} else {
-			addCourse(data);
-		}
+		addCourse(data);
 	};
 
 	// const onRemoveFeaturedImage = () => {
@@ -132,9 +120,7 @@ const AddNewCourse: React.FC = () => {
 								<Button
 									type="submit"
 									colorScheme="blue"
-									isLoading={
-										addMutation.isLoading || addImageMutation.isLoading
-									}>
+									isLoading={addMutation.isLoading}>
 									{__('Add Course', 'masteriyo')}
 								</Button>
 								<Button variant="outline" onClick={() => history.goBack()}>
@@ -163,7 +149,16 @@ const AddNewCourse: React.FC = () => {
 								</FormControl>
 								<FormControl>
 									<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-									{preview ? (
+									{isUploading && (
+										<Center
+											border="1px"
+											borderColor="gray.100"
+											h="36"
+											overflow="hidden">
+											<Spinner />
+										</Center>
+									)}
+									{!isUploading && preview && (
 										<Stack direction="column" spacing="4">
 											<Box
 												border="1px"
@@ -179,9 +174,9 @@ const AddNewCourse: React.FC = () => {
 												{__('Remove featured Image', 'masteriyo')}
 											</Button>
 										</Stack>
-									) : (
-										<ImageUpload uploadOn="drop" />
 									)}
+
+									{!isUploading && !preview && <ImageUpload />}
 								</FormControl>
 							</Stack>
 						</Box>

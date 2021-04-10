@@ -8,13 +8,12 @@ import { useMutation } from 'react-query';
 import MediaAPI from '../utils/media';
 
 interface ImageUploadProps {
-	uploadOn: 'click' | 'drop';
+	uploadOn?: 'click' | 'drop';
 }
 
 const useImageUpload = () => {
 	const toast = useToast();
 	const imageAPi = new MediaAPI();
-	const [file, setFile] = useState<any>(null);
 	const [preview, setPreview] = useState<any>(null);
 	const [uploadedMediaData, setUploadedMediaData] = useState<any>(null);
 	const uploadMedia = useMutation((image: any) => imageAPi.store(image));
@@ -34,8 +33,10 @@ const useImageUpload = () => {
 
 	const onDrop = (uploadOn: string, acceptedFiles: any) => {
 		if (acceptedFiles.length) {
-			setFile(acceptedFiles[0]);
-			uploadImage(acceptedFiles[0]);
+			if (uploadOn == 'drop') {
+				setPreview(URL.createObjectURL(acceptedFiles[0]));
+				uploadImage(acceptedFiles[0]);
+			}
 		} else {
 			toast({
 				title: __('Please upload Valid Image files', 'masteriyo'),
@@ -46,11 +47,11 @@ const useImageUpload = () => {
 				status: 'error',
 				isClosable: true,
 			});
+			return;
 		}
 	};
 
 	const removeImage = () => {
-		setFile(null);
 		setPreview(null);
 	};
 
@@ -103,7 +104,13 @@ const useImageUpload = () => {
 		);
 	};
 
-	return { file, preview, ImageUpload, removeImage, uploadedMediaData };
+	return {
+		preview,
+		ImageUpload,
+		removeImage,
+		uploadedMediaData,
+		isUploading: uploadMedia.isLoading,
+	};
 };
 
 export default useImageUpload;

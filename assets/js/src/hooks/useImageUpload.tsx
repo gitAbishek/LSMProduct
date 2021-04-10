@@ -17,20 +17,29 @@ const useImageUpload = () => {
 	const [preview, setPreview] = useState<any>(null);
 	const [uploadedMediaData, setUploadedMediaData] = useState<any>(null);
 	const uploadMedia = useMutation((image: any) => imageAPi.store(image));
-
+	const deleteMedia = useMutation((id: any) => imageAPi.delete(id));
 	const uploadImage = (file: any) => {
 		let formData = new FormData();
 		formData.append('file', file);
 
 		uploadMedia.mutate(formData, {
 			onSuccess: (mediaData) => {
-				console.log(mediaData);
 				setUploadedMediaData(mediaData);
 				setPreview(mediaData.source_url);
 			},
 		});
 	};
 
+	const deleteImage = () => {
+		console.log(uploadedMediaData.id);
+		deleteMedia.mutate(uploadedMediaData.id, {
+			onSuccess: (mediaData) => {
+				console.log(mediaData);
+				setUploadedMediaData(null);
+				setPreview(null);
+			},
+		});
+	};
 	const onDrop = (uploadOn: string, acceptedFiles: any) => {
 		if (acceptedFiles.length) {
 			if (uploadOn == 'drop') {
@@ -49,10 +58,6 @@ const useImageUpload = () => {
 			});
 			return;
 		}
-	};
-
-	const removeImage = () => {
-		setPreview(null);
 	};
 
 	const ImageUpload: React.FC<ImageUploadProps> = (props) => {
@@ -107,9 +112,10 @@ const useImageUpload = () => {
 	return {
 		preview,
 		ImageUpload,
-		removeImage,
+		deleteImage,
 		uploadedMediaData,
 		isUploading: uploadMedia.isLoading,
+		isDeleting: deleteMedia.isLoading,
 	};
 };
 

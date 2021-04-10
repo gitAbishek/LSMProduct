@@ -37,7 +37,13 @@ const AddNewCourse: React.FC = () => {
 	const courseAPI = new API(urls.courses);
 	const categoryAPI = new API(urls.categories);
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
-	const { preview, ImageUpload, removeImage, isUploading } = useImageUpload();
+	const {
+		preview,
+		ImageUpload,
+		deleteImage,
+		isUploading,
+		isDeleting,
+	} = useImageUpload();
 	const categoriesOption = categoryQuery?.data?.map((category: any) => {
 		return {
 			value: category.id,
@@ -149,7 +155,7 @@ const AddNewCourse: React.FC = () => {
 								</FormControl>
 								<FormControl>
 									<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-									{isUploading && (
+									{isUploading || isDeleting ? (
 										<Center
 											border="1px"
 											borderColor="gray.100"
@@ -157,7 +163,7 @@ const AddNewCourse: React.FC = () => {
 											overflow="hidden">
 											<Spinner />
 										</Center>
-									)}
+									) : null}
 									{!isUploading && preview && (
 										<Stack direction="column" spacing="4">
 											<Box
@@ -170,7 +176,7 @@ const AddNewCourse: React.FC = () => {
 											<Button
 												colorScheme="red"
 												variant="outline"
-												onClick={removeImage}>
+												onClick={deleteImage}>
 												{__('Remove featured Image', 'masteriyo')}
 											</Button>
 										</Stack>

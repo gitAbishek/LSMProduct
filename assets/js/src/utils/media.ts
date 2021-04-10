@@ -10,15 +10,15 @@ class MediaAPI {
 
 	async get(id: number) {
 		return http({
-			url: `${this.uri}/${id}`,
-			method: 'get',
+			url: this.uri + id,
+			method: 'GET',
 		}).then((res) => res.data);
 	}
 
 	async store(data: any) {
 		return http({
 			url: this.uri,
-			method: 'post',
+			method: 'POST',
 			data: data,
 			headers: {
 				'Content-Type': 'multipart/form-data',
@@ -29,7 +29,10 @@ class MediaAPI {
 	async delete(id: number) {
 		return http({
 			url: this.uri + id,
-			method: 'delete',
+			method: 'DELETE',
+			params: {
+				force: true,
+			},
 		}).then((res) => res.data);
 	}
 }

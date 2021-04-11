@@ -14,6 +14,7 @@ import {
 	Textarea,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import ImageUpload from 'Components/common/ImageUpload';
 import Select from 'Components/common/Select';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -22,9 +23,8 @@ import { useHistory } from 'react-router-dom';
 
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
-import useImageUpload from '../../hooks/useImageUpload';
 import API from '../../utils/api';
-import MediaAPI from '../../utils/media';
+import { mergeDeep } from '../../utils/mergeDeep';
 
 const AddNewCourse: React.FC = () => {
 	interface Inputs {
@@ -33,18 +33,17 @@ const AddNewCourse: React.FC = () => {
 		categories?: any;
 	}
 	const history = useHistory();
-	const { register, handleSubmit, control, errors } = useForm<Inputs>();
+	const {
+		register,
+		handleSubmit,
+		control,
+		errors,
+		setValue,
+	} = useForm<Inputs>();
 	const courseAPI = new API(urls.courses);
 	const categoryAPI = new API(urls.categories);
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
-	const {
-		preview,
-		ImageUpload,
-		deleteImage,
-		isUploading,
-		isDeleting,
-		uploadedMediaData,
-	} = useImageUpload();
+
 	const categoriesOption = categoryQuery?.data?.map((category: any) => {
 		return {
 			value: category.id,
@@ -52,24 +51,22 @@ const AddNewCourse: React.FC = () => {
 		};
 	});
 
-	const addMutation = useMutation((data) => courseAPI.store(data));
+	const addMutation = useMutation((data) => courseAPI.store(data), {
+		onSuccess: (data) => {
+			history.push(routes.courses.edit.replace(':courseId', data.id));
+		},
+	});
 
 	const addCourse = (data: any) => {
 		const newData: any = {
-			name: data.name,
-			description: data.description,
-			...(data.categories.length && {
+			...(data.categories && {
 				categories: data.categories.map((category: any) => ({
 					id: category.value,
 				})),
 			}),
-			...(uploadedMediaData && { featured_image: uploadedMediaData.id }),
 		};
-		addMutation.mutate(newData, {
-			onSuccess: (data) => {
-				history.push(routes.courses.edit.replace(':courseId', data.id));
-			},
-		});
+		console.log(mergeDeep(data, newData));
+		addMutation.mutate(mergeDeep(data, newData));
 	};
 
 	const onSubmit = (data: any) => {
@@ -135,50 +132,21 @@ const AddNewCourse: React.FC = () => {
 								<FormControl>
 									<FormLabel>{__('Categories', 'masteriyo')}</FormLabel>
 									<Controller
-										control={control}
+										as={Select}
 										name="categories"
-										defaultValue=""
-										render={({ onChange, value }) => (
-											<Select
-												closeMenuOnSelect={false}
-												isMulti
-												onChange={onChange}
-												value={value}
-												options={categoriesOption}
-											/>
-										)}
+										closeMenuOnSelect={false}
+										isMulti
+										options={categoriesOption}
+										control={control}
 									/>
 								</FormControl>
 								<FormControl>
 									<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-									{isUploading && (
-										<Center
-											border="1px"
-											borderColor="gray.100"
-											h="36"
-											overflow="hidden">
-											<Spinner />
-										</Center>
-									)}
-									{!isUploading && preview && (
-										<Stack direction="column" spacing="4">
-											<Box
-												border="1px"
-												borderColor="gray.100"
-												h="36"
-												overflow="hidden">
-												<Img src={preview} objectFit="cover" w="full" />
-											</Box>
-											<Button
-												colorScheme="red"
-												variant="outline"
-												onClick={deleteImage}
-												isLoading={isDeleting}>
-												{__('Remove featured Image', 'masteriyo')}
-											</Button>
-										</Stack>
-									)}
-									{!isUploading && !preview && <ImageUpload />}
+									<ImageUpload
+										name="featured_image"
+										register={register}
+										setValue={setValue}
+									/>
 								</FormControl>
 							</Stack>
 						</Box>

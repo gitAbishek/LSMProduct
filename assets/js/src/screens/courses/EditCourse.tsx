@@ -7,6 +7,7 @@ import {
 	FormErrorMessage,
 	FormLabel,
 	Heading,
+	Img,
 	Input,
 	Spinner,
 	Stack,
@@ -14,6 +15,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import ImageUpload from 'Components/common/ImageUpload';
 import Select from 'Components/common/Select';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -23,7 +25,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import { mergeDeep } from '../../utils/mergeDeep';
-import ImageBox from './components/ImageBox';
 
 const EditCourse = () => {
 	interface Inputs {
@@ -35,7 +36,13 @@ const EditCourse = () => {
 	const { courseId }: any = useParams();
 	const history = useHistory();
 	const queryClient = useQueryClient();
-	const { register, handleSubmit, errors, control } = useForm<Inputs>();
+	const {
+		register,
+		handleSubmit,
+		errors,
+		control,
+		setValue,
+	} = useForm<Inputs>();
 	const toast = useToast();
 
 	const courseAPI = new API(urls.courses);
@@ -68,12 +75,13 @@ const EditCourse = () => {
 
 	const onSubmit = (data: any) => {
 		const newData: any = {
-			...(data.categories.length && {
+			...(data.categories && {
 				categories: data.categories.map((category: any) => ({
 					id: category.value,
 				})),
 			}),
 		};
+		console.log(data);
 
 		updateCourse.mutate(mergeDeep(data, newData));
 	};
@@ -168,9 +176,11 @@ const EditCourse = () => {
 									</FormControl>
 									<FormControl>
 										<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-										<ImageBox
-											featuredImageId={courseQuery.data.featured_image}
+										<ImageUpload
+											name="featured_image"
 											register={register}
+											setValue={setValue}
+											mediaId={courseQuery?.data?.featured_image}
 										/>
 									</FormControl>
 								</Stack>

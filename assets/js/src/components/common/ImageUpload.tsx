@@ -106,7 +106,7 @@ const ImageUpload: React.FC<Props> = (props) => {
 
 	return (
 		<>
-			<Input type="hidden" name={name} ref={register} />
+			<Input type="hidden" {...register(name)} />
 			{isLoading && (
 				<Box>
 					<Center border="1px" borderColor="gray.100" h="36" overflow="hidden">

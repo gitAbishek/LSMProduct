@@ -1,33 +1,8 @@
-import {
-	Box,
-	Button,
-	ButtonGroup,
-	Flex,
-	FormControl,
-	FormErrorMessage,
-	FormHelperText,
-	FormLabel,
-	Heading,
-	Input,
-	InputGroup,
-	NumberDecrementStepper,
-	NumberIncrementStepper,
-	NumberInput,
-	NumberInputField,
-	NumberInputStepper,
-	Slider,
-	SliderFilledTrack,
-	SliderThumb,
-	SliderTrack,
-	Stack,
-	Textarea,
-} from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Heading, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import ImageUpload from 'Components/common/ImageUpload';
-import Select from 'Components/common/Select';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
 import routes from '../../constants/routes';
@@ -36,15 +11,11 @@ import API from '../../utils/api';
 import { mergeDeep } from '../../utils/mergeDeep';
 import Categories from './components/Categories';
 import Description from './components/Description';
+import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
 import Price from './components/Price';
 
 const AddNewCourse: React.FC = () => {
-	interface Inputs {
-		name: string;
-		description?: string;
-		categories?: any;
-	}
 	const history = useHistory();
 	const methods = useForm();
 	const courseAPI = new API(urls.courses);
@@ -55,25 +26,24 @@ const AddNewCourse: React.FC = () => {
 		},
 	});
 
-	const addCourse = (data: any) => {
+	const onSubmit = (data: any) => {
 		const newData: any = {
 			...(data.categories && {
 				categories: data.categories.map((category: any) => ({
 					id: category.value,
 				})),
 			}),
+			...(data.regular_price && {
+				regular_price: data.regular_price.toString(),
+			}),
 		};
-		console.log(data);
-		addMutation.mutate(mergeDeep(data, newData));
-	};
 
-	const onSubmit = (data: any) => {
-		console.log(data);
+		addMutation.mutate(mergeDeep(data, newData));
 	};
 
 	return (
 		<FormProvider {...methods}>
-			<form onSubmit={methods.handleSubmit((data) => console.log(data))}>
+			<form onSubmit={methods.handleSubmit(onSubmit)}>
 				<Stack direction="column" spacing="8">
 					<Heading as="h1">{__('Add New Course', 'masteriyo')}</Heading>
 
@@ -109,14 +79,7 @@ const AddNewCourse: React.FC = () => {
 						<Box w="400px" bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="6">
 								<Categories />
-								{/* <FormControl>
-									<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-									<ImageUpload
-										name="featured_image"
-										register={register}
-										setValue={setValue}
-									/>
-								</FormControl> */}
+								<FeaturedImage />
 							</Stack>
 						</Box>
 					</Stack>

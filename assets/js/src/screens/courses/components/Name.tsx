@@ -14,7 +14,7 @@ const Name: React.FC = () => {
 		formState: { errors },
 	} = useFormContext();
 	return (
-		<FormControl isInvalid={!!errors.name}>
+		<FormControl isInvalid={!!errors?.name}>
 			<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
 			<Input
 				placeholder={__('Your Course Name', 'masteriyo')}
@@ -22,7 +22,9 @@ const Name: React.FC = () => {
 					required: __('You must provide name for the course', 'masteriyo'),
 				})}
 			/>
-			<FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
+			<FormErrorMessage>
+				{errors?.name && errors?.name?.message}
+			</FormErrorMessage>
 		</FormControl>
 	);
 };

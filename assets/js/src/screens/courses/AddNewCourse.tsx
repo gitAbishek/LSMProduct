@@ -2,14 +2,23 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Center,
+	Flex,
 	FormControl,
 	FormErrorMessage,
+	FormHelperText,
 	FormLabel,
 	Heading,
-	Img,
 	Input,
-	Spinner,
+	InputGroup,
+	NumberDecrementStepper,
+	NumberIncrementStepper,
+	NumberInput,
+	NumberInputField,
+	NumberInputStepper,
+	Slider,
+	SliderFilledTrack,
+	SliderThumb,
+	SliderTrack,
 	Stack,
 	Textarea,
 } from '@chakra-ui/react';
@@ -25,6 +34,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import { mergeDeep } from '../../utils/mergeDeep';
+import Price from './components/Price';
 
 const AddNewCourse: React.FC = () => {
 	interface Inputs {
@@ -65,7 +75,6 @@ const AddNewCourse: React.FC = () => {
 				})),
 			}),
 		};
-		console.log(mergeDeep(data, newData));
 		addMutation.mutate(mergeDeep(data, newData));
 	};
 
@@ -89,43 +98,48 @@ const AddNewCourse: React.FC = () => {
 							flexDirection="column"
 							justifyContent="space-between">
 							<Stack direction="column" spacing="6">
-								<FormControl isInvalid={!!errors.name}>
-									<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
-									<Input
-										placeholder={__('Your Course Name', 'masteriyo')}
-										name="name"
-										ref={register({
-											required: __(
-												'You must provide name for the course',
-												'masteriyo'
-											),
-										})}
-									/>
-									<FormErrorMessage>
-										{errors.name && errors.name.message}
-									</FormErrorMessage>
-								</FormControl>
+								<Stack direction="column" spacing="6">
+									<FormControl isInvalid={!!errors.name}>
+										<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
+										<Input
+											placeholder={__('Your Course Name', 'masteriyo')}
+											name="name"
+											ref={register({
+												required: __(
+													'You must provide name for the course',
+													'masteriyo'
+												),
+											})}
+										/>
+										<FormErrorMessage>
+											{errors.name && errors.name.message}
+										</FormErrorMessage>
+									</FormControl>
 
-								<FormControl>
-									<FormLabel>{__('Course Description', 'masteriyo')}</FormLabel>
-									<Textarea
-										name="description"
-										placeholder={__('Your Course Description', 'masteriyo')}
-										ref={register()}
-									/>
-								</FormControl>
+									<FormControl>
+										<FormLabel>
+											{__('Course Description', 'masteriyo')}
+										</FormLabel>
+										<Textarea
+											name="description"
+											placeholder={__('Your Course Description', 'masteriyo')}
+											ref={register()}
+										/>
+									</FormControl>
+									<Price register={register} setValue={setValue} />
+								</Stack>
+								<ButtonGroup>
+									<Button
+										type="submit"
+										colorScheme="blue"
+										isLoading={addMutation.isLoading}>
+										{__('Add Course', 'masteriyo')}
+									</Button>
+									<Button variant="outline" onClick={() => history.goBack()}>
+										{__('Cancel', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
 							</Stack>
-							<ButtonGroup>
-								<Button
-									type="submit"
-									colorScheme="blue"
-									isLoading={addMutation.isLoading}>
-									{__('Add Course', 'masteriyo')}
-								</Button>
-								<Button variant="outline" onClick={() => history.goBack()}>
-									{__('Cancel', 'masteriyo')}
-								</Button>
-							</ButtonGroup>
 						</Box>
 						<Box w="400px" bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="6">

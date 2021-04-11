@@ -81,7 +81,6 @@ const EditCourse = () => {
 				})),
 			}),
 		};
-		console.log(data);
 
 		updateCourse.mutate(mergeDeep(data, newData));
 	};

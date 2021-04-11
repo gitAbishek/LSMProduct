@@ -104,8 +104,6 @@ const ImageUpload: React.FC<Props> = (props) => {
 		setValue(name, imageId);
 	}, [imageId]);
 
-	console.log(preview);
-
 	return (
 		<>
 			<Input type="hidden" name={name} ref={register} />

@@ -8,7 +8,12 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-const Name: React.FC = () => {
+interface Props {
+	defaultValue?: string;
+}
+const Name: React.FC<Props> = (props) => {
+	const { defaultValue } = props;
+
 	const {
 		register,
 		formState: { errors },
@@ -17,6 +22,7 @@ const Name: React.FC = () => {
 		<FormControl isInvalid={!!errors?.name}>
 			<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
 			<Input
+				defaultValue={defaultValue}
 				placeholder={__('Your Course Name', 'masteriyo')}
 				{...register('name', {
 					required: __('You must provide name for the course', 'masteriyo'),

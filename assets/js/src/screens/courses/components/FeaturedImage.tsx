@@ -4,7 +4,13 @@ import ImageUpload from 'Components/common/ImageUpload';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-const FeaturedImage: React.FC = () => {
+interface Props {
+	defaultValue?: number;
+}
+
+const FeaturedImage: React.FC<Props> = (props) => {
+	const { defaultValue } = props;
+
 	const { register, setValue } = useFormContext();
 	return (
 		<FormControl>
@@ -13,6 +19,7 @@ const FeaturedImage: React.FC = () => {
 				name="featured_image"
 				register={register}
 				setValue={setValue}
+				mediaId={defaultValue}
 			/>
 		</FormControl>
 	);

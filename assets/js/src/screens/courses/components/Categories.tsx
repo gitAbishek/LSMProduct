@@ -8,7 +8,13 @@ import { useQuery } from 'react-query';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
 
-const Categories = () => {
+interface Props {
+	defaultValue?: any;
+}
+
+const Categories: React.FC<Props> = (props) => {
+	const { defaultValue } = props;
+
 	const categoryAPI = new API(urls.categories);
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
 	const { control } = useFormContext();
@@ -33,6 +39,15 @@ const Categories = () => {
 							<Select
 								{...field}
 								closeMenuOnSelect={false}
+								defaultValue={
+									defaultValue?.length &&
+									defaultValue?.map((category: any) => {
+										return {
+											value: category.id,
+											label: category.name,
+										};
+									})
+								}
 								isMulti
 								options={categoriesOption}
 							/>

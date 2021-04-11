@@ -21,6 +21,7 @@ import Categories from './components/Categories';
 import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
+import Price from './components/Price';
 
 const EditCourse = () => {
 	const { courseId }: any = useParams();
@@ -54,8 +55,12 @@ const EditCourse = () => {
 					id: category.value,
 				})),
 			}),
+			...(data.regular_price && {
+				regular_price: data.regular_price.toString(),
+			}),
 		};
 
+		console.log(data);
 		updateCourse.mutate(mergeDeep(data, newData));
 	};
 
@@ -87,6 +92,7 @@ const EditCourse = () => {
 									<Stack direction="column" spacing="6">
 										<Name defaultValue={courseQuery.data.name} />
 										<Description defaultValue={courseQuery.data.description} />
+										<Price defaultValue={courseQuery.data.regular_price} />
 									</Stack>
 									<ButtonGroup>
 										<Button

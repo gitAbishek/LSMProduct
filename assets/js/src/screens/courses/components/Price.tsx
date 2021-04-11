@@ -17,8 +17,12 @@ import { __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-const Price: React.FC = () => {
-	const [priceValue, setPriceValue] = useState<number>(0);
+interface Props {
+	defaultValue?: any;
+}
+const Price: React.FC<Props> = (props) => {
+	const { defaultValue } = props;
+	const [priceValue, setPriceValue] = useState<number>(defaultValue || 0);
 	const handleChange = (priceValue: number) => setPriceValue(priceValue);
 	const { register, setValue } = useFormContext();
 

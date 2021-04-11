@@ -22,8 +22,8 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
 
 import urls from '../../constants/urls';
-import { SkeletonEditCourse } from '../../skeleton';
 import API from '../../utils/api';
+import MediaAPI from '../../utils/media';
 
 const EditCourse = () => {
 	interface Inputs {
@@ -39,10 +39,23 @@ const EditCourse = () => {
 
 	const courseAPI = new API(urls.courses);
 	const categoryAPI = new API(urls.categories);
+	const imageAPI = new MediaAPI();
 
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
 	const courseQuery = useQuery([`course${courseId}`, courseId], () =>
 		courseAPI.get(courseId)
+	);
+
+	const featuredImageId = courseQuery?.data?.featured_image;
+	const imageQuery = useQuery(
+		[
+			`image${courseQuery?.data?.featured_image}`,
+			courseQuery?.data?.featured_image,
+		],
+		() => imageAPI.get(courseQuery?.data?.featured_image),
+		{
+			enabled: !!courseQuery?.data?.featured_image,
+		}
 	);
 
 	const categoriesOption = categoryQuery?.data?.map((category: any) => {
@@ -64,7 +77,7 @@ const EditCourse = () => {
 
 	return (
 		<>
-			{courseQuery.isLoading ? (
+			{courseQuery.isLoading || categoryQuery.isLoading ? (
 				<Center h="xs">
 					<Spinner />
 				</Center>
@@ -150,6 +163,37 @@ const EditCourse = () => {
 									</FormControl>
 									<FormControl>
 										<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
+										{courseQuery?.data?.featured_image &&
+											(imageQuery.isLoading ? (
+												<Center
+													border="1px"
+													borderColor="gray.100"
+													h="36"
+													overflow="hidden">
+													<Spinner />
+												</Center>
+											) : (
+												<Stack direction="column" spacing="4">
+													<Box
+														border="1px"
+														borderColor="gray.100"
+														h="36"
+														overflow="hidden">
+														<Img
+															src={
+																imageQuery.data.media_details.sizes.medium
+																	.source_url
+															}
+															objectFit="cover"
+															w="full"
+														/>
+													</Box>
+													<Button colorScheme="red" variant="outline">
+														{__('Remove featured Image', 'masteriyo')}
+													</Button>
+												</Stack>
+											))}
+
 										{/* {preview ? (
 										<Stack direction="column" spacing="4">
 											<Box

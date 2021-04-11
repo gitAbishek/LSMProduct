@@ -7,14 +7,13 @@ import {
 	FormErrorMessage,
 	FormLabel,
 	Heading,
-	Img,
+	Input,
 	Spinner,
 	Stack,
 	Textarea,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import ImageUpload from 'Components/common/ImageUpload';
-import Input from 'Components/common/Input';
 import Select from 'Components/common/Select';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -23,7 +22,8 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import urls from '../../constants/urls';
 import API from '../../utils/api';
-import MediaAPI from '../../utils/media';
+import { mergeDeep } from '../../utils/mergeDeep';
+import ImageBox from './components/ImageBox';
 
 const EditCourse = () => {
 	interface Inputs {
@@ -36,26 +36,14 @@ const EditCourse = () => {
 	const history = useHistory();
 	const queryClient = useQueryClient();
 	const { register, handleSubmit, errors, control } = useForm<Inputs>();
+	const toast = useToast();
 
 	const courseAPI = new API(urls.courses);
 	const categoryAPI = new API(urls.categories);
-	const imageAPI = new MediaAPI();
 
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
 	const courseQuery = useQuery([`course${courseId}`, courseId], () =>
 		courseAPI.get(courseId)
-	);
-
-	const featuredImageId = courseQuery?.data?.featured_image;
-	const imageQuery = useQuery(
-		[
-			`image${courseQuery?.data?.featured_image}`,
-			courseQuery?.data?.featured_image,
-		],
-		() => imageAPI.get(courseQuery?.data?.featured_image),
-		{
-			enabled: !!courseQuery?.data?.featured_image,
-		}
 	);
 
 	const categoriesOption = categoryQuery?.data?.map((category: any) => {
@@ -66,13 +54,28 @@ const EditCourse = () => {
 	});
 
 	const updateCourse = useMutation((data) => courseAPI.update(courseId, data), {
-		onSuccess: () => {
+		onSuccess: (data) => {
+			toast({
+				title: data.name + __(' is updated successfully.', 'masteriyo'),
+				description: __('You can keep editing it', 'masteriyo'),
+				status: 'success',
+				isClosable: true,
+			});
+
 			queryClient.invalidateQueries(`course${courseId}`);
 		},
 	});
 
 	const onSubmit = (data: any) => {
-		updateCourse.mutate(data);
+		const newData: any = {
+			...(data.categories.length && {
+				categories: data.categories.map((category: any) => ({
+					id: category.value,
+				})),
+			}),
+		};
+
+		updateCourse.mutate(mergeDeep(data, newData));
 	};
 
 	return (
@@ -84,7 +87,9 @@ const EditCourse = () => {
 			) : (
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Stack direction="column" spacing="8">
-						<Heading as="h1">{__('Add New Course', 'masteriyo')}</Heading>
+						<Heading as="h1">
+							{__('Edit Course: ', 'masteriyo')} {courseQuery.data.name}
+						</Heading>
 
 						<Stack direction="row" spacing="8">
 							<Box
@@ -131,7 +136,7 @@ const EditCourse = () => {
 										type="submit"
 										colorScheme="blue"
 										isLoading={updateCourse.isLoading}>
-										{__('Add Course', 'masteriyo')}
+										{__('Update', 'masteriyo')}
 									</Button>
 									<Button variant="outline" onClick={() => history.goBack()}>
 										{__('Cancel', 'masteriyo')}
@@ -163,56 +168,10 @@ const EditCourse = () => {
 									</FormControl>
 									<FormControl>
 										<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-										{courseQuery?.data?.featured_image &&
-											(imageQuery.isLoading ? (
-												<Center
-													border="1px"
-													borderColor="gray.100"
-													h="36"
-													overflow="hidden">
-													<Spinner />
-												</Center>
-											) : (
-												<Stack direction="column" spacing="4">
-													<Box
-														border="1px"
-														borderColor="gray.100"
-														h="36"
-														overflow="hidden">
-														<Img
-															src={
-																imageQuery.data.media_details.sizes.medium
-																	.source_url
-															}
-															objectFit="cover"
-															w="full"
-														/>
-													</Box>
-													<Button colorScheme="red" variant="outline">
-														{__('Remove featured Image', 'masteriyo')}
-													</Button>
-												</Stack>
-											))}
-
-										{/* {preview ? (
-										<Stack direction="column" spacing="4">
-											<Box
-												border="1px"
-												borderColor="gray.100"
-												h="36"
-												overflow="hidden">
-												<Img src={preview} objectFit="cover" w="full" />
-											</Box>
-											<Button
-												colorScheme="red"
-												variant="outline"
-												onClick={onRemoveFeaturedImage}>
-												{__('Remove featured Image', 'masteriyo')}
-											</Button>
-										</Stack>
-									) : (
-										<ImageUpload setFile={setFile} setPreview={setPreview} />
-									)} */}
+										<ImageBox
+											featuredImageId={courseQuery.data.featured_image}
+											register={register}
+										/>
 									</FormControl>
 								</Stack>
 							</Box>

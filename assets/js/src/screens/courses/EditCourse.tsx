@@ -2,6 +2,7 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
+	Center,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
@@ -21,6 +22,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
 
 import urls from '../../constants/urls';
+import { SkeletonEditCourse } from '../../skeleton';
 import API from '../../utils/api';
 
 const EditCourse = () => {
@@ -63,7 +65,9 @@ const EditCourse = () => {
 	return (
 		<>
 			{courseQuery.isLoading ? (
-				<Spinner />
+				<Center h="xs">
+					<Spinner />
+				</Center>
 			) : (
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Stack direction="column" spacing="8">

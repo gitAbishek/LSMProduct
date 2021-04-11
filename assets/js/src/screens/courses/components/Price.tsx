@@ -15,18 +15,15 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-interface Props {
-	register: any;
-	setValue: any;
-}
-const Price: React.FC<Props> = (props) => {
-	const { register, setValue } = props;
-	const [priceValue, setPriceValue] = useState(0);
+const Price: React.FC = () => {
+	const [priceValue, setPriceValue] = useState<number>(0);
 	const handleChange = (priceValue: number) => setPriceValue(priceValue);
+	const { register, setValue } = useFormContext();
 
 	useEffect(() => {
-		setValue('price', priceValue);
+		setValue('regular_price', priceValue);
 	}, [priceValue]);
 
 	return (
@@ -40,8 +37,8 @@ const Price: React.FC<Props> = (props) => {
 					</SliderTrack>
 					<SliderThumb />
 				</Slider>
-				<NumberInput w="32" ref={register} name="price" value={priceValue}>
-					<NumberInputField rounded="sm" />
+				<NumberInput w="32" name="regular_price" value={priceValue}>
+					<NumberInputField rounded="sm" {...register('regular_price')} />
 					<NumberInputStepper>
 						<NumberIncrementStepper />
 						<NumberDecrementStepper />

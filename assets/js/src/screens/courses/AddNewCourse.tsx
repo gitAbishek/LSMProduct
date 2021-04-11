@@ -26,7 +26,7 @@ import { __ } from '@wordpress/i18n';
 import ImageUpload from 'Components/common/ImageUpload';
 import Select from 'Components/common/Select';
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
@@ -34,6 +34,9 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import { mergeDeep } from '../../utils/mergeDeep';
+import Categories from './components/Categories';
+import Description from './components/Description';
+import Name from './components/Name';
 import Price from './components/Price';
 
 const AddNewCourse: React.FC = () => {
@@ -43,23 +46,8 @@ const AddNewCourse: React.FC = () => {
 		categories?: any;
 	}
 	const history = useHistory();
-	const {
-		register,
-		handleSubmit,
-		control,
-		errors,
-		setValue,
-	} = useForm<Inputs>();
+	const methods = useForm();
 	const courseAPI = new API(urls.courses);
-	const categoryAPI = new API(urls.categories);
-	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
-
-	const categoriesOption = categoryQuery?.data?.map((category: any) => {
-		return {
-			value: category.id,
-			label: category.name,
-		};
-	});
 
 	const addMutation = useMutation((data) => courseAPI.store(data), {
 		onSuccess: (data) => {
@@ -75,16 +63,17 @@ const AddNewCourse: React.FC = () => {
 				})),
 			}),
 		};
+		console.log(data);
 		addMutation.mutate(mergeDeep(data, newData));
 	};
 
 	const onSubmit = (data: any) => {
-		addCourse(data);
+		console.log(data);
 	};
 
 	return (
-		<>
-			<form onSubmit={handleSubmit(onSubmit)}>
+		<FormProvider {...methods}>
+			<form onSubmit={methods.handleSubmit((data) => console.log(data))}>
 				<Stack direction="column" spacing="8">
 					<Heading as="h1">{__('Add New Course', 'masteriyo')}</Heading>
 
@@ -99,35 +88,11 @@ const AddNewCourse: React.FC = () => {
 							justifyContent="space-between">
 							<Stack direction="column" spacing="6">
 								<Stack direction="column" spacing="6">
-									<FormControl isInvalid={!!errors.name}>
-										<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
-										<Input
-											placeholder={__('Your Course Name', 'masteriyo')}
-											name="name"
-											ref={register({
-												required: __(
-													'You must provide name for the course',
-													'masteriyo'
-												),
-											})}
-										/>
-										<FormErrorMessage>
-											{errors.name && errors.name.message}
-										</FormErrorMessage>
-									</FormControl>
-
-									<FormControl>
-										<FormLabel>
-											{__('Course Description', 'masteriyo')}
-										</FormLabel>
-										<Textarea
-											name="description"
-											placeholder={__('Your Course Description', 'masteriyo')}
-											ref={register()}
-										/>
-									</FormControl>
-									<Price register={register} setValue={setValue} />
+									<Name />
+									<Description />
+									<Price />
 								</Stack>
+
 								<ButtonGroup>
 									<Button
 										type="submit"
@@ -143,31 +108,21 @@ const AddNewCourse: React.FC = () => {
 						</Box>
 						<Box w="400px" bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="6">
-								<FormControl>
-									<FormLabel>{__('Categories', 'masteriyo')}</FormLabel>
-									<Controller
-										as={Select}
-										name="categories"
-										closeMenuOnSelect={false}
-										isMulti
-										options={categoriesOption}
-										control={control}
-									/>
-								</FormControl>
-								<FormControl>
+								<Categories />
+								{/* <FormControl>
 									<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
 									<ImageUpload
 										name="featured_image"
 										register={register}
 										setValue={setValue}
 									/>
-								</FormControl>
+								</FormControl> */}
 							</Stack>
 						</Box>
 					</Stack>
 				</Stack>
 			</form>
-		</>
+		</FormProvider>
 	);
 };
 

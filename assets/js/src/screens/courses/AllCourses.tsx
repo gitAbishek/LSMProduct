@@ -46,9 +46,8 @@ const AllCourses = () => {
 						</Tr>
 					</Thead>
 					<Tbody>
-						{courseQuery.isLoading ? (
-							<SkeletonCourseList />
-						) : (
+						{courseQuery.isLoading && <SkeletonCourseList />}
+						{courseQuery.isSuccess &&
 							courseQuery.data.map((course: any) => (
 								<CourseList
 									id={course.id}
@@ -57,8 +56,7 @@ const AllCourses = () => {
 									categories={course.categories}
 									key={course.id}
 								/>
-							))
-						)}
+							))}
 					</Tbody>
 				</Table>
 			</Stack>

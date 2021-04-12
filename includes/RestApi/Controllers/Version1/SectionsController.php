@@ -319,16 +319,19 @@ class SectionsController extends PostsController {
 				'parent_id'         => array(
 					'description' => __( 'Section parent ID.', 'masteriyo' ),
 					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_id'         => array(
 					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'menu_order'        => array(
 					'description' => __( 'Menu order, used to custom sort sections.', 'masteriyo' ),
 					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'meta_data'         => array(

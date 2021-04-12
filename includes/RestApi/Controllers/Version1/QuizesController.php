@@ -408,9 +408,22 @@ class QuizesController extends PostsController {
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
+				'parent_id'           => array(
+					'description' => __( 'Quiz parent ID.', 'masteriyo' ),
+					'type'        => 'integer',
+					'required'    => true,
+					'context'     => array( 'view', 'edit' ),
+				),
 				'course_id'         => array(
 					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
+					'required'    => true,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'menu_order'          => array(
+					'description' => __( 'Menu order, used to custom sort quizes.', 'masteriyo' ),
+					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'permalink'         => array(

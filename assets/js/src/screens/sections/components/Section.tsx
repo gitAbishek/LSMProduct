@@ -125,7 +125,7 @@ const Section: React.FC<Props> = (props) => {
 					</MenuList>
 				</Menu>
 			</Flex>
-			<Box>
+			<Box py="8">
 				<Collapse in={isEditing} animateOpacity>
 					<EditSection
 						id={id}
@@ -135,10 +135,10 @@ const Section: React.FC<Props> = (props) => {
 						onCancel={() => setIsEditing(false)}
 					/>
 				</Collapse>
-				<Stack direction="column" spacing="4" py="4">
-					{contentQuery.isLoading && <Spinner />}
-					{contentQuery.isSuccess &&
-						contentQuery?.data?.map((content: any) => (
+				{contentQuery.isLoading && <Spinner />}
+				{contentQuery.isSuccess && !!contentQuery.data.length && (
+					<Stack direction="column" spacing="4">
+						{contentQuery?.data?.map((content: any) => (
 							<Content
 								key={content.id}
 								id={content.id}
@@ -146,7 +146,8 @@ const Section: React.FC<Props> = (props) => {
 								type={content.type}
 							/>
 						))}
-				</Stack>
+					</Stack>
+				)}
 			</Box>
 			<Box>
 				<Menu>

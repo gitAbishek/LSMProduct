@@ -1,15 +1,21 @@
+import {
+	Button,
+	ButtonGroup,
+	FormControl,
+	FormErrorMessage,
+	FormLabel,
+	Input,
+	Stack,
+	Textarea,
+	useToast,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Button from 'Components/common/Button';
-import FormGroup from 'Components/common/FormGroup';
-import Input from 'Components/common/Input';
-import Label from 'Components/common/Label';
-import Textarea from 'Components/common/Textarea';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
-import { useToasts } from 'react-toast-notifications';
 
-import { updateSection } from '../../../utils/api';
+import urls from '../../../constants/urls';
+import API from '../../../utils/api';
 
 export interface EditSectionProps {
 	id: number;
@@ -26,14 +32,22 @@ type SectionInputs = {
 
 const EditSection: React.FC<EditSectionProps> = (props) => {
 	const { id, name, description, onSave, onCancel } = props;
-	const { register, handleSubmit } = useForm<SectionInputs>();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<SectionInputs>();
 	const queryClient = useQueryClient();
+	const toast = useToast();
+	const sectionAPI = new API(urls.sections);
 
 	const updateMutation = useMutation((data: any) => updateSection(id, data), {
 		onSuccess: (data: any) => {
-			addToast(data?.name + __(' has been updated successfully'), {
-				appearance: 'success',
-				autoDismiss: true,
+			toast({
+				title: __('Updated Successfully', 'masteriyo'),
+				description: data.name + __(' is updated succesffuly', 'masteriyo'),
+				status: 'success',
+				isClosable: true,
 			});
 			queryClient.invalidateQueries('builderSections');
 			onSave();
@@ -45,37 +59,41 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	};
 
 	return (
-		<div className="Edit-Section">
-			<form onSubmit={handleSubmit(onUpdate)}>
-				<FormGroup>
-					<Label htmlFor="">{__('Section Name', 'masteriyo')}</Label>
+		<form onSubmit={handleSubmit(onUpdate)}>
+			<Stack direction="column" spacing="8">
+				<FormControl isInvalid={!!errors?.name}>
+					<FormLabel htmlFor="">{__('Section Name', 'masteriyo')}</FormLabel>
 					<Input
 						placeholder={__('Your Section Name', 'masteriyo')}
-						{...register('name', { required: true })}
-						name="name"
-						defaultValue={name}></Input>
-				</FormGroup>
-				<FormGroup>
-					<Label htmlFor="">{__('Section Description', 'masteriyo')}</Label>
+						defaultValue={name}
+						{...register('name', {
+							required: __('Section name cannot be empty', 'masteriyo'),
+						})}></Input>
+					{errors?.name && (
+						<FormErrorMessage>{errors?.name.message}</FormErrorMessage>
+					)}
+				</FormControl>
+				<FormControl>
+					<FormLabel htmlFor="">
+						{__('Section Description', 'masteriyo')}
+					</FormLabel>
 					<Textarea
 						defaultValue={description}
-						{...register('description')}
 						rows={4}
 						placeholder={__('short summary', 'masteriyo')}
+						{...register('description')}
 					/>
-				</FormGroup>
-				<div className="mto-my-9 mto-py-8 mto-border-t mto-border-b mto-border-solid mto-border-gray-200">
-					<div className="mto-flex">
-						<Button layout="primary" type="submit" className="mto-mr-4">
-							{__('Save', 'masteriyo')}
-						</Button>
-						<Button type="button" onClick={() => onCancel()}>
-							{__('Cancel', 'masteriyo')}
-						</Button>
-					</div>
-				</div>
-			</form>
-		</div>
+				</FormControl>
+				<ButtonGroup>
+					<Button colorScheme="blue" type="submit">
+						{__('Save', 'masteriyo')}
+					</Button>
+					<Button variant="outline" onClick={() => onCancel()}>
+						{__('Cancel', 'masteriyo')}
+					</Button>
+				</ButtonGroup>
+			</Stack>
+		</form>
 	);
 };
 

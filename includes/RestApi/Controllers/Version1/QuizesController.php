@@ -151,6 +151,10 @@ class QuizesController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
+		// The sections should be order by menu which is the sort order.
+		$params['order']['default']   = 'asc';
+		$params['orderby']['default'] = 'menu_order';
+
 		$params['slug']       = array(
 			'description'       => __( 'Limit result set to quizes with a specific slug.', 'masteriyo' ),
 			'type'              => 'string',

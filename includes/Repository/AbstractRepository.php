@@ -158,8 +158,35 @@ abstract class AbstractRepository {
 			) );
 		}, $raw_meta_data );
 
+		return $this->filter_raw_meta_data( $model, $meta_data );
+	}
+
+	/**
+	 * Helper method to filter internal meta keys from all meta data rows for the object.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Model $model        Model object.
+	 * @param array   $raw_meta_data Array of std object of meta data to be filtered.
+	 *
+	 * @return mixed|void
+	 */
+	public function filter_raw_meta_data( &$model, $raw_meta_data ) {
 		$this->internal_meta_keys = array_merge( array_map( array( $this, 'prefix_key' ), $model->get_data_keys() ), $this->internal_meta_keys );
+		$meta_data                = array_filter( $raw_meta_data, array( $this, 'exclude_internal_meta_keys' ) );
 		return apply_filters( "masteriyo_repository_{$this->meta_type}_read_meta", $meta_data, $model, $this );
+	}
+
+	/**
+	 * Callback to remove unwanted meta data.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param object $meta Meta object to check if it should be excluded or not.
+	 * @return bool
+	 */
+	protected function exclude_internal_meta_keys( $meta ) {
+		return ! in_array( $meta->meta_key, $this->internal_meta_keys, true ) && 0 !== stripos( $meta->meta_key, 'wp_' );
 	}
 
 	/**

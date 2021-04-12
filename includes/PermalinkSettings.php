@@ -159,7 +159,7 @@ class PermalinkSettings {
 		$permalinks['course_base'] = masteriyo_sanitize_permalink( $course_base );
 
 		// course_list base may require verbose page rules if nesting pages.
-		$course_list_page_id   = masteriyo_get_page_id( course_list );
+		$course_list_page_id   = masteriyo_get_page_id( 'course_list' );
 		$course_list_permalink = ( $course_list_page_id > 0 && get_post( $course_list_page_id ) ) ? get_page_uri( $course_list_page_id ) : _x( 'course-list', 'default-slug', 'masteriyo' );
 
 		if ( $course_list_page_id && stristr( trim( $permalinks['course_base'], '/' ), $course_list_permalink ) ) {

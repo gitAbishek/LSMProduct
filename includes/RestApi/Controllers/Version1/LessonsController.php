@@ -473,11 +473,19 @@ class LessonsController extends PostsController {
 				'parent_id'           => array(
 					'description' => __( 'Lesson parent ID.', 'masteriyo' ),
 					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_id'         => array(
 					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
+					'required'    => true,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'menu_order'          => array(
+					'description' => __( 'Menu order, used to custom sort lessons.', 'masteriyo' ),
+					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'categories'          => array(
@@ -533,11 +541,6 @@ class LessonsController extends PostsController {
 							),
 						),
 					),
-				),
-				'menu_order'          => array(
-					'description' => __( 'Menu order, used to custom sort lessons.', 'masteriyo' ),
-					'type'        => 'integer',
-					'context'     => array( 'view', 'edit' ),
 				),
 				'video_source'        => array(
 					'description' => __( 'Video source.', 'masteriyo' ),

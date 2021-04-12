@@ -148,6 +148,10 @@ class SectionsController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
+		// The sections should be order by menu which is the sort order.
+		$params['order']['default']   = 'asc';
+		$params['orderby']['default'] = 'menu_order';
+
 		$params['course_id'] = array(
 			'description'       => __( 'Limit result by course id.', 'masteriyo' ),
 			'type'              => 'integer',

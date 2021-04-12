@@ -33,7 +33,7 @@ class API {
 	async update(id: number, data: any) {
 		return http({
 			url: this.uri + id,
-			method: 'put',
+			method: 'patch',
 			data: data,
 		}).then((res) => res.data);
 	}

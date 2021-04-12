@@ -41,21 +41,26 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	const toast = useToast();
 	const sectionAPI = new API(urls.sections);
 
-	const updateMutation = useMutation((data: any) => updateSection(id, data), {
-		onSuccess: (data: any) => {
-			toast({
-				title: __('Updated Successfully', 'masteriyo'),
-				description: data.name + __(' is updated succesffuly', 'masteriyo'),
-				status: 'success',
-				isClosable: true,
-			});
-			queryClient.invalidateQueries('builderSections');
-			onSave();
-		},
-	});
+	const updateMutation = useMutation(
+		(data: any) => sectionAPI.update(id, data),
+		{
+			onSuccess: (data: any) => {
+				toast({
+					title: __('Updated Successfully', 'masteriyo'),
+					description: data.name + __(' is updated succesffuly', 'masteriyo'),
+					status: 'success',
+					isClosable: true,
+				});
+				queryClient.invalidateQueries('builderSections');
+				onSave();
+			},
+		}
+	);
 
 	const onUpdate = (data: any) => {
-		updateMutation.mutate(data);
+		console.log(data);
+		console.log(id);
+		// updateMutation.mutate(data);
 	};
 
 	return (

@@ -2,6 +2,7 @@ import {
 	Box,
 	Collapse,
 	Flex,
+	Icon,
 	IconButton,
 	Menu,
 	MenuButton,
@@ -25,7 +26,7 @@ import {
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { NavLink, useHistory } from 'react-router-dom';
 
-import { Edit } from '../../../assets/icons';
+import { Edit, Sortable } from '../../../assets/icons';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
@@ -67,6 +68,10 @@ const Section: React.FC<Props> = (props) => {
 		},
 	});
 
+	const onEditPress = () => {
+		setIsEditing(true);
+	};
+
 	const onDeletePress = () => {
 		setIsModalOpen(true);
 	};
@@ -82,37 +87,43 @@ const Section: React.FC<Props> = (props) => {
 	const onAddNewLessonPress = () => {
 		history.push(routes.lesson.add.replace(':sectionId', id.toString()));
 	};
+
 	const onAddNewQuizPress = () => {
 		history.push(routes.quiz.add.replace(':sectionId', id.toString()));
 	};
+
 	return (
-		<Box bg="white" p="12" shadow="box">
-			<Flex justify="space-between" align="center">
-				<Stack direction="row" spacing="3">
-					<DragHandle />
-					<Text>{name}</Text>
+		<Box bg="white" p="10" shadow="box">
+			<Flex justify="space-between">
+				<Stack direction="row" spacing="3" align="center" fontSize="xl">
+					<Icon as={Sortable} />
+					<Text fontWeight="semibold">{name}</Text>
 				</Stack>
 				<Menu>
 					<MenuButton
 						as={IconButton}
 						icon={<BiDotsVerticalRounded />}
 						variant="outline"
+						rounded="sm"
+						fontSize="large"
 					/>
 					<MenuList>
-						<MenuItem icon={<BiEdit />}>{__('Edit', 'masteriyo')}</MenuItem>
+						<MenuItem onClick={onEditPress} icon={<BiEdit />}>
+							{__('Edit', 'masteriyo')}
+						</MenuItem>
 						<MenuItem icon={<BiTrash />}>{__('Delete', 'masteriyo')}</MenuItem>
 					</MenuList>
 				</Menu>
 			</Flex>
 			<Box>
 				<Collapse in={isEditing} animateOpacity>
-					{/* <EditSection
+					<EditSection
 						id={id}
 						name={name}
 						description={description}
 						onSave={() => setIsEditing(false)}
 						onCancel={() => setIsEditing(false)}
-					/> */}
+					/>
 				</Collapse>
 				{contentQuery.isLoading ? (
 					<Spinner />

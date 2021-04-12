@@ -1,15 +1,15 @@
-import { useMutation, useQueryClient } from 'react-query';
-
+import { __ } from '@wordpress/i18n';
 import Button from 'Components/common/Button';
 import FormGroup from 'Components/common/FormGroup';
 import Input from 'Components/common/Input';
 import Label from 'Components/common/Label';
-import React from 'react';
 import Textarea from 'Components/common/Textarea';
-import { __ } from '@wordpress/i18n';
-import { updateSection } from '../../../utils/api';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
+
+import { updateSection } from '../../../utils/api';
 
 export interface EditSectionProps {
 	id: number;
@@ -27,11 +27,10 @@ type SectionInputs = {
 const EditSection: React.FC<EditSectionProps> = (props) => {
 	const { id, name, description, onSave, onCancel } = props;
 	const { register, handleSubmit } = useForm<SectionInputs>();
-	const { addToast } = useToasts();
 	const queryClient = useQueryClient();
 
 	const updateMutation = useMutation((data: any) => updateSection(id, data), {
-		onSuccess: (data) => {
+		onSuccess: (data: any) => {
 			addToast(data?.name + __(' has been updated successfully'), {
 				appearance: 'success',
 				autoDismiss: true,
@@ -52,16 +51,15 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 					<Label htmlFor="">{__('Section Name', 'masteriyo')}</Label>
 					<Input
 						placeholder={__('Your Section Name', 'masteriyo')}
-						ref={register({ required: true })}
+						{...register('name', { required: true })}
 						name="name"
 						defaultValue={name}></Input>
 				</FormGroup>
 				<FormGroup>
 					<Label htmlFor="">{__('Section Description', 'masteriyo')}</Label>
 					<Textarea
-						name="description"
 						defaultValue={description}
-						ref={register()}
+						{...register('description')}
 						rows={4}
 						placeholder={__('short summary', 'masteriyo')}
 					/>

@@ -96,7 +96,7 @@ class CourseReview extends Model {
 	}
 
 	/**
-	 * Get author_name.
+	 * Get name.
 	 *
 	 * @since  0.1.0
 	 *

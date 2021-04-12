@@ -1,7 +1,7 @@
+import { Center, Stack } from '@chakra-ui/layout';
+import { Spinner } from '@chakra-ui/spinner';
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
-import Spinner from 'Components/common/Spinner';
-import MainToolbar from 'Layouts/MainToolbar';
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
@@ -18,19 +18,15 @@ const SectionBuilder = () => {
 	const courseAPI = new API(urls.courses);
 	const sectionAPI = new API(urls.sections);
 
-	const courseQuery = useQuery(
-		['builderCourse', courseId],
-		() => courseAPI.get(courseId),
-		{
-			onError: () => {
-				history.push(routes.courses.list);
-			},
-		}
+	const courseQuery = useQuery(['builderCourse', courseId], () =>
+		courseAPI.get(courseId)
 	);
 
-	courseQuery.isError && history.push('/');
+	// Redirect to list page if course is not found
+	courseQuery.isError && history.push(routes.courses.list);
+
 	const sectionQuery = useQuery(['builderSections', courseId], () =>
-		sectionAPI.get(courseId)
+		sectionAPI.list({ course_id: courseId })
 	);
 
 	const addSectionMutation = useMutation(
@@ -45,14 +41,21 @@ const SectionBuilder = () => {
 	const onAddNewSectionClick = () => {
 		addSectionMutation.mutate({
 			parent_id: courseId,
+			course_id: courseId,
 			name: 'New Section',
 		});
 	};
 
 	return (
-		<>
-			<div className="mto-container mto-mx-auto">
-				{sectionQuery?.data?.map((section: any, index: number) => (
+		<Stack direction="column" spacing="8">
+			{(courseQuery.isLoading || sectionQuery.isLoading) && (
+				<Center minH="xs">
+					<Spinner />
+				</Center>
+			)}
+
+			{sectionQuery.isSuccess &&
+				sectionQuery.data.map((section: any, index: number) => (
 					<Section
 						key={section.id}
 						id={section.id}
@@ -61,13 +64,13 @@ const SectionBuilder = () => {
 						courseId={courseId}
 					/>
 				))}
-				<div className="mto-flex mto-justify-center mto-p-12">
-					<AddNewButton onClick={onAddNewSectionClick}>
-						{__('Add New Section', 'masteriyo')}
-					</AddNewButton>
-				</div>
+
+			<div className="mto-flex mto-justify-center mto-p-12">
+				<AddNewButton onClick={onAddNewSectionClick}>
+					{__('Add New Section', 'masteriyo')}
+				</AddNewButton>
 			</div>
-		</>
+		</Stack>
 	);
 };
 

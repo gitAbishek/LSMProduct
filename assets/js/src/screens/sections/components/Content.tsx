@@ -1,24 +1,40 @@
-import { AlignLeft, Timer, Trash } from '../../../assets/icons';
+import {
+	Box,
+	Flex,
+	Icon,
+	IconButton,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
+	Stack,
+	Text,
+} from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
+import Button from 'Components/common/Button';
+import Dropdown from 'Components/common/Dropdown';
+import DropdownOverlay from 'Components/common/DropdownOverlay';
+import OptionButton from 'Components/common/OptionButton';
 import {
 	Card,
 	CardActions,
 	CardHeader,
 	CardHeading,
 } from 'Components/layout/Card';
-import React, { useState } from 'react';
-import { deleteLesson, deleteQuiz } from '../../../utils/api';
-import { useMutation, useQueryClient } from 'react-query';
-
-import { BiTrash } from 'react-icons/bi';
-import Button from 'Components/common/Button';
 import DeleteModal from 'Components/layout/DeleteModal';
-import DragHandle from './DragHandle';
-import Dropdown from 'Components/common/Dropdown';
-import DropdownOverlay from 'Components/common/DropdownOverlay';
-import Icon from 'Components/common/Icon';
-import OptionButton from 'Components/common/OptionButton';
-import { __ } from '@wordpress/i18n';
+import React, { useState } from 'react';
+import {
+	BiAlignLeft,
+	BiDotsVerticalRounded,
+	BiEdit,
+	BiTimer,
+	BiTrash,
+} from 'react-icons/bi';
+import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
+
+import { AlignLeft, Sortable, Timer, Trash } from '../../../assets/icons';
+import DragHandle from './DragHandle';
 
 interface Props {
 	id: number;
@@ -60,58 +76,38 @@ const Content: React.FC<Props> = (props) => {
 		setIsModalOpen(false);
 	};
 
+	const onEditPress = () => {};
+
 	return (
-		<>
-			<Card>
-				<CardHeader>
-					<CardHeading>
-						<DragHandle />
-						<Icon
-							className="mto-text-2xl mto-mr-4"
-							icon={type === 'lesson' ? <AlignLeft /> : <Timer />}
+		<Box rounded="sm" border="1px" borderColor="gray.100" p="1">
+			<Flex justify="space-between">
+				<Stack direction="row" spacing="3" align="center" fontSize="xl">
+					<Icon as={Sortable} />
+					<Icon as={type === 'lesson' ? BiAlignLeft : BiTimer} />
+					<Text fontSize="sm">{name}</Text>
+				</Stack>
+				<Stack direction="row" spacing="3">
+					<Menu placement="bottom-end">
+						<MenuButton
+							as={IconButton}
+							icon={<BiDotsVerticalRounded />}
+							variant="outline"
+							rounded="sm"
+							size="sm"
+							fontSize="large"
 						/>
-						<h5 className="mto-text-base mto-text-gray-800">{name}</h5>
-					</CardHeading>
-					<CardActions>
-						<Button
-							className="mto-mr-2 mto-h-10 mto-px-3"
-							size="small"
-							onClick={() =>
-								push(
-									type === 'lesson'
-										? `/builder/lesson/${id}`
-										: `/quiz/${id}/edit`
-								)
-							}>
-							{__('Edit', 'masteriyo')}
-						</Button>
-						<Dropdown
-							align={'end'}
-							autoClose
-							content={
-								<DropdownOverlay>
-									<ul className="mto-w-36 mto-text-gray-700 mto-m-4">
-										<li
-											className="mto-flex mto-items-center mto-text-sm mto-mb-4 hover:mto-text-primary mto-cursor-pointer"
-											onClick={() => onDeletePress()}>
-											<Icon className="mto-mr-1" icon={<BiTrash />} />
-											{__('Delete', 'masteriyo')}
-										</li>
-									</ul>
-								</DropdownOverlay>
-							}>
-							<OptionButton />
-						</Dropdown>
-					</CardActions>
-				</CardHeader>
-			</Card>
-			<DeleteModal
-				isOpen={isModalOpen}
-				onDeletePress={deleteContent}
-				onClose={onModalClose}
-				title={name}
-			/>
-		</>
+						<MenuList>
+							<MenuItem onClick={onEditPress} icon={<BiEdit />}>
+								{__('Edit', 'masteriyo')}
+							</MenuItem>
+							<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
+								{__('Delete', 'masteriyo')}
+							</MenuItem>
+						</MenuList>
+					</Menu>
+				</Stack>
+			</Flex>
+		</Box>
 	);
 };
 

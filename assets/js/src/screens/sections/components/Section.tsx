@@ -1,5 +1,13 @@
 import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
 	Box,
+	Button,
+	ButtonGroup,
 	Collapse,
 	Flex,
 	Icon,
@@ -15,22 +23,20 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
 	BiAlignLeft,
 	BiDotsVerticalRounded,
 	BiEdit,
-	BiTimer,
 	BiTrash,
 } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-import { Edit, Sortable } from '../../../assets/icons';
+import { Sortable } from '../../../assets/icons';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
-import DragHandle from '../components/DragHandle';
 import Content from './Content';
 import EditSection from './EditSection';
 
@@ -44,10 +50,11 @@ interface Props {
 const Section: React.FC<Props> = (props) => {
 	const { id, name, description } = props;
 	const [isEditing, setIsEditing] = useState(false);
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const contentAPI = new API(urls.contents);
 	const sectionAPI = new API(urls.sections);
 	const history = useHistory();
+	const cancelRef = useRef<any>();
 
 	const queryClient = useQueryClient();
 	const toast = useToast();
@@ -59,8 +66,9 @@ const Section: React.FC<Props> = (props) => {
 	const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
 		onSuccess: (data: any) => {
 			toast({
-				title: data?.name + __(' has been deleted successfully'),
-				description: __(' has been deleted successfully'),
+				title: __('Deleted Successfully', 'masteriyo'),
+				description:
+					data?.name + __('has been deleted successfully', 'masteriyo'),
 				isClosable: true,
 				status: 'error',
 			});
@@ -73,11 +81,7 @@ const Section: React.FC<Props> = (props) => {
 	};
 
 	const onDeletePress = () => {
-		setIsModalOpen(true);
-	};
-
-	const onModalClose = () => {
-		setIsModalOpen(false);
+		setDeleteModalOpen(true);
 	};
 
 	const onDeleteConfirm = () => {
@@ -92,6 +96,10 @@ const Section: React.FC<Props> = (props) => {
 		history.push(routes.quiz.add.replace(':sectionId', id.toString()));
 	};
 
+	const onDeleteModalClose = () => {
+		setDeleteModalOpen(false);
+	};
+
 	return (
 		<Box bg="white" p="10" shadow="box">
 			<Flex justify="space-between">
@@ -99,7 +107,7 @@ const Section: React.FC<Props> = (props) => {
 					<Icon as={Sortable} />
 					<Text fontWeight="semibold">{name}</Text>
 				</Stack>
-				<Menu>
+				<Menu placement="bottom-end">
 					<MenuButton
 						as={IconButton}
 						icon={<BiDotsVerticalRounded />}
@@ -111,7 +119,9 @@ const Section: React.FC<Props> = (props) => {
 						<MenuItem onClick={onEditPress} icon={<BiEdit />}>
 							{__('Edit', 'masteriyo')}
 						</MenuItem>
-						<MenuItem icon={<BiTrash />}>{__('Delete', 'masteriyo')}</MenuItem>
+						<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
+							{__('Delete', 'masteriyo')}
+						</MenuItem>
 					</MenuList>
 				</Menu>
 			</Flex>
@@ -125,18 +135,18 @@ const Section: React.FC<Props> = (props) => {
 						onCancel={() => setIsEditing(false)}
 					/>
 				</Collapse>
-				{contentQuery.isLoading ? (
-					<Spinner />
-				) : (
-					contentQuery?.data?.map((content: any) => (
-						<Content
-							key={content.id}
-							id={content.id}
-							name={content.name}
-							type={content.type}
-						/>
-					))
-				)}
+				<Stack direction="column" spacing="4" py="4">
+					{contentQuery.isLoading && <Spinner />}
+					{contentQuery.isSuccess &&
+						contentQuery?.data?.map((content: any) => (
+							<Content
+								key={content.id}
+								id={content.id}
+								name={content.name}
+								type={content.type}
+							/>
+						))}
+				</Stack>
 			</Box>
 			<Box>
 				<Menu>
@@ -153,6 +163,37 @@ const Section: React.FC<Props> = (props) => {
 					</MenuList>
 				</Menu>
 			</Box>
+			<AlertDialog
+				isOpen={isDeleteModalOpen}
+				onClose={onDeleteModalClose}
+				leastDestructiveRef={cancelRef}>
+				<AlertDialogOverlay>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							{__('Delete Section')} {name}
+						</AlertDialogHeader>
+						<AlertDialogBody>
+							Are you sure? You can't restore this section
+						</AlertDialogBody>
+						<AlertDialogFooter>
+							<ButtonGroup>
+								<Button
+									ref={cancelRef}
+									onClick={onDeleteModalClose}
+									variant="outline">
+									{__('Cancel', 'masteriyo')}
+								</Button>
+								<Button
+									colorScheme="red"
+									onClick={onDeleteConfirm}
+									isLoading={deleteMutation.isLoading}>
+									{__('Delete', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialogOverlay>
+			</AlertDialog>
 		</Box>
 	);
 };

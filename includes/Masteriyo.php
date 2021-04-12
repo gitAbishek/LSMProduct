@@ -157,7 +157,7 @@ class Masteriyo extends Container {
 			"{$namespace}\\QueriesServiceProvider",
 			"{$namespace}\\FaqServiceProvider",
 			"{$namespace}\\EmailsServiceProvider",
-			"{$namespace}\\CommentServiceProvider",
+			"{$namespace}\\CourseReviewServiceProvider",
 		) );
 	}
 

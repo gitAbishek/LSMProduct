@@ -85,7 +85,7 @@ class RestApi {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return array
+	 * @return array\
 	 */
 	protected function get_v1_controllers() {
 		$namespace = '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1';
@@ -105,7 +105,7 @@ class RestApi {
 			'orders'               => "{$namespace}\\OrdersController",
 			'users'                => "{$namespace}\\UsersController",
 			'settings'             => "{$namespace}\\SettingsController",
-			'courses.reviews'      => "{$namespace}\\CourseReviewController",
+			'courses.reviews'      => "{$namespace}\\CourseReviewsController",
 		);
 	}
 

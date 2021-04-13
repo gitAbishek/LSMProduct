@@ -28,7 +28,7 @@ class CourseReviewServiceProvider extends AbstractServiceProvider {
 		'course_review',
 		'course_review.store',
 		'course_review.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseReviewController',
+		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseReviewsController',
 	);
 
 	/**
@@ -42,10 +42,10 @@ class CourseReviewServiceProvider extends AbstractServiceProvider {
 	public function register() {
 		$this->getContainer()->add( 'course_review.store', CourseReviewRepository::class );
 
-		$this->getContainer()->add( 'course_review.rest', CourseReviewController::class )
+		$this->getContainer()->add( 'course_review.rest', CourseReviewsController::class )
 		->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseReviewController' )
+		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseReviewsController' )
 		->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'course_review', CourseReview::class )

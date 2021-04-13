@@ -5,13 +5,15 @@ import {
 	FormErrorMessage,
 	FormLabel,
 	Input,
+	Spacer,
 	Stack,
 	Textarea,
 	useToast,
 } from '@chakra-ui/react';
+import { Editor } from '@tinymce/tinymce-react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 
 import urls from '../../../constants/urls';
@@ -35,6 +37,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	const {
 		register,
 		handleSubmit,
+		control,
 		formState: { errors },
 	} = useForm<SectionInputs>();
 	const queryClient = useQueryClient();
@@ -80,6 +83,14 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 					<FormLabel htmlFor="">
 						{__('Section Description', 'masteriyo')}
 					</FormLabel>
+					<Controller
+						name="description"
+						control={control}
+						defaultValue={description}
+						render={({ field: { value, onChange } }) => (
+							<Editor value={value} onChange={onChange} />
+						)}
+					/>
 					<Textarea
 						defaultValue={description}
 						rows={4}
@@ -96,6 +107,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 					</Button>
 				</ButtonGroup>
 			</Stack>
+			<Spacer h="8" />
 		</form>
 	);
 };

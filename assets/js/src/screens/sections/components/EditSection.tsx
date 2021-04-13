@@ -58,9 +58,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	);
 
 	const onUpdate = (data: any) => {
-		console.log(data);
-		console.log(id);
-		// updateMutation.mutate(data);
+		updateMutation.mutate(data);
 	};
 
 	return (

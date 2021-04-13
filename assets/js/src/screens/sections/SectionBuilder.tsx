@@ -2,7 +2,7 @@ import { Center, Stack } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
-import React from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ const SectionBuilder = () => {
 	const history = useHistory();
 	const courseAPI = new API(urls.courses);
 	const sectionAPI = new API(urls.sections);
-
+	const [totalSectionsLength, setTotalSectionsLength] = useState<number>(0);
 	const courseQuery = useQuery(['builderCourse', courseId], () =>
 		courseAPI.get(courseId)
 	);
@@ -25,8 +25,14 @@ const SectionBuilder = () => {
 	// Redirect to list page if course is not found
 	courseQuery.isError && history.push(routes.courses.list);
 
-	const sectionQuery = useQuery(['builderSections', courseId], () =>
-		sectionAPI.list({ course_id: courseId })
+	const sectionQuery = useQuery(
+		['builderSections', courseId],
+		() => sectionAPI.list({ parent_id: courseId }),
+		{
+			onSuccess: (data) => {
+				setTotalSectionsLength(data.length);
+			},
+		}
 	);
 
 	const addSectionMutation = useMutation(
@@ -38,11 +44,12 @@ const SectionBuilder = () => {
 		}
 	);
 
-	const onAddNewSectionClick = () => {
+	const onAddNewSectionPress = () => {
 		addSectionMutation.mutate({
 			parent_id: courseId,
 			course_id: courseId,
 			name: 'New Section',
+			menu_order: totalSectionsLength + 1,
 		});
 	};
 
@@ -65,11 +72,9 @@ const SectionBuilder = () => {
 					/>
 				))}
 
-			<div className="mto-flex mto-justify-center mto-p-12">
-				<AddNewButton onClick={onAddNewSectionClick}>
-					{__('Add New Section', 'masteriyo')}
-				</AddNewButton>
-			</div>
+			<AddNewButton onClick={onAddNewSectionPress}>
+				{__('Add New Section', 'masteriyo')}
+			</AddNewButton>
 		</Stack>
 	);
 };

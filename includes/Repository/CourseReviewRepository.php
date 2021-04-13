@@ -140,7 +140,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 				'comment_author_email' => $course_review->get_author_email( 'edit' ),
 				'comment_author_url'   => $course_review->get_author_url( 'edit' ),
 				'comment_author_IP'    => $course_review->get_ip_address( 'edit' ),
-				'comment_content'      => $course_review->get_author_description( 'edit' ),
+				'comment_content'      => $course_review->get_content( 'edit' ),
 				'comment_approved'     => $course_review->get_status( 'edit' ),
 				'comment_parent'       => $course_review->get_parent( 'edit' ),
 				'user_id'              => $course_review->get_user_id( 'edit' ),

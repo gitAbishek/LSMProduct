@@ -187,13 +187,14 @@ class CourseReviewsController extends CommentsController {
 	 * @return array
 	 */
 	protected function get_objects( $query_args ) {
-		$course_reviews = get_comments( $query_args );
+		$course_reviews = new \WP_Comment_Query( $query_args );
+		$course_reviews = $course_reviews->comments;
 		$total_posts    = count( $course_reviews );
-
 		if ( $total_posts < 1 ) {
 			// Out-of-bounds, run the query again without LIMIT for total count.
 			unset( $query_args['paged'] );
-			$course_reviews = get_comments( $query_args );
+			$course_reviews = new \WP_Comment_Query( $query_args );
+			$course_reviews = $course_reviews->comments;
 			$total_posts    = count( $course_reviews );
 		}
 
@@ -248,11 +249,12 @@ class CourseReviewsController extends CommentsController {
 		$data = array(
 			'id'           => $course_review->get_id(),
 			'course_id'    => $course_review->get_course_id(),
-			'name'         => $course_review->get_name( $context ),
-			'email'        => $course_review->get_email( $context ),
+			'author_name'  => $course_review->get_author_name( $context ),
+			'author_email' => $course_review->get_author_email( $context ),
+			'author_url'   => $course_review->get_author_url( $context ),
 			'ip_address'   => $course_review->get_ip_address( $context ),
 			'date_created' => $course_review->get_date_created( $context ),
-			'description'  => $course_review->get_description( $context ),
+			'description'  => $course_review->get_content( $context ),
 			'karma'        => $course_review->get_karma( $context ),
 			'status'       => $course_review->get_status( $context ),
 			'agent'        => $course_review->get_agent( $context ),
@@ -275,18 +277,12 @@ class CourseReviewsController extends CommentsController {
 	 */
 	protected function prepare_objects_query( $request ) {
 		$args = array(
-			'offset'  => $request['offset'],
-			'order'   => $request['order'],
-			'orderby' => $request['orderby'],
-			'paged'   => $request['page'],
-			's'       => $request['search'],
-			'role'    => $request['role'],
-			'number'  => $request['per_page'],
+			'offset'   => $request['offset'],
+			'paged'    => $request['page'],
+			'per_page' => $request['per_page'],
+			's'        => $request['search'],
+			'type'     => 'masteriyo_review',
 		);
-
-		if ( 'date' === $args['orderby'] ) {
-			$args['orderby'] = 'date ID';
-		}
 
 		/**
 		 * Filter the query arguments for a request.
@@ -432,9 +428,8 @@ class CourseReviewsController extends CommentsController {
 	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		global $masteriyo_container;
 
-		$id      = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
+		$id            = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
 		$course_review = masteriyo( 'course_review' );
 
 		if ( 0 !== $id ) {

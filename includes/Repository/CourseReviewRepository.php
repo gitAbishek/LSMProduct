@@ -33,18 +33,23 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	 * @param Model $course_review Course review object.
 	 */
 	public function create( Model &$course_review ) {
+
+		if ( ! $course_review->get_date_created( 'edit' ) ) {
+			$course_review->set_date_created( current_time( 'mysql', true ) );
+		}
+
 		$id = wp_insert_comment(
 			apply_filters(
 				'masteriyo_new_course_review_data',
 				array(
 					'comment_post_ID'      => $course_review->get_course_id(),
-					'comment_author'       => $course_review->get_name( 'edit' ),
-					'comment_author_email' => $course_review->get_email( 'edit' ),
-					'comment_author_url'   => $course_review->get_url( 'edit' ),
+					'comment_author'       => $course_review->get_author_name( 'edit' ),
+					'comment_author_email' => $course_review->get_author_email( 'edit' ),
+					'comment_author_url'   => $course_review->get_author_url( 'edit' ),
 					'comment_author_IP'    => $course_review->get_ip_address( 'edit' ),
 					'comment_date'         => $course_review->get_date_created( 'edit' ),
 					'comment_date_gmt'     => $course_review->get_date_created( 'edit' ),
-					'comment_content'      => $course_review->get_description(),
+					'comment_content'      => $course_review->get_content(),
 					'comment_karma'        => $course_review->get_karma( 'edit' ),
 					'comment_approved'     => $course_review->get_status( 'edit' ),
 					'comment_agent'        => $course_review->get_agent( 'edit' ),
@@ -83,12 +88,12 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		$course_review->set_props(
 			array(
 				'course_id'    => $course_review_obj->comment_post_ID,
-				'name'         => $course_review_obj->comment_author,
-				'email'        => $course_review_obj->comment_author_email,
-				'url'          => $course_review_obj->comment_author_url,
+				'author_name'  => $course_review_obj->comment_author,
+				'author_email' => $course_review_obj->comment_author_email,
+				'author_url'   => $course_review_obj->comment_author_url,
 				'ip_address'   => $course_review_obj->comment_author_IP,
 				'date_created' => $course_review_obj->comment_date,
-				'description'  => $course_review_obj->comment_content,
+				'content'      => $course_review_obj->comment_content,
 				'karma'        => $course_review_obj->comment_karma,
 				'status'       => $course_review_obj->comment_approved,
 				'agent'        => $course_review_obj->comment_agent,
@@ -118,12 +123,12 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		$changes = $course_review->get_changes();
 
 		$course_review_data_keys = array(
-			'name',
-			'email',
-			'url',
+			'author_name',
+			'author_email',
+			'author_url',
 			'ip_address',
 			'date_created',
-			'description',
+			'content',
 			'status',
 			'parent',
 		);
@@ -131,11 +136,11 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		// Only update the course review when the course review data changes.
 		if ( array_intersect( $course_review_data_keys, array_keys( $changes ) ) ) {
 			$course_review_data = array(
-				'comment_author'       => $course_review->get_name( 'edit' ),
-				'comment_author_email' => $course_review->get_email( 'edit' ),
-				'comment_author_url'   => $course_review->get_url( 'edit' ),
+				'comment_author'       => $course_review->get_author_name( 'edit' ),
+				'comment_author_email' => $course_review->get_author_email( 'edit' ),
+				'comment_author_url'   => $course_review->get_author_url( 'edit' ),
 				'comment_author_IP'    => $course_review->get_ip_address( 'edit' ),
-				'comment_content'      => $course_review->get_description( 'edit' ),
+				'comment_content'      => $course_review->get_author_description( 'edit' ),
 				'comment_approved'     => $course_review->get_status( 'edit' ),
 				'comment_parent'       => $course_review->get_parent( 'edit' ),
 				'user_id'              => $course_review->get_user_id( 'edit' ),

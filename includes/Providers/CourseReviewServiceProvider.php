@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use ThemeGrill\Masteriyo\Models\CourseReview;
 use ThemeGrill\Masteriyo\Repository\CourseReviewRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseReviewController;
+use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseReviewsController;
 
 class CourseReviewServiceProvider extends AbstractServiceProvider {
 	/**

@@ -337,6 +337,6 @@ abstract class CommentsController extends CrudController {
 	 * @return bool
 	 */
 	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
-		return $this->permission->rest_check_course_reviews_permissions(  'read', $object_id );
+		return $this->permission->rest_check_course_reviews_permissions( 'read', $object_id );
 	}
 }

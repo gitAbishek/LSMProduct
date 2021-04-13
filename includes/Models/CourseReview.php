@@ -96,7 +96,7 @@ class CourseReview extends Model {
 	}
 
 	/**
-	 * Get name.
+	 * Get author_name.
 	 *
 	 * @since  0.1.0
 	 *
@@ -342,7 +342,7 @@ class CourseReview extends Model {
 	 * @param int $karma Comment karma.
 	 */
 	public function set_karma( $karma ) {
-		$this->set_prop( 'karma', $karma );
+		$this->set_prop( 'karma', absint( $karma ) );
 	}
 
 	/**

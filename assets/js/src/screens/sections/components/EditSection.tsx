@@ -91,12 +91,6 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 							<Editor value={value} onChange={onChange} />
 						)}
 					/>
-					<Textarea
-						defaultValue={description}
-						rows={4}
-						placeholder={__('short summary', 'masteriyo')}
-						{...register('description')}
-					/>
 				</FormControl>
 				<ButtonGroup>
 					<Button colorScheme="blue" type="submit">

@@ -38,6 +38,7 @@ const AddNewCourse: React.FC = () => {
 			}),
 		};
 
+		console.log(mergeDeep(data, newData));
 		addMutation.mutate(mergeDeep(data, newData));
 	};
 

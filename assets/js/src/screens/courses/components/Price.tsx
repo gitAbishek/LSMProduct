@@ -22,7 +22,7 @@ interface Props {
 }
 const Price: React.FC<Props> = (props) => {
 	const { defaultValue } = props;
-	const [priceValue, setPriceValue] = useState<number>(defaultValue || 0);
+	const [priceValue, setPriceValue] = useState<number>(defaultValue || '0');
 	const handleChange = (priceValue: number) => setPriceValue(priceValue);
 	const { register, setValue } = useFormContext();
 

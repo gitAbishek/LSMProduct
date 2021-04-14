@@ -30,7 +30,7 @@ const ImageUpload: React.FC<Props> = (props) => {
 	const { mediaId, name, register, setValue } = props;
 	const toast = useToast();
 	const [preview, setPreview] = useState<any>(null);
-	const [imageId, setImageId] = useState<any>(mediaId || 0);
+	const [imageId, setImageId] = useState<any>(mediaId || '0');
 
 	const imageAPi = new MediaAPI();
 

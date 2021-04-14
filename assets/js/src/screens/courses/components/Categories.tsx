@@ -35,19 +35,19 @@ const Categories: React.FC<Props> = (props) => {
 				<FormControl>
 					<FormLabel>{__('Categories', 'masteriyo')}</FormLabel>
 					<Controller
+						defaultValue={
+							defaultValue &&
+							defaultValue?.map((category: any) => {
+								return {
+									value: category.id,
+									label: category.name,
+								};
+							})
+						}
 						render={({ field }) => (
 							<Select
 								{...field}
 								closeMenuOnSelect={false}
-								defaultValue={
-									defaultValue?.length &&
-									defaultValue?.map((category: any) => {
-										return {
-											value: category.id,
-											label: category.name,
-										};
-									})
-								}
 								isMulti
 								options={categoriesOption}
 							/>

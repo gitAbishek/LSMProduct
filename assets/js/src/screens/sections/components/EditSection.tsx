@@ -47,7 +47,6 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 		(data: any) => sectionAPI.update(id, data),
 		{
 			onSuccess: (data: any) => {
-				console.log(data);
 				toast({
 					title: __('Updated Successfully', 'masteriyo'),
 					description: data.name + __(' is updated succesffuly', 'masteriyo'),
@@ -61,7 +60,6 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	);
 
 	const onUpdate = (data: any) => {
-		console.log(data);
 		updateMutation.mutate(data);
 	};
 

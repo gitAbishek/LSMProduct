@@ -7,7 +7,6 @@ import {
 	Input,
 	Spacer,
 	Stack,
-	Textarea,
 	useToast,
 } from '@chakra-ui/react';
 import { Editor } from '@tinymce/tinymce-react';
@@ -61,6 +60,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	);
 
 	const onUpdate = (data: any) => {
+		console.log(data);
 		updateMutation.mutate(data);
 	};
 
@@ -86,9 +86,12 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 					<Controller
 						name="description"
 						control={control}
-						defaultValue={description}
 						render={({ field: { value, onChange } }) => (
-							<Editor value={value} onChange={onChange} />
+							<Editor
+								tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/tinymce.min.js"
+								value={value}
+								onChange={onChange}
+							/>
 						)}
 					/>
 				</FormControl>

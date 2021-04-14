@@ -103,9 +103,11 @@ const Section: React.FC<Props> = (props) => {
 	return (
 		<Box bg="white" p="10" shadow="box">
 			<Flex justify="space-between">
-				<Stack direction="row" spacing="3" align="center" fontSize="xl">
-					<Icon as={Sortable} />
-					<Text fontWeight="semibold">{name}</Text>
+				<Stack direction="row" spacing="3" align="center">
+					<Icon as={Sortable} fontSize="lg" color="gray.500" />
+					<Text fontWeight="semibold" fontSize="xl">
+						{name}
+					</Text>
 				</Stack>
 				<Menu placement="bottom-end">
 					<MenuButton
@@ -167,6 +169,7 @@ const Section: React.FC<Props> = (props) => {
 			<AlertDialog
 				isOpen={isDeleteModalOpen}
 				onClose={onDeleteModalClose}
+				isCentered
 				leastDestructiveRef={cancelRef}>
 				<AlertDialogOverlay>
 					<AlertDialogContent>

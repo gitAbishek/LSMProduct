@@ -73,9 +73,11 @@ const SectionBuilder = () => {
 				))}
 
 			{sectionQuery.isSuccess && (
-				<AddNewButton onClick={onAddNewSectionPress}>
-					{__('Add New Section', 'masteriyo')}
-				</AddNewButton>
+				<Center>
+					<AddNewButton onClick={onAddNewSectionPress}>
+						{__('Add New Section', 'masteriyo')}
+					</AddNewButton>
+				</Center>
 			)}
 		</Stack>
 	);

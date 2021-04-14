@@ -47,6 +47,9 @@ const theme = extendTheme({
 				md: {
 					fontSize: 'xs',
 				},
+				sm: {
+					fontSize: 'xs',
+				},
 			},
 			variants: {
 				solid: {

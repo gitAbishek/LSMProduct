@@ -1,5 +1,12 @@
 import {
-	Box,
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
+	Button,
+	ButtonGroup,
 	Flex,
 	Icon,
 	IconButton,
@@ -11,103 +18,137 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Button from 'Components/common/Button';
-import Dropdown from 'Components/common/Dropdown';
-import DropdownOverlay from 'Components/common/DropdownOverlay';
-import OptionButton from 'Components/common/OptionButton';
-import {
-	Card,
-	CardActions,
-	CardHeader,
-	CardHeading,
-} from 'Components/layout/Card';
-import DeleteModal from 'Components/layout/DeleteModal';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
 	BiAlignLeft,
 	BiDotsVerticalRounded,
-	BiEdit,
 	BiTimer,
 	BiTrash,
 } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 
-import { AlignLeft, Sortable, Timer, Trash } from '../../../assets/icons';
-import DragHandle from './DragHandle';
+import { Sortable } from '../../../assets/icons';
+import routes from '../../../constants/routes';
+import urls from '../../../constants/urls';
+import API from '../../../utils/api';
 
 interface Props {
 	id: number;
 	name: string;
-	type: string;
+	type: 'lesson' | 'quiz' | string;
 }
 
 const Content: React.FC<Props> = (props) => {
 	const { id, name, type } = props;
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const queryClient = useQueryClient();
-	const { push } = useHistory();
+	const history = useHistory();
+	const cancelRef = useRef<any>();
+	const lessonAPI = new API(urls.lessons);
+	const quizAPI = new API(urls.quizes);
 
-	const deleteLessonMutation = useMutation((id: number) => deleteLesson(id), {
+	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('contents');
 		},
 	});
-	const deleteQuizMutation = useMutation((id: number) => deleteQuiz(id), {
+	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('contents');
 		},
 	});
 
-	const onModalClose = () => {
-		setIsModalOpen(false);
+	const onDeleteModalClose = () => {
+		setDeleteModalOpen(false);
 	};
-
 	const onDeletePress = () => {
-		setIsModalOpen(true);
+		setDeleteModalOpen(true);
 	};
-
-	const deleteContent = () => {
+	const onDeleteConfirm = () => {
 		if (type === 'lesson') {
-			deleteLessonMutation.mutate(id);
+			deleteLesson.mutate(id);
 		} else if (type === 'quiz') {
-			deleteQuizMutation.mutate(id);
+			deleteQuiz.mutate(id);
 		}
-		setIsModalOpen(false);
+		setDeleteModalOpen(false);
 	};
-
-	const onEditPress = () => {};
+	const onEditPress = () => {
+		if (type === 'lesson') {
+			history.push(routes.lesson.edit.replace(':lessonId', id.toString()));
+		}
+		if (type === 'quiz') {
+			history.push(
+				routes.quiz.edit.replace(':quizId', id.toString()).replace(':step', '')
+			);
+		}
+	};
 
 	return (
-		<Box rounded="sm" border="1px" borderColor="gray.100" p="1">
-			<Flex justify="space-between">
-				<Stack direction="row" spacing="3" align="center" fontSize="xl">
-					<Icon as={Sortable} />
-					<Icon as={type === 'lesson' ? BiAlignLeft : BiTimer} />
-					<Text fontSize="sm">{name}</Text>
-				</Stack>
-				<Stack direction="row" spacing="3">
-					<Menu placement="bottom-end">
-						<MenuButton
-							as={IconButton}
-							icon={<BiDotsVerticalRounded />}
-							variant="outline"
-							rounded="sm"
-							size="sm"
-							fontSize="large"
-						/>
-						<MenuList>
-							<MenuItem onClick={onEditPress} icon={<BiEdit />}>
-								{__('Edit', 'masteriyo')}
-							</MenuItem>
-							<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
-								{__('Delete', 'masteriyo')}
-							</MenuItem>
-						</MenuList>
-					</Menu>
-				</Stack>
-			</Flex>
-		</Box>
+		<Flex
+			justify="space-between"
+			rounded="sm"
+			border="1px"
+			borderColor="gray.100"
+			p="2">
+			<Stack direction="row" spacing="3" align="center">
+				<Icon as={Sortable} fontSize="lg" color="gray.500" />
+				<Icon as={type === 'lesson' ? BiAlignLeft : BiTimer} fontSize="xl" />
+				<Text fontSize="sm">{name}</Text>
+			</Stack>
+			<Stack direction="row" spacing="3">
+				<Button variant="outline" size="sm" onClick={onEditPress}>
+					{__('Edit', 'masteriyo')}
+				</Button>
+				<Menu placement="bottom-end">
+					<MenuButton
+						as={IconButton}
+						icon={<BiDotsVerticalRounded />}
+						variant="outline"
+						rounded="sm"
+						size="sm"
+						fontSize="large"
+					/>
+					<MenuList>
+						<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
+							{__('Delete', 'masteriyo')}
+						</MenuItem>
+					</MenuList>
+				</Menu>
+			</Stack>
+			<AlertDialog
+				isOpen={isDeleteModalOpen}
+				onClose={onDeleteModalClose}
+				isCentered
+				leastDestructiveRef={cancelRef}>
+				<AlertDialogOverlay>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							{__('Delete Section')} {name}
+						</AlertDialogHeader>
+						<AlertDialogBody>
+							Are you sure? You can't restore this section
+						</AlertDialogBody>
+						<AlertDialogFooter>
+							<ButtonGroup>
+								<Button
+									ref={cancelRef}
+									onClick={onDeleteModalClose}
+									variant="outline">
+									{__('Cancel', 'masteriyo')}
+								</Button>
+								<Button
+									colorScheme="red"
+									onClick={onDeleteConfirm}
+									isLoading={deleteQuiz.isLoading || deleteLesson.isLoading}>
+									{__('Delete', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialogOverlay>
+			</AlertDialog>
+		</Flex>
 	);
 };
 

@@ -1,40 +1,38 @@
-import React, { Fragment, useState } from 'react';
-import { addLesson, fetchSection } from '../../utils/api';
-import { useHistory, useParams } from 'react-router';
-import { useMutation, useQuery } from 'react-query';
-
-import Button from 'Components/common/Button';
-import Dropdown from 'Components/common/Dropdown';
-import DropdownOverlay from 'Components/common/DropdownOverlay';
+import {
+	Box,
+	Button,
+	ButtonGroup,
+	Divider,
+	Flex,
+	Heading,
+	IconButton,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
+	Stack,
+} from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import FormGroup from 'Components/common/FormGroup';
 import Input from 'Components/common/Input';
 import Label from 'Components/common/Label';
-import MainLayout from 'Layouts/MainLayout';
-import MainToolbar from 'Layouts/MainToolbar';
-import OptionButton from 'Components/common/OptionButton';
-import Select from 'Components/common/Select';
 import Slider from 'rc-slider';
-import Textarea from 'Components/common/Textarea';
-import { __ } from '@wordpress/i18n';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
+import { useMutation, useQuery } from 'react-query';
+import { useHistory, useParams } from 'react-router';
 import { useToasts } from 'react-toast-notifications';
+
+import Description from './components/Description';
+import FeaturedImage from './components/FeaturedImage';
+import Name from './components/Name';
 
 const AddNewLesson: React.FC = () => {
 	const { sectionId }: any = useParams();
-	interface Inputs {
-		name: string;
-		description?: string;
-		categories?: any;
-	}
-
-	const { register, handleSubmit } = useForm<Inputs>();
-	const [playBackTime, setPlayBackTime] = useState(3);
+	const methods = useForm();
 	const { addToast } = useToasts();
 	const { push } = useHistory();
-
-	const playBackTimeOnChange = (value: number) => {
-		setPlayBackTime(value);
-	};
 
 	const sectionQuery = useQuery([`section${sectionId}`, sectionId], () =>
 		fetchSection(sectionId)
@@ -64,104 +62,55 @@ const AddNewLesson: React.FC = () => {
 	};
 
 	return (
-		<Fragment>
-			<MainToolbar />
-			<MainLayout>
-				<div>
-					<div className="mto-flex mto-justify-between mto-mb-10">
-						<h1 className="mto-text-xl mto-m-0 mto-font-medium">
+		<FormProvider {...methods}>
+			<Box bg="white" p="10" shadow="box">
+				<Stack direction="column" spacing="8">
+					<Flex aling="center" justify="space-between">
+						<Heading as="h1" fontSize="x-large">
 							{__('Add New Lesson', 'masteriyo')}
-						</h1>
-					</div>
-					<div>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<FormGroup>
-								<Label htmlFor="">{__('Lesson Name', 'masteriyo')}</Label>
-								<Input
-									placeholder={__('Your topic title', 'masteriyo')}
-									ref={register({ required: true })}
-									name="name"
-								/>
-							</FormGroup>
+						</Heading>
+						<Menu placement="bottom-end">
+							<MenuButton
+								as={IconButton}
+								icon={<BiDotsVerticalRounded />}
+								variant="outline"
+								rounded="sm"
+								fontSize="large"
+							/>
+							<MenuList>
+								<MenuItem icon={<BiEdit />}>{__('Edit', 'masteriyo')}</MenuItem>
+								<MenuItem icon={<BiTrash />}>
+									{__('Delete', 'masteriyo')}
+								</MenuItem>
+							</MenuList>
+						</Menu>
+					</Flex>
 
-							<FormGroup>
-								<Label htmlFor="">{__('Description', 'masteriyo')}</Label>
-								<Textarea
-									placeholder={__('Your course description', 'masteriyo')}
-									rows={5}
-									ref={register}
-									name="description"
-								/>
-							</FormGroup>
+					<form onSubmit={methods.handleSubmit(onSubmit)}>
+						<Stack direction="column" spacing="6">
+							<Name />
+							<Description />
+							<FeaturedImage />
 
-							<FormGroup>
-								<Label htmlFor="">{__('Featured Image', 'masteriyo')}</Label>
-							</FormGroup>
-							<div>
-								<div>
-									<FormGroup>
-										<Label htmlFor="">{__('Video Source', 'masteriyo')}</Label>
-										<Select
-											options={[
-												{
-													value: 'source',
-													label: __('Select Video Source', 'masteriyo'),
-												},
-												{ value: 'youtube', label: __('Youtube', 'masteriyo') },
-												{ value: 'vimeo', label: __('Vimeo', 'masteriyo') },
-												{ value: 'custom', label: __('Custom', 'masteriyo') },
-											]}
-										/>
-									</FormGroup>
-								</div>
-								<div>
-									<FormGroup>
-										<Label htmlFor="">{__('Video URL', 'masteriyo')}</Label>
-										<Input
-											placeholder="video url"
-											ref={register}
-											name="video_source_url"
-										/>
-									</FormGroup>
-								</div>
-							</div>
+							<Box py="3">
+								<Divider />
+							</Box>
 
-							<FormGroup>
-								<Label htmlFor="">
-									{__('Video Playback Time', 'masteriyo')}
-								</Label>
-
-								<div>
-									<Slider
-										min={0}
-										max={20}
-										defaultValue={playBackTime}
-										onChange={playBackTimeOnChange}
-									/>
-								</div>
-								<div>
-									<Input
-										type="number"
-										value={playBackTime}
-										onChange={() => playBackTimeOnChange}
-									/>
-								</div>
-							</FormGroup>
-							<div>
-								<div className="mto-flex">
-									<Button layout="primary" className="mto-mr-4" type="submit">
-										{__('Add New Lesson', 'masteriyo')}
-									</Button>
-									<Button onClick={() => push(`/builder/${courseId}`)}>
-										{__('Cancel', 'masteriyo')}
-									</Button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</MainLayout>
-		</Fragment>
+							<ButtonGroup>
+								<Button colorScheme="blue" type="submit">
+									{__('Add New Lesson', 'masteriyo')}
+								</Button>
+								<Button
+									variant="outline"
+									onClick={() => push(`/builder/${courseId}`)}>
+									{__('Cancel', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</Stack>
+					</form>
+				</Stack>
+			</Box>
+		</FormProvider>
 	);
 };
 

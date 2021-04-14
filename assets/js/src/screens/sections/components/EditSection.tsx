@@ -10,10 +10,10 @@ import {
 	Stack,
 	useToast,
 } from '@chakra-ui/react';
-import { Editor } from '@tinymce/tinymce-react';
 import { __ } from '@wordpress/i18n';
+import Editor from 'Components/common/Editor';
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 
 import urls from '../../../constants/urls';
@@ -84,16 +84,10 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 						<FormLabel htmlFor="">
 							{__('Section Description', 'masteriyo')}
 						</FormLabel>
-						<Controller
+						<Editor
 							name="description"
+							defaultValue={description}
 							control={control}
-							render={({ field: { onChange } }) => (
-								<Editor
-									initialValue={description}
-									tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/tinymce.min.js"
-									onEditorChange={onChange}
-								/>
-							)}
 						/>
 					</FormControl>
 					<Divider />

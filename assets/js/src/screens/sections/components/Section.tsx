@@ -66,9 +66,9 @@ const Section: React.FC<Props> = (props) => {
 	const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
 		onSuccess: (data: any) => {
 			toast({
-				title: __('Deleted Successfully', 'masteriyo'),
+				title: __('Section Deleted', 'masteriyo'),
 				description:
-					data?.name + __('has been deleted successfully', 'masteriyo'),
+					data?.name + __(' has been deleted successfully', 'masteriyo'),
 				isClosable: true,
 				status: 'error',
 			});

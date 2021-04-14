@@ -35,7 +35,7 @@ const SectionBuilder = () => {
 		}
 	);
 
-	const addSectionMutation = useMutation(
+	const addSection = useMutation(
 		(newSection: any) => sectionAPI.store(newSection),
 		{
 			onSuccess: () => {
@@ -45,7 +45,7 @@ const SectionBuilder = () => {
 	);
 
 	const onAddNewSectionPress = () => {
-		addSectionMutation.mutate({
+		addSection.mutate({
 			parent_id: courseId,
 			course_id: courseId,
 			name: 'New Section',
@@ -71,7 +71,11 @@ const SectionBuilder = () => {
 						courseId={courseId}
 					/>
 				))}
-
+			{addSection.isLoading && (
+				<Center minH="24">
+					<Spinner />
+				</Center>
+			)}
 			{sectionQuery.isSuccess && (
 				<Center>
 					<AddNewButton onClick={onAddNewSectionPress}>

@@ -1,4 +1,4 @@
-import { Button, Circle, Icon, Stack, Text } from '@chakra-ui/react';
+import { Circle, Icon, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
 import { BiPlus } from 'react-icons/bi';
 

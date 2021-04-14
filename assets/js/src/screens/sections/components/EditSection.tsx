@@ -1,11 +1,12 @@
 import {
+	Box,
 	Button,
 	ButtonGroup,
+	Divider,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
 	Input,
-	Spacer,
 	Stack,
 	useToast,
 } from '@chakra-ui/react';
@@ -64,47 +65,50 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onUpdate)}>
-			<Stack direction="column" spacing="8">
-				<FormControl isInvalid={!!errors?.name}>
-					<FormLabel htmlFor="">{__('Section Name', 'masteriyo')}</FormLabel>
-					<Input
-						placeholder={__('Your Section Name', 'masteriyo')}
-						defaultValue={name}
-						{...register('name', {
-							required: __('Section name cannot be empty', 'masteriyo'),
-						})}></Input>
-					{errors?.name && (
-						<FormErrorMessage>{errors?.name.message}</FormErrorMessage>
-					)}
-				</FormControl>
-				<FormControl>
-					<FormLabel htmlFor="">
-						{__('Section Description', 'masteriyo')}
-					</FormLabel>
-					<Controller
-						name="description"
-						control={control}
-						render={({ field: { onChange } }) => (
-							<Editor
-								initialValue={description}
-								tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/tinymce.min.js"
-								onEditorChange={onChange}
-							/>
+		<Box pb="6">
+			<form onSubmit={handleSubmit(onUpdate)}>
+				<Stack direction="column" spacing="8">
+					<FormControl isInvalid={!!errors?.name}>
+						<FormLabel htmlFor="">{__('Section Name', 'masteriyo')}</FormLabel>
+						<Input
+							placeholder={__('Your Section Name', 'masteriyo')}
+							defaultValue={name}
+							{...register('name', {
+								required: __('Section name cannot be empty', 'masteriyo'),
+							})}></Input>
+						{errors?.name && (
+							<FormErrorMessage>{errors?.name.message}</FormErrorMessage>
 						)}
-					/>
-				</FormControl>
-				<ButtonGroup>
-					<Button colorScheme="blue" type="submit">
-						{__('Save', 'masteriyo')}
-					</Button>
-					<Button variant="outline" onClick={() => onCancel()}>
-						{__('Cancel', 'masteriyo')}
-					</Button>
-				</ButtonGroup>
-			</Stack>
-			<Spacer h="8" />
-		</form>
+					</FormControl>
+					<FormControl>
+						<FormLabel htmlFor="">
+							{__('Section Description', 'masteriyo')}
+						</FormLabel>
+						<Controller
+							name="description"
+							control={control}
+							render={({ field: { onChange } }) => (
+								<Editor
+									initialValue={description}
+									tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/tinymce.min.js"
+									onEditorChange={onChange}
+								/>
+							)}
+						/>
+					</FormControl>
+					<Divider />
+					<ButtonGroup>
+						<Button colorScheme="blue" type="submit">
+							{__('Save', 'masteriyo')}
+						</Button>
+						<Button variant="outline" onClick={() => onCancel()}>
+							{__('Cancel', 'masteriyo')}
+						</Button>
+					</ButtonGroup>
+					<Divider />
+				</Stack>
+			</form>
+		</Box>
 	);
 };
 

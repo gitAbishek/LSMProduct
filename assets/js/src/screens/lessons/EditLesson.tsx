@@ -1,4 +1,10 @@
 import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
 	Box,
 	Button,
 	ButtonGroup,
@@ -16,7 +22,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { Fragment, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
@@ -34,10 +40,18 @@ const EditLesson: React.FC = () => {
 	const history = useHistory();
 	const methods = useForm();
 	const toast = useToast();
+	const cancelRef = useRef<any>();
 	const lessonAPI = new API(urls.lessons);
+	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
-	const lessonQuery = useQuery([`section${lessonId}`, lessonId], () =>
-		lessonAPI.get(lessonId)
+	const lessonQuery = useQuery(
+		[`section${lessonId}`, lessonId],
+		() => lessonAPI.get(lessonId),
+		{
+			onError: () => {
+				history.goBack();
+			},
+		}
 	);
 
 	const updateLesson = useMutation(
@@ -55,8 +69,35 @@ const EditLesson: React.FC = () => {
 		}
 	);
 
+	const deleteLesson = useMutation(
+		(lessonId: number) => lessonAPI.delete(lessonId),
+		{
+			onSuccess: (data: any) => {
+				toast({
+					title: __('Lesson Deleted Successfully', 'masteriyo'),
+					description: data.name + __(' has been deleted successfully.'),
+					isClosable: true,
+					status: 'error',
+				});
+				history.push(routes.section.replace(':courseId', data.course_id));
+			},
+		}
+	);
+
 	const onSubmit = (data: object) => {
 		updateLesson.mutate(data);
+	};
+
+	const onDeletePress = () => {
+		setDeleteModalOpen(true);
+	};
+
+	const onDeleteConfirm = () => {
+		deleteLesson.mutate(lessonId);
+	};
+
+	const onDeleteModalClose = () => {
+		setDeleteModalOpen(false);
 	};
 
 	return (
@@ -82,10 +123,7 @@ const EditLesson: React.FC = () => {
 									fontSize="large"
 								/>
 								<MenuList>
-									<MenuItem icon={<BiEdit />}>
-										{__('Edit', 'masteriyo')}
-									</MenuItem>
-									<MenuItem icon={<BiTrash />}>
+									<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
 										{__('Delete', 'masteriyo')}
 									</MenuItem>
 								</MenuList>
@@ -118,6 +156,38 @@ const EditLesson: React.FC = () => {
 					</Stack>
 				)}
 			</Box>
+			<AlertDialog
+				isOpen={isDeleteModalOpen}
+				onClose={onDeleteModalClose}
+				isCentered
+				leastDestructiveRef={cancelRef}>
+				<AlertDialogOverlay>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							{__('Delete Lesson')} {name}
+						</AlertDialogHeader>
+						<AlertDialogBody>
+							Are you sure? You can't restore this section
+						</AlertDialogBody>
+						<AlertDialogFooter>
+							<ButtonGroup>
+								<Button
+									ref={cancelRef}
+									onClick={onDeleteModalClose}
+									variant="outline">
+									{__('Cancel', 'masteriyo')}
+								</Button>
+								<Button
+									colorScheme="red"
+									onClick={onDeleteConfirm}
+									isLoading={deleteLesson.isLoading}>
+									{__('Delete', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialogOverlay>
+			</AlertDialog>
 		</FormProvider>
 	);
 };

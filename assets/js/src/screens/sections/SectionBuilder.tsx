@@ -62,7 +62,7 @@ const SectionBuilder = () => {
 			)}
 
 			{sectionQuery.isSuccess &&
-				sectionQuery.data.map((section: any, index: number) => (
+				sectionQuery.data.map((section: any) => (
 					<Section
 						key={section.id}
 						id={section.id}
@@ -72,9 +72,11 @@ const SectionBuilder = () => {
 					/>
 				))}
 
-			<AddNewButton onClick={onAddNewSectionPress}>
-				{__('Add New Section', 'masteriyo')}
-			</AddNewButton>
+			{sectionQuery.isSuccess && (
+				<AddNewButton onClick={onAddNewSectionPress}>
+					{__('Add New Section', 'masteriyo')}
+				</AddNewButton>
+			)}
 		</Stack>
 	);
 };

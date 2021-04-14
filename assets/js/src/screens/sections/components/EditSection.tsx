@@ -87,7 +87,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 					<Controller
 						name="description"
 						control={control}
-						render={({ field: { value, onChange } }) => (
+						render={({ field: { onChange } }) => (
 							<Editor
 								initialValue={description}
 								tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/tinymce.min.js"

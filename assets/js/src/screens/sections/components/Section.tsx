@@ -140,7 +140,7 @@ const Section: React.FC<Props> = (props) => {
 				{contentQuery.isLoading && <Spinner />}
 				{contentQuery.isSuccess && !!contentQuery.data.length && (
 					<Stack direction="column" spacing="4">
-						{contentQuery?.data?.map((content: any) => (
+						{contentQuery.data.map((content: any) => (
 							<Content
 								key={content.id}
 								id={content.id}

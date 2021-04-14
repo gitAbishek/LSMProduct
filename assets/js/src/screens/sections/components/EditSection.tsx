@@ -47,6 +47,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 		(data: any) => sectionAPI.update(id, data),
 		{
 			onSuccess: (data: any) => {
+				console.log(data);
 				toast({
 					title: __('Updated Successfully', 'masteriyo'),
 					description: data.name + __(' is updated succesffuly', 'masteriyo'),
@@ -88,9 +89,9 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 						control={control}
 						render={({ field: { value, onChange } }) => (
 							<Editor
+								initialValue={description}
 								tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/tinymce.min.js"
-								value={value}
-								onChange={onChange}
+								onEditorChange={onChange}
 							/>
 						)}
 					/>

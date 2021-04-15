@@ -141,7 +141,7 @@ const Question: React.FC<Props> = (props) => {
 							fontSize="x-large"
 							color="gray.500"
 							_hover={{ color: 'blue.500' }}
-							aria-label={__('Duplicate', 'masteriyo')}
+							aria-label={__('Delete', 'masteriyo')}
 							icon={<BiTrash />}
 							textAlign="right"
 							minW="auto"

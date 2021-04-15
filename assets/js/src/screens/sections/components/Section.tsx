@@ -8,6 +8,7 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
+	Center,
 	Collapse,
 	Flex,
 	Icon,
@@ -28,6 +29,7 @@ import {
 	BiAlignLeft,
 	BiDotsVerticalRounded,
 	BiEdit,
+	BiTimer,
 	BiTrash,
 } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -137,7 +139,11 @@ const Section: React.FC<Props> = (props) => {
 						onCancel={() => setIsEditing(false)}
 					/>
 				</Collapse>
-				{contentQuery.isLoading && <Spinner />}
+				{contentQuery.isLoading && (
+					<Center minH="12">
+						<Spinner />
+					</Center>
+				)}
 				{contentQuery.isSuccess && !!contentQuery.data.length && (
 					<Stack direction="column" spacing="4">
 						{contentQuery.data.map((content: any) => (
@@ -157,10 +163,18 @@ const Section: React.FC<Props> = (props) => {
 						{__('Add New Content', 'masteriyo')}
 					</MenuButton>
 					<MenuList>
-						<MenuItem icon={<BiAlignLeft />} onClick={onAddNewLessonPress}>
+						<MenuItem
+							fontSize="sm"
+							fontWeight="medium"
+							icon={<Icon as={BiAlignLeft} fontSize="lg" />}
+							onClick={onAddNewLessonPress}>
 							{__('Add New Lesson', 'masteriyo')}
 						</MenuItem>
-						<MenuItem icon={<BiAlignLeft />} onClick={onAddNewQuizPress}>
+						<MenuItem
+							fontSize="sm"
+							fontWeight="medium"
+							icon={<Icon as={BiTimer} fontSize="lg" />}
+							onClick={onAddNewQuizPress}>
 							{__('Add New Quiz', 'masteriyo')}
 						</MenuItem>
 					</MenuList>

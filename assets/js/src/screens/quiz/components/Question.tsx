@@ -14,9 +14,14 @@ import {
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
+	Heading,
 	Icon,
 	IconButton,
 	Input,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
 	Stack,
 	useToast,
 } from '@chakra-ui/react';
@@ -24,7 +29,7 @@ import { __ } from '@wordpress/i18n';
 import Editor from 'Components/common/Editor';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { BiCopy, BiTrash } from 'react-icons/bi';
+import { BiCopy, BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { Sortable } from '../../../assets/icons';
@@ -122,9 +127,8 @@ const Question: React.FC<Props> = (props) => {
 				rounded="sm"
 				_expanded={{ shadow: 'box' }}
 				mb="4"
-				py="1"
-				px="2">
-				<Flex align="center" justify="space-between">
+				p="0">
+				<Flex align="center" justify="space-between" px="2" py="1">
 					<Stack direction="row" spacing="2" align="center" flex="1">
 						<Icon as={Sortable} fontSize="lg" color="gray.500" />
 						<AccordionButton _hover={{ background: 'transparent' }} px="0">
@@ -149,35 +153,64 @@ const Question: React.FC<Props> = (props) => {
 						/>
 					</Stack>
 				</Flex>
-				<AccordionPanel>
-					<form onSubmit={handleSubmit(onSubmit)}>
-						<Stack direction="column" spacing="6">
-							<FormControl isInvalid={!!errors?.name}>
-								<FormLabel>{__('Question Name', 'masteriyo')}</FormLabel>
-								<Input
-									defaultValue={questionData.name}
-									placeholder={__('Your Question Name', 'masteriyo')}
-									{...register('name', {
-										required: __(
-											'You must provide name for the question',
-											'masteriyo'
-										),
-									})}
+				<AccordionPanel borderTop="1px" borderColor="gray.100" p="5">
+					<Stack direction="column" spacing="4">
+						<Flex
+							align="center"
+							justify="space-between"
+							borderBottom="1px"
+							borderColor="gray.100"
+							pb="3">
+							<Heading fontSize="lg" fontWeight="semibold">
+								Question
+							</Heading>
+							<Menu placement="bottom-end">
+								<MenuButton
+									as={IconButton}
+									icon={<BiDotsVerticalRounded />}
+									variant="outline"
+									rounded="xs"
+									fontSize="large"
+									size="sm"
 								/>
-								<FormErrorMessage>
-									{errors?.name && errors?.name?.message}
-								</FormErrorMessage>
-							</FormControl>
-							<FormControl>
-								<FormLabel>{__('Question Description', 'masteriyo')}</FormLabel>
-								<Editor
-									name="description"
-									defaultValue={questionData.description}
-									control={control}
-								/>
-							</FormControl>
-						</Stack>
-					</form>
+								<MenuList>
+									<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
+										{__('Delete', 'masteriyo')}
+									</MenuItem>
+								</MenuList>
+							</Menu>
+						</Flex>
+						<form onSubmit={handleSubmit(onSubmit)}>
+							<Stack direction="column" spacing="6">
+								<FormControl isInvalid={!!errors?.name}>
+									<FormLabel>{__('Question Name', 'masteriyo')}</FormLabel>
+									<Input
+										defaultValue={questionData.name}
+										placeholder={__('Your Question Name', 'masteriyo')}
+										{...register('name', {
+											required: __(
+												'You must provide name for the question',
+												'masteriyo'
+											),
+										})}
+									/>
+									<FormErrorMessage>
+										{errors?.name && errors?.name?.message}
+									</FormErrorMessage>
+								</FormControl>
+								<FormControl>
+									<FormLabel>
+										{__('Question Description', 'masteriyo')}
+									</FormLabel>
+									<Editor
+										name="description"
+										defaultValue={questionData.description}
+										control={control}
+									/>
+								</FormControl>
+							</Stack>
+						</form>
+					</Stack>
 				</AccordionPanel>
 			</AccordionItem>
 			<AlertDialog

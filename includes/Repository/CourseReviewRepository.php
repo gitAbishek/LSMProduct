@@ -55,7 +55,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 					'comment_agent'        => $course_review->get_agent( 'edit' ),
 					'comment_type'         => $course_review->get_type( 'edit' ),
 					'comment_parent'       => $course_review->get_parent( 'edit' ),
-					'user_id'              => $course_review->get_user_id( 'edit' ),
+					'user_id'              => $course_review->get_author_id( 'edit' ),
 				),
 				$course_review
 			)
@@ -99,7 +99,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 				'agent'        => $course_review_obj->comment_agent,
 				'type'         => $course_review_obj->comment_type,
 				'parent'       => $course_review_obj->comment_parent,
-				'user_id'      => $course_review_obj->user_id,
+				'author_id'    => $course_review_obj->user_id,
 			)
 		);
 
@@ -143,7 +143,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 				'comment_content'      => $course_review->get_content( 'edit' ),
 				'comment_approved'     => $course_review->get_status( 'edit' ),
 				'comment_parent'       => $course_review->get_parent( 'edit' ),
-				'user_id'              => $course_review->get_user_id( 'edit' ),
+				'user_id'              => $course_review->get_author_id( 'edit' ),
 			);
 
 			wp_update_comment( array_merge( array( 'comment_ID' => $course_review->get_id() ), $course_review_data ) );

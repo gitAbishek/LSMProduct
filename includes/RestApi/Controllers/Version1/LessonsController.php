@@ -264,6 +264,7 @@ class LessonsController extends PostsController {
 			'reviews_allowed'     => $lesson->get_reviews_allowed( $context ),
 			'parent_id'           => $lesson->get_parent_id( $context ),
 			'course_id'           => $lesson->get_course_id( $context ),
+			'featured_image'      => $lesson->get_featured_image( $context ),
 			'categories'          => $this->get_taxonomy_terms( $lesson ),
 			'tags'                => $this->get_taxonomy_terms( $lesson, 'tag' ),
 			'video_source'        => $lesson->get_video_source( $context ),
@@ -492,6 +493,11 @@ class LessonsController extends PostsController {
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
+				'featured_image'      => array(
+					'description' => __( 'Course featured image.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
 				'categories'          => array(
 					'description' => __( 'List of categories.', 'masteriyo' ),
 					'type'        => 'array',
@@ -656,6 +662,11 @@ class LessonsController extends PostsController {
 		// Course ID.
 		if ( isset( $request['course_id'] ) ) {
 			$lesson->set_course_id( $request['course_id'] );
+		}
+
+		// Featured image.
+		if ( isset( $request['featured_image'] ) ) {
+			$lesson->set_featured_image( $request['featured_image'] );
 		}
 
 		// Lesson video source.

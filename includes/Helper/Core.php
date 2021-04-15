@@ -1697,3 +1697,27 @@ function masteriyo_is_edit_myaccount_page() {
 function masteriyo_is_load_login_form_assets() {
 	return ! is_user_logged_in() && masteriyo_is_myaccount_page();
 }
+
+/**
+ * Get value of an option.
+ *
+ * @since 0.1.0
+ *
+ * @param string $setting_name
+ * @param mixed $default
+ *
+ * @return mixed
+ */
+function masteriyo_get_setting_value( $setting_name, $default = null ) {
+	$setting = masteriyo( 'setting' );
+
+	if( is_null( $setting ) ) {
+		return $default;
+	}
+
+	$setting->set_name( $setting_name );
+
+	masteriyo( 'setting.store' )->read( $setting, $default );
+
+	return apply_filters( "masteriyo_setting_{$setting_name}_value", $setting->get_value() );
+}

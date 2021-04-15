@@ -2178,3 +2178,81 @@ function masteriyo_format_country_state_string( $country_string ) {
 		'state'   => $state,
 	);
 }
+
+/**
+ * Check whetheter redirect to cart after course is added.
+ *
+ * @since 0.1.0
+ *
+ * @return bool
+ */
+function masteriyo_cart_redirect_after_add() {
+	$redirect_after_add = get_option( 'masteriyo_cart_redirect_after_add' );
+	$redirect_after_add = masteriyo_string_to_bool( $redirect_after_add );
+	return apply_filters( 'masteriyo_cart_redirect_after_add', $redirect_after_add );
+}
+
+/**
+ * Add precision to a number and return a number.
+ *
+ * @since  0.1.0
+ * @param  float $value Number to add precision to.
+ * @param  bool  $round If should round after adding precision.
+ * @return int|float
+ */
+function masteriyo_add_number_precision( $value, $round = true ) {
+	$cent_precision = pow( 10, masteriyo_get_price_decimals() );
+	$value          = $value * $cent_precision;
+	return $round ? masteriyo_round( $value, masteriyo_get_rounding_precision() - masteriyo_get_price_decimals() ) : $value;
+}
+
+/**
+ * Add precision to an array of number and return an array of int.
+ *
+ * @since  0.1.0
+ * @param  array $value Number to add precision to.
+ * @param  bool  $round Should we round after adding precision?.
+ * @return int|array
+ */
+function masteriyo_add_number_precision_deep( $value, $round = true ) {
+	if ( ! is_array( $value ) ) {
+		return masteriyo_add_number_precision( $value, $round );
+	}
+
+	foreach ( $value as $key => $sub_value ) {
+		$value[ $key ] = masteriyo_add_number_precision_deep( $sub_value, $round );
+	}
+
+	return $value;
+}
+
+/**
+ * Remove precision from a number and return a float.
+ *
+ * @since  0.1.0
+ * @param  float $value Number to add precision to.
+ * @return float
+ */
+function masteriyo_remove_number_precision( $value ) {
+	$cent_precision = pow( 10, masteriyo_get_price_decimals() );
+	return $value / $cent_precision;
+}
+
+/**
+ * Remove precision from an array of number and return an array of int.
+ *
+ * @since  0.1.0
+ * @param  array $value Number to add precision to.
+ * @return int|array
+ */
+function masteriyo_remove_number_precision_deep( $value ) {
+	if ( ! is_array( $value ) ) {
+		return masteriyo_remove_number_precision( $value );
+	}
+
+	foreach ( $value as $key => $sub_value ) {
+		$value[ $key ] = masteriyo_remove_number_precision_deep( $sub_value );
+	}
+
+	return $value;
+}

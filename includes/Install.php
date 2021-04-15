@@ -40,6 +40,8 @@ class Install {
 		// dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_items_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_itemmeta_table_schema( $charset_collate, $base_prefix ) );
+		// dbDelta( self::get_question_table_schema( $charset_collate, $base_prefix ) );
+		dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
 	}
 
 	/**

@@ -9,6 +9,8 @@ defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use ThemeGrill\Masteriyo\Cart\Cart;
+use ThemeGrill\Masteriyo\Cart\Fees;
+use ThemeGrill\Masteriyo\Cart\Totals;
 
 class CartServiceProvider extends AbstractServiceProvider {
 	/**
@@ -39,9 +41,15 @@ class CartServiceProvider extends AbstractServiceProvider {
 	  *
 	  * @since 0.1.0
 	  */
-	 public function register() {
+	  public function register() {
+		$this->getContainer()->add( 'cart.fees', Fees::class );
+
+		$this->getContainer()->add( 'cart.totals', Totals::class );
+
 		$this->getContainer()->add( 'cart', Cart::class, true )
 			->addArgument( 'session' )
-			->addArgument( 'notice' );
+			->addArgument( 'notice' )
+			->addArgument( 'cart.fees');
+
 	 }
 }

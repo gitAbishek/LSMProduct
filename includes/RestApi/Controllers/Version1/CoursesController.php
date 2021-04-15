@@ -486,9 +486,11 @@ class CoursesController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'featured_image'             => array(
-					'description' => __( 'Course featured image.', 'masteriyo' ),
-					'type'        => 'integer',
-					'context'     => array( 'view', 'edit' ),
+					'description'       => __( 'Course featured image.', 'masteriyo' ),
+					'type'              => 'integer',
+					'default'           => null,
+					'validate_callback' => array( $this, 'validate_featured_image' ),
+					'context'           => array( 'view', 'edit' )
 				),
 				'categories'            => array(
 					'description' => __( 'List of categories.', 'masteriyo' ),
@@ -747,5 +749,29 @@ class CoursesController extends PostsController {
 		}
 
 		return $course;
+	}
+
+	/**
+	 * Validate the existence of featured image.
+	 * Since the featured image will use the WordPress attachment.
+	 *
+	 * @param int $featured_image_id Featured image id.
+	 * @return bool|WP_Error
+	 */
+	public function validate_featured_image( $featured_image_id ) {
+		if ( ! is_numeric( $featured_image_id ) ) {
+			return new \WP_Error( 'rest_invalid_type', 'featured image is not of type integer' );
+		}
+
+		$featured_image_id = absint( $featured_image_id );
+		$featured_image    = get_post( $featured_image_id, array(
+			'post_type' => 'attachment'
+		) );
+
+		if( is_null( $featured_image_obj ) ) {
+			return new \WP_Error('rest_invalid_featured_image', 'invalid featured image id');
+		}
+
+		return true;
 	}
 }

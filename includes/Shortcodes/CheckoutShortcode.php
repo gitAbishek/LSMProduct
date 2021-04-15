@@ -48,7 +48,37 @@ class CheckoutShortcode extends Shortcode {
 	public function get_content() {
 		      $data   = $this->get_attributes();
 		$data['cart'] = \masteriyo( 'cart' );
+		$data['courses'] = $this->get_courses_form_cart( \masteriyo('cart') );
 
 		return \masteriyo_get_template_html( 'checkout/form-checkout.php', $data );
+	}
+
+	/**
+	 * Get the valid courses from cart.
+	 *
+	 * @param ThemeGrill\Masteriyo\Cart\Cart $cart Cart.
+	 * @return Course[]
+	 */
+	protected function get_courses_form_cart( $cart ) {
+		$courses = array();
+
+		if( $cart->is_empty() ) {
+			return array();
+		}
+
+		foreach( $cart->get_cart_contents() as $cart_content ) {
+			if ( ! isset( $cart_content['course_id'] ) ) {
+				continue;
+			}
+
+			$course = masteriyo_get_course( $cart_content['course_id'] );
+			if ( is_null( $course ) ) {
+				continue;
+			}
+
+			$courses[] = $course;
+		}
+
+		return $courses;
 	}
 }

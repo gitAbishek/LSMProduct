@@ -164,3 +164,38 @@ function masteriyo_is_single_course_page() {
 function masteriyo_is_course_list_page() {
 	return is_post_type_archive( 'course' );
 }
+
+if ( ! function_exists( 'masteriyo_is_tax_enabled' ) ) {
+
+	/**
+	 * Are store-wide taxes enabled?
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return bool
+	 */
+	function masteriyo_is_tax_enabled() {
+		$calc_taxes = get_option( 'masteriyo_calc_taxes' ) === 'yes';
+		return apply_filters( 'masteriyo_is_tax_enabled', $calc_taxes );
+	}
+}
+
+
+if ( ! function_exists( 'masteriyo_prices_include_tax' ) ) {
+
+	/**
+	 * Are prices inclusive of tax?
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return bool
+	 */
+	function masteriyo_prices_include_tax() {
+		if ( ! masteriyo_is_tax_enabled() ) {
+			return false;
+		}
+
+		$prices_include_tax = get_option( 'masteriyo_prices_include_tax' ) === 'yes';
+		return apply_filters( 'masteriyo_prices_include_tax',  $prices_include_tax );
+	}
+}

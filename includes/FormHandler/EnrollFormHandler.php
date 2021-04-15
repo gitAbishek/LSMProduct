@@ -42,12 +42,12 @@ class EnrollFormHandler {
 		$was_added_to_cart = $this->add_to_cart_handler_simple( $course_id );
 
 		if ( $was_added_to_cart ) {
-			$url = apply_filters( 'masteriyo_add_to_cart_redirect', $url, $adding_to_cart );
+			$url = apply_filters( 'masteriyo_add_to_cart_redirect', '', $adding_to_cart );
 
 			if ( $url ) {
 				wp_safe_redirect( $url );
 				exit;
-			} elseif ( 'yes' === get_option( 'masteriyo_cart_redirect_after_add' ) ) {
+			} elseif ( masteriyo_cart_redirect_after_add() ) {
 				$url = apply_filters( 'masteriyo_cart_redirect_after_add', masteriyo_get_checkout_url(), $adding_to_cart );
 				wp_safe_redirect( $url );
 				exit;

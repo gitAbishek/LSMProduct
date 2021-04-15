@@ -8,8 +8,6 @@
 
 namespace ThemeGrill\Masteriyo\Traits;
 
-use ThemeGrill\Masteriyo\Helper\Number;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -58,7 +56,7 @@ trait ItemTotals {
 	 */
 	public static function round_item_subtotal( $value ) {
 		if ( ! self::round_at_subtotal() ) {
-			$value = Number::round( $value );
+			$value = masteriyo_round( $value );
 		}
 		return $value;
 	}

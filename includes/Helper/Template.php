@@ -438,7 +438,6 @@ if( ! function_exists( 'masteriyo_template_sidebar_row_difficulty' ) ) {
 	function masteriyo_template_sidebar_row_difficulty() {
 		global $course;
 
-		// Bail early if difficulty is not set.
 		$difficulty = $course->get_difficulty();
 
 		// Bail early if difficulty is not set.

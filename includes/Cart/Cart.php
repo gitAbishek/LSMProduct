@@ -98,12 +98,15 @@ class Cart {
 	 * @param \ThemeGrill\Masteriyo\Notice                 $notice Notice.
 	 *
 	 */
-	public function __construct( Session $session, Notice $notice ) {
+	public function __construct( Session $session, Notice $notice, Fees $fees ) {
 		$this->session = $session;
 		$this->notice  = $notice;
+		$this->fees    = $fees;
 
 		// Start the session.
 		$this->session->start();
+
+		$this->fees->set_cart( $this );
 
 		$this->init_hooks();
 	}
@@ -288,7 +291,7 @@ class Cart {
 
 		// If this is a re-order, redirect to the cart page to get rid of the `order_again` query string.
 		if ( $order_again ) {
-			wp_safe_redirect( wc_get_cart_url() );
+			wp_safe_redirect( masteriyo_get_checkout_url() );
 			exit;
 		}
 	}
@@ -323,7 +326,7 @@ class Cart {
 	 * @return array
 	 */
 	private function populate_cart_from_order( $order_id, $cart ) {
-		$order = wc_get_order( $order_id );
+		$order = masteriyo_get_order( $order_id );
 
 		if ( ! $order->get_id() || ! $order->has_status( apply_filters( 'masteriyo_valid_order_statuses_for_order_again', array( 'completed' ) ) ) || ! current_user_can( 'order_again', $order->get_id() ) ) {
 			return;
@@ -372,8 +375,8 @@ class Cart {
 			}
 
 			// Add to cart directly.
-			$cart_id          = WC()->cart->generate_cart_id( $course_id, $variation_id, $variations, $cart_item_data );
-			$course_data      = wc_get_product( $variation_id ? $variation_id : $course_id );
+			$cart_id          = MASTERIYO()->cart->generate_cart_id( $course_id, $variation_id, $variations, $cart_item_data );
+			$course_data      = masteriyo_get_product( $variation_id ? $variation_id : $course_id );
 			$cart[ $cart_id ] = apply_filters(
 				'masteriyo_add_order_again_cart_item',
 				array_merge(
@@ -385,7 +388,7 @@ class Cart {
 						'variation'    => $variations,
 						'quantity'     => $quantity,
 						'data'         => $course_data,
-						'data_hash'    => wc_get_cart_item_data_hash( $course_data ),
+						'data_hash'    => masteriyo_get_cart_item_data_hash( $course_data ),
 					)
 				),
 				$cart_id
@@ -399,7 +402,7 @@ class Cart {
 		$num_items_added             = $num_items_in_cart - $inital_cart_size;
 
 		if ( $num_items_in_original_order > $num_items_added ) {
-			wc_add_notice(
+			masteriyo_add_notice(
 				sprintf(
 					/* translators: %d item count */
 					_n(
@@ -415,7 +418,7 @@ class Cart {
 		}
 
 		if ( 0 < $num_items_added ) {
-			wc_add_notice( __( 'The cart has been filled with the items from your previous order.', 'masteriyo' ) );
+			masteriyo_add_notice( __( 'The cart has been filled with the items from your previous order.', 'masteriyo' ) );
 		}
 
 		return $cart;
@@ -539,7 +542,7 @@ class Cart {
 	 */
 	public function get_total( $context = 'view' ) {
 		$total = apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'total' ) );
-		return 'view' === $context ? apply_filters( 'masteriyo_cart_total', wc_price( $total ) ) : $total;
+		return 'view' === $context ? apply_filters( 'masteriyo_cart_total', masteriyo_price( $total ) ) : $total;
 	}
 
 	/**
@@ -644,7 +647,7 @@ class Cart {
 	 * @param string $value Value to set.
 	 */
 	public function set_subtotal( $value ) {
-		$this->totals['subtotal'] = wc_format_decimal( $value, wc_get_price_decimals() );
+		$this->totals['subtotal'] = masteriyo_format_decimal( $value, masteriyo_get_price_decimals() );
 	}
 
 	/**
@@ -684,7 +687,7 @@ class Cart {
 	 * @param string $value Value to set.
 	 */
 	public function set_cart_contents_total( $value ) {
-		$this->totals['cart_contents_total'] = wc_format_decimal( $value, wc_get_price_decimals() );
+		$this->totals['cart_contents_total'] = masteriyo_format_decimal( $value, masteriyo_get_price_decimals() );
 	}
 
 	/**
@@ -704,7 +707,7 @@ class Cart {
 	 * @param string $value Value to set.
 	 */
 	public function set_total( $value ) {
-		$this->totals['total'] = wc_format_decimal( $value, wc_get_price_decimals() );
+		$this->totals['total'] = masteriyo_format_decimal( $value, masteriyo_get_price_decimals() );
 	}
 
 	/**
@@ -715,7 +718,7 @@ class Cart {
 	 */
 	public function set_total_tax( $value ) {
 		// We round here because this is a total entry, as opposed to line items in other setters.
-		$this->totals['total_tax'] = wc_round_tax_total( $value );
+		$this->totals['total_tax'] = masteriyo_round_tax_total( $value );
 	}
 
 	/**
@@ -725,7 +728,7 @@ class Cart {
 	 * @param string $value Value to set.
 	 */
 	public function set_fee_total( $value ) {
-		$this->totals['fee_total'] = wc_format_decimal( $value, wc_get_price_decimals() );
+		$this->totals['fee_total'] = masteriyo_format_decimal( $value, masteriyo_get_price_decimals() );
 	}
 
 	/**
@@ -868,14 +871,14 @@ class Cart {
 		$result = $this->check_cart_item_validity();
 
 		if ( is_wp_error( $result ) ) {
-			wc_add_notice( $result->get_error_message(), 'error' );
+			masteriyo_add_notice( $result->get_error_message(), 'error' );
 			$return = false;
 		}
 
 		$result = $this->check_cart_item_stock();
 
 		if ( is_wp_error( $result ) ) {
-			wc_add_notice( $result->get_error_message(), 'error' );
+			masteriyo_add_notice( $result->get_error_message(), 'error' );
 			$return = false;
 		}
 
@@ -911,7 +914,7 @@ class Cart {
 	public function check_cart_item_stock() {
 		$error                    = new WP_Error();
 		$course_qty_in_cart       = $this->get_cart_item_quantities();
-		$current_session_order_id = isset( WC()->session->order_awaiting_payment ) ? absint( WC()->session->order_awaiting_payment ) : 0;
+		$current_session_order_id = isset( MASTERIYO()->session->order_awaiting_payment ) ? absint( MASTERIYO()->session->order_awaiting_payment ) : 0;
 
 		foreach ( $this->get_cart() as $cart_item_key => $values ) {
 			$course = $values['data'];
@@ -929,7 +932,7 @@ class Cart {
 			}
 
 			// Check stock based on all items in the cart and consider any held stock within pending orders.
-			$held_stock     = wc_get_held_stock_quantity( $course, $current_session_order_id );
+			$held_stock     = masteriyo_get_held_stock_quantity( $course, $current_session_order_id );
 			$required_stock = $course_qty_in_cart[ $course->get_stock_managed_by_id() ];
 
 			/**
@@ -937,12 +940,12 @@ class Cart {
 			 *
 			 * @since 4.6.0
 			 * @param bool       $has_stock If have enough stock.
-			 * @param WC_Course $course   Course instance.
+			 * @param MASTERIYO_Course $course   Course instance.
 			 * @param array      $values    Cart item values.
 			 */
 			if ( apply_filters( 'masteriyo_cart_item_required_stock_is_not_enough', $course->get_stock_quantity() < ( $held_stock + $required_stock ), $course, $values ) ) {
 				/* translators: 1: course name 2: quantity in stock */
-				$error->add( 'out-of-stock', sprintf( __( 'Sorry, we do not have enough "%1$s" in stock to fulfill your order (%2$s available). We apologize for any inconvenience caused.', 'masteriyo' ), $course->get_name(), wc_format_stock_quantity_for_display( $course->get_stock_quantity() - $held_stock, $course ) ) );
+				$error->add( 'out-of-stock', sprintf( __( 'Sorry, we do not have enough "%1$s" in stock to fulfill your order (%2$s available). We apologize for any inconvenience caused.', 'masteriyo' ), $course->get_name(), masteriyo_format_stock_quantity_for_display( $course->get_stock_quantity() - $held_stock, $course ) ) );
 				return $error;
 			}
 		}
@@ -958,7 +961,7 @@ class Cart {
 	 * @return string
 	 */
 	public function get_item_data( $cart_item, $flat = false ) {
-		return wc_get_formatted_cart_item_data( $cart_item, $flat );
+		return masteriyo_get_formatted_cart_item_data( $cart_item, $flat );
 	}
 
 	/**
@@ -988,7 +991,7 @@ class Cart {
 	 * @return string url to page
 	 */
 	public function get_remove_url( $cart_item_key ) {
-		return wc_get_cart_remove_url( $cart_item_key );
+		return masteriyo_get_cart_remove_url( $cart_item_key );
 	}
 
 	/**
@@ -998,7 +1001,7 @@ class Cart {
 	 * @return string url to page
 	 */
 	public function get_undo_url( $cart_item_key ) {
-		return wc_get_cart_undo_url( $cart_item_key );
+		return masteriyo_get_cart_undo_url( $cart_item_key );
 	}
 
 	/**
@@ -1011,7 +1014,7 @@ class Cart {
 		$tax_totals = array();
 
 		foreach ( $taxes as $key => $tax ) {
-			$code = WC_Tax::get_rate_code( $key );
+			$code = MASTERIYO_Tax::get_rate_code( $key );
 
 			if ( $code || apply_filters( 'masteriyo_cart_remove_taxes_zero_rate_id', 'zero-rated' ) === $key ) {
 				if ( ! isset( $tax_totals[ $code ] ) ) {
@@ -1020,11 +1023,11 @@ class Cart {
 				}
 
 				$tax_totals[ $code ]->tax_rate_id = $key;
-				$tax_totals[ $code ]->is_compound = WC_Tax::is_compound( $key );
-				$tax_totals[ $code ]->label       = WC_Tax::get_rate_label( $key );
+				$tax_totals[ $code ]->is_compound = MASTERIYO_Tax::is_compound( $key );
+				$tax_totals[ $code ]->label       = MASTERIYO_Tax::get_rate_label( $key );
 
-				$tax_totals[ $code ]->amount          += wc_round_tax_total( $tax );
-				$tax_totals[ $code ]->formatted_amount = wc_price( $tax_totals[ $code ]->amount );
+				$tax_totals[ $code ]->amount          += masteriyo_round_tax_total( $tax );
+				$tax_totals[ $code ]->formatted_amount = masteriyo_price( $tax_totals[ $code ]->amount );
 			}
 		}
 
@@ -1044,7 +1047,7 @@ class Cart {
 	public function get_cart_item_tax_classes() {
 		$found_tax_classes = array();
 
-		foreach ( WC()->cart->get_cart() as $item ) {
+		foreach ( MASTERIYO()->cart->get_cart() as $item ) {
 			if ( $item['data'] && $item['data']->is_taxable() ) {
 				$found_tax_classes[] = $item['data']->get_tax_class();
 			}
@@ -1231,7 +1234,7 @@ class Cart {
 		if ( isset( $this->removed_cart_contents[ $cart_item_key ] ) ) {
 			$restore_item                                  = $this->removed_cart_contents[ $cart_item_key ];
 			$this->cart_contents[ $cart_item_key ]         = $restore_item;
-			$this->cart_contents[ $cart_item_key ]['data'] = wc_get_course( $restore_item['variation_id'] ? $restore_item['variation_id'] : $restore_item['course_id'] );
+			$this->cart_contents[ $cart_item_key ]['data'] = masteriyo_get_course( $restore_item['variation_id'] ? $restore_item['variation_id'] : $restore_item['course_id'] );
 
 			do_action( 'masteriyo_restore_cart_item', $cart_item_key, $this );
 
@@ -1254,7 +1257,7 @@ class Cart {
 	 */
 	public function set_quantity( $cart_item_key, $quantity = 1, $refresh_totals = true ) {
 		if ( 0 === $quantity || $quantity < 0 ) {
-			wc_do_deprecated_action( 'masteriyo_before_cart_item_quantity_zero', array( $cart_item_key, $this ), '3.7.0', 'masteriyo_remove_cart_item' );
+			masteriyo_do_deprecated_action( 'masteriyo_before_cart_item_quantity_zero', array( $cart_item_key, $this ), '3.7.0', 'masteriyo_remove_cart_item' );
 			// If we're setting qty to 0 we're removing the item from the cart.
 			return $this->remove_cart_item( $cart_item_key );
 		}
@@ -1286,10 +1289,10 @@ class Cart {
 	 * Get cart's owner.
 	 *
 	 * @since  3.2.0
-	 * @return WC_Customer
+	 * @return MASTERIYO_Customer
 	 */
 	public function get_customer() {
-		return WC()->customer;
+		return masteriyo( 'user' );
 	}
 
 	/**
@@ -1309,7 +1312,7 @@ class Cart {
 
 		do_action( 'masteriyo_before_calculate_totals', $this );
 
-		// new Cart_Totals( $this );
+		new Totals( $this );
 
 		do_action( 'masteriyo_after_calculate_totals', $this );
 	}
@@ -1339,7 +1342,7 @@ class Cart {
 	 * @return Cart_Fees
 	 */
 	public function fees_api() {
-		return $this->fees_api;
+		return $this->fees;
 	}
 
 	/**
@@ -1393,7 +1396,7 @@ class Cart {
 	 * @return string formatted price
 	 */
 	public function get_total_ex_tax() {
-		return apply_filters( 'masteriyo_cart_total_ex_tax', wc_price( max( 0, $this->get_total( 'edit' ) - $this->get_total_tax() ) ) );
+		return apply_filters( 'masteriyo_cart_total_ex_tax', masteriyo_price( max( 0, $this->get_total( 'edit' ) - $this->get_total_tax() ) ) );
 	}
 
 	/**
@@ -1403,7 +1406,7 @@ class Cart {
 	 * @return string formatted price
 	 */
 	public function get_cart_total() {
-		return apply_filters( 'masteriyo_cart_contents_total', wc_price( wc_prices_include_tax() ? $this->get_cart_contents_total() + $this->get_cart_contents_tax() : $this->get_cart_contents_total() ) );
+		return apply_filters( 'masteriyo_cart_contents_total', masteriyo_price( masteriyo_prices_include_tax() ? $this->get_cart_contents_total() + $this->get_cart_contents_tax() : $this->get_cart_contents_total() ) );
 	}
 
 	/**
@@ -1419,19 +1422,19 @@ class Cart {
 		 * If the cart has compound tax, we want to show the subtotal as cart + non-compound taxes (after discount).
 		 */
 		if ( $compound ) {
-			$cart_subtotal = wc_price( $this->get_cart_contents_total() + $this->get_taxes_total( false, false ) );
+			$cart_subtotal = masteriyo_price( $this->get_cart_contents_total() + $this->get_taxes_total( false, false ) );
 
 		} elseif ( $this->display_prices_including_tax() ) {
-			$cart_subtotal = wc_price( $this->get_subtotal() + $this->get_subtotal_tax() );
+			$cart_subtotal = masteriyo_price( $this->get_subtotal() + $this->get_subtotal_tax() );
 
-			if ( $this->get_subtotal_tax() > 0 && ! wc_prices_include_tax() ) {
-				$cart_subtotal .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
+			if ( $this->get_subtotal_tax() > 0 && ! masteriyo_prices_include_tax() ) {
+				$cart_subtotal .= ' <small class="tax_label">' . MASTERIYO()->countries->inc_tax_or_vat() . '</small>';
 			}
 		} else {
-			$cart_subtotal = wc_price( $this->get_subtotal() );
+			$cart_subtotal = masteriyo_price( $this->get_subtotal() );
 
-			if ( $this->get_subtotal_tax() > 0 && wc_prices_include_tax() ) {
-				$cart_subtotal .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
+			if ( $this->get_subtotal_tax() > 0 && masteriyo_prices_include_tax() ) {
+				$cart_subtotal .= ' <small class="tax_label">' . MASTERIYO()->countries->ex_tax_or_vat() . '</small>';
 			}
 		}
 
@@ -1448,11 +1451,11 @@ class Cart {
 	 */
 	public function get_course_price( $course ) {
 		if ( $this->display_prices_including_tax() ) {
-			$course_price = wc_get_price_including_tax( $course );
+			$course_price = masteriyo_get_price_including_tax( $course );
 		} else {
-			$course_price = wc_get_price_excluding_tax( $course );
+			$course_price = masteriyo_get_price_excluding_tax( $course );
 		}
-		return apply_filters( 'masteriyo_cart_course_price', wc_price( $course_price ), $course );
+		return apply_filters( 'masteriyo_cart_course_price', masteriyo_price( $course_price ), $course );
 	}
 
 	/**
@@ -1464,7 +1467,7 @@ class Cart {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param WC_Course $course Course object.
+	 * @param MASTERIYO_Course $course Course object.
 	 * @param int        $quantity Quantity being purchased.
 	 * @return string formatted price
 	 */
@@ -1474,23 +1477,23 @@ class Cart {
 		if ( $course->is_taxable() ) {
 
 			if ( $this->display_prices_including_tax() ) {
-				$row_price       = wc_get_price_including_tax( $course, array( 'qty' => $quantity ) );
-				$course_subtotal = wc_price( $row_price );
+				$row_price       = masteriyo_get_price_including_tax( $course, array( 'qty' => $quantity ) );
+				$course_subtotal = masteriyo_price( $row_price );
 
-				if ( ! wc_prices_include_tax() && $this->get_subtotal_tax() > 0 ) {
-					$course_subtotal .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
+				if ( ! masteriyo_prices_include_tax() && $this->get_subtotal_tax() > 0 ) {
+					$course_subtotal .= ' <small class="tax_label">' . MASTERIYO()->countries->inc_tax_or_vat() . '</small>';
 				}
 			} else {
-				$row_price       = wc_get_price_excluding_tax( $course, array( 'qty' => $quantity ) );
-				$course_subtotal = wc_price( $row_price );
+				$row_price       = masteriyo_get_price_excluding_tax( $course, array( 'qty' => $quantity ) );
+				$course_subtotal = masteriyo_price( $row_price );
 
-				if ( wc_prices_include_tax() && $this->get_subtotal_tax() > 0 ) {
-					$course_subtotal .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
+				if ( masteriyo_prices_include_tax() && $this->get_subtotal_tax() > 0 ) {
+					$course_subtotal .= ' <small class="tax_label">' . MASTERIYO()->countries->ex_tax_or_vat() . '</small>';
 				}
 			}
 		} else {
 			$row_price       = $price * $quantity;
-			$course_subtotal = wc_price( $row_price );
+			$course_subtotal = masteriyo_price( $row_price );
 		}
 
 		return apply_filters( 'masteriyo_cart_course_subtotal', $course_subtotal, $course, $quantity, $this );
@@ -1504,9 +1507,9 @@ class Cart {
 	 * @return string formatted price
 	 */
 	public function get_cart_tax() {
-		$cart_total_tax = wc_round_tax_total( $this->get_cart_contents_tax() + $this->get_fee_tax() );
+		$cart_total_tax = masteriyo_round_tax_total( $this->get_cart_contents_tax() + $this->get_fee_tax() );
 
-		return apply_filters( 'masteriyo_get_cart_tax', $cart_total_tax ? wc_price( $cart_total_tax ) : '' );
+		return apply_filters( 'masteriyo_get_cart_tax', $cart_total_tax ? masteriyo_price( $cart_total_tax ) : '' );
 	}
 
 	/**
@@ -1535,13 +1538,13 @@ class Cart {
 		$total = 0;
 		$taxes = $this->get_taxes();
 		foreach ( $taxes as $key => $tax ) {
-			if ( ! $compound && WC_Tax::is_compound( $key ) ) {
+			if ( ! $compound && MASTERIYO_Tax::is_compound( $key ) ) {
 				continue;
 			}
 			$total += $tax;
 		}
 		if ( $display ) {
-			$total = wc_format_decimal( $total, wc_get_price_decimals() );
+			$total = masteriyo_format_decimal( $total, masteriyo_get_price_decimals() );
 		}
 		return apply_filters( 'masteriyo_cart_taxes_total', $total, $compound, $display, $this );
 	}
@@ -1554,7 +1557,7 @@ class Cart {
 	 * @return mixed formatted price or false if there are none
 	 */
 	public function get_total_discount() {
-		$total_discount = $this->get_discount_total() ? wc_price( $this->get_discount_total() ) : false;
+		$total_discount = $this->get_discount_total() ? masteriyo_price( $this->get_discount_total() ) : false;
 		return apply_filters( 'masteriyo_cart_total_discount', $total_discount, $this );
 	}
 

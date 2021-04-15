@@ -51,15 +51,15 @@ class Fees {
 	);
 
 	/**
-	 * Constructor. Reference to the cart.
+	 * Set cart.
 	 *
 	 * @since 0.1.0
 	 * @throws Exception If missing Cart object.
 	 * @param Cart $cart Cart object.
 	 */
-	public function __construct( &$cart ) {
-		if ( ! is_a( $cart, 'Cart' ) ) {
-			throw new Exception( 'A valid Cart object is required' );
+	public function set_cart( &$cart ) {
+		if ( ! is_a( $cart, 'ThemeGrill\Masteriyo\Cart\Cart' ) ) {
+			throw new \Exception( 'A valid Cart object is required' );
 		}
 
 		$this->cart = $cart;
@@ -75,16 +75,14 @@ class Fees {
 	public function add( $args = array() ) {
 		$fee_props            = (object) wp_parse_args( $args, $this->default_props );
 		$fee_props->name      = $fee_props->name ? $fee_props->name : __( 'Fee', 'masteriyo' );
-		$fee_props->tax_class = in_array( $fee_props->tax_class, array_merge( WC_Tax::get_tax_classes(), WC_Tax::get_tax_class_slugs() ), true ) ? $fee_props->tax_class : '';
-		$fee_props->taxable   = Utils::string_to_bool( $fee_props->taxable );
-		$fee_props->amount    = wc_format_decimal( $fee_props->amount );
+		$fee_props->amount    = masteriyo_format_decimal( $fee_props->amount );
 
 		if ( empty( $fee_props->id ) ) {
 			$fee_props->id = $this->generate_id( $fee_props );
 		}
 
 		if ( array_key_exists( $fee_props->id, $this->fees ) ) {
-			return new WP_Error( 'fee_exists', __( 'Fee has already been added.', 'masteriyo' ) );
+			return new \WP_Error( 'fee_exists', __( 'Fee has already been added.', 'masteriyo' ) );
 		}
 
 		$this->fees[ $fee_props->id ] = $fee_props;
@@ -99,7 +97,7 @@ class Fees {
 	 *
 	 * @return array
 	 */
-	public function get() {
+	public function get_fees() {
 		uasort( $this->fees, array( $this, 'sort_fees_callback' ) );
 
 		return $this->fees;
@@ -112,7 +110,7 @@ class Fees {
 	 *
 	 * @param object[] $raw_fees Array of fees.
 	 */
-	public function set( $raw_fees = array() ) {
+	public function set_fees( $raw_fees = array() ) {
 		$this->fees = array();
 
 		foreach ( $raw_fees as $raw_fee ) {

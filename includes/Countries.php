@@ -6,7 +6,10 @@
  * @version 0.1.0
  */
 
+namespace ThemeGrill\Masteriyo;
+
 defined( 'ABSPATH' ) || exit;
+
 
 use ThemeGrill\Masteriyo\Constants;
 use ThemeGrill\Masteriyo\Traits\Singleton;
@@ -187,7 +190,7 @@ class Countries {
 	 * @return false|array of states
 	 */
 	public function get_states( $cc = null ) {
-		if ( ! isset( $this->states ) ) {
+		if ( empty( $this->states ) ) {
 			$states = include  Constants::get( 'MASTERIYO_PLUGIN_DIR' ). '/i18n/states.php';
 			$this->states = apply_filters( 'masteriyo_states', $states );
 		}
@@ -506,12 +509,9 @@ class Countries {
 	 * @param bool   $escape           If we should escape HTML.
 	 */
 	public function country_dropdown_options( $selected_country = '', $selected_state = '', $escape = false ) {
-		if ( empty( $this->countries ) ) {
-			return;
-		}
-
-		foreach ( $this->countries as $key => $value ) {
-			$states = $this->get_states( $key );
+		foreach ( $this->get_countries() as $key => $value ) {
+			$states = null;
+			// $states = $this->get_states( $key );
 			if ( $states ) {
 				echo '<optgroup label="' . esc_attr( $value ) . '">';
 				foreach ( $states as $state_key => $state_value ) {

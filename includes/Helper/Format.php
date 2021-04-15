@@ -451,9 +451,36 @@ function masteriyo_strtolower( $string ) {
 /**
  * Formats a stock amount by running it through a filter.
  *
+ * @since 0.1.0
+ *
  * @param  int|float $amount Stock amount.
  * @return int|float
  */
 function masteriyo_stock_amount( $amount ) {
 	return apply_filters( 'masteriyo_stock_amount', $amount );
+}
+
+/**
+ * Round a number using the built-in `round` function, but unless the value to round is numeric
+ * (a number or a string that can be parsed as a number), apply 'floatval' first to it
+ * (so it will convert it to 0 in most cases).
+ *
+ * This is needed because in PHP 7 applying `round` to a non-numeric value returns 0,
+ * but in PHP 8 it throws an error. Specifically, in Masteriyo we have a few places where
+ * round('') is often executed.
+ *
+ * @since 0.1.0
+ *
+ * @param mixed $val The value to round.
+ * @param int   $precision The optional number of decimal digits to round to.
+ * @param int   $mode A constant to specify the mode in which rounding occurs.
+ *
+ * @return float The value rounded to the given precision as a float, or the supplied default value.
+ */
+function masteriyo_round( $val, $precision = 0, $mode = PHP_ROUND_HALF_UP ) {
+	$precision = (int) $precision;
+	$mode      = (int) $mode;
+	$val       = is_numeric( $val ) ? $val : (float) $val;
+
+	return round( $val, $precision, $mode );
 }

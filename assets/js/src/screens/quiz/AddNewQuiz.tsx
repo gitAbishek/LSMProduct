@@ -1,90 +1,150 @@
-import 'rc-tabs/assets/index.css';
-
-import React, { Fragment } from 'react';
-import Tabs, { TabPane } from 'rc-tabs';
-import { addQuiz, fetchSection } from '../../utils/api';
-import { useHistory, useParams } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
-
-import Button from 'Components/common/Button';
-import Info from './components/Info';
-import MainLayout from 'Layouts/MainLayout';
-import MainToolbar from 'Layouts/MainToolbar';
-import Questions from './components/Questions';
+import {
+	Box,
+	Button,
+	ButtonGroup,
+	Center,
+	Divider,
+	Flex,
+	Heading,
+	IconButton,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
+	Spinner,
+	Stack,
+	useToast,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { useForm } from 'react-hook-form';
-import { useToasts } from 'react-toast-notifications';
+import React, { useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
+import { useMutation, useQuery } from 'react-query';
+import { useHistory, useParams } from 'react-router-dom';
+
+import routes from '../../constants/routes';
+import urls from '../../constants/urls';
+import API from '../../utils/api';
+import Description from '../courses/components/Description';
+import FeaturedImage from '../courses/components/FeaturedImage';
+import Name from '../courses/components/Name';
+import Info from './components/Info';
+import Questions from './components/Questions';
 
 const AddNewQuiz: React.FC = () => {
 	const { sectionId }: any = useParams();
-	interface Inputs {
-		name: string;
-		description?: string;
-		categories?: any;
-	}
+	const methods = useForm();
+	const history = useHistory();
+	const toast = useToast();
+	const contentAPI = new API(urls.contents);
+	const quizAPI = new API(urls.quizes);
+	const sectionsAPI = new API(urls.sections);
+	const [totalContentCount, setTotalContentCount] = useState<any>(0);
+	const [courseId, setCourseId] = useState<any>(null);
 
-	const { register, handleSubmit } = useForm<Inputs>();
-	const { addToast } = useToasts();
-	const { push } = useHistory();
-
-	const sectionQuery = useQuery([`section${sectionId}`, sectionId], () =>
-		fetchSection(sectionId)
-	);
-
-	const courseId = sectionQuery?.data?.parent_id;
-
-	const addQuizMutation = useMutation(
-		(data: object) =>
-			addQuiz({
-				...data,
-				parent_id: sectionId,
-				course_id: courseId,
-			}),
+	// gets total number of content on section
+	const contentQuery = useQuery(
+		[`content${sectionId}`, sectionId],
+		() => contentAPI.list({ section: sectionId }),
 		{
+			enabled: !!sectionId,
 			onSuccess: (data: any) => {
-				addToast(data?.name + __(' has been added successfully'), {
-					appearance: 'success',
-					autoDismiss: true,
-				});
-				push(`/quiz/${data.id}/edit/questions`);
+				setTotalContentCount(data.length);
+			},
+			onError: () => {
+				history.goBack();
 			},
 		}
 	);
+
+	const sectionQuery = useQuery(
+		[`section${sectionId}`, sectionId],
+		() => sectionsAPI.get(sectionId),
+		{
+			onSuccess: (data: any) => {
+				setCourseId(data.course_id);
+			},
+			onError: () => {
+				history.goBack();
+			},
+		}
+	);
+
+	const addQuiz = useMutation((data: object) => quizAPI.store(data), {
+		onSuccess: (data: any) => {
+			toast({
+				title: __('Lesson Added', 'masteriyo'),
+				description: data.name + __(' is successfully added.', 'masteriyo'),
+				isClosable: true,
+				status: 'success',
+			});
+			history.push(routes.section.replace(':courseId', data.course_id));
+		},
+	});
 	const onSubmit = (data: object) => {
-		addQuizMutation.mutate(data);
+		addQuiz.mutate(data);
 	};
 
 	return (
-		<Fragment>
-			<MainToolbar />
-			<MainLayout>
-				<div>
-					<div className="mto-flex mto-justify-between mto-mb-10">
-						<h1 className="mto-text-xl mto-m-0 mto-font-medium">
-							{__('Add New Quiz', 'masteriyo')}
-						</h1>
-					</div>
-					<div>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<Tabs defaultActiveKey={'1'} animated>
-								<TabPane tab="Info" key="1">
-									<Info register={register} />
-								</TabPane>
-								<TabPane tab="Questions" key="2" disabled></TabPane>
-							</Tabs>
-							<footer className="mto-pt-8 mto-flex mto-border-t mto-border-gray-100 mto-mt-12">
-								<Button layout="primary" className="mto-mr-4" type="submit">
-									{__('Next', 'masteriyo')}
-								</Button>
-								<Button onClick={() => push(`/builder/${courseId}`)}>
-									{__('Cancel', 'masteriyo')}
-								</Button>
-							</footer>
+		<FormProvider {...methods}>
+			<Box bg="white" p="10" shadow="box">
+				{(contentQuery.isLoading || sectionQuery.isLoading) && (
+					<Center minH="xs">
+						<Spinner />
+					</Center>
+				)}
+				{(contentQuery.isSuccess || sectionQuery.isSuccess) && (
+					<Stack direction="column" spacing="8">
+						<Flex aling="center" justify="space-between">
+							<Heading as="h1" fontSize="x-large">
+								{__('Add New Lesson', 'masteriyo')}
+							</Heading>
+							<Menu placement="bottom-end">
+								<MenuButton
+									as={IconButton}
+									icon={<BiDotsVerticalRounded />}
+									variant="outline"
+									rounded="sm"
+									fontSize="large"
+								/>
+								<MenuList>
+									<MenuItem icon={<BiEdit />}>
+										{__('Edit', 'masteriyo')}
+									</MenuItem>
+									<MenuItem icon={<BiTrash />}>
+										{__('Delete', 'masteriyo')}
+									</MenuItem>
+								</MenuList>
+							</Menu>
+						</Flex>
+
+						<form onSubmit={methods.handleSubmit(onSubmit)}>
+							<Stack direction="column" spacing="6">
+								<Name />
+								<Description />
+								<FeaturedImage />
+
+								<Box py="3">
+									<Divider />
+								</Box>
+
+								<ButtonGroup>
+									<Button
+										colorScheme="blue"
+										type="submit"
+										isLoading={addQuiz.isLoading}>
+										{__('Add New Lesson', 'masteriyo')}
+									</Button>
+									<Button variant="outline" onClick={() => history.goBack()}>
+										{__('Cancel', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
+							</Stack>
 						</form>
-					</div>
-				</div>
-			</MainLayout>
-		</Fragment>
+					</Stack>
+				)}
+			</Box>
+		</FormProvider>
 	);
 };
 

@@ -46,6 +46,7 @@ const AddNewLesson: React.FC = () => {
 		[`content${sectionId}`, sectionId],
 		() => contentAPI.list({ section: sectionId }),
 		{
+			enabled: !!sectionId,
 			onSuccess: (data: any) => {
 				setTotalContentCount(data.length);
 			},

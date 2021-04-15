@@ -11,13 +11,17 @@ import {
 	Button,
 	ButtonGroup,
 	Flex,
+	FormControl,
+	FormErrorMessage,
+	FormLabel,
 	Icon,
 	IconButton,
+	Input,
 	Stack,
-	background,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import Editor from 'Components/common/Editor';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiCopy, BiTrash } from 'react-icons/bi';
@@ -36,7 +40,12 @@ interface Props {
 const Question: React.FC<Props> = (props) => {
 	const { questionData, totalQuestionsCount } = props;
 	const toast = useToast();
-	const { register, handleSubmit } = useForm();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		control,
+	} = useForm();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const questionAPI = new API(urls.questions);
 	const cancelRef = useRef<any>();
@@ -141,7 +150,34 @@ const Question: React.FC<Props> = (props) => {
 					</Stack>
 				</Flex>
 				<AccordionPanel>
-					<form onSubmit={handleSubmit(onSubmit)}></form>
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<Stack direction="column" spacing="6">
+							<FormControl isInvalid={!!errors?.name}>
+								<FormLabel>{__('Question Name', 'masteriyo')}</FormLabel>
+								<Input
+									defaultValue={questionData.name}
+									placeholder={__('Your Question Name', 'masteriyo')}
+									{...register('name', {
+										required: __(
+											'You must provide name for the question',
+											'masteriyo'
+										),
+									})}
+								/>
+								<FormErrorMessage>
+									{errors?.name && errors?.name?.message}
+								</FormErrorMessage>
+							</FormControl>
+							<FormControl>
+								<FormLabel>{__('Question Description', 'masteriyo')}</FormLabel>
+								<Editor
+									name="description"
+									defaultValue={questionData.description}
+									control={control}
+								/>
+							</FormControl>
+						</Stack>
+					</form>
 				</AccordionPanel>
 			</AccordionItem>
 			<AlertDialog

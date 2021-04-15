@@ -70,7 +70,7 @@ const MainToolbar = () => {
 									as={NavLink}
 									sx={navLinkStyles}
 									_activeLink={navActiveStyles}
-									to={routes.courses.add}>
+									to={routes.settings}>
 									<ListIcon as={BiCog} />
 									Settings
 								</Link>

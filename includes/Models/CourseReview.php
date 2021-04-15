@@ -60,9 +60,9 @@ class CourseReview extends Model {
 		'karma'        => 0,
 		'status'       => 'approve',
 		'agent'        => '',
-		'type'         => 'masteriyo_review',
+		'type'         => 'course_review',
 		'parent'       => 0,
-		'user_id'      => 0,
+		'author_id'    => 0,
 	);
 
 	/**
@@ -239,7 +239,7 @@ class CourseReview extends Model {
 	}
 
 	/**
-	 * Get user_id.
+	 * Get author_id.
 	 *
 	 * @since  0.1.0
 	 *
@@ -247,8 +247,8 @@ class CourseReview extends Model {
 	 *
 	 * @return int
 	 */
-	public function get_user_id( $context = 'view' ) {
-		return $this->get_prop( 'user_id', $context );
+	public function get_author_id( $context = 'view' ) {
+		return $this->get_prop( 'author_id', $context );
 	}
 
 	/*
@@ -390,13 +390,13 @@ class CourseReview extends Model {
 	}
 
 	/**
-	 * Set user_id.
+	 * Set author_id.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param int $user_id User ID.
+	 * @param int $author_id User ID.
 	 */
-	public function set_user_id( $user_id ) {
-		$this->set_prop( 'user_id', absint( $user_id ) );
+	public function set_author_id( $author_id ) {
+		$this->set_prop( 'author_id', absint( $author_id ) );
 	}
 }

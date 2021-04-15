@@ -1688,17 +1688,6 @@ function masteriyo_is_edit_myaccount_page() {
 }
 
 /**
- * Check if assets for login form should be loaded.
- *
- * @since 0.1.0
- *
- * @return boolean
- */
-function masteriyo_is_load_login_form_assets() {
-	return ! is_user_logged_in() && masteriyo_is_myaccount_page();
-}
-
-/**
  * Get value of an option.
  *
  * @since 0.1.0

@@ -36,8 +36,7 @@ interface Props {
 
 const QuestionBuilder: React.FC<Props> = (props) => {
 	const { quizId, courseId } = props;
-	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [deletingCourse, setDeletingCourse] = useState(Number);
+
 	const [totalQuestionsCount, setTotalQuestionsCount] = useState<any>('0');
 	const questionsAPI = new API(urls.questions);
 
@@ -71,30 +70,6 @@ const QuestionBuilder: React.FC<Props> = (props) => {
 
 	return (
 		<Stack direction="column" spacing="6">
-			<Flex
-				py="3"
-				borderBottom="1px"
-				borderColor="gray.100"
-				align="center"
-				justify="space-between">
-				<Heading fontSize="lg" fontWeight="medium">
-					Questions
-				</Heading>
-
-				<Menu placement="bottom-end">
-					<MenuButton
-						as={IconButton}
-						icon={<BiDotsVerticalRounded />}
-						variant="outline"
-						rounded="sm"
-						size="sm"
-						fontSize="large"
-					/>
-					<MenuList>
-						<MenuItem icon={<BiTrash />}>{__('Delete', 'masteriyo')}</MenuItem>
-					</MenuList>
-				</Menu>
-			</Flex>
 			{questionQuery.isLoading && (
 				<Center minH="xs">
 					<Spinner />

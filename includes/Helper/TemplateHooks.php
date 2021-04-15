@@ -24,6 +24,7 @@ add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sideb
 add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_hours', 50 );
 add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_lectures', 60 );
 add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_difficulty', 70 );
+add_action( 'masteriyo_single_course_faqs_content', 'masteriyo_single_course_faqs_content', 70 );
 
 /**
  * My account page.

@@ -2,8 +2,15 @@ function selectTab(tabIndex) {
     var countTab;
     //Hide All Tabs
     for(countTab=1;countTab<=4;countTab++){
-        document.getElementById('tab'+ countTab+'Content').style.display="none";
-        document.getElementById('tab' + countTab).classList.remove("active-tab");
+		var tab_content = document.getElementById('tab'+ countTab+'Content');
+		var tab_handle = document.getElementById('tab' + countTab);
+
+        if ( tab_content ) {
+			tab_content.style.display="none";
+		}
+		if ( tab_handle ) {
+			tab_handle.classList.remove("active-tab");
+		}
     }
 
     //Show the Selected Tab

@@ -1688,17 +1688,6 @@ function masteriyo_is_edit_myaccount_page() {
 }
 
 /**
- * Check if assets for login form should be loaded.
- *
- * @since 0.1.0
- *
- * @return boolean
- */
-function masteriyo_is_load_login_form_assets() {
-	return ! is_user_logged_in() && masteriyo_is_myaccount_page();
-}
-
-/**
  * Get value of an option.
  *
  * @since 0.1.0
@@ -1720,4 +1709,21 @@ function masteriyo_get_setting_value( $setting_name, $default = null ) {
 	masteriyo( 'setting.store' )->read( $setting, $default );
 
 	return apply_filters( "masteriyo_setting_{$setting_name}_value", $setting->get_value() );
+}
+
+/**
+ * See if a course has FAQs.
+ *
+ * @param integer $course_id
+ *
+ * @return boolean
+ */
+function masteriyo_course_has_faqs( $course_id ) {
+	$faqs = masteriyo_get_faqs(
+		array(
+			'parent_id' => $course_id,
+		)
+	);
+
+	return count( $faqs ) > 0;
 }

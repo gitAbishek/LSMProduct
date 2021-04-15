@@ -3,6 +3,7 @@ import {
 	Button,
 	ButtonGroup,
 	Center,
+	Divider,
 	Flex,
 	Heading,
 	Spinner,
@@ -25,6 +26,7 @@ import urls from '../../constants/urls';
 import API from '../../utils/api';
 import Description from './components/Description';
 import Name from './components/Name';
+import QuestionBuilder from './components/QuestionBuilder';
 
 const EditQuiz: React.FC = () => {
 	const { quizId }: any = useParams();
@@ -38,6 +40,9 @@ const EditQuiz: React.FC = () => {
 		py: '4',
 	};
 
+	const tabPanelStyles = {
+		px: '0',
+	};
 	// gets total number of content on section
 	const quizQuery = useQuery(
 		[`quiz${quizId}`, quizId],
@@ -80,26 +85,25 @@ const EditQuiz: React.FC = () => {
 					<Stack direction="column" spacing="8">
 						<Flex aling="center" justify="space-between">
 							<Heading as="h1" fontSize="x-large">
-								{__('Add New Quiz', 'masteriyo')}
+								{__('Edit Quiz:', 'masteriyo')} {quizQuery.data.name}
 							</Heading>
 						</Flex>
 
 						<Tabs>
 							<TabList justifyContent="center" borderBottom="1px">
 								<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles} isDisabled>
-									{__('Questions', 'masteriyo')}
-								</Tab>
-								<Tab sx={tabStyles} isDisabled>
-									{__('Settings', 'masteriyo')}
-								</Tab>
+								<Tab sx={tabStyles}>{__('Questions', 'masteriyo')}</Tab>
+								<Tab sx={tabStyles}>{__('Settings', 'masteriyo')}</Tab>
 							</TabList>
 							<TabPanels>
-								<TabPanel px="0">
+								<TabPanel sx={tabPanelStyles}>
 									<form onSubmit={methods.handleSubmit(onSubmit)}>
 										<Stack direction="column" spacing="6">
 											<Name defaultValue={quizQuery.data.name} />
 											<Description defaultValue={quizQuery.data.description} />
+											<Box py="3">
+												<Divider />
+											</Box>
 											<ButtonGroup>
 												<Button
 													colorScheme="blue"
@@ -115,6 +119,12 @@ const EditQuiz: React.FC = () => {
 											</ButtonGroup>
 										</Stack>
 									</form>
+								</TabPanel>
+								<TabPanel sx={tabPanelStyles}>
+									<QuestionBuilder
+										courseId={quizQuery.data.course_id}
+										quizId={quizId}
+									/>
 								</TabPanel>
 							</TabPanels>
 						</Tabs>

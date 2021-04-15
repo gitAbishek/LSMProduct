@@ -530,11 +530,6 @@ class QuestionsController extends PostsController {
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'course_id'         => array(
-					'description' => __( 'Course ID.', 'masteriyo' ),
-					'type'        => 'integer',
-					'context'     => array( 'view', 'edit' ),
-				),
 				'permalink'         => array(
 					'description' => __( 'Question URL.', 'masteriyo' ),
 					'type'        => 'string',
@@ -574,11 +569,19 @@ class QuestionsController extends PostsController {
 				'parent_id'             => array(
 					'description' => __( 'Course parent ID.', 'masteriyo' ),
 					'type'        => 'integer',
+					'required'    => true,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'course_id'         => array(
+					'description' => __( 'Course ID.', 'masteriyo' ),
+					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'menu_order'        => array(
 					'description' => __( 'Menu order, used to custom sort questions.', 'masteriyo' ),
 					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'description'       => array(

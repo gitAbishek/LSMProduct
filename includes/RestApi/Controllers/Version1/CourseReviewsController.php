@@ -260,7 +260,7 @@ class CourseReviewsController extends CommentsController {
 			'agent'        => $course_review->get_agent( $context ),
 			'type'         => $course_review->get_type( $context ),
 			'parent'       => $course_review->get_parent( $context ),
-			'user_id'      => $course_review->get_user_id( $context ),
+			'author_id'    => $course_review->get_author_id( $context ),
 		);
 
 		return $data;
@@ -281,7 +281,7 @@ class CourseReviewsController extends CommentsController {
 			'paged'    => $request['page'],
 			'per_page' => $request['per_page'],
 			's'        => $request['search'],
-			'type'     => 'masteriyo_review',
+			'type'     => 'course_review',
 		);
 
 		/**
@@ -381,7 +381,7 @@ class CourseReviewsController extends CommentsController {
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'user_id'      => array(
+				'author_id'      => array(
 					'description' => __( 'The User ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
@@ -439,18 +439,18 @@ class CourseReviewsController extends CommentsController {
 		}
 
 		// Course Review Author.
-		if ( isset( $request['name'] ) ) {
-			$course_review->set_name( $request['name'] );
+		if ( isset( $request['author_name'] ) ) {
+			$course_review->set_author_name( $request['author_name'] );
 		}
 
 		// Course Review Author Email.
-		if ( isset( $request['email'] ) ) {
-			$course_review->set_email( $request['email'] );
+		if ( isset( $request['author_email'] ) ) {
+			$course_review->set_author_email( $request['author_email'] );
 		}
 
 		// Course Review Author URL.
-		if ( isset( $request['url'] ) ) {
-			$course_review->set_url( $request['url'] );
+		if ( isset( $request['author_url'] ) ) {
+			$course_review->set_author_url( $request['author_url'] );
 		}
 
 		// Course Review Author IP.
@@ -464,8 +464,8 @@ class CourseReviewsController extends CommentsController {
 		}
 
 		// Course Review Content.
-		if ( isset( $request['description'] ) ) {
-			$course_review->set_description( $request['description'] );
+		if ( isset( $request['content'] ) ) {
+			$course_review->set_content( $request['content'] );
 		}
 
 		// Course Review Karma.
@@ -494,8 +494,8 @@ class CourseReviewsController extends CommentsController {
 		}
 
 		// User ID.
-		if ( isset( $request['user_id'] ) ) {
-			$course_review->set_user_id( $request['user_id'] );
+		if ( isset( $request['author_id'] ) ) {
+			$course_review->set_author_id( $request['author_id'] );
 		}
 
 		// Allow set meta_data.

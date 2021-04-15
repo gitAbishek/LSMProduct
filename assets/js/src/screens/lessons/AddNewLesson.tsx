@@ -56,6 +56,7 @@ const AddNewLesson: React.FC = () => {
 		}
 	);
 
+	// checks whether section exist or not
 	const sectionQuery = useQuery(
 		[`section${sectionId}`, sectionId],
 		() => sectionsAPI.get(sectionId),
@@ -69,6 +70,7 @@ const AddNewLesson: React.FC = () => {
 		}
 	);
 
+	// adds lesson on the database
 	const addLesson = useMutation((data: object) => lessonAPI.store(data), {
 		onSuccess: (data: any) => {
 			toast({

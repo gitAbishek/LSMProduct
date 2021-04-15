@@ -1,19 +1,18 @@
 import 'rc-tabs/assets/index.css';
 
-import React, { Fragment, useState } from 'react';
-import Tabs, { TabPane } from 'rc-tabs';
-import { fetchQuiz, updateQuiz } from '../../utils/api';
-import { useHistory, useParams } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
-
+import { __ } from '@wordpress/i18n';
 import Button from 'Components/common/Button';
-import Info from './components/Info';
 import MainLayout from 'Layouts/MainLayout';
 import MainToolbar from 'Layouts/MainToolbar';
-import Questions from './components/Questions';
-import { __ } from '@wordpress/i18n';
+import Tabs, { TabPane } from 'rc-tabs';
+import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useMutation, useQuery } from 'react-query';
+import { useHistory, useParams } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
+
+import { fetchQuiz, updateQuiz } from '../../utils/api';
+import Questions from './components/Questions';
 
 const EditQuiz: React.FC = () => {
 	const { quizId, step }: any = useParams();
@@ -80,13 +79,7 @@ const EditQuiz: React.FC = () => {
 								activeKey={currentTab}
 								animated
 								onChange={onTabChange}>
-								<TabPane tab="Info" key="1">
-									<Info
-										register={register}
-										name={quizQuery?.data?.name}
-										description={quizQuery?.data?.description}
-									/>
-								</TabPane>
+								<TabPane tab="Info" key="1"></TabPane>
 								<TabPane tab="Questions" key="2">
 									<Questions
 										quizId={quizId}

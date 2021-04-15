@@ -10,7 +10,7 @@ const routes = {
 		edit: '/builder/lesson/edit/:lessonId',
 	},
 	quiz: {
-		add: '/builder/quiz/add-new-quiz',
+		add: '/builder/quiz/:sectionId/add-new-quiz',
 		edit: '/builder/quiz/edit/:quizId/:step?',
 	},
 

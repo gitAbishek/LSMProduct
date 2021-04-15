@@ -5,11 +5,6 @@ import {
 	Center,
 	Flex,
 	Heading,
-	IconButton,
-	Menu,
-	MenuButton,
-	MenuItem,
-	MenuList,
 	Spinner,
 	Stack,
 	Tab,
@@ -28,6 +23,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
+import { mergeDeep } from '../../utils/mergeDeep';
 import Description from './components/Description';
 import Name from './components/Name';
 
@@ -87,8 +83,15 @@ const AddNewQuiz: React.FC = () => {
 			history.push(routes.section.replace(':courseId', data.course_id));
 		},
 	});
+
 	const onSubmit = (data: object) => {
-		const newData = addQuiz.mutate(data);
+		const newData = {
+			course_id: courseId,
+			parent_id: sectionId,
+			menu_order: totalContentCount + 1,
+		};
+
+		addQuiz.mutate(mergeDeep(data, newData));
 	};
 
 	return (
@@ -103,7 +106,7 @@ const AddNewQuiz: React.FC = () => {
 					<Stack direction="column" spacing="8">
 						<Flex aling="center" justify="space-between">
 							<Heading as="h1" fontSize="x-large">
-								{__('Add New Lesson', 'masteriyo')}
+								{__('Add New Quiz', 'masteriyo')}
 							</Heading>
 						</Flex>
 

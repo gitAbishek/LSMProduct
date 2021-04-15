@@ -26,19 +26,30 @@ import { useMutation, useQueryClient } from 'react-query';
 import { Sortable } from '../../../assets/icons';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
+import { mergeDeep } from '../../../utils/mergeDeep';
 
 interface Props {
 	questionData: any;
+	totalQuestionsCount: any;
 }
 
 const Question: React.FC<Props> = (props) => {
-	const { questionData } = props;
+	const { questionData, totalQuestionsCount } = props;
 	const toast = useToast();
 	const { register, handleSubmit } = useForm();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const questionAPI = new API(urls.questions);
 	const cancelRef = useRef<any>();
 	const queryClient = useQueryClient();
+
+	const duplicateQuestion = useMutation(
+		(data: object) => questionAPI.store(data),
+		{
+			onSuccess: (data) => {
+				queryClient.invalidateQueries(`questions${data.parent_id}`);
+			},
+		}
+	);
 
 	const updateQuestion = useMutation(
 		(data: object) => questionAPI.update(questionData.id, data),
@@ -58,7 +69,18 @@ const Question: React.FC<Props> = (props) => {
 			queryClient.invalidateQueries(`questions${data.parent_id}`);
 		},
 	});
+	console.log(questionData);
 
+	const onDuplicatePress = () => {
+		const data = {
+			name: questionData.name,
+			description: questionData.description,
+			parent_id: questionData.parent_id,
+			course_id: questionData.course_id,
+			menu_order: totalQuestionsCount + 1,
+		};
+		duplicateQuestion.mutate(data);
+	};
 	const onSubmit = (data: object) => {
 		updateQuestion.mutate(data);
 	};
@@ -103,6 +125,7 @@ const Question: React.FC<Props> = (props) => {
 							icon={<BiCopy />}
 							textAlign="right"
 							minW="auto"
+							onClick={onDuplicatePress}
 						/>
 						<IconButton
 							variant="unstyled"

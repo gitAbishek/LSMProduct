@@ -1,28 +1,14 @@
 import {
 	Accordion,
-	AccordionButton,
-	AccordionItem,
-	AccordionPanel,
 	Alert,
 	AlertIcon,
-	Box,
-	Button,
 	Center,
-	Flex,
-	Heading,
-	Icon,
-	IconButton,
-	Menu,
-	MenuButton,
-	MenuItem,
-	MenuList,
 	Spinner,
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
 import React, { useState } from 'react';
-import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import urls from '../../../constants/urls';
@@ -88,7 +74,10 @@ const QuestionBuilder: React.FC<Props> = (props) => {
 					) : (
 						<Accordion allowToggle>
 							{questionQuery.data.map((question: any) => (
-								<Question questionData={question} />
+								<Question
+									questionData={question}
+									totalQuestionsCount={totalQuestionsCount}
+								/>
 							))}
 						</Accordion>
 					)}

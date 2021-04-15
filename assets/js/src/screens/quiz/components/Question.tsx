@@ -107,6 +107,13 @@ const Question: React.FC<Props> = (props) => {
 		setDeleteModalOpen(false);
 	};
 
+	const iconStyles = {
+		fontSize: 'x-large',
+		color: 'gray.500',
+		minW: 'auto',
+		_hover: { color: 'blue.500' },
+	};
+
 	return (
 		<>
 			<AccordionItem
@@ -127,23 +134,16 @@ const Question: React.FC<Props> = (props) => {
 					<Stack direction="row" spacing="2">
 						<IconButton
 							variant="unstyled"
-							fontSize="x-large"
-							color="gray.500"
-							_hover={{ color: 'blue.500' }}
+							sx={iconStyles}
 							aria-label={__('Duplicate', 'masteriyo')}
 							icon={<BiCopy />}
-							textAlign="right"
-							minW="auto"
 							onClick={onDuplicatePress}
 						/>
 						<IconButton
 							variant="unstyled"
-							fontSize="x-large"
-							color="gray.500"
-							_hover={{ color: 'blue.500' }}
+							sx={iconStyles}
 							aria-label={__('Delete', 'masteriyo')}
 							icon={<BiTrash />}
-							textAlign="right"
 							minW="auto"
 							onClick={onDeletePress}
 						/>

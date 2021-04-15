@@ -172,7 +172,7 @@ abstract class CommentsController extends CrudController {
 		 *
 		 * @param array $params JSON Schema-formatted collection parameters.
 		 */
-		return apply_filters( 'rest_comment_collection_params', $params );
+		return apply_filters( 'masteriyo_rest_comment_collection_params', $params );
 	}
 
 	/**

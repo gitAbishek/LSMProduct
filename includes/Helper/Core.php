@@ -2013,7 +2013,7 @@ function masteriyo_get_password_reset_link( $reset_key, $user_id ) {
 	return add_query_arg(
 		array(
 			'key' => $reset_key,
-			'id' => $user_id
+			'id'  => $user_id,
 		),
 		masteriyo_get_account_endpoint_url( 'reset-password' )
 	);
@@ -2120,22 +2120,61 @@ function masteriyo_add_post_state( $post_states, $post ) {
 	return $post_states;
 }
 
-function_exists( 'add_filter' ) && add_filter( 'display_post_states', 'masteriyo_add_post_state', 10, 2 );
+function masteriyo_asort_by_locale( &$data, $locale = '' ) {
+	// Use Collator if PHP Internationalization Functions (php-intl) is available.
+	if ( class_exists( 'Collator' ) ) {
+		$locale   = $locale ? $locale : get_locale();
+		$collator = new Collator( $locale );
+		$collator->asort( $data, Collator::SORT_STRING );
+		return $data;
+	}
 
-/**
- * Check if the current user is admin.
- *
- * @return boolean
- */
-function masteriyo_is_current_user_admin() {
-    return in_array( 'administrator',  wp_get_current_user()->roles );
+	$raw_data = $data;
+
+	array_walk(
+		$data,
+		function ( &$value ) {
+			$value = remove_accents( html_entity_decode( $value ) );
+		}
+	);
+
+	uasort( $data, 'strcmp' );
+
+	foreach ( $data as $key => $val ) {
+		$data[ $key ] = $raw_data[ $key ];
+	}
+
+	return $data;
 }
 
 /**
- * Check if the current user is masteriyo manager.
+ * Get the store's base location.
  *
- * @return boolean
+ * @since 0.1.0
+ * @return array
  */
-function masteriyo_is_current_user_manager() {
-    return in_array( 'masteriyo_manager',  wp_get_current_user()->roles );
+function masteriyo_get_base_location() {
+	$default = apply_filters( 'masteriyo_get_base_location', get_option( 'masteriyo_default_country' ) );
+
+	return masteriyo_format_country_state_string( $default );
+}
+
+/**
+ * Formats a string in the format COUNTRY:STATE into an array.
+ *
+ * @since 2.3.0
+ * @param  string $country_string Country string.
+ * @return array
+ */
+function masteriyo_format_country_state_string( $country_string ) {
+	if ( strstr( $country_string, ':' ) ) {
+		list( $country, $state ) = explode( ':', $country_string );
+	} else {
+		$country = $country_string;
+		$state   = '';
+	}
+	return array(
+		'country' => $country,
+		'state'   => $state,
+	);
 }

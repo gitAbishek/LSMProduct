@@ -18,12 +18,15 @@ const SectionBuilder = () => {
 	const courseAPI = new API(urls.courses);
 	const sectionAPI = new API(urls.sections);
 	const [totalSectionsLength, setTotalSectionsLength] = useState<number>(0);
-	const courseQuery = useQuery(['builderCourse', courseId], () =>
-		courseAPI.get(courseId)
+	const courseQuery = useQuery(
+		['builderCourse', courseId],
+		() => courseAPI.get(courseId),
+		{
+			onError: () => {
+				courseQuery.isError && history.push(routes.courses.list);
+			},
+		}
 	);
-
-	// Redirect to list page if course is not found
-	courseQuery.isError && history.push(routes.courses.list);
 
 	const sectionQuery = useQuery(
 		['builderSections', courseId],
@@ -35,14 +38,11 @@ const SectionBuilder = () => {
 		}
 	);
 
-	const addSection = useMutation(
-		(newSection: any) => sectionAPI.store(newSection),
-		{
-			onSuccess: () => {
-				queryClient.invalidateQueries('builderSections');
-			},
-		}
-	);
+	const addSection = useMutation((data: any) => sectionAPI.store(data), {
+		onSuccess: () => {
+			queryClient.invalidateQueries('builderSections');
+		},
+	});
 
 	const onAddNewSectionPress = () => {
 		addSection.mutate({

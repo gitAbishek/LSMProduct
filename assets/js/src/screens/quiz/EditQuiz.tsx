@@ -1,109 +1,127 @@
-import 'rc-tabs/assets/index.css';
-
+import {
+	Box,
+	Button,
+	ButtonGroup,
+	Center,
+	Flex,
+	Heading,
+	Spinner,
+	Stack,
+	Tab,
+	TabList,
+	TabPanel,
+	TabPanels,
+	Tabs,
+	useToast,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Button from 'Components/common/Button';
-import MainLayout from 'Layouts/MainLayout';
-import MainToolbar from 'Layouts/MainToolbar';
-import Tabs, { TabPane } from 'rc-tabs';
-import React, { Fragment, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
-import { useToasts } from 'react-toast-notifications';
 
-import { fetchQuiz, updateQuiz } from '../../utils/api';
-import Questions from './components/Questions';
+import routes from '../../constants/routes';
+import urls from '../../constants/urls';
+import API from '../../utils/api';
+import Description from './components/Description';
+import Name from './components/Name';
 
 const EditQuiz: React.FC = () => {
-	const { quizId, step }: any = useParams();
-	const [currentTab, setCurrentTab] = useState(
-		step === 'questions' ? '2' : '1'
+	const { quizId }: any = useParams();
+	const methods = useForm();
+	const history = useHistory();
+	const toast = useToast();
+	const quizAPI = new API(urls.quizes);
+
+	const tabStyles = {
+		fontWeight: 'medium',
+		py: '4',
+	};
+
+	// gets total number of content on section
+	const quizQuery = useQuery(
+		[`quiz${quizId}`, quizId],
+		() => quizAPI.get(quizId),
+		{
+			enabled: !!quizId,
+			onError: () => {
+				history.goBack();
+			},
+		}
 	);
-	interface Inputs {
-		name: string;
-		description?: string;
-		categories?: any;
-	}
 
-	const { register, handleSubmit } = useForm<Inputs>();
-	const { addToast } = useToasts();
-	const { push } = useHistory();
-
-	const quizQuery = useQuery([`quiz${quizId}`, quizId], () =>
-		fetchQuiz(quizId)
-	);
-
-	const courseId = quizQuery?.data?.parent_id;
-
-	const updateQuizMutation = useMutation(
-		(data: object) => updateQuiz(quizId, data),
+	const updateQuiz = useMutation(
+		(data: object) => quizAPI.update(quizId, data),
 		{
 			onSuccess: (data: any) => {
-				addToast(data?.name + __(' has been updated successfully'), {
-					appearance: 'success',
-					autoDismiss: true,
+				toast({
+					title: __('Quiz Added', 'masteriyo'),
+					description: data.name + __(' is successfully added.', 'masteriyo'),
+					isClosable: true,
+					status: 'success',
 				});
 			},
 		}
 	);
+
 	const onSubmit = (data: object) => {
-		updateQuizMutation.mutate(data);
-	};
-
-	const navigateTab = () => {
-		if (currentTab === '1') {
-			setCurrentTab('2');
-		} else if (currentTab === '2') {
-			setCurrentTab('3');
-		}
-	};
-
-	const onTabChange = (activeKey: string) => {
-		setCurrentTab(activeKey);
+		updateQuiz.mutate(data);
 	};
 
 	return (
-		<Fragment>
-			<MainToolbar />
-			<MainLayout>
-				<div>
-					<div className="mto-flex mto-justify-between mto-mb-10">
-						<h1 className="mto-text-xl mto-m-0 mto-font-medium">
-							{__('Add New Quiz', 'masteriyo')}
-						</h1>
-					</div>
-					<div>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<Tabs
-								defaultActiveKey={'1'}
-								activeKey={currentTab}
-								animated
-								onChange={onTabChange}>
-								<TabPane tab="Info" key="1"></TabPane>
-								<TabPane tab="Questions" key="2">
-									<Questions
-										quizId={quizId}
-										courseId={quizQuery?.data?.course_id}
-									/>
-								</TabPane>
-							</Tabs>
-							<footer className="mto-pt-8 mto-flex mto-border-t mto-border-gray-100 mto-mt-12">
-								<Button
-									layout="primary"
-									className="mto-mr-4"
-									type="submit"
-									onClick={navigateTab}>
-									{__('Next', 'masteriyo')}
-								</Button>
-								<Button onClick={() => push(`/builder/${courseId}`)}>
-									{__('Cancel', 'masteriyo')}
-								</Button>
-							</footer>
-						</form>
-					</div>
-				</div>
-			</MainLayout>
-		</Fragment>
+		<FormProvider {...methods}>
+			<Box bg="white" p="10" shadow="box">
+				{quizQuery.isLoading && (
+					<Center minH="xs">
+						<Spinner />
+					</Center>
+				)}
+				{quizQuery.isSuccess && (
+					<Stack direction="column" spacing="8">
+						<Flex aling="center" justify="space-between">
+							<Heading as="h1" fontSize="x-large">
+								{__('Add New Quiz', 'masteriyo')}
+							</Heading>
+						</Flex>
+
+						<Tabs>
+							<TabList justifyContent="center" borderBottom="1px">
+								<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
+								<Tab sx={tabStyles} isDisabled>
+									{__('Questions', 'masteriyo')}
+								</Tab>
+								<Tab sx={tabStyles} isDisabled>
+									{__('Settings', 'masteriyo')}
+								</Tab>
+							</TabList>
+							<TabPanels>
+								<TabPanel px="0">
+									<form onSubmit={methods.handleSubmit(onSubmit)}>
+										<Stack direction="column" spacing="6">
+											<Name defaultValue={quizQuery.data.name} />
+											<Description defaultValue={quizQuery.data.description} />
+											<ButtonGroup>
+												<Button
+													colorScheme="blue"
+													type="submit"
+													isLoading={updateQuiz.isLoading}>
+													{__('Update', 'masteriyo')}
+												</Button>
+												<Button
+													variant="outline"
+													onClick={() => history.goBack()}>
+													{__('Cancel', 'masteriyo')}
+												</Button>
+											</ButtonGroup>
+										</Stack>
+									</form>
+								</TabPanel>
+							</TabPanels>
+						</Tabs>
+					</Stack>
+				)}
+			</Box>
+		</FormProvider>
 	);
 };
 

@@ -11,7 +11,7 @@ const routes = {
 	},
 	quiz: {
 		add: '/builder/quiz/:sectionId/add-new-quiz',
-		edit: '/builder/quiz/edit/:quizId/:step?',
+		edit: '/builder/quiz/edit/:quizId',
 	},
 
 	settings: 'settings',

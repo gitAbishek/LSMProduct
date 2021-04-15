@@ -163,4 +163,13 @@
     .certificate-list ul li:last-child{
         @apply mto-border-0;
     }
+
+    /* My Account */
+    .account-holder-detail-more-info-table {
+        @apply mto-space-x-10;
+    }
+    .account-holder-detail-more-info-table > ul{
+        @apply mto-m-0 mto-space-y-5;
+    }
+
 }

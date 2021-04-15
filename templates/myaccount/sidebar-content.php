@@ -22,7 +22,7 @@ do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 <div class="md:mto-w-full mto-p-8 mto-pr-0 md:mto-border-r">
 	<div class="mto-flex mto-w-full mto-items-center mto-space-x-4 mto-mb-10">
 		<img class="mto-inline-block mto-h-10 mto-w-10 mto-rounded-full mto-ring-2 mto-ring-white mto-shadow-lg" src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" alt="" />
-		<div>
+		<div class="member-detail">
 			<h2 class="mto-flex mto-font-semibold mto-text-sm mto-space-x-2 mto-mb-0">
 				<a
 					id="label-username"

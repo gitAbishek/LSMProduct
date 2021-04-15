@@ -1718,7 +1718,7 @@ function masteriyo_get_setting_value( $setting_name, $default = null ) {
  *
  * @return boolean
  */
-function masteriyo_has_faqs( $course_id ) {
+function masteriyo_course_has_faqs( $course_id ) {
 	$faqs = masteriyo_get_faqs(
 		array(
 			'parent_id' => $course_id,

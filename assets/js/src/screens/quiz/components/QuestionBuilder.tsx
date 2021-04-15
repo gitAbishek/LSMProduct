@@ -44,7 +44,7 @@ const QuestionBuilder: React.FC<Props> = (props) => {
 	const queryClient = useQueryClient();
 
 	const questionQuery = useQuery(
-		['questions', quizId],
+		[`questions${quizId}`, quizId],
 		() => questionsAPI.list({ parent: quizId }),
 		{
 			enabled: !!quizId,
@@ -56,28 +56,17 @@ const QuestionBuilder: React.FC<Props> = (props) => {
 
 	const addQuestion = useMutation((data: object) => questionsAPI.store(data), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('questions');
+			queryClient.invalidateQueries(`questions${quizId}`);
 		},
 	});
 
-	const onAddNewQuestion = () => {
-		addQuestion.mutate({ name: 'New Question' });
-	};
-
-	const deleteQuestion = useMutation((id: number) => questionsAPI.delete(id), {
-		onSuccess: (data) => {
-			queryClient.invalidateQueries('questions');
-		},
-	});
-
-	const onDeleteQuestion = (id: any) => {
-		setDeletingCourse(id);
-		setIsModalOpen(true);
-	};
-
-	const onDeleteConfirm = (id: any) => {
-		deleteQuestion.mutate(id);
-		setIsModalOpen(false);
+	const onAddNewQuestionPress = () => {
+		addQuestion.mutate({
+			name: 'New Question',
+			course_id: courseId,
+			parent_id: quizId,
+			menu_order: totalQuestionsCount + 1,
+		});
 	};
 
 	return (
@@ -114,10 +103,10 @@ const QuestionBuilder: React.FC<Props> = (props) => {
 			{questionQuery.isSuccess && (
 				<>
 					{questionQuery.data.length == 0 ? (
-						<Alert status="info">
+						<Alert status="info" fontSize="sm" p="2.5">
 							<AlertIcon />
 							{__(
-								'There are no questions right now, You can add them',
+								'There are no questions right now, You can add them by clicking on Add New Question',
 								'masteriyo'
 							)}
 						</Alert>
@@ -129,7 +118,9 @@ const QuestionBuilder: React.FC<Props> = (props) => {
 						</Accordion>
 					)}
 					<Center>
-						<AddNewButton>Add New Question</AddNewButton>
+						<AddNewButton onClick={onAddNewQuestionPress}>
+							Add New Question
+						</AddNewButton>
 					</Center>
 				</>
 			)}

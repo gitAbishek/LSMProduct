@@ -27,6 +27,10 @@
     a:focus{
         @apply mto-no-underline mto-outline-none !important;
     }
+    ul li{
+        list-style: none;
+    }
+
     /* Login */
     .mto-form-wrapper{
         @apply

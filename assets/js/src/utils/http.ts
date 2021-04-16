@@ -5,7 +5,7 @@ import { isProduction } from './helper';
 
 const configProduction = {
 	//@ts-ignore
-	baseURL: masteriyo.rootApiUrl + '/masteriyo/v1',
+	baseURL: masteriyo.rootApiUrl,
 	headers: {
 		'Content-Type': 'application/json',
 		//@ts-ignore

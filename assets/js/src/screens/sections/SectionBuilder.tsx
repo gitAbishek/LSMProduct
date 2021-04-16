@@ -30,7 +30,12 @@ const SectionBuilder = () => {
 
 	const sectionQuery = useQuery(
 		['builderSections', courseId],
-		() => sectionAPI.list({ parent: courseId }),
+		() =>
+			sectionAPI.list({
+				parent: courseId,
+				order: 'asc',
+				orderBy: 'menu_order',
+			}),
 		{
 			onSuccess: (data) => {
 				setTotalSectionsLength(data.length);

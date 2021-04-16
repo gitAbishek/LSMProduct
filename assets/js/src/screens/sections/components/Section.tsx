@@ -62,7 +62,7 @@ const Section: React.FC<Props> = (props) => {
 	const toast = useToast();
 
 	const contentQuery = useQuery(['contents', id], () =>
-		contentAPI.list({ section: id })
+		contentAPI.list({ section: id, order: 'asc', orderBy: 'menu_order' })
 	);
 
 	const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {

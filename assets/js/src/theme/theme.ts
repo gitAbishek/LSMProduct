@@ -88,11 +88,6 @@ const theme = extendTheme({
 				mb: '3',
 			},
 		},
-		Checkbox: {
-			defaultProps: {
-				colorScheme: 'primary',
-			},
-		},
 	},
 });
 

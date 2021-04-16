@@ -27,15 +27,16 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import Editor from 'Components/common/Editor';
+import Select from 'Components/common/Select';
 import React, { useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { BiCopy, BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { Sortable } from '../../../assets/icons';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
-import { mergeDeep } from '../../../utils/mergeDeep';
+import AnswerBuilder from './answer/AnswerBuilder';
 
 interface Props {
 	questionData: any;
@@ -83,7 +84,6 @@ const Question: React.FC<Props> = (props) => {
 			queryClient.invalidateQueries(`questions${data.parent_id}`);
 		},
 	});
-	console.log(questionData);
 
 	const onDuplicatePress = () => {
 		const data = {
@@ -95,6 +95,14 @@ const Question: React.FC<Props> = (props) => {
 		};
 		duplicateQuestion.mutate(data);
 	};
+
+	const categoryList = [
+		{ value: 'true-false', label: 'True False' },
+		{ value: 'single-choice', label: 'Single Choice' },
+		{ value: 'multiple-choice', label: 'Multi Choice' },
+		{ value: 'short-answer', label: 'Short Answer' },
+	];
+
 	const onSubmit = (data: object) => {
 		updateQuestion.mutate(data);
 	};
@@ -125,7 +133,6 @@ const Question: React.FC<Props> = (props) => {
 				borderWidth="1px"
 				borderColor="gray.100"
 				rounded="sm"
-				_expanded={{ shadow: 'box' }}
 				mb="4"
 				p="0">
 				<Flex align="center" justify="space-between" px="2" py="1">
@@ -154,50 +161,78 @@ const Question: React.FC<Props> = (props) => {
 					</Stack>
 				</Flex>
 				<AccordionPanel borderTop="1px" borderColor="gray.100" p="5">
-					<Stack direction="column" spacing="4">
-						<Flex
-							align="center"
-							justify="space-between"
-							borderBottom="1px"
-							borderColor="gray.100"
-							pb="3">
-							<Heading fontSize="lg" fontWeight="semibold">
-								Question
-							</Heading>
-							<Menu placement="bottom-end">
-								<MenuButton
-									as={IconButton}
-									icon={<BiDotsVerticalRounded />}
-									variant="outline"
-									rounded="xs"
-									fontSize="large"
-									size="sm"
-								/>
-								<MenuList>
-									<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
-										{__('Delete', 'masteriyo')}
-									</MenuItem>
-								</MenuList>
-							</Menu>
-						</Flex>
-						<form onSubmit={handleSubmit(onSubmit)}>
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<Stack direction="column" spacing="8">
 							<Stack direction="column" spacing="6">
-								<FormControl isInvalid={!!errors?.name}>
-									<FormLabel>{__('Question Name', 'masteriyo')}</FormLabel>
-									<Input
-										defaultValue={questionData.name}
-										placeholder={__('Your Question Name', 'masteriyo')}
-										{...register('name', {
-											required: __(
-												'You must provide name for the question',
-												'masteriyo'
-											),
-										})}
-									/>
-									<FormErrorMessage>
-										{errors?.name && errors?.name?.message}
-									</FormErrorMessage>
-								</FormControl>
+								<Flex
+									align="center"
+									justify="space-between"
+									borderBottom="1px"
+									borderColor="gray.100"
+									pb="3">
+									<Heading fontSize="lg" fontWeight="semibold">
+										Question
+									</Heading>
+									<Menu placement="bottom-end">
+										<MenuButton
+											as={IconButton}
+											icon={<BiDotsVerticalRounded />}
+											variant="outline"
+											rounded="xs"
+											fontSize="large"
+											size="sm"
+										/>
+										<MenuList>
+											<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
+												{__('Delete', 'masteriyo')}
+											</MenuItem>
+										</MenuList>
+									</Menu>
+								</Flex>
+								<Stack direction="row" spacing="6">
+									<FormControl isInvalid={!!errors?.name}>
+										<FormLabel>{__('Question Name', 'masteriyo')}</FormLabel>
+										<Input
+											defaultValue={questionData.name}
+											placeholder={__('Your Question Name', 'masteriyo')}
+											{...register('name', {
+												required: __(
+													'You must provide name for the question',
+													'masteriyo'
+												),
+											})}
+										/>
+										<FormErrorMessage>
+											{errors?.name && errors?.name?.message}
+										</FormErrorMessage>
+									</FormControl>
+									<FormControl>
+										<FormLabel>
+											{__('Question Description', 'masteriyo')}
+										</FormLabel>
+										<Controller
+											defaultValue={questionData.type}
+											render={({ field }) => (
+												<Select
+													{...field}
+													closeMenuOnSelect={false}
+													options={categoryList}
+												/>
+											)}
+											control={control}
+											name="type"
+											rules={{
+												required: __(
+													'Please select question type',
+													'masteriyo'
+												),
+											}}
+										/>
+										<FormErrorMessage>
+											{errors?.type && errors?.type?.message}
+										</FormErrorMessage>
+									</FormControl>
+								</Stack>
 								<FormControl>
 									<FormLabel>
 										{__('Question Description', 'masteriyo')}
@@ -209,8 +244,9 @@ const Question: React.FC<Props> = (props) => {
 									/>
 								</FormControl>
 							</Stack>
-						</form>
-					</Stack>
+							<AnswerBuilder questionData={questionData} />
+						</Stack>
+					</form>
 				</AccordionPanel>
 			</AccordionItem>
 			<AlertDialog

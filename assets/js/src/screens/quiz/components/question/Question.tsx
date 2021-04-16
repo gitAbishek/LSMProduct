@@ -10,6 +10,7 @@ import {
 	AlertDialogOverlay,
 	Button,
 	ButtonGroup,
+	Divider,
 	Flex,
 	Icon,
 	IconButton,
@@ -21,6 +22,7 @@ import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiCopy, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
+import { useHistory } from 'react-router';
 
 import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
@@ -37,6 +39,7 @@ const Question: React.FC<Props> = (props) => {
 	const { questionData, totalQuestionsCount } = props;
 	const toast = useToast();
 	const methods = useForm();
+	const history = useHistory();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const questionAPI = new API(urls.questions);
 	const cancelRef = useRef<any>();
@@ -54,7 +57,16 @@ const Question: React.FC<Props> = (props) => {
 	const updateQuestion = useMutation(
 		(data: object) => questionAPI.update(questionData.id, data),
 		{
-			onSuccess: (data: any) => {},
+			onSuccess: (data: any) => {
+				console.log(data);
+				toast({
+					title: __('Question Updated', 'masteriyo'),
+					description: data.name + __(' has been updated successfully.'),
+					isClosable: true,
+					status: 'success',
+				});
+				queryClient.invalidateQueries(`questions${data.parent_id}`);
+			},
 		}
 	);
 
@@ -82,6 +94,7 @@ const Question: React.FC<Props> = (props) => {
 	};
 
 	const onSubmit = (data: object) => {
+		console.log(data);
 		updateQuestion.mutate(data);
 	};
 
@@ -143,6 +156,18 @@ const Question: React.FC<Props> = (props) => {
 							<Stack direction="column" spacing="8">
 								<EditQuestion questionData={questionData} />
 								<Answers questionData={questionData} />
+								<Divider />
+								<ButtonGroup>
+									<Button
+										colorScheme="blue"
+										type="submit"
+										isLoading={updateQuestion.isLoading}>
+										{__('Update', 'masteriyo')}
+									</Button>
+									<Button variant="outline" onClick={() => history.goBack()}>
+										{__('Cancel', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
 							</Stack>
 						</form>
 					</FormProvider>

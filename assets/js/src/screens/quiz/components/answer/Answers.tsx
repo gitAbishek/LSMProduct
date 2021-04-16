@@ -65,36 +65,37 @@ const Answers: React.FC<Props> = (props) => {
 			</Flex>
 			<Input type="hidden" {...register('answers')} />
 
-			{answers.map((answer: any, index: any) => (
-				<Flex sx={borderedBoxStyles} key={index}>
-					<Stack direction="row" spacing="2" align="center" flex="1">
-						<Icon as={Sortable} fontSize="lg" color="gray.500" />
-						<Editable defaultValue={answer.name}>
-							<EditablePreview />
-							<EditableInput />
-						</Editable>
-					</Stack>
-					<Stack direction="row" spacing="4">
-						<Checkbox defaultChecked={answer.answer} />
-						<Stack direction="row" spacing="2">
-							<IconButton
-								variant="unstyled"
-								sx={iconStyles}
-								aria-label={__('Duplicate', 'masteriyo')}
-								icon={<BiCopy />}
-							/>
-							<IconButton
-								variant="unstyled"
-								sx={iconStyles}
-								aria-label={__('Delete', 'masteriyo')}
-								icon={<BiTrash />}
-								minW="auto"
-								onClick={() => onDeletePress(index)}
-							/>
+			{answers.length !== 0 &&
+				answers.map((answer: any, index: any) => (
+					<Flex sx={borderedBoxStyles} key={index}>
+						<Stack direction="row" spacing="2" align="center" flex="1">
+							<Icon as={Sortable} fontSize="lg" color="gray.500" />
+							<Editable defaultValue={answer.name}>
+								<EditablePreview />
+								<EditableInput />
+							</Editable>
 						</Stack>
-					</Stack>
-				</Flex>
-			))}
+						<Stack direction="row" spacing="4">
+							<Checkbox defaultChecked={answer.answer} />
+							<Stack direction="row" spacing="2">
+								<IconButton
+									variant="unstyled"
+									sx={iconStyles}
+									aria-label={__('Duplicate', 'masteriyo')}
+									icon={<BiCopy />}
+								/>
+								<IconButton
+									variant="unstyled"
+									sx={iconStyles}
+									aria-label={__('Delete', 'masteriyo')}
+									icon={<BiTrash />}
+									minW="auto"
+									onClick={() => onDeletePress(index)}
+								/>
+							</Stack>
+						</Stack>
+					</Flex>
+				))}
 			<ButtonGroup>
 				<Button
 					leftIcon={<Icon as={BiPlus} fontSize="xl" />}

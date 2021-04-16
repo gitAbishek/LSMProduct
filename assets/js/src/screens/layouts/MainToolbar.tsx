@@ -42,7 +42,7 @@ const MainToolbar = () => {
 				<Flex direction="row" justifyContent="space-between" align="center">
 					<Stack direction="row" spacing="12" align="center">
 						<Box>
-							<Image src={LogoImg} alt="Masteriyo Logo" />
+							<Image src={LogoImg} alt="Masteriyo Logo" w="100px" />
 						</Box>
 						<List d="flex">
 							<ListItem>

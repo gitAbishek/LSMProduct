@@ -11,32 +11,22 @@ import {
 	Button,
 	ButtonGroup,
 	Flex,
-	FormControl,
-	FormErrorMessage,
-	FormLabel,
-	Heading,
 	Icon,
 	IconButton,
-	Input,
-	Menu,
-	MenuButton,
-	MenuItem,
-	MenuList,
 	Stack,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Editor from 'Components/common/Editor';
-import Select from 'Components/common/Select';
 import React, { useRef, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { BiCopy, BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
+import { FormProvider, useForm } from 'react-hook-form';
+import { BiCopy, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
 import API from '../../../../utils/api';
 import Answers from '../answer/Answers';
+import EditQuestion from './EditQuestion';
 
 interface Props {
 	questionData: any;
@@ -46,12 +36,7 @@ interface Props {
 const Question: React.FC<Props> = (props) => {
 	const { questionData, totalQuestionsCount } = props;
 	const toast = useToast();
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		control,
-	} = useForm();
+	const methods = useForm();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const questionAPI = new API(urls.questions);
 	const cancelRef = useRef<any>();
@@ -96,13 +81,6 @@ const Question: React.FC<Props> = (props) => {
 		duplicateQuestion.mutate(data);
 	};
 
-	const categoryList = [
-		{ value: 'true-false', label: 'True False' },
-		{ value: 'single-choice', label: 'Single Choice' },
-		{ value: 'multiple-choice', label: 'Multi Choice' },
-		{ value: 'short-answer', label: 'Short Answer' },
-	];
-
 	const onSubmit = (data: object) => {
 		updateQuestion.mutate(data);
 	};
@@ -114,7 +92,6 @@ const Question: React.FC<Props> = (props) => {
 	const onDeleteModalClose = () => {
 		setDeleteModalOpen(false);
 	};
-
 	const onDeleteConfirm = () => {
 		deleteQuestion.mutate(questionData.id);
 		setDeleteModalOpen(false);
@@ -161,92 +138,14 @@ const Question: React.FC<Props> = (props) => {
 					</Stack>
 				</Flex>
 				<AccordionPanel borderTop="1px" borderColor="gray.100" p="5">
-					<form onSubmit={handleSubmit(onSubmit)}>
-						<Stack direction="column" spacing="8">
-							<Stack direction="column" spacing="6">
-								<Flex
-									align="center"
-									justify="space-between"
-									borderBottom="1px"
-									borderColor="gray.100"
-									pb="3">
-									<Heading fontSize="lg" fontWeight="semibold">
-										Question
-									</Heading>
-									<Menu placement="bottom-end">
-										<MenuButton
-											as={IconButton}
-											icon={<BiDotsVerticalRounded />}
-											variant="outline"
-											rounded="xs"
-											fontSize="large"
-											size="sm"
-										/>
-										<MenuList>
-											<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
-												{__('Delete', 'masteriyo')}
-											</MenuItem>
-										</MenuList>
-									</Menu>
-								</Flex>
-								<Stack direction="row" spacing="6">
-									<FormControl isInvalid={!!errors?.name}>
-										<FormLabel>{__('Question Name', 'masteriyo')}</FormLabel>
-										<Input
-											defaultValue={questionData.name}
-											placeholder={__('Your Question Name', 'masteriyo')}
-											{...register('name', {
-												required: __(
-													'You must provide name for the question',
-													'masteriyo'
-												),
-											})}
-										/>
-										<FormErrorMessage>
-											{errors?.name && errors?.name?.message}
-										</FormErrorMessage>
-									</FormControl>
-									<FormControl>
-										<FormLabel>
-											{__('Question Description', 'masteriyo')}
-										</FormLabel>
-										<Controller
-											defaultValue={questionData.type}
-											render={({ field }) => (
-												<Select
-													{...field}
-													closeMenuOnSelect={false}
-													options={categoryList}
-												/>
-											)}
-											control={control}
-											name="type"
-											rules={{
-												required: __(
-													'Please select question type',
-													'masteriyo'
-												),
-											}}
-										/>
-										<FormErrorMessage>
-											{errors?.type && errors?.type?.message}
-										</FormErrorMessage>
-									</FormControl>
-								</Stack>
-								<FormControl>
-									<FormLabel>
-										{__('Question Description', 'masteriyo')}
-									</FormLabel>
-									<Editor
-										name="description"
-										defaultValue={questionData.description}
-										control={control}
-									/>
-								</FormControl>
+					<FormProvider {...methods}>
+						<form onSubmit={methods.handleSubmit(onSubmit)}>
+							<Stack direction="column" spacing="8">
+								<EditQuestion questionData={questionData} />
+								<Answers questionData={questionData} />
 							</Stack>
-							<Answers questionData={questionData} />
-						</Stack>
-					</form>
+						</form>
+					</FormProvider>
 				</AccordionPanel>
 			</AccordionItem>
 			<AlertDialog

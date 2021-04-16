@@ -1,22 +1,22 @@
 import {
-	AccordionButton,
 	Button,
 	ButtonGroup,
 	Checkbox,
+	Editable,
+	EditableInput,
+	EditablePreview,
 	Flex,
 	Heading,
 	Icon,
 	IconButton,
-	Menu,
-	MenuButton,
-	MenuItem,
-	MenuList,
+	Input,
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import { borderedBoxStyles, sectionHeaderStyles } from 'Config/styles';
-import React, { useState } from 'react';
-import { BiCopy, BiDotsVerticalRounded, BiPlus, BiTrash } from 'react-icons/bi';
+import React, { useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { BiCopy, BiPlus, BiTrash } from 'react-icons/bi';
 
 import { Sortable } from '../../../../assets/icons';
 
@@ -26,6 +26,7 @@ interface Props {
 
 const Answers: React.FC<Props> = (props) => {
 	const { questionData } = props;
+	const { register, setValue } = useFormContext();
 	const [answers, setAnswers] = useState<any>(questionData.answers);
 
 	const onAddNewAnswerPress = () => {
@@ -51,31 +52,27 @@ const Answers: React.FC<Props> = (props) => {
 		setAnswers(newAnswers);
 	};
 
+	useEffect(() => {
+		setValue('answers', answers);
+	}, [answers]);
+
 	return (
 		<Stack direction="column" spacing="6">
 			<Flex sx={sectionHeaderStyles}>
 				<Heading fontSize="lg" fontWeight="semibold">
 					{__('Answers', 'masteriyo')}
 				</Heading>
-				<Menu placement="bottom-end">
-					<MenuButton
-						as={IconButton}
-						icon={<BiDotsVerticalRounded />}
-						variant="outline"
-						rounded="xs"
-						fontSize="large"
-						size="sm"
-					/>
-					<MenuList>
-						<MenuItem icon={<BiTrash />}>{__('Delete', 'masteriyo')}</MenuItem>
-					</MenuList>
-				</Menu>
 			</Flex>
+			<Input type="hidden" {...register('answers')} />
+
 			{answers.map((answer: any, index: any) => (
 				<Flex sx={borderedBoxStyles} key={index}>
 					<Stack direction="row" spacing="2" align="center" flex="1">
 						<Icon as={Sortable} fontSize="lg" color="gray.500" />
-						<Heading size="sm">{answer.name}</Heading>
+						<Editable defaultValue={answer.name}>
+							<EditablePreview />
+							<EditableInput />
+						</Editable>
 					</Stack>
 					<Stack direction="row" spacing="4">
 						<Checkbox defaultChecked={answer.answer} />

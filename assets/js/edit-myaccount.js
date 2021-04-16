@@ -38,7 +38,7 @@
 
 		// Show saving process indicator.
 		$('#mto-btn-submit-edit-profile-form')
-		.text('Saving...')
+		.text( mto_data.labels.saving )
 		.siblings('.mto-notify-message').remove();
 
 		$.ajax({
@@ -61,13 +61,13 @@
 			error: function( xhr ) {
 				// Show failure message.
 				$('#mto-btn-submit-edit-profile-form')
-				.after('<div class="mto-notify-message mto-warning-msg mto-text-red-700 mto-bg-red-100 mto-border-red-300"><span>' + xhr.responseJSON.message + '</span></div>');
+				.after('<div class="mto-notify-message mto-error-msg mto-text-red-700 mto-bg-red-100 mto-border-red-300"><span>' + xhr.responseJSON.message + '</span></div>');
 			},
 			complete: function() {
 				isSaving = false;
 
 				// Remove saving process indicator.
-				$('#mto-btn-submit-edit-profile-form').text('Save');
+				$('#mto-btn-submit-edit-profile-form').text( mto_data.labels.save );
 			},
 		});
 	});

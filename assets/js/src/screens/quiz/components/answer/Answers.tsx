@@ -14,6 +14,7 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import { borderedBoxStyles, sectionHeaderStyles } from 'Config/styles';
 import React, { useState } from 'react';
 import { BiCopy, BiDotsVerticalRounded, BiPlus, BiTrash } from 'react-icons/bi';
 
@@ -23,14 +24,15 @@ interface Props {
 	questionData: any;
 }
 
-const AnswerBuilder: React.FC<Props> = (props) => {
+const Answers: React.FC<Props> = (props) => {
 	const { questionData } = props;
-	const [answers, setAnswers] = useState<any>(questionData?.answers);
+	const [answers, setAnswers] = useState<any>(questionData.answers);
+
 	const onAddNewAnswerPress = () => {
 		setAnswers([
 			...answers,
 			{
-				label: 'True',
+				name: 'This is name',
 				answer: false,
 			},
 		]);
@@ -43,14 +45,15 @@ const AnswerBuilder: React.FC<Props> = (props) => {
 		_hover: { color: 'blue.500' },
 	};
 
+	const onDeletePress = (id: any) => {
+		var newAnswers = [...answers];
+		newAnswers.splice(id, 1);
+		setAnswers(newAnswers);
+	};
+
 	return (
 		<Stack direction="column" spacing="6">
-			<Flex
-				align="center"
-				justify="space-between"
-				borderBottom="1px"
-				borderColor="gray.100"
-				pb="3">
+			<Flex sx={sectionHeaderStyles}>
 				<Heading fontSize="lg" fontWeight="semibold">
 					{__('Answers', 'masteriyo')}
 				</Heading>
@@ -69,18 +72,10 @@ const AnswerBuilder: React.FC<Props> = (props) => {
 				</Menu>
 			</Flex>
 			{answers.map((answer: any, index: any) => (
-				<Flex
-					key="index"
-					borderWidth="1px"
-					borderColor="gray.100"
-					rounded="sm"
-					mb="4"
-					alignItems="center"
-					justify="space-between"
-					px="2"
-					py="1">
+				<Flex sx={borderedBoxStyles} key={index}>
 					<Stack direction="row" spacing="2" align="center" flex="1">
 						<Icon as={Sortable} fontSize="lg" color="gray.500" />
+						<Heading size="sm">{answer.name}</Heading>
 					</Stack>
 					<Stack direction="row" spacing="4">
 						<Checkbox defaultChecked={answer.answer} />
@@ -97,6 +92,7 @@ const AnswerBuilder: React.FC<Props> = (props) => {
 								aria-label={__('Delete', 'masteriyo')}
 								icon={<BiTrash />}
 								minW="auto"
+								onClick={() => onDeletePress(index)}
 							/>
 						</Stack>
 					</Stack>
@@ -115,4 +111,4 @@ const AnswerBuilder: React.FC<Props> = (props) => {
 	);
 };
 
-export default AnswerBuilder;
+export default Answers;

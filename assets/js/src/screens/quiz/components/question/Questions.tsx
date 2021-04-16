@@ -11,8 +11,8 @@ import AddNewButton from 'Components/common/AddNewButton';
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import urls from '../../../constants/urls';
-import API from '../../../utils/api';
+import urls from '../../../../constants/urls';
+import API from '../../../../utils/api';
 import Question from './Question';
 
 interface Props {
@@ -20,7 +20,7 @@ interface Props {
 	courseId: any;
 }
 
-const QuestionBuilder: React.FC<Props> = (props) => {
+const Questions: React.FC<Props> = (props) => {
 	const { quizId, courseId } = props;
 
 	const [totalQuestionsCount, setTotalQuestionsCount] = useState<any>('0');
@@ -93,4 +93,4 @@ const QuestionBuilder: React.FC<Props> = (props) => {
 	);
 };
 
-export default QuestionBuilder;
+export default Questions;

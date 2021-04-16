@@ -16,17 +16,16 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useState } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
 
-import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import Description from './components/Description';
 import Name from './components/Name';
-import QuestionBuilder from './components/QuestionBuilder';
+import Questions from './components/question/Questions';
 
 const EditQuiz: React.FC = () => {
 	const { quizId }: any = useParams();
@@ -121,7 +120,7 @@ const EditQuiz: React.FC = () => {
 									</form>
 								</TabPanel>
 								<TabPanel sx={tabPanelStyles}>
-									<QuestionBuilder
+									<Questions
 										courseId={quizQuery.data.course_id}
 										quizId={quizId}
 									/>

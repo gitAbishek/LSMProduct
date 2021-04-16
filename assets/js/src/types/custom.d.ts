@@ -8,6 +8,4 @@ declare module '*.png' {
 	export default content;
 }
 
-declare module '@wordpress/block-editor';
-declare module '@wordpress/block-editor';
-declare module '@wordpress/components';
+declare module 'react-uuid';

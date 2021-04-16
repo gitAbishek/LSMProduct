@@ -33,10 +33,10 @@ import { Controller, useForm } from 'react-hook-form';
 import { BiCopy, BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 
-import { Sortable } from '../../../assets/icons';
-import urls from '../../../constants/urls';
-import API from '../../../utils/api';
-import AnswerBuilder from './answer/AnswerBuilder';
+import { Sortable } from '../../../../assets/icons';
+import urls from '../../../../constants/urls';
+import API from '../../../../utils/api';
+import Answers from '../answer/Answers';
 
 interface Props {
 	questionData: any;
@@ -244,7 +244,7 @@ const Question: React.FC<Props> = (props) => {
 									/>
 								</FormControl>
 							</Stack>
-							<AnswerBuilder questionData={questionData} />
+							<Answers questionData={questionData} />
 						</Stack>
 					</form>
 				</AccordionPanel>

@@ -70,6 +70,7 @@
     "prettier-plugin-import-sort": "0.0.6",
     "react-refresh": "0.8.3",
     "react-router-dom": "^5.2.0",
+    "react-uuid": "1.0.2",
     "style-loader": "^1.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "terser-webpack-plugin": "4.1.0",

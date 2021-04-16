@@ -26,7 +26,6 @@ interface Props {
 const AnswerBuilder: React.FC<Props> = (props) => {
 	const { questionData } = props;
 	const [answers, setAnswers] = useState<any>(questionData?.answers);
-
 	const onAddNewAnswerPress = () => {
 		setAnswers([
 			...answers,
@@ -82,9 +81,6 @@ const AnswerBuilder: React.FC<Props> = (props) => {
 					py="1">
 					<Stack direction="row" spacing="2" align="center" flex="1">
 						<Icon as={Sortable} fontSize="lg" color="gray.500" />
-						<AccordionButton _hover={{ background: 'transparent' }} px="0">
-							{answer.label}
-						</AccordionButton>
 					</Stack>
 					<Stack direction="row" spacing="4">
 						<Checkbox defaultChecked={answer.answer} />

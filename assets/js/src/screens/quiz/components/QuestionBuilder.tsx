@@ -30,7 +30,7 @@ const QuestionBuilder: React.FC<Props> = (props) => {
 
 	const questionQuery = useQuery(
 		[`questions${quizId}`, quizId],
-		() => questionsAPI.list({ parent: quizId }),
+		() => questionsAPI.list({ parent: quizId, order: 'asc' }),
 		{
 			enabled: !!quizId,
 			onSuccess: (data) => {

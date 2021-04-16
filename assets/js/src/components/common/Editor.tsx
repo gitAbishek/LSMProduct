@@ -1,5 +1,4 @@
 import { Editor as TinyMceEditor } from '@tinymce/tinymce-react';
-import { IEditorPropTypes } from '@tinymce/tinymce-react/lib/cjs/main/ts/components/EditorPropTypes';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
@@ -9,7 +8,7 @@ interface Props {
 	defaultValue?: string;
 }
 const Editor: React.FC<Props> = (props) => {
-	const { name, control, defaultValue, ...other } = props;
+	const { name, control, defaultValue } = props;
 	return (
 		<Controller
 			name={name}

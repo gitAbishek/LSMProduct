@@ -11,6 +11,7 @@ use ThemeGrill\Masteriyo\Models\Course;
 use ThemeGrill\Masteriyo\Models\Section;
 use ThemeGrill\Masteriyo\Models\Faq;
 use ThemeGrill\Masteriyo\Models\User;
+use ThemeGrill\Masteriyo\Models\CourseReview;
 
 /**
  * Get course.
@@ -1931,4 +1932,35 @@ function masteriyo_set_customer_auth_cookie( $user_id ) {
 
 	// Update session.
 	masteriyo('session')->init_session_cookie();
+}
+
+/**
+ * Get course review.
+ *
+ * @since 0.1.0
+ *
+ * @param  int|WP_Comment|Model $course_review Object ID or WP_Comment or Model.
+ * @return CourseReview|null
+ */
+function masteriyo_get_course_review( $course_review ) {
+	$course_review_obj   = masteriyo( 'course_review' );
+	$course_review_store = masteriyo( 'course_review.store' );
+
+	if ( is_a( $course_review, 'ThemeGrill\Masteriyo\Models\CourseReview' ) ) {
+		$id = $course_review->get_id();
+	} elseif ( is_a( $course_review, 'WP_Comment' ) ) {
+		$id = $course_review->comment_ID;
+	} else {
+		$id = $course_review;
+	}
+
+	try {
+		$id = absint( $id );
+		$course_review_obj->set_id( $id );
+		$course_review_store->read( $course_review_obj );
+	} catch ( \Exception $e ) {
+		return null;
+	}
+
+	return apply_filters( 'masteriyo_get_course_review', $course_review_obj, $course_review );
 }

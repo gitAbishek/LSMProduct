@@ -1,5 +1,12 @@
 import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
 	Badge,
+	Button,
 	ButtonGroup,
 	IconButton,
 	Link,
@@ -9,8 +16,7 @@ import {
 	Tr,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import DeleteModal from 'Components/layout/DeleteModal';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
@@ -30,26 +36,27 @@ const CourseList: React.FC<Props> = (props) => {
 	const { id, name, price, categories } = props;
 	const history = useHistory();
 	const queryClient = useQueryClient();
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const courseAPI = new API(urls.courses);
+	const cancelRef = useRef<any>();
 
-	const deleteMutation = useMutation((id: number) => courseAPI.delete(id), {
+	const deleteCourse = useMutation((id: number) => courseAPI.delete(id), {
 		onSuccess: () => {
-			setIsModalOpen(false);
+			setDeleteModalOpen(false);
 			queryClient.invalidateQueries('courseList');
 		},
 	});
 
 	const onDeletePress = () => {
-		setIsModalOpen(true);
+		setDeleteModalOpen(true);
 	};
 
-	const onModalClose = () => {
-		setIsModalOpen(false);
+	const onDeleteModalClose = () => {
+		setDeleteModalOpen(false);
 	};
 
 	const onDeleteConfirm = () => {
-		deleteMutation.mutate(id);
+		deleteCourse.mutate(id);
 	};
 
 	const onEditPress = () => {
@@ -101,13 +108,38 @@ const CourseList: React.FC<Props> = (props) => {
 						/>
 					</Tooltip>
 				</ButtonGroup>
-				<DeleteModal
-					isOpen={isModalOpen}
-					onClose={onModalClose}
-					onDeletePress={onDeleteConfirm}
-					title={name}
-					isDeleting={deleteMutation.isLoading}
-				/>
+				<AlertDialog
+					isOpen={isDeleteModalOpen}
+					onClose={onDeleteModalClose}
+					isCentered
+					leastDestructiveRef={cancelRef}>
+					<AlertDialogOverlay>
+						<AlertDialogContent>
+							<AlertDialogHeader>
+								{__('Delete Lesson')} {name}
+							</AlertDialogHeader>
+							<AlertDialogBody>
+								Are you sure? You can't restore this section
+							</AlertDialogBody>
+							<AlertDialogFooter>
+								<ButtonGroup>
+									<Button
+										ref={cancelRef}
+										onClick={onDeleteModalClose}
+										variant="outline">
+										{__('Cancel', 'masteriyo')}
+									</Button>
+									<Button
+										colorScheme="red"
+										onClick={onDeleteConfirm}
+										isLoading={deleteCourse.isLoading}>
+										{__('Delete', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
+							</AlertDialogFooter>
+						</AlertDialogContent>
+					</AlertDialogOverlay>
+				</AlertDialog>
 			</Td>
 		</Tr>
 	);

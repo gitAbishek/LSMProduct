@@ -1,12 +1,4 @@
-import {
-	ButtonGroup,
-	Skeleton,
-	SkeletonText,
-	Stack,
-	Td,
-	Tr,
-} from '@chakra-ui/react';
-import Box from 'Components/layout/Box';
+import { Box, Skeleton, SkeletonText, Stack, Td, Tr } from '@chakra-ui/react';
 import React from 'react';
 
 export const SkeletonCourseList: React.FC = () => {

@@ -1,7 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ToastProvider } from 'react-toast-notifications';
 
 import Router from './router/Router';
 import theme from './theme/theme';
@@ -11,11 +10,9 @@ const App = () => {
 
 	return (
 		<ChakraProvider theme={theme}>
-			<ToastProvider>
-				<QueryClientProvider client={queryClient}>
-					<Router />
-				</QueryClientProvider>
-			</ToastProvider>
+			<QueryClientProvider client={queryClient}>
+				<Router />
+			</QueryClientProvider>
 		</ChakraProvider>
 	);
 };

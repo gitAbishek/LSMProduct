@@ -38,7 +38,6 @@ class NoticeServiceProvider extends AbstractServiceProvider {
 	 public function register() {
 		 $this->getContainer()
 			->add( 'notice', Notice::class, true )
-			->addArgument( 'session' )
-			->addArgument( 'template' );
+			->addArgument( 'session' );
 	 }
 }

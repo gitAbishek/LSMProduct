@@ -1,31 +1,46 @@
-import { BiAlignLeft, BiTimer, BiTrash } from 'react-icons/bi';
-import Box, {
-	BoxContent,
-	BoxFooter,
-	BoxHeader,
-	BoxTitle,
-} from 'Components/layout/Box';
-import Dropdown, {
-	DropdownMenu,
-	DropdownMenuItem,
-} from 'Components/common/Dropdown';
-import React, { useState } from 'react';
-import { deleteSection, fetchContents } from '../../../utils/api';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-
-import AddNewButton from 'Components/common/AddNewButton';
-import { Collapse } from 'react-collapse';
-import Content from './Content';
-import DeleteModal from 'Components/layout/DeleteModal';
-import DragHandle from '../components/DragHandle';
-import { Edit } from '../../../assets/icons';
-import EditSection from './EditSection';
-import Icon from 'Components/common/Icon';
-import { NavLink } from 'react-router-dom';
-import OptionButton from 'Components/common/OptionButton';
-import Spinner from 'Components/common/Spinner';
+import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
+	Box,
+	Button,
+	ButtonGroup,
+	Center,
+	Collapse,
+	Flex,
+	Icon,
+	IconButton,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
+	Spinner,
+	Stack,
+	Text,
+	useToast,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { useToasts } from 'react-toast-notifications';
+import AddNewButton from 'Components/common/AddNewButton';
+import React, { useRef, useState } from 'react';
+import {
+	BiAlignLeft,
+	BiDotsVerticalRounded,
+	BiEdit,
+	BiTimer,
+	BiTrash,
+} from 'react-icons/bi';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useHistory } from 'react-router-dom';
+
+import { Sortable } from '../../../assets/icons';
+import routes from '../../../constants/routes';
+import urls from '../../../constants/urls';
+import API from '../../../utils/api';
+import Content from './Content';
+import EditSection from './EditSection';
 
 interface Props {
 	id: number;
@@ -37,64 +52,85 @@ interface Props {
 const Section: React.FC<Props> = (props) => {
 	const { id, name, description } = props;
 	const [isEditing, setIsEditing] = useState(false);
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const contentAPI = new API(urls.contents);
+	const sectionAPI = new API(urls.sections);
+	const history = useHistory();
+	const cancelRef = useRef<any>();
 
 	const queryClient = useQueryClient();
-	const { addToast } = useToasts();
+	const toast = useToast();
 
-	const contentQuery = useQuery(['contents', id], () => fetchContents(id));
+	const contentQuery = useQuery(['contents', id], () =>
+		contentAPI.list({ section: id, order: 'asc', orderBy: 'menu_order' })
+	);
 
-	const deleteMutation = useMutation((id: number) => deleteSection(id), {
-		onSuccess: (data) => {
-			addToast(data?.name + __(' has been deleted successfully'), {
-				appearance: 'error',
-				autoDismiss: true,
+	const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
+		onSuccess: (data: any) => {
+			toast({
+				title: __('Section Deleted', 'masteriyo'),
+				description:
+					data?.name + __(' has been deleted successfully', 'masteriyo'),
+				isClosable: true,
+				status: 'error',
 			});
 			queryClient.invalidateQueries('builderSections');
 		},
 	});
 
-	const onDeletePress = () => {
-		setIsModalOpen(true);
+	const onEditPress = () => {
+		setIsEditing(true);
 	};
 
-	const onModalClose = () => {
-		setIsModalOpen(false);
+	const onDeletePress = () => {
+		setDeleteModalOpen(true);
 	};
 
 	const onDeleteConfirm = () => {
 		deleteMutation.mutate(id);
 	};
 
+	const onAddNewLessonPress = () => {
+		history.push(routes.lesson.add.replace(':sectionId', id.toString()));
+	};
+
+	const onAddNewQuizPress = () => {
+		history.push(routes.quiz.add.replace(':sectionId', id.toString()));
+	};
+
+	const onDeleteModalClose = () => {
+		setDeleteModalOpen(false);
+	};
+
 	return (
-		<Box>
-			<BoxHeader>
-				<div className="mto-flex mto-items-center">
-					<DragHandle />
-					<BoxTitle>{name}</BoxTitle>
-				</div>
-				<div className="mto-flex">
-					<Dropdown
-						align="end"
-						autoClose
-						content={
-							<DropdownMenu>
-								<DropdownMenuItem onClick={() => setIsEditing(true)}>
-									<Icon className="mto-mr-1" icon={<Edit />} />
-									{__('Edit', 'masteriyo')}
-								</DropdownMenuItem>
-								<DropdownMenuItem onClick={onDeletePress}>
-									<Icon className="mto-mr-1" icon={<BiTrash />} />
-									{__('Delete', 'masteriyo')}
-								</DropdownMenuItem>
-							</DropdownMenu>
-						}>
-						<OptionButton />
-					</Dropdown>
-				</div>
-			</BoxHeader>
-			<BoxContent>
-				<Collapse isOpened={isEditing}>
+		<Box bg="white" p="10" shadow="box">
+			<Flex justify="space-between">
+				<Stack direction="row" spacing="3" align="center">
+					<Icon as={Sortable} fontSize="lg" color="gray.500" />
+					<Text fontWeight="semibold" fontSize="xl">
+						{name}
+					</Text>
+				</Stack>
+				<Menu placement="bottom-end">
+					<MenuButton
+						as={IconButton}
+						icon={<BiDotsVerticalRounded />}
+						variant="outline"
+						rounded="sm"
+						fontSize="large"
+					/>
+					<MenuList>
+						<MenuItem onClick={onEditPress} icon={<BiEdit />}>
+							{__('Edit', 'masteriyo')}
+						</MenuItem>
+						<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
+							{__('Delete', 'masteriyo')}
+						</MenuItem>
+					</MenuList>
+				</Menu>
+			</Flex>
+			<Box py="8">
+				<Collapse in={isEditing} animateOpacity>
 					<EditSection
 						id={id}
 						name={name}
@@ -103,50 +139,79 @@ const Section: React.FC<Props> = (props) => {
 						onCancel={() => setIsEditing(false)}
 					/>
 				</Collapse>
-				{contentQuery.isLoading ? (
-					<Spinner />
-				) : (
-					contentQuery?.data?.map((content: any) => (
-						<Content
-							key={content.id}
-							id={content.id}
-							name={content.name}
-							type={content.type}
-						/>
-					))
+				{contentQuery.isLoading && (
+					<Center minH="12">
+						<Spinner />
+					</Center>
 				)}
-			</BoxContent>
-			<BoxFooter>
-				<Dropdown
-					content={
-						<DropdownMenu>
-							<DropdownMenuItem>
-								<NavLink
-									className="mto-flex mto-items-center"
-									to={`/courses/${id}/add-new-lesson`}>
-									<Icon className="mto-mr-1" icon={<BiAlignLeft />} />
-									{__('Lesson', 'masteriyo')}
-								</NavLink>
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<NavLink
-									className="mto-flex mto-items-center"
-									to={`/courses/${id}/add-new-quiz`}>
-									<Icon className="mto-mr-1" icon={<BiTimer />} />
-									{__('Quiz', 'masteriyo')}
-								</NavLink>
-							</DropdownMenuItem>
-						</DropdownMenu>
-					}>
-					<AddNewButton>{__('Add New Content', 'masteriyo')}</AddNewButton>
-				</Dropdown>
-			</BoxFooter>
-			<DeleteModal
-				isOpen={isModalOpen}
-				onDeletePress={onDeleteConfirm}
-				onClose={onModalClose}
-				title={name}
-			/>
+				{contentQuery.isSuccess && !!contentQuery.data.length && (
+					<Stack direction="column" spacing="4">
+						{contentQuery.data.map((content: any) => (
+							<Content
+								key={content.id}
+								id={content.id}
+								name={content.name}
+								type={content.type}
+							/>
+						))}
+					</Stack>
+				)}
+			</Box>
+			<Box>
+				<Menu>
+					<MenuButton as={AddNewButton}>
+						{__('Add New Content', 'masteriyo')}
+					</MenuButton>
+					<MenuList>
+						<MenuItem
+							fontSize="sm"
+							fontWeight="medium"
+							icon={<Icon as={BiAlignLeft} fontSize="lg" />}
+							onClick={onAddNewLessonPress}>
+							{__('Add New Lesson', 'masteriyo')}
+						</MenuItem>
+						<MenuItem
+							fontSize="sm"
+							fontWeight="medium"
+							icon={<Icon as={BiTimer} fontSize="lg" />}
+							onClick={onAddNewQuizPress}>
+							{__('Add New Quiz', 'masteriyo')}
+						</MenuItem>
+					</MenuList>
+				</Menu>
+			</Box>
+			<AlertDialog
+				isOpen={isDeleteModalOpen}
+				onClose={onDeleteModalClose}
+				isCentered
+				leastDestructiveRef={cancelRef}>
+				<AlertDialogOverlay>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							{__('Delete Section')} {name}
+						</AlertDialogHeader>
+						<AlertDialogBody>
+							Are you sure? You can't restore this section
+						</AlertDialogBody>
+						<AlertDialogFooter>
+							<ButtonGroup>
+								<Button
+									ref={cancelRef}
+									onClick={onDeleteModalClose}
+									variant="outline">
+									{__('Cancel', 'masteriyo')}
+								</Button>
+								<Button
+									colorScheme="red"
+									onClick={onDeleteConfirm}
+									isLoading={deleteMutation.isLoading}>
+									{__('Delete', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialogOverlay>
+			</AlertDialog>
 		</Box>
 	);
 };

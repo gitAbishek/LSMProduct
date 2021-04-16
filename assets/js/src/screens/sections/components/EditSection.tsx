@@ -1,15 +1,23 @@
+import {
+	Box,
+	Button,
+	ButtonGroup,
+	Divider,
+	FormControl,
+	FormErrorMessage,
+	FormLabel,
+	Input,
+	Stack,
+	useToast,
+} from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
+import Editor from 'Components/common/Editor';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 
-import Button from 'Components/common/Button';
-import FormGroup from 'Components/common/FormGroup';
-import Input from 'Components/common/Input';
-import Label from 'Components/common/Label';
-import React from 'react';
-import Textarea from 'Components/common/Textarea';
-import { __ } from '@wordpress/i18n';
-import { updateSection } from '../../../utils/api';
-import { useForm } from 'react-hook-form';
-import { useToasts } from 'react-toast-notifications';
+import urls from '../../../constants/urls';
+import API from '../../../utils/api';
 
 export interface EditSectionProps {
 	id: number;
@@ -26,58 +34,75 @@ type SectionInputs = {
 
 const EditSection: React.FC<EditSectionProps> = (props) => {
 	const { id, name, description, onSave, onCancel } = props;
-	const { register, handleSubmit } = useForm<SectionInputs>();
-	const { addToast } = useToasts();
+	const {
+		register,
+		handleSubmit,
+		control,
+		formState: { errors },
+	} = useForm<SectionInputs>();
 	const queryClient = useQueryClient();
+	const toast = useToast();
+	const sectionAPI = new API(urls.sections);
 
-	const updateMutation = useMutation((data: any) => updateSection(id, data), {
-		onSuccess: (data) => {
-			addToast(data?.name + __(' has been updated successfully'), {
-				appearance: 'success',
-				autoDismiss: true,
-			});
-			queryClient.invalidateQueries('builderSections');
-			onSave();
-		},
-	});
+	const updateMutation = useMutation(
+		(data: any) => sectionAPI.update(id, data),
+		{
+			onSuccess: (data: any) => {
+				toast({
+					title: __('Updated Successfully', 'masteriyo'),
+					description: data.name + __(' is updated succesffuly', 'masteriyo'),
+					status: 'success',
+					isClosable: true,
+				});
+				queryClient.invalidateQueries('builderSections');
+				onSave();
+			},
+		}
+	);
 
 	const onUpdate = (data: any) => {
 		updateMutation.mutate(data);
 	};
 
 	return (
-		<div className="Edit-Section">
+		<Box pb="6">
 			<form onSubmit={handleSubmit(onUpdate)}>
-				<FormGroup>
-					<Label htmlFor="">{__('Section Name', 'masteriyo')}</Label>
-					<Input
-						placeholder={__('Your Section Name', 'masteriyo')}
-						ref={register({ required: true })}
-						name="name"
-						defaultValue={name}></Input>
-				</FormGroup>
-				<FormGroup>
-					<Label htmlFor="">{__('Section Description', 'masteriyo')}</Label>
-					<Textarea
-						name="description"
-						defaultValue={description}
-						ref={register()}
-						rows={4}
-						placeholder={__('short summary', 'masteriyo')}
-					/>
-				</FormGroup>
-				<div className="mto-my-9 mto-py-8 mto-border-t mto-border-b mto-border-solid mto-border-gray-200">
-					<div className="mto-flex">
-						<Button layout="primary" type="submit" className="mto-mr-4">
+				<Stack direction="column" spacing="8">
+					<FormControl isInvalid={!!errors?.name}>
+						<FormLabel htmlFor="">{__('Section Name', 'masteriyo')}</FormLabel>
+						<Input
+							placeholder={__('Your Section Name', 'masteriyo')}
+							defaultValue={name}
+							{...register('name', {
+								required: __('Section name cannot be empty', 'masteriyo'),
+							})}></Input>
+						{errors?.name && (
+							<FormErrorMessage>{errors?.name.message}</FormErrorMessage>
+						)}
+					</FormControl>
+					<FormControl>
+						<FormLabel htmlFor="">
+							{__('Section Description', 'masteriyo')}
+						</FormLabel>
+						<Editor
+							name="description"
+							defaultValue={description}
+							control={control}
+						/>
+					</FormControl>
+					<Divider />
+					<ButtonGroup>
+						<Button colorScheme="blue" type="submit">
 							{__('Save', 'masteriyo')}
 						</Button>
-						<Button type="button" onClick={() => onCancel()}>
+						<Button variant="outline" onClick={() => onCancel()}>
 							{__('Cancel', 'masteriyo')}
 						</Button>
-					</div>
-				</div>
+					</ButtonGroup>
+					<Divider />
+				</Stack>
 			</form>
-		</div>
+		</Box>
 	);
 };
 

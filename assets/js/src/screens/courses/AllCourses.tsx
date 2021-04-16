@@ -1,58 +1,54 @@
-import { Edit, Trash } from '../../assets/icons';
-import { Link, useHistory } from 'react-router-dom';
-import React, { Fragment, useState } from 'react';
-import { deleteCourse, fetchCourses } from '../../utils/api';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-
-import Button from 'Components/common/Button';
-import CourseList from './components/CourseList';
-import DeleteModal from 'Components/layout/DeleteModal';
-import Icon from 'Components/common/Icon';
-import MainLayout from 'Layouts/MainLayout';
-import MainToolbar from 'Layouts/MainToolbar';
-import Spinner from 'Components/common/Spinner';
+import {
+	Box,
+	Button,
+	Flex,
+	Heading,
+	Stack,
+	Table,
+	Tbody,
+	Th,
+	Thead,
+	Tr,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { Link as RouterLink } from 'react-router-dom';
+
+import routes from '../../constants/routes';
+import urls from '../../constants/urls';
+import { SkeletonCourseList } from '../../skeleton';
+import API from '../../utils/api';
+import CourseList from './components/CourseList';
 
 const AllCourses = () => {
-	const courseQuery = useQuery('courseList', fetchCourses);
-
+	const courseAPI = new API(urls.courses);
+	const courseQuery = useQuery('courseList', () => courseAPI.list());
 	return (
-		<Fragment>
-			<MainToolbar />
-
-			<MainLayout>
-				<div className="mto-flex mto-justify-between mto-mb-10">
-					<h1 className="mto-text-xl mto-m-0 mto-font-medium">
-						{__('Courses', 'masteriyo')}
-					</h1>
-					<Button layout="primary">
-						<Link to="/courses/add-new-course">
+		<Box bg="white" p="12" shadow="box">
+			<Stack direction="column" spacing="8">
+				<Flex justify="space-between" aling="center">
+					<Heading as="h1">{__('Courses', 'masteriyo')}</Heading>
+					<RouterLink to={routes.courses.add}>
+						<Button colorScheme="blue">
 							{__('Add New Course', 'masteriyo')}
-						</Link>
-					</Button>
-				</div>
-				{courseQuery.isLoading ? (
-					<Spinner />
-				) : (
-					<table className="mto-min-w-full mto-divide-y mto-divide-gray-200 mto-text-gray-700">
-						<thead>
-							<tr>
-								<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-									{__('Title', 'masteriyo')}
-								</th>
-								<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-									{__('Categories', 'masteriyo')}
-								</th>
-								<th className="mto-px-6 mto-py-3 mto-text-left mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-									{__('Price', 'masteriyo')}
-								</th>
-								<th className="mto-px-6 mto-py-3 mto-text-right mto-text-xs mto-font-medium mto-text-gray-500 mto-uppercase mto-tracking-wider">
-									{__('Actions', 'masteriyo')}
-								</th>
-							</tr>
-						</thead>
-						<tbody className="mto-bg-white mto-divide-y mto-divide-gray-200">
-							{courseQuery?.data?.map((course: any) => (
+						</Button>
+					</RouterLink>
+				</Flex>
+
+				<Table>
+					<Thead>
+						<Tr>
+							<Th>{__('Title', 'masteriyo')}</Th>
+							<Th>{__('Categories', 'masteriyo')}</Th>
+							<Th>{__('Price', 'masteriyo')}</Th>
+							<Th>{__('Actions', 'masteriyo')}</Th>
+						</Tr>
+					</Thead>
+					<Tbody>
+						{courseQuery.isLoading && <SkeletonCourseList />}
+						{courseQuery.isSuccess &&
+							courseQuery.data.map((course: any) => (
 								<CourseList
 									id={course.id}
 									name={course.name}
@@ -61,11 +57,10 @@ const AllCourses = () => {
 									key={course.id}
 								/>
 							))}
-						</tbody>
-					</table>
-				)}
-			</MainLayout>
-		</Fragment>
+					</Tbody>
+				</Table>
+			</Stack>
+		</Box>
 	);
 };
 

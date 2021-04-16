@@ -1,133 +1,92 @@
-import { Controller, useForm } from 'react-hook-form';
-import { addCourse, fetchCategories } from '../../utils/api';
-import { useMutation, useQuery } from 'react-query';
-
-import Button from 'Components/common/Button';
-import FormGroup from 'Components/common/FormGroup';
-import ImageUpload from 'Components/common/ImageUpload';
-import Input from 'Components/common/Input';
-import Label from 'Components/common/Label';
-import Loader from 'react-loader-spinner';
-import MainLayout from 'Layouts/MainLayout';
-import MainToolbar from 'Layouts/MainToolbar';
-import React from 'react';
-import Select from 'Components/common/Select';
-import Textarea from 'Components/common/Textarea';
+import { Box, Button, ButtonGroup, Heading, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
-const AddNewCourse = () => {
-	interface Inputs {
-		name: string;
-		description?: string;
-		categories?: any;
-	}
+import routes from '../../constants/routes';
+import urls from '../../constants/urls';
+import API from '../../utils/api';
+import { mergeDeep } from '../../utils/mergeDeep';
+import Categories from './components/Categories';
+import Description from './components/Description';
+import FeaturedImage from './components/FeaturedImage';
+import Name from './components/Name';
+import Price from './components/Price';
+
+const AddNewCourse: React.FC = () => {
 	const history = useHistory();
-	const { register, handleSubmit, control } = useForm<Inputs>();
+	const methods = useForm();
+	const courseAPI = new API(urls.courses);
 
-	const categoryQuery = useQuery('categoryLists', () => fetchCategories());
-
-	const categoriesOption = categoryQuery?.data?.map((category: any) => {
-		return {
-			value: category.id,
-			label: category.name,
-		};
-	});
-
-	const addMutation = useMutation((data) => addCourse(data), {
+	const addMutation = useMutation((data) => courseAPI.store(data), {
 		onSuccess: (data) => {
-			history.push(`/courses/${data?.id}`);
+			history.push(routes.courses.edit.replace(':courseId', data.id));
 		},
 	});
 
 	const onSubmit = (data: any) => {
-		const categories = data.categories.map((category: any) => ({
-			id: category.value,
-		}));
-
 		const newData: any = {
-			name: data.name,
-			description: data.description,
-			categories: categories,
+			...(data.categories && {
+				categories: data.categories.map((category: any) => ({
+					id: category.value,
+				})),
+			}),
+			...(data.regular_price && {
+				regular_price: data.regular_price.toString(),
+			}),
 		};
 
-		addMutation.mutate(newData);
+		console.log(mergeDeep(data, newData));
+		addMutation.mutate(mergeDeep(data, newData));
 	};
 
 	return (
-		<>
-			<MainToolbar />
-			<MainLayout>
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<div className="mto-flex mto-flex-wrap mto--mx-4">
-						<div className="mto-w-1/2 mto-px-4">
-							<FormGroup>
-								<Label>{__('Course Name', 'masteriyo')}</Label>
-								<Input
-									placeholder={__('Your Course Name', 'masteriyo')}
-									ref={register({ required: true })}
-									name="name"></Input>
-							</FormGroup>
+		<FormProvider {...methods}>
+			<form onSubmit={methods.handleSubmit(onSubmit)}>
+				<Stack direction="column" spacing="8">
+					<Heading as="h1">{__('Add New Course', 'masteriyo')}</Heading>
 
-							<FormGroup>
-								<Label>{__('Course Description', 'masteriyo')}</Label>
-								<Textarea
-									placeholder={__('Your Course Title', 'masteriyo')}
-									rows={5}
-									ref={register}
-									name="description"></Textarea>
-							</FormGroup>
-							<div className="mto-flex-row">
-								<Button layout="primary" type="submit">
-									{addMutation.isLoading ? (
-										<Loader
-											type="ThreeDots"
-											height={14}
-											width={20}
-											color="#fff"
-										/>
-									) : (
-										__('Add Course', 'masteriyo')
-									)}
-								</Button>
-							</div>
-						</div>
+					<Stack direction="row" spacing="8">
+						<Box
+							flex="1"
+							bg="white"
+							p="10"
+							shadow="box"
+							d="flex"
+							flexDirection="column"
+							justifyContent="space-between">
+							<Stack direction="column" spacing="6">
+								<Stack direction="column" spacing="6">
+									<Name />
+									<Description />
+									<Price />
+								</Stack>
 
-						<div className="mto-w-1/2 mto-px-4">
-							<FormGroup>
-								<Label>{__('Course Category', 'masteriyo')}</Label>
-								<Controller
-									control={control}
-									name="categories"
-									defaultValue=""
-									render={({ onChange, value }) => (
-										<Select
-											closeMenuOnSelect={false}
-											isMulti
-											onChange={onChange}
-											value={value}
-											options={categoriesOption}
-										/>
-									)}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label>{__('Featured Image', 'masteriyo')}</Label>
-								{/* <ImageUpload
-									className="mto-mb-8"
-									title={__('Drag image or click to upload', 'masteriyo')}
-								/> */}
-								<div className="mto-flex mto-justify-between">
-									<Button>{__('Remove Featured Image', 'masteriyo')}</Button>
-									<Button layout="primary">{__('Add New', 'masteriyo')}</Button>
-								</div>
-							</FormGroup>
-						</div>
-					</div>
-				</form>
-			</MainLayout>
-		</>
+								<ButtonGroup>
+									<Button
+										type="submit"
+										colorScheme="blue"
+										isLoading={addMutation.isLoading}>
+										{__('Add Course', 'masteriyo')}
+									</Button>
+									<Button variant="outline" onClick={() => history.goBack()}>
+										{__('Cancel', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
+							</Stack>
+						</Box>
+						<Box w="400px" bg="white" p="10" shadow="box">
+							<Stack direction="column" spacing="6">
+								<Categories />
+								<FeaturedImage />
+							</Stack>
+						</Box>
+					</Stack>
+				</Stack>
+			</form>
+		</FormProvider>
 	);
 };
 

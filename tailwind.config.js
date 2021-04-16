@@ -4,7 +4,7 @@ const { isProduction, isDevelopment } = require('webpack-mode');
 
 module.exports = {
 	purge: {
-		enabled: isProduction ? true : false,
+		enabled:true,
 		content: ['./assets/js/src/**/*.tsx'],
 	},
 	darkMode: false, // or 'media' or 'class'

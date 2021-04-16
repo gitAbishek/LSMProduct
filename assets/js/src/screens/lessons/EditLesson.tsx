@@ -1,186 +1,194 @@
-import React, { Fragment, useState } from 'react';
 import {
-	addLesson,
-	fetchLesson,
-	fetchLessons,
-	fetchSection,
-	updateLesson,
-} from '../../utils/api';
-import { useHistory, useParams } from 'react-router';
-import { useMutation, useQuery } from 'react-query';
-
-import Button from 'Components/common/Button';
-import Dropdown from 'Components/common/Dropdown';
-import DropdownOverlay from 'Components/common/DropdownOverlay';
-import FormGroup from 'Components/common/FormGroup';
-import Input from 'Components/common/Input';
-import Label from 'Components/common/Label';
-import MainLayout from 'Layouts/MainLayout';
-import MainToolbar from 'Layouts/MainToolbar';
-import OptionButton from 'Components/common/OptionButton';
-import Select from 'Components/common/Select';
-import Slider from 'rc-slider';
-import Textarea from 'Components/common/Textarea';
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
+	Box,
+	Button,
+	ButtonGroup,
+	Center,
+	Divider,
+	Flex,
+	Heading,
+	IconButton,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
+	Spinner,
+	Stack,
+	useToast,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { useForm } from 'react-hook-form';
-import { useToasts } from 'react-toast-notifications';
+import React, { useRef, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
+import { useMutation, useQuery } from 'react-query';
+import { useHistory, useParams } from 'react-router';
+
+import routes from '../../constants/routes';
+import urls from '../../constants/urls';
+import API from '../../utils/api';
+import Description from './components/Description';
+import FeaturedImage from './components/FeaturedImage';
+import Name from './components/Name';
 
 const EditLesson: React.FC = () => {
 	const { lessonId }: any = useParams();
-	const { push } = useHistory();
-	interface Inputs {
-		name: string;
-		description?: string;
-		categories?: any;
-	}
+	const history = useHistory();
+	const methods = useForm();
+	const toast = useToast();
+	const cancelRef = useRef<any>();
+	const lessonAPI = new API(urls.lessons);
+	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
-	const { register, handleSubmit } = useForm<Inputs>();
-	const [playBackTime, setPlayBackTime] = useState(3);
-	const { addToast } = useToasts();
-
-	const playBackTimeOnChange = (value: number) => {
-		setPlayBackTime(value);
-	};
-
-	const lessonQuery = useQuery([`section${lessonId}`, lessonId], () =>
-		fetchLesson(lessonId)
+	const lessonQuery = useQuery(
+		[`section${lessonId}`, lessonId],
+		() => lessonAPI.get(lessonId),
+		{
+			onError: () => {
+				history.goBack();
+			},
+		}
 	);
 
-	const addLessonMutation = useMutation((data: object) => addLesson(data), {
-		onSuccess: (data: any) => {
-			addToast(data?.name + __(' has been updated successfully'), {
-				appearance: 'success',
-				autoDismiss: true,
-				onDismiss: () => {
-					push(`/builder/${lessonQuery?.data?.course_id}`);
-				},
-			});
-		},
-	});
+	const updateLesson = useMutation(
+		(data: object) => lessonAPI.update(lessonId, data),
+		{
+			onSuccess: (data: any) => {
+				toast({
+					title: __('Lesson Updated Successfully', 'masteriyo'),
+					description: data.name + __(' has been updated successfully.'),
+					isClosable: true,
+					status: 'success',
+				});
+				history.push(routes.section.replace(':courseId', data.course_id));
+			},
+		}
+	);
+
+	const deleteLesson = useMutation(
+		(lessonId: number) => lessonAPI.delete(lessonId),
+		{
+			onSuccess: (data: any) => {
+				toast({
+					title: __('Lesson Deleted Successfully', 'masteriyo'),
+					description: data.name + __(' has been deleted successfully.'),
+					isClosable: true,
+					status: 'error',
+				});
+				history.push(routes.section.replace(':courseId', data.course_id));
+			},
+		}
+	);
+
 	const onSubmit = (data: object) => {
-		addLessonMutation.mutate(data);
+		updateLesson.mutate(data);
+	};
+
+	const onDeletePress = () => {
+		setDeleteModalOpen(true);
+	};
+
+	const onDeleteConfirm = () => {
+		deleteLesson.mutate(lessonId);
+	};
+
+	const onDeleteModalClose = () => {
+		setDeleteModalOpen(false);
 	};
 
 	return (
-		<Fragment>
-			<MainToolbar />
-			<MainLayout>
-				<div>
-					<div className="mto-flex mto-justify-between mto-mb-10">
-						<h1 className="mto-text-xl mto-m-0 mto-font-medium">
-							{__('Add New Lesson', 'masteriyo')}
-						</h1>
-						<div>
-							<Dropdown
-								align="end"
-								content={
-									<DropdownOverlay>
-										<ul>
-											<li>{__('Delete', 'masteriyo')}</li>
-										</ul>
-									</DropdownOverlay>
-								}>
-								<OptionButton />
-							</Dropdown>
-						</div>
-					</div>
-					<div>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<FormGroup>
-								<Label htmlFor="">{__('Lesson Name', 'masteriyo')}</Label>
-								<Input
-									placeholder={__('Your topic title', 'masteriyo')}
-									ref={register({ required: true })}
-									defaultValue={lessonQuery?.data?.name}
-									name="name"
+		<FormProvider {...methods}>
+			<Box bg="white" p="10" shadow="box">
+				{lessonQuery.isLoading && (
+					<Center minH="xs">
+						<Spinner />
+					</Center>
+				)}
+				{lessonQuery.isSuccess && (
+					<Stack direction="column" spacing="8">
+						<Flex aling="center" justify="space-between">
+							<Heading as="h1" fontSize="x-large">
+								{__('Edit Lesson', 'masteriyo')}
+							</Heading>
+							<Menu placement="bottom-end">
+								<MenuButton
+									as={IconButton}
+									icon={<BiDotsVerticalRounded />}
+									variant="outline"
+									rounded="sm"
+									fontSize="large"
 								/>
-							</FormGroup>
+								<MenuList>
+									<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
+										{__('Delete', 'masteriyo')}
+									</MenuItem>
+								</MenuList>
+							</Menu>
+						</Flex>
 
-							<FormGroup>
-								<Label htmlFor="">{__('Description', 'masteriyo')}</Label>
-								<Textarea
-									placeholder={__('Your course description', 'masteriyo')}
-									rows={5}
-									ref={register}
-									name="description"
-									defaultValue={lessonQuery?.data?.description}
-								/>
-							</FormGroup>
+						<form onSubmit={methods.handleSubmit(onSubmit)}>
+							<Stack direction="column" spacing="6">
+								<Name defaultValue={lessonQuery.data.name} />
+								<Description defaultValue={lessonQuery.data.description} />
+								<FeaturedImage defaultValue={lessonQuery.data.featured_image} />
 
-							<FormGroup>
-								<Label htmlFor="">{__('Featured Image', 'masteriyo')}</Label>
-							</FormGroup>
-							<div>
-								<div>
-									<FormGroup>
-										<Label htmlFor="">{__('Video Source', 'masteriyo')}</Label>
-										<Select
-											options={[
-												{
-													value: 'source',
-													label: __('Select Video Source', 'masteriyo'),
-												},
-												{ value: 'youtube', label: __('Youtube', 'masteriyo') },
-												{ value: 'vimeo', label: __('Vimeo', 'masteriyo') },
-												{ value: 'custom', label: __('Custom', 'masteriyo') },
-											]}
-										/>
-									</FormGroup>
-								</div>
-								<div>
-									<FormGroup>
-										<Label htmlFor="">{__('Video URL', 'masteriyo')}</Label>
-										<Input
-											placeholder="video url"
-											ref={register}
-											name="video_source_url"
-										/>
-									</FormGroup>
-								</div>
-							</div>
+								<Box py="3">
+									<Divider />
+								</Box>
 
-							<FormGroup>
-								<Label htmlFor="">
-									{__('Video Playback Time', 'masteriyo')}
-								</Label>
-
-								<div>
-									<Slider
-										min={0}
-										max={20}
-										defaultValue={playBackTime}
-										onChange={playBackTimeOnChange}
-									/>
-								</div>
-								<div>
-									<Input
-										type="number"
-										value={playBackTime}
-										onChange={() => playBackTimeOnChange}
-									/>
-								</div>
-							</FormGroup>
-							<div>
-								<div className="mto-flex">
+								<ButtonGroup>
 									<Button
+										colorScheme="blue"
 										type="submit"
-										layout="primary"
-										style={{ marginRight: 16 }}>
-										{__('Update', 'masteriyo')}
+										isLoading={updateLesson.isLoading}>
+										{__('Update Lesson', 'masteriyo')}
 									</Button>
-									<Button
-										onClick={() =>
-											push(`/builder/${lessonQuery?.data?.course_id}`)
-										}>
+									<Button variant="outline" onClick={() => history.goBack()}>
 										{__('Cancel', 'masteriyo')}
 									</Button>
-								</div>
-							</div>
+								</ButtonGroup>
+							</Stack>
 						</form>
-					</div>
-				</div>
-			</MainLayout>
-		</Fragment>
+					</Stack>
+				)}
+			</Box>
+			<AlertDialog
+				isOpen={isDeleteModalOpen}
+				onClose={onDeleteModalClose}
+				isCentered
+				leastDestructiveRef={cancelRef}>
+				<AlertDialogOverlay>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							{__('Delete Lesson')} {name}
+						</AlertDialogHeader>
+						<AlertDialogBody>
+							Are you sure? You can't restore this section
+						</AlertDialogBody>
+						<AlertDialogFooter>
+							<ButtonGroup>
+								<Button
+									ref={cancelRef}
+									onClick={onDeleteModalClose}
+									variant="outline">
+									{__('Cancel', 'masteriyo')}
+								</Button>
+								<Button
+									colorScheme="red"
+									onClick={onDeleteConfirm}
+									isLoading={deleteLesson.isLoading}>
+									{__('Delete', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialogOverlay>
+			</AlertDialog>
+		</FormProvider>
 	);
 };
 

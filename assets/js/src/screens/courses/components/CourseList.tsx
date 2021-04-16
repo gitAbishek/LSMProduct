@@ -1,11 +1,29 @@
+import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
+	Badge,
+	Button,
+	ButtonGroup,
+	IconButton,
+	Link,
+	Stack,
+	Td,
+	Tooltip,
+	Tr,
+} from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
+import React, { useRef, useState } from 'react';
 import { BiEdit, BiTrash } from 'react-icons/bi';
-import { Link, useHistory } from 'react-router-dom';
-import React, { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 
-import DeleteModal from 'Components/layout/DeleteModal';
-import Icon from 'Components/common/Icon';
-import { deleteCourse } from '../../../utils/api';
+import routes from '../../../constants/routes';
+import urls from '../../../constants/urls';
+import API from '../../../utils/api';
 
 interface Props {
 	id: number;
@@ -18,70 +36,112 @@ const CourseList: React.FC<Props> = (props) => {
 	const { id, name, price, categories } = props;
 	const history = useHistory();
 	const queryClient = useQueryClient();
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const courseAPI = new API(urls.courses);
+	const cancelRef = useRef<any>();
 
-	const deleteMutation = useMutation((id: number) => deleteCourse(id), {
+	const deleteCourse = useMutation((id: number) => courseAPI.delete(id), {
 		onSuccess: () => {
+			setDeleteModalOpen(false);
 			queryClient.invalidateQueries('courseList');
 		},
 	});
 
 	const onDeletePress = () => {
-		setIsModalOpen(true);
+		setDeleteModalOpen(true);
 	};
 
-	const onModalClose = () => {
-		setIsModalOpen(false);
+	const onDeleteModalClose = () => {
+		setDeleteModalOpen(false);
 	};
 
 	const onDeleteConfirm = () => {
-		deleteMutation.mutate(id);
+		deleteCourse.mutate(id);
 	};
 
-	const onEditPress = (id: any) => {
-		history.push(`/courses/edit/${id}`);
+	const onEditPress = () => {
+		history.push(routes.courses.edit.replace(':courseId', id.toString()));
 	};
 
 	return (
-		<>
-			<tr key={id}>
-				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
-					<Link to={`/builder/${id}`}>{name}</Link>
-				</td>
-				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
-					{categories.map((category: any) => (
-						<span
-							key={category.id}
-							className="mto-bg-primary mto-rounded-full mto-text-white mto-text-sm mto-px-3 mto-py-1 mto-inline-block mto-mr-1">
-							{category.name}
-						</span>
+		<Tr>
+			<Td>
+				<Link
+					as={RouterLink}
+					to={routes.section.replace(':courseId', id.toString())}
+					fontWeight="semibold"
+					_hover={{ color: 'blue.500' }}>
+					{name}
+				</Link>
+			</Td>
+			<Td>
+				<Stack direction="row">
+					{categories.map((category: any, index: any) => (
+						<Badge key={index}>{category.name}</Badge>
 					))}
-				</td>
-				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
-					{price}
-				</td>
-				<td className="mto-px-6 mto-py-4 mto-whitespace-nowrap mto-transition-colors hover:mto-text-blue-500 mto-text-base">
-					<ul className="mto-flex mto-list-none mto-text-base mto-justify-end">
-						<li
-							onClick={() => onEditPress(id)}
-							className="mto-text-gray-800 hover:mto-text-blue-500 mto-cursor-pointer mto-ml-4">
-							<Icon icon={<BiEdit />} />
-						</li>
-						<li
+				</Stack>
+			</Td>
+			<Td>{price}</Td>
+			<Td>
+				<ButtonGroup>
+					<Tooltip label={__('Edit Course', 'masteriyo')}>
+						<IconButton
+							icon={<BiEdit />}
+							colorScheme="blue"
+							variant="link"
+							size="lg"
+							padding="0"
+							minW="0"
+							aria-label={__('Edit Course', 'masteriyo')}
+							onClick={() => onEditPress()}
+						/>
+					</Tooltip>
+					<Tooltip label={__('Delete Course', 'masteriyo')}>
+						<IconButton
+							icon={<BiTrash />}
+							colorScheme="red"
+							variant="link"
+							size="lg"
+							padding="0"
+							aria-label={__('Delete Course', 'masteriyo')}
 							onClick={() => onDeletePress()}
-							className="mto-text-gray-800 hover:mto-text-red-600 mto-cursor-pointer mto-ml-4">
-							<Icon icon={<BiTrash />} />
-						</li>
-					</ul>
-				</td>
-			</tr>
-			<DeleteModal
-				isOpen={isModalOpen}
-				onClose={onModalClose}
-				onDeletePress={onDeleteConfirm}
-				title={name}
-			/>
-		</>
+						/>
+					</Tooltip>
+				</ButtonGroup>
+				<AlertDialog
+					isOpen={isDeleteModalOpen}
+					onClose={onDeleteModalClose}
+					isCentered
+					leastDestructiveRef={cancelRef}>
+					<AlertDialogOverlay>
+						<AlertDialogContent>
+							<AlertDialogHeader>
+								{__('Delete Lesson')} {name}
+							</AlertDialogHeader>
+							<AlertDialogBody>
+								Are you sure? You can't restore this section
+							</AlertDialogBody>
+							<AlertDialogFooter>
+								<ButtonGroup>
+									<Button
+										ref={cancelRef}
+										onClick={onDeleteModalClose}
+										variant="outline">
+										{__('Cancel', 'masteriyo')}
+									</Button>
+									<Button
+										colorScheme="red"
+										onClick={onDeleteConfirm}
+										isLoading={deleteCourse.isLoading}>
+										{__('Delete', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
+							</AlertDialogFooter>
+						</AlertDialogContent>
+					</AlertDialogOverlay>
+				</AlertDialog>
+			</Td>
+		</Tr>
 	);
 };
 

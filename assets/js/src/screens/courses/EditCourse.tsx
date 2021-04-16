@@ -1,117 +1,124 @@
-import React, { useState } from 'react';
-import { fetchCourse, updateCourse } from '../../utils/api';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-
-import Button from 'Components/common/Button';
-import FormGroup from 'Components/common/FormGroup';
-import ImageUpload from 'Components/common/ImageUpload';
-import Input from 'Components/common/Input';
-import Label from 'Components/common/Label';
-import MainLayout from 'Layouts/MainLayout';
-import MainToolbar from 'Layouts/MainToolbar';
-import Select from 'Components/common/Select';
-import Textarea from 'Components/common/Textarea';
+import {
+	Box,
+	Button,
+	ButtonGroup,
+	Center,
+	Heading,
+	Spinner,
+	Stack,
+	useToast,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useHistory, useParams } from 'react-router-dom';
+
+import urls from '../../constants/urls';
+import API from '../../utils/api';
+import { mergeDeep } from '../../utils/mergeDeep';
+import Categories from './components/Categories';
+import Description from './components/Description';
+import FeaturedImage from './components/FeaturedImage';
+import Name from './components/Name';
+import Price from './components/Price';
 
 const EditCourse = () => {
-	interface Inputs {
-		name: string;
-		description?: string;
-		categories?: any;
-	}
-
 	const { courseId }: any = useParams();
-	const [isUpdated, setIsUpdated] = useState(false);
+	const history = useHistory();
 	const queryClient = useQueryClient();
+	const methods = useForm();
+	const toast = useToast();
 
+	const courseAPI = new API(urls.courses);
 	const courseQuery = useQuery([`course${courseId}`, courseId], () =>
-		fetchCourse(courseId)
+		courseAPI.get(courseId)
 	);
 
-	const { register, handleSubmit } = useForm<Inputs>();
+	const updateCourse = useMutation((data) => courseAPI.update(courseId, data), {
+		onSuccess: (data) => {
+			toast({
+				title: data.name + __(' is updated successfully.', 'masteriyo'),
+				description: __('You can keep editing it', 'masteriyo'),
+				status: 'success',
+				isClosable: true,
+			});
 
-	const addMutation = useMutation((data) => updateCourse(courseId, data), {
-		onSuccess: () => {
-			setIsUpdated(true);
 			queryClient.invalidateQueries(`course${courseId}`);
 		},
 	});
 
 	const onSubmit = (data: any) => {
-		addMutation.mutate(data);
+		const newData: any = {
+			...(data.categories && {
+				categories: data.categories.map((category: any) => ({
+					id: category.value,
+				})),
+			}),
+			...(data.regular_price && {
+				regular_price: data.regular_price.toString(),
+			}),
+		};
+
+		console.log(data);
+		updateCourse.mutate(mergeDeep(data, newData));
 	};
 
 	return (
 		<>
-			<MainToolbar />
-			<MainLayout>
-				{isUpdated && (
-					<div className="mto-p-4 mto-bg-green-100 mto-rounded-sm mto-mb-10 mto-text-green-700">
-						<strong>{courseQuery?.data?.name}</strong>
-						{__(' is successfully updated. You can keep editing.', 'masteriyo')}
-					</div>
-				)}
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<div className="mto-flex">
-						<div className="mto-w-1/2">
-							<FormGroup>
-								<Label htmlFor="">{__('Course Name', 'masteriyo')}</Label>
-								<Input
-									placeholder={__('Your Course Name', 'masteriyo')}
-									ref={register({ required: true })}
-									name="name"
-									defaultValue={courseQuery?.data?.name}></Input>
-							</FormGroup>
+			{courseQuery.isLoading && (
+				<Center h="xs">
+					<Spinner />
+				</Center>
+			)}
 
-							<FormGroup>
-								<Label htmlFor="">
-									{__('Course Description', 'masteriyo')}
-								</Label>
-								<Textarea
-									placeholder={__('Your Course Title', 'masteriyo')}
-									rows={5}
-									ref={register}
-									name="description"
-									defaultValue={courseQuery?.data?.description}></Textarea>
-							</FormGroup>
-							<div className="mto-flex-row">
-								<Button layout="primary" type="submit">
-									{__('Add Course', 'masteriyo')}
-								</Button>
-							</div>
-						</div>
+			{courseQuery.isSuccess && (
+				<FormProvider {...methods}>
+					<form onSubmit={methods.handleSubmit(onSubmit)}>
+						<Stack direction="column" spacing="8">
+							<Heading as="h1">
+								{__('Edit Course: ', 'masteriyo')} {courseQuery.data.name}
+							</Heading>
 
-						<div className="mto-w-1/2">
-							<FormGroup>
-								<Label htmlFor="">{__('Course Category', 'masteriyo')}</Label>
-								<Select
-									options={[
-										{ value: 'chocolate', label: __('Chocolate', 'masteriyo') },
-										{
-											value: 'strawberry',
-											label: __('Strawberry', 'masteriyo'),
-										},
-										{ value: 'vanilla', label: __('Vanilla', 'masteriyo') },
-									]}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label htmlFor="">{__('Featured Image', 'masteriyo')}</Label>
-								<ImageUpload
-									title={__('Drag image or click to upload', 'masteriyo')}
-								/>
-								<div className="mto-flex-row">
-									<Button>{__('Remove Featured Image', 'masteriyo')}</Button>
-									<Button layout="primary">{__('Add New', 'masteriyo')}</Button>
-								</div>
-							</FormGroup>
-						</div>
-					</div>
-				</form>
-			</MainLayout>
+							<Stack direction="row" spacing="8">
+								<Box
+									flex="1"
+									bg="white"
+									p="10"
+									shadow="box"
+									d="flex"
+									flexDirection="column"
+									justifyContent="space-between">
+									<Stack direction="column" spacing="6">
+										<Name defaultValue={courseQuery.data.name} />
+										<Description defaultValue={courseQuery.data.description} />
+										<Price defaultValue={courseQuery.data.regular_price} />
+									</Stack>
+									<ButtonGroup>
+										<Button
+											type="submit"
+											colorScheme="blue"
+											isLoading={updateCourse.isLoading}>
+											{__('Update', 'masteriyo')}
+										</Button>
+										<Button variant="outline" onClick={() => history.goBack()}>
+											{__('Cancel', 'masteriyo')}
+										</Button>
+									</ButtonGroup>
+								</Box>
+								<Box w="400px" bg="white" p="10" shadow="box">
+									<Stack direction="column" spacing="6">
+										<Categories defaultValue={courseQuery.data.categories} />
+										<FeaturedImage
+											defaultValue={courseQuery.data.featured_image}
+										/>
+									</Stack>
+								</Box>
+							</Stack>
+						</Stack>
+					</form>
+				</FormProvider>
+			)}
 		</>
 	);
 };

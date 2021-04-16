@@ -1,117 +1,154 @@
-import { AlignLeft, Timer, Trash } from '../../../assets/icons';
 import {
-	Card,
-	CardActions,
-	CardHeader,
-	CardHeading,
-} from 'Components/layout/Card';
-import React, { useState } from 'react';
-import { deleteLesson, deleteQuiz } from '../../../utils/api';
-import { useMutation, useQueryClient } from 'react-query';
-
-import { BiTrash } from 'react-icons/bi';
-import Button from 'Components/common/Button';
-import DeleteModal from 'Components/layout/DeleteModal';
-import DragHandle from './DragHandle';
-import Dropdown from 'Components/common/Dropdown';
-import DropdownOverlay from 'Components/common/DropdownOverlay';
-import Icon from 'Components/common/Icon';
-import OptionButton from 'Components/common/OptionButton';
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
+	Button,
+	ButtonGroup,
+	Flex,
+	Icon,
+	IconButton,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
+	Stack,
+	Text,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import React, { useRef, useState } from 'react';
+import {
+	BiAlignLeft,
+	BiDotsVerticalRounded,
+	BiTimer,
+	BiTrash,
+} from 'react-icons/bi';
+import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
+
+import { Sortable } from '../../../assets/icons';
+import routes from '../../../constants/routes';
+import urls from '../../../constants/urls';
+import API from '../../../utils/api';
 
 interface Props {
 	id: number;
 	name: string;
-	type: string;
+	type: 'lesson' | 'quiz' | string;
 }
 
 const Content: React.FC<Props> = (props) => {
 	const { id, name, type } = props;
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const queryClient = useQueryClient();
-	const { push } = useHistory();
+	const history = useHistory();
+	const cancelRef = useRef<any>();
+	const lessonAPI = new API(urls.lessons);
+	const quizAPI = new API(urls.quizes);
 
-	const deleteLessonMutation = useMutation((id: number) => deleteLesson(id), {
+	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('contents');
 		},
 	});
-	const deleteQuizMutation = useMutation((id: number) => deleteQuiz(id), {
+	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('contents');
 		},
 	});
 
-	const onModalClose = () => {
-		setIsModalOpen(false);
+	const onDeleteModalClose = () => {
+		setDeleteModalOpen(false);
 	};
-
 	const onDeletePress = () => {
-		setIsModalOpen(true);
+		setDeleteModalOpen(true);
 	};
-
-	const deleteContent = () => {
+	const onDeleteConfirm = () => {
 		if (type === 'lesson') {
-			deleteLessonMutation.mutate(id);
+			deleteLesson.mutate(id);
 		} else if (type === 'quiz') {
-			deleteQuizMutation.mutate(id);
+			deleteQuiz.mutate(id);
 		}
-		setIsModalOpen(false);
+		setDeleteModalOpen(false);
+	};
+	const onEditPress = () => {
+		if (type === 'lesson') {
+			history.push(routes.lesson.edit.replace(':lessonId', id.toString()));
+		}
+		if (type === 'quiz') {
+			history.push(
+				routes.quiz.edit.replace(':quizId', id.toString()).replace(':step', '')
+			);
+		}
 	};
 
 	return (
-		<>
-			<Card>
-				<CardHeader>
-					<CardHeading>
-						<DragHandle />
-						<Icon
-							className="mto-text-2xl mto-mr-4"
-							icon={type === 'lesson' ? <AlignLeft /> : <Timer />}
-						/>
-						<h5 className="mto-text-base mto-text-gray-800">{name}</h5>
-					</CardHeading>
-					<CardActions>
-						<Button
-							className="mto-mr-2 mto-h-10 mto-px-3"
-							size="small"
-							onClick={() =>
-								push(
-									type === 'lesson'
-										? `/builder/lesson/${id}`
-										: `/quiz/${id}/edit`
-								)
-							}>
-							{__('Edit', 'masteriyo')}
-						</Button>
-						<Dropdown
-							align={'end'}
-							autoClose
-							content={
-								<DropdownOverlay>
-									<ul className="mto-w-36 mto-text-gray-700 mto-m-4">
-										<li
-											className="mto-flex mto-items-center mto-text-sm mto-mb-4 hover:mto-text-primary mto-cursor-pointer"
-											onClick={() => onDeletePress()}>
-											<Icon className="mto-mr-1" icon={<BiTrash />} />
-											{__('Delete', 'masteriyo')}
-										</li>
-									</ul>
-								</DropdownOverlay>
-							}>
-							<OptionButton />
-						</Dropdown>
-					</CardActions>
-				</CardHeader>
-			</Card>
-			<DeleteModal
-				isOpen={isModalOpen}
-				onDeletePress={deleteContent}
-				onClose={onModalClose}
-				title={name}
-			/>
-		</>
+		<Flex
+			justify="space-between"
+			rounded="sm"
+			border="1px"
+			borderColor="gray.100"
+			p="2">
+			<Stack direction="row" spacing="3" align="center">
+				<Icon as={Sortable} fontSize="lg" color="gray.500" />
+				<Icon as={type === 'lesson' ? BiAlignLeft : BiTimer} fontSize="xl" />
+				<Text fontSize="sm">{name}</Text>
+			</Stack>
+			<Stack direction="row" spacing="3">
+				<Button variant="outline" size="sm" onClick={onEditPress}>
+					{__('Edit', 'masteriyo')}
+				</Button>
+				<Menu placement="bottom-end">
+					<MenuButton
+						as={IconButton}
+						icon={<BiDotsVerticalRounded />}
+						variant="outline"
+						rounded="sm"
+						size="sm"
+						fontSize="large"
+					/>
+					<MenuList>
+						<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
+							{__('Delete', 'masteriyo')}
+						</MenuItem>
+					</MenuList>
+				</Menu>
+			</Stack>
+			<AlertDialog
+				isOpen={isDeleteModalOpen}
+				onClose={onDeleteModalClose}
+				isCentered
+				leastDestructiveRef={cancelRef}>
+				<AlertDialogOverlay>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							{__('Delete Section')} {name}
+						</AlertDialogHeader>
+						<AlertDialogBody>
+							Are you sure? You can't restore this section
+						</AlertDialogBody>
+						<AlertDialogFooter>
+							<ButtonGroup>
+								<Button
+									ref={cancelRef}
+									onClick={onDeleteModalClose}
+									variant="outline">
+									{__('Cancel', 'masteriyo')}
+								</Button>
+								<Button
+									colorScheme="red"
+									onClick={onDeleteConfirm}
+									isLoading={deleteQuiz.isLoading || deleteLesson.isLoading}>
+									{__('Delete', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialogOverlay>
+			</AlertDialog>
+		</Flex>
 	);
 };
 

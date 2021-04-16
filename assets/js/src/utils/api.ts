@@ -1,178 +1,49 @@
-import { isDevelopment, isProduction } from './helper';
+import http from './http';
 
-import axios from 'axios';
-import urls from '../constants/urls';
+class API {
+	uri: string;
 
-axios.interceptors.request.use(function (config) {
-	config.headers = {
-		...config.headers,
-		'Content-Type': 'application/json',
-	};
-
-	// Sets nonce to run API on WordPress Dashboard
-	if (isProduction()) {
-		config.headers = {
-			...config.headers,
-			//@ts-ignore
-			'X-WP-Nonce': masteriyo.nonce,
-		};
+	constructor(uri: string) {
+		this.uri = `${uri}/`;
 	}
 
-	// Basic Auth for the local development, required basic auth plugin
-	if (isDevelopment()) {
-		config.auth = {
-			...config.auth,
-			username: process.env.username || '',
-			password: process.env.password || '',
-		};
+	async list(query?: any) {
+		return http({
+			url: this.uri,
+			method: 'get',
+			params: query,
+		}).then((res) => res.data);
 	}
-	return config;
-});
 
-export const fetchCourses = () => {
-	return axios.get(urls.courses).then((response) => response.data);
-};
+	async get(id: number) {
+		return http({
+			url: this.uri + id,
+			method: 'get',
+		}).then((res) => res.data);
+	}
 
-export const fetchCourse = (id: any) => {
-	return axios
-		.get(urls.course.replace(':id', id))
-		.then((response) => response.data);
-};
+	async store(data: any) {
+		return http({
+			url: this.uri,
+			method: 'post',
+			data: data,
+		}).then((res) => res.data);
+	}
 
-export const fetchSections = (courseId: number) => {
-	return axios
-		.get(urls.sections, {
-			params: {
-				parent: courseId,
-			},
-		})
-		.then((response) => response.data);
-};
+	async update(id: number, data: any) {
+		return http({
+			url: this.uri + id,
+			method: 'put',
+			data: data,
+		}).then((res) => res.data);
+	}
 
-export const fetchSection = (id: number) => {
-	return axios
-		.get(urls.section.replace(':id', id.toString()))
-		.then((response) => response.data);
-};
+	async delete(id: number) {
+		return http({
+			url: this.uri + id,
+			method: 'delete',
+		}).then((res) => res.data);
+	}
+}
 
-export const fetchContents = (sectionId: number) => {
-	return axios
-		.get(urls.contents, { params: { section: sectionId } })
-		.then((response) => response.data);
-};
-
-export const deleteCourse = (id: any) => {
-	return axios
-		.delete(urls.course.replace(':id', id.toString()))
-		.then((response) => response.data);
-};
-
-export const addCourse = (data: any) => {
-	return axios.post(urls.courses, data).then((response) => response.data);
-};
-
-export const updateCourse = (courseId: any, data: any) => {
-	return axios
-		.patch(urls.course.replace(':id', courseId.toString()), data)
-		.then((response) => response.data);
-};
-
-export const addSection = (data: any) => {
-	return axios.post(urls.sections, data).then((response) => response.data);
-};
-
-export const updateSection = (id: number, data: any) => {
-	return axios
-		.patch(urls.section.replace(':id', id.toString()), data)
-		.then((response) => response.data);
-};
-
-export const deleteSection = (id: number) => {
-	return axios
-		.delete(urls.section.replace(':id', id.toString()))
-		.then((response) => response.data);
-};
-
-export const fetchLessons = (courseId: number) => {
-	return axios
-		.get(urls.lessons, {
-			params: {
-				parent: courseId,
-			},
-		})
-		.then((response) => response.data);
-};
-
-export const fetchLesson = (lessonId: number) => {
-	return axios
-		.get(urls.lesson.replace(':id', lessonId.toString()))
-		.then((response) => response.data);
-};
-
-export const addLesson = (data: any) => {
-	return axios.post(urls.lessons, data).then((response) => response.data);
-};
-
-export const updateLesson = (id: number, data: any) => {
-	return axios
-		.patch(urls.lesson.replace(':id', id.toString()), data)
-		.then((response) => response.data);
-};
-
-export const deleteLesson = (id: number) => {
-	return axios
-		.delete(urls.lesson.replace(':id', id.toString()))
-		.then((response) => response.data);
-};
-
-export const fetchQuiz = (id: number) => {
-	return axios
-		.get(urls.quiz.replace(':id', id.toString()))
-		.then((response) => response.data);
-};
-
-export const addQuiz = (data: any) => {
-	return axios.post(urls.quizes, data).then((response) => response.data);
-};
-
-export const updateQuiz = (id: number, data: any) => {
-	return axios
-		.patch(urls.quiz.replace(':id', id.toString()), data)
-		.then((response) => response.data);
-};
-
-export const deleteQuiz = (id: number) => {
-	return axios
-		.delete(urls.quiz.replace(':id', id.toString()))
-		.then((response) => response.data);
-};
-
-export const fetchQuestions = (quizId: number) => {
-	return axios
-		.get(urls.questions, {
-			params: {
-				parent: quizId,
-			},
-		})
-		.then((response) => response.data);
-};
-
-export const addQuestion = (data: any) => {
-	return axios.post(urls.questions, data).then((response) => response.data);
-};
-
-export const updateQuestion = (id: number, data: any) => {
-	return axios
-		.patch(urls.question.replace(':id', id.toString()), data)
-		.then((response) => response.data);
-};
-
-export const deleteQuestion = (id: number) => {
-	return axios
-		.delete(urls.question.replace(':id', id.toString()))
-		.then((response) => response.data);
-};
-
-export const fetchCategories = () => {
-	return axios.get(urls.categories).then((response) => response.data);
-};
+export default API;

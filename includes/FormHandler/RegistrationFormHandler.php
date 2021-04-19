@@ -57,6 +57,8 @@ class RegistrationFormHandler {
 
 	/**
 	 * Verify nonce.
+	 *
+	 * @since 0.1.0
 	 */
 	protected function verify_nonce() {
 		$nonce_value = isset( $_REQUEST['_wpnonce'] ) ? wp_unslash( $_REQUEST['_wpnonce'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
@@ -71,6 +73,8 @@ class RegistrationFormHandler {
 
 	/**
 	 * Validate the submitted form.
+	 *
+	 * @since 0.1.0
 	 */
 	protected function validate_form() {
 		$data = $this->get_form_data();
@@ -116,6 +120,8 @@ class RegistrationFormHandler {
 	/**
 	 * Redirect after registration.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param User $user
 	 */
 	protected function redirect( $user ) {
@@ -133,6 +139,8 @@ class RegistrationFormHandler {
 
 	/**
 	 * Get the submitted form data.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return array
 	 */

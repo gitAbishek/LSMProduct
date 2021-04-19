@@ -443,6 +443,8 @@ class ScriptStyle {
 					'current_user_id' => get_current_user_id(),
 					'nonce' => wp_create_nonce( 'wp_rest' ),
 					'labels' => array(
+						'save'   => __( 'Save', 'masteriyo' ),
+						'saving' => __( 'Saving...', 'masteriyo' ),
 						'profile_update_success' => __( 'Your profile was updated successfully', 'masteriyo' ),
 					),
 				),

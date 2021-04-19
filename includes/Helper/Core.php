@@ -1727,3 +1727,208 @@ function masteriyo_course_has_faqs( $course_id ) {
 
 	return count( $faqs ) > 0;
 }
+
+if ( ! function_exists( 'masteriyo_create_new_user_username' ) ) {
+	/**
+	 * Create a unique username for a new customer.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $email New customer email address.
+	 * @param array  $new_user_args Array of new user args, maybe including first and last names.
+	 * @param string $suffix Append string to username to make it unique.
+	 *
+	 * @return string Generated username.
+	 */
+	function masteriyo_create_new_user_username( $email, $new_user_args = array(), $suffix = '' ) {
+		$username_parts = array();
+
+		if ( isset( $new_user_args['first_name'] ) ) {
+			$username_parts[] = sanitize_user( $new_user_args['first_name'], true );
+		}
+
+		if ( isset( $new_user_args['last_name'] ) ) {
+			$username_parts[] = sanitize_user( $new_user_args['last_name'], true );
+		}
+
+		// Remove empty parts.
+		$username_parts = array_filter( $username_parts );
+
+		// If there are no parts, e.g. name had unicode chars, or was not provided, fallback to email.
+		if ( empty( $username_parts ) ) {
+			$email_parts    = explode( '@', $email );
+			$email_username = $email_parts[0];
+
+			// Exclude common prefixes.
+			if ( in_array(
+				$email_username,
+				array(
+					'sales',
+					'hello',
+					'mail',
+					'contact',
+					'info',
+				),
+				true
+			) ) {
+				// Get the domain part.
+				$email_username = $email_parts[1];
+			}
+
+			$username_parts[] = sanitize_user( $email_username, true );
+		}
+
+		$username = masteriyo_strtolower( implode( '.', $username_parts ) );
+
+		if ( $suffix ) {
+			$username .= $suffix;
+		}
+
+		/**
+		 * WordPress 4.4 - filters the list of blocked usernames.
+		 *
+		 * @since 0.1.0
+		 *
+		 * @param array $usernames Array of blocked usernames.
+		 */
+		$illegal_logins = (array) apply_filters( 'illegal_user_logins', array() );
+
+		// Stop illegal logins and generate a new random username.
+		if ( in_array( strtolower( $username ), array_map( 'strtolower', $illegal_logins ), true ) ) {
+			$new_args = array();
+
+			/**
+			 * Filter generated username.
+			 *
+			 * @since 0.1.0
+			 *
+			 * @param string $username      Generated username.
+			 * @param string $email         New user email address.
+			 * @param array  $new_user_args Array of new user args, maybe including first and last names.
+			 * @param string $suffix        Append string to username to make it unique.
+			 */
+			$new_args['first_name'] = apply_filters(
+				'masteriyo_generated_username',
+				'masteriyo_user_' . zeroise( wp_rand( 0, 9999 ), 4 ),
+				$email,
+				$new_user_args,
+				$suffix
+			);
+
+			return masteriyo_create_new_user_username( $email, $new_args, $suffix );
+		}
+
+		if ( username_exists( $username ) ) {
+			// Generate something unique to append to the username in case of a conflict with another user.
+			$suffix = '-' . zeroise( wp_rand( 0, 9999 ), 4 );
+			return masteriyo_create_new_user_username( $email, $new_user_args, $suffix );
+		}
+
+		/**
+		 * Filter new customer username.
+		 *
+		 * @since 0.1.0
+		 *
+		 * @param string $username      Customer username.
+		 * @param string $email         New customer email address.
+		 * @param array  $new_user_args Array of new user args, maybe including first and last names.
+		 * @param string $suffix        Append string to username to make it unique.
+		 */
+		return apply_filters( 'masteriyo_new_user_username', $username, $email, $new_user_args, $suffix );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
+	/**
+	 * Create a new customer.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $email    Customer email.
+	 * @param  string $username Customer username.
+	 * @param  string $password Customer password.
+	 * @param  array  $args     List of other arguments.
+	 *
+	 * @return int|User|WP_Error Returns WP_Error on failure, Int (user ID) on success.
+	 */
+	function masteriyo_create_new_user( $email, $username = '', $password = '', $args = array() ) {
+		if ( empty( $email ) || ! is_email( $email ) ) {
+			return new \WP_Error( 'registration-error-invalid-email', __( 'Please provide a valid email address.', 'masteriyo' ) );
+		}
+
+		if ( email_exists( $email ) ) {
+			$message = apply_filters( 'masteriyo_registration_error_email_exists', __( 'An account is already registered with your email address.', 'masteriyo' ), $email );
+			return new \WP_Error( 'registration-error-email-exists', $message );
+		}
+
+		if ( masteriyo_registration_is_generate_username() && empty( $username ) ) {
+			$username = masteriyo_create_new_user_username( $email, $args );
+		}
+
+		$username = sanitize_user( $username );
+
+		if ( empty( $username ) || ! validate_username( $username ) ) {
+			return new \WP_Error( 'registration-error-invalid-username', __( 'Please enter a valid account username.', 'masteriyo' ) );
+		}
+
+		if ( username_exists( $username ) ) {
+			return new \WP_Error( 'registration-error-username-exists', __( 'An account is already registered with that username. Please choose another.', 'masteriyo' ) );
+		}
+
+		// Handle password creation.
+		$password_generated = false;
+		if ( masteriyo_registration_is_generate_password() ) {
+			$password           = wp_generate_password();
+			$password_generated = true;
+		}
+
+		if ( empty( $password ) ) {
+			return new \WP_Error( 'registration-error-missing-password', __( 'Please enter an account password.', 'masteriyo' ) );
+		}
+
+		// Use WP_Error to handle registration errors.
+		$errors = new \WP_Error();
+
+		do_action( 'masteriyo_register_post', $username, $email, $errors );
+
+		$errors = apply_filters( 'masteriyo_registration_errors', $errors, $username, $email );
+
+		if ( $errors->get_error_code() ) {
+			return $errors;
+		}
+
+		$user = masteriyo( 'user' );
+		$user->set_props( (array) $args );
+		$user->set_user_login( $username );
+		$user->set_user_pass( $password );
+		$user->set_email( $email );
+		$user->set_roles( masteriyo_get_setting_value( 'masteriyo_registration_default_role', 'subscriber' ) );
+
+		$user = apply_filters( 'masteriyo_new_user_data', $user );
+
+		masteriyo( 'user.store' )->create( $user );
+
+		if ( ! $user->get_id() ) {
+			return new \WP_Error( 'registration-failure', __( 'Registration failed.', 'masteriyo' ) );
+		}
+
+		do_action( 'masteriyo_created_customer', $user, $password_generated );
+
+		return $user;
+	}
+}
+
+/**
+ * Login a customer (set auth cookie and set global user object).
+ *
+ * @since 0.1.0
+ *
+ * @param int $user_id Customer ID.
+ */
+function masteriyo_set_customer_auth_cookie( $user_id ) {
+	wp_set_current_user( $user_id );
+	wp_set_auth_cookie( $user_id, true );
+
+	// Update session.
+	masteriyo('session')->init_session_cookie();
+}

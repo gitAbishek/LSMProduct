@@ -11,7 +11,6 @@ namespace ThemeGrill\Masteriyo;
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Session\SessionHandler;
-use ThemeGrill\Masteriyo\Contracts\Template;
 
 /**
  * Notice class.
@@ -59,24 +58,12 @@ class Notice {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Session\SessionHandler
-	 */
+	 * @var ThemeGrill\Masteriyo\Session\Session
+*/
 	private $session;
-
-	/**
-	 * Template loader.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var ThemeGrill\Masteriyo\Template;
-	 */
-	private $template_loader;
-
-	public function __construct( SessionHandler $session, Template $template_loader ) {
-		$this->session         = $session;
-		$this->template_loader = $template_loader;
+	public function __construct( SessionHandler $session ) {
+		$this->session = $session;
 	}
-
 	/**
 	 * Get the count of notices added, either for all notices (default) or for one.
 	 * particular notice type specified by $type.
@@ -153,12 +140,11 @@ class Notice {
 		if ( ! empty( $message ) ) {
 			$notices[] = array(
 				'type'   => $type,
-				'notice' => $message,
+				'message' => $message,
 				'data'   => $data
 			);
 		}
-
-		$this->session->set( 'notices', $notices );
+		$this->session->put( 'notices', $notices );
 	}
 
 	/**
@@ -181,7 +167,7 @@ class Notice {
 	 * @since 0.1.0
 	 */
 	public function clear() {
-		$this->session->set( 'notices', array() );
+		$this->session->put( 'notices', array() );
 	}
 
 	/**
@@ -194,12 +180,14 @@ class Notice {
 	 */
 	public function display( $message, $type = self::SUCCESS, $data = array() ) {
 		$message = apply_filters( "masteriyo_add_notice_{$type}", $message );
-
-		$this->template->get( "notices/{$type}.php", array(
-			'message' => $message,
-			'type'    => $type,
-			'data'    => $data,
-		) );
+		masteriyo_get_template(
+			"notices/{$type}.php",
+			array(
+				'message' => $message,
+				'type'    => $type,
+				'data'    => $data,
+			)
+		);
 	}
 
 	/**
@@ -214,18 +202,20 @@ class Notice {
 		$notices = $this->session->get( 'notices', array() );
 
 		if ( ! empty( $type ) ) {
-			$notices = array_filter( $noitices, function( $notice ) use( $type ) {
+			$notices = array_filter( $notices, function( $notice ) use( $type ) {
 				return $type === $notice[ 'type' ];
 			} );
 		}
 
 		$notice_html = array_reduce( $notices, function( $notice_html, $notice ) {
-			$html = $this->template->get_html( "notices/{$type}.php", array(
-				'message' => $message,
-				'type'    => $type,
-				'data'    => $data,
-			) );
-
+			$html = masteriyo_get_template_html(
+				"notices/{$notice['type']}.php",
+				array(
+					'message' => $notice['message'],
+					'type'    => $notice['type'],
+					'data'    => $notice['data'],
+				)
+			);
 			return $notice_html . $html;
 		}, ''  );
 

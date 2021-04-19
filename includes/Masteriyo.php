@@ -80,6 +80,7 @@ class Masteriyo extends Container {
 
 		$this->get( 'query.frontend' );
 
+		$this->get( 'formhandlers' )->register();
 
 		// Initilize the hooks.
 		$this->init_hooks();
@@ -158,6 +159,7 @@ class Masteriyo extends Container {
 			"{$namespace}\\FaqServiceProvider",
 			"{$namespace}\\EmailsServiceProvider",
 			"{$namespace}\\CourseReviewServiceProvider",
+			"{$namespace}\\FormHandlersServiceProvider",
 		) );
 	}
 

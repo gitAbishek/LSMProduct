@@ -436,3 +436,17 @@ function masteriyo_sanitize_permalink( $value ) {
 	$value = str_replace( 'http://', '', $value );
 	return untrailingslashit( $value );
 }
+
+/**
+ * Make a string lowercase.
+ * Try to use mb_strtolower() when available.
+ *
+ * @since  0.1.0
+ *
+ * @param  string $string String to format.
+ *
+ * @return string
+ */
+function masteriyo_strtolower( $string ) {
+	return function_exists( 'mb_strtolower' ) ? mb_strtolower( $string ) : strtolower( $string );
+}

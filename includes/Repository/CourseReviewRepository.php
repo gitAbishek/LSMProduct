@@ -216,4 +216,49 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			}
 		}
 	}
+
+	/**
+	 * Fetch courses reviews.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $query_vars Query vars.
+	 * @return CourseReview[]
+	 */
+	public function query( $query_vars ) {
+		$args = $this->get_wp_query_args( $query_vars );
+		// Fetching review of comment_type 'course_review', 'type' already map to 'post_type' so need to add 'type' as 'comment_type' here.
+		$args = array_merge( $args, array( 'type' => 'course_review' ) );
+
+		if ( ! empty( $args['errors'] ) ) {
+			$query = (object) array(
+				'posts'         => array(),
+				'found_posts'   => 0,
+				'max_num_pages' => 0,
+			);
+		} else {
+			$query = new \WP_Comment_Query( $args );
+		}
+
+		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->comments ) ) {
+			// Prime caches before grabbing objects.
+			update_comment_cache( $query->comments );
+		}
+
+		if ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) {
+			$course_review = $query->comments;
+		} else {
+			$course_review = array_filter( array_map( 'masteriyo_get_course_review', $query->comments ) );
+		}
+
+		if ( isset( $query_vars['paginate'] ) &&  $query_vars['paginate'] ) {
+			return (object) array(
+				'course_review' => $course_review,
+				'total'         => $query->found_posts,
+				'max_num_pages' => $query->max_num_pages,
+			);
+		}
+
+		return $course_review;
+	}
 }

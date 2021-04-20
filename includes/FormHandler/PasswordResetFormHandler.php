@@ -48,7 +48,7 @@ class PasswordResetFormHandler {
 
 			do_action( 'password_reset', $user, $data['password'] );
 
-			wp_set_password( $data['password'], $user->get_id() );
+			wp_set_password( $data['password'], $user->ID );
 
 			masteriyo_set_password_reset_cookie();
 
@@ -131,8 +131,10 @@ class PasswordResetFormHandler {
 			throw new \Exception( __( 'This key is invalid or has already been used. Please reset your password again if needed', 'masteriyo' ) );
 		}
 
-		$validation_errors = new \WP_Error();
-		do_action( 'validate_password_reset', $validation_errors, $user );
+		$validation_error = new \WP_Error();
+		do_action( 'validate_password_reset', $validation_error, $user );
+
+		$validation_errors = $validation_error->get_error_messages();
 
 		if ( count( $validation_errors ) > 0 ) {
 			foreach ( $validation_errors as $message ) {
@@ -141,7 +143,7 @@ class PasswordResetFormHandler {
 			throw new \Exception;
 		}
 
-		return masteriyo_get_user( $user );
+		return $user;
 	}
 
 	/**

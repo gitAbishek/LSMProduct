@@ -20,19 +20,23 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 do_action( 'masteriyo_email_header', $email_heading, $email );
 
 ?>
+<div class="email-template--header">
+	<h2 class="email-template--title"><?php esc_html_e( 'Massteriyo Password Reset', 'masteriyo' ); ?></h2>
+</div>
 <?php /* translators: %s: Username */ ?>
 <p><?php printf( esc_html__( 'Hi %s,', 'masteriyo' ), esc_html( $user->get_username() ) ); ?></p>
 <?php /* translators: %s: Site name */ ?>
-<p><?php printf( esc_html__( 'Someone has requested a new password for the following account on %s:', 'masteriyo' ), esc_html( $blogname ) ); ?></p>
-<?php /* translators: %s: Username */ ?>
-<p><?php printf( esc_html__( 'Username: %s', 'masteriyo' ), esc_html( $user->get_username() ) ); ?></p>
-<p><?php esc_html_e( 'If you didn\'t make this request, just ignore this email. If you\'d like to proceed:', 'masteriyo' ); ?></p>
-<p>
-	<a class="link" href="<?php echo esc_url( masteriyo_get_password_reset_link( $reset_key, $user->get_id() ) ); ?>">
-		<?php esc_html_e( 'Click here to reset your password', 'masteriyo' ); ?>
-	</a>
+<p class="email-template--info"><?php printf( esc_html__( 'Seems like you forgot your password on %s.', 'masteriyo' ), esc_html( $blogname ) ); ?></p>
+<p class="email-template--info"><?php esc_html_e( 'If you didn\'t make this request, just ignore this email.', 'masteriyo' ); ?></p>
+<p class="email-template--info"><?php esc_html_e( 'If you did, then you can use the following button to reset your password:', 'masteriyo' ); ?></p>
+<a class="email-template--button" href="<?php echo esc_url( masteriyo_get_password_reset_link( $reset_key, $user->get_id() ) ); ?>">
+	<?php esc_html_e( 'Reset your password', 'masteriyo' ); ?>
+</a>
+<p class="email-template--info"><?php esc_html_e( 'If you don’t use this link within 2 hours, it will expire.', 'masteriyo' ); ?></p>
+<p class="email-template--footer">
+	<?php esc_html_e( 'Thanks,', 'masteriyo' ); ?><br/>
+	<?php esc_html_e( 'The Masteriyo Team', 'masteriyo' ); ?>
 </p>
-
 <?php
 
 /**

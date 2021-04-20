@@ -24,4 +24,4 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 		<title><?php echo get_bloginfo( 'name', 'display' ); ?></title>
 	</head>
 	<body>
-		<div id="content">
+		<div id="content" class="email-template">

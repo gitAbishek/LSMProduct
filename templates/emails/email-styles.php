@@ -18,10 +18,27 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 
 ?>
 
-#content {
-	background: #e6e6e6;
-    padding: 10px 20px;
-    font-family: arial;
+.email-template{
+    width: 30%;
+    border:1px solid #EBECF2;
+    border-radius: 4px;
+    padding:10px 30px;
 }
-
+.email-template p{
+    line-height: 1.5;
+}
+.email-template--title{
+    font-size: 20px;
+    font-weight: 600;
+    color: #07092F; 
+}
+.email-template--button{
+    border-radius: 4px;
+    background: #78A6FF;
+    padding:12px 16px;
+    margin: 10px 0px;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+}
 <?php

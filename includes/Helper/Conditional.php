@@ -16,7 +16,7 @@ if ( ! function_exists( 'masteriyo_is_filtered' ) ) {
 	 * @return bool
 	 */
 	function masteriyo_is_filtered() {
-		return apply_filters( 'masteriyo__is_filtered', false);
+		return apply_filters( 'masteriyo_is_filtered', false );
 	}
 }
 
@@ -139,7 +139,7 @@ function masteriyo_is_admin_page() {
 	}
 
 	$screen = get_current_screen();
-	return 'toplevel_page_masteriyo' === $screen->id ? true: false;
+	return 'toplevel_page_masteriyo' === $screen->id ? true : false;
 }
 
 
@@ -196,6 +196,6 @@ if ( ! function_exists( 'masteriyo_prices_include_tax' ) ) {
 		}
 
 		$prices_include_tax = get_option( 'masteriyo_prices_include_tax' ) === 'yes';
-		return apply_filters( 'masteriyo_prices_include_tax',  $prices_include_tax );
+		return apply_filters( 'masteriyo_prices_include_tax', $prices_include_tax );
 	}
 }

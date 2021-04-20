@@ -1465,14 +1465,14 @@ function masteriyo_get_myaccount_endpoints() {
  */
 function masteriyo_get_account_endpoint_url( $endpoint ) {
 	if ( 'dashboard' === $endpoint ) {
-		return masteriyo_get_page_permalink( 'myaccount', get_permalink( $GLOBALS['post'] ) );
+		return masteriyo_get_page_permalink( 'myaccount' );
 	}
 
 	if ( 'user-logout' === $endpoint ) {
 		return masteriyo_logout_url();
 	}
 
-	return masteriyo_get_endpoint_url( $endpoint, '', masteriyo_get_page_permalink( 'myaccount', get_permalink( $GLOBALS['post'] ) ) );
+	return masteriyo_get_endpoint_url( $endpoint, '', masteriyo_get_page_permalink( 'myaccount' ) );
 }
 
 /**
@@ -1963,4 +1963,61 @@ function masteriyo_get_course_review( $course_review ) {
 	}
 
 	return apply_filters( 'masteriyo_get_course_review', $course_review_obj, $course_review );
+}
+
+/**
+ * Set constants to prevent caching by some plugins.
+ *
+ * @since 0.1.0
+ */
+function masteriyo_set_nocache_constants() {
+	Constants::set( 'DONOTCACHEPAGE', true );
+	Constants::set( 'DONOTCACHEOBJECT', true );
+	Constants::set( 'DONOTCACHEDB', true );
+}
+
+/**
+ * Wrapper for nocache_headers which also disables page caching.
+ *
+ * @since 0.1.0
+ */
+function masteriyo_nocache_headers() {
+	masteriyo_set_nocache_constants();
+	nocache_headers();
+}
+
+/**
+ * Set password reset cookie.
+ *
+ * @since 0.1.0
+ *
+ * @param string $value Cookie value.
+ */
+function masteriyo_set_password_reset_cookie( $value = '' ) {
+	$rp_cookie = 'wp-resetpass-' . COOKIEHASH;
+	$rp_path   = isset( $_SERVER['REQUEST_URI'] ) ? current( explode( '?', wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) : ''; // WPCS: input var ok, sanitization ok.
+
+	if ( $value ) {
+		setcookie( $rp_cookie, $value, 0, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
+	} else {
+		setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
+	}
+}
+
+/**
+ * Get password reset link.
+ *
+ * @since 0.1.0
+ *
+ * @param string $reset_key
+ * @param int $user_id
+ */
+function masteriyo_get_password_reset_link( $reset_key, $user_id ) {
+	return add_query_arg(
+		array(
+			'key' => $reset_key,
+			'id' => $user_id
+		),
+		masteriyo_get_account_endpoint_url( 'reset-password' )
+	);
 }

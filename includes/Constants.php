@@ -37,7 +37,7 @@ class Constants {
 	 *
 	 * @return bool
 	 */
-	public static function is_true( $name ) {
+	public static function is_true( $name) {
 		return self::is_defined( $name ) && self::get_constant( $name );
 	}
 

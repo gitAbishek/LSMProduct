@@ -20,6 +20,7 @@ class Install {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		self::create_roles();
 		// self::init_db();
+		self::create_pages();
 	}
 
 	/**
@@ -162,6 +163,28 @@ class Install {
 
 		foreach ( $tables as $table ) {
 			$wpdb->query( 'DROP TABLE IF EXISTS ' . esc_sql( $table ) );
+		}
+	}
+
+	/**
+	 * Create pages that the plugin relies on, storing page IDs in variables.
+	 */
+	public static function create_pages() {
+		include_once dirname( __FILE__ ) . '/Helper/Core.php';
+
+		$pages = apply_filters(
+			'masteriyo_create_pages',
+			array(
+				'course-list' => array(
+					'name'    => _x( 'course-list', 'Page slug', 'masteriyo' ),
+					'title'   => _x( 'Course List', 'Page title', 'masteriyo' ),
+					'content' => '',
+				),
+			)
+		);
+
+		foreach ( $pages as $key => $page ) {
+			masteriyo_create_page( esc_sql( $page['name'] ), 'masteriyo_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? masteriyo_get_page_id( $page['parent'] ) : '' );
 		}
 	}
 }

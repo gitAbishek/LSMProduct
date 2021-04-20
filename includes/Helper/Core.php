@@ -2103,7 +2103,7 @@ function masteriyo_create_page( $slug, $option = '', $page_title = '', $page_con
 function masteriyo_add_post_state( $post_states, $post ) {
 
 	if ( 'course-list' === $post->post_name ) {
-		$post_states['masteriyo_course_list_page'] = 'Course List Page';
+		$post_states['masteriyo_course_list_page'] = __( 'Course List Page', 'masteriyo' );
 	}
 
 	return $post_states;

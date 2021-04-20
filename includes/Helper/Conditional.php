@@ -14,7 +14,7 @@ if ( ! function_exists( 'masteriyo_is_filtered' ) ) {
 	 * @return bool
 	 */
 	function masteriyo_is_filtered() {
-		return apply_filters( 'masteriyo__is_filtered',  false);
+		return apply_filters( 'masteriyo__is_filtered', false);
 	}
 }
 

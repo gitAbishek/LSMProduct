@@ -51,7 +51,7 @@ class Constants {
 	 *
 	 * @return bool
 	 */
-	public static function is_defined( $name ) {
+	public static function is_defined( $name) {
 		return array_key_exists( $name, self::$set_constants )
 			? true
 			: defined( $name );

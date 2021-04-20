@@ -7,8 +7,6 @@
 
 use ThemeGrill\Masteriyo\Constants;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Converts a string (e.g. 'yes' or 'no') to a bool.
  *
@@ -283,7 +281,7 @@ function masteriyo_price( $price, $args = array() ) {
 	);
 
 	$unformatted_price = $price;
-	$price             = apply_filters( 'masteriyo_raw_price', abs( $price) );
+	$price             = apply_filters( 'masteriyo_raw_price', abs( $price ) );
 	$price             = number_format( $price, $args['decimals'], $args['decimal_separator'], $args['thousand_separator'] );
 	$price             = apply_filters( 'masteriyo_formatted_price', $price, $unformatted_price, $args['decimals'], $args['decimal_separator'], $args['thousand_separator'] );
 
@@ -293,7 +291,6 @@ function masteriyo_price( $price, $args = array() ) {
 
 	$formatted_price = ( $unformatted_price < 0 ? '-' : '' ) . sprintf( $args['price_format'], '<span class="masteriyo-price-currencySymbol">' . masteriyo_get_currency_symbol( $args['currency'] ) . '</span>', $price );
 	$html            = '<span class="masteriyo-price-amount amount"><bdi>' . $formatted_price . '</bdi></span>';
-
 
 	/**
 	 * Filters the string of price markup.

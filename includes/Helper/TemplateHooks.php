@@ -8,9 +8,8 @@
  * @version 0.1.0
  */
 
-defined( 'ABSPATH' ) || exit;
 
-if ( ! (function_exists( 'add_filter' ) && function_exists( 'add_action' ) ) ) {
+if ( ! ( function_exists( 'add_filter' ) && function_exists( 'add_action' ) ) ) {
 	return;
 }
 

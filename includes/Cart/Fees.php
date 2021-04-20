@@ -42,12 +42,10 @@ class Fees {
 	 * @var array
 	 */
 	private $default_props = array(
-		'id'        => '',
-		'name'      => '',
-		'tax_class' => '',
-		'taxable'   => false,
-		'amount'    => 0,
-		'total'     => 0,
+		'id'     => '',
+		'name'   => '',
+		'amount' => 0,
+		'total'  => 0,
 	);
 
 	/**
@@ -73,9 +71,9 @@ class Fees {
 	 * @return object Either a fee object if added, or a WP_Error if it failed.
 	 */
 	public function add( $args = array() ) {
-		$fee_props            = (object) wp_parse_args( $args, $this->default_props );
-		$fee_props->name      = $fee_props->name ? $fee_props->name : __( 'Fee', 'masteriyo' );
-		$fee_props->amount    = masteriyo_format_decimal( $fee_props->amount );
+		$fee_props         = (object) wp_parse_args( $args, $this->default_props );
+		$fee_props->name   = $fee_props->name ? $fee_props->name : __( 'Fee', 'masteriyo' );
+		$fee_props->amount = masteriyo_format_decimal( $fee_props->amount );
 
 		if ( empty( $fee_props->id ) ) {
 			$fee_props->id = $this->generate_id( $fee_props );

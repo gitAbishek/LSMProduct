@@ -48,17 +48,9 @@ class Cart {
 	 */
 	protected $default_totals = array(
 		'subtotal'            => 0,
-		'subtotal_tax'        => 0,
-		'discount_total'      => 0,
-		'discount_tax'        => 0,
 		'cart_contents_total' => 0,
-		'cart_contents_tax'   => 0,
-		'cart_contents_taxes' => array(),
 		'fee_total'           => 0,
-		'fee_tax'             => 0,
-		'fee_taxes'           => array(),
 		'total'               => 0,
-		'total_tax'           => 0,
 	);
 
 	/**
@@ -98,10 +90,10 @@ class Cart {
 	 * @param \ThemeGrill\Masteriyo\Notice                 $notice Notice.
 	 *
 	 */
-	public function __construct( Session $session, Notice $notice, Fees $fees ) {
-		$this->session = $session;
-		$this->notice  = $notice;
-		$this->fees    = $fees;
+	public function __construct( Session $session, Notice $notice, Fees $fees_api ) {
+		$this->session  = $session;
+		$this->notice   = $notice;
+		$this->fees_api = $fees_api;
 
 		// Start the session.
 		$this->session->start();
@@ -199,7 +191,9 @@ class Cart {
 		$cart                = $this->session->get( 'cart', null );
 
 		// Populate cart from order.
-		if ( isset( $_GET['order_again'], $_GET['_wpnonce'] ) && is_user_logged_in() && wp_verify_nonce( wp_unslash( $_GET['_wpnonce'] ), 'masteriyo-order_again' ) ) { // WPCS: input var ok, sanitization ok.
+		if ( isset( $_GET['order_again'], $_GET['_wpnonce'] )
+			&& is_user_logged_in()
+			&& wp_verify_nonce( wp_unslash( $_GET['_wpnonce'] ), 'masteriyo-order_again' ) ) { // WPCS: input var ok, sanitization ok.
 			$cart        = $this->populate_cart_from_order( absint( $_GET['order_again'] ), $cart ); // WPCS: input var ok.
 			$order_again = true;
 		}
@@ -253,10 +247,12 @@ class Cart {
 			} elseif ( ! empty( $values['data_hash'] ) && ! hash_equals( $values['data_hash'], $this->get_cart_item_data_hash( $course ) ) ) { // phpcs:ignore PHPCompatibility.PHP.NewFunctions.hash_equalsFound
 				$update_cart_session = true;
 				$this->notice->add(
-					/* translators: %1$s: product name. %2$s product permalink */
-					sprintf( __( '%1$s has been removed from your cart because it has since been modified. You can add it back to your cart <a href="%2$s">here</a>.', 'masteriyo' ),
-					$course->get_name(),
-					$course->get_permalink() ),
+					sprintf(
+						/* translators: %1$s: product name. %2$s product permalink */
+						__( '%1$s has been removed from your cart because it has since been modified. You can add it back to your cart <a href="%2$s">here</a>.', 'masteriyo' ),
+						$course->get_name(),
+						$course->get_permalink()
+					),
 					Notice::INFO
 				);
 				do_action( 'masteriyo_remove_cart_item_from_session', $key, $values );
@@ -328,7 +324,9 @@ class Cart {
 	private function populate_cart_from_order( $order_id, $cart ) {
 		$order = masteriyo_get_order( $order_id );
 
-		if ( ! $order->get_id() || ! $order->has_status( apply_filters( 'masteriyo_valid_order_statuses_for_order_again', array( 'completed' ) ) ) || ! current_user_can( 'order_again', $order->get_id() ) ) {
+		if ( ! $order->get_id()
+			|| ! $order->has_status( apply_filters( 'masteriyo_valid_order_statuses_for_order_again', array( 'completed' ) ) )
+			|| ! current_user_can( 'order_again', $order->get_id() ) ) {
 			return;
 		}
 
@@ -484,16 +482,6 @@ class Cart {
 	}
 
 	/**
-	 * Get subtotal.
-	 *
-	 * @since 0.1.0
-	 * @return float
-	 */
-	public function get_subtotal_tax() {
-		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'subtotal_tax' ) );
-	}
-
-	/**
 	 * Get discount_total.
 	 *
 	 * @since 0.1.0
@@ -504,16 +492,6 @@ class Cart {
 	}
 
 	/**
-	 * Get discount_tax.
-	 *
-	 * @since 0.1.0
-	 * @return float
-	 */
-	public function get_discount_tax() {
-		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'discount_tax' ) );
-	}
-
-	/**
 	 * Gets cart total. This is the total of items in the cart, but after discounts. Subtotal is before discounts.
 	 *
 	 * @since 0.1.0
@@ -521,16 +499,6 @@ class Cart {
 	 */
 	public function get_cart_contents_total() {
 		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'cart_contents_total' ) );
-	}
-
-	/**
-	 * Gets cart tax amount.
-	 *
-	 * @since 0.1.0
-	 * @return float
-	 */
-	public function get_cart_contents_tax() {
-		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'cart_contents_tax' ) );
 	}
 
 	/**
@@ -546,16 +514,6 @@ class Cart {
 	}
 
 	/**
-	 * Get total tax amount.
-	 *
-	 * @since 0.1.0
-	 * @return float
-	 */
-	public function get_total_tax() {
-		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'total_tax' ) );
-	}
-
-	/**
 	 * Get total fee amount.
 	 *
 	 * @since 0.1.0
@@ -563,44 +521,6 @@ class Cart {
 	 */
 	public function get_fee_total() {
 		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'fee_total' ) );
-	}
-
-	/**
-	 * Get total fee tax amount.
-	 *
-	 * @since 0.1.0
-	 * @return float
-	 */
-	public function get_fee_tax() {
-		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'fee_tax' ) );
-	}
-
-	/**
-	 * Get taxes.
-	 *
-	 * @since 0.1.0
-	 */
-	public function get_cart_contents_taxes() {
-		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'cart_contents_taxes' ) );
-	}
-
-	/**
-	 * Get taxes.
-	 *
-	 * @since 0.1.0
-	 */
-	public function get_fee_taxes() {
-		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'fee_taxes' ) );
-	}
-
-	/**
-	 * Return whether or not the cart is displaying prices including tax, rather than excluding tax.
-	 *
-	 * @since 0.1.0
-	 * @return bool
-	 */
-	public function display_prices_including_tax() {
-		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, 'incl' === $this->get_tax_price_display_mode() );
 	}
 
 	/*
@@ -651,16 +571,6 @@ class Cart {
 	}
 
 	/**
-	 * Set subtotal.
-	 *
-	 * @since 0.1.0
-	 * @param string $value Value to set.
-	 */
-	public function set_subtotal_tax( $value ) {
-		$this->totals['subtotal_tax'] = $value;
-	}
-
-	/**
 	 * Set discount_total.
 	 *
 	 * @since 0.1.0
@@ -668,16 +578,6 @@ class Cart {
 	 */
 	public function set_discount_total( $value ) {
 		$this->totals['discount_total'] = $value;
-	}
-
-	/**
-	 * Set discount_tax.
-	 *
-	 * @since 0.1.0
-	 * @param string $value Value to set.
-	 */
-	public function set_discount_tax( $value ) {
-		$this->totals['discount_tax'] = $value;
 	}
 
 	/**
@@ -691,16 +591,6 @@ class Cart {
 	}
 
 	/**
-	 * Set cart tax amount.
-	 *
-	 * @since 0.1.0
-	 * @param string $value Value to set.
-	 */
-	public function set_cart_contents_tax( $value ) {
-		$this->totals['cart_contents_tax'] = $value;
-	}
-
-	/**
 	 * Set cart total.
 	 *
 	 * @since 0.1.0
@@ -708,17 +598,6 @@ class Cart {
 	 */
 	public function set_total( $value ) {
 		$this->totals['total'] = masteriyo_format_decimal( $value, masteriyo_get_price_decimals() );
-	}
-
-	/**
-	 * Set total tax amount.
-	 *
-	 * @since 0.1.0
-	 * @param string $value Value to set.
-	 */
-	public function set_total_tax( $value ) {
-		// We round here because this is a total entry, as opposed to line items in other setters.
-		$this->totals['total_tax'] = masteriyo_round_tax_total( $value );
 	}
 
 	/**
@@ -731,54 +610,11 @@ class Cart {
 		$this->totals['fee_total'] = masteriyo_format_decimal( $value, masteriyo_get_price_decimals() );
 	}
 
-	/**
-	 * Set fee tax.
-	 *
-	 * @since 0.1.0
-	 * @param string $value Value to set.
-	 */
-	public function set_fee_tax( $value ) {
-		$this->totals['fee_tax'] = $value;
-	}
-
-	/**
-	 * Set taxes.
-	 *
-	 * @since 0.1.0
-	 * @param array $value Tax values.
-	 */
-	public function set_cart_contents_taxes( $value ) {
-		$this->totals['cart_contents_taxes'] = (array) $value;
-	}
-
-	/**
-	 * Set taxes.
-	 *
-	 * @since 0.1.0
-	 * @param array $value Tax values.
-	 */
-	public function set_fee_taxes( $value ) {
-		$this->totals['fee_taxes'] = (array) $value;
-	}
-
 	/*
 	|--------------------------------------------------------------------------
 	| Helper methods.
 	|--------------------------------------------------------------------------
 	*/
-
-	/**
-	 * Returns the cart taxes.
-	 *
-	 * @return array merged taxes
-	 */
-	public function get_taxes() {
-		return apply_filters(
-			'masteriyo_cart_get_taxes',
-			masteriyo_array_merge_recursive_numeric( $this->get_cart_contents_taxes(), $this->get_fee_taxes() ),
-			$this
-		);
-	}
 
 	/**
 	 * Returns the contents of the cart in an array.
@@ -1005,73 +841,14 @@ class Cart {
 	}
 
 	/**
-	 * Get taxes, merged by code, formatted ready for output.
-	 *
-	 * @return array
-	 */
-	public function get_tax_totals() {
-		$taxes      = $this->get_taxes();
-		$tax_totals = array();
-
-		foreach ( $taxes as $key => $tax ) {
-			$code = MASTERIYO_Tax::get_rate_code( $key );
-
-			if ( $code || apply_filters( 'masteriyo_cart_remove_taxes_zero_rate_id', 'zero-rated' ) === $key ) {
-				if ( ! isset( $tax_totals[ $code ] ) ) {
-					$tax_totals[ $code ]         = new stdClass();
-					$tax_totals[ $code ]->amount = 0;
-				}
-
-				$tax_totals[ $code ]->tax_rate_id = $key;
-				$tax_totals[ $code ]->is_compound = MASTERIYO_Tax::is_compound( $key );
-				$tax_totals[ $code ]->label       = MASTERIYO_Tax::get_rate_label( $key );
-
-				$tax_totals[ $code ]->amount          += masteriyo_round_tax_total( $tax );
-				$tax_totals[ $code ]->formatted_amount = masteriyo_price( $tax_totals[ $code ]->amount );
-			}
-		}
-
-		if ( apply_filters( 'masteriyo_cart_hide_zero_taxes', true ) ) {
-			$amounts    = array_filter( wp_list_pluck( $tax_totals, 'amount' ) );
-			$tax_totals = array_intersect_key( $tax_totals, $amounts );
-		}
-
-		return apply_filters( 'masteriyo_cart_tax_totals', $tax_totals, $this );
-	}
-
-	/**
-	 * Get all tax classes for items in the cart.
-	 *
-	 * @return array
-	 */
-	public function get_cart_item_tax_classes() {
-		$found_tax_classes = array();
-
-		foreach ( MASTERIYO()->cart->get_cart() as $item ) {
-			if ( $item['data'] && $item['data']->is_taxable() ) {
-				$found_tax_classes[] = $item['data']->get_tax_class();
-			}
-		}
-
-		return array_unique( $found_tax_classes );
-	}
-
-	/**
 	 * Determines the value that the customer spent and the subtotal
 	 * displayed, used for things like coupon validation.
-	 *
-	 * Since the coupon lines are displayed based on the TAX DISPLAY value
-	 * of cart, this is used to determine the spend.
-	 *
-	 * If cart totals are shown including tax, use the subtotal.
-	 * If cart totals are shown excluding tax, use the subtotal ex tax
-	 * (tax is shown after coupons).
 	 *
 	 * @since 0.1.0
 	 * @return string
 	 */
 	public function get_displayed_subtotal() {
-		return $this->display_prices_including_tax() ? $this->get_subtotal() + $this->get_subtotal_tax() : $this->get_subtotal();
+		return $this->get_subtotal();
 	}
 
 	/**
@@ -1339,7 +1116,7 @@ class Cart {
 	 * Return reference to fees API.
 	 *
 	 * @since  0.1.0
-	 * @return Cart_Fees
+	 * @return ThemeGrill\Masteriyo\Cart\Fees
 	 */
 	public function fees_api() {
 		return $this->fees;
@@ -1354,19 +1131,15 @@ class Cart {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @uses Cart_Fees::add_fee
+	 * @uses ThemeGrill\Masteriyo\Cart\Fees::add_fee
 	 * @param string $name      Unique name for the fee. Multiple fees of the same name cannot be added.
 	 * @param float  $amount    Fee amount (do not enter negative amounts).
-	 * @param bool   $taxable   Is the fee taxable? (default: false).
-	 * @param string $tax_class The tax class for the fee if taxable. A blank string is standard tax class. (default: '').
 	 */
-	public function add_fee( $name, $amount, $taxable = false, $tax_class = '' ) {
+	public function add_fee( $name, $amount ) {
 		$this->fees_api()->add_fee(
 			array(
-				'name'      => $name,
-				'amount'    => (float) $amount,
-				'taxable'   => $taxable,
-				'tax_class' => $tax_class,
+				'name'   => $name,
+				'amount' => (float) $amount,
 			)
 		);
 	}
@@ -1376,7 +1149,7 @@ class Cart {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @uses Cart_Fees::get_fees
+	 * @uses ThemeGrill\Masteriyo\Cart\Fees::get_fees
 	 * @return array
 	 */
 	public function get_fees() {
@@ -1389,24 +1162,13 @@ class Cart {
 	}
 
 	/**
-	 * Gets the total excluding taxes.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return string formatted price
-	 */
-	public function get_total_ex_tax() {
-		return apply_filters( 'masteriyo_cart_total_ex_tax', masteriyo_price( max( 0, $this->get_total( 'edit' ) - $this->get_total_tax() ) ) );
-	}
-
-	/**
 	 * Gets the cart contents total (after calculation).
 	 *
 	 * @since 0.1.0
 	 * @return string formatted price
 	 */
 	public function get_cart_total() {
-		return apply_filters( 'masteriyo_cart_contents_total', masteriyo_price( masteriyo_prices_include_tax() ? $this->get_cart_contents_total() + $this->get_cart_contents_tax() : $this->get_cart_contents_total() ) );
+		return apply_filters( 'masteriyo_cart_contents_total', masteriyo_price( $this->get_cart_contents_total() ) );
 	}
 
 	/**
@@ -1414,31 +1176,11 @@ class Cart {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param bool $compound whether to include compound taxes.
 	 * @return string formatted price
 	 */
-	public function get_cart_subtotal( $compound = false ) {
-		/**
-		 * If the cart has compound tax, we want to show the subtotal as cart + non-compound taxes (after discount).
-		 */
-		if ( $compound ) {
-			$cart_subtotal = masteriyo_price( $this->get_cart_contents_total() + $this->get_taxes_total( false, false ) );
-
-		} elseif ( $this->display_prices_including_tax() ) {
-			$cart_subtotal = masteriyo_price( $this->get_subtotal() + $this->get_subtotal_tax() );
-
-			if ( $this->get_subtotal_tax() > 0 && ! masteriyo_prices_include_tax() ) {
-				$cart_subtotal .= ' <small class="tax_label">' . MASTERIYO()->countries->inc_tax_or_vat() . '</small>';
-			}
-		} else {
-			$cart_subtotal = masteriyo_price( $this->get_subtotal() );
-
-			if ( $this->get_subtotal_tax() > 0 && masteriyo_prices_include_tax() ) {
-				$cart_subtotal .= ' <small class="tax_label">' . MASTERIYO()->countries->ex_tax_or_vat() . '</small>';
-			}
-		}
-
-		return apply_filters( 'masteriyo_cart_subtotal', $cart_subtotal, $compound, $this );
+	public function get_cart_subtotal() {
+		$cart_subtotal = masteriyo_price( $this->get_subtotal() );
+		return apply_filters( 'masteriyo_cart_subtotal', $cart_subtotal, $this );
 	}
 
 	/**
@@ -1450,20 +1192,12 @@ class Cart {
 	 * @return string formatted price
 	 */
 	public function get_course_price( $course ) {
-		if ( $this->display_prices_including_tax() ) {
-			$course_price = masteriyo_get_price_including_tax( $course );
-		} else {
-			$course_price = masteriyo_get_price_excluding_tax( $course );
-		}
+		$course_price = masteriyo_get_price_excluding_tax( $course );
 		return apply_filters( 'masteriyo_cart_course_price', masteriyo_price( $course_price ), $course );
 	}
 
 	/**
 	 * Get the course row subtotal.
-	 *
-	 * Gets the tax etc to avoid rounding issues.
-	 *
-	 * When on the checkout (review order), this will get the subtotal based on the customer's tax rate rather than the base rate.
 	 *
 	 * @since 0.1.0
 	 *
@@ -1472,81 +1206,11 @@ class Cart {
 	 * @return string formatted price
 	 */
 	public function get_course_subtotal( $course, $quantity ) {
-		$price = $course->get_price();
-
-		if ( $course->is_taxable() ) {
-
-			if ( $this->display_prices_including_tax() ) {
-				$row_price       = masteriyo_get_price_including_tax( $course, array( 'qty' => $quantity ) );
-				$course_subtotal = masteriyo_price( $row_price );
-
-				if ( ! masteriyo_prices_include_tax() && $this->get_subtotal_tax() > 0 ) {
-					$course_subtotal .= ' <small class="tax_label">' . MASTERIYO()->countries->inc_tax_or_vat() . '</small>';
-				}
-			} else {
-				$row_price       = masteriyo_get_price_excluding_tax( $course, array( 'qty' => $quantity ) );
-				$course_subtotal = masteriyo_price( $row_price );
-
-				if ( masteriyo_prices_include_tax() && $this->get_subtotal_tax() > 0 ) {
-					$course_subtotal .= ' <small class="tax_label">' . MASTERIYO()->countries->ex_tax_or_vat() . '</small>';
-				}
-			}
-		} else {
-			$row_price       = $price * $quantity;
-			$course_subtotal = masteriyo_price( $row_price );
-		}
+		$price           = $course->get_price();
+		$row_price       = $price * $quantity;
+		$course_subtotal = masteriyo_price( $row_price );
 
 		return apply_filters( 'masteriyo_cart_course_subtotal', $course_subtotal, $course, $quantity, $this );
-	}
-
-	/**
-	 * Gets the cart tax (after calculation).
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return string formatted price
-	 */
-	public function get_cart_tax() {
-		$cart_total_tax = masteriyo_round_tax_total( $this->get_cart_contents_tax() + $this->get_fee_tax() );
-
-		return apply_filters( 'masteriyo_get_cart_tax', $cart_total_tax ? masteriyo_price( $cart_total_tax ) : '' );
-	}
-
-	/**
-	 * Get a tax amount.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  string $tax_rate_id ID of the tax rate to get taxes for.
-	 * @return float amount
-	 */
-	public function get_tax_amount( $tax_rate_id ) {
-		$taxes = masteriyo_array_merge_recursive_numeric( $this->get_cart_contents_taxes(), $this->get_fee_taxes() );
-		return isset( $taxes[ $tax_rate_id ] ) ? $taxes[ $tax_rate_id ] : 0;
-	}
-
-	/**
-	 * Get tax row amounts with or without compound taxes includes.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  bool $compound True if getting compound taxes.
-	 * @param  bool $display  True if getting total to display.
-	 * @return float price
-	 */
-	public function get_taxes_total( $compound = true, $display = true ) {
-		$total = 0;
-		$taxes = $this->get_taxes();
-		foreach ( $taxes as $key => $tax ) {
-			if ( ! $compound && MASTERIYO_Tax::is_compound( $key ) ) {
-				continue;
-			}
-			$total += $tax;
-		}
-		if ( $display ) {
-			$total = masteriyo_format_decimal( $total, masteriyo_get_price_decimals() );
-		}
-		return apply_filters( 'masteriyo_cart_taxes_total', $total, $compound, $display, $this );
 	}
 
 	/**
@@ -1568,25 +1232,9 @@ class Cart {
 	 */
 	private function reset_totals() {
 		$this->totals = $this->default_totals;
-		// $this->fees_api->remove_all();
+		$this->fees_api->remove_all();
 		do_action( 'masteriyo_cart_reset', $this, false );
 	}
-
-	/**
-	 * Returns 'incl' if tax should be included in cart, otherwise returns 'excl'.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return string
-	 */
-	public function get_tax_price_display_mode() {
-		if ( $this->get_customer() && $this->get_customer()->get_is_vat_exempt() ) {
-			return 'excl';
-		}
-
-		return get_option( 'masteriyo_tax_display_cart' );
-	}
-
 	/**
 	 * Returns the hash based on cart contents.
 	 *

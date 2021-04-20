@@ -15,6 +15,8 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 ?>
 
 <div class="mto-tabs mto-px-4 md:mto-px-0">
+	<?php masteriyo_display_all_notices(); ?>
+
 	<div class="tab-menu mto-flex mto-font-bold mto-text-base mto-border-b-2 mto-border-gray-2 mto-mb-10">
 		<div data-tab="edit-profile-tab" class="mto-tab active-tab mto-pt-6 mto-pb-4 mto--mb-0.5 mto-cursor-pointer"><?php echo esc_html__( 'Edit Profile', 'masteriyo' ); ?></div>
 		<div data-tab="password-security-tab" class="mto-tab mto-pt-6 mto-pb-4 mto--mb-0.5 mto-ml-12 mto-cursor-pointer"><?php echo esc_html__( 'Password & Security', 'masteriyo' ); ?></div>
@@ -102,32 +104,31 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 		<div class="password-security mto-w-full lg:mto-w-2/5">
 			<h2 class="password--security--title mto-font-semibold mto-text-2xl"><?php echo esc_html__( 'Change Password', 'masteriyo' ); ?></h2>
 
-				<form id="password-security-form" class="mto-mt-10">
-					<input type="hidden" name="remember" value="true">
+				<form class="password-security-form mto-mt-10" method="POST">
 					<div class="mto-rounded-md mtoshadow-sm mto-space-y-6">
-						<div class="current-password">
-							<label for="current-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Current Password', 'masteriyo' ); ?></label>
-							<input id="current-password" name="password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						<div class="current_password">
+							<label for="current_password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Current Password', 'masteriyo' ); ?></label>
+							<input id="current_password" name="current_password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 						</div>
 
-						<div class="new-password">
-							<label for="new-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'New Password', 'masteriyo' ); ?></label>
-							<input id="new-password" name="password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						<div class="password_1">
+							<label for="password_1" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'New Password', 'masteriyo' ); ?></label>
+							<input id="password_1" name="password_1" type="password" required autocomplete="new-password" class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 						</div>
 
-						<div class="confirm-password">
-							<label for="confirm-password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Confirm Password', 'masteriyo' ); ?></label>
-							<input id="confirm-password" name="password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						<div class="password_2">
+							<label for="password_2" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Confirm Password', 'masteriyo' ); ?></label>
+							<input id="password_2" name="password_2" type="password" required autocomplete="new-password" class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 						</div>
 					</div>
 
 					<div class="password-security-btn mto-mt-10">
-						<button type="submit" class="change-password btn mto-text-sm mto-py-3 mto-px-6 mto-uppercase">
+						<button type="submit" name="masteriyo-change-password" value="yes" class="change-password btn mto-text-sm mto-py-3 mto-px-6 mto-uppercase">
 							<?php echo esc_html__( 'Change Password', 'masteriyo' ); ?>
 						</button>
 					</div>
 
-					<div id="mto-login-error-msg" class="mto-text-red-700 mto-hidden"></div>
+					<?php wp_nonce_field( 'masteriyo-change-password' ); ?>
 				</form>
 		</div>
 	</div>

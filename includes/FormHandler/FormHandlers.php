@@ -28,6 +28,9 @@ class FormHandlers {
 			'masteriyo_form_handlers',
 			array(
 				"{$namespace}\\RegistrationFormHandler",
+				"{$namespace}\\RequestPasswordResetFormHandler",
+				"{$namespace}\\PasswordResetFormHandler",
+				"{$namespace}\\ChangePasswordFormHandler",
 			)
 		);
 	}

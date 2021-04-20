@@ -101,7 +101,7 @@ class ResetPasswordEmail extends Email {
 			$this->html_template,
 			array(
 				'email_heading'      => $this->get_heading(),
-				'user_login'         => $this->get_object()->get_user_login(),
+				'user'               => $this->get_object(),
 				'reset_key'          => $this->get_reset_key(),
 				'blogname'           => $this->get_blogname(),
 				'additional_content' => $this->get_additional_content(),

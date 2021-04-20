@@ -97,6 +97,7 @@ class Masteriyo extends Container {
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_links' ), 10, 2 );
 		add_filter( 'plugin_action_links_' . Constants::get( 'MASTERIYO_PLUGIN_BASENAME' ), array( $this, 'add_plugin_action_links' ) );
 		add_filter( 'template_include', array( $this, 'template_loader' ) );
+		add_filter( 'template_redirect', array( $this, 'redirect_reset_password_link' ) );
 	}
 
 	/**
@@ -303,6 +304,43 @@ class Masteriyo extends Container {
 		}
 
 		return $template;
+	}
+
+	/**
+	 * Redirect to password reset form after setting password reset cookie.
+	 *
+	 * @since 0.1.0
+	 */
+	public function redirect_reset_password_link() {
+		if ( masteriyo_is_myaccount_page() && isset( $_GET['key'] ) && ( isset( $_GET['id'] ) || isset( $_GET['login'] ) ) ) {
+			// If available, get $user_id from query string parameter for fallback purposes.
+			if ( isset( $_GET['login'] ) ) {
+				$user    = get_user_by( 'login', sanitize_user( wp_unslash( $_GET['login'] ) ) );
+				$user_id = $user ? $user->ID : 0;
+			} else {
+				$user_id = absint( $_GET['id'] );
+			}
+
+			// If the reset token is not for the current user, ignore the reset request (don't redirect).
+			$logged_in_user_id = get_current_user_id();
+			if ( $logged_in_user_id && $logged_in_user_id !== $user_id ) {
+				masteriyo_add_notice( __( 'This password reset key is for a different user account. Please log out and try again.', 'masteriyo' ), 'error' );
+				return;
+			}
+
+			$value = sprintf( '%d:%s', $user_id, wp_unslash( $_GET['key'] ) ); // phpcs:ignore
+
+			masteriyo_set_password_reset_cookie( $value );
+			wp_safe_redirect(
+				add_query_arg(
+					array(
+						'show-reset-form' => 'true',
+					),
+					masteriyo_get_account_endpoint_url( 'reset-password' )
+				)
+			);
+			exit;
+		}
 	}
 }
 

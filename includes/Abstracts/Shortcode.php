@@ -35,6 +35,15 @@ abstract class Shortcode {
 	protected $attributes = array();
 
 	/**
+	 * Arguments to pass to the template.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var array
+	 */
+	protected $template_args = array();
+
+	/**
 	 * Get shortcode attributes.
 	 *
 	 * @since 0.1.0
@@ -55,6 +64,28 @@ abstract class Shortcode {
 	public function set_attributes( $attributes ) {
 		$this->attributes = $this->parse_attributes( $attributes );
 		return $this;
+	}
+
+	/**
+	 * Set template args.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return
+	 */
+	public function set_template_args( $template_args ) {
+		$this->attributes = (array) $template_args;
+	}
+
+	/**
+	 * Get template args.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	public function get_template_args() {
+		return $this->template_args;
 	}
 
 	/**

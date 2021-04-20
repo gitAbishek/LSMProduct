@@ -77,12 +77,15 @@ class Notice {
 		$count       = 0;
 		$all_notices = $this->session->get( 'notices', array() );
 
-		if ( empty( $type )) {
+		if ( empty( $type ) ) {
 			$count = count( $all_notices );
 		} else {
-			$notices = array_filter( $all_notices, function( $notice ) use ( $type ) {
-				return $type === $notice['type'];
-			} );
+			$notices = array_filter(
+				$all_notices,
+				function( $notice ) use ( $type ) {
+					return $type === $notice['type'];
+				}
+			);
 			$count   = count( $notices );
 		}
 
@@ -99,9 +102,12 @@ class Notice {
 	 */
 	public function has( $message, $type = self::SUCCESS ) {
 		$notices = $this->session->get( 'notices', array() );
-		$notices = array_filter( $notices, function( $notice ) use ( $type ) {
-			return $type === $notice['type'];
-		} );
+		$notices = array_filter(
+			$notices,
+			function( $notice ) use ( $type ) {
+				return $type === $notice['type'];
+			}
+		);
 
 		return array_search( $message, wp_list_pluck( $notices, 'notice' ), true ) !== false;
 	}
@@ -117,9 +123,12 @@ class Notice {
 		$notices = $this->session->get( 'notices', array() );
 
 		if ( ! empty( $type ) ) {
-			$notices = array_filter( $notices, function( $notice ) use ( $type ) {
-				return $type === $notice['type'];
-			} );
+			$notices = array_filter(
+				$notices,
+				function( $notice ) use ( $type ) {
+					return $type === $notice['type'];
+				}
+			);
 		}
 
 		return $notices;
@@ -140,9 +149,9 @@ class Notice {
 
 		if ( ! empty( $message ) ) {
 			$notices[] = array(
-				'type'   => $type,
+				'type'    => $type,
 				'message' => $message,
-				'data'   => $data
+				'data'    => $data,
 			);
 		}
 		$this->session->put( 'notices', $notices );
@@ -203,22 +212,29 @@ class Notice {
 		$notices = $this->session->get( 'notices', array() );
 
 		if ( ! empty( $type ) ) {
-			$notices = array_filter( $notices, function( $notice ) use( $type ) {
-				return $type === $notice[ 'type' ];
-			} );
+			$notices = array_filter(
+				$notices,
+				function( $notice ) use ( $type ) {
+					return $type === $notice['type'];
+				}
+			);
 		}
 
-		$notice_html = array_reduce( $notices, function( $notice_html, $notice ) {
-			$html = masteriyo_get_template_html(
-				"notices/{$notice['type']}.php",
-				array(
-					'message' => $notice['message'],
-					'type'    => $notice['type'],
-					'data'    => $notice['data'],
-				)
-			);
-			return $notice_html . $html;
-		}, ''  );
+		$notice_html = array_reduce(
+			$notices,
+			function( $notice_html, $notice ) {
+				$html = masteriyo_get_template_html(
+					"notices/{$notice['type']}.php",
+					array(
+						'message' => $notice['message'],
+						'type'    => $notice['type'],
+						'data'    => $notice['data'],
+					)
+				);
+				return $notice_html . $html;
+			},
+			''
+		);
 
 		$this->clear();
 

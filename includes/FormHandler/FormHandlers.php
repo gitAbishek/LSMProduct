@@ -17,10 +17,15 @@ class FormHandlers {
 	/**
 	 * Undocumented variable
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var FormHandler[]
 	 */
 	private $form_handlers;
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		$namespace = 'ThemeGrill\\Masteriyo\FormHandler';
 
@@ -31,7 +36,7 @@ class FormHandlers {
 				"{$namespace}\\RequestPasswordResetFormHandler",
 				"{$namespace}\\PasswordResetFormHandler",
 				"{$namespace}\\ChangePasswordFormHandler",
-				"{$namespace}\\EnrollFormHandler"
+				"{$namespace}\\AddToCartFormHandler",
 			)
 		);
 	}
@@ -39,11 +44,13 @@ class FormHandlers {
 	/**
 	 * Register form handlers.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return void
 	 */
 	public function register() {
-		foreach( $this->form_handlers as $form_handler ) {
-			$instance = new $form_handler;
+		foreach ( $this->form_handlers as $form_handler ) {
+			$instance = new $form_handler();
 		}
 	}
 }

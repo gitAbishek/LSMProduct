@@ -44,3 +44,12 @@ add_action( 'masteriyo_account_order-history_endpoint', 'masteriyo_account_order
 add_action( 'masteriyo_email_header', 'masteriyo_email_header' );
 add_action( 'masteriyo_email_footer', 'masteriyo_email_footer' );
 
+
+/**
+ * Checkout form.
+ */
+add_action( 'masteriyo_checkout_form', 'masteriyo_checkout_billing_form', 10 );
+add_action( 'masteriyo_checkout_summary', 'masteriyo_checkout_order_summary', 10 );
+add_action( 'masteriyo_checkout_summary', 'masteriyo_checkout_payment_methods', 20 );
+
+

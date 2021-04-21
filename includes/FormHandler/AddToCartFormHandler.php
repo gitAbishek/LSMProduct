@@ -1,6 +1,6 @@
 <?php
 /**
- * Handle enroll form.
+ * Handle Add To Cart form.
  *
  * @package ThemeGrill\Masetriyo\Classes\
  */
@@ -10,29 +10,34 @@ namespace ThemeGrill\Masteriyo\FormHandler;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Enroll class.
+ * AddToCart class.
  */
-class EnrollFormHandler {
+class AddToCartFormHandler {
 
+	/**
+	 * Constructor
+	 *
+	 * @since 0.1.0
+	 */
 	public function __construct() {
-		add_action( 'wp_loaded', array( $this, 'enroll' ), 20 );
+		add_action( 'wp_loaded', array( $this, 'add_to_cart' ), 20 );
 	}
 
 	/**
-	 * Handle enroll.
+	 * Handle addtocart.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return void
 	 */
-	public function enroll() {
-		if ( ! isset( $_REQUEST['enroll'] ) || ! is_numeric( wp_unslash( $_REQUEST['enroll'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	public function add_to_cart() {
+		if ( ! isset( $_REQUEST['add-to-cart'] ) || ! is_numeric( wp_unslash( $_REQUEST['addtocart'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
 
 		masteriyo_nocache_headers();
 
-		$course_id      = apply_filters( 'masteriyo_enroll_course_id', absint( wp_unslash( $_REQUEST['enroll'] ) ) );  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$course_id      = apply_filters( 'masteriyo_add_to_cart_course_id', absint( wp_unslash( $_REQUEST['addtocart'] ) ) );  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$adding_to_cart = masteriyo_get_course( $course_id );
 
 		if ( is_null( $adding_to_cart ) ) {

@@ -98,7 +98,7 @@ class Cart {
 		// Start the session.
 		$this->session->start();
 
-		$this->fees->set_cart( $this );
+		$this->fees_api->set_cart( $this );
 
 		$this->init_hooks();
 	}
@@ -482,17 +482,7 @@ class Cart {
 	}
 
 	/**
-	 * Get discount_total.
-	 *
-	 * @since 0.1.0
-	 * @return float
-	 */
-	public function get_discount_total() {
-		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'discount_total' ) );
-	}
-
-	/**
-	 * Gets cart total. This is the total of items in the cart, but after discounts. Subtotal is before discounts.
+	 * Gets cart total. This is the total of items in the cart.
 	 *
 	 * @since 0.1.0
 	 * @return float
@@ -505,12 +495,10 @@ class Cart {
 	 * Gets cart total after calculation.
 	 *
 	 * @since 0.1.0
-	 * @param string $context If the context is view, the value will be formatted for display. This keeps it compatible with pre-3.2 versions.
 	 * @return float
 	 */
-	public function get_total( $context = 'view' ) {
-		$total = apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'total' ) );
-		return 'view' === $context ? apply_filters( 'masteriyo_cart_total', masteriyo_price( $total ) ) : $total;
+	public function get_total() {
+		return apply_filters( 'masteriyo_cart_' . __FUNCTION__, $this->get_totals_var( 'total' ) );
 	}
 
 	/**
@@ -568,16 +556,6 @@ class Cart {
 	 */
 	public function set_subtotal( $value ) {
 		$this->totals['subtotal'] = masteriyo_format_decimal( $value, masteriyo_get_price_decimals() );
-	}
-
-	/**
-	 * Set discount_total.
-	 *
-	 * @since 0.1.0
-	 * @param string $value Value to set.
-	 */
-	public function set_discount_total( $value ) {
-		$this->totals['discount_total'] = $value;
 	}
 
 	/**
@@ -1119,7 +1097,7 @@ class Cart {
 	 * @return ThemeGrill\Masteriyo\Cart\Fees
 	 */
 	public function fees_api() {
-		return $this->fees;
+		return $this->fees_api;
 	}
 
 	/**
@@ -1211,18 +1189,6 @@ class Cart {
 		$course_subtotal = masteriyo_price( $row_price );
 
 		return apply_filters( 'masteriyo_cart_course_subtotal', $course_subtotal, $course, $quantity, $this );
-	}
-
-	/**
-	 * Gets the total discount amount.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return mixed formatted price or false if there are none
-	 */
-	public function get_total_discount() {
-		$total_discount = $this->get_discount_total() ? masteriyo_price( $this->get_discount_total() ) : false;
-		return apply_filters( 'masteriyo_cart_total_discount', $total_discount, $this );
 	}
 
 	/**

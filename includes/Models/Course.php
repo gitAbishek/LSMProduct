@@ -420,7 +420,7 @@ class Course extends Model {
 		try {
 			$difficulty->set_id( $this->get_difficulty_id() );
 			$store->read( $difficulty );
-		} catch ( \Exception $e) {
+		} catch ( \Exception $e ) {
 			return null;
 		}
 
@@ -450,7 +450,7 @@ class Course extends Model {
 	 * @return bool
 	 */
 	public function get_featured( $context = 'view' ) {
-		return  $this->get_prop( 'featured', $context );
+		return $this->get_prop( 'featured', $context );
 	}
 
 	/**
@@ -723,7 +723,7 @@ class Course extends Model {
 	 * @param int $featured_image Featured image id.
 	 */
 	public function set_featured_image( $featured_image ) {
-		$this->set_prop( 'featured_image', absint( $featured_image ) ) ;
+		$this->set_prop( 'featured_image', absint( $featured_image ) );
 	}
 
 	/**
@@ -768,7 +768,7 @@ class Course extends Model {
 		$this->set_prop( 'review_count', absint( $count ) );
 	}
 
-	 /**
+	/**
 	 * Returns whether or not the course is on sale.
 	 *
 	 * @since 0.1.0
@@ -864,12 +864,15 @@ class Course extends Model {
 		$categories = array();
 		$store      = masteriyo( 'course_cat.store' );
 
-		$categories = array_map( function( $cat_id ) use ( $store ) {
-			$cat_obj = masteriyo( 'course_cat' );
-			$cat_obj->set_id( $cat_id );
-			$store->read( $cat_obj );
-			return $cat_obj;
-		}, $cat_ids );
+		$categories = array_map(
+			function( $cat_id ) use ( $store ) {
+				$cat_obj = masteriyo( 'course_cat' );
+				$cat_obj->set_id( $cat_id );
+				$store->read( $cat_obj );
+				return $cat_obj;
+			},
+			$cat_ids
+		);
 
 		return apply_filters( 'masteriyo_course_categories_objects', $categories, $this );
 	}
@@ -886,12 +889,15 @@ class Course extends Model {
 		$tags    = array();
 		$store   = masteriyo( 'course_tag.store' );
 
-		$tags = array_map( function( $tag_id ) use( $store) {
-			$tag_obj = masteriyo( 'course_tag' );
-			$tag_obj->set_id( $tag_id );
-			$store->read( $tag_obj );
-			return $tag_obj;
-		}, $tag_ids );
+		$tags = array_map(
+			function( $tag_id ) use ( $store ) {
+				$tag_obj = masteriyo( 'course_tag' );
+				$tag_obj->set_id( $tag_id );
+				$store->read( $tag_obj );
+				return $tag_obj;
+			},
+			$tag_ids
+		);
 
 		return apply_filters( 'masteriyo_course_categories_objects', $tags, $this );
 	}
@@ -914,70 +920,74 @@ class Course extends Model {
 		return apply_filters( 'masteriyo_course_categories_objects', $difficulty_obj, $this );
 	}
 
-
 	/**
-	 * Get enroll now button text for the single page.
+	 * Get add_to_cart now button text for the single page.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return string
 	 */
-	public function single_enroll_text() {
-		return apply_filters( 'masteriyo_single_course_enroll_text', __( 'Enroll Now', 'masteriyo' ), $this );
+	public function single_add_to_cart_text() {
+		return apply_filters( 'masteriyo_single_course_add_to_cart_text', __( 'Enroll Now', 'masteriyo' ), $this );
 	}
 
 	/**
-	 * Get enroll url.
+	 * Get add_to_cart url.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return string
 	 */
-	public function enroll_url() {
+	public function add_to_cart_url() {
 		$url = $this->get_permalink();
 
-		if( $this->is_purchasable() ) {
+		if ( $this->is_purchasable() ) {
 			$base_url = ( function_exists( 'is_feed' ) && is_feed() ) || ( function_exists( 'is_404' ) && is_404() ) ? $this->get_permalink() : '';
 
-			$url = add_query_arg( array(
-				'enroll' => $this->get_id()
-			), $base_url );
+			$url = add_query_arg(
+				array(
+					'add_to_cart' => $this->get_id(),
+				),
+				$base_url
+			);
 		}
 
-		return apply_filters( 'masteriyo_course_enroll_url', $url, $this );
+		return apply_filters( 'masteriyo_course_add_to_cart_url', $url, $this );
 	}
 
 	/**
-	 * Get enroll text.
+	 * Get add_to_cart text.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return string
 	 */
-	public function enroll_text() {
-		$text = __( 'Read more', 'mastriyo' );
+	public function add_to_cart_text() {
+		$text = __( 'Read more', 'masteriyo' );
 
-		if( $this->is_purchasable() ) {
-			$text = __( 'Enroll Now', 'masteriyo' );
-		}
-
-		return apply_filters( 'masteriyo_course_enroll_text', $text, $this );
-	}
-
-
-	/**
-	 * Get enroll  button text description - used in aria tags.
-	 *
-	 * @since 0.1.0
-	 * @return string
-	 */
-	public function enroll_description() {
-		$text = __( 'Read more about &ldquo;%s&rdquo;', 'masteriyo' );
-		/* translators: %s: Product title */
 		if ( $this->is_purchasable() ) {
-			$text = __( 'Enroll &ldquo;%s&rdquo; course', 'masteriyo' ) ;
+			$text = __( 'Add_to_cart Now', 'masteriyo' );
 		}
 
-		return apply_filters( 'masteriyo_course_enroll_description', sprintf( $text, $this->get_name() ), $this );
+		return apply_filters( 'masteriyo_course_add_to_cart_text', $text, $this );
+	}
+
+
+	/**
+	 * Get add_to_cart  button text description - used in aria tags.
+	 *
+	 * @since 0.1.0
+	 * @return string
+	 */
+	public function add_to_cart_description() {
+		/* translators: %s: Course title */
+		$text = __( 'Read more about &ldquo;%s&rdquo;', 'masteriyo' );
+
+		if ( $this->is_purchasable() ) {
+			/* translators: %s: Course title */
+			$text = __( 'Enroll &ldquo;%s&rdquo; course', 'masteriyo' );
+		}
+
+		return apply_filters( 'masteriyo_course_add_to_cart_description', sprintf( $text, $this->get_name() ), $this );
 	}
 }

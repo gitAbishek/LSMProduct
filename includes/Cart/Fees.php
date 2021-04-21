@@ -122,7 +122,7 @@ class Fees {
 	 * @since 0.1.0
 	 */
 	public function remove_all() {
-		$this->set();
+		$this->set_fees();
 	}
 
 	/**

@@ -168,6 +168,8 @@ class Install {
 
 	/**
 	 * Create pages that the plugin relies on, storing page IDs in variables.
+	 *
+	 * @since 0.1.0 
 	 */
 	public static function create_pages() {
 		include_once dirname( __FILE__ ) . '/Helper/Core.php';

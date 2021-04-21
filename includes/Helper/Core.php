@@ -2025,6 +2025,8 @@ function masteriyo_get_password_reset_link( $reset_key, $user_id ) {
 /*
  * Create a page and store the ID in an option.
  *
+ * @since 0.1.0
+ *
  * @param mixed  $slug Slug for the new page.
  * @param string $option Option name to store the page's ID.
  * @param string $page_title (default: '') Title for the new page.
@@ -2096,6 +2098,8 @@ function masteriyo_create_page( $slug, $option = '', $page_title = '', $page_con
 
 /**
  * Add a post display state for special masteriyo pages in the page list table.
+ *
+ * @since 0.1.0
  *
  * @param array   $post_states An array of post display states.
  * @param WP_Post $post        The current post object.

@@ -149,20 +149,19 @@ class RegistrationFormHandler {
 		$fields = array( 'username', 'email', 'password', 'confirm-password', 'accept-terms-and-conditions' );
 
 		foreach( $fields as $key ) {
-			if ( isset( $_POST[ $key ] ) ) {
-				if ( 'email' === $key ) {
-					$data[ $key ] = sanitize_email( wp_unslash( trim( $_POST[ $key ] ) ) );
-					continue;
-				}
-				if ( 'username' === $key ) {
-					$data[ $key ] = sanitize_user( trim( $_POST[ $key ] ) );
-					continue;
-				}
-
-				$data[ $key ] = wp_unslash( $_POST[ $key ] );
-			} else {
+			if ( ! isset( $_POST[ $key ] ) ) {
 				$data[ $key ] = '';
+				continue;
 			}
+
+			if ( 'email' === $key ) {
+				$data[ $key ] = sanitize_email( wp_unslash( trim( $_POST[ $key ] ) ) );
+			}
+			if ( 'username' === $key ) {
+				$data[ $key ] = sanitize_user( trim( $_POST[ $key ] ) );
+			}
+
+			$data[ $key ] = wp_unslash( $_POST[ $key ] );
 		}
 		return $data;
 	}

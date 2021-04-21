@@ -128,11 +128,11 @@ class ChangePasswordFormHandler {
 		$fields = array( 'current_password', 'password_1', 'password_2' );
 
 		foreach( $fields as $key ) {
-			if ( isset( $_POST[ $key ] ) ) {
-				$data[ $key ] = trim( $_POST[ $key ] );
-			} else {
+			if ( ! isset( $_POST[ $key ] ) ) {
 				$data[ $key ] = '';
+				continue;
 			}
+			$data[ $key ] = trim( $_POST[ $key ] );
 		}
 		return $data;
 	}

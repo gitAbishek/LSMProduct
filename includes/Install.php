@@ -169,7 +169,7 @@ class Install {
 	/**
 	 * Create pages that the plugin relies on, storing page IDs in variables.
 	 *
-	 * @since 0.1.0 
+	 * @since 0.1.0
 	 */
 	public static function create_pages() {
 		include_once dirname( __FILE__ ) . '/Helper/Core.php';
@@ -177,10 +177,21 @@ class Install {
 		$pages = apply_filters(
 			'masteriyo_create_pages',
 			array(
-				'course-list' => array(
+				'course-list'        => array(
 					'name'    => _x( 'course-list', 'Page slug', 'masteriyo' ),
 					'title'   => _x( 'Course List', 'Page title', 'masteriyo' ),
 					'content' => '',
+				),
+				'myaccount'          => array(
+					'name'    => _x( 'myaccount', 'Page slug', 'masteriyo' ),
+					'title'   => _x( 'My Masteriyo Acoount', 'Page title', 'masteriyo' ),
+					'content' => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_myaccount_shortcode_tag', 'masteriyo_myaccount' ) . ']<!-- /wp:shortcode -->',
+				),
+				'masteriyo-checkout' => array(
+					// Checkout slug is 'masteriyo-checkout' as 'checkout' slug might be used by other plugins like WooCommerce.
+					'name'    => _x( 'masteriyo-checkout', 'Page slug', 'masteriyo' ),
+					'title'   => _x( 'Masteriyo Checkout', 'Page title', 'masteriyo' ),
+					'content' => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_checkout_shortcode_tag', 'masteriyo_checkout' ) . ']<!-- /wp:shortcode -->',
 				),
 			)
 		);

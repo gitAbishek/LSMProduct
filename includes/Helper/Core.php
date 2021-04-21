@@ -37,7 +37,7 @@ function masteriyo_get_course( $course ) {
 		$id = absint( $id );
 		$course_obj->set_id( $id );
 		$course_store->read( $course_obj );
-	} catch ( \Exception $e) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 
@@ -68,7 +68,7 @@ function masteriyo_get_lesson( $lesson ) {
 		$id = absint( $id );
 		$lesson_obj->set_id( $id );
 		$lesson_store->read( $lesson_obj );
-	} catch ( \Exception $e) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 	return apply_filters( 'masteriyo_get_lesson', $lesson_obj, $lesson );
@@ -99,7 +99,7 @@ function masteriyo_get_section( $section ) {
 		$id = absint( $id );
 		$section_obj->set_id( $id );
 		$section_store->read( $section_obj );
-	} catch ( \Exception $e) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 
@@ -131,7 +131,7 @@ function masteriyo_get_faq( $faq ) {
 		$id = absint( $id );
 		$faq_obj->set_id( $id );
 		$faq_store->read( $faq_obj );
-	} catch ( \Exception $e) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 
@@ -237,7 +237,7 @@ function masteriyo_get_quiz( $quiz ) {
 		$id = absint( $id );
 		$quiz_obj->set_id( $id );
 		$quiz_store->read( $quiz_obj );
-	} catch ( \Exception $e) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 
@@ -268,7 +268,7 @@ function masteriyo_get_order( $order ) {
 		$id = absint( $id );
 		$order_obj->set_id( $id );
 		$order_store->read( $order_obj );
-	} catch ( \Exception $e) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 	return apply_filters( 'masteriyo_get_order', $order_obj, $order );
@@ -304,7 +304,7 @@ function masteriyo_get_question( $question ) {
 		$id = absint( $id );
 		$question_obj->set_id( $id );
 		$question_store->read( $question_obj );
-	} catch ( \Exception $e) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 
@@ -335,7 +335,7 @@ function masteriyo_get_course_cat( $course_cat ) {
 		$id = absint( $id );
 		$course_cat_obj->set_id( $id );
 		$course_cat_store->read( $course_cat_obj );
-	} catch ( \Exception $e) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 
@@ -366,7 +366,7 @@ function masteriyo_get_course_tag( $course_tag ) {
 		$id = absint( $id );
 		$course_tag_obj->set_id( $id );
 		$course_tag_store->read( $course_tag_obj );
-	} catch ( \Exception $e) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 
@@ -397,7 +397,7 @@ function masteriyo_get_course_difficulty( $course_difficulty ) {
 		$id = absint( $id );
 		$course_difficulty_obj->set_id( $id );
 		$course_difficulty_store->read( $course_difficulty_obj );
-	} catch ( \Exception $e) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 
@@ -428,7 +428,7 @@ function masteriyo_get_user( $user ) {
 		$id = absint( $id );
 		$user_obj->set_id( $id );
 		$user_store->read( $user_obj );
-	} catch ( \Exception $e) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 
@@ -540,13 +540,13 @@ function masteriyo_get_page_id( $page ) {
 	$page_id = -1;
 	$setting = masteriyo( 'setting' );
 
-	if( ! is_null( $setting ) ) {
+	if ( ! is_null( $setting ) ) {
 		$setting->set_name( 'masteriyo_' . $page . '_page_id' );
 		masteriyo( 'setting.store' )->read( $setting );
 		$page_id = $setting->get_value();
 	}
 
-	$page_id = apply_filters( 'masteriyo_get_' . $page . '_page_id',  $page_id );
+	$page_id = apply_filters( 'masteriyo_get_' . $page . '_page_id', $page_id );
 
 	return $page_id ? absint( $page_id ) : -1;
 }
@@ -593,7 +593,7 @@ function masteriyo_is_single_course_page() {
  * @return string
  */
 function masteriyo_img_url( $file ) {
-	$plugin_dir = plugin_dir_url( Constants::get('MASTERIYO_PLUGIN_FILE') );
+	$plugin_dir = plugin_dir_url( Constants::get( 'MASTERIYO_PLUGIN_FILE' ) );
 
 	return "{$plugin_dir}assets/img/{$file}";
 }
@@ -627,20 +627,25 @@ function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
 	$rating     = (float) $rating;
 	$html       = '';
 	$max_rating = apply_filters( 'masteriyo_max_course_rating', 5 );
-	$stars      = apply_filters( 'masteriyo_rating_indicators_html', array(
-		'full_star' =>
-			"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+	$stars      = apply_filters(
+		'masteriyo_rating_indicators_html',
+		array(
+			'full_star'  =>
+				"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
 				<path d='M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z'/>
 			</svg>",
-		'half_star' =>
-			"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+			'half_star'  =>
+				"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
 				<path d='M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z'/>
 			</svg>",
-		'empty_star' =>
-			"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+			'empty_star' =>
+				"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
 				<path d='M6.516 14.323l-1.49 6.452a.998.998 0 001.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822 0L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 00.832-.586L12 5.43l1.799 3.981a.998.998 0 00.832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 00-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 00-.276-.94l-3.038-2.962 4.09-.326z'/>
 			</svg>",
-	), $rating, $max_rating );
+		),
+		$rating,
+		$max_rating
+	);
 
 	$rating_floor = floor( $rating );
 	for ( $i = 1; $i <= $rating_floor; $i++ ) {
@@ -686,18 +691,18 @@ function masteriyo_get_related_courses( $course ) {
 	 * Ref: https://www.wpbeginner.com/wp-tutorials/how-to-display-related-posts-in-wordpress/
 	 */
 	$args            = array(
-		'tax_query' => array(
+		'tax_query'      => array(
 			'relation' => 'AND',
 			array(
 				'taxonomy' => 'course_tag',
 				'terms'    => $course->get_tag_ids(),
 			),
 		),
-		'post__not_in' => array( $course->get_id() ),
+		'post__not_in'   => array( $course->get_id() ),
 		'posts_per_page' => $max_related_posts,
-		'post_type' => 'course',
+		'post_type'      => 'course',
 	);
-	$query           = new WP_Query($args);
+	$query           = new WP_Query( $args );
 	$related_courses = array_map( 'masteriyo_get_course', $query->posts );
 
 	return apply_filters( 'masteriyo_get_related_courses', $related_courses, $query );
@@ -720,9 +725,11 @@ function masteriyo_get_lessons_count( $course ) {
 		return 0;
 	}
 
-	$lessons = masteriyo_get_lessons(array(
-		'course_id' => $course->get_id(),
-	));
+	$lessons = masteriyo_get_lessons(
+		array(
+			'course_id' => $course->get_id(),
+		)
+	);
 
 	return count( $lessons );
 }
@@ -773,9 +780,11 @@ function masteriyo_get_lecture_hours( $course, $format = null ) {
 		return '';
 	}
 
-	$lessons = masteriyo_get_lessons(array(
-		'course_id' => $course->get_id(),
-	));
+	$lessons = masteriyo_get_lessons(
+		array(
+			'course_id' => $course->get_id(),
+		)
+	);
 	$mins    = 0;
 
 	foreach ( $lessons as $lesson ) {
@@ -803,9 +812,11 @@ function masteriyo_get_lecture_hours_of_section( $section, $format = null ) {
 		return '';
 	}
 
-	$lessons = masteriyo_get_lessons(array(
-		'parent_id' => $section->get_id(),
-	));
+	$lessons = masteriyo_get_lessons(
+		array(
+			'parent_id' => $section->get_id(),
+		)
+	);
 	$mins    = 0;
 
 	foreach ( $lessons as $lesson ) {
@@ -828,21 +839,25 @@ function masteriyo_make_section_to_lessons_dictionary( $course ) {
 	$course = masteriyo_get_course( $course );
 
 	// Bail early if the course is null.
-	if ( is_null( $course) ) {
+	if ( is_null( $course ) ) {
 		return array();
 	}
 
-	$sections = masteriyo_get_sections( array(
-		'order'     => 'asc',
-		'order_by'  => 'menu_order',
-		'parent_id' => $course->get_id(),
-	) );
+	$sections = masteriyo_get_sections(
+		array(
+			'order'     => 'asc',
+			'order_by'  => 'menu_order',
+			'parent_id' => $course->get_id(),
+		)
+	);
 
-	$lessons = masteriyo_get_lessons(array(
-		'order'     => 'asc',
-		'order_by'  => 'menu_order',
-		'course_id' => $course->get_id(),
-	));
+	$lessons = masteriyo_get_lessons(
+		array(
+			'order'     => 'asc',
+			'order_by'  => 'menu_order',
+			'course_id' => $course->get_id(),
+		)
+	);
 
 	$lessons_dictionary = array();
 
@@ -1388,7 +1403,7 @@ function masteriyo_is_admin_page() {
 	}
 
 	$screen = get_current_screen();
-	return 'toplevel_page_masteriyo' === $screen->id ? true: false;
+	return 'toplevel_page_masteriyo' === $screen->id ? true : false;
 }
 
 /**
@@ -1439,19 +1454,22 @@ function masteriyo_get_current_myaccount_endpoint() {
  * @return array
  */
 function masteriyo_get_myaccount_endpoints() {
-	return apply_filters( 'masteriyo_myaccount_endpoints', array(
-		'view-myaccount'   => get_option( 'masteriyo_myaccount_view-myaccount_endpoint', 'view-myaccount' ),
-		'edit-myaccount'   => get_option( 'masteriyo_myaccount_edit-myaccount_endpoint', 'edit-myaccount' ),
-		'dashboard'      => get_option( 'masteriyo_myaccount_dashboard_endpoint', 'dashboard' ),
-		'courses'        => get_option( 'masteriyo_myaccount_courses_endpoint', 'courses' ),
-		'grades'         => get_option( 'masteriyo_myaccount_grades_endpoint', 'grades' ),
-		'memberships'    => get_option( 'masteriyo_myaccount_memberships_endpoint', 'memberships' ),
-		'certificates'   => get_option( 'masteriyo_myaccount_certificates_endpoint', 'certificates' ),
-		'order-history'  => get_option( 'masteriyo_myaccount_order-history_endpoint', 'order-history' ),
-		'reset-password' => get_option( 'masteriyo_myaccount_reset-password_endpoint', 'reset-password' ),
-		'signup'         => get_option( 'masteriyo_myaccount_signup_endpoint', 'signup' ),
-		'user-logout'    => get_option( 'masteriyo_logout_endpoint', 'user-logout' ),
-	) );
+	return apply_filters(
+		'masteriyo_myaccount_endpoints',
+		array(
+			'view-myaccount' => get_option( 'masteriyo_myaccount_view-myaccount_endpoint', 'view-myaccount' ),
+			'edit-myaccount' => get_option( 'masteriyo_myaccount_edit-myaccount_endpoint', 'edit-myaccount' ),
+			'dashboard'      => get_option( 'masteriyo_myaccount_dashboard_endpoint', 'dashboard' ),
+			'courses'        => get_option( 'masteriyo_myaccount_courses_endpoint', 'courses' ),
+			'grades'         => get_option( 'masteriyo_myaccount_grades_endpoint', 'grades' ),
+			'memberships'    => get_option( 'masteriyo_myaccount_memberships_endpoint', 'memberships' ),
+			'certificates'   => get_option( 'masteriyo_myaccount_certificates_endpoint', 'certificates' ),
+			'order-history'  => get_option( 'masteriyo_myaccount_order-history_endpoint', 'order-history' ),
+			'reset-password' => get_option( 'masteriyo_myaccount_reset-password_endpoint', 'reset-password' ),
+			'signup'         => get_option( 'masteriyo_myaccount_signup_endpoint', 'signup' ),
+			'user-logout'    => get_option( 'masteriyo_logout_endpoint', 'user-logout' ),
+		)
+	);
 }
 
 /**
@@ -1550,7 +1568,7 @@ function masteriyo_logout_url( $redirect = '' ) {
  * @return void|string
  */
 function masteriyo_get_svg( $name, $echo = false ) {
-	$file_name = Constants::get('MASTERIYO_ASSETS') . "/svg/{$name}.svg";
+	$file_name = Constants::get( 'MASTERIYO_ASSETS' ) . "/svg/{$name}.svg";
 
 	if ( file_exists( $file_name ) && is_readable( $file_name ) ) {
 		if ( $echo ) {
@@ -1572,33 +1590,33 @@ function masteriyo_get_svg( $name, $echo = false ) {
 function masteriyo_get_account_menu_items() {
 	$endpoints = masteriyo_get_myaccount_endpoints();
 	$items     = array(
-		'dashboard' => array(
+		'dashboard'     => array(
 			'label' => __( 'Dashboard', 'masteriyo' ),
-			'icon' => masteriyo_get_svg( 'dashboard' ),
+			'icon'  => masteriyo_get_svg( 'dashboard' ),
 		),
-		'courses' => array(
+		'courses'       => array(
 			'label' => __( 'My Courses', 'masteriyo' ),
-			'icon' => masteriyo_get_svg( 'courses' ),
+			'icon'  => masteriyo_get_svg( 'courses' ),
 		),
-		'grades' => array(
+		'grades'        => array(
 			'label' => __( 'My Grades', 'masteriyo' ),
-			'icon' => masteriyo_get_svg( 'grades' ),
+			'icon'  => masteriyo_get_svg( 'grades' ),
 		),
-		'memberships' => array(
+		'memberships'   => array(
 			'label' => __( 'My Memberships', 'masteriyo' ),
-			'icon' => masteriyo_get_svg( 'memberships' ),
+			'icon'  => masteriyo_get_svg( 'memberships' ),
 		),
-		'certificates' => array(
+		'certificates'  => array(
 			'label' => __( 'My Certificaties', 'masteriyo' ),
-			'icon' => masteriyo_get_svg( 'certificates' ),
+			'icon'  => masteriyo_get_svg( 'certificates' ),
 		),
 		'order-history' => array(
 			'label' => __( 'My Order History', 'masteriyo' ),
-			'icon' => masteriyo_get_svg( 'order-history' ),
+			'icon'  => masteriyo_get_svg( 'order-history' ),
 		),
-		'user-logout' => array(
+		'user-logout'   => array(
 			'label' => __( 'Logout', 'masteriyo' ),
-			'icon' => masteriyo_get_svg( 'user-logout' ),
+			'icon'  => masteriyo_get_svg( 'user-logout' ),
 		),
 	);
 
@@ -1621,7 +1639,7 @@ function masteriyo_get_account_menu_items() {
  * @param string $str
  */
 function masteriyo_echo_if( $bool, $str = '' ) {
-	if ( !! $bool ) {
+	if ( ! ! $bool ) {
 		echo $str;
 	}
 }
@@ -1701,7 +1719,7 @@ function masteriyo_is_edit_myaccount_page() {
 function masteriyo_get_setting_value( $setting_name, $default = null ) {
 	$setting = masteriyo( 'setting' );
 
-	if( is_null( $setting ) ) {
+	if ( is_null( $setting ) ) {
 		return $default;
 	}
 
@@ -1931,7 +1949,7 @@ function masteriyo_set_customer_auth_cookie( $user_id ) {
 	wp_set_auth_cookie( $user_id, true );
 
 	// Update session.
-	masteriyo('session')->init_session_cookie();
+	masteriyo( 'session' )->init_session_cookie();
 }
 
 /**
@@ -2106,11 +2124,11 @@ function masteriyo_create_page( $slug, $option = '', $page_title = '', $page_con
  */
 function masteriyo_add_post_state( $post_states, $post ) {
 
-	if ( 'course-list' === $post->post_name ) {
+	if ( masteriyo_get_page_id( 'course-list' ) === $post->ID ) {
 		$post_states['masteriyo_course_list_page'] = __( 'Course List Page', 'masteriyo' );
 	}
 
 	return $post_states;
 }
 
-add_filter( 'display_post_states', 'masteriyo_add_post_state', 10, 2 );
+function_exists( 'add_filter' ) && add_filter( 'display_post_states', 'masteriyo_add_post_state', 10, 2 );

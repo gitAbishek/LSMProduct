@@ -32,7 +32,7 @@ class RequestPasswordResetFormHandler {
 	 * @return void
 	 */
 	public function process_password_reset_request() {
-		if ( ! isset( $_REQUEST['masteriyo-password-reset-request'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if ( ! isset( $_POST['masteriyo-password-reset-request'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
 
@@ -98,7 +98,7 @@ class RequestPasswordResetFormHandler {
 	 * @since 0.1.0
 	 */
 	protected function verify_nonce() {
-		$nonce_value = isset( $_REQUEST['_wpnonce'] ) ? wp_unslash( $_REQUEST['_wpnonce'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( empty( $nonce_value ) ) {
 			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
@@ -140,9 +140,9 @@ class RequestPasswordResetFormHandler {
 	 * @return array
 	 */
 	protected function get_form_data() {
-		if ( isset( $_REQUEST[ 'user_login' ] ) ) {
+		if ( isset( $_POST[ 'user_login' ] ) ) {
 			return array(
-				'user_login' => sanitize_user( trim( $_REQUEST[ 'user_login' ] ) ),
+				'user_login' => sanitize_user( trim( $_POST[ 'user_login' ] ) ),
 			);
 		}
 

@@ -25,7 +25,7 @@ class RegistrationFormHandler {
 	 * @return void
 	 */
 	public function process_registration() {
-		if ( ! isset( $_REQUEST['masteriyo-registration'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if ( ! isset( $_POST['masteriyo-registration'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
 
@@ -61,7 +61,7 @@ class RegistrationFormHandler {
 	 * @since 0.1.0
 	 */
 	protected function verify_nonce() {
-		$nonce_value = isset( $_REQUEST['_wpnonce'] ) ? wp_unslash( $_REQUEST['_wpnonce'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( empty( $nonce_value ) ) {
 			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
@@ -149,17 +149,17 @@ class RegistrationFormHandler {
 		$fields = array( 'username', 'email', 'password', 'confirm-password', 'accept-terms-and-conditions' );
 
 		foreach( $fields as $key ) {
-			if ( isset( $_REQUEST[ $key ] ) ) {
+			if ( isset( $_POST[ $key ] ) ) {
 				if ( 'email' === $key ) {
-					$data[ $key ] = sanitize_email( wp_unslash( trim( $_REQUEST[ $key ] ) ) );
+					$data[ $key ] = sanitize_email( wp_unslash( trim( $_POST[ $key ] ) ) );
 					continue;
 				}
 				if ( 'username' === $key ) {
-					$data[ $key ] = sanitize_user( trim( $_REQUEST[ $key ] ) );
+					$data[ $key ] = sanitize_user( trim( $_POST[ $key ] ) );
 					continue;
 				}
 
-				$data[ $key ] = wp_unslash( $_REQUEST[ $key ] );
+				$data[ $key ] = wp_unslash( $_POST[ $key ] );
 			} else {
 				$data[ $key ] = '';
 			}

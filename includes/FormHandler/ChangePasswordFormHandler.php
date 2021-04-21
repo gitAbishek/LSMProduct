@@ -32,7 +32,7 @@ class ChangePasswordFormHandler {
 	 * @return void
 	 */
 	public function handle() {
-		if ( ! isset( $_REQUEST['masteriyo-change-password'] ) || ! is_user_logged_in() ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if ( ! isset( $_POST['masteriyo-change-password'] ) || ! is_user_logged_in() ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
 
@@ -66,7 +66,7 @@ class ChangePasswordFormHandler {
 	 * @since 0.1.0
 	 */
 	protected function verify_nonce() {
-		$nonce_value = isset( $_REQUEST['_wpnonce'] ) ? wp_unslash( $_REQUEST['_wpnonce'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( empty( $nonce_value ) ) {
 			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
@@ -128,8 +128,8 @@ class ChangePasswordFormHandler {
 		$fields = array( 'current_password', 'password_1', 'password_2' );
 
 		foreach( $fields as $key ) {
-			if ( isset( $_REQUEST[ $key ] ) ) {
-				$data[ $key ] = trim( $_REQUEST[ $key ] );
+			if ( isset( $_POST[ $key ] ) ) {
+				$data[ $key ] = trim( $_POST[ $key ] );
 			} else {
 				$data[ $key ] = '';
 			}

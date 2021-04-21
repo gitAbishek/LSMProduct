@@ -35,7 +35,7 @@ do_action('masteriyo_before_password_reset_request_form');
 					</div>
 				</div>
 
-				<input type="hidden" name="_wpnonce" value="<?php echo wp_create_nonce('masteriyo-password-reset-request'); ?>">
+				<?php wp_nonce_field( 'masteriyo-password-reset-request' ); ?>
 
 				<?php masteriyo_display_all_notices(); ?>
 			</form>

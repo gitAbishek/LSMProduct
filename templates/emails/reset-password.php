@@ -45,11 +45,6 @@ do_action( 'masteriyo_email_header', $email_heading, $email );
 	<?php esc_html_e( 'Click here to reset your password', 'masteriyo' ); ?>
 </a>
 
-<p class="email-template--footer">
-	<?php esc_html_e( 'Thanks,', 'masteriyo' ); ?><br/>
-	<?php esc_html_e( 'The Masteriyo Team', 'masteriyo' ); ?>
-</p>
-
 <?php
 
 /**

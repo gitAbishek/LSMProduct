@@ -2068,7 +2068,7 @@ function masteriyo_create_page( $slug, $option = '', $page_title = '', $page_con
 
 	if ( strlen( $page_content ) > 0 ) {
 		// Search for an existing page with the specified page content (typically a shortcode).
-		$shortcode = str_replace( array( '<!-- wp:shortcode -->', '<!-- /wp:shortcode -->' ), '', $page_content );
+		$shortcode        = str_replace( array( '<!-- wp:shortcode -->', '<!-- /wp:shortcode -->' ), '', $page_content );
 		$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' ) AND post_content LIKE %s LIMIT 1;", "%{$shortcode}%" ) );
 	} else {
 		// Search for an existing page with the specified page slug.
@@ -2125,7 +2125,13 @@ function masteriyo_create_page( $slug, $option = '', $page_title = '', $page_con
 function masteriyo_add_post_state( $post_states, $post ) {
 
 	if ( masteriyo_get_page_id( 'course-list' ) === $post->ID ) {
-		$post_states['masteriyo_course_list_page'] = __( 'Course List Page', 'masteriyo' );
+		$post_states['masteriyo_course_list_page'] = __( 'Masteriyo Course List Page', 'masteriyo' );
+	}
+	if ( masteriyo_get_page_id( 'myaccount' ) === $post->ID ) {
+		$post_states['masteriyo_myaccount_page'] = __( 'Masteriyo My Account Page', 'masteriyo' );
+	}
+	if ( masteriyo_get_page_id( 'masteriyo-checkout' ) === $post->ID ) {
+		$post_states['masteriyo_checkout_page'] = __( 'Masteriyo Checkout Page', 'masteriyo' );
 	}
 
 	return $post_states;

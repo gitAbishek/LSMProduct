@@ -18,7 +18,7 @@ class Course extends PostType {
 	public function __construct() {
 		$debug                = masteriyo_is_debug_enabled();
 		$permalinks           = masteriyo_get_permalink_structure();
-		$course_list_page_id = masteriyo_get_page_id( 'course_list' );
+		$course_list_page_id = masteriyo_get_page_id( 'course-list' );
 		$supports             = array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'publicize', 'wpcom-markdown' );
 
 		if ( $course_list_page_id && get_post( $course_list_page_id ) ) {

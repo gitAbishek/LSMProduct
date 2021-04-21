@@ -159,7 +159,7 @@ class PermalinkSettings {
 		$permalinks['course_base'] = masteriyo_sanitize_permalink( $course_base );
 
 		// course_list base may require verbose page rules if nesting pages.
-		$course_list_page_id   = masteriyo_get_page_id( 'course_list' );
+		$course_list_page_id   = masteriyo_get_page_id( 'course-list' );
 		$course_list_permalink = ( $course_list_page_id > 0 && get_post( $course_list_page_id ) ) ? get_page_uri( $course_list_page_id ) : _x( 'course-list', 'default-slug', 'masteriyo' );
 
 		if ( $course_list_page_id && stristr( trim( $permalinks['course_base'], '/' ), $course_list_permalink ) ) {
@@ -178,7 +178,7 @@ class PermalinkSettings {
 		/* translators: %s: Home URL */
 		echo wp_kses_post( wpautop( sprintf( __( 'If you like, you may enter custom structures for your course URLs here. For example, using <code>course-list</code> would make your course links like <code>%scourse-list/sample-course/</code>. This setting affects course URLs only, not things such as course categories.', 'masteriyo' ), esc_url( home_url( '/' ) ) ) ) );
 
-		$course_list_page_id = masteriyo_get_page_id( 'course_list' );
+		$course_list_page_id = masteriyo_get_page_id( 'course-list' );
 		$base_slug            = urldecode( ( $course_list_page_id > 0 && get_post( $course_list_page_id ) ) ? get_page_uri( $course_list_page_id ) : _x( 'Courses list', 'default-base', 'masteriyo' ) );
 		$course_base          = _x( 'course', 'default-base', 'masteriyo' );
 

@@ -632,7 +632,18 @@ if ( ! function_exists( 'masteriyo_checkout_billing_form' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_checkout_billing_form() {
-		masteriyo_get_template( 'checkout/form-billing.php' );
+		$current_user = masteriyo_get_current_user();
+
+		if ( is_null( $current_user ) ) {
+			return;
+		}
+
+		masteriyo_get_template(
+			'checkout/form-billing.php',
+			array(
+				'user' => $current_user,
+			)
+		);
 	}
 }
 

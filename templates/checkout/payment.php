@@ -9,20 +9,45 @@
 
  defined( 'ABSPATH' ) || exit;
 ?>
-<div class="checkout-summary-payment-method">
-	<div class="checkout-summary-paypal">
-		<img src="./img/paypal.png" class="checkout-summary-paypal--image w-25" alt="">
-		<a href="#" class="primary-link">What is paypal?</a>
-	</div>
-	<div class="checkout-summary-info"><box-icon type="solid" name="lock-alt"></box-icon>Your transaction is secured with SSL encryption</div>
+<div id="masteriyo-payment" class="checkout-summary-payment-method">
+	<?php if ( masteriyo( 'cart' )->needs_payment() ) : ?>
+		<ul class="masteriyo-payment-methods payment-methods methods">
+			<?php
+			if ( ! empty( $available_gateways ) ) {
+				foreach ( $available_gateways as $gateway ) {
+					masteriyo_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
+				}
+			} else {
+				$message = esc_html__( 'Please fill in your details above to see available payment methods.', 'masteriyo' );
+				if ( masteriyo_get_current_user()->get_country() ) {
+					$message = esc_html__( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'masteriyo' );
+				}
+				printf(
+					'<li class="masteriyo-notice masteriyo-notice--info masteriyo-info">%s</li>',
+					$message // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				);
+			}
+			?>
+		</ul>
+	<?php endif; ?>
 </div>
-<a href="#" class="checkout-confirm-payment btn-primary full-w">
+
+<?php do_action( 'masteriyo_checkout_summary_before_submit' ); ?>
+
+<button
+	type="submit"
+	class="checkout-confirm-payment btn-primary full-w button alt"
+	id="masteriyo-place-order"
+	name="masteriyo_checkout_place_order">
 	<?php
 		printf(
 			esc_html( 'Confirm Payment: %s', 'masteriyo' ),
 			masteriyo_price( masteriyo( 'cart' )->get_total() )
 		);
 		?>
-</a>
+</button>
+
 <?php
+	wp_nonce_field( 'masteriyo_process_checkout', 'masteriyo-process-checkout-nonce' );
+	do_action( 'masteriyo_checkout_summary_after_submit' );
 

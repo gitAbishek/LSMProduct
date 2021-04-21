@@ -50,6 +50,6 @@ add_action( 'masteriyo_email_footer', 'masteriyo_email_footer' );
  */
 add_action( 'masteriyo_checkout_form', 'masteriyo_checkout_billing_form', 10 );
 add_action( 'masteriyo_checkout_summary', 'masteriyo_checkout_order_summary', 10 );
-add_action( 'masteriyo_checkout_summary', 'masteriyo_checkout_payment_methods', 20 );
+add_action( 'masteriyo_checkout_summary', 'masteriyo_checkout_payment', 20 );
 
 

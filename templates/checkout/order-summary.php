@@ -43,23 +43,5 @@
 			</div>
 		</li>
 	</ul>
-	<div class="checkout-summary-couponcode">
-		<label href="#" for="couponcode-input" class="checkout-summary-couponcode-link">
-			<?php esc_html_e( 'Have a Coupon Code?', 'masteriyo' ); ?>
-		</label>
-		<input type="checkbox" class="checkout-summary-couponcode-input hide" id="couponcode-input" name="couponcode-input" />
-		<form class="checkout-summary-couponcode-form hide" action="">
-			<div class="checkout-summary-couponcode---wrapper">
-				<div class="checkout-summary-couponcode----input full-w">
-					<input type="text" />
-				</div>
-				<div class="checkout-summary-couponcode----button">
-					<a href="#" class="btn-primary full-w">
-						<?php esc_html_e( 'Apply', 'masteriyo' ); ?>
-					</a>
-				</div>
-			</div>
-		</form>
-	</div>
 </div>
 <?php

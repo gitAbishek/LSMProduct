@@ -28,14 +28,18 @@ use ThemeGrill\Masteriyo\Countries;
 				<label for="first-name">
 					<?php esc_html_e( 'First Name', 'masteriyo' ); ?>
 				</label>
-				<input type="text" id="first-name" name="first-name" />
+				<input
+					type="text" id="first-name" name="first-name"
+					value="<?php echo esc_attr( $user->get_first_name() ); ?>" />
 			</div>
 
 			<div class="checkout----lname col-2">
 				<label for="last-name">
 					<?php esc_html_e( 'Last Name', 'masteriyo' ); ?>
 				</label>
-				<input type="text" id="last-name" name="last-name" />
+				<input
+					type="text" id="last-name" name="last-name"
+					value="<?php echo esc_attr( $user->get_last_name() ); ?>" />
 			</div>
 		</div>
 
@@ -44,7 +48,9 @@ use ThemeGrill\Masteriyo\Countries;
 				<label for="email">
 					<?php esc_html_e( 'Email Address', 'masteriyo' ); ?>
 				</label>
-				<input type="text" id="email" name="email" />
+				<input
+					type="text" id="email" name="email"
+					value="<?php echo esc_attr( $user->get_email() ); ?>" />
 			</div>
 		</div>
 
@@ -53,7 +59,9 @@ use ThemeGrill\Masteriyo\Countries;
 				<label for="phone">
 					<?php esc_html_e( 'Phone', 'masteriyo' ); ?>
 				</label>
-				<input type="tel" id="phone" name="phone" />
+				<input
+					type="tel" id="phone" name="phone"
+					value="<?php echo esc_attr( '' ); ?>" />
 			</div>
 		</div>
 
@@ -71,7 +79,7 @@ use ThemeGrill\Masteriyo\Countries;
 				<label for="country">Country/Region</label>
 				<div class="dropdown">
 					<select name="country" id="country">
-					<?php Countries::instance()->country_dropdown_options(); ?>
+					<?php Countries::instance()->country_dropdown_options( $user->get_country() ); ?>
 					</select>
 				</div>
 
@@ -93,7 +101,9 @@ use ThemeGrill\Masteriyo\Countries;
 				<label for="postcode">
 					<?php esc_html_e( 'Postcode / ZIP code', 'masteriyo' ); ?>
 				</label>
-				<input class="danger-msg" type="text" id="postcode" name="postcode" />
+				<input
+					class="danger-msg" type="text" id="postcode" name="postcode"
+					value="<?php esc_attr( $user->get_zip_code() ); ?>" />
 			</div>
 			<div class="error danger-msg">This field is required</div>
 		</div>

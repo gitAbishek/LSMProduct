@@ -34,21 +34,29 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'nickname'             => 'nickname',
 		'first_name'           => 'first_name',
 		'last_name'            => 'last_name',
-		'description'          => 'description',
-		'rich_editing'         => 'rich_editing',
-		'syntax_highlighting'  => 'syntax_highlighting',
-		'comment_shortcuts'    => 'comment_shortcuts',
-		'use_ssl'              => 'use_ssl',
+		'display_name'         => 'display_name',
 		'show_admin_bar_front' => 'show_admin_bar_front',
-		'locale'               => 'locale',
-		'address'              => '_address',
-		'city'                 => '_city',
-		'state'                => '_state',
-		'zip_code'             => '_zip_code',
-		'country'              => '_country',
+		'use_ssl'              => 'use_ssl',
+		'admin_color'          => 'admin_color',
+		'rich_editing'         => 'rich_editing',
+		'comment_shortcuts'    => 'comment_shortcuts',
+		'syntax_highlighting'  => 'syntax_highlighting',
+		'nickname'             => 'nickname',
+		'description'          => 'description',
+		'roles'                 => 'wp_capabilities',
+		'billing_first_name'   => '_billing_first_name',
+		'billing_last_name'    => '_billing_last_name',
+		'billing_company'      => '_billing_company',
+		'billing_address_1'    => '_billing_address_1',
+		'billing_address_2'    => '_billing_address_2',
+		'billing_city'         => '_billing_city',
+		'billing_usercode'     => '_billing_usercode',
+		'billing_country'      => '_billing_country',
+		'billing_state'        => '_billing_state',
+		'billing_email'        => '_billing_email',
+		'billing_phone'        => '_billing_phone',
 	);
 
 	/**
@@ -59,29 +67,23 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 * @param Model $user User object.
 	 */
 	public function create( Model &$user ) {
+		if ( ! $user->get_date_created( 'edit' ) ) {
+			$user->set_date_created( current_time( 'mysql', true ) );
+		}
+
 		$id = wp_insert_user(
 			apply_filters(
 				'masteriyo_new_user_data',
 				array(
-					'user_login'           => $user->get_user_login( 'edit' ),
-					'user_pass'            => $user->get_user_pass( 'edit' ),
-					'user_nicename'        => $user->get_user_nicename( 'edit' ),
-					'user_email'           => $user->get_user_email( 'edit' ),
-					'user_url'             => $user->get_user_url( 'edit' ),
-					'user_activation_key'  => $user->get_user_activation_key( 'edit' ),
-					'user_status'          => $user->get_user_status( 'edit' ),
-					'display_name'         => $user->get_display_name( 'edit' ),
-					'nickname'             => $user->get_nickname( 'edit' ),
-					'first_name'           => $user->get_first_name( 'edit' ),
-					'last_name'            => $user->get_last_name( 'edit' ),
-					'description'          => $user->get_description( 'edit' ),
-					'rich_editing'         => $user->get_rich_editing( 'edit' ),
-					'syntax_highlighting'  => $user->get_syntax_highlighting( 'edit' ),
-					'comment_shortcuts'    => $user->get_comment_shortcuts( 'edit' ),
-					'use_ssl'              => $user->get_use_ssl( 'edit' ),
-					'show_admin_bar_front' => $user->get_show_admin_bar_front( 'edit' ),
-					'locale'               => $user->get_locale( 'edit' ),
-					'role'                 => $user->get_roles( 'edit' ),
+					'user_login'          => $user->get_username( 'edit' ),
+					'user_pass'           => $user->get_password( 'edit' ),
+					'user_nicename'       => $user->get_nicename( 'edit' ),
+					'user_email'          => $user->get_email( 'edit' ),
+					'user_url'            => $user->get_url( 'edit' ),
+					'user_registered'     => $user->get_date_created( 'edit' ),
+					'user_activation_key' => $user->get_activation_key( 'edit' ),
+					'user_status'         => $user->get_status( 'edit' ),
+					'display_name'        => $user->get_display_name( 'edit' ),
 				),
 				$user
 			)
@@ -89,7 +91,8 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 
 		if ( $id && ! is_wp_error( $id ) ) {
 			$user->set_id( $id );
-			$user->apply_changes();
+			$this->update_user_meta( $user, true );
+			$user->apply_changes();\
 
 			do_action( 'masteriyo_new_user', $id, $user );
 		}
@@ -114,17 +117,16 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 
 		$user->set_props(
 			array(
-				'user_login'          => $user_obj->data->user_login,
-				'user_pass'           => $user_obj->data->user_pass,
-				'user_nicename'       => $user_obj->data->user_nicename,
-				'user_email'          => $user_obj->data->user_email,
-				'user_url'            => $user_obj->data->user_url,
-				'user_registered'     => $user_obj->data->user_registered,
-				'user_activation_key' => $user_obj->data->user_activation_key,
-				'user_status'         => $user_obj->data->user_status,
-				'display_name'        => $user_obj->data->display_name,
-				'roles'               => $user_obj->roles,
-				'allcaps'             => $user_obj->allcaps,
+				'username'       => $user_obj->data->user_login,
+				'password'       => $user_obj->data->user_pass,
+				'nicename'       => $user_obj->data->user_nicename,
+				'email'          => $user_obj->data->user_email,
+				'url'            => $user_obj->data->user_url,
+				'registered'     => $user_obj->data->user_registered,
+				'activation_key' => $user_obj->data->user_activation_key,
+				'status'         => $user_obj->data->user_status,
+				'display_name'   => $user_obj->data->display_name,
+				'role'           => ! empty( $user_obj->roles[0] ) ? $user_obj->roles[0] : 'masteriyo_student',
 			)
 		);
 
@@ -147,51 +149,39 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	public function update( Model &$user ) {
 		$changes        = $user->get_changes();
 		$user_data_keys = array(
-			'user_login',
-			'user_pass',
-			'user_nicename',
-			'user_email',
-			'user_url',
-			'user_activation_key',
-			'user_status',
+			'username',
+			'nicename',
+			'email',
+			'url',
+			'date_created',
+			'status',
 			'display_name',
-			'nickname',
-			'first_name',
-			'last_name',
-			'description',
-			'rich_editing',
-			'syntax_highlighting',
-			'comment_shortcuts',
-			'use_ssl',
-			'show_admin_bar_front',
-			'locale',
-			'roles',
 		);
 
 		// Only update the user when the user data changes.
 		if ( array_intersect( $user_data_keys, array_keys( $changes ) ) ) {
 			$user_data = array(
-				'user_login'           => $user->get_user_login( 'edit' ),
-				'user_pass'            => $user->get_user_pass( 'edit' ),
-				'user_nicename'        => $user->get_user_nicename( 'edit' ),
-				'user_email'           => $user->get_user_email( 'edit' ),
-				'user_url'             => $user->get_user_url( 'edit' ),
-				'user_activation_key'  => $user->get_user_activation_key( 'edit' ),
-				'user_status'          => $user->get_user_status( 'edit' ),
-				'display_name'         => $user->get_display_name( 'edit' ),
-				'nickname'             => $user->get_nickname( 'edit' ),
-				'first_name'           => $user->get_first_name( 'edit' ),
-				'last_name'            => $user->get_last_name( 'edit' ),
-				'description'          => $user->get_description( 'edit' ),
-				'rich_editing'         => $user->get_rich_editing( 'edit' ),
-				'syntax_highlighting'  => $user->get_syntax_highlighting( 'edit' ),
-				'comment_shortcuts'    => $user->get_comment_shortcuts( 'edit' ),
-				'use_ssl'              => $user->get_use_ssl( 'edit' ),
-				'show_admin_bar_front' => $user->get_show_admin_bar_front( 'edit' ),
-				'locale'               => $user->get_locale( 'edit' ),
+				'user_login'          => $user->get_username( 'edit' ),
+				'user_nicename'       => $user->get_nicename( 'edit' ),
+				'user_email'          => $user->get_email( 'edit' ),
+				'user_url'            => $user->get_url( 'edit' ),
+				'user_activation_key' => $user->get_activation_key( 'edit' ),
+				'user_status'         => $user->get_status( 'edit' ),
+				'display_name'        => $user->get_display_name( 'edit' ),
 			);
 
 			wp_update_user( array_merge( array( 'ID' => $user->get_id() ), $user_data ) );
+		}
+
+		// Only update password if a new one was set with set_password.
+		if ( $user->get_password() ) {
+			wp_update_user(
+				array(
+					'ID'        => $user->get_id(),
+					'user_pass' => $user->get_password(),
+				)
+			);
+			$user->set_password( '' );
 		}
 
 		$this->update_user_meta( $user );
@@ -243,14 +233,18 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 
 		$set_props = array();
 
-		$meta_values = array_reduce( $meta_values, function( $result, $meta_value ) {
-			$result[ $meta_value->key ][] = $meta_value->value;
-			return $result;
-		}, array() );
+		$meta_values = array_reduce(
+			$meta_values,
+			function( $result, $meta_value ) {
+				$result[ $meta_value->key ][] = $meta_value->value;
+				return $result;
+			},
+			array()
+		);
 
 		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
-			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
+			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_user_meta only unserializes single values.
 		}
 
 		$user->set_props( $set_props );
@@ -273,5 +267,100 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 				$user->{$function}( $meta_values[ '_' . $key ] );
 			}
 		}
+	}
+
+	/**
+	 * Helper method that updates all the user meta for a model based on it's settings in the Model class.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Model $model model object.
+	 * @param bool  $force Force update. Used during create.
+	 */
+	protected function update_user_meta( &$model, $force = false ) {
+		// Make sure to take extra data into account.
+		$extra_data_keys = $model->get_extra_data_keys();
+
+		foreach ( $extra_data_keys as $key ) {
+			$meta_key_to_props[ '_' . $key ] = $key;
+		}
+
+		if ( $force ) {
+			$props_to_update = $this->get_internal_meta_keys();
+		} else {
+			$props_to_update = $this->get_props_to_update( $model, $this->get_internal_meta_keys() );
+		}
+
+		foreach ( $props_to_update as $prop => $meta_key ) {
+			if ( ! is_callable( array( $model, "get_{$prop}" ) ) ) {
+				continue;
+			}
+
+			$value = $model->{"get_$prop"}( 'edit' );
+			$value = is_string( $value ) ? wp_slash( $value ) : $value;
+			switch ( $prop ) {
+				// Stores literal 'true' and 'false' as string in database.
+				case 'rich_editing':
+				case 'syntax_highlighting':
+				case 'comment_shortcuts':
+				case 'show_admin_bar_front':
+					$value = $value ? 'true' : 'false';
+					break;
+			}
+
+			$updated = $this->update_or_delete_user_meta( $model, $meta_key, $value );
+
+			if ( $updated ) {
+				$this->updated_props[] = $prop;
+			}
+		}
+
+		// Update extra data associated with the model like button text or model URL for external models.
+		if ( ! $this->extra_data_saved ) {
+			foreach ( $extra_data_keys as $key ) {
+				$meta_key = '_' . $key;
+				$function = 'get_' . $key;
+				if ( ! array_key_exists( $meta_key, $props_to_update ) ) {
+					continue;
+				}
+				if ( is_callable( array( $model, $function ) ) ) {
+					$value   = $model->{$function}( 'edit' );
+					$value   = is_string( $value ) ? wp_slash( $value ) : $value;
+					$updated = $this->update_or_delete_user_meta( $model, $meta_key, $value );
+
+					if ( $updated ) {
+						$this->updated_props[] = $key;
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Update meta data in, or delete it from, the database.
+	 *
+	 * Avoids storing meta when it's either an empty string or empty array.
+	 * Other empty values such as numeric 0 and null should still be stored.
+	 * Data-stores can force meta to exist using `must_exist_meta_keys`.
+	 *
+	 * Note: WordPress `get_metadata` function returns an empty string when meta data does not exist.
+	 *
+	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
+	 *
+	 * @param Model $object The WP_Data object (WC_Coupon for coupons, etc).
+	 * @param string  $meta_key Meta key to update.
+	 * @param mixed   $meta_value Value to save.
+	 *
+	 *
+	 * @return bool True if updated/deleted.
+	 */
+	protected function update_or_delete_user_meta( $object, $meta_key, $meta_value ) {
+		if ( in_array( $meta_value, array( array(), '' ), true ) && ! in_array( $meta_key, $this->get_must_exist_meta_keys(), true ) ) {
+			$updated = delete_user_meta( $object->get_id(), $meta_key );
+		} else {
+			$updated = update_user_meta( $object->get_id(), $meta_key, $meta_value );
+		}
+
+		return (bool) $updated;
 	}
 }

@@ -9,10 +9,11 @@
 
 namespace ThemeGrill\Masteriyo\Models;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Repository\UserRepository;
 use ThemeGrill\Masteriyo\Helper\Utils;
+use ThemeGrill\Masteriyo\Database\Model;
+use ThemeGrill\Masteriyo\ModelException;
 use ThemeGrill\Masteriyo\Cache\CacheInterface;
+use ThemeGrill\Masteriyo\Repository\UserRepository;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -49,14 +50,15 @@ class User extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'user_login'           => '',
-		'user_pass'            => '',
-		'user_nicename'        => '',
-		'user_email'           => '',
-		'user_url'             => '',
-		'user_registered'      => null,
-		'user_activation_key'  => '',
-		'user_status'          => 0,
+		'username'             => '',
+		'password'             => '',
+		'nicename'             => '',
+		'email'                => '',
+		'url'                  => '',
+		'date_created'         => null,
+		'date_modified'        => null,
+		'activation_key'       => '',
+		'status'               => 0,
 		'display_name'         => '',
 		'nickname'             => '',
 		'first_name'           => '',
@@ -65,16 +67,24 @@ class User extends Model {
 		'rich_editing'         => true,
 		'syntax_highlighting'  => true,
 		'comment_shortcuts'    => false,
-		'use_ssl'              => 0,
+		'admin_color'          => 'fresh',
+		'use_ssl'              => false,
+		'spam'                 => false,
 		'show_admin_bar_front' => true,
 		'locale'               => '',
-		'roles'                => array(),
-		'allcaps'              => array(),
-		'address'              => '',
-		'city'                 => '',
-		'state'                => '',
-		'zip_code'             => '',
-		'country'              => '',
+		'roles'                 => '',
+		// Billing details.
+		'billing_first_name'   => '',
+		'billing_last_name'    => '',
+		'billing_company'      => '',
+		'billing_address_1'    => '',
+		'billing_address_2'    => '',
+		'billing_city'         => '',
+		'billing_postcode'     => '',
+		'billing_country'      => '',
+		'billing_state'        => '',
+		'billing_email'        => '',
+		'billing_phone'        => '',
 	);
 
 	/**
@@ -88,6 +98,13 @@ class User extends Model {
 		$this->repository = $user_repository;
 	}
 
+	/**
+	 * Get User's avatar URL.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
 	public function get_avatar_url() {
 		return get_avatar_url( $this->get_id() );
 	}
@@ -99,7 +116,7 @@ class User extends Model {
 	*/
 
 	/**
-	 * Get user_login.
+	 * Get user's login username.
 	 *
 	 * @since  0.1.0
 	 *
@@ -107,12 +124,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_user_login( $context = 'view' ) {
-		return $this->get_prop( 'user_login', $context );
+	public function get_username( $context = 'view' ) {
+		return $this->get_prop( 'username', $context );
 	}
 
 	/**
-	 * Get user_pass.
+	 * Get users's login password(hash format).
 	 *
 	 * @since  0.1.0
 	 *
@@ -120,12 +137,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_user_pass( $context = 'view' ) {
-		return $this->get_prop( 'user_pass', $context );
+	public function get_password( $context = 'view' ) {
+		return $this->get_prop( 'password', $context );
 	}
 
 	/**
-	 * Get user_nicename.
+	 * Get URL-friendly user name.
 	 *
 	 * @since  0.1.0
 	 *
@@ -133,25 +150,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_user_nicename( $context = 'view' ) {
-		return $this->get_prop( 'user_nicename', $context );
+	public function get_nicename( $context = 'view' ) {
+		return $this->get_prop( 'nicename', $context );
 	}
 
 	/**
-	 * Get user_email.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_user_email( $context = 'view' ) {
-		return $this->get_prop( 'user_email', $context );
-	}
-
-	/**
-	 * Get user's email.
+	 * Get user's email address.
 	 *
 	 * @since  0.1.0
 	 *
@@ -160,11 +164,11 @@ class User extends Model {
 	 * @return string
 	 */
 	public function get_email( $context = 'view' ) {
-		return $this->get_prop( 'user_email', $context );
+		return $this->get_prop( 'email', $context );
 	}
 
 	/**
-	 * Get user_url.
+	 * Get user's URL.
 	 *
 	 * @since  0.1.0
 	 *
@@ -172,12 +176,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_user_url( $context = 'view' ) {
-		return $this->get_prop( 'user_url', $context );
+	public function get_url( $context = 'view' ) {
+		return $this->get_prop( 'url', $context );
 	}
 
 	/**
-	 * Get user_registered.
+	 * Get created/registered date.
 	 *
 	 * @since  0.1.0
 	 *
@@ -185,12 +189,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_user_registered( $context = 'view' ) {
-		return $this->get_prop( 'user_registered', $context );
+	public function get_date_created( $context = 'view' ) {
+		return $this->get_prop( 'date_created', $context );
 	}
 
 	/**
-	 * Get user_activation_key.
+	 * Get password reset key.
 	 *
 	 * @since  0.1.0
 	 *
@@ -198,12 +202,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_user_activation_key( $context = 'view' ) {
-		return $this->get_prop( 'user_activation_key', $context );
+	public function get_activation_key( $context = 'view' ) {
+		return $this->get_prop( 'activation_key', $context );
 	}
 
 	/**
-	 * Get user_status.
+	 * Get user's status.
 	 *
 	 * @since  0.1.0
 	 *
@@ -211,12 +215,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_user_status( $context = 'view' ) {
-		return $this->get_prop( 'user_status', $context );
+	public function get_status( $context = 'view' ) {
+		return $this->get_prop( 'status', $context );
 	}
 
 	/**
-	 * Get display_name.
+	 * Get user's display name. Default is the user's username.
 	 *
 	 * @since  0.1.0
 	 *
@@ -229,7 +233,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Get nickname.
+	 * Get user's nickname. Default is the user's username.
 	 *
 	 * @since  0.1.0
 	 *
@@ -242,7 +246,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Get first_name.
+	 * Get user's first name.
 	 *
 	 * @since  0.1.0
 	 *
@@ -255,7 +259,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Get last_name.
+	 * Get users's last name.
 	 *
 	 * @since  0.1.0
 	 *
@@ -268,7 +272,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Get description.
+	 * Get the user's biographical description.
 	 *
 	 * @since  0.1.0
 	 *
@@ -281,59 +285,85 @@ class User extends Model {
 	}
 
 	/**
-	 * Get rich_editing.
+	 * Get whether to enable the rich-editor for the user. Default true.
 	 *
 	 * @since  0.1.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string
+	 * @return bool
 	 */
 	public function get_rich_editing( $context = 'view' ) {
 		return $this->get_prop( 'rich_editing', $context );
 	}
 
 	/**
-	 * Get syntax_highlighting.
+	 * Get whether to enable the rich code editor for the user. Default true.
 	 *
 	 * @since  0.1.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string
+	 * @return bool
 	 */
 	public function get_syntax_highlighting( $context = 'view' ) {
 		return $this->get_prop( 'syntax_highlighting', $context );
 	}
 
 	/**
-	 * Get comment_shortcuts.
+	 * Get whether to enable comment moderation keyboard shortcuts for the user. Default false.
 	 *
 	 * @since  0.1.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string
+	 * @return bool
 	 */
 	public function get_comment_shortcuts( $context = 'view' ) {
 		return $this->get_prop( 'comment_shortcuts', $context );
 	}
 
 	/**
-	 * Get use_ssl.
+	 * Get admin color scheme for the user. Default 'fresh'.
 	 *
 	 * @since  0.1.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string
+	 * @return bool
+	 */
+	public function get_admin_color( $context = 'view' ) {
+		return $this->get_prop( 'admin_color', $context );
+	}
+
+	/**
+	 * Get whether the user should always access the admin over https. Default false.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return bool
 	 */
 	public function get_use_ssl( $context = 'view' ) {
 		return $this->get_prop( 'use_ssl', $context );
 	}
 
 	/**
-	 * Get show_admin_bar_front.
+	 * Multisite only. Whether the user is marked as spam. Default false.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return bool
+	 */
+	public function get_spam( $context = 'view' ) {
+		return $this->get_prop( 'spam', $context );
+	}
+
+	/**
+	 * Get whether to display the Admin Bar for the user on the site's front end. Default true.
 	 *
 	 * @since  0.1.0
 	 *
@@ -346,7 +376,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Get locale.
+	 * Get user's locale. Default empty.
 	 *
 	 * @since  0.1.0
 	 *
@@ -359,7 +389,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Get roles.
+	 * Get user's roles.
 	 *
 	 * @since  0.1.0
 	 *
@@ -372,7 +402,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Get allcaps.
+	 * Get user's billing first name.
 	 *
 	 * @since  0.1.0
 	 *
@@ -380,12 +410,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_allcaps( $context = 'view' ) {
-		return $this->get_prop( 'allcaps', $context );
+	public function get_billing_first_name( $context = 'view' ) {
+		return $this->get_prop( 'billing_first_name', $context );
 	}
 
 	/**
-	 * Get address.
+	 * Get user's billing last name.
 	 *
 	 * @since  0.1.0
 	 *
@@ -393,12 +423,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_address( $context = 'view' ) {
-		return $this->get_prop( 'address', $context );
+	public function get_billing_last_name( $context = 'view' ) {
+		return $this->get_prop( 'billing_last_name', $context );
 	}
 
 	/**
-	 * Get city.
+	 * Get user's billing company.
 	 *
 	 * @since  0.1.0
 	 *
@@ -406,12 +436,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_city( $context = 'view' ) {
-		return $this->get_prop( 'city', $context );
+	public function get_billing_company( $context = 'view' ) {
+		return $this->get_prop( 'billing_company', $context );
 	}
 
 	/**
-	 * Get state.
+	 * Get user's billing address.
 	 *
 	 * @since  0.1.0
 	 *
@@ -419,12 +449,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_state( $context = 'view' ) {
-		return $this->get_prop( 'state', $context );
+	public function get_billing_address( $context = 'view' ) {
+		return $this->get_billing_address_1( $context );
 	}
 
 	/**
-	 * Get zip_code.
+	 * Get user's billing address 1.
 	 *
 	 * @since  0.1.0
 	 *
@@ -432,12 +462,12 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_zip_code( $context = 'view' ) {
-		return $this->get_prop( 'zip_code', $context );
+	public function get_billing_address_1( $context = 'view' ) {
+		return $this->get_prop( 'billing_address_1', $context );
 	}
 
 	/**
-	 * Get country.
+	 * Get user's billing address 1.
 	 *
 	 * @since  0.1.0
 	 *
@@ -445,8 +475,86 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_country( $context = 'view' ) {
-		return $this->get_prop( 'country', $context );
+	public function get_billing_address_2( $context = 'view' ) {
+		return $this->get_prop( 'billing_address_2', $context );
+	}
+
+	/**
+	 * Get user's billing city.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_city( $context = 'view' ) {
+		return $this->get_prop( 'billing_city', $context );
+	}
+
+	/**
+	 * Get user's billing post code.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_postcode( $context = 'view' ) {
+		return $this->get_prop( 'billing_postcode', $context );
+	}
+
+	/**
+	 * Get user's billing country.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_country( $context = 'view' ) {
+		return $this->get_prop( 'billing_country', $context );
+	}
+
+	/**
+	 * Get user's billing state.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_state( $context = 'view' ) {
+		return $this->get_prop( 'billing_state', $context );
+	}
+
+	/**
+	 * Get user's billing email.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_email( $context = 'view' ) {
+		return $this->get_prop( 'billing_email', $context );
+	}
+
+	/**
+	 * Get user's billing phone number.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_phone( $context = 'view' ) {
+		return $this->get_prop( 'billing_phone', $context );
 	}
 
 	/*
@@ -456,47 +564,36 @@ class User extends Model {
 	*/
 
 	/**
-	 * Set user_login.
+	 * Set user's username.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $user_login User's user_login.
+	 * @param string $username User's username.
 	 */
-	public function set_user_login( $user_login ) {
-		$this->set_prop( 'user_login', $user_login );
+	public function set_username( $username ) {
+		$this->set_prop( 'username', $username );
 	}
 
 	/**
-	 * Set user_pass.
+	 * Set user's password.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $user_pass User's user_pass.
+	 * @param string $password User's password.
 	 */
-	public function set_user_pass( $user_pass ) {
-		$this->set_prop( 'user_pass', $user_pass );
+	public function set_password( $password ) {
+		$this->set_prop( 'password', $password );
 	}
 
 	/**
-	 * Set user_nicename.
+	 * Set user's nicename.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $user_nicename User's user_nicename.
+	 * @param string $nicename User's nicename.
 	 */
-	public function set_user_nicename( $user_nicename ) {
-		$this->set_prop( 'user_nicename', $user_nicename );
-	}
-
-	/**
-	 * Set user_email.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $user_email User's user_email.
-	 */
-	public function set_user_email( $user_email ) {
-		$this->set_prop( 'user_email', $user_email );
+	public function set_nicename( $nicename ) {
+		$this->set_prop( 'nicename', $nicename );
 	}
 
 	/**
@@ -507,55 +604,55 @@ class User extends Model {
 	 * @param string $email User's email.
 	 */
 	public function set_email( $email ) {
-		$this->set_prop( 'user_email', $email );
+		$this->set_prop( 'email', $email );
 	}
 
 	/**
-	 * Set user_url.
+	 * Set user's url.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $user_url User's user_url.
+	 * @param string $url User's url.
 	 */
-	public function set_user_url( $user_url ) {
-		$this->set_prop( 'user_url', $user_url );
+	public function set_url( $url ) {
+		$this->set_prop( 'url', $url );
 	}
 
 	/**
-	 * Set user_registered.
+	 * Set user's registration/creation date.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $user_registered User's user_registered.
+	 * @param string $date_created User's date_created.
 	 */
-	public function set_user_registered( $user_registered ) {
-		$this->set_prop( 'user_registered', $user_registered );
+	public function set_date_created( $date_created ) {
+		$this->set_prop( 'date_created', $date_created );
 	}
 
 	/**
-	 * Set user_activation_key.
+	 * Set user's password reset/activation key.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $user_activation_key User's user_activation_key.
+	 * @param string $activation_key User's activation_key.
 	 */
-	public function set_user_activation_key( $user_activation_key ) {
-		$this->set_prop( 'user_activation_key', $user_activation_key );
+	public function set_activation_key( $activation_key ) {
+		$this->set_prop( 'activation_key', $activation_key );
 	}
 
 	/**
-	 * Set user_status.
+	 * Set user's status.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $user_status User's user_status.
+	 * @param string $status User's status.
 	 */
-	public function set_user_status( $user_status ) {
-		$this->set_prop( 'user_status', $user_status );
+	public function set_status( $status ) {
+		$this->set_prop( 'status', $status );
 	}
 
 	/**
-	 * Set display_name.
+	 * Set user's display_name.
 	 *
 	 * @since 0.1.0
 	 *
@@ -566,7 +663,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Set nickname.
+	 * Set user's nickname.
 	 *
 	 * @since 0.1.0
 	 *
@@ -577,7 +674,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Set first_name.
+	 * Set user's first name.
 	 *
 	 * @since 0.1.0
 	 *
@@ -588,7 +685,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Set last_name.
+	 * Set user's last name.
 	 *
 	 * @since 0.1.0
 	 *
@@ -599,7 +696,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Set description.
+	 * Set user's biographical description.
 	 *
 	 * @since 0.1.0
 	 *
@@ -610,62 +707,84 @@ class User extends Model {
 	}
 
 	/**
-	 * Set rich_editing.
+	 * Set the rich-editor for the user.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $rich_editing User's rich_editing.
+	 * @param bool $rich_editing User's rich_editing.
 	 */
 	public function set_rich_editing( $rich_editing ) {
-		$this->set_prop( 'rich_editing', $rich_editing );
+		$this->set_prop( 'rich_editing', masteriyo_string_to_bool( $rich_editing ) );
 	}
 
 	/**
-	 * Set syntax_highlighting.
+	 * Set the rich code editor for the user.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $syntax_highlighting User's syntax_highlighting.
+	 * @param bool $syntax_highlighting User's syntax highlighting.
 	 */
 	public function set_syntax_highlighting( $syntax_highlighting ) {
-		$this->set_prop( 'syntax_highlighting', $syntax_highlighting );
+		$this->set_prop( 'syntax_highlighting', masteriyo_string_to_bool( $syntax_highlighting ) );
 	}
 
 	/**
-	 * Set comment_shortcuts.
+	 * Set comment moderation keyboard shortcuts for the user.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $comment_shortcuts User's comment_shortcuts.
+	 * @param bool $comment_shortcuts User's comment shortcuts.
 	 */
 	public function set_comment_shortcuts( $comment_shortcuts ) {
-		$this->set_prop( 'comment_shortcuts', $comment_shortcuts );
+		$this->set_prop( 'comment_shortcuts', masteriyo_string_to_bool( $comment_shortcuts ) );
 	}
 
 	/**
-	 * Set use_ssl.
+	 * Set admin color scheme for the user.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $use_ssl User's use_ssl.
+	 * @param bool $admin_color Admin color scheme of the user.
+	 */
+	public function set_admin_color( $admin_color ) {
+		$this->set_prop( 'admin_color', $admin_color );
+	}
+
+	/**
+	 * Set the user should always access the admin over https.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param bool $use_ssl User's use_ssl.
 	 */
 	public function set_use_ssl( $use_ssl ) {
-		$this->set_prop( 'use_ssl', $use_ssl );
+		$this->set_prop( 'use_ssl', masteriyo_string_to_bool( $use_ssl ) );
 	}
 
 	/**
-	 * Set show_admin_bar_front.
+	 * Set the user as spam. Multisite only.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $show_admin_bar_front User's show_admin_bar_front.
+	 * @param bool $span
 	 */
-	public function set_show_admin_bar_front( $show_admin_bar_front ) {
-		$this->set_prop( 'show_admin_bar_front', $show_admin_bar_front );
+	public function set_spam( $spam ) {
+		$this->set_prop( 'spam', $spam );
 	}
 
 	/**
-	 * Set locale.
+	 * Set display the Admin Bar for the user on the site's front end.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $show_admin_bar_front User's show admin bar front..
+	 */
+	public function set_show_admin_bar_front( $show_admin_bar_front ) {
+		$this->set_prop( 'show_admin_bar_front', masteriyo_string_to_bool( $show_admin_bar_front ) );
+	}
+
+	/**
+	 * Set user's locale.
 	 *
 	 * @since 0.1.0
 	 *
@@ -676,79 +795,146 @@ class User extends Model {
 	}
 
 	/**
-	 * Set roles.
+	 * Set user's roles.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $roles User's roles.
 	 */
 	public function set_roles( $roles ) {
+		global $wp_roless;
+
+		if ( $roles && ! empty( $wp_roless->roless ) && ! in_array( $roles, array_keys( $wp_roless->roless ), true ) ) {
+			throw new ModelException( 'user_invalid_roles', __( 'Invalid roles', 'masteriyo' ) );
+		}
+
 		$this->set_prop( 'roles', $roles );
 	}
 
 	/**
-	 * Set allcaps.
+	 * Set user's billing first name.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $allcaps User's allcaps.
+	 * @param string $first_name User's billing first name.
+	 * @return void
 	 */
-	public function set_allcaps( $allcaps ) {
-		$this->set_prop( 'allcaps', $allcaps );
+	public function set_billing_first_name( $first_name ) {
+		$this->set_prop( 'billing_first_name', $first_name );
 	}
 
 	/**
-	 * Set address.
+	 * Set user's billing last name.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $address User's address.
+	 * @param string $last_name User's billing last name.
+	 * @return void
 	 */
-	public function set_address( $address ) {
-		$this->set_prop( 'address', $address );
+	public function set_billing_last_name( $last_name ) {
+		$this->set_prop( 'billing_last_name', $last_name );
 	}
 
 	/**
-	 * Set city.
+	 * Set user's billing company.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $city User's city.
+	 * @param string $company User's billing company.
+	 * @return void
 	 */
-	public function set_city( $city ) {
-		$this->set_prop( 'city', $city );
+	public function set_billing_company( $company ) {
+		$this->set_prop( 'billing_company', $company );
 	}
 
 	/**
-	 * Set state.
+	 * Set user's billing address_1.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $state User's state.
+	 * @param string $address_1 User's billing address_1.
+	 * @return void
 	 */
-	public function set_state( $state ) {
-		$this->set_prop( 'state', $state );
+	public function set_billing_address_1( $address_1 ) {
+		$this->set_prop( 'billing_address_1', $address_1 );
 	}
 
 	/**
-	 * Set zip_code.
+	 * Set user's billing address_2.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $zip_code User's zip_code.
+	 * @param string $address_2 User's billing address_2.
+	 * @return void
 	 */
-	public function set_zip_code( $zip_code ) {
-		$this->set_prop( 'zip_code', $zip_code );
+	public function set_billing_address_2( $address_2 ) {
+		$this->set_prop( 'billing_address_2', $address_2 );
 	}
 
 	/**
-	 * Set country.
+	 * Set user's billing city.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $city User's billing city.
+	 */
+	public function set_billing_city( $city ) {
+		$this->set_prop( 'billing_city', $city );
+	}
+
+	/**
+	 * Set user's billing post code.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $postcode User's billing post code.
+	 */
+	public function set_postcode( $postcode ) {
+		$this->set_prop( 'billing_postcode', $postcode );
+	}
+
+
+	/**
+	 * Set user's billing country.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $country User's country.
 	 */
-	public function set_country( $country ) {
-		$this->set_prop( 'country', $country );
+	public function set_billing_country( $country ) {
+		$this->set_prop( 'billing_country', $country );
+	}
+
+	/**
+	 * Set user's billing state.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $state User's billing state.
+	 */
+	public function set_billing_state( $state ) {
+		$this->set_prop( 'billing_state', $state );
+	}
+
+	/**
+	 * Set user's billing email.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $email User's billing email.
+	 */
+	public function set_billing_email( $email ) {
+		$this->set_prop( 'billing_email', $email );
+	}
+
+	/**
+	 * Set user's billing phone.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $phone User's billing phone.
+	 */
+	public function set_billing_phone( $phone ) {
+		$this->set_prop( 'billing_phone', $phone );
 	}
 }

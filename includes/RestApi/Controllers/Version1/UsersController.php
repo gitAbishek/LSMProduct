@@ -148,22 +148,39 @@ class UsersController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['role']     = array(
-			'description'       => __( 'Limit result by role.', 'masteriyo' ),
-			'type'              => 'string',
-			'sanitize_callback' => 'sanitize_key',
+		$params['orderby'] = array(
+			'default'     => 'name',
+			'description' => __( 'Sort collection by object attribute.', 'masteriyo' ),
+			'enum'        => array(
+				'id',
+				'include',
+				'name',
+				'date_created',
+				'slug',
+				'include_slugs',
+				'email',
+				'url',
+			),
+			'type'        => 'string',
+		);
+
+		$params['roles'] = array(
+			'description'       => __( 'Limit result set to users matching at least one specific role provided. Accepts csv list or single role.', 'masteriyo' ),
+			'type'              => 'array',
+			'items'             => array(
+				'type' => 'string',
+			),
 			'validate_callback' => 'rest_validate_request_arg',
+
 		);
 		$params['per_page'] = array(
 			'description'       => __( 'Number of users per page.', 'masteriyo' ),
 			'type'              => 'number',
-			'sanitize_callback' => function( $value ) {
-				return intval( $value );
-			},
+			'sanitize_callback' => 'absint',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
-		return $params;
+		return apply_filters( 'masteriyo_user_collection_params', $params );
 	}
 	/**
 	 * Get object.
@@ -228,8 +245,6 @@ class UsersController extends PostsController {
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
-		$object->set_user_pass( null );
-
 		$context  = ! empty( $request['context'] ) ? $request['context'] : 'view';
 		$data     = $this->get_user_data( $object, $context );
 		$data     = $this->add_additional_fields_to_object( $data, $request );
@@ -261,14 +276,12 @@ class UsersController extends PostsController {
 	protected function get_user_data( $user, $context = 'view' ) {
 		$data = array(
 			'id'                   => $user->get_id(),
-			'user_login'           => $user->get_user_login(),
-			'user_pass'            => $user->get_user_pass(),
-			'user_nicename'        => $user->get_user_nicename(),
-			'user_email'           => $user->get_user_email(),
-			'user_url'             => $user->get_user_url(),
-			'user_registered'      => $user->get_user_registered(),
-			'user_activation_key'  => $user->get_user_activation_key(),
-			'user_status'          => $user->get_user_status(),
+			'username'             => $user->get_username(),
+			'nicename'             => $user->get_nicename(),
+			'email'                => $user->get_email(),
+			'url'                  => $user->get_url(),
+			'date_created'         => $user->get_date_created(),
+			'status'               => $user->get_status(),
 			'display_name'         => $user->get_display_name(),
 			'nickname'             => $user->get_nickname(),
 			'first_name'           => $user->get_first_name(),
@@ -280,12 +293,20 @@ class UsersController extends PostsController {
 			'use_ssl'              => $user->get_use_ssl(),
 			'show_admin_bar_front' => $user->get_show_admin_bar_front(),
 			'locale'               => $user->get_locale(),
-			'roles'                => $user->get_roles(),
-			'address'              => $user->get_address(),
-			'city'                 => $user->get_city(),
-			'state'                => $user->get_state(),
-			'zip_code'             => $user->get_zip_code(),
-			'country'              => $user->get_country(),
+			'roles'                 => $user->get_roles(),
+			'billing'              => array(
+				'first_name' => $user->get_billing_first_name(),
+				'last_name'  => $user->get_billing_last_name(),
+				'company'    => $user->get_billing_company(),
+				'address_1'  => $user->get_billing_address_1(),
+				'address_2'  => $user->get_billing_address_2(),
+				'city'       => $user->get_billing_city(),
+				'postcode'   => $user->get_billing_postcode(),
+				'country'    => $user->get_billing_country(),
+				'state'      => $user->get_billing_state(),
+				'email'      => $user->get_billing_email(),
+				'phone'      => $user->get_billing_phone(),
+			),
 		);
 
 		return $data;
@@ -348,39 +369,45 @@ class UsersController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'user_login'           => array(
-					'description' => __( 'User login.', 'masteriyo' ),
+				'username'             => array(
+					'description' => __( 'User login username.', 'masteriyo' ),
+					'type'        => 'string',
+					'required'    => true,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'password'             => array(
+					'description' => __( 'User login password.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'user_nicename'        => array(
+				'nicename'             => array(
 					'description' => __( 'User nicename.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'user_email'           => array(
+				'email'                => array(
 					'description' => __( 'User email.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'user_url'             => array(
+				'url'                  => array(
 					'description' => __( 'Site url of the user.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'user_registered'      => array(
-					'description' => __( 'User registered date', 'masteriyo' ),
+				'date_created'         => array(
+					'description' => __( 'User date created', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'user_activation_key'  => array(
+				'activation_key'       => array(
 					'description' => __( 'User activation key.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'user_status'          => array(
+				'status'               => array(
 					'description' => __( 'User status.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -428,63 +455,101 @@ class UsersController extends PostsController {
 					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
+				'spam'                 => array(
+					'description' => __( 'Mark the user as spam. Multi site only.', 'masteriyo' ),
+					'type'        => 'boolean',
+					'default'     => false,
+					'context'     => array( 'view', 'edit' ),
+				),
 				'use_ssl'              => array(
 					'description' => __( 'Use SSL.', 'masteriyo' ),
-					'type'        => 'number',
+					'type'        => 'boolean',
+					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'show_admin_bar_front' => array(
 					'description' => __( 'Whether to show the admin bar on the frontend.', 'masteriyo' ),
 					'type'        => 'boolean',
+					'default'     => true,
 					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
 				),
 				'locale'               => array(
 					'description' => __( 'User specific locale.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'roles'                => array(
-					'description' => __( 'List of roles.', 'masteriyo' ),
+				'roles'                 => array(
+					'description' => __( 'User role.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type' => 'string',
-					),
 				),
-				'allcaps'              => array(
-					'description' => __( 'List of all the capabilities of the user.', 'masteriyo' ),
-					'type'        => 'array',
+				'billing'              => array(
+					'description' => __( 'User billing details.', 'masteriyo' ),
+					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type' => 'string',
+						'type'       => 'object',
+						'first_name' => array(
+							'description' => __( 'User billing first name.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'last_name' => array(
+							'description' => __( 'User billing last name.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'company' => array(
+							'description' => __( 'User billing company name.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'address_1' => array(
+							'description' => __( 'User billing address 1.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'address_1' => array(
+							'description' => __( 'User billing address 1.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'address_2' => array(
+							'description' => __( 'User billing address 2.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'city' => array(
+							'description' => __( 'User billing city.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'postcode' => array(
+							'description' => __( 'User billing post code.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'country' => array(
+							'description' => __( 'User billing country.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'state' => array(
+							'description' => __( 'User billing state.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'email' => array(
+							'description' => __( 'User billing email address.', 'masteriyo' ),
+							'type'        => 'email',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'phone' => array(
+							'description' => __( 'User billing phone number.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
 					),
-					'readonly'    => true,
-				),
-				'address'              => array(
-					'description' => __( 'User\'s address.', 'masteriyo' ),
-					'type'        => 'string',
-					'context'     => array( 'view', 'edit' ),
-				),
-				'city'              => array(
-					'description' => __( 'User\'s city.', 'masteriyo' ),
-					'type'        => 'string',
-					'context'     => array( 'view', 'edit' ),
-				),
-				'state'              => array(
-					'description' => __( 'User\'s state.', 'masteriyo' ),
-					'type'        => 'string',
-					'context'     => array( 'view', 'edit' ),
-				),
-				'zip_code'              => array(
-					'description' => __( 'User\'s zip code.', 'masteriyo' ),
-					'type'        => 'string',
-					'context'     => array( 'view', 'edit' ),
-				),
-				'country'              => array(
-					'description' => __( 'User\'s country.', 'masteriyo' ),
-					'type'        => 'string',
-					'context'     => array( 'view', 'edit' ),
 				),
 				'meta_data'            => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
@@ -521,6 +586,8 @@ class UsersController extends PostsController {
 	/**
 	 * Prepare a single user object for create or update.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
@@ -536,39 +603,39 @@ class UsersController extends PostsController {
 			$user_repo->read( $user );
 		}
 
-		// User's user_login.
-		if ( isset( $request['user_login'] ) ) {
-			$user->set_user_login( $request['user_login'] );
+		// User's username.
+		if ( isset( $request['username'] ) ) {
+			$user->set_username( $request['username'] );
 		}
 
-		// User's user_pass.
-		if ( isset( $request['user_pass'] ) ) {
-			$user->set_user_pass( $request['user_pass'] );
+		// User's password.
+		if ( isset( $request['password'] ) ) {
+			$user->set_password( $request['password'] );
 		}
 
-		// User's user_nicename.
-		if ( isset( $request['user_nicename'] ) ) {
-			$user->set_user_nicename( $request['user_nicename'] );
+		// User's nicename.
+		if ( isset( $request['nicename'] ) ) {
+			$user->set_nicename( $request['nicename'] );
 		}
 
-		// User's user_email.
-		if ( isset( $request['user_email'] ) ) {
-			$user->set_user_email( $request['user_email'] );
+		// User's email.
+		if ( isset( $request['email'] ) ) {
+			$user->set_email( $request['email'] );
 		}
 
-		// User's user_url.
-		if ( isset( $request['user_url'] ) ) {
-			$user->set_user_url( $request['user_url'] );
+		// User's url.
+		if ( isset( $request['url'] ) ) {
+			$user->set_url( $request['url'] );
 		}
 
-		// User's user_activation_key.
-		if ( isset( $request['user_activation_key'] ) ) {
-			$user->set_user_activation_key( $request['user_activation_key'] );
+		// User's activation_key.
+		if ( isset( $request['activation_key'] ) ) {
+			$user->set_activation_key( $request['activation_key'] );
 		}
 
-		// User's user_status.
-		if ( isset( $request['user_status'] ) ) {
-			$user->set_user_status( $request['user_status'] );
+		// User's status.
+		if ( isset( $request['status'] ) ) {
+			$user->set_status( $request['status'] );
 		}
 
 		// User's display_name.
@@ -631,29 +698,49 @@ class UsersController extends PostsController {
 			$user->set_roles( $request['roles'] );
 		}
 
-		// User's address.
-		if ( isset( $request['address'] ) ) {
-			$user->set_address( $request['address'] );
+		// User billing details.
+		if ( isset( $request['billing']['first_name'] ) ) {
+			$user->set_billing_first_name( $request['billing']['first_name'] );
 		}
 
-		// User's city.
-		if ( isset( $request['city'] ) ) {
-			$user->set_city( $request['city'] );
+		if ( isset( $request['billing']['last_name'] ) ) {
+			$user->set_billing_last_name( $request['billing']['last_name'] );
 		}
 
-		// User's state.
-		if ( isset( $request['state'] ) ) {
-			$user->set_state( $request['state'] );
+		if ( isset( $request['billing']['company'] ) ) {
+			$user->set_billing_company( $request['billing']['company'] );
 		}
 
-		// User's zip_code.
-		if ( isset( $request['zip_code'] ) ) {
-			$user->set_zip_code( $request['zip_code'] );
+		if ( isset( $request['billing']['address_1'] ) ) {
+			$user->set_billing_address_1( $request['billing']['address_1'] );
 		}
 
-		// User's country.
-		if ( isset( $request['country'] ) ) {
-			$user->set_country( $request['country'] );
+		if ( isset( $request['billing']['address_2'] ) ) {
+			$user->set_billing_address_2( $request['billing']['address_2'] );
+		}
+
+		if ( isset( $request['billing']['city'] ) ) {
+			$user->set_billing_city( $request['billing']['city'] );
+		}
+
+		if ( isset( $request['billing']['postcode'] ) ) {
+			$user->set_billing_postcode( $request['billing']['postcode'] );
+		}
+
+		if ( isset( $request['billing']['country'] ) ) {
+			$user->set_billing_country( $request['billing']['country'] );
+		}
+
+		if ( isset( $request['billing']['state'] ) ) {
+			$user->set_billing_state( $request['billing']['state'] );
+		}
+
+		if ( isset( $request['billing']['email'] ) ) {
+			$user->set_billing_email( $request['billing']['email'] );
+		}
+
+		if ( isset( $request['billing']['phone'] ) ) {
+			$user->set_billing_phone( $request['billing']['phone'] );
 		}
 
 		// Allow set meta_data.
@@ -827,7 +914,7 @@ class UsersController extends PostsController {
 
 		$user = get_user_by( 'id', (int) $request['id'] );
 
-		if (! $user || ! $this->permission->rest_check_users_manipulation_permissions( 'edit' ) ) {
+		if ( ! $user || ! $this->permission->rest_check_users_manipulation_permissions( 'edit' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),

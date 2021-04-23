@@ -49,7 +49,7 @@ const EditQuiz: React.FC = () => {
 		{
 			enabled: !!quizId,
 			onError: () => {
-				history.goBack();
+				history.push(routes.notFound);
 			},
 		}
 	);

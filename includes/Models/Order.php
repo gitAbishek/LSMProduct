@@ -377,7 +377,7 @@ class Order extends Model {
 	 * @param integer $id Customer/User ID.
 	 */
 	public function set_customer_id( $id ) {
-		$this->set_prop( 'customer_id', $id );
+		$this->set_prop( 'customer_id', absint( $id ) );
 	}
 
 	/**

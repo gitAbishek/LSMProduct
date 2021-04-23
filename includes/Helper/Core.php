@@ -2138,3 +2138,14 @@ function masteriyo_add_post_state( $post_states, $post ) {
 }
 
 function_exists( 'add_filter' ) && add_filter( 'display_post_states', 'masteriyo_add_post_state', 10, 2 );
+
+/**
+ * Get list of status for order.
+ *
+ * @since 0.1.0
+ *
+ * @return array
+ */
+function masteriyo_get_order_status_list() {
+	return (array) apply_filters( 'masteriyo_order_status_list', array( 'pending', 'completed', 'cancelled' ) );
+}

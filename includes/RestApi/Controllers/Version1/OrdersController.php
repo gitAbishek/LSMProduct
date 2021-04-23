@@ -152,7 +152,7 @@ class OrdersController extends PostsController {
 		$params['status']      = array(
 			'description'       => __( 'Limit result set to orders assigned a specific status.', 'masteriyo' ),
 			'type'              => 'string',
-			'enum'              => array( 'pending', 'processing', 'completed', 'cancelled', 'refunded', 'failed', 'any' ),
+			'enum'              => array_merge( masteriyo_get_order_status_list(), array( 'any' ) ),
 			'default'           => 'any',
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
@@ -325,7 +325,7 @@ class OrdersController extends PostsController {
 					'description' => __( 'Order status.', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'pending',
-					'enum'        => array( 'pending', 'processing', 'completed', 'cancelled', 'refunded', 'failed' ),
+					'enum'        => masteriyo_get_order_status_list(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'total'               => array(

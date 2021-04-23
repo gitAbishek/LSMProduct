@@ -81,7 +81,7 @@ const SectionBuilder = () => {
 					<Spinner />
 				</Center>
 			)}
-			{sectionQuery.isSuccess && (
+			{courseQuery.isSuccess && sectionQuery.isSuccess && (
 				<Center>
 					<AddNewButton onClick={onAddNewSectionPress}>
 						{__('Add New Section', 'masteriyo')}

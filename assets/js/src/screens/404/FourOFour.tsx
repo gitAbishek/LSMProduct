@@ -9,8 +9,10 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { NotFound } from '../../constants/images';
+import routes from '../../constants/routes';
 
 const FourOFour = () => {
 	return (
@@ -26,9 +28,11 @@ const FourOFour = () => {
 						<Text fontSize="sm" color="gray.500">
 							{__('We can not find the page you are looking for', 'masteriyo')}
 						</Text>
-						<Button colorScheme="blue">
-							{__('Back to Courses', 'masteriyo')}
-						</Button>
+						<Link to={routes.courses.list}>
+							<Button colorScheme="blue">
+								{__('Back to Courses', 'masteriyo')}
+							</Button>
+						</Link>
 					</VStack>
 				</VStack>
 			</Center>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import routes from '../constants/routes';
 import * as screens from '../screens';
@@ -36,9 +36,8 @@ const MasteriyoRouter = () => {
 			<Route path={routes.settings} exact>
 				<screens.Settings />
 			</Route>
-
 			<Route>
-				<Redirect to={routes.courses.list} />
+				<screens.FourOFour />
 			</Route>
 		</Switch>
 	);

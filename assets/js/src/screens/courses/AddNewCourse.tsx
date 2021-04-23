@@ -71,7 +71,9 @@ const AddNewCourse: React.FC = () => {
 										isLoading={addMutation.isLoading}>
 										{__('Add Course', 'masteriyo')}
 									</Button>
-									<Button variant="outline" onClick={() => history.goBack()}>
+									<Button
+										variant="outline"
+										onClick={() => history.push(routes.courses.list)}>
 										{__('Cancel', 'masteriyo')}
 									</Button>
 								</ButtonGroup>

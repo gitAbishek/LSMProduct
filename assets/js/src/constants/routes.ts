@@ -13,8 +13,8 @@ const routes = {
 		add: '/builder/quiz/:sectionId/add-new-quiz',
 		edit: '/builder/quiz/edit/:quizId',
 	},
-
-	settings: 'settings',
+	settings: '/settings',
+	notFound: '/not-found',
 };
 
 export default routes;

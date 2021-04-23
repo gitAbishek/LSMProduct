@@ -49,7 +49,7 @@ const EditLesson: React.FC = () => {
 		() => lessonAPI.get(lessonId),
 		{
 			onError: () => {
-				history.goBack();
+				history.push(routes.notFound);
 			},
 		}
 	);

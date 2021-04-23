@@ -51,7 +51,7 @@ const AddNewLesson: React.FC = () => {
 				setTotalContentCount(data.length);
 			},
 			onError: () => {
-				history.goBack();
+				history.push(routes.notFound);
 			},
 		}
 	);
@@ -65,7 +65,7 @@ const AddNewLesson: React.FC = () => {
 				setCourseId(data.course_id);
 			},
 			onError: () => {
-				history.goBack();
+				history.push(routes.notFound);
 			},
 		}
 	);

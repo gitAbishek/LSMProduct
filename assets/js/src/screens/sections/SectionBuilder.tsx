@@ -23,7 +23,7 @@ const SectionBuilder = () => {
 		() => courseAPI.get(courseId),
 		{
 			onError: () => {
-				courseQuery.isError && history.push(routes.courses.list);
+				history.push(routes.notFound);
 			},
 		}
 	);
@@ -81,7 +81,7 @@ const SectionBuilder = () => {
 					<Spinner />
 				</Center>
 			)}
-			{sectionQuery.isSuccess && (
+			{courseQuery.isSuccess && sectionQuery.isSuccess && (
 				<Center>
 					<AddNewButton onClick={onAddNewSectionPress}>
 						{__('Add New Section', 'masteriyo')}

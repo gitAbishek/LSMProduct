@@ -236,7 +236,6 @@ class OrderItemsController extends PostsController {
 			'name'       => $order_item->get_name( $context ),
 			'type'       => $order_item->get_type( $context ),
 			'quantity'   => $order_item->get_quantity( $context ),
-			'tax'        => $order_item->get_tax( $context ),
 			'total'      => $order_item->get_total( $context ),
 		);
 
@@ -310,11 +309,6 @@ class OrderItemsController extends PostsController {
 				'quantity'   => array(
 					'description' => __( 'Quantity.', 'masteriyo' ),
 					'type'        => 'number',
-					'context'     => array( 'view', 'edit' ),
-				),
-				'tax'        => array(
-					'description' => __( 'Tax for the order item.', 'masteriyo' ),
-					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'total'      => array(
@@ -397,11 +391,6 @@ class OrderItemsController extends PostsController {
 		// Order Items Quantity.
 		if ( isset( $request['quantity'] ) ) {
 			$order_item->set_quantity( $request['quantity'] );
-		}
-
-		// Order item tax.
-		if ( isset( $request['tax'] ) ) {
-			$order_item->set_tax( $request['tax'] );
 		}
 
 		// Total Price.

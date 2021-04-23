@@ -233,7 +233,6 @@ class OrdersController extends PostsController {
 			'permalink'           => $order->get_permalink(),
 			'status'              => $order->get_status( $context ),
 			'total'               => $order->get_total( $context ),
-			'discount'            => $order->get_discount( $context ),
 			'currency'            => $order->get_currency( $context ),
 			'expiry_date'         => $order->get_expiry_date( $context ),
 			'date_created'        => $order->get_date_created( $context ),
@@ -246,7 +245,6 @@ class OrdersController extends PostsController {
 			'created_via'         => $order->get_created_via( $context ),
 			'customer_ip_address' => $order->get_customer_ip_address( $context ),
 			'customer_user_agent' => $order->get_customer_user_agent( $context ),
-			'total_tax'           => $order->get_total_tax( $context ),
 		);
 
 		return $data;
@@ -335,11 +333,6 @@ class OrdersController extends PostsController {
 					'type'        => 'number',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'discount'            => array(
-					'description' => __( 'Discount for the order.', 'masteriyo' ),
-					'type'        => 'number',
-					'context'     => array( 'view', 'edit' ),
-				),
 				'currency'            => array(
 					'description' => __( 'Currency.', 'masteriyo' ),
 					'type'        => 'string',
@@ -389,11 +382,6 @@ class OrdersController extends PostsController {
 				),
 				'customer_user_agent' => array(
 					'description' => __( 'Customer user agent.', 'masteriyo' ),
-					'type'        => 'string',
-					'context'     => array( 'view', 'edit' ),
-				),
-				'total_tax'           => array(
-					'description' => __( 'Total tax.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -457,11 +445,6 @@ class OrdersController extends PostsController {
 			$order->set_total( $request['total'] );
 		}
 
-		// Discount Price.
-		if ( isset( $request['discount'] ) ) {
-			$order->set_discount( $request['discount'] );
-		}
-
 		// Currency.
 		if ( isset( $request['currency'] ) ) {
 			$order->set_currency( $request['currency'] );
@@ -512,11 +495,6 @@ class OrdersController extends PostsController {
 		// Set customer user agent.
 		if ( isset( $request['customer_user_agent'] ) ) {
 			$order->set_customer_user_agent( $request['customer_user_agent'] );
-		}
-
-		// Set total tax.
-		if ( isset( $request['total_tax'] ) ) {
-			$order->set_total_tax( $request['total_tax'] );
 		}
 
 		// Allow set meta_data.

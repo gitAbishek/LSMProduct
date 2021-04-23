@@ -66,7 +66,6 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 					'name'       => $order_item->get_name( 'edit' ),
 					'type'       => $order_item->get_type( 'edit' ),
 					'quantity'   => $order_item->get_quantity( 'edit' ),
-					'tax'        => $order_item->get_tax( 'edit' ),
 					'total'      => $order_item->get_total( 'edit' ),
 				),
 				$order_item
@@ -124,7 +123,6 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 			'name'       => $order_item_obj->name,
 			'type'       => $order_item_obj->type,
 			'quantity'   => $order_item_obj->quantity,
-			'tax'        => $order_item_obj->tax,
 			'total'      => $order_item_obj->total,
 		) );
 
@@ -157,7 +155,6 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 					'name'       => $order_item->get_name( 'edit' ),
 					'type'       => $order_item->get_type( 'edit' ),
 					'quantity'   => $order_item->get_quantity( 'edit' ),
-					'tax'        => $order_item->get_tax( 'edit' ),
 					'total'      => $order_item->get_total( 'edit' ),
 				),
 				array(

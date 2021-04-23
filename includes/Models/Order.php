@@ -60,7 +60,6 @@ class Order extends Model {
 	protected $data = array(
 		'status'              => false,
 		'total'               => 0,
-		'discount'            => 0,
 		'currency'            => '',
 		'expiry_date'         => '',
 		'date_created'        => null,
@@ -73,7 +72,6 @@ class Order extends Model {
 		'created_via'         => '',
 		'customer_ip_address' => '',
 		'customer_user_agent' => '',
-		'total_tax'           => 0,
 	);
 
 	/**
@@ -141,19 +139,6 @@ class Order extends Model {
 	 */
 	public function get_total( $context = 'view' ) {
 		return $this->get_prop( 'total', $context );
-	}
-
-	/**
-	 * Get the discount.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return double
-	 */
-	public function get_discount( $context = 'view' ) {
-		return $this->get_prop( 'discount', $context );
 	}
 
 	/**
@@ -312,19 +297,6 @@ class Order extends Model {
 		return $this->get_prop( 'customer_user_agent', $context );
 	}
 
-	/**
-	 * Get the total tax.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_total_tax( $context = 'view' ) {
-		return $this->get_prop( 'total_tax', $context );
-	}
-
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -351,17 +323,6 @@ class Order extends Model {
 	 */
 	public function set_total( $total ) {
 		$this->set_prop( 'total', $total );
-	}
-
-	/**
-	 * Set order discount.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param double $discount order discount.
-	 */
-	public function set_discount( $discount ) {
-		$this->set_prop( 'discount', $discount );
 	}
 
 	/**
@@ -494,16 +455,5 @@ class Order extends Model {
 	 */
 	public function set_customer_user_agent( $customer_user_agent ) {
 		$this->set_prop( 'customer_user_agent', $customer_user_agent );
-	}
-
-	/**
-	 * Set total tax.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $total_tax Total tax.
-	 */
-	public function set_total_tax( $total_tax ) {
-		$this->set_prop( 'total_tax', $total_tax );
 	}
 }

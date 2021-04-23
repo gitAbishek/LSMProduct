@@ -25,7 +25,6 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 	 */
 	protected $internal_meta_keys = array(
 		'total'               => '_total',
-		'discount'            => '_discount',
 		'currency'            => '_currency',
 		'expiry_date'         => '_expiry_date',
 		'payment_method'      => '_payment_method',
@@ -35,7 +34,6 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 		'created_via'         => '_created_via',
 		'customer_ip_address' => '_customer_ip_address',
 		'customer_user_agent' => '_customer_user_agent',
-		'total_tax'           => '_total_tax',
 	);
 
 	/**

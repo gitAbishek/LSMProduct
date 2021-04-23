@@ -54,7 +54,6 @@ class OrderItem extends Model {
 		'name'       => '',
 		'type'       => '',
 		'quantity'   => 0,
-		'tax'        => '',
 		'total'      => '',
 	);
 
@@ -141,19 +140,6 @@ class OrderItem extends Model {
 	}
 
 	/**
-	 * Get the product specific tax.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_tax( $context = 'view' ) {
-		return $this->get_prop( 'tax', $context );
-	}
-
-	/**
 	 * Get the total amount.
 	 *
 	 * @since  0.1.0
@@ -225,17 +211,6 @@ class OrderItem extends Model {
 	 */
 	public function set_quantity( $quantity ) {
 		$this->set_prop( 'quantity', $quantity );
-	}
-
-	/**
-	 * Set the product tax.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $tax Product ID.
-	 */
-	public function set_tax( $tax ) {
-		$this->set_prop( 'tax', $tax );
 	}
 
 	/**

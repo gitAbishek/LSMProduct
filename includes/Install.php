@@ -113,7 +113,6 @@ class Install {
 			name text,
 			type varchar(200),
 			quantity BIGINT,
-			tax BIGINT,
 			total BIGINT,
 			PRIMARY KEY (id)
 		) $charset_collate;";

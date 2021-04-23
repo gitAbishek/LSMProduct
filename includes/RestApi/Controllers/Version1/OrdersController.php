@@ -560,13 +560,17 @@ class OrdersController extends PostsController {
 			);
 		}
 
-		$customer_id = get_current_user_id();
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
+		$customer_id = 0;
 
 		if ( isset( $request['customer_id'] ) ) {
 			$customer_id = absint( $request['customer_id'] );
 		}
 
-		if ( ! $customer_id || ! $this->permission->rest_check_read_orders_permissions( $customer_id, 'read' ) ) {
+		if ( ! $customer_id || get_current_user_id() !== $customer_id ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
@@ -595,7 +599,7 @@ class OrdersController extends PostsController {
 			);
 		}
 
-		if ( ! $this->permission->rest_check_order_permissions( absint( $request['id'] ), 'create' ) ) {
+		if ( ! is_user_logged_in() ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
@@ -651,6 +655,13 @@ class OrdersController extends PostsController {
 				'masteriyo_null_permission',
 				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
 			);
+		}
+
+		/**
+		 * Prevent from updating the order owner to someone else.
+		 */
+		if ( isset( $request['customer_id'] ) && absint( $request['customer_id'] ) !== get_current_user_id() ) {
+			return false;
 		}
 
 		if ( ! $this->permission->rest_check_order_permissions( absint( $request['id'] ), 'update' ) ) {

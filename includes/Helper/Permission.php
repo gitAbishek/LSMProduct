@@ -158,83 +158,23 @@ class Permission {
 	 * @return bool
 	 */
 	public function rest_check_order_permissions( $object_id, $context = 'read' ) {
-		$permission = false;
+		$post_type = 'masteriyo_order';
+		$contexts  = array(
+			'read'   => 'read',
+			'create' => 'publish_posts',
+			'update' => 'edit_post',
+			'delete' => 'delete_post',
+			'batch'  => 'edit_others_posts',
+		);
 
-		if ( 'create' === $context ) {
-			$permission = is_user_logged_in();
-		} else {
-			$permission = $this->order_has_current_user_as_owner( $object_id );
-		}
-
-		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'order' );
-	}
-
-	/**
-	 * Check read orders permissions.
-	 *
-	 * @since 0.1.0
-	 * @param string $object_id Object ID.
-	 * @param string $context   Request context.
-	 * @return bool
-	 */
-	public function rest_check_read_orders_permissions( $customer_id ) {
-		$permission = get_current_user_id() === $customer_id;
-
-		return apply_filters( 'masteriyo_rest_check_permissions', $permission, 'read', $customer_id, 'orders' );
-	}
-
-	/**
-	 * Check if the current user is the owner of an order.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param integer $order_id
-	 *
-	 * @return boolean
-	 */
-	protected function order_has_current_user_as_owner( $order_id ) {
-		try {
-			$order = masteriyo( 'order' );
-			$order->set_id( $order_id );
-			$order_repo = masteriyo( 'order.store' );
-			$order_repo->read( $order );
-
-			if ( $order->get_customer_id() === get_current_user_id() ) {
-				return true;
-			}
-		} catch ( \Exception $e ) {}
-
-		return false;
-	}
-
-	/**
-	 * Check order item permissions on REST API.
-	 *
-	 * @since 0.1.0
-	 * @param string $object_id Object ID.
-	 * @param string $context   Request context.
-	 * @return bool
-	 */
-	public function rest_check_order_item_permissions( $object_id, $context = 'read' ) {
-		$permission = false;
-
-		try {
-			$order_id = $object_id;
-
-			if ( 'create' !== $context ) {
-				$order_item = masteriyo( 'order.item' );
-				$order_item->set_id( $object_id );
-				$order_item_repo = masteriyo( 'order.item.store' );
-				$order_item_repo->read( $order_item );
-
-				$order_id = $order_item->get_order_id();
-			}
-
-			$permission = $this->order_has_current_user_as_owner( $order_id );
-		} catch ( \Exception $e ) {
+		if ( 'revision' === $post_type ) {
 			$permission = false;
+		} else {
+			$cap              = $contexts[ $context ];
+			$post_type_object = get_post_type_object( $post_type );
+			$permission       = current_user_can( $post_type_object->cap->$cap, $object_id );
 		}
 
-		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'order_item' );
+		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, $post_type );
 	}
 }

@@ -19,7 +19,7 @@ function masteriyo_template_redirect() {
 
 	// phpcs:disable WordPress.Security.NonceVerification.Recommended
 	// When default permalinks are enabled, redirect courses list page to post type archive url.
-	if ( ! empty( $_GET['page_id'] ) && '' === get_option( 'permalink_structure' ) && masteriyo_get_page_id( 'course=list' ) === absint( $_GET['page_id'] ) && get_post_type_archive_link( 'course' ) ) {
+	if ( ! empty( $_GET['page_id'] ) && '' === get_option( 'permalink_structure' ) && masteriyo_get_page_id( 'course-list' ) === absint( $_GET['page_id'] ) && get_post_type_archive_link( 'course' ) ) {
 		wp_safe_redirect( get_post_type_archive_link( 'course' ) );
 		exit;
 	}

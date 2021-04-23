@@ -65,8 +65,6 @@ class Masteriyo extends Container {
 		// Register service providers.
 		$this->register_service_providers();
 
-		Install::init();
-
 		// Initialize the rest api controllers.
 		RestApi::instance()->init();
 
@@ -108,6 +106,7 @@ class Masteriyo extends Container {
 	 * @since 0.1.0
 	 */
 	public function after_wp_init() {
+		Install::init();
 		RegisterPostType::instance()->register();
 		RegisterTaxonomies::register();
 		Shortcodes::instance()->register_shortcodes();

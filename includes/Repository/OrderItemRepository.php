@@ -62,7 +62,7 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 				'masteriyo_new_course_data',
 				array(
 					'order_id'   => $order_item->get_order_id( 'edit' ),
-					'product_id' => $order_item->get_product_id( 'edit' ),
+					'course_id'  => $order_item->get_course_id( 'edit' ),
 					'name'       => $order_item->get_name( 'edit' ),
 					'type'       => $order_item->get_type( 'edit' ),
 					'quantity'   => $order_item->get_quantity( 'edit' ),
@@ -120,7 +120,7 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 
 		$order_item->set_props( array(
 			'order_id'   => $order_item_obj->order_id,
-			'product_id' => $order_item_obj->product_id,
+			'course_id' => $order_item_obj->course_id,
 			'name'       => $order_item_obj->name,
 			'type'       => $order_item_obj->type,
 			'quantity'   => $order_item_obj->quantity,
@@ -153,7 +153,7 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 				$this->get_table_name(),
 				array(
 					'order_id'   => $order_item->get_order_id( 'edit' ),
-					'product_id' => $order_item->get_product_id( 'edit' ),
+					'course_id' => $order_item->get_course_id( 'edit' ),
 					'name'       => $order_item->get_name( 'edit' ),
 					'type'       => $order_item->get_type( 'edit' ),
 					'quantity'   => $order_item->get_quantity( 'edit' ),

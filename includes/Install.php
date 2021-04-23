@@ -109,7 +109,7 @@ class Install {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_order_items` (
 			id BIGINT UNSIGNED AUTO_INCREMENT,
 			order_id BIGINT UNSIGNED NOT NULL,
-			product_id BIGINT UNSIGNED NOT NULL,
+			course_id BIGINT UNSIGNED NOT NULL,
 			name text,
 			type varchar(200),
 			quantity BIGINT,

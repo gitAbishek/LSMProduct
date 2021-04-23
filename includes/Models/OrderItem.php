@@ -50,7 +50,7 @@ class OrderItem extends Model {
 	 */
 	protected $data = array(
 		'order_id'   => '',
-		'product_id' => '',
+		'course_id'  => '',
 		'name'       => '',
 		'type'       => '',
 		'quantity'   => 0,
@@ -76,7 +76,7 @@ class OrderItem extends Model {
 	*/
 
 	/**
-	 * Get the product ID.
+	 * Get the course ID.
 	 *
 	 * @since  0.1.0
 	 *
@@ -84,8 +84,8 @@ class OrderItem extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_product_id( $context = 'view' ) {
-		return $this->get_prop( 'product_id', $context );
+	public function get_course_id( $context = 'view' ) {
+		return $this->get_prop( 'course_id', $context );
 	}
 
 	/**
@@ -184,14 +184,14 @@ class OrderItem extends Model {
 	}
 
 	/**
-	 * Set product id.
+	 * Set course id.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $product_id Product ID.
+	 * @param string $course_id Course ID.
 	 */
-	public function set_product_id( $product_id ) {
-		$this->set_prop( 'product_id', $product_id );
+	public function set_course_id( $course_id ) {
+		$this->set_prop( 'course_id', $course_id );
 	}
 
 	/**

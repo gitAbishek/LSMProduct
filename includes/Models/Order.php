@@ -94,7 +94,7 @@ class Order extends Model {
 	*/
 
 	/**
-	 * Product permalink.
+	 * Order permalink.
 	 *
 	 * @return string
 	 */

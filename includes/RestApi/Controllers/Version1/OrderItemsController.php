@@ -232,7 +232,7 @@ class OrderItemsController extends PostsController {
 		$data = array(
 			'id'         => $order_item->get_id(),
 			'order_id'   => $order_item->get_order_id(),
-			'product_id' => $order_item->get_product_id( $context ),
+			'course_id'  => $order_item->get_course_id( $context ),
 			'name'       => $order_item->get_name( $context ),
 			'type'       => $order_item->get_type( $context ),
 			'quantity'   => $order_item->get_quantity( $context ),
@@ -292,7 +292,7 @@ class OrderItemsController extends PostsController {
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'product_id' => array(
+				'course_id' => array(
 					'description' => __( 'Product ID.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -380,8 +380,8 @@ class OrderItemsController extends PostsController {
 		}
 
 		// Product ID.
-		if ( isset( $request['product_id'] ) ) {
-			$order_item->set_product_id( $request['product_id'] );
+		if ( isset( $request['course_id'] ) ) {
+			$order_item->set_course_id( $request['course_id'] );
 		}
 
 		// Product Name.

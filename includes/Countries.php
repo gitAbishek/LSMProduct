@@ -10,16 +10,12 @@ namespace ThemeGrill\Masteriyo;
 
 defined( 'ABSPATH' ) || exit;
 
-
 use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Traits\Singleton;
 
 /**
  * The Masteriyo countries class stores country/state data.
  */
 class Countries {
-
-	use Singleton;
 
 	/**
 	 * Countries list.
@@ -191,7 +187,7 @@ class Countries {
 	 */
 	public function get_states( $cc = null ) {
 		if ( empty( $this->states ) ) {
-			$states = include  Constants::get( 'MASTERIYO_PLUGIN_DIR' ). '/i18n/states.php';
+			$states       = include Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/i18n/states.php';
 			$this->states = apply_filters( 'masteriyo_states', $states );
 		}
 

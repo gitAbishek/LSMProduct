@@ -79,7 +79,7 @@ use ThemeGrill\Masteriyo\Countries;
 				<label for="country">Country/Region</label>
 				<div class="dropdown">
 					<select name="country" id="country">
-					<?php Countries::instance()->country_dropdown_options( $user->get_country() ); ?>
+					<?php masteriyo( 'countries' )->country_dropdown_options( $user->get_country() ); ?>
 					</select>
 				</div>
 

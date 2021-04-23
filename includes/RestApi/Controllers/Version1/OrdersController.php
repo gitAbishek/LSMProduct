@@ -12,6 +12,7 @@ namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Permission;
+use ThemeGrill\Masteriyo\Models\Order;
 
 /**
  * OrdersController class.
@@ -33,11 +34,11 @@ class OrdersController extends PostsController {
 	protected $rest_base = 'orders';
 
 	/**
-	 * Post type.
+	 * Object type.
 	 *
 	 * @var string
 	 */
-	protected $object_type = 'order';
+	protected $object_type = 'masteriyo_order';
 
 	/**
 	 * Post type.
@@ -132,13 +133,6 @@ class OrdersController extends PostsController {
 					'methods'             => \WP_REST_Server::DELETABLE,
 					'callback'            => array( $this, 'delete_item' ),
 					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
-					'args'                => array(
-						'force' => array(
-							'default'     => false,
-							'description' => __( 'Whether to bypass trash and force deletion.', 'masteriyo' ),
-							'type'        => 'boolean',
-						),
-					),
 				),
 				'schema' => array( $this, 'get_public_item_schema' ),
 			)
@@ -158,15 +152,15 @@ class OrdersController extends PostsController {
 		$params['status']      = array(
 			'description'       => __( 'Limit result set to orders assigned a specific status.', 'masteriyo' ),
 			'type'              => 'string',
-			'enum'              => array( 'pending', 'processing', 'completed', 'cancelled', 'refunded', 'failed' ),
-			'default'           => 'pending',
+			'enum'              => array( 'pending', 'processing', 'completed', 'cancelled', 'refunded', 'failed', 'any' ),
+			'default'           => 'any',
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 		$params['customer_id'] = array(
 			'description'       => __( 'Filter orders by customer ID.', 'masteriyo' ),
 			'type'              => 'number',
-			'sanitize_callback' => 'sanitize_key',
+			'sanitize_callback' => 'absint',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
@@ -180,12 +174,12 @@ class OrdersController extends PostsController {
 	 * @return object Model object or WP_Error object.
 	 */
 	protected function get_object( $id ) {
-		global $masteriyo_container;
 		try {
 			$id    = $id instanceof \WP_Post ? $id->ID : $id;
-			$order = $masteriyo_container->get( 'order' );
+			$id    = $id instanceof Order ? $id->get_id() : $id;
+			$order = masteriyo( 'order' );
 			$order->set_id( $id );
-			$order_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\OrderRepository::class );
+			$order_repo = masteriyo( 'order.store' );
 			$order_repo->read( $order );
 		} catch ( \Exception $e ) {
 			return false;
@@ -238,11 +232,12 @@ class OrdersController extends PostsController {
 			'id'                  => $order->get_id(),
 			'permalink'           => $order->get_permalink(),
 			'status'              => $order->get_status( $context ),
-			'order_status'        => $order->get_order_status( $context ),
 			'total'               => $order->get_total( $context ),
 			'discount'            => $order->get_discount( $context ),
 			'currency'            => $order->get_currency( $context ),
 			'expiry_date'         => $order->get_expiry_date( $context ),
+			'date_created'        => $order->get_date_created( $context ),
+			'date_modified'       => $order->get_date_modified( $context ),
 			'customer_id'         => $order->get_customer_id( $context ),
 			'payment_method'      => $order->get_payment_method( $context ),
 			'transaction_id'      => $order->get_transaction_id( $context ),
@@ -271,20 +266,11 @@ class OrdersController extends PostsController {
 		// Set order status.
 		$args['post_status'] = $request['status'];
 
-		// Set order status.
-		$args['meta_query'] = array(
-			'relation' => 'AND',
-			array(
-				'key'     => '_order_status',
-				'value'   => $request['order_status'],
-				'compare' => '=',
-			),
-			array(
-				'key'     => '_customer_id',
-				'value'   => ! empty( $request['customer_id'] ) ? $request['customer_id'] : get_current_user_id(),
-				'compare' => '=',
-			),
-		);
+		if ( ! empty( $request['customer_id'] ) ) {
+			$args['author'] = $request['customer_id'];
+		} else {
+			$args['author'] = get_current_user_id();
+		}
 
 		return $args;
 	}
@@ -356,7 +342,7 @@ class OrdersController extends PostsController {
 				),
 				'currency'            => array(
 					'description' => __( 'Currency.', 'masteriyo' ),
-					'type'        => 'number',
+					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'expiry_date'         => array(
@@ -452,14 +438,12 @@ class OrdersController extends PostsController {
 	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		global $masteriyo_container;
-
 		$id    = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$order = $masteriyo_container->get( 'order' );
+		$order = masteriyo( 'order' );
 
 		if ( 0 !== $id ) {
 			$order->set_id( $id );
-			$order_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\OrderRepository::class );
+			$order_repo = masteriyo( 'order.store' );
 			$order_repo->read( $order );
 		}
 
@@ -553,5 +537,154 @@ class OrdersController extends PostsController {
 		 * @param bool            $creating If is creating a new object.
 		 */
 		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $order, $request, $creating );
+	}
+
+	/**
+	 * Checks if a given request has access to get a specific item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
+	 */
+	public function get_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_order_permissions( absint( $request['id'] ), 'read' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to read items.
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function get_items_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$customer_id = get_current_user_id();
+
+		if ( isset( $request['customer_id'] ) ) {
+			$customer_id = absint( $request['customer_id'] );
+		}
+
+		if ( ! $customer_id || ! $this->permission->rest_check_read_orders_permissions( $customer_id, 'read' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to create an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function create_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_order_permissions( absint( $request['id'] ), 'create' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to delete an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function delete_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_order_permissions( absint( $request['id'] ), 'delete' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_delete',
+				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to update an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function update_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_order_permissions( absint( $request['id'] ), 'update' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		return true;
 	}
 }

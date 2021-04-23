@@ -24,21 +24,18 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'_total'               => 'total',
-		'_discount'            => 'discount',
-		'_currency'            => 'currency',
-		'_expiry_date'         => 'expiry_date',
-		'_date_created'        => 'date_created',
-		'_date_modified'       => 'date_modified',
-		'_customer_id'         => 'customer_id',
-		'_payment_method'      => 'payment_method',
-		'_transaction_id'      => 'transaction_id',
-		'_date_paid'           => 'date_paid',
-		'_date_completed'      => 'date_completed',
-		'_created_via'         => 'created_via',
-		'_customer_ip_address' => 'customer_ip_address',
-		'_customer_user_agent' => 'customer_user_agent',
-		'_total_tax'           => 'total_tax',
+		'total'               => '_total',
+		'discount'            => '_discount',
+		'currency'            => '_currency',
+		'expiry_date'         => '_expiry_date',
+		'payment_method'      => '_payment_method',
+		'transaction_id'      => '_transaction_id',
+		'date_paid'           => '_date_paid',
+		'date_completed'      => '_date_completed',
+		'created_via'         => '_created_via',
+		'customer_ip_address' => '_customer_ip_address',
+		'customer_user_agent' => '_customer_user_agent',
+		'total_tax'           => '_total_tax',
 	);
 
 	/**
@@ -105,6 +102,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 				'status'        => $order_post->post_status,
 				'date_created'  => $order_post->post_date_gmt,
 				'date_modified' => $order_post->post_modified_gmt,
+				'customer_id'   => absint( $order_post->post_author ),
 			)
 		);
 
@@ -129,6 +127,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 
 		$post_data_keys = array(
 			'status',
+			'date_modified',
 		);
 
 		// Only update the post when the post data changes.
@@ -187,28 +186,14 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 		$id          = $order->get_id();
 		$object_type = $order->get_object_type();
 
-		$args = array_merge(
-			array(
-				'force_delete' => false,
-			),
-			$args
-		);
-
 		if ( ! $id ) {
 			return;
 		}
 
-		if ( $args['force_delete'] ) {
-			do_action( 'masteriyo_before_delete_' . $object_type, $id, $order );
-			wp_delete_post( $id, true );
-			$order->set_id( 0 );
-			do_action( 'masteriyo_after_delete_' . $object_type, $id, $order );
-		} else {
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $order );
-			wp_trash_post( $id );
-			$order->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $order );
-		}
+		do_action( 'masteriyo_before_delete_' . $object_type, $id, $order );
+		wp_delete_post( $id, true );
+		$order->set_id( 0 );
+		do_action( 'masteriyo_after_delete_' . $object_type, $id, $order );
 	}
 
 	/**
@@ -233,7 +218,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 			array()
 		);
 
-		foreach ( $this->internal_meta_keys as $meta_key => $prop ) {
+		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
 			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
 		}

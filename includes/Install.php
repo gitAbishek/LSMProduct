@@ -19,7 +19,7 @@ class Install {
 	public static function init() {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		self::create_roles();
-		// self::init_db();
+		self::init_db();
 		self::create_pages();
 	}
 
@@ -37,7 +37,9 @@ class Install {
 		$base_prefix     = $wpdb->base_prefix;
 
 		dbDelta( self::get_question_table_schema( $charset_collate, $base_prefix ) );
-		dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
+		// dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
+		dbDelta( self::get_order_items_table_schema( $charset_collate, $base_prefix ) );
+		dbDelta( self::get_order_itemmeta_table_schema( $charset_collate, $base_prefix ) );
 	}
 
 	/**
@@ -83,11 +85,59 @@ class Install {
 	 */
 	private static function get_session_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_sessions` (
-			`id` BIGINT UNSIGNED AUTO_INCREMENT,
-			`key` CHAR(32) UNIQUE NOT NULL,
-			`data` LONGTEXT NOT NULL,
-			`expiry` BIGINT UNSIGNED NOT NULL,
+			id BIGINT UNSIGNED AUTO_INCREMENT,
+			key CHAR(32) UNIQUE NOT NULL,
+			data LONGTEXT NOT NULL,
+			expiry BIGINT UNSIGNED NOT NULL,
 			PRIMARY KEY (id)
+		) $charset_collate;";
+
+		return $sql;
+	}
+
+	/**
+	 * Get order items table schema.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $charset_collate   Database charset collate.
+	 * @param string $base_prefix       Table prefix.
+	 *
+	 * @return string
+	 */
+	private static function get_order_items_table_schema( $charset_collate, $base_prefix ) {
+		$sql = "CREATE TABLE `{$base_prefix}masteriyo_order_items` (
+			id BIGINT UNSIGNED AUTO_INCREMENT,
+			order_id BIGINT UNSIGNED NOT NULL,
+			product_id BIGINT UNSIGNED NOT NULL,
+			name text,
+			type varchar(200),
+			quantity BIGINT,
+			tax BIGINT,
+			total BIGINT,
+			PRIMARY KEY (id)
+		) $charset_collate;";
+
+		return $sql;
+	}
+
+	/**
+	 * Get order item meta table schema.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $charset_collate   Database charset collate.
+	 * @param string $base_prefix       Table prefix.
+	 *
+	 * @return string
+	 */
+	private static function get_order_itemmeta_table_schema( $charset_collate, $base_prefix ) {
+		$sql = "CREATE TABLE `{$base_prefix}masteriyo_order_itemmeta` (
+			meta_id BIGINT UNSIGNED AUTO_INCREMENT,
+			order_item_id BIGINT UNSIGNED NOT NULL,
+			meta_key varchar(200) NOT NULL,
+			meta_value text,
+			PRIMARY KEY (meta_id)
 		) $charset_collate;";
 
 		return $sql;

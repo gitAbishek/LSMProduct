@@ -65,6 +65,8 @@ class Masteriyo extends Container {
 		// Register service providers.
 		$this->register_service_providers();
 
+		Install::init();
+
 		// Initialize the rest api controllers.
 		RestApi::instance()->init();
 

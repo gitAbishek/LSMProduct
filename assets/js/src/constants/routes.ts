@@ -14,7 +14,7 @@ const routes = {
 		edit: '/builder/quiz/edit/:quizId',
 	},
 	settings: '/settings',
-	fourOfour: '/not-found',
+	notFound: '/not-found',
 };
 
 export default routes;

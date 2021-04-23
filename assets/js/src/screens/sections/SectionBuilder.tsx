@@ -23,7 +23,7 @@ const SectionBuilder = () => {
 		() => courseAPI.get(courseId),
 		{
 			onError: () => {
-				courseQuery.isError && history.push(routes.courses.list);
+				history.push(routes.notFound);
 			},
 		}
 	);

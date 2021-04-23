@@ -2149,3 +2149,21 @@ function_exists( 'add_filter' ) && add_filter( 'display_post_states', 'masteriyo
 function masteriyo_get_order_status_list() {
 	return (array) apply_filters( 'masteriyo_order_status_list', array( 'pending', 'completed', 'cancelled' ) );
 }
+
+/**
+ * Check if the current user is admin.
+ *
+ * @return boolean
+ */
+function masteriyo_is_current_user_admin() {
+    return in_array( 'administrator',  wp_get_current_user()->roles );
+}
+
+/**
+ * Check if the current user is masteriyo manager.
+ *
+ * @return boolean
+ */
+function masteriyo_is_current_user_manager() {
+    return in_array( 'masteriyo_manager',  wp_get_current_user()->roles );
+}

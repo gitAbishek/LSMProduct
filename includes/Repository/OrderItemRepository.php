@@ -18,20 +18,33 @@ use ThemeGrill\Masteriyo\Models\OrderItem;
 class OrderItemRepository extends AbstractRepository implements RepositoryInterface {
 
 	/**
+	 * Meta type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $meta_type = 'order_item';
+
+	/**
+	 * This only needs set if you are using a custom metadata type (for example payment tokens.
+	 * This should be the name of the field your table uses for associating meta with objects.
+	 * For example, in payment_tokenmeta, this would be payment_token_id.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $object_id_field_for_meta = 'order_item_id';
+
+	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 3.0.0
+	 * @since 0.1.0
+	 *
 	 * @var array
 	 */
-	protected $internal_meta_keys = array(
-		'_order_id'   => 'order_id',
-		'_product_id' => 'product_id',
-		'_name'       => 'name',
-		'_type'       => 'type',
-		'_quantity'   => 'quantity',
-		'_tax'        => 'tax',
-		'_total'      => 'total',
-	);
+	protected $internal_meta_keys = array();
 
 	/**
 	 * Create an order item in the database.
@@ -41,32 +54,34 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 	 * @param Model $order_item Order Item object.
 	 */
 	public function create( Model &$order_item ) {
-		$id = wp_insert_post(
+		global $wpdb;
+
+		$is_success = $wpdb->insert(
+			$this->get_table_name(),
 			apply_filters(
-				'masteriyo_new_order_item_data',
+				'masteriyo_new_course_data',
 				array(
-					'post_type'      => 'masteriyo_order_item',
-					'post_status'    => 'publish',
-					'post_author'    => get_current_user_id(),
-					'post_title'     => __( 'Order Item', 'masteriyo' ),
-					'post_content'   => __( 'Order Item', 'masteriyo' ),
-					'post_excerpt'   => __( 'Order Item', 'masteriyo' ),
-					'comment_status' => 'closed',
-					'ping_status'    => 'closed',
+					'order_id'   => $order_item->get_order_id( 'edit' ),
+					'product_id' => $order_item->get_product_id( 'edit' ),
+					'name'       => $order_item->get_name( 'edit' ),
+					'type'       => $order_item->get_type( 'edit' ),
+					'quantity'   => $order_item->get_quantity( 'edit' ),
+					'tax'        => $order_item->get_tax( 'edit' ),
+					'total'      => $order_item->get_total( 'edit' ),
 				),
 				$order_item
 			)
 		);
 
-		if ( $id && ! is_wp_error( $id ) ) {
-			$order_item->set_id( $id );
-			$this->update_post_meta( $order_item, true );
+		if ( $is_success && $wpdb->insert_id ) {
+			$order_item->set_id( $wpdb->insert_id );
+			$this->update_custom_table_meta( $order_item, true );
 			// TODO Invalidate caches.
 
 			$order_item->save_meta_data();
 			$order_item->apply_changes();
 
-			do_action( 'masteriyo_new_order_item', $id, $order_item );
+			do_action( 'masteriyo_new_order_item', $wpdb->insert_id, $order_item );
 		}
 	}
 
@@ -80,13 +95,40 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 	 * @throws \Exception If invalid order item.
 	 */
 	public function read( Model &$order_item ) {
-		$order_item_post = get_post( $order_item->get_id() );
-
-		if ( ! $order_item->get_id() || ! $order_item_post || 'masteriyo_order_item' !== $order_item_post->post_type ) {
+		if ( ! $order_item->get_id() ) {
 			throw new \Exception( __( 'Invalid order item.', 'masteriyo' ) );
 		}
 
-		$this->read_order_data( $order_item );
+		global $wpdb;
+
+		$table_name = $this->get_table_name();
+
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$table_name}
+				WHERE id = %d
+				LIMIT 1",
+				$order_item->get_id()
+			)
+		);
+
+		if ( ! is_array( $results ) || count( $results ) === 0 ) {
+			throw new \Exception( __( 'Order item not found.', 'masteriyo' ) );
+		}
+
+		$order_item_obj = $results[0];
+
+		$order_item->set_props( array(
+			'order_id'   => $order_item_obj->order_id,
+			'product_id' => $order_item_obj->product_id,
+			'name'       => $order_item_obj->name,
+			'type'       => $order_item_obj->type,
+			'quantity'   => $order_item_obj->quantity,
+			'tax'        => $order_item_obj->tax,
+			'total'      => $order_item_obj->total,
+		) );
+
+		$this->read_order_item_data( $order_item );
 		$this->read_extra_data( $order_item );
 		$order_item->set_object_read( true );
 
@@ -105,18 +147,24 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 	public function update( Model &$order_item ) {
 		$changes = $order_item->get_changes();
 
-		// Only update post modified time to record this save event.
-		$GLOBALS['wpdb']->update(
-			$GLOBALS['wpdb']->posts,
-			array(
-				'post_modified'     => current_time( 'mysql' ),
-				'post_modified_gmt' => current_time( 'mysql', true ),
-			),
-			array(
-				'ID' => $order_item->get_id(),
-			)
-		);
-		clean_post_cache( $order_item->get_id() );
+		// Only update when there are changes.
+		if ( count( $changes ) > 0 ) {
+			$GLOBALS['wpdb']->update(
+				$this->get_table_name(),
+				array(
+					'order_id'   => $order_item->get_order_id( 'edit' ),
+					'product_id' => $order_item->get_product_id( 'edit' ),
+					'name'       => $order_item->get_name( 'edit' ),
+					'type'       => $order_item->get_type( 'edit' ),
+					'quantity'   => $order_item->get_quantity( 'edit' ),
+					'tax'        => $order_item->get_tax( 'edit' ),
+					'total'      => $order_item->get_total( 'edit' ),
+				),
+				array(
+					'id' => $order_item->get_id(),
+				)
+			);
+		}
 
 		$this->update_post_meta( $order_item );
 
@@ -142,8 +190,15 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 		}
 
 		do_action( 'masteriyo_before_delete_' . $object_type, $id, $order_item );
-		wp_delete_post( $id );
+
+		$GLOBALS['wpdb']->delete(
+			$this->get_table_name(),
+			array(
+				'id' => $order_item->get_id(),
+			)
+		);
 		$order_item->set_id( 0 );
+
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $order_item );
 	}
 
@@ -154,7 +209,7 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 	 *
 	 * @param OrderItem $order_item Order Item object.
 	 */
-	protected function read_order_data( &$order_item ) {
+	protected function read_order_item_data( &$order_item ) {
 		$id          = $order_item->get_id();
 		$meta_values = $this->read_meta( $order_item );
 
@@ -195,5 +250,16 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 				$order_item->{$function}( $meta_values[ '_' . $key ] );
 			}
 		}
+	}
+
+	/**
+	 * Get table name.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_table_name() {
+		return "{$GLOBALS['wpdb']->prefix}masteriyo_order_items";
 	}
 }

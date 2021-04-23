@@ -30,16 +30,7 @@ class OrderItem extends Model {
 	 *
 	 * @var string
 	 */
-	protected $object_type = 'masteriyo_order_item';
-
-	/**
-	 * Post type.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	protected $post_type = 'masteriyo_order_item';
+	protected $object_type = 'order_item';
 
 	/**
 	 * Cache group.
@@ -76,30 +67,6 @@ class OrderItem extends Model {
 	 */
 	public function __construct( OrderItemRepository $order_item_repository ) {
 		$this->repository = $order_item_repository;
-	}
-
-	/*
-	|--------------------------------------------------------------------------
-	| Non-CRUD Getters
-	|--------------------------------------------------------------------------
-	*/
-
-	/**
-	 * Product permalink.
-	 *
-	 * @return string
-	 */
-	public function get_permalink() {
-		return get_permalink( $this->get_id() );
-	}
-
-	/**
-	 * Returns the children IDs if applicable. Overridden by child classes.
-	 *
-	 * @return array of IDs
-	 */
-	public function get_children() {
-		return array();
 	}
 
 	/*

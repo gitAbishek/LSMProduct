@@ -37,6 +37,37 @@ function masteriyo_get_order( $order ) {
 }
 
 /**
+ * Get order item.
+ *
+ * @since 0.1.0
+ *
+ * @param int|OrderItem $order Order id or Order Model or Post.
+ *
+ * @return OrderItem|null
+ */
+function masteriyo_get_order_item( $order_item ) {
+	$order_item_obj   = masteriyo( 'order.item' );
+	$order_item_store = masteriyo( 'order.item.store' );
+
+	try {
+		if ( is_a( $order_item, 'ThemeGrill\Masteriyo\Models\OrderItem' ) ) {
+			$id = $order_item->get_id();
+		} elseif ( is_a( $order_item, \stdClass::class ) ) {
+			$id = $order_item->id;
+		} else {
+			$id = $order_item;
+		}
+
+		$id = absint( $id );
+		$order_item_obj->set_id( $id );
+		$order_item_store->read( $order_item_obj );
+	} catch ( \Exception $e ) {
+		return null;
+	}
+	return apply_filters( 'masteriyo_get_order_item', $order_item_obj, $order_item );
+}
+
+/**
  * Get list of status for order.
  *
  * @since 0.1.0
@@ -161,4 +192,34 @@ function masteriyo_get_order_status_name( $status ) {
 	}
 
 	return '';
+}
+
+/**
+ * Get orders.
+ *
+ * @since 0.1.0
+ *
+ * @param array $args Query arguments.
+ *
+ * @return object|array[Order]
+ */
+function masteriyo_get_orders( $args = array() ) {
+	$orders = masteriyo( 'query.orders' )->set_args( $args )->get_orders();
+
+	return apply_filters( 'masteriyo_get_orders', $orders, $args );
+}
+
+/**
+ * Get order items.
+ *
+ * @since 0.1.0
+ *
+ * @param array $args Query arguments.
+ *
+ * @return object|array[OrderItem]
+ */
+function masteriyo_get_order_items( $args = array() ) {
+	$order_items = masteriyo( 'query.orders.items' )->set_args( $args )->get_order_items();
+
+	return apply_filters( 'masteriyo_get_order_items', $order_items, $args );
 }

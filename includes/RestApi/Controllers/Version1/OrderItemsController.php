@@ -455,9 +455,9 @@ class OrderItemsController extends PostsController {
 		/**
 		 * Query for counting rows.
 		 */
-		$total_items = $wpdb->query(
+		$total_items = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT id FROM {$table_name}
+				"SELECT COUNT(id) FROM {$table_name}
 				WHERE order_id = %d",
 				$order_id
 			)

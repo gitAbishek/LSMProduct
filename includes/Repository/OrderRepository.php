@@ -242,4 +242,110 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 			}
 		}
 	}
+
+	/**
+	 * Fetch orders.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $query_vars Query vars.
+	 * @return Course[]
+	 */
+	public function query( $query_vars ) {
+		$args = $this->get_wp_query_args( $query_vars );
+
+		if ( ! empty( $args['errors'] ) ) {
+			$query = (object) array(
+				'posts'         => array(),
+				'found_posts'   => 0,
+				'max_num_pages' => 0,
+			);
+		} else {
+			$query = new \WP_Query( $args );
+		}
+
+		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
+			// Prime caches before grabbing objects.
+			update_post_caches( $query->posts, array( 'masteriyo_order' ) );
+		}
+
+		$orders = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_order', $query->posts ) );
+
+		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
+			return (object) array(
+				'orders'      => $orders,
+				'total'         => $query->found_posts,
+				'max_num_pages' => $query->max_num_pages,
+			);
+		}
+
+		return $orders;
+	}
+
+	/**
+	 * Get valid WP_Query args from a CourseQuery's query variables.
+	 *
+	 * @since 0.1.0
+	 * @param array $query_vars Query vars from a CourseQuery.
+	 * @return array
+	 */
+	protected function get_wp_query_args( $query_vars ) {
+		// Map customer id.
+		if ( isset( $query_vars['customer_id'] ) ) {
+			$query_vars['author'] = $query_vars['customer_id'];
+			unset( $query_vars['customer_id'] );
+		}
+
+		// Add the 'mto-' prefix to status if needed.
+		if ( ! empty( $query_vars['status'] ) ) {
+			if ( is_array( $query_vars['status'] ) ) {
+				foreach ( $query_vars['status'] as &$status ) {
+					$status = masteriyo_is_order_status( 'mto-' . $status ) ? 'mto-' . $status : $status;
+				}
+			} else {
+				$query_vars['status'] = masteriyo_is_order_status( 'mto-' . $query_vars['status'] ) ? 'mto-' . $query_vars['status'] : $query_vars['status'];
+			}
+		}
+
+		$wp_query_args = parent::get_wp_query_args( $query_vars );
+
+		if ( ! isset( $wp_query_args['date_query'] ) ) {
+			$wp_query_args['date_query'] = array();
+		}
+		if ( ! isset( $wp_query_args['meta_query'] ) ) {
+			$wp_query_args['meta_query'] = array(); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+		}
+
+		// Handle date queries.
+		$date_queries = array(
+			'date_created'   => 'post_date',
+			'date_modified'  => 'post_modified',
+			'date_paid'      => '_date_paid',
+			'date_completed' => '_date_completed',
+		);
+		foreach ( $date_queries as $query_var_key => $db_key ) {
+			if ( isset( $query_vars[ $query_var_key ] ) && '' !== $query_vars[ $query_var_key ] ) {
+
+				// Remove any existing meta queries for the same keys to prevent conflicts.
+				$existing_queries = wp_list_pluck( $wp_query_args['meta_query'], 'key', true );
+				foreach ( $existing_queries as $query_index => $query_contents ) {
+					unset( $wp_query_args['meta_query'][ $query_index ] );
+				}
+
+				$wp_query_args = $this->parse_date_for_wp_query( $query_vars[ $query_var_key ], $db_key, $wp_query_args );
+			}
+		}
+
+		// Handle paginate.
+		if ( ! isset( $query_vars['paginate'] ) || ! $query_vars['paginate'] ) {
+			$wp_query_args['no_found_rows'] = true;
+		}
+
+		// Handle orderby.
+		if ( isset( $query_vars['orderby'] ) && 'include' === $query_vars['orderby'] ) {
+			$wp_query_args['orderby'] = 'post__in';
+		}
+
+		return apply_filters( 'masteriyo_order_data_store_cpt_get_orders_query', $wp_query_args, $query_vars, $this );
+	}
 }

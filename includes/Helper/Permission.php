@@ -8,6 +8,7 @@
 namespace ThemeGrill\Masteriyo\Helper;
 
 defined( 'ABSPATH' ) || exit;
+
 class Permission {
 	/**
 	 * Check permissions of posts on REST API.

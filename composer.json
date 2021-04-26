@@ -24,7 +24,8 @@
       "includes/Helper/TemplateHooks.php",
       "includes/Helper/Page.php",
       "includes/Helper/Format.php",
-      "includes/Helper/Notice.php"
+      "includes/Helper/Notice.php",
+      "includes/Helper/Order.php"
     ],
     "psr-4": {
       "ThemeGrill\\Masteriyo\\": "includes/"

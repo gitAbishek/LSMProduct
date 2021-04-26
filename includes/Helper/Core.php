@@ -245,36 +245,6 @@ function masteriyo_get_quiz( $quiz ) {
 }
 
 /**
- * Get order.
- *
- * @since 0.1.0
- *
- * @param int|Order|WP_Post $order Order id or Order Model or Post.
- * @return Order|null
- */
-function masteriyo_get_order( $order ) {
-	$order_obj   = masteriyo( 'order' );
-	$order_store = masteriyo( 'order.store' );
-
-	if ( is_a( $order, 'ThemeGrill\Masteriyo\Models\Order' ) ) {
-		$id = $order->get_id();
-	} elseif ( is_a( $order, 'WP_Post' ) ) {
-		$id = $order->ID;
-	} else {
-		$id = $order;
-	}
-
-	try {
-		$id = absint( $id );
-		$order_obj->set_id( $id );
-		$order_store->read( $order_obj );
-	} catch ( \Exception $e ) {
-		return null;
-	}
-	return apply_filters( 'masteriyo_get_order', $order_obj, $order );
-}
-
-/**
  * Get question.
  *
  * @since 0.1.0
@@ -2138,17 +2108,6 @@ function masteriyo_add_post_state( $post_states, $post ) {
 }
 
 function_exists( 'add_filter' ) && add_filter( 'display_post_states', 'masteriyo_add_post_state', 10, 2 );
-
-/**
- * Get list of status for order.
- *
- * @since 0.1.0
- *
- * @return array
- */
-function masteriyo_get_order_status_list() {
-	return (array) apply_filters( 'masteriyo_order_status_list', array( 'pending', 'completed', 'cancelled' ) );
-}
 
 /**
  * Check if the current user is admin.

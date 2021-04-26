@@ -76,7 +76,7 @@ class Masteriyo extends Container {
 		PermalinkSettings::instance()->init();
 
 		// Register scripts and styles.
-		$this->get( 'script-style');
+		$this->get( 'script-style' );
 
 		$this->get( 'query.frontend' );
 
@@ -111,6 +111,7 @@ class Masteriyo extends Container {
 		RegisterTaxonomies::register();
 		Shortcodes::instance()->register_shortcodes();
 
+		$this->register_order_status();
 		$this->load_text_domain();
 
 		do_action( 'masteriyo_init' );
@@ -136,33 +137,36 @@ class Masteriyo extends Container {
 	 */
 	private function get_service_providers() {
 		$namespace = 'ThemeGrill\\Masteriyo\\Providers';
-		return apply_filters( 'masteriyo_service_providers', array(
-			"{$namespace}\\CacheServiceProvider",
-			"{$namespace}\\NoticeServiceProvider",
-			"{$namespace}\\FrontendQueryServiceProvider",
-			"{$namespace}\\CourseServiceProvider",
-			"{$namespace}\\PermissionServiceProvider",
-			"{$namespace}\\SessionServiceProvider",
-			"{$namespace}\\LessonServiceProvider",
-			"{$namespace}\\QuizServiceProvider",
-			"{$namespace}\\SectionServiceProvider",
-			"{$namespace}\\UserServiceProvider",
-			"{$namespace}\\OrderServiceProvider",
-			"{$namespace}\\CourseTagServiceProvider",
-			"{$namespace}\\CourseCategoryServiceProvider",
-			"{$namespace}\\CourseDifficultyServiceProvider",
-			"{$namespace}\\CartServiceProvider",
-			"{$namespace}\\TemplateServiceProvider",
-			"{$namespace}\\QuestionServiceProvider",
-			"{$namespace}\\ScriptStyleServiceProvider",
-			"{$namespace}\\ShortcodesServiceProvider",
-			"{$namespace}\\SettingsServiceProvider",
-			"{$namespace}\\QueriesServiceProvider",
-			"{$namespace}\\FaqServiceProvider",
-			"{$namespace}\\EmailsServiceProvider",
-			"{$namespace}\\CourseReviewServiceProvider",
-			"{$namespace}\\FormHandlersServiceProvider",
-		) );
+		return apply_filters(
+			'masteriyo_service_providers',
+			array(
+				"{$namespace}\\CacheServiceProvider",
+				"{$namespace}\\NoticeServiceProvider",
+				"{$namespace}\\FrontendQueryServiceProvider",
+				"{$namespace}\\CourseServiceProvider",
+				"{$namespace}\\PermissionServiceProvider",
+				"{$namespace}\\SessionServiceProvider",
+				"{$namespace}\\LessonServiceProvider",
+				"{$namespace}\\QuizServiceProvider",
+				"{$namespace}\\SectionServiceProvider",
+				"{$namespace}\\UserServiceProvider",
+				"{$namespace}\\OrderServiceProvider",
+				"{$namespace}\\CourseTagServiceProvider",
+				"{$namespace}\\CourseCategoryServiceProvider",
+				"{$namespace}\\CourseDifficultyServiceProvider",
+				"{$namespace}\\CartServiceProvider",
+				"{$namespace}\\TemplateServiceProvider",
+				"{$namespace}\\QuestionServiceProvider",
+				"{$namespace}\\ScriptStyleServiceProvider",
+				"{$namespace}\\ShortcodesServiceProvider",
+				"{$namespace}\\SettingsServiceProvider",
+				"{$namespace}\\QueriesServiceProvider",
+				"{$namespace}\\FaqServiceProvider",
+				"{$namespace}\\EmailsServiceProvider",
+				"{$namespace}\\CourseReviewServiceProvider",
+				"{$namespace}\\FormHandlersServiceProvider",
+			)
+		);
 	}
 
 	/**
@@ -174,7 +178,7 @@ class Masteriyo extends Container {
 		load_plugin_textdomain(
 			'masteriyo',
 			false,
-			dirname(plugin_basename( Constants::get('MASTERIYO_PLUGIN_FILE') ) ) . '/' . Constants::get('MASTERIYO_PLUGIN_REL_LANGUAGES_PATH')
+			dirname( plugin_basename( Constants::get( 'MASTERIYO_PLUGIN_FILE' ) ) ) . '/' . Constants::get( 'MASTERIYO_PLUGIN_REL_LANGUAGES_PATH' )
 		);
 	}
 
@@ -222,7 +226,7 @@ class Masteriyo extends Container {
 		}
 
 		$masteriyo_links = array(
-			'docs' => array(
+			'docs'    => array(
 				'url'        => apply_filters( 'masteriyo_docs_url', '#' ),
 				'label'      => __( 'Docs', 'masteriyo' ),
 				'aria-label' => __( 'View masteriyo documentation', 'masteriyo' ),
@@ -261,7 +265,7 @@ class Masteriyo extends Container {
 	 * @return array
 	 */
 	public static function add_plugin_action_links( $links ) {
-		$action_links = array(
+		$action_links      = array(
 			'settings' => array(
 				'url'        => admin_url( 'admin.php?page=masteriyo' ),
 				'label'      => __( 'Settings', 'masteriyo' ),
@@ -341,6 +345,21 @@ class Masteriyo extends Container {
 				)
 			);
 			exit;
+		}
+	}
+
+	/**
+	 * Register order status.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
+	private function register_order_status() {
+		$order_statuses = \masteriyo_get_order_statuses();
+
+		foreach ( $order_statuses as $order_status => $values ) {
+			register_post_status( $order_status, $values );
 		}
 	}
 }

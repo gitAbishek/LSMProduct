@@ -10,6 +10,8 @@
 namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 
 use ThemeGrill\Masteriyo\ModelException;
+use ThemeGrill\Masteriyo\Exceptions\RestException;
+
 
 defined( 'ABSPATH' ) || exit;
 
@@ -143,7 +145,7 @@ abstract class CrudController extends RestController {
 			return $new_object;
 		} catch ( ModelException $e ) {
 			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
-		} catch ( \WC_REST_Exception $e ) {
+		} catch ( RestException $e ) {
 			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
 		}
 	}
@@ -182,7 +184,7 @@ abstract class CrudController extends RestController {
 		} catch ( ModelException $e ) {
 			$object->delete();
 			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
-		} catch ( \WC_REST_Exception $e ) {
+		} catch ( RestException $e ) {
 			$object->delete();
 			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
 		}
@@ -228,7 +230,7 @@ abstract class CrudController extends RestController {
 			do_action( "masteriyo_rest_insert_{$this->object_type}_object", $object, $request, false );
 		} catch ( ModelException $e ) {
 			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
-		} catch ( \WC_REST_Exception $e ) {
+		} catch ( RestException $e ) {
 			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
 		}
 

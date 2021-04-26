@@ -10,6 +10,8 @@ defined( 'ABSPATH' ) || exit;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use ThemeGrill\Masteriyo\Query\FaqQuery;
 use ThemeGrill\Masteriyo\Query\LessonQuery;
+use ThemeGrill\Masteriyo\Query\OrderItemQuery;
+use ThemeGrill\Masteriyo\Query\OrderQuery;
 use ThemeGrill\Masteriyo\Query\QuizQuery;
 use ThemeGrill\Masteriyo\Query\QuestionQuery;
 use ThemeGrill\Masteriyo\Query\SectionQuery;
@@ -32,12 +34,16 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		'query.quizes',
 		'query.questions',
 		'query.faqs',
+		'query.orders',
+		'query.orders.items',
 
 		'\ThemeGrill\Masteriyo\Query\SectionQuery',
 		'\ThemeGrill\Masteriyo\Query\LessonQuery',
 		'\ThemeGrill\Masteriyo\Query\QuizQuery',
 		'\ThemeGrill\Masteriyo\Query\QuestionQuery',
 		'\ThemeGrill\Masteriyo\Query\FaqQuery',
+		'\ThemeGrill\Masteriyo\Query\OrderQuery',
+		'\ThemeGrill\Masteriyo\Query\OrderItemQuery',
 	);
 
 	/**
@@ -54,11 +60,15 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'query.quizes', QuizQuery::class );
 		$this->getContainer()->add( 'query.questions', QuestionQuery::class );
 		$this->getContainer()->add( 'query.faqs', FaqQuery::class );
+		$this->getContainer()->add( 'query.orders', OrderQuery::class );
+		$this->getContainer()->add( 'query.orders.items', OrderItemQuery::class );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\SectionQuery' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\LessonQuery' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\QuizQuery' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\QuestionQuery' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\FaqQuery' );
+		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\OrderQuery' );
+		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\OrderItemQuery' );
 	}
 }

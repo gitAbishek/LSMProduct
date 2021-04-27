@@ -79,6 +79,7 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 
 			$order_item->save_meta_data();
 			$order_item->apply_changes();
+			$this->clear_cache( $order_item );
 
 			do_action( 'masteriyo_new_order_item', $wpdb->insert_id, $order_item );
 		}
@@ -100,22 +101,29 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 
 		global $wpdb;
 
-		$table_name = $this->get_table_name();
+		// Get from cache if available.
+		$order_item_obj = masteriyo('cache')->get( 'masteriyo-order-item-' . $order_item->get_id(), 'masteriyo-order-items' );
 
-		$results = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$table_name}
-				WHERE id = %d
-				LIMIT 1",
-				$order_item->get_id()
-			)
-		);
+		if ( false === $order_item_obj ) {
+			$table_name = $this->get_table_name();
 
-		if ( ! is_array( $results ) || count( $results ) === 0 ) {
-			throw new \Exception( __( 'Order item not found.', 'masteriyo' ) );
+			$results = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM {$table_name}
+					WHERE id = %d
+					LIMIT 1",
+					$order_item->get_id()
+				)
+			);
+
+			if ( ! is_array( $results ) || count( $results ) === 0 ) {
+				throw new \Exception( __( 'Order item not found.', 'masteriyo' ) );
+			}
+
+			$order_item_obj = $results[0];
+
+			masteriyo('cache')->set( 'masteriyo-item-' . $order_item->get_id(), $order_item_obj, 'masteriyo-order-items' );
 		}
-
-		$order_item_obj = $results[0];
 
 		$order_item->set_props( array(
 			'order_id'   => $order_item_obj->order_id,
@@ -166,6 +174,7 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 		$this->update_post_meta( $order_item );
 
 		$order_item->apply_changes();
+		$this->clear_cache( $order_item );
 
 		do_action( 'masteriyo_update_order_item', $order_item->get_id(), $order_item );
 	}
@@ -188,12 +197,22 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 
 		do_action( 'masteriyo_before_delete_' . $object_type, $id, $order_item );
 
+		/**
+		 * Delete order item metadata.
+		 */
+		$meta_table_info = $this->get_meta_table_info();
+		$GLOBALS['wpdb']->delete( $meta_table_info['table'], array( $meta_table_info['object_id_field'] => $order_item->get_id() ) );
+
+		/**
+		 * Delete order item.
+		 */
 		$GLOBALS['wpdb']->delete(
 			$this->get_table_name(),
 			array(
 				'id' => $order_item->get_id(),
 			)
 		);
+		$this->clear_cache( $order_item );
 		$order_item->set_id( 0 );
 
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $order_item );
@@ -261,7 +280,7 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 	}
 
 	/**
-	 * Fetch orders.
+	 * Fetch order items.
 	 *
 	 * @since 0.1.0
 	 *
@@ -347,5 +366,101 @@ class OrderItemRepository extends AbstractRepository implements RepositoryInterf
 		}
 
 		return $order_items;
+	}
+
+	/**
+	 * Delete order items.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $query_vars Query vars.
+	 * @return OrderItem[]
+	 */
+	public function delete_batch( $query_vars ) {
+		global $wpdb;
+		$where_args   = array(
+			'order_id' => array(
+				'placeholder' => '%d',
+				'key'         => 'order_id',
+			),
+			'course_id' => array(
+				'placeholder' => '%d',
+				'key'         => 'course_id',
+			),
+			'name' => array(
+				'placeholder' => '%s',
+				'key'         => 'name',
+			),
+			'type' => array(
+				'placeholder' => '%s',
+				'key'         => 'type',
+			),
+			'quantity' => array(
+				'placeholder' => '%d',
+				'key'         => 'quantity',
+			),
+		);
+		$where        = array();
+		$where_format = array();
+		$object_type  = masteriyo('order.item')->get_object_type();
+		$table_name   = $this->get_table_name();
+
+		/**
+		 * Prepare where args.
+		 */
+		foreach ( $where_args as $db_key => $where ) {
+			if ( ! empty( $query_vars[ $where['key'] ] ) ) {
+				$where[ $db_key ] = $query_vars[ $where['key'] ];
+				$where_format[]   = $where['placeholder'];
+			}
+		}
+
+		/**
+		 * Get ids of the order items that will be deleted.
+		 */
+		$where_clause = " WHERE 1=1 ";
+		$where_values = array();
+		$index        = 0;
+		foreach ( $where as $db_key => $value ) {
+			$where_clause  .= " AND {$db_key} = {$where_format[ $index ]} ";
+			$where_values[] = $value;
+			$index++;
+		}
+		$sql            = "SELECT id FROM {$table_name} {$where_clause}";
+		$order_item_ids = $wpdb->get_results( $wpdb->prepare( $sql, $where_values ) );
+		$order_item_ids = wp_list_pluck( $order_item_ids, 'id' );
+
+		do_action( 'masteriyo_before_batch_delete_' . $object_type, $query_vars );
+
+		/**
+		 * Delete order item metadata.
+		 */
+		$meta_table_info = $this->get_meta_table_info();
+		$item_ids_string = implode( ', ', $order_item_ids );
+		$wpdb->query( "DELETE FROM {$meta_table_info['table']} WHERE id in ({$item_ids_string})" );
+
+		// Delete order items.
+		$result = $wpdb->delete( $table_name, $where, $where_format );
+
+		// Clear cache.
+		foreach ( $order_item_ids as $order_item_id ) {
+			masteriyo('cache')->delete( 'masteriyo-item-' . $order_item_id, 'masteriyo-order-items' );
+			masteriyo('cache')->delete( $order_item_id, $this->meta_type . '_meta' );
+		}
+
+		do_action( 'masteriyo_after_batch_delete_' . $object_type, $query_vars, $result );
+	}
+
+	/**
+	 * Clear meta cache.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param OrderItem $item Order item object.
+	 */
+	public function clear_cache( &$item ) {
+		masteriyo('cache')->delete( 'masteriyo-item-' . $item->get_id(), 'masteriyo-order-items' );
+		masteriyo('cache')->delete( 'masteriyo-order-items-' . $item->get_order_id(), 'masteriyo-orders' );
+		masteriyo('cache')->delete( $item->get_id(), $this->meta_type . '_meta' );
 	}
 }

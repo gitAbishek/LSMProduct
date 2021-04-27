@@ -17,7 +17,7 @@ use ThemeGrill\Masteriyo\Models\Order;
 /**
  * OrderRepository class.
  */
-class OrderRepository extends AbstractRepository implements RepositoryInterface {
+class OrderRepository extends AbstractRepository implements RepositoryInterface, OrderRepositoryInterface {
 
 	/**
 	 * Data stored in meta keys, but not considered "meta".
@@ -127,6 +127,8 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 	 * @return void
 	 */
 	public function update( Model &$order ) {
+		$order->set_version( Constants::get( 'MASTERIYO_VERSION' ) );
+
 		$changes = $order->get_changes();
 
 		$post_data_keys = array(
@@ -353,5 +355,99 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 		}
 
 		return apply_filters( 'masteriyo_order_data_store_cpt_get_orders_query', $wp_query_args, $query_vars, $this );
+	}
+
+	/**
+	 * Read order items of a specific type from the database for this order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  Order $order Order object.
+	 * @param  string $type Order item type.
+	 * @return array
+	 */
+	public function read_items( $order, $type ) {
+		$order_items = false;
+
+		// Get from cache if available.
+		if ( $order->get_id() ) {
+			$order_items = masteriyo('cache')->get( 'masteriyo-order-items-' . $order->get_id(), 'masteriyo-orders' );
+		}
+
+		// Fetch from database.
+		if ( false === $order_items ) {
+			$order_items = masteriyo_get_order_items( array( 'order_id' => $order->get_id() ) );
+
+			foreach ( $order_items as $item ) {
+				masteriyo('cache')->set( 'masteriyo-item-' . $item->order_item_id, $item, 'masteriyo-order-items' );
+			}
+
+			if ( $order->get_id() ) {
+				masteriyo('cache')->set( 'masteriyo-order-items-' . $order->get_id(), $order_items, 'masteriyo-orders' );
+			}
+		}
+
+		return wp_list_filter( $order_items, array( 'type' => $type ) );
+	}
+
+	/**
+	 * Remove all line items (products, coupons, shipping, taxes) from the order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Order $order Order object.
+	 * @param string $type Order item type. Default null.
+	 */
+	public function delete_items( $order, $type = null ) {
+		$order_items_repo = masteriyo('order.item.store');
+
+		if ( ! empty( $type ) ) {
+			$order_items_repo->delete_batch( array(
+				'order_id' => $order->get_id(),
+				'type'     => $type,
+			) );
+		} else {
+			$order_items_repo->delete_batch( array( 'order_id' => $order->get_id() ) );
+		}
+
+		$this->clear_caches( $order );
+	}
+
+	/**
+	 * Get token ids for an order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Order $order Order object.
+	 * @return array
+	 */
+	public function get_payment_token_ids( $order ) {
+		$token_ids = array_filter( (array) get_post_meta( $order->get_id(), '_payment_tokens', true ) );
+		return $token_ids;
+	}
+
+	/**
+	 * Update token ids for an order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Order $order Order object.
+	 * @param array    $token_ids Payment token ids.
+	 */
+	public function update_payment_token_ids( $order, $token_ids ) {
+		update_post_meta( $order->get_id(), '_payment_tokens', $token_ids );
+	}
+
+	/**
+	 * Clear any caches.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Order $order Order object.
+	 */
+	protected function clear_caches( &$order ) {
+		clean_post_cache( $order->get_id() );
+		// Delete shop order transients.
+		masteriyo('cache')->delete( 'masteriyo-order-items-' . $order->get_id(), 'masteriyo-orders' );
 	}
 }

@@ -28,6 +28,9 @@ const paths = {
 		src: ['assets/img/*.png', 'assets/img/*.jpg'],
 		dest: 'assets/img',
 	},
+	php: {
+		src: 'templates/**/*.php',
+	},
 };
 
 function compileSass() {
@@ -64,6 +67,7 @@ function reloadBrowserSync(cb) {
 function watchChanges() {
 	watch(paths.sass.src, compileSass);
 	watch(paths.js.src, series(minifyJs, reloadBrowserSync));
+	watch(paths.php.src, reloadBrowserSync);
 	watch(paths.images.src, series(optimizeImages, reloadBrowserSync));
 }
 

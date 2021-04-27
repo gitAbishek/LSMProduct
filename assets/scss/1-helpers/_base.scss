@@ -1,0 +1,34 @@
+// Global
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+// Body properties
+body {
+  font-size: $text-sm;
+  line-height: $text-sm * 1.6;
+  font-family: "Roboto", sans-serif;
+  color: $text-color;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+ul li {
+  list-style: none;
+}
+// Hide and Show
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
+// Link
+a.primary-link {
+  color: $primary-color;
+  font-weight: 500;
+  text-decoration: underline;
+  &:hover {
+    color: rgba($primary-color, 0.8);
+  }
+}

@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { dest, series, src, watch } = require('gulp');
-const sass = require('@mr-hope/gulp-sass');
+const { sass } = require('@mr-hope/gulp-sass');
 const browserSync = require('browser-sync').create();
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
@@ -15,7 +15,7 @@ if (!process.env.WORDPRESS_URL) {
 // paths for the automation
 const paths = {
 	sass: {
-		src: 'assets/sass/**/*.scss',
+		src: 'assets/scss/**/*.scss',
 		dest: 'assets/css',
 	},
 
@@ -35,7 +35,11 @@ const paths = {
 
 function compileSass() {
 	return src(paths.sass.src)
-		.pipe(sass().on('error', sass.logError))
+		.pipe(
+			sass({
+				outputStyle: 'compressed',
+			}).on('error', sass.logError)
+		)
 		.pipe(autoprefixer())
 		.pipe(browserSync.stream())
 		.pipe(dest(paths.sass.dest));

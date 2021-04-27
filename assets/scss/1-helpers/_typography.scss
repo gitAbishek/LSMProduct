@@ -1,0 +1,67 @@
+// Text sizes
+$text-xs: 0.75rem;
+$text-sm: 0.875rem;
+$text-base: 1rem;
+$text-lg: 1.125rem;
+$text-xl: 1.5rem;
+
+//	Headings
+.gigantic,
+.huge,
+.large,
+.bigger,
+.big,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: $heading-color;
+	font-weight: bold;
+}
+.gigantic {
+	font-size: $text-xl * 2;
+	line-height: 1.09;
+	letter-spacing: -2px;
+}
+.huge,
+h1 {
+	font-size: $text-xl;
+	line-height: 1.05;
+	letter-spacing: -1px;
+}
+.large,
+h2 {
+	font-size: $text-lg;
+	line-height: 1.14;
+}
+.bigger,
+h3 {
+	font-size: $text-sm;
+	line-height: 1.38;
+}
+.big,
+h4 {
+	font-size: $text-xs;
+	line-height: 1.38;
+}
+.small,
+small {
+	font-size: 10px;
+	line-height: 1.2;
+}
+// Basic text styles
+p {
+	margin: 0 0 20px 0;
+}
+em {
+	font-style: italic;
+}
+strong,
+.strong {
+	font-weight: bold;
+}
+a {
+	text-decoration: none;
+}

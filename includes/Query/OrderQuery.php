@@ -43,6 +43,7 @@ class OrderQuery extends ObjectQuery {
 				'date_modified'        => '',
 				'date_paid'            => '',
 				'date_completed'       => '',
+				'version'              => '',
 			)
 		);
 	}

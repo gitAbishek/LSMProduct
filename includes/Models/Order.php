@@ -72,6 +72,7 @@ class Order extends Model {
 		'created_via'         => '',
 		'customer_ip_address' => '',
 		'customer_user_agent' => '',
+		'version'             => '',
 	);
 
 	/**
@@ -107,6 +108,15 @@ class Order extends Model {
 	 */
 	public function get_children() {
 		return array();
+	}
+
+	/**
+	 * Get items for this order.
+	 *
+	 * @return array
+	 */
+	public function get_order_items() {
+		return masteriyo_get_order_items( array( 'order_id' => $this->get_id() ) );
 	}
 
 	/*
@@ -297,6 +307,19 @@ class Order extends Model {
 		return $this->get_prop( 'customer_user_agent', $context );
 	}
 
+	/**
+	 * Get version.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_version( $context = 'view' ) {
+		return $this->get_prop( 'version', $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -455,5 +478,16 @@ class Order extends Model {
 	 */
 	public function set_customer_user_agent( $customer_user_agent ) {
 		$this->set_prop( 'customer_user_agent', $customer_user_agent );
+	}
+
+	/**
+	 * Set version.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $version Version.
+	 */
+	public function set_version( $version ) {
+		$this->set_prop( 'version', $version );
 	}
 }

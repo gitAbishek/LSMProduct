@@ -9,6 +9,8 @@
 
 namespace ThemeGrill\Masteriyo\Repository;
 
+use ThemeGrill\Masteriyo\Constants;
+use ThemeGrill\Masteriyo\Contracts\OrderRepositoryInterface;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\Order;
 
@@ -34,6 +36,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 		'created_via'         => '_created_via',
 		'customer_ip_address' => '_customer_ip_address',
 		'customer_user_agent' => '_customer_user_agent',
+		'version'             => '_version',
 	);
 
 	/**
@@ -46,6 +49,9 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface 
 	public function create( Model &$order ) {
 		if ( ! $order->get_date_created( 'edit' ) ) {
 			$order->set_date_created( current_time( 'mysql', true ) );
+		}
+		if ( ! $order->get_version( 'edit') ) {
+			$order->set_version( Constants::get( 'MASTERIYO_VERSION' ) );
 		}
 
 		$id = wp_insert_post(

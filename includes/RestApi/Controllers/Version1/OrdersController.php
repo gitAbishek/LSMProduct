@@ -245,6 +245,7 @@ class OrdersController extends PostsController {
 			'created_via'         => $order->get_created_via( $context ),
 			'customer_ip_address' => $order->get_customer_ip_address( $context ),
 			'customer_user_agent' => $order->get_customer_user_agent( $context ),
+			'version'             => $order->get_version( $context ),
 		);
 
 		return $data;
@@ -382,6 +383,11 @@ class OrdersController extends PostsController {
 				),
 				'customer_user_agent' => array(
 					'description' => __( 'Customer user agent.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'version'             => array(
+					'description' => __( 'Version of Masteriyo which last updated the order.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),

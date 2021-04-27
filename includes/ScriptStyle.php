@@ -148,7 +148,7 @@ class ScriptStyle {
 				'callback' => 'masteriyo_is_admin_page'
 			),
 			'public' => array(
-				'src'     => $this->get_asset_url( '/assets/dist/public.css' ),
+				'src'     => $this->get_asset_url( '/assets/css/public.css' ),
 				'has_rtl' => true,
 				'context' => 'public'
 			),

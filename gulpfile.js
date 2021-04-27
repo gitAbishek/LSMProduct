@@ -15,7 +15,7 @@ if (!process.env.WORDPRESS_URL) {
 // paths for the automation
 const paths = {
 	sass: {
-		src: 'assets/sass/**/*.scss',
+		src: 'assets/scss/**/*.scss',
 		dest: 'assets/css',
 	},
 

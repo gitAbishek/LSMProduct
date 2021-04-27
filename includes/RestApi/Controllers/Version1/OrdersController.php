@@ -239,6 +239,7 @@ class OrdersController extends PostsController {
 			'date_modified'       => $order->get_date_modified( $context ),
 			'customer_id'         => $order->get_customer_id( $context ),
 			'payment_method'      => $order->get_payment_method( $context ),
+			'payment_method_title'=> $order->get_payment_method_title( $context ),
 			'transaction_id'      => $order->get_transaction_id( $context ),
 			'date_paid'           => $order->get_date_paid( $context ),
 			'date_completed'      => $order->get_date_completed( $context ),
@@ -246,6 +247,22 @@ class OrdersController extends PostsController {
 			'customer_ip_address' => $order->get_customer_ip_address( $context ),
 			'customer_user_agent' => $order->get_customer_user_agent( $context ),
 			'version'             => $order->get_version( $context ),
+			'order_key'           => $order->get_order_key( $context ),
+			'customer_note'       => $order->get_customer_note( $context ),
+			'cart_hash'           => $order->get_cart_hash( $context ),
+			'billing'             => array(
+				'first_name' => $order->get_billing_first_name(),
+				'last_name'  => $order->get_billing_last_name(),
+				'company'    => $order->get_billing_company(),
+				'address_1'  => $order->get_billing_address_1(),
+				'address_2'  => $order->get_billing_address_2(),
+				'city'       => $order->get_billing_city(),
+				'postcode'   => $order->get_billing_postcode(),
+				'country'    => $order->get_billing_country(),
+				'state'      => $order->get_billing_state(),
+				'email'      => $order->get_billing_email(),
+				'phone'      => $order->get_billing_phone(),
+			),
 		);
 
 		return $data;
@@ -356,6 +373,12 @@ class OrdersController extends PostsController {
 					'default'     => 'paypal',
 					'enum'        => array( 'paypal' ),
 				),
+				'payment_method_title' => array(
+					'description' => __( 'Payment method title.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+					'enum'        => array( 'paypal' ),
+				),
 				'transaction_id'      => array(
 					'description' => __( 'Transaction ID.', 'masteriyo' ),
 					'type'        => 'string',
@@ -390,6 +413,90 @@ class OrdersController extends PostsController {
 					'description' => __( 'Version of Masteriyo which last updated the order.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+				),
+				'order_key'           => array(
+					'description' => __( 'Order key.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'customer_note'        => array(
+					'description' => __( 'Note left by customer during checkout.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'cart_hash'            => array(
+					'description' => __( 'MD5 hash of cart items to ensure orders are not modified.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
+				),
+				'billing'              => array(
+					'description' => __( 'Order billing details.', 'masteriyo' ),
+					'type'        => 'object',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'       => 'object',
+						'first_name' => array(
+							'description' => __( 'Order billing first name.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'last_name' => array(
+							'description' => __( 'Order billing last name.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'company' => array(
+							'description' => __( 'Order billing company name.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'address_1' => array(
+							'description' => __( 'Order billing address 1.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'address_1' => array(
+							'description' => __( 'Order billing address 1.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'address_2' => array(
+							'description' => __( 'Order billing address 2.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'city' => array(
+							'description' => __( 'Order billing city.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'postcode' => array(
+							'description' => __( 'Order billing post code.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'country' => array(
+							'description' => __( 'Order billing country.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'state' => array(
+							'description' => __( 'Order billing state.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'email' => array(
+							'description' => __( 'Order billing email address.', 'masteriyo' ),
+							'type'        => 'email',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'phone' => array(
+							'description' => __( 'Order billing phone number.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+					),
 				),
 				'meta_data'           => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
@@ -473,6 +580,11 @@ class OrdersController extends PostsController {
 			$order->set_payment_method( $request['payment_method'] );
 		}
 
+		// Set payment method title.
+		if ( isset( $request['payment_method_title'] ) ) {
+			$order->set_payment_method_title( $request['payment_method_title'] );
+		}
+
 		// Set transaction ID.
 		if ( isset( $request['transaction_id'] ) ) {
 			$order->set_transaction_id( $request['transaction_id'] );
@@ -501,6 +613,61 @@ class OrdersController extends PostsController {
 		// Set customer user agent.
 		if ( isset( $request['customer_user_agent'] ) ) {
 			$order->set_customer_user_agent( $request['customer_user_agent'] );
+		}
+
+		// Set order key.
+		if ( isset( $request['order_key'] ) ) {
+			$order->set_order_key( $request['order_key'] );
+		}
+
+		// Set customer note.
+		if ( isset( $request['customer_note'] ) ) {
+			$order->set_customer_note( $request['customer_note'] );
+		}
+
+		// Order billing details.
+		if ( isset( $request['billing']['first_name'] ) ) {
+			$order->set_billing_first_name( $request['billing']['first_name'] );
+		}
+
+		if ( isset( $request['billing']['last_name'] ) ) {
+			$order->set_billing_last_name( $request['billing']['last_name'] );
+		}
+
+		if ( isset( $request['billing']['company'] ) ) {
+			$order->set_billing_company( $request['billing']['company'] );
+		}
+
+		if ( isset( $request['billing']['address_1'] ) ) {
+			$order->set_billing_address_1( $request['billing']['address_1'] );
+		}
+
+		if ( isset( $request['billing']['address_2'] ) ) {
+			$order->set_billing_address_2( $request['billing']['address_2'] );
+		}
+
+		if ( isset( $request['billing']['city'] ) ) {
+			$order->set_billing_city( $request['billing']['city'] );
+		}
+
+		if ( isset( $request['billing']['postcode'] ) ) {
+			$order->set_billing_postcode( $request['billing']['postcode'] );
+		}
+
+		if ( isset( $request['billing']['country'] ) ) {
+			$order->set_billing_country( $request['billing']['country'] );
+		}
+
+		if ( isset( $request['billing']['state'] ) ) {
+			$order->set_billing_state( $request['billing']['state'] );
+		}
+
+		if ( isset( $request['billing']['email'] ) ) {
+			$order->set_billing_email( $request['billing']['email'] );
+		}
+
+		if ( isset( $request['billing']['phone'] ) ) {
+			$order->set_billing_phone( $request['billing']['phone'] );
 		}
 
 		// Allow set meta_data.

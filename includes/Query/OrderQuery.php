@@ -44,6 +44,20 @@ class OrderQuery extends ObjectQuery {
 				'date_paid'            => '',
 				'date_completed'       => '',
 				'version'              => '',
+				'order_key'            => '',
+				'customer_note'        => '',
+				'billing_first_name'   => '',
+				'billing_last_name'    => '',
+				'billing_company'      => '',
+				'billing_address_1'    => '',
+				'billing_address_2'    => '',
+				'billing_city'         => '',
+				'billing_state'        => '',
+				'billing_postcode'     => '',
+				'billing_country'      => '',
+				'billing_email'        => '',
+				'billing_phone'        => '',
+				'payment_method_title' => '',
 			)
 		);
 	}

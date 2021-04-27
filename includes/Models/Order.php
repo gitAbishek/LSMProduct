@@ -58,21 +58,37 @@ class Order extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'status'              => false,
-		'total'               => 0,
-		'currency'            => '',
-		'expiry_date'         => '',
-		'date_created'        => null,
-		'date_modified'       => null,
-		'customer_id'         => null,
-		'payment_method'      => '',
-		'transaction_id'      => '',
-		'date_paid'           => '',
-		'date_completed'      => '',
-		'created_via'         => '',
-		'customer_ip_address' => '',
-		'customer_user_agent' => '',
-		'version'             => '',
+		'status'               => false,
+		'total'                => 0,
+		'currency'             => '',
+		'expiry_date'          => '',
+		'date_created'         => null,
+		'date_modified'        => null,
+		'customer_id'          => null,
+		'payment_method'       => '',
+		'payment_method_title' => '',
+		'transaction_id'       => '',
+		'date_paid'            => '',
+		'date_completed'       => '',
+		'created_via'          => '',
+		'customer_ip_address'  => '',
+		'customer_user_agent'  => '',
+		'version'              => '',
+		'order_key'            => '',
+		'customer_note'        => '',
+		'cart_hash'            => '',
+		// Billing details.
+		'billing_first_name'   => '',
+		'billing_last_name'    => '',
+		'billing_company'      => '',
+		'billing_address_1'    => '',
+		'billing_address_2'    => '',
+		'billing_city'         => '',
+		'billing_postcode'     => '',
+		'billing_country'      => '',
+		'billing_state'        => '',
+		'billing_email'        => '',
+		'billing_phone'        => '',
 	);
 
 	/**
@@ -136,6 +152,19 @@ class Order extends Model {
 	 */
 	public function get_status( $context = 'view' ) {
 		return $this->get_prop( 'status', $context );
+	}
+
+	/**
+	 * Checks the order status against a passed in status.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param array|string $status Status to check.
+	 *
+	 * @return bool
+	 */
+	public function has_status( $status ) {
+		return apply_filters( 'masteriyo_order_has_status', ( is_array( $status ) && in_array( $this->get_status(), $status, true ) ) || $this->get_status() === $status, $this, $status );
 	}
 
 	/**
@@ -320,6 +349,274 @@ class Order extends Model {
 		return $this->get_prop( 'version', $context );
 	}
 
+	/**
+	 * Get order_key.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_order_key( $context = 'view' ) {
+		return $this->get_prop( 'order_key', $context );
+	}
+
+	/**
+	 * Get customer_note.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_customer_note( $context = 'view' ) {
+		return $this->get_prop( 'customer_note', $context );
+	}
+
+	/**
+	 * Get cart_hash.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_cart_hash( $context = 'view' ) {
+		return $this->get_prop( 'cart_hash', $context );
+	}
+
+	/**
+	 * Get user's billing first name.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_first_name( $context = 'view' ) {
+		return $this->get_prop( 'billing_first_name', $context );
+	}
+
+	/**
+	 * Get user's billing last name.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_last_name( $context = 'view' ) {
+		return $this->get_prop( 'billing_last_name', $context );
+	}
+
+	/**
+	 * Get user's billing company.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_company( $context = 'view' ) {
+		return $this->get_prop( 'billing_company', $context );
+	}
+
+	/**
+	 * Get user's billing address.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_address( $context = 'view' ) {
+		return $this->get_billing_address_1( $context );
+	}
+
+	/**
+	 * Get user's billing address 1.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_address_1( $context = 'view' ) {
+		return $this->get_prop( 'billing_address_1', $context );
+	}
+
+	/**
+	 * Get user's billing address 1.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_address_2( $context = 'view' ) {
+		return $this->get_prop( 'billing_address_2', $context );
+	}
+
+	/**
+	 * Get user's billing city.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_city( $context = 'view' ) {
+		return $this->get_prop( 'billing_city', $context );
+	}
+
+	/**
+	 * Get user's billing post code.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_postcode( $context = 'view' ) {
+		return $this->get_prop( 'billing_postcode', $context );
+	}
+
+	/**
+	 * Get user's billing country.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_country( $context = 'view' ) {
+		return $this->get_prop( 'billing_country', $context );
+	}
+
+	/**
+	 * Get user's billing state.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_state( $context = 'view' ) {
+		return $this->get_prop( 'billing_state', $context );
+	}
+
+	/**
+	 * Get user's billing email.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_email( $context = 'view' ) {
+		return $this->get_prop( 'billing_email', $context );
+	}
+
+	/**
+	 * Get user's billing phone number.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_phone( $context = 'view' ) {
+		return $this->get_prop( 'billing_phone', $context );
+	}
+
+	/**
+	 * Alias for get_customer_id().
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return integer
+	 */
+	public function get_user_id( $context = 'view' ) {
+		return $this->get_customer_id( $context );
+	}
+
+	/**
+	 * Get the customer associated with the order. False for guests.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return User|false
+	 */
+	public function get_customer() {
+		return $this->get_customer_id() ? masteriyo_get_user( $this->get_customer_id() ) : false;
+	}
+
+	/**
+	 * Alias for get_customer().
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return User|false
+	 */
+	public function get_user() {
+		return $this->get_customer();
+	}
+
+	/**
+	 * Get payment method title.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return string
+	 */
+	public function get_payment_method_title( $context = 'view' ) {
+		return $this->get_prop( 'payment_method_title', $context );
+	}
+
+	/**
+	 * Returns the order billing address in raw, non-formatted way.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array The stored address after filter.
+	 */
+	public function get_address() {
+		return apply_filters(
+			'masteriyo_get_order_address',
+			array(
+				'first_name' => $this->get_billing_first_name(),
+				'last_name'  => $this->get_billing_last_name(),
+				'company'    => $this->get_billing_company(),
+				'address_1'  => $this->get_billing_address_1(),
+				'address_2'  => $this->get_billing_address_2(),
+				'city'       => $this->get_billing_city(),
+				'postcode'   => $this->get_billing_postcode(),
+				'country'    => $this->get_billing_country(),
+				'state'      => $this->get_billing_state(),
+				'email'      => $this->get_billing_email(),
+				'phone'      => $this->get_billing_phone(),
+			),
+			$this
+		);
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -489,5 +786,298 @@ class Order extends Model {
 	 */
 	public function set_version( $version ) {
 		$this->set_prop( 'version', $version );
+	}
+
+	/**
+	 * Set order_key.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $order_key order_key.
+	 */
+	public function set_order_key( $order_key ) {
+		$this->set_prop( 'order_key', $order_key );
+	}
+
+	/**
+	 * Set customer_note.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $customer_note customer_note.
+	 */
+	public function set_customer_note( $customer_note ) {
+		$this->set_prop( 'customer_note', $customer_note );
+	}
+
+	/**
+	 * Set cart_hash.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $cart_hash cart_hash.
+	 */
+	public function set_cart_hash( $cart_hash ) {
+		$this->set_prop( 'cart_hash', $cart_hash );
+	}
+
+	/**
+	 * Set user's billing first name.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $first_name User's billing first name.
+	 * @return void
+	 */
+	public function set_billing_first_name( $first_name ) {
+		$this->set_prop( 'billing_first_name', $first_name );
+	}
+
+	/**
+	 * Set user's billing last name.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $last_name User's billing last name.
+	 * @return void
+	 */
+	public function set_billing_last_name( $last_name ) {
+		$this->set_prop( 'billing_last_name', $last_name );
+	}
+
+	/**
+	 * Set user's billing company.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $company User's billing company.
+	 * @return void
+	 */
+	public function set_billing_company( $company ) {
+		$this->set_prop( 'billing_company', $company );
+	}
+
+	/**
+	 * Set user's billing address_1.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $address_1 User's billing address_1.
+	 * @return void
+	 */
+	public function set_billing_address_1( $address_1 ) {
+		$this->set_prop( 'billing_address_1', $address_1 );
+	}
+
+	/**
+	 * Set user's billing address_2.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $address_2 User's billing address_2.
+	 * @return void
+	 */
+	public function set_billing_address_2( $address_2 ) {
+		$this->set_prop( 'billing_address_2', $address_2 );
+	}
+
+	/**
+	 * Set user's billing city.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $city User's billing city.
+	 */
+	public function set_billing_city( $city ) {
+		$this->set_prop( 'billing_city', $city );
+	}
+
+	/**
+	 * Set user's billing post code.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $postcode User's billing post code.
+	 */
+	public function set_postcode( $postcode ) {
+		$this->set_prop( 'billing_postcode', $postcode );
+	}
+
+
+	/**
+	 * Set user's billing country.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $country User's country.
+	 */
+	public function set_billing_country( $country ) {
+		$this->set_prop( 'billing_country', $country );
+	}
+
+	/**
+	 * Set user's billing state.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $state User's billing state.
+	 */
+	public function set_billing_state( $state ) {
+		$this->set_prop( 'billing_state', $state );
+	}
+
+	/**
+	 * Set user's billing email.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $email User's billing email.
+	 */
+	public function set_billing_email( $email ) {
+		$this->set_prop( 'billing_email', $email );
+	}
+
+	/**
+	 * Set user's billing phone.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $phone User's billing phone.
+	 */
+	public function set_billing_phone( $phone ) {
+		$this->set_prop( 'billing_phone', $phone );
+	}
+
+	/**
+	 * Set payment method title.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $value Payment method title.
+	 */
+	public function set_payment_method_title( $value ) {
+		$this->set_prop( 'payment_method_title', $value );
+	}
+
+	/**
+	 * Maybe set date paid.
+	 *
+	 * Sets the date paid variable when transitioning to the payment complete
+	 * order status. This is either processing or completed. This is not filtered
+	 * to avoid infinite loops e.g. if loading an order via the filter.
+	 *
+	 * Date paid is set once in this manner - only when it is not already set.
+	 * This ensures the data exists even if a gateway does not use the
+	 * `payment_complete` method.
+	 *
+	 * @since 0.1.0
+	 */
+	public function maybe_set_date_paid() {
+		// This logic only runs if the date_paid prop has not been set yet.
+		if ( ! $this->get_date_paid( 'edit' ) ) {
+			$payment_completed_status = apply_filters( 'masteriyo_payment_complete_order_status', $this->needs_processing() ? 'processing' : 'completed', $this->get_id(), $this );
+
+			if ( $this->has_status( $payment_completed_status ) ) {
+				// If payment complete status is reached, set paid now.
+				$this->set_date_paid( time() );
+
+			} elseif ( 'processing' === $payment_completed_status && $this->has_status( 'completed' ) ) {
+				// If payment complete status was processing, but we've passed that and still have no date, set it now.
+				$this->set_date_paid( time() );
+			}
+		}
+	}
+
+	/**
+	 * Maybe set date completed.
+	 *
+	 * Sets the date completed variable when transitioning to completed status.
+	 *
+	 * @since 0.1.0
+	 */
+	protected function maybe_set_date_completed() {
+		if ( $this->has_status( 'completed' ) ) {
+			$this->set_date_completed( time() );
+		}
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Conditionals
+	|--------------------------------------------------------------------------
+	|
+	| Checks if a condition is true or false.
+	|
+	*/
+
+	/**
+	 * Returns true if the order has a billing address.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	public function has_billing_address() {
+		return $this->get_billing_address_1() || $this->get_billing_address_2();
+	}
+
+	/**
+	 * Check if an order key is valid.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $key Order key.
+	 *
+	 * @return bool
+	 */
+	public function key_is_valid( $key ) {
+		return hash_equals( $this->get_order_key(), $key );
+	}
+
+	/**
+	 * See if order matches cart_hash.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $cart_hash Cart hash.
+	 *
+	 * @return bool
+	 */
+	public function has_cart_hash( $cart_hash = '' ) {
+		return hash_equals( $this->get_cart_hash(), $cart_hash ); // @codingStandardsIgnoreLine
+	}
+
+	/**
+	 * Checks if an order can be edited, specifically for use on the Edit Order screen.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_editable() {
+		return apply_filters( 'masteriyo_order_is_editable', in_array( $this->get_status(), array( 'mto-pending', 'mto-on-hold' ), true ), $this );
+	}
+
+	/**
+	 * Returns if an order has been paid for based on the order status.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_paid() {
+		return apply_filters( 'masteriyo_order_is_paid', $this->has_status( masteriyo_get_is_paid_statuses() ), $this );
+	}
+
+	/**
+	 * Checks if an order needs payment, based on status and order total.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return bool
+	 */
+	public function needs_payment() {
+		$valid_order_statuses = apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( 'mto-pending', 'mto-failed' ), $this );
+		return apply_filters( 'masteriyo_order_needs_payment', ( $this->has_status( $valid_order_statuses ) && $this->get_total() > 0 ), $this, $valid_order_statuses );
 	}
 }

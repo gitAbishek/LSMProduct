@@ -114,7 +114,9 @@ class Install {
 			type varchar(200),
 			quantity BIGINT,
 			total BIGINT,
-			PRIMARY KEY (id)
+			PRIMARY KEY (id),
+			KEY course_id (course_id),
+			KEY order_id (order_id)
 		) $charset_collate;";
 
 		return $sql;
@@ -136,7 +138,9 @@ class Install {
 			order_item_id BIGINT UNSIGNED NOT NULL,
 			meta_key varchar(200) NOT NULL,
 			meta_value text,
-			PRIMARY KEY (meta_id)
+			PRIMARY KEY (meta_id),
+			KEY order_item_id (order_item_id),
+			KEY meta_key (meta_key(32))
 		) $charset_collate;";
 
 		return $sql;

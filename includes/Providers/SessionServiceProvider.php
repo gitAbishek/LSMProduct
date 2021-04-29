@@ -45,6 +45,6 @@ class SessionServiceProvider extends AbstractServiceProvider {
 
 		$this->getContainer()
 			->add( 'session', SessionHandler::class, true )
-			->addArgument( 'session.store');
+			->addArgument( 'session.store' );
 	}
 }

@@ -78,11 +78,11 @@ final class Totals {
 	 * @var array
 	 */
 	protected $totals = array(
-		'fees_total'         => 0,
-		'items_subtotal'     => 0,
-		'items_total'        => 0,
-		'total'              => 0,
-		'discounts_total'    => 0,
+		'fees_total'      => 0,
+		'items_subtotal'  => 0,
+		'items_total'     => 0,
+		'total'           => 0,
+		'discounts_total' => 0,
 	);
 
 	/**
@@ -120,11 +120,11 @@ final class Totals {
 	 */
 	protected function get_default_item_props() {
 		return (object) array(
-			'object'             => null,
-			'quantity'           => 0,
-			'product'            => false,
-			'subtotal'           => 0,
-			'total'              => 0,
+			'object'   => null,
+			'quantity' => 0,
+			'product'  => false,
+			'subtotal' => 0,
+			'total'    => 0,
 		);
 	}
 
@@ -136,7 +136,7 @@ final class Totals {
 	 */
 	protected function get_default_fee_props() {
 		return (object) array(
-			'object'    => null,
+			'object' => null,
 		);
 	}
 
@@ -180,9 +180,9 @@ final class Totals {
 		$fee_running_total = 0;
 
 		foreach ( $this->cart->get_fees() as $fee_key => $fee_object ) {
-			$fee            = $this->get_default_fee_props();
-			$fee->object    = $fee_object;
-			$fee->total     = masteriyo_add_number_precision_deep( $fee->object->amount );
+			$fee         = $this->get_default_fee_props();
+			$fee->object = $fee_object;
+			$fee->total  = masteriyo_add_number_precision_deep( $fee->object->amount );
 
 			// Negative fees should not make the order total go negative.
 			if ( 0 > $fee->total ) {
@@ -196,68 +196,10 @@ final class Totals {
 			$fee_running_total += $fee->total;
 
 			// Set totals within object.
-			$fee->object->total    = masteriyo_remove_number_precision_deep( $fee->total );
+			$fee->object->total = masteriyo_remove_number_precision_deep( $fee->total );
 
 			$this->fees[ $fee_key ] = $fee;
 		}
-	}
-
-	/**
-	 * Return array of coupon objects from the cart. Normalises data
-	 * into the same format for use by this class.
-	 *
-	 * @since  0.1.0
-	 */
-	protected function get_coupons_from_cart() {
-		$this->coupons = $this->cart->get_coupons();
-
-		foreach ( $this->coupons as $coupon ) {
-			switch ( $coupon->get_discount_type() ) {
-				case 'fixed_product':
-					$coupon->sort = 1;
-					break;
-				case 'percent':
-					$coupon->sort = 2;
-					break;
-				case 'fixed_cart':
-					$coupon->sort = 3;
-					break;
-				default:
-					$coupon->sort = 0;
-					break;
-			}
-
-			// Allow plugins to override the default order.
-			$coupon->sort = apply_filters( 'masteriyo_coupon_sort', $coupon->sort, $coupon );
-		}
-
-		uasort( $this->coupons, array( $this, 'sort_coupons_callback' ) );
-	}
-
-	/**
-	 * Sort coupons so discounts apply consistently across installs.
-	 *
-	 * In order of priority;
-	 *  - sort param
-	 *  - usage restriction
-	 *  - coupon value
-	 *  - ID
-	 *
-	 * @param WC_Coupon $a Coupon object.
-	 * @param WC_Coupon $b Coupon object.
-	 * @return int
-	 */
-	protected function sort_coupons_callback( $a, $b ) {
-		if ( $a->sort === $b->sort ) {
-			if ( $a->get_limit_usage_to_x_items() === $b->get_limit_usage_to_x_items() ) {
-				if ( $a->get_amount() === $b->get_amount() ) {
-					return $b->get_id() - $a->get_id();
-				}
-				return ( $a->get_amount() < $b->get_amount() ) ? -1 : 1;
-			}
-			return ( $a->get_limit_usage_to_x_items() < $b->get_limit_usage_to_x_items() ) ? -1 : 1;
-		}
-		return ( $a->sort < $b->sort ) ? -1 : 1;
 	}
 
 	/**
@@ -280,7 +222,7 @@ final class Totals {
 	 */
 	protected function get_discounted_price_in_cents( $item_key ) {
 		$item  = $this->items[ $item_key ];
-		$price = isset( $this->coupon_discount_totals[ $item_key ] ) ? $item->price - $this->coupon_discount_totals[ $item_key ] : $item->price;
+		$price = $item->price;
 		return $price;
 	}
 
@@ -345,7 +287,7 @@ final class Totals {
 		$this->calculate_item_subtotals();
 
 		foreach ( $this->items as $item_key => $item ) {
-			$item->total     = $this->get_discounted_price_in_cents( $item_key );
+			$item->total = $this->get_discounted_price_in_cents( $item_key );
 
 			if ( has_filter( 'masteriyo_get_discounted_price' ) ) {
 				/**
@@ -360,7 +302,7 @@ final class Totals {
 				);
 			}
 
-			$this->cart->cart_contents[ $item_key ]['line_total']             = masteriyo_remove_number_precision( $item->total );
+			$this->cart->cart_contents[ $item_key ]['line_total'] = masteriyo_remove_number_precision( $item->total );
 		}
 
 		$items_total = $this->get_rounded_items_total( $this->get_values_for_total( 'total' ) );

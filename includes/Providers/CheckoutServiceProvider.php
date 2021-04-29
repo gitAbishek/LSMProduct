@@ -1,6 +1,6 @@
 <?php
 /**
- * Notice model service provider.
+ * Checkout service provider.
  */
 
 namespace ThemeGrill\Masteriyo\Providers;
@@ -8,9 +8,9 @@ namespace ThemeGrill\Masteriyo\Providers;
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Notice;
+use ThemeGrill\Masteriyo\Checkout;
 
-class NoticeServiceProvider extends AbstractServiceProvider {
+class CheckoutServiceProvider extends AbstractServiceProvider {
 	/**
 	 * The provided array is a way to let the container
 	 * know that a service is provided by this service
@@ -23,8 +23,8 @@ class NoticeServiceProvider extends AbstractServiceProvider {
 	 * @var array
 	 */
 	protected $provides = array(
-		'notice',
-		'\ThemeGrill\Masteriyo\Notice',
+		'checkout',
+		'\ThemeGrill\Masteriyo\Checkout',
 	);
 
 	/**
@@ -36,6 +36,6 @@ class NoticeServiceProvider extends AbstractServiceProvider {
 	* @since 0.1.0
 	*/
 	public function register() {
-		$this->getContainer()->add( 'notice', Notice::class, true )->addArgument( 'session' );
+		$this->getContainer()->add( 'checkout', Checkout::class, true );
 	}
 }

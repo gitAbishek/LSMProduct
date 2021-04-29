@@ -3,6 +3,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
+#: assets/js/src/screens/404/FourOFour.tsx:24
+msgid "404"
+msgstr ""
+
 #: assets/js/src/components/common/ImageUpload.tsx:131
 msgid "Remove featured Image"
 msgstr ""
@@ -19,6 +23,18 @@ msgstr ""
 msgid "Media files jpeg, png are only supported"
 msgstr ""
 
+#: assets/js/src/screens/404/FourOFour.tsx:26
+msgid "Oops - Page Not Found"
+msgstr ""
+
+#: assets/js/src/screens/404/FourOFour.tsx:29
+msgid "We can not find the page you are looking for"
+msgstr ""
+
+#: assets/js/src/screens/404/FourOFour.tsx:33
+msgid "Back to Courses"
+msgstr ""
+
 #: assets/js/src/screens/courses/AddNewCourse.tsx:49
 #: assets/js/src/screens/courses/AllCourses.tsx:34
 msgid "Add New Course"
@@ -28,8 +44,8 @@ msgstr ""
 msgid "Add Course"
 msgstr ""
 
-#: assets/js/src/screens/courses/AddNewCourse.tsx:75
-#: assets/js/src/screens/courses/EditCourse.tsx:105
+#: assets/js/src/screens/courses/AddNewCourse.tsx:77
+#: assets/js/src/screens/courses/EditCourse.tsx:106
 #: assets/js/src/screens/courses/components/CourseList.tsx:130
 #: assets/js/src/screens/lessons/AddNewLesson.tsx:146
 #: assets/js/src/screens/lessons/EditLesson.tsx:178
@@ -63,21 +79,21 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: assets/js/src/screens/courses/EditCourse.tsx:102
+#: assets/js/src/screens/courses/EditCourse.tsx:103
 #: assets/js/src/screens/quiz/EditQuiz.tsx:111
 #: assets/js/src/screens/quiz/components/question/Question.tsx:165
 msgid "Update"
 msgstr ""
 
-#: assets/js/src/screens/courses/EditCourse.tsx:41
+#: assets/js/src/screens/courses/EditCourse.tsx:42
 msgid " is updated successfully."
 msgstr ""
 
-#: assets/js/src/screens/courses/EditCourse.tsx:42
+#: assets/js/src/screens/courses/EditCourse.tsx:43
 msgid "You can keep editing it"
 msgstr ""
 
-#: assets/js/src/screens/courses/EditCourse.tsx:80
+#: assets/js/src/screens/courses/EditCourse.tsx:81
 msgid "Edit Course: "
 msgstr ""
 

@@ -19,7 +19,7 @@
 				}
 			} else {
 				$message = esc_html__( 'Please fill in your details above to see available payment methods.', 'masteriyo' );
-				if ( masteriyo_get_current_user()->get_country() ) {
+				if ( masteriyo_get_current_user()->get_billing_country() ) {
 					$message = esc_html__( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'masteriyo' );
 				}
 				printf(
@@ -48,6 +48,6 @@
 </button>
 
 <?php
-	wp_nonce_field( 'masteriyo_process_checkout', 'masteriyo-process-checkout-nonce' );
+	wp_nonce_field( 'masteriyo-process_checkout', 'masteriyo-process-checkout-nonce' );
 	do_action( 'masteriyo_checkout_summary_after_submit' );
 

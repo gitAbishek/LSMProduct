@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use ThemeGrill\Masteriyo\Notice;
 use ThemeGrill\Masteriyo\Countries;
 
 ?>
@@ -29,8 +30,13 @@ use ThemeGrill\Masteriyo\Countries;
 					<?php esc_html_e( 'First Name', 'masteriyo' ); ?>
 				</label>
 				<input
-					type="text" id="first-name" name="first-name"
-					value="<?php echo esc_attr( $user->get_first_name() ); ?>" />
+					type="text" id="billing-first-name" name="billing_first_name"
+					value="" />
+			<?php if ( masteriyo_notice_exists( 'billing_first_name', Notice::ERROR ) ) : ?>
+				<div class="error danger-msg">
+				<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_first_name', Notice::ERROR ) ); ?>
+				</div>
+			<?php endif; ?>
 			</div>
 
 			<div class="checkout----lname col-2">
@@ -38,8 +44,14 @@ use ThemeGrill\Masteriyo\Countries;
 					<?php esc_html_e( 'Last Name', 'masteriyo' ); ?>
 				</label>
 				<input
-					type="text" id="last-name" name="last-name"
-					value="<?php echo esc_attr( $user->get_last_name() ); ?>" />
+					type="text" id="billing-last-name" name="billing_last_name"
+					value="" />
+
+				<?php if ( masteriyo_notice_exists( 'billing_last_name', Notice::ERROR ) ) : ?>
+					<div class="error danger-msg">
+					<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_last_name', Notice::ERROR ) ); ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 
@@ -49,9 +61,14 @@ use ThemeGrill\Masteriyo\Countries;
 					<?php esc_html_e( 'Email Address', 'masteriyo' ); ?>
 				</label>
 				<input
-					type="text" id="email" name="email"
-					value="<?php echo esc_attr( $user->get_email() ); ?>" />
+					type="text" id="billing-email" name="billing_email"
+					value="" />
 			</div>
+		<?php if ( masteriyo_notice_exists( 'billing_email', Notice::ERROR ) ) : ?>
+			<div class="error danger-msg">
+			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_email', Notice::ERROR ) ); ?>
+			</div>
+		<?php endif; ?>
 		</div>
 
 		<div class="checkout---phone-wrapper">
@@ -60,9 +77,14 @@ use ThemeGrill\Masteriyo\Countries;
 					<?php esc_html_e( 'Phone', 'masteriyo' ); ?>
 				</label>
 				<input
-					type="tel" id="phone" name="phone"
-					value="<?php echo esc_attr( '' ); ?>" />
+					type="tel" id="billing-phone" name="billing_phone"
+					value="" />
 			</div>
+		<?php if ( masteriyo_notice_exists( 'billing_phone', Notice::ERROR ) ) : ?>
+			<div class="error danger-msg">
+			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_phone', Notice::ERROR ) ); ?>
+			</div>
+		<?php endif; ?>
 		</div>
 
 		<div class="checkout---company-name-wrapper">
@@ -70,20 +92,29 @@ use ThemeGrill\Masteriyo\Countries;
 				<label for="company-name">
 					<?php esc_html_e( 'Company Name', 'masteriyo' ); ?>
 				</label>
-				<input type="text" id="company-name" name="company-name" />
+				<input type="text" id="billing-company" name="billing_company" />
 			</div>
+		<?php if ( masteriyo_notice_exists( 'billing_company', Notice::ERROR ) ) : ?>
+			<div class="error danger-msg">
+			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_company', Notice::ERROR ) ); ?>
+			</div>
+		<?php endif; ?>
 		</div>
 
 		<div class="checkout---country-wrapper">
 			<div class="checkout----country col-1">
 				<label for="country">Country/Region</label>
 				<div class="dropdown">
-					<select name="country" id="country">
-					<?php masteriyo( 'countries' )->country_dropdown_options( $user->get_country() ); ?>
+					<select name="billing_country" id="billing-country">
+					<?php masteriyo( 'countries' )->country_dropdown_options(); ?>
 					</select>
 				</div>
-
 			</div>
+		<?php if ( masteriyo_notice_exists( 'billing_country', Notice::ERROR ) ) : ?>
+			<div class="error danger-msg">
+				<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_country', Notice::ERROR ) ); ?>
+			</div>
+		<?php endif; ?>
 		</div>
 
 		<div class="checkout---street-wrapper">
@@ -91,9 +122,21 @@ use ThemeGrill\Masteriyo\Countries;
 				<label for="street1">
 					<?php esc_html_e( 'Street Address', 'masteriyo' ); ?>
 				</label>
-				<input type="text" id="street1" name="street1" />
-				<input type="text" id="street2" name="street2" />
+				<input type="text" id="billing-address-1" name="billing_address_1" />
+				<input type="text" id="billing-address-2" name="billing_address_2" />
 			</div>
+
+		<?php if ( masteriyo_notice_exists( 'billing_address_1', Notice::ERROR ) ) : ?>
+			<div class="error danger-msg">
+			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_address_1', Notice::ERROR ) ); ?>
+			</div>
+		<?php endif; ?>
+
+		<?php if ( masteriyo_notice_exists( 'billing_address_2', Notice::ERROR ) ) : ?>
+			<div class="error danger-msg">
+			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_address_2', Notice::ERROR ) ); ?>
+			</div>
+		<?php endif; ?>
 		</div>
 
 		<div class="checkout---postcode-wrapper">
@@ -102,11 +145,17 @@ use ThemeGrill\Masteriyo\Countries;
 					<?php esc_html_e( 'Postcode / ZIP code', 'masteriyo' ); ?>
 				</label>
 				<input
-					class="danger-msg" type="text" id="postcode" name="postcode"
-					value="<?php esc_attr( $user->get_zip_code() ); ?>" />
+					class="danger-msg" type="text" id="billing-postcode"
+					name="billing_postcode"
+					value="" />
 			</div>
-			<div class="error danger-msg">This field is required</div>
+		<?php if ( masteriyo_notice_exists( 'billing_postcode', Notice::ERROR ) ) : ?>
+			<div class="error danger-msg">
+			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_postcode', Notice::ERROR ) ); ?>
+			</div>
+		<?php endif; ?>
 		</div>
+
 
 	</form>
 </div>

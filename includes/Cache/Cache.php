@@ -32,7 +32,7 @@ class Cache implements CacheInterface {
 	 * @return string
 	 */
 	public function get_prefix( $group ) {
-		// Get cache key - uses cache key wc_orders_cache_prefix to invalidate when needed.
+		// Get cache key - uses cache key masteriyo_orders_cache_prefix to invalidate when needed.
 		$prefix = wp_cache_get( 'masteriyo_' . $group . '_cache_prefix', $group );
 
 		if ( false === $prefix ) {

@@ -15,8 +15,8 @@
   ],
   "autoload": {
     "files": [
-      "includes/Helper/Core.php",
       "includes/Helper/Arr.php",
+      "includes/Helper/Core.php",
       "includes/Helper/Term.php",
       "includes/Helper/Conditional.php",
       "includes/Helper/Format.php",
@@ -25,7 +25,6 @@
       "includes/Helper/Page.php",
       "includes/Helper/Notice.php",
       "includes/Helper/Order.php",
-      "includes/Helper/Notice.php",
       "includes/Helper/Course.php"
     ],
     "psr-4": {

@@ -22,20 +22,20 @@ class FormHandlersServiceProvider extends AbstractServiceProvider {
 	 *
 	 * @var array
 	 */
-	 protected $provides = array(
+	protected $provides = array(
 		'formhandlers',
-		'ThemeGrill\Masteriyo\FormHandler\FormHandlers'
-	 );
+		'ThemeGrill\Masteriyo\FormHandler\FormHandlers',
+	);
 
-	 /**
-	  * This is where the magic happens, within the method you can
-	  * access the container and register or retrieve anything
-	  * that you need to, but remember, every alias registered
-	  * within this method must be declared in the `$provides` array.
-	  *
-	  * @since 0.1.0
-	  */
-	 public function register() {
+	/**
+	 * This is where the magic happens, within the method you can
+	* access the container and register or retrieve anything
+	* that you need to, but remember, every alias registered
+	* within this method must be declared in the `$provides` array.
+	*
+	* @since 0.1.0
+	*/
+	public function register() {
 		$this->getContainer()->add( 'formhandlers', FormHandlers::class, true );
-	 }
+	}
 }

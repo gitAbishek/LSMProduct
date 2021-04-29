@@ -143,7 +143,6 @@ class ScriptStyle {
 	 * @return array
 	 */
 	private function init_styles() {
-<<<<<<< HEAD
 		$this->styles = apply_filters(
 			'masteriyo_enqueue_styles',
 			array(
@@ -160,22 +159,6 @@ class ScriptStyle {
 				),
 			)
 		);
-=======
-		$this->styles = apply_filters( 'masteriyo_enqueue_styles', array(
-			'admin' => array(
-				'src'      => $this->get_asset_url( '/assets/js/build/app.css' ),
-				'has_rtl'  => true,
-				'context'  => 'admin',
-				'callback' => 'masteriyo_is_admin_page'
-			),
-			'public' => array(
-				'src'      => $this->get_asset_url( '/assets/dist/public.css' ),
-				'has_rtl'  => true,
-				'context'  => 'public',
-				// 'callback' => 'masteriyo_is_course_list_page'
-			),
-		) );
->>>>>>> Implementing order system.
 	}
 
 	/**

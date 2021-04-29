@@ -1,6 +1,6 @@
 <?php
 /**
- * This ongoing trait will have shared calculation logic between WC_Abstract_Order and WC_Cart_Totals classes.
+ * This ongoing trait will have shared calculation logic between Totals classes.
  *
  * @package ThemeGrill\Masteriyo\Traits
  * @version 0.1.0
@@ -70,20 +70,4 @@ trait ItemTotals {
 	protected static function round_at_subtotal() {
 		return 'yes' === get_option( 'masteriyo_tax_round_at_subtotal' );
 	}
-
-	/**
-	 * Apply rounding to an array of taxes before summing. Rounds to store DP setting, ignoring precision.
-	 *
-	 * @since  0.1.0
-	 * @param  float $value    Tax value.
-	 * @param  bool  $in_cents Whether precision of value is in cents.
-	 * @return float
-	 */
-	protected static function round_line_tax( $value, $in_cents = true ) {
-		if ( ! self::round_at_subtotal() ) {
-			$value = wc_round_tax_total( $value, $in_cents ? 0 : null );
-		}
-		return $value;
-	}
-
 }

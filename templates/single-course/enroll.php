@@ -17,7 +17,7 @@ global $course;
 
 		<?php do_action( 'masteriyo_before_add_to_cart_button' ); ?>
 
-		<button type="submit" name="add_to_cart" value="<?php echo esc_attr( $course->get_id() ); ?>"
+		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $course->get_id() ); ?>"
 			class="single_add_to_cart_button button alt btn mto-py-4 mto-px-6 md:mto-px-10 mto-text-base mto-mb-6 md:mto-mb-32">
 			<?php echo esc_html( $course->single_add_to_cart_text() ); ?>
 		</button>

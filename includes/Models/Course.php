@@ -109,6 +109,16 @@ class Course extends Model {
 		return wp_get_attachment_url( $this->get_featured_image() );
 	}
 
+	/**
+	 * If the stock level comes from another product ID, this should be modified.
+	 *
+	 * @since  0.1.0
+	 * @return int
+	 */
+	public function get_stock_managed_by_id() {
+		return $this->get_id();
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Non-CRUD Getters

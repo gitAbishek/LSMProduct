@@ -178,7 +178,7 @@ class Cart {
 	/**
 	 * Get the cart data from the PHP session and store it in class variables.
 	 *
-	 * @since 3.2.0
+	 * @since 0.1.0
 	 */
 	public function get_cart_from_session() {
 		do_action( 'masteriyo_load_cart_from_session' );
@@ -689,13 +689,6 @@ class Cart {
 			$return = false;
 		}
 
-		$result = $this->check_cart_item_stock();
-
-		if ( is_wp_error( $result ) ) {
-			masteriyo_add_notice( $result->get_error_message(), 'error' );
-			$return = false;
-		}
-
 		return $return;
 
 	}
@@ -713,58 +706,11 @@ class Cart {
 
 			if ( ! $course || ! $course->exists() || 'trash' === $course->get_status() ) {
 				$this->set_quantity( $cart_item_key, 0 );
-				$return = new WP_Error( 'invalid', __( 'An item which is no longer available was removed from your cart.', 'masteriyo' ) );
+				$return = new \WP_Error( 'invalid', __( 'An item which is no longer available was removed from your cart.', 'masteriyo' ) );
 			}
 		}
 
 		return $return;
-	}
-
-	/**
-	 * Looks through the cart to check each item is in stock. If not, add an error.
-	 *
-	 * @return bool|WP_Error
-	 */
-	public function check_cart_item_stock() {
-		$error                    = new WP_Error();
-		$course_qty_in_cart       = $this->get_cart_item_quantities();
-		$current_session_order_id = isset( MASTERIYO()->session->order_awaiting_payment ) ? absint( MASTERIYO()->session->order_awaiting_payment ) : 0;
-
-		foreach ( $this->get_cart() as $cart_item_key => $values ) {
-			$course = $values['data'];
-
-			// Check stock based on stock-status.
-			if ( ! $course->is_in_stock() ) {
-				/* translators: %s: course name */
-				$error->add( 'out-of-stock', sprintf( __( 'Sorry, "%s" is not in stock. Please edit your cart and try again. We apologize for any inconvenience caused.', 'masteriyo' ), $course->get_name() ) );
-				return $error;
-			}
-
-			// We only need to check courses managing stock, with a limited stock qty.
-			if ( ! $course->managing_stock() || $course->backorders_allowed() ) {
-				continue;
-			}
-
-			// Check stock based on all items in the cart and consider any held stock within pending orders.
-			$held_stock     = masteriyo_get_held_stock_quantity( $course, $current_session_order_id );
-			$required_stock = $course_qty_in_cart[ $course->get_stock_managed_by_id() ];
-
-			/**
-			 * Allows filter if course have enough stock to get added to the cart.
-			 *
-			 * @since 4.6.0
-			 * @param bool       $has_stock If have enough stock.
-			 * @param MASTERIYO_Course $course   Course instance.
-			 * @param array      $values    Cart item values.
-			 */
-			if ( apply_filters( 'masteriyo_cart_item_required_stock_is_not_enough', $course->get_stock_quantity() < ( $held_stock + $required_stock ), $course, $values ) ) {
-				/* translators: 1: course name 2: quantity in stock */
-				$error->add( 'out-of-stock', sprintf( __( 'Sorry, we do not have enough "%1$s" in stock to fulfill your order (%2$s available). We apologize for any inconvenience caused.', 'masteriyo' ), $course->get_name(), masteriyo_format_stock_quantity_for_display( $course->get_stock_quantity() - $held_stock, $course ) ) );
-				return $error;
-			}
-		}
-
-		return true;
 	}
 
 	/**
@@ -786,6 +732,7 @@ class Cart {
 	public function get_cross_sells() {
 		$cross_sells = array();
 		$in_cart     = array();
+
 		if ( ! $this->is_empty() ) {
 			foreach ( $this->get_cart() as $cart_item_key => $values ) {
 				if ( $values['quantity'] > 0 ) {
@@ -794,7 +741,9 @@ class Cart {
 				}
 			}
 		}
+
 		$cross_sells = array_diff( $cross_sells, $in_cart );
+
 		return apply_filters( 'masteriyo_cart_crosssell_ids', wp_parse_id_list( $cross_sells ), $this );
 	}
 

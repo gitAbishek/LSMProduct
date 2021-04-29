@@ -164,7 +164,7 @@ class CoursesController extends PostsController {
 		$params['featured']   = array(
 			'description'       => __( 'Limit result set to featured courses.', 'masteriyo' ),
 			'type'              => 'boolean',
-			'sanitize_callback' => 'wc_string_to_bool',
+			'sanitize_callback' => 'masteriyo_string_to_bool',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 		$params['category']   = array(

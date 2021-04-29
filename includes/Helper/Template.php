@@ -138,7 +138,7 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 			$page_title = single_term_title( '', false );
 		} else {
 			$course_list_page_id = masteriyo_get_page_id( 'course-list' );
-			$page_title           = get_the_title( $course_list_page_id );
+			$page_title          = get_the_title( $course_list_page_id );
 		}
 
 		$page_title = apply_filters( 'masteriyo_page_title', $page_title );
@@ -622,28 +622,6 @@ if ( ! function_exists( 'masteriyo_single_course_faqs_content' ) ) {
 
 		masteriyo_get_template( 'single-course/tab-content-faq.php', $data );
 
-	}
-}
-
-if ( ! function_exists( 'masteriyo_checkout_billing_form' ) ) {
-	/**
-	 * Display billing form.
-	 *
-	 * @since 0.1.0
-	 */
-	function masteriyo_checkout_billing_form() {
-		$current_user = masteriyo_get_current_user();
-
-		if ( is_null( $current_user ) ) {
-			return;
-		}
-
-		masteriyo_get_template(
-			'checkout/form-billing.php',
-			array(
-				'user' => $current_user,
-			)
-		);
 	}
 }
 

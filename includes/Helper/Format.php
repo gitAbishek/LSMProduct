@@ -449,6 +449,17 @@ function masteriyo_strtolower( $string ) {
 }
 
 /**
+ * Wrapper for mb_strtoupper which see's if supported first.
+ *
+ * @since  0.1.0
+ * @param  string $string String to format.
+ * @return string
+ */
+function masteriyo_strtoupper( $string ) {
+	return function_exists( 'mb_strtoupper' ) ? mb_strtoupper( $string ) : strtoupper( $string );
+}
+
+/**
  * Formats a stock amount by running it through a filter.
  *
  * @since 0.1.0
@@ -483,4 +494,86 @@ function masteriyo_round( $val, $precision = 0, $mode = PHP_ROUND_HALF_UP ) {
 	$val       = is_numeric( $val ) ? $val : (float) $val;
 
 	return round( $val, $precision, $mode );
+}
+
+/**
+ * Format the postcode according to the country and length of the postcode.
+ *
+ * @since 0.1.0
+ *
+ * @param string $postcode Unformatted postcode.
+ * @param string $country  Base country.
+ * @return string
+ */
+function masteriyo_format_postcode( $postcode, $country ) {
+	$postcode = masteriyo_normalize_postcode( $postcode );
+
+	switch ( $country ) {
+		case 'CA':
+		case 'GB':
+			$postcode = substr_replace( $postcode, ' ', -3, 0 );
+			break;
+		case 'IE':
+			$postcode = substr_replace( $postcode, ' ', 3, 0 );
+			break;
+		case 'BR':
+		case 'PL':
+			$postcode = substr_replace( $postcode, '-', -3, 0 );
+			break;
+		case 'JP':
+			$postcode = substr_replace( $postcode, '-', 3, 0 );
+			break;
+		case 'PT':
+			$postcode = substr_replace( $postcode, '-', 4, 0 );
+			break;
+		case 'PR':
+		case 'US':
+			$postcode = rtrim( substr_replace( $postcode, '-', 5, 0 ), '-' );
+			break;
+		case 'NL':
+			$postcode = substr_replace( $postcode, ' ', 4, 0 );
+			break;
+	}
+
+	return apply_filters( 'masteriyo_format_postcode', trim( $postcode ), $country );
+}
+
+/**
+ * Normalize postcodes.
+ *
+ * Remove spaces and convert characters to uppercase.
+ *
+ * @since 0.1.0
+ * @param string $postcode Postcode.
+ * @return string
+ */
+function masteriyo_normalize_postcode( $postcode ) {
+	return preg_replace( '/[\s\-]/', '', trim( masteriyo_strtoupper( $postcode ) ) );
+}
+
+/**
+ * Format phone numbers.
+ *
+ * @since 0.1.0
+ *
+ * @param string $phone Phone number.
+ * @return string
+ */
+function masteriyo_format_phone_number( $phone ) {
+	if ( ! MASTERIYO_Validation::is_phone( $phone ) ) {
+		return '';
+	}
+	return preg_replace( '/[^0-9\+\-\(\)\s]/', '-', preg_replace( '/[\x00-\x1F\x7F-\xFF]/', '', $phone ) );
+}
+
+/**
+ * Sanitize phone number.
+ * Allows only numbers and "+" (plus sign).
+ *
+ * @since 0.1.0
+ * @param string $phone Phone number.
+ * @return string
+ */
+function masteriyo_sanitize_phone_number( $phone ) {
+	return preg_replace( '/[^\d+]/', '', $phone );
 }

@@ -562,6 +562,7 @@ function masteriyo_get_current_user() {
 	if ( is_user_logged_in() ) {
 		return masteriyo_get_user( get_current_user_id() );
 	}
+
 	return null;
 }
 
@@ -2119,6 +2120,7 @@ function masteriyo_add_post_state( $post_states, $post ) {
 
 	return $post_states;
 }
+function_exists( 'add_filter' ) && add_filter( 'display_post_states', 'masteriyo_add_post_state', 10, 2 );
 
 function masteriyo_asort_by_locale( &$data, $locale = '' ) {
 	// Use Collator if PHP Internationalization Functions (php-intl) is available.
@@ -2255,4 +2257,75 @@ function masteriyo_remove_number_precision_deep( $value ) {
 	}
 
 	return $value;
+}
+
+/**
+ * Wrapper for set_time_limit to see if it is enabled.
+ *
+ * @since 0.1.0.
+ *
+ * @param int $limit Time limit.
+ */
+function masteriyo_set_time_limit( $limit = 0 ) {
+	if ( ! function_exists( 'set_time_limit' ) ) {
+		return;
+	}
+
+	if ( true === strpos( ini_get( 'disable_functions' ), 'set_time_limit' ) ) {
+		return;
+	}
+
+	if ( ini_get( 'safe_mode' ) ) {
+		return;
+	}
+
+	@set_time_limit( $limit );
+}
+
+/**
+ * Get data if set, otherwise return a default value or null. Prevents notices when data is not set.
+ *
+ * @since  0.1.0
+ * @param  mixed  $var     Variable.
+ * @param  string $default Default value.
+ * @return mixed
+ */
+function masteriyo_get_var( &$var, $default = null ) {
+	return isset( $var ) ? $var : $default;
+}
+
+/**
+ * User to sort checkout fields based on priority with uasort.
+ *
+ * @since 0.1.0
+ * @param array $a First field to compare.
+ * @param array $b Second field to compare.
+ * @return int
+ */
+function masteriyo_checkout_fields_uasort_comparison( $a, $b ) {
+	/*
+	 * We are not guaranteed to get a priority
+	 * setting. So don't compare if they don't
+	 * exist.
+	 */
+	if ( ! isset( $a['priority'], $b['priority'] ) ) {
+		return 0;
+	}
+
+	return masteriyo_uasort_comparison( $a['priority'], $b['priority'] );
+}
+
+/**
+ * User to sort two values with ausort.
+ *
+ * @since 0.1.0
+ * @param int $a First value to compare.
+ * @param int $b Second value to compare.
+ * @return int
+ */
+function masteriyo_uasort_comparison( $a, $b ) {
+	if ( $a === $b ) {
+		return 0;
+	}
+	return ( $a < $b ) ? -1 : 1;
 }

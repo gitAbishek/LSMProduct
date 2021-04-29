@@ -272,4 +272,28 @@ class Notice {
 		 */
 		return wp_kses( $message, apply_filters( 'masteriyo_kses_notice_allowed_tags', $allowed_tags ) );
 	}
+
+	/**
+	 * Get notice by type.
+	 *
+	 * @since 0.1.0
+	 * @return string
+	 */
+	public function get_by_id( $id, $type = '' ) {
+		$all_notices = $this->get( $type );
+		$message     = '';
+
+		foreach ( $all_notices as $notice ) {
+			if ( ! isset( $notice['data']['id'] ) ) {
+				continue;
+			}
+
+			if ( $id === $notice['data']['id'] ) {
+				$message = $notice['message'];
+				break;
+			}
+		}
+
+		return $message;
+	}
 }

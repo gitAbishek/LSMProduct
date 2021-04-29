@@ -143,7 +143,7 @@ class Query {
 				}
 				break;
 			case 'view-order':
-				// $order = wc_get_order( $wp->query_vars['view-order'] );
+				// $order = masteriyo_get_order( $wp->query_vars['view-order'] );
 				/* translators: %s: order number */
 				// $title = ( $order ) ? sprintf( __( 'Order #%s', 'masteriyo' ), $order->get_order_number() ) : '';
 				break;

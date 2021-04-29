@@ -31,13 +31,13 @@ class AddToCartFormHandler {
 	 * @return void
 	 */
 	public function add_to_cart() {
-		if ( ! isset( $_REQUEST['add-to-cart'] ) || ! is_numeric( wp_unslash( $_REQUEST['addtocart'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if ( ! isset( $_REQUEST['add-to-cart'] ) || ! is_numeric( wp_unslash( $_REQUEST['add-to-cart'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
 
 		masteriyo_nocache_headers();
 
-		$course_id      = apply_filters( 'masteriyo_add_to_cart_course_id', absint( wp_unslash( $_REQUEST['addtocart'] ) ) );  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$course_id      = apply_filters( 'masteriyo_add_to_cart_course_id', absint( wp_unslash( $_REQUEST['add-to-cart'] ) ) );  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$adding_to_cart = masteriyo_get_course( $course_id );
 
 		if ( is_null( $adding_to_cart ) ) {

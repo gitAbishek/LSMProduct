@@ -87,8 +87,8 @@ abstract class AbstractRepository {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $model		Model object.
-	 * @param MetaData $meta	MetaData object.
+	 * @param Model $model      Model object.
+	 * @param MetaData $meta    MetaData object.
 	 *
 	 * @return void
 	 */
@@ -102,12 +102,12 @@ abstract class AbstractRepository {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $model		Model object.
-	 * @param MetaData $meta	MetaData object.
+	 * @param Model $model      Model object.
+	 * @param MetaData $meta    MetaData object.
 	 *
 	 * @return int meta ID.
 	 */
-	public function add_meta( &$model, $meta  ) {
+	public function add_meta( &$model, $meta ) {
 		return add_metadata( $this->meta_type, $model->get_id(), $meta->key, $meta->value, false );
 	}
 
@@ -116,8 +116,8 @@ abstract class AbstractRepository {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $mode		Model object.
-	 * @param MetaData $meta	MetaData object.
+	 * @param Model $mode       Model object.
+	 * @param MetaData $meta    MetaData object.
 	 *
 	 * @return void
 	 */
@@ -150,13 +150,18 @@ abstract class AbstractRepository {
 			)
 		);
 
-		$meta_data = array_map( function( $meta_data ) {
-			return new MetaData( array(
-				'id'    => $meta_data->meta_id,
-				'key'   => $meta_data->meta_key,
-				'value' => maybe_unserialize( $meta_data->meta_value )
-			) );
-		}, $raw_meta_data );
+		$meta_data = array_map(
+			function( $meta_data ) {
+				return new MetaData(
+					array(
+						'id'    => $meta_data->meta_id,
+						'key'   => $meta_data->meta_key,
+						'value' => maybe_unserialize( $meta_data->meta_value ),
+					)
+				);
+			},
+			$raw_meta_data
+		);
 
 		return $this->filter_raw_meta_data( $model, $meta_data );
 	}
@@ -200,7 +205,7 @@ abstract class AbstractRepository {
 	 *
 	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
 	 *
-	 * @param Model $object The WP_Data object (WC_Coupon for coupons, etc).
+	 * @param Model $object The WP_Data object.
 	 * @param string  $meta_key Meta key to update.
 	 * @param mixed   $meta_value Value to save.
 	 *
@@ -228,7 +233,7 @@ abstract class AbstractRepository {
 	 *
 	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
 	 *
-	 * @param Model $object The WP_Data object (WC_Coupon for coupons, etc).
+	 * @param Model $object The Model object.
 	 * @param string  $meta_key Meta key to update.
 	 * @param mixed   $meta_value Value to save.
 	 *
@@ -284,6 +289,7 @@ abstract class AbstractRepository {
 	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
 	 *
 	 * @param Model $object The WP_Data object (WC_Coupon for coupons, etc).
+	 * @param Model $object The Model object.
 	 * @param string  $meta_key Meta key to update.
 	 * @param mixed   $meta_value Value to save.
 	 *
@@ -576,12 +582,12 @@ abstract class AbstractRepository {
 		if ( $force ) {
 			$props_to_update = $this->get_internal_meta_keys();
 		} else {
-			$props_to_update =  $this->get_props_to_update( $model, $this->get_internal_meta_keys(), 'user' );
+			$props_to_update = $this->get_props_to_update( $model, $this->get_internal_meta_keys(), 'user' );
 		}
 
 		foreach ( $props_to_update as $prop => $meta_key ) {
-			$value = $model->{"get_$prop"}( 'edit' );
-			$value = is_string( $value ) ? wp_slash( $value ) : $value;
+			$value   = $model->{"get_$prop"}( 'edit' );
+			$value   = is_string( $value ) ? wp_slash( $value ) : $value;
 			$updated = $this->update_or_delete_user_meta( $model, $meta_key, $value );
 
 			if ( $updated ) {
@@ -609,7 +615,7 @@ abstract class AbstractRepository {
 		if ( $force ) {
 			$props_to_update = $this->get_internal_meta_keys();
 		} else {
-			$props_to_update =  $this->get_props_to_update( $model, $this->get_internal_meta_keys() );
+			$props_to_update = $this->get_props_to_update( $model, $this->get_internal_meta_keys() );
 		}
 
 		foreach ( $props_to_update as $prop => $meta_key ) {
@@ -672,7 +678,7 @@ abstract class AbstractRepository {
 		if ( $force ) {
 			$props_to_update = $this->get_internal_meta_keys();
 		} else {
-			$props_to_update =  $this->get_props_to_update( $model, $this->get_internal_meta_keys(), $this->meta_type );
+			$props_to_update = $this->get_props_to_update( $model, $this->get_internal_meta_keys(), $this->meta_type );
 		}
 
 		foreach ( $props_to_update as $prop => $meta_key ) {
@@ -729,7 +735,7 @@ abstract class AbstractRepository {
 		if ( $force ) {
 			$props_to_update = $this->get_internal_meta_keys();
 		} else {
-			$props_to_update =  $this->get_props_to_update( $model, $this->get_internal_meta_keys() );
+			$props_to_update = $this->get_props_to_update( $model, $this->get_internal_meta_keys() );
 		}
 
 		foreach ( $props_to_update as $meta_key => $prop ) {
@@ -803,10 +809,10 @@ abstract class AbstractRepository {
 	}
 
 	/**
-	 * Get valid WP_Query args from a WC_Object_Query's query variables.
+	 * Get valid WP_Query args from a ObjectQuery's query variables.
 	 *
 	 * @since 0.1.0
-	 * @param array $query_vars query vars from a WC_Object_Query.
+	 * @param array $query_vars query vars from a ObjectQuery.
 	 * @return array
 	 */
 	protected function get_wp_query_args( $query_vars ) {

@@ -5,8 +5,6 @@
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Helper;
-
 /**
  * Array merge and sum function.
  *
@@ -81,7 +79,7 @@ function masteriyo_array_overlay( $a1, $a2 ) {
 			continue;
 		}
 		if ( is_array( $v ) && is_array( $a2[ $k ] ) ) {
-			$a1[ $k ] = wc_array_overlay( $v, $a2[ $k ] );
+			$a1[ $k ] = masteriyo_array_overlay( $v, $a2[ $k ] );
 		} else {
 			$a1[ $k ] = $a2[ $k ];
 		}

@@ -40,8 +40,6 @@ class Install {
 		// dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_items_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_itemmeta_table_schema( $charset_collate, $base_prefix ) );
-		// dbDelta( self::get_question_table_schema( $charset_collate, $base_prefix ) );
-		dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
 	}
 
 	/**
@@ -88,11 +86,11 @@ class Install {
 	private static function get_session_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_sessions` (
 			id BIGINT UNSIGNED AUTO_INCREMENT,
-			key CHAR(32) UNIQUE NOT NULL,
-			data LONGTEXT NOT NULL,
-			expiry BIGINT UNSIGNED NOT NULL,
+			`key` CHAR(32) UNIQUE NOT NULL,
+			`data` LONGTEXT NOT NULL,
+			`expiry` BIGINT UNSIGNED NOT NULL,
 			PRIMARY KEY (id)
-		) $charset_collate;";
+		) {$charset_collate};";
 
 		return $sql;
 	}
@@ -112,8 +110,8 @@ class Install {
 			id BIGINT UNSIGNED AUTO_INCREMENT,
 			order_id BIGINT UNSIGNED NOT NULL,
 			course_id BIGINT UNSIGNED NOT NULL,
-			name text,
-			type varchar(200),
+			`name` text,
+			`type` varchar(200),
 			quantity BIGINT,
 			total BIGINT,
 			PRIMARY KEY (id),

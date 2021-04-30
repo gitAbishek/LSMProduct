@@ -1,0 +1,135 @@
+.mto-btn {
+    font-size: $mto-text-sm;
+    font-weight: 500;
+    padding: 10px 12px;
+    text-align: center;
+    @include mto-border-radius;
+    @include mto-default-animate;
+
+    //Default buttons
+    &-default {
+        background: white;
+        @include mto-default-border;
+        color: $mto-btn-gray !important;
+
+        &:hover {
+            background: $mto-btn-gray;
+            border-color: $mto-btn-gray;
+            color: white !important;
+            @include mto-shadow-1;
+        }
+
+        &:focus,
+        &:active {
+            background: $mto-btn-active-blue;
+            border-color: $mto-btn-active-blue;
+            color: white;
+        }
+
+        &--lg {
+            padding: 12px 16px;
+            font-size: $mto-text-sm;
+        }
+
+        &--xl {
+            padding: 16px 20px;
+            font-size: $mto-text-base;
+        }
+    }
+
+    // Primary Buttons
+    &-primary {
+        background: $mto-primary-color;
+        border-color: $mto-primary-color;
+        color: white !important;
+
+        &:hover {
+            background: $mto-btn-hover-blue;
+            border-color: $mto-btn-hover-blue;
+        }
+
+        &:focus,
+        &:active {
+            background: $mto-btn-active-blue;
+            border-color: $mto-btn-active-blue;
+        }
+
+        &--lg {
+            padding: 12px 16px;
+            font-size: $mto-text-sm;
+        }
+
+        &--xl {
+            padding: 16px 20px;
+            font-size: $mto-text-base;
+        }
+    }
+
+    // Seconday Buttons
+    &-secondary {
+        background: $mto-accent-color;
+        border-color: $mto-accent-color;
+        color: white !important;
+
+        &:hover {
+            background: darken($mto-accent-color, 10%);
+            border-color: darken($mto-accent-color, 10%);
+        }
+
+        &:focus,
+        &:active {
+            background: darken($mto-accent-color, 20%);
+            border-color: darken($mto-accent-color, 20%);
+        }
+
+        &--lg {
+            padding: 12px 16px;
+            font-size: $mto-text-sm;
+        }
+
+        &--xl {
+            padding: 16px 20px;
+            font-size: $mto-text-base;
+        }
+    }
+
+    // Disabled button
+    &-disabled {
+        background: $mto-disabled-color;
+        color: $mto-disabled-text-color !important;
+
+        &:hover {
+            background: $mto-disabled-color;
+            color: $mto-disabled-text-color;
+            border-color: $mto-border-color;
+            cursor: not-allowed;
+        }
+
+        &:focus,
+        &:active {
+            background: $mto-disabled-color;
+            color: $mto-disabled-text-color;
+            border-color: $mto-border-color;
+        }
+
+        &--lg {
+            padding: 12px 16px;
+            font-size: $mto-text-sm;
+        }
+
+        &--xl {
+            padding: 16px 20px;
+            font-size: $mto-text-base;
+        }
+    }
+}
+
+// Links
+.mto-link-primary {
+    color: $mto-primary-color;
+    font-weight: 500;
+    text-decoration: underline;
+    &:hover {
+        color: rgba($mto-primary-color, 0.8);
+    }
+}

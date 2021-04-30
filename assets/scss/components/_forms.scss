@@ -1,0 +1,69 @@
+// Alert messages
+.mto-alert {
+  padding: 14px 12px;
+  margin: 8px 0px;
+  @include mto-default-border;
+  @include mto-border-radius;
+}
+// Error
+.mto-error {
+  margin: 8px 0px;
+}
+.mto-info-msg {
+  background: rgba($mto-info-color, 0.03);
+  color: $mto-info-color;
+  border-color: $mto-info-color;
+}
+.mto-warning-msg {
+  background: rgba($mto-warning-color, 0.03);
+  color: $mto-warning-color;
+  border-color: $mto-warning-color;
+}
+.mto-danger-msg {
+  background: rgba($mto-danger-color, 0.03);
+  color: $mto-danger-color;
+  border-color: $mto-danger-color;
+}
+.mto-success-msg {
+  background: rgba($mto-success-color, 0.03);
+  color: $mto-success-color;
+  border-color: $mto-success-color;
+}
+// Labels
+.mto-label {
+  font-size: $mto-text-sm;
+  font-weight: 500;
+  color: $mto-heading-color;
+  display: inherit;
+  margin-bottom: 15px;
+}
+// Fields
+.mto-input {
+  padding: 16px;
+  outline: none;
+  width: 100%;
+  @include mto-default-border(2);
+  @include mto-border-radius;
+
+  &::placeholder {
+    color: $mto-placeholder-color;
+  }
+  &:hover {
+    border-color: $mto-primary-color;
+  }
+  &:focus,
+  &:active {
+    border-color: $mto-primary-color;
+    background-color: $mto-lighter-gray;
+    color: $mto-heading-color;
+  }
+  &.success {
+    border-color: $mto-success-color;
+  }
+  &.danger {
+    border-color: $mto-danger-color;
+  }
+  &.warning {
+    border-color: $mto-warning-color;
+  }
+}

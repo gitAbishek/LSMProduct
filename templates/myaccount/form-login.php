@@ -24,8 +24,8 @@ do_action( 'masteriyo_before_login_form_content' );
 						<input type="hidden" name="remember" value="true">
 						<div class="mto-rounded-md mtoshadow-sm mto-space-y-6">
 							<div class="username">
-								<label for="username-email-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Username or Email', 'masteriyo' ); ?></label>
-								<input id="username-email-address" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+								<label for="username-email-address" class="mto-label"><?php echo esc_html__( 'Username or Email', 'masteriyo' ); ?></label>
+								<input id="username-email-address" name="text" type="text" required class="mto-input" placeholder="">
 							</div>
 
 							<div class="password">
@@ -50,7 +50,7 @@ do_action( 'masteriyo_before_login_form_content' );
 						</div>
 
 						<div class="mto-block md:mto-flex mto-items-center mto-justify-between">
-							<button type="submit" class="btn mto-capitalize sign-in">
+							<button type="submit" class="mto-btn-signin mto-btn mto-primary">
 								<?php echo esc_html__( 'Sign in', 'masteriyo' ); ?>
 							</button>
 
@@ -58,7 +58,7 @@ do_action( 'masteriyo_before_login_form_content' );
 								<span><?php echo esc_html__( 'Don\'t have an account?', 'masteriyo' ); ?></span>
 								<a
 									href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'signup' ) ); ?>"
-									class="mto-font-medium mto-text-primary-800 hover:mto-text-primary-700 hover:mto-underline"
+									class="mto-link-primary"
 								>
 									<?php echo esc_html__( 'Sign Up Now', 'masteriyo' ); ?>
 								</a>

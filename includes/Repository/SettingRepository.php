@@ -17,25 +17,29 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 * @param Model $setting Setting object.
 	 */
 	public function create( Model &$setting ) {
-		global $wpdb;
 
-		$data = apply_filters(
-			'masteriyo_new_setting_data',
-			array(
-				'name'  => $setting->get_full_name(),
-				'value' => $setting->get_value(),
-			),
-			$setting
-		);
+		$changes = $setting->get_changes();
 
-		update_option( $data['name'], $data['value'], false );
-
-		if ( $wpdb->insert_id && ! is_wp_error( $wpdb->insert_id ) ) {
-			$setting->set_id( $wpdb->insert_id );
-			$setting->apply_changes();
-
-			do_action( 'masteriyo_new_setting', $wpdb->insert_id, $setting );
+		$setting_data = array();
+		foreach ( $setting->get_data_keys() as $setting_key ) {
+			$callable_setting_key = str_replace( '.', '_', $setting_key );
+			if ( is_callable( array( $setting, "get_{$callable_setting_key}" ) ) ) {
+				$setting_data[ $setting_key ] = call_user_func( array( $setting, "get_{$callable_setting_key}" ) );
+			}
 		}
+
+		$data = apply_filters( 'masteriyo_new_setting_data', $setting_data, $setting );
+
+		// Only update the post when the post data changes.
+		if ( array_intersect( $setting->get_data_keys(), array_keys( $changes ) ) ) {
+			foreach ( $data as $setting_name => $setting_value ) {
+				update_option( 'masteriyo.' . $setting_name, $setting_value, false );
+			}
+		}
+
+		$setting->apply_changes();
+
+		do_action( 'masteriyo_new_setting', $setting );
 	}
 
 	/**
@@ -49,16 +53,24 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 * @throws Exception If invalid setting.
 	 */
 	public function read( Model &$setting, $default = null ) {
-		$value = get_option( $setting->get_name(), $default );
+		global $wpdb;
 
-		if ( ! $setting->get_name() ) {
-			throw new \Exception( __( 'Invalid setting.', 'masteriyo' ) );
+		$options = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}options WHERE option_name LIKE %s",
+				esc_sql( 'masteriyo.%' )
+			),
+			ARRAY_A
+		);
+
+		$setting_data = array();
+		foreach ( $options as $option ) {
+			$option_arr = explode( '.', $option['option_name'] );
+			$group      = count( $option_arr ) > 2 ? $option_arr[1] : '';
+			$setting_data[ $group . '_' . $option_arr[2] ] = $option['option_value'];
 		}
 
-		$setting->set_props( array(
-			'name' => $setting->get_name(),
-			'value' => $value
-		) );
+		$setting->set_props( $setting_data );
 
 		$setting->set_object_read( true );
 
@@ -89,7 +101,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 * @since 0.1.0
 	 *
 	 * @param Model $setting Setting object.
-	 * @param array $args	Array of args to pass.alert-danger
+	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$setting, $args = array() ) {
 		return new \WP_Error(

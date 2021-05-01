@@ -1,4 +1,4 @@
-.mto-login {
+.mto-signup {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,20 +11,26 @@
     margin-bottom: 24px;
   }
 
-  .mto-btn-wrapper,
-  .mto-remember-forgot {
+  .mto-password {
+    .mto-input {
+      margin-bottom: 8px;
+    }
+
+    .mto-note {
+      margin-bottom: 24px;
+    }
+  }
+
+  .mto-btn-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .mto-remember-forgot {
-    margin-bottom: 24px;
-  }
-
   .mto-remember-me {
     display: flex;
     align-items: center;
+    margin-bottom: 24px;
     & > label {
       margin: 0;
     }

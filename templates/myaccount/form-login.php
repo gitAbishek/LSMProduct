@@ -15,7 +15,7 @@ do_action( 'masteriyo_before_login_form_content' );
 ?>
 <!-- re -->
 <section class="mto-login">
-		<div class="mto-login--wrapper">
+		<div class="mto-login--wrapper mto-form-container">
 			<h3 class="mto-login--title"><?php echo esc_html__( 'Sign In', 'masteriyo' ); ?></h3>
 
 			<form id="mto-login--form" class="mto-login--form">
@@ -61,7 +61,7 @@ do_action( 'masteriyo_before_login_form_content' );
 					</div>
 				</div>
 
-				<div id="mto-login-error-msg" class="mto-hidden mto-notify-message mto-warning-msg mto-text-red-700 mto-bg-red-100 mto-border-red-300"></div>
+				<div id="mto-login-error-msg" class="mto-hidden mto-notify-message mto-alert mto-danger-msg"></div>
 			</form>
 			<?php masteriyo_display_all_notices(); ?>
 

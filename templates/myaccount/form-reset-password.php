@@ -21,18 +21,18 @@ do_action('masteriyo_before_password_reset_form');
 ?>
 
 <section class="mto-reset">
-		<div class="mto-reset--wrapper">
+		<div class="mto-reset--wrapper mto-form-container">
 			<h3 class="mto-reset--title"><?php echo esc_html__('New password', 'masteriyo'); ?></h3>
 			<p class="mto-reset--msg"><?php echo apply_filters('masteriyo_reset_password_message', esc_html__('Enter a new password below.', 'masteriyo')); ?></p>
 
 			<form id="mto-reset--form" class="mto-reset--form" method="post">
 				<input type="hidden" name="remember" value="true">
 					<div class="mto-username">
-						<label for="password" class="mto-label"><?php echo esc_html__( 'New password', 'masteriyo' ); ?><span class="mto-red">*</span></label>
+						<label for="password" class="mto-label"><?php echo esc_html__( 'New password', 'masteriyo' ); ?><span class="mto-text-red">*</span></label>
 						<input id="password" class="mto-input" name="password" type="password" required autocomplete="new-password" >
 					</div>
 					<div class="mto-password">
-						<label for="confirm-password" class="mto-label"><?php echo esc_html__( 'Re-enter new password', 'masteriyo' ); ?><span class="mto-red">*</span></label>
+						<label for="confirm-password" class="mto-label"><?php echo esc_html__( 'Re-enter new password', 'masteriyo' ); ?><span class="mto-text-red">*</span></label>
 						<input id="confirm-password" class="mto-input" name="confirm-password" type="password" required autocomplete="new-password" >
 					</div>
 

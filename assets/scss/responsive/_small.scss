@@ -1,17 +1,15 @@
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 768px) {
-  //Login
-  .mto-login .mto-login--wrapper,
-  .mto-reset .mto-reset--wrapper {
+  //Form contianer
+  .mto-form-container {
     width: 80%;
   }
 }
 
 // X-Small devices (portrait phones, less than 576px)
 @media (max-width: 576px) {
-  // Login
-  .mto-login .mto-login--wrapper,
-  .mto-reset .mto-reset--wrapper,
+  // Form container
+  .mto-form-container,
   .mto-btn {
     width: 100%;
   }

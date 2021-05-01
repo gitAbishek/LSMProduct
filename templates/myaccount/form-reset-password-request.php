@@ -13,7 +13,7 @@ do_action('masteriyo_before_password_reset_request_form');
 ?>
 
 <section class="mto-reset">
-		<div class="mto-reset--wrapper">
+		<div class="mto-reset--wrapper mto-form-container">
 			<h3 class="mto-reset--title"><?php echo esc_html__('Reset Password', 'masteriyo'); ?></h3>
 			<p class="mto-reset--msg"><?php echo esc_html__("Enter your user account's verified email address and we will send you a password reset link.", 'masteriyo'); ?></p>
 

@@ -1,25 +1,26 @@
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 768px) {
-  .mto {
-    &-login--wrapper {
-      width: 80%;
-    }
+  //Login
+  .mto-login .mto-login--wrapper,
+  .mto-reset .mto-reset--wrapper {
+    width: 80%;
   }
 }
 
 // X-Small devices (portrait phones, less than 576px)
 @media (max-width: 576px) {
   // Login
-  .mto {
-    &-login--wrapper,
-    &-btn {
-      width: 100%;
-    }
-    &-signin-up {
-      flex-direction: column;
-    }
-    &-btn {
-      margin-bottom: 24px;
-    }
+  .mto-login .mto-login--wrapper,
+  .mto-reset .mto-reset--wrapper,
+  .mto-btn {
+    width: 100%;
+  }
+  .mto-login .mto-btn-wrapper,
+  .mto-reset .mto-btn-wrapper {
+    flex-direction: column;
+  }
+  .mto-login .mto-btn,
+  .mto-reset .mto-btn {
+    margin-bottom: 24px;
   }
 }

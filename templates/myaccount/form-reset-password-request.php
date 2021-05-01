@@ -12,28 +12,24 @@ do_action('masteriyo_before_password_reset_request_form');
 
 ?>
 
-<section class="reset-form mto-container mto-mx-auto">
-	<div class="mto-flex mto-justify-center mto-items-center mto-h-screen">
+<section class="mto-reset">
+		<div class="mto-reset--wrapper">
+			<h3 class="mto-reset--title"><?php echo esc_html__('Reset Password', 'masteriyo'); ?></h3>
+			<p class="mto-reset--msg"><?php echo esc_html__("Enter your user account's verified email address and we will send you a password reset link.", 'masteriyo'); ?></p>
 
-		<div class="mto-form-wrapper">
-			<h2 class="mto-font-semibold mto-text-2xl mto-mb-4"><?php echo esc_html__('Reset Password', 'masteriyo'); ?></h2>
-			<p><?php echo esc_html__("Enter your user account's verified email address and we will send you a password reset link.", 'masteriyo'); ?></p>
-
-			<form class="mto-mt-10" method="post">
-				<div class="mto-rounded-md mtoshadow-sm">
-					<div class="reset-username mto-mb-6">
-						<label for="reset-username-email-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__('Username or Email', 'masteriyo'); ?></label>
-						<input id="reset-username-email-address" name="user_login" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+			<form id="mto-reset--form" class="mto-reset--form" method="post">
+					<div class="mto-username">
+						<label for="reset-username-email-address" class="mto-label"><?php echo esc_html__('Username or Email', 'masteriyo'); ?></label>
+						<input id="reset-username-email-address" class="mto-input" name="user_login" type="text" required placeholder="">
 					</div>
-				</div>
 
-				<div class="mto-block md:mto-flex mto-items-center md:mto-space-x-6">
-					<button type="submit" name="masteriyo-password-reset-request" value="yes" class="btn mto-capitalize sign-in">
+				<div class="mto-btn-wrapper">
+					<button type="submit" name="masteriyo-password-reset-request" value="yes" class="mto-reset-btn mto-btn mto-primary">
 						<?php echo esc_html__('Send Reset Email', 'masteriyo'); ?>
 					</button>
 
-					<div class="go-back mto-text-sm mto-mt-6 md:mto-my-0 mto-text-center md:mto-text-left">
-						<a href="<?php echo esc_url(masteriyo_get_page_permalink('myaccount')); ?>" class="mto-font-medium mto-text-primary-800 hover:mto-text-primary-700 hover:mto-underline">
+					<div class="mto-reset-signin">
+						<a href="<?php echo esc_url(masteriyo_get_page_permalink('myaccount')); ?>" class="mto-link-primary">
 							<?php echo esc_html__('Go back to sign-in', 'masteriyo'); ?>
 						</a>
 					</div>
@@ -45,7 +41,6 @@ do_action('masteriyo_before_password_reset_request_form');
 			</form>
 
 		</div>
-	</div>
 </section>
 
 <?php

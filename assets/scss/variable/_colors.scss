@@ -29,6 +29,12 @@ $mto-disabled-text-color: #424360;
 // Border colors
 $mto-border-color: #ebecf2;
 
+//Required colors
+$mto-red: #ff0000;
+.mto-text-red {
+  color: $mto-red;
+}
+
 // Alert colors
 $mto-danger-color: #ff8787;
 $mto-info-color: #4dabf7;

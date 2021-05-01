@@ -1,8 +1,8 @@
 // Medium devices (tablets, less than 992px)
 @media (max-width: 992px) {
-  .mto {
-    &-login--wrapper {
-      width: 70%;
-    }
+  //Login
+  .mto-login .mto-login--wrapper,
+  .mto-reset .mto-reset--wrapper {
+    width: 70%;
   }
 }

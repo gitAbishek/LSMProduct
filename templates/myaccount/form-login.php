@@ -16,9 +16,9 @@ do_action( 'masteriyo_before_login_form_content' );
 <!-- re -->
 <section class="mto-login">
 		<div class="mto-login--wrapper">
-			<h3 class="mto-title"><?php echo esc_html__( 'Sign In', 'masteriyo' ); ?></h3>
+			<h3 class="mto-login--title"><?php echo esc_html__( 'Sign In', 'masteriyo' ); ?></h3>
 
-			<form id="mto-login-form" class="mto-login-form">
+			<form id="mto-login--form" class="mto-login--form">
 				<input type="hidden" name="remember" value="true">
 				<div class="mto-username">
 					<label for="username-email-address" class="mto-label"><?php echo esc_html__( 'Username or Email', 'masteriyo' ); ?></label>
@@ -45,12 +45,12 @@ do_action( 'masteriyo_before_login_form_content' );
 					</div>
 				</div>
 
-				<div class="mto-signin-up">
-					<button type="submit" class="mto-btn-signin mto-btn mto-primary">
+				<div class="mto-btn-wrapper">
+					<button type="submit" class="mto-login-btn mto-btn mto-primary">
 						<?php echo esc_html__( 'Sign in', 'masteriyo' ); ?>
 					</button>
 
-					<div class="mto-link-signup">
+					<div class="mto-login-signup">
 						<span><?php echo esc_html__( 'Don\'t have an account?', 'masteriyo' ); ?></span>
 						<a
 							href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'signup' ) ); ?>"

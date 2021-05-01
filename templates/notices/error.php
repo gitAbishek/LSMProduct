@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 
-<div class="mto-notify-message mto-error-msg mto-text-red-700 mto-bg-red-100 mto-border-red-300">
+<div class="mto-notify-message mto-alert mto-danger-msg">
 	<span><?php echo $message; ?></span>
 </div>
 

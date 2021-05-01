@@ -1,7 +1,25 @@
-// X-Small devices (portrait phones, less than 576px)
-@media (max-width: 576px) {
-}
-
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 768px) {
+  .mto {
+    &-login--wrapper {
+      width: 80%;
+    }
+  }
+}
+
+// X-Small devices (portrait phones, less than 576px)
+@media (max-width: 576px) {
+  // Login
+  .mto {
+    &-login--wrapper,
+    &-btn {
+      width: 100%;
+    }
+    &-signin-up {
+      flex-direction: column;
+    }
+    &-btn {
+      margin-bottom: 24px;
+    }
+  }
 }

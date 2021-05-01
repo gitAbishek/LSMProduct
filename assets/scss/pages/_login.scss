@@ -6,23 +6,36 @@
   }
 
   &-login--wrapper {
-    width: clac(100vw - 50%);
+    width: 50%;
     padding: 40px;
     @include mto-shadow-1;
     @include mto-default-border;
   }
+
+  &-title {
+    margin-bottom: 30px;
+  }
+
   &-input {
     margin-bottom: 24px;
   }
+
+  &-signin-up,
   &-remember-forgot {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  &-remember-forgot {
     margin-bottom: 24px;
   }
-  &-signin-up {
+
+  &-remember-me {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    & > label {
+      margin: 0;
+    }
   }
 }

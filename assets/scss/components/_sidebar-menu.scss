@@ -49,6 +49,8 @@
     ul {
       margin: 0;
       li {
+        display: flex;
+        align-items: center;
         list-style-type: none;
         padding: 16px;
         border: 1px solid white;

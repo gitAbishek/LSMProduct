@@ -43,10 +43,8 @@ do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 			<?php foreach( $menu_items as $slug => $endpoint ): ?>
 				<li class="<?php masteriyo_echo_if( $slug === $current_endpoint, 'active' ); ?>">
 					<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( $slug ) ); ?>">
-						<span class="mto-inline-block">
-							<?php echo $endpoint['icon']; ?>
-						</span>
-						<div class="mto-inline-block"><?php echo esc_html( $endpoint['label'] ); ?></div>
+						<?php echo $endpoint['icon']; ?>
+						<span><?php echo esc_html( $endpoint['label'] ); ?></span>
 					</a>
 				</li>
 			<?php endforeach; ?>

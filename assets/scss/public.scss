@@ -5,14 +5,19 @@
 // Utility
 @import "utility/mixins";
 
+// Base
+@import "base/base";
+
 // Components
 @import "components/buttons";
 @import "components/forms";
+@import "components/sidebar-menu";
 
 // Pages
 @import "pages/login";
 @import "pages/reset-password";
 @import "pages/signup";
+@import "pages/dashboard";
 // @import "pages/checkout";
 
 // Media

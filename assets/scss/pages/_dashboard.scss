@@ -47,3 +47,61 @@
     }
   }
 }
+
+// User counter
+.mto-counter {
+  display: flex;
+  gap: 30px;
+
+  & > * {
+    @include mto-default-border;
+    @include mto-border-radius;
+    @include mto-default-animate;
+    padding: 30px;
+    flex-basis: 100%;
+
+    &:hover {
+      @include mto-shadow-1;
+    }
+  }
+
+  .mto-icon-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .mto-icon {
+      display: inherit;
+      padding: 10px;
+      border-radius: 100%;
+    }
+    .mto-title {
+      font-size: $mto-text-lg;
+      margin: inherit;
+    }
+  }
+
+  &--inprogress .mto-icon {
+    background: lighten($mto-green, 30%);
+    .mto-icon-svg {
+      fill: $mto-green;
+    }
+  }
+  &--scores .mto-icon {
+    background: lighten($mto-primary-color, 20%);
+    .mto-icon-svg {
+      fill: $mto-primary-color;
+    }
+  }
+  &--certificates .mto-icon {
+    background: lighten($mto-accent-color, 20%);
+    .mto-icon-svg {
+      fill: $mto-accent-color;
+    }
+  }
+
+  .mto-number {
+    font-size: 36px;
+    font-weight: 900;
+  }
+}

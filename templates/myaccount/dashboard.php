@@ -31,46 +31,47 @@ defined( 'ABSPATH' ) || exit;
 	</a>
 </div>
 
-<div class="user-counter mto-card-wrapper">
-	<div class="user-inprogress mto-card hover:mto-shadow-lg">
-		<div class="mto-flex mto-items-center mto-space-x-4">
-			<span class="mto-bg-green-50 mto-rounded-full mto-p-4">
+<div class="mto-counter">
+	<div class="mto-counter--inprogress">
+		<div class="mto-icon-title">
+			<span class="mto-icon">
 				<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path d="M22.8 7.6l-9.7-3.2c-.7-.2-1.4-.2-2.2 0L1.2 7.6C.5 7.9 0 8.6 0 9.4s.5 1.5 1.2 1.8l.8.3c-.1.2-.2.4-.2.7-.4.2-.7.6-.7 1.2 0 .4.2.8.5 1L.6 19c-.1.4.2.8.6.8h2.1c.4 0 .7-.4.6-.8l-1-4.6c.3-.2.5-.6.5-1s-.2-.8-.5-1c0-.1.1-.3.2-.4l2.1.7-.5 4.6c0 1.4 3.2 2.6 7.2 2.6s7.2-1.2 7.2-2.6l-.5-4.6 4.1-1.4c.7-.2 1.2-1 1.2-1.8.1-.9-.4-1.6-1.1-1.9zm-5.5 9.2c-2.2 1.4-8.5 1.4-10.7 0l.4-3.6 3.8 1.3c.4.1 1.2.3 2.2 0l3.8-1.3.5 3.6zm-4.8-4.2c-.4.1-.7.1-1.1 0l-5.7-1.9L12 9.4c.3-.1.5-.4.5-.8-.1-.4-.4-.6-.7-.5L4.2 9.7c-.2 0-.4.1-.7.2L2 9.4l9.5-3.1c.4-.1.7-.1 1.1 0L22 9.4l-9.5 3.2z"/>
 				</svg>
 			</span>
-			<h3 class="mto-font-bold mto-text-base mto-text-textColor"><?php echo esc_html__( 'In Progress', 'masteriyo' ); ?></h3>
+			<h4 class="mto-title"><?php echo esc_html__( 'In Progress', 'masteriyo' ); ?></h4>
 		</div>
-		<span class="mto-inline-block mto-text-textColor mto-text-4xl mto-font-bold">2</span>
-		<div class="mto-text-gray-700"><?php echo esc_html__( 'Courses', 'masteriyo' ); ?></div>
+		<span class="mto-number">2</span>
+		<div class="mto-subtitle"><?php echo esc_html__( 'Courses', 'masteriyo' ); ?></div>
 	</div>
 
-	<div class="user-scores mto-card hover:mto-shadow-lg">
-		<div class="mto-flex mto-items-center mto-space-x-4">
-			<span class="mto-bg-secondary-50 mto-rounded-full mto-p-3">
+	<div class="mto-counter--scores">
+		<div class="mto-icon-title">
+			<span class="mto-icon">
 				<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M21 4h-3V3a1 1 0 00-1-1H7a1 1 0 00-1 1v1H3a1 1 0 00-1 1v3c0 4.31 1.799 6.91 4.819 7.012A6.001 6.001 0 0011 17.91V20H9v2h6v-2h-2v-2.09a6.01 6.01 0 004.181-2.898C20.201 14.91 22 12.31 22 8V5a1 1 0 00-1-1zM4 8V6h2v6.83C4.216 12.078 4 9.299 4 8zm8 8c-2.206 0-4-1.794-4-4V4h8v8c0 2.206-1.794 4-4 4zm6-3.17V6h2v2c0 1.299-.216 4.078-2 4.83z"/>
-					</svg>
+				<path d="M21 4h-3V3a1 1 0 00-1-1H7a1 1 0 00-1 1v1H3a1 1 0 00-1 1v3c0 4.31 1.799 6.91 4.819 7.012A6.001 6.001 0 0011 17.91V20H9v2h6v-2h-2v-2.09a6.01 6.01 0 004.181-2.898C20.201 14.91 22 12.31 22 8V5a1 1 0 00-1-1zM4 8V6h2v6.83C4.216 12.078 4 9.299 4 8zm8 8c-2.206 0-4-1.794-4-4V4h8v8c0 2.206-1.794 4-4 4zm6-3.17V6h2v2c0 1.299-.216 4.078-2 4.83z"/>
+				</svg>
 			</span>
-			<h3 class="mto-font-bold mto-text-base mto-text-textColor"><?php echo esc_html__( 'Scores', 'masteriyo' ); ?></h3>
+			<h4 class="mto-title"><?php echo esc_html__( 'Scores', 'masteriyo' ); ?></h4>
 		</div>
-		<span class="mto-inline-block mto-text-textColor mto-text-4xl mto-font-bold">20</span>
-		<div class="mto-text-gray-700"><?php echo esc_html__( 'Reward Points', 'masteriyo' ); ?></div>
+		<span class="mto-number">20</span>
+		<div class="mto-subtitle"><?php echo esc_html__( 'Reward Points', 'masteriyo' ); ?></div>
 	</div>
 
-	<div class="user-certificates mto-card hover:mto-shadow-lg">
-		<div class="mto-flex mto-items-center mto-space-x-4">
-			<span class="mto-bg-primary-50 mto-rounded-full mto-p-3">
+	<div class="mto-counter--certificates">
+		<div class="mto-icon-title">
+			<span class="mto-icon">
 				<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path d="M12 22c3.859 0 7-3.141 7-7s-3.141-7-7-7c-3.86 0-7 3.141-7 7s3.14 7 7 7zm0-12c2.757 0 5 2.243 5 5s-2.243 5-5 5-5-2.243-5-5 2.243-5 5-5zm-1-8H7v5.518a8.957 8.957 0 014-1.459V2zm6 0h-4v4.059a8.957 8.957 0 014 1.459V2z"/>
 					<path d="M10.019 15.811l-.468 2.726L12 17.25l2.449 1.287-.468-2.726 1.982-1.932-2.738-.398L12 11l-1.225 2.481-2.738.398z"/>
-				</svg>
+			</svg>
 			</span>
-			<h3 class="mto-font-bold mto-text-base mto-text-textColor"><?php echo esc_html__( 'Certificates', 'masteriyo' ); ?></h3>
+			<h4 class="mto-title"><?php echo esc_html__( 'Certificates', 'masteriyo' ); ?></h4>
 		</div>
-		<span class="mto-inline-block mto-text-textColor mto-text-4xl mto-font-bold">2</span>
-		<div class="mto-text-gray-700"><?php echo esc_html__( 'Courses', 'masteriyo' ); ?></div>
+		<span class="mto-number">2</span>
+		<div class="mto-subtitle"><?php echo esc_html__( 'Courses', 'masteriyo' ); ?></div>
 	</div>
+	
 </div>
 
 <div class="mto-card-wrapper">

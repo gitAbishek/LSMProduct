@@ -1,0 +1,49 @@
+// Dashboard
+.mto-dashboard {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 48px;
+  margin: 0 64px;
+}
+
+// Welcome notify
+.mto-welcome-notify {
+  background: $mto-primary-color;
+  @include mto-border-radius;
+  padding: 32px;
+  color: white;
+  position: relative;
+
+  .mto-title {
+    color: white;
+    font-size: $mto-text-xl;
+  }
+
+  .mto-close {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    .mto-icon-svg {
+      fill: white;
+    }
+    &:hover {
+      background: rgba(white, 0.1);
+    }
+  }
+
+  .mto-view-myaccount {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 100px;
+    padding-left: 24px;
+    &:hover {
+      .mto-icon-svg {
+        fill: white;
+      }
+    }
+  }
+}

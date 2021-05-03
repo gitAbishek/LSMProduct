@@ -508,15 +508,10 @@ function masteriyo_locate_template( $template_name, $template_path = '', $defaul
  */
 function masteriyo_get_page_id( $page ) {
 	$page_id = -1;
-	// $setting = masteriyo( 'setting' );
 
-	// if ( ! is_null( $setting ) ) {
-	// 	$setting->set_name( 'masteriyo_' . $page . '_page_id' );
-	// 	masteriyo( 'setting.store' )->read( $setting );
-	// 	$page_id = $setting->get_value();
-	// }
+	$page_id = get_option( 'masteriyo_' . $page . '_page_id' );
 
-	// $page_id = apply_filters( 'masteriyo_get_' . $page . '_page_id', $page_id );
+	$page_id = apply_filters( 'masteriyo_get_' . $page . '_page_id', $page_id );
 
 	return $page_id ? absint( $page_id ) : -1;
 }
@@ -2032,20 +2027,24 @@ function masteriyo_create_page( $slug, $option = '', $page_title = '', $page_con
 
 		if ( $page_object && 'page' === $page_object->post_type && ! in_array( $page_object->post_status, array( 'pending', 'trash', 'future', 'auto-draft' ), true ) ) {
 			// Valid page is already in place.
-			return $page_object->ID;
+			if ( strlen( $page_content ) > 0 ) {
+				// Search for an existing page with the specified page content (typically a shortcode).
+				$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' ) AND post_content LIKE %s LIMIT 1;", "%{$page_content}%" ) );
+			} else {
+				// Search for an existing page with the specified page slug.
+				$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' )  AND post_name = %s LIMIT 1;", $slug ) );
+			}
+
+			$valid_page_found = apply_filters( 'masteriyo_create_page_id', $valid_page_found, $slug, $page_content );
+
+			if ( $valid_page_found ) {
+				if ( $option ) {
+					update_option( $option, $valid_page_found );
+				}
+				return $valid_page_found;
+			}
 		}
 	}
-
-	if ( strlen( $page_content ) > 0 ) {
-		// Search for an existing page with the specified page content (typically a shortcode).
-		$shortcode        = str_replace( array( '<!-- wp:shortcode -->', '<!-- /wp:shortcode -->' ), '', $page_content );
-		$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' ) AND post_content LIKE %s LIMIT 1;", "%{$shortcode}%" ) );
-	} else {
-		// Search for an existing page with the specified page slug.
-		$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' )  AND post_name = %s LIMIT 1;", $slug ) );
-	}
-
-	$valid_page_found = apply_filters( 'masteriyo_create_page_id', $valid_page_found, $slug, $page_content );
 
 	// Search for a matching valid trashed page.
 	if ( strlen( $page_content ) > 0 ) {

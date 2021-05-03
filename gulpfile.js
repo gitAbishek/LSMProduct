@@ -13,7 +13,7 @@ const rename = require('gulp-rename');
 const autoprefixer = require('gulp-autoprefixer');
 const imagemin = require('gulp-imagemin');
 
-if (!process.env.WORDPRESS_URL) {
+if (!process.env.WORDPRESS_URL && process.env.DEVELOPMENT) {
 	console.error('Please set WORDPRESS_URL on your environment variable');
 	process.exit(1);
 }

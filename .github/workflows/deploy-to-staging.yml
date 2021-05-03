@@ -2,9 +2,6 @@ name: Deploy to staging server
 
 on:
   push:
-    branches:
-      - master
-      - develop
 
 jobs:
   build:
@@ -47,11 +44,7 @@ jobs:
 
       - name: Build the application
         run: |
-          yarn build
-          yarn build:css:public
-
-      - name: Zip the application
-        run: grunt release
+          yarn release
 
       - name: Deploy to staging server
         uses: wlixcc/SFTP-Deploy-Action@v1.0
@@ -59,7 +52,7 @@ jobs:
           server: ${{ secrets.STAGING_SERVER_HOST }}
           username: ${{ secrets.STAGING_SERVER_USER }}
           ssh_private_key: ${{ secrets.STAGING_PRIVATE_KEY }}
-          local_path: './*.zip'
+          local_path: './release/*.zip'
           remote_path: 'public_html/'
           args: '-o ConnectTimeout=10'
 

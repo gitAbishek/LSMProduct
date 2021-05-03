@@ -96,13 +96,6 @@ class SettingsController extends CrudController {
 					'methods'             => \WP_REST_Server::DELETABLE,
 					'callback'            => array( $this, 'delete_items' ),
 					'permission_callback' => array( $this, 'delete_items_permissions_check' ),
-					'args'                => array(
-						'force' => array(
-							'default'     => false,
-							'type'        => 'boolean',
-							'description' => __( 'Required to be true, as the resource does not support trashing.', 'masteriyo' ),
-						),
-					),
 				),
 			)
 		);
@@ -166,15 +159,6 @@ class SettingsController extends CrudController {
 	}
 
 	/**
-	 * Reset the default value to settings.
-	 *
-	 * @since 0.1.0
-	 */
-	public function delete_items( $request ) {
-
-	}
-
-	/**
 	 * Get the query params for collections of attachments.
 	 *
 	 * @since 0.1.0
@@ -217,7 +201,7 @@ class SettingsController extends CrudController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'general' => array(
+				'general'  => array(
 					'description' => __( 'General Settings.', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
@@ -280,7 +264,7 @@ class SettingsController extends CrudController {
 						),
 					),
 				),
-				'courses' => array(
+				'courses'  => array(
 					'description' => __( 'Courses Settings.', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
@@ -358,35 +342,35 @@ class SettingsController extends CrudController {
 						),
 					),
 				),
-				'pages'   => array(
+				'pages'    => array(
 					'description' => __( 'Pages Setting', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'                  => 'object',
-						'profile_page'          => array(
-							'description' => __( 'Profile page.', 'masteriyo' ),
-							'type'        => 'string',
+						'profile_page_id'          => array(
+							'description' => __( 'Profile page ID.', 'masteriyo' ),
+							'type'        => 'int',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'course_list_page'      => array(
-							'description' => __( 'Archive course page.', 'masteriyo' ),
-							'type'        => 'string',
+						'course_list_page_id'      => array(
+							'description' => __( 'Archive course page ID.', 'masteriyo' ),
+							'type'        => 'int',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'terms_conditions_page' => array(
-							'description' => __( 'Terms and conditions page.', 'masteriyo' ),
-							'type'        => 'string',
+						'terms_conditions_page_id' => array(
+							'description' => __( 'Terms and conditions page ID.', 'masteriyo' ),
+							'type'        => 'int',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'cart_page'             => array(
-							'description' => __( 'Cart page.', 'masteriyo' ),
-							'type'        => 'string',
+						'cart_page_id'             => array(
+							'description' => __( 'Cart page ID.', 'masteriyo' ),
+							'type'        => 'int',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'checkout_page'         => array(
-							'description' => __( 'Checkout page.', 'masteriyo' ),
-							'type'        => 'string',
+						'checkout_page_id'         => array(
+							'description' => __( 'Checkout page ID.', 'masteriyo' ),
+							'type'        => 'int',
 							'context'     => array( 'view', 'edit' ),
 						),
 						'checkout_endpoints'    => array(
@@ -455,12 +439,12 @@ class SettingsController extends CrudController {
 						),
 					),
 				),
-				'emails'  => array(
+				'emails'   => array(
 					'description' => __( 'Email Setting', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'general'          => array(
+						'general'              => array(
 							'from_name'       => array(
 								'description' => __( 'Email send from.', 'masteriyo' ),
 								'type'        => 'string',
@@ -487,7 +471,7 @@ class SettingsController extends CrudController {
 								'context'     => array( 'view', 'edit' ),
 							),
 						),
-						'new_order'        => array(
+						'new_order'            => array(
 							'enable'     => array(
 								'description' => __( 'Enable new order.', 'masteriyo' ),
 								'type'        => 'string',
@@ -514,7 +498,7 @@ class SettingsController extends CrudController {
 								'context'     => array( 'view', 'edit' ),
 							),
 						),
-						'processing_order' => array(
+						'processing_order'     => array(
 							'enable'  => array(
 								'description' => __( 'Enable processing order.', 'masteriyo' ),
 								'type'        => 'string',
@@ -536,7 +520,7 @@ class SettingsController extends CrudController {
 								'context'     => array( 'view', 'edit' ),
 							),
 						),
-						'completed_order'  => array(
+						'completed_order'      => array(
 							'enable'  => array(
 								'description' => __( 'Enable completed order.', 'masteriyo' ),
 								'type'        => 'string',
@@ -558,7 +542,7 @@ class SettingsController extends CrudController {
 								'context'     => array( 'view', 'edit' ),
 							),
 						),
-						'onhold_order'     => array(
+						'onhold_order'         => array(
 							'enable'  => array(
 								'description' => __( 'Enable on hold order.', 'masteriyo' ),
 								'type'        => 'string',
@@ -580,7 +564,7 @@ class SettingsController extends CrudController {
 								'context'     => array( 'view', 'edit' ),
 							),
 						),
-						'cancelled_order'  => array(
+						'cancelled_order'      => array(
 							'enable'     => array(
 								'description' => __( 'Enable cancelled order.', 'masteriyo' ),
 								'type'        => 'string',
@@ -607,7 +591,7 @@ class SettingsController extends CrudController {
 								'context'     => array( 'view', 'edit' ),
 							),
 						),
-						'enrolled_course'  => array(
+						'enrolled_course'      => array(
 							'enable'  => array(
 								'description' => __( 'Enable enrolled course.', 'masteriyo' ),
 								'type'        => 'string',
@@ -628,6 +612,72 @@ class SettingsController extends CrudController {
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
+						),
+						'completed_course'     => array(
+							'enable'  => array(
+								'description' => __( 'Enable completed course.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'subject' => array(
+								'description' => __( 'Completed course email subject.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'heading' => array(
+								'description' => __( 'Completed course email heading.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'content' => array(
+								'description' => __( 'Completed course email content.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+						),
+						'become_an_instructor' => array(
+							'enable'  => array(
+								'description' => __( 'Enable become an instructor.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'subject' => array(
+								'description' => __( 'Become an instructor email subject.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'heading' => array(
+								'description' => __( 'Become an instructor email heading.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'content' => array(
+								'description' => __( 'Become an instructor email content.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+						),
+					),
+				),
+				'advanced' => array(
+					'description' => __( 'Advanced Setting', 'masteriyo' ),
+					'type'        => 'object',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'template_debug' => array(
+							'description' => __( 'Enable template debug.', 'masteriyo' ),
+							'type'        => 'boolean',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'debug'          => array(
+							'description' => __( 'Enable debug mode.', 'masteriyo' ),
+							'type'        => 'boolean',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'styles_mode'    => array(
+							'description' => __( 'Choose styles mode.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
 						),
 					),
 				),
@@ -744,6 +794,21 @@ class SettingsController extends CrudController {
 		return $setting;
 	}
 
+	/**
+	 * Reset the default value to settings.
+	 *
+	 * @since 0.1.0
+	 * @return Setting
+	 */
+	public function delete_items( $request ) {
+			$setting = masteriyo( 'setting' );
+			$setting->delete( $setting );
+			$request->set_param( 'context', 'edit' );
+			$response = $this->prepare_object_for_response( $setting, $request );
+
+			return $response;
+	}
+
 
 	/**
 	 * Prepares the object for the REST response.
@@ -787,7 +852,7 @@ class SettingsController extends CrudController {
 	 */
 	protected function get_setting_data( $setting, $context = 'view' ) {
 		return array(
-			'general' => array(
+			'general'  => array(
 				'address_line1'      => $setting->get_general_address_line1( $context ),
 				'address_line2'      => $setting->get_general_address_line2( $context ),
 				'city'               => $setting->get_general_city( $context ),
@@ -799,7 +864,7 @@ class SettingsController extends CrudController {
 				'decimal_separator'  => $setting->get_general_decimal_separator( $context ),
 				'number_of_decimals' => $setting->get_general_number_of_decimals( $context ),
 			),
-			'courses' => array(
+			'courses'  => array(
 				'placeholder_image'              => $setting->get_courses_placeholder_image( $context ),
 				'add_to_cart_behaviour'          => $setting->get_courses_add_to_cart_behaviour( $context ),
 				'per_page'                       => $setting->get_courses_per_page( $context ),
@@ -815,12 +880,12 @@ class SettingsController extends CrudController {
 				'show_thumbnail'                 => $setting->get_courses_show_thumbnail( $context ),
 				'thumbnail_size'                 => $setting->get_courses_thumbnail_size( $context ),
 			),
-			'pages'   => array(
-				'profile_page'          => $setting->get_pages_profile_page( $context ),
-				'course_list_page'      => $setting->get_pages_course_list_page( $context ),
-				'terms_conditions_page' => $setting->get_pages_terms_conditions_page( $context ),
-				'cart_page'             => $setting->get_pages_cart_page( $context ),
-				'checkout_page'         => $setting->get_pages_checkout_page( $context ),
+			'pages'    => array(
+				'profile_page_id'          => $setting->get_pages_profile_page_id( $context ),
+				'course_list_page_id'      => $setting->get_pages_course_list_page_id( $context ),
+				'terms_conditions_page_id' => $setting->get_pages_terms_conditions_page_id( $context ),
+				'cart_page_id'             => $setting->get_pages_cart_page_id( $context ),
+				'checkout_page_id'         => $setting->get_pages_checkout_page_id( $context ),
 				'checkout_endpoints'    => array(
 					'pay'                        => $setting->get_pages_pay( $context ),
 					'order_received'             => $setting->get_pages_order_received( $context ),
@@ -838,52 +903,69 @@ class SettingsController extends CrudController {
 					'logout'          => $setting->get_pages_logout( $context ),
 				),
 			),
-			'emails'  => array(
-				'general'          => array(
+			'emails'   => array(
+				'general'              => array(
 					'from_name'       => $setting->get_emails_general_from_name( $context ),
 					'from_email'      => $setting->get_emails_general_from_email( $context ),
 					'default_content' => $setting->get_emails_general_default_content( $context ),
 					'header_image'    => $setting->get_emails_general_header_image( $context ),
 					'footer_text'     => $setting->get_emails_general_footer_text( $context ),
 				),
-				'new_order'        => array(
+				'new_order'            => array(
 					'enable'     => $setting->get_emails_new_order_enable( $context ),
 					'recipients' => $setting->get_emails_new_order_recipients( $context ),
 					'subject'    => $setting->get_emails_new_order_subject( $context ),
 					'heading'    => $setting->get_emails_new_order_heading( $context ),
 					'content'    => $setting->get_emails_new_order_content( $context ),
 				),
-				'processing_order' => array(
+				'processing_order'     => array(
 					'enable'  => $setting->get_emails_processing_order_enable( $context ),
 					'subject' => $setting->get_emails_processing_order_subject( $context ),
 					'heading' => $setting->get_emails_processing_order_heading( $context ),
 					'content' => $setting->get_emails_processing_order_content( $context ),
 				),
-				'completed_order'  => array(
+				'completed_order'      => array(
 					'enable'  => $setting->get_emails_completed_order_enable( $context ),
 					'subject' => $setting->get_emails_completed_order_subject( $context ),
 					'heading' => $setting->get_emails_completed_order_heading( $context ),
 					'content' => $setting->get_emails_completed_order_content( $context ),
 				),
-				'onhold_order'     => array(
+				'onhold_order'         => array(
 					'enable'  => $setting->get_emails_onhold_order_enable( $context ),
 					'subject' => $setting->get_emails_onhold_order_subject( $context ),
 					'heading' => $setting->get_emails_onhold_order_heading( $context ),
 					'content' => $setting->get_emails_onhold_order_content( $context ),
 				),
-				'cancelled_order'  => array(
+				'cancelled_order'      => array(
 					'enable'     => $setting->get_emails_cancelled_order_enable( $context ),
 					'recipients' => $setting->get_emails_cancelled_order_recipients( $context ),
 					'subject'    => $setting->get_emails_cancelled_order_subject( $context ),
 					'heading'    => $setting->get_emails_cancelled_order_heading( $context ),
 					'content'    => $setting->get_emails_cancelled_order_content( $context ),
 				),
-				'enrolled_course'  => array(
+				'enrolled_course'      => array(
 					'enable'  => $setting->get_emails_enrolled_course_enable( $context ),
 					'subject' => $setting->get_emails_enrolled_course_subject( $context ),
 					'heading' => $setting->get_emails_enrolled_course_heading( $context ),
 					'content' => $setting->get_emails_enrolled_course_content( $context ),
 				),
+				'completed_course'     => array(
+					'enable'  => $setting->get_emails_completed_course_enable( $context ),
+					'subject' => $setting->get_emails_completed_course_subject( $context ),
+					'heading' => $setting->get_emails_completed_course_heading( $context ),
+					'content' => $setting->get_emails_completed_course_content( $context ),
+				),
+				'become_an_instructor' => array(
+					'enable'  => $setting->get_emails_become_an_instructor_enable( $context ),
+					'subject' => $setting->get_emails_become_an_instructor_subject( $context ),
+					'heading' => $setting->get_emails_become_an_instructor_heading( $context ),
+					'content' => $setting->get_emails_become_an_instructor_content( $context ),
+				),
+			),
+			'advanced' => array(
+				'template_debug_enable' => $setting->get_advanced_template_debug_enable( $context ),
+				'debug_enable'          => $setting->get_advanced_debug_enable( $context ),
+				'styles_mode'           => $setting->get_advanced_styles_mode( $context ),
 			),
 		);
 	}
@@ -1004,24 +1086,24 @@ class SettingsController extends CrudController {
 
 		// Pages Setting.
 
-		if ( isset( $request['pages']['profile_page'] ) ) {
-			$setting->set_pages_profile_page( $request['pages']['profile_page'] );
+		if ( isset( $request['pages']['profile_page_id'] ) ) {
+			$setting->set_pages_profile_page_id( $request['pages']['profile_page_id'] );
 		}
 
-		if ( isset( $request['pages']['course_list_page'] ) ) {
-			$setting->set_pages_course_list_page( $request['pages']['course_list_page'] );
+		if ( isset( $request['pages']['course_list_page_id'] ) ) {
+			$setting->set_pages_course_list_page_id( $request['pages']['course_list_page_id'] );
 		}
 
-		if ( isset( $request['pages']['terms_conditions_page'] ) ) {
-			$setting->set_pages_terms_conditions_page( $request['pages']['terms_conditions_page'] );
+		if ( isset( $request['pages']['terms_conditions_page_id'] ) ) {
+			$setting->set_pages_terms_conditions_page_id( $request['pages']['terms_conditions_page_id'] );
 		}
 
-		if ( isset( $request['pages']['cart_page'] ) ) {
-			$setting->set_pages_cart_page( $request['pages']['cart_page'] );
+		if ( isset( $request['pages']['cart_page_id'] ) ) {
+			$setting->set_pages_cart_page_id( $request['pages']['cart_page_id'] );
 		}
 
-		if ( isset( $request['pages']['checkout_page'] ) ) {
-			$setting->set_pages_checkout_page( $request['pages']['checkout_page'] );
+		if ( isset( $request['pages']['checkout_page_id'] ) ) {
+			$setting->set_pages_checkout_page_id( $request['pages']['checkout_page_id'] );
 		}
 
 		// Checkout Endpoints.
@@ -1207,6 +1289,55 @@ class SettingsController extends CrudController {
 			$setting->set_emails_enrolled_course_content( $request['emails']['enrolled_course']['content'] );
 		}
 
+		// Completed Course
+
+		if ( isset( $request['emails']['completed_course']['enable'] ) ) {
+			$setting->set_emails_completed_course_enable( $request['emails']['completed_course']['enable'] );
+		}
+
+		if ( isset( $request['emails']['completed_course']['subject'] ) ) {
+			$setting->set_emails_completed_course_subject( $request['emails']['completed_course']['subject'] );
+		}
+
+		if ( isset( $request['emails']['completed_course']['heading'] ) ) {
+			$setting->set_emails_completed_course_heading( $request['emails']['completed_course']['heading'] );
+		}
+
+		if ( isset( $request['emails']['completed_course']['content'] ) ) {
+			$setting->set_emails_completed_course_content( $request['emails']['completed_course']['content'] );
+		}
+
+		// Become an instructor.
+
+		if ( isset( $request['emails']['become_an_instructor']['enable'] ) ) {
+			$setting->set_emails_become_an_instructor_enable( $request['emails']['become_an_instructor']['enable'] );
+		}
+
+		if ( isset( $request['emails']['become_an_instructor']['subject'] ) ) {
+			$setting->set_emails_become_an_instructor_subject( $request['emails']['become_an_instructor']['subject'] );
+		}
+
+		if ( isset( $request['emails']['become_an_instructor']['heading'] ) ) {
+			$setting->set_emails_become_an_instructor_heading( $request['emails']['become_an_instructor']['heading'] );
+		}
+
+		if ( isset( $request['emails']['become_an_instructor']['content'] ) ) {
+			$setting->set_emails_become_an_instructor_content( $request['emails']['become_an_instructor']['content'] );
+		}
+
+		// Advanced Setting.
+
+		if ( isset( $request['advanced']['template_debug_enable'] ) ) {
+			$setting->set_advanced_template_debug_enable( $request['advanced']['template_debug_enable'] );
+		}
+
+		if ( isset( $request['advanced']['debug_enable'] ) ) {
+			$setting->set_advanced_debug_enable( $request['advanced']['debug_enable'] );
+		}
+
+		if ( isset( $request['advanced']['styles_mode'] ) ) {
+			$setting->set_advanced_styles_mode( $request['advanced']['styles_mode'] );
+		}
 
 		/**
 		 * Filters an object before it is inserted via the REST API.

@@ -104,11 +104,14 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$setting, $args = array() ) {
-		return new \WP_Error(
-			'invalid-method',
-			// translators: %s: Class method name.
-			sprintf( __( "Method '%s' not implemented.", 'masteriyo' ), __METHOD__ ),
-			array( 'status' => 405 )
-		);
+
+		// Resetting to default data.
+		foreach ( $setting->get_default_datas() as $setting_name => $setting_value ) {
+			update_option( 'masteriyo.' . $setting_name, $setting_value, false );
+		}
+
+		$setting->apply_changes();
+
+		do_action( 'masteriyo_reset_setting', $setting );
 	}
 }

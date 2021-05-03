@@ -107,11 +107,11 @@ class Setting extends Model {
 		/** Pages Setting */
 
 		// Page Setup.
-		'pages.profile_page'                     => '',
-		'pages.course_list_page'                 => '',
-		'pages.terms_conditions_page'            => '',
-		'pages.cart_page'                        => '',
-		'pages.checkout_page'                    => '',
+		'pages.profile_page_id'                  => '',
+		'pages.course_list_page_id'              => '',
+		'pages.terms_conditions_page_id'         => '',
+		'pages.cart_page_id'                     => '',
+		'pages.checkout_page_id'                 => '',
 
 		// Checkout Endpoints.
 		'pages.pay'                              => '',
@@ -189,6 +189,13 @@ class Setting extends Model {
 		'emails.become_an_instructor_subject'    => '',
 		'emails.become_an_instructor_heading'    => '',
 		'emails.become_an_instructor_content'    => '',
+
+		/** Advanced Setting */
+
+		// Debug.
+		'advanced.template_debug_enable'         => '',
+		'advanced.debug_enable'                  => '',
+		'advanced.styles_mode'                   => '',
 	);
 
 	/**
@@ -200,6 +207,18 @@ class Setting extends Model {
 	 */
 	public function __construct( SettingRepository $setting_repository ) {
 		$this->repository = $setting_repository;
+	}
+
+	/**
+	 * Default datas, might use for resetting data to default value.
+	 *
+	 * Default data will be returned if not read from store. Otherwise stored datas will return.
+	 *
+	 * @since 0.1.0
+	 * @return array $data Default datas.
+	 */
+	public function get_default_datas() {
+		return $this->data;
 	}
 
 	/**
@@ -501,63 +520,63 @@ class Setting extends Model {
 	// Pages Setting Getter.
 
 	/**
-	 * Get option pages_profile_page.
+	 * Get option pages_profile_page_id.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_pages_profile_page( $context = 'view' ) {
-		return $this->get_prop( 'pages.profile_page', $context );
+	public function get_pages_profile_page_id( $context = 'view' ) {
+		return $this->get_prop( 'pages.profile_page_id', $context );
 	}
 
 	/**
-	 * Get option pages_course_list_page.
+	 * Get option pages_course_list_page_id.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_pages_course_list_page( $context = 'view' ) {
-		return $this->get_prop( 'pages.course_list_page', $context );
+	public function get_pages_course_list_page_id( $context = 'view' ) {
+		return $this->get_prop( 'pages.course_list_page_id', $context );
 	}
 
 	/**
-	 * Get option pages_terms_conditions_page.
+	 * Get option pages_terms_conditions_page_id.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_pages_terms_conditions_page( $context = 'view' ) {
-		return $this->get_prop( 'pages.terms_conditions_page', $context );
+	public function get_pages_terms_conditions_page_id( $context = 'view' ) {
+		return $this->get_prop( 'pages.terms_conditions_page_id', $context );
 	}
 
 	/**
-	 * Get option pages_cart_page.
+	 * Get option pages_cart_page_id.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_pages_cart_page( $context = 'view' ) {
-		return $this->get_prop( 'pages.cart_page', $context );
+	public function get_pages_cart_page_id( $context = 'view' ) {
+		return $this->get_prop( 'pages.cart_page_id', $context );
 	}
 
 	/**
-	 * Get option pages_checkout_page.
+	 * Get option pages_checkout_page_id.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_pages_checkout_page( $context = 'view' ) {
-		return $this->get_prop( 'pages.checkout_page', $context );
+	public function get_pages_checkout_page_id( $context = 'view' ) {
+		return $this->get_prop( 'pages.checkout_page_id', $context );
 	}
 
 	// Checkout endpoints.
@@ -1097,6 +1116,145 @@ class Setting extends Model {
 		return $this->get_prop( 'emails.enrolled_course_content', $context );
 	}
 
+	// Completed Course.
+
+	/**
+	 * Get option emails_completed_course_enable.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_emails_completed_course_enable( $context = 'view' ) {
+		return $this->get_prop( 'emails.completed_course_enable', $context );
+	}
+
+	/**
+	 * Get option emails_completed_course_subject.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_emails_completed_course_subject( $context = 'view' ) {
+		return $this->get_prop( 'emails.completed_course_subject', $context );
+	}
+
+	/**
+	 * Get option emails_completed_course_heading.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_emails_completed_course_heading( $context = 'view' ) {
+		return $this->get_prop( 'emails.completed_course_heading', $context );
+	}
+
+	/**
+	 * Get option emails_completed_course_content.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_emails_completed_course_content( $context = 'view' ) {
+		return $this->get_prop( 'emails.completed_course_content', $context );
+	}
+
+	// Become An Instructor.
+
+	/**
+	 * Get option emails_become_an_instructor_enable.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_emails_become_an_instructor_enable( $context = 'view' ) {
+		return $this->get_prop( 'emails.become_an_instructor_enable', $context );
+	}
+
+	/**
+	 * Get option emails_become_an_instructor_subject.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_emails_become_an_instructor_subject( $context = 'view' ) {
+		return $this->get_prop( 'emails.become_an_instructor_subject', $context );
+	}
+
+	/**
+	 * Get option emails_become_an_instructor_heading.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_emails_become_an_instructor_heading( $context = 'view' ) {
+		return $this->get_prop( 'emails.become_an_instructor_heading', $context );
+	}
+
+	/**
+	 * Get option emails_become_an_instructor_content.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_emails_become_an_instructor_content( $context = 'view' ) {
+		return $this->get_prop( 'emails.become_an_instructor_content', $context );
+	}
+
+	// Advanced Setting.
+
+	// Debug.
+
+	/**
+	 * Get option advanced_template_debug_enable.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_advanced_template_debug_enable( $context = 'view' ) {
+		return $this->get_prop( 'advanced.template_debug_enable', $context );
+	}
+
+	/**
+	 * Get option advanced_debug_enable.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_advanced_debug_enable( $context = 'view' ) {
+		return $this->get_prop( 'advanced.debug_enable', $context );
+	}
+
+	/**
+	 * Get option advanced_styles_mode.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_advanced_styles_mode( $context = 'view' ) {
+		return $this->get_prop( 'advanced.styles_mode', $context );
+	}
 
 	/**
 	 * ############# CRUD setters ###########################
@@ -1349,53 +1507,53 @@ class Setting extends Model {
 	// Pages Setting Setter.
 
 	/**
-	 * Set option pages_profile_page.
+	 * Set option pages_profile_page_id.
 	*
 	* @since 0.1.0
-	* @param string $pages_profile_page
+	* @param string $pages_profile_page_id
 	*/
-	public function set_pages_profile_page( $pages_profile_page ) {
-		return $this->set_prop( 'pages.profile_page', $pages_profile_page );
+	public function set_pages_profile_page_id( $pages_profile_page_id ) {
+		return $this->set_prop( 'pages.profile_page_id', $pages_profile_page_id );
 	}
 
 	/**
-	 * Set option pages_course_list_page.
+	 * Set option pages_course_list_page_id.
 	*
 	* @since 0.1.0
-	* @param string $pages_course_list_page
+	* @param string $pages_course_list_page_id
 	*/
-	public function set_pages_course_list_page( $pages_course_list_page ) {
-		return $this->set_prop( 'pages.course_list_page', $pages_course_list_page );
+	public function set_pages_course_list_page_id( $pages_course_list_page_id ) {
+		return $this->set_prop( 'pages.course_list_page_id', $pages_course_list_page_id );
 	}
 
 	/**
-	 * Set option pages_terms_conditions_page.
+	 * Set option pages_terms_conditions_page_id.
 	*
 	* @since 0.1.0
-	* @param string $pages_terms_conditions_page
+	* @param string $pages_terms_conditions_page_id
 	*/
-	public function set_pages_terms_conditions_page( $pages_terms_conditions_page ) {
-		return $this->set_prop( 'pages.terms_conditions_page', $pages_terms_conditions_page );
+	public function set_pages_terms_conditions_page_id( $pages_terms_conditions_page_id ) {
+		return $this->set_prop( 'pages.terms_conditions_page_id', $pages_terms_conditions_page_id );
 	}
 
 	/**
-	 * Set option pages_cart_page.
+	 * Set option pages_cart_page_id.
 	*
 	* @since 0.1.0
-	* @param string $pages_cart_page
+	* @param string $pages_cart_page_id
 	*/
-	public function set_pages_cart_page( $pages_cart_page ) {
-		return $this->set_prop( 'pages.cart_page', $pages_cart_page );
+	public function set_pages_cart_page_id( $pages_cart_page_id ) {
+		return $this->set_prop( 'pages.cart_page_id', $pages_cart_page_id );
 	}
 
 	/**
-	 * Set option pages_checkout_page.
+	 * Set option pages_checkout_page_id.
 	*
 	* @since 0.1.0
-	* @param string $pages_checkout_page
+	* @param string $pages_checkout_page_id
 	*/
-	public function set_pages_checkout_page( $pages_checkout_page ) {
-		return $this->set_prop( 'pages.checkout_page', $pages_checkout_page );
+	public function set_pages_checkout_page_id( $pages_checkout_page_id ) {
+		return $this->set_prop( 'pages.checkout_page_id', $pages_checkout_page_id );
 	}
 
 	// Checkout endpoints.
@@ -1846,6 +2004,124 @@ class Setting extends Model {
 	*/
 	public function set_emails_enrolled_course_content( $emails_enrolled_course_content ) {
 		return $this->set_prop( 'emails.enrolled_course_content', $emails_enrolled_course_content );
+	}
+
+	// Completed Course.
+
+	/**
+	 * Set option emails_completed_course_enable.
+	*
+	* @since 0.1.0
+	* @param string $emails_completed_course_enable
+	*/
+	public function set_emails_completed_course_enable( $emails_completed_course_enable ) {
+		return $this->set_prop( 'emails.completed_course_enable', $emails_completed_course_enable );
+	}
+
+	/**
+	 * Set option emails_completed_course_subject.
+	*
+	* @since 0.1.0
+	* @param string $emails_completed_course_subject
+	*/
+	public function set_emails_completed_course_subject( $emails_completed_course_subject ) {
+		return $this->set_prop( 'emails.completed_course_subject', $emails_completed_course_subject );
+	}
+
+	/**
+	 * Set option emails_completed_course_heading.
+	*
+	* @since 0.1.0
+	* @param string $emails_completed_course_heading
+	*/
+	public function set_emails_completed_course_heading( $emails_completed_course_heading ) {
+		return $this->set_prop( 'emails.completed_course_heading', $emails_completed_course_heading );
+	}
+
+	/**
+	 * Set option emails_completed_course_content.
+	*
+	* @since 0.1.0
+	* @param string $emails_completed_course_content
+	*/
+	public function set_emails_completed_course_content( $emails_completed_course_content ) {
+		return $this->set_prop( 'emails.completed_course_content', $emails_completed_course_content );
+	}
+
+	// Become An Instructor.
+
+	/**
+	 * Set option emails_become_an_instructor_enable.
+	*
+	* @since 0.1.0
+	* @param string $emails_become_an_instructor_enable
+	*/
+	public function set_emails_become_an_instructor_enable( $emails_become_an_instructor_enable ) {
+		return $this->set_prop( 'emails.become_an_instructor_enable', $emails_become_an_instructor_enable );
+	}
+
+	/**
+	 * Set option emails_become_an_instructor_subject.
+	*
+	* @since 0.1.0
+	* @param string $emails_become_an_instructor_subject
+	*/
+	public function set_emails_become_an_instructor_subject( $emails_become_an_instructor_subject ) {
+		return $this->set_prop( 'emails.become_an_instructor_subject', $emails_become_an_instructor_subject );
+	}
+
+	/**
+	 * Set option emails_become_an_instructor_heading.
+	*
+	* @since 0.1.0
+	* @param string $emails_become_an_instructor_heading
+	*/
+	public function set_emails_become_an_instructor_heading( $emails_become_an_instructor_heading ) {
+		return $this->set_prop( 'emails.become_an_instructor_heading', $emails_become_an_instructor_heading );
+	}
+
+	/**
+	 * Set option emails_become_an_instructor_content.
+	*
+	* @since 0.1.0
+	* @param string $emails_become_an_instructor_content
+	*/
+	public function set_emails_become_an_instructor_content( $emails_become_an_instructor_content ) {
+		return $this->set_prop( 'emails.become_an_instructor_content', $emails_become_an_instructor_content );
+	}
+
+	// Advanced Setting.
+
+	// Debug.
+
+	/**
+	 * Set option advanced_template_debug_enable.
+	*
+	* @since 0.1.0
+	* @param string $advanced_template_debug_enable
+	*/
+	public function set_advanced_template_debug_enable( $advanced_template_debug_enable ) {
+		return $this->set_prop( 'advanced.template_debug_enable', $advanced_template_debug_enable );
+	}
+
+	/**
+	 * Set option advanced_debug_enable.
+	*
+	* @since 0.1.0
+	* @param string $advanced_debug_enable
+	*/
+	public function set_advanced_debug_enable( $advanced_debug_enable ) {
+		return $this->set_prop( 'advanced.debug_enable', $advanced_debug_enable );
+	}
+
+	/**
+	 * Set option advanced_styles_mode.
+	*
+	* @since 0.1.0
+	* @param string $advanced_styles_mode
+	*/
+	public function set_advanced_styles_mode( $advanced_styles_mode ) {
+		return $this->set_prop( 'advanced.styles_mode', $advanced_styles_mode );
 	}
 
 }

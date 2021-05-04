@@ -1834,7 +1834,7 @@ class Setting extends Model {
 	* @param string[] $recipients
 	*/
 	public function set_emails_new_order_recipients( $recipients ) {
-		return $this->set_prop( 'emails.new_order_recipients', $recipients );
+		return $this->set_prop( 'emails.new_order_recipients', maybe_unserialize( $recipients ) );
 	}
 
 	/**
@@ -2012,7 +2012,7 @@ class Setting extends Model {
 	* @param string[] $recipients
 	*/
 	public function set_emails_cancelled_order_recipients( $recipients ) {
-		return $this->set_prop( 'emails.cancelled_order_recipients', $recipients );
+		return $this->set_prop( 'emails.cancelled_order_recipients', maybe_unserialize( $recipients ) );
 	}
 
 	/**

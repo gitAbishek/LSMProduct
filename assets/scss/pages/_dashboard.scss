@@ -1,10 +1,12 @@
+.mto-main {
+  gap: 64px;
+}
 // Dashboard
 .mto-dashboard {
   display: flex;
   flex-direction: column;
   flex: 1 1 74%;
   gap: 48px;
-  margin-left: 64px;
   min-width: 600px;
   ul {
     margin: inherit;
@@ -119,7 +121,8 @@
   gap: 30px;
 
   &--stat {
-    flex-grow: 6;
+    flex: 1 1 66%;
+    min-width: 500px;
 
     &--header {
       margin-bottom: 20px;
@@ -127,13 +130,15 @@
   }
 
   &--pcourse {
-    flex: 1 1 25%;
+    flex: 1 1 30%;
+    min-width: 260px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     &--title {
       font-size: $mto-text-base;
+      margin: inherit;
     }
 
     &--list {
@@ -162,14 +167,116 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  gap: 20px;
 
   &--header {
-    display: flex;
+    display: inline-flex;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
+
+  &--title {
+    font-size: $mto-text-xl;
+    margin: inherit;
+  }
+
   &--btn {
     display: inline-flex;
     align-items: center;
     border-radius: 100px;
+  }
+
+  &--body {
+    &--wrap {
+      gap: 30px;
+      margin-bottom: 16px;
+
+      & > * {
+        flex-grow: 1;
+      }
+    }
+
+    &--img-title {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    &--img {
+      width: 80px;
+      height: 80px;
+      @include mto-border-radius;
+    }
+
+    &--rating {
+      .mto-icon-svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &--title {
+      font-size: $mto-text-lg;
+      font-weight: 700;
+      margin: inherit;
+    }
+
+    &--duration {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+
+      .mto-icon-svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    &--tag > * {
+      border-radius: 100px;
+    }
+    // Progress bar
+    &--pbar {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    &--progressbar {
+      height: 16px;
+      position: relative;
+      background: lighten($mto-primary-color, 10%);
+      overflow: hidden;
+      border-radius: 50px;
+      span {
+        display: block;
+        height: 100%;
+      }
+    }
+
+    &--bar {
+      width: 50%;
+    }
+    &--progress {
+      background: $mto-primary-color;
+      animation: progressbar 3s ease-in-out;
+      animation-fill-mode: both;
+      padding: 0 10px;
+      font-size: 9px;
+      color: white;
+
+      @keyframes progressbar {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+    }
+
+    &--btn {
+      border-radius: 100px;
+    }
   }
 }

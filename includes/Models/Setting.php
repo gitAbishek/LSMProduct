@@ -1448,7 +1448,7 @@ class Setting extends Model {
 	* @param string $courses_enable_editing
 	*/
 	public function set_courses_enable_editing( $courses_enable_editing ) {
-		return $this->set_prop( 'courses.enable_editing', $courses_enable_editing );
+		return $this->set_prop( 'courses.enable_editing', masteiryo_string_to_bool( $courses_enable_editing ) );
 	}
 
 	/**
@@ -1528,7 +1528,7 @@ class Setting extends Model {
 	* @param string $courses_single_course_enable_editing
 	*/
 	public function set_courses_single_course_enable_editing( $courses_single_course_enable_editing ) {
-		return $this->set_prop( 'courses.single_course_enable_editing', $courses_single_course_enable_editing );
+		return $this->set_prop( 'courses.single_course_enable_editing', masteiryo_string_to_bool( $courses_single_course_enable_editing ) );
 	}
 
 	/**
@@ -1538,7 +1538,7 @@ class Setting extends Model {
 	* @param string $courses_show_thumbnail
 	*/
 	public function set_courses_show_thumbnail( $courses_show_thumbnail ) {
-		return $this->set_prop( 'courses.show_thumbnail', $courses_show_thumbnail );
+		return $this->set_prop( 'courses.show_thumbnail', masteiryo_string_to_bool( $courses_show_thumbnail ) );
 	}
 
 	/**
@@ -1728,7 +1728,7 @@ class Setting extends Model {
 	* @param string $payments_paypal_enable
 	*/
 	public function set_payments_paypal_enable( $payments_paypal_enable ) {
-		return $this->set_prop( 'payments.paypal_enable', $payments_paypal_enable );
+		return $this->set_prop( 'payments.paypal_enable', masteiryo_string_to_bool( $payments_paypal_enable ) );
 	}
 
 	/**
@@ -1748,7 +1748,7 @@ class Setting extends Model {
 	* @param string $payments_paypal_sandbox_enable
 	*/
 	public function set_payments_paypal_sandbox_enable( $payments_paypal_sandbox_enable ) {
-		return $this->set_prop( 'payments.paypal_sandbox_enable', $payments_paypal_sandbox_enable );
+		return $this->set_prop( 'payments.paypal_sandbox_enable', masteiryo_string_to_bool( $payments_paypal_sandbox_enable ) );
 	}
 
 	/**
@@ -1824,7 +1824,7 @@ class Setting extends Model {
 	* @param string $emails_new_order_enable
 	*/
 	public function set_emails_new_order_enable( $emails_new_order_enable ) {
-		return $this->set_prop( 'emails.new_order_enable', $emails_new_order_enable );
+		return $this->set_prop( 'emails.new_order_enable', masteiryo_string_to_bool( $emails_new_order_enable ) );
 	}
 
 	/**
@@ -1876,7 +1876,7 @@ class Setting extends Model {
 	* @param string $emails_processing_order_enable
 	*/
 	public function set_emails_processing_order_enable( $emails_processing_order_enable ) {
-		return $this->set_prop( 'emails.processing_order_enable', $emails_processing_order_enable );
+		return $this->set_prop( 'emails.processing_order_enable', masteiryo_string_to_bool( $emails_processing_order_enable ) );
 	}
 
 	/**
@@ -1918,7 +1918,7 @@ class Setting extends Model {
 	* @param string $emails_completed_order_enable
 	*/
 	public function set_emails_completed_order_enable( $emails_completed_order_enable ) {
-		return $this->set_prop( 'emails.completed_order_enable', $emails_completed_order_enable );
+		return $this->set_prop( 'emails.completed_order_enable', masteiryo_string_to_bool( $emails_completed_order_enable ) );
 	}
 
 	/**
@@ -1960,7 +1960,7 @@ class Setting extends Model {
 	* @param string $emails_onhold_order_enable
 	*/
 	public function set_emails_onhold_order_enable( $emails_onhold_order_enable ) {
-		return $this->set_prop( 'emails.onhold_order_enable', $emails_onhold_order_enable );
+		return $this->set_prop( 'emails.onhold_order_enable', masteiryo_string_to_bool( $emails_onhold_order_enable ) );
 	}
 
 	/**
@@ -2002,7 +2002,7 @@ class Setting extends Model {
 	* @param string $emails_cancelled_order_enable
 	*/
 	public function set_emails_cancelled_order_enable( $emails_cancelled_order_enable ) {
-		return $this->set_prop( 'emails.cancelled_order_enable', $emails_cancelled_order_enable );
+		return $this->set_prop( 'emails.cancelled_order_enable', masteiryo_string_to_bool( $emails_cancelled_order_enable ) );
 	}
 
 	/**
@@ -2054,7 +2054,7 @@ class Setting extends Model {
 	* @param string $emails_enrolled_course_enable
 	*/
 	public function set_emails_enrolled_course_enable( $emails_enrolled_course_enable ) {
-		return $this->set_prop( 'emails.enrolled_course_enable', $emails_enrolled_course_enable );
+		return $this->set_prop( 'emails.enrolled_course_enable', masteiryo_string_to_bool( $emails_enrolled_course_enable ) );
 	}
 
 	/**
@@ -2096,7 +2096,7 @@ class Setting extends Model {
 	* @param string $emails_completed_course_enable
 	*/
 	public function set_emails_completed_course_enable( $emails_completed_course_enable ) {
-		return $this->set_prop( 'emails.completed_course_enable', $emails_completed_course_enable );
+		return $this->set_prop( 'emails.completed_course_enable', masteiryo_string_to_bool( $emails_completed_course_enable ) );
 	}
 
 	/**
@@ -2138,7 +2138,7 @@ class Setting extends Model {
 	* @param string $emails_become_an_instructor_enable
 	*/
 	public function set_emails_become_an_instructor_enable( $emails_become_an_instructor_enable ) {
-		return $this->set_prop( 'emails.become_an_instructor_enable', $emails_become_an_instructor_enable );
+		return $this->set_prop( 'emails.become_an_instructor_enable', masteiryo_string_to_bool( $emails_become_an_instructor_enable ) );
 	}
 
 	/**
@@ -2182,7 +2182,7 @@ class Setting extends Model {
 	* @param string $advanced_template_debug_enable
 	*/
 	public function set_advanced_template_debug_enable( $advanced_template_debug_enable ) {
-		return $this->set_prop( 'advanced.template_debug_enable', $advanced_template_debug_enable );
+		return $this->set_prop( 'advanced.template_debug_enable', masteiryo_string_to_bool( $advanced_template_debug_enable ) );
 	}
 
 	/**
@@ -2192,7 +2192,7 @@ class Setting extends Model {
 	* @param string $advanced_debug_enable
 	*/
 	public function set_advanced_debug_enable( $advanced_debug_enable ) {
-		return $this->set_prop( 'advanced.debug_enable', $advanced_debug_enable );
+		return $this->set_prop( 'advanced.debug_enable', masteiryo_string_to_bool( $advanced_debug_enable ) );
 	}
 
 	/**

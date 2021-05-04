@@ -500,7 +500,7 @@ class SettingsController extends CrudController {
 						'new_order'            => array(
 							'enable'     => array(
 								'description' => __( 'Enable new order.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'recipients' => array(
@@ -527,7 +527,7 @@ class SettingsController extends CrudController {
 						'processing_order'     => array(
 							'enable'  => array(
 								'description' => __( 'Enable processing order.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'subject' => array(
@@ -549,7 +549,7 @@ class SettingsController extends CrudController {
 						'completed_order'      => array(
 							'enable'  => array(
 								'description' => __( 'Enable completed order.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'subject' => array(
@@ -571,7 +571,7 @@ class SettingsController extends CrudController {
 						'onhold_order'         => array(
 							'enable'  => array(
 								'description' => __( 'Enable on hold order.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'subject' => array(
@@ -593,7 +593,7 @@ class SettingsController extends CrudController {
 						'cancelled_order'      => array(
 							'enable'     => array(
 								'description' => __( 'Enable cancelled order.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'recipients' => array(
@@ -620,7 +620,7 @@ class SettingsController extends CrudController {
 						'enrolled_course'      => array(
 							'enable'  => array(
 								'description' => __( 'Enable enrolled course.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'subject' => array(
@@ -642,7 +642,7 @@ class SettingsController extends CrudController {
 						'completed_course'     => array(
 							'enable'  => array(
 								'description' => __( 'Enable completed course.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'subject' => array(
@@ -664,7 +664,7 @@ class SettingsController extends CrudController {
 						'become_an_instructor' => array(
 							'enable'  => array(
 								'description' => __( 'Enable become an instructor.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'subject' => array(
@@ -690,17 +690,17 @@ class SettingsController extends CrudController {
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'template_debug' => array(
+						'template_debug_enable' => array(
 							'description' => __( 'Enable template debug.', 'masteriyo' ),
 							'type'        => 'boolean',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'debug'          => array(
+						'debug_enable'          => array(
 							'description' => __( 'Enable debug mode.', 'masteriyo' ),
 							'type'        => 'boolean',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'styles_mode'    => array(
+						'styles_mode'           => array(
 							'description' => __( 'Choose styles mode.', 'masteriyo' ),
 							'type'        => 'string',
 							'enum'        => array( 'none', 'simple', 'advance' ),

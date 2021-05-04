@@ -95,8 +95,8 @@ class Setting extends Model {
 		'courses.tag_base'                       => '',
 		'courses.difficulty_base'                => '',
 		'courses.single_course_permalink'        => '',
-		'courses.lessons'                        => '',
-		'courses.quizes'                         => '',
+		'courses.lessons_slug'                   => '',
+		'courses.quizzes_slug'                   => '',
 		'courses.enable_single_course_permalink' => '',
 		'courses.single_course_enable_editing'   => '',
 
@@ -110,7 +110,6 @@ class Setting extends Model {
 		'pages.profile_page_id'                  => '',
 		'pages.course_list_page_id'              => '',
 		'pages.terms_conditions_page_id'         => '',
-		'pages.cart_page_id'                     => '',
 		'pages.checkout_page_id'                 => '',
 
 		// Checkout Endpoints.
@@ -132,9 +131,9 @@ class Setting extends Model {
 		/** Payments Settings. */
 
 		// Standard Paypal
-		'payments.paypal_enable'                 => '',
+		'payments.paypal_enable'                 => false,
 		'payments.paypal_production_email'       => '',
-		'payments.paypal_sandbox_enable'         => '',
+		'payments.paypal_sandbox_enable'         => false,
 		'payments.paypal_sandbox_email'          => '',
 
 		/** Emails Setting */
@@ -201,8 +200,8 @@ class Setting extends Model {
 		/** Advanced Setting */
 
 		// Debug.
-		'advanced.template_debug_enable'         => '',
-		'advanced.debug_enable'                  => '',
+		'advanced.template_debug_enable'         => false,
+		'advanced.debug_enable'                  => false,
 		'advanced.styles_mode'                   => '',
 	);
 
@@ -454,27 +453,27 @@ class Setting extends Model {
 	}
 
 	/**
-	 * Get option courses_lessons.
+	 * Get option courses_lessons_slug.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_courses_lessons( $context = 'view' ) {
-		return $this->get_prop( 'courses.lessons', $context );
+	public function get_courses_lessons_slug( $context = 'view' ) {
+		return $this->get_prop( 'courses.lessons_slug', $context );
 	}
 
 	/**
-	 * Get option courses_quizes.
+	 * Get option courses_quizzes_slug.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_courses_quizes( $context = 'view' ) {
-		return $this->get_prop( 'courses.quizes', $context );
+	public function get_courses_quizzes_slug( $context = 'view' ) {
+		return $this->get_prop( 'courses.quizzes_slug', $context );
 	}
 
 	/**
@@ -561,18 +560,6 @@ class Setting extends Model {
 	 */
 	public function get_pages_terms_conditions_page_id( $context = 'view' ) {
 		return $this->get_prop( 'pages.terms_conditions_page_id', $context );
-	}
-
-	/**
-	 * Get option pages_cart_page_id.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $context
-	 * @return string
-	 */
-	public function get_pages_cart_page_id( $context = 'view' ) {
-		return $this->get_prop( 'pages.cart_page_id', $context );
 	}
 
 	/**
@@ -1505,23 +1492,23 @@ class Setting extends Model {
 	}
 
 	/**
-	 * Set option courses_lessons.
+	 * Set option courses_lessons_slug.
 	*
 	* @since 0.1.0
-	* @param string $courses_lessons
+	* @param string $courses_lessons_slug
 	*/
-	public function set_courses_lessons( $courses_lessons ) {
-		return $this->set_prop( 'courses.lessons', $courses_lessons );
+	public function set_courses_lessons_slug( $courses_lessons_slug ) {
+		return $this->set_prop( 'courses.lessons_slug', $courses_lessons_slug );
 	}
 
 	/**
-	 * Set option courses_quizes.
+	 * Set option courses_quizzes_slug.
 	*
 	* @since 0.1.0
-	* @param string $courses_quizes
+	* @param string $courses_quizzes_slug
 	*/
-	public function set_courses_quizes( $courses_quizes ) {
-		return $this->set_prop( 'courses.quizes', $courses_quizes );
+	public function set_courses_quizzes_slug( $courses_quizzes_slug ) {
+		return $this->set_prop( 'courses.quizzes_slug', $courses_quizzes_slug );
 	}
 
 	/**
@@ -1594,16 +1581,6 @@ class Setting extends Model {
 	*/
 	public function set_pages_terms_conditions_page_id( $pages_terms_conditions_page_id ) {
 		return $this->set_prop( 'pages.terms_conditions_page_id', $pages_terms_conditions_page_id );
-	}
-
-	/**
-	 * Set option pages_cart_page_id.
-	*
-	* @since 0.1.0
-	* @param string $pages_cart_page_id
-	*/
-	public function set_pages_cart_page_id( $pages_cart_page_id ) {
-		return $this->set_prop( 'pages.cart_page_id', $pages_cart_page_id );
 	}
 
 	/**

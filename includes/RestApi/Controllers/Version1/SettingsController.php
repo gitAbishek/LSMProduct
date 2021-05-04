@@ -347,7 +347,7 @@ class SettingsController extends CrudController {
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'                  => 'object',
+						'type'                     => 'object',
 						'profile_page_id'          => array(
 							'description' => __( 'Profile page ID.', 'masteriyo' ),
 							'type'        => 'int',
@@ -373,7 +373,7 @@ class SettingsController extends CrudController {
 							'type'        => 'int',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'checkout_endpoints'    => array(
+						'checkout_endpoints'       => array(
 							'pay'                        => array(
 								'description' => __( 'Pay endpoint.', 'masteriyo' ),
 								'type'        => 'string',
@@ -400,7 +400,7 @@ class SettingsController extends CrudController {
 								'context'     => array( 'view', 'edit' ),
 							),
 						),
-						'account_endpoints'     => array(
+						'account_endpoints'        => array(
 							'orders'          => array(
 								'description' => __( 'Orders endpoint.', 'masteriyo' ),
 								'type'        => 'string',
@@ -433,6 +433,36 @@ class SettingsController extends CrudController {
 							),
 							'logout'          => array(
 								'description' => __( 'Logout endpoint.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+						),
+					),
+				),
+				'payments' => array(
+					'description' => __( 'Payments Settings.', 'masteriyo' ),
+					'type'        => 'object',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'   => 'object',
+						'paypal' => array(
+							'enable'           => array(
+								'description' => __( 'Enable standard paypal.', 'masteriyo' ),
+								'type'        => 'boolean',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'production_email' => array(
+								'description' => __( 'Paypal production email address.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'sandbox_enable'   => array(
+								'description' => __( 'Enable sandbox mode on paypal.', 'masteriyo' ),
+								'type'        => 'boolean',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'sandbox_email'    => array(
+								'description' => __( 'Paypal sandbox email address.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
@@ -886,14 +916,14 @@ class SettingsController extends CrudController {
 				'terms_conditions_page_id' => $setting->get_pages_terms_conditions_page_id( $context ),
 				'cart_page_id'             => $setting->get_pages_cart_page_id( $context ),
 				'checkout_page_id'         => $setting->get_pages_checkout_page_id( $context ),
-				'checkout_endpoints'    => array(
+				'checkout_endpoints'       => array(
 					'pay'                        => $setting->get_pages_pay( $context ),
 					'order_received'             => $setting->get_pages_order_received( $context ),
 					'add_payment_method'         => $setting->get_pages_add_payment_method( $context ),
 					'delete_payment_method'      => $setting->get_pages_delete_payment_method( $context ),
 					'set_default_payment_method' => $setting->get_pages_set_default_payment_method( $context ),
 				),
-				'account_endpoints'     => array(
+				'account_endpoints'        => array(
 					'orders'          => $setting->get_pages_orders( $context ),
 					'view_order'      => $setting->get_pages_view_order( $context ),
 					'my_courses'      => $setting->get_pages_my_courses( $context ),
@@ -901,6 +931,14 @@ class SettingsController extends CrudController {
 					'payment_methods' => $setting->get_pages_payment_methods( $context ),
 					'lost_password'   => $setting->get_pages_lost_password( $context ),
 					'logout'          => $setting->get_pages_logout( $context ),
+				),
+			),
+			'payments' => array(
+				'paypal' => array(
+					'enable'           => $setting->get_payments_paypal_enable( $context ),
+					'production_email' => $setting->get_payments_paypal_production_email( $context ),
+					'sandbox_enable'   => $setting->get_payments_paypal_sandbox_enable( $context ),
+					'sandbox_email'    => $setting->get_payments_paypal_sandbox_email( $context ),
 				),
 			),
 			'emails'   => array(
@@ -1154,6 +1192,25 @@ class SettingsController extends CrudController {
 
 		if ( isset( $request['pages']['account_endpoints']['logout'] ) ) {
 			$setting->set_pages_logout( $request['pages']['account_endpoints']['logout'] );
+		}
+
+		// Payments Setting.
+
+		// Paypal.
+		if ( isset( $request['payments']['paypal']['enable'] ) ) {
+			$setting->set_payments_paypal_enable( $request['payments']['paypal']['enable'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['production_email'] ) ) {
+			$setting->set_payments_paypal_production_email( $request['payments']['paypal']['production_email'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['sandbox_enable'] ) ) {
+			$setting->set_payments_paypal_sandbox_enable( $request['payments']['paypal']['sandbox_enable'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['sandbox_email'] ) ) {
+			$setting->set_payments_paypal_sandbox_email( $request['payments']['paypal']['sandbox_email'] );
 		}
 
 		// Emails Setting.

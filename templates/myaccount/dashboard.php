@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit;
 </div>
 
 <div class="mto-counter">
-	<div class="mto-counter--inprogress">
+	<div class="mto-counter--inprogress mto-db-card">
 		<div class="mto-icon-title">
 			<span class="mto-icon">
 				<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -45,7 +45,7 @@ defined( 'ABSPATH' ) || exit;
 		<div class="mto-subtitle"><?php echo esc_html__( 'Courses', 'masteriyo' ); ?></div>
 	</div>
 
-	<div class="mto-counter--scores">
+	<div class="mto-counter--scores mto-db-card">
 		<div class="mto-icon-title">
 			<span class="mto-icon">
 				<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -58,7 +58,7 @@ defined( 'ABSPATH' ) || exit;
 		<div class="mto-subtitle"><?php echo esc_html__( 'Reward Points', 'masteriyo' ); ?></div>
 	</div>
 
-	<div class="mto-counter--certificates">
+	<div class="mto-counter--certificates mto-db-card">
 		<div class="mto-icon-title">
 			<span class="mto-icon">
 				<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -74,49 +74,47 @@ defined( 'ABSPATH' ) || exit;
 	
 </div>
 
-<div class="mto-card-wrapper">
-	<div class="user-statistic mto-card mto-full md:mto-w-3/4 hover:mto-shadow-lg">
-		<div class="card-header">
-			<span class="mto-block mto-text-textColor mto-text-4xl mto-font-bold">24.33</span>
-			<span class="mto-block mto-font-bold mto-text-textColor mto-text-base"><?php echo esc_html__( 'Hours spend last week', 'masteriyo' ); ?></span>
+<div class="mto-sc mto-flex mto-flex--space-between">
+	<div class="mto-sc--stat mto-db-card">
+		<div class="mto-sc--stat--header">
+			<h4 class="mto-sc--stat--hour">24.33</h4>
+			<span class="mto-sc--stat--hourdetail"><?php echo esc_html__( 'Hours spend last week', 'masteriyo' ); ?></span>
 		</div>
-		<div>
-			<img class="mto-w-full" src="./img/chart.png" alt="">
-		</div>
+		<img class="mto-sc-stat--img" src="<?php echo esc_html__( masteriyo_img_url('chart.png'));?>" alt="">
 	</div>
 
-	<div class="db-popular-course-list mto-card hover:mto-shadow-lg mto-space-y-10">
-		<div class="mto-card-header">
-			<h4 class="mto-card-header"><?php echo esc_html__( 'Popular Course', 'masteriyo' ); ?></h4>
+	<div class="mto-sc--pcourse mto-db-card">
+		<div class="mto-sc--pcourse--header">
+			<h4 class="mto-sc--pcourse--title"><?php echo esc_html__( 'Popular Course', 'masteriyo' ); ?></h4>
 		</div>
-		<ul class="mto-space-y-4">
-			<li >
-				<a class="mto-flex mto-space-x-4 mto-text-textColor hover:mto-text-primary" href="#">
-					<img src="./img/pcourse1.jpg" alt="Building Javascript Calendar" />
-					<span class="mto-text-sm mto-font-bold ">Building Javascript Calendar</span>
+		<ul class="mto-sc--pcourse--list mto-flex">
+			<li>
+				<a class="mto-sc--pcourse--course" href="#">
+					<img src="<?php echo esc_html__( masteriyo_img_url('dummyimg.jpg'));?>" class="mto-sc--pcourse--img" alt="Building Javascript Calendar" />
+					<span class="mto-sc--pcourse--title ">Building Javascript Calendar</span>
 				</a>
 			</li>
 			<li>
-				<a class="mto-flex mto-space-x-4 mto-text-textColor hover:mto-text-primary" href="#">
-					<img src="./img/pcourse2.jpg" alt="Building Javascript Calendar" />
-					<span class="mto-text-sm mto-font-bold">Building Javascript Calendar</span>
+				<a class="mto-sc--pcourse--course" href="#">
+					<img src="<?php echo esc_html__( masteriyo_img_url('dummyimg.jpg'));?>" class="mto-sc--pcourse--img" alt="Building Javascript Calendar" />
+					<span class="mto-sc--pcourse--title ">Building Javascript Calendar</span>
 				</a>
 			</li>
-
 			<li>
-				<a class="mto-flex mto-space-x-4 mto-text-textColor hover:mto-text-primary" href="#">
-					<img src="./img/pcourse3.jpg" alt="Building Javascript Calendar" />
-					<span class="mto-text-sm mto-font-bold">Building Javascript Calendar</span>
+				<a class="mto-sc--pcourse--course" href="#">
+					<img src="<?php echo esc_html__( masteriyo_img_url('dummyimg.jpg'));?>" class="mto-sc--pcourse--img" alt="Building Javascript Calendar" />
+					<span class="mto-sc--pcourse--title ">Building Javascript Calendar</span>
 				</a>
 			</li>
-
-			<a class="mto-flex mto-space-x-4 mto-text-textColor hover:mto-text-primary" href="#">
-				<img src="./img/pcourse2.jpg" alt="Building Javascript Calendar" />
-				<span class="mto-text-sm mto-font-bold">Building Javascript Calendar</span>
-			</a>
-		</li>
+			<li>
+				<a class="mto-sc--pcourse--course" href="#">
+					<img src="<?php echo esc_html__( masteriyo_img_url('dummyimg.jpg'));?>" class="mto-sc--pcourse--img" alt="Building Javascript Calendar" />
+					<span class="mto-sc--pcourse--title ">Building Javascript Calendar</span>
+				</a>
+			</li>
+			
 		</ul>
-		<a class="mto-block mto-items-center mto-font-semibold mto-text-sm mto-text-pColor mto-uppercase hover:mto-text-primary" href="#">
+		<a class="mto-sc--pcourse--btn mto-link-primary" href="#">
 			<span class="mto-inline-flex"><?php echo esc_html__( 'Show All', 'masteriyo' ); ?></span>
 			<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 				<path d="M10.707 17.707L16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/>
@@ -125,18 +123,19 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 </div>
 
-<div class="study-wrapper md:mto-mt-0 mto-space-y-8">
-	<div class="study-header mto-flex mto-flex-row mto-mt-16 md:mto-justify-between">
-		<h2 class="mto-font-bold mto-text-2xl mto-text-textColor mto-mb-0"><?php echo esc_html__( 'Continue Studying', 'masteriyo' ); ?></h2>
-		<a class="btn mto-font-semibold mto-text-sm mto-text-pColor hover:mto-text-white mto-bg-white mto-border hover:mto-border-0" href="#">
-			<span class="mto-inline-flex"><?php echo esc_html__( 'Show All', 'masteriyo' ); ?></span>
+<div class="mto-cstudy">
+	<div class="mto-cstudy--header">
+		<h2 class="mto-cstudy--title"><?php echo esc_html__( 'Continue Studying', 'masteriyo' ); ?></h2>
+		<a class="mto-cstudy--btn mto-btn mto-btn-default" href="#">
+			<span><?php echo esc_html__( 'Show All', 'masteriyo' ); ?></span>
 			<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 				<path d="M10.707 17.707L16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/>
 			</svg>
 		</a>
 	</div>
-	<div class="study-list">
-		<ul class="mto-space-y-6">
+
+	<div class="mto-cstudy--body">
+		<ul>
 			<li>
 				<div class="mto-card mto-flex md:mto-flex-row mto-items-center md:mto-space-x-4">
 					<img class="mto-w-20" src="./img/cstudy1.jpg" alt="">

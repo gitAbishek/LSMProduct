@@ -2,9 +2,16 @@
 .mto-dashboard {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 1 1 74%;
   gap: 48px;
-  margin: 0 64px;
+  margin-left: 64px;
+  min-width: 600px;
+  ul {
+    margin: inherit;
+    li {
+      list-style-type: none;
+    }
+  }
 }
 
 // Welcome notify
@@ -47,23 +54,24 @@
     }
   }
 }
+// Dashboard Card
+.mto-db-card {
+  @include mto-default-border;
+  @include mto-border-radius;
+  @include mto-default-animate;
+  padding: 30px;
+  flex: 1 1 30%;
+
+  &:hover {
+    @include mto-shadow-1;
+  }
+}
 
 // User counter
 .mto-counter {
   display: flex;
+  flex-wrap: wrap;
   gap: 30px;
-
-  & > * {
-    @include mto-default-border;
-    @include mto-border-radius;
-    @include mto-default-animate;
-    padding: 30px;
-    flex-basis: 100%;
-
-    &:hover {
-      @include mto-shadow-1;
-    }
-  }
 
   .mto-icon-title {
     display: flex;
@@ -102,6 +110,66 @@
 
   .mto-number {
     font-size: 36px;
-    font-weight: 900;
+    font-weight: 600;
+  }
+}
+
+// Statistic and Popular Cources
+.mto-sc {
+  gap: 30px;
+
+  &--stat {
+    flex-grow: 6;
+
+    &--header {
+      margin-bottom: 20px;
+    }
+  }
+
+  &--pcourse {
+    flex: 1 1 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &--title {
+      font-size: $mto-text-base;
+    }
+
+    &--list {
+      gap: 8px;
+    }
+
+    &--img {
+      width: 40px;
+      height: 40px;
+      @include mto-border-radius;
+    }
+
+    &--course {
+      display: flex;
+      gap: 20px;
+    }
+    &--btn {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+// Continue Studing
+.mto-cstudy {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  &--header {
+    display: flex;
+    justify-content: space-between;
+  }
+  &--btn {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 100px;
   }
 }

@@ -129,6 +129,14 @@ class Setting extends Model {
 		'pages.lost_password'                    => '',
 		'pages.logout'                           => '',
 
+		/** Payments Settings. */
+
+		// Standard Paypal
+		'payments.paypal_enable'                 => '',
+		'payments.paypal_production_email'       => '',
+		'payments.paypal_sandbox_enable'         => '',
+		'payments.paypal_sandbox_email'          => '',
+
 		/** Emails Setting */
 
 		// General->Email Options.
@@ -725,6 +733,58 @@ class Setting extends Model {
 	 */
 	public function get_pages_logout( $context = 'view' ) {
 		return $this->get_prop( 'pages.logout', $context );
+	}
+
+	// Payments Setting Getter.
+
+	// Paypal
+
+	/**
+	 * Get option payments_paypal_enable.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_enable( $context = 'view' ) {
+		return $this->get_prop( 'payments.paypal_enable', $context );
+	}
+
+	/**
+	 * Get option payments_paypal_production_email.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_production_email( $context = 'view' ) {
+		return $this->get_prop( 'payments.paypal_production_email', $context );
+	}
+
+	/**
+	 * Get option payments_paypal_sandbox_enable.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_sandbox_enable( $context = 'view' ) {
+		return $this->get_prop( 'payments.paypal_sandbox_enable', $context );
+	}
+
+	/**
+	 * Get option payments_paypal_sandbox_email.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_sandbox_email( $context = 'view' ) {
+		return $this->get_prop( 'payments.paypal_sandbox_email', $context );
 	}
 
 
@@ -1678,6 +1738,50 @@ class Setting extends Model {
 	*/
 	public function set_pages_logout( $pages_logout ) {
 		return $this->set_prop( 'pages.logout', $pages_logout );
+	}
+
+	// Payments Setting SEtter.
+
+	// Paypal.
+
+	/**
+	 * Set option payments_paypal_enable.
+	*
+	* @since 0.1.0
+	* @param string $payments_paypal_enable
+	*/
+	public function set_payments_paypal_enable( $payments_paypal_enable ) {
+		return $this->set_prop( 'payments.paypal_enable', $payments_paypal_enable );
+	}
+
+	/**
+	 * Set option payments_paypal_production_email.
+	*
+	* @since 0.1.0
+	* @param string $payments_paypal_production_email
+	*/
+	public function set_payments_paypal_production_email( $payments_paypal_production_email ) {
+		return $this->set_prop( 'payments.paypal_production_email', $payments_paypal_production_email );
+	}
+
+	/**
+	 * Set option payments_paypal_sandbox_enable.
+	*
+	* @since 0.1.0
+	* @param string $payments_paypal_sandbox_enable
+	*/
+	public function set_payments_paypal_sandbox_enable( $payments_paypal_sandbox_enable ) {
+		return $this->set_prop( 'payments.paypal_sandbox_enable', $payments_paypal_sandbox_enable );
+	}
+
+	/**
+	 * Set option payments_paypal_sandbox_email.
+	*
+	* @since 0.1.0
+	* @param string $payments_paypal_sandbox_email
+	*/
+	public function set_payments_paypal_sandbox_email( $payments_paypal_sandbox_email ) {
+		return $this->set_prop( 'payments.paypal_sandbox_email', $payments_paypal_sandbox_email );
 	}
 
 	// Email Setting Setter.

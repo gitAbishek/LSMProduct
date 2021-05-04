@@ -88,7 +88,7 @@ class Setting extends Model {
 		'courses.placeholder_image'              => '',
 		'courses.add_to_cart_behaviour'          => '',
 		'courses.per_page'                       => '',
-		'courses.enable_editing'                 => '',
+		'courses.enable_editing'                 => false,
 
 		// Single Course.
 		'courses.category_base'                  => '',
@@ -148,51 +148,51 @@ class Setting extends Model {
 		'emails.general_footer_text'             => '',
 
 		//New Order.
-		'emails.new_order_enable'                => '',
-		'emails.new_order_recipients'            => '',
+		'emails.new_order_enable'                => false,
+		'emails.new_order_recipients'            => array(),
 		'emails.new_order_subject'               => '',
 		'emails.new_order_heading'               => '',
 		'emails.new_order_content'               => '',
 
 		// Processing Order.
-		'emails.processing_order_enable'         => '',
+		'emails.processing_order_enable'         => false,
 		'emails.processing_order_subject'        => '',
 		'emails.processing_order_heading'        => '',
 		'emails.processing_order_content'        => '',
 
 		// Completed Order.
-		'emails.completed_order_enable'          => '',
+		'emails.completed_order_enable'          => false,
 		'emails.completed_order_subject'         => '',
 		'emails.completed_order_heading'         => '',
 		'emails.completed_order_content'         => '',
 
 		// On Hold Order.
-		'emails.onhold_order_enable'             => '',
+		'emails.onhold_order_enable'             => false,
 		'emails.onhold_order_subject'            => '',
 		'emails.onhold_order_heading'            => '',
 		'emails.onhold_order_content'            => '',
 
 		// Cancelled Order.
-		'emails.cancelled_order_enable'          => '',
+		'emails.cancelled_order_enable'          => false,
 		'emails.cancelled_order_recipients'      => '',
 		'emails.cancelled_order_subject'         => '',
 		'emails.cancelled_order_heading'         => '',
 		'emails.cancelled_order_content'         => '',
 
 		// Enrolled Course.
-		'emails.enrolled_course_enable'          => '',
+		'emails.enrolled_course_enable'          => false,
 		'emails.enrolled_course_subject'         => '',
 		'emails.enrolled_course_heading'         => '',
 		'emails.enrolled_course_content'         => '',
 
 		// Completed Course.
-		'emails.completed_course_enable'         => '',
+		'emails.completed_course_enable'         => false,
 		'emails.completed_course_subject'        => '',
 		'emails.completed_course_heading'        => '',
 		'emails.completed_course_content'        => '',
 
 		// Become An Instructor.
-		'emails.become_an_instructor_enable'     => '',
+		'emails.become_an_instructor_enable'     => false,
 		'emails.become_an_instructor_subject'    => '',
 		'emails.become_an_instructor_heading'    => '',
 		'emails.become_an_instructor_content'    => '',
@@ -1445,7 +1445,7 @@ class Setting extends Model {
 	 * Set option courses_enable_editing.
 	*
 	* @since 0.1.0
-	* @param string $courses_enable_editing
+	* @param boolean $courses_enable_editing
 	*/
 	public function set_courses_enable_editing( $courses_enable_editing ) {
 		return $this->set_prop( 'courses.enable_editing', masteiryo_string_to_bool( $courses_enable_editing ) );
@@ -1717,7 +1717,7 @@ class Setting extends Model {
 		return $this->set_prop( 'pages.logout', $pages_logout );
 	}
 
-	// Payments Setting SEtter.
+	// Payments Setting Setter.
 
 	// Paypal.
 
@@ -1725,7 +1725,7 @@ class Setting extends Model {
 	 * Set option payments_paypal_enable.
 	*
 	* @since 0.1.0
-	* @param string $payments_paypal_enable
+	* @param boolean $payments_paypal_enable
 	*/
 	public function set_payments_paypal_enable( $payments_paypal_enable ) {
 		return $this->set_prop( 'payments.paypal_enable', masteiryo_string_to_bool( $payments_paypal_enable ) );
@@ -1745,7 +1745,7 @@ class Setting extends Model {
 	 * Set option payments_paypal_sandbox_enable.
 	*
 	* @since 0.1.0
-	* @param string $payments_paypal_sandbox_enable
+	* @param boolean $payments_paypal_sandbox_enable
 	*/
 	public function set_payments_paypal_sandbox_enable( $payments_paypal_sandbox_enable ) {
 		return $this->set_prop( 'payments.paypal_sandbox_enable', masteiryo_string_to_bool( $payments_paypal_sandbox_enable ) );
@@ -1766,409 +1766,409 @@ class Setting extends Model {
 	// General.
 
 	/**
-	 * Set option emails_general_from_name.
+	 * Set general from name.
 	*
 	* @since 0.1.0
-	* @param string $emails_general_from_name
+	* @param string $from_name
 	*/
-	public function set_emails_general_from_name( $emails_general_from_name ) {
-		return $this->set_prop( 'emails.general_from_name', $emails_general_from_name );
+	public function set_emails_general_from_name( $from_name ) {
+		return $this->set_prop( 'emails.general_from_name', $from_name );
 	}
 
 	/**
-	 * Set option emails_general_from_email.
+	 * Set general from email.
 	*
 	* @since 0.1.0
-	* @param string $emails_general_from_email
+	* @param string $from_email
 	*/
-	public function set_emails_general_from_email( $emails_general_from_email ) {
-		return $this->set_prop( 'emails.general_from_email', $emails_general_from_email );
+	public function set_emails_general_from_email( $from_email ) {
+		return $this->set_prop( 'emails.general_from_email', $from_email );
 	}
 
 	/**
-	 * Set option emails_general_default_content.
+	 * Set general gemail default content.
 	*
 	* @since 0.1.0
-	* @param string $emails_general_default_content
+	* @param string $default_content
 	*/
-	public function set_emails_general_default_content( $emails_general_default_content ) {
-		return $this->set_prop( 'emails.general_default_content', $emails_general_default_content );
+	public function set_emails_general_default_content( $default_content ) {
+		return $this->set_prop( 'emails.general_default_content', $default_content );
 	}
 
 	/**
-	 * Set option emails_general_header_image.
+	 * Set general email header image.
 	*
 	* @since 0.1.0
-	* @param string $emails_general_header_image
+	* @param string $header_image
 	*/
-	public function set_emails_general_header_image( $emails_general_header_image ) {
-		return $this->set_prop( 'emails.general_header_image', $emails_general_header_image );
+	public function set_emails_general_header_image( $header_image ) {
+		return $this->set_prop( 'emails.general_header_image', $header_image );
 	}
 
 	/**
-	 * Set option emails_general_footer_text.
+	 * Set general email footer text.
 	*
 	* @since 0.1.0
-	* @param string $emails_general_footer_text
+	* @param string $footer
 	*/
-	public function set_emails_general_footer_text( $emails_general_footer_text ) {
-		return $this->set_prop( 'emails.general_footer_text', $emails_general_footer_text );
+	public function set_emails_general_footer_text( $footer ) {
+		return $this->set_prop( 'emails.general_footer_text', $footer );
 	}
 
 	// New order.
 
 	/**
-	 * Set option emails_new_order_enable.
+	 * Enable/Disable new order email.
 	*
 	* @since 0.1.0
-	* @param string $emails_new_order_enable
+	* @param boolean $enable
 	*/
-	public function set_emails_new_order_enable( $emails_new_order_enable ) {
-		return $this->set_prop( 'emails.new_order_enable', masteiryo_string_to_bool( $emails_new_order_enable ) );
+	public function set_emails_new_order_enable( $enable ) {
+		return $this->set_prop( 'emails.new_order_enable', masteiryo_string_to_bool( $enable ) );
 	}
 
 	/**
-	 * Set option emails_new_order_recipients.
+	 * Set new order recipients.
 	*
 	* @since 0.1.0
-	* @param string $emails_new_order_recipients
+	* @param string[] $recipients
 	*/
-	public function set_emails_new_order_recipients( $emails_new_order_recipients ) {
-		return $this->set_prop( 'emails.new_order_recipients', $emails_new_order_recipients );
+	public function set_emails_new_order_recipients( $recipients ) {
+		return $this->set_prop( 'emails.new_order_recipients', $recipients );
 	}
 
 	/**
-	 * Set option emails_new_order_subject.
+	 * Set new order email subject.
 	*
 	* @since 0.1.0
-	* @param string $emails_new_order_subject
+	* @param string $subject
 	*/
-	public function set_emails_new_order_subject( $emails_new_order_subject ) {
-		return $this->set_prop( 'emails.new_order_subject', $emails_new_order_subject );
+	public function set_emails_new_order_subject( $subject ) {
+		return $this->set_prop( 'emails.new_order_subject', $subject );
 	}
 
 	/**
-	 * Set option emails_new_order_heading.
+	 * Set new order email heading.
 	*
 	* @since 0.1.0
-	* @param string $emails_new_order_heading
+	* @param string $heading
 	*/
-	public function set_emails_new_order_heading( $emails_new_order_heading ) {
-		return $this->set_prop( 'emails.new_order_heading', $emails_new_order_heading );
+	public function set_emails_new_order_heading( $heading ) {
+		return $this->set_prop( 'emails.new_order_heading', $heading );
 	}
 
 	/**
-	 * Set option emails_new_order_content.
+	 * Set new order email content.
 	*
 	* @since 0.1.0
-	* @param string $emails_new_order_content
+	* @param string $content
 	*/
-	public function set_emails_new_order_content( $emails_new_order_content ) {
-		return $this->set_prop( 'emails.new_order_content', $emails_new_order_content );
+	public function set_emails_new_order_content( $content ) {
+		return $this->set_prop( 'emails.new_order_content', $content );
 	}
 
 	// Processing order.
 
 	/**
-	 * Set option emails_processing_order_enable.
+	 * Enable/Disable order processing email.
 	*
 	* @since 0.1.0
-	* @param string $emails_processing_order_enable
+	* @param boolean $enable
 	*/
-	public function set_emails_processing_order_enable( $emails_processing_order_enable ) {
-		return $this->set_prop( 'emails.processing_order_enable', masteiryo_string_to_bool( $emails_processing_order_enable ) );
+	public function set_emails_processing_order_enable( $enable ) {
+		return $this->set_prop( 'emails.processing_order_enable', masteiryo_string_to_bool( $enable ) );
 	}
 
 	/**
-	 * Set option emails_processing_order_subject.
+	 * Set order processing email subject.
 	*
 	* @since 0.1.0
-	* @param string $emails_processing_order_subject
+	* @param string $subject
 	*/
-	public function set_emails_processing_order_subject( $emails_processing_order_subject ) {
-		return $this->set_prop( 'emails.processing_order_subject', $emails_processing_order_subject );
+	public function set_emails_processing_order_subject( $subject ) {
+		return $this->set_prop( 'emails.processing_order_subject', $subject );
 	}
 
 	/**
-	 * Set option emails_processing_order_heading.
+	 * Set order processing email heading.
 	*
 	* @since 0.1.0
-	* @param string $emails_processing_order_heading
+	* @param string $heading
 	*/
-	public function set_emails_processing_order_heading( $emails_processing_order_heading ) {
-		return $this->set_prop( 'emails.processing_order_heading', $emails_processing_order_heading );
+	public function set_emails_processing_order_heading( $heading ) {
+		return $this->set_prop( 'emails.processing_order_heading', $heading );
 	}
 
 	/**
-	 * Set option emails_processing_order_content.
+	 * Set order processing email content.
 	*
 	* @since 0.1.0
-	* @param string $emails_processing_order_content
+	* @param string $content
 	*/
-	public function set_emails_processing_order_content( $emails_processing_order_content ) {
-		return $this->set_prop( 'emails.processing_order_content', $emails_processing_order_content );
+	public function set_emails_processing_order_content( $content ) {
+		return $this->set_prop( 'emails.processing_order_content', $content );
 	}
 
 	// Completed order.
 
 	/**
-	 * Set option emails_completed_order_enable.
+	 * Enable/Disable order completed email.
 	*
 	* @since 0.1.0
-	* @param string $emails_completed_order_enable
+	* @param boolean $enable
 	*/
-	public function set_emails_completed_order_enable( $emails_completed_order_enable ) {
-		return $this->set_prop( 'emails.completed_order_enable', masteiryo_string_to_bool( $emails_completed_order_enable ) );
+	public function set_emails_completed_order_enable( $enable ) {
+		return $this->set_prop( 'emails.completed_order_enable', masteiryo_string_to_bool( $enable ) );
 	}
 
 	/**
-	 * Set option emails_completed_order_subject.
+	 * Set order completed email subject.
 	*
 	* @since 0.1.0
-	* @param string $emails_completed_order_subject
+	* @param string $subject
 	*/
-	public function set_emails_completed_order_subject( $emails_completed_order_subject ) {
-		return $this->set_prop( 'emails.completed_order_subject', $emails_completed_order_subject );
+	public function set_emails_completed_order_subject( $subject ) {
+		return $this->set_prop( 'emails.completed_order_subject', $subject );
 	}
 
 	/**
-	 * Set option emails_completed_order_heading.
+	 * Set order completed email heading.
 	*
 	* @since 0.1.0
-	* @param string $emails_completed_order_heading
+	* @param string $heading
 	*/
-	public function set_emails_completed_order_heading( $emails_completed_order_heading ) {
-		return $this->set_prop( 'emails.completed_order_heading', $emails_completed_order_heading );
+	public function set_emails_completed_order_heading( $heading ) {
+		return $this->set_prop( 'emails.completed_order_heading', $heading );
 	}
 
 	/**
-	 * Set option emails_completed_order_content.
+	 * Set order completed email content.
 	*
 	* @since 0.1.0
-	* @param string $emails_completed_order_content
+	* @param string $content
 	*/
-	public function set_emails_completed_order_content( $emails_completed_order_content ) {
-		return $this->set_prop( 'emails.completed_order_content', $emails_completed_order_content );
+	public function set_emails_completed_order_content( $content ) {
+		return $this->set_prop( 'emails.completed_order_content', $content );
 	}
 
 	// On Hold Order.
 
 	/**
-	 * Set option emails_onhold_order_enable.
+	 * Enable/Dsiable order onhold email.
 	*
 	* @since 0.1.0
-	* @param string $emails_onhold_order_enable
+	* @param boolean $enable
 	*/
-	public function set_emails_onhold_order_enable( $emails_onhold_order_enable ) {
-		return $this->set_prop( 'emails.onhold_order_enable', masteiryo_string_to_bool( $emails_onhold_order_enable ) );
+	public function set_emails_onhold_order_enable( $enable ) {
+		return $this->set_prop( 'emails.onhold_order_enable', masteiryo_string_to_bool( $enable ) );
 	}
 
 	/**
-	 * Set option emails_onhold_order_subject.
+	 * Set order onhold email subject.
 	*
 	* @since 0.1.0
-	* @param string $emails_onhold_order_subject
+	* @param string $subject
 	*/
-	public function set_emails_onhold_order_subject( $emails_onhold_order_subject ) {
-		return $this->set_prop( 'emails.onhold_order_subject', $emails_onhold_order_subject );
+	public function set_emails_onhold_order_subject( $subject ) {
+		return $this->set_prop( 'emails.onhold_order_subject', $subject );
 	}
 
 	/**
-	 * Set option emails_onhold_order_heading.
+	 * Set order onhold email heading
 	*
 	* @since 0.1.0
-	* @param string $emails_onhold_order_heading
+	* @param string $heading
 	*/
-	public function set_emails_onhold_order_heading( $emails_onhold_order_heading ) {
-		return $this->set_prop( 'emails.onhold_order_heading', $emails_onhold_order_heading );
+	public function set_emails_onhold_order_heading( $heading ) {
+		return $this->set_prop( 'emails.onhold_order_heading', $heading );
 	}
 
 	/**
-	 * Set option emails_onhold_order_content.
+	 * Set order onhold email content.
 	*
 	* @since 0.1.0
-	* @param string $emails_onhold_order_content
+	* @param string $content
 	*/
-	public function set_emails_onhold_order_content( $emails_onhold_order_content ) {
-		return $this->set_prop( 'emails.onhold_order_content', $emails_onhold_order_content );
+	public function set_emails_onhold_order_content( $content ) {
+		return $this->set_prop( 'emails.onhold_order_content', $content );
 	}
 
 	// Cancelled Order.
 
 	/**
-	 * Set option emails_cancelled_order_enable.
+	 * Enable/Dsiable order cancelled email
 	*
 	* @since 0.1.0
-	* @param string $emails_cancelled_order_enable
+	* @param boolean $enable
 	*/
-	public function set_emails_cancelled_order_enable( $emails_cancelled_order_enable ) {
-		return $this->set_prop( 'emails.cancelled_order_enable', masteiryo_string_to_bool( $emails_cancelled_order_enable ) );
+	public function set_emails_cancelled_order_enable( $enable ) {
+		return $this->set_prop( 'emails.cancelled_order_enable', masteiryo_string_to_bool( $enable ) );
 	}
 
 	/**
-	 * Set option emails_cancelled_order_recipients.
+	 * Set order cancelled email recipient.
 	*
 	* @since 0.1.0
-	* @param string $emails_cancelled_order_recipients
+	* @param string[] $recipients
 	*/
-	public function set_emails_cancelled_order_recipients( $emails_cancelled_order_recipients ) {
-		return $this->set_prop( 'emails.cancelled_order_recipients', $emails_cancelled_order_recipients );
+	public function set_emails_cancelled_order_recipients( $recipients ) {
+		return $this->set_prop( 'emails.cancelled_order_recipients', $recipients );
 	}
 
 	/**
-	 * Set option emails_cancelled_order_subject.
+	 * Set order cancelled email subject.
 	*
 	* @since 0.1.0
-	* @param string $emails_cancelled_order_subject
+	* @param string $subject
 	*/
-	public function set_emails_cancelled_order_subject( $emails_cancelled_order_subject ) {
-		return $this->set_prop( 'emails.cancelled_order_subject', $emails_cancelled_order_subject );
+	public function set_emails_cancelled_order_subject( $subject ) {
+		return $this->set_prop( 'emails.cancelled_order_subject', $subject );
 	}
 
 	/**
-	 * Set option emails_cancelled_order_heading.
+	 * Set order cancelled email heading.
 	*
 	* @since 0.1.0
-	* @param string $emails_cancelled_order_heading
+	* @param string $heading
 	*/
-	public function set_emails_cancelled_order_heading( $emails_cancelled_order_heading ) {
-		return $this->set_prop( 'emails.cancelled_order_heading', $emails_cancelled_order_heading );
+	public function set_emails_cancelled_order_heading( $heading ) {
+		return $this->set_prop( 'emails.cancelled_order_heading', $heading );
 	}
 
 	/**
-	 * Set option emails_cancelled_order_content.
+	 * Set order cancelled email content.
 	*
 	* @since 0.1.0
-	* @param string $emails_cancelled_order_content
+	* @param string $content
 	*/
-	public function set_emails_cancelled_order_content( $emails_cancelled_order_content ) {
-		return $this->set_prop( 'emails.cancelled_order_content', $emails_cancelled_order_content );
+	public function set_emails_cancelled_order_content( $content ) {
+		return $this->set_prop( 'emails.cancelled_order_content', $content );
 	}
 
 	// Enrolled Course.
 
 	/**
-	 * Set option emails_enrolled_course_enable.
+	 * Enable/Disable course enrolled email.
 	*
 	* @since 0.1.0
-	* @param string $emails_enrolled_course_enable
+	* @param boolean $enable
 	*/
-	public function set_emails_enrolled_course_enable( $emails_enrolled_course_enable ) {
-		return $this->set_prop( 'emails.enrolled_course_enable', masteiryo_string_to_bool( $emails_enrolled_course_enable ) );
+	public function set_emails_enrolled_course_enable( $enable ) {
+		return $this->set_prop( 'emails.enrolled_course_enable', masteiryo_string_to_bool( $enable ) );
 	}
 
 	/**
-	 * Set option emails_enrolled_course_subject.
+	 * Set course enrolled email subject.
 	*
 	* @since 0.1.0
-	* @param string $emails_enrolled_course_subject
+	* @param string $subject
 	*/
-	public function set_emails_enrolled_course_subject( $emails_enrolled_course_subject ) {
-		return $this->set_prop( 'emails.enrolled_course_subject', $emails_enrolled_course_subject );
+	public function set_emails_enrolled_course_subject( $subject ) {
+		return $this->set_prop( 'emails.enrolled_course_subject', $subject );
 	}
 
 	/**
-	 * Set option emails_enrolled_course_heading.
+	 * Set course enrolled email heading.
 	*
 	* @since 0.1.0
-	* @param string $emails_enrolled_course_heading
+	* @param string $heading
 	*/
-	public function set_emails_enrolled_course_heading( $emails_enrolled_course_heading ) {
-		return $this->set_prop( 'emails.enrolled_course_heading', $emails_enrolled_course_heading );
+	public function set_emails_enrolled_course_heading( $heading ) {
+		return $this->set_prop( 'emails.enrolled_course_heading', $heading );
 	}
 
 	/**
-	 * Set option emails_enrolled_course_content.
+	 * Set course enrolled email content.
 	*
 	* @since 0.1.0
-	* @param string $emails_enrolled_course_content
+	* @param string $content
 	*/
-	public function set_emails_enrolled_course_content( $emails_enrolled_course_content ) {
-		return $this->set_prop( 'emails.enrolled_course_content', $emails_enrolled_course_content );
+	public function set_emails_enrolled_course_content( $content ) {
+		return $this->set_prop( 'emails.enrolled_course_content', $content );
 	}
 
 	// Completed Course.
 
 	/**
-	 * Set option emails_completed_course_enable.
+	 * Enable/Disable course completed email.
 	*
 	* @since 0.1.0
-	* @param string $emails_completed_course_enable
+	* @param boolean $enable
 	*/
-	public function set_emails_completed_course_enable( $emails_completed_course_enable ) {
-		return $this->set_prop( 'emails.completed_course_enable', masteiryo_string_to_bool( $emails_completed_course_enable ) );
+	public function set_emails_completed_course_enable( $enable ) {
+		return $this->set_prop( 'emails.completed_course_enable', masteiryo_string_to_bool( $enable ) );
 	}
 
 	/**
-	 * Set option emails_completed_course_subject.
+	 * Set completed course meail subject.
 	*
 	* @since 0.1.0
-	* @param string $emails_completed_course_subject
+	* @param string $subject
 	*/
-	public function set_emails_completed_course_subject( $emails_completed_course_subject ) {
-		return $this->set_prop( 'emails.completed_course_subject', $emails_completed_course_subject );
+	public function set_emails_completed_course_subject( $subject ) {
+		return $this->set_prop( 'emails.completed_course_subject', $subject );
 	}
 
 	/**
-	 * Set option emails_completed_course_heading.
+	 * Set completed course email heading.
 	*
 	* @since 0.1.0
-	* @param string $emails_completed_course_heading
+	* @param string $heading
 	*/
-	public function set_emails_completed_course_heading( $emails_completed_course_heading ) {
-		return $this->set_prop( 'emails.completed_course_heading', $emails_completed_course_heading );
+	public function set_emails_completed_course_heading( $heading ) {
+		return $this->set_prop( 'emails.completed_course_heading', $heading );
 	}
 
 	/**
-	 * Set option emails_completed_course_content.
+	 * Set emails completed course content.
 	*
 	* @since 0.1.0
-	* @param string $emails_completed_course_content
+	* @param string $content
 	*/
-	public function set_emails_completed_course_content( $emails_completed_course_content ) {
-		return $this->set_prop( 'emails.completed_course_content', $emails_completed_course_content );
+	public function set_emails_completed_course_content( $content ) {
+		return $this->set_prop( 'emails.completed_course_content', $content );
 	}
 
 	// Become An Instructor.
 
 	/**
-	 * Set option emails_become_an_instructor_enable.
+	 * Enable/disable becone an instructor email.
 	*
 	* @since 0.1.0
-	* @param string $emails_become_an_instructor_enable
+	* @param boolean $enable
 	*/
-	public function set_emails_become_an_instructor_enable( $emails_become_an_instructor_enable ) {
-		return $this->set_prop( 'emails.become_an_instructor_enable', masteiryo_string_to_bool( $emails_become_an_instructor_enable ) );
+	public function set_emails_become_an_instructor_enable( $enable ) {
+		return $this->set_prop( 'emails.become_an_instructor_enable', masteiryo_string_to_bool( $enable ) );
 	}
 
 	/**
-	 * Set option emails_become_an_instructor_subject.
+	 * Set become an instructor email subject.
 	*
 	* @since 0.1.0
-	* @param string $emails_become_an_instructor_subject
+	* @param string $subject
 	*/
-	public function set_emails_become_an_instructor_subject( $emails_become_an_instructor_subject ) {
-		return $this->set_prop( 'emails.become_an_instructor_subject', $emails_become_an_instructor_subject );
+	public function set_emails_become_an_instructor_subject( $subject ) {
+		return $this->set_prop( 'emails.become_an_instructor_subject', $subject );
 	}
 
 	/**
-	 * Set option emails_become_an_instructor_heading.
+	 * Set become an insctuctor email heading.
 	*
 	* @since 0.1.0
-	* @param string $emails_become_an_instructor_heading
+	* @param string $heading
 	*/
-	public function set_emails_become_an_instructor_heading( $emails_become_an_instructor_heading ) {
-		return $this->set_prop( 'emails.become_an_instructor_heading', $emails_become_an_instructor_heading );
+	public function set_emails_become_an_instructor_heading( $heading ) {
+		return $this->set_prop( 'emails.become_an_instructor_heading', $heading );
 	}
 
 	/**
-	 * Set option emails_become_an_instructor_content.
+	 * Set become an instructor email content.
 	*
 	* @since 0.1.0
-	* @param string $emails_become_an_instructor_content
+	* @param string $content
 	*/
-	public function set_emails_become_an_instructor_content( $emails_become_an_instructor_content ) {
-		return $this->set_prop( 'emails.become_an_instructor_content', $emails_become_an_instructor_content );
+	public function set_emails_become_an_instructor_content( $content ) {
+		return $this->set_prop( 'emails.become_an_instructor_content', $content );
 	}
 
 	// Advanced Setting.
@@ -2176,33 +2176,33 @@ class Setting extends Model {
 	// Debug.
 
 	/**
-	 * Set option advanced_template_debug_enable.
+	 * Enable/Disable template debug mode.
 	*
 	* @since 0.1.0
-	* @param string $advanced_template_debug_enable
+	* @param string $mode
 	*/
-	public function set_advanced_template_debug_enable( $advanced_template_debug_enable ) {
-		return $this->set_prop( 'advanced.template_debug_enable', masteiryo_string_to_bool( $advanced_template_debug_enable ) );
+	public function set_advanced_template_debug_enable( $mode ) {
+		return $this->set_prop( 'advanced.template_debug_enable', masteiryo_string_to_bool( $mode ) );
 	}
 
 	/**
-	 * Set option advanced_debug_enable.
+	 * Enable/Disable debug mode.
 	*
 	* @since 0.1.0
-	* @param string $advanced_debug_enable
+	* @param string $mode
 	*/
-	public function set_advanced_debug_enable( $advanced_debug_enable ) {
-		return $this->set_prop( 'advanced.debug_enable', masteiryo_string_to_bool( $advanced_debug_enable ) );
+	public function set_advanced_debug_enable( $mode ) {
+		return $this->set_prop( 'advanced.debug_enable', masteiryo_string_to_bool( $mode ) );
 	}
 
 	/**
-	 * Set option advanced_styles_mode.
+	 * Set advance styles mode.
 	*
 	* @since 0.1.0
-	* @param string $advanced_styles_mode
+	* @param string $style
 	*/
-	public function set_advanced_styles_mode( $advanced_styles_mode ) {
-		return $this->set_prop( 'advanced.styles_mode', $advanced_styles_mode );
+	public function set_advanced_styles_mode( $style ) {
+		return $this->set_prop( 'advanced.styles_mode', $style );
 	}
 
 }

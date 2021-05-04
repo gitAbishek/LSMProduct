@@ -505,8 +505,9 @@ class SettingsController extends CrudController {
 							),
 							'recipients' => array(
 								'description' => __( 'Recipients email address.', 'masteriyo' ),
-								'type'        => 'email',
+								'type'        => 'array',
 								'context'     => array( 'view', 'edit' ),
+								''
 							),
 							'subject'    => array(
 								'description' => __( 'New order email subject.', 'masteriyo' ),
@@ -600,6 +601,9 @@ class SettingsController extends CrudController {
 								'description' => __( 'Recipients email address.', 'masteriyo' ),
 								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
+								'items'       => array(
+									'type' => 'email',
+								),
 							),
 							'subject'    => array(
 								'description' => __( 'Cancelled order email subject.', 'masteriyo' ),

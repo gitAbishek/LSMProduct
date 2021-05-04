@@ -242,6 +242,7 @@ class SettingsController extends CrudController {
 							'description' => __( 'Position of Currency.', 'masteriyo' ),
 							'type'        => 'string',
 							'default'     => 'left',
+							'enum'        => array( 'left', 'right', 'left_space', 'right_space' ),
 							'context'     => array( 'view', 'edit' ),
 						),
 						'thousand_separator' => array(
@@ -258,7 +259,7 @@ class SettingsController extends CrudController {
 						),
 						'number_of_decimals' => array(
 							'description' => __( 'Number of Decimals.', 'masteriyo' ),
-							'type'        => 'int',
+							'type'        => 'integer',
 							'default'     => 3,
 							'context'     => array( 'view', 'edit' ),
 						),
@@ -272,7 +273,7 @@ class SettingsController extends CrudController {
 						'type'                           => 'object',
 						'placeholder_image'              => array(
 							'description' => __( 'Placeholder image for courses.', 'masteriyo' ),
-							'type'        => 'string',
+							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
 						'add_to_cart_behaviour'          => array(
@@ -282,7 +283,7 @@ class SettingsController extends CrudController {
 						),
 						'per_page'                       => array(
 							'description' => __( 'Courses per page.', 'masteriyo' ),
-							'type'        => 'int',
+							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
 						'enable_editing'                 => array(
@@ -310,14 +311,14 @@ class SettingsController extends CrudController {
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'lessons'                        => array(
-							'description' => __( 'Course Lessons', 'masteriyo' ),
+						'lessons_slug'                   => array(
+							'description' => __( 'Course lessons slug', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'quizes'                         => array(
-							'description' => __( 'Course quizes.', 'masteriyo' ),
-							'type'        => 'int',
+						'quizzes_slug'                   => array(
+							'description' => __( 'Course quizzes slug.', 'masteriyo' ),
+							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
 						'enable_single_course_permalink' => array(
@@ -337,7 +338,7 @@ class SettingsController extends CrudController {
 						),
 						'thumbnail_size'                 => array(
 							'description' => __( 'Course thumbnail size', 'masteriyo' ),
-							'type'        => 'int',
+							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
 					),
@@ -350,27 +351,22 @@ class SettingsController extends CrudController {
 						'type'                     => 'object',
 						'profile_page_id'          => array(
 							'description' => __( 'Profile page ID.', 'masteriyo' ),
-							'type'        => 'int',
+							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
 						'course_list_page_id'      => array(
 							'description' => __( 'Archive course page ID.', 'masteriyo' ),
-							'type'        => 'int',
+							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
 						'terms_conditions_page_id' => array(
 							'description' => __( 'Terms and conditions page ID.', 'masteriyo' ),
-							'type'        => 'int',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'cart_page_id'             => array(
-							'description' => __( 'Cart page ID.', 'masteriyo' ),
-							'type'        => 'int',
+							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
 						'checkout_page_id'         => array(
 							'description' => __( 'Checkout page ID.', 'masteriyo' ),
-							'type'        => 'int',
+							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
 						'checkout_endpoints'       => array(
@@ -453,7 +449,7 @@ class SettingsController extends CrudController {
 							),
 							'production_email' => array(
 								'description' => __( 'Paypal production email address.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'sandbox_enable'   => array(
@@ -463,7 +459,7 @@ class SettingsController extends CrudController {
 							),
 							'sandbox_email'    => array(
 								'description' => __( 'Paypal sandbox email address.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
 							),
 						),
@@ -482,7 +478,7 @@ class SettingsController extends CrudController {
 							),
 							'from_email'      => array(
 								'description' => __( 'Email address to send email.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'default_content' => array(
@@ -509,7 +505,7 @@ class SettingsController extends CrudController {
 							),
 							'recipients' => array(
 								'description' => __( 'Recipients email address.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'subject'    => array(
@@ -602,7 +598,7 @@ class SettingsController extends CrudController {
 							),
 							'recipients' => array(
 								'description' => __( 'Recipients email address.', 'masteriyo' ),
-								'type'        => 'string',
+								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'subject'    => array(
@@ -707,6 +703,7 @@ class SettingsController extends CrudController {
 						'styles_mode'    => array(
 							'description' => __( 'Choose styles mode.', 'masteriyo' ),
 							'type'        => 'string',
+							'enum'        => array( 'none', 'simple', 'advance' ),
 							'context'     => array( 'view', 'edit' ),
 						),
 					),
@@ -903,8 +900,8 @@ class SettingsController extends CrudController {
 				'tag_base'                       => $setting->get_courses_tag_base( $context ),
 				'difficulty_base'                => $setting->get_courses_difficulty_base( $context ),
 				'single_course_permalink'        => $setting->get_courses_single_course_permalink( $context ),
-				'lessons'                        => $setting->get_courses_lessons( $context ),
-				'quizes'                         => $setting->get_courses_quizes( $context ),
+				'lessons_slug'                   => $setting->get_courses_lessons_slug( $context ),
+				'quizzes_slug'                   => $setting->get_courses_quizzes_slug( $context ),
 				'enable_single_course_permalink' => $setting->get_courses_enable_single_course_permalink( $context ),
 				'single_course_enable_editing'   => $setting->get_courses_single_course_enable_editing( $context ),
 				'show_thumbnail'                 => $setting->get_courses_show_thumbnail( $context ),
@@ -914,7 +911,6 @@ class SettingsController extends CrudController {
 				'profile_page_id'          => $setting->get_pages_profile_page_id( $context ),
 				'course_list_page_id'      => $setting->get_pages_course_list_page_id( $context ),
 				'terms_conditions_page_id' => $setting->get_pages_terms_conditions_page_id( $context ),
-				'cart_page_id'             => $setting->get_pages_cart_page_id( $context ),
 				'checkout_page_id'         => $setting->get_pages_checkout_page_id( $context ),
 				'checkout_endpoints'       => array(
 					'pay'                        => $setting->get_pages_pay( $context ),
@@ -1098,12 +1094,12 @@ class SettingsController extends CrudController {
 			$setting->set_courses_single_course_permalink( $request['courses']['single_course_permalink'] );
 		}
 
-		if ( isset( $request['courses']['lessons'] ) ) {
-			$setting->set_courses_lessons( $request['courses']['lessons'] );
+		if ( isset( $request['courses']['lessons_slug'] ) ) {
+			$setting->set_courses_lessons_slug( $request['courses']['lessons_slug'] );
 		}
 
-		if ( isset( $request['courses']['quizes'] ) ) {
-			$setting->set_courses_quizes( $request['courses']['quizes'] );
+		if ( isset( $request['courses']['quizzes_slug'] ) ) {
+			$setting->set_courses_quizzes_slug( $request['courses']['quizzes_slug'] );
 		}
 
 		if ( isset( $request['courses']['enable_single_course_permalink'] ) ) {
@@ -1134,10 +1130,6 @@ class SettingsController extends CrudController {
 
 		if ( isset( $request['pages']['terms_conditions_page_id'] ) ) {
 			$setting->set_pages_terms_conditions_page_id( $request['pages']['terms_conditions_page_id'] );
-		}
-
-		if ( isset( $request['pages']['cart_page_id'] ) ) {
-			$setting->set_pages_cart_page_id( $request['pages']['cart_page_id'] );
 		}
 
 		if ( isset( $request['pages']['checkout_page_id'] ) ) {
@@ -1216,12 +1208,16 @@ class SettingsController extends CrudController {
 		// Emails Setting.
 
 		// General.
-		if ( isset( $request['emails']['general']['from_name'] ) ) {
+		if ( isset( $request['emails']['general']['from_name'] ) && ! empty( $request['emails']['general']['from_name'] ) ) {
 			$setting->set_emails_general_from_name( $request['emails']['general']['from_name'] );
+		} else {
+			$setting->set_emails_general_from_name( get_bloginfo( 'name' ) );
 		}
 
-		if ( isset( $request['emails']['general']['from_email'] ) ) {
+		if ( isset( $request['emails']['general']['from_email'] ) && ! empty( $request['emails']['general']['from_email'] ) ) {
 			$setting->set_emails_general_from_email( $request['emails']['general']['from_email'] );
+		} else {
+			$setting->set_emails_general_from_email( get_bloginfo( 'admin_email' ) );
 		}
 
 		if ( isset( $request['emails']['general']['default_content'] ) ) {

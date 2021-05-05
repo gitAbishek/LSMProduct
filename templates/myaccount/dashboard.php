@@ -125,7 +125,7 @@ defined( 'ABSPATH' ) || exit;
 
 <div class="mto-cstudy">
 	<div class="mto-cstudy--header">
-		<h3 class="mto-cstudy--title"><?php echo esc_html__( 'Continue Studying', 'masteriyo' ); ?></h3>
+		<h2 class="mto-cstudy--title"><?php echo esc_html__( 'Continue Studying', 'masteriyo' ); ?></h2>
 		<a class="mto-cstudy--btn mto-btn mto-btn-default" href="#">
 			<span><?php echo esc_html__( 'Show All', 'masteriyo' ); ?></span>
 			<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

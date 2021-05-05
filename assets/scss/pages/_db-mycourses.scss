@@ -1,0 +1,88 @@
+.mto-mycourses {
+  &--title {
+    margin-bottom: 30px;
+  }
+}
+// Courses list
+.mto-mycourses {
+  &--list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+
+  &--card {
+    gap: 20px;
+    @include mto-default-border;
+  }
+
+  &--detail {
+    padding: 20px;
+  }
+
+  // Course header
+  &--header {
+    .mto-icon-svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &--tag {
+    border-radius: 100px;
+    padding: 2px 12px;
+    font-size: $mto-text-sm;
+  }
+  &--rt {
+    gap: 10px;
+  }
+
+  &--rt,
+  &--rating {
+    display: flex;
+    align-items: center;
+  }
+
+  &--detail {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &--header--title {
+    font-size: $mto-text-lg;
+    font-weight: 700;
+    margin: 16px 0 0;
+  }
+  // Course list body
+  &--body {
+    .mto-time-wrap {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      .mto-icon-svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+  .mto-pbar {
+    margin-top: 10px;
+  }
+
+  &--footer {
+    align-items: center;
+  }
+  &--btn {
+    border-radius: 100px;
+  }
+}
+
+// My certificates
+.mto-mycertificates{
+  
+}

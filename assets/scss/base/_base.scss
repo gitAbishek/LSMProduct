@@ -12,6 +12,10 @@
   flex-wrap: wrap;
 }
 
+.mto-inline-flex {
+  display: inline-flex;
+}
+
 .mto-flex-ycenter {
   align-items: center;
 }
@@ -32,7 +36,7 @@
 
 // Progress bar
 .mto-pbar {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   gap: 4px;
 }

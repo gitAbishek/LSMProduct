@@ -75,9 +75,9 @@ class Faqs extends PostType {
 			'show_in_rest'        => true,
 			'has_archive'         => false,
 			'map_meta_cap'        => true,
+			'capability_type'     => array( 'faq', 'faqs' ),
 			'exclude_from_search' => true,
 			'publicly_queryable'  => false,
-			'capability_type'     => 'post',
 			'can_export'          => true,
 			'delete_with_user'    => true,
 		);

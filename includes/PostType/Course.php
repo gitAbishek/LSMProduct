@@ -76,7 +76,7 @@ class Course extends PostType {
 			'can_export'          => true,
 			'show_in_rest'        => true,
 			'map_meta_cap'        => true,
-			'capability_type'     => 'post',
+			'capability_type'     => array( 'course', 'courses' ),
 			'rewrite'             => $permalinks['course_rewrite_slug'] ? array(
 				'slug'       => $permalinks['course_rewrite_slug'],
 				'with_front' => false,

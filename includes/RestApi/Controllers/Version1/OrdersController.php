@@ -820,7 +820,7 @@ class OrdersController extends PostsController {
 			);
 		}
 
-		if ( ! is_user_logged_in() ) {
+		if ( ! $this->permission->rest_check_order_permissions( 0, 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),

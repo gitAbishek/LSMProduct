@@ -75,9 +75,9 @@ class Quiz extends PostType {
 			'show_in_rest'        => true,
 			'has_archive'         => false,
 			'map_meta_cap'        => true,
+			'capability_type'     => array( 'quiz', 'quizes' ),
 			'exclude_from_search' => false,
 			'publicly_queryable'  => true,
-			'capability_type'     => 'post',
 			'can_export'          => true,
 			'delete_with_user'    => true,
 			'rewrite'             => $permalinks['quiz_rewrite_slug'] ? array(

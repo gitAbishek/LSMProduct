@@ -160,7 +160,7 @@ class Permission {
 	 */
 	public function rest_check_order_permissions( $object_id, $context = 'read' ) {
 		$post_type = 'mto-order';
-		$contexts  = array(
+		$contexts = array(
 			'read'   => 'read',
 			'create' => 'publish_posts',
 			'update' => 'edit_post',

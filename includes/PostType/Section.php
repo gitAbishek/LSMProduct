@@ -76,9 +76,9 @@ class Section extends PostType {
 			'show_in_rest'        => true,
 			'has_archive'         => true,
 			'map_meta_cap'        => true,
+			'capability_type'     => array( 'section', 'sections' ),
 			'exclude_from_search' => false,
 			'publicly_queryable'  => true,
-			'capability_type'     => 'post',
 			'can_export'          => true,
 			'delete_with_user'    => true,
 			'rewrite'             => $permalinks['section_rewrite_slug'] ? array(

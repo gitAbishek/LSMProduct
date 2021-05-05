@@ -140,12 +140,12 @@
     }
 
     &--list {
-      gap: 8px;
+      gap: 10px;
     }
 
     &--img {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       @include mto-border-radius;
     }
 
@@ -233,41 +233,6 @@
 
     &--tag > * {
       border-radius: 100px;
-    }
-    // Progress bar
-    &--pbar {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    &--progressbar {
-      height: 16px;
-      position: relative;
-      background: lighten($mto-primary-color, 20%);
-      overflow: hidden;
-      border-radius: 50px;
-      span {
-        display: block;
-        height: 100%;
-      }
-    }
-
-    &--progress {
-      background: $mto-primary-color;
-      animation: progressbar 3s ease-in-out;
-      animation-fill-mode: both;
-      padding: 0 10px;
-      font-size: 9px;
-      color: white;
-
-      @keyframes progressbar {
-        0% {
-          width: 0;
-        }
-        100% {
-          width: 100%;
-        }
-      }
     }
 
     &--btn {

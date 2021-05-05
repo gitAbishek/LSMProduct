@@ -176,10 +176,10 @@ defined( 'ABSPATH' ) || exit;
 						<span class="mto-btn mto-btn-accent">Book</span>
 					</div>
 
-					<div class="mto-cstudy--body--pbar">
-						<div class="mto-cstudy--body--progressbar">
-							<span class="mto-cstudy--body--bar" style="width:50%;">
-								<span class="mto-cstudy--body--progress">50%</span>
+					<div class="mto-cstudy--body--pbar mto-pbar">
+						<div class="mto-progressbar">
+							<span class="mto-bar" style="width:50%;">
+								<span class="mto-progress">50%</span>
 							</span>
 						</div>
 						<div class="mto-cstudy--body--caption">
@@ -235,10 +235,10 @@ defined( 'ABSPATH' ) || exit;
 						<span class="mto-btn mto-btn-accent">Book</span>
 					</div>
 
-					<div class="mto-cstudy--body--pbar">
-						<div class="mto-cstudy--body--progressbar">
-							<span class="mto-cstudy--body--bar" style="width:25%;">
-								<span class="mto-cstudy--body--progress">25%</span>
+					<div class="mto-cstudy--body--pbar mto-pbar">
+						<div class="mto-progressbar">
+							<span class="mto-bar" style="width:25%;">
+								<span class="mto-progress">25%</span>
 							</span>
 						</div>
 						<div class="mto-cstudy--body--caption">

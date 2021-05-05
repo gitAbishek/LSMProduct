@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <div class="mycourses">
-	<h2 class="mto-font-bold mto-text-2xl mto-text-textColor">My Courses</h2>
+	<h2 class="mto-font-bold mto-text-2xl mto-text-textColor">My1 Courses</h2>
 	<div class="mto-flex mto-flex-col md:mto-my-10 md:mto-flex-row mto-space-x-8">
 
 		<div class="mto-flex-grow mto-border mto-rounded">

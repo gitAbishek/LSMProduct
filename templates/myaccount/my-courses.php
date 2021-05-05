@@ -219,18 +219,47 @@ defined( 'ABSPATH' ) || exit;
 
 <div class="mto-mycertificates">
 	<h2 class="mto-mycertificates--title">My Certificates</h2>
-	<div class="mto-certificate--list">
+	<div class="mto-mycertificates--list">
 		<ul class="mto-mycertificates mto-mycertificates--list-wrap">
 			<li>
-				<div class="mto-header">
+				<div class="mto-list-header mto-flex mto-flex--space-between">
 					<span>Course</span>
 					<span>Certificates</span>
 				</div>
 			</li>
+			
 			<li>
-				<div class="mto-flex">
-					<div class="mto-inline-flex">
-						<img class="mto-c-img" src="./img/certificate.jpg" alt="">
+				<div class="mto-course-list mto-flex mto-flex--space-between mto-flex-ycenter">
+					<div class="mto-inline-flex mto-flex-ycenter">
+						<img class="mto-c-img" src="<?php echo esc_html__( masteriyo_img_url('dummyimg.jpg'));?>" alt="">
+						<h3 class="mto-c-title">Building a Better Software</h3>
+					</div>
+					<div>
+						<a class="mto-c-btn mto-btn mto-btn-primary" href="#">
+							<span>Download</span>
+						</a>
+					</div>
+				</div>
+			</li>
+
+			<li>
+				<div class="mto-course-list mto-flex mto-flex--space-between mto-flex-ycenter">
+					<div class="mto-inline-flex mto-flex-ycenter">
+						<img class="mto-c-img" src="<?php echo esc_html__( masteriyo_img_url('dummyimg.jpg'));?>" alt="">
+						<h3 class="mto-c-title">Building a Better Software</h3>
+					</div>
+					<div>
+						<a class="mto-c-btn mto-btn mto-btn-primary" href="#">
+							<span>Download</span>
+						</a>
+					</div>
+				</div>
+			</li>
+
+			<li>
+				<div class="mto-course-list mto-flex mto-flex--space-between mto-flex-ycenter">
+					<div class="mto-inline-flex mto-flex-ycenter">
+						<img class="mto-c-img" src="<?php echo esc_html__( masteriyo_img_url('dummyimg.jpg'));?>" alt="">
 						<h3 class="mto-c-title">Building a Better Software</h3>
 					</div>
 					<div>
@@ -243,7 +272,7 @@ defined( 'ABSPATH' ) || exit;
 
 		</ul>
 	</div>
-	<a class="btn mto-font-semibold mto-text-sm mto-text-pColor hover:mto-text-white mto-bg-white mto-border hover:mto-border-0" href="#">
+	<a class="mto-mycourses--btn mto-btn mto-btn-default mto-inline-flex" href="#">
 		<span class="mto-inline-flex">Show All Certificates</span>
 		<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 			<path d="M10.707 17.707L16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/>

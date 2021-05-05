@@ -150,7 +150,7 @@ class OrderItemsController extends PostsController {
 			'validate_callback' => 'rest_validate_request_arg',
 			'required'          => true,
 		);
-		$params['paged'] = array(
+		$params['paged']    = array(
 			'description'       => __( 'Paginate the order items.', 'masteriyo' ),
 			'type'              => 'integer',
 			'sanitize_callback' => 'absint',
@@ -180,7 +180,7 @@ class OrderItemsController extends PostsController {
 			$id         = $id instanceof OrderItem ? $id->get_id() : $id;
 			$order_item = masteriyo( 'order.item' );
 			$order_item->set_id( $id );
-			$order_item_repo = masteriyo( 'order.item.store' );
+			$order_item_repo = masteriyo( 'order-item.store' );
 			$order_item_repo->read( $order_item );
 		} catch ( \Exception $e ) {
 			return false;
@@ -230,13 +230,13 @@ class OrderItemsController extends PostsController {
 	 */
 	protected function get_order_item_data( $order_item, $context = 'view' ) {
 		$data = array(
-			'id'         => $order_item->get_id(),
-			'order_id'   => $order_item->get_order_id(),
-			'course_id'  => $order_item->get_course_id( $context ),
-			'name'       => $order_item->get_name( $context ),
-			'type'       => $order_item->get_type( $context ),
-			'quantity'   => $order_item->get_quantity( $context ),
-			'total'      => $order_item->get_total( $context ),
+			'id'        => $order_item->get_id(),
+			'order_id'  => $order_item->get_order_id(),
+			'course_id' => $order_item->get_course_id( $context ),
+			'name'      => $order_item->get_name( $context ),
+			'type'      => $order_item->get_type( $context ),
+			'quantity'  => $order_item->get_quantity( $context ),
+			'total'     => $order_item->get_total( $context ),
 		);
 
 		return $data;
@@ -280,13 +280,13 @@ class OrderItemsController extends PostsController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'         => array(
+				'id'        => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'order_id'   => array(
+				'order_id'  => array(
 					'description' => __( 'Order ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
@@ -296,27 +296,27 @@ class OrderItemsController extends PostsController {
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'name'       => array(
+				'name'      => array(
 					'description' => __( 'Order item name.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'type'       => array(
+				'type'      => array(
 					'description' => __( 'Order item type.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'quantity'   => array(
+				'quantity'  => array(
 					'description' => __( 'Quantity.', 'masteriyo' ),
 					'type'        => 'number',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'total'      => array(
+				'total'     => array(
 					'description' => __( 'Total amount of the order item.', 'masteriyo' ),
 					'type'        => 'number',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'meta_data'  => array(
+				'meta_data' => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -364,7 +364,7 @@ class OrderItemsController extends PostsController {
 
 		if ( 0 !== $id ) {
 			$order_item->set_id( $id );
-			$order_item_repo = masteriyo( 'order.item.store' );
+			$order_item_repo = masteriyo( 'order-item.store' );
 			$order_item_repo->read( $order_item );
 		}
 
@@ -428,7 +428,7 @@ class OrderItemsController extends PostsController {
 	protected function get_objects( $query_args ) {
 		global $wpdb;
 
-		$table_name = masteriyo('order.item.store')->get_table_name();
+		$table_name = masteriyo( 'order-item.store' )->get_table_name();
 		$order_id   = $query_args['order_id'];
 		$offset     = 0;
 		$per_page   = 10;
@@ -437,7 +437,7 @@ class OrderItemsController extends PostsController {
 			$per_page = $query_args['per_page'];
 		}
 		if ( $query_args['paged'] > 0 ) {
-			$offset = ($query_args['paged'] - 1) * $per_page;
+			$offset = ( $query_args['paged'] - 1 ) * $per_page;
 		}
 
 		/**
@@ -497,7 +497,7 @@ class OrderItemsController extends PostsController {
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -528,7 +528,7 @@ class OrderItemsController extends PostsController {
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -559,7 +559,7 @@ class OrderItemsController extends PostsController {
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -594,7 +594,7 @@ class OrderItemsController extends PostsController {
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -629,7 +629,7 @@ class OrderItemsController extends PostsController {
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}

@@ -7,13 +7,13 @@ namespace ThemeGrill\Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
-use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\Order;
-use ThemeGrill\Masteriyo\Models\OrderItem;
-use ThemeGrill\Masteriyo\Repository\OrderItemRepository;
+use ThemeGrill\Masteriyo\Models\Order\Order;
 use ThemeGrill\Masteriyo\Repository\OrderRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrderItemsController;
+use ThemeGrill\Masteriyo\Models\Order\OrderItemCourse;
+use League\Container\ServiceProvider\AbstractServiceProvider;
+use ThemeGrill\Masteriyo\Repository\OrderItemCourseRepository;
 use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrdersController;
+use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrderItemsController;
 
 class OrderServiceProvider extends AbstractServiceProvider {
 	/**
@@ -27,47 +27,47 @@ class OrderServiceProvider extends AbstractServiceProvider {
 	 *
 	 * @var array
 	 */
-	 protected $provides = array(
+	protected $provides = array(
 		'order',
 		'order.store',
 		'order.rest',
 		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrdersController',
-		'order.item',
-		'order.item.store',
-		'order.item.rest',
+		'order-item',
+		'order-item.rest',
 		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrderItemsController',
-	 );
+		'order-item.course',
+		'order-item.course.store',
+	);
 
-	 /**
-	  * This is where the magic happens, within the method you can
-	  * access the container and register or retrieve anything
-	  * that you need to, but remember, every alias registered
-	  * within this method must be declared in the `$provides` array.
-	  *
-	  * @since 0.1.0
-	  */
-	 public function register() {
-		 $this->getContainer()->add( 'order.store', OrderRepository::class );
+	/**
+	 * This is where the magic happens, within the method you can
+	* access the container and register or retrieve anything
+	* that you need to, but remember, every alias registered
+	* within this method must be declared in the `$provides` array.
+	*
+	* @since 0.1.0
+	*/
+	public function register() {
+		$this->getContainer()->add( 'order.store', OrderRepository::class );
 
-		 $this->getContainer()->add( 'order.rest', OrdersController::class )
-			->addArgument( 'permission');
+		$this->getContainer()->add( 'order.rest', OrdersController::class )
+			->addArgument( 'permission' );
 
-		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrdersController' )
-			->addArgument( 'permission');
+		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrdersController' )
+			->addArgument( 'permission' );
 
-		 $this->getContainer()->add( 'order', Order::class )
-			->addArgument( 'order.store');
+		$this->getContainer()->add( 'order', Order::class )
+			->addArgument( 'order.store' );
 
+		$this->getContainer()->add( 'order-item.course.store', OrderItemCourseRepository::class );
 
-		$this->getContainer()->add( 'order.item.store', OrderItemRepository::class );
-
-		$this->getContainer()->add( 'order.item.rest', OrderItemsController::class )
-			->addArgument( 'permission');
+		$this->getContainer()->add( 'order-item.rest', OrderItemsController::class )
+			->addArgument( 'permission' );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrderItemsController' )
-			->addArgument( 'permission');
+			->addArgument( 'permission' );
 
-		 $this->getContainer()->add( 'order.item', OrderItem::class )
-			->addArgument( 'order.item.store');
-	 }
+		$this->getContainer()->add( 'order-item.course', OrderItemCourse::class )
+			->addArgument( 'order-item.course.store' );
+	}
 }

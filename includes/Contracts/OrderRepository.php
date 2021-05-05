@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * Functions that must be defined by order repository classes.
  */
-interface OrderRepositoryInterface {
+interface OrderRepository {
 
 	/**
 	 * Read order items of a specific type from the database for this order.

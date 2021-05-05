@@ -9,8 +9,10 @@
 
 namespace ThemeGrill\Masteriyo\Repository;
 
+defined( 'ABSPATH' ) || exit;
+
 use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Contracts\OrderRepositoryInterface;
+use ThemeGrill\Masteriyo\Contracts\OrderRepository as OrderRepositoryInterface;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\Order;
 
@@ -26,32 +28,32 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'total'               => '_total',
-		'currency'            => '_currency',
-		'expiry_date'         => '_expiry_date',
-		'payment_method'      => '_payment_method',
-		'transaction_id'      => '_transaction_id',
-		'date_paid'           => '_date_paid',
-		'date_completed'      => '_date_completed',
-		'created_via'         => '_created_via',
-		'customer_ip_address' => '_customer_ip_address',
-		'customer_user_agent' => '_customer_user_agent',
-		'version'             => '_version',
-		'payment_method_title'=> '_payment_method_title',
-		'order_key'           => '_order_key',
-		'customer_note'       => '_customer_note',
-		'cart_hash'           => '_cart_hash',
-		'billing_first_name'  => '_billing_first_name',
-		'billing_last_name'   => '_billing_last_name',
-		'billing_company'     => '_billing_company',
-		'billing_address_1'   => '_billing_address_1',
-		'billing_address_2'   => '_billing_address_2',
-		'billing_city'        => '_billing_city',
-		'billing_usercode'    => '_billing_usercode',
-		'billing_country'     => '_billing_country',
-		'billing_state'       => '_billing_state',
-		'billing_email'       => '_billing_email',
-		'billing_phone'       => '_billing_phone',
+		'total'                => '_total',
+		'currency'             => '_currency',
+		'expiry_date'          => '_expiry_date',
+		'payment_method'       => '_payment_method',
+		'transaction_id'       => '_transaction_id',
+		'date_paid'            => '_date_paid',
+		'date_completed'       => '_date_completed',
+		'created_via'          => '_created_via',
+		'customer_ip_address'  => '_customer_ip_address',
+		'customer_user_agent'  => '_customer_user_agent',
+		'version'              => '_version',
+		'payment_method_title' => '_payment_method_title',
+		'order_key'            => '_order_key',
+		'customer_note'        => '_customer_note',
+		'cart_hash'            => '_cart_hash',
+		'billing_first_name'   => '_billing_first_name',
+		'billing_last_name'    => '_billing_last_name',
+		'billing_company'      => '_billing_company',
+		'billing_address_1'    => '_billing_address_1',
+		'billing_address_2'    => '_billing_address_2',
+		'billing_city'         => '_billing_city',
+		'billing_usercode'     => '_billing_usercode',
+		'billing_country'      => '_billing_country',
+		'billing_state'        => '_billing_state',
+		'billing_email'        => '_billing_email',
+		'billing_phone'        => '_billing_phone',
 	);
 
 	/**
@@ -65,7 +67,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		if ( ! $order->get_date_created( 'edit' ) ) {
 			$order->set_date_created( current_time( 'mysql', true ) );
 		}
-		if ( ! $order->get_version( 'edit') ) {
+		if ( ! $order->get_version( 'edit' ) ) {
 			$order->set_version( Constants::get( 'MASTERIYO_VERSION' ) );
 		}
 
@@ -296,7 +298,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 
 		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
 			return (object) array(
-				'orders'      => $orders,
+				'orders'        => $orders,
 				'total'         => $query->found_posts,
 				'max_num_pages' => $query->max_num_pages,
 			);
@@ -386,7 +388,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 
 		// Get from cache if available.
 		if ( $order->get_id() ) {
-			$order_items = masteriyo('cache')->get( 'masteriyo-order-items-' . $order->get_id(), 'masteriyo-orders' );
+			$order_items = masteriyo( 'cache' )->get( 'masteriyo-order-items-' . $order->get_id(), 'masteriyo-orders' );
 		}
 
 		// Fetch from database.
@@ -394,11 +396,11 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			$order_items = masteriyo_get_order_items( array( 'order_id' => $order->get_id() ) );
 
 			foreach ( $order_items as $item ) {
-				masteriyo('cache')->set( 'masteriyo-item-' . $item->order_item_id, $item, 'masteriyo-order-items' );
+				masteriyo( 'cache' )->set( 'masteriyo-item-' . $item->order_item_id, $item, 'masteriyo-order-items' );
 			}
 
 			if ( $order->get_id() ) {
-				masteriyo('cache')->set( 'masteriyo-order-items-' . $order->get_id(), $order_items, 'masteriyo-orders' );
+				masteriyo( 'cache' )->set( 'masteriyo-order-items-' . $order->get_id(), $order_items, 'masteriyo-orders' );
 			}
 		}
 
@@ -414,13 +416,15 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 * @param string $type Order item type. Default null.
 	 */
 	public function delete_items( $order, $type = null ) {
-		$order_items_repo = masteriyo('order.item.store');
+		$order_items_repo = masteriyo( 'order-item.store' );
 
 		if ( ! empty( $type ) ) {
-			$order_items_repo->delete_batch( array(
-				'order_id' => $order->get_id(),
-				'type'     => $type,
-			) );
+			$order_items_repo->delete_batch(
+				array(
+					'order_id' => $order->get_id(),
+					'type'     => $type,
+				)
+			);
 		} else {
 			$order_items_repo->delete_batch( array( 'order_id' => $order->get_id() ) );
 		}
@@ -463,6 +467,6 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	protected function clear_caches( &$order ) {
 		clean_post_cache( $order->get_id() );
 		// Delete shop order transients.
-		masteriyo('cache')->delete( 'masteriyo-order-items-' . $order->get_id(), 'masteriyo-orders' );
+		masteriyo( 'cache' )->delete( 'masteriyo-order-items-' . $order->get_id(), 'masteriyo-orders' );
 	}
 }

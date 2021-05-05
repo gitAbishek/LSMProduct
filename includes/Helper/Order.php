@@ -18,7 +18,7 @@ function masteriyo_get_order( $order ) {
 	$order_obj   = masteriyo( 'order' );
 	$order_store = masteriyo( 'order.store' );
 
-	if ( is_a( $order, 'ThemeGrill\Masteriyo\Models\Order' ) ) {
+	if ( is_a( $order, 'ThemeGrill\Masteriyo\Models\Order\Order' ) ) {
 		$id = $order->get_id();
 	} elseif ( is_a( $order, 'WP_Post' ) ) {
 		$id = $order->ID;
@@ -46,11 +46,11 @@ function masteriyo_get_order( $order ) {
  * @return OrderItem|null
  */
 function masteriyo_get_order_item( $order_item ) {
-	$order_item_obj   = masteriyo( 'order.item' );
-	$order_item_store = masteriyo( 'order.item.store' );
+	$order_item_obj   = masteriyo( 'order-item' );
+	$order_item_store = masteriyo( 'order-item.store' );
 
 	try {
-		if ( is_a( $order_item, 'ThemeGrill\Masteriyo\Models\OrderItem' ) ) {
+		if ( is_a( $order_item, 'ThemeGrill\Masteriyo\Models\Order\OrderItem' ) ) {
 			$id = $order_item->get_id();
 		} elseif ( is_a( $order_item, \stdClass::class ) ) {
 			$id = $order_item->id;

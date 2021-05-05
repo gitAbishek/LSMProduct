@@ -7,7 +7,7 @@
  * @package ThemeGrill\Masteriyo\Models;
  */
 
-namespace ThemeGrill\Masteriyo\Models;
+namespace ThemeGrill\Masteriyo\Models\Order;
 
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Repository\OrderRepository;
@@ -1079,5 +1079,101 @@ class Order extends Model {
 	public function needs_payment() {
 		$valid_order_statuses = apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( 'mto-pending', 'mto-failed' ), $this );
 		return apply_filters( 'masteriyo_order_needs_payment', ( $this->has_status( $valid_order_statuses ) && $this->get_total() > 0 ), $this, $valid_order_statuses );
+	}
+
+	/**
+	 * Get key for where a certain item type is stored in _items.
+	 *
+	 * @since  0.1.0
+	 * @param  string $item object Order item (product, shipping, fee, coupon, tax).
+	 * @return string
+	 */
+	protected function get_items_key( $item ) {
+		if ( is_a( $item, '\ThemeGrill\Masteriyo\Models\Order\OrderItemCourse' ) ) {
+			return 'course';
+		}
+
+		return apply_filters( 'masteriyo_get_items_key', '', $item );
+	}
+
+	/**
+	 * Return an array of items/products within this order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string|array $types Types of line items to get (array or string).
+	 * @return OrderItem[]
+	 */
+	public function get_items( $types = 'line_item' ) {
+		$items = array();
+		$types = array_filter( (array) $types );
+
+		foreach ( $types as $type ) {
+			$group = $this->type_to_group( $type );
+
+			if ( $group ) {
+				if ( ! isset( $this->items[ $group ] ) ) {
+					$this->items[ $group ] = array_filter( $this->repository->read_items( $this, $type ) );
+				}
+				// Don't use array_merge here because keys are numeric.
+				$items = $items + $this->items[ $group ];
+			}
+		}
+
+		return apply_filters( 'masteriyo_order_get_items', $items, $this, $types );
+	}
+
+	/**
+	 * Convert a type to a types group.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $type type to lookup.
+	 * @return string
+	 */
+	protected function type_to_group( $type ) {
+		$type_to_group = apply_filters(
+			'masteriyo_order_type_to_group',
+			array(
+				'course' => 'course_lines',
+				'tax'       => 'tax_lines',
+				'shipping'  => 'shipping_lines',
+				'fee'       => 'fee_lines',
+				'coupon'    => 'coupon_lines',
+			)
+		);
+		return isset( $type_to_group[ $type ] ) ? $type_to_group[ $type ] : '';
+	}
+
+	/**
+	 * Adds an order item to this order. The order item will not persist until save.
+	 *
+	 * @since 0.1.0
+	 * @param OrderItem $item Order item object (product, shipping, fee, coupon, tax).
+	 * @return false|void
+	 */
+	public function add_item( $item ) {
+		$items_key = $this->get_items_key( $item );
+
+		if ( ! $items_key ) {
+			return false;
+		}
+
+		// Make sure existing items are loaded so we can append this new one.
+		if ( ! isset( $this->items[ $items_key ] ) ) {
+			$this->items[ $items_key ] = $this->get_items( $item->get_type() );
+		}
+
+		// Set parent.
+		$item->set_order_id( $this->get_id() );
+
+		// Append new row with generated temporary ID.
+		$item_id = $item->get_id();
+
+		if ( $item_id ) {
+			$this->items[ $items_key ][ $item_id ] = $item;
+		} else {
+			$this->items[ $items_key ][ 'new:' . $items_key . count( $this->items[ $items_key ] ) ] = $item;
+		}
 	}
 }

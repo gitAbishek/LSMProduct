@@ -174,7 +174,7 @@ class Setting extends Model {
 
 		// Cancelled Order.
 		'emails.cancelled_order_enable'          => false,
-		'emails.cancelled_order_recipients'      => '',
+		'emails.cancelled_order_recipients'      => array(),
 		'emails.cancelled_order_subject'         => '',
 		'emails.cancelled_order_heading'         => '',
 		'emails.cancelled_order_content'         => '',
@@ -1310,411 +1310,411 @@ class Setting extends Model {
 	// General Setting Setter.
 
 	/**
-	* Set option general_address_line1.
+	* Set option general address line1.
 	*
 	* @since 0.1.0
-	* @param string $general_address_line1
+	* @param string $address_line1
 	*/
-	public function set_general_address_line1( $general_address_line1 ) {
-		return $this->set_prop( 'general.address_line1', $general_address_line1 );
+	public function set_general_address_line1( $address_line1 ) {
+		return $this->set_prop( 'general.address_line1', $address_line1 );
 	}
 
 	/**
-	 * Set option general_address_line2.
+	 * Set option general address line2.
 	*
 	* @since 0.1.0
-	* @param string $general_address_line2
+	* @param string $address_line2
 	*/
-	public function set_general_address_line2( $general_address_line2 ) {
-		return $this->set_prop( 'general.address_line2', $general_address_line2 );
+	public function set_general_address_line2( $address_line2 ) {
+		return $this->set_prop( 'general.address_line2', $address_line2 );
 	}
 
 	/**
-	 * Set option general_city.
+	 * Set option general city.
 	*
 	* @since 0.1.0
-	* @param string $general_city
+	* @param string $city
 	*/
-	public function set_general_city( $general_city ) {
-		return $this->set_prop( 'general.city', $general_city );
+	public function set_general_city( $city ) {
+		return $this->set_prop( 'general.city', $city );
 	}
 
 	/**
-	 * Set option general_country.
+	 * Set option general country.
 	*
 	* @since 0.1.0
-	* @param string $general_country
+	* @param string $country
 	*/
-	public function set_general_country( $general_country ) {
-		return $this->set_prop( 'general.country', $general_country );
+	public function set_general_country( $country ) {
+		return $this->set_prop( 'general.country', $country );
 	}
 
 	/**
-	 * Set option general_postcode.
+	 * Set option general postcode.
 	*
 	* @since 0.1.0
-	* @param string $general_postcode
+	* @param string $postcode
 	*/
-	public function set_general_postcode( $general_postcode ) {
-		return $this->set_prop( 'general.postcode', $general_postcode );
+	public function set_general_postcode( $postcode ) {
+		return $this->set_prop( 'general.postcode', $postcode );
 	}
 
 	/**
-	 * Set option general_currency.
+	 * Set option general currency.
 	*
 	* @since 0.1.0
-	* @param string $general_currency
+	* @param string $currency
 	*/
-	public function set_general_currency( $general_currency ) {
-		return $this->set_prop( 'general.currency', $general_currency );
+	public function set_general_currency( $currency ) {
+		return $this->set_prop( 'general.currency', $currency );
 	}
 
 	/**
-	 * Set option general_currency_position.
+	 * Set option general currency position.
 	*
 	* @since 0.1.0
-	* @param string $general_currency_position
+	* @param string $currency_position
 	*/
-	public function set_general_currency_position( $general_currency_position ) {
-		return $this->set_prop( 'general.currency_position', $general_currency_position );
+	public function set_general_currency_position( $currency_position ) {
+		return $this->set_prop( 'general.currency_position', $currency_position );
 	}
 
 	/**
-	 * Set option general_thousand_separator.
+	 * Set option general thousand separator.
 	*
 	* @since 0.1.0
-	* @param string $general_thousand_separator
+	* @param string $thousand_separator
 	*/
-	public function set_general_thousand_separator( $general_thousand_separator ) {
-		return $this->set_prop( 'general.thousand_separator', $general_thousand_separator );
+	public function set_general_thousand_separator( $thousand_separator ) {
+		return $this->set_prop( 'general.thousand_separator', $thousand_separator );
 	}
 
 	/**
-	 * Set option general_decimal_separator.
+	 * Set option general decimal separator.
 	*
 	* @since 0.1.0
-	* @param string $general_decimal_separator
+	* @param string $decimal_separator
 	*/
-	public function set_general_decimal_separator( $general_decimal_separator ) {
-		return $this->set_prop( 'general.decimal_separator', $general_decimal_separator );
+	public function set_general_decimal_separator( $decimal_separator ) {
+		return $this->set_prop( 'general.decimal_separator', $decimal_separator );
 	}
 
 	/**
-	 * Set option general_number_of_decimals.
+	 * Set option general number of decimals.
 	*
 	* @since 0.1.0
-	* @param string $general_number_of_decimals
+	* @param string $number_of_decimals
 	*/
-	public function set_general_number_of_decimals( $general_number_of_decimals ) {
-		return $this->set_prop( 'general.number_of_decimals', $general_number_of_decimals );
+	public function set_general_number_of_decimals( $number_of_decimals ) {
+		return $this->set_prop( 'general.number_of_decimals', $number_of_decimals );
 	}
 
 	// Courses Setting Setter.
 
 	/**
-	 * Set option courses_placeholder_image.
+	 * Set option courses placeholder image.
 	*
 	* @since 0.1.0
-	* @param string $courses_placeholder_image
+	* @param string $placeholder_image
 	*/
-	public function set_courses_placeholder_image( $courses_placeholder_image ) {
-		return $this->set_prop( 'courses.placeholder_image', $courses_placeholder_image );
+	public function set_courses_placeholder_image( $placeholder_image ) {
+		return $this->set_prop( 'courses.placeholder_image', $placeholder_image );
 	}
 
 	/**
-	 * Set option courses_add_to_cart_behaviour.
+	 * Set option courses add to cart behaviour.
 	*
 	* @since 0.1.0
-	* @param string $courses_add_to_cart_behaviour
+	* @param string $add_to_cart_behaviour
 	*/
-	public function set_courses_add_to_cart_behaviour( $courses_add_to_cart_behaviour ) {
-		return $this->set_prop( 'courses.add_to_cart_behaviour', $courses_add_to_cart_behaviour );
+	public function set_courses_add_to_cart_behaviour( $add_to_cart_behaviour ) {
+		return $this->set_prop( 'courses.add_to_cart_behaviour', $add_to_cart_behaviour );
 	}
 
 	/**
-	 * Set option courses_per_page.
+	 * Set option courses per page.
 	*
 	* @since 0.1.0
-	* @param string $courses_per_page
+	* @param string $per_page
 	*/
-	public function set_courses_per_page( $courses_per_page ) {
-		return $this->set_prop( 'courses.per_page', $courses_per_page );
+	public function set_courses_per_page( $per_page ) {
+		return $this->set_prop( 'courses.per_page', $per_page );
 	}
 
 	/**
-	 * Set option courses_enable_editing.
+	 * Set option courses enable editing.
 	*
 	* @since 0.1.0
-	* @param boolean $courses_enable_editing
+	* @param boolean $enable_editing
 	*/
-	public function set_courses_enable_editing( $courses_enable_editing ) {
-		return $this->set_prop( 'courses.enable_editing', masteriyo_string_to_bool( $courses_enable_editing ) );
+	public function set_courses_enable_editing( $enable_editing ) {
+		return $this->set_prop( 'courses.enable_editing', masteriyo_string_to_bool( $enable_editing ) );
 	}
 
 	/**
-	 * Set option courses_category_base.
+	 * Set option courses category base.
 	*
 	* @since 0.1.0
-	* @param string $courses_category_base
+	* @param string $category_base
 	*/
-	public function set_courses_category_base( $courses_category_base ) {
-		return $this->set_prop( 'courses.category_base', $courses_category_base );
+	public function set_courses_category_base( $category_base ) {
+		return $this->set_prop( 'courses.category_base', $category_base );
 	}
 
 	/**
-	 * Set option courses_tag_base.
+	 * Set option courses tag base.
 	*
 	* @since 0.1.0
-	* @param string $courses_tag_base
+	* @param string $tag_base
 	*/
-	public function set_courses_tag_base( $courses_tag_base ) {
-		return $this->set_prop( 'courses.tag_base', $courses_tag_base );
+	public function set_courses_tag_base( $tag_base ) {
+		return $this->set_prop( 'courses.tag_base', $tag_base );
 	}
 
 	/**
-	 * Set option courses_difficulty_base.
+	 * Set option courses difficulty base.
 	*
 	* @since 0.1.0
-	* @param string $courses_difficulty_base
+	* @param string $difficulty_base
 	*/
-	public function set_courses_difficulty_base( $courses_difficulty_base ) {
-		return $this->set_prop( 'courses.difficulty_base', $courses_difficulty_base );
+	public function set_courses_difficulty_base( $difficulty_base ) {
+		return $this->set_prop( 'courses.difficulty_base', $difficulty_base );
 	}
 
 	/**
-	 * Set option courses_single_course_permalink.
+	 * Set option courses single course permalink.
 	*
 	* @since 0.1.0
-	* @param string $courses_single_course_permalink
+	* @param string $single_course_permalink
 	*/
-	public function set_courses_single_course_permalink( $courses_single_course_permalink ) {
-		return $this->set_prop( 'courses.single_course_permalink', $courses_single_course_permalink );
+	public function set_courses_single_course_permalink( $single_course_permalink ) {
+		return $this->set_prop( 'courses.single_course_permalink', $single_course_permalink );
 	}
 
 	/**
-	 * Set option courses_lessons_slug.
+	 * Set option courses lessons slug.
 	*
 	* @since 0.1.0
-	* @param string $courses_lessons_slug
+	* @param string $lessons_slug
 	*/
-	public function set_courses_lessons_slug( $courses_lessons_slug ) {
-		return $this->set_prop( 'courses.lessons_slug', $courses_lessons_slug );
+	public function set_courses_lessons_slug( $lessons_slug ) {
+		return $this->set_prop( 'courses.lessons_slug', $lessons_slug );
 	}
 
 	/**
-	 * Set option courses_quizzes_slug.
+	 * Set option courses quizzes slug.
 	*
 	* @since 0.1.0
-	* @param string $courses_quizzes_slug
+	* @param string $quizzes_slug
 	*/
-	public function set_courses_quizzes_slug( $courses_quizzes_slug ) {
-		return $this->set_prop( 'courses.quizzes_slug', $courses_quizzes_slug );
+	public function set_courses_quizzes_slug( $quizzes_slug ) {
+		return $this->set_prop( 'courses.quizzes_slug', $quizzes_slug );
 	}
 
 	/**
-	 * Set option courses_enable_single_course_permalink.
+	 * Set option courses enable single course permalink.
 	*
 	* @since 0.1.0
-	* @param string $courses_enable_single_course_permalink
+	* @param string $enable_single_course_permalink
 	*/
-	public function set_courses_enable_single_course_permalink( $courses_enable_single_course_permalink ) {
-		return $this->set_prop( 'courses.enable_single_course_permalink', $courses_enable_single_course_permalink );
+	public function set_courses_enable_single_course_permalink( $enable_single_course_permalink ) {
+		return $this->set_prop( 'courses.enable_single_course_permalink', $enable_single_course_permalink );
 	}
 
 	/**
-	 * Set option courses_single_course_enable_editing.
+	 * Set option courses single course enable editing.
 	*
 	* @since 0.1.0
-	* @param string $courses_single_course_enable_editing
+	* @param string $single_course_enable_editing
 	*/
-	public function set_courses_single_course_enable_editing( $courses_single_course_enable_editing ) {
-		return $this->set_prop( 'courses.single_course_enable_editing', masteriyo_string_to_bool( $courses_single_course_enable_editing ) );
+	public function set_courses_single_course_enable_editing( $single_course_enable_editing ) {
+		return $this->set_prop( 'courses.single_course_enable_editing', masteriyo_string_to_bool( $single_course_enable_editing ) );
 	}
 
 	/**
-	 * Set option courses_show_thumbnail.
+	 * Set option courses show thumbnail.
 	*
 	* @since 0.1.0
-	* @param string $courses_show_thumbnail
+	* @param string $show_thumbnail
 	*/
-	public function set_courses_show_thumbnail( $courses_show_thumbnail ) {
-		return $this->set_prop( 'courses.show_thumbnail', masteriyo_string_to_bool( $courses_show_thumbnail ) );
+	public function set_courses_show_thumbnail( $show_thumbnail ) {
+		return $this->set_prop( 'courses.show_thumbnail', masteriyo_string_to_bool( $show_thumbnail ) );
 	}
 
 	/**
-	 * Set option courses_thumbnail_size.
+	 * Set option courses thumbnail size.
 	*
 	* @since 0.1.0
-	* @param string $courses_thumbnail_size
+	* @param string $thumbnail_size
 	*/
-	public function set_courses_thumbnail_size( $courses_thumbnail_size ) {
-		return $this->set_prop( 'courses.thumbnail_size', $courses_thumbnail_size );
+	public function set_courses_thumbnail_size( $thumbnail_size ) {
+		return $this->set_prop( 'courses.thumbnail_size', $thumbnail_size );
 	}
 
 	// Pages Setting Setter.
 
 	/**
-	 * Set option pages_profile_page_id.
+	 * Set option pages profile page id.
 	*
 	* @since 0.1.0
-	* @param string $pages_profile_page_id
+	* @param string $profile_page_id
 	*/
-	public function set_pages_profile_page_id( $pages_profile_page_id ) {
-		return $this->set_prop( 'pages.profile_page_id', $pages_profile_page_id );
+	public function set_pages_profile_page_id( $profile_page_id ) {
+		return $this->set_prop( 'pages.profile_page_id', $profile_page_id );
 	}
 
 	/**
-	 * Set option pages_course_list_page_id.
+	 * Set option pages course list page id.
 	*
 	* @since 0.1.0
-	* @param string $pages_course_list_page_id
+	* @param string $course_list_page_id
 	*/
-	public function set_pages_course_list_page_id( $pages_course_list_page_id ) {
-		return $this->set_prop( 'pages.course_list_page_id', $pages_course_list_page_id );
+	public function set_pages_course_list_page_id( $course_list_page_id ) {
+		return $this->set_prop( 'pages.course_list_page_id', $course_list_page_id );
 	}
 
 	/**
-	 * Set option pages_terms_conditions_page_id.
+	 * Set option pages terms conditions page_id.
 	*
 	* @since 0.1.0
-	* @param string $pages_terms_conditions_page_id
+	* @param string $terms_conditions_page_id
 	*/
-	public function set_pages_terms_conditions_page_id( $pages_terms_conditions_page_id ) {
-		return $this->set_prop( 'pages.terms_conditions_page_id', $pages_terms_conditions_page_id );
+	public function set_pages_terms_conditions_page_id( $terms_conditions_page_id ) {
+		return $this->set_prop( 'pages.terms_conditions_page_id', $terms_conditions_page_id );
 	}
 
 	/**
-	 * Set option pages_checkout_page_id.
+	 * Set option pages checkout page_id.
 	*
 	* @since 0.1.0
-	* @param string $pages_checkout_page_id
+	* @param string $checkout_page_id
 	*/
-	public function set_pages_checkout_page_id( $pages_checkout_page_id ) {
-		return $this->set_prop( 'pages.checkout_page_id', $pages_checkout_page_id );
+	public function set_pages_checkout_page_id( $checkout_page_id ) {
+		return $this->set_prop( 'pages.checkout_page_id', $checkout_page_id );
 	}
 
 	// Checkout endpoints.
 
 	/**
-	 * Set option pages_pay.
+	 * Set option pages pay.
 	*
 	* @since 0.1.0
-	* @param string $pages_pay
+	* @param string $pay
 	*/
-	public function set_pages_pay( $pages_pay ) {
-		return $this->set_prop( 'pages.pay', $pages_pay );
+	public function set_pages_pay( $pay ) {
+		return $this->set_prop( 'pages.pay', $pay );
 	}
 
 	/**
-	 * Set option pages_order_received.
+	 * Set option pages order received.
 	*
 	* @since 0.1.0
-	* @param string $pages_order_received
+	* @param string $order_received
 	*/
-	public function set_pages_order_received( $pages_order_received ) {
-		return $this->set_prop( 'pages.order_received', $pages_order_received );
+	public function set_pages_order_received( $order_received ) {
+		return $this->set_prop( 'pages.order_received', $order_received );
 	}
 
 	/**
-	 * Set option pages_add_payment_method.
+	 * Set option pages add payment method.
 	*
 	* @since 0.1.0
-	* @param string $pages_add_payment_method
+	* @param string $add_payment_method
 	*/
-	public function set_pages_add_payment_method( $pages_add_payment_method ) {
-		return $this->set_prop( 'pages.add_payment_method', $pages_add_payment_method );
+	public function set_pages_add_payment_method( $add_payment_method ) {
+		return $this->set_prop( 'pages.add_payment_method', $add_payment_method );
 	}
 
 	/**
-	 * Set option pages_delete_payment_method.
+	 * Set option pages delete payment method.
 	*
 	* @since 0.1.0
-	* @param string $pages_delete_payment_method
+	* @param string $delete_payment_method
 	*/
-	public function set_pages_delete_payment_method( $pages_delete_payment_method ) {
-		return $this->set_prop( 'pages.delete_payment_method', $pages_delete_payment_method );
+	public function set_pages_delete_payment_method( $delete_payment_method ) {
+		return $this->set_prop( 'pages.delete_payment_method', $delete_payment_method );
 	}
 
 	/**
-	 * Set option pages_set_default_payment_method.
+	 * Set option pages set default payment method.
 	*
 	* @since 0.1.0
-	* @param string $pages_set_default_payment_method
+	* @param string $set_default_payment_method
 	*/
-	public function set_pages_set_default_payment_method( $pages_set_default_payment_method ) {
-		return $this->set_prop( 'pages.set_default_payment_method', $pages_set_default_payment_method );
+	public function set_pages_set_default_payment_method( $set_default_payment_method ) {
+		return $this->set_prop( 'pages.set_default_payment_method', $set_default_payment_method );
 	}
 
 	// Account endpoints.
 
 	/**
-	 * Set option pages_orders.
+	 * Set option pages orders.
 	*
 	* @since 0.1.0
-	* @param string $pages_orders
+	* @param string $orders
 	*/
-	public function set_pages_orders( $pages_orders ) {
-		return $this->set_prop( 'pages.orders', $pages_orders );
+	public function set_pages_orders( $orders ) {
+		return $this->set_prop( 'pages.orders', $orders );
 	}
 
 	/**
-	 * Set option pages_view_order.
+	 * Set option pages view order.
 	*
 	* @since 0.1.0
-	* @param string $pages_view_order
+	* @param string $view_order
 	*/
-	public function set_pages_view_order( $pages_view_order ) {
-		return $this->set_prop( 'pages.view_order', $pages_view_order );
+	public function set_pages_view_order( $view_order ) {
+		return $this->set_prop( 'pages.view_order', $view_order );
 	}
 
 	/**
-	 * Set option pages_my_courses.
+	 * Set option pages my courses.
 	*
 	* @since 0.1.0
-	* @param string $pages_my_courses
+	* @param string $my_courses
 	*/
-	public function set_pages_my_courses( $pages_my_courses ) {
-		return $this->set_prop( 'pages.my_courses', $pages_my_courses );
+	public function set_pages_my_courses( $my_courses ) {
+		return $this->set_prop( 'pages.my_courses', $my_courses );
 	}
 
 	/**
-	 * Set option pages_edit_account.
+	 * Set option pages edit account.
 	*
 	* @since 0.1.0
-	* @param string $pages_edit_account
+	* @param string $edit_account
 	*/
-	public function set_pages_edit_account( $pages_edit_account ) {
-		return $this->set_prop( 'pages.edit_account', $pages_edit_account );
+	public function set_pages_edit_account( $edit_account ) {
+		return $this->set_prop( 'pages.edit_account', $edit_account );
 	}
 
 	/**
-	 * Set option pages_payment_methods.
+	 * Set option pages payment methods.
 	*
 	* @since 0.1.0
-	* @param string $pages_payment_methods
+	* @param string $payment_methods
 	*/
-	public function set_pages_payment_methods( $pages_payment_methods ) {
-		return $this->set_prop( 'pages.payment_methods', $pages_payment_methods );
+	public function set_pages_payment_methods( $payment_methods ) {
+		return $this->set_prop( 'pages.payment_methods', $payment_methods );
 	}
 
 	/**
-	 * Set option pages_lost_password.
+	 * Set option pages lost password.
 	*
 	* @since 0.1.0
-	* @param string $pages_lost_password
+	* @param string $lost_password
 	*/
-	public function set_pages_lost_password( $pages_lost_password ) {
-		return $this->set_prop( 'pages.lost_password', $pages_lost_password );
+	public function set_pages_lost_password( $lost_password ) {
+		return $this->set_prop( 'pages.lost_password', $lost_password );
 	}
 
 	/**
-	 * Set option pages_logout.
+	 * Set option pages logout.
 	*
 	* @since 0.1.0
-	* @param string $pages_logout
+	* @param string $logout
 	*/
-	public function set_pages_logout( $pages_logout ) {
-		return $this->set_prop( 'pages.logout', $pages_logout );
+	public function set_pages_logout( $logout ) {
+		return $this->set_prop( 'pages.logout', $logout );
 	}
 
 	// Payments Setting Setter.
@@ -1722,43 +1722,43 @@ class Setting extends Model {
 	// Paypal.
 
 	/**
-	 * Set option payments_paypal_enable.
+	 * Set option payments paypal enable.
 	*
 	* @since 0.1.0
-	* @param boolean $payments_paypal_enable
+	* @param boolean $paypal_enable
 	*/
-	public function set_payments_paypal_enable( $payments_paypal_enable ) {
-		return $this->set_prop( 'payments.paypal_enable', masteriyo_string_to_bool( $payments_paypal_enable ) );
+	public function set_payments_paypal_enable( $paypal_enable ) {
+		return $this->set_prop( 'payments.paypal_enable', masteriyo_string_to_bool( $paypal_enable ) );
 	}
 
 	/**
-	 * Set option payments_paypal_production_email.
+	 * Set option payments paypal production email.
 	*
 	* @since 0.1.0
-	* @param string $payments_paypal_production_email
+	* @param string $paypal_production_email
 	*/
-	public function set_payments_paypal_production_email( $payments_paypal_production_email ) {
-		return $this->set_prop( 'payments.paypal_production_email', $payments_paypal_production_email );
+	public function set_payments_paypal_production_email( $paypal_production_email ) {
+		return $this->set_prop( 'payments.paypal_production_email', $paypal_production_email );
 	}
 
 	/**
-	 * Set option payments_paypal_sandbox_enable.
+	 * Set option payments paypal sandbox enable.
 	*
 	* @since 0.1.0
-	* @param boolean $payments_paypal_sandbox_enable
+	* @param boolean $paypal_sandbox_enable
 	*/
-	public function set_payments_paypal_sandbox_enable( $payments_paypal_sandbox_enable ) {
-		return $this->set_prop( 'payments.paypal_sandbox_enable', masteriyo_string_to_bool( $payments_paypal_sandbox_enable ) );
+	public function set_payments_paypal_sandbox_enable( $paypal_sandbox_enable ) {
+		return $this->set_prop( 'payments.paypal_sandbox_enable', masteriyo_string_to_bool( $paypal_sandbox_enable ) );
 	}
 
 	/**
-	 * Set option payments_paypal_sandbox_email.
+	 * Set option payments paypal sandbox email.
 	*
 	* @since 0.1.0
-	* @param string $payments_paypal_sandbox_email
+	* @param string $paypal_sandbox_email
 	*/
-	public function set_payments_paypal_sandbox_email( $payments_paypal_sandbox_email ) {
-		return $this->set_prop( 'payments.paypal_sandbox_email', $payments_paypal_sandbox_email );
+	public function set_payments_paypal_sandbox_email( $paypal_sandbox_email ) {
+		return $this->set_prop( 'payments.paypal_sandbox_email', $paypal_sandbox_email );
 	}
 
 	// Email Setting Setter.
@@ -1786,7 +1786,7 @@ class Setting extends Model {
 	}
 
 	/**
-	 * Set general gemail default content.
+	 * Set general email default content.
 	*
 	* @since 0.1.0
 	* @param string $default_content
@@ -2100,7 +2100,7 @@ class Setting extends Model {
 	}
 
 	/**
-	 * Set completed course meail subject.
+	 * Set completed course email subject.
 	*
 	* @since 0.1.0
 	* @param string $subject

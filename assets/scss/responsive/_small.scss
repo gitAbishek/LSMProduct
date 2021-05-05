@@ -21,4 +21,10 @@
   .mto-reset .mto-btn {
     margin-bottom: 24px;
   }
+  // Dashbord Continue Studying
+  .mto-cstudy {
+    &--btn {
+      width: inherit;
+    }
+  }
 }

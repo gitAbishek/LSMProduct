@@ -178,15 +178,15 @@ defined( 'ABSPATH' ) || exit;
 
 					<div class="mto-cstudy--body--pbar">
 						<div class="mto-cstudy--body--progressbar">
-							<span class="mto-cstudy--body--bar">
-								<span class="mto-cstudy--body--progress">15%</span>
+							<span class="mto-cstudy--body--bar" style="width:50%;">
+								<span class="mto-cstudy--body--progress">50%</span>
 							</span>
 						</div>
 						<div class="mto-cstudy--body--caption">
 							Started Jan 5, 2020
 						</div>
 					</div>
-					<div class="mto-cstudy--body--pstatus">15% Complete</div>
+					<div class="mto-cstudy--body--pstatus">50% Complete</div>
 					<div>
 						<a class="mto-cstudy--body--btn mto-btn mto-btn-primary " href="#">
 							<span><?php echo esc_html__( 'Continue', 'masteriyo' ); ?></span>
@@ -237,15 +237,15 @@ defined( 'ABSPATH' ) || exit;
 
 					<div class="mto-cstudy--body--pbar">
 						<div class="mto-cstudy--body--progressbar">
-							<span class="mto-cstudy--body--bar">
-								<span class="mto-cstudy--body--progress">15%</span>
+							<span class="mto-cstudy--body--bar" style="width:25%;">
+								<span class="mto-cstudy--body--progress">25%</span>
 							</span>
 						</div>
 						<div class="mto-cstudy--body--caption">
 							Started Jan 5, 2020
 						</div>
 					</div>
-					<div class="mto-cstudy--body--pstatus">15% Complete</div>
+					<div class="mto-cstudy--body--pstatus">25% Complete</div>
 					<div>
 						<a class="mto-cstudy--body--btn mto-btn mto-btn-primary " href="#">
 							<span><?php echo esc_html__( 'Continue', 'masteriyo' ); ?></span>

@@ -15,6 +15,7 @@
     }
   }
 
+  // Edit Profile.
   .mto-edt-profile--wrap {
     position: relative;
   }
@@ -51,8 +52,18 @@
       flex: 1;
     }
   }
+}
+.mto-pwd-security--btn,
+.mto-edt-myaccount--btn {
+  border-radius: 100px;
+}
 
-  &--btn {
-    border-radius: 100px;
+// Password and security.
+.mto-pwd-security {
+  &--form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 50%;
   }
 }

@@ -92,44 +92,39 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 					</div>
 				</div>
 
-				<div>
+				<div class="mto-submit-btn">
 					<button id="mto-btn-submit-edit-profile-form" type="submit" class="mto-edt-myaccount--btn mto-btn mto-btn-primary">
 						<?php echo esc_html__( 'Save', 'masteriyo' ); ?>
 					</button>
 				</div>
 		</form>
 	</div>
-	<div id="password-security-tab" class="mto-tab-content mto-hidden">
-		<div class="password-security mto-w-full lg:mto-w-2/5">
-			<h2 class="password--security--title mto-font-semibold mto-text-2xl"><?php echo esc_html__( 'Change Password', 'masteriyo' ); ?></h2>
+	<div id="password-security-tab" class="mto-pwd-security mto-tab-content mto-hidden">
+			<h3 class="mto-pwd-security--title"><?php echo esc_html__( 'Change Password', 'masteriyo' ); ?></h3>
 
-				<form class="password-security-form mto-mt-10" method="POST">
-					<div class="mto-rounded-md mtoshadow-sm mto-space-y-6">
-						<div class="current_password">
-							<label for="current_password" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Current Password', 'masteriyo' ); ?></label>
-							<input id="current_password" name="current_password" type="password" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
-						</div>
+			<form class="mto-pwd-security--form" method="POST">
+				<div class="mto-cr-pwd">
+					<label for="current_password" class="mto-label"><?php echo esc_html__( 'Current Password', 'masteriyo' ); ?></label>
+					<input id="current_password" name="current_password" type="password" required class="mto-input" placeholder="">
+				</div>
 
-						<div class="password_1">
-							<label for="password_1" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'New Password', 'masteriyo' ); ?></label>
-							<input id="password_1" name="password_1" type="password" required autocomplete="new-password" class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
-						</div>
+				<div class="mto-nw-pwd password_1">
+					<label for="password_1" class="mto-label"><?php echo esc_html__( 'New Password', 'masteriyo' ); ?></label>
+					<input id="password_1" name="password_1" type="password" required autocomplete="new-password" class="mto-input" placeholder="">
+				</div>
 
-						<div class="password_2">
-							<label for="password_2" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Confirm Password', 'masteriyo' ); ?></label>
-							<input id="password_2" name="password_2" type="password" required autocomplete="new-password" class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
-						</div>
-					</div>
+				<div class="mto-cf-pwd password_2">
+					<label for="password_2" class="mto-label"><?php echo esc_html__( 'Confirm Password', 'masteriyo' ); ?></label>
+					<input id="password_2" name="password_2" type="password" required autocomplete="new-password" class="mto-input" placeholder="">
+				</div>
+				<div class="mto-cpwd-btn">
+					<button type="submit" name="masteriyo-change-password" value="yes" class="mto-pwd-security--btn mto-btn mto-btn-primary">
+						<?php echo esc_html__( 'Change Password', 'masteriyo' ); ?>
+					</button>
+				</div>
 
-					<div class="password-security-btn mto-mt-10">
-						<button type="submit" name="masteriyo-change-password" value="yes" class="change-password btn mto-text-sm mto-py-3 mto-px-6 mto-uppercase">
-							<?php echo esc_html__( 'Change Password', 'masteriyo' ); ?>
-						</button>
-					</div>
-
-					<?php wp_nonce_field( 'masteriyo-change-password' ); ?>
-				</form>
-		</div>
+				<?php wp_nonce_field( 'masteriyo-change-password' ); ?>
+			</form>
 	</div>
 </div>
 

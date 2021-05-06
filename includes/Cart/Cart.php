@@ -189,6 +189,7 @@ class Cart {
 		$update_cart_session = false; // Flag to indicate the stored cart should be updated.
 		$order_again         = false; // Flag to indicate whether this is a re-order.
 		$cart                = $this->session->get( 'cart', null );
+		$cart                = is_null( $cart ) ? array() : $cart;
 
 		// Populate cart from order.
 		if ( isset( $_GET['order_again'], $_GET['_wpnonce'] )
@@ -623,6 +624,8 @@ class Cart {
 	/**
 	 * Checks if the cart is empty.
 	 *
+	 * @since 0.1.0.
+	 *
 	 * @return bool
 	 */
 	public function is_empty() {
@@ -633,10 +636,11 @@ class Cart {
 	/**
 	 * Empties the cart and optionally the persistent cart too.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param bool $clear_persistent_cart Should the persistant cart be cleared too. Defaults to true.
 	 */
-	public function empty_cart( $clear_persistent_cart = true ) {
-
+	public function clear( $clear_persistent_cart = true ) {
 		do_action( 'masteriyo_before_cart_emptied', $clear_persistent_cart );
 
 		$this->cart_contents         = array();
@@ -644,10 +648,10 @@ class Cart {
 		$this->totals                = $this->default_totals;
 
 		if ( $clear_persistent_cart ) {
-			$this->session->persistent_cart_destroy();
+			$this->persistent_cart_destroy();
 		}
 
-		$this->fees_api->remove_all_fees();
+		$this->fees_api->remove_all();
 
 		do_action( 'masteriyo_cart_emptied', $clear_persistent_cart );
 	}
@@ -1168,7 +1172,9 @@ class Cart {
 	 *
 	 * The masteriyo_cart_item_data_to_validate filter can be used to add custom properties.
 	 *
-	 * @param Cours $course Course object.
+	 * @since 0.1.0
+	 *
+	 * @param Course $course Course object.
 	 * @return string
 	 */
 	protected function get_cart_item_data_hash( $course ) {
@@ -1186,4 +1192,26 @@ class Cart {
 		);
 	}
 
+	/**
+	 * Delete the persistent cart permanently.
+	 *
+	 * @since 0.1.0
+	 */
+	public function persistent_cart_destroy() {
+		if ( get_current_user_id() && apply_filters( 'masteriyo_persistent_cart_enabled', true ) ) {
+			delete_user_meta( get_current_user_id(), '_masteriyo_persistent_cart_' . get_current_blog_id() );
+		}
+	}
+
+	/**
+	 * Destroy cart session data.
+	 *
+	 * @since 0.1.0
+	 */
+	public function destroy_cart_session() {
+		$this->session->put( 'cart', null );
+		$this->session->put( 'cart_totals', null );
+		$this->session->put( 'removed_cart_contents', null );
+		$this->session->put( 'order_awaiting_payment', null );
+	}
 }

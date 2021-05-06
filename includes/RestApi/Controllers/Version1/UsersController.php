@@ -171,6 +171,7 @@ class UsersController extends PostsController {
 				'type' => 'string',
 			),
 			'validate_callback' => 'rest_validate_request_arg',
+			'enum'              => masteriyo_get_wp_roles(),
 
 		);
 		$params['per_page'] = array(
@@ -293,7 +294,7 @@ class UsersController extends PostsController {
 			'use_ssl'              => $user->get_use_ssl(),
 			'show_admin_bar_front' => $user->get_show_admin_bar_front(),
 			'locale'               => $user->get_locale(),
-			'roles'                 => $user->get_roles(),
+			'roles'                => $user->get_roles(),
 			'billing'              => array(
 				'first_name' => $user->get_billing_first_name(),
 				'last_name'  => $user->get_billing_last_name(),
@@ -478,9 +479,10 @@ class UsersController extends PostsController {
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'roles'                 => array(
+				'roles'                => array(
 					'description' => __( 'User role.', 'masteriyo' ),
 					'type'        => 'array',
+					'enum'        => masteriyo_get_wp_roles(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'billing'              => array(
@@ -494,57 +496,57 @@ class UsersController extends PostsController {
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'last_name' => array(
+						'last_name'  => array(
 							'description' => __( 'User billing last name.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'company' => array(
+						'company'    => array(
 							'description' => __( 'User billing company name.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'address_1' => array(
+						'address_1'  => array(
 							'description' => __( 'User billing address 1.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'address_1' => array(
+						'address_1'  => array(
 							'description' => __( 'User billing address 1.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'address_2' => array(
+						'address_2'  => array(
 							'description' => __( 'User billing address 2.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'city' => array(
+						'city'       => array(
 							'description' => __( 'User billing city.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'postcode' => array(
+						'postcode'   => array(
 							'description' => __( 'User billing post code.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'country' => array(
+						'country'    => array(
 							'description' => __( 'User billing country.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'state' => array(
+						'state'      => array(
 							'description' => __( 'User billing state.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'email' => array(
+						'email'      => array(
 							'description' => __( 'User billing email address.', 'masteriyo' ),
 							'type'        => 'email',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'phone' => array(
+						'phone'      => array(
 							'description' => __( 'User billing phone number.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),

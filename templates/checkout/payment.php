@@ -9,30 +9,34 @@
 
  defined( 'ABSPATH' ) || exit;
 ?>
-<div id="masteriyo-payments" class="checkout-summary-payment-method">
-	<?php if ( masteriyo( 'cart' )->needs_payment() ) : ?>
-		<ul class="masteriyo-payment-methods payment-methods methods">
-			<?php
-			if ( ! empty( $available_gateways ) ) {
-				foreach ( $available_gateways as $gateway ) {
-					masteriyo_get_template( 'checkout/pa
-					yment-method.php', array( 'gateway' => $gateway ) );
+
+<?php do_action( 'masteriyo_checkout_before_payment_methods' ); ?>
+
+<?php if ( masteriyo( 'cart' )->needs_payment() ) : ?>
+	<div id="masteriyo-payments" class="checkout-summary-payment-method">
+			<ul class="masteriyo-payment-methods payment-methods methods">
+				<?php
+				if ( ! empty( $available_gateways ) ) {
+					foreach ( $available_gateways as $gateway ) {
+						masteriyo_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
+					}
+				} else {
+					$message = esc_html__( 'Please fill in your details above to see available payment methods.', 'masteriyo' );
+					if ( masteriyo_get_current_user()->get_billing_country() ) {
+						$message = esc_html__( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'masteriyo' );
+					}
+					printf(
+						'<li class="masteriyo-notice masteriyo-notice--info masteriyo-info">%s</li>',
+						$message // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					);
 				}
-			} else {
-				$message = esc_html__( 'Please fill in your details above to see available payment methods.', 'masteriyo' );
-				if ( masteriyo_get_current_user()->get_billing_country() ) {
-					$message = esc_html__( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'masteriyo' );
-				}
-				printf(
-					'<li class="masteriyo-notice masteriyo-notice--info masteriyo-info">%s</li>',
-					$message // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				);
-			}
-			?>
-		</ul>
-	<?php endif; ?>
-	<input type="hidden" name="payment_method" value="cod" />
-</div>
+				?>
+			</ul>
+			<input type="hidden" name="payment_method" value="cod" />
+		</div>
+<?php endif; ?>
+
+<?php do_action( 'masteriyo_checkout_after_payment_methods' ); ?>
 
 <?php do_action( 'masteriyo_checkout_summary_before_submit' ); ?>
 

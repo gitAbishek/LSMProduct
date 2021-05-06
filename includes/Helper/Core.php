@@ -2334,3 +2334,14 @@ function masteriyo_uasort_comparison( $a, $b ) {
 function masteriyo_get_user_agent() {
 	return isset( $_SERVER['HTTP_USER_AGENT'] ) ? masteriyo_clean( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
 }
+
+/**
+ * Get WordPress user roles.
+ *
+ * @since 0.1.0
+ * @return string[]
+ */
+function masteriyo_get_wp_roles() {
+	$roles = wp_roles();
+	return array_keys( $roles->role_names );
+}

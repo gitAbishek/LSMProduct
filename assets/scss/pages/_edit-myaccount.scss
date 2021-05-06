@@ -12,25 +12,47 @@
 
     .mto-active-tab {
       color: $mto-primary-color;
-      background: $mto-accent-color;
     }
   }
 
-  .mto-edt-profile-upload {
-    background: $mto-primary-color;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-self: center;
+  .mto-edt-profile--wrap {
+    position: relative;
   }
 
   .mto-svg-icon svg {
-    width: 24px;
-    height: 24px;
-    fill: black;
+    background: $mto-primary-color;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 20px;
+    right: 0px;
+    padding: 5px;
+    fill: #fff;
+    border-radius: 50px;
+    cursor: pointer;
   }
 
-  .mto-edit-mayaccount--img {
+  .mto-edt-myaccount--img {
+    border-radius: 100px;
+    @include mto-shadow-1;
+  }
+
+  //Form.
+  &--form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .mto-col-2 {
+    gap: 30px;
+    & > * {
+      flex: 1;
+    }
+  }
+
+  &--btn {
     border-radius: 100px;
   }
 }

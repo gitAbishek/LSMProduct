@@ -48,6 +48,48 @@ class CheckoutShortcode extends Shortcode {
 	public function get_content() {
 		$data = $this->get_attributes();
 
-		return \masteriyo_get_template_html( 'checkout/form-checkout.php', $data );
+		if ( is_null( masteriyo( 'cart' ) ) ) {
+			return;
+		}
+
+		$this->checkout();
+	}
+
+	/**
+	 * Show the checkout.
+	 *
+	 * @return void
+	 */
+	private function checkout() {
+		// Check cart has contents.
+		if ( masteriyo( 'cart' )->is_empty() && ! is_customize_preview() && apply_filters( 'woocommerce_checkout_redirect_empty_cart', true ) ) {
+			return;
+		}
+
+		// Check cart contents for errors.
+		do_action( 'woocommerce_check_cart_items' );
+
+		// Calculate total.s
+		masteriyo( 'cart' )->calculate_totals();
+
+		// Get checkout object.
+		$checkout = masteriyo( 'checkout' );
+
+		if ( is_null( $checkout ) ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		if ( empty( $_POST ) ) {
+			masteriyo_clear_notices();
+		}
+
+		masteriyo_get_template(
+			'checkout/form-checkout.php',
+			array(
+				'checkout' => $checkout,
+			)
+		);
+
 	}
 }

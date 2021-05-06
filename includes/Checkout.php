@@ -10,12 +10,33 @@
 
 namespace ThemeGrill\Masteriyo;
 
+use ThemeGrill\Masteriyo\Cart\Cart;
+use ThemeGrill\Masteriyo\Session\Session;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Checkout class.
  */
 class Checkout {
+
+	/**
+	 * Cart instance.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var ThemeGrill\masteriyo\Cart\Cart
+	 */
+	private $cart = null;
+
+	/**
+	 * Session instance.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var ThemeGrill\Masteriyo\Session\Session
+	 */
+	private $session = null;
 
 	/**
 	 * Checkout fields.
@@ -25,7 +46,6 @@ class Checkout {
 	 * @var array
 	 */
 	private $fields = null;
-
 
 	/**
 	 * Caches User object. @see get_value.
@@ -39,8 +59,11 @@ class Checkout {
 	/**
 	 * Constructor.
 	 */
-	public function __construct() {
-		$this->inIt_hooks();
+	public function __construct( Cart $cart, Session $session ) {
+		$this->cart    = $cart;
+		$this->session = $session;
+
+		$this->init_hooks();
 	}
 
 	/**
@@ -87,7 +110,7 @@ class Checkout {
 			$nonce_value = masteriyo_get_var( $_REQUEST['masteriyo-process-checkout-nonce'], masteriyo_get_var( $_REQUEST['_wpnonce'], '' ) );
 
 			if ( empty( $nonce_value ) || ! wp_verify_nonce( $nonce_value, 'masteriyo-process_checkout' ) ) {
-				masteriyo( 'session' )->put( 'refresh_totals', true );
+				$this->session->put( 'refresh_totals', true );
 				throw new \Exception( __( 'We were unable to process your order, please try again.', 'masteriyo' ) );
 			}
 
@@ -96,7 +119,7 @@ class Checkout {
 
 			do_action( 'masteriyo_before_checkout_process' );
 
-			if ( masteriyo( 'cart' )->is_empty() ) {
+			if ( $this->cart->is_empty() ) {
 				throw new \Exception(
 					sprintf(
 						/* translators: %s: course list url */
@@ -124,28 +147,27 @@ class Checkout {
 				}
 			}
 
-			$a = 1;
-			// if ( empty( $posted_data['masteriyo_checkout_update_totals'] ) && 0 === masteriyo_notice_count( Notice::ERROR ) ) {
-			// 	$this->process_user( $posted_data );
-			// 	$order_id = $this->create_order( $posted_data );
-			// 	$order    = masteriyo_get_order( $order_id );
+			if ( empty( $posted_data['masteriyo_checkout_update_totals'] ) && 0 === masteriyo_notice_count( Notice::ERROR ) ) {
+				$this->process_user( $posted_data );
+				$order_id = $this->create_order( $posted_data );
+				$order    = masteriyo_get_order( $order_id );
 
-			// 	if ( is_wp_error( $order_id ) ) {
-			// 		throw new Exception( $order_id->get_error_message() );
-			// 	}
+				if ( is_wp_error( $order_id ) ) {
+					throw new Exception( $order_id->get_error_message() );
+				}
 
-			// 	if ( ! $order ) {
-			// 		throw new Exception( __( 'Unable to create order.', 'masteriyo' ) );
-			// 	}
+				if ( ! $order ) {
+					throw new Exception( __( 'Unable to create order.', 'masteriyo' ) );
+				}
 
-			// 	do_action( 'masteriyo_checkout_order_processed', $order_id, $posted_data, $order );
+				do_action( 'masteriyo_checkout_order_processed', $order_id, $posted_data, $order );
 
-			// 	if ( $order->needs_payment() ) {
-			// 		$this->process_order_payment( $order_id, $posted_data['payment_method'] );
-			// 	} else {
-			// 		$this->process_order_without_payment( $order_id );
-			// 	}
-			// }
+				if ( $order->needs_payment() ) {
+					$this->process_order_payment( $order_id, $posted_data['payment_method'] );
+				} else {
+					$this->process_order_without_payment( $order_id );
+				}
+			}
 		} catch ( Exception $e ) {
 			masteriyo_add_notice( $e->getMessage(), Notice::ERROR );
 		}
@@ -278,10 +300,10 @@ class Checkout {
 		array_walk( $address_fields, array( $this, 'set_user_address_fields' ), $data );
 		masteriyo_get_current_user()->save();
 
-		masteriyo( 'session' )->put( 'chosen_payment_method', $data['payment_method'] );
+		$this->session->put( 'chosen_payment_method', $data['payment_method'] );
 
 		// Update cart totals now we have user address.
-		masteriyo( 'cart' )->calculate_totals();
+		$this->cart->calculate_totals();
 	}
 
 	/**
@@ -337,6 +359,8 @@ class Checkout {
 	 * @param  WP_Error $errors Validation errors.
 	 */
 	protected function validate_checkout( &$data, &$errors ) {
+		masteriyo_clear_notices();
+
 		$this->validate_posted_data( $data, $errors );
 		$this->check_cart_items();
 
@@ -345,14 +369,14 @@ class Checkout {
 			$errors->add( 'terms', __( 'Please read and accept the terms and conditions to proceed with your order.', 'masteriyo' ) );
 		}
 
-		if ( masteriyo( 'cart' )->needs_payment() ) {
+		if ( $this->cart->needs_payment() ) {
 			// $available_gateways = masteriyo( 'payment_gateways' )->get_available_payment_gateways();
-			$available_gateways = array();
+			$available_gateways = array( 'cod' => 'cod' );
 
 			if ( ! isset( $available_gateways[ $data['payment_method'] ] ) ) {
 				$errors->add( 'payment', __( 'Invalid payment method.', 'masteriyo' ) );
 			} else {
-				$available_gateways[ $data['payment_method'] ]->validate_fields();
+				// $available_gateways[ $data['payment_method'] ]->validate_fields();
 			}
 		}
 
@@ -445,7 +469,7 @@ class Checkout {
 				}
 
 				if ( '' !== $data[ $key ] && in_array( 'state', $format, true ) ) {
-					$country      = isset( $data[ $fieldset_key . '_country' ] ) ? $data[ $fieldset_key . '_country' ] : MASTERIYO()->user->{"get_{$fieldset_key}_country"}();
+					$country      = isset( $data[ $fieldset_key . '_country' ] ) ? $data[ $fieldset_key . '_country' ] : masteriyo_get_current_user()->{"get_{$fieldset_key}_country"}();
 					$valid_states = masteriyo( 'countries' )->get_states( $country );
 
 					if ( ! empty( $valid_states ) && is_array( $valid_states ) && count( $valid_states ) > 0 ) {
@@ -542,8 +566,8 @@ class Checkout {
 		}
 
 		try {
-			$order_id  = absint( masteriyo( 'session' )->get( 'order_awaiting_payment' ) );
-			$cart_hash = masteriyo( 'cart' )->get_cart_hash();
+			$order_id  = absint( $this->session->get( 'order_awaiting_payment' ) );
+			$cart_hash = $this->cart->get_cart_hash();
 			// $available_gateways = masteriyo( 'payment_gateways' )->get_available_payment_gateways();
 			$available_gateways = array();
 			$order              = $order_id ? masteriyo_get_order( $order_id ) : null;
@@ -574,14 +598,12 @@ class Checkout {
 				}
 			}
 
-			// $order->set_created_via( 'checkout' );
+			$order->set_created_via( 'checkout' );
 			$order->set_cart_hash( $cart_hash );
-			$order->set_user_id( apply_filters( 'masteriyo_checkout_user_id', get_current_user_id() ) );
-			$order->set_currency( get_masteriyo_currency() );
-			$order->set_prices_include_tax( 'yes' === get_option( 'masteriyo_prices_include_tax' ) );
-			$order->set_user_ip_address( WC_Geolocation::get_ip_address() );
-			$order->set_user_user_agent( wc_get_user_agent() );
-			$order->set_user_note( isset( $data['order_comments'] ) ? $data['order_comments'] : '' );
+			$order->set_customer_id( apply_filters( 'masteriyo_checkout_user_id', get_current_user_id() ) );
+			$order->set_currency( masteriyo_get_currency() );
+			// $order->set_customer_ip_address( WC_Geolocation::get_ip_address() );
+			$order->set_customer_user_agent( masteriyo_get_user_agent() );
 			$order->set_payment_method( isset( $available_gateways[ $data['payment_method'] ] ) ? $available_gateways[ $data['payment_method'] ] : $data['payment_method'] );
 			$this->set_data_from_cart( $order );
 
@@ -615,20 +637,135 @@ class Checkout {
 		}
 
 		// Only print notices if not reloading the checkout, otherwise they're lost in the page reload.
-		if ( ! is_null( masteriyo( 'session' )->get( 'reload_checkout' ) ) ) {
+		if ( ! is_null( $this->session->get( 'reload_checkout' ) ) ) {
 			$messages = masteriyo_print_notices( true );
 		}
 
 		$response = array(
 			'result'   => 'failure',
 			'messages' => isset( $messages ) ? $messages : '',
-			'refresh'  => is_null( masteriyo( 'session' )->get( 'refresh_totals' ) ),
-			'reload'   => is_null( masteriyo( 'session' )->get( 'reload_checkout' ) ),
+			'refresh'  => is_null( $this->session->get( 'refresh_totals' ) ),
+			'reload'   => is_null( $this->session->get( 'reload_checkout' ) ),
 		);
 
-		masteriyo( 'session' )->remove( 'refresh_totals' );
-		masteriyo( 'session' )->remove( 'reload_checkout' );
+		$this->session->remove( 'refresh_totals' );
+		$this->session->remove( 'reload_checkout' );
 
 		wp_send_json( $response );
+	}
+
+	/**
+	 * Copy line items, tax, totals data from cart to order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Order $order Order object.
+	 *
+	 * @throws Exception When unable to create order.
+	 */
+	public function set_data_from_cart( &$order ) {
+		$order->set_total( $this->cart->get_total( 'edit' ) );
+		$this->create_order_course_items( $order );
+	}
+
+	/**
+	 * Add line items to the order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Order $order Order instance.
+	 */
+	public function create_order_course_items( &$order ) {
+		foreach ( $this->cart->get_cart() as $cart_item_key => $values ) {
+			$item   = apply_filters( 'masteriyo_checkout_create_order_line_item_object', masteriyo( 'order-item.course' ), $cart_item_key, $values, $order );
+			$course = $values['data'];
+
+			$item->set_props(
+				array(
+					'quantity' => $values['quantity'],
+					'subtotal' => $values['line_subtotal'],
+					'total'    => $values['line_total'],
+				)
+			);
+
+			if ( $course ) {
+				$item->set_props(
+					array(
+						'name'      => $course->get_name(),
+						'course_id' => $course->get_id(),
+					)
+				);
+			}
+
+			// $item->set_backorder_meta();
+
+			do_action( 'masteriyo_checkout_create_order_line_item', $item, $cart_item_key, $values, $order );
+
+			// Add item to order and save.
+			$order->add_item( $item );
+		}
+	}
+
+	/**
+	 * Process an order that does require payment.
+	 *
+	 * @since 0.1.0
+	 * @param int    $order_id       Order ID.
+	 * @param string $payment_method Payment method.
+	 */
+	protected function process_order_payment( $order_id, $payment_method ) {
+		$available_gateways = masteriyo( 'payment_gateways' )->get_available_payment_gateways();
+
+		if ( ! isset( $available_gateways[ $payment_method ] ) ) {
+			return;
+		}
+
+		// Store Order ID in session so it can be re-used after payment failure.
+		$this->session->put( 'order_awaiting_payment', $order_id );
+
+		// Process Payment.
+		$result = $available_gateways[ $payment_method ]->process_payment( $order_id );
+
+		// Redirect to success/confirmation/payment page.
+		if ( isset( $result['result'] ) && 'success' === $result['result'] ) {
+			$result['order_id'] = $order_id;
+
+			$result = apply_filters( 'masteriyo_payment_successful_result', $result, $order_id );
+
+			if ( ! is_ajax() ) {
+				// phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
+				wp_redirect( $result['redirect'] );
+				exit;
+			}
+
+			wp_send_json( $result );
+		}
+	}
+
+	/**
+	 * Process an order that doesn't require payment.
+	 *
+	 * @since 0.1.0
+	 * @param int $order_id Order ID.
+	 */
+	protected function process_order_without_payment( $order_id ) {
+		$order = masteriyo_get_order( $order_id );
+		$order->payment_complete();
+
+		$this->cart->clear();
+
+		if ( ! masteriyo_is_ajax() ) {
+			wp_safe_redirect(
+				apply_filters( 'masteriyo_checkout_no_payment_needed_redirect', $order->get_checkout_order_received_url(), $order )
+			);
+			exit;
+		}
+
+		wp_send_json(
+			array(
+				'result'   => 'success',
+				'redirect' => apply_filters( 'masteriyo_checkout_no_payment_needed_redirect', $order->get_checkout_order_received_url(), $order ),
+			)
+		);
 	}
 }

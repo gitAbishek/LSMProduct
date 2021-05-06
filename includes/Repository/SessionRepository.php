@@ -26,15 +26,13 @@ class SessionRepository implements RepositoryInterface {
 	public function create( Model &$session ) {
 		global $wpdb;
 
-		error_log( __FUNCTION__ );
-
 		$session_table = $session->get_table();
 		$wpdb->replace(
 			$session_table,
 			array(
-				'key'     => $session->get_key(),
+				'key'    => $session->get_key(),
 				'data'   => maybe_serialize( $session->all() ),
-				'expiry' => $session->get_expiry()
+				'expiry' => $session->get_expiry(),
 			),
 			array( '%s', '%s', '%d' )
 		);
@@ -48,7 +46,7 @@ class SessionRepository implements RepositoryInterface {
 	 * @since 0.1.0
 	 *
 	 * @param Model $session Session object.
-	 * @param array $args	Array of args to pass.alert-danger
+	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$session, $args = array() ) {
 		global $wpdb;
@@ -76,11 +74,13 @@ class SessionRepository implements RepositoryInterface {
 			$result        = $wpdb->get_row( $query ); // phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
 
 			if ( ! is_null( $result ) ) {
-				$session->set_props( array(
-					'key'    => $result->key,
-					'data'   => maybe_unserialize( $result->data ),
-					'expiry' => $result->expiry
-				) );
+				$session->set_props(
+					array(
+						'key'    => $result->key,
+						'data'   => maybe_unserialize( $result->data ),
+						'expiry' => $result->expiry,
+					)
+				);
 
 				$session->set_id( $result->id );
 				$session->set_object_read( true );
@@ -103,13 +103,12 @@ class SessionRepository implements RepositoryInterface {
 		$session_table = $session->get_table();
 
 		if ( $session->is_dirty() ) {
-			\error_log( __FUNCTION__ );
 			$wpdb->update(
 				$session_table,
 				array(
 					'key'    => $session->get_key(),
 					'data'   => maybe_serialize( $session->all() ),
-					'expiry' => $session->get_expiry()
+					'expiry' => $session->get_expiry(),
 				),
 				array( 'id' => $session->get_id() ),
 				array( '%s', '%s', '%d' ),

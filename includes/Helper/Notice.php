@@ -43,7 +43,7 @@ function masteriyo_notice_count( $notice_type = '' ) {
 	}
 
 	$notice_count = 0;
-	$all_notices  = masteriyo( 'session' )->get( 'masteriyo_notices', array() );
+	$all_notices  = masteriyo( 'session' )->get( 'notices', array() );
 
 	foreach ( $all_notices as $notice ) {
 		if ( isset( $notice['type'] ) && $notice_type === $notice['type'] ) {
@@ -94,4 +94,27 @@ function masteriyo_notice_by_id( $id, $type ) {
 	$message = $notice->get_by_id( $id, $type );
 
 	return $message;
+}
+
+/**
+ * Clear notices.
+ *
+ * @since 0.1.0
+ *
+ * @param string $type Notice type.
+ *
+ * @return void
+ */
+function masteriyo_clear_notices( $type = '' ) {
+	$notice = masteriyo( 'notice' );
+
+	if ( is_null( $notice ) ) {
+		return;
+	}
+
+	if ( empty( $type ) ) {
+		$notice->clear();
+	}
+
+	$notice->remove( $type );
 }

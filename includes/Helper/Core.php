@@ -631,13 +631,8 @@ function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
  * @return array[Course]
  */
 function masteriyo_get_related_courses( $course ) {
-	$setting = masteriyo( 'setting' );
-
-	$setting->set_name( 'masteriyo_max_related_posts_count' );
-
-	masteriyo( 'setting.store' )->read( $setting );
-
-	$max_related_posts = apply_filters( 'masteriyo_max_related_posts_count', $setting->get_value() );
+	$max_related_posts = get_option( 'masteriyo_max_related_posts_count', 3 );
+	$max_related_posts = apply_filters( 'masteriyo_max_related_posts_count', $max_related_posts );
 	$max_related_posts = absint( $max_related_posts );
 	$max_related_posts = max( $max_related_posts, 5 );
 
@@ -2189,7 +2184,7 @@ function masteriyo_format_country_state_string( $country_string ) {
  * @return bool
  */
 function masteriyo_cart_redirect_after_add() {
-	$redirect_after_add = get_option( 'masteriyo_cart_redirect_after_add' );
+	$redirect_after_add = get_option( 'masteriyo_cart_redirect_after_add', true );
 	$redirect_after_add = masteriyo_string_to_bool( $redirect_after_add );
 	return apply_filters( 'masteriyo_cart_redirect_after_add', $redirect_after_add );
 }
@@ -2328,4 +2323,14 @@ function masteriyo_uasort_comparison( $a, $b ) {
 		return 0;
 	}
 	return ( $a < $b ) ? -1 : 1;
+}
+
+/**
+ * Get user agent string.
+ *
+ * @since  0.1.0
+ * @return string
+ */
+function masteriyo_get_user_agent() {
+	return isset( $_SERVER['HTTP_USER_AGENT'] ) ? masteriyo_clean( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
 }

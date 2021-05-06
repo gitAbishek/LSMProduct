@@ -36,6 +36,9 @@ class CheckoutServiceProvider extends AbstractServiceProvider {
 	* @since 0.1.0
 	*/
 	public function register() {
-		$this->getContainer()->add( 'checkout', Checkout::class, true );
+		$this->getContainer()
+			->add( 'checkout', Checkout::class, true )
+			->addArgument( 'cart' )
+			->addArgument( 'session' );
 	}
 }

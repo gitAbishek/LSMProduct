@@ -9,13 +9,14 @@
 
  defined( 'ABSPATH' ) || exit;
 ?>
-<div id="masteriyo-payment" class="checkout-summary-payment-method">
+<div id="masteriyo-payments" class="checkout-summary-payment-method">
 	<?php if ( masteriyo( 'cart' )->needs_payment() ) : ?>
 		<ul class="masteriyo-payment-methods payment-methods methods">
 			<?php
 			if ( ! empty( $available_gateways ) ) {
 				foreach ( $available_gateways as $gateway ) {
-					masteriyo_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
+					masteriyo_get_template( 'checkout/pa
+					yment-method.php', array( 'gateway' => $gateway ) );
 				}
 			} else {
 				$message = esc_html__( 'Please fill in your details above to see available payment methods.', 'masteriyo' );
@@ -30,6 +31,7 @@
 			?>
 		</ul>
 	<?php endif; ?>
+	<input type="hidden" name="payment_method" value="cod" />
 </div>
 
 <?php do_action( 'masteriyo_checkout_summary_before_submit' ); ?>

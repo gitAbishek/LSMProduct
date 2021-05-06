@@ -142,6 +142,40 @@ use ThemeGrill\Masteriyo\Countries;
 		<div class="checkout---postcode-wrapper">
 			<div class="checkout----postcode col-1">
 				<label for="postcode">
+					<?php esc_html_e( 'State', 'masteriyo' ); ?>
+				</label>
+				<input
+					class="danger-msg" type="text" id="billing-state"
+					name="billing_state"
+					value="" />
+			</div>
+		<?php if ( masteriyo_notice_exists( 'billing_state', Notice::ERROR ) ) : ?>
+			<div class="error danger-msg">
+			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_state', Notice::ERROR ) ); ?>
+			</div>
+		<?php endif; ?>
+		</div>
+
+		<div class="checkout---postcode-wrapper">
+			<div class="checkout----postcode col-1">
+				<label for="postcode">
+					<?php esc_html_e( 'City / Town', 'masteriyo' ); ?>
+				</label>
+				<input
+					class="danger-msg" type="text" id="billing-city"
+					name="billing_city"
+					value="" />
+			</div>
+		<?php if ( masteriyo_notice_exists( 'billing_city', Notice::ERROR ) ) : ?>
+			<div class="error danger-msg">
+			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_city', Notice::ERROR ) ); ?>
+			</div>
+		<?php endif; ?>
+		</div>
+
+		<div class="checkout---postcode-wrapper">
+			<div class="checkout----postcode col-1">
+				<label for="postcode">
 					<?php esc_html_e( 'Postcode / ZIP code', 'masteriyo' ); ?>
 				</label>
 				<input
@@ -155,8 +189,6 @@ use ThemeGrill\Masteriyo\Countries;
 			</div>
 		<?php endif; ?>
 		</div>
-
-
 	</form>
 </div>
 <?php do_action( 'masteriyo_checkout_after_billing' ); ?>

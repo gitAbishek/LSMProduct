@@ -72,7 +72,7 @@ class User extends Model {
 		'spam'                 => false,
 		'show_admin_bar_front' => true,
 		'locale'               => '',
-		'roles'                 => '',
+		'roles'                => array(),
 		// Billing details.
 		'billing_first_name'   => '',
 		'billing_last_name'    => '',
@@ -802,9 +802,9 @@ class User extends Model {
 	 * @param string $roles User's roles.
 	 */
 	public function set_roles( $roles ) {
-		global $wp_roless;
+		global $wp_roles;
 
-		if ( $roles && ! empty( $wp_roless->roless ) && ! in_array( $roles, array_keys( $wp_roless->roless ), true ) ) {
+		if ( $roles && ! empty( $wp_roless->roles ) && ! in_array( $roles, array_keys( $wp_roles->roles ), true ) ) {
 			throw new ModelException( 'user_invalid_roles', __( 'Invalid roles', 'masteriyo' ) );
 		}
 

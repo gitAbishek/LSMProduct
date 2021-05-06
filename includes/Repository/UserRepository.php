@@ -45,7 +45,8 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		'syntax_highlighting'  => 'syntax_highlighting',
 		'nickname'             => 'nickname',
 		'description'          => 'description',
-		'roles'                 => 'wp_capabilities',
+
+		// Billing fields.
 		'billing_first_name'   => '_billing_first_name',
 		'billing_last_name'    => '_billing_last_name',
 		'billing_company'      => '_billing_company',
@@ -84,6 +85,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 					'user_activation_key' => $user->get_activation_key( 'edit' ),
 					'user_status'         => $user->get_status( 'edit' ),
 					'display_name'        => $user->get_display_name( 'edit' ),
+					'role'                => $user->get_roles( 'edit' ),
 				),
 				$user
 			)
@@ -126,7 +128,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 				'activation_key' => $user_obj->data->user_activation_key,
 				'status'         => $user_obj->data->user_status,
 				'display_name'   => $user_obj->data->display_name,
-				'role'           => ! empty( $user_obj->roles[0] ) ? $user_obj->roles[0] : 'masteriyo_student',
+				'roles'          => ! empty( $user_obj->roles ) ? $user_obj->roles : array( 'masteriyo_student' ),
 			)
 		);
 

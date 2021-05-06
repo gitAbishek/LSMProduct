@@ -585,7 +585,7 @@ class UsersController extends PostsController {
 		return $schema;
 	}
 
-	/**
+	/**`
 	 * Prepare a single user object for create or update.
 	 *
 	 * @since 0.1.0

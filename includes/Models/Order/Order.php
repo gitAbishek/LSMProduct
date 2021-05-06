@@ -1135,11 +1135,11 @@ class Order extends Model {
 		$type_to_group = apply_filters(
 			'masteriyo_order_type_to_group',
 			array(
-				'course' => 'course_lines',
-				'tax'       => 'tax_lines',
-				'shipping'  => 'shipping_lines',
-				'fee'       => 'fee_lines',
-				'coupon'    => 'coupon_lines',
+				'course'   => 'course_lines',
+				'tax'      => 'tax_lines',
+				'shipping' => 'shipping_lines',
+				'fee'      => 'fee_lines',
+				'coupon'   => 'coupon_lines',
 			)
 		);
 		return isset( $type_to_group[ $type ] ) ? $type_to_group[ $type ] : '';
@@ -1175,5 +1175,86 @@ class Order extends Model {
 		} else {
 			$this->items[ $items_key ][ 'new:' . $items_key . count( $this->items[ $items_key ] ) ] = $item;
 		}
+	}
+
+	/**
+	 * When a payment is complete this function is called.
+	 *
+	 * Most of the time this should mark an order as 'processing' so that admin can process/post the items.
+	 * If the cart contains only downloadable items then the order is 'completed' since the admin needs to take no action.
+	 * Stock levels are reduced at this point.
+	 * Sales are also recorded for products.
+	 * Finally, record the date of payment.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $transaction_id Optional transaction id to store in post meta.
+	 * @return bool success
+	 */
+	public function payment_complete( $transaction_id = '' ) {
+		if ( ! $this->get_id() ) { // Order must exist.
+			return false;
+		}
+
+		try {
+			do_action( 'masteriyo_pre_payment_complete', $this->get_id() );
+
+			if ( ! is_null( masteriyo( 'session' ) ) ) {
+				masteriyo( 'session' )->put( 'order_awaiting_payment', false );
+			}
+
+			$statuses = apply_filters(
+				'masteriyo_valid_order_statuses_for_payment_complete',
+				array( 'on-hold', 'pending', 'failed', 'cancelled' ),
+				$this
+			);
+
+			if ( $this->has_status( $statuses ) ) {
+				if ( ! empty( $transaction_id ) ) {
+					$this->set_transaction_id( $transaction_id );
+				}
+
+				if ( ! $this->get_date_paid( 'edit' ) ) {
+					$this->set_date_paid( time() );
+				}
+
+				$order_status   = $this->needs_processing() ? 'processing' : 'completed';
+				$payment_status = apply_filters( 'masteriyo_payment_complete_order_status', $order_status, $this->get_id(), $this );
+
+				$this->set_status( $payment_status );
+				$this->save();
+
+				do_action( 'masteriyo_payment_complete', $this->get_id() );
+			} else {
+				do_action( 'masteriyo_payment_complete_order_status_' . $this->get_status(), $this->get_id() );
+			}
+		} catch ( Exception $e ) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * See if the order needs processing before it can be completed.
+	 *
+	 * @since 0.1.0
+	 * @return bool
+	 */
+	public function needs_processing() {
+		return false;
+	}
+
+	/**
+	 * Generates a URL for the thanks page (order received).
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_checkout_order_received_url() {
+		$order_received_url = masteriyo_get_endpoint_url( 'order-received', $this->get_id(), masteriyo_get_checkout_url() );
+		$order_received_url = add_query_arg( 'key', $this->get_order_key(), $order_received_url );
+
+		return apply_filters( 'masteriyo_get_checkout_order_received_url', $order_received_url, $this );
 	}
 }

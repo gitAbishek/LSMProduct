@@ -10,6 +10,7 @@ defined( 'ABSPATH' ) || exit;
 use ThemeGrill\Masteriyo\Models\Order\Order;
 use ThemeGrill\Masteriyo\Repository\OrderRepository;
 use ThemeGrill\Masteriyo\Models\Order\OrderItemCourse;
+use ThemeGrill\Masteriyo\Repository\OrderItemRepository;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use ThemeGrill\Masteriyo\Repository\OrderItemCourseRepository;
 use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrdersController;
@@ -58,6 +59,8 @@ class OrderServiceProvider extends AbstractServiceProvider {
 
 		$this->getContainer()->add( 'order', Order::class )
 			->addArgument( 'order.store' );
+
+		$this->getContainer()->add( 'order-item.store', OrderItemRepository::class );
 
 		$this->getContainer()->add( 'order-item.course.store', OrderItemCourseRepository::class );
 

@@ -10,6 +10,8 @@
 namespace ThemeGrill\Masteriyo\Database;
 
 use ThemeGrill\Masteriyo\ModelException;
+use ThemeGrill\Masteriyo\DateTime;
+
 use ThemeGrill\Masteriyo\MetaData;
 
 defined( 'ABSPATH' ) || exit;
@@ -359,8 +361,8 @@ abstract class Model {
 		 *
 		 * @since 0.1.0
 		 *
-		 * @param Model					$this		The object being saved.
-		 * @param RepositoryInterface	$repository The data store persisting the data.
+		 * @param Model                 $this       The object being saved.
+		 * @param RepositoryInterface   $repository The data store persisting the data.
 		 */
 		do_action( 'masteriyo_before_' . $this->object_type . '_object_save', $this, $this->repository );
 
@@ -375,8 +377,8 @@ abstract class Model {
 		 *
 		 * @since 0.1.0
 		 *
-		 * @param Model					$this		The object being saved.
-		 * @param RepositoryInterface	$repository	The repository persisting the data.
+		 * @param Model                 $this       The object being saved.
+		 * @param RepositoryInterface   $repository The repository persisting the data.
 		 */
 		do_action( 'masteriyo_after_' . $this->object_type . '_object_save', $this, $this->repository );
 
@@ -444,8 +446,8 @@ abstract class Model {
 			return $this->{$function}();
 		}
 
-		$meta_data = $this->get_meta_data();
-		$array_keys = array_keys( wp_list_pluck( $meta_data, 'key' ), $key, true  );
+		$meta_data  = $this->get_meta_data();
+		$array_keys = array_keys( wp_list_pluck( $meta_data, 'key' ), $key, true );
 		$value      = $single ? '' : array();
 
 		if ( ! empty( $array_keys ) ) {
@@ -617,5 +619,46 @@ abstract class Model {
 	 */
 	public function get_object_type() {
 		return $this->object_type;
+	}
+
+	/**
+	 * Sets a date prop whilst handling formatting and datetime objects.
+	 *
+	 * @since 0.1.0
+	 * @param string         $prop Name of prop to set.
+	 * @param string|integer $value Value of the prop.
+	 */
+	protected function set_date_prop( $prop, $value ) {
+		try {
+			if ( empty( $value ) ) {
+				$this->set_prop( $prop, null );
+				return;
+			}
+
+			if ( is_a( $value, 'MASTERIYO_DateTime' ) ) {
+				$datetime = $value;
+			} elseif ( is_numeric( $value ) ) {
+				// Timestamps are handled as UTC timestamps in all cases.
+				$datetime = new DateTIme( "@{$value}", new DateTimeZone( 'UTC' ) );
+			} else {
+				// Strings are defined in local WP timezone. Convert to UTC.
+				if ( 1 === preg_match( '/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(Z|((-|\+)\d{2}:\d{2}))$/', $value, $date_bits ) ) {
+					$offset    = ! empty( $date_bits[7] ) ? iso8601_timezone_to_offset( $date_bits[7] ) : masteriyo_timezone_offset();
+					$timestamp = gmmktime( $date_bits[4], $date_bits[5], $date_bits[6], $date_bits[2], $date_bits[3], $date_bits[1] ) - $offset;
+				} else {
+					$timestamp = masteriyo_string_to_timestamp( get_gmt_from_date( gmdate( 'Y-m-d H:i:s', masteriyo_string_to_timestamp( $value ) ) ) );
+				}
+				$datetime = new DateTime( "@{$timestamp}", new DateTimeZone( 'UTC' ) );
+			}
+
+			// Set local timezone or offset.
+			if ( get_option( 'timezone_string' ) ) {
+				$datetime->setTimezone( new DateTimeZone( masteriyo_timezone_string() ) );
+			} else {
+				$datetime->set_utc_offset( masteriyo_timezone_offset() );
+			}
+
+			$this->set_prop( $prop, $datetime );
+		} catch ( Exception $e ) {} // @codingStandardsIgnoreLine.
 	}
 }

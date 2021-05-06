@@ -1,0 +1,38 @@
+.mto-myaccount {
+  gap: 64px;
+// Header
+  &--header{
+    flex: 1 1 15%
+    min-width: 160px;
+  }
+
+  // Profile image.
+  &-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 100px;
+    @include mto-shadow-1;
+  }
+
+  // Profile Name.
+  &--name {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  // Membership
+  &--membership {
+    color: $mto-light-text-color;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  // Body
+  &--body {
+    flex: 1 1 65%;
+    gap: 64px;
+    li {
+      padding: 8px 0px;
+    }
+  }
+}

@@ -35,7 +35,7 @@ require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 /**
  * Bootstrap the appplication.
  */
-$masteriyo = require_once dirname( __FILE__ ) . '/bootstrap/app.php';
+$GLOBALS['masteriyo'] = require_once dirname( __FILE__ ) . '/bootstrap/app.php';
 
 /**
  * Return the service container.

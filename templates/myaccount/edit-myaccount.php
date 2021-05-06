@@ -66,29 +66,29 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0">
 					<div class="mto-flex-grow">
 						<label for="user-address" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Address', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_address() ); ?>" id="user-address" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						<input value="<?php echo esc_attr( $user->get_billing_address() ); ?>" id="user-address" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0 md:mto-space-x-8">
 					<div class="mto-flex-grow">
 						<label for="user-city" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'City', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_city() ); ?>" id="user-city" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						<input value="<?php echo esc_attr( $user->get_billing_city() ); ?>" id="user-city" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 
 					<div class="mto-flex-grow">
 						<label for="user-state" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'State', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_state() ); ?>" id="user-state" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						<input value="<?php echo esc_attr( $user->get_billing_state() ); ?>" id="user-state" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 				<div class="mto-flex mto-flex-col md:mto-flex-row mto-space-y-6 md:mto-space-y-0 md:mto-space-x-8">
 					<div class="mto-flex-grow">
 						<label for="user-zip-code" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Zip Code', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_zip_code() ); ?>" id="user-zip-code" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						<input value="<?php echo esc_attr( $user->get_billing_postcode() ); ?>" id="user-zip-code" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 
 					<div class="mto-flex-grow">
 						<label for="user-country" class="mto-block mto-text-sm mto-font-semibold mto-mb-2"><?php echo esc_html__( 'Country', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_country() ); ?>" id="user-country" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
+						<input value="<?php echo esc_attr( $user->get_billing_country() ); ?>" id="user-country" name="text" type="text" required class="mto-px-4 mto-rounded mto-block mto-w-full mto-py-2 mto-border mto-border-gray-300 focus:mto-outline-none focus:mto-shadow-outline focus:mto-border-primary" placeholder="">
 					</div>
 				</div>
 

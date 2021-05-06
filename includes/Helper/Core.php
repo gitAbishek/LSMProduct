@@ -1409,7 +1409,7 @@ function masteriyo_get_checkout_url() {
  * @return string Url to course list page
  */
 function masteriyo_get_course_list_url() {
-	return apply_filters( 'masteriyo_get_course_list_url', masteriyo_get_page_permalink( 'course_list' ) );
+	return apply_filters( 'masteriyo_get_course_list_url', masteriyo_get_page_permalink( 'course-list' ) );
 }
 
 /**

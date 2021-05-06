@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-get_header( 'course_list' );
+get_header( 'course-list' );
 
 /**
  * Hook: masteriyo_before_main_content.
@@ -90,4 +90,4 @@ do_action( 'masteriyo_after_main_content' );
  */
 do_action( 'masteriyo_sidebar' );
 
-get_footer( 'course_list' );
+get_footer( 'course-list' );

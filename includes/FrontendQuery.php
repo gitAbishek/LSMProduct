@@ -293,7 +293,7 @@ class FrontendQuery {
 			}
 
 			// When orderby is set, WordPress shows posts on the front-page. Get around that here.
-			if ( $this->page_on_front_is( masteriyo_get_page_id( course_list ) ) ) {
+			if ( $this->page_on_front_is( masteriyo_get_page_id( 'course-list' ) ) ) {
 				$_query = wp_parse_args( $q->query );
 				if ( empty( $_query ) || ! array_diff( array_keys( $_query ), array( 'preview', 'page', 'paged', 'cpage', 'orderby' ) ) ) {
 					$q->set( 'page_id', (int) get_option( 'page_on_front' ) );
@@ -321,7 +321,7 @@ class FrontendQuery {
 		}
 
 		// Special check for course_lists with the COURSE POST TYPE ARCHIVE on front.
-		if ( current_theme_supports( 'cmasteriyo' ) && $q->is_page() && 'page' === get_option( 'show_on_front' ) && absint( $q->get( 'page_id' ) ) === masteriyo_get_page_id( course_list ) ) {
+		if ( current_theme_supports( 'cmasteriyo' ) && $q->is_page() && 'page' === get_option( 'show_on_front' ) && absint( $q->get( 'page_id' ) ) === masteriyo_get_page_id( 'course-list' ) ) {
 			// This is a front-page course_list.
 			$q->set( 'post_type', 'course' );
 			$q->set( 'page_id', '' );
@@ -337,7 +337,7 @@ class FrontendQuery {
 			// This is hacky but works. Awaiting https://core.trac.wordpress.org/ticket/21096.
 			global $wp_post_types;
 
-			$course_list_page = get_post( masteriyo_get_page_id( course_list ) );
+			$course_list_page = get_post( masteriyo_get_page_id( 'course-list' ) );
 
 			$wp_post_types['course']->ID         = $course_list_page->ID;
 			$wp_post_types['course']->post_title = $course_list_page->post_title;

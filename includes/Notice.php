@@ -188,7 +188,9 @@ class Notice {
 	 * @param string $type Optional. The singular name of the notice type - either error, success or notice.
 	 * @param array  $data        Optional notice data.
 	 */
-	public function display( $message, $type = self::SUCCESS, $data = array() ) {
+	public function display( $message, $type = self::SUCCESS, $data = array() ) {+
+
+		+
 		$message = apply_filters( "masteriyo_add_notice_{$type}", $message );
 		masteriyo_get_template(
 			"notices/{$type}.php",
@@ -295,5 +297,26 @@ class Notice {
 		}
 
 		return $message;
+	}
+
+	/**
+	 * Remove notices.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param [type] $type Notice type.
+	 * @return void
+	 */
+	public function remove( $type ) {
+		$all_notices = $this->get();
+
+		$all_notices = array_filter(
+			$all_notices,
+			function( $notice ) use ( $type ) {
+				return $type !== $notice['type'];
+			}
+		);
+
+		$this->session->put( 'notices', $all_notices );
 	}
 }

@@ -25,7 +25,7 @@ do_action( 'masteriyo_before_view_myaccount_content' );
 
   	  <span class="mto-myaccount--membership"><?php echo esc_html__( 'Gold Member', 'masteriyo' ); ?></span>
     </div>
-    
+
     <div class="mto-myaccount--body mto-flex">
         <ul class="mto-title account-col-1">
           <li><strong><?php echo esc_html__( 'Email', 'masteriyo' ); ?></strong></li>
@@ -37,16 +37,16 @@ do_action( 'masteriyo_before_view_myaccount_content' );
           <li><strong><?php echo esc_html__( 'Zip Code', 'masteriyo' ); ?></strong></li>
           <li><strong><?php echo esc_html__( 'Country', 'masteriyo' ); ?></strong></li>
         </ul>
-        
+
         <ul class="mto-content account-col-2">
-          <li><?php echo esc_html( $user->get_user_email() ); ?></li>
+          <li><?php echo esc_html( $user->get_email() ); ?></li>
           <li><?php echo esc_html( $user->get_first_name() ); ?></li>
           <li><?php echo esc_html( $user->get_last_name() ); ?></li>
-          <li><?php echo esc_html( $user->get_address() ); ?></li>
-          <li><?php echo esc_html( $user->get_city() ); ?></li>
-          <li><?php echo esc_html( $user->get_state() ); ?></li>
-          <li><?php echo esc_html( $user->get_zip_code() ); ?></li>
-          <li><?php echo esc_html( $user->get_country() ); ?></li>
+          <li><?php echo esc_html( $user->get_billing_address() ); ?></li>
+          <li><?php echo esc_html( $user->get_billing_city() ); ?></li>
+          <li><?php echo esc_html( $user->get_billing_state() ); ?></li>
+          <li><?php echo esc_html( $user->get_billing_postcode() ); ?></li>
+          <li><?php echo esc_html( $user->get_billing_country() ); ?></li>
       </div>
     </div>
 </div>

@@ -8,9 +8,9 @@
 	 * Tabs handler.
 	 */
 	$( document.body ).on( 'click', '.mto-tab', function() {
-		$(this).siblings('.mto-tab').removeClass('active-tab');
-		$(this).addClass('active-tab');
-		$('.tab-content').addClass('mto-hidden');
+		$(this).siblings('.mto-tab').removeClass('mto-active-tab');
+		$(this).addClass('mto-active-tab');
+		$('.mto-tab-content').addClass('mto-hidden');
 		$('#' + $(this).data('tab')).removeClass('mto-hidden');
 	});
 

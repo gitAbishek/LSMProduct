@@ -14,26 +14,30 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 
 ?>
 
-<div class="mto-tabs mto-px-4 md:mto-px-0">
+<div class="mto-edt-myaccount mto-tabs">
 	<?php masteriyo_display_all_notices(); ?>
 
-	<div class="tab-menu mto-flex mto-font-bold mto-text-base mto-border-b-2 mto-border-gray-2 mto-mb-10">
-		<div data-tab="edit-profile-tab" class="mto-tab active-tab mto-pt-6 mto-pb-4 mto--mb-0.5 mto-cursor-pointer"><?php echo esc_html__( 'Edit Profile', 'masteriyo' ); ?></div>
-		<div data-tab="password-security-tab" class="mto-tab mto-pt-6 mto-pb-4 mto--mb-0.5 mto-ml-12 mto-cursor-pointer"><?php echo esc_html__( 'Password & Security', 'masteriyo' ); ?></div>
+	<div class="mto-edt-myaccount--tab-menu mto-flex">
+		<div data-tab="edit-profile-tab" class="mto-tab mto-active-tab"><?php echo esc_html__( 'Edit Profile', 'masteriyo' ); ?></div>
+		<div data-tab="password-security-tab" class="mto-tab"><?php echo esc_html__( 'Password & Security', 'masteriyo' ); ?></div>
 	</div>
-	<div id="edit-profile-tab" class="tab-content mto-block">
-		<div class="edit-profile mto-my-20">
-			<div class="mto-flex mto-justify-center">
+
+	<div id="edit-profile-tab" class="mto-edt-myaccount--content mto-tab-content">
+		<div class="mto-edt-profile">
+			<div class="mto-flex mto-flex-xcenter">
 				<a href="#" aria-label="Change Profile Picture">
-					<div class="mto-group mto-w-24 mto-h-24 mto-bg-cover mto-bg-center mto-rounded-full mto-border-4 mto-shadow-md mto-relative mto-overflow-hidden">
-						<form action="/action_page.php">
-							<label for="img" class="mto-hidden group-hover:mto-block mto-absolute mto-inset-5 mto-w-12 mto-h-12 mto-bg-gray-900 mto-opacity-50 mto-p-3 mto-rounded-full mto-cursor-pointer">
-								<svg xmlns="http://www.w3.org/2000/svg"viewBox="0 0 24 24"><path d="M12,8c-2.168,0-4,1.832-4,4c0,2.168,1.832,4,4,4s4-1.832,4-4C16,9.832,14.168,8,12,8z M12,14c-1.065,0-2-0.935-2-2 s0.935-2,2-2s2,0.935,2,2S13.065,14,12,14z"></path><path d="M20,5h-2.586l-2.707-2.707C14.52,2.105,14.266,2,14,2h-4C9.734,2,9.48,2.105,9.293,2.293L6.586,5H4C2.897,5,2,5.897,2,7v11 c0,1.103,0.897,2,2,2h16c1.103,0,2-0.897,2-2V7C22,5.897,21.103,5,20,5z M4,18V7h3c0.266,0,0.52-0.105,0.707-0.293L10.414,4h3.172 l2.707,2.707C16.48,6.895,16.734,7,17,7h3l0.002,11H4z"></path></svg>
+						<form action="/action_page.php" class="mto-edt-profile-upload">
+							<label for="img" class="mto-svg-icon">
+									<svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+											<path d="M12 8c-2.168 0-4 1.832-4 4s1.832 4 4 4 4-1.832 4-4-1.832-4-4-4zm0 6c-1.065 0-2-.935-2-2s.935-2 2-2 2 .935 2 2-.935 2-2 2z"/>
+											
+											<path d="M20 5h-2.586l-2.707-2.707A.996.996 0 0014 2h-4a.996.996 0 00-.707.293L6.586 5H4c-1.103 0-2 .897-2 2v11c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2zM4 18V7h3c.266 0 .52-.105.707-.293L10.414 4h3.172l2.707 2.707A.996.996 0 0017 7h3l.002 11H4z"/>
+									</svg>
 							</label>
+						
 							<input class="mto-hidden" type="file" id="img" name="img" accept="image/*">
 						</form>
-						<img src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" alt="">
-					</div>
+						<img src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" class="mto-edt-myaccount--img" alt="">
 				</a>
 			</div>
 		</div>
@@ -100,7 +104,7 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 			</div>
 		</form>
 	</div>
-	<div id="password-security-tab" class="tab-content mto-hidden">
+	<div id="password-security-tab" class="mto-tab-content mto-hidden">
 		<div class="password-security mto-w-full lg:mto-w-2/5">
 			<h2 class="password--security--title mto-font-semibold mto-text-2xl"><?php echo esc_html__( 'Change Password', 'masteriyo' ); ?></h2>
 

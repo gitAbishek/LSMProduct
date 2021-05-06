@@ -1,0 +1,36 @@
+.mto-edt-myaccount {
+  &--tab-menu {
+    border-bottom: 1px solid $mto-border-color;
+    padding: 20px 0;
+    margin-bottom: 40px;
+    font-weight: 700;
+    gap: 30px;
+
+    & > * {
+      cursor: pointer;
+    }
+
+    .mto-active-tab {
+      color: $mto-primary-color;
+      background: $mto-accent-color;
+    }
+  }
+
+  .mto-edt-profile-upload {
+    background: $mto-primary-color;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-self: center;
+  }
+
+  .mto-svg-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: black;
+  }
+
+  .mto-edit-mayaccount--img {
+    border-radius: 100px;
+  }
+}

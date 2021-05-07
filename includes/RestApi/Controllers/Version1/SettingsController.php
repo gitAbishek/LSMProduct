@@ -236,6 +236,7 @@ class SettingsController extends CrudController {
 							'description' => __( 'Currency Code.', 'masteriyo' ),
 							'type'        => 'string',
 							'default'     => 'USD',
+							'enum'        => array_keys( get_masteriyo_currencies() ),
 							'context'     => array( 'view', 'edit' ),
 						),
 						'currency_position'  => array(
@@ -309,6 +310,12 @@ class SettingsController extends CrudController {
 						'single_course_permalink'        => array(
 							'description' => __( 'Single course permalink.', 'masteriyo' ),
 							'type'        => 'string',
+							'enum'        => array(
+								'default',
+								'course_list_base',
+								'course_list_category_base',
+								'custom_base',
+							),
 							'context'     => array( 'view', 'edit' ),
 						),
 						'lessons_slug'                   => array(
@@ -318,6 +325,11 @@ class SettingsController extends CrudController {
 						),
 						'quizzes_slug'                   => array(
 							'description' => __( 'Course quizzes slug.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'sections_slug'                  => array(
+							'description' => __( 'Course sections slug.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
@@ -908,6 +920,7 @@ class SettingsController extends CrudController {
 				'single_course_permalink'        => $setting->get_courses_single_course_permalink( $context ),
 				'lessons_slug'                   => $setting->get_courses_lessons_slug( $context ),
 				'quizzes_slug'                   => $setting->get_courses_quizzes_slug( $context ),
+				'sections_slug'                  => $setting->get_courses_sections_slug( $context ),
 				'enable_single_course_permalink' => $setting->get_courses_enable_single_course_permalink( $context ),
 				'single_course_enable_editing'   => $setting->get_courses_single_course_enable_editing( $context ),
 				'show_thumbnail'                 => $setting->get_courses_show_thumbnail( $context ),
@@ -1106,6 +1119,10 @@ class SettingsController extends CrudController {
 
 		if ( isset( $request['courses']['quizzes_slug'] ) ) {
 			$setting->set_courses_quizzes_slug( $request['courses']['quizzes_slug'] );
+		}
+
+		if ( isset( $request['courses']['sections_slug'] ) ) {
+			$setting->set_courses_sections_slug( $request['courses']['sections_slug'] );
 		}
 
 		if ( isset( $request['courses']['enable_single_course_permalink'] ) ) {

@@ -20,6 +20,16 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 
 		$changes = $setting->get_changes();
 
+		$courses_slugs = array(
+			'courses.lessons_slug',
+			'courses.quizzes_slug',
+			'courses.sections_slug',
+			'courses.single_course_permalink',
+			'courses.category_base',
+			'courses.tag_base',
+			'courses.difficulty_base',
+		);
+
 		$setting_data = array();
 		foreach ( $setting->get_data_keys() as $setting_key ) {
 			$callable_setting_key = str_replace( '.', '_', $setting_key );
@@ -35,6 +45,11 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 			foreach ( $data as $setting_name => $setting_value ) {
 				update_option( 'masteriyo.' . $setting_name, $setting_value, false );
 			}
+		}
+
+		// If courses permalink/slugs changed then update masteriyo_flush_rewrite_rules.
+		if ( array_intersect( $courses_slugs, array_keys( $changes ) ) ) {
+			update_option( 'masteriyo_flush_rewrite_rules', 'yes' );
 		}
 
 		$setting->apply_changes();

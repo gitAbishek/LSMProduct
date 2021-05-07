@@ -26,9 +26,9 @@ class PermalinkSettings {
 	 * @since 0.1.0
 	 */
 	public function init() {
-		add_action( 'load-options-permalink.php', array( $this, 'display_taxonomy_permalink_fields' ) );
+		// add_action( 'load-options-permalink.php', array( $this, 'display_taxonomy_permalink_fields' ) );
 
-		add_action( 'init', array( $this, 'settings_save' ) );
+		// add_action( 'init', array( $this, 'settings_save' ) );
 	}
 
 	/**
@@ -165,7 +165,6 @@ class PermalinkSettings {
 		if ( $course_list_page_id && stristr( trim( $permalinks['course_base'], '/' ), $course_list_permalink ) ) {
 			$permalinks['use_verbose_page_rules'] = true;
 		}
-
 
 		$saved_permalinks = masteriyo_get_permalink_structure();
 		$permalinks       = wp_parse_args( $permalinks, $saved_permalinks );

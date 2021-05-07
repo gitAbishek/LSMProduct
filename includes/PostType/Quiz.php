@@ -26,6 +26,7 @@ class Quiz extends PostType {
 
 	public function __construct() {
 		$debug = masteriyo_is_debug_enabled();
+		$permalinks = masteriyo_get_permalink_structure();
 
 		$this->labels = array(
 			'name'                  => _x( 'Quizes', 'Quize General Name', 'masteriyo' ),
@@ -79,6 +80,11 @@ class Quiz extends PostType {
 			'capability_type'     => 'post',
 			'can_export'          => true,
 			'delete_with_user'    => true,
+			'rewrite'             => $permalinks['quiz_rewrite_slug'] ? array(
+				'slug'       => $permalinks['quiz_rewrite_slug'],
+				'with_front' => false,
+				'feeds'      => true,
+			) : false,
 		);
 	}
 

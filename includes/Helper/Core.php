@@ -1278,32 +1278,129 @@ function get_masteriyo_currencies() {
  *
  * @return array
  */
-function masteriyo_get_permalink_structure( $id = '' ) {
-	$saved_permalinks = (array) get_option( 'masteriyo_permalinks', array() );
-	$permalinks       = wp_parse_args(
-		array_filter( $saved_permalinks ),
-		array(
-			'course_base'            => _x( 'course', 'slug', 'masteriyo' ),
-			'course_category_base'   => _x( 'course-category', 'slug', 'masteriyo' ),
-			'course_tag_base'        => _x( 'course-tag', 'slug', 'masteriyo' ),
-			'course_difficulty_base' => _x( 'course-difficulty', 'slug', 'masteriyo' ),
-			'use_verbose_page_rules' => false,
-		)
+function masteriyo_get_permalink_structure() {
+	$get_slugs = array(
+		'courses'            => get_option( 'masteriyo.courses.single_course_permalink' ),
+		'courses_category'   => get_option( 'masteriyo.courses.category_base' ),
+		'courses_tag'        => get_option( 'masteriyo.courses.tag_base' ),
+		'courses_difficulty' => get_option( 'masteriyo.courses.difficulty_base' ),
+		'lessons'            => get_option( 'masteriyo.courses.lessons_slug' ),
+		'quizzes'            => get_option( 'masteriyo.courses.quizzes_slug' ),
+		'sections'           => get_option( 'masteriyo.courses.sections_slug' ),
 	);
 
-	if ( $saved_permalinks !== $permalinks ) {
-		update_option( 'masteriyo_permalinks', $permalinks );
-	}
+	$permalinks = array(
+		'course_base'            => _x( 'course', 'slug', 'masteriyo' ),
+		'course_category_base'   => _x( 'course-category', 'slug', 'masteriyo' ),
+		'course_tag_base'        => _x( 'course-tag', 'slug', 'masteriyo' ),
+		'course_difficulty_base' => _x( 'course-difficulty', 'slug', 'masteriyo' ),
+		'lesson_base'            => _x( 'lesson', 'slug', 'masteriyo' ),
+		'quiz_base'              => _x( 'quiz', 'slug', 'masteriyo' ),
+		'section_base'           => _x( 'section', 'slug', 'masteriyo' ),
+	);
 
-	$permalinks['course_rewrite_slug']            = untrailingslashit( $permalinks['course_base'] );
-	$permalinks['course_category_rewrite_slug']   = untrailingslashit( $permalinks['course_category_base'] );
-	$permalinks['course_tag_rewrite_slug']        = untrailingslashit( $permalinks['course_tag_base'] );
-	$permalinks['course_difficulty_rewrite_slug'] = untrailingslashit( $permalinks['course_difficulty_base'] );
-
-	$permalinks = isset( $permalinks[ $id ] ) ? $permalinks[ $id ] : $permalinks;
+	$permalinks['course_rewrite_slug']            = untrailingslashit( empty( $get_slugs['courses'] ) ? $permalinks['course_base'] : $get_slugs['courses'] );
+	$permalinks['course_category_rewrite_slug']   = untrailingslashit( empty( $get_slugs['courses_category'] ) ? $permalinks['course_category_base'] : $get_slugs['courses_category'] );
+	$permalinks['course_tag_rewrite_slug']        = untrailingslashit( empty( $get_slugs['courses_tag'] ) ? $permalinks['course_tag_base'] : $get_slugs['courses_tag'] );
+	$permalinks['course_difficulty_rewrite_slug'] = untrailingslashit( empty( $get_slugs['courses_difficulty'] ) ? $permalinks['course_difficulty_base'] : $get_slugs['courses_difficulty'] );
+	$permalinks['lesson_rewrite_slug']            = untrailingslashit( empty( $get_slugs['lessons'] ) ) ? $permalinks['lesson_base'] : $get_slugs['lessons'];
+	$permalinks['quiz_rewrite_slug']              = untrailingslashit( empty( $get_slugs['quizzes'] ) ) ? $permalinks['quiz_base'] : $get_slugs['quizzes'];
+	$permalinks['section_rewrite_slug']           = untrailingslashit( empty( $get_slugs['sections'] ) ) ? $permalinks['section_base'] : $get_slugs['sections'];
 
 	return $permalinks;
 }
+
+/**
+ * Check whether to flush rules or not after settings saved.
+ *
+ * @since 0.1.0
+ */
+function masteriyo_maybe_flush_rewrite() {
+
+	if ( 'yes' === get_option( 'masteriyo_flush_rewrite_rules' ) ) {
+		update_option( 'masteriyo_flush_rewrite_rules', 'no' );
+		flush_rewrite_rules();
+	}
+}
+add_action( 'masteriyo_after_register_post_type', 'masteriyo_maybe_flush_rewrite' );
+
+/**
+ * Filter to allow course_cat in the permalinks for course.
+ *
+ * @param  string  $permalink The existing permalink URL.
+ * @param  WP_Post $post WP_Post object.
+ * @return string
+ */
+function masteriyo_course_post_type_link( $permalink, $post ) {
+	// Abort if post is not a course.
+	if ( 'course' !== $post->post_type ) {
+		return $permalink;
+	}
+
+	// Abort early if the placeholder rewrite tag isn't in the generated URL.
+	if ( false === strpos( $permalink, '%' ) ) {
+		return $permalink;
+	}
+
+	// Get the custom taxonomy terms in use by this post.
+	$terms = get_the_terms( $post->ID, 'course_cat' );
+
+	if ( ! empty( $terms ) ) {
+		$terms           = wp_list_sort(
+			$terms,
+			array(
+				'parent'  => 'DESC',
+				'term_id' => 'ASC',
+			)
+		);
+		$category_object = apply_filters( 'masteriyo_course_post_type_link_course_cat', $terms[0], $terms, $post );
+		$course_cat     = $category_object->slug;
+
+		if ( $category_object->parent ) {
+			$ancestors = get_ancestors( $category_object->term_id, 'course_cat' );
+			foreach ( $ancestors as $ancestor ) {
+				$ancestor_object = get_term( $ancestor, 'course_cat' );
+				if ( apply_filters( 'masteriyo_course_post_type_link_parent_category_only', false ) ) {
+					$course_cat = $ancestor_object->slug;
+				} else {
+					$course_cat = $ancestor_object->slug . '/' . $course_cat;
+				}
+			}
+		}
+	} else {
+		// If no terms are assigned to this post, use a string instead (can't leave the placeholder there).
+		$course_cat = _x( 'uncategorized', 'slug', 'masteriyo' );
+	}
+
+	$find = array(
+		'%year%',
+		'%monthnum%',
+		'%day%',
+		'%hour%',
+		'%minute%',
+		'%second%',
+		'%post_id%',
+		'%category%',
+		'%course_cat%',
+	);
+
+	$replace = array(
+		date_i18n( 'Y', strtotime( $post->post_date ) ),
+		date_i18n( 'm', strtotime( $post->post_date ) ),
+		date_i18n( 'd', strtotime( $post->post_date ) ),
+		date_i18n( 'H', strtotime( $post->post_date ) ),
+		date_i18n( 'i', strtotime( $post->post_date ) ),
+		date_i18n( 's', strtotime( $post->post_date ) ),
+		$post->ID,
+		$course_cat,
+		$course_cat,
+	);
+
+	$permalink = str_replace( $find, $replace, $permalink );
+
+	return $permalink;
+}
+add_filter( 'post_type_link', 'masteriyo_course_post_type_link', 10, 2 );
 
 /**
  * Switch Masteriyo to site language.

@@ -46,6 +46,6 @@ class RegisterPostType {
 			$post_type->register();
 		}
 
-		do_action( 'woocommerce_after_register_post_type' );
+		do_action( 'masteriyo_after_register_post_type' );
 	}
 }

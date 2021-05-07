@@ -14,6 +14,7 @@
 
 use ThemeGrill\Masteriyo\Masteriyo;
 use League\Container\Container;
+use ThemeGrill\Masteriyo\Activation;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -50,3 +51,11 @@ function masteriyo( $class = '' ) {
 
 	return empty( $class ) ? $masteriyo : $masteriyo->get( $class );
 }
+
+/**
+ * Registering to activation hook and run activation class.
+ */
+function masteriyo_activate() {
+	Activation::init();
+}
+register_activation_hook( __FILE__, 'masteriyo_activate' );

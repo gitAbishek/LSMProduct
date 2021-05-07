@@ -13,8 +13,8 @@
 <?php do_action( 'masteriyo_checkout_before_payment_methods' ); ?>
 
 <?php if ( masteriyo( 'cart' )->needs_payment() ) : ?>
-	<div id="masteriyo-payments" class="checkout-summary-payment-method">
-			<ul class="masteriyo-payment-methods payment-methods methods">
+	<div id="masteriyo-payments" class="mto-checkout-summary-payment-method">
+			<ul class="masteriyo-payment-methods payment-methods methods mto-checkout-payment-method">
 				<?php
 				if ( ! empty( $available_gateways ) ) {
 					foreach ( $available_gateways as $gateway ) {
@@ -26,13 +26,14 @@
 						$message = esc_html__( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'masteriyo' );
 					}
 					printf(
-						'<li class="masteriyo-notice masteriyo-notice--info masteriyo-info">%s</li>',
+						'<li class="mto-notice mto-alert mto-info-msg">%s</li>',
 						$message // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					);
 				}
 				?>
 			</ul>
-			<input type="hidden" name="payment_method" value="cod" />
+
+			<input type="hidden" name="payment_method" class="mto-input" value="cod" />
 		</div>
 <?php endif; ?>
 
@@ -42,7 +43,7 @@
 
 <button
 	type="submit"
-	class="checkout-confirm-payment btn-primary full-w button alt"
+	class="mto-checkout--btn mto-button mto-btn-primary alt"
 	id="masteriyo-place-order"
 	name="masteriyo_checkout_place_order">
 	<?php

@@ -9,7 +9,8 @@
 
  defined( 'ABSPATH' ) || exit;
 ?>
-<li class="masteriyo-payment_method payment-method-<?php echo esc_attr( $gateway->id ); ?>">
+
+<li class="payment_method payment-method-<?php echo esc_attr( $gateway->id ); ?>">
 	<input
 		id="payment-method-<?php echo esc_attr( $gateway->id ); ?>"
 		type="radio"
@@ -18,14 +19,15 @@
 		value="<?php echo esc_attr( $gateway->id ); ?>"
 		<?php checked( $gateway->chosen, true ); ?> data-order_button_text="<?php echo esc_attr( $gateway->order_button_text ); ?>" />
 
-	<label for="payment_method_<?php echo esc_attr( $gateway->id ); ?>">
+	<label for="payment_method_<?php echo esc_attr( $gateway->id ); ?>" class="mto-label">
+
 		<?php
 			echo esc_html( $gateway->get_title() );
 			echo $gateway->get_icon();
 		?>
 	</label>
 	<?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
-		<div class="payment-box payment-method-<?php echo esc_attr( $gateway->id ); ?>" <?php if ( ! $gateway->chosen ) : /* phpcs:ignore Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace */ ?>style="display:none;"<?php endif; /* phpcs:ignore Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace */ ?>>
+		<div class="payment-box payment-method-<?php echo esc_attr( $gateway->id ); ?>" <?php if ( ! $gateway->chosen ) : /* phpcs:ignore Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace */ ?>style="display:block;"<?php endif; /* phpcs:ignore Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace */ ?>>
 			<?php $gateway->payment_fields(); ?>
 		</div>
 	<?php endif; ?>

@@ -16,175 +16,184 @@ use ThemeGrill\Masteriyo\Countries;
 
 <?php do_action( 'masteriyo_checkout_before_billing' ); ?>
 
-<div class="checkout-main">
-	<h2 class="checkout--title">
+<div class="mto-checkout-main">
+	<h3 class="mto-checkout--title">
 		<?php esc_html_e( 'Payment Details', 'masteriyo' ); ?>
-	</h2>
+	</h3>
 
-	<!-- <div class="checkout-alert-msg alert success-msg show">Successfully form submited</div> -->
+	<!-- <div class="mto-checkout--alert-msg mto-alert mto-success-msg mto-show">Successfully form submited</div> -->
 
-	<form action="" class="checkout--form">
-		<div class="checkout---fname-lname-wrapper">
-			<div class="checkout----fname col-2">
-				<label for="first-name">
+	<form action="" class="mto-checkout--form">
+		<div class="mto-checkout---fname-lname-wrapper mto-col-2">
+			<div class="mto-checkout----fname">
+				<label for="billing-first-name" class="mto-label">
 					<?php esc_html_e( 'First Name', 'masteriyo' ); ?>
 				</label>
+
 				<input
-					type="text" id="billing-first-name" name="billing_first_name"
+					type="text" id="billing-first-name" class="mto-input" name="billing_first_name"
 					value="" />
-			<?php if ( masteriyo_notice_exists( 'billing_first_name', Notice::ERROR ) ) : ?>
-				<div class="error danger-msg">
-				<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_first_name', Notice::ERROR ) ); ?>
-				</div>
-			<?php endif; ?>
+			
+					<?php if ( masteriyo_notice_exists( 'billing_first_name', Notice::ERROR ) ) : ?>
+					<div class="mto-error mto-danger-msg">
+					<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_first_name', Notice::ERROR ) ); ?>
+					</div>
+				<?php endif; ?>
 			</div>
 
-			<div class="checkout----lname col-2">
-				<label for="last-name">
+			<div class="mto-checkout----lname">
+				<label for="billing-last-name" class="mto-label">
 					<?php esc_html_e( 'Last Name', 'masteriyo' ); ?>
 				</label>
+
 				<input
-					type="text" id="billing-last-name" name="billing_last_name"
+					type="text" id="billing-last-name" class="mto-input" name="billing_last_name"
 					value="" />
 
 				<?php if ( masteriyo_notice_exists( 'billing_last_name', Notice::ERROR ) ) : ?>
-					<div class="error danger-msg">
+					<div class="mto-error mto-danger-msg">
 					<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_last_name', Notice::ERROR ) ); ?>
 					</div>
 				<?php endif; ?>
 			</div>
 		</div>
 
-		<div class="checkout---email-wrapper">
-			<div class="checkout----email col-1">
-				<label for="email">
+		<div class="mto-checkout---email-wrapper">
+			<div class="mto-checkout----email">
+				<label for="billing-email" class="mto-label">
 					<?php esc_html_e( 'Email Address', 'masteriyo' ); ?>
 				</label>
 				<input
-					type="text" id="billing-email" name="billing_email"
+					type="text" id="billing-email" class="mto-input" name="billing_email"
 					value="" />
 			</div>
 		<?php if ( masteriyo_notice_exists( 'billing_email', Notice::ERROR ) ) : ?>
-			<div class="error danger-msg">
+			<div class="mto-error mto-danger-msg">
 			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_email', Notice::ERROR ) ); ?>
 			</div>
 		<?php endif; ?>
 		</div>
 
-		<div class="checkout---phone-wrapper">
-			<div class="checkout----phone col-1">
-				<label for="phone">
+		<div class="mto-checkout---phone-wrapper">
+			<div class="mto-checkout----phone">
+				<label for="billing-phone" class="mto-label">
 					<?php esc_html_e( 'Phone', 'masteriyo' ); ?>
 				</label>
 				<input
-					type="tel" id="billing-phone" name="billing_phone"
+					type="tel" id="billing-phone" class="mto-input" name="billing_phone"
 					value="" />
 			</div>
 		<?php if ( masteriyo_notice_exists( 'billing_phone', Notice::ERROR ) ) : ?>
-			<div class="error danger-msg">
+			<div class="mto-error mto-danger-msg">
 			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_phone', Notice::ERROR ) ); ?>
 			</div>
 		<?php endif; ?>
 		</div>
 
-		<div class="checkout---company-name-wrapper">
-			<div class="checkout----company-name col-1">
-				<label for="company-name">
+		<div class="mto-checkout---company-name-wrapper">
+			<div class="mto-checkout----company-name">
+				<label for="billing-company" class="mto-label">
 					<?php esc_html_e( 'Company Name', 'masteriyo' ); ?>
 				</label>
-				<input type="text" id="billing-company" name="billing_company" />
+
+				<input type="text" id="billing-company" class="mto-input" name="billing_company" />
 			</div>
-		<?php if ( masteriyo_notice_exists( 'billing_company', Notice::ERROR ) ) : ?>
-			<div class="error danger-msg">
-			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_company', Notice::ERROR ) ); ?>
-			</div>
-		<?php endif; ?>
+
+			<?php if ( masteriyo_notice_exists( 'billing_company', Notice::ERROR ) ) : ?>
+				<div class="mto-error mto-danger-msg">
+				<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_company', Notice::ERROR ) ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
-		<div class="checkout---country-wrapper">
-			<div class="checkout----country col-1">
-				<label for="country">Country/Region</label>
+		<div class="mto-checkout---country-wrapper">
+			<div class="mto-checkout----country">
+				<label for="billing-country" class="mto-label">Country/Region</label>
 				<div class="dropdown">
-					<select name="billing_country" id="billing-country">
-					<?php masteriyo( 'countries' )->country_dropdown_options(); ?>
+					<select name="billing_country" id="billing-country" class="mto-input">
+						<?php masteriyo( 'countries' )->country_dropdown_options(); ?>
 					</select>
 				</div>
 			</div>
 		<?php if ( masteriyo_notice_exists( 'billing_country', Notice::ERROR ) ) : ?>
-			<div class="error danger-msg">
+			<div class="mto-error mto-danger-msg">
 				<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_country', Notice::ERROR ) ); ?>
 			</div>
 		<?php endif; ?>
 		</div>
 
-		<div class="checkout---street-wrapper">
-			<div class="checkout----street col-1">
-				<label for="street1">
+		<div class="mto-checkout---street-wrapper">
+			<div class="mto-checkout----street">
+				<label for="billing-address-1" class="mto-label">
 					<?php esc_html_e( 'Street Address', 'masteriyo' ); ?>
 				</label>
-				<input type="text" id="billing-address-1" name="billing_address_1" />
-				<input type="text" id="billing-address-2" name="billing_address_2" />
+
+				<input type="text" id="billing-address-1" class="mto-input" name="billing_address_1" />
+				<input type="text" id="billing-address-2" class="mto-input" name="billing_address_2" />
 			</div>
 
 		<?php if ( masteriyo_notice_exists( 'billing_address_1', Notice::ERROR ) ) : ?>
-			<div class="error danger-msg">
-			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_address_1', Notice::ERROR ) ); ?>
+			<div class="mto-error mto-danger-msg">
+				<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_address_1', Notice::ERROR ) ); ?>
 			</div>
 		<?php endif; ?>
 
 		<?php if ( masteriyo_notice_exists( 'billing_address_2', Notice::ERROR ) ) : ?>
-			<div class="error danger-msg">
-			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_address_2', Notice::ERROR ) ); ?>
+			<div class="mto-error mto-danger-msg">
+				<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_address_2', Notice::ERROR ) ); ?>
 			</div>
 		<?php endif; ?>
 		</div>
 
-		<div class="checkout---postcode-wrapper">
-			<div class="checkout----postcode col-1">
-				<label for="postcode">
+		<div class="mto-checkout---state-wrapper">
+			<div class="mto-checkout----state">
+				<label for="billing-state" class="mto-label">
 					<?php esc_html_e( 'State', 'masteriyo' ); ?>
 				</label>
+				
 				<input
-					class="danger-msg" type="text" id="billing-state"
+					class="mto-input" type="text" id="billing-state"
 					name="billing_state"
 					value="" />
 			</div>
 		<?php if ( masteriyo_notice_exists( 'billing_state', Notice::ERROR ) ) : ?>
-			<div class="error danger-msg">
-			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_state', Notice::ERROR ) ); ?>
+			<div class="mto-error mto-danger-msg">
+				<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_state', Notice::ERROR ) ); ?>
 			</div>
 		<?php endif; ?>
 		</div>
 
-		<div class="checkout---postcode-wrapper">
-			<div class="checkout----postcode col-1">
-				<label for="postcode">
+		<div class="mto-checkout---city-wrapper">
+			<div class="mto-checkout----city">
+				<label for="billing-city" class="mto-label">
 					<?php esc_html_e( 'City / Town', 'masteriyo' ); ?>
 				</label>
 				<input
-					class="danger-msg" type="text" id="billing-city"
+					class="mto-input" type="text" id="billing-city"
 					name="billing_city"
 					value="" />
 			</div>
 		<?php if ( masteriyo_notice_exists( 'billing_city', Notice::ERROR ) ) : ?>
-			<div class="error danger-msg">
+			<div class="mto-error mto-danger-msg">
 			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_city', Notice::ERROR ) ); ?>
 			</div>
 		<?php endif; ?>
 		</div>
 
-		<div class="checkout---postcode-wrapper">
-			<div class="checkout----postcode col-1">
-				<label for="postcode">
+		<div class="mto-checkout---postcode-wrapper">
+			<div class="mto-checkout----postcode">
+				<label for="billing-postcode" class="mto-label">
 					<?php esc_html_e( 'Postcode / ZIP code', 'masteriyo' ); ?>
 				</label>
+
 				<input
-					class="danger-msg" type="text" id="billing-postcode"
+					class="mto-input" type="text" id="billing-postcode"
 					name="billing_postcode"
 					value="" />
 			</div>
+
 		<?php if ( masteriyo_notice_exists( 'billing_postcode', Notice::ERROR ) ) : ?>
-			<div class="error danger-msg">
+			<div class="mto-error mto-danger-msg">
 			<?php echo wp_kses_post( masteriyo_notice_by_id( 'billing_postcode', Notice::ERROR ) ); ?>
 			</div>
 		<?php endif; ?>

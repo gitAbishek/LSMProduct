@@ -33,6 +33,9 @@ class Difficulty extends Taxonomy {
 	 * @return array
 	 */
 	protected function get_args() {
+
+		$permalinks = masteriyo_get_permalink_structure();
+
 		return apply_filters(
 			'masteriyo_taxonomy_args_course_difficulty',
 			array(
@@ -44,7 +47,7 @@ class Difficulty extends Taxonomy {
 				'show_tag_cloud'    => true,
 				'query_var'         => true,
 				'rewrite'           => array(
-					'slug'         => \masteriyo_get_permalink_structure('course_difficulty_rewrite_slug'),
+					'slug'         => $permalinks['course_difficulty_rewrite_slug'],
 					'with_front'   => false,
 					'hierarchical' => true,
 				),

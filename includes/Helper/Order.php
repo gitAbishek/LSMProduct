@@ -76,7 +76,7 @@ function masteriyo_get_order_item( $order_item ) {
  */
 function masteriyo_get_order_statuses() {
 	$order_statuses = array(
-		'mto-pending'    => array(
+		'pending'    => array(
 			'label'                     => _x( 'Pending payment', 'Order status', 'masteriyo' ),
 			'public'                    => false,
 			'public'                    => false,
@@ -86,7 +86,7 @@ function masteriyo_get_order_statuses() {
 			// translators: %s: number of orders
 			'label_count'               => _n_noop( 'Pending payment <span class="count">(%s)</span>', 'Pending payment <span class="count">(%s)</span>', 'masteriyo' ),
 		),
-		'mto-processing' => array(
+		'processing' => array(
 			'label'                     => _x( 'Processing', 'Order status', 'masteriyo' ),
 			'public'                    => false,
 			'exclude_from_search'       => false,
@@ -95,7 +95,7 @@ function masteriyo_get_order_statuses() {
 			/* translators: %s: number of orders */
 			'label_count'               => _n_noop( 'Processing <span class="count">(%s)</span>', 'Processing <span class="count">(%s)</span>', 'masteriyo' ),
 		),
-		'mto-on-hold'    => array(
+		'on-hold'    => array(
 			'label'                     => _x( 'On hold', 'Order status', 'masteriyo' ),
 			'public'                    => false,
 			'exclude_from_search'       => false,
@@ -104,7 +104,7 @@ function masteriyo_get_order_statuses() {
 			/* translators: %s: number of orders */
 			'label_count'               => _n_noop( 'On hold <span class="count">(%s)</span>', 'On hold <span class="count">(%s)</span>', 'masteriyo' ),
 		),
-		'mto-completed'  => array(
+		'completed'  => array(
 			'label'                     => _x( 'Completed', 'Order status', 'masteriyo' ),
 			'public'                    => false,
 			'exclude_from_search'       => false,
@@ -113,7 +113,7 @@ function masteriyo_get_order_statuses() {
 			/* translators: %s: number of orders */
 			'label_count'               => _n_noop( 'Completed <span class="count">(%s)</span>', 'Completed <span class="count">(%s)</span>', 'masteriyo' ),
 		),
-		'mto-cancelled'  => array(
+		'cancelled'  => array(
 			'label'                     => _x( 'Cancelled', 'Order status', 'masteriyo' ),
 			'public'                    => false,
 			'exclude_from_search'       => false,
@@ -122,7 +122,7 @@ function masteriyo_get_order_statuses() {
 			/* translators: %s: number of orders */
 			'label_count'               => _n_noop( 'Cancelled <span class="count">(%s)</span>', 'Cancelled <span class="count">(%s)</span>', 'masteriyo' ),
 		),
-		'mto-refunded'   => array(
+		'refunded'   => array(
 			'label'                     => _x( 'Refunded', 'Order status', 'masteriyo' ),
 			'public'                    => false,
 			'exclude_from_search'       => false,
@@ -131,7 +131,7 @@ function masteriyo_get_order_statuses() {
 			/* translators: %s: number of orders */
 			'label_count'               => _n_noop( 'Refunded <span class="count">(%s)</span>', 'Refunded <span class="count">(%s)</span>', 'masteriyo' ),
 		),
-		'mto-failed'     => array(
+		'failed'     => array(
 			'label'                     => _x( 'Failed', 'Order status', 'masteriyo' ),
 			'public'                    => false,
 			'exclude_from_search'       => false,

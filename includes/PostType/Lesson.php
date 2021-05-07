@@ -16,7 +16,8 @@ class Lesson extends PostType {
 	protected $slug = 'lesson';
 
 	public function __construct() {
-		$debug = masteriyo_is_debug_enabled();
+		$debug      = masteriyo_is_debug_enabled();
+		$permalinks = masteriyo_get_permalink_structure();
 
 		$this->labels = array(
 			'name'                  => _x( 'Lessons', 'Lesson General Name', 'masteriyo' ),
@@ -70,6 +71,11 @@ class Lesson extends PostType {
 			'capability_type'     => 'post',
 			'can_export'          => true,
 			'delete_with_user'    => true,
+			'rewrite'             => $permalinks['lesson_rewrite_slug'] ? array(
+				'slug'       => $permalinks['lesson_rewrite_slug'],
+				'with_front' => false,
+				'feeds'      => true,
+			) : false,
 		);
 	}
 }

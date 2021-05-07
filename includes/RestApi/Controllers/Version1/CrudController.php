@@ -468,6 +468,14 @@ abstract class CrudController extends RestController {
 			$objects[] = $this->prepare_response_for_collection( $data );
 		}
 
+		$objects = apply_filters( 'masteriyo_before_process_objects_collection', $objects );
+
+		if ( is_callable( array( $this, 'process_objects_collection' ) ) ) {
+			$objects = $this->process_objects_collection( $objects );
+		}
+
+		$objects = apply_filters( 'masteriyo_after_process_objects_collection', $objects );
+
 		$page      = (int) $query_args['paged'];
 		$max_pages = $query_results['pages'];
 

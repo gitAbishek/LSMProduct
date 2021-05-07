@@ -82,7 +82,7 @@ class CoursesController extends PostsController {
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_items' ),
 					'permission_callback' => array( $this, 'get_items_permissions_check' ),
-					'args'                => $this->get_collection_params()
+					'args'                => $this->get_collection_params(),
 				),
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
@@ -287,16 +287,19 @@ class CoursesController extends PostsController {
 	 *
 	 * @return array
 	 */
-	protected function get_taxonomy_terms ( $course, $taxonomy = 'cat' ) {
+	protected function get_taxonomy_terms( $course, $taxonomy = 'cat' ) {
 		$terms = Utils::get_object_terms( $course->get_id(), 'course_' . $taxonomy );
 
-		$terms =  array_map( function( $term ) {
-			return array(
-				'id'   => $term->term_id,
-				'name' => $term->name,
-				'slug' => $term->slug
-			);
-		}, $terms );
+		$terms = array_map(
+			function( $term ) {
+				return array(
+					'id'   => $term->term_id,
+					'name' => $term->name,
+					'slug' => $term->slug,
+				);
+			},
+			$terms
+		);
 
 		return $terms;
 	}
@@ -371,128 +374,128 @@ class CoursesController extends PostsController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'                    => array(
+				'id'                 => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name'                  => array(
+				'name'               => array(
 					'description' => __( 'Course name.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'slug'                  => array(
+				'slug'               => array(
 					'description' => __( 'Course slug.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'permalink'             => array(
+				'permalink'          => array(
 					'description' => __( 'Course URL.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_created'          => array(
+				'date_created'       => array(
 					'description' => __( "The date the course was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_created_gmt'      => array(
+				'date_created_gmt'   => array(
 					'description' => __( 'The date the course was created, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_modified'         => array(
+				'date_modified'      => array(
 					'description' => __( "The date the course was last modified, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_modified_gmt'     => array(
+				'date_modified_gmt'  => array(
 					'description' => __( 'The date the course was last modified, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'status'                => array(
+				'status'             => array(
 					'description' => __( 'Course status (post status).', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'publish',
 					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'featured'              => array(
+				'featured'           => array(
 					'description' => __( 'Featured course.', 'masteriyo' ),
 					'type'        => 'boolean',
 					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'catalog_visibility'    => array(
+				'catalog_visibility' => array(
 					'description' => __( 'Catalog visibility.', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'visible',
 					'enum'        => array( 'visible', 'catalog', 'search', 'hidden' ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'description'           => array(
+				'description'        => array(
 					'description' => __( 'Course description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'short_description'     => array(
+				'short_description'  => array(
 					'description' => __( 'Course short description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'price'                 => array(
+				'price'              => array(
 					'description' => __( 'Current course price.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'regular_price'         => array(
+				'regular_price'      => array(
 					'description' => __( 'Course regular price.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'sale_price'            => array(
+				'sale_price'         => array(
 					'description' => __( 'Course sale price.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'reviews_allowed'       => array(
+				'reviews_allowed'    => array(
 					'description' => __( 'Allow reviews.', 'masteriyo' ),
 					'type'        => 'boolean',
 					'default'     => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'average_rating'        => array(
+				'average_rating'     => array(
 					'description' => __( 'Reviews average rating.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'rating_count'          => array(
+				'rating_count'       => array(
 					'description' => __( 'Amount of reviews that the course have.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'parent_id'             => array(
+				'parent_id'          => array(
 					'description' => __( 'Course parent ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'featured_image'             => array(
+				'featured_image'     => array(
 					'description'       => __( 'Course featured image.', 'masteriyo' ),
 					'type'              => 'integer',
 					'default'           => null,
 					'validate_callback' => array( $this, 'validate_featured_image' ),
-					'context'           => array( 'view', 'edit' )
+					'context'           => array( 'view', 'edit' ),
 				),
-				'categories'            => array(
+				'categories'         => array(
 					'description' => __( 'List of categories.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -519,7 +522,7 @@ class CoursesController extends PostsController {
 						),
 					),
 				),
-				'tags'                  => array(
+				'tags'               => array(
 					'description' => __( 'List of tags.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -546,7 +549,7 @@ class CoursesController extends PostsController {
 						),
 					),
 				),
-				'difficulties'                  => array(
+				'difficulties'       => array(
 					'description' => __( 'List of difficulties.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -573,12 +576,12 @@ class CoursesController extends PostsController {
 						),
 					),
 				),
-				'menu_order'            => array(
+				'menu_order'         => array(
 					'description' => __( 'Menu order, used to custom sort courses.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'meta_data'             => array(
+				'meta_data'          => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -604,7 +607,7 @@ class CoursesController extends PostsController {
 						),
 					),
 				),
-			)
+			),
 		);
 
 		return $schema;
@@ -690,7 +693,6 @@ class CoursesController extends PostsController {
 			$course->set_featured_image( $request['featured_image'] );
 		}
 
-
 		// Course categories.
 		if ( isset( $request['categories'] ) && is_array( $request['categories'] ) ) {
 			$course = $this->save_taxonomy_terms( $course, $request['categories'] );
@@ -764,12 +766,15 @@ class CoursesController extends PostsController {
 		}
 
 		$featured_image_id = absint( $featured_image_id );
-		$featured_image    = get_post( $featured_image_id, array(
-			'post_type' => 'attachment'
-		) );
+		$featured_image    = get_post(
+			$featured_image_id,
+			array(
+				'post_type' => 'attachment',
+			)
+		);
 
-		if( is_null( $featured_image_obj ) ) {
-			return new \WP_Error('rest_invalid_featured_image', 'invalid featured image id');
+		if ( is_null( $featured_image_obj ) ) {
+			return new \WP_Error( 'rest_invalid_featured_image', 'invalid featured image id' );
 		}
 
 		return true;

@@ -373,3 +373,27 @@ if ( ! function_exists( 'masteriyo_is_ajax' ) ) {
 		return function_exists( 'wp_doing_ajax' ) ? wp_doing_ajax() : Constants::is_defined( 'DOING_AJAX' );
 	}
 }
+
+
+/**
+ * Validate course id.
+ *
+ * @since 0.1.0.
+ *
+ * @param int $course_id Course Id.
+ * @return boolean|WP_Error
+ */
+function masteriyo_is_course( $course_id ) {
+	if ( ! is_numeric( $course_id ) ) {
+		return new \WP_Error( 'rest_invalid_type', 'course is not of type integer' );
+	}
+
+	$course_id = absint( $course_id );
+	$course    = get_post( $course_id );
+
+	if ( is_null( $course ) || 'course' !== $course->post_type ) {
+		return new \WP_Error('rest_invalid_course', 'invalid course id');
+	}
+
+	return true;
+}

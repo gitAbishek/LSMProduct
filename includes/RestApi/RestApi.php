@@ -59,7 +59,7 @@ class RestApi {
 		return apply_filters(
 			'masteriyo_rest_api_get_rest_namespaces',
 			array(
-				'masteriyo/v1'    => $this->get_v1_controllers(),
+				'masteriyo/v1' => $this->get_v1_controllers(),
 				// 'masteriyo/store' => $this->get_store_controllers(),
 			)
 		);
@@ -107,6 +107,7 @@ class RestApi {
 			'users'                => "{$namespace}\\UsersController",
 			'settings'             => "{$namespace}\\SettingsController",
 			'courses.reviews'      => "{$namespace}\\CourseReviewsController",
+			'courses.builder'      => "{$namespace}\\CourseBuilderController",
 		);
 	}
 

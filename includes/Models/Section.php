@@ -87,6 +87,24 @@ class Section extends Model {
 	*/
 
 	/**
+	 * Get the course's title. For courses this is the course name.
+	 *
+	 * @return string
+	 */
+	public function get_title() {
+		return apply_filters( 'masteriyo_section_title', $this->get_name(), $this );
+	}
+
+	/**
+	 * Section permalink.
+	 *
+	 * @return string
+	 */
+	public function get_permalink() {
+		return get_permalink( $this->get_id() );
+	}
+
+	/**
 	 * Returns the children IDs if applicable. Overridden by child classes.
 	 *
 	 * @return array of IDs

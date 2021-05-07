@@ -192,7 +192,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  3.0.0
+	 * @since  0.1.0
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -222,6 +222,8 @@ class SectionsController extends PostsController {
 	/**
 	 * Get section data.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param Section $section section instance.
 	 * @param string  $context Request context.
 	 *                         Options: 'view' and 'edit'.
@@ -232,6 +234,7 @@ class SectionsController extends PostsController {
 		$data = array(
 			'id'          => $section->get_id(),
 			'name'        => $section->get_name( $context ),
+			'permalink'   => $section->get_permalink( $context ),
 			'menu_order'  => $section->get_menu_order( $context ),
 			'parent_id'   => $section->get_parent_id( $context ),
 			'course_id'   => $section->get_course_id( $context ),
@@ -246,7 +249,7 @@ class SectionsController extends PostsController {
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
-	 * @since  3.0.0
+	 * @since  0.1.0
 	 * @return array
 	 */
 	protected function prepare_objects_query( $request ) {

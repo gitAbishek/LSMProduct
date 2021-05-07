@@ -26,7 +26,8 @@ class Section extends PostType {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$debug = masteriyo_is_debug_enabled();
+		$debug      = masteriyo_is_debug_enabled();
+		$permalinks = masteriyo_get_permalink_structure();
 
 		$this->labels = array(
 			'name'                  => _x( 'Sections', 'Section General Name', 'masteriyo' ),
@@ -80,6 +81,11 @@ class Section extends PostType {
 			'capability_type'     => 'post',
 			'can_export'          => true,
 			'delete_with_user'    => true,
+			'rewrite'             => $permalinks['section_rewrite_slug'] ? array(
+				'slug'       => $permalinks['section_rewrite_slug'],
+				'with_front' => false,
+				'feeds'      => true,
+			) : false,
 		);
 	}
 }

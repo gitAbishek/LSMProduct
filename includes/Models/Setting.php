@@ -97,6 +97,7 @@ class Setting extends Model {
 		'courses.single_course_permalink'        => '',
 		'courses.lessons_slug'                   => '',
 		'courses.quizzes_slug'                   => '',
+		'courses.sections_slug'                  => '',
 		'courses.enable_single_course_permalink' => '',
 		'courses.single_course_enable_editing'   => '',
 
@@ -474,6 +475,18 @@ class Setting extends Model {
 	 */
 	public function get_courses_quizzes_slug( $context = 'view' ) {
 		return $this->get_prop( 'courses.quizzes_slug', $context );
+	}
+
+	/**
+	 * Get option courses_sections_slug.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_courses_sections_slug( $context = 'view' ) {
+		return $this->get_prop( 'courses.sections_slug', $context );
 	}
 
 	/**
@@ -1458,7 +1471,7 @@ class Setting extends Model {
 	* @param string $category_base
 	*/
 	public function set_courses_category_base( $category_base ) {
-		return $this->set_prop( 'courses.category_base', $category_base );
+		return $this->set_prop( 'courses.category_base', masteriyo_sanitize_permalink( $category_base ) );
 	}
 
 	/**
@@ -1468,7 +1481,7 @@ class Setting extends Model {
 	* @param string $tag_base
 	*/
 	public function set_courses_tag_base( $tag_base ) {
-		return $this->set_prop( 'courses.tag_base', $tag_base );
+		return $this->set_prop( 'courses.tag_base', masteriyo_sanitize_permalink( $tag_base ) );
 	}
 
 	/**
@@ -1478,7 +1491,7 @@ class Setting extends Model {
 	* @param string $difficulty_base
 	*/
 	public function set_courses_difficulty_base( $difficulty_base ) {
-		return $this->set_prop( 'courses.difficulty_base', $difficulty_base );
+		return $this->set_prop( 'courses.difficulty_base', masteriyo_sanitize_permalink( $difficulty_base ) );
 	}
 
 	/**
@@ -1488,7 +1501,19 @@ class Setting extends Model {
 	* @param string $single_course_permalink
 	*/
 	public function set_courses_single_course_permalink( $single_course_permalink ) {
-		return $this->set_prop( 'courses.single_course_permalink', $single_course_permalink );
+
+		if ( $single_course_permalink ) {
+			$course_base = preg_replace( '#/+#', '/', '/' . str_replace( '#', '', trim( wp_unslash( $single_course_permalink ) ) ) );
+		} else {
+			$course_base = '/';
+		}
+
+		// This is an invalid base structure and breaks pages.
+		if ( '/%course_cat%/' === trailingslashit( $course_base ) ) {
+			$course_base = '/' . _x( 'course', 'slug', 'masteriyo' ) . $course_base;
+		}
+
+		return $this->set_prop( 'courses.single_course_permalink', masteriyo_sanitize_permalink( $course_base ) );
 	}
 
 	/**
@@ -1498,7 +1523,7 @@ class Setting extends Model {
 	* @param string $lessons_slug
 	*/
 	public function set_courses_lessons_slug( $lessons_slug ) {
-		return $this->set_prop( 'courses.lessons_slug', $lessons_slug );
+		return $this->set_prop( 'courses.lessons_slug', masteriyo_sanitize_permalink( $lessons_slug ) );
 	}
 
 	/**
@@ -1508,7 +1533,17 @@ class Setting extends Model {
 	* @param string $quizzes_slug
 	*/
 	public function set_courses_quizzes_slug( $quizzes_slug ) {
-		return $this->set_prop( 'courses.quizzes_slug', $quizzes_slug );
+		return $this->set_prop( 'courses.quizzes_slug', masteriyo_sanitize_permalink( $quizzes_slug ) );
+	}
+
+	/**
+	 * Set option courses sections slug.
+	*
+	* @since 0.1.0
+	* @param string $sections_slug
+	*/
+	public function set_courses_sections_slug( $sections_slug ) {
+		return $this->set_prop( 'courses.sections_slug', masteriyo_sanitize_permalink( $sections_slug ) );
 	}
 
 	/**

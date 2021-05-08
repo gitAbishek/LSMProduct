@@ -23,7 +23,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 	return;
 }
 ?>
-<div class="mto-course-item mto-flex">
+<div class="mto-course-item">
 	<div class="mto-course--card">
 		<div class="mto-course--img-wrap">
 			<span class="mto-course--price-tag">

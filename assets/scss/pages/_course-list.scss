@@ -1,0 +1,75 @@
+.mto-course {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  &--card {
+    @include mto-shadow-1;
+    background: white;
+    flex: 1 1 25%;
+    max-width: 256px;
+  }
+
+  &--img-wrap {
+    position: relative;
+  }
+
+  &--price-tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: $mto-primary-color;
+    border-radius: 0 0 16px 0;
+    padding: 8px 16px;
+    color: white;
+    font-weight: 700;
+  }
+}
+
+.mto-course--header {
+  padding: 20px 16px;
+
+  .mto-rt {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .mto-icon-svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .mto-tag {
+    border-radius: 100px;
+    padding: 2px 8px;
+    font-size: 12px;
+  }
+
+  .mto-title {
+    font-size: $mto-text-lg;
+    font-weight: 700;
+    margin: 10px 0 20px 0;
+  }
+}
+
+.mto-duration {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mto-time-btn {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mto-course--btn {
+  border-radius: 100px;
+  padding: 8px 16px;
+}

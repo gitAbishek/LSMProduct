@@ -16,15 +16,14 @@ do_action( 'masteriyo_before_single_course_content' );
 
 ?>
 
-<div id="course-<?php the_ID(); ?>" class="antialiased mto-bg-gray-50">
-    <div class="mto-container mto-flex mto-flex-col md:mto-flex-row mto-my-20 mto-mx-auto">
-        <div class="mto-w-full md:mto-w-9/12 md:mto-mr-4">
-			<?php masteriyo_get_template( 'single-course/main-content.php' ); ?>
-        </div>
-        <aside class="mto-px-4 md:mto-ml-4 mto-w-full md:mto-w-3/12 mto-bg-grey-700">
-			<?php masteriyo_get_template( 'single-course/sidebar-content.php' ); ?>
-        </aside>
+<div id="course-<?php the_ID(); ?>" class="mto-scourse">
+    <div class="mto-scourse--main">
+        <?php masteriyo_get_template( 'single-course/main-content.php' ); ?>
     </div>
+    
+    <aside class="mto-scourse--aside">
+        <?php masteriyo_get_template( 'single-course/sidebar-content.php' ); ?>
+    </aside>
 </div>
 
 <?php

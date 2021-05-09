@@ -11,11 +11,11 @@ global $course;
 
 ?>
 
-<h2 class="mto-font-bold mto-text-4xl mto-flex mto-mb-14">
+<h2 class="mto-scourse--title">
 	<?php echo esc_html( $course->get_name() ); ?>
 
-	<?php if ( $course->is_featured() ) : ?>
-	<span class="mto-self-start mto-rounded-full mto-text-white mto-uppercase mto-font-medium mto-text-xs mto-bg-red-500 mto-px-3 mto-py-1 mto-ml-2"><?php echo esc_html__( 'Hot', 'masteriyo' ); ?></span>
+	<?php if ( $course->is_featured() ) : ?>Hot
+	<span class="mto-scourse--tag mto-bg-red"><?php echo esc_html__( 'Hot', 'masteriyo' ); ?></span>
 	<?php endif ?>
 </h2>
 

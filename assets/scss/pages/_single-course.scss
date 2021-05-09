@@ -1,0 +1,59 @@
+// Title
+.mto-scourse {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  &--title {
+    font-size: 36px;
+    font-weight: 700;
+    position: relative;
+  }
+
+  &--tag {
+    font-size: $mto-text-sm;
+    padding: 4px 8px;
+    color: white;
+    border-radius: 50px;
+    position: absolute;
+    top: 0;
+  }
+
+  &--main {
+    flex: 1 1 65%;
+  }
+
+  &--aside {
+    flex: 1 1 31%;
+  }
+}
+
+// Feature image.
+.mto-feature-img {
+  position: relative;
+
+  .mto-price-tag,
+  .mto-heart {
+    position: absolute;
+  }
+
+  .mto-price-tag {
+    top: 0;
+    left: 0;
+  }
+
+  .mto-price-tag {
+    background: $mto-primary-color;
+    border-radius: 0 0 16px 0;
+    padding: 8px 16px;
+    color: white;
+  }
+  .mto-heart {
+    top: 20px;
+    right: 20px;
+    background: $mto-primary-color;
+    border-radius: 100px;
+    padding: 10px;
+  }
+}

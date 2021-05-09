@@ -18,10 +18,10 @@ do_action( 'masteriyo_before_single_course_main_content' );
 
 <?php masteriyo_get_template( 'single-course/featured-image.php' ); ?>
 
-<div class="mto-tabs mto-px-4 md:mto-px-0">
+<div class="mto-tabs">
 	<?php masteriyo_get_template( 'single-course/tab-handles.php' ); ?>
 
-	<div id="tab1Content" class="tab-content course-overview mto-block mto-break-words">
+	<div id="tab1Content" class="tab-content course-overview">
 		<?php masteriyo_get_template( 'single-course/tab-content-overview.php' ); ?>
 	</div>
 

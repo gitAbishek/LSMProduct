@@ -10,8 +10,8 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 global $course;
 ?>
 
-<div class="mto-rating-reviews">
-	<span class="mto-rating mto-icon-svg">
+<div class="mto-rating-reviews mto-scourse--mdetail mto-flex">
+	<span class="mto-rating mto-icon-svg mto-flex">
 		<?php masteriyo_render_stars( $rating, '' );?>
 	</span>
 

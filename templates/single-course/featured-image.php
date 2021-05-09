@@ -12,9 +12,7 @@ global $course;
 ?>
 
 <div class="mto-feature-img">
-	<img class="mto-img" src="<?php echo esc_html__( masteriyo_img_url('scourse-feature-img.jpg'));?>" alt="Developing your first impressive portfolio">
 	<img class="mto-img" src="<?php echo esc_html( $course->get_featured_image_url() ); ?>" alt="Developing your first impressive portfolio">
-	
 	<?php if ( ! empty( $course->get_price() ) ): ?>
 		<span class="mto-price-tag">
 			<?php echo masteriyo_price( $course->get_price() ); ?>

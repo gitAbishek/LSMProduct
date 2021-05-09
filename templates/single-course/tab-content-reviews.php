@@ -19,16 +19,16 @@ do_action( 'masteriyo_before_single_course_reviews_content' );
 
 ?>
 
-<div class="mto-scourse-reviews mto-flex">
-		<div class="mto-scourse-rs">
-			<span class="mto-icon-svg mto-rstar">
+<div class="mto-stab--treviews">
+		<div class="mto-stab-rs mto-flex mto-flex-ycenter">
+			<span class="mto-icon-svg mto-flex mto-rstar">
 				<?php masteriyo_render_stars( $rating, '' ); ?>
 			</span>
 
 			<span class="mto-rnumber"><?php echo esc_html( $rating ); ?> out of 5</span>
 		</div>
 </div>
-<p class="mto-urating">
+<p class="mto-stab--turating">
 	<?php /* translators: %s: Review Count */ ?>
 	<span><?php printf( esc_html__( '%s user ratings', 'masteriyo' ), esc_html( $review_count ) ); ?></span>
 </p>

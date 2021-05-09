@@ -16,15 +16,16 @@ do_action('masteriyo_before_single_course_curriculum_content');
 
 ?>
 
-<div class="curr-accordion mto-relative">
-	<div class="curr-details mto-flex mto-justify-between">
-		<ul class="mto-flex mto-flex-row mto-list-disc mto-space-x-8 mto-mb-8">
+<div class="mto-stab--tcurriculum">
+	<div class="mto-stab--details mto-flex mto-flex--space-between">
+		<ul class="details">
 			<li class="mto-list-none"><?php echo count( $sections ); ?> section(s)</li>
 			<li><?php echo count( $lessons ) ?> Lecture(s)</li>
 			<li><?php echo masteriyo_get_lecture_hours( $GLOBALS['course'] ) ?> total length</li>
 		</ul>
+		<span id="mto-expand-collape-all" class="mto-link-primary mto-expand-collape-all">Expand all lessons</span>
 		<?php if ( count( $sections ) > 0 ): ?>
-		<span id="mto-expand-collape-all" class="curr-expand-collape-all mto-cursor-pointer mto-text-primary mto-text-sm  mto-font-bold mto-uppercase">Expand all lessons</span>
+		<span id="mto-expand-collape-all" class="mto-link-primary mto-expand-collape-all">Collapse all lessons</span>
 		<?php endif; ?>
 	</div>
 
@@ -50,6 +51,7 @@ do_action('masteriyo_before_single_course_curriculum_content');
 					</div>
 				</div>
 			</div>
+
 			<div class="curr-accordion-item-body">
 				<div class="curr-accordion-item-body-content">
 					<ol class="mto-rounded-b mto-list-decimal">

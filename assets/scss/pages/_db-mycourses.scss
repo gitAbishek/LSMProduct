@@ -25,17 +25,12 @@
 
   // Course header
   &--header {
-    .mto-icon-svg {
+    .mto-icon-svg > svg {
       width: 18px;
       height: 18px;
     }
   }
 
-  &--tag {
-    border-radius: 100px;
-    padding: 2px 12px;
-    font-size: $mto-text-sm;
-  }
   &--rt {
     gap: 10px;
   }
@@ -57,6 +52,7 @@
     font-weight: 700;
     margin: 16px 0 0;
   }
+
   // Course list body
   &--body {
     .mto-time-wrap {
@@ -64,7 +60,7 @@
       align-items: center;
       gap: 4px;
 
-      .mto-icon-svg {
+      .mto-icon-svg > svg {
         width: 16px;
         height: 16px;
       }

@@ -28,10 +28,33 @@
   justify-content: space-between;
 }
 
+// Badge
+.mto-badge {
+  padding: 4px 16px;
+  font-size: 12px;
+  border-radius: 100px;
+  color: white;
+
+  &.mto-badge-red {
+    background: $mto-badge-red;
+  }
+  &.mto-badge-green {
+    background: $mto-badge-green;
+  }
+  &.mto-badge-blue {
+    background: $mto-badge-blue;
+  }
+
+  &.mto-badge-pink {
+    background: $mto-badge-pink;
+  }
+}
+
 //svg icon
-.mto-icon-svg {
+.mto-icon-svg > svg {
   width: 24px;
   height: 24px;
+  display: inherit;
 }
 
 // Progress bar

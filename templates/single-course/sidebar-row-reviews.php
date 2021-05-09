@@ -10,12 +10,12 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 global $course;
 ?>
 
-<div class="mto-py-4 mto-border-b mto-border-gray-200">
-	<span class="mto-inline-block">
-		<?php masteriyo_render_stars( $rating, 'mto-text-primary mto-w-4 mto-h-4' );?>
+<div class="mto-rating-reviews">
+	<span class="mto-rating mto-icon-svg">
+		<?php masteriyo_render_stars( $rating, '' );?>
 	</span>
 
-	<span class="mto-inline-block mto-text-xs mto-font-medium mto-text-gray-600 mto-ml-2">
+	<span class="mto-reviews">
 		<?php echo esc_html( $review_count ); ?> <?php echo esc_html( $review_text ) ?>
 	</span>
 </div>

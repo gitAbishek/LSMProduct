@@ -38,18 +38,13 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 12px;
+    align-items: center;
   }
 
-  .mto-icon-svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .mto-tag {
-    border-radius: 100px;
-    padding: 2px 8px;
-    font-size: 12px;
+  .mto-icon-svg > svg {
+    width: 16px;
+    height: 16px;
   }
 
   .mto-title {

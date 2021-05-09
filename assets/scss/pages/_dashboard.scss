@@ -92,19 +92,19 @@
 
   &--inprogress .mto-icon {
     background: lighten($mto-green, 30%);
-    .mto-icon-svg {
+    &.mto-icon-svg {
       fill: $mto-green;
     }
   }
   &--scores .mto-icon {
     background: lighten($mto-primary-color, 20%);
-    .mto-icon-svg {
+    &.mto-icon-svg {
       fill: $mto-primary-color;
     }
   }
   &--certificates .mto-icon {
     background: lighten($mto-accent-color, 20%);
-    .mto-icon-svg {
+    &.mto-icon-svg {
       fill: $mto-accent-color;
     }
   }
@@ -207,11 +207,9 @@
       @include mto-border-radius;
     }
 
-    &--rating {
-      .mto-icon-svg {
-        width: 14px;
-        height: 14px;
-      }
+    &--rating.mto-icon-svg > svg {
+      width: 14px;
+      height: 14px;
     }
 
     &--title {
@@ -225,14 +223,10 @@
       align-items: center;
       gap: 4px;
 
-      .mto-icon-svg {
+      .mto-icon-svg > svg {
         width: 16px;
         height: 16px;
       }
-    }
-
-    &--tag > * {
-      border-radius: 100px;
     }
 
     &--btn {

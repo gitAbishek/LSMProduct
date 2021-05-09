@@ -14,8 +14,8 @@ global $course;
 <h2 class="mto-scourse--title">
 	<?php echo esc_html( $course->get_name() ); ?>
 
-	<?php if ( $course->is_featured() ) : ?>Hot
-	<span class="mto-scourse--tag mto-bg-red"><?php echo esc_html__( 'Hot', 'masteriyo' ); ?></span>
+	<?php if ( $course->is_featured() ) : ?>
+	<span class="mto-scourse--title-tag mto-badge mto-badge-red"><?php echo esc_html__( 'Hot', 'masteriyo' ); ?></span>
 	<?php endif ?>
 </h2>
 

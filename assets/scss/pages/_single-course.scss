@@ -11,13 +11,20 @@
     position: relative;
   }
 
-  &--tag {
+  &--title-tag {
     font-size: $mto-text-sm;
-    padding: 4px 8px;
-    color: white;
+    // padding: 4px 8px;
+    // color: white;
     border-radius: 50px;
     position: absolute;
     top: 0;
+  }
+
+  &--badges {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   &--main {

@@ -96,7 +96,7 @@ class MyAccountShortcode extends Shortcode {
 			if ( isset( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) && 0 < strpos( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ], ':' ) ) {  // @codingStandardsIgnoreLine
 				list( $rp_id, $rp_key ) = array_map( 'masteriyo_clean', explode( ':', wp_unslash( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ), 2 ) ); // @codingStandardsIgnoreLine
 				$user                   = masteriyo_get_user( absint( $rp_id ) );
-				$rp_login               = $user ? $user->get_user_login() : '';
+				$rp_login               = $user ? $user->get_username() : '';
 
 				if ( is_wp_error( check_password_reset_key( $rp_key, $rp_login ) ) ) {
 					masteriyo_add_notice( __( 'This key is invalid or has already been used. Please request to reset your password again if needed.', 'woocommerce' ), 'error' );

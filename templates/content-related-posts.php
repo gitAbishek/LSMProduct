@@ -13,7 +13,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 
 ?>
 
-<section class="mto-hidden md:mto-block mto-mt-10">
+<section class="md:mto-block mto-mt-10">
 	<h3 class="mto-font-bold mto-text-2xl mto-mb-5">Related Post</h3>
 	<div class="mto-flex mto-flex-wrap mto-flex-row">
 	<?php foreach ( $related_courses as $course ) { ?>

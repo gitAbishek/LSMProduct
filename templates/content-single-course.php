@@ -27,7 +27,6 @@ do_action( 'masteriyo_before_single_course_content' );
 </div>
 
 <?php
-
 /**
  * masteriyo_after_single_course_content hook.
  */

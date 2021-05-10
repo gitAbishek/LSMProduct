@@ -21,11 +21,11 @@ do_action( 'masteriyo_email_header', $email_heading, $email );
 
 ?>
 <?php /* translators: %s: Username */ ?>
-<p><?php printf( esc_html__( 'Hi %s,', 'masteriyo' ), esc_html( $user->get_user_login() ) ); ?></p>
+<p><?php printf( esc_html__( 'Hi %s,', 'masteriyo' ), esc_html( $user->get_username() ) ); ?></p>
 <?php /* translators: %s: Site name */ ?>
 <p><?php printf( esc_html__( 'Someone has requested a new password for the following account on %s:', 'masteriyo' ), esc_html( $blogname ) ); ?></p>
 <?php /* translators: %s: Username */ ?>
-<p><?php printf( esc_html__( 'Username: %s', 'masteriyo' ), esc_html( $user->get_user_login() ) ); ?></p>
+<p><?php printf( esc_html__( 'Username: %s', 'masteriyo' ), esc_html( $user->get_username() ) ); ?></p>
 <p><?php esc_html_e( 'If you didn\'t make this request, just ignore this email. If you\'d like to proceed:', 'masteriyo' ); ?></p>
 <p>
 	<a class="link" href="<?php echo esc_url( masteriyo_get_password_reset_link( $reset_key, $user->get_id() ) ); ?>">

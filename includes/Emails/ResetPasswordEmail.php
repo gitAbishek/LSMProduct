@@ -67,7 +67,7 @@ class ResetPasswordEmail extends Email {
 			return;
 		}
 
-		$this->set_recipient( stripslashes( $user->get_user_email() ) );
+		$this->set_recipient( stripslashes( $user->get_email() ) );
 
 		// Bail if recipient is empty.
 		if ( empty( $this->get_recipient() ) ) {

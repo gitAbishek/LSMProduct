@@ -1811,16 +1811,15 @@ function masteriyo_is_edit_myaccount_page() {
  */
 function masteriyo_get_setting_value( $setting_name, $default = null ) {
 	$setting = masteriyo( 'setting' );
-
 	if ( is_null( $setting ) ) {
-		return $default;
+			return $default;
 	}
-
-	$setting->set_name( $setting_name );
-
 	masteriyo( 'setting.store' )->read( $setting, $default );
-
-	return apply_filters( "masteriyo_setting_{$setting_name}_value", $setting->get_value() );
+	$value = $default;
+	if ( method_exists( $setting, "get_{$setting_name}" ) ) {
+			$value = call_user_func_array( array( $setting, "get_{$setting_name}" ), array() );
+	}
+	return apply_filters( "masteriyo_setting_{$setting_name}_value", $value );
 }
 
 /**
@@ -2011,8 +2010,8 @@ if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 
 		$user = masteriyo( 'user' );
 		$user->set_props( (array) $args );
-		$user->set_user_login( $username );
-		$user->set_user_pass( $password );
+		$user->set_username( $username );
+		$user->set_password( $password );
 		$user->set_email( $email );
 		$user->set_roles( masteriyo_get_setting_value( 'masteriyo_registration_default_role', 'subscriber' ) );
 

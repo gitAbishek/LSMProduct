@@ -65,7 +65,7 @@ class RequestPasswordResetFormHandler {
 				throw new \Exception( __( 'Invalid username or email', 'masteriyo' ) );
 			}
 
-			do_action( 'retrieve_password', $user->get_user_login() );
+			do_action( 'retrieve_password', $user->get_username() );
 
 			if ( ! apply_filters( 'allow_password_reset', true, $user ) ) {
 				throw new \Exception( __( 'Password reset is not allowed for this user', 'masteriyo' ) );

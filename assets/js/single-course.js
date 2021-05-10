@@ -44,12 +44,13 @@ accordionFaqHeaders.forEach(accordionFaqHeader => {
 });
 
 // Curriculum Accordion
-const accordionCurrHeaders = document.querySelectorAll(".curr-accordion-item-header");
+const accordionCurrHeaders = document.querySelectorAll(".mto-cheader");
 const toggle_accordion_item = function( accordionCurrHeader ) {
 	accordionCurrHeader.classList.toggle("active");
 	const accordionCurrBody = accordionCurrHeader.nextElementSibling;
 	if(accordionCurrHeader.classList.contains("active")) {
 		accordionCurrBody.style.maxHeight = accordionCurrBody.scrollHeight + "px";
+        accourdionCurrHeaders.classList.toggle("mto-hidden");
 	}
 	else {
 		accordionCurrBody.style.maxHeight = 0;

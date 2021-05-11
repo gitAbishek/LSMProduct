@@ -310,31 +310,25 @@ class SettingsController extends CrudController {
 						'single_course_permalink'        => array(
 							'description' => __( 'Single course permalink.', 'masteriyo' ),
 							'type'        => 'string',
-							'enum'        => array(
-								'default',
-								'course_list_base',
-								'course_list_category_base',
-								'custom_base',
-							),
 							'context'     => array( 'view', 'edit' ),
 						),
-						'lessons_slug'                   => array(
-							'description' => __( 'Course lessons slug', 'masteriyo' ),
+						'single_lesson_permalink'        => array(
+							'description' => __( 'Course lessons permalink', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'quizzes_slug'                   => array(
-							'description' => __( 'Course quizzes slug.', 'masteriyo' ),
+						'single_quiz_permalink'          => array(
+							'description' => __( 'Course quizzes permalink.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'sections_slug'                  => array(
-							'description' => __( 'Course sections slug.', 'masteriyo' ),
+						'single_section_permalink'       => array(
+							'description' => __( 'Course sections permalink.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
 						'enable_single_course_permalink' => array(
-							'description' => __( 'Enable Single_course_permalink.', 'masteriyo' ),
+							'description' => __( 'Enable single course permalink.', 'masteriyo' ),
 							'type'        => 'boolean',
 							'context'     => array( 'view', 'edit' ),
 						),
@@ -350,7 +344,14 @@ class SettingsController extends CrudController {
 						),
 						'thumbnail_size'                 => array(
 							'description' => __( 'Course thumbnail size', 'masteriyo' ),
-							'type'        => 'integer',
+							'type'        => 'string',
+							'enum'        => array(
+								'thumbnail',
+								'medium',
+								'medium_large',
+								'large',
+								'custom-size',
+							),
 							'context'     => array( 'view', 'edit' ),
 						),
 					),
@@ -361,8 +362,8 @@ class SettingsController extends CrudController {
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'                     => 'object',
-						'profile_page_id'          => array(
-							'description' => __( 'Profile page ID.', 'masteriyo' ),
+						'myaccount_page_id'        => array(
+							'description' => __( 'My Account page ID.', 'masteriyo' ),
 							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
@@ -918,16 +919,16 @@ class SettingsController extends CrudController {
 				'tag_base'                       => $setting->get_courses_tag_base( $context ),
 				'difficulty_base'                => $setting->get_courses_difficulty_base( $context ),
 				'single_course_permalink'        => $setting->get_courses_single_course_permalink( $context ),
-				'lessons_slug'                   => $setting->get_courses_lessons_slug( $context ),
-				'quizzes_slug'                   => $setting->get_courses_quizzes_slug( $context ),
-				'sections_slug'                  => $setting->get_courses_sections_slug( $context ),
+				'single_lesson_permalink'        => $setting->get_courses_single_lesson_permalink( $context ),
+				'single_quiz_permalink'          => $setting->get_courses_single_quiz_permalink( $context ),
+				'single_section_permalink'       => $setting->get_courses_single_section_permalink( $context ),
 				'enable_single_course_permalink' => $setting->get_courses_enable_single_course_permalink( $context ),
 				'single_course_enable_editing'   => $setting->get_courses_single_course_enable_editing( $context ),
 				'show_thumbnail'                 => $setting->get_courses_show_thumbnail( $context ),
 				'thumbnail_size'                 => $setting->get_courses_thumbnail_size( $context ),
 			),
 			'pages'    => array(
-				'profile_page_id'          => $setting->get_pages_profile_page_id( $context ),
+				'myaccount_page_id'        => $setting->get_pages_myaccount_page_id( $context ),
 				'course_list_page_id'      => $setting->get_pages_course_list_page_id( $context ),
 				'terms_conditions_page_id' => $setting->get_pages_terms_conditions_page_id( $context ),
 				'checkout_page_id'         => $setting->get_pages_checkout_page_id( $context ),
@@ -1113,16 +1114,16 @@ class SettingsController extends CrudController {
 			$setting->set_courses_single_course_permalink( $request['courses']['single_course_permalink'] );
 		}
 
-		if ( isset( $request['courses']['lessons_slug'] ) ) {
-			$setting->set_courses_lessons_slug( $request['courses']['lessons_slug'] );
+		if ( isset( $request['courses']['single_lesson_permalink'] ) ) {
+			$setting->set_courses_single_lesson_permalink( $request['courses']['single_lesson_permalink'] );
 		}
 
-		if ( isset( $request['courses']['quizzes_slug'] ) ) {
-			$setting->set_courses_quizzes_slug( $request['courses']['quizzes_slug'] );
+		if ( isset( $request['courses']['single_quiz_permalink'] ) ) {
+			$setting->set_courses_single_quiz_permalink( $request['courses']['single_quiz_permalink'] );
 		}
 
-		if ( isset( $request['courses']['sections_slug'] ) ) {
-			$setting->set_courses_sections_slug( $request['courses']['sections_slug'] );
+		if ( isset( $request['courses']['single_section_permalink'] ) ) {
+			$setting->set_courses_single_section_permalink( $request['courses']['single_section_permalink'] );
 		}
 
 		if ( isset( $request['courses']['enable_single_course_permalink'] ) ) {
@@ -1143,8 +1144,8 @@ class SettingsController extends CrudController {
 
 		// Pages Setting.
 
-		if ( isset( $request['pages']['profile_page_id'] ) ) {
-			$setting->set_pages_profile_page_id( $request['pages']['profile_page_id'] );
+		if ( isset( $request['pages']['myaccount_page_id'] ) ) {
+			$setting->set_pages_myaccount_page_id( $request['pages']['myaccount_page_id'] );
 		}
 
 		if ( isset( $request['pages']['course_list_page_id'] ) ) {

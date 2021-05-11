@@ -22,7 +22,9 @@ do_action( 'masteriyo_before_single_course_content' );
     </div>
     
     <aside class="mto-scourse--aside">
-        <?php masteriyo_get_template( 'single-course/sidebar-content.php' ); ?>
+        <div class="mto-sticky mto-scourse--aside-wrap">
+            <?php masteriyo_get_template( 'single-course/sidebar-content.php' ); ?>
+        </div>
     </aside>
 </div>
 

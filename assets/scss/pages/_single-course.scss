@@ -202,7 +202,10 @@
       text-transform: uppercase;
     }
   }
-
+  // Faq Tab
+  .mto-faq-accordion-item-body-content {
+    overflow: hidden;
+  }
   // Reviews tab
   &--treviews {
     display: flex;
@@ -227,4 +230,9 @@
   &--turating {
     text-align: center;
   }
+}
+
+// Related-post
+.mto-related-post {
+  margin-top: 60px;
 }

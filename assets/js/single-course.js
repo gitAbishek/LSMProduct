@@ -19,13 +19,13 @@ function selectTab(tabIndex) {
 }
 
 // FAQ Accordion
-const accordionFaqHeaders = document.querySelectorAll(".faq-accordion-item-header");
+const accordionFaqHeaders = document.querySelectorAll(".mto-faq-accordion-item-header");
 
 accordionFaqHeaders.forEach(accordionFaqHeader => {
     accordionFaqHeader.addEventListener("click", event => {
 
         //one collapsed Faq at a time!
-        const currentlyActiveAccordionFaqHeader = document.querySelector(".faq-accordion-Faq-header.active");
+        const currentlyActiveAccordionFaqHeader = document.querySelector(".mto-faq-accordion-item-header.active");
         if(currentlyActiveAccordionFaqHeader && currentlyActiveAccordionFaqHeader!==accordionFaqHeader) {
             currentlyActiveAccordionFaqHeader.classList.toggle("active");
             currentlyActiveAccordionFaqHeader.nextElementSibling.style.maxHeight = 0;

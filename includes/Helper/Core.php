@@ -1284,9 +1284,9 @@ function masteriyo_get_permalink_structure() {
 		'courses_category'   => get_option( 'masteriyo.courses.category_base' ),
 		'courses_tag'        => get_option( 'masteriyo.courses.tag_base' ),
 		'courses_difficulty' => get_option( 'masteriyo.courses.difficulty_base' ),
-		'lessons'            => get_option( 'masteriyo.courses.lessons_slug' ),
-		'quizzes'            => get_option( 'masteriyo.courses.quizzes_slug' ),
-		'sections'           => get_option( 'masteriyo.courses.sections_slug' ),
+		'lessons'            => get_option( 'masteriyo.courses.single_lesson_permalink' ),
+		'quizzes'            => get_option( 'masteriyo.courses.single_quiz_permalink' ),
+		'sections'           => get_option( 'masteriyo.courses.single_section_permalink' ),
 	);
 
 	$permalinks = array(
@@ -1322,7 +1322,7 @@ function masteriyo_maybe_flush_rewrite() {
 		flush_rewrite_rules();
 	}
 }
-add_action( 'masteriyo_after_register_post_type', 'masteriyo_maybe_flush_rewrite' );
+function_exists( 'add_action' ) && add_action( 'masteriyo_after_register_post_type', 'masteriyo_maybe_flush_rewrite' );
 
 /**
  * Filter to allow course_cat in the permalinks for course.
@@ -1400,7 +1400,7 @@ function masteriyo_course_post_type_link( $permalink, $post ) {
 
 	return $permalink;
 }
-add_filter( 'post_type_link', 'masteriyo_course_post_type_link', 10, 2 );
+function_exists( 'add_filter' ) && add_filter( 'post_type_link', 'masteriyo_course_post_type_link', 10, 2 );
 
 /**
  * Switch Masteriyo to site language.

@@ -447,8 +447,13 @@ class ScriptStyle {
 					'data' => array(
 						'rootApiUrl' => esc_url_raw( untrailingslashit( rest_url() ) ),
 						'nonce'      => wp_create_nonce( 'wp_rest' ),
-						'pages_slug'      => array(
+						'pageSlugs'  => array(
 							'courseList' => $course_list_slug,
+						),
+						'currency'   => array(
+							'code'     => \masteriyo_get_currency(),
+							'symbol'   => \masteriyo_get_currency_symbol( masteriyo_get_currency() ),
+							'position' => get_option( 'masteriyo.general.currency_position', 'left' ),
 						),
 					),
 				),

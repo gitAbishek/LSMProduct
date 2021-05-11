@@ -439,6 +439,12 @@ class ScriptStyle {
 		$course_list_page = get_post( masteriyo_get_page_id( 'course-list' ) );
 		$course_list_slug = ! is_null( $course_list_page ) ? $course_list_page->post_name : '';
 
+		$myaccount_page = get_post( masteriyo_get_page_id( 'myaccount' ) );
+		$myaccount_slug = ! is_null( $myaccount_page ) ? $myaccount_page->post_name : '';
+
+		$checkout_page = get_post( masteriyo_get_page_id( 'checkout' ) );
+		$checkout_slug = ! is_null( $checkout_page ) ? $checkout_page->post_name : '';
+
 		$this->localized_scripts = apply_filters(
 			'masteriyo_localized_scripts',
 			array(
@@ -449,6 +455,8 @@ class ScriptStyle {
 						'nonce'      => wp_create_nonce( 'wp_rest' ),
 						'pageSlugs'  => array(
 							'courseList' => $course_list_slug,
+							'myaccount'  => $myaccount_slug,
+							'checkout'   => $checkout_slug,
 						),
 						'currency'   => array(
 							'code'     => \masteriyo_get_currency(),

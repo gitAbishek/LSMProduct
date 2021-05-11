@@ -21,9 +21,9 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 		$changes = $setting->get_changes();
 
 		$courses_slugs = array(
-			'courses.lessons_slug',
-			'courses.quizzes_slug',
-			'courses.sections_slug',
+			'courses.single_lesson_permalink',
+			'courses.single_quiz_permalink',
+			'courses.single_section_permalink',
 			'courses.single_course_permalink',
 			'courses.category_base',
 			'courses.tag_base',

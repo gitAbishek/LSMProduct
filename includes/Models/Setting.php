@@ -95,9 +95,9 @@ class Setting extends Model {
 		'courses.tag_base'                       => '',
 		'courses.difficulty_base'                => '',
 		'courses.single_course_permalink'        => '',
-		'courses.lessons_slug'                   => '',
-		'courses.quizzes_slug'                   => '',
-		'courses.sections_slug'                  => '',
+		'courses.single_lesson_permalink'        => '',
+		'courses.single_quiz_permalink'          => '',
+		'courses.single_section_permalink'       => '',
 		'courses.enable_single_course_permalink' => '',
 		'courses.single_course_enable_editing'   => '',
 
@@ -108,7 +108,7 @@ class Setting extends Model {
 		/** Pages Setting */
 
 		// Page Setup.
-		'pages.profile_page_id'                  => '',
+		'pages.myaccount_page_id'                => '',
 		'pages.course_list_page_id'              => '',
 		'pages.terms_conditions_page_id'         => '',
 		'pages.checkout_page_id'                 => '',
@@ -454,39 +454,39 @@ class Setting extends Model {
 	}
 
 	/**
-	 * Get option courses_lessons_slug.
+	 * Get option courses_single_lesson_permalink.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_courses_lessons_slug( $context = 'view' ) {
-		return $this->get_prop( 'courses.lessons_slug', $context );
+	public function get_courses_single_lesson_permalink( $context = 'view' ) {
+		return $this->get_prop( 'courses.single_lesson_permalink', $context );
 	}
 
 	/**
-	 * Get option courses_quizzes_slug.
+	 * Get option courses_single_quiz_permalink.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_courses_quizzes_slug( $context = 'view' ) {
-		return $this->get_prop( 'courses.quizzes_slug', $context );
+	public function get_courses_single_quiz_permalink( $context = 'view' ) {
+		return $this->get_prop( 'courses.single_quiz_permalink', $context );
 	}
 
 	/**
-	 * Get option courses_sections_slug.
+	 * Get option courses_single_section_permalink.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_courses_sections_slug( $context = 'view' ) {
-		return $this->get_prop( 'courses.sections_slug', $context );
+	public function get_courses_single_section_permalink( $context = 'view' ) {
+		return $this->get_prop( 'courses.single_section_permalink', $context );
 	}
 
 	/**
@@ -540,15 +540,15 @@ class Setting extends Model {
 	// Pages Setting Getter.
 
 	/**
-	 * Get option pages_profile_page_id.
+	 * Get option pages_myaccount_page_id.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_pages_profile_page_id( $context = 'view' ) {
-		return $this->get_prop( 'pages.profile_page_id', $context );
+	public function get_pages_myaccount_page_id( $context = 'view' ) {
+		return $this->get_prop( 'pages.myaccount_page_id', $context );
 	}
 
 	/**
@@ -1419,7 +1419,7 @@ class Setting extends Model {
 	* @param string $number_of_decimals
 	*/
 	public function set_general_number_of_decimals( $number_of_decimals ) {
-		return $this->set_prop( 'general.number_of_decimals', $number_of_decimals );
+		return $this->set_prop( 'general.number_of_decimals', absint( $number_of_decimals ) );
 	}
 
 	// Courses Setting Setter.
@@ -1431,7 +1431,7 @@ class Setting extends Model {
 	* @param string $placeholder_image
 	*/
 	public function set_courses_placeholder_image( $placeholder_image ) {
-		return $this->set_prop( 'courses.placeholder_image', $placeholder_image );
+		return $this->set_prop( 'courses.placeholder_image', absint( $placeholder_image ) );
 	}
 
 	/**
@@ -1451,7 +1451,7 @@ class Setting extends Model {
 	* @param string $per_page
 	*/
 	public function set_courses_per_page( $per_page ) {
-		return $this->set_prop( 'courses.per_page', $per_page );
+		return $this->set_prop( 'courses.per_page', absint( $per_page ) );
 	}
 
 	/**
@@ -1517,33 +1517,33 @@ class Setting extends Model {
 	}
 
 	/**
-	 * Set option courses lessons slug.
+	 * Set option courses single lesson permalink.
 	*
 	* @since 0.1.0
-	* @param string $lessons_slug
+	* @param string $single_lesson_permalink
 	*/
-	public function set_courses_lessons_slug( $lessons_slug ) {
-		return $this->set_prop( 'courses.lessons_slug', masteriyo_sanitize_permalink( $lessons_slug ) );
+	public function set_courses_single_lesson_permalink( $single_lesson_permalink ) {
+		return $this->set_prop( 'courses.single_lesson_permalink', masteriyo_sanitize_permalink( $single_lesson_permalink ) );
 	}
 
 	/**
-	 * Set option courses quizzes slug.
+	 * Set option courses single quiz permalink.
 	*
 	* @since 0.1.0
-	* @param string $quizzes_slug
+	* @param string $single_quiz_permalink
 	*/
-	public function set_courses_quizzes_slug( $quizzes_slug ) {
-		return $this->set_prop( 'courses.quizzes_slug', masteriyo_sanitize_permalink( $quizzes_slug ) );
+	public function set_courses_single_quiz_permalink( $single_quiz_permalink ) {
+		return $this->set_prop( 'courses.single_quiz_permalink', masteriyo_sanitize_permalink( $single_quiz_permalink ) );
 	}
 
 	/**
-	 * Set option courses sections slug.
+	 * Set option courses single section permalink.
 	*
 	* @since 0.1.0
-	* @param string $sections_slug
+	* @param string $single_section_permalink
 	*/
-	public function set_courses_sections_slug( $sections_slug ) {
-		return $this->set_prop( 'courses.sections_slug', masteriyo_sanitize_permalink( $sections_slug ) );
+	public function set_courses_single_section_permalink( $single_section_permalink ) {
+		return $this->set_prop( 'courses.single_section_permalink', masteriyo_sanitize_permalink( $single_section_permalink ) );
 	}
 
 	/**
@@ -1553,7 +1553,7 @@ class Setting extends Model {
 	* @param string $enable_single_course_permalink
 	*/
 	public function set_courses_enable_single_course_permalink( $enable_single_course_permalink ) {
-		return $this->set_prop( 'courses.enable_single_course_permalink', $enable_single_course_permalink );
+		return $this->set_prop( 'courses.enable_single_course_permalink', masteriyo_string_to_bool( $enable_single_course_permalink ) );
 	}
 
 	/**
@@ -1589,13 +1589,13 @@ class Setting extends Model {
 	// Pages Setting Setter.
 
 	/**
-	 * Set option pages profile page id.
+	 * Set option pages myaccount page id.
 	*
 	* @since 0.1.0
-	* @param string $profile_page_id
+	* @param string $myaccount_page_id
 	*/
-	public function set_pages_profile_page_id( $profile_page_id ) {
-		return $this->set_prop( 'pages.profile_page_id', $profile_page_id );
+	public function set_pages_myaccount_page_id( $myaccount_page_id ) {
+		return $this->set_prop( 'pages.myaccount_page_id', absint( $myaccount_page_id ) );
 	}
 
 	/**
@@ -1605,7 +1605,7 @@ class Setting extends Model {
 	* @param string $course_list_page_id
 	*/
 	public function set_pages_course_list_page_id( $course_list_page_id ) {
-		return $this->set_prop( 'pages.course_list_page_id', $course_list_page_id );
+		return $this->set_prop( 'pages.course_list_page_id', absint( $course_list_page_id ) );
 	}
 
 	/**
@@ -1615,7 +1615,7 @@ class Setting extends Model {
 	* @param string $terms_conditions_page_id
 	*/
 	public function set_pages_terms_conditions_page_id( $terms_conditions_page_id ) {
-		return $this->set_prop( 'pages.terms_conditions_page_id', $terms_conditions_page_id );
+		return $this->set_prop( 'pages.terms_conditions_page_id', absint( $terms_conditions_page_id ) );
 	}
 
 	/**
@@ -1625,7 +1625,7 @@ class Setting extends Model {
 	* @param string $checkout_page_id
 	*/
 	public function set_pages_checkout_page_id( $checkout_page_id ) {
-		return $this->set_prop( 'pages.checkout_page_id', $checkout_page_id );
+		return $this->set_prop( 'pages.checkout_page_id', absint( $checkout_page_id ) );
 	}
 
 	// Checkout endpoints.

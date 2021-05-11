@@ -75,7 +75,7 @@ const paths = {
 	},
 
 	js: {
-		src: 'assets/js/*.js',
+		src: ['assets/js/*.js', '!assets/js/*.min.js'],
 		dest: 'assets/js',
 	},
 

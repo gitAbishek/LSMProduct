@@ -25,7 +25,7 @@ do_action('masteriyo_before_single_course_curriculum_content');
 		</ul>
 
 		<?php if ( count( $sections ) > 0 ): ?>
-		<span id="mto-expand-collape-all" class="mto-link-primary mto-expand-collape-all">Collapse all lessons</span>
+		<span id="mto-expand-collape-all" class="mto-link-primary mto-expand-collape-all">Expand All</span>
 		<?php endif; ?>
 	</div>
 
@@ -39,13 +39,13 @@ do_action('masteriyo_before_single_course_curriculum_content');
 					
 					<span class="mto-csection"><?php echo masteriyo_get_lecture_hours_of_section( $section ) ?></span>
 					
-					<span class="mto-plus mto-icon-svg">
+					<span class="mto-cplus mto-icon-svg">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 							<path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z" />
 						</svg>
 					</span>
 
-					<span class="mto-minus mto-hidden mto-icon-svg">
+					<span class="mto-cminus mto-hidden mto-icon-svg">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 							<path d="M5 11h14v2H5z" />
 						</svg>

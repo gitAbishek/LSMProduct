@@ -113,6 +113,7 @@ class ScriptStyle {
 				),
 				'single-course'  => array(
 					'src'      => $this->get_asset_url( '/assets/js/single-course.js' ),
+					'deps'     => array( 'jquery' ),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_single_course_page',
 				),

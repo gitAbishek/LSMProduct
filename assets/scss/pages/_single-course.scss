@@ -139,8 +139,40 @@
 
     .mto-stab--citems {
       border-bottom: 1px solid $mto-border-color;
+      cursor: pointer;
       &:last-of-type {
         border: none;
+      }
+      &.active {
+        border-bottom: 0;
+        .mto-cheader {
+          background: $mto-primary-color;
+          border-top-left-radius: 4px;
+          border-top-right-radius: 4px;
+
+          .mto-ctitle,
+          .mto-ltc {
+            color: white;
+          }
+        }
+        .mto-cbody {
+          max-height: 999px;
+          padding: 0 16px;
+          @include mto-default-border;
+          border-bottom-left-radius: 4px;
+          border-bottom-right-radius: 4px;
+        }
+        .mto-cplus {
+          display: none;
+        }
+        .mto-cminus {
+          display: block;
+          background: white;
+          border-radius: 50px;
+          width: 24px;
+          height: 24px;
+          @include mto-shadow-1;
+        }
       }
     }
 
@@ -162,29 +194,20 @@
       gap: 16px;
     }
 
-    .mto-cheader.active {
-      background: $mto-primary-color;
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-      .mto-ctitle,
-      .mto-ltc {
-        color: white;
-      }
-    }
-
     .mto-cbody {
-      overflow: hidden;
       max-height: 0;
-      padding: 0 16px;
-      @include mto-default-border;
-      @include mto-border-radius;
+      overflow: hidden;
+      transition: max-height 200ms;
       border-top: 0px;
     }
 
+    .mto-lesson-list {
+      margin-bottom: 0;
+    }
     .mto-lesson-list li {
       padding: 16px 0;
       border-bottom: 1px solid $mto-border-color;
-      margin-bottom: 0;
+
       &:last-of-type {
         border-bottom: none;
       }
@@ -203,9 +226,9 @@
     }
   }
   // Faq Tab
-  .mto-faq-accordion-item-body-content {
-    overflow: hidden;
-  }
+  // .mto-faq-accordion-item-body-content {
+  //   overflow: hidden;
+  // }
   // Reviews tab
   &--treviews {
     display: flex;

@@ -436,6 +436,9 @@ class ScriptStyle {
 	 * @since 0.1.1
 	 */
 	public function load_admin_localized_scripts() {
+		$course_list_page = get_post( masteriyo_get_page_id( 'course-list' ) );
+		$course_list_slug = ! is_null( $course_list_page ) ? $course_list_page->post_name : '';
+
 		$this->localized_scripts = apply_filters(
 			'masteriyo_localized_scripts',
 			array(
@@ -444,6 +447,9 @@ class ScriptStyle {
 					'data' => array(
 						'rootApiUrl' => esc_url_raw( untrailingslashit( rest_url() ) ),
 						'nonce'      => wp_create_nonce( 'wp_rest' ),
+						'pages_slug'      => array(
+							'courseList' => $course_list_slug,
+						),
 					),
 				),
 			)

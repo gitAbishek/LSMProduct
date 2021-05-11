@@ -21,8 +21,8 @@ function selectTab(tabIndex) {
 (function($) {
     
     // FAQ Accordion
-    $(document.body).on('click', '.mto-faq-accordion-item-header', function(){
-        $(this).siblings('.mto-faq-accordion-item-body').first().slideToggle('swing');
+    $(document.body).on('click', '.mto-faq--item-header', function(){
+        $(this).siblings('.mto-faq--item-body').first().slideToggle('swing');
 
     });
 

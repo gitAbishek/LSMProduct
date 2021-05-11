@@ -15,15 +15,16 @@ do_action('masteriyo_before_single_course_faq_content');
 
 ?>
 
-<div class="mto-faq-accordion mto-relative">
+<div class="mto-stab--faq">
 	<?php foreach( $faqs as $faq ): ?>
-		<div class="mto-faq-accordion-item">
-			<div class="mto-faq-accordion-item-header">
+		<div class="mto-faq--item">
+			<div class="mto-faq--item-header">
 				<?php echo esc_html( $faq->get_name() ); ?>
 			</div>
-			<div class="mto-faq-accordion-item-body">
-				<div class="mto-faq-accordion-item-body-content">
-					<p>
+
+			<div class="mto-faq--item-body">
+				<div class="mto-faq--item-body-content">
+					<p class="content">
 						<?php echo esc_html( $faq->get_description() ); ?>
 					</p>
 				</div>

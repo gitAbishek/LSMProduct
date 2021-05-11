@@ -225,10 +225,32 @@
       text-transform: uppercase;
     }
   }
+
   // Faq Tab
-  // .mto-faq-accordion-item-body-content {
-  //   overflow: hidden;
-  // }
+  &--faq {
+    .mto-faq--item-header {
+      overflow: hidden;
+      border-bottom: 1px solid $mto-border-color;
+      padding: 16px 30px;
+      font-size: $mto-text-base;
+      font-weight: 600;
+      cursor: pointer;
+
+      &:last-of-type {
+        border-bottom: 0;
+      }
+    }
+
+    .mto-faq--item-body {
+      display: none;
+      border-bottom: 1px solid $mto-border-color;
+      padding: 16px 30px;
+      .content {
+        margin: inherit;
+      }
+    }
+  }
+
   // Reviews tab
   &--treviews {
     display: flex;

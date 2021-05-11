@@ -32,8 +32,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 
 			<!-- Featured Image -->
 			<?php //echo wp_get_attachment_image( $course->get_featured_image() ); ?>
-			<!-- <img class="mto-absoulte mto-w-full mto-h-full mto-object-cover" src="https://via.placeholder.com/150" alt="You are your only limit"> -->
-			<img class="mto-course--img" src="<?php echo esc_html__( masteriyo_img_url('course-img.jpg'));?>" alt="You are your only limit">
+			<img class="mto-course--img" src="https://via.placeholder.com/150" alt="You are your only limit">
 		</div>
 
 		<div class="mto-course--header">

@@ -217,7 +217,7 @@ class CoursesController extends PostsController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  3.0.0
-	 * @param  Model         $object  Model object.
+	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
@@ -247,8 +247,8 @@ class CoursesController extends PostsController {
 	 * Get course data.
 	 *
 	 * @param Course $course Course instance.
-	 * @param string     $context Request context.
-	 *                            Options: 'view' and 'edit'.
+	 * @param string $context Request context.
+	 *                        Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
@@ -258,6 +258,7 @@ class CoursesController extends PostsController {
 			'name'              => $course->get_name( $context ),
 			'slug'              => $course->get_slug( $context ),
 			'permalink'         => $course->get_permalink(),
+			'preview_permalink' => $course->get_preview_course_link(),
 			'status'            => $course->get_status( $context ),
 			'description'       => 'view' === $context ? wpautop( do_shortcode( $course->get_description() ) ) : $course->get_description( $context ),
 			'short_description' => 'view' === $context ? apply_filters( 'masteriyo_short_description', $course->get_short_description() ) : $course->get_short_description( $context ),
@@ -392,6 +393,13 @@ class CoursesController extends PostsController {
 				),
 				'permalink'          => array(
 					'description' => __( 'Course URL.', 'masteriyo' ),
+					'type'        => 'string',
+					'format'      => 'uri',
+					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
+				),
+				'preview_permalink'  => array(
+					'description' => __( 'Course Preview URL.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
@@ -734,8 +742,8 @@ class CoursesController extends PostsController {
 	 * @since 0.1.0
 	 *
 	 * @param Course $course  Course instance.
-	 * @param array      $terms    Terms data.
-	 * @param string     $taxonomy Taxonomy name.
+	 * @param array  $terms    Terms data.
+	 * @param string $taxonomy Taxonomy name.
 	 *
 	 * @return Course
 	 */

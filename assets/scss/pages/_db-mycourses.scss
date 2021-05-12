@@ -91,20 +91,27 @@
       border-bottom: none;
     }
   }
+
   .mto-list-header {
     font-size: $mto-text-base;
     font-weight: 600;
     text-transform: uppercase;
   }
+
   .mto-c-img {
     width: 40px;
     height: 40px;
     @include mto-border-radius;
   }
+
   .mto-c-title {
     margin-left: 16px;
     margin-bottom: inherit;
     font-size: $mto-text-base;
     font-weight: 700;
+  }
+
+  .mto-c-btn {
+    border-radius: 100px;
   }
 }

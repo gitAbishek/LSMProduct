@@ -73,8 +73,6 @@ class Masteriyo extends Container {
 
 		Ajax::init();
 
-		PermalinkSettings::instance()->init();
-
 		// Register scripts and styles.
 		$this->get( 'script-style' );
 

@@ -144,6 +144,15 @@ class Course extends Model {
 	}
 
 	/**
+	 * Course Preview URL;
+	 *
+	 * @return string
+	 */
+	public function get_preview_course_link() {
+		return get_preview_post_link( $this->get_id() );
+	}
+
+	/**
 	 * Returns the children IDs if applicable. Overridden by child classes.
 	 *
 	 * @return array of IDs
@@ -276,7 +285,6 @@ class Course extends Model {
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string price
-	 *
 	 */
 	public function get_reviews_allowed( $context = 'view' ) {
 		return $this->get_prop( 'reviews_allowed', $context );
@@ -402,7 +410,6 @@ class Course extends Model {
 	 * @since  0.1.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
 	 *
 	 * @return string price
 	 */

@@ -90,12 +90,30 @@ class Masteriyo extends Container {
 	 * @since 0.1.0
 	 */
 	protected function init_hooks() {
+		add_action( 'admin_init', array( $this, 'get_rest_api_availability' ) );
 		add_action( 'init', array( $this, 'after_wp_init' ) );
 		add_action( 'admin_bar_menu', array( $this, 'add_course_list_page_link' ), 35 );
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_links' ), 10, 2 );
 		add_filter( 'plugin_action_links_' . Constants::get( 'MASTERIYO_PLUGIN_BASENAME' ), array( $this, 'add_plugin_action_links' ) );
 		add_filter( 'template_include', array( $this, 'template_loader' ) );
 		add_filter( 'template_redirect', array( $this, 'redirect_reset_password_link' ) );
+	}
+
+	/**
+	 * Check if REST API is available or not. If available then do not show the admin notice.
+	 *
+	 * @since 0.1.0
+	 */
+	public function get_rest_api_availability() {
+		$response          = new \WP_Site_Health();
+		$rest_availability = $response->get_test_rest_availability();
+		$user_id           = get_current_user_id();
+
+		if ( 'good' === $rest_availability['status'] ) {
+			add_user_meta( $user_id, 'masteriyo_dismissed_nag_messages', 'true', true );
+		} else {
+			delete_user_meta( $user_id, 'masteriyo_dismissed_nag_messages' );
+		}
 	}
 
 	/**

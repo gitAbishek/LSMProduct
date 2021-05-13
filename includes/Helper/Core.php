@@ -1354,7 +1354,7 @@ function masteriyo_course_post_type_link( $permalink, $post ) {
 			)
 		);
 		$category_object = apply_filters( 'masteriyo_course_post_type_link_course_cat', $terms[0], $terms, $post );
-		$course_cat     = $category_object->slug;
+		$course_cat      = $category_object->slug;
 
 		if ( $category_object->parent ) {
 			$ancestors = get_ancestors( $category_object->term_id, 'course_cat' );
@@ -2442,36 +2442,3 @@ function masteriyo_get_wp_roles() {
 	return array_keys( $roles->role_names );
 }
 
-/**
- * Add an admin notice.
- *
- * @since 0.1.0
- */
-function masteriyo_general_admin_notice() {
-
-	$user_id = get_current_user_id();
-
-	if ( version_compare( get_bloginfo( 'version' ), '4.7', '>=' ) && ! get_user_meta( $user_id, 'masteriyo_dismissed_nag_messages' ) ) {
-		?>
-		<div class="notice notice-warning">
-			<p><strong><?php printf( __( 'REST API is disabled, you must enable it in order to work Masteriyo plugin properly. %1$1sDismiss this Message%2$2s', 'masteriyo' ), '<a href="?masteriyo-dismissed-nag">', '</a>' ); ?></strong></p>
-		</div>
-		<?php
-	}
-}
-function_exists( 'add_action' ) && add_action( 'admin_notices', 'masteriyo_general_admin_notice' );
-
-/**
- * Dismiss info nag message.
- *
- * @since 0.1.0
- */
-function masteriyo_dismissed_nag_messages() {
-
-	$user_id = get_current_user_id();
-
-	if ( isset( $_GET['masteriyo-dismissed-nag'] ) ) {
-		add_user_meta( $user_id, 'masteriyo_dismissed_nag_messages', 'true', true );
-	}
-}
-function_exists( 'add_action' ) && add_action( 'admin_init', 'masteriyo_dismissed_nag_messages' );

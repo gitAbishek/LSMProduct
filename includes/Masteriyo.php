@@ -90,9 +90,12 @@ class Masteriyo extends Container {
 	 * @since 0.1.0
 	 */
 	protected function init_hooks() {
-		add_action( 'admin_init', array( $this, 'get_rest_api_availability' ) );
+		// add_action( 'admin_init', array( $this, 'get_rest_api_availability' ) );
+		add_action( 'admin_init', array( $this, 'dismiss_admin_notice_messages' ) );
 		add_action( 'init', array( $this, 'after_wp_init' ) );
 		add_action( 'admin_bar_menu', array( $this, 'add_course_list_page_link' ), 35 );
+		add_action( 'admin_notices', array( $this, 'display_admin_notices' ) );
+
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_links' ), 10, 2 );
 		add_filter( 'plugin_action_links_' . Constants::get( 'MASTERIYO_PLUGIN_BASENAME' ), array( $this, 'add_plugin_action_links' ) );
 		add_filter( 'template_include', array( $this, 'template_loader' ) );
@@ -379,6 +382,37 @@ class Masteriyo extends Container {
 
 		foreach ( $order_statuses as $order_status => $values ) {
 			register_post_status( $order_status, $values );
+		}
+	}
+
+	/**
+	 * Dismiss info nag message.
+	 *
+	 * @since 0.1.0
+	 */
+	public function dismiss_admin_notice_messages() {
+		$user_id = get_current_user_id();
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET['masteriyo-dismissed-nag'] ) ) {
+			add_user_meta( $user_id, 'masteriyo_dismissed_nag_messages', 'true', true );
+		}
+	}
+
+	/**
+	 * Display admin notices.
+	 *
+	 * @since 0.1.0
+	 */
+	public function display_admin_notices() {
+		$user_id      = get_current_user_id();
+		$is_dismissed = masteriyo_string_to_bool( get_user_meta( $user_id, 'masteriyo_dismissed_nag_messages', true ) );
+
+		if ( version_compare( get_bloginfo( 'version' ), '4.7', '>=' ) && ! $is_dismissed ) {
+			// translators: %s: Dismiss link
+			$message = sprintf( esc_html__( 'REST API is disabled, you must enable it in order to work Masteriyo plugin properly. %1$1sDismiss this Message%2$2s', 'masteriyo' ), '<a href="?masteriyo-dismissed-nag">', '</a>' );
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			printf( '<div class="notice notice-warning"><p><strong>%s</strong>: %s</p></div>', 'Masteriyo', $message );
 		}
 	}
 }

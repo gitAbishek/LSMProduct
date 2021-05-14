@@ -409,12 +409,14 @@ class CourseBuilderController extends RestController {
 	 */
 	protected function get_course_child_data( $course_item, $context = 'view' ) {
 		$data = array(
-			'id'         => $course_item->get_id(),
-			'name'       => $course_item->get_name( $context ),
-			'permalink'  => $course_item->get_permalink(),
-			'type'       => $course_item->get_object_type(),
-			'menu_order' => $course_item->get_menu_order(),
-			'parent_id'  => $course_item->get_parent_id(),
+			'id'          => $course_item->get_id(),
+			'name'        => $course_item->get_name( $context ),
+			'name'        => $course_item->get_name( $context ),
+			'description' => $course_item->get_description( $context ),
+			'permalink'   => $course_item->get_permalink( $context ),
+			'type'        => $course_item->get_object_type(),
+			'menu_order'  => $course_item->get_menu_order( $context ),
+			'parent_id'   => $course_item->get_parent_id( $context ),
 		);
 
 		return $data;

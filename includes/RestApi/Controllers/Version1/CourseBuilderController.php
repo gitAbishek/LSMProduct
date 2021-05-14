@@ -41,7 +41,7 @@ class CourseBuilderController extends RestController {
 	 *
 	 * @var string
 	 */
-	protected $rest_base = 'courses';
+	protected $rest_base = 'coursebuilder';
 
 	/**
 	 * Object type.
@@ -90,7 +90,7 @@ class CourseBuilderController extends RestController {
 
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->rest_base . '/(?P<id>[\d]+)/builder',
+			'/' . $this->rest_base . '/(?P<id>[\d]+)',
 			array(
 				'args'   => array(
 					'id' => array(

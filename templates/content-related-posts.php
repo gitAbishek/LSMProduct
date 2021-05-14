@@ -23,7 +23,17 @@ do_action( 'masteriyo_before_related_posts_content' );
 						<?php if ( is_numeric( $course->get_price() ) ): ?>
 							<span class="price-tag">$<?php echo esc_html( $course->get_price() ); ?></span>
 						<?php endif; ?>
-						<img class="mto-w-full" src="<?php echo wp_get_attachment_url( $course->get_featured_image() ) ?>" alt="Course featured image" />
+
+						<!-- Featured Image -->
+						<?php if ( empty( $course->get_featured_image_url() ) ): ?>
+							<img class="mto-w-full" src="https://via.placeholder.com/150" alt="Course featured image">
+						<?php else: ?>
+							<img
+								class="mto-w-full"
+								src="<?php echo $course->get_featured_image_url(); ?>"
+								alt="Course featured image"
+							>
+						<?php endif; ?>
 					</div>
 
 					<div class="mto-course--header">
@@ -31,7 +41,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 							<span class="mto-icon-svg mto-flex mto-rating">
 							<?php masteriyo_render_stars( $course->get_average_rating(), '' );?>
 							</span>
-							
+
 							<?php
 							if ( count( $course->get_category_ids() ) > 0 ) {
 								$cat = masteriyo_get_course_cat( $course->get_category_ids()[0] );
@@ -44,7 +54,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 							}
 							?>
 						</div>
-						
+
 
 						<h2 class="mto-title">
 						<?php echo esc_html( $course->get_name() ); ?>

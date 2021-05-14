@@ -106,6 +106,9 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function get_featured_image_url() {
+		if ( empty( $this->get_featured_image() ) ) {
+			return '';
+		}
 		return wp_get_attachment_url( $this->get_featured_image() );
 	}
 

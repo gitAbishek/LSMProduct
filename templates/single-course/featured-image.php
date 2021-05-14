@@ -12,7 +12,17 @@ global $course;
 ?>
 
 <div class="mto-feature-img">
-	<img class="mto-img" src="<?php echo esc_html( $course->get_featured_image_url() ); ?>" alt="Developing your first impressive portfolio">
+	<!-- Featured Image -->
+	<?php if ( empty( $course->get_featured_image_url() ) ): ?>
+		<img class="mto-w-full" src="https://via.placeholder.com/150" alt="Course featured image">
+	<?php else: ?>
+		<img
+			class="mto-w-full"
+			src="<?php echo $course->get_featured_image_url(); ?>"
+			alt="Course featured image"
+		>
+	<?php endif; ?>
+
 	<?php if ( ! empty( $course->get_price() ) ): ?>
 		<span class="mto-price-tag">
 			<?php echo masteriyo_price( $course->get_price() ); ?>

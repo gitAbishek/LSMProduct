@@ -31,8 +31,15 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 			</span>
 
 			<!-- Featured Image -->
-			<?php //echo wp_get_attachment_image( $course->get_featured_image() ); ?>
-			<img class="mto-course--img" src="https://via.placeholder.com/150" alt="You are your only limit">
+			<?php if ( empty( $course->get_featured_image_url() ) ): ?>
+				<img class="mto-course--img" src="https://via.placeholder.com/150" alt="Course featured image">
+			<?php else: ?>
+				<img
+					class="mto-course--img"
+					src="<?php echo $course->get_featured_image_url(); ?>"
+					alt="Course featured image"
+				>
+			<?php endif; ?>
 		</div>
 
 		<div class="mto-course--header">
@@ -56,11 +63,11 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 				</span>
 				<?php foreach( $course->get_categories( 'name' ) as $category ): ?>
 					<span class="mto-badge mto-badge-pink mto-tag">
-						<?php echo esc_html( $category ); ?>
+						<?php echo esc_html( $category->get_name() ); ?>
 					</span>
 				<?php endforeach; ?>
 			</div>
-			
+
 			<h2 class="mto-title">
 					<?php echo esc_html( $course->get_name() ); ?>
 			</h2>

@@ -79,7 +79,7 @@ class Permission {
 	 */
 	public function rest_check_users_manipulation_permissions( $context = 'read' ) {
 		$contexts   = array(
-			'read'    => 'list_users',
+			'read'    => 'read_users',
 			'create'  => 'create_users',
 			'edit'    => 'edit_users',
 			'delete'  => 'delete_users',
@@ -136,10 +136,10 @@ class Permission {
 	public function rest_check_course_reviews_permissions( $context = 'read', $object_id = 0 ) {
 		$permission = false;
 		$contexts   = array(
-			'read'   => 'moderate_comments',
-			'create' => 'moderate_comments',
-			'edit'   => 'moderate_comments',
-			'delete' => 'moderate_comments',
+			'read'   => 'read_course_reviews',
+			'create' => 'publish_course_reviews',
+			'edit'   => 'edit_course_reviews',
+			'delete' => 'delete_course_reviews',
 			'batch'  => 'moderate_comments',
 		);
 
@@ -158,23 +158,18 @@ class Permission {
 	 * @param string $context   Request context.
 	 * @return bool
 	 */
-	public function rest_check_order_permissions( $object_id, $context = 'read' ) {
+	public function rest_check_order_permissions( $context = 'read', $object_id = 0 ) {
 		$post_type = 'mto-order';
-		$contexts = array(
+		$contexts  = array(
 			'read'   => 'read',
 			'create' => 'publish_posts',
 			'update' => 'edit_post',
 			'delete' => 'delete_post',
 			'batch'  => 'edit_others_posts',
 		);
-
-		if ( 'revision' === $post_type ) {
-			$permission = false;
-		} else {
-			$cap              = $contexts[ $context ];
-			$post_type_object = get_post_type_object( $post_type );
-			$permission       = current_user_can( $post_type_object->cap->$cap, $object_id );
-		}
+		$cap              = $contexts[ $context ];
+		$post_type_object = get_post_type_object( $post_type );
+		$permission       = current_user_can( $post_type_object->cap->$cap, $object_id );
 
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, $post_type );
 	}

@@ -312,7 +312,7 @@ abstract class CommentsController extends CrudController {
 
 		$post = get_comment( (int) $request['id'] );
 
-		if ( $post && ! $this->permission->rest_check_course_reviews_permissions( 'update', $post->ID ) ) {
+		if ( $post && ! $this->permission->rest_check_course_reviews_permissions( 'edit', $post->ID ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),

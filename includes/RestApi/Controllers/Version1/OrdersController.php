@@ -752,12 +752,39 @@ class OrdersController extends PostsController {
 			);
 		}
 
-		if ( ! $this->permission->rest_check_order_permissions( absint( $request['id'] ), 'read' ) ) {
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
+		$id    = absint( $request['id'] );
+		$order = $this->get_object( $id );
+
+		if ( ! is_object( $order ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_invalid_id",
+				__( 'Invalid ID.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( ! $this->permission->rest_check_order_permissions( 'read', $id ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		if ( $order->get_customer_id() !== get_current_user_id() ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you are not allowed to read this resource.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
 				)
 			);
 		}
@@ -785,7 +812,7 @@ class OrdersController extends PostsController {
 			return true;
 		}
 
-		$customer_id = 0;
+		$customer_id = get_current_user_id();
 
 		if ( isset( $request['customer_id'] ) ) {
 			$customer_id = absint( $request['customer_id'] );
@@ -820,7 +847,7 @@ class OrdersController extends PostsController {
 			);
 		}
 
-		if ( ! $this->permission->rest_check_order_permissions( 0, 'create' ) ) {
+		if ( ! $this->permission->rest_check_order_permissions( 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
@@ -849,9 +876,11 @@ class OrdersController extends PostsController {
 			);
 		}
 
-		$post = get_post( (int) $request['id'] );
+		if ( masteriyo_is_current_user_admin() ) {
+			return true;
+		}
 
-		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'delete', $post->ID ) ) {
+		if ( ! $this->permission->rest_check_order_permissions( 'delete', absint( $request['id'] ) ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
@@ -887,9 +916,11 @@ class OrdersController extends PostsController {
 			return false;
 		}
 
-		$post = get_post( (int) $request['id'] );
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
 
-		if ( $post && ! $this->permission->rest_check_order_permissions( absint( $request['id'] ), 'update', $post->ID ) ) {
+		if ( ! $this->permission->rest_check_order_permissions( 'update', absint( $request['id'] ) ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),

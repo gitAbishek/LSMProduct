@@ -146,25 +146,6 @@ class Install {
 	}
 
 	/**
-	 * Assign core capabilities to admin role.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return void
-	 */
-	public static function assign_admin_capabilities() {
-		if ( ! class_exists( 'WP_Roles' ) ) {
-			return;
-		}
-
-		$capabilities = Capabilities::get_admin_capabilities();
-
-		foreach ( $capabilities as $cap => $bool ) {
-			wp_roles()->add_cap( 'administrator', $cap );
-		}
-	}
-
-	/**
 	 * Remove core capabilities from admin role.
 	 *
 	 * @since 0.1.0

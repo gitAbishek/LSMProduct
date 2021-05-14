@@ -102,7 +102,6 @@ class Masteriyo extends Container {
 		add_filter( 'template_redirect', array( $this, 'redirect_reset_password_link' ) );
 
 		add_action( 'switch_blog', array( $this, 'define_tables' ), 0 );
-		register_activation_hook( Constants::get('MASTERIYO_PLUGIN_FILE'), array( Install::class, 'assign_admin_capabilities' ) );
 	}
 
 	/**

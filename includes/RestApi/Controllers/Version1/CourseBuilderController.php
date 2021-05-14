@@ -444,8 +444,8 @@ class CourseBuilderController extends RestController {
 			}
 		}
 
-		$results['contents']      = $contents;
-		$results['sections']      = $sections;
+		$results['contents']      = array_combine( wp_list_pluck( $contents, 'id' ), $contents );
+		$results['sections']      = array_combine( wp_list_pluck( $sections, 'id' ), $sections );
 		$results['section_order'] = $section_ids;
 
 		return $results;

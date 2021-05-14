@@ -112,11 +112,15 @@ const Section: React.FC<Props> = (props) => {
 					p="10"
 					shadow="box"
 					ref={draggableProvided.innerRef}
-					{...draggableProvided.draggableProps}
-					{...draggableProvided.dragHandleProps}>
+					{...draggableProvided.draggableProps}>
 					<Flex justify="space-between">
 						<Stack direction="row" spacing="3" align="center">
-							<Icon as={Sortable} fontSize="lg" color="gray.500" />
+							<Icon
+								as={Sortable}
+								fontSize="lg"
+								color="gray.500"
+								{...draggableProvided.dragHandleProps}
+							/>
 							<Text fontWeight="semibold" fontSize="xl">
 								{name} {id}
 							</Text>

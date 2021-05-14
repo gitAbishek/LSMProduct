@@ -486,12 +486,37 @@ class OrderItemsController extends PostsController {
 			);
 		}
 
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
 		$order_item = $this->get_object( absint( $request['id'] ) );
 
+		if ( ! is_object( $order_item ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_invalid_id",
+				__( 'Invalid ID.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		$order = masteriyo_get_order( $order_item->get_order_id() );
+
+		if ( ! is_object( $order ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Could not read the order object.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
 		if (
-			! $order_item ||
-			! $order_item->get_id() ||
-			! $this->permission->rest_check_order_permissions( $order_item->get_order_id(), 'read' )
+			$order->get_customer_id() !== get_current_user_id() ||
+			! $this->permission->rest_check_order_permissions( 'read', $order_item->get_order_id() )
 		) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
@@ -523,7 +548,30 @@ class OrderItemsController extends PostsController {
 			return true;
 		}
 
-		if ( ! $this->permission->rest_check_order_permissions( absint( $request['order_id'] ), 'read' ) ) {
+		$order_id = isset( $_GET['order_id'] ) ? absint( $_GET['order_id'] ) : 0;
+		$order    = masteriyo_get_order( $order_id );
+
+		if ( ! is_object( $order ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Could not read the order object.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( get_current_user_id() !== $order->get_customer_id() ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you cannot list this resource.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( ! $this->permission->rest_check_order_permissions( 'read', absint( $request['order_id'] ) ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
@@ -552,9 +600,20 @@ class OrderItemsController extends PostsController {
 			);
 		}
 
-		$order_id = absint( $request['order_id'] );
+		$order_id = isset( $request['order_id'] ) ? absint( $request['order_id'] ) : 0;
+		$order    = masteriyo_get_order( $order_id );
 
-		if ( ! $order_id || ! $this->permission->rest_check_order_permissions( $order_id, 'update' ) ) {
+		if ( ! $order_id || ! is_object( $order ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_invalid_id",
+				__( 'Invalid order ID.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( $order->get_customer_id() !== get_current_user_id() ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
@@ -589,7 +648,7 @@ class OrderItemsController extends PostsController {
 
 		$order_item = $this->get_object( absint( $request['id'] ) );
 
-		if ( ! $order_item || ! $this->permission->rest_check_order_permissions( $order_item->get_order_id(), 'delete' ) ) {
+		if ( ! $order_item || ! $this->permission->rest_check_order_permissions( 'delete', $order_item->get_order_id() ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
@@ -624,7 +683,17 @@ class OrderItemsController extends PostsController {
 
 		$order_item = $this->get_object( absint( $request['id'] ) );
 
-		if ( ! $this->permission->rest_check_order_permissions( $order_item->get_order_id(), 'update' ) ) {
+		if ( ! is_object( $order_item ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_invalid_id",
+				__( 'Invalid ID.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( ! $this->permission->rest_check_order_permissions( 'update', $order_item->get_order_id() ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),

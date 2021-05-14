@@ -17,6 +17,8 @@ const SectionBuilder = () => {
 	const history = useHistory();
 	const courseAPI = new API(urls.courses);
 	const sectionAPI = new API(urls.sections);
+	const builderAPI = new API(urls.builder.replace('courseId', courseId));
+	const [builderData, setBuilderData] = useState(null);
 	const [totalSectionsLength, setTotalSectionsLength] = useState<number>(0);
 	const courseQuery = useQuery(
 		['builderCourse', courseId],
@@ -28,20 +30,11 @@ const SectionBuilder = () => {
 		}
 	);
 
-	const sectionQuery = useQuery(
-		['builderSections', courseId],
-		() =>
-			sectionAPI.list({
-				parent: courseId,
-				order: 'asc',
-				orderBy: 'menu_order',
-			}),
-		{
-			onSuccess: (data) => {
-				setTotalSectionsLength(data.length);
-			},
-		}
-	);
+	const builderQuery = useQuery(['builderSections'], () => builderAPI.list(), {
+		onSuccess: (data) => {
+			setBuilderData(data);
+		},
+	});
 
 	const addSection = useMutation((data: any) => sectionAPI.store(data), {
 		onSuccess: () => {
@@ -60,14 +53,14 @@ const SectionBuilder = () => {
 
 	return (
 		<Stack direction="column" spacing="8">
-			{(courseQuery.isLoading || sectionQuery.isLoading) && (
+			{(courseQuery.isLoading || builderQuery.isLoading) && (
 				<Center minH="xs">
 					<Spinner />
 				</Center>
 			)}
 
-			{sectionQuery.isSuccess &&
-				sectionQuery.data.map((section: any) => (
+			{builderQuery.isSuccess &&
+				builderQuery.data.sections.map((section: any) => (
 					<Section
 						key={section.id}
 						id={section.id}
@@ -76,12 +69,13 @@ const SectionBuilder = () => {
 						courseId={courseId}
 					/>
 				))}
+
 			{addSection.isLoading && (
 				<Center minH="24">
 					<Spinner />
 				</Center>
 			)}
-			{courseQuery.isSuccess && sectionQuery.isSuccess && (
+			{courseQuery.isSuccess && builderQuery.isSuccess && (
 				<Center>
 					<AddNewButton onClick={onAddNewSectionPress}>
 						{__('Add New Section', 'masteriyo')}

@@ -14,6 +14,7 @@ const urls = {
 	orders: base + 'orders',
 	users: base + 'users',
 	settings: base + 'settings',
+	builder: base + 'courses/courseId/builder',
 };
 
 export default urls;

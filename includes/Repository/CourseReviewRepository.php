@@ -62,7 +62,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		);
 
 		// Set comment status.
-		wp_set_comment_status( $id,  $course_review->get_status() );
+		wp_set_comment_status( $id, $course_review->get_status() );
 
 		if ( $id && ! is_wp_error( $id ) ) {
 			$course_review->set_id( $id );
@@ -88,6 +88,14 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			throw new \Exception( __( 'Invalid Course Review.', 'masteriyo' ) );
 		}
 
+		// Map the comment status from numberical to word.
+		$status = $course_review_obj->comment_approved;
+		if ( '1' === $status ) {
+			$status = 'approve';
+		} elseif ( '0' === $status ) {
+			$status = 'hold';
+		}
+
 		$course_review->set_props(
 			array(
 				'course_id'    => $course_review_obj->comment_post_ID,
@@ -98,7 +106,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 				'date_created' => $course_review_obj->comment_date,
 				'content'      => $course_review_obj->comment_content,
 				'karma'        => $course_review_obj->comment_karma,
-				'status'       => $course_review_obj->comment_approved,
+				'status'       => $status,
 				'agent'        => $course_review_obj->comment_agent,
 				'type'         => $course_review_obj->comment_type,
 				'parent'       => $course_review_obj->comment_parent,
@@ -254,7 +262,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			$course_review = array_filter( array_map( 'masteriyo_get_course_review', $query->comments ) );
 		}
 
-		if ( isset( $query_vars['paginate'] ) &&  $query_vars['paginate'] ) {
+		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
 			return (object) array(
 				'course_review' => $course_review,
 				'total'         => $query->found_posts,

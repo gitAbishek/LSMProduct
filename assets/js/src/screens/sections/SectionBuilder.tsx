@@ -25,69 +25,7 @@ const SectionBuilder = () => {
 	const courseAPI = new API(urls.courses);
 	const sectionAPI = new API(urls.sections);
 	const builderAPI = new API(urls.builder);
-	const [builderData, setBuilderData] = useState({
-		contents: {
-			'130': {
-				id: 130,
-				name: 'Quiz Section 1',
-				description: '',
-				permalink: 'http://masteriyo.test/quiz/quiz-section-1/',
-				type: 'quiz',
-				menu_order: 0,
-				parent_id: 126,
-			},
-			'129': {
-				id: 129,
-				name: 'lession 2 Section 1',
-				description: '<p>Hello World</p>',
-				permalink: 'http://masteriyo.test/lesson/lession-2-section-1-2/',
-				type: 'lesson',
-				menu_order: 0,
-				parent_id: 125,
-			},
-			'127': {
-				id: 127,
-				name: 'lession Section 1',
-				description: '<p>Hello World</p>',
-				permalink: 'http://masteriyo.test/lesson/lession-section-1/',
-				type: 'lesson',
-				menu_order: 1,
-				parent_id: 126,
-			},
-			'128': {
-				id: 128,
-				name: 'lession 2 Section 1',
-				description: '<p>Hello World</p>',
-				permalink: 'http://masteriyo.test/lesson/lession-2-section-1/',
-				type: 'lesson',
-				menu_order: 1,
-				parent_id: 125,
-			},
-		},
-		sections: {
-			'125': {
-				id: 125,
-				name: 'Section 1',
-				description: '',
-				permalink: 'http://masteriyo.test/section/section-1/',
-				type: 'section',
-				menu_order: 0,
-				parent_id: 124,
-				contents: [129, 128],
-			},
-			'126': {
-				id: 126,
-				name: 'Section 2',
-				description: '',
-				permalink: 'http://masteriyo.test/section/section-2/',
-				type: 'section',
-				menu_order: 1,
-				parent_id: 124,
-				contents: [130, 127],
-			},
-		},
-		section_order: [125, 126],
-	});
+	const [builderData, setBuilderData] = useState<any>(null);
 	const [totalSectionsLength, setTotalSectionsLength] = useState<number>(0);
 	const courseQuery = useQuery(
 		['builderCourse', courseId],
@@ -104,7 +42,7 @@ const SectionBuilder = () => {
 		() => builderAPI.get(courseId),
 		{
 			onSuccess: (data) => {
-				// setBuilderData(data);
+				setBuilderData(data);
 			},
 		}
 	);
@@ -137,60 +75,39 @@ const SectionBuilder = () => {
 		}
 
 		if (type === 'content') {
-			console.log('this is content');
-			const home = builderData.sections[source.droppableId];
-			const foreign = builderData.sections[destination.droppableId];
+			const currentSection = builderData.sections[source.droppableId];
+			const destinationSection = builderData.sections[destination.droppableId];
 
-			const homeTaskIds = Array.from(home.contents);
-			homeTaskIds.splice(source.index, 1);
-			const newHome = {
-				...home,
-				contents: homeTaskIds,
+			const currentContents = Array.from(currentSection.contents);
+			currentContents.splice(source.index, 1);
+
+			const newCurrentSection = {
+				...currentSection,
+				contents: currentContents,
 			};
-			const foreignTaskIds = Array.from(foreign.contents);
-			foreignTaskIds.splice(destination.index, 0, parseInt(draggableId));
 
-			// const newForeign = {
-			// 	...foreign,
-			// 	contents: foreignTaskIds,
-			// };
+			const destinationContents = Array.from(destinationSection.contents);
+			destinationContents.splice(destination.index, 0, parseInt(draggableId));
 
-			// // console.log(newForeign);
-			// const newSections = [
-			// 		...builderData.sections,
-			// 		source.droppableId: newHome,
-			// 		destination.droppableId]: newForeign,
-			// ];
+			const newDestinationSection = {
+				...destinationSection,
+				contents: destinationContents,
+			};
 
-			// console.log(newSections);
+			const newBuilderData = {
+				...builderData,
+				sections: {
+					...builderData.sections,
+					[newCurrentSection.id]: newCurrentSection,
+					[newDestinationSection.id]: newDestinationSection,
+				},
+			};
 
-			// console.log('this is content');
-			// const sourceContents = Array.from(
-			// 	builderData.sections[source.droppableId].contents
-			// );
-			// const destinationContent = Array.from(
-			// 	builderData.sections[destination.droppableId].contents
-			// );
-
-			// sourceContents.splice(source.index, 1);
-			// destinationContent.splice(destination.index, 0, parseInt(draggableId));
-			// console.log(sourceContents);
-			// console.log(destinationContent);
-
-			// const newSections = Array.from(builderData.sections);
-			// const newSecti
-			// const newSections = {
-			// 	...builderData,
-			// 	sections: [
-			// 		source.droppableId: sourceContents,
-			// 	destination.droppableId: destinationContent
-			// 	]
-			// 	,
-			// }
+			setBuilderData(newBuilderData);
 		}
 	};
 
-	console.log(builderData?.sections);
+	// console.log(builderData?.sections);
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
 			<Droppable droppableId="section" type="section">
@@ -217,7 +134,6 @@ const SectionBuilder = () => {
 										name={section.name}
 										description={section.description}
 										courseId={courseId}
-										contents={section.contents}
 									/>
 								);
 							})}

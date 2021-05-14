@@ -49,7 +49,6 @@ interface Props {
 	courseId: number;
 	description?: any;
 	index: number;
-	contents: object[];
 }
 
 const Section: React.FC<Props> = (props) => {
@@ -106,7 +105,7 @@ const Section: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<Draggable draggableId={id.toString()} key={id} index={index}>
+		<Draggable draggableId={id.toString()} index={index}>
 			{(draggableProvided) => (
 				<Box
 					bg="white"
@@ -158,7 +157,7 @@ const Section: React.FC<Props> = (props) => {
 							</Center>
 						)}
 						{contentQuery.isSuccess && !!contentQuery.data.length && (
-							<Droppable droppableId={index.toString()} type="content">
+							<Droppable droppableId={id.toString()} type="content">
 								{(droppableProvided) => (
 									<Stack
 										direction="column"

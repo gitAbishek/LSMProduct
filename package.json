@@ -10,6 +10,7 @@
     "@emotion/styled": "^11",
     "@tinymce/tinymce-react": "3.12.2",
     "@wordpress/i18n": "3.18.0",
+    "array-move": "3.0.1",
     "axios": "0.21.1",
     "framer-motion": "^4",
     "react": "17.0.1",

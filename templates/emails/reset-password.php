@@ -23,7 +23,7 @@ do_action( 'masteriyo_email_header', $email_heading, $email );
 
 <p class="email-template--info">
 	<?php /* translators: %s: Username */ ?>
-	<?php printf( esc_html__( 'Hi %s,', 'masteriyo' ), esc_html( $user->get_user_login() ) ); ?>
+	<?php printf( esc_html__( 'Hi %s,', 'masteriyo' ), esc_html( $user->get_username() ) ); ?>
 </p>
 
 <p class="email-template--info">
@@ -32,7 +32,7 @@ do_action( 'masteriyo_email_header', $email_heading, $email );
 </p>
 <p class="email-template--info">
 	<?php /* translators: %s: Username */ ?>
-	<?php printf( esc_html__( 'Username: %s', 'masteriyo' ), esc_html( $user->get_user_login() ) ); ?>
+	<?php printf( esc_html__( 'Username: %s', 'masteriyo' ), esc_html( $user->get_username() ) ); ?>
 </p>
 <p class="email-template--info">
 	<?php esc_html_e( 'If you didn\'t make this request, just ignore this email. If you\'d like to proceed:', 'masteriyo' ); ?>

@@ -90,7 +90,6 @@ class Masteriyo extends Container {
 	 * @since 0.1.0
 	 */
 	protected function init_hooks() {
-		add_action( 'admin_init', array( $this, 'dismiss_admin_notice_messages' ) );
 		add_action( 'init', array( $this, 'after_wp_init' ) );
 		add_action( 'admin_bar_menu', array( $this, 'add_course_list_page_link' ), 35 );
 		add_action( 'admin_notices', array( $this, 'display_admin_notices' ) );
@@ -99,23 +98,6 @@ class Masteriyo extends Container {
 		add_filter( 'plugin_action_links_' . Constants::get( 'MASTERIYO_PLUGIN_BASENAME' ), array( $this, 'add_plugin_action_links' ) );
 		add_filter( 'template_include', array( $this, 'template_loader' ) );
 		add_filter( 'template_redirect', array( $this, 'redirect_reset_password_link' ) );
-	}
-
-	/**
-	 * Check if REST API is available or not. If available then do not show the admin notice.
-	 *
-	 * @since 0.1.0
-	 */
-	public function get_rest_api_availability() {
-		$response          = new \WP_Site_Health();
-		$rest_availability = $response->get_test_rest_availability();
-		$user_id           = get_current_user_id();
-
-		if ( 'good' === $rest_availability['status'] ) {
-			add_user_meta( $user_id, 'masteriyo_dismissed_nag_messages', 'true', true );
-		} else {
-			delete_user_meta( $user_id, 'masteriyo_dismissed_nag_messages' );
-		}
 	}
 
 	/**
@@ -385,31 +367,14 @@ class Masteriyo extends Container {
 	}
 
 	/**
-	 * Dismiss info nag message.
-	 *
-	 * @since 0.1.0
-	 */
-	public function dismiss_admin_notice_messages() {
-		$user_id = get_current_user_id();
-
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( isset( $_GET['masteriyo-dismissed-nag'] ) ) {
-			add_user_meta( $user_id, 'masteriyo_dismissed_nag_messages', 'true', true );
-		}
-	}
-
-	/**
 	 * Display admin notices.
 	 *
 	 * @since 0.1.0
 	 */
 	public function display_admin_notices() {
-		$user_id      = get_current_user_id();
-		$is_dismissed = masteriyo_string_to_bool( get_user_meta( $user_id, 'masteriyo_dismissed_nag_messages', true ) );
-
-		if ( ! $is_dismissed ) {
+		if ( version_compare( get_bloginfo( 'version' ), '4.7', '<=' ) ) {
 			// translators: %s: Dismiss link
-			$message = sprintf( esc_html__( 'Minimum WordPress version required to work Masteriyo is v4.7. %1$1sDismiss this Message%2$2s', 'masteriyo' ), '<a href="?masteriyo-dismissed-nag">', '</a>' );
+			$message = sprintf( esc_html__( 'Minimum WordPress version required to work Masteriyo is v4.7.', 'masteriyo' ) );
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			printf( '<div class="notice notice-warning"><p><strong>%s</strong>: %s</p></div>', 'Masteriyo', $message );
 		}

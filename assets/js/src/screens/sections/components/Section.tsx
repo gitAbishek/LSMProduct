@@ -25,7 +25,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
 import React, { useRef, useState } from 'react';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import {
 	BiAlignLeft,
 	BiDotsVerticalRounded,
@@ -48,7 +48,8 @@ interface Props {
 	name: string;
 	courseId: number;
 	description?: any;
-	index: any;
+	index: number;
+	contents: object[];
 }
 
 const Section: React.FC<Props> = (props) => {
@@ -115,12 +116,10 @@ const Section: React.FC<Props> = (props) => {
 					{...draggableProvided.draggableProps}>
 					<Flex justify="space-between">
 						<Stack direction="row" spacing="3" align="center">
-							<Icon
-								as={Sortable}
-								fontSize="lg"
-								color="gray.500"
-								{...draggableProvided.dragHandleProps}
-							/>
+							<span {...draggableProvided.dragHandleProps}>
+								<Icon as={Sortable} fontSize="lg" color="gray.500" />
+							</span>
+
 							<Text fontWeight="semibold" fontSize="xl">
 								{name} {id}
 							</Text>
@@ -159,16 +158,26 @@ const Section: React.FC<Props> = (props) => {
 							</Center>
 						)}
 						{contentQuery.isSuccess && !!contentQuery.data.length && (
-							<Stack direction="column" spacing="4">
-								{contentQuery.data.map((content: any) => (
-									<Content
-										key={content.id}
-										id={content.id}
-										name={content.name}
-										type={content.type}
-									/>
-								))}
-							</Stack>
+							<Droppable droppableId={index.toString()} type="content">
+								{(droppableProvided) => (
+									<Stack
+										direction="column"
+										spacing="4"
+										ref={droppableProvided.innerRef}
+										{...droppableProvided.droppableProps}>
+										{contentQuery.data.map((content: any, index: any) => (
+											<Content
+												key={content.id}
+												id={content.id}
+												name={content.name}
+												type={content.type}
+												index={index}
+											/>
+										))}
+										{droppableProvided.placeholder}
+									</Stack>
+								)}
+							</Droppable>
 						)}
 					</Box>
 					<Box>

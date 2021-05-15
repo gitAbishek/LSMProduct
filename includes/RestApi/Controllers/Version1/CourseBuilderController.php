@@ -469,6 +469,14 @@ class CourseBuilderController extends RestController {
 			)
 		);
 
+		// Set some default values.
+		$sections = array_map(
+			function( $section ) {
+				return wp_parse_args( $section, array( 'contents' => array() ) );
+			},
+			$sections
+		);
+
 		usort(
 			$sections,
 			function( $a, $b ) {

@@ -101,6 +101,7 @@ const Content: React.FC<Props> = (props) => {
 					borderColor="gray.100"
 					p="2"
 					mb="3"
+					_last={{ mb: 0 }}
 					ref={draggableProvided.innerRef}
 					{...draggableProvided.draggableProps}>
 					<Stack direction="row" spacing="3" align="center">

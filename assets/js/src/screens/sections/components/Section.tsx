@@ -171,7 +171,7 @@ const Section: React.FC<Props> = (props) => {
 						)}
 					</Droppable>
 
-					<Box p="5" pt="0">
+					<Box p="5">
 						<Menu>
 							<MenuButton as={AddNewButton}>
 								{__('Add New Content', 'masteriyo')}

@@ -65,7 +65,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	};
 
 	return (
-		<Box pb="6">
+		<Box p="5" pt="0">
 			<form onSubmit={handleSubmit(onUpdate)}>
 				<Stack direction="column" spacing="8">
 					<FormControl isInvalid={!!errors?.name}>

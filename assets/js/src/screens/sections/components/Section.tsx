@@ -115,7 +115,7 @@ const Section: React.FC<Props> = (props) => {
 							</span>
 
 							<Text fontWeight="semibold" fontSize="xl">
-								{name} {id}
+								{name}
 							</Text>
 						</Stack>
 						<Menu placement="bottom-end">

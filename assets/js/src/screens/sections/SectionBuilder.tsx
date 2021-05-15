@@ -37,6 +37,7 @@ const SectionBuilder = () => {
 		{
 			onSuccess: (data) => {
 				setBuilderData(data);
+				setTotalSectionsLength(Object.keys(data.sections).length);
 			},
 			refetchOnWindowFocus: false,
 			refetchIntervalInBackground: false,
@@ -65,8 +66,11 @@ const SectionBuilder = () => {
 			parent_id: courseId,
 			course_id: courseId,
 			name: 'New Section',
+			menu_order: totalSectionsLength + 1,
 		});
 	};
+
+	console.log(totalSectionsLength);
 
 	const onDragEnd = (result: DropResult) => {
 		const { source, destination, draggableId, type } = result;

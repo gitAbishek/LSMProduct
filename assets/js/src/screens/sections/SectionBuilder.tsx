@@ -1,15 +1,9 @@
 import { Center, Stack } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
 import { __ } from '@wordpress/i18n';
-import arrayMove from 'array-move';
 import AddNewButton from 'Components/common/AddNewButton';
 import React, { useState } from 'react';
-import {
-	DragDropContext,
-	Draggable,
-	DropResult,
-	Droppable,
-} from 'react-beautiful-dnd';
+import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -44,6 +38,20 @@ const SectionBuilder = () => {
 			onSuccess: (data) => {
 				setBuilderData(data);
 			},
+			refetchOnWindowFocus: false,
+			refetchIntervalInBackground: false,
+			refetchOnMount: false,
+			refetchOnReconnect: false,
+		}
+	);
+
+	const updateBuilder = useMutation(
+		(data: any) => builderAPI.update(courseId, data),
+		{
+			onSuccess: (data) => {
+				console.log(data);
+				queryClient.invalidateQueries('builderSections');
+			},
 		}
 	);
 
@@ -71,6 +79,20 @@ const SectionBuilder = () => {
 			destination.droppableId === source.droppableId &&
 			destination.index === source.index
 		) {
+			return;
+		}
+
+		if (type === 'section') {
+			const newSectionOrder = Array.from(builderData.section_order);
+			newSectionOrder.splice(source.index, 1);
+			newSectionOrder.splice(destination.index, 0, draggableId);
+
+			const newBuilderData = {
+				...builderData,
+				section_order: newSectionOrder,
+			};
+			setBuilderData(newBuilderData);
+			updateBuilder.mutate(newBuilderData);
 			return;
 		}
 
@@ -104,10 +126,10 @@ const SectionBuilder = () => {
 			};
 
 			setBuilderData(newBuilderData);
+			updateBuilder.mutate(newBuilderData);
 		}
 	};
 
-	// console.log(builderData?.sections);
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
 			<Droppable droppableId="section" type="section">
@@ -123,7 +145,7 @@ const SectionBuilder = () => {
 							</Center>
 						)}
 
-						{builderQuery.isSuccess &&
+						{builderData &&
 							builderData.section_order.map((sectionId: any, index: any) => {
 								const section = builderData.sections[sectionId];
 								return (
@@ -134,6 +156,8 @@ const SectionBuilder = () => {
 										name={section.name}
 										description={section.description}
 										courseId={courseId}
+										contents={section.contents}
+										contentsMap={builderData.contents}
 									/>
 								);
 							})}

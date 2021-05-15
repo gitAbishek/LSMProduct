@@ -92,6 +92,7 @@ const Content: React.FC<Props> = (props) => {
 				<Flex
 					justify="space-between"
 					rounded="sm"
+					bg="white"
 					border="1px"
 					borderColor="gray.100"
 					p="2"
@@ -105,9 +106,7 @@ const Content: React.FC<Props> = (props) => {
 							as={type === 'lesson' ? BiAlignLeft : BiTimer}
 							fontSize="xl"
 						/>
-						<Text fontSize="sm">
-							{name} <strong>{id}</strong>
-						</Text>
+						<Text fontSize="sm">{name}</Text>
 					</Stack>
 					<Stack direction="row" spacing="3">
 						<Button variant="outline" size="sm" onClick={onEditPress}>

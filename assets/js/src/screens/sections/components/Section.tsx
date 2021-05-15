@@ -8,7 +8,6 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Center,
 	Collapse,
 	Flex,
 	Icon,
@@ -17,7 +16,6 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
-	Spinner,
 	Stack,
 	Text,
 	useToast,
@@ -33,7 +31,7 @@ import {
 	BiTimer,
 	BiTrash,
 } from 'react-icons/bi';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
 import { Sortable } from '../../../assets/icons';
@@ -49,23 +47,20 @@ interface Props {
 	courseId: number;
 	description?: any;
 	index: number;
+	contents: any;
+	contentsMap: any;
 }
 
 const Section: React.FC<Props> = (props) => {
-	const { id, name, description, index } = props;
+	const { id, name, description, index, contents, contentsMap } = props;
 	const [isEditing, setIsEditing] = useState(false);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-	const contentAPI = new API(urls.contents);
 	const sectionAPI = new API(urls.sections);
 	const history = useHistory();
 	const cancelRef = useRef<any>();
-
+	const newContents = contents?.map((contentId: any) => contentsMap[contentId]);
 	const queryClient = useQueryClient();
 	const toast = useToast();
-
-	const contentQuery = useQuery(['contents', id], () =>
-		contentAPI.list({ section: id, order: 'asc', orderBy: 'menu_order' })
-	);
 
 	const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
 		onSuccess: (data: any) => {
@@ -151,20 +146,16 @@ const Section: React.FC<Props> = (props) => {
 								onCancel={() => setIsEditing(false)}
 							/>
 						</Collapse>
-						{contentQuery.isLoading && (
-							<Center minH="12">
-								<Spinner />
-							</Center>
-						)}
-						{contentQuery.isSuccess && !!contentQuery.data.length && (
-							<Droppable droppableId={id.toString()} type="content">
-								{(droppableProvided) => (
-									<Stack
-										direction="column"
-										spacing="4"
-										ref={droppableProvided.innerRef}
-										{...droppableProvided.droppableProps}>
-										{contentQuery.data.map((content: any, index: any) => (
+
+						<Droppable droppableId={id.toString()} type="content">
+							{(droppableProvided) => (
+								<Stack
+									direction="column"
+									spacing="4"
+									ref={droppableProvided.innerRef}
+									{...droppableProvided.droppableProps}>
+									{newContents &&
+										newContents.map((content: any, index: any) => (
 											<Content
 												key={content.id}
 												id={content.id}
@@ -173,11 +164,10 @@ const Section: React.FC<Props> = (props) => {
 												index={index}
 											/>
 										))}
-										{droppableProvided.placeholder}
-									</Stack>
-								)}
-							</Droppable>
-						)}
+									{droppableProvided.placeholder}
+								</Stack>
+							)}
+						</Droppable>
 					</Box>
 					<Box>
 						<Menu>

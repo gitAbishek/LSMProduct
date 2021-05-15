@@ -119,7 +119,7 @@ const SectionBuilder = () => {
 							</Center>
 						)}
 						{courseQuery.isSuccess && builderQuery.isSuccess && builderData && (
-							<Center>
+							<Center mb="8">
 								<AddNewButton onClick={onAddNewSectionPress}>
 									{__('Add New Section', 'masteriyo')}
 								</AddNewButton>

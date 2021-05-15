@@ -104,12 +104,12 @@ const Section: React.FC<Props> = (props) => {
 			{(draggableProvided) => (
 				<Box
 					bg="white"
-					p="10"
 					shadow="box"
 					mb="8"
+					p="3"
 					ref={draggableProvided.innerRef}
 					{...draggableProvided.draggableProps}>
-					<Flex justify="space-between">
+					<Flex justify="space-between" p="5">
 						<Stack direction="row" spacing="3" align="center">
 							<span {...draggableProvided.dragHandleProps}>
 								<Icon as={Sortable} fontSize="lg" color="gray.500" />
@@ -137,40 +137,41 @@ const Section: React.FC<Props> = (props) => {
 							</MenuList>
 						</Menu>
 					</Flex>
-					<Box py="8">
-						<Collapse in={isEditing} animateOpacity>
-							<EditSection
-								id={id}
-								name={name}
-								description={description}
-								onSave={() => setIsEditing(false)}
-								onCancel={() => setIsEditing(false)}
-							/>
-						</Collapse>
 
-						<Droppable droppableId={id.toString()} type="content">
-							{(droppableProvided) => (
-								<Stack
-									direction="column"
-									spacing="4"
-									ref={droppableProvided.innerRef}
-									{...droppableProvided.droppableProps}>
-									{newContents &&
-										newContents.map((content: any, index: any) => (
-											<Content
-												key={content.id}
-												id={content.id}
-												name={content.name}
-												type={content.type}
-												index={index}
-											/>
-										))}
-									{droppableProvided.placeholder}
-								</Stack>
-							)}
-						</Droppable>
-					</Box>
-					<Box>
+					<Collapse in={isEditing} animateOpacity>
+						<EditSection
+							id={id}
+							name={name}
+							description={description}
+							onSave={() => setIsEditing(false)}
+							onCancel={() => setIsEditing(false)}
+						/>
+					</Collapse>
+
+					<Droppable droppableId={id.toString()} type="content">
+						{(droppableProvided, snapshot) => (
+							<Box
+								p="5"
+								minH="8"
+								bgColor={snapshot.isDraggingOver ? 'gray.100' : 'transparent'}
+								ref={droppableProvided.innerRef}
+								{...droppableProvided.droppableProps}>
+								{newContents &&
+									newContents.map((content: any, index: any) => (
+										<Content
+											key={content.id}
+											id={content.id}
+											name={content.name}
+											type={content.type}
+											index={index}
+										/>
+									))}
+								{droppableProvided.placeholder}
+							</Box>
+						)}
+					</Droppable>
+
+					<Box p="5" pt="0">
 						<Menu>
 							<MenuButton as={AddNewButton}>
 								{__('Add New Content', 'masteriyo')}

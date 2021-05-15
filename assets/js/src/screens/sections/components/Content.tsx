@@ -55,6 +55,7 @@ const Content: React.FC<Props> = (props) => {
 			queryClient.invalidateQueries('contents');
 		},
 	});
+
 	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('contents');
@@ -64,9 +65,11 @@ const Content: React.FC<Props> = (props) => {
 	const onDeleteModalClose = () => {
 		setDeleteModalOpen(false);
 	};
+
 	const onDeletePress = () => {
 		setDeleteModalOpen(true);
 	};
+
 	const onDeleteConfirm = () => {
 		if (type === 'lesson') {
 			deleteLesson.mutate(id);
@@ -75,6 +78,7 @@ const Content: React.FC<Props> = (props) => {
 		}
 		setDeleteModalOpen(false);
 	};
+
 	const onEditPress = () => {
 		if (type === 'lesson') {
 			history.push(routes.lesson.edit.replace(':lessonId', id.toString()));
@@ -96,6 +100,7 @@ const Content: React.FC<Props> = (props) => {
 					border="1px"
 					borderColor="gray.100"
 					p="2"
+					mb="3"
 					ref={draggableProvided.innerRef}
 					{...draggableProvided.draggableProps}>
 					<Stack direction="row" spacing="3" align="center">

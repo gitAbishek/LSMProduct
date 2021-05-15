@@ -52,13 +52,13 @@ const Content: React.FC<Props> = (props) => {
 
 	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('contents');
+			queryClient.invalidateQueries('builderSections');
 		},
 	});
 
 	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('contents');
+			queryClient.invalidateQueries('builderSections');
 		},
 	});
 

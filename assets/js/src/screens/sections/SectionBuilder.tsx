@@ -39,7 +39,8 @@ const SectionBuilder = () => {
 		{
 			onSuccess: (data) => {
 				setBuilderData(data);
-				setTotalSectionsLength(Object.keys(data.sections).length);
+				data.sections &&
+					setTotalSectionsLength(Object.keys(data.sections).length);
 			},
 			refetchOnWindowFocus: false,
 			refetchIntervalInBackground: false,

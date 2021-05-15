@@ -40,7 +40,6 @@ const SectionBuilder = () => {
 			},
 			refetchOnWindowFocus: false,
 			refetchIntervalInBackground: false,
-			refetchOnMount: false,
 			refetchOnReconnect: false,
 		}
 	);
@@ -139,13 +138,16 @@ const SectionBuilder = () => {
 						spacing="8"
 						ref={droppableProvided.innerRef}
 						{...droppableProvided.droppableProps}>
-						{(courseQuery.isLoading || builderQuery.isLoading) && (
+						{(courseQuery.isLoading ||
+							builderQuery.isLoading ||
+							!builderData) && (
 							<Center minH="xs">
 								<Spinner />
 							</Center>
 						)}
 
 						{builderData &&
+							builderQuery.isSuccess &&
 							builderData.section_order.map((sectionId: any, index: any) => {
 								const section = builderData.sections[sectionId];
 								return (
@@ -167,7 +169,7 @@ const SectionBuilder = () => {
 								<Spinner />
 							</Center>
 						)}
-						{courseQuery.isSuccess && builderQuery.isSuccess && (
+						{courseQuery.isSuccess && builderQuery.isSuccess && builderData && (
 							<Center>
 								<AddNewButton onClick={onAddNewSectionPress}>
 									{__('Add New Section', 'masteriyo')}

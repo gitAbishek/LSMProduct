@@ -80,7 +80,7 @@ const AddNewQuiz: React.FC = () => {
 				isClosable: true,
 				status: 'success',
 			});
-			history.push(routes.section.replace(':courseId', data.course_id));
+			history.push(routes.quiz.edit.replace(':quizId', data.id));
 		},
 	});
 

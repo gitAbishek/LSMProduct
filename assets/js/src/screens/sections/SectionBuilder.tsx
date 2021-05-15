@@ -1,4 +1,5 @@
 import { Center, Stack } from '@chakra-ui/layout';
+import { Box } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
@@ -82,9 +83,7 @@ const SectionBuilder = () => {
 		<DragDropContext onDragEnd={onDragEnd}>
 			<Droppable droppableId="section" type="section">
 				{(droppableProvided) => (
-					<Stack
-						direction="column"
-						spacing="8"
+					<Box
 						ref={droppableProvided.innerRef}
 						{...droppableProvided.droppableProps}>
 						{(courseQuery.isLoading ||
@@ -126,7 +125,7 @@ const SectionBuilder = () => {
 							</Center>
 						)}
 						{droppableProvided.placeholder}
-					</Stack>
+					</Box>
 				)}
 			</Droppable>
 		</DragDropContext>

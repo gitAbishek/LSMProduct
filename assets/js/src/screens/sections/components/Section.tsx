@@ -106,6 +106,7 @@ const Section: React.FC<Props> = (props) => {
 					bg="white"
 					p="10"
 					shadow="box"
+					mb="8"
 					ref={draggableProvided.innerRef}
 					{...draggableProvided.draggableProps}>
 					<Flex justify="space-between">

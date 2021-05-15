@@ -21,6 +21,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
 
+import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import Description from './components/Description';
@@ -64,6 +65,7 @@ const EditQuiz: React.FC = () => {
 					isClosable: true,
 					status: 'success',
 				});
+				history.push(routes.section.replace(':courseId', data.course_id));
 			},
 		}
 	);

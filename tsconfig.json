@@ -15,6 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
+    "suppressImplicitAnyIndexErrors": true,
     "paths": {
       "Components/*": ["./assets/js/src/components/*"],
       "Config/*": ["./assets/js/src/config/*"],

@@ -76,6 +76,7 @@ const SectionBuilder = () => {
 
 		if (orderedData) {
 			setBuilderData(orderedData);
+			updateBuilder.mutate(orderedData);
 		}
 	};
 

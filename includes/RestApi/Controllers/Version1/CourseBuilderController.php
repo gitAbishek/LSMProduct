@@ -270,7 +270,8 @@ class CourseBuilderController extends RestController {
 	 * @return array
 	 */
 	public function get_item( $request ) {
-		$course = get_post( absint( $request['id'] ) );
+		$response = array();
+		$course   = get_post( absint( $request['id'] ) );
 
 		if ( is_null( $course ) || $this->post_type !== $course->post_type ) {
 			return new \WP_Error(
@@ -305,7 +306,7 @@ class CourseBuilderController extends RestController {
 	protected function get_course_contents( $request ) {
 		$sections = $this->get_objects(
 			array(
-				'post_parent' => $request['course'],
+				'post_parent' => $request['id'],
 				'post_type'   => 'section',
 			),
 			$request

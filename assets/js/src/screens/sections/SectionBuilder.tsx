@@ -50,7 +50,6 @@ const SectionBuilder = () => {
 		(data: any) => builderAPI.update(courseId, data),
 		{
 			onSuccess: (data) => {
-				console.log(data);
 				queryClient.invalidateQueries('builderSections');
 			},
 		}
@@ -70,8 +69,6 @@ const SectionBuilder = () => {
 			menu_order: totalSectionsLength + 1,
 		});
 	};
-
-	console.log(totalSectionsLength);
 
 	const onDragEnd = (result: DropResult) => {
 		const orderedData = reorder(result, builderData);

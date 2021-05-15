@@ -66,7 +66,7 @@ export const reorder = (result: DropResult, builderData: any) => {
 		};
 
 		const destinationContents = Array.from(destinationSection.contents);
-		destinationContents.splice(destination.index, 0, parseInt(draggableId));
+		destinationContents.splice(destination.index, 0, draggableId);
 
 		const newDestinationSection = {
 			...destinationSection,

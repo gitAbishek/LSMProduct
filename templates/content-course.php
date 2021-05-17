@@ -31,12 +31,12 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 			</span>
 
 			<!-- Featured Image -->
-			<?php if ( empty( $course->get_featured_image_url() ) ): ?>
+			<?php if ( empty( $course->get_featured_image_url() ) ) : ?>
 				<img class="mto-course--img" src="https://via.placeholder.com/150" alt="Course featured image">
-			<?php else: ?>
+			<?php else : ?>
 				<img
 					class="mto-course--img"
-					src="<?php echo $course->get_featured_image_url(); ?>"
+					src="<?php echo esc_url( $course->get_featured_image_url() ); ?>"
 					alt="Course featured image"
 				>
 			<?php endif; ?>
@@ -61,7 +61,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 						<path d="M6.516 14.323l-1.49 6.452a.998.998 0 001.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822 0L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 00.832-.586L12 5.43l1.799 3.981a.998.998 0 00.832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 00-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 00-.276-.94l-3.038-2.962 4.09-.326z"/>
 					</svg>
 				</span>
-				<?php foreach( $course->get_categories( 'name' ) as $category ): ?>
+				<?php foreach ( $course->get_categories( 'name' ) as $category ) : ?>
 					<span class="mto-badge mto-badge-pink mto-tag">
 						<?php echo esc_html( $category->get_name() ); ?>
 					</span>
@@ -82,8 +82,8 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 
 					<time class="mto-inline-block mto-text-sm">10:00 min</time>
 				</span>
-				<a href="#" class="mto-course--btn mto-btn mto-btn-primary">
-					<?php esc_html_e( apply_filters( 'masteriyo_enroll_now', 'Enroll Now' ), 'masteriyo' ); ?>
+				<a href="?add-to-cart=<?php echo absint( $course->get_id() ); ?>" class="mto-course--btn mto-btn mto-btn-primary">
+					<?php esc_html_e( apply_filters( 'masteriyo_add_to_cart_text', 'Enroll Now' ), 'masteriyo' ); ?>
 				</a>
 			</div>
 		</div>

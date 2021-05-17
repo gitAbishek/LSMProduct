@@ -47,6 +47,7 @@ jobs:
 
       - name: Build the application
         run: |
+          yarn build
           yarn release
 
       - name: Deploy to staging server

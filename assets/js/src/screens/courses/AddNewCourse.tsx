@@ -1,5 +1,13 @@
-import { Box, Button, ButtonGroup, Heading, Stack } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	ButtonGroup,
+	Container,
+	Heading,
+	Stack,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import Header from 'Components/layout/Header';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
@@ -38,57 +46,63 @@ const AddNewCourse: React.FC = () => {
 			}),
 		};
 
-		console.log(mergeDeep(data, newData));
 		addMutation.mutate(mergeDeep(data, newData));
 	};
 
 	return (
-		<FormProvider {...methods}>
-			<form onSubmit={methods.handleSubmit(onSubmit)}>
-				<Stack direction="column" spacing="8">
-					<Heading as="h1">{__('Add New Course', 'masteriyo')}</Heading>
+		<Stack direction="column" spacing="8" alignItems="center">
+			<Header />
+			<Container maxW="container.xl">
+				<FormProvider {...methods}>
+					<form onSubmit={methods.handleSubmit(onSubmit)}>
+						<Stack direction="column" spacing="8">
+							<Heading as="h1" size="xl">
+								{__('Add New Course', 'masteriyo')}
+							</Heading>
 
-					<Stack direction="row" spacing="8">
-						<Box
-							flex="1"
-							bg="white"
-							p="10"
-							shadow="box"
-							d="flex"
-							flexDirection="column"
-							justifyContent="space-between">
-							<Stack direction="column" spacing="6">
-								<Stack direction="column" spacing="6">
-									<Name />
-									<Description />
-									<Price />
-								</Stack>
+							<Stack direction="row" spacing="8">
+								<Box
+									flex="1"
+									bg="white"
+									p="10"
+									shadow="box"
+									d="flex"
+									flexDirection="column"
+									justifyContent="space-between">
+									<Stack direction="column" spacing="6">
+										<Stack direction="column" spacing="6">
+											<Name />
+											<Description />
+											<Price />
+										</Stack>
 
-								<ButtonGroup>
-									<Button
-										type="submit"
-										colorScheme="blue"
-										isLoading={addMutation.isLoading}>
-										{__('Add Course', 'masteriyo')}
-									</Button>
-									<Button
-										variant="outline"
-										onClick={() => history.push(routes.courses.list)}>
-										{__('Cancel', 'masteriyo')}
-									</Button>
-								</ButtonGroup>
+										<ButtonGroup>
+											<Button
+												type="submit"
+												colorScheme="blue"
+												isLoading={addMutation.isLoading}>
+												{__('Add Course', 'masteriyo')}
+											</Button>
+											<Button
+												variant="outline"
+												onClick={() => history.push(routes.courses.list)}>
+												{__('Cancel', 'masteriyo')}
+											</Button>
+										</ButtonGroup>
+									</Stack>
+								</Box>
+								<Box w="400px" bg="white" p="10" shadow="box">
+									<Stack direction="column" spacing="6">
+										<Categories />
+										<FeaturedImage />
+									</Stack>
+								</Box>
 							</Stack>
-						</Box>
-						<Box w="400px" bg="white" p="10" shadow="box">
-							<Stack direction="column" spacing="6">
-								<Categories />
-								<FeaturedImage />
-							</Stack>
-						</Box>
-					</Stack>
-				</Stack>
-			</form>
-		</FormProvider>
+						</Stack>
+					</form>
+				</FormProvider>
+			</Container>
+		</Stack>
 	);
 };
 

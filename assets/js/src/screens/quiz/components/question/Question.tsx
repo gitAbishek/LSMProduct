@@ -58,7 +58,6 @@ const Question: React.FC<Props> = (props) => {
 		(data: object) => questionAPI.update(questionData.id, data),
 		{
 			onSuccess: (data: any) => {
-				console.log(data);
 				toast({
 					title: __('Question Updated', 'masteriyo'),
 					description: data.name + __(' has been updated successfully.'),
@@ -94,7 +93,6 @@ const Question: React.FC<Props> = (props) => {
 	};
 
 	const onSubmit = (data: object) => {
-		console.log(data);
 		updateQuestion.mutate(data);
 	};
 

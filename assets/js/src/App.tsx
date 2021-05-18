@@ -1,4 +1,4 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { Box, ChakraProvider, Container } from '@chakra-ui/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -11,7 +11,11 @@ const App = () => {
 	return (
 		<ChakraProvider theme={theme}>
 			<QueryClientProvider client={queryClient}>
-				<Router />
+				<Box id="masteriyo">
+					<Container maxW="container.xl" d="block">
+						<Router />
+					</Container>
+				</Box>
 			</QueryClientProvider>
 		</ChakraProvider>
 	);

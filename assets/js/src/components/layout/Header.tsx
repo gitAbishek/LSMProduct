@@ -4,7 +4,6 @@ import {
 	ButtonGroup,
 	Container,
 	Flex,
-	Icon,
 	Image,
 	Link,
 	List,
@@ -14,7 +13,8 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiBook, BiCog, BiEdit, BiShowAlt } from 'react-icons/bi';
+import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
+import { Link as RouterLink } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 import { Logo } from '../../constants/images';
@@ -37,12 +37,14 @@ const Header = () => {
 	};
 
 	return (
-		<Box bg="white">
-			<Container maxW="container.xl">
+		<Box bg="white" w="full">
+			<Container maxW="container.xl" bg="white">
 				<Flex direction="row" justifyContent="space-between" align="center">
 					<Stack direction="row" spacing="12" align="center">
 						<Box>
-							<Image src={Logo} alt="Masteriyo Logo" w="100px" />
+							<RouterLink to={routes.courses.list}>
+								<Image src={Logo} alt="Masteriyo Logo" w="120px" />
+							</RouterLink>
 						</Box>
 						<List d="flex">
 							<ListItem>
@@ -55,16 +57,7 @@ const Header = () => {
 									Courses
 								</Link>
 							</ListItem>
-							<ListItem>
-								<Link
-									as={NavLink}
-									sx={navLinkStyles}
-									_activeLink={navActiveStyles}
-									to={routes.courses.add}>
-									<ListIcon as={BiEdit} />
-									Course Builder
-								</Link>
-							</ListItem>
+
 							<ListItem>
 								<Link
 									as={NavLink}
@@ -79,12 +72,11 @@ const Header = () => {
 					</Stack>
 
 					<ButtonGroup>
-						<Button
-							leftIcon={<Icon as={BiShowAlt} w="4" h="4" />}
-							variant="outline">
-							{__('Preview', 'masteriyo')}
-						</Button>
-						<Button colorScheme="blue">{__('Save', 'masteriyo')}</Button>
+						<RouterLink to={routes.courses.add}>
+							<Button colorScheme="blue">
+								{__('Add New Course', 'masteriyo')}
+							</Button>
+						</RouterLink>
 					</ButtonGroup>
 				</Flex>
 			</Container>

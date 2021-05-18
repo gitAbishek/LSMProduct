@@ -12,9 +12,7 @@ const App = () => {
 		<ChakraProvider theme={theme}>
 			<QueryClientProvider client={queryClient}>
 				<Box id="masteriyo">
-					<Container maxW="container.xl" d="block">
-						<Router />
-					</Container>
+					<Router />
 				</Box>
 			</QueryClientProvider>
 		</ChakraProvider>

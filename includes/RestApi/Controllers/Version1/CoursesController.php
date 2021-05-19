@@ -253,6 +253,15 @@ class CoursesController extends PostsController {
 	 * @return array
 	 */
 	protected function get_course_data( $course, $context = 'view' ) {
+		$author = masteriyo_get_user( $course->get_author_id( $context ) );
+
+		if ( ! is_null( $author ) ) {
+			$author = array(
+				'id'           => $author->get_id(),
+				'display_name' => $author->get_display_name(),
+			);
+		}
+
 		$data = array(
 			'id'                => $course->get_id(),
 			'name'              => $course->get_name( $context ),
@@ -265,6 +274,9 @@ class CoursesController extends PostsController {
 			'reviews_allowed'   => $course->get_reviews_allowed( $context ),
 			'parent_id'         => $course->get_parent_id( $context ),
 			'menu_order'        => $course->get_menu_order( $context ),
+			'author'            => $author,
+			'date_created'      => $course->get_date_created( $context ),
+			'date_modified'     => $course->get_date_modified( $context ),
 			'featured'          => $course->get_featured( $context ),
 			'price'             => $course->get_price( $context ),
 			'regular_price'     => $course->get_regular_price( $context ),

@@ -259,6 +259,7 @@ class CoursesController extends PostsController {
 			$author = array(
 				'id'           => $author->get_id(),
 				'display_name' => $author->get_display_name(),
+				'avatar_url'   => $author->get_avatar_url(),
 			);
 		}
 

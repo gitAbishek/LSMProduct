@@ -41,7 +41,9 @@ const AllCourses = () => {
 								<Tr>
 									<Th>{__('Title', 'masteriyo')}</Th>
 									<Th>{__('Categories', 'masteriyo')}</Th>
+									<Th>{__('Author', 'masteriyo')}</Th>
 									<Th>{__('Price', 'masteriyo')}</Th>
+									<Th>{__('Date', 'masteriyo')}</Th>
 									<Th>{__('Actions', 'masteriyo')}</Th>
 								</Tr>
 							</Thead>
@@ -55,6 +57,7 @@ const AllCourses = () => {
 											price={course.price}
 											categories={course.categories}
 											key={course.id}
+											previewLink={course.permalink}
 										/>
 									))}
 							</Tbody>

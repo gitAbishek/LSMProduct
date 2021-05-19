@@ -5,19 +5,31 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogOverlay,
+	Avatar,
 	Badge,
 	Button,
 	ButtonGroup,
+	Icon,
 	IconButton,
 	Link,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
 	Stack,
 	Td,
-	Tooltip,
+	Text,
 	Tr,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
-import { BiEdit, BiTrash } from 'react-icons/bi';
+import {
+	BiCalendar,
+	BiDotsVerticalRounded,
+	BiEdit,
+	BiShow,
+	BiTrash,
+} from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 
@@ -30,10 +42,11 @@ interface Props {
 	name: string;
 	price?: any;
 	categories?: any;
+	previewLink?: string;
 }
 
 const CourseList: React.FC<Props> = (props) => {
-	const { id, name, price, categories } = props;
+	const { id, name, price, categories, previewLink } = props;
 	const history = useHistory();
 	const queryClient = useQueryClient();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -81,32 +94,52 @@ const CourseList: React.FC<Props> = (props) => {
 					))}
 				</Stack>
 			</Td>
+			<Td>
+				<Stack direction="row" spacing="2" alignItems="center">
+					<Avatar size="xs" />
+					<Text fontSize="sm" fontWeight="medium" color="gray.600">
+						John Doe
+					</Text>
+				</Stack>
+			</Td>
 			<Td>{price}</Td>
 			<Td>
+				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
+					<Icon as={BiCalendar} />
+					<Text fontSize="sm" fontWeight="medium">
+						19 May, 2021
+					</Text>
+				</Stack>
+			</Td>
+			<Td>
 				<ButtonGroup>
-					<Tooltip label={__('Edit Course', 'masteriyo')}>
-						<IconButton
-							icon={<BiEdit />}
-							colorScheme="blue"
-							variant="link"
-							size="lg"
-							padding="0"
-							minW="0"
-							aria-label={__('Edit Course', 'masteriyo')}
-							onClick={() => onEditPress()}
+					<Button
+						leftIcon={<BiEdit />}
+						colorScheme="blue"
+						size="sm"
+						onClick={() => onEditPress()}>
+						{__('Edit')}
+					</Button>
+					<Menu placement="bottom-end">
+						<MenuButton
+							as={IconButton}
+							icon={<BiDotsVerticalRounded />}
+							variant="outline"
+							rounded="sm"
+							fontSize="large"
+							size="sm"
 						/>
-					</Tooltip>
-					<Tooltip label={__('Delete Course', 'masteriyo')}>
-						<IconButton
-							icon={<BiTrash />}
-							colorScheme="red"
-							variant="link"
-							size="lg"
-							padding="0"
-							aria-label={__('Delete Course', 'masteriyo')}
-							onClick={() => onDeletePress()}
-						/>
-					</Tooltip>
+						<MenuList>
+							<Link href={previewLink} isExternal>
+								<MenuItem icon={<BiShow />}>
+									{__('Preview', 'masteriyo')}
+								</MenuItem>
+							</Link>
+							<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
+								{__('Delete', 'masteriyo')}
+							</MenuItem>
+						</MenuList>
+					</Menu>
 				</ButtonGroup>
 				<AlertDialog
 					isOpen={isDeleteModalOpen}

@@ -58,8 +58,8 @@ const AllCourses = () => {
 											categories={course.categories}
 											key={course.id}
 											createdOn={course.date_created}
-											author={course.author.display_name}
 											permalink={course.permalink}
+											authorId={course.author.id}
 										/>
 									))}
 							</Tbody>

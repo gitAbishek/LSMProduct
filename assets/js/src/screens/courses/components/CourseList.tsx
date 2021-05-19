@@ -30,7 +30,7 @@ import {
 	BiShow,
 	BiTrash,
 } from 'react-icons/bi';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 
 import routes from '../../../constants/routes';
@@ -44,17 +44,18 @@ interface Props {
 	categories?: any;
 	permalink: string;
 	createdOn: string;
-	author: string;
+	authorId: number;
 }
 
 const CourseList: React.FC<Props> = (props) => {
-	const { id, name, price, categories, permalink, createdOn, author } = props;
+	const { id, name, price, categories, permalink, createdOn, authorId } = props;
 	const history = useHistory();
 	const queryClient = useQueryClient();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const courseAPI = new API(urls.courses);
 	const cancelRef = useRef<any>();
 	const createdOnDate = createdOn.split(' ')[0];
+	const userAPI = new API(urls.users);
 
 	const deleteCourse = useMutation((id: number) => courseAPI.delete(id), {
 		onSuccess: () => {
@@ -62,6 +63,16 @@ const CourseList: React.FC<Props> = (props) => {
 			queryClient.invalidateQueries('courseList');
 		},
 	});
+
+	const getAuthor = useQuery(
+		[`author${authorId}`, authorId],
+		() => userAPI.get(authorId),
+		{
+			onSuccess: (data) => {
+				console.log(data);
+			},
+		}
+	);
 
 	const onDeletePress = () => {
 		setDeleteModalOpen(true);
@@ -98,9 +109,16 @@ const CourseList: React.FC<Props> = (props) => {
 				</Stack>
 			</Td>
 			<Td>
-				<Text fontSize="sm" fontWeight="medium" color="gray.600">
-					{author}
-				</Text>
+				<Stack direction="row" spacing="2" alignItems="center">
+					{getAuthor.isSuccess && (
+						<>
+							<Avatar src={getAuthor.data.avatar_urls[48]} size="xs" />
+							<Text fontSize="sm" fontWeight="medium" color="gray.600">
+								{getAuthor.data.name}
+							</Text>
+						</>
+					)}
+				</Stack>
 			</Td>
 			<Td>{price}</Td>
 			<Td>

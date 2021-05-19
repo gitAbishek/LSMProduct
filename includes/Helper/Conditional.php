@@ -392,8 +392,34 @@ function masteriyo_is_course( $course_id ) {
 	$course    = get_post( $course_id );
 
 	if ( is_null( $course ) || 'course' !== $course->post_type ) {
-		return new \WP_Error('rest_invalid_course', 'invalid course id');
+		return new \WP_Error( 'rest_invalid_course', 'invalid course id' );
 	}
 
 	return true;
+}
+
+if ( ! function_exists( 'masteriyo_is_current_user_admin' ) ) {
+	/**
+	 * Check if the current user is admin.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_current_user_admin() {
+		return in_array( 'administrator', wp_get_current_user()->roles );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_is_current_user_manager' ) ) {
+	/**
+	 * Check if the current user is masteriyo manager.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_current_user_manager() {
+		return in_array( 'masteriyo_manager', wp_get_current_user()->roles );
+	}
 }

@@ -28,7 +28,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		'sale_price'        => '_sale_price',
 		'category_ids'      => '_category_ids',
 		'tag_ids'           => '_tag_ids',
-		'difficulty_id'    => '_difficulty_id',
+		'difficulty_id'     => '_difficulty_id',
 		'featured_image'    => '_thumbnail_id',
 		'rating_counts'     => '_rating_counts',
 		'average_rating'    => '_average_rating',
@@ -66,7 +66,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 					'post_password'  => $course->get_post_password( 'edit' ),
 					'post_date'      => $course->get_date_created( 'edit' ),
 					'post_date_gmt'  => $course->get_date_created( 'edit' ),
-					'post_name'      => $course->get_slug( 'edit' )
+					'post_name'      => $course->get_slug( 'edit' ),
 				),
 				$course
 			)
@@ -103,20 +103,22 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			throw new \Exception( __( 'Invalid course.', 'masteriyo' ) );
 		}
 
-		$course->set_props( array(
-			'name'              => $course_post->post_title,
-			'slug'              => $course_post->post_name,
-			'date_created'      => $course_post->post_date_gmt,
-			'date_modified'     => $course_post->post_modified_gmt,
-			'status'            => $course_post->post_status,
-			'description'       => $course_post->post_content,
-			'short_description' => $course_post->post_excerpt,
-			'parent_id'         => $course_post->post_parent,
-			'author_id'         => $course_post->post_author,
-			'menu_order'        => $course_post->menu_order,
-			'post_password'     => $course_post->post_password,
-			'reviews_allowed'   => 'open' === $course_post->comment_status,
-		) );
+		$course->set_props(
+			array(
+				'name'              => $course_post->post_title,
+				'slug'              => $course_post->post_name,
+				'date_created'      => $course_post->post_date_gmt,
+				'date_modified'     => $course_post->post_modified_gmt,
+				'status'            => $course_post->post_status,
+				'description'       => $course_post->post_content,
+				'short_description' => $course_post->post_excerpt,
+				'parent_id'         => $course_post->post_parent,
+				'author_id'         => $course_post->post_author,
+				'menu_order'        => $course_post->menu_order,
+				'post_password'     => $course_post->post_password,
+				'reviews_allowed'   => 'open' === $course_post->comment_status,
+			)
+		);
 
 		$this->read_visibility( $course );
 		$this->read_course_data( $course );
@@ -148,7 +150,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			'menu_order',
 			'date_created',
 			'date_modified',
-			'slug'
+			'slug',
 		);
 
 		// Only update the post when the post data changes.
@@ -212,15 +214,18 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	 * @since 0.1.0
 	 *
 	 * @param Model $course Course object.
-	 * @param array $args	Array of args to pass.alert-danger
+	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$course, $args = array() ) {
 		$id          = $course->get_id();
 		$object_type = $course->get_object_type();
 
-		$args = array_merge( array(
-			'force_delete' => false,
-		), $args );
+		$args = array_merge(
+			array(
+				'force_delete' => false,
+			),
+			$args
+		);
 
 		if ( ! $id ) {
 			return;
@@ -352,19 +357,23 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 
 		$set_props = array();
 
-		$meta_values = array_reduce( $meta_values, function( $result, $meta_value ) {
-			$result[ $meta_value->key ][] = $meta_value->value;
-			return $result;
-		}, array() );
+		$meta_values = array_reduce(
+			$meta_values,
+			function( $result, $meta_value ) {
+				$result[ $meta_value->key ][] = $meta_value->value;
+				return $result;
+			},
+			array()
+		);
 
 		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
 			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
 		}
 
-		$set_props['category_ids']   = $this->get_term_ids( $course, 'course_cat' );
-		$set_props['tag_ids']        = $this->get_term_ids( $course, 'course_tag' );
-		$set_props['difficulty_id']  = $this->get_term_ids( $course, 'course_difficulty' );
+		$set_props['category_ids']  = $this->get_term_ids( $course, 'course_cat' );
+		$set_props['tag_ids']       = $this->get_term_ids( $course, 'course_tag' );
+		$set_props['difficulty_id'] = $this->get_term_ids( $course, 'course_difficulty' );
 
 		$set_props['difficulty_id'] = count( $set_props['difficulty_id'] ) > 0 ? $set_props['difficulty_id'][0] : array();
 
@@ -420,7 +429,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 
 		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
 			return (object) array(
-				'courses'      => $courses,
+				'courses'       => $courses,
 				'total'         => $query->found_posts,
 				'max_num_pages' => $query->max_num_pages,
 			);

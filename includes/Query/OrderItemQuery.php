@@ -29,11 +29,9 @@ class OrderItemQuery extends ObjectQuery {
 		return array_merge(
 			parent::get_default_query_vars(),
 			array(
-				'order_id'  => '',
-				'course_id' => '',
-				'name'      => '',
-				'type'      => '',
-				'quantity'  => '',
+				'order_id' => '',
+				'name'     => '',
+				'type'     => '',
 			)
 		);
 	}

@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Order Item repository.
  */
-abstract class OrderItemRepository extends AbstractRepository  {
+abstract class OrderItemRepository extends AbstractRepository {
 
 	/**
 	 * Meta type. This should match up with
@@ -47,21 +47,29 @@ abstract class OrderItemRepository extends AbstractRepository  {
 	public function create( &$item ) {
 		global $wpdb;
 
-		$wpdb->insert(
+		$is_success = $wpdb->insert(
 			$wpdb->prefix . 'masteriyo_order_items',
-			array(
-				'order_item_name' => $item->get_name(),
-				'order_item_type' => $item->get_type(),
-				'order_id'        => $item->get_order_id(),
+			apply_filters(
+				'masteriyo_new_order_item',
+				array(
+					'order_item_name' => $item->get_name(),
+					'order_item_type' => $item->get_type(),
+					'order_id'        => $item->get_order_id(),
+				),
+				$item
 			)
 		);
-		$item->set_id( $wpdb->insert_id );
-		$this->save_item_data( $item );
-		$item->save_meta_data();
-		$item->apply_changes();
-		$this->clear_cache( $item );
 
-		do_action( 'masteriyo_new_order_item', $item->get_id(), $item, $item->get_order_id() );
+		if ( $is_success && $wpdb->insert_id ) {
+			$item->set_id( $wpdb->insert_id );
+			$this->update_custom_table_meta( $item, true );
+			$item->save_meta_data();
+			$item->apply_changes();
+			$this->clear_cache( $item );
+
+			do_action( 'masteriyo_new_order_item', $item->get_id(), $item, $item->get_order_id() );
+		}
+
 	}
 
 	/**
@@ -75,7 +83,7 @@ abstract class OrderItemRepository extends AbstractRepository  {
 
 		$changes = $item->get_changes();
 
-		if ( array_intersect( array( 'name', 'order_id' ), array_keys( $changes ) ) ) {
+		if ( array_intersect( array( 'order_item_name', 'order_id' ), array_keys( $changes ) ) ) {
 			$wpdb->update(
 				$wpdb->prefix . 'masteriyo_order_items',
 				array(
@@ -87,7 +95,7 @@ abstract class OrderItemRepository extends AbstractRepository  {
 			);
 		}
 
-		$this->save_item_data( $item );
+		$this->update_custom_table_meta( $item );
 		$item->save_meta_data();
 		$item->apply_changes();
 		$this->clear_cache( $item );
@@ -131,7 +139,7 @@ abstract class OrderItemRepository extends AbstractRepository  {
 		$data = wp_cache_get( 'item-' . $item->get_id(), 'order-items' );
 
 		if ( false === $data ) {
-			$data = $wpdb->get_row( $wpdb->prepare( "SELECT order_id, order_item_name FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d LIMIT 1;", $item->get_id() ) );
+			$data = $wpdb->get_row( $wpdb->prepare( "SELECT order_id, name FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d LIMIT 1;", $item->get_id() ) );
 			wp_cache_set( 'item-' . $item->get_id(), $data, 'order-items' );
 		}
 
@@ -141,21 +149,12 @@ abstract class OrderItemRepository extends AbstractRepository  {
 
 		$item->set_props(
 			array(
-				'order_id' => $data->order_id,
-				'name'     => $data->order_item_name,
+				'order_id'        => $data->order_id,
+				'order_item_name' => $data->name,
 			)
 		);
 		$item->read_meta_data();
 	}
-
-	/**
-	 * Saves an item's data to the database / item meta.
-	 * Ran after both create and update, so $item->get_id() will be set.
-	 *
-	 * @since 0.1.0
-	 * @param OrderItem $item Order item object.
-	 */
-	public function save_item_data( &$item ) {}
 
 	/**
 	 * Clear meta cache.
@@ -163,8 +162,8 @@ abstract class OrderItemRepository extends AbstractRepository  {
 	 * @param OrderItem $item Order item object.
 	 */
 	public function clear_cache( &$item ) {
-		wp_cache_delete( 'item-' . $item->get_id(), 'order-items' );
-		wp_cache_delete( 'order-items-' . $item->get_order_id(), 'orders' );
+		wp_cache_delete( 'item-' . $item->get_id(), 'masteriyo-order-items' );
+		wp_cache_delete( 'order-items-' . $item->get_order_id(), 'masteriyo-orders' );
 		wp_cache_delete( $item->get_id(), $this->meta_type . '_meta' );
 	}
 }

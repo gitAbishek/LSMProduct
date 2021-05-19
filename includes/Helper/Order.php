@@ -46,8 +46,8 @@ function masteriyo_get_order( $order ) {
  * @return OrderItem|null
  */
 function masteriyo_get_order_item( $order_item ) {
-	$order_item_obj   = masteriyo( 'order-item' );
-	$order_item_store = masteriyo( 'order-item.store' );
+	$order_item_obj   = masteriyo( 'order-item.course' );
+	$order_item_store = masteriyo( 'order-item.course.store' );
 
 	try {
 		if ( is_a( $order_item, 'ThemeGrill\Masteriyo\Models\Order\OrderItem' ) ) {

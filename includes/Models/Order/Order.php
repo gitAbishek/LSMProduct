@@ -9,9 +9,9 @@
 
 namespace ThemeGrill\Masteriyo\Models\Order;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Repository\OrderRepository;
 use ThemeGrill\Masteriyo\Helper\Utils;
+use ThemeGrill\Masteriyo\Database\Model;
+use ThemeGrill\Masteriyo\Abstracts\Order as AbstractOrder;
 use ThemeGrill\Masteriyo\Cache\CacheInterface;
 
 defined( 'ABSPATH' ) || exit;
@@ -21,34 +21,16 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 0.1.0
  */
-class Order extends Model {
+class Order extends AbstractOrder {
 
 	/**
-	 * This is the name of this object type.
+	 * Stores data about status changes so relevant hooks can be fired.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var string
+	 * @var bool|array
 	 */
-	protected $object_type = 'masteriyo_order';
-
-	/**
-	 * Post type.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	protected $post_type = 'masteriyo_order';
-
-	/**
-	 * Cache group.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	protected $cache_group = 'orders';
+	protected $status_transition = false;
 
 	/**
 	 * Stores order data.
@@ -58,12 +40,18 @@ class Order extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'status'               => false,
-		'total'                => 0,
+		// Abstract order props.
+		'parent_id'            => 0,
+		'status'               => '',
 		'currency'             => '',
-		'expiry_date'          => '',
+		'version'              => '',
+		'prices_include_tax'   => false,
 		'date_created'         => null,
 		'date_modified'        => null,
+		'total'                => 0,
+
+		// Order props.
+		'expiry_date'          => '',
 		'customer_id'          => null,
 		'payment_method'       => '',
 		'payment_method_title' => '',
@@ -73,10 +61,10 @@ class Order extends Model {
 		'created_via'          => '',
 		'customer_ip_address'  => '',
 		'customer_user_agent'  => '',
-		'version'              => '',
 		'order_key'            => '',
 		'customer_note'        => '',
 		'cart_hash'            => '',
+
 		// Billing details.
 		'billing_first_name'   => '',
 		'billing_last_name'    => '',
@@ -91,107 +79,11 @@ class Order extends Model {
 		'billing_phone'        => '',
 	);
 
-	/**
-	 * Get the order if ID
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param OrderRepository $order_repository Order Repository.
-	 */
-	public function __construct( OrderRepository $order_repository ) {
-		$this->repository = $order_repository;
-	}
-
-	/*
-	|--------------------------------------------------------------------------
-	| Non-CRUD Getters
-	|--------------------------------------------------------------------------
-	*/
-
-	/**
-	 * Order permalink.
-	 *
-	 * @return string
-	 */
-	public function get_permalink() {
-		return get_permalink( $this->get_id() );
-	}
-
-	/**
-	 * Returns the children IDs if applicable. Overridden by child classes.
-	 *
-	 * @return array of IDs
-	 */
-	public function get_children() {
-		return array();
-	}
-
-	/**
-	 * Get items for this order.
-	 *
-	 * @return array
-	 */
-	public function get_order_items() {
-		return masteriyo_get_order_items( array( 'order_id' => $this->get_id() ) );
-	}
-
 	/*
 	|--------------------------------------------------------------------------
 	| Getters
 	|--------------------------------------------------------------------------
 	*/
-
-	/**
-	 * Get order status.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_status( $context = 'view' ) {
-		return $this->get_prop( 'status', $context );
-	}
-
-	/**
-	 * Checks the order status against a passed in status.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param array|string $status Status to check.
-	 *
-	 * @return bool
-	 */
-	public function has_status( $status ) {
-		return apply_filters( 'masteriyo_order_has_status', ( is_array( $status ) && in_array( $this->get_status(), $status, true ) ) || $this->get_status() === $status, $this, $status );
-	}
-
-	/**
-	 * Get the total.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return double
-	 */
-	public function get_total( $context = 'view' ) {
-		return $this->get_prop( 'total', $context );
-	}
-
-	/**
-	 * Get the currency.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_currency( $context = 'view' ) {
-		return $this->get_prop( 'currency', $context );
-	}
 
 	/**
 	 * Get the expiry date.
@@ -204,32 +96,6 @@ class Order extends Model {
 	 */
 	public function get_expiry_date( $context = 'view' ) {
 		return $this->get_prop( 'expiry_date', $context );
-	}
-
-	/**
-	 * Get order created date.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_date_created( $context = 'view' ) {
-		return $this->get_prop( 'date_created', $context );
-	}
-
-	/**
-	 * Get order modified date.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_date_modified( $context = 'view' ) {
-		return $this->get_prop( 'date_modified', $context );
 	}
 
 	/**
@@ -336,18 +202,6 @@ class Order extends Model {
 		return $this->get_prop( 'customer_user_agent', $context );
 	}
 
-	/**
-	 * Get version.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_version( $context = 'view' ) {
-		return $this->get_prop( 'version', $context );
-	}
 
 	/**
 	 * Get order_key.
@@ -624,39 +478,6 @@ class Order extends Model {
 	*/
 
 	/**
-	 * Set order status.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $status Order status.
-	 */
-	public function set_status( $status ) {
-		$this->set_prop( 'status', $status );
-	}
-
-	/**
-	 * Set order total.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param double $total order total.
-	 */
-	public function set_total( $total ) {
-		$this->set_prop( 'total', $total );
-	}
-
-	/**
-	 * Set order currency.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $currency Money currency.
-	 */
-	public function set_currency( $currency ) {
-		$this->set_prop( 'currency', $currency );
-	}
-
-	/**
 	 * Set order expiry date.
 	 *
 	 * @since 0.1.0
@@ -665,28 +486,6 @@ class Order extends Model {
 	 */
 	public function set_expiry_date( $expiry_date ) {
 		$this->set_prop( 'expiry_date', $expiry_date );
-	}
-
-	/**
-	 * Set order created date.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
-	 */
-	public function set_date_created( $date = null ) {
-		$this->set_prop( 'date_created', $date );
-	}
-
-	/**
-	 * Set order modified date.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
-	 */
-	public function set_date_modified( $date = null ) {
-		$this->set_prop( 'date_modified', $date );
 	}
 
 	/**
@@ -778,17 +577,6 @@ class Order extends Model {
 	}
 
 	/**
-	 * Set version.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $version Version.
-	 */
-	public function set_version( $version ) {
-		$this->set_prop( 'version', $version );
-	}
-
-	/**
 	 * Set order_key.
 	 *
 	 * @since 0.1.0
@@ -800,11 +588,11 @@ class Order extends Model {
 	}
 
 	/**
-	 * Set customer_note.
+	 * Set customer note.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $customer_note customer_note.
+	 * @param string $customer_note Customer note.
 	 */
 	public function set_customer_note( $customer_note ) {
 		$this->set_prop( 'customer_note', $customer_note );
@@ -1079,102 +867,6 @@ class Order extends Model {
 	public function needs_payment() {
 		$valid_order_statuses = apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( 'mto-pending', 'mto-failed' ), $this );
 		return apply_filters( 'masteriyo_order_needs_payment', ( $this->has_status( $valid_order_statuses ) && $this->get_total() > 0 ), $this, $valid_order_statuses );
-	}
-
-	/**
-	 * Get key for where a certain item type is stored in _items.
-	 *
-	 * @since  0.1.0
-	 * @param  string $item object Order item (product, shipping, fee, coupon, tax).
-	 * @return string
-	 */
-	protected function get_items_key( $item ) {
-		if ( is_a( $item, '\ThemeGrill\Masteriyo\Models\Order\OrderItemCourse' ) ) {
-			return 'course';
-		}
-
-		return apply_filters( 'masteriyo_get_items_key', '', $item );
-	}
-
-	/**
-	 * Return an array of items/products within this order.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string|array $types Types of line items to get (array or string).
-	 * @return OrderItem[]
-	 */
-	public function get_items( $types = 'line_item' ) {
-		$items = array();
-		$types = array_filter( (array) $types );
-
-		foreach ( $types as $type ) {
-			$group = $this->type_to_group( $type );
-
-			if ( $group ) {
-				if ( ! isset( $this->items[ $group ] ) ) {
-					$this->items[ $group ] = array_filter( $this->repository->read_items( $this, $type ) );
-				}
-				// Don't use array_merge here because keys are numeric.
-				$items = $items + $this->items[ $group ];
-			}
-		}
-
-		return apply_filters( 'masteriyo_order_get_items', $items, $this, $types );
-	}
-
-	/**
-	 * Convert a type to a types group.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $type type to lookup.
-	 * @return string
-	 */
-	protected function type_to_group( $type ) {
-		$type_to_group = apply_filters(
-			'masteriyo_order_type_to_group',
-			array(
-				'course'   => 'course_lines',
-				'tax'      => 'tax_lines',
-				'shipping' => 'shipping_lines',
-				'fee'      => 'fee_lines',
-				'coupon'   => 'coupon_lines',
-			)
-		);
-		return isset( $type_to_group[ $type ] ) ? $type_to_group[ $type ] : '';
-	}
-
-	/**
-	 * Adds an order item to this order. The order item will not persist until save.
-	 *
-	 * @since 0.1.0
-	 * @param OrderItem $item Order item object (product, shipping, fee, coupon, tax).
-	 * @return false|void
-	 */
-	public function add_item( $item ) {
-		$items_key = $this->get_items_key( $item );
-
-		if ( ! $items_key ) {
-			return false;
-		}
-
-		// Make sure existing items are loaded so we can append this new one.
-		if ( ! isset( $this->items[ $items_key ] ) ) {
-			$this->items[ $items_key ] = $this->get_items( $item->get_type() );
-		}
-
-		// Set parent.
-		$item->set_order_id( $this->get_id() );
-
-		// Append new row with generated temporary ID.
-		$item_id = $item->get_id();
-
-		if ( $item_id ) {
-			$this->items[ $items_key ][ $item_id ] = $item;
-		} else {
-			$this->items[ $items_key ][ 'new:' . $items_key . count( $this->items[ $items_key ] ) ] = $item;
-		}
 	}
 
 	/**

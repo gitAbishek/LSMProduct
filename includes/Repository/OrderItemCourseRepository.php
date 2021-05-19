@@ -20,26 +20,6 @@ use ThemeGrill\Masteriyo\Repository\RepositoryInterface;
 class OrderItemCourseRepository extends OrderItemRepository implements RepositoryInterface {
 
 	/**
-	 * Meta type.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	protected $meta_type = 'order_item';
-
-	/**
-	 * This only needs set if you are using a custom metadata type (for example payment tokens.
-	 * This should be the name of the field your table uses for associating meta with objects.
-	 * For example, in payment_tokenmeta, this would be payment_token_id.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	protected $object_id_field_for_meta = 'order_item_id';
-
-	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
 	 * @since 0.1.0
@@ -60,37 +40,34 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	 *
 	 * @param Model $order_item Order Item object.
 	 */
-	public function create( &$order_item ) {
-		global $wpdb;
+	// public function create( &$order_item ) {
+	// 	global $wpdb;
 
-		$is_success = $wpdb->insert(
-			$this->get_table_name(),
-			apply_filters(
-				'masteriyo_new_course_data',
-				array(
-					'order_id'  => $order_item->get_order_id( 'edit' ),
-					'course_id' => $order_item->get_course_id( 'edit' ),
-					'name'      => $order_item->get_name( 'edit' ),
-					'type'      => $order_item->get_type( 'edit' ),
-					'quantity'  => $order_item->get_quantity( 'edit' ),
-					'total'     => $order_item->get_total( 'edit' ),
-				),
-				$order_item
-			)
-		);
+	// 	$is_success = $wpdb->insert(
+	// 		$this->get_table_name(),
+	// 		apply_filters(
+	// 			'masteriyo_new_course_data',
+	// 			array(
+	// 				'order_id'        => $order_item->get_order_id( 'edit' ),
+	// 				'order_item_name' => $order_item->get_name( 'edit' ),
+	// 				'order_item_type' => $order_item->get_type( 'edit' ),
+	// 			),
+	// 			$order_item
+	// 		)
+	// 	);
 
-		if ( $is_success && $wpdb->insert_id ) {
-			$order_item->set_id( $wpdb->insert_id );
-			$this->update_custom_table_meta( $order_item, true );
-			// TODO Invalidate caches.
+	// 	if ( $is_success && $wpdb->insert_id ) {
+	// 		$order_item->set_id( $wpdb->insert_id );
+	// 		$this->update_custom_table_meta( $order_item, true );
+	// 		// TODO Invalidate caches.
 
-			$order_item->save_meta_data();
-			$order_item->apply_changes();
-			$this->clear_cache( $order_item );
+	// 		$order_item->save_meta_data();
+	// 		$order_item->apply_changes();
+	// 		$this->clear_cache( $order_item );
 
-			do_action( 'masteriyo_new_order_item', $wpdb->insert_id, $order_item );
-		}
-	}
+	// 		do_action( 'masteriyo_new_order_item', $wpdb->insert_id, $order_item );
+	// 	}
+	// }
 
 	/**
 	 * Read an order item.
@@ -116,9 +93,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 
 			$results = $wpdb->get_results(
 				$wpdb->prepare(
-					"SELECT * FROM {$table_name}
-					WHERE id = %d
-					LIMIT 1",
+					"SELECT * FROM {$table_name} WHERE order_item_id = %d LIMIT 1",
 					$order_item->get_id()
 				)
 			);
@@ -134,12 +109,9 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 
 		$order_item->set_props(
 			array(
-				'order_id'  => $order_item_obj->order_id,
-				'course_id' => $order_item_obj->course_id,
-				'name'      => $order_item_obj->name,
-				'type'      => $order_item_obj->type,
-				'quantity'  => $order_item_obj->quantity,
-				'total'     => $order_item_obj->total,
+				'order_id'        => $order_item_obj->order_id,
+				'order_item_name' => $order_item_obj->name,
+				'order_item_type' => $order_item_obj->type,
 			)
 		);
 
@@ -167,12 +139,12 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 			$GLOBALS['wpdb']->update(
 				$this->get_table_name(),
 				array(
-					'order_id'  => $order_item->get_order_id( 'edit' ),
-					'course_id' => $order_item->get_course_id( 'edit' ),
-					'name'      => $order_item->get_name( 'edit' ),
-					'type'      => $order_item->get_type( 'edit' ),
-					'quantity'  => $order_item->get_quantity( 'edit' ),
-					'total'     => $order_item->get_total( 'edit' ),
+					'order_id'        => $order_item->get_order_id( 'edit' ),
+					'course_id'       => $order_item->get_course_id( 'edit' ),
+					'order_item_name' => $order_item->get_name( 'edit' ),
+					'order_item_type' => $order_item->get_type( 'edit' ),
+					'quantity'        => $order_item->get_quantity( 'edit' ),
+					'total'           => $order_item->get_total( 'edit' ),
 				),
 				array(
 					'id' => $order_item->get_id(),
@@ -218,7 +190,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		$GLOBALS['wpdb']->delete(
 			$this->get_table_name(),
 			array(
-				'id' => $order_item->get_id(),
+				'order_item_id' => $order_item->get_id(),
 			)
 		);
 		$this->clear_cache( $order_item );
@@ -435,9 +407,9 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 			$where_values[] = $value;
 			$index++;
 		}
-		$sql            = "SELECT id FROM {$table_name} {$where_clause}";
+		$sql            = "SELECT order_item_id FROM {$table_name} {$where_clause}";
 		$order_item_ids = $wpdb->get_results( $wpdb->prepare( $sql, $where_values ) );
-		$order_item_ids = wp_list_pluck( $order_item_ids, 'id' );
+		$order_item_ids = wp_list_pluck( $order_item_ids, 'order_item_id' );
 
 		do_action( 'masteriyo_before_batch_delete_' . $object_type, $query_vars );
 
@@ -446,7 +418,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		 */
 		$meta_table_info = $this->get_meta_table_info();
 		$item_ids_string = implode( ', ', $order_item_ids );
-		$wpdb->query( "DELETE FROM {$meta_table_info['table']} WHERE id in ({$item_ids_string})" );
+		$wpdb->query( "DELETE FROM {$meta_table_info['table']} WHERE order_item_id in ({$item_ids_string})" );
 
 		// Delete order items.
 		$result = $wpdb->delete( $table_name, $where, $where_format );
@@ -458,42 +430,5 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		}
 
 		do_action( 'masteriyo_after_batch_delete_' . $object_type, $query_vars, $result );
-	}
-
-	/**
-	 * Clear meta cache.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param OrderItem $item Order item object.
-	 */
-	public function clear_cache( &$item ) {
-		masteriyo( 'cache' )->delete( 'masteriyo-item-' . $item->get_id(), 'masteriyo-order-items' );
-		masteriyo( 'cache' )->delete( 'masteriyo-order-items-' . $item->get_order_id(), 'masteriyo-orders' );
-		masteriyo( 'cache' )->delete( $item->get_id(), $this->meta_type . '_meta' );
-	}
-
-	/**
-	 * Saves an item's data to the database / item meta.
-	 * Ran after both create and update, so $id will be set.
-	 *
-	 * @since 3.0.0
-	 * @param WC_Order_Item_Product $item Product order item object.
-	 */
-	public function save_item_data( &$item ) {
-		$id                = $item->get_id();
-		$changes           = $item->get_changes();
-		$meta_key_to_props = array(
-			'course_id' => '_course_id',
-			'quantity'  => '_quantitiy',
-			'subtotal'  => '_subtotal',
-			'total'     => '_total',
-		);
-
-		$props_to_update = $this->get_props_to_update( $item, $meta_key_to_props, 'order_item' );
-
-		foreach ( $props_to_update as $meta_key => $prop ) {
-			update_metadata( 'order_item', $id, $meta_key, $item->{"get_$prop"}( 'edit' ) );
-		}
 	}
 }

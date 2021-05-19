@@ -40,6 +40,7 @@ class OrderItemCourse extends OrderItem {
 	 * @param OrderItemCourseRepository $repository Order Repository.
 	 */
 	public function __construct( OrderItemCourseRepository $repository ) {
+		parent::__construct();
 		$this->repository = $repository;
 	}
 

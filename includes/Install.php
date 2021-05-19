@@ -106,16 +106,13 @@ class Install {
 	 */
 	private static function get_order_items_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_order_items` (
-			id BIGINT UNSIGNED AUTO_INCREMENT,
+			order_item_id BIGINT UNSIGNED AUTO_INCREMENT,
+			order_item_name text NOT NULL,
+			order_item_type  varchar(200) NOT NULL,
 			order_id BIGINT UNSIGNED NOT NULL,
-			course_id BIGINT UNSIGNED NOT NULL,
-			`name` text,
-			`type` varchar(200),
-			quantity BIGINT,
-			total BIGINT,
-			PRIMARY KEY (id),
-			KEY course_id (course_id),
-			KEY order_id (order_id)
+			PRIMARY KEY (order_item_id),
+			KEY order_id (order_id),
+			KEY order_item_type (order_item_type)
 		) $charset_collate;";
 
 		return $sql;

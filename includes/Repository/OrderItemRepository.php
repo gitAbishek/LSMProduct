@@ -23,7 +23,7 @@ class OrderItemRepository implements OrderItemRepositoryInterface {
 	 *
 	 * @since  0.1.0
 	 * @param  int $order_id Order ID .
-	 * @param  array $item order_item_name and order_item_type.
+	 * @param  array $item name and type.
 	 * @return int Order Item ID
 	 */
 	public function add_order_item( $order_id, $item ) {
@@ -31,8 +31,8 @@ class OrderItemRepository implements OrderItemRepositoryInterface {
 		$wpdb->insert(
 			$wpdb->prefix . 'masteriyo_order_items',
 			array(
-				'order_item_name' => $item['order_item_name'],
-				'order_item_type' => $item['order_item_type'],
+				'order_item_name' => $item['name'],
+				'order_item_type' => $item['type'],
 				'order_id'        => $order_id,
 			),
 			array(
@@ -54,7 +54,7 @@ class OrderItemRepository implements OrderItemRepositoryInterface {
 	 *
 	 * @since  0.1.0
 	 * @param  int   $item_id Item ID.
-	 * @param  array $item order_item_name or order_item_type.
+	 * @param  array $item name or type.
 	 * @return boolean
 	 */
 	public function update_order_item( $item_id, $item ) {
@@ -160,16 +160,16 @@ class OrderItemRepository implements OrderItemRepositoryInterface {
 	 * @param int $item_id Item ID.
 	 * @return string|null Order item type or null if no order item entry found.
 	 */
-	public function get_order_item_type( $item_id ) {
+	public function get_type( $item_id ) {
 		global $wpdb;
-		$order_item_type = $wpdb->get_var(
+		$type = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT order_item_type FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d LIMIT 1;",
+				"SELECT type FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d LIMIT 1;",
 				$item_id
 			)
 		);
 
-		return $order_item_type;
+		return $type;
 	}
 
 	/**

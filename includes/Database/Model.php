@@ -142,7 +142,7 @@ abstract class Model {
 	 *
 	 * @return array
 	 */
-	public function _sleep() {
+	public function __sleep() {
 		return array( 'id' );
 	}
 

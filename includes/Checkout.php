@@ -697,8 +697,6 @@ class Checkout {
 				);
 			}
 
-			// $item->set_backorder_meta();
-
 			do_action( 'masteriyo_checkout_create_order_line_item', $item, $cart_item_key, $values, $order );
 
 			// Add item to order and save.

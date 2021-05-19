@@ -80,6 +80,8 @@ class Masteriyo extends Container {
 
 		$this->get( 'formhandlers' )->register();
 
+		$this->define_tables();
+
 		// Initilize the hooks.
 		$this->init_hooks();
 	}
@@ -98,6 +100,8 @@ class Masteriyo extends Container {
 		add_filter( 'plugin_action_links_' . Constants::get( 'MASTERIYO_PLUGIN_BASENAME' ), array( $this, 'add_plugin_action_links' ) );
 		add_filter( 'template_include', array( $this, 'template_loader' ) );
 		add_filter( 'template_redirect', array( $this, 'redirect_reset_password_link' ) );
+
+		add_action( 'switch_blog', array( $this, 'define_tables' ), 0 );
 	}
 
 	/**
@@ -377,6 +381,25 @@ class Masteriyo extends Container {
 			$message = sprintf( esc_html__( 'Minimum WordPress version required to work Masteriyo is v4.7.', 'masteriyo' ) );
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			printf( '<div class="notice notice-warning"><p><strong>%s</strong>: %s</p></div>', 'Masteriyo', $message );
+		}
+	}
+
+	/**
+	 * Register custom tables within $wpdb object.
+	 *
+	 * @since 0.1.0
+	 */
+	public function define_tables() {
+		global $wpdb;
+
+		// List of tables without prefixes.
+		$tables = array(
+			'order_itemmeta' => 'masteriyo_order_itemmeta',
+		);
+
+		foreach ( $tables as $name => $table ) {
+			$wpdb->$name    = $wpdb->prefix . $table;
+			$wpdb->tables[] = $table;
 		}
 	}
 }

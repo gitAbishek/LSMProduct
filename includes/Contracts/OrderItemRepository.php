@@ -23,7 +23,7 @@ interface OrderItemRepository {
 	 * Add an order item to an order.
 	 *
 	 * @param  int   $order_id Order ID.
-	 * @param  array $item order_item_name and order_item_type.
+	 * @param  array $item name and type.
 	 * @return int   Order Item ID
 	 */
 	public function add_order_item( $order_id, $item );
@@ -32,7 +32,7 @@ interface OrderItemRepository {
 	 * Update an order item.
 	 *
 	 * @param  int   $item_id Item ID.
-	 * @param  array $item order_item_name or order_item_type.
+	 * @param  array $item name or type.
 	 * @return boolean
 	 */
 	public function update_order_item( $item_id, $item );
@@ -102,5 +102,5 @@ interface OrderItemRepository {
 	 * @param  int $item_id Item ID.
 	 * @return string
 	 */
-	public function get_order_item_type( $item_id );
+	public function get_type( $item_id );
 }

@@ -18,8 +18,32 @@ class Install {
 	 */
 	public static function init() {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		self::install();
 		self::init_db();
 		self::create_roles();
+	}
+
+	/**
+	 * Update Masteriyo information.
+	 *
+	 * @since 0.1.0
+	 */
+	public static function install() {
+		$masteriyo_version = get_option( 'masteriyo_plugin_version' );
+
+		if ( empty( $masteriyo_version ) ) {
+			if ( empty( $masteriyo_version ) && apply_filters( 'masteriyo_enable_setup_wizard', true ) ) {
+				set_transient( '_masteriyo_activation_redirect', 1, 30 );
+			}
+		}
+		update_option( 'masteriyo_plugin_version', MASTERIYO_VERSION );
+
+		// Save the install date.
+		if ( false == get_option( 'masteriyo_install_date' ) ) {
+			update_option( 'masteriyo_install_date', current_time( 'timestamp' ) );
+		}
+
+		flush_rewrite_rules();
 	}
 
 	/**

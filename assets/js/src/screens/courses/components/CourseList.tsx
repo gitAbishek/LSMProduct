@@ -42,16 +42,18 @@ interface Props {
 	name: string;
 	price?: any;
 	categories?: any;
-	previewLink?: string;
+	permalink: string;
+	createdOn: string;
 }
 
 const CourseList: React.FC<Props> = (props) => {
-	const { id, name, price, categories, previewLink } = props;
+	const { id, name, price, categories, permalink, createdOn } = props;
 	const history = useHistory();
 	const queryClient = useQueryClient();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const courseAPI = new API(urls.courses);
 	const cancelRef = useRef<any>();
+	const createdOnDate = createdOn.split(' ')[0];
 
 	const deleteCourse = useMutation((id: number) => courseAPI.delete(id), {
 		onSuccess: () => {
@@ -107,7 +109,7 @@ const CourseList: React.FC<Props> = (props) => {
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
 					<Icon as={BiCalendar} />
 					<Text fontSize="sm" fontWeight="medium">
-						19 May, 2021
+						{createdOnDate}
 					</Text>
 				</Stack>
 			</Td>
@@ -130,7 +132,7 @@ const CourseList: React.FC<Props> = (props) => {
 							size="sm"
 						/>
 						<MenuList>
-							<Link href={previewLink} isExternal>
+							<Link href={permalink} isExternal>
 								<MenuItem icon={<BiShow />}>
 									{__('Preview', 'masteriyo')}
 								</MenuItem>

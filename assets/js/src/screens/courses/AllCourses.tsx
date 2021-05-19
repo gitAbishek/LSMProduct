@@ -57,7 +57,8 @@ const AllCourses = () => {
 											price={course.price}
 											categories={course.categories}
 											key={course.id}
-											previewLink={course.permalink}
+											createdOn={course.date_created}
+											permalink={course.permalink}
 										/>
 									))}
 							</Tbody>

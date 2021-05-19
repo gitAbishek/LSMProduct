@@ -44,10 +44,11 @@ interface Props {
 	categories?: any;
 	permalink: string;
 	createdOn: string;
+	author: string;
 }
 
 const CourseList: React.FC<Props> = (props) => {
-	const { id, name, price, categories, permalink, createdOn } = props;
+	const { id, name, price, categories, permalink, createdOn, author } = props;
 	const history = useHistory();
 	const queryClient = useQueryClient();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -97,12 +98,9 @@ const CourseList: React.FC<Props> = (props) => {
 				</Stack>
 			</Td>
 			<Td>
-				<Stack direction="row" spacing="2" alignItems="center">
-					<Avatar size="xs" />
-					<Text fontSize="sm" fontWeight="medium" color="gray.600">
-						John Doe
-					</Text>
-				</Stack>
+				<Text fontSize="sm" fontWeight="medium" color="gray.600">
+					{author}
+				</Text>
 			</Td>
 			<Td>{price}</Td>
 			<Td>

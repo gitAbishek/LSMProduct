@@ -30,7 +30,7 @@ const AddNewCourse: React.FC = () => {
 
 	const addMutation = useMutation((data) => courseAPI.store(data), {
 		onSuccess: (data) => {
-			history.push(routes.courses.edit.replace(':courseId', data.id));
+			history.push(routes.builder.replace(':courseId', data.id));
 		},
 	});
 

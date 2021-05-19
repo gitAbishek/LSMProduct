@@ -19,7 +19,7 @@ const Router: React.FC = () => {
 				<Route path={routes.courses.edit} exact>
 					<screens.EditCourse />
 				</Route>
-				<Route path={routes.section} exact>
+				<Route path={routes.builder} exact>
 					<screens.SectionBuilder />
 				</Route>
 				<Route path={routes.lesson.add} exact>

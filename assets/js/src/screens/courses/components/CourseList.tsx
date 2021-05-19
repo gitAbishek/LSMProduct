@@ -68,7 +68,7 @@ const CourseList: React.FC<Props> = (props) => {
 			<Td>
 				<Link
 					as={RouterLink}
-					to={routes.section.replace(':courseId', id.toString())}
+					to={routes.courses.edit.replace(':courseId', id.toString())}
 					fontWeight="semibold"
 					_hover={{ color: 'blue.500' }}>
 					{name}

@@ -15,6 +15,7 @@ const routes = {
 	},
 	settings: '/settings',
 	notFound: '/not-found',
+	builder: '/courses/:courseId/builder',
 };
 
 export default routes;

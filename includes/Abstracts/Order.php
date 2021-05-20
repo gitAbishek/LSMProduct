@@ -540,7 +540,7 @@ abstract class Order extends Model {
 	 * @param string|array $types Types of line items to get (array or string).
 	 * @return OrderItem[]
 	 */
-	public function get_items( $types = 'line_item' ) {
+	public function get_items( $types = 'course' ) {
 		$items = array();
 		$types = array_filter( (array) $types );
 

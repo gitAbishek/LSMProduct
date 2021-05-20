@@ -35,7 +35,7 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		'query.questions',
 		'query.faqs',
 		'query.orders',
-		'query.orders.items',
+		'query.order-items',
 
 		'\ThemeGrill\Masteriyo\Query\SectionQuery',
 		'\ThemeGrill\Masteriyo\Query\LessonQuery',
@@ -61,7 +61,7 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'query.questions', QuestionQuery::class );
 		$this->getContainer()->add( 'query.faqs', FaqQuery::class );
 		$this->getContainer()->add( 'query.orders', OrderQuery::class );
-		$this->getContainer()->add( 'query.orders.items', OrderItemQuery::class );
+		$this->getContainer()->add( 'query.order-items', OrderItemQuery::class );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\SectionQuery' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\LessonQuery' );

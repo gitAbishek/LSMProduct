@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Order Item repository.
  */
-abstract class OrderItemRepository extends AbstractRepository {
+class OrderItemRepository extends AbstractRepository {
 
 	/**
 	 * Meta type. This should match up with
@@ -165,5 +165,112 @@ abstract class OrderItemRepository extends AbstractRepository {
 		wp_cache_delete( 'item-' . $item->get_id(), 'masteriyo-order-items' );
 		wp_cache_delete( 'order-items-' . $item->get_order_id(), 'masteriyo-orders' );
 		wp_cache_delete( $item->get_id(), $this->meta_type . '_meta' );
+	}
+
+	/**
+	 * Fetch courses.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $query_vars Query vars.
+	 * @return OrderItem[]
+	 */
+	public function query( $query_vars ) {
+		global $wpdb;
+
+		$order_id = absint( $query_vars['order_id'] );
+
+		$order_items = array();
+		$order       = get_post( $order_id );
+
+		if ( is_null( $order ) || 'mto-order' !== $order->post_type ) {
+			return $$order_items;
+		}
+
+		$items = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}masteriyo_order_items WHERE order_id = %d",
+				$order_id
+			)
+		);
+
+		$item_objects = array_filter( array_map( array( $this, 'get_order_item_object' ), $items ) );
+
+		$item_ids     = wp_list_pluck( $items, 'order_item_id' );
+		$item_ids_str = implode( ',', $item_ids );
+
+		$item_metas = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}masteriyo_order_itemmeta WHERE order_item_id IN (%s)",
+				$item_ids
+			)
+		);
+
+		$item_objects = array_filter(
+			array_map(
+				function( $item_object ) use ( $item_metas ) {
+					return $this->get_order_item_meta( $item_object, $item_metas );
+				},
+				$item_objects
+			)
+		);
+
+		return $item_objects;
+	}
+
+	/**
+	 * Get order item object.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param stdclass $item Order item
+	 * @return OrderItem
+	 */
+	public function get_order_item_object( $item ) {
+		$type = trim( $item->order_item_type );
+		$type = empty( $type ) ? 'course' : $type;
+
+		try {
+			$item_obj = masteriyo( "order-item.{$type}" );
+			$item_obj->set_id( $item->order_item_id );
+			$item_obj->set_props(
+				array(
+					'order_id' => $item->order_id,
+					'name'     => $item->order_item_name,
+				)
+			);
+		} catch ( \Exception $error ) {
+			error_log( $error->getMessage() );
+		}
+
+		return $item_obj;
+	}
+
+	/**
+	 * Get order item meta.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param OrderItem $item Order item object.
+	 * @param stdclass $item_metas List of all order item meta.
+	 *
+	 * @return
+	 */
+	public function get_order_item_meta( $item, $item_metas ) {
+		$item_metas = array_filter(
+			$item_metas,
+			function ( $item_meta ) use ( $item ) {
+				return absint( $item_meta->order_item_id ) === $item->get_id();
+			}
+		);
+
+		foreach ( $item_metas as $item_meta ) {
+			$function = "set_{$item_meta->meta_key}";
+			if ( is_callable( array( $item, $function ) ) ) {
+				$item->$function( $item_meta->meta_value );
+			}
+		}
+
+		return $item;
 	}
 }

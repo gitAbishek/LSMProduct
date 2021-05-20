@@ -27,47 +27,11 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'course_id' => '_course_id',
-		'quantity'  => '_quantitiy',
-		'subtotal'  => '_subtotal',
-		'total'     => '_total',
+		'course_id' => 'course_id',
+		'quantity'  => 'quantitiy',
+		'subtotal'  => 'subtotal',
+		'total'     => 'total',
 	);
-
-	/**
-	 * Create an order item in the database.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Model $order_item Order Item object.
-	 */
-	// public function create( &$order_item ) {
-	// 	global $wpdb;
-
-	// 	$is_success = $wpdb->insert(
-	// 		$this->get_table_name(),
-	// 		apply_filters(
-	// 			'masteriyo_new_course_data',
-	// 			array(
-	// 				'order_id'        => $order_item->get_order_id( 'edit' ),
-	// 				'order_item_name' => $order_item->get_name( 'edit' ),
-	// 				'order_item_type' => $order_item->get_type( 'edit' ),
-	// 			),
-	// 			$order_item
-	// 		)
-	// 	);
-
-	// 	if ( $is_success && $wpdb->insert_id ) {
-	// 		$order_item->set_id( $wpdb->insert_id );
-	// 		$this->update_custom_table_meta( $order_item, true );
-	// 		// TODO Invalidate caches.
-
-	// 		$order_item->save_meta_data();
-	// 		$order_item->apply_changes();
-	// 		$this->clear_cache( $order_item );
-
-	// 		do_action( 'masteriyo_new_order_item', $wpdb->insert_id, $order_item );
-	// 	}
-	// }
 
 	/**
 	 * Read an order item.

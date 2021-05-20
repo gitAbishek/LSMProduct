@@ -38,14 +38,14 @@ class OrdersController extends PostsController {
 	 *
 	 * @var string
 	 */
-	protected $object_type = 'masteriyo_order';
+	protected $object_type = 'order';
 
 	/**
 	 * Post type.
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'masteriyo_order';
+	protected $post_type = 'mto-order';
 
 	/**
 	 * If object is hierarchical.
@@ -149,7 +149,7 @@ class OrdersController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['status']      = array(
+		$params['status'] = array(
 			'description'       => __( 'Limit result set to orders assigned a specific status.', 'masteriyo' ),
 			'type'              => 'string',
 			'enum'              => array_merge( array_keys( masteriyo_get_order_statuses() ), array( 'any' ) ),
@@ -157,9 +157,17 @@ class OrdersController extends PostsController {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['customer_id'] = array(
-			'description'       => __( 'Filter orders by customer ID.', 'masteriyo' ),
-			'type'              => 'number',
+
+		$params['customer'] = array(
+			'description'       => __( 'Limit result set to orders assigned a specific customer.', 'masteriyo' ),
+			'type'              => 'integer',
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['course'] = array(
+			'description'       => __( 'Limit result set to orders assigned a specific course.', 'masteriyo' ),
+			'type'              => 'integer',
 			'sanitize_callback' => 'absint',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
@@ -228,29 +236,31 @@ class OrdersController extends PostsController {
 	 * @return array
 	 */
 	protected function get_order_data( $order, $context = 'view' ) {
+		$items = $order->get_items();
+
 		$data = array(
-			'id'                  => $order->get_id(),
-			'permalink'           => $order->get_permalink(),
-			'status'              => $order->get_status( $context ),
-			'total'               => $order->get_total( $context ),
-			'currency'            => $order->get_currency( $context ),
-			'expiry_date'         => $order->get_expiry_date( $context ),
-			'date_created'        => $order->get_date_created( $context ),
-			'date_modified'       => $order->get_date_modified( $context ),
-			'customer_id'         => $order->get_customer_id( $context ),
-			'payment_method'      => $order->get_payment_method( $context ),
-			'payment_method_title'=> $order->get_payment_method_title( $context ),
-			'transaction_id'      => $order->get_transaction_id( $context ),
-			'date_paid'           => $order->get_date_paid( $context ),
-			'date_completed'      => $order->get_date_completed( $context ),
-			'created_via'         => $order->get_created_via( $context ),
-			'customer_ip_address' => $order->get_customer_ip_address( $context ),
-			'customer_user_agent' => $order->get_customer_user_agent( $context ),
-			'version'             => $order->get_version( $context ),
-			'order_key'           => $order->get_order_key( $context ),
-			'customer_note'       => $order->get_customer_note( $context ),
-			'cart_hash'           => $order->get_cart_hash( $context ),
-			'billing'             => array(
+			'id'                   => $order->get_id(),
+			'permalink'            => $order->get_permalink(),
+			'status'               => $order->get_status( $context ),
+			'total'                => $order->get_total( $context ),
+			'currency'             => $order->get_currency( $context ),
+			'expiry_date'          => $order->get_expiry_date( $context ),
+			'date_created'         => $order->get_date_created( $context ),
+			'date_modified'        => $order->get_date_modified( $context ),
+			'customer_id'          => $order->get_customer_id( $context ),
+			'payment_method'       => $order->get_payment_method( $context ),
+			'payment_method_title' => $order->get_payment_method_title( $context ),
+			'transaction_id'       => $order->get_transaction_id( $context ),
+			'date_paid'            => $order->get_date_paid( $context ),
+			'date_completed'       => $order->get_date_completed( $context ),
+			'created_via'          => $order->get_created_via( $context ),
+			'customer_ip_address'  => $order->get_customer_ip_address( $context ),
+			'customer_user_agent'  => $order->get_customer_user_agent( $context ),
+			'version'              => $order->get_version( $context ),
+			'order_key'            => $order->get_order_key( $context ),
+			'customer_note'        => $order->get_customer_note( $context ),
+			'cart_hash'            => $order->get_cart_hash( $context ),
+			'billing'              => array(
 				'first_name' => $order->get_billing_first_name(),
 				'last_name'  => $order->get_billing_last_name(),
 				'company'    => $order->get_billing_company(),
@@ -263,6 +273,7 @@ class OrdersController extends PostsController {
 				'email'      => $order->get_billing_email(),
 				'phone'      => $order->get_billing_phone(),
 			),
+			'course_lines'         => $this->get_order_item_course( $items, $context ),
 		);
 
 		return $data;
@@ -304,69 +315,69 @@ class OrdersController extends PostsController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'                  => array(
+				'id'                   => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'permalink'           => array(
+				'permalink'            => array(
 					'description' => __( 'Order URL.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_created'        => array(
+				'date_created'         => array(
 					'description' => __( "The date the Order was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_created_gmt'    => array(
+				'date_created_gmt'     => array(
 					'description' => __( 'The date the Order was created, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_modified'       => array(
+				'date_modified'        => array(
 					'description' => __( "The date the Order was last modified, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_modified_gmt'   => array(
+				'date_modified_gmt'    => array(
 					'description' => __( 'The date the Order was last modified, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'status'              => array(
+				'status'               => array(
 					'description' => __( 'Order status.', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'pending',
 					'enum'        => array_keys( masteriyo_get_order_statuses() ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'total'               => array(
+				'total'                => array(
 					'description' => __( 'Total amount of the order.', 'masteriyo' ),
 					'type'        => 'number',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'currency'            => array(
+				'currency'             => array(
 					'description' => __( 'Currency.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'expiry_date'         => array(
+				'expiry_date'          => array(
 					'description' => __( 'Expiry date of this order.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'customer_id'         => array(
+				'customer_id'          => array(
 					'description' => __( 'Customer ID.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'payment_method'      => array(
+				'payment_method'       => array(
 					'description' => __( 'Payment method.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -379,42 +390,42 @@ class OrdersController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 					'enum'        => array( 'paypal' ),
 				),
-				'transaction_id'      => array(
+				'transaction_id'       => array(
 					'description' => __( 'Transaction ID.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_paid'           => array(
+				'date_paid'            => array(
 					'description' => __( 'Date of payment.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_completed'      => array(
+				'date_completed'       => array(
 					'description' => __( 'Date of order completion.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'created_via'         => array(
+				'created_via'          => array(
 					'description' => __( 'Method of order creation.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'customer_ip_address' => array(
+				'customer_ip_address'  => array(
 					'description' => __( 'Customer IP address.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'customer_user_agent' => array(
+				'customer_user_agent'  => array(
 					'description' => __( 'Customer user agent.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'version'             => array(
+				'version'              => array(
 					'description' => __( 'Version of Masteriyo which last updated the order.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'order_key'           => array(
+				'order_key'            => array(
 					'description' => __( 'Order key.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -441,64 +452,64 @@ class OrdersController extends PostsController {
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'last_name' => array(
+						'last_name'  => array(
 							'description' => __( 'Order billing last name.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'company' => array(
+						'company'    => array(
 							'description' => __( 'Order billing company name.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'address_1' => array(
+						'address_1'  => array(
 							'description' => __( 'Order billing address 1.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'address_1' => array(
+						'address_1'  => array(
 							'description' => __( 'Order billing address 1.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'address_2' => array(
+						'address_2'  => array(
 							'description' => __( 'Order billing address 2.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'city' => array(
+						'city'       => array(
 							'description' => __( 'Order billing city.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'postcode' => array(
+						'postcode'   => array(
 							'description' => __( 'Order billing post code.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'country' => array(
+						'country'    => array(
 							'description' => __( 'Order billing country.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'state' => array(
+						'state'      => array(
 							'description' => __( 'Order billing state.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'email' => array(
+						'email'      => array(
 							'description' => __( 'Order billing email address.', 'masteriyo' ),
 							'type'        => 'email',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'phone' => array(
+						'phone'      => array(
 							'description' => __( 'Order billing phone number.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
 					),
 				),
-				'meta_data'           => array(
+				'meta_data'            => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -711,7 +722,7 @@ class OrdersController extends PostsController {
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -748,7 +759,7 @@ class OrdersController extends PostsController {
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -777,7 +788,7 @@ class OrdersController extends PostsController {
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -806,7 +817,7 @@ class OrdersController extends PostsController {
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -842,11 +853,42 @@ class OrdersController extends PostsController {
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
 
 		return true;
+	}
+
+	/**
+	 * Get course order items.
+	 *
+	 * @param OrderItem[] $items
+	 * @return void
+	 */
+	protected function get_order_item_course( $items, $context ) {
+		$course_items = array_filter(
+			$items,
+			function( $item ) {
+				return 'course' === $item->get_type();
+			}
+		);
+
+		$data = array();
+
+		foreach ( $course_items as $course_item ) {
+			$data[] = array(
+				'id'        => $course_item->get_id(),
+				'name'      => $course_item->get_name( $context ),
+				'type'      => $course_item->get_type( $context ),
+				'course_id' => $course_item->get_course_id( $context ),
+				'quantity'  => $course_item->get_quantity( $context ),
+				'subtotal'  => $course_item->get_subtotal( $context ),
+				'total'     => $course_item->get_total( $context ),
+			);
+		}
+
+		return $data;
 	}
 }

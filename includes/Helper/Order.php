@@ -219,7 +219,8 @@ function masteriyo_get_orders( $args = array() ) {
  * @return object|array[OrderItem]
  */
 function masteriyo_get_order_items( $args = array() ) {
-	$order_items = masteriyo( 'query.orders.items' )->set_args( $args )->get_order_items();
+	$order_items = masteriyo( 'query.order-items' )->set_args( $args )->get_order_items();
 
 	return apply_filters( 'masteriyo_get_order_items', $order_items, $args );
 }
+

@@ -2475,25 +2475,3 @@ function masteriyo_doing_it_wrong( $function, $message, $version ) {
 	}
 	// phpcs: enable
 }
-
-/**
- * Check if the current user is admin.
- *
- * @since 0.1.0
- *
- * @return boolean
- */
-function masteriyo_is_current_user_admin() {
-    return in_array( 'administrator',  wp_get_current_user()->roles );
-}
-
-/**
- * Check if the current user is masteriyo manager.
- *
- * @since 0.1.0
- *
- * @return boolean
- */
-function masteriyo_is_current_user_manager() {
-    return in_array( 'masteriyo_manager',  wp_get_current_user()->roles );
-}

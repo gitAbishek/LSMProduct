@@ -75,7 +75,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			apply_filters(
 				'masteriyo_new_order_data',
 				array(
-					'post_type'      => 'masteriyo_order',
+					'post_type'      => 'mto-order',
 					'post_status'    => $order->get_status() ? $order->get_status() : 'pending',
 					'post_author'    => get_current_user_id(),
 					'post_title'     => __( 'Order', 'masteriyo' ),
@@ -114,7 +114,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	public function read( Model &$order ) {
 		$order_post = get_post( $order->get_id() );
 
-		if ( ! $order->get_id() || ! $order_post || 'masteriyo_order' !== $order_post->post_type ) {
+		if ( ! $order->get_id() || ! $order_post || 'mto-order' !== $order_post->post_type ) {
 			throw new \Exception( __( 'Invalid order.', 'masteriyo' ) );
 		}
 
@@ -157,7 +157,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		if ( array_intersect( $post_data_keys, array_keys( $changes ) ) ) {
 			$post_data = array(
 				'post_status' => $order->get_status( 'edit' ),
-				'post_type'   => 'masteriyo_order',
+				'post_type'   => 'mto-order',
 			);
 
 			/**
@@ -291,7 +291,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'masteriyo_order' ) );
+			update_post_caches( $query->posts, array( 'mto-order' ) );
 		}
 
 		$orders = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_order', $query->posts ) );
@@ -396,7 +396,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			$order_items = masteriyo_get_order_items( array( 'order_id' => $order->get_id() ) );
 
 			foreach ( $order_items as $item ) {
-				masteriyo( 'cache' )->set( 'masteriyo-item-' . $item->order_item_id, $item, 'masteriyo-order-items' );
+				masteriyo( 'cache' )->set( 'masteriyo-item-' . $item->get_id(), $item, 'masteriyo-order-items' );
 			}
 
 			if ( $order->get_id() ) {
@@ -404,6 +404,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			}
 		}
 
+		return $order_items;
 		return wp_list_filter( $order_items, array( 'type' => $type ) );
 	}
 

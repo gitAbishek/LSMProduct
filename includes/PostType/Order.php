@@ -20,7 +20,7 @@ class Order extends PostType {
 	 *
 	 * @var string
 	 */
-	protected $slug = 'masteriyo_order';
+	protected $slug = 'mto-order';
 
 	/**
 	 * Constructor.

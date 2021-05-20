@@ -79,6 +79,15 @@ class Order extends AbstractOrder {
 		'billing_phone'        => '',
 	);
 
+	/**
+	 * Get object type.
+	 *
+	 * @since 0.1.0
+	 */
+	public function get_object_type() {
+		return 'mto-order';
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Getters

@@ -159,7 +159,7 @@ class Permission {
 	 * @return bool
 	 */
 	public function rest_check_order_permissions( $object_id, $context = 'read' ) {
-		$post_type = 'masteriyo_order';
+		$post_type = 'mto-order';
 		$contexts  = array(
 			'read'   => 'read',
 			'create' => 'publish_posts',

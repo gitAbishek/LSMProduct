@@ -296,10 +296,17 @@ abstract class Order extends Model {
 	protected function get_values_for_total( $field ) {
 		$items = array_map(
 			function ( $item ) use ( $field ) {
-				return masteriyo_add_number_precision( $item[ $field ], false );
+				$value = 0;
+
+				if ( is_callable( array( $item, "get_${field}" ) ) ) {
+					$value = masteriyo_add_number_precision( $item->{"get_${field}"}(), false );
+				}
+
+				return $value;
 			},
 			array_values( $this->get_items() )
 		);
+
 		return $items;
 	}
 
@@ -621,7 +628,7 @@ abstract class Order extends Model {
 	 */
 	protected function get_items_key( $item ) {
 		if ( is_a( $item, '\ThemeGrill\Masteriyo\Models\Order\OrderItemCourse' ) ) {
-			return 'course';
+			return 'course_lines';
 		}
 
 		return apply_filters( 'masteriyo_get_items_key', '', $item );
@@ -678,5 +685,59 @@ abstract class Order extends Model {
 		} else {
 			$this->items[ $items_key ][ 'new:' . $items_key . count( $this->items[ $items_key ] ) ] = $item;
 		}
+	}
+
+	/**
+	 * Helper function.
+	 * If you add all items in this order in cart again, this would be the cart subtotal (assuming all other settings are same).
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return float Cart subtotal.
+	 */
+	protected function get_cart_subtotal_for_order() {
+		return masteriyo_remove_number_precision(
+			$this->get_rounded_items_total(
+				$this->get_values_for_total( 'subtotal' )
+			)
+		);
+	}
+
+	/**
+	 * Helper function.
+	 * If you add all items in this order in cart again, this would be the cart total (assuming all other settings are same).
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return float Cart total.
+	 */
+	protected function get_cart_total_for_order() {
+		return masteriyo_remove_number_precision(
+			$this->get_rounded_items_total(
+				$this->get_values_for_total( 'total' )
+			)
+		);
+	}
+
+	/**
+	 * Calculate totals by looking at the contents of the order. Stores the totals and returns the orders final total.
+	 *
+	 * @since 0.1.0
+	 * @param  bool $and_taxes Calc taxes if true.
+	 * @return float calculated grand total.
+	 */
+	public function calculate_totals( $and_taxes = true ) {
+		do_action( 'masteriyo_order_before_calculate_totals', $and_taxes, $this );
+
+		$cart_subtotal = $this->get_cart_subtotal_for_order();
+		$cart_total    = $this->get_cart_total_for_order();
+
+		$this->set_total( masteriyo_round( $cart_total, masteriyo_get_price_decimals() ) );
+
+		do_action( 'masteriyo_order_after_calculate_totals', $and_taxes, $this );
+
+		$this->save();
+
+		return $this->get_total();
 	}
 }

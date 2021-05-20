@@ -198,7 +198,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	}
 
 	/**
-	 * Delete an order from the database.
+	 * Delete an order from the database.r
 	 *
 	 * @since 0.1.0
 	 *
@@ -209,14 +209,28 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		$id          = $order->get_id();
 		$object_type = $order->get_object_type();
 
+		$args = array_merge(
+			array(
+				'force_delete' => false,
+			),
+			$args
+		);
+
 		if ( ! $id ) {
 			return;
 		}
 
-		do_action( 'masteriyo_before_delete_' . $object_type, $id, $order );
-		wp_delete_post( $id, true );
-		$order->set_id( 0 );
-		do_action( 'masteriyo_after_delete_' . $object_type, $id, $order );
+		if ( $args['force_delete'] ) {
+			do_action( 'masteriyo_before_delete_' . $object_type, $id, $course );
+			wp_delete_post( $id, true );
+			$course->set_id( 0 );
+			do_action( 'masteriyo_after_delete_' . $object_type, $id, $course );
+		} else {
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course );
+			wp_trash_post( $id );
+			$course->set_status( 'trash' );
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course );
+		}
 	}
 
 	/**
@@ -405,7 +419,6 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		}
 
 		return $order_items;
-		return wp_list_filter( $order_items, array( 'type' => $type ) );
 	}
 
 	/**

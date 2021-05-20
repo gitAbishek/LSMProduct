@@ -11,7 +11,6 @@ namespace ThemeGrill\Masteriyo\Database;
 
 use ThemeGrill\Masteriyo\ModelException;
 use ThemeGrill\Masteriyo\DateTime;
-
 use ThemeGrill\Masteriyo\MetaData;
 
 defined( 'ABSPATH' ) || exit;
@@ -660,5 +659,19 @@ abstract class Model {
 
 			$this->set_prop( $prop, $datetime );
 		} catch ( Exception $e ) {} // @codingStandardsIgnoreLine.
+	}
+
+	/**
+	 * When invalid data is found, throw an exception unless reading from the DB.
+	 *
+	 * @throws ModelException Data Exception.
+	 * @since 0.1.0
+	 * @param string $code             Error code.
+	 * @param string $message          Error message.
+	 * @param int    $http_status_code HTTP status code.
+	 * @param array  $data             Extra error data.
+	 */
+	protected function error( $code, $message, $http_status_code = 400, $data = array() ) {
+		throw new ModelException( $code, $message, $http_status_code, $data );
 	}
 }

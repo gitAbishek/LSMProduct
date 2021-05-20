@@ -236,7 +236,7 @@ class SettingsController extends CrudController {
 							'description' => __( 'Currency Code.', 'masteriyo' ),
 							'type'        => 'string',
 							'default'     => 'USD',
-							'enum'        => array_keys( get_masteriyo_currencies() ),
+							'enum'        => masteriyo_get_currency_codes(),
 							'context'     => array( 'view', 'edit' ),
 						),
 						'currency_position'  => array(

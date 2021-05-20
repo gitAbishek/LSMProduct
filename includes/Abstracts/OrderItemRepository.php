@@ -184,7 +184,7 @@ class OrderItemRepository extends AbstractRepository {
 		$order       = get_post( $order_id );
 
 		if ( is_null( $order ) || 'mto-order' !== $order->post_type ) {
-			return $$order_items;
+			return $order_items;
 		}
 
 		$items = $wpdb->get_results(
@@ -196,20 +196,10 @@ class OrderItemRepository extends AbstractRepository {
 
 		$item_objects = array_filter( array_map( array( $this, 'get_order_item_object' ), $items ) );
 
-		$item_ids     = wp_list_pluck( $items, 'order_item_id' );
-		$item_ids_str = implode( ',', $item_ids );
-
-		$item_metas = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}masteriyo_order_itemmeta WHERE order_item_id IN (%s)",
-				$item_ids
-			)
-		);
-
 		$item_objects = array_filter(
 			array_map(
-				function( $item_object ) use ( $item_metas ) {
-					return $this->get_order_item_meta( $item_object, $item_metas );
+				function( $item_object ) {
+					return $this->get_order_item_meta( $item_object );
 				},
 				$item_objects
 			)
@@ -256,18 +246,14 @@ class OrderItemRepository extends AbstractRepository {
 	 *
 	 * @return
 	 */
-	public function get_order_item_meta( $item, $item_metas ) {
-		$item_metas = array_filter(
-			$item_metas,
-			function ( $item_meta ) use ( $item ) {
-				return absint( $item_meta->order_item_id ) === $item->get_id();
-			}
-		);
+	public function get_order_item_meta( $item ) {
+		$meta_values = $this->read_meta( $item );
 
-		foreach ( $item_metas as $item_meta ) {
-			$function = "set_{$item_meta->meta_key}";
+		foreach ( $meta_values  as $meta_value ) {
+			$function = "set_{$meta_value->key}";
+
 			if ( is_callable( array( $item, $function ) ) ) {
-				$item->$function( $item_meta->meta_value );
+				$item->$function( maybe_unserialize( $meta_value->value ) );
 			}
 		}
 

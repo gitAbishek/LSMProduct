@@ -12,6 +12,8 @@ namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Permission;
+use ThemeGrill\Masteriyo\Exceptions\RestException;
+use ThemeGrill\Masteriyo\ModelException;
 use ThemeGrill\Masteriyo\Models\Order;
 
 /**
@@ -293,8 +295,8 @@ class OrdersController extends PostsController {
 		// Set order status.
 		$args['post_status'] = $request['status'];
 
-		if ( ! empty( $request['customer_id'] ) ) {
-			$args['author'] = $request['customer_id'];
+		if ( ! empty( $request['customer'] ) ) {
+			$args['author'] = $request['customer'];
 		} else {
 			$args['author'] = get_current_user_id();
 		}
@@ -332,11 +334,13 @@ class OrdersController extends PostsController {
 					'description' => __( "The date the Order was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
 				),
 				'date_created_gmt'     => array(
 					'description' => __( 'The date the Order was created, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
 				),
 				'date_modified'        => array(
 					'description' => __( "The date the Order was last modified, in the site's timezone.", 'masteriyo' ),
@@ -361,16 +365,19 @@ class OrdersController extends PostsController {
 					'description' => __( 'Total amount of the order.', 'masteriyo' ),
 					'type'        => 'number',
 					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
 				),
 				'currency'             => array(
 					'description' => __( 'Currency.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+					'enum'        => masteriyo_get_currency_codes(),
 				),
 				'expiry_date'          => array(
 					'description' => __( 'Expiry date of this order.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
 				),
 				'customer_id'          => array(
 					'description' => __( 'Customer ID.', 'masteriyo' ),
@@ -381,14 +388,13 @@ class OrdersController extends PostsController {
 					'description' => __( 'Payment method.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
-					'default'     => 'paypal',
 					'enum'        => array( 'paypal' ),
 				),
 				'payment_method_title' => array(
 					'description' => __( 'Payment method title.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
-					'enum'        => array( 'paypal' ),
+					'enum'        => array( 'Paypal' ),
 				),
 				'transaction_id'       => array(
 					'description' => __( 'Transaction ID.', 'masteriyo' ),
@@ -399,36 +405,43 @@ class OrdersController extends PostsController {
 					'description' => __( 'Date of payment.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
 				),
 				'date_completed'       => array(
 					'description' => __( 'Date of order completion.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
 				),
 				'created_via'          => array(
 					'description' => __( 'Method of order creation.', 'masteriyo' ),
 					'type'        => 'string',
+					'readonly'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'customer_ip_address'  => array(
 					'description' => __( 'Customer IP address.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
 				),
 				'customer_user_agent'  => array(
 					'description' => __( 'Customer user agent.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
 				),
 				'version'              => array(
 					'description' => __( 'Version of Masteriyo which last updated the order.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
 				),
 				'order_key'            => array(
 					'description' => __( 'Order key.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
 				),
 				'customer_note'        => array(
 					'description' => __( 'Note left by customer during checkout.', 'masteriyo' ),
@@ -509,6 +522,59 @@ class OrdersController extends PostsController {
 						),
 					),
 				),
+				'set_paid'             => array(
+					'description' => __( 'Set whether the payment is done.', 'masteriyo' ),
+					'type'        => 'boolean',
+					'default'     => false,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'course_lines'         => array(
+					'description' => __( 'Course items data.', 'masteriyo' ),
+					'type'        => 'array',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'      => 'object',
+						'id'        => array(
+							'description' => __( 'Item ID.', 'masteriyo' ),
+							'type'        => 'integer',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'course_id' => array(
+							'description' => __( 'Order billing last name.', 'masteriyo' ),
+							'type'        => 'integer',
+							'required'    => true,
+							'context'     => array( 'view', 'edit' ),
+						),
+						'name'      => array(
+							'description' => __( 'Course name.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'quantity'  => array(
+							'description' => __( 'Quantity ordered.', 'masteriyo' ),
+							'type'        => 'integer',
+							'default'     => 1,
+							'readonly'    => true,
+							'context'     => array( 'view', 'edit' ),
+						),
+						'subtotal'  => array(
+							'description' => __( 'Course total (before discounts).', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'total'     => array(
+							'description' => __( 'Course total (after discounts).', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'price'     => array(
+							'description' => __( 'Course price.', 'masteriyo' ),
+							'type'        => 'number',
+							'readonly'    => true,
+							'context'     => array( 'view', 'edit' ),
+						),
+					),
+				),
 				'meta_data'            => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
@@ -559,24 +625,9 @@ class OrdersController extends PostsController {
 			$order_repo->read( $order );
 		}
 
-		// Order status.
-		if ( isset( $request['status'] ) ) {
-			$order->set_status( $request['status'] );
-		}
-
-		// Total Price.
-		if ( isset( $request['total'] ) ) {
-			$order->set_total( $request['total'] );
-		}
-
 		// Currency.
 		if ( isset( $request['currency'] ) ) {
 			$order->set_currency( $request['currency'] );
-		}
-
-		// Order's expiry date.
-		if ( isset( $request['expiry_date'] ) ) {
-			$order->set_expiry_date( $request['expiry_date'] );
 		}
 
 		// Customer ID.
@@ -601,39 +652,21 @@ class OrdersController extends PostsController {
 			$order->set_transaction_id( $request['transaction_id'] );
 		}
 
-		// Set date of payment.
-		if ( isset( $request['date_paid'] ) ) {
-			$order->set_date_paid( $request['date_paid'] );
-		}
-
-		// Set date of order completion.
-		if ( isset( $request['date_completed'] ) ) {
-			$order->set_date_completed( $request['date_completed'] );
-		}
-
-		// Set method of order creation.
-		if ( isset( $request['created_via'] ) ) {
-			$order->set_created_via( $request['created_via'] );
-		}
-
-		// Set customer IP address.
-		if ( isset( $request['customer_ip_address'] ) ) {
-			$order->set_customer_ip_address( $request['customer_ip_address'] );
-		}
-
-		// Set customer user agent.
-		if ( isset( $request['customer_user_agent'] ) ) {
-			$order->set_customer_user_agent( $request['customer_user_agent'] );
-		}
-
-		// Set order key.
-		if ( isset( $request['order_key'] ) ) {
-			$order->set_order_key( $request['order_key'] );
-		}
-
 		// Set customer note.
 		if ( isset( $request['customer_note'] ) ) {
 			$order->set_customer_note( $request['customer_note'] );
+		}
+
+		// Set set paid.
+		if ( $request['set_paid'] ) {
+			$order->set_status( 'completed' );
+		}
+
+		// Add course items.
+		if ( isset( $request['course_lines'] ) ) {
+			foreach ( $request['course_lines'] as $course_line ) {
+				$this->set_item( $order, 'course_lines', $course_line );
+			}
 		}
 
 		// Order billing details.
@@ -890,5 +923,219 @@ class OrdersController extends PostsController {
 		}
 
 		return $data;
+	}
+
+
+	/**
+	 * Save an object data.
+	 *
+	 * @since  3.0.0
+	 * @throws RestException But all errors are validated before returning any data.
+	 * @param  WP_REST_Request $request  Full details about the request.
+	 * @param  bool            $creating If is creating a new object.
+	 * @return WC_Data|WP_Error
+	 */
+	protected function save_object( $request, $creating = false ) {
+		try {
+			$object = $this->prepare_object_for_database( $request, $creating );
+
+			if ( is_wp_error( $object ) ) {
+				return $object;
+			}
+
+			// Make sure gateways are loaded so hooks from gateways fire on save/create.
+			// WC()->payment_gateways();
+
+			if ( ! is_null( $request['customer_id'] ) && 0 !== $request['customer_id'] ) {
+				// Make sure customer exists.
+				if ( false === get_user_by( 'id', $request['customer_id'] ) ) {
+					throw new RestException( 'masteriyo_rest_invalid_customer_id', __( 'Customer ID is invalid.', 'masteriyo' ), 400 );
+				}
+
+				// Make sure customer is part of blog.
+				if ( is_multisite() && ! is_user_member_of_blog( $request['customer_id'] ) ) {
+					add_user_to_blog( get_current_blog_id(), $request['customer_id'], 'masteriyo_student' );
+				}
+			}
+
+			if ( $creating ) {
+				$object->set_created_via( 'rest-api' );
+				$object->set_prices_include_tax( 'yes' === get_option( 'masteriyo_prices_include_tax' ) );
+				$object->calculate_totals();
+			} else {
+				// If items have changed, recalculate order totals.
+				if ( isset( $request['billing'] ) || isset( $request['course_lines'] ) ) {
+					$object->calculate_totals( true );
+				}
+			}
+
+			// Set status.
+			if ( ! empty( $request['status'] ) ) {
+				$object->set_status( $request['status'] );
+			}
+
+			$object->save();
+
+			// Actions for after the order is saved.
+			if ( true === $request['set_paid'] ) {
+				if ( $creating || $object->needs_payment() ) {
+					$object->payment_complete( $request['transaction_id'] );
+				}
+			}
+
+			return $this->get_object( $object->get_id() );
+		} catch ( ModelException $e ) {
+			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
+		} catch ( RestException $e ) {
+			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
+		}
+	}
+
+	/**
+	 * Wrapper method to create/update order items.
+	 * When updating, the item ID provided is checked to ensure it is associated
+	 * with the order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Order $order order object.
+	 * @param string   $item_type The item type.
+	 * @param array    $posted item provided in the request body.
+	 * @throws RestException If item ID is not associated with order.
+	 */
+	protected function set_item( $order, $item_type, $posted ) {
+		global $wpdb;
+
+		$action = empty( $posted['id'] ) ? 'create' : 'update';
+		$method = 'prepare_' . $item_type;
+		$item   = null;
+
+		// Verify provided line item ID is associated with order.
+		if ( 'update' === $action ) {
+			$item = $order->get_item( absint( $posted['id'] ), false );
+
+			if ( ! $item ) {
+				throw new RestException( 'masteriyo_rest_invalid_item_id', __( 'Order item ID provided is not associated with order.', 'masteriyo' ), 400 );
+			}
+		}
+
+		// Prepare item data.
+		$item = $this->$method( $posted, $action, $item );
+
+		do_action( 'masteriyo_rest_set_order_item', $item, $posted );
+
+		// If creating the order, add the item to it.
+		if ( 'create' === $action ) {
+			$order->add_item( $item );
+		} else {
+			$item->save();
+		}
+	}
+
+
+	/**
+	 * Gets the course ID from the SKU or posted ID.
+	 *
+	 * @throws RestException When SKU or ID is not valid.
+	 * @param array  $posted Request data.
+	 * @param string $action 'create' to add line item or 'update' to update it.
+	 * @return int
+	 */
+	protected function get_course_id( $posted, $action = 'create' ) {
+		if ( ! empty( $posted['course_id'] ) && empty( $posted['variation_id'] ) ) {
+			$course_id = (int) $posted['course_id'];
+		} elseif ( 'update' === $action ) {
+			$course_id = 0;
+		} else {
+			throw new RestException( 'masteriyo_rest_required_course_reference', __( 'Course ID or SKU is required.', 'masteriyo' ), 400 );
+		}
+		return $course_id;
+	}
+
+	/**
+	 * Create or update a course item.
+	 *
+	 * @param array  $posted Line item data.
+	 * @param string $action 'create' to add line item or 'update' to update it.
+	 * @param object $item Passed when updating an item. Null during creation.
+	 * @return OrderItemCourse
+	 * @throws RestException Invalid data, server error.
+	 */
+	protected function prepare_course_lines( $posted, $action = 'create', $item = null ) {
+		if ( is_null( $item ) ) {
+			$item = masteriyo( 'order-item.course' );
+			if ( ! empty( $posted['id'] ) ) {
+				$item->set_id( $posted['id'] );
+
+				masteriyo( 'order-item.course.store' )->read( $item );
+			}
+		}
+
+		$course = masteriyo_get_course( $this->get_course_id( $posted, $action ) );
+
+		if ( $course && $course !== $item->get_course() ) {
+			$item->set_course( $course );
+
+			if ( 'create' === $action ) {
+				$quantity = isset( $posted['quantity'] ) ? $posted['quantity'] : 1;
+				$total    = masteriyo_get_price_excluding_tax( $course, array( 'qty' => $quantity ) );
+				$item->set_total( $total );
+				$item->set_subtotal( $total );
+			}
+		}
+
+		$this->maybe_set_item_props( $item, array( 'name', 'quantity', 'total', 'subtotal' ), $posted );
+		$this->maybe_set_item_meta_data( $item, $posted );
+
+		return $item;
+	}
+
+	/**
+	 * Maybe set an item prop if the value was posted.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param OrderItem $item   Order item.
+	 * @param string        $prop   Order property.
+	 * @param array         $posted Request data.
+	 */
+	protected function maybe_set_item_prop( $item, $prop, $posted ) {
+		if ( isset( $posted[ $prop ] ) ) {
+			$item->{"set_$prop"}( $posted[ $prop ] );
+		}
+	}
+
+	/**
+	 * Maybe set item props if the values were posted.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param OrderItem $item   Order item data.
+	 * @param string[]      $props  Properties.
+	 * @param array         $posted Request data.
+	 */
+	protected function maybe_set_item_props( $item, $props, $posted ) {
+		foreach ( $props as $prop ) {
+			$this->maybe_set_item_prop( $item, $prop, $posted );
+		}
+	}
+
+	/**
+	 * Maybe set item meta if posted.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param OrderItem $item   Order item data.
+	 * @param array         $posted Request data.
+	 */
+	protected function maybe_set_item_meta_data( $item, $posted ) {
+		if ( ! empty( $posted['meta_data'] ) && is_array( $posted['meta_data'] ) ) {
+			foreach ( $posted['meta_data'] as $meta ) {
+				if ( isset( $meta['key'] ) ) {
+					$value = isset( $meta['value'] ) ? $meta['value'] : null;
+					$item->update_meta_data( $meta['key'], $value, isset( $meta['id'] ) ? $meta['id'] : '' );
+				}
+			}
+		}
 	}
 }

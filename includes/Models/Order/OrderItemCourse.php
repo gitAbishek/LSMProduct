@@ -116,22 +116,6 @@ class OrderItemCourse extends OrderItem {
 		return $this->get_prop( 'total', $context );
 	}
 
-	/**
-	 * Get the associated course.
-	 *
-	 * @return WC_Course|bool
-	 */
-	public function get_course() {
-		$course = wc_get_course( $this->get_course_id() );
-
-		// Backwards compatible filter from WC_Order::get_course_from_item().
-		if ( has_filter( 'masteriyo_get_course_from_item' ) ) {
-			$course = apply_filters( 'masteriyo_get_course_from_item', $course, $this, $this->get_order() );
-		}
-
-		return apply_filters( 'masteriyo_order_item_course', $course, $this );
-	}
-
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -212,4 +196,34 @@ class OrderItemCourse extends OrderItem {
 			$this->set_subtotal( $total );
 		}
 	}
+
+	/**
+	 * Get the associated course.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return Course|bool
+	 */
+	public function get_course() {
+		$course = masteriyo_get_course( $this->get_course_id() );
+
+		return apply_filters( 'masteriyo_order_item_course', $course, $this );
+	}
+
+	/**
+	 * Set properties based on passed in course object.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Course $course Course instance.
+	 */
+	public function set_course( $course ) {
+		if ( ! is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ) {
+			$this->error( 'order_item_course_invalid_course', __( 'Invalid course', 'masteriyo' ) );
+		}
+
+		$this->set_course_id( $course->get_id() );
+		$this->set_name( $course->get_name() );
+	}
+
 }

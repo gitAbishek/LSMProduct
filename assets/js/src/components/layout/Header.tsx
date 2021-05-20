@@ -20,7 +20,13 @@ import { NavLink } from 'react-router-dom';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 
-const Header = () => {
+interface Props {
+	hideAddNewCourse?: boolean;
+}
+
+const Header: React.FC<Props> = (props) => {
+	const { hideAddNewCourse } = props;
+
 	const navLinkStyles = {
 		mr: '10',
 		py: '6',
@@ -72,11 +78,13 @@ const Header = () => {
 					</Stack>
 
 					<ButtonGroup>
-						<RouterLink to={routes.courses.add}>
-							<Button colorScheme="blue">
-								{__('Add New Course', 'masteriyo')}
-							</Button>
-						</RouterLink>
+						{!hideAddNewCourse && (
+							<RouterLink to={routes.courses.add}>
+								<Button colorScheme="blue">
+									{__('Add New Course', 'masteriyo')}
+								</Button>
+							</RouterLink>
+						)}
 					</ButtonGroup>
 				</Flex>
 			</Container>

@@ -51,7 +51,7 @@ const AddNewCourse: React.FC = () => {
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
-			<Header />
+			<Header hideAddNewCourse />
 			<Container maxW="container.xl">
 				<FormProvider {...methods}>
 					<form onSubmit={methods.handleSubmit(onSubmit)}>

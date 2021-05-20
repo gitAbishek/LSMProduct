@@ -1,7 +1,7 @@
 const routes = {
 	courses: {
 		list: '/courses',
-		add: '/builder',
+		add: '/courses/add-new-course',
 		edit: '/courses/:courseId',
 	},
 	section: '/builder/courses/:courseId',

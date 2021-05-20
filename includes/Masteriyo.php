@@ -62,6 +62,7 @@ class Masteriyo extends Container {
 	 * @since 0.1.0
 	 */
 	protected function init() {
+		Activation::init();
 		Deactivation::init();
 
 		// Register service providers.

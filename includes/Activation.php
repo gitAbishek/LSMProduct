@@ -17,8 +17,17 @@ class Activation {
 	 * @return void
 	 */
 	public static function init() {
+		register_activation_hook( Constants::get('MASTERIYO_PLUGIN_FILE'), array( __CLASS__, 'on_activate' ) );
+	}
+
+	/**
+	 * Callback for plugin activation hook.
+	 *
+	 * @since 0.1.0
+	 */
+	public static function on_activate() {
 		self::create_pages();
-		self::assign_admin_capabilities();
+		self::assign_core_capabilities_to_admin();
 	}
 
 	/**
@@ -63,7 +72,7 @@ class Activation {
 	 *
 	 * @return void
 	 */
-	public static function assign_admin_capabilities() {
+	public static function assign_core_capabilities_to_admin() {
 		if ( ! class_exists( 'WP_Roles' ) ) {
 			return;
 		}

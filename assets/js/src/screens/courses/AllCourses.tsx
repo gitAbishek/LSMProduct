@@ -1,6 +1,5 @@
 import {
 	Box,
-	Button,
 	Container,
 	Flex,
 	Heading,
@@ -59,7 +58,7 @@ const AllCourses = () => {
 											key={course.id}
 											createdOn={course.date_created}
 											permalink={course.permalink}
-											authorId={course.author.id}
+											author={course.author}
 										/>
 									))}
 							</Tbody>

@@ -97,7 +97,7 @@ const HeaderBuilder: React.FC<Props> = (props) => {
 
 					<ButtonGroup>
 						{previewUrl && (
-							<Link href={previewUrl}>
+							<Link href={previewUrl} isExternal>
 								<Button variant="outline" leftIcon={<BiShow />}>
 									{__('Preview', 'masteriyo')}
 								</Button>

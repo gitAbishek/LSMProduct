@@ -880,7 +880,7 @@ class OrdersController extends PostsController {
 			return true;
 		}
 
-		if ( ! $this->permission->rest_check_order_permissions( 'delete', absint( $request['id'] ) ) ) {
+		if ( ! $this->permission->rest_check_order_permissions( 'delete', $request['id'] ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
@@ -920,7 +920,7 @@ class OrdersController extends PostsController {
 			return true;
 		}
 
-		if ( ! $this->permission->rest_check_order_permissions( 'update', absint( $request['id'] ) ) ) {
+		if ( ! $this->permission->rest_check_order_permissions( 'update', $request['id'] ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),

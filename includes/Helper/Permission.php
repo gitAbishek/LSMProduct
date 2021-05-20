@@ -159,6 +159,7 @@ class Permission {
 	 * @return bool
 	 */
 	public function rest_check_order_permissions( $context = 'read', $object_id = 0 ) {
+		$object_id = absint( $object_id );
 		$post_type = 'mto-order';
 		$contexts  = array(
 			'read'   => 'read',

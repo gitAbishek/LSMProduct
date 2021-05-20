@@ -75,7 +75,7 @@ class Quiz extends PostType {
 			'show_in_rest'        => true,
 			'has_archive'         => false,
 			'map_meta_cap'        => true,
-			'capability_type'     => array( 'quiz', 'quizes' ),
+			'capability_type'     => array( 'quiz', 'quizzes' ),
 			'exclude_from_search' => false,
 			'publicly_queryable'  => true,
 			'can_export'          => true,

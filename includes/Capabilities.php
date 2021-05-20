@@ -85,7 +85,7 @@ class Capabilities {
 		return apply_filters(
 			'masteriyo_get_manager_capabilities',
 			array_merge(
-				array_fill_keys( $core_capabilities, true ),
+				array_fill_keys( array_unique( $core_capabilities ), true ),
 				get_role( 'editor' )->capabilities
 			)
 		);
@@ -161,7 +161,7 @@ class Capabilities {
 		return apply_filters(
 			'masteriyo_get_instructor_capabilities',
 			array_merge(
-				array_fill_keys( $core_capabilities, true ),
+				array_fill_keys( array_unique( $core_capabilities ), true ),
 				get_role( 'author' )->capabilities
 			)
 		);
@@ -206,7 +206,7 @@ class Capabilities {
 		return apply_filters(
 			'masteriyo_get_student_capabilities',
 			array_merge(
-				array_fill_keys( $core_capabilities, true ),
+				array_fill_keys( array_unique( $core_capabilities ), true ),
 				get_role( 'contributor' )->capabilities
 			)
 		);
@@ -283,7 +283,7 @@ class Capabilities {
 
 		return apply_filters(
 			'masteriyo_get_administrator_capabilities',
-			array_fill_keys( $core_capabilities, true ),
+			array_fill_keys( array_unique( $core_capabilities ), true )
 		);
 	}
 }

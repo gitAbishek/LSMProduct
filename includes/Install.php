@@ -20,9 +20,6 @@ class Install {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		self::init_db();
 		self::create_roles();
-
-		register_deactivation_hook( Constants::get('MASTERIYO_PLUGIN_FILE'), array( __CLASS__, 'remove_roles' ) );
-		register_deactivation_hook( Constants::get('MASTERIYO_PLUGIN_FILE'), array( __CLASS__, 'remove_admin_capabilities' ) );
 	}
 
 	/**
@@ -146,25 +143,6 @@ class Install {
 	}
 
 	/**
-	 * Remove core capabilities from admin role.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return void
-	 */
-	public static function remove_admin_capabilities() {
-		if ( ! class_exists( 'WP_Roles' ) ) {
-			return;
-		}
-
-		$capabilities = Capabilities::get_admin_capabilities();
-
-		foreach ( $capabilities as $cap => $bool ) {
-			wp_roles()->remove_cap( 'administrator', $cap );
-		}
-	}
-
-	/**
 	 * Create roles.
 	 *
 	 * @since 0.1.0
@@ -172,45 +150,9 @@ class Install {
 	 * @return void
 	 */
 	private static function create_roles() {
-		foreach ( self::get_roles() as $role_slug => $role ) {
+		foreach ( Roles::get_all() as $role_slug => $role ) {
 			add_role( $role_slug, $role['display_name'], $role['capabilities'] );
 		}
-	}
-
-	/**
-	 * Remove roles.
-	 */
-	public static function remove_roles() {
-		foreach ( self::get_roles() as $role_slug => $role ) {
-			remove_role( $role_slug );
-		}
-	}
-
-	/**
-	 * Retun roles.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return array
-	 */
-	public static function get_roles() {
-		return apply_filters(
-			'masteriyo_get_roles',
-			array(
-				'masteriyo_manager'    => array(
-					'display_name' => esc_html__( 'Masteriyo Manager', 'masteriyo' ),
-					'capabilities' => Capabilities::get_manager_capabilities(),
-				),
-				'masteriyo_instructor' => array(
-					'display_name' => esc_html__( 'Masteriyo Instructor', 'masteriyo' ),
-					'capabilities' => Capabilities::get_instructor_capabilities(),
-				),
-				'masteriyo_student'    => array(
-					'display_name' => esc_html__( 'Masteriyo Student', 'masteriyo' ),
-					'capabilities' => Capabilities::get_student_capabilities(),
-				),
-			)
-		);
 	}
 
 	/**

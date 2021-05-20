@@ -1,8 +1,10 @@
 import { Center, Stack } from '@chakra-ui/layout';
-import { Box } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
+import Header from 'Components/layout/Header';
+import HeaderBuilder from 'Components/layout/HeaderBuilder';
 import React, { useState } from 'react';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -82,55 +84,64 @@ const SectionBuilder = () => {
 	};
 
 	return (
-		<DragDropContext onDragEnd={onDragEnd}>
-			<Droppable droppableId="section" type="section">
-				{(droppableProvided) => (
-					<Box
-						ref={droppableProvided.innerRef}
-						{...droppableProvided.droppableProps}>
-						{(courseQuery.isLoading ||
-							builderQuery.isLoading ||
-							!builderData) && (
-							<Center minH="xs">
-								<Spinner />
-							</Center>
-						)}
+		<Stack direction="column" spacing="8" alignItems="center">
+			<HeaderBuilder courseId={courseId} />
+			<Container maxW="container.xl">
+				<DragDropContext onDragEnd={onDragEnd}>
+					<Droppable droppableId="section" type="section">
+						{(droppableProvided) => (
+							<Box
+								ref={droppableProvided.innerRef}
+								{...droppableProvided.droppableProps}>
+								{(courseQuery.isLoading ||
+									builderQuery.isLoading ||
+									!builderData) && (
+									<Center minH="xs">
+										<Spinner />
+									</Center>
+								)}
 
-						{builderData &&
-							builderQuery.isSuccess &&
-							builderData.section_order.map((sectionId: any, index: any) => {
-								const section = builderData.sections[sectionId];
-								return (
-									<Section
-										key={section.id}
-										id={section.id}
-										index={index}
-										name={section.name}
-										description={section.description}
-										courseId={courseId}
-										contents={section.contents}
-										contentsMap={builderData.contents}
-									/>
-								);
-							})}
+								{builderData &&
+									builderQuery.isSuccess &&
+									builderData.section_order.map(
+										(sectionId: any, index: any) => {
+											const section = builderData.sections[sectionId];
+											return (
+												<Section
+													key={section.id}
+													id={section.id}
+													index={index}
+													name={section.name}
+													description={section.description}
+													courseId={courseId}
+													contents={section.contents}
+													contentsMap={builderData.contents}
+												/>
+											);
+										}
+									)}
 
-						{addSection.isLoading && (
-							<Center minH="24">
-								<Spinner />
-							</Center>
+								{addSection.isLoading && (
+									<Center minH="24">
+										<Spinner />
+									</Center>
+								)}
+								{courseQuery.isSuccess &&
+									builderQuery.isSuccess &&
+									builderData && (
+										<Center mb="8">
+											<AddNewButton onClick={onAddNewSectionPress}>
+												{__('Add New Section', 'masteriyo')}
+											</AddNewButton>
+										</Center>
+									)}
+								{droppableProvided.placeholder}
+							</Box>
 						)}
-						{courseQuery.isSuccess && builderQuery.isSuccess && builderData && (
-							<Center mb="8">
-								<AddNewButton onClick={onAddNewSectionPress}>
-									{__('Add New Section', 'masteriyo')}
-								</AddNewButton>
-							</Center>
-						)}
-						{droppableProvided.placeholder}
-					</Box>
-				)}
-			</Droppable>
-		</DragDropContext>
+					</Droppable>
+				</DragDropContext>
+			</Container>
+		</Stack>
 	);
 };
 

@@ -3,6 +3,7 @@ const routes = {
 		list: '/courses',
 		add: '/courses/add-new-course',
 		edit: '/courses/:courseId',
+		settings: '/courses/:courseId/settings',
 	},
 	section: '/builder/courses/:courseId',
 	lesson: {
@@ -15,7 +16,7 @@ const routes = {
 	},
 	settings: '/settings',
 	notFound: '/not-found',
-	builder: '/courses/:courseId/builder',
+	builder: '/builder/:courseId',
 };
 
 export default routes;

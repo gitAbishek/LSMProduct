@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
+import { BiBook, BiCog, BiEdit, BiShow } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
@@ -21,11 +21,11 @@ import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 
 interface Props {
-	hideAddNewCourseBtn?: boolean;
+	courseId: number;
 }
 
-const Header: React.FC<Props> = (props) => {
-	const { hideAddNewCourseBtn } = props;
+const HeaderBuilder: React.FC<Props> = (props) => {
+	const { courseId } = props;
 
 	const navLinkStyles = {
 		mr: '10',
@@ -58,9 +58,12 @@ const Header: React.FC<Props> = (props) => {
 									as={NavLink}
 									sx={navLinkStyles}
 									_activeLink={navActiveStyles}
-									to={routes.courses.list}>
+									to={routes.courses.edit.replace(
+										':courseId',
+										courseId.toString()
+									)}>
 									<ListIcon as={BiBook} />
-									Courses
+									{__('Course', 'masteriyo')}
 								</Link>
 							</ListItem>
 
@@ -69,22 +72,33 @@ const Header: React.FC<Props> = (props) => {
 									as={NavLink}
 									sx={navLinkStyles}
 									_activeLink={navActiveStyles}
-									to={routes.settings}>
+									to={routes.builder.replace(':courseId', courseId.toString())}>
+									<ListIcon as={BiEdit} />
+									{__('Builder', 'masteriyo')}
+								</Link>
+							</ListItem>
+							<ListItem>
+								<Link
+									as={NavLink}
+									sx={navLinkStyles}
+									_activeLink={navActiveStyles}
+									to={routes.courses.settings.replace(
+										':courseId',
+										courseId.toString()
+									)}>
 									<ListIcon as={BiCog} />
-									Settings
+									{__('Settings', 'masteriyo')}
 								</Link>
 							</ListItem>
 						</List>
 					</Stack>
 
 					<ButtonGroup>
-						{!hideAddNewCourseBtn && (
-							<RouterLink to={routes.courses.add}>
-								<Button colorScheme="blue">
-									{__('Add New Course', 'masteriyo')}
-								</Button>
-							</RouterLink>
-						)}
+						<Button variant="outline" leftIcon={<BiShow />}>
+							{__('Preview', 'masteriyo')}
+						</Button>
+
+						<Button colorScheme="blue">{__('Save', 'masteriyo')}</Button>
 					</ButtonGroup>
 				</Flex>
 			</Container>
@@ -92,4 +106,4 @@ const Header: React.FC<Props> = (props) => {
 	);
 };
 
-export default Header;
+export default HeaderBuilder;

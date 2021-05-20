@@ -22,10 +22,12 @@ import routes from '../../constants/routes';
 
 interface Props {
 	courseId: number;
+	previewUrl?: string;
+	onSave?: void;
 }
 
 const HeaderBuilder: React.FC<Props> = (props) => {
-	const { courseId } = props;
+	const { courseId, previewUrl, onSave } = props;
 
 	const navLinkStyles = {
 		mr: '10',
@@ -94,11 +96,17 @@ const HeaderBuilder: React.FC<Props> = (props) => {
 					</Stack>
 
 					<ButtonGroup>
-						<Button variant="outline" leftIcon={<BiShow />}>
-							{__('Preview', 'masteriyo')}
-						</Button>
+						{previewUrl && (
+							<Link href={previewUrl}>
+								<Button variant="outline" leftIcon={<BiShow />}>
+									{__('Preview', 'masteriyo')}
+								</Button>
+							</Link>
+						)}
 
-						<Button colorScheme="blue">{__('Save', 'masteriyo')}</Button>
+						{onSave && (
+							<Button colorScheme="blue">{__('Save', 'masteriyo')}</Button>
+						)}
 					</ButtonGroup>
 				</Flex>
 			</Container>

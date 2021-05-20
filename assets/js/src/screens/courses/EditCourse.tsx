@@ -14,7 +14,7 @@ import HeaderBuilder from 'Components/layout/HeaderBuilder';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link as RouterLink, useHistory, useParams } from 'react-router-dom';
 
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
@@ -46,7 +46,6 @@ const EditCourse = () => {
 				status: 'success',
 				isClosable: true,
 			});
-
 			queryClient.invalidateQueries(`course${courseId}`);
 		},
 	});
@@ -76,12 +75,15 @@ const EditCourse = () => {
 
 			{courseQuery.isSuccess && (
 				<Stack direction="column" spacing="8" alignItems="center">
-					<HeaderBuilder courseId={courseId} />
+					<HeaderBuilder
+						courseId={courseId}
+						previewUrl={courseQuery.data.preview_permalink}
+					/>
 					<Container maxW="container.xl">
 						<FormProvider {...methods}>
 							<form onSubmit={methods.handleSubmit(onSubmit)}>
 								<Stack direction="column" spacing="8">
-									<Heading as="h1">
+									<Heading as="h1" size="xl">
 										{__('Edit Course: ', 'masteriyo')} {courseQuery.data.name}
 									</Heading>
 
@@ -108,11 +110,11 @@ const EditCourse = () => {
 													isLoading={updateCourse.isLoading}>
 													{__('Update', 'masteriyo')}
 												</Button>
-												<Button
-													variant="outline"
-													onClick={() => history.goBack()}>
-													{__('Cancel', 'masteriyo')}
-												</Button>
+												<RouterLink to={routes.courses.list}>
+													<Button variant="outline">
+														{__('Cancel', 'masteriyo')}
+													</Button>
+												</RouterLink>
 											</ButtonGroup>
 										</Box>
 										<Box w="400px" bg="white" p="10" shadow="box">

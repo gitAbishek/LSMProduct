@@ -1,9 +1,8 @@
 import { Center, Stack } from '@chakra-ui/layout';
-import { Box, Container } from '@chakra-ui/react';
+import { Box, Container, useToast } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
-import Header from 'Components/layout/Header';
 import HeaderBuilder from 'Components/layout/HeaderBuilder';
 import React, { useState } from 'react';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
@@ -20,9 +19,12 @@ const SectionBuilder = () => {
 	const { courseId }: any = useParams();
 	const queryClient = useQueryClient();
 	const history = useHistory();
+	const toast = useToast();
+
 	const courseAPI = new API(urls.courses);
 	const sectionAPI = new API(urls.sections);
 	const builderAPI = new API(urls.builder);
+
 	const [builderData, setBuilderData] = useState<any>(null);
 	const [totalSectionsLength, setTotalSectionsLength] = useState<number>(0);
 
@@ -54,7 +56,13 @@ const SectionBuilder = () => {
 	const updateBuilder = useMutation(
 		(data: any) => builderAPI.update(courseId, data),
 		{
-			onSuccess: (data) => {
+			onSuccess: () => {
+				toast({
+					title: __('Builder Updated', 'masteriyo'),
+					description: __('builder is updated.', 'masteriyo'),
+					isClosable: true,
+					status: 'success',
+				});
 				queryClient.invalidateQueries('builderSections');
 			},
 		}
@@ -77,77 +85,77 @@ const SectionBuilder = () => {
 
 	const onDragEnd = (result: DropResult) => {
 		const orderedData = reorder(result, builderData);
+		setBuilderData(orderedData);
+	};
 
-		if (orderedData) {
-			setBuilderData(orderedData);
-			updateBuilder.mutate(orderedData);
-		}
+	const onSaveBtnPress = () => {
+		updateBuilder.mutate(builderData);
 	};
 
 	return (
-		courseQuery.isSuccess && (
-			<Stack direction="column" spacing="8" alignItems="center">
-				<HeaderBuilder
-					courseId={courseId}
-					previewUrl={courseQuery.data.preview_permalink}
-				/>
-				<Container maxW="container.xl">
-					<DragDropContext onDragEnd={onDragEnd}>
-						<Droppable droppableId="section" type="section">
-							{(droppableProvided) => (
-								<Box
-									ref={droppableProvided.innerRef}
-									{...droppableProvided.droppableProps}>
-									{(courseQuery.isLoading ||
-										builderQuery.isLoading ||
-										!builderData) && (
-										<Center minH="xs">
-											<Spinner />
-										</Center>
+		<Stack direction="column" spacing="8" alignItems="center">
+			<HeaderBuilder
+				courseId={courseId}
+				previewUrl={courseQuery?.data?.preview_permalink}
+				onSave={onSaveBtnPress}
+				isSaveLoading={updateBuilder.isLoading}
+			/>
+			<Container maxW="container.xl">
+				<DragDropContext onDragEnd={onDragEnd}>
+					<Droppable droppableId="section" type="section">
+						{(droppableProvided) => (
+							<Box
+								ref={droppableProvided.innerRef}
+								{...droppableProvided.droppableProps}>
+								{(courseQuery.isLoading ||
+									builderQuery.isLoading ||
+									!builderData) && (
+									<Center minH="xs">
+										<Spinner />
+									</Center>
+								)}
+
+								{builderData &&
+									builderQuery.isSuccess &&
+									builderData.section_order.map(
+										(sectionId: any, index: any) => {
+											const section = builderData.sections[sectionId];
+											return (
+												<Section
+													key={section.id}
+													id={section.id}
+													index={index}
+													name={section.name}
+													description={section.description}
+													courseId={courseId}
+													contents={section.contents}
+													contentsMap={builderData.contents}
+												/>
+											);
+										}
 									)}
 
-									{builderData &&
-										builderQuery.isSuccess &&
-										builderData.section_order.map(
-											(sectionId: any, index: any) => {
-												const section = builderData.sections[sectionId];
-												return (
-													<Section
-														key={section.id}
-														id={section.id}
-														index={index}
-														name={section.name}
-														description={section.description}
-														courseId={courseId}
-														contents={section.contents}
-														contentsMap={builderData.contents}
-													/>
-												);
-											}
-										)}
-
-									{addSection.isLoading && (
-										<Center minH="24">
-											<Spinner />
+								{addSection.isLoading && (
+									<Center minH="24">
+										<Spinner />
+									</Center>
+								)}
+								{courseQuery.isSuccess &&
+									builderQuery.isSuccess &&
+									builderData && (
+										<Center mb="8">
+											<AddNewButton onClick={onAddNewSectionPress}>
+												{__('Add New Section', 'masteriyo')}
+											</AddNewButton>
 										</Center>
 									)}
-									{courseQuery.isSuccess &&
-										builderQuery.isSuccess &&
-										builderData && (
-											<Center mb="8">
-												<AddNewButton onClick={onAddNewSectionPress}>
-													{__('Add New Section', 'masteriyo')}
-												</AddNewButton>
-											</Center>
-										)}
-									{droppableProvided.placeholder}
-								</Box>
-							)}
-						</Droppable>
-					</DragDropContext>
-				</Container>
-			</Stack>
-		)
+								{droppableProvided.placeholder}
+							</Box>
+						)}
+					</Droppable>
+				</DragDropContext>
+			</Container>
+		</Stack>
 	);
 };
 

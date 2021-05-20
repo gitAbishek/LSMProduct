@@ -56,7 +56,7 @@ const SectionBuilder = () => {
 	const updateBuilder = useMutation(
 		(data: any) => builderAPI.update(courseId, data),
 		{
-			onSuccess: () => {
+			onSuccess: (data) => {
 				toast({
 					title: __('Builder Updated', 'masteriyo'),
 					description: __('builder is updated.', 'masteriyo'),
@@ -98,7 +98,7 @@ const SectionBuilder = () => {
 				courseId={courseId}
 				previewUrl={courseQuery?.data?.preview_permalink}
 				onSave={onSaveBtnPress}
-				isSaveLoading={updateBuilder.isLoading}
+				isSaveLoading={courseQuery.isLoading || updateBuilder.isLoading}
 			/>
 			<Container maxW="container.xl">
 				<DragDropContext onDragEnd={onDragEnd}>

@@ -70,16 +70,21 @@ const HeaderBuilder: React.FC<Props> = (props) => {
 								</Link>
 							</ListItem>
 
-							<ListItem>
-								<Link
-									as={NavLink}
-									sx={navLinkStyles}
-									_activeLink={navActiveStyles}
-									to={routes.builder.replace(':courseId', courseId.toString())}>
-									<ListIcon as={BiEdit} />
-									{__('Builder', 'masteriyo')}
-								</Link>
-							</ListItem>
+							{courseId && (
+								<ListItem>
+									<Link
+										as={NavLink}
+										sx={navLinkStyles}
+										_activeLink={navActiveStyles}
+										to={routes.builder.replace(
+											':courseId',
+											courseId.toString()
+										)}>
+										<ListIcon as={BiEdit} />
+										{__('Builder', 'masteriyo')}
+									</Link>
+								</ListItem>
+							)}
 							<ListItem>
 								<Link
 									as={NavLink}

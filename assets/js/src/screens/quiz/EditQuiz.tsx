@@ -126,7 +126,14 @@ const EditQuiz = () => {
 															</Button>
 															<Button
 																variant="outline"
-																onClick={() => history.goBack()}>
+																onClick={() =>
+																	history.push(
+																		routes.builder.replace(
+																			':courseId',
+																			courseId
+																		)
+																	)
+																}>
 																{__('Cancel', 'masteriyo')}
 															</Button>
 														</ButtonGroup>

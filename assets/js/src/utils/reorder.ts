@@ -5,7 +5,7 @@ export const reorder = (result: DropResult, builderData: any) => {
 
 	// if dropped outside the droppable area
 	if (!destination) {
-		return;
+		return builderData;
 	}
 
 	// moving to same place
@@ -13,7 +13,7 @@ export const reorder = (result: DropResult, builderData: any) => {
 		destination.droppableId === source.droppableId &&
 		destination.index === source.index
 	) {
-		return;
+		return builderData;
 	}
 
 	// moving section
@@ -55,33 +55,33 @@ export const reorder = (result: DropResult, builderData: any) => {
 			};
 
 			return newBuilderData;
+		} else {
+			const currentContents = Array.from(currentSection.contents);
+			currentContents.splice(source.index, 1);
+
+			const newCurrentSection = {
+				...currentSection,
+				contents: currentContents,
+			};
+
+			const destinationContents = Array.from(destinationSection.contents);
+			destinationContents.splice(destination.index, 0, draggableId);
+
+			const newDestinationSection = {
+				...destinationSection,
+				contents: destinationContents,
+			};
+
+			const newBuilderData = {
+				...builderData,
+				sections: {
+					...builderData.sections,
+					[newCurrentSection.id]: newCurrentSection,
+					[newDestinationSection.id]: newDestinationSection,
+				},
+			};
+
+			return newBuilderData;
 		}
-
-		const currentContents = Array.from(currentSection.contents);
-		currentContents.splice(source.index, 1);
-
-		const newCurrentSection = {
-			...currentSection,
-			contents: currentContents,
-		};
-
-		const destinationContents = Array.from(destinationSection.contents);
-		destinationContents.splice(destination.index, 0, draggableId);
-
-		const newDestinationSection = {
-			...destinationSection,
-			contents: destinationContents,
-		};
-
-		const newBuilderData = {
-			...builderData,
-			sections: {
-				...builderData.sections,
-				[newCurrentSection.id]: newCurrentSection,
-				[newDestinationSection.id]: newDestinationSection,
-			},
-		};
-
-		return newBuilderData;
 	}
 };

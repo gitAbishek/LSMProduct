@@ -61,6 +61,31 @@ class Onboard {
 			return;
 		}
 
+		$onboard_dependencies = include_once MASTERIYO_PLUGIN_DIR . '/assets/js/build/gettingStarted.asset.php';
+
+		wp_register_script(
+			'masteriyo-onboarding',
+			plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . '/assets/js/build/gettingStarted.js',
+			$onboard_dependencies['dependencies'],
+			$onboard_dependencies['version'],
+			true
+		);
+
+		// Add localization vars.
+		wp_localize_script(
+			'masteriyo-onboarding',
+			'_masteriyo',
+			array(
+				'adminURL'             => esc_url( admin_url() ),
+				'siteURL'              => esc_url( home_url( '/' ) ),
+				'pluginUrl'            => esc_url( plugin_dir_url( MASTERIYO_PLUGIN_FILE ) ),
+				'permalinkStructure'   => get_option( 'permalink_structure' ),
+				'permalinkOptionsPage' => esc_url( admin_url( 'options-permalink.php' ) ),
+			)
+		);
+
+		wp_enqueue_script( 'masteriyo-onboarding' );
+
 		ob_start();
 
 		$this->setup_wizard_header();
@@ -100,7 +125,6 @@ class Onboard {
 		?>
 			<body class="masteriyo-user-onboarding-wizard">
 				<div id="masteriyo-onboarding" class="masteriyo-main-wrap">
-					<h1>OnBoard Page</h1>
 				</div>
 			</body>
 		<?php
@@ -116,6 +140,7 @@ class Onboard {
 			wp_print_media_templates();
 		}
 		wp_print_footer_scripts();
+		wp_print_scripts( 'masteriyo-onboarding' );
 		?>
 		</html>
 		<?php

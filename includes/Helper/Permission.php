@@ -154,8 +154,8 @@ class Permission {
 	 * Check order permissions.
 	 *
 	 * @since 0.1.0
-	 * @param string $object_id Object ID.
 	 * @param string $context   Request context.
+	 * @param string $object_id Object ID.
 	 * @return bool
 	 */
 	public function rest_check_order_permissions( $context = 'read', $object_id = 0 ) {
@@ -168,9 +168,15 @@ class Permission {
 			'delete' => 'delete_post',
 			'batch'  => 'edit_others_posts',
 		);
-		$cap              = $contexts[ $context ];
-		$post_type_object = get_post_type_object( $post_type );
-		$permission       = current_user_can( $post_type_object->cap->$cap, $object_id );
+		$cap        = $context;
+
+		if ( isset( $contexts[ $context ] ) ) {
+			$post_type_object = get_post_type_object( $post_type );
+			$cap = $contexts[ $context ];
+			$cap = $post_type_object->cap->$cap;
+		}
+
+		$permission = current_user_can( $cap, $object_id );
 
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, $post_type );
 	}

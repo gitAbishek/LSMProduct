@@ -9,6 +9,7 @@ import {
 	Button,
 	ButtonGroup,
 	Center,
+	Container,
 	Divider,
 	Flex,
 	Heading,
@@ -22,9 +23,10 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import HeaderBuilder from 'Components/layout/HeaderBuilder';
 import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
+import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 
@@ -35,7 +37,7 @@ import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
 
-const EditLesson: React.FC = () => {
+const EditLesson = () => {
 	const { lessonId }: any = useParams();
 	const history = useHistory();
 	const methods = useForm();
@@ -43,6 +45,7 @@ const EditLesson: React.FC = () => {
 	const cancelRef = useRef<any>();
 	const lessonAPI = new API(urls.lessons);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const [courseId, setCourseId] = useState<any>(null);
 
 	const lessonQuery = useQuery(
 		[`section${lessonId}`, lessonId],
@@ -50,6 +53,9 @@ const EditLesson: React.FC = () => {
 		{
 			onError: () => {
 				history.push(routes.notFound);
+			},
+			onSuccess: (data) => {
+				setCourseId(data.course_id);
 			},
 		}
 	);
@@ -64,7 +70,7 @@ const EditLesson: React.FC = () => {
 					isClosable: true,
 					status: 'success',
 				});
-				history.push(routes.section.replace(':courseId', data.course_id));
+				history.push(routes.builder.replace(':courseId', data.course_id));
 			},
 		}
 	);
@@ -79,7 +85,7 @@ const EditLesson: React.FC = () => {
 					isClosable: true,
 					status: 'error',
 				});
-				history.push(routes.section.replace(':courseId', data.course_id));
+				history.push(routes.builder.replace(':courseId', data.course_id));
 			},
 		}
 	);
@@ -101,94 +107,108 @@ const EditLesson: React.FC = () => {
 	};
 
 	return (
-		<FormProvider {...methods}>
-			<Box bg="white" p="10" shadow="box">
-				{lessonQuery.isLoading && (
-					<Center minH="xs">
-						<Spinner />
-					</Center>
-				)}
-				{lessonQuery.isSuccess && (
-					<Stack direction="column" spacing="8">
-						<Flex aling="center" justify="space-between">
-							<Heading as="h1" fontSize="x-large">
-								{__('Edit Lesson', 'masteriyo')}
-							</Heading>
-							<Menu placement="bottom-end">
-								<MenuButton
-									as={IconButton}
-									icon={<BiDotsVerticalRounded />}
-									variant="outline"
-									rounded="sm"
-									fontSize="large"
-								/>
-								<MenuList>
-									<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
-										{__('Delete', 'masteriyo')}
-									</MenuItem>
-								</MenuList>
-							</Menu>
-						</Flex>
+		lessonQuery.isSuccess && (
+			<Stack direction="column" spacing="8" alignItems="center">
+				<HeaderBuilder courseId={courseId} />
+				<Container maxW="container.xl">
+					<FormProvider {...methods}>
+						<Box bg="white" p="10" shadow="box">
+							{lessonQuery.isLoading && (
+								<Center minH="xs">
+									<Spinner />
+								</Center>
+							)}
 
-						<form onSubmit={methods.handleSubmit(onSubmit)}>
-							<Stack direction="column" spacing="6">
-								<Name defaultValue={lessonQuery.data.name} />
-								<Description defaultValue={lessonQuery.data.description} />
-								<FeaturedImage defaultValue={lessonQuery.data.featured_image} />
+							<Stack direction="column" spacing="8">
+								<Flex aling="center" justify="space-between">
+									<Heading as="h1" fontSize="x-large">
+										{__('Edit Lesson', 'masteriyo')}
+									</Heading>
+									<Menu placement="bottom-end">
+										<MenuButton
+											as={IconButton}
+											icon={<BiDotsVerticalRounded />}
+											variant="outline"
+											rounded="sm"
+											fontSize="large"
+										/>
+										<MenuList>
+											<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
+												{__('Delete', 'masteriyo')}
+											</MenuItem>
+										</MenuList>
+									</Menu>
+								</Flex>
 
-								<Box py="3">
-									<Divider />
-								</Box>
+								<form onSubmit={methods.handleSubmit(onSubmit)}>
+									<Stack direction="column" spacing="6">
+										<Name defaultValue={lessonQuery.data.name} />
+										<Description defaultValue={lessonQuery.data.description} />
+										<FeaturedImage
+											defaultValue={lessonQuery.data.featured_image}
+										/>
 
-								<ButtonGroup>
-									<Button
-										colorScheme="blue"
-										type="submit"
-										isLoading={updateLesson.isLoading}>
-										{__('Update Lesson', 'masteriyo')}
-									</Button>
-									<Button variant="outline" onClick={() => history.goBack()}>
-										{__('Cancel', 'masteriyo')}
-									</Button>
-								</ButtonGroup>
+										<Box py="3">
+											<Divider />
+										</Box>
+
+										<ButtonGroup>
+											<Button
+												colorScheme="blue"
+												type="submit"
+												isLoading={updateLesson.isLoading}>
+												{__('Update Lesson', 'masteriyo')}
+											</Button>
+											<Button
+												variant="outline"
+												onClick={() =>
+													history.push(
+														routes.builder.replace(':courseId', courseId)
+													)
+												}>
+												{__('Cancel', 'masteriyo')}
+											</Button>
+										</ButtonGroup>
+									</Stack>
+								</form>
 							</Stack>
-						</form>
-					</Stack>
-				)}
-			</Box>
-			<AlertDialog
-				isOpen={isDeleteModalOpen}
-				onClose={onDeleteModalClose}
-				isCentered
-				leastDestructiveRef={cancelRef}>
-				<AlertDialogOverlay>
-					<AlertDialogContent>
-						<AlertDialogHeader>
-							{__('Delete Lesson')} {name}
-						</AlertDialogHeader>
-						<AlertDialogBody>
-							Are you sure? You can't restore this section
-						</AlertDialogBody>
-						<AlertDialogFooter>
-							<ButtonGroup>
-								<Button
-									ref={cancelRef}
-									onClick={onDeleteModalClose}
-									variant="outline">
-									{__('Cancel', 'masteriyo')}
-								</Button>
-								<Button
-									colorScheme="red"
-									onClick={onDeleteConfirm}
-									isLoading={deleteLesson.isLoading}>
-									{__('Delete', 'masteriyo')}
-								</Button>
-							</ButtonGroup>
-						</AlertDialogFooter>
-					</AlertDialogContent>
-				</AlertDialogOverlay>
-			</AlertDialog>
-		</FormProvider>
+						</Box>
+						<AlertDialog
+							isOpen={isDeleteModalOpen}
+							onClose={onDeleteModalClose}
+							isCentered
+							leastDestructiveRef={cancelRef}>
+							<AlertDialogOverlay>
+								<AlertDialogContent>
+									<AlertDialogHeader>
+										{__('Delete Lesson')} {name}
+									</AlertDialogHeader>
+									<AlertDialogBody>
+										Are you sure? You can't restore this section
+									</AlertDialogBody>
+									<AlertDialogFooter>
+										<ButtonGroup>
+											<Button
+												ref={cancelRef}
+												onClick={onDeleteModalClose}
+												variant="outline">
+												{__('Cancel', 'masteriyo')}
+											</Button>
+											<Button
+												colorScheme="red"
+												onClick={onDeleteConfirm}
+												isLoading={deleteLesson.isLoading}>
+												{__('Delete', 'masteriyo')}
+											</Button>
+										</ButtonGroup>
+									</AlertDialogFooter>
+								</AlertDialogContent>
+							</AlertDialogOverlay>
+						</AlertDialog>
+					</FormProvider>
+				</Container>
+			</Stack>
+		)
 	);
 };
 

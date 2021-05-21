@@ -17,10 +17,13 @@ export const SkeletonCourseList: React.FC = () => {
 						<SkeletonText noOfLines={1} />
 					</Td>
 					<Td>
-						<Stack direction="row">
-							<Skeleton h="3" w="6" />
-							<Skeleton h="3" w="6" />
-						</Stack>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
 					</Td>
 				</Tr>
 			))}

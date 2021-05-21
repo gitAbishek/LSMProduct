@@ -3,16 +3,18 @@ import {
 	Button,
 	ButtonGroup,
 	Center,
+	Container,
 	Heading,
 	Spinner,
 	Stack,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import HeaderBuilder from 'Components/layout/HeaderBuilder';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link as RouterLink, useHistory, useParams } from 'react-router-dom';
 
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
@@ -44,7 +46,6 @@ const EditCourse = () => {
 				status: 'success',
 				isClosable: true,
 			});
-
 			queryClient.invalidateQueries(`course${courseId}`);
 		},
 	});
@@ -61,7 +62,6 @@ const EditCourse = () => {
 			}),
 		};
 
-		console.log(data);
 		updateCourse.mutate(mergeDeep(data, newData));
 	};
 
@@ -74,51 +74,65 @@ const EditCourse = () => {
 			)}
 
 			{courseQuery.isSuccess && (
-				<FormProvider {...methods}>
-					<form onSubmit={methods.handleSubmit(onSubmit)}>
-						<Stack direction="column" spacing="8">
-							<Heading as="h1">
-								{__('Edit Course: ', 'masteriyo')} {courseQuery.data.name}
-							</Heading>
+				<Stack direction="column" spacing="8" alignItems="center">
+					<HeaderBuilder
+						courseId={courseId}
+						previewUrl={courseQuery.data.preview_permalink}
+					/>
+					<Container maxW="container.xl">
+						<FormProvider {...methods}>
+							<form onSubmit={methods.handleSubmit(onSubmit)}>
+								<Stack direction="column" spacing="8">
+									<Heading as="h1" size="xl">
+										{__('Edit Course: ', 'masteriyo')} {courseQuery.data.name}
+									</Heading>
 
-							<Stack direction="row" spacing="8">
-								<Box
-									flex="1"
-									bg="white"
-									p="10"
-									shadow="box"
-									d="flex"
-									flexDirection="column"
-									justifyContent="space-between">
-									<Stack direction="column" spacing="6">
-										<Name defaultValue={courseQuery.data.name} />
-										<Description defaultValue={courseQuery.data.description} />
-										<Price defaultValue={courseQuery.data.regular_price} />
+									<Stack direction="row" spacing="8">
+										<Box
+											flex="1"
+											bg="white"
+											p="10"
+											shadow="box"
+											d="flex"
+											flexDirection="column"
+											justifyContent="space-between">
+											<Stack direction="column" spacing="6">
+												<Name defaultValue={courseQuery.data.name} />
+												<Description
+													defaultValue={courseQuery.data.description}
+												/>
+												<Price defaultValue={courseQuery.data.regular_price} />
+											</Stack>
+											<ButtonGroup>
+												<Button
+													type="submit"
+													colorScheme="blue"
+													isLoading={updateCourse.isLoading}>
+													{__('Update', 'masteriyo')}
+												</Button>
+												<RouterLink to={routes.courses.list}>
+													<Button variant="outline">
+														{__('Cancel', 'masteriyo')}
+													</Button>
+												</RouterLink>
+											</ButtonGroup>
+										</Box>
+										<Box w="400px" bg="white" p="10" shadow="box">
+											<Stack direction="column" spacing="6">
+												<Categories
+													defaultValue={courseQuery.data.categories}
+												/>
+												<FeaturedImage
+													defaultValue={courseQuery.data.featured_image}
+												/>
+											</Stack>
+										</Box>
 									</Stack>
-									<ButtonGroup>
-										<Button
-											type="submit"
-											colorScheme="blue"
-											isLoading={updateCourse.isLoading}>
-											{__('Update', 'masteriyo')}
-										</Button>
-										<Button variant="outline" onClick={() => history.goBack()}>
-											{__('Cancel', 'masteriyo')}
-										</Button>
-									</ButtonGroup>
-								</Box>
-								<Box w="400px" bg="white" p="10" shadow="box">
-									<Stack direction="column" spacing="6">
-										<Categories defaultValue={courseQuery.data.categories} />
-										<FeaturedImage
-											defaultValue={courseQuery.data.featured_image}
-										/>
-									</Stack>
-								</Box>
-							</Stack>
-						</Stack>
-					</form>
-				</FormProvider>
+								</Stack>
+							</form>
+						</FormProvider>
+					</Container>
+				</Stack>
 			)}
 		</>
 	);

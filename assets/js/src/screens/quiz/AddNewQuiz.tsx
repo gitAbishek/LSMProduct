@@ -3,6 +3,7 @@ import {
 	Button,
 	ButtonGroup,
 	Center,
+	Container,
 	Flex,
 	Heading,
 	Spinner,
@@ -15,6 +16,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import HeaderBuilder from 'Components/layout/HeaderBuilder';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
@@ -95,60 +97,67 @@ const AddNewQuiz: React.FC = () => {
 	};
 
 	return (
-		<FormProvider {...methods}>
-			<Box bg="white" p="10" shadow="box">
-				{(contentQuery.isLoading || sectionQuery.isLoading) && (
-					<Center minH="xs">
-						<Spinner />
-					</Center>
-				)}
-				{(contentQuery.isSuccess || sectionQuery.isSuccess) && (
-					<Stack direction="column" spacing="8">
-						<Flex aling="center" justify="space-between">
-							<Heading as="h1" fontSize="x-large">
-								{__('Add New Quiz', 'masteriyo')}
-							</Heading>
-						</Flex>
-
-						<form onSubmit={methods.handleSubmit(onSubmit)}>
-							<Stack direction="column" spacing="6">
-								<Tabs>
-									<TabList justifyContent="center" borderBottom="1px">
-										<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
-										<Tab sx={tabStyles} isDisabled>
-											{__('Questions', 'masteriyo')}
-										</Tab>
-										<Tab sx={tabStyles} isDisabled>
-											{__('Settings', 'masteriyo')}
-										</Tab>
-									</TabList>
-									<TabPanels>
-										<TabPanel px="0">
-											<Stack direction="column" spacing="6">
-												<Name />
-												<Description />
-											</Stack>
-										</TabPanel>
-									</TabPanels>
-								</Tabs>
-
-								<ButtonGroup>
-									<Button
-										colorScheme="blue"
-										type="submit"
-										isLoading={addQuiz.isLoading}>
+		<Stack direction="column" spacing="8" alignItems="center">
+			{sectionQuery.isSuccess && <HeaderBuilder courseId={courseId} />}
+			<Container maxW="container.xl">
+				<FormProvider {...methods}>
+					<Box bg="white" p="10" shadow="box">
+						{(contentQuery.isLoading || sectionQuery.isLoading) && (
+							<Center minH="xs">
+								<Spinner />
+							</Center>
+						)}
+						{(contentQuery.isSuccess || sectionQuery.isSuccess) && (
+							<Stack direction="column" spacing="8">
+								<Flex aling="center" justify="space-between">
+									<Heading as="h1" fontSize="x-large">
 										{__('Add New Quiz', 'masteriyo')}
-									</Button>
-									<Button variant="outline" onClick={() => history.goBack()}>
-										{__('Cancel', 'masteriyo')}
-									</Button>
-								</ButtonGroup>
+									</Heading>
+								</Flex>
+
+								<form onSubmit={methods.handleSubmit(onSubmit)}>
+									<Stack direction="column" spacing="6">
+										<Tabs>
+											<TabList justifyContent="center" borderBottom="1px">
+												<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
+												<Tab sx={tabStyles} isDisabled>
+													{__('Questions', 'masteriyo')}
+												</Tab>
+												<Tab sx={tabStyles} isDisabled>
+													{__('Settings', 'masteriyo')}
+												</Tab>
+											</TabList>
+											<TabPanels>
+												<TabPanel px="0">
+													<Stack direction="column" spacing="6">
+														<Name />
+														<Description />
+													</Stack>
+												</TabPanel>
+											</TabPanels>
+										</Tabs>
+
+										<ButtonGroup>
+											<Button
+												colorScheme="blue"
+												type="submit"
+												isLoading={addQuiz.isLoading}>
+												{__('Add New Quiz', 'masteriyo')}
+											</Button>
+											<Button
+												variant="outline"
+												onClick={() => history.goBack()}>
+												{__('Cancel', 'masteriyo')}
+											</Button>
+										</ButtonGroup>
+									</Stack>
+								</form>
 							</Stack>
-						</form>
-					</Stack>
-				)}
-			</Box>
-		</FormProvider>
+						)}
+					</Box>
+				</FormProvider>
+			</Container>
+		</Stack>
 	);
 };
 

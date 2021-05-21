@@ -5,19 +5,31 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogOverlay,
+	Avatar,
 	Badge,
 	Button,
 	ButtonGroup,
+	Icon,
 	IconButton,
 	Link,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
 	Stack,
 	Td,
-	Tooltip,
+	Text,
 	Tr,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
-import { BiEdit, BiTrash } from 'react-icons/bi';
+import {
+	BiCalendar,
+	BiDotsVerticalRounded,
+	BiEdit,
+	BiShow,
+	BiTrash,
+} from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 
@@ -30,15 +42,19 @@ interface Props {
 	name: string;
 	price?: any;
 	categories?: any;
+	permalink: string;
+	createdOn: string;
+	author: { id: number; display_name: string; avatar_url: string };
 }
 
 const CourseList: React.FC<Props> = (props) => {
-	const { id, name, price, categories } = props;
+	const { id, name, price, categories, permalink, createdOn, author } = props;
 	const history = useHistory();
 	const queryClient = useQueryClient();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const courseAPI = new API(urls.courses);
 	const cancelRef = useRef<any>();
+	const createdOnDate = createdOn.split(' ')[0];
 
 	const deleteCourse = useMutation((id: number) => courseAPI.delete(id), {
 		onSuccess: () => {
@@ -68,7 +84,7 @@ const CourseList: React.FC<Props> = (props) => {
 			<Td>
 				<Link
 					as={RouterLink}
-					to={routes.section.replace(':courseId', id.toString())}
+					to={routes.courses.edit.replace(':courseId', id.toString())}
 					fontWeight="semibold"
 					_hover={{ color: 'blue.500' }}>
 					{name}
@@ -81,32 +97,52 @@ const CourseList: React.FC<Props> = (props) => {
 					))}
 				</Stack>
 			</Td>
+			<Td>
+				<Stack direction="row" spacing="2" alignItems="center">
+					<Avatar src={author.avatar_url} size="xs" />
+					<Text fontSize="sm" fontWeight="medium" color="gray.600">
+						{author.display_name}
+					</Text>
+				</Stack>
+			</Td>
 			<Td>{price}</Td>
 			<Td>
+				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
+					<Icon as={BiCalendar} />
+					<Text fontSize="sm" fontWeight="medium">
+						{createdOnDate}
+					</Text>
+				</Stack>
+			</Td>
+			<Td>
 				<ButtonGroup>
-					<Tooltip label={__('Edit Course', 'masteriyo')}>
-						<IconButton
-							icon={<BiEdit />}
-							colorScheme="blue"
-							variant="link"
-							size="lg"
-							padding="0"
-							minW="0"
-							aria-label={__('Edit Course', 'masteriyo')}
-							onClick={() => onEditPress()}
+					<Button
+						leftIcon={<BiEdit />}
+						colorScheme="blue"
+						size="sm"
+						onClick={() => onEditPress()}>
+						{__('Edit')}
+					</Button>
+					<Menu placement="bottom-end">
+						<MenuButton
+							as={IconButton}
+							icon={<BiDotsVerticalRounded />}
+							variant="outline"
+							rounded="sm"
+							fontSize="large"
+							size="sm"
 						/>
-					</Tooltip>
-					<Tooltip label={__('Delete Course', 'masteriyo')}>
-						<IconButton
-							icon={<BiTrash />}
-							colorScheme="red"
-							variant="link"
-							size="lg"
-							padding="0"
-							aria-label={__('Delete Course', 'masteriyo')}
-							onClick={() => onDeletePress()}
-						/>
-					</Tooltip>
+						<MenuList>
+							<Link href={permalink} isExternal>
+								<MenuItem icon={<BiShow />}>
+									{__('Preview', 'masteriyo')}
+								</MenuItem>
+							</Link>
+							<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
+								{__('Delete', 'masteriyo')}
+							</MenuItem>
+						</MenuList>
+					</Menu>
 				</ButtonGroup>
 				<AlertDialog
 					isOpen={isDeleteModalOpen}

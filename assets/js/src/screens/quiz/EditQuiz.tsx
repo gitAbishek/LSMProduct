@@ -30,7 +30,7 @@ import Description from './components/Description';
 import Name from './components/Name';
 import Questions from './components/question/Questions';
 
-const EditQuiz: React.FC = () => {
+const EditQuiz = () => {
 	const { quizId }: any = useParams();
 	const methods = useForm();
 	const history = useHistory();

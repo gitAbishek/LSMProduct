@@ -439,3 +439,23 @@ if ( ! function_exists( 'masteriyo_is_add_payment_method_page' ) ) {
 		return ( $page_id && is_page( $page_id ) && ( isset( $wp->query_vars['payment-methods'] ) || isset( $wp->query_vars['add-payment-method'] ) ) );
 	}
 }
+
+if ( ! function_exists( 'masteriyo_is_current_user_post_author' ) ) {
+	/**
+	 * Check if the current user is the author of a post.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param integer|string $post_id Post ID.
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_current_user_post_author( $post_id ) {
+		$post = get_post( absint( $post_id ) );
+
+		if ( is_a( $post, \WP_Post::class ) ) {
+			return get_current_user_id() === absint( $post->post_author );
+		}
+		return false;
+	}
+}

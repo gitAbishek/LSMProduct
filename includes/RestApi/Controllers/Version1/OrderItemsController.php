@@ -12,7 +12,7 @@ namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Permission;
-use ThemeGrill\Masteriyo\Models\OrderItem;
+use ThemeGrill\Masteriyo\Models\Order\OrderItem;
 
 /**
  * OrderItemsController class.
@@ -514,10 +514,9 @@ class OrderItemsController extends PostsController {
 			);
 		}
 
-		if (
-			$order->get_customer_id() !== get_current_user_id() ||
-			! $this->permission->rest_check_order_permissions( 'read', $order_item->get_order_id() )
-		) {
+		$cap = masteriyo_is_current_user_post_author( $order_item->get_order_id() ) ? 'read_orders' : 'read_others_orders';
+
+		if ( ! $this->permission->rest_check_order_permissions( $cap, $order_item->get_order_id() ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
@@ -561,17 +560,9 @@ class OrderItemsController extends PostsController {
 			);
 		}
 
-		if ( get_current_user_id() !== $order->get_customer_id() ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_read',
-				__( 'Sorry, you cannot list this resource.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
+		$cap = masteriyo_is_current_user_post_author( $request['order_id'] ) ? 'read_orders' : 'read_others_orders';
 
-		if ( ! $this->permission->rest_check_order_permissions( 'read', absint( $request['order_id'] ) ) ) {
+		if ( ! $this->permission->rest_check_order_permissions( $cap, $request['order_id'] ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
@@ -603,7 +594,11 @@ class OrderItemsController extends PostsController {
 		$order_id = isset( $request['order_id'] ) ? absint( $request['order_id'] ) : 0;
 		$order    = masteriyo_get_order( $order_id );
 
-		if ( ! $order_id || ! is_object( $order ) ) {
+		if (
+			! $order_id ||
+			! is_object( $order ) ||
+			! masteriyo_is_current_user_post_author( $order_id )
+		) {
 			return new \WP_Error(
 				"masteriyo_rest_invalid_id",
 				__( 'Invalid order ID.', 'masteriyo' ),
@@ -613,12 +608,12 @@ class OrderItemsController extends PostsController {
 			);
 		}
 
-		if ( $order->get_customer_id() !== get_current_user_id() ) {
+		if ( ! $this->permission->rest_check_order_permissions( 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code(),
+					'status' => rest_authorization_required_code()
 				)
 			);
 		}
@@ -648,7 +643,21 @@ class OrderItemsController extends PostsController {
 
 		$order_item = $this->get_object( absint( $request['id'] ) );
 
-		if ( ! $order_item || ! $this->permission->rest_check_order_permissions( 'delete', $order_item->get_order_id() ) ) {
+		if (
+			! $order_item ||
+			! is_object( $order_item ) ||
+			! masteriyo_is_current_user_post_author( $order_item->get_order_id() )
+		) {
+			return new \WP_Error(
+				"masteriyo_rest_invalid_id",
+				__( 'Invalid order ID.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( ! $this->permission->rest_check_order_permissions( 'delete', $order_item->get_order_id() ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
@@ -693,7 +702,21 @@ class OrderItemsController extends PostsController {
 			);
 		}
 
-		if ( ! $this->permission->rest_check_order_permissions( 'update', $order_item->get_order_id() ) ) {
+		if (
+			! $order_item ||
+			! is_object( $order_item ) ||
+			! masteriyo_is_current_user_post_author( $order_item->get_order_id() )
+		) {
+			return new \WP_Error(
+				"masteriyo_rest_invalid_id",
+				__( 'Invalid order ID.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( ! $this->permission->rest_check_order_permissions( 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),

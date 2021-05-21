@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 use ThemeGrill\Masteriyo\Helper\Permission;
 use ThemeGrill\Masteriyo\Exceptions\RestException;
 use ThemeGrill\Masteriyo\ModelException;
-use ThemeGrill\Masteriyo\Models\Order;
+use ThemeGrill\Masteriyo\Models\Order\Order;
 
 /**
  * OrdersController class.
@@ -756,35 +756,14 @@ class OrdersController extends PostsController {
 			return true;
 		}
 
-		$id    = absint( $request['id'] );
-		$order = $this->get_object( $id );
+		$cap = masteriyo_is_current_user_post_author( $request['id'] ) ? 'read_orders' : 'read_others_orders';
 
-		if ( ! is_object( $order ) ) {
-			return new \WP_Error(
-				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		if ( ! $this->permission->rest_check_order_permissions( 'read', $id ) ) {
+		if ( ! $this->permission->rest_check_order_permissions( $cap, $request['id'] ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
-				)
-			);
-		}
-
-		if ( $order->get_customer_id() !== get_current_user_id() ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_read',
-				__( 'Sorry, you are not allowed to read this resource.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
 				)
 			);
 		}
@@ -812,20 +791,41 @@ class OrdersController extends PostsController {
 			return true;
 		}
 
-		$customer_id = get_current_user_id();
-
-		if ( isset( $request['customer_id'] ) ) {
-			$customer_id = absint( $request['customer_id'] );
-		}
-
-		if ( ! $customer_id || get_current_user_id() !== $customer_id ) {
+		if ( ! $this->permission->rest_check_order_permissions( 'read_orders' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
-				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
+				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
 				)
 			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check permissions for an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $object_type Object type.
+	 * @param string $context   Request context.
+	 * @param int    $object_id Post ID.
+	 *
+	 * @return bool
+	 */
+	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
+		if ( 'read' === $context ) {
+			$cap = masteriyo_is_current_user_post_author( $object_id ) ? 'read_orders' : 'read_others_orders';
+
+			if ( ! $this->permission->rest_check_order_permissions( $cap, $object_id ) ) {
+				return false;
+			}
 		}
 
 		return true;
@@ -913,7 +913,13 @@ class OrdersController extends PostsController {
 		 * Prevent from updating the order owner to someone else.
 		 */
 		if ( isset( $request['customer_id'] ) && absint( $request['customer_id'] ) !== get_current_user_id() ) {
-			return false;
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, you are not allowed to change the owner of the order.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
 		}
 
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {

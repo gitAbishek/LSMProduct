@@ -43,6 +43,7 @@ const EditLesson: React.FC = () => {
 	const cancelRef = useRef<any>();
 	const lessonAPI = new API(urls.lessons);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const [courseId, setCourseId] = useState<any>(null);
 
 	const lessonQuery = useQuery(
 		[`section${lessonId}`, lessonId],
@@ -50,6 +51,9 @@ const EditLesson: React.FC = () => {
 		{
 			onError: () => {
 				history.push(routes.notFound);
+			},
+			onSuccess: (data) => {
+				setCourseId(data.course_id);
 			},
 		}
 	);
@@ -147,7 +151,13 @@ const EditLesson: React.FC = () => {
 										isLoading={updateLesson.isLoading}>
 										{__('Update Lesson', 'masteriyo')}
 									</Button>
-									<Button variant="outline" onClick={() => history.goBack()}>
+									<Button
+										variant="outline"
+										onClick={() =>
+											history.push(
+												routes.builder.replace(':courseId', courseId)
+											)
+										}>
 										{__('Cancel', 'masteriyo')}
 									</Button>
 								</ButtonGroup>

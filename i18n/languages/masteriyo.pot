@@ -3,378 +3,378 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: assets/js/src/screens/404/FourOFour.tsx:24
+#: assets/js/back-end/screens/404/FourOFour.tsx:24
 msgid "404"
 msgstr ""
 
-#: assets/js/src/components/common/ImageUpload.tsx:131
+#: assets/js/back-end/components/common/ImageUpload.tsx:131
 msgid "Remove featured Image"
 msgstr ""
 
-#: assets/js/src/components/common/ImageUpload.tsx:164
+#: assets/js/back-end/components/common/ImageUpload.tsx:164
 msgid "Upload an Image here"
 msgstr ""
 
-#: assets/js/src/components/common/ImageUpload.tsx:79
+#: assets/js/back-end/components/common/ImageUpload.tsx:79
 msgid "Please upload Valid Image files"
 msgstr ""
 
-#: assets/js/src/components/common/ImageUpload.tsx:80
+#: assets/js/back-end/components/common/ImageUpload.tsx:80
 msgid "Media files jpeg, png are only supported"
 msgstr ""
 
-#: assets/js/src/components/layout/Header.tsx:84
-#: assets/js/src/screens/courses/AddNewCourse.tsx:60
+#: assets/js/back-end/components/layout/Header.tsx:84
+#: assets/js/back-end/screens/courses/AddNewCourse.tsx:60
 msgid "Add New Course"
 msgstr ""
 
-#: assets/js/src/components/layout/HeaderBuilder.tsx:103
-#: assets/js/src/screens/courses/components/CourseList.tsx:138
-#: assets/js/src/screens/layouts/MainToolbar.tsx:85
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:108
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:138
+#: assets/js/back-end/screens/layouts/MainToolbar.tsx:85
 msgid "Preview"
 msgstr ""
 
-#: assets/js/src/components/layout/HeaderBuilder.tsx:113
-#: assets/js/src/screens/layouts/MainToolbar.tsx:87
-#: assets/js/src/screens/sections/components/EditSection.tsx:96
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:118
+#: assets/js/back-end/screens/layouts/MainToolbar.tsx:87
+#: assets/js/back-end/screens/sections/components/EditSection.tsx:96
 msgid "Save"
 msgstr ""
 
-#: assets/js/src/components/layout/HeaderBuilder.tsx:69
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:69
 msgid "Course"
 msgstr ""
 
-#: assets/js/src/components/layout/HeaderBuilder.tsx:80
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:84
 msgid "Builder"
 msgstr ""
 
-#: assets/js/src/components/layout/HeaderBuilder.tsx:93
-#: assets/js/src/screens/quiz/AddNewQuiz.tsx:122
-#: assets/js/src/screens/quiz/EditQuiz.tsx:97
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:98
+#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:127
+#: assets/js/back-end/screens/quiz/EditQuiz.tsx:107
 msgid "Settings"
 msgstr ""
 
-#: assets/js/src/screens/404/FourOFour.tsx:26
+#: assets/js/back-end/screens/404/FourOFour.tsx:26
 msgid "Oops - Page Not Found"
 msgstr ""
 
-#: assets/js/src/screens/404/FourOFour.tsx:29
+#: assets/js/back-end/screens/404/FourOFour.tsx:29
 msgid "We can not find the page you are looking for"
 msgstr ""
 
-#: assets/js/src/screens/404/FourOFour.tsx:33
+#: assets/js/back-end/screens/404/FourOFour.tsx:33
 msgid "Back to Courses"
 msgstr ""
 
-#: assets/js/src/screens/courses/AddNewCourse.tsx:84
+#: assets/js/back-end/screens/courses/AddNewCourse.tsx:84
 msgid "Add Course"
 msgstr ""
 
-#: assets/js/src/screens/courses/AddNewCourse.tsx:89
-#: assets/js/src/screens/courses/EditCourse.tsx:115
-#: assets/js/src/screens/courses/components/CourseList.tsx:166
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:153
-#: assets/js/src/screens/lessons/EditLesson.tsx:178
-#: assets/js/src/screens/quiz/AddNewQuiz.tsx:143
-#: assets/js/src/screens/quiz/EditQuiz.tsx:118
-#: assets/js/src/screens/quiz/components/question/Question.tsx:193
-#: assets/js/src/screens/sections/components/Content.tsx:156
-#: assets/js/src/screens/sections/components/EditSection.tsx:99
-#: assets/js/src/screens/sections/components/Section.tsx:216
+#: assets/js/back-end/screens/courses/AddNewCourse.tsx:89
+#: assets/js/back-end/screens/courses/EditCourse.tsx:115
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:166
+#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:153
+#: assets/js/back-end/screens/lessons/EditLesson.tsx:195
+#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:150
+#: assets/js/back-end/screens/quiz/EditQuiz.tsx:137
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:193
+#: assets/js/back-end/screens/sections/components/Content.tsx:156
+#: assets/js/back-end/screens/sections/components/EditSection.tsx:99
+#: assets/js/back-end/screens/sections/components/Section.tsx:216
 msgid "Cancel"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:34
+#: assets/js/back-end/screens/courses/AllCourses.tsx:34
 msgid "Courses"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:41
+#: assets/js/back-end/screens/courses/AllCourses.tsx:41
 msgid "Title"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:42
-#: assets/js/src/screens/courses/components/Categories.tsx:42
+#: assets/js/back-end/screens/courses/AllCourses.tsx:42
+#: assets/js/back-end/screens/courses/components/Categories.tsx:42
 msgid "Categories"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:43
+#: assets/js/back-end/screens/courses/AllCourses.tsx:43
 msgid "Author"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:44
+#: assets/js/back-end/screens/courses/AllCourses.tsx:44
 msgid "Price"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:45
+#: assets/js/back-end/screens/courses/AllCourses.tsx:45
 msgid "Date"
 msgstr ""
 
-#: assets/js/src/screens/courses/AllCourses.tsx:46
+#: assets/js/back-end/screens/courses/AllCourses.tsx:46
 msgid "Actions"
 msgstr ""
 
-#: assets/js/src/screens/courses/EditCourse.tsx:111
-#: assets/js/src/screens/quiz/EditQuiz.tsx:113
-#: assets/js/src/screens/quiz/components/question/Question.tsx:163
+#: assets/js/back-end/screens/courses/EditCourse.tsx:111
+#: assets/js/back-end/screens/quiz/EditQuiz.tsx:125
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:163
 msgid "Update"
 msgstr ""
 
-#: assets/js/src/screens/courses/EditCourse.tsx:44
+#: assets/js/back-end/screens/courses/EditCourse.tsx:44
 msgid " is updated successfully."
 msgstr ""
 
-#: assets/js/src/screens/courses/EditCourse.tsx:45
+#: assets/js/back-end/screens/courses/EditCourse.tsx:45
 msgid "You can keep editing it"
 msgstr ""
 
-#: assets/js/src/screens/courses/EditCourse.tsx:87
+#: assets/js/back-end/screens/courses/EditCourse.tsx:87
 msgid "Edit Course: "
 msgstr ""
 
-#: assets/js/src/screens/courses/components/CourseList.tsx:124
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:124
-#: assets/js/src/screens/sections/components/Content.tsx:119
-#: assets/js/src/screens/sections/components/Section.tsx:132
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:124
+#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:124
+#: assets/js/back-end/screens/sections/components/Content.tsx:119
+#: assets/js/back-end/screens/sections/components/Section.tsx:132
 msgid "Edit"
 msgstr ""
 
-#: assets/js/src/screens/courses/components/CourseList.tsx:155
-#: assets/js/src/screens/lessons/EditLesson.tsx:167
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:155
+#: assets/js/back-end/screens/lessons/EditLesson.tsx:184
 msgid "Delete Lesson"
 msgstr ""
 
-#: assets/js/src/screens/courses/components/CourseList.tsx:172
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:127
-#: assets/js/src/screens/lessons/EditLesson.tsx:184
-#: assets/js/src/screens/quiz/components/answer/Answers.tsx:90
-#: assets/js/src/screens/quiz/components/question/Question.tsx:199
-#: assets/js/src/screens/sections/components/Content.tsx:164
-#: assets/js/src/screens/sections/components/Section.tsx:222
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:172
+#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:127
+#: assets/js/back-end/screens/lessons/EditLesson.tsx:201
+#: assets/js/back-end/screens/quiz/components/answer/Answers.tsx:90
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:199
+#: assets/js/back-end/screens/sections/components/Content.tsx:164
+#: assets/js/back-end/screens/sections/components/Section.tsx:222
 msgid "Delete"
 msgstr ""
 
-#: assets/js/src/screens/courses/components/Description.tsx:17
+#: assets/js/back-end/screens/courses/components/Description.tsx:17
 msgid "Course Description"
 msgstr ""
 
-#: assets/js/src/screens/courses/components/FeaturedImage.tsx:17
-#: assets/js/src/screens/lessons/components/FeaturedImage.tsx:17
+#: assets/js/back-end/screens/courses/components/FeaturedImage.tsx:17
+#: assets/js/back-end/screens/lessons/components/FeaturedImage.tsx:17
 msgid "Featured Image"
 msgstr ""
 
-#: assets/js/src/screens/courses/components/Name.tsx:23
+#: assets/js/back-end/screens/courses/components/Name.tsx:23
 msgid "Course Name"
 msgstr ""
 
-#: assets/js/src/screens/courses/components/Name.tsx:26
+#: assets/js/back-end/screens/courses/components/Name.tsx:26
 msgid "Your Course Name"
 msgstr ""
 
-#: assets/js/src/screens/courses/components/Name.tsx:28
+#: assets/js/back-end/screens/courses/components/Name.tsx:28
 msgid "You must provide name for the course"
 msgstr ""
 
-#: assets/js/src/screens/courses/components/Price.tsx:35
+#: assets/js/back-end/screens/courses/components/Price.tsx:35
 msgid "Featured "
 msgstr ""
 
-#: assets/js/src/screens/courses/components/Price.tsx:54
+#: assets/js/back-end/screens/courses/components/Price.tsx:54
 msgid "Setting price 0 will make your course free"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:148
-#: assets/js/src/screens/sections/components/Section.tsx:185
+#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:148
+#: assets/js/back-end/screens/sections/components/Section.tsx:185
 msgid "Add New Lesson"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:79
+#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:79
 msgid "Lesson Added"
 msgstr ""
 
-#: assets/js/src/screens/lessons/AddNewLesson.tsx:80
-#: assets/js/src/screens/quiz/AddNewQuiz.tsx:79
-#: assets/js/src/screens/quiz/EditQuiz.tsx:64
+#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:80
+#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:81
+#: assets/js/back-end/screens/quiz/EditQuiz.tsx:70
 msgid " is successfully added."
 msgstr ""
 
-#: assets/js/src/screens/lessons/EditLesson.tsx:115
+#: assets/js/back-end/screens/lessons/EditLesson.tsx:125
 msgid "Edit Lesson"
 msgstr ""
 
-#: assets/js/src/screens/lessons/EditLesson.tsx:148
+#: assets/js/back-end/screens/lessons/EditLesson.tsx:160
 msgid "Update Lesson"
 msgstr ""
 
-#: assets/js/src/screens/lessons/EditLesson.tsx:62
+#: assets/js/back-end/screens/lessons/EditLesson.tsx:68
 msgid "Lesson Updated Successfully"
 msgstr ""
 
-#: assets/js/src/screens/lessons/EditLesson.tsx:63
-#: assets/js/src/screens/quiz/components/question/Question.tsx:63
+#: assets/js/back-end/screens/lessons/EditLesson.tsx:69
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:63
 msgid " has been updated successfully."
 msgstr ""
 
-#: assets/js/src/screens/lessons/EditLesson.tsx:77
+#: assets/js/back-end/screens/lessons/EditLesson.tsx:83
 msgid "Lesson Deleted Successfully"
 msgstr ""
 
-#: assets/js/src/screens/lessons/EditLesson.tsx:78
-#: assets/js/src/screens/quiz/components/question/Question.tsx:76
+#: assets/js/back-end/screens/lessons/EditLesson.tsx:84
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:76
 msgid " has been deleted successfully."
 msgstr ""
 
-#: assets/js/src/screens/lessons/components/Description.tsx:17
+#: assets/js/back-end/screens/lessons/components/Description.tsx:17
 msgid "Lesson Description"
 msgstr ""
 
-#: assets/js/src/screens/lessons/components/Name.tsx:23
+#: assets/js/back-end/screens/lessons/components/Name.tsx:23
 msgid "Lesson Name"
 msgstr ""
 
-#: assets/js/src/screens/lessons/components/Name.tsx:26
+#: assets/js/back-end/screens/lessons/components/Name.tsx:26
 msgid "Your lesson Name"
 msgstr ""
 
-#: assets/js/src/screens/lessons/components/Name.tsx:28
+#: assets/js/back-end/screens/lessons/components/Name.tsx:28
 msgid "You must provide name for the lesson"
 msgstr ""
 
-#: assets/js/src/screens/quiz/AddNewQuiz.tsx:117
-#: assets/js/src/screens/quiz/EditQuiz.tsx:95
+#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:122
+#: assets/js/back-end/screens/quiz/EditQuiz.tsx:105
 msgid "Info"
 msgstr ""
 
-#: assets/js/src/screens/quiz/AddNewQuiz.tsx:119
-#: assets/js/src/screens/quiz/EditQuiz.tsx:96
+#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:124
+#: assets/js/back-end/screens/quiz/EditQuiz.tsx:106
 msgid "Questions"
 msgstr ""
 
-#: assets/js/src/screens/quiz/AddNewQuiz.tsx:140
-#: assets/js/src/screens/sections/components/Section.tsx:192
+#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:145
+#: assets/js/back-end/screens/sections/components/Section.tsx:192
 msgid "Add New Quiz"
 msgstr ""
 
-#: assets/js/src/screens/quiz/AddNewQuiz.tsx:78
-#: assets/js/src/screens/quiz/EditQuiz.tsx:63
+#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:80
+#: assets/js/back-end/screens/quiz/EditQuiz.tsx:69
 msgid "Quiz Added"
 msgstr ""
 
-#: assets/js/src/screens/quiz/EditQuiz.tsx:89
+#: assets/js/back-end/screens/quiz/EditQuiz.tsx:99
 msgid "Edit Quiz:"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/Description.tsx:17
+#: assets/js/back-end/screens/quiz/components/Description.tsx:17
 msgid "Quiz Description"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/Name.tsx:23
+#: assets/js/back-end/screens/quiz/components/Name.tsx:23
 msgid "Quiz Name"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/Name.tsx:26
+#: assets/js/back-end/screens/quiz/components/Name.tsx:26
 msgid "Your Quiz Name"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/Name.tsx:28
+#: assets/js/back-end/screens/quiz/components/Name.tsx:28
 msgid "You must provide name for the quiz"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/answer/Answers.tsx:63
+#: assets/js/back-end/screens/quiz/components/answer/Answers.tsx:63
 msgid "Answers"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/answer/Answers.tsx:84
-#: assets/js/src/screens/quiz/components/question/Question.tsx:137
+#: assets/js/back-end/screens/quiz/components/answer/Answers.tsx:84
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:137
 msgid "Duplicate"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/question/EditQuestion.tsx:49
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:49
 msgid "Question Name"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/question/EditQuestion.tsx:52
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:52
 msgid "Your Question Name"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/question/EditQuestion.tsx:54
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:54
 msgid "You must provide name for the question"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/question/EditQuestion.tsx:78
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:78
 msgid "Please select question type"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/question/EditQuestion.tsx:87
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:87
 msgid "Question Description"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/question/Question.tsx:182
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:182
 msgid "Delete "
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/question/Question.tsx:62
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:62
 msgid "Question Updated"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/question/Question.tsx:75
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:75
 msgid "Question Deleted"
 msgstr ""
 
-#: assets/js/src/screens/quiz/components/question/Questions.tsx:69
+#: assets/js/back-end/screens/quiz/components/question/Questions.tsx:69
 msgid ""
 "There are no questions right now, You can add them by clicking on Add New "
 "Question"
 msgstr ""
 
-#: assets/js/src/screens/sections/SectionBuilder.tsx:148
+#: assets/js/back-end/screens/sections/SectionBuilder.tsx:148
 msgid "Add New Section"
 msgstr ""
 
-#: assets/js/src/screens/sections/SectionBuilder.tsx:61
+#: assets/js/back-end/screens/sections/SectionBuilder.tsx:61
 msgid "Builder Updated"
 msgstr ""
 
-#: assets/js/src/screens/sections/SectionBuilder.tsx:62
+#: assets/js/back-end/screens/sections/SectionBuilder.tsx:62
 msgid "builder is updated."
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Content.tsx:145
-#: assets/js/src/screens/sections/components/Section.tsx:205
+#: assets/js/back-end/screens/sections/components/Content.tsx:145
+#: assets/js/back-end/screens/sections/components/Section.tsx:205
 msgid "Delete Section"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/EditSection.tsx:52
+#: assets/js/back-end/screens/sections/components/EditSection.tsx:52
 msgid "Updated Successfully"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/EditSection.tsx:53
+#: assets/js/back-end/screens/sections/components/EditSection.tsx:53
 msgid " is updated succesffuly"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/EditSection.tsx:72
+#: assets/js/back-end/screens/sections/components/EditSection.tsx:72
 msgid "Section Name"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/EditSection.tsx:74
+#: assets/js/back-end/screens/sections/components/EditSection.tsx:74
 msgid "Your Section Name"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/EditSection.tsx:77
+#: assets/js/back-end/screens/sections/components/EditSection.tsx:77
 msgid "Section name cannot be empty"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/EditSection.tsx:85
+#: assets/js/back-end/screens/sections/components/EditSection.tsx:85
 msgid "Section Description"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:177
+#: assets/js/back-end/screens/sections/components/Section.tsx:177
 msgid "Add New Content"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:68
+#: assets/js/back-end/screens/sections/components/Section.tsx:68
 msgid "Section Deleted"
 msgstr ""
 
-#: assets/js/src/screens/sections/components/Section.tsx:70
+#: assets/js/back-end/screens/sections/components/Section.tsx:70
 msgid " has been deleted successfully"
 msgstr ""

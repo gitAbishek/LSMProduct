@@ -101,7 +101,7 @@ class ScriptStyle {
 			'masteriyo_enqueue_scripts',
 			array(
 				'admin'          => array(
-					'src'      => $this->get_asset_url( '/assets/js/build/app.js' ),
+					'src'      => $this->get_asset_url( '/assets/js/build/masteriyo-backend.js' ),
 					'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
@@ -148,7 +148,7 @@ class ScriptStyle {
 			'masteriyo_enqueue_styles',
 			array(
 				'admin'  => array(
-					'src'      => $this->get_asset_url( '/assets/js/build/app.css' ),
+					'src'      => $this->get_asset_url( '/assets/js/build/masteriyo-backend.css' ),
 					'has_rtl'  => true,
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',

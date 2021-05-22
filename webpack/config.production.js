@@ -9,7 +9,7 @@ const config = {
 	entry: baseConfig.paths.entry,
 
 	output: {
-		filename: '[name].js',
+		filename: 'masteriyo-[name].js',
 		path: baseConfig.paths.output,
 	},
 
@@ -62,7 +62,7 @@ const config = {
 	},
 
 	plugins: [
-		new MiniCSSExtractPlugin({ filename: '[name].css' }),
+		new MiniCSSExtractPlugin({ filename: 'masteriyo-[name].css' }),
 		new DependencyExtractionWebpackPlugin({ injectPolyfill: true }),
 		new CleanWebpackPlugin(),
 		new Dotenv(),

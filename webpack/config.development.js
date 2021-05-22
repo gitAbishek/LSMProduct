@@ -3,6 +3,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const baseConfig = require('./config.base');
+const WebpackBar = require('webpackbar');
 
 const config = {
 	entry: baseConfig.paths.entry,
@@ -60,6 +61,7 @@ const config = {
 		}),
 		new ErrorOverlayPlugin(),
 		new Dotenv(),
+		new WebpackBar(),
 	].filter(Boolean),
 
 	resolve: baseConfig.resolver,

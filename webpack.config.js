@@ -1,4 +1,4 @@
-const { isProduction, isDevelopment } = require('webpack-mode');
+const { isProduction } = require('webpack-mode');
 
 module.exports = function () {
 	if (isProduction) {

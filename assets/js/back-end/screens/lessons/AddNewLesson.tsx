@@ -95,69 +95,69 @@ const AddNewLesson: React.FC = () => {
 		addLesson.mutate(mergeDeep(data, newData));
 	};
 
-	// if (contentQuery.isLoading || sectionQuery.isLoading) {
-	return <FullScreenLoader />;
-	// }
+	if (contentQuery.isLoading || sectionQuery.isLoading) {
+		return <FullScreenLoader />;
+	}
 
-	// return (
-	// 	<Stack direction="column" spacing="8" alignItems="center">
-	// 		<HeaderBuilder courseId={courseId} />
-	// 		<Container maxW="container.xl">
-	// 			<FormProvider {...methods}>
-	// 				<Box bg="white" p="10" shadow="box">
-	// 					<Stack direction="column" spacing="8">
-	// 						<Flex aling="center" justify="space-between">
-	// 							<Heading as="h1" fontSize="x-large">
-	// 								{__('Add New Lesson', 'masteriyo')}
-	// 							</Heading>
-	// 							<Menu placement="bottom-end">
-	// 								<MenuButton
-	// 									as={IconButton}
-	// 									icon={<BiDotsVerticalRounded />}
-	// 									variant="outline"
-	// 									rounded="sm"
-	// 									fontSize="large"
-	// 								/>
-	// 								<MenuList>
-	// 									<MenuItem icon={<BiEdit />}>
-	// 										{__('Edit', 'masteriyo')}
-	// 									</MenuItem>
-	// 									<MenuItem icon={<BiTrash />}>
-	// 										{__('Delete', 'masteriyo')}
-	// 									</MenuItem>
-	// 								</MenuList>
-	// 							</Menu>
-	// 						</Flex>
+	return (
+		<Stack direction="column" spacing="8" alignItems="center">
+			<HeaderBuilder courseId={courseId} />
+			<Container maxW="container.xl">
+				<FormProvider {...methods}>
+					<Box bg="white" p="10" shadow="box">
+						<Stack direction="column" spacing="8">
+							<Flex aling="center" justify="space-between">
+								<Heading as="h1" fontSize="x-large">
+									{__('Add New Lesson', 'masteriyo')}
+								</Heading>
+								<Menu placement="bottom-end">
+									<MenuButton
+										as={IconButton}
+										icon={<BiDotsVerticalRounded />}
+										variant="outline"
+										rounded="sm"
+										fontSize="large"
+									/>
+									<MenuList>
+										<MenuItem icon={<BiEdit />}>
+											{__('Edit', 'masteriyo')}
+										</MenuItem>
+										<MenuItem icon={<BiTrash />}>
+											{__('Delete', 'masteriyo')}
+										</MenuItem>
+									</MenuList>
+								</Menu>
+							</Flex>
 
-	// 						<form onSubmit={methods.handleSubmit(onSubmit)}>
-	// 							<Stack direction="column" spacing="6">
-	// 								<Name />
-	// 								<Description />
-	// 								<FeaturedImage />
+							<form onSubmit={methods.handleSubmit(onSubmit)}>
+								<Stack direction="column" spacing="6">
+									<Name />
+									<Description />
+									<FeaturedImage />
 
-	// 								<Box py="3">
-	// 									<Divider />
-	// 								</Box>
+									<Box py="3">
+										<Divider />
+									</Box>
 
-	// 								<ButtonGroup>
-	// 									<Button
-	// 										colorScheme="blue"
-	// 										type="submit"
-	// 										isLoading={addLesson.isLoading}>
-	// 										{__('Add New Lesson', 'masteriyo')}
-	// 									</Button>
-	// 									<Button variant="outline" onClick={() => history.goBack()}>
-	// 										{__('Cancel', 'masteriyo')}
-	// 									</Button>
-	// 								</ButtonGroup>
-	// 							</Stack>
-	// 						</form>
-	// 					</Stack>
-	// 				</Box>
-	// 			</FormProvider>
-	// 		</Container>
-	// 	</Stack>
-	// );
+									<ButtonGroup>
+										<Button
+											colorScheme="blue"
+											type="submit"
+											isLoading={addLesson.isLoading}>
+											{__('Add New Lesson', 'masteriyo')}
+										</Button>
+										<Button variant="outline" onClick={() => history.goBack()}>
+											{__('Cancel', 'masteriyo')}
+										</Button>
+									</ButtonGroup>
+								</Stack>
+							</form>
+						</Stack>
+					</Box>
+				</FormProvider>
+			</Container>
+		</Stack>
+	);
 };
 
 export default AddNewLesson;

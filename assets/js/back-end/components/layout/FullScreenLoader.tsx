@@ -4,7 +4,12 @@ import React from 'react';
 const FullScreenLoader = () => {
 	return (
 		<Center h="calc(100vh - 60px)">
-			<Spinner />
+			<Spinner
+				size="lg"
+				color="blue.500"
+				emptyColor="gray.200"
+				thickness="3px"
+			/>
 		</Center>
 	);
 };

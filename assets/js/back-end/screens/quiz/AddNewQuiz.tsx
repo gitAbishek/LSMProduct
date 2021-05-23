@@ -141,7 +141,13 @@ const AddNewQuiz: React.FC = () => {
 											isLoading={addQuiz.isLoading}>
 											{__('Add New Quiz', 'masteriyo')}
 										</Button>
-										<Button variant="outline" onClick={() => history.goBack()}>
+										<Button
+											variant="outline"
+											onClick={() =>
+												history.push(
+													routes.builder.replace(':courseId', courseId)
+												)
+											}>
 											{__('Cancel', 'masteriyo')}
 										</Button>
 									</ButtonGroup>

@@ -27,9 +27,13 @@ import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
 import Price from './components/Price';
 
-const EditCourse = () => {
-	const { courseId }: any = useParams();
-	const history = useHistory();
+interface Props {
+	courseId: number;
+}
+
+const EditCourse: React.FC<Props> = (props) => {
+	const { courseId } = props;
+
 	const queryClient = useQueryClient();
 	const methods = useForm();
 	const toast = useToast();

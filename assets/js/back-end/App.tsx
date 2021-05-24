@@ -11,9 +11,7 @@ const App = () => {
 	return (
 		<ChakraProvider theme={theme}>
 			<QueryClientProvider client={queryClient}>
-				<Box id="masteriyo">
-					<Router />
-				</Box>
+				<Router />
 			</QueryClientProvider>
 		</ChakraProvider>
 	);

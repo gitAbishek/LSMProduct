@@ -2,11 +2,9 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Center,
 	Container,
 	Flex,
 	Heading,
-	Spinner,
 	Stack,
 	Tab,
 	TabList,
@@ -16,6 +14,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import HeaderBuilder from 'Components/layout/HeaderBuilder';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -96,64 +95,65 @@ const AddNewQuiz: React.FC = () => {
 		addQuiz.mutate(mergeDeep(data, newData));
 	};
 
+	if (sectionQuery.isLoading || contentQuery.isLoading) {
+		return <FullScreenLoader />;
+	}
+
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
-			{sectionQuery.isSuccess && <HeaderBuilder courseId={courseId} />}
+			<HeaderBuilder courseId={courseId} />
 			<Container maxW="container.xl">
 				<FormProvider {...methods}>
 					<Box bg="white" p="10" shadow="box">
-						{(contentQuery.isLoading || sectionQuery.isLoading) && (
-							<Center minH="xs">
-								<Spinner />
-							</Center>
-						)}
-						{(contentQuery.isSuccess || sectionQuery.isSuccess) && (
-							<Stack direction="column" spacing="8">
-								<Flex aling="center" justify="space-between">
-									<Heading as="h1" fontSize="x-large">
-										{__('Add New Quiz', 'masteriyo')}
-									</Heading>
-								</Flex>
+						<Stack direction="column" spacing="8">
+							<Flex aling="center" justify="space-between">
+								<Heading as="h1" fontSize="x-large">
+									{__('Add New Quiz', 'masteriyo')}
+								</Heading>
+							</Flex>
 
-								<form onSubmit={methods.handleSubmit(onSubmit)}>
-									<Stack direction="column" spacing="6">
-										<Tabs>
-											<TabList justifyContent="center" borderBottom="1px">
-												<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
-												<Tab sx={tabStyles} isDisabled>
-													{__('Questions', 'masteriyo')}
-												</Tab>
-												<Tab sx={tabStyles} isDisabled>
-													{__('Settings', 'masteriyo')}
-												</Tab>
-											</TabList>
-											<TabPanels>
-												<TabPanel px="0">
-													<Stack direction="column" spacing="6">
-														<Name />
-														<Description />
-													</Stack>
-												</TabPanel>
-											</TabPanels>
-										</Tabs>
+							<form onSubmit={methods.handleSubmit(onSubmit)}>
+								<Stack direction="column" spacing="6">
+									<Tabs>
+										<TabList justifyContent="center" borderBottom="1px">
+											<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
+											<Tab sx={tabStyles} isDisabled>
+												{__('Questions', 'masteriyo')}
+											</Tab>
+											<Tab sx={tabStyles} isDisabled>
+												{__('Settings', 'masteriyo')}
+											</Tab>
+										</TabList>
+										<TabPanels>
+											<TabPanel px="0">
+												<Stack direction="column" spacing="6">
+													<Name />
+													<Description />
+												</Stack>
+											</TabPanel>
+										</TabPanels>
+									</Tabs>
 
-										<ButtonGroup>
-											<Button
-												colorScheme="blue"
-												type="submit"
-												isLoading={addQuiz.isLoading}>
-												{__('Add New Quiz', 'masteriyo')}
-											</Button>
-											<Button
-												variant="outline"
-												onClick={() => history.goBack()}>
-												{__('Cancel', 'masteriyo')}
-											</Button>
-										</ButtonGroup>
-									</Stack>
-								</form>
-							</Stack>
-						)}
+									<ButtonGroup>
+										<Button
+											colorScheme="blue"
+											type="submit"
+											isLoading={addQuiz.isLoading}>
+											{__('Add New Quiz', 'masteriyo')}
+										</Button>
+										<Button
+											variant="outline"
+											onClick={() =>
+												history.push(
+													routes.builder.replace(':courseId', courseId)
+												)
+											}>
+											{__('Cancel', 'masteriyo')}
+										</Button>
+									</ButtonGroup>
+								</Stack>
+							</form>
+						</Stack>
 					</Box>
 				</FormProvider>
 			</Container>

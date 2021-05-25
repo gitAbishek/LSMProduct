@@ -59,10 +59,10 @@ class Cache implements CacheInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param int|string $key	The key under which the cache contents are stored.
-	 * @param string $group		Where the cache contents are grouped
-	 * @param bool $force		Whether to force an update of the local cache from the persistent cache.
-	 * @param bool $found		Whether the key was found in the cache (passed by reference). Disambiguates a return of false, a storable value.
+	 * @param int|string $key   The key under which the cache contents are stored.
+	 * @param string $group     Where the cache contents are grouped
+	 * @param bool $force       Whether to force an update of the local cache from the persistent cache.
+	 * @param bool $found       Whether the key was found in the cache (passed by reference). Disambiguates a return of false, a storable value.
 	 *
 	 * @return mixed|false The cache contents on success, false on failure to retrieve contents.
 	 */
@@ -91,10 +91,10 @@ class Cache implements CacheInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param int|string $key	The cache key to use for retrieval later.
-	 * @param mixed $data		The data to add to the cache.
-	 * @param string $group		Where to group the cache contents. Enables the same key to be used across groups.
-	 * @param int $expire		When to expire the cache contents, in seconds. Default 0 (no expiration).
+	 * @param int|string $key   The cache key to use for retrieval later.
+	 * @param mixed $data       The data to add to the cache.
+	 * @param string $group     Where to group the cache contents. Enables the same key to be used across groups.
+	 * @param int $expire       When to expire the cache contents, in seconds. Default 0 (no expiration).
 	 *
 	 * @return bool True on success, false if cache key and group already exist.
 	 */
@@ -107,10 +107,10 @@ class Cache implements CacheInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param int|string $key	The cache key to use for retrieval later.
-	 * @param mixed $data		The new data to store in the cache.
-	 * @param string $group		Where to group the cache contents. Enables the same key to be used across groups.
-	 * @param int $expire		When to expire the cache contents, in seconds. Default 0 (no expiration).
+	 * @param int|string $key   The cache key to use for retrieval later.
+	 * @param mixed $data       The new data to store in the cache.
+	 * @param string $group     Where to group the cache contents. Enables the same key to be used across groups.
+	 * @param int $expire       When to expire the cache contents, in seconds. Default 0 (no expiration).
 	 *
 	 * @return bool  False if original value does not exist, true if contents were replaced
 	 */
@@ -123,8 +123,8 @@ class Cache implements CacheInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param int|string $key	What the contents in the cache are called.
-	 * @param string $group	Where the cache contents are grouped.
+	 * @param int|string $key   What the contents in the cache are called.
+	 * @param string $group Where the cache contents are grouped.
 	 * @return void
 	 */
 	public function delete( $key, $group = '' ) {

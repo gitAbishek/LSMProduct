@@ -46,7 +46,7 @@ const SectionBuilder: React.FC<Props> = (props) => {
 
 	const addSection = useMutation((data: any) => sectionAPI.store(data), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('builderSections');
+			queryClient.invalidateQueries(`builder${courseId}`);
 		},
 	});
 

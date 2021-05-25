@@ -39,10 +39,11 @@ interface Props {
 	name: string;
 	type: 'lesson' | 'quiz' | string;
 	index: any;
+	courseId: number;
 }
 
 const Content: React.FC<Props> = (props) => {
-	const { id, name, type, index } = props;
+	const { id, name, type, index, courseId } = props;
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const queryClient = useQueryClient();
 	const history = useHistory();
@@ -52,13 +53,13 @@ const Content: React.FC<Props> = (props) => {
 
 	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('builderSections');
+			queryClient.invalidateQueries(`builder${courseId}`);
 		},
 	});
 
 	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('builderSections');
+			queryClient.invalidateQueries(`builder${courseId}`);
 		},
 	});
 

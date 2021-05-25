@@ -52,7 +52,15 @@ interface Props {
 }
 
 const Section: React.FC<Props> = (props) => {
-	const { id, name, description, index, contents, contentsMap } = props;
+	const {
+		id,
+		name,
+		description,
+		index,
+		contents,
+		contentsMap,
+		courseId,
+	} = props;
 	const [isEditing, setIsEditing] = useState(false);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const sectionAPI = new API(urls.sections);
@@ -71,7 +79,7 @@ const Section: React.FC<Props> = (props) => {
 				isClosable: true,
 				status: 'error',
 			});
-			queryClient.invalidateQueries('builderSections');
+			queryClient.invalidateQueries(`builder${courseId}`);
 		},
 	});
 
@@ -164,6 +172,7 @@ const Section: React.FC<Props> = (props) => {
 											name={content.name}
 											type={content.type}
 											index={index}
+											courseId={courseId}
 										/>
 									))}
 								{droppableProvided.placeholder}

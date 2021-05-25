@@ -11,7 +11,7 @@ namespace ThemeGrill\Masteriyo\Repository;
 
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\OrderItem;
-use ThemeGrill\Masteriyo\Abstracts\OrderItemRepository;
+use ThemeGrill\Masteriyo\Repository\OrderItemRepository;
 use ThemeGrill\Masteriyo\Repository\RepositoryInterface;
 
 /**

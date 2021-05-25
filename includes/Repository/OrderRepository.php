@@ -221,15 +221,15 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		}
 
 		if ( $args['force_delete'] ) {
-			do_action( 'masteriyo_before_delete_' . $object_type, $id, $course );
+			do_action( 'masteriyo_before_delete_' . $object_type, $id, $order );
 			wp_delete_post( $id, true );
-			$course->set_id( 0 );
-			do_action( 'masteriyo_after_delete_' . $object_type, $id, $course );
+			$order->set_id( 0 );
+			do_action( 'masteriyo_after_delete_' . $object_type, $id, $order );
 		} else {
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course );
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $order );
 			wp_trash_post( $id );
-			$course->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course );
+			$order->set_status( 'trash' );
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $order );
 		}
 	}
 
@@ -288,7 +288,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 * @since 0.1.0
 	 *
 	 * @param array $query_vars Query vars.
-	 * @return Course[]
+	 * @return Order[]
 	 */
 	public function query( $query_vars ) {
 		$args = $this->get_wp_query_args( $query_vars );
@@ -322,10 +322,10 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	}
 
 	/**
-	 * Get valid WP_Query args from a CourseQuery's query variables.
+	 * Get valid WP_Query args from a OrderQuery's query variables.
 	 *
 	 * @since 0.1.0
-	 * @param array $query_vars Query vars from a CourseQuery.
+	 * @param array $query_vars Query vars from a OrderQuery.
 	 * @return array
 	 */
 	protected function get_wp_query_args( $query_vars ) {
@@ -422,7 +422,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	}
 
 	/**
-	 * Remove all line items (products, coupons, shipping, taxes) from the order.
+	 * Remove all line items (orders) from the order.
 	 *
 	 * @since 0.1.0
 	 *
@@ -431,6 +431,8 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 */
 	public function delete_items( $order, $type = null ) {
 		$order_items_repo = masteriyo( 'order-item.store' );
+
+		$a = 1;
 
 		if ( ! empty( $type ) ) {
 			$order_items_repo->delete_batch(

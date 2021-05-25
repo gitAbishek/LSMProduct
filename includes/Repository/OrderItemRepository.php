@@ -1,191 +1,339 @@
 <?php
+
 /**
- * OrderItemRepository class.
+ * Class order item repository.
  *
+ * @package ThemeGrill\Masteriyo\Abstracts
  * @since 0.1.0
- *
- * @package ThemeGrill\Masteriyo\Repository;
+ * @version 0.1.0
  */
 
 namespace ThemeGrill\Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Models\OrderItem;
+use ThemeGrill\Masteriyo\Repository\AbstractRepository;
 use ThemeGrill\Masteriyo\Contracts\OrderItemRepository as OrderItemRepositoryInterface;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
- * OrderItemRepository class.
+ * Order Item repository.
  */
-class OrderItemRepository implements OrderItemRepositoryInterface {
+class OrderItemRepository extends AbstractRepository {
 
 	/**
-	 * Add an order item to an order .
+	 * Meta type. This should match up with
+	 * the types available at https://developer.wordpress.org/reference/functions/add_metadata/.
+	 * WP defines 'post', 'user', 'comment', and 'term'.
 	 *
-	 * @since  0.1.0
-	 * @param  int $order_id Order ID .
-	 * @param  array $item name and type.
-	 * @return int Order Item ID
+	 * @var string
 	 */
-	public function add_order_item( $order_id, $item ) {
+	protected $meta_type = 'order_item';
+
+	/**
+	 * This only needs set if you are using a custom metadata type (for example payment tokens.
+	 * This should be the name of the field your table uses for associating meta with objects.
+	 * For example, in payment_tokenmeta, this would be payment_token_id.
+	 *
+	 * @var string
+	 */
+	protected $object_id_field_for_meta = 'order_item_id';
+
+	/**
+	 * Create a new order item in the database.
+	 *
+	 * @since 0.1.0
+	 * @param OrderItem $item Order item object.
+	 */
+	public function create( &$item ) {
 		global $wpdb;
-		$wpdb->insert(
+
+		$is_success = $wpdb->insert(
 			$wpdb->prefix . 'masteriyo_order_items',
-			array(
-				'order_item_name' => $item['name'],
-				'order_item_type' => $item['type'],
-				'order_id'        => $order_id,
-			),
-			array(
-				'%s',
-				'%s',
-				'%d',
+			apply_filters(
+				'masteriyo_new_order_item',
+				array(
+					'order_item_name' => $item->get_name(),
+					'order_item_type' => $item->get_type(),
+					'order_id'        => $item->get_order_id(),
+				),
+				$item
 			)
 		);
 
-		$item_id = absint( $wpdb->insert_id );
+		if ( $is_success && $wpdb->insert_id ) {
+			$item->set_id( $wpdb->insert_id );
+			$this->update_custom_table_meta( $item, true );
+			$item->save_meta_data();
+			$item->apply_changes();
+			$this->clear_cache( $item );
 
-		$this->clear_caches( $item_id, $order_id );
+			do_action( 'masteriyo_new_order_item', $item->get_id(), $item, $item->get_order_id() );
+		}
 
-		return $item_id;
 	}
 
 	/**
-	 * Update an order item.
-	 *
-	 * @since  0.1.0
-	 * @param  int   $item_id Item ID.
-	 * @param  array $item name or type.
-	 * @return boolean
-	 */
-	public function update_order_item( $item_id, $item ) {
-		global $wpdb;
-		$updated = $wpdb->update( $wpdb->prefix . 'masteriyo_order_items', $item, array( 'order_item_id' => $item_id ) );
-		$this->clear_caches( $item_id, null );
-		return $updated;
-	}
-
-	/**
-	 * Delete an order item.
-	 *
-	 * @since  0.1.0
-	 * @param  int $item_id Item ID.
-	 */
-	public function delete_order_item( $item_id ) {
-		// Load the order ID before the deletion, since after, it won't exist in the database.
-		$order_id = $this->get_order_id_by_order_item_id( $item_id );
-
-		global $wpdb;
-		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d", $item_id ) );
-		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}masteriyo_order_itemmeta WHERE order_item_id = %d", $item_id ) );
-
-		$this->clear_caches( $item_id, $order_id );
-	}
-
-	/**
-	 * Update term meta.
-	 *
-	 * @since  0.1.0
-	 * @param  int    $item_id Item ID.
-	 * @param  string $meta_key Meta key.
-	 * @param  mixed  $meta_value Meta value.
-	 * @param  string $prev_value (default: '').
-	 * @return bool
-	 */
-	public function update_metadata( $item_id, $meta_key, $meta_value, $prev_value = '' ) {
-		return update_metadata( 'order_item', $item_id, $meta_key, is_string( $meta_value ) ? wp_slash( $meta_value ) : $meta_value, $prev_value );
-	}
-
-	/**
-	 * Add term meta.
-	 *
-	 * @since  0.1.0
-	 * @param  int    $item_id Item ID.
-	 * @param  string $meta_key Meta key.
-	 * @param  mixed  $meta_value Meta value.
-	 * @param  bool   $unique (default: false).
-	 * @return int    New row ID or 0
-	 */
-	public function add_metadata( $item_id, $meta_key, $meta_value, $unique = false ) {
-		return add_metadata( 'order_item', $item_id, wp_slash( $meta_key ), is_string( $meta_value ) ? wp_slash( $meta_value ) : $meta_value, $unique );
-	}
-
-	/**
-	 * Delete term meta.
-	 *
-	 * @since  0.1.0
-	 * @param  int    $item_id Item ID.
-	 * @param  string $meta_key Meta key.
-	 * @param  string $meta_value (default: '').
-	 * @param  bool   $delete_all (default: false).
-	 * @return bool
-	 */
-	public function delete_metadata( $item_id, $meta_key, $meta_value = '', $delete_all = false ) {
-		return delete_metadata( 'order_item', $item_id, $meta_key, is_string( $meta_value ) ? wp_slash( $meta_value ) : $meta_value, $delete_all );
-	}
-
-	/**
-	 * Get term meta.
-	 *
-	 * @since  0.1.0
-	 * @param  int    $item_id Item ID.
-	 * @param  string $key Meta key.
-	 * @param  bool   $single (default: true).
-	 * @return mixed
-	 */
-	public function get_metadata( $item_id, $key, $single = true ) {
-		return get_metadata( 'order_item', $item_id, $key, $single );
-	}
-
-	/**
-	 * Get order ID by order item ID.
+	 * Update a order item in the database.
 	 *
 	 * @since 0.1.0
-	 * @param  int $item_id Item ID.
-	 * @return int
+	 * @param OrderItem $item Order item object.
 	 */
-	public function get_order_id_by_order_item_id( $item_id ) {
+	public function update( Model &$item ) {
 		global $wpdb;
-		return (int) $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT order_id FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d",
-				$item_id
-			)
-		);
+
+		$changes = $item->get_changes();
+
+		if ( array_intersect( array( 'order_item_name', 'order_id' ), array_keys( $changes ) ) ) {
+			$wpdb->update(
+				$wpdb->prefix . 'masteriyo_order_items',
+				array(
+					'order_item_name' => $item->get_name(),
+					'order_item_type' => $item->get_type(),
+					'order_id'        => $item->get_order_id(),
+				),
+				array( 'order_item_id' => $item->get_id() )
+			);
+		}
+
+		$this->update_custom_table_meta( $item );
+		$item->save_meta_data();
+		$item->apply_changes();
+		$this->clear_cache( $item );
+
+		do_action( 'masteriyo_update_order_item', $item->get_id(), $item, $item->get_order_id() );
 	}
 
 	/**
-	 * Get the order item type based on Item ID.
+	 * Remove an order item from the database.
 	 *
 	 * @since 0.1.0
-	 * @param int $item_id Item ID.
-	 * @return string|null Order item type or null if no order item entry found.
+	 * @param OrderItem $item Order item object.
+	 * @param array         $args Array of args to pass to the delete method.
 	 */
-	public function get_type( $item_id ) {
+	public function delete( &$item, $args = array() ) {
+		if ( $item->get_id() ) {
+			global $wpdb;
+			do_action( 'masteriyo_before_delete_order_item', $item->get_id() );
+			$wpdb->delete( $wpdb->prefix . 'masteriyo_order_items', array( 'order_item_id' => $item->get_id() ) );
+			$wpdb->delete( $wpdb->prefix . 'masteriyo_order_itemmeta', array( 'order_item_id' => $item->get_id() ) );
+			do_action( 'masteriyo_delete_order_item', $item->get_id() );
+			$this->clear_cache( $item );
+		}
+	}
+
+	/**
+	 * Read a order item from the database.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param OrderItem $item Order item object.
+	 *
+	 * @throws Exception If invalid order item.
+	 */
+	public function read( &$item ) {
 		global $wpdb;
-		$type = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT type FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d LIMIT 1;",
-				$item_id
+
+		$item->set_defaults();
+
+		// Get from cache if available.
+		$data = wp_cache_get( 'item-' . $item->get_id(), 'order-items' );
+
+		if ( false === $data ) {
+			$data = $wpdb->get_row( $wpdb->prepare( "SELECT order_id, name FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d LIMIT 1;", $item->get_id() ) );
+			wp_cache_set( 'item-' . $item->get_id(), $data, 'order-items' );
+		}
+
+		if ( ! $data ) {
+			throw new Exception( __( 'Invalid order item.', 'masteriyo' ) );
+		}
+
+		$item->set_props(
+			array(
+				'order_id'        => $data->order_id,
+				'order_item_name' => $data->name,
 			)
 		);
-
-		return $type;
+		$item->read_meta_data();
 	}
 
 	/**
 	 * Clear meta cache.
 	 *
-	 * @param int      $item_id Item ID.
-	 * @param int|null $order_id Order ID. If not set, it will be loaded using the item ID.
+	 * @param OrderItem $item Order item object.
 	 */
-	protected function clear_caches( $item_id, $order_id ) {
-		wp_cache_delete( 'item-' . $item_id, 'order-items' );
+	public function clear_cache( &$item ) {
+		wp_cache_delete( 'item-' . $item->get_id(), 'masteriyo-order-items' );
+		wp_cache_delete( 'order-items-' . $item->get_order_id(), 'masteriyo-orders' );
+		wp_cache_delete( $item->get_id(), $this->meta_type . '_meta' );
+	}
 
-		if ( ! $order_id ) {
-			$order_id = $this->get_order_id_by_order_item_id( $item_id );
+	/**
+	 * Fetch courses.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $query_vars Query vars.
+	 * @return OrderItem[]
+	 */
+	public function query( $query_vars ) {
+		global $wpdb;
+
+		$order_id = absint( $query_vars['order_id'] );
+
+		$order_items = array();
+		$order       = get_post( $order_id );
+
+		if ( is_null( $order ) || 'mto-order' !== $order->post_type ) {
+			return $order_items;
 		}
-		if ( $order_id ) {
-			wp_cache_delete( 'order-items-' . $order_id, 'orders' );
+
+		$items = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}masteriyo_order_items WHERE order_id = %d",
+				$order_id
+			)
+		);
+
+		$item_objects = array_filter( array_map( array( $this, 'get_order_item_object' ), $items ) );
+
+		$item_objects = array_filter(
+			array_map(
+				function( $item_object ) {
+					return $this->get_order_item_meta( $item_object );
+				},
+				$item_objects
+			)
+		);
+
+		return $item_objects;
+	}
+
+	/**
+	 * Get order item object.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param stdclass $item Order item
+	 * @return OrderItem
+	 */
+	public function get_order_item_object( $item ) {
+		$type = trim( $item->order_item_type );
+		$type = empty( $type ) ? 'course' : $type;
+
+		try {
+			$item_obj = masteriyo( "order-item.{$type}" );
+			$item_obj->set_id( $item->order_item_id );
+			$item_obj->set_props(
+				array(
+					'order_id' => $item->order_id,
+					'name'     => $item->order_item_name,
+				)
+			);
+		} catch ( \Exception $error ) {
+			error_log( $error->getMessage() );
+		}
+
+		return $item_obj;
+	}
+
+	/**
+	 * Get order item meta.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param OrderItem $item Order item object.
+	 * @param stdclass $item_metas List of all order item meta.
+	 *
+	 * @return
+	 */
+	public function get_order_item_meta( $item ) {
+		$meta_values = $this->read_meta( $item );
+
+		foreach ( $meta_values  as $meta_value ) {
+			$function = "set_{$meta_value->key}";
+
+			if ( is_callable( array( $item, $function ) ) ) {
+				$item->$function( maybe_unserialize( $meta_value->value ) );
+			}
+		}
+
+		return $item;
+	}
+
+	/**
+	 * Delete all line items.
+	 *
+	 * @since 0.1.0
+	 */
+	public function delete_batch( $args ) {
+		global $wpdb;
+
+		$args = wp_parse_args(
+			$args,
+			array(
+				'order_id' => '',
+				'type'     => '',
+			)
+		);
+
+		$order_id       = absint( $args['order_id'] );
+		$type           = trim( $args['type'] );
+		$order_item_ids = array();
+
+		if ( empty( $order_id ) ) {
+			return;
+		}
+
+		if ( empty( $type ) ) {
+			$order_item_ids = $wpdb->get_col(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->prefix}masteriyo_order_items WHERE order_id = %d",
+					$order_id
+				)
+			);
+
+			$wpdb->delete(
+				"{$wpdb->prefix}masteriyo_order_items",
+				array(
+					'order_id' => $order_id,
+				),
+				array(
+					'%d',
+				)
+			);
+		} else {
+			$order_item_ids = $wpdb->get_col(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->prefix}masteriyo_order_items WHERE order_id = %d AND order_item_type = %s",
+					$order_id,
+					$type
+				)
+			);
+
+			$wpdb->delete(
+				"{$wpdb->prefix}masteriyo_order_items",
+				array(
+					'order_id' => $order_id,
+					'type'     => $type,
+				),
+				array(
+					'%d',
+					'%s',
+				)
+			);
+		}
+
+		$order_item_ids    = array_map( 'absint', $order_item_ids );
+		$in_order_item_ids = array_fill( 0, count( $order_item_ids ), '%d' );
+		$in_order_item_ids = join( ',', $order_item_ids );
+
+		if ( ! empty( $order_item_ids ) ) {
+			$wpdb->query(
+				$wpdb->prepare(
+					"DELETE FROM {$wpdb->prefix}masteriyo_order_itemmeta WHERE order_item_id IN ($in_order_item_ids)", // phpcs:ignore
+					$order_item_ids
+				)
+			);
 		}
 	}
 }

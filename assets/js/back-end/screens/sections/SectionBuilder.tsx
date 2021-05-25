@@ -1,16 +1,13 @@
-import { Center, Stack } from '@chakra-ui/layout';
-import { Box, Container, useToast } from '@chakra-ui/react';
+import { Center } from '@chakra-ui/layout';
+import { Box, useToast } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
 import FullScreenLoader from 'Components/layout/FullScreenLoader';
-import HeaderBuilder from 'Components/layout/HeaderBuilder';
 import React, { useState } from 'react';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useHistory, useParams } from 'react-router-dom';
 
-import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import { reorder } from '../../utils/reorder';
@@ -79,10 +76,6 @@ const SectionBuilder: React.FC<Props> = (props) => {
 	const onDragEnd = (result: DropResult) => {
 		const orderedData = reorder(result, builderData);
 		setBuilderData(orderedData);
-	};
-
-	const onSaveBtnPress = () => {
-		updateBuilder.mutate(builderData);
 	};
 
 	if (builderQuery.isLoading || !builderData) {

@@ -22,20 +22,20 @@ class CacheServiceProvider extends AbstractServiceProvider {
 	 *
 	 * @var array
 	 */
-	 protected $provides = array(
+	protected $provides = array(
 		'cache',
-		'\ThemeGrill\Masteriyo\Cache\Cache'
-	 );
+		'\ThemeGrill\Masteriyo\Cache\Cache',
+	);
 
-	 /**
-	  * This is where the magic happens, within the method you can
-	  * access the container and register or retrieve anything
-	  * that you need to, but remember, every alias registered
-	  * within this method must be declared in the `$provides` array.
-	  *
-	  * @since 0.1.0
-	  */
-	 public function register() {
-		 $this->getContainer()->add( 'cache', Cache::class, true );
-	 }
+	/**
+	 * This is where the magic happens, within the method you can
+	 * access the container and register or retrieve anything
+	 * that you need to, but remember, every alias registered
+	 * within this method must be declared in the `$provides` array.
+	 *
+	 * @since 0.1.0
+	*/
+	public function register() {
+		$this->getContainer()->add( 'cache', Cache::class, true );
+	}
 }

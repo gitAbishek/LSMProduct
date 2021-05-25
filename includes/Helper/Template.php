@@ -672,6 +672,22 @@ if ( ! function_exists( 'masteriyo_checkout_payment' ) ) {
 	 * @return void
 	 */
 	function masteriyo_checkout_payment() {
-		masteriyo_get_template( 'checkout/payment.php' );
+		$available_gateways = array();
+
+		if ( masteriyo( 'cart' )->needs_payment() ) {
+			$available_gateways = masteriyo( 'payment-gateways' )->get_available_payment_gateways();
+		}
+
+		// translators: Cart total order
+		$order_button_text = apply_filters( 'masteriyo_order_button_text', __( 'Confirm payment %s', 'masteriyo' ) );
+
+		masteriyo_get_template(
+			'checkout/payment.php',
+			array(
+				'checkout'           => masteriyo( 'checkout' ),
+				'available_gateways' => $available_gateways,
+				'order_button_text'  => sprintf( $order_button_text, masteriyo_price( masteriyo( 'cart' )->get_total() ) ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			)
+		);
 	}
 }

@@ -15,17 +15,18 @@ import Section from './components/Section';
 
 interface Props {
 	courseId: number | any;
+	builderData: any;
+	setBuilderData: any;
 }
 
 const SectionBuilder: React.FC<Props> = (props) => {
-	const { courseId } = props;
+	const { courseId, builderData, setBuilderData } = props;
 	const queryClient = useQueryClient();
 	const toast = useToast();
 
 	const sectionAPI = new API(urls.sections);
 	const builderAPI = new API(urls.builder);
 
-	const [builderData, setBuilderData] = useState<any>(null);
 	const [totalSectionsLength, setTotalSectionsLength] = useState<number>(0);
 
 	const builderQuery = useQuery(

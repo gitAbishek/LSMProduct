@@ -21,10 +21,11 @@ import routes from '../../../constants/routes';
 
 interface Props {
 	previewUrl: string | any;
+	onSave: () => void;
 }
 
 const Header: React.FC<Props> = (props) => {
-	const { previewUrl } = props;
+	const { previewUrl, onSave } = props;
 	const tabStyles = {
 		fontWeight: 'medium',
 		fontSize: 'sm',
@@ -67,9 +68,9 @@ const Header: React.FC<Props> = (props) => {
 							<Button variant="outline">Preview</Button>
 						</Link>
 
-						<RouterLink to={routes.courses.add}>
-							<Button colorScheme="blue">{__('Save', 'masteriyo')}</Button>
-						</RouterLink>
+						<Button colorScheme="blue" onClick={onSave}>
+							{__('Save', 'masteriyo')}
+						</Button>
 					</ButtonGroup>
 				</Flex>
 			</Container>

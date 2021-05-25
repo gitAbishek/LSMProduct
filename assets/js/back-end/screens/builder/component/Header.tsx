@@ -68,7 +68,7 @@ const Header: React.FC<Props> = (props) => {
 							<Button variant="outline">Preview</Button>
 						</Link>
 
-						<Button colorScheme="blue" onClick={onSave}>
+						<Button colorScheme="blue" type="submit">
 							{__('Save', 'masteriyo')}
 						</Button>
 					</ButtonGroup>

@@ -295,8 +295,10 @@ class OrdersController extends PostsController {
 		// Set order status.
 		$args['post_status'] = $request['status'];
 
-		if ( ! empty( $request['customer'] ) ) {
-			$args['author'] = $request['customer'];
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			if ( ! empty( $request['customer'] ) ) {
+				$args['author'] = $request['customer'];
+			};
 		} else {
 			$args['author'] = get_current_user_id();
 		}
@@ -766,6 +768,8 @@ class OrdersController extends PostsController {
 	/**
 	 * Check if a given request has access to read items.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
@@ -845,7 +849,9 @@ class OrdersController extends PostsController {
 			);
 		}
 
-		if ( ! $this->permission->rest_check_order_permissions( absint( $request['id'] ), 'delete' ) ) {
+		$post = get_post( (int) $request['id'] );
+
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'delete', $post->ID ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
@@ -881,7 +887,9 @@ class OrdersController extends PostsController {
 			return false;
 		}
 
-		if ( ! $this->permission->rest_check_order_permissions( absint( $request['id'] ), 'update' ) ) {
+		$post = get_post( (int) $request['id'] );
+
+		if ( $post && ! $this->permission->rest_check_order_permissions( absint( $request['id'] ), 'update', $post->ID ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
@@ -896,6 +904,8 @@ class OrdersController extends PostsController {
 
 	/**
 	 * Get course order items.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param OrderItem[] $items
 	 * @return void
@@ -929,11 +939,11 @@ class OrdersController extends PostsController {
 	/**
 	 * Save an object data.
 	 *
-	 * @since  3.0.0
+	 * @since  0.1.0
 	 * @throws RestException But all errors are validated before returning any data.
 	 * @param  WP_REST_Request $request  Full details about the request.
 	 * @param  bool            $creating If is creating a new object.
-	 * @return WC_Data|WP_Error
+	 * @return MOdel|WP_Error
 	 */
 	protected function save_object( $request, $creating = false ) {
 		try {
@@ -942,9 +952,6 @@ class OrdersController extends PostsController {
 			if ( is_wp_error( $object ) ) {
 				return $object;
 			}
-
-			// Make sure gateways are loaded so hooks from gateways fire on save/create.
-			// WC()->payment_gateways();
 
 			if ( ! is_null( $request['customer_id'] ) && 0 !== $request['customer_id'] ) {
 				// Make sure customer exists.
@@ -1036,6 +1043,8 @@ class OrdersController extends PostsController {
 	/**
 	 * Gets the course ID from the SKU or posted ID.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @throws RestException When SKU or ID is not valid.
 	 * @param array  $posted Request data.
 	 * @param string $action 'create' to add line item or 'update' to update it.
@@ -1054,6 +1063,8 @@ class OrdersController extends PostsController {
 
 	/**
 	 * Create or update a course item.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param array  $posted Line item data.
 	 * @param string $action 'create' to add line item or 'update' to update it.

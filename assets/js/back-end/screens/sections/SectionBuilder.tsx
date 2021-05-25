@@ -30,7 +30,7 @@ const SectionBuilder: React.FC<Props> = (props) => {
 	const [totalSectionsLength, setTotalSectionsLength] = useState<number>(0);
 
 	const builderQuery = useQuery(
-		['builderSections'],
+		[`builder${courseId}`, courseId],
 		() => builderAPI.get(courseId),
 		{
 			onSuccess: (data) => {
@@ -41,21 +41,6 @@ const SectionBuilder: React.FC<Props> = (props) => {
 			refetchOnWindowFocus: false,
 			refetchIntervalInBackground: false,
 			refetchOnReconnect: false,
-		}
-	);
-
-	const updateBuilder = useMutation(
-		(data: any) => builderAPI.update(courseId, data),
-		{
-			onSuccess: (data) => {
-				toast({
-					title: __('Builder Updated', 'masteriyo'),
-					description: __('builder is updated.', 'masteriyo'),
-					isClosable: true,
-					status: 'success',
-				});
-				queryClient.invalidateQueries('builderSections');
-			},
 		}
 	);
 
@@ -82,6 +67,7 @@ const SectionBuilder: React.FC<Props> = (props) => {
 	if (builderQuery.isLoading || !builderData) {
 		return <FullScreenLoader />;
 	}
+
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
 			<Droppable droppableId="section" type="section">

@@ -7,7 +7,7 @@
  * @version 0.1.0
  */
 
- defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit;
 ?>
 
 <?php do_action( 'masteriyo_checkout_before_payment_methods' ); ?>
@@ -22,9 +22,11 @@
 					}
 				} else {
 					$message = esc_html__( 'Please fill in your details above to see available payment methods.', 'masteriyo' );
+
 					if ( masteriyo_get_current_user()->get_billing_country() ) {
 						$message = esc_html__( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'masteriyo' );
 					}
+
 					printf(
 						'<li class="mto-notice mto-alert mto-info-msg">%s</li>',
 						$message // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -32,8 +34,6 @@
 				}
 				?>
 			</ul>
-
-			<input type="hidden" name="payment_method" class="mto-input" value="cod" />
 		</div>
 <?php endif; ?>
 
@@ -46,12 +46,7 @@
 	class="mto-checkout--btn mto-button mto-btn-primary alt"
 	id="masteriyo-place-order"
 	name="masteriyo_checkout_place_order">
-	<?php
-		printf(
-			esc_html( 'Confirm Payment: %s', 'masteriyo' ),
-			masteriyo_price( masteriyo( 'cart' )->get_total() )
-		);
-		?>
+	<?php printf( $order_button_text ); ?>
 </button>
 
 <?php

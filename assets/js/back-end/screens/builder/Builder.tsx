@@ -100,7 +100,9 @@ const Builder: React.FC = () => {
 			</Box>
 			<TabPanels>
 				<TabPanel sx={tabPanelStyles}>
-					<EditCourse />
+					<Container maxW="container.xl">
+						<EditCourse courseData={courseQuery.data} />
+					</Container>
 				</TabPanel>
 				<TabPanel sx={tabPanelStyles}></TabPanel>
 			</TabPanels>

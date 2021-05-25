@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 use ThemeGrill\Masteriyo\Models\Order\Order;
 use ThemeGrill\Masteriyo\Repository\OrderRepository;
 use ThemeGrill\Masteriyo\Models\Order\OrderItemCourse;
-use ThemeGrill\Masteriyo\Abstracts\OrderItemRepository;
+use ThemeGrill\Masteriyo\Repository\OrderItemRepository;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use ThemeGrill\Masteriyo\Repository\OrderItemCourseRepository;
 use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrdersController;

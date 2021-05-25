@@ -874,7 +874,7 @@ class Order extends AbstractOrder {
 	 * @return bool
 	 */
 	public function needs_payment() {
-		$valid_order_statuses = apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( 'mto-pending', 'mto-failed' ), $this );
+		$valid_order_statuses = apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( 'pending', 'failed' ), $this );
 		return apply_filters( 'masteriyo_order_needs_payment', ( $this->has_status( $valid_order_statuses ) && $this->get_total() > 0 ), $this, $valid_order_statuses );
 	}
 
@@ -957,5 +957,36 @@ class Order extends AbstractOrder {
 		$order_received_url = add_query_arg( 'key', $this->get_order_key(), $order_received_url );
 
 		return apply_filters( 'masteriyo_get_checkout_order_received_url', $order_received_url, $this );
+	}
+
+	/**
+	 * Set order status.
+	 *
+	 * @since 0.1.0
+	 * @param string $new_status    Status to change the order to. No internal wc- prefix is required.
+	 * @param string $note          Optional note to add.
+	 * @param bool   $manual_update Is this a manual order status change?.
+	 * @return array
+	 */
+	public function set_status( $new_status, $note = '', $manual_update = false ) {
+		$result = parent::set_status( $new_status );
+
+		if ( true === $this->object_read && ! empty( $result['from'] ) && $result['from'] !== $result['to'] ) {
+			$this->status_transition = array(
+				'from'   => ! empty( $this->status_transition['from'] ) ? $this->status_transition['from'] : $result['from'],
+				'to'     => $result['to'],
+				'note'   => $note,
+				'manual' => (bool) $manual_update,
+			);
+
+			if ( $manual_update ) {
+				do_action( 'woocommerce_order_edit_status', $this->get_id(), $result['to'] );
+			}
+
+			$this->maybe_set_date_paid();
+			$this->maybe_set_date_completed();
+		}
+
+		return $result;
 	}
 }

@@ -26,6 +26,7 @@ import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
 import Price from './components/Price';
 
+interface Props {}
 const EditCourse = () => {
 	const { courseId }: any = useParams();
 	const history = useHistory();

@@ -25,6 +25,7 @@ import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
+import EditCourse from '../courses/EditCourse';
 
 const Builder: React.FC = () => {
 	const { courseId }: any = useParams();
@@ -98,7 +99,9 @@ const Builder: React.FC = () => {
 				</Container>
 			</Box>
 			<TabPanels>
-				<TabPanel sx={tabPanelStyles}></TabPanel>
+				<TabPanel sx={tabPanelStyles}>
+					<EditCourse />
+				</TabPanel>
 				<TabPanel sx={tabPanelStyles}></TabPanel>
 			</TabPanels>
 		</Tabs>

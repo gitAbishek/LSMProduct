@@ -131,6 +131,12 @@ class Setting extends Model {
 
 		/** Payments Settings. */
 
+		// Offline payment
+		'payments.offline_enable'                => true,
+		'payments.offline_title'                 => 'Offline payment',
+		'payments.offline_description'           => 'Pay with offline payment.',
+		'payments.offline_instructions'          => 'Pay with offline payment',
+
 		// Standard Paypal
 		'payments.paypal_enable'                 => false,
 		'payments.paypal_production_email'       => '',
@@ -736,6 +742,57 @@ class Setting extends Model {
 	}
 
 	// Payments Setting Getter.
+
+	// Offline
+
+	/**
+	 * Check whether the offline payment is enable or not.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_offline_enable( $context = 'view' ) {
+		return $this->get_prop( 'payments.offline_enable', $context );
+	}
+
+	/**
+	 * Get offline payment title.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_offline_title( $context = 'view' ) {
+		return $this->get_prop( 'payments.offline_title', $context );
+	}
+
+	/**
+	 * Get offline payment description.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_offline_description( $context = 'view' ) {
+		return $this->get_prop( 'payments.offline_description', $context );
+	}
+
+	/**
+	 * Get offline payment instructions.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_offline_instructions( $context = 'view' ) {
+		return $this->get_prop( 'payments.offline_instructions', $context );
+	}
+
 
 	// Paypal
 
@@ -1753,6 +1810,52 @@ class Setting extends Model {
 	}
 
 	// Payments Setting Setter.
+
+	// Offline
+
+	/**
+	 * Set the enable/disable offline payment.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param boolean $enable
+	 */
+	public function set_payments_offline_enable( $enable ) {
+		return $this->set_prop( 'payments.offline_enable', $enable );
+	}
+
+	/**
+	 * Set offline payment title.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $title
+	 */
+	public function set_payments_offline_title( $title ) {
+		return $this->set_prop( 'payments.offline_title', $title );
+	}
+
+	/**
+	 * Set offline payment description.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $description
+	 */
+	public function set_payments_offline_description( $description ) {
+		return $this->set_prop( 'payments.offline_description', $description );
+	}
+
+	/**
+	 * set offline payment instructions.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $instructions
+	 */
+	public function set_payments_offline_instructions( $instructions ) {
+		return $this->set_prop( 'payments.offline_instructions', $instructions );
+	}
 
 	// Paypal.
 

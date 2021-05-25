@@ -407,7 +407,7 @@ if ( ! function_exists( 'masteriyo_is_current_user_admin' ) ) {
 	 * @return boolean
 	 */
 	function masteriyo_is_current_user_admin() {
-		return in_array( 'administrator', wp_get_current_user()->roles );
+		return in_array( 'administrator', wp_get_current_user()->roles, true );
 	}
 }
 
@@ -420,6 +420,22 @@ if ( ! function_exists( 'masteriyo_is_current_user_manager' ) ) {
 	 * @return boolean
 	 */
 	function masteriyo_is_current_user_manager() {
-		return in_array( 'masteriyo_manager', wp_get_current_user()->roles );
+		return in_array( 'masteriyo_manager', wp_get_current_user()->roles, true );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_is_add_payment_method_page' ) ) {
+
+	/**
+	 * masteriyo_Is_add_payment_method_page - Returns true when viewing the add payment method page.
+	 *
+	 * @return bool
+	 */
+	function masteriyo_is_add_payment_method_page() {
+		global $wp;
+
+		$page_id = masteriyo_get_page_id( 'myaccount' );
+
+		return ( $page_id && is_page( $page_id ) && ( isset( $wp->query_vars['payment-methods'] ) || isset( $wp->query_vars['add-payment-method'] ) ) );
 	}
 }

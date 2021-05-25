@@ -8,7 +8,7 @@
 
 namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 
-defined( 'ABSPATH' ) ||	exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * PostsController
@@ -48,7 +48,7 @@ abstract class PostsController extends CrudController {
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -75,7 +75,7 @@ abstract class PostsController extends CrudController {
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -99,13 +99,12 @@ abstract class PostsController extends CrudController {
 			);
 		}
 
-
 		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -136,7 +135,7 @@ abstract class PostsController extends CrudController {
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -167,7 +166,7 @@ abstract class PostsController extends CrudController {
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}

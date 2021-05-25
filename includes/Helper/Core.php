@@ -1807,14 +1807,20 @@ function masteriyo_is_edit_myaccount_page() {
  */
 function masteriyo_get_setting_value( $setting_name, $default = null ) {
 	$setting = masteriyo( 'setting' );
+
 	if ( is_null( $setting ) ) {
-			return $default;
+		return $default;
 	}
+
 	masteriyo( 'setting.store' )->read( $setting, $default );
-	$value = $default;
+
+	$value        = $default;
+	$setting_name = str_replace( '.', '_', $setting_name );
+
 	if ( method_exists( $setting, "get_{$setting_name}" ) ) {
-			$value = call_user_func_array( array( $setting, "get_{$setting_name}" ), array() );
+		$value = call_user_func_array( array( $setting, "get_{$setting_name}" ), array() );
 	}
+
 	return apply_filters( "masteriyo_setting_{$setting_name}_value", $value );
 }
 
@@ -2447,4 +2453,25 @@ function masteriyo_get_wp_roles() {
  */
 function masteriyo_get_currency_codes() {
 	return array_keys( masteriyo_get_currencies() );
+}
+
+/**
+ * Wrapper for _doing_it_wrong().
+ *
+ * @since  0.1.0
+ * @param string $function Function used.
+ * @param string $message Message to log.
+ * @param string $version Version the message was added in.
+ */
+function masteriyo_doing_it_wrong( $function, $message, $version ) {
+	// phpcs: disable
+	$message .= ' Backtrace: ' . wp_debug_backtrace_summary();
+
+	if ( masteriyo_is_ajax() || masteriyo_is_rest_api_request() ) {
+		do_action( 'doing_it_wrong_run', $function, $message, $version );
+		error_log( "{$function} was called incorrectly. {$message}. This message was added in version {$version}." );
+	} else {
+		_doing_it_wrong( $function, $message, $version );
+	}
+	// phpcs: enable
 }

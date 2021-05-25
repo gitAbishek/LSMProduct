@@ -38,21 +38,18 @@ const EditCourse: React.FC<Props> = (props) => {
 	const toast = useToast();
 
 	const courseAPI = new API(urls.courses);
-	const courseQuery = useQuery([`course${courseData.id}`, courseData.id], () =>
-		courseAPI.get(courseData.id)
-	);
 
 	const updateCourse = useMutation(
 		(data) => courseAPI.update(courseData.id, data),
 		{
-			onSuccess: (data) => {
+			onSuccess: (data: CourseDataMap) => {
 				toast({
 					title: data.name + __(' is updated successfully.', 'masteriyo'),
 					description: __('You can keep editing it', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
 				});
-				queryClient.invalidateQueries(`course${courseData.id}`);
+				queryClient.invalidateQueries(`courses${data.id}`);
 			},
 		}
 	);

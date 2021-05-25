@@ -50,7 +50,7 @@ const Builder: React.FC = () => {
 	};
 
 	const courseQuery = useQuery(
-		[`courses/${courseId}`, courseId],
+		[`courses${courseId}`, courseId],
 		() => courseAPI.get(courseId),
 		{
 			onError: () => {

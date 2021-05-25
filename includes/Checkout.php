@@ -370,13 +370,12 @@ class Checkout {
 		}
 
 		if ( $this->cart->needs_payment() ) {
-			// $available_gateways = masteriyo( 'payment_gateways' )->get_available_payment_gateways();
-			$available_gateways = array( 'cod' => 'cod' );
+			$available_gateways = masteriyo( 'payment-gateways' )->get_available_payment_gateways();
 
 			if ( ! isset( $available_gateways[ $data['payment_method'] ] ) ) {
 				$errors->add( 'payment', __( 'Invalid payment method.', 'masteriyo' ) );
 			} else {
-				// $available_gateways[ $data['payment_method'] ]->validate_fields();
+				$available_gateways[ $data['payment_method'] ]->validate_fields();
 			}
 		}
 
@@ -568,7 +567,7 @@ class Checkout {
 		try {
 			$order_id  = absint( $this->session->get( 'order_awaiting_payment' ) );
 			$cart_hash = $this->cart->get_cart_hash();
-			// $available_gateways = masteriyo( 'payment_gateways' )->get_available_payment_gateways();
+			// $available_gateways = masteriyo( 'payment-gateways' )->get_available_payment_gateways();
 			$available_gateways = array();
 			$order              = $order_id ? masteriyo_get_order( $order_id ) : null;
 
@@ -712,7 +711,7 @@ class Checkout {
 	 * @param string $payment_method Payment method.
 	 */
 	protected function process_order_payment( $order_id, $payment_method ) {
-		$available_gateways = masteriyo( 'payment_gateways' )->get_available_payment_gateways();
+		$available_gateways = masteriyo( 'payment-gateways' )->get_available_payment_gateways();
 
 		if ( ! isset( $available_gateways[ $payment_method ] ) ) {
 			return;
@@ -730,7 +729,7 @@ class Checkout {
 
 			$result = apply_filters( 'masteriyo_payment_successful_result', $result, $order_id );
 
-			if ( ! is_ajax() ) {
+			if ( ! masteriyo_is_ajax() ) {
 				// phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
 				wp_redirect( $result['redirect'] );
 				exit;

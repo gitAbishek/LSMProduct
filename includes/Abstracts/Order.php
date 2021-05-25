@@ -336,10 +336,31 @@ abstract class Order extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $status Order status.
+	 * @param string $status Order status to change the order to.
+	 * @return array details of change
 	 */
-	public function set_status( $status ) {
-		$this->set_prop( 'status', $status );
+	public function set_status( $new_status ) {
+		$old_status = $this->get_status();
+
+		// If setting the status, ensure it's set to a valid status.
+		if ( true === $this->object_read ) {
+			// Only allow valid new status.
+			if ( ! in_array( $new_status, $this->get_valid_statuses(), true ) && 'trash' !== $new_status ) {
+				$new_status = 'pending';
+			}
+
+			// If the old status is set but unknown (e.g. draft) assume its pending for action usage.
+			if ( $old_status && ! in_array( $old_status, $this->get_valid_statuses(), true ) && 'trash' !== $old_status ) {
+				$old_status = 'pending';
+			}
+		}
+
+		$this->set_prop( 'status', $new_status );
+
+		return array(
+			'from' => $old_status,
+			'to'   => $new_status,
+		);
 	}
 
 	/**
@@ -739,5 +760,15 @@ abstract class Order extends Model {
 		$this->save();
 
 		return $this->get_total();
+	}
+
+	/**
+	 * Get all valid statuses for this order
+	 *
+	 * @since 0.1.0
+	 * @return array Internal status keys e.g. 'wc-processing'
+	 */
+	protected function get_valid_statuses() {
+		return array_keys( masteriyo_get_order_statuses() );
 	}
 }

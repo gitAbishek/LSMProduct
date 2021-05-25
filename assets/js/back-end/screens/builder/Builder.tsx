@@ -6,7 +6,6 @@ import {
 	Flex,
 	Icon,
 	Image,
-	Spinner,
 	Stack,
 	Tab,
 	TabList,
@@ -26,10 +25,10 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import EditCourse from '../courses/EditCourse';
+import SectionBuilder from '../sections/SectionBuilder';
 
 const Builder: React.FC = () => {
 	const { courseId }: any = useParams();
-	const queryClient = useQueryClient();
 	const history = useHistory();
 	const courseAPI = new API(urls.courses);
 
@@ -98,14 +97,16 @@ const Builder: React.FC = () => {
 					</Flex>
 				</Container>
 			</Box>
-			<TabPanels>
-				<TabPanel sx={tabPanelStyles}>
-					<Container maxW="container.xl">
+			<Container maxW="container.xl">
+				<TabPanels>
+					<TabPanel sx={tabPanelStyles}>
 						<EditCourse courseData={courseQuery.data} />
-					</Container>
-				</TabPanel>
-				<TabPanel sx={tabPanelStyles}></TabPanel>
-			</TabPanels>
+					</TabPanel>
+					<TabPanel sx={tabPanelStyles}>
+						<SectionBuilder courseId={courseQuery.data.id} />
+					</TabPanel>
+				</TabPanels>
+			</Container>
 		</Tabs>
 	);
 };

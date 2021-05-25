@@ -17,7 +17,7 @@ import { reorder } from '../../utils/reorder';
 import Section from './components/Section';
 
 interface Props {
-	courseId: number;
+	courseId: number | any;
 }
 
 const SectionBuilder: React.FC<Props> = (props) => {

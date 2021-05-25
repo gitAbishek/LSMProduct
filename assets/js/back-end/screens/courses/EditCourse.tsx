@@ -28,7 +28,7 @@ import Name from './components/Name';
 import Price from './components/Price';
 
 interface Props {
-	courseData: CourseDataMap;
+	courseData: CourseDataMap | any;
 }
 
 const EditCourse: React.FC<Props> = (props) => {
@@ -72,44 +72,38 @@ const EditCourse: React.FC<Props> = (props) => {
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={methods.handleSubmit(onSubmit)}>
-				<Stack direction="column" spacing="8">
-					<Heading as="h1" size="xl">
-						{__('Edit Course: ', 'masteriyo')} {courseData.name}
-					</Heading>
-
-					<Stack direction="row" spacing="8">
-						<Box
-							flex="1"
-							bg="white"
-							p="10"
-							shadow="box"
-							d="flex"
-							flexDirection="column"
-							justifyContent="space-between">
-							<Stack direction="column" spacing="6">
-								<Name defaultValue={courseData.name} />
-								<Description defaultValue={courseData.description} />
-								<Price defaultValue={courseData.regular_price} />
-							</Stack>
-							<ButtonGroup>
-								<Button
-									type="submit"
-									colorScheme="blue"
-									isLoading={updateCourse.isLoading}>
-									{__('Update', 'masteriyo')}
-								</Button>
-								<RouterLink to={routes.courses.list}>
-									<Button variant="outline">{__('Cancel', 'masteriyo')}</Button>
-								</RouterLink>
-							</ButtonGroup>
-						</Box>
-						<Box w="400px" bg="white" p="10" shadow="box">
-							<Stack direction="column" spacing="6">
-								<Categories defaultValue={courseData.categories} />
-								<FeaturedImage defaultValue={courseData.featured_image} />
-							</Stack>
-						</Box>
-					</Stack>
+				<Stack direction="row" spacing="8">
+					<Box
+						flex="1"
+						bg="white"
+						p="10"
+						shadow="box"
+						d="flex"
+						flexDirection="column"
+						justifyContent="space-between">
+						<Stack direction="column" spacing="6">
+							<Name defaultValue={courseData.name} />
+							<Description defaultValue={courseData.description} />
+							<Price defaultValue={courseData.regular_price} />
+						</Stack>
+						<ButtonGroup>
+							<Button
+								type="submit"
+								colorScheme="blue"
+								isLoading={updateCourse.isLoading}>
+								{__('Update', 'masteriyo')}
+							</Button>
+							<RouterLink to={routes.courses.list}>
+								<Button variant="outline">{__('Cancel', 'masteriyo')}</Button>
+							</RouterLink>
+						</ButtonGroup>
+					</Box>
+					<Box w="400px" bg="white" p="10" shadow="box">
+						<Stack direction="column" spacing="6">
+							<Categories defaultValue={courseData.categories} />
+							<FeaturedImage defaultValue={courseData.featured_image} />
+						</Stack>
+					</Box>
 				</Stack>
 			</form>
 		</FormProvider>

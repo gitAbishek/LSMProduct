@@ -89,47 +89,45 @@ const SectionBuilder: React.FC<Props> = (props) => {
 		return <FullScreenLoader />;
 	}
 	return (
-		<Container maxW="container.xl">
-			<DragDropContext onDragEnd={onDragEnd}>
-				<Droppable droppableId="section" type="section">
-					{(droppableProvided) => (
-						<Box
-							ref={droppableProvided.innerRef}
-							{...droppableProvided.droppableProps}>
-							{builderData.section_order.map((sectionId: any, index: any) => {
-								const section = builderData.sections[sectionId];
-								return (
-									<Section
-										key={section.id}
-										id={section.id}
-										index={index}
-										name={section.name}
-										description={section.description}
-										courseId={courseId}
-										contents={section.contents}
-										contentsMap={builderData.contents}
-									/>
-								);
-							})}
+		<DragDropContext onDragEnd={onDragEnd}>
+			<Droppable droppableId="section" type="section">
+				{(droppableProvided) => (
+					<Box
+						ref={droppableProvided.innerRef}
+						{...droppableProvided.droppableProps}>
+						{builderData.section_order.map((sectionId: any, index: any) => {
+							const section = builderData.sections[sectionId];
+							return (
+								<Section
+									key={section.id}
+									id={section.id}
+									index={index}
+									name={section.name}
+									description={section.description}
+									courseId={courseId}
+									contents={section.contents}
+									contentsMap={builderData.contents}
+								/>
+							);
+						})}
 
-							{addSection.isLoading && (
-								<Center minH="24">
-									<Spinner />
-								</Center>
-							)}
-
-							<Center mb="8">
-								<AddNewButton onClick={onAddNewSectionPress}>
-									{__('Add New Section', 'masteriyo')}
-								</AddNewButton>
+						{addSection.isLoading && (
+							<Center minH="24">
+								<Spinner />
 							</Center>
+						)}
 
-							{droppableProvided.placeholder}
-						</Box>
-					)}
-				</Droppable>
-			</DragDropContext>
-		</Container>
+						<Center mb="8">
+							<AddNewButton onClick={onAddNewSectionPress}>
+								{__('Add New Section', 'masteriyo')}
+							</AddNewButton>
+						</Center>
+
+						{droppableProvided.placeholder}
+					</Box>
+				)}
+			</Droppable>
+		</DragDropContext>
 	);
 };
 

@@ -3,37 +3,64 @@ import {
 	Button,
 	ButtonGroup,
 	Flex,
-	Select,
+	FormControl,
+	FormLabel,
+	Link,
+	NumberDecrementStepper,
+	NumberIncrementStepper,
+	NumberInput,
+	NumberInputField,
+	NumberInputStepper,
 	Stack,
-	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 
 interface Props {
 	setTabIndex?: any;
+	dashboardURL: string;
 }
 
 const Course: React.FC<Props> = (props) => {
-	const { setTabIndex } = props;
-
+	const { setTabIndex, dashboardURL } = props;
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext();
 	return (
 		<Box rounded="3px">
 			<Box bg="white" p="30" shadow="box">
 				<Stack direction="column" spacing="8">
-					<Flex justify="space-between" align="center">
-						<strong>
-							<Text fontSize="sm">{__('Course Per Row', 'masteriyo')}</Text>
-						</strong>
-						<Select w="md" placeholder="4" />
-					</Flex>
+					<FormControl id="course-per-row">
+						<Flex justify="space-between" align="center">
+							<FormLabel style={{ fontWeight: 'bold' }}>
+								{__('Course Per Row', 'masteriyo')}
+							</FormLabel>
+							<NumberInput w="md" defaultValue={4}>
+								<NumberInputField {...register('course_per_row')} />
+								<NumberInputStepper>
+									<NumberIncrementStepper />
+									<NumberDecrementStepper />
+								</NumberInputStepper>
+							</NumberInput>
+						</Flex>
+					</FormControl>
 
-					<Flex justify="space-between" align="center">
-						<strong>
-							<Text fontSize="sm">{__('Course Per Page', 'masteriyo')}</Text>
-						</strong>
-						<Select w="md" placeholder="20" />
-					</Flex>
+					<FormControl id="course-per-page">
+						<Flex justify="space-between" align="center">
+							<FormLabel style={{ fontWeight: 'bold' }}>
+								{__('Course Per Page', 'masteriyo')}
+							</FormLabel>
+							<NumberInput w="md" defaultValue={20}>
+								<NumberInputField {...register('course_per_page')} />
+								<NumberInputStepper>
+									<NumberIncrementStepper />
+									<NumberDecrementStepper />
+								</NumberInputStepper>
+							</NumberInput>
+						</Flex>
+					</FormControl>
 
 					<Flex justify="space-between" align="center">
 						<Button
@@ -45,7 +72,9 @@ const Course: React.FC<Props> = (props) => {
 						</Button>
 						<ButtonGroup>
 							<Button onClick={() => setTabIndex(3)} variant="ghost">
-								{__('Skip', 'masteriyo')}
+								<Link href={dashboardURL ? dashboardURL : '#'}>
+									{__('Skip to Dashboard', 'masteriyo')}
+								</Link>
 							</Button>
 							<Button
 								onClick={() => setTabIndex(3)}

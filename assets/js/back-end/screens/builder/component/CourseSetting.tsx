@@ -13,7 +13,7 @@ import { useFormContext } from 'react-hook-form';
 import { CourseDataMap } from '../../../types/course';
 
 interface Props {
-	courseData: CourseDataMap | any;
+	courseData?: CourseDataMap | any;
 }
 const CourseSetting: React.FC<Props> = (props) => {
 	const { courseData } = props;
@@ -29,7 +29,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 					<FormControl isInvalid={errors?.difficulties} maxW="xs">
 						<FormLabel>{__('Difficulty', 'masteriyo')}</FormLabel>
 						<Select
-							defaultValue={courseData.difficulties}
+							defaultValue={courseData?.difficulties}
 							placeholder={__('Choose Course Level', 'masteriyo')}
 							{...register('difficulties')}>
 							<option value="beginner">{__('Beginner', 'masteriyo')}</option>

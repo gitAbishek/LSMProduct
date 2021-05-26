@@ -4,26 +4,28 @@ import {
 	ButtonGroup,
 	Heading,
 	Image,
+	Link,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 
-import CoverImg from '../../../../img/onboard-cover.png';
+import { onboardCover } from '../../components/constants/images';
 
 interface Props {
 	setTabIndex?: any;
+	dashboardURL: string;
 }
 
 const Welcome: React.FC<Props> = (props) => {
-	const { setTabIndex } = props;
+	const { setTabIndex, dashboardURL } = props;
 	return (
 		<Box rounded="3px">
 			<Box bg="white" p="30" shadow="box">
 				<Stack direction="column" spacing="8">
 					<Box align="center">
-						<Image src={CoverImg} alt="Masteriyo Logo" />
+						<Image src={onboardCover} alt="Masteriyo Logo" />
 					</Box>
 
 					<Stack spacing={6} align="center">
@@ -46,7 +48,11 @@ const Welcome: React.FC<Props> = (props) => {
 							<Button onClick={() => setTabIndex(1)} colorScheme="blue">
 								{__('Start Now', 'masteriyo')}
 							</Button>
-							<Button variant="ghost">{__('Skip this', 'masteriyo')}</Button>
+							<Button variant="ghost">
+								<Link href={dashboardURL ? dashboardURL : '#'}>
+									{__('Skip to Dashboard', 'masteriyo')}
+								</Link>
+							</Button>
 						</ButtonGroup>
 					</Stack>
 				</Stack>

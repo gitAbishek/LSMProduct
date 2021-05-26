@@ -73,7 +73,7 @@ class OrderItem extends Model {
 	}
 
 	/**
-	 * Get the product name.
+	 * Get the course name.
 	 *
 	 * @since  0.1.0
 	 *
@@ -129,18 +129,18 @@ class OrderItem extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $order_id Product ID.
+	 * @param string $order_id Course ID.
 	 */
 	public function set_order_id( $order_id ) {
 		$this->set_prop( 'order_id', absint( $order_id ) );
 	}
 
 	/**
-	 * Set the product name.
+	 * Set the course name.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $name Product ID.
+	 * @param string $name Course ID.
 	 */
 	public function set_name( $name ) {
 		$this->set_prop( 'name', wp_check_invalid_utf8( $name ) );
@@ -162,5 +162,60 @@ class OrderItem extends Model {
 	 */
 	public function is_type( $type ) {
 		return is_array( $type ) ? in_array( $this->get_type(), $type, true ) : $type === $this->get_type();
+	}
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Meta Data Handling
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Expands things like term slugs before return.
+	 *
+	 * @param string $hideprefix  Meta data prefix, (default: _).
+	 * @param bool   $include_all Include all meta data, this stop skip items with values already in the course name.
+	 * @return array
+	 */
+	public function get_formatted_meta_data( $hideprefix = '_', $include_all = false ) {
+		$formatted_meta    = array();
+		$meta_data         = $this->get_meta_data();
+		$hideprefix_length = ! empty( $hideprefix ) ? strlen( $hideprefix ) : 0;
+		$course           = is_callable( array( $this, 'get_course' ) ) ? $this->get_course() : false;
+		$order_item_name   = $this->get_name();
+
+		foreach ( $meta_data as $meta ) {
+			if ( empty( $meta->id ) || '' === $meta->value || ! is_scalar( $meta->value ) || ( $hideprefix_length && substr( $meta->key, 0, $hideprefix_length ) === $hideprefix ) ) {
+				continue;
+			}
+
+			$meta->key     = rawurldecode( (string) $meta->key );
+			$meta->value   = rawurldecode( (string) $meta->value );
+			$attribute_key = str_replace( 'attribute_', '', $meta->key );
+			$display_key   = masteriyo_attribute_label( $attribute_key, $course );
+			$display_value = wp_kses_post( $meta->value );
+
+			if ( taxonomy_exists( $attribute_key ) ) {
+				$term = get_term_by( 'slug', $meta->value, $attribute_key );
+				if ( ! is_wp_error( $term ) && is_object( $term ) && $term->name ) {
+					$display_value = $term->name;
+				}
+			}
+
+			// Skip items with values already in the course details area of the course name.
+			if ( ! $include_all && $course && $course->is_type( 'variation' ) && masteriyo_is_attribute_in_course_name( $display_value, $order_item_name ) ) {
+				continue;
+			}
+
+			$formatted_meta[ $meta->id ] = (object) array(
+				'key'           => $meta->key,
+				'value'         => $meta->value,
+				'display_key'   => apply_filters( 'masteriyo_order_item_display_meta_key', $display_key, $meta, $this ),
+				'display_value' => wpautop( make_clickable( apply_filters( 'masteriyo_order_item_display_meta_value', $display_value, $meta, $this ) ) ),
+			);
+		}
+
+		return apply_filters( 'masteriyo_order_item_get_formatted_meta_data', $formatted_meta, $this );
 	}
 }

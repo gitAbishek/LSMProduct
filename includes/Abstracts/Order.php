@@ -147,7 +147,7 @@ abstract class Order extends Model {
 	/**
 	 * Get all class data in array format.
 	 *
-	 * @since 3.0.0
+	 * @since 0.1.0
 	 * @return array
 	 */
 	public function get_data() {
@@ -308,6 +308,26 @@ abstract class Order extends Model {
 		);
 
 		return $items;
+	}
+
+	/**
+	 * Get total tax amount. Alias for get_order_tax().
+	 *
+	 * @param  string $context View or edit context.
+	 * @return float
+	 */
+	public function get_total_tax( $context = 'view' ) {
+		return 0;
+	}
+
+	/**
+	 * Gets the total discount amount.
+	 *
+	 * @param  bool $ex_tax Show discount excl any tax.
+	 * @return float
+	 */
+	public function get_total_discount( $ex_tax = true ) {
+		return 0;
 	}
 
 	/*
@@ -611,12 +631,12 @@ abstract class Order extends Model {
 	 *
 	 * @since  0.1.0
 	 * @param  int  $item_id ID of item to get.
-	 * @param  bool $load_from_db Prior to 3.2 this item was loaded direct from WC_Order_Factory, not this object. This param is here for backwards compatility with that. If false, uses the local items variable instead.
+	 * @param  bool $load_from_db Prior to 3.2 this item was loaded direct from MASTERIYO_Order_Factory, not this object. This param is here for backwards compatility with that. If false, uses the local items variable instead.
 	 * @return OrderItem|false
 	 */
 	public function get_item( $item_id, $load_from_db = true ) {
 		if ( $load_from_db ) {
-			return WC_Order_Factory::get_order_item( $item_id );
+			return MASTERIYO_Order_Factory::get_order_item( $item_id );
 		}
 
 		// Search for item id.
@@ -763,10 +783,36 @@ abstract class Order extends Model {
 	}
 
 	/**
+	 * Get item subtotal - this is the cost before discount.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param object $item Item to get total from.
+	 * @param bool   $inc_tax (default: false).
+	 * @param bool   $round (default: true).
+	 * @return float
+	 */
+	public function get_item_subtotal( $item, $inc_tax = false, $round = true ) {
+		$subtotal = 0;
+
+		if ( is_callable( array( $item, 'get_subtotal' ) ) && $item->get_quantity() ) {
+			if ( $inc_tax ) {
+				$subtotal = ( $item->get_subtotal() + $item->get_subtotal_tax() ) / $item->get_quantity();
+			} else {
+				$subtotal = floatval( $item->get_subtotal() ) / $item->get_quantity();
+			}
+
+			$subtotal = $round ? number_format( (float) $subtotal, masteriyo_get_price_decimals(), '.', '' ) : $subtotal;
+		}
+
+		return apply_filters( 'masteriyo_order_amount_item_subtotal', $subtotal, $this, $item, $inc_tax, $round );
+	}
+
+	/**
 	 * Get all valid statuses for this order
 	 *
 	 * @since 0.1.0
-	 * @return array Internal status keys e.g. 'wc-processing'
+	 * @return array Internal status keys e.g. 'masteriyo-processing'
 	 */
 	protected function get_valid_statuses() {
 		return array_keys( masteriyo_get_order_statuses() );

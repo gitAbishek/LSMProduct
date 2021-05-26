@@ -325,7 +325,7 @@ class OrderItemRepository extends AbstractRepository {
 
 		$order_item_ids    = array_map( 'absint', $order_item_ids );
 		$in_order_item_ids = array_fill( 0, count( $order_item_ids ), '%d' );
-		$in_order_item_ids = join( ',', $order_item_ids );
+		$in_order_item_ids = join( ',', $in_order_item_ids );
 
 		if ( ! empty( $order_item_ids ) ) {
 			$wpdb->query(

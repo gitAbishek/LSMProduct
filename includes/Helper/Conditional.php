@@ -427,8 +427,9 @@ if ( ! function_exists( 'masteriyo_is_current_user_manager' ) ) {
 if ( ! function_exists( 'masteriyo_is_add_payment_method_page' ) ) {
 
 	/**
-	 * masteriyo_Is_add_payment_method_page - Returns true when viewing the add payment method page.
+	 * Returns true when viewing the add payment method page.
 	 *
+	 * @since 0.1.0
 	 * @return bool
 	 */
 	function masteriyo_is_add_payment_method_page() {
@@ -457,5 +458,40 @@ if ( ! function_exists( 'masteriyo_is_current_user_post_author' ) ) {
 			return get_current_user_id() === absint( $post->post_author );
 		}
 		return false;
+	}
+}
+
+if ( ! function_exists( 'masteriyo_is_tax_enabled' ) ) {
+	/**
+	 * Is tax enabled?
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return bool
+	 */
+	function masteriyo_is_tax_enabled() {
+		return false;
+	}
+}
+
+if ( ! function_exists( 'masteriyo_is_checkout_page' ) ) {
+
+	/**
+	 * Return true if the current page is checkout page.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
+	function masteriyo_is_checkout_page() {
+		global $post;
+
+		if ( ! ( is_page() && is_singular() ) ) {
+			return false;
+		}
+
+		$page_id = masteriyo_get_page_id( 'checkout' );
+
+		return $post->ID === $page_id;
 	}
 }

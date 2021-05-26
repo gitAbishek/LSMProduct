@@ -35,6 +35,8 @@ class Offline extends PaymentGateway {
 		// // Load the settings.
 		$this->init_settings();
 
+		$this->set_order_button_text( 'Confirm Payment' );
+
 		// // Get settings.
 		$this->title        = $this->get_option( 'title' );
 		$this->description  = $this->get_option( 'description' );

@@ -565,10 +565,9 @@ class Checkout {
 		}
 
 		try {
-			$order_id  = absint( $this->session->get( 'order_awaiting_payment' ) );
-			$cart_hash = $this->cart->get_cart_hash();
-			// $available_gateways = masteriyo( 'payment-gateways' )->get_available_payment_gateways();
-			$available_gateways = array();
+			$order_id           = absint( $this->session->get( 'order_awaiting_payment' ) );
+			$cart_hash          = $this->cart->get_cart_hash();
+			$available_gateways = masteriyo( 'payment-gateways' )->get_available_payment_gateways();
 			$order              = $order_id ? masteriyo_get_order( $order_id ) : null;
 
 			/**
@@ -620,7 +619,7 @@ class Checkout {
 			if ( $order && is_a( $order, 'ThemeGrill\Masteriyo\Models\Order' ) ) {
 				do_action( 'masteriyo_checkout_order_exception', $order );
 			}
-			return new WP_Error( 'checkout-error', $e->getMessage() );
+			return new \WP_Error( 'checkout-error', $e->getMessage() );
 		}
 	}
 

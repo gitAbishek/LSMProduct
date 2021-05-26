@@ -124,27 +124,27 @@ class Setting extends Model {
 		),
 		'payments' => array(
 			// Offline payment
-			'offline_enable'                        => true,
-			'offline_title'                         => 'Offline payment',
-			'offline_description'                   => 'Pay with offline payment.',
-			'offline_instructions'                  => 'Pay with offline payment',
+			'offline_enable'                 => true,
+			'offline_title'                  => 'Offline payment',
+			'offline_description'            => 'Pay with offline payment.',
+			'offline_instructions'           => 'Pay with offline payment',
 
 			// Standard Paypal
-			'paypal_enable'                         => false,
-			'paypal_title'                          => 'Paypal',
-			'paypal_description'                    => 'Pay via PayPal; you can pay with your credit card if you don\'t have a PayPal account.',
-			'paypal_enable_ipn_email_notifications' => true,
-			'paypal_sandbox_enable'                 => false,
-			'paypal_email'                          => '',
-			'paypal_receiver_email'                 => '',
-			'paypal_identity_token'                 => '',
-			'paypal_invoice_prefix'                 => 'masteriyo-',
-			'paypal_payment_action'                 => 'capture',
-			'paypal_image_url'                      => '',
-			'paypal_enable_log'                     => false,
-			'paypal_sandbox_api_username'           => '',
-			'paypal_sandbox_api_password'           => '',
-			'paypal_sandbox_api_signature'          => '',
+			'paypal_enable'                  => false,
+			'paypal_title'                   => 'Paypal',
+			'paypal_description'             => 'Pay via PayPal; you can pay with your credit card if you don\'t have a PayPal account.',
+			'paypal_ipn_email_notifications' => true,
+			'paypal_sandbox'                 => false,
+			'paypal_email'                   => '',
+			'paypal_receiver_email'          => '',
+			'paypal_identity_token'          => '',
+			'paypal_invoice_prefix'          => 'masteriyo-',
+			'paypal_payment_action'          => 'capture',
+			'paypal_image_url'               => '',
+			'paypal_debug'                   => false,
+			'paypal_sandbox_api_username'    => '',
+			'paypal_sandbox_api_password'    => '',
+			'paypal_sandbox_api_signature'   => '',
 		),
 		'emails'   => array(
 			// General Options.
@@ -859,20 +859,20 @@ class Setting extends Model {
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_payments_paypal_enable_ipn_email_notifications( $context = 'view' ) {
-		return $this->get_setting_prop( 'paypal_enable_ipn_email_notifications', 'payments', $context );
+	public function get_payments_paypal_ipn_email_notifications( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_ipn_email_notifications', 'payments', $context );
 	}
 
 	/**
-	 * Check whether the paypal sandbox is enabled or not.
+	 * Check whether the paypal sandbox.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_payments_paypal_sandbox_enable( $context = 'view' ) {
-		return $this->get_setting_prop( 'paypal_sandbox_enable', 'payments', $context );
+	public function get_payments_paypal_sandbox( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_sandbox', 'payments', $context );
 	}
 
 	/**
@@ -884,7 +884,14 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_payments_paypal_email( $context = 'view' ) {
+		$email = $this->get_setting_prop( 'paypal_email', 'payments', 'edit' );
+
+		if ( empty( $email ) ) {
+			$this->set_setting_prop( 'paypal_email', 'payments', get_bloginfo( 'admin_email' ) );
+		}
+
 		return $this->get_setting_prop( 'paypal_email', 'payments', $context );
+
 	}
 
 	/**
@@ -896,6 +903,12 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_payments_paypal_receiver_email( $context = 'view' ) {
+		$email = $this->get_setting_prop( 'paypal_receiver_email', 'payments', 'edit' );
+
+		if ( empty( $email ) ) {
+			$this->set_setting_prop( 'paypal_receiver_email', 'payments', get_bloginfo( 'admin_email' ) );
+		}
+
 		return $this->get_setting_prop( 'paypal_receiver_email', 'payments', $context );
 	}
 
@@ -955,8 +968,8 @@ class Setting extends Model {
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_payments_paypal_enable_log( $context = 'view' ) {
-		return $this->get_setting_prop( 'paypal_enable_log', 'payments', $context );
+	public function get_payments_paypal_debug( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_debug', 'payments', $context );
 	}
 
 	/**
@@ -1659,7 +1672,7 @@ class Setting extends Model {
 	* @param int $per_page
 	*/
 	public function set_courses_per_page( $per_page ) {
-		 $this->set_setting_prop( 'per_page', 'courses', absint( $per_page ) );
+		$this->set_setting_prop( 'per_page', 'courses', absint( $per_page ) );
 	}
 
 	/**
@@ -1762,7 +1775,7 @@ class Setting extends Model {
 	* @param string $enable
 	*/
 	public function set_courses_enable_single_course_permalink( $enable ) {
-		 $this->set_setting_prop( 'enable_single_course_permalink', 'courses', $enable );
+		$this->set_setting_prop( 'enable_single_course_permalink', 'courses', $enable );
 	}
 
 	/**
@@ -2047,18 +2060,18 @@ class Setting extends Model {
 	* @since 0.1.0
 	* @param boolean $enable
 	*/
-	public function set_payments_paypal_enable_ipn_email_notifications( $enable ) {
-		$this->set_setting_prop( 'paypal_enable_ipn_email_notifications', 'payments', masteriyo_string_to_bool( $enable ) );
+	public function set_payments_paypal_ipn_email_notifications( $enable ) {
+		$this->set_setting_prop( 'paypal_ipn_email_notifications', 'payments', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
-	 * Set option payments paypal sandbox enable.
+	 * Set option payments paypal sandbox.
 	*
 	* @since 0.1.0
 	* @param boolean $enable
 	*/
-	public function set_payments_paypal_sandbox_enable( $enable ) {
-		$this->set_setting_prop( 'styles_mode', 'payments', masteriyo_string_to_bool( $enable ) );
+	public function set_payments_paypal_sandbox( $enable ) {
+		$this->set_setting_prop( 'paypal_sandbox', 'payments', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -2068,7 +2081,7 @@ class Setting extends Model {
 	* @param string $email
 	*/
 	public function set_payments_paypal_email( $email ) {
-		$this->set_setting_prop( 'paypal_email', 'payments', $email );
+		$this->set_setting_prop( 'paypal_email', 'payments', trim( $email ) );
 	}
 
 	/**
@@ -2078,7 +2091,7 @@ class Setting extends Model {
 	* @param string $email
 	*/
 	public function set_payments_paypal_receiver_email( $email ) {
-		$this->set_setting_prop( 'paypal_receiver_email', 'payments', $email );
+		$this->set_setting_prop( 'paypal_receiver_email', 'payments', trim( $email ) );
 	}
 
 	/**
@@ -2088,7 +2101,7 @@ class Setting extends Model {
 	* @param string $token
 	*/
 	public function set_payments_paypal_identity_token( $token ) {
-		$this->set_setting_prop( 'paypal_identity_token', 'payments', $token );
+		$this->set_setting_prop( 'paypal_identity_token', 'payments', trim( $token ) );
 	}
 
 	/**
@@ -2098,7 +2111,7 @@ class Setting extends Model {
 	* @param string $invoice_prefix
 	*/
 	public function set_payments_paypal_invoice_prefix( $invoice_prefix ) {
-		$this->set_setting_prop( 'paypal_invoice_prefix', 'payments', $invoice_prefix );
+		$this->set_setting_prop( 'paypal_invoice_prefix', 'payments', trim( $invoice_prefix ) );
 	}
 
 	/**
@@ -2108,7 +2121,7 @@ class Setting extends Model {
 	* @param string $action
 	*/
 	public function set_payments_paypal_payment_action( $action ) {
-		$this->set_setting_prop( 'paypal_payment_action', 'payments', $action );
+		$this->set_setting_prop( 'paypal_payment_action', 'payments', trim( $action ) );
 	}
 
 	/**
@@ -2118,7 +2131,7 @@ class Setting extends Model {
 	* @param string $url
 	*/
 	public function set_payments_paypal_image_url( $url ) {
-		$this->set_setting_prop( 'paypal_image_url', 'payments', $url );
+		$this->set_setting_prop( 'paypal_image_url', 'payments', trim( $url ) );
 	}
 
 	/**
@@ -2127,8 +2140,8 @@ class Setting extends Model {
 	* @since 0.1.0
 	* @param string $enable
 	*/
-	public function set_payments_paypal_enable_log( $enable ) {
-		$this->set_setting_prop( 'paypal_enable_log', 'payments', masteriyo_string_to_bool( $enable ) );
+	public function set_payments_paypal_debug( $enable ) {
+		$this->set_setting_prop( 'paypal_debug', 'payments', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -2182,7 +2195,7 @@ class Setting extends Model {
 	* @param string $email
 	*/
 	public function set_emails_general_from_email( $email ) {
-		$this->set_setting_prop( 'general_from_email', 'emails', $email );
+		$this->set_setting_prop( 'general_from_email', 'emails', trim( $email ) );
 	}
 
 	/**
@@ -2286,7 +2299,7 @@ class Setting extends Model {
 	* @param string $subject
 	*/
 	public function set_emails_processing_order_subject( $subject ) {
-		 $this->set_setting_prop( 'processing_order_subject', 'emails', $subject );
+		$this->set_setting_prop( 'processing_order_subject', 'emails', $subject );
 	}
 
 	/**

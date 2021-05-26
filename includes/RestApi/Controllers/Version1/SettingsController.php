@@ -455,24 +455,84 @@ class SettingsController extends CrudController {
 					'items'       => array(
 						'type'   => 'object',
 						'paypal' => array(
-							'enable'           => array(
+							'enable'                => array(
 								'description' => __( 'Enable standard paypal.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'production_email' => array(
-								'description' => __( 'Paypal production email address.', 'masteriyo' ),
-								'type'        => 'email',
+							'title'                 => array(
+								'description' => __( 'Paypal title which the user sees during checkout.', 'masteriyo' ),
+								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'sandbox_enable'   => array(
-								'description' => __( 'Enable sandbox mode on paypal.', 'masteriyo' ),
+							'description'           => array(
+								'description' => __( 'Paypal description which the user sees during checkout.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'enable_ipn_email_notifiations' => array(
+								'description' => __( 'Enable IPN email notifications.', 'masteriyo' ),
+								'type'        => 'boolean',
+								'default'     => true,
+								'context'     => array( 'view', 'edit' ),
+							),
+							'sandbox'              => array(
+								'description' => __( 'Enable sandbox/sandbox mode on paypal.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'sandbox_email'    => array(
-								'description' => __( 'Paypal sandbox email address.', 'masteriyo' ),
+							'email'                 => array(
+								'description' => __( 'Paypal email.', 'masteriyo' ),
 								'type'        => 'email',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'receiver_email'        => array(
+								'description' => __( 'Paypal receiver email.', 'masteriyo' ),
+								'type'        => 'email',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'identity_token'        => array(
+								'description' => __( 'Paypal identity token.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'invoice_prefix'        => array(
+								'description' => __( 'Paypal invoice prefix.', 'masteriyo' ),
+								'type'        => 'string',
+								'default'     => 'masteriyo-',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'payment_action'        => array(
+								'description' => __( 'Paypal payment action.', 'masteriyo' ),
+								'type'        => 'string',
+								'default'     => 'capture',
+								'enum'        => array( 'capture', 'authorize' ),
+								'context'     => array( 'view', 'edit' ),
+							),
+							'image_url'             => array(
+								'description' => __( 'Paypal image url.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'debug'                 => array(
+								'description' => __( 'Enable log.', 'masteriyo' ),
+								'type'        => 'boolean',
+								'default'     => false,
+								'context'     => array( 'view', 'edit' ),
+							),
+							'sandbox_api_username'  => array(
+								'description' => __( 'Paypal sandbox API username.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'sandbox_api_password'  => array(
+								'description' => __( 'Paypal sandbox API password.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'sandbox_api_signature' => array(
+								'description' => __( 'Paypal sandbox API signature.', 'masteriyo' ),
+								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 						),
@@ -955,19 +1015,16 @@ class SettingsController extends CrudController {
 					'title'                          => $setting->get_payments_paypal_title( $context ),
 					'description'                    => $setting->get_payments_paypal_description( $context ),
 					'description'                    => $setting->get_payments_paypal_description( $context ),
-					'enable_ipn_email_notifications' => $setting->get_payments_paypal_enable_ipn_email_notifications( $context ),
-					'sandbox_enable'                 => $setting->get_payments_paypal_sandbox_enable( $context ),
+					'ipn_email_notifications' => $setting->get_payments_paypal_ipn_email_notifications( $context ),
+					'sandbox'                       => $setting->get_payments_paypal_sandbox( $context ),
 					'email'                          => $setting->get_payments_paypal_email( $context ),
 					'receiver_email'                 => $setting->get_payments_paypal_receiver_email( $context ),
 					'identity_token'                 => $setting->get_payments_paypal_identity_token( $context ),
 					'invoice_prefix'                 => $setting->get_payments_paypal_invoice_prefix( $context ),
 					'payment_action'                 => $setting->get_payments_paypal_payment_action( $context ),
 					'image_url'                      => $setting->get_payments_paypal_image_url( $context ),
-					'enable_log'                     => $setting->get_payments_paypal_enable_log( $context ),
+					'debug'                          => $setting->get_payments_paypal_debug( $context ),
 					'sandbox_api_username'           => $setting->get_payments_paypal_sandbox_api_username( $context ),
-					'sandbox_api_password'           => $setting->get_payments_paypal_invoice_prefix( $context ),
-					'sandbox_api_signature'          => $setting->get_payments_paypal_sandbox_api_signature( $context ),
-
 				),
 			),
 			'emails'   => array(
@@ -1230,16 +1287,60 @@ class SettingsController extends CrudController {
 			$setting->set_payments_paypal_enable( $request['payments']['paypal']['enable'] );
 		}
 
-		if ( isset( $request['payments']['paypal']['production_email'] ) ) {
-			$setting->set_payments_paypal_production_email( $request['payments']['paypal']['production_email'] );
+		if ( isset( $request['payments']['paypal']['title'] ) ) {
+			$setting->set_payments_paypal_title( $request['payments']['paypal']['title'] );
 		}
 
-		if ( isset( $request['payments']['paypal']['sandbox_enable'] ) ) {
-			$setting->set_payments_paypal_sandbox_enable( $request['payments']['paypal']['sandbox_enable'] );
+		if ( isset( $request['payments']['paypal']['description'] ) ) {
+			$setting->set_payments_paypal_description( $request['payments']['paypal']['description'] );
 		}
 
-		if ( isset( $request['payments']['paypal']['sandbox_email'] ) ) {
-			$setting->set_payments_paypal_sandbox_email( $request['payments']['paypal']['sandbox_email'] );
+		if ( isset( $request['payments']['paypal']['ipn_email_notifications'] ) ) {
+			$setting->set_payments_paypal_ipn_email_notifications( $request['payments']['paypal']['ipn_email_notifications'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['sandbox'] ) ) {
+			$setting->set_payments_paypal_sandbox( $request['payments']['paypal']['sandbox'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['email'] ) ) {
+			$setting->set_payments_paypal_email( $request['payments']['paypal']['email'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['receiver_email'] ) ) {
+			$setting->set_payments_paypal_receiver_email( $request['payments']['paypal']['receiver_email'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['identity_token'] ) ) {
+			$setting->set_payments_paypal_identity_token( $request['payments']['paypal']['identity_token'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['invoice_prefix'] ) ) {
+			$setting->set_payments_paypal_invoice_prefix( $request['payments']['paypal']['invoice_prefix'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['payment_action'] ) ) {
+			$setting->set_payments_paypal_payment_action( $request['payments']['paypal']['payment_action'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['image_url'] ) ) {
+			$setting->set_payments_paypal_image_url( $request['payments']['paypal']['image_url'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['debug'] ) ) {
+			$setting->set_payments_paypal_debug( $request['payments']['paypal']['debug'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['sandbox_api_username'] ) ) {
+			$setting->set_payments_paypal_sandbox_api_username( $request['payments']['paypal']['sandbox_api_username'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['sandbox_api_password'] ) ) {
+			$setting->set_payments_paypal_sandbox_api_password( $request['payments']['paypal']['sandbox_api_password'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['sandbox_api_signature'] ) ) {
+			$setting->set_payments_paypal_sandbox_api_signature( $request['payments']['paypal']['sandbox_api_signature'] );
 		}
 
 		// Emails Setting.

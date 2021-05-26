@@ -56,7 +56,7 @@ class PaymentGateways {
 	public function init() {
 		$load_gateways = array(
 			'ThemeGrill\Masteriyo\Gateways\Offline\Offline',
-			// 'ThemeGrill\Masteriyo\Gateways\Paypal\Paypal',
+			'ThemeGrill\Masteriyo\Gateways\Paypal\Paypal',
 		);
 
 		// Filter.

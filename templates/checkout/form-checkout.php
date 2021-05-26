@@ -22,7 +22,9 @@ if ( ! is_user_logged_in() ) {
 	<form
 		name="checkout" method="post" class="mto-checkout--form masteriyo-checkout"
 		action="<?php echo esc_url( masteriyo_get_checkout_url() ); ?>"
-		enctype="multipart/form-data" >
+		enctype="multipart/form-data"
+		class="checkout masteriyo-checkout"
+		validate="novalidate" >
 
 		<div class="mto-checkout-wrapper">
 			<?php do_action( 'masteriyo_checkout_form' ); ?>

@@ -46,7 +46,7 @@ defined( 'ABSPATH' ) || exit;
 	class="mto-checkout--btn mto-button mto-btn-primary alt"
 	id="masteriyo-place-order"
 	name="masteriyo_checkout_place_order">
-	<?php printf( $order_button_text ); ?>
+	<?php echo esc_html( $order_button_text ); ?>
 </button>
 
 <?php

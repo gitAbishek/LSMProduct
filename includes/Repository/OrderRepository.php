@@ -67,6 +67,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		if ( ! $order->get_date_created( 'edit' ) ) {
 			$order->set_date_created( current_time( 'mysql', true ) );
 		}
+
 		if ( ! $order->get_version( 'edit' ) ) {
 			$order->set_version( Constants::get( 'MASTERIYO_VERSION' ) );
 		}
@@ -78,9 +79,8 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 					'post_type'      => 'mto-order',
 					'post_status'    => $order->get_status() ? $order->get_status() : 'pending',
 					'post_author'    => get_current_user_id(),
-					'post_title'     => __( 'Order', 'masteriyo' ),
-					'post_content'   => __( 'Order', 'masteriyo' ),
-					'post_excerpt'   => __( 'Order', 'masteriyo' ),
+					'post_title'     => $this->get_order_title(),
+					'post_password'  => $this->get_order_key( $order ),
 					'comment_status' => 'closed',
 					'ping_status'    => 'closed',
 					'post_date'      => $order->get_date_created( 'edit' ),
@@ -97,6 +97,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 
 			$order->save_meta_data();
 			$order->apply_changes();
+			$this->clear_caches( $order );
 
 			do_action( 'masteriyo_new_order', $id, $order );
 		}
@@ -398,24 +399,31 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 * @return array
 	 */
 	public function read_items( $order, $type ) {
-		$order_items = false;
+		$type        = trim( $type );
+		$order_items = array();
 
 		// Get from cache if available.
 		if ( $order->get_id() ) {
 			$order_items = masteriyo( 'cache' )->get( 'masteriyo-order-items-' . $order->get_id(), 'masteriyo-orders' );
 		}
 
+		if ( ! empty( $order_items ) ) {
+			return $order_items;
+		}
+
 		// Fetch from database.
-		if ( false === $order_items ) {
-			$order_items = masteriyo_get_order_items( array( 'order_id' => $order->get_id() ) );
+		$order_items = masteriyo_get_order_items(
+			array(
+				'order_id' => $order->get_id(),
+			)
+		);
 
-			foreach ( $order_items as $item ) {
-				masteriyo( 'cache' )->set( 'masteriyo-item-' . $item->get_id(), $item, 'masteriyo-order-items' );
-			}
+		foreach ( $order_items as $item ) {
+			masteriyo( 'cache' )->set( 'masteriyo-item-' . $item->get_id(), $item, 'masteriyo-order-items' );
+		}
 
-			if ( $order->get_id() ) {
-				masteriyo( 'cache' )->set( 'masteriyo-order-items-' . $order->get_id(), $order_items, 'masteriyo-orders' );
-			}
+		if ( $order->get_id() ) {
+			masteriyo( 'cache' )->set( 'masteriyo-order-items-' . $order->get_id(), $order_items, 'masteriyo-orders' );
 		}
 
 		return $order_items;
@@ -431,8 +439,6 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 */
 	public function delete_items( $order, $type = null ) {
 		$order_items_repo = masteriyo( 'order-item.store' );
-
-		$a = 1;
 
 		if ( ! empty( $type ) ) {
 			$order_items_repo->delete_batch(
@@ -484,5 +490,31 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		clean_post_cache( $order->get_id() );
 		// Delete shop order transients.
 		masteriyo( 'cache' )->delete( 'masteriyo-order-items-' . $order->get_id(), 'masteriyo-orders' );
+	}
+
+	/**
+	 * Get a title for the new post type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	protected function get_order_title() {
+		// phpcs:enable
+		/* translators: %s: Order date */
+		return sprintf( __( 'Order &ndash; %s', 'masteriyo' ), strftime( _x( '%1$b %2$d, %Y @ %I:%M %p', 'Order date parsed by strftime', 'masteriyo' ) ) );
+		// phpcs:disable
+	}
+
+	/**
+	 * Get order key.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Order $order Order object.
+	 * @return string
+	 */
+	protected function get_order_key( $order ) {
+		return masteriyo_generate_order_key();
 	}
 }

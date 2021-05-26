@@ -13,12 +13,15 @@
 namespace ThemeGrill\Masteriyo\Gateways\Paypal;
 
 use ThemeGrill\Masteriyo\Constants;
+use ThemeGrill\Masteriyo\Gateways\Paypal\Request;
+use ThemeGrill\Masteriyo\Gateways\Paypal\PdtHandler;
+use ThemeGrill\Masteriyo\Gateways\Paypal\IpnHandler;
 use ThemeGrill\Masteriyo\Abstracts\PaymentGateway;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * WC_Gateway_Paypal Class.
+ * MASTERIYO_Gateway_Paypal Class.
  */
 class Paypal extends PaymentGateway {
 
@@ -29,7 +32,7 @@ class Paypal extends PaymentGateway {
 	 *
 	 * @var string
 	 */
-	protected $id = 'paypal-standard';
+	protected $id = 'paypal';
 
 	/**
 	 * True if the gateway shows fields on the checkout.
@@ -56,6 +59,8 @@ class Paypal extends PaymentGateway {
 
 	/**
 	 * Constructor for the gateway.
+	 *
+	 * @since 0.1.0
 	 */
 	public function __construct() {
 		$this->order_button_text = __( 'Proceed to PayPal', 'masteriyo' );
@@ -73,14 +78,14 @@ class Paypal extends PaymentGateway {
 		// Define user set variables.
 		$this->title          = $this->get_option( 'title' );
 		$this->description    = $this->get_option( 'description' );
-		$this->testmode       = 'yes' === $this->get_option( 'testmode', 'no' );
-		$this->debug          = 'yes' === $this->get_option( 'debug', 'no' );
+		$this->sandbox        = masteriyo_string_to_bool( $this->get_option( 'sandbox', 'no' ) );
+		$this->debug          = masteriyo_string_to_bool( $this->get_option( 'debug', 'no' ) );
 		$this->email          = $this->get_option( 'email' );
 		$this->receiver_email = $this->get_option( 'receiver_email', $this->email );
 		$this->identity_token = $this->get_option( 'identity_token' );
 		self::$log_enabled    = $this->debug;
 
-		if ( $this->testmode ) {
+		if ( $this->sandbox ) {
 			/* translators: %s: Link to PayPal sandbox testing guide page */
 			$this->description .= ' ' . sprintf( __( 'SANDBOX ENABLED. You can use sandbox testing accounts only. See the <a href="%s">PayPal Sandbox Testing Guide</a> for more details.', 'masteriyo' ), 'https://developer.paypal.com/docs/classic/lifecycle/ug_sandbox/' );
 			$this->description  = trim( $this->description );
@@ -89,17 +94,14 @@ class Paypal extends PaymentGateway {
 		add_action( 'masteriyo_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 		add_action( 'masteriyo_order_status_processing', array( $this, 'capture_payment' ) );
 		add_action( 'masteriyo_order_status_completed', array( $this, 'capture_payment' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
 		if ( ! $this->is_valid_for_use() ) {
-			$this->enabled = 'no';
+			$this->enabled = true;
 		} else {
-			include_once dirname( __FILE__ ) . '/includes/class-wc-gateway-paypal-ipn-handler.php';
-			new WC_Gateway_Paypal_IPN_Handler( $this->testmode, $this->receiver_email );
+			new IpnHandler( $this->sandbox, $this->receiver_email );
 
 			if ( $this->identity_token ) {
-				include_once dirname( __FILE__ ) . '/includes/class-wc-gateway-paypal-pdt-handler.php';
-				new WC_Gateway_Paypal_PDT_Handler( $this->testmode, $this->identity_token );
+				new PdtHandler( $this->sandbox, $this->identity_token );
 			}
 		}
 
@@ -114,7 +116,7 @@ class Paypal extends PaymentGateway {
 	 * When this gateway is toggled on via AJAX, if this returns true a
 	 * redirect will occur to the settings page instead.
 	 *
-	 * @since 3.4.0
+	 * @since 0.1.0
 	 * @return bool
 	 */
 	public function needs_setup() {
@@ -124,22 +126,26 @@ class Paypal extends PaymentGateway {
 	/**
 	 * Logging method.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param string $message Log message.
 	 * @param string $level Optional. Default 'info'. Possible values:
 	 *                      emergency|alert|critical|error|warning|notice|info|debug.
 	 */
 	public static function log( $message, $level = 'info' ) {
-		if ( self::$log_enabled ) {
-			if ( empty( self::$log ) ) {
-				self::$log = wc_get_logger();
-			}
-			self::$log->log( $level, $message, array( 'source' => 'paypal' ) );
-		}
+		// if ( self::$log_enabled ) {
+		// 	if ( empty( self::$log ) ) {
+		// 		self::$log = masteriyo_get_logger();
+		// 	}
+		// 	self::$log->log( $level, $message, array( 'source' => 'paypal' ) );
+		// }
 	}
 
 	/**
 	 * Processes and saves options.
 	 * If there is an error thrown, will continue to save and validate fields, but will leave the erroring field out.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return bool was anything saved?
 	 */
@@ -149,7 +155,7 @@ class Paypal extends PaymentGateway {
 		// Maybe clear logs.
 		if ( 'yes' !== $this->get_option( 'debug', 'no' ) ) {
 			if ( empty( self::$log ) ) {
-				self::$log = wc_get_logger();
+				self::$log = masteriyo_get_logger();
 			}
 			self::$log->clear( 'paypal' );
 		}
@@ -160,14 +166,18 @@ class Paypal extends PaymentGateway {
 	/**
 	 * Get gateway icon.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return string
 	 */
 	public function get_icon() {
 		// We need a base country for the link to work, bail if in the unlikely event no country is set.
-		$base_country = WC()->countries->get_base_country();
+		$base_country = masteriyo( 'countries' )->get_base_country();
+
 		if ( empty( $base_country ) ) {
 			return '';
 		}
+
 		$icon_html = '';
 		$icon      = (array) $this->get_icon_image( $base_country );
 
@@ -182,6 +192,8 @@ class Paypal extends PaymentGateway {
 
 	/**
 	 * Get the link for an icon based on country.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param  string $country Country two letter code.
 	 * @return string
@@ -202,6 +214,8 @@ class Paypal extends PaymentGateway {
 
 	/**
 	 * Get PayPal images for a country.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $country Country code.
 	 * @return array of image URLs
@@ -264,7 +278,7 @@ class Paypal extends PaymentGateway {
 				$icon = 'https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg';
 				break;
 			default:
-				$icon = WC_HTTPS::force_https_url( WC()->plugin_url() . '/includes/gateways/paypal/assets/images/paypal.png' );
+				$icon = MASTERIYO_HTTPS::force_https_url( MASTERIYO()->plugin_url() . '/includes/gateways/paypal/assets/images/paypal.png' );
 				break;
 		}
 		return apply_filters( 'masteriyo_paypal_icon', $icon );
@@ -273,11 +287,13 @@ class Paypal extends PaymentGateway {
 	/**
 	 * Check if this gateway is available in the user's country based on currency.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return bool
 	 */
 	public function is_valid_for_use() {
 		return in_array(
-			get_masteriyo_currency(),
+			masteriyo_get_currency(),
 			apply_filters(
 				'masteriyo_paypal_supported_currencies',
 				array( 'AUD', 'BRL', 'CAD', 'MXN', 'NZD', 'HKD', 'SGD', 'USD', 'EUR', 'JPY', 'TRY', 'NOK', 'CZK', 'DKK', 'HUF', 'ILS', 'MYR', 'PHP', 'PLN', 'SEK', 'CHF', 'TWD', 'THB', 'GBP', 'RMB', 'RUB', 'INR' )
@@ -308,38 +324,43 @@ class Paypal extends PaymentGateway {
 	/**
 	 * Get the transaction URL.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param  Order $order Order object.
 	 * @return string
 	 */
 	public function get_transaction_url( $order ) {
-		if ( $this->testmode ) {
+		if ( $this->sandbox ) {
 			$this->view_transaction_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_view-a-trans&id=%s';
 		} else {
 			$this->view_transaction_url = 'https://www.paypal.com/cgi-bin/webscr?cmd=_view-a-trans&id=%s';
 		}
+
 		return parent::get_transaction_url( $order );
 	}
 
 	/**
 	 * Process the payment and return the result.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param  int $order_id Order ID.
 	 * @return array
 	 */
 	public function process_payment( $order_id ) {
-		include_once dirname( __FILE__ ) . '/includes/class-wc-gateway-paypal-request.php';
-
-		$order          = wc_get_order( $order_id );
-		$paypal_request = new WC_Gateway_Paypal_Request( $this );
+		$order          = masteriyo_get_order( $order_id );
+		$paypal_request = new Request( $this );
 
 		return array(
 			'result'   => 'success',
-			'redirect' => $paypal_request->get_request_url( $order, $this->testmode ),
+			'redirect' => $paypal_request->get_request_url( $order, $this->sandbox ),
 		);
 	}
 
 	/**
 	 * Can the order be refunded via PayPal?
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param  Order $order Order object.
 	 * @return bool
@@ -347,7 +368,7 @@ class Paypal extends PaymentGateway {
 	public function can_refund_order( $order ) {
 		$has_api_creds = false;
 
-		if ( $this->testmode ) {
+		if ( $this->sandbox ) {
 			$has_api_creds = $this->get_option( 'sandbox_api_username' ) && $this->get_option( 'sandbox_api_password' ) && $this->get_option( 'sandbox_api_signature' );
 		} else {
 			$has_api_creds = $this->get_option( 'api_username' ) && $this->get_option( 'api_password' ) && $this->get_option( 'api_signature' );
@@ -358,18 +379,20 @@ class Paypal extends PaymentGateway {
 
 	/**
 	 * Init the API class and set the username/password etc.
+	 *
+	 * @since 0.1.0
 	 */
 	protected function init_api() {
-		include_once dirname( __FILE__ ) . '/includes/class-wc-gateway-paypal-api-handler.php';
-
-		WC_Gateway_Paypal_API_Handler::$api_username  = $this->testmode ? $this->get_option( 'sandbox_api_username' ) : $this->get_option( 'api_username' );
-		WC_Gateway_Paypal_API_Handler::$api_password  = $this->testmode ? $this->get_option( 'sandbox_api_password' ) : $this->get_option( 'api_password' );
-		WC_Gateway_Paypal_API_Handler::$api_signature = $this->testmode ? $this->get_option( 'sandbox_api_signature' ) : $this->get_option( 'api_signature' );
-		WC_Gateway_Paypal_API_Handler::$sandbox       = $this->testmode;
+		ApiHandler::$api_username  = $this->sandbox ? $this->get_option( 'sandbox_api_username' ) : $this->get_option( 'api_username' );
+		ApiHandler::$api_password  = $this->sandbox ? $this->get_option( 'sandbox_api_password' ) : $this->get_option( 'api_password' );
+		ApiHandler::$api_signature = $this->sandbox ? $this->get_option( 'sandbox_api_signature' ) : $this->get_option( 'api_signature' );
+		ApiHandler::$sandbox       = $this->sandbox;
 	}
 
 	/**
 	 * Process a refund if supported.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param  int    $order_id Order ID.
 	 * @param  float  $amount Refund amount.
@@ -377,7 +400,7 @@ class Paypal extends PaymentGateway {
 	 * @return bool|WP_Error
 	 */
 	public function process_refund( $order_id, $amount = null, $reason = '' ) {
-		$order = wc_get_order( $order_id );
+		$order = masteriyo_get_order( $order_id );
 
 		if ( ! $this->can_refund_order( $order ) ) {
 			return new WP_Error( 'error', __( 'Refund failed.', 'masteriyo' ) );
@@ -385,14 +408,14 @@ class Paypal extends PaymentGateway {
 
 		$this->init_api();
 
-		$result = WC_Gateway_Paypal_API_Handler::refund_transaction( $order, $amount, $reason );
+		$result = ApiHandler::refund_transaction( $order, $amount, $reason );
 
 		if ( is_wp_error( $result ) ) {
 			$this->log( 'Refund Failed: ' . $result->get_error_message(), 'error' );
 			return new WP_Error( 'error', $result->get_error_message() );
 		}
 
-		$this->log( 'Refund Result: ' . wc_print_r( $result, true ) );
+		$this->log( 'Refund Result: ' . masteriyo_print_r( $result, true ) );
 
 		switch ( strtolower( $result->ACK ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			case 'success':
@@ -410,14 +433,16 @@ class Paypal extends PaymentGateway {
 	/**
 	 * Capture payment when the order is changed from on-hold to complete or processing
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param  int $order_id Order ID.
 	 */
 	public function capture_payment( $order_id ) {
-		$order = wc_get_order( $order_id );
+		$order = masteriyo_get_order( $order_id );
 
 		if ( 'paypal' === $order->get_payment_method() && 'pending' === $order->get_meta( '_paypal_status', true ) && $order->get_transaction_id() ) {
 			$this->init_api();
-			$result = WC_Gateway_Paypal_API_Handler::do_capture( $order );
+			$result = ApiHandler::do_capture( $order );
 
 			if ( is_wp_error( $result ) ) {
 				$this->log( 'Capture Failed: ' . $result->get_error_message(), 'error' );
@@ -426,7 +451,7 @@ class Paypal extends PaymentGateway {
 				return;
 			}
 
-			$this->log( 'Capture Result: ' . wc_print_r( $result, true ) );
+			$this->log( 'Capture Result: ' . masteriyo_print_r( $result, true ) );
 
 			// phpcs:disable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			if ( ! empty( $result->PAYMENTSTATUS ) ) {
@@ -448,28 +473,9 @@ class Paypal extends PaymentGateway {
 	}
 
 	/**
-	 * Load admin scripts.
-	 *
-	 * @since 3.3.0
-	 */
-	public function admin_scripts() {
-		$screen    = get_current_screen();
-		$screen_id = $screen ? $screen->id : '';
-
-		if ( 'masteriyo_page_wc-settings' !== $screen_id ) {
-			return;
-		}
-
-		$suffix  = Constants::is_true( 'SCRIPT_DEBUG' ) ? '' : '.min';
-		$version = Constants::get_constant( 'WC_VERSION' );
-
-		wp_enqueue_script( 'masteriyo_paypal_admin', WC()->plugin_url() . '/includes/gateways/paypal/assets/js/paypal-admin' . $suffix . '.js', array(), $version, true );
-	}
-
-	/**
 	 * Custom PayPal order received text.
 	 *
-	 * @since 3.9.0
+	 * @since 0.1.0
 	 * @param string   $text Default text.
 	 * @param Order $order Order data.
 	 * @return string

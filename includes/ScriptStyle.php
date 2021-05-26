@@ -106,11 +106,6 @@ class ScriptStyle {
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
 				),
-				'public'         => array(
-					'src'     => $this->get_asset_url( '/assets/js/build/public.js' ),
-					'deps'    => array( 'wp-polyfill' ),
-					'context' => 'public',
-				),
 				'single-course'  => array(
 					'src'      => $this->get_asset_url( '/assets/js/single-course.js' ),
 					'deps'     => array( 'jquery' ),
@@ -130,6 +125,13 @@ class ScriptStyle {
 					'version'  => $this->get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_load_login_form_assets',
+				),
+				'checkout'       => array(
+					'src'      => $this->get_asset_url( '/assets/js/frontend/checkout.js' ),
+					'deps'     => array( 'jquery' ),
+					'version'  => $this->get_version(),
+					'context'  => 'public',
+					'callback' => 'masteriyo_is_checkout_page',
 				),
 			)
 		);
@@ -501,6 +503,16 @@ class ScriptStyle {
 					'data' => array(
 						'ajax_url' => admin_url( 'admin-ajax.php' ),
 						'nonce'    => wp_create_nonce( 'masteriyo_login_nonce' ),
+					),
+				),
+				'checkout'       => array(
+					'name' => 'mto_checkout_params',
+					'data' => array(
+						'ajax_url'            => admin_url( 'admin-ajax.php' ),
+						'checkout_url'        => '/?mto-ajax=checkout',
+						'i18n_checkout_error' => esc_html__( 'Error processing checkout. Please try again.', 'masteriyo' ),
+						'is_checkout'         => true,
+						'mto_ajax_url'        => '/?mto-ajax=%%endpoint%%',
 					),
 				),
 			)

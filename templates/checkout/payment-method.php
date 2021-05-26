@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 
-<li class="payment_method payment-method-<?php echo esc_attr( $gateway->get_id() ); ?>">
+<li class="payment-method payment-method-<?php echo esc_attr( $gateway->get_id() ); ?>">
 	<input
 		id="payment-method-<?php echo esc_attr( $gateway->get_id() ); ?>"
 		type="radio"
@@ -22,10 +22,11 @@ defined( 'ABSPATH' ) || exit;
 
 	<label for="payment_method_<?php echo esc_attr( $gateway->get_id() ); ?>" class="mto-label">
 		<?php
-			echo esc_html( $gateway->get_title() );
-			echo esc_url( $gateway->get_icon() );
+			echo $gateway->get_title(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $gateway->get_icon(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>
 	</label>
+
 	<?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
 		<div class="payment-box payment-method-<?php echo esc_attr( $gateway->get_id() ); ?>" <?php if ( ! $gateway->is_chosen() ) : /* phpcs:ignore Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace */ ?>style="display:block;"<?php endif; /* phpcs:ignore Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace */ ?>>
 			<?php $gateway->payment_fields(); ?>

@@ -679,15 +679,60 @@ if ( ! function_exists( 'masteriyo_checkout_payment' ) ) {
 		}
 
 		// translators: Cart total order
-		$order_button_text = apply_filters( 'masteriyo_order_button_text', __( 'Confirm payment %s', 'masteriyo' ) );
+		$order_button_text = apply_filters( 'masteriyo_order_button_text', __( 'Confirm Payment', 'masteriyo' ) );
 
 		masteriyo_get_template(
 			'checkout/payment.php',
 			array(
 				'checkout'           => masteriyo( 'checkout' ),
 				'available_gateways' => $available_gateways,
-				'order_button_text'  => sprintf( $order_button_text, masteriyo_price( masteriyo( 'cart' )->get_total() ) ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				'order_button_text'  => $order_button_text,
 			)
 		);
+	}
+}
+
+if ( ! function_exists( 'masteriyo_display_item_meta' ) ) {
+	/**
+	 * Display item meta data.
+	 *
+	 * @since  0.1.0
+	 * @param  OrderItem $item Order Item.
+	 * @param  array         $args Arguments.
+	 * @return string|void
+	 */
+	function masteriyo_display_item_meta( $item, $args = array() ) {
+		$strings = array();
+		$html    = '';
+		$args    = wp_parse_args(
+			$args,
+			array(
+				'before'       => '<ul class="masteriyo-item-meta"><li>',
+				'after'        => '</li></ul>',
+				'separator'    => '</li><li>',
+				'echo'         => true,
+				'autop'        => false,
+				'label_before' => '<strong class="masteriyo-item-meta-label">',
+				'label_after'  => ':</strong> ',
+			)
+		);
+
+		foreach ( $item->get_formatted_meta_data() as $meta_id => $meta ) {
+			$value     = $args['autop'] ? wp_kses_post( $meta->display_value ) : wp_kses_post( make_clickable( trim( $meta->display_value ) ) );
+			$strings[] = $args['label_before'] . wp_kses_post( $meta->display_key ) . $args['label_after'] . $value;
+		}
+
+		if ( $strings ) {
+			$html = $args['before'] . implode( $args['separator'], $strings ) . $args['after'];
+		}
+
+		$html = apply_filters( 'masteriyo_display_item_meta', $html, $item, $args );
+
+		if ( $args['echo'] ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $html;
+		} else {
+			return $html;
+		}
 	}
 }

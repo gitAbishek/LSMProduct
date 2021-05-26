@@ -946,24 +946,10 @@ class Order extends AbstractOrder {
 	}
 
 	/**
-	 * Generates a URL for the thanks page (order received).
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return string
-	 */
-	public function get_checkout_order_received_url() {
-		$order_received_url = masteriyo_get_endpoint_url( 'order-received', $this->get_id(), masteriyo_get_checkout_url() );
-		$order_received_url = add_query_arg( 'key', $this->get_order_key(), $order_received_url );
-
-		return apply_filters( 'masteriyo_get_checkout_order_received_url', $order_received_url, $this );
-	}
-
-	/**
 	 * Set order status.
 	 *
 	 * @since 0.1.0
-	 * @param string $new_status    Status to change the order to. No internal wc- prefix is required.
+	 * @param string $new_status    Status to change the order to. No internal masteriyo- prefix is required.
 	 * @param string $note          Optional note to add.
 	 * @param bool   $manual_update Is this a manual order status change?.
 	 * @return array
@@ -980,7 +966,7 @@ class Order extends AbstractOrder {
 			);
 
 			if ( $manual_update ) {
-				do_action( 'woocommerce_order_edit_status', $this->get_id(), $result['to'] );
+				do_action( 'masteriyo_order_edit_status', $this->get_id(), $result['to'] );
 			}
 
 			$this->maybe_set_date_paid();
@@ -988,5 +974,107 @@ class Order extends AbstractOrder {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Gets the order number for display (by default, order ID).
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_order_number() {
+		return (string) apply_filters( 'masteriyo_order_number', $this->get_id(), $this );
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| URLs and Endpoints
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Generates a URL for the thanks page (order received).
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_checkout_order_received_url() {
+		$order_received_url = masteriyo_get_endpoint_url( 'order-received', $this->get_id(), masteriyo_get_checkout_url() );
+		$order_received_url = add_query_arg( 'key', $this->get_order_key(), $order_received_url );
+
+		return apply_filters( 'masteriyo_get_checkout_order_received_url', $order_received_url, $this );
+	}
+
+	/**
+	 * Generates a URL so that a customer can cancel their (unpaid - pending) order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $redirect Redirect URL.
+	 * @return string
+	 */
+	public function get_cancel_order_url( $redirect = '' ) {
+		return apply_filters(
+			'masteriyo_get_cancel_order_url',
+			wp_nonce_url(
+				add_query_arg(
+					array(
+						'cancel_order' => 'true',
+						'order'        => $this->get_order_key(),
+						'order_id'     => $this->get_id(),
+						'redirect'     => $redirect,
+					),
+					$this->get_cancel_endpoint()
+				),
+				'masteriyo-cancel_order'
+			)
+		);
+	}
+
+
+	/**
+	 * Generates a raw (unescaped) cancel-order URL for use by payment gateways.
+	 *
+	 * 2since 0.1.0
+	 *
+	 * @param string $redirect Redirect URL.
+	 * @return string The unescaped cancel-order URL.
+	 */
+	public function get_cancel_order_url_raw( $redirect = '' ) {
+		return apply_filters(
+			'masteriyo_get_cancel_order_url_raw',
+			add_query_arg(
+				array(
+					'cancel_order' => 'true',
+					'order'        => $this->get_order_key(),
+					'order_id'     => $this->get_id(),
+					'redirect'     => $redirect,
+					'_wpnonce'     => wp_create_nonce( 'masteriyo-cancel_order' ),
+				),
+				$this->get_cancel_endpoint()
+			)
+		);
+	}
+
+	/**
+	 * Helper method to return the cancel endpoint.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string the cancel endpoint; either the cart page or the home page.
+	 */
+	public function get_cancel_endpoint() {
+		$cancel_endpoint = masteriyo_get_cart_url();
+		if ( ! $cancel_endpoint ) {
+			$cancel_endpoint = home_url();
+		}
+
+		if ( false === strpos( $cancel_endpoint, '?' ) ) {
+			$cancel_endpoint = trailingslashit( $cancel_endpoint );
+		}
+
+		return $cancel_endpoint;
 	}
 }

@@ -621,3 +621,46 @@ if ( ! function_exists( 'masteriyo_format_rating' ) ) {
 		}
 	}
 }
+
+/**
+ * Trim a string and append a suffix.
+ *
+ * @since 0.1.0
+ *
+ * @param  string  $string String to trim.
+ * @param  integer $chars  Amount of characters.
+ *                         Defaults to 200.
+ * @param  string  $suffix Suffix.
+ *                         Defaults to '...'.
+ * @return string
+ */
+function masteriyo_trim_string( $string, $chars = 200, $suffix = '...' ) {
+	if ( strlen( $string ) > $chars ) {
+		if ( function_exists( 'mb_substr' ) ) {
+			$string = mb_substr( $string, 0, ( $chars - mb_strlen( $suffix ) ) ) . $suffix;
+		} else {
+			$string = substr( $string, 0, ( $chars - strlen( $suffix ) ) ) . $suffix;
+		}
+	}
+	return $string;
+}
+
+/**
+ * Convert a float to a string without locale formatting which PHP adds when changing floats to strings.
+ *
+ * @since 0.1.0
+ *
+ * @param  float $float Float value to format.
+ * @return string
+ */
+function masteriyo_float_to_string( $float ) {
+	if ( ! is_float( $float ) ) {
+		return $float;
+	}
+
+	$locale = localeconv();
+	$string = strval( $float );
+	$string = str_replace( $locale['decimal_point'], '.', $string );
+
+	return $string;
+}

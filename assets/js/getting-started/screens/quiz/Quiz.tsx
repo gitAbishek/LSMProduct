@@ -3,42 +3,55 @@ import {
 	Button,
 	ButtonGroup,
 	Flex,
+	FormControl,
+	FormLabel,
 	Input,
 	InputGroup,
 	InputRightAddon,
-	Select,
+	Link,
 	Stack,
-	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-
+import { useFormContext } from 'react-hook-form';
 interface Props {
 	setTabIndex?: any;
+	dashboardURL: string;
 }
 
 const Quiz: React.FC<Props> = (props) => {
-	const { setTabIndex } = props;
+	const { setTabIndex, dashboardURL } = props;
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext();
 	return (
 		<Box rounded="3px">
 			<Box bg="white" p="30" shadow="box">
 				<Stack direction="column" spacing="8">
-					<Flex justify="space-between" align="center">
-						<strong>
-							<Text fontSize="sm">{__('Time Limit', 'masteriyo')}</Text>
-						</strong>
-						<InputGroup w="md" size="md">
-							<Input defaultValue="60" />
-							<InputRightAddon children={`minutes`} />
-						</InputGroup>
-					</Flex>
+					<FormControl id="quiz-time-limit">
+						<Flex justify="space-between" align="center">
+							<FormLabel style={{ fontWeight: 'bold' }}>
+								{__('Time Limit', 'masteriyo')}
+							</FormLabel>
+							<InputGroup w="md" size="md">
+								<Input defaultValue="60" {...register('time_limit')} />
+								<InputRightAddon children={`Minutes`} />
+							</InputGroup>
+						</Flex>
+					</FormControl>
 
-					<Flex justify="space-between" align="center">
-						<strong>
-							<Text fontSize="sm">{__('Attempts Allowed', 'masteriyo')}</Text>
-						</strong>
-						<Select w="md" placeholder="5 attempts" />
-					</Flex>
+					<FormControl id="quiz-attempts-allowed">
+						<Flex justify="space-between" align="center">
+							<FormLabel style={{ fontWeight: 'bold' }}>
+								{__('Attempts Allowed', 'masteriyo')}
+							</FormLabel>
+							<InputGroup w="md" size="md">
+								<Input defaultValue="5" {...register('attempts_allowed')} />
+								<InputRightAddon children={`Attempts`} />
+							</InputGroup>
+						</Flex>
+					</FormControl>
 
 					<Flex justify="space-between" align="center">
 						<Button
@@ -50,7 +63,9 @@ const Quiz: React.FC<Props> = (props) => {
 						</Button>
 						<ButtonGroup>
 							<Button onClick={() => setTabIndex(4)} variant="ghost">
-								{__('Skip', 'masteriyo')}
+								<Link href={dashboardURL ? dashboardURL : '#'}>
+									{__('Skip to Dashboard', 'masteriyo')}
+								</Link>
 							</Button>
 							<Button
 								onClick={() => setTabIndex(4)}

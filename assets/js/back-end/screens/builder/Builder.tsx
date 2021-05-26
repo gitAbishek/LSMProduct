@@ -32,6 +32,7 @@ import API from '../../utils/api';
 import { mergeDeep } from '../../utils/mergeDeep';
 import EditCourse from '../courses/EditCourse';
 import SectionBuilder from '../sections/SectionBuilder';
+import CourseSetting from './component/CourseSetting';
 
 const Builder: React.FC = () => {
 	const { courseId }: any = useParams();
@@ -94,7 +95,7 @@ const Builder: React.FC = () => {
 		}
 	);
 
-	const onSave = (data: CourseDataMap) => {
+	const onSave = (data: any) => {
 		updateBuilder.mutate(builderData);
 		const newData: any = {
 			...(data.categories && {
@@ -177,6 +178,9 @@ const Builder: React.FC = () => {
 										builderData={builderData}
 										setBuilderData={setBuilderData}
 									/>
+								</TabPanel>
+								<TabPanel sx={tabPanelStyles}>
+									<CourseSetting courseData={courseQuery?.data} />
 								</TabPanel>
 							</TabPanels>
 						</Stack>

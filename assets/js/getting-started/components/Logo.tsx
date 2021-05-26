@@ -1,16 +1,16 @@
 import { Box, Container, Image } from '@chakra-ui/react';
 import React from 'react';
 
-import LogoImg from '../../../img/onboard-logo.png';
+import { Logo } from '../../src/constants/images';
 
-const Logo: React.FC = () => {
+const MainLogo: React.FC = () => {
 	return (
 		<Container maxW="container.xl" centerContent>
 			<Box m="10">
-				<Image src={LogoImg} alt="Masteriyo Logo" w="260px" />
+				<Image src={Logo} alt="Masteriyo Logo" w="260px" />
 			</Box>
 		</Container>
 	);
 };
 
-export default Logo;
+export default MainLogo;

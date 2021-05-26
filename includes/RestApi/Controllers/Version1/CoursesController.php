@@ -192,6 +192,8 @@ class CoursesController extends PostsController {
 	/**
 	 * Get object.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param  Model|WP_Post $object Model or WP_Post object.
 	 * @return object Model object or WP_Error object.
 	 */
@@ -202,6 +204,7 @@ class CoursesController extends PostsController {
 			} else {
 				$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
 			}
+
 			$course = masteriyo( 'course' );
 			$course->set_id( $id );
 			$course_repo = masteriyo( 'course.store' );
@@ -283,9 +286,9 @@ class CoursesController extends PostsController {
 			'regular_price'     => $course->get_regular_price( $context ),
 			'sale_price'        => $course->get_sale_price( $context ),
 			'featured_image'    => $course->get_featured_image( $context ),
-			'categories'        => $this->get_taxonomy_terms( $course ),
+			'categories'        => $this->get_taxonomy_terms( $course, 'cat' ),
 			'tags'              => $this->get_taxonomy_terms( $course, 'tag' ),
-			'difficulties'      => $this->get_taxonomy_terms( $course, 'difficulty' ),
+			'difficulty'        => $this->get_taxonomy_terms( $course, 'difficulty' ),
 		);
 
 		return $data;
@@ -314,6 +317,8 @@ class CoursesController extends PostsController {
 			},
 			$terms
 		);
+
+		$terms = 'difficulty' === $taxonomy ? array_shift( $terms ) : $terms;
 
 		return $terms;
 	}
@@ -570,9 +575,9 @@ class CoursesController extends PostsController {
 						),
 					),
 				),
-				'difficulties'       => array(
-					'description' => __( 'List of difficulties.', 'masteriyo' ),
-					'type'        => 'array',
+				'difficulty'         => array(
+					'description' => __( 'Course difficulty', 'masteriyo' ),
+					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
@@ -725,8 +730,8 @@ class CoursesController extends PostsController {
 		}
 
 		// Course difficulties.
-		if ( isset( $request['difficulties'] ) && is_array( $request['difficulties'] ) ) {
-			$course = $this->save_taxonomy_terms( $course, $request['difficulties'], 'difficulty' );
+		if ( isset( $request['difficulty'] ) && is_array( $request['difficulty'] ) ) {
+			$course = $this->save_taxonomy_terms( $course, $request['difficulty'], 'difficulty' );
 		}
 
 		// Allow set meta_data.
@@ -761,7 +766,7 @@ class CoursesController extends PostsController {
 	 * @return Course
 	 */
 	protected function save_taxonomy_terms( $course, $terms, $taxonomy = 'cat' ) {
-		$term_ids = wp_list_pluck( $terms, 'id' );
+		$term_ids = 'difficulty' === $taxonomy ? array_values( $terms ) : wp_list_pluck( $terms, 'id' );
 
 		if ( 'cat' === $taxonomy ) {
 			$course->set_category_ids( $term_ids );

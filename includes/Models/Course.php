@@ -433,6 +433,13 @@ class Course extends Model {
 		return $this->get_prop( 'difficulty_id', $context );
 	}
 
+	/**
+	 * Get the difficulty object.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return Difficulty
+	 */
 	public function get_difficulty() {
 		$difficulty = masteriyo( 'course_difficulty' );
 		$store      = masteriyo( 'course_difficulty.store' );

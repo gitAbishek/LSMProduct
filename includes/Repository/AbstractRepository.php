@@ -381,15 +381,14 @@ abstract class AbstractRepository {
 	 * @return array of terms
 	 */
 	protected function get_term_ids( $model, $taxonomy ) {
-		if ( is_numeric( $model ) ) {
-			$model_id = $model;
-		} else {
-			$model_id = $model->get_id();
-		}
-		$terms = get_the_terms( $model_id, $taxonomy );
+		$id = is_numeric( $model ) ? absint( $model ) : $model->get_id();
+
+		$terms = get_the_terms( $id, $taxonomy );
+
 		if ( false === $terms || is_wp_error( $terms ) ) {
 			return array();
 		}
+
 		return wp_list_pluck( $terms, 'term_id' );
 	}
 

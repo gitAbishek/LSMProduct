@@ -270,7 +270,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		}
 
 		if ( $force || array_key_exists( 'difficulty_id', $changes ) ) {
-			wp_set_post_terms( $model->get_id(), $model->get_difficulty_id( 'edit' ), 'course_difficulty', false );
+			wp_set_post_terms( $model->get_id(), (array) $model->get_difficulty_id( 'edit' ), 'course_difficulty', false );
 		}
 	}
 
@@ -374,8 +374,6 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		$set_props['category_ids']  = $this->get_term_ids( $course, 'course_cat' );
 		$set_props['tag_ids']       = $this->get_term_ids( $course, 'course_tag' );
 		$set_props['difficulty_id'] = $this->get_term_ids( $course, 'course_difficulty' );
-
-		$set_props['difficulty_id'] = count( $set_props['difficulty_id'] ) > 0 ? $set_props['difficulty_id'][0] : array();
 
 		$course->set_props( $set_props );
 	}

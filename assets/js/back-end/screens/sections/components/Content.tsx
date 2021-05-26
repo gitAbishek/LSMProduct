@@ -5,6 +5,7 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogOverlay,
+	Box,
 	Button,
 	ButtonGroup,
 	Flex,
@@ -92,86 +93,88 @@ const Content: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<Draggable draggableId={id.toString()} index={index}>
-			{(draggableProvided) => (
-				<Flex
-					justify="space-between"
-					rounded="sm"
-					bg="white"
-					border="1px"
-					borderColor="gray.100"
-					p="2"
-					mb="3"
-					_last={{ mb: 0 }}
-					ref={draggableProvided.innerRef}
-					{...draggableProvided.draggableProps}>
-					<Stack direction="row" spacing="3" align="center">
-						<span {...draggableProvided.dragHandleProps}>
-							<Icon as={Sortable} fontSize="lg" color="gray.500" />
-						</span>
-						<Icon
-							as={type === 'lesson' ? BiAlignLeft : BiTimer}
-							fontSize="xl"
-						/>
-						<Text fontSize="sm">{name}</Text>
-					</Stack>
-					<Stack direction="row" spacing="3">
-						<Button variant="outline" size="sm" onClick={onEditPress}>
-							{__('Edit', 'masteriyo')}
-						</Button>
-						<Menu placement="bottom-end">
-							<MenuButton
-								as={IconButton}
-								icon={<BiDotsVerticalRounded />}
-								variant="outline"
-								rounded="sm"
-								size="sm"
-								fontSize="large"
+		<Box>
+			<Draggable draggableId={id.toString()} index={index}>
+				{(draggableProvided) => (
+					<Flex
+						justify="space-between"
+						rounded="sm"
+						bg="white"
+						border="1px"
+						borderColor="gray.100"
+						p="2"
+						mb="3"
+						_last={{ mb: 0 }}
+						ref={draggableProvided.innerRef}
+						{...draggableProvided.draggableProps}>
+						<Stack direction="row" spacing="3" align="center">
+							<span {...draggableProvided.dragHandleProps}>
+								<Icon as={Sortable} fontSize="lg" color="gray.500" />
+							</span>
+							<Icon
+								as={type === 'lesson' ? BiAlignLeft : BiTimer}
+								fontSize="xl"
 							/>
-							<MenuList>
-								<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
-									{__('Delete', 'masteriyo')}
-								</MenuItem>
-							</MenuList>
-						</Menu>
-					</Stack>
-					<AlertDialog
-						isOpen={isDeleteModalOpen}
-						onClose={onDeleteModalClose}
-						isCentered
-						leastDestructiveRef={cancelRef}>
-						<AlertDialogOverlay>
-							<AlertDialogContent>
-								<AlertDialogHeader>
-									{__('Delete Section')} {name}
-								</AlertDialogHeader>
-								<AlertDialogBody>
-									Are you sure? You can't restore this section
-								</AlertDialogBody>
-								<AlertDialogFooter>
-									<ButtonGroup>
-										<Button
-											ref={cancelRef}
-											onClick={onDeleteModalClose}
-											variant="outline">
-											{__('Cancel', 'masteriyo')}
-										</Button>
-										<Button
-											colorScheme="red"
-											onClick={onDeleteConfirm}
-											isLoading={
-												deleteQuiz.isLoading || deleteLesson.isLoading
-											}>
-											{__('Delete', 'masteriyo')}
-										</Button>
-									</ButtonGroup>
-								</AlertDialogFooter>
-							</AlertDialogContent>
-						</AlertDialogOverlay>
-					</AlertDialog>
-				</Flex>
-			)}
-		</Draggable>
+							<Text fontSize="sm">{name}</Text>
+						</Stack>
+						<Flex direction="row">
+							<Button variant="outline" size="sm" onClick={onEditPress} mr="2">
+								{__('Edit', 'masteriyo')}
+							</Button>
+							<Menu placement="bottom-end" offset={[0, 0]}>
+								<MenuButton
+									as={IconButton}
+									icon={<BiDotsVerticalRounded />}
+									variant="outline"
+									rounded="sm"
+									size="sm"
+									fontSize="large"
+								/>
+								<MenuList>
+									<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
+										{__('Delete', 'masteriyo')}
+									</MenuItem>
+								</MenuList>
+							</Menu>
+						</Flex>
+						<AlertDialog
+							isOpen={isDeleteModalOpen}
+							onClose={onDeleteModalClose}
+							isCentered
+							leastDestructiveRef={cancelRef}>
+							<AlertDialogOverlay>
+								<AlertDialogContent>
+									<AlertDialogHeader>
+										{__('Delete Section')} {name}
+									</AlertDialogHeader>
+									<AlertDialogBody>
+										Are you sure? You can't restore this section
+									</AlertDialogBody>
+									<AlertDialogFooter>
+										<ButtonGroup>
+											<Button
+												ref={cancelRef}
+												onClick={onDeleteModalClose}
+												variant="outline">
+												{__('Cancel', 'masteriyo')}
+											</Button>
+											<Button
+												colorScheme="red"
+												onClick={onDeleteConfirm}
+												isLoading={
+													deleteQuiz.isLoading || deleteLesson.isLoading
+												}>
+												{__('Delete', 'masteriyo')}
+											</Button>
+										</ButtonGroup>
+									</AlertDialogFooter>
+								</AlertDialogContent>
+							</AlertDialogOverlay>
+						</AlertDialog>
+					</Flex>
+				)}
+			</Draggable>
+		</Box>
 	);
 };
 

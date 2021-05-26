@@ -22,7 +22,6 @@ interface Props {
 const SectionBuilder: React.FC<Props> = (props) => {
 	const { courseId, builderData, setBuilderData } = props;
 	const queryClient = useQueryClient();
-	const toast = useToast();
 
 	const sectionAPI = new API(urls.sections);
 	const builderAPI = new API(urls.builder);

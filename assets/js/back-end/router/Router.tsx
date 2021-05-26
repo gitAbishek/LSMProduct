@@ -16,9 +16,6 @@ const Router: React.FC = () => {
 				<Route path={routes.courses.add} exact>
 					<screens.AddNewCourse />
 				</Route>
-				<Route path={routes.courses.edit} exact>
-					<screens.EditCourse />
-				</Route>
 				<Route path={routes.builder} exact>
 					<screens.Builder />
 				</Route>

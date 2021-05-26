@@ -54,7 +54,8 @@ const MainTab: React.FC = () => {
 	const onSubmit = (data?: any) => {
 		const formattedData: any = {
 			general: {
-				currency: `${data.currency}`,
+				currency:
+					'undefined' != `${data.currency}` ? `${data.currency}` : 'USD',
 				currency_position:
 					'undefined' != `${data.currency_position}`
 						? `${data.currency_position}`

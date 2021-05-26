@@ -3,14 +3,14 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 
 import Footer from './Footer';
-import Logo from './Logo';
+import MainLogo from './Logo';
 import MainTab from './MainTab';
 
 const MainLayout: React.FC = () => {
 	return (
 		<Box id="masteriyo-onboarding">
 			<Stack direction="column" spacing="2">
-				<Logo />
+				<MainLogo />
 
 				<Box w="full">
 					<Container maxW="container.lg" centerContent>

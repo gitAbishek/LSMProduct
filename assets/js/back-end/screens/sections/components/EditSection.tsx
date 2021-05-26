@@ -25,6 +25,7 @@ export interface EditSectionProps {
 	description?: string;
 	onSave: () => void;
 	onCancel: () => void;
+	courseId: number;
 }
 
 type SectionInputs = {
@@ -33,7 +34,7 @@ type SectionInputs = {
 };
 
 const EditSection: React.FC<EditSectionProps> = (props) => {
-	const { id, name, description, onSave, onCancel } = props;
+	const { id, name, description, onSave, onCancel, courseId } = props;
 	const {
 		register,
 		handleSubmit,
@@ -54,7 +55,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 					status: 'success',
 					isClosable: true,
 				});
-				queryClient.invalidateQueries('builderSections');
+				queryClient.invalidateQueries(`builder${courseId}`);
 				onSave();
 			},
 		}

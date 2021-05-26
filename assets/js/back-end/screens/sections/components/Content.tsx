@@ -5,6 +5,7 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogOverlay,
+	Box,
 	Button,
 	ButtonGroup,
 	Flex,
@@ -39,10 +40,11 @@ interface Props {
 	name: string;
 	type: 'lesson' | 'quiz' | string;
 	index: any;
+	courseId: number;
 }
 
 const Content: React.FC<Props> = (props) => {
-	const { id, name, type, index } = props;
+	const { id, name, type, index, courseId } = props;
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const queryClient = useQueryClient();
 	const history = useHistory();
@@ -52,13 +54,13 @@ const Content: React.FC<Props> = (props) => {
 
 	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('builderSections');
+			queryClient.invalidateQueries(`builder${courseId}`);
 		},
 	});
 
 	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('builderSections');
+			queryClient.invalidateQueries(`builder${courseId}`);
 		},
 	});
 
@@ -114,11 +116,11 @@ const Content: React.FC<Props> = (props) => {
 						/>
 						<Text fontSize="sm">{name}</Text>
 					</Stack>
-					<Stack direction="row" spacing="3">
-						<Button variant="outline" size="sm" onClick={onEditPress}>
+					<Flex direction="row">
+						<Button variant="outline" size="sm" onClick={onEditPress} mr="2">
 							{__('Edit', 'masteriyo')}
 						</Button>
-						<Menu placement="bottom-end">
+						<Menu placement="bottom-end" offset={[0, 0]}>
 							<MenuButton
 								as={IconButton}
 								icon={<BiDotsVerticalRounded />}
@@ -133,7 +135,7 @@ const Content: React.FC<Props> = (props) => {
 								</MenuItem>
 							</MenuList>
 						</Menu>
-					</Stack>
+					</Flex>
 					<AlertDialog
 						isOpen={isDeleteModalOpen}
 						onClose={onDeleteModalClose}

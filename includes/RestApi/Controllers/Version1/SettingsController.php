@@ -942,7 +942,7 @@ class SettingsController extends CrudController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  0.1.0
-	 * @param  Model         $object  Model object.
+	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */

@@ -3,6 +3,7 @@ import axios from 'axios';
 import urls from '../constants/urls';
 import { isProduction } from './helper';
 
+let _masteriyo: any = 'undefined' != typeof masteriyo && masteriyo;
 const configProduction = {
 	//@ts-ignore
 	baseURL: _MASTERIYO_.rootApiUrl,

@@ -74,13 +74,18 @@ class Onboard {
 		// Add localization vars.
 		wp_localize_script(
 			'masteriyo-onboarding',
-			'_masteriyo',
+			'masteriyo',
 			array(
+				'rootApiUrl'           => esc_url_raw( untrailingslashit( rest_url() ) ),
+				'nonce'                => wp_create_nonce( 'wp_rest' ),
 				'adminURL'             => esc_url( admin_url() ),
 				'siteURL'              => esc_url( home_url( '/' ) ),
 				'pluginUrl'            => esc_url( plugin_dir_url( MASTERIYO_PLUGIN_FILE ) ),
 				'permalinkStructure'   => get_option( 'permalink_structure' ),
 				'permalinkOptionsPage' => esc_url( admin_url( 'options-permalink.php' ) ),
+				'currencies'           => masteriyo_get_currency_options(),
+				'pagesOptions'         => masteriyo_get_pages_option(),
+				'pageBuilderURL'       => esc_url( admin_url( '/admin.php?page=masteriyo#/builder' ) ),
 			)
 		);
 

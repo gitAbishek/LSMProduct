@@ -18,7 +18,14 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 */
 	public function create( Model &$setting ) {
 
-		$changes = $setting->get_changes();
+		$changes         = array();
+		$setting_changes = $setting->get_changes();
+		$group_changes   = array_keys( $setting_changes );
+		foreach ( $group_changes as $group ) {
+			foreach ( $setting_changes[ $group ] as $setting_name => $value ) {
+				$changes[ $group . '.' . $setting_name ] = $value;
+			}
+		}
 
 		$courses_slugs = array(
 			'courses.single_lesson_permalink',

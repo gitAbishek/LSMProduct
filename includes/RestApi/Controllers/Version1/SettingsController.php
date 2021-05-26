@@ -951,10 +951,23 @@ class SettingsController extends CrudController {
 			),
 			'payments' => array(
 				'paypal' => array(
-					'enable'           => $setting->get_payments_paypal_enable( $context ),
-					'production_email' => $setting->get_payments_paypal_production_email( $context ),
-					'sandbox_enable'   => $setting->get_payments_paypal_sandbox_enable( $context ),
-					'sandbox_email'    => $setting->get_payments_paypal_sandbox_email( $context ),
+					'enable'                         => $setting->get_payments_paypal_enable( $context ),
+					'title'                          => $setting->get_payments_paypal_title( $context ),
+					'description'                    => $setting->get_payments_paypal_description( $context ),
+					'description'                    => $setting->get_payments_paypal_description( $context ),
+					'enable_ipn_email_notifications' => $setting->get_payments_paypal_enable_ipn_email_notifications( $context ),
+					'sandbox_enable'                 => $setting->get_payments_paypal_sandbox_enable( $context ),
+					'email'                          => $setting->get_payments_paypal_email( $context ),
+					'receiver_email'                 => $setting->get_payments_paypal_receiver_email( $context ),
+					'identity_token'                 => $setting->get_payments_paypal_identity_token( $context ),
+					'invoice_prefix'                 => $setting->get_payments_paypal_invoice_prefix( $context ),
+					'payment_action'                 => $setting->get_payments_paypal_payment_action( $context ),
+					'image_url'                      => $setting->get_payments_paypal_image_url( $context ),
+					'enable_log'                     => $setting->get_payments_paypal_enable_log( $context ),
+					'sandbox_api_username'           => $setting->get_payments_paypal_sandbox_api_username( $context ),
+					'sandbox_api_password'           => $setting->get_payments_paypal_invoice_prefix( $context ),
+					'sandbox_api_signature'          => $setting->get_payments_paypal_sandbox_api_signature( $context ),
+
 				),
 			),
 			'emails'   => array(

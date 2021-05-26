@@ -65,151 +65,152 @@ class Setting extends Model {
 	 * @var array
 	 */
 	protected $data = array(
+		'general'  => array(
+			'address_line1'      => '',
+			'address_line2'      => '',
+			'city'               => '',
+			'country'            => '',
+			'postcode'           => '',
+			'currency'           => 'USD',
+			'currency_position'  => 'left',
+			'thousand_separator' => ',',
+			'decimal_separator'  => '.',
+			'number_of_decimals' => 2,
+		),
+		'courses'  => array(
+			// General.
+			'placeholder_image'              => 0,
+			'add_to_cart_behaviour'          => '',
+			'per_page'                       => 12,
+			'enable_editing'                 => false,
 
-		/** General Setting */
+			// Single Course.
+			'category_base'                  => '',
+			'tag_base'                       => '',
+			'difficulty_base'                => '',
+			'single_course_permalink'        => '',
+			'single_lesson_permalink'        => '',
+			'single_quiz_permalink'          => '',
+			'single_section_permalink'       => '',
+			'enable_single_course_permalink' => '',
+			'single_course_enable_editing'   => '',
 
-		// Store.
-		'general.address_line1'                  => '',
-		'general.address_line2'                  => '',
-		'general.city'                           => '',
-		'general.country'                        => '',
-		'general.postcode'                       => '',
+			// Course Thumbnail.
+			'show_thumbnail'                 => true,
+			'thumbnail_size'                 => 'thumbnail',
+		),
+		'pages'    => array(
+			// Page Setup.
+			'myaccount_page_id'          => '',
+			'course_list_page_id'        => '',
+			'terms_conditions_page_id'   => '',
+			'checkout_page_id'           => '',
 
-		// Currency.
-		'general.currency'                       => 'USD',
-		'general.currency_position'              => 'left',
-		'general.thousand_separator'             => ',',
-		'general.decimal_separator'              => '.',
-		'general.number_of_decimals'             => 3,
+			// Checkout Endpoints.
+			'pay'                        => '',
+			'order_received'             => '',
+			'add_payment_method'         => '',
+			'delete_payment_method'      => '',
+			'set_default_payment_method' => '',
 
-		/** Courses Setting */
+			// Account Endpoints.
+			'orders'                     => '',
+			'view_order'                 => '',
+			'my_courses'                 => '',
+			'edit_account'               => '',
+			'payment_methods'            => '',
+			'lost_password'              => '',
+			'logout'                     => '',
+		),
+		'payments' => array(
+			// Offline payment
+			'offline_enable'                        => true,
+			'offline_title'                         => 'Offline payment',
+			'offline_description'                   => 'Pay with offline payment.',
+			'offline_instructions'                  => 'Pay with offline payment',
 
-		// General.
-		'courses.placeholder_image'              => '',
-		'courses.add_to_cart_behaviour'          => '',
-		'courses.per_page'                       => '',
-		'courses.enable_editing'                 => false,
+			// Standard Paypal
+			'paypal_enable'                         => false,
+			'paypal_title'                          => 'Paypal',
+			'paypal_description'                    => 'Pay via PayPal; you can pay with your credit card if you don\'t have a PayPal account.',
+			'paypal_enable_ipn_email_notifications' => true,
+			'paypal_sandbox_enable'                 => false,
+			'paypal_email'                          => '',
+			'paypal_receiver_email'                 => '',
+			'paypal_identity_token'                 => '',
+			'paypal_invoice_prefix'                 => 'masteriyo-',
+			'paypal_payment_action'                 => 'capture',
+			'paypal_image_url'                      => '',
+			'paypal_enable_log'                     => false,
+			'paypal_sandbox_api_username'           => '',
+			'paypal_sandbox_api_password'           => '',
+			'paypal_sandbox_api_signature'          => '',
+		),
+		'emails'   => array(
+			// General Options.
+			'general_from_name'            => '',
+			'general_from_email'           => '',
 
-		// Single Course.
-		'courses.category_base'                  => '',
-		'courses.tag_base'                       => '',
-		'courses.difficulty_base'                => '',
-		'courses.single_course_permalink'        => '',
-		'courses.single_lesson_permalink'        => '',
-		'courses.single_quiz_permalink'          => '',
-		'courses.single_section_permalink'       => '',
-		'courses.enable_single_course_permalink' => '',
-		'courses.single_course_enable_editing'   => '',
+			// General Templates.
+			'general_default_content'      => '',
+			'general_header_image'         => '',
+			'general_footer_text'          => '',
 
-		// Course Thumbnail.
-		'courses.show_thumbnail'                 => '',
-		'courses.thumbnail_size'                 => '',
+			//New Order.
+			'new_order_enable'             => false,
+			'new_order_recipients'         => array(),
+			'new_order_subject'            => '',
+			'new_order_heading'            => '',
+			'new_order_content'            => '',
 
-		/** Pages Setting */
+			// Processing Order.
+			'processing_order_enable'      => false,
+			'processing_order_subject'     => '',
+			'processing_order_heading'     => '',
+			'processing_order_content'     => '',
 
-		// Page Setup.
-		'pages.myaccount_page_id'                => '',
-		'pages.course_list_page_id'              => '',
-		'pages.terms_conditions_page_id'         => '',
-		'pages.checkout_page_id'                 => '',
+			// Completed Order.
+			'completed_order_enable'       => false,
+			'completed_order_subject'      => '',
+			'completed_order_heading'      => '',
+			'completed_order_content'      => '',
 
-		// Checkout Endpoints.
-		'pages.pay'                              => '',
-		'pages.order_received'                   => '',
-		'pages.add_payment_method'               => '',
-		'pages.delete_payment_method'            => '',
-		'pages.set_default_payment_method'       => '',
+			// On Hold Order.
+			'onhold_order_enable'          => false,
+			'onhold_order_subject'         => '',
+			'onhold_order_heading'         => '',
+			'onhold_order_content'         => '',
 
-		// Account Endpoints.
-		'pages.orders'                           => '',
-		'pages.view_order'                       => '',
-		'pages.my_courses'                       => '',
-		'pages.edit_account'                     => '',
-		'pages.payment_methods'                  => '',
-		'pages.lost_password'                    => '',
-		'pages.logout'                           => '',
+			// Cancelled Order.
+			'cancelled_order_enable'       => false,
+			'cancelled_order_recipients'   => array(),
+			'cancelled_order_subject'      => '',
+			'cancelled_order_heading'      => '',
+			'cancelled_order_content'      => '',
 
-		/** Payments Settings. */
+			// Enrolled Course.
+			'enrolled_course_enable'       => false,
+			'enrolled_course_subject'      => '',
+			'enrolled_course_heading'      => '',
+			'enrolled_course_content'      => '',
 
-		// Offline payment
-		'payments.offline_enable'                => true,
-		'payments.offline_title'                 => 'Offline payment',
-		'payments.offline_description'           => 'Pay with offline payment.',
-		'payments.offline_instructions'          => 'Pay with offline payment',
+			// Completed Course.
+			'completed_course_enable'      => false,
+			'completed_course_subject'     => '',
+			'completed_course_heading'     => '',
+			'completed_course_content'     => '',
 
-		// Standard Paypal
-		'payments.paypal_enable'                 => false,
-		'payments.paypal_production_email'       => '',
-		'payments.paypal_sandbox_enable'         => false,
-		'payments.paypal_sandbox_email'          => '',
-
-		/** Emails Setting */
-
-		// General->Email Options.
-		'emails.general_from_name'               => '',
-		'emails.general_from_email'              => '',
-
-		// General->Email Templates.
-		'emails.general_default_content'         => '',
-		'emails.general_header_image'            => '',
-		'emails.general_footer_text'             => '',
-
-		//New Order.
-		'emails.new_order_enable'                => false,
-		'emails.new_order_recipients'            => array(),
-		'emails.new_order_subject'               => '',
-		'emails.new_order_heading'               => '',
-		'emails.new_order_content'               => '',
-
-		// Processing Order.
-		'emails.processing_order_enable'         => false,
-		'emails.processing_order_subject'        => '',
-		'emails.processing_order_heading'        => '',
-		'emails.processing_order_content'        => '',
-
-		// Completed Order.
-		'emails.completed_order_enable'          => false,
-		'emails.completed_order_subject'         => '',
-		'emails.completed_order_heading'         => '',
-		'emails.completed_order_content'         => '',
-
-		// On Hold Order.
-		'emails.onhold_order_enable'             => false,
-		'emails.onhold_order_subject'            => '',
-		'emails.onhold_order_heading'            => '',
-		'emails.onhold_order_content'            => '',
-
-		// Cancelled Order.
-		'emails.cancelled_order_enable'          => false,
-		'emails.cancelled_order_recipients'      => array(),
-		'emails.cancelled_order_subject'         => '',
-		'emails.cancelled_order_heading'         => '',
-		'emails.cancelled_order_content'         => '',
-
-		// Enrolled Course.
-		'emails.enrolled_course_enable'          => false,
-		'emails.enrolled_course_subject'         => '',
-		'emails.enrolled_course_heading'         => '',
-		'emails.enrolled_course_content'         => '',
-
-		// Completed Course.
-		'emails.completed_course_enable'         => false,
-		'emails.completed_course_subject'        => '',
-		'emails.completed_course_heading'        => '',
-		'emails.completed_course_content'        => '',
-
-		// Become An Instructor.
-		'emails.become_an_instructor_enable'     => false,
-		'emails.become_an_instructor_subject'    => '',
-		'emails.become_an_instructor_heading'    => '',
-		'emails.become_an_instructor_content'    => '',
-
-		/** Advanced Setting */
-
-		// Debug.
-		'advanced.template_debug_enable'         => false,
-		'advanced.debug_enable'                  => false,
-		'advanced.styles_mode'                   => '',
+			// Become An Instructor.
+			'become_an_instructor_enable'  => false,
+			'become_an_instructor_subject' => '',
+			'become_an_instructor_heading' => '',
+			'become_an_instructor_content' => '',
+		),
+		'advance'  => array(
+			'template_debug_enable' => false,
+			'debug_enable'          => false,
+			'styles_mode'           => '',
+		),
 	);
 
 	/**
@@ -231,8 +232,26 @@ class Setting extends Model {
 	 * @since 0.1.0
 	 * @return array $data Default datas.
 	 */
-	public function get_default_datas() {
+	public function get_default_data() {
 		return $this->data;
+	}
+
+	/**
+	 * Get data keys.
+	 *
+	 * @since 0.1.0
+	 */
+	public function get_data_keys() {
+		$data_keys = array();
+		$groups    = array_keys( $this->data );
+
+		foreach ( $groups as $group ) {
+			foreach ( $this->data[ $group ] as $setting_name => $default_value ) {
+				$data_keys[] = $group . '.' . $setting_name;
+			}
+		}
+
+		return $data_keys;
 	}
 
 	/**
@@ -250,7 +269,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_general_address_line1( $context = 'view' ) {
-		return $this->get_prop( 'general.address_line1', $context );
+		return $this->get_setting_prop( 'address_line1', 'general', $context );
 	}
 
 	/**
@@ -262,7 +281,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_general_address_line2( $context = 'view' ) {
-		return $this->get_prop( 'general.address_line2', $context );
+		return $this->get_setting_prop( 'address_line2', 'general', $context );
 	}
 
 	/**
@@ -274,7 +293,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_general_city( $context = 'view' ) {
-		return $this->get_prop( 'general.city', $context );
+		return $this->get_setting_prop( 'city', 'general', $context );
 	}
 
 	/**
@@ -286,7 +305,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_general_country( $context = 'view' ) {
-		return $this->get_prop( 'general.country', $context );
+		return $this->get_setting_prop( 'country', 'general', $context );
 	}
 
 	/**
@@ -298,7 +317,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_general_postcode( $context = 'view' ) {
-		return $this->get_prop( 'general.postcode', $context );
+		return $this->get_setting_prop( 'postcode', 'general', $context );
 	}
 
 	/**
@@ -310,7 +329,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_general_currency( $context = 'view' ) {
-		return $this->get_prop( 'general.currency', $context );
+		return $this->get_setting_prop( 'currency', 'general', $context );
 	}
 
 	/**
@@ -322,7 +341,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_general_currency_position( $context = 'view' ) {
-		return $this->get_prop( 'general.currency_position', $context );
+		return $this->get_setting_prop( 'currency_position', 'general', $context );
 	}
 
 	/**
@@ -334,7 +353,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_general_thousand_separator( $context = 'view' ) {
-		return $this->get_prop( 'general.thousand_separator', $context );
+		return $this->get_setting_prop( 'thousand_separator', 'general', $context );
 	}
 
 	/**
@@ -346,7 +365,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_general_decimal_separator( $context = 'view' ) {
-		return $this->get_prop( 'general.decimal_separator', $context );
+		return $this->get_setting_prop( 'decimal_separator', 'general', $context );
 	}
 
 	/**
@@ -358,7 +377,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_general_number_of_decimals( $context = 'view' ) {
-		return $this->get_prop( 'general.number_of_decimals', $context );
+		return $this->get_setting_prop( 'number_of_decimals', 'general', $context );
 	}
 
 	// Courses Setting Getter.
@@ -372,7 +391,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_placeholder_image( $context = 'view' ) {
-		return $this->get_prop( 'courses.placeholder_image', $context );
+		return $this->get_setting_prop( 'placeholder_image', 'courses', $context );
 	}
 
 	/**
@@ -384,7 +403,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_add_to_cart_behaviour( $context = 'view' ) {
-		return $this->get_prop( 'courses.add_to_cart_behaviour', $context );
+		return $this->get_setting_prop( 'add_to_cart_behavior', 'courses', $context );
 	}
 
 	/**
@@ -396,7 +415,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_per_page( $context = 'view' ) {
-		return $this->get_prop( 'courses.per_page', $context );
+		return $this->get_setting_prop( 'per_page', 'courses', $context );
 	}
 
 	/**
@@ -408,7 +427,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_enable_editing( $context = 'view' ) {
-		return $this->get_prop( 'courses.enable_editing', $context );
+		return $this->get_setting_prop( 'enable_editing', 'courses', $context );
 	}
 
 	/**
@@ -420,7 +439,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_category_base( $context = 'view' ) {
-		return $this->get_prop( 'courses.category_base', $context );
+		return $this->get_setting_prop( 'category_base', 'courses', $context );
 	}
 
 	/**
@@ -432,7 +451,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_tag_base( $context = 'view' ) {
-		return $this->get_prop( 'courses.tag_base', $context );
+		return $this->get_setting_prop( 'tag_base', 'courses', $context );
 	}
 
 	/**
@@ -444,7 +463,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_difficulty_base( $context = 'view' ) {
-		return $this->get_prop( 'courses.difficulty_base', $context );
+		return $this->get_setting_prop( 'difficulty_base', 'courses', $context );
 	}
 
 	/**
@@ -456,7 +475,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_single_course_permalink( $context = 'view' ) {
-		return $this->get_prop( 'courses.single_course_permalink', $context );
+		return $this->get_setting_prop( 'single_course_permalink', 'courses', $context );
 	}
 
 	/**
@@ -468,7 +487,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_single_lesson_permalink( $context = 'view' ) {
-		return $this->get_prop( 'courses.single_lesson_permalink', $context );
+		return $this->get_setting_prop( 'single_lesson_permalink', 'courses', $context );
 	}
 
 	/**
@@ -480,7 +499,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_single_quiz_permalink( $context = 'view' ) {
-		return $this->get_prop( 'courses.single_quiz_permalink', $context );
+		return $this->get_setting_prop( 'single_quiz_permalink', 'courses', $context );
 	}
 
 	/**
@@ -492,7 +511,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_single_section_permalink( $context = 'view' ) {
-		return $this->get_prop( 'courses.single_section_permalink', $context );
+		return $this->get_setting_prop( 'single_section_permalink', 'courses', $context );
 	}
 
 	/**
@@ -504,7 +523,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_enable_single_course_permalink( $context = 'view' ) {
-		return $this->get_prop( 'courses.enable_single_course_permalink', $context );
+		return $this->get_setting_prop( 'enable_single_course_permalink', 'courses', $context );
 	}
 
 	/**
@@ -516,7 +535,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_single_course_enable_editing( $context = 'view' ) {
-		return $this->get_prop( 'courses.single_course_enable_editing', $context );
+		return $this->get_setting_prop( 'single_course_enable_editing', 'courses', $context );
 	}
 
 	/**
@@ -528,7 +547,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_show_thumbnail( $context = 'view' ) {
-		return $this->get_prop( 'courses.show_thumbnail', $context );
+		return $this->get_setting_prop( 'show_thumbnail', 'courses', $context );
 	}
 
 	/**
@@ -540,7 +559,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_courses_thumbnail_size( $context = 'view' ) {
-		return $this->get_prop( 'courses.thumbnail_size', $context );
+		return $this->get_setting_prop( 'thumbnail_size', 'courses', $context );
 	}
 
 	// Pages Setting Getter.
@@ -554,7 +573,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_myaccount_page_id( $context = 'view' ) {
-		return $this->get_prop( 'pages.myaccount_page_id', $context );
+		return $this->get_setting_prop( 'myaccount_page_id', 'pages', $context );
 	}
 
 	/**
@@ -566,7 +585,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_course_list_page_id( $context = 'view' ) {
-		return $this->get_prop( 'pages.course_list_page_id', $context );
+		return $this->get_setting_prop( 'course_list_page_id', 'pages', $context );
 	}
 
 	/**
@@ -578,7 +597,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_terms_conditions_page_id( $context = 'view' ) {
-		return $this->get_prop( 'pages.terms_conditions_page_id', $context );
+		return $this->get_setting_prop( 'terms_conditions_page_id', 'pages', $context );
 	}
 
 	/**
@@ -590,7 +609,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_checkout_page_id( $context = 'view' ) {
-		return $this->get_prop( 'pages.checkout_page_id', $context );
+		return $this->get_setting_prop( 'checkout_page_id', 'pages', $context );
 	}
 
 	// Checkout endpoints.
@@ -604,7 +623,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_pay( $context = 'view' ) {
-		return $this->get_prop( 'pages.pay', $context );
+		return $this->get_setting_prop( 'pay', 'pages', $context );
 	}
 
 	/**
@@ -616,7 +635,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_order_received( $context = 'view' ) {
-		return $this->get_prop( 'pages.order_received', $context );
+		return $this->get_setting_prop( 'order_received', 'pages', $context );
 	}
 
 	/**
@@ -628,7 +647,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_add_payment_method( $context = 'view' ) {
-		return $this->get_prop( 'pages.add_payment_method', $context );
+		return $this->get_setting_prop( 'add_payment_method', 'pages', $context );
 	}
 
 	/**
@@ -640,7 +659,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_delete_payment_method( $context = 'view' ) {
-		return $this->get_prop( 'pages.delete_payment_method', $context );
+		return $this->get_setting_prop( 'delete_payment_method', 'pages', $context );
 	}
 
 	/**
@@ -652,7 +671,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_set_default_payment_method( $context = 'view' ) {
-		return $this->get_prop( 'pages.set_default_payment_method', $context );
+		return $this->get_setting_prop( 'set_default_payment_method', 'pages', $context );
 	}
 
 	// Acoount endpoints.
@@ -666,7 +685,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_orders( $context = 'view' ) {
-		return $this->get_prop( 'pages.orders', $context );
+		return $this->get_setting_prop( 'orders', 'pages', $context );
 	}
 
 	/**
@@ -678,7 +697,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_view_order( $context = 'view' ) {
-		return $this->get_prop( 'pages.view_order', $context );
+		return $this->get_setting_prop( 'view_order', 'pages', $context );
 	}
 
 	/**
@@ -690,7 +709,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_my_courses( $context = 'view' ) {
-		return $this->get_prop( 'pages.my_courses', $context );
+		return $this->get_setting_prop( 'my_courses', 'pages', $context );
 	}
 
 	/**
@@ -702,7 +721,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_edit_account( $context = 'view' ) {
-		return $this->get_prop( 'pages.edit_account', $context );
+		return $this->get_setting_prop( 'edit_account', 'pages', $context );
 	}
 
 	/**
@@ -714,7 +733,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_payment_methods( $context = 'view' ) {
-		return $this->get_prop( 'pages.payment_methods', $context );
+		return $this->get_setting_prop( 'payment_methods', 'pages', $context );
 	}
 
 	/**
@@ -726,7 +745,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_lost_password( $context = 'view' ) {
-		return $this->get_prop( 'pages.lost_password', $context );
+		return $this->get_setting_prop( 'lost_password', 'pages', $context );
 	}
 
 	/**
@@ -738,7 +757,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_pages_logout( $context = 'view' ) {
-		return $this->get_prop( 'pages.logout', $context );
+		return $this->get_setting_prop( 'logout', 'pages', $context );
 	}
 
 	// Payments Setting Getter.
@@ -754,7 +773,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_payments_offline_enable( $context = 'view' ) {
-		return $this->get_prop( 'payments.offline_enable', $context );
+		return $this->get_setting_prop( 'offline_enable', 'payments', $context );
 	}
 
 	/**
@@ -766,7 +785,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_payments_offline_title( $context = 'view' ) {
-		return $this->get_prop( 'payments.offline_title', $context );
+		return $this->get_setting_prop( 'offline_title', 'payments', $context );
 	}
 
 	/**
@@ -778,7 +797,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_payments_offline_description( $context = 'view' ) {
-		return $this->get_prop( 'payments.offline_description', $context );
+		return $this->get_setting_prop( 'offline_description', 'payments', $context );
 	}
 
 	/**
@@ -790,7 +809,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_payments_offline_instructions( $context = 'view' ) {
-		return $this->get_prop( 'payments.offline_instructions', $context );
+		return $this->get_setting_prop( 'offline_instructions', 'payments', $context );
 	}
 
 
@@ -805,23 +824,47 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_payments_paypal_enable( $context = 'view' ) {
-		return $this->get_prop( 'payments.paypal_enable', $context );
+		return $this->get_setting_prop( 'paypal_enable', 'payments', $context );
 	}
 
 	/**
-	 * Get option payments_paypal_production_email.
+	 * Get paypal payment gateway title.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_payments_paypal_production_email( $context = 'view' ) {
-		return $this->get_prop( 'payments.paypal_production_email', $context );
+	public function get_payments_paypal_title( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_title', 'payments', $context );
 	}
 
 	/**
-	 * Get option payments_paypal_sandbox_enable.
+	 * Get paypal payment gateway description.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_description( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_description', 'payments', $context );
+	}
+
+	/**
+	 * Check whether the paypal ipn email notifications is enabled or not.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_enable_ipn_email_notifications( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_enable_ipn_email_notifications', 'payments', $context );
+	}
+
+	/**
+	 * Check whether the paypal sandbox is enabled or not.
 	 *
 	 * @since 0.1.0
 	 *
@@ -829,19 +872,127 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_payments_paypal_sandbox_enable( $context = 'view' ) {
-		return $this->get_prop( 'payments.paypal_sandbox_enable', $context );
+		return $this->get_setting_prop( 'paypal_sandbox_enable', 'payments', $context );
 	}
 
 	/**
-	 * Get option payments_paypal_sandbox_email.
+	 * Get paypal payment gateway email.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_payments_paypal_sandbox_email( $context = 'view' ) {
-		return $this->get_prop( 'payments.paypal_sandbox_email', $context );
+	public function get_payments_paypal_email( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_email', 'payments', $context );
+	}
+
+	/**
+	 * Get paypal payment gateway receiver email.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_receiver_email( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_receiver_email', 'payments', $context );
+	}
+
+	/**
+	 * Get paypal payment gateway identity token.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_identity_token( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_identity_token', 'payments', $context );
+	}
+
+	/**
+	 * Get paypal payment gateway invoice prefix.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_invoice_prefix( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_invoice_prefix', 'payments', $context );
+	}
+
+	/**
+	 * Get paypal payment gateway paymentaction.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_payment_action( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_payment_action', 'payments', $context );
+	}
+
+	/**
+	 * Get paypal payment gateway image url.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_image_url( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_image_url', 'payments', $context );
+	}
+
+	/**
+	 * Check whether the paypal log is enabled or not.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_enable_log( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_enable_log', 'payments', $context );
+	}
+
+	/**
+	 * Get paypal sandbox api username.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_sandbox_api_username( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_sandbox_api_username', 'payments', $context );
+	}
+
+	/**
+	 * Get paypal sandbox api passsword.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_sandbox_api_passsword( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_sandbox_api_passsword', 'payments', $context );
+	}
+
+	/**
+	 * Get paypal sandbox api signature.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_sandbox_api_signature( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_sandbox_api_signature', 'payments', $context );
 	}
 
 
@@ -850,7 +1001,7 @@ class Setting extends Model {
 	// General.
 
 	/**
-	 * Get option emails_general_from_name.
+	 * Get email general mail from name.
 	 *
 	 * @since 0.1.0
 	 *
@@ -858,11 +1009,11 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_general_from_name( $context = 'view' ) {
-		return $this->get_prop( 'emails.general_from_name', $context );
+		return $this->get_setting_prop( 'general_from_name', 'emails', $context );
 	}
 
 	/**
-	 * Get option emails_general_from_email.
+	 * Get email general from email.
 	 *
 	 * @since 0.1.0
 	 *
@@ -870,11 +1021,11 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_general_from_email( $context = 'view' ) {
-		return $this->get_prop( 'emails.general_from_email', $context );
+		return $this->get_setting_prop( 'general_from_email', 'emails', $context );
 	}
 
 	/**
-	 * Get option emails_general_default_content.
+	 * Get email general default content.
 	 *
 	 * @since 0.1.0
 	 *
@@ -882,11 +1033,11 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_general_default_content( $context = 'view' ) {
-		return $this->get_prop( 'emails.general_default_content', $context );
+		return $this->get_setting_prop( 'general_default_content', 'emails', $context );
 	}
 
 	/**
-	 * Get option emails_general_header_image.
+	 * Get email general header image.
 	 *
 	 * @since 0.1.0
 	 *
@@ -894,11 +1045,11 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_general_header_image( $context = 'view' ) {
-		return $this->get_prop( 'emails.general_header_image', $context );
+		return $this->get_setting_prop( 'general_header_image', 'emails', $context );
 	}
 
 	/**
-	 * Get option emails_general_footer_text.
+	 * Get email general footer text.
 	 *
 	 * @since 0.1.0
 	 *
@@ -906,7 +1057,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_general_footer_text( $context = 'view' ) {
-		return $this->get_prop( 'emails.general_footer_text', $context );
+		return $this->get_setting_prop( 'general_footer_text', 'emails', $context );
 	}
 
 	// New order.
@@ -920,7 +1071,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_new_order_enable( $context = 'view' ) {
-		return $this->get_prop( 'emails.new_order_enable', $context );
+		return $this->get_setting_prop( 'new_order_enable', 'emails', $context );
 	}
 
 	/**
@@ -932,7 +1083,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_new_order_recipients( $context = 'view' ) {
-		return $this->get_prop( 'emails.new_order_recipients', $context );
+		return $this->get_setting_prop( 'new_order_recipients', 'emails', $context );
 	}
 
 	/**
@@ -944,7 +1095,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_new_order_subject( $context = 'view' ) {
-		return $this->get_prop( 'emails.new_order_subject', $context );
+		return $this->get_setting_prop( 'new_order_subject', 'emails', $context );
 	}
 
 	/**
@@ -956,7 +1107,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_new_order_heading( $context = 'view' ) {
-		return $this->get_prop( 'emails.new_order_heading', $context );
+		return $this->get_setting_prop( 'new_order_heading', 'emails', $context );
 	}
 
 	/**
@@ -968,7 +1119,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_new_order_content( $context = 'view' ) {
-		return $this->get_prop( 'emails.new_order_content', $context );
+		return $this->get_setting_prop( 'new_order_content', 'emails', $context );
 	}
 
 	// Processing order.
@@ -982,7 +1133,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_processing_order_enable( $context = 'view' ) {
-		return $this->get_prop( 'emails.processing_order_enable', $context );
+		return $this->get_setting_prop( 'processing_order_enable', 'emails', $context );
 	}
 
 	/**
@@ -994,7 +1145,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_processing_order_subject( $context = 'view' ) {
-		return $this->get_prop( 'emails.processing_order_subject', $context );
+		return $this->get_setting_prop( 'processing_order_subject', 'emails', $context );
 	}
 
 	/**
@@ -1006,7 +1157,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_processing_order_heading( $context = 'view' ) {
-		return $this->get_prop( 'emails.processing_order_heading', $context );
+		return $this->get_setting_prop( 'processing_order_heading', 'emails', $context );
 	}
 
 	/**
@@ -1018,7 +1169,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_processing_order_content( $context = 'view' ) {
-		return $this->get_prop( 'emails.processing_order_content', $context );
+		return $this->get_setting_prop( 'processing_order_content', 'emails', $context );
 	}
 
 	// Completed order.
@@ -1032,7 +1183,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_completed_order_enable( $context = 'view' ) {
-		return $this->get_prop( 'emails.completed_order_enable', $context );
+		return $this->get_setting_prop( 'completed_order_enable', 'emails', $context );
 	}
 
 	/**
@@ -1044,7 +1195,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_completed_order_subject( $context = 'view' ) {
-		return $this->get_prop( 'emails.completed_order_subject', $context );
+		return $this->get_setting_prop( 'completed_order_subject', 'emails', $context );
 	}
 
 	/**
@@ -1056,7 +1207,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_completed_order_heading( $context = 'view' ) {
-		return $this->get_prop( 'emails.completed_order_heading', $context );
+		return $this->get_setting_prop( 'completed_order_heading', 'emails', $context );
 	}
 
 	/**
@@ -1068,7 +1219,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_completed_order_content( $context = 'view' ) {
-		return $this->get_prop( 'emails.completed_order_content', $context );
+		return $this->get_setting_prop( 'completed_order_content', 'emails', $context );
 	}
 
 	// On Hold Order.
@@ -1082,7 +1233,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_onhold_order_enable( $context = 'view' ) {
-		return $this->get_prop( 'emails.onhold_order_enable', $context );
+		return $this->get_setting_prop( 'onhold_order_enable', 'emails', $context );
 	}
 
 	/**
@@ -1094,7 +1245,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_onhold_order_subject( $context = 'view' ) {
-		return $this->get_prop( 'emails.onhold_order_subject', $context );
+		return $this->get_setting_prop( 'onhold_order_subject', 'emails', $context );
 	}
 
 	/**
@@ -1106,7 +1257,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_onhold_order_heading( $context = 'view' ) {
-		return $this->get_prop( 'emails.onhold_order_heading', $context );
+		return $this->get_setting_prop( 'onhold_order_heading', 'emails', $context );
 	}
 
 	/**
@@ -1118,7 +1269,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_onhold_order_content( $context = 'view' ) {
-		return $this->get_prop( 'emails.onhold_order_content', $context );
+		return $this->get_setting_prop( 'onhold_order_content', 'emails', $context );
 	}
 
 	// Cancelled Order.
@@ -1132,7 +1283,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_cancelled_order_enable( $context = 'view' ) {
-		return $this->get_prop( 'emails.cancelled_order_enable', $context );
+		return $this->get_setting_prop( 'cancelled_order_enable', 'emails', $context );
 	}
 
 	/**
@@ -1144,7 +1295,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_cancelled_order_recipients( $context = 'view' ) {
-		return $this->get_prop( 'emails.cancelled_order_recipients', $context );
+		return $this->get_setting_prop( 'cancelled_order_recipients', 'emails', $context );
 	}
 
 	/**
@@ -1156,7 +1307,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_cancelled_order_subject( $context = 'view' ) {
-		return $this->get_prop( 'emails.cancelled_order_subject', $context );
+		return $this->get_setting_prop( 'cancelled_order_subject', 'emails', $context );
 	}
 
 	/**
@@ -1168,7 +1319,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_cancelled_order_heading( $context = 'view' ) {
-		return $this->get_prop( 'emails.cancelled_order_heading', $context );
+		return $this->get_setting_prop( 'cancelled_order_heading', 'emails', $context );
 	}
 
 	/**
@@ -1180,7 +1331,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_cancelled_order_content( $context = 'view' ) {
-		return $this->get_prop( 'emails.cancelled_order_content', $context );
+		return $this->get_setting_prop( 'cancelled_order_content', 'emails', $context );
 	}
 
 	// Enrolled Course.
@@ -1194,7 +1345,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_enrolled_course_enable( $context = 'view' ) {
-		return $this->get_prop( 'emails.enrolled_course_enable', $context );
+		return $this->get_setting_prop( 'enrolled_course_enable', 'emails', $context );
 	}
 
 	/**
@@ -1206,7 +1357,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_enrolled_course_subject( $context = 'view' ) {
-		return $this->get_prop( 'emails.enrolled_course_subject', $context );
+		return $this->get_setting_prop( 'enrolled_course_subject', 'emails', $context );
 	}
 
 	/**
@@ -1218,7 +1369,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_enrolled_course_heading( $context = 'view' ) {
-		return $this->get_prop( 'emails.enrolled_course_heading', $context );
+		return $this->get_setting_prop( 'enrolled_course_heading', 'emails', $context );
 	}
 
 	/**
@@ -1230,7 +1381,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_enrolled_course_content( $context = 'view' ) {
-		return $this->get_prop( 'emails.enrolled_course_content', $context );
+		return $this->get_setting_prop( 'enrolled_course_content', 'emails', $context );
 	}
 
 	// Completed Course.
@@ -1244,7 +1395,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_completed_course_enable( $context = 'view' ) {
-		return $this->get_prop( 'emails.completed_course_enable', $context );
+		return $this->get_setting_prop( 'completed_course_enable', 'emails', $context );
 	}
 
 	/**
@@ -1256,7 +1407,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_completed_course_subject( $context = 'view' ) {
-		return $this->get_prop( 'emails.completed_course_subject', $context );
+		return $this->get_setting_prop( 'completed_course_subject', 'emails', $context );
 	}
 
 	/**
@@ -1268,7 +1419,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_completed_course_heading( $context = 'view' ) {
-		return $this->get_prop( 'emails.completed_course_heading', $context );
+		return $this->get_setting_prop( 'completed_course_heading', 'emails', $context );
 	}
 
 	/**
@@ -1280,7 +1431,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_completed_course_content( $context = 'view' ) {
-		return $this->get_prop( 'emails.completed_course_content', $context );
+		return $this->get_setting_prop( 'completed_course_content', 'emails', $context );
 	}
 
 	// Become An Instructor.
@@ -1294,7 +1445,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_become_an_instructor_enable( $context = 'view' ) {
-		return $this->get_prop( 'emails.become_an_instructor_enable', $context );
+		return $this->get_setting_prop( 'become_an_instructor_enable', 'emails', $context );
 	}
 
 	/**
@@ -1306,7 +1457,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_become_an_instructor_subject( $context = 'view' ) {
-		return $this->get_prop( 'emails.become_an_instructor_subject', $context );
+		return $this->get_setting_prop( 'become_an_instructor_subject', 'emails', $context );
 	}
 
 	/**
@@ -1318,7 +1469,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_become_an_instructor_heading( $context = 'view' ) {
-		return $this->get_prop( 'emails.become_an_instructor_heading', $context );
+		return $this->get_setting_prop( 'become_an_instructor_heading', 'emails', $context );
 	}
 
 	/**
@@ -1330,7 +1481,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_emails_become_an_instructor_content( $context = 'view' ) {
-		return $this->get_prop( 'emails.become_an_instructor_content', $context );
+		return $this->get_setting_prop( 'become_an_instructor_content', 'emails', $context );
 	}
 
 	// Advanced Setting.
@@ -1346,7 +1497,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_advanced_template_debug_enable( $context = 'view' ) {
-		return $this->get_prop( 'advanced.template_debug_enable', $context );
+		return $this->get_setting_prop( 'template_debug_enable', 'advance', $context );
 	}
 
 	/**
@@ -1358,7 +1509,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_advanced_debug_enable( $context = 'view' ) {
-		return $this->get_prop( 'advanced.debug_enable', $context );
+		return $this->get_setting_prop( 'debug_enable', 'advance', $context );
 	}
 
 	/**
@@ -1370,7 +1521,7 @@ class Setting extends Model {
 	 * @return string
 	 */
 	public function get_advanced_styles_mode( $context = 'view' ) {
-		return $this->get_prop( 'advanced.styles_mode', $context );
+		return $this->get_setting_prop( 'styles_mode', 'advance', $context );
 	}
 
 	/**
@@ -1386,7 +1537,7 @@ class Setting extends Model {
 	* @param string $address_line1
 	*/
 	public function set_general_address_line1( $address_line1 ) {
-		return $this->set_prop( 'general.address_line1', $address_line1 );
+		$this->set_setting_prop( 'address_line1', 'general', $address_line1 );
 	}
 
 	/**
@@ -1396,7 +1547,7 @@ class Setting extends Model {
 	* @param string $address_line2
 	*/
 	public function set_general_address_line2( $address_line2 ) {
-		return $this->set_prop( 'general.address_line2', $address_line2 );
+		$this->set_setting_prop( 'address_line2', 'general', $address_line2 );
 	}
 
 	/**
@@ -1406,7 +1557,7 @@ class Setting extends Model {
 	* @param string $city
 	*/
 	public function set_general_city( $city ) {
-		return $this->set_prop( 'general.city', $city );
+		$this->set_setting_prop( 'city', 'general', $city );
 	}
 
 	/**
@@ -1416,7 +1567,7 @@ class Setting extends Model {
 	* @param string $country
 	*/
 	public function set_general_country( $country ) {
-		return $this->set_prop( 'general.country', $country );
+		$this->set_setting_prop( 'country', 'general', $country );
 	}
 
 	/**
@@ -1426,7 +1577,7 @@ class Setting extends Model {
 	* @param string $postcode
 	*/
 	public function set_general_postcode( $postcode ) {
-		return $this->set_prop( 'general.postcode', $postcode );
+		$this->set_setting_prop( 'postcode', 'general', $postcode );
 	}
 
 	/**
@@ -1436,47 +1587,47 @@ class Setting extends Model {
 	* @param string $currency
 	*/
 	public function set_general_currency( $currency ) {
-		return $this->set_prop( 'general.currency', $currency );
+		$this->set_setting_prop( 'currency', 'general', $currency );
 	}
 
 	/**
 	 * Set option general currency position.
 	*
 	* @since 0.1.0
-	* @param string $currency_position
+	* @param string $position
 	*/
-	public function set_general_currency_position( $currency_position ) {
-		return $this->set_prop( 'general.currency_position', $currency_position );
+	public function set_general_currency_position( $position ) {
+		$this->set_setting_prop( 'currency_position', 'general', $position );
 	}
 
 	/**
 	 * Set option general thousand separator.
 	*
 	* @since 0.1.0
-	* @param string $thousand_separator
+	* @param string $separator
 	*/
-	public function set_general_thousand_separator( $thousand_separator ) {
-		return $this->set_prop( 'general.thousand_separator', $thousand_separator );
+	public function set_general_thousand_separator( $separator ) {
+		$this->set_setting_prop( 'thousand_separator', 'general', $separator );
 	}
 
 	/**
 	 * Set option general decimal separator.
 	*
 	* @since 0.1.0
-	* @param string $decimal_separator
+	* @param string $separator
 	*/
-	public function set_general_decimal_separator( $decimal_separator ) {
-		return $this->set_prop( 'general.decimal_separator', $decimal_separator );
+	public function set_general_decimal_separator( $separator ) {
+		$this->set_setting_prop( 'decimal_separator', 'general', $separator );
 	}
 
 	/**
 	 * Set option general number of decimals.
 	*
 	* @since 0.1.0
-	* @param string $number_of_decimals
+	* @param int $number_of_decimals
 	*/
 	public function set_general_number_of_decimals( $number_of_decimals ) {
-		return $this->set_prop( 'general.number_of_decimals', absint( $number_of_decimals ) );
+		$this->set_setting_prop( 'number_of_decimals', 'general', absint( $number_of_decimals ) );
 	}
 
 	// Courses Setting Setter.
@@ -1485,10 +1636,10 @@ class Setting extends Model {
 	 * Set option courses placeholder image.
 	*
 	* @since 0.1.0
-	* @param string $placeholder_image
+	* @param int $image
 	*/
-	public function set_courses_placeholder_image( $placeholder_image ) {
-		return $this->set_prop( 'courses.placeholder_image', absint( $placeholder_image ) );
+	public function set_courses_placeholder_image( $image ) {
+		$this->set_setting_prop( 'placeholder_image', 'courses', $image );
 	}
 
 	/**
@@ -1498,57 +1649,57 @@ class Setting extends Model {
 	* @param string $add_to_cart_behaviour
 	*/
 	public function set_courses_add_to_cart_behaviour( $add_to_cart_behaviour ) {
-		return $this->set_prop( 'courses.add_to_cart_behaviour', $add_to_cart_behaviour );
+		$this->set_setting_prop( 'add_to_cart_behaviour', 'courses', $add_to_cart_behaviour );
 	}
 
 	/**
 	 * Set option courses per page.
 	*
 	* @since 0.1.0
-	* @param string $per_page
+	* @param int $per_page
 	*/
 	public function set_courses_per_page( $per_page ) {
-		return $this->set_prop( 'courses.per_page', absint( $per_page ) );
+		 $this->set_setting_prop( 'per_page', 'courses', absint( $per_page ) );
 	}
 
 	/**
 	 * Set option courses enable editing.
 	*
 	* @since 0.1.0
-	* @param boolean $enable_editing
+	* @param boolean $enable
 	*/
-	public function set_courses_enable_editing( $enable_editing ) {
-		return $this->set_prop( 'courses.enable_editing', masteriyo_string_to_bool( $enable_editing ) );
+	public function set_courses_enable_editing( $enable ) {
+		$this->set_setting_prop( 'enable_editing', 'courses', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
 	 * Set option courses category base.
 	*
 	* @since 0.1.0
-	* @param string $category_base
+	* @param string $base
 	*/
-	public function set_courses_category_base( $category_base ) {
-		return $this->set_prop( 'courses.category_base', masteriyo_sanitize_permalink( $category_base ) );
+	public function set_courses_category_base( $base ) {
+		$this->set_setting_prop( 'category_base', 'courses', $base );
 	}
 
 	/**
 	 * Set option courses tag base.
 	*
 	* @since 0.1.0
-	* @param string $tag_base
+	* @param string $base
 	*/
-	public function set_courses_tag_base( $tag_base ) {
-		return $this->set_prop( 'courses.tag_base', masteriyo_sanitize_permalink( $tag_base ) );
+	public function set_courses_tag_base( $base ) {
+		$this->set_setting_prop( 'tag_base', 'courses', $base );
 	}
 
 	/**
 	 * Set option courses difficulty base.
 	*
 	* @since 0.1.0
-	* @param string $difficulty_base
+	* @param string $base
 	*/
-	public function set_courses_difficulty_base( $difficulty_base ) {
-		return $this->set_prop( 'courses.difficulty_base', masteriyo_sanitize_permalink( $difficulty_base ) );
+	public function set_courses_difficulty_base( $base ) {
+		$this->set_setting_prop( 'difficulty_base', 'courses', $base );
 	}
 
 	/**
@@ -1557,10 +1708,11 @@ class Setting extends Model {
 	* @since 0.1.0
 	* @param string $single_course_permalink
 	*/
-	public function set_courses_single_course_permalink( $single_course_permalink ) {
+	public function set_courses_single_course_permalink( $permalink ) {
+		$permalink = trim( $permalink );
 
-		if ( $single_course_permalink ) {
-			$course_base = preg_replace( '#/+#', '/', '/' . str_replace( '#', '', trim( wp_unslash( $single_course_permalink ) ) ) );
+		if ( $permalink ) {
+			$course_base = preg_replace( '#/+#', '/', '/' . str_replace( '#', '', trim( wp_unslash( $permalink ) ) ) );
 		} else {
 			$course_base = '/';
 		}
@@ -1570,77 +1722,77 @@ class Setting extends Model {
 			$course_base = '/' . _x( 'course', 'slug', 'masteriyo' ) . $course_base;
 		}
 
-		return $this->set_prop( 'courses.single_course_permalink', masteriyo_sanitize_permalink( $course_base ) );
+		$this->set_setting_prop( 'single_course_permalink', 'courses', $permalink );
 	}
 
 	/**
 	 * Set option courses single lesson permalink.
 	*
 	* @since 0.1.0
-	* @param string $single_lesson_permalink
+	* @param string $permalink
 	*/
-	public function set_courses_single_lesson_permalink( $single_lesson_permalink ) {
-		return $this->set_prop( 'courses.single_lesson_permalink', masteriyo_sanitize_permalink( $single_lesson_permalink ) );
+	public function set_courses_single_lesson_permalink( $permalink ) {
+		$this->set_setting_prop( 'single_lesson_permalink', 'courses', $permalink );
 	}
 
 	/**
 	 * Set option courses single quiz permalink.
 	*
 	* @since 0.1.0
-	* @param string $single_quiz_permalink
+	* @param string $permalink
 	*/
-	public function set_courses_single_quiz_permalink( $single_quiz_permalink ) {
-		return $this->set_prop( 'courses.single_quiz_permalink', masteriyo_sanitize_permalink( $single_quiz_permalink ) );
+	public function set_courses_single_quiz_permalink( $permalink ) {
+		$this->set_setting_prop( 'single_quiz_permalink', 'courses', $permalink );
 	}
 
 	/**
 	 * Set option courses single section permalink.
 	*
 	* @since 0.1.0
-	* @param string $single_section_permalink
+	* @param string $permalink
 	*/
-	public function set_courses_single_section_permalink( $single_section_permalink ) {
-		return $this->set_prop( 'courses.single_section_permalink', masteriyo_sanitize_permalink( $single_section_permalink ) );
+	public function set_courses_single_section_permalink( $permalink ) {
+		$this->set_setting_prop( 'single_section_permalink', 'courses', $permalink );
 	}
 
 	/**
 	 * Set option courses enable single course permalink.
 	*
 	* @since 0.1.0
-	* @param string $enable_single_course_permalink
+	* @param string $enable
 	*/
-	public function set_courses_enable_single_course_permalink( $enable_single_course_permalink ) {
-		return $this->set_prop( 'courses.enable_single_course_permalink', masteriyo_string_to_bool( $enable_single_course_permalink ) );
+	public function set_courses_enable_single_course_permalink( $enable ) {
+		 $this->set_setting_prop( 'enable_single_course_permalink', 'courses', $enable );
 	}
 
 	/**
 	 * Set option courses single course enable editing.
 	*
 	* @since 0.1.0
-	* @param string $single_course_enable_editing
+	* @param string $enable
 	*/
-	public function set_courses_single_course_enable_editing( $single_course_enable_editing ) {
-		return $this->set_prop( 'courses.single_course_enable_editing', masteriyo_string_to_bool( $single_course_enable_editing ) );
+	public function set_courses_single_course_enable_editing( $enable ) {
+		$this->set_setting_prop( 'single_course_enable_editing', 'courses', $enable );
 	}
 
 	/**
 	 * Set option courses show thumbnail.
 	*
 	* @since 0.1.0
-	* @param string $show_thumbnail
+	* @param string $show
 	*/
-	public function set_courses_show_thumbnail( $show_thumbnail ) {
-		return $this->set_prop( 'courses.show_thumbnail', masteriyo_string_to_bool( $show_thumbnail ) );
+	public function set_courses_show_thumbnail( $show ) {
+		$this->set_setting_prop( 'show_thumbnail', 'courses', $show );
 	}
 
 	/**
 	 * Set option courses thumbnail size.
 	*
 	* @since 0.1.0
-	* @param string $thumbnail_size
+	* @param string $size
 	*/
-	public function set_courses_thumbnail_size( $thumbnail_size ) {
-		return $this->set_prop( 'courses.thumbnail_size', $thumbnail_size );
+	public function set_courses_thumbnail_size( $size ) {
+		$this->set_setting_prop( 'thumbnail_size', 'courses', $size );
 	}
 
 	// Pages Setting Setter.
@@ -1649,40 +1801,40 @@ class Setting extends Model {
 	 * Set option pages myaccount page id.
 	*
 	* @since 0.1.0
-	* @param string $myaccount_page_id
+	* @param string $page_id
 	*/
-	public function set_pages_myaccount_page_id( $myaccount_page_id ) {
-		return $this->set_prop( 'pages.myaccount_page_id', absint( $myaccount_page_id ) );
+	public function set_pages_myaccount_page_id( $page_id ) {
+		$this->set_setting_prop( 'myaccount_page_id', 'pages', $page_id );
 	}
 
 	/**
 	 * Set option pages course list page id.
 	*
 	* @since 0.1.0
-	* @param string $course_list_page_id
+	* @param string $page_id
 	*/
-	public function set_pages_course_list_page_id( $course_list_page_id ) {
-		return $this->set_prop( 'pages.course_list_page_id', absint( $course_list_page_id ) );
+	public function set_pages_course_list_page_id( $page_id ) {
+		$this->set_setting_prop( 'course_list_page_id', 'pages', $page_id );
 	}
 
 	/**
 	 * Set option pages terms conditions page_id.
 	*
 	* @since 0.1.0
-	* @param string $terms_conditions_page_id
+	* @param string $page_id
 	*/
-	public function set_pages_terms_conditions_page_id( $terms_conditions_page_id ) {
-		return $this->set_prop( 'pages.terms_conditions_page_id', absint( $terms_conditions_page_id ) );
+	public function set_pages_terms_conditions_page_id( $page_id ) {
+		$this->set_setting_prop( 'terms_conditions_page_id', 'pages', $page_id );
 	}
 
 	/**
 	 * Set option pages checkout page_id.
 	*
 	* @since 0.1.0
-	* @param string $checkout_page_id
+	* @param string $page_id
 	*/
-	public function set_pages_checkout_page_id( $checkout_page_id ) {
-		return $this->set_prop( 'pages.checkout_page_id', absint( $checkout_page_id ) );
+	public function set_pages_checkout_page_id( $page_id ) {
+		$this->set_setting_prop( 'checkout_page_id', 'pages', $page_id );
 	}
 
 	// Checkout endpoints.
@@ -1694,7 +1846,7 @@ class Setting extends Model {
 	* @param string $pay
 	*/
 	public function set_pages_pay( $pay ) {
-		return $this->set_prop( 'pages.pay', $pay );
+		$this->set_setting_prop( 'pay', 'pages', $pay );
 	}
 
 	/**
@@ -1704,37 +1856,37 @@ class Setting extends Model {
 	* @param string $order_received
 	*/
 	public function set_pages_order_received( $order_received ) {
-		return $this->set_prop( 'pages.order_received', $order_received );
+		$this->set_setting_prop( 'order_received', 'pages', $order_received );
 	}
 
 	/**
 	 * Set option pages add payment method.
 	*
 	* @since 0.1.0
-	* @param string $add_payment_method
+	* @param string $payment_method
 	*/
-	public function set_pages_add_payment_method( $add_payment_method ) {
-		return $this->set_prop( 'pages.add_payment_method', $add_payment_method );
+	public function set_pages_add_payment_method( $payment_method ) {
+		$this->set_setting_prop( 'add_payment_method', 'pages', $payment_method );
 	}
 
 	/**
 	 * Set option pages delete payment method.
 	*
 	* @since 0.1.0
-	* @param string $delete_payment_method
+	* @param string $payment_method
 	*/
-	public function set_pages_delete_payment_method( $delete_payment_method ) {
-		return $this->set_prop( 'pages.delete_payment_method', $delete_payment_method );
+	public function set_pages_delete_payment_method( $payment_method ) {
+		$this->set_setting_prop( 'delete_payment_method', 'pages', $payment_method );
 	}
 
 	/**
 	 * Set option pages set default payment method.
 	*
 	* @since 0.1.0
-	* @param string $set_default_payment_method
+	* @param string $payment_method
 	*/
-	public function set_pages_set_default_payment_method( $set_default_payment_method ) {
-		return $this->set_prop( 'pages.set_default_payment_method', $set_default_payment_method );
+	public function set_pages_set_default_payment_method( $payment_method ) {
+		$this->set_setting_prop( 'set_default_payment_method', 'pages', $payment_method );
 	}
 
 	// Account endpoints.
@@ -1746,7 +1898,7 @@ class Setting extends Model {
 	* @param string $orders
 	*/
 	public function set_pages_orders( $orders ) {
-		return $this->set_prop( 'pages.orders', $orders );
+		$this->set_setting_prop( 'orders', 'pages', $orders );
 	}
 
 	/**
@@ -1756,7 +1908,7 @@ class Setting extends Model {
 	* @param string $view_order
 	*/
 	public function set_pages_view_order( $view_order ) {
-		return $this->set_prop( 'pages.view_order', $view_order );
+		$this->set_setting_prop( 'view_order', 'pages', $view_order );
 	}
 
 	/**
@@ -1766,7 +1918,7 @@ class Setting extends Model {
 	* @param string $my_courses
 	*/
 	public function set_pages_my_courses( $my_courses ) {
-		return $this->set_prop( 'pages.my_courses', $my_courses );
+		$this->set_setting_prop( 'my_courses', 'pages', $my_courses );
 	}
 
 	/**
@@ -1776,7 +1928,7 @@ class Setting extends Model {
 	* @param string $edit_account
 	*/
 	public function set_pages_edit_account( $edit_account ) {
-		return $this->set_prop( 'pages.edit_account', $edit_account );
+		$this->set_setting_prop( 'edit_account', 'pages', $edit_account );
 	}
 
 	/**
@@ -1786,7 +1938,7 @@ class Setting extends Model {
 	* @param string $payment_methods
 	*/
 	public function set_pages_payment_methods( $payment_methods ) {
-		return $this->set_prop( 'pages.payment_methods', $payment_methods );
+		$this->set_setting_prop( 'payment_methods', 'pages', $payment_methods );
 	}
 
 	/**
@@ -1796,7 +1948,7 @@ class Setting extends Model {
 	* @param string $lost_password
 	*/
 	public function set_pages_lost_password( $lost_password ) {
-		return $this->set_prop( 'pages.lost_password', $lost_password );
+		$this->set_setting_prop( 'lost_password', 'pages', $lost_password );
 	}
 
 	/**
@@ -1806,7 +1958,7 @@ class Setting extends Model {
 	* @param string $logout
 	*/
 	public function set_pages_logout( $logout ) {
-		return $this->set_prop( 'pages.logout', $logout );
+		$this->set_setting_prop( 'logout', 'pages', $logout );
 	}
 
 	// Payments Setting Setter.
@@ -1821,7 +1973,7 @@ class Setting extends Model {
 	 * @param boolean $enable
 	 */
 	public function set_payments_offline_enable( $enable ) {
-		return $this->set_prop( 'payments.offline_enable', $enable );
+		$this->set_setting_prop( 'offline_enable', 'payments', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -1832,7 +1984,7 @@ class Setting extends Model {
 	 * @param string $title
 	 */
 	public function set_payments_offline_title( $title ) {
-		return $this->set_prop( 'payments.offline_title', $title );
+		$this->set_setting_prop( 'offline_title', 'payments', $title );
 	}
 
 	/**
@@ -1843,7 +1995,7 @@ class Setting extends Model {
 	 * @param string $description
 	 */
 	public function set_payments_offline_description( $description ) {
-		return $this->set_prop( 'payments.offline_description', $description );
+		$this->set_setting_prop( 'offline_description', 'payments', $description );
 	}
 
 	/**
@@ -1854,7 +2006,7 @@ class Setting extends Model {
 	 * @param string $instructions
 	 */
 	public function set_payments_offline_instructions( $instructions ) {
-		return $this->set_prop( 'payments.offline_instructions', $instructions );
+		$this->set_setting_prop( 'offline_instructions', 'payments', $instructions );
 	}
 
 	// Paypal.
@@ -1863,40 +2015,150 @@ class Setting extends Model {
 	 * Set option payments paypal enable.
 	*
 	* @since 0.1.0
-	* @param boolean $paypal_enable
+	* @param boolean $enable
 	*/
-	public function set_payments_paypal_enable( $paypal_enable ) {
-		return $this->set_prop( 'payments.paypal_enable', masteriyo_string_to_bool( $paypal_enable ) );
+	public function set_payments_paypal_enable( $enable ) {
+		$this->set_setting_prop( 'paypal_enable', 'payments', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
-	 * Set option payments paypal production email.
+	 * Set paypal title.
 	*
 	* @since 0.1.0
-	* @param string $paypal_production_email
+	* @param boolean $title
 	*/
-	public function set_payments_paypal_production_email( $paypal_production_email ) {
-		return $this->set_prop( 'payments.paypal_production_email', $paypal_production_email );
+	public function set_payments_paypal_title( $title ) {
+		$this->set_setting_prop( 'paypal_title', 'payments', $title );
+	}
+
+	/**
+	 * Set paypal description.
+	*
+	* @since 0.1.0
+	* @param boolean $description
+	*/
+	public function set_payments_paypal_description( $description ) {
+		$this->set_setting_prop( 'paypal_description', 'payments', $description );
+	}
+
+	/**
+	 * Set paypal enable ipn email notifications.
+	*
+	* @since 0.1.0
+	* @param boolean $enable
+	*/
+	public function set_payments_paypal_enable_ipn_email_notifications( $enable ) {
+		$this->set_setting_prop( 'paypal_enable_ipn_email_notifications', 'payments', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
 	 * Set option payments paypal sandbox enable.
 	*
 	* @since 0.1.0
-	* @param boolean $paypal_sandbox_enable
+	* @param boolean $enable
 	*/
-	public function set_payments_paypal_sandbox_enable( $paypal_sandbox_enable ) {
-		return $this->set_prop( 'payments.paypal_sandbox_enable', masteriyo_string_to_bool( $paypal_sandbox_enable ) );
+	public function set_payments_paypal_sandbox_enable( $enable ) {
+		$this->set_setting_prop( 'styles_mode', 'payments', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
-	 * Set option payments paypal sandbox email.
+	 * Set option payments paypal email.
 	*
 	* @since 0.1.0
-	* @param string $paypal_sandbox_email
+	* @param string $email
 	*/
-	public function set_payments_paypal_sandbox_email( $paypal_sandbox_email ) {
-		return $this->set_prop( 'payments.paypal_sandbox_email', $paypal_sandbox_email );
+	public function set_payments_paypal_email( $email ) {
+		$this->set_setting_prop( 'paypal_email', 'payments', $email );
+	}
+
+	/**
+	 * Set option payments paypal receiver email.
+	*
+	* @since 0.1.0
+	* @param string $email
+	*/
+	public function set_payments_paypal_receiver_email( $email ) {
+		$this->set_setting_prop( 'paypal_receiver_email', 'payments', $email );
+	}
+
+	/**
+	 * Set option payments paypal identity token.
+	*
+	* @since 0.1.0
+	* @param string $token
+	*/
+	public function set_payments_paypal_identity_token( $token ) {
+		$this->set_setting_prop( 'paypal_identity_token', 'payments', $token );
+	}
+
+	/**
+	 * Set option payments paypal invoice prefix.
+	*
+	* @since 0.1.0
+	* @param string $invoice_prefix
+	*/
+	public function set_payments_paypal_invoice_prefix( $invoice_prefix ) {
+		$this->set_setting_prop( 'paypal_invoice_prefix', 'payments', $invoice_prefix );
+	}
+
+	/**
+	 * Set option payments paypal payment action.
+	*
+	* @since 0.1.0
+	* @param string $action
+	*/
+	public function set_payments_paypal_payment_action( $action ) {
+		$this->set_setting_prop( 'paypal_payment_action', 'payments', $action );
+	}
+
+	/**
+	 * Set option payments paypal image url.
+	*
+	* @since 0.1.0
+	* @param string $url
+	*/
+	public function set_payments_paypal_image_url( $url ) {
+		$this->set_setting_prop( 'paypal_image_url', 'payments', $url );
+	}
+
+	/**
+	 * Set paypal enable log.
+	*
+	* @since 0.1.0
+	* @param string $enable
+	*/
+	public function set_payments_paypal_enable_log( $enable ) {
+		$this->set_setting_prop( 'paypal_enable_log', 'payments', masteriyo_string_to_bool( $enable ) );
+	}
+
+	/**
+	 * Set paypal sandbox api username.
+	*
+	* @since 0.1.0
+	* @param string $username
+	*/
+	public function set_payments_paypal_sandbox_api_username( $username ) {
+		$this->set_setting_prop( 'paypal_sandbox_api_username', 'payments', $username );
+	}
+
+	/**
+	 * Set paypal sandbox api password.
+	*
+	* @since 0.1.0
+	* @param string $password
+	*/
+	public function set_payments_paypal_sandbox_api_password( $password ) {
+		$this->set_setting_prop( 'paypal_sandbox_api_password', 'payments', $password );
+	}
+
+	/**
+	 * Set paypal sandbox api signature.
+	*
+	* @since 0.1.0
+	* @param string $siognature
+	*/
+	public function set_payments_paypal_sandbox_api_signature( $signature ) {
+		$this->set_setting_prop( 'paypal_sandbox_api_signature', 'payments', $signature );
 	}
 
 	// Email Setting Setter.
@@ -1907,40 +2169,40 @@ class Setting extends Model {
 	 * Set general from name.
 	*
 	* @since 0.1.0
-	* @param string $from_name
+	* @param string $name
 	*/
-	public function set_emails_general_from_name( $from_name ) {
-		return $this->set_prop( 'emails.general_from_name', $from_name );
+	public function set_emails_general_from_name( $name ) {
+		$this->set_setting_prop( 'general_from_name', 'emails', $name );
 	}
 
 	/**
 	 * Set general from email.
 	*
 	* @since 0.1.0
-	* @param string $from_email
+	* @param string $email
 	*/
-	public function set_emails_general_from_email( $from_email ) {
-		return $this->set_prop( 'emails.general_from_email', $from_email );
+	public function set_emails_general_from_email( $email ) {
+		$this->set_setting_prop( 'general_from_email', 'emails', $email );
 	}
 
 	/**
 	 * Set general email default content.
 	*
 	* @since 0.1.0
-	* @param string $default_content
+	* @param string $content
 	*/
-	public function set_emails_general_default_content( $default_content ) {
-		return $this->set_prop( 'emails.general_default_content', $default_content );
+	public function set_emails_general_default_content( $content ) {
+		$this->set_setting_prop( 'general_default_content', 'emails', $content );
 	}
 
 	/**
 	 * Set general email header image.
 	*
 	* @since 0.1.0
-	* @param string $header_image
+	* @param string $image
 	*/
-	public function set_emails_general_header_image( $header_image ) {
-		return $this->set_prop( 'emails.general_header_image', $header_image );
+	public function set_emails_general_header_image( $image ) {
+		$this->set_setting_prop( 'general_header_image', 'emails', $image );
 	}
 
 	/**
@@ -1950,7 +2212,7 @@ class Setting extends Model {
 	* @param string $footer
 	*/
 	public function set_emails_general_footer_text( $footer ) {
-		return $this->set_prop( 'emails.general_footer_text', $footer );
+		$this->set_setting_prop( 'general_footer_text', 'emails', $footer );
 	}
 
 	// New order.
@@ -1962,7 +2224,7 @@ class Setting extends Model {
 	* @param boolean $enable
 	*/
 	public function set_emails_new_order_enable( $enable ) {
-		return $this->set_prop( 'emails.new_order_enable', masteriyo_string_to_bool( $enable ) );
+		$this->set_setting_prop( 'new_order_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -1972,7 +2234,7 @@ class Setting extends Model {
 	* @param string[] $recipients
 	*/
 	public function set_emails_new_order_recipients( $recipients ) {
-		return $this->set_prop( 'emails.new_order_recipients', maybe_unserialize( $recipients ) );
+		$this->set_setting_prop( 'new_order_recipients', 'emails', $recipients );
 	}
 
 	/**
@@ -1982,7 +2244,7 @@ class Setting extends Model {
 	* @param string $subject
 	*/
 	public function set_emails_new_order_subject( $subject ) {
-		return $this->set_prop( 'emails.new_order_subject', $subject );
+		$this->set_setting_prop( 'new_order_subject', 'emails', $subject );
 	}
 
 	/**
@@ -1992,7 +2254,7 @@ class Setting extends Model {
 	* @param string $heading
 	*/
 	public function set_emails_new_order_heading( $heading ) {
-		return $this->set_prop( 'emails.new_order_heading', $heading );
+		$this->set_setting_prop( 'new_order_heading', 'emails', $heading );
 	}
 
 	/**
@@ -2002,7 +2264,7 @@ class Setting extends Model {
 	* @param string $content
 	*/
 	public function set_emails_new_order_content( $content ) {
-		return $this->set_prop( 'emails.new_order_content', $content );
+		$this->set_setting_prop( 'new_order_content', 'emails', $content );
 	}
 
 	// Processing order.
@@ -2014,7 +2276,7 @@ class Setting extends Model {
 	* @param boolean $enable
 	*/
 	public function set_emails_processing_order_enable( $enable ) {
-		return $this->set_prop( 'emails.processing_order_enable', masteriyo_string_to_bool( $enable ) );
+		$this->set_setting_prop( 'processing_order_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -2024,7 +2286,7 @@ class Setting extends Model {
 	* @param string $subject
 	*/
 	public function set_emails_processing_order_subject( $subject ) {
-		return $this->set_prop( 'emails.processing_order_subject', $subject );
+		 $this->set_setting_prop( 'processing_order_subject', 'emails', $subject );
 	}
 
 	/**
@@ -2034,7 +2296,7 @@ class Setting extends Model {
 	* @param string $heading
 	*/
 	public function set_emails_processing_order_heading( $heading ) {
-		return $this->set_prop( 'emails.processing_order_heading', $heading );
+		$this->set_setting_prop( 'processing_order_heading', 'emails', $heading );
 	}
 
 	/**
@@ -2044,7 +2306,7 @@ class Setting extends Model {
 	* @param string $content
 	*/
 	public function set_emails_processing_order_content( $content ) {
-		return $this->set_prop( 'emails.processing_order_content', $content );
+		$this->set_setting_prop( 'processing_order_content', 'emails', $content );
 	}
 
 	// Completed order.
@@ -2056,7 +2318,7 @@ class Setting extends Model {
 	* @param boolean $enable
 	*/
 	public function set_emails_completed_order_enable( $enable ) {
-		return $this->set_prop( 'emails.completed_order_enable', masteriyo_string_to_bool( $enable ) );
+		$this->set_setting_prop( 'completed_order_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -2066,7 +2328,7 @@ class Setting extends Model {
 	* @param string $subject
 	*/
 	public function set_emails_completed_order_subject( $subject ) {
-		return $this->set_prop( 'emails.completed_order_subject', $subject );
+		$this->set_setting_prop( 'completed_order_subject', 'emails', $subject );
 	}
 
 	/**
@@ -2076,7 +2338,7 @@ class Setting extends Model {
 	* @param string $heading
 	*/
 	public function set_emails_completed_order_heading( $heading ) {
-		return $this->set_prop( 'emails.completed_order_heading', $heading );
+		$this->set_setting_prop( 'completed_order_heading', 'emails', $heading );
 	}
 
 	/**
@@ -2086,7 +2348,7 @@ class Setting extends Model {
 	* @param string $content
 	*/
 	public function set_emails_completed_order_content( $content ) {
-		return $this->set_prop( 'emails.completed_order_content', $content );
+		$this->set_setting_prop( 'completed_order_content', 'emails', $content );
 	}
 
 	// On Hold Order.
@@ -2098,7 +2360,7 @@ class Setting extends Model {
 	* @param boolean $enable
 	*/
 	public function set_emails_onhold_order_enable( $enable ) {
-		return $this->set_prop( 'emails.onhold_order_enable', masteriyo_string_to_bool( $enable ) );
+		$this->set_setting_prop( 'onhold_order_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -2108,7 +2370,7 @@ class Setting extends Model {
 	* @param string $subject
 	*/
 	public function set_emails_onhold_order_subject( $subject ) {
-		return $this->set_prop( 'emails.onhold_order_subject', $subject );
+		$this->set_setting_prop( 'onhold_order_subject', 'emails', $subject );
 	}
 
 	/**
@@ -2118,7 +2380,7 @@ class Setting extends Model {
 	* @param string $heading
 	*/
 	public function set_emails_onhold_order_heading( $heading ) {
-		return $this->set_prop( 'emails.onhold_order_heading', $heading );
+		$this->set_setting_prop( 'onhold_order_heading', 'emails', $heading );
 	}
 
 	/**
@@ -2128,7 +2390,7 @@ class Setting extends Model {
 	* @param string $content
 	*/
 	public function set_emails_onhold_order_content( $content ) {
-		return $this->set_prop( 'emails.onhold_order_content', $content );
+		$this->set_setting_prop( 'onhold_order_content', 'emails', $content );
 	}
 
 	// Cancelled Order.
@@ -2140,7 +2402,7 @@ class Setting extends Model {
 	* @param boolean $enable
 	*/
 	public function set_emails_cancelled_order_enable( $enable ) {
-		return $this->set_prop( 'emails.cancelled_order_enable', masteriyo_string_to_bool( $enable ) );
+		$this->set_setting_prop( 'cancelled_order_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -2150,7 +2412,7 @@ class Setting extends Model {
 	* @param string[] $recipients
 	*/
 	public function set_emails_cancelled_order_recipients( $recipients ) {
-		return $this->set_prop( 'emails.cancelled_order_recipients', maybe_unserialize( $recipients ) );
+		$this->set_setting_prop( 'cancelled_order_recipients', 'emails', $recipients );
 	}
 
 	/**
@@ -2160,7 +2422,7 @@ class Setting extends Model {
 	* @param string $subject
 	*/
 	public function set_emails_cancelled_order_subject( $subject ) {
-		return $this->set_prop( 'emails.cancelled_order_subject', $subject );
+		$this->set_setting_prop( 'cancelled_order_subject', 'emails', $subject );
 	}
 
 	/**
@@ -2170,7 +2432,7 @@ class Setting extends Model {
 	* @param string $heading
 	*/
 	public function set_emails_cancelled_order_heading( $heading ) {
-		return $this->set_prop( 'emails.cancelled_order_heading', $heading );
+		$this->set_setting_prop( 'cancelled_order_heading', 'emails', $heading );
 	}
 
 	/**
@@ -2180,7 +2442,7 @@ class Setting extends Model {
 	* @param string $content
 	*/
 	public function set_emails_cancelled_order_content( $content ) {
-		return $this->set_prop( 'emails.cancelled_order_content', $content );
+		$this->set_setting_prop( 'cancelled_order_content', 'emails', $content );
 	}
 
 	// Enrolled Course.
@@ -2192,7 +2454,7 @@ class Setting extends Model {
 	* @param boolean $enable
 	*/
 	public function set_emails_enrolled_course_enable( $enable ) {
-		return $this->set_prop( 'emails.enrolled_course_enable', masteriyo_string_to_bool( $enable ) );
+		$this->set_setting_prop( 'enrolled_course_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -2202,7 +2464,7 @@ class Setting extends Model {
 	* @param string $subject
 	*/
 	public function set_emails_enrolled_course_subject( $subject ) {
-		return $this->set_prop( 'emails.enrolled_course_subject', $subject );
+		$this->set_setting_prop( 'enrolled_course_subject', 'emails', $subject );
 	}
 
 	/**
@@ -2212,7 +2474,7 @@ class Setting extends Model {
 	* @param string $heading
 	*/
 	public function set_emails_enrolled_course_heading( $heading ) {
-		return $this->set_prop( 'emails.enrolled_course_heading', $heading );
+		$this->set_setting_prop( 'enrolled_course_heading', 'emails', $heading );
 	}
 
 	/**
@@ -2222,7 +2484,7 @@ class Setting extends Model {
 	* @param string $content
 	*/
 	public function set_emails_enrolled_course_content( $content ) {
-		return $this->set_prop( 'emails.enrolled_course_content', $content );
+		$this->set_setting_prop( 'enrolled_course_content', 'emails', $content );
 	}
 
 	// Completed Course.
@@ -2234,7 +2496,7 @@ class Setting extends Model {
 	* @param boolean $enable
 	*/
 	public function set_emails_completed_course_enable( $enable ) {
-		return $this->set_prop( 'emails.completed_course_enable', masteriyo_string_to_bool( $enable ) );
+		$this->set_setting_prop( 'completed_course_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -2244,7 +2506,7 @@ class Setting extends Model {
 	* @param string $subject
 	*/
 	public function set_emails_completed_course_subject( $subject ) {
-		return $this->set_prop( 'emails.completed_course_subject', $subject );
+		$this->set_setting_prop( 'completed_course_subject', 'emails', $subject );
 	}
 
 	/**
@@ -2254,7 +2516,7 @@ class Setting extends Model {
 	* @param string $heading
 	*/
 	public function set_emails_completed_course_heading( $heading ) {
-		return $this->set_prop( 'emails.completed_course_heading', $heading );
+		$this->set_setting_prop( 'completed_course_heading', 'emails', $heading );
 	}
 
 	/**
@@ -2264,7 +2526,7 @@ class Setting extends Model {
 	* @param string $content
 	*/
 	public function set_emails_completed_course_content( $content ) {
-		return $this->set_prop( 'emails.completed_course_content', $content );
+		$this->set_setting_prop( 'completed_course_content', 'emails', $content );
 	}
 
 	// Become An Instructor.
@@ -2276,7 +2538,7 @@ class Setting extends Model {
 	* @param boolean $enable
 	*/
 	public function set_emails_become_an_instructor_enable( $enable ) {
-		return $this->set_prop( 'emails.become_an_instructor_enable', masteriyo_string_to_bool( $enable ) );
+		$this->set_setting_prop( 'become_an_instructor_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -2286,7 +2548,7 @@ class Setting extends Model {
 	* @param string $subject
 	*/
 	public function set_emails_become_an_instructor_subject( $subject ) {
-		return $this->set_prop( 'emails.become_an_instructor_subject', $subject );
+		$this->set_setting_prop( 'become_an_instructor_subject', 'emails', $subject );
 	}
 
 	/**
@@ -2296,7 +2558,7 @@ class Setting extends Model {
 	* @param string $heading
 	*/
 	public function set_emails_become_an_instructor_heading( $heading ) {
-		return $this->set_prop( 'emails.become_an_instructor_heading', $heading );
+		$this->set_setting_prop( 'become_an_instructor_heading', 'emails', $heading );
 	}
 
 	/**
@@ -2306,10 +2568,10 @@ class Setting extends Model {
 	* @param string $content
 	*/
 	public function set_emails_become_an_instructor_content( $content ) {
-		return $this->set_prop( 'emails.become_an_instructor_content', $content );
+		$this->set_setting_prop( 'become_an_instructor_content', 'emails', $content );
 	}
 
-	// Advanced Setting.
+	// Advance Setting.
 
 	// Debug.
 
@@ -2317,20 +2579,20 @@ class Setting extends Model {
 	 * Enable/Disable template debug mode.
 	*
 	* @since 0.1.0
-	* @param string $mode
+	* @param boolean $enable
 	*/
-	public function set_advanced_template_debug_enable( $mode ) {
-		return $this->set_prop( 'advanced.template_debug_enable', masteriyo_string_to_bool( $mode ) );
+	public function set_advance_template_debug_enable( $enable ) {
+		$this->set_setting_prop( 'template_debug_enable', 'advance', masteriyo_boolean_to_bool( $enable ) );
 	}
 
 	/**
 	 * Enable/Disable debug mode.
 	*
 	* @since 0.1.0
-	* @param string $mode
+	* @param string $enable
 	*/
-	public function set_advanced_debug_enable( $mode ) {
-		return $this->set_prop( 'advanced.debug_enable', masteriyo_string_to_bool( $mode ) );
+	public function set_advance_debug_enable( $enable ) {
+		$this->set_setting_prop( 'debug_enable', 'advance', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -2339,8 +2601,49 @@ class Setting extends Model {
 	* @since 0.1.0
 	* @param string $style
 	*/
-	public function set_advanced_styles_mode( $style ) {
-		return $this->set_prop( 'advanced.styles_mode', $style );
+	public function set_advance_styles_mode( $style ) {
+		$this->set_setting_prop( 'styles_mode', 'advance', $style );
 	}
 
+	/**
+	 * Sets a prop for a setter method.
+	 *
+	 * @since 0.1.0
+	 * @param string $prop    Name of prop to set.
+	 * @param string $group Name of setting group.
+	 * @param mixed  $value   Value of the prop.
+	 */
+	protected function set_setting_prop( $prop, $group, $value ) {
+		if ( array_key_exists( $prop, $this->data[ $group ] ) ) {
+			if ( true === $this->object_read ) {
+				if ( $value !== $this->data[ $group ][ $prop ] || ( isset( $this->changes[ $group ] ) && array_key_exists( $prop, $this->changes[ $group ] ) ) ) {
+					$this->changes[ $group ][ $prop ] = $value;
+				}
+			} else {
+				$this->data[ $group ][ $prop ] = $value;
+			}
+		}
+	}
+
+	/**
+	 * Gets a prop for a getter method.
+	 *
+	 * @since  0.1.0
+	 * @param  string $prop Name of prop to get.
+	 * @param  string $group Setting group.
+	 * @param  string $context What the value is for. Valid values are 'view' and 'edit'. What the value is for. Valid values are view and edit.
+	 * @return mixed
+	 */
+	protected function get_setting_prop( $prop, $group = 'general', $context = 'view' ) {
+		$value = null;
+
+		if ( array_key_exists( $prop, $this->data[ $group ] ) ) {
+			$value = isset( $this->changes[ $group ][ $prop ] ) ? $this->changes[ $group ][ $prop ] : $this->data[ $group ][ $prop ];
+
+			if ( 'view' === $context ) {
+				$value = apply_filters( $this->get_hook_prefix() . $group . '_' . $prop, $value, $this );
+			}
+		}
+		return $value;
+	}
 }

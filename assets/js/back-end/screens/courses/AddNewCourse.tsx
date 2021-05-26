@@ -151,7 +151,7 @@ const AddNewCourse: React.FC = () => {
 									</form>
 								</TabPanel>
 								<TabPanel></TabPanel>
-								<TabPanel>
+								<TabPanel sx={tabPanelStyles}>
 									<CourseSetting />
 								</TabPanel>
 							</TabPanels>

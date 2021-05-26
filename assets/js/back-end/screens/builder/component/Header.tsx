@@ -39,42 +39,7 @@ const Header: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<Box bg="white" w="full">
-			<Container maxW="container.xl">
-				<Flex direction="row" justifyContent="space-between" align="center">
-					<Stack direction="row" spacing="12" align="center">
-						<Box>
-							<RouterLink to={routes.courses.list}>
-								<Image src={Logo} alt="Masteriyo Logo" w="120px" />
-							</RouterLink>
-						</Box>
-						<TabList borderBottom="none" bg="white">
-							<Tab sx={tabStyles}>
-								<Icon as={BiBook} sx={iconStyles} />
-								{__('Course', 'masteriyo')}
-							</Tab>
-							<Tab sx={tabStyles}>
-								<Icon as={BiEdit} sx={iconStyles} />
-								{__('Builder', 'masteriyo')}
-							</Tab>
-							<Tab sx={tabStyles}>
-								<Icon as={BiCog} sx={iconStyles} />
-								{__('Settings', 'masteriyo')}
-							</Tab>
-						</TabList>
-					</Stack>
-					<ButtonGroup>
-						<Link href={previewUrl} isExternal>
-							<Button variant="outline">Preview</Button>
-						</Link>
-
-						<Button colorScheme="blue" type="submit">
-							{__('Save', 'masteriyo')}
-						</Button>
-					</ButtonGroup>
-				</Flex>
-			</Container>
-		</Box>
+		
 	);
 };
 

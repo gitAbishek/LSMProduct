@@ -149,6 +149,7 @@ const Section: React.FC<Props> = (props) => {
 					<Collapse in={isEditing} animateOpacity>
 						<EditSection
 							id={id}
+							courseId={courseId}
 							name={name}
 							description={description}
 							onSave={() => setIsEditing(false)}

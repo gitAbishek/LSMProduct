@@ -1,8 +1,16 @@
 import {
 	Box,
+	Button,
+	ButtonGroup,
 	Container,
+	Flex,
 	Heading,
+	Icon,
+	Image,
+	Link,
 	Stack,
+	Tab,
+	TabList,
 	TabPanel,
 	TabPanels,
 	Tabs,
@@ -12,16 +20,17 @@ import { __ } from '@wordpress/i18n';
 import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link as RouterLink, useHistory, useParams } from 'react-router-dom';
 
+import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import EditCourse from '../courses/EditCourse';
 import SectionBuilder from '../sections/SectionBuilder';
-import Header from './component/Header';
 
 const Builder: React.FC = () => {
 	const { courseId }: any = useParams();
@@ -29,23 +38,31 @@ const Builder: React.FC = () => {
 	const queryClient = useQueryClient();
 	const toast = useToast();
 	const methods = useForm();
+
 	const courseAPI = new API(urls.courses);
 	const builderAPI = new API(urls.builder);
 
 	const [builderData, setBuilderData] = useState<any>(null);
-	const [courseData, setCourseData] = useState<CourseDataMap>();
+
+	const tabStyles = {
+		fontWeight: 'medium',
+		fontSize: 'sm',
+		py: '6',
+		px: 0,
+		mx: 4,
+	};
 
 	const tabPanelStyles = {
 		px: '0',
 	};
 
+	const iconStyles = {
+		mr: '2',
+	};
 	const courseQuery = useQuery<CourseDataMap>(
 		[`courses${courseId}`, courseId],
 		() => courseAPI.get(courseId),
 		{
-			onSuccess: (data: CourseDataMap) => {
-				setCourseData(data);
-			},
 			onError: () => {
 				history.push(routes.notFound);
 			},
@@ -76,16 +93,12 @@ const Builder: React.FC = () => {
 		}
 	);
 
-	const onSave = () => {
-		if (builderData) {
-			updateBuilder.mutate(builderData);
-		}
-		if (courseData) {
-			updateCourse.mutate(courseData);
-		}
+	const onSave = (data: any) => {
+		updateBuilder.mutate(builderData);
+		console.log(data);
 	};
 
-	if (courseQuery.isLoading || !courseData) {
+	if (courseQuery.isLoading) {
 		return <FullScreenLoader />;
 	}
 
@@ -93,7 +106,47 @@ const Builder: React.FC = () => {
 		<FormProvider {...methods}>
 			<Tabs>
 				<Stack direction="column" spacing="10" align="center">
-					<Header previewUrl={courseData?.preview_permalink} onSave={onSave} />
+					<Box bg="white" w="full">
+						<Container maxW="container.xl">
+							<Flex
+								direction="row"
+								justifyContent="space-between"
+								align="center">
+								<Stack direction="row" spacing="12" align="center">
+									<Box>
+										<RouterLink to={routes.courses.list}>
+											<Image src={Logo} alt="Masteriyo Logo" w="120px" />
+										</RouterLink>
+									</Box>
+									<TabList borderBottom="none" bg="white">
+										<Tab sx={tabStyles}>
+											<Icon as={BiBook} sx={iconStyles} />
+											{__('Course', 'masteriyo')}
+										</Tab>
+										<Tab sx={tabStyles}>
+											<Icon as={BiEdit} sx={iconStyles} />
+											{__('Builder', 'masteriyo')}
+										</Tab>
+										<Tab sx={tabStyles}>
+											<Icon as={BiCog} sx={iconStyles} />
+											{__('Settings', 'masteriyo')}
+										</Tab>
+									</TabList>
+								</Stack>
+								<ButtonGroup>
+									<Link href={courseQuery.data?.preview_permalink} isExternal>
+										<Button variant="outline">Preview</Button>
+									</Link>
+
+									<Button
+										colorScheme="blue"
+										onClick={methods.handleSubmit(onSave)}>
+										{__('Save', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
+							</Flex>
+						</Container>
+					</Box>
 					<Container maxW="container.xl">
 						<Stack direction="column" spacing="6">
 							<Heading as="h1" fontSize="x-large">
@@ -101,7 +154,7 @@ const Builder: React.FC = () => {
 							</Heading>
 							<TabPanels>
 								<TabPanel sx={tabPanelStyles}>
-									<EditCourse courseData={courseData} />
+									<EditCourse courseData={courseQuery.data} />
 								</TabPanel>
 								<TabPanel sx={tabPanelStyles}>
 									<SectionBuilder

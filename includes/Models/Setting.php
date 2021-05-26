@@ -1617,61 +1617,61 @@ class Setting extends Model {
 	// General Setting Setter.
 
 	/**
-	* Set option general address line1.
-	*
-	* @since 0.1.0
-	* @param string $address_line1
-	*/
+	 * Set option general address line1.
+	 *
+	 * @since 0.1.0
+	 * @param string $address_line1
+	 */
 	public function set_general_address_line1( $address_line1 ) {
 		$this->set_setting_prop( 'address_line1', 'general', $address_line1 );
 	}
 
 	/**
 	 * Set option general address line2.
-	*
-	* @since 0.1.0
-	* @param string $address_line2
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $address_line2
+	 */
 	public function set_general_address_line2( $address_line2 ) {
 		$this->set_setting_prop( 'address_line2', 'general', $address_line2 );
 	}
 
 	/**
 	 * Set option general city.
-	*
-	* @since 0.1.0
-	* @param string $city
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $city
+	 */
 	public function set_general_city( $city ) {
 		$this->set_setting_prop( 'city', 'general', $city );
 	}
 
 	/**
 	 * Set option general country.
-	*
-	* @since 0.1.0
-	* @param string $country
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $country
+	 */
 	public function set_general_country( $country ) {
 		$this->set_setting_prop( 'country', 'general', $country );
 	}
 
 	/**
 	 * Set option general postcode.
-	*
-	* @since 0.1.0
-	* @param string $postcode
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $postcode
+	 */
 	public function set_general_postcode( $postcode ) {
 		$this->set_setting_prop( 'postcode', 'general', $postcode );
 	}
 
 	/**
 	 * Set option general currency.
-	*
-	* @since 0.1.0
-	* @param string $currency
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $currency
+	 */
 	public function set_general_currency( $currency ) {
 		$this->set_setting_prop( 'currency', 'general', $currency );
 	}
@@ -1730,10 +1730,10 @@ class Setting extends Model {
 
 	/**
 	 * Set option courses add to cart behaviour.
-	*
-	* @since 0.1.0
-	* @param string $add_to_cart_behaviour
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $add_to_cart_behaviour
+	 */
 	public function set_courses_add_to_cart_behaviour( $add_to_cart_behaviour ) {
 		$this->set_setting_prop( 'add_to_cart_behaviour', 'courses', $add_to_cart_behaviour );
 	}
@@ -1917,20 +1917,20 @@ class Setting extends Model {
 
 	/**
 	 * Set option pages pay.
-	*
-	* @since 0.1.0
-	* @param string $pay
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $pay
+	 */
 	public function set_pages_pay( $pay ) {
 		$this->set_setting_prop( 'pay', 'pages', $pay );
 	}
 
 	/**
 	 * Set option pages order received.
-	*
-	* @since 0.1.0
-	* @param string $order_received
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $order_received
+	 */
 	public function set_pages_order_received( $order_received ) {
 		$this->set_setting_prop( 'order_received', 'pages', $order_received );
 	}
@@ -1969,70 +1969,70 @@ class Setting extends Model {
 
 	/**
 	 * Set option pages orders.
-	*
-	* @since 0.1.0
-	* @param string $orders
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $orders
+	 */
 	public function set_pages_orders( $orders ) {
 		$this->set_setting_prop( 'orders', 'pages', $orders );
 	}
 
 	/**
 	 * Set option pages view order.
-	*
-	* @since 0.1.0
-	* @param string $view_order
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $view_order
+	 */
 	public function set_pages_view_order( $view_order ) {
 		$this->set_setting_prop( 'view_order', 'pages', $view_order );
 	}
 
 	/**
 	 * Set option pages my courses.
-	*
-	* @since 0.1.0
-	* @param string $my_courses
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $my_courses
+	 */
 	public function set_pages_my_courses( $my_courses ) {
 		$this->set_setting_prop( 'my_courses', 'pages', $my_courses );
 	}
 
 	/**
 	 * Set option pages edit account.
-	*
-	* @since 0.1.0
-	* @param string $edit_account
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $edit_account
+	 */
 	public function set_pages_edit_account( $edit_account ) {
 		$this->set_setting_prop( 'edit_account', 'pages', $edit_account );
 	}
 
 	/**
 	 * Set option pages payment methods.
-	*
-	* @since 0.1.0
-	* @param string $payment_methods
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $payment_methods
+	 */
 	public function set_pages_payment_methods( $payment_methods ) {
 		$this->set_setting_prop( 'payment_methods', 'pages', $payment_methods );
 	}
 
 	/**
 	 * Set option pages lost password.
-	*
-	* @since 0.1.0
-	* @param string $lost_password
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $lost_password
+	 */
 	public function set_pages_lost_password( $lost_password ) {
 		$this->set_setting_prop( 'lost_password', 'pages', $lost_password );
 	}
 
 	/**
 	 * Set option pages logout.
-	*
-	* @since 0.1.0
-	* @param string $logout
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $logout
+	 */
 	public function set_pages_logout( $logout ) {
 		$this->set_setting_prop( 'logout', 'pages', $logout );
 	}
@@ -2335,10 +2335,10 @@ class Setting extends Model {
 
 	/**
 	 * Set general email footer text.
-	*
-	* @since 0.1.0
-	* @param string $footer
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $footer
+	 */
 	public function set_emails_general_footer_text( $footer ) {
 		$this->set_setting_prop( 'general_footer_text', 'emails', $footer );
 	}
@@ -2347,50 +2347,50 @@ class Setting extends Model {
 
 	/**
 	 * Enable/Disable new order email.
-	*
-	* @since 0.1.0
-	* @param boolean $enable
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param boolean $enable
+	 */
 	public function set_emails_new_order_enable( $enable ) {
 		$this->set_setting_prop( 'new_order_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
 	 * Set new order recipients.
-	*
-	* @since 0.1.0
-	* @param string[] $recipients
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string[] $recipients
+	 */
 	public function set_emails_new_order_recipients( $recipients ) {
 		$this->set_setting_prop( 'new_order_recipients', 'emails', maybe_unserialize( $recipients ) );
 	}
 
 	/**
 	 * Set new order email subject.
-	*
-	* @since 0.1.0
-	* @param string $subject
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $subject
+	 */
 	public function set_emails_new_order_subject( $subject ) {
 		$this->set_setting_prop( 'new_order_subject', 'emails', $subject );
 	}
 
 	/**
 	 * Set new order email heading.
-	*
-	* @since 0.1.0
-	* @param string $heading
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $heading
+	 */
 	public function set_emails_new_order_heading( $heading ) {
 		$this->set_setting_prop( 'new_order_heading', 'emails', $heading );
 	}
 
 	/**
 	 * Set new order email content.
-	*
-	* @since 0.1.0
-	* @param string $content
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $content
+	 */
 	public function set_emails_new_order_content( $content ) {
 		$this->set_setting_prop( 'new_order_content', 'emails', $content );
 	}
@@ -2399,40 +2399,40 @@ class Setting extends Model {
 
 	/**
 	 * Enable/Disable order processing email.
-	*
-	* @since 0.1.0
-	* @param boolean $enable
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param boolean $enable
+	 */
 	public function set_emails_processing_order_enable( $enable ) {
 		$this->set_setting_prop( 'processing_order_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
 	 * Set order processing email subject.
-	*
-	* @since 0.1.0
-	* @param string $subject
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $subject
+	 */
 	public function set_emails_processing_order_subject( $subject ) {
 		$this->set_setting_prop( 'processing_order_subject', 'emails', $subject );
 	}
 
 	/**
 	 * Set order processing email heading.
-	*
-	* @since 0.1.0
-	* @param string $heading
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $heading
+	 */
 	public function set_emails_processing_order_heading( $heading ) {
 		$this->set_setting_prop( 'processing_order_heading', 'emails', $heading );
 	}
 
 	/**
 	 * Set order processing email content.
-	*
-	* @since 0.1.0
-	* @param string $content
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $content
+	 */
 	public function set_emails_processing_order_content( $content ) {
 		$this->set_setting_prop( 'processing_order_content', 'emails', $content );
 	}
@@ -2441,40 +2441,40 @@ class Setting extends Model {
 
 	/**
 	 * Enable/Disable order completed email.
-	*
-	* @since 0.1.0
-	* @param boolean $enable
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param boolean $enable
+	 */
 	public function set_emails_completed_order_enable( $enable ) {
 		$this->set_setting_prop( 'completed_order_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
 	 * Set order completed email subject.
-	*
-	* @since 0.1.0
-	* @param string $subject
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $subject
+	 */
 	public function set_emails_completed_order_subject( $subject ) {
 		$this->set_setting_prop( 'completed_order_subject', 'emails', $subject );
 	}
 
 	/**
 	 * Set order completed email heading.
-	*
-	* @since 0.1.0
-	* @param string $heading
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $heading
+	 */
 	public function set_emails_completed_order_heading( $heading ) {
 		$this->set_setting_prop( 'completed_order_heading', 'emails', $heading );
 	}
 
 	/**
 	 * Set order completed email content.
-	*
-	* @since 0.1.0
-	* @param string $content
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $content
+	 */
 	public function set_emails_completed_order_content( $content ) {
 		$this->set_setting_prop( 'completed_order_content', 'emails', $content );
 	}
@@ -2483,40 +2483,40 @@ class Setting extends Model {
 
 	/**
 	 * Enable/Dsiable order onhold email.
-	*
-	* @since 0.1.0
-	* @param boolean $enable
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param boolean $enable
+	 */
 	public function set_emails_onhold_order_enable( $enable ) {
 		$this->set_setting_prop( 'onhold_order_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
 	 * Set order onhold email subject.
-	*
-	* @since 0.1.0
-	* @param string $subject
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $subject
+	 */
 	public function set_emails_onhold_order_subject( $subject ) {
 		$this->set_setting_prop( 'onhold_order_subject', 'emails', $subject );
 	}
 
 	/**
 	 * Set order onhold email heading
-	*
-	* @since 0.1.0
-	* @param string $heading
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $heading
+	 */
 	public function set_emails_onhold_order_heading( $heading ) {
 		$this->set_setting_prop( 'onhold_order_heading', 'emails', $heading );
 	}
 
 	/**
 	 * Set order onhold email content.
-	*
-	* @since 0.1.0
-	* @param string $content
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $content
+	 */
 	public function set_emails_onhold_order_content( $content ) {
 		$this->set_setting_prop( 'onhold_order_content', 'emails', $content );
 	}
@@ -2525,50 +2525,50 @@ class Setting extends Model {
 
 	/**
 	 * Enable/Dsiable order cancelled email
-	*
-	* @since 0.1.0
-	* @param boolean $enable
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param boolean $enable
+	 */
 	public function set_emails_cancelled_order_enable( $enable ) {
 		$this->set_setting_prop( 'cancelled_order_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
 	 * Set order cancelled email recipient.
-	*
-	* @since 0.1.0
-	* @param string[] $recipients
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string[] $recipients
+	 */
 	public function set_emails_cancelled_order_recipients( $recipients ) {
 		$this->set_setting_prop( 'cancelled_order_recipients', 'emails', maybe_unserialize( $recipients ) );
 	}
 
 	/**
 	 * Set order cancelled email subject.
-	*
-	* @since 0.1.0
-	* @param string $subject
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $subject
+	 */
 	public function set_emails_cancelled_order_subject( $subject ) {
 		$this->set_setting_prop( 'cancelled_order_subject', 'emails', $subject );
 	}
 
 	/**
 	 * Set order cancelled email heading.
-	*
-	* @since 0.1.0
-	* @param string $heading
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $heading
+	 */
 	public function set_emails_cancelled_order_heading( $heading ) {
 		$this->set_setting_prop( 'cancelled_order_heading', 'emails', $heading );
 	}
 
 	/**
 	 * Set order cancelled email content.
-	*
-	* @since 0.1.0
-	* @param string $content
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $content
+	 */
 	public function set_emails_cancelled_order_content( $content ) {
 		$this->set_setting_prop( 'cancelled_order_content', 'emails', $content );
 	}
@@ -2577,40 +2577,40 @@ class Setting extends Model {
 
 	/**
 	 * Enable/Disable course enrolled email.
-	*
-	* @since 0.1.0
-	* @param boolean $enable
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param boolean $enable
+	 */
 	public function set_emails_enrolled_course_enable( $enable ) {
 		$this->set_setting_prop( 'enrolled_course_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
 	 * Set course enrolled email subject.
-	*
-	* @since 0.1.0
-	* @param string $subject
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $subject
+	 */
 	public function set_emails_enrolled_course_subject( $subject ) {
 		$this->set_setting_prop( 'enrolled_course_subject', 'emails', $subject );
 	}
 
 	/**
 	 * Set course enrolled email heading.
-	*
-	* @since 0.1.0
-	* @param string $heading
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $heading
+	 */
 	public function set_emails_enrolled_course_heading( $heading ) {
 		$this->set_setting_prop( 'enrolled_course_heading', 'emails', $heading );
 	}
 
 	/**
 	 * Set course enrolled email content.
-	*
-	* @since 0.1.0
-	* @param string $content
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $content
+	 */
 	public function set_emails_enrolled_course_content( $content ) {
 		$this->set_setting_prop( 'enrolled_course_content', 'emails', $content );
 	}
@@ -2619,40 +2619,40 @@ class Setting extends Model {
 
 	/**
 	 * Enable/Disable course completed email.
-	*
-	* @since 0.1.0
-	* @param boolean $enable
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param boolean $enable
+	 */
 	public function set_emails_completed_course_enable( $enable ) {
 		$this->set_setting_prop( 'completed_course_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
 	 * Set completed course email subject.
-	*
-	* @since 0.1.0
-	* @param string $subject
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $subject
+	 */
 	public function set_emails_completed_course_subject( $subject ) {
 		$this->set_setting_prop( 'completed_course_subject', 'emails', $subject );
 	}
 
 	/**
 	 * Set completed course email heading.
-	*
-	* @since 0.1.0
-	* @param string $heading
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $heading
+	 */
 	public function set_emails_completed_course_heading( $heading ) {
 		$this->set_setting_prop( 'completed_course_heading', 'emails', $heading );
 	}
 
 	/**
 	 * Set emails completed course content.
-	*
-	* @since 0.1.0
-	* @param string $content
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $content
+	 */
 	public function set_emails_completed_course_content( $content ) {
 		$this->set_setting_prop( 'completed_course_content', 'emails', $content );
 	}
@@ -2661,40 +2661,40 @@ class Setting extends Model {
 
 	/**
 	 * Enable/disable becone an instructor email.
-	*
-	* @since 0.1.0
-	* @param boolean $enable
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param boolean $enable
+	 */
 	public function set_emails_become_an_instructor_enable( $enable ) {
 		$this->set_setting_prop( 'become_an_instructor_enable', 'emails', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
 	 * Set become an instructor email subject.
-	*
-	* @since 0.1.0
-	* @param string $subject
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $subject
+	 */
 	public function set_emails_become_an_instructor_subject( $subject ) {
 		$this->set_setting_prop( 'become_an_instructor_subject', 'emails', $subject );
 	}
 
 	/**
 	 * Set become an insctuctor email heading.
-	*
-	* @since 0.1.0
-	* @param string $heading
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $heading
+	 */
 	public function set_emails_become_an_instructor_heading( $heading ) {
 		$this->set_setting_prop( 'become_an_instructor_heading', 'emails', $heading );
 	}
 
 	/**
 	 * Set become an instructor email content.
-	*
-	* @since 0.1.0
-	* @param string $content
-	*/
+	 *
+	 * @since 0.1.0
+	 * @param string $content
+	 */
 	public function set_emails_become_an_instructor_content( $content ) {
 		$this->set_setting_prop( 'become_an_instructor_content', 'emails', $content );
 	}

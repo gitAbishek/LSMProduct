@@ -31,6 +31,6 @@ export type CourseDataMap = {
 	sale_price: number;
 	categories: string[];
 	tags: string[];
-	difficulties: string[];
+	difficulty: string;
 	_links: CourseLinksMap;
 };

@@ -29,6 +29,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
+import { mergeDeep } from '../../utils/mergeDeep';
 import EditCourse from '../courses/EditCourse';
 import SectionBuilder from '../sections/SectionBuilder';
 
@@ -93,9 +94,20 @@ const Builder: React.FC = () => {
 		}
 	);
 
-	const onSave = (data: any) => {
+	const onSave = (data: CourseDataMap) => {
 		updateBuilder.mutate(builderData);
-		console.log(data);
+		const newData: any = {
+			...(data.categories && {
+				categories: data.categories.map((category: any) => ({
+					id: category.value,
+				})),
+			}),
+			...(data.regular_price && {
+				regular_price: data.regular_price.toString(),
+			}),
+		};
+
+		updateCourse.mutate(mergeDeep(data, newData));
 	};
 
 	if (courseQuery.isLoading) {
@@ -140,7 +152,10 @@ const Builder: React.FC = () => {
 
 									<Button
 										colorScheme="blue"
-										onClick={methods.handleSubmit(onSave)}>
+										onClick={methods.handleSubmit(onSave)}
+										isLoading={
+											updateCourse.isLoading || updateBuilder.isLoading
+										}>
 										{__('Save', 'masteriyo')}
 									</Button>
 								</ButtonGroup>

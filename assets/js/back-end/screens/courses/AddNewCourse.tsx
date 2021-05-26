@@ -97,7 +97,7 @@ const AddNewCourse: React.FC = () => {
 											<Icon as={BiBook} sx={iconStyles} />
 											{__('Course', 'masteriyo')}
 										</Tab>
-										<Tab sx={tabStyles}>
+										<Tab sx={tabStyles} isDisabled>
 											<Icon as={BiEdit} sx={iconStyles} />
 											{__('Builder', 'masteriyo')}
 										</Tab>

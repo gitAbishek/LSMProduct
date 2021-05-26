@@ -12,15 +12,23 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 
-import CoverImg from '../../../../img/onboard-finish-cover.png';
+import { onboardFinishCover } from '../../components/constants/images';
 
-const Welcome: React.FC = () => {
+interface Props {
+	dashboardURL: string;
+	siteURL: string;
+	pageBuilderURL: string;
+}
+
+const Welcome: React.FC<Props> = (props) => {
+	const { dashboardURL, siteURL, pageBuilderURL } = props;
+
 	return (
 		<Box rounded="3px">
 			<Box bg="white" p="30" shadow="box">
 				<Stack direction="column" spacing="8">
 					<Box align="center">
-						<Image src={CoverImg} alt="Masteriyo Logo" />
+						<Image src={onboardFinishCover} alt="Masteriyo Logo" />
 					</Box>
 
 					<Stack spacing={6} align="center">
@@ -40,13 +48,15 @@ const Welcome: React.FC = () => {
 							textDecoration="underline"
 							fontSize="12px"
 							color="#78A6FF"
-							href="#">
+							href={siteURL ? siteURL : '#'}>
 							{__('Visit your site', 'masteriyo')}
 						</Link>
 					</Stack>
 					<Flex justify="space-between" align="center">
 						<Button rounded="3px" colorScheme="blue" variant="outline">
-							{__('Back to dashboard', 'masteriyo')}
+							<Link href={dashboardURL ? dashboardURL : '#'}>
+								{__('Back to dashboard', 'masteriyo')}
+							</Link>
 						</Button>
 
 						<ButtonGroup>
@@ -54,7 +64,9 @@ const Welcome: React.FC = () => {
 								{__('Install sample course', 'masteriyo')}
 							</Button>
 							<Button rounded="3px" colorScheme="blue">
-								{__('Create a new course', 'masteriyo')}
+								<Link href={pageBuilderURL ? pageBuilderURL : '#'}>
+									{__('Create a new course', 'masteriyo')}
+								</Link>
 							</Button>
 						</ButtonGroup>
 					</Flex>

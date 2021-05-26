@@ -75,16 +75,12 @@ const CourseList: React.FC<Props> = (props) => {
 		deleteCourse.mutate(id);
 	};
 
-	const onEditPress = () => {
-		history.push(routes.courses.edit.replace(':courseId', id.toString()));
-	};
-
 	return (
 		<Tr>
 			<Td>
 				<Link
 					as={RouterLink}
-					to={routes.courses.edit.replace(':courseId', id.toString())}
+					to={routes.builder.replace(':courseId', id.toString())}
 					fontWeight="semibold"
 					_hover={{ color: 'blue.500' }}>
 					{name}
@@ -116,13 +112,11 @@ const CourseList: React.FC<Props> = (props) => {
 			</Td>
 			<Td>
 				<ButtonGroup>
-					<Button
-						leftIcon={<BiEdit />}
-						colorScheme="blue"
-						size="sm"
-						onClick={() => onEditPress()}>
-						{__('Edit')}
-					</Button>
+					<RouterLink to={routes.builder.replace(':courseId', id.toString())}>
+						<Button leftIcon={<BiEdit />} colorScheme="blue" size="sm">
+							{__('Edit')}
+						</Button>
+					</RouterLink>
 					<Menu placement="bottom-end">
 						<MenuButton
 							as={IconButton}

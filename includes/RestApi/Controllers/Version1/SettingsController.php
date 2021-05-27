@@ -117,7 +117,7 @@ class SettingsController extends CrudController {
 			);
 		}
 
-		return current_user_can( 'manage_options' ) || current_user_can( 'masteriyo_settings' );
+		return current_user_can( 'manage_options' ) || current_user_can( 'manage_masteriyo_settings' );
 	}
 
 	/**
@@ -136,7 +136,7 @@ class SettingsController extends CrudController {
 			);
 		}
 
-		return current_user_can( 'manage_options' ) || current_user_can( 'masteriyo_settings' );
+		return current_user_can( 'manage_options' ) || current_user_can( 'manage_masteriyo_settings' );
 	}
 
 	/**
@@ -155,7 +155,7 @@ class SettingsController extends CrudController {
 			);
 		}
 
-		return current_user_can( 'manage_options' ) || current_user_can( 'masteriyo_settings' );
+		return current_user_can( 'manage_options' ) || current_user_can( 'manage_masteriyo_settings' );
 	}
 
 	/**
@@ -817,7 +817,7 @@ class SettingsController extends CrudController {
 	 * @return bool
 	 */
 	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
-		return current_user_can( 'manage_options' ) || current_user_can( 'masteriyo_settings' );
+		return current_user_can( 'manage_options' ) || current_user_can( 'manage_masteriyo_settings' );
 	}
 
 	/**

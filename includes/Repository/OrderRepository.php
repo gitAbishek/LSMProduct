@@ -430,7 +430,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 * @param string $type Order item type. Default null.
 	 */
 	public function delete_items( $order, $type = null ) {
-		$order_items_repo = masteriyo( 'order-item.store' );
+		$order_items_repo = masteriyo( 'order.item.store' );
 
 		$a = 1;
 

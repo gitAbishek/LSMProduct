@@ -74,8 +74,8 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		$order_item->set_props(
 			array(
 				'order_id'        => $order_item_obj->order_id,
-				'order_item_name' => $order_item_obj->name,
-				'order_item_type' => $order_item_obj->type,
+				'order_item_name' => $order_item_obj->order_item_name,
+				'order_item_type' => $order_item_obj->order_item_type,
 			)
 		);
 
@@ -211,17 +211,6 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 				$order_item->{$function}( $meta_values[ '_' . $key ] );
 			}
 		}
-	}
-
-	/**
-	 * Get table name.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return string
-	 */
-	public function get_table_name() {
-		return "{$GLOBALS['wpdb']->prefix}masteriyo_order_items";
 	}
 
 	/**

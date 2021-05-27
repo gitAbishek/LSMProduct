@@ -94,7 +94,7 @@ class Capabilities {
 				'quiz'              => array( 'publish', 'read', 'edit', 'delete', 'delete_others' ),
 				'question'          => array( 'publish', 'read', 'read_others', 'edit', 'delete', 'delete_others' ),
 				'order'             => array( 'read', 'read_others', 'edit', 'edit_others', 'delete', 'delete_others' ),
-				'masteriyo_setting' => array( 'manage_singular' ),
+				'masteriyo_setting' => array( 'manage' ),
 				'course_review'     => array( 'read', 'edit_plural', 'edit_others', 'delete_plural', 'delete_others' ),
 				'users'             => array( 'read' ),
 			)
@@ -128,7 +128,7 @@ class Capabilities {
 				'quiz'              => array( 'read', 'delete', 'delete_others' ),
 				'question'          => array( 'read', 'delete', 'delete_others' ),
 				'order'             => array( 'read', 'read_others', 'edit', 'edit_others', 'delete', 'delete_others' ),
-				'masteriyo_setting' => array( 'manage_singular' ),
+				'masteriyo_setting' => array( 'manage' ),
 				'course_review'     => array( 'read', 'edit_plural', 'edit_others', 'delete_plural', 'delete_others' ),
 				'users'             => array( 'create', 'read', 'edit', 'delete' ),
 			)
@@ -157,7 +157,7 @@ class Capabilities {
 			'question'          => array( 'question', 'questions' ),
 			'quiz'              => array( 'quiz', 'quizzes' ),
 			'order'             => array( 'order', 'orders' ),
-			'masteriyo_setting' => array( 'masteriyo_setting' ),
+			'masteriyo_setting' => array( 'masteriyo_setting', 'masteriyo_settings' ),
 			'course_review'     => array( 'course_review', 'course_reviews' ),
 			'users'             => array( 'user', 'users' ),
 		);

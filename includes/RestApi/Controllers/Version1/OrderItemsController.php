@@ -176,11 +176,11 @@ class OrderItemsController extends PostsController {
 	 */
 	protected function get_object( $id ) {
 		try {
-			$id         = $id instanceof \stdClass ? $id->id : $id;
+			$id         = $id instanceof \stdClass ? $id->order_item_id : $id;
 			$id         = $id instanceof OrderItem ? $id->get_id() : $id;
-			$order_item = masteriyo( 'order.item' );
+			$order_item = masteriyo( 'order.item.course' );
 			$order_item->set_id( $id );
-			$order_item_repo = masteriyo( 'order-item.store' );
+			$order_item_repo = masteriyo( 'order.item.course.store' );
 			$order_item_repo->read( $order_item );
 		} catch ( \Exception $e ) {
 			return false;
@@ -360,11 +360,11 @@ class OrderItemsController extends PostsController {
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id         = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$order_item = masteriyo( 'order.item' );
+		$order_item = masteriyo( 'order.item.course' );
 
 		if ( 0 !== $id ) {
 			$order_item->set_id( $id );
-			$order_item_repo = masteriyo( 'order-item.store' );
+			$order_item_repo = masteriyo( 'order.item.store' );
 			$order_item_repo->read( $order_item );
 		}
 
@@ -428,7 +428,7 @@ class OrderItemsController extends PostsController {
 	protected function get_objects( $query_args ) {
 		global $wpdb;
 
-		$table_name = masteriyo( 'order-item.store' )->get_table_name();
+		$table_name = masteriyo( 'order.item.store' )->get_table_name();
 		$order_id   = $query_args['order_id'];
 		$offset     = 0;
 		$per_page   = 10;
@@ -457,7 +457,7 @@ class OrderItemsController extends PostsController {
 		 */
 		$total_items = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(id) FROM {$table_name}
+				"SELECT COUNT(order_item_id) FROM {$table_name}
 				WHERE order_id = %d",
 				$order_id
 			)
@@ -547,7 +547,7 @@ class OrderItemsController extends PostsController {
 			return true;
 		}
 
-		$order_id = isset( $_GET['order_id'] ) ? absint( $_GET['order_id'] ) : 0;
+		$order_id = isset( $request['order_id'] ) ? absint( $request['order_id'] ) : 0;
 		$order    = masteriyo_get_order( $order_id );
 
 		if ( ! is_object( $order ) ) {

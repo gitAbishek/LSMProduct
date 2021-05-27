@@ -12,6 +12,7 @@ use ThemeGrill\Masteriyo\Repository\OrderRepository;
 use ThemeGrill\Masteriyo\Models\Order\OrderItemCourse;
 use ThemeGrill\Masteriyo\Repository\OrderItemRepository;
 use League\Container\ServiceProvider\AbstractServiceProvider;
+use ThemeGrill\Masteriyo\Models\Order\OrderItem;
 use ThemeGrill\Masteriyo\Repository\OrderItemCourseRepository;
 use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrdersController;
 use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrderItemsController;
@@ -33,12 +34,12 @@ class OrderServiceProvider extends AbstractServiceProvider {
 		'order.store',
 		'order.rest',
 		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrdersController',
-		'order-item',
-		'order-item.store',
-		'order-item.rest',
+		'order.item',
+		'order.item.store',
+		'order.item.rest',
 		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrderItemsController',
-		'order-item.course',
-		'order-item.course.store',
+		'order.item.course',
+		'order.item.course.store',
 	);
 
 	/**
@@ -61,17 +62,20 @@ class OrderServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'order', Order::class )
 			->addArgument( 'order.store' );
 
-		$this->getContainer()->add( 'order-item.store', OrderItemRepository::class );
+		$this->getContainer()->add( 'order.item.store', OrderItemRepository::class );
 
-		$this->getContainer()->add( 'order-item.course.store', OrderItemCourseRepository::class );
+		$this->getContainer()->add( 'order.item.course.store', OrderItemCourseRepository::class );
 
-		$this->getContainer()->add( 'order-item.rest', OrderItemsController::class )
+		$this->getContainer()->add( 'order.item.rest', OrderItemsController::class )
 			->addArgument( 'permission' );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrderItemsController' )
 			->addArgument( 'permission' );
 
-		$this->getContainer()->add( 'order-item.course', OrderItemCourse::class )
-			->addArgument( 'order-item.course.store' );
+		$this->getContainer()->add( 'order.item', OrderItem::class )
+			->addArgument( 'order.item.store' );
+
+		$this->getContainer()->add( 'order.item.course', OrderItemCourse::class )
+			->addArgument( 'order.item.course.store' );
 	}
 }

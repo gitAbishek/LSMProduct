@@ -6,6 +6,7 @@ import ReactSelect, {
 	Props as ReactSelectProps,
 	components,
 } from 'react-select';
+import SingleValue from 'react-select/src/components/SingleValue';
 
 import {
 	FillInTheBlanks,
@@ -23,7 +24,7 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 	const customStyles = {
 		control: (provided: any, state: any) => ({
 			...provided,
-			height: BaseLine * 6,
+			height: '40px',
 			boxShadow: `0 1px 0 ${colors.SHADOW}`,
 			borderRadius: defaultStyle.borderRadius,
 			borderColor: state.isDisabled
@@ -31,7 +32,7 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 				: state.isFocused
 				? colors.PRIMARY
 				: colors.BORDER,
-			paddingLeft: BaseLine,
+			paddingLeft: '4px',
 			transition: 'all 0.35s ease-in-out',
 			backgroundColor: state.isDisabled
 				? colors.LIGHT_GRAY
@@ -94,12 +95,23 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 		}
 	};
 
+	const SingleValue = (singleValueProps: any) => {
+		return (
+			<components.SingleValue {...singleValueProps}>
+				<Stack direction="row" spacing="2">
+					{singleValueProps.data.icon && renderIcon(singleValueProps.data.icon)}
+					<span>{singleValueProps.data.label}</span>
+				</Stack>
+			</components.SingleValue>
+		);
+	};
+
 	const Option = (optionProps: any) => {
 		return (
 			<components.Option {...optionProps}>
 				<Stack direction="row" spacing="2">
 					{optionProps.data.icon && renderIcon(optionProps.data.icon)}
-					<span>{optionProps.label} yo yo</span>
+					<span>{optionProps.label}</span>
 				</Stack>
 			</components.Option>
 		);
@@ -109,7 +121,7 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 		<ReactSelect
 			{...props}
 			styles={customStyles}
-			components={{ Option: Option }}
+			components={{ Option: Option, SingleValue: SingleValue }}
 		/>
 	);
 });

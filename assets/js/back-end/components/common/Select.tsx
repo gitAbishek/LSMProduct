@@ -95,7 +95,6 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 	};
 
 	const Option = (optionProps: any) => {
-		console.log(optionProps);
 		return (
 			<components.Option {...optionProps}>
 				<Stack direction="row" spacing="2">

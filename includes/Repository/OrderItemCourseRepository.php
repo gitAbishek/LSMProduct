@@ -336,7 +336,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		);
 		$where        = array();
 		$where_format = array();
-		$object_type  = masteriyo( 'order.item' )->get_object_type();
+		$object_type  = masteriyo( 'order-item' )->get_object_type();
 		$table_name   = $this->get_table_name();
 
 		/**

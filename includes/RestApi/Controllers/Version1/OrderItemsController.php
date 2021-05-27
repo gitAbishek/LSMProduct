@@ -178,9 +178,9 @@ class OrderItemsController extends PostsController {
 		try {
 			$id         = $id instanceof \stdClass ? $id->order_item_id : $id;
 			$id         = $id instanceof OrderItem ? $id->get_id() : $id;
-			$order_item = masteriyo( 'order.item.course' );
+			$order_item = masteriyo( 'order-item.course' );
 			$order_item->set_id( $id );
-			$order_item_repo = masteriyo( 'order.item.course.store' );
+			$order_item_repo = masteriyo( 'order-item.course.store' );
 			$order_item_repo->read( $order_item );
 		} catch ( \Exception $e ) {
 			return false;
@@ -360,11 +360,11 @@ class OrderItemsController extends PostsController {
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id         = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$order_item = masteriyo( 'order.item.course' );
+		$order_item = masteriyo( 'order-item.course' );
 
 		if ( 0 !== $id ) {
 			$order_item->set_id( $id );
-			$order_item_repo = masteriyo( 'order.item.store' );
+			$order_item_repo = masteriyo( 'order-item.store' );
 			$order_item_repo->read( $order_item );
 		}
 
@@ -428,7 +428,7 @@ class OrderItemsController extends PostsController {
 	protected function get_objects( $query_args ) {
 		global $wpdb;
 
-		$table_name = masteriyo( 'order.item.store' )->get_table_name();
+		$table_name = masteriyo( 'order-item.store' )->get_table_name();
 		$order_id   = $query_args['order_id'];
 		$offset     = 0;
 		$per_page   = 10;

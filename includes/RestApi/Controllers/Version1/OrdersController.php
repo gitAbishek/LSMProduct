@@ -1111,11 +1111,11 @@ class OrdersController extends PostsController {
 	 */
 	protected function prepare_course_lines( $posted, $action = 'create', $item = null ) {
 		if ( is_null( $item ) ) {
-			$item = masteriyo( 'order.item.course' );
+			$item = masteriyo( 'order-item.course' );
 			if ( ! empty( $posted['id'] ) ) {
 				$item->set_id( $posted['id'] );
 
-				masteriyo( 'order.item.course.store' )->read( $item );
+				masteriyo( 'order-item.course.store' )->read( $item );
 			}
 		}
 

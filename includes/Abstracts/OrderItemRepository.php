@@ -221,7 +221,7 @@ class OrderItemRepository extends AbstractRepository {
 		$type = empty( $type ) ? 'course' : $type;
 
 		try {
-			$item_obj = masteriyo( "order.item.{$type}" );
+			$item_obj = masteriyo( "order-item.{$type}" );
 			$item_obj->set_id( $item->order_item_id );
 			$item_obj->set_props(
 				array(

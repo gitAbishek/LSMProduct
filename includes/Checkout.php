@@ -676,7 +676,7 @@ class Checkout {
 	 */
 	public function create_order_course_items( &$order ) {
 		foreach ( $this->cart->get_cart() as $cart_item_key => $values ) {
-			$item   = apply_filters( 'masteriyo_checkout_create_order_line_item_object', masteriyo( 'order.item.course' ), $cart_item_key, $values, $order );
+			$item   = apply_filters( 'masteriyo_checkout_create_order_line_item_object', masteriyo( 'order-item.course' ), $cart_item_key, $values, $order );
 			$course = $values['data'];
 
 			$item->set_props(

@@ -66,6 +66,7 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 		menu: (provided: any) => ({
 			...provided,
 			borderRadius: defaultStyle,
+			zIndex: '3',
 		}),
 	};
 
@@ -109,7 +110,6 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 		<ReactSelect
 			{...props}
 			styles={customStyles}
-			menuIsOpen
 			components={{ Option: Option }}
 		/>
 	);

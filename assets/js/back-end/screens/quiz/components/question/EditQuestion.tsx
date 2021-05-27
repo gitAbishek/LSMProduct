@@ -33,6 +33,24 @@ const EditQuestion: React.FC<Props> = (props) => {
 		{ value: 'short-answer', label: 'Short Answer', icon: 'OpenEndedEssay' },
 	];
 
+	const getQuestionTypeDefaultValue = () => {
+		switch (questionData.type) {
+			case 'true-false':
+				return questionType[0];
+			case 'single-choice':
+				return questionType[1];
+			case 'multiple-choice':
+				return questionType[2];
+			case 'short-answer':
+				return questionType[3];
+
+			default:
+				return;
+		}
+	};
+
+	console.log(questionData.type);
+
 	const onQuestionTypeChange = (questionType: {
 		value: string;
 		label: string;
@@ -73,7 +91,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 				<FormControl>
 					<FormLabel>{__('Question Type', 'masteriyo')}</FormLabel>
 					<Controller
-						defaultValue={questionData.type}
+						defaultValue={getQuestionTypeDefaultValue()}
 						render={({ field: { onChange, value } }) => (
 							<Select
 								value={value}

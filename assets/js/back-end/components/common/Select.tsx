@@ -60,7 +60,7 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 			backgroundColor: state.isSelected
 				? colors.PRIMARY
 				: state.isFocused
-				? colors.PRIMARY
+				? '#ccddff'
 				: 'transparent',
 		}),
 

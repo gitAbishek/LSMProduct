@@ -62,7 +62,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 					</FormErrorMessage>
 				</FormControl>
 				<FormControl>
-					<FormLabel>{__('Question Description', 'masteriyo')}</FormLabel>
+					<FormLabel>{__('Question Type', 'masteriyo')}</FormLabel>
 					<Controller
 						defaultValue={questionData.type}
 						render={({ field }) => (

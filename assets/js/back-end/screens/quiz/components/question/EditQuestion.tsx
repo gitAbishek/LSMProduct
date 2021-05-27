@@ -10,15 +10,16 @@ import {
 import { __ } from '@wordpress/i18n';
 import Editor from 'Components/common/Editor';
 import Select from 'Components/common/Select';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 interface Props {
 	questionData: any;
+	setQuestionType: Dispatch<SetStateAction<string>>;
 }
 
 const EditQuestion: React.FC<Props> = (props) => {
-	const { questionData } = props;
+	const { questionData, setQuestionType } = props;
 	const {
 		register,
 		control,
@@ -31,6 +32,14 @@ const EditQuestion: React.FC<Props> = (props) => {
 		{ value: 'multiple-choice', label: 'Multi Choice', icon: 'MultipleChoice' },
 		{ value: 'short-answer', label: 'Short Answer', icon: 'OpenEndedEssay' },
 	];
+
+	const onQuestionTypeChange = (questionType: {
+		value: string;
+		label: string;
+		icon: string;
+	}) => {
+		setQuestionType(questionType.value);
+	};
 
 	return (
 		<Stack direction="column" spacing="6">
@@ -65,11 +74,14 @@ const EditQuestion: React.FC<Props> = (props) => {
 					<FormLabel>{__('Question Type', 'masteriyo')}</FormLabel>
 					<Controller
 						defaultValue={questionData.type}
-						render={({ field }) => (
+						render={({ field: { onChange, value } }) => (
 							<Select
-								{...field}
-								closeMenuOnSelect={false}
+								value={value}
 								options={questionType}
+								onChange={(data: any) => {
+									onChange(data);
+									onQuestionTypeChange(data);
+								}}
 							/>
 						)}
 						control={control}

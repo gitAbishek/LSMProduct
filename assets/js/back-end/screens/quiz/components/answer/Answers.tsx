@@ -22,10 +22,11 @@ import { Sortable } from '../../../../assets/icons';
 
 interface Props {
 	questionData: any;
+	questionType: string;
 }
 
 const Answers: React.FC<Props> = (props) => {
-	const { questionData } = props;
+	const { questionData, questionType } = props;
 	const { register, setValue } = useFormContext();
 	const [answers, setAnswers] = useState<any>(questionData.answers);
 

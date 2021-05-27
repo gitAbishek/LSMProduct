@@ -41,6 +41,7 @@ const Question: React.FC<Props> = (props) => {
 	const methods = useForm();
 	const history = useHistory();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const [questionType, setQuestionType] = useState('true-false');
 	const questionAPI = new API(urls.questions);
 	const cancelRef = useRef<any>();
 	const queryClient = useQueryClient();
@@ -152,8 +153,14 @@ const Question: React.FC<Props> = (props) => {
 					<FormProvider {...methods}>
 						<form onSubmit={methods.handleSubmit(onSubmit)}>
 							<Stack direction="column" spacing="8">
-								<EditQuestion questionData={questionData} />
-								<Answers questionData={questionData} />
+								<EditQuestion
+									questionData={questionData}
+									setQuestionType={setQuestionType}
+								/>
+								<Answers
+									questionData={questionData}
+									questionType={questionType}
+								/>
 								<Divider />
 								<ButtonGroup>
 									<Button

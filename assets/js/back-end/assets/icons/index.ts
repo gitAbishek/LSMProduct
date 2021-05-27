@@ -1,10 +1,8 @@
-export { default as DotsVertical } from './dots-vertical.svg';
-export { default as Plus } from './plus.svg';
 export { default as Sortable } from './sortable.svg';
-export { default as Trash } from './trash.svg';
-export { default as AlignLeft } from './align-left.svg';
-export { default as Timer } from './timer.svg';
-export { default as Edit } from './edit.svg';
-export { default as Show } from './show.svg';
-export { default as Cog } from './cog.svg';
-export { default as Book } from './book.svg';
+export { default as FillInTheBlanks } from './fill-in-the-blanks.svg';
+export { default as ImageMatching } from './image-matching.svg';
+export { default as MultipleChoice } from './multiple-choice.svg';
+export { default as OpenEndedEssay } from './open-ended-essay.svg';
+export { default as SingleChoice } from './single-choice.svg';
+export { default as SortableQuestion } from './sortable-question.svg';
+export { default as YesNo } from './yes-no.svg';

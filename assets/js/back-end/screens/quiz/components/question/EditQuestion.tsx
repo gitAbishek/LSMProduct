@@ -25,8 +25,8 @@ const EditQuestion: React.FC<Props> = (props) => {
 		formState: { errors },
 	} = useFormContext();
 
-	const categoryList = [
-		{ value: 'true-false', label: 'True False' },
+	const questionType = [
+		{ value: 'true-false', label: 'True False', icon: 'BiCopy' },
 		{ value: 'single-choice', label: 'Single Choice' },
 		{ value: 'multiple-choice', label: 'Multi Choice' },
 		{ value: 'short-answer', label: 'Short Answer' },
@@ -69,7 +69,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 							<Select
 								{...field}
 								closeMenuOnSelect={false}
-								options={categoryList}
+								options={questionType}
 							/>
 						)}
 						control={control}

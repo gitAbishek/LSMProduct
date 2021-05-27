@@ -26,10 +26,10 @@ const EditQuestion: React.FC<Props> = (props) => {
 	} = useFormContext();
 
 	const questionType = [
-		{ value: 'true-false', label: 'True False', icon: 'FillInTheBlanks' },
-		{ value: 'single-choice', label: 'Single Choice', icon: 'BiCopy' },
-		{ value: 'multiple-choice', label: 'Multi Choice', icon: 'BiCopy' },
-		{ value: 'short-answer', label: 'Short Answer', icon: 'BiCopy' },
+		{ value: 'true-false', label: 'True False', icon: 'YesNo' },
+		{ value: 'single-choice', label: 'Single Choice', icon: 'SingleChoice' },
+		{ value: 'multiple-choice', label: 'Multi Choice', icon: 'MultipleChoice' },
+		{ value: 'short-answer', label: 'Short Answer', icon: 'OpenEndedEssay' },
 	];
 
 	return (

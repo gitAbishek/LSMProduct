@@ -7,7 +7,15 @@ import ReactSelect, {
 	components,
 } from 'react-select';
 
-import { FillInTheBlanks } from '../../assets/icons';
+import {
+	FillInTheBlanks,
+	ImageMatching,
+	MultipleChoice,
+	OpenEndedEssay,
+	SingleChoice,
+	SortableQuestion,
+	YesNo,
+} from '../../assets/icons';
 
 interface Props extends ReactSelectProps {}
 
@@ -62,8 +70,26 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 	};
 
 	const renderIcon = (iconName: string) => {
-		if (iconName === 'FillInTheBlanks') {
-			return <Icon as={FillInTheBlanks} />;
+		const iconStyles = {
+			fontSize: '1.5rem',
+		};
+		switch (iconName) {
+			case 'FillInTheBlanks':
+				return <Icon sx={iconStyles} as={FillInTheBlanks} />;
+			case 'ImageMatching':
+				return <Icon sx={iconStyles} as={ImageMatching} />;
+			case 'MultipleChoice':
+				return <Icon sx={iconStyles} as={MultipleChoice} />;
+			case 'OpenEndedEssay':
+				return <Icon sx={iconStyles} as={OpenEndedEssay} />;
+			case 'SingleChoice':
+				return <Icon sx={iconStyles} as={SingleChoice} />;
+			case 'SortableQuestion':
+				return <Icon sx={iconStyles} as={SortableQuestion} />;
+			case 'YesNo':
+				return <Icon sx={iconStyles} as={YesNo} />;
+			default:
+				return;
 		}
 	};
 

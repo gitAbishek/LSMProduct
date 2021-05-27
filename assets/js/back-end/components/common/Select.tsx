@@ -1,8 +1,13 @@
-import ReactSelect, { Props as ReactSelectProps } from 'react-select';
-import defaultStyle, { BaseLine } from 'Config/defaultStyle';
-
-import React from 'react';
+import { Icon, Stack } from '@chakra-ui/react';
 import colors from 'Config/colors';
+import defaultStyle, { BaseLine } from 'Config/defaultStyle';
+import React from 'react';
+import ReactSelect, {
+	Props as ReactSelectProps,
+	components,
+} from 'react-select';
+
+import { FillInTheBlanks } from '../../assets/icons';
 
 interface Props extends ReactSelectProps {}
 
@@ -56,7 +61,32 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 		}),
 	};
 
-	return <ReactSelect {...props} styles={customStyles} />;
+	const renderIcon = (iconName: string) => {
+		if (iconName === 'FillInTheBlanks') {
+			return <Icon as={FillInTheBlanks} />;
+		}
+	};
+
+	const Option = (optionProps: any) => {
+		console.log(optionProps);
+		return (
+			<components.Option {...optionProps}>
+				<Stack direction="row" spacing="2">
+					{optionProps.data.icon && renderIcon(optionProps.data.icon)}
+					<span>{optionProps.label} yo yo</span>
+				</Stack>
+			</components.Option>
+		);
+	};
+
+	return (
+		<ReactSelect
+			{...props}
+			styles={customStyles}
+			menuIsOpen
+			components={{ Option: Option }}
+		/>
+	);
 });
 
 export default Select;

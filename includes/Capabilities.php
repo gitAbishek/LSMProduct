@@ -66,6 +66,7 @@ class Capabilities {
 			)
 		);
 		$core_capabilities = self::map_caps( $caps_info );
+		$core_capabilities = array_merge( array_keys( self::get_student_capabilities() ), $core_capabilities );
 
 		return apply_filters(
 			'masteriyo_get_instructor_capabilities',
@@ -100,6 +101,7 @@ class Capabilities {
 			)
 		);
 		$core_capabilities = self::map_caps( $caps_info );
+		$core_capabilities = array_merge( array_keys( self::get_instructor_capabilities() ), $core_capabilities );
 
 		return apply_filters(
 			'masteriyo_get_manager_capabilities',
@@ -134,6 +136,7 @@ class Capabilities {
 			)
 		);
 		$core_capabilities = self::map_caps( $caps_info );
+		$core_capabilities = array_merge( array_keys( self::get_manager_capabilities() ), $core_capabilities );
 
 		return apply_filters(
 			'masteriyo_get_administrator_capabilities',

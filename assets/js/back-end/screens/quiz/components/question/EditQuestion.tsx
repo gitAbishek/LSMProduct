@@ -10,27 +10,54 @@ import {
 import { __ } from '@wordpress/i18n';
 import Editor from 'Components/common/Editor';
 import Select from 'Components/common/Select';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 interface Props {
 	questionData: any;
+	setQuestionType: Dispatch<SetStateAction<string>>;
 }
 
 const EditQuestion: React.FC<Props> = (props) => {
-	const { questionData } = props;
+	const { questionData, setQuestionType } = props;
 	const {
 		register,
 		control,
 		formState: { errors },
 	} = useFormContext();
 
-	const categoryList = [
-		{ value: 'true-false', label: 'True False' },
-		{ value: 'single-choice', label: 'Single Choice' },
-		{ value: 'multiple-choice', label: 'Multi Choice' },
-		{ value: 'short-answer', label: 'Short Answer' },
+	const questionType = [
+		{ value: 'true-false', label: 'True False', icon: 'YesNo' },
+		{ value: 'single-choice', label: 'Single Choice', icon: 'SingleChoice' },
+		{ value: 'multiple-choice', label: 'Multi Choice', icon: 'MultipleChoice' },
+		{ value: 'short-answer', label: 'Short Answer', icon: 'OpenEndedEssay' },
 	];
+
+	const getQuestionTypeDefaultValue = () => {
+		switch (questionData.type) {
+			case 'true-false':
+				return questionType[0];
+			case 'single-choice':
+				return questionType[1];
+			case 'multiple-choice':
+				return questionType[2];
+			case 'short-answer':
+				return questionType[3];
+
+			default:
+				return;
+		}
+	};
+
+	console.log(questionData.type);
+
+	const onQuestionTypeChange = (questionType: {
+		value: string;
+		label: string;
+		icon: string;
+	}) => {
+		setQuestionType(questionType.value);
+	};
 
 	return (
 		<Stack direction="column" spacing="6">
@@ -62,14 +89,17 @@ const EditQuestion: React.FC<Props> = (props) => {
 					</FormErrorMessage>
 				</FormControl>
 				<FormControl>
-					<FormLabel>{__('Question Description', 'masteriyo')}</FormLabel>
+					<FormLabel>{__('Question Type', 'masteriyo')}</FormLabel>
 					<Controller
-						defaultValue={questionData.type}
-						render={({ field }) => (
+						defaultValue={getQuestionTypeDefaultValue()}
+						render={({ field: { onChange, value } }) => (
 							<Select
-								{...field}
-								closeMenuOnSelect={false}
-								options={categoryList}
+								value={value}
+								options={questionType}
+								onChange={(data: any) => {
+									onChange(data);
+									onQuestionTypeChange(data);
+								}}
 							/>
 						)}
 						control={control}

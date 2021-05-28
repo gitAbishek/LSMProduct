@@ -1422,10 +1422,21 @@ class SettingsController extends CrudController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
+		 * @since 0.1.0
+		 *
 		 * @param Model         $setting  Object object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */
 		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $setting, $request, $creating );
+	}
+
+	/**
+	 * Return settings as object.
+	 *
+	 * @since 0.1.0
+	 */
+	protected function process_objects_collection( $settings ) {
+		return array_shift( $settings );
 	}
 }

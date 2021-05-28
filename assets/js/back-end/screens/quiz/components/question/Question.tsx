@@ -27,6 +27,7 @@ import { useHistory } from 'react-router';
 import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
 import API from '../../../../utils/api';
+import { mergeDeep } from '../../../../utils/mergeDeep';
 import Answers from '../answer/Answers';
 import EditQuestion from './EditQuestion';
 
@@ -93,8 +94,13 @@ const Question: React.FC<Props> = (props) => {
 		duplicateQuestion.mutate(data);
 	};
 
-	const onSubmit = (data: object) => {
-		updateQuestion.mutate(data);
+	const onSubmit = (data: any) => {
+		const newData = {
+			...(data.type && {
+				type: data.type.value,
+			}),
+		};
+		updateQuestion.mutate(mergeDeep(data, newData));
 	};
 
 	const onDeletePress = () => {
@@ -158,7 +164,7 @@ const Question: React.FC<Props> = (props) => {
 									setQuestionType={setQuestionType}
 								/>
 								<Answers
-									questionData={questionData}
+									answers={questionData?.answers}
 									questionType={questionType}
 								/>
 								<Divider />

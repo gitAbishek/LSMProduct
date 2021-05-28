@@ -476,7 +476,7 @@ class SettingsController extends CrudController {
 								'default'     => true,
 								'context'     => array( 'view', 'edit' ),
 							),
-							'sandbox'              => array(
+							'sandbox'               => array(
 								'description' => __( 'Enable sandbox/sandbox mode on paypal.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
@@ -1011,20 +1011,25 @@ class SettingsController extends CrudController {
 			),
 			'payments' => array(
 				'paypal' => array(
-					'enable'                         => $setting->get_payments_paypal_enable( $context ),
-					'title'                          => $setting->get_payments_paypal_title( $context ),
-					'description'                    => $setting->get_payments_paypal_description( $context ),
-					'description'                    => $setting->get_payments_paypal_description( $context ),
+					'enable'                  => $setting->get_payments_paypal_enable( $context ),
+					'title'                   => $setting->get_payments_paypal_title( $context ),
+					'description'             => $setting->get_payments_paypal_description( $context ),
+					'description'             => $setting->get_payments_paypal_description( $context ),
 					'ipn_email_notifications' => $setting->get_payments_paypal_ipn_email_notifications( $context ),
-					'sandbox'                       => $setting->get_payments_paypal_sandbox( $context ),
-					'email'                          => $setting->get_payments_paypal_email( $context ),
-					'receiver_email'                 => $setting->get_payments_paypal_receiver_email( $context ),
-					'identity_token'                 => $setting->get_payments_paypal_identity_token( $context ),
-					'invoice_prefix'                 => $setting->get_payments_paypal_invoice_prefix( $context ),
-					'payment_action'                 => $setting->get_payments_paypal_payment_action( $context ),
-					'image_url'                      => $setting->get_payments_paypal_image_url( $context ),
-					'debug'                          => $setting->get_payments_paypal_debug( $context ),
-					'sandbox_api_username'           => $setting->get_payments_paypal_sandbox_api_username( $context ),
+					'sandbox'                 => $setting->get_payments_paypal_sandbox( $context ),
+					'email'                   => $setting->get_payments_paypal_email( $context ),
+					'receiver_email'          => $setting->get_payments_paypal_receiver_email( $context ),
+					'identity_token'          => $setting->get_payments_paypal_identity_token( $context ),
+					'invoice_prefix'          => $setting->get_payments_paypal_invoice_prefix( $context ),
+					'payment_action'          => $setting->get_payments_paypal_payment_action( $context ),
+					'image_url'               => $setting->get_payments_paypal_image_url( $context ),
+					'debug'                   => $setting->get_payments_paypal_debug( $context ),
+					'sandbox_api_username'    => $setting->get_payments_paypal_sandbox_api_username( $context ),
+					'sandbox_api_password'    => $setting->get_payments_paypal_sandbox_api_password( $context ),
+					'sandbox_api_signature'   => $setting->get_payments_paypal_sandbox_api_signature( $context ),
+					'live_api_username'       => $setting->get_payments_paypal_live_api_username( $context ),
+					'live_api_password'       => $setting->get_payments_paypal_live_api_password( $context ),
+					'live_api_signature'      => $setting->get_payments_paypal_live_api_signature( $context ),
 				),
 			),
 			'emails'   => array(
@@ -1341,6 +1346,18 @@ class SettingsController extends CrudController {
 
 		if ( isset( $request['payments']['paypal']['sandbox_api_signature'] ) ) {
 			$setting->set_payments_paypal_sandbox_api_signature( $request['payments']['paypal']['sandbox_api_signature'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['live_api_username'] ) ) {
+			$setting->set_payments_paypal_live_api_username( $request['payments']['paypal']['live_api_username'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['live_api_password'] ) ) {
+			$setting->set_payments_paypal_live_api_password( $request['payments']['paypal']['live_api_password'] );
+		}
+
+		if ( isset( $request['payments']['paypal']['live_api_signature'] ) ) {
+			$setting->set_payments_paypal_live_api_signature( $request['payments']['paypal']['live_api_signature'] );
 		}
 
 		// Emails Setting.

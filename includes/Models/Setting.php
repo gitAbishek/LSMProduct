@@ -145,6 +145,9 @@ class Setting extends Model {
 			'paypal_sandbox_api_username'    => '',
 			'paypal_sandbox_api_password'    => '',
 			'paypal_sandbox_api_signature'   => '',
+			'paypal_live_api_username'       => '',
+			'paypal_live_api_password'       => '',
+			'paypal_live_api_signature'      => '',
 		),
 		'emails'   => array(
 			// General Options.
@@ -992,8 +995,8 @@ class Setting extends Model {
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_payments_paypal_sandbox_api_passsword( $context = 'view' ) {
-		return $this->get_setting_prop( 'paypal_sandbox_api_passsword', 'payments', $context );
+	public function get_payments_paypal_sandbox_api_password( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_sandbox_api_password', 'payments', $context );
 	}
 
 	/**
@@ -1006,6 +1009,42 @@ class Setting extends Model {
 	 */
 	public function get_payments_paypal_sandbox_api_signature( $context = 'view' ) {
 		return $this->get_setting_prop( 'paypal_sandbox_api_signature', 'payments', $context );
+	}
+
+	/**
+	 * Get paypal live api username.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_live_api_username( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_live_api_username', 'payments', $context );
+	}
+
+	/**
+	 * Get paypal live api passsword.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_live_api_password( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_live_api_password', 'payments', $context );
+	}
+
+	/**
+	 * Get paypal live api signature.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_payments_paypal_live_api_signature( $context = 'view' ) {
+		return $this->get_setting_prop( 'paypal_live_api_signature', 'payments', $context );
 	}
 
 
@@ -2172,6 +2211,36 @@ class Setting extends Model {
 	*/
 	public function set_payments_paypal_sandbox_api_signature( $signature ) {
 		$this->set_setting_prop( 'paypal_sandbox_api_signature', 'payments', $signature );
+	}
+
+	/**
+	 * Set paypal live api username.
+	*
+	* @since 0.1.0
+	* @param string $username
+	*/
+	public function set_payments_paypal_live_api_username( $username ) {
+		$this->set_setting_prop( 'paypal_live_api_username', 'payments', $username );
+	}
+
+	/**
+	 * Set paypal live api password.
+	*
+	* @since 0.1.0
+	* @param string $password
+	*/
+	public function set_payments_paypal_live_api_password( $password ) {
+		$this->set_setting_prop( 'paypal_live_api_password', 'payments', $password );
+	}
+
+	/**
+	 * Set paypal live api signature.
+	*
+	* @since 0.1.0
+	* @param string $siognature
+	*/
+	public function set_payments_paypal_live_api_signature( $signature ) {
+		$this->set_setting_prop( 'paypal_live_api_signature', 'payments', $signature );
 	}
 
 	// Email Setting Setter.

@@ -1,7 +1,12 @@
 .mto-login {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &--wrapper {
+    background: $mto-white-color;
+  }
 
   &--title {
     margin-bottom: 30px;

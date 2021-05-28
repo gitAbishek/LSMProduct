@@ -28,6 +28,12 @@
   justify-content: space-between;
 }
 
+ul {
+  li {
+    margin: 0;
+  }
+}
+
 // Badge
 .mto-badge {
   padding: 4px 16px;

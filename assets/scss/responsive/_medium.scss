@@ -4,4 +4,9 @@
   .mto-form-container {
     width: 70%;
   }
+  .mto-cstudy {
+    &--body--pstatus {
+      display: none;
+    }
+  }
 }

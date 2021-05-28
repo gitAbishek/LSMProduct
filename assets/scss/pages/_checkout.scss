@@ -35,7 +35,9 @@
     gap: 30px;
     @include mto-shadow-2();
     padding: 44px;
+    background: $mto-white-color;
   }
+
   // Your order.
   &-summary {
     flex: 1 1 35%;
@@ -44,6 +46,7 @@
       @include mto-shadow-2();
       padding: 44px;
       margin-bottom: 30px;
+      background: $mto-white-color;
 
       ul {
         margin: 0;
@@ -78,6 +81,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: $mto-white-color;
   }
   &--btn {
     width: 100%;

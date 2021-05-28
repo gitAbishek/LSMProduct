@@ -17,6 +17,7 @@
   &--card {
     gap: 20px;
     @include mto-default-border;
+    background: $mto-white-color;
   }
 
   &--detail {

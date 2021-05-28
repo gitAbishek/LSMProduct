@@ -25,6 +25,9 @@
 @import "pages/course-list";
 @import "pages/single-course";
 
+// Support Theme
+@import "theme/_twentytwentytheme";
+
 // Media
 @import "responsive/large";
 @import "responsive/medium";

@@ -49,6 +49,10 @@
       flex-direction: column;
     }
 
+    .mto-sticky {
+      z-index: 9;
+    }
+
     .mto-icon-svg > svg {
       width: 20px;
       height: 20px;

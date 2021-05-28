@@ -1,0 +1,18 @@
+// Twenty Twenty Theme Support
+
+.entry-content > :not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
+  max-width: 100% !important;
+}
+
+.mto-hidden {
+  display: none !important;
+}
+
+// Media queries.
+@media (min-width: 700px) {
+  .entry-content h1,
+  .entry-content h2,
+  .entry-content h3 {
+    margin: inherit !important;
+  }
+}

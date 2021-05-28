@@ -34,7 +34,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 		'positive_feedback' => '_positive_feedback',
 		'negative_feedback' => '_negative_feedback',
 		'feedback'          => '_feedback',
-		'course_id'         => '_course_id'
+		'course_id'         => '_course_id',
 	);
 
 	/**
@@ -57,7 +57,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 					'post_status'   => $question->get_status() ? $question->get_status() : 'publish',
 					'post_author'   => get_current_user_id(),
 					'post_title'    => $question->get_name() ? $question->get_name() : __( 'Question', 'masteriyo' ),
-					'post_content'  => serialize( $question->get_answers() ),
+					'post_content'  => wp_json_encode( $question->get_answers() ),
 					'post_excerpt'  => $question->get_description(),
 					'post_parent'   => $question->get_parent_id(),
 					'ping_status'   => 'closed',
@@ -105,11 +105,10 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 				'date_created'  => $question_post->post_date_gmt,
 				'date_modified' => $question_post->post_modified_gmt,
 				'status'        => $question_post->post_status,
-				'answers'       => maybe_unserialize( $question_post->post_content ),
+				'answers'       => json_decode( $question_post->post_content ),
 				'description'   => $question_post->post_excerpt,
 				'menu_order'    => $question_post->menu_order,
-			'parent_id'         => $question_post->post_parent,
-
+				'parent_id'     => $question_post->post_parent,
 			)
 		);
 
@@ -146,7 +145,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 		// Only update the post when the post data changes.
 		if ( array_intersect( $post_data_keys, array_keys( $changes ) ) ) {
 			$post_data = array(
-				'post_content' => $question->get_answers( 'edit' ),
+				'post_content' => wp_json_encode( $question->get_answers( 'edit' ) ),
 				'post_excerpt' => $question->get_description( 'edit' ),
 				'post_title'   => $question->get_name( 'edit' ),
 				'post_status'  => $question->get_status( 'edit' ) ? $question->get_status( 'edit' ) : 'publish',
@@ -319,7 +318,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 
 		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
 			return (object) array(
-				'questions'      => $questions,
+				'questions'     => $questions,
 				'total'         => $query->found_posts,
 				'max_num_pages' => $query->max_num_pages,
 			);
@@ -363,8 +362,8 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 
 		// Handle date queries.
 		$date_queries = array(
-			'date_created'      => 'post_date',
-			'date_modified'     => 'post_modified',
+			'date_created'  => 'post_date',
+			'date_modified' => 'post_modified',
 		);
 		foreach ( $date_queries as $query_var_key => $db_key ) {
 			if ( isset( $query_vars[ $query_var_key ] ) && '' !== $query_vars[ $query_var_key ] ) {

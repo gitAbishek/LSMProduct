@@ -17,15 +17,20 @@ import {
 	Select,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import Header from 'Components/layout/Header';
 import React, { useEffect, useMemo, useState } from 'react';
 import ReactFlagsSelect from 'react-flags-select';
 import { useForm } from 'react-hook-form';
+import { useQuery } from 'react-query';
+import urls from '../../constants/urls';
+import API from '../../utils/api';
 import { currency } from '../../utils/currency';
 
 const Settings = () => {
 	const [country, setCountry] = useState('');
 	const { handleSubmit, register, setValue } = useForm();
+	const courseApi = new API(urls.settings);
 	const tabStyles = {
 		fontWeight: 'medium',
 		fontSize: 'sm',
@@ -41,10 +46,16 @@ const Settings = () => {
 		setValue('country', country);
 	}, [country]);
 
+	const settingsQuery = useQuery('settings', () => courseApi.list(), {});
+
+	if (settingsQuery.isLoading) {
+		return <FullScreenLoader />;
+	}
+
 	const onSubmit = (data: any) => {
 		console.log(data);
 	};
-
+	console.log(settingsQuery.data);
 	return (
 		<Stack direction="column" spacing="8" width="full" alignItems="center">
 			<Header />
@@ -120,7 +131,7 @@ const Settings = () => {
 												<Stack direction="row" spacing="8">
 													<FormControl>
 														<FormLabel minW="xs">Currency</FormLabel>
-														<Select>
+														<Select {...register('currency')}>
 															{Object.entries(currency).map(([code, name]) => (
 																<option value={code} key={code}>
 																	{name}
@@ -130,17 +141,39 @@ const Settings = () => {
 													</FormControl>
 													<FormControl>
 														<FormLabel minW="xs">Currency Position</FormLabel>
-														<Input type="text" />
+														<Select {...register('currency_position')}>
+															<option value="left">
+																{__('Left', 'masteriyo')}
+															</option>
+															<option value="right">
+																{__('Left', 'masteriyo')}
+															</option>
+														</Select>
 													</FormControl>
 												</Stack>
 												<Stack direction="row" spacing="8">
 													<FormControl>
 														<FormLabel minW="xs">Thausand Separator</FormLabel>
-														<Input type="text" />
+														<Input
+															type="text"
+															{...register('thausand_separator')}
+														/>
 													</FormControl>
 													<FormControl>
 														<FormLabel minW="xs">Decimal Separator</FormLabel>
-														<Input type="text" />
+														<Input
+															type="text"
+															{...register('decimal_separator')}
+														/>
+													</FormControl>
+												</Stack>
+												<Stack direction="row" spacing="8">
+													<FormControl>
+														<FormLabel minW="xs">Number of Decimals</FormLabel>
+														<Input
+															type="text"
+															{...register('number_of_decimals')}
+														/>
 													</FormControl>
 												</Stack>
 											</Stack>

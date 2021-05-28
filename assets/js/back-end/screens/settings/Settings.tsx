@@ -19,7 +19,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import Header from 'Components/layout/Header';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactFlagsSelect from 'react-flags-select';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';

@@ -27,6 +27,7 @@ import { useHistory } from 'react-router';
 import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
 import API from '../../../../utils/api';
+import { mergeDeep } from '../../../../utils/mergeDeep';
 import Answers from '../answer/Answers';
 import EditQuestion from './EditQuestion';
 
@@ -41,6 +42,7 @@ const Question: React.FC<Props> = (props) => {
 	const methods = useForm();
 	const history = useHistory();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const [questionType, setQuestionType] = useState('true-false');
 	const questionAPI = new API(urls.questions);
 	const cancelRef = useRef<any>();
 	const queryClient = useQueryClient();
@@ -92,8 +94,13 @@ const Question: React.FC<Props> = (props) => {
 		duplicateQuestion.mutate(data);
 	};
 
-	const onSubmit = (data: object) => {
-		updateQuestion.mutate(data);
+	const onSubmit = (data: any) => {
+		const newData = {
+			...(data.type && {
+				type: data.type.value,
+			}),
+		};
+		updateQuestion.mutate(mergeDeep(data, newData));
 	};
 
 	const onDeletePress = () => {
@@ -152,8 +159,14 @@ const Question: React.FC<Props> = (props) => {
 					<FormProvider {...methods}>
 						<form onSubmit={methods.handleSubmit(onSubmit)}>
 							<Stack direction="column" spacing="8">
-								<EditQuestion questionData={questionData} />
-								<Answers questionData={questionData} />
+								<EditQuestion
+									questionData={questionData}
+									setQuestionType={setQuestionType}
+								/>
+								<Answers
+									answers={questionData?.answers}
+									questionType={questionType}
+								/>
 								<Divider />
 								<ButtonGroup>
 									<Button

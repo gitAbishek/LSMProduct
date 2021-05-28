@@ -470,7 +470,7 @@ class SettingsController extends CrudController {
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'enable_ipn_email_notifiations' => array(
+							'ipn_email_notifiations' => array(
 								'description' => __( 'Enable IPN email notifications.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'default'     => true,
@@ -532,6 +532,21 @@ class SettingsController extends CrudController {
 							),
 							'sandbox_api_signature' => array(
 								'description' => __( 'Paypal sandbox API signature.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'live_api_username'  => array(
+								'description' => __( 'Paypal live API username.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'live_api_password'  => array(
+								'description' => __( 'Paypal live API password.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+							),
+							'live_api_signature' => array(
+								'description' => __( 'Paypal live API signature.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),

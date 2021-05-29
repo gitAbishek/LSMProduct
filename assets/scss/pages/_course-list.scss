@@ -2,13 +2,14 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 30px;
+  justify-content: flex-start;
 
   &-item {
     @include mto-shadow-1;
     background: white;
-    flex: 1 1 20%;
-    min-width: 256px;
+    flex-basis: 23%;
+    margin: 0 1% 2% 1%;
+    max-width: 23.33%;
   }
 
   &--img-wrap {

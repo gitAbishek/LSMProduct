@@ -577,3 +577,47 @@ function masteriyo_format_phone_number( $phone ) {
 function masteriyo_sanitize_phone_number( $phone ) {
 	return preg_replace( '/[^\d+]/', '', $phone );
 }
+
+if ( ! function_exists( 'masteriyo_format_rating' ) ) {
+	/**
+	 * Format ratint to SVGs.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param float $rating
+	 * @param boolean $echo
+	 * @return mixed
+	 */
+	function masteriyo_format_rating( $rating, $echo = false ) {
+		$rating      = abs( $rating );
+		$rating      = min( $rating, 5 );
+		$rating      = masteriyo_round( $rating, 1 );
+		$whole       = floor( $rating );
+		$fraction    = $rating - $whole;
+		$count_stars = 0;
+		$html        = '';
+
+		// Set full stars.
+		for ( $count = 0; $count < $whole; ++$count ) {
+			++$count_stars;
+			$html .= masteriyo_get_svg( 'full_start' );
+		}
+
+		// Set half star if there is.
+		if ( $fraction > 0.4 ) {
+			++$count_stars;
+			$html .= masteriyo_get_svg( 'half_star' );
+		}
+
+		// Set the empty stars.
+		for ( ; $count_stars <= 5; ++$count_stars ) {
+			$html .= masteriyo_get_svg( 'empty_star' );
+		}
+
+		if ( $echo ) {
+			echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		} else {
+			return $html;
+		}
+	}
+}

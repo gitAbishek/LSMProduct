@@ -16,7 +16,7 @@ import { GeneralSettingsMap } from '../../../types';
 import { currency } from '../../../utils/currency';
 
 interface Props {
-	generalData: GeneralSettingsMap;
+	generalData: GeneralSettingsMap | any;
 }
 const GeneralSettings: React.FC<Props> = (props) => {
 	const { generalData } = props;

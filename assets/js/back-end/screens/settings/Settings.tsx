@@ -65,7 +65,6 @@ const Settings = () => {
 
 	const onSubmit = (data: SetttingsMap) => {
 		const mergedData = mergeDeep(settingsQuery.data, data);
-		console.log(mergedData);
 		updateSettings.mutate(mergedData);
 	};
 

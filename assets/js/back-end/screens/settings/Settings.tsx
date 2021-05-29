@@ -14,7 +14,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import Header from 'Components/layout/Header';
-import React, { useState } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import urls from '../../constants/urls';
@@ -99,7 +99,10 @@ const Settings = () => {
 									</TabPanel>
 								</TabPanels>
 								<ButtonGroup>
-									<Button colorScheme="blue" type="submit">
+									<Button
+										colorScheme="blue"
+										type="submit"
+										isLoading={updateSettings.isLoading}>
 										{__('Save', 'masteriyo')}
 									</Button>
 								</ButtonGroup>

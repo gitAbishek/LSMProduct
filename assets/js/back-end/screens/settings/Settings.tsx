@@ -9,22 +9,26 @@ import {
 	Container,
 	ButtonGroup,
 	Button,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import Header from 'Components/layout/Header';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import urls from '../../constants/urls';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
+import { mergeDeep } from '../../utils/mergeDeep';
 import GeneralSettings from './components/GeneralSettings';
 
 const Settings = () => {
-	const courseApi = new API(urls.settings);
+	const settingsApi = new API(urls.settings);
 	const methods = useForm<SetttingsMap>();
-	const [settings, setSettings] = useState();
+	const toast = useToast();
+	const queryClient = useQueryClient();
+
 	const tabStyles = {
 		fontWeight: 'medium',
 		fontSize: 'sm',
@@ -37,7 +41,22 @@ const Settings = () => {
 	};
 
 	const settingsQuery = useQuery<SetttingsMap>('settings', () =>
-		courseApi.list()
+		settingsApi.list()
+	);
+
+	const updateSettings = useMutation(
+		(data: SetttingsMap) => settingsApi.store(data),
+		{
+			onSuccess: () => {
+				toast({
+					title: __('Settings is Updated', 'masteriyo'),
+					description: __('You can keep changing settings', 'masteriyo'),
+					status: 'success',
+					isClosable: true,
+				});
+				queryClient.invalidateQueries(`settings`);
+			},
+		}
 	);
 
 	if (settingsQuery.isLoading) {
@@ -45,7 +64,9 @@ const Settings = () => {
 	}
 
 	const onSubmit = (data: SetttingsMap) => {
-		console.log(data);
+		const mergedData = mergeDeep(settingsQuery.data, data);
+		console.log(mergedData);
+		updateSettings.mutate(mergedData);
 	};
 
 	return (

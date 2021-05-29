@@ -16,18 +16,17 @@ import { GeneralSettingsMap } from '../../../types';
 import { currency } from '../../../utils/currency';
 
 interface Props {
-	generalData?: GeneralSettingsMap;
+	generalData: GeneralSettingsMap;
 }
 const GeneralSettings: React.FC<Props> = (props) => {
 	const { generalData } = props;
-	const [country, setCountry] = useState('');
+	const [country, setCountry] = useState(generalData.country);
 	const { register, setValue } = useFormContext();
 
 	useEffect(() => {
 		setValue('general.country', country);
 	}, [country]);
 
-	console.log(generalData);
 	return (
 		<Stack direction="column" spacing="8">
 			<Box>

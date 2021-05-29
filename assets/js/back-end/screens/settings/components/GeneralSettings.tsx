@@ -27,6 +27,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 		setValue('general.country', country);
 	}, [country]);
 
+	console.log(generalData);
 	return (
 		<Stack direction="column" spacing="8">
 			<Box>
@@ -123,8 +124,8 @@ const GeneralSettings: React.FC<Props> = (props) => {
 							<FormLabel minW="xs">Thausand Separator</FormLabel>
 							<Input
 								type="text"
-								{...register('general.thausand_separator')}
-								defaultValue={generalData?.thausand_separator}
+								{...register('general.thousand_separator')}
+								defaultValue={generalData?.thousand_separator}
 							/>
 						</FormControl>
 						<FormControl>

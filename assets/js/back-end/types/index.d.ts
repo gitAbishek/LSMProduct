@@ -6,7 +6,7 @@ export type GeneralSettingsMap = {
 	postcode: string;
 	currency: string;
 	currency_position: string;
-	thausand_separator: string;
+	thousand_separator: string;
 	decimal_separator: string;
 	number_of_decimals: number;
 };

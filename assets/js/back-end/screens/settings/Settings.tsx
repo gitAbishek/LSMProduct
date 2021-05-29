@@ -36,7 +36,9 @@ const Settings = () => {
 		py: 8,
 	};
 
-	const settingsQuery = useQuery('settings', () => courseApi.list());
+	const settingsQuery = useQuery<SetttingsMap>('settings', () =>
+		courseApi.list()
+	);
 
 	if (settingsQuery.isLoading) {
 		return <FullScreenLoader />;
@@ -64,13 +66,16 @@ const Settings = () => {
 							<form onSubmit={methods.handleSubmit(onSubmit)}>
 								<TabPanels>
 									<TabPanel sx={tabPanelStyles}>
-										<GeneralSettings />
-										<Button colorScheme="blue" type="submit">
-											{__('Save', 'masteriyo')}
-										</Button>
+										<GeneralSettings
+											generalData={settingsQuery.data?.general}
+										/>
 									</TabPanel>
 								</TabPanels>
-								<ButtonGroup></ButtonGroup>
+								<ButtonGroup>
+									<Button colorScheme="blue" type="submit">
+										{__('Save', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
 							</form>
 						</FormProvider>
 					</Tabs>

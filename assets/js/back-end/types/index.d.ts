@@ -23,9 +23,9 @@ export type CoursesSettingsMap = {
 	single_lesson_permalink: string;
 	single_quiz_permalink: string;
 	single_section_permalink: string;
-	enable_single_course_permalink: string;
-	single_course_enable_editing: string;
-	show_thumbnail: string;
+	enable_single_course_permalink: boolean;
+	single_course_enable_editing: boolean;
+	show_thumbnail: boolean;
 	thumbnail_size: string;
 };
 

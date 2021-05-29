@@ -21,6 +21,7 @@ import urls from '../../constants/urls';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
 import { mergeDeep } from '../../utils/mergeDeep';
+import CoursesSettings from './components/CoursesSettings';
 import GeneralSettings from './components/GeneralSettings';
 
 const Settings = () => {
@@ -65,7 +66,8 @@ const Settings = () => {
 
 	const onSubmit = (data: SetttingsMap) => {
 		const mergedData = mergeDeep(settingsQuery.data, data);
-		updateSettings.mutate(mergedData);
+		console.log(data);
+		// updateSettings.mutate(mergedData);
 	};
 
 	return (
@@ -88,6 +90,11 @@ const Settings = () => {
 									<TabPanel sx={tabPanelStyles}>
 										<GeneralSettings
 											generalData={settingsQuery.data?.general}
+										/>
+									</TabPanel>
+									<TabPanel>
+										<CoursesSettings
+											coursesData={settingsQuery.data?.courses}
 										/>
 									</TabPanel>
 								</TabPanels>

@@ -3,13 +3,13 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  margin-top: -15px;
 
   &-item {
     @include mto-shadow-1;
     background: white;
-    flex-basis: 23%;
-    margin: 0 1% 2% 1%;
-    max-width: 23.33%;
+    margin: 15px;
+    flex-basis: calc((100% / 4) - 30px);
   }
 
   &--img-wrap {

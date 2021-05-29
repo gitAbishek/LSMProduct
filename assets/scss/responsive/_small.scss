@@ -27,4 +27,10 @@
       width: inherit;
     }
   }
+
+  .mto-course {
+    &-item {
+      flex-basis: 100%;
+    }
+  }
 }

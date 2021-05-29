@@ -9,4 +9,9 @@
       display: none;
     }
   }
+  .mto-course {
+    &-item {
+      flex-basis: calc((100% / 3) - 30px);
+    }
+  }
 }

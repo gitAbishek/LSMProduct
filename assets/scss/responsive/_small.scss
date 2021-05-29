@@ -28,9 +28,8 @@
     }
   }
 
-  .mto-course {
-    &-item {
-      flex-basis: 100%;
-    }
+  .mto-course-item,
+  .mto-courses--card {
+    flex-basis: 100%;
   }
 }

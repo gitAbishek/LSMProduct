@@ -64,12 +64,14 @@ const Settings = () => {
 							<form onSubmit={methods.handleSubmit(onSubmit)}>
 								<TabPanels>
 									<TabPanel sx={tabPanelStyles}>
-										<GeneralSettings />
-										<ButtonGroup>
-											<Button colorScheme="blue" type="submit">
-												{__('Save', 'masteriyo')}
-											</Button>
-										</ButtonGroup>
+										<Stack direction="column" spacing="8">
+											<GeneralSettings />
+											<ButtonGroup>
+												<Button colorScheme="blue" type="submit">
+													{__('Save', 'masteriyo')}
+												</Button>
+											</ButtonGroup>
+										</Stack>
 									</TabPanel>
 								</TabPanels>
 							</form>

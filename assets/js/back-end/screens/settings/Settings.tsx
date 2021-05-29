@@ -17,12 +17,13 @@ import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import urls from '../../constants/urls';
+import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
 import GeneralSettings from './components/GeneralSettings';
 
 const Settings = () => {
 	const courseApi = new API(urls.settings);
-	const methods = useForm();
+	const methods = useForm<SetttingsMap>();
 	const [settings, setSettings] = useState();
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -41,7 +42,7 @@ const Settings = () => {
 		return <FullScreenLoader />;
 	}
 
-	const onSubmit = (data: any) => {
+	const onSubmit = (data: SetttingsMap) => {
 		console.log(data);
 	};
 

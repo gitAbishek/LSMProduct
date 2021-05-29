@@ -18,7 +18,8 @@ import { currency } from '../../../utils/currency';
 interface Props {
 	generalData?: GeneralSettingsMap;
 }
-const GeneralSettings: React.FC = () => {
+const GeneralSettings: React.FC<Props> = (props) => {
+	const { generalData } = props;
 	const [country, setCountry] = useState('');
 	const { register, setValue } = useFormContext();
 
@@ -46,7 +47,7 @@ const GeneralSettings: React.FC = () => {
 							<input
 								type="hidden"
 								{...register('general.country')}
-								defaultValue={country}
+								defaultValue={generalData?.country}
 							/>
 							<ReactFlagsSelect
 								selected={country}
@@ -55,17 +56,29 @@ const GeneralSettings: React.FC = () => {
 						</FormControl>
 						<FormControl>
 							<FormLabel minW="xs">City</FormLabel>
-							<Input type="text" {...register('general.city')} />
+							<Input
+								type="text"
+								{...register('general.city')}
+								defaultValue={generalData?.city}
+							/>
 						</FormControl>
 					</Stack>
 					<Stack direction="row" spacing="8">
 						<FormControl>
 							<FormLabel minW="xs">Adress Line 1</FormLabel>
-							<Input type="text" {...register('general.address_line1')} />
+							<Input
+								type="text"
+								{...register('general.address_line1')}
+								defaultValue={generalData?.address_line1}
+							/>
 						</FormControl>
 						<FormControl>
 							<FormLabel minW="xs">Adress Line 2</FormLabel>
-							<Input type="text" {...register('general.address_line2')} />
+							<Input
+								type="text"
+								{...register('general.address_line2')}
+								defaultValue={generalData?.address_line2}
+							/>
 						</FormControl>
 					</Stack>
 				</Stack>
@@ -85,7 +98,9 @@ const GeneralSettings: React.FC = () => {
 					<Stack direction="row" spacing="8">
 						<FormControl>
 							<FormLabel minW="xs">Currency</FormLabel>
-							<Select {...register('general.currency')}>
+							<Select
+								{...register('general.currency')}
+								defaultValue={generalData?.currency}>
 								{Object.entries(currency).map(([code, name]) => (
 									<option value={code} key={code}>
 										{name}
@@ -95,7 +110,9 @@ const GeneralSettings: React.FC = () => {
 						</FormControl>
 						<FormControl>
 							<FormLabel minW="xs">Currency Position</FormLabel>
-							<Select {...register('general.currency_position')}>
+							<Select
+								{...register('general.currency_position')}
+								defaultValue={generalData?.currency_position}>
 								<option value="left">{__('Left', 'masteriyo')}</option>
 								<option value="right">{__('Left', 'masteriyo')}</option>
 							</Select>
@@ -104,17 +121,29 @@ const GeneralSettings: React.FC = () => {
 					<Stack direction="row" spacing="8">
 						<FormControl>
 							<FormLabel minW="xs">Thausand Separator</FormLabel>
-							<Input type="text" {...register('general.thausand_separator')} />
+							<Input
+								type="text"
+								{...register('general.thausand_separator')}
+								defaultValue={generalData?.thausand_separator}
+							/>
 						</FormControl>
 						<FormControl>
 							<FormLabel minW="xs">Decimal Separator</FormLabel>
-							<Input type="text" {...register('general.decimal_separator')} />
+							<Input
+								type="text"
+								{...register('general.decimal_separator')}
+								defaultValue={generalData?.decimal_separator}
+							/>
 						</FormControl>
 					</Stack>
 					<Stack direction="row" spacing="8">
 						<FormControl>
 							<FormLabel minW="xs">Number of Decimals</FormLabel>
-							<Input type="text" {...register('general.number_of_decimals')} />
+							<Input
+								type="text"
+								{...register('general.number_of_decimals')}
+								defaultValue={generalData?.number_of_decimals}
+							/>
 						</FormControl>
 					</Stack>
 				</Stack>

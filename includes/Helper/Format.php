@@ -590,9 +590,9 @@ if ( ! function_exists( 'masteriyo_format_rating' ) ) {
 	 */
 	function masteriyo_format_rating( $rating, $echo = false ) {
 		$rating      = abs( $rating );
-		$rating      = min( $rating, 5 );
 		$rating      = masteriyo_round( $rating, 1 );
 		$whole       = floor( $rating );
+		$whole       = min( $whole, 5 );
 		$fraction    = $rating - $whole;
 		$count_stars = 0;
 		$html        = '';
@@ -610,7 +610,7 @@ if ( ! function_exists( 'masteriyo_format_rating' ) ) {
 		}
 
 		// Set the empty stars.
-		for ( ; $count_stars <= 5; ++$count_stars ) {
+		for ( ; $count_stars < 5; ++$count_stars ) {
 			$html .= masteriyo_get_svg( 'empty_star' );
 		}
 

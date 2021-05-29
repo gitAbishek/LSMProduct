@@ -1657,16 +1657,31 @@ function masteriyo_logout_url( $redirect = '' ) {
  * @return void|string
  */
 function masteriyo_get_svg( $name, $echo = false ) {
+	global $wp_filesystem;
+
+	$credentials = request_filesystem_credentials( '', 'direct' );
+
+	// Bail early if the credentials is wrong.
+	if ( ! $credentials ) {
+		return;
+	}
+
+	\WP_Filesystem( $credentials );
+
 	$file_name = Constants::get( 'MASTERIYO_ASSETS' ) . "/svg/{$name}.svg";
 
 	if ( file_exists( $file_name ) && is_readable( $file_name ) ) {
-		if ( $echo ) {
-			readfile( $file_name );
-		} else {
-			return file_get_contents( $file_name );
-		}
+		$file_contents = $wp_filesystem->get_contents( $file_name );
 	}
-	return '';
+
+	$file_contents = apply_filters( 'masteriyo_svg_file', $file_contents, $name );
+
+	if ( $echo ) {
+		echo $file_contents;
+	} else {
+		return $file_contents;
+	}
+
 }
 
 /**

@@ -24,7 +24,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 	const { register, setValue } = useFormContext();
 
 	useEffect(() => {
-		setValue('country', country);
+		setValue('general.country', country);
 	}, [country]);
 
 	return (

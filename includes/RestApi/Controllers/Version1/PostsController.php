@@ -43,7 +43,7 @@ abstract class PostsController extends CrudController {
 
 		$post = get_post( (int) $request['id'] );
 
-		if ( $post && ! $this->permission->rest_check_post_permissions( $this->object_type, 'read', $request['id'] ) ) {
+		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'read', $request['id'] ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),

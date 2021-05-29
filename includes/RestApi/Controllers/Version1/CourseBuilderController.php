@@ -15,7 +15,7 @@ namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Permission;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\RestController;
+use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\PostsController;
 
 /**
  * Course builder REST API. controller class.
@@ -23,7 +23,7 @@ use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\RestController;
  * @package Masteriyo\RestApi
  * @extends CrudController
  */
-class CourseBuilderController extends RestController {
+class CourseBuilderController extends PostsController {
 
 	/**
 	 * Endpoint namespace.
@@ -119,35 +119,6 @@ class CourseBuilderController extends RestController {
 				'schema' => array( $this, 'get_public_item_schema' ),
 			)
 		);
-	}
-
-	/**
-	 * Check if a given request has access to read the terms.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return WP_Error|boolean
-	 */
-	public function get_item_permissions_check( $request ) {
-		if ( is_null( $this->permission ) ) {
-			return new \WP_Error(
-				'masteriyo_null_permission',
-				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
-			);
-		}
-
-		if ( ! $this->permission->rest_check_post_permissions( 'course', 'read' ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_read',
-				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code(),
-				)
-			);
-		}
-
-		return true;
 	}
 
 	/**
@@ -529,35 +500,6 @@ class CourseBuilderController extends RestController {
 	 */
 	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
 		return $this->permission->rest_check_post_permissions( $object_type, 'read', $object_id );
-	}
-
-	/**
-	 * Check if a given request has access to create an item.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return WP_Error|boolean
-	 */
-	public function update_item_permissions_check( $request ) {
-		if ( is_null( $this->permission ) ) {
-			return new \WP_Error(
-				'masteriyo_null_permission',
-				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
-			);
-		}
-
-		if ( ! $this->permission->rest_check_post_permissions( 'course', 'update', $request['id'] ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_create',
-				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code(),
-				)
-			);
-		}
-
-		return true;
 	}
 
 	/**

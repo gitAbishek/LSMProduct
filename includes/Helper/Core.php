@@ -1668,7 +1668,8 @@ function masteriyo_get_svg( $name, $echo = false ) {
 
 	\WP_Filesystem( $credentials );
 
-	$file_name = Constants::get( 'MASTERIYO_ASSETS' ) . "/svg/{$name}.svg";
+	$file_name     = Constants::get( 'MASTERIYO_ASSETS' ) . "/svg/{$name}.svg";
+	$file_contents = '';
 
 	if ( file_exists( $file_name ) && is_readable( $file_name ) ) {
 		$file_contents = $wp_filesystem->get_contents( $file_name );

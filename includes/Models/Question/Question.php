@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 0.1.0
  */
-abstract class Question extends Model {
+class Question extends Model {
 
 	/**
 	 * This is the name of this object type.
@@ -71,7 +71,7 @@ abstract class Question extends Model {
 		'type'              => '',
 		'status'            => false,
 		'description'       => '',
-		'parent_id'          => 0,
+		'parent_id'         => 0,
 		'answers'           => array(),
 		'answer_required'   => true,
 		'randomize'         => false,
@@ -266,7 +266,13 @@ abstract class Question extends Model {
 	 * @return string
 	 */
 	public function get_type( $context = 'view' ) {
-		return apply_filters( 'masteriyo_question_type', $this->type, $context );
+		$type_in_db = $this->get_prop( 'type', 'edit' );
+		$type       = ! empty( $this->type ) ? $this->type : $type_in_db;
+
+		$this->type = $type;
+		$this->set_prop( 'type', $type );
+
+		return $this->get_prop( 'type', $context );
 	}
 
 	/**
@@ -451,7 +457,7 @@ abstract class Question extends Model {
 	 * @param array $type Question type.
 	 */
 	public function set_type( $type ) {
-		$this->set_prop( 'type', $this->type );
+		$this->set_prop( 'type', $type );
 	}
 
 	/**

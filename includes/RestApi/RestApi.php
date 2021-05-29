@@ -98,7 +98,7 @@ class RestApi {
 			'courses.children'     => "{$namespace}\\CourseChildrenController",
 			'lessons'              => "{$namespace}\\LessonsController",
 			'questions'            => "{$namespace}\\QuestionsController",
-			'quizes'               => "{$namespace}\\QuizesController",
+			'quizzes'              => "{$namespace}\\QuizesController",
 			'sections'             => "{$namespace}\\SectionsController",
 			'sections.children'    => "{$namespace}\\SectionChildrenController",
 			'faqs'                 => "{$namespace}\\FaqsController",
@@ -108,6 +108,7 @@ class RestApi {
 			'settings'             => "{$namespace}\\SettingsController",
 			'courses.reviews'      => "{$namespace}\\CourseReviewsController",
 			'courses.builder'      => "{$namespace}\\CourseBuilderController",
+			'quizzes.builder'      => "{$namespace}\\QuizBuilderController",
 		);
 	}
 

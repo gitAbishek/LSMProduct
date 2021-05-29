@@ -32,7 +32,7 @@ class QuestionServiceProvider extends AbstractServiceProvider {
 	 *
 	 * @var array
 	 */
-	 protected $provides = array(
+	protected $provides = array(
 		'question',
 		'question.store',
 		'question.rest',
@@ -45,25 +45,25 @@ class QuestionServiceProvider extends AbstractServiceProvider {
 		'question.sortable',
 	);
 
-	 /**
-	  * This is where the magic happens, within the method you can
-	  * access the container and register or retrieve anything
-	  * that you need to, but remember, every alias registered
-	  * within this method must be declared in the `$provides` array.
-	  *
-	  * @since 0.1.0
-	  */
-	 public function register() {
+	/**
+	 * This is where the magic happens, within the method you can
+	 * access the container and register or retrieve anything
+	 * that you need to, but remember, every alias registered
+	 * within this method must be declared in the `$provides` array.
+	 *
+	 * @since 0.1.0
+	*/
+	public function register() {
 		$this->getContainer()->add( 'question.store', QuestionRepository::class );
 
 		$this->getContainer()->add( 'question.rest', QuestionsController::class )
-			->addArgument( 'permission');
+			->addArgument( 'permission' );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuestionsController' )
-			->addArgument( 'permission');
+			->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'question', Question::class )
-			->addArgument( 'question.store');
+			->addArgument( 'question.store' );
 
 		$this->getContainer()->add( 'question.true-false', TrueFalse::class )
 			->addArgument( 'question.store' );
@@ -82,5 +82,5 @@ class QuestionServiceProvider extends AbstractServiceProvider {
 
 		$this->getContainer()->add( 'question.sortable', Sortable::class )
 			->addArgument( 'question.store' );
-	 }
+	}
 }

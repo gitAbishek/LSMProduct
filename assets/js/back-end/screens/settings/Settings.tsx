@@ -92,7 +92,7 @@ const Settings = () => {
 											generalData={settingsQuery.data?.general}
 										/>
 									</TabPanel>
-									<TabPanel>
+									<TabPanel sx={tabPanelStyles}>
 										<CoursesSettings
 											coursesData={settingsQuery.data?.courses}
 										/>

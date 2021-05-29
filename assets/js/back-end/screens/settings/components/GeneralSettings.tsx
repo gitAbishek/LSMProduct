@@ -6,9 +6,9 @@ import {
 	FormControl,
 	FormLabel,
 	Input,
+	Select,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Select from 'Components/common/Select';
 import React, { useEffect, useState } from 'react';
 import ReactFlagsSelect from 'react-flags-select';
 import { useFormContext } from 'react-hook-form';

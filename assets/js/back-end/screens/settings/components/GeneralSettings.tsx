@@ -114,7 +114,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 								{...register('general.currency_position')}
 								defaultValue={generalData?.currency_position}>
 								<option value="left">{__('Left', 'masteriyo')}</option>
-								<option value="right">{__('Left', 'masteriyo')}</option>
+								<option value="right">{__('Right', 'masteriyo')}</option>
 							</Select>
 						</FormControl>
 					</Stack>

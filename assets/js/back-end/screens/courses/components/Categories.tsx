@@ -10,10 +10,12 @@ import API from '../../../utils/api';
 
 interface Props {
 	defaultValue?: any;
+	name?: string;
+	label?: string;
 }
 
 const Categories: React.FC<Props> = (props) => {
-	const { defaultValue } = props;
+	const { defaultValue, name = 'categories', label = 'Categories' } = props;
 	const [categoriesList, setCategoriesList] = useState<any>(null);
 	const categoryAPI = new API(urls.categories);
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list(), {
@@ -39,7 +41,7 @@ const Categories: React.FC<Props> = (props) => {
 				</Center>
 			) : (
 				<FormControl>
-					<FormLabel>{__('Categories', 'masteriyo')}</FormLabel>
+					<FormLabel>{__(label, 'masteriyo')}</FormLabel>
 					<Controller
 						defaultValue={
 							defaultValue &&
@@ -59,7 +61,7 @@ const Categories: React.FC<Props> = (props) => {
 							/>
 						)}
 						control={control}
-						name="categories"
+						name={name}
 					/>
 				</FormControl>
 			)}

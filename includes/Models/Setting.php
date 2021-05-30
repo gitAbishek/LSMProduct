@@ -92,8 +92,6 @@ class Setting extends Model {
 			'single_lesson_permalink'        => '',
 			'single_quiz_permalink'          => '',
 			'single_section_permalink'       => '',
-			'enable_single_course_permalink' => '',
-			'single_course_enable_editing'   => '',
 
 			// Course Thumbnail.
 			'show_thumbnail'                 => true,
@@ -160,51 +158,51 @@ class Setting extends Model {
 			'general_footer_text'          => '',
 
 			//New Order.
-			'new_order_enable'             => false,
+			'new_order_enable'             => true,
 			'new_order_recipients'         => array(),
 			'new_order_subject'            => '',
 			'new_order_heading'            => '',
 			'new_order_content'            => '',
 
 			// Processing Order.
-			'processing_order_enable'      => false,
+			'processing_order_enable'      => true,
 			'processing_order_subject'     => '',
 			'processing_order_heading'     => '',
 			'processing_order_content'     => '',
 
 			// Completed Order.
-			'completed_order_enable'       => false,
+			'completed_order_enable'       => true,
 			'completed_order_subject'      => '',
 			'completed_order_heading'      => '',
 			'completed_order_content'      => '',
 
 			// On Hold Order.
-			'onhold_order_enable'          => false,
+			'onhold_order_enable'          => true,
 			'onhold_order_subject'         => '',
 			'onhold_order_heading'         => '',
 			'onhold_order_content'         => '',
 
 			// Cancelled Order.
-			'cancelled_order_enable'       => false,
+			'cancelled_order_enable'       => true,
 			'cancelled_order_recipients'   => array(),
 			'cancelled_order_subject'      => '',
 			'cancelled_order_heading'      => '',
 			'cancelled_order_content'      => '',
 
 			// Enrolled Course.
-			'enrolled_course_enable'       => false,
+			'enrolled_course_enable'       => true,
 			'enrolled_course_subject'      => '',
 			'enrolled_course_heading'      => '',
 			'enrolled_course_content'      => '',
 
 			// Completed Course.
-			'completed_course_enable'      => false,
+			'completed_course_enable'      => true,
 			'completed_course_subject'     => '',
 			'completed_course_heading'     => '',
 			'completed_course_content'     => '',
 
 			// Become An Instructor.
-			'become_an_instructor_enable'  => false,
+			'become_an_instructor_enable'  => true,
 			'become_an_instructor_subject' => '',
 			'become_an_instructor_heading' => '',
 			'become_an_instructor_content' => '',
@@ -515,30 +513,6 @@ class Setting extends Model {
 	 */
 	public function get_courses_single_section_permalink( $context = 'view' ) {
 		return $this->get_setting_prop( 'single_section_permalink', 'courses', $context );
-	}
-
-	/**
-	 * Get option courses_enable_single_course_permalink.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $context
-	 * @return string
-	 */
-	public function get_courses_enable_single_course_permalink( $context = 'view' ) {
-		return $this->get_setting_prop( 'enable_single_course_permalink', 'courses', $context );
-	}
-
-	/**
-	 * Get option courses_single_course_enable_editing.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $context
-	 * @return string
-	 */
-	public function get_courses_single_course_enable_editing( $context = 'view' ) {
-		return $this->get_setting_prop( 'single_course_enable_editing', 'courses', $context );
 	}
 
 	/**
@@ -1805,26 +1779,6 @@ class Setting extends Model {
 	*/
 	public function set_courses_single_section_permalink( $permalink ) {
 		$this->set_setting_prop( 'single_section_permalink', 'courses', $permalink );
-	}
-
-	/**
-	 * Set option courses enable single course permalink.
-	*
-	* @since 0.1.0
-	* @param string $enable
-	*/
-	public function set_courses_enable_single_course_permalink( $enable ) {
-		$this->set_setting_prop( 'enable_single_course_permalink', 'courses', $enable );
-	}
-
-	/**
-	 * Set option courses single course enable editing.
-	*
-	* @since 0.1.0
-	* @param string $enable
-	*/
-	public function set_courses_single_course_enable_editing( $enable ) {
-		$this->set_setting_prop( 'single_course_enable_editing', 'courses', $enable );
 	}
 
 	/**

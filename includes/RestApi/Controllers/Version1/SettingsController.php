@@ -327,16 +327,6 @@ class SettingsController extends CrudController {
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'enable_single_course_permalink' => array(
-							'description' => __( 'Enable single course permalink.', 'masteriyo' ),
-							'type'        => 'boolean',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'single_course_enable_editing'   => array(
-							'description' => __( 'Enable editing published single course.', 'masteriyo' ),
-							'type'        => 'boolean',
-							'context'     => array( 'view', 'edit' ),
-						),
 						'show_thumbnail'                 => array(
 							'description' => __( 'Show course thumbnail.', 'masteriyo' ),
 							'type'        => 'boolean',
@@ -455,17 +445,17 @@ class SettingsController extends CrudController {
 					'items'       => array(
 						'type'   => 'object',
 						'paypal' => array(
-							'enable'                => array(
+							'enable'                 => array(
 								'description' => __( 'Enable standard paypal.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'title'                 => array(
+							'title'                  => array(
 								'description' => __( 'Paypal title which the user sees during checkout.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'description'           => array(
+							'description'            => array(
 								'description' => __( 'Paypal description which the user sees during checkout.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
@@ -476,76 +466,76 @@ class SettingsController extends CrudController {
 								'default'     => true,
 								'context'     => array( 'view', 'edit' ),
 							),
-							'sandbox'               => array(
+							'sandbox'                => array(
 								'description' => __( 'Enable sandbox/sandbox mode on paypal.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'email'                 => array(
+							'email'                  => array(
 								'description' => __( 'Paypal email.', 'masteriyo' ),
 								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'receiver_email'        => array(
+							'receiver_email'         => array(
 								'description' => __( 'Paypal receiver email.', 'masteriyo' ),
 								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'identity_token'        => array(
+							'identity_token'         => array(
 								'description' => __( 'Paypal identity token.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'invoice_prefix'        => array(
+							'invoice_prefix'         => array(
 								'description' => __( 'Paypal invoice prefix.', 'masteriyo' ),
 								'type'        => 'string',
 								'default'     => 'masteriyo-',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'payment_action'        => array(
+							'payment_action'         => array(
 								'description' => __( 'Paypal payment action.', 'masteriyo' ),
 								'type'        => 'string',
 								'default'     => 'capture',
 								'enum'        => array( 'capture', 'authorize' ),
 								'context'     => array( 'view', 'edit' ),
 							),
-							'image_url'             => array(
+							'image_url'              => array(
 								'description' => __( 'Paypal image url.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'debug'                 => array(
+							'debug'                  => array(
 								'description' => __( 'Enable log.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'default'     => false,
 								'context'     => array( 'view', 'edit' ),
 							),
-							'sandbox_api_username'  => array(
+							'sandbox_api_username'   => array(
 								'description' => __( 'Paypal sandbox API username.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'sandbox_api_password'  => array(
+							'sandbox_api_password'   => array(
 								'description' => __( 'Paypal sandbox API password.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'sandbox_api_signature' => array(
+							'sandbox_api_signature'  => array(
 								'description' => __( 'Paypal sandbox API signature.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'live_api_username'  => array(
+							'live_api_username'      => array(
 								'description' => __( 'Paypal live API username.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'live_api_password'  => array(
+							'live_api_password'      => array(
 								'description' => __( 'Paypal live API password.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'live_api_signature' => array(
+							'live_api_signature'     => array(
 								'description' => __( 'Paypal live API signature.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
@@ -997,8 +987,6 @@ class SettingsController extends CrudController {
 				'single_lesson_permalink'        => $setting->get_courses_single_lesson_permalink( $context ),
 				'single_quiz_permalink'          => $setting->get_courses_single_quiz_permalink( $context ),
 				'single_section_permalink'       => $setting->get_courses_single_section_permalink( $context ),
-				'enable_single_course_permalink' => $setting->get_courses_enable_single_course_permalink( $context ),
-				'single_course_enable_editing'   => $setting->get_courses_single_course_enable_editing( $context ),
 				'show_thumbnail'                 => $setting->get_courses_show_thumbnail( $context ),
 				'thumbnail_size'                 => $setting->get_courses_thumbnail_size( $context ),
 			),
@@ -1214,14 +1202,6 @@ class SettingsController extends CrudController {
 
 		if ( isset( $request['courses']['single_section_permalink'] ) ) {
 			$setting->set_courses_single_section_permalink( $request['courses']['single_section_permalink'] );
-		}
-
-		if ( isset( $request['courses']['enable_single_course_permalink'] ) ) {
-			$setting->set_courses_enable_single_course_permalink( $request['courses']['enable_single_course_permalink'] );
-		}
-
-		if ( isset( $request['courses']['single_course_enable_editing'] ) ) {
-			$setting->set_courses_single_course_enable_editing( $request['courses']['single_course_enable_editing'] );
 		}
 
 		if ( isset( $request['courses']['show_thumbnail'] ) ) {

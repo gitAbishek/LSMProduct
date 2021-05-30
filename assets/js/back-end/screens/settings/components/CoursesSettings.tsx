@@ -248,12 +248,12 @@ const CoursesSettings: React.FC<Props> = (props) => {
 								render={({ field }) => (
 									<RadioGroup {...field}>
 										<Stack spacing={3} direction="column">
-											<Radio colorScheme="blue" value="default">
+											<Radio value="default">
 												<FormHelperText mt="0">
 													http://example.com?masteriyo_course=sample-course
 												</FormHelperText>
 											</Radio>
-											<Radio colorScheme="green" value="pretty">
+											<Radio value="pretty">
 												<FormHelperText mt="0">
 													http://example.com/course/sample-course
 												</FormHelperText>
@@ -266,19 +266,31 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel minW="2xs">
-							{__('Single Section Permalink', 'masteriyo')}
-						</FormLabel>
-						<RadioGroup>
-							<Stack spacing={3} direction="column">
-								<Radio colorScheme="blue" value="default">
-									http://example.com?masteriyo_course=sample-course
-								</Radio>
-								<Radio colorScheme="green" value="pretty">
-									http://example.com/course/sample-course
-								</Radio>
-							</Stack>
-						</RadioGroup>
+						<Stack direction="row">
+							<FormLabel minW="2xs">
+								{__('Single Section Permalink', 'masteriyo')}
+							</FormLabel>
+							<Controller
+								defaultValue={coursesData?.single_section_permalink}
+								name="courses.single_section_permalink"
+								render={({ field }) => (
+									<RadioGroup {...field}>
+										<Stack spacing={3} direction="column">
+											<Radio value="default">
+												<FormHelperText mt="0">
+													http://example.com?masteriyo_course=sample-course
+												</FormHelperText>
+											</Radio>
+											<Radio value="pretty">
+												<FormHelperText mt="0">
+													http://example.com/course/sample-course
+												</FormHelperText>
+											</Radio>
+										</Stack>
+									</RadioGroup>
+								)}
+							/>
+						</Stack>
 					</FormControl>
 
 					<FormControl>

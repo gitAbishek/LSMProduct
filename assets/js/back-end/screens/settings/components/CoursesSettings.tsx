@@ -312,30 +312,6 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					<FormControl>
 						<Stack direction="row" spacing="4">
 							<FormLabel minW="2xs">
-								{__('Enable Single Course Permalink', 'masteriyo')}
-							</FormLabel>
-							<Switch
-								{...register('courses.enable_single_course_permalink')}
-								defaultChecked={coursesData?.enable_single_course_permalink}
-							/>
-						</Stack>
-					</FormControl>
-
-					<FormControl>
-						<Stack direction="row" spacing="4">
-							<FormLabel minW="2xs">
-								{__('Enable Single Course Editing', 'masteriyo')}
-							</FormLabel>
-							<Switch
-								{...register('courses.enable_single_course_permalink')}
-								defaultChecked={coursesData?.single_course_enable_editing}
-							/>
-						</Stack>
-					</FormControl>
-
-					<FormControl>
-						<Stack direction="row" spacing="4">
-							<FormLabel minW="2xs">
 								{__('Show Thumbnail', 'masteriyo')}
 							</FormLabel>
 							<Switch

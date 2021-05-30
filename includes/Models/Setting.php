@@ -1691,7 +1691,7 @@ class Setting extends Model {
 	* @param int $image
 	*/
 	public function set_courses_placeholder_image( $image ) {
-		$this->set_setting_prop( 'placeholder_image', 'courses', $image );
+		$this->set_setting_prop( 'placeholder_image', 'courses', absint( $image ) );
 	}
 
 	/**

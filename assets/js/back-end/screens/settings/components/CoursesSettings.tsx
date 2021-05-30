@@ -19,27 +19,43 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import ImageUpload from 'Components/common/ImageUpload';
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import urls from '../../../constants/urls';
 import { CoursesSettingsMap } from '../../../types';
 import API from '../../../utils/api';
 
+/* TODO
+[ ] Add Real urls for the permalink settings
+*/
 interface Props {
 	coursesData?: CoursesSettingsMap;
 }
+
 const CoursesSettings: React.FC<Props> = (props) => {
 	const { coursesData: coursesData } = props;
 	const { register, setValue } = useFormContext();
+	const [showCustomSize, setShowCustomSize] = useState(false);
+
 	const categoryAPI = new API(urls.categories);
 	const tagsAPI = new API(urls.tags);
 	const difficultiesAPI = new API(urls.difficulties);
+
 	const categoryQuery = useQuery('categories', () => categoryAPI.list());
 	const tagsQuery = useQuery('tags', () => tagsAPI.list());
 	const difficultiesQuery = useQuery('difficulties', () =>
 		difficultiesAPI.list()
 	);
+
+	const onThumnailSizeChange = (e: any) => {
+		setValue('courses.thumbnail_size', e.target.value);
+		if (e.target.value === 'custom-size') {
+			setShowCustomSize(true);
+		} else {
+			setShowCustomSize(false);
+		}
+	};
 
 	return (
 		<Stack direction="column" spacing="8">
@@ -333,12 +349,51 @@ const CoursesSettings: React.FC<Props> = (props) => {
 						<FormLabel minW="2xs">
 							{__('Thumbnail Size', 'masteriyo')}
 						</FormLabel>
-						<Input
-							type="text"
-							{...register('courses.thumbnail_size')}
-							defaultValue={coursesData?.thumbnail_size}
-						/>
+						<Select
+							onChange={onThumnailSizeChange}
+							defaultValue={coursesData?.thumbnail_size}>
+							<option value="thumbnail">Thumbnail</option>
+							<option value="medium">Medium</option>
+							<option value="medium_large">Medium Large</option>
+							<option value="large">large</option>
+							<option value="custom-size">Custom Size</option>
+						</Select>
 					</FormControl>
+
+					{showCustomSize && (
+						<Stack direction="row" spacing="6">
+							<FormControl>
+								<FormLabel>{__('Width', 'masteriyo')}</FormLabel>
+								<Controller
+									name="courses.custom-height"
+									render={({ field }) => (
+										<NumberInput {...field}>
+											<NumberInputField borderRadius="sm" shadow="input" />
+											<NumberInputStepper>
+												<NumberIncrementStepper />
+												<NumberDecrementStepper />
+											</NumberInputStepper>
+										</NumberInput>
+									)}
+								/>
+							</FormControl>
+							<FormControl>
+								<FormLabel>{__('Height', 'masteriyo')}</FormLabel>
+								<Controller
+									name="courses.custom-height"
+									render={({ field }) => (
+										<NumberInput {...field}>
+											<NumberInputField borderRadius="sm" shadow="input" />
+											<NumberInputStepper>
+												<NumberIncrementStepper />
+												<NumberDecrementStepper />
+											</NumberInputStepper>
+										</NumberInput>
+									)}
+								/>
+							</FormControl>
+						</Stack>
+					)}
 				</Stack>
 			</Box>
 		</Stack>

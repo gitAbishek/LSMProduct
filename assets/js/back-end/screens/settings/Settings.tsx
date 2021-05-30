@@ -22,6 +22,7 @@ import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
 import CoursesSettings from './components/CoursesSettings';
 import GeneralSettings from './components/GeneralSettings';
+import PagesSettings from './components/PagesSettings';
 
 const Settings = () => {
 	const settingsApi = new API(urls.settings);
@@ -93,6 +94,9 @@ const Settings = () => {
 										<CoursesSettings
 											coursesData={settingsQuery.data?.courses}
 										/>
+									</TabPanel>
+									<TabPanel sx={tabPanelStyles}>
+										<PagesSettings />
 									</TabPanel>
 								</TabPanels>
 								<ButtonGroup>

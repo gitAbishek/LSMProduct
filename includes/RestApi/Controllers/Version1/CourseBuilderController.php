@@ -279,8 +279,7 @@ class CourseBuilderController extends PostsController {
 			array(
 				'post_parent' => $request['id'],
 				'post_type'   => 'section',
-			),
-			$request
+			)
 		);
 
 		$objects = array_merge( array(), $sections );
@@ -290,8 +289,7 @@ class CourseBuilderController extends PostsController {
 				array(
 					'post_parent' => $section->get_id(),
 					'post_type'   => 'any',
-				),
-				$request
+				)
 			);
 
 			if ( 0 < count( $contents ) ) {
@@ -307,11 +305,10 @@ class CourseBuilderController extends PostsController {
 	 *
 	 * @since 0.1.0
 	 * @param string[] $query_args WP_Query args.
-	 * @param  WP_REST_Request $request Full details about the request.
 	 *
 	 * @return Model[]
 	 */
-	protected function get_objects( $query_args, $request ) {
+	protected function get_objects( $query_args ) {
 		$query_args['posts_per_page'] = -1;
 		$query                        = new \WP_Query( $query_args );
 

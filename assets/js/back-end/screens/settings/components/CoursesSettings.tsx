@@ -315,7 +315,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 								{__('Show Thumbnail', 'masteriyo')}
 							</FormLabel>
 							<Switch
-								{...register('courses.show')}
+								{...register('courses.show_thumbnail')}
 								defaultChecked={coursesData?.show_thumbnail}
 							/>
 						</Stack>

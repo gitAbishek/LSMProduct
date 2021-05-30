@@ -20,7 +20,6 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import urls from '../../constants/urls';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
-import { mergeDeep } from '../../utils/mergeDeep';
 import CoursesSettings from './components/CoursesSettings';
 import GeneralSettings from './components/GeneralSettings';
 
@@ -65,8 +64,7 @@ const Settings = () => {
 	}
 
 	const onSubmit = (data: SetttingsMap) => {
-		const mergedData = mergeDeep(settingsQuery.data, data);
-		updateSettings.mutate(mergedData);
+		updateSettings.mutate(data);
 	};
 
 	return (

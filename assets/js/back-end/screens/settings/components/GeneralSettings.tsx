@@ -16,11 +16,11 @@ import { GeneralSettingsMap } from '../../../types';
 import { currency } from '../../../utils/currency';
 
 interface Props {
-	generalData: GeneralSettingsMap | any;
+	generalData?: GeneralSettingsMap;
 }
 const GeneralSettings: React.FC<Props> = (props) => {
 	const { generalData } = props;
-	const [country, setCountry] = useState(generalData.country);
+	const [country, setCountry] = useState(generalData?.country);
 	const { register, setValue } = useFormContext();
 
 	useEffect(() => {
@@ -50,7 +50,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 								defaultValue={generalData?.country}
 							/>
 							<ReactFlagsSelect
-								selected={country}
+								selected={country || ''}
 								onSelect={(code) => setCountry(code)}
 							/>
 						</FormControl>

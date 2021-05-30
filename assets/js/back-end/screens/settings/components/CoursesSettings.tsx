@@ -34,8 +34,12 @@ const CoursesSettings: React.FC<Props> = (props) => {
 	const { register, setValue } = useFormContext();
 	const categoryAPI = new API(urls.categories);
 	const tagsAPI = new API(urls.tags);
+	const difficultiesAPI = new API(urls.difficulties);
 	const categoryQuery = useQuery('categories', () => categoryAPI.list());
 	const tagsQuery = useQuery('tags', () => tagsAPI.list());
+	const difficultiesQuery = useQuery('difficulties', () =>
+		difficultiesAPI.list()
+	);
 
 	return (
 		<Stack direction="column" spacing="8">
@@ -128,6 +132,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 							{__('Course Category Base', 'masteriyo')}
 						</FormLabel>
 						<Select
+							placeholder={__('Select Category Base', 'masteriyo')}
 							{...register('courses.category_base')}
 							defaultValue={coursesData?.category_base}>
 							{categoryQuery?.data?.map(
@@ -145,6 +150,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 							{__('Couses Tag Base', 'masteriyo')}
 						</FormLabel>
 						<Select
+							placeholder={__('Select Tag Base', 'masteriyo')}
 							{...register('courses.tag_base')}
 							defaultValue={coursesData?.tag_base}>
 							{tagsQuery?.data?.map(
@@ -162,9 +168,16 @@ const CoursesSettings: React.FC<Props> = (props) => {
 							{__('Course Difficulty base', 'masteriyo')}
 						</FormLabel>
 						<Select
+							placeholder={__('Select Difficulty Base', 'masteriyo')}
 							{...register('courses.difficulty_base')}
 							defaultValue={coursesData?.difficulty_base}>
-							<option value="beginner">{__('Beginner', 'masteriyo')}</option>
+							{difficultiesQuery?.data?.map(
+								(difficulty: { id: number; name: string; slug: string }) => (
+									<option value={difficulty.id} key={difficulty.id}>
+										{difficulty.name}
+									</option>
+								)
+							)}
 						</Select>
 					</FormControl>
 

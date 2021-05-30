@@ -45,7 +45,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</Flex>
 
 					<FormControl>
-						<FormLabel>{__('Placeholder Image', 'masteriyo')}</FormLabel>
+						<FormLabel minW="2xs">
+							{__('Placeholder Image', 'masteriyo')}
+						</FormLabel>
 						<ImageUpload
 							name="courses.placeholder_image"
 							setValue={setValue}
@@ -53,7 +55,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 						/>
 					</FormControl>
 					<FormControl>
-						<FormLabel>{__('Add to cart behavior', 'masteriyo')}</FormLabel>
+						<FormLabel minW="2xs">
+							{__('Add to cart behavior', 'masteriyo')}
+						</FormLabel>
 						<Select
 							{...register('courses.add_to_cart_behavior')}
 							defaultValue={coursesData?.add_to_cart_behavior}>
@@ -62,7 +66,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel>{__('Course Per Page', 'masteiryo')}</FormLabel>
+						<FormLabel minW="2xs">
+							{__('Course Per Page', 'masteiryo')}
+						</FormLabel>
 						<Controller
 							name="courses.per_page"
 							render={({ field }) => (
@@ -79,7 +85,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 
 					<FormControl>
 						<Stack direction="row">
-							<FormLabel>
+							<FormLabel minW="2xs">
 								{__('Enable Editing Published Course', 'masteriyo')}
 							</FormLabel>
 							<Controller
@@ -109,7 +115,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</Flex>
 
 					<FormControl>
-						<FormLabel>{__('Course Category Base', 'masteiryo')}</FormLabel>
+						<FormLabel minW="2xs">
+							{__('Course Category Base', 'masteiryo')}
+						</FormLabel>
 						<Select
 							{...register('courses.category_base')}
 							defaultValue={coursesData?.category_base}>
@@ -120,7 +128,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel>{__('Couses Tag Base', 'masteriyo')}</FormLabel>
+						<FormLabel minW="2xs">
+							{__('Couses Tag Base', 'masteriyo')}
+						</FormLabel>
 						<Select
 							{...register('courses.tag_base')}
 							defaultValue={coursesData?.tag_base}>
@@ -129,7 +139,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel>{__('Course Difficulty base', 'masteriyo')}</FormLabel>
+						<FormLabel minW="2xs">
+							{__('Course Difficulty base', 'masteriyo')}
+						</FormLabel>
 						<Select
 							{...register('courses.difficulty_base')}
 							defaultValue={coursesData?.difficulty_base}>
@@ -138,7 +150,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel>{__('Single Course Permalink', 'masteriyo')}</FormLabel>
+						<FormLabel minW="2xs">
+							{__('Single Course Permalink', 'masteriyo')}
+						</FormLabel>
 						<Controller
 							name="courses.single_course_permalink"
 							render={({ field }) => (
@@ -157,7 +171,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel>{__('Single Lesson Permalink', 'masteriyo')}</FormLabel>
+						<FormLabel minW="2xs">
+							{__('Single Lesson Permalink', 'masteriyo')}
+						</FormLabel>
 						<RadioGroup>
 							<Stack spacing={3} direction="column">
 								<Radio colorScheme="blue" value="default">
@@ -171,7 +187,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel>{__('Single Quiz Permalink', 'masteriyo')}</FormLabel>
+						<FormLabel minW="2xs">
+							{__('Single Quiz Permalink', 'masteriyo')}
+						</FormLabel>
 						<RadioGroup>
 							<Stack spacing={3} direction="column">
 								<Radio colorScheme="blue" value="default">
@@ -185,7 +203,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel>{__('Single Section Permalink', 'masteriyo')}</FormLabel>
+						<FormLabel minW="2xs">
+							{__('Single Section Permalink', 'masteriyo')}
+						</FormLabel>
 						<RadioGroup>
 							<Stack spacing={3} direction="column">
 								<Radio colorScheme="blue" value="default">
@@ -200,7 +220,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 
 					<FormControl>
 						<Stack direction="row" spacing="4">
-							<FormLabel>
+							<FormLabel minW="2xs">
 								{__('Enable Single Course Permalink', 'masteriyo')}
 							</FormLabel>
 							<Switch
@@ -212,7 +232,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 
 					<FormControl>
 						<Stack direction="row" spacing="4">
-							<FormLabel>
+							<FormLabel minW="2xs">
 								{__('Enable Single Course Editing', 'masteriyo')}
 							</FormLabel>
 							<Switch
@@ -224,7 +244,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 
 					<FormControl>
 						<Stack direction="row" spacing="4">
-							<FormLabel>{__('Show Thumbnail', 'masteriyo')}</FormLabel>
+							<FormLabel minW="2xs">
+								{__('Show Thumbnail', 'masteriyo')}
+							</FormLabel>
 							<Switch
 								{...register('courses.show')}
 								defaultChecked={coursesData?.show_thumbnail}
@@ -233,7 +255,9 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel>{__('Thumbnail Size', 'masteriyo')}</FormLabel>
+						<FormLabel minW="2xs">
+							{__('Thumbnail Size', 'masteriyo')}
+						</FormLabel>
 						<Input
 							type="text"
 							{...register('courses.thumbnail_size')}

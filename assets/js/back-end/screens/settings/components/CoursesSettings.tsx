@@ -30,6 +30,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 	const { coursesData: coursesData } = props;
 	const { register, setValue } = useFormContext();
 
+	console.log(coursesData);
 	return (
 		<Stack direction="column" spacing="8">
 			<Box>
@@ -72,6 +73,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 						</FormLabel>
 						<Controller
 							name="courses.per_page"
+							defaultValue={coursesData?.per_page}
 							render={({ field }) => (
 								<NumberInput {...field}>
 									<NumberInputField borderRadius="sm" shadow="input" />

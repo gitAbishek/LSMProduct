@@ -88,6 +88,16 @@ const theme = extendTheme({
 				mb: '3',
 			},
 		},
+		Select: {
+			sizes: {
+				md: {
+					field: {
+						borderRadius: 'sm',
+						shadow: 'input',
+					},
+				},
+			},
+		},
 	},
 });
 

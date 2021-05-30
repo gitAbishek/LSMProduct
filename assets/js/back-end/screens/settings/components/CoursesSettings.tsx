@@ -68,7 +68,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 
 					<FormControl>
 						<FormLabel minW="2xs">
-							{__('Course Per Page', 'masteiryo')}
+							{__('Course Per Page', 'masteriyo')}
 						</FormLabel>
 						<Controller
 							name="courses.per_page"
@@ -117,7 +117,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 
 					<FormControl>
 						<FormLabel minW="2xs">
-							{__('Course Category Base', 'masteiryo')}
+							{__('Course Category Base', 'masteriyo')}
 						</FormLabel>
 						<Select
 							{...register('courses.category_base')}

@@ -33,7 +33,10 @@ const CoursesSettings: React.FC<Props> = (props) => {
 	const { coursesData: coursesData } = props;
 	const { register, setValue } = useFormContext();
 	const categoryAPI = new API(urls.categories);
-	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
+	const tagsAPI = new API(urls.tags);
+	const categoryQuery = useQuery('categories', () => categoryAPI.list());
+	const tagsQuery = useQuery('tags', () => tagsAPI.list());
+
 	return (
 		<Stack direction="column" spacing="8">
 			<Box>
@@ -127,7 +130,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 						<Select
 							{...register('courses.category_base')}
 							defaultValue={coursesData?.category_base}>
-							{categoryQuery?.data.map(
+							{categoryQuery?.data?.map(
 								(category: { id: number; name: string; slug: string }) => (
 									<option value={category.id} key={category.id}>
 										{category.name}
@@ -144,7 +147,13 @@ const CoursesSettings: React.FC<Props> = (props) => {
 						<Select
 							{...register('courses.tag_base')}
 							defaultValue={coursesData?.tag_base}>
-							<option value="something">{__('data', 'masteriyo')}</option>
+							{tagsQuery?.data?.map(
+								(tag: { id: number; name: string; slug: string }) => (
+									<option value={tag.id} key={tag.id}>
+										{tag.name}
+									</option>
+								)
+							)}
 						</Select>
 					</FormControl>
 

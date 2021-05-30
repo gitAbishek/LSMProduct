@@ -36,7 +36,7 @@ class Install {
 		$base_prefix     = $wpdb->base_prefix;
 
 		dbDelta( self::get_question_table_schema( $charset_collate, $base_prefix ) );
-		// dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
+		dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_items_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_itemmeta_table_schema( $charset_collate, $base_prefix ) );
 	}
@@ -83,7 +83,7 @@ class Install {
 	 * @return string
 	 */
 	private static function get_session_table_schema( $charset_collate, $base_prefix ) {
-		$sql = "CREATE TABLE `{$base_prefix}masteriyo_sessions` (
+		$sql = "CREATE TABLE IF NOT EXISTS `{$base_prefix}masteriyo_sessions` (
 			id BIGINT UNSIGNED AUTO_INCREMENT,
 			`key` CHAR(32) UNIQUE NOT NULL,
 			`data` LONGTEXT NOT NULL,

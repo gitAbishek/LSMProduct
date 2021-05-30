@@ -78,6 +78,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 						</FormLabel>
 						<ImageUpload
 							name="courses.placeholder_image"
+							mediaId={coursesData?.placeholder_image}
 							setValue={setValue}
 							register={register}
 						/>

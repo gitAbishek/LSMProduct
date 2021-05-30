@@ -1856,7 +1856,7 @@ class Setting extends Model {
 	* @param string $page_id
 	*/
 	public function set_pages_myaccount_page_id( $page_id ) {
-		$this->set_setting_prop( 'myaccount_page_id', 'pages', $page_id );
+		$this->set_setting_prop( 'myaccount_page_id', 'pages', absint( $page_id ) );
 	}
 
 	/**
@@ -1866,7 +1866,7 @@ class Setting extends Model {
 	* @param string $page_id
 	*/
 	public function set_pages_course_list_page_id( $page_id ) {
-		$this->set_setting_prop( 'course_list_page_id', 'pages', $page_id );
+		$this->set_setting_prop( 'course_list_page_id', 'pages', absint( $page_id ) );
 	}
 
 	/**
@@ -1876,7 +1876,7 @@ class Setting extends Model {
 	* @param string $page_id
 	*/
 	public function set_pages_terms_conditions_page_id( $page_id ) {
-		$this->set_setting_prop( 'terms_conditions_page_id', 'pages', $page_id );
+		$this->set_setting_prop( 'terms_conditions_page_id', 'pages', absint( $page_id ) );
 	}
 
 	/**
@@ -1886,7 +1886,7 @@ class Setting extends Model {
 	* @param string $page_id
 	*/
 	public function set_pages_checkout_page_id( $page_id ) {
-		$this->set_setting_prop( 'checkout_page_id', 'pages', $page_id );
+		$this->set_setting_prop( 'checkout_page_id', 'pages', absint( $page_id ) );
 	}
 
 	// Checkout endpoints.

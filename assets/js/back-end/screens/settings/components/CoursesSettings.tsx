@@ -15,6 +15,7 @@ import {
 	Switch,
 	Radio,
 	RadioGroup,
+	FormHelperText,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import ImageUpload from 'Components/common/ImageUpload';
@@ -32,7 +33,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 	return (
 		<Stack direction="column" spacing="8">
 			<Box>
-				<Stack direction="column" spacing="6">
+				<Stack direction="column" spacing="8">
 					<Flex
 						align="center"
 						justify="space-between"
@@ -73,7 +74,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 							name="courses.per_page"
 							render={({ field }) => (
 								<NumberInput {...field}>
-									<NumberInputField />
+									<NumberInputField borderRadius="sm" shadow="input" />
 									<NumberInputStepper>
 										<NumberIncrementStepper />
 										<NumberDecrementStepper />
@@ -102,7 +103,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 				</Stack>
 			</Box>
 			<Box>
-				<Stack direction="column" spacing="6">
+				<Stack direction="column" spacing="8">
 					<Flex
 						align="center"
 						justify="space-between"
@@ -150,40 +151,52 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel minW="2xs">
-							{__('Single Course Permalink', 'masteriyo')}
-						</FormLabel>
-						<Controller
-							name="courses.single_course_permalink"
-							render={({ field }) => (
-								<RadioGroup {...field}>
-									<Stack spacing={3} direction="column">
-										<Radio value="default">
-											http://example.com?masteriyo_course=sample-course
-										</Radio>
-										<Radio value="pretty">
-											http://example.com/course/sample-course
-										</Radio>
-									</Stack>
-								</RadioGroup>
-							)}
-						/>
+						<Stack direction="row">
+							<FormLabel minW="2xs">
+								{__('Single Course Permalink', 'masteriyo')}
+							</FormLabel>
+							<Controller
+								name="courses.single_course_permalink"
+								render={({ field }) => (
+									<RadioGroup {...field}>
+										<Stack spacing={3} direction="column">
+											<Radio value="default">
+												<FormHelperText mt="0">
+													http://example.com?masteriyo_course=sample-course
+												</FormHelperText>
+											</Radio>
+											<Radio value="pretty">
+												<FormHelperText mt="0">
+													http://example.com/course/sample-course
+												</FormHelperText>
+											</Radio>
+										</Stack>
+									</RadioGroup>
+								)}
+							/>
+						</Stack>
 					</FormControl>
 
 					<FormControl>
-						<FormLabel minW="2xs">
-							{__('Single Lesson Permalink', 'masteriyo')}
-						</FormLabel>
-						<RadioGroup>
-							<Stack spacing={3} direction="column">
-								<Radio colorScheme="blue" value="default">
-									http://example.com?masteriyo_course=sample-course
-								</Radio>
-								<Radio colorScheme="green" value="pretty">
-									http://example.com/course/sample-course
-								</Radio>
-							</Stack>
-						</RadioGroup>
+						<Stack direction="row">
+							<FormLabel minW="2xs">
+								{__('Single Lesson Permalink', 'masteriyo')}
+							</FormLabel>
+							<RadioGroup>
+								<Stack spacing={3} direction="column">
+									<Radio colorScheme="blue" value="default">
+										<FormHelperText mt="0">
+											http://example.com?masteriyo_course=sample-course
+										</FormHelperText>
+									</Radio>
+									<Radio colorScheme="green" value="pretty">
+										<FormHelperText mt="0">
+											http://example.com/course/sample-course
+										</FormHelperText>
+									</Radio>
+								</Stack>
+							</RadioGroup>
+						</Stack>
 					</FormControl>
 
 					<FormControl>

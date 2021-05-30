@@ -79,23 +79,23 @@ class Setting extends Model {
 		),
 		'courses'  => array(
 			// General.
-			'placeholder_image'              => 0,
-			'add_to_cart_behaviour'          => '',
-			'per_page'                       => 12,
-			'enable_editing'                 => false,
+			'placeholder_image'        => 0,
+			'add_to_cart_behaviour'    => '',
+			'per_page'                 => 12,
+			'enable_editing'           => false,
 
 			// Single Course.
-			'category_base'                  => '',
-			'tag_base'                       => '',
-			'difficulty_base'                => '',
-			'single_course_permalink'        => '',
-			'single_lesson_permalink'        => '',
-			'single_quiz_permalink'          => '',
-			'single_section_permalink'       => '',
+			'category_base'            => '',
+			'tag_base'                 => '',
+			'difficulty_base'          => '',
+			'single_course_permalink'  => '',
+			'single_lesson_permalink'  => '',
+			'single_quiz_permalink'    => '',
+			'single_section_permalink' => '',
 
 			// Course Thumbnail.
-			'show_thumbnail'                 => true,
-			'thumbnail_size'                 => 'thumbnail',
+			'show_thumbnail'           => true,
+			'thumbnail_size'           => 'thumbnail',
 		),
 		'pages'    => array(
 			// Page Setup.
@@ -1788,7 +1788,7 @@ class Setting extends Model {
 	* @param string $show
 	*/
 	public function set_courses_show_thumbnail( $show ) {
-		$this->set_setting_prop( 'show_thumbnail', 'courses', $show );
+		$this->set_setting_prop( 'show_thumbnail', 'courses', masteriyo_string_to_bool( $show ) );
 	}
 
 	/**

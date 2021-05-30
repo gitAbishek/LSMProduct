@@ -21,7 +21,10 @@ import { __ } from '@wordpress/i18n';
 import ImageUpload from 'Components/common/ImageUpload';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import { useQuery } from 'react-query';
+import urls from '../../../constants/urls';
 import { CoursesSettingsMap } from '../../../types';
+import API from '../../../utils/api';
 
 interface Props {
 	coursesData?: CoursesSettingsMap;
@@ -29,8 +32,8 @@ interface Props {
 const CoursesSettings: React.FC<Props> = (props) => {
 	const { coursesData: coursesData } = props;
 	const { register, setValue } = useFormContext();
-
-	console.log(coursesData);
+	const categoryAPI = new API(urls.categories);
+	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list());
 	return (
 		<Stack direction="column" spacing="8">
 			<Box>
@@ -124,9 +127,13 @@ const CoursesSettings: React.FC<Props> = (props) => {
 						<Select
 							{...register('courses.category_base')}
 							defaultValue={coursesData?.category_base}>
-							<option value="uncategorized" key="uncategorized">
-								uncategorized
-							</option>
+							{categoryQuery?.data.map(
+								(category: { id: number; name: string; slug: string }) => (
+									<option value={category.id} key={category.id}>
+										{category.name}
+									</option>
+								)
+							)}
 						</Select>
 					</FormControl>
 

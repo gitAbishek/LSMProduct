@@ -47,7 +47,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 		<div class="mto-course--header">
 			<div class="mto-rt">
 				<span class="mto-icon-svg mto-flex mto-rating">
-					<?php masteriyo_format_rating( wp_rand( 0, 5 ) / wp_rand( 0, 5 ), true ); ?>
+					<?php masteriyo_format_rating( wp_rand( 0, 5 ) / wp_rand( 1, 5 ), true ); ?>
 				</span>
 				<?php foreach ( $course->get_categories( 'name' ) as $category ) : ?>
 					<span class="mto-badge mto-badge-pink mto-tag">

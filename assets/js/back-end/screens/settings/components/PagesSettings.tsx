@@ -176,6 +176,86 @@ const PagesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 				</Stack>
 			</Box>
+
+			<Box>
+				<Stack direction="column" spacing="8">
+					<Flex
+						align="center"
+						justify="space-between"
+						borderBottom="1px"
+						borderColor="gray.100"
+						pb="3">
+						<Heading fontSize="lg" fontWeight="semibold">
+							{__('Account Endpoints', 'masteriyo')}
+						</Heading>
+					</Flex>
+
+					<FormControl>
+						<FormLabel minW="2xs">{__('Orders', 'masteriyo')}</FormLabel>
+						<Input
+							type="text"
+							defaultValue={pageSettingsData?.account_endpoints.orders}
+							{...register('pages.account_endpoints.pay')}
+						/>
+					</FormControl>
+
+					<FormControl>
+						<FormLabel minW="2xs">{__('View Order', 'masteriyo')}</FormLabel>
+						<Input
+							type="text"
+							defaultValue={pageSettingsData?.account_endpoints.view_order}
+							{...register('pages.account_endpoints.view_order')}
+						/>
+					</FormControl>
+
+					<FormControl>
+						<FormLabel minW="2xs">{__('My Courses', 'masteriyo')}</FormLabel>
+						<Input
+							type="text"
+							defaultValue={pageSettingsData?.account_endpoints.my_courses}
+							{...register('pages.account_endpoints.my_courses')}
+						/>
+					</FormControl>
+
+					<FormControl>
+						<FormLabel minW="2xs">{__('Edit Account', 'masteriyo')}</FormLabel>
+						<Input
+							type="text"
+							defaultValue={pageSettingsData?.account_endpoints.edit_account}
+							{...register('pages.account_endpoints.edit_account')}
+						/>
+					</FormControl>
+
+					<FormControl>
+						<FormLabel minW="2xs">
+							{__('Payment Methods', 'masteriyo')}
+						</FormLabel>
+						<Input
+							type="text"
+							defaultValue={pageSettingsData?.account_endpoints.payment_methods}
+							{...register('pages.account_endpoints.payment_methods')}
+						/>
+					</FormControl>
+
+					<FormControl>
+						<FormLabel minW="2xs">{__('Lost Password', 'masteriyo')}</FormLabel>
+						<Input
+							type="text"
+							defaultValue={pageSettingsData?.account_endpoints.lost_password}
+							{...register('pages.account_endpoints.lost_password')}
+						/>
+					</FormControl>
+
+					<FormControl>
+						<FormLabel minW="2xs">{__('Logout', 'masteriyo')}</FormLabel>
+						<Input
+							type="text"
+							defaultValue={pageSettingsData?.account_endpoints.logout}
+							{...register('pages.account_endpoints.logout')}
+						/>
+					</FormControl>
+				</Stack>
+			</Box>
 		</Stack>
 	);
 };

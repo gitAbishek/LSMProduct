@@ -19,9 +19,13 @@ const PagesSettings = () => {
 	const pagesQuery = useQuery('pages', () => pageAPI.list());
 
 	const renderPagesOption = () => {
-		return pagesQuery?.data?.map((page: any) => (
-			<option value={page.id}>{page.title.rendered}</option>
-		));
+		try {
+			return pagesQuery?.data?.map((page: any) => (
+				<option value={page.id}>{page.title.rendered}</option>
+			));
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	console.log(pagesQuery?.data);

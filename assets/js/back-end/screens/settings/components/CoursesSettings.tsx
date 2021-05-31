@@ -38,16 +38,6 @@ const CoursesSettings: React.FC<Props> = (props) => {
 	const { register, setValue } = useFormContext();
 	const [showCustomSize, setShowCustomSize] = useState(false);
 
-	const categoryAPI = new API(urls.categories);
-	const tagsAPI = new API(urls.tags);
-	const difficultiesAPI = new API(urls.difficulties);
-
-	const categoryQuery = useQuery('categories', () => categoryAPI.list());
-	const tagsQuery = useQuery('tags', () => tagsAPI.list());
-	const difficultiesQuery = useQuery('difficulties', () =>
-		difficultiesAPI.list()
-	);
-
 	const onThumnailSizeChange = (e: any) => {
 		setValue('courses.thumbnail_size', e.target.value);
 		if (e.target.value === 'custom-size') {
@@ -148,54 +138,33 @@ const CoursesSettings: React.FC<Props> = (props) => {
 						<FormLabel minW="2xs">
 							{__('Course Category Base', 'masteriyo')}
 						</FormLabel>
-						<Select
-							placeholder={__('Select Category Base', 'masteriyo')}
+						<Input
+							type="text"
+							defaultValue={coursesData?.category_base}
 							{...register('courses.category_base')}
-							defaultValue={coursesData?.category_base}>
-							{categoryQuery?.data?.map(
-								(category: { id: number; name: string; slug: string }) => (
-									<option value={category.id} key={category.id}>
-										{category.name}
-									</option>
-								)
-							)}
-						</Select>
+						/>
 					</FormControl>
 
 					<FormControl>
 						<FormLabel minW="2xs">
 							{__('Couses Tag Base', 'masteriyo')}
 						</FormLabel>
-						<Select
-							placeholder={__('Select Tag Base', 'masteriyo')}
+						<Input
+							type="text"
 							{...register('courses.tag_base')}
-							defaultValue={coursesData?.tag_base}>
-							{tagsQuery?.data?.map(
-								(tag: { id: number; name: string; slug: string }) => (
-									<option value={tag.id} key={tag.id}>
-										{tag.name}
-									</option>
-								)
-							)}
-						</Select>
+							defaultValue={coursesData?.tag_base}
+						/>
 					</FormControl>
 
 					<FormControl>
 						<FormLabel minW="2xs">
 							{__('Course Difficulty base', 'masteriyo')}
 						</FormLabel>
-						<Select
-							placeholder={__('Select Difficulty Base', 'masteriyo')}
+						<Input
+							type="text"
 							{...register('courses.difficulty_base')}
-							defaultValue={coursesData?.difficulty_base}>
-							{difficultiesQuery?.data?.map(
-								(difficulty: { id: number; name: string; slug: string }) => (
-									<option value={difficulty.id} key={difficulty.id}>
-										{difficulty.name}
-									</option>
-								)
-							)}
-						</Select>
+							defaultValue={coursesData?.difficulty_base}
+						/>
 					</FormControl>
 
 					<FormControl>

@@ -17,7 +17,7 @@ const theme = extendTheme({
 	},
 	styles: {
 		global: {
-			'#masteriyo': {
+			'html,body': {
 				bg: 'gray.50',
 			},
 			'::placeholder': {

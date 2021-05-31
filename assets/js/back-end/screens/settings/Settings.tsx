@@ -96,7 +96,7 @@ const Settings = () => {
 										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
-										<PagesSettings />
+										{/* <PagesSettings /> */}
 									</TabPanel>
 								</TabPanels>
 								<ButtonGroup>

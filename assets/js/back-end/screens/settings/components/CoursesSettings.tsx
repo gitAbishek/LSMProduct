@@ -19,12 +19,9 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import ImageUpload from 'Components/common/ImageUpload';
-import React, { useState } from 'react';
+import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { useQuery } from 'react-query';
-import urls from '../../../constants/urls';
 import { CoursesSettingsMap } from '../../../types';
-import API from '../../../utils/api';
 
 /* TODO
 [ ] Add Real urls for the permalink settings

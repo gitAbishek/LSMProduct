@@ -23,6 +23,7 @@ import API from '../../utils/api';
 import CoursesSettings from './components/CoursesSettings';
 import GeneralSettings from './components/GeneralSettings';
 import PagesSettings from './components/PagesSettings';
+import PaymentsSettings from './components/PaymentsSettings';
 
 const Settings = () => {
 	const settingsApi = new API(urls.settings);
@@ -65,7 +66,7 @@ const Settings = () => {
 	}
 
 	const onSubmit = (data: SetttingsMap) => {
-		console.log(data.pages);
+		console.log(data.payments);
 		updateSettings.mutate(data);
 	};
 
@@ -99,6 +100,11 @@ const Settings = () => {
 									<TabPanel sx={tabPanelStyles}>
 										<PagesSettings
 											pageSettingsData={settingsQuery.data?.pages}
+										/>
+									</TabPanel>
+									<TabPanel sx={tabPanelStyles}>
+										<PaymentsSettings
+											paymentsData={settingsQuery.data?.payments}
 										/>
 									</TabPanel>
 								</TabPanels>

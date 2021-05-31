@@ -40,16 +40,18 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 					</Flex>
 
 					<FormControl>
-						<FormLabel minW="2xs">{__('Enable', 'masteriyo')}</FormLabel>
-						<Controller
-							name="payments.paypal.enable"
-							render={(fields) => (
-								<Switch
-									{...fields}
-									defaultChecked={paymentsData?.paypal?.enable}
-								/>
-							)}
-						/>
+						<Stack direction="row">
+							<FormLabel minW="2xs">{__('Enabled', 'masteriyo')}</FormLabel>
+							<Controller
+								name="payments.paypal.enable"
+								render={({ field }) => (
+									<Switch
+										{...field}
+										defaultChecked={paymentsData?.paypal?.enable}
+									/>
+								)}
+							/>
+						</Stack>
 					</FormControl>
 				</Stack>
 			</Box>

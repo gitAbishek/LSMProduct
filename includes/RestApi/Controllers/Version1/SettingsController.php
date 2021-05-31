@@ -271,77 +271,71 @@ class SettingsController extends CrudController {
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'                           => 'object',
-						'placeholder_image'              => array(
+						'type'                     => 'object',
+						'placeholder_image'        => array(
 							'description' => __( 'Placeholder image for courses.', 'masteriyo' ),
 							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'add_to_cart_behaviour'          => array(
+						'add_to_cart_behaviour'    => array(
 							'description' => __( 'Add to cart beahviour.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'per_page'                       => array(
+						'per_page'                 => array(
 							'description' => __( 'Courses per page.', 'masteriyo' ),
 							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'enable_editing'                 => array(
+						'enable_editing'           => array(
 							'description' => __( 'Enable editing published course.', 'masteriyo' ),
 							'type'        => 'boolean',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'category_base'                  => array(
+						'category_base'            => array(
 							'description' => __( 'Course category base.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'tag_base'                       => array(
+						'tag_base'                 => array(
 							'description' => __( 'Course tag base', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'difficulty_base'                => array(
+						'difficulty_base'          => array(
 							'description' => __( 'Course difficulty base', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'single_course_permalink'        => array(
+						'single_course_permalink'  => array(
 							'description' => __( 'Single course permalink.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'single_lesson_permalink'        => array(
+						'single_lesson_permalink'  => array(
 							'description' => __( 'Course lessons permalink', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'single_quiz_permalink'          => array(
+						'single_quiz_permalink'    => array(
 							'description' => __( 'Course quizzes permalink.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'single_section_permalink'       => array(
+						'single_section_permalink' => array(
 							'description' => __( 'Course sections permalink.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'show_thumbnail'                 => array(
+						'show_thumbnail'           => array(
 							'description' => __( 'Show course thumbnail.', 'masteriyo' ),
 							'type'        => 'boolean',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'thumbnail_size'                 => array(
+						'thumbnail_size'           => array(
 							'description' => __( 'Course thumbnail size', 'masteriyo' ),
 							'type'        => 'string',
-							'enum'        => array(
-								'thumbnail',
-								'medium',
-								'medium_large',
-								'large',
-								'custom-size',
-							),
+							'enum'        => get_intermediate_image_sizes(),
 							'context'     => array( 'view', 'edit' ),
 						),
 					),
@@ -976,19 +970,19 @@ class SettingsController extends CrudController {
 				'number_of_decimals' => $setting->get_general_number_of_decimals( $context ),
 			),
 			'courses'  => array(
-				'placeholder_image'              => $setting->get_courses_placeholder_image( $context ),
-				'add_to_cart_behaviour'          => $setting->get_courses_add_to_cart_behaviour( $context ),
-				'per_page'                       => $setting->get_courses_per_page( $context ),
-				'enable_editing'                 => $setting->get_courses_enable_editing( $context ),
-				'category_base'                  => $setting->get_courses_category_base( $context ),
-				'tag_base'                       => $setting->get_courses_tag_base( $context ),
-				'difficulty_base'                => $setting->get_courses_difficulty_base( $context ),
-				'single_course_permalink'        => $setting->get_courses_single_course_permalink( $context ),
-				'single_lesson_permalink'        => $setting->get_courses_single_lesson_permalink( $context ),
-				'single_quiz_permalink'          => $setting->get_courses_single_quiz_permalink( $context ),
-				'single_section_permalink'       => $setting->get_courses_single_section_permalink( $context ),
-				'show_thumbnail'                 => $setting->get_courses_show_thumbnail( $context ),
-				'thumbnail_size'                 => $setting->get_courses_thumbnail_size( $context ),
+				'placeholder_image'        => $setting->get_courses_placeholder_image( $context ),
+				'add_to_cart_behaviour'    => $setting->get_courses_add_to_cart_behaviour( $context ),
+				'per_page'                 => $setting->get_courses_per_page( $context ),
+				'enable_editing'           => $setting->get_courses_enable_editing( $context ),
+				'category_base'            => $setting->get_courses_category_base( $context ),
+				'tag_base'                 => $setting->get_courses_tag_base( $context ),
+				'difficulty_base'          => $setting->get_courses_difficulty_base( $context ),
+				'single_course_permalink'  => $setting->get_courses_single_course_permalink( $context ),
+				'single_lesson_permalink'  => $setting->get_courses_single_lesson_permalink( $context ),
+				'single_quiz_permalink'    => $setting->get_courses_single_quiz_permalink( $context ),
+				'single_section_permalink' => $setting->get_courses_single_section_permalink( $context ),
+				'show_thumbnail'           => $setting->get_courses_show_thumbnail( $context ),
+				'thumbnail_size'           => $setting->get_courses_thumbnail_size( $context ),
 			),
 			'pages'    => array(
 				'myaccount_page_id'        => $setting->get_pages_myaccount_page_id( $context ),

@@ -466,6 +466,7 @@ class ScriptStyle {
 							'symbol'   => \masteriyo_get_currency_symbol( masteriyo_get_currency() ),
 							'position' => get_option( 'masteriyo.general.currency_position', 'left' ),
 						),
+						'imageSizes' => get_intermediate_image_sizes(),
 					),
 				),
 			)

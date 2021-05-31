@@ -53,9 +53,23 @@ export type PagesSettingsMap = {
 export type PaymentsSettingsMap = {
 	paypal: {
 		enable: boolean;
-		production_email: string;
-		sandbox_enable: boolean;
-		sandbox_email: string;
+		title: string;
+		description: string;
+		ipn_email_notifications: boolean;
+		sandbox: boolean;
+		email: string;
+		receiver_email: string;
+		identity_token: string;
+		invoice_prefix: string;
+		payment_action: string;
+		image_url: string;
+		debug: boolean;
+		sandbox_api_username: string;
+		sandbox_api_password: string;
+		sandbox_api_signature: string;
+		live_api_username: string;
+		live_api_password: string;
+		live_api_signature: string;
 	};
 };
 

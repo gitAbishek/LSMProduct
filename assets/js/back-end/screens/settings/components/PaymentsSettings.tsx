@@ -14,6 +14,8 @@ import {
 	Tab,
 	TabPanels,
 	TabPanel,
+	Textarea,
+	Collapse,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -27,7 +29,8 @@ interface Props {
 
 const PaymentsSettings: React.FC<Props> = (props) => {
 	const { paymentsData } = props;
-	const { register } = useFormContext();
+	const { register, watch } = useFormContext();
+	const showPayPalOptions = watch('payments.paypal.enable');
 
 	const tabStyles = {
 		justifyContent: 'flex-start',
@@ -56,20 +59,12 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 				</TabList>
 				<TabPanels flex="1">
 					<TabPanel>
-						<Stack direction="column" spacing="8">
-							<Flex
-								align="center"
-								justify="space-between"
-								borderBottom="1px"
-								borderColor="gray.100"
-								pb="3">
-								<Heading fontSize="lg" fontWeight="semibold">
-									{__('General', 'masteriyo')}
-								</Heading>
-							</Flex>
+						<Stack direction="column" spacing="6">
 							<FormControl>
 								<Stack direction="row">
-									<FormLabel>{__('Enabled', 'masteriyo')}</FormLabel>
+									<FormLabel minW="160px">
+										{__('Enabled', 'masteriyo')}
+									</FormLabel>
 									<Controller
 										name="payments.paypal.enable"
 										render={({ field }) => (
@@ -81,6 +76,110 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									/>
 								</Stack>
 							</FormControl>
+							<Collapse in={showPayPalOptions}>
+								<Stack direction="column" spacing="6">
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Title', 'masteriyo')}
+										</FormLabel>
+										<Input
+											type="text"
+											defaultValue={paymentsData?.paypal?.title}
+											{...register('paymentsData.paypal.title')}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Description', 'masteriyo')}
+										</FormLabel>
+										<Textarea
+											defaultValue={paymentsData?.paypal?.description}
+											{...register('paymentsData.paypal.description')}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<Stack direction="row">
+											<FormLabel minW="160px">
+												{__('Ipn Email Notification', 'masteriyo')}
+											</FormLabel>
+											<Controller
+												name="payments.paypal.ipn_email_notifications"
+												render={({ field }) => (
+													<Switch
+														{...field}
+														defaultChecked={
+															paymentsData?.paypal?.ipn_email_notifications
+														}
+													/>
+												)}
+											/>
+										</Stack>
+									</FormControl>
+
+									<FormControl>
+										<Stack direction="row">
+											<FormLabel minW="160px">
+												{__('Sandbox', 'masteriyo')}
+											</FormLabel>
+											<Controller
+												name="payments.paypal.sandbox"
+												render={({ field }) => (
+													<Switch
+														{...field}
+														defaultChecked={paymentsData?.paypal?.sandbox}
+													/>
+												)}
+											/>
+										</Stack>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Email', 'masteriyo')}
+										</FormLabel>
+										<Input
+											type="email"
+											defaultValue={paymentsData?.paypal?.email}
+											{...register('paymentsData.paypal.email')}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Reciever Email', 'masteriyo')}
+										</FormLabel>
+										<Input
+											type="email"
+											defaultValue={paymentsData?.paypal?.receiver_email}
+											{...register('paymentsData.paypal.receiver_email')}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Indentity Token', 'masteriyo')}
+										</FormLabel>
+										<Input
+											type="text"
+											defaultValue={paymentsData?.paypal?.identity_token}
+											{...register('paymentsData.paypal.identity_token')}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Invoice Prefix', 'masteriyo')}
+										</FormLabel>
+										<Input
+											type="text"
+											defaultValue={paymentsData?.paypal?.invoice_prefix}
+											{...register('paymentsData.paypal.invoice_prefix')}
+										/>
+									</FormControl>
+								</Stack>
+							</Collapse>
 						</Stack>
 					</TabPanel>
 				</TabPanels>

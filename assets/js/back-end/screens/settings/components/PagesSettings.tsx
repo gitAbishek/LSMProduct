@@ -195,7 +195,7 @@ const PagesSettings: React.FC<Props> = (props) => {
 						<Input
 							type="text"
 							defaultValue={pageSettingsData?.account_endpoints.orders}
-							{...register('pages.account_endpoints.pay')}
+							{...register('pages.account_endpoints.orders')}
 						/>
 					</FormControl>
 

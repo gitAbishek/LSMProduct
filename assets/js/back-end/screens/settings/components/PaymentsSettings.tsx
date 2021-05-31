@@ -1,13 +1,9 @@
 import {
 	Stack,
-	Box,
-	Flex,
-	Heading,
 	FormControl,
 	FormLabel,
 	Select,
 	Input,
-	Spinner,
 	Switch,
 	Tabs,
 	TabList,
@@ -30,8 +26,13 @@ interface Props {
 const PaymentsSettings: React.FC<Props> = (props) => {
 	const { paymentsData } = props;
 	const { register, watch } = useFormContext();
-	const showPayPalOptions = watch('payments.paypal.enable');
+	const showPayPalOptions = watch(
+		'payments.paypal.enable',
+		paymentsData?.paypal.enable
+	);
+	const showSandboxOptions = watch('payments.paypal.sandbox');
 
+	console.log(showPayPalOptions);
 	const tabStyles = {
 		justifyContent: 'flex-start',
 		w: '160px',
@@ -76,7 +77,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									/>
 								</Stack>
 							</FormControl>
-							<Collapse in={showPayPalOptions}>
+							<Collapse in={showPayPalOptions} animateOpacity>
 								<Stack direction="column" spacing="6">
 									<FormControl>
 										<FormLabel minW="160px">
@@ -177,6 +178,20 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											defaultValue={paymentsData?.paypal?.invoice_prefix}
 											{...register('paymentsData.paypal.invoice_prefix')}
 										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Payment Actions', 'masteriyo')}
+										</FormLabel>
+										<Select
+											placeholder={__('Select Payment Action', 'masteriyo')}
+											defaultValue={paymentsData?.paypal?.payment_action}
+											{...register('paymentsData.paypal.invoice_prefix')}>
+											<option value="capture">
+												{__('Capture', 'masteriyo')}
+											</option>
+										</Select>
 									</FormControl>
 								</Stack>
 							</Collapse>

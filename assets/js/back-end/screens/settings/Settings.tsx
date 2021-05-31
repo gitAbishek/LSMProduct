@@ -71,20 +71,21 @@ const Settings = () => {
 	};
 
 	return (
-		<Stack direction="column" spacing="8" width="full" alignItems="center">
-			<Header />
-			<Container maxW="container.xl">
-				<Box bg="white" p="10" shadow="box">
-					<Tabs>
-						<TabList justifyContent="center" borderBottom="1px">
-							<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
-							<Tab sx={tabStyles}>{__('Courses', 'masteriyo')}</Tab>
-							<Tab sx={tabStyles}>{__('Pages', 'masteriyo')}</Tab>
-							<Tab sx={tabStyles}>{__('Payments', 'masteriyo')}</Tab>
-							<Tab sx={tabStyles}>{__('Emails', 'masteriyo')}</Tab>
-							<Tab sx={tabStyles}>{__('Advanced', 'masteriyo')}</Tab>
-						</TabList>
-						<FormProvider {...methods}>
+		<FormProvider {...methods}>
+			<Stack direction="column" spacing="8" width="full" alignItems="center">
+				<Header />
+				<Container maxW="container.xl">
+					<Box bg="white" p="10" shadow="box">
+						<Tabs>
+							<TabList justifyContent="center" borderBottom="1px">
+								<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
+								<Tab sx={tabStyles}>{__('Courses', 'masteriyo')}</Tab>
+								<Tab sx={tabStyles}>{__('Pages', 'masteriyo')}</Tab>
+								<Tab sx={tabStyles}>{__('Payments', 'masteriyo')}</Tab>
+								<Tab sx={tabStyles}>{__('Emails', 'masteriyo')}</Tab>
+								<Tab sx={tabStyles}>{__('Advanced', 'masteriyo')}</Tab>
+							</TabList>
+
 							<form onSubmit={methods.handleSubmit(onSubmit)}>
 								<TabPanels>
 									<TabPanel sx={tabPanelStyles}>
@@ -117,11 +118,11 @@ const Settings = () => {
 									</Button>
 								</ButtonGroup>
 							</form>
-						</FormProvider>
-					</Tabs>
-				</Box>
-			</Container>
-		</Stack>
+						</Tabs>
+					</Box>
+				</Container>
+			</Stack>
+		</FormProvider>
 	);
 };
 

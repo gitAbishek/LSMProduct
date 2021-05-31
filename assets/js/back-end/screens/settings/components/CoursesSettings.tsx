@@ -223,7 +223,20 @@ const CoursesSettings: React.FC<Props> = (props) => {
 							/>
 						</Stack>
 					</FormControl>
-
+				</Stack>
+			</Box>
+			<Box>
+				<Stack direction="column" spacing="8">
+					<Flex
+						align="center"
+						justify="space-between"
+						borderBottom="1px"
+						borderColor="gray.100"
+						pb="3">
+						<Heading fontSize="lg" fontWeight="semibold">
+							{__('Course Thumbnail', 'masteriyo')}
+						</Heading>
+					</Flex>
 					<FormControl>
 						<Stack direction="row" spacing="4">
 							<FormLabel minW="2xs">

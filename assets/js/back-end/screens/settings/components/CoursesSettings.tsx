@@ -200,25 +200,10 @@ const CoursesSettings: React.FC<Props> = (props) => {
 							<FormLabel minW="2xs">
 								{__('Single Lesson Permalink', 'masteriyo')}
 							</FormLabel>
-							<Controller
+							<Input
+								type="text"
 								defaultValue={coursesData?.single_lesson_permalink}
-								name="courses.single_lesson_permalink"
-								render={({ field }) => (
-									<RadioGroup {...field}>
-										<Stack spacing={3} direction="column">
-											<Radio value="default">
-												<FormHelperText mt="0">
-													http://example.com?masteriyo_course=sample-course
-												</FormHelperText>
-											</Radio>
-											<Radio value="pretty">
-												<FormHelperText mt="0">
-													http://example.com/course/sample-course
-												</FormHelperText>
-											</Radio>
-										</Stack>
-									</RadioGroup>
-								)}
+								{...register('single_lesson_permalink')}
 							/>
 						</Stack>
 					</FormControl>
@@ -228,25 +213,10 @@ const CoursesSettings: React.FC<Props> = (props) => {
 							<FormLabel minW="2xs">
 								{__('Single Quiz Permalink', 'masteriyo')}
 							</FormLabel>
-							<Controller
+							<Input
+								type="text"
 								defaultValue={coursesData?.single_quiz_permalink}
-								name="courses.single_quiz_permalink"
-								render={({ field }) => (
-									<RadioGroup {...field}>
-										<Stack spacing={3} direction="column">
-											<Radio value="default">
-												<FormHelperText mt="0">
-													http://example.com?masteriyo_course=sample-course
-												</FormHelperText>
-											</Radio>
-											<Radio value="pretty">
-												<FormHelperText mt="0">
-													http://example.com/course/sample-course
-												</FormHelperText>
-											</Radio>
-										</Stack>
-									</RadioGroup>
-								)}
+								{...register('courses.single_quiz_permalink')}
 							/>
 						</Stack>
 					</FormControl>
@@ -256,25 +226,10 @@ const CoursesSettings: React.FC<Props> = (props) => {
 							<FormLabel minW="2xs">
 								{__('Single Section Permalink', 'masteriyo')}
 							</FormLabel>
-							<Controller
+							<Input
+								type="text"
 								defaultValue={coursesData?.single_section_permalink}
-								name="courses.single_section_permalink"
-								render={({ field }) => (
-									<RadioGroup {...field}>
-										<Stack spacing={3} direction="column">
-											<Radio value="default">
-												<FormHelperText mt="0">
-													http://example.com?masteriyo_course=sample-course
-												</FormHelperText>
-											</Radio>
-											<Radio value="pretty">
-												<FormHelperText mt="0">
-													http://example.com/course/sample-course
-												</FormHelperText>
-											</Radio>
-										</Stack>
-									</RadioGroup>
-								)}
+								{...register('courses.single_section_permalink')}
 							/>
 						</Stack>
 					</FormControl>

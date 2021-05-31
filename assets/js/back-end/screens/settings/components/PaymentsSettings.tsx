@@ -48,28 +48,40 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<Tabs orientation="vertical" align="start">
-			<Stack direction="row">
+		<Tabs orientation="vertical">
+			<Stack direction="row" flex="1">
 				<TabList sx={tabListStyles}>
 					<Tab sx={tabStyles}>PayPal</Tab>
 					<Tab sx={tabStyles}>PayPal Express</Tab>
 				</TabList>
-				<TabPanels>
+				<TabPanels flex="1">
 					<TabPanel>
-						<FormControl>
-							<Stack direction="row">
-								<FormLabel>{__('Enabled', 'masteriyo')}</FormLabel>
-								<Controller
-									name="payments.paypal.enable"
-									render={({ field }) => (
-										<Switch
-											{...field}
-											defaultChecked={paymentsData?.paypal?.enable}
-										/>
-									)}
-								/>
-							</Stack>
-						</FormControl>
+						<Stack direction="column" spacing="8">
+							<Flex
+								align="center"
+								justify="space-between"
+								borderBottom="1px"
+								borderColor="gray.100"
+								pb="3">
+								<Heading fontSize="lg" fontWeight="semibold">
+									{__('General', 'masteriyo')}
+								</Heading>
+							</Flex>
+							<FormControl>
+								<Stack direction="row">
+									<FormLabel>{__('Enabled', 'masteriyo')}</FormLabel>
+									<Controller
+										name="payments.paypal.enable"
+										render={({ field }) => (
+											<Switch
+												{...field}
+												defaultChecked={paymentsData?.paypal?.enable}
+											/>
+										)}
+									/>
+								</Stack>
+							</FormControl>
+						</Stack>
 					</TabPanel>
 				</TabPanels>
 			</Stack>

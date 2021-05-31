@@ -65,6 +65,7 @@ const Settings = () => {
 	}
 
 	const onSubmit = (data: SetttingsMap) => {
+		console.log(data.pages);
 		updateSettings.mutate(data);
 	};
 
@@ -96,7 +97,9 @@ const Settings = () => {
 										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
-										{/* <PagesSettings /> */}
+										<PagesSettings
+											pageSettingsData={settingsQuery.data?.pages}
+										/>
 									</TabPanel>
 								</TabPanels>
 								<ButtonGroup>

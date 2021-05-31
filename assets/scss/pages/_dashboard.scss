@@ -8,7 +8,9 @@
   flex: 1 1 74%;
   gap: 48px;
   ul {
-    margin: inherit;
+    margin: 0;
+    padding: 0;
+
     li {
       list-style-type: none;
     }
@@ -20,11 +22,11 @@
   background: $mto-primary-color;
   @include mto-border-radius;
   padding: 32px;
-  color: white;
+  color: $mto-white-color;
   position: relative;
 
   .mto-title {
-    color: white;
+    color: $mto-white-color;
     font-size: $mto-text-xl;
   }
 
@@ -36,10 +38,10 @@
     height: 24px;
     border-radius: 100%;
     .mto-icon-svg {
-      fill: white;
+      fill: $mto-white-color;
     }
     &:hover {
-      background: rgba(white, 0.1);
+      background: rgba($mto-white-color, 0.1);
     }
   }
 
@@ -50,7 +52,7 @@
     padding-left: 24px;
     &:hover {
       .mto-icon-svg {
-        fill: white;
+        fill: $mto-white-color;
       }
     }
   }
@@ -62,7 +64,7 @@
   @include mto-default-animate;
   padding: 30px;
   flex: 1 1 30%;
-  background: $mto-white-color;
+  background: $mto-$mto-white-color-color;
 
   &:hover {
     @include mto-shadow-1;

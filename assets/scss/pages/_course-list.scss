@@ -7,7 +7,7 @@
 
   &-item {
     @include mto-shadow-1;
-    background: white;
+    background: $mto-white-color;
     margin: 15px;
     flex-basis: calc((100% / 4) - 30px);
   }
@@ -27,7 +27,7 @@
     background: $mto-primary-color;
     border-radius: 0 0 16px 0;
     padding: 8px 16px;
-    color: white;
+    color: $mto-white-color;
     font-weight: 700;
   }
 }

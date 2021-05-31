@@ -1,9 +1,10 @@
 .mto-vertical-menu {
   // General
   border-right: 1px solid $mto-border-color;
+  background: $mto-$mto-white-color-color;
   flex: 1 1 20%;
   min-width: 200px;
-  background: $mto-white-color;
+  padding-top: 40px;
 
   & svg {
     width: 24px;
@@ -46,23 +47,24 @@
 
   // Menu
   .mto-menu {
-    background: white;
+    background: $mto-white-color;
     margin-top: 40px;
     ul {
       margin: 0;
+      padding: 0;
       li {
         display: flex;
         align-items: center;
         list-style-type: none;
         padding: 16px;
-        border: 1px solid white;
+        border: 1px solid $mto-white-color;
 
         &.active,
         &:hover {
           margin-right: -1px;
           @include mto-default-border;
           border-radius: 4px 0 0 4px;
-          border-right: 1px solid white;
+          border-right: 1px solid $mto-white-color;
           & svg {
             fill: $mto-dark-blue-color;
           }
@@ -72,6 +74,7 @@
           display: inline-flex;
           width: 100%;
           gap: 10px;
+          align-items: center;
         }
       }
     }

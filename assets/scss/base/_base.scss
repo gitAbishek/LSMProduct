@@ -39,7 +39,7 @@ ul {
   padding: 4px 16px;
   font-size: 12px;
   border-radius: 100px;
-  color: white;
+  color: $mto-white-color;
 
   &.mto-badge-red {
     background: $mto-badge-red;
@@ -87,7 +87,7 @@ ul {
   animation-fill-mode: both;
   padding: 0 10px;
   font-size: 9px;
-  color: white;
+  color: $mto-white-color;
 
   @keyframes progressbar {
     0% {

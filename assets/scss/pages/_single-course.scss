@@ -79,12 +79,12 @@
     background: $mto-primary-color;
     border-radius: 0 0 16px 0;
     padding: 8px 16px;
-    color: white;
+    color: $mto-white-color;
   }
   .mto-heart {
     top: 20px;
     right: 20px;
-    background: white;
+    background: $mto-white-color;
     border-radius: 100px;
     padding: 8px;
     @include mto-shadow-1;
@@ -160,7 +160,7 @@
 
           .mto-ctitle,
           .mto-ltc {
-            color: white;
+            color: $mto-white-color;
           }
         }
         .mto-cbody {
@@ -175,7 +175,7 @@
         }
         .mto-cminus {
           display: block;
-          background: white;
+          background: $mto-white-color;
           border-radius: 50px;
           width: 24px;
           height: 24px;

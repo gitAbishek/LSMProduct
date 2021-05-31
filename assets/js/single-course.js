@@ -62,16 +62,24 @@ function selectTab(tabIndex) {
 		isCollapsedAll = true;
 	}
 
-	// Sticky
-	var stickyTop = $('.mto-sticky').offset().top;
+	$(document).ready(function () {
+		var content_ref = $('.mto-scourse--main').get(0);
+		if (content_ref) {
+			$(window).scroll(function () {
+				var stickyHeight = $('.mto-sticky').height();
+				var scroll_position = $(window).scrollTop();
+				var content_y = content_ref.offsetTop;
+				var content_y2 = content_y + content_ref.offsetHeight - stickyHeight;
+				var isSticky = false;
 
-	$(window).scroll(function () {
-		var windowTop = $(window).scrollTop();
-
-		if (stickyTop < windowTop) {
-			$('.mto-sticky').css({ position: 'fixed', top: '20px' });
-		} else {
-			$('.mto-sticky').css('position', 'relative');
+				if (scroll_position > content_y && scroll_position < content_y2)
+					isSticky = true;
+				if (isSticky) {
+					$('.mto-sticky').css({ position: 'fixed', top: '20px' });
+				} else {
+					$('.mto-sticky').css({ position: 'relative' });
+				}
+			});
 		}
 	});
 })(jQuery);

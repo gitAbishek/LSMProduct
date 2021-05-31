@@ -107,7 +107,7 @@ const Settings = () => {
 										colorScheme="blue"
 										type="submit"
 										isLoading={updateSettings.isLoading}>
-										{__('Save', 'masteriyo')}
+										{__('Save Settings', 'masteriyo')}
 									</Button>
 								</ButtonGroup>
 							</form>

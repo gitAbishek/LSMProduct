@@ -8,14 +8,14 @@
 
     //Default buttons
     &-default {
-        background: white;
+        background: $mto-white-color;
         @include mto-default-border;
         color: $mto-btn-gray !important;
 
         &:hover {
-            background: $mto-btn-gray;
-            border-color: $mto-btn-gray;
-            color: white !important;
+            background: $mto-btn-active-blue;
+            border-color: $mto-btn-active-blue;
+            color: $mto-white-color !important;
             @include mto-shadow-1;
         }
 
@@ -23,7 +23,7 @@
         &:active {
             background: $mto-btn-active-blue;
             border-color: $mto-btn-active-blue;
-            color: white;
+            color: $mto-white-color;
         }
 
         &--lg {
@@ -41,7 +41,7 @@
     &-primary {
         background: $mto-primary-color;
         border-color: $mto-primary-color;
-        color: white !important;
+        color: $mto-white-color !important;
 
         &:hover {
             background: $mto-btn-hover-blue;
@@ -69,7 +69,7 @@
     &-accent {
         background: $mto-accent-color;
         border-color: $mto-accent-color;
-        color: white !important;
+        color: $mto-white-color !important;
 
         &:hover {
             background: darken($mto-accent-color, 10%);

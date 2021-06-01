@@ -62,6 +62,12 @@ const EmailSetttings: React.FC<Props> = (props) => {
 		control,
 	});
 
+	const showCompletedCourse = useWatch({
+		name: 'emails.completed_course.enable',
+		defaultValue: emailData?.completed_course.enable,
+		control,
+	});
+
 	const tabStyles = {
 		justifyContent: 'flex-start',
 		w: '180px',
@@ -410,7 +416,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 									/>
 								</Stack>
 							</FormControl>
-							<Collapse in={showOnholdeOrder}>
+							<Collapse in={showCancelledOrder}>
 								<Stack direction="column" spacing="6">
 									<FormControl>
 										<FormLabel minW="160px">
@@ -478,7 +484,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 									/>
 								</Stack>
 							</FormControl>
-							<Collapse in={showOnholdeOrder}>
+							<Collapse in={showEnrolledCourse}>
 								<Stack direction="column" spacing="6">
 									<FormControl>
 										<FormLabel minW="160px">
@@ -509,6 +515,63 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<Editor
 											name="emails.enrolled_course.content"
 											defaultValue={emailData?.enrolled_course.content}
+											control={control}
+										/>
+									</FormControl>
+								</Stack>
+							</Collapse>
+						</Stack>
+					</TabPanel>
+
+					<TabPanel>
+						<Stack direction="column" spacing="6">
+							<FormControl>
+								<Stack direction="row">
+									<FormLabel minW="160px">
+										{__('Enable', 'masteriyo')}
+									</FormLabel>
+									<Controller
+										name="emails.completed_course.enable"
+										render={({ field }) => (
+											<Switch
+												{...field}
+												defaultChecked={emailData?.completed_course.enable}
+											/>
+										)}
+									/>
+								</Stack>
+							</FormControl>
+							<Collapse in={showCompletedCourse}>
+								<Stack direction="column" spacing="6">
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Subject', 'masteriyo')}
+										</FormLabel>
+										<Textarea
+											defaultValue={emailData?.completed_course?.subject}
+											{...register('emails.completed_course.subject')}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Heading', 'masteriyo')}
+										</FormLabel>
+										<ImageUpload
+											name="emails.completed_course.heading"
+											mediaId={emailData?.completed_course.heading}
+											setValue={setValue}
+											register={register}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Content', 'masteriyo')}
+										</FormLabel>
+										<Editor
+											name="emails.completed_course.content"
+											defaultValue={emailData?.completed_course.content}
 											control={control}
 										/>
 									</FormControl>

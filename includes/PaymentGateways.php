@@ -145,7 +145,7 @@ class PaymentGateways {
 		$available_gateway_keys = array_values(
 			array_map(
 				function( $gateway ) {
-					return $gateway->get_id();
+					return $gateway->get_name();
 				},
 				$available_gateways
 			)

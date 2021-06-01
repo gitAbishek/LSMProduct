@@ -13,26 +13,28 @@
 namespace ThemeGrill\Masteriyo\Gateways\Paypal;
 
 use ThemeGrill\Masteriyo\Constants;
+use ThemeGrill\Masteriyo\Gateways\Paypal\ApiHandler;
 use ThemeGrill\Masteriyo\Gateways\Paypal\Request;
 use ThemeGrill\Masteriyo\Gateways\Paypal\PdtHandler;
 use ThemeGrill\Masteriyo\Gateways\Paypal\IpnHandler;
 use ThemeGrill\Masteriyo\Abstracts\PaymentGateway;
+use ThemeGrill\Masteriyo\Contracts\PaymentGateway as PaymentGatewayInterface;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * MASTERIYO_Gateway_Paypal Class.
  */
-class Paypal extends PaymentGateway {
+class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 
 	/**
-	 * Payment gateway id.
+	 * Payment gateway name.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @var string
 	 */
-	protected $id = 'paypal';
+	protected $name = 'paypal';
 
 	/**
 	 * True if the gateway shows fields on the checkout.
@@ -67,10 +69,7 @@ class Paypal extends PaymentGateway {
 		$this->method_title      = __( 'PayPal Standard', 'masteriyo' );
 		/* translators: %s: Link to Masteriyo system status page */
 		$this->method_description = __( 'PayPal Standard redirects customers to PayPal to enter their payment information.', 'masteriyo' );
-		$this->supports           = array(
-			'courses',
-			'refunds',
-		);
+		$this->supports           = array( 'course', 'refund' );
 
 		// Load the settings.
 		$this->init_settings();
@@ -91,7 +90,6 @@ class Paypal extends PaymentGateway {
 			$this->description  = trim( $this->description );
 		}
 
-		add_action( 'masteriyo_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 		add_action( 'masteriyo_order_status_processing', array( $this, 'capture_payment' ) );
 		add_action( 'masteriyo_order_status_completed', array( $this, 'capture_payment' ) );
 
@@ -105,7 +103,7 @@ class Paypal extends PaymentGateway {
 			}
 		}
 
-		if ( 'yes' === $this->enabled ) {
+		if ( $this->enabled ) {
 			add_filter( 'masteriyo_thankyou_order_received_text', array( $this, 'order_received_text' ), 10, 2 );
 		}
 	}
@@ -142,28 +140,6 @@ class Paypal extends PaymentGateway {
 	}
 
 	/**
-	 * Processes and saves options.
-	 * If there is an error thrown, will continue to save and validate fields, but will leave the erroring field out.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return bool was anything saved?
-	 */
-	public function process_admin_options() {
-		$saved = parent::process_admin_options();
-
-		// Maybe clear logs.
-		if ( 'yes' !== $this->get_option( 'debug', 'no' ) ) {
-			if ( empty( self::$log ) ) {
-				self::$log = masteriyo_get_logger();
-			}
-			self::$log->clear( 'paypal' );
-		}
-
-		return $saved;
-	}
-
-	/**
 	 * Get gateway icon.
 	 *
 	 * @since 0.1.0
@@ -187,7 +163,7 @@ class Paypal extends PaymentGateway {
 
 		$icon_html .= sprintf( '<a href="%1$s" class="about_paypal" onclick="javascript:window.open(\'%1$s\',\'WIPaypal\',\'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700\'); return false;">' . esc_attr__( 'What is PayPal?', 'masteriyo' ) . '</a>', esc_url( $this->get_icon_url( $base_country ) ) );
 
-		return apply_filters( 'masteriyo_gateway_icon', $icon_html, $this->id );
+		return apply_filters( 'masteriyo_gateway_icon', $icon_html, $this->name );
 	}
 
 	/**
@@ -278,7 +254,7 @@ class Paypal extends PaymentGateway {
 				$icon = 'https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg';
 				break;
 			default:
-				$icon = MASTERIYO_HTTPS::force_https_url( MASTERIYO()->plugin_url() . '/includes/gateways/paypal/assets/images/paypal.png' );
+				$icon = masteriyo_get_plugin_url() . '/includes/gateways/paypal/assets/images/paypal.png';
 				break;
 		}
 		return apply_filters( 'masteriyo_paypal_icon', $icon );
@@ -302,25 +278,6 @@ class Paypal extends PaymentGateway {
 		);
 	}
 
-	/**
-	 * Admin Panel Options.
-	 * - Options for bits like 'title' and availability on a country-by-country basis.
-	 *
-	 * @since 1.0.0
-	 */
-	public function admin_options() {
-		if ( $this->is_valid_for_use() ) {
-			parent::admin_options();
-		} else {
-			?>
-			<div class="inline error">
-				<p>
-					<strong><?php esc_html_e( 'Gateway disabled', 'masteriyo' ); ?></strong>: <?php esc_html_e( 'PayPal Standard does not support your store currency.', 'masteriyo' ); ?>
-				</p>
-			</div>
-			<?php
-		}
-	}
 	/**
 	 * Get the transaction URL.
 	 *
@@ -383,10 +340,17 @@ class Paypal extends PaymentGateway {
 	 * @since 0.1.0
 	 */
 	protected function init_api() {
-		ApiHandler::$api_username  = $this->sandbox ? $this->get_option( 'sandbox_api_username' ) : $this->get_option( 'api_username' );
-		ApiHandler::$api_password  = $this->sandbox ? $this->get_option( 'sandbox_api_password' ) : $this->get_option( 'api_password' );
-		ApiHandler::$api_signature = $this->sandbox ? $this->get_option( 'sandbox_api_signature' ) : $this->get_option( 'api_signature' );
-		ApiHandler::$sandbox       = $this->sandbox;
+		if ( $this->sandbox ) {
+			ApiHandler::$api_username  = $this->get_option( 'sandbox_api_username' );
+			ApiHandler::$api_password  = $this->get_option( 'sandbox_api_password' );
+			ApiHandler::$api_signature = $this->get_option( 'sandbox_api_signature' );
+		} else {
+			ApiHandler::$api_username  = $this->get_option( 'live_api_username' );
+			ApiHandler::$api_password  = $this->get_option( 'live_api_password' );
+			ApiHandler::$api_signature = $this->get_option( 'live_api_signature' );
+		}
+
+		ApiHandler::$sandbox = $this->sandbox;
 	}
 
 	/**
@@ -403,7 +367,7 @@ class Paypal extends PaymentGateway {
 		$order = masteriyo_get_order( $order_id );
 
 		if ( ! $this->can_refund_order( $order ) ) {
-			return new WP_Error( 'error', __( 'Refund failed.', 'masteriyo' ) );
+			return new \WP_Error( 'error', __( 'Refund failed.', 'masteriyo' ) );
 		}
 
 		$this->init_api();
@@ -412,7 +376,7 @@ class Paypal extends PaymentGateway {
 
 		if ( is_wp_error( $result ) ) {
 			$this->log( 'Refund Failed: ' . $result->get_error_message(), 'error' );
-			return new WP_Error( 'error', $result->get_error_message() );
+			return new \WP_Error( 'error', $result->get_error_message() );
 		}
 
 		$this->log( 'Refund Result: ' . masteriyo_print_r( $result, true ) );
@@ -427,7 +391,7 @@ class Paypal extends PaymentGateway {
 				return true;
 		}
 
-		return isset( $result->L_LONGMESSAGE0 ) ? new WP_Error( 'error', $result->L_LONGMESSAGE0 ) : false; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+		return isset( $result->L_LONGMESSAGE0 ) ? new \WP_Error( 'error', $result->L_LONGMESSAGE0 ) : false; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	}
 
 	/**
@@ -481,7 +445,7 @@ class Paypal extends PaymentGateway {
 	 * @return string
 	 */
 	public function order_received_text( $text, $order ) {
-		if ( $order && $this->id === $order->get_payment_method() ) {
+		if ( $order && $this->name === $order->get_payment_method() ) {
 			return esc_html__( 'Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you. Log into your PayPal account to view transaction details.', 'masteriyo' );
 		}
 

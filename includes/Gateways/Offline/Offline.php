@@ -11,6 +11,7 @@ defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Constants;
 use ThemeGrill\Masteriyo\Abstracts\PaymentGateway;
+use ThemeGrill\Masteriyo\Contracts\PaymentGateway as PaymentGatewayInterface;
 
 /**
  * Cash on Delivery Gateway.
@@ -21,7 +22,7 @@ use ThemeGrill\Masteriyo\Abstracts\PaymentGateway;
  * @class       Offline
  * @extends     PaymentGateway
  */
-class Offline extends PaymentGateway {
+class Offline extends PaymentGateway implements PaymentGatewayInterface {
 
 	/**
 	 * Constructor for the gateway.
@@ -35,15 +36,7 @@ class Offline extends PaymentGateway {
 		// // Load the settings.
 		$this->init_settings();
 
-		$this->set_order_button_text( 'Confirm Payment' );
-
-		// // Get settings.
-		$this->title        = $this->get_option( 'title' );
-		$this->description  = $this->get_option( 'description' );
-		$this->instructions = $this->get_option( 'instructions' );
-
-		add_action( 'masteriyo_update_options_payment_gateways_' . $this->get_id(), array( $this, 'process_admin_options' ) );
-		add_action( 'masteriyo_thankyou_' . $this->get_id(), array( $this, 'thankyou_page' ) );
+		add_action( 'masteriyo_thankyou_' . $this->get_name(), array( $this, 'thankyou_page' ) );
 		add_filter( 'masteriyo_payment_complete_order_status', array( $this, 'change_payment_complete_order_status' ), 10, 3 );
 
 		// Customer Emails.
@@ -56,58 +49,17 @@ class Offline extends PaymentGateway {
 	 * @since 0.1.0
 	 */
 	protected function setup_properties() {
-		$this->id                 = 'offline';
+		$this->name               = 'offline';
 		$this->icon               = apply_filters( 'masteriyo_offline_icon', '' );
 		$this->method_title       = __( 'Offline', 'masteriyo' );
 		$this->method_description = __( 'Have your customers pay with cash (or by other means) upon delivery.', 'masteriyo' );
 		$this->has_fields         = false;
-	}
 
-	/**
-	 * Checks to see whether or not the admin settings are being accessed by the current request.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return bool
-	 */
-	private function is_accessing_settings() {
-		if ( is_admin() ) {
-			// phpcs:disable WordPress.Security.NonceVerification
-			if ( ! isset( $_REQUEST['page'] ) || 'masteriyo-settings' !== $_REQUEST['page'] ) {
-				return false;
-			}
-			if ( ! isset( $_REQUEST['tab'] ) || 'checkout' !== $_REQUEST['tab'] ) {
-				return false;
-			}
-			if ( ! isset( $_REQUEST['section'] ) || 'offlne' !== $_REQUEST['section'] ) {
-				return false;
-			}
-			// phpcs:enable WordPress.Security.NonceVerification
+		$this->set_order_button_text( 'Confirm Payment' );
 
-			return true;
-		}
-
-		if ( Constants::is_true( 'REST_REQUEST' ) ) {
-			global $wp;
-
-			if ( isset( $wp->query_vars['rest_route'] ) && false !== strpos( $wp->query_vars['rest_route'], '/payment_gateways' ) ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-	/**
-	 * Indicates whether a rate exists in an array of canonically-formatted rate IDs that activates this gateway.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param array $rate_ids Rate ids to check.
-	 * @return boolean
-	 */
-	private function get_matching_rates( $rate_ids ) {
-		// First, match entries in 'method_id:instance_id' format. Then, match entries in 'method_id' format by stripping off the instance ID from the candidates.
-		return array_unique( array_merge( array_intersect( $this->enable_for_methods, $rate_ids ), array_intersect( $this->enable_for_methods, array_unique( array_map( 'masteriyo_get_string_before_colon', $rate_ids ) ) ) ) );
+		$this->title        = $this->get_option( 'title' );
+		$this->description  = $this->get_option( 'description' );
+		$this->instructions = $this->get_option( 'instructions' );
 	}
 
 	/**
@@ -164,6 +116,7 @@ class Offline extends PaymentGateway {
 		if ( $order && 'offline' === $order->get_payment_method() ) {
 			$status = 'completed';
 		}
+
 		return $status;
 	}
 
@@ -177,8 +130,23 @@ class Offline extends PaymentGateway {
 	 * @param bool     $plain_text Email format: plain text or HTML.
 	 */
 	public function email_instructions( $order, $sent_to_admin, $plain_text = false ) {
-		if ( $this->instructions && ! $sent_to_admin && $this->id === $order->get_payment_method() ) {
+		if ( $this->instructions && ! $sent_to_admin && $this->name === $order->get_payment_method() ) {
 			echo wp_kses_post( wpautop( wptexturize( $this->instructions ) ) . PHP_EOL );
 		}
+	}
+
+
+	/**
+	 * Process refund.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  int        $order_id Order ID.
+	 * @param  float|null $amount Refund amount.
+	 * @param  string     $reason Refund reason.
+	 * @return boolean True or false based on success, or a WP_Error object.
+	 */
+	public function process_refund( $order_id, $amount = null, $reason = '' ) {
+		return false;
 	}
 }

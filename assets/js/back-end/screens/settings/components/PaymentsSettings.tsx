@@ -91,7 +91,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Input
 											type="text"
 											defaultValue={paymentsData?.paypal?.title}
-											{...register('paymentsData.paypal.title')}
+											{...register('payments.paypal.title')}
 										/>
 									</FormControl>
 
@@ -101,7 +101,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</FormLabel>
 										<Textarea
 											defaultValue={paymentsData?.paypal?.description}
-											{...register('paymentsData.paypal.description')}
+											{...register('payments.paypal.description')}
 										/>
 									</FormControl>
 
@@ -131,7 +131,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Input
 											type="email"
 											defaultValue={paymentsData?.paypal?.email}
-											{...register('paymentsData.paypal.email')}
+											{...register('payments.paypal.email')}
 										/>
 									</FormControl>
 
@@ -142,7 +142,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Input
 											type="email"
 											defaultValue={paymentsData?.paypal?.receiver_email}
-											{...register('paymentsData.paypal.receiver_email')}
+											{...register('payments.paypal.receiver_email')}
 										/>
 									</FormControl>
 
@@ -153,7 +153,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Input
 											type="text"
 											defaultValue={paymentsData?.paypal?.identity_token}
-											{...register('paymentsData.paypal.identity_token')}
+											{...register('payments.paypal.identity_token')}
 										/>
 									</FormControl>
 
@@ -164,7 +164,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Input
 											type="text"
 											defaultValue={paymentsData?.paypal?.invoice_prefix}
-											{...register('paymentsData.paypal.invoice_prefix')}
+											{...register('payments.paypal.invoice_prefix')}
 										/>
 									</FormControl>
 
@@ -175,7 +175,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Select
 											placeholder={__('Select Payment Action', 'masteriyo')}
 											defaultValue={paymentsData?.paypal?.payment_action}
-											{...register('paymentsData.paypal.invoice_prefix')}>
+											{...register('payments.paypal.payment_action')}>
 											<option value="capture">
 												{__('Capture', 'masteriyo')}
 											</option>
@@ -189,7 +189,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Input
 											type="text"
 											defaultValue={paymentsData?.paypal?.image_url}
-											{...register('paymentsData.paypal.image_url')}
+											{...register('payments.paypal.image_url')}
 										/>
 									</FormControl>
 
@@ -237,9 +237,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 													defaultValue={
 														paymentsData?.paypal?.sandbox_api_username
 													}
-													{...register(
-														'paymentsData.paypal.sandbox_api_username'
-													)}
+													{...register('payments.paypal.sandbox_api_username')}
 												/>
 											</FormControl>
 
@@ -252,9 +250,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 													defaultValue={
 														paymentsData?.paypal?.sandbox_api_password
 													}
-													{...register(
-														'paymentsData.paypal.sandbox_api_password'
-													)}
+													{...register('payments.paypal.sandbox_api_password')}
 												/>
 											</FormControl>
 
@@ -267,9 +263,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 													defaultValue={
 														paymentsData?.paypal?.sandbox_api_signature
 													}
-													{...register(
-														'paymentsData.paypal.sandbox_api_signature'
-													)}
+													{...register('payments.paypal.sandbox_api_signature')}
 												/>
 											</FormControl>
 										</Stack>
@@ -282,7 +276,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Input
 											type="text"
 											defaultValue={paymentsData?.paypal?.live_api_username}
-											{...register('paymentsData.paypal.live_api_username')}
+											{...register('payments.paypal.live_api_username')}
 										/>
 									</FormControl>
 
@@ -293,7 +287,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Input
 											type="password"
 											defaultValue={paymentsData?.paypal?.live_api_password}
-											{...register('paymentsData.paypal.live_api_password')}
+											{...register('payments.paypal.live_api_password')}
 										/>
 									</FormControl>
 
@@ -304,7 +298,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Input
 											type="text"
 											defaultValue={paymentsData?.paypal?.live_api_signature}
-											{...register('paymentsData.paypal.live_api_signature')}
+											{...register('payments.paypal.live_api_signature')}
 										/>
 									</FormControl>
 								</Stack>

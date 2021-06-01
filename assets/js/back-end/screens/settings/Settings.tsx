@@ -20,6 +20,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import urls from '../../constants/urls';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
+import AdvancedSettings from './components/AdvancedSettings';
 import CoursesSettings from './components/CoursesSettings';
 import EmailSetttings from './components/EmailSetttings';
 import GeneralSettings from './components/GeneralSettings';
@@ -111,7 +112,12 @@ const Settings = () => {
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
 										<EmailSetttings emailData={settingsQuery.data?.emails} />
-									</TabPanel>{' '}
+									</TabPanel>
+									<TabPanel sx={tabPanelStyles}>
+										<AdvancedSettings
+											advancedData={settingsQuery.data?.advanced}
+										/>
+									</TabPanel>
 								</TabPanels>
 								<ButtonGroup>
 									<Button

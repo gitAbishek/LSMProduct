@@ -14,24 +14,30 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 0.1.0
  */
-class Api {
+class ApiHandler {
 
 	/**
-	 * API Username
+	 * API Username.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @var string
 	 */
 	public static $api_username;
 
 	/**
-	 * API Password
+	 * API Password.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @var string
 	 */
 	public static $api_password;
 
 	/**
-	 * API Signature
+	 * API Signature.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @var string
 	 */
@@ -40,6 +46,8 @@ class Api {
 	/**
 	 * Sandbox
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var bool
 	 */
 	public static $sandbox = false;
@@ -47,6 +55,8 @@ class Api {
 	/**
 	 * Get capture request args.
 	 * See https://developer.paypal.com/docs/classic/api/merchant/DoCapture_API_Operation_NVP/.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param  Order $order Order object.
 	 * @param  float    $amount Amount.
@@ -85,14 +95,16 @@ class Api {
 			'PWD'           => self::$api_password,
 			'METHOD'        => 'RefundTransaction',
 			'TRANSACTIONID' => $order->get_transaction_id(),
-			'NOTE'          => html_entity_decode( wc_trim_string( $reason, 255 ), ENT_NOQUOTES, 'UTF-8' ),
+			'NOTE'          => html_entity_decode( masteriyo_trim_string( $reason, 255 ), ENT_NOQUOTES, 'UTF-8' ),
 			'REFUNDTYPE'    => 'Full',
 		);
+
 		if ( ! is_null( $amount ) ) {
 			$request['AMT']          = number_format( $amount, 2, '.', '' );
 			$request['CURRENCYCODE'] = $order->get_currency();
 			$request['REFUNDTYPE']   = 'Partial';
 		}
+
 		return apply_filters( 'masteriyo_paypal_refund_request', $request, $order, $amount, $reason );
 	}
 
@@ -110,12 +122,12 @@ class Api {
 				'method'      => 'POST',
 				'body'        => self::get_capture_request( $order, $amount ),
 				'timeout'     => 70,
-				'user-agent'  => 'masteriyo/' . masteriyo()->version,
+				'user-agent'  => 'masteriyo/' . masteriyo_get_version(),
 				'httpversion' => '1.1',
 			)
 		);
 
-		WC_Gateway_Paypal::log( 'DoCapture Response: ' . wc_print_r( $raw_response, true ) );
+		Payapl::log( 'DoCapture Response: ' . masteriyo_print_r( $raw_response, true ) );
 
 		if ( is_wp_error( $raw_response ) ) {
 			return $raw_response;
@@ -133,7 +145,7 @@ class Api {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param  order $order Order object.
+	 * @param  Order $order Order object.
 	 * @param  float    $amount Refund amount.
 	 * @param  string   $reason Refund reason.
 	 * @return object Either an object of name value pairs for a success, or a WP_ERROR object.
@@ -145,12 +157,12 @@ class Api {
 				'method'      => 'POST',
 				'body'        => self::get_refund_request( $order, $amount, $reason ),
 				'timeout'     => 70,
-				'user-agent'  => 'Masteriyo/' . WC()->version,
+				'user-agent'  => 'masteriyo/' . masteriyo_get_version,
 				'httpversion' => '1.1',
 			)
 		);
 
-		WC_Gateway_Paypal::log( 'Refund Response: ' . wc_print_r( $raw_response, true ) );
+		Paypal::log( 'Refund Response: ' . masteriyo_print_r( $raw_response, true ) );
 
 		if ( is_wp_error( $raw_response ) ) {
 			return $raw_response;

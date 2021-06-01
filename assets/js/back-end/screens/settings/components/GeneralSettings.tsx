@@ -43,7 +43,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 					</Flex>
 					<Stack direction="row" spacing="8">
 						<FormControl>
-							<FormLabel minW="xs">Country</FormLabel>
+							<FormLabel minW="xs">{__('Country', 'masteriyo')}</FormLabel>
 							<input
 								type="hidden"
 								{...register('general.country')}
@@ -55,7 +55,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 							/>
 						</FormControl>
 						<FormControl>
-							<FormLabel minW="xs">City</FormLabel>
+							<FormLabel minW="xs">{__('City', 'masteriyo')}</FormLabel>
 							<Input
 								type="text"
 								{...register('general.city')}
@@ -65,7 +65,9 @@ const GeneralSettings: React.FC<Props> = (props) => {
 					</Stack>
 					<Stack direction="row" spacing="8">
 						<FormControl>
-							<FormLabel minW="xs">Adress Line 1</FormLabel>
+							<FormLabel minW="xs">
+								{__('Adress Line 1', 'masteriyo')}
+							</FormLabel>
 							<Input
 								type="text"
 								{...register('general.address_line1')}
@@ -73,7 +75,9 @@ const GeneralSettings: React.FC<Props> = (props) => {
 							/>
 						</FormControl>
 						<FormControl>
-							<FormLabel minW="xs">Adress Line 2</FormLabel>
+							<FormLabel minW="xs">
+								{__('Adress Line 2', 'masteriyo')}
+							</FormLabel>
 							<Input
 								type="text"
 								{...register('general.address_line2')}
@@ -92,12 +96,12 @@ const GeneralSettings: React.FC<Props> = (props) => {
 						borderColor="gray.100"
 						pb="3">
 						<Heading fontSize="lg" fontWeight="semibold">
-							Currency Options
+							{__('Currency Options', 'masteriyo')}
 						</Heading>
 					</Flex>
 					<Stack direction="row" spacing="8">
 						<FormControl>
-							<FormLabel minW="xs">Currency</FormLabel>
+							<FormLabel minW="xs">{__('Currency', 'masteriyo')}</FormLabel>
 							<Select
 								{...register('general.currency')}
 								defaultValue={generalData?.currency}>
@@ -109,7 +113,9 @@ const GeneralSettings: React.FC<Props> = (props) => {
 							</Select>
 						</FormControl>
 						<FormControl>
-							<FormLabel minW="xs">Currency Position</FormLabel>
+							<FormLabel minW="xs">
+								{__('Currency Position', 'masteriyo')}
+							</FormLabel>
 							<Select
 								{...register('general.currency_position')}
 								defaultValue={generalData?.currency_position}>
@@ -120,7 +126,9 @@ const GeneralSettings: React.FC<Props> = (props) => {
 					</Stack>
 					<Stack direction="row" spacing="8">
 						<FormControl>
-							<FormLabel minW="xs">Thausand Separator</FormLabel>
+							<FormLabel minW="xs">
+								{__('Thausand Separator', 'masteriyo')}
+							</FormLabel>
 							<Input
 								type="text"
 								{...register('general.thousand_separator')}
@@ -128,7 +136,9 @@ const GeneralSettings: React.FC<Props> = (props) => {
 							/>
 						</FormControl>
 						<FormControl>
-							<FormLabel minW="xs">Decimal Separator</FormLabel>
+							<FormLabel minW="xs">
+								{__('Decimal Separator', 'masteriyo')}
+							</FormLabel>
 							<Input
 								type="text"
 								{...register('general.decimal_separator')}
@@ -138,7 +148,9 @@ const GeneralSettings: React.FC<Props> = (props) => {
 					</Stack>
 					<Stack direction="row" spacing="8">
 						<FormControl>
-							<FormLabel minW="xs">Number of Decimals</FormLabel>
+							<FormLabel minW="xs">
+								{__('Number of Decimals', 'masteriyo')}
+							</FormLabel>
 							<Input
 								type="text"
 								{...register('general.number_of_decimals')}

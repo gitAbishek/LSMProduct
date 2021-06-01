@@ -68,7 +68,6 @@ const Settings = () => {
 	}
 
 	const onSubmit = (data: SetttingsMap) => {
-		console.log(data.emails);
 		updateSettings.mutate(data);
 	};
 

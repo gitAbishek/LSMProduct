@@ -763,23 +763,23 @@ class SettingsController extends CrudController {
 						),
 					),
 				),
-				'advanced' => array(
-					'description' => __( 'Advanced Setting', 'masteriyo' ),
+				'advance'  => array(
+					'description' => __( 'Advance setting', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'template_debug_enable' => array(
+						'template_debug' => array(
 							'description' => __( 'Enable template debug.', 'masteriyo' ),
 							'type'        => 'boolean',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'debug_enable'          => array(
-							'description' => __( 'Enable debug mode.', 'masteriyo' ),
+						'debug'          => array(
+							'description' => __( 'Enable debug.', 'masteriyo' ),
 							'type'        => 'boolean',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'styles_mode'           => array(
-							'description' => __( 'Choose styles mode.', 'masteriyo' ),
+						'style'          => array(
+							'description' => __( 'Choose style.', 'masteriyo' ),
 							'type'        => 'string',
 							'enum'        => array( 'none', 'simple', 'advance' ),
 							'context'     => array( 'view', 'edit' ),
@@ -1088,10 +1088,10 @@ class SettingsController extends CrudController {
 					'content' => $setting->get_emails_become_an_instructor_content( $context ),
 				),
 			),
-			'advanced' => array(
-				'template_debug_enable' => $setting->get_advanced_template_debug_enable( $context ),
-				'debug_enable'          => $setting->get_advanced_debug_enable( $context ),
-				'styles_mode'           => $setting->get_advanced_styles_mode( $context ),
+			'advance'  => array(
+				'template_debug' => $setting->get_advance_template_debug( $context ),
+				'debug'          => $setting->get_advance_debug( $context ),
+				'style'          => $setting->get_advance_style( $context ),
 			),
 		);
 	}
@@ -1522,18 +1522,18 @@ class SettingsController extends CrudController {
 			$setting->set_emails_become_an_instructor_content( $request['emails']['become_an_instructor']['content'] );
 		}
 
-		// Advanced Setting.
+		// Advance Setting.
 
-		if ( isset( $request['advanced']['template_debug_enable'] ) ) {
-			$setting->set_advanced_template_debug_enable( $request['advanced']['template_debug_enable'] );
+		if ( isset( $request['advance']['template_debug_enable'] ) ) {
+			$setting->set_advance_template_debug_enable( $request['advance']['template_debug_enable'] );
 		}
 
-		if ( isset( $request['advanced']['debug_enable'] ) ) {
-			$setting->set_advanced_debug_enable( $request['advanced']['debug_enable'] );
+		if ( isset( $request['advance']['debug_enable'] ) ) {
+			$setting->set_advance_debug_enable( $request['advance']['debug_enable'] );
 		}
 
-		if ( isset( $request['advanced']['styles_mode'] ) ) {
-			$setting->set_advanced_styles_mode( $request['advanced']['styles_mode'] );
+		if ( isset( $request['advance']['style'] ) ) {
+			$setting->set_advance_style( $request['advance']['style'] );
 		}
 
 		/**

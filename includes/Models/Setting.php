@@ -208,9 +208,9 @@ class Setting extends Model {
 			'become_an_instructor_content' => '',
 		),
 		'advance'  => array(
-			'template_debug_enable' => false,
-			'debug_enable'          => false,
-			'styles_mode'           => '',
+			'template_debug' => false,
+			'debug'          => false,
+			'style'          => 'simple',
 		),
 	);
 
@@ -1515,39 +1515,39 @@ class Setting extends Model {
 	// Debug.
 
 	/**
-	 * Get option advanced_template_debug_enable.
+	 * Retruns true if the template debug is enabled.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_advanced_template_debug_enable( $context = 'view' ) {
-		return $this->get_setting_prop( 'template_debug_enable', 'advance', $context );
+	public function get_advance_template_debug( $context = 'view' ) {
+		return $this->get_setting_prop( 'template_debug', 'advance', $context );
 	}
 
 	/**
-	 * Get option advanced_debug_enable.
-	 *
+	 * Returns true if the masteriyo debug is enabled.
+	*
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_advanced_debug_enable( $context = 'view' ) {
-		return $this->get_setting_prop( 'debug_enable', 'advance', $context );
+	public function get_advance_debug( $context = 'view' ) {
+		return $this->get_setting_prop( 'debug', 'advance', $context );
 	}
 
 	/**
-	 * Get option advanced_styles_mode.
+	 * Get option advanced_style.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_advanced_styles_mode( $context = 'view' ) {
-		return $this->get_setting_prop( 'styles_mode', 'advance', $context );
+	public function get_advance_style( $context = 'view' ) {
+		return $this->get_setting_prop( 'style', 'advance', $context );
 	}
 
 	/**
@@ -2617,8 +2617,8 @@ class Setting extends Model {
 	* @since 0.1.0
 	* @param boolean $enable
 	*/
-	public function set_advance_template_debug_enable( $enable ) {
-		$this->set_setting_prop( 'template_debug_enable', 'advance', masteriyo_boolean_to_bool( $enable ) );
+	public function set_advance_template_debug( $enable ) {
+		$this->set_setting_prop( 'template_debug', 'advance', masteriyo_boolean_to_bool( $enable ) );
 	}
 
 	/**
@@ -2627,8 +2627,8 @@ class Setting extends Model {
 	* @since 0.1.0
 	* @param string $enable
 	*/
-	public function set_advance_debug_enable( $enable ) {
-		$this->set_setting_prop( 'debug_enable', 'advance', masteriyo_string_to_bool( $enable ) );
+	public function set_advance_debug( $enable ) {
+		$this->set_setting_prop( 'debug', 'advance', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**
@@ -2637,8 +2637,8 @@ class Setting extends Model {
 	* @since 0.1.0
 	* @param string $style
 	*/
-	public function set_advance_styles_mode( $style ) {
-		$this->set_setting_prop( 'styles_mode', 'advance', $style );
+	public function set_advance_style( $style ) {
+		$this->set_setting_prop( 'style', 'advance', $style );
 	}
 
 	/**

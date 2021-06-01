@@ -76,7 +76,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advanced.styles_mode')}>
 									<option value="none">{__('None', 'masteriyo')}</option>
 									<option value="simple">{__('Simple', 'masteriyo')}</option>
-									<option value="advanced">{__('Simple', 'masteriyo')}</option>
+									<option value="advanced">
+										{__('Advanced', 'masteriyo')}
+									</option>
 								</Select>
 							</Stack>
 						</FormControl>

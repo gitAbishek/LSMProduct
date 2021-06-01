@@ -67,7 +67,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 
 						<FormControl>
 							<Stack direction="row">
-								<FormLabel minW="3xs">{__('Debug', 'masteriyo')}</FormLabel>
+								<FormLabel minW="3xs">{__('Style', 'masteriyo')}</FormLabel>
 								<Select
 									defaultValue={advanceData?.style}
 									{...register('advance.style')}>

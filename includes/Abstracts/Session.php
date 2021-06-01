@@ -212,8 +212,8 @@ abstract class Session extends Model implements SessionInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $key	Session item key.
-	 * @param mixed $value	Session item value.
+	 * @param string $key   Session item key.
+	 * @param mixed $value  Session item value.
 	 * @return void
 	 */
 	public function put( $key, $value = null ) {
@@ -246,9 +246,13 @@ abstract class Session extends Model implements SessionInterface {
 	public function exists( $key ) {
 		$keys         = (array) $key;
 		$session_data = $this->get_prop( 'data' );
-		$result       = array_reduce( $keys, function( $result, $key ) use ( $session_data ) {
-			return $result && isset( $session_data[ $key ] );
-		}, true );
+		$result       = array_reduce(
+			$keys,
+			function( $result, $key ) use ( $session_data ) {
+				return $result && isset( $session_data[ $key ] );
+			},
+			true
+		);
 
 		return $result;
 	}
@@ -264,9 +268,13 @@ abstract class Session extends Model implements SessionInterface {
 	public function has( $key ) {
 		$keys         = (array) $key;
 		$session_data = $this->get_prop( 'data' );
-		$result       = array_reduce( $keys, function( $result, $key ) use ( $session_data ) {
-			return $result && isset( $session_data[ $key ] ) && ! is_null( $session_data[ $key ] );
-		}, true );
+		$result       = array_reduce(
+			$keys,
+			function( $result, $key ) use ( $session_data ) {
+				return $result && isset( $session_data[ $key ] ) && ! is_null( $session_data[ $key ] );
+			},
+			true
+		);
 
 		return $result;
 	}
@@ -289,6 +297,7 @@ abstract class Session extends Model implements SessionInterface {
 		}
 
 		$this->set_prop( 'data', $session_data );
+
 		return $value;
 	}
 
@@ -302,12 +311,16 @@ abstract class Session extends Model implements SessionInterface {
 	 */
 	public function forget( $keys ) {
 		$session_data = $this->get_prop( 'data' );
-		$keys         = (array ) $keys;
+		$keys         = (array) $keys;
 		$keys         = is_array( $keys ) ? array_flip( $keys ) : $keys;
 
-		$session_data = array_filter( $session_data, function( $session_key ) use ( $keys ) {
-			return ! isset( $keys[ $session_key ] );
-		}, ARRAY_FILTER_USE_KEY );
+		$session_data = array_filter(
+			$session_data,
+			function( $session_key ) use ( $keys ) {
+				return ! isset( $keys[ $session_key ] );
+			},
+			ARRAY_FILTER_USE_KEY
+		);
 
 		$this->set_prop( 'data', $session_data );
 	}

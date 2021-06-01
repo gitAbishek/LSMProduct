@@ -39,7 +39,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 	});
 
 	const tabStyles = {
-		justifyContent: 'fx-start',
+		justifyContent: 'flex-start',
 		w: '160px',
 		borderLeft: 0,
 		borderRight: '2px solid',

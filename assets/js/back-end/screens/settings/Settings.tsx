@@ -21,6 +21,7 @@ import urls from '../../constants/urls';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
 import CoursesSettings from './components/CoursesSettings';
+import EmailSetttings from './components/EmailSetttings';
 import GeneralSettings from './components/GeneralSettings';
 import PagesSettings from './components/PagesSettings';
 import PaymentsSettings from './components/PaymentsSettings';
@@ -108,6 +109,9 @@ const Settings = () => {
 											paymentsData={settingsQuery.data?.payments}
 										/>
 									</TabPanel>
+									<TabPanel sx={tabPanelStyles}>
+										<EmailSetttings emailData={settingsQuery.data?.emails} />
+									</TabPanel>{' '}
 								</TabPanels>
 								<ButtonGroup>
 									<Button

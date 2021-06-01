@@ -42,6 +42,12 @@ const EmailSetttings: React.FC<Props> = (props) => {
 		control,
 	});
 
+	const showCompletedOrder = useWatch({
+		name: 'emails.completed_order.enable',
+		defaultValue: emailData?.completed_order.enable,
+		control,
+	});
+
 	const tabStyles = {
 		justifyContent: 'flex-start',
 		w: '180px',
@@ -251,6 +257,63 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<Editor
 											name="emails.processing_order.content"
 											defaultValue={emailData?.processing_order.content}
+											control={control}
+										/>
+									</FormControl>
+								</Stack>
+							</Collapse>
+						</Stack>
+					</TabPanel>
+
+					<TabPanel>
+						<Stack direction="column" spacing="6">
+							<FormControl>
+								<Stack direction="row">
+									<FormLabel minW="160px">
+										{__('Enable', 'masteriyo')}
+									</FormLabel>
+									<Controller
+										name="emails.completed_order.enable"
+										render={({ field }) => (
+											<Switch
+												{...field}
+												defaultChecked={emailData?.completed_order.enable}
+											/>
+										)}
+									/>
+								</Stack>
+							</FormControl>
+							<Collapse in={showCompletedOrder}>
+								<Stack direction="column" spacing="6">
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Subject', 'masteriyo')}
+										</FormLabel>
+										<Textarea
+											defaultValue={emailData?.completed_order?.subject}
+											{...register('emails.completed_order.subject')}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Heading', 'masteriyo')}
+										</FormLabel>
+										<ImageUpload
+											name="emails.completed_order.heading"
+											mediaId={emailData?.completed_order.heading}
+											setValue={setValue}
+											register={register}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Content', 'masteriyo')}
+										</FormLabel>
+										<Editor
+											name="emails.completed_order.content"
+											defaultValue={emailData?.completed_order.content}
 											control={control}
 										/>
 									</FormControl>

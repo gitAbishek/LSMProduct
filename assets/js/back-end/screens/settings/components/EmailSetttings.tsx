@@ -17,8 +17,10 @@ import {
 	Heading,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import Editor from 'Components/common/Editor';
+import ImageUpload from 'Components/common/ImageUpload';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 
 import { EmailsSetttingsMap } from '../../../types';
 
@@ -27,11 +29,16 @@ interface Props {
 }
 const EmailSetttings: React.FC<Props> = (props) => {
 	const { emailData } = props;
-	const { register, control } = useFormContext();
+	const { register, setValue, control } = useFormContext();
+	const showNewOrderOptions = useWatch({
+		name: 'emails.new_order.enable',
+		defaultValue: emailData?.new_order.enable,
+		control,
+	});
 
 	const tabStyles = {
 		justifyContent: 'flex-start',
-		w: '160px',
+		w: '180px',
 		borderLeft: 0,
 		borderRight: '2px solid',
 		borderRightColor: 'transparent',
@@ -39,6 +46,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 		marginRight: '-2px',
 		pl: 0,
 		fontSize: 'sm',
+		textAlign: 'left',
 	};
 
 	const tabListStyles = {
@@ -63,43 +71,128 @@ const EmailSetttings: React.FC<Props> = (props) => {
 				</TabList>
 				<TabPanels flex="1">
 					<TabPanel>
-						<Stack direction="column" spacing="10">
-							<Box>
-								<Stack direction="column" spacing="6">
-									<Flex
-										align="center"
-										justify="space-between"
-										borderBottom="1px"
-										borderColor="gray.100"
-										pb="3">
-										<Heading fontSize="lg" fontWeight="semibold">
-											{__('General', 'masteriyo')}
-										</Heading>
-									</Flex>
+						<Stack direction="column" spacing="6">
+							<FormControl>
+								<FormLabel minW="160px">
+									{__('From Name', 'masteriyo')}
+								</FormLabel>
+								<Input
+									type="text"
+									defaultValue={emailData?.general?.from_name}
+									{...register('emails.general.from_name')}
+								/>
+							</FormControl>
 
+							<FormControl>
+								<FormLabel minW="160px">
+									{__('From Email', 'masteriyo')}
+								</FormLabel>
+								<Input
+									type="email"
+									defaultValue={emailData?.general?.from_email}
+									{...register('emails.general.from_email')}
+								/>
+							</FormControl>
+
+							<FormControl>
+								<FormLabel minW="160px">
+									{__('Default Content', 'masteriyo')}
+								</FormLabel>
+								<Textarea
+									defaultValue={emailData?.general?.default_content}
+									{...register('emails.general.default_content')}
+								/>
+							</FormControl>
+
+							<FormControl>
+								<FormLabel minW="160px">
+									{__('Header Image', 'masteriyo')}
+								</FormLabel>
+								<ImageUpload
+									name="emails.general.header_image"
+									mediaId={emailData?.general.header_image}
+									setValue={setValue}
+									register={register}
+								/>
+							</FormControl>
+
+							<FormControl>
+								<FormLabel minW="160px">
+									{__('Footer Text', 'masteriyo')}
+								</FormLabel>
+								<Textarea
+									defaultValue={emailData?.general?.footer_text}
+									{...register('emails.general.footer_text')}
+								/>
+							</FormControl>
+						</Stack>
+					</TabPanel>
+
+					<TabPanel>
+						<Stack direction="column" spacing="6">
+							<FormControl>
+								<Stack direction="row">
+									<FormLabel minW="160px">
+										{__('Enable', 'masteriyo')}
+									</FormLabel>
+									<Controller
+										name="emails.new_order.enable"
+										render={({ field }) => (
+											<Switch
+												{...field}
+												defaultChecked={emailData?.new_order.enable}
+											/>
+										)}
+									/>
+								</Stack>
+							</FormControl>
+							<Collapse in={showNewOrderOptions}>
+								<Stack direction="column" spacing="6">
 									<FormControl>
 										<FormLabel minW="160px">
-											{__('From Name', 'masteriyo')}
+											{__('Recipients', 'masteriyo')}
 										</FormLabel>
 										<Input
 											type="text"
-											defaultValue={emailData?.general?.from_name}
-											{...register('emails.general.from_name')}
+											defaultValue={emailData?.new_order?.recipients}
+											{...register('emails.new_order.recipients')}
 										/>
 									</FormControl>
 
 									<FormControl>
 										<FormLabel minW="160px">
-											{__('From Email', 'masteriyo')}
+											{__('Subject', 'masteriyo')}
 										</FormLabel>
-										<Input
-											type="email"
-											defaultValue={emailData?.general?.from_email}
-											{...register('emails.general.from_email')}
+										<Textarea
+											defaultValue={emailData?.new_order?.subject}
+											{...register('emails.new_order.subject')}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Heading', 'masteriyo')}
+										</FormLabel>
+										<ImageUpload
+											name="emails.new_order.heading"
+											mediaId={emailData?.new_order.heading}
+											setValue={setValue}
+											register={register}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Content', 'masteriyo')}
+										</FormLabel>
+										<Editor
+											name="emails.new_order.content"
+											defaultValue={emailData?.new_order.content}
+											control={control}
 										/>
 									</FormControl>
 								</Stack>
-							</Box>
+							</Collapse>
 						</Stack>
 					</TabPanel>
 				</TabPanels>

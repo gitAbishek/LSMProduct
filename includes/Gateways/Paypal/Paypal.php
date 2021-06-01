@@ -77,8 +77,8 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 		// Define user set variables.
 		$this->title          = $this->get_option( 'title' );
 		$this->description    = $this->get_option( 'description' );
-		$this->sandbox        = masteriyo_string_to_bool( $this->get_option( 'sandbox', 'no' ) );
-		$this->debug          = masteriyo_string_to_bool( $this->get_option( 'debug', 'no' ) );
+		$this->sandbox        = $this->get_option( 'sandbox', false );
+		$this->debug          = $this->get_option( 'debug', false );
 		$this->email          = $this->get_option( 'email' );
 		$this->receiver_email = $this->get_option( 'receiver_email', $this->email );
 		$this->identity_token = $this->get_option( 'identity_token' );

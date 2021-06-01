@@ -65,29 +65,28 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 */
 	public function create( Model &$order ) {
 		if ( ! $order->get_date_created( 'edit' ) ) {
-			$order->set_date_created( current_time( 'mysql', true ) );
+			$order->set_date_created( time() );
 		}
 
-		if ( ! $order->get_version( 'edit' ) ) {
-			$order->set_version( Constants::get( 'MASTERIYO_VERSION' ) );
-		}
+		$order->set_currency( $order->get_currency() ? $order->get_currency() : masteriyo_get_currency() );
+		$order->set_version( Constants::get( 'MASTERIYO_VERSION' ) );
 
 		$id = wp_insert_post(
 			apply_filters(
 				'masteriyo_new_order_data',
 				array(
-					'post_type'      => 'mto-order',
-					'post_status'    => $order->get_status() ? $order->get_status() : 'pending',
-					'post_author'    => get_current_user_id(),
-					'post_title'     => $this->get_order_title(),
-					'post_password'  => $this->get_order_key( $order ),
-					'comment_status' => 'closed',
-					'ping_status'    => 'closed',
-					'post_date'      => $order->get_date_created( 'edit' ),
-					'post_date_gmt'  => $order->get_date_created( 'edit' ),
+					'post_type'     => 'mto-order',
+					'post_status'   => $order->get_status() ? $order->get_status() : 'pending',
+					'post_author'   => 1,
+					'post_title'    => $this->get_order_title(),
+					'post_password' => $this->get_order_key( $order ),
+					'ping_status'   => 'closed',
+					'post_date'     => gmdate( 'Y-m-d H:i:s', $order->get_date_created( 'edit' )->getOffsetTimestamp() ),
+					'post_date_gmt' => gmdate( 'Y-m-d H:i:s', $order->get_date_created( 'edit' )->getTimestamp() ),
 				),
 				$order
-			)
+			),
+			true
 		);
 
 		if ( $id && ! is_wp_error( $id ) ) {

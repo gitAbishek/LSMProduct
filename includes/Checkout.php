@@ -148,7 +148,7 @@ class Checkout {
 			}
 
 			if ( empty( $posted_data['masteriyo_checkout_update_totals'] ) && 0 === masteriyo_notice_count( Notice::ERROR ) ) {
-				$this->process_user( $posted_data );
+				$this->process_customer( $posted_data );
 				$order_id = $this->create_order( $posted_data );
 				$order    = masteriyo_get_order( $order_id );
 
@@ -157,7 +157,7 @@ class Checkout {
 				}
 
 				if ( ! $order ) {
-					throw new Exception( __( 'Unable to create order.', 'masteriyo' ) );
+					throw new \Exception( __( 'Unable to create order.', 'masteriyo' ) );
 				}
 
 				do_action( 'masteriyo_checkout_order_processed', $order_id, $posted_data, $order );
@@ -501,7 +501,7 @@ class Checkout {
 	 * @throws Exception When not able to create user.
 	 * @param array $data Posted data.
 	 */
-	protected function process_user( $data ) {
+	protected function process_customer( $data ) {
 		$user_id = apply_filters( 'masteriyo_checkout_user_id', get_current_user_id() );
 
 		// On multisite, ensure user exists on current site, if not add them before allowing login.

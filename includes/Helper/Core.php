@@ -1832,7 +1832,7 @@ function masteriyo_get_setting_value( $setting_name, $default = null ) {
 	$value        = $default;
 	$setting_name = str_replace( '.', '_', $setting_name );
 
-	if ( method_exists( $setting, "get_{$setting_name}" ) ) {
+	if ( is_callable( array( $setting, "get_{$setting_name}" ) ) ) {
 		$value = call_user_func_array( array( $setting, "get_{$setting_name}" ), array() );
 	}
 

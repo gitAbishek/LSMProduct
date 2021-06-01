@@ -450,8 +450,8 @@ class Request {
 				$item_line_total = $this->number_format( $item['line_total'], $order );
 				$this->add_line_item( $item->get_name(), 1, $item_line_total );
 			} else {
-				$course = $item->get_course();
-				// $sku             = $course ? $course->get_sku() : '';
+				$course          = $item->get_course();
+				$sku             = $course && is_callable( $course, 'get_sku' ) ? $course->get_sku() : '';
 				$item_line_total = $this->number_format( $order->get_item_subtotal( $item, false ), $order );
 				$this->add_line_item( $this->get_order_item_name( $order, $item ), $item->get_quantity(), $item_line_total, $sku );
 			}

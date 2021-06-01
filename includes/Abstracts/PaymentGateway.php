@@ -33,7 +33,7 @@ abstract class PaymentGateway {
 	 *
 	 * @var string
 	 */
-	protected $id = '';
+	protected $name = '';
 
 	/**
 	 * Set if the place order button should be renamed on selection.
@@ -141,7 +141,7 @@ abstract class PaymentGateway {
 	 *
 	 * @var array
 	 */
-	protected $supports = array( 'courses' );
+	protected $supports = array( 'course' );
 
 	/**
 	 * Maximum transaction amount, zero does not define a maximum.
@@ -191,8 +191,8 @@ abstract class PaymentGateway {
 	 *
 	 * @return string
 	 */
-	public function get_id() {
-		return $this->id;
+	public function get_name() {
+		return $this->name;
 	}
 
 	/**
@@ -672,43 +672,6 @@ abstract class PaymentGateway {
 	}
 
 	/**
-	 * Process Payment.
-	 *
-	 * Process the payment. Override this in your gateway. When implemented, this should.
-	 * return the success and redirect in an array. e.g:
-	 *
-	 *        return array(
-	 *            'result'   => 'success',
-	 *            'redirect' => $this->get_return_url( $order )
-	 *        );
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param int $order_id Order ID.
-	 * @return array
-	 */
-	public function process_payment( $order_id ) {
-		return array();
-	}
-
-	/**
-	 * Process refund.
-	 *
-	 * If the gateway declares 'refunds' support, this will allow it to refund.
-	 * a passed in amount.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  int        $order_id Order ID.
-	 * @param  float|null $amount Refund amount.
-	 * @param  string     $reason Refund reason.
-	 * @return boolean True or false based on success, or a WP_Error object.
-	 */
-	public function process_refund( $order_id, $amount = null, $reason = '' ) {
-		return false;
-	}
-
-	/**
 	 * Validate frontend fields.
 	 *
 	 * Validate payment fields on the frontend.
@@ -771,7 +734,7 @@ abstract class PaymentGateway {
 	 * @return string The value specified for the option or a default value for the option.
 	 */
 	public function get_option( $key, $default = null ) {
-		$option_name = 'payments.' . $this->get_id() . '_' . $key;
+		$option_name = 'payments.' . $this->get_name() . '_' . $key;
 
 		return masteriyo_get_setting_value( $option_name, $default );
 	}

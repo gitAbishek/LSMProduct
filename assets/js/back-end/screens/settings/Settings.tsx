@@ -68,7 +68,11 @@ const Settings = () => {
 	}
 
 	const onSubmit = (data: SetttingsMap) => {
-		updateSettings.mutate(data);
+		try {
+			updateSettings.mutate(data);
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
 	return (
@@ -114,7 +118,7 @@ const Settings = () => {
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
 										<AdvancedSettings
-											advancedData={settingsQuery.data?.advanced}
+											advanceData={settingsQuery.data?.advance}
 										/>
 									</TabPanel>
 								</TabPanels>

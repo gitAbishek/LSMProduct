@@ -134,9 +134,9 @@ export type EmailsSetttingsMap = {
 };
 
 export type AdvancedSettingsMap = {
-	template_debug_enable: boolean;
-	debug_enable: boolean;
-	styles_mode: string;
+	template_debug: boolean;
+	debug: boolean;
+	style: string;
 };
 
 export type SetttingsMap = {
@@ -145,5 +145,5 @@ export type SetttingsMap = {
 	pages: PagesSettingsMap;
 	payments: PaymentsSettingsMap;
 	emails: EmailsSetttingsMap;
-	advanced: AdvancedSettingsMap;
+	advance: AdvancedSettingsMap;
 };

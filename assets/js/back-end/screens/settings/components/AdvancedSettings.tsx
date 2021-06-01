@@ -14,11 +14,11 @@ import { useFormContext, Controller } from 'react-hook-form';
 import { AdvancedSettingsMap } from '../../../types';
 
 interface Props {
-	advancedData?: AdvancedSettingsMap;
+	advanceData?: AdvancedSettingsMap;
 }
 
 const AdvancedSettings: React.FC<Props> = (props) => {
-	const { advancedData } = props;
+	const { advanceData } = props;
 	const { register } = useFormContext();
 	return (
 		<Stack direction="column" spacing="10">
@@ -42,11 +42,11 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								</FormLabel>
 
 								<Controller
-									name="advanced.template_debug_enable"
+									name="advance.template_debug"
 									render={({ field }) => (
 										<Switch
 											{...field}
-											defaultChecked={advancedData?.template_debug_enable}
+											defaultChecked={advanceData?.template_debug}
 										/>
 									)}
 								/>
@@ -57,12 +57,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							<Stack direction="row">
 								<FormLabel minW="3xs">{__('Debug', 'masteriyo')}</FormLabel>
 								<Controller
-									name="advanced.debug_enable"
+									name="advance.debug"
 									render={({ field }) => (
-										<Switch
-											{...field}
-											defaultChecked={advancedData?.debug_enable}
-										/>
+										<Switch {...field} defaultChecked={advanceData?.debug} />
 									)}
 								/>
 							</Stack>
@@ -72,8 +69,8 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							<Stack direction="row">
 								<FormLabel minW="3xs">{__('Debug', 'masteriyo')}</FormLabel>
 								<Select
-									defaultValue={advancedData?.styles_mode}
-									{...register('advanced.styles_mode')}>
+									defaultValue={advanceData?.style}
+									{...register('advance.style')}>
 									<option value="none">{__('None', 'masteriyo')}</option>
 									<option value="simple">{__('Simple', 'masteriyo')}</option>
 									<option value="advanced">

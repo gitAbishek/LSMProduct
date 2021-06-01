@@ -211,11 +211,10 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<FormLabel minW="160px">
 											{__('Heading', 'masteriyo')}
 										</FormLabel>
-										<ImageUpload
-											name="emails.new_order.heading"
-											mediaId={emailData?.new_order.heading}
-											setValue={setValue}
-											register={register}
+										<Input
+											type="text"
+											defaultValue={emailData?.new_order.heading}
+											{...register('emails.new_order.heading')}
 										/>
 									</FormControl>
 
@@ -258,6 +257,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<FormLabel minW="160px">
 											{__('Subject', 'masteriyo')}
 										</FormLabel>
+
 										<Textarea
 											defaultValue={emailData?.processing_order?.subject}
 											{...register('emails.processing_order.subject')}
@@ -268,11 +268,10 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<FormLabel minW="160px">
 											{__('Heading', 'masteriyo')}
 										</FormLabel>
-										<ImageUpload
-											name="emails.processing_order.heading"
-											mediaId={emailData?.processing_order.heading}
-											setValue={setValue}
-											register={register}
+										<Input
+											type="text"
+											defaultValue={emailData?.processing_order.heading}
+											{...register('emails.processing_order.heading')}
 										/>
 									</FormControl>
 
@@ -325,11 +324,10 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<FormLabel minW="160px">
 											{__('Heading', 'masteriyo')}
 										</FormLabel>
-										<ImageUpload
-											name="emails.completed_order.heading"
-											mediaId={emailData?.completed_order.heading}
-											setValue={setValue}
-											register={register}
+										<Input
+											type="text"
+											defaultValue={emailData?.completed_order.heading}
+											{...register('emails.completed_order.heading')}
 										/>
 									</FormControl>
 
@@ -382,11 +380,10 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<FormLabel minW="160px">
 											{__('Heading', 'masteriyo')}
 										</FormLabel>
-										<ImageUpload
-											name="emails.onhold_order.heading"
-											mediaId={emailData?.onhold_order.heading}
-											setValue={setValue}
-											register={register}
+										<Input
+											type="text"
+											defaultValue={emailData?.onhold_order.heading}
+											{...register('emails.onhold_order.heading')}
 										/>
 									</FormControl>
 
@@ -449,11 +446,10 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<FormLabel minW="160px">
 											{__('Heading', 'masteriyo')}
 										</FormLabel>
-										<ImageUpload
-											name="emails.cancelled_order.heading"
-											mediaId={emailData?.cancelled_order.heading}
-											setValue={setValue}
-											register={register}
+										<Input
+											type="text"
+											defaultValue={emailData?.cancelled_order.heading}
+											{...register('emails.cancelled_order.heading')}
 										/>
 									</FormControl>
 
@@ -506,11 +502,10 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<FormLabel minW="160px">
 											{__('Heading', 'masteriyo')}
 										</FormLabel>
-										<ImageUpload
-											name="emails.enrolled_course.heading"
-											mediaId={emailData?.enrolled_course.heading}
-											setValue={setValue}
-											register={register}
+										<Input
+											type="text"
+											defaultValue={emailData?.enrolled_course.heading}
+											{...register('emails.enrolled_course.heading')}
 										/>
 									</FormControl>
 
@@ -563,11 +558,10 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<FormLabel minW="160px">
 											{__('Heading', 'masteriyo')}
 										</FormLabel>
-										<ImageUpload
-											name="emails.completed_course.heading"
-											mediaId={emailData?.completed_course.heading}
-											setValue={setValue}
-											register={register}
+										<Input
+											type="text"
+											defaultValue={emailData?.completed_course.heading}
+											{...register('emails.completed_course.heading')}
 										/>
 									</FormControl>
 
@@ -620,11 +614,10 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<FormLabel minW="160px">
 											{__('Heading', 'masteriyo')}
 										</FormLabel>
-										<ImageUpload
-											name="emails.become_an_instructor.heading"
-											mediaId={emailData?.become_an_instructor.heading}
-											setValue={setValue}
-											register={register}
+										<Input
+											type="text"
+											defaultValue={emailData?.become_an_instructor.heading}
+											{...register('emails.become_an_instructor.heading')}
 										/>
 									</FormControl>
 

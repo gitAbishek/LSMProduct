@@ -32,6 +32,12 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 		control,
 	});
 
+	const showPayPalSandBoxOptions = useWatch({
+		name: 'payments.paypal.sandbox',
+		defaultValue: paymentsData?.paypal.sandbox,
+		control,
+	});
+
 	const tabStyles = {
 		justifyContent: 'fx-start',
 		w: '160px',
@@ -119,23 +125,6 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									</FormControl>
 
 									<FormControl>
-										<Stack direction="row">
-											<FormLabel minW="160px">
-												{__('Sandbox', 'masteriyo')}
-											</FormLabel>
-											<Controller
-												name="payments.paypal.sandbox"
-												render={({ field }) => (
-													<Switch
-														{...field}
-														defaultChecked={paymentsData?.paypal?.sandbox}
-													/>
-												)}
-											/>
-										</Stack>
-									</FormControl>
-
-									<FormControl>
 										<FormLabel minW="160px">
 											{__('Email', 'masteriyo')}
 										</FormLabel>
@@ -191,6 +180,132 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												{__('Capture', 'masteriyo')}
 											</option>
 										</Select>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Image Url', 'masteriyo')}
+										</FormLabel>
+										<Input
+											type="text"
+											defaultValue={paymentsData?.paypal?.image_url}
+											{...register('paymentsData.paypal.image_url')}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<Stack direction="row">
+											<FormLabel minW="160px">
+												{__('Debug', 'masteriyo')}
+											</FormLabel>
+											<Controller
+												name="payments.paypal.debug"
+												render={({ field }) => (
+													<Switch
+														{...field}
+														defaultChecked={paymentsData?.paypal?.debug}
+													/>
+												)}
+											/>
+										</Stack>
+									</FormControl>
+
+									<FormControl>
+										<Stack direction="row">
+											<FormLabel minW="160px">
+												{__('Sandbox', 'masteriyo')}
+											</FormLabel>
+											<Controller
+												name="payments.paypal.sandbox"
+												render={({ field }) => (
+													<Switch
+														{...field}
+														defaultChecked={paymentsData?.paypal?.sandbox}
+													/>
+												)}
+											/>
+										</Stack>
+									</FormControl>
+									<Collapse in={showPayPalSandBoxOptions}>
+										<Stack direction="column" spacing="6">
+											<FormControl>
+												<FormLabel minW="160px">
+													{__('Sandbox API Username', 'masteriyo')}
+												</FormLabel>
+												<Input
+													type="text"
+													defaultValue={
+														paymentsData?.paypal?.sandbox_api_username
+													}
+													{...register(
+														'paymentsData.paypal.sandbox_api_username'
+													)}
+												/>
+											</FormControl>
+
+											<FormControl>
+												<FormLabel minW="160px">
+													{__('Sandbox API Password', 'masteriyo')}
+												</FormLabel>
+												<Input
+													type="password"
+													defaultValue={
+														paymentsData?.paypal?.sandbox_api_password
+													}
+													{...register(
+														'paymentsData.paypal.sandbox_api_password'
+													)}
+												/>
+											</FormControl>
+
+											<FormControl>
+												<FormLabel minW="160px">
+													{__('Sandbox API Signature', 'masteriyo')}
+												</FormLabel>
+												<Input
+													type="text"
+													defaultValue={
+														paymentsData?.paypal?.sandbox_api_signature
+													}
+													{...register(
+														'paymentsData.paypal.sandbox_api_signature'
+													)}
+												/>
+											</FormControl>
+										</Stack>
+									</Collapse>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Live API Username', 'masteriyo')}
+										</FormLabel>
+										<Input
+											type="text"
+											defaultValue={paymentsData?.paypal?.live_api_username}
+											{...register('paymentsData.paypal.live_api_username')}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Live API Password', 'masteriyo')}
+										</FormLabel>
+										<Input
+											type="password"
+											defaultValue={paymentsData?.paypal?.live_api_password}
+											{...register('paymentsData.paypal.live_api_password')}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Live API Signature', 'masteriyo')}
+										</FormLabel>
+										<Input
+											type="text"
+											defaultValue={paymentsData?.paypal?.live_api_signature}
+											{...register('paymentsData.paypal.live_api_signature')}
+										/>
 									</FormControl>
 								</Stack>
 							</Collapse>

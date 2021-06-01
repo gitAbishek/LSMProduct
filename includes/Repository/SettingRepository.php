@@ -21,6 +21,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 		$changes         = array();
 		$setting_changes = $setting->get_changes();
 		$group_changes   = array_keys( $setting_changes );
+
 		foreach ( $group_changes as $group ) {
 			foreach ( $setting_changes[ $group ] as $setting_name => $value ) {
 				$changes[ $group . '.' . $setting_name ] = $value;
@@ -128,7 +129,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	public function delete( Model &$setting, $args = array() ) {
 
 		// Resetting to default data.
-		foreach ( $setting->get_default_datas() as $setting_name => $setting_value ) {
+		foreach ( $setting->get_default_data( true ) as $setting_name => $setting_value ) {
 			update_option( 'masteriyo.' . $setting_name, $setting_value, false );
 		}
 

@@ -1524,12 +1524,12 @@ class SettingsController extends CrudController {
 
 		// Advance Setting.
 
-		if ( isset( $request['advance']['template_debug_enable'] ) ) {
-			$setting->set_advance_template_debug_enable( $request['advance']['template_debug_enable'] );
+		if ( isset( $request['advance']['template_debug'] ) ) {
+			$setting->set_advance_template_debug( $request['advance']['template_debug'] );
 		}
 
-		if ( isset( $request['advance']['debug_enable'] ) ) {
-			$setting->set_advance_debug_enable( $request['advance']['debug_enable'] );
+		if ( isset( $request['advance']['debug'] ) ) {
+			$setting->set_advance_debug( $request['advance']['debug'] );
 		}
 
 		if ( isset( $request['advance']['style'] ) ) {

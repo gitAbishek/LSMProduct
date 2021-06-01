@@ -231,10 +231,26 @@ class Setting extends Model {
 	 * Default data will be returned if not read from store. Otherwise stored datas will return.
 	 *
 	 * @since 0.1.0
+	 *
+	 * @param boolean $flat Flat the data.
+	 *
 	 * @return array $data Default datas.
 	 */
-	public function get_default_data() {
-		return $this->data;
+	public function get_default_data( $flat = false ) {
+		$data = array();
+
+		if ( $flat ) {
+			$groups = array_keys( $this->data );
+			foreach ( $groups as $group ) {
+				foreach ( $this->data[ $group ] as $setting => $value ) {
+					$data[ "${group}.${setting}" ] = $value;
+				}
+			}
+		} else {
+			$data = $this->data;
+		}
+
+		return apply_filters( 'masteriyo_setting_default_data', $data, $flat );
 	}
 
 	/**
@@ -2618,7 +2634,7 @@ class Setting extends Model {
 	* @param boolean $enable
 	*/
 	public function set_advance_template_debug( $enable ) {
-		$this->set_setting_prop( 'template_debug', 'advance', masteriyo_boolean_to_bool( $enable ) );
+		$this->set_setting_prop( 'template_debug', 'advance', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**

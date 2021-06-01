@@ -6,7 +6,15 @@ import Router from './router/Router';
 import theme from './theme/theme';
 
 const App = () => {
-	const queryClient = new QueryClient();
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				refetchOnMount: false,
+				refetchOnWindowFocus: false,
+				refetchOnReconnect: false,
+			},
+		},
+	});
 
 	return (
 		<ChakraProvider theme={theme}>

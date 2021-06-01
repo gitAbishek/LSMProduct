@@ -17,11 +17,13 @@
     "react-beautiful-dnd": "13.1.0",
     "react-dom": "17.0.1",
     "react-dropzone": "11.3.2",
+    "react-flags-select": "2.1.2",
     "react-focus-lock": "2.5.0",
-    "react-hook-form": "7.0.5",
+    "react-hook-form": "7.7.1",
     "react-icons": "4.2.0",
     "react-query": "3.8.3",
     "react-select": "3.1.0",
+    "remove": "0.1.5",
     "tinymce": "5.7.1"
   },
   "devDependencies": {
@@ -38,6 +40,7 @@
     "@types/react-collapse": "5.0.0",
     "@types/react-router-dom": "5.1.7",
     "@types/react-select": "4.0.13",
+    "@types/react-select-country-list": "2.2.0",
     "@wordpress/babel-plugin-makepot": "4.0.1",
     "@wordpress/babel-preset-default": "^4.18.0",
     "@wordpress/dependency-extraction-webpack-plugin": "2.8.0",

@@ -1007,7 +1007,13 @@ class SettingsController extends CrudController {
 				),
 			),
 			'payments' => array(
-				'paypal' => array(
+				'offline' => array(
+					'enable'      => $setting->get_payments_offline_enable( $context ),
+					'title'       => $setting->get_payments_offline_title( $context ),
+					'description' => $setting->get_payments_offline_description( $context ),
+					'description' => $setting->get_payments_offline_description( $context ),
+				),
+				'paypal'  => array(
 					'enable'                  => $setting->get_payments_paypal_enable( $context ),
 					'title'                   => $setting->get_payments_paypal_title( $context ),
 					'description'             => $setting->get_payments_paypal_description( $context ),
@@ -1275,6 +1281,19 @@ class SettingsController extends CrudController {
 		}
 
 		// Payments Setting.
+
+		// Offline.
+		if ( isset( $request['payments']['offline']['enable'] ) ) {
+			$setting->set_payments_offline_enable( $request['payments']['offline']['enable'] );
+		}
+
+		if ( isset( $request['payments']['offline']['title'] ) ) {
+			$setting->set_payments_offline_title( $request['payments']['offline']['title'] );
+		}
+
+		if ( isset( $request['payments']['offline']['description'] ) ) {
+			$setting->set_payments_offline_description( $request['payments']['offline']['description'] );
+		}
 
 		// Paypal.
 		if ( isset( $request['payments']['paypal']['enable'] ) ) {

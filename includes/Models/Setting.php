@@ -122,7 +122,7 @@ class Setting extends Model {
 		),
 		'payments' => array(
 			// Offline payment
-			'offline_enable'                 => true,
+			'offline_enable'                 => false,
 			'offline_title'                  => 'Offline payment',
 			'offline_description'            => 'Pay with offline payment.',
 			'offline_instructions'           => 'Pay with offline payment',

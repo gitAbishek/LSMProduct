@@ -95,7 +95,7 @@ function masteriyo_timezone_offset() {
 function masteriyo_string_to_timestamp( $time_string, $from_timestamp = null ) {
 	$original_timezone = date_default_timezone_get();
 
-	// @codingStandardsIgnoreStart
+	// phpcs:disable
 	date_default_timezone_set( 'UTC' );
 
 	if ( null === $from_timestamp ) {
@@ -105,7 +105,7 @@ function masteriyo_string_to_timestamp( $time_string, $from_timestamp = null ) {
 	}
 
 	date_default_timezone_set( $original_timezone );
-	// @codingStandardsIgnoreEnd
+	// phpcs:enable
 
 	return $next_timestamp;
 }
@@ -388,6 +388,7 @@ function masteriyo_clean( $var ) {
  */
 function masteriyo_date_format() {
 	$date_format = get_option( 'date_format' );
+
 	if ( empty( $date_format ) ) {
 		// Return default date format if the option is empty.
 		$date_format = 'F j, Y';
@@ -663,4 +664,25 @@ function masteriyo_float_to_string( $float ) {
 	$string = str_replace( $locale['decimal_point'], '.', $string );
 
 	return $string;
+}
+
+/**
+ * Format a date for output.
+ *
+ * @since  0.1.0
+ * @param  ThemeGrill\Masteriyo\DateTime $date   Instance of ThemeGrill\Masteriyo\DateTime.
+ * @param  string      $format Data format.
+ *                             Defaults to the masteriyo_date_format function if not set.
+ * @return string
+ */
+function masteriyo_format_datetime( $date, $format = '' ) {
+	if ( empty( $format ) ) {
+		$format = masteriyo_date_format();
+	}
+
+	if ( ! is_a( $date, 'ThemeGrill\Masteriyo\DateTime' ) ) {
+		return '';
+	}
+
+	return $date->date_i18n( $format );
 }

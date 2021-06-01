@@ -122,8 +122,8 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		$order->set_props(
 			array(
 				'status'        => $order_post->post_status,
-				'date_created'  => $order_post->post_date_gmt,
-				'date_modified' => $order_post->post_modified_gmt,
+				'date_created'  => $this->string_to_timestamp( $order_post->post_date_gmt ),
+				'date_modified' => $this->string_to_timestamp( $order_post->post_modified_gmt ),
 				'customer_id'   => absint( $order_post->post_author ),
 			)
 		);
@@ -516,5 +516,30 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 */
 	protected function get_order_key( $order ) {
 		return masteriyo_generate_order_key();
+	}
+
+	/**
+	 * Get amount already refunded.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  Order $order Order object.
+	 * @return float
+	 */
+	public function get_total_refunded( $order ) {
+		global $wpdb;
+
+		$total = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT SUM( postmeta.meta_value )
+				FROM $wpdb->postmeta AS postmeta
+				INNER JOIN $wpdb->posts AS posts ON ( posts.post_type = 'mto-order-refund' AND posts.post_parent = %d )
+				WHERE postmeta.meta_key = '_refund_amount'
+				AND postmeta.post_id = posts.ID",
+				$order->get_id()
+			)
+		);
+
+		return floatval( $total );
 	}
 }

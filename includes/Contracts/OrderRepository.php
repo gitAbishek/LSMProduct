@@ -19,6 +19,16 @@ defined( 'ABSPATH' ) || exit;
 interface OrderRepository {
 
 	/**
+	 * Get amount already refunded.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param ORder $order Order object.
+	 * @return float
+	 */
+	public function get_total_refunded( $order );
+
+	/**
 	 * Read order items of a specific type from the database for this order.
 	 *
 	 * @since 0.1.0

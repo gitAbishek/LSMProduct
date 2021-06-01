@@ -638,7 +638,7 @@ abstract class Model {
 				$datetime = $value;
 			} elseif ( is_numeric( $value ) ) {
 				// Timestamps are handled as UTC timestamps in all cases.
-				$datetime = new DateTIme( "@{$value}", new DateTimeZone( 'UTC' ) );
+				$datetime = new DateTIme( "@{$value}", new \DateTimeZone( 'UTC' ) );
 			} else {
 				// Strings are defined in local WP timezone. Convert to UTC.
 				if ( 1 === preg_match( '/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(Z|((-|\+)\d{2}:\d{2}))$/', $value, $date_bits ) ) {
@@ -647,12 +647,12 @@ abstract class Model {
 				} else {
 					$timestamp = masteriyo_string_to_timestamp( get_gmt_from_date( gmdate( 'Y-m-d H:i:s', masteriyo_string_to_timestamp( $value ) ) ) );
 				}
-				$datetime = new DateTime( "@{$timestamp}", new DateTimeZone( 'UTC' ) );
+				$datetime = new DateTime( "@{$timestamp}", new \DateTimeZone( 'UTC' ) );
 			}
 
 			// Set local timezone or offset.
 			if ( get_option( 'timezone_string' ) ) {
-				$datetime->setTimezone( new DateTimeZone( masteriyo_timezone_string() ) );
+				$datetime->setTimezone( new \DateTimeZone( masteriyo_timezone_string() ) );
 			} else {
 				$datetime->set_utc_offset( masteriyo_timezone_offset() );
 			}

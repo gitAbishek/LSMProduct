@@ -182,7 +182,7 @@ class OrderItem extends Model {
 		$formatted_meta    = array();
 		$meta_data         = $this->get_meta_data();
 		$hideprefix_length = ! empty( $hideprefix ) ? strlen( $hideprefix ) : 0;
-		$course           = is_callable( array( $this, 'get_course' ) ) ? $this->get_course() : false;
+		$course            = is_callable( array( $this, 'get_course' ) ) ? $this->get_course() : false;
 		$order_item_name   = $this->get_name();
 
 		foreach ( $meta_data as $meta ) {

@@ -507,9 +507,8 @@ function masteriyo_locate_template( $template_name, $template_path = '', $defaul
  * @return int
  */
 function masteriyo_get_page_id( $page ) {
-
-	$page_id = get_option( 'masteriyo_' . $page . '_page_id', -1 );
-
+	$page    = str_replace( '-', '_', $page );
+	$page_id = get_option( 'masteriyo.pages.' . $page . '_page_id', -1 );
 	$page_id = apply_filters( 'masteriyo_get_' . $page . '_page_id', $page_id );
 
 	return $page_id ? absint( $page_id ) : -1;

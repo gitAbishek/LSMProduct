@@ -254,7 +254,7 @@ abstract class Order extends Model {
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string
+	 * @return DateTime|NULL object if the date is set or null if there is no date.
 	 */
 	public function get_date_created( $context = 'view' ) {
 		return $this->get_prop( 'date_created', $context );
@@ -267,7 +267,7 @@ abstract class Order extends Model {
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string
+	 * @return DateTime|NULL object if the date is set or null if there is no date.
 	 */
 	public function get_date_modified( $context = 'view' ) {
 		return $this->get_prop( 'date_modified', $context );
@@ -422,7 +422,7 @@ abstract class Order extends Model {
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
 	public function set_date_created( $date = null ) {
-		$this->set_prop( 'date_created', $date );
+		$this->set_date_prop( 'date_created', $date );
 	}
 
 	/**
@@ -433,7 +433,7 @@ abstract class Order extends Model {
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
 	public function set_date_modified( $date = null ) {
-		$this->set_prop( 'date_modified', $date );
+		$this->set_date_prop( 'date_modified', $date );
 	}
 
 	/**

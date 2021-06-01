@@ -513,9 +513,13 @@ class Order extends AbstractOrder {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $payment_method Payment method.
+	 * @param string|PaymentGateway $payment_method Payment method.
 	 */
 	public function set_payment_method( $payment_method ) {
+		if ( is_a( $payment_method, 'ThemeGrill\Masteriyo\Abstracts\PaymentGateway' ) ) {
+			$payment_method = $payment_method->get_method_title();
+		}
+
 		$this->set_prop( 'payment_method', $payment_method );
 	}
 
@@ -977,6 +981,83 @@ class Order extends AbstractOrder {
 	}
 
 	/**
+	 * Get amount already refunded.
+	 *
+	 * @since 0.1.0
+	 * @return string
+	 */
+	public function get_total_refunded() {
+		$cache_key   = masteriyo( 'cache' )->get_prefix( 'orders' ) . 'total_refunded' . $this->get_id();
+		$cached_data = masteriyo( 'cache' )->get( $cache_key, $this->cache_group );
+
+		if ( false !== $cached_data ) {
+			return $cached_data;
+		}
+
+		$total_refunded = $this->repository->get_total_refunded( $this );
+
+		masteriyo( 'cache' )->set( $cache_key, $total_refunded, $this->cache_group );
+
+		return $total_refunded;
+	}
+
+	/**
+	 * Gets order total - formatted for display.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $tax_display      Type of tax display.
+	 * @param bool   $display_refunded If should include refunded value.
+	 *
+	 * @return string
+	 */
+	public function get_formatted_order_total( $tax_display = '', $display_refunded = true ) {
+		$formatted_total = masteriyo_price( $this->get_total(), array( 'currency' => $this->get_currency() ) );
+		$order_total     = $this->get_total();
+		$total_refunded  = $this->get_total_refunded();
+		$tax_string      = '';
+
+		// Tax for inclusive prices.
+		if ( masteriyo_is_tax_enabled() && 'incl' === $tax_display ) {
+			$tax_string_array = array();
+			$tax_totals       = $this->get_tax_totals();
+
+			if ( 'itemized' === get_option( 'masteriyo_tax_total_display' ) ) {
+				foreach ( $tax_totals as $code => $tax ) {
+					$tax_amount         = ( $total_refunded && $display_refunded ) ? masteriyo_price( masteriyo_round( $tax->amount - $this->get_total_tax_refunded_by_rate_id( $tax->rate_id ) ), array( 'currency' => $this->get_currency() ) ) : $tax->formatted_amount;
+					$tax_string_array[] = sprintf( '%s %s', $tax_amount, $tax->label );
+				}
+			} elseif ( ! empty( $tax_totals ) ) {
+				$tax_amount         = ( $total_refunded && $display_refunded ) ? $this->get_total_tax() - $this->get_total_tax_refunded() : $this->get_total_tax();
+				$tax_string_array[] = sprintf( '%s %s', masteriyo_price( $tax_amount, array( 'currency' => $this->get_currency() ) ), masteriyo( 'countries' )->tax_or_vat() );
+			}
+
+			if ( ! empty( $tax_string_array ) ) {
+				/* translators: %s: taxes */
+				$tax_string = ' <small class="includes_tax">' . sprintf( __( '(includes %s)', 'masteriyo' ), implode( ', ', $tax_string_array ) ) . '</small>';
+			}
+		}
+
+		if ( $total_refunded && $display_refunded ) {
+			$formatted_total = '<del aria-hidden="true">' . wp_strip_all_tags( $formatted_total ) . '</del> <ins>' . masteriyo_price( $order_total - $total_refunded, array( 'currency' => $this->get_currency() ) ) . $tax_string . '</ins>';
+		} else {
+			$formatted_total .= $tax_string;
+		}
+
+		/**
+		 * Filter Masteriyo formatted order total.
+		 *
+		 * @since 0.1.0
+		 *
+		 * @param string   $formatted_total  Total to display.
+		 * @param Order $order            Order data.
+		 * @param string   $tax_display      Type of tax display.
+		 * @param bool     $display_refunded If should include refunded value.
+		 */
+		return apply_filters( 'masteriyo_get_formatted_order_total', $formatted_total, $this, $tax_display, $display_refunded );
+	}
+
+	/**
 	 * Gets the order number for display (by default, order ID).
 	 *
 	 * @since 0.1.0
@@ -985,6 +1066,17 @@ class Order extends AbstractOrder {
 	 */
 	public function get_order_number() {
 		return (string) apply_filters( 'masteriyo_order_number', $this->get_id(), $this );
+	}
+
+	/**
+	 * Check if order has been created via admin, checkout, or in another way.
+	 *
+	 * @since 0.1.0
+	 * @param string $modus Way of creating the order to test for.
+	* @return bool
+	 */
+	public function is_created_via( $modus ) {
+		return apply_filters( 'masteriyo_order_is_created_via', $modus === $this->get_created_via(), $this, $modus );
 	}
 
 	/*

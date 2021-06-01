@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 
 import { PaymentsSettingsMap } from '../../../types';
 
@@ -25,16 +25,15 @@ interface Props {
 
 const PaymentsSettings: React.FC<Props> = (props) => {
 	const { paymentsData } = props;
-	const { register, watch } = useFormContext();
-	const showPayPalOptions = watch(
-		'payments.paypal.enable',
-		paymentsData?.paypal.enable
-	);
-	const showSandboxOptions = watch('payments.paypal.sandbox');
+	const { register, control } = useFormContext();
+	const showPayPalOptions = useWatch({
+		name: 'payments.paypal.enable',
+		defaultValue: paymentsData?.paypal.enable,
+		control,
+	});
 
-	console.log(showPayPalOptions);
 	const tabStyles = {
-		justifyContent: 'flex-start',
+		justifyContent: 'fx-start',
 		w: '160px',
 		borderLeft: 0,
 		borderRight: '2px solid',

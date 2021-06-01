@@ -37,11 +37,20 @@ const ImageUpload: React.FC<Props> = (props) => {
 	const uploadMedia = useMutation((image: any) => imageAPi.store(image));
 	const deleteMedia = useMutation((id: any) => imageAPi.delete(id));
 
+	const mediaEnabled = () => {
+		if (mediaId === 0 || mediaId === '0') {
+			return false;
+		} else if (mediaId) {
+			return true;
+		} else {
+			return false;
+		}
+	};
 	const imageQuery = useQuery(
 		[`image${mediaId}`, mediaId],
 		() => imageAPi.get(mediaId),
 		{
-			enabled: !!mediaId,
+			enabled: mediaEnabled(),
 			onSuccess: (data) => {
 				setImageId(data.id);
 				setPreview(data.source_url);

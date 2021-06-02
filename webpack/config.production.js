@@ -5,6 +5,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const baseConfig = require('./config.base');
 const WebpackBar = require('webpackbar');
+const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
+const EslintPlugin = require('eslint-webpack-plugin');
+
 const config = {
 	entry: baseConfig.paths.entry,
 
@@ -67,6 +70,12 @@ const config = {
 		new CleanWebpackPlugin(),
 		new Dotenv(),
 		new WebpackBar(),
+		new ForkTsCheckerPlugin({
+			async: false,
+		}),
+		new EslintPlugin({
+			extensions: ['js', 'jsx', 'ts', 'tsx'],
+		}),
 	].filter(Boolean),
 
 	resolve: baseConfig.resolver,

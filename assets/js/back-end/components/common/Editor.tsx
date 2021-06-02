@@ -3,7 +3,7 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 
 interface Props {
-	name: string;
+	name: `${string}`;
 	control: any;
 	defaultValue?: string;
 }

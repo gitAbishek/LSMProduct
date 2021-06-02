@@ -1,12 +1,11 @@
 import { Icon, Stack } from '@chakra-ui/react';
 import colors from 'Config/colors';
-import defaultStyle, { BaseLine } from 'Config/defaultStyle';
+import defaultStyle from 'Config/defaultStyle';
 import React from 'react';
 import ReactSelect, {
 	Props as ReactSelectProps,
 	components,
 } from 'react-select';
-import SingleValue from 'react-select/src/components/SingleValue';
 
 import {
 	FillInTheBlanks,
@@ -126,4 +125,5 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
 	);
 });
 
+Select.displayName = 'Select';
 export default Select;

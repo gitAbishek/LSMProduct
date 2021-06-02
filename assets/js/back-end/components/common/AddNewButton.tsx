@@ -34,4 +34,5 @@ const AddNewButton = React.forwardRef<HTMLButtonElement, Props>(
 	}
 );
 
+AddNewButton.displayName = 'AddNewButton';
 export default AddNewButton;

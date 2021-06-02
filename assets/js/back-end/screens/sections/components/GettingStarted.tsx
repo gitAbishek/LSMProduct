@@ -1,4 +1,4 @@
-import Button from 'Components/common/Button';
+import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { __ } from '@wordpress/i18n';
 
@@ -12,15 +12,11 @@ const GettingStarted = () => {
 				{__('Upload your content, quiz, assignment', 'masteriyo')}
 			</p>
 			<div className="mto-flex -mto-ml-8 -mto-mr-8">
-				<Button layout="primary" className="mto-mx-8">
-					{__('Add Section', 'masteriyo')}
-				</Button>
-				<Button layout="primary" className="mto-mx-8">
+				<Button className="mto-mx-8">{__('Add Section', 'masteriyo')}</Button>
+				<Button className="mto-mx-8">
 					{__('Add Assignment', 'masteriyo')}
 				</Button>
-				<Button layout="primary" className="mto-mx-8">
-					{__('Add Quiz', 'masteriyo')}
-				</Button>
+				<Button className="mto-mx-8">{__('Add Quiz', 'masteriyo')}</Button>
 			</div>
 			<p className="mto-mb-16 mto-leading-6">
 				{__('Not sure how to get started?', 'masteriyo')} <br />

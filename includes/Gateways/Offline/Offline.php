@@ -74,9 +74,9 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 		$order = masteriyo_get_order( $order_id );
 
 		if ( $order->get_total() > 0 ) {
-			// Mark as processing or on-hold (payment won't be taken until delivery).
+			// Mark as processing or on-hold (payment won't be taken until send).
 			$status = apply_filters( 'masteriyo_offline_process_payment_order_status', 'on-hold', $order );
-			$order->set_status( $status );
+			$order->update_status( $status, __( 'Payment to be made offline.', 'masteriyo' ) );
 		} else {
 			$order->payment_complete();
 		}

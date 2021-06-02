@@ -89,6 +89,46 @@ class Order extends AbstractOrder {
 	}
 
 	/**
+	 * Updates status of order immediately.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @uses Order::set_status()
+	 * @param string $new_status    Status to change the order to. No internal wc- prefix is required.
+	 * @param string $note          Optional note to add.
+	 * @param bool   $manual        Is this a manual order status change?.
+	 * @return bool
+	 */
+	public function update_status( $new_status, $note = '', $manual = false ) {
+		// Bail early if the the order doesn't exist.
+		if ( ! $this->get_id() ) {
+			return false;
+		}
+
+		try {
+			$this->set_status( $new_status, $note, $manual );
+			$this->save();
+		} catch ( Exception $e ) {
+			// TODO: Write Logger class.
+			// $logger = wc_get_logger();
+			// $logger->error(
+			// 	sprintf(
+			// 		'Error updating status for order #%d',
+			// 		$this->get_id()
+			// 	),
+			// 	array(
+			// 		'order' => $this,
+			// 		'error' => $e,
+			// 	)
+			// );
+			$this->add_order_note( __( 'Update status event failed.', 'masteriyo' ) . ' ' . $e->getMessage() );
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Handle the status transition.
 	 *
 	 * @since 0.1.0

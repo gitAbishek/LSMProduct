@@ -8,7 +8,6 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Center,
 	Container,
 	Divider,
 	Flex,
@@ -18,7 +17,6 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
-	Spinner,
 	Stack,
 	useToast,
 } from '@chakra-ui/react';
@@ -181,8 +179,12 @@ const EditLesson = () => {
 								<AlertDialogHeader>
 									{__('Delete Lesson')} {name}
 								</AlertDialogHeader>
+
 								<AlertDialogBody>
-									Are you sure? You can't restore this section
+									{__(
+										"Are you sure? You can't restore this lesson",
+										'masteriyo'
+									)}
 								</AlertDialogBody>
 								<AlertDialogFooter>
 									<ButtonGroup>

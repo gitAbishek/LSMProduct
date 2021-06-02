@@ -1,3 +1,4 @@
+*.js
 *.min.js
 *.bundle.js
 /build

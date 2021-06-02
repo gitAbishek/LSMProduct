@@ -32,11 +32,13 @@ const PagesSettings: React.FC<Props> = (props) => {
 
 	const renderPagesOption = () => {
 		try {
-			return pagesQuery?.data?.map((page: { id: number; title: any }) => (
-				<option value={page.id} key={page.id}>
-					{page.title.rendered}
-				</option>
-			));
+			return pagesQuery?.data?.map(
+				(page: { id: number; title: { rendered: string } }) => (
+					<option value={page.id} key={page.id}>
+						{page.title.rendered}
+					</option>
+				)
+			);
 		} catch (error) {
 			console.error(error);
 			return;

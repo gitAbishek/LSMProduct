@@ -14,6 +14,7 @@ use ThemeGrill\Masteriyo\RestApi\RestApi;
 use ThemeGrill\Masteriyo\PostType\RegisterPostType;
 use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
 use ThemeGrill\Masteriyo\AdminMenu;
+use ThemeGrill\Masteriyo\FileRestrictions\FileRestrictions;
 use ThemeGrill\Masteriyo\Shortcodes\Shortcodes;
 
 defined( 'ABSPATH' ) || exit;
@@ -64,6 +65,7 @@ class Masteriyo extends Container {
 	protected function init() {
 		Activation::init();
 		Deactivation::init();
+		FileRestrictions::init();
 
 		// Register service providers.
 		$this->register_service_providers();

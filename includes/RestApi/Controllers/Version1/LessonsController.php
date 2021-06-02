@@ -556,6 +556,8 @@ class LessonsController extends PostsController {
 					'description' => __( 'Video source.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
+					'default'     => 'self-hosted',
+					'enum'        => array_keys( masteriyo_get_lesson_video_sources() ),
 				),
 				'video_source_url'    => array(
 					'description' => __( 'Video source URL.', 'masteriyo' ),

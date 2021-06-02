@@ -37,7 +37,7 @@ class IpnHandler extends Response {
 	 */
 	public function __construct( $sandbox = false, $receiver_email = '' ) {
 		add_action( 'masteriyo_api_Paypal', array( $this, 'check_response' ) );
-		add_action( 'valid-paypal-standard-ipn-request', array( $this, 'valid_response' ) );
+		add_action( 'masteriyo_valid_paypal_standard_ipn_request', array( $this, 'valid_response' ) );
 
 		$this->receiver_email = $receiver_email;
 		$this->sandbox        = $sandbox;
@@ -49,11 +49,10 @@ class IpnHandler extends Response {
 	 * @since 0.1.0
 	 */
 	public function check_response() {
-		if ( ! empty( $_POST ) && $this->validate_ipn() ) { // WPCS: CSRF ok.
-			$posted = wp_unslash( $_POST ); // WPCS: CSRF ok, input var ok.
+		if ( ! empty( $_POST ) && $this->validate_ipn() ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$posted = wp_unslash( $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
-			do_action( 'valid-paypal-standard-ipn-request', $posted );
+			do_action( 'masteriyo_valid_paypal_standard_ipn_request', $posted );
 			exit;
 		}
 
@@ -93,7 +92,7 @@ class IpnHandler extends Response {
 		Paypal::log( 'Checking IPN response is valid' );
 
 		// Get received values from post data.
-		$validate_ipn        = wp_unslash( $_POST ); // WPCS: CSRF ok, input var ok.
+		$validate_ipn        = wp_unslash( $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$validate_ipn['cmd'] = '_notify-validate';
 
 		// Send back post vars to paypal.
@@ -308,7 +307,7 @@ class IpnHandler extends Response {
 	 */
 	protected function payment_status_paid_cancelled_order( $order, $posted ) {
 		$this->send_ipn_email_notification(
-			/* translators: %s: order link. */
+		/* translators: %s: order link. */
 			sprintf( __( 'Payment for cancelled order %s received', 'masteriyo' ), '<a class="link" href="' . esc_url( $order->get_edit_order_url() ) . '">' . $order->get_order_number() . '</a>' ),
 			/* translators: %s: order ID. */
 			sprintf( __( 'Order #%s has been marked paid by PayPal IPN, but was previously cancelled. Admin handling required.', 'masteriyo' ), $order->get_order_number() )
@@ -331,7 +330,7 @@ class IpnHandler extends Response {
 			$order->update_status( 'refunded', sprintf( __( 'Payment %s via IPN.', 'masteriyo' ), strtolower( $posted['payment_status'] ) ) );
 
 			$this->send_ipn_email_notification(
-				/* translators: %s: order link. */
+			/* translators: %s: order link. */
 				sprintf( __( 'Payment for order %s refunded', 'masteriyo' ), '<a class="link" href="' . esc_url( $order->get_edit_order_url() ) . '">' . $order->get_order_number() . '</a>' ),
 				/* translators: %1$s: order ID, %2$s: reason code. */
 				sprintf( __( 'Order #%1$s has been marked as refunded - PayPal reason code: %2$s', 'masteriyo' ), $order->get_order_number(), $posted['reason_code'] )
@@ -352,7 +351,7 @@ class IpnHandler extends Response {
 		$order->update_status( 'on-hold', sprintf( __( 'Payment %s via IPN.', 'masteriyo' ), masteriyo_clean( $posted['payment_status'] ) ) );
 
 		$this->send_ipn_email_notification(
-			/* translators: %s: order link. */
+		/* translators: %s: order link. */
 			sprintf( __( 'Payment for order %s reversed', 'masteriyo' ), '<a class="link" href="' . esc_url( $order->get_edit_order_url() ) . '">' . $order->get_order_number() . '</a>' ),
 			/* translators: %1$s: order ID, %2$s: reason code. */
 			sprintf( __( 'Order #%1$s has been marked on-hold due to a reversal - PayPal reason code: %2$s', 'masteriyo' ), $order->get_order_number(), masteriyo_clean( $posted['reason_code'] ) )
@@ -369,7 +368,7 @@ class IpnHandler extends Response {
 	 */
 	protected function payment_status_canceled_reversal( $order, $posted ) {
 		$this->send_ipn_email_notification(
-			/* translators: %s: order link. */
+		/* translators: %s: order link. */
 			sprintf( __( 'Reversal cancelled for order #%s', 'masteriyo' ), $order->get_order_number() ),
 			/* translators: %1$s: order ID, %2$s: order link. */
 			sprintf( __( 'Order #%1$s has had a reversal cancelled. Please check the status of payment and update the order status accordingly here: %2$s', 'masteriyo' ), $order->get_order_number(), esc_url( $order->get_edit_order_url() ) )
@@ -405,15 +404,67 @@ class IpnHandler extends Response {
 	 * @param string $message Email message.
 	 */
 	protected function send_ipn_email_notification( $subject, $message ) {
-		$new_order_settings = get_option( 'masteriyo_new_order_settings', array() );
-		$mailer             = MASTERIYO()->mailer();
-		$message            = $mailer->wrap_message( $subject, $message );
+		$new_order_settings        = $this->get_new_order_settings();
+		$mailer                    = masteriyo( 'email' );
+		$message                   = $mailer->wrap_message( $subject, $message );
+		$masteriyo_paypal_settings = $this->get_paypal_settings();
 
-		$masteriyo_paypal_settings = get_option( 'masteriyo_paypal_settings' );
-		if ( ! empty( $masteriyo_paypal_settings['ipn_notification'] ) && 'no' === $masteriyo_paypal_settings['ipn_notification'] ) {
+		if ( ! $masteriyo_paypal_settings['ipn_notification'] ) {
 			return;
 		}
 
-		$mailer->send( ! empty( $new_order_settings['recipient'] ) ? $new_order_settings['recipient'] : get_option( 'admin_email' ), strip_tags( $subject ), $message );
+		$recipients = $new_order_settings['recipients'];
+		if ( empty( $recipients ) ) {
+			$recipients = (array) get_bloginfo( 'admin_email' );
+		}
+
+		$mailer->send( $recipients, wp_strip_all_tags( $subject ), $message );
+	}
+
+	/**
+	 * Get email nrew order settings.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	protected function get_new_order_settings() {
+		return array(
+			'enable'     => masteriyo_get_setting_value( 'emails.new_order_enable' ),
+			'recipients' => masteriyo_get_setting_value( 'emails.new_order_recipients' ),
+			'subject'    => masteriyo_get_setting_value( 'emails.new_order_subject' ),
+			'heading'    => masteriyo_get_setting_value( 'emails.new_order_heading' ),
+			'content'    => masteriyo_get_setting_value( 'emails.new_order_content' ),
+		);
+	}
+
+	/**
+	 * Get paypal settings.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	protected function get_paypal_settings() {
+		return array(
+			'enable'                 => masteriyo_get_setting_value( 'payments.paypal_enable' ),
+			'title'                  => masteriyo_get_setting_value( 'payments.paypal_title' ),
+			'description'            => masteriyo_get_setting_value( 'payments.paypal_description' ),
+			'ipn_email_notification' => masteriyo_get_setting_value( 'payments.paypal_ipn_email_notification' ),
+			'sandbox'                => masteriyo_get_setting_value( 'payments.paypal_sandbox' ),
+			'email'                  => masteriyo_get_setting_value( 'payments.paypal_email' ),
+			'receiver_email'         => masteriyo_get_setting_value( 'payments.paypal_receiver_email' ),
+			'identity_token'         => masteriyo_get_setting_value( 'payments.paypal_indentity_token' ),
+			'invoice_prefix'         => masteriyo_get_setting_value( 'payments.paypal_invoice_prefix' ),
+			'payment_action'         => masteriyo_get_setting_value( 'payments.paypal_payment_action' ),
+			'image_url'              => masteriyo_get_setting_value( 'payments.paypal_image_url' ),
+			'debug'                  => masteriyo_get_setting_value( 'payments.paypal_debug' ),
+			'sandbox_api_username'   => masteriyo_get_setting_value( 'payments.paypal_sandbox_api_username' ),
+			'sandbox_api_password'   => masteriyo_get_setting_value( 'payments.paypal_sandbox_api_password' ),
+			'sandbox_api_signature'  => masteriyo_get_setting_value( 'payments.paypal_sandbox_api_signature' ),
+			'live_api_username'      => masteriyo_get_setting_value( 'payments.paypal_live_api_username' ),
+			'live_api_password'      => masteriyo_get_setting_value( 'payments.paypal_live_api_password' ),
+			'live_api_signature'     => masteriyo_get_setting_value( 'payments.paypal_live_api_signature' ),
+		);
 	}
 }

@@ -340,7 +340,17 @@ class Lesson extends Model {
 	 * @return string
 	 */
 	public function get_video_source_url( $context = 'view' ) {
-		return $this->get_prop( 'video_source_url', $context );
+		$source     = $this->get_video_source( 'edit' );
+		$source_url = $this->get_prop( 'video_source_url', $context );
+
+		if ( 'edit' === $context ) {
+			return $source_url;
+		}
+		if ( 'self-hosted' === $source && is_numeric( $source_url ) ) {
+			$source_url = masteriyo_generate_self_hosted_lesson_video_url( $this->get_id() );
+		}
+
+		return $source_url;
 	}
 
 	/**

@@ -88,6 +88,76 @@ class Order extends AbstractOrder {
 		return 'mto-order';
 	}
 
+	/**
+	 * Handle the status transition.
+	 *
+	 * @since 0.1.0
+	 */
+	protected function status_transition() {
+		$status_transition = $this->status_transition;
+
+		// Reset status transition variable.
+		$this->status_transition = false;
+
+		if ( ! $status_transition ) {
+			return;
+		}
+
+		try {
+			do_action( 'masteriyo_order_status_' . $status_transition['to'], $this->get_id(), $this );
+
+			if ( ! empty( $status_transition['from'] ) ) {
+				$transition_note = sprintf(
+					/* translators: 1: old order status 2: new order status */
+					__( 'Order status changed from %1$s to %2$s.', 'masteriyo' ),
+					masteriyo_get_order_status_name( $status_transition['from'] ),
+					masteriyo_get_order_status_name( $status_transition['to'] )
+				);
+
+				// Note the transition occurred.
+				$this->add_status_transition_note( $transition_note, $status_transition );
+
+				do_action( 'masteriyo_order_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
+				do_action( 'masteriyo_order_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
+
+				// Work out if this was for a payment, and trigger a payment_status hook instead.
+				if (
+					in_array( $status_transition['from'], apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( 'pending', 'failed' ), $this ), true )
+					&& in_array( $status_transition['to'], masteriyo_get_is_paid_statuses(), true )
+				) {
+					/**
+					 * Fires when the order progresses from a pending payment status to a paid one.
+					 *
+					 * @since 0.1.0
+					 * @param int Order ID
+					 * @param Order Order object
+					 */
+					do_action( 'masteriyo_order_payment_status_changed', $this->get_id(), $this );
+				}
+			} else {
+				/* translators: %s: new order status */
+				$transition_note = sprintf( __( 'Order status set to %s.', 'masteriyo' ), masteriyo_get_order_status_name( $status_transition['to'] ) );
+
+				// Note the transition occurred.
+				$this->add_status_transition_note( $transition_note, $status_transition );
+			}
+		} catch ( Exception $e ) {
+			// $logger = masteriyo_get_logger();
+			// $logger->error(
+			// 	sprintf(
+			// 		'Status transition of order #%d errored!',
+			// 		$this->get_id()
+			// 	),
+			// 	array(
+			// 		'order' => $this,
+			// 		'error' => $e,
+			// 	)
+			// );
+			// $this->add_order_note( __( 'Error during status transition.', 'masteriyo' ) . ' ' . $e->getMessage() );
+		}
+	}
+
+
 	/*
 	|--------------------------------------------------------------------------
 	| Getters
@@ -1125,11 +1195,33 @@ class Order extends AbstractOrder {
 		);
 	}
 
+	/**
+	 * Generates a URL to view an order from the my account page.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_view_order_url() {
+		$url = masteriyo_get_endpoint_url( 'view-order', $this->get_id(), masteriyo_get_page_permalink( 'myaccount' ) );
+		return apply_filters( 'masteriyo_get_view_order_url', $url, $this );
+	}
+
+	/**
+	 * Get's the URL to edit the order in the backend.
+	 *
+	 * @since 0.1.0
+	 * @return string
+	 */
+	public function get_edit_order_url() {
+		$url = get_admin_url( null, 'post.php?post=' . $this->get_id() . '&action=edit' );
+		return apply_filters( 'masteriyo_get_edit_order_url', $url, $this );
+	}
 
 	/**
 	 * Generates a raw (unescaped) cancel-order URL for use by payment gateways.
 	 *
-	 * 2since 0.1.0
+	 * @since 0.1.0
 	 *
 	 * @param string $redirect Redirect URL.
 	 * @return string The unescaped cancel-order URL.
@@ -1169,4 +1261,125 @@ class Order extends AbstractOrder {
 
 		return $cancel_endpoint;
 	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Order notes.
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Adds a note (comment) to the order. Order must exist.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $note              Note to add.
+	 * @param  int    $is_customer_note  Is this a note for the customer?.
+	 * @param  bool   $added_by_user     Was the note added by a user?.
+	 * @return int                       Comment ID.
+	 */
+	public function add_order_note( $note, $is_customer_note = 0, $added_by_user = false ) {
+		if ( ! $this->get_id() ) {
+			return 0;
+		}
+
+		if ( is_user_logged_in() && current_user_can( 'edit_mto-orders', $this->get_id() ) && $added_by_user ) {
+			$user                 = get_user_by( 'id', get_current_user_id() );
+			$comment_author       = $user->display_name;
+			$comment_author_email = $user->user_email;
+		} else {
+			$comment_author        = __( 'Masteriyo', 'masteriyo' );
+			$comment_author_email  = strtolower( __( 'Masteriyo', 'masteriyo' ) ) . '@';
+			$http_host             = str_replace( 'www.', '', sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) );
+			$comment_author_email .= isset( $_SERVER['HTTP_HOST'] ) ? $http_host : 'noreply.com';
+			$comment_author_email  = sanitize_email( $comment_author_email );
+		}
+
+		$commentdata = apply_filters(
+			'masteriyo_new_order_note_data',
+			array(
+				'comment_post_ID'      => $this->get_id(),
+				'comment_author'       => $comment_author,
+				'comment_author_email' => $comment_author_email,
+				'comment_author_url'   => '',
+				'comment_content'      => $note,
+				'comment_agent'        => 'Masteriyo',
+				'comment_type'         => 'order_note',
+				'comment_parent'       => 0,
+				'comment_approved'     => 1,
+			),
+			array(
+				'order_id'         => $this->get_id(),
+				'is_customer_note' => $is_customer_note,
+			)
+		);
+
+		$comment_id = wp_insert_comment( $commentdata );
+
+		if ( $is_customer_note ) {
+			add_comment_meta( $comment_id, 'is_customer_note', 1 );
+
+			do_action(
+				'masteriyo_new_customer_note',
+				array(
+					'order_id'      => $this->get_id(),
+					'customer_note' => $commentdata['comment_content'],
+				)
+			);
+		}
+
+		/**
+		 * Action hook fired after an order note is added.
+		 *
+		 * @param int      $order_note_id Order note ID.
+		 * @param Order $order         Order data.
+		 *
+		 * @since 0.1.0
+		 */
+		do_action( 'masteriyo_order_note_added', $comment_id, $this );
+
+		return $comment_id;
+	}
+
+	/**
+	 * Add an order note for status transition
+	 *
+	 * @since 0.1.0
+	 * @uses Order::add_order_note()
+	 * @param string $note          Note to be added giving status transition from and to details.
+	 * @param bool   $transition    Details of the status transition.
+	 * @return int                  Comment ID.
+	 */
+	private function add_status_transition_note( $note, $transition ) {
+		return $this->add_order_note( trim( $transition['note'] . ' ' . $note ), 0, $transition['manual'] );
+	}
+
+	/**
+	 * List order notes (public) for the customer.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	public function get_customer_order_notes() {
+		$notes = array();
+		$args  = array(
+			'post_id' => $this->get_id(),
+			'approve' => 'approve',
+			'type'    => '',
+		);
+
+		$comments = get_comments( $args );
+
+		foreach ( $comments as $comment ) {
+			if ( ! get_comment_meta( $comment->comment_ID, 'is_customer_note', true ) ) {
+				continue;
+			}
+			$comment->comment_content = make_clickable( $comment->comment_content );
+			$notes[]                  = $comment;
+		}
+
+		return $notes;
+	}
+
 }

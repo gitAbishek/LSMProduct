@@ -198,24 +198,4 @@ class PaymentGateways {
 			$current_gateway->set_current();
 		}
 	}
-
-	/**
-	 * Save options in admin.
-	 *
-	 * @since 0.1.0
-	 */
-	public function process_admin_options() {
-		$gateway_order = isset( $_POST['gateway_order'] ) ? masteriyo_clean( wp_unslash( $_POST['gateway_order'] ) ) : ''; // WPCS: input var ok, CSRF ok.
-		$order         = array();
-
-		if ( is_array( $gateway_order ) && count( $gateway_order ) > 0 ) {
-			$loop = 0;
-			foreach ( $gateway_order as $gateway_id ) {
-				$order[ esc_attr( $gateway_id ) ] = $loop;
-				$loop++;
-			}
-		}
-
-		update_option( 'masteriyo_gateway_order', $order );
-	}
 }

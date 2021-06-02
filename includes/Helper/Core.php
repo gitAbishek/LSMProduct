@@ -2598,3 +2598,44 @@ function masteriyo_get_order_id_by_order_key( $order_key ) {
 
 	return $data_store->get_order_id_by_order_key( $order_key );
 }
+
+/**
+ * Get available lesson video sources.
+ *
+ * @since 0.1.0
+ *
+ * @return array
+ */
+function masteriyo_get_lesson_video_sources() {
+	$sources = array(
+		'self-hosted' => __( 'Self Hosted', 'masteriyo' ),
+		'youtube'     => __( 'YouTube', 'masteriyo' ),
+	);
+	return apply_filters( 'masteriyo_lesson_video_sources', $sources );
+}
+
+/**
+ * Generate URL for a self hosted lesson video file.
+ *
+ * @since 0.1.0
+ *
+ * @param integer|string $lesson_id
+ *
+ * @return string
+ */
+function masteriyo_generate_self_hosted_lesson_video_url( $lesson_id ) {
+	$lesson = masteriyo_get_lesson( $lesson_id );
+
+	if ( is_null( $lesson ) ) {
+		return '';
+	}
+	$url = add_query_arg(
+		array(
+			'mto-lesson-vid' => 'yes',
+			'course-id'      => $lesson->get_course_id(),
+			'lesson-id'      => $lesson->get_id(),
+		),
+		home_url( '/' )
+	);
+	return apply_filters( 'masteriyo_self_hosted_lesson_video_url', $url, $lesson );
+}

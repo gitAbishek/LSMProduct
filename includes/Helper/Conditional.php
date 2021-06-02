@@ -462,8 +462,9 @@ if ( ! function_exists( 'masteriyo_is_current_user_post_author' ) ) {
 }
 
 if ( ! function_exists( 'masteriyo_is_tax_enabled' ) ) {
+
 	/**
-	 * Is tax enabled?
+	 * Are store-wide taxes enabled?
 	 *
 	 * @since 0.1.0
 	 *
@@ -493,5 +494,68 @@ if ( ! function_exists( 'masteriyo_is_checkout_page' ) ) {
 		$page_id = masteriyo_get_page_id( 'checkout' );
 
 		return $post->ID === $page_id;
+	}
+}
+
+if ( ! function_exists( 'masteriyo_is_user_enrolled_in_course' ) ) {
+	/**
+	 * Check if a user is enrolled in a course.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param integer|string $user_id
+	 * @param integer|string $course_id
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_user_enrolled_in_course( $user_id, $course_id ) {
+		if ( ! $user_id || ! $course_id ) {
+			return false;
+		}
+		$course = masteriyo_get_course( $course_id );
+		$user   = masteriyo_get_user( $user_id );
+
+		if ( is_null( $course ) || is_null( $user ) ) {
+			return false;
+		}
+
+		$orders = masteriyo_get_orders(
+			array(
+				'customer_id' => $user->get_id(),
+			)
+		);
+
+		foreach ( $orders as $order ) {
+			$order_items = masteriyo_get_order_items(
+				array(
+					'order_id' => $order->get_id(),
+				)
+			);
+
+			foreach ( $order_items as $order_item ) {
+				if ( ! $order_item->is_type( 'course' ) ) {
+					continue;
+				}
+				if ( $course->get_id() === $order_item->get_course_id() ) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+}
+
+if ( ! function_exists( 'masteriyo_is_current_user_enrolled_in_course' ) ) {
+	/**
+	 * Check if the current logged in user is enrolled in a course.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param integer|string $course_id
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_current_user_enrolled_in_course( $course_id ) {
+		return masteriyo_is_user_enrolled_in_course( get_current_user_id(), $course_id );
 	}
 }

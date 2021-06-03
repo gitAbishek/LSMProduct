@@ -16,7 +16,7 @@ class LessonVideoRestriction extends FileRestriction {
 	 * @since 0.1.0
 	 */
 	public function run() {
-		if ( ! isset( $_GET['mto-lesson-vid'] ) ) return;
+		if ( ! isset( $_GET['masteriyo_lesson_vid'] ) ) return;
 
 		$this->validate_lesson_video_url();
 
@@ -26,7 +26,7 @@ class LessonVideoRestriction extends FileRestriction {
 			$this->send_lesson_video_file();
 		}
 
-		$course = masteriyo_get_course( $_GET['course-id'] );
+		$course = masteriyo_get_course( $_GET['course_id'] );
 
 		if ( $course->get_author_id() === get_current_user_id() ) {
 			$this->send_lesson_video_file();
@@ -45,7 +45,7 @@ class LessonVideoRestriction extends FileRestriction {
 	 * @since 0.1.0
 	 */
 	public function send_lesson_video_file() {
-		$lesson = masteriyo_get_lesson( $_GET['lesson-id'] );
+		$lesson = masteriyo_get_lesson( $_GET['lesson_id'] );
 
 		do_action( 'masteriyo_before_send_lesson_video_file', $lesson );
 
@@ -75,16 +75,16 @@ class LessonVideoRestriction extends FileRestriction {
 	 * @since 0.1.0
 	 */
 	public function validate_lesson_video_url() {
-		if ( empty( $_GET['course-id'] ) ) {
+		if ( empty( $_GET['course_id'] ) ) {
 			$this->send_error( __( 'Invalid URL', 'masteriyo' ) );
 		}
-		if ( empty( $_GET['lesson-id'] ) ) {
+		if ( empty( $_GET['lesson_id'] ) ) {
 			$this->send_error( __( 'Invalid URL', 'masteriyo' ) );
 		}
-		if ( is_null( masteriyo_get_course( $_GET['course-id'] ) ) ) {
+		if ( is_null( masteriyo_get_course( $_GET['course_id'] ) ) ) {
 			$this->send_error( __( 'Invalid URL', 'masteriyo' ) );
 		}
-		if ( is_null( masteriyo_get_lesson( $_GET['lesson-id'] ) ) ) {
+		if ( is_null( masteriyo_get_lesson( $_GET['lesson_id'] ) ) ) {
 			$this->send_error( __( 'Invalid URL', 'masteriyo' ) );
 		}
 	}

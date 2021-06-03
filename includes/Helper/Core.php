@@ -2631,9 +2631,9 @@ function masteriyo_generate_self_hosted_lesson_video_url( $lesson_id ) {
 	}
 	$url = add_query_arg(
 		array(
-			'mto-lesson-vid' => 'yes',
-			'course-id'      => $lesson->get_course_id(),
-			'lesson-id'      => $lesson->get_id(),
+			'masteriyo_lesson_vid' => 'yes',
+			'course_id'      => $lesson->get_course_id(),
+			'lesson_id'      => $lesson->get_id(),
 		),
 		home_url( '/' )
 	);

@@ -452,7 +452,7 @@ class ScriptStyle {
 			'masteriyo_localized_scripts',
 			array(
 				'admin' => array(
-					'name' => 'masteriyo',
+					'name' => '_MASTERIYO_',
 					'data' => array(
 						'rootApiUrl' => esc_url_raw( untrailingslashit( rest_url() ) ),
 						'nonce'      => wp_create_nonce( 'wp_rest' ),

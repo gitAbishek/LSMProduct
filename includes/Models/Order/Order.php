@@ -707,7 +707,7 @@ class Order extends AbstractOrder {
 	 * @param string $order_key order_key.
 	 */
 	public function set_order_key( $order_key ) {
-		$this->set_prop( 'order_key', $order_key );
+		$this->set_prop( 'order_key', substr( $order_key, 0, 22 ) );
 	}
 
 	/**

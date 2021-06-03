@@ -137,7 +137,7 @@ class Setting extends Model {
 			'paypal_receiver_email'          => '',
 			'paypal_identity_token'          => '',
 			'paypal_invoice_prefix'          => 'masteriyo-',
-			'paypal_payment_action'          => 'capture',
+			'paypal_payment_action'          => 'sale',
 			'paypal_image_url'               => '',
 			'paypal_debug'                   => false,
 			'paypal_sandbox_api_username'    => '',

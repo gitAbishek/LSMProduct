@@ -68,6 +68,10 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			$order->set_date_created( time() );
 		}
 
+		if ( '' === $order->get_order_key() ) {
+			$order->set_order_key( masteriyo_generate_order_key() );
+		}
+
 		$order->set_currency( $order->get_currency() ? $order->get_currency() : masteriyo_get_currency() );
 		$order->set_version( Constants::get( 'MASTERIYO_VERSION' ) );
 

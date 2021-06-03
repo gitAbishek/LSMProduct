@@ -368,10 +368,14 @@ class IpnHandler extends Response {
 	 */
 	protected function payment_status_canceled_reversal( $order, $posted ) {
 		$this->send_ipn_email_notification(
-		/* translators: %s: order link. */
+			/* translators: %s: order link. */
 			sprintf( __( 'Reversal cancelled for order #%s', 'masteriyo' ), $order->get_order_number() ),
-			/* translators: %1$s: order ID, %2$s: order link. */
-			sprintf( __( 'Order #%1$s has had a reversal cancelled. Please check the status of payment and update the order status accordingly here: %2$s', 'masteriyo' ), $order->get_order_number(), esc_url( $order->get_edit_order_url() ) )
+			sprintf(
+				/* translators: %1$s: order ID, %2$s: order link. */
+				__( 'Order #%1$s has had a reversal cancelled. Please check the status of payment and update the order status accordingly here: %2$s', 'masteriyo' ),
+				$order->get_order_number(),
+				esc_url( $order->get_edit_order_url() )
+			)
 		);
 	}
 

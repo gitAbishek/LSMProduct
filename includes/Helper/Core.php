@@ -2632,3 +2632,18 @@ function masteriyo_generate_self_hosted_lesson_video_url( $lesson_id ) {
 	);
 	return apply_filters( 'masteriyo_self_hosted_lesson_video_url', $url, $lesson );
 }
+
+/**
+ * Get setting object containg all the masteriyo settings.
+ *
+ * @since 0.1.0
+ *
+ * @return Setting
+ */
+function masteriyo_get_settings() {
+	$setting      = masteriyo( 'setting' );
+	$setting_repo = masteriyo( 'setting.store' );
+	$setting_repo->read( $setting );
+
+	return $setting;
+}

@@ -61,7 +61,7 @@ const config = {
 
 		new HtmlWebpackPlugin({
 			filename: 'interactive.html',
-			template: './assets/js/back-end/index.html',
+			template: './assets/js/interactive/index.html',
 		}),
 
 		new ReactRefreshWebpackPlugin({

@@ -55,6 +55,12 @@ const config = {
 
 	plugins: [
 		new HtmlWebpackPlugin({
+			filename: 'index.html',
+			template: './assets/js/back-end/index.html',
+		}),
+
+		new HtmlWebpackPlugin({
+			filename: 'interactive.html',
 			template: './assets/js/back-end/index.html',
 		}),
 

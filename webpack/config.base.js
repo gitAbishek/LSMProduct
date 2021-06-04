@@ -4,6 +4,11 @@ module.exports = {
 	paths: {
 		entry: {
 			backend: path.resolve(process.cwd(), 'assets/js/back-end', 'index.tsx'),
+			interactive: path.resolve(
+				process.cwd(),
+				'assets/js/interactive',
+				'index.tsx'
+			),
 		},
 		output: path.resolve(process.cwd(), 'assets/js/build'),
 	},

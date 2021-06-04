@@ -2134,37 +2134,39 @@ function masteriyo_get_password_reset_link( $reset_key, $user_id ) {
  * @since 0.1.0
  *
  * @param mixed  $slug Slug for the new page.
- * @param string $option Option name to store the page's ID.
+ * @param string $setting_name Setting name to store the page's ID.
  * @param string $page_title (default: '') Title for the new page.
  * @param string $page_content (default: '') Content for the new page.
  * @param int    $post_parent (default: 0) Parent for the new page.
  * @return int page ID.
  */
-function masteriyo_create_page( $slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
+function masteriyo_create_page( $slug, $setting_name = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
 	global $wpdb;
 
-	$option_value = get_option( $option );
+	$setting        = masteriyo_get_settings();
+	$previous_value = 0;
 
-	if ( $option_value > 0 ) {
-		$page_object = get_post( $option_value );
+	if ( method_exists( $setting, "get_pages_{$setting_name}" ) ) {
+		$previous_value = call_user_func_array( array( $setting, "get_pages_{$setting_name}" ), array() );
+	}
+
+	if ( $previous_value > 0 ) {
+		$page_object = get_post( $previous_value );
 
 		if ( $page_object && 'page' === $page_object->post_type && ! in_array( $page_object->post_status, array( 'pending', 'trash', 'future', 'auto-draft' ), true ) ) {
 			// Valid page is already in place.
 			if ( strlen( $page_content ) > 0 ) {
 				// Search for an existing page with the specified page content (typically a shortcode).
-				$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' ) AND post_content LIKE %s LIMIT 1;", "%{$page_content}%" ) );
+				$valid_page_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' ) AND post_content LIKE %s LIMIT 1;", "%{$page_content}%" ) );
 			} else {
 				// Search for an existing page with the specified page slug.
-				$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' )  AND post_name = %s LIMIT 1;", $slug ) );
+				$valid_page_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' )  AND post_name = %s LIMIT 1;", $slug ) );
 			}
 
-			$valid_page_found = apply_filters( 'masteriyo_create_page_id', $valid_page_found, $slug, $page_content );
+			$valid_page_id = apply_filters( 'masteriyo_create_page_id', $valid_page_id, $slug, $page_content );
 
-			if ( $valid_page_found ) {
-				if ( $option ) {
-					update_option( $option, $valid_page_found );
-				}
-				return $valid_page_found;
+			if ( $valid_page_id ) {
+				return $valid_page_id;
 			}
 		}
 	}
@@ -2198,11 +2200,6 @@ function masteriyo_create_page( $slug, $option = '', $page_title = '', $page_con
 		);
 		$page_id   = wp_insert_post( $page_data );
 	}
-
-	if ( $option ) {
-		update_option( $option, $page_id );
-	}
-
 	return $page_id;
 }
 

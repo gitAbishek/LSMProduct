@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Router from './router/Router';
 import theme from '../back-end/theme/theme';
+import Interactive from './components/Interactive';
 
 const App = () => {
 	const queryClient = new QueryClient({
@@ -19,7 +20,7 @@ const App = () => {
 	return (
 		<ChakraProvider theme={theme}>
 			<QueryClientProvider client={queryClient}>
-				<Router />
+				<Interactive></Interactive>
 			</QueryClientProvider>
 		</ChakraProvider>
 	);

@@ -39,6 +39,9 @@ class Install {
 		dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_items_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_itemmeta_table_schema( $charset_collate, $base_prefix ) );
+		dbDelta( self::get_user_activity_table_schema( $charset_collate, $base_prefix ) );
+		dbDelta( self::get_user_activitymeta_table_schema( $charset_collate, $base_prefix ) );
+
 	}
 
 	/**
@@ -84,11 +87,11 @@ class Install {
 	 */
 	private static function get_session_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE IF NOT EXISTS `{$base_prefix}masteriyo_sessions` (
-			id BIGINT UNSIGNED AUTO_INCREMENT,
+			`id` BIGINT UNSIGNED AUTO_INCREMENT,
 			`key` CHAR(32) UNIQUE NOT NULL,
 			`data` LONGTEXT NOT NULL,
 			`expiry` BIGINT UNSIGNED NOT NULL,
-			PRIMARY KEY (id)
+			PRIMARY KEY (`id`)
 		) {$charset_collate};";
 
 		return $sql;
@@ -107,8 +110,8 @@ class Install {
 	private static function get_order_items_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_order_items` (
 			order_item_id BIGINT UNSIGNED AUTO_INCREMENT,
-			order_item_name text NOT NULL,
-			order_item_type  varchar(200) NOT NULL,
+			order_item_name TEXT NOT NULL,
+			order_item_type  VARCHAR(200) NOT NULL,
 			order_id BIGINT UNSIGNED NOT NULL,
 			PRIMARY KEY (order_item_id),
 			KEY order_id (order_id),
@@ -130,13 +133,73 @@ class Install {
 	 */
 	private static function get_order_itemmeta_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_order_itemmeta` (
-			meta_id BIGINT UNSIGNED AUTO_INCREMENT,
-			order_item_id BIGINT UNSIGNED NOT NULL,
-			meta_key varchar(200) NOT NULL,
-			meta_value text,
-			PRIMARY KEY (meta_id),
-			KEY order_item_id (order_item_id),
-			KEY meta_key (meta_key(32))
+			`meta_id` BIGINT UNSIGNED AUTO_INCREMENT,
+			`order_item_id` BIGINT UNSIGNED NOT NULL,
+			`meta_key` VARCHAR(255) NOT NULL,
+			`meta_value` LONGTEXT,
+			PRIMARY KEY (`meta_id`),
+			KEY `order_item_id` (`order_item_id`),
+			KEY `meta_key` (`meta_key`(191))
+		) $charset_collate;";
+
+		return $sql;
+	}
+
+	/**
+	 * Get user activity table schema.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $charset_collate   Database charset collate.
+	 * @param string $base_prefix       Table prefix.
+	 *
+	 * @return void
+	 */
+	public function get_user_activity_table_schema( $charset_collate, $base_prefix ) {
+		$sql = "CREATE TABLE `{$base_prefix}masteriyo_user_activity` (
+			`activity_id` BIGINT UNSIGNED AUTO_INCREMENT,
+			`user_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
+			`item_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
+			`item_type` VARCHAR(200) NOT NULL,
+			`activity_type` VARCHAR(200) DEFAULT NULL,
+			`activity_status` VARCHAR(200) DEFAULT NULL,
+			`activity_start` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			`activity_update` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			`activity_complete` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			PRIMARY KEY (`activity_id`),
+			KEY `user_id` (`user_id`),
+			KEY `item_id` (`item_id`),
+			KEY `item_type` (`item_type`),
+			KEY `activity_type` (`activity_type`),
+			KEY `activity_status` (`activity_status`),
+			KEY `activity_start` (`activity_start`),
+			KEY `activity_update` (`activity_update`),
+			KEY `activity_complete` (`activity_complete`)
+		) $charset_collate;";
+
+		return $sql;
+	}
+
+
+	/**
+	 * Get user acitivty item meta table schema.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $charset_collate   Database charset collate.
+	 * @param string $base_prefix       Table prefix.
+	 *
+	 * @return string
+	 */
+	private static function get_user_activitymeta_table_schema( $charset_collate, $base_prefix ) {
+		$sql = "CREATE TABLE `{$base_prefix}masteriyo_user_activitymeta` (
+			`meta_id` BIGINT UNSIGNED AUTO_INCREMENT,
+			`user_activity_id` BIGINT UNSIGNED NOT NULL,
+			`meta_key` VARCHAR(255) NOT NULL,
+			`meta_value` LONGTEXT,
+			PRIMARY KEY (`meta_id`),
+			KEY `user_activity_id` (`user_activity_id`),
+			KEY `meta_key` (`meta_key`(191))
 		) $charset_collate;";
 
 		return $sql;

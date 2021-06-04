@@ -15,6 +15,8 @@ import {
 	AccordionItem,
 	AccordionPanel,
 	Spinner,
+	DrawerOverlay,
+	list,
 } from '@chakra-ui/react';
 import React from 'react';
 import { BiMenu } from 'react-icons/bi';
@@ -25,12 +27,24 @@ import urls from '../../back-end/constants/urls';
 const Sidebar = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const courseApi = new API(urls.courses);
-
-	const coursesQuery = useQuery([`interactiveCourse11`], () =>
-		courseApi.get(11)
+	const listApi = new API(urls.builder);
+	const courseId = 11;
+	const coursesQuery = useQuery(
+		[`interactiveCourse${courseId}`, courseId],
+		() => courseApi.get(courseId)
 	);
 
-	if (coursesQuery.isLoading) {
+	const listQuery = useQuery(
+		[`list${courseId}`, courseId],
+		() => listApi.get(courseId),
+		{
+			onSuccess: (data) => {
+				console.log(data);
+			},
+		}
+	);
+
+	if (coursesQuery.isLoading || listQuery.isLoading) {
 		return <Spinner />;
 	}
 
@@ -46,56 +60,41 @@ const Sidebar = () => {
 				aria-label="open sidebar"
 			/>
 			<Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+				{/* <DrawerOverlay /> */}
 				<DrawerContent>
 					<DrawerCloseButton />
 					<DrawerHeader bg="blue.500" color="white" fontSize="md">
 						{coursesQuery.data.name}
 					</DrawerHeader>
-
 					<DrawerBody px="0">
-						<Accordion>
-							<AccordionItem>
-								<h2>
-									<AccordionButton>
-										<Box flex="1" textAlign="left">
-											Section 1 title
-										</Box>
-										<AccordionIcon />
-									</AccordionButton>
-								</h2>
-								<AccordionPanel pb={4}>
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-									do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud exercitation ullamco
-									laboris nisi ut aliquip ex ea commodo consequat.
-								</AccordionPanel>
-							</AccordionItem>
+						<Accordion allowToggle>
+							{listQuery.data.section_order.map((sectionId: any) => {
+								const section = listQuery.data.sections[sectionId];
 
-							<AccordionItem>
-								<h2>
-									<AccordionButton>
-										<Box flex="1" textAlign="left">
-											Section 2 title
-										</Box>
-										<AccordionIcon />
-									</AccordionButton>
-								</h2>
-								<AccordionPanel pb={4}>
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-									do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud exercitation ullamco
-									laboris nisi ut aliquip ex ea commodo consequat.
-								</AccordionPanel>
-							</AccordionItem>
+								return (
+									<AccordionItem key={section.id}>
+										{console.log(section)}
+										<h2>
+											<AccordionButton>
+												<Box flex="1" textAlign="left">
+													{section.name}
+												</Box>
+												<AccordionIcon />
+											</AccordionButton>
+										</h2>
+										<AccordionPanel pb={4}>
+											Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+											sed do eiusmod tempor incididunt ut labore et dolore magna
+											aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+											ullamco laboris nisi ut aliquip ex ea commodo consequat.
+										</AccordionPanel>
+									</AccordionItem>
+								);
+							})}
 						</Accordion>
 					</DrawerBody>
 
-					<DrawerFooter>
-						<Button variant="outline" mr={3} onClick={onClose}>
-							Cancel
-						</Button>
-						<Button colorScheme="blue">Save</Button>
-					</DrawerFooter>
+					<DrawerFooter></DrawerFooter>
 				</DrawerContent>
 			</Drawer>
 		</Box>

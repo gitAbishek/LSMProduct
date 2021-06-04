@@ -59,7 +59,7 @@ const Header = () => {
 										</PopoverTrigger>
 										<PopoverContent p="8">
 											<PopoverArrow />
-											<CircularProgress />
+											<CircularProgress value={60} />
 										</PopoverContent>
 									</Popover>
 								</Stack>

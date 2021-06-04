@@ -12,6 +12,7 @@ import {
 	PopoverArrow,
 	PopoverContent,
 	PopoverTrigger,
+	Progress,
 	Stack,
 	Text,
 	useDisclosure,
@@ -63,6 +64,7 @@ const Header = () => {
 									</Popover>
 								</Stack>
 							</Stack>
+							<Progress value={80} size="xs" />
 						</Stack>
 						<Button
 							colorScheme="blue"

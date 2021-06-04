@@ -27,6 +27,7 @@ class SessionRepository implements RepositoryInterface {
 		global $wpdb;
 
 		$session_table = $session->get_table();
+
 		$wpdb->replace(
 			$session_table,
 			array(
@@ -36,6 +37,7 @@ class SessionRepository implements RepositoryInterface {
 			),
 			array( '%s', '%s', '%d' )
 		);
+
 		$session->set_id( $wpdb->insert_id );
 		$session->set_object_read( true );
 	}

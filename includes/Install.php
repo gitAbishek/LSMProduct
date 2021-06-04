@@ -155,8 +155,8 @@ class Install {
 	 *
 	 * @return void
 	 */
-	public function get_user_activity_table_schema( $charset_collate, $base_prefix ) {
-		$sql = "CREATE TABLE `{$base_prefix}masteriyo_user_activity` (
+	public static function get_user_activity_table_schema( $charset_collate, $base_prefix ) {
+		$sql = "CREATE TABLE `{$base_prefix}masteriyo_user_activities` (
 			`activity_id` BIGINT UNSIGNED AUTO_INCREMENT,
 			`user_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
 			`item_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',

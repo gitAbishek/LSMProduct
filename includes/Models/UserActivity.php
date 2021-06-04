@@ -57,14 +57,14 @@ class UserActivity extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'user_id'   => 0,
-		'item_id'   => 0,
-		'item_type' => null,
-		'type'      => null,
-		'status'    => null,
-		'start'     => '',
-		'update'    => '',
-		'complete'  => '',
+		'user_id'       => 0,
+		'item_id'       => 0,
+		'item_type'     => null,
+		'type'          => null,
+		'status'        => null,
+		'date_start'    => null,
+		'date_update'   => null,
+		'date_complete' => null,
 	);
 
 	/**
@@ -77,6 +77,18 @@ class UserActivity extends Model {
 	public function __construct( RepositoryInterface $user_activity_repository ) {
 		$this->repository = $user_activity_repository;
 	}
+
+	/**
+	 * Get user activity table.
+	 *
+	 * @return void
+	 */
+	public function get_table() {
+		global $wpdb;
+
+		return "{$wpdb->base_prefix}masteriyo_user_activities";
+	}
+
 
 	/**
 	 * Getters
@@ -156,8 +168,8 @@ class UserActivity extends Model {
 
 	 * @return int
 	 */
-	public function get_start( $context = 'view' ) {
-		return $this->get_prop( 'start', $context );
+	public function get_date_start( $context = 'view' ) {
+		return $this->get_prop( 'date_start', $context );
 	}
 
 	/**
@@ -169,8 +181,8 @@ class UserActivity extends Model {
 
 	 * @return int
 	 */
-	public function get_update( $context = 'view' ) {
-		return $this->get_prop( 'update', $context );
+	public function get_date_update( $context = 'view' ) {
+		return $this->get_prop( 'date_update', $context );
 	}
 
 	/**
@@ -182,8 +194,8 @@ class UserActivity extends Model {
 
 	 * @return int
 	 */
-	public function get_complete( $context = 'view' ) {
-		return $this->get_prop( 'complete', $context );
+	public function get_date_complete( $context = 'view' ) {
+		return $this->get_prop( 'date_complete', $context );
 	}
 
 	/**
@@ -264,8 +276,8 @@ class UserActivity extends Model {
 	 *
 	 * @return int
 	 */
-	public function set_start( $start ) {
-		return $this->set_prop( 'start', $start );
+	public function set_date_start( $date_start ) {
+		return $this->set_prop( 'date_start', $date_start );
 	}
 
 	/**
@@ -277,8 +289,8 @@ class UserActivity extends Model {
 	 *
 	 * @return int
 	 */
-	public function set_update( $update ) {
-		return $this->set_prop( 'update', $update );
+	public function set_date_update( $date_update ) {
+		return $this->set_prop( 'date_update', $date_update );
 	}
 
 	/**
@@ -290,7 +302,7 @@ class UserActivity extends Model {
 	 *
 	 * @return int
 	 */
-	public function set_complete( $complete ) {
-		return $this->set_prop( 'complete', $complete );
+	public function set_date_complete( $date_complete ) {
+		return $this->set_prop( 'date_complete', $date_complete );
 	}
 }

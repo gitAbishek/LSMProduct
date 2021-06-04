@@ -426,7 +426,8 @@ class Masteriyo extends Container {
 
 		// List of tables without prefixes.
 		$tables = array(
-			'order_itemmeta' => 'masteriyo_order_itemmeta',
+			'order_itemmeta'    => 'masteriyo_order_itemmeta',
+			'user_activitymeta' => 'masteriyo_user_activitymeta',
 		);
 
 		foreach ( $tables as $name => $table ) {

@@ -22,10 +22,11 @@ import routes from '../../constants/routes';
 
 interface Props {
 	hideAddNewCourseBtn?: boolean;
+	hideCoursesMenu?: boolean;
 }
 
 const Header: React.FC<Props> = (props) => {
-	const { hideAddNewCourseBtn } = props;
+	const { hideAddNewCourseBtn, hideCoursesMenu } = props;
 
 	const navLinkStyles = {
 		mr: '10',
@@ -52,29 +53,31 @@ const Header: React.FC<Props> = (props) => {
 								<Image src={Logo} alt="Masteriyo Logo" w="120px" />
 							</RouterLink>
 						</Box>
-						<List d="flex">
-							<ListItem>
-								<Link
-									as={NavLink}
-									sx={navLinkStyles}
-									_activeLink={navActiveStyles}
-									to={routes.courses.list}>
-									<ListIcon as={BiBook} />
-									Courses
-								</Link>
-							</ListItem>
+						{!hideCoursesMenu && (
+							<List d="flex">
+								<ListItem>
+									<Link
+										as={NavLink}
+										sx={navLinkStyles}
+										_activeLink={navActiveStyles}
+										to={routes.courses.list}>
+										<ListIcon as={BiBook} />
+										Courses
+									</Link>
+								</ListItem>
 
-							<ListItem>
-								<Link
-									as={NavLink}
-									sx={navLinkStyles}
-									_activeLink={navActiveStyles}
-									to={routes.settings}>
-									<ListIcon as={BiCog} />
-									Settings
-								</Link>
-							</ListItem>
-						</List>
+								<ListItem>
+									<Link
+										as={NavLink}
+										sx={navLinkStyles}
+										_activeLink={navActiveStyles}
+										to={routes.settings}>
+										<ListIcon as={BiCog} />
+										Settings
+									</Link>
+								</ListItem>
+							</List>
+						)}
 					</Stack>
 
 					<ButtonGroup>

@@ -164,6 +164,12 @@ class Course extends Model {
 		return array();
 	}
 
+	/*
+	|--------------------------------------------------------------------------
+	| Getters
+	|--------------------------------------------------------------------------
+	*/
+
 	/**
 	 * Get course name.
 	 *
@@ -523,6 +529,12 @@ class Course extends Model {
 	public function get_review_count( $context = 'view' ) {
 		return $this->get_prop( 'review_count', $context );
 	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Setters
+	|--------------------------------------------------------------------------
+	*/
 
 	/**
 	 * Set course name.

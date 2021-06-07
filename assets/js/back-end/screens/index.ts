@@ -7,3 +7,4 @@ export { default as EditLesson } from './lessons/EditLesson';
 export { default as Settings } from './settings/Settings';
 export { default as FourOFour } from './404/FourOFour';
 export { default as Builder } from './builder/Builder';
+export { default as AllOrders } from './orders/AllOrders';

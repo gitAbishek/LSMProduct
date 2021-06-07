@@ -2622,8 +2622,8 @@ function masteriyo_generate_self_hosted_lesson_video_url( $lesson_id ) {
 	$url = add_query_arg(
 		array(
 			'masteriyo_lesson_vid' => 'yes',
-			'course_id'      => $lesson->get_course_id(),
-			'lesson_id'      => $lesson->get_id(),
+			'course_id'            => $lesson->get_course_id(),
+			'lesson_id'            => $lesson->get_id(),
 		),
 		home_url( '/' )
 	);
@@ -2643,4 +2643,23 @@ function masteriyo_get_settings() {
 	$setting_repo->read( $setting );
 
 	return $setting;
+}
+
+/**
+ * Get user acitivity statuses.
+ *
+ * @since 0.1.0
+ *
+ * @return array
+ */
+function masteriyo_get_user_activity_statuses() {
+	return apply_filters(
+		'masteriyo_user_activity_statuses',
+		array(
+			'any',
+			'begin',
+			'progress',
+			'complete',
+		)
+	);
 }

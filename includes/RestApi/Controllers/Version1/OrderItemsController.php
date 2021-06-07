@@ -31,7 +31,7 @@ class OrderItemsController extends PostsController {
 	 *
 	 * @var string
 	 */
-	protected $rest_base = 'order_items';
+	protected $rest_base = 'order-items';
 
 	/**
 	 * Object type.
@@ -494,10 +494,10 @@ class OrderItemsController extends PostsController {
 
 		if ( ! is_object( $order_item ) ) {
 			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
+				'masteriyo_rest_invalid_id',
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -509,7 +509,7 @@ class OrderItemsController extends PostsController {
 				'masteriyo_rest_cannot_read',
 				__( 'Could not read the order object.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -555,7 +555,7 @@ class OrderItemsController extends PostsController {
 				'masteriyo_rest_cannot_read',
 				__( 'Could not read the order object.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -600,10 +600,10 @@ class OrderItemsController extends PostsController {
 			! masteriyo_is_current_user_post_author( $order_id )
 		) {
 			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
+				'masteriyo_rest_invalid_id',
 				__( 'Invalid order ID.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -613,7 +613,7 @@ class OrderItemsController extends PostsController {
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -649,10 +649,10 @@ class OrderItemsController extends PostsController {
 			! masteriyo_is_current_user_post_author( $order_item->get_order_id() )
 		) {
 			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
+				'masteriyo_rest_invalid_id',
 				__( 'Invalid order ID.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -694,10 +694,10 @@ class OrderItemsController extends PostsController {
 
 		if ( ! is_object( $order_item ) ) {
 			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
+				'masteriyo_rest_invalid_id',
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -708,10 +708,10 @@ class OrderItemsController extends PostsController {
 			! masteriyo_is_current_user_post_author( $order_item->get_order_id() )
 		) {
 			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
+				'masteriyo_rest_invalid_id',
 				__( 'Invalid order ID.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}

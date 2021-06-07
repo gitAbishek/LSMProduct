@@ -218,4 +218,17 @@ class OrderItem extends Model {
 
 		return apply_filters( 'masteriyo_order_item_get_formatted_meta_data', $formatted_meta, $this );
 	}
+
+	/**
+	 * Get the order items table name.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_table_name() {
+		global $wpdb;
+
+		return "{$wpdb->base_prefix}masteriyo_order_items";
+	}
 }

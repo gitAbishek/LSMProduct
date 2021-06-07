@@ -53,7 +53,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		$order_item_obj = masteriyo( 'cache' )->get( 'masteriyo-order-item-' . $order_item->get_id(), 'masteriyo-order-items' );
 
 		if ( false === $order_item_obj ) {
-			$table_name = $this->get_table_name();
+			$table_name = $order_item->get_table_name();
 
 			$results = $wpdb->get_results(
 				$wpdb->prepare(

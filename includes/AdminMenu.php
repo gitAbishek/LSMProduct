@@ -96,6 +96,15 @@ class AdminMenu {
 			array( $this, 'display_main_page' )
 		);
 
+		add_submenu_page(
+			'masteriyo',
+			esc_html__( 'Orders', 'masteriyo' ),
+			esc_html__( 'Orders', 'masteriyo' ),
+			'manage_options',
+			'masteriyo#/orders',
+			array( $this, 'display_main_page' )
+		);
+
 		remove_submenu_page( 'masteriyo', 'masteriyo' );
 	}
 

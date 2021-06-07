@@ -18,7 +18,7 @@
 
 namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 
-defined( 'ABSPATH' )  || exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Abstract Rest Controller Class
@@ -476,7 +476,7 @@ abstract class RestController extends \WP_REST_Controller {
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'    => 'object',
+						'type' => 'object',
 					),
 				),
 				'update' => array(
@@ -484,7 +484,7 @@ abstract class RestController extends \WP_REST_Controller {
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'    => 'object',
+						'type' => 'object',
 					),
 				),
 				'delete' => array(
@@ -492,7 +492,7 @@ abstract class RestController extends \WP_REST_Controller {
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'    => 'integer',
+						'type' => 'integer',
 					),
 				),
 			),

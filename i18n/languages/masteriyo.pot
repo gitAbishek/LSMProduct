@@ -23,13 +23,14 @@ msgstr ""
 msgid "Media files jpeg, png are only supported"
 msgstr ""
 
-#: assets/js/back-end/components/layout/Header.tsx:84
+#: assets/js/back-end/components/layout/Header.tsx:87
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:124
 msgid "Add New Course"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:108
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:132
+#: assets/js/back-end/screens/orders/components/OrderRow.tsx:136
 #: assets/js/getting-started/screens/currency/Currency.tsx:221
 msgid "Preview"
 msgstr ""
@@ -134,6 +135,7 @@ msgid "Price"
 msgstr ""
 
 #: assets/js/back-end/screens/courses/AllCourses.tsx:45
+#: assets/js/back-end/screens/orders/AllOrders.tsx:52
 msgid "Date"
 msgstr ""
 
@@ -143,6 +145,7 @@ msgstr ""
 
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:117
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:123
+#: assets/js/back-end/screens/orders/components/OrderRow.tsx:178
 #: assets/js/back-end/screens/sections/components/Content.tsx:121
 #: assets/js/back-end/screens/sections/components/Section.tsx:140
 msgid "Edit"
@@ -163,6 +166,8 @@ msgstr ""
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:163
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:150
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:195
+#: assets/js/back-end/screens/orders/EditOrder.tsx:256
+#: assets/js/back-end/screens/orders/components/OrderRow.tsx:210
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:151
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:132
 #: assets/js/back-end/screens/quiz/components/question/Question.tsx:206
@@ -175,6 +180,8 @@ msgstr ""
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:169
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:126
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:201
+#: assets/js/back-end/screens/orders/EditOrder.tsx:262
+#: assets/js/back-end/screens/orders/components/OrderRow.tsx:216
 #: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:91
 #: assets/js/back-end/screens/quiz/components/question/Question.tsx:212
 #: assets/js/back-end/screens/sections/components/Content.tsx:169
@@ -243,6 +250,7 @@ msgid "Lesson Updated Successfully"
 msgstr ""
 
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:68
+#: assets/js/back-end/screens/orders/EditOrder.tsx:74
 #: assets/js/back-end/screens/quiz/components/question/Question.tsx:65
 msgid " has been updated successfully."
 msgstr ""
@@ -252,6 +260,7 @@ msgid "Lesson Deleted Successfully"
 msgstr ""
 
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:83
+#: assets/js/back-end/screens/orders/EditOrder.tsx:95
 #: assets/js/back-end/screens/quiz/components/question/Question.tsx:78
 msgid " has been deleted successfully."
 msgstr ""
@@ -270,6 +279,170 @@ msgstr ""
 
 #: assets/js/back-end/screens/lessons/components/Name.tsx:28
 msgid "You must provide name for the lesson"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/AllOrders.tsx:44
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:201
+msgid "Orders"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/AllOrders.tsx:51
+#: assets/js/back-end/screens/orders/components/OrderRow.tsx:153
+msgid "Order"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/AllOrders.tsx:53
+#: assets/js/back-end/screens/orders/components/OrderStatus.tsx:55
+msgid "Status"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/AllOrders.tsx:54
+msgid "Total"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:134
+msgid "Edit Order"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:157
+#: assets/js/back-end/screens/settings/Settings.tsx:86
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:48
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:100
+msgid "General"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:172
+msgid "Billing"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:188
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:58
+msgid "City"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:189
+msgid "Postcode / ZIP"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:196
+msgid "Country / Region"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:197
+msgid "State / County"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:204
+msgid "Email address"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:205
+msgid "Phone"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:221
+msgid "Update Order"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:241
+#: assets/js/back-end/screens/orders/components/OrderRow.tsx:196
+msgid "Delete Order"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:245
+msgid "Are you sure? You can't restore this order"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:73
+msgid "Order updated successfully"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/EditOrder.tsx:94
+msgid "Order Deleted Successfully"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/AddressLines.tsx:26
+msgid "Address 1"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/AddressLines.tsx:36
+msgid "Address 2"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/CompanyInputControl.tsx:23
+msgid "Company"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/DateCreated.tsx:13
+msgid "Date created"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/FirstNameLastName.tsx:26
+msgid "First Name"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/FirstNameLastName.tsx:36
+msgid "Last Name"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/OrderRow.tsx:171
+msgid "OK"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/OrderRow.tsx:199
+msgid "Are you sure? You can't restore this order."
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/OrderStatus.tsx:17
+msgid "Pending"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/OrderStatus.tsx:21
+msgid "Processing"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/OrderStatus.tsx:25
+msgid "On Hold"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/OrderStatus.tsx:29
+msgid "Completed"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/OrderStatus.tsx:33
+msgid "Cancelled"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/OrderStatus.tsx:37
+msgid "Refunded"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/OrderStatus.tsx:41
+msgid "Failed"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/OrderStatus.tsx:59
+msgid "Please select a status"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/PaymentMethod.tsx:17
+msgid "Paypal"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/PaymentMethod.tsx:31
+msgid "Payment method"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/PaymentMethod.tsx:33
+msgid "Select a payment method"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/PaymentMethod.tsx:36
+msgid "Please select a payment method"
+msgstr ""
+
+#: assets/js/back-end/screens/orders/components/TransactionID.tsx:23
+msgid "Transaction ID"
 msgstr ""
 
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:119
@@ -424,12 +597,6 @@ msgstr ""
 
 #: assets/js/back-end/screens/settings/Settings.tsx:57
 msgid "You can keep changing settings"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/Settings.tsx:86
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:48
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:100
-msgid "General"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/Settings.tsx:88
@@ -639,10 +806,6 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:58
-msgid "City"
-msgstr ""
-
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:69
 msgid "Adress Line 1"
 msgstr ""
@@ -689,10 +852,6 @@ msgstr ""
 
 #: assets/js/back-end/screens/settings/components/PagesSettings.tsx:196
 msgid "Account Endpoints"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:201
-msgid "Orders"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/PagesSettings.tsx:210

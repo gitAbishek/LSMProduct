@@ -8,3 +8,4 @@ export { default as Settings } from './settings/Settings';
 export { default as FourOFour } from './404/FourOFour';
 export { default as Builder } from './builder/Builder';
 export { default as AllOrders } from './orders/AllOrders';
+export { default as EditOrder } from './orders/EditOrder';

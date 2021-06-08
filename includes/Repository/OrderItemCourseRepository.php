@@ -73,9 +73,9 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 
 		$order_item->set_props(
 			array(
-				'order_id'        => $order_item_obj->order_id,
-				'order_item_name' => $order_item_obj->order_item_name,
-				'order_item_type' => $order_item_obj->order_item_type,
+				'order_id' => $order_item_obj->order_id,
+				'name'     => $order_item_obj->order_item_name,
+				'type'     => $order_item_obj->order_item_type,
 			)
 		);
 

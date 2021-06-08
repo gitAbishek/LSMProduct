@@ -336,4 +336,15 @@ class OrderItemRepository extends AbstractRepository {
 			);
 		}
 	}
+
+	/**
+	 * Get table name.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_table_name() {
+		return "{$GLOBALS['wpdb']->prefix}masteriyo_order_items";
+	}
 }

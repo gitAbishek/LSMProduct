@@ -16,7 +16,7 @@ use ThemeGrill\Masteriyo\Cache\CacheInterface;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * UserActivity model (post type).
+ * UserActivity model (custom table).
  *
  * @since 0.1.0
  */
@@ -59,7 +59,6 @@ class UserActivity extends Model {
 	protected $data = array(
 		'user_id'       => 0,
 		'item_id'       => 0,
-		'item_type'     => null,
 		'type'          => null,
 		'status'        => null,
 		'date_start'    => null,
@@ -78,21 +77,30 @@ class UserActivity extends Model {
 		$this->repository = $user_activity_repository;
 	}
 
+	/*
+	|--------------------------------------------------------------------------
+	| Non-CRUD Getters
+	|--------------------------------------------------------------------------
+	*/
+
 	/**
 	 * Get user activity table.
 	 *
-	 * @return void
+	 * @since 0.1.0
+	 *
+	 * @return string
 	 */
-	public function get_table() {
+	public function get_table_name() {
 		global $wpdb;
 
 		return "{$wpdb->base_prefix}masteriyo_user_activities";
 	}
 
-
-	/**
-	 * Getters
-	 */
+	/*
+	|--------------------------------------------------------------------------
+	| Getters
+	|--------------------------------------------------------------------------
+	*/
 
 	/**
 	 * Get user id.
@@ -118,19 +126,6 @@ class UserActivity extends Model {
 	 */
 	public function get_item_id( $context = 'view' ) {
 		return $this->get_prop( 'item_id', $context );
-	}
-
-	/**
-	 * Get item type.
-	 *
-	 * @since 0.1.0
-	 *
-	* @param  string $context What the value is for. valid values are view and edit.
-
-	 * @return int
-	 */
-	public function get_item_type( $context = 'view' ) {
-		return $this->get_prop( 'item_type', $context );
 	}
 
 	/**
@@ -198,9 +193,11 @@ class UserActivity extends Model {
 		return $this->get_prop( 'date_complete', $context );
 	}
 
-	/**
-	 * Setters
-	 */
+	/*
+	|--------------------------------------------------------------------------
+	| Setters
+	|--------------------------------------------------------------------------
+	*/
 
 	/**
 	 * Set user id.
@@ -212,7 +209,7 @@ class UserActivity extends Model {
 	 * @return int
 	 */
 	public function set_user_id( $user_id ) {
-		return $this->set_prop( 'user_id', $user_id );
+		return $this->set_prop( 'user_id', absint( $user_id ) );
 	}
 
 	/**
@@ -225,20 +222,7 @@ class UserActivity extends Model {
 	 * @return int
 	 */
 	public function set_item_id( $item_id ) {
-		return $this->set_prop( 'item_id', $item_id );
-	}
-
-	/**
-	 * Set item type.
-	 *
-	 * @since 0.1.0
-	 *
-	* @param  string $type Item type.
-
-	 * @return int
-	 */
-	public function set_item_type( $type ) {
-		return $this->set_prop( 'item_type', $type );
+		return $this->set_prop( 'item_id', absint( $item_id ) );
 	}
 
 	/**

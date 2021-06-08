@@ -13,11 +13,12 @@ defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Permission;
 use ThemeGrill\Masteriyo\Models\Order\OrderItem;
+use ThemeGrill\Masteriyo\Query\UserActivityQuery;
 
 /**
  * User activities controller class.
  */
-class UserActivitiesController extends PostsController {
+class UserActivitiesController extends CrudController {
 
 	/**
 	 * Endpoint namespace.
@@ -31,14 +32,14 @@ class UserActivitiesController extends PostsController {
 	 *
 	 * @var string
 	 */
-	protected $rest_base = 'order-items';
+	protected $rest_base = 'user-activities';
 
 	/**
 	 * Object type.
 	 *
 	 * @var string
 	 */
-	protected $object_type = 'order_item';
+	protected $object_type = 'user_activity';
 
 	/**
 	 * If object is hierarchical.
@@ -141,28 +142,94 @@ class UserActivitiesController extends PostsController {
 	 * @return array
 	 */
 	public function get_collection_params() {
-		$params = array();
-
-		$params['order_id'] = array(
-			'description'       => __( 'Filter order items by order ID.', 'masteriyo' ),
-			'type'              => 'number',
-			'sanitize_callback' => 'sanitize_key',
-			'validate_callback' => 'rest_validate_request_arg',
-			'required'          => true,
-		);
-		$params['paged']    = array(
-			'description'       => __( 'Paginate the order items.', 'masteriyo' ),
+		$params['paged'] = array(
+			'description'       => __( 'Paginate the user activities.', 'masteriyo' ),
 			'type'              => 'integer',
+			'default'           => 1,
 			'sanitize_callback' => 'absint',
 			'validate_callback' => 'rest_validate_request_arg',
-			'default'           => 1,
+			'minimum'           => 1,
 		);
+
 		$params['per_page'] = array(
 			'description'       => __( 'Limit items per page.', 'masteriyo' ),
 			'type'              => 'integer',
+			'default'           => 10,
+			'minimum'           => 1,
 			'sanitize_callback' => 'absint',
 			'validate_callback' => 'rest_validate_request_arg',
-			'default'           => 10,
+		);
+
+		$params['user_id'] = array(
+			'description'       => __( 'User ID.', 'masteriyo' ),
+			'type'              => 'integer',
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
+			'default'           => 0,
+		);
+
+		$params['item_id'] = array(
+			'description'       => __( 'Item ID (e.g. course and quiz).', 'masteriyo' ),
+			'type'              => 'integer',
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
+			'default'           => 0,
+		);
+
+		$params['activity_type'] = array(
+			'description'       => __( 'User activity type.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_title',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['status'] = array(
+			'description'       => __( 'User activity status.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_title',
+			'validate_callback' => 'rest_validate_request_arg',
+			'default'           => 'any',
+			'enum'              => masteriyo_get_user_activity_statuses(),
+		);
+
+		$params['date_start'] = array(
+			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
+			'type'              => 'string',
+			'format'            => 'date-time',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['date_complete'] = array(
+			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
+			'type'              => 'string',
+			'format'            => 'date-time',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['date_update'] = array(
+			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
+			'type'              => 'string',
+			'format'            => 'date-time',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['order'] = array(
+			'description'       => __( 'Order sort attribute ascending or descending.', 'masteriyo' ),
+			'type'              => 'string',
+			'default'           => 'desc',
+			'enum'              => array( 'asc', 'desc' ),
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['orderby'] = array(
+			'description'       => __( 'Sort collection by object attribute.', 'masteriyo' ),
+			'type'              => 'string',
+			'default'           => 'id',
+			'enum'              => array(
+				'id',
+				'type',
+			),
+			'validate_callback' => 'rest_validate_request_arg',
 		);
 
 		return $params;
@@ -171,35 +238,33 @@ class UserActivitiesController extends PostsController {
 	/**
 	 * Get object.
 	 *
-	 * @param  int|WP_Post $id Object ID.
+	 * @since 0.1.0
+	 *
+	 * @param  int|UserActivity $id Object ID.
 	 * @return object Model object or WP_Error object.
 	 */
 	protected function get_object( $id ) {
 		try {
-			$id         = $id instanceof \stdClass ? $id->order_item_id : $id;
-			$id         = $id instanceof OrderItem ? $id->get_id() : $id;
-			$order_item = masteriyo( 'order-item.course' );
-			$order_item->set_id( $id );
-			$order_item_repo = masteriyo( 'order-item.course.store' );
-			$order_item_repo->read( $order_item );
+			$id            = is_a( $id, 'ThemeGrill\Masteriyo\Database\Model' ) ? $id->get_id() : $id;
+			$user_activity = masteriyo_get_user_activity( $id );
 		} catch ( \Exception $e ) {
 			return false;
 		}
 
-		return $order_item;
+		return $user_activity;
 	}
 
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  3.0.0
+	 * @since  0.1.0
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
 		$context = ! empty( $request['context'] ) ? $request['context'] : 'view';
-		$data    = $this->get_order_item_data( $object, $context );
+		$data    = $this->get_user_activity_data( $object, $context );
 
 		$data     = $this->add_additional_fields_to_object( $data, $request );
 		$data     = $this->filter_response_by_context( $data, $context );
@@ -212,31 +277,35 @@ class UserActivitiesController extends PostsController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
+		 * @since 0.1.0
+		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param WC_Data          $object   Object data.
+		 * @param Model          $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
 	}
 
 	/**
-	 * Get order item data.
+	 * Get user activity data.
 	 *
-	 * @param Order  $order_item Order instance.
+	 * @since 0.1.0
+	 *
+	 * @param UserActivity  $user_activity User activity instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
-	protected function get_order_item_data( $order_item, $context = 'view' ) {
+	protected function get_user_activity_data( $user_activity, $context = 'view' ) {
 		$data = array(
-			'id'        => $order_item->get_id(),
-			'order_id'  => $order_item->get_order_id(),
-			'course_id' => $order_item->get_course_id( $context ),
-			'name'      => $order_item->get_name( $context ),
-			'type'      => $order_item->get_type( $context ),
-			'quantity'  => $order_item->get_quantity( $context ),
-			'total'     => $order_item->get_total( $context ),
+			'id'            => $user_activity->get_id( $context ),
+			'user_id'       => $user_activity->get_user_id( $context ),
+			'item_id'       => $user_activity->get_item_id( $context ),
+			'type'          => $user_activity->get_type( $context ),
+			'date_start'    => $user_activity->get_date_start( $context ),
+			'date_update'   => $user_activity->get_date_update( $context ),
+			'date_complete' => $user_activity->get_date_complete( $context ),
 		);
 
 		return $data;
@@ -245,24 +314,40 @@ class UserActivitiesController extends PostsController {
 	/**
 	 * Prepare objects query.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
 	 * @since  0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
 	 *
 	 * @return array
 	 */
 	protected function prepare_objects_query( $request ) {
-		$args = array();
+		$args = wp_parse_args(
+			$request->get_params(),
+			array(
+				'paged'         => 1,
+				'per_page'      => 10,
+				'user_id'       => 0,
+				'item_id'       => 0,
+				'activity_type' => '',
+				'status'        => 'any',
+				'date_start'    => null,
+				'date_update'   => null,
+				'date_complete' => null,
+			)
+		);
 
-		if ( ! empty( $request['order_id'] ) ) {
-			$args['order_id'] = $request['order_id'];
-		}
-		if ( ! empty( $request['paged'] ) ) {
-			$args['paged'] = $request['paged'];
-		}
-		if ( ! empty( $request['per_page'] ) ) {
-			$args['per_page'] = $request['per_page'];
-		}
+		/**
+		 * Filter the query arguments for a request.
+		 *
+		 * Enables adding extra arguments or setting defaults for a post
+		 * collection request.
+		 *
+		 * @since 0.1.0
+		 *
+		 * @param array           $args    Key value array of query var to query value.
+		 * @param WP_REST_Request $request The request used.
+		 */
+		$args = apply_filters( "masteriyo_rest_{$this->object_type}_object_query", $args, $request );
 
 		return $args;
 	}
@@ -280,67 +365,47 @@ class UserActivitiesController extends PostsController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'        => array(
+				'id'            => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'order_id'  => array(
-					'description' => __( 'Order ID.', 'masteriyo' ),
+				'user_id'       => array(
+					'description' => __( 'User ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'course_id' => array(
-					'description' => __( 'Product ID.', 'masteriyo' ),
+				'item_id'       => array(
+					'description' => __( 'Item ID (course, quiz).', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'name'      => array(
-					'description' => __( 'Order item name.', 'masteriyo' ),
+				'type'          => array(
+					'description' => __( 'User activity type (course, quiz).', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'type'      => array(
-					'description' => __( 'Order item type.', 'masteriyo' ),
+				'status'        => array(
+					'description' => __( 'User activity status.', 'masteriyo' ),
+					'type'        => 'string',
+					'enum'        => masteriyo_get_user_activity_statuses(),
+					'context'     => array( 'view', 'edit' ),
+				),
+				'date_start'    => array(
+					'description' => __( 'User activity start date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'quantity'  => array(
-					'description' => __( 'Quantity.', 'masteriyo' ),
-					'type'        => 'number',
+				'date_complete' => array(
+					'description' => __( 'User activity complete date in GMT.', 'masteriyo' ),
+					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'total'     => array(
-					'description' => __( 'Total amount of the order item.', 'masteriyo' ),
-					'type'        => 'number',
+				'date_update'   => array(
+					'description' => __( 'User activity update date in GMT.', 'masteriyo' ),
+					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
-				),
-				'meta_data' => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
-					'type'        => 'array',
-					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type'       => 'object',
-						'properties' => array(
-							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
-								'type'        => 'integer',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-							),
-							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
-								'type'        => 'mixed',
-								'context'     => array( 'view', 'edit' ),
-							),
-						),
-					),
 				),
 			),
 		);
@@ -349,7 +414,7 @@ class UserActivitiesController extends PostsController {
 	}
 
 	/**
-	 * Prepare a single order for create or update.
+	 * Prepare a single user activity for create or update.
 	 *
 	 * @since 0.1.0
 	 *
@@ -359,50 +424,50 @@ class UserActivitiesController extends PostsController {
 	 * @return WP_Error|WC_Data
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		$id         = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$order_item = masteriyo( 'order-item.course' );
+		$id            = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
+		$user_activity = masteriyo( 'user-activity' );
 
 		if ( 0 !== $id ) {
-			$order_item->set_id( $id );
-			$order_item_repo = masteriyo( 'order-item.store' );
-			$order_item_repo->read( $order_item );
+			$user_activity->set_id( $id );
+			$user_activity_repo = masteriyo( 'user-activity' );
+			$user_activity_repo->read( $user_activity );
 		}
 
-		// Order ID.
-		if ( isset( $request['order_id'] ) ) {
-			$order_item->set_order_id( $request['order_id'] );
+		// User ID.
+		if ( isset( $request['user_id'] ) && empty( $request['user_id'] ) ) {
+			$user_activity->set_user_id( $request['user_id'] );
+		} else {
+			$user_activity->set_user_id( get_current_user_id() );
 		}
 
-		// Product ID.
-		if ( isset( $request['course_id'] ) ) {
-			$order_item->set_course_id( $request['course_id'] );
+		// Item ID.
+		if ( isset( $request['item_id'] ) ) {
+			$user_activity->set_item_id( $request['item_id'] );
 		}
 
-		// Product Name.
-		if ( isset( $request['name'] ) ) {
-			$order_item->set_name( $request['name'] );
-		}
-
-		// Order Item Type.
+		// Activity type.
 		if ( isset( $request['type'] ) ) {
-			$order_item->set_type( $request['type'] );
+			$user_activity->set_type( $request['type'] );
 		}
 
-		// Order Items Quantity.
-		if ( isset( $request['quantity'] ) ) {
-			$order_item->set_quantity( $request['quantity'] );
+		// Activity status.
+		if ( isset( $request['status'] ) ) {
+			$user_activity->set_status( $request['status'] );
 		}
 
-		// Total Price.
-		if ( isset( $request['total'] ) ) {
-			$order_item->set_total( $request['total'] );
+		// Activity start date.
+		if ( isset( $request['date_start'] ) ) {
+			$user_activity->set_date_start( $request['date_start'] );
 		}
 
-		// Allow set meta_data.
-		if ( isset( $request['meta_data'] ) && is_array( $request['meta_data'] ) ) {
-			foreach ( $request['meta_data'] as $meta ) {
-				$order_item->update_meta_data( $meta['key'], $meta['value'], isset( $meta['id'] ) ? $meta['id'] : '' );
-			}
+		// Activity update date.
+		if ( isset( $request['date_update'] ) ) {
+			$user_activity->set_date_update( $request['date_update'] );
+		}
+
+		// Activity complete date.
+		if ( isset( $request['date_complete'] ) ) {
+			$user_activity->set_date_complete( $request['date_complete'] );
 		}
 
 		/**
@@ -411,11 +476,13 @@ class UserActivitiesController extends PostsController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
-		 * @param WC_Data         $order_item  Object object.
+		 * @since 0.1.0
+		 *
+		 * @param Model         $user_activity  Object object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */
-		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $order_item, $request, $creating );
+		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $user_activity, $request, $creating );
 	}
 
 	/**
@@ -426,45 +493,13 @@ class UserActivitiesController extends PostsController {
 	 * @return array
 	 */
 	protected function get_objects( $query_args ) {
-		global $wpdb;
+		$query   = new UserActivityQuery( $query_args );
+		$objects = $query->get_user_activities();
 
-		$table_name = masteriyo( 'order-item.store' )->get_table_name();
-		$order_id   = $query_args['order_id'];
-		$offset     = 0;
-		$per_page   = 10;
-
-		if ( $query_args['per_page'] > 0 ) {
-			$per_page = $query_args['per_page'];
-		}
-		if ( $query_args['paged'] > 0 ) {
-			$offset = ( $query_args['paged'] - 1 ) * $per_page;
-		}
-
-		/**
-		 * Query for order items.
-		 */
-		$result = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$table_name}
-				WHERE order_id = %d
-				LIMIT {$offset}, {$per_page}",
-				$order_id
-			)
-		);
-
-		/**
-		 * Query for counting rows.
-		 */
-		$total_items = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT COUNT(order_item_id) FROM {$table_name}
-				WHERE order_id = %d",
-				$order_id
-			)
-		);
+		$total_items = count( $objects );
 
 		return array(
-			'objects' => array_filter( array_map( array( $this, 'get_object' ), $result ) ),
+			'objects' => $objects,
 			'total'   => (int) $total_items,
 			'pages'   => (int) ceil( $total_items / (int) $query_args['per_page'] ),
 		);
@@ -490,47 +525,13 @@ class UserActivitiesController extends PostsController {
 			return true;
 		}
 
-		$order_item = $this->get_object( absint( $request['id'] ) );
-
-		if ( ! is_object( $order_item ) ) {
-			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		$order = masteriyo_get_order( $order_item->get_order_id() );
-
-		if ( ! is_object( $order ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_read',
-				__( 'Could not read the order object.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		$cap = masteriyo_is_current_user_post_author( $order_item->get_order_id() ) ? 'read_orders' : 'read_others_orders';
-
-		if ( ! $this->permission->rest_check_order_permissions( $cap, $order_item->get_order_id() ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_read',
-				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code(),
-				)
-			);
-		}
-
 		return true;
 	}
 
 	/**
 	 * Check if a given request has access to read items.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -545,31 +546,6 @@ class UserActivitiesController extends PostsController {
 
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
 			return true;
-		}
-
-		$order_id = isset( $request['order_id'] ) ? absint( $request['order_id'] ) : 0;
-		$order    = masteriyo_get_order( $order_id );
-
-		if ( ! is_object( $order ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_read',
-				__( 'Could not read the order object.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		$cap = masteriyo_is_current_user_post_author( $request['order_id'] ) ? 'read_orders' : 'read_others_orders';
-
-		if ( ! $this->permission->rest_check_order_permissions( $cap, $request['order_id'] ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_read',
-				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code(),
-				)
-			);
 		}
 
 		return true;
@@ -588,33 +564,6 @@ class UserActivitiesController extends PostsController {
 			return new \WP_Error(
 				'masteriyo_null_permission',
 				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
-			);
-		}
-
-		$order_id = isset( $request['order_id'] ) ? absint( $request['order_id'] ) : 0;
-		$order    = masteriyo_get_order( $order_id );
-
-		if (
-			! $order_id ||
-			! is_object( $order ) ||
-			! masteriyo_is_current_user_post_author( $order_id )
-		) {
-			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
-				__( 'Invalid order ID.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		if ( ! $this->permission->rest_check_order_permissions( 'create' ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_create',
-				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
 			);
 		}
 
@@ -641,32 +590,6 @@ class UserActivitiesController extends PostsController {
 			return true;
 		}
 
-		$order_item = $this->get_object( absint( $request['id'] ) );
-
-		if (
-			! $order_item ||
-			! is_object( $order_item ) ||
-			! masteriyo_is_current_user_post_author( $order_item->get_order_id() )
-		) {
-			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
-				__( 'Invalid order ID.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		if ( ! $this->permission->rest_check_order_permissions( 'delete', $order_item->get_order_id() ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_delete',
-				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code(),
-				)
-			);
-		}
-
 		return true;
 	}
 
@@ -688,42 +611,6 @@ class UserActivitiesController extends PostsController {
 
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
 			return true;
-		}
-
-		$order_item = $this->get_object( absint( $request['id'] ) );
-
-		if ( ! is_object( $order_item ) ) {
-			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		if (
-			! $order_item ||
-			! is_object( $order_item ) ||
-			! masteriyo_is_current_user_post_author( $order_item->get_order_id() )
-		) {
-			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
-				__( 'Invalid order ID.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		if ( ! $this->permission->rest_check_order_permissions( 'create' ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_update',
-				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code(),
-				)
-			);
 		}
 
 		return true;

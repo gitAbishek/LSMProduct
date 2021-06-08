@@ -14,7 +14,7 @@ use ThemeGrill\Masteriyo\Helper\Number;
 /**
  * User Activity repository class.
  */
-class UserActivityRepository extends AbstractRepository {
+class UserActivityRepository extends AbstractRepository implements RepositoryInterface {
 
 	/**
 	 * Data stored in meta keys, but not considered "meta".
@@ -38,16 +38,25 @@ class UserActivityRepository extends AbstractRepository {
 			$user_activity->set_date_start( current_time( 'mysql', true ) );
 		}
 
-		$table = $user_activity->get_table();
+		if ( ! $user_activity->get_date_update( 'edit' ) ) {
+			$user_activity->set_date_update( current_time( 'mysql', true ) );
+		}
+
+		if ( empty( $user_activity->get_type( 'edit' ) ) ) {
+			$user_activity->set_type( 'course' );
+		}
+
+		if ( empty( $user_activity->get_status( 'edit' ) ) ) {
+			$user_activity->set_status( 'begin' );
+		}
 
 		$result = $wpdb->insert(
-			$table,
+			$user_activity->get_table_name(),
 			apply_filters(
 				'masteriyo_new_user_activity_data',
 				array(
 					'user_id'           => $user_activity->get_user_id( 'edit' ),
 					'item_id'           => $user_activity->get_item_id( 'edit' ),
-					'item_type'         => $user_activity->get_item_type( 'edit' ),
 					'activity_type'     => $user_activity->get_type( 'edit' ),
 					'activity_status'   => $user_activity->get_status( 'edit' ),
 					'activity_start'    => $user_activity->get_date_start( 'edit' ),
@@ -56,18 +65,17 @@ class UserActivityRepository extends AbstractRepository {
 				),
 				$user_activity
 			),
-			array( '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
+			array( '%d', '%d', '%s', '%s', '%s', '%s', '%s' )
 		);
 
-		if ( $result && $wpdb->inser_id ) {
-			$user_activity->set_id( $id );
-			$item->set_id( $wpdb->insert_id );
-			$this->update_custom_table_meta( $item, true );
-			$item->save_meta_data();
-			$item->apply_changes();
-			$this->clear_cache( $item );
+		if ( $result && $wpdb->insert_id ) {
+			$user_activity->set_id( $wpdb->insert_id );
+			$this->update_custom_table_meta( $user_activity, true );
+			$user_activity->save_meta_data();
+			$user_activity->apply_changes();
+			$this->clear_cache( $user_activity );
 
-			do_action( 'masteriyo_new_user_activity', $item->get_id(), $item, $item->get_order_id() );
+			do_action( 'masteriyo_new_user_activity', $user_activity->get_id(), $user_activity );
 		}
 
 	}
@@ -107,156 +115,156 @@ class UserActivityRepository extends AbstractRepository {
 	 * Remove an order item from the database.
 	 *
 	 * @since 0.1.0
-	 * @param OrderItem $item Order item object.
+	 * @param UserActivity $item Order item object.
 	 * @param array         $args Array of args to pass to the delete method.
 	 */
-	public function delete( &$item, $args = array() ) {
-		if ( $item->get_id() ) {
-			global $wpdb;
-			do_action( 'masteriyo_before_delete_user_activity', $item->get_id() );
-			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activitys', array( 'user_activity_id' => $item->get_id() ) );
-			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activitymeta', array( 'user_activity_id' => $item->get_id() ) );
-			do_action( 'masteriyo_delete_user_activity', $item->get_id() );
-			$this->clear_cache( $item );
+	public function delete( &$user_activity, $args = array() ) {
+		global $wpdb;
+
+		if ( $user_activity->get_id() ) {
+			do_action( 'masteriyo_before_delete_user_activity', $user_activity->get_id() );
+
+			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activitys', array( 'user_activity_id' => $user_activity->get_id() ) );
+			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activitymeta', array( 'user_activity_id' => $user_activity->get_id() ) );
+
+			do_action( 'masteriyo_delete_user_activity', $user_activity->get_id() );
+
+			$this->clear_cache( $user_activity );
 		}
 	}
 
 	/**
-	 * Read a order item from the database.
+	 * Read a user activity from the database.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param OrderItem $item Order item object.
+	 * @param UserActivity $user_activity User activity object.
 	 *
 	 * @throws Exception If invalid order item.
 	 */
-	public function read( &$item ) {
+	public function read( &$user_activity ) {
 		global $wpdb;
 
-		$item->set_defaults();
-
 		// Get from cache if available.
-		$data = wp_cache_get( 'item-' . $item->get_id(), 'order-items' );
+		$cache_user_activity = wp_cache_get( 'item-' . $user_activity->get_id(), 'user-activities' );
 
-		if ( false === $data ) {
-			$data = $wpdb->get_row( $wpdb->prepare( "SELECT order_id, name FROM {$wpdb->prefix}masteriyo_user_activitys WHERE user_activity_id = %d LIMIT 1;", $item->get_id() ) );
-			wp_cache_set( 'item-' . $item->get_id(), $data, 'order-items' );
+		if ( is_a( $cache_user_activity, 'ThemeGrill\Masteriyo\Database\Model' ) ) {
+			return $cache_user_activity;
 		}
 
-		if ( ! $data ) {
-			throw new Exception( __( 'Invalid order item.', 'masteriyo' ) );
-		}
-
-		$item->set_props(
-			array(
-				'order_id'           => $data->order_id,
-				'user_activity_name' => $data->name,
+		$result = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}masteriyo_user_activities WHERE activity_id = %d;",
+				$user_activity->get_id()
 			)
 		);
-		$item->read_meta_data();
+
+		if ( ! $user_activity ) {
+			throw new Exception( __( 'Invalid user activity.', 'masteriyo' ) );
+		}
+
+		$user_activity->set_props(
+			array(
+				'user_id'       => $result->user_id,
+				'item_id'       => $result->item_id,
+				'type'          => $result->activity_type,
+				'status'        => $result->activity_status,
+				'date_start'    => $result->activity_start,
+				'date_update'   => $result->activity_update,
+				'date_complete' => $result->activity_complete,
+			)
+		);
+
+		$user_activity->read_meta_data();
+
+		wp_cache_set( 'item-' . $user_activity->get_id(), $user_activity, 'user-activities' );
 	}
 
 	/**
 	 * Clear meta cache.
 	 *
-	 * @param OrderItem $item Order item object.
+	 * @since 0.1.0
+	 *
+	 * @param UserActivity $item Order item object.
 	 */
 	public function clear_cache( &$item ) {
-		wp_cache_delete( 'item-' . $item->get_id(), 'masteriyo-order-items' );
-		wp_cache_delete( 'order-items-' . $item->get_order_id(), 'masteriyo-orders' );
+		wp_cache_delete( 'user-activity-' . $item->get_id(), 'masteriyo-user-activities' );
+		wp_cache_delete( 'user-activities-' . $item->get_id(), 'masteriyo-user-activities' );
 		wp_cache_delete( $item->get_id(), $this->meta_type . '_meta' );
 	}
 
 	/**
-	 * Fetch courses.
+	 * Fetch user activities.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param array $query_vars Query vars.
-	 * @return OrderItem[]
+	 * @return UserActivity[]
 	 */
 	public function query( $query_vars ) {
 		global $wpdb;
 
-		$order_id = absint( $query_vars['order_id'] );
+		$sql[] = "SELECT * FROM {$wpdb->base_prefix}masteriyo_user_activities";
 
-		$user_activitys = array();
-		$order          = get_post( $order_id );
-
-		if ( is_null( $order ) || 'mto-order' !== $order->post_type ) {
-			return $user_activitys;
+		if ( ! empty( $query_vars['user_id'] ) ) {
+			$search_criteria[] = $wpdb->prepare( 'user_id = %d', $query_vars['user_id'] );
 		}
 
-		$items = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}masteriyo_user_activitys WHERE order_id = %d",
-				$order_id
-			)
-		);
+		if ( ! empty( $query_vars['item_id'] ) ) {
+			$search_criteria[] = $wpdb->prepare( 'item_id = %d', $query_vars['item_id'] );
+		}
 
-		$item_objects = array_filter( array_map( array( $this, 'get_user_activity_object' ), $items ) );
+		if ( ! empty( $query_vars['activity_type'] ) ) {
+			$search_criteria[] = $wpdb->prepare( 'type = %s', $query_vars['activity_type'] );
+		}
 
-		$item_objects = array_filter(
-			array_map(
-				function( $item_object ) {
-					return $this->get_user_activity_meta( $item_object );
-				},
-				$item_objects
-			)
-		);
+		if ( ! empty( $query_vars['status'] ) && 'any' !== $query_vars['status'] ) {
+			$search_criteria[] = $wpdb->prepare( 'type = %s', $query_vars['status'] );
+		}
 
-		return $item_objects;
+		if ( 1 <= count( $search_criteria ) ) {
+			$criteria = implode( ' AND ', $search_criteria );
+			$sql[]    = 'WHERE ' . $criteria;
+		}
+
+		// Construct limit part.
+		$per_page = $query_vars['per_page'];
+
+		if ( $query_vars['paged'] > 0 ) {
+			$offset = ( $query_vars['paged'] - 1 ) * $per_page;
+		}
+
+		$sql[] = $wpdb->prepare( 'LIMIT %d, %d', $offset, $per_page );
+
+		$sql = implode( ' ', $sql ) . ';';
+
+		// Fetch the results.
+		$user_activities = $wpdb->get_results( $wpdb->prepare( $sql ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		$ids = wp_list_pluck( $user_activities, 'activity_id' );
+
+		return array_filter( array_map( 'masteriyo_get_user_activity', $ids ) );
 	}
 
 	/**
-	 * Get order item object.
+	 * Get user activity meta.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param stdclass $item Order item
-	 * @return OrderItem
-	 */
-	public function get_user_activity_object( $item ) {
-		$type = trim( $item->user_activity_type );
-		$type = empty( $type ) ? 'course' : $type;
-
-		try {
-			$item_obj = masteriyo( "order-item.{$type}" );
-			$item_obj->set_id( $item->user_activity_id );
-			$item_obj->set_props(
-				array(
-					'order_id' => $item->order_id,
-					'name'     => $item->user_activity_name,
-				)
-			);
-		} catch ( \Exception $error ) {
-			error_log( $error->getMessage() );
-		}
-
-		return $item_obj;
-	}
-
-	/**
-	 * Get order item meta.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param OrderItem $item Order item object.
-	 * @param stdclass $item_metas List of all order item meta.
-	 *
+	 * @param UserActivity $user_activity User activity object.
 	 * @return
 	 */
-	public function get_user_activity_meta( $item ) {
-		$meta_values = $this->read_meta( $item );
+	public function get_user_activity_meta( $user_activity ) {
+		$meta_values = $this->read_meta( $user_activity );
 
 		foreach ( $meta_values  as $meta_value ) {
 			$function = "set_{$meta_value->key}";
 
-			if ( is_callable( array( $item, $function ) ) ) {
-				$item->$function( maybe_unserialize( $meta_value->value ) );
+			if ( is_callable( array( $user_activity, $function ) ) ) {
+				$user_activity->$function( maybe_unserialize( $meta_value->value ) );
 			}
 		}
 
-		return $item;
+		return $user_activity;
 	}
 }

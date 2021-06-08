@@ -140,6 +140,7 @@ abstract class AbstractRepository {
 
 		$meta_table_info = $this->get_meta_table_info();
 
+		// phpcs:disable
 		$raw_meta_data = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT {$meta_table_info['meta_id_field']} as  meta_id, meta_key, meta_value
@@ -149,6 +150,7 @@ abstract class AbstractRepository {
 				$model->get_id()
 			)
 		);
+		// phpcs:enable
 
 		$meta_data = array_map(
 			function( $meta_data ) {

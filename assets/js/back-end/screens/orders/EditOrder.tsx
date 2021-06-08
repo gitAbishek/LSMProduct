@@ -43,6 +43,7 @@ import AddressLines from './components/AddressLines';
 import TextInputPair from './components/TextInputPair';
 import PaymentMethod from './components/PaymentMethod';
 import TransactionID from './components/TransactionID';
+import { SkeletonOrderItemsList } from '../../skeleton';
 
 const EditOrder = () => {
 	const { orderId }: any = useParams();
@@ -51,6 +52,7 @@ const EditOrder = () => {
 	const toast = useToast();
 	const cancelRef = useRef<any>();
 	const orderAPI = new API(urls.orders);
+	const orderItemsAPI = new API(urls.order_items);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const queryClient = useQueryClient();
 
@@ -63,7 +65,11 @@ const EditOrder = () => {
 			},
 		}
 	);
-	console.log(orderQuery.data);
+	const orderItemsQuery = useQuery('orderItemsList', () =>
+		orderItemsAPI.list({
+			order_id: orderId,
+		})
+	);
 
 	const updateOrder = useMutation(
 		(data: object) => orderAPI.update(orderId, data),
@@ -208,6 +214,35 @@ const EditOrder = () => {
 											/>
 										</Box>
 									</Stack>
+
+									<Box py="3">
+										<Divider />
+									</Box>
+
+									<Heading as="h2" fontSize="medium">
+										{__('Items', 'masteriyo')}
+									</Heading>
+									{orderItemsQuery.isLoading && <SkeletonOrderItemsList />}
+									{orderItemsQuery.isSuccess &&
+										orderItemsQuery.data.map((orderItem: any) => (
+											<Stack key={orderItem.id} direction="row" spacing="6">
+												<Text flexGrow={1} fontWeight="semibold">
+													{orderItem.name}
+												</Text>
+												<Text
+													fontSize="sm"
+													fontWeight="medium"
+													color="gray.600">
+													x {orderItem.quantity}
+												</Text>
+												<Text
+													fontSize="sm"
+													fontWeight="medium"
+													color="gray.600">
+													{orderQuery.data?.currency} {orderItem.total}
+												</Text>
+											</Stack>
+										))}
 
 									<Box py="3">
 										<Divider />

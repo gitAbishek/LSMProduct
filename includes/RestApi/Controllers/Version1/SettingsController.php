@@ -287,6 +287,11 @@ class SettingsController extends CrudController {
 							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
+						'per_row'                  => array(
+							'description' => __( 'Courses per row.', 'masteriyo' ),
+							'type'        => 'integer',
+							'context'     => array( 'view', 'edit' ),
+						),
 						'enable_editing'           => array(
 							'description' => __( 'Enable editing published course.', 'masteriyo' ),
 							'type'        => 'boolean',
@@ -429,6 +434,24 @@ class SettingsController extends CrudController {
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
+						),
+					),
+				),
+				'quizzes'  => array(
+					'description' => __( 'Quizzes Setting', 'masteriyo' ),
+					'type'        => 'object',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'             => 'object',
+						'time_limit'       => array(
+							'description' => __( 'Quiz time limit in minutes.', 'masteriyo' ),
+							'type'        => 'integer',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'attempts_allowed' => array(
+							'description' => __( 'Quiz total attempts allowed.', 'masteriyo' ),
+							'type'        => 'integer',
+							'context'     => array( 'view', 'edit' ),
 						),
 					),
 				),
@@ -973,6 +996,7 @@ class SettingsController extends CrudController {
 				'placeholder_image'        => $setting->get_courses_placeholder_image( $context ),
 				'add_to_cart_behaviour'    => $setting->get_courses_add_to_cart_behaviour( $context ),
 				'per_page'                 => $setting->get_courses_per_page( $context ),
+				'per_row'                  => $setting->get_courses_per_row( $context ),
 				'enable_editing'           => $setting->get_courses_enable_editing( $context ),
 				'category_base'            => $setting->get_courses_category_base( $context ),
 				'tag_base'                 => $setting->get_courses_tag_base( $context ),
@@ -1005,6 +1029,10 @@ class SettingsController extends CrudController {
 					'lost_password'   => $setting->get_pages_lost_password( $context ),
 					'logout'          => $setting->get_pages_logout( $context ),
 				),
+			),
+			'quizzes'  => array(
+				'time_limit'       => $setting->get_quizzes_time_limit( $context ),
+				'attempts_allowed' => $setting->get_quizzes_attempts_allowed( $context ),
 			),
 			'payments' => array(
 				'offline' => array(
@@ -1172,6 +1200,10 @@ class SettingsController extends CrudController {
 			$setting->set_courses_per_page( $request['courses']['per_page'] );
 		}
 
+		if ( isset( $request['courses']['per_row'] ) ) {
+			$setting->set_courses_per_row( $request['courses']['per_row'] );
+		}
+
 		if ( isset( $request['courses']['enable_editing'] ) ) {
 			$setting->set_courses_enable_editing( $request['courses']['enable_editing'] );
 		}
@@ -1278,6 +1310,16 @@ class SettingsController extends CrudController {
 
 		if ( isset( $request['pages']['account_endpoints']['logout'] ) ) {
 			$setting->set_pages_logout( $request['pages']['account_endpoints']['logout'] );
+		}
+
+		// Quizzes Setting.
+
+		if ( isset( $request['quizzes']['time_limit'] ) ) {
+			$setting->set_quizzes_time_limit( $request['quizzes']['time_limit'] );
+		}
+
+		if ( isset( $request['quizzes']['attempts_allowed'] ) ) {
+			$setting->set_quizzes_attempts_allowed( $request['quizzes']['attempts_allowed'] );
 		}
 
 		// Payments Setting.

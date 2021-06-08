@@ -82,6 +82,7 @@ class Setting extends Model {
 			'placeholder_image'        => 0,
 			'add_to_cart_behaviour'    => '',
 			'per_page'                 => 12,
+			'per_row'                  => 4,
 			'enable_editing'           => false,
 
 			// Single Course.
@@ -119,6 +120,10 @@ class Setting extends Model {
 			'payment_methods'            => '',
 			'lost_password'              => '',
 			'logout'                     => '',
+		),
+		'quizzes'  => array(
+			'time_limit'       => 60,
+			'attempts_allowed' => 5,
 		),
 		'payments' => array(
 			// Offline payment
@@ -433,6 +438,18 @@ class Setting extends Model {
 	 */
 	public function get_courses_per_page( $context = 'view' ) {
 		return $this->get_setting_prop( 'per_page', 'courses', $context );
+	}
+
+	/**
+	 * Get option courses_per_row.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_courses_per_row( $context = 'view' ) {
+		return $this->get_setting_prop( 'per_row', 'courses', $context );
 	}
 
 	/**
@@ -752,6 +769,33 @@ class Setting extends Model {
 	public function get_pages_logout( $context = 'view' ) {
 		return $this->get_setting_prop( 'logout', 'pages', $context );
 	}
+
+	// Quizzes Setting Getter.
+
+	/**
+	 * Get option quizzes_time_limit.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_quizzes_time_limit( $context = 'view' ) {
+		return $this->get_setting_prop( 'time_limit', 'quizzes', $context );
+	}
+
+	/**
+	 * Get option quizzes_attempts_allowed.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_quizzes_attempts_allowed( $context = 'view' ) {
+		return $this->get_setting_prop( 'attempts_allowed', 'quizzes', $context );
+	}
+
 
 	// Payments Setting Getter.
 
@@ -1705,6 +1749,16 @@ class Setting extends Model {
 	}
 
 	/**
+	 * Set option courses per row.
+	*
+	* @since 0.1.0
+	* @param int $per_row
+	*/
+	public function set_courses_per_row( $per_row ) {
+		$this->set_setting_prop( 'per_row', 'courses', absint( $per_row ) );
+	}
+
+	/**
 	 * Set option courses enable editing.
 	*
 	* @since 0.1.0
@@ -1981,6 +2035,28 @@ class Setting extends Model {
 	*/
 	public function set_pages_logout( $logout ) {
 		$this->set_setting_prop( 'logout', 'pages', $logout );
+	}
+
+	// Quizzes Setting Setter.
+
+	/**
+	 * Set option quizzes time limit.
+	 *
+	 * @since 0.1.0
+	 * @param string $time_limit
+	 */
+	public function set_quizzes_time_limit( $time_limit ) {
+		$this->set_setting_prop( 'time_limit', 'quizzes', absint( $time_limit ) );
+	}
+
+	/**
+	 * Set option quizzes attempts allowed.
+	 *
+	 * @since 0.1.0
+	 * @param string $attempts_allowed
+	 */
+	public function set_quizzes_attempts_allowed( $attempts_allowed ) {
+		$this->set_setting_prop( 'attempts_allowed', 'quizzes', absint( $attempts_allowed ) );
 	}
 
 	// Payments Setting Setter.

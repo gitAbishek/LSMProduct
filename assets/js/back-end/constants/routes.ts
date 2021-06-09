@@ -18,6 +18,11 @@ const routes = {
 		add: '/builder/quiz/:sectionId/add-new-quiz',
 		edit: '/builder/quiz/edit/:quizId',
 	},
+	course_categories: {
+		list: '/courses/categories',
+		add: '/courses/categories/new',
+		edit: '/courses/categories/:categoryId',
+	},
 	settings: '/settings',
 	notFound: '/not-found',
 	builder: '/builder/:courseId',

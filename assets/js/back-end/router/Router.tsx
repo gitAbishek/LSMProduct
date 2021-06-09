@@ -37,6 +37,15 @@ const Router: React.FC = () => {
 				<Route path={routes.quiz.edit} exact>
 					<EditQuiz />
 				</Route>
+				<Route path={routes.course_categories.list} exact>
+					<screens.AllCourseCategories />
+				</Route>
+				<Route path={routes.course_categories.add} exact>
+					<screens.AddNewCourseCategory />
+				</Route>
+				<Route path={routes.course_categories.edit} exact>
+					<screens.EditCourseCategory />
+				</Route>
 				<Route path={routes.settings} exact>
 					<screens.Settings />
 				</Route>

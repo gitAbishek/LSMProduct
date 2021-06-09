@@ -163,7 +163,7 @@ const EditCourseCategory = () => {
 											colorScheme="blue"
 											type="submit"
 											isLoading={updateCategory.isLoading}>
-											{__('Update Category', 'masteriyo')}
+											{__('Update', 'masteriyo')}
 										</Button>
 										<Button
 											variant="outline"

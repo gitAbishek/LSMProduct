@@ -26,7 +26,10 @@ const SlugInput: React.FC<Props> = (props) => {
 				defaultValue={defaultValue}
 				{...register('slug', {
 					required: __('You must provide name for the category', 'masteriyo'),
-					validate: (value) => (value.includes(' ') ? 'invalid' : true),
+					validate: (value) =>
+						value.includes(' ')
+							? __('Spaces are not allowed', 'masteriyo')
+							: true,
 				})}
 			/>
 			<FormHelperText>

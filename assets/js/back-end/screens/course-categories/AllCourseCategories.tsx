@@ -15,15 +15,15 @@ import React from 'react';
 import { useQuery } from 'react-query';
 
 import urls from '../../constants/urls';
-import { SkeletonCourseCategory } from '../../skeleton';
+import { SkeletonCourseTaxonomy } from '../../skeleton';
 import API from '../../utils/api';
 import CategoryRow from './components/CategoryRow';
 import Header from './components/Header';
 
 const AllCourseCategories = () => {
-	const courseAPI = new API(urls.categories);
+	const categoriesAPI = new API(urls.categories);
 	const categoriesQuery = useQuery('courseCategoriesList', () =>
-		courseAPI.list()
+		categoriesAPI.list()
 	);
 
 	return (
@@ -49,7 +49,7 @@ const AllCourseCategories = () => {
 								</Tr>
 							</Thead>
 							<Tbody>
-								{categoriesQuery.isLoading && <SkeletonCourseCategory />}
+								{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
 								{categoriesQuery.isSuccess &&
 									categoriesQuery.data.map((cat: any) => (
 										<CategoryRow

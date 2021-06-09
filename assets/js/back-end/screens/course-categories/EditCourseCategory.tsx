@@ -88,10 +88,10 @@ const EditCourseCategory = () => {
 					status: 'error',
 				});
 			},
-			onError: (error) => {
+			onError: (error: any) => {
 				toast({
 					title: __('Failed to delete category', 'masteriyo'),
-					description: `${error}`,
+					description: `${error.response?.data?.message}`,
 					isClosable: true,
 					status: 'error',
 				});

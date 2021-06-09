@@ -137,7 +137,7 @@ class CourseTagsController extends RestTermsController {
 
 		if ( 0 !== $id ) {
 			$course_tag->set_id( $id );
-			$course_tag_repo = masteriyo( 'course_cat.store' );
+			$course_tag_repo = masteriyo( 'course_tag.store' );
 			$course_tag_repo->read( $course_tag );
 		}
 

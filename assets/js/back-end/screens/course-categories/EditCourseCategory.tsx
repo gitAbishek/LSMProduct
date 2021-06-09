@@ -25,7 +25,7 @@ import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 
 import routes from '../../constants/routes';
@@ -44,6 +44,7 @@ const EditCourseCategory = () => {
 	const cancelRef = useRef<any>();
 	const categoryAPI = new API(urls.categories);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const queryClient = useQueryClient();
 
 	const categoryQuery = useQuery(
 		[`courseCategory${categoryId}`, categoryId],
@@ -65,11 +66,12 @@ const EditCourseCategory = () => {
 					isClosable: true,
 					status: 'success',
 				});
+				queryClient.invalidateQueries('courseCategoriesList');
 			},
-			onError: (error) => {
+			onError: (error: any) => {
 				toast({
 					title: __('Failed to update category', 'masteriyo'),
-					description: `${error}`,
+					description: `${error.response?.data?.message}`,
 					isClosable: true,
 					status: 'error',
 				});
@@ -78,7 +80,7 @@ const EditCourseCategory = () => {
 	);
 
 	const deleteCategory = useMutation(
-		(categoryId: number) => categoryAPI.delete(categoryId),
+		(categoryId: number) => categoryAPI.delete(categoryId, { force: true }),
 		{
 			onSuccess: (data: any) => {
 				toast({
@@ -87,6 +89,8 @@ const EditCourseCategory = () => {
 					isClosable: true,
 					status: 'error',
 				});
+				history.push(routes.course_categories.list);
+				queryClient.invalidateQueries('courseCategoriesList');
 			},
 			onError: (error: any) => {
 				toast({

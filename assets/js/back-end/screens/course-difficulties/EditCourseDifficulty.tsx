@@ -25,7 +25,7 @@ import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 
 import routes from '../../constants/routes';
@@ -44,6 +44,7 @@ const EditCourseDifficulty = () => {
 	const cancelRef = useRef<any>();
 	const difficultyAPI = new API(urls.difficulties);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const queryClient = useQueryClient();
 
 	const difficultyQuery = useQuery(
 		[`courseDifficulty${difficultyId}`, difficultyId],
@@ -65,11 +66,12 @@ const EditCourseDifficulty = () => {
 					isClosable: true,
 					status: 'success',
 				});
+				queryClient.invalidateQueries('courseDifficultiesList');
 			},
-			onError: (error) => {
+			onError: (error: any) => {
 				toast({
 					title: __('Failed to update difficulty', 'masteriyo'),
-					description: `${error}`,
+					description: `${error.response?.data?.message}`,
 					isClosable: true,
 					status: 'error',
 				});
@@ -78,7 +80,8 @@ const EditCourseDifficulty = () => {
 	);
 
 	const deleteDifficulty = useMutation(
-		(difficultyId: number) => difficultyAPI.delete(difficultyId),
+		(difficultyId: number) =>
+			difficultyAPI.delete(difficultyId, { force: true }),
 		{
 			onSuccess: (data: any) => {
 				toast({
@@ -87,6 +90,8 @@ const EditCourseDifficulty = () => {
 					isClosable: true,
 					status: 'error',
 				});
+				history.push(routes.course_difficulties.list);
+				queryClient.invalidateQueries('courseDifficultiesList');
 			},
 			onError: (error: any) => {
 				toast({

@@ -12,3 +12,6 @@ export { default as EditOrder } from './orders/EditOrder';
 export { default as AllCourseCategories } from './course-categories/AllCourseCategories';
 export { default as EditCourseCategory } from './course-categories/EditCourseCategory';
 export { default as AddNewCourseCategory } from './course-categories/AddNewCourseCategory';
+export { default as AllCourseDifficulties } from './course-difficulties/AllCourseDifficulties';
+export { default as AddNewCourseDifficulty } from './course-difficulties/AddNewCourseDifficulty';
+export { default as EditCourseDifficulty } from './course-difficulties/EditCourseDifficulty';

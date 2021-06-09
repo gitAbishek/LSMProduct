@@ -23,6 +23,11 @@ const routes = {
 		add: '/courses/categories/new',
 		edit: '/courses/categories/:categoryId',
 	},
+	course_difficulties: {
+		list: '/courses/difficulties',
+		add: '/courses/difficulties/new',
+		edit: '/courses/difficulties/:difficultyId',
+	},
 	settings: '/settings',
 	notFound: '/not-found',
 	builder: '/builder/:courseId',

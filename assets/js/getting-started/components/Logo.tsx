@@ -1,7 +1,7 @@
 import { Box, Container, Image } from '@chakra-ui/react';
 import React from 'react';
 
-import { Logo } from '../../src/constants/images';
+import { Logo } from '../../back-end/constants/images';
 
 const MainLogo: React.FC = () => {
 	return (

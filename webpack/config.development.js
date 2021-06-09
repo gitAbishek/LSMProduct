@@ -66,6 +66,12 @@ const config = {
 			template: './assets/js/interactive/index.html',
 		}),
 
+		new HtmlWebpackPlugin({
+			filename: 'getting-started.html',
+			chunks: ['gettingStarted'],
+			template: './assets/js/getting-started/index.html',
+		}),
+
 		new ReactRefreshWebpackPlugin({
 			overlay: false,
 		}),

@@ -28,6 +28,11 @@ const routes = {
 		add: '/courses/difficulties/new',
 		edit: '/courses/difficulties/:difficultyId',
 	},
+	course_tags: {
+		list: '/courses/tags',
+		add: '/courses/tags/new',
+		edit: '/courses/tags/:tagId',
+	},
 	settings: '/settings',
 	notFound: '/not-found',
 	builder: '/builder/:courseId',

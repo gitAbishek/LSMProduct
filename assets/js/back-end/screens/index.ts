@@ -15,3 +15,6 @@ export { default as AddNewCourseCategory } from './course-categories/AddNewCours
 export { default as AllCourseDifficulties } from './course-difficulties/AllCourseDifficulties';
 export { default as AddNewCourseDifficulty } from './course-difficulties/AddNewCourseDifficulty';
 export { default as EditCourseDifficulty } from './course-difficulties/EditCourseDifficulty';
+export { default as AllCourseTags } from './course-tags/AllCourseTags';
+export { default as AddNewCourseTag } from './course-tags/AddNewCourseTag';
+export { default as EditCourseTag } from './course-tags/EditCourseTag';

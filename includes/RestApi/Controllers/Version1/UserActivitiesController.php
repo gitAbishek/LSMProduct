@@ -303,9 +303,10 @@ class UserActivitiesController extends CrudController {
 			'user_id'       => $user_activity->get_user_id( $context ),
 			'item_id'       => $user_activity->get_item_id( $context ),
 			'type'          => $user_activity->get_type( $context ),
-			'date_start'    => $user_activity->get_date_start( $context ),
-			'date_update'   => $user_activity->get_date_update( $context ),
-			'date_complete' => $user_activity->get_date_complete( $context ),
+			'status'        => $user_activity->get_status( $context ),
+			'date_start'    => masteriyo_rest_prepare_date_response( $user_activity->get_date_start( $context ) ),
+			'date_update'   => masteriyo_rest_prepare_date_response( $user_activity->get_date_update( $context ) ),
+			'date_complete' => masteriyo_rest_prepare_date_response( $user_activity->get_date_complete( $context ) ),
 		);
 
 		return $data;
@@ -377,13 +378,15 @@ class UserActivitiesController extends CrudController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'item_id'       => array(
-					'description' => __( 'Item ID (course, quiz).', 'masteriyo' ),
-					'type'        => 'string',
+					'description' => __( 'Item ID (course, quiz, etc.).', 'masteriyo' ),
+					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'type'          => array(
 					'description' => __( 'User activity type (course, quiz).', 'masteriyo' ),
 					'type'        => 'string',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'status'        => array(
@@ -395,16 +398,19 @@ class UserActivitiesController extends CrudController {
 				'date_start'    => array(
 					'description' => __( 'User activity start date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
+					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_complete' => array(
 					'description' => __( 'User activity complete date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
+					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_update'   => array(
 					'description' => __( 'User activity update date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
+					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
 			),
@@ -421,7 +427,7 @@ class UserActivitiesController extends CrudController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|WC_Data
+	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id            = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -429,12 +435,12 @@ class UserActivitiesController extends CrudController {
 
 		if ( 0 !== $id ) {
 			$user_activity->set_id( $id );
-			$user_activity_repo = masteriyo( 'user-activity' );
+			$user_activity_repo = masteriyo( 'user-activity.store' );
 			$user_activity_repo->read( $user_activity );
 		}
 
 		// User ID.
-		if ( isset( $request['user_id'] ) && empty( $request['user_id'] ) ) {
+		if ( isset( $request['user_id'] ) && ! empty( $request['user_id'] ) ) {
 			$user_activity->set_user_id( $request['user_id'] );
 		} else {
 			$user_activity->set_user_id( get_current_user_id() );
@@ -468,6 +474,11 @@ class UserActivitiesController extends CrudController {
 		// Activity complete date.
 		if ( isset( $request['date_complete'] ) ) {
 			$user_activity->set_date_complete( $request['date_complete'] );
+		}
+
+		// Acitivity items.
+		if ( isset( $request['items'] ) ) {
+			$user_activity->set_items( $request['items'] );
 		}
 
 		/**

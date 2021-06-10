@@ -58,7 +58,7 @@ class CourseReview extends Model {
 		'date_created' => null,
 		'title'        => '',
 		'content'      => '',
-		'karma'        => 0,
+		'rating'       => 0,
 		'status'       => 'approve',
 		'agent'        => '',
 		'type'         => 'course_review',
@@ -188,7 +188,7 @@ class CourseReview extends Model {
 	}
 
 	/**
-	 * Get karma.
+	 * Get rating.
 	 *
 	 * @since  0.1.0
 	 *
@@ -196,8 +196,8 @@ class CourseReview extends Model {
 	 *
 	 * @return int
 	 */
-	public function get_karma( $context = 'view' ) {
-		return $this->get_prop( 'karma', $context );
+	public function get_rating( $context = 'view' ) {
+		return $this->get_prop( 'rating', $context );
 	}
 
 	/**
@@ -360,14 +360,14 @@ class CourseReview extends Model {
 	}
 
 	/**
-	 * Set karma.
+	 * Set rating.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param int $karma Comment karma.
+	 * @param int $rating Comment rating.
 	 */
-	public function set_karma( $karma ) {
-		$this->set_prop( 'karma', absint( $karma ) );
+	public function set_rating( $rating ) {
+		$this->set_prop( 'rating', absint( $rating ) );
 	}
 
 	/**

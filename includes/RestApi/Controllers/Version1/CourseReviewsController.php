@@ -256,7 +256,7 @@ class CourseReviewsController extends CommentsController {
 			'date_created' => $course_review->get_date_created( $context ),
 			'title'        => $course_review->get_title( $context ),
 			'description'  => $course_review->get_content( $context ),
-			'karma'        => $course_review->get_karma( $context ),
+			'rating'       => $course_review->get_rating( $context ),
 			'status'       => $course_review->get_status( $context ),
 			'agent'        => $course_review->get_agent( $context ),
 			'type'         => $course_review->get_type( $context ),
@@ -368,8 +368,8 @@ class CourseReviewsController extends CommentsController {
 					'context'     => array( 'view', 'edit' ),
 					'required'    => true,
 				),
-				'karma'        => array(
-					'description' => __( 'Course Review Karma.', 'masteriyo' ),
+				'rating'        => array(
+					'description' => __( 'Course Review rating.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -498,9 +498,9 @@ class CourseReviewsController extends CommentsController {
 			$course_review->set_content( $request['content'] );
 		}
 
-		// Course Review Karma.
-		if ( isset( $request['karma'] ) ) {
-			$course_review->set_karma( $request['karma'] );
+		// Course Review Rating.
+		if ( isset( $request['rating'] ) ) {
+			$course_review->set_rating( $request['rating'] );
 		}
 
 		// Course Review Approved.

@@ -95,7 +95,7 @@
 				var $submit_button = $form.find('button[type="submit"]');
 				var data = {
 					title: $form.find('input[name="title"]').val(),
-					karma: $form.find('input[name="rating"]').val(),
+					rating: $form.find('input[name="rating"]').val(),
 					content: $form.find('input[name="content"]').val(),
 				};
 
@@ -163,7 +163,7 @@
 				var $submit_button = $form.find('button[type="submit"]');
 				var data = {
 					title: $form.find('input[name="title"]').val(),
-					karma: $form.find('input[name="rating"]').val(),
+					rating: $form.find('input[name="rating"]').val(),
 					content: $form.find('input[name="content"]').val(),
 				};
 

@@ -50,8 +50,8 @@ do_action( 'masteriyo_before_single_course_reviews_content' );
 		<div class="author-name" data-value="<?php echo esc_attr( $course_review->get_author_name() ); ?>">
 			Author: <?php echo esc_html( $course_review->get_author_name() ); ?>
 		</div>
-		<div class="rating" data-value="<?php echo esc_attr( $course_review->get_karma() ); ?>">
-			Rating: <?php echo esc_html( $course_review->get_karma() ); ?>
+		<div class="rating" data-value="<?php echo esc_attr( $course_review->get_rating() ); ?>">
+			Rating: <?php echo esc_html( $course_review->get_rating() ); ?>
 		</div>
 		<div class="date-created" data-value="<?php echo esc_attr( $course_review->get_date_created() ); ?>">
 			Date: <?php echo esc_html( $course_review->get_date_created() ); ?>

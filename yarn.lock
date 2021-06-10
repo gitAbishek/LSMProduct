@@ -3741,6 +3741,11 @@ caw@^2.0.0, caw@^2.0.1:
   dependencies:
     traverse ">=0.3.0 <0.4"
 
+chakra-ui-steps@0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/chakra-ui-steps/-/chakra-ui-steps-0.2.2.tgz#439a2292c570899d51c14b58a61143762e838883"
+  integrity sha512-JVRnmupr7tbfJo0Xt9q2Lxe3pGx5ih5piQJL3pTvGiEK/rBNw/COlMY7CMn4iCknuYdq9tk5s3Wz4mMN2WTYmw==
+
 chalk@2.4.2, chalk@^2.0.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
@@ -4537,6 +4542,11 @@ csstype@^3.0.2, csstype@^3.0.6:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.8.tgz#d2266a792729fb227cd216fb572f43728e1ad340"
   integrity sha512-jXKhWqXPmlUeoQnF/EhTtTl4C9SnrxSH/jZUih3jmO6lBKr99rP3/+FmrMj4EFpOXzMtXHAZkd3x0E6h6Fgflw==
+
+currency-symbol-map@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/currency-symbol-map/-/currency-symbol-map-5.0.1.tgz#447629c7e26730299aa6174c55bde281f682b2e5"
+  integrity sha512-2yHvoVBPIS9Dx7fjritu9l7UHWo4Z3D2oQnQj8AYwUee2j/PAcoHB4issCqwabfbipISZ/iG6vVYsfrAoks2eA==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
@@ -10314,6 +10324,11 @@ react-clientside-effect@^1.2.2:
   integrity sha512-2bL8qFW1TGBHozGGbVeyvnggRpMjibeZM2536AKNENLECutp2yfs44IL8Hmpn8qjFQ2K7A9PnYf3vc7aQq/cPA==
   dependencies:
     "@babel/runtime" "^7.12.13"
+
+react-currency-input-field@3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-3.4.1.tgz#128e7322b52d093716c2c47f7592903de19e79f4"
+  integrity sha512-2DD0nE+pClg/UkQi/FGBdi/53P+KH06CjifBdH4u3rreGj5MYpOY7ViZewtOEA53yZNfWZ2mjwR12nJAXpp3Qw==
 
 react-dev-utils@^9.0.3:
   version "9.1.0"

@@ -14,12 +14,12 @@ import React from 'react';
 import { onboardCover } from '../../components/constants/images';
 
 interface Props {
-	setTabIndex?: any;
 	dashboardURL: string;
+	nextStep: () => void;
 }
 
 const Welcome: React.FC<Props> = (props) => {
-	const { setTabIndex, dashboardURL } = props;
+	const { dashboardURL, nextStep } = props;
 	return (
 		<Box rounded="3px">
 			<Box bg="white" p="30" shadow="box">
@@ -45,7 +45,7 @@ const Welcome: React.FC<Props> = (props) => {
 							)}
 						</Text>
 						<ButtonGroup>
-							<Button onClick={() => setTabIndex(1)} colorScheme="blue">
+							<Button onClick={nextStep} colorScheme="blue">
 								{__('Start Now', 'masteriyo')}
 							</Button>
 							<Button variant="ghost">

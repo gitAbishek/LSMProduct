@@ -15,62 +15,60 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 interface Props {
-	setTabIndex?: any;
 	dashboardURL: string;
+	prevStep: () => void;
+	nextStep: () => void;
 }
 
 const Quiz: React.FC<Props> = (props) => {
-	const { setTabIndex, dashboardURL } = props;
-	const {
-		register,
-		formState: { errors },
-	} = useFormContext();
+	const { dashboardURL, prevStep, nextStep } = props;
+	const { register } = useFormContext();
 	return (
 		<Box rounded="3px">
 			<Box bg="white" p="30" shadow="box">
 				<Stack direction="column" spacing="8">
-					<FormControl id="quiz-time-limit">
+					<FormControl>
 						<Flex justify="space-between" align="center">
-							<FormLabel style={{ fontWeight: 'bold' }}>
+							<FormLabel sx={{ fontWeight: 'bold' }}>
 								{__('Time Limit', 'masteriyo')}
 							</FormLabel>
 							<InputGroup w="md" size="md">
-								<Input defaultValue="60" {...register('time_limit')} />
-								<InputRightAddon children={`Minutes`} />
+								<Input defaultValue="60" {...register('quizzes.time_limit')} />
+								<InputRightAddon>{__('Minutes', 'masteriyo')}</InputRightAddon>
 							</InputGroup>
 						</Flex>
 					</FormControl>
 
-					<FormControl id="quiz-attempts-allowed">
+					<FormControl>
 						<Flex justify="space-between" align="center">
-							<FormLabel style={{ fontWeight: 'bold' }}>
+							<FormLabel sx={{ fontWeight: 'bold' }}>
 								{__('Attempts Allowed', 'masteriyo')}
 							</FormLabel>
 							<InputGroup w="md" size="md">
-								<Input defaultValue="5" {...register('attempts_allowed')} />
-								<InputRightAddon children={`Attempts`} />
+								<Input
+									defaultValue={5}
+									{...register('quizzes.attempts_allowed')}
+								/>
+								<InputRightAddon>{__('Attempts', 'masteriyo')}</InputRightAddon>
 							</InputGroup>
 						</Flex>
 					</FormControl>
 
 					<Flex justify="space-between" align="center">
 						<Button
-							onClick={() => setTabIndex(2)}
+							onClick={prevStep}
 							rounded="3px"
 							colorScheme="blue"
 							variant="outline">
 							{__('Back', 'masteriyo')}
 						</Button>
 						<ButtonGroup>
-							<Button onClick={() => setTabIndex(4)} variant="ghost">
+							<Button variant="ghost">
 								<Link href={dashboardURL ? dashboardURL : '#'}>
 									{__('Skip to Dashboard', 'masteriyo')}
 								</Link>
 							</Button>
-							<Button
-								onClick={() => setTabIndex(4)}
-								rounded="3px"
-								colorScheme="blue">
+							<Button onClick={nextStep} rounded="3px" colorScheme="blue">
 								{__('Continue', 'masteriyo')}
 							</Button>
 						</ButtonGroup>

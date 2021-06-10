@@ -1755,7 +1755,7 @@ class Setting extends Model {
 	* @param int $per_row
 	*/
 	public function set_courses_per_row( $per_row ) {
-		$this->set_setting_prop( 'per_row', 'courses', absint( $per_row ) );
+		return $this->set_setting_prop( 'per_row', 'courses', absint( $per_row ) );
 	}
 
 	/**
@@ -2046,7 +2046,7 @@ class Setting extends Model {
 	 * @param string $time_limit
 	 */
 	public function set_quizzes_time_limit( $time_limit ) {
-		$this->set_setting_prop( 'time_limit', 'quizzes', absint( $time_limit ) );
+		return $this->set_setting_prop( 'time_limit', 'quizzes', absint( $time_limit ) );
 	}
 
 	/**
@@ -2056,7 +2056,7 @@ class Setting extends Model {
 	 * @param string $attempts_allowed
 	 */
 	public function set_quizzes_attempts_allowed( $attempts_allowed ) {
-		$this->set_setting_prop( 'attempts_allowed', 'quizzes', absint( $attempts_allowed ) );
+		return $this->set_setting_prop( 'attempts_allowed', 'quizzes', absint( $attempts_allowed ) );
 	}
 
 	// Payments Setting Setter.

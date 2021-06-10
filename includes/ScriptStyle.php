@@ -520,6 +520,13 @@ class ScriptStyle {
 						'nonce'    => wp_create_nonce( 'masteriyo_login_nonce' ),
 					),
 				),
+				'single-course'  => array(
+					'name' => 'masteriyo_data',
+					'data' => array(
+						'rootApiUrl' => esc_url_raw( rest_url() ),
+						'nonce'      => wp_create_nonce( 'wp_rest' ),
+					),
+				),
 				'checkout'       => array(
 					'name' => 'mto_checkout_params',
 					'data' => array(

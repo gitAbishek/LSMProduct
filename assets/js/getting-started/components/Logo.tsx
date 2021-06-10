@@ -7,7 +7,7 @@ const MainLogo: React.FC = () => {
 	return (
 		<Container maxW="container.xl" centerContent>
 			<Box m="10">
-				<Image src={Logo} alt="Masteriyo Logo" w="260px" />
+				<Image src={Logo} alt="Masteriyo Logo" w="64" />
 			</Box>
 		</Container>
 	);

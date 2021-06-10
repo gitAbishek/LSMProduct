@@ -16,29 +16,26 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-
 interface Props {
-	setTabIndex?: any;
 	dashboardURL: string;
+	prevStep: () => void;
+	nextStep: () => void;
 }
 
 const Course: React.FC<Props> = (props) => {
-	const { setTabIndex, dashboardURL } = props;
-	const {
-		register,
-		formState: { errors },
-	} = useFormContext();
+	const { dashboardURL, prevStep, nextStep } = props;
+	const { register } = useFormContext();
 	return (
 		<Box rounded="3px">
 			<Box bg="white" p="30" shadow="box">
 				<Stack direction="column" spacing="8">
-					<FormControl id="course-per-row">
+					<FormControl>
 						<Flex justify="space-between" align="center">
-							<FormLabel style={{ fontWeight: 'bold' }}>
+							<FormLabel sx={{ fontWeight: 'bold' }}>
 								{__('Course Per Row', 'masteriyo')}
 							</FormLabel>
 							<NumberInput w="md" defaultValue={4}>
-								<NumberInputField {...register('course_per_row')} />
+								<NumberInputField {...register('courses.per_row')} />
 								<NumberInputStepper>
 									<NumberIncrementStepper />
 									<NumberDecrementStepper />
@@ -47,13 +44,13 @@ const Course: React.FC<Props> = (props) => {
 						</Flex>
 					</FormControl>
 
-					<FormControl id="course-per-page">
+					<FormControl>
 						<Flex justify="space-between" align="center">
-							<FormLabel style={{ fontWeight: 'bold' }}>
+							<FormLabel sx={{ fontWeight: 'bold' }}>
 								{__('Course Per Page', 'masteriyo')}
 							</FormLabel>
 							<NumberInput w="md" defaultValue={20}>
-								<NumberInputField {...register('course_per_page')} />
+								<NumberInputField {...register('courses.per_page')} />
 								<NumberInputStepper>
 									<NumberIncrementStepper />
 									<NumberDecrementStepper />
@@ -64,22 +61,19 @@ const Course: React.FC<Props> = (props) => {
 
 					<Flex justify="space-between" align="center">
 						<Button
-							onClick={() => setTabIndex(1)}
+							onClick={prevStep}
 							rounded="3px"
 							colorScheme="blue"
 							variant="outline">
 							{__('Back', 'masteriyo')}
 						</Button>
 						<ButtonGroup>
-							<Button onClick={() => setTabIndex(3)} variant="ghost">
+							<Button variant="ghost">
 								<Link href={dashboardURL ? dashboardURL : '#'}>
 									{__('Skip to Dashboard', 'masteriyo')}
 								</Link>
 							</Button>
-							<Button
-								onClick={() => setTabIndex(3)}
-								rounded="3px"
-								colorScheme="blue">
+							<Button onClick={nextStep} rounded="3px" colorScheme="blue">
 								{__('Continue', 'masteriyo')}
 							</Button>
 						</ButtonGroup>

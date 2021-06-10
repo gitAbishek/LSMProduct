@@ -634,7 +634,7 @@ abstract class Model {
 				return;
 			}
 
-			if ( is_a( $value, 'MASTERIYO_DateTime' ) ) {
+			if ( is_a( $value, 'ThemeGrill\Masteriyo\DateTime' ) ) {
 				$datetime = $value;
 			} elseif ( is_numeric( $value ) ) {
 				// Timestamps are handled as UTC timestamps in all cases.

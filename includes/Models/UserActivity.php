@@ -59,8 +59,8 @@ class UserActivity extends Model {
 	protected $data = array(
 		'user_id'       => 0,
 		'item_id'       => 0,
-		'type'          => null,
-		'status'        => null,
+		'type'          => '',
+		'status'        => 'begin',
 		'date_start'    => null,
 		'date_update'   => null,
 		'date_complete' => null,
@@ -159,9 +159,8 @@ class UserActivity extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	* @param  string $context What the value is for. valid values are view and edit.
-
-	 * @return int
+	 * @param  string $context What the value is for. valid values are view and edit.
+	 * @return DateTime|null
 	 */
 	public function get_date_start( $context = 'view' ) {
 		return $this->get_prop( 'date_start', $context );
@@ -172,9 +171,8 @@ class UserActivity extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	* @param  string $context What the value is for. valid values are view and edit.
-
-	 * @return int
+	 * @param  string $context What the value is for. valid values are view and edit.
+	 * @return DateTime|null
 	 */
 	public function get_date_update( $context = 'view' ) {
 		return $this->get_prop( 'date_update', $context );
@@ -185,12 +183,22 @@ class UserActivity extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	* @param  string $context What the value is for. valid values are view and edit.
-
-	 * @return int
+	 * @param  string $context What the value is for. valid values are view and edit.
+	 * @return DateTime|null
 	 */
 	public function get_date_complete( $context = 'view' ) {
 		return $this->get_prop( 'date_complete', $context );
+	}
+
+	/**
+	 * Get user activity items.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	public function get_items( $context = 'view' ) {
+		return $this->items;
 	}
 
 	/*
@@ -205,11 +213,9 @@ class UserActivity extends Model {
 	 * @since 0.1.0
 	 *
 	* @param int $user_id User ID.
-
-	 * @return int
 	 */
 	public function set_user_id( $user_id ) {
-		return $this->set_prop( 'user_id', absint( $user_id ) );
+		$this->set_prop( 'user_id', absint( $user_id ) );
 	}
 
 	/**
@@ -218,11 +224,9 @@ class UserActivity extends Model {
 	 * @since 0.1.0
 	 *
 	* @param int $item_id Item ID. (course, quiz, etc.)
-
-	 * @return int
 	 */
 	public function set_item_id( $item_id ) {
-		return $this->set_prop( 'item_id', absint( $item_id ) );
+		$this->set_prop( 'item_id', absint( $item_id ) );
 	}
 
 	/**
@@ -231,11 +235,9 @@ class UserActivity extends Model {
 	 * @since 0.1.0
 	 *
 	 * @param  string $type Activity type.
-	 *
-	 * @return int
 	 */
 	public function set_type( $type ) {
-		return $this->set_prop( 'type', $type );
+		$this->set_prop( 'type', $type );
 	}
 
 	/**
@@ -244,11 +246,9 @@ class UserActivity extends Model {
 	 * @since 0.1.0
 	 *
 	 * @param  string $status Activity status.
-	 *
-	 * @return int
 	 */
 	public function set_status( $status ) {
-		return $this->set_prop( 'status', $status );
+		$this->set_prop( 'status', $status );
 	}
 
 	/**
@@ -257,11 +257,9 @@ class UserActivity extends Model {
 	 * @since 0.1.0
 	 *
 	 * @param  string $start Activity start.
-	 *
-	 * @return int
 	 */
 	public function set_date_start( $date_start ) {
-		return $this->set_prop( 'date_start', $date_start );
+		$this->set_date_prop( 'date_start', $date_start );
 	}
 
 	/**
@@ -270,11 +268,9 @@ class UserActivity extends Model {
 	 * @since 0.1.0
 	 *
 	 * @param  string $update Activity update.
-	 *
-	 * @return int
 	 */
 	public function set_date_update( $date_update ) {
-		return $this->set_prop( 'date_update', $date_update );
+		$this->set_date_prop( 'date_update', $date_update );
 	}
 
 	/**
@@ -283,10 +279,8 @@ class UserActivity extends Model {
 	 * @since 0.1.0
 	 *
 	 * @param  string $complete Activity complete.
-	 *
-	 * @return int
 	 */
 	public function set_date_complete( $date_complete ) {
-		return $this->set_prop( 'date_complete', $date_complete );
+		$this->set_date_prop( 'date_complete', $date_complete );
 	}
 }

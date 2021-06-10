@@ -30,11 +30,20 @@ import {
 	BiTrash,
 } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
+
+const makeOrderNumberLabel = (order: any) => {
+	if (order.billing.first_name || order.billing.last_name) {
+		return `#${order.id} ${order.billing.first_name} ${order.billing.last_name}`.trim();
+	} else if (order.billing.company) {
+		return `#${order.id} ${order.billing.company}`.trim();
+	}
+	return `#${order.id}`;
+};
 
 interface BillingAdress {
 	first_name: string;
@@ -47,25 +56,30 @@ interface BillingAdress {
 	postcode: string;
 	country: string;
 }
-interface Props {
+interface Order {
 	id: number;
 	order_number: string;
-	createdOn: any;
-	status?: any;
-	total?: string;
-	currency?: string;
+	date_created: any;
+	status: any;
+	total: string;
+	currency: string;
 	billing: BillingAdress;
+}
+interface Props {
+	data: Order;
 }
 
 const OrderRow: React.FC<Props> = (props) => {
-	const { id, order_number, createdOn, status, total, currency, billing } = props;
+	const { data } = props;
+	const { id, status, total, currency, billing } = data;
+	const order_number = makeOrderNumberLabel(data);
 	const queryClient = useQueryClient();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const [isOrderPreviewModalOpen, setOrderPreviewModalOpen] = useState(false);
 	const ordersAPI = new API(urls.orders);
 	const cancelDeleteModalRef = useRef<any>();
 	const cancelOrderPreviewModalRef = useRef<any>();
-	const createdOnDate = createdOn.split(' ')[0];
+	const createdOnDate = data.date_created.date.split(' ')[0];
 
 	const deleteOrder = useMutation((id: number) => ordersAPI.delete(id), {
 		onSuccess: () => {
@@ -98,8 +112,7 @@ const OrderRow: React.FC<Props> = (props) => {
 					as={RouterLink}
 					to={routes.orders.edit.replace(':orderId', id.toString())}
 					fontWeight="semibold"
-					_hover={{ color: 'blue.500' }}
-				>
+					_hover={{ color: 'blue.500' }}>
 					{order_number}
 				</Link>
 			</Td>
@@ -114,10 +127,14 @@ const OrderRow: React.FC<Props> = (props) => {
 			<Td>
 				<Badge>{status}</Badge>
 			</Td>
-			<Td>{currency}{total}</Td>
+			<Td>
+				{currency}
+				{total}
+			</Td>
 			<Td>
 				<ButtonGroup>
-					<RouterLink to={routes.orders.edit.replace(':orderId', id.toString())}>
+					<RouterLink
+						to={routes.orders.edit.replace(':orderId', id.toString())}>
 						<Button leftIcon={<BiEdit />} colorScheme="blue" size="sm">
 							{__('Edit')}
 						</Button>
@@ -150,10 +167,16 @@ const OrderRow: React.FC<Props> = (props) => {
 					leastDestructiveRef={cancelOrderPreviewModalRef}>
 					<AlertDialogOverlay>
 						<AlertDialogContent>
-							<AlertDialogHeader>{__('Order', 'masteriyo')} {order_number}</AlertDialogHeader>
+							<AlertDialogHeader>
+								{__('Order', 'masteriyo')} {order_number}
+							</AlertDialogHeader>
 							<AlertDialogBody>
-								<div><strong>Billing details</strong></div>
-								<div>{billing.first_name} {billing.last_name}</div>
+								<div>
+									<strong>{__('Billing details', 'masteriyo')}</strong>
+								</div>
+								<div>
+									{billing.first_name} {billing.last_name}
+								</div>
 								<div>{billing.company}</div>
 								<div>{billing.address_1}</div>
 								<div>{billing.address_2}</div>
@@ -172,10 +195,9 @@ const OrderRow: React.FC<Props> = (props) => {
 									</Button>
 									<Link
 										as={RouterLink}
-										to={routes.orders.edit.replace(':orderId', id.toString())}
-									>
+										to={routes.orders.edit.replace(':orderId', id.toString())}>
 										<Button colorScheme="blue">
-												{__('Edit', 'masteriyo')}
+											{__('Edit', 'masteriyo')}
 										</Button>
 									</Link>
 								</ButtonGroup>
@@ -196,10 +218,7 @@ const OrderRow: React.FC<Props> = (props) => {
 								{__('Delete Order')} {order_number}
 							</AlertDialogHeader>
 							<AlertDialogBody>
-								{__(
-									"Are you sure? You can't restore this order.",
-									'masteriyo'
-								)}
+								{__("Are you sure? You can't restore this order.", 'masteriyo')}
 							</AlertDialogBody>
 							<AlertDialogFooter>
 								<ButtonGroup>

@@ -47,7 +47,7 @@ const Header: React.FC<Props> = (props) => {
 		<Box bg="white" w="full">
 			<Container maxW="container.xl" bg="white">
 				<Flex direction="row" justifyContent="space-between" align="center">
-					<Stack direction="row" spacing="12" align="center">
+					<Stack direction="row" spacing="12" align="center" minHeight="16">
 						<Box>
 							<RouterLink to={routes.courses.list}>
 								<Image src={Logo} alt="Masteriyo Logo" w="120px" />

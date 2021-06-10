@@ -4,7 +4,7 @@ import React from 'react';
 
 import Footer from './Footer';
 import MainLogo from './Logo';
-import MainTab from './MainTab';
+import SetupWizard from './SetupWizard';
 
 const MainLayout: React.FC = () => {
 	return (
@@ -13,10 +13,8 @@ const MainLayout: React.FC = () => {
 				<MainLogo />
 
 				<Box w="full">
-					<Container maxW="container.lg" centerContent>
-						<Box w="full">
-							<MainTab />
-						</Box>
+					<Container maxW="container.xl">
+						<SetupWizard />
 					</Container>
 				</Box>
 

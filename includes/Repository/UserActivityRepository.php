@@ -7,9 +7,10 @@
 
 namespace ThemeGrill\Masteriyo\Repository;
 
+use ThemeGrill\Masteriyo\MetaData;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\UserActivity;
-use ThemeGrill\Masteriyo\Helper\Number;
+use ThemeGrill\Masteriyo\Repository\AbstractRepository;
 
 /**
  * User Activity repository class.
@@ -42,13 +43,12 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 			$user_activity->set_date_update( current_time( 'mysql', true ) );
 		}
 
-		if ( empty( $user_activity->get_type( 'edit' ) ) ) {
-			$user_activity->set_type( 'course' );
-		}
-
-		if ( empty( $user_activity->get_status( 'edit' ) ) ) {
+		if ( ! $user_activity->get_status( 'edit' ) ) {
 			$user_activity->set_status( 'begin' );
 		}
+
+		$date_complete = $user_activity->get_date_complete( 'edit' );
+		$date_complete = is_null( $date_complete ) ? null : $date_complete->getTimestamp();
 
 		$result = $wpdb->insert(
 			$user_activity->get_table_name(),
@@ -59,9 +59,9 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 					'item_id'           => $user_activity->get_item_id( 'edit' ),
 					'activity_type'     => $user_activity->get_type( 'edit' ),
 					'activity_status'   => $user_activity->get_status( 'edit' ),
-					'activity_start'    => $user_activity->get_date_start( 'edit' ),
-					'activity_update'   => $user_activity->get_date_update( 'edit' ),
-					'activity_complete' => $user_activity->get_date_complete( 'edit' ),
+					'activity_start'    => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_start( 'edit' )->getTimestamp() ),
+					'activity_update'   => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_update( 'edit' )->getTimestamp() ),
+					'activity_complete' => gmdate( 'Y-m-d H:i:s', $date_complete ),
 				),
 				$user_activity
 			),
@@ -81,51 +81,65 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 	}
 
 	/**
-	 * Update a order item in the database.
+	 * Update a user activity item in the database.
 	 *
 	 * @since 0.1.0
-	 * @param OrderItem $item Order item object.
+	 * @param UserActivity $user_activity User activity object.
 	 */
-	public function update( Model &$item ) {
+	public function update( Model &$user_activity ) {
 		global $wpdb;
 
-		$changes = $item->get_changes();
+		$changes = $user_activity->get_changes();
 
-		if ( array_intersect( array( 'user_activity_name', 'order_id' ), array_keys( $changes ) ) ) {
+		$user_activity_data_keys = array(
+			'user_id',
+			'item_id',
+			'type',
+			'status',
+			'date_start',
+			'date_update',
+			'date_complete',
+		);
+
+		if ( array_intersect( $user_activity_data_keys, array_keys( $changes ) ) ) {
 			$wpdb->update(
-				$wpdb->prefix . 'masteriyo_user_activitys',
+				$wpdb->prefix . 'masteriyo_user_activities',
 				array(
-					'user_activity_name' => $item->get_name(),
-					'user_activity_type' => $item->get_type(),
-					'order_id'           => $item->get_order_id(),
+					'user_id'           => $user_activity->get_user_id( 'edit' ),
+					'item_id'           => $user_activity->get_item_id( 'edit' ),
+					'activity_type'     => $user_activity->get_type( 'edit' ),
+					'activity_status'   => $user_activity->get_status( 'edit' ),
+					'activity_start'    => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_start( 'edit' )->getTimestamp() ),
+					'activity_update'   => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_update( 'edit' )->getTimestamp() ),
+					'activity_complete' => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_complete( 'edit' )->getTimestamp() ),
 				),
-				array( 'user_activity_id' => $item->get_id() )
+				array( 'activity_id' => $user_activity->get_id() )
 			);
 		}
 
-		$this->update_custom_table_meta( $item );
-		$item->save_meta_data();
-		$item->apply_changes();
-		$this->clear_cache( $item );
+		$this->update_custom_table_meta( $user_activity );
+		$user_activity->save_meta_data();
+		$user_activity->apply_changes();
+		$this->clear_cache( $user_activity );
 
-		do_action( 'masteriyo_update_user_activity', $item->get_id(), $item, $item->get_order_id() );
+		do_action( 'masteriyo_update_user_activity', $user_activity->get_id(), $user_activity );
 	}
 
 	/**
-	 * Remove an order item from the database.
+	 * Remove an user activity from the database.
 	 *
 	 * @since 0.1.0
-	 * @param UserActivity $item Order item object.
+	 * @param UserActivity $user_activity User activity object.
 	 * @param array         $args Array of args to pass to the delete method.
 	 */
 	public function delete( &$user_activity, $args = array() ) {
 		global $wpdb;
 
 		if ( $user_activity->get_id() ) {
-			do_action( 'masteriyo_before_delete_user_activity', $user_activity->get_id() );
+			do_action( 'masteriyo_before_delete_user_activities', $user_activity->get_id() );
 
-			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activitys', array( 'user_activity_id' => $user_activity->get_id() ) );
-			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activitymeta', array( 'user_activity_id' => $user_activity->get_id() ) );
+			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_activities', array( 'activity_id' => $user_activity->get_id() ) );
+			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_activitymeta', array( 'user_activity_id' => $user_activity->get_id() ) );
 
 			do_action( 'masteriyo_delete_user_activity', $user_activity->get_id() );
 
@@ -140,17 +154,10 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 	 *
 	 * @param UserActivity $user_activity User activity object.
 	 *
-	 * @throws Exception If invalid order item.
+	 * @throws Exception If invalid user activity object.
 	 */
 	public function read( &$user_activity ) {
 		global $wpdb;
-
-		// Get from cache if available.
-		$cache_user_activity = wp_cache_get( 'item-' . $user_activity->get_id(), 'user-activities' );
-
-		if ( is_a( $cache_user_activity, 'ThemeGrill\Masteriyo\Database\Model' ) ) {
-			return $cache_user_activity;
-		}
 
 		$result = $wpdb->get_row(
 			$wpdb->prepare(
@@ -159,8 +166,8 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 			)
 		);
 
-		if ( ! $user_activity ) {
-			throw new Exception( __( 'Invalid user activity.', 'masteriyo' ) );
+		if ( ! $result ) {
+			throw new \Exception( __( 'Invalid user activity.', 'masteriyo' ) );
 		}
 
 		$user_activity->set_props(
@@ -169,15 +176,16 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 				'item_id'       => $result->item_id,
 				'type'          => $result->activity_type,
 				'status'        => $result->activity_status,
-				'date_start'    => $result->activity_start,
-				'date_update'   => $result->activity_update,
-				'date_complete' => $result->activity_complete,
+				'date_start'    => $this->string_to_timestamp( $result->activity_start ),
+				'date_update'   => $this->string_to_timestamp( $result->activity_update ),
+				'date_complete' => $this->string_to_timestamp( $result->activity_complete ),
 			)
 		);
 
 		$user_activity->read_meta_data();
+		$user_activity->set_object_read( true );
 
-		wp_cache_set( 'item-' . $user_activity->get_id(), $user_activity, 'user-activities' );
+		do_action( 'masteriyo_user_activity_read', $user_activity->get_id(), $user_activity );
 	}
 
 	/**
@@ -185,12 +193,12 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param UserActivity $item Order item object.
+	 * @param UserActivity $user_activity User activity object.
 	 */
-	public function clear_cache( &$item ) {
-		wp_cache_delete( 'user-activity-' . $item->get_id(), 'masteriyo-user-activities' );
-		wp_cache_delete( 'user-activities-' . $item->get_id(), 'masteriyo-user-activities' );
-		wp_cache_delete( $item->get_id(), $this->meta_type . '_meta' );
+	public function clear_cache( &$user_activity ) {
+		wp_cache_delete( 'item' . $user_activity->get_id(), 'masteriyo-user-activities' );
+		wp_cache_delete( 'items-' . $user_activity->get_id(), 'masteriyo-user-activities' );
+		wp_cache_delete( $user_activity->get_id(), $this->meta_type . '_meta' );
 	}
 
 	/**
@@ -204,7 +212,8 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 	public function query( $query_vars ) {
 		global $wpdb;
 
-		$sql[] = "SELECT * FROM {$wpdb->base_prefix}masteriyo_user_activities";
+		$search_criteria = array();
+		$sql[]           = "SELECT * FROM {$wpdb->base_prefix}masteriyo_user_activities";
 
 		if ( ! empty( $query_vars['user_id'] ) ) {
 			$search_criteria[] = $wpdb->prepare( 'user_id = %d', $query_vars['user_id'] );

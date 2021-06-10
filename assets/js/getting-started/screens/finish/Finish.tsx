@@ -47,7 +47,7 @@ const Welcome: React.FC<Props> = (props) => {
 						<Link
 							textDecoration="underline"
 							fontSize="12px"
-							color="#78A6FF"
+							color="blue.400"
 							href={siteURL ? siteURL : '#'}>
 							{__('Visit your site', 'masteriyo')}
 						</Link>

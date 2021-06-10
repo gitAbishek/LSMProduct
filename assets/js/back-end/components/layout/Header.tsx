@@ -26,7 +26,11 @@ interface Props {
 }
 
 const Header: React.FC<Props> = (props) => {
+<<<<<<< HEAD
 	const { hideAddNewCourseBtn, hideCoursesMenu } = props;
+=======
+	const { hideAddNewCourseBtn } = props;
+>>>>>>> ba969ac1 (Tweak some variables)
 
 	const navLinkStyles = {
 		mr: '10',
@@ -80,7 +84,7 @@ const Header: React.FC<Props> = (props) => {
 						)}
 					</Stack>
 
-					{children}
+					{props.children}
 
 					{!hideAddNewCourseBtn && (
 						<ButtonGroup>

@@ -181,25 +181,9 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-<<<<<<< HEAD
 #: assets/js/back-end/screens/courses/AllCourses.tsx:45
 #: assets/js/back-end/screens/orders/AllOrders.tsx:52
 msgid "Date"
-=======
-#: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:46
-#: assets/js/back-end/screens/course-categories/components/SlugInput.tsx:24
-#: assets/js/back-end/screens/course-difficulties/AllCourseDifficulties.tsx:46
-#: assets/js/back-end/screens/course-difficulties/components/SlugInput.tsx:24
-#: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:44
-#: assets/js/back-end/screens/course-tags/components/SlugInput.tsx:24
-msgid "Slug"
-msgstr ""
-
-#: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:47
-#: assets/js/back-end/screens/course-difficulties/AllCourseDifficulties.tsx:47
-#: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:45
-msgid "Count"
->>>>>>> 55d5286f (Pot file)
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:48

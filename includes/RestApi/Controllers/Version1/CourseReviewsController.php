@@ -254,6 +254,7 @@ class CourseReviewsController extends CommentsController {
 			'author_url'   => $course_review->get_author_url( $context ),
 			'ip_address'   => $course_review->get_ip_address( $context ),
 			'date_created' => $course_review->get_date_created( $context ),
+			'title'        => $course_review->get_title( $context ),
 			'description'  => $course_review->get_content( $context ),
 			'karma'        => $course_review->get_karma( $context ),
 			'status'       => $course_review->get_status( $context ),
@@ -355,6 +356,18 @@ class CourseReviewsController extends CommentsController {
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
+				'title'  => array(
+					'description' => __( 'Course Review Title.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+					'required'    => true,
+				),
+				'content'  => array(
+					'description' => __( 'Course Review Content.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+					'required'    => true,
+				),
 				'karma'        => array(
 					'description' => __( 'Course Review Karma.', 'masteriyo' ),
 					'type'        => 'integer',
@@ -428,14 +441,26 @@ class CourseReviewsController extends CommentsController {
 	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-
 		$id            = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
 		$course_review = masteriyo( 'course_review' );
+		$user          = masteriyo_get_current_user();
 
 		if ( 0 !== $id ) {
 			$course_review->set_id( $id );
 			$course_review_repo = masteriyo( \ThemeGrill\Masteriyo\Repository\CourseReviewRepository::class );
 			$course_review_repo->read( $course_review );
+		}
+
+		if (
+			! is_null( $user ) &&
+			! isset( $request['author_id'] ) &&
+			! isset( $request['author_name'] ) &&
+			! isset( $request['author_email'] )
+		) {
+			$course_review->set_author_id( $user->get_id() );
+			$course_review->set_author_email( $user->get_email() );
+			$course_review->set_author_name( $user->get_display_name() );
+			$course_review->set_author_url( $user->get_url() );
 		}
 
 		// Course Review Author.
@@ -461,6 +486,11 @@ class CourseReviewsController extends CommentsController {
 		// Course Review Date.
 		if ( isset( $request['date_created'] ) ) {
 			$course_review->set_date_created( $request['date_created'] );
+		}
+
+		// Course Review Title.
+		if ( isset( $request['title'] ) ) {
+			$course_review->set_title( $request['title'] );
 		}
 
 		// Course Review Content.
@@ -612,12 +642,19 @@ class CourseReviewsController extends CommentsController {
 	 * @return WP_Error|boolean
 	 */
 	public function delete_item_permissions_check( $request ) {
+		// return new \WP_Error(
+		// 	'masteriyo_null_permission',
+		// 	__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+		// );
 		if ( is_null( $this->permission ) ) {
 			return new \WP_Error(
 				'masteriyo_null_permission',
 				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
 			);
 		}
+
+		$is_logged_in = is_user_logged_in();
+		$user_id = get_current_user_id();
 
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
 			return true;

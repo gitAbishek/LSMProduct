@@ -16,6 +16,14 @@ use ThemeGrill\Masteriyo\Models\CourseReview;
  * CourseReview Repository class.
  */
 class CourseReviewRepository extends AbstractRepository implements RepositoryInterface {
+	/**
+	 * Meta type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $meta_type = 'comment';
 
 	/**
 	 * Data stored in meta keys, but not considered "meta".
@@ -23,7 +31,9 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	 * @since 0.1.0
 	 * @var array
 	 */
-	protected $internal_meta_keys = array();
+	protected $internal_meta_keys = array(
+		'title' => '_title',
+	);
 
 	/**
 	 * Create course review (comment) in database.
@@ -66,6 +76,9 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 
 		if ( $id && ! is_wp_error( $id ) ) {
 			$course_review->set_id( $id );
+			$this->update_comment_meta( $course_review, true );
+
+			$course_review->save_meta_data();
 			$course_review->apply_changes();
 
 			do_action( 'masteriyo_new_course_review', $id, $course_review );
@@ -114,7 +127,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			)
 		);
 
-		$this->read_comment_data( $course_review_obj );
+		$this->read_comment_data( $course_review );
 		$this->read_extra_data( $course_review );
 		$course_review->set_object_read( true );
 
@@ -160,6 +173,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			wp_update_comment( array_merge( array( 'comment_ID' => $course_review->get_id() ), $course_review_data ) );
 		}
 
+		$this->update_comment_meta( $course_review );
 		$course_review->apply_changes();
 
 		do_action( 'masteriyo_update_course_review', $course_review->get_id(), $course_review );
@@ -207,7 +221,26 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	 *
 	 * @param User $course_review Course review object.
 	 */
-	protected function read_comment_data( &$course_review ) {}
+	protected function read_comment_data( &$course_review ) {
+		$id          = $course_review->get_id();
+		$meta_values = $this->read_meta( $course_review );
+		$set_props   = array();
+		$meta_values = array_reduce(
+			$meta_values,
+			function( $result, $meta_value ) {
+				$result[ $meta_value->key ][] = $meta_value->value;
+				return $result;
+			},
+			array()
+		);
+
+		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
+			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
+			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
+		}
+
+		$course_review->set_props( $set_props );
+	}
 
 	/**
 	 * Read extra data associated with the course review.

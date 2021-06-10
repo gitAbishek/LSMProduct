@@ -263,6 +263,34 @@ abstract class AbstractRepository {
 	 *
 	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
 	 *
+	 * @param Model $object The Model object.
+	 * @param string  $meta_key Meta key to update.
+	 * @param mixed   $meta_value Value to save.
+	 *
+	 *
+	 * @return bool True if updated/deleted.
+	 */
+	protected function update_or_delete_comment_meta( $object, $meta_key, $meta_value ) {
+		if ( in_array( $meta_value, array( array(), '' ), true ) && ! in_array( $meta_key, $this->get_must_exist_meta_keys(), true ) ) {
+			$updated = delete_comment_meta( $object->get_id(), $meta_key );
+		} else {
+			$updated = update_comment_meta( $object->get_id(), $meta_key, $meta_value );
+		}
+
+		return (bool) $updated;
+	}
+
+	/**
+	 * Update meta data in, or delete it from, the database.
+	 *
+	 * Avoids storing meta when it's either an empty string or empty array.
+	 * Other empty values such as numeric 0 and null should still be stored.
+	 * Data-stores can force meta to exist using `must_exist_meta_keys`.
+	 *
+	 * Note: WordPress `get_metadata` function returns an empty string when meta data does not exist.
+	 *
+	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
+	 *
 	 * @param Model $object The WP_Data object.
 	 * @param string  $meta_key Meta key to update.
 	 * @param mixed   $meta_value Value to save.
@@ -651,6 +679,63 @@ abstract class AbstractRepository {
 					$value   = $model->{$function}( 'edit' );
 					$value   = is_string( $value ) ? wp_slash( $value ) : $value;
 					$updated = $this->update_or_delete_post_meta( $model, $meta_key, $value );
+
+					if ( $updated ) {
+						$this->updated_props[] = $key;
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Helper method that updates all the comments meta for a model based on it's settings in the Model class.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Model $model model object.
+	 * @param bool  $force Force update. Used during create.
+	 */
+	protected function update_comment_meta( &$model, $force = false ) {
+		// Make sure to take extra data into account.
+		$extra_data_keys = $model->get_extra_data_keys();
+
+		foreach ( $extra_data_keys as $key ) {
+			$meta_key_to_props[ '_' . $key ] = $key;
+		}
+
+		if ( $force ) {
+			$props_to_update = $this->get_internal_meta_keys();
+		} else {
+			$props_to_update = $this->get_props_to_update( $model, $this->get_internal_meta_keys(), 'comment' );
+		}
+
+		foreach ( $props_to_update as $prop => $meta_key ) {
+			if ( ! is_callable( array( $model, "get_{$prop}" ) ) ) {
+				continue;
+			}
+
+			$value = $model->{"get_$prop"}( 'edit' );
+			$value = is_string( $value ) ? wp_slash( $value ) : $value;
+			$updated = $this->update_or_delete_comment_meta( $model, $meta_key, $value );
+
+			if ( $updated ) {
+				$this->updated_props[] = $prop;
+			}
+		}
+
+		// Update extra data associated with the model like button text or model URL for external models.
+		if ( ! $this->extra_data_saved ) {
+			foreach ( $extra_data_keys as $key ) {
+				$meta_key = '_' . $key;
+				$function = 'get_' . $key;
+				if ( ! array_key_exists( $meta_key, $props_to_update ) ) {
+					continue;
+				}
+				if ( is_callable( array( $model, $function ) ) ) {
+					$value   = $model->{$function}( 'edit' );
+					$value   = is_string( $value ) ? wp_slash( $value ) : $value;
+					$updated = $this->update_or_delete_comment_meta( $model, $meta_key, $value );
 
 					if ( $updated ) {
 						$this->updated_props[] = $key;

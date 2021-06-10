@@ -56,6 +56,7 @@ class CourseReview extends Model {
 		'author_url'   => '',
 		'ip_address'   => '',
 		'date_created' => null,
+		'title'        => '',
 		'content'      => '',
 		'karma'        => 0,
 		'status'       => 'approve',
@@ -158,6 +159,19 @@ class CourseReview extends Model {
 	 */
 	public function get_date_created( $context = 'view' ) {
 		return $this->get_prop( 'date_created', $context );
+	}
+
+	/**
+	 * Get title.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_title( $context = 'view' ) {
+		return $this->get_prop( 'title', $context );
 	}
 
 	/**
@@ -321,6 +335,17 @@ class CourseReview extends Model {
 	 */
 	public function set_date_created( $date_created ) {
 		$this->set_prop( 'date_created', $date_created );
+	}
+
+	/**
+	 * Set title.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $title Comment title.
+	 */
+	public function set_title( $title ) {
+		$this->set_prop( 'title', $title );
 	}
 
 	/**

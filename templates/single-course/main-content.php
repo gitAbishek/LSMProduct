@@ -33,7 +33,7 @@ do_action( 'masteriyo_before_single_course_main_content' );
 		<?php do_action( 'masteriyo_single_course_faqs_content' ); ?>
 	</div>
 
-	<div id="tab4Content" class="mto-hidden">
+	<div id="tab4Content" class="tab-content course-reviews mto-hidden">
 		<?php masteriyo_get_template( 'single-course/tab-content-reviews.php' ); ?>
 	</div>
 </div>

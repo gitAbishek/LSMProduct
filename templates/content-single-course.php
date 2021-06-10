@@ -14,9 +14,11 @@ global $course;
  */
 do_action( 'masteriyo_before_single_course_content' );
 
+masteriyo_display_all_notices();
+
 ?>
 
-<div id="course-<?php the_ID(); ?>" class="mto-scourse">
+<div id="course-<?php the_ID(); ?>" class="mto-scourse" style="width:100%;">
 	<div class="mto-scourse--main">
 		<?php masteriyo_get_template( 'single-course/main-content.php' ); ?>
 	</div>

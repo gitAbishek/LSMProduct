@@ -61,11 +61,11 @@ class Onboard {
 			return;
 		}
 
-		$onboard_dependencies = include_once MASTERIYO_PLUGIN_DIR . '/assets/js/build/gettingStarted.asset.php';
+		$onboard_dependencies = include_once MASTERIYO_PLUGIN_DIR . '/assets/js/build/masteriyo-gettingStarted.asset.php';
 
 		wp_register_script(
 			'masteriyo-onboarding',
-			plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . '/assets/js/build/gettingStarted.js',
+			plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . '/assets/js/build/masteriyo-gettingStarted.js',
 			$onboard_dependencies['dependencies'],
 			$onboard_dependencies['version'],
 			true
@@ -74,7 +74,7 @@ class Onboard {
 		// Add localization vars.
 		wp_localize_script(
 			'masteriyo-onboarding',
-			'masteriyo',
+			'_MASTERIYO_',
 			array(
 				'rootApiUrl'           => esc_url_raw( untrailingslashit( rest_url() ) ),
 				'nonce'                => wp_create_nonce( 'wp_rest' ),
@@ -83,9 +83,7 @@ class Onboard {
 				'pluginUrl'            => esc_url( plugin_dir_url( MASTERIYO_PLUGIN_FILE ) ),
 				'permalinkStructure'   => get_option( 'permalink_structure' ),
 				'permalinkOptionsPage' => esc_url( admin_url( 'options-permalink.php' ) ),
-				'currencies'           => masteriyo_get_currency_options(),
-				'pagesOptions'         => masteriyo_get_pages_option(),
-				'pageBuilderURL'       => esc_url( admin_url( '/admin.php?page=masteriyo#/builder' ) ),
+				'pageBuilderURL'       => esc_url( admin_url( '/admin.php?page=masteriyo#/courses/add-new-course' ) ),
 			)
 		);
 

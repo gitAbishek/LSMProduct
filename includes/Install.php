@@ -194,10 +194,13 @@ class Install {
 			`meta_id` BIGINT UNSIGNED AUTO_INCREMENT,
 			`user_activity_id` BIGINT UNSIGNED NOT NULL,
 			`meta_key` VARCHAR(255) NOT NULL,
+			`meta_type` VARCHAR(255) NOT NULL,
 			`meta_value` LONGTEXT,
+			`extra_value` LONGTEXT,
 			PRIMARY KEY (`meta_id`),
 			KEY `user_activity_id` (`user_activity_id`),
 			KEY `meta_key` (`meta_key`(191))
+			KEY `meta_type` (`meta_type`(191))
 		) $charset_collate;";
 
 		return $sql;

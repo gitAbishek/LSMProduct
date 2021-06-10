@@ -145,6 +145,7 @@
 				$form.find('input[name="content"]').val(content);
 				$submit_button.text('Update');
 
+				$form.find('input[name="title"]').focus();
 				$('html, body').animate(
 					{
 						scrollTop: $form.offset().top,

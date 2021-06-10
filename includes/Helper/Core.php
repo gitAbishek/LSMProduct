@@ -200,6 +200,21 @@ function masteriyo_get_faqs( $args = array() ) {
 }
 
 /**
+ * Get course reviews.
+ *
+ * @since 0.1.0
+ *
+ * @param array $args Query arguments.
+ *
+ * @return object|array[CourseReview]
+ */
+function masteriyo_get_course_reviews( $args = array() ) {
+	$course_reviews = masteriyo( 'query.course-reviews' )->set_args( $args )->get_courses_reviews();
+
+	return apply_filters( 'masteriyo_get_course_reviews', $course_reviews, $args );
+}
+
+/**
  * Get quiz.
  *
  * @since 0.1.0
@@ -2626,4 +2641,45 @@ function masteriyo_get_user_activity_statuses() {
 function masteriyo_get_current_ip_address() {
 	$geolocation = Geolocation::geolocate_ip( '', true );
 	return $geolocation['ip_address'];
+}
+function masteriyo_create_course_review( $args ) {
+	$id            = isset( $args['id'] ) ? absint( $args['id'] ) : 0;
+	$course_review = masteriyo( 'course_review' );
+	$user          = masteriyo_get_user( get_current_user_id() );
+
+	if ( 0 !== $id ) {
+		$course_review->set_id( $id );
+		$course_review_repo = masteriyo( 'course_review.store' );
+		$course_review_repo->read( $course_review );
+	}
+
+	if ( ! is_null( $user ) ) {
+		$course_review->set_author_id( $user->get_id() );
+		$course_review->set_author_email( $user->get_email() );
+		$course_review->set_author_name( $user->get_display_name() );
+		$course_review->set_author_url( $user->get_url() );
+	}
+
+	// Course Review Content.
+	if ( isset( $args['content'] ) ) {
+		$course_review->set_content( $args['content'] );
+	}
+
+	// Course Review Rating.
+	if ( isset( $args['rating'] ) ) {
+		$course_review->set_karma( $args['rating'] );
+	}
+
+	// $message = apply_filters( 'masteriyo_registration_error_email_exists', __( 'An account is already registered with your email address.', 'masteriyo' ), $email );
+	// return new \WP_Error( 'registration-error-email-exists', $message );
+
+	$course_review->save();
+
+	$course_review = masteriyo_get_course_review( $course_review->get_id() );
+
+	if ( ! $course_review ) {
+		return new \WP_Error( 'course-review-submission-error', __( 'Could not submit the course review.', 'masteriyo' ) );
+	}
+
+	return $course_review;
 }

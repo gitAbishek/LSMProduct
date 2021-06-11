@@ -74,3 +74,103 @@
   border-radius: 100px;
   padding: 8px 16px;
 }
+
+.mto-title,
+.mto-message {
+  .mto-label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .mto-input {
+    border: 1px solid #ebecf2;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 0px #eff0f6;
+    border-radius: 3px;
+  }
+}
+
+.mto-review {
+  border-bottom: 1px solid $mto-border-color;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+
+  .mto-avatar {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  .mto-right {
+    margin-left: 18px;
+    max-width: 90%;
+
+    .rating {
+      margin-bottom: 14px;
+    }
+
+    .author-name {
+      color: $mto-primary-color;
+      text-decoration: underline;
+      margin-right: 16px;
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    .date-created {
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    .title {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      margin-top: 24px;
+      margin-bottom: 16px;
+    }
+
+    .content {
+      font-size: 16px;
+      line-height: 27px;
+    }
+  }
+}
+
+// form
+.mto-submit-review-form {
+  .mto-btn-primary {
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+}
+
+.mto-btngroup {
+  margin-top: 16px;
+}
+
+.mto-maintitle {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+  margin-bottom: 32px;
+  margin-top: 48px;
+}
+
+.mto-delete-course-review {
+  margin-left: 16px;
+}
+
+.boxshadow-none {
+  box-shadow: none !important;
+  padding: 0px;
+}
+
+.mto-flex-column {
+  flex-direction: column;
+}

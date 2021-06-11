@@ -64,7 +64,7 @@
   @include mto-default-animate;
   padding: 30px;
   flex: 1 1 30%;
-  background: $mto-$mto-white-color-color;
+  // background: $mto-$mto-white-color-color;
 
   &:hover {
     @include mto-shadow-1;

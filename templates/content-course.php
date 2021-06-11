@@ -75,7 +75,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 					<time class="mto-inline-block mto-text-sm">10:00 min</time>
 				</span>
 				<a href="?add-to-cart=<?php echo absint( $course->get_id() ); ?>" class="mto-course--btn mto-btn mto-btn-primary">
-					<?php apply_filters( 'masteriyo_add_to_cart_text', esc_html_e( 'Enroll Now', 'masteriyo' ) ); ?>
+					<?php apply_filters( 'masteriyo_add_to_cart_text', esc_html_e( 'Add to cart', 'masteriyo' ) ); ?>
 				</a>
 			</div>
 		</div>

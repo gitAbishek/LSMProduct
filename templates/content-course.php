@@ -27,9 +27,11 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 	<div class="mto-course--card">
 		<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php esc_attr( $course->get_name() ); ?>">
 			<div class="mto-course--img-wrap">
+			<?php if ( $course->is_purchasable() ) : ?>
 				<span class="mto-course--price-tag">
 					<?php echo masteriyo_price( $course->get_price() ); ?>
 				</span>
+			<?php endif; ?>
 
 				<!-- Featured Image -->
 				<?php if ( empty( $course->get_featured_image_url() ) ) : ?>
@@ -74,9 +76,11 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 
 					<time class="mto-inline-block mto-text-sm">10:00 min</time>
 				</span>
+			<?php if ( $course->is_purchasable() ) : ?>
 				<a href="?add-to-cart=<?php echo absint( $course->get_id() ); ?>" class="mto-course--btn mto-btn mto-btn-primary">
 					<?php apply_filters( 'masteriyo_add_to_cart_text', esc_html_e( 'Add to cart', 'masteriyo' ) ); ?>
 				</a>
+			<?php endif; ?>
 			</div>
 		</div>
 	</div>

@@ -55,7 +55,15 @@ const config = {
 
 	plugins: [
 		new HtmlWebpackPlugin({
+			filename: 'index.html',
+			chunks: ['backend'],
 			template: './assets/js/back-end/index.html',
+		}),
+
+		new HtmlWebpackPlugin({
+			filename: 'interactive.html',
+			chunks: ['interactive'],
+			template: './assets/js/interactive/index.html',
 		}),
 
 		new ReactRefreshWebpackPlugin({

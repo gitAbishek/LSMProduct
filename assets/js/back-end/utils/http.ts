@@ -5,11 +5,11 @@ import { isProduction } from './helper';
 
 const configProduction = {
 	//@ts-ignore
-	baseURL: masteriyo.rootApiUrl,
+	baseURL: _MASTERIYO_.rootApiUrl,
 	headers: {
 		'Content-Type': 'application/json',
 		//@ts-ignore
-		'X-WP-Nonce': masteriyo.nonce,
+		'X-WP-Nonce': _MASTERIYO_.nonce,
 	},
 };
 

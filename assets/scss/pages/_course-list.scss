@@ -174,3 +174,10 @@
 .mto-flex-column {
   flex-direction: column;
 }
+
+.mto-login-msg {
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 32px;
+  color: $mto-light-text-color;
+}

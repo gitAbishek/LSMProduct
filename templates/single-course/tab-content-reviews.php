@@ -107,7 +107,7 @@ do_action('masteriyo_before_single_course_reviews_content');
 		</form>
 	</div>
 <?php else : ?>
-	<div>You must be <a href="<?php echo esc_attr(masteriyo_get_page_permalink('myaccount')); ?>">logged in</a> to
+	<div class="mto-login-msg">You must be <a href="<?php echo esc_attr(masteriyo_get_page_permalink('myaccount')); ?>" class="mto-link-primary">logged in</a> to
 		submit a review</div>
 <?php endif; ?>
 

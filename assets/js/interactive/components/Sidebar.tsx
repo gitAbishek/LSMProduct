@@ -5,24 +5,20 @@ import {
 	useDisclosure,
 	DrawerCloseButton,
 	DrawerBody,
-	Button,
 	DrawerHeader,
 	DrawerFooter,
 	IconButton,
 	Accordion,
-	AccordionButton,
-	AccordionIcon,
-	AccordionItem,
-	AccordionPanel,
 	Spinner,
 	DrawerOverlay,
-	list,
 } from '@chakra-ui/react';
 import React from 'react';
 import { BiMenu } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import API from '../../back-end/utils/api';
 import urls from '../../back-end/constants/urls';
+import SidebarItem from './SidebarItem';
+import { CloseCone } from '../../back-end/constants/images';
 
 const Sidebar = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -34,14 +30,8 @@ const Sidebar = () => {
 		() => courseApi.get(courseId)
 	);
 
-	const listQuery = useQuery(
-		[`list${courseId}`, courseId],
-		() => listApi.get(courseId),
-		{
-			onSuccess: (data) => {
-				console.log(data);
-			},
-		}
+	const listQuery = useQuery([`list${courseId}`, courseId], () =>
+		listApi.get(courseId)
 	);
 
 	if (coursesQuery.isLoading || listQuery.isLoading) {
@@ -60,35 +50,45 @@ const Sidebar = () => {
 				aria-label="open sidebar"
 			/>
 			<Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-				{/* <DrawerOverlay /> */}
+				<DrawerOverlay bg="rgba(255,255,255,0.1)" />
 				<DrawerContent>
-					<DrawerCloseButton />
-					<DrawerHeader bg="blue.500" color="white" fontSize="md">
+					<DrawerCloseButton
+						sx={{
+							position: 'absolute',
+							right: '-35px',
+							backgroundImage: `url(${CloseCone})`,
+							backgroundSize: 'cover',
+							width: '36px',
+							height: '60px',
+							color: 'white',
+							fontSize: '12',
+						}}
+						_hover={{
+							backgroundImage: `url(${CloseCone})`,
+						}}
+					/>
+					<DrawerHeader
+						bg="blue.500"
+						color="white"
+						fontSize="lg"
+						minH="20"
+						d="flex"
+						alignItems="center"
+						fontWeight="semibold">
 						{coursesQuery.data.name}
 					</DrawerHeader>
-					<DrawerBody px="0">
+					<DrawerBody p="0">
 						<Accordion allowToggle>
 							{listQuery.data.section_order.map((sectionId: any) => {
 								const section = listQuery.data.sections[sectionId];
-
 								return (
-									<AccordionItem key={section.id}>
-										{console.log(section)}
-										<h2>
-											<AccordionButton>
-												<Box flex="1" textAlign="left">
-													{section.name}
-												</Box>
-												<AccordionIcon />
-											</AccordionButton>
-										</h2>
-										<AccordionPanel pb={4}>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-											sed do eiusmod tempor incididunt ut labore et dolore magna
-											aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-											ullamco laboris nisi ut aliquip ex ea commodo consequat.
-										</AccordionPanel>
-									</AccordionItem>
+									<SidebarItem
+										key={section.id}
+										id={section.id}
+										name={section.name}
+										contents={section.contents}
+										contentsMap={listQuery.data.contents}
+									/>
 								);
 							})}
 						</Accordion>

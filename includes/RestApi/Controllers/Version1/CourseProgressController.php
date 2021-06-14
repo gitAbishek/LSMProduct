@@ -1,6 +1,6 @@
 <?php
 /**
- * User activities controller.
+ * Course progress controller.
  *
  * @since 0.1.0
  *
@@ -14,11 +14,13 @@ defined( 'ABSPATH' ) || exit;
 use ThemeGrill\Masteriyo\Helper\Permission;
 use ThemeGrill\Masteriyo\Models\Order\OrderItem;
 use ThemeGrill\Masteriyo\Query\UserActivityQuery;
+use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
+use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\UserActivitiesController;
 
 /**
  * User activities controller class.
  */
-class UserActivitiesController extends CrudController {
+class CourseProgressController extends UserActivitiesController {
 
 	/**
 	 * Endpoint namespace.
@@ -32,14 +34,21 @@ class UserActivitiesController extends CrudController {
 	 *
 	 * @var string
 	 */
-	protected $rest_base = 'user-activities';
+	protected $rest_base = 'course-progress';
 
 	/**
 	 * Object type.
 	 *
 	 * @var string
 	 */
-	protected $object_type = 'user_activity';
+	protected $object_type = 'course_progress';
+
+	/**
+	 * Post type.
+	 *
+	 * @var string
+	 */
+	protected $post_type = 'course_progress';
 
 	/**
 	 * If object is hierarchical.
@@ -78,7 +87,7 @@ class UserActivitiesController extends CrudController {
 	public function register_routes() {
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->rest_base,
+			$this->rest_base,
 			array(
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
@@ -97,7 +106,7 @@ class UserActivitiesController extends CrudController {
 
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->rest_base . '/(?P<id>[\d]+)',
+			$this->rest_base . '/(?P<id>[\d]+)',
 			array(
 				'args'   => array(
 					'id' => array(
@@ -127,7 +136,13 @@ class UserActivitiesController extends CrudController {
 					'methods'             => \WP_REST_Server::DELETABLE,
 					'callback'            => array( $this, 'delete_item' ),
 					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
-					'args'                => array(),
+					'args'                => array(
+						'force' => array(
+							'default'     => false,
+							'description' => __( 'Whether to bypass trash and force deletion.', 'masteriyo' ),
+							'type'        => 'boolean',
+						),
+					),
 				),
 				'schema' => array( $this, 'get_public_item_schema' ),
 			)
@@ -142,97 +157,17 @@ class UserActivitiesController extends CrudController {
 	 * @return array
 	 */
 	public function get_collection_params() {
-		$params['paged'] = array(
-			'description'       => __( 'Paginate the user activities.', 'masteriyo' ),
-			'type'              => 'integer',
-			'default'           => 1,
-			'sanitize_callback' => 'absint',
-			'validate_callback' => 'rest_validate_request_arg',
-			'minimum'           => 1,
-		);
+		$params = parent::get_collection_params();
 
-		$params['per_page'] = array(
-			'description'       => __( 'Limit items per page.', 'masteriyo' ),
-			'type'              => 'integer',
-			'default'           => 10,
-			'minimum'           => 1,
-			'sanitize_callback' => 'absint',
-			'validate_callback' => 'rest_validate_request_arg',
-		);
+		unset( $params['activity_type'] );
+		unset( $params['item_id'] );
 
-		$params['user_id'] = array(
-			'description'       => __( 'User ID.', 'masteriyo' ),
+		$params['course_id'] = array(
+			'description'       => __( 'Course ID.', 'masteriyo' ),
 			'type'              => 'integer',
 			'sanitize_callback' => 'absint',
 			'validate_callback' => 'rest_validate_request_arg',
 			'default'           => 0,
-		);
-
-		$params['item_id'] = array(
-			'description'       => __( 'Item ID.', 'masteriyo' ),
-			'type'              => 'integer',
-			'sanitize_callback' => 'absint',
-			'validate_callback' => 'rest_validate_request_arg',
-			'default'           => 0,
-		);
-
-		$params['activity_type'] = array(
-			'description'       => __( 'User activity type.', 'masteriyo' ),
-			'type'              => 'string',
-			'sanitize_callback' => 'sanitize_title',
-			'validate_callback' => 'rest_validate_request_arg',
-		);
-
-		$params['status'] = array(
-			'description'       => __( 'User activity status.', 'masteriyo' ),
-			'type'              => 'string',
-			'sanitize_callback' => 'sanitize_title',
-			'validate_callback' => 'rest_validate_request_arg',
-			'default'           => 'any',
-			'enum'              => masteriyo_get_user_activity_statuses(),
-		);
-
-		$params['date_start'] = array(
-			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
-			'type'              => 'string',
-			'format'            => 'date-time',
-			'validate_callback' => 'rest_validate_request_arg',
-		);
-
-		$params['date_complete'] = array(
-			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
-			'type'              => 'string',
-			'format'            => 'date-time',
-			'validate_callback' => 'rest_validate_request_arg',
-		);
-
-		$params['date_update'] = array(
-			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
-			'type'              => 'string',
-			'format'            => 'date-time',
-			'validate_callback' => 'rest_validate_request_arg',
-		);
-
-		$params['order'] = array(
-			'description'       => __( 'Order sort attribute ascending or descending.', 'masteriyo' ),
-			'type'              => 'string',
-			'default'           => 'desc',
-			'enum'              => array( 'asc', 'desc' ),
-			'validate_callback' => 'rest_validate_request_arg',
-		);
-
-		$params['orderby'] = array(
-			'description'       => __( 'Sort collection by object attribute.', 'masteriyo' ),
-			'type'              => 'string',
-			'default'           => 'id',
-			'enum'              => array(
-				'id',
-				'type',
-				'date_start',
-				'date_update',
-				'date_complete',
-			),
-			'validate_callback' => 'rest_validate_request_arg',
 		);
 
 		return $params;
@@ -248,13 +183,13 @@ class UserActivitiesController extends CrudController {
 	 */
 	protected function get_object( $id ) {
 		try {
-			$id            = is_a( $id, 'ThemeGrill\Masteriyo\Database\Model' ) ? $id->get_id() : $id;
-			$user_activity = masteriyo_get_user_activity( $id );
+			$id              = is_a( $id, 'ThemeGrill\Masteriyo\Database\Model' ) ? $id->get_id() : $id;
+			$course_progress = masteriyo_get_course_progress( $id );
 		} catch ( \Exception $e ) {
 			return false;
 		}
 
-		return $user_activity;
+		return $course_progress;
 	}
 
 	/**
@@ -267,7 +202,7 @@ class UserActivitiesController extends CrudController {
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
 		$context = ! empty( $request['context'] ) ? $request['context'] : 'view';
-		$data    = $this->get_user_activity_data( $object, $context );
+		$data    = $this->get_course_progress_data( $object, $context );
 
 		$data     = $this->add_additional_fields_to_object( $data, $request );
 		$data     = $this->filter_response_by_context( $data, $context );
@@ -294,22 +229,23 @@ class UserActivitiesController extends CrudController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param UserActivity  $user_activity User activity instance.
+	 * @param UserActivity  $course_progress User activity instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
-	protected function get_user_activity_data( $user_activity, $context = 'view' ) {
+	protected function get_course_progress_data( $course_progress, $context = 'view' ) {
 		$data = array(
-			'id'            => $user_activity->get_id( $context ),
-			'user_id'       => $user_activity->get_user_id( $context ),
-			'item_id'       => $user_activity->get_item_id( $context ),
-			'type'          => $user_activity->get_type( $context ),
-			'status'        => $user_activity->get_status( $context ),
-			'date_start'    => masteriyo_rest_prepare_date_response( $user_activity->get_date_start( $context ) ),
-			'date_update'   => masteriyo_rest_prepare_date_response( $user_activity->get_date_update( $context ) ),
-			'date_complete' => masteriyo_rest_prepare_date_response( $user_activity->get_date_complete( $context ) ),
+			'id'            => $course_progress->get_id( $context ),
+			'user_id'       => $course_progress->get_user_id( $context ),
+			'course_id'     => $course_progress->get_course_id( $context ),
+			'type'          => $course_progress->get_type( $context ),
+			'status'        => $course_progress->get_status( $context ),
+			'date_start'    => masteriyo_rest_prepare_date_response( $course_progress->get_date_start( $context ) ),
+			'date_update'   => masteriyo_rest_prepare_date_response( $course_progress->get_date_update( $context ) ),
+			'date_complete' => masteriyo_rest_prepare_date_response( $course_progress->get_date_complete( $context ) ),
+			'items'         => $course_progress->get_items(),
 		);
 
 		return $data;
@@ -331,14 +267,17 @@ class UserActivitiesController extends CrudController {
 				'paged'         => 1,
 				'per_page'      => 10,
 				'user_id'       => 0,
-				'item_id'       => 0,
-				'activity_type' => '',
 				'status'        => 'any',
 				'date_start'    => null,
 				'date_update'   => null,
 				'date_complete' => null,
 			)
 		);
+
+		if ( isset( $args['orderby'] ) && 'id' === $args['orderby'] ) {
+			unset( $args['orderby'] );
+			$args['orderby'] = 'activity_id';
+		}
 
 		/**
 		 * Filter the query arguments for a request.
@@ -380,41 +319,64 @@ class UserActivitiesController extends CrudController {
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'item_id'       => array(
-					'description' => __( 'Item ID (course, quiz, etc.).', 'masteriyo' ),
+				'course_id'     => array(
+					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
-					'required'    => true,
-					'context'     => array( 'view', 'edit' ),
-				),
-				'type'          => array(
-					'description' => __( 'User activity type (course, quiz).', 'masteriyo' ),
-					'type'        => 'string',
-					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'status'        => array(
-					'description' => __( 'User activity status.', 'masteriyo' ),
+					'description' => __( 'Course progress status.', 'masteriyo' ),
 					'type'        => 'string',
 					'enum'        => masteriyo_get_user_activity_statuses(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_start'    => array(
-					'description' => __( 'User activity start date in GMT.', 'masteriyo' ),
+					'description' => __( 'Course progress start date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_complete' => array(
-					'description' => __( 'User activity complete date in GMT.', 'masteriyo' ),
+					'description' => __( 'Course progress complete date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_update'   => array(
-					'description' => __( 'User activity update date in GMT.', 'masteriyo' ),
+					'description' => __( 'Course progress update date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
+				),
+				'items'         => array(
+					'description' => __( 'Course items (lesson, quiz) ', 'masteriyo' ),
+					'type'        => 'array',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'         => 'object',
+						'id'           => array(
+							'description' => __( 'ID.', 'masteriyo' ),
+							'type'        => 'integer',
+							'readonly'    => true,
+							'context'     => array( 'view', 'edit' ),
+						),
+						'item_id'      => array(
+							'description' => __( 'Course item ID (lesson, quiz).', 'masteriyo' ),
+							'type'        => 'integer',
+							'required'    => true,
+							'context'     => array( 'view', 'edit' ),
+						),
+						'item_type'    => array(
+							'description' => __( 'Course item ID (lesson, quiz).', 'masteriyo' ),
+							'type'        => 'integer',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'is_completed' => array(
+							'description' => __( 'Course item ID.', 'masteriyo' ),
+							'type'        => 'boolean',
+							'context'     => array( 'view', 'edit' ),
+						),
+					),
 				),
 			),
 		);
@@ -423,7 +385,7 @@ class UserActivitiesController extends CrudController {
 	}
 
 	/**
-	 * Prepare a single user activity for create or update.
+	 * Prepare a single course progress for create or update.
 	 *
 	 * @since 0.1.0
 	 *
@@ -433,55 +395,62 @@ class UserActivitiesController extends CrudController {
 	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		$id            = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$user_activity = masteriyo( 'user-activity' );
+		$id              = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
+		$course_progress = masteriyo( 'course-progress' );
 
 		if ( 0 !== $id ) {
-			$user_activity->set_id( $id );
-			$user_activity_repo = masteriyo( 'user-activity.store' );
-			$user_activity_repo->read( $user_activity );
+			$course_progress->set_id( $id );
+			$course_progress_repo = masteriyo( 'course-progress.store' );
+			$course_progress_repo->read( $course_progress );
 		}
 
 		// User ID.
 		if ( isset( $request['user_id'] ) && ! empty( $request['user_id'] ) ) {
-			$user_activity->set_user_id( $request['user_id'] );
+			$course_progress->set_user_id( $request['user_id'] );
 		} else {
-			$user_activity->set_user_id( get_current_user_id() );
+			$course_progress->set_user_id( get_current_user_id() );
 		}
 
-		// Item ID.
-		if ( isset( $request['item_id'] ) ) {
-			$user_activity->set_item_id( $request['item_id'] );
+		// Validate the user ID.
+		$user = get_user_by( 'id', $course_progress->get_user_id( 'edit' ) );
+		if ( ! $user ) {
+			return new \WP_Error( 'invalid_user_id', __( 'Invalid user ID.', 'masteriyo' ) );
 		}
 
-		// Activity type.
-		if ( isset( $request['type'] ) ) {
-			$user_activity->set_type( $request['type'] );
+		// Course ID.
+		if ( isset( $request['course_id'] ) ) {
+			$course_progress->set_course_id( $request['course_id'] );
+
+			// Validate course ID.
+			$course_post = get_post( $course_progress->get_course_id( 'edit' ) );
+			if ( ! $course_post || 'course' !== $course_post->post_type ) {
+				return new \WP_Error( 'invalid_course_id', __( 'Invalid course ID.', 'masteriyo' ) );
+			}
 		}
 
 		// Activity status.
 		if ( isset( $request['status'] ) ) {
-			$user_activity->set_status( $request['status'] );
+			$course_progress->set_status( $request['status'] );
 		}
 
 		// Activity start date.
 		if ( isset( $request['date_start'] ) ) {
-			$user_activity->set_date_start( $request['date_start'] );
+			$course_progress->set_date_start( $request['date_start'] );
 		}
 
 		// Activity update date.
 		if ( isset( $request['date_update'] ) ) {
-			$user_activity->set_date_update( $request['date_update'] );
+			$course_progress->set_date_update( $request['date_update'] );
 		}
 
 		// Activity complete date.
 		if ( isset( $request['date_complete'] ) ) {
-			$user_activity->set_date_complete( $request['date_complete'] );
+			$course_progress->set_date_complete( $request['date_complete'] );
 		}
 
 		// Acitivity items.
 		if ( isset( $request['items'] ) ) {
-			$user_activity->set_items( $request['items'] );
+			$course_progress->set_items( $request['items'] );
 		}
 
 		/**
@@ -492,11 +461,11 @@ class UserActivitiesController extends CrudController {
 		 *
 		 * @since 0.1.0
 		 *
-		 * @param Model         $user_activity  Object object.
+		 * @param Model         $course_progress  Object object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */
-		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $user_activity, $request, $creating );
+		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $course_progress, $request, $creating );
 	}
 
 	/**
@@ -507,8 +476,8 @@ class UserActivitiesController extends CrudController {
 	 * @return array
 	 */
 	protected function get_objects( $query_args ) {
-		$query   = new UserActivityQuery( $query_args );
-		$objects = $query->get_user_activities();
+		$query   = new CourseProgressQuery( $query_args );
+		$objects = $query->get_course_progress();
 
 		$total_items = count( $objects );
 
@@ -520,12 +489,12 @@ class UserActivitiesController extends CrudController {
 	}
 
 	/**
-	 * Checks if a given request has access to get a specific item.
+	 * Check if a given request has access to read item.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
 	 */
 	public function get_item_permissions_check( $request ) {
 		if ( is_null( $this->permission ) ) {
@@ -533,10 +502,6 @@ class UserActivitiesController extends CrudController {
 				'masteriyo_null_permission',
 				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
 			);
-		}
-
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
-			return true;
 		}
 
 		return true;
@@ -556,6 +521,12 @@ class UserActivitiesController extends CrudController {
 				'masteriyo_null_permission',
 				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
 			);
+		}
+
+		$course_post = get_post( (int) $request['course_id'] );
+
+		if ( ! $course_post || 'course' !== $course_post->post_type ) {
+			return new \WP_Error( 'invalid_course_id', __( 'Invalid course ID.', 'masteriyo' ) );
 		}
 
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
@@ -585,30 +556,7 @@ class UserActivitiesController extends CrudController {
 	}
 
 	/**
-	 * Check if a given request has access to delete an item.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return WP_Error|boolean
-	 */
-	public function delete_item_permissions_check( $request ) {
-		if ( is_null( $this->permission ) ) {
-			return new \WP_Error(
-				'masteriyo_null_permission',
-				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
-			);
-		}
-
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
-			return true;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Check if a given request has access to update an item.
+	 * Check if a given request has access to create/update an item.
 	 *
 	 * @since 0.1.0
 	 *
@@ -623,8 +571,29 @@ class UserActivitiesController extends CrudController {
 			);
 		}
 
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
-			return true;
+		$course_progress = masteriyo_get_course_progress( (int) $request['id'] );
+
+		if ( ! $course_progress || 'course' !== $course_progress->get_type() ) {
+			return new \WP_Error( 'invalid_course_progress_id', __( 'Invalid course progress ID.', 'masteriyo' ) );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to delete an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function delete_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
 		}
 
 		return true;

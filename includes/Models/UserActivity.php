@@ -32,15 +32,6 @@ class UserActivity extends Model {
 	protected $object_type = 'user-activity';
 
 	/**
-	 * Post type.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	protected $post_type = 'user-activity';
-
-	/**
 	 * Cache group.
 	 *
 	 * @since 0.1.0

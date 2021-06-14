@@ -161,6 +161,7 @@ class Permission {
 	public function rest_check_order_permissions( $context = 'read', $object_id = 0 ) {
 		$object_id = absint( $object_id );
 		$post_type = 'mto-order';
+		$cap       = $context;
 		$contexts  = array(
 			'read'   => 'read',
 			'create' => 'publish_posts',
@@ -168,12 +169,11 @@ class Permission {
 			'delete' => 'delete_post',
 			'batch'  => 'edit_others_posts',
 		);
-		$cap        = $context;
 
 		if ( isset( $contexts[ $context ] ) ) {
 			$post_type_object = get_post_type_object( $post_type );
-			$cap = $contexts[ $context ];
-			$cap = $post_type_object->cap->$cap;
+			$cap              = $contexts[ $context ];
+			$cap              = $post_type_object->cap->$cap;
 		}
 
 		$permission = current_user_can( $cap, $object_id );

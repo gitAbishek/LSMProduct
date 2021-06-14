@@ -162,17 +162,17 @@ class Install {
 			`item_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
 			`activity_type` VARCHAR(200) DEFAULT NULL,
 			`activity_status` VARCHAR(200) DEFAULT NULL,
-			`activity_start` datetime DEFAULT '0000-00-00 00:00:00',
-			`activity_update` datetime DEFAULT '0000-00-00 00:00:00',
-			`activity_complete` datetime DEFAULT '0000-00-00 00:00:00',
+			`date_start` datetime DEFAULT '0000-00-00 00:00:00',
+			`date_update` datetime DEFAULT '0000-00-00 00:00:00',
+			`date_complete` datetime DEFAULT '0000-00-00 00:00:00',
 			PRIMARY KEY (`activity_id`),
 			KEY `user_id` (`user_id`),
 			KEY `item_id` (`item_id`),
 			KEY `activity_type` (`activity_type`),
 			KEY `activity_status` (`activity_status`),
-			KEY `activity_start` (`activity_start`),
-			KEY `activity_update` (`activity_update`),
-			KEY `activity_complete` (`activity_complete`)
+			KEY `date_start` (`date_start`),
+			KEY `date_update` (`date_update`),
+			KEY `date_complete` (`date_complete`)
 		) $charset_collate;";
 
 		return $sql;
@@ -199,7 +199,7 @@ class Install {
 			`extra_value` LONGTEXT,
 			PRIMARY KEY (`meta_id`),
 			KEY `user_activity_id` (`user_activity_id`),
-			KEY `meta_key` (`meta_key`(191))
+			KEY `meta_key` (`meta_key`(191)),
 			KEY `meta_type` (`meta_type`(191))
 		) $charset_collate;";
 

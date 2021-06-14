@@ -55,13 +55,13 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 			apply_filters(
 				'masteriyo_new_user_activity_data',
 				array(
-					'user_id'           => $user_activity->get_user_id( 'edit' ),
-					'item_id'           => $user_activity->get_item_id( 'edit' ),
-					'activity_type'     => $user_activity->get_type( 'edit' ),
-					'activity_status'   => $user_activity->get_status( 'edit' ),
-					'activity_start'    => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_start( 'edit' )->getTimestamp() ),
-					'activity_update'   => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_update( 'edit' )->getTimestamp() ),
-					'activity_complete' => gmdate( 'Y-m-d H:i:s', $date_complete ),
+					'user_id'         => $user_activity->get_user_id( 'edit' ),
+					'item_id'         => $user_activity->get_item_id( 'edit' ),
+					'activity_type'   => $user_activity->get_type( 'edit' ),
+					'activity_status' => $user_activity->get_status( 'edit' ),
+					'date_start'      => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_start( 'edit' )->getTimestamp() ),
+					'date_update'     => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_update( 'edit' )->getTimestamp() ),
+					'date_complete'   => gmdate( 'Y-m-d H:i:s', $date_complete ),
 				),
 				$user_activity
 			),
@@ -105,13 +105,13 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 			$wpdb->update(
 				$wpdb->prefix . 'masteriyo_user_activities',
 				array(
-					'user_id'           => $user_activity->get_user_id( 'edit' ),
-					'item_id'           => $user_activity->get_item_id( 'edit' ),
-					'activity_type'     => $user_activity->get_type( 'edit' ),
-					'activity_status'   => $user_activity->get_status( 'edit' ),
-					'activity_start'    => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_start( 'edit' )->getTimestamp() ),
-					'activity_update'   => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_update( 'edit' )->getTimestamp() ),
-					'activity_complete' => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_complete( 'edit' )->getTimestamp() ),
+					'user_id'         => $user_activity->get_user_id( 'edit' ),
+					'item_id'         => $user_activity->get_item_id( 'edit' ),
+					'activity_type'   => $user_activity->get_type( 'edit' ),
+					'activity_status' => $user_activity->get_status( 'edit' ),
+					'date_start'      => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_start( 'edit' )->getTimestamp() ),
+					'date_update'     => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_update( 'edit' )->getTimestamp() ),
+					'date_complete'   => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_complete( 'edit' )->getTimestamp() ),
 				),
 				array( 'activity_id' => $user_activity->get_id() )
 			);
@@ -176,9 +176,9 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 				'item_id'       => $result->item_id,
 				'type'          => $result->activity_type,
 				'status'        => $result->activity_status,
-				'date_start'    => $this->string_to_timestamp( $result->activity_start ),
-				'date_update'   => $this->string_to_timestamp( $result->activity_update ),
-				'date_complete' => $this->string_to_timestamp( $result->activity_complete ),
+				'date_start'    => $this->string_to_timestamp( $result->date_start ),
+				'date_update'   => $this->string_to_timestamp( $result->date_update ),
+				'date_complete' => $this->string_to_timestamp( $result->date_complete ),
 			)
 		);
 
@@ -219,8 +219,8 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 			$search_criteria[] = $wpdb->prepare( 'user_id = %d', $query_vars['user_id'] );
 		}
 
-		if ( ! empty( $query_vars['item_id'] ) ) {
-			$search_criteria[] = $wpdb->prepare( 'item_id = %d', $query_vars['item_id'] );
+		if ( ! empty( $query_vars['course_id'] ) ) {
+			$search_criteria[] = $wpdb->prepare( 'item_id = %d', $query_vars['course_id'] );
 		}
 
 		if ( ! empty( $query_vars['activity_type'] ) ) {

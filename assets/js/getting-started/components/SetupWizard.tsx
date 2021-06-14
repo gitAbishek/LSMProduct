@@ -49,18 +49,18 @@ const SetupWizard: React.FC = () => {
 		'undefined' != typeof _MASTERIYO_ && _MASTERIYO_;
 
 	let steps = [];
-	for (const [key, RenderContent] of Object.entries(screens)) {
-		steps.push({ label: key, RenderContent });
+	for (const [key, StepContent] of Object.entries(screens)) {
+		steps.push({ label: key, StepContent });
 	}
 
 	return (
 		<FormProvider {...methods}>
 			<Container maxW="container.md">
 				<form onSubmit={methods.handleSubmit(onSubmit)}>
-					<Steps size="sm" mb={5} activeStep={activeStep}>
-						{steps.map(({ label, RenderContent }) => (
+					<Steps colorScheme="blue" size="sm" mb={5} activeStep={activeStep}>
+						{steps.map(({ label, StepContent }) => (
 							<Step label={label} key={label}>
-								<RenderContent
+								<StepContent
 									dashboardURL={adminURL}
 									mutationLoading={addMutation.isLoading}
 									pageBuilderURL={pageBuilderURL}

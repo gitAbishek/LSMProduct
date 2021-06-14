@@ -1,20 +1,16 @@
 import React from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Switch } from 'react-router-dom';
 import Interactive from '../components/Interactive';
 
 import routes from '../constants/routes';
-import { InteractiveLesson } from '../pages';
 
 const Router: React.FC = () => {
 	return (
 		<HashRouter>
+			<div>Something</div>
 			<Switch>
-				<Route path={routes.lesson} exact>
-					<InteractiveLesson />
-				</Route>
-
-				<Route path="/">
-					<Interactive />
+				<Route exact path="/lesson">
+					<div>Internal page</div>
 				</Route>
 			</Switch>
 		</HashRouter>

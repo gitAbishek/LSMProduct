@@ -16,6 +16,8 @@ import {
 	Select,
 	Stack,
 	Text,
+	Alert,
+	AlertIcon,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -37,6 +39,8 @@ const Preview = ({ control }) => {
 
 	if ('undefined' != typeof watchData.general) {
 		let currencySymbol: string;
+
+		const regex: any = /\d/; // To check for number in input.
 		const {
 			currency,
 			currency_position,
@@ -46,6 +50,27 @@ const Preview = ({ control }) => {
 		} = watchData.general;
 
 		currencySymbol = getSymbolFromCurrency(currency);
+
+		if (regex.test(decimal_separator) || regex.test(thousands_separator)) {
+			return (
+				<Alert fontSize="sm" status="error">
+					<AlertIcon />
+					{__("Thousand and decimal separator can't be number.", 'masteriyo')}
+				</Alert>
+			);
+		}
+
+		if (
+			'undefined' != typeof thousands_separator &&
+			decimal_separator === thousands_separator
+		) {
+			return (
+				<Alert fontSize="sm" status="error">
+					<AlertIcon />
+					{__("Thousand and decimal separator can't be same.", 'masteriyo')}
+				</Alert>
+			);
+		}
 
 		if ('left' === currency_position) {
 			return (
@@ -186,11 +211,11 @@ const Currency: React.FC<Props> = (props) => {
 							{__('Back', 'masteriyo')}
 						</Button>
 						<ButtonGroup>
-							<Button variant="ghost">
-								<Link href={dashboardURL ? dashboardURL : '#'}>
+							<Link href={dashboardURL ? dashboardURL : '#'}>
+								<Button variant="ghost">
 									{__('Skip to Dashboard', 'masteriyo')}
-								</Link>
-							</Button>
+								</Button>
+							</Link>
 							<Button onClick={nextStep} rounded="3px" colorScheme="blue">
 								{__('Next', 'masteriyo')}
 							</Button>

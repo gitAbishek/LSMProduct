@@ -10,6 +10,11 @@ import {
 	InputRightAddon,
 	Link,
 	Stack,
+	NumberInput,
+	NumberInputField,
+	NumberInputStepper,
+	NumberIncrementStepper,
+	NumberDecrementStepper,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -33,7 +38,13 @@ const Quiz: React.FC<Props> = (props) => {
 								{__('Time Limit', 'masteriyo')}
 							</FormLabel>
 							<InputGroup w="md" size="md">
-								<Input defaultValue="60" {...register('quizzes.time_limit')} />
+								<NumberInput w="md" defaultValue={60}>
+									<NumberInputField {...register('quizzes.time_limit')} />
+									<NumberInputStepper>
+										<NumberIncrementStepper />
+										<NumberDecrementStepper />
+									</NumberInputStepper>
+								</NumberInput>
 								<InputRightAddon>{__('Minutes', 'masteriyo')}</InputRightAddon>
 							</InputGroup>
 						</Flex>
@@ -45,10 +56,13 @@ const Quiz: React.FC<Props> = (props) => {
 								{__('Attempts Allowed', 'masteriyo')}
 							</FormLabel>
 							<InputGroup w="md" size="md">
-								<Input
-									defaultValue={5}
-									{...register('quizzes.attempts_allowed')}
-								/>
+								<NumberInput w="md" defaultValue={5}>
+									<NumberInputField {...register('quizzes.attempts_allowed')} />
+									<NumberInputStepper>
+										<NumberIncrementStepper />
+										<NumberDecrementStepper />
+									</NumberInputStepper>
+								</NumberInput>
 								<InputRightAddon>{__('Attempts', 'masteriyo')}</InputRightAddon>
 							</InputGroup>
 						</Flex>
@@ -63,11 +77,11 @@ const Quiz: React.FC<Props> = (props) => {
 							{__('Back', 'masteriyo')}
 						</Button>
 						<ButtonGroup>
-							<Button variant="ghost">
-								<Link href={dashboardURL ? dashboardURL : '#'}>
+							<Link href={dashboardURL ? dashboardURL : '#'}>
+								<Button variant="ghost">
 									{__('Skip to Dashboard', 'masteriyo')}
-								</Link>
-							</Button>
+								</Button>
+							</Link>
 							<Button onClick={nextStep} rounded="3px" colorScheme="blue">
 								{__('Continue', 'masteriyo')}
 							</Button>

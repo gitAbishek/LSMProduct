@@ -133,6 +133,12 @@ class ScriptStyle {
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_checkout_page',
 				),
+				'interactive'    => array(
+					'src'     => $this->get_asset_url( '/assets/js/build/masteriyo-interactive.js' ),
+					'deps'    => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
+					'version' => $this->get_version(),
+					'context' => 'public',
+				),
 			)
 		);
 	}

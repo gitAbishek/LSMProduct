@@ -107,6 +107,15 @@ class Masteriyo extends Container {
 		add_filter( 'template_redirect', array( $this, 'redirect_reset_password_link' ) );
 
 		add_action( 'switch_blog', array( $this, 'define_tables' ), 0 );
+
+		add_filter(
+			'query_vars',
+			function( $query_vars ) {
+				$query_vars[] = 'masteriyo';
+				$query_vars[] = 'course';
+				return $query_vars;
+			}
+		);
 	}
 
 	/**
@@ -224,6 +233,16 @@ class Masteriyo extends Container {
 				'href'   => masteriyo_get_page_permalink( 'course-list' ),
 			)
 		);
+
+		// TODO Remove this after implement interactive page.
+		$wp_admin_bar->add_node(
+			array(
+				'parent' => 'site-name',
+				'id'     => 'masteriyo-interactive-page',
+				'title'  => __( 'Interactive page', 'masteriyo' ),
+				'href'   => home_url( '?masteriyo=interactive&course=12' ),
+			)
+		);
 	}
 
 	/**
@@ -314,7 +333,6 @@ class Masteriyo extends Container {
 	 * @return string
 	 */
 	public function template_loader( $template ) {
-
 		global $post;
 
 		if ( masteriyo_is_single_course_page() ) {
@@ -322,6 +340,11 @@ class Masteriyo extends Container {
 			$template = masteriyo( 'template' )->locate( 'single-course.php' );
 		} elseif ( masteriyo_is_archive_course_page() ) {
 			$template = masteriyo( 'template' )->locate( 'archive-course.php' );
+		}
+
+		if ( isset( $_GET['masteriyo'] ) && 'interactive' === $_GET['masteriyo'] ) {
+			$template = plugin_dir_path( Constants::get( 'MASTERIYO_PLUGIN_FILE' ) ) . '/templates/interactive.php';
+			status_header( 200 );
 		}
 
 		return $template;

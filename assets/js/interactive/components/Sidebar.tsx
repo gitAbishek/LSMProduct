@@ -112,20 +112,23 @@ const Sidebar = () => {
 					</DrawerHeader>
 
 					<DrawerBody p="0">
-						<Accordion allowToggle>
-							{listQuery.data.section_order.map((sectionId: any) => {
-								const section = listQuery.data.sections[sectionId];
-								return (
-									<SidebarItem
-										key={section.id}
-										id={section.id}
-										name={section.name}
-										contents={section.contents}
-										contentsMap={listQuery.data.contents}
-									/>
-								);
-							})}
-						</Accordion>
+						{currentTab === 1 && (
+							<Accordion allowToggle>
+								{listQuery.data.section_order.map((sectionId: any) => {
+									const section = listQuery.data.sections[sectionId];
+									return (
+										<SidebarItem
+											key={section.id}
+											id={section.id}
+											name={section.name}
+											contents={section.contents}
+											contentsMap={listQuery.data.contents}
+										/>
+									);
+								})}
+							</Accordion>
+						)}
+						{currentTab === 2 && <span>Questions</span>}
 					</DrawerBody>
 
 					<DrawerFooter p="0">

@@ -11,6 +11,8 @@ import {
 	Accordion,
 	Spinner,
 	DrawerOverlay,
+	Alert,
+	AlertTitle,
 } from '@chakra-ui/react';
 import React from 'react';
 import { BiMenu } from 'react-icons/bi';
@@ -19,6 +21,7 @@ import API from '../../back-end/utils/api';
 import urls from '../../back-end/constants/urls';
 import SidebarItem from './SidebarItem';
 import { CloseCone } from '../../back-end/constants/images';
+import { __ } from '@wordpress/i18n';
 
 const Sidebar = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -36,6 +39,14 @@ const Sidebar = () => {
 
 	if (coursesQuery.isLoading || listQuery.isLoading) {
 		return <Spinner />;
+	}
+
+	if (coursesQuery.isError || listQuery.isError) {
+		return (
+			<Alert status="error">
+				<AlertTitle>{__('No courses found', 'masteriyo')}</AlertTitle>
+			</Alert>
+		);
 	}
 
 	return (

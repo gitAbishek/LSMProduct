@@ -104,11 +104,11 @@ const Pages: React.FC<Props> = (props) => {
 									{__('Back', 'masteriyo')}
 								</Button>
 								<ButtonGroup>
-									<Button variant="ghost">
-										<Link href={dashboardURL ? dashboardURL : '#'}>
+									<Link href={dashboardURL ? dashboardURL : '#'}>
+										<Button variant="ghost">
 											{__('Skip to Dashboard', 'masteriyo')}
-										</Link>
-									</Button>
+										</Button>
+									</Link>
 									<Button
 										type="submit"
 										isLoading={mutationLoading}

@@ -68,11 +68,11 @@ const Course: React.FC<Props> = (props) => {
 							{__('Back', 'masteriyo')}
 						</Button>
 						<ButtonGroup>
-							<Button variant="ghost">
-								<Link href={dashboardURL ? dashboardURL : '#'}>
+							<Link href={dashboardURL ? dashboardURL : '#'}>
+								<Button variant="ghost">
 									{__('Skip to Dashboard', 'masteriyo')}
-								</Link>
-							</Button>
+								</Button>
+							</Link>
 							<Button onClick={nextStep} rounded="3px" colorScheme="blue">
 								{__('Continue', 'masteriyo')}
 							</Button>

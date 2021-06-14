@@ -12,7 +12,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 
-import { onboardFinishCover } from '../../components/constants/images';
+import { onboardFinishCover } from '../../../back-end/constants/images';
 
 interface Props {
 	dashboardURL: string;
@@ -53,21 +53,21 @@ const Welcome: React.FC<Props> = (props) => {
 						</Link>
 					</Stack>
 					<Flex justify="space-between" align="center">
-						<Button rounded="3px" colorScheme="blue" variant="outline">
-							<Link href={dashboardURL ? dashboardURL : '#'}>
+						<Link href={dashboardURL ? dashboardURL : '#'}>
+							<Button rounded="3px" colorScheme="blue" variant="outline">
 								{__('Back to dashboard', 'masteriyo')}
-							</Link>
-						</Button>
+							</Button>
+						</Link>
 
 						<ButtonGroup>
 							<Button variant="ghost">
 								{__('Install sample course', 'masteriyo')}
 							</Button>
-							<Button rounded="3px" colorScheme="blue">
-								<Link href={pageBuilderURL ? pageBuilderURL : '#'}>
+							<Link href={pageBuilderURL ? pageBuilderURL : '#'}>
+								<Button rounded="3px" colorScheme="blue">
 									{__('Create a new course', 'masteriyo')}
-								</Link>
-							</Button>
+								</Button>
+							</Link>
 						</ButtonGroup>
 					</Flex>
 				</Stack>

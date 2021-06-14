@@ -11,7 +11,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 
-import { onboardCover } from '../../components/constants/images';
+import { onboardCover } from '../../../back-end/constants/images';
 
 interface Props {
 	dashboardURL: string;
@@ -48,11 +48,11 @@ const Welcome: React.FC<Props> = (props) => {
 							<Button onClick={nextStep} colorScheme="blue">
 								{__('Start Now', 'masteriyo')}
 							</Button>
-							<Button variant="ghost">
-								<Link href={dashboardURL ? dashboardURL : '#'}>
+							<Link href={dashboardURL ? dashboardURL : '#'}>
+								<Button variant="ghost">
 									{__('Skip to Dashboard', 'masteriyo')}
-								</Link>
-							</Button>
+								</Button>
+							</Link>
 						</ButtonGroup>
 					</Stack>
 				</Stack>

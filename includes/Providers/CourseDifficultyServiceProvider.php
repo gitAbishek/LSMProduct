@@ -24,31 +24,31 @@ class CourseDifficultyServiceProvider extends AbstractServiceProvider {
 	 *
 	 * @var array
 	 */
-	 protected $provides = array(
+	protected $provides = array(
 		'course_difficulty',
 		'course_difficulty.store',
 		'course_difficulty.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseDifficultiesController'
-	 );
+		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseDifficultiesController',
+	);
 
-	 /**
-	  * This is where the magic happens, within the method you can
-	  * access the container and register or retrieve anything
-	  * that you need to, but remember, every alias registered
-	  * within this method must be declared in the `$provides` array.
-	  *
-	  * @since 0.1.0
-	  */
-	 public function register() {
-		 $this->getContainer()->add( 'course_difficulty.store', CourseDifficultyRepository::class );
+	/**
+	 * This is where the magic happens, within the method you can
+	 * access the container and register or retrieve anything
+	 * that you need to, but remember, every alias registered
+	 * within this method must be declared in the `$provides` array.
+	 *
+	 * @since 0.1.0
+	 */
+	public function register() {
+		$this->getContainer()->add( 'course_difficulty.store', CourseDifficultyRepository::class );
 
-		 $this->getContainer()->add( 'course_difficulty.rest', CourseDifficultiesController::class )
-			->addArgument( 'permission');
+		$this->getContainer()->add( 'course_difficulty.rest', CourseDifficultiesController::class )
+			->addArgument( 'permission' );
 
-		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseDifficultiesController' )
-			->addArgument( 'permission');
+		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseDifficultiesController' )
+			->addArgument( 'permission' );
 
-		 $this->getContainer()->add( 'course_difficulty', CourseDifficulty::class )
-			->addArgument( 'course_difficulty.store');
-	 }
+		$this->getContainer()->add( 'course_difficulty', CourseDifficulty::class )
+			->addArgument( 'course_difficulty.store' );
+	}
 }

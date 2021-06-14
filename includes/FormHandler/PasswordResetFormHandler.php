@@ -32,11 +32,11 @@ class PasswordResetFormHandler {
 	 * @return void
 	 */
 	public function process() {
-		if ( isset( $_GET['password-reset-complete'] ) ) {
+		if ( isset( $_GET['password-reset-complete'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			masteriyo_add_notice( __( 'Your password has been reset successfully.', 'masteriyo' ) );
 		}
 
-		if ( ! isset( $_POST['masteriyo-password-reset'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if ( ! isset( $_POST['masteriyo-password-reset'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
 
@@ -112,7 +112,7 @@ class PasswordResetFormHandler {
 			foreach ( $validation_errors as $message ) {
 				masteriyo_add_notice( sprintf( '<strong>%s: %s</strong> ', __( 'Error', 'masteriyo' ), $message ), 'error' );
 			}
-			throw new \Exception;
+			throw new \Exception();
 		}
 	}
 
@@ -140,7 +140,7 @@ class PasswordResetFormHandler {
 			foreach ( $validation_errors as $message ) {
 				masteriyo_add_notice( sprintf( '<strong>%s: %s</strong> ', __( 'Error', 'masteriyo' ), $message ), 'error' );
 			}
-			throw new \Exception;
+			throw new \Exception();
 		}
 
 		return $user;
@@ -157,7 +157,7 @@ class PasswordResetFormHandler {
 		$data   = array();
 		$fields = array( 'password', 'confirm-password', 'reset_key', 'reset_login' );
 
-		foreach( $fields as $key ) {
+		foreach ( $fields as $key ) {
 			if ( ! isset( $_POST[ $key ] ) ) {
 				$data[ $key ] = '';
 				continue;

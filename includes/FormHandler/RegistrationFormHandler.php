@@ -25,7 +25,7 @@ class RegistrationFormHandler {
 	 * @return void
 	 */
 	public function process_registration() {
-		if ( ! isset( $_POST['masteriyo-registration'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if ( ! isset( $_POST['masteriyo-registration'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
 
@@ -113,7 +113,7 @@ class RegistrationFormHandler {
 			foreach ( $validation_errors as $message ) {
 				masteriyo_add_notice( sprintf( '<strong>%s:%s</strong> ', __( 'Error', 'masteriyo' ), $message ), 'error' );
 			}
-			throw new \Exception;
+			throw new \Exception();
 		}
 	}
 
@@ -148,7 +148,7 @@ class RegistrationFormHandler {
 		$data   = array();
 		$fields = array( 'username', 'email', 'password', 'confirm-password', 'accept-terms-and-conditions' );
 
-		foreach( $fields as $key ) {
+		foreach ( $fields as $key ) {
 			if ( ! isset( $_POST[ $key ] ) ) {
 				$data[ $key ] = '';
 				continue;

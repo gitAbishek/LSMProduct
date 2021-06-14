@@ -24,31 +24,31 @@ class QuizServiceProvider extends AbstractServiceProvider {
 	 *
 	 * @var array
 	 */
-	 protected $provides = array(
+	protected $provides = array(
 		'quiz',
 		'quiz.store',
 		'quiz.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuizesController'
-	 );
+		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuizesController',
+	);
 
-	 /**
-	  * This is where the magic happens, within the method you can
-	  * access the container and register or retrieve anything
-	  * that you need to, but remember, every alias registered
-	  * within this method must be declared in the `$provides` array.
-	  *
-	  * @since 0.1.0
-	  */
-	 public function register() {
-		 $this->getContainer()->add( 'quiz.store', QuizRepository::class );
+	/**
+	 * This is where the magic happens, within the method you can
+	 * access the container and register or retrieve anything
+	 * that you need to, but remember, every alias registered
+	 * within this method must be declared in the `$provides` array.
+	 *
+	 * @since 0.1.0
+	*/
+	public function register() {
+		$this->getContainer()->add( 'quiz.store', QuizRepository::class );
 
-		 $this->getContainer()->add( 'quiz.rest', QuizesController::class )
-			->addArgument( 'permission');
+		$this->getContainer()->add( 'quiz.rest', QuizesController::class )
+			->addArgument( 'permission' );
 
-		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuizesController' )
-			->addArgument( 'permission');
+		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuizesController' )
+			->addArgument( 'permission' );
 
-		 $this->getContainer()->add( 'quiz', Quiz::class )
-			->addArgument( 'quiz.store');
-	 }
+		$this->getContainer()->add( 'quiz', Quiz::class )
+			->addArgument( 'quiz.store' );
+	}
 }

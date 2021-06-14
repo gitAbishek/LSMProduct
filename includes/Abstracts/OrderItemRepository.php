@@ -133,8 +133,6 @@ class OrderItemRepository extends AbstractRepository {
 	public function read( &$item ) {
 		global $wpdb;
 
-		// $item->set_defaults();
-
 		// Get from cache if available.
 		$data = wp_cache_get( 'item-' . $item->get_id(), 'order-items' );
 

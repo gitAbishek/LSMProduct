@@ -32,7 +32,7 @@ class ChangePasswordFormHandler {
 	 * @return void
 	 */
 	public function handle() {
-		if ( ! isset( $_POST['masteriyo-change-password'] ) || ! is_user_logged_in() ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if ( ! isset( $_POST['masteriyo-change-password'] ) || ! is_user_logged_in() ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
 
@@ -47,7 +47,7 @@ class ChangePasswordFormHandler {
 
 			$user->set_user_pass( $data['password_1'] );
 
-			masteriyo('user.store')->update( $user );
+			masteriyo( 'user.store' )->update( $user );
 
 			masteriyo_add_notice( __( 'Your password was changed successfully', 'masteriyo' ) );
 
@@ -112,7 +112,7 @@ class ChangePasswordFormHandler {
 			foreach ( $validation_errors as $message ) {
 				masteriyo_add_notice( sprintf( '<strong>%s: %s</strong> ', __( 'Error', 'masteriyo' ), $message ), 'error' );
 			}
-			throw new \Exception;
+			throw new \Exception();
 		}
 	}
 
@@ -127,12 +127,12 @@ class ChangePasswordFormHandler {
 		$data   = array();
 		$fields = array( 'current_password', 'password_1', 'password_2' );
 
-		foreach( $fields as $key ) {
-			if ( ! isset( $_POST[ $key ] ) ) {
+		foreach ( $fields as $key ) {
+			if ( ! isset( $_POST[ $key ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$data[ $key ] = '';
 				continue;
 			}
-			$data[ $key ] = trim( $_POST[ $key ] );
+			$data[ $key ] = trim( $_POST[ $key ] ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		}
 		return $data;
 	}

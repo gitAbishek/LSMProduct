@@ -24,31 +24,31 @@ class CourseCategoryServiceProvider extends AbstractServiceProvider {
 	 *
 	 * @var array
 	 */
-	 protected $provides = array(
+	protected $provides = array(
 		'course_cat',
 		'course_cat.store',
 		'course_cat.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController'
-	 );
+		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController',
+	);
 
-	 /**
-	  * This is where the magic happens, within the method you can
-	  * access the container and register or retrieve anything
-	  * that you need to, but remember, every alias registered
-	  * within this method must be declared in the `$provides` array.
-	  *
-	  * @since 0.1.0
-	  */
-	 public function register() {
-		 $this->getContainer()->add( 'course_cat.store', CourseCategoryRepository::class );
+	/**
+	 * This is where the magic happens, within the method you can
+	 * access the container and register or retrieve anything
+	 * that you need to, but remember, every alias registered
+	 * within this method must be declared in the `$provides` array.
+	 *
+	 * @since 0.1.0
+	 */
+	public function register() {
+		$this->getContainer()->add( 'course_cat.store', CourseCategoryRepository::class );
 
-		 $this->getContainer()->add( 'course_cat.rest', CourseCategoriesController::class )
-			->addArgument( 'permission');
+		$this->getContainer()->add( 'course_cat.rest', CourseCategoriesController::class )
+			->addArgument( 'permission' );
 
-		  $this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController' )
-			->addArgument( 'permission');
+		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController' )
+			->addArgument( 'permission' );
 
-		 $this->getContainer()->add( 'course_cat', CourseCategory::class )
-			->addArgument( 'course_cat.store');
-	 }
+		$this->getContainer()->add( 'course_cat', CourseCategory::class )
+			->addArgument( 'course_cat.store' );
+	}
 }

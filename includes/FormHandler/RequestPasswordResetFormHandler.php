@@ -32,7 +32,7 @@ class RequestPasswordResetFormHandler {
 	 * @return void
 	 */
 	public function process_password_reset_request() {
-		if ( ! isset( $_POST['masteriyo-password-reset-request'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if ( ! isset( $_POST['masteriyo-password-reset-request'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
 
@@ -128,7 +128,7 @@ class RequestPasswordResetFormHandler {
 			foreach ( $validation_errors as $message ) {
 				masteriyo_add_notice( sprintf( '<strong>%s: %s</strong> ', __( 'Error', 'masteriyo' ), $message ), 'error' );
 			}
-			throw new \Exception;
+			throw new \Exception();
 		}
 	}
 
@@ -140,9 +140,9 @@ class RequestPasswordResetFormHandler {
 	 * @return array
 	 */
 	protected function get_form_data() {
-		if ( isset( $_POST[ 'user_login' ] ) ) {
+		if ( isset( $_POST['user_login'] ) ) {
 			return array(
-				'user_login' => sanitize_user( trim( $_POST[ 'user_login' ] ) ),
+				'user_login' => sanitize_user( trim( $_POST['user_login'] ) ),
 			);
 		}
 

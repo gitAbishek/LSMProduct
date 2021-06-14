@@ -118,9 +118,9 @@ interface Session {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $key		Session item key.
-	 * @param mixed $default	Session item default value.
-	 * @param string $context	What the value is for. Valid values are view and edit.
+	 * @param string $key       Session item key.
+	 * @param mixed $default    Session item default value.
+	 * @param string $context   What the value is for. Valid values are view and edit.
 	 *
 	 * @return mixed
 	 */
@@ -129,8 +129,8 @@ interface Session {
 	/**
 	 * Put a key/value pair in the session.
 	 *
-	 * @param string $key	Session item key.
-	 * @param mixed $value	Session item value.
+	 * @param string $key   Session item key.
+	 * @param mixed $value  Session item value.
 	 * @return void
 	 */
 	public function put( $key, $value = null );

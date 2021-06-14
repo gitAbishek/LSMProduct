@@ -274,7 +274,7 @@ class Email {
 			$content    = $emogrifier->emogrify();
 			$html_prune = \Pelago\Emogrifier\HtmlProcessor\HtmlPruner::fromHtml( $content );
 			$html_prune->removeElementsWithDisplayNone();
-			$content    = $html_prune->render();
+			$content = $html_prune->render();
 		} catch ( \Exception $e ) {
 			$content = '<style type="text/css">' . $css . '</style>' . $content;
 		}

@@ -30,7 +30,7 @@ msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:108
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:132
-#: assets/js/getting-started/screens/currency/Currency.tsx:171
+#: assets/js/getting-started/screens/currency/Currency.tsx:196
 msgid "Preview"
 msgstr ""
 
@@ -603,22 +603,22 @@ msgid "Content"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:104
-#: assets/js/getting-started/screens/currency/Currency.tsx:88
+#: assets/js/getting-started/screens/currency/Currency.tsx:113
 msgid "Currency"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:117
-#: assets/js/getting-started/screens/currency/Currency.tsx:106
+#: assets/js/getting-started/screens/currency/Currency.tsx:131
 msgid "Currency Position"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:122
-#: assets/js/getting-started/screens/currency/Currency.tsx:112
+#: assets/js/getting-started/screens/currency/Currency.tsx:137
 msgid "Left"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:123
-#: assets/js/getting-started/screens/currency/Currency.tsx:113
+#: assets/js/getting-started/screens/currency/Currency.tsx:138
 msgid "Right"
 msgstr ""
 
@@ -627,7 +627,7 @@ msgid "Thausand Separator"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:140
-#: assets/js/getting-started/screens/currency/Currency.tsx:134
+#: assets/js/getting-started/screens/currency/Currency.tsx:159
 msgid "Decimal Separator"
 msgstr ""
 
@@ -826,35 +826,43 @@ msgid "Course Per Row"
 msgstr ""
 
 #: assets/js/getting-started/screens/course/Course.tsx:68
-#: assets/js/getting-started/screens/currency/Currency.tsx:186
-#: assets/js/getting-started/screens/pages/Pages.tsx:105
-#: assets/js/getting-started/screens/quiz/Quiz.tsx:63
+#: assets/js/getting-started/screens/currency/Currency.tsx:211
+#: assets/js/getting-started/screens/pages/Pages.tsx:104
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:77
 msgid "Back"
 msgstr ""
 
 #: assets/js/getting-started/screens/course/Course.tsx:73
-#: assets/js/getting-started/screens/currency/Currency.tsx:191
-#: assets/js/getting-started/screens/pages/Pages.tsx:110
-#: assets/js/getting-started/screens/quiz/Quiz.tsx:68
+#: assets/js/getting-started/screens/currency/Currency.tsx:216
+#: assets/js/getting-started/screens/pages/Pages.tsx:109
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:82
 #: assets/js/getting-started/screens/welcome/Welcome.tsx:53
 msgid "Skip to Dashboard"
 msgstr ""
 
 #: assets/js/getting-started/screens/course/Course.tsx:77
-#: assets/js/getting-started/screens/quiz/Quiz.tsx:72
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:86
 msgid "Continue"
 msgstr ""
 
-#: assets/js/getting-started/screens/currency/Currency.tsx:121
+#: assets/js/getting-started/screens/currency/Currency.tsx:146
 msgid "Thousands Separator"
 msgstr ""
 
-#: assets/js/getting-started/screens/currency/Currency.tsx:147
+#: assets/js/getting-started/screens/currency/Currency.tsx:172
 msgid "Number of Decimal"
 msgstr ""
 
-#: assets/js/getting-started/screens/currency/Currency.tsx:195
+#: assets/js/getting-started/screens/currency/Currency.tsx:220
 msgid "Next"
+msgstr ""
+
+#: assets/js/getting-started/screens/currency/Currency.tsx:58
+msgid "Thousand and decimal separator can't be number."
+msgstr ""
+
+#: assets/js/getting-started/screens/currency/Currency.tsx:70
+msgid "Thousand and decimal separator can't be same."
 msgstr ""
 
 #: assets/js/getting-started/screens/finish/Finish.tsx:36
@@ -884,39 +892,39 @@ msgstr ""
 msgid "Create a new course"
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:118
+#: assets/js/getting-started/screens/pages/Pages.tsx:117
 msgid "Finish"
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:36
+#: assets/js/getting-started/screens/pages/Pages.tsx:35
 msgid "Select a page..."
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:69
+#: assets/js/getting-started/screens/pages/Pages.tsx:68
 msgid "Course List"
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:80
+#: assets/js/getting-started/screens/pages/Pages.tsx:79
 msgid "My Account"
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:91
+#: assets/js/getting-started/screens/pages/Pages.tsx:90
 msgid "Checkout"
 msgstr ""
 
-#: assets/js/getting-started/screens/quiz/Quiz.tsx:33
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:38
 msgid "Time Limit"
 msgstr ""
 
-#: assets/js/getting-started/screens/quiz/Quiz.tsx:37
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:48
 msgid "Minutes"
 msgstr ""
 
-#: assets/js/getting-started/screens/quiz/Quiz.tsx:45
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:56
 msgid "Attempts Allowed"
 msgstr ""
 
-#: assets/js/getting-started/screens/quiz/Quiz.tsx:52
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:66
 msgid "Attempts"
 msgstr ""
 
@@ -938,4 +946,8 @@ msgstr ""
 
 #: assets/js/getting-started/screens/welcome/Welcome.tsx:49
 msgid "Start Now"
+msgstr ""
+
+#: assets/js/interactive/components/Header.tsx:74
+msgid "Submit Quiz"
 msgstr ""

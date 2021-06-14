@@ -8,7 +8,7 @@ import SetupWizard from './SetupWizard';
 
 const MainLayout: React.FC = () => {
 	return (
-		<Box id="masteriyo-onboarding">
+		<Box id="masteriyo-setup-wizard">
 			<Stack direction="column" spacing="2">
 				<MainLogo />
 

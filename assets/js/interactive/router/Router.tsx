@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import Interactive from '../components/Interactive';
 
 import routes from '../constants/routes';
 import { InteractiveLesson } from '../pages';
@@ -12,8 +13,8 @@ const Router: React.FC = () => {
 					<InteractiveLesson />
 				</Route>
 
-				<Route>
-					<InteractiveLesson />
+				<Route path="/">
+					<Interactive />
 				</Route>
 			</Switch>
 		</HashRouter>

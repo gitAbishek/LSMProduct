@@ -9,7 +9,6 @@ const Interactive: React.FC = () => {
 		<Box>
 			<Header />
 			<Sidebar />
-			<Router />
 		</Box>
 	);
 };

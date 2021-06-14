@@ -1,6 +1,6 @@
 <?php
 /**
- * User Activity Repository.
+ * Course progress rRepository.
  *
  * @package ThemeGrill\Masteriyo\Repository;
  */
@@ -13,7 +13,7 @@ use ThemeGrill\Masteriyo\Models\UserActivity;
 use ThemeGrill\Masteriyo\Repository\AbstractRepository;
 
 /**
- * User Activity repository class.
+ * Course progress repository class.
  */
 class CourseProgressRepository extends AbstractRepository implements RepositoryInterface {
 
@@ -26,11 +26,11 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	protected $internal_meta_keys = array();
 
 	/**
-	 * Create a useractivity in the database.
+	 * Create a course progress in the database.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $course_progress UserActivity object.
+	 * @param Model $course_progress CourseProgress object.
 	 */
 	public function create( Model &$course_progress ) {
 		global $wpdb;
@@ -49,7 +49,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		$result = $wpdb->insert(
 			$course_progress->get_table_name(),
 			apply_filters(
-				'masteriyo_new_user_activity_data',
+				'masteriyo_new_course_progress_data',
 				array(
 					'user_id'         => $course_progress->get_user_id( 'edit' ),
 					'item_id'         => $course_progress->get_course_id( 'edit' ),
@@ -72,16 +72,16 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			$course_progress->apply_changes();
 			$this->clear_cache( $course_progress );
 
-			do_action( 'masteriyo_new_user_activity', $course_progress->get_id(), $course_progress );
+			do_action( 'masteriyo_new_course_progress', $course_progress->get_id(), $course_progress );
 		}
 
 	}
 
 	/**
-	 * Update a user activity item in the database.
+	 * Update a course progress item in the database.
 	 *
 	 * @since 0.1.0
-	 * @param UserActivity $course_progress User activity object.
+	 * @param CourseProgress $course_progress Course progress object.
 	 */
 	public function update( Model &$course_progress ) {
 		global $wpdb;
@@ -119,14 +119,14 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		$course_progress->apply_changes();
 		$this->clear_cache( $course_progress );
 
-		do_action( 'masteriyo_update_user_activity', $course_progress->get_id(), $course_progress );
+		do_action( 'masteriyo_update_course_progress', $course_progress->get_id(), $course_progress );
 	}
 
 	/**
-	 * Remove an user activity from the database.
+	 * Remove an course progress from the database.
 	 *
 	 * @since 0.1.0
-	 * @param UserActivity $course_progress User activity object.
+	 * @param CourseProgress $course_progress Course progress object.
 	 * @param array         $args Array of args to pass to the delete method.
 	 */
 	public function delete( &$course_progress, $args = array() ) {
@@ -138,7 +138,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_activities', array( 'activity_id' => $course_progress->get_id() ) );
 			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_activitymeta', array( 'user_activity_id' => $course_progress->get_id() ) );
 
-			do_action( 'masteriyo_delete_user_activity', $course_progress->get_id() );
+			do_action( 'masteriyo_delete_course_progress', $course_progress->get_id() );
 
 			$course_progress->set_status( 'trash' );
 
@@ -147,13 +147,13 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	}
 
 	/**
-	 * Read a user activity from the database.
+	 * Read a course progress from the database.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param UserActivity $course_progress User activity object.
+	 * @param CourseProgress $course_progress Course progress object.
 	 *
-	 * @throws Exception If invalid user activity object.
+	 * @throws Exception If invalid course progress object object.
 	 */
 	public function read( &$course_progress ) {
 		global $wpdb;
@@ -185,7 +185,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		$this->read_course_progress_items( $course_progress );
 		$course_progress->set_object_read( true );
 
-		do_action( 'masteriyo_user_activity_read', $course_progress->get_id(), $course_progress );
+		do_action( 'masteriyo_course_progress_read', $course_progress->get_id(), $course_progress );
 	}
 
 	/**
@@ -193,7 +193,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param UserActivity $course_progress User activity object.
+	 * @param UserActivity $course_progress Course progress object.
 	 */
 	public function clear_cache( &$course_progress ) {
 		wp_cache_delete( 'item' . $course_progress->get_id(), 'masteriyo-course-progress' );
@@ -202,12 +202,12 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	}
 
 	/**
-	 * Fetch user activities.
+	 * Fetch course progress items.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param array $query_vars Query vars.
-	 * @return UserActivity[]
+	 * @return CourseProgress[]
 	 */
 	public function query( $query_vars ) {
 		global $wpdb;

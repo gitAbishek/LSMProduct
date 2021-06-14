@@ -13,9 +13,11 @@ import {
 	DrawerOverlay,
 	Alert,
 	AlertTitle,
+	ButtonGroup,
+	Button,
 } from '@chakra-ui/react';
-import React from 'react';
-import { BiMenu } from 'react-icons/bi';
+import React, { useState } from 'react';
+import { BiAlignLeft, BiInfoCircle, BiMenu } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import API from '../../back-end/utils/api';
 import urls from '../../back-end/constants/urls';
@@ -25,9 +27,12 @@ import { __ } from '@wordpress/i18n';
 
 const Sidebar = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [currentTab, setCurrentTab] = useState<number>(1);
+	const courseId = 8;
+
 	const courseApi = new API(urls.courses);
 	const listApi = new API(urls.builder);
-	const courseId = 11;
+
 	const coursesQuery = useQuery(
 		[`interactiveCourse${courseId}`, courseId],
 		() => courseApi.get(courseId)
@@ -36,6 +41,23 @@ const Sidebar = () => {
 	const listQuery = useQuery([`list${courseId}`, courseId], () =>
 		listApi.get(courseId)
 	);
+
+	const buttonStyles = {
+		variant: 'solid',
+		shadow: 'none',
+		bg: 'gray.50',
+		flex: '1',
+		border: '1px',
+		borderColor: 'gray.100',
+		'.chakra-button__icon': {
+			fontSize: 'lg',
+		},
+		_active: {
+			borderColor: 'transparent',
+			bg: 'white',
+			color: 'blue.500',
+		},
+	};
 
 	if (coursesQuery.isLoading || listQuery.isLoading) {
 		return <Spinner />;
@@ -88,6 +110,7 @@ const Sidebar = () => {
 						fontWeight="semibold">
 						{coursesQuery.data.name}
 					</DrawerHeader>
+
 					<DrawerBody p="0">
 						<Accordion allowToggle>
 							{listQuery.data.section_order.map((sectionId: any) => {
@@ -105,7 +128,24 @@ const Sidebar = () => {
 						</Accordion>
 					</DrawerBody>
 
-					<DrawerFooter></DrawerFooter>
+					<DrawerFooter p="0">
+						<ButtonGroup d="flex" flex="1" spacing="0">
+							<Button
+								leftIcon={<BiAlignLeft />}
+								isActive={currentTab === 1}
+								sx={buttonStyles}
+								onClick={() => setCurrentTab(1)}>
+								{__('Lessons', 'masteriyo')}
+							</Button>
+							<Button
+								leftIcon={<BiInfoCircle />}
+								isActive={currentTab === 2}
+								sx={buttonStyles}
+								onClick={() => setCurrentTab(2)}>
+								{__('Questions', 'masteriyo')}
+							</Button>
+						</ButtonGroup>
+					</DrawerFooter>
 				</DrawerContent>
 			</Drawer>
 		</Box>

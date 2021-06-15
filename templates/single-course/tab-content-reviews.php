@@ -86,10 +86,10 @@ do_action('masteriyo_before_single_course_reviews_content');
 						<?php echo esc_html($course_review->get_content()); ?>
 					</div>
 					<?php if (masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() || get_current_user_id() === $course_review->get_author_id()) : ?>
-						<div class="mto-flex mto-btngroup">
+						<!-- <div class="mto-flex mto-btngroup">
 							<div class="mto-edit-course-review"><a href="#" class="mto-link-primary"><strong class="text">Edit</strong></a></div>
 							<div class="mto-delete-course-review"><a href="#" class="mto-link-primary"><strong class="text">Delete</strong></a></div>
-						</div>
+						</div> -->
 					<?php endif; ?>
 				</div>
 			</div>

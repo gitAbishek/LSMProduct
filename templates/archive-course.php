@@ -39,6 +39,11 @@ do_action( 'masteriyo_before_main_content' );
 	do_action( 'masteriyo_archive_description' );
 	?>
 </header>
+
+<div class="course-search">
+	<?php masteriyo_get_course_search_form(); ?>
+</div>
+
 <?php
 if ( masteriyo_course_loop() ) {
 

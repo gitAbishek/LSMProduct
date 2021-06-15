@@ -47,8 +47,29 @@ do_action('masteriyo_before_single_course_reviews_content');
 					<img src="https://images.unsplash.com/photo-1552234994-66ba234fd567?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80" />
 				</div>
 				<div class="mto-flex mto-flex-column mto-right">
-					<div class="rating" data-value="<?php echo esc_attr($course_review->get_rating()); ?>">
-						<?php echo esc_html($course_review->get_rating()); ?>
+					<div class="mto-flex justify-content-between">
+						<div class="rating" data-value="<?php echo esc_attr($course_review->get_rating()); ?>">
+							<?php echo esc_html($course_review->get_rating()); ?>
+						</div>
+						<nav class="dropdown">
+							<label for="touch"><span class='icon_box'>
+									<svg width="5" height="16" viewBox="0 0 5 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M2.19629 6C1.09629 6 0.196289 6.9 0.196289 8C0.196289 9.1 1.09629 10 2.19629 10C3.29629 10 4.19629 9.1 4.19629 8C4.19629 6.9 3.29629 6 2.19629 6ZM2.19629 0C1.09629 0 0.196289 0.9 0.196289 2C0.196289 3.1 1.09629 4 2.19629 4C3.29629 4 4.19629 3.1 4.19629 2C4.19629 0.9 3.29629 0 2.19629 0ZM2.19629 12C1.09629 12 0.196289 12.9 0.196289 14C0.196289 15.1 1.09629 16 2.19629 16C3.29629 16 4.19629 15.1 4.19629 14C4.19629 12.9 3.29629 12 2.19629 12Z" fill="black" />
+									</svg>
+								</span></label>
+							<input type="checkbox" id="touch">
+							<?php if (masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() || get_current_user_id() === $course_review->get_author_id()) : ?>
+								<ul class="slide">
+									<li>
+										<div class="mto-edit-course-review"><a href="#" class=""><strong class="text">Edit</strong></a></div>
+									</li>
+									<li>
+										<div class="mto-delete-course-review"><a href="#" class=""><strong class="text">Delete</strong></a></div>
+									</li>
+								</ul>
+							<?php endif; ?>
+						</nav>
+
 					</div>
 					<div class="mto-flex">
 						<div class="author-name" data-value="<?php echo esc_attr($course_review->get_author_name()); ?>">

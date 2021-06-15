@@ -1051,17 +1051,23 @@ msgid "Currency"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:117
+<<<<<<< HEAD
 #: assets/js/getting-started/screens/currency/Currency.tsx:156
+=======
 msgid "Currency Position"
-msgstr ""
-
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:122
+<<<<<<< HEAD
 #: assets/js/getting-started/screens/currency/Currency.tsx:162
+=======
+>>>>>>> c21d3edf (added dropdown for edit and delete)
 msgid "Left"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:123
+<<<<<<< HEAD
 #: assets/js/getting-started/screens/currency/Currency.tsx:163
+=======
+>>>>>>> c21d3edf (added dropdown for edit and delete)
 msgid "Right"
 msgstr ""
 
@@ -1070,7 +1076,10 @@ msgid "Thausand Separator"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:140
+<<<<<<< HEAD
 #: assets/js/getting-started/screens/currency/Currency.tsx:184
+=======
+>>>>>>> c21d3edf (added dropdown for edit and delete)
 msgid "Decimal Separator"
 msgstr ""
 
@@ -1236,6 +1245,7 @@ msgstr ""
 
 #: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:72
 msgid "Enabled"
+<<<<<<< HEAD
 msgstr ""
 
 #: assets/js/getting-started/components/Footer.tsx:8
@@ -1371,4 +1381,6 @@ msgstr ""
 
 #: assets/js/interactive/components/Sidebar.tsx:71
 msgid "No courses found"
+=======
+>>>>>>> c21d3edf (added dropdown for edit and delete)
 msgstr ""

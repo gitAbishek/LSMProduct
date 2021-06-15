@@ -118,8 +118,8 @@
       color: $mto-primary-color;
       text-decoration: underline;
       margin-right: 16px;
-      font-size: 12px;
-      line-height: 14px;
+      font-size: 14px;
+      line-height: 16px;
     }
 
     .date-created {
@@ -180,4 +180,7 @@
   margin-top: 24px;
   margin-bottom: 32px;
   color: $mto-light-text-color;
+}
+.mto-border-none {
+  border: none;
 }

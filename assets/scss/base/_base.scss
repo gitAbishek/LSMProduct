@@ -30,6 +30,7 @@
 
 ul {
   li {
+    list-style-type: none;
     margin: 0;
   }
 }
@@ -97,4 +98,8 @@ ul {
       width: 100%;
     }
   }
+}
+
+.justify-content-between {
+  justify-content: space-between;
 }

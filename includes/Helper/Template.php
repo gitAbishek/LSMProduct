@@ -736,3 +736,47 @@ if ( ! function_exists( 'masteriyo_display_item_meta' ) ) {
 		}
 	}
 }
+
+if ( ! function_exists( 'masteriyo_get_course_search_form' ) ) {
+
+	/**
+	 * Display course search form.
+	 *
+	 * Will first attempt to locate the course-searchform.php file in either the child or.
+	 * the parent, then load it. If it doesn't exist, then the default search form.
+	 * will be displayed.
+	 *
+	 * The default searchform uses html5.
+	 *
+	 * @since 0.1.0
+	 * @param bool $echo (default: true).
+	 * @return string
+	 */
+	function masteriyo_get_course_search_form( $echo = true ) {
+		global $course_search_form_index;
+
+		ob_start();
+
+		if ( empty( $course_search_form_index ) ) {
+			$course_search_form_index = 0;
+		}
+
+		do_action( 'before_masteriyo_get_course_search_form' );
+
+		masteriyo_get_template(
+			'course-searchform.php',
+			array(
+				'index' => $course_search_form_index++,
+			)
+		);
+
+		$search_form = apply_filters( 'masteriyo_get_course_search_search_form', ob_get_clean() );
+
+		if ( ! $echo ) {
+			return $search_form;
+		}
+
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $search_form;
+	}
+}

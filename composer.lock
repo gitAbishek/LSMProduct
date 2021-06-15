@@ -1920,10 +1920,13 @@
                 "iri",
                 "sockets"
             ],
+<<<<<<< HEAD
             "support": {
                 "issues": "https://github.com/WordPress/Requests/issues",
                 "source": "https://github.com/WordPress/Requests/tree/v1.8.1"
             },
+=======
+>>>>>>> Created user items and user item meta table.
             "time": "2021-06-04T09:56:25+00:00"
         },
         {

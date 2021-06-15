@@ -83,6 +83,19 @@ class UserCourse extends Model {
 	*/
 
 	/**
+	 * Get table name.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_table_name() {
+		global $wpdb;
+
+		return "{$wpdb->base_prefix}masteriyo_user_items";
+	}
+
+	/**
 	 * Get course object.
 	 *
 	 * @since 0.1.0
@@ -123,6 +136,19 @@ class UserCourse extends Model {
 	 */
 	public function get_user_id( $context = 'view' ) {
 		return $this->get_prop( 'user_id', $context );
+	}
+
+	/**
+	 * Get user's course status.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_type( $context = 'view' ) {
+		return 'course';
 	}
 
 	/**
@@ -204,6 +230,17 @@ class UserCourse extends Model {
 	 */
 	public function set_user_id( $value ) {
 		$this->set_prop( 'user_id', absint( $value ) );
+	}
+
+	/**
+	 * Set user's course status (does nothing).
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param string $value User item type.
+	 */
+	public function set_type( $value ) {
+		//
 	}
 
 	/**

@@ -32,7 +32,7 @@ class UserCourseServiceProvider extends AbstractServiceProvider {
 		'user-course',
 		'user-course.store',
 		'user-course.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseProgressController',
+		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\UserCourseController',
 	);
 
 	/**
@@ -44,18 +44,18 @@ class UserCourseServiceProvider extends AbstractServiceProvider {
 	 * @since 0.1.0
 	 */
 	public function register() {
-		$this->getContainer()->add( 'user-course.store', CourseProgressRepository::class );
+		$this->getContainer()->add( 'user-course.store', UserCourseRepository::class );
 
 		$this->getContainer()
-			->add( 'user-course.rest', CourseProgressController::class )
+			->add( 'user-course.rest', UserCourseController::class )
 			->addArgument( 'permission' );
 
 		$this->getContainer()
-			->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseProgressController' )
+			->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\UserCourseController' )
 			->addArgument( 'permission' );
 
 		$this->getContainer()
-			->add( 'user-course', CourseProgress::class )
+			->add( 'user-course', UserCourse::class )
 			->addArgument( 'user-course.store' );
 	}
 }

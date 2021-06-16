@@ -1,6 +1,7 @@
 const routes = {
-	lesson: 'interactive/lesson/:lessonId',
-	quiz: 'interactive/quie/:quizId',
+	interactive: '/interactive',
+	lesson: '/interactive/lesson/:lessonId',
+	quiz: '/interactive/quiz/:quizId',
 };
 
 export default routes;

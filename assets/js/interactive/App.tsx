@@ -1,10 +1,10 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import 'focus-visible';
 
 import Router from './router/Router';
 import theme from '../back-end/theme/theme';
-import Interactive from './components/Interactive';
 
 const App = () => {
 	const queryClient = new QueryClient({
@@ -20,7 +20,7 @@ const App = () => {
 	return (
 		<ChakraProvider theme={theme}>
 			<QueryClientProvider client={queryClient}>
-				<Interactive></Interactive>
+				<Router />
 			</QueryClientProvider>
 		</ChakraProvider>
 	);

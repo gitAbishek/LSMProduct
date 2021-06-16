@@ -49,8 +49,6 @@ const EditQuestion: React.FC<Props> = (props) => {
 		}
 	};
 
-	console.log(questionData.type);
-
 	const onQuestionTypeChange = (questionType: {
 		value: string;
 		label: string;

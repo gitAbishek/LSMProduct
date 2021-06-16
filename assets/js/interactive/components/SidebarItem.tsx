@@ -33,7 +33,6 @@ const SidebarItem: React.FC<Props> = (props) => {
 		rounded: 'full',
 	};
 
-	console.log(newContents);
 	return (
 		<AccordionItem isDisabled={!newContents.length} _first={{ borderTop: 0 }}>
 			{({ isExpanded }) => (

@@ -18,7 +18,6 @@ const InteractiveLesson = () => {
 		() => lessonAPI.get(lessonId),
 		{
 			onSuccess: (data: any) => {
-				console.log(data);
 				setMediaId(data.featured_image);
 			},
 			onError: () => {
@@ -38,8 +37,6 @@ const InteractiveLesson = () => {
 	if (lessonQuery.isLoading) {
 		return <FullScreenLoader />;
 	}
-
-	console.log(imageQuery.data);
 
 	return (
 		<Container centerContent maxW="container.xl" py="8">

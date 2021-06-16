@@ -278,6 +278,7 @@ msgstr ""
 
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:121
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:104
+#: assets/js/interactive/components/Sidebar.tsx:148
 msgid "Questions"
 msgstr ""
 
@@ -325,27 +326,27 @@ msgstr ""
 msgid "Duplicate"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:108
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:106
 msgid "Please select question type"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:117
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:115
 msgid "Question Description"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:76
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:74
 msgid "Question Name"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:79
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:77
 msgid "Your Question Name"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:81
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:79
 msgid "You must provide name for the question"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:92
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:90
 msgid "Question Type"
 msgstr ""
 
@@ -801,4 +802,12 @@ msgstr ""
 
 #: assets/js/interactive/components/Header.tsx:74
 msgid "Submit Quiz"
+msgstr ""
+
+#: assets/js/interactive/components/Sidebar.tsx:141
+msgid "Lessons"
+msgstr ""
+
+#: assets/js/interactive/components/Sidebar.tsx:69
+msgid "No courses found"
 msgstr ""

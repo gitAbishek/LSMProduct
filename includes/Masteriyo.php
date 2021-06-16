@@ -243,7 +243,7 @@ class Masteriyo extends Container {
 				'parent' => 'site-name',
 				'id'     => 'masteriyo-interactive-page',
 				'title'  => __( 'Interactive page', 'masteriyo' ),
-				'href'   => home_url( '?masteriyo=interactive&course=12' ),
+				'href'   => home_url( '?masteriyo=interactive#/course/8' ),
 			)
 		);
 	}

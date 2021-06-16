@@ -24,11 +24,13 @@ import urls from '../../back-end/constants/urls';
 import SidebarItem from './SidebarItem';
 import { CloseCone } from '../../back-end/constants/images';
 import { __ } from '@wordpress/i18n';
+import { useParams } from 'react-router-dom';
 
 const Sidebar = () => {
+	const { courseId }: any = useParams();
+
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [currentTab, setCurrentTab] = useState<number>(1);
-	const courseId = 8;
 
 	const courseApi = new API(urls.courses);
 	const listApi = new API(urls.builder);
@@ -119,6 +121,7 @@ const Sidebar = () => {
 									return (
 										<SidebarItem
 											key={section.id}
+											courseId={courseId}
 											id={section.id}
 											name={section.name}
 											contents={section.contents}

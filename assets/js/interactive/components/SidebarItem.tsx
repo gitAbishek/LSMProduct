@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
 
 interface Props {
+	courseId: number;
 	id: number;
 	name: string;
 	contents: any;
@@ -23,7 +24,7 @@ interface Props {
 }
 
 const SidebarItem: React.FC<Props> = (props) => {
-	const { id, name, contents, contentsMap } = props;
+	const { courseId, id, name, contents, contentsMap } = props;
 	const newContents = contents?.map((contentId: any) => contentsMap[contentId]);
 
 	const centerStyles = {
@@ -68,10 +69,9 @@ const SidebarItem: React.FC<Props> = (props) => {
 											px="3"
 											py="3">
 											<Link
-												to={routes.lesson.replace(
-													':lessonId',
-													content.id.toString()
-												)}>
+												to={routes.lesson
+													.replace(':lessonId', content.id.toString())
+													.replace(':courseId', courseId.toString())}>
 												<Stack direction="row" spacing="2" alignItems="center">
 													<Icon
 														as={content.type === 'quiz' ? BiTimer : BiPlay}

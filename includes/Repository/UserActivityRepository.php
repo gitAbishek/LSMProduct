@@ -18,6 +18,15 @@ use ThemeGrill\Masteriyo\Repository\AbstractRepository;
 class UserActivityRepository extends AbstractRepository implements RepositoryInterface {
 
 	/**
+	 * Meta type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $meta_type = 'user_activity';
+
+	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
 	 * @since 3.0.0

@@ -148,7 +148,7 @@ class Checkout {
 			}
 
 			if ( empty( $posted_data['masteriyo_checkout_update_totals'] ) && 0 === masteriyo_notice_count( Notice::ERROR ) ) {
-				$this->process_customer( $posted_data );
+				$this->process_user( $posted_data );
 				$order_id = $this->create_order( $posted_data );
 				$order    = masteriyo_get_order( $order_id );
 
@@ -501,7 +501,7 @@ class Checkout {
 	 * @throws Exception When not able to create user.
 	 * @param array $data Posted data.
 	 */
-	protected function process_customer( $data ) {
+	protected function process_user( $data ) {
 		$user_id = apply_filters( 'masteriyo_checkout_user_id', get_current_user_id() );
 
 		// On multisite, ensure user exists on current site, if not add them before allowing login.
@@ -534,6 +534,11 @@ class Checkout {
 				}
 			}
 
+			/**
+			 * Action hook to adjust user before save during checkout.
+			 *
+			 * @since 0.1.0
+			 */
 			do_action( 'masteriyo_checkout_update_user', $user, $data );
 
 			$user->save();
@@ -605,13 +610,29 @@ class Checkout {
 			$order->set_payment_method( isset( $available_gateways[ $data['payment_method'] ] ) ? $available_gateways[ $data['payment_method'] ] : $data['payment_method'] );
 			$this->set_data_from_cart( $order );
 
+			/**
+			 * Action hook to adjust order before save.
+			 *
+			 * @since 0.1.0
+			 */
+			do_action( 'woocommerce_checkout_create_order', $order, $data );
 			do_action( 'masteriyo_checkout_create_order', $order, $data );
 
 			// Save the order.
 			$order_id = $order->save();
 
+			/**
+			 * Action hook fired after an order is created used to add custom meta to the order.
+			 *
+			 * @since 0.1.0
+			 */
 			do_action( 'masteriyo_checkout_update_order_meta', $order_id, $data );
 
+			/**
+			 * Action hook fired after an order is created.
+			 *
+			 * @since 0.1.0
+			 */
 			do_action( 'masteriyo_checkout_order_created', $order );
 
 			return $order_id;

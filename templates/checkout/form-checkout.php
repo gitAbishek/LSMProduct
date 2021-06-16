@@ -12,7 +12,26 @@ defined( 'ABSPATH' ) || exit;
 do_action( 'masteriyo_before_checkout_form' );
 
 if ( ! is_user_logged_in() ) {
-	echo esc_html( apply_filters( 'masteriyo_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'masteriyo' ) ) );
+	$message = sprintf(
+		apply_filters(
+			'masteriyo_checkout_must_be_logged_in_message',
+			// translators: %s: My account page link
+			__( 'You must be %1$slogged in%2$s to checkout.', 'masteriyo' )
+		),
+		'<a href="' . esc_url( masteriyo_get_myaccount_url() ) . '">',
+		'</a>'
+	);
+
+	echo wp_kses(
+		$message,
+		array(
+			'a' => array(
+				'href'  => array(),
+				'title' => array(),
+			),
+		)
+	);
+
 	return;
 }
 

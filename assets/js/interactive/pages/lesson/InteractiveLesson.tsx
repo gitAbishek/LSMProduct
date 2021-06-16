@@ -47,7 +47,9 @@ const InteractiveLesson = () => {
 				<Stack direction="column" spacing="8">
 					<Heading as="h5">{lessonQuery?.data?.name}</Heading>
 					<Image src={imageQuery?.data?.source_url} />
-					<Text>{lessonQuery?.data?.description}</Text>
+					<Text
+						dangerouslySetInnerHTML={{ __html: lessonQuery?.data?.description }}
+					/>
 				</Stack>
 			</Box>
 		</Container>

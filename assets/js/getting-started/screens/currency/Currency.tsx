@@ -20,7 +20,7 @@ import {
 	AlertIcon,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useState } from 'react';
+import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { currency } from '../../../back-end/utils/currency';
 import getSymbolFromCurrency from 'currency-symbol-map';

@@ -279,7 +279,7 @@ msgstr ""
 
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:121
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:104
-#: assets/js/interactive/components/Sidebar.tsx:148
+#: assets/js/interactive/components/Sidebar.tsx:151
 msgid "Questions"
 msgstr ""
 
@@ -807,16 +807,6 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
-#: assets/js/interactive/components/Header.tsx:74
-msgid "Submit Quiz"
-msgstr ""
-
-#: assets/js/interactive/components/Sidebar.tsx:141
-msgid "Lessons"
-msgstr ""
-
-#: assets/js/interactive/components/Sidebar.tsx:69
-msgid "No courses found"
 #: assets/js/getting-started/components/Footer.tsx:8
 msgid "MASTERIYO LMS. Designed by ThemeGrill"
 msgstr ""
@@ -944,10 +934,10 @@ msgstr ""
 msgid "Submit Quiz"
 msgstr ""
 
-#: assets/js/interactive/components/Sidebar.tsx:141
+#: assets/js/interactive/components/Sidebar.tsx:144
 msgid "Lessons"
 msgstr ""
 
-#: assets/js/interactive/components/Sidebar.tsx:69
+#: assets/js/interactive/components/Sidebar.tsx:71
 msgid "No courses found"
 msgstr ""

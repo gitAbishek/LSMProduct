@@ -12,6 +12,8 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { BiMinus, BiPlay, BiPlus, BiTimer } from 'react-icons/bi';
+import { Link } from 'react-router-dom';
+import routes from '../constants/routes';
 
 interface Props {
 	id: number;
@@ -31,6 +33,7 @@ const SidebarItem: React.FC<Props> = (props) => {
 		rounded: 'full',
 	};
 
+	console.log(newContents);
 	return (
 		<AccordionItem isDisabled={!newContents.length} _first={{ borderTop: 0 }}>
 			{({ isExpanded }) => (
@@ -65,17 +68,26 @@ const SidebarItem: React.FC<Props> = (props) => {
 											borderTopColor="gray.200"
 											px="3"
 											py="3">
-											<Stack direction="row" spacing="2" alignItems="center">
-												<Icon
-													as={content.type === 'quiz' ? BiTimer : BiPlay}
-													color="blue.500"
-													fontSize="xl"
-												/>
-												<Text color="gray.300" fontSize="xs" fontWeight="bold">
-													{index + 1}
-												</Text>
-												<Text fontSize="xs">{content.name}</Text>
-											</Stack>
+											<Link
+												to={routes.lesson.replace(
+													':lessonId',
+													content.id.toString()
+												)}>
+												<Stack direction="row" spacing="2" alignItems="center">
+													<Icon
+														as={content.type === 'quiz' ? BiTimer : BiPlay}
+														color="blue.500"
+														fontSize="xl"
+													/>
+													<Text
+														color="gray.300"
+														fontSize="xs"
+														fontWeight="bold">
+														{index + 1}
+													</Text>
+													<Text fontSize="xs">{content.name}</Text>
+												</Stack>
+											</Link>
 										</ListItem>
 									)
 								)}

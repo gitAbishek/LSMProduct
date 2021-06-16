@@ -63,6 +63,8 @@ class UserCourse extends Model {
 		'date_start'    => null,
 		'date_modified' => null,
 		'date_end'      => null,
+		'order_id'      => 0,
+		'price'         => '',
 	);
 
 	/**
@@ -104,6 +106,17 @@ class UserCourse extends Model {
 	 */
 	public function get_course() {
 		return masteriyo_get_course( $this->get_course_id() );
+	}
+
+	/**
+	 * Get order associated with the course.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return ThemeGrill\Masteriyo\Models\Course|NULL
+	 */
+	public function get_order() {
+		return masteriyo_get_order( $this->get_order_id() );
 	}
 
 	/*
@@ -203,6 +216,32 @@ class UserCourse extends Model {
 		return $this->get_prop( 'date_end', $context );
 	}
 
+	/**
+	 * Get user's course associated recent order ID.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_order_id( $context = 'view' ) {
+		return $this->get_prop( 'order_id', $context );
+	}
+
+	/**
+	 * Get user's course recent price.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_price( $context = 'view' ) {
+		return $this->get_prop( 'price', $context );
+	}
+
 
 	/*
 	|--------------------------------------------------------------------------
@@ -240,7 +279,7 @@ class UserCourse extends Model {
 	 * @param string $value User item type.
 	 */
 	public function set_type( $value ) {
-		//
+		// Don't updat the type.
 	}
 
 	/**
@@ -285,6 +324,28 @@ class UserCourse extends Model {
 	 */
 	public function set_date_end( $value ) {
 		$this->set_date_prop( 'date_end', $value );
+	}
+
+	/**
+	 * Set user's course associated recent order ID.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $value User's course end date.
+	 */
+	public function set_order_id( $value ) {
+		$this->set_prop( 'order_id', $value );
+	}
+
+	/**
+	 * Set user's course price.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $value User's course end date.
+	 */
+	public function set_price( $value ) {
+		$this->set_prop( 'price', $value );
 	}
 
 }

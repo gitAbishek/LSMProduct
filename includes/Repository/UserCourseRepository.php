@@ -21,7 +21,10 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	 * @since 0.1.0
 	 * @var array
 	 */
-	protected $internal_meta_keys = array();
+	protected $internal_meta_keys = array(
+		'order_id' => '_order_id',
+		'price'    => '_price',
+	);
 
 	/**
 	 * Create a user course in the database.
@@ -55,7 +58,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 					'status'        => $user_course->get_status( 'edit' ),
 					'date_start'    => gmdate( 'Y-m-d H:i:s', $user_course->get_date_start( 'edit' )->getTimestamp() ),
 					'date_modified' => gmdate( 'Y-m-d H:i:s', $user_course->get_date_modified( 'edit' )->getTimestamp() ),
-					'date_end'      => $date_complete,
+					'date_end'      => $date_end,
 				),
 				$user_course
 			),

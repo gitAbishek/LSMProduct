@@ -1,6 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import 'focus-visible';
 
 import Router from './router/Router';
 import theme from '../back-end/theme/theme';

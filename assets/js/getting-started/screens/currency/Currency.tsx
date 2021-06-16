@@ -20,7 +20,7 @@ import {
 	AlertIcon,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { currency } from '../../../back-end/utils/currency';
 import getSymbolFromCurrency from 'currency-symbol-map';
@@ -31,16 +31,40 @@ interface Props {
 	nextStep: () => void;
 }
 
-const Preview = ({ control }) => {
-	// Watch entire currency form.
-	const watchData = useWatch({
-		control,
-	});
+function validateData(generalWatchData?: any) {
+	if ('undefined' != typeof generalWatchData) {
+		// To check for number in input.
+		const regex: any = /\d/;
 
+		const { decimal_separator, thousands_separator } = generalWatchData;
+		let data: { message: string; isBtnEnable?: boolean };
+
+		if (regex.test(decimal_separator) || regex.test(thousands_separator)) {
+			return (data = {
+				message: "Thousand and decimal separator can't be number.",
+				isBtnEnable: false,
+			});
+		} else if (
+			'undefined' != typeof thousands_separator &&
+			decimal_separator === thousands_separator
+		) {
+			return (data = {
+				message: "Thousand and decimal separator can't be same.",
+				isBtnEnable: false,
+			});
+		} else {
+			return (data = {
+				message: 'Validate successfully',
+				isBtnEnable: true,
+			});
+		}
+	}
+}
+
+const Preview = ({ watchData }) => {
 	if ('undefined' != typeof watchData.general) {
 		let currencySymbol: string;
 
-		const regex: any = /\d/; // To check for number in input.
 		const {
 			currency,
 			currency_position,
@@ -51,23 +75,13 @@ const Preview = ({ control }) => {
 
 		currencySymbol = getSymbolFromCurrency(currency);
 
-		if (regex.test(decimal_separator) || regex.test(thousands_separator)) {
-			return (
-				<Alert fontSize="sm" status="error">
-					<AlertIcon />
-					{__("Thousand and decimal separator can't be number.", 'masteriyo')}
-				</Alert>
-			);
-		}
+		let validationData = validateData(watchData.general);
 
-		if (
-			'undefined' != typeof thousands_separator &&
-			decimal_separator === thousands_separator
-		) {
+		if (!validationData?.isBtnEnable) {
 			return (
 				<Alert fontSize="sm" status="error">
 					<AlertIcon />
-					{__("Thousand and decimal separator can't be same.", 'masteriyo')}
+					{validationData?.message}
 				</Alert>
 			);
 		}
@@ -102,6 +116,17 @@ const Preview = ({ control }) => {
 const Currency: React.FC<Props> = (props) => {
 	const { dashboardURL, prevStep, nextStep } = props;
 	const { register, control } = useFormContext();
+	// Watch entire currency form.
+	const watchData = useWatch({
+		control,
+	});
+
+	let enableBtn: boolean = true;
+
+	if ('undefined' != typeof watchData.general) {
+		let validationData = validateData(watchData.general);
+		enableBtn = validationData?.isBtnEnable;
+	}
 
 	return (
 		<Box rounded="3px">
@@ -197,7 +222,7 @@ const Currency: React.FC<Props> = (props) => {
 						</strong>
 						<Box rounded="3" boxSizing="border-box" w="md">
 							<Heading color="blue.500" as="h2" size="md">
-								<Preview control={control} />
+								<Preview watchData={watchData} />
 							</Heading>
 						</Box>
 					</Flex>
@@ -216,7 +241,11 @@ const Currency: React.FC<Props> = (props) => {
 									{__('Skip to Dashboard', 'masteriyo')}
 								</Button>
 							</Link>
-							<Button onClick={nextStep} rounded="3px" colorScheme="blue">
+							<Button
+								isDisabled={!enableBtn}
+								onClick={nextStep}
+								rounded="3px"
+								colorScheme="blue">
 								{__('Next', 'masteriyo')}
 							</Button>
 						</ButtonGroup>

@@ -40,9 +40,14 @@ do_action( 'masteriyo_before_main_content' );
 	?>
 </header>
 
-<div class="course-search">
-	<?php masteriyo_get_course_search_form(); ?>
-</div>
+<?php
+/**
+ * Hook: masteriyo_after_archive_header.
+ *
+ * @hooked masteriyo_course_search_form - 10
+ */
+do_action( 'masteriyo_after_archive_header' );
+?>
 
 <?php
 if ( masteriyo_course_loop() ) {

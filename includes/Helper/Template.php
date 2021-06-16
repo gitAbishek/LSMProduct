@@ -780,3 +780,20 @@ if ( ! function_exists( 'masteriyo_get_course_search_form' ) ) {
 		echo $search_form;
 	}
 }
+
+if ( ! function_exists( 'masteriyo_course_search_form' ) ) {
+
+	/**
+	 * Course Search Form.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_course_search_form() {
+		?>
+		<div class="course-search">
+			<?php masteriyo_get_course_search_form(); ?>
+		</div>
+		<?php
+	}
+	function_exists( 'add_action' ) && add_action( 'masteriyo_after_archive_header', 'masteriyo_course_search_form' );
+}

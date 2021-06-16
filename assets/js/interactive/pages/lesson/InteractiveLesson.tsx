@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Container, Heading, Text, Image } from '@chakra-ui/react';
+import { Box, Container, Heading, Text, Image, Stack } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import API from '../../../back-end/utils/api';
@@ -43,10 +43,12 @@ const InteractiveLesson = () => {
 
 	return (
 		<Container centerContent maxW="container.xl" py="8">
-			<Box bg="white" p="8" shadow="box" w="full">
-				<Heading as="h5">{lessonQuery?.data?.name}</Heading>
-				<Text>{lessonQuery?.data?.description}</Text>
-				<Image src={imageQuery?.data?.source_url} />
+			<Box bg="white" p="14" shadow="box" w="full">
+				<Stack direction="column" spacing="8">
+					<Heading as="h5">{lessonQuery?.data?.name}</Heading>
+					<Image src={imageQuery?.data?.source_url} />
+					<Text>{lessonQuery?.data?.description}</Text>
+				</Stack>
 			</Box>
 		</Container>
 	);

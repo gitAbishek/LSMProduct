@@ -47,31 +47,18 @@ function masteriyo_get_price_excluding_tax( $course, $args = array() ) {
  *
  * @since 0.1.0
  *
- * @param int|Course $course Course object or Course ID.
- * @param int|User $user User object or User ID.
+ * @param int|ThemeGrill\Masteriyo\Models\Course $course Course object or Course ID.
+ * @param int|ThemeGrill\Masteriyo\Models\User $user User object or User ID.
  *
  * @return bool
  */
-function masteriyo_is_course_can_be_enrolled( $course, $user = null ) {
+function masteriyo_can_course_be_enrolled( $course, $user = null ) {
+	if ( is_null( $user ) ) {
+		$user = masteriyo_get_current_user();
+	}
+
 	$course_id = is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ? $course->get_id() : $course;
 	$user_id   = is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ? $user->get_id() : $user;
 
-	if ( is_null( $user_id ) ) {
-		$user_id = get_current_user_id();
-	}
-
-	// Check whether the course is bought or not.
-	$orders = masteriyo_get_orders(
-		array(
-			'limit'       => -1,
-			'customer_id' => $user,
-		)
-	);
-
-	$order_ids = array_map(
-		function( $order ) {
-			return $order->get_id();
-		},
-		$orders
-	);
+	return apply_filters( 'masteriyo_can_course_be_enrolled', false, $course, $user );
 }

@@ -967,7 +967,29 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function single_add_to_cart_text() {
-		return apply_filters( 'masteriyo_single_course_add_to_cart_text', __( 'Enroll Now', 'masteriyo' ), $this );
+		return apply_filters( 'masteriyo_single_course_add_to_cart_text', __( 'Add to cart', 'masteriyo' ), $this );
+	}
+
+	/**
+	 * Get enroll button text for the single page.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function single_enroll_text() {
+		return apply_filters( 'masteriyo_single_course_enroll_text', __( 'Enroll Now', 'masteriyo' ), $this );
+	}
+
+	/**
+	 * Get enroll URL.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function enroll_url() {
+		return home_url( '?masteriyo=interactive#/course/' . $this->get_id() );
 	}
 
 	/**

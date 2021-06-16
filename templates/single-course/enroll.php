@@ -12,19 +12,27 @@ global $course;
 
 <?php do_action( 'masteriyo_before_add_to_cart_form' ); ?>
 
-	<form class="add_to_cart" method="post" enctype="multipart/form-data"
-		action="<?php echo esc_url( apply_filters( 'masteriyo_add_to_cart_form_action', $course->get_permalink() ) ); ?>">
-
-		<?php do_action( 'masteriyo_before_add_to_cart_button' ); ?>
-
-		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $course->get_id() ); ?>"
+	<?php if ( masteriyo_can_course_be_enrolled( $course ) ) : ?>
+		<a href="<?php echo esc_url( $course->enroll_url() ); ?>"
+			target="_blank"
 			class="single_add_to_cart_button button alt mto-btn mto-btn-primary mto-scourse--btn">
-			<?php echo esc_html( $course->single_add_to_cart_text() ); ?>
-		</button>
+			<?php echo esc_html( $course->single_enroll_text() ); ?>
+		</a>
+	<?php else : ?>
+		<form class="add_to_cart" method="post" enctype="multipart/form-data"
+			action="<?php echo esc_url( apply_filters( 'masteriyo_add_to_cart_form_action', $course->get_permalink() ) ); ?>">
 
-		<?php do_action( 'masteriyo_after_add_to_cart_button' ); ?>
+			<?php do_action( 'masteriyo_before_add_to_cart_button' ); ?>
 
-	</form>
+			<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $course->get_id() ); ?>"
+				class="single_add_to_cart_button button alt mto-btn mto-btn-primary mto-scourse--btn">
+				<?php echo esc_html( $course->single_add_to_cart_text() ); ?>
+			</button>
 
-<?php do_action( 'masteriyo_after_add_to_cart_form' ); ?>
+			<?php do_action( 'masteriyo_after_add_to_cart_button' ); ?>
+
+		</form>
+	<?php endif; ?>
+
 <?php
+	do_action( 'masteriyo_after_add_to_cart_form' );

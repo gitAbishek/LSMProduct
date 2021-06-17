@@ -523,8 +523,25 @@ class ScriptStyle {
 				'single-course'  => array(
 					'name' => 'masteriyo_data',
 					'data' => array(
-						'rootApiUrl' => esc_url_raw( rest_url() ),
-						'nonce'      => wp_create_nonce( 'wp_rest' ),
+						'rootApiUrl'              => esc_url_raw( rest_url() ),
+						'nonce'                   => wp_create_nonce( 'wp_rest' ),
+						'rating_indicator_markup' => masteriyo_get_rating_indicators_markup( 'mto-rating-input-icon' ),
+						'max_course_rating'       => masteriyo_get_max_course_rating(),
+						'labels'                  => array(
+							'type_confirm'   => __( 'Type CONFIRM to proceed', 'masteriyo' ),
+							'try_again'      => __( 'Try again', 'masteriyo' ),
+							'submit'         => __( 'Submit', 'masteriyo' ),
+							'update'         => __( 'Update', 'masteriyo' ),
+							'delete'         => __( 'Delete', 'masteriyo' ),
+							'submitting'     => __( 'Submitting...', 'masteriyo' ),
+							'deleting'       => __( 'Deleting...', 'masteriyo' ),
+							'reply_to'       => __( 'Reply to', 'masteriyo' ),
+							'edit_reply'     => __( 'Edit reply', 'masteriyo' ),
+							'edit_review'    => __( 'Edit review', 'masteriyo' ),
+							'submit_success' => __( 'Submitted successfully', 'masteriyo' ),
+							'update_success' => __( 'Updated successfully', 'masteriyo' ),
+							'delete_success' => __( 'Deleted successfully', 'masteriyo' ),
+						),
 					),
 				),
 				'checkout'       => array(

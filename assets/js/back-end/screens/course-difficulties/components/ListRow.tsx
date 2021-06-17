@@ -89,7 +89,9 @@ const ListRow: React.FC<Props> = (props) => {
 					{name}
 				</Link>
 			</Td>
-			<Td>{description ? description : '—'}</Td>
+			<Td
+				dangerouslySetInnerHTML={{ __html: description ? description : '—' }}
+			/>
 			<Td>{slug}</Td>
 			<Td>
 				<Link href={link} isExternal>
@@ -119,7 +121,7 @@ const ListRow: React.FC<Props> = (props) => {
 						<MenuList>
 							<Link href={link} isExternal>
 								<MenuItem icon={<BiShow />}>
-									{__('Go to frontend query', 'masteriyo')}
+									{__('View Difficulty', 'masteriyo')}
 								</MenuItem>
 							</Link>
 							<MenuItem onClick={onDeletePress} icon={<BiTrash />}>

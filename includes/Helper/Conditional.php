@@ -6,6 +6,7 @@
  */
 
 use ThemeGrill\Masteriyo\Constants;
+use ThemeGrill\Masteriyo\Models\CourseReview;
 
 if ( ! function_exists( 'masteriyo_is_filtered' ) ) {
 	/**
@@ -541,5 +542,28 @@ if ( ! function_exists( 'masteriyo_is_current_user_enrolled_in_course' ) ) {
 	 */
 	function masteriyo_is_current_user_enrolled_in_course( $course_id ) {
 		return masteriyo_is_user_enrolled_in_course( get_current_user_id(), $course_id );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_current_user_can_edit_course_review' ) ) {
+	/**
+	 * Check if the current logged in user can edit a course review.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int|string|WP_Comment|CourseReview $course_review_id
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_current_user_can_edit_course_review( $course_review_id = 0 ) {
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+		$review = masteriyo_get_course_review( $course_review_id );
+
+		if ( is_null( $review ) ) {
+			return false;
+		}
+		return get_current_user_id() === $review->get_author_id();
 	}
 }

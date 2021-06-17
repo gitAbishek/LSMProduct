@@ -1,6 +1,6 @@
 import { Container, useToast } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useState } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 
@@ -24,12 +24,6 @@ const SetupWizard: React.FC = () => {
 	const addMutation = useMutation((data?: any) => settingAPI.store(data), {
 		onSuccess: (data) => {
 			nextStep(); // To finish page.
-
-			toast({
-				title: `Global setting successfully updated`,
-				status: 'success',
-				isClosable: true,
-			});
 		},
 		onError: (error) => {
 			toast({

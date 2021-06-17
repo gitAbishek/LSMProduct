@@ -10,11 +10,11 @@ defined('ABSPATH') || exit; // Exit if accessed directly.
 
 global $course;
 
-$review_count        = $course->get_review_count();
 $rating              = $course->get_average_rating();
 $reviews_and_replies = masteriyo_get_course_reviews_and_replies($course);
 $course_reviews      = $reviews_and_replies['reviews'];
 $replies             = $reviews_and_replies['replies'];
+$review_count        = count( $course_reviews );
 $pp_placeholder      = masteriyo_get_course_review_author_pp_placeholder();
 
 /**
@@ -164,7 +164,7 @@ do_action('masteriyo_before_single_course_reviews_content');
 				<input type="hidden" name="rating" value="0" />
 				<div class="mto-stab-rs boxshadow-none ">
 					<span class="mto-icon-svg mto-flex mto-rstar">
-						<?php masteriyo_render_stars($rating, 'mto-rating-input-icon'); ?>
+						<?php masteriyo_render_stars(0, 'mto-rating-input-icon'); ?>
 					</span>
 				</div>
 			</div>

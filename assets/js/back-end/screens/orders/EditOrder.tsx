@@ -29,16 +29,16 @@ import {
 import { __ } from '@wordpress/i18n';
 import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import React, { useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
+import ReactSelect from 'react-select';
 
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import Header from 'Components/layout/Header';
-import CountryStateInputs from './components/CountryStateInputs';
 
 const orderStatusList = [
 	{
@@ -76,6 +76,23 @@ const paymentMethods = [
 		value: 'paypal',
 	},
 ];
+//@ts-ignore
+const states = window._MASTERIYO_.states;
+//@ts-ignore
+const countries = window._MASTERIYO_.countries;
+const countryOptions = Object.entries(countries).map(([code, name]) => ({
+	value: code,
+	label: name,
+}));
+const hasStates = (countryCode: string) => {
+	return !!states[countryCode];
+};
+const getStateOptions = (countryCode: string) => {
+	return Object.entries(states[countryCode]).map(([code, name]) => ({
+		value: code,
+		label: name,
+	}));
+};
 
 const EditOrder = () => {
 	const { orderId }: any = useParams();
@@ -84,6 +101,8 @@ const EditOrder = () => {
 		handleSubmit,
 		register,
 		formState: { errors },
+		control,
+		watch,
 	} = useForm();
 	const toast = useToast();
 	const cancelRef = useRef<any>();
@@ -117,6 +136,16 @@ const EditOrder = () => {
 			},
 		}
 	);
+
+	const billingCountry = watch('billing[country]');
+	const countryCode = billingCountry
+		? billingCountry.value
+		: orderQuery.data?.billing.country;
+	const isStatesAvailable = hasStates(countryCode);
+	const billingState = watch('billing[state]');
+	const stateCode = billingState
+		? billingState.value
+		: orderQuery.data?.billing.state;
 
 	const updateOrder = useMutation(
 		(data: object) => orderAPI.update(orderId, data),
@@ -163,7 +192,6 @@ const EditOrder = () => {
 				data.billing.state = data.billing.state.value;
 			}
 		}
-		console.log(data);
 		updateOrder.mutate(data);
 	};
 
@@ -294,7 +322,7 @@ const EditOrder = () => {
 											<FormControl isInvalid={!!errors?.first_name}>
 												<FormLabel>{__('First Name', 'masteriyo')}</FormLabel>
 												<Input
-													defaultValue={orderQuery.data.billing.first_name}
+													defaultValue={orderQuery.data?.billing.first_name}
 													{...register('billing[first_name]')}
 												/>
 												<FormErrorMessage>
@@ -304,7 +332,7 @@ const EditOrder = () => {
 											<FormControl isInvalid={!!errors?.last_name}>
 												<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
 												<Input
-													defaultValue={orderQuery.data.billing.last_name}
+													defaultValue={orderQuery.data?.billing.last_name}
 													{...register('billing[last_name]')}
 												/>
 												<FormErrorMessage>
@@ -317,7 +345,7 @@ const EditOrder = () => {
 										<FormControl isInvalid={!!errors?.company} py="3">
 											<FormLabel>{__('Company', 'masteriyo')}</FormLabel>
 											<Input
-												defaultValue={orderQuery.data.billing.company}
+												defaultValue={orderQuery.data?.billing.company}
 												{...register('billing[company]')}
 											/>
 											<FormErrorMessage>
@@ -326,17 +354,88 @@ const EditOrder = () => {
 										</FormControl>
 
 										{/* Country & State */}
-										{/* <CountryStateInputs
-											defaultCountry={orderQuery.data.billing.country}
-											defaultState={orderQuery.data.billing.state}
-										/> */}
+										<Stack direction="row" spacing="8" py="3">
+											<FormControl
+												isInvalid={errors && errors['billing[country]']}>
+												<FormLabel>
+													{__('Country / Region', 'masteriyo')}
+												</FormLabel>
+												<Controller
+													defaultValue={
+														orderQuery.data?.billing.country && {
+															label:
+																countries[orderQuery.data?.billing.country],
+															value: orderQuery.data?.billing.country,
+														}
+													}
+													render={(args) => {
+														const { field } = args;
+														return (
+															<ReactSelect
+																{...field}
+																isSearchable
+																options={countryOptions}
+															/>
+														);
+													}}
+													control={control}
+													name="billing[country]"
+												/>
+												<FormErrorMessage>
+													{errors &&
+														errors['billing[country]'] &&
+														errors['billing[country]'].message}
+												</FormErrorMessage>
+											</FormControl>
+											<FormControl
+												isInvalid={errors && errors['billing[state]']}>
+												<FormLabel>
+													{__('State / County', 'masteriyo')}
+												</FormLabel>
+												<Controller
+													defaultValue={
+														stateCode && {
+															label: states[stateCode],
+															value: stateCode,
+														}
+													}
+													render={({ field }) => {
+														if (isStatesAvailable) {
+															return (
+																<ReactSelect
+																	{...field}
+																	defaultValue={
+																		field.value.value && {
+																			label: states[field.value.value],
+																			value: field.value.value,
+																		}
+																	}
+																	isSearchable
+																	options={getStateOptions(countryCode)}
+																/>
+															);
+														}
+														return (
+															<Input {...field} value={field.value.value} />
+														);
+													}}
+													control={control}
+													name="billing[state]"
+												/>
+												<FormErrorMessage>
+													{errors &&
+														errors['billing[state]'] &&
+														errors['billing[state]'].message}
+												</FormErrorMessage>
+											</FormControl>
+										</Stack>
 
 										{/* Address Lines */}
 										<Stack direction="row" spacing="8" py="3">
 											<FormControl isInvalid={!!errors?.address_1}>
 												<FormLabel>{__('Address 1', 'masteriyo')}</FormLabel>
 												<Input
-													defaultValue={orderQuery.data.billing.address_1}
+													defaultValue={orderQuery.data?.billing.address_1}
 													{...register('billing[address_1]')}
 												/>
 												<FormErrorMessage>
@@ -346,7 +445,7 @@ const EditOrder = () => {
 											<FormControl isInvalid={!!errors?.address_2}>
 												<FormLabel>{__('Address 2', 'masteriyo')}</FormLabel>
 												<Input
-													defaultValue={orderQuery.data.billing.address_2}
+													defaultValue={orderQuery.data?.billing.address_2}
 													{...register('billing[address_2]')}
 												/>
 												<FormErrorMessage>
@@ -361,7 +460,7 @@ const EditOrder = () => {
 												isInvalid={errors && errors['billing[city]']}>
 												<FormLabel>{__('City', 'masteriyo')}</FormLabel>
 												<Input
-													defaultValue={orderQuery.data.billing.city}
+													defaultValue={orderQuery.data?.billing.city}
 													{...register('billing[city]')}
 												/>
 												<FormErrorMessage>
@@ -376,7 +475,7 @@ const EditOrder = () => {
 													{__('Postcode / ZIP', 'masteriyo')}
 												</FormLabel>
 												<Input
-													defaultValue={orderQuery.data.billing.postcode}
+													defaultValue={orderQuery.data?.billing.postcode}
 													{...register('billing[postcode]')}
 												/>
 												<FormErrorMessage>
@@ -395,7 +494,7 @@ const EditOrder = () => {
 													{__('Email address', 'masteriyo')}
 												</FormLabel>
 												<Input
-													defaultValue={orderQuery.data.billing.email}
+													defaultValue={orderQuery.data?.billing.email}
 													{...register('billing[email]')}
 													type="email"
 												/>
@@ -409,7 +508,7 @@ const EditOrder = () => {
 												isInvalid={errors && errors['billing[phone]']}>
 												<FormLabel>{__('Phone', 'masteriyo')}</FormLabel>
 												<Input
-													defaultValue={orderQuery.data.billing.phone}
+													defaultValue={orderQuery.data?.billing.phone}
 													{...register('billing[phone]')}
 												/>
 												<FormErrorMessage>

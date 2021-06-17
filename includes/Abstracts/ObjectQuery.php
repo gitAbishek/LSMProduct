@@ -9,7 +9,7 @@
 
 namespace ThemeGrill\Masteriyo\Abstracts;
 
-defined( 'ABSPATH' )  || exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Abstract Object Query Class
@@ -39,6 +39,8 @@ abstract class ObjectQuery {
 	 */
 	public function __construct( $args = array() ) {
 		$this->query_vars = wp_parse_args( $args, $this->get_default_query_vars() );
+
+		$this->parse_query_vars();
 	}
 
 	/**
@@ -110,11 +112,22 @@ abstract class ObjectQuery {
 			'exclude'        => '',
 			'limit'          => get_option( 'posts_per_page' ),
 			'page'           => 1,
-			'offset'         => '',
+			'offset'         => 0,
 			'paginate'       => false,
 			'order'          => 'DESC',
 			'orderby'        => 'date',
 			'return'         => 'objects',
 		);
+	}
+
+	/**
+	 * Parse query vars.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
+	protected function parse_query_vars() {
+		// Override this function in child class to map the query vars.
 	}
 }

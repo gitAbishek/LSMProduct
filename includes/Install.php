@@ -243,7 +243,7 @@ class Install {
 	 */
 	private static function get_user_items_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_user_items` (
-			`user_item_id` BIGINT UNSIGNED AUTO_INCREMENT,
+			`id` BIGINT UNSIGNED AUTO_INCREMENT,
 			`user_id` BIGINT UNSIGNED NOT NULL,
 			`item_id` BIGINT UNSIGNED NOT NULL,
 			`item_type` VARCHAR(255) NOT NULL DEFAULT '',
@@ -252,7 +252,7 @@ class Install {
 			`date_start` datetime DEFAULT '0000-00-00 00:00:00',
 			`date_modified` datetime DEFAULT '0000-00-00 00:00:00',
 			`date_end` datetime DEFAULT '0000-00-00 00:00:00',
-			PRIMARY KEY (`user_item_id`),
+			PRIMARY KEY (`id`),
 			KEY `user_id` (`user_id`),
 			KEY `item_id` (`item_id`),
 			KEY `parent_id` (`parent_id`),

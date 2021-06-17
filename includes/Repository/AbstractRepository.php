@@ -1042,7 +1042,6 @@ abstract class AbstractRepository {
 		return $wp_query_args;
 	}
 
-
 	/**
 	 * Converts a WP post date string into a timestamp.
 	 *

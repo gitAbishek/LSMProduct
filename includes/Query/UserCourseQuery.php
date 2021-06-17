@@ -36,6 +36,7 @@ class UserCourseQuery extends ObjectQuery {
 				'date_start'    => null,
 				'date_modified' => null,
 				'date_end'      => null,
+				'orderby'       => 'id',
 			)
 		);
 	}
@@ -53,3 +54,4 @@ class UserCourseQuery extends ObjectQuery {
 		return apply_filters( 'masteriyo_user_course_object_query', $results, $args );
 	}
 }
+

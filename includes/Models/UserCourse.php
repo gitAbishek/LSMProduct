@@ -334,7 +334,7 @@ class UserCourse extends Model {
 	 * @param int $value User's course end date.
 	 */
 	public function set_order_id( $value ) {
-		$this->set_prop( 'order_id', $value );
+		$this->set_prop( 'order_id', absint( $value ) );
 	}
 
 	/**

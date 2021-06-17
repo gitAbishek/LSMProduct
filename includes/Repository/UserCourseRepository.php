@@ -15,6 +15,16 @@ use ThemeGrill\Masteriyo\Repository\AbstractRepository;
  */
 class UserCourseRepository extends AbstractRepository implements RepositoryInterface {
 
+
+	/**
+	 * Meta type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $meta_type = 'user_item';
+
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
@@ -97,19 +107,22 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 			'date_end',
 		);
 
+		$date_end = $user_course->get_date_end( 'edit' );
+		$date_end = is_null( $date_end ) ? '' : gmdate( 'Y-m-d H:i:s', $date_end->getTimestamp() );
+
 		if ( array_intersect( $user_course_data_keys, array_keys( $changes ) ) ) {
 			$wpdb->update(
 				$user_course->get_table_name(),
 				array(
 					'user_id'       => $user_course->get_user_id( 'edit' ),
-					'item_id'       => $user_course->get_item_id( 'edit' ),
+					'item_id'       => $user_course->get_course_id( 'edit' ),
 					'item_type'     => $user_course->get_type( 'edit' ),
 					'status'        => $user_course->get_status( 'edit' ),
 					'date_start'    => gmdate( 'Y-m-d H:i:s', $user_course->get_date_start( 'edit' )->getTimestamp() ),
 					'date_modified' => gmdate( 'Y-m-d H:i:s', $user_course->get_date_modified( 'edit' )->getTimestamp() ),
-					'date_end'      => gmdate( 'Y-m-d H:i:s', $user_course->get_date_end( 'edit' )->getTimestamp() ),
+					'date_end'      => $date_end,
 				),
-				array( 'user_item_id' => $user_course->get_id() )
+				array( 'id' => $user_course->get_id() )
 			);
 		}
 
@@ -134,7 +147,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		if ( $user_course->get_id() ) {
 			do_action( 'masteriyo_before_delete_user_course', $user_course->get_id() );
 
-			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_items', array( 'user_item_id' => $user_course->get_id() ) );
+			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_items', array( 'id' => $user_course->get_id() ) );
 			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_itemmeta', array( 'user_item_id' => $user_course->get_id() ) );
 
 			do_action( 'masteriyo_delete_user_course', $user_course->get_id() );
@@ -159,7 +172,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 
 		$result = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}masteriyo_user_items WHERE user_item_id = %d;",
+				"SELECT * FROM {$wpdb->prefix}masteriyo_user_items WHERE id = %d;",
 				$user_course->get_id()
 			)
 		);
@@ -180,10 +193,40 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 			)
 		);
 
-		$user_course->read_meta_data();
+		$this->read_user_course_data( $user_course );
 		$user_course->set_object_read( true );
 
 		do_action( 'masteriyo_user_course_read', $user_course->get_id(), $user_course );
+	}
+
+	/**
+	 * Read user course data. Can be overridden by child classes to load other props.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param ThemeGrill\Masteriyo\Models\UserCourse $user_course User course object.
+	 */
+	protected function read_user_course_data( &$user_course ) {
+		$id          = $user_course->get_id();
+		$meta_values = $this->read_meta( $user_course );
+
+		$set_props = array();
+
+		$meta_values = array_reduce(
+			$meta_values,
+			function( $result, $meta_value ) {
+				$result[ $meta_value->key ][] = $meta_value->value;
+				return $result;
+			},
+			array()
+		);
+
+		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
+			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
+			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
+		}
+
+		$user_course->set_props( $set_props );
 	}
 
 	/**
@@ -213,6 +256,13 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		$search_criteria = array();
 		$sql[]           = "SELECT * FROM {$wpdb->base_prefix}masteriyo_user_items";
 
+		// Generate meta query.
+		$meta_sql = $this->parse_meta_query( $query_vars );
+
+		if ( ! empty( $meta_sql['join'] ) ) {
+			$sql[] = $meta_sql['join'];
+		}
+
 		// Construct where clause part.
 		if ( ! empty( $query_vars['user_id'] ) ) {
 			$search_criteria[] = $wpdb->prepare( 'user_id = %d', $query_vars['user_id'] );
@@ -235,17 +285,20 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 			$sql[]    = 'WHERE ' . $criteria;
 		}
 
+		if ( ! empty( $meta_sql['where'] ) ) {
+			$sql[] = $meta_sql['where'];
+		}
+
 		// Construct order and order by part.
 		$sql[] = 'ORDER BY ' . sanitize_sql_orderby( $query_vars['orderby'] . ' ' . $query_vars['order'] );
 
 		// Construct limit part.
-		$per_page = $query_vars['per_page'];
+		$limit = $query_vars['limit'];
 
-		if ( $query_vars['paged'] > 0 ) {
-			$offset = ( $query_vars['paged'] - 1 ) * $per_page;
+		if ( $query_vars['page'] > 0 && $limit > 1 ) {
+			$offset = ( $query_vars['page'] - 1 ) * $limit;
+			$sql[]  = $wpdb->prepare( 'LIMIT %d, %d', $offset, $limit );
 		}
-
-		$sql[] = $wpdb->prepare( 'LIMIT %d, %d', $offset, $per_page );
 
 		// Generate SQL from the SQL parts.
 		$sql = implode( ' ', $sql ) . ';';
@@ -253,8 +306,47 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		// Fetch the results.
 		$user_course = $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
-		$ids = wp_list_pluck( $user_course, 'user_item_id' );
+		$ids = wp_list_pluck( $user_course, 'id' );
 
 		return array_filter( array_map( 'masteriyo_get_user_course', $ids ) );
+	}
+
+	/**
+	 * Return after join and where clauses for meta.
+	 */
+	protected function parse_meta_query( $query_vars ) {
+		global $wpdb;
+
+		$meta_query_vars = array_filter(
+			$query_vars,
+			function( $query_var ) {
+				return isset( $this->internal_meta_keys[ $query_var ] );
+			},
+			ARRAY_FILTER_USE_KEY
+		);
+
+		// Bail early if there is not meta query vars.
+		if ( empty( $meta_query_vars ) ) {
+			return array(
+				'join'  => '',
+				'where' => '',
+			);
+		}
+
+		// Add underscore before meta key.
+		$meta_query_arr = array();
+		foreach ( $meta_query_vars as $key => $value ) {
+			$meta_query_arr[] = array(
+				'key'     => '_' . $key,
+				'value'   => $value,
+				'compare' => '=',
+			);
+		}
+
+		$meta_query = new \WP_Meta_Query();
+		$meta_query->parse_query_vars( array( 'meta_query' => $meta_query_arr ) );
+		$sql = $meta_query->get_sql( 'user_item', "{$wpdb->base_prefix}masteriyo_user_items", 'id', null );
+
+		return $sql;
 	}
 }

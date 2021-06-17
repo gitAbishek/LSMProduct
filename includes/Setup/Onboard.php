@@ -32,9 +32,12 @@ class Onboard {
 	 */
 	public function init() {
 
-		// if we are here, we assume we don't need to run the wizard again
-		// and the user doesn't need to be redirected here
-		update_option( 'masteriyo_first_time_activation_flag', true );
+		$wizard_ran = get_option( 'masteriyo_first_time_activation_flag', false );
+
+		// If Wizard was ran already, then do not proceed to Wizard page again,
+		if ( $wizard_ran ) {
+			return;
+		}
 
 		add_action( 'admin_menu', array( $this, 'add_onboarding_admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'onboard_setup_wizard' ), 30 );
@@ -46,7 +49,13 @@ class Onboard {
 	 * @since 0.1.0
 	 */
 	public function add_onboarding_admin_menu() {
-		add_dashboard_page( '', '', 'manage_options', $this->page_name, '' );
+		add_menu_page(
+			__( 'Masteriyo Onboard', 'masteriyo' ),
+			'masteriyo onboard',
+			'manage_options',
+			$this->page_name,
+			''
+		);
 	}
 
 	/**
@@ -55,6 +64,10 @@ class Onboard {
 	 * @since 0.1.0
 	 */
 	public function onboard_setup_wizard() {
+
+		// if we are here, we assume we don't need to run the wizard again
+		// and the user doesn't need to be redirected here
+		update_option( 'masteriyo_first_time_activation_flag', true );
 
 		// Proceeding only when we are on right page.
 		if ( ! isset( $_GET['page'] ) || $this->page_name !== $_GET['page'] ) {

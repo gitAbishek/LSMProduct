@@ -39,8 +39,8 @@ class Install {
 		update_option( 'masteriyo_plugin_version', MASTERIYO_VERSION );
 
 		// Save the install date.
-		if ( false == get_option( 'masteriyo_install_date' ) ) {
-			update_option( 'masteriyo_install_date', current_time( 'timestamp' ) );
+		if ( false === get_option( 'masteriyo_install_date' ) ) {
+			update_option( 'masteriyo_install_date', current_time( 'mysql', true ) );
 		}
 
 		flush_rewrite_rules();

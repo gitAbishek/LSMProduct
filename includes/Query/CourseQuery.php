@@ -31,7 +31,6 @@ class CourseQuery extends ObjectQuery {
 			array(
 				'type'              => 'course',
 				'status'            => array( 'draft', 'pending', 'private', 'publish' ),
-				'limit'             => get_option( 'posts_per_page' ),
 				'include'           => array(),
 				'date_created'      => '',
 				'date_modified'     => '',

@@ -1505,6 +1505,17 @@ function masteriyo_get_course_list_url() {
 }
 
 /**
+ * Gets the url to the my account page.
+ *
+ * @since  0.1.0
+ *
+ * @return string Url to checkout page
+ */
+function masteriyo_get_myaccount_url() {
+	return apply_filters( 'masteriyo_get_myaccount_url', masteriyo_get_page_permalink( 'myaccount' ) );
+}
+
+/**
  * Get current endpoint in the myaccount page.
  *
  * @since 0.1.0

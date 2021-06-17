@@ -65,7 +65,8 @@ class Install {
 		dbDelta( self::get_order_itemmeta_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_user_activity_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_user_activitymeta_table_schema( $charset_collate, $base_prefix ) );
-
+		dbDelta( self::get_user_items_table_schema( $charset_collate, $base_prefix ) );
+		dbDelta( self::get_user_itemmeta_table_schema( $charset_collate, $base_prefix ) );
 	}
 
 	/**
@@ -177,7 +178,7 @@ class Install {
 	 * @param string $charset_collate   Database charset collate.
 	 * @param string $base_prefix       Table prefix.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public static function get_user_activity_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_user_activities` (
@@ -225,6 +226,65 @@ class Install {
 			KEY `user_activity_id` (`user_activity_id`),
 			KEY `meta_key` (`meta_key`(191)),
 			KEY `meta_type` (`meta_type`(191))
+		) $charset_collate;";
+
+		return $sql;
+	}
+
+	/**
+	 * Get user items table schema.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $charset_collate   Database charset collate.
+	 * @param string $base_prefix       Table prefix.
+	 *
+	 * @return string
+	 */
+	private static function get_user_items_table_schema( $charset_collate, $base_prefix ) {
+		$sql = "CREATE TABLE `{$base_prefix}masteriyo_user_items` (
+			`id` BIGINT UNSIGNED AUTO_INCREMENT,
+			`user_id` BIGINT UNSIGNED NOT NULL,
+			`item_id` BIGINT UNSIGNED NOT NULL,
+			`item_type` VARCHAR(255) NOT NULL DEFAULT '',
+			`status` VARCHAR(255) NOT NULL DEFAULT '',
+			`parent_id` BIGINT UNSIGNED NOT NULL DEFAULT 0,
+			`date_start` datetime DEFAULT '0000-00-00 00:00:00',
+			`date_modified` datetime DEFAULT '0000-00-00 00:00:00',
+			`date_end` datetime DEFAULT '0000-00-00 00:00:00',
+			PRIMARY KEY (`id`),
+			KEY `user_id` (`user_id`),
+			KEY `item_id` (`item_id`),
+			KEY `parent_id` (`parent_id`),
+			KEY `status` (`status`(191)),
+			KEY `item_type` (`item_type`(191)),
+			KEY `date_start` (`date_start`),
+			KEY `date_modified` (`date_modified`),
+			KEY `date_end` (`date_end`)
+		) $charset_collate;";
+
+		return $sql;
+	}
+
+	/**
+	 * Get user items meta table schema.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $charset_collate   Database charset collate.
+	 * @param string $base_prefix       Table prefix.
+	 *
+	 * @return string
+	 */
+	private static function get_user_itemmeta_table_schema( $charset_collate, $base_prefix ) {
+		$sql = "CREATE TABLE `{$base_prefix}masteriyo_user_itemmeta` (
+			`meta_id` BIGINT UNSIGNED AUTO_INCREMENT,
+			`user_item_id` BIGINT UNSIGNED NOT NULL,
+			`meta_key` VARCHAR(255) NOT NULL,
+			`meta_value` LONGTEXT,
+			PRIMARY KEY (`meta_id`),
+			KEY `user_item_id` (`user_item_id`),
+			KEY `meta_key` (`meta_key`(191))
 		) $charset_collate;";
 
 		return $sql;

@@ -886,7 +886,12 @@ class Order extends AbstractOrder {
 	public function maybe_set_date_paid() {
 		// This logic only runs if the date_paid prop has not been set yet.
 		if ( ! $this->get_date_paid( 'edit' ) ) {
-			$payment_completed_status = apply_filters( 'masteriyo_payment_complete_order_status', $this->needs_processing() ? 'processing' : 'completed', $this->get_id(), $this );
+			$payment_completed_status = apply_filters(
+				'masteriyo_payment_complete_order_status',
+				$this->needs_processing() ? 'processing' : 'completed',
+				$this->get_id(),
+				$this
+			);
 
 			if ( $this->has_status( $payment_completed_status ) ) {
 				// If payment complete status is reached, set paid now.

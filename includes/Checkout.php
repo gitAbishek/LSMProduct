@@ -11,6 +11,8 @@
 namespace ThemeGrill\Masteriyo;
 
 use ThemeGrill\Masteriyo\Cart\Cart;
+use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+
 use ThemeGrill\Masteriyo\Session\Session;
 
 defined( 'ABSPATH' ) || exit;
@@ -74,6 +76,8 @@ class Checkout {
 	 */
 	private function init_hooks() {
 		add_action( 'masteriyo_checkout_form', array( $this, 'billing_form' ), 10 );
+		add_action( 'masteriyo_checkout_order_processed', array( $this, 'update_user_course' ), 10, 3 );
+		add_filter( 'masteriyo_payment_complete_order_status', array( $this, 'update_user_course_status' ), 10, 3 );
 	}
 
 	/**
@@ -148,7 +152,7 @@ class Checkout {
 			}
 
 			if ( empty( $posted_data['masteriyo_checkout_update_totals'] ) && 0 === masteriyo_notice_count( Notice::ERROR ) ) {
-				$this->process_customer( $posted_data );
+				$this->process_user( $posted_data );
 				$order_id = $this->create_order( $posted_data );
 				$order    = masteriyo_get_order( $order_id );
 
@@ -501,7 +505,7 @@ class Checkout {
 	 * @throws Exception When not able to create user.
 	 * @param array $data Posted data.
 	 */
-	protected function process_customer( $data ) {
+	protected function process_user( $data ) {
 		$user_id = apply_filters( 'masteriyo_checkout_user_id', get_current_user_id() );
 
 		// On multisite, ensure user exists on current site, if not add them before allowing login.
@@ -534,6 +538,11 @@ class Checkout {
 				}
 			}
 
+			/**
+			 * Action hook to adjust user before save during checkout.
+			 *
+			 * @since 0.1.0
+			 */
 			do_action( 'masteriyo_checkout_update_user', $user, $data );
 
 			$user->save();
@@ -605,13 +614,28 @@ class Checkout {
 			$order->set_payment_method( isset( $available_gateways[ $data['payment_method'] ] ) ? $available_gateways[ $data['payment_method'] ] : $data['payment_method'] );
 			$this->set_data_from_cart( $order );
 
+			/**
+			 * Action hook to adjust order before save.
+			 *
+			 * @since 0.1.0
+			 */
 			do_action( 'masteriyo_checkout_create_order', $order, $data );
 
 			// Save the order.
 			$order_id = $order->save();
 
+			/**
+			 * Action hook fired after an order is created used to add custom meta to the order.
+			 *
+			 * @since 0.1.0
+			 */
 			do_action( 'masteriyo_checkout_update_order_meta', $order_id, $data );
 
+			/**
+			 * Action hook fired after an order is created.
+			 *
+			 * @since 0.1.0
+			 */
 			do_action( 'masteriyo_checkout_order_created', $order );
 
 			return $order_id;
@@ -763,5 +787,87 @@ class Checkout {
 				'redirect' => apply_filters( 'masteriyo_checkout_no_payment_needed_redirect', $order->get_checkout_order_received_url(), $order ),
 			)
 		);
+	}
+
+	/**
+	 * Insert or update the user ccourse.
+	 *r
+	 * @since 0.1.0
+	 *
+	 * @param int $order_id                             Order ID.
+	 * @param array $posted_data                        Posted data.
+	 * @param ThemeGrill\Masteriyo\Models\Order $order  Order object.
+	 */
+	public function update_user_course( $order_id, $posted_data, $order ) {
+		// Get order items.
+		$order_items = (array) $order->get_items();
+
+		// Update user course.
+		foreach ( $order_items as $order_item ) {
+			// Bail early if its not course items.
+			if ( ! is_a( $order_item, '\ThemeGrill\Masteriyo\Models\Order\OrderItemCourse' ) ) {
+				continue;
+			}
+
+			$user_course = masteriyo( 'user-course' );
+			$user_course->set_user_id( $order->get_customer_id() );
+			$user_course->set_status( $order->get_status() );
+			$user_course->set_order_id( $order->get_id() );
+			$user_course->set_course_id( $order_item->get_course_id( 'edit' ) );
+			$user_course->save();
+		}
+	}
+
+	/**
+	 * Update the user course status when the order status associaited with the course changes.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $order_status Order status
+	 * @param int $order_id Order ID.
+	 * @param ThemeGrill\Masteriyo\Models\Order\Order $order Order object.
+	 */
+	public function update_user_course_status( $order_status, $order_id, $order ) {
+		$customer     = masteriyo_get_current_user();
+		$course_items = $order->get_items();
+
+		// Bail early if there is not customer or no order items.
+		if ( empty( $customer ) || empty( $course_items ) ) {
+			$order_status;
+		}
+
+		$course_ids = array_map(
+			function( $course_item ) {
+				return $course_item->get_course_id();
+			},
+			$course_items
+		);
+
+		foreach ( $course_items as $course_item ) {
+			$query = new UserCourseQuery(
+				array(
+					'course_id' => $course_item->get_course_id(),
+					'user_id'   => $customer->get_id(),
+					'order_id'  => $order_id,
+				)
+			);
+
+			$user_courses = $query->get_user_courses();
+
+			if ( empty( $user_courses ) ) {
+				$order_staus;
+			}
+
+			$user_course = $user_courses[0];
+
+			if ( $order_id !== $user_course->get_order_id() ) {
+				$order_staus;
+			}
+
+			$user_course->set_status( $order_status );
+			$user_course->save();
+		}
+
+		return $order_status;
 	}
 }

@@ -211,6 +211,7 @@ class Masteriyo extends Container {
 					"{$namespace}\\UserActivityServiceProvider",
 					"{$namespace}\\CourseProgressServiceProvider",
 					"{$namespace}\\QuizProgressServiceProvider",
+					"{$namespace}\\UserCourseServiceProvider",
 				)
 			)
 		);
@@ -476,6 +477,7 @@ class Masteriyo extends Container {
 		$tables = array(
 			'order_itemmeta'    => 'masteriyo_order_itemmeta',
 			'user_activitymeta' => 'masteriyo_user_activitymeta',
+			'user_itemmeta'     => 'masteriyo_user_itemmeta',
 		);
 
 		foreach ( $tables as $name => $table ) {

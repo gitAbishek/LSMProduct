@@ -87,6 +87,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 					'post_title'    => $this->get_order_title(),
 					'post_password' => $this->get_order_key( $order ),
 					'ping_status'   => 'closed',
+					'post_excerpt'  => $order->get_customer_note( 'edit' ),
 					'post_date'     => gmdate( 'Y-m-d H:i:s', $order->get_date_created( 'edit' )->getOffsetTimestamp() ),
 					'post_date_gmt' => gmdate( 'Y-m-d H:i:s', $order->get_date_created( 'edit' )->getTimestamp() ),
 				),
@@ -129,7 +130,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 				'status'        => $order_post->post_status,
 				'date_created'  => $this->string_to_timestamp( $order_post->post_date_gmt ),
 				'date_modified' => $this->string_to_timestamp( $order_post->post_modified_gmt ),
-				'customer_id'   => absint( $order_post->post_author ),
+				'customer_note' => $order_post->post_excerpt,
 			)
 		);
 

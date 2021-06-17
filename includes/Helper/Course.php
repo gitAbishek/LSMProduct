@@ -9,6 +9,7 @@
  */
 
 use ThemeGrill\Masteriyo\Constants;
+use ThemeGrill\Masteriyo\Query\UserCourseQuery;
 
 /**
  * For a given course, and optionally price/qty, work out the price with tax excluded, based on store settings.
@@ -53,6 +54,8 @@ function masteriyo_get_price_excluding_tax( $course, $args = array() ) {
  * @return bool
  */
 function masteriyo_can_course_be_enrolled( $course, $user = null ) {
+	$can_be_enrolled = false;
+
 	if ( is_null( $user ) ) {
 		$user = masteriyo_get_current_user();
 	}
@@ -60,5 +63,19 @@ function masteriyo_can_course_be_enrolled( $course, $user = null ) {
 	$course_id = is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ? $course->get_id() : $course;
 	$user_id   = is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ? $user->get_id() : $user;
 
-	return apply_filters( 'masteriyo_can_course_be_enrolled', false, $course, $user );
+	$query = new UserCourseQuery(
+		array(
+			'course_id' => $course_id,
+			'user_id'   => $user_id,
+			'limit'     => 1,
+		)
+	);
+
+	$user_course = $query->get_user_courses();
+
+	if ( ! empty( $user_course ) && 'completed' === $user_course[0]->get_status() ) {
+		$can_be_enrolled = true;
+	}
+
+	return apply_filters( 'masteriyo_can_course_be_enrolled', $can_be_enrolled, $course, $user );
 }

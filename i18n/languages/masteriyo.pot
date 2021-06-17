@@ -30,6 +30,7 @@ msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:108
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:132
+#: assets/js/getting-started/screens/currency/Currency.tsx:221
 msgid "Preview"
 msgstr ""
 
@@ -278,7 +279,7 @@ msgstr ""
 
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:121
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:104
-#: assets/js/interactive/components/Sidebar.tsx:148
+#: assets/js/interactive/components/Sidebar.tsx:151
 msgid "Questions"
 msgstr ""
 
@@ -521,6 +522,7 @@ msgid "Open Link"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:76
+#: assets/js/getting-started/screens/course/Course.tsx:50
 msgid "Course Per Page"
 msgstr ""
 
@@ -601,18 +603,22 @@ msgid "Content"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:104
+#: assets/js/getting-started/screens/currency/Currency.tsx:138
 msgid "Currency"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:117
+#: assets/js/getting-started/screens/currency/Currency.tsx:156
 msgid "Currency Position"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:122
+#: assets/js/getting-started/screens/currency/Currency.tsx:162
 msgid "Left"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:123
+#: assets/js/getting-started/screens/currency/Currency.tsx:163
 msgid "Right"
 msgstr ""
 
@@ -621,6 +627,7 @@ msgid "Thausand Separator"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:140
+#: assets/js/getting-started/screens/currency/Currency.tsx:184
 msgid "Decimal Separator"
 msgstr ""
 
@@ -800,14 +807,137 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
+#: assets/js/getting-started/components/Footer.tsx:8
+msgid "MASTERIYO LMS. Designed by ThemeGrill"
+msgstr ""
+
+#: assets/js/getting-started/screens/course/Course.tsx:35
+msgid "Course Per Row"
+msgstr ""
+
+#: assets/js/getting-started/screens/course/Course.tsx:68
+#: assets/js/getting-started/screens/currency/Currency.tsx:236
+#: assets/js/getting-started/screens/pages/Pages.tsx:104
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:77
+msgid "Back"
+msgstr ""
+
+#: assets/js/getting-started/screens/course/Course.tsx:73
+#: assets/js/getting-started/screens/currency/Currency.tsx:241
+#: assets/js/getting-started/screens/pages/Pages.tsx:109
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:82
+#: assets/js/getting-started/screens/welcome/Welcome.tsx:53
+msgid "Skip to Dashboard"
+msgstr ""
+
+#: assets/js/getting-started/screens/course/Course.tsx:77
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:86
+msgid "Continue"
+msgstr ""
+
+#: assets/js/getting-started/screens/currency/Currency.tsx:171
+msgid "Thousands Separator"
+msgstr ""
+
+#: assets/js/getting-started/screens/currency/Currency.tsx:197
+msgid "Number of Decimal"
+msgstr ""
+
+#: assets/js/getting-started/screens/currency/Currency.tsx:249
+msgid "Next"
+msgstr ""
+
+#: assets/js/getting-started/screens/finish/Finish.tsx:36
+msgid "Congratulation, you're all set!"
+msgstr ""
+
+#: assets/js/getting-started/screens/finish/Finish.tsx:40
+msgid ""
+"Massa sed integer amet consequat. Est ultricies nisi, \n"
+"\t\t\t\t\t\t\t\tconsectetur pellentesque metus, sit dolor urna. Malesuada \n"
+"\t\t\t\t\t\t\t\tvenenatis, nulla quis ac."
+msgstr ""
+
+#: assets/js/getting-started/screens/finish/Finish.tsx:52
+msgid "Visit your site"
+msgstr ""
+
+#: assets/js/getting-started/screens/finish/Finish.tsx:58
+msgid "Back to dashboard"
+msgstr ""
+
+#: assets/js/getting-started/screens/finish/Finish.tsx:64
+msgid "Install sample course"
+msgstr ""
+
+#: assets/js/getting-started/screens/finish/Finish.tsx:68
+msgid "Create a new course"
+msgstr ""
+
+#: assets/js/getting-started/screens/pages/Pages.tsx:117
+msgid "Finish"
+msgstr ""
+
+#: assets/js/getting-started/screens/pages/Pages.tsx:35
+msgid "Select a page..."
+msgstr ""
+
+#: assets/js/getting-started/screens/pages/Pages.tsx:68
+msgid "Course List"
+msgstr ""
+
+#: assets/js/getting-started/screens/pages/Pages.tsx:79
+msgid "My Account"
+msgstr ""
+
+#: assets/js/getting-started/screens/pages/Pages.tsx:90
+msgid "Checkout"
+msgstr ""
+
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:38
+msgid "Time Limit"
+msgstr ""
+
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:48
+msgid "Minutes"
+msgstr ""
+
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:56
+msgid "Attempts Allowed"
+msgstr ""
+
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:66
+msgid "Attempts"
+msgstr ""
+
+#: assets/js/getting-started/screens/welcome/Welcome.tsx:33
+msgid "Welcome To MASTERIYO"
+msgstr ""
+
+#: assets/js/getting-started/screens/welcome/Welcome.tsx:36
+msgid "A Simple and Powerful LMS"
+msgstr ""
+
+#: assets/js/getting-started/screens/welcome/Welcome.tsx:39
+msgid ""
+"Thank you for choosing MASTERIYO LMS for your online \n"
+"\t\t\t\t\t\t\t\tcourses. This short setup will guide you through the \n"
+"\t\t\t\t\t\t\t\tbasic settings and configure MASTERIYO LMS so you can \n"
+"\t\t\t\t\t\t\t\tget started creating courses faster"
+msgstr ""
+
+#: assets/js/getting-started/screens/welcome/Welcome.tsx:49
+msgid "Start Now"
+msgstr ""
+
 #: assets/js/interactive/components/Header.tsx:74
 msgid "Submit Quiz"
 msgstr ""
 
-#: assets/js/interactive/components/Sidebar.tsx:141
+#: assets/js/interactive/components/Sidebar.tsx:144
 msgid "Lessons"
 msgstr ""
 
-#: assets/js/interactive/components/Sidebar.tsx:69
+#: assets/js/interactive/components/Sidebar.tsx:71
 msgid "No courses found"
 msgstr ""

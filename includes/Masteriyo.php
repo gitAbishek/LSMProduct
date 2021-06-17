@@ -16,6 +16,7 @@ use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
 use ThemeGrill\Masteriyo\AdminMenu;
 use ThemeGrill\Masteriyo\FileRestrictions\FileRestrictions;
 use ThemeGrill\Masteriyo\Shortcodes\Shortcodes;
+use ThemeGrill\Masteriyo\Setup\Onboard;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -116,6 +117,7 @@ class Masteriyo extends Container {
 				return $query_vars;
 			}
 		);
+		add_action( 'admin_init', array( $this, 'admin_redirects' ) );
 	}
 
 	/**
@@ -131,8 +133,25 @@ class Masteriyo extends Container {
 
 		$this->register_order_status();
 		$this->load_text_domain();
+		$this->setup_wizard();
 
 		do_action( 'masteriyo_init' );
+	}
+
+	/**
+	 * Setup wizard method.
+	 *
+	 * @return void
+	 */
+	public function setup_wizard() {
+		// Setup.
+		if ( ! empty( $_GET['page'] ) ) {
+
+			if ( 'masteriyo-onboard' == $_GET['page'] ) {
+				$onboard_obj = new Onboard();
+				$onboard_obj->init();
+			}
+		}
 	}
 
 	/**
@@ -388,6 +407,32 @@ class Masteriyo extends Container {
 			);
 			exit;
 		}
+	}
+
+	/**
+	 * Redirecting user to onboard or other page.
+	 *
+	 * @since 0.1.0
+	 */
+	public function admin_redirects() {
+
+		if ( ! get_transient( '_masteriyo_activation_redirect' ) ) {
+			return;
+		}
+
+		delete_transient( '_masteriyo_activation_redirect' );
+
+		if ( ( ! empty( $_GET['page'] ) && in_array( $_GET['page'], array( 'masteriyo-onboard' ) ) ) || is_network_admin() || isset( $_GET['activate-multi'] ) || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		 // If plugin is running for first time, redirect to onboard page.
+		if ( get_option( 'masteriyo_first_time_activation_flag' ) != '1' ) {
+			wp_safe_redirect( admin_url( 'index.php?page=masteriyo-onboard' ) );
+			exit;
+		}
+
+		return;
 	}
 
 	/**

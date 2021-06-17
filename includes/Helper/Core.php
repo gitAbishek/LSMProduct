@@ -571,8 +571,8 @@ function masteriyo_get_current_user() {
  * @since 0.1.0
  *
  * @param int|float $rating Given rating.
- * @param string $classes Extra classes to add to the svgs.
- * @param string $echo Whether to echo or return the html.
+ * @param string    $classes Extra classes to add to the svgs.
+ * @param string    $echo Whether to echo or return the html.
  *
  * @return void|string
  */
@@ -687,7 +687,7 @@ function masteriyo_get_lessons_count( $course ) {
  *
  * @since 0.1.0
  *
- * @param int $minutes Total length in minutes.
+ * @param int    $minutes Total length in minutes.
  * @param string $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
  *
  * @return string
@@ -716,7 +716,7 @@ function masteriyo_minutes_to_time_length_string( $minutes, $format = null ) {
  * @since 0.1.0
  *
  * @param int|Course|WP_Post $course
- * @param string $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
+ * @param string             $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
  *
  * @return string
  */
@@ -748,7 +748,7 @@ function masteriyo_get_lecture_hours( $course, $format = null ) {
  * @since 0.1.0
  *
  * @param int|Section|WP_Post $course
- * @param string $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
+ * @param string              $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
  *
  * @return string
  */
@@ -1650,7 +1650,7 @@ function masteriyo_logout_url( $redirect = '' ) {
  *
  * @since 0.1.0
  *
- * @param string $name SVG filename.
+ * @param string  $name SVG filename.
  * @param boolean $echo Whether to echo the contents or not.
  *
  * @return void|string
@@ -1740,7 +1740,7 @@ function masteriyo_get_account_menu_items() {
  * @since 0.1.0
  *
  * @param boolean $bool
- * @param string $str
+ * @param string  $str
  */
 function masteriyo_echo_if( $bool, $str = '' ) {
 	if ( ! ! $bool ) {
@@ -1816,7 +1816,7 @@ function masteriyo_is_edit_myaccount_page() {
  * @since 0.1.0
  *
  * @param string $setting_name
- * @param mixed $default
+ * @param mixed  $default
  *
  * @return mixed
  */
@@ -2116,7 +2116,7 @@ function masteriyo_set_password_reset_cookie( $value = '' ) {
  * @since 0.1.0
  *
  * @param string $reset_key
- * @param int $user_id
+ * @param int    $user_id
  */
 function masteriyo_get_password_reset_link( $reset_key, $user_id ) {
 	return add_query_arg(

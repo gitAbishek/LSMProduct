@@ -9,6 +9,11 @@ module.exports = {
 				'assets/js/interactive',
 				'index.tsx'
 			),
+			gettingStarted: path.resolve(
+				process.cwd(),
+				'assets/js/getting-started',
+				'index.tsx'
+			),
 		},
 		output: path.resolve(process.cwd(), 'assets/js/build'),
 	},

@@ -31,7 +31,7 @@ const config = {
 				test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
 				loader: require.resolve('url-loader'),
 				options: {
-					limit: 10000,
+					limit: 150000,
 					name: 'static/media/[name].[hash:8].[ext]',
 				},
 			},
@@ -64,6 +64,12 @@ const config = {
 			filename: 'interactive.html',
 			chunks: ['interactive'],
 			template: './assets/js/interactive/index.html',
+		}),
+
+		new HtmlWebpackPlugin({
+			filename: 'getting-started.html',
+			chunks: ['gettingStarted'],
+			template: './assets/js/getting-started/index.html',
 		}),
 
 		new ReactRefreshWebpackPlugin({

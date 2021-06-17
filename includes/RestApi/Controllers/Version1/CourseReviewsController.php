@@ -322,7 +322,6 @@ class CourseReviewsController extends CommentsController {
 					'description' => __( 'Course ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
 				),
 				'name'         => array(
 					'description' => __( 'Course Reviewer Author.', 'masteriyo' ),
@@ -360,7 +359,6 @@ class CourseReviewsController extends CommentsController {
 					'description' => __( 'Course Review Title.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
-					'required'    => true,
 				),
 				'content'  => array(
 					'description' => __( 'Course Review Content.', 'masteriyo' ),
@@ -392,7 +390,6 @@ class CourseReviewsController extends CommentsController {
 					'description' => __( 'Course Review Parent.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
 				),
 				'author_id'      => array(
 					'description' => __( 'The User ID.', 'masteriyo' ),
@@ -516,6 +513,11 @@ class CourseReviewsController extends CommentsController {
 		// Course Review Type.
 		if ( isset( $request['type'] ) ) {
 			$course_review->set_type( $request['type'] );
+		}
+
+		// Course ID.
+		if ( isset( $request['course_id'] ) ) {
+			$course_review->set_course_id( $request['course_id'] );
 		}
 
 		// Course Review Parent.

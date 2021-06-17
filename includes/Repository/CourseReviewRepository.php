@@ -276,6 +276,9 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		// Fetching review of comment_type 'course_review', 'type' already map to 'post_type' so need to add 'type' as 'comment_type' here.
 		$args = array_merge( $args, array( 'type' => 'course_review' ) );
 
+		if ( isset( $query_vars['course_id'] ) ) {
+			$args['post_id'] = $query_vars['course_id'];
+		}
 		if ( ! empty( $args['errors'] ) ) {
 			$query = (object) array(
 				'posts'         => array(),

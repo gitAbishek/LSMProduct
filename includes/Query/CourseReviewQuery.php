@@ -28,7 +28,9 @@ class CourseReviewQuery extends ObjectQuery {
 	protected function get_default_query_vars() {
 		return array_merge(
 			parent::get_default_query_vars(),
-			array()
+			array(
+				'course_id' => '',
+			)
 		);
 	}
 

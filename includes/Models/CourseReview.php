@@ -253,6 +253,17 @@ class CourseReview extends Model {
 	}
 
 	/**
+	 * Check if this is a reply.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	public function is_reply() {
+		return absint( $this->get_parent('edit') ) > 0;
+	}
+
+	/**
 	 * Get author_id.
 	 *
 	 * @since  0.1.0
@@ -263,6 +274,17 @@ class CourseReview extends Model {
 	 */
 	public function get_author_id( $context = 'view' ) {
 		return $this->get_prop( 'author_id', $context );
+	}
+
+	/**
+	 * Get author.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @return User
+	 */
+	public function get_author() {
+		return masteriyo_get_user( $this->get_author_id() );
 	}
 
 	/*

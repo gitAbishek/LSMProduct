@@ -530,22 +530,16 @@ function masteriyo_get_current_user() {
 }
 
 /**
- * Render stars based on rating.
+ * Get markup for rating indicators.
  *
  * @since 0.1.0
  *
- * @param int|float $rating Given rating.
- * @param string    $classes Extra classes to add to the svgs.
- * @param string    $echo Whether to echo or return the html.
- *
- * @return void|string
+ * @param string $classes
+ * @return array
  */
-function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
-	$rating     = (float) $rating;
-	$html       = '';
-	$max_rating = apply_filters( 'masteriyo_max_course_rating', 5 );
-	$stars      = apply_filters(
-		'masteriyo_rating_indicators_html',
+function masteriyo_get_rating_indicators_markup( $classes = '' ) {
+	return apply_filters(
+		'masteriyo_rating_indicators_markup',
 		array(
 			'full_star'  =>
 				"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
@@ -559,16 +553,45 @@ function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
 				"<svg class='mto-inline-block mto-fill-current {$classes}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
 				<path d='M6.516 14.323l-1.49 6.452a.998.998 0 001.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822 0L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 00.832-.586L12 5.43l1.799 3.981a.998.998 0 00.832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 00-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 00-.276-.94l-3.038-2.962 4.09-.326z'/>
 			</svg>",
-		),
-		$rating,
-		$max_rating
+		)
 	);
+}
+
+/**
+ * Get max allowed rating for course.
+ *
+ * @since 0.1.0
+ *
+ * @return integer
+ */
+function masteriyo_get_max_course_rating() {
+	return apply_filters( 'masteriyo_max_course_rating', 5 );
+}
+
+/**
+ * Render stars based on rating.
+ *
+ * @since 0.1.0
+ *
+ * @param int|float $rating Given rating.
+ * @param string $classes Extra classes to add to the svgs.
+ * @param string $echo Whether to echo or return the html.
+ *
+ * @return void|string
+ */
+function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
+	$rating     = (float) $rating;
+	$html       = '';
+	$max_rating = masteriyo_get_max_course_rating();
+	$rating     = $rating > $max_rating ? $max_rating : $rating;
+	$rating     = $rating < 0 ? 0 : $rating;
+	$stars      = masteriyo_get_rating_indicators_markup( $classes );
 
 	$rating_floor = floor( $rating );
 	for ( $i = 1; $i <= $rating_floor; $i++ ) {
 		$html .= $stars['full_star'];
 	}
-	if ( $rating_floor !== $rating ) {
+	if ( $rating_floor < $rating ) {
 		$html .= $stars['half_star'];
 	}
 
@@ -2643,3 +2666,59 @@ function masteriyo_get_current_ip_address() {
 	return $geolocation['ip_address'];
 }
 
+/**
+ * Get placeholder image for an author of a course review.
+ *
+ * @since 0.1.0
+ *
+ * @return string
+ */
+function masteriyo_get_course_review_author_pp_placeholder() {
+	return apply_filters('masteriyo_course_review_author_pp_placeholder', 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png');
+}
+
+/**
+ * Get course reviews and replies.
+ *
+ * @since 0.1.0
+ *
+ * @param integer|string|Course|WP_Post $course_id
+ *
+ * @return array
+ */
+function masteriyo_get_course_reviews_and_replies( $course_id ) {
+	$course = masteriyo_get_course( $course_id );
+
+	if ( is_null( $course ) ) {
+		return array(
+			'reviews' => array(),
+			'replies' => array(),
+		);
+	}
+
+	$course_reviews  = masteriyo_get_course_reviews(
+		array(
+			'course_id' => $course->get_id(),
+		)
+	);
+	$filtered_reviews = array();
+	$replies          = array();
+
+	foreach ($course_reviews as $review) {
+		if (!$review->is_reply()) {
+			$filtered_reviews[] = $review;
+			continue;
+		}
+		$key = $review->get_parent();
+
+		if (!isset($replies[$key])) {
+			$replies[$key] = array();
+		}
+		$replies[$key][] = $review;
+	}
+
+	return array(
+		'reviews' => $filtered_reviews,
+		'replies' => $replies,
+	);
+}

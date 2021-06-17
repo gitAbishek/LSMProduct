@@ -60,11 +60,11 @@
 	};
 	var masteriyo_helper = {
 		confirm: function () {
-			var res = window.prompt('Type CONFIRM to proceed');
+			var res = window.prompt(mto_data.labels.type_confirm);
 
 			if (null === res) return false;
 			if ('CONFIRM' !== res) {
-				alert('Try again');
+				alert(mto_data.labels.try_again);
 				return false;
 			}
 			return true;
@@ -72,17 +72,62 @@
 		removeNotices: function ($element) {
 			$element.find('.mto-notify-message').remove();
 		},
+		get_rating_markup: function( rating ) {
+			rating     = rating === '' ? 0 : rating;
+			rating     = parseFloat(rating);
+			html       = '';
+			max_rating = mto_data.max_course_rating;
+			rating     = rating > max_rating ? max_rating : rating;
+			rating     = rating < 0 ? 0 : rating;
+			stars      = mto_data.rating_indicator_markup;
+
+			rating_floor = Math.floor( rating );
+			for ( i = 1; i <= rating_floor; i++ ) {
+				html += stars.full_star;
+			}
+			if ( rating_floor < rating ) {
+				html += stars.half_star;
+			}
+
+			rating_ceil = Math.ceil( rating );
+			for ( i = rating_ceil; i < max_rating; i++ ) {
+				html += stars.empty_star;
+			}
+			return html;
+		},
 	};
 	var masteriyo = {
 		$create_revew_form: $('.mto-submit-review-form'),
+		create_review_form_class: '.mto-submit-review-form',
 
 		init: function () {
 			$(document).ready(function () {
+				masteriyo.init_rating_widget();
+				masteriyo.init_menu_toggler();
 				masteriyo.init_faqs_accordions_handler();
 				masteriyo.init_curriculum_accordions_handler();
 				masteriyo.init_create_reviews_handler();
 				masteriyo.init_edit_reviews_handler();
 				masteriyo.init_delete_reviews_handler();
+				masteriyo.init_reply_btn_handler();
+			});
+		},
+		init_menu_toggler: function() {
+			$(document.body).on('click', '.menu-toggler', function() {
+				if ( $(this).siblings('.menu').height() == 0 ) {
+					$(this).siblings('.menu').height('auto');
+					$(this).siblings('.menu').css('max-height', '999px');
+					return;
+				}
+				$(this).siblings('.menu').height(0);
+			});
+		},
+		init_rating_widget: function () {
+			$(masteriyo.create_review_form_class).on('click', '.mto-rating-input-icon', function() {
+				var rating = $(this).index() + 1;
+
+				masteriyo.$create_revew_form.find('input[name="rating"]').val(rating);
+				$(this).closest('.mto-rstar').html(masteriyo_helper.get_rating_markup(rating));
 			});
 		},
 		init_create_reviews_handler: function () {
@@ -96,18 +141,19 @@
 				var data = {
 					title: $form.find('input[name="title"]').val(),
 					rating: $form.find('input[name="rating"]').val(),
-					content: $form.find('input[name="content"]').val(),
+					content: $form.find('[name="content"]').val(),
+					parent: $form.find('[name="parent"]').val(),
+					course_id: $form.find('[name="course_id"]').val(),
 				};
 
 				if (isCreating || 'yes' === $form.data('edit-mode')) return;
 
 				isCreating = true;
-				$submit_button.text('Submitting...');
+				$submit_button.text(mto_data.labels.submitting);
 				masteriyo_helper.removeNotices($form);
 				masteriyo_api.createCourseReview(data, {
-					onSuccess: function (res) {
-						var message = 'Review submitted successfully';
-						$form.append(masteriyo_utils.getSuccessNotice(message));
+					onSuccess: function () {
+						$form.append(masteriyo_utils.getSuccessNotice(mto_data.labels.submit_success));
 						window.location.reload();
 					},
 					onError: function (xhr, status, error) {
@@ -118,12 +164,40 @@
 						}
 
 						$form.append(masteriyo_utils.getErrorNotice(message));
-						$submit_button.text('Submit');
+						$submit_button.text(mto_data.labels.submit);
 					},
 					onComplete: function () {
 						isCreating = false;
 					},
 				});
+			});
+		},
+		init_reply_btn_handler: function() {
+			$(document.body).on('click', '.mto-reply-course-review', function (e) {
+				e.preventDefault();
+
+				var $form = masteriyo.$create_revew_form;
+				var $review = $(this).closest('.mto-course-review');
+				var review_id = $review.data('id');
+				var $submit_button = $form.find('button[type="submit"]');
+				var title = $review.find('.title').data('value');
+
+				$form.find('input[name="title"]').val('');
+				$form.find('input[name="rating"]').val(0);
+				$form.find('.mto-rstar').html(masteriyo_helper.get_rating_markup(0));
+				$form.find('[name="content"]').val('');
+				$form.find('[name="parent"]').val(review_id);
+				$submit_button.text(mto_data.labels.submit);
+
+				$('.mto-form-title').text(mto_data.labels.reply_to + ': ' + title);
+				$form.find('.mto-title, .mto-rating').hide();
+				$form.find('[name="content"]').focus();
+				$('html, body').animate(
+					{
+						scrollTop: $form.offset().top,
+					},
+					500
+				);
 			});
 		},
 		init_edit_reviews_handler: function () {
@@ -137,21 +211,38 @@
 				var title = $review.find('.title').data('value');
 				var rating = $review.find('.rating').data('value');
 				var content = $review.find('.content').data('value');
+				var parent = $review.find('[name="parent"]').val();
 
 				$form.data('edit-mode', 'yes');
 				$form.data('review-id', review_id);
 				$form.find('input[name="title"]').val(title);
 				$form.find('input[name="rating"]').val(rating);
-				$form.find('input[name="content"]').val(content);
-				$submit_button.text('Update');
+				$form.find('.mto-rstar').html(masteriyo_helper.get_rating_markup(rating));
+				$form.find('[name="content"]').val(content);
+				$form.find('[name="parent"]').val(parent);
+				$submit_button.text(mto_data.labels.update);
 
-				$form.find('input[name="title"]').focus();
-				$('html, body').animate(
-					{
-						scrollTop: $form.offset().top,
-					},
-					500
-				);
+				if ( $review.is('.is-course-review-reply') ) {
+					$('.mto-form-title').text(mto_data.labels.edit_reply);
+					$form.find('.mto-title, .mto-rating').hide();
+					$form.find('[name="content"]').focus();
+					$('html, body').animate(
+						{
+							scrollTop: $form.offset().top,
+						},
+						500
+					);
+				} else {
+					$('.mto-form-title').text(mto_data.labels.edit_review + ': ' + title);
+					$form.find('.mto-title, .mto-rating').show();
+					$form.find('input[name="title"]').focus();
+					$('html, body').animate(
+						{
+							scrollTop: $form.offset().top,
+						},
+						500
+					);
+				}
 			});
 
 			var isSubmitting = false;
@@ -165,19 +256,20 @@
 				var data = {
 					title: $form.find('input[name="title"]').val(),
 					rating: $form.find('input[name="rating"]').val(),
-					content: $form.find('input[name="content"]').val(),
+					content: $form.find('[name="content"]').val(),
+					parent: $form.find('[name="parent"]').val(),
+					course_id: $form.find('[name="course_id"]').val(),
 				};
 
 				if (isSubmitting || 'yes' !== $form.data('edit-mode')) return;
 
 				isSubmitting = true;
-				$submit_button.text('Submitting...');
+				$submit_button.text(mto_data.labels.submitting);
 				masteriyo_helper.removeNotices($form);
 				masteriyo_api.updateCourseReview(review_id, data, {
-					onSuccess: function (res) {
-						var message = 'Review updated successfully';
-						$form.append(masteriyo_utils.getSuccessNotice(message));
-						$submit_button.text('Update');
+					onSuccess: function () {
+						$form.append(masteriyo_utils.getSuccessNotice(mto_data.labels.update_success));
+						$submit_button.text(mto_data.labels.update);
 						window.location.reload();
 					},
 					onError: function (xhr, status, error) {
@@ -188,7 +280,7 @@
 						}
 
 						$form.append(masteriyo_utils.getErrorNotice(message));
-						$submit_button.text('Update');
+						$submit_button.text(mto_data.labels.update);
 					},
 					onComplete: function () {
 						isSubmitting = false;
@@ -209,11 +301,10 @@
 				if (isDeletingFlags[review_id] || !masteriyo_helper.confirm()) return;
 
 				isDeletingFlags[review_id] = true;
-				$delete_button.find('.text').text('Deleting...');
+				$delete_button.find('.text').text(mto_data.labels.deleting);
 				masteriyo_api.deleteCourseReview(review_id, {
-					onSuccess: function (res) {
-						var message = 'Deleted review successfully';
-						$review.after(masteriyo_utils.getSuccessNotice(message));
+					onSuccess: function () {
+						$review.after(masteriyo_utils.getSuccessNotice(mto_data.labels.delete_success));
 						$review.remove();
 					},
 					onError: function (xhr, status, error) {
@@ -224,7 +315,7 @@
 						}
 
 						$review.append(masteriyo_utils.getErrorNotice(message));
-						$delete_button.find('.text').text('Delete');
+						$delete_button.find('.text').text(mto_data.labels.delete);
 					},
 					onComplete: function () {
 						isDeletingFlags[review_id] = false;

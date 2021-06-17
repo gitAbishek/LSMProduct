@@ -7,6 +7,7 @@
 
 use ThemeGrill\Masteriyo\DateTime;
 use ThemeGrill\Masteriyo\Constants;
+use ThemeGrill\Masteriyo\Geolocation;
 use ThemeGrill\Masteriyo\Models\Course;
 use ThemeGrill\Masteriyo\Models\Section;
 use ThemeGrill\Masteriyo\Models\Faq;
@@ -2673,4 +2674,16 @@ function masteriyo_get_user_activity_statuses() {
 			'complete',
 		)
 	);
+}
+
+/**
+ * Get ip address for current request.
+ *
+ * @since 0.1.0
+ *
+ * @return string
+ */
+function masteriyo_get_current_ip_address() {
+	$geolocation = Geolocation::geolocate_ip( '', true );
+	return $geolocation['ip_address'];
 }

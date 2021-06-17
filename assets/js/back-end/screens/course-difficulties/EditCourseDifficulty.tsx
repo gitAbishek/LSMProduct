@@ -66,6 +66,7 @@ const EditCourseDifficulty = () => {
 					isClosable: true,
 					status: 'success',
 				});
+				history.push(routes.course_difficulties.list);
 				queryClient.invalidateQueries('courseDifficultiesList');
 			},
 			onError: (error: any) => {

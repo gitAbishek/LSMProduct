@@ -40,9 +40,7 @@ const AddNewCourseCategory = () => {
 					isClosable: true,
 					status: 'success',
 				});
-				history.push(
-					routes.course_categories.edit.replace(':categoryId', data.id)
-				);
+				history.push(routes.course_categories.list);
 				queryClient.invalidateQueries('courseCategoriesList');
 			},
 			onError: (error: any) => {

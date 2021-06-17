@@ -40,9 +40,7 @@ const AddNewCourseDifficulty = () => {
 					isClosable: true,
 					status: 'success',
 				});
-				history.push(
-					routes.course_difficulties.edit.replace(':difficultyId', data.id)
-				);
+				history.push(routes.course_difficulties.list);
 				queryClient.invalidateQueries('courseDifficultiesList');
 			},
 			onError: (error: any) => {

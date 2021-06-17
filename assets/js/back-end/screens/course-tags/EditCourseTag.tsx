@@ -64,6 +64,7 @@ const EditCourseTag = () => {
 				isClosable: true,
 				status: 'success',
 			});
+			history.push(routes.course_tags.list);
 			queryClient.invalidateQueries('courseTagsList');
 		},
 		onError: (error: any) => {

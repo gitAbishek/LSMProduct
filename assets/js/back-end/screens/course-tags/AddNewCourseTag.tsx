@@ -38,7 +38,7 @@ const AddNewCourseTag = () => {
 				isClosable: true,
 				status: 'success',
 			});
-			history.push(routes.course_tags.edit.replace(':tagId', data.id));
+			history.push(routes.course_tags.list);
 			queryClient.invalidateQueries('courseTagsList');
 		},
 		onError: (error: any) => {

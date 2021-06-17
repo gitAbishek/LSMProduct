@@ -66,6 +66,7 @@ const EditCourseCategory = () => {
 					isClosable: true,
 					status: 'success',
 				});
+				history.push(routes.course_categories.list);
 				queryClient.invalidateQueries('courseCategoriesList');
 			},
 			onError: (error: any) => {

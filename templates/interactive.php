@@ -28,34 +28,8 @@ use ThemeGrill\Masteriyo\Constants;
 
 	<body>
 		<div id="masteriyo-interactive-course"></div>
-		<script>
-			window._MASTERIYO_ = {
-				rootApiUrl: 'http://localhost/masteriyo/wp-json',
-				nonce: 'cafca5cd48',
-				pageSlugs: {
-					courseList: 'course-list',
-					myaccount: 'myaccount',
-					checkout: 'masteriyo-checkout',
-				},
-				currency: {
-					code: 'USD',
-					symbol: '&#36;',
-					position: 'left',
-				},
-				imageSizes: [
-					'thumbnail',
-					'medium',
-					'medium_large',
-					'large',
-					'1536x1536',
-					'2048x2048',
-					'post-thumbnail',
-				],
-			};
-		</script>
 		<?php wp_footer(); ?>
 	</body>
 </html>
 
 <?php
-

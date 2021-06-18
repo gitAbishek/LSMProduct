@@ -2747,7 +2747,10 @@ function masteriyo_update_course_average_rating( $course_id ) {
 			$rating_sum += (float) $rating;
 		}
 	}
-	$course->set_average_rating( $rating_sum / count( $reviews ) );
+	$rating = $rating_sum / count( $reviews );
+	$rating = min( $rating, masteriyo_get_max_course_rating() );
+
+	$course->set_average_rating( $rating );
 	$course->save();
 }
 

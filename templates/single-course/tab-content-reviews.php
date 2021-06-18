@@ -31,7 +31,7 @@ do_action('masteriyo_before_single_course_reviews_content');
 		</span>
 
 		<span class="mto-rnumber">
-			<?php echo esc_html($rating); ?> <?php _e('out of', 'masteriyo'); ?> <?php echo esc_html(masteriyo_get_max_course_rating()); ?>
+			<?php echo esc_html( masteriyo_round( $rating, 1 ) ); ?> <?php _e('out of', 'masteriyo'); ?> <?php echo esc_html(masteriyo_get_max_course_rating()); ?>
 		</span>
 	</div>
 </div>

@@ -16,6 +16,9 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useFormContext } from 'react-hook-form';
 import PagesAPI from '../../../back-end/utils/pages';
+import { SetttingsMap } from '../../../back-end/types';
+import urls from '../../../back-end/constants/urls';
+import API from '../../../back-end//utils/api';
 interface Props {
 	mutationLoading: boolean;
 	dashboardURL: string;
@@ -25,8 +28,12 @@ interface Props {
 const Pages: React.FC<Props> = (props) => {
 	const { mutationLoading, dashboardURL, prevStep } = props;
 	const { register } = useFormContext();
+	const settingsApi = new API(urls.settings);
 	const pageAPI = new PagesAPI();
 	const pagesQuery = useQuery('pages', () => pageAPI.list());
+	const settingsQuery = useQuery<SetttingsMap>('settings', () =>
+		settingsApi.list()
+	);
 
 	const renderPagesOption = () => {
 		try {
@@ -52,7 +59,7 @@ const Pages: React.FC<Props> = (props) => {
 		<Box rounded="3px">
 			<Box bg="white" p="30" shadow="box">
 				<Stack direction="column" spacing="8">
-					{pagesQuery.isLoading ? (
+					{pagesQuery.isLoading || settingsQuery.isLoading ? (
 						<>
 							<Stack spacing="8">
 								<Skeleton h="6" />
@@ -67,7 +74,12 @@ const Pages: React.FC<Props> = (props) => {
 									<FormLabel sx={{ fontWeight: 'bold' }}>
 										{__('Course List', 'masteriyo')}
 									</FormLabel>
-									<Select w="md" {...register('pages.course_list_page_id')}>
+									<Select
+										defaultValue={
+											settingsQuery?.data?.pages?.course_list_page_id
+										}
+										w="md"
+										{...register('pages.course_list_page_id')}>
 										{renderPagesOption()}
 									</Select>
 								</Flex>
@@ -78,7 +90,10 @@ const Pages: React.FC<Props> = (props) => {
 									<FormLabel sx={{ fontWeight: 'bold' }}>
 										<Text fontSize="sm">{__('My Account', 'masteriyo')}</Text>
 									</FormLabel>
-									<Select w="md" {...register('pages.myaccount_page_id')}>
+									<Select
+										defaultValue={settingsQuery?.data?.pages?.myaccount_page_id}
+										w="md"
+										{...register('pages.myaccount_page_id')}>
 										{renderPagesOption()}
 									</Select>
 								</Flex>
@@ -89,7 +104,10 @@ const Pages: React.FC<Props> = (props) => {
 									<FormLabel sx={{ fontWeight: 'bold' }}>
 										{__('Checkout', 'masteriyo')}
 									</FormLabel>
-									<Select w="md" {...register('pages.checkout_page_id')}>
+									<Select
+										defaultValue={settingsQuery?.data?.pages?.checkout_page_id}
+										w="md"
+										{...register('pages.checkout_page_id')}>
 										{renderPagesOption()}
 									</Select>
 								</Flex>

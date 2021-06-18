@@ -7,7 +7,6 @@ import {
 	Heading,
 	Icon,
 	Image,
-	Link,
 	Stack,
 	Tab,
 	TabList,
@@ -138,11 +137,11 @@ const AddNewCourse: React.FC = () => {
 												<Stack direction="column" spacing="6">
 													<Name />
 													<Description />
-													<Price />
 												</Stack>
 											</Box>
 											<Box w="400px" bg="white" p="10" shadow="box">
 												<Stack direction="column" spacing="6">
+													<Price />
 													<Categories />
 													<FeaturedImage />
 												</Stack>

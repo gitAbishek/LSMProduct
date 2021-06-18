@@ -35,7 +35,7 @@ const Price: React.FC<Props> = (props) => {
 					name="price"
 					defaultValue={defaultValue || 0}
 					render={({ field }) => (
-						<NumberInput {...field}>
+						<NumberInput {...field} w="full">
 							<NumberInputField borderRadius="sm" shadow="input" />
 							<NumberInputStepper>
 								<NumberIncrementStepper />

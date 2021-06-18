@@ -5,6 +5,10 @@ const routes = {
 		edit: '/courses/:courseId',
 		settings: '/courses/:courseId/settings',
 	},
+	orders: {
+		list: '/orders',
+		edit: '/orders/:orderId',
+	},
 	section: '/builder/courses/:courseId',
 	lesson: {
 		add: '/builder/lesson/:sectionId/add-new-lesson',

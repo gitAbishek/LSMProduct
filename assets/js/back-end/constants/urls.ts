@@ -13,6 +13,7 @@ const urls = {
 	sections: base + 'sections',
 	contents: base + 'sections/children',
 	orders: base + 'orders',
+	order_items: base + 'order-items',
 	users: '/wp/v2/users',
 	settings: base + 'settings',
 	builder: base + 'coursebuilder',

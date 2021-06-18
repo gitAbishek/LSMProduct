@@ -53,3 +53,54 @@ export const SkeletonEditCourse: React.FC = () => {
 		</Stack>
 	);
 };
+
+export const SkeletonOrdersList: React.FC = () => {
+	const lengths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	return (
+		<>
+			{lengths.map((index) => (
+				<Tr key={index}>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+				</Tr>
+			))}
+		</>
+	);
+};
+
+export const SkeletonOrderItemsList: React.FC = () => {
+	const lengths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	return (
+		<>
+			{lengths.map((index) => (
+				<Tr key={index}>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+				</Tr>
+			))}
+		</>
+	);
+};

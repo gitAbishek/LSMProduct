@@ -597,7 +597,10 @@ class OrderItemsController extends PostsController {
 		if (
 			! $order_id ||
 			! is_object( $order ) ||
-			! masteriyo_is_current_user_post_author( $order_id )
+			(
+				! masteriyo_is_current_user_post_author( $order_id ) &&
+				! masteriyo_is_current_user_admin()
+			)
 		) {
 			return new \WP_Error(
 				'masteriyo_rest_invalid_id',
@@ -646,7 +649,10 @@ class OrderItemsController extends PostsController {
 		if (
 			! $order_item ||
 			! is_object( $order_item ) ||
-			! masteriyo_is_current_user_post_author( $order_item->get_order_id() )
+			(
+				! masteriyo_is_current_user_post_author( $order_item->get_order_id() ) &&
+				! masteriyo_is_current_user_admin()
+			)
 		) {
 			return new \WP_Error(
 				'masteriyo_rest_invalid_id',
@@ -705,7 +711,10 @@ class OrderItemsController extends PostsController {
 		if (
 			! $order_item ||
 			! is_object( $order_item ) ||
-			! masteriyo_is_current_user_post_author( $order_item->get_order_id() )
+			(
+				! masteriyo_is_current_user_post_author( $order_item->get_order_id() ) &&
+				! masteriyo_is_current_user_admin()
+			)
 		) {
 			return new \WP_Error(
 				'masteriyo_rest_invalid_id',

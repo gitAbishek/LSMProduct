@@ -505,6 +505,7 @@ class ScriptStyle {
 						),
 					),
 				),
+
 				'login-form'     => array(
 					'name' => 'masteriyo_data',
 					'data' => array(
@@ -520,6 +521,13 @@ class ScriptStyle {
 						'i18n_checkout_error' => esc_html__( 'Error processing checkout. Please try again.', 'masteriyo' ),
 						'is_checkout'         => true,
 						'mto_ajax_url'        => '/?mto-ajax=%%endpoint%%',
+					),
+				),
+				'interactive'    => array(
+					'name' => '_MASTERIYO_',
+					'data' => array(
+						'rootApiUrl' => esc_url_raw( rest_url() ),
+						'nonce'      => wp_create_nonce( 'wp_rest' ),
 					),
 				),
 			)

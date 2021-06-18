@@ -53,24 +53,6 @@ class AdminMenu {
 
 		add_submenu_page(
 			'masteriyo',
-			esc_html__( 'Masteriyo', 'masteriyo' ),
-			esc_html__( 'Masteriyo', 'masteriyo' ),
-			'manage_options',
-			'masteriyo#/masteriyo',
-			array( $this, 'display_main_page' )
-		);
-
-		add_submenu_page(
-			'masteriyo',
-			esc_html__( 'Dashboard', 'masteriyo' ),
-			esc_html__( 'Dashboard', 'masteriyo' ),
-			'manage_options',
-			'masteriyo#/dashboard',
-			array( $this, 'display_main_page' )
-		);
-
-		add_submenu_page(
-			'masteriyo',
 			esc_html__( 'Courses', 'masteriyo' ),
 			esc_html__( 'Courses', 'masteriyo' ),
 			'manage_options',
@@ -114,6 +96,15 @@ class AdminMenu {
 			array( $this, 'display_main_page' )
 		);
 
+		add_submenu_page(
+			'masteriyo',
+			esc_html__( 'Settings', 'masteriyo' ),
+			esc_html__( 'Settings', 'masteriyo' ),
+			'manage_options',
+			'masteriyo#/settings',
+			array( $this, 'display_main_page' )
+		);
+
 		remove_submenu_page( 'masteriyo', 'masteriyo' );
 	}
 
@@ -134,6 +125,6 @@ class AdminMenu {
 	 * @return void
 	 */
 	public function display_main_page() {
-		require_once Constants::get( 'MASTERIYO_PLUGIN_DIR' ). '/templates/masteriyo.php';
+		require_once Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/templates/masteriyo.php';
 	}
 }

@@ -43,9 +43,36 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	 * @param Model $course_review Course review object.
 	 */
 	public function create( Model &$course_review ) {
+		$current_user = wp_get_current_user();
 
 		if ( ! $course_review->get_date_created( 'edit' ) ) {
 			$course_review->set_date_created( current_time( 'mysql', true ) );
+		}
+
+		if ( ! $course_review->get_ip_address( 'edit' ) ) {
+			$course_review->set_ip_address( masteriyo_get_user_ip_address() );
+		}
+
+		if ( ! $course_review->get_agent( 'edit' ) ) {
+			$course_review->set_agent( masteriyo_get_user_agent() );
+		}
+
+		if ( ! empty( $current_user ) ) {
+			if ( ! $course_review->get_author_email( 'edit' ) ) {
+				$course_review->set_author_email( $current_user->user_email );
+			}
+
+			if ( ! $course_review->get_author_id( 'edit' ) ) {
+				$course_review->get_author_id( $current_user->ID );
+			}
+
+			if ( ! $course_review->get_author_name( 'edit' ) ) {
+				$course_review->set_author_name( $current_user->user_nicename );
+			}
+
+			if ( ! $course_review->get_author_url( 'edit' ) ) {
+				$course_review->set_author_url( $current_user->user_url );
+			}
 		}
 
 		$id = wp_insert_comment(

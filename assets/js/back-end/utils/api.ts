@@ -38,10 +38,11 @@ class API {
 		}).then((res) => res.data);
 	}
 
-	async delete(id: number) {
+	async delete(id: number, params?: any) {
 		return http({
 			url: this.uri + id,
 			method: 'delete',
+			params: params,
 		}).then((res) => res.data);
 	}
 }

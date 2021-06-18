@@ -18,6 +18,21 @@ const routes = {
 		add: '/builder/quiz/:sectionId/add-new-quiz',
 		edit: '/builder/quiz/edit/:quizId',
 	},
+	course_categories: {
+		list: '/courses/categories',
+		add: '/courses/categories/new',
+		edit: '/courses/categories/:categoryId',
+	},
+	course_difficulties: {
+		list: '/courses/difficulties',
+		add: '/courses/difficulties/new',
+		edit: '/courses/difficulties/:difficultyId',
+	},
+	course_tags: {
+		list: '/courses/tags',
+		add: '/courses/tags/new',
+		edit: '/courses/tags/:tagId',
+	},
 	settings: '/settings',
 	notFound: '/not-found',
 	builder: '/builder/:courseId',

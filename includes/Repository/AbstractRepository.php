@@ -740,6 +740,10 @@ abstract class AbstractRepository {
 		}
 
 		foreach ( $props_to_update as $meta_key => $prop ) {
+			if ( ! is_callable( array( $model, "get_{$prop}" ) ) ) {
+				continue;
+			}
+
 			$value = $model->{"get_$prop"}( 'edit' );
 			$value = is_string( $value ) ? wp_slash( $value ) : $value;
 			switch ( $prop ) {

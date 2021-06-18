@@ -80,15 +80,17 @@ const Header: React.FC<Props> = (props) => {
 						)}
 					</Stack>
 
-					<ButtonGroup>
-						{!hideAddNewCourseBtn && (
+					{props.children}
+
+					{!hideAddNewCourseBtn && (
+						<ButtonGroup>
 							<RouterLink to={routes.courses.add}>
 								<Button colorScheme="blue">
 									{__('Add New Course', 'masteriyo')}
 								</Button>
 							</RouterLink>
-						)}
-					</ButtonGroup>
+						</ButtonGroup>
+					)}
 				</Flex>
 			</Container>
 		</Box>

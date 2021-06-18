@@ -2231,7 +2231,7 @@ function masteriyo_add_post_state( $post_states, $post ) {
 	if ( masteriyo_get_page_id( 'myaccount' ) === $post->ID ) {
 		$post_states['masteriyo_myaccount_page'] = __( 'Masteriyo My Account Page', 'masteriyo' );
 	}
-	if ( masteriyo_get_page_id( 'masteriyo-checkout' ) === $post->ID ) {
+	if ( masteriyo_get_page_id( 'checkout' ) === $post->ID ) {
 		$post_states['masteriyo_checkout_page'] = __( 'Masteriyo Checkout Page', 'masteriyo' );
 	}
 

@@ -56,7 +56,7 @@ class Activation {
 					'name'         => _x( 'masteriyo-checkout', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'Masteriyo Checkout', 'Page title', 'masteriyo' ),
 					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_checkout_shortcode_tag', 'masteriyo_checkout' ) . ']<!-- /wp:shortcode -->',
-					'setting_name' => 'checkout_page_id',
+					'setting_name' => 'masteriyo_checkout_page_id',
 				),
 			)
 		);

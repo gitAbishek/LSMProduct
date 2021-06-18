@@ -2674,7 +2674,7 @@ function masteriyo_get_current_ip_address() {
  * @return string
  */
 function masteriyo_get_course_review_author_pp_placeholder() {
-	return apply_filters('masteriyo_course_review_author_pp_placeholder', 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png');
+	return apply_filters( 'masteriyo_course_review_author_pp_placeholder', 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png' );
 }
 
 /**
@@ -2696,7 +2696,7 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
 		);
 	}
 
-	$course_reviews  = masteriyo_get_course_reviews(
+	$course_reviews   = masteriyo_get_course_reviews(
 		array(
 			'course_id' => $course->get_id(),
 		)
@@ -2704,17 +2704,17 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
 	$filtered_reviews = array();
 	$replies          = array();
 
-	foreach ($course_reviews as $review) {
-		if (!$review->is_reply()) {
+	foreach ( $course_reviews as $review ) {
+		if ( ! $review->is_reply() ) {
 			$filtered_reviews[] = $review;
 			continue;
 		}
 		$key = $review->get_parent();
 
-		if (!isset($replies[$key])) {
-			$replies[$key] = array();
+		if ( ! isset( $replies[ $key ] ) ) {
+			$replies[ $key ] = array();
 		}
-		$replies[$key][] = $review;
+		$replies[ $key ][] = $review;
 	}
 
 	return array(
@@ -2737,7 +2737,7 @@ function masteriyo_update_course_average_rating( $course_id ) {
 		return;
 	}
 
-	$reviews = masteriyo_get_course_reviews_and_replies($course)['reviews'];
+	$reviews    = masteriyo_get_course_reviews_and_replies( $course )['reviews'];
 	$rating_sum = 0;
 
 	foreach ( $reviews as $review ) {
@@ -2749,4 +2749,25 @@ function masteriyo_update_course_average_rating( $course_id ) {
 	}
 	$course->set_average_rating( $rating_sum / count( $reviews ) );
 	$course->save();
+}
+
+/**
+ * Get user ip address.
+ *
+ * @since 0.1.0
+ *
+ * @return string
+ */
+function masteriyo_get_user_ip_address() {
+	if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+		//ip from share internet
+		$ip = $_SERVER['HTTP_CLIENT_IP'];
+	} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+		//ip pass from proxy
+		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else {
+		$ip = $_SERVER['REMOTE_ADDR'];
+	}
+
+	return $ip;
 }

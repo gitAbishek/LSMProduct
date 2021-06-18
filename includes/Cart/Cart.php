@@ -965,7 +965,6 @@ class Cart {
 	 */
 	public function set_quantity( $cart_item_key, $quantity = 1, $refresh_totals = true ) {
 		if ( 0 === $quantity || $quantity < 0 ) {
-			masteriyo_do_deprecated_action( 'masteriyo_before_cart_item_quantity_zero', array( $cart_item_key, $this ), '3.7.0', 'masteriyo_remove_cart_item' );
 			// If we're setting qty to 0 we're removing the item from the cart.
 			return $this->remove_cart_item( $cart_item_key );
 		}

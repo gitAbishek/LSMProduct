@@ -805,4 +805,38 @@ class CoursesController extends PostsController {
 
 		return true;
 	}
+
+	/**
+	 * Prepare links for the request.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Model           $object  Object data.
+	 * @param WP_REST_Request $request Request object.
+	 * @return array                   Links for the given post.
+	 */
+	protected function prepare_links( $object, $request ) {
+		$links = parent::prepare_links( $object, $request );
+
+		$query = new \WP_Query(
+			array(
+				'post_type'      => array( 'lesson', 'quiz' ),
+				'post_status'    => 'publish',
+				'posts_per_page' => 1,
+				'meta_key'       => '_course_id',
+				'meta_compare'   => '=',
+				'meta_value'     => $object->get_id(),
+				'orderby'        => array(
+					'parent'     => 'ASC',
+					'menu_order' => 'ASC',
+				),
+			)
+		);
+
+		$links['first'] = array(
+			'href' => ( 1 === $query->post_count ) ? $this->get_navigation_link( $query->posts[0] ) : '',
+		);
+
+		return $links;
+	}
 }

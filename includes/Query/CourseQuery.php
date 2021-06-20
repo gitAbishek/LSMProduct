@@ -46,6 +46,7 @@ class CourseQuery extends ObjectQuery {
 				'difficulty'        => array(),
 				'average_rating'    => '',
 				'review_count'      => '',
+				'course'            => '',
 			)
 		);
 	}

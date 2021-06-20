@@ -574,6 +574,25 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			}
 		}
 
+		// Handle meta queries.
+		$meta_queries = array(
+			'course',
+		);
+
+		foreach ( $query_vars as $query_var => $value ) {
+			if ( in_array( $meta_queries, $query_var, true ) ) {
+				$wp_query_vars['meta_query'][] = array(
+					'key'     => $query_var,
+					'value'   => $value,
+					'compare' => '=',
+				);
+			}
+		}
+
+		if ( isset( $wp_query_vars['meta_query'] ) ) {
+			$wp_query_args['meta_query'][] = array( 'relation' => 'AND' );
+		}
+
 		// Handle paginate.
 		if ( ! isset( $query_vars['paginate'] ) || ! $query_vars['paginate'] ) {
 			$wp_query_args['no_found_rows'] = true;

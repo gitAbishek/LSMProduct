@@ -7,49 +7,45 @@ import {
 	NumberInput,
 	NumberInputField,
 	NumberInputStepper,
-	Slider,
-	SliderFilledTrack,
-	SliderThumb,
-	SliderTrack,
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import React from 'react';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 
 interface Props {
 	defaultValue?: any;
 }
 const Price: React.FC<Props> = (props) => {
 	const { defaultValue } = props;
-	const [priceValue, setPriceValue] = useState<number>(defaultValue || '0');
-	const handleChange = (priceValue: number) => setPriceValue(priceValue);
-	const { register, setValue } = useFormContext();
+	const { control } = useFormContext();
 
-	useEffect(() => {
-		setValue('regular_price', priceValue);
-	}, [priceValue]);
+	const watchPrice = useWatch({
+		name: 'price',
+		defaultValue: defaultValue,
+		control,
+	});
 
 	return (
 		<FormControl>
-			<FormLabel>{__('Featured ', 'masteriyo')}</FormLabel>
+			<FormLabel>{__('Price', 'masteriyo')}</FormLabel>
 
 			<Stack direction="row" spacing="6">
-				<Slider value={priceValue} onChange={handleChange}>
-					<SliderTrack>
-						<SliderFilledTrack />
-					</SliderTrack>
-					<SliderThumb />
-				</Slider>
-				<NumberInput w="32" name="regular_price" value={priceValue}>
-					<NumberInputField rounded="sm" {...register('regular_price')} />
-					<NumberInputStepper>
-						<NumberIncrementStepper />
-						<NumberDecrementStepper />
-					</NumberInputStepper>
-				</NumberInput>
+				<Controller
+					name="price"
+					defaultValue={defaultValue || 0}
+					render={({ field }) => (
+						<NumberInput {...field} w="full">
+							<NumberInputField borderRadius="sm" shadow="input" />
+							<NumberInputStepper>
+								<NumberIncrementStepper />
+								<NumberDecrementStepper />
+							</NumberInputStepper>
+						</NumberInput>
+					)}
+				/>
 			</Stack>
-			{priceValue === 0 && (
+			{watchPrice == 0 && (
 				<FormHelperText>
 					{__('Setting price 0 will make your course free', 'masteriyo')}
 				</FormHelperText>

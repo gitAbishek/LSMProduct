@@ -671,6 +671,9 @@ class OrdersController extends PostsController {
 			}
 		}
 
+		// Set customer IP address.
+		$order->set_customer_ip_address( masteriyo_get_current_ip_address() );
+
 		// Order billing details.
 		if ( isset( $request['billing']['first_name'] ) ) {
 			$order->set_billing_first_name( $request['billing']['first_name'] );

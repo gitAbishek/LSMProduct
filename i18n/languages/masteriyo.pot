@@ -1248,14 +1248,14 @@ msgstr ""
 
 #: assets/js/getting-started/screens/course/Course.tsx:68
 #: assets/js/getting-started/screens/currency/Currency.tsx:236
-#: assets/js/getting-started/screens/pages/Pages.tsx:104
+#: assets/js/getting-started/screens/pages/Pages.tsx:122
 #: assets/js/getting-started/screens/quiz/Quiz.tsx:77
 msgid "Back"
 msgstr ""
 
 #: assets/js/getting-started/screens/course/Course.tsx:73
 #: assets/js/getting-started/screens/currency/Currency.tsx:241
-#: assets/js/getting-started/screens/pages/Pages.tsx:109
+#: assets/js/getting-started/screens/pages/Pages.tsx:127
 #: assets/js/getting-started/screens/quiz/Quiz.tsx:82
 #: assets/js/getting-started/screens/welcome/Welcome.tsx:53
 msgid "Skip to Dashboard"
@@ -1305,24 +1305,24 @@ msgstr ""
 msgid "Create a new course"
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:117
+#: assets/js/getting-started/screens/pages/Pages.tsx:105
+msgid "Checkout"
+msgstr ""
+
+#: assets/js/getting-started/screens/pages/Pages.tsx:135
 msgid "Finish"
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:35
+#: assets/js/getting-started/screens/pages/Pages.tsx:42
 msgid "Select a page..."
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:68
+#: assets/js/getting-started/screens/pages/Pages.tsx:75
 msgid "Course List"
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:79
+#: assets/js/getting-started/screens/pages/Pages.tsx:91
 msgid "My Account"
-msgstr ""
-
-#: assets/js/getting-started/screens/pages/Pages.tsx:90
-msgid "Checkout"
 msgstr ""
 
 #: assets/js/getting-started/screens/quiz/Quiz.tsx:38

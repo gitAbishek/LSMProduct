@@ -168,7 +168,7 @@ class QuizesController extends PostsController {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['course_id']       = array(
+		$params['course_id']  = array(
 			'description'       => __( 'Limit results by course id.', 'masteriyo' ),
 			'type'              => 'integer',
 			'sanitize_callback' => 'absint',
@@ -412,7 +412,7 @@ class QuizesController extends PostsController {
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'parent_id'           => array(
+				'parent_id'         => array(
 					'description' => __( 'Quiz parent ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
@@ -424,7 +424,7 @@ class QuizesController extends PostsController {
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'menu_order'          => array(
+				'menu_order'        => array(
 					'description' => __( 'Menu order, used to custom sort quizes.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
@@ -586,5 +586,21 @@ class QuizesController extends PostsController {
 		 * @param bool            $creating If is creating a new object.
 		 */
 		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $quiz, $request, $creating );
+	}
+
+	/**
+	 * Prepare links for the request.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Model           $object  Object data.
+	 * @param WP_REST_Request $request Request object.
+	 * @return array                   Links for the given post.
+	 */
+	protected function prepare_links( $object, $request ) {
+		$links           = parent::prepare_links( $object, $request );
+		$next_prev_links = $this->get_navigation_links( $object, $request );
+
+		return $links + $next_prev_links;
 	}
 }

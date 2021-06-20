@@ -8,6 +8,8 @@ namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Utils;
+use ThemeGrill\Masteriyo\Query\CourseQuery;
+
 use ThemeGrill\Masteriyo\Helper\Permission;
 
 class LessonsController extends PostsController {
@@ -481,7 +483,7 @@ class LessonsController extends PostsController {
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'course_id'         => array(
+				'course_id'           => array(
 					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
@@ -740,4 +742,22 @@ class LessonsController extends PostsController {
 
 		return $lesson;
 	}
+
+	/**
+	 * Prepare links for the request.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Model           $object  Object data.
+	 * @param WP_REST_Request $request Request object.
+	 * @return array                   Links for the given post.
+	 */
+	protected function prepare_links( $object, $request ) {
+		$links = parent::prepare_links( $object, $request );
+
+		$next_prev_links = $this->get_navigation_links( $object, $request );
+
+		return $links + $next_prev_links;
+	}
+
 }

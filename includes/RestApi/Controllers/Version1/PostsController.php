@@ -173,4 +173,71 @@ abstract class PostsController extends CrudController {
 
 		return true;
 	}
+
+	/**
+	 * Get previous and next links for the request.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Model           $object  Object data.
+	 * @param WP_REST_Request $request Request object.
+	 * @return array                   Links for the given post.
+	 */
+	protected function get_navigation_links( $object, $request ) {
+		$query = new \WP_Query(
+			array(
+				'post_type'      => array( 'lesson', 'quiz' ),
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'meta_key'       => '_course_id',
+				'meta_compare'   => '=',
+				'meta_value'     => $object->get_course_id(),
+				'orderby'        => array(
+					'parent'     => 'ASC',
+					'menu_order' => 'ASC',
+				),
+			)
+		);
+
+		try {
+			foreach ( $query->posts as $index => $post ) {
+				if ( $post->ID === $object->get_id() ) {
+					$prev = ( $index - 1 ) > -1 ? $query->posts[ $index - 1 ] : '';
+					$next = ( $index + 1 ) < $query->found_posts ? $query->posts[ $index + 1 ] : '';
+				}
+			}
+		} catch ( \Exception $error ) {
+			//
+		}
+
+		$links['prev'] = array(
+			'href' => $this->get_navigation_link( $prev ),
+		);
+
+		$links['next'] = array(
+			'href' => $this->get_navigation_link( $next ),
+		);
+
+		return $links;
+	}
+
+	/**
+	 * Get navigation link.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_Post $object Post object.
+	 * @return string
+	 */
+	protected function get_navigation_link( $object ) {
+		if ( empty( $object ) ) {
+			return '';
+		}
+
+		$object_type = str_replace( 'mto-', '', $object->post_type );
+		$object_rest = masteriyo( "{$object_type}.rest" );
+		$link        = rest_url( sprintf( '/%s/%s/%d', $object_rest->namespace, $object_rest->rest_base, $object->ID ) );
+
+		return $link;
+	}
 }

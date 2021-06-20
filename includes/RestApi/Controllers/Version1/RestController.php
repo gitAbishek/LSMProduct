@@ -569,4 +569,19 @@ abstract class RestController extends \WP_REST_Controller {
 			array()
 		);
 	}
+
+	/**
+	 * Handle namespace and rest_base properties access.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return mixed
+	 */
+	public function __get( $property ) {
+		if ( 'namespace' === $property ) {
+			return $this->namespace;
+		} elseif ( 'rest_base' === $property ) {
+			return $this->rest_base;
+		}
+	}
 }

@@ -9,6 +9,11 @@ import {
 	Icon,
 	Button,
 	ButtonGroup,
+	Stack,
+	Avatar,
+	Heading,
+	Flex,
+	Text,
 } from '@chakra-ui/react';
 import React from 'react';
 import { __ } from '@wordpress/i18n';
@@ -24,10 +29,47 @@ const Notification = () => {
 			</PopoverTrigger>
 			<PopoverContent>
 				<PopoverArrow />
-				<PopoverHeader>Confirmation!</PopoverHeader>
-				<PopoverBody>Are you sure you want to have that milkshake?</PopoverBody>
+				<PopoverHeader>{__('Notification', 'masteriyo')}</PopoverHeader>
+				<PopoverBody>
+					<Stack direction="column" spacing="4">
+						<Flex justifyContent="space-between">
+							<Stack direction="row" spacing="2">
+								<Avatar size="sm" />
+								<Stack direction="column" spacing="1">
+									<Heading as="h5" fontSize="sm">
+										Sarah Jones
+									</Heading>
+									<Text fontSize="xs">
+										Asked a question in{' '}
+										<Text as="strong">How to build WordPress website</Text>
+									</Text>
+								</Stack>
+							</Stack>
+							<Text fontSize="xs" color="gray.300">
+								2 min Ago
+							</Text>
+						</Flex>
+						<Flex justifyContent="space-between">
+							<Stack direction="row" spacing="2">
+								<Avatar size="sm" />
+								<Stack direction="column" spacing="1">
+									<Heading as="h5" fontSize="sm">
+										Sarah Jones
+									</Heading>
+									<Text fontSize="xs">
+										Asked a question in{' '}
+										<Text as="strong">How to build WordPress website</Text>
+									</Text>
+								</Stack>
+							</Stack>
+							<Text fontSize="xs" color="gray.300">
+								2 min Ago
+							</Text>
+						</Flex>
+					</Stack>
+				</PopoverBody>
 				<PopoverFooter>
-					<ButtonGroup>
+					<ButtonGroup justifyContent="flex-end" d="flex">
 						<Button variant="link">
 							{__('Mark all as read', 'masteriyo')}
 						</Button>

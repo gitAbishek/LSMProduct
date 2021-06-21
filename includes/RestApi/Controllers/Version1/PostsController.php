@@ -293,16 +293,16 @@ abstract class PostsController extends CrudController {
 	 * @return array
 	 */
 	protected function get_navigation_item( $object, $context = 'view' ) {
-		if ( empty( $navigation['previous'] ) ) {
+		if ( empty( $object ) ) {
 			return '';
 		}
 
-		$previous_parent = get_post( $navigation['previous']->post_parent );
+		$previous_parent = get_post( $object->post_parent );
 
 		$previous = array(
-			'id'     => $navigation['previous']->ID,
-			'name'   => $navigation['previous']->post_title,
-			'type'   => str_replace( 'mto-', '', $navigation['previous']->post_type ),
+			'id'     => $object->ID,
+			'name'   => $object->post_title,
+			'type'   => str_replace( 'mto-', '', $object->post_type ),
 			'parent' => is_null( $previous_parent ) ? null : array(
 				'id'   => $previous_parent->ID,
 				'name' => $previous_parent->post_title,

@@ -29,6 +29,7 @@ import {
 } from 'react-icons/bi';
 import { __ } from '@wordpress/i18n';
 import { Polygon } from '../../back-end/constants/images';
+import AvatarMenu from './AvatarMenu';
 
 const Header = () => {
 	const {
@@ -123,7 +124,7 @@ const Header = () => {
 							<Icon as={BiSearch} />
 							<Icon as={BiHeart} />
 							<Icon as={BiBell} />
-							<Avatar size="sm" />
+							<AvatarMenu />
 						</Stack>
 					</Stack>
 				</Container>

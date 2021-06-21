@@ -22,12 +22,13 @@ import React from 'react';
 import { Logo } from '../../back-end/constants/images';
 import {
 	BiBell,
-	BiDownArrow,
+	BiChevronDown,
 	BiHeart,
 	BiInfoCircle,
 	BiSearch,
 } from 'react-icons/bi';
 import { __ } from '@wordpress/i18n';
+import { Polygon } from '../../back-end/constants/images';
 
 const Header = () => {
 	const {
@@ -39,13 +40,35 @@ const Header = () => {
 	const { isOpen: isHeaderOpen, onToggle: onHeaderToggle } = useDisclosure();
 
 	return (
-		<>
-			<IconButton
-				onClick={onHeaderToggle}
-				icon={<BiDownArrow />}
-				aria-label="toggle header"
-			/>
-			<Slide direction="top" in={isHeaderOpen} style={{ zIndex: 999 }}>
+		<Slide direction="top" in={isHeaderOpen} style={{ zIndex: 999 }}>
+			<Box position="relative" shadow="box" bg="white">
+				<IconButton
+					onClick={onHeaderToggle}
+					icon={
+						<BiChevronDown
+							style={{ transform: isHeaderOpen ? 'rotate(180deg)' : 'none' }}
+						/>
+					}
+					aria-label={__('Toggle Header', 'masteriyo')}
+					variant="unstyled"
+					color="gray.400"
+					sx={{
+						w: '40px',
+						h: '26px',
+						backgroundImage: `url(${Polygon})`,
+						position: 'absolute',
+						backgroundSize: '100%',
+						backgroundRepeat: 'no-repeat',
+						d: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						right: '80px',
+						bottom: '-20px',
+						fontSize: '2xl',
+						minW: 'auto',
+						lineHeight: '0',
+					}}
+				/>
 				<Container maxW="container.xl">
 					<Stack
 						direction="row"
@@ -104,8 +127,8 @@ const Header = () => {
 						</Stack>
 					</Stack>
 				</Container>
-			</Slide>
-		</>
+			</Box>
+		</Slide>
 	);
 };
 

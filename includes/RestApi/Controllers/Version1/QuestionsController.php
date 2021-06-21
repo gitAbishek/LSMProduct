@@ -269,7 +269,7 @@ class QuestionsController extends PostsController {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
-		$params['type']     = array(
+		$params['type'] = array(
 			'description'       => __( 'Limit result set to questiones assigned a specific type.', 'masteriyo' ),
 			'type'              => 'string',
 			'enum'              => apply_filters( 'masteriyo_question_types', $this->get_types() ),
@@ -386,6 +386,7 @@ class QuestionsController extends PostsController {
 			'positive_feedback' => $question->get_positive_feedback( $context ),
 			'negative_feedback' => $question->get_negative_feedback( $context ),
 			'feedback'          => $question->get_feedback( $context ),
+			'navigation'        => $this->get_navigation_items( $lesson, $context ),
 		);
 
 		return $data;
@@ -567,7 +568,7 @@ class QuestionsController extends PostsController {
 					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'parent_id'             => array(
+				'parent_id'         => array(
 					'description' => __( 'Course parent ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,

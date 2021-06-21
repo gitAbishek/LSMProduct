@@ -272,6 +272,7 @@ class LessonsController extends PostsController {
 			'video_source'        => $lesson->get_video_source( $context ),
 			'video_source_url'    => $lesson->get_video_source_url( $context ),
 			'video_playback_time' => $lesson->get_video_playback_time( $context ),
+			'navigation'          => $this->get_navigation_items( $lesson, $context ),
 		);
 
 		return $data;

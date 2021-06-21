@@ -113,6 +113,17 @@ class Section extends Model {
 		return get_children( $this->get_id() );
 	}
 
+	/**
+	 * Get the object type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_object_type() {
+		return $this->object_type;
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Getters

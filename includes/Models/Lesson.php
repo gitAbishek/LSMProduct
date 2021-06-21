@@ -128,6 +128,17 @@ class Lesson extends Model {
 		return array();
 	}
 
+	/**
+	 * Get the object type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_object_type() {
+		return $this->object_type;
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| CRUD Getters
@@ -545,7 +556,7 @@ class Lesson extends Model {
 	 * @param int $featured_image Featured image id.
 	 */
 	public function set_featured_image( $featured_image ) {
-		$this->set_prop( 'featured_image', absint( $featured_image ) ) ;
+		$this->set_prop( 'featured_image', absint( $featured_image ) );
 	}
 
 	/**
@@ -589,7 +600,7 @@ class Lesson extends Model {
 	 * @param array $counts Product rating counts.
 	 */
 	public function set_rating_counts( $counts ) {
-		$counts = array_map( 'absint', ( array ) $counts );
+		$counts = array_map( 'absint', (array) $counts );
 		$this->set_prop( 'rating_counts', array_filter( $counts ) );
 	}
 

@@ -174,16 +174,19 @@ abstract class PostsController extends CrudController {
 		return true;
 	}
 
-	/**
+
+		/**
 	 * Get previous and next links for the request.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param Model           $object  Object data.
-	 * @param WP_REST_Request $request Request object.
 	 * @return array                   Links for the given post.
 	 */
-	protected function get_navigation_links( $object, $request ) {
+	protected function get_navigation_objects( $object ) {
+		$previous = '';
+		$next     = '';
+
 		$query = new \WP_Query(
 			array(
 				'post_type'      => array( 'lesson', 'quiz' ),
@@ -202,20 +205,37 @@ abstract class PostsController extends CrudController {
 		try {
 			foreach ( $query->posts as $index => $post ) {
 				if ( $post->ID === $object->get_id() ) {
-					$prev = ( $index - 1 ) > -1 ? $query->posts[ $index - 1 ] : '';
-					$next = ( $index + 1 ) < $query->found_posts ? $query->posts[ $index + 1 ] : '';
+					$previous = ( $index - 1 ) > -1 ? $query->posts[ $index - 1 ] : '';
+					$next     = ( $index + 1 ) < $query->found_posts ? $query->posts[ $index + 1 ] : '';
 				}
 			}
 		} catch ( \Exception $error ) {
 			//
 		}
 
-		$links['prev'] = array(
-			'href' => $this->get_navigation_link( $prev ),
+		return array(
+			'previous' => $previous,
+			'next'     => $next,
+		);
+	}
+
+	/**
+	 * Get previous and next links for the request.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Model           $object  Object data.
+	 * @return array                   Links for the given post.
+	 */
+	protected function get_navigation_links( $object ) {
+		$navigation = $this->get_navigation_objects( $object );
+
+		$links['previous'] = array(
+			'href' => $this->get_navigation_link( $navigation['previous'] ),
 		);
 
 		$links['next'] = array(
-			'href' => $this->get_navigation_link( $next ),
+			'href' => $this->get_navigation_link( $navigation['next'] ),
 		);
 
 		return $links;
@@ -239,5 +259,56 @@ abstract class PostsController extends CrudController {
 		$link        = rest_url( sprintf( '/%s/%s/%d', $object_rest->namespace, $object_rest->rest_base, $object->ID ) );
 
 		return $link;
+	}
+
+	/**
+	 * Get navigation items.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_Post $model WP_Post object.
+	 * @param string $context Request context.
+	 *                        Options: 'view' and 'edit'.
+	 *
+	 * @return array
+	 */
+	protected function get_navigation_items( $object, $context = 'view' ) {
+		$navigation = $this->get_navigation_objects( $object );
+
+		return array(
+			'previous' => $this->get_navigation_item( $navigation['previous'] ),
+			'next'     => $this->get_navigation_item( $navigation['next'] ),
+		);
+	}
+
+	/**
+	 * Get navigation item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_Post $object WP_Post object.
+	 * @param string $context Request context.
+	 *                        Options: 'view' and 'edit'.
+	 *
+	 * @return array
+	 */
+	protected function get_navigation_item( $object, $context = 'view' ) {
+		if ( empty( $navigation['previous'] ) ) {
+			return '';
+		}
+
+		$previous_parent = get_post( $navigation['previous']->post_parent );
+
+		$previous = array(
+			'id'     => $navigation['previous']->ID,
+			'name'   => $navigation['previous']->post_title,
+			'type'   => str_replace( 'mto-', '', $navigation['previous']->post_type ),
+			'parent' => is_null( $previous_parent ) ? null : array(
+				'id'   => $previous_parent->ID,
+				'name' => $previous_parent->post_title,
+			),
+		);
+
+		return $previous;
 	}
 }

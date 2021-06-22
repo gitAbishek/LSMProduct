@@ -65,7 +65,6 @@ class Question extends Model {
 	 */
 	protected $data = array(
 		'name'              => '',
-		'slug'              => '',
 		'date_created'      => null,
 		'date_modified'     => null,
 		'type'              => '',
@@ -149,19 +148,6 @@ class Question extends Model {
 	 */
 	public function get_name( $context = 'view' ) {
 		return $this->get_prop( 'name', $context );
-	}
-
-	/**
-	 * Get question slug.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_slug( $context = 'view' ) {
-		return $this->get_prop( 'slug', $context );
 	}
 
 	/**
@@ -381,17 +367,6 @@ class Question extends Model {
 	 */
 	public function set_name( $name ) {
 		$this->set_prop( 'name', $name );
-	}
-
-	/**
-	 * Set question slug.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $slug question slug.
-	 */
-	public function set_slug( $slug ) {
-		$this->set_prop( 'slug', $slug );
 	}
 
 	/**

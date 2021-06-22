@@ -64,7 +64,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 					'menu_order'    => $question->get_menu_order(),
 					'post_date'     => $question->get_date_created( 'edit' ),
 					'post_date_gmt' => $question->get_date_created( 'edit' ),
-					'post_name'     => $question->get_slug( 'edit' ),
+					'post_name'     => '',
 				),
 				$question
 			)
@@ -73,7 +73,6 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 		if ( $id && ! is_wp_error( $id ) ) {
 			$question->set_id( $id );
 			$this->update_post_meta( $question, true );
-			// $this->update_terms( $question, true );
 			// TODO Invalidate caches.
 
 			$question->save_meta_data();
@@ -101,7 +100,6 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 		$question->set_props(
 			array(
 				'name'          => $question_post->post_title,
-				'slug'          => $question_post->post_name,
 				'date_created'  => $question_post->post_date_gmt,
 				'date_modified' => $question_post->post_modified_gmt,
 				'status'        => $question_post->post_status,
@@ -138,7 +136,6 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			'status',
 			'date_created',
 			'date_modified',
-			'slug',
 			'menu_order',
 		);
 
@@ -150,7 +147,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 				'post_title'   => $question->get_name( 'edit' ),
 				'post_status'  => $question->get_status( 'edit' ) ? $question->get_status( 'edit' ) : 'publish',
 				'menu_order'   => $question->get_menu_order( 'edit' ),
-				'post_name'    => $question->get_slug( 'edit' ),
+				'post_name'    => '',
 				'post_parent'  => $question->get_parent_id( 'edit' ),
 				'post_type'    => 'question',
 			);
@@ -212,32 +209,6 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 		wp_delete_post( $id, true );
 		$question->set_id( 0 );
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $question );
-	}
-
-	/**
-	 * For all stored terms in all taxonomies, save them to the DB.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Model $model Model object.
-	 * @param bool  $force Force update. Used during create.
-	 */
-	protected function update_terms( &$model, $force = false ) {
-		$changes = $model->get_changes();
-
-		if ( $force || array_key_exists( 'category_ids', $changes ) ) {
-			$categories = $model->get_category_ids( 'edit' );
-
-			if ( empty( $categories ) && get_option( 'default_question_cat', 0 ) ) {
-				$categories = array( get_option( 'default_question_cat', 0 ) );
-			}
-
-			wp_set_post_terms( $model->get_id(), $categories, 'question_cat', false );
-		}
-
-		if ( $force || array_key_exists( 'tag_ids', $changes ) ) {
-			wp_set_post_terms( $model->get_id(), $model->get_tag_ids( 'edit' ), 'question_tag', false );
-		}
 	}
 
 	/**

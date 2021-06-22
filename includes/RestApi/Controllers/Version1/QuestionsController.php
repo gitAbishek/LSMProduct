@@ -66,10 +66,7 @@ class QuestionsController extends PostsController {
 		'true-false',
 		'single-choice',
 		'multiple-choice',
-		'fill-blanks',
 		'short-answer',
-		'image-matching',
-		'sortable',
 	);
 
 	/**
@@ -247,12 +244,6 @@ class QuestionsController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['slug'] = array(
-			'description'       => __( 'Limit result set to questiones with a specific slug.', 'masteriyo' ),
-			'type'              => 'string',
-			'validate_callback' => 'rest_validate_request_arg',
-		);
-
 		$params['course_id'] = array(
 			'description'       => __( 'Limit result by course id.', 'masteriyo' ),
 			'type'              => 'integer',
@@ -371,7 +362,6 @@ class QuestionsController extends PostsController {
 		$data = array(
 			'id'                => $question->get_id(),
 			'name'              => $question->get_name( $context ),
-			'slug'              => $question->get_slug( $context ),
 			'permalink'         => $question->get_permalink(),
 			'status'            => $question->get_status( $context ),
 			'description'       => 'view' === $context ? apply_filters( 'masteriyo_description', $question->get_description() ) : $question->get_description( $context ),
@@ -403,33 +393,6 @@ class QuestionsController extends PostsController {
 		}
 
 		return $answers;
-	}
-
-	/**
-	 * Get taxonomy terms.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Question $question Question object.
-	 * @param string   $taxonomy Taxonomy slug.
-	 *
-	 * @return array
-	 */
-	protected function get_taxonomy_terms( $question, $taxonomy = 'cat' ) {
-		$terms = Utils::get_object_terms( $question->get_id(), 'question_' . $taxonomy );
-
-		$terms = array_map(
-			function( $term ) {
-				return array(
-					'id'   => $term->term_id,
-					'name' => $term->name,
-					'slug' => $term->slug,
-				);
-			},
-			$terms
-		);
-
-		return $terms;
 	}
 
 	/**

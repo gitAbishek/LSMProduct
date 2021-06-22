@@ -12,14 +12,20 @@ import {
 	Stack,
 	Avatar,
 	Heading,
-	Flex,
 	Text,
+	List,
+	ListItem,
 } from '@chakra-ui/react';
 import React from 'react';
 import { __ } from '@wordpress/i18n';
 import { BiBell } from 'react-icons/bi';
 
 const Notification = () => {
+	const listItemStyles = {
+		d: 'flex',
+		justifyContent: 'space-between',
+	};
+
 	return (
 		<Popover placement="bottom">
 			<PopoverTrigger>
@@ -31,9 +37,9 @@ const Notification = () => {
 				<PopoverArrow />
 				<PopoverHeader>{__('Notification', 'masteriyo')}</PopoverHeader>
 				<PopoverBody>
-					<Stack direction="column" spacing="4">
-						<Flex justifyContent="space-between">
-							<Stack direction="row" spacing="2">
+					<List>
+						<ListItem sx={listItemStyles}>
+							<Stack direction="row" spacing="2" maxW="240px">
 								<Avatar size="sm" />
 								<Stack direction="column" spacing="1">
 									<Heading as="h5" fontSize="sm">
@@ -45,28 +51,11 @@ const Notification = () => {
 									</Text>
 								</Stack>
 							</Stack>
-							<Text fontSize="xs" color="gray.300">
+							<Text fontSize="xs" color="gray.300" ml="4">
 								2 min Ago
 							</Text>
-						</Flex>
-						<Flex justifyContent="space-between">
-							<Stack direction="row" spacing="2">
-								<Avatar size="sm" />
-								<Stack direction="column" spacing="1">
-									<Heading as="h5" fontSize="sm">
-										Sarah Jones
-									</Heading>
-									<Text fontSize="xs">
-										Asked a question in{' '}
-										<Text as="strong">How to build WordPress website</Text>
-									</Text>
-								</Stack>
-							</Stack>
-							<Text fontSize="xs" color="gray.300">
-								2 min Ago
-							</Text>
-						</Flex>
-					</Stack>
+						</ListItem>
+					</List>
 				</PopoverBody>
 				<PopoverFooter>
 					<ButtonGroup justifyContent="flex-end" d="flex">

@@ -281,7 +281,7 @@ class QuizesController extends PostsController {
 			'status'            => $quiz->get_status( $context ),
 			'description'       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
 			'short_description' => 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description( $context ),
-			'navigation'        => $this->get_navigation_items( $lesson, $context ),
+			'navigation'        => $this->get_navigation_items( $quiz, $context ),
 		);
 
 		return $data;

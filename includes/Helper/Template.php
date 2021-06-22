@@ -464,7 +464,7 @@ if ( ! function_exists( 'masteriyo_myaccount_sidebar_content' ) ) {
 		$data = array(
 			'menu_items'       => masteriyo_get_account_menu_items(),
 			'user'             => masteriyo_get_current_user(),
-			'current_endpoint' => masteriyo_get_current_myaccount_endpoint(),
+			'current_endpoint' => masteriyo_get_current_myaccount_endpoint()['slug'],
 		);
 
 		masteriyo_get_template( 'myaccount/sidebar-content.php', $data );
@@ -552,7 +552,51 @@ if ( ! function_exists( 'masteriyo_account_order_history_endpoint' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_account_order_history_endpoint() {
-		masteriyo_get_template( 'myaccount/my-order-history.php' );
+		$orders = masteriyo_get_orders(
+			array(
+				'customer_id' => get_current_user_id(),
+			)
+		);
+
+		masteriyo_get_template(
+			'myaccount/my-order-history.php',
+			array(
+				'orders' => $orders,
+			)
+		);
+	}
+}
+
+if ( ! function_exists( 'masteriyo_account_view_order_endpoint' ) ) {
+	/**
+	 * Show order detail on myaccount page.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_account_view_order_endpoint( $order_id ) {
+		$order                 = masteriyo_get_order( $order_id );
+		$customer_id = $order->get_customer_id();
+
+		if ( ! masteriyo_is_current_user_admin() && ! masteriyo_is_current_user_manager() && get_current_user_id() !== $customer_id )  {
+			echo __( 'You are not allowed to view this content', 'masteriyo' );
+			return;
+		}
+
+		$notes                 = $order->get_customer_order_notes();
+		$order_items           = $order->get_items( 'course' );
+		$show_purchase_note    = $order->has_status( apply_filters( 'masteriyo_purchase_note_order_statuses', array( 'completed', 'processing' ) ) );
+		$show_customer_details = masteriyo_is_current_user_admin() || (is_user_logged_in() && $order->get_user_id() === get_current_user_id());
+
+		masteriyo_get_template(
+			'myaccount/view-order.php',
+			array(
+				'order'                 =>  $order,
+				'notes'                 => $notes,
+				'order_items'           => $order_items,
+				'show_purchase_note'    => $show_purchase_note,
+				'show_customer_details' => $show_customer_details,
+			)
+		);
 	}
 }
 
@@ -563,15 +607,16 @@ if ( ! function_exists( 'masteriyo_myaccount_main_content' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_myaccount_main_content() {
-		$current_endpoint = masteriyo_get_current_myaccount_endpoint();
+		$endpoint         = masteriyo_get_current_myaccount_endpoint();
+		$current_endpoint = $endpoint['slug'];
 
 		if ( has_action( 'masteriyo_account_' . $current_endpoint . '_endpoint' ) ) {
-			do_action( 'masteriyo_account_' . $current_endpoint . '_endpoint', $current_endpoint );
+			do_action( 'masteriyo_account_' . $current_endpoint . '_endpoint', $endpoint['arg'] );
 			return;
 		}
 
 		// No endpoint found? Default to dashboard.
-		masteriyo_get_template( 'myaccount/dashboard.php' );
+		masteriyo_get_template( 'myaccount/dashboard.php', $endpoint );
 	}
 }
 

@@ -1484,13 +1484,19 @@ function masteriyo_get_current_myaccount_endpoint() {
 			}
 
 			if ( in_array( $key, $slugs, true ) ) {
-				return $key;
+				return array(
+					'slug' => $key,
+					'arg'  => $value,
+				);
 			}
 		}
 	}
 
 	// No endpoint found? Default to dashboard.
-	return 'dashboard';
+	return array(
+		'slug' => 'dashboard',
+		'arg'  => null,
+	);
 }
 
 /**
@@ -1515,6 +1521,7 @@ function masteriyo_get_myaccount_endpoints() {
 			'reset-password' => get_option( 'masteriyo_myaccount_reset-password_endpoint', 'reset-password' ),
 			'signup'         => get_option( 'masteriyo_myaccount_signup_endpoint', 'signup' ),
 			'user-logout'    => get_option( 'masteriyo_logout_endpoint', 'user-logout' ),
+			'view-order'     => get_option( 'masteriyo_logout_endpoint', 'view-order' ),
 		)
 	);
 }

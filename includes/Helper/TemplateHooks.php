@@ -37,6 +37,7 @@ add_action( 'masteriyo_account_grades_endpoint', 'masteriyo_account_grades_endpo
 add_action( 'masteriyo_account_memberships_endpoint', 'masteriyo_account_memberships_endpoint' );
 add_action( 'masteriyo_account_certificates_endpoint', 'masteriyo_account_certificates_endpoint' );
 add_action( 'masteriyo_account_order-history_endpoint', 'masteriyo_account_order_history_endpoint' );
+add_action( 'masteriyo_account_view-order_endpoint', 'masteriyo_account_view_order_endpoint' );
 
 /**
  * Emails.

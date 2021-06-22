@@ -5,18 +5,35 @@ import {
 	Center,
 	HStack,
 	useDisclosure,
+	Link,
 } from '@chakra-ui/react';
 import { BiAlarm, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import React from 'react';
 import { Stack } from '@chakra-ui/react';
 import { ContentNavigationSchema } from '../schemas';
+import { Link as RouterLink } from 'react-router-dom';
+import routes from '../constants/routes';
 
 interface Props {
 	navigation: ContentNavigationSchema;
+	courseId: number;
 }
 
 const FloatingNavigation: React.FC<Props> = (props) => {
-	const { navigation } = props;
+	const { navigation, courseId } = props;
+
+	const getNavigationRoute = (id: number, type: string) => {
+		if (type === 'lesson') {
+			return routes.lesson
+				.replace(':lessonId', id.toString())
+				.replace(':courseId', courseId.toString());
+		} else if (type === 'quiz') {
+			return routes.quiz
+				.replace(':quizId', id.toString())
+				.replace(':courseId', courseId.toString());
+		}
+		return;
+	};
 
 	const {
 		isOpen: isPrevOpen,
@@ -68,7 +85,12 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 							</Stack>
 						</HStack>
 					</Box>
-					<Box
+					<Link
+						as={RouterLink}
+						to={getNavigationRoute(
+							navigation?.previous?.id,
+							navigation?.previous?.type
+						)}
 						position="fixed"
 						top="50%"
 						transform="translateY(-50%)"
@@ -79,7 +101,7 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						onMouseLeave={onPrevClose}
 						_hover={{ color: 'blue.500' }}>
 						<Icon as={BiChevronLeft} fontSize="5rem" />
-					</Box>
+					</Link>
 				</>
 			)}
 
@@ -113,14 +135,19 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 								</Center>
 								<Stack direction="column" spacing="0">
 									<Text fontSize="xs" color="gray.400">
-										Introduction
+										{navigation?.next?.parent?.name}
 									</Text>
-									<Text fontWeight="bold">Short Quiz</Text>
+									<Text fontWeight="bold">{navigation?.next?.name}</Text>
 								</Stack>
 							</Stack>
 						</HStack>
 					</Box>
-					<Box
+					<Link
+						as={RouterLink}
+						to={getNavigationRoute(
+							navigation?.next?.id,
+							navigation?.next?.type
+						)}
 						position="fixed"
 						top="50%"
 						transform="translateY(-50%)"
@@ -131,7 +158,7 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						onMouseLeave={onNextClose}
 						_hover={{ color: 'blue.500' }}>
 						<Icon as={BiChevronRight} fontSize="5rem" />
-					</Box>
+					</Link>
 				</>
 			)}
 		</>

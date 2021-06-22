@@ -49,7 +49,10 @@ const InteractiveLesson = () => {
 						dangerouslySetInnerHTML={{ __html: lessonQuery?.data?.description }}
 					/>
 				</Stack>
-				<FloatingNavigation navigation={lessonQuery?.data?.navigation} />
+				<FloatingNavigation
+					navigation={lessonQuery?.data?.navigation}
+					courseId={lessonQuery?.data?.course_id}
+				/>
 			</Box>
 		</Container>
 	);

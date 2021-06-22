@@ -6,7 +6,7 @@ import {
 	HStack,
 	useDisclosure,
 } from '@chakra-ui/react';
-import { BiAlarm, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import { BiAlarm, BiChevronLeft } from 'react-icons/bi';
 import React from 'react';
 import { Stack } from '@chakra-ui/react';
 

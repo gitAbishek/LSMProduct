@@ -190,6 +190,17 @@ abstract class Model {
 	}
 
 	/**
+	 * Set all props to default values.
+	 *
+	 * @since 0.1.0
+	 */
+	public function set_defaults() {
+		$this->data    = $this->default_data;
+		$this->changes = array();
+		$this->set_object_read( false );
+	}
+
+	/**
 	 * Set object read property.
 	 *
 	 * @since 0.1.0

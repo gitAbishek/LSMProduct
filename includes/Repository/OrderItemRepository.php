@@ -139,20 +139,22 @@ class OrderItemRepository extends AbstractRepository {
 		$data = wp_cache_get( 'item-' . $item->get_id(), 'order-items' );
 
 		if ( false === $data ) {
-			$data = $wpdb->get_row( $wpdb->prepare( "SELECT order_id, name FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d LIMIT 1;", $item->get_id() ) );
+			$sql  = $wpdb->prepare( "SELECT order_id, order_item_name FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d LIMIT 1;", $item->get_id() );
+			$data = $wpdb->get_row( $sql );
 			wp_cache_set( 'item-' . $item->get_id(), $data, 'order-items' );
 		}
 
 		if ( ! $data ) {
-			throw new Exception( __( 'Invalid order item.', 'masteriyo' ) );
+			throw new \Exception( __( 'Invalid order item.', 'masteriyo' ) );
 		}
 
 		$item->set_props(
 			array(
 				'order_id'        => $data->order_id,
-				'order_item_name' => $data->name,
+				'order_item_name' => $data->order_item_name,
 			)
 		);
+		$item->set_object_read( true );
 		$item->read_meta_data();
 	}
 

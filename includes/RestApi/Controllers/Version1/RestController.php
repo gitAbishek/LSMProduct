@@ -525,7 +525,7 @@ abstract class RestController extends \WP_REST_Controller {
 		}
 
 		// Exclude fields that specify a different context than the request context.
-		$context = $request['context'];
+		$context = isset( $request['context'] ) ? $request['context'] : '';
 		if ( $context ) {
 			foreach ( $properties as $name => $options ) {
 				if ( ! empty( $options['context'] ) && ! in_array( $context, $options['context'], true ) ) {

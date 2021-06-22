@@ -14,7 +14,7 @@ $rating              = $course->get_average_rating();
 $reviews_and_replies = masteriyo_get_course_reviews_and_replies($course);
 $course_reviews      = $reviews_and_replies['reviews'];
 $replies             = $reviews_and_replies['replies'];
-$review_count        = count( $course_reviews );
+$review_count        = count($course_reviews);
 $pp_placeholder      = masteriyo_get_course_review_author_pp_placeholder();
 
 /**
@@ -73,7 +73,6 @@ do_action('masteriyo_before_single_course_reviews_content');
 								</label>
 								<ul class="slide menu">
 									<li class="mto-edit-course-review"><strong><?php _e('Edit', 'masteriyo'); ?></strong></li>
-									<li class="mto-reply-course-review"><strong><?php _e('Reply', 'masteriyo'); ?></strong></li>
 									<li class="mto-delete-course-review"><strong><?php _e('Delete', 'masteriyo'); ?></strong></li>
 								</ul>
 							</nav>
@@ -93,19 +92,19 @@ do_action('masteriyo_before_single_course_reviews_content');
 					<div class="content" data-value="<?php echo esc_attr($course_review->get_content()); ?>">
 						<?php echo esc_html($course_review->get_content()); ?>
 					</div>
+					<span class="mto-reply-course-review"><?php _e('Reply', 'masteriyo'); ?></span>
 				</div>
 			</div>
 		</div>
 
 		<?php if (!empty($replies[$course_review->get_id()])) : ?>
 			<div class="mto-course-review-replies">
-				<div><strong><?php _e( 'Replies', 'masteriyo' ); ?>:</strong></div>
 				<?php foreach ($replies[$course_review->get_id()] as $reply) : ?>
 					<!-- Course Review (Reply) -->
 					<div class="mto-course-review is-course-review-reply" data-id="<?php echo esc_attr($reply->get_id()); ?>">
 						<input type="hidden" name="parent" value="<?php echo esc_attr($course_review->get_id()); ?>">
 						<div class="rating" data-value="0"></div>
-						<div class="mto-flex mto-review">
+						<div class="mto-review mto-flex mto-replies">
 							<div class="mto-avatar">
 								<?php if (!$reply->get_author()) : ?>
 									<img src="<?php echo esc_attr($pp_placeholder); ?>" />
@@ -113,34 +112,36 @@ do_action('masteriyo_before_single_course_reviews_content');
 									<img src="<?php echo esc_attr($reply->get_author()->get_avatar_url()); ?>" />
 								<?php endif; ?>
 							</div>
-							<div class="mto-flex mto-flex-column mto-right">
-								<div class="mto-flex">
-									<div class="author-name" data-value="<?php echo esc_attr($reply->get_author_name()); ?>">
-										<?php echo esc_html($reply->get_author_name()); ?>
+							<div class="mto-flex  justify-content-between mto-reply-replies">
+								<div class="mto-flex mto-flex-column mto-right">
+									<div class="mto-flex">
+										<div class="author-name" data-value="<?php echo esc_attr($reply->get_author_name()); ?>">
+											<?php echo esc_html($reply->get_author_name()); ?>
+										</div>
+										<div class="date-created" data-value="<?php echo esc_attr($reply->get_date_created()); ?>">
+											<?php echo esc_html($reply->get_date_created()); ?>
+										</div>
 									</div>
-									<div class="date-created" data-value="<?php echo esc_attr($reply->get_date_created()); ?>">
-										<?php echo esc_html($reply->get_date_created()); ?>
+									<div class="content" data-value="<?php echo esc_attr($reply->get_content()); ?>">
+										<?php echo esc_html($reply->get_content()); ?>
 									</div>
 								</div>
-								<div class="content" data-value="<?php echo esc_attr($reply->get_content()); ?>">
-									<?php echo esc_html($reply->get_content()); ?>
-								</div>
+								<?php if (masteriyo_current_user_can_edit_course_review($reply)) : ?>
+									<nav class="dropdown">
+										<label class="menu-toggler">
+											<span class='icon_box'>
+												<svg width="5" height="16" viewBox="0 0 5 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M2.19629 6C1.09629 6 0.196289 6.9 0.196289 8C0.196289 9.1 1.09629 10 2.19629 10C3.29629 10 4.19629 9.1 4.19629 8C4.19629 6.9 3.29629 6 2.19629 6ZM2.19629 0C1.09629 0 0.196289 0.9 0.196289 2C0.196289 3.1 1.09629 4 2.19629 4C3.29629 4 4.19629 3.1 4.19629 2C4.19629 0.9 3.29629 0 2.19629 0ZM2.19629 12C1.09629 12 0.196289 12.9 0.196289 14C0.196289 15.1 1.09629 16 2.19629 16C3.29629 16 4.19629 15.1 4.19629 14C4.19629 12.9 3.29629 12 2.19629 12Z" fill="black" />
+												</svg>
+											</span>
+										</label>
+										<ul class="slide menu">
+											<li class="mto-edit-course-review"><strong><?php _e('Edit', 'masteriyo'); ?></strong></li>
+											<li class="mto-delete-course-review"><strong><?php _e('Delete', 'masteriyo'); ?></strong></li>
+										</ul>
+									</nav>
 							</div>
-							<?php if (masteriyo_current_user_can_edit_course_review($reply)) : ?>
-								<nav class="dropdown">
-									<label class="menu-toggler">
-										<span class='icon_box'>
-											<svg width="5" height="16" viewBox="0 0 5 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M2.19629 6C1.09629 6 0.196289 6.9 0.196289 8C0.196289 9.1 1.09629 10 2.19629 10C3.29629 10 4.19629 9.1 4.19629 8C4.19629 6.9 3.29629 6 2.19629 6ZM2.19629 0C1.09629 0 0.196289 0.9 0.196289 2C0.196289 3.1 1.09629 4 2.19629 4C3.29629 4 4.19629 3.1 4.19629 2C4.19629 0.9 3.29629 0 2.19629 0ZM2.19629 12C1.09629 12 0.196289 12.9 0.196289 14C0.196289 15.1 1.09629 16 2.19629 16C3.29629 16 4.19629 15.1 4.19629 14C4.19629 12.9 3.29629 12 2.19629 12Z" fill="black" />
-											</svg>
-										</span>
-									</label>
-									<ul class="slide menu">
-										<li class="mto-edit-course-review"><strong><?php _e('Edit', 'masteriyo'); ?></strong></li>
-										<li class="mto-delete-course-review"><strong><?php _e('Delete', 'masteriyo'); ?></strong></li>
-									</ul>
-								</nav>
-							<?php endif; ?>
+						<?php endif; ?>
 						</div>
 					</div>
 				<?php endforeach; ?>

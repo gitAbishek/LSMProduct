@@ -81,6 +81,7 @@
     padding: 8px 16px;
     color: $mto-white-color;
   }
+
   .mto-heart {
     top: 20px;
     right: 20px;
@@ -115,6 +116,7 @@
     color: $mto-primary-color;
     margin-bottom: -2px;
   }
+
   // Curriculum tab
   &--tcurriculum {
     .mto-stab--shortinfo {
@@ -148,11 +150,14 @@
     .mto-stab--citems {
       border-bottom: 1px solid $mto-border-color;
       cursor: pointer;
+
       &:last-of-type {
         border: none;
       }
+
       &.active {
         border-bottom: 0;
+
         .mto-cheader {
           background: $mto-primary-color;
           border-top-left-radius: 4px;
@@ -163,6 +168,7 @@
             color: $mto-white-color;
           }
         }
+
         .mto-cbody {
           max-height: 999px;
           padding: 0 16px;
@@ -170,9 +176,11 @@
           border-bottom-left-radius: 4px;
           border-bottom-right-radius: 4px;
         }
+
         .mto-cplus {
           display: none;
         }
+
         .mto-cminus {
           display: block;
           background: $mto-white-color;
@@ -191,6 +199,7 @@
       align-items: center;
       justify-content: space-between;
     }
+
     .mto-ctitle {
       margin: inherit;
       font-size: $mto-text-lg;
@@ -212,6 +221,7 @@
     .mto-lesson-list {
       margin-bottom: 0;
     }
+
     .mto-lesson-list li {
       padding: 16px 0;
       border-bottom: 1px solid $mto-border-color;
@@ -223,11 +233,13 @@
 
     .mto-time {
       gap: 8px;
+
       .mto-icon-svg svg {
         width: 16px;
         height: 16px;
       }
     }
+
     .mto-lesson-list--btn {
       border-radius: 100px;
       text-transform: uppercase;
@@ -253,6 +265,7 @@
       display: none;
       border-bottom: 1px solid $mto-border-color;
       padding: 16px 30px;
+
       .content {
         margin: inherit;
       }
@@ -293,4 +306,24 @@
 .mto-item--wrap {
   gap: 0;
   margin: 0 -15px;
+}
+
+.mto-reply-course-review {
+  font-size: 14px;
+  line-height: 16px;
+  color: $mto-primary-color;
+  margin-top: 16px;
+}
+
+.mto-replies {
+  flex-direction: row;
+}
+
+.mto-reply-replies {
+  width: 92%;
+}
+
+.mto-course-review-replies {
+  width: 90%;
+  float: right;
 }

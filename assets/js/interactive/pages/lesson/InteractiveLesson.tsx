@@ -6,6 +6,7 @@ import API from '../../../back-end/utils/api';
 import urls from '../../../back-end/constants/urls';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import MediaAPI from '../../../back-end/utils/media';
+import FloatingNavigation from '../../components/FloatingNavigation';
 
 const InteractiveLesson = () => {
 	const { lessonId }: any = useParams();
@@ -41,6 +42,7 @@ const InteractiveLesson = () => {
 	return (
 		<Container centerContent maxW="container.xl" py="8">
 			<Box bg="white" p="14" shadow="box" w="full">
+				<FloatingNavigation />
 				<Stack direction="column" spacing="8">
 					<Heading as="h5">{lessonQuery?.data?.name}</Heading>
 					<Image src={imageQuery?.data?.source_url} />

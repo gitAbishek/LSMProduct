@@ -19,16 +19,11 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { Logo } from '../../back-end/constants/images';
-import {
-	BiBell,
-	BiChevronDown,
-	BiHeart,
-	BiInfoCircle,
-	BiSearch,
-} from 'react-icons/bi';
+import { BiChevronDown, BiHeart, BiInfoCircle, BiSearch } from 'react-icons/bi';
 import { __ } from '@wordpress/i18n';
 import { Polygon } from '../../back-end/constants/images';
 import AvatarMenu from './AvatarMenu';
+import Notification from './Notification';
 
 const Header = () => {
 	const {
@@ -122,7 +117,7 @@ const Header = () => {
 						<Stack direction="row" spacing="2" align="center">
 							<Icon as={BiSearch} />
 							<Icon as={BiHeart} />
-							<Icon as={BiBell} />
+							<Notification />
 							<AvatarMenu />
 						</Stack>
 					</Stack>

@@ -1,21 +1,31 @@
-import { Box, Icon, Text, Center, HStack } from '@chakra-ui/react';
+import {
+	Box,
+	Icon,
+	Text,
+	Center,
+	HStack,
+	useDisclosure,
+} from '@chakra-ui/react';
 import { BiAlarm, BiChevronRight } from 'react-icons/bi';
 import React from 'react';
 import { Stack } from '@chakra-ui/react';
 
 const FloatingNavigation = () => {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+
 	return (
 		<>
 			<Box
 				bg="white"
 				shadow="box"
 				position="fixed"
-				pl="4"
-				py="2"
+				p="6"
+				pr="80px"
 				top="50vh"
 				right="0"
-				rounded="xs"
-				transform="translateY(-50%)">
+				transition="all 0.35s ease-in-out"
+				transform={isOpen ? 'translate(0, -50%)' : 'translate(100%, -50%)'}
+				rounded="xs">
 				<HStack spacing="4">
 					<Stack direction="row" spacing="2" align="center">
 						<Center
@@ -36,8 +46,19 @@ const FloatingNavigation = () => {
 							<Text fontWeight="bold">Short Quiz</Text>
 						</Stack>
 					</Stack>
-					<Icon as={BiChevronRight} fontSize="5rem" color="gray.200" />
 				</HStack>
+			</Box>
+			<Box
+				position="fixed"
+				top="50%"
+				transform="translateY(-50%)"
+				right="0"
+				cursor="pointer"
+				color="gray.200"
+				onMouseEnter={onOpen}
+				onMouseLeave={onClose}
+				_hover={{ color: 'blue.500' }}>
+				<Icon as={BiChevronRight} fontSize="5rem" />
 			</Box>
 		</>
 	);

@@ -1126,37 +1126,13 @@ class Order extends AbstractOrder {
 	 *
 	 * @return string
 	 */
-	public function get_formatted_order_total( $tax_display = '', $display_refunded = true ) {
+	public function get_formatted_order_total( $display_refunded = true ) {
 		$formatted_total = masteriyo_price( $this->get_total(), array( 'currency' => $this->get_currency() ) );
 		$order_total     = $this->get_total();
 		$total_refunded  = $this->get_total_refunded();
-		$tax_string      = '';
-
-		// Tax for inclusive prices.
-		if ( masteriyo_is_tax_enabled() && 'incl' === $tax_display ) {
-			$tax_string_array = array();
-			$tax_totals       = $this->get_tax_totals();
-
-			if ( 'itemized' === get_option( 'masteriyo_tax_total_display' ) ) {
-				foreach ( $tax_totals as $code => $tax ) {
-					$tax_amount         = ( $total_refunded && $display_refunded ) ? masteriyo_price( masteriyo_round( $tax->amount - $this->get_total_tax_refunded_by_rate_id( $tax->rate_id ) ), array( 'currency' => $this->get_currency() ) ) : $tax->formatted_amount;
-					$tax_string_array[] = sprintf( '%s %s', $tax_amount, $tax->label );
-				}
-			} elseif ( ! empty( $tax_totals ) ) {
-				$tax_amount         = ( $total_refunded && $display_refunded ) ? $this->get_total_tax() - $this->get_total_tax_refunded() : $this->get_total_tax();
-				$tax_string_array[] = sprintf( '%s %s', masteriyo_price( $tax_amount, array( 'currency' => $this->get_currency() ) ), masteriyo( 'countries' )->tax_or_vat() );
-			}
-
-			if ( ! empty( $tax_string_array ) ) {
-				/* translators: %s: taxes */
-				$tax_string = ' <small class="includes_tax">' . sprintf( __( '(includes %s)', 'masteriyo' ), implode( ', ', $tax_string_array ) ) . '</small>';
-			}
-		}
 
 		if ( $total_refunded && $display_refunded ) {
-			$formatted_total = '<del aria-hidden="true">' . wp_strip_all_tags( $formatted_total ) . '</del> <ins>' . masteriyo_price( $order_total - $total_refunded, array( 'currency' => $this->get_currency() ) ) . $tax_string . '</ins>';
-		} else {
-			$formatted_total .= $tax_string;
+			$formatted_total = '<del aria-hidden="true">' . wp_strip_all_tags( $formatted_total ) . '</del> <ins>' . masteriyo_price( $order_total - $total_refunded, array( 'currency' => $this->get_currency() ) ) . '</ins>';
 		}
 
 		/**
@@ -1165,11 +1141,10 @@ class Order extends AbstractOrder {
 		 * @since 0.1.0
 		 *
 		 * @param string   $formatted_total  Total to display.
-		 * @param Order $order            Order data.
-		 * @param string   $tax_display      Type of tax display.
+		 * @param Order    $order            Order data.
 		 * @param bool     $display_refunded If should include refunded value.
 		 */
-		return apply_filters( 'masteriyo_get_formatted_order_total', $formatted_total, $this, $tax_display, $display_refunded );
+		return apply_filters( 'masteriyo_get_formatted_order_total', $formatted_total, $this, $display_refunded );
 	}
 
 	/**
@@ -1253,6 +1228,17 @@ class Order extends AbstractOrder {
 	}
 
 	/**
+	 * Get a checkout page URL.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_checkout_payment_url() {
+		return '#';
+	}
+
+	/**
 	 * Get's the URL to edit the order in the backend.
 	 *
 	 * @since 0.1.0
@@ -1305,6 +1291,81 @@ class Order extends AbstractOrder {
 		}
 
 		return $cancel_endpoint;
+	}
+
+	/**
+	 * Add total row for the payment method.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array  $total_rows  Total rows.
+	 */
+	protected function add_order_item_totals_payment_method_row( &$total_rows ) {
+		if ( $this->get_total() > 0 && $this->get_payment_method_title() && 'other' !== $this->get_payment_method_title() ) {
+			$total_rows['payment_method'] = array(
+				'label' => __( 'Payment method:', 'masteriyo' ),
+				'value' => $this->get_payment_method_title(),
+			);
+		}
+	}
+
+	/**
+	 * Add total row for refunds.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array  $total_rows  Total rows.
+	 */
+	protected function add_order_item_totals_refund_rows( &$total_rows ) {
+		$refunds = $this->get_refunds();
+		if ( $refunds ) {
+			foreach ( $refunds as $id => $refund ) {
+				$total_rows[ 'refund_' . $id ] = array(
+					'label' => $refund->get_reason() ? $refund->get_reason() : __( 'Refund', 'masteriyo' ) . ':',
+					'value' => masteriyo_price( '-' . $refund->get_amount(), array( 'currency' => $this->get_currency() ) ),
+				);
+			}
+		}
+	}
+
+	/**
+	 * Get totals for display on pages and in emails.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	public function get_order_item_totals() {
+		$total_rows  = array();
+
+		$this->add_order_item_totals_payment_method_row( $total_rows );
+		$this->add_order_item_totals_refund_rows( $total_rows );
+		$this->add_order_item_totals_total_row( $total_rows );
+
+		return apply_filters( 'masteriyo_get_order_item_totals', $total_rows, $this );
+	}
+
+	/**
+	 * Get a formatted billing address for the order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $empty_content Content to show if no address is present. @since 3.3.0.
+	 * @return string
+	 */
+	public function get_formatted_billing_address( $empty_content = '' ) {
+		$raw_address = apply_filters( 'masteriyo_order_formatted_billing_address', $this->get_address( 'billing' ), $this );
+		$address     = masteriyo('countries')->get_formatted_address( $raw_address );
+
+		/**
+		 * Filter orders formatterd billing address.
+		 *
+		 * @since 0.1.0
+		 * @param string   $address     Formatted billing address string.
+		 * @param array    $raw_address Raw billing address.
+		 * @param Order $order       Order data. @since 0.1.0
+		 */
+		return apply_filters( 'masteriyo_order_get_formatted_billing_address', $address ? $address : $empty_content, $raw_address, $this );
 	}
 
 	/*

@@ -104,19 +104,16 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 				$this->get_table_name(),
 				array(
 					'order_id'        => $order_item->get_order_id( 'edit' ),
-					'course_id'       => $order_item->get_course_id( 'edit' ),
 					'order_item_name' => $order_item->get_name( 'edit' ),
 					'order_item_type' => $order_item->get_type( 'edit' ),
-					'quantity'        => $order_item->get_quantity( 'edit' ),
-					'total'           => $order_item->get_total( 'edit' ),
 				),
 				array(
-					'id' => $order_item->get_id(),
+					'order_item_id' => $order_item->get_id(),
 				)
 			);
 		}
 
-		$this->update_post_meta( $order_item );
+		$this->update_custom_table_meta( $order_item );
 
 		$order_item->apply_changes();
 		$this->clear_cache( $order_item );

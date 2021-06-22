@@ -817,4 +817,103 @@ abstract class Order extends Model {
 	protected function get_valid_statuses() {
 		return array_keys( masteriyo_get_order_statuses() );
 	}
+
+	/**
+	 * Get order refunds.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array[Order]
+	 */
+	public function get_refunds() {
+		$cache_key   = 'mto-order-refunds' . $this->get_id();
+		$cached_data = masteriyo('cache')->get( $cache_key, $this->cache_group );
+
+		if ( false !== $cached_data ) {
+			return $cached_data;
+		}
+
+		$this->refunds = masteriyo_get_orders(
+			array(
+				'type'   => 'mto-order-refund',
+				'parent' => $this->get_id(),
+				'limit'  => -1,
+			)
+		);
+
+		masteriyo('cache')->set( $cache_key, $this->refunds, $this->cache_group );
+
+		return $this->refunds;
+	}
+
+	/**
+	 * Get the refunded amount for a line item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  int    $item_id   ID of the item we're checking.
+	 * @param  string $item_type Type of the item we're checking, if not a course.
+	 *
+	 * @return int
+	 */
+	public function get_qty_refunded_for_item( $item_id, $item_type = 'course' ) {
+		$qty = 0;
+		foreach ( $this->get_refunds() as $refund ) {
+			foreach ( $refund->get_items( $item_type ) as $refunded_item ) {
+				if ( absint( $refunded_item->get_meta( '_refunded_item_id' ) ) === $item_id ) {
+					$qty += $refunded_item->get_quantity();
+				}
+			}
+		}
+		return $qty;
+	}
+
+	/**
+	 * Get line subtotal.
+	 *
+	 *  @since 0.1.0
+	 *
+	 * @param object $item Item to get total from.
+	 * @param bool   $round (default: true).
+	 * @return float
+	 */
+	public function get_line_subtotal( $item, $round = true ) {
+		$subtotal = 0;
+
+		if ( is_callable( array( $item, 'get_subtotal' ) ) ) {
+			$subtotal = $item->get_subtotal();
+			$subtotal = $round ? masteriyo_round( $subtotal, masteriyo_get_price_decimals() ) : $subtotal;
+		}
+
+		return apply_filters( 'masteriyo_order_amount_line_subtotal', $subtotal, $this, $item, $round );
+	}
+
+	/**
+	 * Gets line subtotal - formatted for display.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param object $item Item to get total from.
+	 *
+	 * @return string
+	 */
+	public function get_formatted_line_subtotal( $item ) {
+		$subtotal = masteriyo_price( $this->get_line_subtotal( $item, true ), array( 'currency' => $this->get_currency() ) );
+
+		return apply_filters( 'masteriyo_order_formatted_line_subtotal', $subtotal, $item, $this );
+	}
+
+	/**
+	 * Add total row for grand total.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array  $total_rows Reference to total rows array.
+	 */
+	protected function add_order_item_totals_total_row( &$total_rows ) {
+		$total_rows['order_total'] = array(
+			'label' => __( 'Total:', 'masteriyo' ),
+			'value' => $this->get_formatted_order_total(),
+		);
+	}
 }

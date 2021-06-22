@@ -7,7 +7,12 @@ import {
 	useDisclosure,
 	Link,
 } from '@chakra-ui/react';
-import { BiAlarm, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import {
+	BiAlarm,
+	BiAlignLeft,
+	BiChevronLeft,
+	BiChevronRight,
+} from 'react-icons/bi';
 import React from 'react';
 import { Stack } from '@chakra-ui/react';
 import { ContentNavigationSchema } from '../schemas';
@@ -80,7 +85,13 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 									shadow="0 0 10px rgba(0,0,0,0.1)"
 									fontSize="x-large"
 									color="blue.500">
-									<Icon as={BiAlarm} />
+									<Icon
+										as={
+											navigation?.previous?.type === 'quiz'
+												? BiAlarm
+												: BiAlignLeft
+										}
+									/>
 								</Center>
 							</Stack>
 						</HStack>
@@ -131,7 +142,11 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 									shadow="0 0 10px rgba(0,0,0,0.1)"
 									fontSize="x-large"
 									color="blue.500">
-									<Icon as={BiAlarm} />
+									<Icon
+										as={
+											navigation?.next?.type === 'quiz' ? BiAlarm : BiAlignLeft
+										}
+									/>
 								</Center>
 								<Stack direction="column" spacing="0">
 									<Text fontSize="xs" color="gray.400">

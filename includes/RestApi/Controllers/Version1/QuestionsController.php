@@ -386,7 +386,6 @@ class QuestionsController extends PostsController {
 			'positive_feedback' => $question->get_positive_feedback( $context ),
 			'negative_feedback' => $question->get_negative_feedback( $context ),
 			'feedback'          => $question->get_feedback( $context ),
-			'navigation'        => $this->get_navigation_items( $lesson, $context ),
 		);
 
 		return $data;

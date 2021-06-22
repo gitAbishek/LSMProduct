@@ -281,6 +281,7 @@ class QuizesController extends PostsController {
 			'status'            => $quiz->get_status( $context ),
 			'description'       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
 			'short_description' => 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description( $context ),
+			'navigation'        => $this->get_navigation_items( $lesson, $context ),
 		);
 
 		return $data;
@@ -580,6 +581,8 @@ class QuizesController extends PostsController {
 		 *
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
+		 *
+		 * @since 0.1.0
 		 *
 		 * @param Model         $quiz  Object object.
 		 * @param WP_REST_Request $request  Request object.

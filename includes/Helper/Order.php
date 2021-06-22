@@ -251,3 +251,67 @@ function masteriyo_get_order_id_by_order_key( $order_key ) {
 
 	return $data_store->get_order_id_by_order_key( $order_key );
 }
+
+/**
+ * Get My Account > Orders columns.
+ *
+ * @since 0.1.0
+ *
+ * @return array
+ */
+function masteriyo_get_account_orders_columns() {
+	$columns = apply_filters(
+		'masteriyo_account_orders_columns',
+		array(
+			'order-number'  => __( 'Order', 'masteriyo' ),
+			'order-date'    => __( 'Date', 'masteriyo' ),
+			'order-status'  => __( 'Status', 'masteriyo' ),
+			'order-total'   => __( 'Total', 'masteriyo' ),
+			'order-actions' => __( 'Actions', 'masteriyo' ),
+		)
+	);
+	return apply_filters( 'masteriyo_my_account_my_orders_columns', $columns );
+}
+
+/**
+ * Get account orders actions.
+ *
+ * @since 0.1.0
+ *
+ * @param  int|Order $order Order instance or ID.
+ *
+ * @return array
+ */
+function masteriyo_get_account_orders_actions( $order ) {
+	if ( ! is_object( $order ) ) {
+		$order_id = absint( $order );
+		$order    = masteriyo_get_order( $order_id );
+	}
+
+	$actions = array(
+		'pay'    => array(
+			'url'  => $order->get_checkout_payment_url(),
+			'name' => __( 'Pay', 'masteriyo' ),
+		),
+		'view'   => array(
+			'url'  => $order->get_view_order_url(),
+			'url'  => '#',
+			'name' => __( 'View', 'masteriyo' ),
+		),
+		'cancel' => array(
+			'url'  => $order->get_cancel_order_url( masteriyo_get_page_permalink( 'myaccount' ) ),
+			'url'  => '#',
+			'name' => __( 'Cancel', 'masteriyo' ),
+		),
+	);
+
+	if ( ! $order->needs_payment() ) {
+		unset( $actions['pay'] );
+	}
+
+	if ( ! in_array( $order->get_status(), apply_filters( 'masteriyo_valid_order_statuses_for_cancel', array( 'pending', 'failed' ), $order ), true ) ) {
+		unset( $actions['cancel'] );
+	}
+
+	return apply_filters( 'masteriyo_my_account_my_orders_actions', $actions, $order );
+}

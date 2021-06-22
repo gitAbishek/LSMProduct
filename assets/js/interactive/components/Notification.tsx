@@ -59,10 +59,12 @@ const Notification = () => {
 				</PopoverBody>
 				<PopoverFooter>
 					<ButtonGroup justifyContent="flex-end" d="flex">
-						<Button variant="link">
+						<Button variant="link" _hover={{ color: 'blue.500' }}>
 							{__('Mark all as read', 'masteriyo')}
 						</Button>
-						<Button variant="link">{__('Clear All', 'masteriyo')}</Button>
+						<Button variant="link" _hover={{ color: 'blue.500' }}>
+							{__('Clear All', 'masteriyo')}
+						</Button>
 					</ButtonGroup>
 				</PopoverFooter>
 			</PopoverContent>

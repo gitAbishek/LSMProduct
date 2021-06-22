@@ -9,6 +9,7 @@
 
 namespace ThemeGrill\Masteriyo\Repository;
 
+use ThemeGrill\Masteriyo\CourseReviews;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\CourseReview;
 
@@ -107,7 +108,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 
 			$course_review->save_meta_data();
 			$course_review->apply_changes();
-			masteriyo_update_course_average_rating( $course_review->get_course_id() );
+			CourseReviews::update_course_review_stats( $course_review->get_course_id() );
 
 			do_action( 'masteriyo_new_course_review', $id, $course_review );
 		}
@@ -201,7 +202,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			);
 
 			wp_update_comment( array_merge( array( 'comment_ID' => $course_review->get_id() ), $course_review_data ) );
-			masteriyo_update_course_average_rating( $course_review->get_course_id() );
+			CourseReviews::update_course_review_stats( $course_review->get_course_id() );
 		}
 
 		$this->update_comment_meta( $course_review );
@@ -243,7 +244,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			$course_review->set_status( 'trash' );
 			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course_review );
 		}
-		masteriyo_update_course_average_rating( $course_review->get_course_id() );
+		CourseReviews::update_course_review_stats( $course_review->get_course_id() );
 	}
 
 	/**

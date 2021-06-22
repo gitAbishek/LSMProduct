@@ -67,6 +67,7 @@ class Masteriyo extends Container {
 		Activation::init();
 		Deactivation::init();
 		FileRestrictions::init();
+		CourseReviews::init();
 
 		// Register service providers.
 		$this->register_service_providers();

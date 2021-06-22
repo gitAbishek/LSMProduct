@@ -498,6 +498,26 @@ class Course extends Model {
 	}
 
 	/**
+	 * Get the total amount (COUNT) of ratings, or just the count for one rating e.g. number of 5 star ratings.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  int $value Optional. Rating value to get the count for. By default returns the count of all rating values.
+	 *
+	 * @return int
+	 */
+	public function get_rating_count( $value = null ) {
+		$counts = $this->get_rating_counts();
+
+		if ( is_null( $value ) ) {
+			return array_sum( $counts );
+		} elseif ( isset( $counts[ $value ] ) ) {
+			return absint( $counts[ $value ] );
+		}
+		return 0;
+	}
+
+	/**
 	 * Get rating count.
 	 *
 	 * @since  0.1.0

@@ -2724,37 +2724,6 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
 }
 
 /**
- * Update average rating of a course.
- *
- * @since 0.1.0
- *
- * @param mixed $course_id
- */
-function masteriyo_update_course_average_rating( $course_id ) {
-	$course = masteriyo_get_course( $course_id );
-
-	if ( is_null( $course ) ) {
-		return;
-	}
-
-	$reviews    = masteriyo_get_course_reviews_and_replies( $course )['reviews'];
-	$rating_sum = 0;
-
-	foreach ( $reviews as $review ) {
-		$rating = $review->get_rating();
-
-		if ( is_numeric( $rating ) ) {
-			$rating_sum += (float) $rating;
-		}
-	}
-	$rating = $rating_sum / count( $reviews );
-	$rating = min( $rating, masteriyo_get_max_course_rating() );
-
-	$course->set_average_rating( $rating );
-	$course->save();
-}
-
-/**
  * Get user ip address.
  *
  * @since 0.1.0

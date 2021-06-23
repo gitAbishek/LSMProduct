@@ -1,7 +1,22 @@
-import { Box, List, ListIcon, ListItem, Text } from '@chakra-ui/react';
+import {
+	Button,
+	ButtonGroup,
+	Icon,
+	List,
+	ListIcon,
+	ListItem,
+	Stack,
+	Text,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiInfoCircle, BiTime } from 'react-icons/bi';
+import {
+	BiCheckCircle,
+	BiCheckDouble,
+	BiChevronRight,
+	BiInfoCircle,
+	BiTime,
+} from 'react-icons/bi';
 
 const QuizStart = () => {
 	const listItemStyles = {
@@ -18,7 +33,7 @@ const QuizStart = () => {
 		},
 	};
 	return (
-		<Box>
+		<Stack direction="column" spacing="8">
 			<List
 				bg="blue.500"
 				rounded="sm"
@@ -38,8 +53,30 @@ const QuizStart = () => {
 					<Text as="strong">{__('Questions: ')}</Text>
 					<Text ml="1">5</Text>
 				</ListItem>
+				<ListItem sx={listItemStyles}>
+					<ListIcon as={BiCheckCircle} />
+					<Text as="strong">{__('Mark: ')}</Text>
+					<Text ml="1">100</Text>
+				</ListItem>
+				<ListItem sx={listItemStyles}>
+					<ListIcon as={BiCheckDouble} />
+					<Text as="strong">{__('Pass Mark: ')}</Text>
+					<Text ml="1">40</Text>
+				</ListItem>
 			</List>
-		</Box>
+
+			<ButtonGroup>
+				<Button
+					type="submit"
+					colorScheme="blue"
+					rounded="full"
+					fontWeight="bold"
+					rightIcon={<Icon as={BiChevronRight} fontSize="x-large" />}
+					textTransform="uppercase">
+					{__('Start Quiz', 'masteriyo')}
+				</Button>
+			</ButtonGroup>
+		</Stack>
 	);
 };
 

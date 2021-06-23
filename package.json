@@ -12,9 +12,9 @@
     "@wordpress/i18n": "3.18.0",
     "array-move": "3.0.1",
     "axios": "0.21.1",
-    "focus-visible": "5.2.0",
     "chakra-ui-steps": "0.2.2",
     "currency-symbol-map": "5.0.1",
+    "focus-visible": "5.2.0",
     "framer-motion": "^4",
     "react": "17.0.1",
     "react-beautiful-dnd": "13.1.0",
@@ -27,6 +27,7 @@
     "react-icons": "4.2.0",
     "react-query": "3.8.3",
     "react-select": "3.1.0",
+    "react-timer-hook": "3.0.4",
     "remove": "0.1.5",
     "tinymce": "5.7.1"
   },

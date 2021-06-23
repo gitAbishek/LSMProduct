@@ -9,12 +9,16 @@ import MediaAPI from '../../../back-end/utils/media';
 import FloatingNavigation from '../../components/FloatingNavigation';
 import ContentNav from '../../components/ContentNav';
 import QuizStart from './components/QuizStart';
+import FloatingTimer from '../../components/FloatingTimer';
 
 const InteractiveQuiz = () => {
 	const { quizId }: any = useParams();
 	const quizAPI = new API(urls.quizes);
 	const [mediaId, setMediaId] = useState(0);
 	const imageAPi = new MediaAPI();
+
+	const time = new Date();
+	time.setSeconds(time.getSeconds() + 600); // 10 minutes timer
 
 	const quizQuery = useQuery(
 		[`section${quizId}`, quizId],
@@ -57,6 +61,7 @@ const InteractiveQuiz = () => {
 				navigation={quizQuery?.data?.navigation}
 				courseId={quizQuery?.data?.course_id}
 			/>
+			<FloatingTimer expiryTimestamp={time} />
 			<ContentNav
 				navigation={quizQuery?.data?.navigation}
 				courseId={quizQuery?.data?.course_id}

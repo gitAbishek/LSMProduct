@@ -7,6 +7,7 @@
 
 use ThemeGrill\Masteriyo\Constants;
 use ThemeGrill\Masteriyo\Models\CourseReview;
+use ThemeGrill\Masteriyo\Query\UserCourseQuery;
 
 if ( ! function_exists( 'masteriyo_is_filtered' ) ) {
 	/**
@@ -505,30 +506,20 @@ if ( ! function_exists( 'masteriyo_is_user_enrolled_in_course' ) ) {
 			return false;
 		}
 
-		$orders = masteriyo_get_orders(
+		$query = new UserCourseQuery(
 			array(
-				'customer_id' => $user->get_id(),
-				'status'      => 'completed',
+				'course_id' => $course->get_id(),
+				'user_id'   => $user->get_id(),
+				'type'      => 'course',
 			)
 		);
 
-		foreach ( $orders as $order ) {
-			$order_items = masteriyo_get_order_items(
-				array(
-					'order_id' => $order->get_id(),
-				)
-			);
+		$user_courses = $query->get_user_courses();
 
-			foreach ( $order_items as $order_item ) {
-				if ( ! $order_item->is_type( 'course' ) ) {
-					continue;
-				}
-				if ( $course->get_id() === $order_item->get_course_id() ) {
-					return true;
-				}
-			}
+		if ( empty( $user_courses ) ) {
+			return false;
 		}
-		return false;
+		return $user_courses[0]->get_status() !== '';
 	}
 }
 

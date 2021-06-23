@@ -285,6 +285,7 @@ class QuizesController extends PostsController {
 			'pass_mark'         => $quiz->get_pass_mark( $context ),
 			'full_mark'         => $quiz->get_full_mark( $context ),
 			'duration'          => $quiz->get_duration( $context ),
+			'questions_count'   => $quiz->get_questions_count(),
 			'navigation'        => $this->get_navigation_items( $quiz, $context ),
 		);
 
@@ -467,7 +468,7 @@ class QuizesController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'duration'          => array(
-					'description' => __( 'Quiz duration.', 'masteriyo' ),
+					'description' => __( 'Quiz duration (seconds).', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => false,
 					'context'     => array( 'view', 'edit' ),

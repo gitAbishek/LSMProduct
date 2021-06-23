@@ -117,6 +117,33 @@ class Quiz extends Model {
 		return array();
 	}
 
+	/**
+	 * Get questions.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return ThemeGrill\Masteriyo\Models\Question
+	 */
+	public function get_questions() {
+		return masteriyo_get_questions(
+			array(
+				'limit'   => -1,
+				'quiz_id' => $this->get_id(),
+			)
+		);
+	}
+
+	/**
+	 * Get number of questions.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return int|WP_Error
+	 */
+	public function get_questions_count() {
+		return masteriyo_get_questions_count_by_quiz( $this->get_id() );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Getters

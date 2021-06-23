@@ -8,6 +8,7 @@ import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoad
 import MediaAPI from '../../../back-end/utils/media';
 import FloatingNavigation from '../../components/FloatingNavigation';
 import ContentNav from '../../components/ContentNav';
+import QuizStart from './components/QuizStart';
 
 const InteractiveQuiz = () => {
 	const { quizId }: any = useParams();
@@ -46,6 +47,7 @@ const InteractiveQuiz = () => {
 				<Stack direction="column" spacing="8">
 					<Heading as="h5">{lessonQuery?.data?.name}</Heading>
 					<Image src={imageQuery?.data?.source_url} />
+					<QuizStart />
 					<Text
 						dangerouslySetInnerHTML={{ __html: lessonQuery?.data?.description }}
 					/>

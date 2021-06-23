@@ -32,17 +32,19 @@ const Header = () => {
 		isOpen: isProgressOpen,
 	} = useDisclosure();
 
-	const { isOpen: isHeaderOpen, onToggle: onHeaderToggle } = useDisclosure();
+	const { isOpen, onToggle } = useDisclosure({
+		defaultIsOpen: true,
+	});
 
 	return (
 		<Box as="header" h="84px">
-			<Slide direction="top" in={isHeaderOpen} style={{ zIndex: 999 }}>
+			<Slide direction="top" in={isOpen} style={{ zIndex: 999 }}>
 				<Box position="relative" shadow="box" bg="white">
 					<IconButton
-						onClick={onHeaderToggle}
+						onClick={onToggle}
 						icon={
 							<BiChevronDown
-								style={{ transform: isHeaderOpen ? 'rotate(180deg)' : 'none' }}
+								style={{ transform: isOpen ? 'rotate(180deg)' : 'none' }}
 							/>
 						}
 						aria-label={__('Toggle Header', 'masteriyo')}

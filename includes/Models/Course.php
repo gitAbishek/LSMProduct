@@ -147,6 +147,17 @@ class Course extends Model {
 	}
 
 	/**
+	 * Get interactive page url for this course.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_interactive_page_url() {
+		return home_url( '?masteriyo=interactive#/course/' . $this->get_id() );
+	}
+
+	/**
 	 * Course Preview URL;
 	 *
 	 * @return string
@@ -162,6 +173,17 @@ class Course extends Model {
 	 */
 	public function get_children() {
 		return array();
+	}
+
+	/**
+	 * Get lecture hours in human readable format.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_human_readable_lecture_hours() {
+		return masteriyo_get_lecture_hours( $this );
 	}
 
 	/*

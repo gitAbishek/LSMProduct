@@ -16,7 +16,7 @@ const InteractiveQuiz = () => {
 	const [mediaId, setMediaId] = useState(0);
 	const imageAPi = new MediaAPI();
 
-	const lessonQuery = useQuery(
+	const quizQuery = useQuery(
 		[`section${quizId}`, quizId],
 		() => quizAPI.get(quizId),
 		{
@@ -37,7 +37,7 @@ const InteractiveQuiz = () => {
 		}
 	);
 
-	if (lessonQuery.isLoading) {
+	if (quizQuery.isLoading) {
 		return <FullScreenLoader />;
 	}
 
@@ -45,21 +45,21 @@ const InteractiveQuiz = () => {
 		<Container centerContent maxW="container.xl" py="16">
 			<Box bg="white" p="14" shadow="box" w="full">
 				<Stack direction="column" spacing="8">
-					<Heading as="h5">{lessonQuery?.data?.name}</Heading>
+					<Heading as="h5">{quizQuery?.data?.name}</Heading>
 					<Image src={imageQuery?.data?.source_url} />
 					<QuizStart />
 					<Text
-						dangerouslySetInnerHTML={{ __html: lessonQuery?.data?.description }}
+						dangerouslySetInnerHTML={{ __html: quizQuery?.data?.description }}
 					/>
 				</Stack>
 			</Box>
 			<FloatingNavigation
-				navigation={lessonQuery?.data?.navigation}
-				courseId={lessonQuery?.data?.course_id}
+				navigation={quizQuery?.data?.navigation}
+				courseId={quizQuery?.data?.course_id}
 			/>
 			<ContentNav
-				navigation={lessonQuery?.data?.navigation}
-				courseId={lessonQuery?.data?.course_id}
+				navigation={quizQuery?.data?.navigation}
+				courseId={quizQuery?.data?.course_id}
 			/>
 		</Container>
 	);

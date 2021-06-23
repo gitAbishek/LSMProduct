@@ -30,6 +30,7 @@ const theme = extendTheme({
 		box: '0px 0px 60px rgba(0, 0, 0, 0.06)',
 		input: '0px 1px 0px #EFF0F6',
 		button: '0px 4px 14px rgba(0, 0, 0, 0.13)',
+		boxl: '0px 0px 60px rgba(0, 0, 0, 0.15)',
 	},
 	components: {
 		Popover: {

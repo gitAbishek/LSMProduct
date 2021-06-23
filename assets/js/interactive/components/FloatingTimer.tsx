@@ -4,6 +4,7 @@ import {
 	CircularProgress,
 	CircularProgressLabel,
 	Text,
+	VStack,
 } from '@chakra-ui/react';
 import { useTimer } from 'react-timer-hook';
 
@@ -13,43 +14,41 @@ interface Props {
 const FloatingTimer: React.FC<Props> = (props) => {
 	const { expiryTimestamp } = props;
 
-	const {
-		seconds,
-		minutes,
-		hours,
-		days,
-		isRunning,
-		start,
-		pause,
-		resume,
-		restart,
-	} = useTimer({
+	const { seconds, minutes } = useTimer({
 		expiryTimestamp,
 		onExpire: () => console.warn('onExpire called'),
 	});
-
 	return (
 		<Center
 			position="fixed"
 			right="40px"
 			top="140px"
-			w="120px"
-			h="120px"
+			w="110px"
+			h="110px"
 			bg="white"
+			shadow="boxl"
 			rounded="full">
 			<CircularProgress
 				value={minutes}
-				max={60}
+				max={10}
 				capIsRound
 				color="blue.500"
 				size="140px"
 				trackColor="transparent"
 				thickness="5px">
 				<CircularProgressLabel fontSize="lg">
-					<Text fontSize="lg" fontWeight="bold">
-						{minutes}:{seconds}
-					</Text>
-					<Text fontSize="10px">ANSWERED: 1:5</Text>
+					<VStack spacing="0">
+						<Text fontSize="lg" fontWeight="bold" color="gray.700">
+							{minutes}:{seconds}
+						</Text>
+						<Text fontSize="10px" color="gray.500">
+							ANSWERED:{' '}
+							<Text as="span" color="gray.700">
+								1
+							</Text>
+							:5
+						</Text>
+					</VStack>
 				</CircularProgressLabel>
 			</CircularProgress>
 		</Center>

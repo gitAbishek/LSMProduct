@@ -512,39 +512,6 @@ if ( ! function_exists( 'masteriyo_account_view_myaccount_endpoint' ) ) {
 	}
 }
 
-if ( ! function_exists( 'masteriyo_account_grades_endpoint' ) ) {
-	/**
-	 * Show grades on myaccount page.
-	 *
-	 * @since 0.1.0
-	 */
-	function masteriyo_account_grades_endpoint() {
-		masteriyo_get_template( 'myaccount/my-grades.php' );
-	}
-}
-
-if ( ! function_exists( 'masteriyo_account_memberships_endpoint' ) ) {
-	/**
-	 * Show memberships on myaccount page.
-	 *
-	 * @since 0.1.0
-	 */
-	function masteriyo_account_memberships_endpoint() {
-		masteriyo_get_template( 'myaccount/my-memberships.php' );
-	}
-}
-
-if ( ! function_exists( 'masteriyo_account_certificates_endpoint' ) ) {
-	/**
-	 * Show certificates on myaccount page.
-	 *
-	 * @since 0.1.0
-	 */
-	function masteriyo_account_certificates_endpoint() {
-		masteriyo_get_template( 'myaccount/my-certificates.php' );
-	}
-}
-
 if ( ! function_exists( 'masteriyo_account_order_history_endpoint' ) ) {
 	/**
 	 * Show order history on myaccount page.

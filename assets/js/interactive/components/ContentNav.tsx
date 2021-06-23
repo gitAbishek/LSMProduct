@@ -72,6 +72,7 @@ const ContentNav: React.FC<Props> = (props) => {
 				</Box>
 
 				<Button
+					type="submit"
 					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"

@@ -24,21 +24,25 @@ interface Props {
 	courseId: number;
 }
 
+export const getNavigationRoute = (
+	id: number,
+	type: string,
+	courseId: number
+) => {
+	if (type === 'lesson') {
+		return routes.lesson
+			.replace(':lessonId', id.toString())
+			.replace(':courseId', courseId.toString());
+	} else if (type === 'quiz') {
+		return routes.quiz
+			.replace(':quizId', id.toString())
+			.replace(':courseId', courseId.toString());
+	}
+	return;
+};
+
 const FloatingNavigation: React.FC<Props> = (props) => {
 	const { navigation, courseId } = props;
-
-	const getNavigationRoute = (id: number, type: string) => {
-		if (type === 'lesson') {
-			return routes.lesson
-				.replace(':lessonId', id.toString())
-				.replace(':courseId', courseId.toString());
-		} else if (type === 'quiz') {
-			return routes.quiz
-				.replace(':quizId', id.toString())
-				.replace(':courseId', courseId.toString());
-		}
-		return;
-	};
 
 	const {
 		isOpen: isPrevOpen,
@@ -100,7 +104,8 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						as={RouterLink}
 						to={getNavigationRoute(
 							navigation?.previous?.id,
-							navigation?.previous?.type
+							navigation?.previous?.type,
+							courseId
 						)}
 						position="fixed"
 						top="50%"
@@ -161,7 +166,8 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						as={RouterLink}
 						to={getNavigationRoute(
 							navigation?.next?.id,
-							navigation?.next?.type
+							navigation?.next?.type,
+							courseId
 						)}
 						position="fixed"
 						top="50%"

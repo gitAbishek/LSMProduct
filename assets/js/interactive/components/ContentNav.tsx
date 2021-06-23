@@ -37,6 +37,8 @@ const ContentNav: React.FC<Props> = (props) => {
 
 	const navLinkStyles = {
 		p: '4',
+		w: 'full',
+		d: 'block',
 		_hover: {
 			bg: 'white',
 			shadow: 'box',
@@ -46,7 +48,7 @@ const ContentNav: React.FC<Props> = (props) => {
 	return (
 		<Box as="nav" w="full" p="6">
 			<ButtonGroup d="flex" justifyContent="space-between" alignItems="center">
-				<Box w="180px">
+				<Box w="200px">
 					{navigation?.previous && (
 						<Link
 							as={RouterLink}
@@ -80,7 +82,7 @@ const ContentNav: React.FC<Props> = (props) => {
 					{__('Submit Quiz', 'masteriyo')}
 				</Button>
 
-				<Box w="180px">
+				<Box w="200px">
 					{navigation?.next && (
 						<Link
 							as={RouterLink}

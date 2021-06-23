@@ -186,17 +186,19 @@ class Install {
 	 */
 	public static function get_user_activity_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_user_activities` (
-			`activity_id` BIGINT UNSIGNED AUTO_INCREMENT,
+			`id` BIGINT UNSIGNED AUTO_INCREMENT,
 			`user_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
 			`item_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
 			`activity_type` VARCHAR(200) DEFAULT NULL,
 			`activity_status` VARCHAR(200) DEFAULT NULL,
+			`parent_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
 			`date_start` datetime DEFAULT '0000-00-00 00:00:00',
 			`date_update` datetime DEFAULT '0000-00-00 00:00:00',
 			`date_complete` datetime DEFAULT '0000-00-00 00:00:00',
-			PRIMARY KEY (`activity_id`),
+			PRIMARY KEY (`id`),
 			KEY `user_id` (`user_id`),
 			KEY `item_id` (`item_id`),
+			KEY `parent_id` (`parent_id`),
 			KEY `activity_type` (`activity_type`),
 			KEY `activity_status` (`activity_status`),
 			KEY `date_start` (`date_start`),
@@ -223,13 +225,10 @@ class Install {
 			`meta_id` BIGINT UNSIGNED AUTO_INCREMENT,
 			`user_activity_id` BIGINT UNSIGNED NOT NULL,
 			`meta_key` VARCHAR(255) NOT NULL,
-			`meta_type` VARCHAR(255) NOT NULL,
 			`meta_value` LONGTEXT,
-			`extra_value` LONGTEXT,
 			PRIMARY KEY (`meta_id`),
 			KEY `user_activity_id` (`user_activity_id`),
-			KEY `meta_key` (`meta_key`(191)),
-			KEY `meta_type` (`meta_type`(191))
+			KEY `meta_key` (`meta_key`(191))
 		) $charset_collate;";
 
 		return $sql;

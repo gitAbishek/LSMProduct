@@ -488,15 +488,16 @@ if ( ! function_exists( 'masteriyo_is_user_enrolled_in_course' ) ) {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param integer|string $user_id
 	 * @param integer|string $course_id
+	 * @param integer|string $user_id
 	 *
 	 * @return boolean
 	 */
-	function masteriyo_is_user_enrolled_in_course( $user_id, $course_id ) {
-		if ( ! $user_id || ! $course_id ) {
-			return false;
+	function masteriyo_is_user_enrolled_in_course($course_id, $user_id = null ) {;
+		if ( is_null( $user_id ) ) {
+			$user_id = get_current_user_id();
 		}
+
 		$course = masteriyo_get_course( $course_id );
 		$user   = masteriyo_get_user( $user_id );
 
@@ -507,6 +508,7 @@ if ( ! function_exists( 'masteriyo_is_user_enrolled_in_course' ) ) {
 		$orders = masteriyo_get_orders(
 			array(
 				'customer_id' => $user->get_id(),
+				'status'      => 'completed',
 			)
 		);
 
@@ -541,7 +543,7 @@ if ( ! function_exists( 'masteriyo_is_current_user_enrolled_in_course' ) ) {
 	 * @return boolean
 	 */
 	function masteriyo_is_current_user_enrolled_in_course( $course_id ) {
-		return masteriyo_is_user_enrolled_in_course( get_current_user_id(), $course_id );
+		return masteriyo_is_user_enrolled_in_course( $course_id, get_current_user_id() );
 	}
 }
 

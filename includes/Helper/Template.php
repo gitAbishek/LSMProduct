@@ -5,6 +5,8 @@
  * @since 0.1.0
  */
 
+use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+
 if ( ! function_exists( 'add_action' ) && function_exists( 'add_filter' ) ) {
 	return;
 }
@@ -478,7 +480,38 @@ if ( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_account_courses_endpoint() {
-		masteriyo_get_template( 'myaccount/my-courses.php' );
+		$query = new UserCourseQuery(
+			array(
+				'user_id'   => get_current_user_id(),
+				'limit'     => -1,
+			)
+		);
+		$user_courses     = $query->get_user_courses();
+		$enrolled_courses = array();
+		$all_courses      = array();
+
+		foreach ( $user_courses as $user_course ) {
+			$course = masteriyo_get_course( $user_course->get_course_id() );
+
+			if ( is_null( $course ) ) {
+				continue;
+			}
+
+			$course->user_course = $user_course;
+
+			if ( masteriyo_is_current_user_enrolled_in_course( $course ) ) {
+				$enrolled_courses[] = $course;
+			}
+			$all_courses[] = $course;
+		}
+
+		masteriyo_get_template(
+			'myaccount/my-courses.php',
+			array(
+				'enrolled_courses' => $enrolled_courses,
+				'all_courses'      => $all_courses,
+			)
+		);
 	}
 }
 

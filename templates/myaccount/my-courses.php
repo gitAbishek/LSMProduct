@@ -7,289 +7,122 @@
 
 defined( 'ABSPATH' ) || exit;
 
+do_action( 'masteriyo_before_account_mycourses', $all_courses, $enrolled_courses );
+
 ?>
 
 <div class="mto-mycourses">
-	<h2 class="mto-mycourses--title">My Courses</h2>
-	<div class="mto-mycourses--list">
-
-		<div class="mto-mycourses--card">
-			<div class="mto-mycourses--thumbnail">
-				<img class="mto-mycourses--img" src="<?php echo esc_html__( masteriyo_img_url('db-course-thumbnail.jpg'));?>" alt="You are your only limit" />
-			</div>
-			<div class="mto-mycourses--detail">
-				<div class="mto-mycourses--header">
-					<div class="mto-mycourses--rt">
-						<span class="mto-mycourses--rating mto-icon-svg">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
-							</svg>
-						</span>
-
-						<span class="mto-badge mto-badge-pink mto-mycourses--tag ">Book</span>
+	<h2 class="mto-mycourses--title"><?php _e( 'Active Courses', 'masteriyo' ); ?></h2>
+	<?php if ( count( $enrolled_courses ) > 0 ): ?>
+		<div class="mto-mycourses--list">
+			<?php foreach ( $enrolled_courses as $course ): ?>
+				<div class="mto-mycourses--card">
+					<div class="mto-mycourses--thumbnail">
+						<img class="mto-mycourses--img" src="<?php echo esc_attr( $course->get_featured_image_url() );?>" alt="<?php _e( 'Course Featured Image', 'masteriyo' ); ?>" />
 					</div>
-					<h3 class="mto-mycourses--header--title">Jango Courses</h3>
-				</div>
-				<div class="mto-mycourses--body">
-						<div class="mto-mycourses--body--duration mto-flex mto-flex--space-between">
-							<div class="mto-time-wrap">
-								<span class="mto-icon-svg">
-									<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-										<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
-										<path d="M13 7h-2v6h6v-2h-4z"/>
-									</svg>
+					<div class="mto-mycourses--detail">
+						<div class="mto-mycourses--header">
+							<div class="mto-mycourses--rt">
+								<span class="mto-mycourses--rating mto-icon-svg">
+									<?php masteriyo_render_stars( $course->get_average_rating() ); ?>
 								</span>
 
-								<time class="mto-courses--body--time">10 hrs</time>
+								<?php foreach( $course->get_categories() as $category ): ?>
+									<span class="mto-badge mto-badge-pink mto-mycourses--tag "><?php echo esc_html(  $category->get_name() ); ?></span>
+								<?php endforeach; ?>
 							</div>
+							<h3 class="mto-mycourses--header--title"><?php echo esc_html( $course->get_name() ); ?></h3>
+						</div>
+						<div class="mto-mycourses--body">
+								<div class="mto-mycourses--body--duration mto-flex mto-flex--space-between">
+									<div class="mto-time-wrap">
+										<span class="mto-icon-svg">
+											<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+												<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
+												<path d="M13 7h-2v6h6v-2h-4z"/>
+											</svg>
+										</span>
 
-							<div class="mto-courses--body--status">
-								50% Completed
-							</div>
+										<time class="mto-courses--body--time"><?php echo esc_html( $course->get_human_readable_lecture_hours() ); ?></time>
+									</div>
+
+									<div class="mto-courses--body--status">
+										50% Completed
+									</div>
+								</div>
+
+								<div class="mto-courses--body--pbar mto-pbar">
+									<div class="mto-progressbar">
+										<span class="mto-bar" style="width:50%;">
+											<span class="mto-progress">50%</span>
+										</span>
+									</div>
+								</div>
 						</div>
 
-						<div class="mto-courses--body--pbar mto-pbar">
-							<div class="mto-progressbar">
-								<span class="mto-bar" style="width:50%;">
-									<span class="mto-progress">50%</span>
-								</span>
-							</div>
+						<div class="mto-mycourses--footer mto-flex mto-flex--space-between">
+							<div class="mto-mycourses--date"><?php _e( 'Started', 'masteriyo' ); ?> <?php echo esc_html( masteriyo_format_datetime( $course->user_course->get_date_start() ) );  ?></div>
+							<a href="<?php echo esc_attr( $course->get_interactive_page_url() ); ?>" class="mto-mycourses--btn mto-btn mto-btn-primary"><?php _e( 'Continue', 'masteriyo' ); ?></a>
 						</div>
-
+					</div>
 				</div>
-
-				<div class="mto-mycourses--footer mto-flex mto-flex--space-between">
-					<div class="mto-mycourses--date">Started Jan 5, 2021</div>
-					<a href="#" class="mto-mycourses--btn mto-btn mto-btn-primary">Continue</a>
-				</div>
-			</div>
+			<?php endforeach; ?>
 		</div>
-
-		<div class="mto-mycourses--card">
-			<div class="mto-mycourses--thumbnail">
-				<img class="mto-mycourses--img" src="<?php echo esc_html__( masteriyo_img_url('db-course-thumbnail.jpg'));?>" alt="You are your only limit" />
-			</div>
-			<div class="mto-mycourses--detail">
-				<div class="mto-mycourses--header">
-					<div class="mto-mycourses--rt">
-						<span class="mto-mycourses--rating mto-icon-svg">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
-							</svg>
-						</span>
-
-						<span class="mto-badge mto-badge-pink mto-mycourses--tag ">Book</span>
-					</div>
-					<h3 class="mto-mycourses--header--title">Jango Courses</h3>
-				</div>
-				<div class="mto-mycourses--body">
-						<div class="mto-mycourses--body--duration mto-flex mto-flex--space-between">
-							<div class="mto-time-wrap">
-								<span class="mto-icon-svg">
-									<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-										<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
-										<path d="M13 7h-2v6h6v-2h-4z"/>
-									</svg>
-								</span>
-
-								<time class="mto-courses--body--time">10 hrs</time>
-							</div>
-
-							<div class="mto-courses--body--status">
-								50% Completed
-							</div>
-						</div>
-
-						<div class="mto-courses--body--pbar mto-pbar">
-							<div class="mto-progressbar">
-								<span class="mto-bar" style="width:50%;">
-									<span class="mto-progress">50%</span>
-								</span>
-							</div>
-						</div>
-
-				</div>
-
-				<div class="mto-mycourses--footer mto-flex mto-flex--space-between">
-					<div class="mto-mycourses--date">Started Jan 5, 2021</div>
-					<a href="#" class="mto-mycourses--btn mto-btn mto-btn-primary">Continue</a>
-				</div>
-			</div>
+	<?php else: ?>
+		<div class="mto-myachivement--notify-message mto-alert mto-info-msg">
+			<span><?php _e( 'You haven\'t enrolled in any courses yet!', 'masteriyo' ); ?></span>
 		</div>
+	<?php endif; ?>
 
-		<div class="mto-mycourses--card">
-			<div class="mto-mycourses--thumbnail">
-				<img class="mto-mycourses--img" src="<?php echo esc_html__( masteriyo_img_url('db-course-thumbnail.jpg'));?>" alt="You are your only limit" />
-			</div>
-			<div class="mto-mycourses--detail">
-				<div class="mto-mycourses--header">
-					<div class="mto-mycourses--rt">
-						<span class="mto-mycourses--rating mto-icon-svg">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M21.947 9.179a1.001 1.001 0 00-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 001.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
-							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M5.025 20.775A.998.998 0 006 22a1 1 0 00.555-.168L12 18.202l5.445 3.63a1.001 1.001 0 001.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 00-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 00-1.822-.001L8.622 8.05l-5.701.453a1 1 0 00-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"/>
-							</svg>
-						</span>
+	<?php do_action( 'masteriyo_after_account_mycourses_enrolled_courses', $all_courses, $enrolled_courses ); ?>
 
-						<span class="mto-badge mto-badge-pink mto-mycourses--tag ">Book</span>
+	<h2 class="mto-mycourses--title"><?php _e( 'All Courses', 'masteriyo' ); ?></h2>
+	<?php if ( count( $all_courses ) > 0 ): ?>
+		<div class="mto-mycourses--list">
+			<?php foreach ( $all_courses as $course ): ?>
+				<div class="mto-mycourses--card">
+					<div class="mto-mycourses--thumbnail">
+						<img class="mto-mycourses--img" src="<?php echo esc_attr( $course->get_featured_image_url() );?>" alt="<?php _e( 'Course Featured Image', 'masteriyo' ); ?>" />
 					</div>
-					<h3 class="mto-mycourses--header--title">Jango Courses</h3>
-				</div>
-				<div class="mto-mycourses--body">
-						<div class="mto-mycourses--body--duration mto-flex mto-flex--space-between">
-							<div class="mto-time-wrap">
-								<span class="mto-icon-svg">
-									<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-										<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
-										<path d="M13 7h-2v6h6v-2h-4z"/>
-									</svg>
+					<div class="mto-mycourses--detail">
+						<div class="mto-mycourses--header">
+							<div class="mto-mycourses--rt">
+								<span class="mto-mycourses--rating mto-icon-svg">
+									<?php masteriyo_render_stars( $course->get_average_rating() ); ?>
 								</span>
 
-								<time class="mto-courses--body--time">10 hrs</time>
+								<?php foreach( $course->get_categories() as $category ): ?>
+									<span class="mto-badge mto-badge-pink mto-mycourses--tag "><?php echo esc_html(  $category->get_name() ); ?></span>
+								<?php endforeach; ?>
 							</div>
+							<h3 class="mto-mycourses--header--title"><?php echo esc_html( $course->get_name() ); ?></h3>
+						</div>
+						<div class="mto-mycourses--body">
+							<div class="mto-mycourses--body--duration mto-flex mto-flex--space-between">
+								<div class="mto-time-wrap">
+									<span class="mto-icon-svg">
+										<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+											<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
+											<path d="M13 7h-2v6h6v-2h-4z"/>
+										</svg>
+									</span>
 
-							<div class="mto-courses--body--status">
-								50% Completed
+									<time class="mto-courses--body--time"><?php echo esc_html( $course->get_human_readable_lecture_hours() ); ?></time>
+									<a href="<?php echo esc_attr( $course->get_permalink() ); ?>" class="mto-mycourses--btn mto-btn mto-btn-primary"><?php _e( 'View', 'masteriyo' ); ?></a>
+								</div>
 							</div>
 						</div>
-
-						<div class="mto-courses--body--pbar mto-pbar">
-							<div class="mto-progressbar">
-								<span class="mto-bar" style="width:50%;">
-									<span class="mto-progress">50%</span>
-								</span>
-							</div>
-						</div>
-
+					</div>
 				</div>
-
-				<div class="mto-mycourses--footer mto-flex mto-flex--space-between">
-					<div class="mto-mycourses--date">Started Jan 5, 2021</div>
-					<a href="#" class="mto-mycourses--btn mto-btn mto-btn-primary">Continue</a>
-				</div>
-			</div>
+			<?php endforeach; ?>
 		</div>
-
-	</div>
-
-	<a class="mto-mycourses--btn mto-btn mto-btn-default mto-inline-flex" href="#">
-		<span>Show All Courses</span>
-		<span class="mto-icon-svg">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-				<path d="M10.707 17.707L16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/>
-			</svg>
-		</span>
-		
-	</a>
-
-</div>
-
-<div class="mto-myachivement">
-	<h2 class="mto-myachivement--title">My Achivements</h2>
-	<div class="mto-myachivement--notify-message mto-alert mto-info-msg">
-		<span>You have no achievements yet. Enroll in course to get an achievements</span>
-	</div>
-</div>
-
-<div class="mto-mycertificates">
-	<h2 class="mto-mycertificates--title">My Certificates</h2>
-	<div class="mto-mycertificates--list">
-		<ul class="mto-mycertificates mto-mycertificates--list-wrap">
-			<li>
-				<div class="mto-list-header mto-flex mto-flex--space-between">
-					<span>Course</span>
-					<span>Certificates</span>
-				</div>
-			</li>
-			
-			<li>
-				<div class="mto-course-list mto-flex mto-flex--space-between mto-flex-ycenter">
-					<div class="mto-inline-flex mto-flex-ycenter">
-						<img class="mto-c-img" src="<?php echo esc_html__( masteriyo_img_url('dummyimg.jpg'));?>" alt="">
-						<h3 class="mto-c-title">Building a Better Software</h3>
-					</div>
-					<div>
-						<a class="mto-c-btn mto-btn mto-btn-primary" href="#">
-							<span>Download</span>
-						</a>
-					</div>
-				</div>
-			</li>
-
-			<li>
-				<div class="mto-course-list mto-flex mto-flex--space-between mto-flex-ycenter">
-					<div class="mto-inline-flex mto-flex-ycenter">
-						<img class="mto-c-img" src="<?php echo esc_html__( masteriyo_img_url('dummyimg.jpg'));?>" alt="">
-						<h3 class="mto-c-title">Building a Better Software</h3>
-					</div>
-					<div>
-						<a class="mto-c-btn mto-btn mto-btn-primary" href="#">
-							<span>Download</span>
-						</a>
-					</div>
-				</div>
-			</li>
-
-			<li>
-				<div class="mto-course-list mto-flex mto-flex--space-between mto-flex-ycenter">
-					<div class="mto-inline-flex mto-flex-ycenter">
-						<img class="mto-c-img" src="<?php echo esc_html__( masteriyo_img_url('dummyimg.jpg'));?>" alt="">
-						<h3 class="mto-c-title">Building a Better Software</h3>
-					</div>
-					<div>
-						<a class="mto-c-btn mto-btn mto-btn-primary" href="#">
-							<span>Download</span>
-						</a>
-					</div>
-				</div>
-			</li>
-
-		</ul>
-	</div>
-	<a class="mto-mycourses--btn mto-btn mto-btn-default mto-inline-flex" href="#">
-		<span class="mto-inline-flex">Show All Certificates</span>
-
-		<span class="mto-icon-svg">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-				<path d="M10.707 17.707L16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/>
-			</svg>
-		</span>
-	</a>
+	<?php else: ?>
+		<div class="mto-myachivement--notify-message mto-alert mto-info-msg">
+			<span><?php _e( 'No courses yet!', 'masteriyo' ); ?></span>
+		</div>
+	<?php endif; ?>
 </div>
 
 <?php
+
+do_action( 'masteriyo_after_account_mycourses', $all_courses, $enrolled_courses ); ?>

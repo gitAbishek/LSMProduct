@@ -7,6 +7,7 @@ import urls from '../../../back-end/constants/urls';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import MediaAPI from '../../../back-end/utils/media';
 import FloatingNavigation from '../../components/FloatingNavigation';
+import ContentNav from '../../components/ContentNav';
 
 const InteractiveLesson = () => {
 	const { lessonId }: any = useParams();
@@ -40,7 +41,7 @@ const InteractiveLesson = () => {
 	}
 
 	return (
-		<Container centerContent maxW="container.xl" py="8">
+		<Container centerContent maxW="container.xl" py="16">
 			<Box bg="white" p="14" shadow="box" w="full">
 				<Stack direction="column" spacing="8">
 					<Heading as="h5">{lessonQuery?.data?.name}</Heading>
@@ -54,6 +55,10 @@ const InteractiveLesson = () => {
 					courseId={lessonQuery?.data?.course_id}
 				/>
 			</Box>
+			<ContentNav
+				navigation={lessonQuery?.data?.navigation}
+				courseId={lessonQuery?.data?.course_id}
+			/>
 		</Container>
 	);
 };

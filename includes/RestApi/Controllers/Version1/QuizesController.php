@@ -201,9 +201,9 @@ class QuizesController extends PostsController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param  int|WP_Post|Model $object Object ID or WP_Post or Model.
+	 * @param  int|WP_Post|ThemeGrill\Masteriyo\Models\Quiz $object Object ID or WP_Post or Quiz object.
 	 *
-	 * @return object Model object or WP_Error object.
+	 * @return ThemeGrill\Masteriyo\Models\Quiz|WP_Error Quiz object or WP_Error object.
 	 */
 	protected function get_object( $object ) {
 		try {
@@ -212,6 +212,7 @@ class QuizesController extends PostsController {
 			} else {
 				$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
 			}
+
 			$quiz = masteriyo( 'quiz' );
 			$quiz->set_id( $id );
 			$quiz_repo = masteriyo( 'quiz.store' );
@@ -288,33 +289,6 @@ class QuizesController extends PostsController {
 		);
 
 		return $data;
-	}
-
-	/**
-	 * Get taxonomy terms.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Quiz   $quiz Quiz object.
-	 * @param string $taxonomy Taxonomy slug.
-	 *
-	 * @return array
-	 */
-	protected function get_taxonomy_terms( $quiz, $taxonomy = 'cat' ) {
-		$terms = Utils::get_object_terms( $quiz->get_id(), 'quiz_' . $taxonomy );
-
-		$terms = array_map(
-			function( $term ) {
-				return array(
-					'id'   => $term->term_id,
-					'name' => $term->name,
-					'slug' => $term->slug,
-				);
-			},
-			$terms
-		);
-
-		return $terms;
 	}
 
 	/**

@@ -38,7 +38,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $quiz Quiz object.
+	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz Quiz object.
 	 */
 	public function create( Model &$quiz ) {
 		if ( ! $quiz->get_date_created( 'edit' ) ) {
@@ -69,7 +69,6 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 		if ( $id && ! is_wp_error( $id ) ) {
 			$quiz->set_id( $id );
 			$this->update_post_meta( $quiz, true );
-			// $this->update_terms( $quiz, true );
 			// TODO Invalidate caches.
 
 			$quiz->save_meta_data();
@@ -85,7 +84,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $quiz Cource object.
+	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz Cource object.
 	 * @throws Exception If invalid quiz.
 	 */
 	public function read( Model &$quiz ) {
@@ -121,7 +120,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $quiz Quiz object.
+	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz Quiz object.
 	 *
 	 * @return void
 	 */
@@ -193,7 +192,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Model $quiz Quiz object.
+	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz Quiz object.
 	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$quiz, $args = array() ) {
@@ -211,37 +210,11 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	}
 
 	/**
-	 * For all stored terms in all taxonomies, save them to the DB.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Model $model Model object.
-	 * @param bool       $force Force update. Used during create.
-	 */
-	protected function update_terms( &$model, $force = false ) {
-		$changes = $model->get_changes();
-
-		if ( $force || array_key_exists( 'category_ids', $changes ) ) {
-			$categories = $model->get_category_ids( 'edit' );
-
-			if ( empty( $categories ) && get_option( 'default_quiz_cat', 0 ) ) {
-				$categories = array( get_option( 'default_quiz_cat', 0 ) );
-			}
-
-			wp_set_post_terms( $model->get_id(), $categories, 'quiz_cat', false );
-		}
-
-		if ( $force || array_key_exists( 'tag_ids', $changes ) ) {
-			wp_set_post_terms( $model->get_id(), $model->get_tag_ids( 'edit' ), 'quiz_tag', false );
-		}
-	}
-
-	/**
 	 * Read quiz data. Can be overridden by child classes to load other props.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Quiz $quiz quiz object.
+	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz quiz object.
 	 */
 	protected function read_quiz_data( &$quiz ) {
 		$id          = $quiz->get_id();
@@ -271,7 +244,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Quiz $quiz quiz object.
+	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz quiz object.
 	 */
 	protected function read_extra_data( &$quiz ) {
 		$meta_values = $this->read_meta( $quiz );
@@ -291,7 +264,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 * @since 0.1.0
 	 *
 	 * @param array $query_vars Query vars.
-	 * @return Quiz[]
+	 * @return ThemeGrill\Masteriyo\Models\Quiz[]
 	 */
 	public function query( $query_vars ) {
 		$args = $this->get_wp_query_args( $query_vars );

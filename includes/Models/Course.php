@@ -147,17 +147,6 @@ class Course extends Model {
 	}
 
 	/**
-	 * Get interactive page url for this course.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @return string
-	 */
-	public function get_interactive_page_url() {
-		return home_url( '?masteriyo=interactive#/course/' . $this->get_id() );
-	}
-
-	/**
 	 * Course Preview URL;
 	 *
 	 * @return string

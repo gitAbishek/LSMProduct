@@ -826,13 +826,6 @@ abstract class Order extends Model {
 	 * @return array[Order]
 	 */
 	public function get_refunds() {
-		$cache_key   = 'mto-order-refunds' . $this->get_id();
-		$cached_data = masteriyo('cache')->get( $cache_key, $this->cache_group );
-
-		if ( false !== $cached_data ) {
-			return $cached_data;
-		}
-
 		$this->refunds = masteriyo_get_orders(
 			array(
 				'type'   => 'mto-order-refund',
@@ -840,8 +833,6 @@ abstract class Order extends Model {
 				'limit'  => -1,
 			)
 		);
-
-		masteriyo('cache')->set( $cache_key, $this->refunds, $this->cache_group );
 
 		return $this->refunds;
 	}

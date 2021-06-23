@@ -46,7 +46,7 @@ const ContentNav: React.FC<Props> = (props) => {
 	return (
 		<Box as="nav" w="full" p="6">
 			<ButtonGroup d="flex" justifyContent="space-between" alignItems="center">
-				<Box>
+				<Box w="180px">
 					{navigation?.previous && (
 						<Link
 							as={RouterLink}
@@ -79,7 +79,7 @@ const ContentNav: React.FC<Props> = (props) => {
 					{__('Submit Quiz', 'masteriyo')}
 				</Button>
 
-				<Box>
+				<Box w="180px">
 					{navigation?.next && (
 						<Link
 							as={RouterLink}

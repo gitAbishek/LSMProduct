@@ -41,7 +41,7 @@ const InteractiveLesson = () => {
 	}
 
 	return (
-		<Container centerContent maxW="container.xl" py="8">
+		<Container centerContent maxW="container.xl" py="16">
 			<Box bg="white" p="14" shadow="box" w="full">
 				<Stack direction="column" spacing="8">
 					<Heading as="h5">{lessonQuery?.data?.name}</Heading>

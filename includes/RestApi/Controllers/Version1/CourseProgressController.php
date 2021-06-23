@@ -13,14 +13,14 @@ defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Permission;
 use ThemeGrill\Masteriyo\Models\Order\OrderItem;
-use ThemeGrill\Masteriyo\Query\UserActivityQuery;
+use ThemeGrill\Masteriyo\Exceptions\RestException;
 use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
 use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\UserActivitiesController;
 
 /**
  * User activities controller class.
  */
-class CourseProgressController extends UserActivitiesController {
+class CourseProgressController extends CrudController {
 
 	/**
 	 * Endpoint namespace.
@@ -157,10 +157,31 @@ class CourseProgressController extends UserActivitiesController {
 	 * @return array
 	 */
 	public function get_collection_params() {
-		$params = parent::get_collection_params();
+		$params['paged'] = array(
+			'description'       => __( 'Paginate the course progress.', 'masteriyo' ),
+			'type'              => 'integer',
+			'default'           => 1,
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
+			'minimum'           => 1,
+		);
 
-		unset( $params['activity_type'] );
-		unset( $params['item_id'] );
+		$params['per_page'] = array(
+			'description'       => __( 'Limit course progress per page.', 'masteriyo' ),
+			'type'              => 'integer',
+			'default'           => 10,
+			'minimum'           => 1,
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['user_id'] = array(
+			'description'       => __( 'User ID.', 'masteriyo' ),
+			'type'              => 'integer',
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
+			'default'           => 0,
+		);
 
 		$params['course_id'] = array(
 			'description'       => __( 'Course ID.', 'masteriyo' ),
@@ -168,6 +189,58 @@ class CourseProgressController extends UserActivitiesController {
 			'sanitize_callback' => 'absint',
 			'validate_callback' => 'rest_validate_request_arg',
 			'default'           => 0,
+		);
+
+		$params['status'] = array(
+			'description'       => __( 'User activity status.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_title',
+			'validate_callback' => 'rest_validate_request_arg',
+			'default'           => 'any',
+			'enum'              => masteriyo_get_user_activity_statuses(),
+		);
+
+		$params['date_start'] = array(
+			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
+			'type'              => 'string',
+			'format'            => 'date-time',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['date_complete'] = array(
+			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
+			'type'              => 'string',
+			'format'            => 'date-time',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['date_update'] = array(
+			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
+			'type'              => 'string',
+			'format'            => 'date-time',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['order'] = array(
+			'description'       => __( 'Order sort attribute ascending or descending.', 'masteriyo' ),
+			'type'              => 'string',
+			'default'           => 'desc',
+			'enum'              => array( 'asc', 'desc' ),
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['orderby'] = array(
+			'description'       => __( 'Sort collection by object attribute.', 'masteriyo' ),
+			'type'              => 'string',
+			'default'           => 'id',
+			'enum'              => array(
+				'id',
+				'type',
+				'date_start',
+				'date_update',
+				'date_complete',
+			),
+			'validate_callback' => 'rest_validate_request_arg',
 		);
 
 		return $params;
@@ -178,7 +251,7 @@ class CourseProgressController extends UserActivitiesController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param  int|UserActivity $id Object ID.
+	 * @param  int|CourseProgress $id Object ID.
 	 * @return object Model object or WP_Error object.
 	 */
 	protected function get_object( $id ) {
@@ -229,7 +302,7 @@ class CourseProgressController extends UserActivitiesController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param UserActivity  $course_progress User activity instance.
+	 * @param CourseProgress  $course_progress User activity instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
@@ -240,12 +313,10 @@ class CourseProgressController extends UserActivitiesController {
 			'id'            => $course_progress->get_id( $context ),
 			'user_id'       => $course_progress->get_user_id( $context ),
 			'course_id'     => $course_progress->get_course_id( $context ),
-			'type'          => $course_progress->get_type( $context ),
 			'status'        => $course_progress->get_status( $context ),
 			'date_start'    => masteriyo_rest_prepare_date_response( $course_progress->get_date_start( $context ) ),
 			'date_update'   => masteriyo_rest_prepare_date_response( $course_progress->get_date_update( $context ) ),
 			'date_complete' => masteriyo_rest_prepare_date_response( $course_progress->get_date_complete( $context ) ),
-			'items'         => $course_progress->get_items(),
 		);
 
 		return $data;
@@ -273,11 +344,6 @@ class CourseProgressController extends UserActivitiesController {
 				'date_complete' => null,
 			)
 		);
-
-		if ( isset( $args['orderby'] ) && 'id' === $args['orderby'] ) {
-			unset( $args['orderby'] );
-			$args['orderby'] = 'activity_id';
-		}
 
 		/**
 		 * Filter the query arguments for a request.
@@ -348,36 +414,6 @@ class CourseProgressController extends UserActivitiesController {
 					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'items'         => array(
-					'description' => __( 'Course items (lesson, quiz) ', 'masteriyo' ),
-					'type'        => 'array',
-					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type'         => 'object',
-						'id'           => array(
-							'description' => __( 'ID.', 'masteriyo' ),
-							'type'        => 'integer',
-							'readonly'    => true,
-							'context'     => array( 'view', 'edit' ),
-						),
-						'item_id'      => array(
-							'description' => __( 'Course item ID (lesson, quiz).', 'masteriyo' ),
-							'type'        => 'integer',
-							'required'    => true,
-							'context'     => array( 'view', 'edit' ),
-						),
-						'item_type'    => array(
-							'description' => __( 'Course item ID (lesson, quiz).', 'masteriyo' ),
-							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'is_completed' => array(
-							'description' => __( 'Course item ID.', 'masteriyo' ),
-							'type'        => 'boolean',
-							'context'     => array( 'view', 'edit' ),
-						),
-					),
-				),
 			),
 		);
 
@@ -404,28 +440,14 @@ class CourseProgressController extends UserActivitiesController {
 			$course_progress_repo->read( $course_progress );
 		}
 
-		// User ID.
-		if ( isset( $request['user_id'] ) && ! empty( $request['user_id'] ) ) {
-			$course_progress->set_user_id( $request['user_id'] );
-		} else {
-			$course_progress->set_user_id( get_current_user_id() );
-		}
+		try {
+			$user_id = $this->validate_user_id( $request, $creating );
+			$course_progress->set_user_id( $user_id );
 
-		// Validate the user ID.
-		$user = get_user_by( 'id', $course_progress->get_user_id( 'edit' ) );
-		if ( ! $user ) {
-			return new \WP_Error( 'invalid_user_id', __( 'Invalid user ID.', 'masteriyo' ) );
-		}
-
-		// Course ID.
-		if ( isset( $request['course_id'] ) ) {
-			$course_progress->set_course_id( $request['course_id'] );
-
-			// Validate course ID.
-			$course_post = get_post( $course_progress->get_course_id( 'edit' ) );
-			if ( ! $course_post || 'course' !== $course_post->post_type ) {
-				return new \WP_Error( 'invalid_course_id', __( 'Invalid course ID.', 'masteriyo' ) );
-			}
+			$course_id = $this->validate_course_id( $request, $creating );
+			$course_progress->set_course_id( $course_id );
+		} catch ( RestException $e ) {
+			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
 		}
 
 		// Activity status.
@@ -446,11 +468,6 @@ class CourseProgressController extends UserActivitiesController {
 		// Activity complete date.
 		if ( isset( $request['date_complete'] ) ) {
 			$course_progress->set_date_complete( $request['date_complete'] );
-		}
-
-		// Acitivity items.
-		if ( isset( $request['items'] ) ) {
-			$course_progress->set_items( $request['items'] );
 		}
 
 		/**
@@ -504,6 +521,10 @@ class CourseProgressController extends UserActivitiesController {
 			);
 		}
 
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
 		return true;
 	}
 
@@ -521,12 +542,6 @@ class CourseProgressController extends UserActivitiesController {
 				'masteriyo_null_permission',
 				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
 			);
-		}
-
-		$course_post = get_post( (int) $request['course_id'] );
-
-		if ( ! $course_post || 'course' !== $course_post->post_type ) {
-			return new \WP_Error( 'invalid_course_id', __( 'Invalid course ID.', 'masteriyo' ) );
 		}
 
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
@@ -552,6 +567,10 @@ class CourseProgressController extends UserActivitiesController {
 			);
 		}
 
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
 		return true;
 	}
 
@@ -571,10 +590,8 @@ class CourseProgressController extends UserActivitiesController {
 			);
 		}
 
-		$course_progress = masteriyo_get_course_progress( (int) $request['id'] );
-
-		if ( ! $course_progress || 'course' !== $course_progress->get_type() ) {
-			return new \WP_Error( 'invalid_course_progress_id', __( 'Invalid course progress ID.', 'masteriyo' ) );
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
 		}
 
 		return true;
@@ -612,5 +629,77 @@ class CourseProgressController extends UserActivitiesController {
 	 */
 	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
 		return true;
+	}
+
+	/**
+	 * Validate the user ID in the request.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Request object.
+	 * @param bool            $creating If is creating a new object.
+	 *
+	 * @return WP_Error|Model
+	 */
+	protected function validate_user_id( $request, $creating = false ) {
+		$user_id = null;
+
+		// User ID.
+		if ( isset( $request['user_id'] ) && ! empty( $request['user_id'] ) ) {
+			$user_id = $request['user_id'];
+		} else {
+			$user_id = get_current_user_id();
+		}
+
+		// Validate the user ID.
+		$user = get_user_by( 'id', $user_id );
+		if ( ! $user ) {
+			throw new RestException(
+				'masteriyo_rest_invalid_user_id',
+				__( 'User ID is invalid.', 'masteriyo' ),
+				400
+			);
+		}
+
+		// If the current user is not administrator or manager, then the current
+		// user must be same of the request suer id.
+		if ( masteriyo_is_current_user_student() && get_current_user_id() !== $user_id ) {
+			throw new RestException(
+				'masteriyo_rest_access_denied_course_progress',
+				__( 'Student cannot access other\'s course progress.', 'masteriyo' ),
+				400
+			);
+		}
+
+		return $user_id;
+	}
+
+	/**
+	 * Validate the course ID in the request.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Request object.
+	 * @param bool            $creating If is creating a new object.
+	 *
+	 * @return WP_Error|Model
+	 */
+	protected function validate_course_id( $request, $creating = false ) {
+		$course_id = null;
+
+		// Course ID.
+		if ( isset( $request['course_id'] ) && ! empty( $request['course_id'] ) ) {
+			$course_id = $request['course_id'];
+
+			// Validate course ID.
+			$course_post = get_post( $course_id );
+			if ( ! $course_post || 'course' !== $course_post->post_type ) {
+				throw new RestException(
+					'masteriyo_rest_invalid_course_id',
+					__( 'Course ID is invalid.', 'masteriyo' ),
+					400
+				);
+			}
+		}
 	}
 }

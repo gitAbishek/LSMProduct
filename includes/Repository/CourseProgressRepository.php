@@ -70,7 +70,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 				),
 				$course_progress
 			),
-			array( '%d', '%d', '%s', '%s', '%s', '%s', '%s' )
+			array( '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s' )
 		);
 
 		if ( $result && $wpdb->insert_id ) {
@@ -107,18 +107,21 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		);
 
 		if ( array_intersect( $course_progress_data_keys, array_keys( $changes ) ) ) {
+			$date_complete = $course_progress->get_date_complete( 'edit' );
+			$date_complete = is_null( $date_complete ) ? '' : gmdate( 'Y-m-d H:i:s', $date_complete->getTimestamp() );
+
 			$wpdb->update(
-				$wpdb->prefix . 'masteriyo_course_progress',
+				$course_progress->get_table_name(),
 				array(
 					'user_id'         => $course_progress->get_user_id( 'edit' ),
-					'item_id'         => $course_progress->get_item_id( 'edit' ),
+					'item_id'         => $course_progress->get_course_id( 'edit' ),
 					'activity_type'   => $course_progress->get_type( 'edit' ),
 					'activity_status' => $course_progress->get_status( 'edit' ),
 					'date_start'      => gmdate( 'Y-m-d H:i:s', $course_progress->get_date_start( 'edit' )->getTimestamp() ),
 					'date_update'     => gmdate( 'Y-m-d H:i:s', $course_progress->get_date_update( 'edit' )->getTimestamp() ),
-					'date_complete'   => gmdate( 'Y-m-d H:i:s', $course_progress->get_date_complete( 'edit' )->getTimestamp() ),
+					'date_complete'   => $date_complete,
 				),
-				array( 'activity_id' => $course_progress->get_id() )
+				array( 'id' => $course_progress->get_id() )
 			);
 		}
 
@@ -144,7 +147,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		if ( $course_progress->get_id() ) {
 			do_action( 'masteriyo_before_delete_course_progress', $course_progress->get_id() );
 
-			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_activities', array( 'activity_id' => $course_progress->get_id() ) );
+			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_activities', array( 'id' => $course_progress->get_id() ) );
 			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_activitymeta', array( 'user_activity_id' => $course_progress->get_id() ) );
 
 			do_action( 'masteriyo_delete_course_progress', $course_progress->get_id() );
@@ -169,7 +172,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 
 		$result = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}masteriyo_user_activities WHERE activity_id = %d;",
+				"SELECT * FROM {$wpdb->prefix}masteriyo_user_activities WHERE id = %d;",
 				$course_progress->get_id()
 			)
 		);
@@ -234,7 +237,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		}
 
 		if ( ! empty( $query_vars['activity_type'] ) ) {
-			$search_criteria[] = $wpdb->prepare( 'activity_type = %s', $query_vars['activity_type'] );
+			$search_criteria[] = $wpdb->prepare( 'activity_type = %s', 'course-progress' );
 		}
 
 		if ( ! empty( $query_vars['status'] ) && 'any' !== $query_vars['status'] ) {
@@ -264,7 +267,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		// Fetch the results.
 		$course_progress = $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
-		$ids = wp_list_pluck( $course_progress, 'activity_id' );
+		$ids = wp_list_pluck( $course_progress, 'id' );
 
 		return array_filter( array_map( 'masteriyo_get_course_progress', $ids ) );
 	}
@@ -300,13 +303,11 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 					array(
 						'user_activity_id' => $course_progress->get_id(),
 						'meta_key'         => $item['item_id'],
-						'meta_type'        => $item['item_type'],
 						'meta_value'       => masteriyo_bool_to_string( $item['is_completed'] ),
 					),
 					array( 'meta_id' => $item['id'] ),
 					array(
 						'%d',
-						'%s',
 						'%s',
 						'%s',
 					),
@@ -318,12 +319,10 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 					array(
 						'user_activity_id' => $course_progress->get_id(),
 						'meta_key'         => $item['item_id'],
-						'meta_type'        => $item['item_type'],
 						'meta_value'       => masteriyo_bool_to_string( $item['is_completed'] ),
 					),
 					array(
 						'%d',
-						'%s',
 						'%s',
 						'%s',
 					)

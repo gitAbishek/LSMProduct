@@ -410,6 +410,32 @@ if ( ! function_exists( 'masteriyo_is_current_user_manager' ) ) {
 	}
 }
 
+if ( ! function_exists( 'masteriyo_is_current_user_student' ) ) {
+	/**
+	 * Check if the current user is masteriyo student.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_current_user_student() {
+		return in_array( 'masteriyo_student', wp_get_current_user()->roles, true );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_is_current_user_instructor' ) ) {
+	/**
+	 * Check if the current user is masteriyo instructor.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_current_user_instructor() {
+		return in_array( 'masteriyo_instructor', wp_get_current_user()->roles, true );
+	}
+}
+
 if ( ! function_exists( 'masteriyo_is_add_payment_method_page' ) ) {
 
 	/**

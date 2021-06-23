@@ -51,6 +51,7 @@ class UserActivity extends Model {
 		'user_id'       => 0,
 		'item_id'       => 0,
 		'type'          => '',
+		'parent_id'     => 0,
 		'status'        => 'begin',
 		'date_start'    => null,
 		'date_update'   => null,
@@ -126,10 +127,23 @@ class UserActivity extends Model {
 	 *
 	* @param  string $context What the value is for. valid values are view and edit.
 
-	 * @return int
+	 * @return string
 	 */
 	public function get_type( $context = 'view' ) {
 		return $this->get_prop( 'type', $context );
+	}
+
+	/**
+	 * Get activity parent id.
+	 *
+	 * @since 0.1.0
+	 *
+	* @param  string $context What the value is for. valid values are view and edit.
+
+	 * @return int
+	 */
+	public function get_parent_id( $context = 'view' ) {
+		return $this->get_prop( 'parent_id', $context );
 	}
 
 	/**
@@ -229,6 +243,17 @@ class UserActivity extends Model {
 	 */
 	public function set_type( $type ) {
 		$this->set_prop( 'type', $type );
+	}
+
+	/**
+	 * Set activity parent ID.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $value Activity parent ID.
+	 */
+	public function set_parent_id( $value ) {
+		$this->set_prop( 'parent_id', absint( $value ) );
 	}
 
 	/**

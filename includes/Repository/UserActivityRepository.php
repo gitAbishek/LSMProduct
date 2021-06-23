@@ -66,6 +66,7 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 				array(
 					'user_id'         => $user_activity->get_user_id( 'edit' ),
 					'item_id'         => $user_activity->get_item_id( 'edit' ),
+					'parent_id'       => $user_activity->get_parent_id( 'edit' ),
 					'activity_type'   => $user_activity->get_type( 'edit' ),
 					'activity_status' => $user_activity->get_status( 'edit' ),
 					'date_start'      => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_start( 'edit' )->getTimestamp() ),
@@ -103,6 +104,7 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 		$user_activity_data_keys = array(
 			'user_id',
 			'item_id',
+			'parent_id',
 			'type',
 			'status',
 			'date_start',
@@ -116,13 +118,14 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 				array(
 					'user_id'         => $user_activity->get_user_id( 'edit' ),
 					'item_id'         => $user_activity->get_item_id( 'edit' ),
+					'parent_id'       => $user_activity->get_parent_id( 'edit' ),
 					'activity_type'   => $user_activity->get_type( 'edit' ),
 					'activity_status' => $user_activity->get_status( 'edit' ),
 					'date_start'      => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_start( 'edit' )->getTimestamp() ),
 					'date_update'     => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_update( 'edit' )->getTimestamp() ),
 					'date_complete'   => gmdate( 'Y-m-d H:i:s', $user_activity->get_date_complete( 'edit' )->getTimestamp() ),
 				),
-				array( 'activity_id' => $user_activity->get_id() )
+				array( 'id' => $user_activity->get_id() )
 			);
 		}
 
@@ -183,6 +186,7 @@ class UserActivityRepository extends AbstractRepository implements RepositoryInt
 			array(
 				'user_id'       => $result->user_id,
 				'item_id'       => $result->item_id,
+				'parent_id'     => $result->parent_id,
 				'type'          => $result->activity_type,
 				'status'        => $result->activity_status,
 				'date_start'    => $this->string_to_timestamp( $result->date_start ),

@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 0.1.0
  */
-class CourseProgress extends UserActivity {
+class CourseProgress extends Model {
 
 	/**
 	 * This is the name of this object type.
@@ -39,10 +39,12 @@ class CourseProgress extends UserActivity {
 	 *
 	 * @var string
 	 */
-	protected $cache_group = 'course-progress';
+	protected $cache_group = 'course-progresses';
 
 	/**
 	 * Course progress items (lesson, quiz) etc.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @var array
 	 */
@@ -52,12 +54,14 @@ class CourseProgress extends UserActivity {
 	/**
 	 * Store items which are changed.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var array
 	 */
 	protected $item_changes = array();
 
 	/**
-	 * Stores user activity data.
+	 * Stores user course progress data.
 	 *
 	 * @since 0.1.0
 	 *
@@ -66,7 +70,7 @@ class CourseProgress extends UserActivity {
 	protected $data = array(
 		'user_id'       => 0,
 		'course_id'     => 0,
-		'type'          => 'course',
+		'type'          => 'course-progress',
 		'status'        => 'begin',
 		'date_start'    => null,
 		'date_update'   => null,
@@ -91,7 +95,7 @@ class CourseProgress extends UserActivity {
 	*/
 
 	/**
-	 * Get user activity table.
+	 * Get user course progress table.
 	 *
 	 * @since 0.1.0
 	 *
@@ -110,24 +114,91 @@ class CourseProgress extends UserActivity {
 	*/
 
 	/**
-	 * Get user activity items.
+	 * Get user ID.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return array
+	* @param  string $context What the value is for. Valid values are view and edit.
+
+	 * @return int
 	 */
-	public function get_items( $context = 'view' ) {
-		return $this->items;
+	public function get_user_id( $context = 'view' ) {
+		return $this->get_prop( 'user_id', $context );
 	}
 
 	/**
 	 * Get course id.
 	 *
-	 * @param string $context
-	 * @return integer
+	 * @since 0.1.0
+	 *
+	* @param  string $context What the value is for. Valid values are view and edit.
+
+	 * @return int
 	 */
 	public function get_course_id( $context = 'view' ) {
 		return $this->get_prop( 'course_id', $context );
+	}
+
+	/**
+	 * Get course progress type.
+	 *
+	 * @since 0.1.0
+	 *
+	* @param  string $context What the value is for. valid values are view and edit.
+
+	 * @return string
+	 */
+	public function get_type( $context = 'view' ) {
+		return $this->get_prop( 'type', $context );
+	}
+
+	/**
+	 * Get course progress status.
+	 *
+	 * @since 0.1.0
+	 *
+	* @param  string $context What the value is for. valid values are view and edit.
+
+	 * @return int
+	 */
+	public function get_status( $context = 'view' ) {
+		return $this->get_prop( 'status', $context );
+	}
+
+	/**
+	 * Get course progress start.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $context What the value is for. valid values are view and edit.
+	 * @return DateTime|null
+	 */
+	public function get_date_start( $context = 'view' ) {
+		return $this->get_prop( 'date_start', $context );
+	}
+
+	/**
+	 * Get course progress update.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $context What the value is for. valid values are view and edit.
+	 * @return DateTime|null
+	 */
+	public function get_date_update( $context = 'view' ) {
+		return $this->get_prop( 'date_update', $context );
+	}
+
+	/**
+	 * Get course progress complete.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $context What the value is for. valid values are view and edit.
+	 * @return DateTime|null
+	 */
+	public function get_date_complete( $context = 'view' ) {
+		return $this->get_prop( 'date_complete', $context );
 	}
 
 	/*
@@ -135,6 +206,17 @@ class CourseProgress extends UserActivity {
 	| Settters
 	|--------------------------------------------------------------------------
 	*/
+
+	/**
+	 * Set user ID.
+	 *
+	 * @since 0.1.0
+	 *
+	* @param int $user_id User ID.
+	 */
+	public function set_user_id( $user_id ) {
+		$this->set_prop( 'user_id', absint( $user_id ) );
+	}
 
 	/**
 	 * Set course ID.
@@ -145,6 +227,78 @@ class CourseProgress extends UserActivity {
 	 */
 	public function set_course_id( $course_id ) {
 		$this->set_prop( 'course_id', absint( $course_id ) );
+	}
+
+	/**
+	 * Set course progress type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $type Course progress type.
+	 */
+	public function set_type( $type ) {
+		$this->set_prop( 'type', $type );
+	}
+
+	/**
+	 * Set course progress status.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $status Course progress status.
+	 */
+	public function set_status( $status ) {
+		$this->set_prop( 'status', $status );
+	}
+
+	/**
+	 * Set course progress start.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $start Course progress start.
+	 */
+	public function set_date_start( $date_start ) {
+		$this->set_date_prop( 'date_start', $date_start );
+	}
+
+	/**
+	 * Set course progress update.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $update Course progress update.
+	 */
+	public function set_date_update( $date_update ) {
+		$this->set_date_prop( 'date_update', $date_update );
+	}
+
+	/**
+	 * Set course progress complete.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $complete Course progress complete.
+	 */
+	public function set_date_complete( $date_complete ) {
+		$this->set_date_prop( 'date_complete', $date_complete );
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Activit items related functions.
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Get user course progress items.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	public function get_items( $context = 'view' ) {
+		return $this->items;
 	}
 
 	/**

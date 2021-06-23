@@ -192,6 +192,14 @@ class UserActivitiesController extends CrudController {
 			'enum'              => masteriyo_get_user_activity_statuses(),
 		);
 
+		$params['parent_id'] = array(
+			'description'       => __( 'Parent ID.', 'masteriyo' ),
+			'type'              => 'integer',
+			'sanitize_callback' => 'absint',
+			'validate_callback' => 'rest_validate_request_arg',
+			'default'           => 0,
+		);
+
 		$params['date_start'] = array(
 			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
 			'type'              => 'string',
@@ -307,6 +315,7 @@ class UserActivitiesController extends CrudController {
 			'item_id'       => $user_activity->get_item_id( $context ),
 			'type'          => $user_activity->get_type( $context ),
 			'status'        => $user_activity->get_status( $context ),
+			'parent_id'     => $user_activity->get_parent_id( $context ),
 			'date_start'    => masteriyo_rest_prepare_date_response( $user_activity->get_date_start( $context ) ),
 			'date_update'   => masteriyo_rest_prepare_date_response( $user_activity->get_date_update( $context ) ),
 			'date_complete' => masteriyo_rest_prepare_date_response( $user_activity->get_date_complete( $context ) ),
@@ -332,6 +341,7 @@ class UserActivitiesController extends CrudController {
 				'per_page'      => 10,
 				'user_id'       => 0,
 				'item_id'       => 0,
+				'parent_id'     => 0,
 				'activity_type' => '',
 				'status'        => 'any',
 				'date_start'    => null,
@@ -389,13 +399,19 @@ class UserActivitiesController extends CrudController {
 				'type'          => array(
 					'description' => __( 'User activity type (course, quiz).', 'masteriyo' ),
 					'type'        => 'string',
-					'required'    => true,
+					'required'    => false,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'status'        => array(
 					'description' => __( 'User activity status.', 'masteriyo' ),
 					'type'        => 'string',
 					'enum'        => masteriyo_get_user_activity_statuses(),
+					'context'     => array( 'view', 'edit' ),
+				),
+				'parent_id'     => array(
+					'description' => __( 'Parent item ID (course, quiz, etc.).', 'masteriyo' ),
+					'type'        => 'integer',
+					'required'    => false,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_start'    => array(
@@ -452,6 +468,11 @@ class UserActivitiesController extends CrudController {
 		// Item ID.
 		if ( isset( $request['item_id'] ) ) {
 			$user_activity->set_item_id( $request['item_id'] );
+		}
+
+		// Item parent ID.
+		if ( isset( $request['parent_id'] ) ) {
+			$user_activity->set_parent_id( $request['parent_id'] );
 		}
 
 		// Activity type.

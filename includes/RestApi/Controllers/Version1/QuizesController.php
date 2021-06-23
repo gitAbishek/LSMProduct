@@ -151,7 +151,7 @@ class QuizesController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		// The sections should be order by menu which is the sort order.
+		// The quizes should be order by menu which is the sort order.
 		$params['order']['default']   = 'asc';
 		$params['orderby']['default'] = 'menu_order';
 
@@ -281,6 +281,9 @@ class QuizesController extends PostsController {
 			'status'            => $quiz->get_status( $context ),
 			'description'       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
 			'short_description' => 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description( $context ),
+			'pass_mark'         => $quiz->get_pass_mark( $context ),
+			'full_mark'         => $quiz->get_full_mark( $context ),
+			'duration'          => $quiz->get_duration( $context ),
 			'navigation'        => $this->get_navigation_items( $quiz, $context ),
 		);
 
@@ -477,6 +480,24 @@ class QuizesController extends PostsController {
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
+				'pass_mark'         => array(
+					'description' => __( 'Quiz pass mark.', 'masteriyo' ),
+					'type'        => 'integer',
+					'required'    => false,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'full_mark'         => array(
+					'description' => __( 'Quiz full mark..', 'masteriyo' ),
+					'type'        => 'integer',
+					'required'    => false,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'duration'          => array(
+					'description' => __( 'Quiz duration.', 'masteriyo' ),
+					'type'        => 'integer',
+					'required'    => false,
+					'context'     => array( 'view', 'edit' ),
+				),
 				'meta_data'         => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
@@ -529,32 +550,32 @@ class QuizesController extends PostsController {
 			$quiz_repo->read( $quiz );
 		}
 
-		// Post title.
+		// Quiz title.
 		if ( isset( $request['name'] ) ) {
 			$quiz->set_name( wp_filter_post_kses( $request['name'] ) );
 		}
 
-		// Post content.
+		// Quiz content.
 		if ( isset( $request['description'] ) ) {
 			$quiz->set_description( wp_filter_post_kses( $request['description'] ) );
 		}
 
-		// Post excerpt.
+		// Quiz excerpt.
 		if ( isset( $request['short_description'] ) ) {
 			$quiz->set_short_description( wp_filter_post_kses( $request['short_description'] ) );
 		}
 
-		// Post status.
+		// Quiz status.
 		if ( isset( $request['status'] ) ) {
 			$quiz->set_status( get_post_status_object( $request['status'] ) ? $request['status'] : 'draft' );
 		}
 
-		// Post slug.
+		// Quiz slug.
 		if ( isset( $request['slug'] ) ) {
 			$quiz->set_slug( $request['slug'] );
 		}
 
-		// Post parent id.
+		// Quiz parent id.
 		if ( isset( $request['parent_id'] ) ) {
 			$quiz->set_parent_id( $request['parent_id'] );
 		}
@@ -564,9 +585,24 @@ class QuizesController extends PostsController {
 			$quiz->set_course_id( $request['course_id'] );
 		}
 
-		// Post menu order.
+		// Quiz menu order.
 		if ( isset( $request['menu_order'] ) ) {
 			$quiz->set_menu_order( $request['menu_order'] );
+		}
+
+		// Quiz pass mark.
+		if ( isset( $request['pass_mark'] ) ) {
+			$quiz->set_pass_mark( $request['pass_mark'] );
+		}
+
+		// Quiz full mark.
+		if ( isset( $request['full_mark'] ) ) {
+			$quiz->set_full_mark( $request['full_mark'] );
+		}
+
+		// Quiz duration.
+		if ( isset( $request['duration'] ) ) {
+			$quiz->set_duration( $request['duration'] );
 		}
 
 		// Allow set meta_data.

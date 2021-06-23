@@ -28,6 +28,9 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 */
 	protected $internal_meta_keys = array(
 		'course_id' => '_course_id',
+		'pass_mark' => '_pass_mark',
+		'full_mark' => '_full_mark',
+		'duration'  => '_duration',
 	);
 
 	/**
@@ -57,7 +60,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 					'menu_order'    => $quiz->get_menu_order(),
 					'post_date'     => $quiz->get_date_created( 'edit' ),
 					'post_date_gmt' => $quiz->get_date_created( 'edit' ),
-					'post_name'     => $quiz->get_slug( 'edit' )
+					'post_name'     => $quiz->get_slug( 'edit' ),
 				),
 				$quiz
 			)
@@ -92,17 +95,19 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			throw new \Exception( __( 'Invalid quiz.', 'masteriyo' ) );
 		}
 
-		$quiz->set_props( array(
-			'name'              => $quiz_post->post_title,
-			'slug'              => $quiz_post->post_name,
-			'date_created'      => $quiz_post->post_date_gmt,
-			'date_modified'     => $quiz_post->post_modified_gmt,
-			'status'            => $quiz_post->post_status,
-			'parent_id'         => $quiz_post->post_parent,
-			'menu_order'        => $quiz_post->menu_order,
-			'description'       => $quiz_post->post_content,
-			'short_description' => $quiz_post->post_excerpt,
-		) );
+		$quiz->set_props(
+			array(
+				'name'              => $quiz_post->post_title,
+				'slug'              => $quiz_post->post_name,
+				'date_created'      => $quiz_post->post_date_gmt,
+				'date_modified'     => $quiz_post->post_modified_gmt,
+				'status'            => $quiz_post->post_status,
+				'parent_id'         => $quiz_post->post_parent,
+				'menu_order'        => $quiz_post->menu_order,
+				'description'       => $quiz_post->post_content,
+				'short_description' => $quiz_post->post_excerpt,
+			)
+		);
 
 		$this->read_quiz_data( $quiz );
 		$this->read_extra_data( $quiz );
@@ -131,7 +136,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			'status',
 			'date_created',
 			'date_modified',
-			'slug'
+			'slug',
 		);
 
 		// Only update the post when the post data changes.
@@ -189,7 +194,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 * @since 0.1.0
 	 *
 	 * @param Model $quiz Quiz object.
-	 * @param array $args	Array of args to pass.alert-danger
+	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$quiz, $args = array() ) {
 		$id          = $quiz->get_id();
@@ -244,10 +249,14 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 
 		$set_props = array();
 
-		$meta_values = array_reduce( $meta_values, function( $result, $meta_value ) {
-			$result[ $meta_value->key ][] = $meta_value->value;
-			return $result;
-		}, array() );
+		$meta_values = array_reduce(
+			$meta_values,
+			function( $result, $meta_value ) {
+				$result[ $meta_value->key ][] = $meta_value->value;
+				return $result;
+			},
+			array()
+		);
 
 		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
@@ -325,8 +334,8 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	protected function get_wp_query_args( $query_vars ) {
 		// Map query vars to ones that get_wp_query_args or WP_Query recognize.
 		$key_mapping = array(
-			'status' => 'post_status',
-			'page'   => 'paged',
+			'status'    => 'post_status',
+			'page'      => 'paged',
 			'parent_id' => 'post_parent',
 		);
 
@@ -350,8 +359,8 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 
 		// Handle date queries.
 		$date_queries = array(
-			'date_created'      => 'post_date',
-			'date_modified'     => 'post_modified',
+			'date_created'  => 'post_date',
+			'date_modified' => 'post_modified',
 		);
 		foreach ( $date_queries as $query_var_key => $db_key ) {
 			if ( isset( $query_vars[ $query_var_key ] ) && '' !== $query_vars[ $query_var_key ] ) {

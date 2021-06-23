@@ -68,6 +68,9 @@ class Quiz extends Model {
 		'status'            => false,
 		'description'       => '',
 		'short_description' => '',
+		'pass_mark'         => 0,
+		'full_mark'         => 0,
+		'duration'          => 0, // Seconds
 	);
 
 	/**
@@ -113,6 +116,13 @@ class Quiz extends Model {
 	public function get_children() {
 		return array();
 	}
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Getters
+	|--------------------------------------------------------------------------
+	*/
 
 	/**
 	 * Get quiz name.
@@ -245,6 +255,51 @@ class Quiz extends Model {
 	}
 
 	/**
+	 * Returns quiz pass mark.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return int Quiz pass mark.
+	 */
+	public function get_pass_mark( $context = 'view' ) {
+		return $this->get_prop( 'pass_mark', $context );
+	}
+
+	/**
+	 * Returns quiz full mark.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return int Quiz full mark.
+	 */
+	public function get_full_mark( $context = 'view' ) {
+		return $this->get_prop( 'full_mark', $context );
+	}
+
+	/**
+	 * Returns quiz duration.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return int Quiz duration (seconds).
+	 */
+	public function get_duration( $context = 'view' ) {
+		return $this->get_prop( 'duration', $context );
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Setters
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
 	 * Set quiz name.
 	 *
 	 * @since 0.1.0
@@ -353,4 +408,38 @@ class Quiz extends Model {
 	public function set_menu_order( $menu_order ) {
 		$this->set_prop( 'menu_order', absint( $menu_order ) );
 	}
+
+	/**
+	 * Set the quiz pass mark.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $pass_mark pass mark.
+	 */
+	public function set_pass_mark( $pass_mark ) {
+		$this->set_prop( 'pass_mark', absint( $pass_mark ) );
+	}
+
+	/**
+	 * Set the quiz full mark.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $full_mark full mark.
+	 */
+	public function set_full_mark( $full_mark ) {
+		$this->set_prop( 'full_mark', absint( $full_mark ) );
+	}
+
+	/**
+	 * Set the quiz duration.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $duration duration (seconds).
+	 */
+	public function set_duration( $duration ) {
+		$this->set_prop( 'duration', absint( $duration ) );
+	}
+
 }

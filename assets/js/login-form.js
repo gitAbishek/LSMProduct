@@ -5,7 +5,7 @@
 	/**
 	 * Login form submission handler.
 	 */
-	$( document.body ).on( 'submit', 'form#mto-login-form', function(e) {
+	$( document.body ).on( 'submit', 'form.mto-login--form', function(e) {
 		e.preventDefault();
 
 		const $form = $(this);

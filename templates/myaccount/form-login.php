@@ -18,7 +18,7 @@ do_action( 'masteriyo_before_login_form_content' );
 		<div class="mto-login--wrapper mto-form-container">
 			<h3 class="mto-login--title"><?php echo esc_html__( 'Sign In', 'masteriyo' ); ?></h3>
 
-			<form id="mto-login--form" class="mto-login--form">
+			<form id="mto-login--form" class="mto-login--form" method="post">
 				<input type="hidden" name="remember" value="true">
 				<div class="mto-username">
 					<label for="username-email-address" class="mto-label"><?php echo esc_html__( 'Username or Email', 'masteriyo' ); ?></label>

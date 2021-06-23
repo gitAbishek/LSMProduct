@@ -7,6 +7,7 @@ import urls from '../../../back-end/constants/urls';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import MediaAPI from '../../../back-end/utils/media';
 import FloatingNavigation from '../../components/FloatingNavigation';
+import ContentNav from '../../components/ContentNav';
 
 const InteractiveLesson = () => {
 	const { lessonId }: any = useParams();
@@ -54,6 +55,7 @@ const InteractiveLesson = () => {
 					courseId={lessonQuery?.data?.course_id}
 				/>
 			</Box>
+			<ContentNav />
 		</Container>
 	);
 };

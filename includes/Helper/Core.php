@@ -1510,18 +1510,15 @@ function masteriyo_get_myaccount_endpoints() {
 	return apply_filters(
 		'masteriyo_myaccount_endpoints',
 		array(
-			'view-myaccount' => get_option( 'masteriyo_myaccount_view-myaccount_endpoint', 'view-myaccount' ),
-			'edit-myaccount' => get_option( 'masteriyo_myaccount_edit-myaccount_endpoint', 'edit-myaccount' ),
-			'dashboard'      => get_option( 'masteriyo_myaccount_dashboard_endpoint', 'dashboard' ),
-			'courses'        => get_option( 'masteriyo_myaccount_courses_endpoint', 'courses' ),
-			'grades'         => get_option( 'masteriyo_myaccount_grades_endpoint', 'grades' ),
-			'memberships'    => get_option( 'masteriyo_myaccount_memberships_endpoint', 'memberships' ),
-			'certificates'   => get_option( 'masteriyo_myaccount_certificates_endpoint', 'certificates' ),
-			'order-history'  => get_option( 'masteriyo_myaccount_order-history_endpoint', 'order-history' ),
-			'reset-password' => get_option( 'masteriyo_myaccount_reset-password_endpoint', 'reset-password' ),
-			'signup'         => get_option( 'masteriyo_myaccount_signup_endpoint', 'signup' ),
-			'user-logout'    => get_option( 'masteriyo_logout_endpoint', 'user-logout' ),
-			'view-order'     => get_option( 'masteriyo_logout_endpoint', 'view-order' ),
+			'view-myaccount' => masteriyo_get_setting_value( 'masteriyo.pages.view_myaccount', 'view-myaccount' ),
+			'edit-myaccount' => masteriyo_get_setting_value( 'masteriyo.pages.edit_account', 'edit-myaccount' ),
+			'dashboard'      => masteriyo_get_setting_value( 'masteriyo.pages.dashboard', 'dashboard' ),
+			'courses'        => masteriyo_get_setting_value( 'masteriyo.pages.my_courses', 'courses' ),
+			'order-history'  => masteriyo_get_setting_value( 'masteriyo.pages.order_history', 'order-history' ),
+			'reset-password' => masteriyo_get_setting_value( 'masteriyo.pages.lost_password', 'reset-password' ),
+			'signup'         => masteriyo_get_setting_value( 'masteriyo.pages.signup', 'signup' ),
+			'user-logout'    => masteriyo_get_setting_value( 'masteriyo.pages.logout', 'user-logout' ),
+			'view-order'     => masteriyo_get_setting_value( 'masteriyo.pages.view_order', 'view-order' ),
 		)
 	);
 }
@@ -1605,7 +1602,7 @@ function masteriyo_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 function masteriyo_logout_url( $redirect = '' ) {
 	$redirect = $redirect ? $redirect : apply_filters( 'masteriyo_logout_default_redirect_url', masteriyo_get_page_permalink( 'myaccount' ) );
 
-	if ( get_option( 'masteriyo_logout_endpoint' ) ) {
+	if ( masteriyo_get_setting_value( 'masteriyo.pages.logout' ) ) {
 		return wp_nonce_url( masteriyo_get_endpoint_url( 'user-logout', '', $redirect ), 'user-logout' );
 	}
 

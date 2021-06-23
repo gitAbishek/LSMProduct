@@ -113,12 +113,16 @@ class Setting extends Model {
 			'set_default_payment_method' => '',
 
 			// Account Endpoints.
+			'dashboard'                  => '',
 			'orders'                     => '',
 			'view_order'                 => '',
+			'order_history'              => '',
 			'my_courses'                 => '',
+			'view_myaccount'             => '',
 			'edit_account'               => '',
 			'payment_methods'            => '',
 			'lost_password'              => '',
+			'signup'                     => '',
 			'logout'                     => '',
 		),
 		'quizzes'  => array(

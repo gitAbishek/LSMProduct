@@ -55,7 +55,10 @@ const InteractiveLesson = () => {
 					courseId={lessonQuery?.data?.course_id}
 				/>
 			</Box>
-			<ContentNav />
+			<ContentNav
+				navigation={lessonQuery?.data?.navigation}
+				courseId={lessonQuery?.data?.course_id}
+			/>
 		</Container>
 	);
 };

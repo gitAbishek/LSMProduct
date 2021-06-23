@@ -1,7 +1,7 @@
 import { Box, List, ListIcon, ListItem, Text } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiTime } from 'react-icons/bi';
+import { BiInfoCircle, BiTime } from 'react-icons/bi';
 
 const QuizStart = () => {
 	const listItemStyles = {
@@ -12,6 +12,9 @@ const QuizStart = () => {
 		px: '3',
 		'.chakra-icon': {
 			fontSize: 'lg',
+		},
+		_last: {
+			borderRightColor: 'transparent',
 		},
 	};
 	return (
@@ -31,7 +34,9 @@ const QuizStart = () => {
 					<Text ml="1">1h 35m</Text>
 				</ListItem>
 				<ListItem sx={listItemStyles}>
-					<ListIcon as={BiTime} />
+					<ListIcon as={BiInfoCircle} />
+					<Text as="strong">{__('Questions: ')}</Text>
+					<Text ml="1">5</Text>
 				</ListItem>
 			</List>
 		</Box>

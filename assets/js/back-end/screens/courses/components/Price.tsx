@@ -32,7 +32,7 @@ const Price: React.FC<Props> = (props) => {
 
 			<Stack direction="row" spacing="6">
 				<Controller
-					name="price"
+					name="regular_price"
 					defaultValue={defaultValue || 0}
 					render={({ field }) => (
 						<NumberInput {...field} w="full">

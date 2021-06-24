@@ -30,11 +30,11 @@ const EditCourse: React.FC<Props> = (props) => {
 					<Stack direction="column" spacing="6">
 						<Name defaultValue={courseData.name} />
 						<Description defaultValue={courseData.description} />
-						<Price defaultValue={courseData.regular_price} />
 					</Stack>
 				</Box>
 				<Box w="400px" bg="white" p="10" shadow="box">
 					<Stack direction="column" spacing="6">
+						<Price defaultValue={courseData.regular_price} />
 						<Categories defaultValue={courseData.categories} />
 						<FeaturedImage defaultValue={courseData.featured_image} />
 					</Stack>

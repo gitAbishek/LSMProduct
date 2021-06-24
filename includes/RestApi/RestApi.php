@@ -107,6 +107,7 @@ class RestApi {
 			'users'                 => "{$namespace}\\UsersController",
 			'settings'              => "{$namespace}\\SettingsController",
 			'courses.reviews'       => "{$namespace}\\CourseReviewsController",
+			'courses.qas'           => "{$namespace}\\CourseQuestionAnswersController",
 			'courses.builder'       => "{$namespace}\\CourseBuilderController",
 			'quizzes.builder'       => "{$namespace}\\QuizBuilderController",
 			'user-activities'       => "{$namespace}\\UserActivitiesController",

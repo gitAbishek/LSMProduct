@@ -1,4 +1,8 @@
 import {
+	Alert,
+	AlertDescription,
+	AlertIcon,
+	AlertTitle,
 	Box,
 	Button,
 	ButtonGroup,
@@ -118,9 +122,7 @@ const AddNewQuiz: React.FC = () => {
 									<Tabs>
 										<TabList justifyContent="center" borderBottom="1px">
 											<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
-											<Tab sx={tabStyles} isDisabled>
-												{__('Questions', 'masteriyo')}
-											</Tab>
+											<Tab sx={tabStyles}>{__('Questions', 'masteriyo')}</Tab>
 											<Tab sx={tabStyles}>{__('Settings', 'masteriyo')}</Tab>
 										</TabList>
 										<TabPanels>
@@ -130,8 +132,21 @@ const AddNewQuiz: React.FC = () => {
 													<Description />
 												</Stack>
 											</TabPanel>
-											<TabPanel></TabPanel>
-											<TabPanel>
+											<TabPanel px="0">
+												<Alert status="error">
+													<AlertIcon />
+													<AlertTitle mr={2}>
+														{__('Add course first', 'masteriyo')}
+													</AlertTitle>
+													<AlertDescription>
+														{__(
+															'In order to add questions. You need to add quiz first',
+															'masteriyo'
+														)}
+													</AlertDescription>
+												</Alert>
+											</TabPanel>
+											<TabPanel px="0">
 												<QuizSettings />
 											</TabPanel>
 										</TabPanels>

@@ -8,6 +8,7 @@ namespace ThemeGrill\Masteriyo\Providers;
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
+use ThemeGrill\Masteriyo\Query\CourseQuestionAnswerQuery;
 use ThemeGrill\Masteriyo\Query\CourseReviewQuery;
 use ThemeGrill\Masteriyo\Query\FaqQuery;
 use ThemeGrill\Masteriyo\Query\LessonQuery;
@@ -38,6 +39,7 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		'query.orders',
 		'query.order-items',
 		'query.course-reviews',
+		'query.course-qas',
 
 		'\ThemeGrill\Masteriyo\Query\SectionQuery',
 		'\ThemeGrill\Masteriyo\Query\LessonQuery',
@@ -47,6 +49,7 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		'\ThemeGrill\Masteriyo\Query\OrderQuery',
 		'\ThemeGrill\Masteriyo\Query\OrderItemQuery',
 		'\ThemeGrill\Masteriyo\Query\CourseReviewQuery',
+		'\ThemeGrill\Masteriyo\Query\CourseQuestionAnswerQuery',
 	);
 
 	/**
@@ -66,6 +69,7 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'query.orders', OrderQuery::class );
 		$this->getContainer()->add( 'query.order-items', OrderItemQuery::class );
 		$this->getContainer()->add( 'query.course-reviews', CourseReviewQuery::class );
+		$this->getContainer()->add( 'query.course-qas', CourseQuestionAnswerQuery::class );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\SectionQuery' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\LessonQuery' );
@@ -75,5 +79,6 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\OrderQuery' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\OrderItemQuery' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\CourseReviewQuery' );
+		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\CourseQuestionAnswerQuery' );
 	}
 }

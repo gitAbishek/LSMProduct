@@ -216,6 +216,52 @@ function masteriyo_get_course_reviews( $args = array() ) {
 }
 
 /**
+ * Get course question-answer.
+ *
+ * @since 0.1.0
+ *
+ * @param  int|WP_Comment|Model $course_qa Object ID or WP_Comment or Model.
+ * @return CourseQuestionAnswer|null
+ */
+function masteriyo_get_course_qa( $course_qa ) {
+	$course_qa_obj   = masteriyo( 'course_qa' );
+	$course_qa_store = masteriyo( 'course_qa.store' );
+
+	if ( is_a( $course_qa, 'ThemeGrill\Masteriyo\Models\CourseReview' ) ) {
+		$id = $course_qa->get_id();
+	} elseif ( is_a( $course_qa, 'WP_Comment' ) ) {
+		$id = $course_qa->comment_ID;
+	} else {
+		$id = $course_qa;
+	}
+
+	try {
+		$id = absint( $id );
+		$course_qa_obj->set_id( $id );
+		$course_qa_store->read( $course_qa_obj );
+	} catch ( \Exception $e ) {
+		return null;
+	}
+
+	return apply_filters( 'masteriyo_get_course_qa', $course_qa_obj, $course_qa );
+}
+
+/**
+ * Get course question-answers.
+ *
+ * @since 0.1.0
+ *
+ * @param array $args Query arguments.
+ *
+ * @return object|array[CourseQuestionAnswer]
+ */
+function masteriyo_get_course_qas( $args = array() ) {
+	$course_qas = masteriyo( 'query.course-qas' )->set_args( $args )->get_course_qas();
+
+	return apply_filters( 'masteriyo_get_course_qas', $course_qas, $args );
+}
+
+/**
  * Get quiz.
  *
  * @since 0.1.0

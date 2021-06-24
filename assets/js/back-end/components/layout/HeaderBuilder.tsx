@@ -63,7 +63,7 @@ const HeaderBuilder: React.FC<Props> = (props) => {
 									_activeLink={navActiveStyles}
 									to={routes.courses.edit.replace(
 										':courseId',
-										courseId.toString()
+										courseId?.toString()
 									)}>
 									<ListIcon as={BiBook} />
 									{__('Course', 'masteriyo')}

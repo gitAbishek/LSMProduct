@@ -1,5 +1,4 @@
 import {
-	Box,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
@@ -8,9 +7,10 @@ import {
 import { __ } from '@wordpress/i18n/build-types';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import { QuizSchema } from '../../../schemas';
 
 interface Props {
-	quizData;
+	quizData: QuizSchema;
 }
 
 const QuizSettings = () => {

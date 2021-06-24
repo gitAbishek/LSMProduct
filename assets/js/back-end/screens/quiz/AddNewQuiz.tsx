@@ -27,6 +27,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import { QuizSchema } from '../../schemas';
 import API from '../../utils/api';
 import { mergeDeep } from '../../utils/mergeDeep';
 import Description from './components/Description';
@@ -78,19 +79,19 @@ const AddNewQuiz: React.FC = () => {
 		}
 	);
 
-	const addQuiz = useMutation((data: object) => quizAPI.store(data), {
-		onSuccess: (data: any) => {
+	const addQuiz = useMutation((data: QuizSchema) => quizAPI.store(data), {
+		onSuccess: (data: QuizSchema) => {
 			toast({
 				title: __('Quiz Added', 'masteriyo'),
 				description: data.name + __(' is successfully added.', 'masteriyo'),
 				isClosable: true,
 				status: 'success',
 			});
-			history.push(routes.quiz.edit.replace(':quizId', data.id));
+			history.push(routes.quiz.edit.replace(':quizId', data.id.toString()));
 		},
 	});
 
-	const onSubmit = (data: object) => {
+	const onSubmit = (data: QuizSchema) => {
 		const newData = {
 			course_id: courseId,
 			parent_id: sectionId,

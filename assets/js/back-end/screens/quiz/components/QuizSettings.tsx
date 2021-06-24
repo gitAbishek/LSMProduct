@@ -10,28 +10,29 @@ import { useFormContext } from 'react-hook-form';
 import { QuizSchema } from '../../../schemas';
 
 interface Props {
-	quizData: QuizSchema;
+	quizData?: QuizSchema;
 }
 
-const QuizSettings = () => {
+const QuizSettings: React.FC<Props> = (props) => {
+	const { quizData } = props;
 	const {
 		register,
 		formState: { errors },
-	} = useFormContext();
+	} = useFormContext<QuizSchema>();
 
 	return (
 		<>
-			<FormControl isInvalid={!!errors?.name}>
+			<FormControl isInvalid={!!errors?.pass_mark}>
 				<FormLabel>{__('Quiz Name', 'masteriyo')}</FormLabel>
 				<Input
-					defaultValue={defaultValue}
+					defaultValue={quizData?.pass_mark}
 					placeholder={__('Your Quiz Name', 'masteriyo')}
-					{...register('name', {
-						required: __('You must provide name for the quiz', 'masteriyo'),
+					{...register('pass_mark', {
+						required: __('Please Provide Pass Mark for the quiz', 'masteriyo'),
 					})}
 				/>
 				<FormErrorMessage>
-					{errors?.name && errors?.name?.message}
+					{errors?.pass_mark && errors?.pass_mark?.message}
 				</FormErrorMessage>
 			</FormControl>
 		</>

@@ -53,16 +53,12 @@ const QuizSettings: React.FC<Props> = (props) => {
 
 			<FormControl isInvalid={!!errors?.pass_mark}>
 				<FormLabel>{__('Pass Mark', 'masteriyo')}</FormLabel>
-				<Input
-					defaultValue={quizData?.pass_mark}
-					placeholder={__('Quiz Pass Mark', 'masteriyo')}
-					{...register('pass_mark', {
-						required: __('Please Provide Pass Mark for the quiz', 'masteriyo'),
-					})}
-				/>
 				<Controller
-					name="full_mark"
+					name="pass_mark"
 					defaultValue={quizData?.pass_mark || 100}
+					rules={{
+						required: __('Full Mark is required for the quiz', 'masteriyo'),
+					}}
 					render={({ field }) => (
 						<NumberInput {...field} w="full">
 							<NumberInputField borderRadius="sm" shadow="input" />

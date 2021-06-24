@@ -36,7 +36,7 @@ import QuizSettings from './components/QuizSettings';
 
 const AddNewQuiz: React.FC = () => {
 	const { sectionId }: any = useParams();
-	const methods = useForm();
+	const methods = useForm<QuizSchema>();
 	const history = useHistory();
 	const toast = useToast();
 	const contentAPI = new API(urls.contents);

@@ -5,7 +5,6 @@ import {
 	Flex,
 	FormControl,
 	FormLabel,
-	Input,
 	InputGroup,
 	InputRightAddon,
 	Link,

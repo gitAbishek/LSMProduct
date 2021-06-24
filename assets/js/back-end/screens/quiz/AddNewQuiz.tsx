@@ -27,6 +27,7 @@ import API from '../../utils/api';
 import { mergeDeep } from '../../utils/mergeDeep';
 import Description from './components/Description';
 import Name from './components/Name';
+import QuizSettings from './components/QuizSettings';
 
 const AddNewQuiz: React.FC = () => {
 	const { sectionId }: any = useParams();
@@ -120,9 +121,7 @@ const AddNewQuiz: React.FC = () => {
 											<Tab sx={tabStyles} isDisabled>
 												{__('Questions', 'masteriyo')}
 											</Tab>
-											<Tab sx={tabStyles} isDisabled>
-												{__('Settings', 'masteriyo')}
-											</Tab>
+											<Tab sx={tabStyles}>{__('Settings', 'masteriyo')}</Tab>
 										</TabList>
 										<TabPanels>
 											<TabPanel px="0">
@@ -130,6 +129,10 @@ const AddNewQuiz: React.FC = () => {
 													<Name />
 													<Description />
 												</Stack>
+											</TabPanel>
+											<TabPanel></TabPanel>
+											<TabPanel>
+												<QuizSettings />
 											</TabPanel>
 										</TabPanels>
 									</Tabs>

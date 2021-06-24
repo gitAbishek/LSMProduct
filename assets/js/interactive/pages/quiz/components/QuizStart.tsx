@@ -9,6 +9,7 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import humanizeDuration from 'humanize-duration';
 import React from 'react';
 import {
 	BiCheckCircle,
@@ -17,8 +18,15 @@ import {
 	BiInfoCircle,
 	BiTime,
 } from 'react-icons/bi';
+import { QuizSchema } from '../../../../back-end/schemas';
 
-const QuizStart = () => {
+interface Props {
+	quizData: QuizSchema;
+}
+
+const QuizStart: React.FC<Props> = (props) => {
+	const { quizData } = props;
+
 	const listItemStyles = {
 		d: 'flex',
 		alignItems: 'center',
@@ -32,6 +40,9 @@ const QuizStart = () => {
 			borderRightColor: 'transparent',
 		},
 	};
+
+	console.log(quizData.duration);
+
 	return (
 		<Stack direction="column" spacing="8">
 			<List
@@ -46,22 +57,22 @@ const QuizStart = () => {
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiTime} />
 					<Text as="strong">{__('Duration: ')}</Text>
-					<Text ml="1">1h 35m</Text>
+					<Text ml="1">{humanizeDuration(quizData?.duration * 60 * 1000)}</Text>
 				</ListItem>
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiInfoCircle} />
 					<Text as="strong">{__('Questions: ')}</Text>
-					<Text ml="1">5</Text>
+					<Text ml="1">{quizData?.questions_count}</Text>
 				</ListItem>
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiCheckCircle} />
 					<Text as="strong">{__('Mark: ')}</Text>
-					<Text ml="1">100</Text>
+					<Text ml="1">{quizData?.full_mark}</Text>
 				</ListItem>
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiCheckDouble} />
 					<Text as="strong">{__('Pass Mark: ')}</Text>
-					<Text ml="1">40</Text>
+					<Text ml="1">{quizData?.pass_mark}</Text>
 				</ListItem>
 			</List>
 

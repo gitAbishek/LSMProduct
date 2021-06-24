@@ -59,7 +59,7 @@ class Install {
 		$charset_collate = $wpdb->get_charset_collate();
 		$base_prefix     = $wpdb->base_prefix;
 
-		dbDelta( self::get_question_table_schema( $charset_collate, $base_prefix ) );
+		// dbDelta( self::get_question_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_items_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_itemmeta_table_schema( $charset_collate, $base_prefix ) );
@@ -111,13 +111,16 @@ class Install {
 	 * @return string
 	 */
 	private static function get_session_table_schema( $charset_collate, $base_prefix ) {
-		$sql = "CREATE TABLE IF NOT EXISTS `{$base_prefix}masteriyo_sessions` (
-			`id` BIGINT UNSIGNED AUTO_INCREMENT,
-			`key` CHAR(32) UNIQUE NOT NULL,
-			`data` LONGTEXT NOT NULL,
-			`expiry` BIGINT UNSIGNED NOT NULL,
-			PRIMARY KEY (`id`)
-		) {$charset_collate};";
+		$sql = "CREATE TABLE `{$base_prefix}masteriyo_sessions` (
+			`session_id` BIGINT UNSIGNED AUTO_INCREMENT,
+			`session_key` CHAR(32) NOT NULL,
+			`session_data` LONGTEXT NOT NULL,
+			`session_expiry` BIGINT UNSIGNED NOT NULL,
+			`user_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
+			PRIMARY KEY (`session_id`),
+			KEY (`user_id`),
+			UNIQUE KEY `session_key` (`session_key`)
+		) $charset_collate;";
 
 		return $sql;
 	}

@@ -31,9 +31,9 @@ class SessionRepository implements RepositoryInterface {
 		$wpdb->replace(
 			$session_table,
 			array(
-				'key'    => $session->get_key(),
-				'data'   => maybe_serialize( $session->all() ),
-				'expiry' => $session->get_expiry(),
+				'session_key'    => $session->get_key(),
+				'session_data'   => maybe_serialize( $session->all() ),
+				'session_expiry' => $session->get_expiry(),
 			),
 			array( '%s', '%s', '%d' )
 		);
@@ -55,7 +55,7 @@ class SessionRepository implements RepositoryInterface {
 
 		if ( $session->get_id() ) {
 			$session_table = $session->get_table();
-			$wpdb->delete( $session_table, array( 'id' => $session->get_id() ) );
+			$wpdb->delete( $session_table, array( 'session_id' => $session->get_id() ) );
 		}
 	}
 
@@ -71,20 +71,22 @@ class SessionRepository implements RepositoryInterface {
 		global $wpdb;
 
 		if ( ! empty( $session->get_key() ) ) {
-			$session_table = esc_sql( $session->get_table() );
-			$query         = $wpdb->prepare( "SELECT * FROM {$session_table} WHERE `key` = %s", $session->get_key() );
-			$result        = $wpdb->get_row( $query ); // phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+			$query  = $wpdb->prepare(
+				"SELECT * FROM {$wpdb->base_prefix}masteriyo_sessions WHERE session_key = %s",
+				$session->get_key()
+			);
+			$result = $wpdb->get_row( $query ); // phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
 
 			if ( ! is_null( $result ) ) {
 				$session->set_props(
 					array(
-						'key'    => $result->key,
-						'data'   => maybe_unserialize( $result->data ),
-						'expiry' => $result->expiry,
+						'key'    => $result->session_key,
+						'data'   => maybe_unserialize( $result->session_data ),
+						'expiry' => $result->session_expiry,
 					)
 				);
 
-				$session->set_id( $result->id );
+				$session->set_id( $result->session_id );
 				$session->set_object_read( true );
 			}
 		}
@@ -108,11 +110,11 @@ class SessionRepository implements RepositoryInterface {
 			$wpdb->update(
 				$session_table,
 				array(
-					'key'    => $session->get_key(),
-					'data'   => maybe_serialize( $session->all() ),
-					'expiry' => $session->get_expiry(),
+					'session_key'    => $session->get_key(),
+					'session_data'   => maybe_serialize( $session->all() ),
+					'session_expiry' => $session->get_expiry(),
 				),
-				array( 'id' => $session->get_id() ),
+				array( 'session_id' => $session->get_id() ),
 				array( '%s', '%s', '%d' ),
 				array( '%d' )
 			);

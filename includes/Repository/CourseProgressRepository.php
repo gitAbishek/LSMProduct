@@ -70,7 +70,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 				),
 				$course_progress
 			),
-			array( '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s' )
+			array( '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
 		);
 
 		if ( $result && $wpdb->insert_id ) {
@@ -237,7 +237,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		}
 
 		if ( ! empty( $query_vars['activity_type'] ) ) {
-			$search_criteria[] = $wpdb->prepare( 'activity_type = %s', 'course-progress' );
+			$search_criteria[] = $wpdb->prepare( 'activity_type = %s', 'course_progress' );
 		}
 
 		if ( ! empty( $query_vars['status'] ) && 'any' !== $query_vars['status'] ) {

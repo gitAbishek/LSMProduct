@@ -1,7 +1,10 @@
 import {
 	FormControl,
 	FormErrorMessage,
+	FormHelperText,
 	FormLabel,
+	InputGroup,
+	InputRightAddon,
 	NumberDecrementStepper,
 	NumberIncrementStepper,
 	NumberInput,
@@ -69,6 +72,36 @@ const QuizSettings: React.FC<Props> = (props) => {
 				/>
 				<FormErrorMessage>
 					{errors?.pass_mark && errors?.pass_mark?.message}
+				</FormErrorMessage>
+			</FormControl>
+
+			<FormControl isInvalid={!!errors?.duration}>
+				<FormLabel>{__('Duration', 'masteriyo')}</FormLabel>
+
+				<Controller
+					name="duration"
+					defaultValue={quizData?.duration || 60}
+					rules={{
+						required: __('Duration is required', 'masteriyo'),
+					}}
+					render={({ field }) => (
+						<InputGroup>
+							<NumberInput defaultValue={quizData?.duration || 60} w="full">
+								<NumberInputField {...field} rounded="sm" />
+								<NumberInputStepper>
+									<NumberIncrementStepper />
+									<NumberDecrementStepper />
+								</NumberInputStepper>
+							</NumberInput>
+							<InputRightAddon>{__('Minutes', 'masteriyo')}</InputRightAddon>
+						</InputGroup>
+					)}
+				/>
+				<FormHelperText>
+					{__('Duraction should be in minutes', 'masteriyo')}
+				</FormHelperText>
+				<FormErrorMessage>
+					{errors?.duration && errors?.duration?.message}
 				</FormErrorMessage>
 			</FormControl>
 		</Stack>

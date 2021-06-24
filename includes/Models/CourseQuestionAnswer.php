@@ -262,6 +262,17 @@ class CourseQuestionAnswer extends Model {
 	}
 
 	/**
+	 * Check if this is an answer.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	public function is_answer() {
+		return absint( $this->get_parent('edit') ) > 0;
+	}
+
+	/**
 	 * Get author_id.
 	 *
 	 * @since  0.1.0

@@ -70,7 +70,7 @@ class CourseProgress extends Model {
 	protected $data = array(
 		'user_id'       => 0,
 		'course_id'     => 0,
-		'type'          => 'course-progress',
+		'type'          => 'course_progress',
 		'status'        => 'begin',
 		'date_start'    => null,
 		'date_update'   => null,

@@ -2,12 +2,10 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Center,
 	Container,
 	Divider,
 	Flex,
 	Heading,
-	Spinner,
 	Stack,
 	Tab,
 	TabList,
@@ -38,6 +36,7 @@ const EditQuiz: React.FC = () => {
 	const toast = useToast();
 	const quizAPI = new API(urls.quizes);
 	const [courseId, setCourseId] = useState<any>(null);
+	const [tabIndex, setTabIndex] = useState<number>(0);
 
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -45,7 +44,7 @@ const EditQuiz: React.FC = () => {
 	};
 
 	const tabPanelStyles = {
-		px: '0',
+		p: '0',
 	};
 	// gets total number of content on section
 	const quizQuery = useQuery(
@@ -98,43 +97,15 @@ const EditQuiz: React.FC = () => {
 								</Heading>
 							</Flex>
 
-							<Tabs>
+							<Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
 								<TabList justifyContent="center" borderBottom="1px">
 									<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
-									<Tab sx={tabStyles}>{__('Questions', 'masteriyo')}</Tab>
 									<Tab sx={tabStyles}>{__('Settings', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Questions', 'masteriyo')}</Tab>
 								</TabList>
 								<TabPanels>
-									<TabPanel sx={tabPanelStyles}>
-										<form onSubmit={methods.handleSubmit(onSubmit)}>
-											<Stack direction="column" spacing="6">
-												<Name defaultValue={quizQuery.data.name} />
-												<Description
-													defaultValue={quizQuery.data.description}
-												/>
-												<Box py="3">
-													<Divider />
-												</Box>
-												<ButtonGroup>
-													<Button
-														colorScheme="blue"
-														type="submit"
-														isLoading={updateQuiz.isLoading}>
-														{__('Update', 'masteriyo')}
-													</Button>
-													<Button
-														variant="outline"
-														onClick={() =>
-															history.push(
-																routes.builder.replace(':courseId', courseId)
-															)
-														}>
-														{__('Cancel', 'masteriyo')}
-													</Button>
-												</ButtonGroup>
-											</Stack>
-										</form>
-									</TabPanel>
+									<TabPanel sx={tabPanelStyles}></TabPanel>
+									<TabPanel sx={tabPanelStyles}>settings</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
 										<Questions
 											courseId={quizQuery.data.course_id}
@@ -143,6 +114,37 @@ const EditQuiz: React.FC = () => {
 									</TabPanel>
 								</TabPanels>
 							</Tabs>
+							<form onSubmit={methods.handleSubmit(onSubmit)}>
+								<Stack direction="column" spacing="6">
+									{tabIndex === 0 && (
+										<>
+											<Name defaultValue={quizQuery.data.name} />
+											<Description defaultValue={quizQuery.data.description} />
+										</>
+									)}
+
+									<Box py="3">
+										<Divider />
+									</Box>
+									<ButtonGroup>
+										<Button
+											colorScheme="blue"
+											type="submit"
+											isLoading={updateQuiz.isLoading}>
+											{__('Update', 'masteriyo')}
+										</Button>
+										<Button
+											variant="outline"
+											onClick={() =>
+												history.push(
+													routes.builder.replace(':courseId', courseId)
+												)
+											}>
+											{__('Cancel', 'masteriyo')}
+										</Button>
+									</ButtonGroup>
+								</Stack>
+							</form>
 						</Stack>
 					</Box>
 				</FormProvider>

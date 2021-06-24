@@ -55,7 +55,7 @@ const Questions: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<Stack direction="column" spacing="6">
+		<Stack direction="column" spacing="6" py="8">
 			{questionQuery.isLoading && (
 				<Center minH="xs">
 					<Spinner />

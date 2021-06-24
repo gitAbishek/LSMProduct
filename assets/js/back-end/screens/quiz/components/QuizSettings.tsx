@@ -53,7 +53,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 				<FormLabel>{__('Pass Mark', 'masteriyo')}</FormLabel>
 				<Controller
 					name="pass_mark"
-					defaultValue={quizData?.pass_mark || 100}
+					defaultValue={quizData?.pass_mark || 40}
 					rules={{
 						required: __('Pass mark is required for the quiz', 'masteriyo'),
 					}}

@@ -62,17 +62,17 @@ const QuizStart: React.FC<Props> = (props) => {
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiInfoCircle} />
 					<Text as="strong">{__('Questions: ')}</Text>
-					<Text ml="1">5</Text>
+					<Text ml="1">{quizData?.questions_count}</Text>
 				</ListItem>
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiCheckCircle} />
 					<Text as="strong">{__('Mark: ')}</Text>
-					<Text ml="1">100</Text>
+					<Text ml="1">{quizData?.full_mark}</Text>
 				</ListItem>
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiCheckDouble} />
 					<Text as="strong">{__('Pass Mark: ')}</Text>
-					<Text ml="1">40</Text>
+					<Text ml="1">{quizData?.pass_mark}</Text>
 				</ListItem>
 			</List>
 

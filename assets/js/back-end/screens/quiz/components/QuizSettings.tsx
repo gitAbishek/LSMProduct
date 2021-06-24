@@ -2,7 +2,6 @@ import {
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
-	Input,
 	NumberDecrementStepper,
 	NumberIncrementStepper,
 	NumberInput,
@@ -22,7 +21,6 @@ interface Props {
 const QuizSettings: React.FC<Props> = (props) => {
 	const { quizData } = props;
 	const {
-		register,
 		formState: { errors },
 	} = useFormContext<QuizSchema>();
 
@@ -57,7 +55,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 					name="pass_mark"
 					defaultValue={quizData?.pass_mark || 100}
 					rules={{
-						required: __('Full Mark is required for the quiz', 'masteriyo'),
+						required: __('Pass mark is required for the quiz', 'masteriyo'),
 					}}
 					render={({ field }) => (
 						<NumberInput {...field} w="full">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Heading, Text, Image, Stack } from '@chakra-ui/react';
+import { Box, Container, Heading, Text, Stack } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import API from '../../../back-end/utils/api';
@@ -31,7 +31,7 @@ const InteractiveQuiz = () => {
 			<Box bg="white" p="14" shadow="box" w="full">
 				<Stack direction="column" spacing="8">
 					<Heading as="h5">{quizQuery?.data?.name}</Heading>
-					<QuizStart />
+					<QuizStart quizData={quizQuery?.data} />
 					<Text
 						dangerouslySetInnerHTML={{ __html: quizQuery?.data?.description }}
 					/>

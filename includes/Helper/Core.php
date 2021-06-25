@@ -7,11 +7,12 @@
 
 use ThemeGrill\Masteriyo\DateTime;
 use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Geolocation;
-use ThemeGrill\Masteriyo\Models\Course;
-use ThemeGrill\Masteriyo\Models\Section;
 use ThemeGrill\Masteriyo\Models\Faq;
+use ThemeGrill\Masteriyo\Geolocation;
 use ThemeGrill\Masteriyo\Models\User;
+use ThemeGrill\Masteriyo\Models\Course;
+use ThemeGrill\Masteriyo\ModelException;
+use ThemeGrill\Masteriyo\Models\Section;
 use ThemeGrill\Masteriyo\Models\CourseReview;
 
 /**
@@ -344,13 +345,13 @@ function masteriyo_get_course_difficulty( $course_difficulty ) {
  * @since 0.1.0
  *
  * @param int|User|WP_User $user User  id or User Model or WP+User.
- * @return User|null
+ * @return User|WP_Error
  */
 function masteriyo_get_user( $user ) {
 	$user_obj   = masteriyo( 'user' );
 	$user_store = masteriyo( 'user.store' );
 
-	if ( is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ) {
+	if ( is_a( $user, 'ThemeGrill\Masteriyo\Database\Model' ) ) {
 		$id = $user->get_id();
 	} elseif ( is_a( $user, 'WP_User' ) ) {
 		$id = $user->ID;
@@ -362,8 +363,8 @@ function masteriyo_get_user( $user ) {
 		$id = absint( $id );
 		$user_obj->set_id( $id );
 		$user_store->read( $user_obj );
-	} catch ( \Exception $e ) {
-		return null;
+	} catch ( \ModelException $e ) {
+		$user_obj = new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
 	}
 
 	return apply_filters( 'masteriyo_get_user', $user_obj, $user );
@@ -2647,7 +2648,7 @@ function masteriyo_get_user_activity_statuses() {
 		'masteriyo_user_activity_statuses',
 		array(
 			'any',
-			'begin',
+			'start',
 			'progress',
 			'complete',
 		)

@@ -14,6 +14,7 @@ defined( 'ABSPATH' ) || exit;
 use ThemeGrill\Masteriyo\Helper\Permission;
 use ThemeGrill\Masteriyo\Exceptions\RestException;
 use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
+use ThemeGrill\Masteriyo\Query\CourseProgressItemQuery;
 
 /**
  * Course progress items controller class.
@@ -245,13 +246,13 @@ class CourseProgressItemsController extends CrudController {
 	 */
 	protected function get_object( $id ) {
 		try {
-			$id              = is_a( $id, 'ThemeGrill\Masteriyo\Database\Model' ) ? $id->get_id() : $id;
-			$course_progress = masteriyo_get_course_progress( $id );
+			$id                   = is_a( $id, 'ThemeGrill\Masteriyo\Database\Model' ) ? $id->get_id() : $id;
+			$course_progress_item = masteriyo_get_course_progress_item( $id );
 		} catch ( \Exception $e ) {
 			return false;
 		}
 
-		return $course_progress;
+		return $course_progress_item;
 	}
 
 	/**
@@ -264,7 +265,7 @@ class CourseProgressItemsController extends CrudController {
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
 		$context = ! empty( $request['context'] ) ? $request['context'] : 'view';
-		$data    = $this->get_course_progress_data( $object, $context );
+		$data    = $this->get_course_progress_item_data( $object, $context );
 
 		$data     = $this->add_additional_fields_to_object( $data, $request );
 		$data     = $this->filter_response_by_context( $data, $context );
@@ -291,21 +292,23 @@ class CourseProgressItemsController extends CrudController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param CourseProgress  $course_progress User activity instance.
+	 * @param CourseProgress  $course_progress_item User activity instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
-	protected function get_course_progress_data( $course_progress, $context = 'view' ) {
+	protected function get_course_progress_item_data( $course_progress_item, $context = 'view' ) {
 		$data = array(
-			'id'            => $course_progress->get_id( $context ),
-			'user_id'       => $course_progress->get_user_id( $context ),
-			'course_id'     => $course_progress->get_course_id( $context ),
-			'status'        => $course_progress->get_status( $context ),
-			'date_start'    => masteriyo_rest_prepare_date_response( $course_progress->get_date_start( $context ) ),
-			'date_update'   => masteriyo_rest_prepare_date_response( $course_progress->get_date_update( $context ) ),
-			'date_complete' => masteriyo_rest_prepare_date_response( $course_progress->get_date_complete( $context ) ),
+			'id'            => $course_progress_item->get_id( $context ),
+			'user_id'       => $course_progress_item->get_user_id( $context ),
+			'item_id'       => $course_progress_item->get_item_id( $context ),
+			'progress_id'   => $course_progress_item->get_progress_id( $context ),
+			'type'          => $course_progress_item->get_type( $context ),
+			'status'        => $course_progress_item->get_status( $context ),
+			'date_start'    => masteriyo_rest_prepare_date_response( $course_progress_item->get_date_start( $context ) ),
+			'date_update'   => masteriyo_rest_prepare_date_response( $course_progress_item->get_date_update( $context ) ),
+			'date_complete' => masteriyo_rest_prepare_date_response( $course_progress_item->get_date_complete( $context ) ),
 		);
 
 		return $data;
@@ -372,11 +375,13 @@ class CourseProgressItemsController extends CrudController {
 				'progress_id'   => array(
 					'description' => __( 'Course progress ID.', 'masteriyo' ),
 					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'user_id'       => array(
 					'description' => __( 'User ID.', 'masteriyo' ),
 					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'item_id'       => array(
@@ -431,43 +436,49 @@ class CourseProgressItemsController extends CrudController {
 	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		$id              = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$course_progress = masteriyo( 'course-progress' );
+		$id                   = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
+		$course_progress_item = masteriyo( 'course-progress-item' );
 
 		if ( 0 !== $id ) {
-			$course_progress->set_id( $id );
-			$course_progress_repo = masteriyo( 'course-progress.store' );
-			$course_progress_repo->read( $course_progress );
+			$course_progress_item->set_id( $id );
+			$course_progress_item_repo = masteriyo( 'course-progress-item.store' );
+			$course_progress_item_repo->read( $course_progress_item );
 		}
 
-		try {
-			$user_id = $this->validate_user_id( $request, $creating );
-			$course_progress->set_user_id( $user_id );
+		if ( isset( $request['progress_id'] ) ) {
+			$course_progress_item->set_progress_id( $request['progress_id'] );
+		}
 
-			$course_id = $this->validate_course_id( $request, $creating );
-			$course_progress->set_course_id( $course_id );
-		} catch ( RestException $e ) {
-			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
+		if ( isset( $request['item_id'] ) ) {
+			$course_progress_item->set_item_id( $request['item_id'] );
+		}
+
+		if ( isset( $request['item_type'] ) ) {
+			$course_progress_item->set_type( $request['item_type'] );
+		}
+
+		if ( isset( $request['user_id'] ) ) {
+			$course_progress_item->set_user_id( $request['user_id'] );
 		}
 
 		// Activity status.
 		if ( isset( $request['status'] ) ) {
-			$course_progress->set_status( $request['status'] );
+			$course_progress_item->set_status( $request['status'] );
 		}
 
 		// Activity start date.
 		if ( isset( $request['date_start'] ) ) {
-			$course_progress->set_date_start( $request['date_start'] );
+			$course_progress_item->set_date_start( $request['date_start'] );
 		}
 
 		// Activity update date.
 		if ( isset( $request['date_update'] ) ) {
-			$course_progress->set_date_update( $request['date_update'] );
+			$course_progress_item->set_date_update( $request['date_update'] );
 		}
 
 		// Activity complete date.
 		if ( isset( $request['date_complete'] ) ) {
-			$course_progress->set_date_complete( $request['date_complete'] );
+			$course_progress_item->set_date_complete( $request['date_complete'] );
 		}
 
 		/**
@@ -478,11 +489,11 @@ class CourseProgressItemsController extends CrudController {
 		 *
 		 * @since 0.1.0
 		 *
-		 * @param Model         $course_progress  Object object.
+		 * @param Model         $course_progress_item  Object object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */
-		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $course_progress, $request, $creating );
+		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $course_progress_item, $request, $creating );
 	}
 
 	/**
@@ -493,8 +504,8 @@ class CourseProgressItemsController extends CrudController {
 	 * @return array
 	 */
 	protected function get_objects( $query_args ) {
-		$query   = new CourseProgressQuery( $query_args );
-		$objects = $query->get_course_progress();
+		$query   = new CourseProgressItemQuery( $query_args );
+		$objects = $query->get_course_progress_items();
 
 		$total_items = count( $objects );
 

@@ -9,8 +9,9 @@
 
 namespace ThemeGrill\Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\User;
+use ThemeGrill\Masteriyo\Database\Model;
+use ThemeGrill\Masteriyo\ModelException;
 
 /**
  * UserRepository class.
@@ -108,13 +109,17 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @param Model $user User object.
 	 *
-	 * @throws \Exception If invalid user.
+	 * @throws ModelException If invalid user.
 	 */
 	public function read( Model &$user ) {
 		$user_obj = get_user_by( 'id', $user->get_id() );
 
 		if ( ! $user->get_id() || ! $user_obj ) {
-			throw new \Exception( __( 'Invalid user.', 'masteriyo' ) );
+			throw new ModelException(
+				'masteriyo_invalid_user_id',
+				__( 'Invalid user.', 'masteriyo' ),
+				400
+			);
 		}
 
 		$user->set_props(

@@ -69,9 +69,9 @@ class CourseProgressItem extends Model {
 	protected $data = array(
 		'user_id'       => 0,
 		'item_id'       => 0,
-		'course_id'     => 0,
+		'progress_id'   => 0,
 		'type'          => '',
-		'status'        => 'begin',
+		'status'        => 'start',
 		'date_start'    => null,
 		'date_update'   => null,
 		'date_complete' => null,
@@ -148,8 +148,8 @@ class CourseProgressItem extends Model {
 
 	 * @return int
 	 */
-	public function get_course_id( $context = 'view' ) {
-		return $this->get_prop( 'course_id', $context );
+	public function get_progress_id( $context = 'view' ) {
+		return $this->get_prop( 'progress_id', $context );
 	}
 
 	/**
@@ -247,10 +247,10 @@ class CourseProgressItem extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	* @param int $course_id Course ID.
+	* @param int $progress_id Course ID.
 	 */
-	public function set_course_id( $course_id ) {
-		$this->set_prop( 'course_id', absint( $course_id ) );
+	public function set_progress_id( $progress_id ) {
+		$this->set_prop( 'progress_id', absint( $progress_id ) );
 	}
 
 	/**

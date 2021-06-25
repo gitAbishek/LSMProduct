@@ -25,9 +25,9 @@ class CourseQuestionAnswerServiceProvider extends AbstractServiceProvider {
 	 * @var array
 	 */
 	protected $provides = array(
-		'course_qa',
-		'course_qa.store',
-		'course_qa.rest',
+		'course-qa',
+		'course-qa.store',
+		'course-qa.rest',
 		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseQuestionAnswersController',
 	);
 
@@ -40,15 +40,15 @@ class CourseQuestionAnswerServiceProvider extends AbstractServiceProvider {
 	 * @since 0.1.0
 	 */
 	public function register() {
-		$this->getContainer()->add( 'course_qa.store', CourseQuestionAnswerRepository::class );
+		$this->getContainer()->add( 'course-qa.store', CourseQuestionAnswerRepository::class );
 
-		$this->getContainer()->add( 'course_qa.rest', CourseQuestionAnswersController::class )
+		$this->getContainer()->add( 'course-qa.rest', CourseQuestionAnswersController::class )
 		->addArgument( 'permission' );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseQuestionAnswersController' )
 		->addArgument( 'permission' );
 
-		$this->getContainer()->add( 'course_qa', CourseQuestionAnswer::class )
-		->addArgument( 'course_qa.store' );
+		$this->getContainer()->add( 'course-qa', CourseQuestionAnswer::class )
+		->addArgument( 'course-qa.store' );
 	}
 }

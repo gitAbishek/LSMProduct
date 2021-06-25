@@ -43,7 +43,7 @@ class CourseQuestionAnswerQuery extends ObjectQuery {
 	 */
 	public function get_course_qas() {
 		$args    = apply_filters( 'masteriyo_course_qa_object_query_args', $this->get_query_vars() );
-		$results = masteriyo( 'course_qa.store' )->query( $args );
+		$results = masteriyo( 'course-qa.store' )->query( $args );
 		return apply_filters( 'masteriyo_course_qa_object_query', $results, $args );
 	}
 }

@@ -224,8 +224,8 @@ function masteriyo_get_course_reviews( $args = array() ) {
  * @return CourseQuestionAnswer|null
  */
 function masteriyo_get_course_qa( $course_qa ) {
-	$course_qa_obj   = masteriyo( 'course_qa' );
-	$course_qa_store = masteriyo( 'course_qa.store' );
+	$course_qa_obj   = masteriyo( 'course-qa' );
+	$course_qa_store = masteriyo( 'course-qa.store' );
 
 	if ( is_a( $course_qa, 'ThemeGrill\Masteriyo\Models\CourseReview' ) ) {
 		$id = $course_qa->get_id();

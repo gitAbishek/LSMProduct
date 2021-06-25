@@ -168,9 +168,9 @@ class CourseQuestionAnswersController extends CommentsController {
 			} else {
 				$id = is_a( $object, '\WP_Comment' ) ? $object->comment_ID : $object->get_id();
 			}
-			$mto_course_qa = masteriyo( 'course_qa' );
+			$mto_course_qa = masteriyo( 'course-qa' );
 			$mto_course_qa->set_id( $id );
-			$mto_course_qa_repo = masteriyo( 'course_qa.store' );
+			$mto_course_qa_repo = masteriyo( 'course-qa.store' );
 			$mto_course_qa_repo->read( $mto_course_qa );
 		} catch ( \Exception $e ) {
 			return false;
@@ -436,12 +436,12 @@ class CourseQuestionAnswersController extends CommentsController {
 	protected function prepare_object_for_database( $request, $creating = false ) {
 
 		$id            = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
-		$mto_course_qa = masteriyo( 'course_qa' );
+		$mto_course_qa = masteriyo( 'course-qa' );
 		$user          = masteriyo_get_current_user();
 
 		if ( 0 !== $id ) {
 			$mto_course_qa->set_id( $id );
-			$mto_course_qa_repo = masteriyo( 'course_qa.store' );
+			$mto_course_qa_repo = masteriyo( 'course-qa.store' );
 			$mto_course_qa_repo->read( $mto_course_qa );
 		}
 

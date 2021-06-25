@@ -28,7 +28,9 @@
       "includes/Helper/Course.php",
       "includes/Helper/UserActivity.php",
       "includes/Helper/UserCourse.php",
-      "includes/Helper/question.php"
+      "includes/Helper/question.php",
+      "includes/Helper/course-progress.php"
+
     ],
     "psr-4": {
       "ThemeGrill\\Masteriyo\\": "includes/"

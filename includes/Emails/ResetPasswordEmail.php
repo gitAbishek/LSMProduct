@@ -58,7 +58,7 @@ class ResetPasswordEmail extends Email {
 		$user = masteriyo_get_user( $user_id );
 
 		// Bail early if user doesn't exist.
-		if ( is_null( $user ) ) {
+		if ( is_wp_error( $user ) ) {
 			return;
 		}
 

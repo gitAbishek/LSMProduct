@@ -9,6 +9,7 @@ namespace ThemeGrill\Masteriyo\Repository;
 
 use ThemeGrill\Masteriyo\MetaData;
 use ThemeGrill\Masteriyo\Database\Model;
+use ThemeGrill\Masteriyo\ModelException;
 use ThemeGrill\Masteriyo\Models\UserActivity;
 use ThemeGrill\Masteriyo\Repository\AbstractRepository;
 
@@ -44,6 +45,18 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	public function create( Model &$course_progress_item ) {
 		global $wpdb;
 
+		// Bail early if the course progress is not valid.
+		$course_progress = masteriyo_get_course_progress( $course_progress_item->get_progress_id() );
+		if ( is_wp_error( $course_progress ) ) {
+			return $course_progress;
+		}
+
+		// Bail early if the user id is invalid.
+		$user = masteriyo_get_user( $course_progress_item->get_user_id() );
+		if ( is_wp_error( $user ) ) {
+			return $user;
+		}
+
 		if ( ! $course_progress_item->get_date_start( 'edit' ) ) {
 			$course_progress_item->set_date_start( current_time( 'mysql', true ) );
 		}
@@ -62,7 +75,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 				array(
 					'user_id'         => $course_progress_item->get_user_id( 'edit' ),
 					'item_id'         => $course_progress_item->get_item_id( 'edit' ),
-					'parent_id'       => $xourse_progress_item->get_progress_id( 'edit' ),
+					'parent_id'       => $course_progress_item->get_progress_id( 'edit' ),
 					'activity_type'   => $course_progress_item->get_type( 'edit' ),
 					'activity_status' => $course_progress_item->get_status( 'edit' ),
 					'date_start'      => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_date_start( 'edit' )->getTimestamp() ),
@@ -108,19 +121,30 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 		);
 
 		if ( array_intersect( $course_progress_item_data_keys, array_keys( $changes ) ) ) {
-			$date_complete = $course_progress_item->get_date_complete( 'edit' );
-			$date_complete = is_null( $date_complete ) ? '' : gmdate( 'Y-m-d H:i:s', $date_complete->getTimestamp() );
+			// Set the complete date if the status is complete.
+			$date_complete = '';
+			if ( 'complete' === $course_progress_item->get_status( 'edit' ) ) {
+				$date_complete = $course_progress_item->get_date_complete( 'edit' );
+				$date_complete = is_null( $date_complete ) ? '' : gmdate( 'Y-m-d H:i:s', $date_complete->getTimestamp() );
+			}
+
+			// Set the update if there is any change and the user hasn't set the update value manually.
+			$date_update = gmdate( 'Y-m-d H:i:s', $course_progress_item->get_date_update( 'edit' )->getTimestamp() );
+			if ( ! in_array( 'date_update', array_keys( $changes ), true ) ) {
+				$date_update = $course_progress_item->get_date_update( 'edit' );
+				$date_update = is_null( $date_update ) ? '' : gmdate( 'Y-m-d H:i:s', $date_update->getTimestamp() );
+			}
 
 			$wpdb->update(
 				$course_progress_item->get_table_name(),
 				array(
 					'user_id'         => $course_progress_item->get_user_id( 'edit' ),
 					'item_id'         => $course_progress_item->get_item_id( 'edit' ),
-					'parent_id'       => $course_progress_item->get_course_id( 'edit' ),
+					'parent_id'       => $course_progress_item->get_progress_id( 'edit' ),
 					'activity_type'   => $course_progress_item->get_type( 'edit' ),
 					'activity_status' => $course_progress_item->get_status( 'edit' ),
 					'date_start'      => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_date_start( 'edit' )->getTimestamp() ),
-					'date_update'     => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_date_update( 'edit' )->getTimestamp() ),
+					'date_update'     => $date_update,
 					'date_complete'   => $date_complete,
 				),
 				array( 'id' => $course_progress_item->get_id() )
@@ -166,7 +190,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	 *
 	 * @param CourseProgress $course_progress_item Course progress object.
 	 *
-	 * @throws Exception If invalid course progress object object.
+	 * @throws ModelException If invalid course progress object object.
 	 */
 	public function read( &$course_progress_item ) {
 		global $wpdb;
@@ -179,7 +203,11 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 		);
 
 		if ( ! $result ) {
-			throw new \Exception( __( 'Invalid course progress.', 'masteriyo' ) );
+			throw new ModelException(
+				'masteriyo_invalid_course_progress_item',
+				__( 'Invalid course progress item ID.', 'masteriyo' ),
+				400
+			);
 		}
 
 		$course_progress_item->set_props(
@@ -196,7 +224,6 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 		);
 
 		$course_progress_item->read_meta_data();
-		$this->read_course_progress_items( $course_progress_item );
 		$course_progress_item->set_object_read( true );
 
 		do_action( 'masteriyo_course_progress_item_read', $course_progress_item->get_id(), $course_progress_item );
@@ -221,7 +248,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	 * @since 0.1.0
 	 *
 	 * @param array $query_vars Query vars.
-	 * @return CourseProgress[]
+	 * @return CourseProgressItem[]
 	 */
 	public function query( $query_vars ) {
 		global $wpdb;
@@ -275,6 +302,6 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 
 		$ids = wp_list_pluck( $course_progress_item, 'id' );
 
-		return array_filter( array_map( 'masteriyo_get_course_progress', $ids ) );
+		return array_filter( array_map( 'masteriyo_get_course_progress_item', $ids ) );
 	}
 }

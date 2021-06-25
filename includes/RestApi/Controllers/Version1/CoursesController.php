@@ -258,7 +258,7 @@ class CoursesController extends PostsController {
 	protected function get_course_data( $course, $context = 'view' ) {
 		$author = masteriyo_get_user( $course->get_author_id( $context ) );
 
-		if ( ! is_null( $author ) ) {
+		if ( ! is_wp_error( $author ) ) {
 			$author = array(
 				'id'           => $author->get_id(),
 				'display_name' => $author->get_display_name(),

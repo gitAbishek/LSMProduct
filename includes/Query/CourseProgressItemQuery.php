@@ -48,7 +48,7 @@ class CourseProgressItemQuery extends ObjectQuery {
 	 *
 	 * @return array|CourseProgressItem Course progress item objects
 	 */
-	public function get_course_progress() {
+	public function get_course_progress_items() {
 		$args    = apply_filters( 'masteriyo_course_progress_item_object_query_args', $this->get_query_vars() );
 		$results = masteriyo( 'course-progress-item.store' )->query( $args );
 		return apply_filters( 'masteriyo_course_progress_item_object_query', $results, $args );

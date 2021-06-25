@@ -9,6 +9,7 @@ namespace ThemeGrill\Masteriyo\Repository;
 
 use ThemeGrill\Masteriyo\MetaData;
 use ThemeGrill\Masteriyo\Database\Model;
+use ThemeGrill\Masteriyo\ModelException;
 use ThemeGrill\Masteriyo\Models\UserActivity;
 use ThemeGrill\Masteriyo\Repository\AbstractRepository;
 
@@ -170,26 +171,30 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	public function read( &$course_progress ) {
 		global $wpdb;
 
-		$result = $wpdb->get_row(
+		$progress_obj = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$wpdb->prefix}masteriyo_user_activities WHERE id = %d;",
 				$course_progress->get_id()
 			)
 		);
 
-		if ( ! $result ) {
-			throw new \Exception( __( 'Invalid course progress.', 'masteriyo' ) );
+		if ( ! $progress_obj || 'course_progress' !== $progress_obj->activity_type ) {
+			throw new ModelException(
+				'masteriyo_invalid_course_progress_id',
+				__( 'Invalid course progress ID.', 'masteriyo' ),
+				400
+			);
 		}
 
 		$course_progress->set_props(
 			array(
-				'user_id'       => $result->user_id,
-				'course_id'     => $result->item_id,
-				'type'          => $result->activity_type,
-				'status'        => $result->activity_status,
-				'date_start'    => $this->string_to_timestamp( $result->date_start ),
-				'date_update'   => $this->string_to_timestamp( $result->date_update ),
-				'date_complete' => $this->string_to_timestamp( $result->date_complete ),
+				'user_id'       => $progress_obj->user_id,
+				'course_id'     => $progress_obj->item_id,
+				'type'          => $progress_obj->activity_type,
+				'status'        => $progress_obj->activity_status,
+				'date_start'    => $this->string_to_timestamp( $progress_obj->date_start ),
+				'date_update'   => $this->string_to_timestamp( $progress_obj->date_update ),
+				'date_complete' => $this->string_to_timestamp( $progress_obj->date_complete ),
 			)
 		);
 

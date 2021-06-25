@@ -32,7 +32,6 @@ class CourseProgressItemServiceProvider extends AbstractServiceProvider {
 		'course-progress-item',
 		'course-progress-item.store',
 		'course-progress-item.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseProgressItemsController',
 	);
 
 	/**
@@ -47,11 +46,7 @@ class CourseProgressItemServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'course-progress-item.store', CourseProgressItemRepository::class );
 
 		$this->getContainer()
-			->add( 'course-progress-item.rest', CourseProgressItemController::class )
-			->addArgument( 'permission' );
-
-		$this->getContainer()
-			->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseProgressItemController' )
+			->add( 'course-progress-item.rest', CourseProgressItemsController::class )
 			->addArgument( 'permission' );
 
 		$this->getContainer()

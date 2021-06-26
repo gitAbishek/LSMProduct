@@ -1,4 +1,3 @@
-import React from 'react';
 import {
 	Center,
 	CircularProgress,
@@ -6,16 +5,20 @@ import {
 	Text,
 	VStack,
 } from '@chakra-ui/react';
+import React from 'react';
 import { useTimer } from 'react-timer-hook';
 
 interface Props {
-	expiryTimestamp: any;
+	duration: number;
 }
 const FloatingTimer: React.FC<Props> = (props) => {
-	const { expiryTimestamp } = props;
+	const { duration } = props;
+
+	const time = new Date();
+	const timeStamp = time.setMinutes(time.getMinutes() + duration);
 
 	const { seconds, minutes } = useTimer({
-		expiryTimestamp,
+		expiryTimestamp: timeStamp,
 		onExpire: () => console.warn('onExpire called'),
 	});
 	return (

@@ -41,8 +41,6 @@ const QuizStart: React.FC<Props> = (props) => {
 		},
 	};
 
-	console.log(quizData.duration);
-
 	return (
 		<Stack direction="column" spacing="8">
 			<List

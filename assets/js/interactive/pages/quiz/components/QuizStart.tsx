@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import humanizeDuration from 'humanize-duration';
+import { useStateMachine } from 'little-state-machine';
 import React from 'react';
 import {
 	BiCheckCircle,
@@ -19,13 +20,16 @@ import {
 	BiTime,
 } from 'react-icons/bi';
 import { QuizSchema } from '../../../../back-end/schemas';
-
+import { updateQuizProgress } from '../../../actions';
 interface Props {
 	quizData: QuizSchema;
 }
 
 const QuizStart: React.FC<Props> = (props) => {
 	const { quizData } = props;
+	const { actions } = useStateMachine({
+		updateQuizProgress,
+	});
 
 	const listItemStyles = {
 		d: 'flex',
@@ -41,7 +45,12 @@ const QuizStart: React.FC<Props> = (props) => {
 		},
 	};
 
-	console.log(quizData.duration);
+	const onStartClick = () => {
+		console.log('clicked');
+		actions.updateQuizProgress({
+			quizProgress: { [quizData.id]: { startedOn: Date.now() } },
+		});
+	};
 
 	return (
 		<Stack direction="column" spacing="8">
@@ -78,7 +87,7 @@ const QuizStart: React.FC<Props> = (props) => {
 
 			<ButtonGroup>
 				<Button
-					type="submit"
+					onClick={onStartClick}
 					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"

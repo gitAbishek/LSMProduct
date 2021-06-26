@@ -30,5 +30,5 @@
     "webpack",
     "jest"
   ],
-  "include": ["assets/js/back-end", "assets/js/back-end/types/custom.d.ts"]
+  "include": ["./assets/js/back-end/**/*", "./assets/js/interactive/**/*"]
 }

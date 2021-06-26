@@ -62,7 +62,7 @@ function validateData(generalWatchData?: any) {
 
 const Preview = ({ watchData }) => {
 	if ('undefined' != typeof watchData.general) {
-		let currencySymbol: string;
+		let currencySymbol: any;
 
 		const {
 			currency,

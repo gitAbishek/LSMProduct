@@ -13,7 +13,7 @@ import {
 import React from 'react';
 import { BiMinus, BiPlay, BiPlus, BiTimer } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-import routes from '../constants/routes';
+import { getNavigationRoute } from './FloatingNavigation';
 
 interface Props {
 	courseId: number;
@@ -69,9 +69,11 @@ const SidebarItem: React.FC<Props> = (props) => {
 											px="3"
 											py="3">
 											<Link
-												to={routes.lesson
-													.replace(':lessonId', content.id.toString())
-													.replace(':courseId', courseId.toString())}>
+												to={getNavigationRoute(
+													content.id,
+													content.type,
+													courseId
+												)}>
 												<Stack direction="row" spacing="2" alignItems="center">
 													<Icon
 														as={content.type === 'quiz' ? BiTimer : BiPlay}

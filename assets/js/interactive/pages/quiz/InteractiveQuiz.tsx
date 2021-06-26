@@ -1,4 +1,5 @@
 import { Box, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import { useStateMachine } from 'little-state-machine';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
@@ -14,8 +15,9 @@ import QuizStart from './components/QuizStart';
 const InteractiveQuiz = () => {
 	const { quizId }: any = useParams();
 	const quizAPI = new API(urls.quizes);
+	const { state } = useStateMachine();
 
-	// 10 minutes timer
+	const startedOn = state?.quizProgress[quizId]?.startedOn || false;
 
 	const quizQuery = useQuery<QuizSchema, Error>(
 		[`section${quizId}`, quizId],
@@ -39,10 +41,14 @@ const InteractiveQuiz = () => {
 					navigation={quizQuery?.data?.navigation}
 					courseId={quizQuery?.data?.course_id}
 				/>
-				<FloatingTimer
-					duration={quizQuery?.data?.duration}
-					quizId={quizQuery?.data?.id}
-				/>
+				{startedOn && (
+					<FloatingTimer
+						startedOn={startedOn}
+						duration={quizQuery?.data?.duration}
+						quizId={quizQuery?.data?.id}
+					/>
+				)}
+
 				<ContentNav
 					navigation={quizQuery?.data?.navigation}
 					courseId={quizQuery?.data?.course_id}

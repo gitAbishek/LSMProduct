@@ -27,8 +27,7 @@ interface Props {
 
 const QuizStart: React.FC<Props> = (props) => {
 	const { quizData } = props;
-
-	const { actions, state } = useStateMachine({
+	const { actions } = useStateMachine({
 		updateQuizProgress,
 	});
 
@@ -49,12 +48,9 @@ const QuizStart: React.FC<Props> = (props) => {
 	const onStartClick = () => {
 		console.log('clicked');
 		actions.updateQuizProgress({
-			quizProgress: { id: quizData?.id, startedOn: Date.now() },
+			quizProgress: { [quizData.id]: { startedOn: Date.now() } },
 		});
 	};
-
-	console.log(state);
-	console.log(Date.now());
 
 	return (
 		<Stack direction="column" spacing="8">

@@ -15,9 +15,11 @@ interface Props {
 }
 const FloatingTimer: React.FC<Props> = (props) => {
 	const { duration, startedOn } = props;
+	const time = new Date(startedOn);
+	const formatDate = time.setMinutes(time.getMinutes() + duration);
 
-	const { seconds, minutes } = useTimer({
-		expiryTimestamp: startedOn + duration * 60 * 1000,
+	const { hours, seconds, minutes } = useTimer({
+		expiryTimestamp: formatDate,
 		onExpire: () => console.warn('onExpire called'),
 	});
 
@@ -42,7 +44,7 @@ const FloatingTimer: React.FC<Props> = (props) => {
 				<CircularProgressLabel fontSize="lg">
 					<VStack spacing="0">
 						<Text fontSize="lg" fontWeight="bold" color="gray.700">
-							{minutes}:{seconds}
+							{hours}:{minutes}:{seconds}
 						</Text>
 						<Text fontSize="10px" color="gray.500">
 							ANSWERED:{' '}

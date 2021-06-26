@@ -16,7 +16,6 @@ import React, { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { BiPlus } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
-
 import MediaAPI from '../../utils/media';
 
 interface Props {
@@ -111,7 +110,7 @@ const ImageUpload: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		setValue(name, imageId);
-	}, [imageId]);
+	}, [imageId, name, setValue]);
 
 	return (
 		<>

@@ -6,7 +6,7 @@ interface Props extends React.ComponentPropsWithRef<'button'> {}
 
 const AddNewButton = React.forwardRef<HTMLButtonElement, Props>(
 	(props, ref) => {
-		const { className, children, ...other } = props;
+		const { children, ...other } = props;
 		return (
 			<button ref={ref} {...other}>
 				<Stack direction="row" spacing="3" align="center" role="group">

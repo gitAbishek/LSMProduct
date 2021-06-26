@@ -13,10 +13,8 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
-import { Link as RouterLink } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
-
+import { BiBook, BiCog } from 'react-icons/bi';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 

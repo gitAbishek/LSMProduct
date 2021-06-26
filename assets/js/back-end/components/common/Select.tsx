@@ -3,10 +3,9 @@ import colors from 'Config/colors';
 import defaultStyle from 'Config/defaultStyle';
 import React from 'react';
 import ReactSelect, {
-	Props as ReactSelectProps,
 	components,
+	Props as ReactSelectProps,
 } from 'react-select';
-
 import {
 	FillInTheBlanks,
 	ImageMatching,
@@ -19,7 +18,7 @@ import {
 
 interface Props extends ReactSelectProps {}
 
-const Select = React.forwardRef<ReactSelectProps, Props>((props, ref) => {
+const Select = React.forwardRef<ReactSelectProps, Props>((props) => {
 	const customStyles = {
 		control: (provided: any, state: any) => ({
 			...provided,

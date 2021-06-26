@@ -24,7 +24,7 @@ interface Props {
 }
 
 const SidebarItem: React.FC<Props> = (props) => {
-	const { courseId, id, name, contents, contentsMap } = props;
+	const { courseId, name, contents, contentsMap } = props;
 	const newContents = contents?.map((contentId: any) => contentsMap[contentId]);
 
 	const centerStyles = {

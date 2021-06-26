@@ -1,13 +1,12 @@
 import { Center } from '@chakra-ui/layout';
-import { Box, useToast } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
 import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import React, { useState } from 'react';
-import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import { reorder } from '../../utils/reorder';

@@ -2,7 +2,6 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Center,
 	Container,
 	Divider,
 	Flex,
@@ -12,7 +11,6 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
-	Spinner,
 	Stack,
 	useToast,
 } from '@chakra-ui/react';
@@ -24,7 +22,6 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';

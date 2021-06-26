@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import 'focus-visible';
+import { StateMachineProvider } from 'little-state-machine';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import theme from '../back-end/theme/theme';
@@ -17,11 +18,13 @@ const App = () => {
 	});
 
 	return (
-		<ChakraProvider theme={theme}>
-			<QueryClientProvider client={queryClient}>
-				<Router />
-			</QueryClientProvider>
-		</ChakraProvider>
+		<StateMachineProvider>
+			<ChakraProvider theme={theme}>
+				<QueryClientProvider client={queryClient}>
+					<Router />
+				</QueryClientProvider>
+			</ChakraProvider>
+		</StateMachineProvider>
 	);
 };
 

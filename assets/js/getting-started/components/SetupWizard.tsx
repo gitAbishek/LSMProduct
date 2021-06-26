@@ -1,13 +1,11 @@
 import { Container, useToast } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
+import { Step, Steps, useSteps } from 'chakra-ui-steps';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
-
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
 import * as screens from '../screens';
-import { Step, Steps, useSteps } from 'chakra-ui-steps';
 
 // Global variable.
 declare var _MASTERIYO_: any;
@@ -22,7 +20,7 @@ const SetupWizard: React.FC = () => {
 	const settingAPI = new API(urls.settings);
 
 	const addMutation = useMutation((data?: any) => settingAPI.store(data), {
-		onSuccess: (data) => {
+		onSuccess: () => {
 			nextStep(); // To finish page.
 		},
 		onError: (error) => {

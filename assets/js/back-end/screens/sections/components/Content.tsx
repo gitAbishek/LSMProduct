@@ -5,7 +5,6 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogOverlay,
-	Box,
 	Button,
 	ButtonGroup,
 	Flex,
@@ -29,7 +28,6 @@ import {
 } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
-
 import { Sortable } from '../../../assets/icons';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';

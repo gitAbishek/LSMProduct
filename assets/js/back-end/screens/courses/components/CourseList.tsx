@@ -31,8 +31,7 @@ import {
 	BiTrash,
 } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
-
+import { Link as RouterLink } from 'react-router-dom';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
@@ -49,7 +48,6 @@ interface Props {
 
 const CourseList: React.FC<Props> = (props) => {
 	const { id, name, price, categories, permalink, createdOn, author } = props;
-	const history = useHistory();
 	const queryClient = useQueryClient();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const courseAPI = new API(urls.courses);

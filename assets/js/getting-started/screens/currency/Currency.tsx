@@ -1,4 +1,6 @@
 import {
+	Alert,
+	AlertIcon,
 	Box,
 	Button,
 	ButtonGroup,
@@ -16,15 +18,13 @@ import {
 	Select,
 	Stack,
 	Text,
-	Alert,
-	AlertIcon,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import getSymbolFromCurrency from 'currency-symbol-map';
 import React from 'react';
+import CurrencyInput from 'react-currency-input-field';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { currency } from '../../../back-end/utils/currency';
-import getSymbolFromCurrency from 'currency-symbol-map';
-import CurrencyInput from 'react-currency-input-field';
 interface Props {
 	dashboardURL: string;
 	prevStep: () => void;
@@ -37,26 +37,25 @@ function validateData(generalWatchData?: any) {
 		const regex: any = /\d/;
 
 		const { decimal_separator, thousands_separator } = generalWatchData;
-		let data: { message: string; isBtnEnable?: boolean };
 
 		if (regex.test(decimal_separator) || regex.test(thousands_separator)) {
-			return (data = {
+			return {
 				message: "Thousand and decimal separator can't be number.",
 				isBtnEnable: false,
-			});
+			};
 		} else if (
 			'undefined' != typeof thousands_separator &&
 			decimal_separator === thousands_separator
 		) {
-			return (data = {
+			return {
 				message: "Thousand and decimal separator can't be same.",
 				isBtnEnable: false,
-			});
+			};
 		} else {
-			return (data = {
+			return {
 				message: 'Validate successfully',
 				isBtnEnable: true,
-			});
+			};
 		}
 	}
 }

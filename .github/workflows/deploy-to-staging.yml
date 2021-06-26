@@ -45,6 +45,11 @@ jobs:
       - name: Install php dependencies
         run: composer install
 
+      - name: Checking code and formattings
+        run: |
+          yarn lint
+          yarn prettier
+
       - name: Build the application
         run: |
           yarn build

@@ -1,7 +1,6 @@
-import { Box, ChakraProvider, Container } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
 import Router from './router/Router';
 import theme from './theme/theme';
 

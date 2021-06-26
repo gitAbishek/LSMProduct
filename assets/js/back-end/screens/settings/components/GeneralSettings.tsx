@@ -1,12 +1,12 @@
 import {
-	Stack,
 	Box,
 	Flex,
-	Heading,
 	FormControl,
 	FormLabel,
+	Heading,
 	Input,
 	Select,
+	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
@@ -25,7 +25,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		setValue('general.country', country);
-	}, [country]);
+	}, [country, setValue]);
 
 	return (
 		<Stack direction="column" spacing="8">

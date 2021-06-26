@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { FormControl, FormLabel } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import Select from 'Components/common/Select';
 import React from 'react';
@@ -9,7 +9,7 @@ interface Props {
 }
 const VideoSource: React.FC<Props> = (props) => {
 	const { defaultValue } = props;
-	const { control, register } = useFormContext();
+	const { control } = useFormContext();
 
 	const options = [
 		{ value: 'youtube', label: 'YouTube' },

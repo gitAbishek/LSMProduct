@@ -15,7 +15,6 @@ use ThemeGrill\Masteriyo\Helper\Permission;
 use ThemeGrill\Masteriyo\Models\Order\OrderItem;
 use ThemeGrill\Masteriyo\Exceptions\RestException;
 use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\UserActivitiesController;
 
 /**
  * User activities controller class.

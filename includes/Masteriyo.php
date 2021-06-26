@@ -212,7 +212,6 @@ class Masteriyo extends Container {
 					"{$namespace}\\CheckoutServiceProvider",
 					"{$namespace}\\PaymentGatewaysServiceProvider",
 					"{$namespace}\\CourseProgressServiceProvider",
-					"{$namespace}\\QuizProgressServiceProvider",
 					"{$namespace}\\UserCourseServiceProvider",
 					"{$namespace}\\CourseProgressItemServiceProvider",
 				)

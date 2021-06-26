@@ -5,20 +5,24 @@ import {
 	Text,
 	VStack,
 } from '@chakra-ui/react';
+import { useStateMachine } from 'little-state-machine';
 import React from 'react';
 import { useTimer } from 'react-timer-hook';
 
 interface Props {
 	duration: number;
+	quizId: number;
 }
 const FloatingTimer: React.FC<Props> = (props) => {
-	const { duration } = props;
+	const { duration, quizId } = props;
+	const { state } = useStateMachine();
 
-	const time = new Date();
-	const timeStamp = time.setMinutes(time.getMinutes() + duration);
+	// const time = new Date(state.);
+	// const timeStamp = time.setMinutes(time.getMinutes() + duration);
 
 	const { seconds, minutes } = useTimer({
-		expiryTimestamp: timeStamp,
+		expiryTimestamp:
+			state.quizProgress[quizId].startedOn + duration * 60 * 1000,
 		onExpire: () => console.warn('onExpire called'),
 	});
 	return (

@@ -54,6 +54,7 @@ const QuizStart: React.FC<Props> = (props) => {
 	};
 
 	console.log(state);
+	console.log(Date.now());
 
 	return (
 		<Stack direction="column" spacing="8">

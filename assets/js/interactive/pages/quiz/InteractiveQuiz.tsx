@@ -17,36 +17,41 @@ const InteractiveQuiz = () => {
 
 	// 10 minutes timer
 
-	const quizQuery = useQuery<QuizSchema>([`section${quizId}`, quizId], () =>
-		quizAPI.get(quizId)
+	const quizQuery = useQuery<QuizSchema, Error>(
+		[`section${quizId}`, quizId],
+		() => quizAPI.get(quizId),
+		{}
 	);
 
-	if (quizQuery.isLoading) {
-		return <FullScreenLoader />;
+	if (quizQuery.status === 'success') {
+		return (
+			<Container centerContent maxW="container.xl" py="16">
+				<Box bg="white" p="14" shadow="box" w="full">
+					<Stack direction="column" spacing="8">
+						<Heading as="h5">{quizQuery?.data?.name}</Heading>
+						<QuizStart quizData={quizQuery.data} />
+						<Text
+							dangerouslySetInnerHTML={{ __html: quizQuery?.data?.description }}
+						/>
+					</Stack>
+				</Box>
+				<FloatingNavigation
+					navigation={quizQuery?.data?.navigation}
+					courseId={quizQuery?.data?.course_id}
+				/>
+				<FloatingTimer
+					duration={quizQuery?.data?.duration}
+					quizId={quizQuery?.data?.id}
+				/>
+				<ContentNav
+					navigation={quizQuery?.data?.navigation}
+					courseId={quizQuery?.data?.course_id}
+				/>
+			</Container>
+		);
 	}
 
-	return (
-		<Container centerContent maxW="container.xl" py="16">
-			<Box bg="white" p="14" shadow="box" w="full">
-				<Stack direction="column" spacing="8">
-					<Heading as="h5">{quizQuery?.data?.name}</Heading>
-					<QuizStart quizData={quizQuery?.data} />
-					<Text
-						dangerouslySetInnerHTML={{ __html: quizQuery?.data?.description }}
-					/>
-				</Stack>
-			</Box>
-			<FloatingNavigation
-				navigation={quizQuery?.data?.navigation}
-				courseId={quizQuery?.data?.course_id}
-			/>
-			<FloatingTimer duration={quizQuery?.data?.duration} />
-			<ContentNav
-				navigation={quizQuery?.data?.navigation}
-				courseId={quizQuery?.data?.course_id}
-			/>
-		</Container>
-	);
+	return <FullScreenLoader />;
 };
 
 export default InteractiveQuiz;

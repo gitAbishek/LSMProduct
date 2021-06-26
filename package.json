@@ -100,6 +100,6 @@
     "build": "webpack --mode production",
     "dev": "gulp dev",
     "release": "gulp release",
-    "linkt": "eslint ./assets/js/back-end/*.tsx"
+    "lint": "eslint ./assets/js --ext ts,tsx"
   }
 }

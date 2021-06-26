@@ -10,7 +10,6 @@ namespace ThemeGrill\Masteriyo\Repository;
 use ThemeGrill\Masteriyo\MetaData;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\ModelException;
-use ThemeGrill\Masteriyo\Models\UserActivity;
 use ThemeGrill\Masteriyo\Repository\AbstractRepository;
 
 /**
@@ -210,7 +209,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param UserActivity $course_progress Course progress object.
+	 * @param CourseProgress $course_progress Course progress object.
 	 */
 	public function clear_cache( &$course_progress ) {
 		wp_cache_delete( 'item' . $course_progress->get_id(), 'masteriyo-course-progress' );

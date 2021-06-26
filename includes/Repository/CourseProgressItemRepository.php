@@ -10,7 +10,6 @@ namespace ThemeGrill\Masteriyo\Repository;
 use ThemeGrill\Masteriyo\MetaData;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\ModelException;
-use ThemeGrill\Masteriyo\Models\UserActivity;
 use ThemeGrill\Masteriyo\Repository\AbstractRepository;
 
 /**

@@ -110,7 +110,6 @@ class RestApi {
 			'courses.qas'           => "{$namespace}\\CourseQuestionAnswersController",
 			'courses.builder'       => "{$namespace}\\CourseBuilderController",
 			'quizzes.builder'       => "{$namespace}\\QuizBuilderController",
-			'user-activities'       => "{$namespace}\\UserActivitiesController",
 			'course-progress'       => "{$namespace}\\CourseProgressController",
 			'course-progress.items' => "{$namespace}\\CourseProgressItemsController",
 			'quiz-progress'         => "{$namespace}\\QuizProgressController",

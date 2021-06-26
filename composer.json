@@ -26,7 +26,6 @@
       "includes/Helper/Notice.php",
       "includes/Helper/Order.php",
       "includes/Helper/Course.php",
-      "includes/Helper/UserActivity.php",
       "includes/Helper/UserCourse.php",
       "includes/Helper/question.php",
       "includes/Helper/course-progress.php"

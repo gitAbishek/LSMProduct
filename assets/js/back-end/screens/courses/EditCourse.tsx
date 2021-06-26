@@ -1,7 +1,5 @@
 import { Box, Stack } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
 import React from 'react';
-
 import { CourseDataMap } from '../../types/course';
 import Categories from './components/Categories';
 import Description from './components/Description';

@@ -10,17 +10,6 @@ createStore({
 	quizProgress: {},
 });
 
-const updateQuizProgress = (
-	state: { quizProgress: any },
-	payload: { quizProgress: any }
-) => ({
-	...state,
-	quizProgress: {
-		...state.quizProgress,
-		...payload,
-	},
-});
-
 const App = () => {
 	const queryClient = new QueryClient({
 		defaultOptions: {

@@ -1,10 +1,25 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import 'focus-visible';
-import { StateMachineProvider } from 'little-state-machine';
+import { createStore, StateMachineProvider } from 'little-state-machine';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import theme from '../back-end/theme/theme';
 import Router from './router/Router';
+
+createStore({
+	quizProgress: {},
+});
+
+const updateQuizProgress = (
+	state: { quizProgress: any },
+	payload: { quizProgress: any }
+) => ({
+	...state,
+	quizProgress: {
+		...state.quizProgress,
+		...payload,
+	},
+});
 
 const App = () => {
 	const queryClient = new QueryClient({

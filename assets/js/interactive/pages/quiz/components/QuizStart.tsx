@@ -41,6 +41,8 @@ const QuizStart: React.FC<Props> = (props) => {
 		},
 	};
 
+	const onStartClick = () => {};
+
 	return (
 		<Stack direction="column" spacing="8">
 			<List
@@ -76,7 +78,7 @@ const QuizStart: React.FC<Props> = (props) => {
 
 			<ButtonGroup>
 				<Button
-					type="submit"
+					onClick={onStartClick}
 					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"

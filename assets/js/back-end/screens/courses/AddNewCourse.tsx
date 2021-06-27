@@ -13,6 +13,7 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -36,6 +37,7 @@ const AddNewCourse: React.FC = () => {
 	const history = useHistory();
 	const methods = useForm();
 	const courseAPI = new API(urls.courses);
+	const toast = useToast();
 
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -53,11 +55,7 @@ const AddNewCourse: React.FC = () => {
 		mr: '2',
 	};
 
-	const addMutation = useMutation((data) => courseAPI.store(data), {
-		onSuccess: (data) => {
-			history.push(routes.builder.replace(':courseId', data.id));
-		},
-	});
+	const addMutation = useMutation((data) => courseAPI.store(data));
 
 	const formatData = (data: any, status: string) => {
 		return {
@@ -74,13 +72,26 @@ const AddNewCourse: React.FC = () => {
 	// When saved as a draft
 	const onSaveAsDraft = (data: any) => {
 		console.log(mergeDeep(data, formatData(data, 'draft')));
-		addMutation.mutate(mergeDeep(data, formatData(data, 'draft')));
+		addMutation.mutate(mergeDeep(data, formatData(data, 'draft')), {
+			onSuccess: () => {
+				toast({
+					title: __('Added to draft', 'masteriyo'),
+					description: __('You can continue editing', 'masteriyo'),
+					isClosable: true,
+					status: 'success',
+				});
+			},
+		});
 	};
 
 	// On Add Course
 	const onSubmit = (data: any) => {
 		console.log(mergeDeep(data, formatData(data, 'publish')));
-		addMutation.mutate(mergeDeep(data, formatData(data, 'publish')));
+		addMutation.mutate(mergeDeep(data, formatData(data, 'publish')), {
+			onSuccess: (data: any) => {
+				history.push(routes.builder.replace(':courseId', data.id));
+			},
+		});
 	};
 
 	return (

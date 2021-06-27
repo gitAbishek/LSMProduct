@@ -181,13 +181,12 @@ class CourseProgressItemsController extends CrudController {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
-		$params['status'] = array(
-			'description'       => __( 'User activity status.', 'masteriyo' ),
-			'type'              => 'string',
-			'sanitize_callback' => 'sanitize_title',
+		$params['completed'] = array(
+			'description'       => __( 'Course progress item completed.', 'masteriyo' ),
+			'type'              => 'boolean',
+			'sanitize_callback' => 'masteriyo_string_to_bool',
 			'validate_callback' => 'rest_validate_request_arg',
-			'default'           => 'any',
-			'enum'              => masteriyo_get_user_activity_statuses(),
+			'default'           => true,
 		);
 
 		$params['date_start'] = array(
@@ -305,7 +304,7 @@ class CourseProgressItemsController extends CrudController {
 			'item_id'       => $course_progress_item->get_item_id( $context ),
 			'progress_id'   => $course_progress_item->get_progress_id( $context ),
 			'type'          => $course_progress_item->get_type( $context ),
-			'status'        => $course_progress_item->get_status( $context ),
+			'completed'     => $course_progress_item->get_completed( $context ),
 			'date_start'    => masteriyo_rest_prepare_date_response( $course_progress_item->get_date_start( $context ) ),
 			'date_update'   => masteriyo_rest_prepare_date_response( $course_progress_item->get_date_update( $context ) ),
 			'date_complete' => masteriyo_rest_prepare_date_response( $course_progress_item->get_date_complete( $context ) ),
@@ -395,10 +394,10 @@ class CourseProgressItemsController extends CrudController {
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'status'        => array(
-					'description' => __( 'Course progress item status.', 'masteriyo' ),
-					'type'        => 'string',
-					'enum'        => masteriyo_get_user_activity_statuses(),
+				'completed'     => array(
+					'description' => __( 'Course progress item completed.', 'masteriyo' ),
+					'type'        => 'boolean',
+					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_start'    => array(
@@ -461,9 +460,9 @@ class CourseProgressItemsController extends CrudController {
 			$course_progress_item->set_user_id( $request['user_id'] );
 		}
 
-		// Activity status.
-		if ( isset( $request['status'] ) ) {
-			$course_progress_item->set_status( $request['status'] );
+		// Course progress item completion.
+		if ( isset( $request['completed'] ) ) {
+			$course_progress_item->set_completed( $request['completed'] );
 		}
 
 		// Activity start date.
@@ -683,34 +682,5 @@ class CourseProgressItemsController extends CrudController {
 		}
 
 		return $user_id;
-	}
-
-	/**
-	 * Validate the course ID in the request.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param WP_REST_Request $request Request object.
-	 * @param bool            $creating If is creating a new object.
-	 *
-	 * @return WP_Error|Model
-	 */
-	protected function validate_course_id( $request, $creating = false ) {
-		$course_id = null;
-
-		// Course ID.
-		if ( isset( $request['course_id'] ) && ! empty( $request['course_id'] ) ) {
-			$course_id = $request['course_id'];
-
-			// Validate course ID.
-			$course_post = get_post( $course_id );
-			if ( ! $course_post || 'course' !== $course_post->post_type ) {
-				throw new RestException(
-					'masteriyo_rest_invalid_course_id',
-					__( 'Course ID is invalid.', 'masteriyo' ),
-					400
-				);
-			}
-		}
 	}
 }

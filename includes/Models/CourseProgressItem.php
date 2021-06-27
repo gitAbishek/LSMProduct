@@ -42,24 +42,6 @@ class CourseProgressItem extends Model {
 	protected $cache_group = 'course-progress-items';
 
 	/**
-	 * Course progress items (lesson, quiz) etc.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var array
-	 */
-	protected $items = array();
-
-	/**
-	 * Store items which are changed.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var array
-	 */
-	protected $item_changes = array();
-
-	/**
 	 * Stores user course progress data.
 	 *
 	 * @since 0.1.0
@@ -71,7 +53,7 @@ class CourseProgressItem extends Model {
 		'item_id'       => 0,
 		'progress_id'   => 0,
 		'type'          => '',
-		'status'        => 'start',
+		'completed'     => true,
 		'date_start'    => null,
 		'date_update'   => null,
 		'date_complete' => null,
@@ -166,16 +148,16 @@ class CourseProgressItem extends Model {
 	}
 
 	/**
-	 * Get course progress status.
+	 * Check whether the course progress item is completed or not.
 	 *
 	 * @since 0.1.0
 	 *
 	* @param  string $context What the value is for. valid values are view and edit.
 
-	 * @return int
+	 * @return boolean
 	 */
-	public function get_status( $context = 'view' ) {
-		return $this->get_prop( 'status', $context );
+	public function get_completed( $context = 'view' ) {
+		return $this->get_prop( 'completed', $context );
 	}
 
 	/**
@@ -265,14 +247,14 @@ class CourseProgressItem extends Model {
 	}
 
 	/**
-	 * Set course progress status.
+	 * Set course progress complete.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param  string $status Course progress status.
+	 * @param boolean $completed
 	 */
-	public function set_status( $status ) {
-		$this->set_prop( 'status', $status );
+	public function set_completed( $completed ) {
+		$this->set_prop( 'completed', masteriyo_string_to_bool( $completed ) );
 	}
 
 	/**

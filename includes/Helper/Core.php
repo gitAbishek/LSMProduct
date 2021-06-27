@@ -2769,24 +2769,3 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
 		'replies' => $replies,
 	);
 }
-
-/**
- * Get user ip address.
- *
- * @since 0.1.0
- *
- * @return string
- */
-function masteriyo_get_user_ip_address() {
-	if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-		//ip from share internet
-		$ip = $_SERVER['HTTP_CLIENT_IP'];
-	} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-		//ip pass from proxy
-		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-	} else {
-		$ip = $_SERVER['REMOTE_ADDR'];
-	}
-
-	return $ip;
-}

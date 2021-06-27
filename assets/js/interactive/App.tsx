@@ -1,9 +1,14 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import 'focus-visible';
+import { createStore, StateMachineProvider } from 'little-state-machine';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import theme from '../back-end/theme/theme';
 import Router from './router/Router';
+
+createStore({
+	quizProgress: {},
+});
 
 const App = () => {
 	const queryClient = new QueryClient({
@@ -17,11 +22,13 @@ const App = () => {
 	});
 
 	return (
-		<ChakraProvider theme={theme}>
-			<QueryClientProvider client={queryClient}>
-				<Router />
-			</QueryClientProvider>
-		</ChakraProvider>
+		<StateMachineProvider>
+			<ChakraProvider theme={theme}>
+				<QueryClientProvider client={queryClient}>
+					<Router />
+				</QueryClientProvider>
+			</ChakraProvider>
+		</StateMachineProvider>
 	);
 };
 

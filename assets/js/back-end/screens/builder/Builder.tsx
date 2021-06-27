@@ -23,7 +23,6 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Link as RouterLink, useHistory, useParams } from 'react-router-dom';
-
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
@@ -103,9 +102,7 @@ const Builder: React.FC = () => {
 					id: category.value,
 				})),
 			}),
-			...(data.regular_price && {
-				regular_price: data.regular_price.toString(),
-			}),
+			regular_price: `${data.regular_price}`,
 		};
 
 		updateCourse.mutate(mergeDeep(data, newData));

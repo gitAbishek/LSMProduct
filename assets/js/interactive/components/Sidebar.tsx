@@ -1,30 +1,30 @@
 import {
-	Box,
-	Drawer,
-	DrawerContent,
-	useDisclosure,
-	DrawerCloseButton,
-	DrawerBody,
-	DrawerHeader,
-	DrawerFooter,
-	IconButton,
 	Accordion,
-	Spinner,
-	DrawerOverlay,
 	Alert,
 	AlertTitle,
-	ButtonGroup,
+	Box,
 	Button,
+	ButtonGroup,
+	Drawer,
+	DrawerBody,
+	DrawerCloseButton,
+	DrawerContent,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerOverlay,
+	IconButton,
+	Spinner,
+	useDisclosure,
 } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { BiAlignLeft, BiInfoCircle, BiMenu } from 'react-icons/bi';
 import { useQuery } from 'react-query';
-import API from '../../back-end/utils/api';
-import urls from '../../back-end/constants/urls';
-import SidebarItem from './SidebarItem';
-import { CloseCone } from '../../back-end/constants/images';
-import { __ } from '@wordpress/i18n';
 import { useParams } from 'react-router-dom';
+import { CloseCone } from '../../back-end/constants/images';
+import urls from '../../back-end/constants/urls';
+import API from '../../back-end/utils/api';
+import SidebarItem from './SidebarItem';
 
 const Sidebar = () => {
 	const { courseId }: any = useParams();
@@ -76,12 +76,21 @@ const Sidebar = () => {
 	return (
 		<Box>
 			<IconButton
-				colorScheme="blue"
+				variant="unstyled"
+				color="white"
+				d="flex"
+				justifyContent="center"
 				position="fixed"
 				top="32"
 				fontSize="xl"
 				icon={<BiMenu />}
 				onClick={onOpen}
+				bgSize="cover"
+				minW="auto"
+				w="36px"
+				p="0"
+				h="60px"
+				bgImage={`url(${CloseCone})`}
 				aria-label="open sidebar"
 			/>
 			<Drawer isOpen={isOpen} placement="left" onClose={onClose}>

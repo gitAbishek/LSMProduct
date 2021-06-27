@@ -1,23 +1,23 @@
 import {
 	Box,
-	Icon,
-	Text,
 	Center,
 	HStack,
-	useDisclosure,
+	Icon,
 	Link,
+	Stack,
+	Text,
+	useDisclosure,
 } from '@chakra-ui/react';
+import React from 'react';
 import {
 	BiAlarm,
 	BiAlignLeft,
 	BiChevronLeft,
 	BiChevronRight,
 } from 'react-icons/bi';
-import React from 'react';
-import { Stack } from '@chakra-ui/react';
-import { ContentNavigationSchema } from '../schemas';
 import { Link as RouterLink } from 'react-router-dom';
 import routes from '../constants/routes';
+import { ContentNavigationSchema } from '../schemas';
 
 interface Props {
 	navigation: ContentNavigationSchema;
@@ -38,7 +38,7 @@ export const getNavigationRoute = (
 			.replace(':quizId', id.toString())
 			.replace(':courseId', courseId.toString());
 	}
-	return;
+	return '';
 };
 
 const FloatingNavigation: React.FC<Props> = (props) => {

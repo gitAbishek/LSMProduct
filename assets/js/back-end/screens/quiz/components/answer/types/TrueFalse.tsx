@@ -1,17 +1,17 @@
 import {
-	Flex,
-	Stack,
-	Icon,
-	Editable,
-	EditablePreview,
-	EditableInput,
-	Checkbox,
-	IconButton,
 	Box,
 	Button,
 	ButtonGroup,
+	Checkbox,
+	Editable,
+	EditableInput,
+	EditablePreview,
+	Flex,
 	Heading,
+	Icon,
+	IconButton,
 	Input,
+	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import { borderedBoxStyles, sectionHeaderStyles } from 'Config/styles';
@@ -55,7 +55,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		setValue('answers', answers);
-	}, [answers]);
+	}, [answers, setValue]);
 
 	return (
 		<Stack direction="column" spacing="6">

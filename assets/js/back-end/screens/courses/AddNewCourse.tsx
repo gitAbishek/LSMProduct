@@ -20,7 +20,6 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation } from 'react-query';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
-
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
@@ -60,19 +59,28 @@ const AddNewCourse: React.FC = () => {
 		},
 	});
 
-	const onSubmit = (data: any) => {
-		const newData: any = {
+	const formatData = (data: any, status: string) => {
+		return {
 			...(data.categories && {
 				categories: data.categories.map((category: any) => ({
 					id: category.value,
 				})),
 			}),
-			...(data.regular_price && {
-				regular_price: data.regular_price.toString(),
-			}),
+			regular_price: `${data.regular_price}`,
+			status: status,
 		};
+	};
 
-		addMutation.mutate(mergeDeep(data, newData));
+	// When saved as a draft
+	const onSaveAsDraft = (data: any) => {
+		console.log(mergeDeep(data, formatData(data, 'draft')));
+		addMutation.mutate(mergeDeep(data, formatData(data, 'draft')));
+	};
+
+	// On Add Course
+	const onSubmit = (data: any) => {
+		console.log(mergeDeep(data, formatData(data, 'publish')));
+		addMutation.mutate(mergeDeep(data, formatData(data, 'publish')));
 	};
 
 	return (
@@ -107,6 +115,12 @@ const AddNewCourse: React.FC = () => {
 									</TabList>
 								</Stack>
 								<ButtonGroup>
+									<Button
+										variant="outline"
+										onClick={methods.handleSubmit(onSaveAsDraft)}
+										isLoading={addMutation.isLoading}>
+										{__('Save as Draft', 'masteriyo')}
+									</Button>
 									<Button
 										colorScheme="blue"
 										onClick={methods.handleSubmit(onSubmit)}

@@ -37,7 +37,7 @@ function masteriyo_get_question( $question ) {
 	}
 
 	$type           = get_post_meta( $id, '_type', true );
-	$question_obj   = masteriyo( "question.${type}" );
+	$question_obj   = masteriyo( empty( $type ) ? 'question' : "question.{$type}" );
 	$question_store = masteriyo( 'question.store' );
 
 	if ( is_a( $question, 'ThemeGrill\Masteriyo\Models\Question' ) ) {

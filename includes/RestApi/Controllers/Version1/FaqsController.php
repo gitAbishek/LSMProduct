@@ -409,62 +409,6 @@ class FaqsController extends PostsController {
 	}
 
 	/**
-	 * Check if a given request has access to read items.
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return WP_Error|boolean
-	 */
-	public function get_items_permissions_check( $request ) {
-		if ( is_null( $this->permission ) ) {
-			return new \WP_Error(
-				'masteriyo_null_permission',
-				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
-			);
-		}
-
-		if ( ! $this->permission->rest_check_faqs_permissions( 'read' ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_read',
-				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		return true;
-	}
-
-	/**
-	 * Checks if a given request has access to get a specific item.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
-	 */
-	public function get_item_permissions_check( $request ) {
-		if ( is_null( $this->permission ) ) {
-			return new \WP_Error(
-				'masteriyo_null_permission',
-				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
-			);
-		}
-
-		if ( ! $this->permission->rest_check_faqs_permissions( 'read', absint( $request['id'] ) ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_read',
-				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		return true;
-	}
-
-	/**
 	 * Check if a given request has access to create an item.
 	 *
 	 * @since 0.1.0
@@ -480,12 +424,39 @@ class FaqsController extends PostsController {
 			);
 		}
 
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
 		if ( ! $this->permission->rest_check_faqs_permissions( 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		$course_id = absint( $request['course_id'] );
+		$course    = masteriyo_get_course( $course_id );
+
+		if ( is_null( $course ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_invalid_id",
+				__( 'Invalid course ID.', 'masteriyo' ),
+				array(
+					'status' => 404
+				)
+			);
+		}
+
+		if ( $course->get_author_id() !== get_current_user_id() ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you are not allowed to create faq for others course.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -513,34 +484,25 @@ class FaqsController extends PostsController {
 			return true;
 		}
 
-		$review = $this->get_object( absint( $request['id'] ) );
+		$id  = absint( $request['id'] );
+		$faq = masteriyo_get_faq( $id );
 
-		if ( ! is_object( $review ) ) {
+		if ( is_null( $faq ) ) {
 			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
+				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => 404
 				)
 			);
 		}
 
-		if ( get_current_user_id() !== $review->get_user_id() ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_delete',
-				__( 'Sorry, you are not allowed to delete this resource.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		if ( ! $this->permission->rest_check_faqs_permissions( 'delete', absint( $request['id'] ) ) ) {
+		if ( ! $this->permission->rest_check_faqs_permissions( 'delete', $id ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -568,34 +530,25 @@ class FaqsController extends PostsController {
 			return true;
 		}
 
-		$review = $this->get_object( absint( $request['id'] ) );
+		$id  = absint( $request['id'] );
+		$faq = masteriyo_get_faq( $id );
 
-		if ( ! is_object( $review ) ) {
+		if ( is_null( $faq ) ) {
 			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
+				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => 404
 				)
 			);
 		}
 
-		if ( get_current_user_id() !== $review->get_user_id() ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_update',
-				__( 'Sorry, you are not allowed to update this resource.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code()
-				)
-			);
-		}
-
-		if ( ! $this->permission->rest_check_faqs_permissions( 'edit', absint( $request['id'] ) ) ) {
+		if ( ! $this->permission->rest_check_faqs_permissions( 'update', $id ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}

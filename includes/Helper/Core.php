@@ -286,7 +286,7 @@ function masteriyo_get_quiz( $quiz ) {
 		$quiz_obj->set_id( $id );
 		$quiz_store->read( $quiz_obj );
 	} catch ( \Exception $e ) {
-		$quiz_obj = new \WP_Error( 'invalid_quiz_id', $e->getErrorMessage() );
+		$quiz_obj = new \WP_Error( 'invalid_quiz_id', $e->getMessage() );
 	}
 
 	return apply_filters( 'masteriyo_get_quiz', $quiz_obj, $quiz );

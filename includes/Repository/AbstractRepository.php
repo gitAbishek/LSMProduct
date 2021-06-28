@@ -715,8 +715,8 @@ abstract class AbstractRepository {
 				continue;
 			}
 
-			$value = $model->{"get_$prop"}( 'edit' );
-			$value = is_string( $value ) ? wp_slash( $value ) : $value;
+			$value   = $model->{"get_$prop"}( 'edit' );
+			$value   = is_string( $value ) ? wp_slash( $value ) : $value;
 			$updated = $this->update_or_delete_comment_meta( $model, $meta_key, $value );
 
 			if ( $updated ) {

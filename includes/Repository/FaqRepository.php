@@ -23,7 +23,10 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	 * @since 0.1.0
 	 * @var array
 	 */
-	protected $internal_meta_keys = array();
+	protected $internal_meta_keys = array(
+		'title'      => '_title',
+		'sort_order' => '_sort_order',
+	);
 
 	/**
 	 * Create a faq in the database.
@@ -33,35 +36,36 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	 * @param Model $faq Faq object.
 	 */
 	public function create( Model &$faq ) {
-		if ( ! $faq->get_date_created( 'edit' ) ) {
-			$faq->set_date_created( current_time( 'mysql', true ) );
+		if ( ! $faq->get_created_at( 'edit' ) ) {
+			$faq->set_created_at( current_time( 'mysql', true ) );
 		}
 
-		$id = wp_insert_post(
+		$id = wp_insert_comment(
 			apply_filters(
 				'masteriyo_new_faq_data',
 				array(
-					'post_type'      => 'faq',
-					'post_status'    => 'publish',
-					'post_author'    => get_current_user_id(),
-					'post_title'     => $faq->get_name(),
-					'post_content'   => $faq->get_description(),
-					'post_parent'    => $faq->get_course_id(),
-					'post_name'      => '',
-					'comment_status' => 'closed',
-					'ping_status'    => 'closed',
-					'menu_order'     => $faq->get_menu_order(),
-					'post_date'      => $faq->get_date_created( 'edit' ),
-					'post_date_gmt'  => $faq->get_date_created( 'edit' ),
+					'comment_author'       => $faq->get_user_name( 'edit' ),
+					'comment_author_email' => $faq->get_user_email( 'edit' ),
+					'comment_author_url'   => $faq->get_user_url( 'edit' ),
+					'comment_content'      => $faq->get_conent( 'edit' ),
+					'comment_date'         => $faq->get_created_at( 'edit' ),
+					'comment_date_gmt'     => $faq->get_created_at( 'edit' ),
+					'comment_post_ID'      => $faq->get_course_id( 'edit' ),
+					'comment_type'         => $faq->get_type(),
+					'user_id'              => $faq->get_user_id( 'edit' ),
+					'comment_agent'        => $faq->get_user_agent( 'edit' ),
+					'comment_author_IP'    => $faq->get_user_ip( 'edit' ),
 				),
 				$faq
-			)
+			),
+			true
 		);
 
 		if ( $id && ! is_wp_error( $id ) ) {
 			$faq->set_id( $id );
-			// TODO Invalidate caches.
+			$this->update_comment_meta( $faq, true );
 
+			$faq->save_meta_data();
 			$faq->apply_changes();
 
 			do_action( 'masteriyo_new_faq', $id, $faq );
@@ -78,20 +82,31 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	 * @throws \Exception If invalid faq.
 	 */
 	public function read( Model &$faq ) {
-		$faq_post = get_post( $faq->get_id() );
+		$faq_obj = get_comment( $faq->get_id() );
 
-		if ( ! $faq->get_id() || ! $faq_post || 'faq' !== $faq_post->post_type ) {
+		if ( ! $faq->get_id() || ! $faq_obj || $faq->get_type() !== $faq_obj->comment_type ) {
 			throw new \Exception( __( 'Invalid Faq.', 'masteriyo' ) );
 		}
 
+		// Map the comment status from numberical to word.
+		$status = $faq->comment_approved;
+		if ( '1' === $status ) {
+			$status = 'approve';
+		} elseif ( '0' === $status ) {
+			$status = 'hold';
+		}
 		$faq->set_props(
 			array(
-				'name'          => $faq_post->post_title,
-				'date_created'  => $faq_post->post_date_gmt,
-				'date_modified' => $faq_post->post_modified_gmt,
-				'description'   => $faq_post->post_content,
-				'course_id'     => $faq_post->post_parent,
-				'menu_order'    => $faq_post->menu_order,
+				'content'    => $faq->comment_type,
+				'course_id'  => $faq->comment_post_ID,
+				'user_id'    => $faq->user_id,
+				'user_name'  => $faq->comment_author,
+				'user_email' => $faq->comment_author_email,
+				'user_url'   => $faq->comment_author_url,
+				'user_ip'    => $faq->comment_author_IP,
+				'user_agent' => $faq->comment_agent,
+				'status'     => $status,
+				'created_at' => $faq->comment_date_gmt,
 			)
 		);
 		$faq->set_object_read( true );
@@ -112,12 +127,17 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 		$changes = $faq->get_changes();
 
 		$post_data_keys = array(
-			'description',
-			'name',
-			'parent_id',
-			'menu_order',
-			'date_created',
-			'date_modified',
+			'content',
+			'course_id',
+			'user_id',
+			'user_name',
+			'user_email',
+			'user_url',
+			'user_ip',
+			'user_agent',
+			'sort_order',
+			'status',
+			'created_at',
 		);
 
 		// Only update the post when the post data changes.
@@ -184,7 +204,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 		}
 
 		do_action( 'masteriyo_before_delete_' . $object_type, $id, $faq );
-		wp_delete_post( $id, true );
+		wp_delete_comment( $id, true );
 		$faq->set_id( 0 );
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $faq );
 	}
@@ -219,7 +239,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 
 		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
 			return (object) array(
-				'faqs'      => $faqs,
+				'faqs'          => $faqs,
 				'total'         => $query->found_posts,
 				'max_num_pages' => $query->max_num_pages,
 			);
@@ -238,7 +258,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	protected function get_wp_query_args( $query_vars ) {
 		// Map query vars to ones that get_wp_query_args or WP_Query recognize.
 		$key_mapping = array(
-			'page'   => 'paged',
+			'page'      => 'paged',
 			'parent_id' => 'post_parent',
 		);
 
@@ -262,8 +282,8 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 
 		// Handle date queries.
 		$date_queries = array(
-			'date_created'      => 'post_date',
-			'date_modified'     => 'post_modified',
+			'date_created'  => 'post_date',
+			'date_modified' => 'post_modified',
 		);
 		foreach ( $date_queries as $query_var_key => $db_key ) {
 			if ( isset( $query_vars[ $query_var_key ] ) && '' !== $query_vars[ $query_var_key ] ) {

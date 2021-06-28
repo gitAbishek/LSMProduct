@@ -700,5 +700,7 @@ class CourseProgressController extends CrudController {
 				);
 			}
 		}
+
+		return $course_id;
 	}
 }

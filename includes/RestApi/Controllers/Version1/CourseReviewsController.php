@@ -622,10 +622,56 @@ class CourseReviewsController extends CommentsController {
 			);
 		}
 
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
 		if ( ! $this->permission->rest_check_course_reviews_permissions( 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
-				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
+				__( 'Sorry, you are not allowed to create course reviews.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( isset( $request['author_id'] ) && absint( $request['author_id'] ) === 0 ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, author_id cannot be empty or zero.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( isset( $request['author_id'] ) && absint( $request['author_id'] ) !== get_current_user_id() ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you are not allowed to create course reviews for others.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		$course = masteriyo_get_course( absint( $request['course_id'] ) );
+
+		if ( is_null( $course ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_invalid_id",
+				__( 'Invalid course ID.', 'masteriyo' ),
+				array(
+					'status' => 404
+				)
+			);
+		}
+
+		if ( $course->get_author_id() === get_current_user_id() ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you cannot create review for your own course.', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code()
 				)
@@ -644,19 +690,12 @@ class CourseReviewsController extends CommentsController {
 	 * @return WP_Error|boolean
 	 */
 	public function delete_item_permissions_check( $request ) {
-		// return new \WP_Error(
-		// 	'masteriyo_null_permission',
-		// 	__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
-		// );
 		if ( is_null( $this->permission ) ) {
 			return new \WP_Error(
 				'masteriyo_null_permission',
 				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
 			);
 		}
-
-		$is_logged_in = is_user_logged_in();
-		$user_id = get_current_user_id();
 
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
 			return true;
@@ -743,6 +782,16 @@ class CourseReviewsController extends CommentsController {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( isset( $request['course_id'] ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, you cannot move a review to another course.', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code()
 				)

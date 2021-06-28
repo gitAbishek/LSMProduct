@@ -66,6 +66,11 @@ class CourseReviews {
 	 */
 	public static function update_course_review_stats( $course ) {
 		$course = masteriyo_get_course( $course );
+
+		if ( is_null( $course ) ) {
+			return;
+		}
+
 		$course->set_rating_counts( self::get_rating_counts( $course ) );
 		$course->set_average_rating( self::get_average_rating( $course ) );
 		$course->set_review_count( self::get_review_count( $course ) );

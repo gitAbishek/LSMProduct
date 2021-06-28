@@ -67,6 +67,7 @@ class Install {
 		dbDelta( self::get_user_activitymeta_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_user_items_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_user_itemmeta_table_schema( $charset_collate, $base_prefix ) );
+		dbDelta( self::get_quiz_attempts_table_schema( $charset_collate, $base_prefix ) );
 	}
 
 	/**
@@ -188,6 +189,7 @@ class Install {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_user_activities` (
 			`id` BIGINT UNSIGNED AUTO_INCREMENT,
 			`user_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
+			`parent_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
 			`item_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
 			`activity_type` VARCHAR(20) DEFAULT NULL,
 			`activity_status` VARCHAR(20) DEFAULT NULL,
@@ -288,6 +290,37 @@ class Install {
 			PRIMARY KEY (`meta_id`),
 			KEY `user_item_id` (`user_item_id`),
 			KEY `meta_key` (`meta_key`(191))
+		) $charset_collate;";
+
+		return $sql;
+	}
+
+	/**
+	 * Get quiz attempts meta table schema.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $charset_collate   Database charset collate.
+	 * @param string $base_prefix       Table prefix.
+	 *
+	 * @return string
+	 */
+	private static function get_quiz_attempts_table_schema( $charset_collate, $base_prefix ) {
+		$sql = "CREATE TABLE {$base_prefix}masteriyo_quiz_attempts (
+			attempt_id int(11) NOT NULL AUTO_INCREMENT,
+			course_id int(11) DEFAULT NULL,
+			quiz_id int(11) DEFAULT NULL,
+			user_id int(11) DEFAULT NULL,
+			total_questions int(11) DEFAULT NULL,
+			total_answered_questions int(11) DEFAULT NULL,
+			total_marks decimal(9,2) DEFAULT NULL,
+			total_attempts int(11) DEFAULT NULL,
+			earned_marks decimal(9,2) DEFAULT NULL,
+			info text,
+			attempt_status varchar(50) DEFAULT NULL,
+			attempt_started_at datetime DEFAULT NULL,
+			attempt_ended_at datetime DEFAULT NULL,
+			PRIMARY KEY  (attempt_id)
 		) $charset_collate;";
 
 		return $sql;

@@ -9,6 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Utils;
 use ThemeGrill\Masteriyo\Helper\Permission;
+use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuestionsController;
 
 class QuizesController extends PostsController {
 	/**
@@ -139,6 +140,106 @@ class QuizesController extends PostsController {
 				'schema' => array( $this, 'get_public_item_schema' ),
 			)
 		);
+
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/(?P<id>[\d]+)' . '/start_quiz',
+			array(
+				'args' => array(
+					'id' => array(
+						'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
+						'type'        => 'integer',
+					),
+				),
+				array(
+					'methods'  => \WP_REST_Server::CREATABLE,
+					'callback' => array( $this, 'start_quiz' ),
+					// 'permission_callback' => array( $this, 'check_answer_permissions_check' ),
+				),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/(?P<id>[\d]+)' . '/check_answers',
+			array(
+				'args' => array(
+					'id' => array(
+						'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
+						'type'        => 'integer',
+					),
+				),
+				array(
+					'methods'  => \WP_REST_Server::CREATABLE,
+					'callback' => array( $this, 'check_answers' ),
+					// 'permission_callback' => array( $this, 'check_answer_permissions_check' ),
+				),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/attempts',
+			array(
+				array(
+					'methods'  => \WP_REST_Server::READABLE,
+					'callback' => array( $this, 'get_attempts' ),
+					// 'permission_callback' => array( $this, 'get_attempts_permissions_check' ),
+					'args'     => array(
+						'quiz_id'  => array(
+							'description'       => __( 'Quiz ID.', 'masteriyo' ),
+							'type'              => 'integer',
+							'required'          => true,
+							'sanitize_callback' => 'absint',
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+						'user_id'  => array(
+							'description'       => __( 'User ID.', 'masteriyo' ),
+							'type'              => 'integer',
+							'required'          => true,
+							'sanitize_callback' => 'absint',
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+						'orderby'  => array(
+							'description'       => __( 'Sort collection by object attribute.', 'masteriyo' ),
+							'type'              => 'string',
+							'default'           => 'attempt_id',
+							'enum'              => array(
+								'attempt_id',
+								'course_id',
+								'quiz_id',
+								'attempt_started_at',
+								'attempt_ended_at',
+							),
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+						'order'    => array(
+							'description'       => __( 'Order sort attribute ascending or descending.', 'masteriyo' ),
+							'type'              => 'string',
+							'default'           => 'desc',
+							'enum'              => array( 'asc', 'desc' ),
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+						'paged'    => array(
+							'description'       => __( 'Paginate the quiz attempts.', 'masteriyo' ),
+							'type'              => 'integer',
+							'default'           => 1,
+							'sanitize_callback' => 'absint',
+							'validate_callback' => 'rest_validate_request_arg',
+							'minimum'           => 1,
+						),
+						'per_page' => array(
+							'description'       => __( 'Limit items per page.', 'masteriyo' ),
+							'type'              => 'integer',
+							'default'           => 10,
+							'minimum'           => 1,
+							'sanitize_callback' => 'absint',
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+					),
+				),
+			)
+		);
 	}
 
 	/**
@@ -224,6 +325,244 @@ class QuizesController extends PostsController {
 		return $quiz;
 	}
 
+	/**
+	 * Get Question object.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  int|WP_Post|Model $object Object ID or WP_Post or Model.
+	 *
+	 * @return object Model object or WP_Error object.
+	 */
+	protected function get_question_object( $object ) {
+		try {
+			if ( is_int( $object ) ) {
+				$id = $object;
+			} else {
+				$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
+			}
+			$type     = get_post_meta( $id, '_type', true );
+			$question = masteriyo( "question.${type}" );
+			$question->set_id( $id );
+			$question_repo = masteriyo( 'question.store' );
+			$question_repo->read( $question );
+		} catch ( \Exception $e ) {
+			return false;
+		}
+
+		return $question;
+	}
+
+	/**
+	 * Collect data after starting quiz.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 */
+	public function start_quiz( $request ) {
+
+		global $wpdb;
+
+		if ( ! is_user_logged_in() ) {
+			return new \WP_Error(
+				'masteriyo_rest_user_not_logged_in',
+				__( 'Please sign in to start the quiz.', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		}
+
+		$user_id = (int) get_current_user_id();
+		$quiz_id = (int) $request['id'];
+
+		$course = get_course_by_quiz( $quiz_id );
+
+		if ( empty( $course->ID ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_course_empty_id',
+				__( 'There is something went wrong with course, please check if quiz attached with a course', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		}
+
+		$course_id = (int) $course->ID;
+		$date      = date( 'Y-m-d H:i:s', time() );
+
+		$attempt_data = array(
+			'course_id'                => $course_id,
+			'quiz_id'                  => $quiz_id,
+			'user_id'                  => $user_id,
+			'total_answered_questions' => 0,
+			'attempt_status'           => 'attempt_started',
+			'attempt_started_at'       => $date,
+		);
+		$wpdb->insert( $wpdb->prefix . 'masteriyo_quiz_attempts', $attempt_data );
+
+		$response = array(
+			'status_code' => 'started',
+			'message'     => __( 'Quiz has been started.', 'masteriyo' ),
+			'data'        => array(
+				'quiz_id' => (int) $quiz_id,
+				'user_id' => (int) $user_id,
+			),
+		);
+
+		return apply_filters( 'masteriyo_start_quiz_rest_reponse', $response );
+
+	}
+
+	/**
+	 * Check given answer and collect the results.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 */
+	public function check_answers( $request ) {
+
+		global $wpdb;
+
+		$parameters           = $request->get_params();
+		$quiz_id              = (int) $request['id'];
+		$user_id              = get_current_user_id();
+		$total_earned_marks   = 0;
+		$attempt_questions    = 0;
+		$total_question_marks = 0;
+
+		$attempt_data = is_quiz_started( $quiz_id );
+
+		$previous_attempts = get_all_quiz_attempts( $quiz_id, $user_id );
+		$attempted_count   = is_array( $previous_attempts ) ? count( $previous_attempts ) : 0;
+
+		if ( is_array( $parameters ) && count( $parameters ) > 0 ) {
+			foreach ( $parameters as $parameter ) {
+
+				if ( is_array( $parameter ) && count( $parameters ) > 0 ) {
+					foreach ( $parameter as $key => $value ) {
+
+						if ( 'question_id' === $key ) {
+							$object = $this->get_question_object( (int) $value );
+
+							if ( ! $object || 0 === $object->get_id() ) {
+								return new \WP_Error(
+									"masteriyo_rest_{$this->post_type}_invalid_id",
+									__( 'Invalid ID.', 'masteriyo' ),
+									array( 'status' => 404 )
+								);
+							}
+
+							$total_question_marks += $object->get_points();
+						}
+						if ( 'answers' === $key ) {
+							$is_correct = $object->check_answer( $value, 'view' );
+
+							$question_mark       = $is_correct ? $object->get_points() : 0;
+							$total_earned_marks += $question_mark;
+							$attempt_questions++;
+						}
+					}
+				}
+			}
+
+			$quiz_questions = get_quiz_questions( $quiz_id, 'post_parent' );
+
+			$attempt_detail = array(
+				'total_marks'              => $total_question_marks,
+				'earned_marks'             => $total_earned_marks,
+				'total_questions'          => $quiz_questions->post_count,
+				'total_answered_questions' => $attempt_questions,
+				'total_attempts'           => $attempted_count,
+				'attempt_status'           => 'attempt_ended',
+				'attempt_ended_at'         => date( 'Y-m-d H:i:s', time() ),
+			);
+
+			$wpdb->update(
+				$wpdb->prefix . 'masteriyo_quiz_attempts',
+				$attempt_detail,
+				array( 'attempt_id' => $attempt_data->attempt_id )
+			);
+
+			$attempt_datas = (array) get_quiz_attempts_data( $quiz_id, $attempt_data->attempt_id );
+
+			$keys = array(
+				'attempt_id',
+				'course_id',
+				'quiz_id',
+				'user_id',
+				'total_questions',
+				'total_answered_questions',
+				'total_attempts',
+			);
+
+			foreach ( $keys as $key ) {
+				if ( array_key_exists( $key, $attempt_datas ) ) {
+					$attempt_datas[ $key ] = (int) $attempt_datas[ $key ];
+				}
+			}
+
+			return apply_filters( 'masteriyo_answer_check_rest_reponse', $attempt_datas );
+		}
+	}
+
+	public function get_attempts( $request ) {
+		$parameters = $request->get_params();
+
+		$quiz_id = $parameters['quiz_id'];
+		$user_id = $parameters['user_id'];
+
+		$query_vars = array(
+			'user_id'  => $user_id,
+			'quiz_id'  => $quiz_id,
+			'per_page' => $parameters['per_page'],
+			'paged'    => $parameters['paged'],
+			'orderby'  => $parameters['orderby'],
+			'order'    => $parameters['order'],
+		);
+
+		$attempt_datas = (array) quiz_attempts_query( $query_vars );
+
+		$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
+
+		return $response;
+
+	}
+
+	/**
+	 * Changed value from string to integer for response.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $attempt_data Quiz attempt data.
+	 * @return array
+	 */
+	protected function prepare_quiz_attempts_for_response( $attempt_datas ) {
+		// Keys which value should be changed to integer.
+		$keys = array(
+			'attempt_id',
+			'course_id',
+			'quiz_id',
+			'user_id',
+			'total_questions',
+			'total_answered_questions',
+			'total_attempts',
+		);
+
+		$response_data = array();
+
+		if ( count( $attempt_datas ) > 1 ) {
+			foreach ( $attempt_datas as $attempt_data ) {
+				$attempt_data = (array) $attempt_data;
+				foreach ( $keys as $key ) {
+					if ( array_key_exists( $key, $attempt_data ) ) {
+						$attempt_data[ $key ] = (int) $attempt_data[ $key ];
+					}
+				}
+				$response_data[] = $attempt_data;
+			}
+			return $response_data;
+		}
+
+	}
 
 	/**
 	 * Prepares the object for the REST response.

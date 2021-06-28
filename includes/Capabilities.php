@@ -29,7 +29,7 @@ class Capabilities {
 				'quiz'          => array( 'read' ),
 				'question'      => array( 'read' ),
 				'course_review' => array( 'publish', 'read', 'edit_plural', 'delete_plural' ),
-				'order'         => array( 'publish', 'read', 'delete' ),
+				'order'         => array( 'read' ),
 				'users'         => array( 'read' ),
 			)
 		);
@@ -63,6 +63,7 @@ class Capabilities {
 				'question'      => array( 'publish', 'read', 'edit', 'delete' ),
 				'course_review' => array( 'read', 'edit_plural', 'delete_plural' ),
 				'users'         => array( 'read' ),
+				'order'         => array( 'read' ),
 			)
 		);
 		$core_capabilities = self::map_caps( $caps_info );

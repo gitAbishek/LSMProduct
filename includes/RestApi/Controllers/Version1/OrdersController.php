@@ -297,10 +297,24 @@ class OrdersController extends PostsController {
 
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
 			if ( ! empty( $request['customer'] ) ) {
-				$args['author'] = $request['customer'];
+				$args['meta_query'] = array(
+					'relation' => 'AND',
+					array(
+						'key'     => '_customer_id',
+						'value'   => absint( $request['customer'] ),
+						'compare' => '=',
+					),
+				);
 			};
 		} else {
-			$args['author'] = get_current_user_id();
+			$args['meta_query'] = array(
+				'relation' => 'AND',
+				array(
+					'key'     => '_customer_id',
+					'value'   => get_current_user_id(),
+					'compare' => '=',
+				),
+			);
 		}
 
 		return $args;
@@ -759,9 +773,22 @@ class OrdersController extends PostsController {
 			return true;
 		}
 
-		$cap = masteriyo_is_current_user_post_author( $request['id'] ) ? 'read_orders' : 'read_others_orders';
+		$id    = absint( $request['id'] );
+		$order = masteriyo_get_order( $id );
 
-		if ( ! $this->permission->rest_check_order_permissions( $cap, $request['id'] ) ) {
+		if ( is_null( $order ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_invalid_id",
+				__( 'Invalid ID.', 'masteriyo' ),
+				array(
+					'status' => 404
+				)
+			);
+		}
+
+		$cap = $order->get_customer_id() === get_current_user_id() ? 'read_orders' : 'read_others_orders';
+
+		if ( ! $this->permission->rest_check_order_permissions( $cap, $id ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
@@ -824,7 +851,8 @@ class OrdersController extends PostsController {
 		}
 
 		if ( 'read' === $context ) {
-			$cap = masteriyo_is_current_user_post_author( $object_id ) ? 'read_orders' : 'read_others_orders';
+			$order = masteriyo_get_order( $object_id );
+			$cap   = $order->get_customer_id() === get_current_user_id() ? 'read_orders' : 'read_others_orders';
 
 			if ( ! $this->permission->rest_check_order_permissions( $cap, $object_id ) ) {
 				return false;
@@ -848,6 +876,10 @@ class OrdersController extends PostsController {
 				'masteriyo_null_permission',
 				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
 			);
+		}
+
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
 		}
 
 		if ( ! $this->permission->rest_check_order_permissions( 'create' ) ) {
@@ -879,7 +911,7 @@ class OrdersController extends PostsController {
 			);
 		}
 
-		if ( masteriyo_is_current_user_admin() ) {
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
 			return true;
 		}
 
@@ -912,6 +944,10 @@ class OrdersController extends PostsController {
 			);
 		}
 
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
 		/**
 		 * Prevent from updating the order owner to someone else.
 		 */
@@ -923,10 +959,6 @@ class OrdersController extends PostsController {
 					'status' => rest_authorization_required_code()
 				)
 			);
-		}
-
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
-			return true;
 		}
 
 		if ( ! $this->permission->rest_check_order_permissions( 'update', $request['id'] ) ) {

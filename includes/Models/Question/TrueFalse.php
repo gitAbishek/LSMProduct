@@ -31,7 +31,7 @@ class TrueFalse extends Question implements QuestionInterface {
 	/**
 	 * Check whether the chosen answer is correct or not.
 	 *
-	 * @param bool   $chosen_answer Answer chosen by user.
+	 * @param array  $chosen_answer Answer chosen by user.
 	 * @param string $context Options: 'edit', 'view'.
 	 *
 	 * @return bool
@@ -43,6 +43,16 @@ class TrueFalse extends Question implements QuestionInterface {
 			$chosen_answer = $chosen_answer ? 'true' : 'false';
 		}
 
-		return isset( $answers[ $chosen_answer ] ) && ! ! $answers[ $chosen_answer ];
+		$correct_answer = array();
+
+		if ( is_array( $answers ) && count( $answers ) > 0 ) {
+			foreach ( $answers as $answer ) {
+				if ( $answer->right ) {
+					$correct_answer = $answer;
+					break;
+				}
+			}
+			return $correct_answer->name === $chosen_answer;
+		}
 	}
 }

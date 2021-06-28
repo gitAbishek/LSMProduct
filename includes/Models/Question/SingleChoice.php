@@ -39,6 +39,17 @@ class SingleChoice extends Question implements QuestionInterface {
 	public function check_answer( $chosen_answer, $context = 'edit' ) {
 		$answers = $this->get_answers( 'edit' );
 
-		return isset( $answers[ $chosen_answer ] ) && ! ! $answers[ $chosen_answer ];
+		$correct_answer = array();
+
+		if ( is_array( $answers ) && count( $answers ) > 0 ) {
+			foreach ( $answers as $answer ) {
+				if ( $answer->right ) {
+					$correct_answer = $answer;
+					break;
+				}
+			}
+
+			return $correct_answer->name === $chosen_answer;
+		}
 	}
 }

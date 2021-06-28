@@ -37,15 +37,18 @@ class MultipleChoice extends Question implements QuestionInterface {
 	 * @return bool
 	 */
 	public function check_answer( $chosen_answers, $context = 'edit' ) {
-		$answers        = $this->get_answers( 'edit' );
-		$chosen_answers = (array) $chosen_answers;
+		$answers = $this->get_answers( 'edit' );
 
-		foreach ( $answers as $answer => $is_correct ) {
-			if ( $is_correct && ! in_array( $answer, $chosen_answers ) ) {
-				return false;
+		$correct_answers = array();
+
+		if ( is_array( $answers ) && count( $answers ) > 0 ) {
+			foreach ( $answers as $answer ) {
+				if ( $answer->right ) {
+					$correct_answers[] = $answer->name;
+				}
 			}
-		}
 
-		return true;
+			return $chosen_answers === $correct_answers;
+		}
 	}
 }

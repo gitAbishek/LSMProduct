@@ -167,6 +167,11 @@ class CoursesController extends PostsController {
 			'sanitize_callback' => 'masteriyo_string_to_bool',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
+		$params['only_free']   = array(
+			'description'       => __( 'Only list free courses.', 'masteriyo' ),
+			'type'              => 'string',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
 		$params['category']   = array(
 			'description'       => __( 'Limit result set to courses assigned a specific category ID.', 'masteriyo' ),
 			'type'              => 'string',
@@ -374,6 +379,22 @@ class CoursesController extends PostsController {
 				'field'    => 'name',
 				'terms'    => 'featured',
 				'operator' => true === $request['featured'] ? 'IN' : 'NOT IN',
+			);
+		}
+
+		if ( isset( $request['only_free'] ) && 'yes' === $request['only_free'] ) {
+			$args['meta_query'] = array(
+				'relation' => 'OR',
+				array(
+					'key'     => '_regular_price',
+					'value'   => '0',
+					'compare' => '=',
+				),
+				array(
+					'key'     => '_regular_price',
+					'value'   => '',
+					'compare' => '=',
+				),
 			);
 		}
 

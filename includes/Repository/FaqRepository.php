@@ -16,6 +16,14 @@ use ThemeGrill\Masteriyo\Models\Faq;
  * FaqRepository class.
  */
 class FaqRepository extends AbstractRepository implements RepositoryInterface {
+	/**
+	 * Meta type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $meta_type = 'comment';
 
 	/**
 	 * Data stored in meta keys, but not considered "meta".
@@ -47,7 +55,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 					'comment_author'       => $faq->get_user_name( 'edit' ),
 					'comment_author_email' => $faq->get_user_email( 'edit' ),
 					'comment_author_url'   => $faq->get_user_url( 'edit' ),
-					'comment_content'      => $faq->get_conent( 'edit' ),
+					'comment_content'      => $faq->get_content( 'edit' ),
 					'comment_date'         => $faq->get_created_at( 'edit' ),
 					'comment_date_gmt'     => $faq->get_created_at( 'edit' ),
 					'comment_post_ID'      => $faq->get_course_id( 'edit' ),
@@ -82,14 +90,14 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	 * @throws \Exception If invalid faq.
 	 */
 	public function read( Model &$faq ) {
-		$faq_obj = get_comment( $faq->get_id() );
+		$faq_post = get_comment( $faq->get_id() );
 
-		if ( ! $faq->get_id() || ! $faq_obj || $faq->get_type() !== $faq_obj->comment_type ) {
+		if ( ! $faq->get_id() || ! $faq_post || $faq->get_type() !== $faq_post->comment_type ) {
 			throw new \Exception( __( 'Invalid Faq.', 'masteriyo' ) );
 		}
 
 		// Map the comment status from numberical to word.
-		$status = $faq->comment_approved;
+		$status = $faq_post->comment_approved;
 		if ( '1' === $status ) {
 			$status = 'approve';
 		} elseif ( '0' === $status ) {
@@ -97,18 +105,19 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 		}
 		$faq->set_props(
 			array(
-				'content'    => $faq->comment_type,
-				'course_id'  => $faq->comment_post_ID,
-				'user_id'    => $faq->user_id,
-				'user_name'  => $faq->comment_author,
-				'user_email' => $faq->comment_author_email,
-				'user_url'   => $faq->comment_author_url,
-				'user_ip'    => $faq->comment_author_IP,
-				'user_agent' => $faq->comment_agent,
+				'content'    => $faq_post->comment_content,
+				'course_id'  => $faq_post->comment_post_ID,
+				'user_id'    => $faq_post->user_id,
+				'user_name'  => $faq_post->comment_author,
+				'user_email' => $faq_post->comment_author_email,
+				'user_url'   => $faq_post->comment_author_url,
+				'user_ip'    => $faq_post->comment_author_IP,
+				'user_agent' => $faq_post->comment_agent,
 				'status'     => $status,
-				'created_at' => $faq->comment_date_gmt,
+				'created_at' => $faq_post->comment_date_gmt,
 			)
 		);
+		$this->read_comment_meta_data( $faq );
 		$faq->set_object_read( true );
 
 		do_action( 'masteriyo_faq_read', $faq->get_id(), $faq );
@@ -126,7 +135,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	public function update( Model &$faq ) {
 		$changes = $faq->get_changes();
 
-		$post_data_keys = array(
+		$faq_data_keys = array(
 			'content',
 			'course_id',
 			'user_id',
@@ -135,53 +144,30 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 			'user_url',
 			'user_ip',
 			'user_agent',
-			'sort_order',
 			'status',
 			'created_at',
 		);
 
-		// Only update the post when the post data changes.
-		if ( array_intersect( $post_data_keys, array_keys( $changes ) ) ) {
-			$post_data = array(
-				'post_content'   => $faq->get_description( 'edit' ),
-				'post_title'     => $faq->get_name( 'edit' ),
-				'post_parent'    => $faq->get_course_id( 'edit' ),
-				'comment_status' => 'closed',
-				'post_status'    => 'publish',
-				'menu_order'     => $faq->get_menu_order( 'edit' ),
-				'post_type'      => 'faq',
+		// Only update the course review when the course review data changes.
+		if ( array_intersect( $faq_data_keys, array_keys( $changes ) ) ) {
+			$faq_data = array(
+				'comment_author'       => $faq->get_user_name( 'edit' ),
+				'comment_author_email' => $faq->get_user_email( 'edit' ),
+				'comment_author_url'   => $faq->get_user_url( 'edit' ),
+				'comment_content'      => $faq->get_content( 'edit' ),
+				'comment_date'         => $faq->get_created_at( 'edit' ),
+				'comment_date_gmt'     => $faq->get_created_at( 'edit' ),
+				'comment_post_ID'      => $faq->get_course_id( 'edit' ),
+				'comment_type'         => $faq->get_type(),
+				'user_id'              => $faq->get_user_id( 'edit' ),
+				'comment_agent'        => $faq->get_user_agent( 'edit' ),
+				'comment_author_IP'    => $faq->get_user_ip( 'edit' ),
 			);
 
-			/**
-			 * When updating this object, to prevent infinite loops, use $wpdb
-			 * to update data, since wp_update_post spawns more calls to the
-			 * save_post action.
-			 *
-			 * This ensures hooks are fired by either WP itself (admin screen save),
-			 * or an update purely from CRUD.
-			 */
-			if ( doing_action( 'save_post' ) ) {
-				// TODO Abstract the $wpdb WordPress class.
-				$GLOBALS['wpdb']->update( $GLOBALS['wpdb']->posts, $post_data, array( 'ID' => $faq->get_id() ) );
-				clean_post_cache( $faq->get_id() );
-			} else {
-				wp_update_post( array_merge( array( 'ID' => $faq->get_id() ), $post_data ) );
-			}
-			$faq->read_meta_data( true ); // Refresh internal meta data, in case things were hooked into `save_post` or another WP hook.
-		} else { // Only update post modified time to record this save event.
-			$GLOBALS['wpdb']->update(
-				$GLOBALS['wpdb']->posts,
-				array(
-					'post_modified'     => current_time( 'mysql' ),
-					'post_modified_gmt' => current_time( 'mysql', true ),
-				),
-				array(
-					'ID' => $faq->get_id(),
-				)
-			);
-			clean_post_cache( $faq->get_id() );
+			wp_update_comment( array_merge( array( 'comment_ID' => $faq->get_id() ), $faq_data ) );
 		}
 
+		$this->update_comment_meta( $faq );
 		$faq->apply_changes();
 
 		do_action( 'masteriyo_update_faq', $faq->get_id(), $faq );
@@ -309,5 +295,32 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 		}
 
 		return apply_filters( 'masteriyo_faq_wp_query_args', $wp_query_args, $query_vars, $this );
+	}
+
+	/**
+	 * Read comment meta data. Can be overridden by child classes to load other props.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Faq $faq Course review object.
+	 */
+	protected function read_comment_meta_data( &$faq ) {
+		$meta_values = $this->read_meta( $faq );
+		$set_props   = array();
+		$meta_values = array_reduce(
+			$meta_values,
+			function( $result, $meta_value ) {
+				$result[ $meta_value->key ][] = $meta_value->value;
+				return $result;
+			},
+			array()
+		);
+
+		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
+			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
+			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
+		}
+
+		$faq->set_props( $set_props );
 	}
 }

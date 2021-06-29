@@ -7,7 +7,7 @@
  * @package ThemeGrill\Masteriyo\Models;
  */
 
-titlespace ThemeGrill\Masteriyo\Models;
+namespace ThemeGrill\Masteriyo\Models;
 
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Repository\FaqRepository;

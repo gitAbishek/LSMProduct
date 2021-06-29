@@ -2,8 +2,13 @@ import {
 	Box,
 	Container,
 	Flex,
+	FormLabel,
 	Heading,
+	Input,
+	Select,
+	Spinner,
 	Stack,
+	Switch,
 	Table,
 	Tbody,
 	Th,
@@ -12,17 +17,89 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import Header from 'Components/layout/Header';
-import React from 'react';
-import { useQuery } from 'react-query';
-
+import React, { useRef } from 'react';
+import { useQuery, useQueryClient } from 'react-query';
 import urls from '../../constants/urls';
 import { SkeletonCourseList } from '../../skeleton';
 import API from '../../utils/api';
 import CourseList from './components/CourseList';
 
+const courseStatusList = [
+	{
+		label: __('Published', 'masteriyo'),
+		value: 'publish',
+	},
+	{
+		label: __('Draft', 'masteriyo'),
+		value: 'draft',
+	},
+];
+
+interface FilterParams {
+	category_id?: string | number;
+	searchString?: string;
+	status?: string;
+	isOnlyFree?: boolean;
+}
+
 const AllCourses = () => {
+	const filterParamsRef = useRef<FilterParams>({});
 	const courseAPI = new API(urls.courses);
-	const courseQuery = useQuery('courseList', () => courseAPI.list());
+	const queryClient = useQueryClient();
+	const courseQuery = useQuery('courseList', () =>
+		courseAPI.list({
+			search: filterParamsRef.current.searchString,
+			category: filterParamsRef.current.category_id,
+			status: filterParamsRef.current.status,
+			only_free: filterParamsRef.current.isOnlyFree ? 'yes' : '',
+		})
+	);
+	const categoryAPI = new API(urls.categories);
+	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list(), {
+		retry: false,
+	});
+
+	const getCategoryOptions = () => {
+		if (categoryQuery.isLoading || categoryQuery.isError) {
+			return [];
+		}
+		return [
+			{
+				value: '',
+				label: __('-- Select Category --', 'masteriyo'),
+			},
+			...categoryQuery.data.map((category: any) => {
+				return {
+					value: category.id,
+					label: category.name,
+				};
+			}),
+		];
+	};
+	const getSearchInputHandler = () => {
+		let timer: any = 0;
+
+		return function (e: any) {
+			clearTimeout(timer);
+			timer = setTimeout(() => {
+				filterParamsRef.current.searchString = e.target.value;
+				queryClient.invalidateQueries('courseList');
+			}, 800);
+		};
+	};
+	const onChangeCategoryFilter = (e: any) => {
+		filterParamsRef.current.category_id = e.target.value;
+		queryClient.invalidateQueries('courseList');
+	};
+	const onChangeStatusFilter = (e: any) => {
+		filterParamsRef.current.status = e.target.value;
+		queryClient.invalidateQueries('courseList');
+	};
+	const onChangeOnlyFreeFilter = (e: any) => {
+		filterParamsRef.current.isOnlyFree = e.target.checked;
+		queryClient.invalidateQueries('courseList');
+	};
+
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header />
@@ -34,6 +111,47 @@ const AllCourses = () => {
 								{__('Courses', 'masteriyo')}
 							</Heading>
 						</Flex>
+
+						<Stack direction="row" spacing="8">
+							<Flex alignItems="center">
+								<FormLabel>{__('Search', 'masteriyo')}</FormLabel>
+								<Input onKeyUp={getSearchInputHandler()} />
+							</Flex>
+							<Flex alignItems="center">
+								<FormLabel>{__('Category', 'masteriyo')}</FormLabel>
+								{categoryQuery.isLoading ? (
+									<Spinner />
+								) : (
+									<Select onChange={onChangeCategoryFilter}>
+										{getCategoryOptions().map((option: any) => (
+											<option key={option.value} value={option.value}>
+												{option.label}
+											</option>
+										))}
+									</Select>
+								)}
+							</Flex>
+							<Flex alignItems="center">
+								<FormLabel>{__('Status', 'masteriyo')}</FormLabel>
+								<Select defaultValue="publish" onChange={onChangeStatusFilter}>
+									{courseStatusList.map((option: any) => (
+										<option key={option.value} value={option.value}>
+											{option.label}
+										</option>
+									))}
+								</Select>
+							</Flex>
+							<Flex alignItems="center">
+								<FormLabel htmlFor="filter-only-free-courses">
+									{__('Only Free', 'masteriyo')}
+								</FormLabel>
+								<Switch
+									id="filter-only-free-courses"
+									defaultChecked={false}
+									onChange={onChangeOnlyFreeFilter}
+								/>
+							</Flex>
+						</Stack>
 
 						<Table>
 							<Thead>

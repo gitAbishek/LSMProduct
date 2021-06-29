@@ -36,7 +36,7 @@ function get_quiz_questions( $quiz_id, $by ) {
 	}
 
 	$query = new \WP_Query( $args );
-	wp_reset_query();
+	wp_reset_postdata();
 
 	return $query;
 
@@ -253,5 +253,5 @@ function quiz_attempts_query( $query_vars ) {
 	// Fetch the results.
 	$quiz_attempt = $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
-	return $quiz_attempt;
+	return (array) $quiz_attempt;
 }

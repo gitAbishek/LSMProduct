@@ -46,7 +46,6 @@ const QuizStart: React.FC<Props> = (props) => {
 	};
 
 	const onStartClick = () => {
-		console.log('clicked');
 		actions.updateQuizProgress({
 			quizProgress: { [quizData.id]: { startedOn: Date.now() } },
 		});

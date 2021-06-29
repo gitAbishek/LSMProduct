@@ -143,7 +143,7 @@ class QuizesController extends PostsController {
 
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->rest_base . '/(?P<id>[\d]+)' . '/start_quiz',
+			'/' . $this->rest_base . '/(?P<id>[\d]+)/start_quiz',
 			array(
 				'args' => array(
 					'id' => array(
@@ -161,7 +161,7 @@ class QuizesController extends PostsController {
 
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->rest_base . '/(?P<id>[\d]+)' . '/check_answers',
+			'/' . $this->rest_base . '/(?P<id>[\d]+)/check_answers',
 			array(
 				'args' => array(
 					'id' => array(
@@ -240,6 +240,77 @@ class QuizesController extends PostsController {
 				),
 			)
 		);
+
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/attempt/(?P<id>[\d]+)',
+			array(
+				'args' => array(
+					'id' => array(
+						'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
+						'type'        => 'integer',
+					),
+				),
+				array(
+					'methods'  => \WP_REST_Server::READABLE,
+					'callback' => array( $this, 'get_attempt' ),
+					// 'permission_callback' => array( $this, 'get_attempt_permissions_check' ),
+					'args'     => array(
+						'quiz_id'  => array(
+							'description'       => __( 'Quiz ID.', 'masteriyo' ),
+							'type'              => 'integer',
+							'required'          => true,
+							'sanitize_callback' => 'absint',
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+						'user_id'  => array(
+							'description'       => __( 'User ID.', 'masteriyo' ),
+							'type'              => 'integer',
+							'required'          => true,
+							'sanitize_callback' => 'absint',
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+						'orderby'  => array(
+							'description'       => __( 'Sort collection by object attribute.', 'masteriyo' ),
+							'type'              => 'string',
+							'default'           => 'attempt_id',
+							'enum'              => array(
+								'attempt_id',
+								'course_id',
+								'quiz_id',
+								'attempt_started_at',
+								'attempt_ended_at',
+							),
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+						'order'    => array(
+							'description'       => __( 'Order sort attribute ascending or descending.', 'masteriyo' ),
+							'type'              => 'string',
+							'default'           => 'desc',
+							'enum'              => array( 'asc', 'desc' ),
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+						'paged'    => array(
+							'description'       => __( 'Paginate the quiz attempts.', 'masteriyo' ),
+							'type'              => 'integer',
+							'default'           => 1,
+							'sanitize_callback' => 'absint',
+							'validate_callback' => 'rest_validate_request_arg',
+							'minimum'           => 1,
+						),
+						'per_page' => array(
+							'description'       => __( 'Limit items per page.', 'masteriyo' ),
+							'type'              => 'integer',
+							'default'           => 10,
+							'minimum'           => 1,
+							'sanitize_callback' => 'absint',
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+					),
+				),
+			)
+		);
+
 	}
 
 	/**
@@ -386,26 +457,23 @@ class QuizesController extends PostsController {
 		}
 
 		$course_id = (int) $course->ID;
-		$date      = date( 'Y-m-d H:i:s', time() );
+		$date      = gmdate( 'Y-m-d H:i:s', time() );
+
+		$previous_attempts = get_all_quiz_attempts( $quiz_id, $user_id );
+		$attempted_count   = is_array( $previous_attempts ) ? count( $previous_attempts ) : 0;
 
 		$attempt_data = array(
 			'course_id'                => $course_id,
 			'quiz_id'                  => $quiz_id,
 			'user_id'                  => $user_id,
 			'total_answered_questions' => 0,
+			'total_attempts'           => ++$attempted_count,
 			'attempt_status'           => 'attempt_started',
 			'attempt_started_at'       => $date,
 		);
 		$wpdb->insert( $wpdb->prefix . 'masteriyo_quiz_attempts', $attempt_data );
 
-		$response = array(
-			'status_code' => 'started',
-			'message'     => __( 'Quiz has been started.', 'masteriyo' ),
-			'data'        => array(
-				'quiz_id' => (int) $quiz_id,
-				'user_id' => (int) $user_id,
-			),
-		);
+		$response = rest_ensure_response( $attempt_data );
 
 		return apply_filters( 'masteriyo_start_quiz_rest_reponse', $response );
 
@@ -424,15 +492,11 @@ class QuizesController extends PostsController {
 
 		$parameters           = $request->get_params();
 		$quiz_id              = (int) $request['id'];
-		$user_id              = get_current_user_id();
 		$total_earned_marks   = 0;
 		$attempt_questions    = 0;
 		$total_question_marks = 0;
 
 		$attempt_data = is_quiz_started( $quiz_id );
-
-		$previous_attempts = get_all_quiz_attempts( $quiz_id, $user_id );
-		$attempted_count   = is_array( $previous_attempts ) ? count( $previous_attempts ) : 0;
 
 		if ( is_array( $parameters ) && count( $parameters ) > 0 ) {
 			foreach ( $parameters as $parameter ) {
@@ -471,9 +535,8 @@ class QuizesController extends PostsController {
 				'earned_marks'             => $total_earned_marks,
 				'total_questions'          => $quiz_questions->post_count,
 				'total_answered_questions' => $attempt_questions,
-				'total_attempts'           => $attempted_count,
 				'attempt_status'           => 'attempt_ended',
-				'attempt_ended_at'         => date( 'Y-m-d H:i:s', time() ),
+				'attempt_ended_at'         => gmdate( 'Y-m-d H:i:s', time() ),
 			);
 
 			$wpdb->update(
@@ -484,31 +547,25 @@ class QuizesController extends PostsController {
 
 			$attempt_datas = (array) get_quiz_attempts_data( $quiz_id, $attempt_data->attempt_id );
 
-			$keys = array(
-				'attempt_id',
-				'course_id',
-				'quiz_id',
-				'user_id',
-				'total_questions',
-				'total_answered_questions',
-				'total_attempts',
-			);
+			$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
 
-			foreach ( $keys as $key ) {
-				if ( array_key_exists( $key, $attempt_datas ) ) {
-					$attempt_datas[ $key ] = (int) $attempt_datas[ $key ];
-				}
-			}
-
-			return apply_filters( 'masteriyo_answer_check_rest_reponse', $attempt_datas );
+			return apply_filters( 'masteriyo_answer_check_rest_reponse', $response );
 		}
 	}
 
+	/**
+	 * Get all quiz attempts according to user_id and quiz_id.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 * @return array
+	 */
 	public function get_attempts( $request ) {
 		$parameters = $request->get_params();
 
-		$quiz_id = $parameters['quiz_id'];
-		$user_id = $parameters['user_id'];
+		$quiz_id = (int) $parameters['quiz_id'];
+		$user_id = (int) $parameters['user_id'];
 
 		$query_vars = array(
 			'user_id'  => $user_id,
@@ -519,11 +576,67 @@ class QuizesController extends PostsController {
 			'order'    => $parameters['order'],
 		);
 
-		$attempt_datas = (array) quiz_attempts_query( $query_vars );
+		$multi_attempts_data = array();
 
-		$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
+		$attempt_datas = quiz_attempts_query( $query_vars );
 
-		return $response;
+		if ( is_array( $attempt_datas ) && ! count( $attempt_datas ) > 0 ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_attempts_not_found",
+				__( 'Quiz attempts not found for given user ID.', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		} else {
+			foreach ( $attempt_datas as $attempt_data ) {
+				$multi_attempts_data[] = (array) $attempt_data;
+			}
+			$response = $this->prepare_quiz_attempts_for_response( $multi_attempts_data );
+
+			return $response;
+
+		}
+	}
+
+	/**
+	 * Get quiz attempt according to attempt_id, user_id and quiz_id.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 * @return array
+	 */
+	public function get_attempt( $request ) {
+		$parameters = $request->get_params();
+
+		$attempt_id = (int) $request['id'];
+		$quiz_id    = (int) $parameters['quiz_id'];
+		$user_id    = (int) $parameters['user_id'];
+
+		$query_vars = array(
+			'attempt_id' => $attempt_id,
+			'quiz_id'    => $quiz_id,
+			'user_id'    => $user_id,
+			'per_page'   => $parameters['per_page'],
+			'paged'      => $parameters['paged'],
+			'orderby'    => $parameters['orderby'],
+			'order'      => $parameters['order'],
+		);
+
+		$attempt_datas = quiz_attempts_query( $query_vars );
+
+		if ( is_array( $attempt_datas ) && ! count( $attempt_datas ) > 0 ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_attempt_not_found",
+				__( 'Quiz attempt not found.', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		} else {
+			if ( count( $attempt_datas ) === 1 ) {
+				$attempt_datas = (array) $attempt_datas[0];
+			}
+			$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
+			return $response;
+		}
 
 	}
 
@@ -536,7 +649,7 @@ class QuizesController extends PostsController {
 	 * @return array
 	 */
 	protected function prepare_quiz_attempts_for_response( $attempt_datas ) {
-		// Keys which value should be changed to integer.
+		// Attempt keys which value should be changed to integer for response.
 		$keys = array(
 			'attempt_id',
 			'course_id',
@@ -549,7 +662,19 @@ class QuizesController extends PostsController {
 
 		$response_data = array();
 
-		if ( count( $attempt_datas ) > 1 ) {
+		// If array is not multi-dimensional.
+		if ( count( $attempt_datas ) === count( $attempt_datas, COUNT_RECURSIVE ) ) {
+
+			foreach ( $keys as $key ) {
+				if ( array_key_exists( $key, $attempt_datas ) ) {
+					$attempt_datas[ $key ] = (int) $attempt_datas[ $key ];
+				}
+			}
+
+			$attempt_datas = rest_ensure_response( $attempt_datas );
+			return $attempt_datas;
+		} else { // For multi-dimensional.
+
 			foreach ( $attempt_datas as $attempt_data ) {
 				$attempt_data = (array) $attempt_data;
 				foreach ( $keys as $key ) {
@@ -559,6 +684,8 @@ class QuizesController extends PostsController {
 				}
 				$response_data[] = $attempt_data;
 			}
+
+			$response_data = rest_ensure_response( $response_data );
 			return $response_data;
 		}
 

@@ -71,14 +71,17 @@ const AddNewCourse: React.FC = () => {
 
 	// When saved as a draft
 	const onSaveAsDraft = (data: any) => {
-		console.log(mergeDeep(data, formatData(data, 'draft')));
 		addMutation.mutate(mergeDeep(data, formatData(data, 'draft')), {
-			onSuccess: () => {
+			onSuccess: (data: any) => {
 				toast({
 					title: __('Added to draft', 'masteriyo'),
 					description: __('You can continue editing', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
+				});
+				history.push({
+					pathname: routes.builder.replace(':courseId', data.id),
+					search: '?type=draft',
 				});
 			},
 		});
@@ -86,7 +89,6 @@ const AddNewCourse: React.FC = () => {
 
 	// On Add Course
 	const onSubmit = (data: any) => {
-		console.log(mergeDeep(data, formatData(data, 'publish')));
 		addMutation.mutate(mergeDeep(data, formatData(data, 'publish')), {
 			onSuccess: (data: any) => {
 				history.push(routes.builder.replace(':courseId', data.id));

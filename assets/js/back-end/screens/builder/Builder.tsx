@@ -179,7 +179,9 @@ const Builder: React.FC = () => {
 										isLoading={
 											updateCourse.isLoading || updateBuilder.isLoading
 										}>
-										{__('Save', 'masteriyo')}
+										{type && type == 'draft'
+											? __('Publish', 'masteriyo')
+											: __('Save', 'masteriyo')}
 									</Button>
 								</ButtonGroup>
 							</Flex>

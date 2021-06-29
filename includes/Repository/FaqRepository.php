@@ -205,7 +205,11 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	 */
 	public function query( $query_vars ) {
 		$args = $this->get_wp_query_args( $query_vars );
+		$args = array_merge( $args, array( 'type' => 'faq' ) );
 
+		if ( isset( $query_vars['course_id'] ) ) {
+			$args['post_id'] = $query_vars['course_id'];
+		}
 		if ( ! empty( $args['errors'] ) ) {
 			$query = (object) array(
 				'posts'         => array(),
@@ -213,25 +217,29 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 				'max_num_pages' => 0,
 			);
 		} else {
-			$query = new \WP_Query( $args );
+			$query = new \WP_Comment_Query( $args );
 		}
 
-		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
+		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->comments ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'faq' ) );
+			update_comment_cache( $query->comments );
 		}
 
-		$faqs = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_faq', $query->posts ) );
+		if ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) {
+			$faq = $query->comments;
+		} else {
+			$faq = array_filter( array_map( 'masteriyo_get_faq', $query->comments ) );
+		}
 
 		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
 			return (object) array(
-				'faqs'          => $faqs,
+				'faq'           => $faq,
 				'total'         => $query->found_posts,
 				'max_num_pages' => $query->max_num_pages,
 			);
 		}
 
-		return $faqs;
+		return $faq;
 	}
 
 	/**

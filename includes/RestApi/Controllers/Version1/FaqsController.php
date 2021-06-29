@@ -142,7 +142,7 @@ class FaqsController extends PostsController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param  int|Model|WP_Post $object Object ID or Model or WP_Post object.
+	 * @param  int|Model|WP_Comment $object Object ID or Model or WP_Comment object.
 	 * @return object Model object or WP_Error object.
 	 */
 	protected function get_object( $object ) {
@@ -150,7 +150,7 @@ class FaqsController extends PostsController {
 			if ( is_int( $object ) ) {
 				$id = $object;
 			} else {
-				$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
+				$id = is_a( $object, '\WP_Comment' ) ? $object->comment_ID : $object->get_id();
 			}
 			$faq = masteriyo( 'faq' );
 			$faq->set_id( $id );
@@ -204,11 +204,13 @@ class FaqsController extends PostsController {
 	 */
 	protected function get_faq_data( $faq, $context = 'view' ) {
 		$data = array(
-			'id'          => $faq->get_id(),
-			'name'        => $faq->get_name( $context ),
-			'menu_order'  => $faq->get_menu_order( $context ),
-			'parent_id'   => $faq->get_course_id( $context ),
-			'description' => 'view' === $context ? wpautop( do_shortcode( $faq->get_description() ) ) : $faq->get_description( $context ),
+			'id'         => $faq->get_id(),
+			'title'      => $faq->get_title( $context ),
+			'content'    => 'view' === $context ? wpautop( do_shortcode( $faq->get_content() ) ) : $faq->get_content( $context ),
+			'course_id'  => $faq->get_course_id( $context ),
+			'user_id'    => $faq->get_user_id( $context ),
+			'sort_order' => $faq->get_sort_order( $context ),
+			'created_at' => $faq->get_created_at( $context ),
 		);
 
 		return $data;
@@ -223,10 +225,28 @@ class FaqsController extends PostsController {
 	 * @return array
 	 */
 	protected function prepare_objects_query( $request ) {
-		$args = parent::prepare_objects_query( $request );
+		$args = array(
+			'offset'   => $request['offset'],
+			'paged'    => $request['page'],
+			'per_page' => $request['per_page'],
+			's'        => $request['search'],
+			'type'     => 'mto-faq',
+		);
 
-		// Set post_status.
-		$args['post_status'] = 'publish';
+		if ( isset( $request['course_id'] ) ) {
+			$args['post_id'] = absint( $request['course_id'] );
+		}
+
+		/**
+		 * Filter the query arguments for a request.
+		 *
+		 * Enables adding extra arguments or setting defaults for a post
+		 * collection request.
+		 *
+		 * @param array           $args    Key value array of query var to query value.
+		 * @param WP_REST_Request $request The request used.
+		 */
+		$args = apply_filters( "masteriyo_rest_{$this->object_type}_object_query", $args, $request );
 
 		return $args;
 	}
@@ -250,8 +270,8 @@ class FaqsController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name'              => array(
-					'description' => __( 'Faq name.', 'masteriyo' ),
+				'title'              => array(
+					'description' => __( 'Faq title.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -277,18 +297,18 @@ class FaqsController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'description'       => array(
-					'description' => __( 'Faq description.', 'masteriyo' ),
+				'content'         => array(
+					'description' => __( 'Faq content.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'parent_id'         => array(
-					'description' => __( 'Faq parent ID.', 'masteriyo' ),
+				'course_id'         => array(
+					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'menu_order'        => array(
-					'description' => __( 'Menu order, used to custom sort Faqs.', 'masteriyo' ),
+				'sort_order'        => array(
+					'description' => __( 'Sort order, used to custom sort Faqs.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -317,18 +337,18 @@ class FaqsController extends PostsController {
 		}
 
 		// Post title.
-		if ( isset( $request['name'] ) ) {
-			$faq->set_name( wp_filter_post_kses( $request['name'] ) );
+		if ( isset( $request['title'] ) ) {
+			$faq->set_title( wp_filter_post_kses( $request['title'] ) );
 		}
 
 		// Post content.
-		if ( isset( $request['description'] ) ) {
-			$faq->set_description( wp_filter_post_kses( $request['description'] ) );
+		if ( isset( $request['content'] ) ) {
+			$faq->set_content( wp_filter_post_kses( $request['content'] ) );
 		}
 
 		// Menu order.
-		if ( isset( $request['menu_order'] ) ) {
-			$faq->set_menu_order( $request['menu_order'] );
+		if ( isset( $request['sort_order'] ) ) {
+			$faq->set_sort_order( $request['sort_order'] );
 		}
 
 		// Faq parent ID.
@@ -359,5 +379,242 @@ class FaqsController extends PostsController {
 		 * @param bool            $creating If is creating a new object.
 		 */
 		return apply_filters( "masteriyo_rest_pre_insert_{$this->post_type}_object", $faq, $request, $creating );
+	}
+
+	/**
+	 * Get objects.
+	 *
+	 * @since  0.1.0
+	 * @param  array $query_args Query args.
+	 * @return array
+	 */
+	protected function get_objects( $query_args ) {
+		$query = new \WP_Comment_Query( $query_args );
+		$faq_posts = $query->comments;
+		$total_posts    = count( $faq_posts );
+
+		if ( $total_posts < 1 ) {
+			// Out-of-bounds, run the query again without LIMIT for total count.
+			unset( $query_args['paged'] );
+			$faq_posts = new \WP_Comment_Query( $query_args );
+			$faq_posts = $query->comments;
+			$total_posts    = count( $faq_posts );
+		}
+
+		return array(
+			'objects' => array_filter( array_map( array( $this, 'get_object' ), $faq_posts ) ),
+			'total'   => (int) $total_posts,
+			'pages'   => (int) ceil( $total_posts / (int) 10 ),
+		);
+	}
+
+	/**
+	 * Check if a given request has access to read items.
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function get_items_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_faqs_permissions( 'read' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Checks if a given request has access to get a specific item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
+	 */
+	public function get_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_faqs_permissions( 'read', absint( $request['id'] ) ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to create an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function create_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( ! $this->permission->rest_check_faqs_permissions( 'create' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to delete an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function delete_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
+		$review = $this->get_object( absint( $request['id'] ) );
+
+		if ( ! is_object( $review ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_invalid_id",
+				__( 'Invalid ID.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( get_current_user_id() !== $review->get_user_id() ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_delete',
+				__( 'Sorry, you are not allowed to delete this resource.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( ! $this->permission->rest_check_faqs_permissions( 'delete', absint( $request['id'] ) ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_delete',
+				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to update an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function update_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
+		$review = $this->get_object( absint( $request['id'] ) );
+
+		if ( ! is_object( $review ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_invalid_id",
+				__( 'Invalid ID.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( get_current_user_id() !== $review->get_user_id() ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, you are not allowed to update this resource.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		if ( ! $this->permission->rest_check_faqs_permissions( 'edit', absint( $request['id'] ) ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code()
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check permissions for an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $object_type Object type.
+	 * @param string $context   Request context.
+	 * @param int    $object_id Post ID.
+	 *
+	 * @return bool
+	 */
+	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
+		return true;
 	}
 }

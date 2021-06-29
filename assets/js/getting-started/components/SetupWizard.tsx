@@ -15,12 +15,12 @@ const SetupWizard: React.FC = () => {
 		initialStep: 0,
 	});
 
-	const methods = useForm();
+	const methods = useForm({ reValidateMode: 'onChange' });
 	const toast = useToast();
 	const settingAPI = new API(urls.settings);
 
 	const addMutation = useMutation((data?: any) => settingAPI.store(data), {
-		onSuccess: () => {
+		onSuccess: (data) => {
 			nextStep(); // To finish page.
 		},
 		onError: (error) => {

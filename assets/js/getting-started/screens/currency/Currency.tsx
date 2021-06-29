@@ -1,11 +1,10 @@
 import {
-	Alert,
-	AlertIcon,
 	Box,
 	Button,
 	ButtonGroup,
 	Flex,
 	FormControl,
+	FormErrorMessage,
 	FormLabel,
 	Heading,
 	Input,
@@ -24,88 +23,38 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import React from 'react';
 import CurrencyInput from 'react-currency-input-field';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
+import { SetttingsMap } from '../../../back-end/types';
 import { currency } from '../../../back-end/utils/currency';
+import { hasNumber } from '../../../back-end/utils/helper';
 interface Props {
 	dashboardURL: string;
 	prevStep: () => void;
 	nextStep: () => void;
 }
 
-function validateData(generalWatchData?: any) {
-	if ('undefined' != typeof generalWatchData) {
-		// To check for number in input.
-		const regex: any = /\d/;
+const Preview = (general: any) => {
+	const currencySymbol = getSymbolFromCurrency(general.currency);
 
-		const { decimal_separator, thousands_separator } = generalWatchData;
-
-		if (regex.test(decimal_separator) || regex.test(thousands_separator)) {
-			return {
-				message: "Thousand and decimal separator can't be number.",
-				isBtnEnable: false,
-			};
-		} else if (
-			'undefined' != typeof thousands_separator &&
-			decimal_separator === thousands_separator
-		) {
-			return {
-				message: "Thousand and decimal separator can't be same.",
-				isBtnEnable: false,
-			};
-		} else {
-			return {
-				message: 'Validate successfully',
-				isBtnEnable: true,
-			};
-		}
-	}
-}
-
-const Preview = ({ watchData }) => {
-	if ('undefined' != typeof watchData.general) {
-		let currencySymbol: any;
-
-		const {
-			currency,
-			currency_position,
-			thousands_separator,
-			decimal_separator,
-			number_of_decimals,
-		} = watchData.general;
-
-		currencySymbol = getSymbolFromCurrency(currency);
-
-		let validationData = validateData(watchData.general);
-
-		if (!validationData?.isBtnEnable) {
-			return (
-				<Alert fontSize="sm" status="error">
-					<AlertIcon />
-					{validationData?.message}
-				</Alert>
-			);
-		}
-
-		if ('left' === currency_position) {
-			return (
-				<CurrencyInput
-					prefix={currencySymbol}
-					groupSeparator={thousands_separator}
-					decimalSeparator={decimal_separator}
-					decimalScale={number_of_decimals}
-					value={9999.99}
-				/>
-			);
-		} else if ('right' === currency_position) {
-			return (
-				<CurrencyInput
-					suffix={currencySymbol}
-					groupSeparator={thousands_separator}
-					decimalSeparator={decimal_separator}
-					decimalScale={number_of_decimals}
-					value={9999.99}
-				/>
-			);
-		}
+	if ('left' === general.currency_position) {
+		return (
+			<CurrencyInput
+				prefix={currencySymbol}
+				groupSeparator={general.thousands_separator}
+				decimalSeparator={general.decimal_separator}
+				decimalScale={general.number_of_decimals}
+				value={9999.99}
+			/>
+		);
+	} else if ('right' === general.currency_position) {
+		return (
+			<CurrencyInput
+				suffix={currencySymbol}
+				groupSeparator={general.thousands_separator}
+				decimalSeparator={general.decimal_separator}
+				decimalScale={general.number_of_decimals}
+				value={9999.99}
+			/>
+		);
 	}
 
 	// Default value.
@@ -114,18 +63,15 @@ const Preview = ({ watchData }) => {
 
 const Currency: React.FC<Props> = (props) => {
 	const { dashboardURL, prevStep, nextStep } = props;
-	const { register, control } = useFormContext();
+	const {
+		register,
+		formState: { errors },
+		trigger,
+	} = useFormContext();
 	// Watch entire currency form.
-	const watchData = useWatch({
-		control,
+	const watchGeneralData = useWatch<SetttingsMap>({
+		name: 'general',
 	});
-
-	let enableBtn: boolean = true;
-
-	if ('undefined' != typeof watchData.general) {
-		let validationData = validateData(watchData.general);
-		enableBtn = validationData?.isBtnEnable;
-	}
 
 	return (
 		<Box rounded="3px">
@@ -177,16 +123,28 @@ const Currency: React.FC<Props> = (props) => {
 						</Flex>
 					</FormControl>
 
-					<FormControl>
+					<FormControl isInvalid={!!errors?.general?.decimal_separator}>
 						<Flex justify="space-between" align="center">
 							<FormLabel sx={{ fontWeight: 'bold' }}>
 								{__('Decimal Separator', 'masteriyo')}
 							</FormLabel>
-							<Input
-								defaultValue="."
-								w="md"
-								{...register('general.decimal_separator')}
-							/>
+							<Box>
+								<Input
+									defaultValue="."
+									w="md"
+									{...register('general.decimal_separator', {
+										required: true,
+										pattern: {
+											value: hasNumber,
+											message: 'Numbers are not allowed.',
+										},
+									})}
+								/>
+								<FormErrorMessage>
+									{errors?.general?.decimal_separator &&
+										errors?.general?.decimal_separator.message}
+								</FormErrorMessage>
+							</Box>
 						</Flex>
 					</FormControl>
 
@@ -221,7 +179,7 @@ const Currency: React.FC<Props> = (props) => {
 						</strong>
 						<Box rounded="3" boxSizing="border-box" w="md">
 							<Heading color="blue.500" as="h2" size="md">
-								<Preview watchData={watchData} />
+								<Preview general={watchGeneralData} />
 							</Heading>
 						</Box>
 					</Flex>
@@ -241,7 +199,7 @@ const Currency: React.FC<Props> = (props) => {
 								</Button>
 							</Link>
 							<Button
-								isDisabled={!enableBtn}
+								isDisabled={!!errors}
 								onClick={nextStep}
 								rounded="3px"
 								colorScheme="blue">

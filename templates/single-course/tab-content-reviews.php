@@ -31,7 +31,7 @@ do_action('masteriyo_before_single_course_reviews_content');
 		</span>
 
 		<span class="mto-rnumber">
-			<?php echo esc_html( masteriyo_round( $rating, 1 ) ); ?> <?php _e('out of', 'masteriyo'); ?> <?php echo esc_html(masteriyo_get_max_course_rating()); ?>
+			<?php echo esc_html(masteriyo_round($rating, 1)); ?> <?php _e('out of', 'masteriyo'); ?> <?php echo esc_html(masteriyo_get_max_course_rating()); ?>
 		</span>
 	</div>
 </div>
@@ -104,7 +104,7 @@ do_action('masteriyo_before_single_course_reviews_content');
 					<div class="mto-course-review is-course-review-reply" data-id="<?php echo esc_attr($reply->get_id()); ?>">
 						<input type="hidden" name="parent" value="<?php echo esc_attr($course_review->get_id()); ?>">
 						<div class="rating" data-value="0"></div>
-						<div class="mto-review mto-flex mto-replies">
+						<div class="mto-review mto-flex mto-replies mto-border-none">
 							<div class="mto-avatar">
 								<?php if (!$reply->get_author()) : ?>
 									<img src="<?php echo esc_attr($pp_placeholder); ?>" />

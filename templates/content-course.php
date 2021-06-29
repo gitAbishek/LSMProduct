@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying course content within loops
  *
@@ -14,34 +15,30 @@
  * @version 0.1.0
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 global $course;
 
 // Ensure visibility.
-if ( empty( $course ) || ! $course->is_visible() ) {
+if (empty($course) || !$course->is_visible()) {
 	return;
 }
 ?>
 <div class="mto-course-item m-0">
 	<div class="mto-course--card">
-		<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php esc_attr( $course->get_name() ); ?>">
+		<a href="<?php echo esc_url($course->get_permalink()); ?>" title="<?php esc_attr($course->get_name()); ?>">
 			<div class="mto-course--img-wrap">
-			<?php if ( $course->is_purchasable() ) : ?>
-				<span class="mto-course--price-tag">
-					<?php echo masteriyo_price( $course->get_price() ); ?>
-				</span>
-			<?php endif; ?>
+				<?php if ($course->is_purchasable()) : ?>
+					<span class="mto-course--price-tag">
+						<?php echo masteriyo_price($course->get_price()); ?>
+					</span>
+				<?php endif; ?>
 
 				<!-- Featured Image -->
-				<?php if ( empty( $course->get_featured_image_url() ) ) : ?>
+				<?php if (empty($course->get_featured_image_url())) : ?>
 					<img class="mto-course--img" src="https://via.placeholder.com/150" alt="Course featured image">
 				<?php else : ?>
-					<img
-						class="mto-course--img"
-						src="<?php echo esc_url( $course->get_featured_image_url() ); ?>"
-						alt="Course featured image"
-					>
+					<img class="mto-course--img" src="<?php echo esc_url($course->get_featured_image_url()); ?>" alt="Course featured image">
 				<?php endif; ?>
 			</div>
 		</a>
@@ -49,11 +46,11 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 		<div class="mto-course--header">
 			<div class="mto-rt">
 				<span class="mto-icon-svg mto-flex mto-rating">
-					<?php masteriyo_format_rating( wp_rand( 0, 5 ) / wp_rand( 1, 5 ), true ); ?>
+					<?php masteriyo_format_rating(wp_rand(0, 5) / wp_rand(1, 5), true); ?>
 				</span>
-				<?php foreach ( $course->get_categories( 'name' ) as $category ) : ?>
+				<?php foreach ($course->get_categories('name') as $category) : ?>
 					<span class="mto-badge mto-badge-pink mto-tag">
-						<?php echo esc_html( $category->get_name() ); ?>
+						<?php echo esc_html($category->get_name()); ?>
 					</span>
 				<?php endforeach; ?>
 			</div>
@@ -62,16 +59,16 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 				<?php
 				printf(
 					'<a href="%s" title="%s">%s</a>',
-					esc_url( $course->get_permalink() ),
-					esc_html( $course->get_name() ),
-					esc_html( $course->get_name() )
+					esc_url($course->get_permalink()),
+					esc_html($course->get_name()),
+					esc_html($course->get_name())
 				);
 				?>
 			</h2>
 			<div class="mto-time-btn">
 				<span class="mto-duration">
 					<span class="mto-icon-svg">
-						<?php masteriyo_get_svg( 'clock', true ); ?>
+						<?php masteriyo_get_svg('clock', true); ?>
 					</span>
 
 					<time class="mto-inline-block mto-text-sm">10:00 min</time>
@@ -80,7 +77,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 				<?php if ( masteriyo_can_start_course( $course ) ) : ?>
 					<a href="<?php echo esc_url( $course->start_course_url() ); ?>"
 						target="_blank"
-						class="single_add_to_cart_button button alt mto-btn mto-btn-primary mto-scourse--btn">
+						class="single_add_to_cart_button button alt mto-btn mto-btn-primary mto-scourse--btn mb-0">
 						<?php apply_filters( 'masteriyo_start_course_text', esc_html_e( 'Start Course', 'masteriyo' ) ); ?>
 					</a>
 				<?php else : ?>
@@ -89,7 +86,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 					</a>
 				<?php endif; ?>
 
-			<?php endif; ?>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

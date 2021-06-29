@@ -4,11 +4,12 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-top: -15px;
+  gap: 32px;
 
   &-item {
     @include mto-shadow-1;
     background: $mto-white-color;
-    margin: 15px;
+    // margin: 15px;
     flex-basis: calc((100% / 4) - 30px);
   }
 
@@ -229,4 +230,7 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 14px;
+}
+.mto-submit-review-form-container {
+  clear: both;
 }

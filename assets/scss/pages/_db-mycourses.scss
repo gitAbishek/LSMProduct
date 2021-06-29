@@ -18,6 +18,7 @@
     background: $mto-white-color;
     margin: 15px 15px 30px 15px;
     flex-basis: calc((100% / 3) - 30px);
+    max-width: 256px;
   }
 
   &--img {
@@ -44,6 +45,7 @@
   &--rating {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
   }
 
   &--detail {
@@ -56,6 +58,7 @@
     font-size: $mto-text-lg;
     font-weight: 700;
     margin: 16px 0 0;
+    padding-top: 14px;
   }
 
   // Course list body

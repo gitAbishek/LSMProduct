@@ -51,7 +51,7 @@ const AllCourses = () => {
 			search: filterParamsRef.current.searchString,
 			category: filterParamsRef.current.category_id,
 			status: filterParamsRef.current.status,
-			only_free: filterParamsRef.current.isOnlyFree ? 'yes' : '',
+			price: filterParamsRef.current.isOnlyFree ? '0' : null,
 		})
 	);
 	const categoryAPI = new API(urls.categories);

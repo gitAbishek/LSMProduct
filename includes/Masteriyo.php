@@ -69,6 +69,7 @@ class Masteriyo extends Container {
 		FileRestrictions::init();
 		CourseReviews::init();
 		CourseQuestionAnswers::init();
+		Faqs::init();
 
 		// Register service providers.
 		$this->register_service_providers();

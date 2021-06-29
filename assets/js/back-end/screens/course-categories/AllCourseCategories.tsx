@@ -13,7 +13,6 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useQuery } from 'react-query';
-
 import urls from '../../constants/urls';
 import { SkeletonCourseTaxonomy } from '../../skeleton';
 import API from '../../utils/api';

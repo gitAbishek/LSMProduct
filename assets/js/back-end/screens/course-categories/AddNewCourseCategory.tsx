@@ -14,14 +14,13 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
-
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import DescriptionInput from './components/DescriptionInput';
-import SlugInput from './components/SlugInput';
-import NameInput from './components/NameInput';
 import Header from './components/Header';
+import NameInput from './components/NameInput';
+import SlugInput from './components/SlugInput';
 
 const AddNewCourseCategory = () => {
 	const history = useHistory();

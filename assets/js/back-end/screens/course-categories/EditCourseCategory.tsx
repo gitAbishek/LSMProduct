@@ -27,14 +27,13 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import DescriptionInput from './components/DescriptionInput';
-import SlugInput from './components/SlugInput';
-import NameInput from './components/NameInput';
 import Header from './components/Header';
+import NameInput from './components/NameInput';
+import SlugInput from './components/SlugInput';
 
 const EditCourseCategory = () => {
 	const { categoryId }: any = useParams();

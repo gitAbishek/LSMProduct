@@ -22,7 +22,6 @@ import React, { useRef, useState } from 'react';
 import { BiDotsVerticalRounded, BiEdit, BiShow, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
-
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';

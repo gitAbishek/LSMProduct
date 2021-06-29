@@ -13,12 +13,11 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useQuery } from 'react-query';
-
 import urls from '../../constants/urls';
 import { SkeletonCourseTaxonomy } from '../../skeleton';
 import API from '../../utils/api';
-import ListRow from './components/ListRow';
 import Header from './components/Header';
+import ListRow from './components/ListRow';
 
 const AllCourseDifficulties = () => {
 	const difficultiesAPI = new API(urls.difficulties);

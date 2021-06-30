@@ -906,6 +906,7 @@ class CourseProgressController extends CrudController {
 
 		$total_quizzes = $query->found_posts;
 
+		$data['items'] = array();
 		foreach ( $items as $item ) {
 			$data['items'][] = $this->get_course_progress_item_data( $item );
 		}

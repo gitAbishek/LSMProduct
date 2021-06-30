@@ -84,7 +84,7 @@ const Header = () => {
 								align="center"
 								flex="1"
 								justify="space-between">
-								<Stack direction="column" spacing="1" flex="1">
+								<Stack direction="column" spacing="2" flex="1">
 									<Stack direction="row" justify="space-between" align="center">
 										<Stack direction="row" alignItems="center">
 											<Flex>
@@ -115,6 +115,7 @@ const Header = () => {
 												<PopoverTrigger>
 													<IconButton
 														py="0"
+														minW="0"
 														variant="link"
 														minH="auto"
 														icon={<BiInfoCircle />}

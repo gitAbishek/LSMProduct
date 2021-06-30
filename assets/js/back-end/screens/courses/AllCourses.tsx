@@ -30,14 +30,11 @@ interface FilterParams {
 
 const AllCourses = () => {
 	const courseAPI = new API(urls.courses);
-	const [filterParams, setFilterParams] = useState<FilterParams>({
-		status: 'any',
-	});
+	const [filterParams, setFilterParams] = useState<FilterParams>({});
 	const courseQuery = useQuery(['courseList', filterParams], () =>
 		courseAPI.list(filterParams)
 	);
 
-	console.log(filterParams);
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header />

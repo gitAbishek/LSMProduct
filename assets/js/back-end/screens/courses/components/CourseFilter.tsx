@@ -8,6 +8,7 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import { pickBy } from 'object-pickby';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
@@ -37,7 +38,7 @@ interface FilterParams {
 }
 
 interface Props {
-	setFilterParams?: Function;
+	setFilterParams: any;
 }
 
 const CourseFilter: React.FC<Props> = (props) => {
@@ -49,13 +50,10 @@ const CourseFilter: React.FC<Props> = (props) => {
 	const { handleSubmit, register } = useForm();
 
 	const onSubmit = (data: FilterParams) => {
-		typeof setFilterParams === 'function' &&
-			setFilterParams({
-				...(data.search ? { search: data.search } : {}),
-				...(data.category ? { category: data.category } : {}),
-				...(data.status ? { status: data.status } : {}),
-				...(data.isOnlyFree ? { price: 0 } : {}),
-			});
+		// only pick parameters that are not empty
+		const newData = pickBy(data, (param) => param.length > 0);
+
+		setFilterParams(newData);
 	};
 
 	return (
@@ -69,7 +67,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 						/>
 
 						<Select {...register('category')}>
-							<option>{__('All Categories', 'masteriyo')}</option>
+							<option value="">{__('All Categories', 'masteriyo')}</option>
 							{categoryQuery?.data?.map(
 								(category: { id: number; name: string }) => (
 									<option key={category.id} value={category.id}>
@@ -89,8 +87,8 @@ const CourseFilter: React.FC<Props> = (props) => {
 
 						<Select {...register('isOnlyFree')}>
 							<option value="">{__('Pricing', 'masteriyo')}</option>
-							<option value="free">{__('Free', 'masteriyo')}</option>
-							<option value="paid">{__('Paid', 'masteriyo')}</option>
+							<option value="0">{__('Free', 'masteriyo')}</option>
+							<option value="">{__('Paid', 'masteriyo')}</option>
 						</Select>
 						<ButtonGroup>
 							<Button type="submit" colorScheme="blue">

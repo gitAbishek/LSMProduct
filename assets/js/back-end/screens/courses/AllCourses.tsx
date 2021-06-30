@@ -38,6 +38,7 @@ const AllCourses = () => {
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header />
+			<CourseFilter setFilterParams={setFilterParams} />
 			<Container maxW="container.xl">
 				<Box bg="white" p="12" shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
@@ -46,8 +47,6 @@ const AllCourses = () => {
 								{__('Courses', 'masteriyo')}
 							</Heading>
 						</Flex>
-
-						<CourseFilter setFilterParams={setFilterParams} />
 
 						<Table>
 							<Thead>

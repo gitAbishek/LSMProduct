@@ -1,17 +1,14 @@
 import {
-	Button,
-	Flex,
-	FormLabel,
+	Box,
+	Container,
 	Input,
 	Select,
 	Spinner,
 	Stack,
-	Switch,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { BiFilter } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
@@ -83,55 +80,44 @@ const CourseFilter: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			<Stack direction="row" spacing="8">
-				<Flex alignItems="center">
-					<FormLabel>{__('Search', 'masteriyo')}</FormLabel>
-					<Input {...register('search')} />
-				</Flex>
-				<Flex alignItems="center">
-					<FormLabel>{__('Category', 'masteriyo')}</FormLabel>
-					{categoryQuery.isLoading ? (
-						<Spinner />
-					) : (
-						<Select {...register('category')}>
-							{getCategoryOptions().map((option: any) => (
+		<Container maxW="container.xl">
+			<Box bg="white" px="12" py="8" shadow="box" mx="auto">
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<Stack direction="row" spacing="4">
+						<Input
+							placeholder={__('Search courses', 'masteriyo')}
+							{...register('search')}
+						/>
+
+						{categoryQuery.isLoading ? (
+							<Spinner />
+						) : (
+							<Select {...register('category')}>
+								{getCategoryOptions().map((option: any) => (
+									<option key={option.value} value={option.value}>
+										{option.label}
+									</option>
+								))}
+							</Select>
+						)}
+
+						<Select {...register('status')}>
+							{courseStatusList.map((option: any) => (
 								<option key={option.value} value={option.value}>
 									{option.label}
 								</option>
 							))}
 						</Select>
-					)}
-				</Flex>
-				<Flex alignItems="center">
-					<FormLabel>{__('Status', 'masteriyo')}</FormLabel>
-					<Select {...register('status')}>
-						{courseStatusList.map((option: any) => (
-							<option key={option.value} value={option.value}>
-								{option.label}
-							</option>
-						))}
-					</Select>
-				</Flex>
-				<Flex alignItems="center">
-					<FormLabel htmlFor="filter-only-free-courses">
-						{__('Only Free', 'masteriyo')}
-					</FormLabel>
-					<Switch
-						id="filter-only-free-courses"
-						defaultChecked={false}
-						{...register('isOnlyFree')}
-					/>
-				</Flex>
-				<Button
-					leftIcon={<BiFilter />}
-					colorScheme="blue"
-					size="sm"
-					type="submit">
-					{__('Filter')}
-				</Button>
-			</Stack>
-		</form>
+
+						<Select {...register('isOnlyFree')}>
+							<option value="">{__('Pricing', 'masteriyo')}</option>
+							<option value="free">{__('Free', 'masteriyo')}</option>
+							<option value="paid">{__('Paid', 'masteriyo')}</option>
+						</Select>
+					</Stack>
+				</form>
+			</Box>
+		</Container>
 	);
 };
 

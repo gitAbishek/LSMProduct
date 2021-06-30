@@ -12,20 +12,33 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import Header from 'Components/layout/Header';
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-
 import urls from '../../constants/urls';
 import { SkeletonCourseList } from '../../skeleton';
 import API from '../../utils/api';
+import CourseFilter from './components/CourseFilter';
 import CourseList from './components/CourseList';
+
+interface FilterParams {
+	category?: string | number;
+	search?: string;
+	status?: string;
+	isOnlyFree?: boolean;
+	price?: string | number;
+}
 
 const AllCourses = () => {
 	const courseAPI = new API(urls.courses);
-	const courseQuery = useQuery('courseList', () => courseAPI.list());
+	const [filterParams, setFilterParams] = useState<FilterParams>({});
+	const courseQuery = useQuery(['courseList', filterParams], () =>
+		courseAPI.list(filterParams)
+	);
+
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header />
+			<CourseFilter setFilterParams={setFilterParams} />
 			<Container maxW="container.xl">
 				<Box bg="white" p="12" shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">

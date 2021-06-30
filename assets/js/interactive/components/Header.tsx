@@ -3,6 +3,7 @@ import {
 	Button,
 	CircularProgress,
 	Container,
+	Flex,
 	Heading,
 	Icon,
 	IconButton,
@@ -69,20 +70,41 @@ const Header = () => {
 					<Container maxW="container.xl">
 						<Stack
 							direction="row"
-							spacing="4"
+							spacing="12"
 							align="center"
 							py="4"
 							justifyContent="space-between">
-							<Image src={Logo} maxW="180px" />
+							<Box w="165px">
+								<Image src={Logo} />
+							</Box>
 
-							<Stack direction="row" spacing="6" align="center">
-								<Stack direction="column" spacing="1">
+							<Stack
+								direction="row"
+								spacing="6"
+								align="center"
+								flex="1"
+								justify="space-between">
+								<Stack direction="column" spacing="1" flex="1">
 									<Stack direction="row" justify="space-between" align="center">
-										<Stack direction="row">
-											<Heading>35%</Heading>
-											<Text>Complete</Text>
+										<Stack direction="row" alignItems="center">
+											<Flex>
+												<Heading fontSize="lg">35</Heading>
+												<Text fontSize="xs">%</Text>
+											</Flex>
+
+											<Text
+												fontSize="10px"
+												textTransform="uppercase"
+												color="gray.600"
+												fontWeight="bold">
+												Complete
+											</Text>
 										</Stack>
-										<Stack direction="row">
+										<Stack
+											direction="row"
+											fontSize="xs"
+											fontWeight="medium"
+											color="gray.600">
 											<Text>11/21 Steps | </Text>
 											<Text>2 lessons left | </Text>
 											<Text>1 Quiz left</Text>
@@ -116,7 +138,7 @@ const Header = () => {
 									{__('Submit Quiz', 'masteriyo')}
 								</Button>
 							</Stack>
-							<Stack direction="row" spacing="2" align="center">
+							<Stack direction="row" spacing="2" align="center" w="120px">
 								<Icon as={BiSearch} />
 								<Icon as={BiHeart} />
 								<Notification />

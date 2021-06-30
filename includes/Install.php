@@ -189,7 +189,6 @@ class Install {
 		$sql = "CREATE TABLE `{$base_prefix}masteriyo_user_activities` (
 			`id` BIGINT UNSIGNED AUTO_INCREMENT,
 			`user_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
-			`parent_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
 			`item_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
 			`activity_type` VARCHAR(20) DEFAULT NULL,
 			`activity_status` VARCHAR(20) DEFAULT NULL,
@@ -320,7 +319,11 @@ class Install {
 			attempt_status varchar(50) DEFAULT NULL,
 			attempt_started_at datetime DEFAULT NULL,
 			attempt_ended_at datetime DEFAULT NULL,
-			PRIMARY KEY  (attempt_id)
+			PRIMARY KEY  (`attempt_id`)
+			KEY `quiz_id` (`quiz_id`),
+			KEY `user_id` (`user_id`),
+			KEY `attempt_started_at` (`attempt_started_at`),
+			KEY `attempt_ended_at` (`attempt_ended_at`),
 		) $charset_collate;";
 
 		return $sql;

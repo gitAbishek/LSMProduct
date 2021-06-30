@@ -1,5 +1,7 @@
 import {
 	Box,
+	Button,
+	ButtonGroup,
 	Container,
 	Input,
 	Select,
@@ -47,28 +49,6 @@ const CourseFilter: React.FC<Props> = (props) => {
 	});
 	const { handleSubmit, register } = useForm();
 
-	const getCategoryOptions = () => {
-		if (categoryQuery.isLoading || categoryQuery.isError) {
-			return [
-				{
-					value: '',
-					label: __('All Categories', 'masteriyo'),
-				},
-			];
-		}
-		return [
-			{
-				value: '',
-				label: __('All Categories', 'masteriyo'),
-			},
-			...categoryQuery.data.map((category: any) => {
-				return {
-					value: category.id,
-					label: category.name,
-				};
-			}),
-		];
-	};
 	const onSubmit = (data: FilterParams) => {
 		typeof setFilterParams === 'function' &&
 			setFilterParams({
@@ -93,11 +73,14 @@ const CourseFilter: React.FC<Props> = (props) => {
 							<Spinner />
 						) : (
 							<Select {...register('category')}>
-								{getCategoryOptions().map((option: any) => (
-									<option key={option.value} value={option.value}>
-										{option.label}
-									</option>
-								))}
+								<option>{__('All Categories', 'masteriyo')}</option>
+								{categoryQuery?.data?.map(
+									(category: { id: number; name: string }) => (
+										<option key={category.id} value={category.id}>
+											{category.name}
+										</option>
+									)
+								)}
 							</Select>
 						)}
 
@@ -114,6 +97,11 @@ const CourseFilter: React.FC<Props> = (props) => {
 							<option value="free">{__('Free', 'masteriyo')}</option>
 							<option value="paid">{__('Paid', 'masteriyo')}</option>
 						</Select>
+						<ButtonGroup>
+							<Button type="submit" colorScheme="blue">
+								{__('Filter', 'masteriyo')}
+							</Button>
+						</ButtonGroup>
 					</Stack>
 				</form>
 			</Box>

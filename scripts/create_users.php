@@ -19,6 +19,15 @@ $users = array(
 		'description' => 'This is administrator',
 	),
 	array(
+		'user_login'  => 'manager',
+		'user_email'  => 'manager@the.com',
+		'role'        => 'masteriyo_manager',
+		'password'    => 'manager',
+		'user_url'    => 'https://manager.example.com',
+		'first_name'  => 'Manager 1',
+		'description' => 'This is manager',
+	),
+	array(
 		'user_login'  => 'manager1',
 		'user_email'  => 'manager1@the.com',
 		'role'        => 'masteriyo_manager',
@@ -46,6 +55,15 @@ $users = array(
 		'description' => 'This is administrator',
 	),
 	array(
+		'user_login'  => 'student',
+		'user_email'  => 'student@the.com',
+		'role'        => 'masteriyo_student',
+		'password'    => 'student',
+		'user_url'    => 'https://student.example.com',
+		'first_name'  => 'Student',
+		'description' => 'This is student',
+	),
+	array(
 		'user_login'  => 'student1',
 		'user_email'  => 'student1@the.com',
 		'role'        => 'masteriyo_student',
@@ -62,6 +80,15 @@ $users = array(
 		'user_url'    => 'https://student2.example.com',
 		'first_name'  => 'Student2',
 		'description' => 'This is student 2',
+	),
+	array(
+		'user_login'  => 'instructor',
+		'user_email'  => 'instructor@the.com',
+		'role'        => 'masteriyo_instructor',
+		'password'    => 'instructor',
+		'user_url'    => 'https://instructor.example.com',
+		'first_name'  => 'Instructor',
+		'description' => 'This is instructor',
 	),
 	array(
 		'user_login'  => 'instructor1',

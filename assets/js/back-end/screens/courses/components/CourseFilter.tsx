@@ -1,4 +1,5 @@
 import {
+	Button,
 	Flex,
 	FormLabel,
 	Input,
@@ -9,7 +10,9 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useForm } from 'react-hook-form';
+import { BiFilter } from 'react-icons/bi';
+import { useQuery } from 'react-query';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
 
@@ -33,22 +36,19 @@ interface FilterParams {
 	search?: string;
 	status?: string;
 	isOnlyFree?: boolean;
-	price?: string | number;
 }
 
 interface Props {
-	filterParamsRef: {
-		current: FilterParams;
-	};
+	setFilterParams?: Function;
 }
 
 const CourseFilter: React.FC<Props> = (props) => {
-	const { filterParamsRef } = props;
-	const queryClient = useQueryClient();
+	const { setFilterParams } = props;
 	const categoryAPI = new API(urls.categories);
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list(), {
 		retry: false,
 	});
+	const { handleSubmit, register } = useForm();
 
 	const getCategoryOptions = () => {
 		if (categoryQuery.isLoading || categoryQuery.isError) {
@@ -72,75 +72,66 @@ const CourseFilter: React.FC<Props> = (props) => {
 			}),
 		];
 	};
-	const getSearchInputHandler = () => {
-		let timer: any = 0;
-
-		return function (e: any) {
-			clearTimeout(timer);
-			timer = setTimeout(() => {
-				filterParamsRef.current.search = e.target.value;
-				queryClient.cancelQueries('courseList');
-				queryClient.refetchQueries('courseList');
-			}, 800);
-		};
-	};
-	const onChangeCategoryFilter = (e: any) => {
-		filterParamsRef.current.category = e.target.value;
-		queryClient.cancelQueries('courseList');
-		queryClient.refetchQueries('courseList');
-	};
-	const onChangeStatusFilter = (e: any) => {
-		filterParamsRef.current.status = e.target.value;
-		queryClient.cancelQueries('courseList');
-		queryClient.refetchQueries('courseList');
-	};
-	const onChangeOnlyFreeFilter = (e: any) => {
-		filterParamsRef.current.isOnlyFree = e.target.checked;
-		queryClient.cancelQueries('courseList');
-		queryClient.refetchQueries('courseList');
+	const onSubmit = (data: FilterParams) => {
+		typeof setFilterParams === 'function' &&
+			setFilterParams({
+				...(data.search ? { search: data.search } : {}),
+				...(data.category ? { category: data.category } : {}),
+				...(data.status ? { status: data.status } : {}),
+				...(data.isOnlyFree ? { price: 0 } : {}),
+			});
 	};
 
 	return (
-		<Stack direction="row" spacing="8">
-			<Flex alignItems="center">
-				<FormLabel>{__('Search', 'masteriyo')}</FormLabel>
-				<Input onKeyUp={getSearchInputHandler()} />
-			</Flex>
-			<Flex alignItems="center">
-				<FormLabel>{__('Category', 'masteriyo')}</FormLabel>
-				{categoryQuery.isLoading ? (
-					<Spinner />
-				) : (
-					<Select onChange={onChangeCategoryFilter}>
-						{getCategoryOptions().map((option: any) => (
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<Stack direction="row" spacing="8">
+				<Flex alignItems="center">
+					<FormLabel>{__('Search', 'masteriyo')}</FormLabel>
+					<Input {...register('search')} />
+				</Flex>
+				<Flex alignItems="center">
+					<FormLabel>{__('Category', 'masteriyo')}</FormLabel>
+					{categoryQuery.isLoading ? (
+						<Spinner />
+					) : (
+						<Select {...register('category')}>
+							{getCategoryOptions().map((option: any) => (
+								<option key={option.value} value={option.value}>
+									{option.label}
+								</option>
+							))}
+						</Select>
+					)}
+				</Flex>
+				<Flex alignItems="center">
+					<FormLabel>{__('Status', 'masteriyo')}</FormLabel>
+					<Select {...register('status')}>
+						{courseStatusList.map((option: any) => (
 							<option key={option.value} value={option.value}>
 								{option.label}
 							</option>
 						))}
 					</Select>
-				)}
-			</Flex>
-			<Flex alignItems="center">
-				<FormLabel>{__('Status', 'masteriyo')}</FormLabel>
-				<Select onChange={onChangeStatusFilter}>
-					{courseStatusList.map((option: any) => (
-						<option key={option.value} value={option.value}>
-							{option.label}
-						</option>
-					))}
-				</Select>
-			</Flex>
-			<Flex alignItems="center">
-				<FormLabel htmlFor="filter-only-free-courses">
-					{__('Only Free', 'masteriyo')}
-				</FormLabel>
-				<Switch
-					id="filter-only-free-courses"
-					defaultChecked={false}
-					onChange={onChangeOnlyFreeFilter}
-				/>
-			</Flex>
-		</Stack>
+				</Flex>
+				<Flex alignItems="center">
+					<FormLabel htmlFor="filter-only-free-courses">
+						{__('Only Free', 'masteriyo')}
+					</FormLabel>
+					<Switch
+						id="filter-only-free-courses"
+						defaultChecked={false}
+						{...register('isOnlyFree')}
+					/>
+				</Flex>
+				<Button
+					leftIcon={<BiFilter />}
+					colorScheme="blue"
+					size="sm"
+					type="submit">
+					{__('Filter')}
+				</Button>
+			</Stack>
+		</form>
 	);
 };
 

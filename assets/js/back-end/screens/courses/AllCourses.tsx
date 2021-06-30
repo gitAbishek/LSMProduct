@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import Header from 'Components/layout/Header';
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import urls from '../../constants/urls';
 import { SkeletonCourseList } from '../../skeleton';
@@ -29,25 +29,11 @@ interface FilterParams {
 }
 
 const AllCourses = () => {
-	const filterParamsRef = useRef<FilterParams>({});
 	const courseAPI = new API(urls.courses);
-	const courseQuery = useQuery('courseList', () => {
-		const filterParams: FilterParams = {};
-
-		if (filterParamsRef.current.search) {
-			filterParams.search = filterParamsRef.current.search;
-		}
-		if (filterParamsRef.current.category) {
-			filterParams.category = filterParamsRef.current.category;
-		}
-		if (filterParamsRef.current.status) {
-			filterParams.status = filterParamsRef.current.status;
-		}
-		if (filterParamsRef.current.isOnlyFree) {
-			filterParams.price = 0;
-		}
-		return courseAPI.list(filterParams);
-	});
+	const [filterParams, setFilterParams] = useState<FilterParams>({});
+	const courseQuery = useQuery(['courseList', filterParams], () =>
+		courseAPI.list(filterParams)
+	);
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
@@ -61,7 +47,7 @@ const AllCourses = () => {
 							</Heading>
 						</Flex>
 
-						<CourseFilter filterParamsRef={filterParamsRef} />
+						<CourseFilter setFilterParams={setFilterParams} />
 
 						<Table>
 							<Thead>
@@ -75,11 +61,8 @@ const AllCourses = () => {
 								</Tr>
 							</Thead>
 							<Tbody>
-								{(courseQuery.isLoading || courseQuery.isFetching) && (
-									<SkeletonCourseList />
-								)}
+								{courseQuery.isLoading && <SkeletonCourseList />}
 								{courseQuery.isSuccess &&
-									!courseQuery.isFetching &&
 									courseQuery.data.map((course: any) => (
 										<CourseList
 											id={course.id}

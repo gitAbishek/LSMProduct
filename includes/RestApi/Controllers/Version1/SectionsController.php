@@ -440,4 +440,152 @@ class SectionsController extends PostsController {
 		 */
 		return apply_filters( "masteriyo_rest_pre_insert_{$this->post_type}_object", $section, $request, $creating );
 	}
+
+	/**
+	 * Check if a given request has access to create an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function create_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'create' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		$course_id = absint( $request['course_id'] );
+		$course    = masteriyo_get_course( $course_id );
+
+		if ( is_null( $course ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_invalid_id",
+				__( 'Invalid course ID.', 'masteriyo' ),
+				array(
+					'status' => 404
+				)
+			);
+		}
+
+		if ( $course->get_author_id() !== get_current_user_id() ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you are not allowed to create section for others course.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to delete an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function delete_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
+		$id      = absint( $request['id'] );
+		$section = masteriyo_get_section( $id );
+
+		if ( is_null( $section ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_invalid_id",
+				__( 'Invalid ID.', 'masteriyo' ),
+				array(
+					'status' => 404
+				)
+			);
+		}
+
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'delete', $id ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_delete',
+				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to update an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function update_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
+		$id      = absint( $request['id'] );
+		$section = masteriyo_get_section( $id );
+
+		if ( is_null( $section ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_invalid_id",
+				__( 'Invalid ID.', 'masteriyo' ),
+				array(
+					'status' => 404
+				)
+			);
+		}
+
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'update', $id ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
+	}
 }

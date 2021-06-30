@@ -49,7 +49,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 		}
 
 		if ( ! $mto_course_qa->get_ip_address( 'edit' ) ) {
-			$mto_course_qa->set_ip_address( masteriyo_get_user_ip_address() );
+			$mto_course_qa->set_ip_address( masteriyo_get_current_ip_address() );
 		}
 
 		if ( ! $mto_course_qa->get_agent( 'edit' ) ) {

@@ -51,7 +51,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		}
 
 		if ( ! $course_review->get_ip_address( 'edit' ) ) {
-			$course_review->set_ip_address( masteriyo_get_user_ip_address() );
+			$course_review->set_ip_address( masteriyo_get_current_ip_address() );
 		}
 
 		if ( ! $course_review->get_agent( 'edit' ) ) {

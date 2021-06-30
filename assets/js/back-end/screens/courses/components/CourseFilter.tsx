@@ -5,7 +5,6 @@ import {
 	Container,
 	Input,
 	Select,
-	Spinner,
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -69,20 +68,16 @@ const CourseFilter: React.FC<Props> = (props) => {
 							{...register('search')}
 						/>
 
-						{categoryQuery.isLoading ? (
-							<Spinner />
-						) : (
-							<Select {...register('category')}>
-								<option>{__('All Categories', 'masteriyo')}</option>
-								{categoryQuery?.data?.map(
-									(category: { id: number; name: string }) => (
-										<option key={category.id} value={category.id}>
-											{category.name}
-										</option>
-									)
-								)}
-							</Select>
-						)}
+						<Select {...register('category')}>
+							<option>{__('All Categories', 'masteriyo')}</option>
+							{categoryQuery?.data?.map(
+								(category: { id: number; name: string }) => (
+									<option key={category.id} value={category.id}>
+										{category.name}
+									</option>
+								)
+							)}
+						</Select>
 
 						<Select {...register('status')}>
 							{courseStatusList.map((option: any) => (

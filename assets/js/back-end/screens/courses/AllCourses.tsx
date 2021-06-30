@@ -26,6 +26,10 @@ import CourseList from './components/CourseList';
 
 const courseStatusList = [
 	{
+		label: __('All', 'masteriyo'),
+		value: '',
+	},
+	{
 		label: __('Published', 'masteriyo'),
 		value: 'publish',
 	},
@@ -36,24 +40,34 @@ const courseStatusList = [
 ];
 
 interface FilterParams {
-	category_id?: string | number;
-	searchString?: string;
+	category?: string | number;
+	search?: string;
 	status?: string;
 	isOnlyFree?: boolean;
+	price?: string | number;
 }
 
 const AllCourses = () => {
 	const filterParamsRef = useRef<FilterParams>({});
 	const courseAPI = new API(urls.courses);
 	const queryClient = useQueryClient();
-	const courseQuery = useQuery('courseList', () =>
-		courseAPI.list({
-			search: filterParamsRef.current.searchString,
-			category: filterParamsRef.current.category_id,
-			status: filterParamsRef.current.status,
-			price: filterParamsRef.current.isOnlyFree ? '0' : null,
-		})
-	);
+	const courseQuery = useQuery('courseList', () => {
+		const filterParams: FilterParams = {};
+
+		if (filterParamsRef.current.search) {
+			filterParams.search = filterParamsRef.current.search;
+		}
+		if (filterParamsRef.current.category) {
+			filterParams.category = filterParamsRef.current.category;
+		}
+		if (filterParamsRef.current.status) {
+			filterParams.status = filterParamsRef.current.status;
+		}
+		if (filterParamsRef.current.isOnlyFree) {
+			filterParams.price = 0;
+		}
+		return courseAPI.list(filterParams);
+	});
 	const categoryAPI = new API(urls.categories);
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list(), {
 		retry: false,
@@ -61,12 +75,17 @@ const AllCourses = () => {
 
 	const getCategoryOptions = () => {
 		if (categoryQuery.isLoading || categoryQuery.isError) {
-			return [];
+			return [
+				{
+					value: '',
+					label: __('All Categories', 'masteriyo'),
+				},
+			];
 		}
 		return [
 			{
 				value: '',
-				label: __('-- Select Category --', 'masteriyo'),
+				label: __('All Categories', 'masteriyo'),
 			},
 			...categoryQuery.data.map((category: any) => {
 				return {
@@ -82,22 +101,26 @@ const AllCourses = () => {
 		return function (e: any) {
 			clearTimeout(timer);
 			timer = setTimeout(() => {
-				filterParamsRef.current.searchString = e.target.value;
-				queryClient.invalidateQueries('courseList');
+				filterParamsRef.current.search = e.target.value;
+				queryClient.cancelQueries('courseList');
+				queryClient.refetchQueries('courseList');
 			}, 800);
 		};
 	};
 	const onChangeCategoryFilter = (e: any) => {
-		filterParamsRef.current.category_id = e.target.value;
-		queryClient.invalidateQueries('courseList');
+		filterParamsRef.current.category = e.target.value;
+		queryClient.cancelQueries('courseList');
+		queryClient.refetchQueries('courseList');
 	};
 	const onChangeStatusFilter = (e: any) => {
 		filterParamsRef.current.status = e.target.value;
-		queryClient.invalidateQueries('courseList');
+		queryClient.cancelQueries('courseList');
+		queryClient.refetchQueries('courseList');
 	};
 	const onChangeOnlyFreeFilter = (e: any) => {
 		filterParamsRef.current.isOnlyFree = e.target.checked;
-		queryClient.invalidateQueries('courseList');
+		queryClient.cancelQueries('courseList');
+		queryClient.refetchQueries('courseList');
 	};
 
 	return (
@@ -133,7 +156,7 @@ const AllCourses = () => {
 							</Flex>
 							<Flex alignItems="center">
 								<FormLabel>{__('Status', 'masteriyo')}</FormLabel>
-								<Select defaultValue="publish" onChange={onChangeStatusFilter}>
+								<Select onChange={onChangeStatusFilter}>
 									{courseStatusList.map((option: any) => (
 										<option key={option.value} value={option.value}>
 											{option.label}
@@ -165,8 +188,11 @@ const AllCourses = () => {
 								</Tr>
 							</Thead>
 							<Tbody>
-								{courseQuery.isLoading && <SkeletonCourseList />}
+								{(courseQuery.isLoading || courseQuery.isFetching) && (
+									<SkeletonCourseList />
+								)}
 								{courseQuery.isSuccess &&
+									!courseQuery.isFetching &&
 									courseQuery.data.map((course: any) => (
 										<CourseList
 											id={course.id}

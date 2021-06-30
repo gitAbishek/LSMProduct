@@ -445,10 +445,19 @@ class QuizesController extends PostsController {
 
 		$user_id = (int) get_current_user_id();
 		$quiz_id = (int) $request['id'];
+		$quiz    = get_post( $quiz_id );
 
-		$course = get_course_by_quiz( $quiz_id );
+		if ( empty( $quiz ) || $this->post_type !== $quiz->post_type ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_invalid_id",
+				__( 'Invalid Quiz ID.', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		}
 
-		if ( empty( $course->ID ) ) {
+		$course_id = (int) get_post_meta( $quiz_id, '_course_id', true );
+
+		if ( empty( $course_id ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_course_empty_id',
 				__( 'There is something went wrong with course, please check if quiz attached with a course', 'masteriyo' ),
@@ -456,10 +465,9 @@ class QuizesController extends PostsController {
 			);
 		}
 
-		$course_id = (int) $course->ID;
-		$date      = gmdate( 'Y-m-d H:i:s', time() );
+		$date = gmdate( 'Y-m-d H:i:s', time() );
 
-		$previous_attempts = get_all_quiz_attempts( $quiz_id, $user_id );
+		$previous_attempts = masteriyo_get_all_quiz_attempts( $quiz_id, $user_id );
 		$attempted_count   = is_array( $previous_attempts ) ? count( $previous_attempts ) : 0;
 
 		$attempt_data = array(
@@ -496,7 +504,7 @@ class QuizesController extends PostsController {
 		$attempt_questions    = 0;
 		$total_question_marks = 0;
 
-		$attempt_data = is_quiz_started( $quiz_id );
+		$attempt_data = masteriyo_is_quiz_started( $quiz_id );
 
 		if ( is_array( $parameters ) && count( $parameters ) > 0 ) {
 			foreach ( $parameters as $parameter ) {
@@ -528,7 +536,7 @@ class QuizesController extends PostsController {
 				}
 			}
 
-			$quiz_questions = get_quiz_questions( $quiz_id, 'post_parent' );
+			$quiz_questions = masteriyo_get_quiz_questions( $quiz_id, 'post_parent' );
 
 			$attempt_detail = array(
 				'total_marks'              => $total_question_marks,
@@ -545,7 +553,7 @@ class QuizesController extends PostsController {
 				array( 'attempt_id' => $attempt_data->attempt_id )
 			);
 
-			$attempt_datas = (array) get_quiz_attempts_data( $quiz_id, $attempt_data->attempt_id );
+			$attempt_datas = (array) masteriyo_get_quiz_attempt_ended_data( $quiz_id, $attempt_data->attempt_id );
 
 			$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
 
@@ -578,7 +586,7 @@ class QuizesController extends PostsController {
 
 		$multi_attempts_data = array();
 
-		$attempt_datas = quiz_attempts_query( $query_vars );
+		$attempt_datas = masteriyo_get_quiz_attempts( $query_vars );
 
 		if ( is_array( $attempt_datas ) && ! count( $attempt_datas ) > 0 ) {
 			return new \WP_Error(
@@ -622,7 +630,7 @@ class QuizesController extends PostsController {
 			'order'      => $parameters['order'],
 		);
 
-		$attempt_datas = quiz_attempts_query( $query_vars );
+		$attempt_datas = masteriyo_get_quiz_attempts( $query_vars );
 
 		if ( is_array( $attempt_datas ) && ! count( $attempt_datas ) > 0 ) {
 			return new \WP_Error(

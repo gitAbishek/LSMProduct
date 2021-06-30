@@ -138,7 +138,12 @@ const Header = () => {
 									{__('Submit Quiz', 'masteriyo')}
 								</Button>
 							</Stack>
-							<Stack direction="row" spacing="2" align="center" w="120px">
+							<Stack
+								direction="row"
+								spacing="3"
+								align="center"
+								w="120px"
+								color="gray.400">
 								<Icon as={BiSearch} />
 								<Icon as={BiHeart} />
 								<Notification />

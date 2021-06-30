@@ -17,7 +17,7 @@
  * @param string  $by String e.g 'post_parent.
  * @return object
  */
-function get_quiz_questions( $quiz_id, $by ) {
+function masteriyo_get_quiz_questions( $quiz_id, $by ) {
 
 	$args = array(
 		'post_type'     => 'question',
@@ -36,7 +36,6 @@ function get_quiz_questions( $quiz_id, $by ) {
 	}
 
 	$query = new \WP_Query( $args );
-	wp_reset_postdata();
 
 	return $query;
 
@@ -63,37 +62,6 @@ function get_post_id( $post_id = 0 ) {
 }
 
 /**
- * @param $quiz_id
- *
- * @return array|bool|null|object|void
- *
- * Get course by quiz
- *
- * @since 0.1.0
- */
-function get_course_by_quiz( $quiz_id ) {
-	global $wpdb;
-
-	$quiz_id = get_post_id( $quiz_id );
-	$post    = get_post( $quiz_id );
-
-	if ( $post ) {
-		$course_post_type = 'course';
-		$query_string     = "SELECT ID, post_author, post_name, post_type, post_parent FROM {$wpdb->posts} where ID = %d";
-		$course           = $wpdb->get_row( $wpdb->prepare( $query_string, $post->post_parent ) );
-
-		if ( $course ) {
-			if ( $course->post_type !== $course_post_type ) {
-				$course = $wpdb->get_row( $wpdb->prepare( $query_string, $course->post_parent ) );
-			}
-			return $course;
-		}
-	}
-
-	return false;
-}
-
-/**
  * Determine if there is any started quiz exists.
  *
  * @since 0.1.0
@@ -102,7 +70,7 @@ function get_course_by_quiz( $quiz_id ) {
  *
  * @return array|null|object|void
  */
-function is_quiz_started( $quiz_id = 0 ) {
+function masteriyo_is_quiz_started( $quiz_id = 0 ) {
 	global $wpdb;
 
 	$quiz_id = get_post_id( $quiz_id );
@@ -133,7 +101,7 @@ function is_quiz_started( $quiz_id = 0 ) {
  * @param int $quiz Quiz ID.
  * @param int $attempt_id User Attempt ID.
  */
-function get_quiz_attempts_data( $quiz_id = 0, $attempt_id ) {
+function masteriyo_get_quiz_attempt_ended_data( $quiz_id = 0, $attempt_id ) {
 	global $wpdb;
 
 	$quiz_id = get_post_id( $quiz_id );
@@ -170,7 +138,7 @@ function get_quiz_attempts_data( $quiz_id = 0, $attempt_id ) {
  * @return array|bool|null|object
  */
 
-function get_all_quiz_attempts( $quiz_id = 0, $user_id = 0 ) {
+function masteriyo_get_all_quiz_attempts( $quiz_id = 0, $user_id = 0 ) {
 	global $wpdb;
 
 	$quiz_id = get_post_id( $quiz_id );
@@ -203,7 +171,7 @@ function get_all_quiz_attempts( $quiz_id = 0, $user_id = 0 ) {
  * @param array $query_vars Query vars.
  * @return QuizAttempt[]
  */
-function quiz_attempts_query( $query_vars ) {
+function masteriyo_get_quiz_attempts( $query_vars ) {
 	global $wpdb;
 
 	$search_criteria = array();

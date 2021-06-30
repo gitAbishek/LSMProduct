@@ -259,8 +259,8 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		// Construct limit part.
 		$per_page = $query_vars['per_page'];
 
-		if ( $query_vars['paged'] > 0 ) {
-			$offset = ( $query_vars['paged'] - 1 ) * $per_page;
+		if ( $query_vars['page'] > 0 ) {
+			$offset = ( $query_vars['page'] - 1 ) * $per_page;
 		}
 
 		$sql[] = $wpdb->prepare( 'LIMIT %d, %d', $offset, $per_page );

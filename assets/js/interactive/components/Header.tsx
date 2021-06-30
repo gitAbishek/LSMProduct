@@ -17,11 +17,10 @@ import {
 	Text,
 	useDisclosure,
 } from '@chakra-ui/react';
-import React from 'react';
-import { Logo } from '../../back-end/constants/images';
-import { BiChevronDown, BiHeart, BiInfoCircle, BiSearch } from 'react-icons/bi';
 import { __ } from '@wordpress/i18n';
-import { Polygon } from '../../back-end/constants/images';
+import React from 'react';
+import { BiChevronDown, BiHeart, BiInfoCircle, BiSearch } from 'react-icons/bi';
+import { Logo, Polygon } from '../../back-end/constants/images';
 import AvatarMenu from './AvatarMenu';
 import Notification from './Notification';
 
@@ -107,7 +106,7 @@ const Header = () => {
 											</Popover>
 										</Stack>
 									</Stack>
-									<Progress value={80} size="xs" />
+									<Progress value={80} size="xs" rounded="full" />
 								</Stack>
 								<Button
 									colorScheme="blue"

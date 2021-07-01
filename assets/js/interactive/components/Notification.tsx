@@ -3,7 +3,7 @@ import {
 	Button,
 	ButtonGroup,
 	Heading,
-	Icon,
+	IconButton,
 	List,
 	ListItem,
 	Popover,
@@ -35,7 +35,12 @@ const Notification = () => {
 	return (
 		<Popover placement="bottom">
 			<PopoverTrigger>
-				<Icon as={BiBell} />
+				<IconButton
+					variant="unstyled"
+					fontSize="md"
+					icon={<BiBell />}
+					aria-label={__('Open Notification Panel', 'masteriyo')}
+				/>
 			</PopoverTrigger>
 			<PopoverContent>
 				<PopoverArrow />

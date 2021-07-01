@@ -11,14 +11,13 @@ import {
 	Tr,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import Header from 'Components/layout/Header';
 import React from 'react';
 import { useQuery } from 'react-query';
-
 import urls from '../../constants/urls';
 import { SkeletonOrdersList } from '../../skeleton';
 import API from '../../utils/api';
 import OrderRow from './components/OrderRow';
-import Header from 'Components/layout/Header';
 
 const AllOrders = () => {
 	const ordersAPI = new API(urls.orders);

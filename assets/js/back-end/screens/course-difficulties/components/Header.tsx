@@ -2,9 +2,8 @@ import { Button, ButtonGroup } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-
-import routes from '../../../constants/routes';
 import Header from '../../../components/layout/Header';
+import routes from '../../../constants/routes';
 
 interface Props {
 	isEmpty?: boolean;

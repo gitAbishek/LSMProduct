@@ -167,6 +167,11 @@ class CoursesController extends PostsController {
 			'sanitize_callback' => 'masteriyo_string_to_bool',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
+		$params['price']   = array(
+			'description'       => __( 'List courses with specific price.', 'masteriyo' ),
+			'type'              => 'string',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
 		$params['category']   = array(
 			'description'       => __( 'Limit result set to courses assigned a specific category ID.', 'masteriyo' ),
 			'type'              => 'string',
@@ -374,6 +379,17 @@ class CoursesController extends PostsController {
 				'field'    => 'name',
 				'terms'    => 'featured',
 				'operator' => true === $request['featured'] ? 'IN' : 'NOT IN',
+			);
+		}
+
+		if ( isset( $request['price'] ) ) {
+			$args['meta_query'] = array(
+				'relation' => 'AND',
+				array(
+					'key'     => '_regular_price',
+					'value'   => abs( $request['price'] ),
+					'compare' => '=',
+				),
 			);
 		}
 

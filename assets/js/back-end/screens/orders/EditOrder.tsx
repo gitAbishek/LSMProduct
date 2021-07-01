@@ -11,34 +11,33 @@ import {
 	Container,
 	Divider,
 	Flex,
+	FormControl,
+	FormErrorMessage,
+	FormLabel,
 	Heading,
 	IconButton,
+	Input,
 	Menu,
 	MenuButton,
 	MenuItem,
 	MenuList,
-	Stack,
-	useToast,
-	Text,
-	FormControl,
-	FormErrorMessage,
-	FormLabel,
 	Select,
-	Input,
+	Stack,
+	Text,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import FullScreenLoader from 'Components/layout/FullScreenLoader';
+import Header from 'Components/layout/Header';
 import React, { useRef, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import ReactSelect from 'react-select';
-
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
-import Header from 'Components/layout/Header';
 
 const orderStatusList = [
 	{

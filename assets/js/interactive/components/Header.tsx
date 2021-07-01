@@ -26,6 +26,7 @@ import { useParams } from 'react-router-dom';
 import { Logo, Polygon } from '../../back-end/constants/images';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
+import { CourseProgressMap } from '../schemas';
 import AvatarMenu from './AvatarMenu';
 import Notification from './Notification';
 
@@ -43,7 +44,7 @@ const Header = () => {
 		defaultIsOpen: true,
 	});
 
-	const courseProgress = useQuery(
+	const { data, status } = useQuery<CourseProgressMap>(
 		[`courseProgress${courseId}`, courseId],
 		() => progressAPI.store({ course_id: courseId }),
 		{
@@ -103,7 +104,12 @@ const Header = () => {
 									<Stack direction="row" justify="space-between" align="center">
 										<Stack direction="row" alignItems="center">
 											<Flex>
-												<Heading fontSize="lg">35</Heading>
+												<Heading fontSize="lg">
+													{status === 'success' &&
+														(data?.summary?.total?.completed /
+															data?.summary?.total?.pending) *
+															100}
+												</Heading>
 												<Text fontSize="xs">%</Text>
 											</Flex>
 

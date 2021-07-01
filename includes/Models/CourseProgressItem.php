@@ -51,8 +51,8 @@ class CourseProgressItem extends Model {
 	protected $data = array(
 		'user_id'       => 0,
 		'item_id'       => 0,
+		'item_type'     => '',
 		'progress_id'   => 0,
-		'type'          => '',
 		'completed'     => true,
 		'date_start'    => null,
 		'date_update'   => null,
@@ -143,8 +143,8 @@ class CourseProgressItem extends Model {
 
 	 * @return string
 	 */
-	public function get_type( $context = 'view' ) {
-		return $this->get_prop( 'type', $context );
+	public function get_item_type( $context = 'view' ) {
+		return $this->get_prop( 'item_type', $context );
 	}
 
 	/**
@@ -242,8 +242,8 @@ class CourseProgressItem extends Model {
 	 *
 	 * @param  string $type Course progress type.
 	 */
-	public function set_type( $type ) {
-		$this->set_prop( 'type', $type );
+	public function set_item_type( $type ) {
+		$this->set_prop( 'item_type', $type );
 	}
 
 	/**

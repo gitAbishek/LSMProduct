@@ -303,7 +303,7 @@ class CourseProgressItemsController extends CrudController {
 			'user_id'       => $course_progress_item->get_user_id( $context ),
 			'item_id'       => $course_progress_item->get_item_id( $context ),
 			'progress_id'   => $course_progress_item->get_progress_id( $context ),
-			'type'          => $course_progress_item->get_type( $context ),
+			'item_type'     => $course_progress_item->get_item_type( $context ),
 			'completed'     => $course_progress_item->get_completed( $context ),
 			'date_start'    => masteriyo_rest_prepare_date_response( $course_progress_item->get_date_start( $context ) ),
 			'date_update'   => masteriyo_rest_prepare_date_response( $course_progress_item->get_date_update( $context ) ),
@@ -453,7 +453,7 @@ class CourseProgressItemsController extends CrudController {
 		}
 
 		if ( isset( $request['item_type'] ) ) {
-			$course_progress_item->set_type( $request['item_type'] );
+			$course_progress_item->set_item_type( $request['item_type'] );
 		}
 
 		if ( isset( $request['user_id'] ) ) {

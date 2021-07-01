@@ -861,7 +861,7 @@ class CourseProgressController extends CrudController {
 
 		// Create a map of progress items which are from DB.
 		foreach ( $items as $item ) {
-			$item_key               = $item->get_item_id() . ':' . $item->get_user_id() . ':' . $item->get_type() . ':' . $item->get_progress_id();
+			$item_key               = $item->get_item_id() . ':' . $item->get_user_id() . ':' . $item->get_item_type() . ':' . $item->get_progress_id();
 			$items_map[ $item_key ] = $item;
 		}
 
@@ -871,7 +871,7 @@ class CourseProgressController extends CrudController {
 			$items_map[ $item_key ] = $item_obj;
 
 			$item_obj->set_item_id( $progress_item['item_id'] );
-			$item_obj->set_type( $progress_item['item_type'] );
+			$item_obj->set_item_type( $progress_item['item_type'] );
 			$item_obj->set_completed( isset( $progress_item['completed'] ) ? $progress_item['completed'] : false );
 			$item_obj->set_user_id( $user_id );
 			$item_obj->set_progress_id( $course_progress->get_id() );
@@ -983,7 +983,7 @@ class CourseProgressController extends CrudController {
 			array_filter(
 				$items,
 				function( $item ) {
-					return 'lesson' === $item->get_type( 'edit' ) && $item->get_completed( 'edit' );
+					return 'lesson' === $item->get_item_type( 'edit' ) && $item->get_completed( 'edit' );
 				}
 			)
 		);
@@ -1019,7 +1019,7 @@ class CourseProgressController extends CrudController {
 			array_filter(
 				$items,
 				function( $item ) {
-					return 'quiz' === $item->get_type( 'edit' ) && $item->get_completed( 'edit' );
+					return 'quiz' === $item->get_item_type( 'edit' ) && $item->get_completed( 'edit' );
 				}
 			)
 		);
@@ -1044,7 +1044,7 @@ class CourseProgressController extends CrudController {
 	protected function get_course_progress_item_data( $course_progress_item, $context = 'view' ) {
 		$data = array(
 			'item_id'   => $course_progress_item->get_item_id( $context ),
-			'item_type' => $course_progress_item->get_type( $context ),
+			'item_type' => $course_progress_item->get_item_type( $context ),
 			'completed' => $course_progress_item->get_completed( $context ),
 		);
 

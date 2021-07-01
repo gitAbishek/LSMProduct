@@ -2,12 +2,15 @@ import {
 	Box,
 	Button,
 	CircularProgress,
+	CircularProgressLabel,
 	Container,
 	Flex,
 	Heading,
 	Icon,
 	IconButton,
 	Image,
+	List,
+	ListItem,
 	Popover,
 	PopoverArrow,
 	PopoverContent,
@@ -141,9 +144,35 @@ const Header: React.FC<Props> = (props) => {
 														aria-label="open progress"
 													/>
 												</PopoverTrigger>
-												<PopoverContent p="8">
+												<PopoverContent p="4" w="200px">
 													<PopoverArrow />
-													<CircularProgress value={60} />
+													<List>
+														<ListItem>
+															<Stack direction="row" spacing="2">
+																<CircularProgress value={60} capIsRound>
+																	<CircularProgressLabel>
+																		{Math.round(
+																			(summary.lesson.completed /
+																				summary.lesson.pending) *
+																				100
+																		)}
+																		{__('%', 'masteriyo')}
+																	</CircularProgressLabel>
+																</CircularProgress>
+																<Stack direction="column">
+																	<Text>{__('Lesson', 'masteriyo')}</Text>
+																	<Text>
+																		{summary.lesson.completed}
+																		{__('Lesson', 'masteriyo')}
+																	</Text>
+																	<Text>
+																		{summary.lesson.pending}
+																		{__('Left', 'masteriyo')}
+																	</Text>
+																</Stack>
+															</Stack>
+														</ListItem>
+													</List>
 												</PopoverContent>
 											</Popover>
 										</Stack>

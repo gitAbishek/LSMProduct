@@ -1,22 +1,36 @@
+import {
+	Box,
+	Container,
+	Heading,
+	Image,
+	Stack,
+	Text,
+	useToast,
+} from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
-import { Box, Container, Heading, Text, Image, Stack } from '@chakra-ui/react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import API from '../../../back-end/utils/api';
-import urls from '../../../back-end/constants/urls';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
+import urls from '../../../back-end/constants/urls';
+import API from '../../../back-end/utils/api';
 import MediaAPI from '../../../back-end/utils/media';
-import FloatingNavigation from '../../components/FloatingNavigation';
 import ContentNav from '../../components/ContentNav';
+import FloatingNavigation from '../../components/FloatingNavigation';
+import { CourseProgressItemMap } from '../../schemas';
 
 const InteractiveLesson = () => {
-	const { lessonId }: any = useParams();
+	const { lessonId, courseId }: any = useParams();
 	const lessonAPI = new API(urls.lessons);
 	const [mediaId, setMediaId] = useState(0);
+	const toast = useToast();
+	const queryClient = useQueryClient();
+
 	const imageAPi = new MediaAPI();
+	const progressAPI = new API(urls.interactiveProgress);
 
 	const lessonQuery = useQuery(
-		[`section${lessonId}`, lessonId],
+		[`se ction${lessonId}`, lessonId],
 		() => lessonAPI.get(lessonId),
 		{
 			onSuccess: (data: any) => {
@@ -36,9 +50,38 @@ const InteractiveLesson = () => {
 		}
 	);
 
+	type CompletedDataMap = {
+		course_id: number | any;
+		items: [CourseProgressItemMap];
+	};
+
+	const completeMutation = useMutation((data: CompletedDataMap) =>
+		progressAPI.store(data)
+	);
+
 	if (lessonQuery.isLoading) {
 		return <FullScreenLoader />;
 	}
+
+	const onCompletePress = () => {
+		completeMutation.mutate(
+			{
+				course_id: courseId,
+				items: [{ item_id: lessonId, item_type: 'lesson', completed: true }],
+			},
+			{
+				onSuccess: () => {
+					queryClient.invalidateQueries(`courseProgress${courseId}`);
+					toast({
+						title: __('Mark as completed', 'masteriyo'),
+						description: __('Lesson has been marked as completed', 'masteriyo'),
+						isClosable: true,
+						status: 'success',
+					});
+				},
+			}
+		);
+	};
 
 	return (
 		<Container centerContent maxW="container.xl" py="16">
@@ -52,12 +95,14 @@ const InteractiveLesson = () => {
 				</Stack>
 				<FloatingNavigation
 					navigation={lessonQuery?.data?.navigation}
-					courseId={lessonQuery?.data?.course_id}
+					courseId={courseId}
 				/>
 			</Box>
 			<ContentNav
 				navigation={lessonQuery?.data?.navigation}
-				courseId={lessonQuery?.data?.course_id}
+				courseId={courseId}
+				onCompletePress={onCompletePress}
+				isButtonLoading={completeMutation.isLoading}
 			/>
 		</Container>
 	);

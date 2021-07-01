@@ -45,7 +45,7 @@ const Header = () => {
 
 	const courseProgress = useQuery(
 		[`courseProgress${courseId}`, courseId],
-		() => progressAPI.store(courseId),
+		() => progressAPI.store({ course_id: courseId }),
 		{
 			enabled: !!courseId,
 		}

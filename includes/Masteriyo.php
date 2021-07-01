@@ -460,9 +460,9 @@ class Masteriyo extends Container {
 	 * @since 0.1.0
 	 */
 	public function display_admin_notices() {
-		if ( version_compare( get_bloginfo( 'version' ), '4.7', '<=' ) ) {
+		if ( version_compare( get_bloginfo( 'version' ), '5.0', '<' ) ) {
 			// translators: %s: Dismiss link
-			$message = sprintf( esc_html__( 'Minimum WordPress version required to work Masteriyo is v4.7.', 'masteriyo' ) );
+			$message = sprintf( esc_html__( 'Minimum WordPress version required to work Masteriyo is v5.0.', 'masteriyo' ) );
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			printf( '<div class="notice notice-warning"><p><strong>%s</strong>: %s</p></div>', 'Masteriyo', $message );
 		}

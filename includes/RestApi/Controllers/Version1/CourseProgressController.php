@@ -838,13 +838,6 @@ class CourseProgressController extends CrudController {
 	protected function save_course_progress_items( $request, $course_progress ) {
 		global $wpdb;
 
-		if ( ! isset( $request['items'] ) || empty( $request['items'] ) ) {
-			return array();
-		}
-
-		$user_id        = get_current_user_id();
-		$progress_items = $request['items'];
-
 		$query = new CourseProgressItemQuery(
 			array(
 				'user_id'     => $user_id,
@@ -857,6 +850,13 @@ class CourseProgressController extends CrudController {
 		);
 
 		$items = $query->get_course_progress_items();
+
+		if ( ! isset( $request['items'] ) || empty( $request['items'] ) ) {
+			return $items;
+		}
+
+		$user_id        = get_current_user_id();
+		$progress_items = $request['items'];
 
 		// Create a map of progress items which are from DB.
 		foreach ( $items as $item ) {

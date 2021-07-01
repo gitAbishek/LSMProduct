@@ -1,23 +1,23 @@
 import {
-	Popover,
-	PopoverTrigger,
-	PopoverContent,
-	PopoverHeader,
-	PopoverBody,
-	PopoverFooter,
-	PopoverArrow,
-	Icon,
+	Avatar,
 	Button,
 	ButtonGroup,
-	Stack,
-	Avatar,
 	Heading,
-	Text,
+	IconButton,
 	List,
 	ListItem,
+	Popover,
+	PopoverArrow,
+	PopoverBody,
+	PopoverContent,
+	PopoverFooter,
+	PopoverHeader,
+	PopoverTrigger,
+	Stack,
+	Text,
 } from '@chakra-ui/react';
-import React from 'react';
 import { __ } from '@wordpress/i18n';
+import React from 'react';
 import { BiBell } from 'react-icons/bi';
 
 const Notification = () => {
@@ -35,9 +35,12 @@ const Notification = () => {
 	return (
 		<Popover placement="bottom">
 			<PopoverTrigger>
-				<Button variant="unstyled" fontSize="l">
-					<Icon as={BiBell} />
-				</Button>
+				<IconButton
+					variant="unstyled"
+					fontSize="md"
+					icon={<BiBell />}
+					aria-label={__('Open Notification Panel', 'masteriyo')}
+				/>
 			</PopoverTrigger>
 			<PopoverContent>
 				<PopoverArrow />

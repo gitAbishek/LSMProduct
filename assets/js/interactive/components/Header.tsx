@@ -110,8 +110,8 @@ const Header = () => {
 												<Stack direction="row" alignItems="center">
 													<Flex>
 														<Heading fontSize="lg">
-															{(data?.summary?.total?.completed /
-																data?.summary?.total?.pending) *
+															{(data.summary.total.completed /
+																data.summary.total.pending) *
 																100}
 														</Heading>
 														<Text fontSize="xs">%</Text>
@@ -130,9 +130,20 @@ const Header = () => {
 													fontSize="xs"
 													fontWeight="medium"
 													color="gray.600">
-													<Text>11/21 Steps | </Text>
-													<Text>2 lessons left | </Text>
-													<Text>1 Quiz left</Text>
+													<Text>
+														{data.summary.total.completed +
+															data.summary.total.pending}
+														/{data.summary.total.pending}{' '}
+														{__('Steps', 'masteriyo')} |{' '}
+													</Text>
+													<Text>
+														{data.summary.lesson.pending}{' '}
+														{__('lessons left', 'masteriyo')} |{' '}
+													</Text>
+													<Text>
+														{data.summary.quiz.pending}{' '}
+														{__('lessons left', 'masteriyo')}
+													</Text>
 													<Popover
 														isOpen={isProgressOpen}
 														onClose={onProgressClose}

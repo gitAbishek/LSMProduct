@@ -144,13 +144,21 @@ const Header: React.FC<Props> = (props) => {
 														aria-label="open progress"
 													/>
 												</PopoverTrigger>
-												<PopoverContent p="4" w="200px">
+												<PopoverContent p="6" w="240px">
 													<PopoverArrow />
 													<List>
-														<ListItem>
+														<ListItem
+															borderBottom="1px"
+															borderColor="gray.100"
+															pb="6">
 															<Stack direction="row" spacing="2">
-																<CircularProgress value={60} capIsRound>
-																	<CircularProgressLabel>
+																<CircularProgress
+																	value={60}
+																	size="54px"
+																	capIsRound
+																	trackColor="blue.100"
+																	color="blue.500">
+																	<CircularProgressLabel fontWeight="bold">
 																		{Math.round(
 																			(summary.lesson.completed /
 																				summary.lesson.pending) *
@@ -159,15 +167,69 @@ const Header: React.FC<Props> = (props) => {
 																		{__('%', 'masteriyo')}
 																	</CircularProgressLabel>
 																</CircularProgress>
-																<Stack direction="column">
-																	<Text>{__('Lesson', 'masteriyo')}</Text>
-																	<Text>
-																		{summary.lesson.completed}
+																<Stack direction="column" spacing="1">
+																	<Text
+																		textTransform="uppercase"
+																		fontSize="x-small"
+																		color="gray.500"
+																		fontWeight="bold">
 																		{__('Lesson', 'masteriyo')}
 																	</Text>
-																	<Text>
+																	<Text
+																		fontSize="x-small"
+																		fontWeight="bold"
+																		color="blue.500">
+																		{summary.lesson.completed}
+																		{__(' Completed', 'masteriyo')}
+																	</Text>
+																	<Text
+																		fontSize="x-small"
+																		fontWeight="bold"
+																		color="gray.700">
 																		{summary.lesson.pending}
-																		{__('Left', 'masteriyo')}
+																		{__(' Left', 'masteriyo')}
+																	</Text>
+																</Stack>
+															</Stack>
+														</ListItem>
+														<ListItem pt="6">
+															<Stack direction="row" spacing="2">
+																<CircularProgress
+																	value={60}
+																	size="54px"
+																	capIsRound
+																	trackColor="blue.100"
+																	color="blue.500">
+																	<CircularProgressLabel fontWeight="bold">
+																		{Math.round(
+																			(summary.quiz.completed /
+																				summary.quiz.pending) *
+																				100
+																		)}
+																		{__('%', 'masteriyo')}
+																	</CircularProgressLabel>
+																</CircularProgress>
+																<Stack direction="column" spacing="1">
+																	<Text
+																		textTransform="uppercase"
+																		fontSize="x-small"
+																		color="gray.500"
+																		fontWeight="bold">
+																		{__('Quiz', 'masteriyo')}
+																	</Text>
+																	<Text
+																		fontSize="x-small"
+																		fontWeight="bold"
+																		color="blue.500">
+																		{summary.quiz.completed}
+																		{__(' Completed', 'masteriyo')}
+																	</Text>
+																	<Text
+																		fontSize="x-small"
+																		fontWeight="bold"
+																		color="gray.700">
+																		{summary.quiz.pending}
+																		{__(' Left', 'masteriyo')}
 																	</Text>
 																</Stack>
 															</Stack>

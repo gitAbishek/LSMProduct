@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
@@ -24,12 +24,13 @@ const InteractiveLesson = () => {
 	const lessonAPI = new API(urls.lessons);
 	const [mediaId, setMediaId] = useState(0);
 	const toast = useToast();
+	const queryClient = useQueryClient();
 
 	const imageAPi = new MediaAPI();
 	const progressAPI = new API(urls.interactiveProgress);
 
 	const lessonQuery = useQuery(
-		[`section${lessonId}`, lessonId],
+		[`se ction${lessonId}`, lessonId],
 		() => lessonAPI.get(lessonId),
 		{
 			onSuccess: (data: any) => {
@@ -70,6 +71,7 @@ const InteractiveLesson = () => {
 			},
 			{
 				onSuccess: () => {
+					queryClient.invalidateQueries(`courseProgress${courseId}`);
 					toast({
 						title: __('Mark as completed', 'masteriyo'),
 						description: __('Lesson has been marked as completed', 'masteriyo'),

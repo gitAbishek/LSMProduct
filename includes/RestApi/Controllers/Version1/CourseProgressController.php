@@ -946,7 +946,7 @@ class CourseProgressController extends CrudController {
 			array_filter(
 				$items,
 				function( $item ) {
-					$item->get_completed( 'edit' );
+					return $item->get_completed( 'edit' );
 				}
 			)
 		);

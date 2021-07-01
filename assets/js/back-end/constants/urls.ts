@@ -17,6 +17,7 @@ const urls = {
 	users: '/wp/v2/users',
 	settings: base + 'settings',
 	builder: base + 'coursebuilder',
+	interactiveProgress: base + 'course-progress/start',
 };
 
 export default urls;

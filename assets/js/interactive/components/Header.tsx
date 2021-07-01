@@ -21,20 +21,35 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiChevronDown, BiHeart, BiInfoCircle, BiSearch } from 'react-icons/bi';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 import { Logo, Polygon } from '../../back-end/constants/images';
+import urls from '../../back-end/constants/urls';
+import API from '../../back-end/utils/api';
 import AvatarMenu from './AvatarMenu';
 import Notification from './Notification';
 
 const Header = () => {
+	const { courseId }: any = useParams();
+
 	const {
 		onOpen: onProgressOpen,
 		onClose: onProgressClose,
 		isOpen: isProgressOpen,
 	} = useDisclosure();
+	const progressAPI = new API(urls.interactiveProgress);
 
 	const { isOpen, onToggle } = useDisclosure({
 		defaultIsOpen: true,
 	});
+
+	const courseProgress = useQuery(
+		[`courseProgress${courseId}`, courseId],
+		() => progressAPI.store(courseId),
+		{
+			enabled: !!courseId,
+		}
+	);
 
 	return (
 		<Box as="header" h="84px">

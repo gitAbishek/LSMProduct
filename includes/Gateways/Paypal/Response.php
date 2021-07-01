@@ -73,8 +73,8 @@ abstract class Response {
 			$order->add_order_note( $note );
 			$order->payment_complete( $txn_id );
 
-			if ( isset( MASTERIYO()->cart ) ) {
-				MASTERIYO()->cart->empty_cart();
+			if ( ! is_null( masteriyo( 'cart' ) ) ) {
+				masteriyo( 'cart' )->clear();
 			}
 		}
 	}

@@ -110,6 +110,7 @@ abstract class ObjectQuery {
 			'parent'         => '',
 			'parent_exclude' => '',
 			'exclude'        => '',
+			'per_page'       => get_option( 'posts_per_page' ),
 			'limit'          => get_option( 'posts_per_page' ),
 			'page'           => 1,
 			'offset'         => 0,

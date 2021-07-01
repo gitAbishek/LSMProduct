@@ -11,8 +11,9 @@ namespace ThemeGrill\Masteriyo\Models\Order;
 
 use ThemeGrill\Masteriyo\Helper\Utils;
 use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Abstracts\Order as AbstractOrder;
 use ThemeGrill\Masteriyo\Cache\CacheInterface;
+use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+use ThemeGrill\Masteriyo\Abstracts\Order as AbstractOrder;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -110,17 +111,6 @@ class Order extends AbstractOrder {
 			$this->save();
 		} catch ( Exception $e ) {
 			// TODO: Write Logger class.
-			// $logger = wc_get_logger();
-			// $logger->error(
-			// 	sprintf(
-			// 		'Error updating status for order #%d',
-			// 		$this->get_id()
-			// 	),
-			// 	array(
-			// 		'order' => $this,
-			// 		'error' => $e,
-			// 	)
-			// );
 			$this->add_order_note( __( 'Update status event failed.', 'masteriyo' ) . ' ' . $e->getMessage() );
 			return false;
 		}
@@ -182,18 +172,7 @@ class Order extends AbstractOrder {
 				$this->add_status_transition_note( $transition_note, $status_transition );
 			}
 		} catch ( Exception $e ) {
-			// $logger = masteriyo_get_logger();
-			// $logger->error(
-			// 	sprintf(
-			// 		'Status transition of order #%d errored!',
-			// 		$this->get_id()
-			// 	),
-			// 	array(
-			// 		'order' => $this,
-			// 		'error' => $e,
-			// 	)
-			// );
-			// $this->add_order_note( __( 'Error during status transition.', 'masteriyo' ) . ' ' . $e->getMessage() );
+			$this->add_order_note( __( 'Error during status transition.', 'masteriyo' ) . ' ' . $e->getMessage() );
 		}
 	}
 
@@ -1336,7 +1315,7 @@ class Order extends AbstractOrder {
 	 * @return array
 	 */
 	public function get_order_item_totals() {
-		$total_rows  = array();
+		$total_rows = array();
 
 		$this->add_order_item_totals_payment_method_row( $total_rows );
 		$this->add_order_item_totals_refund_rows( $total_rows );
@@ -1355,7 +1334,7 @@ class Order extends AbstractOrder {
 	 */
 	public function get_formatted_billing_address( $empty_content = '' ) {
 		$raw_address = apply_filters( 'masteriyo_order_formatted_billing_address', $this->get_address( 'billing' ), $this );
-		$address     = masteriyo('countries')->get_formatted_address( $raw_address );
+		$address     = masteriyo( 'countries' )->get_formatted_address( $raw_address );
 
 		/**
 		 * Filter orders formatterd billing address.
@@ -1487,5 +1466,4 @@ class Order extends AbstractOrder {
 
 		return $notes;
 	}
-
 }

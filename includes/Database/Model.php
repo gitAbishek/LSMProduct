@@ -552,7 +552,7 @@ abstract class Model {
 	 * @param string|array $value Meta value.
 	 * @param bool         $unique Should this be a unique key?.
 	 */
-	public function add_meta( $key, $value, $unique = false ) {
+	public function add_meta_data( $key, $value, $unique = false ) {
 		$function = 'set_' . $key;
 
 		if ( is_callable( array( $this, $function ) ) ) {

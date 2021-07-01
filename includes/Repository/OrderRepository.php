@@ -12,9 +12,10 @@ namespace ThemeGrill\Masteriyo\Repository;
 defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Contracts\OrderRepository as OrderRepositoryInterface;
-use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\Order;
+use ThemeGrill\Masteriyo\Database\Model;
+use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+use ThemeGrill\Masteriyo\Contracts\OrderRepository as OrderRepositoryInterface;
 
 /**
  * OrderRepository class.
@@ -104,6 +105,8 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			$order->save_meta_data();
 			$order->apply_changes();
 			$this->clear_caches( $order );
+
+			$this->create_or_update_user_course( $order );
 
 			do_action( 'masteriyo_new_order', $id, $order );
 		}
@@ -547,5 +550,56 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		);
 
 		return floatval( $total );
+	}
+
+	/**
+	 * Create or update user's course list.
+	 *
+	 * @param string $order Order boject.
+	 *
+	 * @since 0.1.0
+	 */
+	public function create_or_update_user_course( $order ) {
+		// Filter order item courses.
+		$order_items = array_filter(
+			$order->get_items(),
+			function( $order_item ) {
+				return is_a( $order_item, '\ThemeGrill\Masteriyo\Models\Order\OrderItemCourse' );
+			}
+		);
+
+		$query = new UserCourseQuery(
+			array(
+				'user_id'  => $order->get_customer_id(),
+				'per_page' => -1,
+				'type'     => 'user_course',
+				'parent'   => 0,
+			)
+		);
+
+		$user_courses_map = array();
+		$user_courses     = $query->get_user_courses();
+		foreach ( $user_courses as $user_course ) {
+			$user_courses_map[ $user_course->get_course_id() ] = $user_course;
+		}
+
+		// Update user course.
+		foreach ( $order_items as $order_item ) {
+			if ( isset( $user_courses_map[ $order_item->get_course_id() ] ) ) {
+				$user_course = $user_courses_map[ $order_item->get_course_id() ];
+			} else {
+				$user_course = masteriyo( 'user-course' );
+			}
+
+			$user_course->set_user_id( $order->get_customer_id( 'edit' ) );
+			$user_course->set_status( 'active' );
+			$user_course->set_order_id( $order->get_id() );
+			$user_course->set_course_id( $order_item->get_course_id( 'edit' ) );
+			$user_course->set_price( $order_item->get_total( 'edit' ) );
+
+			$user_course = apply_filters( 'masteriyo_save_user_course', $user_course, $order_item, $order );
+
+			$user_course->save();
+		}
 	}
 }

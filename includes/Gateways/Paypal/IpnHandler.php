@@ -36,7 +36,7 @@ class IpnHandler extends Response {
 	 * @param string $receiver_email Email to receive IPN from.
 	 */
 	public function __construct( $sandbox = false, $receiver_email = '' ) {
-		add_action( 'masteriyo_api_Paypal', array( $this, 'check_response' ) );
+		add_action( 'masteriyo_api_gateway_paypal', array( $this, 'check_response' ) );
 		add_action( 'masteriyo_valid_paypal_standard_ipn_request', array( $this, 'valid_response' ) );
 
 		$this->receiver_email = $receiver_email;

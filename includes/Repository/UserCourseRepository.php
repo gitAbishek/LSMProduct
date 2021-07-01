@@ -272,9 +272,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 			$search_criteria[] = $wpdb->prepare( 'item_id = %d', $query_vars['course_id'] );
 		}
 
-		if ( ! empty( $query_vars['type'] ) ) {
-			$search_criteria[] = $wpdb->prepare( 'item_type = %s', $query_vars['type'] );
-		}
+		$search_criteria[] = $wpdb->prepare( 'item_type = %s', 'user_course' );
 
 		if ( ! empty( $query_vars['status'] ) && 'any' !== $query_vars['status'] ) {
 			$search_criteria[] = $wpdb->prepare( 'status = %s', $query_vars['status'] );
@@ -293,11 +291,12 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		$sql[] = 'ORDER BY ' . sanitize_sql_orderby( $query_vars['orderby'] . ' ' . $query_vars['order'] );
 
 		// Construct limit part.
-		$limit = $query_vars['limit'];
+		$per_page = $query_vars['per_page'];
+		$page     = $query_vars['page'];
 
-		if ( $query_vars['page'] > 0 && $limit > 1 ) {
-			$offset = ( $query_vars['page'] - 1 ) * $limit;
-			$sql[]  = $wpdb->prepare( 'LIMIT %d, %d', $offset, $limit );
+		if ( $page > 0 && $per_page > 0 ) {
+			$offset = ( $page - 1 ) * $per_page;
+			$sql[]  = $wpdb->prepare( 'LIMIT %d, %d', $offset, $per_page );
 		}
 
 		// Generate SQL from the SQL parts.

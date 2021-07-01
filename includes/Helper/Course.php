@@ -67,14 +67,16 @@ function masteriyo_can_course_be_enrolled( $course, $user = null ) {
 		array(
 			'course_id' => $course_id,
 			'user_id'   => $user_id,
-			'limit'     => 1,
+			'per_page'  => 1,
 		)
 	);
 
 	$user_course = $query->get_user_courses();
 
-	if ( ! empty( $user_course ) && 'completed' === $user_course[0]->get_status() ) {
-		$can_be_enrolled = true;
+	if ( ! empty( $user_course ) ) {
+		$order = $user_course[0]->get_order();
+
+		$can_be_enrolled = 'completed' === $order->get_status();
 	}
 
 	return apply_filters( 'masteriyo_can_course_be_enrolled', $can_be_enrolled, $course, $user );

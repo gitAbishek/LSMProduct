@@ -76,8 +76,6 @@ class Checkout {
 	 */
 	private function init_hooks() {
 		add_action( 'masteriyo_checkout_form', array( $this, 'billing_form' ), 10 );
-		add_action( 'masteriyo_checkout_order_processed', array( $this, 'update_user_course' ), 10, 3 );
-		add_filter( 'masteriyo_payment_complete_order_status', array( $this, 'update_user_course_status' ), 10, 3 );
 	}
 
 	/**
@@ -609,7 +607,7 @@ class Checkout {
 			$order->set_cart_hash( $cart_hash );
 			$order->set_customer_id( apply_filters( 'masteriyo_checkout_user_id', get_current_user_id() ) );
 			$order->set_currency( masteriyo_get_currency() );
-			// $order->set_customer_ip_address( WC_Geolocation::get_ip_address() );
+			$order->set_customer_ip_address( masteriyo_get_current_ip_address() );
 			$order->set_customer_user_agent( masteriyo_get_user_agent() );
 			$order->set_payment_method( isset( $available_gateways[ $data['payment_method'] ] ) ? $available_gateways[ $data['payment_method'] ] : $data['payment_method'] );
 			$this->set_data_from_cart( $order );
@@ -787,87 +785,5 @@ class Checkout {
 				'redirect' => apply_filters( 'masteriyo_checkout_no_payment_needed_redirect', $order->get_checkout_order_received_url(), $order ),
 			)
 		);
-	}
-
-	/**
-	 * Insert or update the user ccourse.
-	 *r
-	 * @since 0.1.0
-	 *
-	 * @param int $order_id                             Order ID.
-	 * @param array $posted_data                        Posted data.
-	 * @param ThemeGrill\Masteriyo\Models\Order $order  Order object.
-	 */
-	public function update_user_course( $order_id, $posted_data, $order ) {
-		// Get order items.
-		$order_items = (array) $order->get_items();
-
-		// Update user course.
-		foreach ( $order_items as $order_item ) {
-			// Bail early if its not course items.
-			if ( ! is_a( $order_item, '\ThemeGrill\Masteriyo\Models\Order\OrderItemCourse' ) ) {
-				continue;
-			}
-
-			$user_course = masteriyo( 'user-course' );
-			$user_course->set_user_id( $order->get_customer_id() );
-			$user_course->set_status( $order->get_status() );
-			$user_course->set_order_id( $order->get_id() );
-			$user_course->set_course_id( $order_item->get_course_id( 'edit' ) );
-			$user_course->save();
-		}
-	}
-
-	/**
-	 * Update the user course status when the order status associaited with the course changes.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param int $order_status Order status
-	 * @param int $order_id Order ID.
-	 * @param ThemeGrill\Masteriyo\Models\Order\Order $order Order object.
-	 */
-	public function update_user_course_status( $order_status, $order_id, $order ) {
-		$customer     = masteriyo_get_current_user();
-		$course_items = $order->get_items();
-
-		// Bail early if there is not customer or no order items.
-		if ( empty( $customer ) || empty( $course_items ) ) {
-			$order_status;
-		}
-
-		$course_ids = array_map(
-			function( $course_item ) {
-				return $course_item->get_course_id();
-			},
-			$course_items
-		);
-
-		foreach ( $course_items as $course_item ) {
-			$query = new UserCourseQuery(
-				array(
-					'course_id' => $course_item->get_course_id(),
-					'user_id'   => $customer->get_id(),
-					'order_id'  => $order_id,
-				)
-			);
-
-			$user_courses = $query->get_user_courses();
-
-			if ( empty( $user_courses ) ) {
-				$order_staus;
-			}
-
-			$user_course = $user_courses[0];
-
-			if ( $order_id !== $user_course->get_order_id() ) {
-				$order_staus;
-			}
-
-			$user_course->set_status( $order_status );
-			$user_course->save();
-		}
-
-		return $order_status;
 	}
 }

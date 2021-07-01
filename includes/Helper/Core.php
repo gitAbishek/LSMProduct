@@ -2693,7 +2693,6 @@ function masteriyo_get_user_activity_statuses() {
 	return apply_filters(
 		'masteriyo_user_activity_statuses',
 		array(
-			'any',
 			'start',
 			'progress',
 			'complete',

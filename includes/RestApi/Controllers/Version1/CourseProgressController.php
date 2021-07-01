@@ -473,14 +473,14 @@ class CourseProgressController extends CrudController {
 						'item_type' => array(
 							'description' => __( 'Course progress ( Lesson, Quiz) item type.', 'masteriyo' ),
 							'type'        => 'string',
-							'default'     => 'lesson',
+							'required'    => true,
 							'enum'        => array( 'lesson', 'quiz' ),
 							'context'     => array( 'view', 'edit' ),
 						),
 						'completed' => array(
 							'description' => __( 'Course progress item completed.', 'masteriyo' ),
 							'type'        => 'boolean',
-							'default'     => false,
+							'required'    => true,
 							'context'     => array( 'view', 'edit' ),
 						),
 					),
@@ -488,7 +488,7 @@ class CourseProgressController extends CrudController {
 			),
 		);
 
-		return rest_get_endpoint_args_for_schema( $schema );
+		return $this->get_endpoint_args_for_schema( $schema );
 	}
 
 	/**
@@ -776,6 +776,77 @@ class CourseProgressController extends CrudController {
 		return $course_id;
 	}
 
+		/**
+	 * Validate start course progress request data.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_Error|WP_REST_Response
+	 */
+	protected function validate_start_course_progress( $request ) {
+		$item_types = array( 'lesson', 'quiz' );
+
+		if ( ! isset( $request['items'] ) || empty( $request['items'] ) ) {
+			return;
+		}
+
+		foreach ( $request['items'] as $item ) {
+			if ( ! isset( $item['item_id'] ) ) {
+				return new \WP_Error(
+					'rest_missing_callback_param',
+					/* translators: %s: item id */
+					sprintf( __( 'Missing parameter(s): %s', 'masteriyo' ), 'item_id' ),
+					array( 'status' => rest_authorization_required_code() )
+				);
+			}
+
+			if ( ! isset( $item['item_type'] ) ) {
+				return new \WP_Error(
+					'rest_missing_callback_param',
+					/* translators: %s: item type */
+					sprintf( __( 'Missing parameter(s): %s', 'masteriyo' ), 'item_type' ),
+					array( 'status' => rest_authorization_required_code() )
+				);
+			}
+
+			if ( ! in_array( $item['item_type'], $item_types, true ) ) {
+				return new \WP_Error(
+					'rest_invalid_param',
+					/* translators: %s: item type */
+					sprintf( __( 'Invalid parameter(s): %s', 'masteriyo' ), 'item_type' ),
+					array(
+						'status' => rest_authorization_required_code(),
+						'params' => array(
+							'item_type' => sprintf(
+								/* translators: %s: item types */
+								__( 'item_type is not of type %s', 'masteriyo' ),
+								implode( ' and ', $item_types )
+							),
+						),
+					)
+				);
+			}
+
+			if ( isset( $item['completed'] ) && ! is_bool( $item['completed'] ) ) {
+				return new \WP_Error(
+					'rest_invalid_param',
+					/* translators: %s: item type */
+					sprintf( __( 'Invalid parameter(s): %s', 'masteriyo' ), 'item_type' ),
+					array(
+						'status' => rest_authorization_required_code(),
+						'params' => array(
+							'completed' => __( 'completed is not of type boolean', 'masteriyo' ),
+						),
+					)
+				);
+			}
+		}
+
+		return true;
+	}
+
 	/**
 	 * Start course progress.
 	 *
@@ -786,6 +857,11 @@ class CourseProgressController extends CrudController {
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function start_course_progress( $request ) {
+		$validated = $this->validate_start_course_progress( $request );
+		if ( is_wp_error( $validated ) ) {
+			return $validated;
+		}
+
 		$user_id   = get_current_user_id();
 		$course_id = absint( $request['course_id'] );
 

@@ -1,17 +1,16 @@
 import {
 	Box,
+	Button,
 	ButtonGroup,
-	Link,
 	Center,
+	Heading,
+	HStack,
 	Icon,
+	Link,
 	Stack,
 	Text,
-	HStack,
-	Heading,
-	Button,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-
 import React from 'react';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
@@ -21,10 +20,12 @@ import { getNavigationRoute } from './FloatingNavigation';
 interface Props {
 	courseId: number;
 	navigation: ContentNavigationSchema;
+	onCompletePress: any;
+	isButtonLoading?: boolean;
 }
 
 const ContentNav: React.FC<Props> = (props) => {
-	const { navigation, courseId } = props;
+	const { navigation, courseId, onCompletePress, isButtonLoading } = props;
 
 	const cirlceStyles = {
 		w: '30px',
@@ -74,12 +75,13 @@ const ContentNav: React.FC<Props> = (props) => {
 				</Box>
 
 				<Button
-					type="submit"
+					onClick={onCompletePress}
+					isLoading={isButtonLoading}
 					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"
 					textTransform="uppercase">
-					{__('Submit Quiz', 'masteriyo')}
+					{__('Mark as Complete', 'masteriyo')}
 				</Button>
 
 				<Box w="200px">

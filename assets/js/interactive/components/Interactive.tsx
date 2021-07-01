@@ -11,6 +11,7 @@ import Sidebar from './Sidebar';
 const Interactive: React.FC = () => {
 	const { courseId }: any = useParams();
 	const progressAPI = new API(urls.interactiveProgress);
+
 	const { data, status } = useQuery<CourseProgressMap>(
 		[`courseProgress${courseId}`, courseId],
 		() => progressAPI.store({ course_id: courseId }),

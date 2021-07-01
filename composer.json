@@ -29,7 +29,6 @@
       "includes/Helper/UserCourse.php",
       "includes/Helper/question.php",
       "includes/Helper/course-progress.php",
-      "includes/Helper/UserActivity.php",
       "includes/Helper/UserCourse.php",
       "includes/Helper/quiz.php"
     ],

@@ -306,20 +306,21 @@ class Install {
 	 */
 	private static function get_quiz_attempts_table_schema( $charset_collate, $base_prefix ) {
 		$sql = "CREATE TABLE {$base_prefix}masteriyo_quiz_attempts (
-			attempt_id int(11) NOT NULL AUTO_INCREMENT,
-			course_id int(11) DEFAULT NULL,
-			quiz_id int(11) DEFAULT NULL,
-			user_id int(11) DEFAULT NULL,
-			total_questions int(11) DEFAULT NULL,
-			total_answered_questions int(11) DEFAULT NULL,
+			attempt_id BIGINT UNSIGNED AUTO_INCREMENT,
+			course_id BIGINT UNSIGNED NOT NULL,
+			quiz_id BIGINT UNSIGNED NOT NULL,
+			user_id BIGINT UNSIGNED NOT NULL,
+			total_questions BIGINT UNSIGNED NOT NULL,
+			total_answered_questions BIGINT UNSIGNED NOT NULL,
 			total_marks decimal(9,2) DEFAULT NULL,
-			total_attempts int(11) DEFAULT NULL,
+			total_attempts BIGINT UNSIGNED NOT NULL,
 			earned_marks decimal(9,2) DEFAULT NULL,
 			info text,
 			attempt_status varchar(50) DEFAULT NULL,
 			attempt_started_at datetime DEFAULT NULL,
 			attempt_ended_at datetime DEFAULT NULL,
 			PRIMARY KEY  (`attempt_id`)
+			KEY `course_id` (`course_id`),
 			KEY `quiz_id` (`quiz_id`),
 			KEY `user_id` (`user_id`),
 			KEY `attempt_started_at` (`attempt_started_at`),

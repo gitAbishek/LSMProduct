@@ -473,7 +473,7 @@ class ScriptStyle {
 							'position' => get_option( 'masteriyo.general.currency_position', 'left' ),
 						),
 						'imageSizes' => get_intermediate_image_sizes(),
-						'countries'  =>  masteriyo( 'countries' )->get_countries(),
+						'countries'  => masteriyo( 'countries' )->get_countries(),
 						'states'     => array_filter(
 							masteriyo( 'countries' )->get_states(),
 							function( $state ) {

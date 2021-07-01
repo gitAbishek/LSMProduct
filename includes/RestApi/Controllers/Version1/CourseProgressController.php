@@ -459,7 +459,7 @@ class CourseProgressController extends CrudController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'items'     => array(
-					'description' => __( 'Order billing details.', 'masteriyo' ),
+					'description' => __( 'Course progress items.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
@@ -473,6 +473,7 @@ class CourseProgressController extends CrudController {
 						'item_type' => array(
 							'description' => __( 'Course progress ( Lesson, Quiz) item type.', 'masteriyo' ),
 							'type'        => 'string',
+							'default'     => 'lesson',
 							'enum'        => array( 'lesson', 'quiz' ),
 							'context'     => array( 'view', 'edit' ),
 						),
@@ -838,7 +839,8 @@ class CourseProgressController extends CrudController {
 	protected function save_course_progress_items( $request, $course_progress ) {
 		global $wpdb;
 
-		$query = new CourseProgressItemQuery(
+		$user_id = get_current_user_id();
+		$query   = new CourseProgressItemQuery(
 			array(
 				'user_id'     => $user_id,
 				'progress_id' => $course_progress->get_id(),
@@ -855,7 +857,6 @@ class CourseProgressController extends CrudController {
 			return $items;
 		}
 
-		$user_id        = get_current_user_id();
 		$progress_items = $request['items'];
 
 		// Create a map of progress items which are from DB.

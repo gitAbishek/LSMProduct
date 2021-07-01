@@ -24,6 +24,7 @@ import { useParams } from 'react-router-dom';
 import { CloseCone } from '../../back-end/constants/images';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
+import QuestionList from './qa/QuestionList';
 import SidebarItem from './SidebarItem';
 
 const Sidebar = () => {
@@ -119,7 +120,8 @@ const Sidebar = () => {
 						d="flex"
 						alignItems="center"
 						fontWeight="semibold">
-						{coursesQuery.data.name}
+						{currentTab === 1 && coursesQuery.data.name}
+						{currentTab === 2 && __('Question and Answers')}
 					</DrawerHeader>
 
 					<DrawerBody p="0">
@@ -140,7 +142,7 @@ const Sidebar = () => {
 								})}
 							</Accordion>
 						)}
-						{currentTab === 2 && <span>Questions</span>}
+						{currentTab === 2 && <QuestionList />}
 					</DrawerBody>
 
 					<DrawerFooter p="0">

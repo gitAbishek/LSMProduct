@@ -27,6 +27,12 @@ export type CourseProgressSummaryMap = {
 	};
 };
 
+export type CourseProgressItemMap = {
+	item_id: number;
+	item_type: string;
+	completed: boolean;
+};
+
 export type CourseProgressMap = {
 	id: number;
 	user_id: number;
@@ -35,6 +41,6 @@ export type CourseProgressMap = {
 	date_start: string;
 	date_update: string;
 	date_completed: string | any;
-	items: [];
+	items: [CourseProgressItemMap];
 	summary: CourseProgressSummaryMap;
 };

@@ -3,7 +3,6 @@ import {
 	Button,
 	CircularProgress,
 	Container,
-	Fade,
 	Flex,
 	Heading,
 	Icon,
@@ -22,36 +21,26 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiChevronDown, BiHeart, BiInfoCircle, BiSearch } from 'react-icons/bi';
-import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
 import { Logo, Polygon } from '../../back-end/constants/images';
-import urls from '../../back-end/constants/urls';
-import API from '../../back-end/utils/api';
-import { CourseProgressMap } from '../schemas';
+import { CourseProgressSummaryMap } from '../schemas';
 import AvatarMenu from './AvatarMenu';
 import Notification from './Notification';
 
-const Header = () => {
-	const { courseId }: any = useParams();
+interface Props {
+	summary: CourseProgressSummaryMap;
+}
+const Header: React.FC<Props> = (props) => {
+	const { summary } = props;
 
 	const {
 		onOpen: onProgressOpen,
 		onClose: onProgressClose,
 		isOpen: isProgressOpen,
 	} = useDisclosure();
-	const progressAPI = new API(urls.interactiveProgress);
 
 	const { isOpen, onToggle } = useDisclosure({
 		defaultIsOpen: true,
 	});
-
-	const { data, status } = useQuery<CourseProgressMap>(
-		[`courseProgress${courseId}`, courseId],
-		() => progressAPI.store({ course_id: courseId }),
-		{
-			enabled: !!courseId,
-		}
-	);
 
 	return (
 		<Box as="header" h="84px">
@@ -94,89 +83,80 @@ const Header = () => {
 							<Box w="165px">
 								<Image src={Logo} />
 							</Box>
-							{status === 'success' && (
-								<Fade in={status === 'success'} style={{ width: '100%' }}>
-									<Stack
-										direction="row"
-										spacing="6"
-										align="center"
-										flex="1"
-										justify="space-between">
-										<Stack direction="column" spacing="2" flex="1">
-											<Stack
-												direction="row"
-												justify="space-between"
-												align="center">
-												<Stack direction="row" alignItems="center">
-													<Flex>
-														<Heading fontSize="lg">
-															{(data.summary.total.completed /
-																data.summary.total.pending) *
-																100}
-														</Heading>
-														<Text fontSize="xs">%</Text>
-													</Flex>
 
-													<Text
-														fontSize="10px"
-														textTransform="uppercase"
-														color="gray.600"
-														fontWeight="bold">
-														Complete
-													</Text>
-												</Stack>
-												<Stack
-													direction="row"
-													fontSize="xs"
-													fontWeight="medium"
-													color="gray.600">
-													<Text>
-														{data.summary.total.completed +
-															data.summary.total.pending}
-														/{data.summary.total.pending}{' '}
-														{__('Steps', 'masteriyo')} |{' '}
-													</Text>
-													<Text>
-														{data.summary.lesson.pending}{' '}
-														{__('lessons left', 'masteriyo')} |{' '}
-													</Text>
-													<Text>
-														{data.summary.quiz.pending}{' '}
-														{__('lessons left', 'masteriyo')}
-													</Text>
-													<Popover
-														isOpen={isProgressOpen}
-														onClose={onProgressClose}
-														onOpen={onProgressOpen}>
-														<PopoverTrigger>
-															<IconButton
-																py="0"
-																minW="0"
-																variant="link"
-																minH="auto"
-																icon={<BiInfoCircle />}
-																aria-label="open progress"
-															/>
-														</PopoverTrigger>
-														<PopoverContent p="8">
-															<PopoverArrow />
-															<CircularProgress value={60} />
-														</PopoverContent>
-													</Popover>
-												</Stack>
-											</Stack>
-											<Progress value={80} size="xs" rounded="full" />
+							<Stack
+								direction="row"
+								spacing="6"
+								align="center"
+								flex="1"
+								justify="space-between">
+								<Stack direction="column" spacing="2" flex="1">
+									<Stack direction="row" justify="space-between" align="center">
+										<Stack direction="row" alignItems="center">
+											<Flex>
+												<Heading fontSize="lg">
+													{(summary.total.completed / summary.total.pending) *
+														100}
+												</Heading>
+												<Text fontSize="xs">%</Text>
+											</Flex>
+
+											<Text
+												fontSize="10px"
+												textTransform="uppercase"
+												color="gray.600"
+												fontWeight="bold">
+												Complete
+											</Text>
 										</Stack>
-										<Button
-											colorScheme="blue"
-											rounded="3xl"
-											textTransform="uppercase"
-											fontWeight="bold">
-											{__('Submit Quiz', 'masteriyo')}
-										</Button>
+										<Stack
+											direction="row"
+											fontSize="xs"
+											fontWeight="medium"
+											color="gray.600">
+											<Text>
+												{summary.total.completed + summary.total.pending}/
+												{summary.total.pending} {__('Steps', 'masteriyo')} |{' '}
+											</Text>
+											<Text>
+												{summary.lesson.pending}{' '}
+												{__('lessons left', 'masteriyo')} |{' '}
+											</Text>
+											<Text>
+												{summary.quiz.pending} {__('lessons left', 'masteriyo')}
+											</Text>
+											<Popover
+												isOpen={isProgressOpen}
+												onClose={onProgressClose}
+												onOpen={onProgressOpen}>
+												<PopoverTrigger>
+													<IconButton
+														py="0"
+														minW="0"
+														variant="link"
+														minH="auto"
+														icon={<BiInfoCircle />}
+														aria-label="open progress"
+													/>
+												</PopoverTrigger>
+												<PopoverContent p="8">
+													<PopoverArrow />
+													<CircularProgress value={60} />
+												</PopoverContent>
+											</Popover>
+										</Stack>
 									</Stack>
-								</Fade>
-							)}
+									<Progress value={80} size="xs" rounded="full" />
+								</Stack>
+								<Button
+									colorScheme="blue"
+									rounded="3xl"
+									textTransform="uppercase"
+									fontWeight="bold">
+									{__('Submit Quiz', 'masteriyo')}
+								</Button>
+							</Stack>
+
 							<Stack
 								direction="row"
 								spacing="3"

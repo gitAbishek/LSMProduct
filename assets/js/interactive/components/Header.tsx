@@ -148,7 +148,12 @@ const Header: React.FC<Props> = (props) => {
 											</Popover>
 										</Stack>
 									</Stack>
-									<Progress value={80} size="xs" rounded="full" />
+									<Progress
+										value={summary.total.completed}
+										size="xs"
+										rounded="full"
+										max={summary.total.completed + summary.total.pending}
+									/>
 								</Stack>
 								<Button
 									colorScheme="blue"

@@ -1,6 +1,7 @@
-import { Heading, Stack, Text } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n/build-types';
+import { Heading, Icon, Stack, Text } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React from 'react';
+import { BiChevronRight } from 'react-icons/bi';
 
 interface Props {
 	title: string;
@@ -16,6 +17,7 @@ const QuestionItem: React.FC<Props> = (props) => {
 					{answer} {__('Answers', 'masteriyo')}
 				</Text>
 			</Stack>
+			<Icon as={BiChevronRight} />
 		</Stack>
 	);
 };

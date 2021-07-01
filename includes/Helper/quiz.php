@@ -42,26 +42,6 @@ function masteriyo_get_quiz_questions( $quiz_id, $by ) {
 }
 
 /**
- * @param int $post_id
- *
- * @return bool|false|int
- *
- * Get current post id or given post id
- *
- * @since 0.1.0
- */
-function get_post_id( $post_id = 0 ) {
-	if ( ! $post_id ) {
-		$post_id = get_the_ID();
-		if ( ! $post_id ) {
-			return false;
-		}
-	}
-
-	return $post_id;
-}
-
-/**
  * Determine if there is any started quiz exists.
  *
  * @since 0.1.0
@@ -73,7 +53,6 @@ function get_post_id( $post_id = 0 ) {
 function masteriyo_is_quiz_started( $quiz_id = 0 ) {
 	global $wpdb;
 
-	$quiz_id = get_post_id( $quiz_id );
 	$user_id = get_current_user_id();
 
 	$is_started = $wpdb->get_row(
@@ -104,7 +83,6 @@ function masteriyo_is_quiz_started( $quiz_id = 0 ) {
 function masteriyo_get_quiz_attempt_ended_data( $quiz_id = 0, $attempt_id ) {
 	global $wpdb;
 
-	$quiz_id = get_post_id( $quiz_id );
 	$user_id = get_current_user_id();
 
 	$attempt_data = $wpdb->get_row(
@@ -141,7 +119,6 @@ function masteriyo_get_quiz_attempt_ended_data( $quiz_id = 0, $attempt_id ) {
 function masteriyo_get_all_quiz_attempts( $quiz_id = 0, $user_id = 0 ) {
 	global $wpdb;
 
-	$quiz_id = get_post_id( $quiz_id );
 	$user_id = $user_id ? $user_id : get_current_user_id();
 
 	$attempts = $wpdb->get_results(

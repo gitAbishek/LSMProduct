@@ -32,7 +32,7 @@ const QuestionList = () => {
 	];
 	return (
 		<>
-			<Stack direction="column" spacing="4">
+			<Stack direction="column" spacing="1">
 				<Box as="form" action="" p="4">
 					<FormControl>
 						<InputGroup>
@@ -44,7 +44,7 @@ const QuestionList = () => {
 					</FormControl>
 				</Box>
 				{dummyContent.map((item: any, index: number) => (
-					<QuestionItem title={item.title} answer={item.number} key={index} />
+					<QuestionItem title={item.title} answer={item.answer} key={index} />
 				))}
 			</Stack>
 		</>

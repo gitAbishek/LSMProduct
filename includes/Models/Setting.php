@@ -80,10 +80,8 @@ class Setting extends Model {
 		'courses'  => array(
 			// General.
 			'placeholder_image'        => 0,
-			'add_to_cart_behaviour'    => '',
 			'per_page'                 => 12,
 			'per_row'                  => 4,
-			'enable_editing'           => false,
 
 			// Single Course.
 			'category_base'            => '',
@@ -421,18 +419,6 @@ class Setting extends Model {
 	}
 
 	/**
-	 * Get option courses_add_to_cart_behaviour.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $context
-	 * @return string
-	 */
-	public function get_courses_add_to_cart_behaviour( $context = 'view' ) {
-		return $this->get_setting_prop( 'add_to_cart_behavior', 'courses', $context );
-	}
-
-	/**
 	 * Get option courses_per_page.
 	 *
 	 * @since 0.1.0
@@ -454,18 +440,6 @@ class Setting extends Model {
 	 */
 	public function get_courses_per_row( $context = 'view' ) {
 		return $this->get_setting_prop( 'per_row', 'courses', $context );
-	}
-
-	/**
-	 * Get option courses_enable_editing.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $context
-	 * @return string
-	 */
-	public function get_courses_enable_editing( $context = 'view' ) {
-		return $this->get_setting_prop( 'enable_editing', 'courses', $context );
 	}
 
 	/**
@@ -1733,16 +1707,6 @@ class Setting extends Model {
 	}
 
 	/**
-	 * Set option courses add to cart behaviour.
-	*
-	* @since 0.1.0
-	* @param string $add_to_cart_behaviour
-	*/
-	public function set_courses_add_to_cart_behaviour( $add_to_cart_behaviour ) {
-		$this->set_setting_prop( 'add_to_cart_behaviour', 'courses', $add_to_cart_behaviour );
-	}
-
-	/**
 	 * Set option courses per page.
 	*
 	* @since 0.1.0
@@ -1760,16 +1724,6 @@ class Setting extends Model {
 	*/
 	public function set_courses_per_row( $per_row ) {
 		$this->set_setting_prop( 'per_row', 'courses', absint( $per_row ) );
-	}
-
-	/**
-	 * Set option courses enable editing.
-	*
-	* @since 0.1.0
-	* @param boolean $enable
-	*/
-	public function set_courses_enable_editing( $enable ) {
-		$this->set_setting_prop( 'enable_editing', 'courses', masteriyo_string_to_bool( $enable ) );
 	}
 
 	/**

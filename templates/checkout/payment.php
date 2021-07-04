@@ -14,27 +14,27 @@ defined( 'ABSPATH' ) || exit;
 
 <?php if ( masteriyo( 'cart' )->needs_payment() ) : ?>
 	<div id="masteriyo-payments" class="mto-checkout-summary-payment-method">
-			<ul class="masteriyo-payment-methods payment-methods methods mto-checkout-payment-method">
-				<?php
-				if ( ! empty( $available_gateways ) ) {
-					foreach ( $available_gateways as $gateway ) {
-						masteriyo_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
-					}
-				} else {
-					$message = esc_html__( 'Please fill in your details above to see available payment methods.', 'masteriyo' );
-
-					if ( masteriyo_get_current_user()->get_billing_country() ) {
-						$message = esc_html__( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'masteriyo' );
-					}
-
-					printf(
-						'<li class="mto-notice mto-alert mto-info-msg">%s</li>',
-						$message // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					);
+		<ul class="masteriyo-payment-methods payment-methods methods mto-checkout-payment-method">
+			<?php
+			if ( ! empty( $available_gateways ) ) {
+				foreach ( $available_gateways as $gateway ) {
+					masteriyo_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
 				}
-				?>
-			</ul>
-		</div>
+			} else {
+				$message = esc_html__( 'Please fill in your details above to see available payment methods.', 'masteriyo' );
+
+				if ( masteriyo_get_current_user()->get_billing_country() ) {
+					$message = esc_html__( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'masteriyo' );
+				}
+
+				printf(
+					'<li class="mto-notice mto-alert mto-info-msg">%s</li>',
+					$message // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				);
+			}
+			?>
+		</ul>
+	</div>
 <?php endif; ?>
 
 <?php do_action( 'masteriyo_checkout_after_payment_methods' ); ?>

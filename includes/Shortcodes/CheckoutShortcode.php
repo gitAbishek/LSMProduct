@@ -131,7 +131,7 @@ class CheckoutShortcode extends Shortcode {
 		// In case order is created from admin, but paid by the actual customer, store the ip address of the payer
 		// when they visit the payment confirmation page.
 		if ( $order && $order->is_created_via( 'admin' ) ) {
-			// $order->set_customer_ip_address( MASTERIYO_Geolocation::get_ip_address() );
+			$order->set_customer_ip_address( masteriyo_get_current_ip_address() );
 			$order->save();
 		}
 

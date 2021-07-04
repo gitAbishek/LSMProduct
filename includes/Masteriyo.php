@@ -138,6 +138,8 @@ class Masteriyo extends Container {
 		$this->load_text_domain();
 		$this->setup_wizard();
 
+		$this->handle_paypal_ipn();
+
 		do_action( 'masteriyo_init' );
 	}
 
@@ -476,6 +478,21 @@ class Masteriyo extends Container {
 			$wpdb->$name    = $wpdb->prefix . $table;
 			$wpdb->tables[] = $table;
 		}
+	}
+
+	/**
+	 * Handle Paypal IPN listener.
+	 *
+	 * @return void
+	 */
+	public function handle_paypal_ipn() {
+		// phpcs:disable
+		if ( ( isset( $_POST['paypalListener'] ) && 'paypal_standard_IPN' === $_POST['paypalListener'] )
+			|| isset( $_POST['test_ipn'] ) && '1' === $_POST['test_ipn'] ) {
+			masteriyo( 'payment-gateways' )->get_available_payment_gateways();
+			do_action( 'masteriyo_api_gateway_paypal' );
+		}
+		// phpcs:enable
 	}
 }
 

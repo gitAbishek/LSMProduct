@@ -161,7 +161,7 @@ class UserCourse extends Model {
 	 * @return string
 	 */
 	public function get_type( $context = 'view' ) {
-		return 'course';
+		return 'user_course';
 	}
 
 	/**

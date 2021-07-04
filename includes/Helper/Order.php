@@ -165,7 +165,7 @@ function masteriyo_is_order_status( $maybe_status ) {
  * @return array
  */
 function masteriyo_get_is_paid_statuses() {
-	return apply_filters( 'masteriyo_order_is_paid_statuses', array( 'mto-processing', 'mto-completed' ) );
+	return apply_filters( 'masteriyo_order_is_paid_statuses', array( 'processing', 'completed' ) );
 }
 
 /**
@@ -175,7 +175,7 @@ function masteriyo_get_is_paid_statuses() {
  * @return array
  */
 function masteriyo_get_is_pending_statuses() {
-	return apply_filters( 'masteriyo_order_is_pending_statuses', array( 'mto-pending' ) );
+	return apply_filters( 'masteriyo_order_is_pending_statuses', array( 'pending' ) );
 }
 
 /**

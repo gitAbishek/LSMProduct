@@ -31,7 +31,6 @@ class UserCourseQuery extends ObjectQuery {
 			array(
 				'user_id'       => 0,
 				'course_id'     => 0,
-				'type'          => 'course',
 				'status'        => 'any',
 				'date_start'    => null,
 				'date_modified' => null,

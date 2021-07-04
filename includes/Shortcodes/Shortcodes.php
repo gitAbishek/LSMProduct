@@ -42,10 +42,13 @@ class Shortcodes {
 	protected function get_shortcodes() {
 		$namespace = '\\ThemeGrill\\Masteriyo\\Shortcodes';
 
-		return apply_filters( 'masteriyo_shortcodes', array(
-			'myaccount'    => "{$namespace}\\MyAccountShortcode",
-			'checkout'     => "{$namespace}\\CheckoutShortcode",
-			'cart'         => "{$namespace}\\CartShortcode",
-		) );
+		return apply_filters(
+			'masteriyo_shortcodes',
+			array(
+				'myaccount' => "{$namespace}\\MyAccountShortcode",
+				'checkout'  => "{$namespace}\\CheckoutShortcode",
+				'cart'      => "{$namespace}\\CartShortcode",
+			)
+		);
 	}
 }

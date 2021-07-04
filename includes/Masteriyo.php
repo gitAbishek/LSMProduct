@@ -259,16 +259,6 @@ class Masteriyo extends Container {
 				'href'   => masteriyo_get_page_permalink( 'course-list' ),
 			)
 		);
-
-		// TODO Remove this after implement interactive page.
-		$wp_admin_bar->add_node(
-			array(
-				'parent' => 'site-name',
-				'id'     => 'masteriyo-interactive-page',
-				'title'  => __( 'Interactive page', 'masteriyo' ),
-				'href'   => home_url( '?masteriyo=interactive#/course/8' ),
-			)
-		);
 	}
 
 	/**
@@ -430,13 +420,12 @@ class Masteriyo extends Container {
 			return;
 		}
 
-		 // If plugin is running for first time, redirect to onboard page.
+		// If plugin is running for first time, redirect to onboard page.
 		if ( get_option( 'masteriyo_first_time_activation_flag' ) != '1' ) {
 			wp_safe_redirect( admin_url( 'index.php?page=masteriyo-onboard' ) );
 			exit;
 		}
 
-		return;
 	}
 
 	/**

@@ -4,4 +4,4 @@ export const isDevelopment =
 export const isProduction =
 	process.env.NODE_ENV === 'production' ? true : false;
 
-export const hasNumber = /d/;
+export const hasNumber = /^\D+$/i;

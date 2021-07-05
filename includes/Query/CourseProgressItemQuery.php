@@ -37,6 +37,7 @@ class CourseProgressItemQuery extends ObjectQuery {
 				'date_start'    => null,
 				'date_update'   => null,
 				'date_complete' => null,
+				'orderby'       => 'id',
 			)
 		);
 	}

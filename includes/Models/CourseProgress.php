@@ -286,69 +286,19 @@ class CourseProgress extends Model {
 	 * @return array
 	 */
 	public function get_items( $context = 'view' ) {
+		if ( empty( $this->items ) ) {
+			$this->items = $this->repository->get_course_progress_items( $this );
+		}
+
 		return $this->items;
 	}
 
 	/**
-	 * Set course progress item.
+	 * Get user course progress summary
 	 *
-	 * @since 0.1.0
-	 *
-	 * @param array $items Course progress items.
+	 * @return void
 	 */
-	public function set_items( $items ) {
-		foreach ( $items as $item ) {
-			if ( isset( $item['id'] ) && ! empty( $item['id'] ) ) {
-				$this->items[] = $item;
-			} else {
-				$this->set_item_changes( $item );
-			}
-		}
-	}
-
-	/**
-	 * Set course items which are changed.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param array $progress_item Progress item.
-	 */
-	protected function set_item_changes( $progress_item ) {
-		$changed     = false;
-		$changes_key = array( 'item_type', 'is_completed' );
-
-		foreach ( $this->items as $item ) {
-			if ( $item['item_id'] === $progress_item['item_id'] && count( array_intersect( $item, $progress_item ) ) > 1 ) {
-				$this->item_changes[] = wp_parse_args( $progress_item, $item );
-				$changed              = true;
-				break;
-			}
-		}
-
-		if ( ! $changed ) {
-			$this->item_changes[] = $progress_item;
-		}
-	}
-
-	/**
-	 * Get course progress item changes.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return array
-	 */
-	public function get_item_changes() {
-		return $this->item_changes;
-	}
-
-	/**
-	 * Set course progress item.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param array $item Course progress item
-	 */
-	public function add_item( $context = 'view' ) {
-		$this->items[] = item;
+	public function get_summary( $type = 'all' ) {
+		return $this->repository->get_summary( $this, $type );
 	}
 }

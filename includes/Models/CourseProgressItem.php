@@ -49,13 +49,14 @@ class CourseProgressItem extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'user_id'       => 0,
-		'item_id'       => 0,
-		'item_type'     => '',
-		'progress_id'   => 0,
-		'completed'     => true,
-		'started_at'    => null,
-		'modified_at'   => null,
+		'user_id'      => 0,
+		'item_id'      => 0,
+		'item_type'    => '',
+		'progress_id'  => 0,
+		'course_id'    => 0,
+		'completed'    => false,
+		'started_at'   => null,
+		'modified_at'  => null,
 		'completed_at' => null,
 	);
 
@@ -122,7 +123,7 @@ class CourseProgressItem extends Model {
 	}
 
 	/**
-	 * Get course id.
+	 * Get course progress id.
 	 *
 	 * @since 0.1.0
 	 *
@@ -132,6 +133,19 @@ class CourseProgressItem extends Model {
 	 */
 	public function get_progress_id( $context = 'view' ) {
 		return $this->get_prop( 'progress_id', $context );
+	}
+
+	/**
+	 * Get course course id.
+	 *
+	 * @since 0.1.0
+	 *
+	* @param  string $context What the value is for. Valid values are view and edit.
+
+	 * @return int
+	 */
+	public function get_course_id( $context = 'view' ) {
+		return $this->get_prop( 'course_id', $context );
 	}
 
 	/**
@@ -225,7 +239,7 @@ class CourseProgressItem extends Model {
 	}
 
 	/**
-	 * Set course ID.
+	 * Set course progress ID.
 	 *
 	 * @since 0.1.0
 	 *
@@ -233,6 +247,17 @@ class CourseProgressItem extends Model {
 	 */
 	public function set_progress_id( $progress_id ) {
 		$this->set_prop( 'progress_id', absint( $progress_id ) );
+	}
+
+	/**
+	 * Se course ID.
+	 *
+	 * @since 0.1.0
+	 *
+	* @param int $course_id Course ID.
+	 */
+	public function set_course_id( $course_id ) {
+		$this->set_prop( 'course_id', absint( $course_id ) );
 	}
 
 	/**

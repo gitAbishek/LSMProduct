@@ -167,7 +167,7 @@ class CoursesController extends PostsController {
 			'sanitize_callback' => 'masteriyo_string_to_bool',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['price']   = array(
+		$params['price']      = array(
 			'description'       => __( 'List courses with specific price.', 'masteriyo' ),
 			'type'              => 'string',
 			'validate_callback' => 'rest_validate_request_arg',

@@ -106,19 +106,6 @@ class CourseProgressController extends CrudController {
 
 		register_rest_route(
 			$this->namespace,
-			$this->rest_base . '/start',
-			array(
-				array(
-					'methods'             => \WP_REST_Server::CREATABLE,
-					'callback'            => array( $this, 'start_course_progress' ),
-					'permission_callback' => array( $this, 'create_item_permissions_check' ),
-					'args'                => $this->get_start_schema(),
-				),
-			)
-		);
-
-		register_rest_route(
-			$this->namespace,
 			$this->rest_base . '/(?P<id>[\d]+)',
 			array(
 				'args'   => array(
@@ -321,6 +308,13 @@ class CourseProgressController extends CrudController {
 	 * @return array
 	 */
 	protected function get_course_progress_data( $course_progress, $context = 'view' ) {
+		$items = array_map(
+			function( $item ) {
+				return $this->get_course_progress_item_data( $item );
+			},
+			$course_progress->get_items()
+		);
+
 		$data = array(
 			'id'           => $course_progress->get_id( $context ),
 			'user_id'      => $course_progress->get_user_id( $context ),
@@ -329,6 +323,8 @@ class CourseProgressController extends CrudController {
 			'started_at'   => masteriyo_rest_prepare_date_response( $course_progress->get_started_at( $context ) ),
 			'modified_at'  => masteriyo_rest_prepare_date_response( $course_progress->get_modified_at( $context ) ),
 			'completed_at' => masteriyo_rest_prepare_date_response( $course_progress->get_completed_at( $context ) ),
+			'items'        => $items,
+			'summary'      => $course_progress->get_summary( 'all' ),
 		);
 
 		return $data;
@@ -433,64 +429,6 @@ class CourseProgressController extends CrudController {
 	}
 
 	/**
-	 * Get the course progress start schema, conforming to JSON Schema.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return array
-	 */
-	public function get_start_schema() {
-		$schema = array(
-			'$schema'    => 'http://json-schema.org/draft-04/schema#',
-			'title'      => $this->object_type,
-			'type'       => 'object',
-			'properties' => array(
-				'id'        => array(
-					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
-					'type'        => 'integer',
-					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
-				),
-				'course_id' => array(
-					'description' => __( 'Course ID.', 'masteriyo' ),
-					'type'        => 'integer',
-					'required'    => true,
-					'context'     => array( 'view', 'edit' ),
-				),
-				'items'     => array(
-					'description' => __( 'Course progress items.', 'masteriyo' ),
-					'type'        => 'array',
-					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type'      => 'object',
-						'item_id'   => array(
-							'description' => __( 'Lesson/Quiz ID.', 'masteriyo' ),
-							'type'        => 'integer',
-							'required'    => true,
-							'context'     => array( 'view', 'edit' ),
-						),
-						'item_type' => array(
-							'description' => __( 'Course progress ( Lesson, Quiz) item type.', 'masteriyo' ),
-							'type'        => 'string',
-							'required'    => true,
-							'enum'        => array( 'lesson', 'quiz' ),
-							'context'     => array( 'view', 'edit' ),
-						),
-						'completed' => array(
-							'description' => __( 'Course progress item completed.', 'masteriyo' ),
-							'type'        => 'boolean',
-							'required'    => true,
-							'context'     => array( 'view', 'edit' ),
-						),
-					),
-				),
-			),
-		);
-
-		return $this->get_endpoint_args_for_schema( $schema );
-	}
-
-	/**
 	 * Prepare a single course progress for create or update.
 	 *
 	 * @since 0.1.0
@@ -526,18 +464,18 @@ class CourseProgressController extends CrudController {
 		}
 
 		// Activity start date.
-		if ( isset( $request['date_start'] ) ) {
-			$course_progress->set_date_start( $request['date_start'] );
+		if ( isset( $request['started_at'] ) ) {
+			$course_progress->set_started_at( $request['started_at'] );
 		}
 
 		// Activity update date.
-		if ( isset( $request['date_update'] ) ) {
-			$course_progress->set_date_update( $request['date_update'] );
+		if ( isset( $request['modified_at'] ) ) {
+			$course_progress->set_modified_at( $request['modified_at'] );
 		}
 
 		// Activity complete date.
-		if ( isset( $request['date_complete'] ) ) {
-			$course_progress->set_date_complete( $request['date_complete'] );
+		if ( isset( $request['completed_at'] ) ) {
+			$course_progress->set_completed_at( $request['completed_at'] );
 		}
 
 		/**
@@ -847,63 +785,6 @@ class CourseProgressController extends CrudController {
 	}
 
 	/**
-	 * Start course progress.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @return WP_Error|WP_REST_Response
-	 */
-	public function start_course_progress( $request ) {
-		$validated = $this->validate_start_course_progress( $request );
-		if ( is_wp_error( $validated ) ) {
-			return $validated;
-		}
-
-		$user_id   = get_current_user_id();
-		$course_id = absint( $request['course_id'] );
-
-		$course = get_post( $course_id );
-		if ( is_null( $course ) || 'course' !== $course->post_type ) {
-			return new \WP_Error(
-				'masteriyo_invalid_course_id',
-				__( 'Invalid course ID', 'masteriyo' ),
-				array( 'status' => 400 )
-			);
-		}
-
-		$query = new CourseProgressQuery(
-			array(
-				'course_id' => $course_id,
-				'user_id'   => $user_id,
-				'per_page'  => 1,
-				'page'      => 1,
-				'order'     => 'desc',
-				'orderby'   => 'id',
-			)
-		);
-
-		$course_progress = $query->get_course_progress();
-
-		if ( empty( $course_progress ) ) {
-			$course_progress = masteriyo( 'course-progress' );
-			$course_progress->set_user_id( $user_id );
-			$course_progress->set_course_id( $course_id );
-			$course_progress->get_started_at( current_time( 'mysql' ) );
-			$course_progress->save();
-		}
-
-		if ( is_array( $course_progress ) ) {
-			$course_progress = $course_progress[0];
-		}
-
-		$items = $this->save_course_progress_items( $request, $course_progress );
-
-		return $this->get_start_progress_data( $course_progress, $items );
-	}
-
-	/**
 	 * Save course progress items if any.
 	 *
 	 * @since 0.1.0
@@ -955,154 +836,6 @@ class CourseProgressController extends CrudController {
 		}
 
 		return array_values( $items_map );
-	}
-
-	/**
-	 * Get start progress data.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param CourseProgress $course_progress Course progress object.
-	 * @param array $items Course progress items (lesson and quiz),
-	 *
-	 * @return array
-	 */
-	protected function get_start_progress_data( $course_progress, $items ) {
-		$data = $this->get_course_progress_data( $course_progress );
-
-		$query = new \WP_Query(
-			array(
-				'post_type'    => 'quiz',
-				'post_status'  => 'any',
-				'meta_key'     => '_course_id',
-				'meta_value'   => $course_progress->get_course_id(),
-				'meta_compare' => '=',
-			)
-		);
-
-		$total_quizzes = $query->found_posts;
-
-		$data['items'] = array();
-		foreach ( $items as $item ) {
-			$data['items'][] = $this->get_course_progress_item_data( $item );
-		}
-
-		$data['summary'] = array(
-			'total'  => $this->get_total_summary( $course_progress, $items ),
-			'lesson' => $this->get_lesson_summary( $course_progress, $items ),
-			'quiz'   => $this->get_quiz_summary( $course_progress, $items ),
-		);
-
-		return $data;
-
-	}
-
-	/**
-	 * Get total summary(completed, pending).
-	 *
-	 * @param CourseProgress $course_progress Course progress object.
-	 * @param array $items Course progress items (total and quiz),
-	 *
-	 * @return array
-	 */
-	protected function get_total_summary( $course_progress, $items ) {
-		$query = new \WP_Query(
-			array(
-				'post_type'    => array( 'lesson', 'quiz' ),
-				'post_status'  => 'any',
-				'meta_key'     => '_course_id',
-				'meta_value'   => $course_progress->get_course_id(),
-				'meta_compare' => '=',
-			)
-		);
-
-		$total = $query->found_posts;
-
-		$completed = count(
-			array_filter(
-				$items,
-				function( $item ) {
-					return $item->get_completed( 'edit' );
-				}
-			)
-		);
-
-		return array(
-			'completed' => $completed,
-			'pending'   => ( $total - $completed ) > 0 ? ( $total - $completed ) : 0,
-		);
-	}
-
-	/**
-	 * Get lesson summary(completed, pending).
-	 *
-	 * @param CourseProgress $course_progress Course progress object.
-	 * @param array $items Course progress items (lesson and quiz),
-	 *
-	 * @return array
-	 */
-	protected function get_lesson_summary( $course_progress, $items ) {
-		$query = new \WP_Query(
-			array(
-				'post_type'    => 'lesson',
-				'post_status'  => 'any',
-				'meta_key'     => '_course_id',
-				'meta_value'   => $course_progress->get_course_id(),
-				'meta_compare' => '=',
-			)
-		);
-
-		$total = $query->found_posts;
-
-		$completed = count(
-			array_filter(
-				$items,
-				function( $item ) {
-					return 'lesson' === $item->get_item_type( 'edit' ) && $item->get_completed( 'edit' );
-				}
-			)
-		);
-
-		return array(
-			'completed' => $completed,
-			'pending'   => ( $total - $completed ) > 0 ? ( $total - $completed ) : 0,
-		);
-	}
-
-	/**
-	 * Get quiz summary(completed, pending).
-	 *
-	 * @param CourseProgress $course_progress Course progress object.
-	 * @param array $items Course progress items (quiz and quiz),
-	 *
-	 * @return array
-	 */
-	protected function get_quiz_summary( $course_progress, $items ) {
-		$query = new \WP_Query(
-			array(
-				'post_type'    => 'quiz',
-				'post_status'  => 'any',
-				'meta_key'     => '_course_id',
-				'meta_value'   => $course_progress->get_course_id(),
-				'meta_compare' => '=',
-			)
-		);
-
-		$total = $query->found_posts;
-
-		$completed = count(
-			array_filter(
-				$items,
-				function( $item ) {
-					return 'quiz' === $item->get_item_type( 'edit' ) && $item->get_completed( 'edit' );
-				}
-			)
-		);
-
-		return array(
-			'completed' => $completed,
-			'pending'   => ( $total - $completed ) > 0 ? ( $total - $completed ) : 0,
-		);
 	}
 
 	/**

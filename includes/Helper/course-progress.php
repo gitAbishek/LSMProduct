@@ -1,4 +1,8 @@
 <?php
+
+use ThemeGrill\Masteriyo\ModelException;
+use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
 /**
  * Course progress functions.
  *
@@ -66,4 +70,58 @@ function masteriyo_get_course_progress_item( $course_progress_item ) {
 	}
 
 	return apply_filters( 'masteriyo_get_course_progress_item', $item, $course_progress_item );
+}
+
+/**
+ * Get course progress.
+ *
+ * @since 0.1.0
+ *
+ * @param ThemeGrill\Masteriyo\Models\Course|WP_Post|int $course Course object.
+ * @param ThemeGrill\Masteriyo\Models\User|WP_Post|int $user User object.
+ *
+ * @return ThemeGrill\Masteriyo\Models\CourseProgress|WP_Error
+ */
+function masteriyo_get_course_progress_by_user_and_course( $user, $course ) {
+	if ( is_a( $course, 'ThemeGrill\Masteriyo\Database\Model' ) ) {
+		$id = $course->get_id();
+	} elseif ( is_a( $course, '\WP_Post' ) ) {
+		$id = $course->ID;
+	} else {
+		$id = absint( $course );
+	}
+
+	if ( is_a( $user, 'ThemeGrill\Masteriyo\Database\Model' ) ) {
+		$id = $user->get_id();
+	} elseif ( is_a( $user, '\WP_User' ) ) {
+		$id = $user->ID;
+	} else {
+		$id = absint( $user );
+	}
+
+	try {
+		$query = new CourseProgressQuery(
+			array(
+				'course_id' => $course,
+				'user_id'   => $user,
+				'per_page'  => 1,
+			)
+		);
+
+		$course_progress = $query->get_course_progress();
+
+		if ( empty( $course_progress ) ) {
+			throw new ModelException(
+				'masteriyo_course_progress_not_exists',
+				__( 'Course progrss for the user\'s course doesn\'t exits.', 'masteriyo' ),
+				400
+			);
+		}
+
+		return $course_progress[0];
+	} catch ( \ModelException $e ) {
+		$course_progress_obj = new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
+	}
+
+	return apply_filters( 'masteriyo_get_course_progress', $course_progress_obj, $course_progress );
 }

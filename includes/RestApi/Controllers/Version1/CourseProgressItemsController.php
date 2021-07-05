@@ -142,7 +142,7 @@ class CourseProgressItemsController extends CrudController {
 	 * @return array
 	 */
 	public function get_collection_params() {
-		$params['paged'] = array(
+		$params['page'] = array(
 			'description'       => __( 'Paginate the course progress.', 'masteriyo' ),
 			'type'              => 'integer',
 			'default'           => 1,
@@ -160,7 +160,7 @@ class CourseProgressItemsController extends CrudController {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
-		$params['progress_id'] = array(
+		$params['course_id'] = array(
 			'description'       => __( 'Course progress ID.', 'masteriyo' ),
 			'type'              => 'integer',
 			'sanitize_callback' => 'absint',
@@ -175,9 +175,10 @@ class CourseProgressItemsController extends CrudController {
 		);
 
 		$params['item_type'] = array(
-			'description'       => __( 'Course progress (course, quiz) item type.', 'masteriyo' ),
-			'type'              => 'integer',
-			'sanitize_callback' => 'absint',
+			'description'       => __( 'Course progress (lesson, quiz) item type.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_key',
+			'enum'              => array( 'lesson', 'quiz' ),
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
@@ -186,24 +187,23 @@ class CourseProgressItemsController extends CrudController {
 			'type'              => 'boolean',
 			'sanitize_callback' => 'masteriyo_string_to_bool',
 			'validate_callback' => 'rest_validate_request_arg',
-			'default'           => true,
 		);
 
-		$params['date_start'] = array(
+		$params['started_at'] = array(
 			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
 			'type'              => 'string',
 			'format'            => 'date-time',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
-		$params['date_complete'] = array(
+		$params['completed_at'] = array(
 			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
 			'type'              => 'string',
 			'format'            => 'date-time',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
-		$params['date_update'] = array(
+		$params['modified_at'] = array(
 			'description'       => __( 'Limit response to resources started after a given ISO8601 compliant date.', 'masteriyo' ),
 			'type'              => 'string',
 			'format'            => 'date-time',
@@ -225,9 +225,9 @@ class CourseProgressItemsController extends CrudController {
 			'enum'              => array(
 				'id',
 				'type',
-				'date_start',
-				'date_update',
-				'date_complete',
+				'started_at',
+				'modified_at',
+				'completed_at',
 			),
 			'validate_callback' => 'rest_validate_request_arg',
 		);
@@ -269,7 +269,6 @@ class CourseProgressItemsController extends CrudController {
 		$data     = $this->add_additional_fields_to_object( $data, $request );
 		$data     = $this->filter_response_by_context( $data, $context );
 		$response = rest_ensure_response( $data );
-		$response->add_links( $this->prepare_links( $object, $request ) );
 
 		/**
 		 * Filter the data for a response.
@@ -299,15 +298,15 @@ class CourseProgressItemsController extends CrudController {
 	 */
 	protected function get_course_progress_item_data( $course_progress_item, $context = 'view' ) {
 		$data = array(
-			'id'            => $course_progress_item->get_id( $context ),
-			'user_id'       => $course_progress_item->get_user_id( $context ),
-			'item_id'       => $course_progress_item->get_item_id( $context ),
-			'progress_id'   => $course_progress_item->get_progress_id( $context ),
-			'item_type'     => $course_progress_item->get_item_type( $context ),
-			'completed'     => $course_progress_item->get_completed( $context ),
-			'date_start'    => masteriyo_rest_prepare_date_response( $course_progress_item->get_date_start( $context ) ),
-			'date_update'   => masteriyo_rest_prepare_date_response( $course_progress_item->get_date_update( $context ) ),
-			'date_complete' => masteriyo_rest_prepare_date_response( $course_progress_item->get_date_complete( $context ) ),
+			'id'           => $course_progress_item->get_id( $context ),
+			'progress_id'  => $course_progress_item->get_progress_id( $context ),
+			'user_id'      => $course_progress_item->get_user_id( $context ),
+			'item_id'      => $course_progress_item->get_item_id( $context ),
+			'item_type'    => $course_progress_item->get_item_type( $context ),
+			'completed'    => $course_progress_item->get_completed( $context ),
+			'started_at'   => masteriyo_rest_prepare_date_response( $course_progress_item->get_started_at( $context ) ),
+			'modified_at'  => masteriyo_rest_prepare_date_response( $course_progress_item->get_modified_at( $context ) ),
+			'completed_at' => masteriyo_rest_prepare_date_response( $course_progress_item->get_completed_at( $context ) ),
 		);
 
 		return $data;
@@ -326,13 +325,13 @@ class CourseProgressItemsController extends CrudController {
 		$args = wp_parse_args(
 			$request->get_params(),
 			array(
-				'paged'         => 1,
-				'per_page'      => 10,
-				'user_id'       => 0,
-				'status'        => 'any',
-				'date_start'    => null,
-				'date_update'   => null,
-				'date_complete' => null,
+				'paged'        => 1,
+				'per_page'     => 10,
+				'user_id'      => get_current_user_id(),
+				'status'       => 'any',
+				'started_at'   => null,
+				'modified_at'  => null,
+				'completed_at' => null,
 			)
 		);
 
@@ -365,54 +364,54 @@ class CourseProgressItemsController extends CrudController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'            => array(
+				'id'           => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'progress_id'   => array(
+				'course_id'    => array(
 					'description' => __( 'Course progress ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'user_id'       => array(
+				'user_id'      => array(
 					'description' => __( 'User ID.', 'masteriyo' ),
 					'type'        => 'integer',
-					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'item_id'       => array(
+				'item_id'      => array(
 					'description' => __( 'Lesson/Quiz ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'item_type'     => array(
+				'item_type'    => array(
 					'description' => __( 'Course progress ( Lesson, Quiz) item type.', 'masteriyo' ),
 					'type'        => 'string',
+					'enum'        => array( 'lesson', 'quiz' ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'completed'     => array(
+				'completed'    => array(
 					'description' => __( 'Course progress item completed.', 'masteriyo' ),
 					'type'        => 'boolean',
 					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_start'    => array(
+				'started_at'   => array(
 					'description' => __( 'Course progress item start date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_complete' => array(
+				'completed_at' => array(
 					'description' => __( 'Course progress item complete date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_update'   => array(
+				'modified_at'  => array(
 					'description' => __( 'Course progress item update date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'date-time',
@@ -444,8 +443,8 @@ class CourseProgressItemsController extends CrudController {
 			$course_progress_item_repo->read( $course_progress_item );
 		}
 
-		if ( isset( $request['progress_id'] ) ) {
-			$course_progress_item->set_progress_id( $request['progress_id'] );
+		if ( isset( $request['course_id'] ) ) {
+			$course_progress_item->set_course_id( $request['course_id'] );
 		}
 
 		if ( isset( $request['item_id'] ) ) {
@@ -456,8 +455,10 @@ class CourseProgressItemsController extends CrudController {
 			$course_progress_item->set_item_type( $request['item_type'] );
 		}
 
-		if ( isset( $request['user_id'] ) ) {
+		if ( isset( $request['user_id'] ) && ! empty( $request['user_id'] ) ) {
 			$course_progress_item->set_user_id( $request['user_id'] );
+		} else {
+			$course_progress_item->set_user_id( get_current_user_id() );
 		}
 
 		// Course progress item completion.
@@ -466,18 +467,18 @@ class CourseProgressItemsController extends CrudController {
 		}
 
 		// Activity start date.
-		if ( isset( $request['date_start'] ) ) {
-			$course_progress_item->set_date_start( $request['date_start'] );
+		if ( isset( $request['started_at'] ) ) {
+			$course_progress_item->set_started_at( $request['started_at'] );
 		}
 
 		// Activity update date.
-		if ( isset( $request['date_update'] ) ) {
-			$course_progress_item->set_date_update( $request['date_update'] );
+		if ( isset( $request['modified_at'] ) ) {
+			$course_progress_item->set_modified_at( $request['modified_at'] );
 		}
 
 		// Activity complete date.
-		if ( isset( $request['date_complete'] ) ) {
-			$course_progress_item->set_date_complete( $request['date_complete'] );
+		if ( isset( $request['completed_at'] ) ) {
+			$course_progress_item->set_completed_at( $request['completed_at'] );
 		}
 
 		/**
@@ -682,5 +683,17 @@ class CourseProgressItemsController extends CrudController {
 		}
 
 		return $user_id;
+	}
+
+	/**
+	 * Return single object if there is only single object in the array.
+	 *
+	 * @param array $items Course items.
+	 * @return void
+	 */
+	protected function process_objects_collection( $items ) {
+		$items = ( 1 === count( $items ) ) ? $items[0] : $items;
+
+		return $items;
 	}
 }

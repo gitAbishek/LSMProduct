@@ -293,7 +293,6 @@ class CourseProgressController extends CrudController {
 		$data     = $this->add_additional_fields_to_object( $data, $request );
 		$data     = $this->filter_response_by_context( $data, $context );
 		$response = rest_ensure_response( $data );
-		$response->add_links( $this->prepare_links( $object, $request ) );
 
 		/**
 		 * Filter the data for a response.

@@ -29,13 +29,13 @@ class CourseProgressQuery extends ObjectQuery {
 		return array_merge(
 			parent::get_default_query_vars(),
 			array(
-				'user_id'       => 0,
-				'course_id'     => 0,
-				'activity_type' => 'course',
-				'status'        => 'any',
-				'date_start'    => null,
-				'date_update'   => null,
-				'date_complete' => null,
+				'user_id'      => 0,
+				'course_id'    => 0,
+				'status'       => '',
+				'started_at'   => null,
+				'modified_at'  => null,
+				'completed_at' => null,
+				'orderby'      => 'id',
 			)
 		);
 	}

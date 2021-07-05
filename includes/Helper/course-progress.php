@@ -20,7 +20,7 @@ function masteriyo_get_course_progress( $course_progress ) {
 	if ( is_a( $course_progress, 'ThemeGrill\Masteriyo\Database\Model' ) ) {
 		$id = $course_progress->get_id();
 	} else {
-		$id = (int) $course_progress;
+		$id = absint( $course_progress );
 	}
 
 	try {

@@ -10,6 +10,7 @@ namespace ThemeGrill\Masteriyo\Repository;
 use ThemeGrill\Masteriyo\MetaData;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\ModelException;
+use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
 use ThemeGrill\Masteriyo\Repository\AbstractRepository;
 
 /**
@@ -44,6 +45,24 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	public function create( Model &$course_progress ) {
 		global $wpdb;
 
+		$query = new CourseProgressQuery(
+			array(
+				'course_id' => $course_progress->get_course_id( 'edit' ),
+				'user_id'   => $course_progress->get_user_id( 'edit' ),
+				'per_page'  => 1,
+			)
+		);
+
+		$progress = $query->get_course_progress();
+
+		// There can be only one course progress for each course and user.
+		// So, update the return the previous course progreess if it exits.
+		if ( is_array( $progress ) && ! empty( $progress ) ) {
+			$course_progress->set_id( $progress[0]->get_id() );
+			$this->update( $course_progress );
+			return;
+		}
+
 		if ( ! $course_progress->get_started_at( 'edit' ) ) {
 			$course_progress->set_started_at( current_time( 'mysql', true ) );
 		}
@@ -76,14 +95,12 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		if ( $result && $wpdb->insert_id ) {
 			$course_progress->set_id( $wpdb->insert_id );
 			$this->update_custom_table_meta( $course_progress, true );
-			$this->update_course_progress_items( $course_progress, true );
 			$course_progress->save_meta_data();
 			$course_progress->apply_changes();
 			$this->clear_cache( $course_progress );
 
 			do_action( 'masteriyo_new_course_progress', $course_progress->get_id(), $course_progress );
 		}
-
 	}
 
 	/**
@@ -126,7 +143,6 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		}
 
 		$this->update_custom_table_meta( $course_progress );
-		$this->update_course_progress_items( $course_progress, true );
 		$course_progress->save_meta_data();
 		$course_progress->apply_changes();
 		$this->clear_cache( $course_progress );
@@ -189,7 +205,6 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			array(
 				'user_id'      => $progress_obj->user_id,
 				'course_id'    => $progress_obj->item_id,
-				'type'         => $progress_obj->activity_type,
 				'status'       => $progress_obj->activity_status,
 				'started_at'   => $this->string_to_timestamp( $progress_obj->created_at ),
 				'modified_at'  => $this->string_to_timestamp( $progress_obj->modified_at ),
@@ -198,7 +213,6 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		);
 
 		$course_progress->read_meta_data();
-		$this->read_course_progress_items( $course_progress );
 		$course_progress->set_object_read( true );
 
 		do_action( 'masteriyo_course_progress_read', $course_progress->get_id(), $course_progress );
@@ -231,6 +245,8 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		$search_criteria = array();
 		$sql[]           = "SELECT * FROM {$wpdb->base_prefix}masteriyo_user_activities";
 
+		$search_criteria[] = $wpdb->prepare( 'activity_type = %s', 'course_progress' );
+
 		// Construct where clause part.
 		if ( ! empty( $query_vars['user_id'] ) ) {
 			$search_criteria[] = $wpdb->prepare( 'user_id = %d', $query_vars['user_id'] );
@@ -238,10 +254,6 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 
 		if ( ! empty( $query_vars['course_id'] ) ) {
 			$search_criteria[] = $wpdb->prepare( 'item_id = %d', $query_vars['course_id'] );
-		}
-
-		if ( ! empty( $query_vars['activity_type'] ) ) {
-			$search_criteria[] = $wpdb->prepare( 'activity_type = %s', 'course_progress' );
 		}
 
 		if ( ! empty( $query_vars['status'] ) && 'any' !== $query_vars['status'] ) {
@@ -275,96 +287,4 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 
 		return array_filter( array_map( 'masteriyo_get_course_progress', $ids ) );
 	}
-
-	/**
-	 * Update course progress items.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Model $model model object.
-	 * @param bool  $force Force update. Used during create.
-	 */
-	protected function update_course_progress_items( $course_progress, $force = false ) {
-		foreach ( $course_progress->get_items() as $item ) {
-			$this->update_single_course_progress_item( $course_progress, $item );
-		}
-	}
-
-	/**
-	 * Update a single course progress item.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Model $course_progress Course progress object.
-	 */
-	protected function update_single_course_progress_item( $course_progress, $item ) {
-		global $wpdb;
-
-		foreach ( $course_progress->get_item_changes() as $item ) {
-			if ( isset( $item['id'] ) && ! empty( $item['id'] ) ) {
-				$wpdb->update(
-					"{$wpdb->base_prefix}masteriyo_user_activitymeta",
-					array(
-						'user_activity_id' => $course_progress->get_id(),
-						'meta_key'         => $item['item_id'],
-						'meta_value'       => masteriyo_bool_to_string( $item['is_completed'] ),
-					),
-					array( 'meta_id' => $item['id'] ),
-					array(
-						'%d',
-						'%s',
-						'%s',
-					),
-					array( '%d' )
-				);
-			} else {
-				$wpdb->insert(
-					"{$wpdb->base_prefix}masteriyo_user_activitymeta",
-					array(
-						'user_activity_id' => $course_progress->get_id(),
-						'meta_key'         => $item['item_id'],
-						'meta_value'       => masteriyo_bool_to_string( $item['is_completed'] ),
-					),
-					array(
-						'%d',
-						'%s',
-						'%s',
-					)
-				);
-			}
-		}
-	}
-
-	/**
-	 * Read all course progress items.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Model $course_progress Course progress object.
-	 */
-	protected function read_course_progress_items( $course_progress ) {
-		global $wpdb;
-
-		$items = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->base_prefix}masteriyo_user_activitymeta WHERE user_activity_id = %d",
-				$course_progress->get_id()
-			)
-		);
-
-		$items = array_map(
-			function( $item ) {
-				return array(
-					'id'           => absint( $item->meta_id ),
-					'item_id'      => absint( $item->meta_key ),
-					'item_type'    => $item->meta_type,
-					'is_completed' => masteriyo_string_to_bool( $item->meta_value ),
-				);
-			},
-			$items
-		);
-
-		$course_progress->set_items( $items );
-	}
-
 }

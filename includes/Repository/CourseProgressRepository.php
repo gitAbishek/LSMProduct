@@ -44,16 +44,16 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	public function create( Model &$course_progress ) {
 		global $wpdb;
 
-		if ( ! $course_progress->get_date_start( 'edit' ) ) {
-			$course_progress->set_date_start( current_time( 'mysql', true ) );
+		if ( ! $course_progress->get_started_at( 'edit' ) ) {
+			$course_progress->set_started_at( current_time( 'mysql', true ) );
 		}
 
-		if ( ! $course_progress->get_date_update( 'edit' ) ) {
-			$course_progress->set_date_update( current_time( 'mysql', true ) );
+		if ( ! $course_progress->get_modified_at( 'edit' ) ) {
+			$course_progress->set_modified_at( current_time( 'mysql', true ) );
 		}
 
-		$date_complete = $course_progress->get_date_complete( 'edit' );
-		$date_complete = is_null( $date_complete ) ? '' : gmdate( 'Y-m-d H:i:s', $date_complete->getTimestamp() );
+		$completed_at = $course_progress->get_completed_at( 'edit' );
+		$completed_at = is_null( $completed_at ) ? '' : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
 
 		$result = $wpdb->insert(
 			$course_progress->get_table_name(),
@@ -64,9 +64,9 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 					'item_id'         => $course_progress->get_course_id( 'edit' ),
 					'activity_type'   => $course_progress->get_type( 'edit' ),
 					'activity_status' => $course_progress->get_status( 'edit' ),
-					'date_start'      => gmdate( 'Y-m-d H:i:s', $course_progress->get_date_start( 'edit' )->getTimestamp() ),
-					'date_update'     => gmdate( 'Y-m-d H:i:s', $course_progress->get_date_update( 'edit' )->getTimestamp() ),
-					'date_complete'   => $date_complete,
+					'created_at'      => gmdate( 'Y-m-d H:i:s', $course_progress->get_started_at( 'edit' )->getTimestamp() ),
+					'modified_at'     => gmdate( 'Y-m-d H:i:s', $course_progress->get_modified_at( 'edit' )->getTimestamp() ),
+					'completed_at'    => $completed_at,
 				),
 				$course_progress
 			),
@@ -101,14 +101,14 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			'user_id',
 			'item_id',
 			'status',
-			'date_start',
-			'date_update',
-			'date_complete',
+			'created_at',
+			'modified_at',
+			'completed_at',
 		);
 
 		if ( array_intersect( $course_progress_data_keys, array_keys( $changes ) ) ) {
-			$date_complete = $course_progress->get_date_complete( 'edit' );
-			$date_complete = is_null( $date_complete ) ? '' : gmdate( 'Y-m-d H:i:s', $date_complete->getTimestamp() );
+			$completed_at = $course_progress->get_completed_at( 'edit' );
+			$completed_at = is_null( $completed_at ) ? '' : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
 
 			$wpdb->update(
 				$course_progress->get_table_name(),
@@ -117,9 +117,9 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 					'item_id'         => $course_progress->get_course_id( 'edit' ),
 					'activity_type'   => $course_progress->get_type( 'edit' ),
 					'activity_status' => $course_progress->get_status( 'edit' ),
-					'date_start'      => gmdate( 'Y-m-d H:i:s', $course_progress->get_date_start( 'edit' )->getTimestamp() ),
-					'date_update'     => gmdate( 'Y-m-d H:i:s', $course_progress->get_date_update( 'edit' )->getTimestamp() ),
-					'date_complete'   => $date_complete,
+					'created_at'      => gmdate( 'Y-m-d H:i:s', $course_progress->get_started_at( 'edit' )->getTimestamp() ),
+					'modified_at'     => gmdate( 'Y-m-d H:i:s', $course_progress->get_modified_at( 'edit' )->getTimestamp() ),
+					'completed_at'    => $completed_at,
 				),
 				array( 'id' => $course_progress->get_id() )
 			);
@@ -187,13 +187,13 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 
 		$course_progress->set_props(
 			array(
-				'user_id'       => $progress_obj->user_id,
-				'course_id'     => $progress_obj->item_id,
-				'type'          => $progress_obj->activity_type,
-				'status'        => $progress_obj->activity_status,
-				'date_start'    => $this->string_to_timestamp( $progress_obj->date_start ),
-				'date_update'   => $this->string_to_timestamp( $progress_obj->date_update ),
-				'date_complete' => $this->string_to_timestamp( $progress_obj->date_complete ),
+				'user_id'      => $progress_obj->user_id,
+				'course_id'    => $progress_obj->item_id,
+				'type'         => $progress_obj->activity_type,
+				'status'       => $progress_obj->activity_status,
+				'started_at'   => $this->string_to_timestamp( $progress_obj->created_at ),
+				'modified_at'  => $this->string_to_timestamp( $progress_obj->modified_at ),
+				'completed_at' => $this->string_to_timestamp( $progress_obj->completed_at ),
 			)
 		);
 

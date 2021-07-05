@@ -193,18 +193,18 @@ class Install {
 			`activity_type` VARCHAR(20) DEFAULT NULL,
 			`activity_status` VARCHAR(20) DEFAULT NULL,
 			`parent_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
-			`date_start` datetime DEFAULT '0000-00-00 00:00:00',
-			`date_update` datetime DEFAULT '0000-00-00 00:00:00',
-			`date_complete` datetime DEFAULT '0000-00-00 00:00:00',
+			`created_at` datetime DEFAULT '0000-00-00 00:00:00',
+			`modified_at` datetime DEFAULT '0000-00-00 00:00:00',
+			`completed_at` datetime DEFAULT '0000-00-00 00:00:00',
 			PRIMARY KEY (`id`),
 			KEY `user_id` (`user_id`),
 			KEY `item_id` (`item_id`),
 			KEY `parent_id` (`parent_id`),
 			KEY `activity_type` (`activity_type`),
 			KEY `activity_status` (`activity_status`),
-			KEY `date_start` (`date_start`),
-			KEY `date_update` (`date_update`),
-			KEY `date_complete` (`date_complete`)
+			KEY `created_at` (`created_at`),
+			KEY `modified_at` (`modified_at`),
+			KEY `completed_at` (`completed_at`)
 		) $charset_collate;";
 
 		return $sql;

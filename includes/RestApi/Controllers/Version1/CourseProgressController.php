@@ -323,13 +323,13 @@ class CourseProgressController extends CrudController {
 	 */
 	protected function get_course_progress_data( $course_progress, $context = 'view' ) {
 		$data = array(
-			'id'            => $course_progress->get_id( $context ),
-			'user_id'       => $course_progress->get_user_id( $context ),
-			'course_id'     => $course_progress->get_course_id( $context ),
-			'status'        => $course_progress->get_status( $context ),
-			'date_start'    => masteriyo_rest_prepare_date_response( $course_progress->get_date_start( $context ) ),
-			'date_update'   => masteriyo_rest_prepare_date_response( $course_progress->get_date_update( $context ) ),
-			'date_complete' => masteriyo_rest_prepare_date_response( $course_progress->get_date_complete( $context ) ),
+			'id'           => $course_progress->get_id( $context ),
+			'user_id'      => $course_progress->get_user_id( $context ),
+			'course_id'    => $course_progress->get_course_id( $context ),
+			'status'       => $course_progress->get_status( $context ),
+			'started_at'   => masteriyo_rest_prepare_date_response( $course_progress->get_started_at( $context ) ),
+			'modified_at'  => masteriyo_rest_prepare_date_response( $course_progress->get_modified_at( $context ) ),
+			'completed_at' => masteriyo_rest_prepare_date_response( $course_progress->get_completed_at( $context ) ),
 		);
 
 		return $data;
@@ -348,13 +348,13 @@ class CourseProgressController extends CrudController {
 		$args = wp_parse_args(
 			$request->get_params(),
 			array(
-				'page'          => 1,
-				'per_page'      => 10,
-				'user_id'       => 0,
-				'status'        => 'any',
-				'date_start'    => null,
-				'date_update'   => null,
-				'date_complete' => null,
+				'page'         => 1,
+				'per_page'     => 10,
+				'user_id'      => 0,
+				'status'       => 'any',
+				'started_at'   => null,
+				'modified_at'  => null,
+				'completed_at' => null,
 			)
 		);
 
@@ -387,42 +387,42 @@ class CourseProgressController extends CrudController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'            => array(
+				'id'           => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'user_id'       => array(
+				'user_id'      => array(
 					'description' => __( 'User ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'course_id'     => array(
+				'course_id'    => array(
 					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'status'        => array(
+				'status'       => array(
 					'description' => __( 'Course progress status.', 'masteriyo' ),
 					'type'        => 'string',
 					'enum'        => masteriyo_get_user_activity_statuses(),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_start'    => array(
+				'started_at'   => array(
 					'description' => __( 'Course progress start date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_complete' => array(
-					'description' => __( 'Course progress complete date in GMT.', 'masteriyo' ),
+				'modified_at'  => array(
+					'description' => __( 'Course progress modified date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_update'   => array(
-					'description' => __( 'Course progress update date in GMT.', 'masteriyo' ),
+				'completed_at' => array(
+					'description' => __( 'Course progress complete date in GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
@@ -891,7 +891,7 @@ class CourseProgressController extends CrudController {
 			$course_progress = masteriyo( 'course-progress' );
 			$course_progress->set_user_id( $user_id );
 			$course_progress->set_course_id( $course_id );
-			$course_progress->get_date_start( current_time( 'mysql' ) );
+			$course_progress->get_started_at( current_time( 'mysql' ) );
 			$course_progress->save();
 		}
 

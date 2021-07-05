@@ -65,7 +65,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 			);
 		}
 
-		// Bail early if ther item_id is not either lesson or quiz.
+		// Bail early if ther item_id is not either lesson or quiz.\
 		$item = get_post( $course_progress_item->get_item_id( 'edit' ) );
 		if ( is_null( $item ) || ! in_array( $item->post_type, array( 'lesson', 'quiz' ), true ) ) {
 			throw new RestException(
@@ -75,20 +75,20 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 			);
 		}
 
-		if ( ! $course_progress_item->get_date_start( 'edit' ) ) {
-			$course_progress_item->set_date_start( current_time( 'mysql', true ) );
+		if ( ! $course_progress_item->get_started_at( 'edit' ) ) {
+			$course_progress_item->set_started_at( current_time( 'mysql', true ) );
 		}
 
-		if ( ! $course_progress_item->get_date_update( 'edit' ) ) {
-			$course_progress_item->set_date_update( current_time( 'mysql', true ) );
+		if ( ! $course_progress_item->get_modified_at( 'edit' ) ) {
+			$course_progress_item->set_modified_at( current_time( 'mysql', true ) );
 		}
 
 		if ( $course_progress_item->get_completed( 'edit' ) ) {
-			$course_progress_item->set_date_complete( current_time( 'mysql', true ) );
+			$course_progress_item->set_completed_at( current_time( 'mysql', true ) );
 		}
 
-		$date_complete = $course_progress_item->get_date_complete( 'edit' );
-		$date_complete = is_null( $date_complete ) ? '' : gmdate( 'Y-m-d H:i:s', $date_complete->getTimestamp() );
+		$completed_at = $course_progress_item->get_completed_at( 'edit' );
+		$completed_at = is_null( $completed_at ) ? '' : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
 
 		$result = $wpdb->insert(
 			$course_progress_item->get_table_name(),
@@ -100,9 +100,9 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 					'parent_id'       => $course_progress_item->get_progress_id( 'edit' ),
 					'activity_type'   => $course_progress_item->get_item_type( 'edit' ),
 					'activity_status' => $course_progress_item->get_completed( 'edit' ) ? 'complete' : 'start',
-					'date_start'      => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_date_start( 'edit' )->getTimestamp() ),
-					'date_update'     => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_date_update( 'edit' )->getTimestamp() ),
-					'date_complete'   => $date_complete,
+					'created_at'      => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_started_at( 'edit' )->getTimestamp() ),
+					'modified_at'     => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_modified_at( 'edit' )->getTimestamp() ),
+					'completed_at'    => $completed_at,
 				),
 				$course_progress_item
 			),
@@ -137,24 +137,24 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 			'item_id',
 			'progress_id',
 			'completed',
-			'date_start',
-			'date_update',
-			'date_complete',
+			'created_at',
+			'modified_at',
+			'completed_at',
 		);
 
 		if ( array_intersect( $course_progress_item_data_keys, array_keys( $changes ) ) ) {
 			// Set the complete date if the status is complete.
-			$date_complete = '';
+			$completed_at = '';
 			if ( $course_progress_item->get_completed( 'edit' ) ) {
-				$date_complete = $course_progress_item->get_date_complete( 'edit' );
-				$date_complete = is_null( $date_complete ) ? '' : gmdate( 'Y-m-d H:i:s', $date_complete->getTimestamp() );
+				$completed_at = $course_progress_item->get_completed_at( 'edit' );
+				$completed_at = is_null( $completed_at ) ? '' : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
 			}
 
 			// Set the update if there is any change and the user hasn't set the update value manually.
-			$date_update = gmdate( 'Y-m-d H:i:s', $course_progress_item->get_date_update( 'edit' )->getTimestamp() );
-			if ( ! in_array( 'date_update', array_keys( $changes ), true ) ) {
-				$date_update = $course_progress_item->get_date_update( 'edit' );
-				$date_update = is_null( $date_update ) ? '' : gmdate( 'Y-m-d H:i:s', $date_update->getTimestamp() );
+			$modified_at = gmdate( 'Y-m-d H:i:s', $course_progress_item->get_modified_at( 'edit' )->getTimestamp() );
+			if ( ! in_array( 'modified_at', array_keys( $changes ), true ) ) {
+				$modified_at = $course_progress_item->get_modified_at( 'edit' );
+				$modified_at = is_null( $modified_at ) ? '' : gmdate( 'Y-m-d H:i:s', $modified_at->getTimestamp() );
 			}
 
 			$wpdb->update(
@@ -165,9 +165,9 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 					'parent_id'       => $course_progress_item->get_progress_id( 'edit' ),
 					'activity_type'   => $course_progress_item->get_item_type( 'edit' ),
 					'activity_status' => $course_progress_item->get_completed( 'edit' ) ? 'complete' : 'start',
-					'date_start'      => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_date_start( 'edit' )->getTimestamp() ),
-					'date_update'     => $date_update,
-					'date_complete'   => $date_complete,
+					'created_at'      => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_started_at( 'edit' )->getTimestamp() ),
+					'modified_at'     => $modified_at,
+					'completed_at'    => $completed_at,
 				),
 				array( 'id' => $course_progress_item->get_id() )
 			);
@@ -234,14 +234,14 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 
 		$course_progress_item->set_props(
 			array(
-				'user_id'       => $result->user_id,
-				'item_id'       => $result->item_id,
-				'progress_id'   => $result->parent_id,
-				'type'          => $result->activity_type,
-				'completed'     => 'complete' === $result->activity_status ? true : false,
-				'date_start'    => $this->string_to_timestamp( $result->date_start ),
-				'date_update'   => $this->string_to_timestamp( $result->date_update ),
-				'date_complete' => $this->string_to_timestamp( $result->date_complete ),
+				'user_id'      => $result->user_id,
+				'item_id'      => $result->item_id,
+				'progress_id'  => $result->parent_id,
+				'type'         => $result->activity_type,
+				'completed'    => 'complete' === $result->activity_status ? true : false,
+				'started_at'   => $this->string_to_timestamp( $result->created_at ),
+				'modified_at'  => $this->string_to_timestamp( $result->modified_at ),
+				'completed_at' => $this->string_to_timestamp( $result->completed_at ),
 			)
 		);
 

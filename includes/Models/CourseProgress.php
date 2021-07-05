@@ -68,13 +68,12 @@ class CourseProgress extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'user_id'       => 0,
-		'course_id'     => 0,
-		'type'          => 'course_progress',
-		'status'        => 'begin',
-		'date_start'    => null,
-		'date_update'   => null,
-		'date_complete' => null,
+		'user_id'      => 0,
+		'course_id'    => 0,
+		'status'       => 'begin',
+		'started_at'   => null,
+		'modified_at'  => null,
+		'completed_at' => null,
 	);
 
 	/**
@@ -149,7 +148,7 @@ class CourseProgress extends Model {
 	 * @return string
 	 */
 	public function get_type( $context = 'view' ) {
-		return $this->get_prop( 'type', $context );
+		return 'course_progress';
 	}
 
 	/**
@@ -173,8 +172,8 @@ class CourseProgress extends Model {
 	 * @param  string $context What the value is for. valid values are view and edit.
 	 * @return DateTime|null
 	 */
-	public function get_date_start( $context = 'view' ) {
-		return $this->get_prop( 'date_start', $context );
+	public function get_started_at( $context = 'view' ) {
+		return $this->get_prop( 'started_at', $context );
 	}
 
 	/**
@@ -185,8 +184,8 @@ class CourseProgress extends Model {
 	 * @param  string $context What the value is for. valid values are view and edit.
 	 * @return DateTime|null
 	 */
-	public function get_date_update( $context = 'view' ) {
-		return $this->get_prop( 'date_update', $context );
+	public function get_modified_at( $context = 'view' ) {
+		return $this->get_prop( 'modified_at', $context );
 	}
 
 	/**
@@ -197,8 +196,8 @@ class CourseProgress extends Model {
 	 * @param  string $context What the value is for. valid values are view and edit.
 	 * @return DateTime|null
 	 */
-	public function get_date_complete( $context = 'view' ) {
-		return $this->get_prop( 'date_complete', $context );
+	public function get_completed_at( $context = 'view' ) {
+		return $this->get_prop( 'completed_at', $context );
 	}
 
 	/*
@@ -230,17 +229,6 @@ class CourseProgress extends Model {
 	}
 
 	/**
-	 * Set course progress type.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  string $type Course progress type.
-	 */
-	public function set_type( $type ) {
-		$this->set_prop( 'type', $type );
-	}
-
-	/**
 	 * Set course progress status.
 	 *
 	 * @since 0.1.0
@@ -258,8 +246,8 @@ class CourseProgress extends Model {
 	 *
 	 * @param  string $start Course progress start.
 	 */
-	public function set_date_start( $date_start ) {
-		$this->set_date_prop( 'date_start', $date_start );
+	public function set_started_at( $started_at ) {
+		$this->set_date_prop( 'started_at', $started_at );
 	}
 
 	/**
@@ -269,8 +257,8 @@ class CourseProgress extends Model {
 	 *
 	 * @param  string $update Course progress update.
 	 */
-	public function set_date_update( $date_update ) {
-		$this->set_date_prop( 'date_update', $date_update );
+	public function set_modified_at( $modified_at ) {
+		$this->set_date_prop( 'modified_at', $modified_at );
 	}
 
 	/**
@@ -280,8 +268,8 @@ class CourseProgress extends Model {
 	 *
 	 * @param  string $complete Course progress complete.
 	 */
-	public function set_date_complete( $date_complete ) {
-		$this->set_date_prop( 'date_complete', $date_complete );
+	public function set_completed_at( $completed_at ) {
+		$this->set_date_prop( 'completed_at', $completed_at );
 	}
 
 	/*

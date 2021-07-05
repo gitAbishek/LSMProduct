@@ -203,9 +203,9 @@ class QuizesController extends PostsController {
 						'orderby'  => array(
 							'description'       => __( 'Sort collection by object attribute.', 'masteriyo' ),
 							'type'              => 'string',
-							'default'           => 'attempt_id',
+							'default'           => 'id',
 							'enum'              => array(
-								'attempt_id',
+								'id',
 								'course_id',
 								'quiz_id',
 								'attempt_started_at',
@@ -273,9 +273,9 @@ class QuizesController extends PostsController {
 						'orderby'  => array(
 							'description'       => __( 'Sort collection by object attribute.', 'masteriyo' ),
 							'type'              => 'string',
-							'default'           => 'attempt_id',
+							'default'           => 'id',
 							'enum'              => array(
-								'attempt_id',
+								'id',
 								'course_id',
 								'quiz_id',
 								'attempt_started_at',
@@ -550,10 +550,10 @@ class QuizesController extends PostsController {
 			$wpdb->update(
 				$wpdb->prefix . 'masteriyo_quiz_attempts',
 				$attempt_detail,
-				array( 'attempt_id' => $attempt_data->attempt_id )
+				array( 'id' => $attempt_data->id )
 			);
 
-			$attempt_datas = (array) masteriyo_get_quiz_attempt_ended_data( $quiz_id, $attempt_data->attempt_id );
+			$attempt_datas = (array) masteriyo_get_quiz_attempt_ended_data( $quiz_id, $attempt_data->id );
 
 			$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
 
@@ -606,7 +606,7 @@ class QuizesController extends PostsController {
 	}
 
 	/**
-	 * Get quiz attempt according to attempt_id, user_id and quiz_id.
+	 * Get quiz attempt according to id, user_id and quiz_id.
 	 *
 	 * @since 0.1.0
 	 *
@@ -616,18 +616,18 @@ class QuizesController extends PostsController {
 	public function get_attempt( $request ) {
 		$parameters = $request->get_params();
 
-		$attempt_id = (int) $request['id'];
-		$quiz_id    = (int) $parameters['quiz_id'];
-		$user_id    = (int) $parameters['user_id'];
+		$id      = (int) $request['id'];
+		$quiz_id = (int) $parameters['quiz_id'];
+		$user_id = (int) $parameters['user_id'];
 
 		$query_vars = array(
-			'attempt_id' => $attempt_id,
-			'quiz_id'    => $quiz_id,
-			'user_id'    => $user_id,
-			'per_page'   => $parameters['per_page'],
-			'paged'      => $parameters['paged'],
-			'orderby'    => $parameters['orderby'],
-			'order'      => $parameters['order'],
+			'id'       => $id,
+			'quiz_id'  => $quiz_id,
+			'user_id'  => $user_id,
+			'per_page' => $parameters['per_page'],
+			'paged'    => $parameters['paged'],
+			'orderby'  => $parameters['orderby'],
+			'order'    => $parameters['order'],
 		);
 
 		$attempt_datas = masteriyo_get_quiz_attempts( $query_vars );
@@ -659,7 +659,7 @@ class QuizesController extends PostsController {
 	protected function prepare_quiz_attempts_for_response( $attempt_datas ) {
 		// Attempt keys which value should be changed to integer for response.
 		$keys = array(
-			'attempt_id',
+			'id',
 			'course_id',
 			'quiz_id',
 			'user_id',

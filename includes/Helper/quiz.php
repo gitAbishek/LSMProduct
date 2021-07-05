@@ -78,9 +78,9 @@ function masteriyo_is_quiz_started( $quiz_id = 0 ) {
  * @since 0.1.0
  *
  * @param int $quiz Quiz ID.
- * @param int $attempt_id User Attempt ID.
+ * @param int $id User Attempt ID.
  */
-function masteriyo_get_quiz_attempt_ended_data( $quiz_id = 0, $attempt_id ) {
+function masteriyo_get_quiz_attempt_ended_data( $quiz_id = 0, $id ) {
 	global $wpdb;
 
 	$user_id = get_current_user_id();
@@ -89,12 +89,12 @@ function masteriyo_get_quiz_attempt_ended_data( $quiz_id = 0, $attempt_id ) {
 		$wpdb->prepare(
 			"SELECT *
 			FROM 	{$wpdb->prefix}masteriyo_quiz_attempts
-			WHERE 	attempt_id = %d
+			WHERE 	id = %d
 					AND user_id =  %d
 					AND quiz_id = %d
 					AND attempt_status = %s;
 			",
-			$attempt_id,
+			$id,
 			$user_id,
 			$quiz_id,
 			'attempt_ended'
@@ -155,8 +155,8 @@ function masteriyo_get_quiz_attempts( $query_vars ) {
 	$sql[]           = "SELECT * FROM {$wpdb->base_prefix}masteriyo_quiz_attempts";
 
 	// Construct where clause part.
-	if ( ! empty( $query_vars['attempt_id'] ) ) {
-		$search_criteria[] = $wpdb->prepare( 'attempt_id = %d', $query_vars['attempt_id'] );
+	if ( ! empty( $query_vars['id'] ) ) {
+		$search_criteria[] = $wpdb->prepare( 'id = %d', $query_vars['id'] );
 	}
 
 	if ( ! empty( $query_vars['course_id'] ) ) {

@@ -277,11 +277,6 @@ class SettingsController extends CrudController {
 							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'add_to_cart_behaviour'    => array(
-							'description' => __( 'Add to cart beahviour.', 'masteriyo' ),
-							'type'        => 'string',
-							'context'     => array( 'view', 'edit' ),
-						),
 						'per_page'                 => array(
 							'description' => __( 'Courses per page.', 'masteriyo' ),
 							'type'        => 'integer',
@@ -290,11 +285,6 @@ class SettingsController extends CrudController {
 						'per_row'                  => array(
 							'description' => __( 'Courses per row.', 'masteriyo' ),
 							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'enable_editing'           => array(
-							'description' => __( 'Enable editing published course.', 'masteriyo' ),
-							'type'        => 'boolean',
 							'context'     => array( 'view', 'edit' ),
 						),
 						'category_base'            => array(
@@ -994,10 +984,8 @@ class SettingsController extends CrudController {
 			),
 			'courses'  => array(
 				'placeholder_image'        => $setting->get_courses_placeholder_image( $context ),
-				'add_to_cart_behaviour'    => $setting->get_courses_add_to_cart_behaviour( $context ),
 				'per_page'                 => $setting->get_courses_per_page( $context ),
 				'per_row'                  => $setting->get_courses_per_row( $context ),
-				'enable_editing'           => $setting->get_courses_enable_editing( $context ),
 				'category_base'            => $setting->get_courses_category_base( $context ),
 				'tag_base'                 => $setting->get_courses_tag_base( $context ),
 				'difficulty_base'          => $setting->get_courses_difficulty_base( $context ),
@@ -1192,20 +1180,12 @@ class SettingsController extends CrudController {
 			$setting->set_courses_placeholder_image( $request['courses']['placeholder_image'] );
 		}
 
-		if ( isset( $request['courses']['add_to_cart_behaviour'] ) ) {
-			$setting->set_courses_add_to_cart_behaviour( $request['courses']['add_to_cart_behaviour'] );
-		}
-
 		if ( isset( $request['courses']['per_page'] ) ) {
 			$setting->set_courses_per_page( $request['courses']['per_page'] );
 		}
 
 		if ( isset( $request['courses']['per_row'] ) ) {
 			$setting->set_courses_per_row( $request['courses']['per_row'] );
-		}
-
-		if ( isset( $request['courses']['enable_editing'] ) ) {
-			$setting->set_courses_enable_editing( $request['courses']['enable_editing'] );
 		}
 
 		if ( isset( $request['courses']['category_base'] ) ) {

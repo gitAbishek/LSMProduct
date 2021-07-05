@@ -32,29 +32,33 @@ interface Props {
 	nextStep: () => void;
 }
 
-const Preview = (general: any) => {
-	const currencySymbol = getSymbolFromCurrency(general.currency);
+const Preview = (props: any) => {
+	if ('undefined' != typeof props.general) {
+		const { general } = props;
 
-	if ('left' === general.currency_position) {
-		return (
-			<CurrencyInput
-				prefix={currencySymbol}
-				groupSeparator={general.thousands_separator}
-				decimalSeparator={general.decimal_separator}
-				decimalScale={general.number_of_decimals}
-				value={9999.99}
-			/>
-		);
-	} else if ('right' === general.currency_position) {
-		return (
-			<CurrencyInput
-				suffix={currencySymbol}
-				groupSeparator={general.thousands_separator}
-				decimalSeparator={general.decimal_separator}
-				decimalScale={general.number_of_decimals}
-				value={9999.99}
-			/>
-		);
+		const currencySymbol = getSymbolFromCurrency(general.currency);
+
+		if ('left' === general.currency_position) {
+			return (
+				<CurrencyInput
+					prefix={currencySymbol}
+					groupSeparator={general.thousands_separator}
+					decimalSeparator={general.decimal_separator}
+					decimalScale={general.number_of_decimals}
+					value={9999.99}
+				/>
+			);
+		} else if ('right' === general.currency_position) {
+			return (
+				<CurrencyInput
+					suffix={currencySymbol}
+					groupSeparator={general.thousands_separator}
+					decimalSeparator={general.decimal_separator}
+					decimalScale={general.number_of_decimals}
+					value={9999.99}
+				/>
+			);
+		}
 	}
 
 	// Default value.
@@ -66,7 +70,6 @@ const Currency: React.FC<Props> = (props) => {
 	const {
 		register,
 		formState: { errors },
-		trigger,
 	} = useFormContext();
 	// Watch entire currency form.
 	const watchGeneralData = useWatch<SetttingsMap>({
@@ -110,16 +113,37 @@ const Currency: React.FC<Props> = (props) => {
 						</Flex>
 					</FormControl>
 
-					<FormControl>
+					<FormControl isInvalid={!!errors?.general?.thousand_separator}>
 						<Flex justify="space-between" align="center">
 							<FormLabel sx={{ fontWeight: 'bold' }}>
-								{__('Thousands Separator', 'masteriyo')}
+								{__('Thousand Separator', 'masteriyo')}
 							</FormLabel>
-							<Input
-								defaultValue=","
-								w="md"
-								{...register('general.thousands_separator')}
-							/>
+							<Box>
+								<Input
+									defaultValue=","
+									w="md"
+									{...register('general.thousand_separator', {
+										required: true,
+										pattern: {
+											value: hasNumber,
+											message: 'Numbers are not allowed.',
+										},
+										validate: (value) =>
+											value != watchGeneralData.decimal_separator,
+									})}
+								/>
+								<FormErrorMessage>
+									{errors?.general?.thousand_separator &&
+										errors?.general?.thousand_separator.message}
+
+									{errors?.general?.thousand_separator &&
+										errors?.general?.thousand_separator.type === 'validate' &&
+										__(
+											`Thousand and Decimal separator can't be same.`,
+											'masteriyo'
+										)}
+								</FormErrorMessage>
+							</Box>
 						</Flex>
 					</FormControl>
 
@@ -138,11 +162,20 @@ const Currency: React.FC<Props> = (props) => {
 											value: hasNumber,
 											message: 'Numbers are not allowed.',
 										},
+										validate: (value) =>
+											value != watchGeneralData.thousand_separator,
 									})}
 								/>
 								<FormErrorMessage>
 									{errors?.general?.decimal_separator &&
 										errors?.general?.decimal_separator.message}
+
+									{errors?.general?.decimal_separator &&
+										errors?.general?.decimal_separator.type === 'validate' &&
+										__(
+											`Thousand and Decimal separator can't be same.`,
+											'masteriyo'
+										)}
 								</FormErrorMessage>
 							</Box>
 						</Flex>
@@ -155,13 +188,9 @@ const Currency: React.FC<Props> = (props) => {
 							</FormLabel>
 							<Controller
 								name="general.number_of_decimals"
+								defaultValue="2"
 								render={({ field }) => (
-									<NumberInput
-										{...field}
-										w="md"
-										min={1}
-										max={4}
-										defaultValue="2">
+									<NumberInput {...field} w="md" min={1} max={4}>
 										<NumberInputField />
 										<NumberInputStepper>
 											<NumberIncrementStepper />
@@ -199,7 +228,7 @@ const Currency: React.FC<Props> = (props) => {
 								</Button>
 							</Link>
 							<Button
-								isDisabled={!!errors}
+								isDisabled={!!errors?.general}
 								onClick={nextStep}
 								rounded="3px"
 								colorScheme="blue">

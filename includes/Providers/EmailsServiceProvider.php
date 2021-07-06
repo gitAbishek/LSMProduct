@@ -16,6 +16,7 @@ use ThemeGrill\Masteriyo\Emails\NewOrderEmail;
 use ThemeGrill\Masteriyo\Emails\OrderCancelledEmail;
 use ThemeGrill\Masteriyo\Emails\OrderOnHoldEmail;
 use ThemeGrill\Masteriyo\Emails\OrderCompletedEmail;
+use ThemeGrill\Masteriyo\Emails\OrderProcessingEmail;
 use ThemeGrill\Masteriyo\Emails\ResetPasswordEmail;
 
 class EmailsServiceProvider extends AbstractServiceProvider {
@@ -40,6 +41,7 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 		'email.order-cancelled',
 		'email.order-onhold',
 		'email.order-completed',
+		'email.order-processing',
 		'\ThemeGrill\Masteriyo\Emails\Email',
 		'\ThemeGrill\Masteriyo\Emails\ResetPasswordEmail',
 	);
@@ -62,6 +64,7 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'email.order-cancelled', OrderCancelledEmail::class );
 		$this->getContainer()->add( 'email.order-onhold', OrderOnHoldEmail::class );
 		$this->getContainer()->add( 'email.order-completed', OrderCompletedEmail::class );
+		$this->getContainer()->add( 'email.order-processing', OrderProcessingEmail::class );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Emails\Email' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Emails\ResetPasswordEmail' );

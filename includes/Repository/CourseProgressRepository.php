@@ -153,7 +153,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			$completed_at = '';
 			if ( 'complete' === $course_progress->get_status( 'edit' ) ) {
 				$completed_at = $course_progress->get_completed_at( 'edit' );
-				$completed_at = is_null( $completed_at ) ? '' : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
+				$completed_at = is_null( $completed_at ) ? current_time( 'mysql', true ) : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
 			}
 
 			if ( ! isset( $changes['modified_at'] ) ) {

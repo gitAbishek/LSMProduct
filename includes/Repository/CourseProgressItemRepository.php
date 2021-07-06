@@ -172,7 +172,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 			$completed_at = '';
 			if ( $course_progress_item->get_completed( 'edit' ) ) {
 				$completed_at = $course_progress_item->get_completed_at( 'edit' );
-				$completed_at = is_null( $completed_at ) ? '' : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
+				$completed_at = is_null( $completed_at ) ? current_time( 'mysql', true ) : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
 			}
 
 			// Set the update if there is any change and the user hasn't set the update value manually.

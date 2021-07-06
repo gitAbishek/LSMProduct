@@ -4,17 +4,36 @@ import { BiStar, BiUser } from 'react-icons/bi';
 
 interface Props {
 	message: string;
-	avatarUrl: string;
+	avatar: string;
 	name: string;
 	time: string;
 	sender: 'user' | 'author';
 }
 const Message: React.FC<Props> = (props) => {
-	const { message, avatarUrl, name, time, sender } = props;
-
+	const { message, avatar, name, time, sender = 'user' } = props;
+	// https://i.pravatar.cc/150?img=3
+	const bubbleStyle =
+		sender === 'user'
+			? {
+					borderBottomRightRadius: 'lg',
+					borderBottomLeftRadius: 'lg',
+					borderTopRightRadius: 'lg',
+					bg: 'gray.100',
+			  }
+			: {
+					borderBottomRightRadius: 'lg',
+					borderBottomLeftRadius: 'lg',
+					borderTopLeftRadius: 'lg',
+					bg: 'blue.400',
+					color: 'white',
+			  };
 	return (
-		<Stack direction="row" spacing="2" justify="space-between">
-			<Avatar size="sm" src="https://i.pravatar.cc/150?img=3" />
+		<Stack
+			direction="row"
+			spacing="2"
+			justify="space-between"
+			flexDir={sender === 'user' ? 'row' : 'row-reverse'}>
+			<Avatar size="sm" src={avatar} />
 			<Stack direction="column" spacing="2" flex="1">
 				<Stack
 					direction="row"
@@ -25,20 +44,17 @@ const Message: React.FC<Props> = (props) => {
 						<Text fontSize="sm" fontWeight="medium">
 							{name}
 						</Text>
-						<Icon as={sender === 'user' ? BiUser : BiStar} color="pink.400" />
+						<Icon
+							as={sender === 'user' ? BiUser : BiStar}
+							color={sender === 'user' ? 'pink.400' : 'blue.400'}
+						/>
 					</Stack>
 					<Text fontSize="x-small" color="gray.400">
 						{time}
 					</Text>
 				</Stack>
-				<Box
-					fontSize="xs"
-					bg="gray.100"
-					p="4"
-					borderBottomRightRadius="lg"
-					borderBottomLeftRadius="lg"
-					borderTopRightRadius="lg">
-					What is the Screencast videos?
+				<Box fontSize="xs" p="4" xs={bubbleStyle}>
+					{message}
 				</Box>
 			</Stack>
 		</Stack>

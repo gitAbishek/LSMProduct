@@ -89,7 +89,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 
 		$section->set_props(
 			array(
-				'name'         => $section_post->post_title,
+				'name'          => $section_post->post_title,
 				'date_created'  => $section_post->post_date_gmt,
 				'date_modified' => $section_post->post_modified_gmt,
 				'description'   => $section_post->post_content,
@@ -296,9 +296,10 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	protected function get_wp_query_args( $query_vars ) {
 		// Map query vars to ones that get_wp_query_args or WP_Query recognize.
 		$key_mapping = array(
-			'status' => 'post_status',
-			'page'   => 'paged',
+			'status'    => 'post_status',
+			'page'      => 'paged',
 			'parent_id' => 'post_parent',
+			'course_id' => 'post_parent',
 		);
 
 		foreach ( $key_mapping as $query_key => $db_key ) {
@@ -321,8 +322,8 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 
 		// Handle date queries.
 		$date_queries = array(
-			'date_created'      => 'post_date',
-			'date_modified'     => 'post_modified',
+			'date_created'  => 'post_date',
+			'date_modified' => 'post_modified',
 		);
 		foreach ( $date_queries as $query_var_key => $db_key ) {
 			if ( isset( $query_vars[ $query_var_key ] ) && '' !== $query_vars[ $query_var_key ] ) {

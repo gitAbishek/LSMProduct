@@ -307,12 +307,7 @@ class CourseProgressController extends CrudController {
 	 * @return array
 	 */
 	protected function get_course_progress_data( $course_progress, $context = 'view' ) {
-		$items = array_map(
-			function( $item ) {
-				return $this->get_course_progress_item_data( $item );
-			},
-			$course_progress->get_items()
-		);
+		$course_items = $this->get_course_progress_items( $course_progress );
 
 		$data = array(
 			'id'           => $course_progress->get_id( $context ),
@@ -322,7 +317,7 @@ class CourseProgressController extends CrudController {
 			'started_at'   => masteriyo_rest_prepare_date_response( $course_progress->get_started_at( $context ) ),
 			'modified_at'  => masteriyo_rest_prepare_date_response( $course_progress->get_modified_at( $context ) ),
 			'completed_at' => masteriyo_rest_prepare_date_response( $course_progress->get_completed_at( $context ) ),
-			'items'        => $items,
+			'items'        => $this->get_course_progress_items( $course_progress ),
 			'summary'      => $course_progress->get_summary( 'all' ),
 		);
 
@@ -856,5 +851,116 @@ class CourseProgressController extends CrudController {
 		);
 
 		return $data;
+	}
+
+	/**
+	 * Get course progress items.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param CourseProgress $course_progress
+	 * @return array
+	 */
+	protected function get_course_progress_items( $course_progress ) {
+		foreach ( $course_progress->get_items() as $progress_item ) {
+			$progress_items[ $progress_item->get_item_id() ] = $progress_item;
+		}
+
+		$query = new \WP_Query(
+			array(
+				'post_type'      => array( 'section', 'lesson', 'quiz' ),
+				'post_status'    => 'any',
+				'posts_per_page' => -1,
+				'meta_key'       => '_course_id',
+				'meta_value'     => $course_progress->get_course_id( 'edit' ),
+			)
+		);
+
+		$sections = $this->filter_course_sections( $query->posts );
+
+		foreach ( $sections as $id => $section ) {
+			$sections[ $id ]['contents'] = $this->filter_course_lessons_quizzes( $query->posts, $section['item_id'], $progress_items );
+		}
+
+		return $sections;
+	}
+
+	/**
+	 * Filter course sections.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_Post[] $posts
+	 * @return array
+	 */
+	protected function filter_course_sections( $posts ) {
+		$sections = array_filter(
+			$posts,
+			function( $post ) {
+				return 'section' === $post->post_type;
+			}
+		);
+
+		usort(
+			$sections,
+			function( $a, $b ) {
+				return $a->menu_order > $b->menu_order;
+			}
+		);
+
+		$sections = array_map(
+			function( $section ) {
+				return array(
+					'item_id'    => $section->ID,
+					'item_title' => $section->post_title,
+					'item_type'  => $section->post_type,
+				);
+			},
+			$sections
+		);
+
+		return $sections;
+	}
+
+	/**
+	 * Filter course lessons and quizzes.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_Post[] $posts
+	 * @param int $seciton_id Section ID.
+	 * @param array $progress_items Progress Items.
+	 * @return array
+	 */
+	protected function filter_course_lessons_quizzes( $posts, $section_id, $progress_items ) {
+		$lessons_quizzes = array_filter(
+			$posts,
+			function( $post ) use ( $section_id ) {
+				return in_array( $post->post_type, array( 'lesson', 'quiz' ), true ) && $section_id === $post->post_parent;
+			}
+		);
+
+		usort(
+			$lessons_quizzes,
+			function( $a, $b ) {
+				return $a->menu_order > $b->menu_order;
+			}
+		);
+
+		$lessons_quizzes = array_map(
+			function( $lesson_quiz ) use ( $progress_items ) {
+				$completed = isset( $progress_items[ $lesson_quiz->ID ] ) ? $progress_items[ $lesson_quiz->ID ]->get_completed() : false;
+
+				return array(
+					'item_id'    => $lesson_quiz->ID,
+					'item_title' => $lesson_quiz->post_title,
+					'item_type'  => $lesson_quiz->post_type,
+					'completed'  => $completed,
+				);
+			},
+			$lessons_quizzes
+		);
+
+		return $lessons_quizzes;
 	}
 }

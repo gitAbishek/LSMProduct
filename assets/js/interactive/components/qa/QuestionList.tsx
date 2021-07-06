@@ -11,6 +11,7 @@ import {
 	Slide,
 	Stack,
 	Text,
+	Textarea,
 	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -45,41 +46,43 @@ const QuestionList = () => {
 	return (
 		<>
 			<Slide direction="left" in={isListOpen} style={{ position: 'absolute' }}>
-				<Stack direction="column" spacing="1">
-					<Box as="form" action="" p="4">
-						<FormControl>
-							<InputGroup>
-								<Input placeholder="Search a Question" />
-								<InputRightElement>
-									<Icon as={BiSearch} />
-								</InputRightElement>
-							</InputGroup>
-						</FormControl>
-					</Box>
-					{dummyContent.map((item: any, index: number) => (
-						<Stack
-							key={index}
-							direction="row"
-							align="center"
-							justify="space-between"
-							spacing="4"
-							borderBottom="1px"
-							borderBottomColor="gray.100"
-							px="4"
-							py="2"
-							onClick={() => {
-								onChatToggle();
-								onListToggle();
-							}}>
-							<Stack direction="column" spacing="2">
-								<Heading fontSize="sm">{item.title}</Heading>
-								<Text fontSize="x-small" color="gray.500">
-									{item.answer} {__('Answers', 'masteriyo')}
-								</Text>
+				<Stack direction="column" spacing="1" h="full" justify="space-between">
+					<Stack direction="column" spacing="1">
+						<Box as="form" action="" p="4">
+							<FormControl>
+								<InputGroup>
+									<Input placeholder="Search a Question" />
+									<InputRightElement>
+										<Icon as={BiSearch} />
+									</InputRightElement>
+								</InputGroup>
+							</FormControl>
+						</Box>
+						{dummyContent.map((item: any, index: number) => (
+							<Stack
+								key={index}
+								direction="row"
+								align="center"
+								justify="space-between"
+								spacing="4"
+								borderBottom="1px"
+								borderBottomColor="gray.100"
+								px="4"
+								py="2"
+								onClick={() => {
+									onChatToggle();
+									onListToggle();
+								}}>
+								<Stack direction="column" spacing="2">
+									<Heading fontSize="sm">{item.title}</Heading>
+									<Text fontSize="x-small" color="gray.500">
+										{item.answer} {__('Answers', 'masteriyo')}
+									</Text>
+								</Stack>
+								<Icon as={BiChevronRight} fontSize="x-large" color="gray.600" />
 							</Stack>
-							<Icon as={BiChevronRight} fontSize="x-large" color="gray.600" />
-						</Stack>
-					))}
+						))}
+					</Stack>
 					<Stack direction="column" spacing="3" w="full" p="4" pb="6">
 						<FormControl>
 							<Input type="text" placeholder="What is your question?" />
@@ -91,7 +94,11 @@ const QuestionList = () => {
 				</Stack>
 			</Slide>
 			<Slide direction="right" in={isChatOpen} style={{ position: 'absolute' }}>
-				<Stack direction="column" spacing="8">
+				<Stack
+					direction="column"
+					spacing="8"
+					justify="space-between"
+					height="100%">
 					<Box as="header">
 						<ButtonGroup px="4" py="2">
 							<Button
@@ -131,7 +138,7 @@ const QuestionList = () => {
 
 					<Stack direction="column" spacing="3" w="full" p="4" pb="6">
 						<FormControl>
-							<Input type="text" placeholder="What is your question?" />
+							<Textarea />
 						</FormControl>
 						<Button colorScheme="blue" type="submit" isFullWidth>
 							Send

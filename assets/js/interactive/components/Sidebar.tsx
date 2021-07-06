@@ -127,7 +127,7 @@ const Sidebar = () => {
 						{currentTab === 2 && __('Question and Answers')}
 					</DrawerHeader>
 
-					<DrawerBody p="0">
+					<DrawerBody p="0" position="relative" overflowX="hidden">
 						{currentTab === 1 && (
 							<Accordion allowToggle>
 								{listQuery.data.section_order.map((sectionId: any) => {

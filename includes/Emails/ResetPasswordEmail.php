@@ -63,7 +63,7 @@ class ResetPasswordEmail extends Email {
 		}
 
 		// Bail early if this email notification is disabled.
-		if ( ! $this->is_enabled() ) {
+		if ( 'yes' === apply_filters( 'masteriyo_disable_reset_password_email', 'no' ) ) {
 			return;
 		}
 

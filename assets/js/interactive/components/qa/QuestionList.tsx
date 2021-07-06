@@ -116,7 +116,7 @@ const QuestionList = () => {
 							</Stack>
 						</Box>
 
-						<Stack direction="column" spacing="2" px="4">
+						<Stack direction="column" spacing="4" px="4">
 							<Message
 								name="Arlene McCoy"
 								avatar="https://i.pravatar.cc/150?img=3"

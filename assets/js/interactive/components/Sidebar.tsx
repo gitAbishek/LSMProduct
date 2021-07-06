@@ -154,11 +154,13 @@ const Sidebar = () => {
 						alignItems="flex-start"
 						justifyContent="flex-start">
 						{currentTab === 2 && (
-							<Stack direction="column" spacing="2">
+							<Stack direction="column" spacing="3" w="full" p="4" pb="6">
 								<FormControl>
 									<Input type="text" placeholder="What is your question?" />
-									<Button colorScheme="blue">Ask a Question</Button>
 								</FormControl>
+								<Button colorScheme="blue" type="submit" isFullWidth>
+									Ask a Question
+								</Button>
 							</Stack>
 						)}
 						<ButtonGroup d="flex" flex="1" spacing="0" w="full">

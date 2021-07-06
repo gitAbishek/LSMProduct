@@ -25,7 +25,7 @@ const QuestionItem: React.FC<Props> = (props) => {
 					{answer} {__('Answers', 'masteriyo')}
 				</Text>
 			</Stack>
-			<Icon as={BiChevronRight} />
+			<Icon as={BiChevronRight} fontSize="x-large" color="gray.600" />
 		</Stack>
 	);
 };

@@ -1,5 +1,4 @@
 import {
-	Avatar,
 	Box,
 	Button,
 	FormControl,
@@ -15,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiChevronRight, BiSearch, BiUser } from 'react-icons/bi';
+import { BiChevronRight, BiSearch } from 'react-icons/bi';
 
 const QuestionList = () => {
 	const { isOpen: isListOpen, onToggle: onListToggle } = useDisclosure({
@@ -96,37 +95,7 @@ const QuestionList = () => {
 				direction="right"
 				in={isChatOpen}
 				style={{ position: 'absolute', top: 20 }}>
-				<Stack direction="column" spacing="2" px="4">
-					<Stack direction="row" spacing="2" justify="space-between">
-						<Avatar size="sm" src="https://i.pravatar.cc/150?img=3" />
-						<Stack direction="column" spacing="2" flex="1">
-							<Stack
-								direction="row"
-								spacing="1"
-								align="center"
-								justify="space-between">
-								<Stack direction="row" align="center">
-									<Text fontSize="sm" fontWeight="medium">
-										Arlene McCoy
-									</Text>
-									<Icon as={BiUser} color="pink.400" />
-								</Stack>
-								<Text fontSize="x-small" color="gray.400">
-									15 min ago
-								</Text>
-							</Stack>
-							<Box
-								fontSize="xs"
-								bg="gray.100"
-								p="4"
-								borderBottomRightRadius="lg"
-								borderBottomLeftRadius="lg"
-								borderTopRightRadius="lg">
-								What is the Screencast videos?
-							</Box>
-						</Stack>
-					</Stack>
-				</Stack>
+				<Stack direction="column" spacing="2" px="4"></Stack>
 			</Slide>
 		</>
 	);

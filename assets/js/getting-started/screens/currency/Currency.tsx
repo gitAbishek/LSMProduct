@@ -6,7 +6,6 @@ import {
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
-	Heading,
 	Input,
 	Link,
 	NumberDecrementStepper,
@@ -16,12 +15,10 @@ import {
 	NumberInputStepper,
 	Select,
 	Stack,
-	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import React from 'react';
-import CurrencyInput from 'react-currency-input-field';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { SetttingsMap } from '../../../back-end/types';
 import { currency } from '../../../back-end/utils/currency';
@@ -32,39 +29,6 @@ interface Props {
 	nextStep: () => void;
 }
 
-const Preview = (props: any) => {
-	if ('undefined' != typeof props.general) {
-		const { general } = props;
-
-		const currencySymbol = getSymbolFromCurrency(general.currency);
-
-		if ('left' === general.currency_position) {
-			return (
-				<CurrencyInput
-					prefix={currencySymbol}
-					groupSeparator={general.thousands_separator}
-					decimalSeparator={general.decimal_separator}
-					decimalScale={general.number_of_decimals}
-					value={9999.99}
-				/>
-			);
-		} else if ('right' === general.currency_position) {
-			return (
-				<CurrencyInput
-					suffix={currencySymbol}
-					groupSeparator={general.thousands_separator}
-					decimalSeparator={general.decimal_separator}
-					decimalScale={general.number_of_decimals}
-					value={9999.99}
-				/>
-			);
-		}
-	}
-
-	// Default value.
-	return <CurrencyInput prefix={'$'} value={9999.99} />;
-};
-
 const Currency: React.FC<Props> = (props) => {
 	const { dashboardURL, prevStep, nextStep } = props;
 	const {
@@ -74,6 +38,13 @@ const Currency: React.FC<Props> = (props) => {
 	// Watch entire currency form.
 	const watchGeneralData = useWatch<SetttingsMap>({
 		name: 'general',
+		defaultValue: {
+			currency: 'USD',
+			currency_position: 'left',
+			thousand_separator: ',',
+			decimal_separator: '.',
+			number_of_decimals: 2,
+		},
 	});
 
 	return (
@@ -201,17 +172,6 @@ const Currency: React.FC<Props> = (props) => {
 							/>
 						</Flex>
 					</FormControl>
-
-					<Flex justify="space-between" align="center">
-						<strong>
-							<Text fontSize="sm">{__('Preview', 'masteriyo')}</Text>
-						</strong>
-						<Box rounded="3" boxSizing="border-box" w="md">
-							<Heading color="blue.500" as="h2" size="md">
-								<Preview general={watchGeneralData} />
-							</Heading>
-						</Box>
-					</Flex>
 
 					<Flex justify="space-between" align="center">
 						<Button

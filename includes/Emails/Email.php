@@ -39,6 +39,46 @@ class Email {
 	protected $enabled;
 
 	/**
+	 * Setting name to check if this email is enabled.
+	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $setting_name_for_enable = '';
+
+	/**
+	 * Setting name to get email subject from.
+	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $setting_name_for_subject = '';
+
+	/**
+	 * Setting name to get email heading from.
+	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $setting_name_for_heading = '';
+
+	/**
+	 * Setting name to get email receipients from.
+	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $setting_name_for_receipients = '';
+
+	/**
 	 * Recipients for the email.
 	 *
 	 * @since 0.1.0
@@ -77,6 +117,7 @@ class Email {
 					'{site_title}'   => $this->get_blogname(),
 					'{site_address}' => wp_parse_url( home_url(), PHP_URL_HOST ),
 					'{site_url}'     => wp_parse_url( home_url(), PHP_URL_HOST ),
+					'{admin_email}'  => get_option('admin_email'),
 				),
 				$this->get_placeholders()
 			)
@@ -91,8 +132,9 @@ class Email {
 	 * @return string
 	 */
 	public function get_subject() {
-		$setting_name = 'masteriyo_email_subject_' . $this->get_id();
+		$setting_name = 'masteriyo.emails.' . $this->setting_name_for_subject;
 		$subject      = masteriyo_get_setting_value( $setting_name, $this->get_default_subject() );
+		$subject      = empty( $subject ) ? $this->get_default_subject() : $subject;
 
 		return apply_filters( $setting_name, $this->format_string( $subject ), $this->get_object(), $this );
 	}
@@ -105,8 +147,9 @@ class Email {
 	 * @return string
 	 */
 	public function get_heading() {
-		$setting_name = 'masteriyo_email_heading_' . $this->get_id();
-		$heading      = masteriyo_get_setting_value( $setting_name, $this->get_default_heading() );
+		$setting_name = 'masteriyo.emails.' . $this->setting_name_for_heading;
+		$heading      = get_option( $setting_name, $this->get_default_heading() );
+		$heading      = empty( $heading ) ?  $this->get_default_heading() : $heading;
 
 		return apply_filters( $setting_name, $this->format_string( $heading ), $this->get_object(), $this );
 	}
@@ -341,10 +384,10 @@ class Email {
 	 * @return bool
 	 */
 	public function is_enabled() {
-		$setting_name  = 'masteriyo_email_is_enabled_' . $this->get_id();
-		$setting_value = masteriyo_get_setting_value( $setting_name, 'yes' );
+		$setting_name = 'masteriyo.emails.' . $this->setting_name_for_enable;
+		$is_enabled   = in_array( get_option( $setting_name, true ), array( 'yes', '1', true ) );
 
-		return apply_filters( $setting_name, 'yes' === $setting_value, $this->get_object(), $this );
+		return apply_filters( $setting_name, $is_enabled, $this->get_object(), $this );
 	}
 
 	/**
@@ -368,7 +411,7 @@ class Email {
 	public function get_recipient() {
 		$recipient  = apply_filters( 'masteriyo_email_recipient_' . $this->get_id(), $this->recipient, $this->get_object(), $this );
 		$recipients = array_map( 'trim', explode( ',', $recipient ) );
-		$recipients = array_filter( $recipients, 'is_email' );
+		$recipients = array_map( array( $this, 'format_string' ), $recipients );
 
 		return implode( ', ', $recipients );
 	}

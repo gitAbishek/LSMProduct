@@ -9,6 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use ThemeGrill\Masteriyo\Emails\Email;
+use ThemeGrill\Masteriyo\Emails\NewOrderEmail;
 use ThemeGrill\Masteriyo\Emails\ResetPasswordEmail;
 
 class EmailsServiceProvider extends AbstractServiceProvider {
@@ -26,6 +27,7 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 	protected $provides = array(
 		'email',
 		'email.password-reset',
+		'email.new-order',
 		'\ThemeGrill\Masteriyo\Emails\Email',
 		'\ThemeGrill\Masteriyo\Emails\ResetPasswordEmail',
 	);
@@ -41,6 +43,7 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 	public function register() {
 		$this->getContainer()->add( 'email', Email::class );
 		$this->getContainer()->add( 'email.password-reset', ResetPasswordEmail::class );
+		$this->getContainer()->add( 'email.new-order', NewOrderEmail::class );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Emails\Email' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Emails\ResetPasswordEmail' );

@@ -11,7 +11,7 @@
  * the readme will list any important changes.
  *
  * @package Masteriyo\Templates\Emails
- * @version 4.0.0
+ * @version 0.1.0
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.

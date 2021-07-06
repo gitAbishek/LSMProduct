@@ -842,3 +842,117 @@ if ( ! function_exists( 'masteriyo_course_search_form' ) ) {
 	}
 	function_exists( 'add_action' ) && add_action( 'masteriyo_after_archive_header', 'masteriyo_course_search_form' );
 }
+
+if ( ! function_exists( 'masteriyo_email_order_details' ) ) {
+	/**
+	 * Show order details.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_email_order_details( $order, $email = null ) {
+		masteriyo_get_template(
+			'emails/order-details.php',
+			array(
+				'order' => $order,
+				'email' => $email,
+			)
+		);
+	}
+}
+
+if ( ! function_exists( 'masteriyo_email_order_meta' ) ) {
+	/**
+	 * Show order metas.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_email_order_meta( $order = false ) {
+		$fields = apply_filters( 'masteriyo_email_order_meta_fields', array(), $order );
+
+		/**
+		 * Deprecated masteriyo_email_order_meta_keys filter.
+		 *
+		 * @since 2.3.0
+		 */
+		$_fields = apply_filters( 'masteriyo_email_order_meta_keys', array() );
+
+		if ( $_fields ) {
+			foreach ( $_fields as $key => $field ) {
+				if ( is_numeric( $key ) ) {
+					$key = $field;
+				}
+
+				$fields[ $key ] = array(
+					'label' => wptexturize( $key ),
+					'value' => wptexturize( get_post_meta( $order->get_id(), $field, true ) ),
+				);
+			}
+		}
+
+		if ( $fields ) {
+			foreach ( $fields as $field ) {
+				if ( isset( $field['label'] ) && isset( $field['value'] ) && $field['value'] ) {
+					echo '<p><strong>' . $field['label'] . ':</strong> ' . $field['value'] . '</p>'; // WPCS: XSS ok.
+				}
+			}
+		}
+	}
+}
+
+if ( ! function_exists( 'masteriyo_email_customer_addresses' ) ) {
+	/**
+	 * Show order metas.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_email_customer_addresses( $order, $email = null ) {
+		masteriyo_get_template(
+			'emails/customer-addresses.php',
+			array(
+				'order' => $order,
+				'email' => $email,
+			)
+		);
+	}
+}
+
+if ( ! function_exists( 'masteriyo_get_email_order_items' ) ) {
+	/**
+	 * Get HTML for the order items to be shown in emails.
+	 *
+	 * @param Order $order Order object.
+	 * @param array $args Arguments.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	function masteriyo_get_email_order_items( $order, $args = array() ) {
+		ob_start();
+
+		$defaults = array(
+			'show_sku'   => false,
+			'show_image' => false,
+			'image_size' => array( 32, 32 ),
+		);
+
+		$args = wp_parse_args( $args, $defaults );
+
+		masteriyo_get_template(
+			'emails/order-items.php',
+			apply_filters(
+				'masteriyo_email_order_items_args',
+				array(
+					'order'               => $order,
+					'items'               => $order->get_items(),
+					'show_sku'            => $args['show_sku'],
+					'show_purchase_note'  => $order->is_paid() && ! $args['sent_to_admin'],
+					'show_image'          => $args['show_image'],
+					'image_size'          => $args['image_size'],
+				)
+			)
+		);
+
+		return apply_filters( 'masteriyo_email_order_items_table', ob_get_clean(), $order );
+	}
+}

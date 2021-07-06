@@ -41,6 +41,9 @@ add_action( 'masteriyo_account_view-order_endpoint', 'masteriyo_account_view_ord
  */
 add_action( 'masteriyo_email_header', 'masteriyo_email_header' );
 add_action( 'masteriyo_email_footer', 'masteriyo_email_footer' );
+add_action( 'masteriyo_email_order_details', 'masteriyo_email_order_details', 20 );
+add_action( 'masteriyo_email_order_meta', 'masteriyo_email_order_meta', 10);
+add_action( 'masteriyo_email_customer_details', 'masteriyo_email_customer_addresses', 20 );
 
 
 /**

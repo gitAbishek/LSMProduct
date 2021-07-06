@@ -90,6 +90,18 @@ class Order extends AbstractOrder {
 	}
 
 	/**
+	 * Get a formatted billing full name.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_formatted_billing_full_name() {
+		/* translators: 1: first name 2: last name */
+		return sprintf( _x( '%1$s %2$s', 'full name', 'masteriyo' ), $this->get_billing_first_name(), $this->get_billing_last_name() );
+	}
+
+	/**
 	 * Updates status of order immediately.
 	 *
 	 * @since 0.1.0

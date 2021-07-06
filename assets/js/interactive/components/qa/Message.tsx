@@ -1,6 +1,6 @@
 import { Avatar, Box, Icon, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
-import { BiStar, BiUser } from 'react-icons/bi';
+import { BiBadgeCheck, BiUser } from 'react-icons/bi';
 
 interface Props {
 	message: string;
@@ -11,7 +11,7 @@ interface Props {
 }
 const Message: React.FC<Props> = (props) => {
 	const { message, avatar, name, time, sender = 'user' } = props;
-	// https://i.pravatar.cc/150?img=3
+
 	const bubbleStyle =
 		sender === 'user'
 			? {
@@ -29,10 +29,9 @@ const Message: React.FC<Props> = (props) => {
 			  };
 	return (
 		<Stack
-			direction="row"
+			direction={sender === 'user' ? 'row' : 'row-reverse'}
 			spacing="2"
-			justify="space-between"
-			flexDir={sender === 'user' ? 'row' : 'row-reverse'}>
+			justify="space-between">
 			<Avatar size="sm" src={avatar} />
 			<Stack direction="column" spacing="2" flex="1">
 				<Stack
@@ -45,7 +44,7 @@ const Message: React.FC<Props> = (props) => {
 							{name}
 						</Text>
 						<Icon
-							as={sender === 'user' ? BiUser : BiStar}
+							as={sender === 'user' ? BiUser : BiBadgeCheck}
 							color={sender === 'user' ? 'pink.400' : 'blue.400'}
 						/>
 					</Stack>
@@ -53,7 +52,7 @@ const Message: React.FC<Props> = (props) => {
 						{time}
 					</Text>
 				</Stack>
-				<Box fontSize="xs" p="4" xs={bubbleStyle}>
+				<Box fontSize="xs" p="4" sx={bubbleStyle}>
 					{message}
 				</Box>
 			</Stack>

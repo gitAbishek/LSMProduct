@@ -15,6 +15,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiChevronRight, BiSearch } from 'react-icons/bi';
+import Message from './Message';
 
 const QuestionList = () => {
 	const { isOpen: isListOpen, onToggle: onListToggle } = useDisclosure({
@@ -95,7 +96,22 @@ const QuestionList = () => {
 				direction="right"
 				in={isChatOpen}
 				style={{ position: 'absolute', top: 20 }}>
-				<Stack direction="column" spacing="2" px="4"></Stack>
+				<Stack direction="column" spacing="2" px="4">
+					<Message
+						name="Arlene McCoy"
+						avatar="https://i.pravatar.cc/150?img=3"
+						message="What is Screencast videos?"
+						sender="user"
+						time="12 min ago"
+					/>
+					<Message
+						name="Arlene McCoy"
+						avatar="https://i.pravatar.cc/150?img=3"
+						message="What is Screencast videos?"
+						sender="author"
+						time="12 min ago"
+					/>
+				</Stack>
 			</Slide>
 		</>
 	);

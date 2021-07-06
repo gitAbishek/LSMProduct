@@ -9,6 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use ThemeGrill\Masteriyo\Emails\BecomeInstructorEmail;
+use ThemeGrill\Masteriyo\Emails\CourseCompletedEmail;
 use ThemeGrill\Masteriyo\Emails\Email;
 use ThemeGrill\Masteriyo\Emails\NewOrderEmail;
 use ThemeGrill\Masteriyo\Emails\ResetPasswordEmail;
@@ -30,6 +31,7 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 		'email.password-reset',
 		'email.new-order',
 		'email.become-instructor',
+		'email.course-completed',
 		'\ThemeGrill\Masteriyo\Emails\Email',
 		'\ThemeGrill\Masteriyo\Emails\ResetPasswordEmail',
 	);
@@ -47,6 +49,7 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'email.password-reset', ResetPasswordEmail::class );
 		$this->getContainer()->add( 'email.new-order', NewOrderEmail::class );
 		$this->getContainer()->add( 'email.become-instructor', BecomeInstructorEmail::class );
+		$this->getContainer()->add( 'email.course-completed', CourseCompletedEmail::class );
 
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Emails\Email' );
 		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Emails\ResetPasswordEmail' );

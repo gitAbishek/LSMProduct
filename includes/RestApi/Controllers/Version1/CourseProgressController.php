@@ -196,7 +196,6 @@ class CourseProgressController extends CrudController {
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_title',
 			'validate_callback' => 'rest_validate_request_arg',
-			'default'           => 'any',
 			'enum'              => masteriyo_get_user_activity_statuses(),
 		);
 
@@ -346,7 +345,7 @@ class CourseProgressController extends CrudController {
 				'page'         => 1,
 				'per_page'     => 10,
 				'user_id'      => 0,
-				'status'       => 'any',
+				'status'       => '',
 				'started_at'   => null,
 				'modified_at'  => null,
 				'completed_at' => null,

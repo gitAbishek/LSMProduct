@@ -138,7 +138,10 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 			$course_progress_item->apply_changes();
 			$this->clear_cache( $course_progress_item );
 
+			$this->update_course_progress_status( $course_progress_item );
+
 			do_action( 'masteriyo_new_course_progress_item', $course_progress_item->get_id(), $course_progress_item );
+
 		}
 
 	}
@@ -202,6 +205,8 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 		$course_progress_item->save_meta_data();
 		$course_progress_item->apply_changes();
 		$this->clear_cache( $course_progress_item );
+
+		$this->update_course_progress_status( $course_progress_item );
 
 		do_action( 'masteriyo_update_course_progress_item', $course_progress_item->get_id(), $course_progress_item );
 	}
@@ -399,6 +404,37 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 				__( 'Invalid item ID.', 'masteriyo' ),
 				400
 			);
+		}
+	}
+
+	/**
+	 * Update the course progress item every time the course progress item is updated/created.
+	 *
+	 * @param CourseProgressItem $course_progress_item Course progress item object.
+	 *
+	 * @since 0.1.0
+	 */
+	protected function update_course_progress_status( $course_progress_item ) {
+		$user_id   = $course_progress_item->get_user_id( 'edit' );
+		$course_id = $course_progress_item->get_course_id( 'edit' );
+
+		if ( empty( $course_id ) ) {
+			$course_progress = \masteriyo_get_course_progress( $course_progress_item->get_progress_id() );
+		} else {
+			$course_progress = \masteriyo_get_course_progress_by_user_and_course( $user_id, $course_id );
+		}
+
+		if ( is_wp_error( $course_progress ) ) {
+			return;
+		}
+
+		$total_summary = $course_progress->get_summary( 'total' );
+
+		$status = ( 0 === $total_summary['pending'] ) ? 'complete' : 'progress';
+
+		if ( $status !== $course_progress->get_status( 'edit' ) ) {
+			$course_progress->set_status( $status );
+			$course_progress->save();
 		}
 	}
 }

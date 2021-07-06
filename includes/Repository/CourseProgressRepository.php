@@ -63,7 +63,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 				array(
 					'user_id'      => $course_progress->get_user_id( 'edit' ),
 					'course_id'    => $course_progress->get_course_id( 'edit' ),
-					'status'       => $course_progress->get_status( 'edit' ),
+					'status'       => empty( $course_progress->get_status( 'edit' ) ) ? $progress[0]->get_status( 'edit' ) : $course_progress->get_status( 'edit' ),
 					'started_at'   => $course_progress->get_started_at( 'edit' ),
 					'modified_at'  => $course_progress->get_modified_at( 'edit' ),
 					'completed_at' => $course_progress->get_completed_at( 'edit' ),
@@ -150,8 +150,15 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		);
 
 		if ( array_intersect( $course_progress_data_keys, array_keys( $changes ) ) ) {
-			$completed_at = $course_progress->get_completed_at( 'edit' );
-			$completed_at = is_null( $completed_at ) ? '' : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
+			$completed_at = '';
+			if ( 'complete' === $course_progress->get_status( 'edit' ) ) {
+				$completed_at = $course_progress->get_completed_at( 'edit' );
+				$completed_at = is_null( $completed_at ) ? '' : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
+			}
+
+			if ( ! isset( $changes['modified_at'] ) ) {
+				$course_progress->set_modified_at( current_time( 'mysql', true ) );
+			}
 
 			$wpdb->update(
 				$course_progress->get_table_name(),

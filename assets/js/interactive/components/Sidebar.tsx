@@ -12,11 +12,8 @@ import {
 	DrawerFooter,
 	DrawerHeader,
 	DrawerOverlay,
-	FormControl,
 	IconButton,
-	Input,
 	Spinner,
-	Stack,
 	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -123,8 +120,7 @@ const Sidebar = () => {
 						d="flex"
 						alignItems="center"
 						fontWeight="semibold">
-						{currentTab === 1 && coursesQuery.data.name}
-						{currentTab === 2 && __('Question and Answers')}
+						{coursesQuery.data.name}
 					</DrawerHeader>
 
 					<DrawerBody p="0" position="relative" overflowX="hidden">
@@ -153,16 +149,6 @@ const Sidebar = () => {
 						flexDirection="column"
 						alignItems="flex-start"
 						justifyContent="flex-start">
-						{currentTab === 2 && (
-							<Stack direction="column" spacing="3" w="full" p="4" pb="6">
-								<FormControl>
-									<Input type="text" placeholder="What is your question?" />
-								</FormControl>
-								<Button colorScheme="blue" type="submit" isFullWidth>
-									Ask a Question
-								</Button>
-							</Stack>
-						)}
 						<ButtonGroup d="flex" flex="1" spacing="0" w="full">
 							<Button
 								leftIcon={<BiAlignLeft />}

@@ -784,7 +784,7 @@ msgstr ""
 
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:126
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:107
-#: assets/js/interactive/components/Sidebar.tsx:160
+#: assets/js/interactive/components/Sidebar.tsx:177
 msgid "Questions"
 msgstr ""
 
@@ -860,6 +860,7 @@ msgid "Minutes"
 msgstr ""
 
 #: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:64
+#: assets/js/interactive/components/qa/QuestionItem.tsx:25
 msgid "Answers"
 msgstr ""
 
@@ -1517,11 +1518,15 @@ msgstr ""
 msgid "Clear All"
 msgstr ""
 
-#: assets/js/interactive/components/Sidebar.tsx:153
+#: assets/js/interactive/components/Sidebar.tsx:127
+msgid "Question and Answers"
+msgstr ""
+
+#: assets/js/interactive/components/Sidebar.tsx:170
 msgid "Lessons"
 msgstr ""
 
-#: assets/js/interactive/components/Sidebar.tsx:71
+#: assets/js/interactive/components/Sidebar.tsx:75
 msgid "No courses found"
 msgstr ""
 

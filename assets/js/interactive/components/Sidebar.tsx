@@ -24,6 +24,7 @@ import { useParams } from 'react-router-dom';
 import { CloseCone } from '../../back-end/constants/images';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
+import QuestionList from './qa/QuestionList';
 import SidebarItem from './SidebarItem';
 
 const Sidebar = () => {
@@ -122,7 +123,7 @@ const Sidebar = () => {
 						{coursesQuery.data.name}
 					</DrawerHeader>
 
-					<DrawerBody p="0">
+					<DrawerBody p="0" position="relative" overflowX="hidden">
 						{currentTab === 1 && (
 							<Accordion allowToggle>
 								{listQuery.data.section_order.map((sectionId: any) => {
@@ -140,11 +141,15 @@ const Sidebar = () => {
 								})}
 							</Accordion>
 						)}
-						{currentTab === 2 && <span>Questions</span>}
+						{currentTab === 2 && <QuestionList />}
 					</DrawerBody>
 
-					<DrawerFooter p="0">
-						<ButtonGroup d="flex" flex="1" spacing="0">
+					<DrawerFooter
+						p="0"
+						flexDirection="column"
+						alignItems="flex-start"
+						justifyContent="flex-start">
+						<ButtonGroup d="flex" flex="1" spacing="0" w="full">
 							<Button
 								leftIcon={<BiAlignLeft />}
 								isActive={currentTab === 1}

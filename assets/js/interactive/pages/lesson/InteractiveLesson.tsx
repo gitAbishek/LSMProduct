@@ -42,11 +42,10 @@ const InteractiveLesson = () => {
 		}
 	);
 
-	const completeQuery = useQuery([`completeQuery${lessonId}`, lessonId], () =>
-		progressAPI.list({ item_id: lessonId, course_id: courseId })
+	const completeQuery = useQuery<CourseProgressItemsMap>(
+		[`completeQuery${lessonId}`, lessonId],
+		() => progressAPI.list({ item_id: lessonId, course_id: courseId })
 	);
-
-	console.log(completeQuery.data);
 
 	const imageQuery = useQuery(
 		[`interactiveLessonimage${mediaId}`, mediaId],
@@ -108,6 +107,7 @@ const InteractiveLesson = () => {
 				courseId={courseId}
 				onCompletePress={onCompletePress}
 				isButtonLoading={completeMutation.isLoading}
+				isButtonDisabled={completeQuery?.data?.completed}
 			/>
 		</Container>
 	);

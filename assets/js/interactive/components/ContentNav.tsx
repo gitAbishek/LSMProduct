@@ -22,10 +22,17 @@ interface Props {
 	navigation: ContentNavigationSchema;
 	onCompletePress: any;
 	isButtonLoading?: boolean;
+	isButtonDisabled?: boolean;
 }
 
 const ContentNav: React.FC<Props> = (props) => {
-	const { navigation, courseId, onCompletePress, isButtonLoading } = props;
+	const {
+		navigation,
+		courseId,
+		onCompletePress,
+		isButtonLoading,
+		isButtonDisabled,
+	} = props;
 
 	const cirlceStyles = {
 		w: '30px',
@@ -77,6 +84,7 @@ const ContentNav: React.FC<Props> = (props) => {
 				<Button
 					onClick={onCompletePress}
 					isLoading={isButtonLoading}
+					isDisabled={isButtonDisabled}
 					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"

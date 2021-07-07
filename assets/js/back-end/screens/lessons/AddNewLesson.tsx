@@ -17,7 +17,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import HeaderBuilder from 'Components/layout/HeaderBuilder';
-import React, { useState } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
@@ -35,22 +35,8 @@ const AddNewLesson: React.FC = () => {
 	const methods = useForm();
 	const toast = useToast();
 	const history = useHistory();
-	const contentAPI = new API(urls.contents);
 	const lessonAPI = new API(urls.lessons);
 	const sectionsAPI = new API(urls.sections);
-	const [totalContentCount, setTotalContentCount] = useState<any>(0);
-
-	// gets total number of content on section
-	const contentQuery = useQuery(
-		[`content${sectionId}`, sectionId],
-		() => contentAPI.list({ section: sectionId }),
-		{
-			enabled: !!sectionId,
-			onSuccess: (data: any) => {
-				setTotalContentCount(data.length);
-			},
-		}
-	);
 
 	// checks whether section exist or not
 	const sectionQuery = useQuery([`section${sectionId}`, sectionId], () =>
@@ -77,12 +63,11 @@ const AddNewLesson: React.FC = () => {
 		const newData = {
 			course_id: courseId,
 			parent_id: sectionId,
-			menu_order: totalContentCount + 1,
 		};
 		addLesson.mutate(mergeDeep(data, newData));
 	};
 
-	if (contentQuery.isSuccess && sectionQuery.isSuccess) {
+	if (sectionQuery.isSuccess) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />

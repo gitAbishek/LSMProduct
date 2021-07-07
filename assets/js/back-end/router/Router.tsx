@@ -46,6 +46,9 @@ const Router: React.FC = () => {
 				<Route path={routes.course_tags.edit} exact>
 					<screens.EditCourseTag />
 				</Route>
+				<Route path={routes.course_tags.edit} exact>
+					<screens.EditCourseTag />
+				</Route>
 				<Route path={routes.settings} exact>
 					<screens.Settings />
 				</Route>

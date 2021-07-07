@@ -1,22 +1,21 @@
 import {
-	Stack,
+	Collapse,
 	FormControl,
 	FormLabel,
-	Select,
 	Input,
+	Select,
+	Stack,
 	Switch,
-	Tabs,
-	TabList,
 	Tab,
-	TabPanels,
+	TabList,
 	TabPanel,
+	TabPanels,
+	Tabs,
 	Textarea,
-	Collapse,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
-
 import { PaymentsSettingsMap } from '../../../types';
 
 interface Props {

@@ -19,7 +19,6 @@ const Router: React.FC = () => {
 				<Route path={routes.courses.add} exact>
 					<screens.AddNewCourse />
 				</Route>
-
 				<Route path={routes.course_categories.list} exact>
 					<screens.AllCourseCategories />
 				</Route>

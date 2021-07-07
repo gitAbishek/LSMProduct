@@ -297,9 +297,12 @@ class CourseProgressItemsController extends CrudController {
 	 * @return array
 	 */
 	protected function get_course_progress_item_data( $course_progress_item, $context = 'view' ) {
+		$progress = \masteriyo_get_course_progress( $course_progress_item->get_progress_id( 'edit' ) );
+
 		$data = array(
 			'id'           => $course_progress_item->get_id( $context ),
 			'progress_id'  => $course_progress_item->get_progress_id( $context ),
+			'course_id'    => $progress->get_course_id( $context ),
 			'user_id'      => $course_progress_item->get_user_id( $context ),
 			'item_id'      => $course_progress_item->get_item_id( $context ),
 			'item_type'    => $course_progress_item->get_item_type( $context ),

@@ -17,7 +17,7 @@ import API from '../../../back-end/utils/api';
 import MediaAPI from '../../../back-end/utils/media';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
-import { CourseProgressItemMap } from '../../schemas';
+import { CourseProgressItemsMap } from '../../schemas';
 
 const InteractiveLesson = () => {
 	const { lessonId, courseId }: any = useParams();
@@ -27,10 +27,10 @@ const InteractiveLesson = () => {
 	const queryClient = useQueryClient();
 
 	const imageAPi = new MediaAPI();
-	const progressAPI = new API(urls.interactiveProgress);
+	const progressAPI = new API(urls.courseProgressItem);
 
 	const lessonQuery = useQuery(
-		[`se ction${lessonId}`, lessonId],
+		[`interactiveLesson${lessonId}`, lessonId],
 		() => lessonAPI.get(lessonId),
 		{
 			onSuccess: (data: any) => {
@@ -42,20 +42,20 @@ const InteractiveLesson = () => {
 		}
 	);
 
+	const completeQuery = useQuery<CourseProgressItemsMap>(
+		[`completeQuery${lessonId}`, lessonId],
+		() => progressAPI.list({ item_id: lessonId, course_id: courseId })
+	);
+
 	const imageQuery = useQuery(
-		[`image${mediaId}`, mediaId],
+		[`interactiveLessonimage${mediaId}`, mediaId],
 		() => imageAPi.get(mediaId),
 		{
 			enabled: mediaId !== 0,
 		}
 	);
 
-	type CompletedDataMap = {
-		course_id: number | any;
-		items: [CourseProgressItemMap];
-	};
-
-	const completeMutation = useMutation((data: CompletedDataMap) =>
+	const completeMutation = useMutation((data: CourseProgressItemsMap) =>
 		progressAPI.store(data)
 	);
 
@@ -67,11 +67,15 @@ const InteractiveLesson = () => {
 		completeMutation.mutate(
 			{
 				course_id: courseId,
-				items: [{ item_id: lessonId, item_type: 'lesson', completed: true }],
+				item_id: lessonId,
+				item_type: 'lesson',
+				completed: true,
 			},
 			{
 				onSuccess: () => {
+					queryClient.invalidateQueries(`completeQuery${lessonId}`);
 					queryClient.invalidateQueries(`courseProgress${courseId}`);
+
 					toast({
 						title: __('Mark as completed', 'masteriyo'),
 						description: __('Lesson has been marked as completed', 'masteriyo'),
@@ -103,6 +107,7 @@ const InteractiveLesson = () => {
 				courseId={courseId}
 				onCompletePress={onCompletePress}
 				isButtonLoading={completeMutation.isLoading}
+				isButtonDisabled={completeQuery?.data?.completed}
 			/>
 		</Container>
 	);

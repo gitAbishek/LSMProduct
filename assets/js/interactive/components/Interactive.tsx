@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import FullScreenLoader from '../../back-end/components/layout/FullScreenLoader';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
 import InteractiveRouter from '../router/InteractiveRouter';
@@ -10,9 +11,9 @@ import Sidebar from './Sidebar';
 
 const Interactive: React.FC = () => {
 	const { courseId }: any = useParams();
-	const progressAPI = new API(urls.interactiveProgress);
+	const progressAPI = new API(urls.courseProgress);
 
-	const { data, status } = useQuery<CourseProgressMap>(
+	const { data, isSuccess } = useQuery<CourseProgressMap>(
 		[`courseProgress${courseId}`, courseId],
 		() => progressAPI.store({ course_id: courseId }),
 		{
@@ -20,14 +21,17 @@ const Interactive: React.FC = () => {
 		}
 	);
 
-	return (
-		<>
-			{status === 'success' && <Header summary={data.summary} />}
+	if (isSuccess) {
+		return (
+			<>
+				<Header summary={data.summary} />
+				<Sidebar items={data.items} />
+				<InteractiveRouter />
+			</>
+		);
+	}
 
-			<Sidebar />
-			<InteractiveRouter />
-		</>
-	);
+	return <FullScreenLoader />;
 };
 
 export default Interactive;

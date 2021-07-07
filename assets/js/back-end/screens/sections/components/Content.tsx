@@ -72,11 +72,14 @@ const Content: React.FC<Props> = (props) => {
 
 	const onDeleteConfirm = () => {
 		if (type === 'lesson') {
-			deleteLesson.mutate(id);
+			deleteLesson.mutate(id, {
+				onSuccess: () => {
+					setDeleteModalOpen(false);
+				},
+			});
 		} else if (type === 'quiz') {
 			deleteQuiz.mutate(id);
 		}
-		setDeleteModalOpen(false);
 	};
 
 	const onEditPress = () => {

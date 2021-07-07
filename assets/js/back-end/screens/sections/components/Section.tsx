@@ -33,7 +33,7 @@ import {
 	BiTrash,
 } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { Sortable } from '../../../assets/icons';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
@@ -57,7 +57,6 @@ const Section: React.FC<Props> = (props) => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const sectionAPI = new API(urls.sections);
-	const history = useHistory();
 	const cancelRef = useRef<any>();
 	const newContents = contents?.map((contentId: any) => contentsMap[contentId]);
 	const queryClient = useQueryClient();
@@ -174,7 +173,7 @@ const Section: React.FC<Props> = (props) => {
 							<MenuList>
 								<Link
 									as={RouterLink}
-									to={routes.quiz.add
+									to={routes.lesson.add
 										.replace(':sectionId', id.toString())
 										.replace(':courseId', courseId.toString())}>
 									<MenuItem
@@ -187,7 +186,7 @@ const Section: React.FC<Props> = (props) => {
 
 								<Link
 									as={RouterLink}
-									to={routes.lesson.add
+									to={routes.quiz.add
 										.replace(':sectionId', id.toString())
 										.replace(':courseId', courseId.toString())}>
 									<MenuItem

@@ -1,21 +1,21 @@
 import {
-	Stack,
 	Box,
 	Flex,
-	Heading,
 	FormControl,
+	FormHelperText,
 	FormLabel,
+	Heading,
 	Input,
-	Select,
 	NumberDecrementStepper,
 	NumberIncrementStepper,
 	NumberInput,
 	NumberInputField,
 	NumberInputStepper,
-	Switch,
 	Radio,
 	RadioGroup,
-	FormHelperText,
+	Select,
+	Stack,
+	Switch,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import ImageUpload from 'Components/common/ImageUpload';
@@ -45,9 +45,21 @@ const CoursesSettings: React.FC<Props> = (props) => {
 						borderColor="gray.100"
 						pb="3">
 						<Heading fontSize="lg" fontWeight="semibold">
-							{__('General', 'masteriyo')}
+							{__('Design', 'masteriyo')}
 						</Heading>
 					</Flex>
+
+					<FormControl>
+						<Stack direction="row" spacing="4">
+							<FormLabel minW="2xs">
+								{__('Show/Hide Search', 'masteriyo')}
+							</FormLabel>
+							<Switch
+								{...register('courses.enable_search')}
+								defaultChecked={coursesData?.enable_search}
+							/>
+						</Stack>
+					</FormControl>
 
 					<FormControl>
 						<FormLabel minW="2xs">
@@ -59,16 +71,6 @@ const CoursesSettings: React.FC<Props> = (props) => {
 							setValue={setValue}
 							register={register}
 						/>
-					</FormControl>
-					<FormControl>
-						<FormLabel minW="2xs">
-							{__('Add to cart behavior', 'masteriyo')}
-						</FormLabel>
-						<Select
-							{...register('courses.add_to_cart_behavior')}
-							defaultValue={coursesData?.add_to_cart_behavior}>
-							<option value="open-link">{__('Open Link', 'masteriyo')}</option>
-						</Select>
 					</FormControl>
 
 					<FormControl>
@@ -91,20 +93,22 @@ const CoursesSettings: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<FormControl>
-						<Stack direction="row">
-							<FormLabel minW="2xs">
-								{__('Enable Editing Published Course', 'masteriyo')}
-							</FormLabel>
-							<Controller
-								name="courses.enable_editing"
-								render={({ field }) => (
-									<Switch
-										{...field}
-										defaultChecked={coursesData?.enable_editing}
-									/>
-								)}
-							/>
-						</Stack>
+						<FormLabel minW="2xs">
+							{__('Course Per Row', 'masteriyo')}
+						</FormLabel>
+						<Controller
+							name="courses.per_row"
+							defaultValue={coursesData?.per_row}
+							render={({ field }) => (
+								<NumberInput {...field}>
+									<NumberInputField borderRadius="sm" shadow="input" />
+									<NumberInputStepper>
+										<NumberIncrementStepper />
+										<NumberDecrementStepper />
+									</NumberInputStepper>
+								</NumberInput>
+							)}
+						/>
 					</FormControl>
 				</Stack>
 			</Box>
@@ -258,6 +262,44 @@ const CoursesSettings: React.FC<Props> = (props) => {
 							<option value="medium_large">Medium Large</option>
 							<option value="large">large</option>
 						</Select>
+					</FormControl>
+				</Stack>
+			</Box>
+			<Box>
+				<Stack direction="column" spacing="8">
+					<Flex
+						align="center"
+						justify="space-between"
+						borderBottom="1px"
+						borderColor="gray.100"
+						pb="3">
+						<Heading fontSize="lg" fontWeight="semibold">
+							{__('Display', 'masteriyo')}
+						</Heading>
+					</Flex>
+
+					<FormControl>
+						<Stack direction="row" spacing="4">
+							<FormLabel minW="2xs">
+								{__('Enable Review', 'masteriyo')}
+							</FormLabel>
+							<Switch
+								{...register('courses.enable_review')}
+								defaultChecked={coursesData?.enable_review}
+							/>
+						</Stack>
+					</FormControl>
+
+					<FormControl>
+						<Stack direction="row" spacing="4">
+							<FormLabel minW="2xs">
+								{__('Enable Questions & Answers', 'masteriyo')}
+							</FormLabel>
+							<Switch
+								{...register('courses.enable_questions_answers')}
+								defaultChecked={coursesData?.enable_questions_answers}
+							/>
+						</Stack>
 					</FormControl>
 				</Stack>
 			</Box>

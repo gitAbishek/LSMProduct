@@ -29,7 +29,6 @@ const Sidebar: React.FC<Props> = (props) => {
 	const { items } = props;
 	const { courseId }: any = useParams();
 
-	console.log(items);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [currentTab, setCurrentTab] = useState<number>(1);
 

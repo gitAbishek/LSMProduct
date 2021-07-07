@@ -52,3 +52,16 @@ export type CourseProgressMap = {
 	items: [CourseProgressItemMap];
 	summary: CourseProgressSummaryMap;
 };
+
+export type CourseProgressItemsMap = {
+	id?: number;
+	progress_id?: number;
+	course_id?: number;
+	user_id?: number;
+	item_id?: number;
+	item_type?: 'lesson';
+	completed?: boolean;
+	started_at?: string;
+	modified_at?: string;
+	completed_at?: string | any;
+};

@@ -11,7 +11,7 @@ import Sidebar from './Sidebar';
 
 const Interactive: React.FC = () => {
 	const { courseId }: any = useParams();
-	const progressAPI = new API(urls.interactiveProgress);
+	const progressAPI = new API(urls.courseProgress);
 
 	const { data, isSuccess } = useQuery<CourseProgressMap>(
 		[`courseProgress${courseId}`, courseId],
@@ -20,7 +20,6 @@ const Interactive: React.FC = () => {
 			enabled: !!courseId,
 		}
 	);
-	console.log(data);
 
 	if (isSuccess) {
 		return (

@@ -17,7 +17,7 @@ import API from '../../../back-end/utils/api';
 import MediaAPI from '../../../back-end/utils/media';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
-import { CourseProgressItemMap } from '../../schemas';
+import { CourseProgressItemsMap } from '../../schemas';
 
 const InteractiveLesson = () => {
 	const { lessonId, courseId }: any = useParams();
@@ -27,7 +27,7 @@ const InteractiveLesson = () => {
 	const queryClient = useQueryClient();
 
 	const imageAPi = new MediaAPI();
-	const progressAPI = new API(urls.interactiveProgress);
+	const progressAPI = new API(urls.courseProgressItem);
 
 	const lessonQuery = useQuery(
 		[`interactiveLesson${lessonId}`, lessonId],
@@ -42,6 +42,12 @@ const InteractiveLesson = () => {
 		}
 	);
 
+	const completeQuery = useQuery([`completeQuery${lessonId}`, lessonId], () =>
+		progressAPI.list({ item_id: lessonId, course_id: courseId })
+	);
+
+	console.log(completeQuery.data);
+
 	const imageQuery = useQuery(
 		[`interactiveLessonimage${mediaId}`, mediaId],
 		() => imageAPi.get(mediaId),
@@ -50,12 +56,7 @@ const InteractiveLesson = () => {
 		}
 	);
 
-	type CompletedDataMap = {
-		course_id: number | any;
-		items: [CourseProgressItemMap];
-	};
-
-	const completeMutation = useMutation((data: CompletedDataMap) =>
+	const completeMutation = useMutation((data: CourseProgressItemsMap) =>
 		progressAPI.store(data)
 	);
 
@@ -67,7 +68,9 @@ const InteractiveLesson = () => {
 		completeMutation.mutate(
 			{
 				course_id: courseId,
-				items: [{ item_id: lessonId, item_type: 'lesson', completed: true }],
+				item_id: lessonId,
+				item_type: 'lesson',
+				completed: true,
 			},
 			{
 				onSuccess: () => {

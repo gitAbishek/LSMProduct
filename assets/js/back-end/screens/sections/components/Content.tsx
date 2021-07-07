@@ -53,12 +53,14 @@ const Content: React.FC<Props> = (props) => {
 	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
 		onSuccess: () => {
 			queryClient.invalidateQueries(`builder${courseId}`);
+			setDeleteModalOpen(false);
 		},
 	});
 
 	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
 		onSuccess: () => {
 			queryClient.invalidateQueries(`builder${courseId}`);
+			setDeleteModalOpen(false);
 		},
 	});
 
@@ -72,11 +74,7 @@ const Content: React.FC<Props> = (props) => {
 
 	const onDeleteConfirm = () => {
 		if (type === 'lesson') {
-			deleteLesson.mutate(id, {
-				onSuccess: () => {
-					setDeleteModalOpen(false);
-				},
-			});
+			deleteLesson.mutate(id);
 		} else if (type === 'quiz') {
 			deleteQuiz.mutate(id);
 		}

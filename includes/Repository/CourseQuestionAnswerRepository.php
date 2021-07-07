@@ -31,9 +31,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	 * @since 0.1.0
 	 * @var array
 	 */
-	protected $internal_meta_keys = array(
-		'title' => '_title',
-	);
+	protected $internal_meta_keys = array();
 
 	/**
 	 * Create course question answer (comment) in database.
@@ -96,9 +94,6 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 				$mto_course_qa
 			)
 		);
-
-		$last_error = error_get_last();
-		$last_error = $GLOBALS['wpdb']->last_error;
 
 		if ( $id && ! is_wp_error( $id ) ) {
 			// Set comment status.

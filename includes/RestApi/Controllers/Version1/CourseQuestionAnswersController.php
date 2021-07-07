@@ -269,7 +269,6 @@ class CourseQuestionAnswersController extends CommentsController {
 			'user_url'   => $mto_course_qa->get_user_url( $context ),
 			'ip_address' => $mto_course_qa->get_ip_address( $context ),
 			'created_at' => $mto_course_qa->get_created_at( $context ),
-			'title'      => $mto_course_qa->get_title( $context ),
 			'content'    => $mto_course_qa->get_content( $context ),
 			'status'     => $mto_course_qa->get_status( $context ),
 			'agent'      => $mto_course_qa->get_agent( $context ),
@@ -330,11 +329,6 @@ class CourseQuestionAnswersController extends CommentsController {
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'title'      => array(
-					'description' => __( 'Course question answer title.', 'masteriyo' ),
-					'type'        => 'string',
-					'context'     => array( 'view', 'edit' ),
-				),
 				'content'    => array(
 					'description' => __( 'Course question answer content.', 'masteriyo' ),
 					'type'        => 'string',
@@ -343,7 +337,8 @@ class CourseQuestionAnswersController extends CommentsController {
 				'status'     => array(
 					'description' => __( 'Course question answer stattis.', 'masteriyo' ),
 					'type'        => 'string',
-					'enum'        => array( 'approve', 'hold', 'trash' ),
+					'default'     => 'approve',
+					'enum'        => array( 'approve', 'hold', 'trash', 'spam' ),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'agent'      => array(
@@ -408,24 +403,14 @@ class CourseQuestionAnswersController extends CommentsController {
 			$mto_course_qa->set_ip_address( $request['ip_address'] );
 		}
 
-		// Course question-answer Title.
-		if ( isset( $request['title'] ) ) {
-			$mto_course_qa->set_title( $request['title'] );
-		}
-
 		// Course question-answer Date.
-		if ( isset( $request['date_created'] ) ) {
-			$mto_course_qa->set_date_created( $request['date_created'] );
+		if ( isset( $request['created_at'] ) ) {
+			$mto_course_qa->set_created_at( $request['created_at'] );
 		}
 
 		// Course question-answer Content.
 		if ( isset( $request['content'] ) ) {
 			$mto_course_qa->set_content( $request['content'] );
-		}
-
-		// Course question-answer Karma.
-		if ( isset( $request['karma'] ) ) {
-			$mto_course_qa->set_karma( $request['karma'] );
 		}
 
 		// Course question-answer Approved.

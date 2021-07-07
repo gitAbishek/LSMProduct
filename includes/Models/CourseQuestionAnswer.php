@@ -54,7 +54,6 @@ class CourseQuestionAnswer extends Model {
 		'user_url'   => '',
 		'ip_address' => '',
 		'created_at' => null,
-		'title'      => '',
 		'content'    => '',
 		'status'     => 'approve',
 		'agent'      => '',
@@ -166,19 +165,6 @@ class CourseQuestionAnswer extends Model {
 	 */
 	public function get_created_at( $context = 'view' ) {
 		return $this->get_prop( 'created_at', $context );
-	}
-
-	/**
-	 * Get title.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return string
-	 */
-	public function get_title( $context = 'view' ) {
-		return $this->get_prop( 'title', $context );
 	}
 
 	/**
@@ -340,17 +326,6 @@ class CourseQuestionAnswer extends Model {
 	 */
 	public function set_created_at( $created_at ) {
 		$this->set_prop( 'created_at', $created_at );
-	}
-
-	/**
-	 * Set title.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $title Comment title.
-	 */
-	public function set_title( $title ) {
-		$this->set_prop( 'title', $title );
 	}
 
 	/**

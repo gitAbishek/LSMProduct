@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import routes from '../constants/routes';
-import { AddNewLesson, EditLesson } from '../screens';
+import { AddNewLesson, Builder, EditLesson } from '../screens';
 import AddNewQuiz from '../screens/quiz/AddNewQuiz';
 import EditQuiz from '../screens/quiz/EditQuiz';
 
 const CourseRouter: React.FC = () => {
+	console.log('coming from course router');
 	return (
 		<Switch>
 			<Route path={routes.quiz.add}>
@@ -14,7 +15,9 @@ const CourseRouter: React.FC = () => {
 			<Route path={routes.quiz.edit} exact>
 				<EditQuiz />
 			</Route>
-
+			<Route path={routes.courses.edit} exact>
+				<Builder />
+			</Route>
 			<Route path={routes.lesson.add} exact>
 				<AddNewLesson />
 			</Route>

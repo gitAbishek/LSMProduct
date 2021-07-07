@@ -127,7 +127,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 					<Stack direction="row" spacing="8">
 						<FormControl>
 							<FormLabel minW="xs">
-								{__('Thausand Separator', 'masteriyo')}
+								{__('Thousand Separator', 'masteriyo')}
 							</FormLabel>
 							<Input
 								type="text"

@@ -16,8 +16,9 @@ const Course: React.FC = () => {
 	);
 
 	if (courseQuery.isSuccess) {
-		<CourseRouter />;
+		return <CourseRouter />;
 	}
+
 	return <FullScreenLoader />;
 };
 

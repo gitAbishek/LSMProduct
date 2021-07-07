@@ -79,7 +79,7 @@ const AddNewLesson: React.FC = () => {
 				isClosable: true,
 				status: 'success',
 			});
-			history.push(routes.builder.replace(':courseId', data.course_id));
+			history.push(routes.courses.edit.replace(':courseId', data.course_id));
 		},
 	});
 

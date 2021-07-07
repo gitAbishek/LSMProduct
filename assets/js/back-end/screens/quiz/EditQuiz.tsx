@@ -21,7 +21,6 @@ import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
-
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { QuizSchema } from '../../schemas';
@@ -74,7 +73,7 @@ const EditQuiz: React.FC = () => {
 					status: 'success',
 				});
 				history.push(
-					routes.builder.replace(':courseId', data?.course_id?.toString())
+					routes.courses.edit.replace(':courseId', data?.course_id?.toString())
 				);
 			},
 		}
@@ -149,7 +148,7 @@ const EditQuiz: React.FC = () => {
 													variant="outline"
 													onClick={() =>
 														history.push(
-															routes.builder.replace(':courseId', courseId)
+															routes.courses.edit.replace(':courseId', courseId)
 														)
 													}>
 													{__('Cancel', 'masteriyo')}

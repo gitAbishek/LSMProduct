@@ -80,7 +80,7 @@ const AddNewCourse: React.FC = () => {
 					status: 'success',
 				});
 				history.push({
-					pathname: routes.builder.replace(':courseId', data.id),
+					pathname: routes.courses.edit.replace(':courseId', data.id),
 					search: '?type=draft',
 				});
 			},
@@ -91,7 +91,7 @@ const AddNewCourse: React.FC = () => {
 	const onSubmit = (data: any) => {
 		addMutation.mutate(mergeDeep(data, formatData(data, 'publish')), {
 			onSuccess: (data: any) => {
-				history.push(routes.builder.replace(':courseId', data.id));
+				history.push(routes.courses.edit.replace(':courseId', data.id));
 			},
 		});
 	};

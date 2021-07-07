@@ -28,7 +28,6 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
@@ -69,7 +68,7 @@ const EditLesson = () => {
 					isClosable: true,
 					status: 'success',
 				});
-				history.push(routes.builder.replace(':courseId', data.course_id));
+				history.push(routes.courses.edit.replace(':courseId', data.course_id));
 			},
 		}
 	);
@@ -84,7 +83,7 @@ const EditLesson = () => {
 					isClosable: true,
 					status: 'error',
 				});
-				history.push(routes.builder.replace(':courseId', data.course_id));
+				history.push(routes.courses.edit.replace(':courseId', data.course_id));
 			},
 		}
 	);
@@ -159,7 +158,7 @@ const EditLesson = () => {
 											variant="outline"
 											onClick={() =>
 												history.push(
-													routes.builder.replace(':courseId', courseId)
+													routes.courses.edit.replace(':courseId', courseId)
 												)
 											}>
 											{__('Cancel', 'masteriyo')}

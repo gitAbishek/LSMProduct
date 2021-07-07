@@ -17,6 +17,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import queryString from 'query-string';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -44,9 +45,8 @@ const Builder: React.FC = () => {
 	const builderAPI = new API(urls.builder);
 
 	const [builderData, setBuilderData] = useState<any>(null);
-
-	// what type of post it is
-	const { type } = queryString.parse(search);
+	const { type, page } = queryString.parse(search);
+	const [tabIndex, setTabIndex] = useState<number>(page === 'builder' ? 1 : 0);
 
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -110,7 +110,7 @@ const Builder: React.FC = () => {
 	if (builderCourseQuery.isSuccess) {
 		return (
 			<FormProvider {...methods}>
-				<Tabs>
+				<Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
 					<Stack direction="column" spacing="10" align="center">
 						<Box bg="white" w="full">
 							<Container maxW="container.xl">
@@ -204,7 +204,7 @@ const Builder: React.FC = () => {
 			</FormProvider>
 		);
 	}
-	return <span>loading...</span>;
+	return <FullScreenLoader />;
 };
 
 export default Builder;

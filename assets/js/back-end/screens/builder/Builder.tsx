@@ -107,99 +107,104 @@ const Builder: React.FC = () => {
 		updateCourse.mutate(mergeDeep(data, newData));
 	};
 
-	return (
-		<FormProvider {...methods}>
-			<Tabs>
-				<Stack direction="column" spacing="10" align="center">
-					<Box bg="white" w="full">
-						<Container maxW="container.xl">
-							<Flex
-								direction="row"
-								justifyContent="space-between"
-								align="center">
-								<Stack direction="row" spacing="12" align="center">
-									<Box>
-										<RouterLink to={routes.courses.list}>
-											<Image src={Logo} alt="Masteriyo Logo" w="120px" />
-										</RouterLink>
-									</Box>
-									<TabList borderBottom="none" bg="white">
-										<Tab sx={tabStyles}>
-											<Icon as={BiBook} sx={iconStyles} />
-											{__('Course', 'masteriyo')}
-										</Tab>
-										<Tab sx={tabStyles}>
-											<Icon as={BiEdit} sx={iconStyles} />
-											{__('Builder', 'masteriyo')}
-										</Tab>
-										<Tab sx={tabStyles}>
-											<Icon as={BiCog} sx={iconStyles} />
-											{__('Settings', 'masteriyo')}
-										</Tab>
-									</TabList>
-								</Stack>
-								<ButtonGroup>
-									<Link
-										href={builderCourseQuery.data?.preview_permalink}
-										isExternal>
-										<Button variant="outline">Preview</Button>
-									</Link>
+	if (builderCourseQuery.isSuccess) {
+		return (
+			<FormProvider {...methods}>
+				<Tabs>
+					<Stack direction="column" spacing="10" align="center">
+						<Box bg="white" w="full">
+							<Container maxW="container.xl">
+								<Flex
+									direction="row"
+									justifyContent="space-between"
+									align="center">
+									<Stack direction="row" spacing="12" align="center">
+										<Box>
+											<Link as={RouterLink} to={routes.courses.list}>
+												<Image src={Logo} alt="Masteriyo Logo" w="120px" />
+											</Link>
+										</Box>
+										<TabList borderBottom="none" bg="white">
+											<Tab sx={tabStyles}>
+												<Icon as={BiBook} sx={iconStyles} />
+												{__('Course', 'masteriyo')}
+											</Tab>
+											<Tab sx={tabStyles}>
+												<Icon as={BiEdit} sx={iconStyles} />
+												{__('Builder', 'masteriyo')}
+											</Tab>
+											<Tab sx={tabStyles}>
+												<Icon as={BiCog} sx={iconStyles} />
+												{__('Settings', 'masteriyo')}
+											</Tab>
+										</TabList>
+									</Stack>
+									<ButtonGroup>
+										<Link
+											href={builderCourseQuery.data?.preview_permalink}
+											isExternal>
+											<Button variant="outline">Preview</Button>
+										</Link>
 
-									{type && type == 'draft' && (
+										{type && type == 'draft' && (
+											<Button
+												variant="outline"
+												onClick={() => {
+													methods.handleSubmit((data) =>
+														onSave(data, 'draft')
+													)();
+												}}
+												isLoading={
+													updateCourse.isLoading || updateBuilder.isLoading
+												}>
+												{__('Update', 'masteriyo')}
+											</Button>
+										)}
 										<Button
-											variant="outline"
-											onClick={() => {
-												methods.handleSubmit((data) => onSave(data, 'draft'))();
-											}}
+											colorScheme="blue"
+											onClick={methods.handleSubmit((data) =>
+												onSave(data, 'publish')
+											)}
 											isLoading={
 												updateCourse.isLoading || updateBuilder.isLoading
 											}>
-											{__('Update', 'masteriyo')}
+											{type && type == 'draft'
+												? __('Publish', 'masteriyo')
+												: __('Save', 'masteriyo')}
 										</Button>
-									)}
-									<Button
-										colorScheme="blue"
-										onClick={methods.handleSubmit((data) =>
-											onSave(data, 'publish')
-										)}
-										isLoading={
-											updateCourse.isLoading || updateBuilder.isLoading
-										}>
-										{type && type == 'draft'
-											? __('Publish', 'masteriyo')
-											: __('Save', 'masteriyo')}
-									</Button>
-								</ButtonGroup>
-							</Flex>
+									</ButtonGroup>
+								</Flex>
+							</Container>
+						</Box>
+						<Container maxW="container.xl">
+							<Stack direction="column" spacing="6">
+								<Heading as="h1" fontSize="x-large">
+									{__('Edit Course: ', 'masteriyo')}{' '}
+									{builderCourseQuery.data?.name}
+								</Heading>
+								<TabPanels>
+									<TabPanel sx={tabPanelStyles}>
+										<EditCourse courseData={builderCourseQuery.data} />
+									</TabPanel>
+									<TabPanel sx={tabPanelStyles}>
+										<SectionBuilder
+											courseId={builderCourseQuery.data?.id}
+											builderData={builderData}
+											setBuilderData={setBuilderData}
+										/>
+									</TabPanel>
+									<TabPanel sx={tabPanelStyles}>
+										<CourseSetting courseData={builderCourseQuery?.data} />
+									</TabPanel>
+								</TabPanels>
+							</Stack>
 						</Container>
-					</Box>
-					<Container maxW="container.xl">
-						<Stack direction="column" spacing="6">
-							<Heading as="h1" fontSize="x-large">
-								{__('Edit Course: ', 'masteriyo')}{' '}
-								{builderCourseQuery.data?.name}
-							</Heading>
-							<TabPanels>
-								<TabPanel sx={tabPanelStyles}>
-									<EditCourse courseData={builderCourseQuery.data} />
-								</TabPanel>
-								<TabPanel sx={tabPanelStyles}>
-									<SectionBuilder
-										courseId={builderCourseQuery.data?.id}
-										builderData={builderData}
-										setBuilderData={setBuilderData}
-									/>
-								</TabPanel>
-								<TabPanel sx={tabPanelStyles}>
-									<CourseSetting courseData={builderCourseQuery?.data} />
-								</TabPanel>
-							</TabPanels>
-						</Stack>
-					</Container>
-				</Stack>
-			</Tabs>
-		</FormProvider>
-	);
+					</Stack>
+				</Tabs>
+			</FormProvider>
+		);
+	}
+	return <span>loading...</span>;
 };
 
 export default Builder;

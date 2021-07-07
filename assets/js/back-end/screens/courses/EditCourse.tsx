@@ -8,7 +8,7 @@ import Name from './components/Name';
 import Price from './components/Price';
 
 interface Props {
-	courseData: CourseDataMap | any;
+	courseData: CourseDataMap;
 }
 
 const EditCourse: React.FC<Props> = (props) => {

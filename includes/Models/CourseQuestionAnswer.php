@@ -48,20 +48,18 @@ class CourseQuestionAnswer extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'course_id'    => 0,
-		'author_name'  => '',
-		'author_email' => '',
-		'author_url'   => '',
-		'ip_address'   => '',
-		'date_created' => null,
-		'title'        => '',
-		'content'      => '',
-		'karma'        => 0,
-		'status'       => 'approve',
-		'agent'        => '',
-		'type'         => 'mto_course_qa',
-		'parent'       => 0,
-		'author_id'    => 0,
+		'course_id'  => 0,
+		'user_name'  => '',
+		'user_email' => '',
+		'user_url'   => '',
+		'ip_address' => '',
+		'created_at' => null,
+		'title'      => '',
+		'content'    => '',
+		'status'     => 'approve',
+		'agent'      => '',
+		'parent'     => 0,
+		'user_id'    => 0,
 	);
 
 	/**
@@ -76,14 +74,14 @@ class CourseQuestionAnswer extends Model {
 	}
 
 	/**
-	 * Get author.
+	 * Get user.
 	 *
 	 * @since  0.1.0
 	 *
 	 * @return User
 	 */
-	public function get_author() {
-		return masteriyo_get_user( $this->get_author_id() );
+	public function get_user() {
+		return masteriyo_get_user( $this->get_user_id() );
 	}
 
 	/*
@@ -106,7 +104,7 @@ class CourseQuestionAnswer extends Model {
 	}
 
 	/**
-	 * Get author_name.
+	 * Get user_name.
 	 *
 	 * @since  0.1.0
 	 *
@@ -114,12 +112,12 @@ class CourseQuestionAnswer extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_author_name( $context = 'view' ) {
-		return $this->get_prop( 'author_name', $context );
+	public function get_user_name( $context = 'view' ) {
+		return $this->get_prop( 'user_name', $context );
 	}
 
 	/**
-	 * Get author_email.
+	 * Get user_email.
 	 *
 	 * @since  0.1.0
 	 *
@@ -127,12 +125,12 @@ class CourseQuestionAnswer extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_author_email( $context = 'view' ) {
-		return $this->get_prop( 'author_email', $context );
+	public function get_user_email( $context = 'view' ) {
+		return $this->get_prop( 'user_email', $context );
 	}
 
 	/**
-	 * Get author_url.
+	 * Get user_url.
 	 *
 	 * @since  0.1.0
 	 *
@@ -140,8 +138,8 @@ class CourseQuestionAnswer extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_author_url( $context = 'view' ) {
-		return $this->get_prop( 'author_url', $context );
+	public function get_user_url( $context = 'view' ) {
+		return $this->get_prop( 'user_url', $context );
 	}
 
 	/**
@@ -158,7 +156,7 @@ class CourseQuestionAnswer extends Model {
 	}
 
 	/**
-	 * Get date_created.
+	 * Get created_at.
 	 *
 	 * @since  0.1.0
 	 *
@@ -166,8 +164,8 @@ class CourseQuestionAnswer extends Model {
 	 *
 	 * @return string object if the date is set or null if there is no date.
 	 */
-	public function get_date_created( $context = 'view' ) {
-		return $this->get_prop( 'date_created', $context );
+	public function get_created_at( $context = 'view' ) {
+		return $this->get_prop( 'created_at', $context );
 	}
 
 	/**
@@ -194,19 +192,6 @@ class CourseQuestionAnswer extends Model {
 	 */
 	public function get_content( $context = 'view' ) {
 		return $this->get_prop( 'content', $context );
-	}
-
-	/**
-	 * Get karma.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @param  string $context What the value is for. Valid values are view and edit.
-	 *
-	 * @return int
-	 */
-	public function get_karma( $context = 'view' ) {
-		return $this->get_prop( 'karma', $context );
 	}
 
 	/**
@@ -245,7 +230,7 @@ class CourseQuestionAnswer extends Model {
 	 * @return string
 	 */
 	public function get_type( $context = 'view' ) {
-		return $this->get_prop( 'type', $context );
+		return 'mto_course_qa';
 	}
 
 	/**
@@ -269,11 +254,11 @@ class CourseQuestionAnswer extends Model {
 	 * @return boolean
 	 */
 	public function is_answer() {
-		return absint( $this->get_parent('edit') ) > 0;
+		return absint( $this->get_parent( 'edit' ) ) > 0;
 	}
 
 	/**
-	 * Get author_id.
+	 * Get user_id.
 	 *
 	 * @since  0.1.0
 	 *
@@ -281,8 +266,8 @@ class CourseQuestionAnswer extends Model {
 	 *
 	 * @return int
 	 */
-	public function get_author_id( $context = 'view' ) {
-		return $this->get_prop( 'author_id', $context );
+	public function get_user_id( $context = 'view' ) {
+		return $this->get_prop( 'user_id', $context );
 	}
 
 	/*
@@ -303,36 +288,36 @@ class CourseQuestionAnswer extends Model {
 	}
 
 	/**
-	 * Set author_name.
+	 * Set user_name.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $author_name Comment author name.
+	 * @param string $user_name Comment user name.
 	 */
-	public function set_author_name( $author_name ) {
-		$this->set_prop( 'author_name', $author_name );
+	public function set_user_name( $user_name ) {
+		$this->set_prop( 'user_name', $user_name );
 	}
 
 	/**
-	 * Set author_email.
+	 * Set user_email.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $author_email Comment author email.
+	 * @param string $user_email Comment user email.
 	 */
-	public function set_author_email( $author_email ) {
-		$this->set_prop( 'author_email', $author_email );
+	public function set_user_email( $user_email ) {
+		$this->set_prop( 'user_email', $user_email );
 	}
 
 	/**
-	 * Set author_url.
+	 * Set user_url.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $author_url Comment author url.
+	 * @param string $user_url Comment user url.
 	 */
-	public function set_author_url( $author_url ) {
-		$this->set_prop( 'author_url', $author_url );
+	public function set_user_url( $user_url ) {
+		$this->set_prop( 'user_url', $user_url );
 	}
 
 	/**
@@ -340,21 +325,21 @@ class CourseQuestionAnswer extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $ip_address Comment author IP.
+	 * @param string $ip_address Comment user IP.
 	 */
 	public function set_ip_address( $ip_address ) {
 		$this->set_prop( 'ip_address', $ip_address );
 	}
 
 	/**
-	 * Set date_created.
+	 * Set created_at.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $date_created Comment date_created.
+	 * @param string $created_at Comment created_at.
 	 */
-	public function set_date_created( $date_created ) {
-		$this->set_prop( 'date_created', $date_created );
+	public function set_created_at( $created_at ) {
+		$this->set_prop( 'created_at', $created_at );
 	}
 
 	/**
@@ -380,17 +365,6 @@ class CourseQuestionAnswer extends Model {
 	}
 
 	/**
-	 * Set karma.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param int $karma Comment karma.
-	 */
-	public function set_karma( $karma ) {
-		$this->set_prop( 'karma', absint( $karma ) );
-	}
-
-	/**
 	 * Set status.
 	 *
 	 * @since 0.1.0
@@ -413,17 +387,6 @@ class CourseQuestionAnswer extends Model {
 	}
 
 	/**
-	 * Set type.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $type Comment Type.
-	 */
-	public function set_type( $type ) {
-		$this->set_prop( 'type', $type );
-	}
-
-	/**
 	 * Set parent.
 	 *
 	 * @since 0.1.0
@@ -435,13 +398,13 @@ class CourseQuestionAnswer extends Model {
 	}
 
 	/**
-	 * Set author_id.
+	 * Set user_id.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param int $author_id User ID.
+	 * @param int $user_id User ID.
 	 */
-	public function set_author_id( $author_id ) {
-		$this->set_prop( 'author_id', absint( $author_id ) );
+	public function set_user_id( $user_id ) {
+		$this->set_prop( 'user_id', absint( $user_id ) );
 	}
 }

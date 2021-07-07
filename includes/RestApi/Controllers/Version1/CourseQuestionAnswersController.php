@@ -148,6 +148,19 @@ class CourseQuestionAnswersController extends CommentsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
+		// Remove the post argument.
+		unset( $params['post'] );
+
+		// Add course argument.
+		$params['course'] = array(
+			'default'     => array(),
+			'description' => __( 'Limit result set to comments assigned to specific course IDs.', 'masteriyo' ),
+			'type'        => 'array',
+			'items'       => array(
+				'type' => 'integer',
+			),
+		);
+
 		return $params;
 
 	}
@@ -189,7 +202,9 @@ class CourseQuestionAnswersController extends CommentsController {
 	protected function get_objects( $query_args ) {
 		$mto_course_qas = new \WP_Comment_Query( $query_args );
 		$mto_course_qas = $mto_course_qas->comments;
-		$total_posts    = count( $mto_course_qas );
+
+		$total_posts = count( $mto_course_qas );
+
 		if ( $total_posts < 1 ) {
 			// Out-of-bounds, run the query again without LIMIT for total count.
 			unset( $query_args['paged'] );
@@ -247,56 +262,22 @@ class CourseQuestionAnswersController extends CommentsController {
 	 */
 	protected function get_mto_course_qa_data( $mto_course_qa, $context = 'view' ) {
 		$data = array(
-			'id'           => $mto_course_qa->get_id(),
-			'course_id'    => $mto_course_qa->get_course_id(),
-			'author_name'  => $mto_course_qa->get_author_name( $context ),
-			'author_email' => $mto_course_qa->get_author_email( $context ),
-			'author_url'   => $mto_course_qa->get_author_url( $context ),
-			'ip_address'   => $mto_course_qa->get_ip_address( $context ),
-			'date_created' => $mto_course_qa->get_date_created( $context ),
-			'title'        => $mto_course_qa->get_title( $context ),
-			'content'      => $mto_course_qa->get_content( $context ),
-			'karma'        => $mto_course_qa->get_karma( $context ),
-			'status'       => $mto_course_qa->get_status( $context ),
-			'agent'        => $mto_course_qa->get_agent( $context ),
-			'type'         => $mto_course_qa->get_type( $context ),
-			'parent'       => $mto_course_qa->get_parent( $context ),
-			'author_id'    => $mto_course_qa->get_author_id( $context ),
+			'id'         => $mto_course_qa->get_id(),
+			'course_id'  => $mto_course_qa->get_course_id(),
+			'user_name'  => $mto_course_qa->get_user_name( $context ),
+			'user_email' => $mto_course_qa->get_user_email( $context ),
+			'user_url'   => $mto_course_qa->get_user_url( $context ),
+			'ip_address' => $mto_course_qa->get_ip_address( $context ),
+			'created_at' => $mto_course_qa->get_created_at( $context ),
+			'title'      => $mto_course_qa->get_title( $context ),
+			'content'    => $mto_course_qa->get_content( $context ),
+			'status'     => $mto_course_qa->get_status( $context ),
+			'agent'      => $mto_course_qa->get_agent( $context ),
+			'parent'     => $mto_course_qa->get_parent( $context ),
+			'user_id'    => $mto_course_qa->get_user_id( $context ),
 		);
 
 		return $data;
-	}
-
-	/**
-	 * Prepare objects query.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @since  0.1.0
-	 *
-	 * @return array
-	 */
-	protected function prepare_objects_query( $request ) {
-		$args = array(
-			'offset'   => $request['offset'],
-			'paged'    => $request['page'],
-			'per_page' => $request['per_page'],
-			's'        => $request['search'],
-			'type'     => 'mto_course_qa',
-		);
-
-		/**
-		 * Filter the query arguments for a request.
-		 *
-		 * Enables adding extra arguments or setting defaults for a post
-		 * collection request.
-		 *
-		 * @param array           $args    Key value array of query var to query value.
-		 * @param WP_REST_Request $request The request used.
-		 */
-		$args = apply_filters( "masteriyo_rest_{$this->object_type}_object_query", $args, $request );
-
-		return $args;
 	}
 
 	/**
@@ -312,112 +293,75 @@ class CourseQuestionAnswersController extends CommentsController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'           => array(
+				'id'         => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'course_id'    => array(
+				'course_id'  => array(
 					'description' => __( 'Course ID', 'masteriyo' ),
 					'type'        => 'integer',
+					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
 				),
-				'name'         => array(
-					'description' => __( 'Course question-answerer Author.', 'masteriyo' ),
+				'name'       => array(
+					'description' => __( 'Course question answerer user\'s name.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'email'        => array(
-					'description' => __( 'Course question-answerer Author Email.', 'masteriyo' ),
+				'email'      => array(
+					'description' => __( 'Course question-answerer user Email.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'url'          => array(
-					'description' => __( 'Course question-answerer Author URL.', 'masteriyo' ),
+				'url'        => array(
+					'description' => __( 'Course question answerer user URL.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'ip_address'   => array(
-					'description' => __( 'The IP address of the question-answerer', 'masteriyo' ),
+				'ip_address' => array(
+					'description' => __( 'The IP address of the question answerer', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
 				),
-				'date_created' => array(
+				'created_at' => array(
 					'description' => __( "The date the course was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
 				),
-				'title'        => array(
-					'description' => __( 'Course Question Answer Title.', 'masteriyo' ),
+				'title'      => array(
+					'description' => __( 'Course question answer title.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'content'      => array(
-					'description' => __( 'Course Question Answer Content.', 'masteriyo' ),
+				'content'    => array(
+					'description' => __( 'Course question answer content.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'karma'        => array(
-					'description' => __( 'Course question-answer Karma.', 'masteriyo' ),
-					'type'        => 'integer',
+				'status'     => array(
+					'description' => __( 'Course question answer stattis.', 'masteriyo' ),
+					'type'        => 'string',
+					'enum'        => array( 'approve', 'hold', 'trash' ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'status'       => array(
-					'description' => __( 'Course question-answer Status.', 'masteriyo' ),
+				'agent'      => array(
+					'description' => __( 'Course questio answer agent.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'agent'        => array(
-					'description' => __( 'Course question-answer Agent.', 'masteriyo' ),
-					'type'        => 'string',
-					'context'     => array( 'view', 'edit' ),
-				),
-				'type'         => array(
-					'description' => __( 'Course question-answer Type.', 'masteriyo' ),
-					'type'        => 'string',
-					'context'     => array( 'view', 'edit' ),
-				),
-				'parent'       => array(
-					'description' => __( 'Course question-answer Parent.', 'masteriyo' ),
+				'parent'     => array(
+					'description' => __( 'Course question answer parent.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'author_id'      => array(
-					'description' => __( 'The User ID.', 'masteriyo' ),
+				'user_Id'    => array(
+					'description' => __( 'The user ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
-				),
-				'meta_data'    => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
-					'type'        => 'array',
-					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type'       => 'object',
-						'properties' => array(
-							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
-								'type'        => 'integer',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-							),
-							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
-								'type'        => 'mixed',
-								'context'     => array( 'view', 'edit' ),
-							),
-						),
-					),
 				),
 			),
 		);
@@ -437,7 +381,6 @@ class CourseQuestionAnswersController extends CommentsController {
 
 		$id            = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
 		$mto_course_qa = masteriyo( 'course-qa' );
-		$user          = masteriyo_get_current_user();
 
 		if ( 0 !== $id ) {
 			$mto_course_qa->set_id( $id );
@@ -445,34 +388,22 @@ class CourseQuestionAnswersController extends CommentsController {
 			$mto_course_qa_repo->read( $mto_course_qa );
 		}
 
-		if (
-			! is_null( $user ) &&
-			! isset( $request['author_id'] ) &&
-			! isset( $request['author_name'] ) &&
-			! isset( $request['author_email'] )
-		) {
-			$mto_course_qa->set_author_id( $user->get_id() );
-			$mto_course_qa->set_author_email( $user->get_email() );
-			$mto_course_qa->set_author_name( $user->get_display_name() );
-			$mto_course_qa->set_author_url( $user->get_url() );
+		// Course question-answer user.
+		if ( isset( $request['user_name'] ) ) {
+			$mto_course_qa->set_user_name( $request['user_name'] );
 		}
 
-		// Course question-answer Author.
-		if ( isset( $request['author_name'] ) ) {
-			$mto_course_qa->set_author_name( $request['author_name'] );
+		// Course question-answer user Email.
+		if ( isset( $request['user_email'] ) ) {
+			$mto_course_qa->set_user_email( $request['user_email'] );
 		}
 
-		// Course question-answer Author Email.
-		if ( isset( $request['author_email'] ) ) {
-			$mto_course_qa->set_author_email( $request['author_email'] );
+		// Course question-answer user URL.
+		if ( isset( $request['user_url'] ) ) {
+			$mto_course_qa->set_user_url( $request['user_url'] );
 		}
 
-		// Course question-answer Author URL.
-		if ( isset( $request['author_url'] ) ) {
-			$mto_course_qa->set_author_url( $request['author_url'] );
-		}
-
-		// Course question-answer Author IP.
+		// Course question-answer user IP.
 		if ( isset( $request['ip_address'] ) ) {
 			$mto_course_qa->set_ip_address( $request['ip_address'] );
 		}
@@ -523,8 +454,8 @@ class CourseQuestionAnswersController extends CommentsController {
 		}
 
 		// User ID.
-		if ( isset( $request['author_id'] ) ) {
-			$mto_course_qa->set_author_id( $request['author_id'] );
+		if ( isset( $request['user_id'] ) ) {
+			$mto_course_qa->set_user_id( $request['user_id'] );
 		}
 
 		// Allow set meta_data.
@@ -570,7 +501,7 @@ class CourseQuestionAnswersController extends CommentsController {
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -603,7 +534,7 @@ class CourseQuestionAnswersController extends CommentsController {
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -636,7 +567,7 @@ class CourseQuestionAnswersController extends CommentsController {
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -668,20 +599,20 @@ class CourseQuestionAnswersController extends CommentsController {
 
 		if ( ! is_object( $question_answer ) ) {
 			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
+				'masteriyo_rest_invalid_id',
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
 
-		if ( get_current_user_id() !== $question_answer->get_author_id() ) {
+		if ( get_current_user_id() !== $question_answer->get_user_id() ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete this resource.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -691,7 +622,7 @@ class CourseQuestionAnswersController extends CommentsController {
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -719,10 +650,10 @@ class CourseQuestionAnswersController extends CommentsController {
 
 		if ( ! is_object( $question_answer ) ) {
 			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
+				'masteriyo_rest_invalid_id',
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -731,12 +662,12 @@ class CourseQuestionAnswersController extends CommentsController {
 			return true;
 		}
 
-		if ( get_current_user_id() !== $question_answer->get_author_id() ) {
+		if ( get_current_user_id() !== $question_answer->get_user_id() ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update this resource.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -746,7 +677,7 @@ class CourseQuestionAnswersController extends CommentsController {
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}

@@ -15,14 +15,15 @@ use ThemeGrill\Masteriyo\Models\CourseQuestionAnswer;
 /**
  * CourseQuestionAnswer Repository class.
  */
-class CourseQuestionAnswerRepository extends AbstractRepository implements RepositoryInterface {	/**
+class CourseQuestionAnswerRepository extends AbstractRepository implements RepositoryInterface {
+	/**
 	* Meta type.
 	*
 	* @since 0.1.0
 	*
 	* @var string
 	*/
-   protected $meta_type = 'comment';
+	protected $meta_type = 'comment';
 
 	/**
 	 * Data stored in meta keys, but not considered "meta".
@@ -35,7 +36,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	);
 
 	/**
-	 * Create course question-answer (comment) in database.
+	 * Create course question answer (comment) in database.
 	 *
 	 * @since 0.1.0
 	 *
@@ -44,8 +45,8 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	public function create( Model &$mto_course_qa ) {
 		$current_user = wp_get_current_user();
 
-		if ( ! $mto_course_qa->get_date_created( 'edit' ) ) {
-			$mto_course_qa->set_date_created( current_time( 'mysql', true ) );
+		if ( ! $mto_course_qa->get_created_at( 'edit' ) ) {
+			$mto_course_qa->set_created_at( current_time( 'mysql', true ) );
 		}
 
 		if ( ! $mto_course_qa->get_ip_address( 'edit' ) ) {
@@ -57,20 +58,20 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 		}
 
 		if ( ! empty( $current_user ) ) {
-			if ( ! $mto_course_qa->get_author_email( 'edit' ) ) {
-				$mto_course_qa->set_author_email( $current_user->user_email );
+			if ( ! $mto_course_qa->get_user_email( 'edit' ) ) {
+				$mto_course_qa->set_user_email( $current_user->user_email );
 			}
 
-			if ( ! $mto_course_qa->get_author_id( 'edit' ) ) {
-				$mto_course_qa->get_author_id( $current_user->ID );
+			if ( ! $mto_course_qa->get_user_id( 'edit' ) ) {
+				$mto_course_qa->set_user_id( $current_user->ID );
 			}
 
-			if ( ! $mto_course_qa->get_author_name( 'edit' ) ) {
-				$mto_course_qa->set_author_name( $current_user->user_nicename );
+			if ( ! $mto_course_qa->get_user_name( 'edit' ) ) {
+				$mto_course_qa->set_user_name( $current_user->user_nicename );
 			}
 
-			if ( ! $mto_course_qa->get_author_url( 'edit' ) ) {
-				$mto_course_qa->set_author_url( $current_user->user_url );
+			if ( ! $mto_course_qa->get_user_url( 'edit' ) ) {
+				$mto_course_qa->set_user_url( $current_user->user_url );
 			}
 		}
 
@@ -79,19 +80,18 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 				'masteriyo_new_mto_course_qa_data',
 				array(
 					'comment_post_ID'      => $mto_course_qa->get_course_id(),
-					'comment_author'       => $mto_course_qa->get_author_name( 'edit' ),
-					'comment_author_email' => $mto_course_qa->get_author_email( 'edit' ),
-					'comment_author_url'   => $mto_course_qa->get_author_url( 'edit' ),
+					'comment_author'       => $mto_course_qa->get_user_name( 'edit' ),
+					'comment_author_email' => $mto_course_qa->get_user_email( 'edit' ),
+					'comment_author_url'   => $mto_course_qa->get_user_url( 'edit' ),
 					'comment_author_IP'    => $mto_course_qa->get_ip_address( 'edit' ),
-					'comment_date'         => $mto_course_qa->get_date_created( 'edit' ),
-					'comment_date_gmt'     => $mto_course_qa->get_date_created( 'edit' ),
+					'comment_date'         => $mto_course_qa->get_created_at( 'edit' ),
+					'comment_date_gmt'     => $mto_course_qa->get_created_at( 'edit' ),
 					'comment_content'      => $mto_course_qa->get_content(),
-					'comment_karma'        => $mto_course_qa->get_karma( 'edit' ),
 					'comment_approved'     => $mto_course_qa->get_status( 'edit' ),
 					'comment_agent'        => $mto_course_qa->get_agent( 'edit' ),
 					'comment_type'         => $mto_course_qa->get_type( 'edit' ),
 					'comment_parent'       => $mto_course_qa->get_parent( 'edit' ),
-					'user_id'              => $mto_course_qa->get_author_id( 'edit' ),
+					'user_id'              => $mto_course_qa->get_user_id( 'edit' ),
 				),
 				$mto_course_qa
 			)
@@ -99,7 +99,6 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 
 		$last_error = error_get_last();
 		$last_error = $GLOBALS['wpdb']->last_error;
-
 
 		if ( $id && ! is_wp_error( $id ) ) {
 			// Set comment status.
@@ -126,7 +125,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	public function read( Model &$mto_course_qa ) {
 		$mto_course_qa_obj = get_comment( $mto_course_qa->get_id() );
 
-		if ( ! $mto_course_qa->get_id() || ! $mto_course_qa_obj ) {
+		if ( ! $mto_course_qa_obj || 'mto_course_qa' !== $mto_course_qa_obj->comment_type ) {
 			throw new \Exception( __( 'Invalid Course Question Answer.', 'masteriyo' ) );
 		}
 
@@ -140,19 +139,17 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 
 		$mto_course_qa->set_props(
 			array(
-				'course_id'    => $mto_course_qa_obj->comment_post_ID,
-				'author_name'  => $mto_course_qa_obj->comment_author,
-				'author_email' => $mto_course_qa_obj->comment_author_email,
-				'author_url'   => $mto_course_qa_obj->comment_author_url,
-				'ip_address'   => $mto_course_qa_obj->comment_author_IP,
-				'date_created' => $mto_course_qa_obj->comment_date,
-				'content'      => $mto_course_qa_obj->comment_content,
-				'karma'        => $mto_course_qa_obj->comment_karma,
-				'status'       => $status,
-				'agent'        => $mto_course_qa_obj->comment_agent,
-				'type'         => $mto_course_qa_obj->comment_type,
-				'parent'       => $mto_course_qa_obj->comment_parent,
-				'author_id'    => $mto_course_qa_obj->user_id,
+				'course_id'  => $mto_course_qa_obj->comment_post_ID,
+				'user_name'  => $mto_course_qa_obj->comment_author,
+				'user_email' => $mto_course_qa_obj->comment_author_email,
+				'user_url'   => $mto_course_qa_obj->comment_author_url,
+				'ip_address' => $mto_course_qa_obj->comment_author_IP,
+				'created_at' => $mto_course_qa_obj->comment_date_gmt,
+				'content'    => $mto_course_qa_obj->comment_content,
+				'status'     => $status,
+				'agent'      => $mto_course_qa_obj->comment_agent,
+				'parent'     => $mto_course_qa_obj->comment_parent,
+				'user_id'    => $mto_course_qa_obj->user_id,
 			)
 		);
 
@@ -299,12 +296,14 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	 */
 	public function query( $query_vars ) {
 		$args = $this->get_wp_query_args( $query_vars );
-		// Fetching question-answer of comment_type 'mto_course_qa', 'type' already map to 'post_type' so need to add 'type' as 'comment_type' here.
-		$args = array_merge( $args, array( 'type' => 'mto_course_qa' ) );
+
+		// Set the comment type to course question answer.s
+		$args['type'] = 'mto_course_qa';
 
 		if ( isset( $query_vars['course_id'] ) ) {
 			$args['post_id'] = $query_vars['course_id'];
 		}
+
 		if ( ! empty( $args['errors'] ) ) {
 			$query = (object) array(
 				'posts'         => array(),

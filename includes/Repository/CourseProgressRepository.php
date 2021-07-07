@@ -57,7 +57,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		$progress = $query->get_course_progress();
 
 		// There can be only one course progress for each course and user.
-		// So, update the return the previous course progreess if it exits.
+		// So, update and return the previous course progreess if it exits.
 		if ( is_array( $progress ) && ! empty( $progress ) ) {
 			$progress[0]->set_props(
 				array(

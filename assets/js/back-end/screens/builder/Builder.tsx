@@ -63,16 +63,18 @@ const Builder: React.FC = () => {
 	const iconStyles = {
 		mr: '2',
 	};
-	const builderCourseQuery = useQuery<CourseDataMap>(
-		[`builderCourse${courseId}`, courseId],
+
+	const courseQuery = useQuery<CourseDataMap>(
+		[`course${courseId}`, courseId],
 		() => courseAPI.get(courseId)
 	);
 
-	const updateBuilder = useMutation(
-		(data: any) => builderAPI.update(courseId, data),
+	const builderQuery = useQuery(
+		[`builder${courseId}`, courseId],
+		() => builderAPI.get(courseId),
 		{
-			onSuccess: () => {
-				queryClient.invalidateQueries(`builderCourse${courseId}`);
+			onSuccess: (data) => {
+				setBuilderData(data);
 			},
 		}
 	);
@@ -87,13 +89,23 @@ const Builder: React.FC = () => {
 					status: 'success',
 					isClosable: true,
 				});
-				queryClient.invalidateQueries(`courses${data.id}`);
+				queryClient.invalidateQueries(`course${data.id}`);
+			},
+		}
+	);
+
+	const updateBuilder = useMutation(
+		(data: any) => builderAPI.update(courseId, data),
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries(`builder${courseId}`);
 			},
 		}
 	);
 
 	const onSave = (data: any, type: string) => {
 		updateBuilder.mutate(builderData);
+
 		const newData: any = {
 			...(data.categories && {
 				categories: data.categories.map((category: any) => ({
@@ -107,7 +119,7 @@ const Builder: React.FC = () => {
 		updateCourse.mutate(mergeDeep(data, newData));
 	};
 
-	if (builderCourseQuery.isSuccess) {
+	if (courseQuery.isSuccess && builderQuery.isSuccess) {
 		return (
 			<FormProvider {...methods}>
 				<Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
@@ -140,9 +152,7 @@ const Builder: React.FC = () => {
 										</TabList>
 									</Stack>
 									<ButtonGroup>
-										<Link
-											href={builderCourseQuery.data?.preview_permalink}
-											isExternal>
+										<Link href={courseQuery.data?.preview_permalink} isExternal>
 											<Button variant="outline">Preview</Button>
 										</Link>
 
@@ -179,22 +189,23 @@ const Builder: React.FC = () => {
 						<Container maxW="container.xl">
 							<Stack direction="column" spacing="6">
 								<Heading as="h1" fontSize="x-large">
-									{__('Edit Course: ', 'masteriyo')}{' '}
-									{builderCourseQuery.data?.name}
+									{__('Edit Course: ', 'masteriyo')} {courseQuery.data.name}
 								</Heading>
 								<TabPanels>
 									<TabPanel sx={tabPanelStyles}>
-										<EditCourse courseData={builderCourseQuery.data} />
+										<EditCourse courseData={courseQuery.data} />
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
 										<SectionBuilder
-											courseId={builderCourseQuery.data?.id}
-											builderData={builderData}
+											courseId={courseQuery.data.id}
+											builderData={
+												(builderData && builderData) || builderQuery.data
+											}
 											setBuilderData={setBuilderData}
 										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
-										<CourseSetting courseData={builderCourseQuery?.data} />
+										<CourseSetting courseData={courseQuery.data} />
 									</TabPanel>
 								</TabPanels>
 							</Stack>

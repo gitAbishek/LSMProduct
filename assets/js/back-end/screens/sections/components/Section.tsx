@@ -33,7 +33,6 @@ import {
 } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
-
 import { Sortable } from '../../../assets/icons';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
@@ -52,15 +51,8 @@ interface Props {
 }
 
 const Section: React.FC<Props> = (props) => {
-	const {
-		id,
-		name,
-		description,
-		index,
-		contents,
-		contentsMap,
-		courseId,
-	} = props;
+	const { id, name, description, index, contents, contentsMap, courseId } =
+		props;
 	const [isEditing, setIsEditing] = useState(false);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const sectionAPI = new API(urls.sections);
@@ -96,11 +88,19 @@ const Section: React.FC<Props> = (props) => {
 	};
 
 	const onAddNewLessonPress = () => {
-		history.push(routes.lesson.add.replace(':sectionId', id.toString()));
+		history.push(
+			routes.lesson.add
+				.replace(':sectionId', id.toString())
+				.replace(':courseId', courseId.toString())
+		);
 	};
 
 	const onAddNewQuizPress = () => {
-		history.push(routes.quiz.add.replace(':sectionId', id.toString()));
+		history.push(
+			routes.quiz.add
+				.replace(':sectionId', id.toString())
+				.replace(':courseId', courseId.toString())
+		);
 	};
 
 	const onDeleteModalClose = () => {

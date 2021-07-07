@@ -1,22 +1,23 @@
 const routes = {
+	course: '/courses/:courseId',
 	courses: {
 		list: '/courses',
 		add: '/courses/add-new-course',
-		edit: '/courses/:courseId',
+		edit: '/courses/:courseId/edit',
 		settings: '/courses/:courseId/settings',
 	},
 	orders: {
 		list: '/orders',
 		edit: '/orders/:orderId',
 	},
-	section: '/builder/courses/:courseId',
+	section: '/courses/:courseId/section',
 	lesson: {
-		add: '/builder/lesson/:sectionId/add-new-lesson',
-		edit: '/builder/lesson/edit/:lessonId',
+		add: '/courses/:courseId/lesson/:sectionId/add-new-lesson',
+		edit: '/courses/:courseId/lesson/edit/:lessonId',
 	},
 	quiz: {
-		add: '/builder/quiz/:sectionId/add-new-quiz',
-		edit: '/builder/quiz/edit/:quizId',
+		add: '/courses/:courseId/quiz/:sectionId/add-new-quiz',
+		edit: '/courses/:courseId/quiz/edit/:quizId',
 	},
 	course_categories: {
 		list: '/courses/categories',
@@ -35,7 +36,6 @@ const routes = {
 	},
 	settings: '/settings',
 	notFound: '/not-found',
-	builder: '/builder/:courseId',
 };
 
 export default routes;

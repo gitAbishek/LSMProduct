@@ -14,9 +14,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiBook, BiCog, BiEdit, BiShow } from 'react-icons/bi';
-import { Link as RouterLink } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
-
+import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 
@@ -76,7 +74,7 @@ const HeaderBuilder: React.FC<Props> = (props) => {
 										as={NavLink}
 										sx={navLinkStyles}
 										_activeLink={navActiveStyles}
-										to={routes.builder.replace(
+										to={routes.courses.edit.replace(
 											':courseId',
 											courseId.toString()
 										)}>

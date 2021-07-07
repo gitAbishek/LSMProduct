@@ -23,12 +23,7 @@ import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import {
-	Link as RouterLink,
-	useHistory,
-	useLocation,
-	useParams,
-} from 'react-router-dom';
+import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
@@ -42,7 +37,6 @@ import CourseSetting from './component/CourseSetting';
 const Builder: React.FC = () => {
 	const { courseId }: any = useParams();
 	const { search } = useLocation();
-	const history = useHistory();
 	const queryClient = useQueryClient();
 	const toast = useToast();
 	const methods = useForm();
@@ -51,9 +45,8 @@ const Builder: React.FC = () => {
 	const builderAPI = new API(urls.builder);
 
 	const [builderData, setBuilderData] = useState<any>(null);
-
-	// what type of post it is
-	const { type } = queryString.parse(search);
+	const { type, page } = queryString.parse(search);
+	const [tabIndex, setTabIndex] = useState<number>(page === 'builder' ? 1 : 0);
 
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -70,21 +63,18 @@ const Builder: React.FC = () => {
 	const iconStyles = {
 		mr: '2',
 	};
+
 	const courseQuery = useQuery<CourseDataMap>(
-		[`courses${courseId}`, courseId],
-		() => courseAPI.get(courseId),
-		{
-			onError: () => {
-				history.push(routes.notFound);
-			},
-		}
+		[`course${courseId}`, courseId],
+		() => courseAPI.get(courseId)
 	);
 
-	const updateBuilder = useMutation(
-		(data: any) => builderAPI.update(courseId, data),
+	const builderQuery = useQuery(
+		[`builder${courseId}`, courseId],
+		() => builderAPI.get(courseId),
 		{
-			onSuccess: () => {
-				queryClient.invalidateQueries(`builder${courseId}`);
+			onSuccess: (data) => {
+				setBuilderData(data);
 			},
 		}
 	);
@@ -99,13 +89,23 @@ const Builder: React.FC = () => {
 					status: 'success',
 					isClosable: true,
 				});
-				queryClient.invalidateQueries(`courses${data.id}`);
+				queryClient.invalidateQueries(`course${data.id}`);
+			},
+		}
+	);
+
+	const updateBuilder = useMutation(
+		(data: any) => builderAPI.update(courseId, data),
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries(`builder${courseId}`);
 			},
 		}
 	);
 
 	const onSave = (data: any, type: string) => {
 		updateBuilder.mutate(builderData);
+
 		const newData: any = {
 			...(data.categories && {
 				categories: data.categories.map((category: any) => ({
@@ -119,100 +119,103 @@ const Builder: React.FC = () => {
 		updateCourse.mutate(mergeDeep(data, newData));
 	};
 
-	if (courseQuery.isLoading) {
-		return <FullScreenLoader />;
-	}
+	if (courseQuery.isSuccess && builderQuery.isSuccess) {
+		return (
+			<FormProvider {...methods}>
+				<Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
+					<Stack direction="column" spacing="10" align="center">
+						<Box bg="white" w="full">
+							<Container maxW="container.xl">
+								<Flex
+									direction="row"
+									justifyContent="space-between"
+									align="center">
+									<Stack direction="row" spacing="12" align="center">
+										<Box>
+											<Link as={RouterLink} to={routes.courses.list}>
+												<Image src={Logo} alt="Masteriyo Logo" w="120px" />
+											</Link>
+										</Box>
+										<TabList borderBottom="none" bg="white">
+											<Tab sx={tabStyles}>
+												<Icon as={BiBook} sx={iconStyles} />
+												{__('Course', 'masteriyo')}
+											</Tab>
+											<Tab sx={tabStyles}>
+												<Icon as={BiEdit} sx={iconStyles} />
+												{__('Builder', 'masteriyo')}
+											</Tab>
+											<Tab sx={tabStyles}>
+												<Icon as={BiCog} sx={iconStyles} />
+												{__('Settings', 'masteriyo')}
+											</Tab>
+										</TabList>
+									</Stack>
+									<ButtonGroup>
+										<Link href={courseQuery.data?.preview_permalink} isExternal>
+											<Button variant="outline">Preview</Button>
+										</Link>
 
-	return (
-		<FormProvider {...methods}>
-			<Tabs>
-				<Stack direction="column" spacing="10" align="center">
-					<Box bg="white" w="full">
-						<Container maxW="container.xl">
-							<Flex
-								direction="row"
-								justifyContent="space-between"
-								align="center">
-								<Stack direction="row" spacing="12" align="center">
-									<Box>
-										<RouterLink to={routes.courses.list}>
-											<Image src={Logo} alt="Masteriyo Logo" w="120px" />
-										</RouterLink>
-									</Box>
-									<TabList borderBottom="none" bg="white">
-										<Tab sx={tabStyles}>
-											<Icon as={BiBook} sx={iconStyles} />
-											{__('Course', 'masteriyo')}
-										</Tab>
-										<Tab sx={tabStyles}>
-											<Icon as={BiEdit} sx={iconStyles} />
-											{__('Builder', 'masteriyo')}
-										</Tab>
-										<Tab sx={tabStyles}>
-											<Icon as={BiCog} sx={iconStyles} />
-											{__('Settings', 'masteriyo')}
-										</Tab>
-									</TabList>
-								</Stack>
-								<ButtonGroup>
-									<Link href={courseQuery.data?.preview_permalink} isExternal>
-										<Button variant="outline">Preview</Button>
-									</Link>
-
-									{type && type == 'draft' && (
+										{type && type == 'draft' && (
+											<Button
+												variant="outline"
+												onClick={() => {
+													methods.handleSubmit((data) =>
+														onSave(data, 'draft')
+													)();
+												}}
+												isLoading={
+													updateCourse.isLoading || updateBuilder.isLoading
+												}>
+												{__('Update', 'masteriyo')}
+											</Button>
+										)}
 										<Button
-											variant="outline"
-											onClick={() => {
-												methods.handleSubmit((data) => onSave(data, 'draft'))();
-											}}
+											colorScheme="blue"
+											onClick={methods.handleSubmit((data) =>
+												onSave(data, 'publish')
+											)}
 											isLoading={
 												updateCourse.isLoading || updateBuilder.isLoading
 											}>
-											{__('Update', 'masteriyo')}
+											{type && type == 'draft'
+												? __('Publish', 'masteriyo')
+												: __('Save', 'masteriyo')}
 										</Button>
-									)}
-									<Button
-										colorScheme="blue"
-										onClick={methods.handleSubmit((data) =>
-											onSave(data, 'publish')
-										)}
-										isLoading={
-											updateCourse.isLoading || updateBuilder.isLoading
-										}>
-										{type && type == 'draft'
-											? __('Publish', 'masteriyo')
-											: __('Save', 'masteriyo')}
-									</Button>
-								</ButtonGroup>
-							</Flex>
+									</ButtonGroup>
+								</Flex>
+							</Container>
+						</Box>
+						<Container maxW="container.xl">
+							<Stack direction="column" spacing="6">
+								<Heading as="h1" fontSize="x-large">
+									{__('Edit Course: ', 'masteriyo')} {courseQuery.data.name}
+								</Heading>
+								<TabPanels>
+									<TabPanel sx={tabPanelStyles}>
+										<EditCourse courseData={courseQuery.data} />
+									</TabPanel>
+									<TabPanel sx={tabPanelStyles}>
+										<SectionBuilder
+											courseId={courseQuery.data.id}
+											builderData={
+												(builderData && builderData) || builderQuery.data
+											}
+											setBuilderData={setBuilderData}
+										/>
+									</TabPanel>
+									<TabPanel sx={tabPanelStyles}>
+										<CourseSetting courseData={courseQuery.data} />
+									</TabPanel>
+								</TabPanels>
+							</Stack>
 						</Container>
-					</Box>
-					<Container maxW="container.xl">
-						<Stack direction="column" spacing="6">
-							<Heading as="h1" fontSize="x-large">
-								{__('Edit Course: ', 'masteriyo')} {courseQuery.data?.name}
-							</Heading>
-							<TabPanels>
-								<TabPanel sx={tabPanelStyles}>
-									<EditCourse courseData={courseQuery.data} />
-								</TabPanel>
-								<TabPanel sx={tabPanelStyles}>
-									<SectionBuilder
-										courseId={courseQuery.data?.id}
-										builderData={builderData}
-										setBuilderData={setBuilderData}
-									/>
-								</TabPanel>
-								<TabPanel sx={tabPanelStyles}>
-									<CourseSetting courseData={courseQuery?.data} />
-								</TabPanel>
-							</TabPanels>
-						</Stack>
-					</Container>
-				</Stack>
-			</Tabs>
-		</FormProvider>
-	);
+					</Stack>
+				</Tabs>
+			</FormProvider>
+		);
+	}
+	return <FullScreenLoader />;
 };
 
 export default Builder;

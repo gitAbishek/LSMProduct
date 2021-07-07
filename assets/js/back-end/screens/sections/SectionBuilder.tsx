@@ -3,10 +3,9 @@ import { Box } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
-import FullScreenLoader from 'Components/layout/FullScreenLoader';
-import React, { useState } from 'react';
+import React from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import { reorder } from '../../utils/reorder';
@@ -21,26 +20,7 @@ interface Props {
 const SectionBuilder: React.FC<Props> = (props) => {
 	const { courseId, builderData, setBuilderData } = props;
 	const queryClient = useQueryClient();
-
 	const sectionAPI = new API(urls.sections);
-	const builderAPI = new API(urls.builder);
-
-	const [totalSectionsLength, setTotalSectionsLength] = useState<number>(0);
-
-	const builderQuery = useQuery(
-		[`builder${courseId}`, courseId],
-		() => builderAPI.get(courseId),
-		{
-			onSuccess: (data) => {
-				setBuilderData(data);
-				data.sections &&
-					setTotalSectionsLength(Object.keys(data.sections).length);
-			},
-			refetchOnWindowFocus: false,
-			refetchIntervalInBackground: false,
-			refetchOnReconnect: false,
-		}
-	);
 
 	const addSection = useMutation((data: any) => sectionAPI.store(data), {
 		onSuccess: () => {
@@ -53,7 +33,6 @@ const SectionBuilder: React.FC<Props> = (props) => {
 			parent_id: courseId,
 			course_id: courseId,
 			name: 'New Section',
-			menu_order: totalSectionsLength + 1,
 		});
 	};
 
@@ -61,10 +40,6 @@ const SectionBuilder: React.FC<Props> = (props) => {
 		const orderedData = reorder(result, builderData);
 		setBuilderData(orderedData);
 	};
-
-	if (builderQuery.isLoading || !builderData) {
-		return <FullScreenLoader />;
-	}
 
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>

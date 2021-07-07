@@ -58,11 +58,12 @@ const AddNewQuiz: React.FC = () => {
 				isClosable: true,
 				status: 'success',
 			});
-			history.push(
-				routes.quiz.edit
-					.replace(':quizId', data.id.toString())
-					.replace(':courseId', data.course_id.toString())
-			);
+			history.push({
+				pathname: routes.quiz.edit
+					.replace(':quizId', `${data.id}`)
+					.replace(':courseId', `${data.course_id}`),
+				search: '?page=questions',
+			});
 		},
 	});
 

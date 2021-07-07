@@ -17,10 +17,11 @@ import {
 import { __ } from '@wordpress/i18n';
 import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import HeaderBuilder from 'Components/layout/HeaderBuilder';
+import queryString from 'query-string';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { QuizSchema } from '../../schemas';
@@ -32,11 +33,16 @@ import QuizSettings from './components/QuizSettings';
 
 const EditQuiz: React.FC = () => {
 	const { quizId, courseId }: any = useParams();
+	const { search } = useLocation();
+	const { page } = queryString.parse(search);
+
 	const methods = useForm();
 	const history = useHistory();
 	const toast = useToast();
 	const quizAPI = new API(urls.quizes);
-	const [tabIndex, setTabIndex] = useState<number>(0);
+	const [tabIndex, setTabIndex] = useState<number>(
+		page === 'questions' ? 1 : 0
+	);
 
 	const tabStyles = {
 		fontWeight: 'medium',

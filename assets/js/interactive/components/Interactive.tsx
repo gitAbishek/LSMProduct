@@ -26,7 +26,6 @@ const Interactive: React.FC = () => {
 		return (
 			<>
 				<Header summary={data.summary} />
-
 				<Sidebar items={data.items} />
 				<InteractiveRouter />
 			</>

@@ -30,7 +30,7 @@ const InteractiveLesson = () => {
 	const progressAPI = new API(urls.interactiveProgress);
 
 	const lessonQuery = useQuery(
-		[`se ction${lessonId}`, lessonId],
+		[`interactiveLesson${lessonId}`, lessonId],
 		() => lessonAPI.get(lessonId),
 		{
 			onSuccess: (data: any) => {
@@ -43,7 +43,7 @@ const InteractiveLesson = () => {
 	);
 
 	const imageQuery = useQuery(
-		[`image${mediaId}`, mediaId],
+		[`interactiveLessonimage${mediaId}`, mediaId],
 		() => imageAPi.get(mediaId),
 		{
 			enabled: mediaId !== 0,

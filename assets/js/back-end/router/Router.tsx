@@ -2,7 +2,7 @@ import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import routes from '../constants/routes';
 import * as screens from '../screens';
-import CourseRouter from './CourseRouter';
+import Course from '../screens/courses/Course';
 
 const Router: React.FC = () => {
 	return (
@@ -48,7 +48,7 @@ const Router: React.FC = () => {
 					<screens.EditCourseTag />
 				</Route>
 				<Route path={routes.course} exact>
-					<CourseRouter />
+					<Course />
 				</Route>
 				<Route path={routes.settings} exact>
 					<screens.Settings />

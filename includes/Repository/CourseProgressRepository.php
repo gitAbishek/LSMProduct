@@ -89,6 +89,10 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			return;
 		}
 
+		if ( ! $course_progress->get_status( 'edit' ) ) {
+			$course_progress->set_status( 'start' );
+		}
+
 		if ( ! $course_progress->get_started_at( 'edit' ) ) {
 			$course_progress->set_started_at( current_time( 'mysql', true ) );
 		}

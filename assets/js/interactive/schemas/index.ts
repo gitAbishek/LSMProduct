@@ -27,20 +27,28 @@ export type CourseProgressSummaryMap = {
 	};
 };
 
-export type CourseProgressItemMap = {
+export type CourseItemsContentMap = {
 	item_id: number;
+	item_title: string;
 	item_type: string;
 	completed: boolean;
+};
+
+export type CourseProgressItemMap = {
+	item_id: number;
+	item_title: string;
+	item_type: string;
+	contents: [CourseItemsContentMap];
 };
 
 export type CourseProgressMap = {
 	id: number;
 	user_id: number;
 	course_id: 9;
-	status: string;
-	date_start: string;
-	date_update: string;
-	date_completed: string | any;
+	status: 'begin' | 'complete';
+	started_at: string;
+	modified_at: string;
+	completed_at: string | any;
 	items: [CourseProgressItemMap];
 	summary: CourseProgressSummaryMap;
 };

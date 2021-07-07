@@ -13,6 +13,7 @@ import {
 import React from 'react';
 import { BiMinus, BiPlay, BiPlus, BiTimer } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import { CourseContentMap } from '../schemas';
 import { getNavigationRoute } from './FloatingNavigation';
 
 interface Props {
@@ -20,12 +21,10 @@ interface Props {
 	id: number;
 	name: string;
 	contents: any;
-	contentsMap: any;
 }
 
 const SidebarItem: React.FC<Props> = (props) => {
-	const { courseId, name, contents, contentsMap } = props;
-	const newContents = contents?.map((contentId: any) => contentsMap[contentId]);
+	const { courseId, name, contents } = props;
 
 	const centerStyles = {
 		width: '23px',
@@ -35,7 +34,7 @@ const SidebarItem: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<AccordionItem isDisabled={!newContents.length} _first={{ borderTop: 0 }}>
+		<AccordionItem isDisabled={!contents.length} _first={{ borderTop: 0 }}>
 			{({ isExpanded }) => (
 				<>
 					<h2>
@@ -54,44 +53,36 @@ const SidebarItem: React.FC<Props> = (props) => {
 							)}
 						</AccordionButton>
 					</h2>
-					{newContents && (
+					{contents && (
 						<AccordionPanel p="0" bg="#F8FAFF">
 							<List>
-								{newContents.map(
-									(
-										content: { id: number; name: string; type: string },
-										index: number
-									) => (
-										<ListItem
-											key={index}
-											borderTop="1px"
-											borderTopColor="gray.200"
-											px="3"
-											py="3">
-											<Link
-												to={getNavigationRoute(
-													content.id,
-													content.type,
-													courseId
-												)}>
-												<Stack direction="row" spacing="2" alignItems="center">
-													<Icon
-														as={content.type === 'quiz' ? BiTimer : BiPlay}
-														color="blue.500"
-														fontSize="xl"
-													/>
-													<Text
-														color="gray.300"
-														fontSize="xs"
-														fontWeight="bold">
-														{index + 1}
-													</Text>
-													<Text fontSize="xs">{content.name}</Text>
-												</Stack>
-											</Link>
-										</ListItem>
-									)
-								)}
+								{contents.map((content: CourseContentMap, index: number) => (
+									<ListItem
+										key={index}
+										borderTop="1px"
+										borderTopColor="gray.200"
+										px="3"
+										py="3">
+										<Link
+											to={getNavigationRoute(
+												content.item_id,
+												content.item_type,
+												courseId
+											)}>
+											<Stack direction="row" spacing="2" alignItems="center">
+												<Icon
+													as={content.item_type === 'quiz' ? BiTimer : BiPlay}
+													color="blue.500"
+													fontSize="xl"
+												/>
+												<Text color="gray.300" fontSize="xs" fontWeight="bold">
+													{index + 1}
+												</Text>
+												<Text fontSize="xs">{content.item_title}</Text>
+											</Stack>
+										</Link>
+									</ListItem>
+								))}
 							</List>
 						</AccordionPanel>
 					)}

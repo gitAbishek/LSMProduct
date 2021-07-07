@@ -27,7 +27,7 @@ export type CourseProgressSummaryMap = {
 	};
 };
 
-export type CourseItemsContentMap = {
+export type CourseContentMap = {
 	item_id: number;
 	item_title: string;
 	item_type: string;
@@ -38,7 +38,7 @@ export type CourseProgressItemMap = {
 	item_id: number;
 	item_title: string;
 	item_type: string;
-	contents: [CourseItemsContentMap];
+	contents: [CourseContentMap];
 };
 
 export type CourseProgressMap = {

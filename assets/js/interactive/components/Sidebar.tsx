@@ -1,7 +1,5 @@
 import {
 	Accordion,
-	Alert,
-	AlertTitle,
 	Box,
 	Button,
 	ButtonGroup,
@@ -13,37 +11,27 @@ import {
 	DrawerHeader,
 	DrawerOverlay,
 	IconButton,
-	Spinner,
 	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { BiAlignLeft, BiInfoCircle, BiMenu } from 'react-icons/bi';
-import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { CloseCone } from '../../back-end/constants/images';
-import urls from '../../back-end/constants/urls';
-import API from '../../back-end/utils/api';
+import { CourseProgressItemMap } from '../schemas';
 import QuestionList from './qa/QuestionList';
 import SidebarItem from './SidebarItem';
 
-const Sidebar = () => {
+interface Props {
+	items: [CourseProgressItemMap];
+}
+const Sidebar: React.FC<Props> = (props) => {
+	const { items } = props;
 	const { courseId }: any = useParams();
 
+	console.log(items);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [currentTab, setCurrentTab] = useState<number>(1);
-
-	const courseApi = new API(urls.courses);
-	const listApi = new API(urls.builder);
-
-	const coursesQuery = useQuery(
-		[`interactiveCourse${courseId}`, courseId],
-		() => courseApi.get(courseId)
-	);
-
-	const listQuery = useQuery([`list${courseId}`, courseId], () =>
-		listApi.get(courseId)
-	);
 
 	const buttonStyles = {
 		variant: 'solid',
@@ -61,18 +49,6 @@ const Sidebar = () => {
 			color: 'blue.500',
 		},
 	};
-
-	if (coursesQuery.isLoading || listQuery.isLoading) {
-		return <Spinner />;
-	}
-
-	if (coursesQuery.isError || listQuery.isError) {
-		return (
-			<Alert status="error">
-				<AlertTitle>{__('No courses found', 'masteriyo')}</AlertTitle>
-			</Alert>
-		);
-	}
 
 	return (
 		<Box>
@@ -120,22 +96,20 @@ const Sidebar = () => {
 						d="flex"
 						alignItems="center"
 						fontWeight="semibold">
-						{coursesQuery.data.name}
+						Course dummy name
 					</DrawerHeader>
 
 					<DrawerBody p="0" position="relative" overflowX="hidden">
 						{currentTab === 1 && (
 							<Accordion allowToggle>
-								{listQuery.data.section_order.map((sectionId: any) => {
-									const section = listQuery.data.sections[sectionId];
+								{items.map((item: CourseProgressItemMap) => {
 									return (
 										<SidebarItem
-											key={section.id}
+											key={item.item_id}
 											courseId={courseId}
-											id={section.id}
-											name={section.name}
-											contents={section.contents}
-											contentsMap={listQuery.data.contents}
+											id={item.item_id}
+											name={item.item_title}
+											contents={item.contents}
 										/>
 									);
 								})}

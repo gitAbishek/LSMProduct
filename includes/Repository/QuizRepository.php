@@ -27,10 +27,12 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
-		'course_id' => '_course_id',
-		'pass_mark' => '_pass_mark',
-		'full_mark' => '_full_mark',
-		'duration'  => '_duration',
+		'course_id'                  => '_course_id',
+		'pass_mark'                  => '_pass_mark',
+		'full_mark'                  => '_full_mark',
+		'duration'                   => '_duration',
+		'attempts_allowed'           => '_attempts_allowed',
+		'questions_display_per_page' => '_questions_display_per_page',
 	);
 
 	/**

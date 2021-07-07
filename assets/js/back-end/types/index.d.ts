@@ -12,10 +12,10 @@ export type GeneralSettingsMap = {
 };
 
 export type CoursesSettingsMap = {
+	enable_search: boolean;
 	placeholder_image: string;
-	add_to_cart_behavior: string;
 	per_page: string;
-	enable_editing: boolean;
+	per_row: number;
 	category_base: string;
 	tag_base: string;
 	difficulty_base: string;
@@ -25,6 +25,12 @@ export type CoursesSettingsMap = {
 	single_section_permalink: string;
 	show_thumbnail: boolean;
 	thumbnail_size: string;
+	enable_review: boolean;
+	enable_questions_answers: boolean;
+};
+
+export type QuizzesSettingsMap = {
+	questions_display_per_page: number;
 };
 
 export type PagesSettingsMap = {
@@ -142,6 +148,7 @@ export type AdvancedSettingsMap = {
 export type SetttingsMap = {
 	general: GeneralSettingsMap;
 	courses: CoursesSettingsMap;
+	quizzes: QuizzesSettingsMap;
 	pages: PagesSettingsMap;
 	payments: PaymentsSettingsMap;
 	emails: EmailsSetttingsMap;

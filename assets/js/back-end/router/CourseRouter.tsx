@@ -6,7 +6,6 @@ import AddNewQuiz from '../screens/quiz/AddNewQuiz';
 import EditQuiz from '../screens/quiz/EditQuiz';
 
 const CourseRouter: React.FC = () => {
-	console.log('coming from course router');
 	return (
 		<Switch>
 			<Route path={routes.quiz.add}>

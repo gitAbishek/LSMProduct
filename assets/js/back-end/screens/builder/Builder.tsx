@@ -17,18 +17,12 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import queryString from 'query-string';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import {
-	Link as RouterLink,
-	useHistory,
-	useLocation,
-	useParams,
-} from 'react-router-dom';
+import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
@@ -42,7 +36,6 @@ import CourseSetting from './component/CourseSetting';
 const Builder: React.FC = () => {
 	const { courseId }: any = useParams();
 	const { search } = useLocation();
-	const history = useHistory();
 	const queryClient = useQueryClient();
 	const toast = useToast();
 	const methods = useForm();
@@ -70,21 +63,16 @@ const Builder: React.FC = () => {
 	const iconStyles = {
 		mr: '2',
 	};
-	const courseQuery = useQuery<CourseDataMap>(
-		[`courses${courseId}`, courseId],
-		() => courseAPI.get(courseId),
-		{
-			onError: () => {
-				history.push(routes.notFound);
-			},
-		}
+	const builderCourseQuery = useQuery<CourseDataMap>(
+		[`builderCourse${courseId}`, courseId],
+		() => courseAPI.get(courseId)
 	);
 
 	const updateBuilder = useMutation(
 		(data: any) => builderAPI.update(courseId, data),
 		{
 			onSuccess: () => {
-				queryClient.invalidateQueries(`builder${courseId}`);
+				queryClient.invalidateQueries(`builderCourse${courseId}`);
 			},
 		}
 	);
@@ -119,10 +107,6 @@ const Builder: React.FC = () => {
 		updateCourse.mutate(mergeDeep(data, newData));
 	};
 
-	if (courseQuery.isLoading) {
-		return <FullScreenLoader />;
-	}
-
 	return (
 		<FormProvider {...methods}>
 			<Tabs>
@@ -155,7 +139,9 @@ const Builder: React.FC = () => {
 									</TabList>
 								</Stack>
 								<ButtonGroup>
-									<Link href={courseQuery.data?.preview_permalink} isExternal>
+									<Link
+										href={builderCourseQuery.data?.preview_permalink}
+										isExternal>
 										<Button variant="outline">Preview</Button>
 									</Link>
 
@@ -190,21 +176,22 @@ const Builder: React.FC = () => {
 					<Container maxW="container.xl">
 						<Stack direction="column" spacing="6">
 							<Heading as="h1" fontSize="x-large">
-								{__('Edit Course: ', 'masteriyo')} {courseQuery.data?.name}
+								{__('Edit Course: ', 'masteriyo')}{' '}
+								{builderCourseQuery.data?.name}
 							</Heading>
 							<TabPanels>
 								<TabPanel sx={tabPanelStyles}>
-									<EditCourse courseData={courseQuery.data} />
+									<EditCourse courseData={builderCourseQuery.data} />
 								</TabPanel>
 								<TabPanel sx={tabPanelStyles}>
 									<SectionBuilder
-										courseId={courseQuery.data?.id}
+										courseId={builderCourseQuery.data?.id}
 										builderData={builderData}
 										setBuilderData={setBuilderData}
 									/>
 								</TabPanel>
 								<TabPanel sx={tabPanelStyles}>
-									<CourseSetting courseData={courseQuery?.data} />
+									<CourseSetting courseData={builderCourseQuery?.data} />
 								</TabPanel>
 							</TabPanels>
 						</Stack>

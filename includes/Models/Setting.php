@@ -79,6 +79,7 @@ class Setting extends Model {
 		),
 		'courses'  => array(
 			// General.
+			'enable_search'      => true,
 			'placeholder_image'        => 0,
 			'per_page'                 => 12,
 			'per_row'                  => 4,
@@ -95,6 +96,10 @@ class Setting extends Model {
 			// Course Thumbnail.
 			'show_thumbnail'           => true,
 			'thumbnail_size'           => 'thumbnail',
+
+			// Display
+			'enable_review' => true,
+			'enable_questions_answers' => true,
 		),
 		'pages'    => array(
 			// Page Setup.
@@ -124,8 +129,7 @@ class Setting extends Model {
 			'logout'                     => '',
 		),
 		'quizzes'  => array(
-			'time_limit'       => 60,
-			'attempts_allowed' => 5,
+			'questions_display_per_page' => 5,
 		),
 		'payments' => array(
 			// Offline payment
@@ -407,6 +411,18 @@ class Setting extends Model {
 	// Courses Setting Getter.
 
 	/**
+	 * Get option courses_enable_search.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_courses_enable_search( $context = 'view' ) {
+		return $this->get_setting_prop( 'enable_search', 'courses', $context );
+	}
+
+	/**
 	 * Get option courses_placeholder_image.
 	 *
 	 * @since 0.1.0
@@ -548,6 +564,30 @@ class Setting extends Model {
 	 */
 	public function get_courses_thumbnail_size( $context = 'view' ) {
 		return $this->get_setting_prop( 'thumbnail_size', 'courses', $context );
+	}
+
+	/**
+	 * Get option courses_enable_review.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_courses_enable_review( $context = 'view' ) {
+		return $this->get_setting_prop( 'enable_review', 'courses', $context );
+	}
+
+	/**
+	 * Get option courses_enable_questions_answers.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_courses_enable_questions_answers( $context = 'view' ) {
+		return $this->get_setting_prop( 'enable_questions_answers', 'courses', $context );
 	}
 
 	// Pages Setting Getter.
@@ -751,29 +791,16 @@ class Setting extends Model {
 	// Quizzes Setting Getter.
 
 	/**
-	 * Get option quizzes_time_limit.
+	 * Get option quizzes_questions_display_per_page.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_quizzes_time_limit( $context = 'view' ) {
-		return $this->get_setting_prop( 'time_limit', 'quizzes', $context );
+	public function get_quizzes_questions_display_per_page( $context = 'view' ) {
+		return $this->get_setting_prop( 'questions_display_per_page', 'quizzes', $context );
 	}
-
-	/**
-	 * Get option quizzes_attempts_allowed.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $context
-	 * @return string
-	 */
-	public function get_quizzes_attempts_allowed( $context = 'view' ) {
-		return $this->get_setting_prop( 'attempts_allowed', 'quizzes', $context );
-	}
-
 
 	// Payments Setting Getter.
 
@@ -1697,6 +1724,16 @@ class Setting extends Model {
 	// Courses Setting Setter.
 
 	/**
+	 * Set option courses enable search.
+	*
+	* @since 0.1.0
+	* @param int $enable_search
+	*/
+	public function set_courses_enable_search( $enable_search ) {
+		$this->set_setting_prop( 'enable_search', 'courses', masteriyo_string_to_bool( $enable_search ) );
+	}
+
+	/**
 	 * Set option courses placeholder image.
 	*
 	* @since 0.1.0
@@ -1827,6 +1864,26 @@ class Setting extends Model {
 	*/
 	public function set_courses_thumbnail_size( $size ) {
 		$this->set_setting_prop( 'thumbnail_size', 'courses', $size );
+	}
+
+	/**
+	 * Set option courses enable review.
+	*
+	* @since 0.1.0
+	* @param string $enable
+	*/
+	public function set_courses_enable_review( $enable ) {
+		$this->set_setting_prop( 'enable_review', 'courses', masteriyo_string_to_bool( $enable ) );
+	}
+
+	/**
+	 * Set option courses enable questions answers.
+	*
+	* @since 0.1.0
+	* @param string $enable
+	*/
+	public function set_courses_enable_questions_answers( $enable ) {
+		$this->set_setting_prop( 'enable_questions_answers', 'courses', masteriyo_string_to_bool( $enable ) );
 	}
 
 	// Pages Setting Setter.
@@ -1998,23 +2055,13 @@ class Setting extends Model {
 	// Quizzes Setting Setter.
 
 	/**
-	 * Set option quizzes time limit.
+	 * Set option quizzes questions display per page.
 	 *
 	 * @since 0.1.0
-	 * @param string $time_limit
+	 * @param string $questions_display_per_page
 	 */
-	public function set_quizzes_time_limit( $time_limit ) {
-		$this->set_setting_prop( 'time_limit', 'quizzes', absint( $time_limit ) );
-	}
-
-	/**
-	 * Set option quizzes attempts allowed.
-	 *
-	 * @since 0.1.0
-	 * @param string $attempts_allowed
-	 */
-	public function set_quizzes_attempts_allowed( $attempts_allowed ) {
-		$this->set_setting_prop( 'attempts_allowed', 'quizzes', absint( $attempts_allowed ) );
+	public function set_quizzes_questions_display_per_page( $questions_display_per_page ) {
+		$this->set_setting_prop( 'questions_display_per_page', 'quizzes', absint( $questions_display_per_page ) );
 	}
 
 	// Payments Setting Setter.

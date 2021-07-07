@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import { BiCheck, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import { ContentNavigationSchema } from '../schemas';
 import { getNavigationRoute } from './FloatingNavigation';
@@ -88,8 +88,11 @@ const ContentNav: React.FC<Props> = (props) => {
 					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"
+					leftIcon={isButtonDisabled && <Icon fontSize="xl" as={BiCheck} />}
 					textTransform="uppercase">
-					{__('Mark as Complete', 'masteriyo')}
+					{isButtonDisabled
+						? __('Completed', 'masteiryo')
+						: __('Mark as Complete', 'masteriyo')}
 				</Button>
 
 				<Box w="200px">

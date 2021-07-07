@@ -73,8 +73,8 @@ const InteractiveLesson = () => {
 			},
 			{
 				onSuccess: () => {
-					queryClient.invalidateQueries(`courseProgress${courseId}`);
 					queryClient.invalidateQueries(`completeQuery${lessonId}`);
+					queryClient.invalidateQueries(`courseProgress${courseId}`);
 
 					toast({
 						title: __('Mark as completed', 'masteriyo'),

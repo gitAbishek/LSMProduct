@@ -272,6 +272,11 @@ class SettingsController extends CrudController {
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'                     => 'object',
+						'enable_search'            => array(
+							'description' => __( 'Enable course search', 'masteriyo' ),
+							'type'        => 'boolean',
+							'context'     => array( 'view', 'edit' ),
+						),
 						'placeholder_image'        => array(
 							'description' => __( 'Placeholder image for courses.', 'masteriyo' ),
 							'type'        => 'integer',
@@ -331,6 +336,16 @@ class SettingsController extends CrudController {
 							'description' => __( 'Course thumbnail size', 'masteriyo' ),
 							'type'        => 'string',
 							'enum'        => get_intermediate_image_sizes(),
+							'context'     => array( 'view', 'edit' ),
+						),
+						'enable_review'            => array(
+							'description' => __( 'Enable course review', 'masteriyo' ),
+							'type'        => 'boolean',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'enable_questions_answers' => array(
+							'description' => __( 'Enable course questions answers', 'masteriyo' ),
+							'type'        => 'boolean',
 							'context'     => array( 'view', 'edit' ),
 						),
 					),
@@ -432,14 +447,9 @@ class SettingsController extends CrudController {
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'             => 'object',
-						'time_limit'       => array(
-							'description' => __( 'Quiz time limit in minutes.', 'masteriyo' ),
-							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'attempts_allowed' => array(
-							'description' => __( 'Quiz total attempts allowed.', 'masteriyo' ),
+						'type'                       => 'object',
+						'questions_display_per_page' => array(
+							'description' => __( 'Quiz questions display per page', 'masteriyo' ),
 							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
@@ -983,6 +993,7 @@ class SettingsController extends CrudController {
 				'number_of_decimals' => $setting->get_general_number_of_decimals( $context ),
 			),
 			'courses'  => array(
+				'enable_search'            => $setting->get_courses_enable_search( $context ),
 				'placeholder_image'        => $setting->get_courses_placeholder_image( $context ),
 				'per_page'                 => $setting->get_courses_per_page( $context ),
 				'per_row'                  => $setting->get_courses_per_row( $context ),
@@ -995,6 +1006,8 @@ class SettingsController extends CrudController {
 				'single_section_permalink' => $setting->get_courses_single_section_permalink( $context ),
 				'show_thumbnail'           => $setting->get_courses_show_thumbnail( $context ),
 				'thumbnail_size'           => $setting->get_courses_thumbnail_size( $context ),
+				'enable_review'            => $setting->get_courses_enable_review( $context ),
+				'enable_questions_answers' => $setting->get_courses_enable_questions_answers( $context ),
 			),
 			'pages'    => array(
 				'myaccount_page_id'        => $setting->get_pages_myaccount_page_id( $context ),
@@ -1019,8 +1032,7 @@ class SettingsController extends CrudController {
 				),
 			),
 			'quizzes'  => array(
-				'time_limit'       => $setting->get_quizzes_time_limit( $context ),
-				'attempts_allowed' => $setting->get_quizzes_attempts_allowed( $context ),
+				'questions_display_per_page' => $setting->get_quizzes_questions_display_per_page( $context ),
 			),
 			'payments' => array(
 				'offline' => array(
@@ -1176,6 +1188,10 @@ class SettingsController extends CrudController {
 
 		// Courses Setting.
 
+		if ( isset( $request['courses']['enable_search'] ) ) {
+			$setting->set_courses_enable_search( $request['courses']['enable_search'] );
+		}
+
 		if ( isset( $request['courses']['placeholder_image'] ) ) {
 			$setting->set_courses_placeholder_image( $request['courses']['placeholder_image'] );
 		}
@@ -1222,6 +1238,14 @@ class SettingsController extends CrudController {
 
 		if ( isset( $request['courses']['thumbnail_size'] ) ) {
 			$setting->set_courses_thumbnail_size( $request['courses']['thumbnail_size'] );
+		}
+
+		if ( isset( $request['courses']['enable_review'] ) ) {
+			$setting->set_courses_enable_review( $request['courses']['enable_review'] );
+		}
+
+		if ( isset( $request['courses']['enable_questions_answers'] ) ) {
+			$setting->set_courses_enable_questions_answers( $request['courses']['enable_questions_answers'] );
 		}
 
 		// Pages Setting.
@@ -1294,12 +1318,8 @@ class SettingsController extends CrudController {
 
 		// Quizzes Setting.
 
-		if ( isset( $request['quizzes']['time_limit'] ) ) {
-			$setting->set_quizzes_time_limit( $request['quizzes']['time_limit'] );
-		}
-
-		if ( isset( $request['quizzes']['attempts_allowed'] ) ) {
-			$setting->set_quizzes_attempts_allowed( $request['quizzes']['attempts_allowed'] );
+		if ( isset( $request['quizzes']['questions_display_per_page'] ) ) {
+			$setting->set_quizzes_questions_display_per_page( $request['quizzes']['questions_display_per_page'] );
 		}
 
 		// Payments Setting.

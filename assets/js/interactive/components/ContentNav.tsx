@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import { BiCheck, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import { ContentNavigationSchema } from '../schemas';
 import { getNavigationRoute } from './FloatingNavigation';
@@ -22,10 +22,17 @@ interface Props {
 	navigation: ContentNavigationSchema;
 	onCompletePress: any;
 	isButtonLoading?: boolean;
+	isButtonDisabled?: boolean;
 }
 
 const ContentNav: React.FC<Props> = (props) => {
-	const { navigation, courseId, onCompletePress, isButtonLoading } = props;
+	const {
+		navigation,
+		courseId,
+		onCompletePress,
+		isButtonLoading,
+		isButtonDisabled,
+	} = props;
 
 	const cirlceStyles = {
 		w: '30px',
@@ -77,11 +84,15 @@ const ContentNav: React.FC<Props> = (props) => {
 				<Button
 					onClick={onCompletePress}
 					isLoading={isButtonLoading}
+					isDisabled={isButtonDisabled}
 					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"
+					leftIcon={isButtonDisabled && <Icon fontSize="xl" as={BiCheck} />}
 					textTransform="uppercase">
-					{__('Mark as Complete', 'masteriyo')}
+					{isButtonDisabled
+						? __('Completed', 'masteiryo')
+						: __('Mark as Complete', 'masteriyo')}
 				</Button>
 
 				<Box w="200px">

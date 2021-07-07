@@ -182,6 +182,31 @@ class Permission {
 	 * @param string $object_id Object ID.
 	 * @return bool
 	 */
+	public function rest_check_comment_permissions( $context = 'read', $object_id = 0 ) {
+		$permission = false;
+		$contexts   = array(
+			'read'   => 'moderate_comments',
+			'create' => 'moderate_comments',
+			'edit'   => 'moderate_comments',
+			'delete' => 'moderate_comments',
+			'batch'  => 'moderate_comments',
+		);
+
+		if ( isset( $contexts[ $context ] ) ) {
+			$permission = current_user_can( $contexts[ $context ] );
+		}
+
+		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'course_review' );
+	}
+
+	/**
+	 * Check course question-answer permissions on REST API.
+	 *
+	 * @since 0.1.0
+	 * @param string $context   Request context.
+	 * @param string $object_id Object ID.
+	 * @return bool
+	 */
 	public function rest_check_mto_course_qas_permissions( $context = 'read', $object_id = 0 ) {
 		$permission = false;
 		$contexts   = array(

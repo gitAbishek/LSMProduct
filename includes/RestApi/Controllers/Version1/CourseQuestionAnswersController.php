@@ -181,6 +181,7 @@ class CourseQuestionAnswersController extends CommentsController {
 			} else {
 				$id = is_a( $object, '\WP_Comment' ) ? $object->comment_ID : $object->get_id();
 			}
+
 			$mto_course_qa = masteriyo( 'course-qa' );
 			$mto_course_qa->set_id( $id );
 			$mto_course_qa_repo = masteriyo( 'course-qa.store' );
@@ -232,7 +233,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
 		$context  = ! empty( $request['context'] ) ? $request['context'] : 'view';
-		$data     = $this->get_mto_course_qa_data( $object, $context );
+		$data     = $this->get_course_qa_data( $object, $context );
 		$data     = $this->add_additional_fields_to_object( $data, $request );
 		$data     = $this->filter_response_by_context( $data, $context );
 		$response = rest_ensure_response( $data );
@@ -260,7 +261,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	 *
 	 * @return array
 	 */
-	protected function get_mto_course_qa_data( $mto_course_qa, $context = 'view' ) {
+	protected function get_course_qa_data( $mto_course_qa, $context = 'view' ) {
 		$data = array(
 			'id'         => $mto_course_qa->get_id(),
 			'course_id'  => $mto_course_qa->get_course_id(),
@@ -268,7 +269,7 @@ class CourseQuestionAnswersController extends CommentsController {
 			'user_email' => $mto_course_qa->get_user_email( $context ),
 			'user_url'   => $mto_course_qa->get_user_url( $context ),
 			'ip_address' => $mto_course_qa->get_ip_address( $context ),
-			'created_at' => $mto_course_qa->get_created_at( $context ),
+			'created_at' => masteriyo_rest_prepare_date_response( $mto_course_qa->get_created_at( $context ) ),
 			'content'    => $mto_course_qa->get_content( $context ),
 			'status'     => $mto_course_qa->get_status( $context ),
 			'agent'      => $mto_course_qa->get_agent( $context ),

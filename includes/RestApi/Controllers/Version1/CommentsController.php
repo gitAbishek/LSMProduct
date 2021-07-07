@@ -194,7 +194,7 @@ abstract class CommentsController extends CrudController {
 
 		$post = get_comment( (int) $request['id'] );
 
-		if ( $post && ! $this->permission->rest_check_course_reviews_permissions( 'read', $request['id'] ) ) {
+		if ( $post && ! $this->permission->rest_check_comment_permissions( 'read', $request['id'] ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
@@ -221,7 +221,7 @@ abstract class CommentsController extends CrudController {
 			);
 		}
 
-		if ( ! $this->permission->rest_check_course_reviews_permissions( 'read' ) ) {
+		if ( ! $this->permission->rest_check_comment_permissions( 'read' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
@@ -250,7 +250,7 @@ abstract class CommentsController extends CrudController {
 			);
 		}
 
-		if ( ! $this->permission->rest_check_course_reviews_permissions( 'create' ) ) {
+		if ( ! $this->permission->rest_check_comment_permissions( 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
@@ -281,7 +281,7 @@ abstract class CommentsController extends CrudController {
 
 		$post = get_comment( (int) $request['id'] );
 
-		if ( $post && ! $this->permission->rest_check_course_reviews_permissions( 'delete', $post->ID ) ) {
+		if ( $post && ! $this->permission->rest_check_comment_permissions( 'delete', $post->ID ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
@@ -312,7 +312,7 @@ abstract class CommentsController extends CrudController {
 
 		$post = get_comment( (int) $request['id'] );
 
-		if ( $post && ! $this->permission->rest_check_course_reviews_permissions( 'edit', $post->ID ) ) {
+		if ( $post && ! $this->permission->rest_check_comment_permissions( 'edit', $post->ID ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
@@ -337,7 +337,7 @@ abstract class CommentsController extends CrudController {
 	 * @return bool
 	 */
 	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
-		return $this->permission->rest_check_course_reviews_permissions( 'read', $object_id );
+		return $this->permission->rest_check_comment_permissions( 'read', $object_id );
 	}
 
 	/**

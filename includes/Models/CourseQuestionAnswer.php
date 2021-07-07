@@ -325,7 +325,7 @@ class CourseQuestionAnswer extends Model {
 	 * @param string $created_at Comment created_at.
 	 */
 	public function set_created_at( $created_at ) {
-		$this->set_prop( 'created_at', $created_at );
+		$this->set_date_prop( 'created_at', $created_at );
 	}
 
 	/**

@@ -6,14 +6,13 @@ import {
 	FormControl,
 	FormLabel,
 	InputGroup,
-	InputRightAddon,
 	Link,
-	Stack,
+	NumberDecrementStepper,
+	NumberIncrementStepper,
 	NumberInput,
 	NumberInputField,
 	NumberInputStepper,
-	NumberIncrementStepper,
-	NumberDecrementStepper,
+	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -34,35 +33,18 @@ const Quiz: React.FC<Props> = (props) => {
 					<FormControl>
 						<Flex justify="space-between" align="center">
 							<FormLabel sx={{ fontWeight: 'bold' }}>
-								{__('Time Limit', 'masteriyo')}
-							</FormLabel>
-							<InputGroup w="md" size="md">
-								<NumberInput w="md" defaultValue={60}>
-									<NumberInputField {...register('quizzes.time_limit')} />
-									<NumberInputStepper>
-										<NumberIncrementStepper />
-										<NumberDecrementStepper />
-									</NumberInputStepper>
-								</NumberInput>
-								<InputRightAddon>{__('Minutes', 'masteriyo')}</InputRightAddon>
-							</InputGroup>
-						</Flex>
-					</FormControl>
-
-					<FormControl>
-						<Flex justify="space-between" align="center">
-							<FormLabel sx={{ fontWeight: 'bold' }}>
-								{__('Attempts Allowed', 'masteriyo')}
+								{__('Questions Display Per Page', 'masteriyo')}
 							</FormLabel>
 							<InputGroup w="md" size="md">
 								<NumberInput w="md" defaultValue={5}>
-									<NumberInputField {...register('quizzes.attempts_allowed')} />
+									<NumberInputField
+										{...register('quizzes.questions_display_per_page')}
+									/>
 									<NumberInputStepper>
 										<NumberIncrementStepper />
 										<NumberDecrementStepper />
 									</NumberInputStepper>
 								</NumberInput>
-								<InputRightAddon>{__('Attempts', 'masteriyo')}</InputRightAddon>
 							</InputGroup>
 						</Flex>
 					</FormControl>

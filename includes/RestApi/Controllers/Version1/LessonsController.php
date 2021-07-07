@@ -493,7 +493,6 @@ class LessonsController extends PostsController {
 				'menu_order'          => array(
 					'description' => __( 'Menu order, used to custom sort lessons.', 'masteriyo' ),
 					'type'        => 'integer',
-					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'featured_image'      => array(
@@ -799,7 +798,7 @@ class LessonsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid course ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -845,7 +844,7 @@ class LessonsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -891,7 +890,7 @@ class LessonsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}

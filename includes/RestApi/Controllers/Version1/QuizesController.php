@@ -880,7 +880,6 @@ class QuizesController extends PostsController {
 				'menu_order'        => array(
 					'description' => __( 'Menu order, used to custom sort quizes.', 'masteriyo' ),
 					'type'        => 'integer',
-					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'permalink'         => array(

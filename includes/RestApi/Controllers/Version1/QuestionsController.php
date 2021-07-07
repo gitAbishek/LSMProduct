@@ -545,7 +545,6 @@ class QuestionsController extends PostsController {
 				'menu_order'        => array(
 					'description' => __( 'Menu order, used to custom sort questions.', 'masteriyo' ),
 					'type'        => 'integer',
-					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'description'       => array(
@@ -806,7 +805,7 @@ class QuestionsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid course ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -852,7 +851,7 @@ class QuestionsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -898,7 +897,7 @@ class QuestionsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}

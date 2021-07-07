@@ -338,7 +338,6 @@ class SectionsController extends PostsController {
 				'menu_order'        => array(
 					'description' => __( 'Menu order, used to custom sort sections.', 'masteriyo' ),
 					'type'        => 'integer',
-					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'meta_data'         => array(

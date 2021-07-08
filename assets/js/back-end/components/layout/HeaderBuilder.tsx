@@ -54,7 +54,7 @@ const HeaderBuilder: React.FC<Props> = (props) => {
 							</RouterLink>
 						</Box>
 						<List d="flex">
-							<ListItem>
+							<ListItem mb="0">
 								<Link
 									as={NavLink}
 									sx={navLinkStyles}
@@ -69,7 +69,7 @@ const HeaderBuilder: React.FC<Props> = (props) => {
 							</ListItem>
 
 							{courseId && (
-								<ListItem>
+								<ListItem mb="0">
 									<Link
 										as={NavLink}
 										sx={navLinkStyles}
@@ -83,7 +83,7 @@ const HeaderBuilder: React.FC<Props> = (props) => {
 									</Link>
 								</ListItem>
 							)}
-							<ListItem>
+							<ListItem mb="0">
 								<Link
 									as={NavLink}
 									sx={navLinkStyles}

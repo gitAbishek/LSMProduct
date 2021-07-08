@@ -53,7 +53,7 @@ const Header: React.FC<Props> = (props) => {
 						</Box>
 						{!hideCoursesMenu && (
 							<List d="flex">
-								<ListItem>
+								<ListItem mb="0">
 									<Link
 										as={NavLink}
 										sx={navLinkStyles}
@@ -64,7 +64,7 @@ const Header: React.FC<Props> = (props) => {
 									</Link>
 								</ListItem>
 
-								<ListItem>
+								<ListItem mb="0">
 									<Link
 										as={NavLink}
 										sx={navLinkStyles}

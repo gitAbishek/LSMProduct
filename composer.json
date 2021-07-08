@@ -30,7 +30,8 @@
       "includes/Helper/question.php",
       "includes/Helper/course-progress.php",
       "includes/Helper/UserCourse.php",
-      "includes/Helper/quiz.php"
+      "includes/Helper/quiz.php",
+      "includes/Helper/course-qa.php"
     ],
     "psr-4": {
       "ThemeGrill\\Masteriyo\\": "includes/"

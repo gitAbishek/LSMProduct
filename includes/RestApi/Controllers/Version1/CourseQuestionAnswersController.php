@@ -255,28 +255,34 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Get course question-answer data.
 	 *
-	 * @param CourseQuestionAnswer $mto_course_qa Course question-answer instance.
+	 * @param CourseQuestionAnswer $course_qa Course question-answer instance.
 	 * @param string       $context Request context.
 	 *                             Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
-	protected function get_course_qa_data( $mto_course_qa, $context = 'view' ) {
+	protected function get_course_qa_data( $course_qa, $context = 'view' ) {
 		$data = array(
-			'id'              => $mto_course_qa->get_id(),
-			'course_id'       => $mto_course_qa->get_course_id(),
-			'user_name'       => $mto_course_qa->get_user_name( $context ),
-			'user_email'      => $mto_course_qa->get_user_email( $context ),
-			'user_url'        => $mto_course_qa->get_user_url( $context ),
-			'ip_address'      => $mto_course_qa->get_ip_address( $context ),
-			'created_at'      => masteriyo_rest_prepare_date_response( $mto_course_qa->get_created_at( $context ) ),
-			'content'         => $mto_course_qa->get_content( $context ),
-			'status'          => $mto_course_qa->get_status( $context ),
-			'agent'           => $mto_course_qa->get_agent( $context ),
-			'parent'          => $mto_course_qa->get_parent( $context ),
-			'user_id'         => $mto_course_qa->get_user_id( $context ),
-			'by_current_user' => $mto_course_qa->get_user_id( $context ) === get_current_user_id(),
+			'id'              => $course_qa->get_id(),
+			'course_id'       => $course_qa->get_course_id(),
+			'user_name'       => $course_qa->get_user_name( $context ),
+			'user_email'      => $course_qa->get_user_email( $context ),
+			'user_url'        => $course_qa->get_user_url( $context ),
+			'ip_address'      => $course_qa->get_ip_address( $context ),
+			'created_at'      => masteriyo_rest_prepare_date_response( $course_qa->get_created_at( $context ) ),
+			'content'         => $course_qa->get_content( $context ),
+			'status'          => $course_qa->get_status( $context ),
+			'agent'           => $course_qa->get_agent( $context ),
+			'parent'          => $course_qa->get_parent( $context ),
+			'user_id'         => $course_qa->get_user_id( $context ),
+			'by_current_user' => $course_qa->get_user_id( $context ) === get_current_user_id(),
 		);
+
+		$question_id = $course_qa->get_id();
+		$course_id   = $course_qa->get_course_id( $context );
+		if ( 0 === $course_qa->get_parent() ) {
+			$data['answers_count'] = masteriyo_get_course_answer_count( $course_id, $question_id );
+		}
 
 		return $data;
 	}

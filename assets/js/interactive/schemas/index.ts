@@ -65,3 +65,14 @@ export type CourseProgressItemsMap = {
 	modified_at?: string;
 	completed_at?: string | any;
 };
+
+export type QuestionAnswerSchema = {
+	id: number;
+	course_id: number;
+	user_name: string;
+	user_email: string;
+	created_at: string;
+	content: string;
+	parent: number;
+	user_id: number;
+};

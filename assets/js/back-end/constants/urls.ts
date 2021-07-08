@@ -19,6 +19,7 @@ const urls = {
 	builder: base + 'coursebuilder',
 	courseProgress: base + 'course-progress',
 	courseProgressItem: base + 'course-progress/items',
+	qa: base + 'courses/questions-answers',
 };
 
 export default urls;

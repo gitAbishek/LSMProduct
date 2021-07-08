@@ -5,11 +5,11 @@ import {
 	Center,
 	FormControl,
 	Icon,
+	Input,
 	Slide,
 	Spinner,
 	Stack,
 	Text,
-	Textarea,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -106,7 +106,8 @@ const QaChat: React.FC<Props> = (props) => {
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<Stack direction="column" spacing="3" w="full" p="4" pb="6">
 							<FormControl>
-								<Textarea
+								<Input
+									type="text"
 									fontSize="xs"
 									{...register('content', { required: true })}
 									disabled={addNewChat.isLoading}

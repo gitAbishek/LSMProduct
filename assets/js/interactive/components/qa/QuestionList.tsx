@@ -9,6 +9,7 @@ import {
 	Input,
 	InputGroup,
 	InputRightElement,
+	Link,
 	Slide,
 	Spinner,
 	Stack,
@@ -98,7 +99,7 @@ const QuestionList: React.FC = () => {
 						spacing="1"
 						h="full"
 						justify="space-between">
-						<Stack direction="column" spacing="1">
+						<Stack direction="column" spacing="0">
 							<Box as="form" action="" p="4">
 								<FormControl>
 									<InputGroup>
@@ -110,35 +111,46 @@ const QuestionList: React.FC = () => {
 								</FormControl>
 							</Box>
 							{qaQuery.data.map((question: QuestionAnswerSchema) => (
-								<Stack
+								<Link
 									key={question.id}
-									direction="row"
-									align="center"
-									justify="space-between"
-									spacing="4"
-									borderBottom="1px"
-									borderBottomColor="gray.100"
-									px="4"
-									py="2"
-									onClick={() =>
-										onQuestionPress(
-											question.id,
-											question.content,
-											question.answers_count
-										)
-									}>
-									<Stack direction="column" spacing="2">
-										<Heading fontSize="sm">{question.content}</Heading>
-										<Text fontSize="x-small" color="gray.500">
-											{question.answers_count + __(' Answers', 'masteriyo')}
-										</Text>
+									_hover={{
+										textDecor: 'none',
+										bg: 'blue.50',
+										color: 'blue.500',
+										'.chakra-icon': {
+											transform: 'translateX(5px)',
+										},
+									}}>
+									<Stack
+										direction="row"
+										align="center"
+										justify="space-between"
+										spacing="4"
+										borderBottom="1px"
+										borderBottomColor="gray.100"
+										px="4"
+										py="2"
+										onClick={() =>
+											onQuestionPress(
+												question.id,
+												question.content,
+												question.answers_count
+											)
+										}>
+										<Stack direction="column" spacing="2">
+											<Heading fontSize="sm">{question.content}</Heading>
+											<Text fontSize="x-small" color="gray.500">
+												{question.answers_count + __(' Answers', 'masteriyo')}
+											</Text>
+										</Stack>
+										<Icon
+											transition="all 0.35s ease-in-out"
+											as={BiChevronRight}
+											fontSize="x-large"
+											color="gray.600"
+										/>
 									</Stack>
-									<Icon
-										as={BiChevronRight}
-										fontSize="x-large"
-										color="gray.600"
-									/>
-								</Stack>
+								</Link>
 							))}
 						</Stack>
 						<form onSubmit={handleSubmit(onSubmit)}>

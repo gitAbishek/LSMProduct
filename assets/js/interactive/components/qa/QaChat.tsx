@@ -25,10 +25,10 @@ import Message from './Message';
 interface Props {
 	isOpen: boolean;
 	onBackPress: any;
-	parentId: number;
+	chatData: { parentId: number; name: string; answerCount: number };
 }
 const QaChat: React.FC<Props> = (props) => {
-	const { isOpen, onBackPress, parentId } = props;
+	const { isOpen, onBackPress, chatData } = props;
 	const { courseId }: any = useParams();
 
 	const queryClient = useQueryClient();
@@ -37,11 +37,11 @@ const QaChat: React.FC<Props> = (props) => {
 
 	const qaAPI = new API(urls.qa);
 	const chatQuery = useQuery(
-		[`chat${parentId}`, parentId],
+		[`chat${chatData.parentId}`, chatData.parentId],
 		() =>
 			qaAPI.list({
 				course_id: courseId,
-				parent: parentId,
+				parent: chatData.parentId,
 			}),
 		{
 			refetchInterval: 1000,
@@ -54,7 +54,7 @@ const QaChat: React.FC<Props> = (props) => {
 		{
 			onSuccess: () => {
 				reset({});
-				queryClient.invalidateQueries(`chat${parentId}`);
+				queryClient.invalidateQueries(`chat${chatData.parentId}`);
 			},
 		}
 	);
@@ -63,7 +63,7 @@ const QaChat: React.FC<Props> = (props) => {
 		addNewChat.mutate({
 			content: data.content,
 			course_id: courseId,
-			parent: parentId,
+			parent: chatData.parentId,
 		});
 	};
 
@@ -82,14 +82,14 @@ const QaChat: React.FC<Props> = (props) => {
 								</Button>
 							</ButtonGroup>
 							<Stack direction="column" p="4" bg="gray.50" spacing="1">
-								<Text fontWeight="bold">What is an instructional video?</Text>
+								<Text fontWeight="bold">{chatData.name}</Text>
 								<Text fontSize="x-small" color="gray.400">
-									3 answers
+									{chatData.answerCount + __(' answers', 'masteriyo')}
 								</Text>
 							</Stack>
 						</Box>
 
-						<Stack direction="column" spacing="4" px="4">
+						<Stack direction="column-reverse" spacing="4" px="4">
 							{chatQuery.data.map((chat: QuestionAnswerSchema) => (
 								<Message
 									key={chat.id}

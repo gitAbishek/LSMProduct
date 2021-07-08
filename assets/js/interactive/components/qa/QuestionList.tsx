@@ -31,7 +31,7 @@ const QuestionList: React.FC = () => {
 	const { courseId }: any = useParams();
 	const toast = useToast();
 	const queryClient = useQueryClient();
-	const [parentId, setparentId] = useState(null);
+	const [chatData, setChatData] = useState(null);
 	const {
 		handleSubmit,
 		register,
@@ -76,8 +76,8 @@ const QuestionList: React.FC = () => {
 		onListToggle();
 	};
 
-	const onQuestionPress = (id: number) => {
-		setparentId(id);
+	const onQuestionPress = (id: number, name: string, answerCount: number) => {
+		setChatData({ parentId: id, name: name, answerCount: answerCount });
 		onChatToggle();
 		onListToggle();
 	};
@@ -120,11 +120,17 @@ const QuestionList: React.FC = () => {
 									borderBottomColor="gray.100"
 									px="4"
 									py="2"
-									onClick={() => onQuestionPress(question.id)}>
+									onClick={() =>
+										onQuestionPress(
+											question.id,
+											question.content,
+											question.answers_count
+										)
+									}>
 									<Stack direction="column" spacing="2">
 										<Heading fontSize="sm">{question.content}</Heading>
 										<Text fontSize="x-small" color="gray.500">
-											{question.id + __(' Answers', 'masteriyo')}
+											{question.answers_count + __(' Answers', 'masteriyo')}
 										</Text>
 									</Stack>
 									<Icon
@@ -162,11 +168,11 @@ const QuestionList: React.FC = () => {
 						</form>
 					</Stack>
 				</Slide>
-				{parentId && (
+				{chatData && (
 					<QaChat
 						isOpen={isChatOpen}
 						onBackPress={onBackPress}
-						parentId={parentId}
+						chatData={chatData}
 					/>
 				)}
 			</>

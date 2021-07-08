@@ -31,7 +31,7 @@ const QuestionList: React.FC = () => {
 	const { courseId }: any = useParams();
 	const toast = useToast();
 	const queryClient = useQueryClient();
-	const [chatId, setChatId] = useState(null);
+	const [parentId, setparentId] = useState(null);
 	const {
 		handleSubmit,
 		register,
@@ -46,7 +46,12 @@ const QuestionList: React.FC = () => {
 	});
 	const { isOpen: isChatOpen, onToggle: onChatToggle } = useDisclosure();
 
-	const qaQuery = useQuery([`qa${courseId}`, courseId], () => qaAPI.list());
+	const qaQuery = useQuery([`qa${courseId}`, courseId], () =>
+		qaAPI.list({
+			course_id: courseId,
+			parent: 0,
+		})
+	);
 
 	const addNewQuestion = useMutation(
 		(data: { content: string; course_id: number }) => qaAPI.store(data),
@@ -72,7 +77,7 @@ const QuestionList: React.FC = () => {
 	};
 
 	const onQuestionPress = (id: number) => {
-		setChatId(id);
+		setparentId(id);
 		onChatToggle();
 		onListToggle();
 	};
@@ -119,7 +124,7 @@ const QuestionList: React.FC = () => {
 									<Stack direction="column" spacing="2">
 										<Heading fontSize="sm">{question.content}</Heading>
 										<Text fontSize="x-small" color="gray.500">
-											{__('2 Answers', 'masteriyo')}
+											{question.id + __(' Answers', 'masteriyo')}
 										</Text>
 									</Stack>
 									<Icon
@@ -157,11 +162,11 @@ const QuestionList: React.FC = () => {
 						</form>
 					</Stack>
 				</Slide>
-				{chatId && (
+				{parentId && (
 					<QaChat
 						isOpen={isChatOpen}
 						onBackPress={onBackPress}
-						chatId={chatId}
+						parentId={parentId}
 					/>
 				)}
 			</>

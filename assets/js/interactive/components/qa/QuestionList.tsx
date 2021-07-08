@@ -3,6 +3,7 @@ import {
 	Button,
 	Center,
 	FormControl,
+	FormErrorMessage,
 	Heading,
 	Icon,
 	Input,
@@ -31,7 +32,12 @@ const QuestionList: React.FC = () => {
 	const toast = useToast();
 	const queryClient = useQueryClient();
 	const [chatId, setChatId] = useState(null);
-	const { handleSubmit, register, reset } = useForm<{ content: string }>();
+	const {
+		handleSubmit,
+		register,
+		reset,
+		formState: { errors },
+	} = useForm<{ content: string }>();
 
 	const qaAPI = new API(urls.qa);
 
@@ -47,7 +53,7 @@ const QuestionList: React.FC = () => {
 		{
 			onSuccess: () => {
 				toast({
-					title: +__('Your question has been asked', 'masteriyo'),
+					title: __('Your question has been asked', 'masteriyo'),
 					description: __(
 						'You will get your answer as soon as possible',
 						'masteriyo'
@@ -126,13 +132,19 @@ const QuestionList: React.FC = () => {
 						</Stack>
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<Stack direction="column" spacing="3" w="full" p="4" pb="6">
-								<FormControl>
+								<FormControl isInvalid={!!errors.content}>
 									<Input
 										type="text"
+										fontSize="xs"
 										placeholder="What is your question?"
 										disabled={addNewQuestion.isLoading}
-										{...register('content', { required: true })}
+										{...register('content', {
+											required: __('Please write your message'),
+										})}
 									/>
+									<FormErrorMessage>
+										{errors?.content && errors?.content?.message}
+									</FormErrorMessage>
 								</FormControl>
 								<Button
 									colorScheme="blue"

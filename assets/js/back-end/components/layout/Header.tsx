@@ -58,6 +58,7 @@ const Header: React.FC<Props> = (props) => {
 										as={NavLink}
 										sx={navLinkStyles}
 										_activeLink={navActiveStyles}
+										_hover={{ color: 'blue.500' }}
 										to={routes.courses.list}>
 										<ListIcon as={BiBook} />
 										Courses
@@ -69,6 +70,7 @@ const Header: React.FC<Props> = (props) => {
 										as={NavLink}
 										sx={navLinkStyles}
 										_activeLink={navActiveStyles}
+										_hover={{ color: 'blue.500' }}
 										to={routes.settings}>
 										<ListIcon as={BiCog} />
 										Settings

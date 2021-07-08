@@ -23,7 +23,7 @@ msgstr ""
 msgid "Media files jpeg, png are only supported"
 msgstr ""
 
-#: assets/js/back-end/components/layout/Header.tsx:87
+#: assets/js/back-end/components/layout/Header.tsx:89
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:150
 msgid "Add New Course"
 msgstr ""

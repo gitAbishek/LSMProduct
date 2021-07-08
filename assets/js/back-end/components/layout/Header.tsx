@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiBook, BiCog } from 'react-icons/bi';
+import { BiBook } from 'react-icons/bi';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
@@ -61,19 +61,7 @@ const Header: React.FC<Props> = (props) => {
 										_hover={{ color: 'blue.500' }}
 										to={routes.courses.list}>
 										<ListIcon as={BiBook} />
-										Courses
-									</Link>
-								</ListItem>
-
-								<ListItem mb="0">
-									<Link
-										as={NavLink}
-										sx={navLinkStyles}
-										_activeLink={navActiveStyles}
-										_hover={{ color: 'blue.500' }}
-										to={routes.settings}>
-										<ListIcon as={BiCog} />
-										Settings
+										{__('All Courses', 'masteriyo')}
 									</Link>
 								</ListItem>
 							</List>

@@ -48,7 +48,9 @@ class AdminMenu {
 			esc_html__( 'Masteriyo', 'masteriyo' ),
 			'manage_options',
 			'masteriyo',
-			array( $this, 'display_main_page' )
+			array( $this, 'display_main_page' ),
+			'dashicons-align-full-width',
+			3
 		);
 
 		add_submenu_page(

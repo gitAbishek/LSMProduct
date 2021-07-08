@@ -35,6 +35,12 @@ function masteriyo_get_course_question_count( $course = 0 ) {
 		ARRAY_A
 	);
 
+	$qa_count = array(
+		'spam'     => 0,
+		'approved' => 0,
+		'total'    => 0,
+	);
+
 	foreach ( $totals as $row ) {
 		switch ( $row['comment_approved'] ) {
 			case 'trash':
@@ -93,6 +99,12 @@ function masteriyo_get_course_answer_count( $course = 0, $question_id = 0 ) {
 			$course_id
 		),
 		ARRAY_A
+	);
+
+	$qa_count = array(
+		'spam'     => 0,
+		'approved' => 0,
+		'total'    => 0,
 	);
 
 	foreach ( $totals as $row ) {

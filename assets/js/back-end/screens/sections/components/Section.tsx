@@ -12,6 +12,7 @@ import {
 	Flex,
 	Icon,
 	IconButton,
+	Link,
 	Menu,
 	MenuButton,
 	MenuItem,
@@ -32,8 +33,7 @@ import {
 	BiTrash,
 } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
-import { useHistory } from 'react-router-dom';
-
+import { Link as RouterLink } from 'react-router-dom';
 import { Sortable } from '../../../assets/icons';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
@@ -52,19 +52,11 @@ interface Props {
 }
 
 const Section: React.FC<Props> = (props) => {
-	const {
-		id,
-		name,
-		description,
-		index,
-		contents,
-		contentsMap,
-		courseId,
-	} = props;
+	const { id, name, description, index, contents, contentsMap, courseId } =
+		props;
 	const [isEditing, setIsEditing] = useState(false);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const sectionAPI = new API(urls.sections);
-	const history = useHistory();
 	const cancelRef = useRef<any>();
 	const newContents = contents?.map((contentId: any) => contentsMap[contentId]);
 	const queryClient = useQueryClient();
@@ -93,14 +85,6 @@ const Section: React.FC<Props> = (props) => {
 
 	const onDeleteConfirm = () => {
 		deleteMutation.mutate(id);
-	};
-
-	const onAddNewLessonPress = () => {
-		history.push(routes.lesson.add.replace(':sectionId', id.toString()));
-	};
-
-	const onAddNewQuizPress = () => {
-		history.push(routes.quiz.add.replace(':sectionId', id.toString()));
 	};
 
 	const onDeleteModalClose = () => {
@@ -187,20 +171,31 @@ const Section: React.FC<Props> = (props) => {
 								{__('Add New Content', 'masteriyo')}
 							</MenuButton>
 							<MenuList>
-								<MenuItem
-									fontSize="sm"
-									fontWeight="medium"
-									icon={<Icon as={BiAlignLeft} fontSize="lg" />}
-									onClick={onAddNewLessonPress}>
-									{__('Add New Lesson', 'masteriyo')}
-								</MenuItem>
-								<MenuItem
-									fontSize="sm"
-									fontWeight="medium"
-									icon={<Icon as={BiTimer} fontSize="lg" />}
-									onClick={onAddNewQuizPress}>
-									{__('Add New Quiz', 'masteriyo')}
-								</MenuItem>
+								<Link
+									as={RouterLink}
+									to={routes.lesson.add
+										.replace(':sectionId', id.toString())
+										.replace(':courseId', courseId.toString())}>
+									<MenuItem
+										fontSize="sm"
+										fontWeight="medium"
+										icon={<Icon as={BiAlignLeft} fontSize="lg" />}>
+										{__('Add New Lesson', 'masteriyo')}
+									</MenuItem>
+								</Link>
+
+								<Link
+									as={RouterLink}
+									to={routes.quiz.add
+										.replace(':sectionId', id.toString())
+										.replace(':courseId', courseId.toString())}>
+									<MenuItem
+										fontSize="sm"
+										fontWeight="medium"
+										icon={<Icon as={BiTimer} fontSize="lg" />}>
+										{__('Add New Quiz', 'masteriyo')}
+									</MenuItem>
+								</Link>
 							</MenuList>
 						</Menu>
 					</Box>

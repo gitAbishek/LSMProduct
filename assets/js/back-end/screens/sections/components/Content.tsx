@@ -53,12 +53,14 @@ const Content: React.FC<Props> = (props) => {
 	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
 		onSuccess: () => {
 			queryClient.invalidateQueries(`builder${courseId}`);
+			setDeleteModalOpen(false);
 		},
 	});
 
 	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
 		onSuccess: () => {
 			queryClient.invalidateQueries(`builder${courseId}`);
+			setDeleteModalOpen(false);
 		},
 	});
 
@@ -76,16 +78,21 @@ const Content: React.FC<Props> = (props) => {
 		} else if (type === 'quiz') {
 			deleteQuiz.mutate(id);
 		}
-		setDeleteModalOpen(false);
 	};
 
 	const onEditPress = () => {
 		if (type === 'lesson') {
-			history.push(routes.lesson.edit.replace(':lessonId', id.toString()));
+			history.push(
+				routes.lesson.edit
+					.replace(':lessonId', id.toString())
+					.replace(':courseId', courseId.toString())
+			);
 		}
 		if (type === 'quiz') {
 			history.push(
-				routes.quiz.edit.replace(':quizId', id.toString()).replace(':step', '')
+				routes.quiz.edit
+					.replace(':quizId', id.toString())
+					.replace(':courseId', courseId.toString())
 			);
 		}
 	};

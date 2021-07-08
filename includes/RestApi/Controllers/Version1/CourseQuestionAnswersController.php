@@ -152,7 +152,7 @@ class CourseQuestionAnswersController extends CommentsController {
 		unset( $params['post'] );
 
 		// Add course argument.
-		$params['course'] = array(
+		$params['course_id'] = array(
 			'default'     => array(),
 			'description' => __( 'Limit result set to comments assigned to specific course IDs.', 'masteriyo' ),
 			'type'        => 'array',

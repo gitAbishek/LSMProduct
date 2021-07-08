@@ -364,7 +364,7 @@ abstract class CommentsController extends CrudController {
 			'author__in'      => $request['user'],
 			'author__not_in'  => $request['user_exclude'],
 			'author_email'    => $request['user_email'],
-			'post__in'        => $request['course'],
+			'post__in'        => $request['course_id'],
 		);
 
 		if ( 'date' === $args['orderby'] ) {

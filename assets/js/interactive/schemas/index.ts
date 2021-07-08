@@ -43,6 +43,7 @@ export type CourseProgressItemMap = {
 
 export type CourseProgressMap = {
 	id: number;
+	name: string;
 	user_id: number;
 	course_id: 9;
 	status: 'begin' | 'complete';

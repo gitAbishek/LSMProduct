@@ -275,13 +275,14 @@ class CourseQuestionAnswersController extends CommentsController {
 			'agent'           => $course_qa->get_agent( $context ),
 			'parent'          => $course_qa->get_parent( $context ),
 			'user_id'         => $course_qa->get_user_id( $context ),
-			'by_current_user' => $course_qa->get_user_id( $context ) === get_current_user_id(),
+			'by_current_user' => $course_qa->is_created_by_current_user(),
+			'sender'          => $course_qa->is_created_by_student() ? 'student' : 'instructor',
 		);
 
-		$question_id = $course_qa->get_id();
-		$course_id   = $course_qa->get_course_id( $context );
-		if ( 0 === $course_qa->get_parent() ) {
-			$data['answers_count'] = masteriyo_get_course_answer_count( $course_id, $question_id );
+		$course_qa->is_created_by_student();
+
+		if ( 0 === $course_qa->get_parent( $context ) ) {
+			$data['answers_count'] = $course_qa->get_answers_count();
 		}
 
 		return $data;

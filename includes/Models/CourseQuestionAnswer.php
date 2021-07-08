@@ -382,4 +382,92 @@ class CourseQuestionAnswer extends Model {
 	public function set_user_id( $user_id ) {
 		$this->set_prop( 'user_id', absint( $user_id ) );
 	}
+
+	/**
+	 * Non-CRUD functions.
+	 */
+
+	/**
+	 * Return true if the course qa is created by the current user.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	public function is_created_by_current_user() {
+		return $this->get_user_id() === get_current_user_id();
+	}
+
+	/**
+	 * Get answers count for the question.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return int
+	 */
+	public function get_answers_count() {
+		return masteriyo_get_course_answer_count( $this->get_course_id(), $this->get_id() );
+	}
+
+	/**
+	 * Return if the course QA is created by the user role.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $role User's role.
+	 * @return boolean
+	 */
+	public function is_created_by( $role ) {
+		$user = get_user_by( 'id', $this->get_user_id( 'edit' ) );
+
+		if ( false === $user ) {
+			return false;
+		}
+
+		return in_array( $role, $user->roles, true );
+	}
+
+	/**
+	 * Return true if the course QA is created by student.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	public function is_created_by_student() {
+		return $this->is_created_by( 'masteriyo_student' );
+	}
+
+	/**
+	 * Return true if the course QA is created by instructor.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	public function is_created_by_instructor() {
+		return $this->is_created_by( 'masteriyo_instructor' );
+	}
+
+	/**
+	 * Return true if the course QA is created by manager.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	public function is_created_by_manager() {
+		return $this->is_created_by( 'masteriyo_manager' );
+	}
+
+	/**
+	 * Return true if the course QA is created by manager.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return boolean
+	 */
+	public function is_created_by_administrator() {
+		return $this->is_created_by( 'masteriyo_administrator' );
+	}
 }

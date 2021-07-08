@@ -76,4 +76,7 @@ export type QuestionAnswerSchema = {
 	content: string;
 	parent: number;
 	user_id: number;
+	sender: 'student' | 'instructor';
+	by_current_user: boolean;
+	answers_count?: number;
 };

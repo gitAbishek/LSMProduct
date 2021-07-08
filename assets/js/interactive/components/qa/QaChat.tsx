@@ -96,8 +96,9 @@ const QaChat: React.FC<Props> = (props) => {
 									name={chat.user_name}
 									avatar="https://i.pravatar.cc/150?img=3"
 									message={chat.content}
-									sender="user"
+									sender={chat.sender}
 									time={chat.created_at}
+									byCurrentUser={chat.by_current_user}
 								/>
 							))}
 						</Stack>

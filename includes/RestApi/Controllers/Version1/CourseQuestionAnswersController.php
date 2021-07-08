@@ -263,18 +263,19 @@ class CourseQuestionAnswersController extends CommentsController {
 	 */
 	protected function get_course_qa_data( $mto_course_qa, $context = 'view' ) {
 		$data = array(
-			'id'         => $mto_course_qa->get_id(),
-			'course_id'  => $mto_course_qa->get_course_id(),
-			'user_name'  => $mto_course_qa->get_user_name( $context ),
-			'user_email' => $mto_course_qa->get_user_email( $context ),
-			'user_url'   => $mto_course_qa->get_user_url( $context ),
-			'ip_address' => $mto_course_qa->get_ip_address( $context ),
-			'created_at' => masteriyo_rest_prepare_date_response( $mto_course_qa->get_created_at( $context ) ),
-			'content'    => $mto_course_qa->get_content( $context ),
-			'status'     => $mto_course_qa->get_status( $context ),
-			'agent'      => $mto_course_qa->get_agent( $context ),
-			'parent'     => $mto_course_qa->get_parent( $context ),
-			'user_id'    => $mto_course_qa->get_user_id( $context ),
+			'id'              => $mto_course_qa->get_id(),
+			'course_id'       => $mto_course_qa->get_course_id(),
+			'user_name'       => $mto_course_qa->get_user_name( $context ),
+			'user_email'      => $mto_course_qa->get_user_email( $context ),
+			'user_url'        => $mto_course_qa->get_user_url( $context ),
+			'ip_address'      => $mto_course_qa->get_ip_address( $context ),
+			'created_at'      => masteriyo_rest_prepare_date_response( $mto_course_qa->get_created_at( $context ) ),
+			'content'         => $mto_course_qa->get_content( $context ),
+			'status'          => $mto_course_qa->get_status( $context ),
+			'agent'           => $mto_course_qa->get_agent( $context ),
+			'parent'          => $mto_course_qa->get_parent( $context ),
+			'user_id'         => $mto_course_qa->get_user_id( $context ),
+			'by_current_user' => $mto_course_qa->get_user_id( $context ) === get_current_user_id(),
 		);
 
 		return $data;
@@ -293,68 +294,72 @@ class CourseQuestionAnswersController extends CommentsController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'         => array(
+				'id'              => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'course_id'  => array(
+				'course_id'       => array(
 					'description' => __( 'Course ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'name'       => array(
+				'name'            => array(
 					'description' => __( 'Course question answerer user\'s name.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'email'      => array(
+				'email'           => array(
 					'description' => __( 'Course question-answerer user Email.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'url'        => array(
+				'url'             => array(
 					'description' => __( 'Course question answerer user URL.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'ip_address' => array(
+				'ip_address'      => array(
 					'description' => __( 'The IP address of the question answerer', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'created_at' => array(
+				'created_at'      => array(
 					'description' => __( "The date the course was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'content'    => array(
+				'content'         => array(
 					'description' => __( 'Course question answer content.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'status'     => array(
+				'status'          => array(
 					'description' => __( 'Course question answer stattis.', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'approve',
 					'enum'        => array( 'approve', 'hold', 'trash', 'spam' ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'agent'      => array(
+				'agent'           => array(
 					'description' => __( 'Course questio answer agent.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'parent'     => array(
+				'parent'          => array(
 					'description' => __( 'Course question answer parent.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
 				),
-				'user_Id'    => array(
+				'user_id'         => array(
 					'description' => __( 'The user ID.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'by_current_user' => array(
+					'description' => __( 'True if this course qa belongs to the current user.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,

@@ -1,7 +1,6 @@
 import { Avatar, Box, Icon, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
 import { BiBadgeCheck, BiUser } from 'react-icons/bi';
-import Timeago from 'react-timeago';
 
 interface Props {
 	message: string;
@@ -51,10 +50,10 @@ const Message: React.FC<Props> = (props) => {
 						/>
 					</Stack>
 					<Text fontSize="x-small" color="gray.400">
-						<Timeago date={time} />
+						{time}
 					</Text>
 				</Stack>
-				<Box fontSize="xs" p="4" sx={bubbleStyle}>
+				<Box fontSize="xs" p="4" py="3" sx={bubbleStyle}>
 					{message}
 				</Box>
 			</Stack>

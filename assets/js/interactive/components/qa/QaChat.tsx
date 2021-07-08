@@ -107,6 +107,7 @@ const QaChat: React.FC<Props> = (props) => {
 						<Stack direction="column" spacing="3" w="full" p="4" pb="6">
 							<FormControl>
 								<Textarea
+									fontSize="xs"
 									{...register('content', { required: true })}
 									disabled={addNewChat.isLoading}
 								/>

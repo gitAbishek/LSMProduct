@@ -2,6 +2,7 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
+	Center,
 	FormControl,
 	Heading,
 	Icon,
@@ -160,7 +161,16 @@ const QuestionList: React.FC = () => {
 			</>
 		);
 	}
-	return <Spinner />;
+	return (
+		<Center h="full">
+			<Spinner
+				size="lg"
+				color="blue.500"
+				emptyColor="gray.200"
+				thickness="3px"
+			/>
+		</Center>
+	);
 };
 
 export default QuestionList;

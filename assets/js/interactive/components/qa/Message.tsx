@@ -27,6 +27,9 @@ const Message: React.FC<Props> = (props) => {
 					bg: 'blue.400',
 					color: 'white',
 			  };
+
+	const formatTime = Date.parse(time);
+
 	return (
 		<Stack
 			direction={sender === 'user' ? 'row' : 'row-reverse'}
@@ -49,7 +52,7 @@ const Message: React.FC<Props> = (props) => {
 						/>
 					</Stack>
 					<Text fontSize="x-small" color="gray.400">
-						{time}
+						{formatTime}
 					</Text>
 				</Stack>
 				<Box fontSize="xs" p="4" sx={bubbleStyle}>

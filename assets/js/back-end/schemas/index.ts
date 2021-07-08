@@ -11,6 +11,8 @@ export type QuizSchema = {
 	pass_mark: number;
 	full_mark: number;
 	duration: number;
+	attempts_allowed: number;
+	questions_display_per_page: number;
 	questions_count: number;
 	navigation: {
 		previous: {

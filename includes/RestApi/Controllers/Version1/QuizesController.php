@@ -746,21 +746,23 @@ class QuizesController extends PostsController {
 	 */
 	protected function get_quiz_data( $quiz, $context = 'view' ) {
 		$data = array(
-			'id'                => $quiz->get_id(),
-			'name'              => $quiz->get_name( $context ),
-			'slug'              => $quiz->get_slug( $context ),
-			'permalink'         => $quiz->get_permalink(),
-			'parent_id'         => $quiz->get_parent_id( $context ),
-			'course_id'         => $quiz->get_course_id( $context ),
-			'menu_order'        => $quiz->get_menu_order( $context ),
-			'status'            => $quiz->get_status( $context ),
-			'description'       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
-			'short_description' => 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description( $context ),
-			'pass_mark'         => $quiz->get_pass_mark( $context ),
-			'full_mark'         => $quiz->get_full_mark( $context ),
-			'duration'          => $quiz->get_duration( $context ),
-			'questions_count'   => $quiz->get_questions_count(),
-			'navigation'        => $this->get_navigation_items( $quiz, $context ),
+			'id'                         => $quiz->get_id(),
+			'name'                       => $quiz->get_name( $context ),
+			'slug'                       => $quiz->get_slug( $context ),
+			'permalink'                  => $quiz->get_permalink(),
+			'parent_id'                  => $quiz->get_parent_id( $context ),
+			'course_id'                  => $quiz->get_course_id( $context ),
+			'menu_order'                 => $quiz->get_menu_order( $context ),
+			'status'                     => $quiz->get_status( $context ),
+			'description'                => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
+			'short_description'          => 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description( $context ),
+			'pass_mark'                  => $quiz->get_pass_mark( $context ),
+			'full_mark'                  => $quiz->get_full_mark( $context ),
+			'duration'                   => $quiz->get_duration( $context ),
+			'attempts_allowed'           => $quiz->get_attempts_allowed( $context ),
+			'questions_display_per_page' => $quiz->get_questions_display_per_page( $context ),
+			'questions_count'            => $quiz->get_questions_count(),
+			'navigation'                 => $this->get_navigation_items( $quiz, $context ),
 		);
 
 		return $data;
@@ -849,104 +851,116 @@ class QuizesController extends PostsController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id'                => array(
+				'id'                         => array(
 					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name'              => array(
+				'name'                       => array(
 					'description' => __( 'Quiz name.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'slug'              => array(
+				'slug'                       => array(
 					'description' => __( 'Quiz slug.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'parent_id'         => array(
+				'parent_id'                  => array(
 					'description' => __( 'Quiz parent ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'course_id'         => array(
+				'course_id'                  => array(
 					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'menu_order'        => array(
+				'menu_order'                 => array(
 					'description' => __( 'Menu order, used to custom sort quizes.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'permalink'         => array(
+				'permalink'                  => array(
 					'description' => __( 'Quiz URL.', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_created'      => array(
+				'date_created'               => array(
 					'description' => __( "The date the quiz was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_created_gmt'  => array(
+				'date_created_gmt'           => array(
 					'description' => __( 'The date the quiz was created, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_modified'     => array(
+				'date_modified'              => array(
 					'description' => __( "The date the quiz was last modified, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_modified_gmt' => array(
+				'date_modified_gmt'          => array(
 					'description' => __( 'The date the quiz was last modified, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'status'            => array(
+				'status'                     => array(
 					'description' => __( 'Quiz status (post status).', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'publish',
 					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'description'       => array(
+				'description'                => array(
 					'description' => __( 'Quiz description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'short_description' => array(
+				'short_description'          => array(
 					'description' => __( 'Quiz short description.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'pass_mark'         => array(
+				'pass_mark'                  => array(
 					'description' => __( 'Quiz pass mark.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => false,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'full_mark'         => array(
+				'full_mark'                  => array(
 					'description' => __( 'Quiz full mark..', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => false,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'duration'          => array(
+				'duration'                   => array(
 					'description' => __( 'Quiz duration (seconds).', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => false,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'meta_data'         => array(
+				'attempts_allowed'           => array(
+					'description' => __( 'Quiz attempts allowed.', 'masteriyo' ),
+					'type'        => 'integer',
+					'required'    => false,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'questions_display_per_page' => array(
+					'description' => __( 'Quiz questions display per page', 'masteriyo' ),
+					'type'        => 'integer',
+					'required'    => false,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'meta_data'                  => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
@@ -1053,6 +1067,16 @@ class QuizesController extends PostsController {
 			$quiz->set_duration( $request['duration'] );
 		}
 
+		// Quiz attempts allowed.
+		if ( isset( $request['attempts_allowed'] ) ) {
+			$quiz->set_attempts_allowed( $request['attempts_allowed'] );
+		}
+
+		// Quiz questions display per page.
+		if ( isset( $request['questions_display_per_page'] ) ) {
+			$quiz->set_questions_display_per_page( $request['questions_display_per_page'] );
+		}
+
 		// Allow set meta_data.
 		if ( isset( $request['meta_data'] ) && is_array( $request['meta_data'] ) ) {
 			foreach ( $request['meta_data'] as $meta ) {
@@ -1129,7 +1153,7 @@ class QuizesController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid course ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -1175,7 +1199,7 @@ class QuizesController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -1221,7 +1245,7 @@ class QuizesController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}

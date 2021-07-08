@@ -1,8 +1,6 @@
 import {
 	Box,
 	Container,
-	Flex,
-	Heading,
 	Stack,
 	Table,
 	Tbody,
@@ -42,12 +40,6 @@ const AllCourses = () => {
 			<Container maxW="container.xl">
 				<Box bg="white" p="12" shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
-						<Flex justify="space-between" aling="center">
-							<Heading as="h1" size="lg">
-								{__('Courses', 'masteriyo')}
-							</Heading>
-						</Flex>
-
 						<Table>
 							<Thead>
 								<Tr>

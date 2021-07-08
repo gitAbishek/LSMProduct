@@ -58,19 +58,21 @@ class Quiz extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'name'              => '',
-		'slug'              => '',
-		'date_created'      => null,
-		'date_modified'     => null,
-		'parent_id'         => 0,
-		'course_id'         => 0,
-		'menu_order'        => 0,
-		'status'            => false,
-		'description'       => '',
-		'short_description' => '',
-		'pass_mark'         => 0,
-		'full_mark'         => 0,
-		'duration'          => 0, // Seconds
+		'name'                       => '',
+		'slug'                       => '',
+		'date_created'               => null,
+		'date_modified'              => null,
+		'parent_id'                  => 0,
+		'course_id'                  => 0,
+		'menu_order'                 => 0,
+		'status'                     => false,
+		'description'                => '',
+		'short_description'          => '',
+		'pass_mark'                  => 0,
+		'full_mark'                  => 0,
+		'duration'                   => 0, // Seconds
+		'attempts_allowed'           => 5,
+		'questions_display_per_page' => 0,
 	);
 
 	/**
@@ -319,6 +321,32 @@ class Quiz extends Model {
 		return $this->get_prop( 'duration', $context );
 	}
 
+	/**
+	 * Returns quiz attempts allowed.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return int Quiz attempts allowed.
+	 */
+	public function get_attempts_allowed( $context = 'view' ) {
+		return $this->get_prop( 'attempts_allowed', $context );
+	}
+
+	/**
+	 * Returns quiz questions display per page.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return int Quiz display per page.
+	 */
+	public function get_questions_display_per_page( $context = 'view' ) {
+		return $this->get_prop( 'questions_display_per_page', $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -466,6 +494,28 @@ class Quiz extends Model {
 	 */
 	public function set_duration( $duration ) {
 		$this->set_prop( 'duration', absint( $duration ) );
+	}
+
+	/**
+	 * Set the quiz attempts allowed.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $attempts_allowed attempts allowed.
+	 */
+	public function set_attempts_allowed( $attempts_allowed ) {
+		$this->set_prop( 'attempts_allowed', absint( $attempts_allowed ) );
+	}
+
+	/**
+	 * Set the quiz question display per page.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $questions_display_per_page Question display per page.
+	 */
+	public function set_questions_display_per_page( $questions_display_per_page ) {
+		$this->set_prop( 'questions_display_per_page', absint( $questions_display_per_page ) );
 	}
 
 }

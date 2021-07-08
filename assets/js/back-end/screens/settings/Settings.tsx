@@ -1,14 +1,14 @@
 import {
 	Box,
-	Tabs,
-	TabList,
-	Tab,
-	TabPanels,
-	TabPanel,
-	Stack,
-	Container,
-	ButtonGroup,
 	Button,
+	ButtonGroup,
+	Container,
+	Stack,
+	Tab,
+	TabList,
+	TabPanel,
+	TabPanels,
+	Tabs,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -26,6 +26,7 @@ import EmailSetttings from './components/EmailSetttings';
 import GeneralSettings from './components/GeneralSettings';
 import PagesSettings from './components/PagesSettings';
 import PaymentsSettings from './components/PaymentsSettings';
+import QuizzesSettings from './components/QuizzesSettings';
 
 const Settings = () => {
 	const settingsApi = new API(urls.settings);
@@ -85,6 +86,7 @@ const Settings = () => {
 							<TabList justifyContent="center" borderBottom="1px">
 								<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
 								<Tab sx={tabStyles}>{__('Courses', 'masteriyo')}</Tab>
+								<Tab sx={tabStyles}>{__('Quizzes', 'masteriyo')}</Tab>
 								<Tab sx={tabStyles}>{__('Pages', 'masteriyo')}</Tab>
 								<Tab sx={tabStyles}>{__('Payments', 'masteriyo')}</Tab>
 								<Tab sx={tabStyles}>{__('Emails', 'masteriyo')}</Tab>
@@ -101,6 +103,11 @@ const Settings = () => {
 									<TabPanel sx={tabPanelStyles}>
 										<CoursesSettings
 											coursesData={settingsQuery.data?.courses}
+										/>
+									</TabPanel>
+									<TabPanel sx={tabPanelStyles}>
+										<QuizzesSettings
+											quizzesData={settingsQuery.data?.quizzes}
 										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>

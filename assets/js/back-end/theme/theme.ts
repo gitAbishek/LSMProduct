@@ -21,8 +21,8 @@ const theme = extendTheme({
 			'html,body': {
 				bg: 'gray.50',
 			},
-			"#masteriyo": {
-				ml: "-20px"
+			'#masteriyo': {
+				ml: '-20px',
 			},
 			'::placeholder': {
 				fontSize: 'sm',

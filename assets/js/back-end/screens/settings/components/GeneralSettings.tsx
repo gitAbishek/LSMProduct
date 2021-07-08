@@ -13,6 +13,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import React, { useEffect, useState } from 'react';
+import { SketchPicker } from 'react-color';
 import ReactFlagsSelect from 'react-flags-select';
 import { useFormContext } from 'react-hook-form';
 import { GeneralSettingsMap } from '../../../types';
@@ -25,6 +26,12 @@ const GeneralSettings: React.FC<Props> = (props) => {
 	const { generalData } = props;
 	const [country, setCountry] = useState(generalData?.country);
 	const { register, setValue } = useFormContext();
+
+	const [color, setColor] = useState({ background: '#787DFF' });
+
+	const handleColorChange = (color: any) => {
+		setColor({ background: color.hex });
+	};
 
 	const tabStyles = {
 		justifyContent: 'flex-start',
@@ -55,6 +62,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 				<TabList sx={tabListStyles}>
 					<Tab sx={tabStyles}>{__('Store', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Currency Options', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Styling', 'masteriyo')}</Tab>
 				</TabList>
 				<TabPanels flex="1">
 					<TabPanel>
@@ -166,6 +174,30 @@ const GeneralSettings: React.FC<Props> = (props) => {
 									/>
 								</FormControl>
 							</Stack>
+						</Stack>
+					</TabPanel>
+					<TabPanel>
+						<Stack direction="column" spacing="6">
+							<FormControl>
+								<FormLabel minW="xs">
+									{__('Primary Color', 'masteriyo')}
+								</FormLabel>
+								<SketchPicker
+									onChange={handleColorChange}
+									color={color.background}
+								/>
+							</FormControl>
+							<FormControl>
+								<FormLabel minW="xs">{__('Theme', 'masteriyo')}</FormLabel>
+								<Select placeholder={__('Select option', 'masteriyo')}>
+									<option value="minimum_styling">
+										{__('Minimum Styling', 'masteriyo')}
+									</option>
+									<option value="some_styling">
+										{__('Some Styling', 'masteriyo')}
+									</option>
+								</Select>
+							</FormControl>
 						</Stack>
 					</TabPanel>
 				</TabPanels>

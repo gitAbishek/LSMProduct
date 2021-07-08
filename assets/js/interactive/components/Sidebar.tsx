@@ -24,9 +24,10 @@ import SidebarItem from './SidebarItem';
 
 interface Props {
 	items: [CourseProgressItemMap];
+	name: string;
 }
 const Sidebar: React.FC<Props> = (props) => {
-	const { items } = props;
+	const { items, name } = props;
 	const { courseId }: any = useParams();
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -95,7 +96,7 @@ const Sidebar: React.FC<Props> = (props) => {
 						d="flex"
 						alignItems="center"
 						fontWeight="semibold">
-						Course dummy name
+						{name}
 					</DrawerHeader>
 
 					<DrawerBody p="0" position="relative" overflowX="hidden">

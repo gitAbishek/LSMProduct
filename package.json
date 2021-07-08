@@ -32,6 +32,7 @@
     "react-select": "3.1.0",
     "react-timer-hook": "3.0.4",
     "remove": "0.1.5",
+    "timeago-react": "3.0.3",
     "tinymce": "5.7.1"
   },
   "devDependencies": {

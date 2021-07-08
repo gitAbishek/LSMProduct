@@ -43,6 +43,7 @@ export type CourseProgressItemMap = {
 
 export type CourseProgressMap = {
 	id: number;
+	name: string;
 	user_id: number;
 	course_id: 9;
 	status: 'begin' | 'complete';
@@ -64,4 +65,18 @@ export type CourseProgressItemsMap = {
 	started_at?: string;
 	modified_at?: string;
 	completed_at?: string | any;
+};
+
+export type QuestionAnswerSchema = {
+	id: number;
+	course_id: number;
+	user_name: string;
+	user_email: string;
+	created_at: string;
+	content: string;
+	parent: number;
+	user_id: number;
+	sender: 'student' | 'instructor';
+	by_current_user: boolean;
+	answers_count?: number;
 };

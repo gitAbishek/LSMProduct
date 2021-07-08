@@ -1,35 +1,36 @@
 import { Avatar, Box, Icon, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
 import { BiBadgeCheck, BiUser } from 'react-icons/bi';
-
+import TimeAgo from 'timeago-react';
 interface Props {
 	message: string;
 	avatar: string;
 	name: string;
 	time: string;
-	sender: 'user' | 'author';
+	sender: 'student' | 'instructor';
+	byCurrentUser: boolean;
 }
 const Message: React.FC<Props> = (props) => {
-	const { message, avatar, name, time, sender = 'user' } = props;
+	const { message, avatar, name, time, sender, byCurrentUser } = props;
 
-	const bubbleStyle =
-		sender === 'user'
-			? {
-					borderBottomRightRadius: 'lg',
-					borderBottomLeftRadius: 'lg',
-					borderTopRightRadius: 'lg',
-					bg: 'gray.100',
-			  }
-			: {
-					borderBottomRightRadius: 'lg',
-					borderBottomLeftRadius: 'lg',
-					borderTopLeftRadius: 'lg',
-					bg: 'blue.400',
-					color: 'white',
-			  };
+	const bubbleStyle = byCurrentUser
+		? {
+				borderBottomRightRadius: 'lg',
+				borderBottomLeftRadius: 'lg',
+				borderTopLeftRadius: 'lg',
+				bg: 'blue.400',
+				color: 'white',
+		  }
+		: {
+				borderBottomRightRadius: 'lg',
+				borderBottomLeftRadius: 'lg',
+				borderTopRightRadius: 'lg',
+				bg: 'gray.100',
+		  };
+
 	return (
 		<Stack
-			direction={sender === 'user' ? 'row' : 'row-reverse'}
+			direction={byCurrentUser ? 'row-reverse' : 'row'}
 			spacing="2"
 			justify="space-between">
 			<Avatar size="sm" src={avatar} />
@@ -44,15 +45,15 @@ const Message: React.FC<Props> = (props) => {
 							{name}
 						</Text>
 						<Icon
-							as={sender === 'user' ? BiUser : BiBadgeCheck}
-							color={sender === 'user' ? 'pink.400' : 'blue.400'}
+							as={sender === 'instructor' ? BiBadgeCheck : BiUser}
+							color={sender === 'instructor' ? 'blue.400' : 'pink.400'}
 						/>
 					</Stack>
 					<Text fontSize="x-small" color="gray.400">
-						{time}
+						<TimeAgo datetime={`${time} UTC`} />
 					</Text>
 				</Stack>
-				<Box fontSize="xs" p="4" sx={bubbleStyle}>
+				<Box fontSize="xs" p="4" py="3" sx={bubbleStyle}>
 					{message}
 				</Box>
 			</Stack>

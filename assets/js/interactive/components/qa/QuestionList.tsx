@@ -15,7 +15,7 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import React, { useState } from 'react';
 import { BiChevronRight, BiSearch } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
@@ -26,6 +26,7 @@ import QaChat from './QaChat';
 
 const QuestionList: React.FC = () => {
 	const { courseId }: any = useParams();
+	const [chatId, setChatId] = useState(null);
 
 	const qaAPI = new API(urls.qa);
 
@@ -37,6 +38,12 @@ const QuestionList: React.FC = () => {
 	const qaQuery = useQuery([`qa${courseId}`, courseId], () => qaAPI.list());
 
 	const onBackPress = () => {
+		onChatToggle();
+		onListToggle();
+	};
+
+	const onQuestionPress = (id: number) => {
+		setChatId(id);
 		onChatToggle();
 		onListToggle();
 	};
@@ -75,10 +82,7 @@ const QuestionList: React.FC = () => {
 									borderBottomColor="gray.100"
 									px="4"
 									py="2"
-									onClick={() => {
-										onChatToggle();
-										onListToggle();
-									}}>
+									onClick={() => onQuestionPress(question.id)}>
 									<Stack direction="column" spacing="2">
 										<Heading fontSize="sm">{question.content}</Heading>
 										<Text fontSize="x-small" color="gray.500">
@@ -103,10 +107,17 @@ const QuestionList: React.FC = () => {
 						</Stack>
 					</Stack>
 				</Slide>
-				<QaChat isOpen={isChatOpen} onBackPress={onBackPress} />
+				{chatId && (
+					<QaChat
+						isOpen={isChatOpen}
+						onBackPress={onBackPress}
+						chatId={chatId}
+					/>
+				)}
 			</>
 		);
 	}
+
 	return (
 		<Center h="full">
 			<Spinner

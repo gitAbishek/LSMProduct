@@ -31,7 +31,7 @@ const QuestionList: React.FC = () => {
 	const toast = useToast();
 	const queryClient = useQueryClient();
 	const [chatId, setChatId] = useState(null);
-	const { handleSubmit, register } = useForm<{ content: string }>();
+	const { handleSubmit, register, reset } = useForm<{ content: string }>();
 
 	const qaAPI = new API(urls.qa);
 
@@ -55,6 +55,7 @@ const QuestionList: React.FC = () => {
 					status: 'success',
 					isClosable: true,
 				});
+				reset({});
 				queryClient.invalidateQueries(`qa${courseId}`);
 			},
 		}
@@ -70,7 +71,9 @@ const QuestionList: React.FC = () => {
 		onListToggle();
 	};
 
-	const onSubmit = (data: { content: string }) => {};
+	const onSubmit = (data: { content: string }) => {
+		addNewQuestion.mutate({ content: data.content, course_id: courseId });
+	};
 
 	if (qaQuery.isSuccess) {
 		return (
@@ -127,10 +130,15 @@ const QuestionList: React.FC = () => {
 									<Input
 										type="text"
 										placeholder="What is your question?"
+										disabled={addNewQuestion.isLoading}
 										{...register('content', { required: true })}
 									/>
 								</FormControl>
-								<Button colorScheme="blue" type="submit" isFullWidth>
+								<Button
+									colorScheme="blue"
+									type="submit"
+									isFullWidth
+									isLoading={addNewQuestion.isLoading}>
 									{__('Ask a Question', 'masteriyo')}
 								</Button>
 							</Stack>

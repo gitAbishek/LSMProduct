@@ -15,7 +15,7 @@ const SetupWizard: React.FC = () => {
 		initialStep: 0,
 	});
 
-	const methods = useForm();
+	const methods = useForm({ reValidateMode: 'onChange', mode: 'onChange' });
 	const toast = useToast();
 	const settingAPI = new API(urls.settings);
 

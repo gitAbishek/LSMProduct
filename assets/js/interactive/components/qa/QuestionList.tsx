@@ -13,11 +13,13 @@ import {
 	Stack,
 	Text,
 	useDisclosure,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { BiChevronRight, BiSearch } from 'react-icons/bi';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
 import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
@@ -26,7 +28,10 @@ import QaChat from './QaChat';
 
 const QuestionList: React.FC = () => {
 	const { courseId }: any = useParams();
+	const toast = useToast();
+	const queryClient = useQueryClient();
 	const [chatId, setChatId] = useState(null);
+	const { handleSubmit, register } = useForm<{ content: string }>();
 
 	const qaAPI = new API(urls.qa);
 
@@ -37,6 +42,23 @@ const QuestionList: React.FC = () => {
 
 	const qaQuery = useQuery([`qa${courseId}`, courseId], () => qaAPI.list());
 
+	const addNewQuestion = useMutation(
+		(data: { content: string; course_id: number }) => qaAPI.store(data),
+		{
+			onSuccess: () => {
+				toast({
+					title: +__('Your question has been asked', 'masteriyo'),
+					description: __(
+						'You will get your answer as soon as possible',
+						'masteriyo'
+					),
+					status: 'success',
+					isClosable: true,
+				});
+				queryClient.invalidateQueries(`qa${courseId}`);
+			},
+		}
+	);
 	const onBackPress = () => {
 		onChatToggle();
 		onListToggle();
@@ -47,6 +69,8 @@ const QuestionList: React.FC = () => {
 		onChatToggle();
 		onListToggle();
 	};
+
+	const onSubmit = (data: { content: string }) => {};
 
 	if (qaQuery.isSuccess) {
 		return (
@@ -97,14 +121,20 @@ const QuestionList: React.FC = () => {
 								</Stack>
 							))}
 						</Stack>
-						<Stack direction="column" spacing="3" w="full" p="4" pb="6">
-							<FormControl>
-								<Input type="text" placeholder="What is your question?" />
-							</FormControl>
-							<Button colorScheme="blue" type="submit" isFullWidth>
-								Ask a Question
-							</Button>
-						</Stack>
+						<form onSubmit={handleSubmit(onSubmit)}>
+							<Stack direction="column" spacing="3" w="full" p="4" pb="6">
+								<FormControl>
+									<Input
+										type="text"
+										placeholder="What is your question?"
+										{...register('content', { required: true })}
+									/>
+								</FormControl>
+								<Button colorScheme="blue" type="submit" isFullWidth>
+									{__('Ask a Question', 'masteriyo')}
+								</Button>
+							</Stack>
+						</form>
 					</Stack>
 				</Slide>
 				{chatId && (

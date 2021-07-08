@@ -308,11 +308,13 @@ class CourseProgressController extends CrudController {
 	 */
 	protected function get_course_progress_data( $course_progress, $context = 'view' ) {
 		$course_items = $this->get_course_progress_items( $course_progress );
+		$course       = masteriyo_get_course( $course_progress->get_course_id( $context ) );
 
 		$data = array(
 			'id'           => $course_progress->get_id( $context ),
 			'user_id'      => $course_progress->get_user_id( $context ),
 			'course_id'    => $course_progress->get_course_id( $context ),
+			'name'         => is_wp_error( $course ) ? '' : $course->get_name( $context ),
 			'status'       => $course_progress->get_status( $context ),
 			'started_at'   => masteriyo_rest_prepare_date_response( $course_progress->get_started_at( $context ) ),
 			'modified_at'  => masteriyo_rest_prepare_date_response( $course_progress->get_modified_at( $context ) ),

@@ -30,9 +30,9 @@
     "react-icons": "4.2.0",
     "react-query": "3.8.3",
     "react-select": "3.1.0",
-    "react-timeago": "6.2.1",
     "react-timer-hook": "3.0.4",
     "remove": "0.1.5",
+    "timeago-react": "3.0.3",
     "tinymce": "5.7.1"
   },
   "devDependencies": {

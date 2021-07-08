@@ -22,6 +22,7 @@ import { useParams } from 'react-router-dom';
 import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
 import { QuestionAnswerSchema } from '../../schemas';
+import QaChat from './QaChat';
 
 const QuestionList: React.FC = () => {
 	const { courseId }: any = useParams();
@@ -34,6 +35,11 @@ const QuestionList: React.FC = () => {
 	const { isOpen: isChatOpen, onToggle: onChatToggle } = useDisclosure();
 
 	const qaQuery = useQuery([`qa${courseId}`, courseId], () => qaAPI.list());
+
+	const onBackPress = () => {
+		onChatToggle();
+		onListToggle();
+	};
 
 	if (qaQuery.isSuccess) {
 		return (
@@ -97,6 +103,7 @@ const QuestionList: React.FC = () => {
 						</Stack>
 					</Stack>
 				</Slide>
+				<QaChat isOpen={isChatOpen} onBackPress={onBackPress} />
 			</>
 		);
 	}

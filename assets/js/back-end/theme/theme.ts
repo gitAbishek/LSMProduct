@@ -24,6 +24,17 @@ const theme = extendTheme({
 			'#masteriyo': {
 				ml: '-20px',
 			},
+			'#masteriyo select': {
+				fontSize: 'sm',
+				borderRadius: 'sm',
+				shadow: 'input',
+				borderColor: 'inherit',
+				color: 'inherit',
+				bg: 'white',
+				_hover: {
+					borderColor: 'gray.300',
+				},
+			},
 			'::placeholder': {
 				fontSize: 'sm',
 			},

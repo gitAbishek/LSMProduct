@@ -23,47 +23,46 @@ msgstr ""
 msgid "Media files jpeg, png are only supported"
 msgstr ""
 
-#: assets/js/back-end/components/layout/Header.tsx:63
+#: assets/js/back-end/components/layout/Header.tsx:64
 msgid "All Courses"
 msgstr ""
 
-#: assets/js/back-end/components/layout/Header.tsx:76
+#: assets/js/back-end/components/layout/Header.tsx:77
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:150
 msgid "Add New Course"
 msgstr ""
 
-#: assets/js/back-end/components/layout/HeaderBuilder.tsx:106
-#: assets/js/back-end/screens/courses/components/CourseList.tsx:131
-#: assets/js/back-end/screens/orders/components/OrderRow.tsx:152
-#: assets/js/getting-started/screens/currency/Currency.tsx:220
-msgid "Preview"
-msgstr ""
-
-#: assets/js/back-end/components/layout/HeaderBuilder.tsx:116
-#: assets/js/back-end/screens/builder/Builder.tsx:183
-#: assets/js/back-end/screens/sections/components/EditSection.tsx:97
-msgid "Save"
-msgstr ""
-
-#: assets/js/back-end/components/layout/HeaderBuilder.tsx:67
-#: assets/js/back-end/screens/builder/Builder.tsx:142
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:118
-msgid "Course"
-msgstr ""
-
-#: assets/js/back-end/components/layout/HeaderBuilder.tsx:82
-#: assets/js/back-end/screens/builder/Builder.tsx:146
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:122
-msgid "Builder"
-msgstr ""
-
-#: assets/js/back-end/components/layout/HeaderBuilder.tsx:96
-#: assets/js/back-end/screens/builder/Builder.tsx:150
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:100
+#: assets/js/back-end/screens/builder/Builder.tsx:153
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:126
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:99
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:103
 #: assets/js/interactive/components/AvatarMenu.tsx:20
 msgid "Settings"
+msgstr ""
+
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:110
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:131
+#: assets/js/back-end/screens/orders/components/OrderRow.tsx:152
+msgid "Preview"
+msgstr ""
+
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:120
+#: assets/js/back-end/screens/builder/Builder.tsx:186
+#: assets/js/back-end/screens/sections/components/EditSection.tsx:97
+msgid "Save"
+msgstr ""
+
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:71
+#: assets/js/back-end/screens/builder/Builder.tsx:145
+#: assets/js/back-end/screens/courses/AddNewCourse.tsx:118
+msgid "Course"
+msgstr ""
+
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:86
+#: assets/js/back-end/screens/builder/Builder.tsx:149
+#: assets/js/back-end/screens/courses/AddNewCourse.tsx:122
+msgid "Builder"
 msgstr ""
 
 #: assets/js/back-end/screens/404/FourOFour.tsx:26
@@ -78,7 +77,7 @@ msgstr ""
 msgid "Back to Courses"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:170
+#: assets/js/back-end/screens/builder/Builder.tsx:173
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:170
 #: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:171
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:165
@@ -87,19 +86,19 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:182
+#: assets/js/back-end/screens/builder/Builder.tsx:185
 msgid "Publish"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:192
+#: assets/js/back-end/screens/builder/Builder.tsx:195
 msgid "Edit Course: "
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:87
+#: assets/js/back-end/screens/builder/Builder.tsx:90
 msgid " is updated successfully."
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:88
+#: assets/js/back-end/screens/builder/Builder.tsx:91
 msgid "You can keep editing it"
 msgstr ""
 
@@ -743,7 +742,7 @@ msgid "Address 2"
 msgstr ""
 
 #: assets/js/back-end/screens/orders/EditOrder.tsx:460
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:84
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:80
 msgid "City"
 msgstr ""
 
@@ -817,31 +816,7 @@ msgstr ""
 msgid "Are you sure? You can't restore this order."
 msgstr ""
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:112
-=======
-#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:125
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:105
-msgid "Info"
-msgstr ""
-
-#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:126
-<<<<<<< HEAD
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:107
-#: assets/js/interactive/components/Sidebar.tsx:177
-=======
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:106
-#: assets/js/interactive/components/Sidebar.tsx:160
->>>>>>> 336c69c4 (Added new api field and removed unnecessary field in Setting controller)
-msgid "Questions"
-msgstr ""
-
-#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:140
->>>>>>> 2a6ea6e7 (Added new api field and removed unnecessary field in Setting controller)
-=======
-#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:112
->>>>>>> eb9005e1 (pot file updated)
 msgid "Add course first"
 msgstr ""
 
@@ -854,8 +829,6 @@ msgstr ""
 msgid "Add New Quiz"
 msgstr ""
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:56
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:65
 msgid "Quiz Added"
@@ -868,38 +841,11 @@ msgstr ""
 
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:98
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:102
-#: assets/js/interactive/components/Sidebar.tsx:138
+#: assets/js/interactive/components/Sidebar.tsx:139
 msgid "Questions"
 msgstr ""
 
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:95
-=======
-#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:85
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:70
-msgid "Quiz Added"
-msgstr ""
-
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:99
->>>>>>> 2a6ea6e7 (Added new api field and removed unnecessary field in Setting controller)
-=======
-#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:56
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:65
-msgid "Quiz Added"
-msgstr ""
-
-#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:97
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:101
-msgid "Info"
-msgstr ""
-
-#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:98
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:102
-#: assets/js/interactive/components/Sidebar.tsx:138
-msgid "Questions"
-msgstr ""
-
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:95
->>>>>>> eb9005e1 (pot file updated)
 msgid "Edit Quiz:"
 msgstr ""
 
@@ -981,7 +927,6 @@ msgid "Pass mark is required for the quiz"
 msgstr ""
 
 #: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:64
-#: assets/js/interactive/components/qa/QuestionList.tsx:79
 msgid "Answers"
 msgstr ""
 
@@ -1281,80 +1226,81 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:105
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:101
 msgid "Adress Line 2"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:120
-#: assets/js/getting-started/screens/currency/Currency.tsx:137
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:116
+#: assets/js/getting-started/screens/currency/Currency.tsx:57
 msgid "Currency"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:133
-#: assets/js/getting-started/screens/currency/Currency.tsx:155
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:129
+#: assets/js/getting-started/screens/currency/Currency.tsx:75
 msgid "Currency Position"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:138
-#: assets/js/getting-started/screens/currency/Currency.tsx:161
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:134
+#: assets/js/getting-started/screens/currency/Currency.tsx:81
 msgid "Left"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:139
-#: assets/js/getting-started/screens/currency/Currency.tsx:162
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:135
+#: assets/js/getting-started/screens/currency/Currency.tsx:82
 msgid "Right"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:146
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:142
+#: assets/js/getting-started/screens/currency/Currency.tsx:90
 msgid "Thousand Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:156
-#: assets/js/getting-started/screens/currency/Currency.tsx:183
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:152
+#: assets/js/getting-started/screens/currency/Currency.tsx:124
 msgid "Decimal Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:168
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:164
 msgid "Number of Decimals"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:183
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:179
 msgid "Primary Color"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:191
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:184
 msgid "Theme"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:192
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:185
 msgid "Select option"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:194
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:187
 msgid "Minimum Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:197
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:190
 msgid "Some Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:63
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:59
 msgid "Store"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:64
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:60
 msgid "Currency Options"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:65
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:61
 msgid "Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:72
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:68
 msgid "Country"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:95
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:91
 msgid "Adress Line 1"
 msgstr ""
 
@@ -1503,19 +1449,15 @@ msgid "MASTERIYO LMS. Designed by ThemeGrill"
 msgstr ""
 
 #: assets/js/getting-started/screens/course/Course.tsx:68
-#: assets/js/getting-started/screens/currency/Currency.tsx:235
+#: assets/js/getting-started/screens/currency/Currency.tsx:182
 #: assets/js/getting-started/screens/pages/Pages.tsx:122
-<<<<<<< HEAD
-#: assets/js/getting-started/screens/quiz/Quiz.tsx:76
-=======
 #: assets/js/getting-started/screens/quiz/Quiz.tsx:58
->>>>>>> eb9005e1 (pot file updated)
-#: assets/js/interactive/components/qa/QuestionList.tsx:108
+#: assets/js/interactive/components/qa/QaChat.tsx:81
 msgid "Back"
 msgstr ""
 
 #: assets/js/getting-started/screens/course/Course.tsx:73
-#: assets/js/getting-started/screens/currency/Currency.tsx:240
+#: assets/js/getting-started/screens/currency/Currency.tsx:187
 #: assets/js/getting-started/screens/pages/Pages.tsx:127
 #: assets/js/getting-started/screens/quiz/Quiz.tsx:63
 #: assets/js/getting-started/screens/welcome/Welcome.tsx:53
@@ -1527,15 +1469,15 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: assets/js/getting-started/screens/currency/Currency.tsx:170
-msgid "Thousands Separator"
+#: assets/js/getting-started/screens/currency/Currency.tsx:146
+msgid "Thousand and Decimal separator can't be same."
 msgstr ""
 
-#: assets/js/getting-started/screens/currency/Currency.tsx:196
+#: assets/js/getting-started/screens/currency/Currency.tsx:158
 msgid "Number of Decimal"
 msgstr ""
 
-#: assets/js/getting-started/screens/currency/Currency.tsx:248
+#: assets/js/getting-started/screens/currency/Currency.tsx:195
 msgid "Next"
 msgstr ""
 
@@ -1678,8 +1620,36 @@ msgstr ""
 msgid "Clear All"
 msgstr ""
 
-#: assets/js/interactive/components/Sidebar.tsx:131
+#: assets/js/interactive/components/Sidebar.tsx:132
 msgid "Lessons"
+msgstr ""
+
+#: assets/js/interactive/components/qa/QaChat.tsx:121
+msgid "Send"
+msgstr ""
+
+#: assets/js/interactive/components/qa/QaChat.tsx:87
+msgid " answers"
+msgstr ""
+
+#: assets/js/interactive/components/qa/QuestionList.tsx:143
+msgid " Answers"
+msgstr ""
+
+#: assets/js/interactive/components/qa/QuestionList.tsx:165
+msgid "Please write your message"
+msgstr ""
+
+#: assets/js/interactive/components/qa/QuestionList.tsx:177
+msgid "Ask a Question"
+msgstr ""
+
+#: assets/js/interactive/components/qa/QuestionList.tsx:62
+msgid "Your question has been asked"
+msgstr ""
+
+#: assets/js/interactive/components/qa/QuestionList.tsx:63
+msgid "You will get your answer as soon as possible"
 msgstr ""
 
 #: assets/js/interactive/pages/lesson/InteractiveLesson.tsx:80

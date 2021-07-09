@@ -267,7 +267,7 @@ class SettingsController extends CrudController {
 						'primary_color'      => array(
 							'description' => __( 'Primary color.', 'masteriyo' ),
 							'type'        => 'string',
-							'format'      => 'color',
+							'format'      => 'hex-color',
 							'context'     => array( 'view', 'edit' ),
 						),
 						'theme'              => array(

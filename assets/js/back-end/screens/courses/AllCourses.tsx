@@ -33,6 +33,20 @@ const AllCourses = () => {
 		courseAPI.list(filterParams)
 	);
 
+	const tableStyles = {
+		th: {
+			pb: '6',
+			borderBottom: 'none',
+		},
+		'tr:nth-of-type(2n+1) td': {
+			bg: 'blue.50',
+		},
+
+		td: {
+			borderBottom: 'none',
+		},
+	};
+
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header />
@@ -40,7 +54,11 @@ const AllCourses = () => {
 			<Container maxW="container.xl">
 				<Box bg="white" p="12" shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
-						<Table>
+						<Table
+							variant="striped"
+							colorScheme="blue"
+							size="sm"
+							sx={tableStyles}>
 							<Thead>
 								<Tr>
 									<Th>{__('Title', 'masteriyo')}</Th>

@@ -925,6 +925,11 @@ class Course extends Model {
 		$this->set_prop( 'billing_cycle', masteriyo_strtolower( $value ) );
 	}
 
+	/*
+	|--------------------------------------------------------------------------
+	| Non-CRUD functions
+	|--------------------------------------------------------------------------
+	*/
 
 	/**
 	 * Returns whether or not the course is on sale.

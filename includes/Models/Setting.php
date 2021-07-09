@@ -76,6 +76,8 @@ class Setting extends Model {
 			'thousand_separator' => ',',
 			'decimal_separator'  => '.',
 			'number_of_decimals' => 2,
+			'primary_color' => '',
+			'theme'         => 'minimum',
 		),
 		'courses'  => array(
 			// General.
@@ -221,7 +223,6 @@ class Setting extends Model {
 		'advance'  => array(
 			'template_debug' => false,
 			'debug'          => false,
-			'style'          => 'simple',
 		),
 	);
 
@@ -1604,15 +1605,27 @@ class Setting extends Model {
 	}
 
 	/**
-	 * Get option advanced_style.
+	 * Get general primary color.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param string $context
 	 * @return string
 	 */
-	public function get_advance_style( $context = 'view' ) {
-		return $this->get_setting_prop( 'style', 'advance', $context );
+	public function get_general_primary_color( $context = 'view' ) {
+		return $this->get_setting_prop( 'primary_color', 'general', $context );
+	}
+
+	/**
+	 * Get general theme.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context
+	 * @return string
+	 */
+	public function get_general_theme( $context = 'view' ) {
+		return $this->get_setting_prop( 'theme', 'general', $context );
 	}
 
 	/**
@@ -2729,13 +2742,23 @@ class Setting extends Model {
 	}
 
 	/**
-	 * Set advance styles mode.
+	 * Set general primary color.
 	*
 	* @since 0.1.0
-	* @param string $style
+	* @param string $primary_color
 	*/
-	public function set_advance_style( $style ) {
-		$this->set_setting_prop( 'style', 'advance', $style );
+	public function set_general_primary_color( $primary_color ) {
+		$this->set_setting_prop( 'primary_color', 'general', $primary_color );
+	}
+
+	/**
+	 * Set general theme.
+	*
+	* @since 0.1.0
+	* @param string $theme
+	*/
+	public function set_general_theme( $theme ) {
+		$this->set_setting_prop( 'theme', 'general', $theme );
 	}
 
 	/**

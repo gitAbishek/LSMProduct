@@ -264,6 +264,17 @@ class SettingsController extends CrudController {
 							'default'     => 3,
 							'context'     => array( 'view', 'edit' ),
 						),
+						'primary_color'      => array(
+							'description' => __( 'Primary color.', 'masteriyo' ),
+							'type'        => 'string',
+							'format'      => 'color',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'theme'              => array(
+							'description' => __( 'Theme.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
 					),
 				),
 				'courses'  => array(
@@ -991,6 +1002,8 @@ class SettingsController extends CrudController {
 				'thousand_separator' => $setting->get_general_thousand_separator( $context ),
 				'decimal_separator'  => $setting->get_general_decimal_separator( $context ),
 				'number_of_decimals' => $setting->get_general_number_of_decimals( $context ),
+				'primary_color'      => $setting->get_general_primary_color( $context ),
+				'theme'              => $setting->get_general_theme( $context ),
 			),
 			'courses'  => array(
 				'enable_search'            => $setting->get_courses_enable_search( $context ),
@@ -1125,7 +1138,6 @@ class SettingsController extends CrudController {
 			'advance'  => array(
 				'template_debug' => $setting->get_advance_template_debug( $context ),
 				'debug'          => $setting->get_advance_debug( $context ),
-				'style'          => $setting->get_advance_style( $context ),
 			),
 		);
 	}
@@ -1184,6 +1196,14 @@ class SettingsController extends CrudController {
 
 		if ( isset( $request['general']['number_of_decimals'] ) ) {
 			$setting->set_general_number_of_decimals( $request['general']['number_of_decimals'] );
+		}
+
+		if ( isset( $request['general']['primary_color'] ) ) {
+			$setting->set_general_primary_color( $request['general']['primary_color'] );
+		}
+
+		if ( isset( $request['general']['theme'] ) ) {
+			$setting->set_general_theme( $request['general']['theme'] );
 		}
 
 		// Courses Setting.
@@ -1591,10 +1611,6 @@ class SettingsController extends CrudController {
 
 		if ( isset( $request['advance']['debug'] ) ) {
 			$setting->set_advance_debug( $request['advance']['debug'] );
-		}
-
-		if ( isset( $request['advance']['style'] ) ) {
-			$setting->set_advance_style( $request['advance']['style'] );
 		}
 
 		/**

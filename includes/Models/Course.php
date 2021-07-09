@@ -86,6 +86,7 @@ class Course extends Model {
 		'average_rating'     => 0,
 		'review_count'       => 0,
 		'enrollment_limit'   => 0,
+		'duration'           => 0,
 	);
 
 	/**
@@ -573,6 +574,17 @@ class Course extends Model {
 		return $this->get_prop( 'enrollment_limit', $context );
 	}
 
+	/**
+	 * Get course duration.
+	 *
+	 * @since 0.1.0
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 * @return int
+	 */
+	public function get_duration( $context = 'view' ) {
+		return $this->get_prop( 'duration', $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -857,6 +869,16 @@ class Course extends Model {
 	 */
 	public function set_enrollment_limit( $value ) {
 		$this->set_prop( 'enrollment_limit', absint( $value ) );
+	}
+
+	/**
+	 * Set the course duration (minutes).
+	 *
+	 * @since 0.1.0
+	 * @param int $value Course duration (minutes).
+	 */
+	public function set_duration( $value ) {
+		$this->set_prop( 'duration', absint( $value ) );
 	}
 
 	/**

@@ -36,6 +36,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		'date_on_sale_from' => '_date_on_sale_from',
 		'date_on_sale_to'   => '_date_on_sale_to',
 		'enrollment_limit'  => '_enrollment_limit',
+		'duration'          => '_duration',
 	);
 
 	/**

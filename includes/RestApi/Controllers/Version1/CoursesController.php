@@ -292,6 +292,7 @@ class CoursesController extends PostsController {
 			'sale_price'        => $course->get_sale_price( $context ),
 			'featured_image'    => $course->get_featured_image( $context ),
 			'enrollment_limit'  => $course->get_enrollment_limit( $context ),
+			'duration'  => $course->get_duration( $context ),
 			'categories'        => $this->get_taxonomy_terms( $course, 'cat' ),
 			'tags'              => $this->get_taxonomy_terms( $course, 'tag' ),
 			'difficulty'        => $this->get_taxonomy_terms( $course, 'difficulty' ),
@@ -630,6 +631,12 @@ class CoursesController extends PostsController {
 					'default'     => 0,
 					'context'     => array( 'view', 'edit' ),
 				),
+				'duration'           => array(
+					'description' => __( 'Course duration (minutes).', 'masteriyo' ),
+					'type'        => 'integer',
+					'default'     => 0,
+					'context'     => array( 'view', 'edit' ),
+				),
 				'meta_data'          => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
@@ -745,6 +752,11 @@ class CoursesController extends PostsController {
 		// Course enrollment limit.
 		if ( isset( $request['enrollment_limit'] ) ) {
 			$course->set_enrollment_limit( $request['enrollment_limit'] );
+		}
+
+		// Course duration.
+		if ( isset( $request['duration'] ) ) {
+			$course->set_duration( $request['duration'] );
 		}
 
 		// Course categories.

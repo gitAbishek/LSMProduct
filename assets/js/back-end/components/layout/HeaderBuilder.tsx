@@ -35,6 +35,10 @@ const HeaderBuilder: React.FC<Props> = (props) => {
 		alignItems: 'center',
 		fontWeight: 'medium',
 		fontSize: 'sm',
+		_hover: {
+			color: 'blue.500',
+			textDecor: 'none',
+		},
 	};
 
 	const navActiveStyles = {

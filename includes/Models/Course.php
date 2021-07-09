@@ -87,6 +87,8 @@ class Course extends Model {
 		'review_count'       => 0,
 		'enrollment_limit'   => 0,
 		'duration'           => 0,
+		'access_mode'        => 'open',
+		'billing_cycle'      => '',
 	);
 
 	/**
@@ -585,6 +587,28 @@ class Course extends Model {
 		return $this->get_prop( 'duration', $context );
 	}
 
+	/**
+	 * Get course access mode.
+	 *
+	 * @since 0.1.0
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 * @return int
+	 */
+	public function get_access_mode( $context = 'view' ) {
+		return $this->get_prop( 'access_mode', $context );
+	}
+
+	/**
+	 * Get course billing cycle.
+	 *
+	 * @since 0.1.0
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 * @return int
+	 */
+	public function get_billing_cycle( $context = 'view' ) {
+		return $this->get_prop( 'billing_cycle', $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -880,6 +904,27 @@ class Course extends Model {
 	public function set_duration( $value ) {
 		$this->set_prop( 'duration', absint( $value ) );
 	}
+
+	/**
+	 * Set the course access mode.
+	 *
+	 * @since 0.1.0
+	 * @param int $value Course access mode (open, need_registration, one_time, recurring ).
+	 */
+	public function set_access_mode( $value ) {
+		$this->set_prop( 'access_mode', $value );
+	}
+
+	/**
+	 * Set the course billing cycle.
+	 *
+	 * @since 0.1.0
+	 * @param int $value Course billing cycle (1d, 2w, 3m, 4y)
+	 */
+	public function set_billing_cycle( $value ) {
+		$this->set_prop( 'billing_cycle', masteriyo_strtolower( $value ) );
+	}
+
 
 	/**
 	 * Returns whether or not the course is on sale.

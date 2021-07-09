@@ -292,7 +292,9 @@ class CoursesController extends PostsController {
 			'sale_price'        => $course->get_sale_price( $context ),
 			'featured_image'    => $course->get_featured_image( $context ),
 			'enrollment_limit'  => $course->get_enrollment_limit( $context ),
-			'duration'  => $course->get_duration( $context ),
+			'duration'          => $course->get_duration( $context ),
+			'access_mode'       => $course->get_access_mode( $context ),
+			'billing_cycle'     => $course->get_billing_cycle( $context ),
 			'categories'        => $this->get_taxonomy_terms( $course, 'cat' ),
 			'tags'              => $this->get_taxonomy_terms( $course, 'tag' ),
 			'difficulty'        => $this->get_taxonomy_terms( $course, 'difficulty' ),
@@ -637,6 +639,18 @@ class CoursesController extends PostsController {
 					'default'     => 0,
 					'context'     => array( 'view', 'edit' ),
 				),
+				'access_mode'        => array(
+					'description' => __( 'Course access mode', 'masteriyo' ),
+					'type'        => 'string',
+					'default'     => 'open',
+					'enum'        => masteriyo_get_course_access_modes(),
+					'context'     => array( 'view', 'edit' ),
+				),
+				'billing_cycle'      => array(
+					'description' => __( 'Course billing cycle (1d, 2w, 3m, 4y)', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
 				'meta_data'          => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
@@ -757,6 +771,16 @@ class CoursesController extends PostsController {
 		// Course duration.
 		if ( isset( $request['duration'] ) ) {
 			$course->set_duration( $request['duration'] );
+		}
+
+		// Course access mode.
+		if ( isset( $request['access_mode'] ) ) {
+			$course->set_access_mode( $request['access_mode'] );
+		}
+
+		// Course billing cycle.
+		if ( isset( $request['billing_cycle'] ) ) {
+			$course->set_billing_cycle( $request['billing_cycle'] );
 		}
 
 		// Course categories.

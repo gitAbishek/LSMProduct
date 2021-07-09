@@ -81,3 +81,22 @@ function masteriyo_can_course_be_enrolled( $course, $user = null ) {
 
 	return apply_filters( 'masteriyo_can_course_be_enrolled', $can_be_enrolled, $course, $user );
 }
+
+/**
+ * Get masteriyo access modes.
+ *
+ * @since 0.1.0
+ * @return string
+ */
+function masteriyo_get_course_access_modes() {
+	return apply_filters(
+		'masteriyo_course_access_modes',
+		array(
+			'open',
+			'need_registration',
+			'one_time',
+			'recurring',
+			'close',
+		)
+	);
+}

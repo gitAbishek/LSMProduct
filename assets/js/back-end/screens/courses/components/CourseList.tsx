@@ -94,7 +94,7 @@ const CourseList: React.FC<Props> = (props) => {
 			<Td>
 				<Stack direction="row" spacing="2" alignItems="center">
 					<Avatar src={author.avatar_url} size="xs" />
-					<Text fontSize="sm" fontWeight="medium" color="gray.600">
+					<Text fontSize="xs" fontWeight="medium" color="gray.600">
 						{author.display_name}
 					</Text>
 				</Stack>
@@ -103,7 +103,7 @@ const CourseList: React.FC<Props> = (props) => {
 			<Td>
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
 					<Icon as={BiCalendar} />
-					<Text fontSize="sm" fontWeight="medium">
+					<Text fontSize="xs" fontWeight="medium">
 						{createdOnDate}
 					</Text>
 				</Stack>

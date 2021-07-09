@@ -11,9 +11,9 @@ import {
 	Tabs,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import ColorInput from 'Components/common/ColorInput';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import React, { useEffect, useState } from 'react';
-import { SketchPicker } from 'react-color';
 import ReactFlagsSelect from 'react-flags-select';
 import { useFormContext } from 'react-hook-form';
 import { GeneralSettingsMap } from '../../../types';
@@ -27,11 +27,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 	const [country, setCountry] = useState(generalData?.country);
 	const { register, setValue } = useFormContext();
 
-	const [color, setColor] = useState({ background: '#787DFF' });
-
-	const handleColorChange = (color: any) => {
-		setColor({ background: color.hex });
-	};
+	const [primaryColor, setPrimaryColor] = useState('#787DFF');
 
 	const tabStyles = {
 		justifyContent: 'flex-start',
@@ -182,10 +178,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 								<FormLabel minW="xs">
 									{__('Primary Color', 'masteriyo')}
 								</FormLabel>
-								<SketchPicker
-									onChange={handleColorChange}
-									color={color.background}
-								/>
+								<ColorInput color={primaryColor} setColor={setPrimaryColor} />
 							</FormControl>
 							<FormControl>
 								<FormLabel minW="xs">{__('Theme', 'masteriyo')}</FormLabel>

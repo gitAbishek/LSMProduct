@@ -89,10 +89,11 @@ class Course extends Model {
 		'duration'           => 0,
 		'access_mode'        => 'open',
 		'billing_cycle'      => '',
+		'show_curriculum'    => true,
 	);
 
 	/**
-	 * Get the course if ID
+	 * Constructor.
 	 *
 	 * @since 0.1.0
 	 *
@@ -609,6 +610,20 @@ class Course extends Model {
 		return $this->get_prop( 'billing_cycle', $context );
 	}
 
+	/**
+	 * Get course curriculum.
+	 *
+	 * True = Visible to all.
+	 * False = Visible to only enrollees.
+	 *
+	 * @since 0.1.0
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 * @return int
+	 */
+	public function get_show_curriculum( $context = 'view' ) {
+		return $this->get_prop( 'show_curriculum', $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -909,7 +924,7 @@ class Course extends Model {
 	 * Set the course access mode.
 	 *
 	 * @since 0.1.0
-	 * @param int $value Course access mode (open, need_registration, one_time, recurring ).
+	 * @param string $value Course access mode (open, need_registration, one_time, recurring ).
 	 */
 	public function set_access_mode( $value ) {
 		$this->set_prop( 'access_mode', $value );
@@ -919,10 +934,23 @@ class Course extends Model {
 	 * Set the course billing cycle.
 	 *
 	 * @since 0.1.0
-	 * @param int $value Course billing cycle (1d, 2w, 3m, 4y)
+	 * @param string $value Course billing cycle (1d, 2w, 3m, 4y)
 	 */
 	public function set_billing_cycle( $value ) {
 		$this->set_prop( 'billing_cycle', masteriyo_strtolower( $value ) );
+	}
+
+	/**
+	 * Set the course curriculum.
+	 *
+	 * True = Visible to all.
+	 * False = Visible to only enrollees.
+	 *
+	 * @since 0.1.0
+	 * @param string $value
+	 */
+	public function set_show_curriculum( $value ) {
+		$this->set_prop( 'show_curriculum', masteriyo_string_to_bool( $value ) );
 	}
 
 	/*

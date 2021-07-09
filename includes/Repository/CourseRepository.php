@@ -39,6 +39,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		'duration'          => '_duration',
 		'access_mode'       => '_access_mode',
 		'billing_cycle'     => '_billing_cycle',
+		'show_curriculum'   => '_show_curriculum',
 	);
 
 	/**
@@ -322,7 +323,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 				$terms[] = 'featured';
 			}
 
-			$rating = min( 5, Number::round( $course->get_average_rating(), 0 ) );
+			$rating = min( 5, masteriyo_round( $course->get_average_rating(), 0 ) );
 
 			if ( $rating > 0 ) {
 				$terms[] = 'rated-' . $rating;

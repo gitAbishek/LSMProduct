@@ -33,7 +33,7 @@ msgid "Add New Course"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:100
-#: assets/js/back-end/screens/builder/Builder.tsx:150
+#: assets/js/back-end/screens/builder/Builder.tsx:153
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:126
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:99
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:103
@@ -48,19 +48,19 @@ msgid "Preview"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:120
-#: assets/js/back-end/screens/builder/Builder.tsx:183
+#: assets/js/back-end/screens/builder/Builder.tsx:186
 #: assets/js/back-end/screens/sections/components/EditSection.tsx:97
 msgid "Save"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:71
-#: assets/js/back-end/screens/builder/Builder.tsx:142
+#: assets/js/back-end/screens/builder/Builder.tsx:145
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:118
 msgid "Course"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:86
-#: assets/js/back-end/screens/builder/Builder.tsx:146
+#: assets/js/back-end/screens/builder/Builder.tsx:149
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:122
 msgid "Builder"
 msgstr ""
@@ -77,7 +77,7 @@ msgstr ""
 msgid "Back to Courses"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:170
+#: assets/js/back-end/screens/builder/Builder.tsx:173
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:170
 #: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:171
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:165
@@ -86,19 +86,19 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:182
+#: assets/js/back-end/screens/builder/Builder.tsx:185
 msgid "Publish"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:192
+#: assets/js/back-end/screens/builder/Builder.tsx:195
 msgid "Edit Course: "
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:87
+#: assets/js/back-end/screens/builder/Builder.tsx:90
 msgid " is updated successfully."
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:88
+#: assets/js/back-end/screens/builder/Builder.tsx:91
 msgid "You can keep editing it"
 msgstr ""
 

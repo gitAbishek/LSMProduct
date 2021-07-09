@@ -54,6 +54,9 @@ const Builder: React.FC = () => {
 		py: '6',
 		px: 0,
 		mx: 4,
+		_hover: {
+			color: 'blue.500',
+		},
 	};
 
 	const tabPanelStyles = {

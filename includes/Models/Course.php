@@ -85,6 +85,7 @@ class Course extends Model {
 		'rating_counts'      => array(),
 		'average_rating'     => 0,
 		'review_count'       => 0,
+		'enrollment_limit'   => 0,
 	);
 
 	/**
@@ -561,6 +562,17 @@ class Course extends Model {
 		return $this->get_prop( 'review_count', $context );
 	}
 
+	/**
+	 * Get the enrollment limit (maximum number of students allowed to enroll).
+	 *
+	 * @since 0.1.0
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 * @return int
+	 */
+	public function get_enrollment_limit( $context = 'view' ) {
+		return $this->get_prop( 'enrollment_limit', $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -807,7 +819,6 @@ class Course extends Model {
 		$this->set_prop( 'featured', Utils::string_to_bool( $featured ) );
 	}
 
-
 	/**
 	 * Set rating counts. Read only.
 	 *
@@ -836,6 +847,16 @@ class Course extends Model {
 	 */
 	public function set_review_count( $count ) {
 		$this->set_prop( 'review_count', absint( $count ) );
+	}
+
+	/**
+	 * Set the enrollment limit. (maximum number of students allowed )
+	 *
+	 * @since 0.1.0
+	 * @param int $value Enrollment limit.
+	 */
+	public function set_enrollment_limit( $value ) {
+		$this->set_prop( 'enrollment_limit', absint( $value ) );
 	}
 
 	/**

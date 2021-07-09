@@ -291,6 +291,7 @@ class CoursesController extends PostsController {
 			'regular_price'     => $course->get_regular_price( $context ),
 			'sale_price'        => $course->get_sale_price( $context ),
 			'featured_image'    => $course->get_featured_image( $context ),
+			'enrollment_limit'  => $course->get_enrollment_limit( $context ),
 			'categories'        => $this->get_taxonomy_terms( $course, 'cat' ),
 			'tags'              => $this->get_taxonomy_terms( $course, 'tag' ),
 			'difficulty'        => $this->get_taxonomy_terms( $course, 'difficulty' ),
@@ -623,6 +624,12 @@ class CoursesController extends PostsController {
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
+				'enrollment_limit'   => array(
+					'description' => __( 'Course enrollment limit. Default unlimited.', 'masteriyo' ),
+					'type'        => 'integer',
+					'default'     => 0,
+					'context'     => array( 'view', 'edit' ),
+				),
 				'meta_data'          => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
@@ -733,6 +740,11 @@ class CoursesController extends PostsController {
 		// Course featured image.
 		if ( isset( $request['featured_image'] ) ) {
 			$course->set_featured_image( $request['featured_image'] );
+		}
+
+		// Course enrollment limit.
+		if ( isset( $request['enrollment_limit'] ) ) {
+			$course->set_enrollment_limit( $request['enrollment_limit'] );
 		}
 
 		// Course categories.

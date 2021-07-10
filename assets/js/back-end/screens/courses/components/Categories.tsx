@@ -1,11 +1,20 @@
-import { Center, FormControl, FormLabel, Spinner } from '@chakra-ui/react';
+import {
+	Button,
+	ButtonGroup,
+	Center,
+	FormControl,
+	FormLabel,
+	Icon,
+	Spinner,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import Select from 'Components/common/Select';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import { BiPlus } from 'react-icons/bi';
 import { useQuery } from 'react-query';
-
 import urls from '../../../constants/urls';
+import { CreateCatModal } from '../../../context/CreateCatProvider';
 import API from '../../../utils/api';
 
 interface Props {
@@ -15,6 +24,8 @@ interface Props {
 const Categories: React.FC<Props> = (props) => {
 	const { defaultValue } = props;
 	const [categoriesList, setCategoriesList] = useState<any>(null);
+	const { setIsCreateCatModalOpen } = useContext(CreateCatModal);
+
 	const categoryAPI = new API(urls.categories);
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list(), {
 		retry: false,
@@ -61,6 +72,15 @@ const Categories: React.FC<Props> = (props) => {
 						control={control}
 						name="categories"
 					/>
+					<ButtonGroup mt="4">
+						<Button
+							variant="link"
+							leftIcon={<Icon fontSize="xl" as={BiPlus} />}
+							onClick={() => setIsCreateCatModalOpen(true)}
+							_hover={{ color: 'blue.500' }}>
+							{__('Add New Category', 'masteriyo')}
+						</Button>
+					</ButtonGroup>
 				</FormControl>
 			)}
 		</>

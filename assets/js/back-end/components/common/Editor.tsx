@@ -6,10 +6,15 @@ import React from 'react';
 import {
 	BiBold,
 	BiCode,
+	BiCodeBlock,
 	BiItalic,
+	BiListUl,
+	BiMinus,
 	BiParagraph,
 	BiStrikethrough,
+	BiSubdirectoryLeft,
 } from 'react-icons/bi';
+import { ImQuotesLeft } from 'react-icons/im';
 
 interface Props {
 	name: `${string}`;
@@ -124,35 +129,50 @@ const MenuBar = ({ editor }: any) => {
 				}>
 				h6
 			</Button>
-
-			<Button
+			<IconButton
+				variant="unstyled"
+				aria-label={__('Bold', 'masteriyo')}
+				sx={buttonStyles(editor.isActive('bulletList'))}
+				icon={<Icon as={BiListUl} />}
 				onClick={() => editor.chain().focus().toggleBulletList().run()}
-				className={editor.isActive('bulletList') ? 'is-active' : ''}>
-				bullet list
-			</Button>
-			<Button
+			/>
+			<IconButton
+				variant="unstyled"
+				aria-label={__('Bold', 'masteriyo')}
+				sx={buttonStyles(editor.isActive('orderedList'))}
+				icon={<Icon as={BiListUl} />}
 				onClick={() => editor.chain().focus().toggleOrderedList().run()}
-				className={editor.isActive('orderedList') ? 'is-active' : ''}>
-				ordered list
-			</Button>
-			<Button
+			/>
+
+			<IconButton
+				variant="unstyled"
+				aria-label={__('Bold', 'masteriyo')}
+				sx={buttonStyles(editor.isActive('codeBlock'))}
+				icon={<Icon as={BiCodeBlock} />}
 				onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-				className={editor.isActive('codeBlock') ? 'is-active' : ''}>
-				code block
-			</Button>
-			<Button
+			/>
+
+			<IconButton
+				variant="unstyled"
+				aria-label={__('Bold', 'masteriyo')}
+				sx={buttonStyles(editor.isActive('blockquote'))}
+				icon={<Icon as={ImQuotesLeft} />}
 				onClick={() => editor.chain().focus().toggleBlockquote().run()}
-				className={editor.isActive('blockquote') ? 'is-active' : ''}>
-				blockquote
-			</Button>
-			<Button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-				horizontal rule
-			</Button>
-			<Button onClick={() => editor.chain().focus().setHardBreak().run()}>
-				hard break
-			</Button>
-			<Button onClick={() => editor.chain().focus().undo().run()}>undo</Button>
-			<Button onClick={() => editor.chain().focus().redo().run()}>redo</Button>
+			/>
+
+			<IconButton
+				variant="unstyled"
+				aria-label={__('Bold', 'masteriyo')}
+				icon={<Icon as={BiMinus} />}
+				onClick={() => editor.chain().focus().setHorizontalRule().run()}
+			/>
+
+			<IconButton
+				variant="unstyled"
+				aria-label={__('Bold', 'masteriyo')}
+				icon={<Icon as={BiSubdirectoryLeft} />}
+				onClick={() => editor.chain().focus().setHardBreak().run()}
+			/>
 		</Stack>
 	);
 };

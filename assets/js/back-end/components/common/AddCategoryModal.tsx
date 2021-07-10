@@ -8,15 +8,19 @@ import {
 	ModalHeader,
 	ModalOverlay,
 	Stack,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import { pickBy } from 'object-pickby';
 import React, { useContext } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from 'react-query';
+import urls from '../../constants/urls';
 import { CreateCatModal } from '../../context/CreateCatProvider';
 import DescriptionInput from '../../screens/course-categories/components/DescriptionInput';
 import NameInput from '../../screens/course-categories/components/NameInput';
 import SlugInput from '../../screens/course-categories/components/SlugInput';
+import API from '../../utils/api';
 
 interface AddCatData {
 	name: string;
@@ -28,10 +32,33 @@ const AddCategoryModal = () => {
 	const { isCreateCatModalOpen, setIsCreateCatModalOpen } =
 		useContext(CreateCatModal);
 	const methods = useForm();
+	const categoryAPI = new API(urls.categories);
+	const toast = useToast();
+	const queryClient = useQueryClient();
+
+	const createCategory = useMutation(
+		(data: object) => categoryAPI.store(data),
+		{
+			onSuccess: () => {
+				toast({
+					title: __('Category Added', 'masteriyo'),
+					description: __(
+						'You can select the new category form dropdown',
+						'masteriyo'
+					),
+					isClosable: true,
+					status: 'success',
+				});
+				queryClient.invalidateQueries('courseCategoriesList');
+				setIsCreateCatModalOpen(false);
+			},
+		}
+	);
 
 	const onSubmit = (data: AddCatData) => {
 		console.log(data);
 		const newData = pickBy(data, (param) => param.length > 0);
+		createCategory.mutate(newData);
 	};
 
 	return (

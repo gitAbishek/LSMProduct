@@ -93,25 +93,38 @@ const MenuBar = ({ editor }: any) => {
 				h2
 			</Button>
 			<Button
-				onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-				className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}>
+				variant="unstyled"
+				sx={buttonStyles(editor.isActive('heading', { level: 3 }))}
+				onClick={() =>
+					editor.chain().focus().toggleHeading({ level: 3 }).run()
+				}>
 				h3
 			</Button>
 			<Button
-				onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-				className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}>
+				variant="unstyled"
+				sx={buttonStyles(editor.isActive('heading', { level: 4 }))}
+				onClick={() =>
+					editor.chain().focus().toggleHeading({ level: 4 }).run()
+				}>
 				h4
 			</Button>
 			<Button
-				onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-				className={editor.isActive('heading', { level: 5 }) ? 'is-active' : ''}>
+				variant="unstyled"
+				sx={buttonStyles(editor.isActive('heading', { level: 5 }))}
+				onClick={() =>
+					editor.chain().focus().toggleHeading({ level: 5 }).run()
+				}>
 				h5
 			</Button>
 			<Button
-				onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-				className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}>
+				variant="unstyled"
+				sx={buttonStyles(editor.isActive('heading', { level: 6 }))}
+				onClick={() =>
+					editor.chain().focus().toggleHeading({ level: 6 }).run()
+				}>
 				h6
 			</Button>
+
 			<Button
 				onClick={() => editor.chain().focus().toggleBulletList().run()}
 				className={editor.isActive('bulletList') ? 'is-active' : ''}>

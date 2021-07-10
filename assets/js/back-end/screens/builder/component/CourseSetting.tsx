@@ -33,8 +33,6 @@ const CourseSetting: React.FC<Props> = (props) => {
 
 	const [displayValue, setDisplayValue] = useState('1');
 
-	console.log(displayValue);
-
 	const {
 		register,
 		formState: { errors },

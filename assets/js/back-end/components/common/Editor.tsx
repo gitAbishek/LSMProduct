@@ -1,4 +1,11 @@
-import { Button, Icon, IconButton, Stack } from '@chakra-ui/react';
+import {
+	Button,
+	Center,
+	Divider,
+	Icon,
+	IconButton,
+	Stack,
+} from '@chakra-ui/react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { __ } from '@wordpress/i18n';
@@ -22,16 +29,25 @@ interface Props {
 	defaultValue?: string;
 }
 const MenuBar = ({ editor }: any) => {
-	const buttonStyles = (isActive: boolean) => {
+	const buttonStyles = (isActive?: boolean) => {
 		if (isActive) {
 			return {
 				bg: 'blue.500',
 				color: 'white',
+				fontSize: 'sm',
+				minW: 'auto',
+				width: '30px',
+				height: '30px',
 			};
 		} else {
 			return {
 				bg: 'transparent',
 				color: 'gray.700',
+				fontSize: 'sm',
+				p: '1',
+				minW: 'auto',
+				width: '30px',
+				height: '30px',
 			};
 		}
 	};
@@ -41,7 +57,7 @@ const MenuBar = ({ editor }: any) => {
 	}
 
 	return (
-		<Stack direction="row" spacing="0">
+		<Stack direction="row" spacing="0" align="center">
 			<IconButton
 				variant="unstyled"
 				aria-label={__('Bold', 'masteriyo')}
@@ -51,7 +67,7 @@ const MenuBar = ({ editor }: any) => {
 			/>
 			<IconButton
 				variant="unstyled"
-				aria-label={__('Bold', 'masteriyo')}
+				aria-label={__('Italic', 'masteriyo')}
 				sx={buttonStyles(editor.isActive('italic'))}
 				icon={<Icon as={BiItalic} />}
 				onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -59,15 +75,18 @@ const MenuBar = ({ editor }: any) => {
 
 			<IconButton
 				variant="unstyled"
-				aria-label={__('Bold', 'masteriyo')}
+				aria-label={__('Strike', 'masteriyo')}
 				sx={buttonStyles(editor.isActive('strike'))}
 				icon={<Icon as={BiStrikethrough} />}
 				onClick={() => editor.chain().focus().toggleStrike().run()}
 			/>
+			<Center height="20px">
+				<Divider orientation="vertical" />
+			</Center>
 
 			<IconButton
 				variant="unstyled"
-				aria-label={__('Bold', 'masteriyo')}
+				aria-label={__('Code', 'masteriyo')}
 				sx={buttonStyles(editor.isActive('code'))}
 				icon={<Icon as={BiCode} />}
 				onClick={() => editor.chain().focus().toggleCode().run()}
@@ -75,11 +94,15 @@ const MenuBar = ({ editor }: any) => {
 
 			<IconButton
 				variant="unstyled"
-				aria-label={__('Bold', 'masteriyo')}
+				aria-label={__('Paragraph', 'masteriyo')}
 				sx={buttonStyles(editor.isActive('paragraph'))}
 				icon={<Icon as={BiParagraph} />}
 				onClick={() => editor.chain().focus().setParagraph().run()}
 			/>
+
+			<Center height="20px">
+				<Divider orientation="vertical" />
+			</Center>
 
 			<Button
 				variant="unstyled"
@@ -131,14 +154,14 @@ const MenuBar = ({ editor }: any) => {
 			</Button>
 			<IconButton
 				variant="unstyled"
-				aria-label={__('Bold', 'masteriyo')}
+				aria-label={__('Bullet List', 'masteriyo')}
 				sx={buttonStyles(editor.isActive('bulletList'))}
 				icon={<Icon as={BiListUl} />}
 				onClick={() => editor.chain().focus().toggleBulletList().run()}
 			/>
 			<IconButton
 				variant="unstyled"
-				aria-label={__('Bold', 'masteriyo')}
+				aria-label={__('Ordered List', 'masteriyo')}
 				sx={buttonStyles(editor.isActive('orderedList'))}
 				icon={<Icon as={BiListUl} />}
 				onClick={() => editor.chain().focus().toggleOrderedList().run()}
@@ -146,7 +169,7 @@ const MenuBar = ({ editor }: any) => {
 
 			<IconButton
 				variant="unstyled"
-				aria-label={__('Bold', 'masteriyo')}
+				aria-label={__('Code Block', 'masteriyo')}
 				sx={buttonStyles(editor.isActive('codeBlock'))}
 				icon={<Icon as={BiCodeBlock} />}
 				onClick={() => editor.chain().focus().toggleCodeBlock().run()}
@@ -154,7 +177,7 @@ const MenuBar = ({ editor }: any) => {
 
 			<IconButton
 				variant="unstyled"
-				aria-label={__('Bold', 'masteriyo')}
+				aria-label={__('Blockquote', 'masteriyo')}
 				sx={buttonStyles(editor.isActive('blockquote'))}
 				icon={<Icon as={ImQuotesLeft} />}
 				onClick={() => editor.chain().focus().toggleBlockquote().run()}
@@ -162,14 +185,16 @@ const MenuBar = ({ editor }: any) => {
 
 			<IconButton
 				variant="unstyled"
-				aria-label={__('Bold', 'masteriyo')}
+				aria-label={__('Horizontal Rule', 'masteriyo')}
+				sx={buttonStyles()}
 				icon={<Icon as={BiMinus} />}
 				onClick={() => editor.chain().focus().setHorizontalRule().run()}
 			/>
 
 			<IconButton
 				variant="unstyled"
-				aria-label={__('Bold', 'masteriyo')}
+				aria-label={__('Hard Break', 'masteriyo')}
+				sx={buttonStyles()}
 				icon={<Icon as={BiSubdirectoryLeft} />}
 				onClick={() => editor.chain().focus().setHardBreak().run()}
 			/>

@@ -52,6 +52,14 @@ const AddCategoryModal = () => {
 				setIsCreateCatModalOpen(false);
 				methods.reset();
 			},
+			onError: (error: any) => {
+				toast({
+					title: __('Failed to create category', 'masteriyo'),
+					description: `${error.response?.data?.message}`,
+					isClosable: true,
+					status: 'error',
+				});
+			},
 		}
 	);
 

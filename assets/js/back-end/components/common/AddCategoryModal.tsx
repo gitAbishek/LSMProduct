@@ -11,7 +11,6 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { pickBy } from 'object-pickby';
 import React, { useContext } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
@@ -49,16 +48,15 @@ const AddCategoryModal = () => {
 					isClosable: true,
 					status: 'success',
 				});
-				queryClient.invalidateQueries('courseCategoriesList');
+				queryClient.invalidateQueries('categoryLists');
 				setIsCreateCatModalOpen(false);
+				methods.reset();
 			},
 		}
 	);
 
 	const onSubmit = (data: AddCatData) => {
-		console.log(data);
-		const newData = pickBy(data, (param) => param.length > 0);
-		createCategory.mutate(newData);
+		createCategory.mutate(data);
 	};
 
 	return (
@@ -81,7 +79,11 @@ const AddCategoryModal = () => {
 						</ModalBody>
 
 						<ModalFooter>
-							<Button colorScheme="blue" type="submit" isFullWidth>
+							<Button
+								colorScheme="blue"
+								type="submit"
+								isFullWidth
+								isLoading={createCategory.isLoading}>
 								{__('Add new Category', 'masteriyo')}
 							</Button>
 						</ModalFooter>

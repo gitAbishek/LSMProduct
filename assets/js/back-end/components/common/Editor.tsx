@@ -114,10 +114,16 @@ const Editor: React.FC<Props> = (props) => {
 		content: '<p> Your content </p>',
 	});
 
+	const showJson = () => {
+		console.log(editor?.getHTML());
+	};
 	return (
 		<>
 			<MenuBar editor={editor} />
 			<EditorContent editor={editor} />
+			<Button colorScheme="blue" onClick={showJson}>
+				Show Code
+			</Button>
 		</>
 	);
 };

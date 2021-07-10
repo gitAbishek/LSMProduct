@@ -3,7 +3,7 @@ import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiBold } from 'react-icons/bi';
+import { BiBold, BiItalic, BiStrikethrough } from 'react-icons/bi';
 
 interface Props {
 	name: `${string}`;
@@ -38,16 +38,22 @@ const MenuBar = ({ editor }: any) => {
 				icon={<Icon as={BiBold} />}
 				onClick={() => editor.chain().focus().toggleBold().run()}
 			/>
-			<Button
+			<IconButton
+				variant="unstyled"
+				aria-label={__('Bold', 'masteriyo')}
+				sx={buttonStyles(editor.isActive('italic'))}
+				icon={<Icon as={BiItalic} />}
 				onClick={() => editor.chain().focus().toggleItalic().run()}
-				className={editor.isActive('italic') ? 'is-active' : ''}>
-				italic
-			</Button>
-			<Button
+			/>
+
+			<IconButton
+				variant="unstyled"
+				aria-label={__('Bold', 'masteriyo')}
+				sx={buttonStyles(editor.isActive('strike'))}
+				icon={<Icon as={BiStrikethrough} />}
 				onClick={() => editor.chain().focus().toggleStrike().run()}
-				className={editor.isActive('strike') ? 'is-active' : ''}>
-				strike
-			</Button>
+			/>
+
 			<Button
 				onClick={() => editor.chain().focus().toggleCode().run()}
 				className={editor.isActive('code') ? 'is-active' : ''}>

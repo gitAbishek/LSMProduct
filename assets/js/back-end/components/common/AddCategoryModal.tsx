@@ -71,7 +71,8 @@ const AddCategoryModal = () => {
 		<Modal
 			isOpen={isCreateCatModalOpen}
 			onClose={() => setIsCreateCatModalOpen(false)}
-			size="xl">
+			size="xl"
+			isCentered>
 			<ModalOverlay />
 			<ModalContent>
 				<FormProvider {...methods}>

@@ -1,7 +1,9 @@
-import { Button } from '@chakra-ui/react';
+import { Button, Icon, IconButton, Stack } from '@chakra-ui/react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import { __ } from '@wordpress/i18n';
 import React from 'react';
+import { BiBold } from 'react-icons/bi';
 
 interface Props {
 	name: `${string}`;
@@ -9,17 +11,33 @@ interface Props {
 	defaultValue?: string;
 }
 const MenuBar = ({ editor }: any) => {
+	const buttonStyles = (isActive: boolean) => {
+		if (isActive) {
+			return {
+				bg: 'blue.500',
+				color: 'white',
+			};
+		} else {
+			return {
+				bg: 'transparent',
+				color: 'gray.700',
+			};
+		}
+	};
+
 	if (!editor) {
 		return null;
 	}
 
 	return (
-		<>
-			<Button
+		<Stack direction="row" spacing="0">
+			<IconButton
+				variant="unstyled"
+				aria-label={__('Bold', 'masteriyo')}
+				sx={buttonStyles(editor.isActive('bold'))}
+				icon={<Icon as={BiBold} />}
 				onClick={() => editor.chain().focus().toggleBold().run()}
-				className={editor.isActive('bold') ? 'is-active' : ''}>
-				bold
-			</Button>
+			/>
 			<Button
 				onClick={() => editor.chain().focus().toggleItalic().run()}
 				className={editor.isActive('italic') ? 'is-active' : ''}>
@@ -104,7 +122,7 @@ const MenuBar = ({ editor }: any) => {
 			</Button>
 			<Button onClick={() => editor.chain().focus().undo().run()}>undo</Button>
 			<Button onClick={() => editor.chain().focus().redo().run()}>redo</Button>
-		</>
+		</Stack>
 	);
 };
 

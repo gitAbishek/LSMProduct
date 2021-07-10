@@ -3,7 +3,13 @@ import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiBold, BiItalic, BiStrikethrough } from 'react-icons/bi';
+import {
+	BiBold,
+	BiCode,
+	BiItalic,
+	BiParagraph,
+	BiStrikethrough,
+} from 'react-icons/bi';
 
 interface Props {
 	name: `${string}`;
@@ -54,30 +60,36 @@ const MenuBar = ({ editor }: any) => {
 				onClick={() => editor.chain().focus().toggleStrike().run()}
 			/>
 
-			<Button
+			<IconButton
+				variant="unstyled"
+				aria-label={__('Bold', 'masteriyo')}
+				sx={buttonStyles(editor.isActive('code'))}
+				icon={<Icon as={BiCode} />}
 				onClick={() => editor.chain().focus().toggleCode().run()}
-				className={editor.isActive('code') ? 'is-active' : ''}>
-				code
-			</Button>
-			<Button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-				clear marks
-			</Button>
-			<Button onClick={() => editor.chain().focus().clearNodes().run()}>
-				clear nodes
-			</Button>
-			<Button
+			/>
+
+			<IconButton
+				variant="unstyled"
+				aria-label={__('Bold', 'masteriyo')}
+				sx={buttonStyles(editor.isActive('paragraph'))}
+				icon={<Icon as={BiParagraph} />}
 				onClick={() => editor.chain().focus().setParagraph().run()}
-				className={editor.isActive('paragraph') ? 'is-active' : ''}>
-				paragraph
-			</Button>
+			/>
+
 			<Button
-				onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-				className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}>
+				variant="unstyled"
+				sx={buttonStyles(editor.isActive('heading', { level: 1 }))}
+				onClick={() =>
+					editor.chain().focus().toggleHeading({ level: 1 }).run()
+				}>
 				h1
 			</Button>
 			<Button
-				onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-				className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}>
+				variant="unstyled"
+				sx={buttonStyles(editor.isActive('heading', { level: 2 }))}
+				onClick={() =>
+					editor.chain().focus().toggleHeading({ level: 2 }).run()
+				}>
 				h2
 			</Button>
 			<Button
@@ -135,7 +147,7 @@ const MenuBar = ({ editor }: any) => {
 const Editor: React.FC<Props> = (props) => {
 	const editor = useEditor({
 		extensions: [StarterKit],
-		content: '<p> Your content </p>',
+		content: 'Your content',
 	});
 
 	const showJson = () => {

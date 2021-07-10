@@ -10,6 +10,7 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import { pickBy } from 'object-pickby';
 import React, { useContext } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { CreateCatModal } from '../../context/CreateCatProvider';
@@ -17,13 +18,20 @@ import DescriptionInput from '../../screens/course-categories/components/Descrip
 import NameInput from '../../screens/course-categories/components/NameInput';
 import SlugInput from '../../screens/course-categories/components/SlugInput';
 
+interface AddCatData {
+	name: string;
+	slug: string;
+	description: string;
+}
+
 const AddCategoryModal = () => {
 	const { isCreateCatModalOpen, setIsCreateCatModalOpen } =
 		useContext(CreateCatModal);
 	const methods = useForm();
 
-	const onSubmit = (data: any) => {
+	const onSubmit = (data: AddCatData) => {
 		console.log(data);
+		const newData = pickBy(data, (param) => param.length > 0);
 	};
 
 	return (

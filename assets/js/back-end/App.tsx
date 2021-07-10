@@ -1,6 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import CreateCatModalProvicer from './context/CreateCatProvider';
 import Router from './router/Router';
 import theme from './theme/theme';
 
@@ -18,7 +19,9 @@ const App = () => {
 	return (
 		<ChakraProvider theme={theme}>
 			<QueryClientProvider client={queryClient}>
-				<Router />
+				<CreateCatModalProvicer>
+					<Router />
+				</CreateCatModalProvicer>
 			</QueryClientProvider>
 		</ChakraProvider>
 	);

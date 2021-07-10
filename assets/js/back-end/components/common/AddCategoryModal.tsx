@@ -13,6 +13,7 @@ import { __ } from '@wordpress/i18n';
 import React, { useContext } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { CreateCatModal } from '../../context/CreateCatProvider';
+import DescriptionInput from '../../screens/course-categories/components/DescriptionInput';
 import NameInput from '../../screens/course-categories/components/NameInput';
 import SlugInput from '../../screens/course-categories/components/SlugInput';
 
@@ -28,7 +29,8 @@ const AddCategoryModal = () => {
 	return (
 		<Modal
 			isOpen={isCreateCatModalOpen}
-			onClose={() => setIsCreateCatModalOpen(false)}>
+			onClose={() => setIsCreateCatModalOpen(false)}
+			size="xl">
 			<ModalOverlay />
 			<ModalContent>
 				<FormProvider {...methods}>
@@ -39,6 +41,7 @@ const AddCategoryModal = () => {
 							<Stack direction="column" spacing="4">
 								<NameInput />
 								<SlugInput />
+								<DescriptionInput />
 							</Stack>
 						</ModalBody>
 

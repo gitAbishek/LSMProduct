@@ -49,7 +49,7 @@ const MenuBar = ({ editor }: any) => {
 	};
 
 	const buttonCommonStyles = (isActive?: boolean) => {
-		mergeDeep(buttonStyles(isActive), {
+		return mergeDeep(buttonStyles(isActive), {
 			fontSize: 'sm',
 			minW: 'auto',
 			width: '30px',
@@ -67,14 +67,14 @@ const MenuBar = ({ editor }: any) => {
 			<IconButton
 				variant="unstyled"
 				aria-label={__('Bold', 'masteriyo')}
-				sx={buttonStyles(editor.isActive('bold'))}
+				sx={buttonCommonStyles(editor.isActive('bold'))}
 				icon={<Icon as={BiBold} />}
 				onClick={() => editor.chain().focus().toggleBold().run()}
 			/>
 			<IconButton
 				variant="unstyled"
 				aria-label={__('Italic', 'masteriyo')}
-				sx={buttonStyles(editor.isActive('italic'))}
+				sx={buttonCommonStyles(editor.isActive('italic'))}
 				icon={<Icon as={BiItalic} />}
 				onClick={() => editor.chain().focus().toggleItalic().run()}
 			/>
@@ -82,7 +82,7 @@ const MenuBar = ({ editor }: any) => {
 			<IconButton
 				variant="unstyled"
 				aria-label={__('Strike', 'masteriyo')}
-				sx={buttonStyles(editor.isActive('strike'))}
+				sx={buttonCommonStyles(editor.isActive('strike'))}
 				icon={<Icon as={BiStrikethrough} />}
 				onClick={() => editor.chain().focus().toggleStrike().run()}
 			/>
@@ -93,7 +93,7 @@ const MenuBar = ({ editor }: any) => {
 			<IconButton
 				variant="unstyled"
 				aria-label={__('Code', 'masteriyo')}
-				sx={buttonStyles(editor.isActive('code'))}
+				sx={buttonCommonStyles(editor.isActive('code'))}
 				icon={<Icon as={BiCode} />}
 				onClick={() => editor.chain().focus().toggleCode().run()}
 			/>
@@ -101,7 +101,7 @@ const MenuBar = ({ editor }: any) => {
 			<IconButton
 				variant="unstyled"
 				aria-label={__('Paragraph', 'masteriyo')}
-				sx={buttonStyles(editor.isActive('paragraph'))}
+				sx={buttonCommonStyles(editor.isActive('paragraph'))}
 				icon={<Icon as={BiParagraph} />}
 				onClick={() => editor.chain().focus().setParagraph().run()}
 			/>
@@ -112,11 +112,11 @@ const MenuBar = ({ editor }: any) => {
 			<Menu>
 				<MenuButton
 					as={Button}
-					variant="
+					variant=" P
 				unstyled">
 					Headings
 				</MenuButton>
-				<MenuList>
+				<MenuList fontSize="xs">
 					<MenuItem
 						sx={buttonStyles(editor.isActive('heading', { level: 1 }))}
 						onClick={() =>
@@ -168,14 +168,14 @@ const MenuBar = ({ editor }: any) => {
 			<IconButton
 				variant="unstyled"
 				aria-label={__('Bullet List', 'masteriyo')}
-				sx={buttonStyles(editor.isActive('bulletList'))}
+				sx={buttonCommonStyles(editor.isActive('bulletList'))}
 				icon={<Icon as={BiListUl} />}
 				onClick={() => editor.chain().focus().toggleBulletList().run()}
 			/>
 			<IconButton
 				variant="unstyled"
 				aria-label={__('Ordered List', 'masteriyo')}
-				sx={buttonStyles(editor.isActive('orderedList'))}
+				sx={buttonCommonStyles(editor.isActive('orderedList'))}
 				icon={<Icon as={BiListUl} />}
 				onClick={() => editor.chain().focus().toggleOrderedList().run()}
 			/>
@@ -183,7 +183,7 @@ const MenuBar = ({ editor }: any) => {
 			<IconButton
 				variant="unstyled"
 				aria-label={__('Code Block', 'masteriyo')}
-				sx={buttonStyles(editor.isActive('codeBlock'))}
+				sx={buttonCommonStyles(editor.isActive('codeBlock'))}
 				icon={<Icon as={BiCodeBlock} />}
 				onClick={() => editor.chain().focus().toggleCodeBlock().run()}
 			/>

@@ -17,50 +17,17 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 * @param Model $setting Setting object.
 	 */
 	public function create( Model &$setting ) {
-
-		$changes         = array();
-		$setting_changes = $setting->get_changes();
-		$group_changes   = array_keys( $setting_changes );
-
-		foreach ( $group_changes as $group ) {
-			foreach ( $setting_changes[ $group ] as $setting_name => $value ) {
-				$changes[ $group . '.' . $setting_name ] = $value;
-			}
-		}
-
-		$courses_slugs = array(
-			'courses.single_lesson_permalink',
-			'courses.single_quiz_permalink',
-			'courses.single_section_permalink',
-			'courses.single_course_permalink',
-			'courses.category_base',
-			'courses.tag_base',
-			'courses.difficulty_base',
-		);
-
-		$setting_data = array();
-		foreach ( $setting->get_data_keys() as $setting_key ) {
-			$callable_setting_key = str_replace( '.', '_', $setting_key );
-			if ( is_callable( array( $setting, "get_{$callable_setting_key}" ) ) ) {
-				$setting_data[ $setting_key ] = call_user_func( array( $setting, "get_{$callable_setting_key}" ) );
-			}
-		}
-
-		$data = apply_filters( 'masteriyo_new_setting_data', $setting_data, $setting );
-
-		// Only update the post when the post data changes.
-		if ( array_intersect( $setting->get_data_keys(), array_keys( $changes ) ) ) {
-			foreach ( $data as $setting_name => $setting_value ) {
-				update_option( 'masteriyo.' . $setting_name, $setting_value, false );
-			}
-		}
+		$setting_in_db = get_option( 'masteriyo_settings', array() );
+		$setting_in_db = wp_parse_args( $setting->get_data(), $setting_in_db );
 
 		// If courses permalink/slugs changed then update masteriyo_flush_rewrite_rules.
-		if ( array_intersect( $courses_slugs, array_keys( $changes ) ) ) {
-			update_option( 'masteriyo_flush_rewrite_rules', 'yes' );
-		}
+		// if ( array_intersect( $courses_slugs, array_keys( $changes ) ) ) {
+		// 	update_option( 'masteriyo_flush_rewrite_rules', 'yes' );
+		// }
 
-		$setting->apply_changes();
+		$setting->set_data( $setting_in_db );
+
+		update_option( 'masteriyo_settings', $setting->get_data() );
 
 		do_action( 'masteriyo_new_setting', $setting );
 	}
@@ -78,22 +45,10 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	public function read( Model &$setting, $default = null ) {
 		global $wpdb;
 
-		$options = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}options WHERE option_name LIKE %s",
-				esc_sql( 'masteriyo.%' )
-			),
-			ARRAY_A
-		);
+		$setting_in_db = get_option( 'masteriyo_settings', array() );
+		$setting_in_db = wp_parse_args( $setting_in_db, $setting->get_data() );
 
-		$setting_data = array();
-		foreach ( $options as $option ) {
-			$option_arr = explode( '.', $option['option_name'] );
-			$group      = count( $option_arr ) > 2 ? $option_arr[1] : '';
-			$setting_data[ $group . '_' . $option_arr[2] ] = $option['option_value'];
-		}
-
-		$setting->set_props( $setting_data );
+		$setting->set_data( $setting_in_db );
 
 		$setting->set_object_read( true );
 

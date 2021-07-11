@@ -206,74 +206,98 @@ class SettingsController extends CrudController {
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'               => 'object',
-						'address_line1'      => array(
-							'description' => __( 'Address Line 1.', 'masteriyo' ),
-							'type'        => 'string',
+						'type'     => 'object',
+						'store'    => array(
+							'description' => __( 'General Settings.', 'masteriyo' ),
+							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type'          => 'object',
+								'address_line1' => array(
+									'description' => __( 'Address Line 1.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'address_line2' => array(
+									'description' => __( 'Address Line 2.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'city'          => array(
+									'description' => __( 'City Name.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'country'       => array(
+									'description' => __( 'Country Name.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'postcode'      => array(
+									'description' => __( 'Postal Code.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
 						),
-						'address_line2'      => array(
-							'description' => __( 'Address Line 2.', 'masteriyo' ),
-							'type'        => 'string',
+						'currency' => array(
+							'description' => __( 'Currency ettings.', 'masteriyo' ),
+							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type'               => 'object',
+								'currency'           => array(
+									'description' => __( 'Currency Code.', 'masteriyo' ),
+									'type'        => 'string',
+									'default'     => 'USD',
+									'enum'        => masteriyo_get_currency_codes(),
+									'context'     => array( 'view', 'edit' ),
+								),
+								'currency_position'  => array(
+									'description' => __( 'Position of Currency.', 'masteriyo' ),
+									'type'        => 'string',
+									'default'     => 'left',
+									'enum'        => array( 'left', 'right', 'left_space', 'right_space' ),
+									'context'     => array( 'view', 'edit' ),
+								),
+								'thousand_separator' => array(
+									'description' => __( 'Thousand Separator.', 'masteriyo' ),
+									'type'        => 'string',
+									'default'     => ',',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'decimal_separator'  => array(
+									'description' => __( 'Decimal Separator.', 'masteriyo' ),
+									'type'        => 'string',
+									'default'     => '.',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'number_of_decimals' => array(
+									'description' => __( 'Number of Decimals.', 'masteriyo' ),
+									'type'        => 'integer',
+									'default'     => 3,
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
 						),
-						'city'               => array(
-							'description' => __( 'City Name.', 'masteriyo' ),
-							'type'        => 'string',
+						'styling'  => array(
+							'description' => __( 'Styling.', 'masteriyo' ),
+							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
-						),
-						'country'            => array(
-							'description' => __( 'Country Name.', 'masteriyo' ),
-							'type'        => 'string',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'postcode'           => array(
-							'description' => __( 'Postal Code.', 'masteriyo' ),
-							'type'        => 'string',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'currency'           => array(
-							'description' => __( 'Currency Code.', 'masteriyo' ),
-							'type'        => 'string',
-							'default'     => 'USD',
-							'enum'        => masteriyo_get_currency_codes(),
-							'context'     => array( 'view', 'edit' ),
-						),
-						'currency_position'  => array(
-							'description' => __( 'Position of Currency.', 'masteriyo' ),
-							'type'        => 'string',
-							'default'     => 'left',
-							'enum'        => array( 'left', 'right', 'left_space', 'right_space' ),
-							'context'     => array( 'view', 'edit' ),
-						),
-						'thousand_separator' => array(
-							'description' => __( 'Thousand Separator.', 'masteriyo' ),
-							'type'        => 'string',
-							'default'     => ',',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'decimal_separator'  => array(
-							'description' => __( 'Decimal Separator.', 'masteriyo' ),
-							'type'        => 'string',
-							'default'     => '.',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'number_of_decimals' => array(
-							'description' => __( 'Number of Decimals.', 'masteriyo' ),
-							'type'        => 'integer',
-							'default'     => 3,
-							'context'     => array( 'view', 'edit' ),
-						),
-						'primary_color'      => array(
-							'description' => __( 'Primary color.', 'masteriyo' ),
-							'type'        => 'string',
-							'format'      => 'hex-color',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'theme'              => array(
-							'description' => __( 'Theme.', 'masteriyo' ),
-							'type'        => 'string',
-							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type'          => 'object',
+								'primary_color' => array(
+									'description' => __( 'Primary color.', 'masteriyo' ),
+									'type'        => 'string',
+									'format'      => 'hex-color',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'theme'         => array(
+									'description' => __( 'Theme.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
 						),
 					),
 				),
@@ -990,156 +1014,7 @@ class SettingsController extends CrudController {
 	 * @return array
 	 */
 	protected function get_setting_data( $setting, $context = 'view' ) {
-		return array(
-			'general'  => array(
-				'address_line1'      => $setting->get_general_address_line1( $context ),
-				'address_line2'      => $setting->get_general_address_line2( $context ),
-				'city'               => $setting->get_general_city( $context ),
-				'country'            => $setting->get_general_country( $context ),
-				'postcode'           => $setting->get_general_postcode( $context ),
-				'currency'           => $setting->get_general_currency( $context ),
-				'currency_position'  => $setting->get_general_currency_position( $context ),
-				'thousand_separator' => $setting->get_general_thousand_separator( $context ),
-				'decimal_separator'  => $setting->get_general_decimal_separator( $context ),
-				'number_of_decimals' => $setting->get_general_number_of_decimals( $context ),
-				'primary_color'      => $setting->get_general_primary_color( $context ),
-				'theme'              => $setting->get_general_theme( $context ),
-			),
-			'courses'  => array(
-				'enable_search'            => $setting->get_courses_enable_search( $context ),
-				'placeholder_image'        => $setting->get_courses_placeholder_image( $context ),
-				'per_page'                 => $setting->get_courses_per_page( $context ),
-				'per_row'                  => $setting->get_courses_per_row( $context ),
-				'category_base'            => $setting->get_courses_category_base( $context ),
-				'tag_base'                 => $setting->get_courses_tag_base( $context ),
-				'difficulty_base'          => $setting->get_courses_difficulty_base( $context ),
-				'single_course_permalink'  => $setting->get_courses_single_course_permalink( $context ),
-				'single_lesson_permalink'  => $setting->get_courses_single_lesson_permalink( $context ),
-				'single_quiz_permalink'    => $setting->get_courses_single_quiz_permalink( $context ),
-				'single_section_permalink' => $setting->get_courses_single_section_permalink( $context ),
-				'show_thumbnail'           => $setting->get_courses_show_thumbnail( $context ),
-				'thumbnail_size'           => $setting->get_courses_thumbnail_size( $context ),
-				'enable_review'            => $setting->get_courses_enable_review( $context ),
-				'enable_questions_answers' => $setting->get_courses_enable_questions_answers( $context ),
-			),
-			'pages'    => array(
-				'myaccount_page_id'        => $setting->get_pages_myaccount_page_id( $context ),
-				'course_list_page_id'      => $setting->get_pages_course_list_page_id( $context ),
-				'terms_conditions_page_id' => $setting->get_pages_terms_conditions_page_id( $context ),
-				'checkout_page_id'         => $setting->get_pages_checkout_page_id( $context ),
-				'checkout_endpoints'       => array(
-					'pay'                        => $setting->get_pages_pay( $context ),
-					'order_received'             => $setting->get_pages_order_received( $context ),
-					'add_payment_method'         => $setting->get_pages_add_payment_method( $context ),
-					'delete_payment_method'      => $setting->get_pages_delete_payment_method( $context ),
-					'set_default_payment_method' => $setting->get_pages_set_default_payment_method( $context ),
-				),
-				'account_endpoints'        => array(
-					'orders'          => $setting->get_pages_orders( $context ),
-					'view_order'      => $setting->get_pages_view_order( $context ),
-					'my_courses'      => $setting->get_pages_my_courses( $context ),
-					'edit_account'    => $setting->get_pages_edit_account( $context ),
-					'payment_methods' => $setting->get_pages_payment_methods( $context ),
-					'lost_password'   => $setting->get_pages_lost_password( $context ),
-					'logout'          => $setting->get_pages_logout( $context ),
-				),
-			),
-			'quizzes'  => array(
-				'questions_display_per_page' => $setting->get_quizzes_questions_display_per_page( $context ),
-			),
-			'payments' => array(
-				'offline' => array(
-					'enable'      => $setting->get_payments_offline_enable( $context ),
-					'title'       => $setting->get_payments_offline_title( $context ),
-					'description' => $setting->get_payments_offline_description( $context ),
-					'description' => $setting->get_payments_offline_description( $context ),
-				),
-				'paypal'  => array(
-					'enable'                  => $setting->get_payments_paypal_enable( $context ),
-					'title'                   => $setting->get_payments_paypal_title( $context ),
-					'description'             => $setting->get_payments_paypal_description( $context ),
-					'description'             => $setting->get_payments_paypal_description( $context ),
-					'ipn_email_notifications' => $setting->get_payments_paypal_ipn_email_notifications( $context ),
-					'sandbox'                 => $setting->get_payments_paypal_sandbox( $context ),
-					'email'                   => $setting->get_payments_paypal_email( $context ),
-					'receiver_email'          => $setting->get_payments_paypal_receiver_email( $context ),
-					'identity_token'          => $setting->get_payments_paypal_identity_token( $context ),
-					'invoice_prefix'          => $setting->get_payments_paypal_invoice_prefix( $context ),
-					'payment_action'          => $setting->get_payments_paypal_payment_action( $context ),
-					'image_url'               => $setting->get_payments_paypal_image_url( $context ),
-					'debug'                   => $setting->get_payments_paypal_debug( $context ),
-					'sandbox_api_username'    => $setting->get_payments_paypal_sandbox_api_username( $context ),
-					'sandbox_api_password'    => $setting->get_payments_paypal_sandbox_api_password( $context ),
-					'sandbox_api_signature'   => $setting->get_payments_paypal_sandbox_api_signature( $context ),
-					'live_api_username'       => $setting->get_payments_paypal_live_api_username( $context ),
-					'live_api_password'       => $setting->get_payments_paypal_live_api_password( $context ),
-					'live_api_signature'      => $setting->get_payments_paypal_live_api_signature( $context ),
-				),
-			),
-			'emails'   => array(
-				'general'              => array(
-					'from_name'       => $setting->get_emails_general_from_name( $context ),
-					'from_email'      => $setting->get_emails_general_from_email( $context ),
-					'default_content' => $setting->get_emails_general_default_content( $context ),
-					'header_image'    => $setting->get_emails_general_header_image( $context ),
-					'footer_text'     => $setting->get_emails_general_footer_text( $context ),
-				),
-				'new_order'            => array(
-					'enable'     => $setting->get_emails_new_order_enable( $context ),
-					'recipients' => $setting->get_emails_new_order_recipients( $context ),
-					'subject'    => $setting->get_emails_new_order_subject( $context ),
-					'heading'    => $setting->get_emails_new_order_heading( $context ),
-					'content'    => $setting->get_emails_new_order_content( $context ),
-				),
-				'processing_order'     => array(
-					'enable'  => $setting->get_emails_processing_order_enable( $context ),
-					'subject' => $setting->get_emails_processing_order_subject( $context ),
-					'heading' => $setting->get_emails_processing_order_heading( $context ),
-					'content' => $setting->get_emails_processing_order_content( $context ),
-				),
-				'completed_order'      => array(
-					'enable'  => $setting->get_emails_completed_order_enable( $context ),
-					'subject' => $setting->get_emails_completed_order_subject( $context ),
-					'heading' => $setting->get_emails_completed_order_heading( $context ),
-					'content' => $setting->get_emails_completed_order_content( $context ),
-				),
-				'onhold_order'         => array(
-					'enable'  => $setting->get_emails_onhold_order_enable( $context ),
-					'subject' => $setting->get_emails_onhold_order_subject( $context ),
-					'heading' => $setting->get_emails_onhold_order_heading( $context ),
-					'content' => $setting->get_emails_onhold_order_content( $context ),
-				),
-				'cancelled_order'      => array(
-					'enable'     => $setting->get_emails_cancelled_order_enable( $context ),
-					'recipients' => $setting->get_emails_cancelled_order_recipients( $context ),
-					'subject'    => $setting->get_emails_cancelled_order_subject( $context ),
-					'heading'    => $setting->get_emails_cancelled_order_heading( $context ),
-					'content'    => $setting->get_emails_cancelled_order_content( $context ),
-				),
-				'enrolled_course'      => array(
-					'enable'  => $setting->get_emails_enrolled_course_enable( $context ),
-					'subject' => $setting->get_emails_enrolled_course_subject( $context ),
-					'heading' => $setting->get_emails_enrolled_course_heading( $context ),
-					'content' => $setting->get_emails_enrolled_course_content( $context ),
-				),
-				'completed_course'     => array(
-					'enable'  => $setting->get_emails_completed_course_enable( $context ),
-					'subject' => $setting->get_emails_completed_course_subject( $context ),
-					'heading' => $setting->get_emails_completed_course_heading( $context ),
-					'content' => $setting->get_emails_completed_course_content( $context ),
-				),
-				'become_an_instructor' => array(
-					'enable'  => $setting->get_emails_become_an_instructor_enable( $context ),
-					'subject' => $setting->get_emails_become_an_instructor_subject( $context ),
-					'heading' => $setting->get_emails_become_an_instructor_heading( $context ),
-					'content' => $setting->get_emails_become_an_instructor_content( $context ),
-				),
-			),
-			'advance'  => array(
-				'template_debug' => $setting->get_advance_template_debug( $context ),
-				'debug'          => $setting->get_advance_debug( $context ),
-			),
-		);
+		return $setting->get_data();
 	}
 
 	/**
@@ -1151,467 +1026,11 @@ class SettingsController extends CrudController {
 	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-
 		$setting      = masteriyo( 'setting' );
 		$setting_repo = masteriyo( 'setting.store' );
 		$setting_repo->read( $setting );
 
-		// General Setting.
-
-		if ( isset( $request['general']['address_line1'] ) ) {
-			$setting->set_general_address_line1( $request['general']['address_line1'] );
-		}
-
-		if ( isset( $request['general']['address_line2'] ) ) {
-			$setting->set_general_address_line2( $request['general']['address_line2'] );
-		}
-
-		if ( isset( $request['general']['city'] ) ) {
-			$setting->set_general_city( $request['general']['city'] );
-		}
-
-		if ( isset( $request['general']['country'] ) ) {
-			$setting->set_general_country( $request['general']['country'] );
-		}
-
-		if ( isset( $request['general']['postcode'] ) ) {
-			$setting->set_general_postcode( $request['general']['postcode'] );
-		}
-
-		if ( isset( $request['general']['currency'] ) ) {
-			$setting->set_general_currency( $request['general']['currency'] );
-		}
-
-		if ( isset( $request['general']['currency_position'] ) ) {
-			$setting->set_general_currency_position( $request['general']['currency_position'] );
-		}
-
-		if ( isset( $request['general']['thousand_separator'] ) ) {
-			$setting->set_general_thousand_separator( $request['general']['thousand_separator'] );
-		}
-
-		if ( isset( $request['general']['decimal_separator'] ) ) {
-			$setting->set_general_decimal_separator( $request['general']['decimal_separator'] );
-		}
-
-		if ( isset( $request['general']['number_of_decimals'] ) ) {
-			$setting->set_general_number_of_decimals( $request['general']['number_of_decimals'] );
-		}
-
-		if ( isset( $request['general']['primary_color'] ) ) {
-			$setting->set_general_primary_color( $request['general']['primary_color'] );
-		}
-
-		if ( isset( $request['general']['theme'] ) ) {
-			$setting->set_general_theme( $request['general']['theme'] );
-		}
-
-		// Courses Setting.
-
-		if ( isset( $request['courses']['enable_search'] ) ) {
-			$setting->set_courses_enable_search( $request['courses']['enable_search'] );
-		}
-
-		if ( isset( $request['courses']['placeholder_image'] ) ) {
-			$setting->set_courses_placeholder_image( $request['courses']['placeholder_image'] );
-		}
-
-		if ( isset( $request['courses']['per_page'] ) ) {
-			$setting->set_courses_per_page( $request['courses']['per_page'] );
-		}
-
-		if ( isset( $request['courses']['per_row'] ) ) {
-			$setting->set_courses_per_row( $request['courses']['per_row'] );
-		}
-
-		if ( isset( $request['courses']['category_base'] ) ) {
-			$setting->set_courses_category_base( $request['courses']['category_base'] );
-		}
-
-		if ( isset( $request['courses']['tag_base'] ) ) {
-			$setting->set_courses_tag_base( $request['courses']['tag_base'] );
-		}
-
-		if ( isset( $request['courses']['difficulty_base'] ) ) {
-			$setting->set_courses_difficulty_base( $request['courses']['difficulty_base'] );
-		}
-
-		if ( isset( $request['courses']['single_course_permalink'] ) ) {
-			$setting->set_courses_single_course_permalink( $request['courses']['single_course_permalink'] );
-		}
-
-		if ( isset( $request['courses']['single_lesson_permalink'] ) ) {
-			$setting->set_courses_single_lesson_permalink( $request['courses']['single_lesson_permalink'] );
-		}
-
-		if ( isset( $request['courses']['single_quiz_permalink'] ) ) {
-			$setting->set_courses_single_quiz_permalink( $request['courses']['single_quiz_permalink'] );
-		}
-
-		if ( isset( $request['courses']['single_section_permalink'] ) ) {
-			$setting->set_courses_single_section_permalink( $request['courses']['single_section_permalink'] );
-		}
-
-		if ( isset( $request['courses']['show_thumbnail'] ) ) {
-			$setting->set_courses_show_thumbnail( $request['courses']['show_thumbnail'] );
-		}
-
-		if ( isset( $request['courses']['thumbnail_size'] ) ) {
-			$setting->set_courses_thumbnail_size( $request['courses']['thumbnail_size'] );
-		}
-
-		if ( isset( $request['courses']['enable_review'] ) ) {
-			$setting->set_courses_enable_review( $request['courses']['enable_review'] );
-		}
-
-		if ( isset( $request['courses']['enable_questions_answers'] ) ) {
-			$setting->set_courses_enable_questions_answers( $request['courses']['enable_questions_answers'] );
-		}
-
-		// Pages Setting.
-
-		if ( isset( $request['pages']['myaccount_page_id'] ) ) {
-			$setting->set_pages_myaccount_page_id( $request['pages']['myaccount_page_id'] );
-		}
-
-		if ( isset( $request['pages']['course_list_page_id'] ) ) {
-			$setting->set_pages_course_list_page_id( $request['pages']['course_list_page_id'] );
-		}
-
-		if ( isset( $request['pages']['terms_conditions_page_id'] ) ) {
-			$setting->set_pages_terms_conditions_page_id( $request['pages']['terms_conditions_page_id'] );
-		}
-
-		if ( isset( $request['pages']['checkout_page_id'] ) ) {
-			$setting->set_pages_checkout_page_id( $request['pages']['checkout_page_id'] );
-		}
-
-		// Checkout Endpoints.
-		if ( isset( $request['pages']['checkout_endpoints']['pay'] ) ) {
-			$setting->set_pages_pay( $request['pages']['checkout_endpoints'] ['pay'] );
-		}
-
-		if ( isset( $request['pages']['checkout_endpoints']['order_received'] ) ) {
-			$setting->set_pages_order_received( $request['pages']['checkout_endpoints']['order_received'] );
-		}
-
-		if ( isset( $request['pages']['checkout_endpoints']['add_payment_method'] ) ) {
-			$setting->set_pages_add_payment_method( $request['pages']['checkout_endpoints']['add_payment_method'] );
-		}
-
-		if ( isset( $request['pages']['checkout_endpoints']['delete_payment_method'] ) ) {
-			$setting->set_pages_delete_payment_method( $request['pages']['checkout_endpoints']['delete_payment_method'] );
-		}
-
-		if ( isset( $request['pages']['checkout_endpoints']['set_default_payment_method'] ) ) {
-			$setting->set_pages_set_default_payment_method( $request['pages']['checkout_endpoints']['set_default_payment_method'] );
-		}
-
-		// Account Endpoints.
-		if ( isset( $request['pages']['account_endpoints']['orders'] ) ) {
-			$setting->set_pages_orders( $request['pages']['account_endpoints']['orders'] );
-		}
-
-		if ( isset( $request['pages']['account_endpoints']['view_order'] ) ) {
-			$setting->set_pages_view_order( $request['pages']['account_endpoints']['view_order'] );
-		}
-
-		if ( isset( $request['pages']['account_endpoints']['my_courses'] ) ) {
-			$setting->set_pages_my_courses( $request['pages']['account_endpoints']['my_courses'] );
-		}
-
-		if ( isset( $request['pages']['account_endpoints']['edit_account'] ) ) {
-			$setting->set_pages_edit_account( $request['pages']['account_endpoints']['edit_account'] );
-		}
-
-		if ( isset( $request['pages']['account_endpoints']['payment_methods'] ) ) {
-			$setting->set_pages_payment_methods( $request['pages']['account_endpoints']['payment_methods'] );
-		}
-
-		if ( isset( $request['pages']['account_endpoints']['lost_password'] ) ) {
-			$setting->set_pages_lost_password( $request['pages']['account_endpoints']['lost_password'] );
-		}
-
-		if ( isset( $request['pages']['account_endpoints']['logout'] ) ) {
-			$setting->set_pages_logout( $request['pages']['account_endpoints']['logout'] );
-		}
-
-		// Quizzes Setting.
-
-		if ( isset( $request['quizzes']['questions_display_per_page'] ) ) {
-			$setting->set_quizzes_questions_display_per_page( $request['quizzes']['questions_display_per_page'] );
-		}
-
-		// Payments Setting.
-
-		// Offline.
-		if ( isset( $request['payments']['offline']['enable'] ) ) {
-			$setting->set_payments_offline_enable( $request['payments']['offline']['enable'] );
-		}
-
-		if ( isset( $request['payments']['offline']['title'] ) ) {
-			$setting->set_payments_offline_title( $request['payments']['offline']['title'] );
-		}
-
-		if ( isset( $request['payments']['offline']['description'] ) ) {
-			$setting->set_payments_offline_description( $request['payments']['offline']['description'] );
-		}
-
-		// Paypal.
-		if ( isset( $request['payments']['paypal']['enable'] ) ) {
-			$setting->set_payments_paypal_enable( $request['payments']['paypal']['enable'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['title'] ) ) {
-			$setting->set_payments_paypal_title( $request['payments']['paypal']['title'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['description'] ) ) {
-			$setting->set_payments_paypal_description( $request['payments']['paypal']['description'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['ipn_email_notifications'] ) ) {
-			$setting->set_payments_paypal_ipn_email_notifications( $request['payments']['paypal']['ipn_email_notifications'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['sandbox'] ) ) {
-			$setting->set_payments_paypal_sandbox( $request['payments']['paypal']['sandbox'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['email'] ) ) {
-			$setting->set_payments_paypal_email( $request['payments']['paypal']['email'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['receiver_email'] ) ) {
-			$setting->set_payments_paypal_receiver_email( $request['payments']['paypal']['receiver_email'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['identity_token'] ) ) {
-			$setting->set_payments_paypal_identity_token( $request['payments']['paypal']['identity_token'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['invoice_prefix'] ) ) {
-			$setting->set_payments_paypal_invoice_prefix( $request['payments']['paypal']['invoice_prefix'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['payment_action'] ) ) {
-			$setting->set_payments_paypal_payment_action( $request['payments']['paypal']['payment_action'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['image_url'] ) ) {
-			$setting->set_payments_paypal_image_url( $request['payments']['paypal']['image_url'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['debug'] ) ) {
-			$setting->set_payments_paypal_debug( $request['payments']['paypal']['debug'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['sandbox_api_username'] ) ) {
-			$setting->set_payments_paypal_sandbox_api_username( $request['payments']['paypal']['sandbox_api_username'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['sandbox_api_password'] ) ) {
-			$setting->set_payments_paypal_sandbox_api_password( $request['payments']['paypal']['sandbox_api_password'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['sandbox_api_signature'] ) ) {
-			$setting->set_payments_paypal_sandbox_api_signature( $request['payments']['paypal']['sandbox_api_signature'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['live_api_username'] ) ) {
-			$setting->set_payments_paypal_live_api_username( $request['payments']['paypal']['live_api_username'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['live_api_password'] ) ) {
-			$setting->set_payments_paypal_live_api_password( $request['payments']['paypal']['live_api_password'] );
-		}
-
-		if ( isset( $request['payments']['paypal']['live_api_signature'] ) ) {
-			$setting->set_payments_paypal_live_api_signature( $request['payments']['paypal']['live_api_signature'] );
-		}
-
-		// Emails Setting.
-
-		// General.
-		if ( isset( $request['emails']['general']['from_name'] ) && ! empty( $request['emails']['general']['from_name'] ) ) {
-			$setting->set_emails_general_from_name( $request['emails']['general']['from_name'] );
-		} else {
-			$setting->set_emails_general_from_name( get_bloginfo( 'name' ) );
-		}
-
-		if ( isset( $request['emails']['general']['from_email'] ) && ! empty( $request['emails']['general']['from_email'] ) ) {
-			$setting->set_emails_general_from_email( $request['emails']['general']['from_email'] );
-		} else {
-			$setting->set_emails_general_from_email( get_bloginfo( 'admin_email' ) );
-		}
-
-		if ( isset( $request['emails']['general']['default_content'] ) ) {
-			$setting->set_emails_general_default_content( $request['emails']['general']['default_content'] );
-		}
-
-		if ( isset( $request['emails']['general']['header_image'] ) ) {
-			$setting->set_emails_general_header_image( $request['emails']['general']['header_image'] );
-		}
-
-		if ( isset( $request['emails']['general']['footer_text'] ) ) {
-			$setting->set_emails_general_footer_text( $request['emails']['general']['footer_text'] );
-		}
-
-		// New order.
-		if ( isset( $request['emails']['new_order']['enable'] ) ) {
-			$setting->set_emails_new_order_enable( $request['emails']['new_order']['enable'] );
-		}
-
-		if ( isset( $request['emails']['new_order']['recipients'] ) ) {
-			$setting->set_emails_new_order_recipients( $request['emails']['new_order']['recipients'] );
-		}
-
-		if ( isset( $request['emails']['new_order']['subject'] ) ) {
-			$setting->set_emails_new_order_subject( $request['emails']['new_order']['subject'] );
-		}
-
-		if ( isset( $request['emails']['new_order']['heading'] ) ) {
-			$setting->set_emails_new_order_heading( $request['emails']['new_order']['heading'] );
-		}
-
-		if ( isset( $request['emails']['new_order']['content'] ) ) {
-			$setting->set_emails_new_order_content( $request['emails']['new_order']['content'] );
-		}
-
-		// Processing Order.
-		if ( isset( $request['emails']['processing_order']['enable'] ) ) {
-			$setting->set_emails_processing_order_enable( $request['emails']['processing_order']['enable'] );
-		}
-
-		if ( isset( $request['emails']['processing_order']['subject'] ) ) {
-			$setting->set_emails_processing_order_subject( $request['emails']['processing_order']['subject'] );
-		}
-
-		if ( isset( $request['emails']['processing_order']['heading'] ) ) {
-			$setting->set_emails_processing_order_heading( $request['emails']['processing_order']['heading'] );
-		}
-
-		if ( isset( $request['emails']['processing_order']['content'] ) ) {
-			$setting->set_emails_processing_order_content( $request['emails']['processing_order']['content'] );
-		}
-
-		// Completed Order.
-		if ( isset( $request['emails']['completed_order']['enable'] ) ) {
-			$setting->set_emails_completed_order_enable( $request['emails']['completed_order']['enable'] );
-		}
-
-		if ( isset( $request['emails']['completed_order']['subject'] ) ) {
-			$setting->set_emails_completed_order_subject( $request['emails']['completed_order']['subject'] );
-		}
-
-		if ( isset( $request['emails']['completed_order']['heading'] ) ) {
-			$setting->set_emails_completed_order_heading( $request['emails']['completed_order']['heading'] );
-		}
-
-		if ( isset( $request['emails']['completed_order']['content'] ) ) {
-			$setting->set_emails_completed_order_content( $request['emails']['completed_order']['content'] );
-		}
-
-		// On Hold Order.
-		if ( isset( $request['emails']['onhold_order']['enable'] ) ) {
-			$setting->set_emails_onhold_order_enable( $request['emails']['onhold_order']['enable'] );
-		}
-
-		if ( isset( $request['emails']['onhold_order']['subject'] ) ) {
-			$setting->set_emails_onhold_order_subject( $request['emails']['onhold_order']['subject'] );
-		}
-
-		if ( isset( $request['emails']['onhold_order']['heading'] ) ) {
-			$setting->set_emails_onhold_order_heading( $request['emails']['onhold_order']['heading'] );
-		}
-
-		if ( isset( $request['emails']['onhold_order']['content'] ) ) {
-			$setting->set_emails_onhold_order_content( $request['emails']['onhold_order']['content'] );
-		}
-
-		// Cancelled Order.
-		if ( isset( $request['emails']['cancelled_order']['enable'] ) ) {
-			$setting->set_emails_cancelled_order_enable( $request['emails']['cancelled_order']['enable'] );
-		}
-
-		if ( isset( $request['emails']['cancelled_order']['recipients'] ) ) {
-			$setting->set_emails_cancelled_order_recipients( $request['emails']['cancelled_order']['recipients'] );
-		}
-
-		if ( isset( $request['emails']['cancelled_order']['subject'] ) ) {
-			$setting->set_emails_cancelled_order_subject( $request['emails']['cancelled_order']['subject'] );
-		}
-
-		if ( isset( $request['emails']['cancelled_order']['heading'] ) ) {
-			$setting->set_emails_cancelled_order_heading( $request['emails']['cancelled_order']['heading'] );
-		}
-
-		if ( isset( $request['emails']['cancelled_order']['content'] ) ) {
-			$setting->set_emails_cancelled_order_content( $request['emails']['cancelled_order']['content'] );
-		}
-
-		// Enrolled Course.
-		if ( isset( $request['emails']['enrolled_course']['enable'] ) ) {
-			$setting->set_emails_enrolled_course_enable( $request['emails']['enrolled_course']['enable'] );
-		}
-
-		if ( isset( $request['emails']['enrolled_course']['subject'] ) ) {
-			$setting->set_emails_enrolled_course_subject( $request['emails']['enrolled_course']['subject'] );
-		}
-
-		if ( isset( $request['emails']['enrolled_course']['heading'] ) ) {
-			$setting->set_emails_enrolled_course_heading( $request['emails']['enrolled_course']['heading'] );
-		}
-
-		if ( isset( $request['emails']['enrolled_course']['content'] ) ) {
-			$setting->set_emails_enrolled_course_content( $request['emails']['enrolled_course']['content'] );
-		}
-
-		// Completed Course
-
-		if ( isset( $request['emails']['completed_course']['enable'] ) ) {
-			$setting->set_emails_completed_course_enable( $request['emails']['completed_course']['enable'] );
-		}
-
-		if ( isset( $request['emails']['completed_course']['subject'] ) ) {
-			$setting->set_emails_completed_course_subject( $request['emails']['completed_course']['subject'] );
-		}
-
-		if ( isset( $request['emails']['completed_course']['heading'] ) ) {
-			$setting->set_emails_completed_course_heading( $request['emails']['completed_course']['heading'] );
-		}
-
-		if ( isset( $request['emails']['completed_course']['content'] ) ) {
-			$setting->set_emails_completed_course_content( $request['emails']['completed_course']['content'] );
-		}
-
-		// Become an instructor.
-
-		if ( isset( $request['emails']['become_an_instructor']['enable'] ) ) {
-			$setting->set_emails_become_an_instructor_enable( $request['emails']['become_an_instructor']['enable'] );
-		}
-
-		if ( isset( $request['emails']['become_an_instructor']['subject'] ) ) {
-			$setting->set_emails_become_an_instructor_subject( $request['emails']['become_an_instructor']['subject'] );
-		}
-
-		if ( isset( $request['emails']['become_an_instructor']['heading'] ) ) {
-			$setting->set_emails_become_an_instructor_heading( $request['emails']['become_an_instructor']['heading'] );
-		}
-
-		if ( isset( $request['emails']['become_an_instructor']['content'] ) ) {
-			$setting->set_emails_become_an_instructor_content( $request['emails']['become_an_instructor']['content'] );
-		}
-
-		// Advance Setting.
-
-		if ( isset( $request['advance']['template_debug'] ) ) {
-			$setting->set_advance_template_debug( $request['advance']['template_debug'] );
-		}
-
-		if ( isset( $request['advance']['debug'] ) ) {
-			$setting->set_advance_debug( $request['advance']['debug'] );
-		}
+		$setting->set_data( $request->get_params() );
 
 		/**
 		 * Filters an object before it is inserted via the REST API.

@@ -2789,7 +2789,6 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
 	);
 }
 
-
 /**
  * Get an image size by name or defined dimensions.
  *
@@ -2865,4 +2864,21 @@ function masteriyo_get_image_size( $image_size ) {
 	wp_cache_set( $cache_key, $size, 'masteriyo' );
 
 	return $size;
+}
+
+/**
+ * Get the global setting value.
+ *
+ * @since  0.1.0
+ * @param  string $prop Name of setting to get.
+ * @param  string $group Setting group.
+ * @param  string $sub_group Setting subgroup.
+ * @return mixed
+ */
+function masteriyo_get_setting( $prop, $group = '', $sub_group = '' ) {
+	$setting      = masteriyo( 'setting' );
+	$setting_repo = masteriyo( 'setting.store' );
+	$setting_repo->read( $setting );
+
+	return $setting->get( $prop, $group, $sub_group );
 }

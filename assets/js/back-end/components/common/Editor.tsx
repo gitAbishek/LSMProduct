@@ -4,6 +4,10 @@ import {
 	Divider,
 	Icon,
 	IconButton,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
 	Stack,
 } from '@chakra-ui/react';
 import { EditorContent, useEditor } from '@tiptap/react';
@@ -22,6 +26,7 @@ import {
 	BiSubdirectoryLeft,
 } from 'react-icons/bi';
 import { ImQuotesLeft } from 'react-icons/im';
+import { mergeDeep } from '../../utils/mergeDeep';
 
 interface Props {
 	name: `${string}`;
@@ -34,22 +39,23 @@ const MenuBar = ({ editor }: any) => {
 			return {
 				bg: 'blue.500',
 				color: 'white',
-				fontSize: 'sm',
-				minW: 'auto',
-				width: '30px',
-				height: '30px',
 			};
 		} else {
 			return {
 				bg: 'transparent',
 				color: 'gray.700',
-				fontSize: 'sm',
-				p: '1',
-				minW: 'auto',
-				width: '30px',
-				height: '30px',
 			};
 		}
+	};
+
+	const buttonCommonStyles = (isActive?: boolean) => {
+		mergeDeep(buttonStyles(isActive), {
+			fontSize: 'sm',
+			minW: 'auto',
+			width: '30px',
+			height: '30px',
+			p: '1',
+		});
 	};
 
 	if (!editor) {
@@ -57,7 +63,7 @@ const MenuBar = ({ editor }: any) => {
 	}
 
 	return (
-		<Stack direction="row" spacing="0" align="center">
+		<Stack direction="row" spacing="1" align="center">
 			<IconButton
 				variant="unstyled"
 				aria-label={__('Bold', 'masteriyo')}
@@ -103,55 +109,62 @@ const MenuBar = ({ editor }: any) => {
 			<Center height="20px">
 				<Divider orientation="vertical" />
 			</Center>
+			<Menu>
+				<MenuButton
+					as={Button}
+					variant="
+				unstyled">
+					Headings
+				</MenuButton>
+				<MenuList>
+					<MenuItem
+						sx={buttonStyles(editor.isActive('heading', { level: 1 }))}
+						onClick={() =>
+							editor.chain().focus().toggleHeading({ level: 1 }).run()
+						}>
+						h1
+					</MenuItem>
+					<MenuItem
+						sx={buttonStyles(editor.isActive('heading', { level: 2 }))}
+						onClick={() =>
+							editor.chain().focus().toggleHeading({ level: 2 }).run()
+						}>
+						h2
+					</MenuItem>
+					<MenuItem
+						sx={buttonStyles(editor.isActive('heading', { level: 3 }))}
+						onClick={() =>
+							editor.chain().focus().toggleHeading({ level: 3 }).run()
+						}>
+						h3
+					</MenuItem>
+					<MenuItem
+						sx={buttonStyles(editor.isActive('heading', { level: 4 }))}
+						onClick={() =>
+							editor.chain().focus().toggleHeading({ level: 4 }).run()
+						}>
+						h4
+					</MenuItem>
+					<MenuItem
+						sx={buttonStyles(editor.isActive('heading', { level: 5 }))}
+						onClick={() =>
+							editor.chain().focus().toggleHeading({ level: 5 }).run()
+						}>
+						h5
+					</MenuItem>
+					<MenuItem
+						sx={buttonStyles(editor.isActive('heading', { level: 6 }))}
+						onClick={() =>
+							editor.chain().focus().toggleHeading({ level: 6 }).run()
+						}>
+						h6
+					</MenuItem>
+				</MenuList>
+			</Menu>
 
-			<Button
-				variant="unstyled"
-				sx={buttonStyles(editor.isActive('heading', { level: 1 }))}
-				onClick={() =>
-					editor.chain().focus().toggleHeading({ level: 1 }).run()
-				}>
-				h1
-			</Button>
-			<Button
-				variant="unstyled"
-				sx={buttonStyles(editor.isActive('heading', { level: 2 }))}
-				onClick={() =>
-					editor.chain().focus().toggleHeading({ level: 2 }).run()
-				}>
-				h2
-			</Button>
-			<Button
-				variant="unstyled"
-				sx={buttonStyles(editor.isActive('heading', { level: 3 }))}
-				onClick={() =>
-					editor.chain().focus().toggleHeading({ level: 3 }).run()
-				}>
-				h3
-			</Button>
-			<Button
-				variant="unstyled"
-				sx={buttonStyles(editor.isActive('heading', { level: 4 }))}
-				onClick={() =>
-					editor.chain().focus().toggleHeading({ level: 4 }).run()
-				}>
-				h4
-			</Button>
-			<Button
-				variant="unstyled"
-				sx={buttonStyles(editor.isActive('heading', { level: 5 }))}
-				onClick={() =>
-					editor.chain().focus().toggleHeading({ level: 5 }).run()
-				}>
-				h5
-			</Button>
-			<Button
-				variant="unstyled"
-				sx={buttonStyles(editor.isActive('heading', { level: 6 }))}
-				onClick={() =>
-					editor.chain().focus().toggleHeading({ level: 6 }).run()
-				}>
-				h6
-			</Button>
+			<Center height="20px">
+				<Divider orientation="vertical" />
+			</Center>
 			<IconButton
 				variant="unstyled"
 				aria-label={__('Bullet List', 'masteriyo')}

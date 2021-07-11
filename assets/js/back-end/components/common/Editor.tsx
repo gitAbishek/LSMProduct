@@ -18,6 +18,7 @@ import {
 	BiBold,
 	BiCode,
 	BiCodeBlock,
+	BiImageAdd,
 	BiItalic,
 	BiListUl,
 	BiMinus,
@@ -63,154 +64,162 @@ const MenuBar = ({ editor }: any) => {
 	}
 
 	return (
-		<Stack direction="row" spacing="1" align="center">
-			<IconButton
-				variant="unstyled"
-				aria-label={__('Bold', 'masteriyo')}
-				sx={buttonCommonStyles(editor.isActive('bold'))}
-				icon={<Icon as={BiBold} />}
-				onClick={() => editor.chain().focus().toggleBold().run()}
-			/>
-			<IconButton
-				variant="unstyled"
-				aria-label={__('Italic', 'masteriyo')}
-				sx={buttonCommonStyles(editor.isActive('italic'))}
-				icon={<Icon as={BiItalic} />}
-				onClick={() => editor.chain().focus().toggleItalic().run()}
-			/>
+		<Stack direction="row" spacing="1" align="center" justify="space-between">
+			<Stack direction="row" spacing="1" align="center">
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Bold', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive('bold'))}
+					icon={<Icon as={BiBold} />}
+					onClick={() => editor.chain().focus().toggleBold().run()}
+				/>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Italic', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive('italic'))}
+					icon={<Icon as={BiItalic} />}
+					onClick={() => editor.chain().focus().toggleItalic().run()}
+				/>
 
-			<IconButton
-				variant="unstyled"
-				aria-label={__('Strike', 'masteriyo')}
-				sx={buttonCommonStyles(editor.isActive('strike'))}
-				icon={<Icon as={BiStrikethrough} />}
-				onClick={() => editor.chain().focus().toggleStrike().run()}
-			/>
-			<Center height="20px">
-				<Divider orientation="vertical" />
-			</Center>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Strike', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive('strike'))}
+					icon={<Icon as={BiStrikethrough} />}
+					onClick={() => editor.chain().focus().toggleStrike().run()}
+				/>
+				<Center height="20px">
+					<Divider orientation="vertical" />
+				</Center>
 
-			<IconButton
-				variant="unstyled"
-				aria-label={__('Code', 'masteriyo')}
-				sx={buttonCommonStyles(editor.isActive('code'))}
-				icon={<Icon as={BiCode} />}
-				onClick={() => editor.chain().focus().toggleCode().run()}
-			/>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Code', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive('code'))}
+					icon={<Icon as={BiCode} />}
+					onClick={() => editor.chain().focus().toggleCode().run()}
+				/>
 
-			<IconButton
-				variant="unstyled"
-				aria-label={__('Paragraph', 'masteriyo')}
-				sx={buttonCommonStyles(editor.isActive('paragraph'))}
-				icon={<Icon as={BiParagraph} />}
-				onClick={() => editor.chain().focus().setParagraph().run()}
-			/>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Paragraph', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive('paragraph'))}
+					icon={<Icon as={BiParagraph} />}
+					onClick={() => editor.chain().focus().setParagraph().run()}
+				/>
 
-			<Center height="20px">
-				<Divider orientation="vertical" />
-			</Center>
-			<Menu>
-				<MenuButton
-					as={Button}
-					variant=" P
-				unstyled">
-					Headings
-				</MenuButton>
-				<MenuList fontSize="xs">
-					<MenuItem
-						sx={buttonStyles(editor.isActive('heading', { level: 1 }))}
-						onClick={() =>
-							editor.chain().focus().toggleHeading({ level: 1 }).run()
-						}>
-						h1
-					</MenuItem>
-					<MenuItem
-						sx={buttonStyles(editor.isActive('heading', { level: 2 }))}
-						onClick={() =>
-							editor.chain().focus().toggleHeading({ level: 2 }).run()
-						}>
-						h2
-					</MenuItem>
-					<MenuItem
-						sx={buttonStyles(editor.isActive('heading', { level: 3 }))}
-						onClick={() =>
-							editor.chain().focus().toggleHeading({ level: 3 }).run()
-						}>
-						h3
-					</MenuItem>
-					<MenuItem
-						sx={buttonStyles(editor.isActive('heading', { level: 4 }))}
-						onClick={() =>
-							editor.chain().focus().toggleHeading({ level: 4 }).run()
-						}>
-						h4
-					</MenuItem>
-					<MenuItem
-						sx={buttonStyles(editor.isActive('heading', { level: 5 }))}
-						onClick={() =>
-							editor.chain().focus().toggleHeading({ level: 5 }).run()
-						}>
-						h5
-					</MenuItem>
-					<MenuItem
-						sx={buttonStyles(editor.isActive('heading', { level: 6 }))}
-						onClick={() =>
-							editor.chain().focus().toggleHeading({ level: 6 }).run()
-						}>
-						h6
-					</MenuItem>
-				</MenuList>
-			</Menu>
+				<Center height="20px">
+					<Divider orientation="vertical" />
+				</Center>
+				<Menu>
+					<MenuButton as={Button} variant="unstyled">
+						Headings
+					</MenuButton>
+					<MenuList fontSize="xs">
+						<MenuItem
+							sx={buttonStyles(editor.isActive('heading', { level: 1 }))}
+							onClick={() =>
+								editor.chain().focus().toggleHeading({ level: 1 }).run()
+							}>
+							h1
+						</MenuItem>
+						<MenuItem
+							sx={buttonStyles(editor.isActive('heading', { level: 2 }))}
+							onClick={() =>
+								editor.chain().focus().toggleHeading({ level: 2 }).run()
+							}>
+							h2
+						</MenuItem>
+						<MenuItem
+							sx={buttonStyles(editor.isActive('heading', { level: 3 }))}
+							onClick={() =>
+								editor.chain().focus().toggleHeading({ level: 3 }).run()
+							}>
+							h3
+						</MenuItem>
+						<MenuItem
+							sx={buttonStyles(editor.isActive('heading', { level: 4 }))}
+							onClick={() =>
+								editor.chain().focus().toggleHeading({ level: 4 }).run()
+							}>
+							h4
+						</MenuItem>
+						<MenuItem
+							sx={buttonStyles(editor.isActive('heading', { level: 5 }))}
+							onClick={() =>
+								editor.chain().focus().toggleHeading({ level: 5 }).run()
+							}>
+							h5
+						</MenuItem>
+						<MenuItem
+							sx={buttonStyles(editor.isActive('heading', { level: 6 }))}
+							onClick={() =>
+								editor.chain().focus().toggleHeading({ level: 6 }).run()
+							}>
+							h6
+						</MenuItem>
+					</MenuList>
+				</Menu>
 
-			<Center height="20px">
-				<Divider orientation="vertical" />
-			</Center>
-			<IconButton
-				variant="unstyled"
-				aria-label={__('Bullet List', 'masteriyo')}
-				sx={buttonCommonStyles(editor.isActive('bulletList'))}
-				icon={<Icon as={BiListUl} />}
-				onClick={() => editor.chain().focus().toggleBulletList().run()}
-			/>
-			<IconButton
-				variant="unstyled"
-				aria-label={__('Ordered List', 'masteriyo')}
-				sx={buttonCommonStyles(editor.isActive('orderedList'))}
-				icon={<Icon as={BiListUl} />}
-				onClick={() => editor.chain().focus().toggleOrderedList().run()}
-			/>
+				<Center height="20px">
+					<Divider orientation="vertical" />
+				</Center>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Bullet List', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive('bulletList'))}
+					icon={<Icon as={BiListUl} />}
+					onClick={() => editor.chain().focus().toggleBulletList().run()}
+				/>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Ordered List', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive('orderedList'))}
+					icon={<Icon as={BiListUl} />}
+					onClick={() => editor.chain().focus().toggleOrderedList().run()}
+				/>
 
-			<IconButton
-				variant="unstyled"
-				aria-label={__('Code Block', 'masteriyo')}
-				sx={buttonCommonStyles(editor.isActive('codeBlock'))}
-				icon={<Icon as={BiCodeBlock} />}
-				onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-			/>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Code Block', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive('codeBlock'))}
+					icon={<Icon as={BiCodeBlock} />}
+					onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+				/>
 
-			<IconButton
-				variant="unstyled"
-				aria-label={__('Blockquote', 'masteriyo')}
-				sx={buttonStyles(editor.isActive('blockquote'))}
-				icon={<Icon as={ImQuotesLeft} />}
-				onClick={() => editor.chain().focus().toggleBlockquote().run()}
-			/>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Blockquote', 'masteriyo')}
+					sx={buttonStyles(editor.isActive('blockquote'))}
+					icon={<Icon as={ImQuotesLeft} />}
+					onClick={() => editor.chain().focus().toggleBlockquote().run()}
+				/>
 
-			<IconButton
-				variant="unstyled"
-				aria-label={__('Horizontal Rule', 'masteriyo')}
-				sx={buttonStyles()}
-				icon={<Icon as={BiMinus} />}
-				onClick={() => editor.chain().focus().setHorizontalRule().run()}
-			/>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Horizontal Rule', 'masteriyo')}
+					sx={buttonCommonStyles()}
+					icon={<Icon as={BiMinus} />}
+					onClick={() => editor.chain().focus().setHorizontalRule().run()}
+				/>
 
-			<IconButton
-				variant="unstyled"
-				aria-label={__('Hard Break', 'masteriyo')}
-				sx={buttonStyles()}
-				icon={<Icon as={BiSubdirectoryLeft} />}
-				onClick={() => editor.chain().focus().setHardBreak().run()}
-			/>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Hard Break', 'masteriyo')}
+					sx={buttonCommonStyles()}
+					icon={<Icon as={BiSubdirectoryLeft} />}
+					onClick={() => editor.chain().focus().setHardBreak().run()}
+				/>
+			</Stack>
+			<Stack direction="row" spacing="1" align="center">
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Hard Break', 'masteriyo')}
+					sx={buttonCommonStyles()}
+					icon={<Icon as={BiImageAdd} />}
+					onClick={() => editor.chain().focus().setHardBreak().run()}
+				/>
+			</Stack>
 		</Stack>
 	);
 };

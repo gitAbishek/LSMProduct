@@ -19,7 +19,7 @@ interface Props {
 	onSucces?: any;
 }
 const ImageUploadModal: React.FC<Props> = (props) => {
-	const { isOpen, onClose } = props;
+	const { isOpen, onClose, onSucces } = props;
 	const [imageUrl, setImageUrl] = useState(null);
 
 	return (
@@ -40,7 +40,9 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 				</ModalBody>
 				<ModalFooter bg="gray.50" borderTop="1px" borderColor="gray.100">
 					<ButtonGroup>
-						<Button colorScheme="blue">{__('Add Image', 'masteriyo')}</Button>
+						<Button colorScheme="blue" onClick={() => onSucces(imageUrl)}>
+							{__('Add Image', 'masteriyo')}
+						</Button>
 						<Button variant="outline" onClick={onClose}>
 							{__('Cancel', 'masteriyo')}
 						</Button>

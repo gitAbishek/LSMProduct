@@ -11,6 +11,7 @@ import {
 	Stack,
 	useDisclosure,
 } from '@chakra-ui/react';
+import Image from '@tiptap/extension-image';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { __ } from '@wordpress/i18n';
@@ -30,7 +31,6 @@ import {
 import { ImQuotesLeft } from 'react-icons/im';
 import { mergeDeep } from '../../utils/mergeDeep';
 import ImageUploadModal from './ImageUploadModal';
-
 interface Props {
 	name: `${string}`;
 	control: any;
@@ -65,6 +65,11 @@ const MenuBar = ({ editor }: any) => {
 	if (!editor) {
 		return null;
 	}
+
+	const onImageUpload = (imageUrl: string) => {
+		imageUrl && editor.chain().focus().setImage({ src: imageUrl }).run();
+		onClose();
+	};
 
 	return (
 		<Stack direction="row" spacing="1" align="center" justify="space-between">
@@ -222,7 +227,11 @@ const MenuBar = ({ editor }: any) => {
 					icon={<Icon as={BiImageAdd} />}
 					onClick={onOpen}
 				/>
-				<ImageUploadModal isOpen={isOpen} onClose={onClose} />
+				<ImageUploadModal
+					isOpen={isOpen}
+					onClose={onClose}
+					onSucces={onImageUpload}
+				/>
 			</Stack>
 		</Stack>
 	);
@@ -230,7 +239,7 @@ const MenuBar = ({ editor }: any) => {
 
 const Editor: React.FC<Props> = () => {
 	const editor = useEditor({
-		extensions: [StarterKit],
+		extensions: [StarterKit, Image],
 		content: 'Your content',
 	});
 

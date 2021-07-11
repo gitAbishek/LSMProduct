@@ -117,8 +117,8 @@ class Setting extends Model {
 				'description'  => 'Pay with offline payment.',
 				'instructions' => 'Pay with offline payment',
 			),
-			'paypal'   => array(
-				// Standard Paypal
+			// Standard Paypal
+			'paypal'  => array(
 				'enable'                  => false,
 				'title'                   => 'Paypal',
 				'description'             => 'Pay via PayPal; you can pay with your credit card if you don\'t have a PayPal account.',
@@ -143,7 +143,7 @@ class Setting extends Model {
 		'quiz'           => array(
 			'styling' => array(
 				'questions_display_per_page' => 5,
-			),
+			)
 		),
 		'emails'         => array(
 			'general'              => array(
@@ -392,7 +392,7 @@ class Setting extends Model {
 		$this->add_sanitize_callback( 'signup', 'advance', 'account', 'sanitize_title' );
 		$this->add_sanitize_callback( 'logout', 'advance', 'account', 'sanitize_title' );
 
-		$this->add_sanitize_callback( 'questions_display_per_page', 'quiz', '', 'absint' );
+		$this->add_sanitize_callback( 'questions_display_per_page', 'quiz', 'styling', 'absint' );
 
 		$this->add_sanitize_callback( 'enable', 'payments', 'offline', 'masteriyo_string_to_bool' );
 		$this->add_sanitize_callback( 'ipn_email_notifications', 'payments', 'paypal', 'masteriyo_string_to_bool' );

@@ -8,18 +8,22 @@ import {
 	ModalFooter,
 	ModalHeader,
 	ModalOverlay,
-	Stack,
 } from '@chakra-ui/react';
-import React from 'react';
+import { __ } from '@wordpress/i18n';
+import React, { useState } from 'react';
+import ImageUpload from './ImageUpload';
 
 interface Props {
 	isOpen: boolean;
 	onClose: any;
+	onSucces?: any;
 }
 const ImageUploadModal: React.FC<Props> = (props) => {
 	const { isOpen, onClose } = props;
+	const [imageUrl, setImageUrl] = useState(null);
+
 	return (
-		<Modal size="lg" isOpen={isOpen} onClose={onClose}>
+		<Modal size="lg" isOpen={isOpen} onClose={onClose} isCentered>
 			<ModalOverlay />
 			<ModalContent>
 				<ModalHeader
@@ -32,13 +36,13 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 				</ModalHeader>
 				<ModalCloseButton color="white" />
 				<ModalBody>
-					<Stack direction="column" spacing="8" p="8"></Stack>
+					<ImageUpload onUploadSuccess={setImageUrl} />
 				</ModalBody>
 				<ModalFooter bg="gray.50" borderTop="1px" borderColor="gray.100">
 					<ButtonGroup>
-						<Button colorScheme="blue">Crop</Button>
+						<Button colorScheme="blue">{__('Add Image', 'masteriyo')}</Button>
 						<Button variant="outline" onClick={onClose}>
-							Cancel
+							{__('Cancel', 'masteriyo')}
 						</Button>
 					</ButtonGroup>
 				</ModalFooter>

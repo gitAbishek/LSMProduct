@@ -9,6 +9,7 @@ import {
 	MenuItem,
 	MenuList,
 	Stack,
+	useDisclosure,
 } from '@chakra-ui/react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -28,6 +29,7 @@ import {
 } from 'react-icons/bi';
 import { ImQuotesLeft } from 'react-icons/im';
 import { mergeDeep } from '../../utils/mergeDeep';
+import ImageUploadModal from './ImageUploadModal';
 
 interface Props {
 	name: `${string}`;
@@ -35,6 +37,7 @@ interface Props {
 	defaultValue?: string;
 }
 const MenuBar = ({ editor }: any) => {
+	const { isOpen, onClose, onOpen } = useDisclosure();
 	const buttonStyles = (isActive?: boolean) => {
 		if (isActive) {
 			return {
@@ -217,14 +220,15 @@ const MenuBar = ({ editor }: any) => {
 					aria-label={__('Hard Break', 'masteriyo')}
 					sx={buttonCommonStyles()}
 					icon={<Icon as={BiImageAdd} />}
-					onClick={() => editor.chain().focus().setHardBreak().run()}
+					onClick={onOpen}
 				/>
+				<ImageUploadModal isOpen={isOpen} onClose={onClose} />
 			</Stack>
 		</Stack>
 	);
 };
 
-const Editor: React.FC<Props> = (props) => {
+const Editor: React.FC<Props> = () => {
 	const editor = useEditor({
 		extensions: [StarterKit],
 		content: 'Your content',

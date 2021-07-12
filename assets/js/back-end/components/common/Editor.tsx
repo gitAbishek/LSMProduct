@@ -21,6 +21,10 @@ import StarterKit from '@tiptap/starter-kit';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import {
+	BiAlignJustify,
+	BiAlignLeft,
+	BiAlignMiddle,
+	BiAlignRight,
 	BiBold,
 	BiCode,
 	BiCodeBlock,
@@ -181,6 +185,37 @@ const MenuBar = ({ editor }: any) => {
 					</MenuList>
 				</Menu>
 
+				<Center height="20px">
+					<Divider orientation="vertical" />
+				</Center>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Align Left', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive({ textAlign: 'left' }))}
+					icon={<Icon as={BiAlignLeft} />}
+					onClick={() => editor.chain().focus().setTextAlign('left').run()}
+				/>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Align Center', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive({ textAlign: 'center' }))}
+					icon={<Icon as={BiAlignMiddle} />}
+					onClick={() => editor.chain().focus().setTextAlign('center').run()}
+				/>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Align Right', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive({ textAlign: 'right' }))}
+					icon={<Icon as={BiAlignRight} />}
+					onClick={() => editor.chain().focus().setTextAlign('right').run()}
+				/>
+				<IconButton
+					variant="unstyled"
+					aria-label={__('Justify', 'masteriyo')}
+					sx={buttonCommonStyles(editor.isActive({ textAlign: 'justify' }))}
+					icon={<Icon as={BiAlignJustify} />}
+					onClick={() => editor.chain().focus().setTextAlign('justify').run()}
+				/>
 				<Center height="20px">
 					<Divider orientation="vertical" />
 				</Center>

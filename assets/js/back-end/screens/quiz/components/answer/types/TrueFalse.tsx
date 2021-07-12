@@ -28,6 +28,9 @@ const TrueFalse: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
 	const [answers, setAnswers] = useState<any>(answersData);
+  const [checkedItems, setCheckedItems] = React.useState([false, false])
+
+	console.log(answersData);
 
 	const onAddNewAnswerPress = () => {
 		setAnswers([

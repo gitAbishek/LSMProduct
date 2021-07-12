@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import { borderedBoxStyles, sectionHeaderStyles } from 'Config/styles';
+import { nanoid } from 'nanoid';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiCopy, BiPlus, BiTrash } from 'react-icons/bi';
@@ -27,20 +28,19 @@ interface Props {
 const TrueFalse: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
-	const [answers, setAnswers] = useState<any>(answersData);
-  const [checkedItems, setCheckedItems] = React.useState([false, false])
-
-	console.log(answersData);
+	const [answers, setAnswers] = useState<any>({});
+	const [checkedItem, setCheckedItem] = React.useState<any>(null);
+	const nanoId = nanoid();
 
 	const onAddNewAnswerPress = () => {
-		setAnswers([
+		setAnswers({
 			...answers,
-			{
+			[nanoId]: {
 				name: 'New Answer',
 				right: false,
 				checked: false,
 			},
-		]);
+		});
 	};
 
 	const iconStyles = {
@@ -56,10 +56,31 @@ const TrueFalse: React.FC<Props> = (props) => {
 		setAnswers(newAnswers);
 	};
 
+	const onCheckPress = (id: any, checked: boolean) => {
+		var newAnswers = answers;
+
+		// uncheck other checkbox
+		for (var key in newAnswers) {
+			if (newAnswers.hasOwnProperty(key)) {
+				newAnswers[key] = { ...answers[key], checked: false };
+			}
+		}
+
+		setAnswers({
+			...newAnswers,
+			[id]: {
+				name: 'New Answer',
+				right: false,
+				checked: checked,
+			},
+		});
+	};
+
 	useEffect(() => {
 		setValue('answers', answers);
 	}, [answers, setValue]);
 
+	console.log(answers);
 	return (
 		<Stack direction="column" spacing="6">
 			<Flex sx={sectionHeaderStyles}>
@@ -69,37 +90,39 @@ const TrueFalse: React.FC<Props> = (props) => {
 			</Flex>
 			<Input type="hidden" {...register('answers')} />
 			<Box>
-				{answers.length !== 0 &&
-					answers.map((answer: any, index: any) => (
-						<Flex sx={borderedBoxStyles} key={index}>
-							<Stack direction="row" spacing="2" align="center" flex="1">
-								<Icon as={Sortable} fontSize="lg" color="gray.500" />
-								<Editable defaultValue={answer?.name}>
-									<EditablePreview />
-									<EditableInput />
-								</Editable>
+				{Object.entries(answers).map(([id, answer]: any) => (
+					<Flex sx={borderedBoxStyles} key={id}>
+						<Stack direction="row" spacing="2" align="center" flex="1">
+							<Icon as={Sortable} fontSize="lg" color="gray.500" />
+							<Editable defaultValue={answer?.name}>
+								<EditablePreview />
+								<EditableInput />
+							</Editable>
+						</Stack>
+						<Stack direction="row" spacing="4">
+							<Checkbox
+								isChecked={answer?.checked}
+								onChange={(e) => onCheckPress(id, e.target.checked)}
+							/>
+							<Stack direction="row" spacing="2">
+								<IconButton
+									variant="unstyled"
+									sx={iconStyles}
+									aria-label={__('Duplicate', 'masteriyo')}
+									icon={<BiCopy />}
+								/>
+								<IconButton
+									variant="unstyled"
+									sx={iconStyles}
+									aria-label={__('Delete', 'masteriyo')}
+									icon={<BiTrash />}
+									minW="auto"
+									onClick={() => onDeletePress(id)}
+								/>
 							</Stack>
-							<Stack direction="row" spacing="4">
-								<Checkbox defaultChecked={answer?.checked} />
-								<Stack direction="row" spacing="2">
-									<IconButton
-										variant="unstyled"
-										sx={iconStyles}
-										aria-label={__('Duplicate', 'masteriyo')}
-										icon={<BiCopy />}
-									/>
-									<IconButton
-										variant="unstyled"
-										sx={iconStyles}
-										aria-label={__('Delete', 'masteriyo')}
-										icon={<BiTrash />}
-										minW="auto"
-										onClick={() => onDeletePress(index)}
-									/>
-								</Stack>
-							</Stack>
-						</Flex>
-					))}
+						</Stack>
+					</Flex>
+				))}
 			</Box>
 			<ButtonGroup>
 				<Button

@@ -21,7 +21,7 @@ const theme = extendTheme({
 			'html,body': {
 				bg: 'gray.50',
 			},
-			'#masteriyo': {
+			'.wp-admin #masteriyo': {
 				ml: '-20px',
 			},
 			'#masteriyo select': {

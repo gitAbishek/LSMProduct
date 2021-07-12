@@ -379,7 +379,7 @@ msgstr ""
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:190
 #: assets/js/back-end/screens/orders/EditOrder.tsx:592
 #: assets/js/back-end/screens/orders/components/OrderRow.tsx:234
-#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:91
+#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:94
 #: assets/js/back-end/screens/quiz/components/question/Question.tsx:212
 #: assets/js/back-end/screens/sections/components/Content.tsx:174
 #: assets/js/back-end/screens/sections/components/Section.tsx:230
@@ -1010,11 +1010,11 @@ msgstr ""
 msgid "Pass mark is required for the quiz"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:64
+#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:67
 msgid "Answers"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:85
+#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:88
 #: assets/js/back-end/screens/quiz/components/question/Question.tsx:144
 msgid "Duplicate"
 msgstr ""

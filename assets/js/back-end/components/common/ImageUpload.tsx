@@ -24,6 +24,7 @@ interface Props {
 	register?: any;
 	setValue?: any;
 	onUploadSuccess?: any;
+	onImageDelete?: any;
 }
 
 const ImageUpload: React.FC<Props> = (props) => {
@@ -76,6 +77,7 @@ const ImageUpload: React.FC<Props> = (props) => {
 			onSuccess: () => {
 				setImageId(0);
 				setPreview(null);
+				onUploadSuccess && onUploadSuccess(null);
 			},
 		});
 	};

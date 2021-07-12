@@ -35,7 +35,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 					Edit Image
 				</ModalHeader>
 				<ModalCloseButton color="white" />
-				<ModalBody>
+				<ModalBody py="6">
 					<ImageUpload onUploadSuccess={setImageUrl} />
 				</ModalBody>
 				<ModalFooter bg="gray.50" borderTop="1px" borderColor="gray.100">

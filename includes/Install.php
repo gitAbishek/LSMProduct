@@ -21,6 +21,7 @@ class Install {
 		self::install();
 		self::init_db();
 		self::create_roles();
+		self::create_difficulties();
 	}
 
 	/**
@@ -373,6 +374,36 @@ class Install {
 
 		foreach ( $tables as $table ) {
 			$wpdb->query( 'DROP TABLE IF EXISTS ' . esc_sql( $table ) );
+		}
+	}
+
+	/**
+	 * Create default difficulties.
+	 *
+	 * @since 0.1.0
+	 */
+	public static function create_difficulties() {
+		$activation = get_option( 'masteriyo_first_time_activation_flag', false );
+		$activation = masteriyo_string_to_bool( $activation );
+
+		if ( $activation ) {
+			return;
+		}
+
+		error_log( __FUNCTION__ );
+
+		$terms = array(
+			'beginner'     => esc_html__( 'Beginner', 'masteriyo' ),
+			'intermediate' => esc_html__( 'Intermediate', 'masteriyo' ),
+			'expert'       => esc_html__( 'Expert', 'masteriyo' ),
+		);
+
+		foreach ( $terms as $slug => $name ) {
+			$term = get_term_by( 'slug', $name, 'course_difficulty' );
+
+			if ( false === $term ) {
+				wp_insert_term( $name, 'course_difficulty' );
+			}
 		}
 	}
 }

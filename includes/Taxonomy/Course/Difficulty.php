@@ -39,7 +39,7 @@ class Difficulty extends Taxonomy {
 		return apply_filters(
 			'masteriyo_taxonomy_args_course_difficulty',
 			array(
-				'hierarchical'      => false,
+				'hierarchical'      => true,
 				'label'             => __( 'Course Difficulties', 'masteriyo' ),
 				'show_ui'           => true,
 				'show_admin_column' => true,
@@ -51,7 +51,7 @@ class Difficulty extends Taxonomy {
 					'with_front'   => false,
 					'hierarchical' => true,
 				),
-				'labels' => array(
+				'labels'            => array(
 					'name'                       => _x( 'Course Difficulties', 'Taxonomy General Name', 'masteriyo' ),
 					'singular_name'              => _x( 'Course Difficulty', 'Taxonomy Singular Name', 'masteriyo' ),
 					'menu_name'                  => __( 'Course Difficulty', 'masteriyo' ),

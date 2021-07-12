@@ -129,10 +129,10 @@ class Masteriyo extends Container {
 	 * @since 0.1.0
 	 */
 	public function after_wp_init() {
-		Install::init();
 		RegisterPostType::instance()->register();
 		RegisterTaxonomies::register();
 		Shortcodes::instance()->register_shortcodes();
+		Install::init();
 
 		$this->register_order_status();
 		$this->load_text_domain();

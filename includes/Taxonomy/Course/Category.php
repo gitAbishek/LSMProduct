@@ -45,12 +45,12 @@ class Category extends Taxonomy {
 				'show_in_nav_menus' => true,
 				'show_tag_cloud'    => true,
 				'query_var'         => true,
-				'rewrite'               => array(
+				'rewrite'           => array(
 					'slug'         => $permalinks['course_category_rewrite_slug'],
 					'with_front'   => false,
 					'hierarchical' => true,
 				),
-				'labels' => array(
+				'labels'            => array(
 					'name'                       => _x( 'Course Categories', 'Taxonomy General Name', 'masteriyo' ),
 					'singular_name'              => _x( 'Course Category', 'Taxonomy Singular Name', 'masteriyo' ),
 					'menu_name'                  => __( 'Course Category', 'masteriyo' ),
@@ -70,7 +70,7 @@ class Category extends Taxonomy {
 					'not_found'                  => __( 'Not Found', 'masteriyo' ),
 					'no_terms'                   => __( 'No course categories', 'masteriyo' ),
 					'items_list'                 => __( 'Course Categories list', 'masteriyo' ),
-					'items_list_navigation'      => __( 'Course Categories list navigation', 'masteriyo' )
+					'items_list_navigation'      => __( 'Course Categories list navigation', 'masteriyo' ),
 				),
 			)
 		);

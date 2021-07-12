@@ -1,5 +1,5 @@
 export const borderedBoxStyles = {
-	borderWidth: '1px',
+	border: '1px',
 	borderColor: 'gray.100',
 	rounded: 'sm',
 	mb: '4',

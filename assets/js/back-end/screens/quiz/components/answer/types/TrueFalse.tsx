@@ -14,7 +14,7 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { borderedBoxStyles, sectionHeaderStyles } from 'Config/styles';
+import { sectionHeaderStyles } from 'Config/styles';
 import { nanoid } from 'nanoid';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -91,7 +91,16 @@ const TrueFalse: React.FC<Props> = (props) => {
 			<Input type="hidden" {...register('answers')} />
 			<Box>
 				{Object.entries(answers).map(([id, answer]: any) => (
-					<Flex sx={borderedBoxStyles} key={id}>
+					<Flex
+						key={id}
+						border="1px"
+						borderColor={answer?.checked ? 'green.200' : 'gray.100'}
+						rounded="sm"
+						mb="4"
+						align="center"
+						justify="space-between"
+						px="2"
+						py="1">
 						<Stack direction="row" spacing="2" align="center" flex="1">
 							<Icon as={Sortable} fontSize="lg" color="gray.500" />
 							<Editable defaultValue={answer?.name}>
@@ -101,6 +110,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 						</Stack>
 						<Stack direction="row" spacing="4">
 							<Checkbox
+								colorScheme="green"
 								isChecked={answer?.checked}
 								onChange={(e) => onCheckPress(id, e.target.checked)}
 							/>

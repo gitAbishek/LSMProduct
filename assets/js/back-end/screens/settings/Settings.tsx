@@ -69,8 +69,6 @@ const Settings = () => {
 	}
 
 	const onSubmit = (data: SetttingsMap) => {
-		console.log(data);
-		
 		try {
 			updateSettings.mutate(data);
 		} catch (err) {

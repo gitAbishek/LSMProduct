@@ -25,6 +25,7 @@ import {
 	BiCodeBlock,
 	BiImageAdd,
 	BiItalic,
+	BiListOl,
 	BiListUl,
 	BiMinus,
 	BiParagraph,
@@ -78,6 +79,7 @@ const MenuBar = ({ editor }: any) => {
 		<Stack
 			direction="row"
 			spacing="1"
+			px="1"
 			align="center"
 			justify="space-between"
 			borderBottom="1px"
@@ -192,7 +194,7 @@ const MenuBar = ({ editor }: any) => {
 					variant="unstyled"
 					aria-label={__('Ordered List', 'masteriyo')}
 					sx={buttonCommonStyles(editor.isActive('orderedList'))}
-					icon={<Icon as={BiListUl} />}
+					icon={<Icon as={BiListOl} />}
 					onClick={() => editor.chain().focus().toggleOrderedList().run()}
 				/>
 

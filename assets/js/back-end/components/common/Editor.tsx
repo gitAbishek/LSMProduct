@@ -254,7 +254,9 @@ const Editor: React.FC<Props> = () => {
 	return (
 		<Box
 			border="1px"
-			borderColor="gray.100"
+			borderColor="gray.200"
+			shadow="input"
+			rounded="sm"
 			sx={{
 				fontSize: 'sm',
 				'.ProseMirror': {

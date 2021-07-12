@@ -44,7 +44,7 @@ function masteriyo_get_price_excluding_tax( $course, $args = array() ) {
 }
 
 /**
- * Check whether the current user can enroll the course.
+ * Check whether the current user can start taking the course.
  *
  * @since 0.1.0
  *
@@ -53,8 +53,8 @@ function masteriyo_get_price_excluding_tax( $course, $args = array() ) {
  *
  * @return bool
  */
-function masteriyo_can_course_be_enrolled( $course, $user = null ) {
-	$can_be_enrolled = false;
+function masteriyo_can_start_course( $course, $user = null ) {
+	$can_start_course = false;
 
 	if ( is_null( $user ) ) {
 		$user = masteriyo_get_current_user();
@@ -76,10 +76,15 @@ function masteriyo_can_course_be_enrolled( $course, $user = null ) {
 	if ( ! empty( $user_course ) ) {
 		$order = $user_course[0]->get_order();
 
-		$can_be_enrolled = 'completed' === $order->get_status();
+		$can_start_course = 'completed' === $order->get_status();
 	}
 
-	return apply_filters( 'masteriyo_can_course_be_enrolled', $can_be_enrolled, $course, $user );
+	$course = masteriyo_get_course( $course_id );
+	if ( 'open' === $course->get_access_mode() ) {
+		$can_start_course = true;
+	}
+
+	return apply_filters( 'masteriyo_can_start_course', $can_start_course, $course, $user );
 }
 
 /**

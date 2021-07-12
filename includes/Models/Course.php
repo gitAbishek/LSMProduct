@@ -1123,24 +1123,24 @@ class Course extends Model {
 	}
 
 	/**
-	 * Get enroll button text for the single page.
+	 * Get start course button text for the single page.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return string
 	 */
-	public function single_enroll_text() {
-		return apply_filters( 'masteriyo_single_course_enroll_text', __( 'Enroll Now', 'masteriyo' ), $this );
+	public function single_course_start_text() {
+		return apply_filters( 'masteriyo_single_course_start_text', __( 'Start Course', 'masteriyo' ), $this );
 	}
 
 	/**
-	 * Get enroll URL.
+	 * Get start course URL.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return string
 	 */
-	public function enroll_url() {
+	public function start_course_url() {
 		return home_url( '?masteriyo=interactive#/course/' . $this->get_id() );
 	}
 

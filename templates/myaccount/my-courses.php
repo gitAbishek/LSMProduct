@@ -62,7 +62,7 @@ do_action( 'masteriyo_before_account_mycourses', $all_courses, $enrolled_courses
 
 						<div class="mto-mycourses--footer mto-flex mto-flex--space-between">
 							<div class="mto-mycourses--date"><?php _e( 'Started', 'masteriyo' ); ?> <?php echo esc_html( masteriyo_format_datetime( $course->user_course->get_date_start() ) );  ?></div>
-							<a href="<?php echo esc_attr( $course->enroll_url() ); ?>" class="mto-mycourses--btn mto-btn mto-btn-primary"><?php _e( 'Continue', 'masteriyo' ); ?></a>
+							<a href="<?php echo esc_attr( $course->start_course_url() ); ?>" class="mto-mycourses--btn mto-btn mto-btn-primary"><?php _e( 'Continue', 'masteriyo' ); ?></a>
 						</div>
 					</div>
 				</div>

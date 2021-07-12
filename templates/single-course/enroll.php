@@ -12,11 +12,11 @@ global $course;
 
 <?php do_action( 'masteriyo_before_add_to_cart_form' ); ?>
 
-	<?php if ( masteriyo_can_course_be_enrolled( $course ) ) : ?>
-		<a href="<?php echo esc_url( $course->enroll_url() ); ?>"
+	<?php if ( masteriyo_can_start_course( $course ) ) : ?>
+		<a href="<?php echo esc_url( $course->start_course_url() ); ?>"
 			target="_blank"
 			class="single_add_to_cart_button button alt mto-btn mto-btn-primary mto-scourse--btn">
-			<?php echo esc_html( $course->single_enroll_text() ); ?>
+			<?php echo esc_html( $course->single_course_start_text() ); ?>
 		</a>
 	<?php else : ?>
 		<form class="add_to_cart" method="post" enctype="multipart/form-data"

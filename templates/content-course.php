@@ -77,11 +77,11 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 					<time class="mto-inline-block mto-text-sm">10:00 min</time>
 				</span>
 			<?php if ( $course->is_purchasable() ) : ?>
-				<?php if ( masteriyo_can_course_be_enrolled( $course ) ) : ?>
-					<a href="<?php echo esc_url( $course->enroll_url() ); ?>"
+				<?php if ( masteriyo_can_start_course( $course ) ) : ?>
+					<a href="<?php echo esc_url( $course->start_course_url() ); ?>"
 						target="_blank"
 						class="single_add_to_cart_button button alt mto-btn mto-btn-primary mto-scourse--btn">
-						<?php apply_filters( 'masteriyo_enroll_text', esc_html_e( 'Enroll Now', 'masteriyo' ) ); ?>
+						<?php apply_filters( 'masteriyo_start_course_text', esc_html_e( 'Start Course', 'masteriyo' ) ); ?>
 					</a>
 				<?php else : ?>
 					<a href="?add-to-cart=<?php echo absint( $course->get_id() ); ?>" class="mto-course--btn mto-btn mto-btn-primary">

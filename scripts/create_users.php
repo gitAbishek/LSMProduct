@@ -46,15 +46,6 @@ $users = array(
 		'description' => 'This is manager2',
 	),
 	array(
-		'user_login'  => 'admin',
-		'user_email'  => 'admin@the.com',
-		'role'        => 'administrator',
-		'password'    => 'admin',
-		'user_url'    => 'https://admin.example.com',
-		'first_name'  => 'Administrator',
-		'description' => 'This is administrator',
-	),
-	array(
 		'user_login'  => 'student',
 		'user_email'  => 'student@the.com',
 		'role'        => 'masteriyo_student',

@@ -71,7 +71,7 @@ class Question extends Model {
 		'status'            => false,
 		'description'       => '',
 		'parent_id'         => 0,
-		'answers'           => array(),
+		'answers'           => '',
 		'answer_required'   => true,
 		'randomize'         => false,
 		'points'            => 0,

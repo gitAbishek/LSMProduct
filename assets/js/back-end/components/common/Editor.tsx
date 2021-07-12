@@ -15,6 +15,7 @@ import {
 import Dropcursor from '@tiptap/extension-dropcursor';
 import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
+import TextAlign from '@tiptap/extension-text-align';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { __ } from '@wordpress/i18n';
@@ -250,7 +251,15 @@ const MenuBar = ({ editor }: any) => {
 
 const Editor: React.FC<Props> = () => {
 	const editor = useEditor({
-		extensions: [StarterKit, Image, Dropcursor, Placeholder],
+		extensions: [
+			StarterKit,
+			Image,
+			Dropcursor,
+			Placeholder,
+			TextAlign.configure({
+				types: ['heading', 'paragraph'],
+			}),
+		],
 	});
 
 	return (

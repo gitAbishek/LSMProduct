@@ -44,8 +44,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 			...answers,
 			[nanoId]: {
 				name: 'New Answer',
-				right: false,
-				checked: false,
+				correct: false,
 			},
 		});
 	};
@@ -57,13 +56,13 @@ const TrueFalse: React.FC<Props> = (props) => {
 		setAnswers(newAns);
 	};
 
-	const onCheckPress = (id: any, checked: boolean) => {
+	const onCheckPress = (id: any, correct: boolean) => {
 		var newAnswers = answers;
 
 		// uncheck other checkbox
 		for (var key in newAnswers) {
 			if (newAnswers.hasOwnProperty(key)) {
-				newAnswers[key] = { ...answers[key], checked: false };
+				newAnswers[key] = { ...answers[key], correct: false };
 			}
 		}
 
@@ -72,7 +71,17 @@ const TrueFalse: React.FC<Props> = (props) => {
 			[id]: {
 				name: 'New Answer',
 				right: false,
-				checked: checked,
+				correct: correct,
+			},
+		});
+	};
+
+	const onDuplicatePress = (name: string) => {
+		setAnswers({
+			...answers,
+			[nanoId]: {
+				name: name,
+				correct: false,
 			},
 		});
 	};
@@ -94,7 +103,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 					<Flex
 						key={id}
 						border="1px"
-						borderColor={answer?.checked ? 'green.200' : 'gray.100'}
+						borderColor={answer?.correct ? 'green.200' : 'gray.100'}
 						rounded="sm"
 						mb="4"
 						align="center"
@@ -111,7 +120,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 						<Stack direction="row" spacing="4">
 							<Checkbox
 								colorScheme="green"
-								isChecked={answer?.checked}
+								isChecked={answer?.correct}
 								onChange={(e) => onCheckPress(id, e.target.checked)}
 							/>
 							<Stack direction="row" spacing="2">
@@ -119,6 +128,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 									variant="unstyled"
 									sx={iconStyles}
 									aria-label={__('Duplicate', 'masteriyo')}
+									onClick={() => onDuplicatePress(answer.name)}
 									icon={<BiCopy />}
 								/>
 								<IconButton

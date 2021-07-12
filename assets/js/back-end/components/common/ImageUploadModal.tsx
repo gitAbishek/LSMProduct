@@ -32,7 +32,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 					borderTopLeftRadius="xs"
 					color="white"
 					fontSize="sm">
-					Edit Image
+					{__('Upload an Image', 'masteriyo')}
 				</ModalHeader>
 				<ModalCloseButton color="white" />
 				<ModalBody py="6">

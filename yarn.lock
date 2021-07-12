@@ -2019,7 +2019,7 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-document/-/extension-document-2.0.0-beta.12.tgz#dfbc7e686075a38662a43708903cd2047cf7f4b2"
   integrity sha512-i5anc2n98Jg1gi6WDLTaS76jLIUe41FHuMHgL4DCIDXv8m2q0qnktfmOvh9AMF7cPzJ2NVAR9xYw0Pxm3qXY4w==
 
-"@tiptap/extension-dropcursor@^2.0.0-beta.17":
+"@tiptap/extension-dropcursor@2.0.0-beta.17", "@tiptap/extension-dropcursor@^2.0.0-beta.17":
   version "2.0.0-beta.17"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-dropcursor/-/extension-dropcursor-2.0.0-beta.17.tgz#3ca59c264b49a91c1a5b2ce8de3e898903d0a5bc"
   integrity sha512-f7hSA4e9xaVi1GAb6JJErVy2QtdpTxjJmtyV8nG7xGvoI0QH1IIiftD88FWGvUGN1CHBg83XpPpmIIFH7oKthw==
@@ -2098,10 +2098,24 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-paragraph/-/extension-paragraph-2.0.0-beta.15.tgz#89483a2f438d8412287d441c890304985c2ac07f"
   integrity sha512-mYGjo85oyLVwgWc8+XZ0cvr5GSHSKvkj5t2t1PyHXDmt6Nhl5cJcHgXDztIUhyh0gbRVFKjwQMeUAZWg6DGxMg==
 
+"@tiptap/extension-placeholder@2.0.0-beta.25":
+  version "2.0.0-beta.25"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-placeholder/-/extension-placeholder-2.0.0-beta.25.tgz#a6346f5c281a72bd25bad95d0ec4a74ba3841693"
+  integrity sha512-/EEH82YmevjcmKg4YcV1h9o7Z00d3fyRKYTElexmQDetIvsEYLSrwd3lIpbWfa0gghdfwkSnEBd3Akx/09cN9w==
+  dependencies:
+    prosemirror-model "^1.14.2"
+    prosemirror-state "^1.3.4"
+    prosemirror-view "^1.18.8"
+
 "@tiptap/extension-strike@^2.0.0-beta.16":
   version "2.0.0-beta.16"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-strike/-/extension-strike-2.0.0-beta.16.tgz#cccce9713824e05ebde895f84f747b8bbed45f7d"
   integrity sha512-SPSCUVzxFLKZzgMXYfeUZE+xy52CJckswo0dZ/8NcUthl3mkDS/TwzokpQ/wsyEsKaJNYt8vh2S9HpadSrLcug==
+
+"@tiptap/extension-text-align@2.0.0-beta.20":
+  version "2.0.0-beta.20"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-text-align/-/extension-text-align-2.0.0-beta.20.tgz#31d9e0f2d224a354aecdf91357825273dceb0963"
+  integrity sha512-R06oz4xr6ULKkVA9MBwttR+72ostEnPDAeXfdf++/RxGwLLmM7TG2+ulMcfp4ICWe6H/zLwTAPpkaKeZSEwwrw==
 
 "@tiptap/extension-text@^2.0.0-beta.12":
   version "2.0.0-beta.12"

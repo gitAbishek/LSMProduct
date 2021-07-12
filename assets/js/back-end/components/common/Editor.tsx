@@ -33,9 +33,9 @@ import { mergeDeep } from '../../utils/mergeDeep';
 import ImageUploadModal from './ImageUploadModal';
 interface Props {
 	name: `${string}`;
-	control: any;
 	defaultValue?: string;
 }
+
 const MenuBar = ({ editor }: any) => {
 	const { isOpen, onClose, onOpen } = useDisclosure();
 	const buttonStyles = (isActive?: boolean) => {

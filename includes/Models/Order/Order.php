@@ -539,7 +539,7 @@ class Order extends AbstractOrder {
 	 * @return User|false
 	 */
 	public function get_user() {
-		return $this->get_customer();
+		return $this->get_user_id() ? get_user_by( 'id', $this->get_user_id() ) : false;
 	}
 
 	/**
@@ -907,6 +907,44 @@ class Order extends AbstractOrder {
 			$this->set_date_completed( time() );
 		}
 	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| CRUD methods
+	|--------------------------------------------------------------------------
+	|
+	*/
+	/**
+	 * Save data to the database.
+	 *
+	 * @since 0.1.0
+	 * @return int order ID
+	 */
+	public function save() {
+		$this->maybe_set_user_billing_email();
+		parent::save();
+		$this->status_transition();
+
+		return $this->get_id();
+	}
+
+	/**
+	 * Maybe set empty billing email to that of the user who owns the order.
+	 *
+	 * @since 0.1.0
+	 */
+	protected function maybe_set_user_billing_email() {
+		$user = $this->get_user();
+
+		if ( ! $this->get_billing_email() && $user ) {
+			try {
+				$this->set_billing_email( $user->user_email );
+			} catch ( ModelException $e ) {
+				unset( $e );
+			}
+		}
+	}
+
 
 	/*
 	|--------------------------------------------------------------------------

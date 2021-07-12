@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Center,
 	Divider,
@@ -11,7 +12,9 @@ import {
 	Stack,
 	useDisclosure,
 } from '@chakra-ui/react';
+import Dropcursor from '@tiptap/extension-dropcursor';
 import Image from '@tiptap/extension-image';
+import Placeholder from '@tiptap/extension-placeholder';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { __ } from '@wordpress/i18n';
@@ -72,7 +75,13 @@ const MenuBar = ({ editor }: any) => {
 	};
 
 	return (
-		<Stack direction="row" spacing="1" align="center" justify="space-between">
+		<Stack
+			direction="row"
+			spacing="1"
+			align="center"
+			justify="space-between"
+			borderBottom="1px"
+			borderColor="gray.100">
 			<Stack direction="row" spacing="1" align="center">
 				<IconButton
 					variant="unstyled"
@@ -239,15 +248,31 @@ const MenuBar = ({ editor }: any) => {
 
 const Editor: React.FC<Props> = () => {
 	const editor = useEditor({
-		extensions: [StarterKit, Image],
-		content: 'Your content',
+		extensions: [StarterKit, Image, Dropcursor, Placeholder],
 	});
 
 	return (
-		<>
+		<Box
+			border="1px"
+			borderColor="gray.100"
+			sx={{
+				fontSize: 'sm',
+				'.ProseMirror': {
+					minH: '200px',
+				},
+				'.ProseMirror p.is-editor-empty:first-child::before': {
+					content: 'attr(data-placeholder)',
+					float: 'left',
+					color: 'gray.300',
+					pointerEvents: 'none',
+					height: '0',
+				},
+			}}>
 			<MenuBar editor={editor} />
-			<EditorContent editor={editor} />
-		</>
+			<Box p="3">
+				<EditorContent editor={editor} />
+			</Box>
+		</Box>
 	);
 };
 

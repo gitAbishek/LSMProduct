@@ -37,7 +37,6 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	const {
 		register,
 		handleSubmit,
-		control,
 		formState: { errors },
 	} = useForm<SectionInputs>();
 	const queryClient = useQueryClient();

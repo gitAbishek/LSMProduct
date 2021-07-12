@@ -288,19 +288,22 @@ const MenuBar = ({ editor }: any) => {
 };
 
 const Editor: React.FC<Props> = (props) => {
-	const { name } = props;
+	const { name, defaultValue } = props;
 	const { register, setValue } = useFormContext();
+
+	console.log(defaultValue);
 
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
-			Image,
+			Image.configure({ inline: true }),
 			Dropcursor,
 			Placeholder,
 			TextAlign.configure({
 				types: ['heading', 'paragraph'],
 			}),
 		],
+		content: defaultValue,
 	});
 
 	return (

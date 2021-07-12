@@ -29,9 +29,16 @@ const TrueFalse: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
 	const [answers, setAnswers] = useState<any>({});
-	const [checkedItem, setCheckedItem] = React.useState<any>(null);
 	const nanoId = nanoid();
 
+	const iconStyles = {
+		fontSize: 'x-large',
+		color: 'gray.500',
+		minW: 'auto',
+		_hover: { color: 'blue.500' },
+	};
+
+	// Adds new answer
 	const onAddNewAnswerPress = () => {
 		setAnswers({
 			...answers,
@@ -43,17 +50,11 @@ const TrueFalse: React.FC<Props> = (props) => {
 		});
 	};
 
-	const iconStyles = {
-		fontSize: 'x-large',
-		color: 'gray.500',
-		minW: 'auto',
-		_hover: { color: 'blue.500' },
-	};
-
+	// Delete answer
 	const onDeletePress = (id: any) => {
-		var newAnswers = [...answers];
-		newAnswers.splice(id, 1);
-		setAnswers(newAnswers);
+		const newAns = Object.assign({}, answers);
+		delete newAns[id];
+		setAnswers(newAns);
 	};
 
 	const onCheckPress = (id: any, checked: boolean) => {
@@ -80,7 +81,6 @@ const TrueFalse: React.FC<Props> = (props) => {
 		setValue('answers', answers);
 	}, [answers, setValue]);
 
-	console.log(answers);
 	return (
 		<Stack direction="column" spacing="6">
 			<Flex sx={sectionHeaderStyles}>

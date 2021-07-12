@@ -20,13 +20,15 @@ import MediaAPI from '../../utils/media';
 
 interface Props {
 	mediaId?: any;
-	name: string;
-	register: any;
-	setValue: any;
+	name?: string;
+	register?: any;
+	setValue?: any;
+	onUploadSuccess?: any;
+	onImageDelete?: any;
 }
 
 const ImageUpload: React.FC<Props> = (props) => {
-	const { mediaId, name, register, setValue } = props;
+	const { mediaId, name, register, setValue, onUploadSuccess } = props;
 	const toast = useToast();
 	const [preview, setPreview] = useState<any>(null);
 	const [imageId, setImageId] = useState<any>(mediaId || '0');
@@ -65,6 +67,7 @@ const ImageUpload: React.FC<Props> = (props) => {
 			onSuccess: (mediaData) => {
 				setImageId(mediaData?.id);
 				setPreview(mediaData?.source_url);
+				onUploadSuccess && onUploadSuccess(mediaData?.source_url);
 			},
 		});
 	};
@@ -74,6 +77,7 @@ const ImageUpload: React.FC<Props> = (props) => {
 			onSuccess: () => {
 				setImageId(0);
 				setPreview(null);
+				onUploadSuccess && onUploadSuccess(null);
 			},
 		});
 	};
@@ -109,12 +113,12 @@ const ImageUpload: React.FC<Props> = (props) => {
 	const isLoading = imageQuery?.isLoading || uploadMedia.isLoading;
 
 	useEffect(() => {
-		setValue(name, imageId);
+		setValue && setValue(name, imageId);
 	}, [imageId, name, setValue]);
 
 	return (
 		<>
-			<Input type="hidden" {...register(name)} />
+			{register && <Input type="hidden" {...register(name)} />}
 			{isLoading && (
 				<Box>
 					<Center border="1px" borderColor="gray.100" h="36" overflow="hidden">
@@ -136,7 +140,7 @@ const ImageUpload: React.FC<Props> = (props) => {
 							deleteImage(imageId);
 							setImageId(0);
 						}}>
-						{__('Remove featured Image', 'masteriyo')}
+						{__('Remove Image', 'masteriyo')}
 					</Button>
 				</Stack>
 			)}

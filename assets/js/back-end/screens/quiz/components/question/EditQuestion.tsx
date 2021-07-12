@@ -113,11 +113,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 			</Stack>
 			<FormControl>
 				<FormLabel>{__('Question Description', 'masteriyo')}</FormLabel>
-				<Editor
-					name="description"
-					defaultValue={questionData.description}
-					control={control}
-				/>
+				<Editor name="description" defaultValue={questionData.description} />
 			</FormControl>
 		</Stack>
 	);

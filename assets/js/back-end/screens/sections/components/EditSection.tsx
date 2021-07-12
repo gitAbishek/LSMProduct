@@ -15,7 +15,6 @@ import Editor from 'Components/common/Editor';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
-
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
 
@@ -38,7 +37,6 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	const {
 		register,
 		handleSubmit,
-		control,
 		formState: { errors },
 	} = useForm<SectionInputs>();
 	const queryClient = useQueryClient();
@@ -85,11 +83,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 						<FormLabel htmlFor="">
 							{__('Section Description', 'masteriyo')}
 						</FormLabel>
-						<Editor
-							name="description"
-							defaultValue={description}
-							control={control}
-						/>
+						<Editor name="description" defaultValue={description} />
 					</FormControl>
 					<Divider />
 					<ButtonGroup>

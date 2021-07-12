@@ -5,6 +5,7 @@ import {
 	Divider,
 	Icon,
 	IconButton,
+	Input,
 	Menu,
 	MenuButton,
 	MenuItem,
@@ -20,6 +21,7 @@ import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import {
 	BiAlignJustify,
 	BiAlignLeft,
@@ -47,6 +49,7 @@ interface Props {
 
 const MenuBar = ({ editor }: any) => {
 	const { isOpen, onClose, onOpen } = useDisclosure();
+
 	const buttonStyles = (isActive?: boolean) => {
 		if (isActive) {
 			return {
@@ -284,7 +287,10 @@ const MenuBar = ({ editor }: any) => {
 	);
 };
 
-const Editor: React.FC<Props> = () => {
+const Editor: React.FC<Props> = (props) => {
+	const { name } = props;
+	const { register, setValue } = useFormContext();
+
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
@@ -316,9 +322,13 @@ const Editor: React.FC<Props> = () => {
 					height: '0',
 				},
 			}}>
+			<Input type="hidden" {...register(name)} />
 			<MenuBar editor={editor} />
 			<Box p="3">
-				<EditorContent editor={editor} />
+				<EditorContent
+					editor={editor}
+					onChange={() => setValue(name, editor?.getHTML())}
+				/>
 			</Box>
 		</Box>
 	);

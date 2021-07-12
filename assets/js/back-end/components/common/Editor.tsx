@@ -291,8 +291,6 @@ const Editor: React.FC<Props> = (props) => {
 	const { name, defaultValue } = props;
 	const { register, setValue } = useFormContext();
 
-	console.log(defaultValue);
-
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
@@ -317,7 +315,11 @@ const Editor: React.FC<Props> = (props) => {
 				'.ProseMirror': {
 					minH: '200px',
 				},
-				'.ProseMirror p.is-editor-empty:first-child::before': {
+
+				'.ProseMirror:focus': {
+					outline: 'none',
+				},
+				'.ProseMirror p.is-editor-empty:first-of-type::before': {
 					content: 'attr(data-placeholder)',
 					float: 'left',
 					color: 'gray.300',

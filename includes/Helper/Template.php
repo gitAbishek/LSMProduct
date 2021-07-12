@@ -946,7 +946,7 @@ if ( ! function_exists( 'masteriyo_get_email_order_items' ) ) {
 					'order'               => $order,
 					'items'               => $order->get_items(),
 					'show_sku'            => $args['show_sku'],
-					'show_purchase_note'  => $order->is_paid() && ! $args['sent_to_admin'],
+					'show_purchase_note'  => $order->is_paid(),
 					'show_image'          => $args['show_image'],
 					'image_size'          => $args['image_size'],
 				)

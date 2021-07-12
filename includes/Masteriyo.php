@@ -14,6 +14,7 @@ use ThemeGrill\Masteriyo\RestApi\RestApi;
 use ThemeGrill\Masteriyo\PostType\RegisterPostType;
 use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
 use ThemeGrill\Masteriyo\AdminMenu;
+use ThemeGrill\Masteriyo\Emails\EmailHooks;
 use ThemeGrill\Masteriyo\FileRestrictions\FileRestrictions;
 use ThemeGrill\Masteriyo\Shortcodes\Shortcodes;
 use ThemeGrill\Masteriyo\Setup\Onboard;
@@ -70,6 +71,7 @@ class Masteriyo extends Container {
 		CourseReviews::init();
 		CourseQuestionAnswers::init();
 		Faqs::init();
+		EmailHooks::init();
 
 		// Register service providers.
 		$this->register_service_providers();

@@ -60,7 +60,6 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 			<Stack direction="row" flex="1">
 				<TabList sx={tabListStyles}>
 					<Tab sx={tabStyles}>PayPal</Tab>
-					<Tab sx={tabStyles}>PayPal Express</Tab>
 				</TabList>
 				<TabPanels flex="1">
 					<TabPanel>

@@ -9,6 +9,8 @@ export type GeneralSettingsMap = {
 	thousand_separator: string;
 	decimal_separator: string;
 	number_of_decimals: number;
+	primary_color: string;
+	theme: string;
 };
 
 export type CoursesSettingsMap = {

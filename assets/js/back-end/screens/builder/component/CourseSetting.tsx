@@ -97,6 +97,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 						<TabList sx={tabListStyles}>
 							<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
 							<Tab sx={tabStyles}>{__('Display', 'masteriyo')}</Tab>
+							<Tab sx={tabStyles}>{__('Pricing', 'masteriyo')}</Tab>
 						</TabList>
 						<TabPanels flex="1">
 							<TabPanel>
@@ -212,6 +213,20 @@ const CourseSetting: React.FC<Props> = (props) => {
 												<Radio value="false">
 													{__('Only Visible to Enrollers', 'masteriyo')}
 												</Radio>
+											</Stack>
+										</RadioGroup>
+									</FormControl>
+								</Stack>
+							</TabPanel>
+
+							<TabPanel>
+								<Stack direction="column" spacing="8">
+									<FormControl>
+										<FormLabel>Pricing Option</FormLabel>
+										<RadioGroup>
+											<Stack direction="column">
+												<Radio value="1">Free</Radio>
+												<Radio value="2">Paid</Radio>
 											</Stack>
 										</RadioGroup>
 									</FormControl>

@@ -32,7 +32,9 @@ const GeneralSettings: React.FC<Props> = (props) => {
 	const [country, setCountry] = useState(generalData?.country);
 	const { register, setValue } = useFormContext();
 
-	const [primaryColor, setPrimaryColor] = useState('#787DFF');
+	const [primaryColor, setPrimaryColor] = useState(
+		generalData?.primary_color || '#787DFF'
+	);
 
 	const tabStyles = {
 		justifyContent: 'flex-start',
@@ -55,7 +57,8 @@ const GeneralSettings: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		setValue('general.country', country);
-	}, [country, setValue]);
+		setValue('general.primary_color', primaryColor);
+	}, [country, primaryColor, setValue]);
 
 	return (
 		<Tabs orientation="vertical">
@@ -224,16 +227,24 @@ const GeneralSettings: React.FC<Props> = (props) => {
 								<FormLabel minW="xs">
 									{__('Primary Color', 'masteriyo')}
 								</FormLabel>
+								<input
+									type="hidden"
+									{...register('general.primary_color')}
+									defaultValue={generalData?.primary_color}
+								/>
+
 								<ColorInput color={primaryColor} setColor={setPrimaryColor} />
 							</FormControl>
 							<FormControl>
 								<FormLabel minW="xs">{__('Theme', 'masteriyo')}</FormLabel>
-								<Select placeholder={__('Select option', 'masteriyo')}>
-									<option value="minimum_styling">
+								<Select
+									{...register('general.theme')}
+									defaultValue={generalData?.theme}>
+									<option value="minimum">
 										{__('Minimum Styling', 'masteriyo')}
 									</option>
-									<option value="some_styling">
-										{__('Some Styling', 'masteriyo')}
+									<option value="custom">
+										{__('Custom Styling', 'masteriyo')}
 									</option>
 								</Select>
 							</FormControl>

@@ -1,7 +1,6 @@
 import {
 	FormControl,
 	FormLabel,
-	Select,
 	Stack,
 	Switch,
 	Tab,
@@ -81,23 +80,6 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 												/>
 											)}
 										/>
-									</Stack>
-								</FormControl>
-
-								<FormControl>
-									<Stack direction="row">
-										<FormLabel minW="3xs">{__('Style', 'masteriyo')}</FormLabel>
-										<Select
-											defaultValue={advanceData?.style}
-											{...register('advance.style')}>
-											<option value="none">{__('None', 'masteriyo')}</option>
-											<option value="simple">
-												{__('Simple', 'masteriyo')}
-											</option>
-											<option value="advanced">
-												{__('Advanced', 'masteriyo')}
-											</option>
-										</Select>
 									</Stack>
 								</FormControl>
 							</Stack>

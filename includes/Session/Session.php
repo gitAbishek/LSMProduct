@@ -244,12 +244,10 @@ class Session extends AbstractSession {
 	 * @since 0.1.0
 	 */
 	public function set_session_expiration() {
-		$expiring   = time() + (int) apply_filters( 'masteriyo_session_expiring', 47 * HOUR_IN_SECONDS );
-		$expiration = time() + (int) apply_filters( 'masteriyo_session_expiration', 48 * HOUR_IN_SECONDS );
+		$this->expiring   = time() + (int) apply_filters( 'masteriyo_session_expiring', 47 * HOUR_IN_SECONDS );
+		$this->expiration = time() + (int) apply_filters( 'masteriyo_session_expiration', 48 * HOUR_IN_SECONDS );
 
-		$this->expiring   = $expiring;
-		$this->expiration = $expiration;
-		$this->set_prop( 'expiry', $expiration );
+		$this->set_prop( 'expiry', $this->expiration );
 	}
 
 	/**

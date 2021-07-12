@@ -73,9 +73,10 @@ abstract class Session extends Model implements SessionInterface {
 	 * @var array
 	 */
 	protected $data = array(
-		'key'    => '',
-		'data'   => array(),
-		'expiry' => 0,
+		'key'        => '',
+		'data'       => array(),
+		'user_agent' => '',
+		'expiry'     => 0,
 	);
 
 	/**
@@ -120,9 +121,8 @@ abstract class Session extends Model implements SessionInterface {
 	 * @param string $id Set the session ID.
 	 */
 	public function set_id( $id ) {
-		$this->id = (int) $id;
+		$this->id = absint( $id );
 	}
-
 
 	/**
 	 * Get the current session key.
@@ -164,7 +164,6 @@ abstract class Session extends Model implements SessionInterface {
 		$this->set_prop( 'data', $data );
 	}
 
-
 	/**
 	 * Get session expiry.
 	 *
@@ -187,7 +186,30 @@ abstract class Session extends Model implements SessionInterface {
 	 */
 	public function set_expiry( $expiry ) {
 		$this->set_prop( 'expiry', absint( $expiry ) );
-		return $this;
+	}
+
+	/**
+	 * Get session user agent.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 * @return int
+	 */
+	public function get_user_agent( $context = 'view' ) {
+		return $this->get_prop( 'user_agent', $context );
+	}
+
+	/**
+	 * Set session user agent.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $user_agent Session user_agent timestamp.
+	 * @return ThemeGrill\Masteriyo\Session\Session
+	 */
+	public function set_user_agent( $user_agent ) {
+		$this->set_prop( 'user_agent', $user_agent );
 	}
 
 	/**

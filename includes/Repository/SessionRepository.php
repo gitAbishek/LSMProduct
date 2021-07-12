@@ -26,16 +26,19 @@ class SessionRepository implements RepositoryInterface {
 	public function create( Model &$session ) {
 		global $wpdb;
 
-		$session_table = $session->get_table();
+		if ( ! $session->get_user_agent( 'edit' ) ) {
+			$session->set_user_agent( masteriyo_get_user_agent() );
+		}
 
 		$wpdb->replace(
-			$session_table,
+			$session->get_table(),
 			array(
 				'session_key'    => $session->get_key(),
 				'session_data'   => maybe_serialize( $session->all() ),
 				'session_expiry' => $session->get_expiry(),
+				'user_agent'     => $session->get_user_agent( 'edit ' ),
 			),
-			array( '%s', '%s', '%d' )
+			array( '%s', '%s', '%d', '%s' )
 		);
 
 		$session->set_id( $wpdb->insert_id );
@@ -48,7 +51,7 @@ class SessionRepository implements RepositoryInterface {
 	 * @since 0.1.0
 	 *
 	 * @param Model $session Session object.
-	 * @param array $args   Array of args to pass.alert-danger
+	 * @param array $args   Array of args to pass.
 	 */
 	public function delete( Model &$session, $args = array() ) {
 		global $wpdb;
@@ -80,9 +83,10 @@ class SessionRepository implements RepositoryInterface {
 			if ( ! is_null( $result ) ) {
 				$session->set_props(
 					array(
-						'key'    => $result->session_key,
-						'data'   => maybe_unserialize( $result->session_data ),
-						'expiry' => $result->session_expiry,
+						'key'        => $result->session_key,
+						'data'       => maybe_unserialize( $result->session_data ),
+						'expiry'     => $result->session_expiry,
+						'user_agent' => $result->user_agent,
 					)
 				);
 
@@ -113,9 +117,10 @@ class SessionRepository implements RepositoryInterface {
 					'session_key'    => $session->get_key(),
 					'session_data'   => maybe_serialize( $session->all() ),
 					'session_expiry' => $session->get_expiry(),
+					'user_agent'     => $session->get_user_agent( 'edit ' ),
 				),
 				array( 'session_id' => $session->get_id() ),
-				array( '%s', '%s', '%d' ),
+				array( '%s', '%s', '%d', '%s' ),
 				array( '%d' )
 			);
 		}

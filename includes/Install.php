@@ -118,10 +118,8 @@ class Install {
 			`session_key` CHAR(32) NOT NULL,
 			`session_data` LONGTEXT NOT NULL,
 			`session_expiry` BIGINT UNSIGNED NOT NULL,
-			`user_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
 			`user_agent` LONGTEXT,
 			PRIMARY KEY (`session_id`),
-			KEY `user_id` (`user_id`),
 			UNIQUE KEY `session_key` (`session_key`)
 		) $charset_collate;";
 

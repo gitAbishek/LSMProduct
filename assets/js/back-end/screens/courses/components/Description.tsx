@@ -2,7 +2,6 @@ import { FormControl, FormLabel } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import Editor from 'Components/common/Editor';
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
 
 interface Props {
 	defaultValue?: string;
@@ -10,16 +9,11 @@ interface Props {
 
 const Description: React.FC<Props> = (props) => {
 	const { defaultValue } = props;
-	const { control } = useFormContext();
 
 	return (
 		<FormControl>
 			<FormLabel>{__('Course Description', 'masteriyo')}</FormLabel>
-			<Editor
-				name="description"
-				defaultValue={defaultValue}
-				control={control}
-			/>
+			<Editor name="description" defaultValue={defaultValue} />
 		</FormControl>
 	);
 };

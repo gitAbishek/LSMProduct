@@ -1,23 +1,22 @@
 import {
-	Stack,
+	Collapse,
 	FormControl,
 	FormLabel,
 	Input,
+	Stack,
 	Switch,
-	Tabs,
-	TabList,
 	Tab,
-	TabPanels,
+	TabList,
 	TabPanel,
+	TabPanels,
+	Tabs,
 	Textarea,
-	Collapse,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import Editor from 'Components/common/Editor';
 import ImageUpload from 'Components/common/ImageUpload';
 import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
-
 import { EmailsSetttingsMap } from '../../../types';
 
 interface Props {
@@ -225,7 +224,6 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<Editor
 											name="emails.new_order.content"
 											defaultValue={emailData?.new_order.content}
-											control={control}
 										/>
 									</FormControl>
 								</Stack>
@@ -282,7 +280,6 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<Editor
 											name="emails.processing_order.content"
 											defaultValue={emailData?.processing_order.content}
-											control={control}
 										/>
 									</FormControl>
 								</Stack>
@@ -338,7 +335,6 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<Editor
 											name="emails.completed_order.content"
 											defaultValue={emailData?.completed_order.content}
-											control={control}
 										/>
 									</FormControl>
 								</Stack>
@@ -394,7 +390,6 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<Editor
 											name="emails.onhold_order.content"
 											defaultValue={emailData?.onhold_order.content}
-											control={control}
 										/>
 									</FormControl>
 								</Stack>
@@ -460,7 +455,6 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<Editor
 											name="emails.cancelled_order.content"
 											defaultValue={emailData?.cancelled_order.content}
-											control={control}
 										/>
 									</FormControl>
 								</Stack>
@@ -516,7 +510,6 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<Editor
 											name="emails.enrolled_course.content"
 											defaultValue={emailData?.enrolled_course.content}
-											control={control}
 										/>
 									</FormControl>
 								</Stack>
@@ -572,7 +565,6 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<Editor
 											name="emails.completed_course.content"
 											defaultValue={emailData?.completed_course.content}
-											control={control}
 										/>
 									</FormControl>
 								</Stack>
@@ -628,7 +620,6 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										<Editor
 											name="emails.become_an_instructor.content"
 											defaultValue={emailData?.become_an_instructor.content}
-											control={control}
 										/>
 									</FormControl>
 								</Stack>

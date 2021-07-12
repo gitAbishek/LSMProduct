@@ -365,7 +365,7 @@ class QuestionsController extends PostsController {
 			$answers = $this->process_answers( maybe_unserialize( $answers ), $question );
 		}
 
-		$answers = empty( trim( $answers ) ) ? json_decode( '{}' ) : $answers;
+		$answers = is_string( $answers ) && empty( trim( $answers ) ) ? json_decode( '{}' ) : $answers;
 
 		$data = array(
 			'id'                => $question->get_id(),

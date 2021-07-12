@@ -40,7 +40,10 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 				</ModalBody>
 				<ModalFooter bg="gray.50" borderTop="1px" borderColor="gray.100">
 					<ButtonGroup>
-						<Button colorScheme="blue" onClick={() => onSucces(imageUrl)}>
+						<Button
+							colorScheme="blue"
+							onClick={() => onSucces(imageUrl)}
+							isDisabled={!imageUrl}>
 							{__('Add Image', 'masteriyo')}
 						</Button>
 						<Button variant="outline" onClick={onClose}>

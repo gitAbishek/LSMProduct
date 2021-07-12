@@ -54,10 +54,10 @@ const MenuBar = ({ editor }: any) => {
 
 	const buttonCommonStyles = (isActive?: boolean) => {
 		return mergeDeep(buttonStyles(isActive), {
-			fontSize: 'sm',
+			fontSize: '16px',
 			minW: 'auto',
-			width: '30px',
-			height: '30px',
+			width: '26px',
+			height: '26px',
 			p: '1',
 		});
 	};
@@ -243,16 +243,10 @@ const Editor: React.FC<Props> = () => {
 		content: 'Your content',
 	});
 
-	const showJson = () => {
-		console.log(editor?.getHTML());
-	};
 	return (
 		<>
 			<MenuBar editor={editor} />
 			<EditorContent editor={editor} />
-			<Button colorScheme="blue" onClick={showJson}>
-				Show Code
-			</Button>
 		</>
 	);
 };

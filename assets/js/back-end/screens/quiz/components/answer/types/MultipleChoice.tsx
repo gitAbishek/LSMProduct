@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import { sectionHeaderStyles } from 'Config/styles';
+import { merge } from 'lodash';
 import { nanoid } from 'nanoid';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -25,7 +26,7 @@ interface Props {
 	answersData?: any;
 }
 
-const MultipleChoice: React.FC<Props> = (props) => {
+const SingleChoice: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
 	const [answers, setAnswers] = useState<any>(answersData);
@@ -57,16 +58,27 @@ const MultipleChoice: React.FC<Props> = (props) => {
 	};
 
 	const onCheckPress = (id: any, correct: boolean) => {
-		var newAnswers = answers;
+		var newAnswers = { ...answers };
 
-		setAnswers({
-			...newAnswers,
+		const mergedData = merge(newAnswers, {
 			[id]: {
-				name: 'New Answer',
-				right: false,
 				correct: correct,
 			},
 		});
+
+		setAnswers(mergedData);
+	};
+
+	const onNameChange = (id: any, name: string) => {
+		var newAnswers = { ...answers };
+
+		setAnswers(
+			merge(newAnswers, {
+				[id]: {
+					name: name,
+				},
+			})
+		);
 	};
 
 	const onDuplicatePress = (name: string) => {
@@ -92,50 +104,53 @@ const MultipleChoice: React.FC<Props> = (props) => {
 			</Flex>
 			<Input type="hidden" {...register('answers')} />
 			<Box>
-				{Object.entries(answers).map(([id, answer]: any) => (
-					<Flex
-						key={id}
-						border="1px"
-						borderColor={answer?.correct ? 'green.200' : 'gray.100'}
-						rounded="sm"
-						mb="4"
-						align="center"
-						justify="space-between"
-						px="2"
-						py="1">
-						<Stack direction="row" spacing="2" align="center" flex="1">
-							<Icon as={Sortable} fontSize="lg" color="gray.500" />
-							<Editable defaultValue={answer?.name}>
-								<EditablePreview />
-								<EditableInput />
-							</Editable>
-						</Stack>
-						<Stack direction="row" spacing="4">
-							<Checkbox
-								colorScheme="green"
-								isChecked={answer?.correct}
-								onChange={(e) => onCheckPress(id, e.target.checked)}
-							/>
-							<Stack direction="row" spacing="2">
-								<IconButton
-									variant="unstyled"
-									sx={iconStyles}
-									aria-label={__('Duplicate', 'masteriyo')}
-									onClick={() => onDuplicatePress(answer.name)}
-									icon={<BiCopy />}
-								/>
-								<IconButton
-									variant="unstyled"
-									sx={iconStyles}
-									aria-label={__('Delete', 'masteriyo')}
-									icon={<BiTrash />}
-									minW="auto"
-									onClick={() => onDeletePress(id)}
-								/>
+				{answers &&
+					Object.entries(answers).map(([id, answer]: any) => (
+						<Flex
+							key={id}
+							border="1px"
+							borderColor={answer?.correct ? 'green.200' : 'gray.100'}
+							rounded="sm"
+							mb="4"
+							align="center"
+							justify="space-between"
+							px="2"
+							py="1">
+							<Stack direction="row" spacing="2" align="center" flex="1">
+								<Icon as={Sortable} fontSize="lg" color="gray.500" />
+								<Editable defaultValue={answer?.name}>
+									<EditablePreview />
+									<EditableInput
+										onChange={(e) => onNameChange(id, e.target.value)}
+									/>
+								</Editable>
 							</Stack>
-						</Stack>
-					</Flex>
-				))}
+							<Stack direction="row" spacing="4">
+								<Checkbox
+									colorScheme="green"
+									isChecked={answer?.correct}
+									onChange={(e) => onCheckPress(id, e.target.checked)}
+								/>
+								<Stack direction="row" spacing="2">
+									<IconButton
+										variant="unstyled"
+										sx={iconStyles}
+										aria-label={__('Duplicate', 'masteriyo')}
+										onClick={() => onDuplicatePress(answer.name)}
+										icon={<BiCopy />}
+									/>
+									<IconButton
+										variant="unstyled"
+										sx={iconStyles}
+										aria-label={__('Delete', 'masteriyo')}
+										icon={<BiTrash />}
+										minW="auto"
+										onClick={() => onDeletePress(id)}
+									/>
+								</Stack>
+							</Stack>
+						</Flex>
+					))}
 			</Box>
 			<ButtonGroup>
 				<Button
@@ -150,4 +165,4 @@ const MultipleChoice: React.FC<Props> = (props) => {
 	);
 };
 
-export default MultipleChoice;
+export default SingleChoice;

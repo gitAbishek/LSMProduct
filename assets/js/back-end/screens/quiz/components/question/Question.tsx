@@ -47,6 +47,9 @@ const Question: React.FC<Props> = (props) => {
 	const methods = useForm();
 	const history = useHistory();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const [answerData, setAnswerData] = useState<any>(
+		questionData?.answers || null
+	);
 	const [questionType, setQuestionType] = useState<QuestionType>('true-false');
 	const questionAPI = new API(urls.questions);
 	const cancelRef = useRef<any>();
@@ -166,11 +169,9 @@ const Question: React.FC<Props> = (props) => {
 								<EditQuestion
 									questionData={questionData}
 									setQuestionType={setQuestionType}
+									setAnswerData={setAnswerData}
 								/>
-								<Answers
-									answers={questionData?.answers}
-									questionType={questionType}
-								/>
+								<Answers answers={answerData} questionType={questionType} />
 								<Divider />
 								<ButtonGroup>
 									<Button

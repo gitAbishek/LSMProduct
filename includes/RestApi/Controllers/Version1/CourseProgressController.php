@@ -864,6 +864,8 @@ class CourseProgressController extends CrudController {
 	 * @return array
 	 */
 	protected function get_course_progress_items( $course_progress ) {
+		$progress_items = array();
+
 		foreach ( $course_progress->get_items() as $progress_item ) {
 			$progress_items[ $progress_item->get_item_id() ] = $progress_item;
 		}

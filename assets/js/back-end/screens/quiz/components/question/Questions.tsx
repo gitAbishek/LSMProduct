@@ -11,6 +11,7 @@ import AddNewButton from 'Components/common/AddNewButton';
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import urls from '../../../../constants/urls';
+import { QuestionSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
 import Question from './Question';
 
@@ -34,11 +35,14 @@ const Questions: React.FC<Props> = (props) => {
 		}
 	);
 
-	const addQuestion = useMutation((data: object) => questionsAPI.store(data), {
-		onSuccess: () => {
-			queryClient.invalidateQueries(`questions${quizId}`);
-		},
-	});
+	const addQuestion = useMutation(
+		(data: QuestionSchema | any) => questionsAPI.store(data),
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries(`questions${quizId}`);
+			},
+		}
+	);
 
 	const onAddNewQuestionPress = () => {
 		addQuestion.mutate({

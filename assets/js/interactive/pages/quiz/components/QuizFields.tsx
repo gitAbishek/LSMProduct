@@ -1,4 +1,5 @@
-import { Heading, Stack } from '@chakra-ui/react';
+import { Divider, Heading, Stack, Text } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
@@ -24,29 +25,41 @@ const QuizFields: React.FC = () => {
 	if (questionQuery.isSuccess) {
 		return (
 			<>
-				{questionQuery.data.map((question: QuestionSchema, index: string) => (
-					<Stack direction="column" spacing="8" key={question.id}>
-						<Heading fontSize="lg">{question.name}</Heading>
+				<Stack direction="column" spacing="16">
+					{questionQuery.data.map((question: QuestionSchema, index: string) => (
+						<Stack direction="column" spacing="8" key={question.id}>
+							<Stack direction="column">
+								<Text fontWeight="medium" color="gray.400">
+									{__('Question ') +
+										(index + 1) +
+										'/' +
+										questionQuery.data.length}
+								</Text>
 
-						{question.type === 'single-choice' && (
-							<FieldSingleChoice
-								answers={question.answers}
-								index={`${index.toString()}`}
-							/>
-						)}
+								<Divider variant="dashed" />
+							</Stack>
+							<Heading fontSize="lg">{question.name}</Heading>
 
-						{question.type === 'multiple-choice' && (
-							<FieldMultipleChoice
-								answers={question.answers}
-								index={`${index.toString()}`}
-							/>
-						)}
+							{question.type === 'single-choice' && (
+								<FieldSingleChoice
+									answers={question.answers}
+									index={`${index.toString()}`}
+								/>
+							)}
 
-						{question.type === 'short-answer' && (
-							<FieldShortAnswer index={`${index.toString()}`} />
-						)}
-					</Stack>
-				))}
+							{question.type === 'multiple-choice' && (
+								<FieldMultipleChoice
+									answers={question.answers}
+									index={`${index.toString()}`}
+								/>
+							)}
+
+							{question.type === 'short-answer' && (
+								<FieldShortAnswer index={`${index.toString()}`} />
+							)}
+						</Stack>
+					))}
+				</Stack>
 			</>
 		);
 	}

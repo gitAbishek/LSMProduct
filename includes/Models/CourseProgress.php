@@ -237,7 +237,7 @@ class CourseProgress extends Model {
 	 */
 	public function set_status( $status ) {
 		$this->set_prop( 'status', $status );
-		do_action( "masteriyo_course_status_{$status}", $status, $this );
+		do_action( 'masteriyo_course_progress_status', $status, $this );
 	}
 
 	/**

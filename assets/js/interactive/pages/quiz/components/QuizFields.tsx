@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
@@ -25,13 +25,13 @@ const QuizFields: React.FC = () => {
 		return (
 			<>
 				{questionQuery.data.map((question: QuestionSchema) => (
-					<Box key={question.id}>
-						<Heading>{question.name}</Heading>
+					<Stack key={question.id}>
+						<Heading fontSize="lg">{question.name}</Heading>
 
 						{question.type === 'single-choice' && (
 							<FieldSingleChoice answers={question.answers} />
 						)}
-					</Box>
+					</Stack>
 				))}
 			</>
 		);

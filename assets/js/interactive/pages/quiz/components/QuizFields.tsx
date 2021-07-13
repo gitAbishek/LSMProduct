@@ -19,8 +19,6 @@ const QuizFields: React.FC = () => {
 		}
 	);
 
-	console.log(questionQuery?.data);
-
 	if (questionQuery.isSuccess) {
 		return (
 			<>

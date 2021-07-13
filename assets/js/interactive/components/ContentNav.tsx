@@ -58,7 +58,7 @@ const ContentNav: React.FC<Props> = (props) => {
 	return (
 		<Box as="nav" w="full" p="6">
 			<ButtonGroup d="flex" justifyContent="space-between" alignItems="center">
-				<Box w="200px">
+				<Box minW="200px">
 					{navigation?.previous && (
 						<Link
 							as={RouterLink}
@@ -98,7 +98,7 @@ const ContentNav: React.FC<Props> = (props) => {
 						: __('Mark as Complete', 'masteriyo')}
 				</Button>
 
-				<Box w="200px">
+				<Box minW="200px">
 					{navigation?.next && (
 						<Link
 							as={RouterLink}

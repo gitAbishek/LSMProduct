@@ -31,8 +31,6 @@
     "jest"
   ],
   "include": [
-    "assets/js/back-end",
-    "assets/js/back-end/types/custom.d.ts",
-    "assets/js/getting-started"
+    "assets/js/**/*"
   ]
 }

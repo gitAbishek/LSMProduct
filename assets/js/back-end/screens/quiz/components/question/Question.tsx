@@ -39,7 +39,8 @@ export type QuestionType =
 	| 'true-false'
 	| 'single-choice'
 	| 'multiple-choice'
-	| 'short-answer';
+	| 'short-answer'
+	| 'image-matching';
 
 const Question: React.FC<Props> = (props) => {
 	const { questionData } = props;
@@ -50,7 +51,9 @@ const Question: React.FC<Props> = (props) => {
 	const [answerData, setAnswerData] = useState<any>(
 		questionData?.answers || null
 	);
-	const [questionType, setQuestionType] = useState<QuestionType>('true-false');
+	const [questionType, setQuestionType] = useState<QuestionType>(
+		questionData.type
+	);
 	const questionAPI = new API(urls.questions);
 	const cancelRef = useRef<any>();
 	const queryClient = useQueryClient();

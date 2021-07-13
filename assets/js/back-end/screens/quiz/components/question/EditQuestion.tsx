@@ -25,6 +25,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 		register,
 		control,
 		formState: { errors },
+		unregister,
 	} = useFormContext();
 
 	const questionType = [
@@ -97,8 +98,9 @@ const EditQuestion: React.FC<Props> = (props) => {
 								options={questionType}
 								onChange={(data: any) => {
 									onChange(data);
-									onQuestionTypeChange(data);
+									unregister('answers');
 									setAnswerData(null);
+									onQuestionTypeChange(data);
 								}}
 							/>
 						)}

@@ -34,6 +34,7 @@ export type CourseDataMap = {
 	difficulty_id: number;
 	enrollment_limit: number;
 	duration: number;
+	access_mode: string;
 	show_curriculum: boolean;
 	_links: CourseLinksMap;
 };

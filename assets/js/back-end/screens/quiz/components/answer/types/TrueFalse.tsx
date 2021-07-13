@@ -15,8 +15,6 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import { sectionHeaderStyles } from 'Config/styles';
-import { merge } from 'lodash';
-import { nanoid } from 'nanoid';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiCopy, BiPlus, BiTrash } from 'react-icons/bi';
@@ -29,9 +27,10 @@ interface Props {
 const TrueFalse: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
-	const [answers, setAnswers] = useState<any>(answersData);
-	const nanoId = nanoid();
-
+	const [answers, setAnswers] = useState<any>([
+		{ name: 'donaldu', correct: true },
+		{ name: 'biden', correct: false },
+	]);
 	const iconStyles = {
 		fontSize: 'x-large',
 		color: 'gray.500',
@@ -39,63 +38,40 @@ const TrueFalse: React.FC<Props> = (props) => {
 		_hover: { color: 'blue.500' },
 	};
 
-	// Adds new answer
 	const onAddNewAnswerPress = () => {
-		setAnswers({
-			...answers,
-			[nanoId]: {
-				name: 'New Answer',
-				correct: false,
-			},
-		});
+		var newAnswers = [...answers];
+		console.log(newAnswers.length);
+		newAnswers.length < 1 &&
+			setAnswers([...newAnswers, { name: 'new answer', correct: false }]);
 	};
 
-	// Delete answer
 	const onDeletePress = (id: any) => {
-		const newAns = Object.assign({}, answers);
-		delete newAns[id];
-		setAnswers(newAns);
+		var newAnswers = [...answers];
+		newAnswers.splice(id, 1);
+		setAnswers(newAnswers);
 	};
 
 	const onCheckPress = (id: any, correct: boolean) => {
-		var newAnswers = { ...answers };
+		var newAnswers = [...answers];
 
 		// uncheck other checkbox
 		for (var key in newAnswers) {
-			if (newAnswers.hasOwnProperty(key)) {
-				newAnswers[key] = { ...answers[key], correct: false };
-			}
+			newAnswers[key] = { ...newAnswers[key], correct: false };
 		}
 
-		const mergedData = merge(newAnswers, {
-			[id]: {
-				correct: correct,
-			},
-		});
-
-		setAnswers(mergedData);
+		newAnswers.splice(id, 1, { ...newAnswers[id], correct: correct });
+		setAnswers(newAnswers);
 	};
 
 	const onNameChange = (id: any, name: string) => {
-		var newAnswers = { ...answers };
-
-		setAnswers(
-			merge(newAnswers, {
-				[id]: {
-					name: name,
-				},
-			})
-		);
+		var newAnswers = [...answers];
+		newAnswers.splice(id, 1, { ...newAnswers[id], name: name });
+		setAnswers(newAnswers);
 	};
 
 	const onDuplicatePress = (name: string) => {
-		setAnswers({
-			...answers,
-			[nanoId]: {
-				name: name,
-				correct: false,
-			},
-		});
+		var newAnswers = [...answers];
+		setAnswers([...newAnswers, { name: name, correct: false }]);
 	};
 
 	useEffect(() => {
@@ -112,52 +88,54 @@ const TrueFalse: React.FC<Props> = (props) => {
 			<Input type="hidden" {...register('answers')} />
 			<Box>
 				{answers &&
-					Object.entries(answers).map(([id, answer]: any) => (
-						<Flex
-							key={id}
-							border="1px"
-							borderColor={answer?.correct ? 'green.200' : 'gray.100'}
-							rounded="sm"
-							mb="4"
-							align="center"
-							justify="space-between"
-							px="2"
-							py="1">
-							<Stack direction="row" spacing="2" align="center" flex="1">
-								<Icon as={Sortable} fontSize="lg" color="gray.500" />
-								<Editable defaultValue={answer?.name}>
-									<EditablePreview />
-									<EditableInput
-										onChange={(e) => onNameChange(id, e.target.value)}
-									/>
-								</Editable>
-							</Stack>
-							<Stack direction="row" spacing="4">
-								<Checkbox
-									colorScheme="green"
-									isChecked={answer?.correct}
-									onChange={(e) => onCheckPress(id, e.target.checked)}
-								/>
-								<Stack direction="row" spacing="2">
-									<IconButton
-										variant="unstyled"
-										sx={iconStyles}
-										aria-label={__('Duplicate', 'masteriyo')}
-										onClick={() => onDuplicatePress(answer.name)}
-										icon={<BiCopy />}
-									/>
-									<IconButton
-										variant="unstyled"
-										sx={iconStyles}
-										aria-label={__('Delete', 'masteriyo')}
-										icon={<BiTrash />}
-										minW="auto"
-										onClick={() => onDeletePress(id)}
-									/>
+					answers.map(
+						(answer: { name: string; correct: boolean }, index: number) => (
+							<Flex
+								key={index}
+								border="1px"
+								borderColor={answer?.correct ? 'green.200' : 'gray.100'}
+								rounded="sm"
+								mb="4"
+								align="center"
+								justify="space-between"
+								px="2"
+								py="1">
+								<Stack direction="row" spacing="2" align="center" flex="1">
+									<Icon as={Sortable} fontSize="lg" color="gray.500" />
+									<Editable defaultValue={answer?.name}>
+										<EditablePreview />
+										<EditableInput
+											onChange={(e) => onNameChange(index, e.target.value)}
+										/>
+									</Editable>
 								</Stack>
-							</Stack>
-						</Flex>
-					))}
+								<Stack direction="row" spacing="4">
+									<Checkbox
+										colorScheme="green"
+										isChecked={answer?.correct}
+										onChange={(e) => onCheckPress(index, e.target.checked)}
+									/>
+									<Stack direction="row" spacing="2">
+										<IconButton
+											variant="unstyled"
+											sx={iconStyles}
+											aria-label={__('Duplicate', 'masteriyo')}
+											onClick={() => onDuplicatePress(answer.name)}
+											icon={<BiCopy />}
+										/>
+										<IconButton
+											variant="unstyled"
+											sx={iconStyles}
+											aria-label={__('Delete', 'masteriyo')}
+											icon={<BiTrash />}
+											minW="auto"
+											onClick={() => onDeletePress(index)}
+										/>
+									</Stack>
+								</Stack>
+							</Flex>
+						)
+					)}
 			</Box>
 			<ButtonGroup>
 				<Button

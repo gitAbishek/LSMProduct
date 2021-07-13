@@ -11,6 +11,7 @@ import { updateQuizProgress } from '../../actions';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
 import FloatingTimer from '../../components/FloatingTimer';
+import QuizFields from './components/QuizFields';
 import QuizStart from './components/QuizStart';
 
 const InteractiveQuiz = () => {
@@ -41,10 +42,17 @@ const InteractiveQuiz = () => {
 				<Box bg="white" p="14" shadow="box" w="full">
 					<Stack direction="column" spacing="8">
 						<Heading as="h5">{quizQuery?.data?.name}</Heading>
-						<QuizStart quizData={quizQuery.data} onStartPress={onStartPress} />
 						<Text
 							dangerouslySetInnerHTML={{ __html: quizQuery?.data?.description }}
 						/>
+						{startedOn ? (
+							<QuizFields />
+						) : (
+							<QuizStart
+								quizData={quizQuery.data}
+								onStartPress={onStartPress}
+							/>
+						)}
 					</Stack>
 				</Box>
 				<FloatingNavigation

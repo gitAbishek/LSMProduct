@@ -63,7 +63,7 @@ export type TrueFalseSchema = {
 	correct: boolean;
 };
 
-export type SingleChoicechema = {
+export type SingleChoiceSchema = {
 	name: string;
 	correct: boolean;
 };
@@ -88,7 +88,7 @@ export type QuestionSchema = {
 	parent_id: number;
 	course_id: number;
 	menu_order: number;
-	answers: TrueFalseSchema | SingleChoicechema | MultipleChoiceSchema;
+	answers: [];
 	answers_required: boolean;
 	randomize: boolean;
 	points: string;

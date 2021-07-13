@@ -10,7 +10,6 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
 import { SingleChoiceSchema } from '../../../../back-end/schemas';
 
 interface Props {
@@ -20,14 +19,13 @@ interface Props {
 
 const FieldSingleChoice: React.FC<Props> = (props) => {
 	const { answers, index } = props;
-	const { quizId }: any = useParams();
 	const {
 		formState: { errors },
 	} = useFormContext();
 
 	return (
 		<>
-			<FormControl isInvalid={errors[quizId]}>
+			<FormControl isInvalid={errors[index]}>
 				<Controller
 					name={index}
 					rules={{ required: __('Answer is required', 'masteriyo') }}
@@ -55,9 +53,9 @@ const FieldSingleChoice: React.FC<Props> = (props) => {
 						</RadioGroup>
 					)}
 				/>
-				{errors[quizId] && (
+				{errors[index] && (
 					<FormErrorMessage fontSize="xs">
-						{errors[quizId].message}
+						{errors[index].message}
 					</FormErrorMessage>
 				)}
 			</FormControl>

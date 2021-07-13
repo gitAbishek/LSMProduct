@@ -1,9 +1,9 @@
 import {
-	Checkbox,
-	CheckboxGroup,
 	Flex,
 	FormControl,
 	FormErrorMessage,
+	Radio,
+	RadioGroup,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
@@ -17,7 +17,7 @@ interface Props {
 	index: any;
 }
 
-const FieldMultipleChoice: React.FC<Props> = (props) => {
+const FieldShortAnswer: React.FC<Props> = (props) => {
 	const { answers, index } = props;
 	const {
 		formState: { errors },
@@ -30,7 +30,7 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 					name={index}
 					rules={{ required: __('Answer is required', 'masteriyo') }}
 					render={({ field }) => (
-						<CheckboxGroup {...field}>
+						<RadioGroup {...field}>
 							<Stack direction="row" spacing="4">
 								{answers.map((answer: SingleChoiceSchema, index: number) => (
 									<Flex
@@ -46,11 +46,11 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 										minW="200px"
 										shadow="input">
 										<Text fontSize="sm">{answer.name}</Text>
-										<Checkbox value={index.toString()} />
+										<Radio value={index.toString()}></Radio>
 									</Flex>
 								))}
 							</Stack>
-						</CheckboxGroup>
+						</RadioGroup>
 					)}
 				/>
 				{errors[index] && (
@@ -63,4 +63,4 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 	);
 };
 
-export default FieldMultipleChoice;
+export default FieldShortAnswer;

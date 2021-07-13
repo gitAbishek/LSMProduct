@@ -16,7 +16,7 @@ const ShortAnswer: React.FC<Props> = () => {
 				</Heading>
 			</Flex>
 			<Box>
-				<Alert status="info">
+				<Alert status="info" fontSize="sm">
 					<AlertIcon />
 					{__("Short answer doesn't require any fields", 'masteriyo')}
 				</Alert>

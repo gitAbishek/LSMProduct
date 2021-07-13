@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import { sectionHeaderStyles } from 'Config/styles';
+import { merge } from 'lodash';
 import { nanoid } from 'nanoid';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -25,7 +26,7 @@ interface Props {
 	answersData?: any;
 }
 
-const MultipleChoice: React.FC<Props> = (props) => {
+const SingleChoice: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
 	const [answers, setAnswers] = useState<any>(answersData);
@@ -57,16 +58,27 @@ const MultipleChoice: React.FC<Props> = (props) => {
 	};
 
 	const onCheckPress = (id: any, correct: boolean) => {
-		var newAnswers = answers;
+		var newAnswers = { ...answers };
 
-		setAnswers({
-			...newAnswers,
+		const mergedData = merge(newAnswers, {
 			[id]: {
-				name: 'New Answer',
-				right: false,
 				correct: correct,
 			},
 		});
+
+		setAnswers(mergedData);
+	};
+
+	const onNameChange = (id: any, name: string) => {
+		var newAnswers = { ...answers };
+
+		setAnswers(
+			merge(newAnswers, {
+				[id]: {
+					name: name,
+				},
+			})
+		);
 	};
 
 	const onDuplicatePress = (name: string) => {
@@ -108,7 +120,9 @@ const MultipleChoice: React.FC<Props> = (props) => {
 								<Icon as={Sortable} fontSize="lg" color="gray.500" />
 								<Editable defaultValue={answer?.name}>
 									<EditablePreview />
-									<EditableInput />
+									<EditableInput
+										onChange={(e) => onNameChange(id, e.target.value)}
+									/>
 								</Editable>
 							</Stack>
 							<Stack direction="row" spacing="4">
@@ -151,4 +165,4 @@ const MultipleChoice: React.FC<Props> = (props) => {
 	);
 };
 
-export default MultipleChoice;
+export default SingleChoice;

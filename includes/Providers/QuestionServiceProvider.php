@@ -41,8 +41,6 @@ class QuestionServiceProvider extends AbstractServiceProvider {
 		'question.single-choice',
 		'question.multiple-choice',
 		'question.short-answer',
-		'question.image-matching',
-		'question.sortable',
 	);
 
 	/**
@@ -75,12 +73,6 @@ class QuestionServiceProvider extends AbstractServiceProvider {
 			->addArgument( 'question.store' );
 
 		$this->getContainer()->add( 'question.short-answer', ShortAnswer::class )
-			->addArgument( 'question.store' );
-
-		$this->getContainer()->add( 'question.image-matching', ImageMatching::class )
-			->addArgument( 'question.store' );
-
-		$this->getContainer()->add( 'question.sortable', Sortable::class )
 			->addArgument( 'question.store' );
 	}
 }

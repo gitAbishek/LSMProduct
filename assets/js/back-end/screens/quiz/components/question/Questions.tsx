@@ -8,22 +8,20 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import AddNewButton from 'Components/common/AddNewButton';
-import React, { useState } from 'react';
+import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-
 import urls from '../../../../constants/urls';
 import API from '../../../../utils/api';
 import Question from './Question';
 
 interface Props {
 	quizId: number;
-	courseId: any;
+	courseId: number;
 }
 
 const Questions: React.FC<Props> = (props) => {
 	const { quizId, courseId } = props;
 
-	const [totalQuestionsCount, setTotalQuestionsCount] = useState<any>('0');
 	const questionsAPI = new API(urls.questions);
 
 	const queryClient = useQueryClient();
@@ -33,9 +31,6 @@ const Questions: React.FC<Props> = (props) => {
 		() => questionsAPI.list({ parent: quizId, order: 'asc' }),
 		{
 			enabled: !!quizId,
-			onSuccess: (data) => {
-				setTotalQuestionsCount(data.length);
-			},
 		}
 	);
 
@@ -50,7 +45,6 @@ const Questions: React.FC<Props> = (props) => {
 			name: 'New Question',
 			course_id: courseId,
 			parent_id: quizId,
-			menu_order: totalQuestionsCount + 1,
 		});
 	};
 
@@ -74,11 +68,7 @@ const Questions: React.FC<Props> = (props) => {
 					) : (
 						<Accordion allowToggle>
 							{questionQuery.data.map((question: any) => (
-								<Question
-									key={question.id}
-									questionData={question}
-									totalQuestionsCount={totalQuestionsCount}
-								/>
+								<Question key={question.id} questionData={question} />
 							))}
 						</Accordion>
 					)}

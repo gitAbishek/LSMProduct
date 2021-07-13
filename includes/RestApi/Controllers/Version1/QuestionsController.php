@@ -578,7 +578,7 @@ class QuestionsController extends PostsController {
 				),
 				'answers'           => array(
 					'description' => __( 'Given answer list for the question.', 'masteriyo' ),
-					'type'        => 'array',
+					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'points'            => array(

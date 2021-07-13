@@ -1,5 +1,7 @@
-import { Flex, Radio, RadioGroup, Stack, Text } from '@chakra-ui/react';
+import { Flex, Input, Radio, RadioGroup, Stack, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import { SingleChoiceSchema } from '../../../../back-end/schemas';
 
 interface Props {
@@ -8,11 +10,19 @@ interface Props {
 
 const FieldSingleChoice: React.FC<Props> = (props) => {
 	const { answers } = props;
-	const [value, setValue] = useState<any>(null);
+	const { quizId }: any = useParams();
+	const [answer, setAnswer] = useState<any>(null);
+	const { register, setValue } = useFormContext();
 
 	return (
 		<>
-			<RadioGroup onChange={(val) => setValue(val)} value={value}>
+			<Input type="hidden" {...register('question.answer')} />
+			<RadioGroup
+				onChange={(val) => {
+					setAnswer(val);
+					setValue('question.answer', val);
+				}}
+				value={answer}>
 				<Stack direction="row" spacing="4">
 					{answers.map((answer: SingleChoiceSchema, index: number) => (
 						<Flex

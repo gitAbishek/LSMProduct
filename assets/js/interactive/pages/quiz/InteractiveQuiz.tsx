@@ -50,6 +50,7 @@ const InteractiveQuiz = () => {
 				)}
 
 				<ContentNav
+					onCompletePress={console.log('nothing')}
 					navigation={quizQuery?.data?.navigation}
 					courseId={quizQuery?.data?.course_id}
 				/>

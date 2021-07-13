@@ -78,5 +78,5 @@ export type QuestionAnswerSchema = {
 	user_id: number;
 	sender: 'student' | 'instructor';
 	by_current_user: boolean;
-	answers_count?: number;
+	answers_count: number;
 };

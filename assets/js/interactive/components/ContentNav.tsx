@@ -88,10 +88,9 @@ const ContentNav: React.FC<Props> = (props) => {
 					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"
-					leftIcon={isButtonDisabled && <Icon fontSize="xl" as={BiCheck} />}
 					textTransform="uppercase">
 					{isButtonDisabled
-						? __('Completed', 'masteiryo')
+						? <Icon fontSize="xl" as={BiCheck} /> + __('Completed', 'masteiryo')
 						: __('Mark as Complete', 'masteriyo')}
 				</Button>
 

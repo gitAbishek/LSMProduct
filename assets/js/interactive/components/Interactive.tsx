@@ -13,7 +13,7 @@ const Interactive: React.FC = () => {
 	const { courseId }: any = useParams();
 	const progressAPI = new API(urls.courseProgress);
 
-	const { data, isSuccess } = useQuery<CourseProgressMap>(
+	const courseProgressQuery = useQuery<CourseProgressMap>(
 		[`courseProgress${courseId}`, courseId],
 		() => progressAPI.store({ course_id: courseId }),
 		{
@@ -21,11 +21,14 @@ const Interactive: React.FC = () => {
 		}
 	);
 
-	if (isSuccess) {
+	if (courseProgressQuery.isSuccess) {
 		return (
 			<>
-				<Header summary={data.summary} />
-				<Sidebar items={data.items} name={data.name} />
+				<Header summary={courseProgressQuery.data.summary} />
+				<Sidebar
+					items={courseProgressQuery.data.items}
+					name={courseProgressQuery.data.name}
+				/>
 				<InteractiveRouter />
 			</>
 		);

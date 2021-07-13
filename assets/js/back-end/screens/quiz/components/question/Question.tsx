@@ -35,13 +35,19 @@ interface Props {
 	questionData: QuestionSchema;
 }
 
+export type QuestionType =
+	| 'true-false'
+	| 'single-choice'
+	| 'multiple-choice'
+	| 'short-answer';
+
 const Question: React.FC<Props> = (props) => {
 	const { questionData } = props;
 	const toast = useToast();
 	const methods = useForm();
 	const history = useHistory();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-	const [questionType, setQuestionType] = useState('true-false');
+	const [questionType, setQuestionType] = useState<QuestionType>('true-false');
 	const questionAPI = new API(urls.questions);
 	const cancelRef = useRef<any>();
 	const queryClient = useQueryClient();

@@ -1,4 +1,5 @@
 import React from 'react';
+import MultipleChoice from './types/MultipleChoice';
 import SingleChoice from './types/SingleChoice';
 import TrueFalse from './types/TrueFalse';
 
@@ -14,6 +15,8 @@ const Answers: React.FC<Props> = (props) => {
 		return <TrueFalse answersData={answers} />;
 	} else if (questionType === 'single-choice') {
 		return <SingleChoice answersData={answers} />;
+	} else if (questionType === 'multiple-choice') {
+		return <MultipleChoice answersData={answers} />;
 	}
 	return <p>Empty Answer</p>;
 };

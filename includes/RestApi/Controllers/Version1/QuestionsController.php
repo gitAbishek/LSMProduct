@@ -377,12 +377,12 @@ class QuestionsController extends PostsController {
 			'feedback'          => $question->get_feedback( $context ),
 		);
 
-		if ( ! masteriyo_is_current_user_student() ) {
-			$data['answers'] = $question->get_answers( $context );
-			if ( 'view' === $context ) {
-				$data['answers'] = $this->process_answers( $question->get_answers( $context ), $question );
-			}
+		// if ( ! masteriyo_is_current_user_student() ) {
+		$data['answers'] = $question->get_answers( $context );
+		if ( 'view' === $context ) {
+			$data['answers'] = $this->process_answers( $question->get_answers( $context ), $question );
 		}
+		// }
 
 		return $data;
 	}

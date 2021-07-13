@@ -23,6 +23,7 @@ interface Props {
 	onCompletePress: any;
 	isButtonLoading?: boolean;
 	isButtonDisabled?: boolean;
+	type?: 'lesson' | 'quiz';
 }
 
 const ContentNav: React.FC<Props> = (props) => {
@@ -32,6 +33,7 @@ const ContentNav: React.FC<Props> = (props) => {
 		onCompletePress,
 		isButtonLoading,
 		isButtonDisabled,
+		type,
 	} = props;
 
 	const cirlceStyles = {
@@ -91,6 +93,8 @@ const ContentNav: React.FC<Props> = (props) => {
 					textTransform="uppercase">
 					{isButtonDisabled
 						? <Icon fontSize="xl" as={BiCheck} /> + __('Completed', 'masteiryo')
+						: type === 'quiz'
+						? __('Submit Quiz', 'masteriyo')
 						: __('Mark as Complete', 'masteriyo')}
 				</Button>
 

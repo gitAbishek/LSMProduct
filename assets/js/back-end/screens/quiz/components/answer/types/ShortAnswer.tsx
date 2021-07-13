@@ -1,17 +1,13 @@
-import { Box, Flex, Heading, Stack, Textarea } from '@chakra-ui/react';
+import { Alert, AlertIcon, Box, Flex, Heading, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import { sectionHeaderStyles } from 'Config/styles';
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
 
 interface Props {
 	answersData?: any;
 }
 
-const ShortAnswer: React.FC<Props> = (props) => {
-	const { answersData } = props;
-	const { register } = useFormContext();
-
+const ShortAnswer: React.FC<Props> = () => {
 	return (
 		<Stack direction="column" spacing="6">
 			<Flex sx={sectionHeaderStyles}>
@@ -20,11 +16,10 @@ const ShortAnswer: React.FC<Props> = (props) => {
 				</Heading>
 			</Flex>
 			<Box>
-				<Textarea
-					placeholder={__('Write your short answer', 'masteriyo')}
-					defaultValue={answersData}
-					{...register('answer', { required: true })}
-				/>
+				<Alert status="info">
+					<AlertIcon />
+					{__("Short answer doesn't require any fields", 'masteriyo')}
+				</Alert>
 			</Box>
 		</Stack>
 	);

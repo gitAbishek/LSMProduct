@@ -23,21 +23,20 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiCopy, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
-
 import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
+import { QuestionSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
 import { mergeDeep } from '../../../../utils/mergeDeep';
 import Answers from '../answer/Answers';
 import EditQuestion from './EditQuestion';
 
 interface Props {
-	questionData: any;
-	totalQuestionsCount: any;
+	questionData: QuestionSchema;
 }
 
 const Question: React.FC<Props> = (props) => {
-	const { questionData, totalQuestionsCount } = props;
+	const { questionData } = props;
 	const toast = useToast();
 	const methods = useForm();
 	const history = useHistory();
@@ -89,7 +88,6 @@ const Question: React.FC<Props> = (props) => {
 			description: questionData.description,
 			parent_id: questionData.parent_id,
 			course_id: questionData.course_id,
-			menu_order: totalQuestionsCount + 1,
 		};
 		duplicateQuestion.mutate(data);
 	};

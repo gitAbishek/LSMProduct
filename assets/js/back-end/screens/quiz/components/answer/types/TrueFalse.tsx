@@ -14,7 +14,8 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { borderedBoxStyles, sectionHeaderStyles } from 'Config/styles';
+import { sectionHeaderStyles } from 'Config/styles';
+import { nanoid } from 'nanoid';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiCopy, BiPlus, BiTrash } from 'react-icons/bi';
@@ -28,17 +29,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
 	const [answers, setAnswers] = useState<any>(answersData);
-
-	const onAddNewAnswerPress = () => {
-		setAnswers([
-			...answers,
-			{
-				name: 'New Answer',
-				right: false,
-				checked: false,
-			},
-		]);
-	};
+	const nanoId = nanoid();
 
 	const iconStyles = {
 		fontSize: 'x-large',
@@ -47,10 +38,52 @@ const TrueFalse: React.FC<Props> = (props) => {
 		_hover: { color: 'blue.500' },
 	};
 
+	// Adds new answer
+	const onAddNewAnswerPress = () => {
+		setAnswers({
+			...answers,
+			[nanoId]: {
+				name: 'New Answer',
+				correct: false,
+			},
+		});
+	};
+
+	// Delete answer
 	const onDeletePress = (id: any) => {
-		var newAnswers = [...answers];
-		newAnswers.splice(id, 1);
-		setAnswers(newAnswers);
+		const newAns = Object.assign({}, answers);
+		delete newAns[id];
+		setAnswers(newAns);
+	};
+
+	const onCheckPress = (id: any, correct: boolean) => {
+		var newAnswers = answers;
+
+		// uncheck other checkbox
+		for (var key in newAnswers) {
+			if (newAnswers.hasOwnProperty(key)) {
+				newAnswers[key] = { ...answers[key], correct: false };
+			}
+		}
+
+		setAnswers({
+			...newAnswers,
+			[id]: {
+				name: 'New Answer',
+				right: false,
+				correct: correct,
+			},
+		});
+	};
+
+	const onDuplicatePress = (name: string) => {
+		setAnswers({
+			...answers,
+			[nanoId]: {
+				name: name,
+				correct: false,
+			},
+		});
 	};
 
 	useEffect(() => {
@@ -66,37 +99,50 @@ const TrueFalse: React.FC<Props> = (props) => {
 			</Flex>
 			<Input type="hidden" {...register('answers')} />
 			<Box>
-				{answers.length !== 0 &&
-					answers.map((answer: any, index: any) => (
-						<Flex sx={borderedBoxStyles} key={index}>
-							<Stack direction="row" spacing="2" align="center" flex="1">
-								<Icon as={Sortable} fontSize="lg" color="gray.500" />
-								<Editable defaultValue={answer?.name}>
-									<EditablePreview />
-									<EditableInput />
-								</Editable>
+				{Object.entries(answers).map(([id, answer]: any) => (
+					<Flex
+						key={id}
+						border="1px"
+						borderColor={answer?.correct ? 'green.200' : 'gray.100'}
+						rounded="sm"
+						mb="4"
+						align="center"
+						justify="space-between"
+						px="2"
+						py="1">
+						<Stack direction="row" spacing="2" align="center" flex="1">
+							<Icon as={Sortable} fontSize="lg" color="gray.500" />
+							<Editable defaultValue={answer?.name}>
+								<EditablePreview />
+								<EditableInput />
+							</Editable>
+						</Stack>
+						<Stack direction="row" spacing="4">
+							<Checkbox
+								colorScheme="green"
+								isChecked={answer?.correct}
+								onChange={(e) => onCheckPress(id, e.target.checked)}
+							/>
+							<Stack direction="row" spacing="2">
+								<IconButton
+									variant="unstyled"
+									sx={iconStyles}
+									aria-label={__('Duplicate', 'masteriyo')}
+									onClick={() => onDuplicatePress(answer.name)}
+									icon={<BiCopy />}
+								/>
+								<IconButton
+									variant="unstyled"
+									sx={iconStyles}
+									aria-label={__('Delete', 'masteriyo')}
+									icon={<BiTrash />}
+									minW="auto"
+									onClick={() => onDeletePress(id)}
+								/>
 							</Stack>
-							<Stack direction="row" spacing="4">
-								<Checkbox defaultChecked={answer?.checked} />
-								<Stack direction="row" spacing="2">
-									<IconButton
-										variant="unstyled"
-										sx={iconStyles}
-										aria-label={__('Duplicate', 'masteriyo')}
-										icon={<BiCopy />}
-									/>
-									<IconButton
-										variant="unstyled"
-										sx={iconStyles}
-										aria-label={__('Delete', 'masteriyo')}
-										icon={<BiTrash />}
-										minW="auto"
-										onClick={() => onDeletePress(index)}
-									/>
-								</Stack>
-							</Stack>
-						</Flex>
-					))}
+						</Stack>
+					</Flex>
+				))}
 			</Box>
 			<ButtonGroup>
 				<Button

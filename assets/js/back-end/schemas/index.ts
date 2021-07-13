@@ -57,3 +57,42 @@ export type QuizSchema = {
 		];
 	};
 };
+
+export type TrueFalseSchema = {
+	name: string;
+	correct: boolean;
+};
+
+export type SingleChoicechema = {
+	name: string;
+	correct: boolean;
+};
+
+export type MultipleChoiceSchema = {
+	name: string;
+	correct: boolean;
+};
+
+export type QuestionSchema = {
+	id: number;
+	name: string;
+	permalink: string;
+	status: 'publish' | 'draft' | string;
+	description: string;
+	type:
+		| 'true-false'
+		| 'single-choice'
+		| 'multiple-choice'
+		| 'short-answer'
+		| 'image-matching';
+	parent_id: number;
+	course_id: number;
+	menu_order: number;
+	answers: TrueFalseSchema | SingleChoicechema | MultipleChoiceSchema;
+	answers_required: boolean;
+	randomize: boolean;
+	points: string;
+	positive_feedback: string;
+	negative_feedback: string;
+	feedback: string;
+};

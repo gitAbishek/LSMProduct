@@ -171,10 +171,7 @@ const Question: React.FC<Props> = (props) => {
 									setQuestionType={setQuestionType}
 									setAnswerData={setAnswerData}
 								/>
-								<Answers
-									answers={questionData?.answers}
-									questionType={questionType}
-								/>
+								<Answers answers={answerData} questionType={questionType} />
 								<Divider />
 								<ButtonGroup>
 									<Button

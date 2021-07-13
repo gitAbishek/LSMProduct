@@ -92,7 +92,7 @@ const MultipleChoice: React.FC<Props> = (props) => {
 			</Flex>
 			<Input type="hidden" {...register('answers')} />
 			<Box>
-				{answers.length &&
+				{answers &&
 					Object.entries(answers).map(([id, answer]: any) => (
 						<Flex
 							key={id}

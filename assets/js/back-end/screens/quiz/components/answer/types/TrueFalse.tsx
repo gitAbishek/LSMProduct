@@ -27,10 +27,7 @@ interface Props {
 const TrueFalse: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
-	const [answers, setAnswers] = useState<any>([
-		{ name: 'donaldu', correct: true },
-		{ name: 'biden', correct: false },
-	]);
+	const [answers, setAnswers] = useState<any>(answersData || []);
 	const iconStyles = {
 		fontSize: 'x-large',
 		color: 'gray.500',
@@ -40,8 +37,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 
 	const onAddNewAnswerPress = () => {
 		var newAnswers = [...answers];
-		console.log(newAnswers.length);
-		newAnswers.length < 1 &&
+		newAnswers.length < 2 &&
 			setAnswers([...newAnswers, { name: 'new answer', correct: false }]);
 	};
 

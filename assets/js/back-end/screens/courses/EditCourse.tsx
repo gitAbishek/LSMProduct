@@ -5,7 +5,6 @@ import Categories from './components/Categories';
 import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
-import Price from './components/Price';
 
 interface Props {
 	courseData: CourseDataMap;
@@ -32,7 +31,6 @@ const EditCourse: React.FC<Props> = (props) => {
 				</Box>
 				<Box w="400px" bg="white" p="10" shadow="box">
 					<Stack direction="column" spacing="6">
-						<Price defaultValue={courseData.regular_price} />
 						<Categories defaultValue={courseData.categories} />
 						<FeaturedImage defaultValue={courseData.featured_image} />
 					</Stack>

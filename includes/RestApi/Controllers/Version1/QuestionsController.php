@@ -359,14 +359,6 @@ class QuestionsController extends PostsController {
 	 * @return array
 	 */
 	protected function get_question_data( $question, $context = 'view' ) {
-		$answers = $question->get_answers( $context );
-
-		if ( 'view' === $context ) {
-			$answers = $this->process_answers( maybe_unserialize( $answers ), $question );
-		}
-
-		$answers = is_string( $answers ) && empty( trim( $answers ) ) ? json_decode( '{}' ) : $answers;
-
 		$data = array(
 			'id'                => $question->get_id(),
 			'name'              => $question->get_name( $context ),
@@ -377,7 +369,6 @@ class QuestionsController extends PostsController {
 			'parent_id'         => $question->get_parent_id( $context ),
 			'course_id'         => $question->get_course_id( $context ),
 			'menu_order'        => $question->get_menu_order( $context ),
-			'answers'           => $answers,
 			'answer_required'   => $question->get_answer_required( $context ),
 			'randomize'         => $question->get_randomize( $context ),
 			'points'            => $question->get_points( $context ),
@@ -385,6 +376,13 @@ class QuestionsController extends PostsController {
 			'negative_feedback' => $question->get_negative_feedback( $context ),
 			'feedback'          => $question->get_feedback( $context ),
 		);
+
+		if ( ! masteriyo_is_current_user_student() ) {
+			$data['answers'] = $question->get_answers( $context );
+			if ( 'view' === $context ) {
+				$data['answers'] = $this->process_answers( $question->get_answers( $context ), $question );
+			}
+		}
 
 		return $data;
 	}

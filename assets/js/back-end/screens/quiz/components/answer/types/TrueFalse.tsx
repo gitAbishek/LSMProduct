@@ -28,7 +28,7 @@ interface Props {
 const TrueFalse: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
-	const [answers, setAnswers] = useState<any>({});
+	const [answers, setAnswers] = useState<any>(answersData);
 	const nanoId = nanoid();
 
 	const iconStyles = {

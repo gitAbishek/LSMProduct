@@ -1,4 +1,4 @@
-import { Box, Radio, RadioGroup } from '@chakra-ui/react';
+import { Flex, Radio, RadioGroup, Stack, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { SingleChoiceSchema } from '../../../../back-end/schemas';
 
@@ -13,11 +13,25 @@ const FieldSingleChoice: React.FC<Props> = (props) => {
 	return (
 		<>
 			<RadioGroup onChange={(val) => setValue(val)} value={value}>
-				{answers.map((answer: SingleChoiceSchema, index: number) => (
-					<Box key={index}>
-						<Radio value={index.toString()}>{answer.name}</Radio>
-					</Box>
-				))}
+				<Stack direction="row" spacing="4">
+					{answers.map((answer: SingleChoiceSchema, index: number) => (
+						<Flex
+							key={index}
+							justify="space-between"
+							align="center"
+							border="1px"
+							borderColor="gray.100"
+							bg="white"
+							rounded="sm"
+							py="3"
+							px="4"
+							minW="200px"
+							shadow="input">
+							<Text fontSize="sm">{answer.name}</Text>
+							<Radio value={index.toString()}></Radio>
+						</Flex>
+					))}
+				</Stack>
 			</RadioGroup>
 		</>
 	);

@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { AdvancedSettingsMap } from '../../../types';
 
 interface Props {
@@ -39,7 +39,6 @@ const tabListStyles = {
 
 const AdvancedSettings: React.FC<Props> = (props) => {
 	const { advanceData } = props;
-	const { register } = useFormContext();
 	return (
 		<Tabs orientation="vertical">
 			<Stack direction="row" flex="1">

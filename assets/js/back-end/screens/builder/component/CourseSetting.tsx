@@ -37,9 +37,17 @@ interface Props {
 const CourseSetting: React.FC<Props> = (props) => {
 	const { courseData } = props;
 
-	const [displayValue, setDisplayValue] = useState(
+	const [enrollDisplayValue, setEnrollDisplayValue] = useState(
 		courseData?.enrollment_limit != 0 ? '1' : '0'
 	);
+
+	const [pricingDisplayValue, setPricingDisplayValue] = useState(
+		'open' === courseData?.access_mode ||
+			'need_registration' === courseData?.access_mode
+			? 'free'
+			: 'paid'
+	);
+
 	const difficultiesAPI = new API(urls.difficulties);
 	const {
 		register,
@@ -112,7 +120,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 										</Select>
 									</FormControl>
 
-									<FormControl isInvalid={errors?.duration} maxW="xs">
+									<FormControl isInvalid={errors?.duration}>
 										<FormLabel>{__('Course Duration', 'masteriyo')}</FormLabel>
 										<Controller
 											name="duration"
@@ -125,7 +133,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 											}}
 											render={({ field }) => (
 												<InputGroup>
-													<NumberInput {...field}>
+													<NumberInput {...field} w="full">
 														<NumberInputField />
 														<NumberInputStepper>
 															<NumberIncrementStepper />
@@ -139,8 +147,6 @@ const CourseSetting: React.FC<Props> = (props) => {
 											)}
 										/>
 
-										<FormHelperText>{__('', 'masteriyo')}</FormHelperText>
-
 										<FormErrorMessage>
 											{errors?.duration && errors?.duration?.message}
 										</FormErrorMessage>
@@ -148,7 +154,9 @@ const CourseSetting: React.FC<Props> = (props) => {
 
 									<FormControl>
 										<FormLabel>{__('Maximum Students', 'masteriyo')}</FormLabel>
-										<RadioGroup onChange={setDisplayValue} value={displayValue}>
+										<RadioGroup
+											onChange={setEnrollDisplayValue}
+											value={enrollDisplayValue}>
 											<Stack direction="row" spacing="8" align="flex-start">
 												<Stack direction="column">
 													<Radio
@@ -167,7 +175,9 @@ const CourseSetting: React.FC<Props> = (props) => {
 												</Stack>
 												<Stack direction="column" spacing="6">
 													<Radio value="1">{__('Limit', 'masteriyo')}</Radio>
-													<Collapse in={displayValue != '0'} animateOpacity>
+													<Collapse
+														in={enrollDisplayValue != '0'}
+														animateOpacity>
 														<FormControl>
 															<FormLabel>
 																{__('Number of Students', 'masteriyo')}
@@ -222,11 +232,65 @@ const CourseSetting: React.FC<Props> = (props) => {
 							<TabPanel>
 								<Stack direction="column" spacing="8">
 									<FormControl>
-										<FormLabel>Pricing Option</FormLabel>
-										<RadioGroup>
-											<Stack direction="column">
-												<Radio value="1">Free</Radio>
-												<Radio value="2">Paid</Radio>
+										<FormLabel>{__('Pricing Option', 'masteriyo')}</FormLabel>
+										<RadioGroup
+											onChange={setPricingDisplayValue}
+											value={pricingDisplayValue}>
+											<Stack direction="column" spacing="4">
+												<Stack direction="column">
+													<Radio value="free">{__('Free', 'masteriyo')}</Radio>
+													<Collapse
+														in={pricingDisplayValue != 'paid'}
+														animateOpacity>
+														<RadioGroup defaultValue={courseData?.access_mode}>
+															<Stack direction="column" spacing="3" ml="5">
+																<Radio
+																	value="open"
+																	{...register('access_mode')}>
+																	{__(
+																		'	Does not need registration',
+																		'masteriyo'
+																	)}
+																</Radio>
+																<Radio
+																	value="need_registration"
+																	{...register('access_mode')}>
+																	{__('	Need registration', 'masteriyo')}
+																</Radio>
+															</Stack>
+														</RadioGroup>
+													</Collapse>
+												</Stack>
+												<Radio
+													onChange={() => setValue('access_mode', 'one_time')}
+													value="paid">
+													{__('Paid', 'masteriyo')}
+												</Radio>
+												<Collapse
+													in={pricingDisplayValue != 'free'}
+													animateOpacity>
+													<FormControl>
+														<FormLabel>
+															{__('One Time Fee', 'masteriyo')}
+														</FormLabel>
+														<Controller
+															name="regular_price"
+															defaultValue={courseData?.regular_price}
+															render={({ field }) => (
+																<NumberInput {...field} w="full">
+																	<NumberInputField
+																		borderRadius="sm"
+																		shadow="input"
+																	/>
+																	<NumberInputStepper>
+																		<NumberIncrementStepper />
+																		<NumberDecrementStepper />
+																	</NumberInputStepper>
+																</NumberInput>
+															)}
+														/>
+													</FormControl>
+												</Collapse>
 											</Stack>
 										</RadioGroup>
 									</FormControl>

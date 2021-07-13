@@ -78,7 +78,7 @@ const InteractiveQuiz = () => {
 				)}
 
 				<ContentNav
-					onCompletePress={console.log('nothing')}
+					onCompletePress={methods.handleSubmit(onSubmit)}
 					navigation={quizQuery?.data?.navigation}
 					courseId={quizQuery?.data?.course_id}
 				/>

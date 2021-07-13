@@ -27,6 +27,7 @@ import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
 import { QuestionSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
+import { mergeDeep } from '../../../../utils/mergeDeep';
 import Answers from '../answer/Answers';
 import EditQuestion from './EditQuestion';
 
@@ -38,7 +39,8 @@ export type QuestionType =
 	| 'true-false'
 	| 'single-choice'
 	| 'multiple-choice'
-	| 'short-answer';
+	| 'short-answer'
+	| 'image-matching';
 
 const Question: React.FC<Props> = (props) => {
 	const { questionData } = props;
@@ -49,7 +51,9 @@ const Question: React.FC<Props> = (props) => {
 	const [answerData, setAnswerData] = useState<any>(
 		questionData?.answers || null
 	);
-	const [questionType, setQuestionType] = useState<QuestionType>('true-false');
+	const [questionType, setQuestionType] = useState<QuestionType>(
+		questionData.type
+	);
 	const questionAPI = new API(urls.questions);
 	const cancelRef = useRef<any>();
 	const queryClient = useQueryClient();
@@ -106,8 +110,7 @@ const Question: React.FC<Props> = (props) => {
 				type: data.type.value,
 			}),
 		};
-		console.log(data);
-		// updateQuestion.mutate(mergeDeep(data, newData));
+		updateQuestion.mutate(mergeDeep(data, newData));
 	};
 
 	const onDeletePress = () => {

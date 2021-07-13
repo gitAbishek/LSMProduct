@@ -98,9 +98,9 @@ const EditQuestion: React.FC<Props> = (props) => {
 								options={questionType}
 								onChange={(data: any) => {
 									onChange(data);
-									onQuestionTypeChange(data);
-									setAnswerData(null);
 									unregister('answers');
+									setAnswerData(null);
+									onQuestionTypeChange(data);
 								}}
 							/>
 						)}

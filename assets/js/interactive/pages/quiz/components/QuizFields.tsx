@@ -1,4 +1,4 @@
-import { Heading, Stack } from '@chakra-ui/react';
+import { Button, ButtonGroup, Heading, Stack } from '@chakra-ui/react';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
@@ -40,6 +40,11 @@ const QuizFields: React.FC = () => {
 							)}
 						</Stack>
 					))}
+					<ButtonGroup>
+						<Button type="submit" colorScheme="blue">
+							Submit form
+						</Button>
+					</ButtonGroup>
 				</form>
 			</FormProvider>
 		);

@@ -10,12 +10,12 @@ import {
 import { __ } from '@wordpress/i18n';
 import Editor from 'Components/common/Editor';
 import Select from 'Components/common/Select';
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 interface Props {
 	questionData: any;
-	setQuestionType: Dispatch<SetStateAction<string>>;
+	setQuestionType: any;
 }
 
 const EditQuestion: React.FC<Props> = (props) => {

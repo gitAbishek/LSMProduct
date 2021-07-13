@@ -15,10 +15,11 @@ import { SingleChoiceSchema } from '../../../../back-end/schemas';
 
 interface Props {
 	answers: [];
+	index: any;
 }
 
 const FieldSingleChoice: React.FC<Props> = (props) => {
-	const { answers } = props;
+	const { answers, index } = props;
 	const { quizId }: any = useParams();
 	const {
 		formState: { errors },
@@ -28,7 +29,7 @@ const FieldSingleChoice: React.FC<Props> = (props) => {
 		<>
 			<FormControl isInvalid={errors[quizId]}>
 				<Controller
-					name={quizId}
+					name={index}
 					rules={{ required: __('Answer is required', 'masteriyo') }}
 					render={({ field }) => (
 						<RadioGroup {...field}>

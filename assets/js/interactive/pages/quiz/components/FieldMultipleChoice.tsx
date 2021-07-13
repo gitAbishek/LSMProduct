@@ -1,9 +1,9 @@
 import {
+	Checkbox,
+	CheckboxGroup,
 	Flex,
 	FormControl,
 	FormErrorMessage,
-	Radio,
-	RadioGroup,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
@@ -15,10 +15,11 @@ import { SingleChoiceSchema } from '../../../../back-end/schemas';
 
 interface Props {
 	answers: [];
+	index: any;
 }
 
 const FieldMultipleChoice: React.FC<Props> = (props) => {
-	const { answers } = props;
+	const { answers, index } = props;
 	const { quizId }: any = useParams();
 	const {
 		formState: { errors },
@@ -28,10 +29,10 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 		<>
 			<FormControl isInvalid={errors[quizId]}>
 				<Controller
-					name={quizId}
+					name={index}
 					rules={{ required: __('Answer is required', 'masteriyo') }}
 					render={({ field }) => (
-						<RadioGroup {...field}>
+						<CheckboxGroup {...field}>
 							<Stack direction="row" spacing="4">
 								{answers.map((answer: SingleChoiceSchema, index: number) => (
 									<Flex
@@ -47,11 +48,11 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 										minW="200px"
 										shadow="input">
 										<Text fontSize="sm">{answer.name}</Text>
-										<Radio value={index.toString()}></Radio>
+										<Checkbox value={index.toString()} />
 									</Flex>
 								))}
 							</Stack>
-						</RadioGroup>
+						</CheckboxGroup>
 					)}
 				/>
 				{errors[quizId] && (

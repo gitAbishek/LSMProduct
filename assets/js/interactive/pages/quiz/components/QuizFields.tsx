@@ -23,16 +23,22 @@ const QuizFields: React.FC = () => {
 	if (questionQuery.isSuccess) {
 		return (
 			<>
-				{questionQuery.data.map((question: QuestionSchema) => (
+				{questionQuery.data.map((question: QuestionSchema, index: string) => (
 					<Stack direction="column" spacing="8" key={question.id}>
 						<Heading fontSize="lg">{question.name}</Heading>
 
 						{question.type === 'single-choice' && (
-							<FieldSingleChoice answers={question.answers} />
+							<FieldSingleChoice
+								answers={question.answers}
+								index={`${index.toString()}`}
+							/>
 						)}
 
 						{question.type === 'multiple-choice' && (
-							<FieldMultipleChoice answers={question.answers} />
+							<FieldMultipleChoice
+								answers={question.answers}
+								index={`${index.toString()}`}
+							/>
 						)}
 					</Stack>
 				))}

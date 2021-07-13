@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import urls from '../../../../back-end/constants/urls';
 import { QuestionSchema } from '../../../../back-end/schemas';
 import API from '../../../../back-end/utils/api';
+import FieldMultipleChoice from './FieldMultipleChoice';
 import FieldSingleChoice from './FieldSingleChoice';
 
 const QuizFields: React.FC = () => {
@@ -28,6 +29,10 @@ const QuizFields: React.FC = () => {
 
 						{question.type === 'single-choice' && (
 							<FieldSingleChoice answers={question.answers} />
+						)}
+
+						{question.type === 'multiple-choice' && (
+							<FieldMultipleChoice answers={question.answers} />
 						)}
 					</Stack>
 				))}

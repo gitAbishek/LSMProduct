@@ -2,7 +2,6 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Checkbox,
 	Editable,
 	EditableInput,
 	EditablePreview,
@@ -11,6 +10,7 @@ import {
 	Icon,
 	IconButton,
 	Input,
+	Radio,
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -106,7 +106,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 									</Editable>
 								</Stack>
 								<Stack direction="row" spacing="4">
-									<Checkbox
+									<Radio
 										colorScheme="green"
 										isChecked={answer?.correct}
 										onChange={(e) => onCheckPress(index, e.target.checked)}

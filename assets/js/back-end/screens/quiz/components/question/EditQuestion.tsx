@@ -16,10 +16,11 @@ import { Controller, useFormContext } from 'react-hook-form';
 interface Props {
 	questionData: any;
 	setQuestionType: any;
+	setAnswerData: any;
 }
 
 const EditQuestion: React.FC<Props> = (props) => {
-	const { questionData, setQuestionType } = props;
+	const { questionData, setQuestionType, setAnswerData } = props;
 	const {
 		register,
 		control,
@@ -97,6 +98,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 								onChange={(data: any) => {
 									onChange(data);
 									onQuestionTypeChange(data);
+									setAnswerData(null);
 								}}
 							/>
 						)}

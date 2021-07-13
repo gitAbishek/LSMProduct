@@ -1,5 +1,7 @@
+import { Spinner } from '@chakra-ui/react';
 import React from 'react';
 import MultipleChoice from './types/MultipleChoice';
+import ShortAnswer from './types/ShortAnswer';
 import SingleChoice from './types/SingleChoice';
 import TrueFalse from './types/TrueFalse';
 
@@ -17,8 +19,14 @@ const Answers: React.FC<Props> = (props) => {
 		return <SingleChoice answersData={answers} />;
 	} else if (questionType === 'multiple-choice') {
 		return <MultipleChoice answersData={answers} />;
+	} else if (questionType === 'short-answer') {
+		return <ShortAnswer answersData={answers} />;
 	}
-	return <p>Empty Answer</p>;
+	return (
+		<>
+			<Spinner />
+		</>
+	);
 };
 
 export default Answers;

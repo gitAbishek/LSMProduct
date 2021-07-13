@@ -74,7 +74,7 @@ const ContentNav: React.FC<Props> = (props) => {
 									<Text fontSize="xs" color="gray.500">
 										Prev
 									</Text>
-									<Heading fontSize="xs">First Installation</Heading>
+									<Heading fontSize="xs">{navigation?.previous.name}</Heading>
 								</Stack>
 							</HStack>
 						</Link>
@@ -104,12 +104,12 @@ const ContentNav: React.FC<Props> = (props) => {
 								courseId
 							)}
 							sx={navLinkStyles}>
-							<HStack spacing="4">
+							<HStack spacing="4" justify="flex-end">
 								<Stack direction="column" spacing="0">
 									<Text fontSize="xs" color="gray.500">
 										Next
 									</Text>
-									<Heading fontSize="xs">Second Installation</Heading>
+									<Heading fontSize="xs">{navigation?.next.name}</Heading>
 								</Stack>
 								<Center sx={cirlceStyles}>
 									<Icon as={BiChevronRight} />

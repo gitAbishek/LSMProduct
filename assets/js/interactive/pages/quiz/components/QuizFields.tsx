@@ -6,6 +6,7 @@ import urls from '../../../../back-end/constants/urls';
 import { QuestionSchema } from '../../../../back-end/schemas';
 import API from '../../../../back-end/utils/api';
 import FieldMultipleChoice from './FieldMultipleChoice';
+import FieldShortAnswer from './FieldShortAnswer';
 import FieldSingleChoice from './FieldSingleChoice';
 
 const QuizFields: React.FC = () => {
@@ -39,6 +40,10 @@ const QuizFields: React.FC = () => {
 								answers={question.answers}
 								index={`${index.toString()}`}
 							/>
+						)}
+
+						{question.type === 'short-answer' && (
+							<FieldShortAnswer index={`${index.toString()}`} />
 						)}
 					</Stack>
 				))}

@@ -27,10 +27,7 @@ interface Props {
 const SingleChoice: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
-	const [answers, setAnswers] = useState<any>([
-		{ name: 'donaldu', correct: true },
-		{ name: 'biden', correct: false },
-	]);
+	const [answers, setAnswers] = useState<any>(answersData);
 
 	const iconStyles = {
 		fontSize: 'x-large',
@@ -39,13 +36,11 @@ const SingleChoice: React.FC<Props> = (props) => {
 		_hover: { color: 'blue.500' },
 	};
 
-	// Adds new answer
 	const onAddNewAnswerPress = () => {
 		var newAnswers = [...answers];
 		setAnswers([...newAnswers, { name: 'new answer', correct: false }]);
 	};
 
-	// Delete answer
 	const onDeletePress = (id: any) => {
 		var newAnswers = [...answers];
 		newAnswers.splice(id, 1);

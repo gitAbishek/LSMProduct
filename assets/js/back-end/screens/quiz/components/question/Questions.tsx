@@ -72,7 +72,7 @@ const Questions: React.FC<Props> = (props) => {
 					) : (
 						<Accordion allowToggle>
 							{questionQuery.data.map((question: any) => (
-								<Question key={question.id} questionData={question} />
+								<Question key={question.id} questionDatas={question} />
 							))}
 						</Accordion>
 					)}

@@ -32,7 +32,7 @@ import Answers from '../answer/Answers';
 import EditQuestion from './EditQuestion';
 
 interface Props {
-	questionData: QuestionSchema;
+	questionDatas: QuestionSchema;
 }
 
 export type QuestionType =
@@ -42,11 +42,12 @@ export type QuestionType =
 	| 'short-answer';
 
 const Question: React.FC<Props> = (props) => {
-	const { questionData } = props;
+	const { questionDatas } = props;
 	const toast = useToast();
 	const methods = useForm();
 	const history = useHistory();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const [questionData, setQuestionData] = useState<any>(questionDatas || null);
 	const [questionType, setQuestionType] = useState<QuestionType>('true-false');
 	const questionAPI = new API(urls.questions);
 	const cancelRef = useRef<any>();
@@ -166,6 +167,7 @@ const Question: React.FC<Props> = (props) => {
 								<EditQuestion
 									questionData={questionData}
 									setQuestionType={setQuestionType}
+									setQuestionData={setQuestionData}
 								/>
 								<Answers
 									answers={questionData?.answers}

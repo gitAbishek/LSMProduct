@@ -54,7 +54,7 @@ class CourseProgressItem extends Model {
 		'item_type'    => '',
 		'progress_id'  => 0,
 		'course_id'    => 0,
-		'completed'    => false,
+		'completed'    => '',
 		'started_at'   => null,
 		'modified_at'  => null,
 		'completed_at' => null,

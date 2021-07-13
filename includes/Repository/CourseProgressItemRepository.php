@@ -62,13 +62,19 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 		// There can be only one course progress for each course and user.
 		// So, update the return the previous course progreess if it exits.
 		if ( is_array( $progress_items ) && ! empty( $progress_items ) ) {
+			// Return the stored completed value if it is not set.
+			$completed = $course_progress_item->get_completed( 'edit' );
+			if ( '' === $course_progress_item->get_completed( 'edit' ) ) {
+				$completed = $progress_items[0]->get_completed( 'edit' );
+			}
+
 			$progress_items[0]->set_props(
 				array(
 					'user_id'      => $course_progress_item->get_user_id( 'edit' ),
 					'item_id'      => $course_progress_item->get_item_id( 'edit' ),
 					'item_type'    => $course_progress_item->get_item_type( 'edit' ),
 					'progress_id'  => $course_progress_item->get_progress_id( 'edit' ),
-					'completed'    => $course_progress_item->get_completed( 'edit' ),
+					'completed'    => $completed,
 					'started_at'   => $course_progress_item->get_started_at( 'edit' ),
 					'modified_at'  => $course_progress_item->get_modified_at( 'edit' ),
 					'completed_at' => $course_progress_item->get_completed_at( 'edit' ),

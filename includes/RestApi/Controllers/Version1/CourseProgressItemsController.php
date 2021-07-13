@@ -399,7 +399,6 @@ class CourseProgressItemsController extends CrudController {
 				'completed'    => array(
 					'description' => __( 'Course progress item completed.', 'masteriyo' ),
 					'type'        => 'boolean',
-					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'started_at'   => array(

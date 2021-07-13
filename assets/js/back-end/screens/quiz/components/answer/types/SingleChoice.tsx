@@ -27,8 +27,7 @@ interface Props {
 const SingleChoice: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
-	const [answers, setAnswers] = useState<any>(answersData);
-
+	const [answers, setAnswers] = useState<any>(answersData || []);
 	const iconStyles = {
 		fontSize: 'x-large',
 		color: 'gray.500',

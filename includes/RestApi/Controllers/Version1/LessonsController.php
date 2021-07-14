@@ -369,12 +369,6 @@ class LessonsController extends PostsController {
 					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'featured'            => array(
-					'description' => __( 'Featured lesson.', 'masteriyo' ),
-					'type'        => 'boolean',
-					'default'     => false,
-					'context'     => array( 'view', 'edit' ),
-				),
 				'catalog_visibility'  => array(
 					'description' => __( 'Catalog visibility.', 'masteriyo' ),
 					'type'        => 'string',

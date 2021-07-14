@@ -40,13 +40,22 @@ const InteractiveQuiz = () => {
 		},
 	});
 
+	const checkQuizAnswers = useMutation(
+		(data: any) => quizAPI.check(quizId, data),
+		{
+			onSuccess: (data) => {
+				console.log(data);
+			},
+		}
+	);
 	const onStartPress = () => {
 		startQuiz.mutate();
 	};
 
 	const onSubmit = (data: any) => {
-		console.log(data);
+		checkQuizAnswers.mutate(data);
 	};
+
 	if (quizQuery.isSuccess) {
 		return (
 			<Container centerContent maxW="container.xl" py="16">

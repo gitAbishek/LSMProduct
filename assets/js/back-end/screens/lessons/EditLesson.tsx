@@ -59,7 +59,10 @@ const EditLesson = () => {
 					isClosable: true,
 					status: 'success',
 				});
-				history.push(routes.courses.edit.replace(':courseId', data.course_id));
+				history.push({
+					pathname: routes.courses.edit.replace(':courseId', courseId),
+					search: '?page=builder',
+				});
 			},
 		}
 	);

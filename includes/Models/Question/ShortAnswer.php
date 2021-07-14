@@ -27,4 +27,17 @@ class ShortAnswer extends Question {
 	 * @var string $type Question type.
 	 */
 	protected $type = 'short-answer';
+
+		/**
+	 * Check whether the short answert is correct or not.
+	 *
+	 * @param array  $chosen_answer Answer chosen by user.
+	 * @param string $context Options: 'edit', 'view'.
+	 *
+	 * @return bool
+	 */
+	public function check_answer( $chosen_answer, $context = 'edit' ) {
+		return true;
+	}
+
 }

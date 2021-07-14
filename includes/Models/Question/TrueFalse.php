@@ -39,20 +39,24 @@ class TrueFalse extends Question implements QuestionInterface {
 	public function check_answer( $chosen_answer, $context = 'edit' ) {
 		$answers = $this->get_answers( 'edit' );
 
-		if ( is_bool( $chosen_answer ) ) {
-			$chosen_answer = $chosen_answer ? 'true' : 'false';
+		// Return true if there are no answers stored.
+		if ( empty( $answers ) ) {
+			return true;
 		}
 
-		$correct_answer = array();
+		$chosen_answer = is_array( $chosen_answer ) ? $chosen_answer[0] : $chosen_answer;
 
-		if ( is_array( $answers ) && count( $answers ) > 0 ) {
-			foreach ( $answers as $answer ) {
-				if ( $answer->right ) {
-					$correct_answer = $answer;
-					break;
-				}
+		// Bail early if the chosen answer is empty.
+		if ( empty( trim( $chosen_answer ) ) ) {
+			return false;
+		}
+
+		foreach ( $answers as $answer ) {
+			if ( $answer->name === $chosen_answer && $answer->correct ) {
+				return true;
 			}
-			return $correct_answer->name === $chosen_answer;
 		}
+
+		return false;
 	}
 }

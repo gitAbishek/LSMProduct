@@ -22,7 +22,6 @@ import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiCopy, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
-import { useHistory } from 'react-router';
 import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
 import { QuestionSchema } from '../../../../schemas';
@@ -46,7 +45,6 @@ const Question: React.FC<Props> = (props) => {
 	const { questionData } = props;
 	const toast = useToast();
 	const methods = useForm();
-	const history = useHistory();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const [answerData, setAnswerData] = useState<any>(
 		questionData?.answers || null

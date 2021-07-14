@@ -21,6 +21,22 @@ const theme = extendTheme({
 			'html,body': {
 				bg: 'gray.50',
 			},
+			'#masteriyo': {
+				'input[type="color"], input[type="date"], input[type="datetime-local"], input[type="datetime"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], select, textarea':
+					{
+						shadow: 'input',
+						color: 'gray.600',
+						border: '1px',
+						borderColor: 'gray.100',
+						_hover: {
+							borderColor: 'gray.300',
+						},
+
+						_focus: {
+							borderColor: 'blue.300',
+						},
+					},
+			},
 			'.wp-admin #masteriyo': {
 				ml: '-20px',
 			},

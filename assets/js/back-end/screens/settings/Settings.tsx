@@ -79,7 +79,7 @@ const Settings = () => {
 	return (
 		<FormProvider {...methods}>
 			<Stack direction="column" spacing="8" width="full" alignItems="center">
-				<Header />
+				<Header hideAddNewCourseBtn={true} hideCoursesMenu={true} />
 				<Container maxW="container.xl">
 					<Box bg="white" p="10" shadow="box">
 						<Tabs>

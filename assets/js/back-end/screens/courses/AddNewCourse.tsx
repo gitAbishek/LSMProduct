@@ -92,7 +92,10 @@ const AddNewCourse: React.FC = () => {
 	const onSubmit = (data: any) => {
 		addMutation.mutate(mergeDeep(data, formatData(data, 'publish')), {
 			onSuccess: (data: any) => {
-				history.push(routes.courses.edit.replace(':courseId', data.id));
+				history.push({
+					pathname: routes.courses.edit.replace(':courseId', data.id),
+					search: '?page=builder',
+				});
 			},
 		});
 	};

@@ -49,6 +49,7 @@ const InteractiveQuiz = () => {
 
 	const onStartPress = () => {
 		startQuiz.mutate();
+		setScoreBoardData(null);
 	};
 
 	const onSubmit = (data: any) => {

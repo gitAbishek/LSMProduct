@@ -76,12 +76,12 @@ class Setting extends Model {
 			'thousand_separator' => ',',
 			'decimal_separator'  => '.',
 			'number_of_decimals' => 2,
-			'primary_color' => '',
-			'theme'         => 'minimum',
+			'primary_color'      => '',
+			'theme'              => 'minimum',
 		),
 		'courses'  => array(
 			// General.
-			'enable_search'      => true,
+			'enable_search'            => true,
 			'placeholder_image'        => 0,
 			'per_page'                 => 12,
 			'per_row'                  => 4,
@@ -100,7 +100,7 @@ class Setting extends Model {
 			'thumbnail_size'           => 'thumbnail',
 
 			// Display
-			'enable_review' => true,
+			'enable_review'            => true,
 			'enable_questions_answers' => true,
 		),
 		'pages'    => array(

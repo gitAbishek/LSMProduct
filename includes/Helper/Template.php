@@ -175,7 +175,7 @@ function masteriyo_setup_loop( $args = array() ) {
 		'current_page' => 1,
 	);
 
-	// If this is a main MASTERIYO query, use global args as defaults.
+	// If this is a main Masteriyo query, use global args as defaults.
 	if ( $GLOBALS['wp_query']->get( 'masteriyo_query' ) ) {
 		$default_args = array_merge(
 			$default_args,
@@ -206,17 +206,17 @@ function_exists( 'add_action' ) && add_action( 'masteriyo_before_course_list_loo
  * @return int
  */
 function masteriyo_get_default_courses_per_row() {
-	$columns     = get_option( 'masteriyo_catalog_columns', 4 );
+	$columns     = get_option( 'masteriyo.courses.per_row', 4 );
 	$course_grid = masteriyo_get_theme_support( 'course_grid' );
 	$min_columns = isset( $course_grid['min_columns'] ) ? absint( $course_grid['min_columns'] ) : 0;
 	$max_columns = isset( $course_grid['max_columns'] ) ? absint( $course_grid['max_columns'] ) : 0;
 
 	if ( $min_columns && $columns < $min_columns ) {
 		$columns = $min_columns;
-		update_option( 'masteriyo_catalog_columns', $columns );
+		update_option( 'masteriyo.courses.per_row', $columns );
 	} elseif ( $max_columns && $columns > $max_columns ) {
 		$columns = $max_columns;
-		update_option( 'masteriyo_catalog_columns', $columns );
+		update_option( 'masteriyo.courses.per_row', $columns );
 	}
 
 	$columns = max( 1, absint( $columns ) );
@@ -227,21 +227,21 @@ function masteriyo_get_default_courses_per_row() {
 /**
  * Get the default rows setting - this is how many course rows will be shown in loops.
  *
- * @since 3.3.0
+ * @since 0.1.0
  * @return int
  */
 function masteriyo_get_default_course_rows_per_page() {
-	$rows        = absint( get_option( 'masteriyo_catalog_rows', 4 ) );
+	$rows        = absint( get_option( 'masteriyo.courses.per_page', 4 ) );
 	$course_grid = masteriyo_get_theme_support( 'course_grid' );
 	$min_rows    = isset( $course_grid['min_rows'] ) ? absint( $course_grid['min_rows'] ) : 0;
 	$max_rows    = isset( $course_grid['max_rows'] ) ? absint( $course_grid['max_rows'] ) : 0;
 
 	if ( $min_rows && $rows < $min_rows ) {
 		$rows = $min_rows;
-		update_option( 'masteriyo_catalog_rows', $rows );
+		update_option( 'masteriyo.courses.per_page', $rows );
 	} elseif ( $max_rows && $rows > $max_rows ) {
 		$rows = $max_rows;
-		update_option( 'masteriyo_catalog_rows', $rows );
+		update_option( 'masteriyo.courses.per_page', $rows );
 	}
 
 	return $rows;
@@ -250,7 +250,7 @@ function masteriyo_get_default_course_rows_per_page() {
 /**
  * Sets a property in the masteriyo_loop global.
  *
- * @since 3.3.0
+ * @since 0.1.0
  * @param string $prop Prop to set.
  * @param string $value Value to set.
  */
@@ -264,7 +264,7 @@ function masteriyo_set_loop_prop( $prop, $value = '' ) {
 /**
  * Gets a property from the masteriyo_loop global.
  *
- * @since 3.3.0
+ * @since 0.1.0
  * @param string $prop Prop to get.
  * @param string $default Default if the prop does not exist.
  * @return mixed
@@ -310,6 +310,8 @@ function_exists( 'add_action' ) && add_action( 'the_post', 'masteriyo_setup_cour
 function masteriyo_add_body_class( $classes, $class ) {
 	if ( masteriyo_is_archive_course_page() ) {
 		$classes[] = 'masteriyo-course-list-page';
+	} elseif ( isset( $_GET['masteriyo'] ) && 'interactive' === $_GET['masteriyo'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$classes[] = 'masteriyo-interactive-page';
 	}
 
 	return $classes;
@@ -480,10 +482,10 @@ if ( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_account_courses_endpoint() {
-		$query = new UserCourseQuery(
+		$query            = new UserCourseQuery(
 			array(
-				'user_id'   => get_current_user_id(),
-				'limit'     => -1,
+				'user_id' => get_current_user_id(),
+				'limit'   => -1,
 			)
 		);
 		$user_courses     = $query->get_user_courses();
@@ -574,10 +576,10 @@ if ( ! function_exists( 'masteriyo_account_view_order_endpoint' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_account_view_order_endpoint( $order_id ) {
-		$order                 = masteriyo_get_order( $order_id );
+		$order       = masteriyo_get_order( $order_id );
 		$customer_id = $order->get_customer_id();
 
-		if ( ! masteriyo_is_current_user_admin() && ! masteriyo_is_current_user_manager() && get_current_user_id() !== $customer_id )  {
+		if ( ! masteriyo_is_current_user_admin() && ! masteriyo_is_current_user_manager() && get_current_user_id() !== $customer_id ) {
 			echo __( 'You are not allowed to view this content', 'masteriyo' );
 			return;
 		}
@@ -585,12 +587,12 @@ if ( ! function_exists( 'masteriyo_account_view_order_endpoint' ) ) {
 		$notes                 = $order->get_customer_order_notes();
 		$order_items           = $order->get_items( 'course' );
 		$show_purchase_note    = $order->has_status( apply_filters( 'masteriyo_purchase_note_order_statuses', array( 'completed', 'processing' ) ) );
-		$show_customer_details = masteriyo_is_current_user_admin() || (is_user_logged_in() && $order->get_user_id() === get_current_user_id());
+		$show_customer_details = masteriyo_is_current_user_admin() || ( is_user_logged_in() && $order->get_user_id() === get_current_user_id() );
 
 		masteriyo_get_template(
 			'myaccount/view-order.php',
 			array(
-				'order'                 =>  $order,
+				'order'                 => $order,
 				'notes'                 => $notes,
 				'order_items'           => $order_items,
 				'show_purchase_note'    => $show_purchase_note,
@@ -943,12 +945,12 @@ if ( ! function_exists( 'masteriyo_get_email_order_items' ) ) {
 			apply_filters(
 				'masteriyo_email_order_items_args',
 				array(
-					'order'               => $order,
-					'items'               => $order->get_items(),
-					'show_sku'            => $args['show_sku'],
-					'show_purchase_note'  => $order->is_paid(),
-					'show_image'          => $args['show_image'],
-					'image_size'          => $args['image_size'],
+					'order'              => $order,
+					'items'              => $order->get_items(),
+					'show_sku'           => $args['show_sku'],
+					'show_purchase_note' => $order->is_paid(),
+					'show_image'         => $args['show_image'],
+					'image_size'         => $args['image_size'],
 				)
 			)
 		);

@@ -15,7 +15,7 @@ use ThemeGrill\Masteriyo\Constants;
 		<?php wp_head(); ?>
 	</head>
 
-	<body>
+	<body class="<?php body_class(); ?>"></body>>
 		<div id="masteriyo-interactive-course"></div>
 		<?php wp_footer(); ?>
 	</body>

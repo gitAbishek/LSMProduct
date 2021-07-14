@@ -46,7 +46,11 @@ const Header: React.FC<Props> = (props) => {
 
 	return (
 		<Box as="header" h="84px">
-			<Slide direction="top" in={isOpen} style={{ zIndex: 999 }}>
+			<Slide
+				direction="top"
+				in={isOpen}
+				style={{ zIndex: 999 }}
+				className="masteriyo-interactive-header">
 				<Box position="relative" shadow="box" bg="white">
 					<IconButton
 						onClick={onToggle}

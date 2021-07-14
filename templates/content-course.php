@@ -23,7 +23,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 	return;
 }
 ?>
-<div class="mto-course-item">
+<div class="mto-course-item m-0">
 	<div class="mto-course--card">
 		<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php esc_attr( $course->get_name() ); ?>">
 			<div class="mto-course--img-wrap">

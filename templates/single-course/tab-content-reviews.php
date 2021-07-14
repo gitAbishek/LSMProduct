@@ -160,7 +160,7 @@ do_action('masteriyo_before_single_course_reviews_content');
 				<label class="mto-label"><?php _e('Title', 'masteriyo'); ?></label>
 				<input type="text" name="title" class="mto-input" />
 			</div>
-			<div class="mto-rating">
+			<div class="mto-rating mt-2">
 				<label class="mto-label"><?php _e('Rating', 'masteriyo'); ?></label>
 				<input type="hidden" name="rating" value="0" />
 				<div class="mto-stab-rs boxshadow-none ">
@@ -169,7 +169,7 @@ do_action('masteriyo_before_single_course_reviews_content');
 					</span>
 				</div>
 			</div>
-			<div class="mto-message">
+			<div class="mto-message mt-2">
 				<label class="mto-label"><?php _e('Content', 'masteriyo'); ?></label>
 				<textarea type="text" name="content" class="mto-input" required column="10"></textarea>
 			</div>

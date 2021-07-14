@@ -30,7 +30,7 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 					name={questionId}
 					rules={{ required: __('Answer is required', 'masteriyo') }}
 					render={({ field }) => (
-						<CheckboxGroup {...field}>
+						<CheckboxGroup onChange={field.onChange}>
 							<Stack direction="row" spacing="4">
 								{answers.map((answer: SingleChoiceSchema, index: number) => (
 									<Flex
@@ -46,7 +46,7 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 										minW="200px"
 										shadow="input">
 										<Text fontSize="sm">{answer.name}</Text>
-										<Checkbox value={index.toString()} />
+										<Checkbox value={answer.name} />
 									</Flex>
 								))}
 							</Stack>

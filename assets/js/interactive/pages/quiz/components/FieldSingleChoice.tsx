@@ -46,7 +46,7 @@ const FieldSingleChoice: React.FC<Props> = (props) => {
 										minW="200px"
 										shadow="input">
 										<Text fontSize="sm">{answer.name}</Text>
-										<Radio value={index.toString()}></Radio>
+										<Radio value={answer.name}></Radio>
 									</Flex>
 								))}
 							</Stack>

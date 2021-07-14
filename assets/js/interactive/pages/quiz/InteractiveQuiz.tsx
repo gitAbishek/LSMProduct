@@ -1,6 +1,6 @@
 import { Box, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import { useStateMachine } from 'little-state-machine';
-import React from 'react';
+import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
@@ -14,11 +14,13 @@ import FloatingNavigation from '../../components/FloatingNavigation';
 import FloatingTimer from '../../components/FloatingTimer';
 import QuizFields from './components/QuizFields';
 import QuizStart from './components/QuizStart';
+import ScoreBoard from './components/ScoreBoard';
 
 const InteractiveQuiz = () => {
 	const { quizId }: any = useParams();
 	const quizAPI = new API(urls.quizes);
 	const methods = useForm();
+	const [scoreBoardData, setScoreBoardData] = useState<any>(null);
 
 	const { state, actions } = useStateMachine({
 		updateQuizProgress,
@@ -53,8 +55,11 @@ const InteractiveQuiz = () => {
 	};
 
 	const onSubmit = (data: any) => {
-		console.log(data);
-		checkQuizAnswers.mutate(data);
+		checkQuizAnswers.mutate(data, {
+			onSuccess: (data: any) => {
+				setScoreBoardData(data);
+			},
+		});
 	};
 
 	if (quizQuery.isSuccess) {
@@ -70,7 +75,9 @@ const InteractiveQuiz = () => {
 										__html: quizQuery?.data?.description,
 									}}
 								/>
-								{startedOn ? (
+								{scoreBoardData ? (
+									<ScoreBoard scoreData={scoreBoardData} />
+								) : startedOn ? (
 									<QuizFields />
 								) : (
 									<QuizStart
@@ -99,6 +106,7 @@ const InteractiveQuiz = () => {
 					onCompletePress={methods.handleSubmit(onSubmit)}
 					navigation={quizQuery?.data?.navigation}
 					courseId={quizQuery?.data?.course_id}
+					isButtonDisabled={scoreBoardData}
 				/>
 			</Container>
 		);

@@ -90,9 +90,16 @@ const ContentNav: React.FC<Props> = (props) => {
 					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"
+					leftIcon={
+						<Icon
+							fontSize="xl"
+							d={isButtonDisabled ? 'block' : 'none'}
+							as={BiCheck}
+						/>
+					}
 					textTransform="uppercase">
 					{isButtonDisabled
-						? <Icon fontSize="xl" as={BiCheck} /> + __('Completed', 'masteiryo')
+						? __('Completed', 'masteiryo')
 						: type === 'quiz'
 						? __('Submit Quiz', 'masteriyo')
 						: __('Mark as Complete', 'masteriyo')}

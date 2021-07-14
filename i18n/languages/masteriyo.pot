@@ -147,7 +147,7 @@ msgid "Add New Course"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:100
-#: assets/js/back-end/screens/builder/Builder.tsx:155
+#: assets/js/back-end/screens/builder/Builder.tsx:156
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:128
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:99
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:103
@@ -162,19 +162,19 @@ msgid "Preview"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:120
-#: assets/js/back-end/screens/builder/Builder.tsx:190
+#: assets/js/back-end/screens/builder/Builder.tsx:191
 #: assets/js/back-end/screens/sections/components/EditSection.tsx:91
 msgid "Save"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:71
-#: assets/js/back-end/screens/builder/Builder.tsx:147
+#: assets/js/back-end/screens/builder/Builder.tsx:148
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:120
 msgid "Course"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:86
-#: assets/js/back-end/screens/builder/Builder.tsx:151
+#: assets/js/back-end/screens/builder/Builder.tsx:152
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:124
 msgid "Builder"
 msgstr ""
@@ -191,7 +191,7 @@ msgstr ""
 msgid "Back to Courses"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:177
+#: assets/js/back-end/screens/builder/Builder.tsx:178
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:170
 #: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:171
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:165
@@ -200,11 +200,11 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:189
+#: assets/js/back-end/screens/builder/Builder.tsx:190
 msgid "Publish"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/Builder.tsx:199
+#: assets/js/back-end/screens/builder/Builder.tsx:200
 msgid "Edit Course: "
 msgstr ""
 
@@ -861,7 +861,7 @@ msgid "Update Order"
 msgstr ""
 
 #: assets/js/back-end/screens/orders/EditOrder.tsx:56
-#: assets/js/interactive/components/ContentNav.tsx:95
+#: assets/js/interactive/components/ContentNav.tsx:102
 msgid "Completed"
 msgstr ""
 
@@ -1030,27 +1030,35 @@ msgstr ""
 msgid "Short answer doesn't require any fields"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:110
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:115
 msgid "Please select question type"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:119
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:124
+msgid "Points"
+msgstr ""
+
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:129
+msgid "Please provide points for the question"
+msgstr ""
+
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:150
 msgid "Question Description"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:76
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:81
 msgid "Question Name"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:79
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:84
 msgid "Your Question Name"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:81
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:86
 msgid "You must provide name for the question"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:92
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:97
 msgid "Question Type"
 msgstr ""
 
@@ -1659,11 +1667,11 @@ msgstr ""
 msgid "Log Out"
 msgstr ""
 
-#: assets/js/interactive/components/ContentNav.tsx:97
+#: assets/js/interactive/components/ContentNav.tsx:104
 msgid "Submit Quiz"
 msgstr ""
 
-#: assets/js/interactive/components/ContentNav.tsx:98
+#: assets/js/interactive/components/ContentNav.tsx:105
 msgid "Mark as Complete"
 msgstr ""
 
@@ -1758,10 +1766,11 @@ msgstr ""
 #: assets/js/interactive/pages/quiz/components/FieldMultipleChoice.tsx:31
 #: assets/js/interactive/pages/quiz/components/FieldShortAnswer.tsx:22
 #: assets/js/interactive/pages/quiz/components/FieldSingleChoice.tsx:31
+#: assets/js/interactive/pages/quiz/components/FieldTrueFalse.tsx:31
 msgid "Answer is required"
 msgstr ""
 
-#: assets/js/interactive/pages/quiz/components/QuizFields.tsx:33
+#: assets/js/interactive/pages/quiz/components/QuizFields.tsx:34
 msgid "Question "
 msgstr ""
 
@@ -1783,4 +1792,32 @@ msgstr ""
 
 #: assets/js/interactive/pages/quiz/components/QuizStart.tsx:85
 msgid "Start Quiz"
+msgstr ""
+
+#: assets/js/interactive/pages/quiz/components/ScoreBoard.tsx:43
+msgid "Your Score"
+msgstr ""
+
+#: assets/js/interactive/pages/quiz/components/ScoreBoard.tsx:49
+msgid "Total Questions: "
+msgstr ""
+
+#: assets/js/interactive/pages/quiz/components/ScoreBoard.tsx:56
+msgid "Total Answered: "
+msgstr ""
+
+#: assets/js/interactive/pages/quiz/components/ScoreBoard.tsx:63
+msgid "Total Attempts: "
+msgstr ""
+
+#: assets/js/interactive/pages/quiz/components/ScoreBoard.tsx:70
+msgid "Total Marks: "
+msgstr ""
+
+#: assets/js/interactive/pages/quiz/components/ScoreBoard.tsx:77
+msgid "Marks Earned: "
+msgstr ""
+
+#: assets/js/interactive/pages/quiz/components/ScoreBoard.tsx:91
+msgid "Start Quiz Again"
 msgstr ""

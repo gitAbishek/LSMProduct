@@ -322,7 +322,9 @@ const Editor: React.FC<Props> = (props) => {
 				'.ProseMirror': {
 					minH: '200px',
 				},
-
+				'.ProseMirror:focus': {
+					outline: 'none',
+				},
 				'.ProseMirror p.is-editor-empty:first-of-type::before': {
 					content: 'attr(data-placeholder)',
 					float: 'left',

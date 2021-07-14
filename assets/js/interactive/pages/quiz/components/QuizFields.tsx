@@ -9,6 +9,7 @@ import API from '../../../../back-end/utils/api';
 import FieldMultipleChoice from './FieldMultipleChoice';
 import FieldShortAnswer from './FieldShortAnswer';
 import FieldSingleChoice from './FieldSingleChoice';
+import FieldTrueFalse from './FieldTrueFalse';
 
 const QuizFields: React.FC = () => {
 	const { quizId }: any = useParams();
@@ -39,6 +40,13 @@ const QuizFields: React.FC = () => {
 								<Divider variant="dashed" />
 							</Stack>
 							<Heading fontSize="lg">{question.name}</Heading>
+
+							{question.type === 'true-false' && (
+								<FieldTrueFalse
+									answers={question.answers}
+									questionId={`${question.id.toString()}`}
+								/>
+							)}
 
 							{question.type === 'single-choice' && (
 								<FieldSingleChoice

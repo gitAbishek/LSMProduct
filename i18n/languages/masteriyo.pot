@@ -1699,35 +1699,35 @@ msgstr ""
 msgid "Mark as Complete"
 msgstr ""
 
-#: assets/js/interactive/components/Header.tsx:123
-msgid "Steps"
+#: assets/js/interactive/components/Header.tsx:119
+msgid "Complete"
 msgstr ""
 
-#: assets/js/interactive/components/Header.tsx:130
+#: assets/js/interactive/components/Header.tsx:137
 msgid "lessons left"
 msgstr ""
 
-#: assets/js/interactive/components/Header.tsx:175
+#: assets/js/interactive/components/Header.tsx:188
 msgid "Lesson"
 msgstr ""
 
-#: assets/js/interactive/components/Header.tsx:208
+#: assets/js/interactive/components/Header.tsx:227
 msgid "%"
 msgstr ""
 
-#: assets/js/interactive/components/Header.tsx:217
+#: assets/js/interactive/components/Header.tsx:236
 msgid "Quiz"
 msgstr ""
 
-#: assets/js/interactive/components/Header.tsx:224
+#: assets/js/interactive/components/Header.tsx:243
 msgid " Completed"
 msgstr ""
 
-#: assets/js/interactive/components/Header.tsx:231
+#: assets/js/interactive/components/Header.tsx:250
 msgid " Left"
 msgstr ""
 
-#: assets/js/interactive/components/Header.tsx:58
+#: assets/js/interactive/components/Header.tsx:62
 msgid "Toggle Header"
 msgstr ""
 

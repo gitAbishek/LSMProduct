@@ -24,7 +24,7 @@ const theme = extendTheme({
 			'.wp-admin #masteriyo': {
 				ml: '-20px',
 			},
-			'.masteriyo--is-admin .masteriyo-interactive-header': {
+			'.admin-bar .masteriyo-interactive-header': {
 				top: '32px !important',
 			},
 			'#masteriyo select': {

@@ -18,6 +18,7 @@ import MediaAPI from '../../../back-end/utils/media';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
 import { CourseProgressItemsMap } from '../../schemas';
+import VideoPlayer from './VideoPlayer';
 
 const InteractiveLesson = () => {
 	const { lessonId, courseId }: any = useParams();
@@ -95,6 +96,10 @@ const InteractiveLesson = () => {
 					<Image src={imageQuery?.data?.source_url} />
 					<Text
 						dangerouslySetInnerHTML={{ __html: lessonQuery?.data?.description }}
+					/>
+					<VideoPlayer
+						type={lessonQuery?.data?.video_source}
+						url={lessonQuery?.data?.video_source_url}
 					/>
 				</Stack>
 				<FloatingNavigation

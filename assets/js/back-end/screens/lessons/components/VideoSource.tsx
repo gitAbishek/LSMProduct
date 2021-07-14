@@ -1,7 +1,14 @@
-import { FormControl, FormLabel, Input, Select, Stack } from '@chakra-ui/react';
+import {
+	FormControl,
+	FormErrorMessage,
+	FormLabel,
+	Input,
+	Select,
+	Stack,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 interface Props {
 	defaultSource?: any;
@@ -9,7 +16,17 @@ interface Props {
 }
 const VideoSource: React.FC<Props> = (props) => {
 	const { defaultSource, defaultSourceUrl } = props;
-	const { register } = useFormContext();
+	const {
+		register,
+		control,
+		formState: { errors },
+	} = useFormContext();
+
+	const watchSource = useWatch({
+		name: 'video_source',
+		defaultValue: defaultSource || 'self-hosted',
+		control,
+	});
 
 	return (
 		<Stack direction="row" spacing="6">
@@ -21,15 +38,27 @@ const VideoSource: React.FC<Props> = (props) => {
 					<option value="vimeo">{__('Vimeo', 'materiyo')}</option>
 				</Select>
 			</FormControl>
-
-			<FormControl>
-				<FormLabel>{__('Video Source URL', 'masteriyo')}</FormLabel>
-				<Input
-					type="text"
-					defaultValue={defaultSourceUrl}
-					{...register('video_source_url')}
-				/>
-			</FormControl>
+			{watchSource !== 'self-hosted' && (
+				<FormControl isInvalid={!!errors.video_source_url}>
+					<FormLabel>{__('Video Source URL', 'masteriyo')}</FormLabel>
+					<Input
+						type="text"
+						defaultValue={defaultSourceUrl}
+						{...register('video_source_url', {
+							pattern: {
+								value:
+									watchSource === 'youtube'
+										? /\/\/(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=|embed\/)?([a-z0-9_\-]+)/i
+										: /\/\/(?:www\.)?vimeo.com\/([0-9a-z\-_]+)/i,
+								message: __('Please Provide Valid URL'),
+							},
+						})}
+					/>
+					<FormErrorMessage>
+						{errors?.video_source_url && errors?.video_source_url?.message}
+					</FormErrorMessage>
+				</FormControl>
+			)}
 		</Stack>
 	);
 };

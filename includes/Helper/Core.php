@@ -2634,11 +2634,14 @@ function masteriyo_get_plugin_url() {
  * @return array
  */
 function masteriyo_get_lesson_video_sources() {
-	$sources = array(
-		'self-hosted' => __( 'Self Hosted', 'masteriyo' ),
-		'youtube'     => __( 'YouTube', 'masteriyo' ),
+	return apply_filters(
+		'masteriyo_lesson_video_sources',
+		array(
+			'self-hosted' => __( 'Self Hosted', 'masteriyo' ),
+			'youtube'     => __( 'YouTube', 'masteriyo' ),
+			'vimeo'       => __( 'Vimeo', 'masteriyo' ),
+		)
 	);
-	return apply_filters( 'masteriyo_lesson_video_sources', $sources );
 }
 
 /**

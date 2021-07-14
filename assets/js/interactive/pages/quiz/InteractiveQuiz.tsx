@@ -26,7 +26,8 @@ const InteractiveQuiz = () => {
 		updateQuizProgress,
 	});
 
-	const startedOn = state?.quizProgress[quizId]?.startedOn || false;
+	const startedOn =
+		(state.quizProgress && state?.quizProgress[quizId]?.startedOn) || false;
 
 	const quizQuery = useQuery<QuizSchema, Error>(
 		[`section${quizId}`, quizId],
@@ -73,7 +74,10 @@ const InteractiveQuiz = () => {
 									}}
 								/>
 								{scoreBoardData ? (
-									<ScoreBoard scoreData={scoreBoardData} />
+									<ScoreBoard
+										scoreData={scoreBoardData}
+										onStartPress={onStartPress}
+									/>
 								) : startedOn ? (
 									<QuizFields />
 								) : (

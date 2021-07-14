@@ -267,8 +267,6 @@ class LessonsController extends PostsController {
 			'parent_id'           => $lesson->get_parent_id( $context ),
 			'course_id'           => $lesson->get_course_id( $context ),
 			'featured_image'      => $lesson->get_featured_image( $context ),
-			'categories'          => $this->get_taxonomy_terms( $lesson ),
-			'tags'                => $this->get_taxonomy_terms( $lesson, 'tag' ),
 			'video_source'        => $lesson->get_video_source( $context ),
 			'video_source_url'    => $lesson->get_video_source_url( $context ),
 			'video_playback_time' => $lesson->get_video_playback_time( $context ),
@@ -276,33 +274,6 @@ class LessonsController extends PostsController {
 		);
 
 		return $data;
-	}
-
-	/**
-	 * Get taxonomy terms.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Lesson $lesson Lesson object.
-	 * @param string $taxonomy Taxonomy slug.
-	 *
-	 * @return array
-	 */
-	protected function get_taxonomy_terms( $lesson, $taxonomy = 'cat' ) {
-		$terms = Utils::get_object_terms( $lesson->get_id(), 'lesson_' . $taxonomy );
-
-		$terms = array_map(
-			function( $term ) {
-				return array(
-					'id'   => $term->term_id,
-					'name' => $term->name,
-					'slug' => $term->slug,
-				);
-			},
-			$terms
-		);
-
-		return $terms;
 	}
 
 	/**
@@ -327,45 +298,6 @@ class LessonsController extends PostsController {
 					'value'   => absint( $request['course_id'] ),
 					'compare' => '=',
 				),
-			);
-		}
-
-		// Taxonomy query to filter lessons by category, tag and difficult.
-		$tax_query = array();
-
-		// Map between taxonomy name and arg's key.
-		$taxonomies = array(
-			'lesson_cat' => 'category',
-			'lesson_tag' => 'tag',
-		);
-
-		// Set tax_query for each passed arg.
-		foreach ( $taxonomies as $taxonomy => $key ) {
-			if ( ! empty( $request[ $key ] ) ) {
-				$tax_query[] = array(
-					'taxonomy' => $taxonomy,
-					'field'    => 'term_id',
-					'terms'    => $request[ $key ],
-				);
-			}
-		}
-
-		// Build tax_query if taxonomies are set.
-		if ( ! empty( $tax_query ) ) {
-			if ( ! empty( $args['tax_query'] ) ) {
-				$args['tax_query'] = array_merge( $tax_query, $args['tax_query'] ); // WPCS: slow query ok.
-			} else {
-				$args['tax_query'] = $tax_query; // WPCS: slow query ok.
-			}
-		}
-
-		// Filter featured.
-		if ( is_bool( $request['featured'] ) ) {
-			$args['tax_query'][] = array(
-				'taxonomy' => 'lesson_visibility',
-				'field'    => 'name',
-				'terms'    => 'featured',
-				'operator' => true === $request['featured'] ? 'IN' : 'NOT IN',
 			);
 		}
 
@@ -499,60 +431,6 @@ class LessonsController extends PostsController {
 					'description' => __( 'Course featured image.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
-				),
-				'categories'          => array(
-					'description' => __( 'List of categories.', 'masteriyo' ),
-					'type'        => 'array',
-					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type'       => 'object',
-						'properties' => array(
-							'id'   => array(
-								'description' => __( 'Category ID.', 'masteriyo' ),
-								'type'        => 'integer',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'name' => array(
-								'description' => __( 'Category name.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-							),
-							'slug' => array(
-								'description' => __( 'Category slug.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-							),
-						),
-					),
-				),
-				'tags'                => array(
-					'description' => __( 'List of tags.', 'masteriyo' ),
-					'type'        => 'array',
-					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type'       => 'object',
-						'properties' => array(
-							'id'   => array(
-								'description' => __( 'Tag ID.', 'masteriyo' ),
-								'type'        => 'integer',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'name' => array(
-								'description' => __( 'Tag name.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-							),
-							'slug' => array(
-								'description' => __( 'Tag slug.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-							),
-						),
-					),
 				),
 				'video_source'        => array(
 					'description' => __( 'Video source.', 'masteriyo' ),
@@ -688,16 +566,6 @@ class LessonsController extends PostsController {
 			$lesson->set_video_playback_time( $request['video_playback_time'] );
 		}
 
-		// Lesson categories.
-		if ( isset( $request['categories'] ) && is_array( $request['categories'] ) ) {
-			$lesson = $this->save_taxonomy_terms( $lesson, $request['categories'] );
-		}
-
-		// Lesson tags.
-		if ( isset( $request['tags'] ) && is_array( $request['tags'] ) ) {
-			$lesson = $this->save_taxonomy_terms( $lesson, $request['tags'], 'tag' );
-		}
-
 		// Allow set meta_data.
 		if ( isset( $request['meta_data'] ) && is_array( $request['meta_data'] ) ) {
 			foreach ( $request['meta_data'] as $meta ) {
@@ -716,31 +584,6 @@ class LessonsController extends PostsController {
 		 * @param bool            $creating If is creating a new object.
 		 */
 		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $lesson, $request, $creating );
-	}
-
-	/**
-	 * Save taxonomy terms.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param Lesson $lesson  Lesson instance.
-	 * @param array  $terms    Terms data.
-	 * @param string $taxonomy Taxonomy name.
-	 *
-	 * @return Lesson
-	 */
-	protected function save_taxonomy_terms( $lesson, $terms, $taxonomy = 'cat' ) {
-		$term_ids = wp_list_pluck( $terms, 'id' );
-
-		if ( 'cat' === $taxonomy ) {
-			$lesson->set_category_ids( $term_ids );
-		} elseif ( 'tag' === $taxonomy ) {
-			$lesson->set_tag_ids( $term_ids );
-		} elseif ( 'difficulty' === $taxonomy ) {
-			$lesson->set_difficulty_ids( $term_ids );
-		}
-
-		return $lesson;
 	}
 
 	/**

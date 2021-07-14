@@ -37,19 +37,24 @@ class SingleChoice extends Question implements QuestionInterface {
 	 * @return bool
 	 */
 	public function check_answer( $chosen_answer, $context = 'edit' ) {
-		$answers = $this->get_answers( 'edit' );
-
-		$correct_answer = array();
-
-		if ( is_array( $answers ) && count( $answers ) > 0 ) {
-			foreach ( $answers as $answer ) {
-				if ( $answer->right ) {
-					$correct_answer = $answer;
-					break;
-				}
-			}
-
-			return $correct_answer->name === $chosen_answer;
+		// Return true if there are no answers stored.
+		if ( empty( $answers ) ) {
+			return true;
 		}
+
+		$chosen_answer = is_array( $chosen_answer ) ? $chosen_answer[0] : $chosen_answer;
+
+		// Bail early if the chosen answer is empty.
+		if ( empty( trim( $chosen_answer ) ) ) {
+			return false;
+		}
+
+		foreach ( $answers as $answer ) {
+			if ( $answer->name === $chosen_answer && $answer->correct ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

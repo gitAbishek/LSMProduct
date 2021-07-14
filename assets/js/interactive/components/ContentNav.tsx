@@ -23,6 +23,7 @@ interface Props {
 	onCompletePress: any;
 	isButtonLoading?: boolean;
 	isButtonDisabled?: boolean;
+	type?: 'lesson' | 'quiz';
 }
 
 const ContentNav: React.FC<Props> = (props) => {
@@ -32,6 +33,7 @@ const ContentNav: React.FC<Props> = (props) => {
 		onCompletePress,
 		isButtonLoading,
 		isButtonDisabled,
+		type,
 	} = props;
 
 	const cirlceStyles = {
@@ -56,7 +58,7 @@ const ContentNav: React.FC<Props> = (props) => {
 	return (
 		<Box as="nav" w="full" p="6">
 			<ButtonGroup d="flex" justifyContent="space-between" alignItems="center">
-				<Box w="200px">
+				<Box minW="200px">
 					{navigation?.previous && (
 						<Link
 							as={RouterLink}
@@ -74,7 +76,7 @@ const ContentNav: React.FC<Props> = (props) => {
 									<Text fontSize="xs" color="gray.500">
 										Prev
 									</Text>
-									<Heading fontSize="xs">First Installation</Heading>
+									<Heading fontSize="xs">{navigation?.previous.name}</Heading>
 								</Stack>
 							</HStack>
 						</Link>
@@ -88,14 +90,22 @@ const ContentNav: React.FC<Props> = (props) => {
 					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"
-					leftIcon={isButtonDisabled && <Icon fontSize="xl" as={BiCheck} />}
+					leftIcon={
+						<Icon
+							fontSize="xl"
+							d={isButtonDisabled ? 'block' : 'none'}
+							as={BiCheck}
+						/>
+					}
 					textTransform="uppercase">
 					{isButtonDisabled
 						? __('Completed', 'masteiryo')
+						: type === 'quiz'
+						? __('Submit Quiz', 'masteriyo')
 						: __('Mark as Complete', 'masteriyo')}
 				</Button>
 
-				<Box w="200px">
+				<Box minW="200px">
 					{navigation?.next && (
 						<Link
 							as={RouterLink}
@@ -105,12 +115,12 @@ const ContentNav: React.FC<Props> = (props) => {
 								courseId
 							)}
 							sx={navLinkStyles}>
-							<HStack spacing="4">
+							<HStack spacing="4" justify="flex-end">
 								<Stack direction="column" spacing="0">
 									<Text fontSize="xs" color="gray.500">
 										Next
 									</Text>
-									<Heading fontSize="xs">Second Installation</Heading>
+									<Heading fontSize="xs">{navigation?.next.name}</Heading>
 								</Stack>
 								<Center sx={cirlceStyles}>
 									<Icon as={BiChevronRight} />

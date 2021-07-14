@@ -78,5 +78,21 @@ export type QuestionAnswerSchema = {
 	user_id: number;
 	sender: 'student' | 'instructor';
 	by_current_user: boolean;
-	answers_count?: number;
+	answers_count: number;
+};
+
+export type ScoreBoardSchema = {
+	id: number;
+	course_id: number;
+	quiz_id: number;
+	user_id: number;
+	total_questions: number;
+	total_answered_questions: number;
+	total_marks: string;
+	total_attempts: number;
+	earned_marks: string;
+	info: any;
+	attempt_status: string;
+	attempt_started_at: string;
+	attempt_ended_at: string;
 };

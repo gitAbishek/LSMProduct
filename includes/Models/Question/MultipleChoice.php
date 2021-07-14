@@ -37,18 +37,34 @@ class MultipleChoice extends Question implements QuestionInterface {
 	 * @return bool
 	 */
 	public function check_answer( $chosen_answers, $context = 'edit' ) {
-		$answers = $this->get_answers( 'edit' );
+		$answers        = $this->get_answers( 'edit' );
+		$chosen_answers = (array) $chosen_answers;
 
-		$correct_answers = array();
-
-		if ( is_array( $answers ) && count( $answers ) > 0 ) {
-			foreach ( $answers as $answer ) {
-				if ( $answer->right ) {
-					$correct_answers[] = $answer->name;
-				}
-			}
-
-			return $chosen_answers === $correct_answers;
+		// Return true if there are no answers stored.
+		if ( empty( $answers ) ) {
+			return true;
 		}
+
+		// Bail early if the chosen answer is empty.
+		if ( empty( $chosen_answers ) ) {
+			return false;
+		}
+
+		// Convert the answers to map.
+		$answers_map = array();
+		foreach ( $answers as $answer ) {
+			$answers_map[ $answer->name ] = $answer->correct;
+		}
+
+		$correct = true;
+		foreach ( $chosen_answers as $chosen_answer ) {
+			if ( isset( $answers_map[ $chosen_answer ] ) ) {
+				$correct = $correct && $answers_map[ $chosen_answer ];
+			} else {
+				$correct = false;
+			}
+		}
+
+		return $correct;
 	}
 }

@@ -5,6 +5,11 @@ import {
 	FormLabel,
 	Heading,
 	Input,
+	NumberDecrementStepper,
+	NumberIncrementStepper,
+	NumberInput,
+	NumberInputField,
+	NumberInputStepper,
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -112,6 +117,32 @@ const EditQuestion: React.FC<Props> = (props) => {
 					/>
 					<FormErrorMessage>
 						{errors?.type && errors?.type?.message}
+					</FormErrorMessage>
+				</FormControl>
+
+				<FormControl isInvalid={!!errors?.points} flex="0 0 100px">
+					<FormLabel>{__('Points', 'masteriyo')}</FormLabel>
+					<Controller
+						name="points"
+						defaultValue={questionData.points || 0}
+						rules={{
+							required: __(
+								'Please provide points for the question',
+								'masteriyo'
+							),
+						}}
+						render={({ field }) => (
+							<NumberInput {...field} w="full">
+								<NumberInputField borderRadius="sm" shadow="input" />
+								<NumberInputStepper>
+									<NumberIncrementStepper />
+									<NumberDecrementStepper />
+								</NumberInputStepper>
+							</NumberInput>
+						)}
+					/>
+					<FormErrorMessage>
+						{errors?.points && errors?.points?.message}
 					</FormErrorMessage>
 				</FormControl>
 			</Stack>

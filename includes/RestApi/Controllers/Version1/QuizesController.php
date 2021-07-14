@@ -498,42 +498,37 @@ class QuizesController extends PostsController {
 
 		global $wpdb;
 
-		$parameters           = $request->get_params();
+		$answers              = $request->get_params();
 		$quiz_id              = (int) $request['id'];
 		$total_earned_marks   = 0;
 		$attempt_questions    = 0;
 		$total_question_marks = 0;
 
+		if ( $answers['id'] ) {
+			unset( $answers['id'] );
+		}
+
 		$attempt_data = masteriyo_is_quiz_started( $quiz_id );
 
-		if ( is_array( $parameters ) && count( $parameters ) > 0 ) {
-			foreach ( $parameters as $parameter ) {
+		if ( is_array( $answers ) && count( $answers ) > 0 ) {
+			foreach ( $answers as $question_id => $value ) {
+				$object = $this->get_question_object( (int) $question_id );
 
-				if ( is_array( $parameter ) && count( $parameters ) > 0 ) {
-					foreach ( $parameter as $key => $value ) {
-
-						if ( 'question_id' === $key ) {
-							$object = $this->get_question_object( (int) $value );
-
-							if ( ! $object || 0 === $object->get_id() ) {
-								return new \WP_Error(
-									"masteriyo_rest_{$this->post_type}_invalid_id",
-									__( 'Invalid ID.', 'masteriyo' ),
-									array( 'status' => 404 )
-								);
-							}
-
-							$total_question_marks += $object->get_points();
-						}
-						if ( 'answers' === $key ) {
-							$is_correct = $object->check_answer( $value, 'view' );
-
-							$question_mark       = $is_correct ? $object->get_points() : 0;
-							$total_earned_marks += $question_mark;
-							$attempt_questions++;
-						}
-					}
+				if ( ! $object || 0 === $object->get_id() ) {
+					return new \WP_Error(
+						"masteriyo_rest_{$this->post_type}_invalid_id",
+						__( 'Invalid ID.', 'masteriyo' ),
+						array( 'status' => 404 )
+					);
 				}
+
+				$total_question_marks += $object->get_points();
+
+				$is_correct = $object->check_answer( $value, 'view' );
+
+				$question_mark       = $is_correct ? $object->get_points() : 0;
+				$total_earned_marks += $question_mark;
+				$attempt_questions++;
 			}
 
 			$quiz_questions = masteriyo_get_quiz_questions( $quiz_id, 'post_parent' );

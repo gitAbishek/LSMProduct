@@ -32,7 +32,7 @@ const QuestionList: React.FC = () => {
 	const { courseId }: any = useParams();
 	const toast = useToast();
 	const queryClient = useQueryClient();
-	const [chatData, setChatData] = useState(null);
+	const [chatData, setChatData] = useState<any>(null);
 	const {
 		handleSubmit,
 		register,

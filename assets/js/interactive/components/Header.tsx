@@ -1,6 +1,5 @@
 import {
 	Box,
-	Button,
 	CircularProgress,
 	CircularProgressLabel,
 	Container,
@@ -246,13 +245,6 @@ const Header: React.FC<Props> = (props) => {
 										max={summary.total.completed + summary.total.pending}
 									/>
 								</Stack>
-								<Button
-									colorScheme="blue"
-									rounded="3xl"
-									textTransform="uppercase"
-									fontWeight="bold">
-									{__('Submit Quiz', 'masteriyo')}
-								</Button>
 							</Stack>
 
 							<Stack

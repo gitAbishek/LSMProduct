@@ -130,7 +130,7 @@ msgstr ""
 #: assets/js/back-end/screens/orders/components/OrderRow.tsx:228
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:142
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:153
-#: assets/js/back-end/screens/quiz/components/question/Question.tsx:206
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:214
 #: assets/js/back-end/screens/sections/components/Content.tsx:166
 #: assets/js/back-end/screens/sections/components/EditSection.tsx:94
 #: assets/js/back-end/screens/sections/components/Section.tsx:224
@@ -196,7 +196,7 @@ msgstr ""
 #: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:171
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:165
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:141
-#: assets/js/back-end/screens/quiz/components/question/Question.tsx:176
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:184
 msgid "Update"
 msgstr ""
 
@@ -379,8 +379,10 @@ msgstr ""
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:190
 #: assets/js/back-end/screens/orders/EditOrder.tsx:592
 #: assets/js/back-end/screens/orders/components/OrderRow.tsx:234
-#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:94
-#: assets/js/back-end/screens/quiz/components/question/Question.tsx:212
+#: assets/js/back-end/screens/quiz/components/answer/types/MultipleChoice.tsx:118
+#: assets/js/back-end/screens/quiz/components/answer/types/SingleChoice.tsx:124
+#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:125
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:220
 #: assets/js/back-end/screens/sections/components/Content.tsx:174
 #: assets/js/back-end/screens/sections/components/Section.tsx:230
 msgid "Delete"
@@ -395,7 +397,7 @@ msgstr ""
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:62
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:57
 #: assets/js/back-end/screens/orders/EditOrder.tsx:155
-#: assets/js/back-end/screens/quiz/components/question/Question.tsx:65
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:76
 msgid " has been updated successfully."
 msgstr ""
 
@@ -412,7 +414,7 @@ msgstr ""
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:85
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:72
 #: assets/js/back-end/screens/orders/EditOrder.tsx:176
-#: assets/js/back-end/screens/quiz/components/question/Question.tsx:78
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:89
 msgid " has been deleted successfully."
 msgstr ""
 
@@ -658,7 +660,7 @@ msgid "Delete Lesson"
 msgstr ""
 
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:151
-#: assets/js/back-end/screens/quiz/components/question/Question.tsx:198
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:206
 #: assets/js/back-end/screens/sections/components/Content.tsx:155
 #: assets/js/back-end/screens/sections/components/Section.tsx:213
 msgid "Are you sure? You can't restore this section"
@@ -859,7 +861,7 @@ msgid "Update Order"
 msgstr ""
 
 #: assets/js/back-end/screens/orders/EditOrder.tsx:56
-#: assets/js/interactive/components/ContentNav.tsx:94
+#: assets/js/interactive/components/ContentNav.tsx:95
 msgid "Completed"
 msgstr ""
 
@@ -1010,52 +1012,61 @@ msgstr ""
 msgid "Pass mark is required for the quiz"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:67
-msgid "Answers"
-msgstr ""
-
-#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:88
-#: assets/js/back-end/screens/quiz/components/question/Question.tsx:144
+#: assets/js/back-end/screens/quiz/components/answer/types/MultipleChoice.tsx:111
+#: assets/js/back-end/screens/quiz/components/answer/types/SingleChoice.tsx:117
+#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:118
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:154
 msgid "Duplicate"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:106
+#: assets/js/back-end/screens/quiz/components/answer/types/MultipleChoice.tsx:74
+#: assets/js/back-end/screens/quiz/components/answer/types/ShortAnswer.tsx:15
+#: assets/js/back-end/screens/quiz/components/answer/types/SingleChoice.tsx:80
+#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:81
+msgid "Answers"
+msgstr ""
+
+#: assets/js/back-end/screens/quiz/components/answer/types/ShortAnswer.tsx:21
+msgid "Short answer doesn't require any fields"
+msgstr ""
+
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:110
 msgid "Please select question type"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:115
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:119
 msgid "Question Description"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:74
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:76
 msgid "Question Name"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:77
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:79
 msgid "Your Question Name"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:79
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:81
 msgid "You must provide name for the question"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:90
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:92
 msgid "Question Type"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/Question.tsx:195
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:203
 msgid "Delete "
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/Question.tsx:64
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:75
 msgid "Question Updated"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/Question.tsx:77
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:88
 msgid "Question Deleted"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/Questions.tsx:69
+#: assets/js/back-end/screens/quiz/components/question/Questions.tsx:67
 msgid ""
 "There are no questions right now, You can add them by clicking on Add New "
 "Question"
@@ -1648,43 +1659,43 @@ msgstr ""
 msgid "Log Out"
 msgstr ""
 
-#: assets/js/interactive/components/ContentNav.tsx:95
-msgid "Mark as Complete"
-msgstr ""
-
-#: assets/js/interactive/components/Header.tsx:124
-msgid "Steps"
-msgstr ""
-
-#: assets/js/interactive/components/Header.tsx:131
-msgid "lessons left"
-msgstr ""
-
-#: assets/js/interactive/components/Header.tsx:176
-msgid "Lesson"
-msgstr ""
-
-#: assets/js/interactive/components/Header.tsx:209
-msgid "%"
-msgstr ""
-
-#: assets/js/interactive/components/Header.tsx:218
-msgid "Quiz"
-msgstr ""
-
-#: assets/js/interactive/components/Header.tsx:225
-msgid " Completed"
-msgstr ""
-
-#: assets/js/interactive/components/Header.tsx:232
-msgid " Left"
-msgstr ""
-
-#: assets/js/interactive/components/Header.tsx:254
+#: assets/js/interactive/components/ContentNav.tsx:97
 msgid "Submit Quiz"
 msgstr ""
 
-#: assets/js/interactive/components/Header.tsx:59
+#: assets/js/interactive/components/ContentNav.tsx:98
+msgid "Mark as Complete"
+msgstr ""
+
+#: assets/js/interactive/components/Header.tsx:123
+msgid "Steps"
+msgstr ""
+
+#: assets/js/interactive/components/Header.tsx:130
+msgid "lessons left"
+msgstr ""
+
+#: assets/js/interactive/components/Header.tsx:175
+msgid "Lesson"
+msgstr ""
+
+#: assets/js/interactive/components/Header.tsx:208
+msgid "%"
+msgstr ""
+
+#: assets/js/interactive/components/Header.tsx:217
+msgid "Quiz"
+msgstr ""
+
+#: assets/js/interactive/components/Header.tsx:224
+msgid " Completed"
+msgstr ""
+
+#: assets/js/interactive/components/Header.tsx:231
+msgid " Left"
+msgstr ""
+
+#: assets/js/interactive/components/Header.tsx:58
 msgid "Toggle Header"
 msgstr ""
 
@@ -1744,22 +1755,32 @@ msgstr ""
 msgid "Lesson has been marked as completed"
 msgstr ""
 
-#: assets/js/interactive/pages/quiz/components/QuizStart.tsx:67
+#: assets/js/interactive/pages/quiz/components/FieldMultipleChoice.tsx:31
+#: assets/js/interactive/pages/quiz/components/FieldShortAnswer.tsx:22
+#: assets/js/interactive/pages/quiz/components/FieldSingleChoice.tsx:31
+msgid "Answer is required"
+msgstr ""
+
+#: assets/js/interactive/pages/quiz/components/QuizFields.tsx:33
+msgid "Question "
+msgstr ""
+
+#: assets/js/interactive/pages/quiz/components/QuizStart.tsx:57
 msgid "Duration: "
 msgstr ""
 
-#: assets/js/interactive/pages/quiz/components/QuizStart.tsx:72
+#: assets/js/interactive/pages/quiz/components/QuizStart.tsx:62
 msgid "Questions: "
 msgstr ""
 
-#: assets/js/interactive/pages/quiz/components/QuizStart.tsx:77
+#: assets/js/interactive/pages/quiz/components/QuizStart.tsx:67
 msgid "Mark: "
 msgstr ""
 
-#: assets/js/interactive/pages/quiz/components/QuizStart.tsx:82
+#: assets/js/interactive/pages/quiz/components/QuizStart.tsx:72
 msgid "Pass Mark: "
 msgstr ""
 
-#: assets/js/interactive/pages/quiz/components/QuizStart.tsx:95
+#: assets/js/interactive/pages/quiz/components/QuizStart.tsx:85
 msgid "Start Quiz"
 msgstr ""

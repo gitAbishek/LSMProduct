@@ -110,7 +110,7 @@ const Header: React.FC<Props> = (props) => {
 												textTransform="uppercase"
 												color="gray.600"
 												fontWeight="bold">
-												Complete
+												{__('Complete', 'masteriyo')}
 											</Text>
 										</Stack>
 										<Stack
@@ -119,8 +119,9 @@ const Header: React.FC<Props> = (props) => {
 											fontWeight="medium"
 											color="gray.600">
 											<Text>
-												{summary.total.completed + summary.total.pending}/
-												{summary.total.pending} {__('Steps', 'masteriyo')} |{' '}
+												{summary.total.pending}/
+												{summary.total.completed + summary.total.pending}
+												{__(' Completed', 'masteriyo')} |{' '}
 											</Text>
 											<Text>
 												{summary.lesson.pending}{' '}

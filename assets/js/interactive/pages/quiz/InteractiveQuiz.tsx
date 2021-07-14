@@ -2,7 +2,7 @@ import { Box, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import { useStateMachine } from 'little-state-machine';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
@@ -32,11 +32,18 @@ const InteractiveQuiz = () => {
 		{}
 	);
 
+	const startQuiz = useMutation(() => quizAPI.start(quizId), {
+		onSuccess: () => {
+			actions.updateQuizProgress({
+				quizProgress: { [quizId]: { startedOn: Date.now() } },
+			});
+		},
+	});
+
 	const onStartPress = () => {
-		actions.updateQuizProgress({
-			quizProgress: { [quizId]: { startedOn: Date.now() } },
-		});
+		startQuiz.mutate();
 	};
+
 	const onSubmit = (data: any) => {
 		console.log(data);
 	};

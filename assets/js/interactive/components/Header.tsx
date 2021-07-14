@@ -46,7 +46,11 @@ const Header: React.FC<Props> = (props) => {
 
 	return (
 		<Box as="header" h="84px">
-			<Slide direction="top" in={isOpen} style={{ zIndex: 999 }}>
+			<Slide
+				direction="top"
+				in={isOpen}
+				style={{ zIndex: 999 }}
+				className="masteriyo-interactive-header">
 				<Box position="relative" shadow="box" bg="white">
 					<IconButton
 						onClick={onToggle}
@@ -98,7 +102,9 @@ const Header: React.FC<Props> = (props) => {
 											<Flex>
 												<Heading fontSize="lg">
 													{Math.round(
-														(summary.total.completed / summary.total.pending) *
+														(summary.total.completed /
+															(summary.total.pending +
+																summary.total.completed)) *
 															100
 													)}
 												</Heading>
@@ -110,7 +116,7 @@ const Header: React.FC<Props> = (props) => {
 												textTransform="uppercase"
 												color="gray.600"
 												fontWeight="bold">
-												Complete
+												{__('Complete', 'masteriyo')}
 											</Text>
 										</Stack>
 										<Stack
@@ -119,8 +125,9 @@ const Header: React.FC<Props> = (props) => {
 											fontWeight="medium"
 											color="gray.600">
 											<Text>
-												{summary.total.completed + summary.total.pending}/
-												{summary.total.pending} {__('Steps', 'masteriyo')} |{' '}
+												{summary.total.pending}/
+												{summary.total.completed + summary.total.pending}
+												{__(' Completed', 'masteriyo')} |{' '}
 											</Text>
 											<Text>
 												{summary.lesson.pending}{' '}
@@ -152,7 +159,12 @@ const Header: React.FC<Props> = (props) => {
 															pb="6">
 															<Stack direction="row" spacing="2">
 																<CircularProgress
-																	value={60}
+																	value={Math.round(
+																		(summary.lesson.completed /
+																			(summary.lesson.pending +
+																				summary.lesson.completed)) *
+																			100
+																	)}
 																	size="54px"
 																	capIsRound
 																	trackColor="blue.100"
@@ -160,7 +172,8 @@ const Header: React.FC<Props> = (props) => {
 																	<CircularProgressLabel fontWeight="bold">
 																		{Math.round(
 																			(summary.lesson.completed /
-																				summary.lesson.pending) *
+																				(summary.lesson.pending +
+																					summary.lesson.completed)) *
 																				100
 																		)}
 																		{__('%', 'masteriyo')}
@@ -194,7 +207,12 @@ const Header: React.FC<Props> = (props) => {
 														<ListItem pt="6">
 															<Stack direction="row" spacing="2">
 																<CircularProgress
-																	value={60}
+																	value={Math.round(
+																		(summary.quiz.completed /
+																			(summary.quiz.pending +
+																				summary.quiz.completed)) *
+																			100
+																	)}
 																	size="54px"
 																	capIsRound
 																	trackColor="blue.100"
@@ -202,7 +220,8 @@ const Header: React.FC<Props> = (props) => {
 																	<CircularProgressLabel fontWeight="bold">
 																		{Math.round(
 																			(summary.quiz.completed /
-																				summary.quiz.pending) *
+																				(summary.quiz.pending +
+																					summary.quiz.completed)) *
 																				100
 																		)}
 																		{__('%', 'masteriyo')}

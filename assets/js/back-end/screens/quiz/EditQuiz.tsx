@@ -67,13 +67,6 @@ const EditQuiz: React.FC = () => {
 					isClosable: true,
 					status: 'success',
 				});
-				history.push({
-					pathname: routes.courses.edit.replace(
-						':courseId',
-						data?.course_id?.toString()
-					),
-					search: '?page=builder',
-				});
 			},
 		}
 	);

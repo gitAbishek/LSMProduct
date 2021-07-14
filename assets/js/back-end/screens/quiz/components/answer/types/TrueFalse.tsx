@@ -98,7 +98,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 								py="1">
 								<Stack direction="row" spacing="2" align="center" flex="1">
 									<Icon as={Sortable} fontSize="lg" color="gray.500" />
-									<Editable defaultValue={answer?.name}>
+									<Editable value={answer?.name}>
 										<EditablePreview />
 										<EditableInput
 											onChange={(e) => onNameChange(index, e.target.value)}

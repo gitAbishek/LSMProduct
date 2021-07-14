@@ -34,6 +34,7 @@ import API from '../../utils/api';
 import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
+import VideoSource from './components/VideoSource';
 
 const EditLesson = () => {
 	const { lessonId, courseId }: any = useParams();
@@ -58,7 +59,10 @@ const EditLesson = () => {
 					isClosable: true,
 					status: 'success',
 				});
-				history.push(routes.courses.edit.replace(':courseId', data.course_id));
+				history.push({
+					pathname: routes.courses.edit.replace(':courseId', courseId),
+					search: '?page=builder',
+				});
 			},
 		}
 	);
@@ -132,7 +136,10 @@ const EditLesson = () => {
 										<FeaturedImage
 											defaultValue={lessonQuery.data.featured_image}
 										/>
-
+										<VideoSource
+											defaultSource={lessonQuery.data.video_source}
+											defaultSourceUrl={lessonQuery.data.video_source_url}
+										/>
 										<Box py="3">
 											<Divider />
 										</Box>

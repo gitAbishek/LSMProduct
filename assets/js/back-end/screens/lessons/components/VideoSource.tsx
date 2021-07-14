@@ -1,38 +1,65 @@
-import { FormControl, FormLabel } from '@chakra-ui/react';
+import {
+	FormControl,
+	FormErrorMessage,
+	FormLabel,
+	Input,
+	Select,
+	Stack,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Select from 'Components/common/Select';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 interface Props {
-	defaultValue?: any;
+	defaultSource?: any;
+	defaultSourceUrl?: any;
 }
 const VideoSource: React.FC<Props> = (props) => {
-	const { defaultValue } = props;
-	const { control } = useFormContext();
+	const { defaultSource, defaultSourceUrl } = props;
+	const {
+		register,
+		control,
+		formState: { errors },
+	} = useFormContext();
 
-	const options = [
-		{ value: 'youtube', label: 'YouTube' },
-		{ value: 'vimeo', label: 'Vimeo' },
-	];
+	const watchSource = useWatch({
+		name: 'video_source',
+		defaultValue: defaultSource || 'self-hosted',
+		control,
+	});
 
 	return (
-		<FormControl>
-			<FormLabel>{__('Video Source', 'masteriyo')}</FormLabel>
-			<Controller
-				render={({ field }) => (
-					<Select
-						{...field}
-						closeMenuOnSelect={false}
-						defaultValue={defaultValue}
-						isMulti
-						options={options}
+		<Stack direction="row" spacing="6">
+			<FormControl>
+				<FormLabel>{__('Video Source', 'masteriyo')}</FormLabel>
+				<Select {...register('video_source')} defaultValue={defaultSource}>
+					<option value="self-hosted">{__('Self Hosted', 'materiyo')}</option>
+					<option value="youtube">{__('YouTube', 'materiyo')}</option>
+					<option value="vimeo">{__('Vimeo', 'materiyo')}</option>
+				</Select>
+			</FormControl>
+			{watchSource !== 'self-hosted' && (
+				<FormControl isInvalid={!!errors.video_source_url}>
+					<FormLabel>{__('Video Source URL', 'masteriyo')}</FormLabel>
+					<Input
+						type="text"
+						defaultValue={defaultSourceUrl}
+						{...register('video_source_url', {
+							pattern: {
+								value:
+									watchSource === 'youtube'
+										? /\/\/(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=|embed\/)?([a-z0-9_\-]+)/i
+										: /\/\/(?:www\.)?vimeo.com\/([0-9a-z\-_]+)/i,
+								message: __('Please Provide Valid URL'),
+							},
+						})}
 					/>
-				)}
-				control={control}
-				name="categories"
-			/>
-		</FormControl>
+					<FormErrorMessage>
+						{errors?.video_source_url && errors?.video_source_url?.message}
+					</FormErrorMessage>
+				</FormControl>
+			)}
+		</Stack>
 	);
 };
 

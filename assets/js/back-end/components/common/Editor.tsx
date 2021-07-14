@@ -12,6 +12,7 @@ import {
 	MenuList,
 	Stack,
 	useDisclosure,
+	useOutsideClick,
 } from '@chakra-ui/react';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import Image from '@tiptap/extension-image';
@@ -43,7 +44,7 @@ import { ImQuotesLeft } from 'react-icons/im';
 import { mergeDeep } from '../../utils/mergeDeep';
 import ImageUploadModal from './ImageUploadModal';
 interface Props {
-	name: `${string}`;
+	name: any;
 	defaultValue?: string;
 }
 
@@ -290,6 +291,7 @@ const MenuBar = ({ editor }: any) => {
 const Editor: React.FC<Props> = (props) => {
 	const { name, defaultValue } = props;
 	const { register, setValue } = useFormContext();
+	const ref = React.useRef<any>();
 
 	const editor = useEditor({
 		extensions: [
@@ -304,6 +306,11 @@ const Editor: React.FC<Props> = (props) => {
 		content: defaultValue,
 	});
 
+	useOutsideClick({
+		ref: ref,
+		handler: () => setValue(name, editor?.getHTML()),
+	});
+
 	return (
 		<Box
 			border="1px"
@@ -315,7 +322,6 @@ const Editor: React.FC<Props> = (props) => {
 				'.ProseMirror': {
 					minH: '200px',
 				},
-
 				'.ProseMirror:focus': {
 					outline: 'none',
 				},
@@ -327,13 +333,10 @@ const Editor: React.FC<Props> = (props) => {
 					height: '0',
 				},
 			}}>
-			<Input type="hidden" {...register(name)} />
+			<Input type="hidden" {...register(name)} defaultValue={defaultValue} />
 			<MenuBar editor={editor} />
-			<Box p="3">
-				<EditorContent
-					editor={editor}
-					onChange={() => setValue(name, editor?.getHTML())}
-				/>
+			<Box p="3" ref={ref}>
+				<EditorContent editor={editor} />
 			</Box>
 		</Box>
 	);

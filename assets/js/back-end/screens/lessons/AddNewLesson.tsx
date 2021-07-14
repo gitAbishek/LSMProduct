@@ -29,6 +29,7 @@ import { mergeDeep } from '../../utils/mergeDeep';
 import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
+import VideoSource from './components/VideoSource';
 
 const AddNewLesson: React.FC = () => {
 	const { sectionId, courseId }: any = useParams();
@@ -103,7 +104,7 @@ const AddNewLesson: React.FC = () => {
 										<Name />
 										<Description />
 										<FeaturedImage />
-
+										<VideoSource />
 										<Box py="3">
 											<Divider />
 										</Box>

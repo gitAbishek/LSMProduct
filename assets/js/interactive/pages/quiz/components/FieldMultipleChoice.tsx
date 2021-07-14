@@ -4,7 +4,7 @@ import {
 	Flex,
 	FormControl,
 	FormErrorMessage,
-	Stack,
+	SimpleGrid,
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -31,7 +31,7 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 					rules={{ required: __('Answer is required', 'masteriyo') }}
 					render={({ field }) => (
 						<CheckboxGroup onChange={field.onChange}>
-							<Stack direction="row" spacing="4">
+							<SimpleGrid spacing="4" columns={4}>
 								{answers.map((answer: SingleChoiceSchema, index: number) => (
 									<Flex
 										key={index}
@@ -43,13 +43,12 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 										rounded="sm"
 										py="3"
 										px="4"
-										minW="200px"
 										shadow="input">
 										<Text fontSize="sm">{answer.name}</Text>
 										<Checkbox value={answer.name} />
 									</Flex>
 								))}
-							</Stack>
+							</SimpleGrid>
 						</CheckboxGroup>
 					)}
 				/>

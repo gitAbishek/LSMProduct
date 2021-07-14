@@ -183,9 +183,6 @@ const Question: React.FC<Props> = (props) => {
 										isLoading={updateQuestion.isLoading}>
 										{__('Update', 'masteriyo')}
 									</Button>
-									<Button variant="outline" onClick={() => history.goBack()}>
-										{__('Cancel', 'masteriyo')}
-									</Button>
 								</ButtonGroup>
 							</Stack>
 						</form>

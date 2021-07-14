@@ -153,7 +153,7 @@ const copyToBuild = [
 ];
 
 function runComposerInBuild() {
-	return exec( 'cd build && composer install --no-dev')
+	return exec( 'cd build && composer install --no-dev --optimize-autoloader')
 }
 
 function compressBuildWithoutVersion() {

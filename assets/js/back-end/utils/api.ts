@@ -56,6 +56,7 @@ class API {
 	async check(id: number, data: any) {
 		return http({
 			url: this.uri + id + '/check_answers',
+			data: data,
 			method: 'post',
 		}).then((res) => res.data);
 	}

@@ -44,7 +44,7 @@ const InteractiveQuiz = () => {
 		(data: any) => quizAPI.check(quizId, data),
 		{
 			onSuccess: (data) => {
-				console.log(data);
+				// console.log(data);
 			},
 		}
 	);
@@ -53,6 +53,7 @@ const InteractiveQuiz = () => {
 	};
 
 	const onSubmit = (data: any) => {
+		console.log(data);
 		checkQuizAnswers.mutate(data);
 	};
 

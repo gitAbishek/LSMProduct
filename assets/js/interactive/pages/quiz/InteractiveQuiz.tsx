@@ -42,14 +42,10 @@ const InteractiveQuiz = () => {
 		},
 	});
 
-	const checkQuizAnswers = useMutation(
-		(data: any) => quizAPI.check(quizId, data),
-		{
-			onSuccess: (data) => {
-				console.log(data);
-			},
-		}
+	const checkQuizAnswers = useMutation((data: any) =>
+		quizAPI.check(quizId, data)
 	);
+
 	const onStartPress = () => {
 		startQuiz.mutate();
 	};
@@ -58,6 +54,7 @@ const InteractiveQuiz = () => {
 		checkQuizAnswers.mutate(data, {
 			onSuccess: (data: any) => {
 				setScoreBoardData(data);
+				actions.updateQuizProgress({ quizProgress: () => {} });
 			},
 		});
 	};

@@ -43,19 +43,19 @@ const QuizFields: React.FC = () => {
 							{question.type === 'single-choice' && (
 								<FieldSingleChoice
 									answers={question.answers}
-									index={`${index.toString()}`}
+									questionId={`${question.id.toString()}`}
 								/>
 							)}
 
 							{question.type === 'multiple-choice' && (
 								<FieldMultipleChoice
 									answers={question.answers}
-									index={`${index.toString()}`}
+									questionId={`${question.id.toString()}`}
 								/>
 							)}
 
 							{question.type === 'short-answer' && (
-								<FieldShortAnswer index={`${index.toString()}`} />
+								<FieldShortAnswer questionId={`${question.id.toString()}`} />
 							)}
 						</Stack>
 					))}

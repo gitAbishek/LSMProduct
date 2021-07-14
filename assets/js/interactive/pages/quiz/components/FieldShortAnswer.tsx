@@ -4,11 +4,11 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
 interface Props {
-	index: any;
+	questionId: any;
 }
 
 const FieldShortAnswer: React.FC<Props> = (props) => {
-	const { index } = props;
+	const { questionId } = props;
 	const {
 		register,
 		formState: { errors },
@@ -16,16 +16,16 @@ const FieldShortAnswer: React.FC<Props> = (props) => {
 
 	return (
 		<>
-			<FormControl isInvalid={errors[index]}>
+			<FormControl isInvalid={errors[questionId]}>
 				<Textarea
-					{...register(index, {
+					{...register(questionId, {
 						required: __('Answer is required', 'masteriyo'),
 					})}
 				/>
 
-				{errors[index] && (
+				{errors[questionId] && (
 					<FormErrorMessage fontSize="xs">
-						{errors[index].message}
+						{errors[questionId].message}
 					</FormErrorMessage>
 				)}
 			</FormControl>

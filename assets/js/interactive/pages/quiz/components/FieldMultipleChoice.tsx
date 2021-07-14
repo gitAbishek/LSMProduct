@@ -14,20 +14,20 @@ import { SingleChoiceSchema } from '../../../../back-end/schemas';
 
 interface Props {
 	answers: [];
-	index: any;
+	questionId: any;
 }
 
 const FieldMultipleChoice: React.FC<Props> = (props) => {
-	const { answers, index } = props;
+	const { answers, questionId } = props;
 	const {
 		formState: { errors },
 	} = useFormContext();
 
 	return (
 		<>
-			<FormControl isInvalid={errors[index]}>
+			<FormControl isInvalid={errors[questionId]}>
 				<Controller
-					name={index}
+					name={questionId}
 					rules={{ required: __('Answer is required', 'masteriyo') }}
 					render={({ field }) => (
 						<CheckboxGroup {...field}>
@@ -53,9 +53,9 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 						</CheckboxGroup>
 					)}
 				/>
-				{errors[index] && (
+				{errors[questionId] && (
 					<FormErrorMessage fontSize="xs">
-						{errors[index].message}
+						{errors[questionId].message}
 					</FormErrorMessage>
 				)}
 			</FormControl>

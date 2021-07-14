@@ -76,6 +76,9 @@ class ScriptStyle {
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_public_localized_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_localized_scripts' ) );
+
+		// Remove third party styles from interactive page.
+		add_action( 'wp_enqueue_scripts', array( $this, 'remove_styles_scripts_in_interactive_page' ), PHP_INT_MAX );
 	}
 
 	/**
@@ -567,5 +570,100 @@ class ScriptStyle {
 		foreach ( $this->localized_scripts as $handle => $script ) {
 			\wp_localize_script( "masteriyo-{$handle}", $script['name'], $script['data'] );
 		}
+	}
+
+	/**
+	 * Remove styles and scripts in interactive page.
+	 *
+	 * @return void
+	 */
+	public function remove_styles_scripts_in_interactive_page() {
+		global $wp_styles;
+
+		// Bail early if the page is not interacitve.
+		if ( ! ( isset( $_GET['masteriyo' ] ) && 'interactive' === $_GET['masteriyo'] ) ) { // phpcs:ignore
+			return;
+		}
+
+		$whitelist = $this->get_whitelist_styles_in_interactive_page();
+
+		foreach ( $wp_styles->registered as $style ) {
+			if ( ! in_array( $style->handle, $whitelist, true ) ) {
+				wp_dequeue_style( $style->handle );
+				wp_deregister_style( $style->handle );
+			}
+		}
+	}
+
+	/**
+	 * Get the list of whitelist styles in interactive page.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	public function get_whitelist_styles_in_interactive_page() {
+		return array_unique(
+			apply_filters(
+				'masteriyo_whitelist_scripts_interactive_page',
+				array(
+					'colors',
+					'common',
+					'forms',
+					'admin-menu',
+					'dashboard',
+					'list-tables',
+					'edit',
+					'revisions',
+					'media',
+					'themes',
+					'about',
+					'nav-menus',
+					'widgets',
+					'site-icon',
+					'l10n',
+					'code-editor',
+					'site-health',
+					'wp-admin',
+					'login',
+					'install',
+					'wp-color-picker',
+					'customize-controls',
+					'customize-widgets',
+					'customize-nav-menus',
+					'buttons',
+					'dashicons',
+					'admin-bar',
+					'wp-auth-check',
+					'editor-buttons',
+					'mediea-views',
+					'wp-pointer',
+					'customize-preview',
+					'wp-embed-template-ie',
+					'imgareaselect',
+					'wp-jquery-ui-dialog',
+					'mediaelement',
+					'wp-mediaelement',
+					'thickbox',
+					'wp-codemirror',
+					'deprecated-media',
+					'farbtastic',
+					'jcrop',
+					'colors-fresh',
+					'open-sans',
+					'wp-editor-font',
+					'wp-block-library-theme',
+					'wp-edit-blocks',
+					'wp-block-editor',
+					'wp-block-library',
+					'wp-block-directory',
+					'wp-components',
+					'wp-editor',
+					'wp-format-library',
+					'wp-list-resuable-blocks',
+					'wp-nux',
+				)
+			)
+		);
 	}
 }

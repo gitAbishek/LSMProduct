@@ -388,8 +388,6 @@ class Install {
 			return;
 		}
 
-		error_log( __FUNCTION__ );
-
 		$terms = array(
 			'beginner'     => esc_html__( 'Beginner', 'masteriyo' ),
 			'intermediate' => esc_html__( 'Intermediate', 'masteriyo' ),

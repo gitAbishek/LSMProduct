@@ -98,7 +98,7 @@ const MultipleChoice: React.FC<Props> = (props) => {
 										/>
 									</Editable>
 								</Stack>
-								<Stack direction="row" spacing="4">
+								<Stack direction="row" spacing="4" flexWrap="wrap">
 									<Checkbox
 										colorScheme="green"
 										isChecked={answer?.correct}

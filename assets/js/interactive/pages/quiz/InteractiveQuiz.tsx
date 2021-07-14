@@ -107,6 +107,7 @@ const InteractiveQuiz = () => {
 					navigation={quizQuery?.data?.navigation}
 					courseId={quizQuery?.data?.course_id}
 					isButtonDisabled={scoreBoardData}
+					isButtonLoading={checkQuizAnswers.isLoading}
 				/>
 			</Container>
 		);

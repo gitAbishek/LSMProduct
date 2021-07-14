@@ -108,7 +108,6 @@ const Builder: React.FC = () => {
 	);
 
 	const onSave = (data: any, type: string) => {
-		console.log(data);
 		updateBuilder.mutate(builderData);
 
 		const newData: any = {

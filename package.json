@@ -20,6 +20,7 @@
     "currency-symbol-map": "5.0.1",
     "focus-visible": "5.2.0",
     "framer-motion": "^4",
+    "get-video-id": "3.2.0",
     "humanize-duration": "3.27.0",
     "little-state-machine": "4.1.2",
     "query-string": "7.0.1",

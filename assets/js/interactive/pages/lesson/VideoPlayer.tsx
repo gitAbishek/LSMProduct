@@ -1,5 +1,5 @@
+import getVideoId from 'get-video-id';
 import React from 'react';
-import { getYoutubeId } from '../../../back-end/utils/helper';
 
 interface Props {
 	type: 'self-hosted' | 'youtube' | 'vimeo';
@@ -7,6 +7,7 @@ interface Props {
 }
 const VideoPlayer: React.FC<Props> = (props) => {
 	const { type, url } = props;
+	const { id } = getVideoId(url || '');
 	return (
 		<>
 			{type === 'youtube' && (
@@ -14,9 +15,14 @@ const VideoPlayer: React.FC<Props> = (props) => {
 					id="ytplayer"
 					width="100%"
 					height="500"
-					src={
-						'https://www.youtube.com/embed/' + getYoutubeId(url || '')
-					}></iframe>
+					src={'https://www.youtube.com/embed/' + id}></iframe>
+			)}
+			{type === 'vimeo' && (
+				<iframe
+					src={'https://player.vimeo.com/video/' + id}
+					width="100%"
+					height="500"
+					allow="autoplay; fullscreen; picture-in-picture"></iframe>
 			)}
 		</>
 	);

@@ -98,7 +98,9 @@ const Header: React.FC<Props> = (props) => {
 											<Flex>
 												<Heading fontSize="lg">
 													{Math.round(
-														(summary.total.completed / summary.total.pending) *
+														(summary.total.completed /
+															(summary.total.pending +
+																summary.total.completed)) *
 															100
 													)}
 												</Heading>

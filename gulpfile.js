@@ -173,6 +173,7 @@ const build         = series(removeBuild, compileAssets, parallel(copyToBuild), 
 const dev           = series(removePreviousMinifiedAssets, startBrowserSync, watchChanges);
 const release       = series(removeRelease, build, parallel(compressBuildWithVersion, compressBuildWithoutVersion));
 
+exports.clean = parallel(removeBuild, removeRelease)
 exports.dev = dev;
 exports.build = build;
 exports.release = release;

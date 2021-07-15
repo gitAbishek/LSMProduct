@@ -54,21 +54,19 @@ const CourseFilter: React.FC<Props> = (props) => {
 	);
 
 	const onChange = (data: FilterParams) => {
-		// only pick parameters that are not empty
 		const newData = pickBy(data, (param) => param.length > 0);
-
 		setFilterParams(newData);
 	};
 
 	return (
 		<Container maxW="container.xl">
 			<Box bg="white" px="12" py="8" shadow="box" mx="auto">
-				<Input
-					placeholder={__('Search courses', 'masteriyo')}
-					{...onSearchInput}
-				/>
 				<form onChange={handleSubmit(onChange)}>
 					<Stack direction="row" spacing="4">
+						<Input
+							placeholder={__('Search courses', 'masteriyo')}
+							{...onSearchInput}
+						/>
 						<Select {...register('category')}>
 							<option value="">{__('All Categories', 'masteriyo')}</option>
 							{categoryQuery?.data?.map(
@@ -88,7 +86,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 							))}
 						</Select>
 
-						<Select {...register('isOnlyFree')}>
+						<Select {...register('price')}>
 							<option value="">{__('Pricing', 'masteriyo')}</option>
 							<option value="0">{__('Free', 'masteriyo')}</option>
 							<option value="">{__('Paid', 'masteriyo')}</option>

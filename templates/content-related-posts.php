@@ -20,14 +20,14 @@ do_action( 'masteriyo_before_related_posts_content' );
 			<div class="mto-course-item">
 				<div class="mto-course--card">
 					<div class="mto-course--img-wrap">
-						<?php if ( is_numeric( $course->get_price() ) ): ?>
+						<?php if ( is_numeric( $course->get_price() ) ) : ?>
 							<span class="price-tag">$<?php echo esc_html( $course->get_price() ); ?></span>
 						<?php endif; ?>
 
 						<!-- Featured Image -->
-						<?php if ( empty( $course->get_featured_image_url() ) ): ?>
+						<?php if ( empty( $course->get_featured_image_url() ) ) : ?>
 							<img class="mto-w-full" src="https://via.placeholder.com/150" alt="Course featured image">
-						<?php else: ?>
+						<?php else : ?>
 							<img
 								class="mto-w-full"
 								src="<?php echo $course->get_featured_image_url(); ?>"
@@ -39,7 +39,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 					<div class="mto-course--header">
 						<div class="mto-rt">
 							<span class="mto-icon-svg mto-flex mto-rating">
-							<?php masteriyo_render_stars( $course->get_average_rating(), '' );?>
+							<?php masteriyo_render_stars( $course->get_average_rating(), '' ); ?>
 							</span>
 
 							<?php
@@ -69,7 +69,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 								</span>
 
 								<time class="mto-inline-block mto-text-sm">
-									<?php echo masteriyo_get_lecture_hours( $course, '%H%h %M%m' ) ?>
+									<?php echo masteriyo_get_lecture_hours( $course, '%H%h %M%m' ); ?>
 								</time>
 							</span>
 							<a href="#" class="mto-course--btn mto-btn mto-btn-primary">

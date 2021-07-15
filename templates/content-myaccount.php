@@ -26,7 +26,7 @@ do_action( 'masteriyo_before_myaccount_content' );
 		do_action( 'masteriyo_myaccount_sidebar_content' );
 		?>
 	</div>
-	
+
 	<main class="mto-dashboard">
 		<?php
 		do_action( 'masteriyo_myaccount_main_content' );

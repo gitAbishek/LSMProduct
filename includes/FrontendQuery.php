@@ -89,8 +89,10 @@ class FrontendQuery {
 			add_filter( 'query_vars', array( $this, 'add_query_vars' ), 0 );
 			add_action( 'parse_request', array( $this, 'parse_request' ), 0 );
 			add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
-			// add_filter( 'get_pagenum_link', array( $this, 'remove_add_to_cart_pagination' ), 10, 1 );
+			add_filter( 'get_pagenum_link', array( $this, 'remove_add_to_cart_pagination' ), 10, 1 );
 		}
+
+		$this->init_query_vars();
 	}
 
 	/**
@@ -98,11 +100,11 @@ class FrontendQuery {
 	 */
 	public function get_errors() {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		// $error = ! empty( $_GET['masteriyo_error'] ) ? sanitize_text_field( wp_unslash( $_GET['masteriyo_error'] ) ) : '';
+		$error = ! empty( $_GET['masteriyo_error'] ) ? sanitize_text_field( wp_unslash( $_GET['masteriyo_error'] ) ) : '';
 
-		// if ( $error && ! masteriyo_has_notice( $error, 'error' ) ) {
-		// 	masteriyo_add_notice( $error, 'error' );
-		// }
+		if ( $error && ! masteriyo_notice_exists( $error, 'error' ) ) {
+			masteriyo_add_notice( $error, Notice::ERROR );
+		}
 	}
 
 	/**
@@ -182,16 +184,16 @@ class FrontendQuery {
 		// Query vars to add to WP.
 		$this->query_vars = array(
 			// Checkout actions.
-			'order-pay'                  => get_option( 'masteriyo_checkout_pay_endpoint', 'order-pay' ),
-			'order-received'             => get_option( 'masteriyo_checkout_order_received_endpoint', 'order-received' ),
+			'order-pay'       => get_option( 'masteriyo_checkout_pay_endpoint', 'order-pay' ),
+			'order-received'  => get_option( 'masteriyo_checkout_order_received_endpoint', 'order-received' ),
 			// My account actions.
-			'orders'                     => get_option( 'masteriyo_profile_orders_endpoint', 'orders' ),
-			'view-order'                 => get_option( 'masteriyo_profile_view_order_endpoint', 'view-order' ),
-			'edit-account'               => get_option( 'masteriyo_profile_edit_account_endpoint', 'edit-account' ),
-			'edit-address'               => get_option( 'masteriyo_profile_edit_address_endpoint', 'edit-address' ),
-			'payment-methods'            => get_option( 'masteriyo_profile_payment_methods_endpoint', 'payment-methods' ),
-			'lost-password'              => get_option( 'masteriyo_profile_lost_password_endpoint', 'lost-password' ),
-			'customer-logout'            => get_option( 'masteriyo_logout_endpoint', 'customer-logout' ),
+			'orders'          => get_option( 'masteriyo_profile_orders_endpoint', 'orders' ),
+			'view-order'      => get_option( 'masteriyo_profile_view_order_endpoint', 'view-order' ),
+			'edit-account'    => get_option( 'masteriyo_profile_edit_account_endpoint', 'edit-account' ),
+			'edit-address'    => get_option( 'masteriyo_profile_edit_address_endpoint', 'edit-address' ),
+			'payment-methods' => get_option( 'masteriyo_profile_payment_methods_endpoint', 'payment-methods' ),
+			'lost-password'   => get_option( 'masteriyo_profile_lost_password_endpoint', 'lost-password' ),
+			'customer-logout' => get_option( 'masteriyo_logout_endpoint', 'customer-logout' ),
 		);
 	}
 
@@ -393,7 +395,13 @@ class FrontendQuery {
 		$q->set( 'post__in', array_unique( (array) apply_filters( 'loop_course_list_post_in', array() ) ) );
 
 		// Work out how many courses to query.
-		$q->set( 'posts_per_page', $q->get( 'posts_per_page' ) ? $q->get( 'posts_per_page' ) : apply_filters( 'loop_course_list_per_page', \masteriyo_get_default_courses_per_row() * \masteriyo_get_default_course_rows_per_page() ) );
+		$q->set(
+			'posts_per_page',
+			$q->get( 'posts_per_page' ) ? $q->get( 'posts_per_page' ) : apply_filters(
+				'loop_course_list_per_page',
+				\masteriyo_get_default_courses_per_row() * masteriyo_get_default_course_rows_per_page()
+			)
+		);
 
 		// Store reference to this query.
 		self::$course_query = $q;
@@ -602,4 +610,15 @@ class FrontendQuery {
 		return self::$course_query;
 	}
 
+	/**
+	 * Remove the add-to-cart param from pagination urls.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $url URL.
+	 * @return string
+	 */
+	public function remove_add_to_cart_pagination( $url ) {
+		return remove_query_arg( 'add-to-cart', $url );
+	}
 }

@@ -618,40 +618,36 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:20
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:13
 msgid "All"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:24
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:17
 msgid "Published"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:28
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:21
 msgid "Draft"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:65
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:67
 msgid "Search courses"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:70
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:73
 msgid "All Categories"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:89
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:92
 msgid "Pricing"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:90
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:93
 msgid "Free"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:91
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:94
 msgid "Paid"
-msgstr ""
-
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:95
-msgid "Filter"
 msgstr ""
 
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:148
@@ -1779,11 +1775,11 @@ msgstr ""
 msgid "You will get your answer as soon as possible"
 msgstr ""
 
-#: assets/js/interactive/pages/lesson/InteractiveLesson.tsx:80
+#: assets/js/interactive/pages/lesson/InteractiveLesson.tsx:81
 msgid "Mark as completed"
 msgstr ""
 
-#: assets/js/interactive/pages/lesson/InteractiveLesson.tsx:81
+#: assets/js/interactive/pages/lesson/InteractiveLesson.tsx:82
 msgid "Lesson has been marked as completed"
 msgstr ""
 

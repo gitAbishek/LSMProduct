@@ -37,7 +37,8 @@
     "react-query": "3.8.3",
     "react-select": "3.1.0",
     "react-timer-hook": "3.0.4",
-    "timeago-react": "3.0.3"
+    "timeago-react": "3.0.3",
+    "use-ontype": "1.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",

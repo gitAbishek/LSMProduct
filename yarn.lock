@@ -12589,6 +12589,11 @@ use-memo-one@^1.1.1:
   resolved "https://registry.yarnpkg.com/use-memo-one/-/use-memo-one-1.1.2.tgz#0c8203a329f76e040047a35a1197defe342fab20"
   integrity sha512-u2qFKtxLsia/r8qG0ZKkbytbztzRb317XCkT7yP8wxL0tZ/CzK2G+WWie5vWvpyeP7+YoPIwbJoIHJ4Ba4k0oQ==
 
+use-ontype@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/use-ontype/-/use-ontype-1.2.4.tgz#6e455170829f6f81399a8b027a5fd4a93e92f5be"
+  integrity sha512-hA/sV8MjTnh7hrpPnLvbzoKr1zH4Ymqm8wtZ1qOj/uHaJtSujY1KkNM8bizrjv+WLPzvLIKQ0fRacFrtUD3N+g==
+
 use-sidecar@^1.0.1:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/use-sidecar/-/use-sidecar-1.0.5.tgz#ffff2a17c1df42e348624b699ba6e5c220527f2b"

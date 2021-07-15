@@ -71,13 +71,7 @@ const config = {
 		new Dotenv(),
 		new WebpackBar(),
 		new ForkTsCheckerPlugin({
-			typescript: {
-        diagnosticOptions: {
-          semantic: true,
-          syntactic: true,
-        },
-        mode: "write-references",
-      },
+			async: false
 		}),
 		new EslintPlugin({
 			extensions: ['js', 'jsx', 'ts', 'tsx'],

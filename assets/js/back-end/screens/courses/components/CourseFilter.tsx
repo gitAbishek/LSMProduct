@@ -43,7 +43,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 	const { handleSubmit, register, reset } = useForm();
 	const onSearchInput = useOnType(
 		{
-			onTypeFinish: (val) => {
+			onTypeFinish: (val: any) => {
 				reset();
 				setFilterParams({
 					search: val,

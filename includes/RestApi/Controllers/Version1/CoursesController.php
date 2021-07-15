@@ -391,7 +391,7 @@ class CoursesController extends PostsController {
 			$args['meta_query'] = array(
 				'relation' => 'AND',
 				array(
-					'key'     => '_regular_price',
+					'key'     => '_price',
 					'value'   => abs( $request['price'] ),
 					'compare' => '=',
 				),

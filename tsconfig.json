@@ -15,12 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "suppressImplicitAnyIndexErrors": true,
-    "paths": {
-      "Components/*": ["./assets/js/back-end/components/*"],
-      "Config/*": ["./assets/js/back-end/config/*"],
-      "Layouts/*": ["./assets/js/back-end/screens/layouts/*"]
-    }
+    "suppressImplicitAnyIndexErrors": true
   },
   "exclude": [
     "node_modules",
@@ -31,6 +26,6 @@
     "jest"
   ],
   "include": [
-    "assets/js/**/*"
+    "./assets/js"
   ]
 }

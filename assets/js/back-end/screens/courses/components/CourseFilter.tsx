@@ -27,7 +27,7 @@ interface FilterParams {
 	category?: string | number;
 	search?: string;
 	status?: string;
-	isOnlyFree?: boolean;
+	price?: string;
 }
 
 interface Props {

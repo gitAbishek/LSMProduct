@@ -73,24 +73,6 @@ class AdminMenu {
 
 		add_submenu_page(
 			'masteriyo',
-			esc_html__( 'Difficulties', 'masteriyo' ),
-			esc_html__( 'Difficulties', 'masteriyo' ),
-			'manage_options',
-			'masteriyo#/courses/difficulties',
-			array( $this, 'display_main_page' )
-		);
-
-		add_submenu_page(
-			'masteriyo',
-			esc_html__( 'Tags', 'masteriyo' ),
-			esc_html__( 'Tags', 'masteriyo' ),
-			'manage_options',
-			'masteriyo#/courses/tags',
-			array( $this, 'display_main_page' )
-		);
-
-		add_submenu_page(
-			'masteriyo',
 			esc_html__( 'Orders', 'masteriyo' ),
 			esc_html__( 'Orders', 'masteriyo' ),
 			'manage_options',

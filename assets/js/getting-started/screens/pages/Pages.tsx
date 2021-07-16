@@ -20,13 +20,13 @@ import urls from '../../../back-end/constants/urls';
 import { SetttingsMap } from '../../../back-end/types';
 import PagesAPI from '../../../back-end/utils/pages';
 interface Props {
-	mutationLoading: boolean;
 	dashboardURL: string;
 	prevStep: () => void;
+	nextStep: () => void;
 }
 
 const Pages: React.FC<Props> = (props) => {
-	const { mutationLoading, dashboardURL, prevStep } = props;
+	const { dashboardURL, prevStep, nextStep } = props;
 	const { register } = useFormContext();
 	const settingsApi = new API(urls.settings);
 	const pageAPI = new PagesAPI();
@@ -127,12 +127,8 @@ const Pages: React.FC<Props> = (props) => {
 											{__('Skip to Dashboard', 'masteriyo')}
 										</Button>
 									</Link>
-									<Button
-										type="submit"
-										isLoading={mutationLoading}
-										rounded="3px"
-										colorScheme="blue">
-										{__('Finish', 'masteriyo')}
+									<Button onClick={nextStep} rounded="3px" colorScheme="blue">
+										{__('Next', 'masteriyo')}
 									</Button>
 								</ButtonGroup>
 							</Flex>

@@ -44,7 +44,8 @@ const QaChat: React.FC<Props> = (props) => {
 				parent: chatData.parentId,
 			}),
 		{
-			refetchInterval: 30000,
+			refetchInterval: 60000,
+			refetchOnMount: false,
 		}
 	);
 

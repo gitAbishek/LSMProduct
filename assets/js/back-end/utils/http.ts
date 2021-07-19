@@ -18,8 +18,8 @@ const configDevelopment = {
 		'Content-Type': 'application/json',
 	},
 	auth: {
-		username: process.env.username || '',
-		password: process.env.password || '',
+		username: process.env.WORDPRESS_USERNAME || '',
+		password: process.env.WORDPRESS_PASSWORD || '',
 	},
 };
 

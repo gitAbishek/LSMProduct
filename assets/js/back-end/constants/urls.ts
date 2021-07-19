@@ -1,6 +1,6 @@
 const base = '/masteriyo/v1/';
 const urls = {
-	base: process.env.baseUrl,
+	base: process.env.WORDPRESS_URL + '/wp-json',
 	wpMedia: '/wp/v2/media',
 	wpPages: '/wp/v2/pages',
 	courses: base + 'courses',

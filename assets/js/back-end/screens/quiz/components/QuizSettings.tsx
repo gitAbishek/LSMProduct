@@ -176,66 +176,63 @@ const QuizSettings: React.FC<Props> = (props) => {
 					</Flex>
 
 					<RadioGroup onChange={setDisplayValue} value={displayValue}>
-						<Stack direction="row" spacing="6" align="flex-start">
-							<Controller
-								name="questions_display_per_page"
-								render={({ field }) => (
-									<>
-										<Radio
-											{...field}
-											value="0"
-											onChange={(e: any) =>
-												setValue('questions_display_per_page', e.target.value)
-											}>
-											{__('From Global Settings', 'masteriyo')}
-										</Radio>
-									</>
-								)}
-							/>
+						<Stack direction="column" spacing="6">
+							<Stack direction="row" spacing="8" align="flex-start">
+								<Controller
+									name="questions_display_per_page"
+									render={({ field }) => (
+										<>
+											<Radio
+												{...field}
+												value="0"
+												onChange={(e: any) =>
+													setValue('questions_display_per_page', e.target.value)
+												}>
+												{__('From Global Settings', 'masteriyo')}
+											</Radio>
+										</>
+									)}
+								/>
 
-							<Stack direction="column" spacing="6">
 								<Radio value="1">{__('Set Individually', 'masteriyo')}</Radio>
-
-								<Collapse
-									in={displayValue != '0' ? true : false}
-									animateOpacity>
-									<FormControl isInvalid={!!errors?.questions_display_per_page}>
-										<FormLabel>
-											{__('Question Display Per Page', 'masteriyo')}
-										</FormLabel>
-
-										<Controller
-											name="questions_display_per_page"
-											defaultValue={quizData?.questions_display_per_page || 5}
-											rules={{
-												required: __(
-													'Question display per page is required',
-													'masteriyo'
-												),
-											}}
-											render={({ field }) => (
-												<InputGroup>
-													<NumberInput
-														defaultValue={
-															quizData?.questions_display_per_page || 5
-														}
-														w="full">
-														<NumberInputField {...field} rounded="sm" />
-														<NumberInputStepper>
-															<NumberIncrementStepper />
-															<NumberDecrementStepper />
-														</NumberInputStepper>
-													</NumberInput>
-												</InputGroup>
-											)}
-										/>
-										<FormErrorMessage>
-											{errors?.questions_display_per_page &&
-												errors?.questions_display_per_page?.message}
-										</FormErrorMessage>
-									</FormControl>
-								</Collapse>
 							</Stack>
+							<Collapse in={displayValue != '0' ? true : false} animateOpacity>
+								<FormControl isInvalid={!!errors?.questions_display_per_page}>
+									<FormLabel>
+										{__('Question Display Per Page', 'masteriyo')}
+									</FormLabel>
+
+									<Controller
+										name="questions_display_per_page"
+										defaultValue={quizData?.questions_display_per_page || 5}
+										rules={{
+											required: __(
+												'Question display per page is required',
+												'masteriyo'
+											),
+										}}
+										render={({ field }) => (
+											<InputGroup>
+												<NumberInput
+													defaultValue={
+														quizData?.questions_display_per_page || 5
+													}
+													w="full">
+													<NumberInputField {...field} rounded="sm" />
+													<NumberInputStepper>
+														<NumberIncrementStepper />
+														<NumberDecrementStepper />
+													</NumberInputStepper>
+												</NumberInput>
+											</InputGroup>
+										)}
+									/>
+									<FormErrorMessage>
+										{errors?.questions_display_per_page &&
+											errors?.questions_display_per_page?.message}
+									</FormErrorMessage>
+								</FormControl>
+							</Collapse>
 						</Stack>
 					</RadioGroup>
 				</Stack>

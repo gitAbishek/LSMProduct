@@ -196,7 +196,6 @@ class QuizesController extends PostsController {
 						'user_id'  => array(
 							'description'       => __( 'User ID.', 'masteriyo' ),
 							'type'              => 'integer',
-							'required'          => true,
 							'sanitize_callback' => 'absint',
 							'validate_callback' => 'rest_validate_request_arg',
 						),
@@ -266,7 +265,6 @@ class QuizesController extends PostsController {
 						'user_id'  => array(
 							'description'       => __( 'User ID.', 'masteriyo' ),
 							'type'              => 'integer',
-							'required'          => true,
 							'sanitize_callback' => 'absint',
 							'validate_callback' => 'rest_validate_request_arg',
 						),
@@ -582,7 +580,7 @@ class QuizesController extends PostsController {
 		$parameters = $request->get_params();
 
 		$quiz_id = (int) $parameters['quiz_id'];
-		$user_id = (int) $parameters['user_id'];
+		$user_id = isset( $parameters['user_id'] ) ? (int) $parameters['user_id'] : get_current_user_id();
 
 		$query_vars = array(
 			'user_id'  => $user_id,
@@ -627,7 +625,7 @@ class QuizesController extends PostsController {
 
 		$id      = (int) $request['id'];
 		$quiz_id = (int) $parameters['quiz_id'];
-		$user_id = (int) $parameters['user_id'];
+		$user_id = isset( $parameters['user_id'] ) ? (int) $parameters['user_id'] : get_current_user_id();
 
 		$query_vars = array(
 			'id'       => $id,

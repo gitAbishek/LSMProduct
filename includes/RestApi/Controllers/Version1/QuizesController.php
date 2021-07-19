@@ -498,17 +498,26 @@ class QuizesController extends PostsController {
 
 		global $wpdb;
 
-		$answers              = $request->get_params();
-		$quiz_id              = (int) $request['id'];
-		$total_earned_marks   = 0;
-		$attempt_questions    = 0;
-		$total_question_marks = 0;
+		$answers                 = $request->get_params();
+		$quiz_id                 = (int) $request['id'];
+		$total_earned_marks      = 0;
+		$attempt_questions       = 0;
+		$total_question_marks    = 0;
+		$total_correct_answers   = 0;
+		$total_incorrect_answers = 0;
 
 		if ( $answers['id'] ) {
 			unset( $answers['id'] );
 		}
 
 		$attempt_data = masteriyo_is_quiz_started( $quiz_id );
+		if ( ! $attempt_data ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_is_not_started",
+				__( 'Quiz is not started.', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		}
 
 		if ( is_array( $answers ) && count( $answers ) > 0 ) {
 			foreach ( $answers as $question_id => $value ) {
@@ -526,6 +535,8 @@ class QuizesController extends PostsController {
 
 				$is_correct = $object->check_answer( $value, 'view' );
 
+				$is_correct ? $total_correct_answers++ : $total_incorrect_answers++;
+
 				$question_mark       = $is_correct ? $object->get_points() : 0;
 				$total_earned_marks += $question_mark;
 				$attempt_questions++;
@@ -538,6 +549,9 @@ class QuizesController extends PostsController {
 				'earned_marks'             => $total_earned_marks,
 				'total_questions'          => $quiz_questions->post_count,
 				'total_answered_questions' => $attempt_questions,
+				'total_correct_answers'    => $total_correct_answers,
+				'total_incorrect_answers'  => $total_incorrect_answers,
+				'answers'                  => maybe_serialize( $answers ),
 				'attempt_status'           => 'attempt_ended',
 				'attempt_ended_at'         => gmdate( 'Y-m-d H:i:s', time() ),
 			);
@@ -548,7 +562,7 @@ class QuizesController extends PostsController {
 				array( 'id' => $attempt_data->id )
 			);
 
-			$attempt_datas = (array) masteriyo_get_quiz_attempt_ended_data( $quiz_id, $attempt_data->id );
+			$attempt_datas = masteriyo_get_quiz_attempt_ended_data( $quiz_id, $attempt_data->id );
 
 			$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
 
@@ -661,6 +675,8 @@ class QuizesController extends PostsController {
 			'total_questions',
 			'total_answered_questions',
 			'total_attempts',
+			'total_correct_answers',
+			'total_incorrect_answers',
 		);
 
 		$response_data = array();
@@ -674,6 +690,11 @@ class QuizesController extends PostsController {
 				}
 			}
 
+			// Unserialized the answers for response.
+			if ( ! empty( $attempt_datas['answers'] ) ) {
+				$attempt_datas['answers'] = maybe_unserialize( $attempt_datas['answers'] );
+			}
+
 			$attempt_datas = rest_ensure_response( $attempt_datas );
 			return $attempt_datas;
 		} else { // For multi-dimensional.
@@ -683,6 +704,11 @@ class QuizesController extends PostsController {
 				foreach ( $keys as $key ) {
 					if ( array_key_exists( $key, $attempt_data ) ) {
 						$attempt_data[ $key ] = (int) $attempt_data[ $key ];
+					}
+
+					// Unserialized the answers for response.
+					if ( ! empty( $attempt_data['answers'] ) ) {
+						$attempt_data['answers'] = maybe_unserialize( $attempt_data['answers'] );
 					}
 				}
 				$response_data[] = $attempt_data;

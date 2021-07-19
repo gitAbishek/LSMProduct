@@ -101,7 +101,7 @@ function masteriyo_get_quiz_attempt_ended_data( $quiz_id = 0, $id ) {
 		)
 	);
 
-	return $attempt_data;
+	return (array) $attempt_data;
 }
 
 /**

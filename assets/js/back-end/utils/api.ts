@@ -48,15 +48,16 @@ class API {
 
 	async start(id: number) {
 		return http({
-			url: this.uri + id + '/start_quiz',
+			url: this.uri + '/start_quiz',
+			data: { id },
 			method: 'post',
 		}).then((res) => res.data);
 	}
 
 	async check(id: number, data: any) {
 		return http({
-			url: this.uri + id + '/check_answers',
-			data: data,
+			url: this.uri + '/check_answers',
+			data: { id, data },
 			method: 'post',
 		}).then((res) => res.data);
 	}

@@ -143,12 +143,13 @@ class QuizesController extends PostsController {
 
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->rest_base . '/(?P<id>[\d]+)/start_quiz',
+			'/' . $this->rest_base . '/start_quiz',
 			array(
 				'args' => array(
 					'id' => array(
 						'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 						'type'        => 'integer',
+						'required'    => true,
 					),
 				),
 				array(
@@ -161,12 +162,18 @@ class QuizesController extends PostsController {
 
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->rest_base . '/(?P<id>[\d]+)/check_answers',
+			'/' . $this->rest_base . '/check_answers',
 			array(
 				'args' => array(
 					'id' => array(
 						'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 						'type'        => 'integer',
+						'required'    => true,
+					),
+					'data' => array(
+						'description' => __( 'Data for checking answers (chosen answers list).', 'masteriyo' ),
+						'type'        => 'object',
+						'required'    => true,
 					),
 				),
 				array(
@@ -496,15 +503,15 @@ class QuizesController extends PostsController {
 
 		global $wpdb;
 
-		$answers                 = $request->get_params();
-		$quiz_id                 = (int) $request['id'];
+		$answers                 = $request['data'];
+		$quiz_id                 = absint( $request['id'] );
 		$total_earned_marks      = 0;
 		$attempt_questions       = 0;
 		$total_question_marks    = 0;
 		$total_correct_answers   = 0;
 		$total_incorrect_answers = 0;
 
-		if ( $answers['id'] ) {
+		if ( isset( $answers['id'] ) ) {
 			unset( $answers['id'] );
 		}
 

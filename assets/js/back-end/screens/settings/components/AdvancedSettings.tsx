@@ -1,7 +1,6 @@
 import {
 	FormControl,
 	FormLabel,
-	Select,
 	Stack,
 	Switch,
 	Tab,
@@ -12,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { AdvancedSettingsMap } from '../../../types';
 
 interface Props {
@@ -40,7 +39,6 @@ const tabListStyles = {
 
 const AdvancedSettings: React.FC<Props> = (props) => {
 	const { advanceData } = props;
-	const { register } = useFormContext();
 	return (
 		<Tabs orientation="vertical">
 			<Stack direction="row" flex="1">
@@ -81,23 +79,6 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 												/>
 											)}
 										/>
-									</Stack>
-								</FormControl>
-
-								<FormControl>
-									<Stack direction="row">
-										<FormLabel minW="3xs">{__('Style', 'masteriyo')}</FormLabel>
-										<Select
-											defaultValue={advanceData?.style}
-											{...register('advance.style')}>
-											<option value="none">{__('None', 'masteriyo')}</option>
-											<option value="simple">
-												{__('Simple', 'masteriyo')}
-											</option>
-											<option value="advanced">
-												{__('Advanced', 'masteriyo')}
-											</option>
-										</Select>
 									</Stack>
 								</FormControl>
 							</Stack>

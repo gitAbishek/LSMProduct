@@ -80,7 +80,7 @@ const CoursesSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel  minW="2xs">
 									{__('Placeholder Image', 'masteriyo')}
 								</FormLabel>
 								<ImageUpload

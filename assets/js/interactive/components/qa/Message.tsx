@@ -50,7 +50,7 @@ const Message: React.FC<Props> = (props) => {
 						/>
 					</Stack>
 					<Text fontSize="x-small" color="gray.400">
-						<TimeAgo datetime={`${time} UTC`} />
+						<TimeAgo datetime={`${time} UTC`} live={false} />
 					</Text>
 				</Stack>
 				<Box fontSize="xs" p="4" py="3" sx={bubbleStyle}>

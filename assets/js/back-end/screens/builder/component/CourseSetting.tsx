@@ -40,7 +40,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 	);
 
 	const [pricingDisplayValue, setPricingDisplayValue] = useState(
-		courseData.price_type
+		courseData?.price_type
 	);
 
 	const difficultiesAPI = new API(urls.difficulties);

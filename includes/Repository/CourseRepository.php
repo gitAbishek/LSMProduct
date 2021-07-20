@@ -303,6 +303,16 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 				$course->set_price( $course->get_regular_price( 'edit' ) );
 			}
 		}
+
+		if ( in_array( $course->get_access_mode( 'edit' ), array( 'open', 'need_registration' ), true ) ) {
+			update_post_meta( $course->get_id(), '_price', '0' );
+			update_post_meta( $course->get_id(), '_regular_price', '0' );
+			update_post_meta( $course->get_id(), '_sale_price', '' );
+
+			$course->set_price( $course->set_price( '0' ) );
+			$course->set_sale_price( $course->set_sale_price( '0' ) );
+			$course->set_regular_price( $course->set_regular_price( '0' ) );
+		}
 	}
 
 	/**

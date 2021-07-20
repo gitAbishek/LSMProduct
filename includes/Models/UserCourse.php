@@ -50,6 +50,15 @@ class UserCourse extends Model {
 	protected $cache_group = 'user-courses';
 
 	/**
+	 * Stores data about status changes so relevant hooks can be fired.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var bool|array
+	 */
+	protected $status_transition = false;
+
+	/**
 	 * Stores user courses data.
 	 *
 	 * @since 0.1.0
@@ -57,14 +66,14 @@ class UserCourse extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'course_id'     => 0,
-		'user_id'       => 0,
-		'status'        => '',
-		'date_start'    => null,
-		'date_modified' => null,
-		'date_end'      => null,
-		'order_id'      => 0,
-		'price'         => '',
+		'course_id'      => 0,
+		'user_id'        => 0,
+		'status'         => '',
+		'date_start'     => null,
+		'date_modified'  => null,
+		'date_end'       => null,
+		'user_course_id' => 0,
+		'price'          => '',
 	);
 
 	/**
@@ -109,14 +118,14 @@ class UserCourse extends Model {
 	}
 
 	/**
-	 * Get order associated with the course.
+	 * Get user_course associated with the course.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return ThemeGrill\Masteriyo\Models\Course|NULL
 	 */
-	public function get_order() {
-		return masteriyo_get_order( $this->get_order_id() );
+	public function get_user_course() {
+		return masteriyo_get_user_course( $this->get_user_course_id() );
 	}
 
 	/*
@@ -217,7 +226,7 @@ class UserCourse extends Model {
 	}
 
 	/**
-	 * Get user's course associated recent order ID.
+	 * Get user's course associated recent user_course ID.
 	 *
 	 * @since  0.1.0
 	 *
@@ -225,8 +234,8 @@ class UserCourse extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_order_id( $context = 'view' ) {
-		return $this->get_prop( 'order_id', $context );
+	public function get_user_course_id( $context = 'view' ) {
+		return $this->get_prop( 'user_course_id', $context );
 	}
 
 	/**
@@ -327,14 +336,14 @@ class UserCourse extends Model {
 	}
 
 	/**
-	 * Set user's course associated recent order ID.
+	 * Set user's course associated recent user_course ID.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param int $value User's course end date.
 	 */
-	public function set_order_id( $value ) {
-		$this->set_prop( 'order_id', absint( $value ) );
+	public function set_user_course_id( $value ) {
+		$this->set_prop( 'user_course_id', absint( $value ) );
 	}
 
 	/**
@@ -348,4 +357,56 @@ class UserCourse extends Model {
 		$this->set_prop( 'price', $value );
 	}
 
+	/*
+	|--------------------------------------------------------------------------
+	| CRUD methods
+	|--------------------------------------------------------------------------
+	|
+	*/
+	/**
+	 * Save data to the database.
+	 *
+	 * @since 0.1.0
+	 * @return int order ID
+	 */
+	public function save() {
+		parent::save();
+		$this->status_transition();
+
+		return $this->get_id();
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Non-CRUD methods
+	|--------------------------------------------------------------------------
+	|
+	*/
+
+	/**
+	 * Handle the status transition.
+	 *
+	 * @since 0.1.0
+	 */
+	protected function status_transition() {
+		$status_transition = $this->status_transition;
+
+		// Reset status transition variable.
+		$this->status_transition = false;
+
+		if ( ! $status_transition ) {
+			return;
+		}
+
+		try {
+			do_action( 'masteriyo_user_course_status_' . $status_transition['to'], $this->get_id(), $this );
+
+			if ( ! empty( $status_transition['from'] ) ) {
+				do_action( 'masteriyo_user_course_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
+				do_action( 'masteriyo_user_course_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
+			}
+		} catch ( \Exception $e ) {
+			// TODO Log the message.
+		}
+	}
 }

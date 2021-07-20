@@ -16,3 +16,10 @@ export const sectionHeaderStyles = {
 	borderColor: 'gray.100',
 	pb: '3',
 };
+
+export const infoIconStyles = {
+	d: 'inline-flex',
+	alignItems: 'center',
+	ml: '2',
+	color: 'gray.400',
+};

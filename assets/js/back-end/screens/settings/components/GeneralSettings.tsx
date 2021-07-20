@@ -1,6 +1,8 @@
 import {
+	Box,
 	FormControl,
 	FormLabel,
+	Icon,
 	Input,
 	Select,
 	Stack,
@@ -9,13 +11,16 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
+	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import ColorInput from 'Components/common/ColorInput';
+import { infoIconStyles } from 'Config/styles';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import React, { useEffect, useState } from 'react';
 import ReactFlagsSelect from 'react-flags-select';
 import { useFormContext } from 'react-hook-form';
+import { BiInfoCircle } from 'react-icons/bi';
 import { GeneralSettingsMap } from '../../../types';
 import { currency } from '../../../utils/currency';
 
@@ -65,7 +70,18 @@ const GeneralSettings: React.FC<Props> = (props) => {
 						<Stack direction="column" spacing="6">
 							<Stack direction="row" spacing="8">
 								<FormControl>
-									<FormLabel minW="xs">{__('Country', 'masteriyo')}</FormLabel>
+									<FormLabel>
+										{__('Country', 'masteriyo')}
+										<Tooltip
+											label={__('Country where you live', 'masteriyo')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+
 									<input
 										type="hidden"
 										{...register('general.country')}
@@ -77,7 +93,21 @@ const GeneralSettings: React.FC<Props> = (props) => {
 									/>
 								</FormControl>
 								<FormControl>
-									<FormLabel minW="xs">{__('City', 'masteriyo')}</FormLabel>
+									<FormLabel>
+										{__('City', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Your city where you are residing',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+
 									<Input
 										type="text"
 										{...register('general.city')}
@@ -87,8 +117,16 @@ const GeneralSettings: React.FC<Props> = (props) => {
 							</Stack>
 							<Stack direction="row" spacing="8">
 								<FormControl>
-									<FormLabel minW="xs">
+									<FormLabel>
 										{__('Adress Line 1', 'masteriyo')}
+										<Tooltip
+											label={__('Your street address')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Input
 										type="text"
@@ -97,8 +135,16 @@ const GeneralSettings: React.FC<Props> = (props) => {
 									/>
 								</FormControl>
 								<FormControl>
-									<FormLabel minW="xs">
+									<FormLabel>
 										{__('Adress Line 2', 'masteriyo')}
+										<Tooltip
+											label={__('Your street address 2')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Input
 										type="text"

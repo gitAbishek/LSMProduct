@@ -91,6 +91,7 @@ class Course extends Model {
 		'access_mode'        => 'open',
 		'billing_cycle'      => '',
 		'show_curriculum'    => true,
+		'purchase_note' => '',
 	);
 
 	/**
@@ -637,6 +638,17 @@ class Course extends Model {
 		return $this->get_prop( 'show_curriculum', $context );
 	}
 
+	/**
+	 * Get course purchase note.
+	 *
+	 * @since 0.1.0
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 * @return int
+	 */
+	public function get_purchase_note( $context = 'view' ) {
+		return $this->get_prop( 'purchase_note', $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -975,6 +987,18 @@ class Course extends Model {
 	 */
 	public function set_show_curriculum( $value ) {
 		$this->set_prop( 'show_curriculum', masteriyo_string_to_bool( $value ) );
+	}
+
+
+	/**
+	 * Set the course purchase note.
+	 *
+	 *
+	 * @since 0.1.0
+	 * @param string $value
+	 */
+	public function set_purchase_note( $value ) {
+		$this->set_prop( 'purchase_note',  $value );
 	}
 
 	/*

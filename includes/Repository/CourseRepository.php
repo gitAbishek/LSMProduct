@@ -40,6 +40,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		'access_mode'       => '_access_mode',
 		'billing_cycle'     => '_billing_cycle',
 		'show_curriculum'   => '_show_curriculum',
+		'purchase_note'   => '_purchase_note',
 	);
 
 	/**

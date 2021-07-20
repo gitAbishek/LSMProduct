@@ -81,7 +81,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 										),
 									}}
 									render={({ field }) => (
-										<NumberInput {...field} w="full">
+										<NumberInput {...field} w="full" min={0}>
 											<NumberInputField borderRadius="sm" shadow="input" />
 											<NumberInputStepper>
 												<NumberIncrementStepper />
@@ -107,7 +107,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 										),
 									}}
 									render={({ field }) => (
-										<NumberInput {...field} w="full">
+										<NumberInput {...field} w="full" min={0}>
 											<NumberInputField borderRadius="sm" shadow="input" />
 											<NumberInputStepper>
 												<NumberIncrementStepper />
@@ -134,7 +134,8 @@ const QuizSettings: React.FC<Props> = (props) => {
 										<InputGroup>
 											<NumberInput
 												defaultValue={quizData?.duration || 60}
-												w="full">
+												w="full"
+												min={0}>
 												<NumberInputField {...field} rounded="sm" />
 												<NumberInputStepper>
 													<NumberIncrementStepper />
@@ -168,7 +169,8 @@ const QuizSettings: React.FC<Props> = (props) => {
 										<InputGroup>
 											<NumberInput
 												defaultValue={quizData?.attempts_allowed || 5}
-												w="full">
+												w="full"
+												min={0}>
 												<NumberInputField {...field} rounded="sm" />
 												<NumberInputStepper>
 													<NumberIncrementStepper />

@@ -78,6 +78,7 @@ class Course extends Model {
 		'price'              => '',
 		'regular_price'      => '',
 		'sale_price'         => '',
+		'price_type'         => 'free',
 		'category_ids'       => array(),
 		'tag_ids'            => array(),
 		'difficulty_id'      => 0,
@@ -414,6 +415,18 @@ class Course extends Model {
 	 */
 	public function get_sale_price( $context = 'view' ) {
 		return $this->get_prop( 'sale_price', $context );
+	}
+	/**
+	 * Returns course's price type.
+	 *
+	 * @since  0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_price_type( $context = 'view' ) {
+		return $this->get_prop( 'price_type', $context );
 	}
 
 	/**
@@ -793,6 +806,17 @@ class Course extends Model {
 	 */
 	public function set_sale_price( $price ) {
 		$this->set_prop( 'sale_price', $price );
+	}
+
+	/**
+	 * Set the course's price type (free or paid).
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $type Course's price type (free or paid)
+	 */
+	public function set_price_type( $type ) {
+		$this->set_prop( 'price_type', $type );
 	}
 
 	/**

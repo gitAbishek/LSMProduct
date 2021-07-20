@@ -81,8 +81,8 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			$course->set_id( $id );
 			$this->update_post_meta( $course, true );
 			$this->update_terms( $course, true );
-			$this->update_visibility( $course, true );
 			$this->handle_updated_props( $course );
+			$this->update_visibility( $course, true );
 			// TODO Invalidate caches.
 
 			$course->save_meta_data();
@@ -205,8 +205,8 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 
 		$this->update_post_meta( $course );
 		$this->update_terms( $course );
-		$this->update_visibility( $course );
 		$this->handle_updated_props( $course );
+		$this->update_visibility( $course );
 
 		$course->apply_changes();
 
@@ -304,6 +304,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			}
 		}
 
+		// Update the prices according to the access mode.
 		if ( in_array( $course->get_access_mode( 'edit' ), array( 'open', 'need_registration' ), true ) ) {
 			update_post_meta( $course->get_id(), '_price', '0' );
 			update_post_meta( $course->get_id(), '_regular_price', '0' );
@@ -312,6 +313,16 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			$course->set_price( $course->set_price( '0' ) );
 			$course->set_sale_price( $course->set_sale_price( '0' ) );
 			$course->set_regular_price( $course->set_regular_price( '0' ) );
+		}
+
+		// Update the price type according to the access mode.
+		$access_mode = $course->get_access_mode( 'edit' );
+		if ( in_array( $access_mode, array( 'open', 'need_registration' ), true ) ) {
+			$course->set_price_type( 'free' );
+		} elseif ( in_array( $access_mode, array( 'one_time', 'recurring' ), true ) && '0' === $course->get_price( 'edit' ) ) {
+			$course->set_price_type( 'free' );
+		} else {
+			$course->set_price_type( 'paid' );
 		}
 	}
 
@@ -324,13 +335,18 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	 * @param bool       $force Force update. Used during create.
 	 */
 	protected function update_visibility( &$course, $force = false ) {
-		$changes = $course->get_changes();
+		$changes           = $course->get_changes();
+		$course_attributes = array( 'featured', 'price_type', 'stock_status', 'average_rating', 'catalog_visibility' );
 
-		if ( $force || array_intersect( array( 'featured', 'stock_status', 'average_rating', 'catalog_visibility' ), array_keys( $changes ) ) ) {
+		if ( $force || array_intersect( $course_attributes, array_keys( $changes ) ) ) {
 			$terms = array();
 
 			if ( $course->get_featured() ) {
 				$terms[] = 'featured';
+			}
+
+			if ( ! empty( $course->get_price_type() ) ) {
+				$terms[] = $course->get_price_type();
 			}
 
 			$rating = min( 5, masteriyo_round( $course->get_average_rating(), 0 ) );
@@ -464,6 +480,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		$featured        = in_array( 'featured', $term_names, true );
 		$exclude_search  = in_array( 'exclude-from-search', $term_names, true );
 		$exclude_catalog = in_array( 'exclude-from-catalog', $term_names, true );
+		$price_type      = in_array( 'free', $term_names, true ) ? 'free' : 'paid';
 
 		if ( $exclude_search && $exclude_catalog ) {
 			$catalog_visibility = 'hidden';
@@ -479,6 +496,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			array(
 				'featured'           => $featured,
 				'catalog_visibility' => $catalog_visibility,
+				'price_type'         => $price_type,
 			)
 		);
 	}

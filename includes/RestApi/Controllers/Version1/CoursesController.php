@@ -148,12 +148,13 @@ class CoursesController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['slug']       = array(
+		$params['slug'] = array(
 			'description'       => __( 'Limit result set to courses with a specific slug.', 'masteriyo' ),
 			'type'              => 'string',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['status']     = array(
+
+		$params['status'] = array(
 			'default'           => 'any',
 			'description'       => __( 'Limit result set to courses assigned a specific status.', 'masteriyo' ),
 			'type'              => 'string',
@@ -161,29 +162,41 @@ class CoursesController extends PostsController {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['featured']   = array(
+
+		$params['featured'] = array(
 			'description'       => __( 'Limit result set to featured courses.', 'masteriyo' ),
 			'type'              => 'boolean',
 			'sanitize_callback' => 'masteriyo_string_to_bool',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['price']      = array(
+
+		$params['price'] = array(
 			'description'       => __( 'List courses with specific price.', 'masteriyo' ),
 			'type'              => 'string',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['category']   = array(
+
+		$params['price_type'] = array(
+			'description'       => __( 'List courses with specific price type (free or paid).', 'masteriyo' ),
+			'type'              => 'string',
+			'enum'              => array( 'free', 'paid' ),
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
+		$params['category'] = array(
 			'description'       => __( 'Limit result set to courses assigned a specific category ID.', 'masteriyo' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['tag']        = array(
+
+		$params['tag'] = array(
 			'description'       => __( 'Limit result set to courses assigned a specific tag ID.', 'masteriyo' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
+
 		$params['difficulty'] = array(
 			'description'       => __( 'Limit result set to courses assigned a specific difficulty ID.', 'masteriyo' ),
 			'type'              => 'string',
@@ -290,6 +303,7 @@ class CoursesController extends PostsController {
 			'price'             => $course->get_price( $context ),
 			'regular_price'     => $course->get_regular_price( $context ),
 			'sale_price'        => $course->get_sale_price( $context ),
+			'price_type'        => $course->get_price_type( $context ),
 			'featured_image'    => $course->get_featured_image( $context ),
 			'enrollment_limit'  => $course->get_enrollment_limit( $context ),
 			'duration'          => $course->get_duration( $context ),
@@ -368,15 +382,6 @@ class CoursesController extends PostsController {
 			}
 		}
 
-		// Build tax_query if taxonomies are set.
-		if ( ! empty( $tax_query ) ) {
-			if ( ! empty( $args['tax_query'] ) ) {
-				$args['tax_query'] = array_merge( $tax_query, $args['tax_query'] ); // WPCS: slow query ok.
-			} else {
-				$args['tax_query'] = $tax_query; // WPCS: slow query ok.
-			}
-		}
-
 		// Filter featured.
 		if ( is_bool( $request['featured'] ) ) {
 			$args['tax_query'][] = array(
@@ -385,6 +390,23 @@ class CoursesController extends PostsController {
 				'terms'    => 'featured',
 				'operator' => true === $request['featured'] ? 'IN' : 'NOT IN',
 			);
+		}
+
+		if ( $request['price_type'] ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'course_visibility',
+				'field'    => 'name',
+				'terms'    => $request['price_type'],
+			);
+		}
+
+		// Build tax_query if taxonomies are set.
+		if ( ! empty( $tax_query ) ) {
+			if ( ! empty( $args['tax_query'] ) ) {
+				$args['tax_query'] = array_merge( $tax_query, $args['tax_query'] ); // WPCS: slow query ok.
+			} else {
+				$args['tax_query'] = $tax_query; // WPCS: slow query ok.
+			}
 		}
 
 		if ( isset( $request['price'] ) ) {
@@ -510,6 +532,12 @@ class CoursesController extends PostsController {
 				'sale_price'         => array(
 					'description' => __( 'Course sale price.', 'masteriyo' ),
 					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'price_type'         => array(
+					'description' => __( 'Course price type.', 'masteriyo' ),
+					'type'        => 'string',
+					'readonly'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'reviews_allowed'    => array(

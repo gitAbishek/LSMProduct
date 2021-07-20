@@ -216,7 +216,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 										<FormLabel>{__('Pricing Option', 'masteriyo')}</FormLabel>
 										<RadioGroup
 											onChange={setPricingDisplayValue}
-											defaultValue={courseData.price_type}>
+											defaultValue={courseData?.price_type}>
 											<Stack direction="column" spacing="4">
 												<Stack direction="column">
 													<Radio value="free">{__('Free', 'masteriyo')}</Radio>

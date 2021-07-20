@@ -15,7 +15,6 @@ import {
 	Radio,
 	RadioGroup,
 	Select,
-	Spinner,
 	Stack,
 	Tab,
 	TabList,
@@ -59,10 +58,6 @@ const CourseSetting: React.FC<Props> = (props) => {
 		difficultiesAPI.list()
 	);
 
-	if (diffultiesQuery.isLoading) {
-		return <Spinner />;
-	}
-
 	const renderDifficultiesOption = () => {
 		try {
 			return diffultiesQuery?.data?.map(
@@ -73,7 +68,6 @@ const CourseSetting: React.FC<Props> = (props) => {
 				)
 			);
 		} catch (error) {
-			console.error(error);
 			return;
 		}
 	};

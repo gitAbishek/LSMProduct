@@ -24,13 +24,13 @@ import { SetttingsMap } from '../../../back-end/types';
 import { currency } from '../../../back-end/utils/currency';
 import { hasNumber } from '../../../back-end/utils/helper';
 interface Props {
-	mutationLoading: boolean;
+	isButtonLoading: boolean;
 	dashboardURL: string;
 	prevStep: () => void;
 }
 
 const Payment: React.FC<Props> = (props) => {
-	const { mutationLoading, dashboardURL, prevStep } = props;
+	const { isButtonLoading, dashboardURL, prevStep } = props;
 	const {
 		register,
 		formState: { errors },
@@ -189,7 +189,7 @@ const Payment: React.FC<Props> = (props) => {
 							</Link>
 							<Button
 								type="submit"
-								isLoading={mutationLoading}
+								isLoading={isButtonLoading}
 								isDisabled={!!errors?.general}
 								rounded="3px"
 								colorScheme="blue">

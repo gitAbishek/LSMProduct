@@ -54,7 +54,7 @@ const SetupWizard: React.FC = () => {
 							<Step label={label} key={label}>
 								<StepContent
 									dashboardURL={adminURL}
-									mutationLoading={addMutation.isLoading}
+									isButtonLoading={addMutation.isLoading}
 									pageBuilderURL={pageBuilderURL}
 									siteURL={siteURL}
 									prevStep={prevStep}

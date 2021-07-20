@@ -107,7 +107,7 @@ class Order extends AbstractOrder {
 	 * @since 0.1.0
 	 *
 	 * @uses Order::set_status()
-	 * @param string $new_status    Status to change the order to. No internal wc- prefix is required.
+	 * @param string $new_status    Status to change the order to.
 	 * @param string $note          Optional note to add.
 	 * @param bool   $manual        Is this a manual order status change?.
 	 * @return bool

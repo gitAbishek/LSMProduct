@@ -354,7 +354,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
 	 *
-	 * @param Model $object The WP_Data object (WC_Coupon for coupons, etc).
+	 * @param Model $object The Model object
 	 * @param string  $meta_key Meta key to update.
 	 * @param mixed   $meta_value Value to save.
 	 *

@@ -55,10 +55,10 @@ foreach ( $items as $item_id => $item ) :
 		// allow other plugins to add additional product information here.
 		do_action( 'masteriyo_order_item_meta_start', $item_id, $item, $order, $plain_text );
 
-		wc_display_item_meta(
+		masteriyo_display_item_meta(
 			$item,
 			array(
-				'label_before' => '<strong class="wc-item-meta-label" style="float: ' . esc_attr( $text_align ) . '; margin-' . esc_attr( $margin_side ) . ': .25em; clear: both">',
+				'label_before' => '<strong class="masteriyo-item-meta-label" style="float: ' . esc_attr( $text_align ) . '; margin-' . esc_attr( $margin_side ) . ': .25em; clear: both">',
 			)
 		);
 

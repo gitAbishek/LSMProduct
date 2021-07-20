@@ -10,7 +10,6 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-
 import { onboardCover } from '../../../back-end/constants/images';
 
 interface Props {

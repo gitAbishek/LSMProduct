@@ -10,7 +10,6 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { NotFound } from '../../constants/images';
 import routes from '../../constants/routes';
 

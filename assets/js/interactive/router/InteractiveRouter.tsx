@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-
 import routes from '../constants/routes';
 import { InteractiveLesson, InteractiveQuiz } from '../pages';
 

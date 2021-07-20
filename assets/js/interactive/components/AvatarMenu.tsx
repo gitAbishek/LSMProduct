@@ -2,12 +2,12 @@ import {
 	Avatar,
 	Menu,
 	MenuButton,
-	MenuList,
-	MenuItem,
 	MenuDivider,
+	MenuItem,
+	MenuList,
 } from '@chakra-ui/react';
-import React from 'react';
 import { __ } from '@wordpress/i18n';
+import React from 'react';
 
 const AvatarMenu = () => {
 	return (

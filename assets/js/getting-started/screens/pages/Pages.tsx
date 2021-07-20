@@ -7,18 +7,18 @@ import {
 	FormLabel,
 	Link,
 	Select,
+	Skeleton,
 	Stack,
 	Text,
-	Skeleton,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { useQuery } from 'react-query';
 import { useFormContext } from 'react-hook-form';
-import PagesAPI from '../../../back-end/utils/pages';
-import { SetttingsMap } from '../../../back-end/types';
-import urls from '../../../back-end/constants/urls';
+import { useQuery } from 'react-query';
 import API from '../../../back-end//utils/api';
+import urls from '../../../back-end/constants/urls';
+import { SetttingsMap } from '../../../back-end/types';
+import PagesAPI from '../../../back-end/utils/pages';
 interface Props {
 	mutationLoading: boolean;
 	dashboardURL: string;

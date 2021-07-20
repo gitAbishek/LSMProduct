@@ -715,3 +715,20 @@ function masteriyo_rest_prepare_date_response( $date, $utc = true ) {
 	// Get timestamp before changing timezone to UTC.
 	return gmdate( 'Y-m-d\TH:i:s', $utc ? $date->getTimestamp() : $date->getOffsetTimestamp() );
 }
+
+/**
+ * Convert plaintext phone number to clickable phone number.
+ *
+ * Remove formatting and allow "+".
+ * Example and specs: https://developer.mozilla.org/en/docs/Web/HTML/Element/a#Creating_a_phone_link
+ *
+ * @since 0.1.0
+ *
+ * @param string $phone Content to convert phone number.
+ * @return string Content with converted phone number.
+ */
+function masteriyo_make_phone_clickable( $phone ) {
+	$number = trim( preg_replace( '/[^\d|\+]/', '', $phone ) );
+
+	return $number ? '<a href="tel:' . esc_attr( $number ) . '">' . esc_html( $phone ) . '</a>' : '';
+}

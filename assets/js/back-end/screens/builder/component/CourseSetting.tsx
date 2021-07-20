@@ -41,10 +41,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 	);
 
 	const [pricingDisplayValue, setPricingDisplayValue] = useState(
-		'open' === courseData?.access_mode ||
-			'need_registration' === courseData?.access_mode
-			? 'free'
-			: 'paid'
+		courseData.price_type
 	);
 
 	const difficultiesAPI = new API(urls.difficulties);
@@ -229,7 +226,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 										<FormLabel>{__('Pricing Option', 'masteriyo')}</FormLabel>
 										<RadioGroup
 											onChange={setPricingDisplayValue}
-											value={pricingDisplayValue}>
+											defaultValue={courseData.price_type}>
 											<Stack direction="column" spacing="4">
 												<Stack direction="column">
 													<Radio value="free">{__('Free', 'masteriyo')}</Radio>

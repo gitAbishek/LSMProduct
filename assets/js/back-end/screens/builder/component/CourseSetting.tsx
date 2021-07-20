@@ -59,17 +59,17 @@ const CourseSetting: React.FC<Props> = (props) => {
 
 	return (
 		<Box bg="white" p="10" shadow="box">
-			<Tabs orientation="vertical">
-				<Stack direction="row" flex="1">
-					<TabList sx={tabListStyles}>
-						<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
-						<Tab sx={tabStyles}>{__('Display', 'masteriyo')}</Tab>
-					</TabList>
-					<form>
+			<form>
+				<Tabs orientation="vertical">
+					<Stack direction="row" flex="1">
+						<TabList sx={tabListStyles}>
+							<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
+							<Tab sx={tabStyles}>{__('Display', 'masteriyo')}</Tab>
+						</TabList>
 						<TabPanels flex="1">
 							<TabPanel>
 								<Stack direction="column" spacing="8">
-									<FormControl isInvalid={errors?.difficulty} maxW="xs">
+									<FormControl>
 										<FormLabel>{__('Difficulty', 'masteriyo')}</FormLabel>
 										<Select
 											defaultValue={courseData?.difficulty}
@@ -97,33 +97,35 @@ const CourseSetting: React.FC<Props> = (props) => {
 											onChange={setDisplayValue}
 											value={displayValue}
 											defaultValue="0">
-											<Stack direction="row" spacing="8" align="flex-start">
-												<Stack direction="column">
-													<Radio value="0">{__('No limit', 'masteriyo')}</Radio>
-													<FormHelperText>
-														{__(
-															'Check this option if there is no limit.',
-															'masteriyo'
-														)}
-													</FormHelperText>
-												</Stack>
-												<Stack direction="column" spacing="6">
+											<Stack direction="column" spacing="6">
+												<Stack direction="row" spacing="8" align="flex-start">
+													<Stack direction="column">
+														<Radio value="0">
+															{__('No limit', 'masteriyo')}
+														</Radio>
+														<FormHelperText>
+															{__(
+																'Check this option if there is no limit.',
+																'masteriyo'
+															)}
+														</FormHelperText>
+													</Stack>
 													<Radio value="1">{__('Limit', 'masteriyo')}</Radio>
-													<Collapse in={displayValue != '0'} animateOpacity>
-														<FormControl>
-															<FormLabel>
-																{__('Number of Students', 'masteriyo')}
-															</FormLabel>
-															<NumberInput defaultValue={50}>
-																<NumberInputField />
-																<NumberInputStepper>
-																	<NumberIncrementStepper />
-																	<NumberDecrementStepper />
-																</NumberInputStepper>
-															</NumberInput>
-														</FormControl>
-													</Collapse>
 												</Stack>
+												<Collapse in={displayValue != '0'} animateOpacity>
+													<FormControl>
+														<FormLabel>
+															{__('Number of Students', 'masteriyo')}
+														</FormLabel>
+														<NumberInput defaultValue={50}>
+															<NumberInputField />
+															<NumberInputStepper>
+																<NumberIncrementStepper />
+																<NumberDecrementStepper />
+															</NumberInputStepper>
+														</NumberInput>
+													</FormControl>
+												</Collapse>
 											</Stack>
 										</RadioGroup>
 									</FormControl>
@@ -150,9 +152,9 @@ const CourseSetting: React.FC<Props> = (props) => {
 								</Stack>
 							</TabPanel>
 						</TabPanels>
-					</form>
-				</Stack>
-			</Tabs>
+					</Stack>
+				</Tabs>
+			</form>
 		</Box>
 	);
 };

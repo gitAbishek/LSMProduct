@@ -2,27 +2,27 @@
 /**
  * Order details table shown in emails.
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/emails/order-details.php.
+ * This template can be overridden by copying it to yourtheme/masteriyo/emails/order-details.php.
  *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * HOWEVER, on occasion Masteriyo will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
  * maintain compatibility. We try to do this as little as possible, but it does
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @package WooCommerce\Templates\Emails
+ * @package ThemeGrill\Masteriyo\Templates\Emails
  */
 
 defined( 'ABSPATH' ) || exit;
 
 $text_align = is_rtl() ? 'right' : 'left';
 
-do_action( 'woocommerce_email_before_order_table', $order, $email ); ?>
+do_action( 'masteriyo_email_before_order_table', $order, $email ); ?>
 
 <h2>
 	<?php
 	/* translators: %s: Order ID. */
-	echo wp_kses_post( sprintf( __( '[Order #%s]', 'woocommerce' ) . ' (<time datetime="%s">%s</time>)', $order->get_order_number(), $order->get_date_created()->format( 'c' ), masteriyo_format_datetime( $order->get_date_created() ) ) );
+	echo wp_kses_post( sprintf( __( '[Order #%s]', 'masteriyo' ) . ' (<time datetime="%s">%s</time>)', $order->get_order_number(), $order->get_date_created()->format( 'c' ), masteriyo_format_datetime( $order->get_date_created() ) ) );
 	?>
 </h2>
 
@@ -30,9 +30,9 @@ do_action( 'woocommerce_email_before_order_table', $order, $email ); ?>
 	<table class="td" cellspacing="0" cellpadding="6" style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
 		<thead>
 			<tr>
-				<th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-				<th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
-				<th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
+				<th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Product', 'masteriyo' ); ?></th>
+				<th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Quantity', 'masteriyo' ); ?></th>
+				<th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Price', 'masteriyo' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -65,7 +65,7 @@ do_action( 'woocommerce_email_before_order_table', $order, $email ); ?>
 			if ( $order->get_customer_note() ) {
 				?>
 				<tr>
-					<th class="td" scope="row" colspan="2" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Note:', 'woocommerce' ); ?></th>
+					<th class="td" scope="row" colspan="2" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Note:', 'masteriyo' ); ?></th>
 					<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></td>
 				</tr>
 				<?php
@@ -75,4 +75,4 @@ do_action( 'woocommerce_email_before_order_table', $order, $email ); ?>
 	</table>
 </div>
 
-<?php do_action( 'woocommerce_email_after_order_table', $order, $email ); ?>
+<?php do_action( 'masteriyo_email_after_order_table', $order, $email ); ?>

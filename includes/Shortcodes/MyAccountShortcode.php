@@ -99,7 +99,7 @@ class MyAccountShortcode extends Shortcode {
 				$rp_login               = $user ? $user->get_username() : '';
 
 				if ( is_wp_error( check_password_reset_key( $rp_key, $rp_login ) ) ) {
-					masteriyo_add_notice( __( 'This key is invalid or has already been used. Please request to reset your password again if needed.', 'woocommerce' ), 'error' );
+					masteriyo_add_notice( __( 'This key is invalid or has already been used. Please request to reset your password again if needed.', 'masteriyo' ), 'error' );
 				} else {
 					$this->set_template_args(
 						array(

@@ -2,15 +2,15 @@
 /**
  * Email Order Items
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/emails/order-items.php.
+ * This template can be overridden by copying it to yourtheme/masteriyo/emails/order-items.php.
  *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * HOWEVER, on occasion Masteriyo will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
  * maintain compatibility. We try to do this as little as possible, but it does
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @package WooCommerce\Templates\Emails
+ * @package ThemeGrill\Masteriyo\Templates\Emails
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -24,7 +24,7 @@ foreach ( $items as $item_id => $item ) :
 	$purchase_note = '';
 	$image         = '';
 
-	if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
+	if ( ! apply_filters( 'masteriyo_order_item_visible', true, $item ) ) {
 		continue;
 	}
 
@@ -35,17 +35,17 @@ foreach ( $items as $item_id => $item ) :
 	}
 
 	?>
-	<tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'order_item', $item, $order ) ); ?>">
+	<tr class="<?php echo esc_attr( apply_filters( 'masteriyo_order_item_class', 'order_item', $item, $order ) ); ?>">
 		<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align: middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;">
 		<?php
 
 		// Show title/image etc.
 		if ( $show_image ) {
-			echo wp_kses_post( apply_filters( 'woocommerce_order_item_thumbnail', $image, $item ) );
+			echo wp_kses_post( apply_filters( 'masteriyo_order_item_thumbnail', $image, $item ) );
 		}
 
 		// Product name.
-		echo wp_kses_post( apply_filters( 'woocommerce_order_item_name', $item->get_name(), $item, false ) );
+		echo wp_kses_post( apply_filters( 'masteriyo_order_item_name', $item->get_name(), $item, false ) );
 
 		// SKU.
 		if ( $show_sku && $sku ) {
@@ -53,7 +53,7 @@ foreach ( $items as $item_id => $item ) :
 		}
 
 		// allow other plugins to add additional product information here.
-		do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, $plain_text );
+		do_action( 'masteriyo_order_item_meta_start', $item_id, $item, $order, $plain_text );
 
 		wc_display_item_meta(
 			$item,
@@ -63,7 +63,7 @@ foreach ( $items as $item_id => $item ) :
 		);
 
 		// allow other plugins to add additional product information here.
-		do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, $plain_text );
+		do_action( 'masteriyo_order_item_meta_end', $item_id, $item, $order, $plain_text );
 
 		?>
 		</td>
@@ -77,7 +77,7 @@ foreach ( $items as $item_id => $item ) :
 			} else {
 				$qty_display = esc_html( $qty );
 			}
-			echo wp_kses_post( apply_filters( 'woocommerce_email_order_item_quantity', $qty_display, $item ) );
+			echo wp_kses_post( apply_filters( 'masteriyo_email_order_item_quantity', $qty_display, $item ) );
 			?>
 		</td>
 		<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">

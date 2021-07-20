@@ -52,7 +52,7 @@ class Activation {
 					'setting_name' => 'myaccount_page_id',
 				),
 				'masteriyo-checkout' => array(
-					// Checkout slug is 'masteriyo-checkout' as 'checkout' slug might be used by other plugins like WooCommerce.
+					// Checkout slug is 'masteriyo-checkout' as 'checkout' slug might be used by other plugins like Masteriyo.
 					'name'         => _x( 'masteriyo-checkout', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'Masteriyo Checkout', 'Page title', 'masteriyo' ),
 					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_checkout_shortcode_tag', 'masteriyo_checkout' ) . ']<!-- /wp:shortcode -->',

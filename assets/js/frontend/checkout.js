@@ -97,7 +97,7 @@ jQuery(function ($) {
 			}
 
 			var selected_payment_method = $(
-				'.woocommerce-checkout input[name="payment_method"]:checked'
+				'.masteriyo-checkout input[name="payment_method"]:checked'
 			).attr('id');
 
 			if (selected_payment_method !== this.selected_payment_method) {

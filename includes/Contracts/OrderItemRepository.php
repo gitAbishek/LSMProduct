@@ -2,8 +2,8 @@
 /**
  * Order Item repository interface.
  *
- * @version 3.0.0
- * @package WooCommerce\Interface
+ * @version 0.1.0
+ * @package ThemeGrill\Masteriyo\Interface
  */
 
 namespace ThemeGrill\Masteriyo\Contracts;
@@ -11,11 +11,11 @@ namespace ThemeGrill\Masteriyo\Contracts;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * WC Order Item Data Store Interface
+ * Masteriyo Order Item Data Store Interface
  *
  * Functions that must be defined by the order item data store (for functions).
  *
- * @version  3.0.0
+ * @version  0.1.0
  */
 interface OrderItemRepository {
 

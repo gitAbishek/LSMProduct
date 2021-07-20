@@ -16,7 +16,6 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiBook, BiCog, BiEdit, BiShowAlt } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
-
 import LogoImg from '../../../../img/logo.png';
 import routes from '../../constants/routes';
 

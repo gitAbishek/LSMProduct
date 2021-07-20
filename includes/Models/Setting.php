@@ -112,7 +112,7 @@ class Setting extends Model {
 		),
 		'pages'    => array(
 			// Page Setup.
-			'general'   => array(
+			'general'  => array(
 				'myaccount_page_id'        => -1,
 				'course_list_page_id'      => -1,
 				'terms_conditions_page_id' => -1,
@@ -120,7 +120,7 @@ class Setting extends Model {
 			),
 
 			// Checkout Endpoints.
-			'checkount' => array(
+			'checkout' => array(
 				'pay'                        => '',
 				'order_received'             => '',
 				'add_payment_method'         => '',
@@ -128,7 +128,7 @@ class Setting extends Model {
 				'set_default_payment_method' => '',
 			),
 			// Account Endpoints.
-			'account'   => array(
+			'account'  => array(
 				'dashboard'       => '',
 				'orders'          => '',
 				'view_order'      => '',
@@ -217,7 +217,7 @@ class Setting extends Model {
 				'heading'    => '',
 				'content'    => '',
 			),
-			'enrollled_course'     => array(
+			'enrolled_course'      => array(
 				'enable'  => true,
 				'subject' => '',
 				'heading' => '',

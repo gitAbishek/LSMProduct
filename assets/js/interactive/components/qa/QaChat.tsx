@@ -45,7 +45,6 @@ const QaChat: React.FC<Props> = (props) => {
 			}),
 		{
 			refetchInterval: 60000,
-			refetchOnMount: false,
 		}
 	);
 

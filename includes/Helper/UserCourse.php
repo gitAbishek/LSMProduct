@@ -28,3 +28,23 @@ function masteriyo_get_user_course( $user_course_id ) {
 		return null;
 	}
 }
+
+/**
+ * Get list of status for user course.
+ *
+ * @since 0.1.0
+ *
+ * @return array
+ */
+function masteriyo_get_user_course_statuses() {
+	$statuses = array(
+		'active'   => array(
+			'label' => _x( 'Active.', 'User Course status', 'masteriyo' ),
+		),
+		'enrolled' => array(
+			'label' => _x( 'Enrolled.', 'User Course status', 'masteriyo' ),
+		),
+	);
+
+	return apply_filters( 'masteriyo_user_course_statuses', $statuses );
+}

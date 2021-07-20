@@ -46,16 +46,21 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	public function create( Model &$user_course ) {
 		global $wpdb;
 
-		if ( ! $user_course->get_date_start( 'edit' ) ) {
-			$user_course->set_date_start( current_time( 'mysql', true ) );
+		$date_start    = '';
+		$date_modified = '';
+		$date_end      = '';
+
+		if ( $user_course->get_date_start( 'edit' ) ) {
+			$date_start = gmdate( 'Y-m-d H:i:s', $user_course->get_date_start( 'edit' )->getTimestamp() );
 		}
 
-		if ( ! $user_course->get_date_modified( 'edit' ) ) {
-			$user_course->set_date_modified( current_time( 'mysql', true ) );
+		if ( $user_course->get_date_modified( 'edit' ) ) {
+			$date_modified = gmdate( 'Y-m-d H:i:s', $user_course->get_date_modified( 'edit' )->getTimestamp() );
 		}
 
-		$date_end = $user_course->get_date_end( 'edit' );
-		$date_end = is_null( $date_end ) ? '' : gmdate( 'Y-m-d H:i:s', $date_end->getTimestamp() );
+		if ( $user_course->get_date_end( 'edit' ) ) {
+			$date_end = gmdate( 'Y-m-d H:i:s', $user_course->get_date_end( 'edit' )->getTimestamp() );
+		}
 
 		$result = $wpdb->insert(
 			$user_course->get_table_name(),
@@ -66,8 +71,8 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 					'item_id'       => $user_course->get_course_id( 'edit' ),
 					'item_type'     => $user_course->get_type( 'edit' ),
 					'status'        => $user_course->get_status( 'edit' ),
-					'date_start'    => gmdate( 'Y-m-d H:i:s', $user_course->get_date_start( 'edit' )->getTimestamp() ),
-					'date_modified' => gmdate( 'Y-m-d H:i:s', $user_course->get_date_modified( 'edit' )->getTimestamp() ),
+					'date_start'    => $date_start,
+					'date_modified' => $date_modified,
 					'date_end'      => $date_end,
 				),
 				$user_course
@@ -107,10 +112,16 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 			'date_end',
 		);
 
-		$date_end = $user_course->get_date_end( 'edit' );
-		$date_end = is_null( $date_end ) ? '' : gmdate( 'Y-m-d H:i:s', $date_end->getTimestamp() );
-
 		if ( array_intersect( $user_course_data_keys, array_keys( $changes ) ) ) {
+			$date_start = $user_course->get_date_start( 'edit' );
+			$date_start = is_null( $date_start ) ? '' : gmdate( 'Y-m-d H:i:s', $date_start->getTimestamp() );
+
+			$date_modified = $user_course->get_date_modified( 'edit' );
+			$date_modified = is_null( $date_modified ) ? '' : gmdate( 'Y-m-d H:i:s', $date_modified->getTimestamp() );
+
+			$date_end = $user_course->get_date_end( 'edit' );
+			$date_end = is_null( $date_end ) ? '' : gmdate( 'Y-m-d H:i:s', $date_end->getTimestamp() );
+
 			$wpdb->update(
 				$user_course->get_table_name(),
 				array(
@@ -118,8 +129,8 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 					'item_id'       => $user_course->get_course_id( 'edit' ),
 					'item_type'     => $user_course->get_type( 'edit' ),
 					'status'        => $user_course->get_status( 'edit' ),
-					'date_start'    => gmdate( 'Y-m-d H:i:s', $user_course->get_date_start( 'edit' )->getTimestamp() ),
-					'date_modified' => gmdate( 'Y-m-d H:i:s', $user_course->get_date_modified( 'edit' )->getTimestamp() ),
+					'date_start'    => $date_start,
+					'date_modified' => $date_modified,
 					'date_end'      => $date_end,
 				),
 				array( 'id' => $user_course->get_id() )
@@ -264,11 +275,11 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		}
 
 		// Construct where clause part.
-		if ( ! empty( $query_vars['user_id'] ) ) {
+		if ( '' !== $query_vars['user_id'] ) {
 			$search_criteria[] = $wpdb->prepare( 'user_id = %d', $query_vars['user_id'] );
 		}
 
-		if ( ! empty( $query_vars['course_id'] ) ) {
+		if ( '' !== $query_vars['course_id'] ) {
 			$search_criteria[] = $wpdb->prepare( 'item_id = %d', $query_vars['course_id'] );
 		}
 

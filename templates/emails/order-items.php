@@ -19,8 +19,7 @@ $text_align  = is_rtl() ? 'right' : 'left';
 $margin_side = is_rtl() ? 'left' : 'right';
 
 foreach ( $items as $item_id => $item ) :
-	$product       = $item->get_product();
-	$sku           = '';
+	$course        = $item->get_course();
 	$purchase_note = '';
 	$image         = '';
 
@@ -28,10 +27,9 @@ foreach ( $items as $item_id => $item ) :
 		continue;
 	}
 
-	if ( is_object( $product ) ) {
-		$sku           = $product->get_sku();
-		$purchase_note = $product->get_purchase_note();
-		$image         = $product->get_image( $image_size );
+	if ( is_object( $course ) ) {
+		$purchase_note = $course->get_purchase_note();
+		$image         = $course->get_image( $image_size );
 	}
 
 	?>
@@ -46,11 +44,6 @@ foreach ( $items as $item_id => $item ) :
 
 		// Product name.
 		echo wp_kses_post( apply_filters( 'masteriyo_order_item_name', $item->get_name(), $item, false ) );
-
-		// SKU.
-		if ( $show_sku && $sku ) {
-			echo wp_kses_post( ' (#' . $sku . ')' );
-		}
 
 		// allow other plugins to add additional product information here.
 		do_action( 'masteriyo_order_item_meta_start', $item_id, $item, $order, $plain_text );

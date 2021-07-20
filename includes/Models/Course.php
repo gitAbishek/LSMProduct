@@ -91,7 +91,7 @@ class Course extends Model {
 		'access_mode'        => 'open',
 		'billing_cycle'      => '',
 		'show_curriculum'    => true,
-		'purchase_note' => '',
+		'purchase_note'      => '',
 	);
 
 	/**
@@ -334,7 +334,7 @@ class Course extends Model {
 	 *
 	 * @since  0.1.0
 	 * @param  string $context What the value is for. Valid values are view and edit.
-	 * @return MASTERIYO_DateTime|NULL object if the date is set or null if there is no date.
+	 * @return DateTime|NULL object if the date is set or null if there is no date.
 	 */
 	public function get_date_on_sale_to( $context = 'view' ) {
 		return $this->get_prop( 'date_on_sale_to', $context );
@@ -647,6 +647,17 @@ class Course extends Model {
 	 */
 	public function get_purchase_note( $context = 'view' ) {
 		return $this->get_prop( 'purchase_note', $context );
+	}
+
+	/**
+	 * Get main image ID.
+	 *
+	 * @since  0.1.0
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return string
+	 */
+	public function get_image_id( $context = 'view' ) {
+		return $this->get_featured_image( $context );
 	}
 
 	/*
@@ -989,7 +1000,6 @@ class Course extends Model {
 		$this->set_prop( 'show_curriculum', masteriyo_string_to_bool( $value ) );
 	}
 
-
 	/**
 	 * Set the course purchase note.
 	 *
@@ -998,7 +1008,18 @@ class Course extends Model {
 	 * @param string $value
 	 */
 	public function set_purchase_note( $value ) {
-		$this->set_prop( 'purchase_note',  $value );
+		$this->set_prop( 'purchase_note', $value );
+	}
+
+	/**
+	 * Get main image ID.
+	 *
+	 * @since  0.1.0
+	 * @param  string $value Set main image ID.
+	 * @return string
+	 */
+	public function set_image_id( $value ) {
+		return $this->set_featured_image( $value );
 	}
 
 	/*
@@ -1189,7 +1210,7 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function start_course_url() {
-		return home_url( '?masteriyo=interactive#/course/' . $this->get_id() );
+		return home_url( sprintf( '?course_id=%d&masteriyo-page=interactive#/course/%d', $this->get_id(), $this->get_id() ) );
 	}
 
 	/**
@@ -1250,5 +1271,33 @@ class Course extends Model {
 		}
 
 		return apply_filters( 'masteriyo_course_add_to_cart_description', sprintf( $text, $this->get_name() ), $this );
+	}
+
+	/**
+	 * Returns the main product image.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $size (default: 'masteriyo_thumbnail').
+	 * @param  array  $attr Image attributes.
+	 * @param  bool   $placeholder True to return $placeholder if no image is found, or false to return an empty string.
+	 * @return string
+	 */
+	public function get_image( $size = 'masteriyo_thumbnail', $attr = array(), $placeholder = true ) {
+		$image = '';
+		if ( $this->get_image_id() ) {
+			$image = wp_get_attachment_image( $this->get_image_id(), $size, false, $attr );
+		} elseif ( $this->get_parent_id() ) {
+			$parent_product = masteriyo_get_product( $this->get_parent_id() );
+			if ( $parent_product ) {
+				$image = $parent_product->get_image( $size, $attr, $placeholder );
+			}
+		}
+
+		if ( ! $image && $placeholder ) {
+			$image = masteriyo_placeholder_img( $size, $attr );
+		}
+
+		return apply_filters( 'masteriyo_product_get_image', $image, $this, $size, $attr, $placeholder, $image );
 	}
 }

@@ -10,14 +10,15 @@
 namespace ThemeGrill\Masteriyo;
 
 use League\Container\Container;
+use ThemeGrill\Masteriyo\AdminMenu;
+use ThemeGrill\Masteriyo\Setup\Onboard;
 use ThemeGrill\Masteriyo\RestApi\RestApi;
+use ThemeGrill\Masteriyo\Emails\EmailHooks;
+use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+use ThemeGrill\Masteriyo\Shortcodes\Shortcodes;
 use ThemeGrill\Masteriyo\PostType\RegisterPostType;
 use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
-use ThemeGrill\Masteriyo\AdminMenu;
-use ThemeGrill\Masteriyo\Emails\EmailHooks;
 use ThemeGrill\Masteriyo\FileRestrictions\FileRestrictions;
-use ThemeGrill\Masteriyo\Shortcodes\Shortcodes;
-use ThemeGrill\Masteriyo\Setup\Onboard;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -65,6 +66,9 @@ class Masteriyo extends Container {
 	 * @since 0.1.0
 	 */
 	protected function init() {
+		// Register service providers.
+		$this->register_service_providers();
+
 		Activation::init();
 		Deactivation::init();
 		FileRestrictions::init();
@@ -72,9 +76,6 @@ class Masteriyo extends Container {
 		CourseQuestionAnswers::init();
 		Faqs::init();
 		EmailHooks::init();
-
-		// Register service providers.
-		$this->register_service_providers();
 
 		// Initialize the rest api controllers.
 		RestApi::instance()->init();
@@ -116,12 +117,14 @@ class Masteriyo extends Container {
 
 		add_filter(
 			'query_vars',
-			function( $query_vars ) {
-				$query_vars[] = 'masteriyo';
-				$query_vars[] = 'course';
-				return $query_vars;
+			function( $vars ) {
+				$vars[] = 'course_id';
+				$vars[] = 'masteriyo-page';
+
+				return $vars;
 			}
 		);
+
 		add_action( 'admin_init', array( $this, 'admin_redirects' ) );
 	}
 
@@ -154,7 +157,7 @@ class Masteriyo extends Container {
 		// Setup.
 		if ( ! empty( $_GET['page'] ) ) {
 
-			if ( 'masteriyo-onboard' == $_GET['page'] ) {
+			if ( 'masteriyo-onboard' === $_GET['page'] ) {
 				$onboard_obj = new Onboard();
 				$onboard_obj->init();
 			}
@@ -362,7 +365,35 @@ class Masteriyo extends Container {
 			$template = masteriyo( 'template' )->locate( 'archive-course.php' );
 		}
 
-		if ( isset( $_GET['masteriyo'] ) && 'interactive' === $_GET['masteriyo'] ) {
+		// Handle interactive page.
+		if ( isset( $_GET['masteriyo-page'] ) && 'interactive' === $_GET['masteriyo-page'] ) { // phpcs:ignore
+			$course_id = isset( $_GET['course_id'] ) ? absint( $_GET['course_id'] ) : 0 ; // phpcs:ignore
+			$user_id   = get_current_user_id();
+
+			$query = new UserCourseQuery(
+				array(
+					'course_id' => $course_id,
+					'user_id'   => $user_id,
+				)
+			);
+
+			$user_courses = $query->get_user_courses();
+			$user_course  = is_array( $user_courses ) ? $user_courses[0] : $user_courses;
+
+			if ( empty( $user_courses ) || ! masteriyo_can_start_course( $course_id, $user_id ) ) {
+				wp_safe_redirect( \masteriyo_get_course_list_url(), 307 );
+			}
+
+			if ( 'active' === $user_course->get_status() ) {
+				$user_course->set_date_start( current_time( 'mysql' ), true );
+				$user_course->set_status( 'enrolled' );
+			}
+
+			if ( 'enrolled' === $user_course->get_status() ) {
+				$user_course->set_date_modified( current_time( 'mysql' ), true );
+				$user_course->save();
+			}
+
 			$template = plugin_dir_path( Constants::get( 'MASTERIYO_PLUGIN_FILE' ) ) . '/templates/interactive.php';
 			status_header( 200 );
 		}
@@ -425,7 +456,7 @@ class Masteriyo extends Container {
 		}
 
 		// If plugin is running for first time, redirect to onboard page.
-		if ( get_option( 'masteriyo_first_time_activation_flag' ) != '1' ) {
+		if ( '1' !== get_option( 'masteriyo_first_time_activation_flag' ) ) {
 			wp_safe_redirect( admin_url( 'index.php?page=masteriyo-onboard' ) );
 			exit;
 		}

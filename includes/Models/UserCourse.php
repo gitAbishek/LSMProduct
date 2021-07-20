@@ -66,14 +66,14 @@ class UserCourse extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'course_id'      => 0,
-		'user_id'        => 0,
-		'status'         => '',
-		'date_start'     => null,
-		'date_modified'  => null,
-		'date_end'       => null,
-		'user_course_id' => 0,
-		'price'          => '',
+		'course_id'     => 0,
+		'user_id'       => 0,
+		'status'        => '',
+		'date_start'    => null,
+		'date_modified' => null,
+		'date_end'      => null,
+		'order_id'      => 0,
+		'price'         => '',
 	);
 
 	/**
@@ -118,14 +118,14 @@ class UserCourse extends Model {
 	}
 
 	/**
-	 * Get user_course associated with the course.
+	 * Get order associated with the course.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return ThemeGrill\Masteriyo\Models\Course|NULL
+	 * @return ThemeGrill\Masteriyo\Models\Order|NULL
 	 */
-	public function get_user_course() {
-		return masteriyo_get_user_course( $this->get_user_course_id() );
+	public function get_order() {
+		return masteriyo_get_order( $this->get_order_id() );
 	}
 
 	/*
@@ -226,7 +226,7 @@ class UserCourse extends Model {
 	}
 
 	/**
-	 * Get user's course associated recent user_course ID.
+	 * Get user's course associated recent order ID.
 	 *
 	 * @since  0.1.0
 	 *
@@ -234,8 +234,8 @@ class UserCourse extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_user_course_id( $context = 'view' ) {
-		return $this->get_prop( 'user_course_id', $context );
+	public function get_order_id( $context = 'view' ) {
+		return $this->get_prop( 'order_id', $context );
 	}
 
 	/**
@@ -296,10 +296,47 @@ class UserCourse extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param int $value User's course status.
+	 * @param string $new_status    Status to change the user_course to. No internal masteriyo- prefix is required.
+	 * @param string $note          Optional note to add.
+	 * @param bool   $manual_update Is this a manual user_course status change?.
+	 * @return array
 	 */
-	public function set_status( $value ) {
-		$this->set_prop( 'status', $value );
+	public function set_status( $new_status, $note = '', $manual_update = false ) {
+		$old_status = $this->get_status();
+
+		// If setting the status, ensure it's set to a valid status.
+		if ( true === $this->object_read ) {
+			// Only allow valid new status.
+			if ( ! in_array( $new_status, $this->get_valid_statuses(), true ) ) {
+				$new_status = 'active';
+			}
+
+			// If the old status is set but unknown (e.g. active) assume its active for action usage.
+			if ( $old_status && ! in_array( $old_status, $this->get_valid_statuses(), true ) ) {
+				$old_status = 'active';
+			}
+		}
+
+		$this->set_prop( 'status', $new_status );
+
+		$result = array(
+			'from' => $old_status,
+			'to'   => $new_status,
+		);
+
+		if ( true === $this->object_read && ! empty( $result['from'] ) && $result['from'] !== $result['to'] ) {
+			$this->status_transition = array(
+				'from'   => ! empty( $this->status_transition['from'] ) ? $this->status_transition['from'] : $result['from'],
+				'to'     => $result['to'],
+				'manual' => (bool) $manual_update,
+			);
+
+			if ( $manual_update ) {
+				do_action( 'masteriyo_user_course_edit_status', $this->get_id(), $result['to'] );
+			}
+		}
+
+		return $result;
 	}
 
 	/**
@@ -336,14 +373,14 @@ class UserCourse extends Model {
 	}
 
 	/**
-	 * Set user's course associated recent user_course ID.
+	 * Set user's course associated recent order ID.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param int $value User's course end date.
 	 */
-	public function set_user_course_id( $value ) {
-		$this->set_prop( 'user_course_id', absint( $value ) );
+	public function set_order_id( $value ) {
+		$this->set_prop( 'order_id', absint( $value ) );
 	}
 
 	/**
@@ -367,7 +404,7 @@ class UserCourse extends Model {
 	 * Save data to the database.
 	 *
 	 * @since 0.1.0
-	 * @return int order ID
+	 * @return int user_course ID
 	 */
 	public function save() {
 		parent::save();
@@ -405,8 +442,18 @@ class UserCourse extends Model {
 				do_action( 'masteriyo_user_course_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
 				do_action( 'masteriyo_user_course_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
 			}
-		} catch ( \Exception $e ) {
+		} catch ( \Exception $e ) { // phpcs:ignore
 			// TODO Log the message.
 		}
+	}
+
+	/**
+	 * Get all valid statuses for this user_course
+	 *
+	 * @since 0.1.0
+	 * @return array Internal status keys e.g. 'masteriyo-processing'
+	 */
+	protected function get_valid_statuses() {
+		return array_keys( masteriyo_get_user_course_statuses() );
 	}
 }

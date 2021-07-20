@@ -2771,3 +2771,81 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
 		'replies' => $replies,
 	);
 }
+
+
+/**
+ * Get an image size by name or defined dimensions.
+ *
+ * The returned variable is filtered by masteriyo_get_image_size_{image_size} filter to
+ * allow 3rd party customisation.
+ *
+ * Sizes defined by the theme take priority over settings. Settings are hidden when a theme
+ * defines sizes.
+ *
+ * @since 0.1.0
+ *
+ * @param array|string $image_size Name of the image size to get, or an array of dimensions.
+ * @return array Array of dimensions including width, height, and cropping mode. Cropping mode is 0 for no crop, and 1 for hard crop.
+ */
+function masteriyo_get_image_size( $image_size ) {
+	$cache_key = 'size-' . ( is_array( $image_size ) ? implode( '-', $image_size ) : $image_size );
+	$size      = wp_cache_get( $cache_key, 'masteriyo' );
+
+	if ( $size ) {
+		return $size;
+	}
+
+	$size = array(
+		'width'  => 600,
+		'height' => 600,
+		'crop'   => 1,
+	);
+
+	if ( is_array( $image_size ) ) {
+		$size       = array(
+			'width'  => isset( $image_size[0] ) ? absint( $image_size[0] ) : 600,
+			'height' => isset( $image_size[1] ) ? absint( $image_size[1] ) : 600,
+			'crop'   => isset( $image_size[2] ) ? absint( $image_size[2] ) : 1,
+		);
+		$image_size = $size['width'] . '_' . $size['height'];
+	} else {
+		$image_size = str_replace( 'masteriyo_', '', $image_size );
+
+		if ( 'single' === $image_size ) {
+			$size['width']  = absint( masteriyo_get_theme_support( 'single_image_width', get_option( 'masteriyo_single_image_width', 600 ) ) );
+			$size['height'] = '';
+			$size['crop']   = 0;
+
+		} elseif ( 'gallery_thumbnail' === $image_size ) {
+			$size['width']  = absint( masteriyo_get_theme_support( 'gallery_thumbnail_image_width', 100 ) );
+			$size['height'] = $size['width'];
+			$size['crop']   = 1;
+
+		} elseif ( 'thumbnail' === $image_size ) {
+			$size['width'] = absint( masteriyo_get_theme_support( 'thumbnail_image_width', get_option( 'masteriyo_thumbnail_image_width', 300 ) ) );
+			$cropping      = get_option( 'masteriyo_thumbnail_cropping', '1:1' );
+
+			if ( 'uncropped' === $cropping ) {
+				$size['height'] = '';
+				$size['crop']   = 0;
+			} elseif ( 'custom' === $cropping ) {
+				$width          = max( 1, get_option( 'masteriyo_thumbnail_cropping_custom_width', '4' ) );
+				$height         = max( 1, get_option( 'masteriyo_thumbnail_cropping_custom_height', '3' ) );
+				$size['height'] = absint( masteriyo_round( ( $size['width'] / $width ) * $height ) );
+				$size['crop']   = 1;
+			} else {
+				$cropping_split = explode( ':', $cropping );
+				$width          = max( 1, current( $cropping_split ) );
+				$height         = max( 1, end( $cropping_split ) );
+				$size['height'] = absint( masteriyo_round( ( $size['width'] / $width ) * $height ) );
+				$size['crop']   = 1;
+			}
+		}
+	}
+
+	$size = apply_filters( 'masteriyo_get_image_size_' . $image_size, $size );
+
+	wp_cache_set( $cache_key, $size, 'masteriyo' );
+
+	return $size;
+}

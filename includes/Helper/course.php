@@ -105,3 +105,75 @@ function masteriyo_get_course_access_modes() {
 		)
 	);
 }
+
+/**
+ * Get the placeholder image.
+ *
+ * Uses wp_get_attachment_image if using an attachment ID @since 3.6.0 to handle responsiveness.
+ *
+ * @since 0.1.0
+ *
+ * @param string       $size Image size.
+ * @param string|array $attr Optional. Attributes for the image markup. Default empty.
+ * @return string
+ */
+function masteriyo_placeholder_img( $size = 'masteriyo_thumbnail', $attr = '' ) {
+	$dimensions        = masteriyo_get_image_size( $size );
+	$placeholder_image = get_option( 'masteriyo_placeholder_image', 0 );
+
+	$default_attr = array(
+		'class' => 'masteriyo-placeholder wp-post-image',
+		'alt'   => __( 'Placeholder', 'masteriyo' ),
+	);
+
+	$attr = wp_parse_args( $attr, $default_attr );
+
+	if ( wp_attachment_is_image( $placeholder_image ) ) {
+		$image_html = wp_get_attachment_image(
+			$placeholder_image,
+			$size,
+			false,
+			$attr
+		);
+	} else {
+		$image      = masteriyo_placeholder_img_src( $size );
+		$hwstring   = image_hwstring( $dimensions['width'], $dimensions['height'] );
+		$attributes = array();
+
+		foreach ( $attr as $name => $value ) {
+			$attribute[] = esc_attr( $name ) . '="' . esc_attr( $value ) . '"';
+		}
+
+		$image_html = '<img src="' . esc_url( $image ) . '" ' . $hwstring . implode( ' ', $attribute ) . '/>';
+	}
+
+	return apply_filters( 'masteriyo_placeholder_img', $image_html, $size, $dimensions );
+}
+
+
+/**
+ * Get the placeholder image URL either from media, or use the fallback image.
+ *
+ * @since 0.1.0
+ *
+ * @param string $size Thumbnail size to use.
+ * @return string
+ */
+function masteriyo_placeholder_img_src( $size = 'masteriyo_thumbnail' ) {
+	$src               = masteriyo_get_plugin_url() . '/assets/images/placeholder.png';
+	$placeholder_image = get_option( 'masteriyo_placeholder_image', 0 );
+
+	if ( ! empty( $placeholder_image ) ) {
+		if ( is_numeric( $placeholder_image ) ) {
+			$image = wp_get_attachment_image_src( $placeholder_image, $size );
+
+			if ( ! empty( $image[0] ) ) {
+				$src = $image[0];
+			}
+		} else {
+			$src = $placeholder_image;
+		}
+	}
+
+	return apply_filters( 'masteriyo_placeholder_img_src', $src );
+}

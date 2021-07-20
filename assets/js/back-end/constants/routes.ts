@@ -24,11 +24,6 @@ const routes = {
 		add: '/courses/categories/new',
 		edit: '/courses/categories/:categoryId',
 	},
-	course_difficulties: {
-		list: '/courses/difficulties',
-		add: '/courses/difficulties/new',
-		edit: '/courses/difficulties/:difficultyId',
-	},
 	course_tags: {
 		list: '/courses/tags',
 		add: '/courses/tags/new',

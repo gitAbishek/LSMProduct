@@ -37,26 +37,30 @@ class TrueFalse extends Question implements QuestionInterface {
 	 * @return bool
 	 */
 	public function check_answer( $chosen_answer, $context = 'edit' ) {
-		$answers = $this->get_answers( 'edit' );
+		$answers       = $this->get_answers( 'edit' );
+		$chosen_answer = (array) $chosen_answer;
 
-		// Return true if there are no answers stored.
-		if ( empty( $answers ) ) {
-			return true;
-		}
-
-		$chosen_answer = is_array( $chosen_answer ) ? $chosen_answer[0] : $chosen_answer;
-
-		// Bail early if the chosen answer is empty.
-		if ( empty( trim( $chosen_answer ) ) ) {
-			return false;
-		}
-
-		foreach ( $answers as $answer ) {
-			if ( $answer->name === $chosen_answer && $answer->correct ) {
-				return true;
+		$correct_answers = array_filter(
+			$answers,
+			function( $answer ) {
+				return $answer->correct;
 			}
-		}
+		);
 
-		return false;
+		$correct_answers = array_values(
+			array_map(
+				function( $correct_answer ) {
+					return $correct_answer->name;
+				},
+				$correct_answers
+			)
+		);
+
+		// There can only be one corrent answer for TrueFalse question.
+		$correct_answers = (array) current( $correct_answers );
+
+		$correct = $chosen_answer === $correct_answers;
+
+		return apply_filters( "masteriyo_question_check_answer_{$this->type}", $correct, $chosen_answer, $context, $this );
 	}
 }

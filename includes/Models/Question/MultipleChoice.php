@@ -37,34 +37,35 @@ class MultipleChoice extends Question implements QuestionInterface {
 	 * @return bool
 	 */
 	public function check_answer( $chosen_answers, $context = 'edit' ) {
+		$correct        = false;
 		$answers        = $this->get_answers( 'edit' );
 		$chosen_answers = (array) $chosen_answers;
 
-		// Return true if there are no answers stored.
-		if ( empty( $answers ) ) {
-			return true;
-		}
-
-		// Bail early if the chosen answer is empty.
-		if ( empty( $chosen_answers ) ) {
-			return false;
-		}
-
-		// Convert the answers to map.
-		$answers_map = array();
-		foreach ( $answers as $answer ) {
-			$answers_map[ $answer->name ] = $answer->correct;
-		}
-
-		$correct = true;
-		foreach ( $chosen_answers as $chosen_answer ) {
-			if ( isset( $answers_map[ $chosen_answer ] ) ) {
-				$correct = $correct && $answers_map[ $chosen_answer ];
-			} else {
-				$correct = false;
+		$correct_answers = array_filter(
+			$answers,
+			function( $answer ) {
+				return $answer->correct;
 			}
+		);
+
+		$correct_answers = array_values(
+			array_map(
+				function( $correct_answer ) {
+					return $correct_answer->name;
+				},
+				$correct_answers
+			)
+		);
+
+		sort( $chosen_answers );
+		sort( $correct_answers );
+
+		// Check only if the number of chosen answers is equal to correct answers,
+		// if the number is different the chosen answers id wrong by default.
+		if ( count( $chosen_answers ) === count( $correct_answers ) ) {
+			$correct = $chosen_answer === $correct_answers;
 		}
 
-		return $correct;
+		return apply_filters( "masteriyo_question_check_answer_{$this->type}", $correct, $context, $this );
 	}
 }

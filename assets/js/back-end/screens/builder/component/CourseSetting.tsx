@@ -3,7 +3,6 @@ import {
 	Collapse,
 	FormControl,
 	FormErrorMessage,
-	FormHelperText,
 	FormLabel,
 	InputGroup,
 	InputRightAddon,
@@ -148,8 +147,8 @@ const CourseSetting: React.FC<Props> = (props) => {
 										<RadioGroup
 											onChange={setEnrollDisplayValue}
 											value={enrollDisplayValue}>
-											<Stack direction="row" spacing="8" align="flex-start">
-												<Stack direction="column">
+											<Stack direction="column" spacing="4">
+												<Stack direction="row" spacing="8" align="flex-start">
 													<Radio
 														onChange={(e: any) =>
 															setValue('enrollment_limit', e.target.value)
@@ -157,39 +156,30 @@ const CourseSetting: React.FC<Props> = (props) => {
 														value="0">
 														{__('No limit', 'masteriyo')}
 													</Radio>
-													<FormHelperText>
-														{__(
-															'Check this option if there is no limit.',
-															'masteriyo'
-														)}
-													</FormHelperText>
-												</Stack>
-												<Stack direction="column" spacing="6">
+
 													<Radio value="1">{__('Limit', 'masteriyo')}</Radio>
-													<Collapse
-														in={enrollDisplayValue != '0'}
-														animateOpacity>
-														<FormControl>
-															<FormLabel>
-																{__('Number of Students', 'masteriyo')}
-															</FormLabel>
-															<Controller
-																name="enrollment_limit"
-																render={({ field }) => (
-																	<NumberInput
-																		{...field}
-																		defaultValue={courseData?.enrollment_limit}>
-																		<NumberInputField />
-																		<NumberInputStepper>
-																			<NumberIncrementStepper />
-																			<NumberDecrementStepper />
-																		</NumberInputStepper>
-																	</NumberInput>
-																)}
-															/>
-														</FormControl>
-													</Collapse>
 												</Stack>
+												<Collapse in={enrollDisplayValue != '0'} animateOpacity>
+													<FormControl>
+														<FormLabel>
+															{__('Number of Students', 'masteriyo')}
+														</FormLabel>
+														<Controller
+															name="enrollment_limit"
+															render={({ field }) => (
+																<NumberInput
+																	{...field}
+																	defaultValue={courseData?.enrollment_limit}>
+																	<NumberInputField />
+																	<NumberInputStepper>
+																		<NumberIncrementStepper />
+																		<NumberDecrementStepper />
+																	</NumberInputStepper>
+																</NumberInput>
+															)}
+														/>
+													</FormControl>
+												</Collapse>
 											</Stack>
 										</RadioGroup>
 									</FormControl>

@@ -18,7 +18,6 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import DescriptionInput from './components/DescriptionInput';
-import Header from './components/Header';
 import NameInput from './components/NameInput';
 import SlugInput from './components/SlugInput';
 
@@ -58,50 +57,45 @@ const AddNewCourseCategory = () => {
 	};
 
 	return (
-		<Stack direction="column" spacing="8" alignItems="center">
-			<Header isEmpty />
-			<Container maxW="container.xl">
-				<FormProvider {...methods}>
-					<Box bg="white" p="10" shadow="box">
-						<Stack direction="column" spacing="8">
-							<Flex aling="center" justify="space-between">
-								<Heading as="h1" fontSize="x-large">
-									{__('Add New Category', 'masteriyo')}
-								</Heading>
-							</Flex>
+		<Container maxW="container.xl" marginTop="6">
+			<FormProvider {...methods}>
+				<Box bg="white" p="10" shadow="box">
+					<Stack direction="column" spacing="8">
+						<Flex aling="center" justify="space-between">
+							<Heading as="h1" fontSize="x-large">
+								{__('Add New Category', 'masteriyo')}
+							</Heading>
+						</Flex>
 
-							<form onSubmit={methods.handleSubmit(onSubmit)}>
-								<Stack direction="column" spacing="6">
-									<NameInput />
-									<SlugInput />
-									<DescriptionInput />
+						<form onSubmit={methods.handleSubmit(onSubmit)}>
+							<Stack direction="column" spacing="6">
+								<NameInput />
+								<SlugInput />
+								<DescriptionInput />
 
-									<Box py="3">
-										<Divider />
-									</Box>
+								<Box py="3">
+									<Divider />
+								</Box>
 
-									<ButtonGroup>
-										<Button
-											colorScheme="blue"
-											type="submit"
-											isLoading={createCategory.isLoading}>
-											{__('Create', 'masteriyo')}
-										</Button>
-										<Button
-											variant="outline"
-											onClick={() =>
-												history.push(routes.course_categories.list)
-											}>
-											{__('Cancel', 'masteriyo')}
-										</Button>
-									</ButtonGroup>
-								</Stack>
-							</form>
-						</Stack>
-					</Box>
-				</FormProvider>
-			</Container>
-		</Stack>
+								<ButtonGroup>
+									<Button
+										colorScheme="blue"
+										type="submit"
+										isLoading={createCategory.isLoading}>
+										{__('Create', 'masteriyo')}
+									</Button>
+									<Button
+										variant="outline"
+										onClick={() => history.push(routes.course_categories.list)}>
+										{__('Cancel', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
+							</Stack>
+						</form>
+					</Stack>
+				</Box>
+			</FormProvider>
+		</Container>
 	);
 };
 

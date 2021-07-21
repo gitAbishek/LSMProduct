@@ -3,7 +3,6 @@ import {
 	Button,
 	ButtonGroup,
 	Container,
-	Stack,
 	Tab,
 	TabList,
 	TabPanel,
@@ -13,7 +12,6 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import FullScreenLoader from 'Components/layout/FullScreenLoader';
-import Header from 'Components/layout/Header';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -78,70 +76,57 @@ const Settings = () => {
 
 	return (
 		<FormProvider {...methods}>
-			<Stack direction="column" spacing="8" width="full" alignItems="center">
-				<Header hideAddNewCourseBtn={true} hideCoursesMenu={true} />
-				<Container maxW="container.xl">
-					<Box bg="white" p="10" shadow="box">
-						<Tabs>
-							<TabList justifyContent="center" borderBottom="1px">
-								<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Courses', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Quizzes', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Pages', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Payments', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Emails', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Advanced', 'masteriyo')}</Tab>
-							</TabList>
+			<Container maxW="container.xl" marginTop="6">
+				<Box bg="white" p="10" shadow="box">
+					<Tabs>
+						<TabList justifyContent="center" borderBottom="1px">
+							<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
+							<Tab sx={tabStyles}>{__('Courses', 'masteriyo')}</Tab>
+							<Tab sx={tabStyles}>{__('Quizzes', 'masteriyo')}</Tab>
+							<Tab sx={tabStyles}>{__('Pages', 'masteriyo')}</Tab>
+							<Tab sx={tabStyles}>{__('Payments', 'masteriyo')}</Tab>
+							<Tab sx={tabStyles}>{__('Emails', 'masteriyo')}</Tab>
+							<Tab sx={tabStyles}>{__('Advanced', 'masteriyo')}</Tab>
+						</TabList>
 
-							<form onSubmit={methods.handleSubmit(onSubmit)}>
-								<TabPanels>
-									<TabPanel sx={tabPanelStyles}>
-										<GeneralSettings
-											generalData={settingsQuery.data?.general}
-										/>
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<CoursesSettings
-											coursesData={settingsQuery.data?.courses}
-										/>
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<QuizzesSettings
-											quizzesData={settingsQuery.data?.quizzes}
-										/>
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<PagesSettings
-											pageSettingsData={settingsQuery.data?.pages}
-										/>
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<PaymentsSettings
-											paymentsData={settingsQuery.data?.payments}
-										/>
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<EmailSetttings emailData={settingsQuery.data?.emails} />
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<AdvancedSettings
-											advanceData={settingsQuery.data?.advance}
-										/>
-									</TabPanel>
-								</TabPanels>
-								<ButtonGroup>
-									<Button
-										colorScheme="blue"
-										type="submit"
-										isLoading={updateSettings.isLoading}>
-										{__('Save Settings', 'masteriyo')}
-									</Button>
-								</ButtonGroup>
-							</form>
-						</Tabs>
-					</Box>
-				</Container>
-			</Stack>
+						<form onSubmit={methods.handleSubmit(onSubmit)}>
+							<TabPanels>
+								<TabPanel sx={tabPanelStyles}>
+									<GeneralSettings generalData={settingsQuery.data?.general} />
+								</TabPanel>
+								<TabPanel sx={tabPanelStyles}>
+									<CoursesSettings coursesData={settingsQuery.data?.courses} />
+								</TabPanel>
+								<TabPanel sx={tabPanelStyles}>
+									<QuizzesSettings quizzesData={settingsQuery.data?.quizzes} />
+								</TabPanel>
+								<TabPanel sx={tabPanelStyles}>
+									<PagesSettings pageSettingsData={settingsQuery.data?.pages} />
+								</TabPanel>
+								<TabPanel sx={tabPanelStyles}>
+									<PaymentsSettings
+										paymentsData={settingsQuery.data?.payments}
+									/>
+								</TabPanel>
+								<TabPanel sx={tabPanelStyles}>
+									<EmailSetttings emailData={settingsQuery.data?.emails} />
+								</TabPanel>
+								<TabPanel sx={tabPanelStyles}>
+									<AdvancedSettings advanceData={settingsQuery.data?.advance} />
+								</TabPanel>
+							</TabPanels>
+							<ButtonGroup>
+								<Button
+									colorScheme="blue"
+									type="submit"
+									isLoading={updateSettings.isLoading}>
+									{__('Save Settings', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</form>
+					</Tabs>
+				</Box>
+			</Container>
 		</FormProvider>
 	);
 };

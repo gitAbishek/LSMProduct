@@ -46,9 +46,10 @@ import ImageUploadModal from './ImageUploadModal';
 interface Props {
 	name: any;
 	defaultValue?: string;
+	hasImageUpload?: boolean;
 }
 
-const MenuBar = ({ editor }: any) => {
+const MenuBar = ({ editor, hasImageUpload = false }: any) => {
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const buttonStyles = (isActive?: boolean) => {
@@ -270,26 +271,28 @@ const MenuBar = ({ editor }: any) => {
 					onClick={() => editor.chain().focus().setHardBreak().run()}
 				/>
 			</Stack>
-			<Stack direction="row" spacing="1" align="center">
-				<IconButton
-					variant="unstyled"
-					aria-label={__('Hard Break', 'masteriyo')}
-					sx={buttonCommonStyles()}
-					icon={<Icon as={BiImageAdd} />}
-					onClick={onOpen}
-				/>
-				<ImageUploadModal
-					isOpen={isOpen}
-					onClose={onClose}
-					onSucces={onImageUpload}
-				/>
-			</Stack>
+			{hasImageUpload && (
+				<Stack direction="row" spacing="1" align="center">
+					<IconButton
+						variant="unstyled"
+						aria-label={__('Hard Break', 'masteriyo')}
+						sx={buttonCommonStyles()}
+						icon={<Icon as={BiImageAdd} />}
+						onClick={onOpen}
+					/>
+					<ImageUploadModal
+						isOpen={isOpen}
+						onClose={onClose}
+						onSucces={onImageUpload}
+					/>
+				</Stack>
+			)}
 		</Stack>
 	);
 };
 
 const Editor: React.FC<Props> = (props) => {
-	const { name, defaultValue } = props;
+	const { name, defaultValue, hasImageUpload } = props;
 	const { register, setValue } = useFormContext();
 	const ref = React.useRef<any>();
 
@@ -334,7 +337,7 @@ const Editor: React.FC<Props> = (props) => {
 				},
 			}}>
 			<Input type="hidden" {...register(name)} defaultValue={defaultValue} />
-			<MenuBar editor={editor} />
+			<MenuBar editor={editor} hasImageUpload={hasImageUpload} />
 			<Box p="3" ref={ref}>
 				<EditorContent editor={editor} />
 			</Box>

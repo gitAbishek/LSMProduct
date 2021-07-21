@@ -5,15 +5,20 @@ import React from 'react';
 
 interface Props {
 	defaultValue?: string;
+	hasImageUpload?: boolean;
 }
 
 const DescriptionInput: React.FC<Props> = (props) => {
-	const { defaultValue } = props;
+	const { defaultValue, hasImageUpload } = props;
 
 	return (
 		<FormControl>
 			<FormLabel>{__('Description', 'masteriyo')}</FormLabel>
-			<Editor name="description" defaultValue={defaultValue} />
+			<Editor
+				name="description"
+				defaultValue={defaultValue}
+				hasImageUpload={hasImageUpload}
+			/>
 		</FormControl>
 	);
 };

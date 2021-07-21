@@ -117,9 +117,6 @@ msgstr ""
 #: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:95
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:207
 #: assets/js/back-end/screens/course-categories/components/CategoryRow.tsx:154
-#: assets/js/back-end/screens/course-difficulties/AddNewCourseDifficulty.tsx:95
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:208
-#: assets/js/back-end/screens/course-difficulties/components/ListRow.tsx:154
 #: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:90
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:197
 #: assets/js/back-end/screens/course-tags/components/ListRow.tsx:145
@@ -142,13 +139,13 @@ msgid "All Courses"
 msgstr ""
 
 #: assets/js/back-end/components/layout/Header.tsx:77
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:151
+#: assets/js/back-end/screens/courses/AddNewCourse.tsx:154
 msgid "Add New Course"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:102
 #: assets/js/back-end/screens/builder/Builder.tsx:155
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:127
+#: assets/js/back-end/screens/courses/AddNewCourse.tsx:130
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:99
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:96
 #: assets/js/interactive/components/AvatarMenu.tsx:20
@@ -169,13 +166,13 @@ msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:71
 #: assets/js/back-end/screens/builder/Builder.tsx:147
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:119
+#: assets/js/back-end/screens/courses/AddNewCourse.tsx:122
 msgid "Course"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:88
 #: assets/js/back-end/screens/builder/Builder.tsx:151
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:123
+#: assets/js/back-end/screens/courses/AddNewCourse.tsx:126
 msgid "Builder"
 msgstr ""
 
@@ -193,7 +190,6 @@ msgstr ""
 
 #: assets/js/back-end/screens/builder/Builder.tsx:177
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:170
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:171
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:165
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:134
 #: assets/js/back-end/screens/quiz/components/question/Question.tsx:182
@@ -216,7 +212,82 @@ msgstr ""
 msgid "You can keep editing it"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:106
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:104
+msgid "Difficulty"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:107
+msgid "Choose Course Level"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:114
+msgid "Course Duration"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:119
+msgid "Course duration is required."
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:134
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:145
+msgid "Minutes"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:146
+msgid "Maximum Students"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:157
+msgid "No limit"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:160
+msgid "Limit"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:165
+msgid "Number of Students"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:193
+msgid "Curriculum in Single page"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:202
+msgid "Always Visible"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:205
+msgid "Only Visible to Enrollers"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:216
+msgid "Pricing Option"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:222
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:91
+msgid "Free"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:231
+msgid "\tDoes not need registration"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:239
+msgid "\tNeed registration"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:248
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:92
+msgid "Paid"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:255
+msgid "One Time Fee"
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:96
 #: assets/js/back-end/screens/orders/EditOrder.tsx:244
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:66
 #: assets/js/back-end/screens/settings/Settings.tsx:87
@@ -225,98 +296,18 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:107
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:97
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:67
 #: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:65
 msgid "Display"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:108
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:89
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:98
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:90
 msgid "Pricing"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:114
-msgid "Difficulty"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:117
-msgid "Choose Course Level"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:124
-msgid "Course Duration"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:129
-msgid "Course duration is required."
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:144
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:145
-msgid "Minutes"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:156
-msgid "Maximum Students"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:167
-msgid "No limit"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:170
-msgid "Check this option if there is no limit."
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:177
-msgid "Limit"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:183
-msgid "Number of Students"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:212
-msgid "Curriculum in Single page"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:221
-msgid "Always Visible"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:224
-msgid "Only Visible to Enrollers"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:235
-msgid "Pricing Option"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:241
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:90
-msgid "Free"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:250
-msgid "\tDoes not need registration"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:258
-msgid "\tNeed registration"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:267
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:91
-msgid "Paid"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:274
-msgid "One Time Fee"
-msgstr ""
-
 #: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:38
-#: assets/js/back-end/screens/course-difficulties/AddNewCourseDifficulty.tsx:38
 #: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:36
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:52
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:57
@@ -331,7 +322,6 @@ msgid "Add New Category"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:88
-#: assets/js/back-end/screens/course-difficulties/AddNewCourseDifficulty.tsx:88
 #: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:85
 msgid "Create"
 msgstr ""
@@ -344,8 +334,6 @@ msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:43
 #: assets/js/back-end/screens/course-categories/components/NameInput.tsx:23
-#: assets/js/back-end/screens/course-difficulties/AllCourseDifficulties.tsx:43
-#: assets/js/back-end/screens/course-difficulties/components/NameInput.tsx:23
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:41
 #: assets/js/back-end/screens/course-tags/components/NameInput.tsx:23
 msgid "Name"
@@ -353,8 +341,6 @@ msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:44
 #: assets/js/back-end/screens/course-categories/components/DescriptionInput.tsx:15
-#: assets/js/back-end/screens/course-difficulties/AllCourseDifficulties.tsx:44
-#: assets/js/back-end/screens/course-difficulties/components/DescriptionInput.tsx:15
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:42
 #: assets/js/back-end/screens/course-tags/components/DescriptionInput.tsx:15
 #: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:98
@@ -363,21 +349,17 @@ msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:45
 #: assets/js/back-end/screens/course-categories/components/SlugInput.tsx:24
-#: assets/js/back-end/screens/course-difficulties/AllCourseDifficulties.tsx:45
-#: assets/js/back-end/screens/course-difficulties/components/SlugInput.tsx:24
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:43
 #: assets/js/back-end/screens/course-tags/components/SlugInput.tsx:24
 msgid "Slug"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:46
-#: assets/js/back-end/screens/course-difficulties/AllCourseDifficulties.tsx:46
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:44
 msgid "Count"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:47
-#: assets/js/back-end/screens/course-difficulties/AllCourseDifficulties.tsx:47
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:45
 #: assets/js/back-end/screens/courses/AllCourses.tsx:69
 #: assets/js/back-end/screens/orders/AllOrders.tsx:45
@@ -400,8 +382,6 @@ msgstr ""
 
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:213
 #: assets/js/back-end/screens/course-categories/components/CategoryRow.tsx:160
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:214
-#: assets/js/back-end/screens/course-difficulties/components/ListRow.tsx:160
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:203
 #: assets/js/back-end/screens/course-tags/components/ListRow.tsx:151
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:168
@@ -423,7 +403,6 @@ msgid "Category Updated Successfully"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:64
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:64
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:62
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:58
 #: assets/js/back-end/screens/orders/EditOrder.tsx:155
@@ -440,7 +419,6 @@ msgid "Category Deleted Successfully"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:88
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:89
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:85
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:76
 #: assets/js/back-end/screens/orders/EditOrder.tsx:176
@@ -454,7 +432,6 @@ msgid "Failed to delete category"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/components/CategoryRow.tsx:108
-#: assets/js/back-end/screens/course-difficulties/components/ListRow.tsx:108
 #: assets/js/back-end/screens/course-tags/components/ListRow.tsx:102
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:116
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:93
@@ -478,78 +455,15 @@ msgid "You must provide name for the category"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/components/SlugInput.tsx:31
-#: assets/js/back-end/screens/course-difficulties/components/SlugInput.tsx:31
 #: assets/js/back-end/screens/course-tags/components/SlugInput.tsx:31
 msgid "Spaces are not allowed"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/components/SlugInput.tsx:36
-#: assets/js/back-end/screens/course-difficulties/components/SlugInput.tsx:36
 #: assets/js/back-end/screens/course-tags/components/SlugInput.tsx:36
 msgid ""
 "The “slug” is the URL-friendly version of the name. It should be all "
 "lowercase and contains only letters, numbers, and hyphens."
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/AddNewCourseDifficulty.tsx:37
-msgid "Difficulty Added"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/AddNewCourseDifficulty.tsx:47
-msgid "Failed to create difficulty"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/AddNewCourseDifficulty.tsx:69
-#: assets/js/back-end/screens/course-difficulties/components/Header.tsx:19
-msgid "Add New Difficulty"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/AllCourseDifficulties.tsx:36
-msgid "Difficulties"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:136
-msgid "Edit Difficulty"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:193
-#: assets/js/back-end/screens/course-difficulties/components/ListRow.tsx:140
-msgid "Delete Difficulty"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:197
-#: assets/js/back-end/screens/course-difficulties/components/ListRow.tsx:143
-msgid "Are you sure? You can't restore this difficulty"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:63
-msgid "Difficulty Updated Successfully"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:73
-msgid "Failed to update difficulty"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:88
-msgid "Difficulty Deleted Successfully"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/EditCourseDifficulty.tsx:98
-#: assets/js/back-end/screens/course-difficulties/components/ListRow.tsx:56
-msgid "Failed to delete difficulty"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/components/ListRow.tsx:123
-msgid "View Difficulty"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/components/NameInput.tsx:26
-msgid "Your Difficulty Name"
-msgstr ""
-
-#: assets/js/back-end/screens/course-difficulties/components/NameInput.tsx:28
-#: assets/js/back-end/screens/course-difficulties/components/SlugInput.tsx:28
-msgid "You must provide name for the difficulty"
 msgstr ""
 
 #: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:35
@@ -613,11 +527,11 @@ msgstr ""
 msgid "You must provide name for the tag"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:136
+#: assets/js/back-end/screens/courses/AddNewCourse.tsx:139
 msgid "Save as Draft"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:142
+#: assets/js/back-end/screens/courses/AddNewCourse.tsx:145
 msgid "Add Course"
 msgstr ""
 
@@ -663,22 +577,8 @@ msgstr ""
 msgid "Search courses"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:73
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:71
 msgid "All Categories"
-msgstr ""
-
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:92
-msgid "Pricing"
-msgstr ""
-
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:93
-msgid "Free"
-msgstr ""
-
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:94
-msgid "Paid"
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:95
-msgid "Filter"
 msgstr ""
 
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:148
@@ -714,7 +614,7 @@ msgstr ""
 msgid "You must provide name for the course"
 msgstr ""
 
-#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:116
+#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:117
 #: assets/js/back-end/screens/sections/components/Section.tsx:183
 msgid "Add New Lesson"
 msgstr ""
@@ -875,7 +775,7 @@ msgid "Address 2"
 msgstr ""
 
 #: assets/js/back-end/screens/orders/EditOrder.tsx:460
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:83
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:100
 msgid "City"
 msgstr ""
 
@@ -1031,7 +931,7 @@ msgstr ""
 msgid "Questions Display Per Page"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:212
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:213
 msgid "From Global Settings"
 msgstr ""
 
@@ -1053,13 +953,6 @@ msgstr ""
 
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:99
 msgid "Pass Mark"
-msgstr ""
-
-#: assets/js/back-end/screens/quiz/components/answer/types/MultipleChoice.tsx:111
-#: assets/js/back-end/screens/quiz/components/answer/types/SingleChoice.tsx:117
-#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:118
-#: assets/js/back-end/screens/quiz/components/question/Question.tsx:154
-msgid "Duplicate"
 msgstr ""
 
 #: assets/js/back-end/screens/quiz/components/answer/types/MultipleChoice.tsx:111
@@ -1371,78 +1264,94 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:104
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:102
+msgid "Your city where you are residing"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:124
+msgid "Adress Line 1"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:126
+msgid "Your street address"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:142
 msgid "Adress Line 2"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:119
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:144
+msgid "Your street address 2"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:165
 #: assets/js/getting-started/screens/currency/Currency.tsx:57
 msgid "Currency"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:132
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:178
 #: assets/js/getting-started/screens/currency/Currency.tsx:75
 msgid "Currency Position"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:137
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:183
 #: assets/js/getting-started/screens/currency/Currency.tsx:81
 msgid "Left"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:138
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:184
 #: assets/js/getting-started/screens/currency/Currency.tsx:82
 msgid "Right"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:145
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:191
 #: assets/js/getting-started/screens/currency/Currency.tsx:90
 msgid "Thousand Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:155
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:201
 #: assets/js/getting-started/screens/currency/Currency.tsx:124
 msgid "Decimal Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:167
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:213
 msgid "Number of Decimals"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:182
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:228
 msgid "Primary Color"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:193
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:239
 msgid "Theme"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:198
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:244
 msgid "Minimum Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:201
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:247
 msgid "Custom Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:62
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:67
 msgid "Store"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:63
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:68
 msgid "Currency Options"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:64
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:69
 msgid "Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:71
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:77
 msgid "Country"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:94
-msgid "Adress Line 1"
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:79
+msgid "Country where you live"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/PagesSettings.tsx:106

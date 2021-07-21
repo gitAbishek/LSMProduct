@@ -49,7 +49,7 @@ const AllCourses = () => {
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
-			<Header />
+			<Header hideCoursesMenu />
 			<CourseFilter setFilterParams={setFilterParams} />
 			<Container maxW="container.xl">
 				<Box bg="white" p="12" shadow="box" mx="auto">

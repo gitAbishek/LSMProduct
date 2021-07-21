@@ -8,7 +8,7 @@ msgid "404"
 msgstr ""
 
 #: assets/js/back-end/components/common/AddCategoryModal.tsx:43
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:37
+#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:36
 msgid "Category Added"
 msgstr ""
 
@@ -17,7 +17,7 @@ msgid "You can select the new category form dropdown"
 msgstr ""
 
 #: assets/js/back-end/components/common/AddCategoryModal.tsx:57
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:47
+#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:46
 msgid "Failed to create category"
 msgstr ""
 
@@ -29,64 +29,64 @@ msgstr ""
 msgid "Add new Category"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:106
+#: assets/js/back-end/components/common/Editor.tsx:100
+msgid "Bold"
+msgstr ""
+
+#: assets/js/back-end/components/common/Editor.tsx:107
 msgid "Italic"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:114
+#: assets/js/back-end/components/common/Editor.tsx:115
 msgid "Strike"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:125
+#: assets/js/back-end/components/common/Editor.tsx:126
 msgid "Code"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:133
+#: assets/js/back-end/components/common/Editor.tsx:134
 msgid "Paragraph"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:197
+#: assets/js/back-end/components/common/Editor.tsx:198
 msgid "Align Left"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:204
+#: assets/js/back-end/components/common/Editor.tsx:205
 msgid "Align Center"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:211
+#: assets/js/back-end/components/common/Editor.tsx:212
 msgid "Align Right"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:218
+#: assets/js/back-end/components/common/Editor.tsx:219
 msgid "Justify"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:228
+#: assets/js/back-end/components/common/Editor.tsx:229
 msgid "Bullet List"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:235
+#: assets/js/back-end/components/common/Editor.tsx:236
 msgid "Ordered List"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:243
+#: assets/js/back-end/components/common/Editor.tsx:244
 msgid "Code Block"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:251
+#: assets/js/back-end/components/common/Editor.tsx:252
 msgid "Blockquote"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:259
+#: assets/js/back-end/components/common/Editor.tsx:260
 msgid "Horizontal Rule"
 msgstr ""
 
-#: assets/js/back-end/components/common/Editor.tsx:276
+#: assets/js/back-end/components/common/Editor.tsx:278
 msgid "Hard Break"
-msgstr ""
-
-#: assets/js/back-end/components/common/Editor.tsx:99
-msgid "Bold"
 msgstr ""
 
 #: assets/js/back-end/components/common/ImageUpload.tsx:143
@@ -114,16 +114,16 @@ msgid "Add Image"
 msgstr ""
 
 #: assets/js/back-end/components/common/ImageUploadModal.tsx:50
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:95
+#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:90
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:207
 #: assets/js/back-end/screens/course-categories/components/CategoryRow.tsx:154
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:90
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:87
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:197
 #: assets/js/back-end/screens/course-tags/components/ListRow.tsx:145
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:162
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:122
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:191
-#: assets/js/back-end/screens/orders/EditOrder.tsx:586
+#: assets/js/back-end/screens/orders/EditOrder.tsx:570
 #: assets/js/back-end/screens/orders/components/OrderRow.tsx:228
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:142
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:146
@@ -152,19 +152,25 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: assets/js/back-end/screens/404/FourOFour.tsx:28
-msgid "We can not find the page you are looking for"
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:112
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:131
+#: assets/js/back-end/screens/orders/components/OrderRow.tsx:152
+msgid "Preview"
 msgstr ""
 
-#: assets/js/back-end/screens/404/FourOFour.tsx:32
-msgid "Back to Courses"
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:122
+#: assets/js/back-end/screens/builder/Builder.tsx:190
+#: assets/js/back-end/screens/sections/components/EditSection.tsx:91
+msgid "Save"
 msgstr ""
 
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:71
 #: assets/js/back-end/screens/builder/Builder.tsx:147
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:122
 msgid "Course"
 msgstr ""
 
+#: assets/js/back-end/components/layout/HeaderBuilder.tsx:88
 #: assets/js/back-end/screens/builder/Builder.tsx:151
 #: assets/js/back-end/screens/courses/AddNewCourse.tsx:126
 msgid "Builder"
@@ -186,15 +192,12 @@ msgstr ""
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:170
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:165
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:134
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:182
 msgid "Update"
 msgstr ""
 
 #: assets/js/back-end/screens/builder/Builder.tsx:189
 msgid "Publish"
-msgstr ""
-
-#: assets/js/back-end/screens/builder/Builder.tsx:190
-msgid "Save"
 msgstr ""
 
 #: assets/js/back-end/screens/builder/Builder.tsx:199
@@ -226,7 +229,7 @@ msgid "Course duration is required."
 msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:134
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:145
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:146
 msgid "Minutes"
 msgstr ""
 
@@ -285,9 +288,9 @@ msgid "One Time Fee"
 msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:96
-#: assets/js/back-end/screens/orders/EditOrder.tsx:244
+#: assets/js/back-end/screens/orders/EditOrder.tsx:241
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:66
-#: assets/js/back-end/screens/settings/Settings.tsx:87
+#: assets/js/back-end/screens/settings/Settings.tsx:83
 #: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:99
 #: assets/js/back-end/screens/settings/components/QuizzesSettings.tsx:51
 msgid "General"
@@ -304,57 +307,50 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:38
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:36
+#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:37
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:35
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:52
+#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:57
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:66
 msgid " is successfully added."
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:47
-msgid "Failed to create category"
-msgstr ""
-
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:69
+#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:66
+#: assets/js/back-end/screens/course-categories/components/Header.tsx:19
+#: assets/js/back-end/screens/courses/components/Categories.tsx:81
 msgid "Add New Category"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:88
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:85
+#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:85
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:82
 msgid "Create"
-msgstr ""
-
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:95
-#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:207
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:90
-#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:197
-#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:122
-#: assets/js/back-end/screens/lessons/EditLesson.tsx:191
-#: assets/js/back-end/screens/orders/EditOrder.tsx:586
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:146
-msgid "Cancel"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:36
 #: assets/js/back-end/screens/courses/AllCourses.tsx:65
+#: assets/js/back-end/screens/courses/components/Categories.tsx:53
 msgid "Categories"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:43
 #: assets/js/back-end/screens/course-categories/components/NameInput.tsx:23
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:41
+#: assets/js/back-end/screens/course-tags/components/NameInput.tsx:23
 msgid "Name"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:44
-#: assets/js/back-end/screens/course-categories/components/DescriptionInput.tsx:15
+#: assets/js/back-end/screens/course-categories/components/DescriptionInput.tsx:16
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:42
+#: assets/js/back-end/screens/course-tags/components/DescriptionInput.tsx:15
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:98
 msgid "Description"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:45
 #: assets/js/back-end/screens/course-categories/components/SlugInput.tsx:24
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:43
+#: assets/js/back-end/screens/course-tags/components/SlugInput.tsx:24
 msgid "Slug"
 msgstr ""
 
@@ -366,7 +362,7 @@ msgstr ""
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:47
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:45
 #: assets/js/back-end/screens/courses/AllCourses.tsx:69
-#: assets/js/back-end/screens/orders/AllOrders.tsx:45
+#: assets/js/back-end/screens/orders/AllOrders.tsx:42
 msgid "Actions"
 msgstr ""
 
@@ -391,7 +387,7 @@ msgstr ""
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:168
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:96
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:197
-#: assets/js/back-end/screens/orders/EditOrder.tsx:592
+#: assets/js/back-end/screens/orders/EditOrder.tsx:576
 #: assets/js/back-end/screens/orders/components/OrderRow.tsx:234
 #: assets/js/back-end/screens/quiz/components/answer/types/MultipleChoice.tsx:118
 #: assets/js/back-end/screens/quiz/components/answer/types/SingleChoice.tsx:124
@@ -409,7 +405,7 @@ msgstr ""
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:64
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:62
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:58
-#: assets/js/back-end/screens/orders/EditOrder.tsx:155
+#: assets/js/back-end/screens/orders/EditOrder.tsx:154
 #: assets/js/back-end/screens/quiz/components/question/Question.tsx:74
 msgid " has been updated successfully."
 msgstr ""
@@ -425,7 +421,7 @@ msgstr ""
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:88
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:85
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:76
-#: assets/js/back-end/screens/orders/EditOrder.tsx:176
+#: assets/js/back-end/screens/orders/EditOrder.tsx:175
 #: assets/js/back-end/screens/quiz/components/question/Question.tsx:87
 msgid " has been deleted successfully."
 msgstr ""
@@ -470,15 +466,15 @@ msgid ""
 "lowercase and contains only letters, numbers, and hyphens."
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:35
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:34
 msgid "Tag Added"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:45
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:44
 msgid "Failed to create tag"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:66
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:63
 #: assets/js/back-end/screens/course-tags/components/Header.tsx:18
 msgid "Add New Tag"
 msgstr ""
@@ -561,7 +557,7 @@ msgid "Price"
 msgstr ""
 
 #: assets/js/back-end/screens/courses/AllCourses.tsx:68
-#: assets/js/back-end/screens/orders/AllOrders.tsx:42
+#: assets/js/back-end/screens/orders/AllOrders.tsx:39
 msgid "Date"
 msgstr ""
 
@@ -597,7 +593,7 @@ msgstr ""
 msgid "Are you sure? You can't restore this section"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/Description.tsx:15
+#: assets/js/back-end/screens/courses/components/Description.tsx:16
 msgid "Course Description"
 msgstr ""
 
@@ -687,157 +683,157 @@ msgstr ""
 msgid "Please Provide Valid URL"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/AllOrders.tsx:34
+#: assets/js/back-end/screens/orders/AllOrders.tsx:31
 #: assets/js/back-end/screens/settings/components/PagesSettings.tsx:203
 msgid "Orders"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/AllOrders.tsx:41
+#: assets/js/back-end/screens/orders/AllOrders.tsx:38
 #: assets/js/back-end/screens/orders/components/OrderRow.tsx:170
 msgid "Order"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/AllOrders.tsx:43
-#: assets/js/back-end/screens/orders/EditOrder.tsx:258
+#: assets/js/back-end/screens/orders/AllOrders.tsx:40
+#: assets/js/back-end/screens/orders/EditOrder.tsx:255
 msgid "Status"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/AllOrders.tsx:44
+#: assets/js/back-end/screens/orders/AllOrders.tsx:41
 msgid "Total"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:154
+#: assets/js/back-end/screens/orders/EditOrder.tsx:153
 msgid "Order updated successfully"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:175
+#: assets/js/back-end/screens/orders/EditOrder.tsx:174
 msgid "Order Deleted Successfully"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:221
+#: assets/js/back-end/screens/orders/EditOrder.tsx:218
 msgid "Edit Order"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:249
+#: assets/js/back-end/screens/orders/EditOrder.tsx:246
 msgid "Date created"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:262
+#: assets/js/back-end/screens/orders/EditOrder.tsx:259
 msgid "Please select a status"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:278
+#: assets/js/back-end/screens/orders/EditOrder.tsx:275
 msgid "Payment method"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:280
+#: assets/js/back-end/screens/orders/EditOrder.tsx:277
 msgid "Select a payment method"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:283
+#: assets/js/back-end/screens/orders/EditOrder.tsx:280
 msgid "Please select a payment method"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:303
+#: assets/js/back-end/screens/orders/EditOrder.tsx:300
 msgid "Transaction ID"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:316
+#: assets/js/back-end/screens/orders/EditOrder.tsx:313
 msgid "Billing"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:322
+#: assets/js/back-end/screens/orders/EditOrder.tsx:319
 msgid "First Name"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:332
+#: assets/js/back-end/screens/orders/EditOrder.tsx:329
 msgid "Last Name"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:345
+#: assets/js/back-end/screens/orders/EditOrder.tsx:342
 msgid "Company"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:360
+#: assets/js/back-end/screens/orders/EditOrder.tsx:357
 msgid "Country / Region"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:392
+#: assets/js/back-end/screens/orders/EditOrder.tsx:386
 msgid "State / County"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:435
+#: assets/js/back-end/screens/orders/EditOrder.tsx:426
 msgid "Address 1"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:44
+#: assets/js/back-end/screens/orders/EditOrder.tsx:43
 msgid "Pending"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:445
+#: assets/js/back-end/screens/orders/EditOrder.tsx:436
 msgid "Address 2"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:460
+#: assets/js/back-end/screens/orders/EditOrder.tsx:450
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:100
 msgid "City"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:474
+#: assets/js/back-end/screens/orders/EditOrder.tsx:463
 msgid "Postcode / ZIP"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:48
+#: assets/js/back-end/screens/orders/EditOrder.tsx:47
 msgid "Processing"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:493
+#: assets/js/back-end/screens/orders/EditOrder.tsx:479
 msgid "Email address"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:508
+#: assets/js/back-end/screens/orders/EditOrder.tsx:492
 msgid "Phone"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:52
+#: assets/js/back-end/screens/orders/EditOrder.tsx:51
 msgid "On Hold"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:528
+#: assets/js/back-end/screens/orders/EditOrder.tsx:512
 msgid "Items"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:554
+#: assets/js/back-end/screens/orders/EditOrder.tsx:538
 msgid "Update Order"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:56
+#: assets/js/back-end/screens/orders/EditOrder.tsx:55
 #: assets/js/interactive/components/ContentNav.tsx:102
 msgid "Completed"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:574
+#: assets/js/back-end/screens/orders/EditOrder.tsx:558
 #: assets/js/back-end/screens/orders/components/OrderRow.tsx:217
 msgid "Delete Order"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:578
+#: assets/js/back-end/screens/orders/EditOrder.tsx:562
 msgid "Are you sure? You can't restore this order"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:60
+#: assets/js/back-end/screens/orders/EditOrder.tsx:59
 msgid "Cancelled"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:64
+#: assets/js/back-end/screens/orders/EditOrder.tsx:63
 msgid "Refunded"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:68
+#: assets/js/back-end/screens/orders/EditOrder.tsx:67
 msgid "Failed"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:74
+#: assets/js/back-end/screens/orders/EditOrder.tsx:73
 msgid "Paypal"
 msgstr ""
 
@@ -914,36 +910,36 @@ msgstr ""
 msgid "Duration is required"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:151
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:152
 msgid "Duration should be in minutes"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:159
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:160
 msgid "Attempts Allowed"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:165
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:166
 msgid "Attempts allowed is required"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:179
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:181
 msgid "Attempts"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:195
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:197
 #: assets/js/getting-started/screens/quiz/Quiz.tsx:36
 msgid "Questions Display Per Page"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:213
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:215
 msgid "From Global Settings"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:220
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:222
 msgid "Set Individually"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:234
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:236
 msgid "Question display per page is required"
 msgstr ""
 
@@ -1072,39 +1068,39 @@ msgstr ""
 msgid " has been deleted successfully"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:137
+#: assets/js/back-end/screens/settings/Settings.tsx:123
 msgid "Save Settings"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:57
+#: assets/js/back-end/screens/settings/Settings.tsx:55
 msgid "Settings is Updated"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:58
+#: assets/js/back-end/screens/settings/Settings.tsx:56
 msgid "You can keep changing settings"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:88
+#: assets/js/back-end/screens/settings/Settings.tsx:84
 msgid "Courses"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:89
+#: assets/js/back-end/screens/settings/Settings.tsx:85
 msgid "Quizzes"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:90
+#: assets/js/back-end/screens/settings/Settings.tsx:86
 msgid "Pages"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:91
+#: assets/js/back-end/screens/settings/Settings.tsx:87
 msgid "Payments"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:92
+#: assets/js/back-end/screens/settings/Settings.tsx:88
 msgid "Emails"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:93
+#: assets/js/back-end/screens/settings/Settings.tsx:89
 msgid "Advanced"
 msgstr ""
 
@@ -1135,147 +1131,137 @@ msgstr ""
 msgid "Couses Tag Base"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:196
-msgid "Are you sure? You can't restore this category"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:159
+msgid "Course Difficulty base"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:213
-#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:203
-#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:96
-#: assets/js/back-end/screens/lessons/EditLesson.tsx:197
-#: assets/js/back-end/screens/orders/EditOrder.tsx:592
-msgid "Delete"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:171
+msgid "Single Course Permalink"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:63
-msgid "Category Updated Successfully"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:199
+msgid "Single Lesson Permalink"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:64
-#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:62
-#: assets/js/back-end/screens/lessons/EditLesson.tsx:58
-#: assets/js/back-end/screens/orders/EditOrder.tsx:155
-msgid " has been updated successfully."
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:212
+msgid "Single Quiz Permalink"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:73
-msgid "Failed to update category"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:225
+msgid "Single Section Permalink"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:87
-msgid "Category Deleted Successfully"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:241
+msgid "Show Thumbnail"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:88
-#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:85
-#: assets/js/back-end/screens/lessons/EditLesson.tsx:76
-#: assets/js/back-end/screens/orders/EditOrder.tsx:176
-msgid " has been deleted successfully."
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:252
+msgid "Thumbnail Size"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:97
-msgid "Failed to delete category"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:270
+msgid "Enable Review"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:35
-msgid "Tag Added"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:282
+msgid "Enable Questions & Answers"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:45
-msgid "Failed to create tag"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:62
+msgid "Design"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:66
-msgid "Add New Tag"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:63
+msgid "Single Course"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:34
-msgid "Tags"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:64
+msgid "Course Thumbnail"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:132
-msgid "Edit Tag"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:73
+msgid "Show/Hide Search"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:185
-msgid "Delete Tag"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:84
+msgid "Placeholder Image"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:189
-msgid "Are you sure? You can't restore this tag"
+#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:96
+#: assets/js/getting-started/screens/course/Course.tsx:50
+msgid "Course Per Page"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:61
-msgid "Tag Updated Successfully"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:100
+msgid "New Order"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:71
-msgid "Failed to update tag"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:101
+msgid "Processing Order"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:84
-msgid "Tag Deleted Successfully"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:102
+msgid "Completed Order"
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:94
-msgid "Failed to delete tag"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:103
+msgid "Onhold Order"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:139
-msgid "Save as Draft"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:104
+msgid "Cancelled Order"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:145
-msgid "Add Course"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:105
+msgid "Enrolled Course"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:154
-msgid "Add New Course"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:106
+msgid "Completed Course"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:77
-msgid "Added to draft"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:107
+msgid "Become and Instructor"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/AddNewCourse.tsx:78
-msgid "You can continue editing"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:114
+msgid "From Name"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/AllCourses.tsx:64
-msgid "Title"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:125
+msgid "From Email"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/AllCourses.tsx:66
-msgid "Author"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:136
+msgid "Default Content"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/AllCourses.tsx:67
-msgid "Price"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:146
+msgid "Header Image"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/AllCourses.tsx:68
-#: assets/js/back-end/screens/orders/AllOrders.tsx:42
-msgid "Date"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:158
+msgid "Footer Text"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/Name.tsx:23
-msgid "Course Name"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:421
+msgid "Recipients"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/Name.tsx:26
-msgid "Your Course Name"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:580
+msgid "Enable"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/Name.tsx:28
-msgid "You must provide name for the course"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:597
+msgid "Subject"
 msgstr ""
 
-#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:117
-msgid "Add New Lesson"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:607
+msgid "Heading"
 msgstr ""
 
-#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:51
-msgid "Lesson Added"
+#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:618
+msgid "Content"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:102
@@ -1368,153 +1354,152 @@ msgstr ""
 msgid "Country where you live"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:278
-msgid "Payment method"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:106
+msgid "Terms and Coditions Page"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:280
-msgid "Select a payment method"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:118
+msgid "Checkout Page"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:283
-msgid "Please select a payment method"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:121
+msgid "Select a Page"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:303
-msgid "Transaction ID"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:133
+msgid "Pay"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:316
-msgid "Billing"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:143
+msgid "Order Recieved"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:322
-msgid "First Name"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:156
+msgid "Add Payment Method"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:332
-msgid "Last Name"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:169
+msgid "Delete Payment Method"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:345
-msgid "Company"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:184
+msgid "Set Default Payment Method"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:360
-msgid "Country / Region"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:213
+msgid "View Order"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:392
-msgid "State / County"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:224
+msgid "My Courses"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:435
-msgid "Address 1"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:235
+msgid "Edit Account"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:44
-msgid "Pending"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:248
+msgid "Payment Methods"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:445
-msgid "Address 2"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:261
+msgid "Lost Password"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:460
-msgid "City"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:273
+msgid "Logout"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:474
-msgid "Postcode / ZIP"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:74
+msgid "Checkout Endpoints"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:48
-msgid "Processing"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:75
+msgid "Account Endpoints"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:493
-msgid "Email address"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:82
+msgid "My Account Page"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:508
-msgid "Phone"
+#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:94
+msgid "Course List Page"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:52
-msgid "On Hold"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:109
+msgid "Ipn Email Notification"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:528
-msgid "Items"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:127
+msgid "Email"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:554
-msgid "Update Order"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:138
+msgid "Reciever Email"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:56
-msgid "Completed"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:149
+msgid "Indentity Token"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:574
-msgid "Delete Order"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:160
+msgid "Invoice Prefix"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:578
-msgid "Are you sure? You can't restore this order"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:171
+msgid "Payment Actions"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:60
-msgid "Cancelled"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:174
+msgid "Select Payment Action"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:64
-msgid "Refunded"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:178
+msgid "Capture"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:68
-msgid "Failed"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:185
+msgid "Image Url"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:74
-msgid "Paypal"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:214
+msgid "Sandbox"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:65
-msgid "Quiz Added"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:231
+msgid "Sandbox API Username"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:88
-msgid "Edit Quiz:"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:244
+msgid "Sandbox API Password"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:94
-msgid "Info"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:257
+msgid "Sandbox API Signature"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:95
-#: assets/js/interactive/components/Sidebar.tsx:139
-msgid "Questions"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:272
+msgid "Live API Username"
 msgstr ""
 
-#: assets/js/back-end/screens/sections/SectionBuilder.tsx:75
-msgid "Add New Section"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:283
+msgid "Live API Password"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:137
-msgid "Save Settings"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:294
+msgid "Live API Signature"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:57
-msgid "Settings is Updated"
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:70
+msgid "Enabled"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:58
-msgid "You can keep changing settings"
+#: assets/js/back-end/screens/settings/components/QuizzesSettings.tsx:58
+msgid "Question Display Per Page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:88
-msgid "Courses"
+#: assets/js/getting-started/components/Footer.tsx:8
+msgid "MASTERIYO LMS. Designed by ThemeGrill"
 msgstr ""
 
 #: assets/js/getting-started/screens/course/Course.tsx:68
@@ -1533,8 +1518,9 @@ msgstr ""
 msgid "Skip to Dashboard"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:91
-msgid "Payments"
+#: assets/js/getting-started/screens/course/Course.tsx:77
+#: assets/js/getting-started/screens/quiz/Quiz.tsx:67
+msgid "Continue"
 msgstr ""
 
 #: assets/js/getting-started/screens/finish/Finish.tsx:35
@@ -1616,8 +1602,24 @@ msgstr ""
 msgid "Start Now"
 msgstr ""
 
-#: assets/js/getting-started/screens/welcome/Welcome.tsx:52
-msgid "Skip to Dashboard"
+#: assets/js/interactive/components/AvatarMenu.tsx:19
+msgid "My Profile"
+msgstr ""
+
+#: assets/js/interactive/components/AvatarMenu.tsx:21
+msgid "My Wishlist"
+msgstr ""
+
+#: assets/js/interactive/components/AvatarMenu.tsx:23
+msgid "Log Out"
+msgstr ""
+
+#: assets/js/interactive/components/ContentNav.tsx:104
+msgid "Submit Quiz"
+msgstr ""
+
+#: assets/js/interactive/components/ContentNav.tsx:105
+msgid "Mark as Complete"
 msgstr ""
 
 #: assets/js/interactive/components/Header.tsx:119
@@ -1670,6 +1672,14 @@ msgstr ""
 
 #: assets/js/interactive/components/Sidebar.tsx:132
 msgid "Lessons"
+msgstr ""
+
+#: assets/js/interactive/components/qa/QaChat.tsx:121
+msgid "Send"
+msgstr ""
+
+#: assets/js/interactive/components/qa/QaChat.tsx:87
+msgid " answers"
 msgstr ""
 
 #: assets/js/interactive/components/qa/QuestionList.tsx:143

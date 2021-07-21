@@ -11,7 +11,7 @@ interface Props {
 const CategoriesBuilderHeader: React.FC<Props> = (props) => {
 	const { isEmpty } = props;
 	return (
-		<Header hideAddNewCourseBtn>
+		<Header hideAddNewCourseBtn hideCoursesMenu>
 			{!isEmpty && (
 				<ButtonGroup>
 					<RouterLink to={routes.course_categories.add}>

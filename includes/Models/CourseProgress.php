@@ -42,6 +42,16 @@ class CourseProgress extends Model {
 	protected $cache_group = 'course-progresses';
 
 	/**
+	 * Stores data about status changes so relevant hooks can be fired.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var bool|array
+	 */
+	protected $status_transition = false;
+
+
+	/**
 	 * Course progress items (lesson, quiz) etc.
 	 *
 	 * @since 0.1.0
@@ -49,7 +59,6 @@ class CourseProgress extends Model {
 	 * @var array
 	 */
 	protected $items = array();
-
 
 	/**
 	 * Store items which are changed.
@@ -229,15 +238,51 @@ class CourseProgress extends Model {
 	}
 
 	/**
-	 * Set course progress status.
+	 * Set user's course progress status.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param  string $status Course progress status.
+	 * @param string $new_status    Status to change the course_progress to.
+	 * @param string $note          Optional note to add.
+	 * @param bool   $manual_update Is this a manual course_progress status change?.
+	 * @return array
 	 */
-	public function set_status( $status ) {
-		$this->set_prop( 'status', $status );
-		do_action( 'masteriyo_course_progress_status', $status, $this );
+	public function set_status( $new_status, $note = '', $manual_update = false ) {
+		$old_status = $this->get_status();
+
+		// If setting the status, ensure it's set to a valid status.
+		if ( true === $this->object_read ) {
+			// Only allow valid new status.
+			if ( ! in_array( $new_status, $this->get_valid_statuses(), true ) ) {
+				$new_status = 'active';
+			}
+
+			// If the old status is set but unknown (e.g. active) assume its active for action usage.
+			if ( $old_status && ! in_array( $old_status, $this->get_valid_statuses(), true ) ) {
+				$old_status = 'active';
+			}
+		}
+
+		$this->set_prop( 'status', $new_status );
+
+		$result = array(
+			'from' => $old_status,
+			'to'   => $new_status,
+		);
+
+		if ( true === $this->object_read && ! empty( $result['from'] ) && $result['from'] !== $result['to'] ) {
+			$this->status_transition = array(
+				'from'   => ! empty( $this->status_transition['from'] ) ? $this->status_transition['from'] : $result['from'],
+				'to'     => $result['to'],
+				'manual' => (bool) $manual_update,
+			);
+
+			if ( $manual_update ) {
+				do_action( 'masteriyo_course_progress_edit_status', $this->get_id(), $result['to'] );
+			}
+		}
+
+		return $result;
 	}
 
 	/**
@@ -273,6 +318,26 @@ class CourseProgress extends Model {
 		$this->set_date_prop( 'completed_at', $completed_at );
 	}
 
+
+	/*
+	|--------------------------------------------------------------------------
+	| CRUD methods
+	|--------------------------------------------------------------------------
+	|
+	*/
+	/**
+	 * Save data to the database.
+	 *
+	 * @since 0.1.0
+	 * @return int Course progress ID
+	 */
+	public function save() {
+		parent::save();
+		$this->status_transition();
+
+		return $this->get_id();
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Activit items related functions.
@@ -301,5 +366,42 @@ class CourseProgress extends Model {
 	 */
 	public function get_summary( $type = 'all' ) {
 		return $this->repository->get_summary( $this, $type );
+	}
+
+	/**
+	 * Get all valid statuses for this course progress
+	 *
+	 * @since 0.1.0
+	 * @return array Internal status keys e.g. (start, progress, complete)
+	 */
+	protected function get_valid_statuses() {
+		return array_keys( masteriyo_get_user_activity_statuses() );
+	}
+
+	/**
+	 * Handle the status transition.
+	 *
+	 * @since 0.1.0
+	 */
+	protected function status_transition() {
+		$status_transition = $this->status_transition;
+
+		// Reset status transition variable.
+		$this->status_transition = false;
+
+		if ( ! $status_transition ) {
+			return;
+		}
+
+		try {
+			do_action( 'masteriyo_course_progress_status_' . $status_transition['to'], $this->get_id(), $this );
+
+			if ( ! empty( $status_transition['from'] ) ) {
+				do_action( 'masteriyo_course_progress_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
+				do_action( 'masteriyo_course_progress_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
+			}
+		} catch ( \Exception $e ) { // phpcs:ignore
+			// TODO Log the message.
+		}
 	}
 }

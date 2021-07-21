@@ -296,7 +296,7 @@ class UserCourse extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $new_status    Status to change the user_course to. No internal masteriyo- prefix is required.
+	 * @param string $new_status    Status to change the user_course to.
 	 * @param string $note          Optional note to add.
 	 * @param bool   $manual_update Is this a manual user_course status change?.
 	 * @return array
@@ -448,10 +448,10 @@ class UserCourse extends Model {
 	}
 
 	/**
-	 * Get all valid statuses for this user_course
+	 * Get all valid statuses for this user course
 	 *
 	 * @since 0.1.0
-	 * @return array Internal status keys e.g. 'masteriyo-processing'
+	 * @return array Internal status keys e.g. ('active', 'enrolled )
 	 */
 	protected function get_valid_statuses() {
 		return array_keys( masteriyo_get_user_course_statuses() );

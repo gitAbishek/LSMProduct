@@ -7,6 +7,8 @@ const baseConfig = require('./config.base');
 const WebpackBar = require('webpackbar');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
+const BundleAnalyzerPlugin =
+	require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config = {
 	entry: baseConfig.paths.entry,
@@ -35,10 +37,9 @@ const config = {
 			},
 			{
 				test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-				loader: require.resolve('url-loader'),
+				loader: require.resolve('file-loader'),
 				options: {
-					limit: 150000,
-					name: 'static/media/[name].[hash:8].[ext]',
+					outputPath: '../../img',
 				},
 			},
 
@@ -50,9 +51,6 @@ const config = {
 					},
 					{
 						loader: 'css-loader',
-					},
-					{
-						loader: 'postcss-loader',
 					},
 				],
 			},
@@ -66,15 +64,17 @@ const config = {
 
 	plugins: [
 		new MiniCSSExtractPlugin({ filename: 'masteriyo-[name].css' }),
-		new DependencyExtractionWebpackPlugin({ injectPolyfill: true }),
 		new CleanWebpackPlugin(),
 		new Dotenv(),
 		new WebpackBar(),
 		new ForkTsCheckerPlugin({
-			async: false
+			async: false,
 		}),
 		new EslintPlugin({
 			extensions: ['js', 'jsx', 'ts', 'tsx'],
+		}),
+		new DependencyExtractionWebpackPlugin({
+			injectPolyfill: true,
 		}),
 	].filter(Boolean),
 

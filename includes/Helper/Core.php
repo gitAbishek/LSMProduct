@@ -829,7 +829,7 @@ function masteriyo_make_section_to_lessons_dictionary( $course ) {
 		array(
 			'order'     => 'asc',
 			'order_by'  => 'menu_order',
-			'parent_id' => $course->get_id(),
+			'course_id' => $course->get_id(),
 		)
 	);
 

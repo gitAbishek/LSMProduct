@@ -381,6 +381,7 @@ class Masteriyo extends Container {
 
 			if ( empty( $user_courses ) || ! masteriyo_can_start_course( $course_id, $user_id ) ) {
 				wp_safe_redirect( \masteriyo_get_course_list_url(), 307 );
+				exit();
 			}
 
 			$user_course  = is_array( $user_courses ) ? $user_courses[0] : $user_courses;

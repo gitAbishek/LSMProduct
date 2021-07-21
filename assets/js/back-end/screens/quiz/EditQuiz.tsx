@@ -1,11 +1,15 @@
 import {
 	Box,
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbLink,
 	Button,
 	ButtonGroup,
 	Container,
 	Divider,
 	Flex,
 	Heading,
+	Icon,
 	Stack,
 	Tab,
 	TabList,
@@ -18,8 +22,14 @@ import { __ } from '@wordpress/i18n';
 import queryString from 'query-string';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { BiChevronRight } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import {
+	Link as RouterLink,
+	useHistory,
+	useLocation,
+	useParams,
+} from 'react-router-dom';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
@@ -80,6 +90,33 @@ const EditQuiz: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
+					<Breadcrumb
+						fontWeight="medium"
+						fontSize="sm"
+						mb="8"
+						separator={<Icon as={BiChevronRight} color="gray.500" />}>
+						<BreadcrumbItem>
+							<BreadcrumbLink
+								color="gray.500"
+								as={RouterLink}
+								to={routes.courses.list}>
+								Home
+							</BreadcrumbLink>
+						</BreadcrumbItem>
+						<BreadcrumbItem>
+							<BreadcrumbLink
+								color="gray.500"
+								as={RouterLink}
+								to={routes.courses.edit.replace(':courseId', courseId)}>
+								Course
+							</BreadcrumbLink>
+						</BreadcrumbItem>
+						<BreadcrumbItem isCurrentPage>
+							<BreadcrumbLink color="blue.600">
+								{quizQuery?.data?.name}
+							</BreadcrumbLink>
+						</BreadcrumbItem>
+					</Breadcrumb>
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">

@@ -379,6 +379,16 @@ class Masteriyo extends Container {
 
 			$user_courses = $query->get_user_courses();
 
+			$course = masteriyo_get_course( $course_id );
+			if ( empty( $user_courses ) && ! is_null( $course ) && 'open' === $course->get_access_mode() ) {
+				$user_courses = masteriyo( 'user-course' );
+				$user_courses->set_status( 'active' );
+				$user_courses->set_course_id( $course_id );
+				$user_courses->set_user_id( $user_id );
+				$user_courses->save();
+				$user_courses->set_object_read( true );
+			}
+
 			if ( empty( $user_courses ) || ! masteriyo_can_start_course( $course_id, $user_id ) ) {
 				wp_safe_redirect( \masteriyo_get_course_list_url(), 307 );
 				exit();

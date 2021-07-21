@@ -55,13 +55,9 @@ function masteriyo_get_price_excluding_tax( $course, $args = array() ) {
  */
 function masteriyo_can_start_course( $course, $user = null ) {
 	$can_start_course = false;
-
-	if ( is_null( $user ) ) {
-		$user = masteriyo_get_current_user();
-	}
-
-	$course_id = is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ? $course->get_id() : $course;
-	$user_id   = is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ? $user->get_id() : $user;
+	$user             = is_null( $user ) ? masteriyo_get_current_user() : $user;
+	$course_id        = is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ? $course->get_id() : $course;
+	$user_id          = is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ? $user->get_id() : $user;
 
 	$query = new UserCourseQuery(
 		array(
@@ -71,17 +67,16 @@ function masteriyo_can_start_course( $course, $user = null ) {
 		)
 	);
 
-	$user_course = $query->get_user_courses();
-
-	if ( ! empty( $user_course ) ) {
-		$order = $user_course[0]->get_order();
-
-		$can_start_course = 'completed' === $order->get_status();
-	}
-
 	$course = masteriyo_get_course( $course_id );
-	if ( 'open' === $course->get_access_mode() ) {
-		$can_start_course = true;
+
+	if ( ! is_null( $course ) ) {
+		if ( 'open' === $course->get_access_mode() ) {
+			$can_start_course = true;
+		} else {
+			$user_course      = current( $query->get_user_courses() );
+			$order            = $user_course->get_order();
+			$can_start_course = 'completed' === $order->get_status();
+		}
 	}
 
 	return apply_filters( 'masteriyo_can_start_course', $can_start_course, $course, $user );

@@ -115,15 +115,9 @@ const CourseSetting: React.FC<Props> = (props) => {
 										<Controller
 											name="duration"
 											defaultValue={courseData?.duration}
-											rules={{
-												required: __(
-													'Course duration is required.',
-													'masteriyo'
-												),
-											}}
 											render={({ field }) => (
 												<InputGroup>
-													<NumberInput {...field} w="full">
+													<NumberInput {...field} w="full" min={0}>
 														<NumberInputField />
 														<NumberInputStepper>
 															<NumberIncrementStepper />

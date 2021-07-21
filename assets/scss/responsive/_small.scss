@@ -31,6 +31,44 @@
   .mto-course-item,
   .mto-courses--card {
     flex-basis: 100%;
-	width: 256px;
+    width: 256px;
+  }
+
+  // Course list page responsive
+
+  .columns-6 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 14px;
+  }
+
+  .columns-5 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 14px;
+  }
+
+  .columns-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 14px;
+  }
+
+  .columns-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 14px;
+  }
+
+  .columns-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 14px;
+  }
+
+  .columns-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 14px;
   }
 }

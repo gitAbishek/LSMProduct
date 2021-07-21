@@ -35,9 +35,10 @@ const config = {
 			},
 			{
 				test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-				loader: require.resolve('file-loader'),
+				loader: require.resolve('url-loader'),
 				options: {
-					outputPath: '../../img',
+					limit: 150000,
+					name: 'static/media/[name].[hash:8].[ext]',
 				},
 			},
 

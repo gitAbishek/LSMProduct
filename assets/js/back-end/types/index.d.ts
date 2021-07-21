@@ -1,4 +1,4 @@
-export type GeneralSettingsMap = {
+export interface GeneralSettingsMap {
 	country: string;
 	city: string;
 	address_line1: string;
@@ -11,9 +11,9 @@ export type GeneralSettingsMap = {
 	number_of_decimals: number;
 	primary_color: string;
 	theme: string;
-};
+}
 
-export type CoursesSettingsMap = {
+export interface CoursesSettingsMap {
 	enable_search: boolean;
 	placeholder_image: string;
 	per_page: string;
@@ -29,13 +29,13 @@ export type CoursesSettingsMap = {
 	thumbnail_size: string;
 	enable_review: boolean;
 	enable_questions_answers: boolean;
-};
+}
 
-export type QuizzesSettingsMap = {
+export interface QuizzesSettingsMap {
 	questions_display_per_page: number;
-};
+}
 
-export type PagesSettingsMap = {
+export interface PagesSettingsMap {
 	myaccount_page_id: number;
 	course_list_page_id: number;
 	terms_conditions_page_id: number;
@@ -56,9 +56,9 @@ export type PagesSettingsMap = {
 		lost_password: string;
 		logout: string;
 	};
-};
+}
 
-export type PaymentsSettingsMap = {
+export interface PaymentsSettingsMap {
 	paypal: {
 		enable: boolean;
 		title: string;
@@ -79,9 +79,9 @@ export type PaymentsSettingsMap = {
 		live_api_password: string;
 		live_api_signature: string;
 	};
-};
+}
 
-export type EmailsSetttingsMap = {
+export interface EmailsSetttingsMap {
 	general: {
 		from_name: string;
 		from_email: string;
@@ -139,15 +139,15 @@ export type EmailsSetttingsMap = {
 		heading: string;
 		content: string;
 	};
-};
+}
 
-export type AdvancedSettingsMap = {
+export interface AdvancedSettingsMap {
 	template_debug: boolean;
 	debug: boolean;
 	style: string;
-};
+}
 
-export type SetttingsMap = {
+export interface SetttingsMap {
 	general: GeneralSettingsMap;
 	courses: CoursesSettingsMap;
 	quizzes: QuizzesSettingsMap;
@@ -155,4 +155,4 @@ export type SetttingsMap = {
 	payments: PaymentsSettingsMap;
 	emails: EmailsSetttingsMap;
 	advance: AdvancedSettingsMap;
-};
+}

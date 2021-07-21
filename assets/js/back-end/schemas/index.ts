@@ -1,4 +1,4 @@
-export type QuizSchema = {
+export interface QuizSchema {
 	id: number;
 	name: string;
 	slug: string;
@@ -61,24 +61,24 @@ export type QuizSchema = {
 			}
 		];
 	};
-};
+}
 
-export type TrueFalseSchema = {
+export interface TrueFalseSchema {
 	name: string;
 	correct: boolean;
-};
+}
 
-export type SingleChoiceSchema = {
+export interface SingleChoiceSchema {
 	name: string;
 	correct: boolean;
-};
+}
 
-export type MultipleChoiceSchema = {
+export interface MultipleChoiceSchema {
 	name: string;
 	correct: boolean;
-};
+}
 
-export type QuestionSchema = {
+export interface QuestionSchema {
 	id: number;
 	name: string;
 	slug: string;
@@ -118,9 +118,9 @@ export type QuestionSchema = {
 			}
 		];
 	};
-};
+}
 
-export type CourseCategorySchema = {
+export interface CourseCategorySchema {
 	id: number;
 	name: string;
 	slug: string;
@@ -129,27 +129,27 @@ export type CourseCategorySchema = {
 	display: string;
 	term_order: number;
 	count: number;
-};
+}
 
-export type CourseDifficultySchema = {
+export interface CourseDifficultySchema {
 	id: number;
 	name: string;
 	slug: string;
 	description: string;
 	term_order: number;
 	count: number;
-};
+}
 
-export type CourseTagSchema = {
+export interface CourseTagSchema {
 	id: number;
 	name: string;
 	slug: string;
 	description: string;
 	term_order: number;
 	count: number;
-};
+}
 
-export type CourseProgressSchema = {
+export interface CourseProgressSchema {
 	id: number;
 	user_id: number;
 	course_id: number;
@@ -157,9 +157,9 @@ export type CourseProgressSchema = {
 	started_at: string;
 	modified_at: string;
 	completed_at: string;
-};
+}
 
-export type CourseProgressItemSchema = {
+export interface CourseProgressItemSchema {
 	page: number;
 	course_id: number;
 	user_id: number;
@@ -169,9 +169,9 @@ export type CourseProgressItemSchema = {
 	started_at: string;
 	completed_at: string;
 	modified_at: string;
-};
+}
 
-export type CourseQASchema = {
+export interface CourseQASchema {
 	id: number;
 	course_id: number;
 	user_id: number;
@@ -186,9 +186,9 @@ export type CourseQASchema = {
 	parent: number;
 	by_current_user: boolean;
 	sender: string;
-};
+}
 
-export type CourseReviewSchema = {
+export interface CourseReviewSchema {
 	id: number;
 	course_id: number;
 	name: string;
@@ -205,9 +205,9 @@ export type CourseReviewSchema = {
 	type: string;
 	parent: number;
 	author_id: number;
-};
+}
 
-export type CourseSchema = {
+export interface CourseSchema {
 	id: number;
 	name: string;
 	slug: string;
@@ -261,9 +261,9 @@ export type CourseSchema = {
 			}
 		];
 	};
-};
+}
 
-export type FaqSchema = {
+export interface FaqSchema {
 	id: number;
 	title: string;
 	date_created: string;
@@ -273,9 +273,9 @@ export type FaqSchema = {
 	content: string;
 	course_id: number;
 	sort_order: number;
-};
+}
 
-export type LessonSchema = {
+export interface LessonSchema {
 	id: number;
 	name: string;
 	slug: string;
@@ -298,9 +298,9 @@ export type LessonSchema = {
 	video_source: string;
 	video_source_url: string;
 	video_playback_time: number;
-};
+}
 
-export type SectionSchema = {
+export interface SectionSchema {
 	id: number;
 	name: string;
 	date_created: string;
@@ -311,9 +311,9 @@ export type SectionSchema = {
 	parent_id: number;
 	course_id: number;
 	menu_order: number;
-};
+}
 
-export type OrderSchema = {
+export interface OrderSchema {
 	id: number;
 	permalink: string;
 	date_created: string;
@@ -360,9 +360,9 @@ export type OrderSchema = {
 		total: string;
 		price: number;
 	};
-};
+}
 
-export type OrderItemSchema = {
+export interface OrderItemSchema {
 	id: number;
 	order_id: string;
 	course_id: string;
@@ -370,9 +370,9 @@ export type OrderItemSchema = {
 	type: string;
 	quantity: number;
 	total: number;
-};
+}
 
-export type SettingsSchema = {
+export interface SettingsSchema {
 	general: {
 		address_line1: string;
 		address_line2: string;
@@ -513,9 +513,9 @@ export type SettingsSchema = {
 		debug: boolean;
 		style: string;
 	};
-};
+}
 
-export type UserSchema = {
+export interface UserSchema {
 	id: number;
 	username: string;
 	password: string;
@@ -551,9 +551,9 @@ export type UserSchema = {
 		email: string;
 		phone: string;
 	};
-};
+}
 
-export type CourseBuilderSchema = {
+export interface CourseBuilderSchema {
 	contents: {
 		id: number;
 		name: string;
@@ -564,9 +564,9 @@ export type CourseBuilderSchema = {
 	}[];
 	sections: SectionSchema[];
 	section_order: number[];
-};
+}
 
-export type QuizBuilderSchema = {
+export interface QuizBuilderSchema {
 	contents: {
 		id: number;
 		name: string;
@@ -575,4 +575,4 @@ export type QuizBuilderSchema = {
 		menu_order: number;
 		parent_id: number;
 	}[];
-};
+}

@@ -1,15 +1,15 @@
-export type AuthorMap = {
+export interface AuthorMap {
 	id: number;
 	display_name: string;
 	avatar_url: string;
-};
+}
 
-export type CourseLinksMap = {
+export interface CourseLinksMap {
 	self: [{ href: string }];
 	collection: [{ href: string }];
-};
+}
 
-export type CourseDataMap = {
+export interface CourseDataMap {
 	id: number;
 	name: string;
 	slug: string;
@@ -38,4 +38,4 @@ export type CourseDataMap = {
 	access_mode: string;
 	show_curriculum: boolean;
 	_links: CourseLinksMap;
-};
+}

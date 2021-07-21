@@ -7,8 +7,6 @@ const baseConfig = require('./config.base');
 const WebpackBar = require('webpackbar');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
-const BundleAnalyzerPlugin =
-	require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config = {
 	entry: baseConfig.paths.entry,

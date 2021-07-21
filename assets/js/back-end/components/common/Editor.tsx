@@ -49,7 +49,7 @@ interface Props {
 	hasImageUpload?: boolean;
 }
 
-const MenuBar = ({ editor, hasImageUpload = false }: any) => {
+const MenuBar = ({ editor, hasImageUpload }: any) => {
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const buttonStyles = (isActive?: boolean) => {

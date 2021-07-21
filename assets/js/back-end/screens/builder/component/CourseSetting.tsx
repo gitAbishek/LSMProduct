@@ -106,7 +106,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 											defaultValue={courseData?.difficulty?.id}
 											placeholder={__('Choose Course Level', 'masteriyo')}
 											{...register('difficulty.id')}>
-											{renderDifficultiesOption()}
+											{diffultiesQuery.isSuccess && renderDifficultiesOption()}
 										</Select>
 									</FormControl>
 

@@ -17,7 +17,6 @@
     "@wordpress/i18n": "3.18.0",
     "axios": "0.21.1",
     "chakra-ui-steps": "0.2.2",
-    "currency-symbol-map": "5.0.1",
     "focus-visible": "5.2.0",
     "framer-motion": "^4",
     "get-video-id": "3.2.0",

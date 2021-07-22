@@ -14,7 +14,6 @@ import {
 	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import getSymbolFromCurrency from 'currency-symbol-map';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
@@ -23,7 +22,6 @@ import { infoIconStyles } from '../../../config/styles';
 import { CountrySchema } from '../../../schemas';
 import { GeneralSettingsMap } from '../../../types';
 import countries from '../../../utils/countires';
-import { currency } from '../../../utils/currency';
 
 interface Props {
 	generalData?: GeneralSettingsMap;
@@ -167,9 +165,11 @@ const GeneralSettings: React.FC<Props> = (props) => {
 									<Select
 										{...register('general.currency')}
 										defaultValue={generalData?.currency}>
-										{Object.entries(currency).map(([code, name]) => (
-											<option value={code} key={code}>
-												{name} ({getSymbolFromCurrency(code)})
+										{countries.map((country: CountrySchema) => (
+											<option
+												value={country.countryCode}
+												key={country.countryCode}>
+												{country.countryName} ({country.currencyCode})
 											</option>
 										))}
 									</Select>

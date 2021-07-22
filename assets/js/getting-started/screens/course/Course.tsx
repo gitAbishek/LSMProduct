@@ -35,7 +35,9 @@ const Course: React.FC<Props> = (props) => {
 								{__('Course Per Row', 'masteriyo')}
 							</FormLabel>
 							<NumberInput w="md" defaultValue={4}>
-								<NumberInputField {...register('courses.per_row')} />
+								<NumberInputField
+									{...register('course_archive.display.per_row')}
+								/>
 								<NumberInputStepper>
 									<NumberIncrementStepper />
 									<NumberDecrementStepper />
@@ -50,7 +52,9 @@ const Course: React.FC<Props> = (props) => {
 								{__('Course Per Page', 'masteriyo')}
 							</FormLabel>
 							<NumberInput w="md" defaultValue={20}>
-								<NumberInputField {...register('courses.per_page')} />
+								<NumberInputField
+									{...register('course_archive.display.per_page')}
+								/>
 								<NumberInputStepper>
 									<NumberIncrementStepper />
 									<NumberDecrementStepper />

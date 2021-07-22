@@ -76,10 +76,10 @@ const Pages: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Select
 										defaultValue={
-											settingsQuery?.data?.pages?.course_list_page_id
+											settingsQuery?.data?.advance?.pages?.course_list_page_id
 										}
 										w="md"
-										{...register('pages.course_list_page_id')}>
+										{...register('advance.pages.course_list_page_id')}>
 										{renderPagesOption()}
 									</Select>
 								</Flex>
@@ -91,9 +91,11 @@ const Pages: React.FC<Props> = (props) => {
 										<Text fontSize="sm">{__('My Account', 'masteriyo')}</Text>
 									</FormLabel>
 									<Select
-										defaultValue={settingsQuery?.data?.pages?.myaccount_page_id}
+										defaultValue={
+											settingsQuery?.data?.advance?.pages?.myaccount_page_id
+										}
 										w="md"
-										{...register('pages.myaccount_page_id')}>
+										{...register('advance.pages.myaccount_page_id')}>
 										{renderPagesOption()}
 									</Select>
 								</Flex>
@@ -105,9 +107,11 @@ const Pages: React.FC<Props> = (props) => {
 										{__('Checkout', 'masteriyo')}
 									</FormLabel>
 									<Select
-										defaultValue={settingsQuery?.data?.pages?.checkout_page_id}
+										defaultValue={
+											settingsQuery?.data?.advance?.pages?.checkout_page_id
+										}
 										w="md"
-										{...register('pages.checkout_page_id')}>
+										{...register('advance.pages.checkout_page_id')}>
 										{renderPagesOption()}
 									</Select>
 								</Flex>

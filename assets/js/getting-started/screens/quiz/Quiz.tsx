@@ -38,7 +38,7 @@ const Quiz: React.FC<Props> = (props) => {
 							<InputGroup w="md" size="md">
 								<NumberInput w="md" defaultValue={5}>
 									<NumberInputField
-										{...register('quizzes.questions_display_per_page')}
+										{...register('quiz.styling.questions_display_per_page')}
 									/>
 									<NumberInputStepper>
 										<NumberIncrementStepper />

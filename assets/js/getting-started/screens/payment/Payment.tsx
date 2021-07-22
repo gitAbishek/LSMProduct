@@ -37,7 +37,7 @@ const Payment: React.FC<Props> = (props) => {
 	} = useFormContext();
 	// Watch entire currency form.
 	const watchGeneralData = useWatch<SetttingsMap>({
-		name: 'general',
+		name: 'payments.currency',
 		defaultValue: {
 			currency: 'USD',
 			currency_position: 'left',
@@ -58,7 +58,7 @@ const Payment: React.FC<Props> = (props) => {
 							</FormLabel>
 							<Select
 								w="md"
-								{...register('general.currency')}
+								{...register('payments.currency.currency')}
 								defaultValue="USD">
 								{countries.map((country: CountrySchema) => (
 									<option value={country.countryCode} key={country.countryCode}>
@@ -77,14 +77,15 @@ const Payment: React.FC<Props> = (props) => {
 							<Select
 								w="md"
 								defaultValue="left"
-								{...register('general.currency_position')}>
+								{...register('payments.currency.currency_position')}>
 								<option value="left">{__('Left', 'masteriyo')}</option>
 								<option value="right">{__('Right', 'masteriyo')}</option>
 							</Select>
 						</Flex>
 					</FormControl>
 
-					<FormControl isInvalid={!!errors?.general?.thousand_separator}>
+					<FormControl
+						isInvalid={!!errors?.payments?.currency?.thousand_separator}>
 						<Flex justify="space-between" align="center">
 							<FormLabel sx={{ fontWeight: 'bold' }}>
 								{__('Thousand Separator', 'masteriyo')}
@@ -93,7 +94,7 @@ const Payment: React.FC<Props> = (props) => {
 								<Input
 									defaultValue=","
 									w="md"
-									{...register('general.thousand_separator', {
+									{...register('payments.currency.thousand_separator', {
 										required: true,
 										pattern: {
 											value: hasNumber,
@@ -104,11 +105,12 @@ const Payment: React.FC<Props> = (props) => {
 									})}
 								/>
 								<FormErrorMessage>
-									{errors?.general?.thousand_separator &&
-										errors?.general?.thousand_separator.message}
+									{errors?.payments?.currency?.thousand_separator &&
+										errors?.payments?.currency?.thousand_separator.message}
 
-									{errors?.general?.thousand_separator &&
-										errors?.general?.thousand_separator.type === 'validate' &&
+									{errors?.payments?.currency?.thousand_separator &&
+										errors?.payments?.currency?.thousand_separator.type ===
+											'validate' &&
 										__(
 											`Thousand and Decimal separator can't be same.`,
 											'masteriyo'
@@ -118,7 +120,8 @@ const Payment: React.FC<Props> = (props) => {
 						</Flex>
 					</FormControl>
 
-					<FormControl isInvalid={!!errors?.general?.decimal_separator}>
+					<FormControl
+						isInvalid={!!errors?.payments?.currency?.decimal_separator}>
 						<Flex justify="space-between" align="center">
 							<FormLabel sx={{ fontWeight: 'bold' }}>
 								{__('Decimal Separator', 'masteriyo')}
@@ -127,7 +130,7 @@ const Payment: React.FC<Props> = (props) => {
 								<Input
 									defaultValue="."
 									w="md"
-									{...register('general.decimal_separator', {
+									{...register('payments.currency.decimal_separator', {
 										required: true,
 										pattern: {
 											value: hasNumber,
@@ -138,11 +141,12 @@ const Payment: React.FC<Props> = (props) => {
 									})}
 								/>
 								<FormErrorMessage>
-									{errors?.general?.decimal_separator &&
-										errors?.general?.decimal_separator.message}
+									{errors?.payments?.currency?.decimal_separator &&
+										errors?.payments?.currency?.decimal_separator.message}
 
-									{errors?.general?.decimal_separator &&
-										errors?.general?.decimal_separator.type === 'validate' &&
+									{errors?.payments?.currency?.decimal_separator &&
+										errors?.payments?.currency?.decimal_separator.type ===
+											'validate' &&
 										__(
 											`Thousand and Decimal separator can't be same.`,
 											'masteriyo'
@@ -158,7 +162,7 @@ const Payment: React.FC<Props> = (props) => {
 								{__('Number of Decimal', 'masteriyo')}
 							</FormLabel>
 							<Controller
-								name="general.number_of_decimals"
+								name="payments.currency.number_of_decimals"
 								defaultValue="2"
 								render={({ field }) => (
 									<NumberInput {...field} w="md" min={1} max={4}>

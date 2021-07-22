@@ -119,7 +119,9 @@ const Content: React.FC<Props> = (props) => {
 							as={type === 'lesson' ? BiAlignLeft : BiTimer}
 							fontSize="xl"
 						/>
-						<Text fontSize="sm">{name}</Text>
+						<Text fontSize="sm" onClick={onEditPress}>
+							{name}
+						</Text>
 					</Stack>
 					<Flex direction="row">
 						<Button variant="outline" size="sm" onClick={onEditPress} mr="2">

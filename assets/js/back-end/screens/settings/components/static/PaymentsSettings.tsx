@@ -31,7 +31,7 @@ const PaymentsSettings: React.FC = () => {
 
 	const showPayPalOptions = useWatch({
 		name: 'payments.paypal.enable',
-		defaultValue: true,
+		defaultValue: false,
 		control,
 	});
 
@@ -65,7 +65,7 @@ const PaymentsSettings: React.FC = () => {
 				<TabList sx={tabListStyles}>
 					<Tab sx={tabStyles}>{__('Store', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Currency', 'masteriyo')}</Tab>
-					<Tab sx={tabStyles}>{__('Payment Methods', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Standard Paypal', 'masteriyo')}</Tab>
 				</TabList>
 				<TabPanels flex="1">
 					<TabPanel>
@@ -145,7 +145,17 @@ const PaymentsSettings: React.FC = () => {
 						<Stack direction="column" spacing="6">
 							<Stack direction="row" spacing="8">
 								<FormControl>
-									<FormLabel minW="xs">{__('Currency', 'masteriyo')}</FormLabel>
+									<FormLabel minW="xs">
+										{__('Currency', 'masteriyo')}
+										<Tooltip
+											label={__('Select default currency', 'masteriyo')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
 									<Select {...register('general.currency')}>
 										{Object.entries(currency).map(([code, name]) => (
 											<option value={code} key={code}>
@@ -157,6 +167,17 @@ const PaymentsSettings: React.FC = () => {
 								<FormControl>
 									<FormLabel minW="xs">
 										{__('Currency Position', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Specifies where the currency symbol will appear',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Select {...register('general.currency_position')}>
 										<option value="left">{__('Left', 'masteriyo')}</option>
@@ -168,6 +189,17 @@ const PaymentsSettings: React.FC = () => {
 								<FormControl>
 									<FormLabel minW="xs">
 										{__('Thousand Separator', 'masteriyo')}
+										<Tooltip
+											label={__(
+												"It can't be a number and same as decimal separator",
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Input
 										type="text"
@@ -177,6 +209,17 @@ const PaymentsSettings: React.FC = () => {
 								<FormControl>
 									<FormLabel minW="xs">
 										{__('Decimal Separator', 'masteriyo')}
+										<Tooltip
+											label={__(
+												"It can't be a number and same as thousand separator",
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Input
 										type="text"
@@ -188,6 +231,17 @@ const PaymentsSettings: React.FC = () => {
 								<FormControl>
 									<FormLabel minW="xs">
 										{__('Number of Decimals', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Number of digit to show on fractional part',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Input
 										type="text"
@@ -202,12 +256,20 @@ const PaymentsSettings: React.FC = () => {
 							<FormControl>
 								<Stack direction="row">
 									<FormLabel minW="160px">
-										{__('Enabled', 'masteriyo')}
+										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__('Use standard paypal on checkout', 'masteriyo')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="payments.paypal.enable"
 										render={({ field }) => (
-											<Switch {...field} defaultChecked={true} />
+											<Switch {...field} defaultChecked={false} />
 										)}
 									/>
 								</Stack>
@@ -232,6 +294,17 @@ const PaymentsSettings: React.FC = () => {
 										<Stack direction="row">
 											<FormLabel minW="160px">
 												{__('Ipn Email Notification', 'masteriyo')}
+												<Tooltip
+													label={__(
+														'Get instant email notification after payment',
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Controller
 												name="payments.paypal.ipn_email_notifications"
@@ -323,6 +396,17 @@ const PaymentsSettings: React.FC = () => {
 										<Stack direction="row">
 											<FormLabel minW="160px">
 												{__('Sandbox', 'masteriyo')}
+												<Tooltip
+													label={__(
+														'Standard paypal test environment',
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Controller
 												name="payments.paypal.sandbox"

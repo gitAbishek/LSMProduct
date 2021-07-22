@@ -1,6 +1,8 @@
 import {
+	Box,
 	FormControl,
 	FormLabel,
+	Icon,
 	NumberDecrementStepper,
 	NumberIncrementStepper,
 	NumberInput,
@@ -14,10 +16,13 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
+	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import { infoIconStyles } from 'Config/styles';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import { BiInfoCircle } from 'react-icons/bi';
 
 const CourseArchiveSettings: React.FC = () => {
 	const { register, setValue } = useFormContext();
@@ -54,6 +59,17 @@ const CourseArchiveSettings: React.FC = () => {
 								<Stack direction="row" spacing="4">
 									<FormLabel minW="2xs">
 										{__('Show/Hide Search', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Display search on course archive page',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Switch
 										{...register('courses.enable_search')}
@@ -65,6 +81,17 @@ const CourseArchiveSettings: React.FC = () => {
 							<FormControl>
 								<FormLabel minW="2xs">
 									{__('Course Per Page', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Display number of courses per page on course archive',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
 								</FormLabel>
 								<Controller
 									name="courses.per_page"
@@ -83,6 +110,17 @@ const CourseArchiveSettings: React.FC = () => {
 							<FormControl>
 								<FormLabel minW="2xs">
 									{__('Course Per Row', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Display number of courses per row on course archive',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
 								</FormLabel>
 								<Controller
 									name="courses.per_row"
@@ -100,7 +138,15 @@ const CourseArchiveSettings: React.FC = () => {
 
 							<FormControl>
 								<FormLabel minW="2xs">
-									{__('Thumbnail Size', 'masteriyo')}
+									{__('Featured Image Size', 'masteriyo')}
+									<Tooltip
+										label={__('Course featured image size', 'masteriyo')}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
 								</FormLabel>
 								<Select
 									defaultValue="thumbnail"

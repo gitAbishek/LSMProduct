@@ -125,7 +125,7 @@ msgstr ""
 #: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:90
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:207
 #: assets/js/back-end/screens/course-categories/components/CategoryRow.tsx:154
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:90
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:87
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:197
 #: assets/js/back-end/screens/course-tags/components/ListRow.tsx:145
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:168
@@ -235,12 +235,6 @@ msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:128
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:146
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:119
-msgid "Course duration is required."
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:134
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:145
 msgid "Minutes"
 msgstr ""
 
@@ -300,7 +294,7 @@ msgid "One Time Fee"
 msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:96
-#: assets/js/back-end/screens/orders/EditOrder.tsx:244
+#: assets/js/back-end/screens/orders/EditOrder.tsx:241
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:66
 #: assets/js/back-end/screens/settings/Settings.tsx:87
 #: assets/js/back-end/screens/settings/components/EmailSettings.tsx:53
@@ -320,8 +314,8 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:38
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:36
+#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:37
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:35
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:52
 #: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:57
 #: assets/js/back-end/screens/quiz/EditQuiz.tsx:66
@@ -334,8 +328,8 @@ msgstr ""
 msgid "Add New Category"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:88
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:85
+#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:85
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:82
 msgid "Create"
 msgstr ""
 
@@ -353,7 +347,7 @@ msgid "Name"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:44
-#: assets/js/back-end/screens/course-categories/components/DescriptionInput.tsx:15
+#: assets/js/back-end/screens/course-categories/components/DescriptionInput.tsx:16
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:42
 #: assets/js/back-end/screens/course-tags/components/DescriptionInput.tsx:15
 #: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:326
@@ -479,7 +473,7 @@ msgid ""
 "lowercase and contains only letters, numbers, and hyphens."
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:35
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:34
 msgid "Tag Added"
 msgstr ""
 
@@ -944,7 +938,7 @@ msgstr ""
 msgid "Questions Display Per Page"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:213
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:215
 msgid "From Global Settings"
 msgstr ""
 

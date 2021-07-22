@@ -676,8 +676,8 @@ function masteriyo_get_related_courses( $course ) {
 		'tax_query'      => array(
 			'relation' => 'AND',
 			array(
-				'taxonomy' => 'course_tag',
-				'terms'    => $course->get_tag_ids(),
+				'taxonomy' => 'course_cat',
+				'terms'    => $course->get_category_ids(),
 			),
 		),
 		'post__not_in'   => array( $course->get_id() ),

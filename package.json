@@ -101,7 +101,8 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --hot --open",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --config ./webpack/webpack.config.prod.js",
+    "build:analyze": "webpack --mode production --env.addons=bundleanalyzer --config ./webpack/webpack.config.prod.js",
     "dev": "gulp dev",
     "release": "gulp release",
     "lint": "eslint ./assets/js --ext ts,tsx",

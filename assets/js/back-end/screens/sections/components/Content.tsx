@@ -23,6 +23,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import {
 	BiAlignLeft,
 	BiDotsVerticalRounded,
+	BiEdit,
 	BiTimer,
 	BiTrash,
 } from 'react-icons/bi';
@@ -124,7 +125,12 @@ const Content: React.FC<Props> = (props) => {
 						</Text>
 					</Stack>
 					<Flex direction="row">
-						<Button variant="outline" size="sm" onClick={onEditPress} mr="2">
+						<Button
+							variant="outline"
+							size="sm"
+							onClick={onEditPress}
+							mr="2"
+							leftIcon={<BiEdit />}>
 							{__('Edit', 'masteriyo')}
 						</Button>
 						<Menu placement="bottom-end" offset={[0, 0]}>

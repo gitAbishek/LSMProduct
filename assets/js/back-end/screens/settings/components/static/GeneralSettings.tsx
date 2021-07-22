@@ -1,6 +1,8 @@
 import {
+	Box,
 	FormControl,
 	FormLabel,
+	Icon,
 	Select,
 	Stack,
 	Tab,
@@ -8,11 +10,14 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
+	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import ColorInput from 'Components/common/ColorInput';
+import { infoIconStyles } from 'Config/styles';
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { BiInfoCircle } from 'react-icons/bi';
 
 const GeneralSettings: React.FC = () => {
 	const { register } = useFormContext();
@@ -50,13 +55,34 @@ const GeneralSettings: React.FC = () => {
 							<FormControl>
 								<FormLabel minW="xs">
 									{__('Primary Color', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Main color use for overall content',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
 								</FormLabel>
 								<input type="hidden" {...register('general.primary_color')} />
 
 								<ColorInput color={primaryColor} setColor={setPrimaryColor} />
 							</FormControl>
 							<FormControl>
-								<FormLabel minW="xs">{__('Theme', 'masteriyo')}</FormLabel>
+								<FormLabel minW="xs">
+									{__('Theme', 'masteriyo')}
+									<Tooltip
+										label={__('Styling for the theme', 'masteriyo')}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
+								</FormLabel>
 								<Select {...register('general.theme')}>
 									<option value="minimum">
 										{__('Minimum Styling', 'masteriyo')}

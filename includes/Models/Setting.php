@@ -72,90 +72,53 @@ class Setting extends Model {
 	 * @var array
 	 */
 	protected $data = array(
-		'general'  => array(
-			'address_line1'      => '',
-			'address_line2'      => '',
-			'city'               => '',
-			'country'            => '',
-			'postcode'           => '',
-			'currency'           => 'USD',
-			'currency_position'  => 'left',
-			'thousand_separator' => ',',
-			'decimal_separator'  => '.',
-			'number_of_decimals' => 2,
-			'primary_color'      => '',
-			'theme'              => 'minimum',
-		),
-		'courses'  => array(
-			// General.
-			'enable_search'            => true,
-			'placeholder_image'        => 0,
-			'per_page'                 => 12,
-			'per_row'                  => 4,
-
-			// Single Course.
-			'category_base'            => '',
-			'tag_base'                 => '',
-			'difficulty_base'          => '',
-			'single_course_permalink'  => '',
-			'single_lesson_permalink'  => '',
-			'single_quiz_permalink'    => '',
-			'single_section_permalink' => '',
-
-			// Course Thumbnail.
-			'show_thumbnail'           => true,
-			'thumbnail_size'           => 'thumbnail',
-
-			// Display
-			'enable_review'            => true,
-			'enable_questions_answers' => true,
-		),
-		'pages'    => array(
-			// Page Setup.
-			'general'  => array(
-				'myaccount_page_id'        => -1,
-				'course_list_page_id'      => -1,
-				'terms_conditions_page_id' => -1,
-				'checkout_page_id'         => -1,
+		'general'        => array(
+			'styling' => array(
+				'primary_color' => '',
+				'theme'         => 'minimum',
 			),
-
-			// Checkout Endpoints.
-			'checkout' => array(
-				'pay'                        => '',
-				'order_received'             => '',
-				'add_payment_method'         => '',
-				'delete_payment_method'      => '',
-				'set_default_payment_method' => '',
-			),
-			// Account Endpoints.
-			'account'  => array(
-				'dashboard'       => '',
-				'orders'          => '',
-				'view_order'      => '',
-				'order_history'   => '',
-				'my_courses'      => '',
-				'view_myaccount'  => '',
-				'edit_account'    => '',
-				'payment_methods' => '',
-				'lost_password'   => '',
-				'signup'          => '',
-				'logout'          => '',
-			),
-
 		),
-		'quizzes'  => array(
-			'questions_display_per_page' => 5,
+		'course_archive' => array(
+			'display' => array(
+				'enable_search'  => true,
+				'per_page'       => 12,
+				'per_row'        => 4,
+				'thumbnail_size' => 'thumbnail',
+			),
 		),
-		'payments' => array(
-			'offline' => array(
+		'single_course'  => array(
+			'display' => array(
+				'enable_review' => true,
+			),
+		),
+		'learning_page'  => array(
+			'display' => array(
+				'enable_questions_answers' => true,
+			),
+		),
+		'payments'       => array(
+			'store'    => array(
+				'country'       => '',
+				'city'          => '',
+				'address_line1' => '',
+				'address_line2' => '',
+			),
+			'currency' => array(
+				'currency'           => 'USD',
+				'currency_position'  => 'left',
+				'thousand_separator' => ',',
+				'decimal_separator'  => '.',
+				'number_of_decimals' => 2,
+			),
+			'offline'  => array(
 				// Offline payment
 				'enable'       => false,
 				'title'        => 'Offline payment',
 				'description'  => 'Pay with offline payment.',
 				'instructions' => 'Pay with offline payment',
 			),
-			// Standard Paypal
-			'paypal'  => array(
+			'paypal'   => array(
+				// Standard Paypal
 				'enable'                  => false,
 				'title'                   => 'Paypal',
 				'description'             => 'Pay via PayPal; you can pay with your credit card if you don\'t have a PayPal account.',
@@ -177,8 +140,14 @@ class Setting extends Model {
 
 			),
 		),
-		'emails'   => array(
+		'quiz'           => array(
+			'styling' => array(
+				'questions_display_per_page' => 5,
+			),
+		),
+		'emails'         => array(
 			'general'              => array(
+				'enable'          => true,
 				'from_name'       => '',
 				'from_email'      => '',
 				'default_content' => '',
@@ -237,9 +206,48 @@ class Setting extends Model {
 
 			),
 		),
-		'advance'  => array(
-			'template_debug' => false,
-			'debug'          => false,
+		'advance'        => array(
+			'pages'      => array(
+				'course_list_page_id'      => -1,
+				'myaccount_page_id'        => -1,
+				'checkout_page_id'         => -1,
+				'terms_conditions_page_id' => -1,
+			),
+			'permalinks' => array(
+				'category_base'            => '',
+				'tag_base'                 => '',
+				'difficulty_base'          => '',
+				'single_course_permalink'  => '',
+				'single_section_permalink' => '',
+				'single_lesson_permalink'  => '',
+				'single_quiz_permalink'    => '',
+			),
+			// Account endpoints.
+			'account'    => array(
+				'dashboard'       => '',
+				'orders'          => '',
+				'view_order'      => '',
+				'order_history'   => '',
+				'my_courses'      => '',
+				'view_myaccount'  => '',
+				'edit_account'    => '',
+				'payment_methods' => '',
+				'lost_password'   => '',
+				'signup'          => '',
+				'logout'          => '',
+			),
+			// Checkout endpoints.
+			'checkout'   => array(
+				'pay'                        => '',
+				'order_received'             => '',
+				'add_payment_method'         => '',
+				'delete_payment_method'      => '',
+				'set_default_payment_method' => '',
+			),
+			'debug'      => array(
+				'template_debug' => false,
+				'debug'          => false,
+			),
 		),
 	);
 
@@ -343,54 +351,55 @@ class Setting extends Model {
 	 * @since 0.1.0
 	 */
 	protected function init_sanitize_callbacks() {
-		$this->add_sanitize_callback( 'number_of_decimals', 'general', 'currency', 'absint' );
+		$this->add_sanitize_callback( 'number_of_decimals', 'payments', 'currency', 'absint' );
 
-		$this->add_sanitize_callback( 'enable_search', 'courses', 'general', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'placeholder_image', 'courses', 'general', 'absint' );
-		$this->add_sanitize_callback( 'per_page', 'courses', 'general', 'absint' );
-		$this->add_sanitize_callback( 'per_row', 'courses', 'general', 'absint' );
-		$this->add_sanitize_callback( 'show_thumbnail', 'courses', 'general', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'enable_review', 'courses', 'general', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'enable_questions_answers', 'courses', 'general', 'masteriyo_string_to_bool' );
+		$this->add_sanitize_callback( 'enable_search', 'course_archive', 'display', 'masteriyo_string_to_bool' );
+		$this->add_sanitize_callback( 'per_page', 'course_archive', 'display', 'absint' );
+		$this->add_sanitize_callback( 'per_row', 'course_archive', 'display', 'absint' );
 
-		$this->add_sanitize_callback( 'category_base', 'courses', 'single_course', 'sanitize_title' );
-		$this->add_sanitize_callback( 'tag_base', 'courses', 'single_course', 'sanitize_title' );
-		$this->add_sanitize_callback( 'difficulty_base', 'courses', 'single_course', 'sanitize_title' );
-		$this->add_sanitize_callback( 'single_course_permalink', 'courses', 'single_course', 'sanitize_title' );
-		$this->add_sanitize_callback( 'single_lesson_permalink', 'courses', 'single_course', 'sanitize_title' );
-		$this->add_sanitize_callback( 'single_quiz_permalink', 'courses', 'single_course', 'sanitize_title' );
-		$this->add_sanitize_callback( 'single_section_permalink', 'courses', 'single_course', 'sanitize_title' );
+		$this->add_sanitize_callback( 'enable_review', 'single_course', 'display', 'masteriyo_string_to_bool' );
 
-		$this->add_sanitize_callback( 'myaccount_page_id', 'pages', 'general', 'absint' );
-		$this->add_sanitize_callback( 'course_list_page_id', 'pages', 'general', 'absint' );
-		$this->add_sanitize_callback( 'terms_conditions_page_id', 'pages', 'general', 'absint' );
-		$this->add_sanitize_callback( 'checkout_page_id', 'pages', 'general', 'absint' );
+		$this->add_sanitize_callback( 'enable_questions_answers', 'learning_page', 'display', 'masteriyo_string_to_bool' );
 
-		$this->add_sanitize_callback( 'pay', 'pages', 'checkount', 'sanitize_title' );
-		$this->add_sanitize_callback( 'order_received', 'pages', 'checkount', 'sanitize_title' );
-		$this->add_sanitize_callback( 'add_payment_method', 'pages', 'checkount', 'sanitize_title' );
-		$this->add_sanitize_callback( 'delete_payment_method', 'pages', 'checkount', 'sanitize_title' );
-		$this->add_sanitize_callback( 'set_default_payment_method', 'pages', 'checkount', 'sanitize_title' );
+		$this->add_sanitize_callback( 'category_base', 'advance', 'permalinks', 'sanitize_title' );
+		$this->add_sanitize_callback( 'tag_base', 'advance', 'permalinks', 'sanitize_title' );
+		$this->add_sanitize_callback( 'difficulty_base', 'advance', 'permalinks', 'sanitize_title' );
+		$this->add_sanitize_callback( 'single_course_permalink', 'advance', 'permalinks', 'sanitize_title' );
+		$this->add_sanitize_callback( 'single_lesson_permalink', 'advance', 'permalinks', 'sanitize_title' );
+		$this->add_sanitize_callback( 'single_quiz_permalink', 'advance', 'permalinks', 'sanitize_title' );
+		$this->add_sanitize_callback( 'single_section_permalink', 'advance', 'permalinks', 'sanitize_title' );
 
-		$this->add_sanitize_callback( 'dashboard', 'pages', 'account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'orders', 'pages', 'account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'view_order', 'pages', 'account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'order_history', 'pages', 'account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'my_courses', 'pages', 'account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'view_myaccount', 'pages', 'account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'edit_account', 'pages', 'account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'payment_methods', 'pages', 'account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'lost_password', 'pages', 'account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'signup', 'pages', 'account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'logout', 'pages', 'account', 'sanitize_title' );
+		$this->add_sanitize_callback( 'myaccount_page_id', 'advance', 'pages', 'absint' );
+		$this->add_sanitize_callback( 'course_list_page_id', 'advance', 'pages', 'absint' );
+		$this->add_sanitize_callback( 'terms_conditions_page_id', 'advance', 'pages', 'absint' );
+		$this->add_sanitize_callback( 'checkout_page_id', 'advance', 'pages', 'absint' );
 
-		$this->add_sanitize_callback( 'questions_display_per_page', 'quizzes', '', 'absint' );
+		$this->add_sanitize_callback( 'pay', 'advance', 'checkout', 'sanitize_title' );
+		$this->add_sanitize_callback( 'order_received', 'advance', 'checkout', 'sanitize_title' );
+		$this->add_sanitize_callback( 'add_payment_method', 'advance', 'checkout', 'sanitize_title' );
+		$this->add_sanitize_callback( 'delete_payment_method', 'advance', 'checkout', 'sanitize_title' );
+		$this->add_sanitize_callback( 'set_default_payment_method', 'advance', 'checkout', 'sanitize_title' );
+
+		$this->add_sanitize_callback( 'dashboard', 'advance', 'account', 'sanitize_title' );
+		$this->add_sanitize_callback( 'orders', 'advance', 'account', 'sanitize_title' );
+		$this->add_sanitize_callback( 'view_order', 'advance', 'account', 'sanitize_title' );
+		$this->add_sanitize_callback( 'order_history', 'advance', 'account', 'sanitize_title' );
+		$this->add_sanitize_callback( 'my_courses', 'advance', 'account', 'sanitize_title' );
+		$this->add_sanitize_callback( 'view_myaccount', 'advance', 'account', 'sanitize_title' );
+		$this->add_sanitize_callback( 'edit_account', 'advance', 'account', 'sanitize_title' );
+		$this->add_sanitize_callback( 'payment_methods', 'advance', 'account', 'sanitize_title' );
+		$this->add_sanitize_callback( 'lost_password', 'advance', 'account', 'sanitize_title' );
+		$this->add_sanitize_callback( 'signup', 'advance', 'account', 'sanitize_title' );
+		$this->add_sanitize_callback( 'logout', 'advance', 'account', 'sanitize_title' );
+
+		$this->add_sanitize_callback( 'questions_display_per_page', 'quiz', '', 'absint' );
 
 		$this->add_sanitize_callback( 'enable', 'payments', 'offline', 'masteriyo_string_to_bool' );
 		$this->add_sanitize_callback( 'ipn_email_notifications', 'payments', 'paypal', 'masteriyo_string_to_bool' );
 		$this->add_sanitize_callback( 'sandbox', 'payments', 'paypal', 'masteriyo_string_to_bool' );
 		$this->add_sanitize_callback( 'debug', 'payments', 'paypal', 'masteriyo_string_to_bool' );
 
+		$this->add_sanitize_callback( 'enable', 'emails', 'general', 'masteriyo_string_to_bool' );
 		$this->add_sanitize_callback( 'enable', 'emails', 'new_order', 'masteriyo_string_to_bool' );
 		$this->add_sanitize_callback( 'enable', 'emails', 'processing_order', 'masteriyo_string_to_bool' );
 		$this->add_sanitize_callback( 'enable', 'emails', 'completed_order', 'masteriyo_string_to_bool' );

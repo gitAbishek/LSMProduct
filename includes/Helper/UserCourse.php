@@ -7,6 +7,8 @@
  * @package ThemeGrill\Masteriyo\Helper
  */
 
+use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+
 /**
  * Get user course.
  *
@@ -47,4 +49,23 @@ function masteriyo_get_user_course_statuses() {
 	);
 
 	return apply_filters( 'masteriyo_user_course_statuses', $statuses );
+}
+
+/**
+ * Count enrolled users in a course.
+ *
+ * @since 0.1.0
+ *
+ * @return integer
+ */
+function masteriyo_count_enrolled_users( $course_id ) {
+	$query = new UserCourseQuery(
+		array(
+			'course_id' => $course_id,
+			'status'    => 'enrolled',
+		)
+	);
+	$enrolled_users_count = count( $query->get_user_courses() );
+
+	return apply_filters( 'masteriyo_count_enrolled_users', $enrolled_users_count, $course_id, $query );
 }

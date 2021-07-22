@@ -31,7 +31,7 @@ interface Props {
 
 const CourseArchiveSettings: React.FC<Props> = (props) => {
 	const { courseArchiveData } = props;
-	const { register, setValue } = useFormContext();
+	const { register } = useFormContext();
 
 	const tabStyles = {
 		justifyContent: 'flex-start',

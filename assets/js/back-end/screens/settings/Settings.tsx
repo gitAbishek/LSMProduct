@@ -98,28 +98,40 @@ const Settings = () => {
 							<form onSubmit={methods.handleSubmit(onSubmit)}>
 								<TabPanels>
 									<TabPanel sx={tabPanelStyles}>
-										<GeneralSettings />
+										<GeneralSettings
+											generalData={settingsQuery.data?.general}
+										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
-										<CourseArchiveSettings />
+										<CourseArchiveSettings
+											courseArchiveData={settingsQuery.data?.courseArchive}
+										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
-										<SingleCourseSettings />
+										<SingleCourseSettings
+											singleCourseData={settingsQuery.data?.singleCourse}
+										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
-										<LearningPageSettings />
+										<LearningPageSettings
+											learningPageData={settingsQuery.data?.learningPage}
+										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
-										<PaymentsSettings />
+										<PaymentsSettings
+											paymentsData={settingsQuery.data?.payments}
+										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
-										<QuizSettings />
+										<QuizSettings quizData={settingsQuery.data?.quiz} />
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
-										<EmailSetttings />
+										<EmailSetttings emailData={settingsQuery.data?.emails} />
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
-										<AdvancedSettings />
+										<AdvancedSettings
+											advanceData={settingsQuery.data?.advance}
+										/>
 									</TabPanel>
 								</TabPanels>
 								<ButtonGroup>

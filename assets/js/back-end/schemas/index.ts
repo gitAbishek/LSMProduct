@@ -576,3 +576,12 @@ export interface QuizBuilderSchema {
 		parent_id: number;
 	}[];
 }
+
+export interface CountrySchema {
+	countryCode: string;
+	countryName: string;
+	currencyCode: string;
+	population: string;
+	capital: string;
+	continentName: string;
+}

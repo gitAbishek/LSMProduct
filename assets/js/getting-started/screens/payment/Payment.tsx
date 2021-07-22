@@ -17,11 +17,11 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import getSymbolFromCurrency from 'currency-symbol-map';
 import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
+import { CountrySchema } from '../../../back-end/schemas';
 import { SetttingsMap } from '../../../back-end/types';
-import { currency } from '../../../back-end/utils/currency';
+import countries from '../../../back-end/utils/countries';
 import { hasNumber } from '../../../back-end/utils/helper';
 interface Props {
 	isButtonLoading: boolean;
@@ -60,9 +60,9 @@ const Payment: React.FC<Props> = (props) => {
 								w="md"
 								{...register('general.currency')}
 								defaultValue="USD">
-								{Object.entries(currency).map(([code, name]) => (
-									<option value={code} key={code}>
-										{name} ({getSymbolFromCurrency(code)})
+								{countries.map((country: CountrySchema) => (
+									<option value={country.countryCode} key={country.countryCode}>
+										{country.countryName} ({country.currencyCode})
 									</option>
 								))}
 							</Select>

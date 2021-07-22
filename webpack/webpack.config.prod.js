@@ -7,8 +7,10 @@ const baseConfig = require('./config.base');
 const WebpackBar = require('webpackbar');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
+const BundleAnalyzerPlugin =
+	require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const config = {
+module.exports = (env) => ({
 	entry: baseConfig.paths.entry,
 
 	output: {
@@ -57,8 +59,16 @@ const config = {
 	},
 
 	optimization: {
-		minimize: true,
-		minimizer: [new TerserPlugin()],
+		splitChunks: {
+			cacheGroups: {
+				vendor: {
+					name: 'dependencies', // part of the bundle name and
+					// can be used in chunks array of HtmlWebpackPlugin
+					test: /[\\/]node_modules[\\/]/,
+					chunks: 'all',
+				},
+			},
+		},
 	},
 
 	plugins: [
@@ -72,12 +82,9 @@ const config = {
 		new EslintPlugin({
 			extensions: ['js', 'jsx', 'ts', 'tsx'],
 		}),
-		new DependencyExtractionWebpackPlugin({
-			injectPolyfill: true,
-		}),
+		new DependencyExtractionWebpackPlugin({ injectPolyfill: true }),
+		env && env.addons === 'bundleanalyzer' && new BundleAnalyzerPlugin(),
 	].filter(Boolean),
 
 	resolve: baseConfig.resolver,
-};
-
-module.exports = config;
+});

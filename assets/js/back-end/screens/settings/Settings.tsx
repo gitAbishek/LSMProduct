@@ -11,10 +11,10 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import urls from '../../constants/urls';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';

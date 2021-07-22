@@ -224,66 +224,62 @@ msgstr ""
 msgid "Course Duration"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:119
-msgid "Course duration is required."
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:134
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:128
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:146
 msgid "Minutes"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:146
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:140
 msgid "Maximum Students"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:157
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:151
 msgid "No limit"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:160
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:154
 msgid "Limit"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:165
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:159
 msgid "Number of Students"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:193
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:187
 msgid "Curriculum in Single page"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:202
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:196
 msgid "Always Visible"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:205
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:199
 msgid "Only Visible to Enrollers"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:216
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:210
 msgid "Pricing Option"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:222
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:91
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:216
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:92
 msgid "Free"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:231
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:225
 msgid "\tDoes not need registration"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:239
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:233
 msgid "\tNeed registration"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:248
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:92
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:242
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:93
 msgid "Paid"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:255
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:249
 msgid "One Time Fee"
 msgstr ""
 
@@ -303,7 +299,7 @@ msgid "Display"
 msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:98
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:90
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:91
 msgid "Pricing"
 msgstr ""
 
@@ -775,7 +771,7 @@ msgid "Address 2"
 msgstr ""
 
 #: assets/js/back-end/screens/orders/EditOrder.tsx:450
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:100
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:99
 msgid "City"
 msgstr ""
 
@@ -1264,93 +1260,93 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:102
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:101
 msgid "Your city where you are residing"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:124
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:123
 msgid "Adress Line 1"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:126
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:125
 msgid "Your street address"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:142
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:141
 msgid "Adress Line 2"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:144
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:143
 msgid "Your street address 2"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:165
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:164
 #: assets/js/getting-started/screens/payment/Payment.tsx:57
 msgid "Currency"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:178
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:179
 #: assets/js/getting-started/screens/payment/Payment.tsx:75
 msgid "Currency Position"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:183
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:184
 #: assets/js/getting-started/screens/payment/Payment.tsx:81
 msgid "Left"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:184
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:185
 #: assets/js/getting-started/screens/payment/Payment.tsx:82
 msgid "Right"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:191
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:192
 #: assets/js/getting-started/screens/payment/Payment.tsx:90
 msgid "Thousand Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:201
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:202
 #: assets/js/getting-started/screens/payment/Payment.tsx:124
 msgid "Decimal Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:213
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:214
 msgid "Number of Decimals"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:228
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:229
 msgid "Primary Color"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:239
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:240
 msgid "Theme"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:244
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:245
 msgid "Minimum Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:247
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:248
 msgid "Custom Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:67
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:64
 msgid "Store"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:68
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:65
 msgid "Currency Options"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:69
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:66
 msgid "Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:77
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:74
 msgid "Country"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:79
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:76
 msgid "Country where you live"
 msgstr ""
 

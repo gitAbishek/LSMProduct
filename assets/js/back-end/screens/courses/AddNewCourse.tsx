@@ -16,12 +16,12 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import AddCategoryModal from 'Components/common/AddCategoryModal';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation } from 'react-query';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
+import AddCategoryModal from '../../components/common/AddCategoryModal';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';

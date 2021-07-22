@@ -22,7 +22,6 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import AddNewButton from 'Components/common/AddNewButton';
 import React, { useRef, useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import {
@@ -35,6 +34,7 @@ import {
 import { useMutation, useQueryClient } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
 import { Sortable } from '../../../assets/icons';
+import AddNewButton from '../../../components/common/AddNewButton';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';

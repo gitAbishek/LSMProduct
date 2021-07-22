@@ -7,7 +7,7 @@ const WebpackBar = require('webpackbar');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
 
-const config = {
+module.exports = (env) => ({
 	entry: baseConfig.paths.entry,
 
 	output: {
@@ -91,5 +91,4 @@ const config = {
 	devServer: baseConfig.devServer,
 
 	devtool: 'cheap-module-source-map',
-};
-module.exports = config;
+});

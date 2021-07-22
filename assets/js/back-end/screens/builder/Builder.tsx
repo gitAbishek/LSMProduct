@@ -17,14 +17,14 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import AddCategoryModal from 'Components/common/AddCategoryModal';
-import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import queryString from 'query-string';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
+import AddCategoryModal from '../../components/common/AddCategoryModal';
+import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';

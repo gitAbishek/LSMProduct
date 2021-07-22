@@ -20,14 +20,14 @@ import urls from '../../constants/urls';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
 import { deepClean } from '../../utils/utils';
-import AdvancedSettings from './components/static/AdvancedSettings';
-import CourseArchiveSettings from './components/static/CourseArchiveSettings';
-import EmailSetttings from './components/static/EmailSettings';
-import GeneralSettings from './components/static/GeneralSettings';
-import LearningPageSettings from './components/static/LearningPageSettings';
-import PaymentsSettings from './components/static/PaymentsSettings';
-import QuizSettings from './components/static/QuizSettings';
-import SingleCourseSettings from './components/static/SingleCourseSettings';
+import AdvancedSettings from './components/AdvancedSettings';
+import CourseArchiveSettings from './components/CourseArchiveSettings';
+import EmailSetttings from './components/EmailSettings';
+import GeneralSettings from './components/GeneralSettings';
+import LearningPageSettings from './components/LearningPageSettings';
+import PaymentsSettings from './components/PaymentsSettings';
+import QuizSettings from './components/QuizSettings';
+import SingleCourseSettings from './components/SingleCourseSettings';
 
 const Settings = () => {
 	const settingsApi = new API(urls.settings);

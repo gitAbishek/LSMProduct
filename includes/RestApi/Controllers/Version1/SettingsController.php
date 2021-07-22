@@ -882,45 +882,21 @@ class SettingsController extends CrudController {
 	}
 
 	/**
-	 * Get objects.
+	 * Get a collection of posts.
 	 *
-	 * @since  0.1.0
-	 * @param  array $query_args Query args.
-	 * @return array
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_Error|WP_REST_Response
 	 */
-	protected function get_objects( $query_args ) {
-		global $wpdb;
-		$setting = masteriyo( 'setting' );
+	public function get_items( $request ) {
+		$setting      = masteriyo( 'setting' );
+		$setting_repo = masteriyo( 'setting.store' );
 
-		$options = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}options WHERE option_name LIKE %s",
-				esc_sql( 'masteriyo.%' )
-			),
-			ARRAY_A
-		);
+		$setting_repo->read( $setting );
 
-		$total_options = count( $options );
-
-		$setting_data = array();
-		foreach ( $options as $option ) {
-			$option_arr  = explode( '.', $option['option_name'] );
-			$group       = count( $option_arr ) > 2 ? $option_arr[1] : '';
-			$option_name = end( $option_arr );
-
-			$setter_callback = "set_{$group}_{$option_name}"; // E.g "set_general_currency", "set_general_city" etc.
-
-			if ( is_callable( array( $setting, $setter_callback ) ) ) {
-				$setting->{$setter_callback}( $option['option_value'] );
-			}
-		}
-		$setting_data[] = $setting; // Returning setting data as per required structure.
-
-		return array(
-			'objects' => $setting_data,
-			'total'   => (int) $total_options,
-			'pages'   => (int) ceil( $total_options / (int) 1 ),
-		);
+		return $this->prepare_object_for_response( $setting, $request );
 	}
 
 

@@ -21,7 +21,7 @@ import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { CountrySchema } from '../../../back-end/schemas';
 import { SetttingsMap } from '../../../back-end/types';
-import countries from '../../../back-end/utils/countires';
+import countries from '../../../back-end/utils/countries';
 import { hasNumber } from '../../../back-end/utils/helper';
 interface Props {
 	isButtonLoading: boolean;

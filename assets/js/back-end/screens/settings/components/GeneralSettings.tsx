@@ -21,7 +21,7 @@ import ColorInput from '../../../components/common/ColorInput';
 import { infoIconStyles } from '../../../config/styles';
 import { CountrySchema } from '../../../schemas';
 import { GeneralSettingsMap } from '../../../types';
-import countries from '../../../utils/countires';
+import countries from '../../../utils/countries';
 
 interface Props {
 	generalData?: GeneralSettingsMap;

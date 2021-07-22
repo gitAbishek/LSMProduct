@@ -771,7 +771,7 @@ msgid "Address 2"
 msgstr ""
 
 #: assets/js/back-end/screens/orders/EditOrder.tsx:450
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:100
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:99
 msgid "City"
 msgstr ""
 
@@ -1260,93 +1260,93 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:102
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:101
 msgid "Your city where you are residing"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:124
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:123
 msgid "Adress Line 1"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:126
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:125
 msgid "Your street address"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:142
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:141
 msgid "Adress Line 2"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:144
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:143
 msgid "Your street address 2"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:165
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:164
 #: assets/js/getting-started/screens/payment/Payment.tsx:57
 msgid "Currency"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:178
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:179
 #: assets/js/getting-started/screens/payment/Payment.tsx:75
 msgid "Currency Position"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:183
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:184
 #: assets/js/getting-started/screens/payment/Payment.tsx:81
 msgid "Left"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:184
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:185
 #: assets/js/getting-started/screens/payment/Payment.tsx:82
 msgid "Right"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:191
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:192
 #: assets/js/getting-started/screens/payment/Payment.tsx:90
 msgid "Thousand Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:201
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:202
 #: assets/js/getting-started/screens/payment/Payment.tsx:124
 msgid "Decimal Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:213
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:214
 msgid "Number of Decimals"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:228
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:229
 msgid "Primary Color"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:239
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:240
 msgid "Theme"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:244
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:245
 msgid "Minimum Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:247
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:248
 msgid "Custom Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:67
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:64
 msgid "Store"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:68
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:65
 msgid "Currency Options"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:69
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:66
 msgid "Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:77
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:74
 msgid "Country"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:79
+#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:76
 msgid "Country where you live"
 msgstr ""
 

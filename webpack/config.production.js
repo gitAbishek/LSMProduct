@@ -57,6 +57,8 @@ const config = {
 	},
 
 	optimization: {
+		minimize: true,
+		minimizer: [new TerserPlugin()],
 		runtimeChunk: 'single',
 		splitChunks: {
 			chunks: 'all',
@@ -64,17 +66,9 @@ const config = {
 			minSize: 0,
 			cacheGroups: {
 				vendor: {
+					name: 'masteriyo-dependencies',
 					test: /[\\/]node_modules[\\/]/,
-					name(module) {
-						// get the name. E.g. node_modules/packageName/not/this/part.js
-						// or node_modules/packageName
-						const packageName = module.context.match(
-							/[\\/]node_modules[\\/](.*?)([\\/]|$)/
-						)[1];
-
-						// npm package names are URL-safe, but some servers don't like @ symbols
-						return `masteriyo-${packageName.replace('@', '')}`;
-					},
+					chunks: 'all',
 				},
 			},
 		},
@@ -91,6 +85,7 @@ const config = {
 		new EslintPlugin({
 			extensions: ['js', 'jsx', 'ts', 'tsx'],
 		}),
+		new DependencyExtractionWebpackPlugin({ injectPolyfill: true }),
 	].filter(Boolean),
 
 	resolve: baseConfig.resolver,

@@ -224,66 +224,62 @@ msgstr ""
 msgid "Course Duration"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:119
-msgid "Course duration is required."
-msgstr ""
-
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:134
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:128
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:146
 msgid "Minutes"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:146
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:140
 msgid "Maximum Students"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:157
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:151
 msgid "No limit"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:160
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:154
 msgid "Limit"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:165
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:159
 msgid "Number of Students"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:193
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:187
 msgid "Curriculum in Single page"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:202
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:196
 msgid "Always Visible"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:205
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:199
 msgid "Only Visible to Enrollers"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:216
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:210
 msgid "Pricing Option"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:222
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:91
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:216
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:92
 msgid "Free"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:231
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:225
 msgid "\tDoes not need registration"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:239
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:233
 msgid "\tNeed registration"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:248
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:92
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:242
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:93
 msgid "Paid"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:255
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:249
 msgid "One Time Fee"
 msgstr ""
 
@@ -303,7 +299,7 @@ msgid "Display"
 msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:98
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:90
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:91
 msgid "Pricing"
 msgstr ""
 

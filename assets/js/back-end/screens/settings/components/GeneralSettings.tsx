@@ -16,12 +16,13 @@ import {
 import { __ } from '@wordpress/i18n';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import React, { useEffect, useState } from 'react';
-import ReactFlagsSelect from 'react-flags-select';
 import { useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
 import ColorInput from '../../../components/common/ColorInput';
 import { infoIconStyles } from '../../../config/styles';
+import { CountrySchema } from '../../../schemas';
 import { GeneralSettingsMap } from '../../../types';
+import countries from '../../../utils/countires';
 import { currency } from '../../../utils/currency';
 
 interface Props {
@@ -29,7 +30,6 @@ interface Props {
 }
 const GeneralSettings: React.FC<Props> = (props) => {
 	const { generalData } = props;
-	const [country, setCountry] = useState(generalData?.country);
 	const { register, setValue } = useFormContext();
 
 	const [primaryColor, setPrimaryColor] = useState(
@@ -56,9 +56,8 @@ const GeneralSettings: React.FC<Props> = (props) => {
 	};
 
 	useEffect(() => {
-		setValue('general.country', country);
 		setValue('general.primary_color', primaryColor);
-	}, [country, primaryColor, setValue]);
+	}, [primaryColor, setValue]);
 
 	return (
 		<Tabs orientation="vertical">
@@ -85,15 +84,17 @@ const GeneralSettings: React.FC<Props> = (props) => {
 										</Tooltip>
 									</FormLabel>
 
-									<input
-										type="hidden"
+									<Select
 										{...register('general.country')}
-										defaultValue={generalData?.country}
-									/>
-									<ReactFlagsSelect
-										selected={country || ''}
-										onSelect={(code) => setCountry(code)}
-									/>
+										defaultValue={generalData?.country}>
+										{countries.map((country: CountrySchema) => (
+											<option
+												value={country.countryCode}
+												key={country.countryCode}>
+												{country.countryName}
+											</option>
+										))}
+									</Select>
 								</FormControl>
 								<FormControl>
 									<FormLabel>

@@ -254,12 +254,12 @@ class CourseProgress extends Model {
 		if ( true === $this->object_read ) {
 			// Only allow valid new status.
 			if ( ! in_array( $new_status, $this->get_valid_statuses(), true ) ) {
-				$new_status = 'active';
+				$new_status = 'start';
 			}
 
-			// If the old status is set but unknown (e.g. active) assume its active for action usage.
+			// If the old status is set but unknown (e.g. start) assume its start for action usage.
 			if ( $old_status && ! in_array( $old_status, $this->get_valid_statuses(), true ) ) {
-				$old_status = 'active';
+				$old_status = 'start';
 			}
 		}
 
@@ -375,7 +375,7 @@ class CourseProgress extends Model {
 	 * @return array Internal status keys e.g. (start, progress, complete)
 	 */
 	protected function get_valid_statuses() {
-		return array_keys( masteriyo_get_user_activity_statuses() );
+		return masteriyo_get_user_activity_statuses();
 	}
 
 	/**
@@ -399,9 +399,30 @@ class CourseProgress extends Model {
 			if ( ! empty( $status_transition['from'] ) ) {
 				do_action( 'masteriyo_course_progress_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
 				do_action( 'masteriyo_course_progress_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
+				error_log( 'masteriyo_course_progress_status_' . $status_transition['from'] . '_to_' . $status_transition['to'] );
 			}
 		} catch ( \Exception $e ) { // phpcs:ignore
 			// TODO Log the message.
 		}
+	}
+
+	/**
+	 * Get status transition.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	public function get_status_transition() {
+		return $this->status_transition;
+	}
+
+	/**
+	 * Set status transition.
+	 *
+	 * @since 0.1.0
+	 */
+	public function set_status_transition( $status_transition ) {
+		$this->status_transition = $status_transition;
 	}
 }

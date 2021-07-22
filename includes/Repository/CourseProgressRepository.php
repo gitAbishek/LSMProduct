@@ -54,16 +54,16 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			)
 		);
 
-		$progress = $query->get_course_progress();
+		$progress = current( $query->get_course_progress() );
 
 		// There can be only one course progress for each course and user.
 		// So, update and return the previous course progreess if it exits.
-		if ( is_array( $progress ) && ! empty( $progress ) ) {
-			$progress[0]->set_props(
+		if ( is_a( $progress, 'ThemeGrill\Masteriyo\Models\CourseProgress' ) ) {
+			$progress->set_props(
 				array(
 					'user_id'      => $course_progress->get_user_id( 'edit' ),
 					'course_id'    => $course_progress->get_course_id( 'edit' ),
-					'status'       => empty( $course_progress->get_status( 'edit' ) ) ? $progress[0]->get_status( 'edit' ) : $course_progress->get_status( 'edit' ),
+					'status'       => empty( $course_progress->get_status( 'edit' ) ) ? $progress->get_status( 'edit' ) : $course_progress->get_status( 'edit' ),
 					'started_at'   => $course_progress->get_started_at( 'edit' ),
 					'modified_at'  => $course_progress->get_modified_at( 'edit' ),
 					'completed_at' => $course_progress->get_completed_at( 'edit' ),
@@ -71,20 +71,21 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 				)
 			);
 
-			$this->update( $progress[0] );
+			$this->update( $progress );
 
 			$course_progress->set_props(
 				array(
-					'user_id'      => $progress[0]->get_user_id( 'edit' ),
-					'course_id'    => $progress[0]->get_course_id( 'edit' ),
-					'status'       => $progress[0]->get_status( 'edit' ),
-					'started_at'   => $progress[0]->get_started_at( 'edit' ),
-					'modified_at'  => $progress[0]->get_modified_at( 'edit' ),
-					'completed_at' => $progress[0]->get_completed_at( 'edit' ),
+					'user_id'      => $progress->get_user_id( 'edit' ),
+					'course_id'    => $progress->get_course_id( 'edit' ),
+					'status'       => $progress->get_status( 'edit' ),
+					'started_at'   => $progress->get_started_at( 'edit' ),
+					'modified_at'  => $progress->get_modified_at( 'edit' ),
+					'completed_at' => $progress->get_completed_at( 'edit' ),
 				)
 			);
 
-			$course_progress->set_id( $progress[0]->get_id() );
+			$course_progress->set_status_transition( $progress->get_status_transition() );
+			$course_progress->set_id( $progress->get_id() );
 
 			return;
 		}

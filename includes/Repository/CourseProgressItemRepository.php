@@ -57,18 +57,18 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 			)
 		);
 
-		$progress_items = $query->get_course_progress_items();
+		$progress_item = current( $query->get_course_progress_items() );
 
 		// There can be only one course progress for each course and user.
 		// So, update the return the previous course progreess if it exits.
-		if ( is_array( $progress_items ) && ! empty( $progress_items ) ) {
+		if ( is_a( $progress_item, 'ThemeGrill\Masteriyo\Models\CourseProgressItem' ) ) {
 			// Return the stored completed value if it is not set.
 			$completed = $course_progress_item->get_completed( 'edit' );
 			if ( '' === $course_progress_item->get_completed( 'edit' ) ) {
-				$completed = $progress_items[0]->get_completed( 'edit' );
+				$completed = $progress_item->get_completed( 'edit' );
 			}
 
-			$progress_items[0]->set_props(
+			$progress_item->set_props(
 				array(
 					'user_id'      => $course_progress_item->get_user_id( 'edit' ),
 					'item_id'      => $course_progress_item->get_item_id( 'edit' ),
@@ -82,74 +82,75 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 				)
 			);
 
-			$this->update( $progress_items[0] );
+			$this->update( $progress_item );
 
 			$course_progress_item->set_props(
 				array(
-					'user_id'      => $progress_items[0]->get_user_id( 'edit' ),
-					'item_id'      => $progress_items[0]->get_item_id( 'edit' ),
-					'item_type'    => $progress_items[0]->get_item_type( 'edit' ),
-					'progress_id'  => $progress_items[0]->get_progress_id( 'edit' ),
-					'completed'    => $progress_items[0]->get_completed( 'edit' ),
-					'started_at'   => $progress_items[0]->get_started_at( 'edit' ),
-					'modified_at'  => $progress_items[0]->get_modified_at( 'edit' ),
-					'completed_at' => $progress_items[0]->get_completed_at( 'edit' ),
+					'user_id'      => $progress_item->get_user_id( 'edit' ),
+					'item_id'      => $progress_item->get_item_id( 'edit' ),
+					'item_type'    => $progress_item->get_item_type( 'edit' ),
+					'progress_id'  => $progress_item->get_progress_id( 'edit' ),
+					'completed'    => $progress_item->get_completed( 'edit' ),
+					'started_at'   => $progress_item->get_started_at( 'edit' ),
+					'modified_at'  => $progress_item->get_modified_at( 'edit' ),
+					'completed_at' => $progress_item->get_completed_at( 'edit' ),
 
 				)
 			);
 
-			$course_progress_item->set_id( $progress_items[0]->get_id() );
+			$course_progress_item->set_id( $progress_item->get_id() );
 
-			return;
-		}
+		} else {
 
-		if ( ! $course_progress_item->get_started_at( 'edit' ) ) {
-			$course_progress_item->set_started_at( current_time( 'mysql', true ) );
-		}
+			if ( ! $course_progress_item->get_started_at( 'edit' ) ) {
+				$course_progress_item->set_started_at( current_time( 'mysql', true ) );
+			}
 
-		if ( ! $course_progress_item->get_modified_at( 'edit' ) ) {
-			$course_progress_item->set_modified_at( current_time( 'mysql', true ) );
-		}
+			if ( ! $course_progress_item->get_modified_at( 'edit' ) ) {
+				$course_progress_item->set_modified_at( current_time( 'mysql', true ) );
+			}
 
-		if ( $course_progress_item->get_completed( 'edit' ) ) {
-			$course_progress_item->set_completed_at( current_time( 'mysql', true ) );
-		}
+			if ( $course_progress_item->get_completed( 'edit' ) ) {
+				$course_progress_item->set_completed_at( current_time( 'mysql', true ) );
+			}
 
-		$completed_at = $course_progress_item->get_completed_at( 'edit' );
-		$completed_at = is_null( $completed_at ) ? '' : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
+			$completed_at = $course_progress_item->get_completed_at( 'edit' );
+			$completed_at = is_null( $completed_at ) ? '' : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
 
-		$result = $wpdb->insert(
-			$course_progress_item->get_table_name(),
-			apply_filters(
-				'masteriyo_new_course_progress_data',
-				array(
-					'user_id'         => $course_progress_item->get_user_id( 'edit' ),
-					'item_id'         => $course_progress_item->get_item_id( 'edit' ),
-					'parent_id'       => $course_progress_item->get_progress_id( 'edit' ),
-					'activity_type'   => $course_progress_item->get_item_type( 'edit' ),
-					'activity_status' => $course_progress_item->get_completed( 'edit' ) ? 'complete' : 'start',
-					'created_at'      => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_started_at( 'edit' )->getTimestamp() ),
-					'modified_at'     => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_modified_at( 'edit' )->getTimestamp() ),
-					'completed_at'    => $completed_at,
+			$result = $wpdb->insert(
+				$course_progress_item->get_table_name(),
+				apply_filters(
+					'masteriyo_new_course_progress_data',
+					array(
+						'user_id'         => $course_progress_item->get_user_id( 'edit' ),
+						'item_id'         => $course_progress_item->get_item_id( 'edit' ),
+						'parent_id'       => $course_progress_item->get_progress_id( 'edit' ),
+						'activity_type'   => $course_progress_item->get_item_type( 'edit' ),
+						'activity_status' => $course_progress_item->get_completed( 'edit' ) ? 'complete' : 'start',
+						'created_at'      => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_started_at( 'edit' )->getTimestamp() ),
+						'modified_at'     => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_modified_at( 'edit' )->getTimestamp() ),
+						'completed_at'    => $completed_at,
+					),
+					$course_progress_item
 				),
-				$course_progress_item
-			),
-			array( '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
-		);
+				array( '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
+			);
 
-		if ( $result && $wpdb->insert_id ) {
-			$course_progress_item->set_id( $wpdb->insert_id );
-			$this->update_custom_table_meta( $course_progress_item, true );
-			$course_progress_item->save_meta_data();
-			$course_progress_item->apply_changes();
-			$this->clear_cache( $course_progress_item );
+			if ( $result && $wpdb->insert_id ) {
+				$course_progress_item->set_id( $wpdb->insert_id );
+				$this->update_custom_table_meta( $course_progress_item, true );
+				$course_progress_item->save_meta_data();
+				$course_progress_item->apply_changes();
+				$this->clear_cache( $course_progress_item );
 
-			$this->update_course_progress_status( $course_progress_item );
+				$this->update_course_progress_status( $course_progress_item );
 
-			do_action( 'masteriyo_new_course_progress_item', $course_progress_item->get_id(), $course_progress_item );
+				do_action( 'masteriyo_new_course_progress_item', $course_progress_item->get_id(), $course_progress_item );
 
+			}
 		}
 
+		$this->update_course_progress( $course_progress_item );
 	}
 
 	/**
@@ -442,5 +443,46 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 			$course_progress->set_status( $status );
 			$course_progress->save();
 		}
+	}
+
+	/**
+	 * Update course progress status.
+	 *
+	 * If all the course progress items are completed, set the course progress to complete as well.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param CourseProgressItem $course_progress_item Course progress item object.
+	 *
+	 */
+	protected function update_course_progress( $course_progress_item ) {
+		$course_id = $course_progress_item->get_course_id();
+		$user_id   = $course_progress_item->get_user_id();
+
+		$query = new CourseProgressItemQuery(
+			array(
+				'course_id' => $course_id,
+				'user_id'   => $user_id,
+			)
+		);
+
+		$items = $query->get_course_progress_items();
+
+		$completed = array_reduce(
+			$items,
+			function ( $completed, $item ) {
+				return $completed && $item->get_completed();
+			},
+			true
+		);
+
+		$status          = $completed ? 'complete' : 'progress';
+		$course_progress = masteriyo_get_course_progress_by_user_and_course( $user_id, $course_id );
+
+		if ( ! is_wp_error( $course_progress ) ) {
+			$course_progress->set_status( $status );
+			$course_progress->save();
+		}
+
 	}
 }

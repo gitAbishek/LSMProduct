@@ -1,64 +1,58 @@
 export interface GeneralSettingsMap {
-	country: string;
-	city: string;
-	address_line1: string;
-	address_line2: string;
-	postcode: string;
-	currency: string;
-	currency_position: string;
-	thousand_separator: string;
-	decimal_separator: string;
-	number_of_decimals: number;
-	primary_color: string;
-	theme: string;
+	styling: {
+		primary_color: string;
+		theme: string;
+	};
 }
 
-export interface CoursesSettingsMap {
+export interface CourseArchiveSettingsMap {
+	display: {
+		enable_search: boolean;
+		per_page: number;
+		per_row: number;
+		thumbnail_size: string;
+	};
+}
+export interface SingleCourseSettingsMap {
+	display: {
+		enable_review: boolean;
+	};
 	enable_search: boolean;
 	placeholder_image: string;
 	per_page: string;
 	per_row: number;
-	category_base: string;
-	tag_base: string;
-	difficulty_base: string;
-	single_course_permalink: string;
-	single_lesson_permalink: string;
-	single_quiz_permalink: string;
-	single_section_permalink: string;
+
 	show_thumbnail: boolean;
 	thumbnail_size: string;
 	enable_review: boolean;
 	enable_questions_answers: boolean;
 }
 
-export interface QuizzesSettingsMap {
-	questions_display_per_page: number;
-}
-
-export interface PagesSettingsMap {
-	myaccount_page_id: number;
-	course_list_page_id: number;
-	terms_conditions_page_id: number;
-	checkout_page_id: number;
-	checkout_endpoints: {
-		pay: string;
-		order_received: string;
-		add_payment_method: string;
-		delete_payment_method: string;
-		set_default_payment_method: string;
-	};
-	account_endpoints: {
-		orders: string;
-		view_order: string;
-		my_courses: string;
-		edit_account: string;
-		payment_methods: string;
-		lost_password: string;
-		logout: string;
+export interface LearningPageSettingsMap {
+	display: {
+		enable_questions_answers: boolean;
 	};
 }
-
 export interface PaymentsSettingsMap {
+	store: {
+		country: string;
+		city: string;
+		address_line1: string;
+		address_line2: string;
+	};
+	currency: {
+		currency: string;
+		currency_position: string;
+		thousand_separator: string;
+		decimal_separator: string;
+		number_of_decimals: number;
+	};
+	offline: {
+		enable: boolean;
+		title: string;
+		description: string;
+		instructions: string;
+	};
 	paypal: {
 		enable: boolean;
 		title: string;
@@ -81,8 +75,15 @@ export interface PaymentsSettingsMap {
 	};
 }
 
+export interface QuizSettingsMap {
+	styling: {
+		questions_display_per_page: number;
+	};
+}
+
 export interface EmailsSetttingsMap {
 	general: {
+		enable: boolean;
 		from_name: string;
 		from_email: string;
 		default_content: string;
@@ -142,17 +143,50 @@ export interface EmailsSetttingsMap {
 }
 
 export interface AdvancedSettingsMap {
-	template_debug: boolean;
-	debug: boolean;
-	style: string;
+	pages: {
+		course_list_page_id: number;
+		myaccount_page_id: number;
+		checkout_page_id: number;
+		terms_conditions_page_id: number;
+	};
+	permalinks: {
+		category_base: string;
+		tag_base: string;
+		difficulty_base: string;
+		single_course_permalink: string;
+		single_lesson_permalink: string;
+		single_quiz_permalink: string;
+		single_section_permalink: string;
+	};
+	account: {
+		orders: string;
+		view_order: string;
+		my_courses: string;
+		edit_account: string;
+		payment_methods: string;
+		lost_password: string;
+		logout: string;
+	};
+	checkout: {
+		pay: string;
+		order_received: string;
+		add_payment_method: string;
+		delete_payment_method: string;
+		set_default_payment_method: string;
+	};
+	debug: {
+		template_debug: boolean;
+		debug: boolean;
+	};
 }
 
 export interface SetttingsMap {
 	general: GeneralSettingsMap;
-	courses: CoursesSettingsMap;
-	quizzes: QuizzesSettingsMap;
-	pages: PagesSettingsMap;
+	courseArchive: CourseArchiveSettingsMap;
+	singleCourse: SingleCourseSettingsMap;
+	learningPage: LearningPageSettingsMap;
 	payments: PaymentsSettingsMap;
+	quiz: QuizSettingsMap;
 	emails: EmailsSetttingsMap;
 	advance: AdvancedSettingsMap;
 }

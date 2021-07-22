@@ -1,14 +1,11 @@
 import { Center } from '@chakra-ui/layout';
-import { Box } from '@chakra-ui/react';
-import { Spinner } from '@chakra-ui/spinner';
+import { Box, Collapse } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
-import { useMutation, useQueryClient } from 'react-query';
 import AddNewButton from '../../components/common/AddNewButton';
-import urls from '../../constants/urls';
-import API from '../../utils/api';
 import { reorder } from '../../utils/reorder';
+import NewSection from './components/NewSection';
 import Section from './components/Section';
 
 interface Props {
@@ -19,22 +16,7 @@ interface Props {
 
 const SectionBuilder: React.FC<Props> = (props) => {
 	const { courseId, builderData, setBuilderData } = props;
-	const queryClient = useQueryClient();
-	const sectionAPI = new API(urls.sections);
-
-	const addSection = useMutation((data: any) => sectionAPI.store(data), {
-		onSuccess: () => {
-			queryClient.invalidateQueries(`builder${courseId}`);
-		},
-	});
-
-	const onAddNewSectionPress = () => {
-		addSection.mutate({
-			parent_id: courseId,
-			course_id: courseId,
-			name: 'New Section',
-		});
-	};
+	const [isAddNewSection, setIsAddNewSection] = useState(false);
 
 	const onDragEnd = (result: DropResult) => {
 		const orderedData = reorder(result, builderData);
@@ -64,14 +46,16 @@ const SectionBuilder: React.FC<Props> = (props) => {
 							);
 						})}
 
-						{addSection.isLoading && (
-							<Center minH="24">
-								<Spinner />
-							</Center>
-						)}
+						<Collapse in={isAddNewSection} animateOpacity>
+							<NewSection
+								courseId={courseId}
+								onSave={() => setIsAddNewSection(false)}
+								onCancel={() => setIsAddNewSection(false)}
+							/>
+						</Collapse>
 
 						<Center mb="8">
-							<AddNewButton onClick={onAddNewSectionPress}>
+							<AddNewButton onClick={() => setIsAddNewSection(true)}>
 								{__('Add New Section', 'masteriyo')}
 							</AddNewButton>
 						</Center>

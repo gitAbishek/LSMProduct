@@ -1,0 +1,97 @@
+import {
+	Box,
+	Button,
+	ButtonGroup,
+	Divider,
+	FormControl,
+	FormErrorMessage,
+	FormLabel,
+	Input,
+	Stack,
+} from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
+import Editor from 'Components/common/Editor';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from 'react-query';
+import urls from '../../../constants/urls';
+import API from '../../../utils/api';
+
+export interface NewSectionProps {
+	onSave: () => void;
+	onCancel: () => void;
+	courseId: number;
+}
+
+type SectionInputs = {
+	name?: string;
+	description?: string;
+};
+
+const NewSection: React.FC<NewSectionProps> = (props) => {
+	const { onSave, onCancel, courseId } = props;
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<SectionInputs>();
+	const queryClient = useQueryClient();
+	const sectionAPI = new API(urls.sections);
+
+	const addSection = useMutation((data: any) => sectionAPI.store(data), {
+		onSuccess: () => {
+			queryClient.invalidateQueries(`builder${courseId}`);
+			onSave();
+		},
+	});
+
+	const onSubmit = (data: any) => {
+		addSection.mutate({
+			parent_id: courseId,
+			course_id: courseId,
+			...data,
+		});
+	};
+
+	return (
+		<Box p="8" bg="white" shadow="box" mb="8">
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<Stack direction="column" spacing="8">
+					<FormControl isInvalid={!!errors?.name}>
+						<FormLabel htmlFor="">{__('Section Name', 'masteriyo')}</FormLabel>
+						<Input
+							placeholder={__('Your Section Name', 'masteriyo')}
+							{...register('name', {
+								required: __('Section name cannot be empty', 'masteriyo'),
+							})}></Input>
+						{errors?.name && (
+							<FormErrorMessage>{errors?.name.message}</FormErrorMessage>
+						)}
+					</FormControl>
+					<FormControl>
+						<FormLabel htmlFor="">
+							{__('Section Description', 'masteriyo')}
+						</FormLabel>
+						<Editor name="description" />
+					</FormControl>
+					<Divider />
+					<ButtonGroup>
+						<Button
+							colorScheme="blue"
+							type="submit"
+							isLoading={addSection.isLoading}>
+							{__('Add', 'masteriyo')}
+						</Button>
+						{!addSection.isLoading && (
+							<Button variant="outline" onClick={() => onCancel()}>
+								{__('Cancel', 'masteriyo')}
+							</Button>
+						)}
+					</ButtonGroup>
+				</Stack>
+			</form>
+		</Box>
+	);
+};
+
+export default NewSection;

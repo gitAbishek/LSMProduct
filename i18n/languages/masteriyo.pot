@@ -125,7 +125,7 @@ msgstr ""
 #: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:90
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:207
 #: assets/js/back-end/screens/course-categories/components/CategoryRow.tsx:154
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:87
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:90
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:197
 #: assets/js/back-end/screens/course-tags/components/ListRow.tsx:145
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:168
@@ -235,6 +235,12 @@ msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:128
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:146
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:119
+msgid "Course duration is required."
+msgstr ""
+
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:134
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:145
 msgid "Minutes"
 msgstr ""
 
@@ -294,17 +300,18 @@ msgid "One Time Fee"
 msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:96
-#: assets/js/back-end/screens/orders/EditOrder.tsx:241
+#: assets/js/back-end/screens/orders/EditOrder.tsx:244
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:66
-#: assets/js/back-end/screens/settings/Settings.tsx:83
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:99
-#: assets/js/back-end/screens/settings/components/QuizzesSettings.tsx:51
+#: assets/js/back-end/screens/settings/Settings.tsx:87
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:48
+#: assets/js/back-end/screens/settings/components/static/PermalinkSettings.tsx:45
 msgid "General"
 msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:97
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:67
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:65
+#: assets/js/back-end/screens/settings/components/static/CourseArchiveSettings.tsx:53
+#: assets/js/back-end/screens/settings/components/static/SingleCourseSettings.tsx:47
 msgid "Display"
 msgstr ""
 
@@ -313,11 +320,11 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:37
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:35
-#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:53
-#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:59
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:68
+#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:38
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:36
+#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:52
+#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:57
+#: assets/js/back-end/screens/quiz/EditQuiz.tsx:66
 msgid " is successfully added."
 msgstr ""
 
@@ -327,8 +334,8 @@ msgstr ""
 msgid "Add New Category"
 msgstr ""
 
-#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:85
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:82
+#: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:88
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:85
 msgid "Create"
 msgstr ""
 
@@ -346,10 +353,10 @@ msgid "Name"
 msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:44
-#: assets/js/back-end/screens/course-categories/components/DescriptionInput.tsx:16
+#: assets/js/back-end/screens/course-categories/components/DescriptionInput.tsx:15
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:42
 #: assets/js/back-end/screens/course-tags/components/DescriptionInput.tsx:15
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:98
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:294
 msgid "Description"
 msgstr ""
 
@@ -472,7 +479,7 @@ msgid ""
 "lowercase and contains only letters, numbers, and hyphens."
 msgstr ""
 
-#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:34
+#: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:35
 msgid "Tag Added"
 msgstr ""
 
@@ -550,7 +557,7 @@ msgid "You can continue editing"
 msgstr ""
 
 #: assets/js/back-end/screens/courses/AllCourses.tsx:64
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:87
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:287
 msgid "Title"
 msgstr ""
 
@@ -689,8 +696,8 @@ msgstr ""
 msgid "Please Provide Valid URL"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/AllOrders.tsx:31
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:203
+#: assets/js/back-end/screens/orders/AllOrders.tsx:34
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:181
 msgid "Orders"
 msgstr ""
 
@@ -780,8 +787,8 @@ msgstr ""
 msgid "Address 2"
 msgstr ""
 
-#: assets/js/back-end/screens/orders/EditOrder.tsx:450
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:99
+#: assets/js/back-end/screens/orders/EditOrder.tsx:460
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:97
 msgid "City"
 msgstr ""
 
@@ -937,7 +944,7 @@ msgstr ""
 msgid "Questions Display Per Page"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:215
+#: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:213
 msgid "From Global Settings"
 msgstr ""
 
@@ -1082,7 +1089,7 @@ msgstr ""
 msgid " has been deleted successfully"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:123
+#: assets/js/back-end/screens/settings/Settings.tsx:129
 msgid "Save Settings"
 msgstr ""
 
@@ -1094,422 +1101,546 @@ msgstr ""
 msgid "You can keep changing settings"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:84
-msgid "Courses"
+#: assets/js/back-end/screens/settings/Settings.tsx:88
+msgid "Course Archive"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:85
-msgid "Quizzes"
+#: assets/js/back-end/screens/settings/Settings.tsx:89
+msgid "Single Course"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:86
-msgid "Pages"
+#: assets/js/back-end/screens/settings/Settings.tsx:90
+msgid "Permalinks"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/Settings.tsx:87
 msgid "Payments"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:88
+#: assets/js/back-end/screens/settings/Settings.tsx:92
+#: assets/js/interactive/components/Header.tsx:236
+msgid "Quiz"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/Settings.tsx:93
 msgid "Emails"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/Settings.tsx:89
+#: assets/js/back-end/screens/settings/Settings.tsx:94
 msgid "Advanced"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:46
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:73
-msgid "Page Setup"
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:106
+msgid "Course List Page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:55
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:108
+msgid "This set course listing page where the courses are display"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:128
+msgid "Terms and Coditions Page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:130
+msgid ""
+"If you define a \"Terms\" page the customer will be asked if they accept "
+"them when checking out."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:150
+msgid "Checkout Page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:152
+msgid "Page contents: [masteriyo_checkout]"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:164
+msgid "Select a Page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:174
+msgid ""
+"Endpoints are appended to your page URLs to handle specific actions on the "
+"accounts pages. They should be unique and can be left blank to disable the "
+"endpoint."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:183
+msgid "Endpoint for the \"My account - Orders\" page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:202
+msgid "View Order"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:204
+msgid "Endpoint for the \"My account - View order\" page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:223
+msgid "My Courses"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:225
+msgid "Endpoint for the \"My account - My courses\" page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:244
+msgid "Edit Account"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:246
+msgid "Endpoint for the \"My account - Edit Account\" page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:265
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:70
+msgid "Payment Methods"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:267
+msgid "Endpoint for the \"My account - Payment methods\" page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:286
+msgid "Lost Password"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:288
+msgid "Endpoint for the \"My account - Lost password\" page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:307
+msgid "Logout"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:309
+msgid "Endpoint for the triggering logout"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:330
+msgid ""
+"Endpoints are appended to your page URLs to handle specific actions during "
+"the checkout process. They should be unique."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:338
+msgid "Pay"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:340
+msgid "Endpoint for the \"Checkout - Pay\" page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:359
+msgid "Order Recieved"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:361
+msgid "Endpoint for the \"Checkout - Order received\" page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:380
+msgid "Add Payment Method"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:382
+msgid "Endpoint for the \"Checkout - Add payment method\" page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:401
+msgid "Delete Payment Method"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:403
+msgid "Endpoint for the delete payment method page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:424
+msgid "Set Default Payment Method"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:426
+msgid "Endpoint for the setting a default payment method page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:452
 msgid "Template Debug"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:72
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:197
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:454
+msgid "Use for template debugging"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:475
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:390
 msgid "Debug"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:115
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:477
+msgid "Use for plugin debugging"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:74
+msgid "Pages Setup"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:75
+msgid "Account Endpoints"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:76
+msgid "Checkout Endpoints"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:84
+msgid "My Account Page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/AdvancedSettings.tsx:86
+msgid "Page contents: [masteriyo_my_account]"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/CourseArchiveSettings.tsx:112
 #: assets/js/getting-started/screens/course/Course.tsx:35
 msgid "Course Per Row"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:137
-msgid "Course Category Base"
+#: assets/js/back-end/screens/settings/components/static/CourseArchiveSettings.tsx:114
+msgid "Display number of courses per row on course archive"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:148
-msgid "Couses Tag Base"
+#: assets/js/back-end/screens/settings/components/static/CourseArchiveSettings.tsx:141
+msgid "Featured Image Size"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:159
-msgid "Course Difficulty base"
+#: assets/js/back-end/screens/settings/components/static/CourseArchiveSettings.tsx:143
+msgid "Course featured image size"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:171
-msgid "Single Course Permalink"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:199
-msgid "Single Lesson Permalink"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:212
-msgid "Single Quiz Permalink"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:225
-msgid "Single Section Permalink"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:241
-msgid "Show Thumbnail"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:252
-msgid "Thumbnail Size"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:270
-msgid "Enable Review"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:282
-msgid "Enable Questions & Answers"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:62
-msgid "Design"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:63
-msgid "Single Course"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:64
-msgid "Course Thumbnail"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:73
+#: assets/js/back-end/screens/settings/components/static/CourseArchiveSettings.tsx:61
 msgid "Show/Hide Search"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:84
-msgid "Placeholder Image"
+#: assets/js/back-end/screens/settings/components/static/CourseArchiveSettings.tsx:63
+msgid "Display search on course archive page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/CoursesSettings.tsx:96
+#: assets/js/back-end/screens/settings/components/static/CourseArchiveSettings.tsx:83
 #: assets/js/getting-started/screens/course/Course.tsx:50
 msgid "Course Per Page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:100
-msgid "New Order"
+#: assets/js/back-end/screens/settings/components/static/CourseArchiveSettings.tsx:85
+msgid "Display number of courses per page on course archive"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:101
-msgid "Processing Order"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:102
-msgid "Completed Order"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:103
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:104
 msgid "Onhold Order"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:104
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:106
+msgid ""
+"This is an order notification sent to students containing order details "
+"after an order is placed on-hold."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:118
 msgid "Cancelled Order"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:105
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:120
+msgid ""
+"Cancelled order emails are sent to students when orders have been marked "
+"cancelled (if they were previously processing or on-hold)."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:132
 msgid "Enrolled Course"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:106
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:134
+msgid "Email sent to students when they have enrolled course."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:146
 msgid "Completed Course"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:107
-msgid "Become and Instructor"
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:148
+msgid "Email sent to students when they marked course is completed."
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:114
-msgid "From Name"
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:160
+msgid "Become an Instructor"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:125
-msgid "From Email"
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:162
+msgid "Email sent to user when they requested to become an instructor"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:136
-msgid "Default Content"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:146
-msgid "Header Image"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:158
-msgid "Footer Text"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:421
-msgid "Recipients"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:580
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:323
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:265
 msgid "Enable"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:597
-msgid "Subject"
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:50
+msgid ""
+"Users \"new account\" emails are sent to the user when a user signs up via "
+"checkout or account pages."
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:607
-msgid "Heading"
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:62
+msgid "New Order"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/EmailSetttings.tsx:618
-msgid "Content"
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:64
+msgid "New order emails are sent to students when a new order is received."
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:101
-msgid "Your city where you are residing"
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:76
+msgid "Processing Order"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:123
-msgid "Adress Line 1"
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:78
+msgid ""
+"This is an order notification sent to students containing order details "
+"after payment."
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:125
-msgid "Your street address"
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:90
+msgid "Completed Order"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:141
-msgid "Adress Line 2"
+#: assets/js/back-end/screens/settings/components/static/EmailSettings.tsx:92
+msgid ""
+"Order complete emails are sent to students when their orders are marked "
+"completed."
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:143
-msgid "Your street address 2"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:164
-#: assets/js/getting-started/screens/payment/Payment.tsx:57
-msgid "Currency"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:179
-#: assets/js/getting-started/screens/payment/Payment.tsx:75
-msgid "Currency Position"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:184
-#: assets/js/getting-started/screens/payment/Payment.tsx:81
-msgid "Left"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:185
-#: assets/js/getting-started/screens/payment/Payment.tsx:82
-msgid "Right"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:192
-#: assets/js/getting-started/screens/payment/Payment.tsx:90
-msgid "Thousand Separator"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:202
-#: assets/js/getting-started/screens/payment/Payment.tsx:124
-msgid "Decimal Separator"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:214
-msgid "Number of Decimals"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:229
-msgid "Primary Color"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:240
-msgid "Theme"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:245
-msgid "Minimum Styling"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:248
-msgid "Custom Styling"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:64
-msgid "Store"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:65
-msgid "Currency Options"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:66
+#: assets/js/back-end/screens/settings/components/static/GeneralSettings.tsx:50
+#: assets/js/back-end/screens/settings/components/static/QuizSettings.tsx:49
 msgid "Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:74
-msgid "Country"
+#: assets/js/back-end/screens/settings/components/static/GeneralSettings.tsx:57
+msgid "Primary Color"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/GeneralSettings.tsx:76
-msgid "Country where you live"
+#: assets/js/back-end/screens/settings/components/static/GeneralSettings.tsx:59
+msgid "Main color use for overall content"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:106
-msgid "Terms and Coditions Page"
+#: assets/js/back-end/screens/settings/components/static/GeneralSettings.tsx:76
+msgid "Theme"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:118
-msgid "Checkout Page"
+#: assets/js/back-end/screens/settings/components/static/GeneralSettings.tsx:78
+msgid "Styling for the theme"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:121
-msgid "Select a Page"
+#: assets/js/back-end/screens/settings/components/static/GeneralSettings.tsx:88
+msgid "Minimum Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:133
-msgid "Pay"
+#: assets/js/back-end/screens/settings/components/static/GeneralSettings.tsx:91
+msgid "Custom Styling"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:143
-msgid "Order Recieved"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:117
+msgid "Adress Line 1"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:156
-msgid "Add Payment Method"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:119
+msgid "Your street address"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:169
-msgid "Delete Payment Method"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:131
+msgid "Adress Line 2"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:184
-msgid "Set Default Payment Method"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:133
+msgid "Your street address 2"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:213
-msgid "View Order"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:151
+#: assets/js/getting-started/screens/currency/Currency.tsx:57
+msgid "Currency"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:224
-msgid "My Courses"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:153
+msgid "Select default currency"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:235
-msgid "Edit Account"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:171
+#: assets/js/getting-started/screens/currency/Currency.tsx:75
+msgid "Currency Position"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:248
-msgid "Payment Methods"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:173
+msgid "Specifies where the currency symbol will appear"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:261
-msgid "Lost Password"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:185
+#: assets/js/getting-started/screens/currency/Currency.tsx:81
+msgid "Left"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:273
-msgid "Logout"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:186
+#: assets/js/getting-started/screens/currency/Currency.tsx:82
+msgid "Right"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:74
-msgid "Checkout Endpoints"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:193
+#: assets/js/getting-started/screens/currency/Currency.tsx:90
+msgid "Thousand Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:75
-msgid "Account Endpoints"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:195
+msgid "It can't be a number and same as decimal separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:82
-msgid "My Account Page"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:213
+#: assets/js/getting-started/screens/currency/Currency.tsx:124
+msgid "Decimal Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PagesSettings.tsx:94
-msgid "Course List Page"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:215
+msgid "It can't be a number and same as thousand separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:109
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:235
+msgid "Number of Decimals"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:237
+msgid "Number of digit to show on fractional part"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:267
+msgid "Use standard paypal on checkout"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:302
 msgid "Ipn Email Notification"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:127
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:304
+msgid "Get instant email notification after payment"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:326
 msgid "Email"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:138
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:336
 msgid "Reciever Email"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:149
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:346
 msgid "Indentity Token"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:160
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:356
 msgid "Invoice Prefix"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:171
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:366
 msgid "Payment Actions"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:174
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:369
 msgid "Select Payment Action"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:178
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:372
 msgid "Capture"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:185
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:379
 msgid "Image Url"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:214
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:404
 msgid "Sandbox"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:231
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:406
+msgid "Standard paypal test environment"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:429
 msgid "Sandbox API Username"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:244
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:439
 msgid "Sandbox API Password"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:257
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:449
 msgid "Sandbox API Signature"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:272
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:461
 msgid "Live API Username"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:283
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:471
 msgid "Live API Password"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:294
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:481
 msgid "Live API Signature"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:70
-msgid "Enabled"
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:68
+msgid "Store"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/QuizzesSettings.tsx:58
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:78
+msgid "Country"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:80
+msgid "Country where you live"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/PaymentsSettings.tsx:99
+msgid "Your city where you are residing"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/PermalinkSettings.tsx:101
+msgid "Single Section Permalink"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/PermalinkSettings.tsx:53
+msgid "Single Course Permalink"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/PermalinkSettings.tsx:80
+msgid "Single Lesson Permalink"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/PermalinkSettings.tsx:89
+msgid "Single Quiz Permalink"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/QuizSettings.tsx:56
 msgid "Question Display Per Page"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/QuizSettings.tsx:58
+msgid "Display number of questions per page during quiz"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/SingleCourseSettings.tsx:55
+msgid "Enable Review"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/static/SingleCourseSettings.tsx:57
+msgid "Display review tab on single course page"
 msgstr ""
 
 #: assets/js/getting-started/components/Footer.tsx:8
@@ -1650,10 +1781,6 @@ msgstr ""
 
 #: assets/js/interactive/components/Header.tsx:227
 msgid "%"
-msgstr ""
-
-#: assets/js/interactive/components/Header.tsx:236
-msgid "Quiz"
 msgstr ""
 
 #: assets/js/interactive/components/Header.tsx:243

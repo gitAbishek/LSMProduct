@@ -1,15 +1,11 @@
 import {
 	Box,
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
 	Button,
 	ButtonGroup,
 	Container,
 	Divider,
 	Flex,
 	Heading,
-	Icon,
 	IconButton,
 	Menu,
 	MenuButton,
@@ -21,15 +17,10 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import {
-	BiChevronRight,
-	BiDotsVerticalRounded,
-	BiEdit,
-	BiTrash,
-} from 'react-icons/bi';
+import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import { Link as RouterLink } from 'react-router-dom';
+import MasteriyoBreadCrumb from '../../components/common/MasteriyoBreadCrumb';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
@@ -48,6 +39,12 @@ const AddNewLesson: React.FC = () => {
 	const history = useHistory();
 	const lessonAPI = new API(urls.lessons);
 	const sectionsAPI = new API(urls.sections);
+	const courseAPI = new API(urls.courses);
+
+	// Get Course Name
+	const courseQuery = useQuery(['courseList', courseId], () =>
+		courseAPI.get(courseId)
+	);
 
 	// checks whether section exist or not
 	const sectionQuery = useQuery([`section${sectionId}`, sectionId], () =>
@@ -83,31 +80,11 @@ const AddNewLesson: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
-					<Breadcrumb
-						fontWeight="medium"
-						fontSize="sm"
-						mb="8"
-						separator={<Icon as={BiChevronRight} color="gray.500" />}>
-						<BreadcrumbItem>
-							<BreadcrumbLink
-								color="gray.500"
-								as={RouterLink}
-								to={routes.courses.list}>
-								Home
-							</BreadcrumbLink>
-						</BreadcrumbItem>
-						<BreadcrumbItem>
-							<BreadcrumbLink
-								color="gray.500"
-								as={RouterLink}
-								to={routes.courses.edit.replace(':courseId', courseId)}>
-								Course
-							</BreadcrumbLink>
-						</BreadcrumbItem>
-						<BreadcrumbItem isCurrentPage>
-							<BreadcrumbLink color="blue.600">Add Lesson</BreadcrumbLink>
-						</BreadcrumbItem>
-					</Breadcrumb>
+					<MasteriyoBreadCrumb
+						isCurrentTitle="Add New Lesson"
+						courseTitle={courseQuery?.data?.name}
+						courseId={courseId}
+					/>
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">

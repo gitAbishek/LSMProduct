@@ -4,15 +4,11 @@ import {
 	AlertIcon,
 	AlertTitle,
 	Box,
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
 	Button,
 	ButtonGroup,
 	Container,
 	Flex,
 	Heading,
-	Icon,
 	Stack,
 	Tab,
 	TabList,
@@ -24,9 +20,9 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiChevronRight } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
-import { Link as RouterLink, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import MasteriyoBreadCrumb from '../../components/common/MasteriyoBreadCrumb';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
@@ -45,10 +41,16 @@ const AddNewQuiz: React.FC = () => {
 	const toast = useToast();
 	const contentAPI = new API(urls.contents);
 	const quizAPI = new API(urls.quizes);
+	const courseAPI = new API(urls.courses);
 	const tabStyles = {
 		fontWeight: 'medium',
 		py: '4',
 	};
+
+	// Get Course Name
+	const courseQuery = useQuery(['courseList', courseId], () =>
+		courseAPI.get(courseId)
+	);
 
 	// gets total number of content on section
 	const contentQuery = useQuery([`content${sectionId}`, sectionId], () =>
@@ -86,31 +88,11 @@ const AddNewQuiz: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
-					<Breadcrumb
-						fontWeight="medium"
-						fontSize="sm"
-						mb="8"
-						separator={<Icon as={BiChevronRight} color="gray.500" />}>
-						<BreadcrumbItem>
-							<BreadcrumbLink
-								color="gray.500"
-								as={RouterLink}
-								to={routes.courses.list}>
-								Home
-							</BreadcrumbLink>
-						</BreadcrumbItem>
-						<BreadcrumbItem>
-							<BreadcrumbLink
-								color="gray.500"
-								as={RouterLink}
-								to={routes.courses.edit.replace(':courseId', courseId)}>
-								Course
-							</BreadcrumbLink>
-						</BreadcrumbItem>
-						<BreadcrumbItem isCurrentPage>
-							<BreadcrumbLink color="blue.600">Add Quiz</BreadcrumbLink>
-						</BreadcrumbItem>
-					</Breadcrumb>
+					<MasteriyoBreadCrumb
+						isCurrentTitle="Add New Quiz"
+						courseTitle={courseQuery?.data?.name}
+						courseId={courseId}
+					/>
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">

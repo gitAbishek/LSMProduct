@@ -117,8 +117,8 @@ class Setting extends Model {
 				'description'  => 'Pay with offline payment.',
 				'instructions' => 'Pay with offline payment',
 			),
-			// Standard Paypal
-			'paypal'  => array(
+			'paypal'   => array(
+				// Standard Paypal
 				'enable'                  => false,
 				'title'                   => 'Paypal',
 				'description'             => 'Pay via PayPal; you can pay with your credit card if you don\'t have a PayPal account.',
@@ -143,7 +143,7 @@ class Setting extends Model {
 		'quiz'           => array(
 			'styling' => array(
 				'questions_display_per_page' => 5,
-			)
+			),
 		),
 		'emails'         => array(
 			'general'              => array(

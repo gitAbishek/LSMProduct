@@ -104,17 +104,17 @@ const Settings = () => {
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
 										<CourseArchiveSettings
-											courseArchiveData={settingsQuery.data?.courseArchive}
+											courseArchiveData={settingsQuery.data?.course_archive}
 										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
 										<SingleCourseSettings
-											singleCourseData={settingsQuery.data?.singleCourse}
+											singleCourseData={settingsQuery.data?.single_course}
 										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
 										<LearningPageSettings
-											learningPageData={settingsQuery.data?.learningPage}
+											learningPageData={settingsQuery.data?.learning_page}
 										/>
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>

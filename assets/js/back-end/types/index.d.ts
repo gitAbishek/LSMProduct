@@ -17,15 +17,6 @@ export interface SingleCourseSettingsMap {
 	display: {
 		enable_review: boolean;
 	};
-	enable_search: boolean;
-	placeholder_image: string;
-	per_page: string;
-	per_row: number;
-
-	show_thumbnail: boolean;
-	thumbnail_size: string;
-	enable_review: boolean;
-	enable_questions_answers: boolean;
 }
 
 export interface LearningPageSettingsMap {
@@ -182,9 +173,9 @@ export interface AdvancedSettingsMap {
 
 export interface SetttingsMap {
 	general: GeneralSettingsMap;
-	courseArchive: CourseArchiveSettingsMap;
-	singleCourse: SingleCourseSettingsMap;
-	learningPage: LearningPageSettingsMap;
+	course_archive: CourseArchiveSettingsMap;
+	single_course: SingleCourseSettingsMap;
+	learning_page: LearningPageSettingsMap;
 	payments: PaymentsSettingsMap;
 	quiz: QuizSettingsMap;
 	emails: EmailsSetttingsMap;

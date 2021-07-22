@@ -1,6 +1,8 @@
 import {
+	Box,
 	FormControl,
 	FormLabel,
+	Icon,
 	Stack,
 	Switch,
 	Tab,
@@ -8,10 +10,13 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
+	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import { infoIconStyles } from 'Config/styles';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import { BiInfoCircle } from 'react-icons/bi';
 
 const SingleCourseSettings: React.FC = () => {
 	const { register, setValue } = useFormContext();
@@ -48,6 +53,17 @@ const SingleCourseSettings: React.FC = () => {
 								<Stack direction="row" spacing="4">
 									<FormLabel minW="2xs">
 										{__('Enable Review', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Display review tab on single course page',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Switch
 										{...register('courses.enable_review')}

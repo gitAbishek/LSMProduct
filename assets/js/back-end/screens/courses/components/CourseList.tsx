@@ -99,7 +99,13 @@ const CourseList: React.FC<Props> = (props) => {
 					</Text>
 				</Stack>
 			</Td>
-			<Td>{price === undefined || price < 1 ? <Badge>Free</Badge> : price}</Td>
+			<Td>
+				{price === undefined || price < 1 ? (
+					<Badge>{__('Free', 'masteriyo')}</Badge>
+				) : (
+					price
+				)}
+			</Td>
 			<Td>
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
 					<Icon as={BiCalendar} />

@@ -1,8 +1,5 @@
 import {
 	Box,
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
 	Button,
 	ButtonGroup,
 	Container,
@@ -21,7 +18,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiBook, BiChevronRight, BiCog, BiEdit } from 'react-icons/bi';
+import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation } from 'react-query';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import AddCategoryModal from '../../components/common/AddCategoryModal';
@@ -153,23 +150,6 @@ const AddNewCourse: React.FC = () => {
 						</Box>
 						<Container maxW="container.xl">
 							<Stack direction="column" spacing="8">
-								<Breadcrumb
-									fontWeight="medium"
-									fontSize="sm"
-									separator={<Icon as={BiChevronRight} color="gray.500" />}>
-									<BreadcrumbItem>
-										<BreadcrumbLink
-											color="gray.500"
-											as={RouterLink}
-											to={routes.courses.list}>
-											Home
-										</BreadcrumbLink>
-									</BreadcrumbItem>
-
-									<BreadcrumbItem isCurrentPage>
-										<BreadcrumbLink color="blue.600">Add Course</BreadcrumbLink>
-									</BreadcrumbItem>
-								</Breadcrumb>
 								<Heading as="h1" size="xl">
 									{__('Add New Course', 'masteriyo')}
 								</Heading>

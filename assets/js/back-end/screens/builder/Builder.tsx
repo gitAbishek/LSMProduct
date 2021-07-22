@@ -1,8 +1,5 @@
 import {
 	Box,
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
 	Button,
 	ButtonGroup,
 	Container,
@@ -23,7 +20,7 @@ import { __ } from '@wordpress/i18n';
 import queryString from 'query-string';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiBook, BiChevronRight, BiCog, BiEdit } from 'react-icons/bi';
+import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
 import AddCategoryModal from '../../components/common/AddCategoryModal';
@@ -198,24 +195,6 @@ const Builder: React.FC = () => {
 							</Box>
 							<Container maxW="container.xl">
 								<Stack direction="column" spacing="6">
-									<Breadcrumb
-										fontWeight="medium"
-										fontSize="sm"
-										separator={<Icon as={BiChevronRight} color="gray.500" />}>
-										<BreadcrumbItem>
-											<BreadcrumbLink
-												color="gray.500"
-												as={RouterLink}
-												to={routes.courses.list}>
-												Home
-											</BreadcrumbLink>
-										</BreadcrumbItem>
-										<BreadcrumbItem isCurrentPage>
-											<BreadcrumbLink color="blue.600">
-												{courseQuery.data.name}
-											</BreadcrumbLink>
-										</BreadcrumbItem>
-									</Breadcrumb>
 									<Heading as="h1" fontSize="x-large">
 										{__('Edit Course: ', 'masteriyo')} {courseQuery.data.name}
 									</Heading>

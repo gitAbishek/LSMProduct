@@ -18,13 +18,12 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import { infoIconStyles } from 'Config/styles';
-import getSymbolFromCurrency from 'currency-symbol-map';
-import React, { useEffect, useState } from 'react';
-import ReactFlagsSelect from 'react-flags-select';
+import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
+import { CountrySchema } from '../../../schemas';
 import { PaymentsSettingsMap } from '../../../types';
-import { currency } from '../../../utils/currency';
+import countries from '../../../utils/countries';
 
 interface Props {
 	paymentsData?: PaymentsSettingsMap;
@@ -32,8 +31,7 @@ interface Props {
 
 const PaymentsSettings: React.FC<Props> = (props) => {
 	const { paymentsData } = props;
-	const { register, control, setValue } = useFormContext();
-	const [country, setCountry] = useState(paymentsData?.store.country);
+	const { register, control } = useFormContext();
 
 	const showPayPalOptions = useWatch({
 		name: 'payments.paypal.enable',
@@ -65,10 +63,6 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 		borderRightColor: 'gray.200',
 	};
 
-	useEffect(() => {
-		setValue('payments.store.country', country);
-	}, [country, setValue]);
-
 	return (
 		<Tabs orientation="vertical">
 			<Stack direction="row" flex="1">
@@ -94,15 +88,17 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</Tooltip>
 									</FormLabel>
 
-									<input
-										type="hidden"
+									<Select
 										{...register('payments.store.country')}
-										defaultValue={paymentsData?.store?.country}
-									/>
-									<ReactFlagsSelect
-										selected={country || ''}
-										onSelect={(code) => setCountry(code)}
-									/>
+										defaultValue={paymentsData?.store?.country}>
+										{countries.map((country: CountrySchema) => (
+											<option
+												value={country.countryCode}
+												key={country.countryCode}>
+												{country.countryName}
+											</option>
+										))}
+									</Select>
 								</FormControl>
 								<FormControl>
 									<FormLabel>
@@ -185,9 +181,11 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									<Select
 										{...register('payments.currency.currency')}
 										defaultValue={paymentsData?.currency?.currency}>
-										{Object.entries(currency).map(([code, name]) => (
-											<option value={code} key={code}>
-												{name} ({getSymbolFromCurrency(code)})
+										{countries.map((country: CountrySchema) => (
+											<option
+												value={country.countryCode}
+												key={country.countryCode}>
+												{country.countryName} ({country.currencyCode})
 											</option>
 										))}
 									</Select>

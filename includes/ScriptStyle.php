@@ -103,9 +103,14 @@ class ScriptStyle {
 		$this->scripts = apply_filters(
 			'masteriyo_enqueue_scripts',
 			array(
+				'dependencies'   => array(
+					'src'      => $this->get_asset_url( '/assets/js/build/masteriyo-dependencies.js' ),
+					'context'  => 'admin',
+					'callback' => 'masteriyo_is_admin_page',
+				),
 				'admin'          => array(
 					'src'      => $this->get_asset_url( '/assets/js/build/masteriyo-backend.js' ),
-					'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
+					'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill', ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
 				),

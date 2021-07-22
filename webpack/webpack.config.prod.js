@@ -62,7 +62,7 @@ module.exports = (env) => ({
 		splitChunks: {
 			cacheGroups: {
 				vendor: {
-					name: 'masteriyo-dependencies', // part of the bundle name and
+					name: 'dependencies', // part of the bundle name and
 					// can be used in chunks array of HtmlWebpackPlugin
 					test: /[\\/]node_modules[\\/]/,
 					chunks: 'all',

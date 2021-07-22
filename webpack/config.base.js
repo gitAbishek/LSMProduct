@@ -15,6 +15,7 @@ module.exports = {
 				'index.tsx'
 			),
 		},
+		output: path.resolve(process.cwd(), 'assets/js/build'),
 	},
 
 	resolver: {

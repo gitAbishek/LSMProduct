@@ -10,10 +10,10 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Editor from 'Components/common/Editor';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
+import Editor from '../../../components/common/Editor';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
 

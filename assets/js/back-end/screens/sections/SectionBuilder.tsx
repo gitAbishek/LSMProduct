@@ -1,7 +1,7 @@
 import { Center } from '@chakra-ui/layout';
 import { Box, Collapse } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import React, { useState } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import AddNewButton from '../../components/common/AddNewButton';
 import { reorder } from '../../utils/reorder';

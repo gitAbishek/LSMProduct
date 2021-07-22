@@ -1,7 +1,9 @@
 import {
+	Box,
 	Collapse,
 	FormControl,
 	FormLabel,
+	Icon,
 	Input,
 	Select,
 	Stack,
@@ -12,11 +14,17 @@ import {
 	TabPanels,
 	Tabs,
 	Textarea,
+	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import { infoIconStyles } from 'Config/styles';
+import getSymbolFromCurrency from 'currency-symbol-map';
+import React, { useEffect, useState } from 'react';
+import ReactFlagsSelect from 'react-flags-select';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
+import { BiInfoCircle } from 'react-icons/bi';
 import { PaymentsSettingsMap } from '../../../types';
+import { currency } from '../../../utils/currency';
 
 interface Props {
 	paymentsData?: PaymentsSettingsMap;
@@ -24,16 +32,18 @@ interface Props {
 
 const PaymentsSettings: React.FC<Props> = (props) => {
 	const { paymentsData } = props;
-	const { register, control } = useFormContext();
+	const { register, control, setValue } = useFormContext();
+	const [country, setCountry] = useState(paymentsData?.store.country);
+
 	const showPayPalOptions = useWatch({
 		name: 'payments.paypal.enable',
-		defaultValue: paymentsData?.paypal.enable,
+		defaultValue: false,
 		control,
 	});
 
 	const showPayPalSandBoxOptions = useWatch({
 		name: 'payments.paypal.sandbox',
-		defaultValue: paymentsData?.paypal.sandbox,
+		defaultValue: true,
 		control,
 	});
 
@@ -55,19 +65,239 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 		borderRightColor: 'gray.200',
 	};
 
+	useEffect(() => {
+		setValue('payments.store.country', country);
+	}, [country, setValue]);
+
 	return (
 		<Tabs orientation="vertical">
 			<Stack direction="row" flex="1">
 				<TabList sx={tabListStyles}>
-					<Tab sx={tabStyles}>PayPal</Tab>
+					<Tab sx={tabStyles}>{__('Store', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Currency', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Standard Paypal', 'masteriyo')}</Tab>
 				</TabList>
 				<TabPanels flex="1">
+					<TabPanel>
+						<Stack direction="column" spacing="6">
+							<Stack direction="row" spacing="8">
+								<FormControl>
+									<FormLabel>
+										{__('Country', 'masteriyo')}
+										<Tooltip
+											label={__('Country where you live', 'masteriyo')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+
+									<input
+										type="hidden"
+										{...register('payments.store.country')}
+										defaultValue={paymentsData?.store?.country}
+									/>
+									<ReactFlagsSelect
+										selected={country || ''}
+										onSelect={(code) => setCountry(code)}
+									/>
+								</FormControl>
+								<FormControl>
+									<FormLabel>
+										{__('City', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Your city where you are residing',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+
+									<Input
+										type="text"
+										{...register('payments.store.city')}
+										defaultValue={paymentsData?.store?.city}
+									/>
+								</FormControl>
+							</Stack>
+							<Stack direction="row" spacing="8">
+								<FormControl>
+									<FormLabel>
+										{__('Adress Line 1', 'masteriyo')}
+										<Tooltip
+											label={__('Your street address')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Input
+										type="text"
+										{...register('payments.store.address_line1')}
+										defaultValue={paymentsData?.store?.address_line1}
+									/>
+								</FormControl>
+								<FormControl>
+									<FormLabel>
+										{__('Adress Line 2', 'masteriyo')}
+										<Tooltip
+											label={__('Your street address 2')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Input
+										type="text"
+										{...register('payments.store.address_line2')}
+										defaultValue={paymentsData?.store?.address_line2}
+									/>
+								</FormControl>
+							</Stack>
+						</Stack>
+					</TabPanel>
+					<TabPanel>
+						<Stack direction="column" spacing="6">
+							<Stack direction="row" spacing="8">
+								<FormControl>
+									<FormLabel minW="xs">
+										{__('Currency', 'masteriyo')}
+										<Tooltip
+											label={__('Select default currency', 'masteriyo')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Select
+										{...register('payments.currency.currency')}
+										defaultValue={paymentsData?.currency?.currency}>
+										{Object.entries(currency).map(([code, name]) => (
+											<option value={code} key={code}>
+												{name} ({getSymbolFromCurrency(code)})
+											</option>
+										))}
+									</Select>
+								</FormControl>
+								<FormControl>
+									<FormLabel minW="xs">
+										{__('Currency Position', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Specifies where the currency symbol will appear',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Select
+										{...register('payments.store.currency_position')}
+										defaultValue={paymentsData?.currency?.currency_position}>
+										<option value="left">{__('Left', 'masteriyo')}</option>
+										<option value="right">{__('Right', 'masteriyo')}</option>
+									</Select>
+								</FormControl>
+							</Stack>
+							<Stack direction="row" spacing="8">
+								<FormControl>
+									<FormLabel minW="xs">
+										{__('Thousand Separator', 'masteriyo')}
+										<Tooltip
+											label={__(
+												"It can't be a number and same as decimal separator",
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Input
+										type="text"
+										{...register('payments.currency.thousand_separator')}
+										defaultValue={paymentsData?.currency?.thousand_separator}
+									/>
+								</FormControl>
+								<FormControl>
+									<FormLabel minW="xs">
+										{__('Decimal Separator', 'masteriyo')}
+										<Tooltip
+											label={__(
+												"It can't be a number and same as thousand separator",
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Input
+										type="text"
+										{...register('payments.currency.decimal_separator')}
+										defaultValue={paymentsData?.currency?.decimal_separator}
+									/>
+								</FormControl>
+							</Stack>
+							<Stack direction="row" spacing="8">
+								<FormControl>
+									<FormLabel minW="xs">
+										{__('Number of Decimals', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Number of digit to show on fractional part',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Input
+										type="text"
+										{...register('payments.currency.number_of_decimals')}
+										defaultValue={paymentsData?.currency?.number_of_decimals}
+									/>
+								</FormControl>
+							</Stack>
+						</Stack>
+					</TabPanel>
 					<TabPanel>
 						<Stack direction="column" spacing="6">
 							<FormControl>
 								<Stack direction="row">
 									<FormLabel minW="160px">
-										{__('Enabled', 'masteriyo')}
+										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__('Use standard paypal on checkout', 'masteriyo')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="payments.paypal.enable"
@@ -88,8 +318,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</FormLabel>
 										<Input
 											type="text"
-											defaultValue={paymentsData?.paypal?.title}
 											{...register('payments.paypal.title')}
+											defaultValue={paymentsData?.paypal?.title}
 										/>
 									</FormControl>
 
@@ -98,8 +328,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											{__('Description', 'masteriyo')}
 										</FormLabel>
 										<Textarea
-											defaultValue={paymentsData?.paypal?.description}
 											{...register('payments.paypal.description')}
+											defaultValue={paymentsData?.paypal?.description}
 										/>
 									</FormControl>
 
@@ -107,6 +337,17 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Stack direction="row">
 											<FormLabel minW="160px">
 												{__('Ipn Email Notification', 'masteriyo')}
+												<Tooltip
+													label={__(
+														'Get instant email notification after payment',
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Controller
 												name="payments.paypal.ipn_email_notifications"
@@ -128,8 +369,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</FormLabel>
 										<Input
 											type="email"
-											defaultValue={paymentsData?.paypal?.email}
 											{...register('payments.paypal.email')}
+											defaultValue={paymentsData?.paypal?.email}
 										/>
 									</FormControl>
 
@@ -139,8 +380,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</FormLabel>
 										<Input
 											type="email"
-											defaultValue={paymentsData?.paypal?.receiver_email}
 											{...register('payments.paypal.receiver_email')}
+											defaultValue={paymentsData?.paypal?.receiver_email}
 										/>
 									</FormControl>
 
@@ -150,8 +391,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</FormLabel>
 										<Input
 											type="text"
-											defaultValue={paymentsData?.paypal?.identity_token}
 											{...register('payments.paypal.identity_token')}
+											defaultValue={paymentsData?.paypal?.identity_token}
 										/>
 									</FormControl>
 
@@ -161,8 +402,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</FormLabel>
 										<Input
 											type="text"
-											defaultValue={paymentsData?.paypal?.invoice_prefix}
 											{...register('payments.paypal.invoice_prefix')}
+											defaultValue={paymentsData?.paypal?.invoice_prefix}
 										/>
 									</FormControl>
 
@@ -186,8 +427,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</FormLabel>
 										<Input
 											type="text"
-											defaultValue={paymentsData?.paypal?.image_url}
 											{...register('payments.paypal.image_url')}
+											defaultValue={paymentsData?.paypal?.image_url}
 										/>
 									</FormControl>
 
@@ -212,6 +453,17 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Stack direction="row">
 											<FormLabel minW="160px">
 												{__('Sandbox', 'masteriyo')}
+												<Tooltip
+													label={__(
+														'Standard paypal test environment',
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Controller
 												name="payments.paypal.sandbox"
@@ -232,10 +484,10 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												</FormLabel>
 												<Input
 													type="text"
+													{...register('payments.paypal.sandbox_api_username')}
 													defaultValue={
 														paymentsData?.paypal?.sandbox_api_username
 													}
-													{...register('payments.paypal.sandbox_api_username')}
 												/>
 											</FormControl>
 
@@ -245,10 +497,10 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												</FormLabel>
 												<Input
 													type="password"
+													{...register('payments.paypal.sandbox_api_password')}
 													defaultValue={
 														paymentsData?.paypal?.sandbox_api_password
 													}
-													{...register('payments.paypal.sandbox_api_password')}
 												/>
 											</FormControl>
 
@@ -258,10 +510,10 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												</FormLabel>
 												<Input
 													type="text"
+													{...register('payments.paypal.sandbox_api_signature')}
 													defaultValue={
 														paymentsData?.paypal?.sandbox_api_signature
 													}
-													{...register('payments.paypal.sandbox_api_signature')}
 												/>
 											</FormControl>
 										</Stack>
@@ -273,8 +525,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</FormLabel>
 										<Input
 											type="text"
-											defaultValue={paymentsData?.paypal?.live_api_username}
 											{...register('payments.paypal.live_api_username')}
+											defaultValue={paymentsData?.paypal?.live_api_username}
 										/>
 									</FormControl>
 
@@ -284,8 +536,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</FormLabel>
 										<Input
 											type="password"
-											defaultValue={paymentsData?.paypal?.live_api_password}
 											{...register('payments.paypal.live_api_password')}
+											defaultValue={paymentsData?.paypal?.live_api_password}
 										/>
 									</FormControl>
 
@@ -295,8 +547,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</FormLabel>
 										<Input
 											type="text"
-											defaultValue={paymentsData?.paypal?.live_api_signature}
 											{...register('payments.paypal.live_api_signature')}
+											defaultValue={paymentsData?.paypal?.live_api_signature}
 										/>
 									</FormControl>
 								</Stack>

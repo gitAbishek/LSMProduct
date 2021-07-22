@@ -7,9 +7,9 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import AddNewButton from 'Components/common/AddNewButton';
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import AddNewButton from '../../../../components/common/AddNewButton';
 import urls from '../../../../constants/urls';
 import { QuestionSchema } from '../../../../schemas';
 import API from '../../../../utils/api';

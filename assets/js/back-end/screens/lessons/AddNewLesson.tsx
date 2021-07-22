@@ -15,13 +15,13 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import FullScreenLoader from 'Components/layout/FullScreenLoader';
-import HeaderBuilder from 'Components/layout/HeaderBuilder';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
+import FullScreenLoader from '../../components/layout/FullScreenLoader';
+import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';

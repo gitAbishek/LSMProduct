@@ -1,7 +1,7 @@
 import { Alert, AlertIcon, Box, Flex, Heading, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { sectionHeaderStyles } from 'Config/styles';
 import React from 'react';
+import { sectionHeaderStyles } from '../../../../../config/styles';
 
 interface Props {
 	answersData?: any;

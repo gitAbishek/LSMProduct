@@ -1,6 +1,4 @@
 import { Icon, Stack } from '@chakra-ui/react';
-import colors from 'Config/colors';
-import defaultStyle from 'Config/defaultStyle';
 import React from 'react';
 import ReactSelect, {
 	components,
@@ -15,6 +13,8 @@ import {
 	SortableQuestion,
 	YesNo,
 } from '../../assets/icons';
+import colors from '../../config/colors';
+import defaultStyle from '../../config/defaultStyle';
 
 interface Props extends ReactSelectProps {}
 

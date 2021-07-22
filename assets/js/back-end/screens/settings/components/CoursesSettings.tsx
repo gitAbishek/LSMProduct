@@ -20,9 +20,9 @@ import {
 	Tabs,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import ImageUpload from 'Components/common/ImageUpload';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import ImageUpload from '../../../components/common/ImageUpload';
 import { CoursesSettingsMap } from '../../../types';
 
 /* TODO

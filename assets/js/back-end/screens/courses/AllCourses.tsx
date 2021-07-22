@@ -9,9 +9,9 @@ import {
 	Tr,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Header from 'Components/layout/Header';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import Header from '../../components/layout/Header';
 import urls from '../../constants/urls';
 import { SkeletonCourseList } from '../../skeleton';
 import API from '../../utils/api';

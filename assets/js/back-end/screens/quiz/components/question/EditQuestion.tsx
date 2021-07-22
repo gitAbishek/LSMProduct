@@ -13,10 +13,10 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Editor from 'Components/common/Editor';
-import Select from 'Components/common/Select';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import Editor from '../../../../components/common/Editor';
+import Select from '../../../../components/common/Select';
 
 interface Props {
 	questionData: any;

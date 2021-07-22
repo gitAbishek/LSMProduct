@@ -1,7 +1,7 @@
-import FullScreenLoader from 'Components/layout/FullScreenLoader';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import urls from '../../constants/urls';
 import CourseRouter from '../../router/CourseRouter';
 import { CourseDataMap } from '../../types/course';

@@ -15,13 +15,13 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import FullScreenLoader from 'Components/layout/FullScreenLoader';
-import HeaderBuilder from 'Components/layout/HeaderBuilder';
 import queryString from 'query-string';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
+import FullScreenLoader from '../../components/layout/FullScreenLoader';
+import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { QuizSchema } from '../../schemas';

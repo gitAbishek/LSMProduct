@@ -14,11 +14,11 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { sectionHeaderStyles } from 'Config/styles';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiCopy, BiPlus, BiTrash } from 'react-icons/bi';
 import { Sortable } from '../../../../../assets/icons';
+import { sectionHeaderStyles } from '../../../../../config/styles';
 
 interface Props {
 	answersData?: any;

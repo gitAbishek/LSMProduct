@@ -8,11 +8,11 @@ import {
 	Spinner,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import Select from 'Components/common/Select';
 import React, { useContext, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { BiPlus } from 'react-icons/bi';
 import { useQuery } from 'react-query';
+import Select from '../../../components/common/Select';
 import urls from '../../../constants/urls';
 import { CreateCatModal } from '../../../context/CreateCatProvider';
 import API from '../../../utils/api';

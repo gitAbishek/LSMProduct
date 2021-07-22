@@ -1,8 +1,8 @@
 import { FormControl, FormLabel } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import ImageUpload from 'Components/common/ImageUpload';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import ImageUpload from '../../../components/common/ImageUpload';
 
 interface Props {
 	defaultValue?: number;

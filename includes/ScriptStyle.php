@@ -105,12 +105,15 @@ class ScriptStyle {
 			array(
 				'dependencies'   => array(
 					'src'      => $this->get_asset_url( '/assets/js/build/masteriyo-dependencies.js' ),
-					'context'  => 'admin',
-					'callback' => 'masteriyo_is_admin_page',
+					'context'  => array( 'admin', 'public' ),
+					'callback' => function() {
+						$a = masteriyo_is_interactive_page();
+						return masteriyo_is_admin_page() || masteriyo_is_interactive_page();
+					},
 				),
 				'admin'          => array(
 					'src'      => $this->get_asset_url( '/assets/js/build/masteriyo-backend.js' ),
-					'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill', ),
+					'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
 				),
@@ -163,12 +166,6 @@ class ScriptStyle {
 		$this->styles = apply_filters(
 			'masteriyo_enqueue_styles',
 			array(
-				'admin'  => array(
-					'src'      => $this->get_asset_url( '/assets/js/build/masteriyo-backend.css' ),
-					'has_rtl'  => true,
-					'context'  => 'admin',
-					'callback' => 'masteriyo_is_admin_page',
-				),
 				'public' => array(
 					'src'     => $this->get_asset_url( '/assets/css/public.css' ),
 					'has_rtl' => true,
@@ -229,7 +226,7 @@ class ScriptStyle {
 		$scripts = array_filter(
 			$scripts,
 			function( $script ) use ( $context ) {
-				return $script['context'] === $context;
+				return in_array( $context, (array) $script['context'], true );
 			}
 		);
 

@@ -587,3 +587,17 @@ if ( ! function_exists( 'masteriyo_current_user_can_edit_course_review' ) ) {
 		return get_current_user_id() === $review->get_author_id();
 	}
 }
+
+
+if ( ! function_exists( 'masteriyo_is_interactive_page' ) ) {
+	/**
+	 * Return true if the page is interactive.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return bool
+	 */
+	function masteriyo_is_interactive_page() {
+		return isset( $_GET['masteriyo-page'] ) && 'interactive' === $_GET['masteriyo-page' ]; // phpcs:ignore
+	}
+}

@@ -73,9 +73,12 @@ function masteriyo_can_start_course( $course, $user = null ) {
 		if ( 'open' === $course->get_access_mode() ) {
 			$can_start_course = true;
 		} else {
-			$user_course      = current( $query->get_user_courses() );
-			$order            = $user_course->get_order();
-			$can_start_course = 'completed' === $order->get_status();
+			$user_course = current( $query->get_user_courses() );
+
+			if ( $user_course ) {
+				$order            = $user_course->get_order();
+				$can_start_course = 'completed' === $order->get_status();
+			}
 		}
 	}
 

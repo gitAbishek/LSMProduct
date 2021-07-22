@@ -12,7 +12,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import Editor from 'Components/common/Editor';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
@@ -30,17 +30,20 @@ type SectionInputs = {
 
 const NewSection: React.FC<NewSectionProps> = (props) => {
 	const { onSave, onCancel, courseId } = props;
+	const methods = useForm<SectionInputs>();
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
-	} = useForm<SectionInputs>();
+	} = methods;
 	const queryClient = useQueryClient();
 	const sectionAPI = new API(urls.sections);
 
 	const addSection = useMutation((data: any) => sectionAPI.store(data), {
 		onSuccess: () => {
 			queryClient.invalidateQueries(`builder${courseId}`);
+			reset();
 			onSave();
 		},
 	});
@@ -55,41 +58,45 @@ const NewSection: React.FC<NewSectionProps> = (props) => {
 
 	return (
 		<Box p="8" bg="white" shadow="box" mb="8">
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<Stack direction="column" spacing="8">
-					<FormControl isInvalid={!!errors?.name}>
-						<FormLabel htmlFor="">{__('Section Name', 'masteriyo')}</FormLabel>
-						<Input
-							placeholder={__('Your Section Name', 'masteriyo')}
-							{...register('name', {
-								required: __('Section name cannot be empty', 'masteriyo'),
-							})}></Input>
-						{errors?.name && (
-							<FormErrorMessage>{errors?.name.message}</FormErrorMessage>
-						)}
-					</FormControl>
-					<FormControl>
-						<FormLabel htmlFor="">
-							{__('Section Description', 'masteriyo')}
-						</FormLabel>
-						<Editor name="description" />
-					</FormControl>
-					<Divider />
-					<ButtonGroup>
-						<Button
-							colorScheme="blue"
-							type="submit"
-							isLoading={addSection.isLoading}>
-							{__('Add', 'masteriyo')}
-						</Button>
-						{!addSection.isLoading && (
-							<Button variant="outline" onClick={() => onCancel()}>
-								{__('Cancel', 'masteriyo')}
+			<FormProvider {...methods}>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<Stack direction="column" spacing="8">
+						<FormControl isInvalid={!!errors?.name}>
+							<FormLabel htmlFor="">
+								{__('Section Name', 'masteriyo')}
+							</FormLabel>
+							<Input
+								placeholder={__('Your Section Name', 'masteriyo')}
+								{...register('name', {
+									required: __('Section name cannot be empty', 'masteriyo'),
+								})}></Input>
+							{errors?.name && (
+								<FormErrorMessage>{errors?.name.message}</FormErrorMessage>
+							)}
+						</FormControl>
+						<FormControl>
+							<FormLabel htmlFor="">
+								{__('Section Description', 'masteriyo')}
+							</FormLabel>
+							<Editor name="description" />
+						</FormControl>
+						<Divider />
+						<ButtonGroup>
+							<Button
+								colorScheme="blue"
+								type="submit"
+								isLoading={addSection.isLoading}>
+								{__('Add', 'masteriyo')}
 							</Button>
-						)}
-					</ButtonGroup>
-				</Stack>
-			</form>
+							{!addSection.isLoading && (
+								<Button variant="outline" onClick={() => onCancel()}>
+									{__('Cancel', 'masteriyo')}
+								</Button>
+							)}
+						</ButtonGroup>
+					</Stack>
+				</form>
+			</FormProvider>
 		</Box>
 	);
 };

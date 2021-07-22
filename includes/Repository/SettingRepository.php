@@ -17,13 +17,28 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 * @param Model $setting Setting object.
 	 */
 	public function create( Model &$setting ) {
-		$setting_in_db = get_option( 'masteriyo_settings', array() );
-		$setting_in_db = wp_parse_args( $setting->get_data(), $setting_in_db );
+		$posted_setting = $setting->get_data();
+		$setting_in_db  = get_option( 'masteriyo_settings', array() );
 
-		// If courses permalink/slugs changed then update masteriyo_flush_rewrite_rules.
-		// if ( array_intersect( $courses_slugs, array_keys( $changes ) ) ) {
-		// 	update_option( 'masteriyo_flush_rewrite_rules', 'yes' );
-		// }
+		// if courses permalink / slugs changed then update masteriyo_flush_rewrite_rules .
+		$should_update_permalink = false;
+		foreach ( $posted_setting['advance']['permalinks'] as $permalink => $value ) {
+			if ( ! isset( $setting_in_db['advance']['permalinks'][ $permalink ] ) ) {
+				$should_update_permalink = true;
+				break;
+			}
+
+			if ( $value !== $setting_in_db['advance']['permalinks'][ $permalink ] ) {
+				$should_update_permalink = true;
+				break;
+			}
+		}
+
+		if ( $should_update_permalink ) {
+			update_option( 'masteriyo_flush_rewrite_rules', 'yes' );
+		}
+
+		$setting_in_db = wp_parse_args( $posted_setting, $setting_in_db );
 
 		$setting->set_data( $setting_in_db );
 

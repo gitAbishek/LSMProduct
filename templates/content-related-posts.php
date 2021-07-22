@@ -9,6 +9,11 @@ defined( 'ABSPATH' ) || exit;
 
 $related_courses = masteriyo_get_related_courses( $GLOBALS['course'] );
 
+if ( empty( $related_courses ) ) {
+	do_action( 'masteriyo_no_related_posts' );
+	return;
+}
+
 do_action( 'masteriyo_before_related_posts_content' );
 
 ?>

@@ -386,7 +386,12 @@ if ( ! function_exists( 'masteriyo_template_sidebar_row_enrolled_students' ) ) {
 	function masteriyo_template_sidebar_row_enrolled_students() {
 		global $course;
 
-		masteriyo_get_template( 'single-course/sidebar-row-enrolled-students.php' );
+		masteriyo_get_template(
+			'single-course/sidebar-row-enrolled-students.php',
+			array(
+				'enrolled_users_count' => masteriyo_count_enrolled_users( $course->get_id() ),
+			)
+		);
 	}
 }
 

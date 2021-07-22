@@ -15,7 +15,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import { infoIconStyles } from 'Config/styles';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
 import { EmailsSetttingsMap } from '../../../types';
 
@@ -25,7 +25,6 @@ interface Props {
 
 const EmailSetttings: React.FC<Props> = (props) => {
 	const { emailData } = props;
-	const { register, setValue, control } = useFormContext();
 
 	const tabStyles = {
 		justifyContent: 'flex-start',

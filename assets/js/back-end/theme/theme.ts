@@ -107,7 +107,9 @@ const theme = extendTheme({
 			variants: {
 				outline: {
 					addon: {
-						bg: 'blue.50',
+						bg: 'blue.10',
+						borderRadius: 'sm',
+						fontSize: 'sm',
 					},
 				},
 			},

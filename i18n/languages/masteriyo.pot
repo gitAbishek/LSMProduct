@@ -316,9 +316,9 @@ msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:37
 #: assets/js/back-end/screens/course-tags/AddNewCourseTag.tsx:35
-#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:52
-#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:57
-#: assets/js/back-end/screens/quiz/EditQuiz.tsx:66
+#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:53
+#: assets/js/back-end/screens/quiz/AddNewQuiz.tsx:59
+#: assets/js/back-end/screens/quiz/EditQuiz.tsx:68
 msgid " is successfully added."
 msgstr ""
 
@@ -691,7 +691,7 @@ msgid "Please Provide Valid URL"
 msgstr ""
 
 #: assets/js/back-end/screens/orders/AllOrders.tsx:31
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:299
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:439
 msgid "Orders"
 msgstr ""
 
@@ -1124,208 +1124,264 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:100
+msgid "Permalinks"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:101
+msgid "Account Endpoints"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:102
+msgid "Checkout Endpoints"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:115
+msgid "Course List Page"
+msgstr ""
+
 #: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:117
+msgid "This set course listing page where the courses are display"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:138
 msgid "My Account Page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:119
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:140
 msgid "Page contents: [masteriyo_my_account]"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:140
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:161
 msgid "Checkout Page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:142
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:163
 msgid "Page contents: [masteriyo_checkout]"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:163
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:184
 msgid "Terms and Coditions Page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:165
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:186
 msgid ""
 "If you define a \"Terms\" page the customer will be asked if they accept "
 "them when checking out."
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:177
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:198
 msgid "Select a Page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:189
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:211
 msgid "Course Category Base"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:200
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:213
+msgid "Enter custom structures for your category URLs here."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:232
+msgid "uncategorized"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:239
 msgid "Couses Tag Base"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:211
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:241
+msgid "Enter custom structures for your tag URLs here."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:267
 msgid "Course Difficulty Base"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:223
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:269
+msgid "Enter custom structures for your difficulty URLs here."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:288
+msgid "/uncategorized"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:296
 msgid "Single Course Permalink"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:253
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:298
+msgid "Enter custom structures for your course URLs here."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:321
+msgid "?course=sample-course"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:328
+msgid "/sample-course"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:340
 msgid "Single Section Permalink"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:266
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:342
+msgid "Enter custom structures for your section URLs here."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:363
+msgid "/sample-section"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:370
 msgid "Single Lesson Permalink"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:279
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:372
+msgid "Enter custom structures for your lesson URLs here."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:393
+msgid "/sample-lesson"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:400
 msgid "Single Quiz Permalink"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:292
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:402
+msgid "Enter custom structures for your quiz URLs here."
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:423
+msgid "/sample-quiz"
+msgstr ""
+
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:432
 msgid ""
 "Endpoints are appended to your page URLs to handle specific actions on the "
 "accounts pages. They should be unique and can be left blank to disable the "
 "endpoint."
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:301
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:441
 msgid "Endpoint for the \"My account - Orders\" page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:321
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:461
 msgid "View Order"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:323
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:463
 msgid "Endpoint for the \"My account - View order\" page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:343
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:483
 msgid "My Courses"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:345
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:485
 msgid "Endpoint for the \"My account - My courses\" page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:365
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:505
 msgid "Edit Account"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:367
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:507
 msgid "Endpoint for the \"My account - Edit Account\" page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:387
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:527
 msgid "Payment Methods"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:389
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:529
 msgid "Endpoint for the \"My account - Payment methods\" page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:409
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:549
 msgid "Lost Password"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:411
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:551
 msgid "Endpoint for the \"My account - Lost password\" page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:431
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:571
 msgid "Logout"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:433
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:573
 msgid "Endpoint for the triggering logout"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:455
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:595
 msgid ""
 "Endpoints are appended to your page URLs to handle specific actions during "
 "the checkout process. They should be unique."
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:463
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:603
 msgid "Pay"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:465
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:605
 msgid "Endpoint for the \"Checkout - Pay\" page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:485
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:625
 msgid "Order Recieved"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:487
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:627
 msgid "Endpoint for the \"Checkout - Order received\" page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:507
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:647
 msgid "Add Payment Method"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:509
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:649
 msgid "Endpoint for the \"Checkout - Add payment method\" page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:529
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:669
 msgid "Delete Payment Method"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:531
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:671
 msgid "Endpoint for the delete payment method page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:551
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:691
 msgid "Set Default Payment Method"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:553
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:693
 msgid "Endpoint for the setting a default payment method page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:580
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:720
 msgid "Template Debug"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:582
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:722
 msgid "Use for template debugging"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:606
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:746
 #: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:436
 msgid "Debug"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:608
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:748
 msgid "Use for plugin debugging"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:83
+#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:99
 msgid "Pages Setup"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:84
-msgid "Permalinks"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:85
-msgid "Account Endpoints"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:86
-msgid "Checkout Endpoints"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:94
-msgid "Course List Page"
-msgstr ""
-
-#: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:96
-msgid "This set course listing page where the courses are display"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/CourseArchiveSettings.tsx:119

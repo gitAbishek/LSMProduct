@@ -524,6 +524,10 @@ class ScriptStyle {
 					'data' => array(
 						'ajax_url' => admin_url( 'admin-ajax.php' ),
 						'nonce'    => wp_create_nonce( 'masteriyo_login_nonce' ),
+						'labels'   => array(
+							'sign_in'    => __( 'Sign In', 'masteriyo' ),
+							'signing_in' => __( 'Signing In...', 'masteriyo' ),
+						),
 					),
 				),
 				'single-course'  => array(

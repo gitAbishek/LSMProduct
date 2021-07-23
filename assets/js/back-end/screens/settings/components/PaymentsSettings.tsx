@@ -45,6 +45,12 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 		control,
 	});
 
+	const showOfflineOptions = useWatch({
+		name: 'payments.offline.enable',
+		defaultValue: paymentsData?.offline?.enable,
+		control,
+	});
+
 	const tabStyles = {
 		justifyContent: 'flex-start',
 		w: '160px',
@@ -70,6 +76,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 					<Tab sx={tabStyles}>{__('Store', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Currency', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Standard Paypal', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Offline Payment', 'masteriyo')}</Tab>
 				</TabList>
 				<TabPanels flex="1">
 					<TabPanel>
@@ -547,6 +554,69 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											type="text"
 											{...register('payments.paypal.live_api_signature')}
 											defaultValue={paymentsData?.paypal?.live_api_signature}
+										/>
+									</FormControl>
+								</Stack>
+							</Collapse>
+						</Stack>
+					</TabPanel>
+					<TabPanel>
+						<Stack direction="column" spacing="6">
+							<FormControl>
+								<Stack direction="row">
+									<FormLabel minW="160px">
+										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__('Use offline payment on checkout', 'masteriyo')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Controller
+										name="payments.offline.enable"
+										render={({ field }) => (
+											<Switch
+												{...field}
+												defaultChecked={paymentsData?.offline?.enable}
+											/>
+										)}
+									/>
+								</Stack>
+							</FormControl>
+
+							<Collapse in={showOfflineOptions} animateOpacity>
+								<Stack direction="column" spacing="6">
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Title', 'masteriyo')}
+										</FormLabel>
+										<Input
+											type="text"
+											{...register('payments.offline.title')}
+											defaultValue={paymentsData?.offline?.title}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Description', 'masteriyo')}
+										</FormLabel>
+										<Textarea
+											{...register('payments.offline.description')}
+											defaultValue={paymentsData?.offline?.description}
+										/>
+									</FormControl>
+
+									<FormControl>
+										<FormLabel minW="160px">
+											{__('Instructions', 'masteriyo')}
+										</FormLabel>
+										<Textarea
+											{...register('payments.offline.instructions')}
+											defaultValue={paymentsData?.offline?.instructions}
 										/>
 									</FormControl>
 								</Stack>

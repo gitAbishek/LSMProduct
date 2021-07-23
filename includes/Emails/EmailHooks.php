@@ -77,8 +77,6 @@ class EmailHooks {
 	 * @param UserCourse $user_course
 	 */
 	public static function trigger_course_enrolled_email( $id, $old_status, $new_status, $user_course ) {
-		error_log( 'Course enrolled status: ' . $new_status );
-
 		if ( 'enrolled' !== $new_status ) {
 			return;
 		}
@@ -97,8 +95,6 @@ class EmailHooks {
 	 * @param CourseProgress $course_progress
 	 */
 	public static function trigger_course_complete_email( $id, $old_status, $new_status, $course_progress ) {
-		error_log( 'Course completed status: ' . $new_status );
-
 		if ( 'complete' !== $new_status ) {
 			return;
 		}

@@ -1,12 +1,12 @@
 import { Box, Container, Input, Select, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { pickBy } from 'object-pickby';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { useOnType } from 'use-ontype';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
+import pickBy from '../../../utils/pickBy';
 
 const courseStatusList = [
 	{
@@ -54,8 +54,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 	);
 
 	const onChange = (data: FilterParams) => {
-		const newData = pickBy(data, (param) => param.length > 0);
-		setFilterParams(newData);
+		setFilterParams(pickBy(data));
 	};
 
 	return (

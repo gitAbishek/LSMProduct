@@ -104,6 +104,16 @@ const theme = extendTheme({
 				},
 			},
 
+			variants: {
+				outline: {
+					addon: {
+						bg: 'blue.10',
+						borderRadius: 'sm',
+						fontSize: 'sm',
+					},
+				},
+			},
+
 			defaultProps: {
 				_placeholder: {
 					color: 'red',

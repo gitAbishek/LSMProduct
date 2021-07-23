@@ -19,10 +19,10 @@ import {
 	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { infoIconStyles } from 'Config/styles';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
+import { infoIconStyles } from '../../../config/styles';
 import { CourseArchiveSettingsMap } from '../../../types';
 
 interface Props {

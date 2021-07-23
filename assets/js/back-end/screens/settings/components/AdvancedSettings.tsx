@@ -20,11 +20,11 @@ import {
 	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import { infoIconStyles } from 'Config/styles';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
 import { useQuery } from 'react-query';
+import { infoIconStyles } from '../../../config/styles';
 import { AdvancedSettingsMap } from '../../../types';
 import PagesAPI from '../../../utils/pages';
 

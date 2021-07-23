@@ -25,7 +25,7 @@ class Quiz extends PostType {
 	protected $slug = 'quiz';
 
 	public function __construct() {
-		$debug = masteriyo_is_debug_enabled();
+		$debug      = masteriyo_is_debug_enabled();
 		$permalinks = masteriyo_get_permalink_structure();
 
 		$this->labels = array(

@@ -17,7 +17,7 @@ class Roles {
 	 */
 	public static function get_all() {
 		return apply_filters(
-			'masteriyo_get_roles',
+			'masteriyo_user_roles',
 			array(
 				'masteriyo_manager'    => array(
 					'display_name' => esc_html__( 'Masteriyo Manager', 'masteriyo' ),

@@ -60,7 +60,6 @@ class Install {
 		$charset_collate = $wpdb->get_charset_collate();
 		$base_prefix     = $wpdb->base_prefix;
 
-		// dbDelta( self::get_question_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_session_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_items_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_order_itemmeta_table_schema( $charset_collate, $base_prefix ) );
@@ -69,37 +68,6 @@ class Install {
 		dbDelta( self::get_user_items_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_user_itemmeta_table_schema( $charset_collate, $base_prefix ) );
 		dbDelta( self::get_quiz_attempts_table_schema( $charset_collate, $base_prefix ) );
-	}
-
-	/**
-	 * Get question table schema.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $charset_collate   Database charset collate.
-	 * @param string $base_prefix       Table prefix.
-	 *
-	 * @return string
-	 */
-	private static function get_question_table_schema( $charset_collate, $base_prefix ) {
-		$sql = "CREATE TABLE `{$base_prefix}masteriyo_questions` (
-			id BIGINT UNSIGNED AUTO_INCREMENT,
-			quiz_id BIGINT UNSIGNED,
-			title text,
-			description LONGTEXT,
-			sort SMALLINT UNSIGNED,
-			points SMALLINT UNSIGNED,
-			correct_msg TEXT,
-			incorrect_msg TEXT,
-			hint_msg TEXT,
-			hint_enabled TINYINT(1),
-			answer_type varchar(50),
-			answer_required TINYINT(1),
-			randomize TINYINT(1),
-			PRIMARY KEY (id)
-		) $charset_collate;";
-
-		return $sql;
 	}
 
 	/**

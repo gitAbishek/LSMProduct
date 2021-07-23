@@ -11,6 +11,7 @@ namespace ThemeGrill\Masteriyo;
  * Capabilities class.
  */
 class Capabilities {
+
 	/**
 	 * Get masteriyo student capabilites.
 	 *
@@ -19,29 +20,25 @@ class Capabilities {
 	 * @return array
 	 */
 	public static function get_student_capabilities() {
-		$caps_info         = apply_filters(
-			'masteriyo_manager_core_caps_info',
-			array(
-				'course'        => array( 'read' ),
-				'section'       => array( 'read' ),
-				'lesson'        => array( 'read' ),
-				'faq'           => array( 'read' ),
-				'quiz'          => array( 'read' ),
-				'question'      => array( 'read' ),
-				'course_review' => array( 'publish', 'read', 'edit_plural', 'delete_plural' ),
-				'order'         => array( 'read' ),
-				'users'         => array( 'read' ),
-			)
+		$capabilities = array(
+			'read_courses'           => true,
+			'read_sections'          => true,
+			'read_lessons'           => true,
+			'read_quizzes'           => true,
+			'read_questions'         => true,
+			'read_faqs'              => true,
+			'read_orders'            => true,
+			'read_users'             => true,
+			'read_course_reviews'    => true,
+			'read_course_qas'        => true,
+			'read_user_courses'      => true,
+			'read_course_progresses' => true,
 		);
-		$core_capabilities = self::map_caps( $caps_info );
 
-		return apply_filters(
-			'masteriyo_get_student_capabilities',
-			array_merge(
-				array_fill_keys( array_unique( $core_capabilities ), true ),
-				get_role( 'contributor' )->capabilities
-			)
-		);
+		$subscriber_caps = get_role( 'subscriber' )->capabilities;
+		$capabilities    = array_merge( $capabilities, $subscriber_caps );
+
+		return apply_filters( 'masteriyo_student_capabilities', $capabilities );
 	}
 
 	/**
@@ -52,30 +49,76 @@ class Capabilities {
 	 * @return array
 	 */
 	public static function get_instructor_capabilities() {
-		$caps_info         = apply_filters(
-			'masteriyo_instructor_core_caps_info',
-			array(
-				'course'        => array( 'publish', 'read', 'edit', 'delete' ),
-				'section'       => array( 'publish', 'read', 'edit', 'delete' ),
-				'lesson'        => array( 'publish', 'read', 'edit', 'delete' ),
-				'faq'           => array( 'publish', 'read', 'edit', 'delete' ),
-				'quiz'          => array( 'publish', 'read', 'edit', 'delete' ),
-				'question'      => array( 'publish', 'read', 'edit', 'delete' ),
-				'course_review' => array( 'read', 'edit_plural', 'delete_plural' ),
-				'users'         => array( 'read' ),
-				'order'         => array( 'read' ),
-			)
-		);
-		$core_capabilities = self::map_caps( $caps_info );
-		$core_capabilities = array_merge( array_keys( self::get_student_capabilities() ), $core_capabilities );
+		$capabilities = array(
+			// Courses
+			'publish_courses'                 => true,
+			'edit_courses'                    => true,
+			'edit_private_courses'            => true,
+			'edit_published_courses'          => true,
+			'delete_courses'                  => true,
+			'delete_published_courses'        => true,
+			'delete_private_courses'          => true,
 
-		return apply_filters(
-			'masteriyo_get_instructor_capabilities',
-			array_merge(
-				array_fill_keys( array_unique( $core_capabilities ), true ),
-				get_role( 'author' )->capabilities
-			)
+			// sections
+			'publish_sections'                => true,
+			'edit_sections'                   => true,
+			'edit_private_sections'           => true,
+			'edit_published_sections'         => true,
+			'delete_sections'                 => true,
+			'delete_published_sections'       => true,
+			'delete_private_sections'         => true,
+
+			// Lessons
+			'publish_lessons'                 => true,
+			'edit_lessons'                    => true,
+			'edit_private_lessons'            => true,
+			'edit_published_lessons'          => true,
+			'delete_lessons'                  => true,
+			'delete_published_lessons'        => true,
+			'delete_private_lessons'          => true,
+
+			// Quizzes
+			'publish_quizzes'                 => true,
+			'edit_quizzes'                    => true,
+			'edit_private_quizzes'            => true,
+			'edit_published_quizzes'          => true,
+			'delete_quizzes'                  => true,
+			'delete_published_quizzes'        => true,
+			'delete_private_quizzes'          => true,
+
+			// Questions
+			'publish_questions'               => true,
+			'edit_questions'                  => true,
+			'edit_private_questions'          => true,
+			'edit_published_questions'        => true,
+			'delete_questions'                => true,
+			'delete_published_questions'      => true,
+			'delete_private_questions'        => true,
+
+			// Course reviews
+			'publish_course_reviews'          => true,
+			'edit_course_reviews'             => true,
+			'edit_private_course_reviews'     => true,
+			'edit_published_course_reviews'   => true,
+			'delete_course_reviews'           => true,
+			'delete_published_course_reviews' => true,
+			'delete_private_course_reviews'   => true,
+
+			// Course QAs
+			'publish_course_qas'              => true,
+			'edit_course_qas'                 => true,
+			'edit_private_course_qas'         => true,
+			'edit_published_course_qas'       => true,
+			'delete_course_qas'               => true,
+			'delete_published_course_qas'     => true,
+			'delete_private_course_qas'       => true,
 		);
+
+		$author_caps  = get_role( 'author' )->capabilities;
+		$capabilities = array_merge( $capabilities, $author_caps );
+		$capabilities = array_merge( $capabilities, self::get_student_capabilities() );
+
+		return apply_filters( 'masteriyo_instructor_capabilities', $capabilities );
 	}
 
 	/**
@@ -86,31 +129,52 @@ class Capabilities {
 	 * @return array
 	 */
 	public static function get_manager_capabilities() {
-		$caps_info         = apply_filters(
-			'masteriyo_manager_core_caps_info',
-			array(
-				'course'            => array( 'publish', 'read', 'edit', 'delete', 'delete_others' ),
-				'section'           => array( 'publish', 'read', 'edit', 'delete', 'delete_others' ),
-				'lesson'            => array( 'publish', 'read', 'edit', 'delete', 'delete_others' ),
-				'faq'               => array( 'publish', 'read', 'edit', 'delete', 'delete_others' ),
-				'quiz'              => array( 'publish', 'read', 'edit', 'delete', 'delete_others' ),
-				'question'          => array( 'publish', 'read', 'read_others', 'edit', 'delete', 'delete_others' ),
-				'order'             => array( 'read', 'read_others', 'edit', 'edit_others', 'delete', 'delete_others' ),
-				'masteriyo_setting' => array( 'manage' ),
-				'course_review'     => array( 'read', 'edit_plural', 'edit_others', 'delete_plural', 'delete_others' ),
-				'users'             => array( 'read' ),
-			)
-		);
-		$core_capabilities = self::map_caps( $caps_info );
-		$core_capabilities = array_merge( array_keys( self::get_instructor_capabilities() ), $core_capabilities );
+		$capabilities = array(
+			// Manage settings
+			'manage_masteriyo_settings'    => true,
 
-		return apply_filters(
-			'masteriyo_get_manager_capabilities',
-			array_merge(
-				array_fill_keys( array_unique( $core_capabilities ), true ),
-				get_role( 'editor' )->capabilities
-			)
+			// Users
+			'create_users'                 => true,
+			'delete_users'                 => true,
+			'edit_users'                   => true,
+			'list_users'                   => true,
+			'promote_users'                => true,
+			'remove_users'                 => true,
+
+			// Courses
+			'edit_others_courses'          => true,
+			'delete_others_courses'        => true,
+
+			// Sections
+			'edit_others_sections'         => true,
+			'delete_others_sections'       => true,
+
+			// Lessons
+			'edit_others_lessons'          => true,
+			'delete_others_lessons'        => true,
+
+			// Quizzes
+			'edit_others_quizzes'          => true,
+			'delete_others_quizzes'        => true,
+
+			// Questions
+			'edit_others_questions'        => true,
+			'delete_others_questions'      => true,
+
+			// Course reviews
+			'edit_others_course_reviews'   => true,
+			'delete_others_course_reviews' => true,
+
+			// Course QAs
+			'edit_others_course_qas'       => true,
+			'delete_others_course_qas'     => true,
 		);
+
+		$editor_caps  = get_role( 'editor' )->capabilities;
+		$capabilities = array_merge( $capabilities, $editor_caps );
+		$capabilities = array_merge( $capabilities, self::get_instructor_capabilities() );
+
+		return apply_filters( 'masteriyo_manager_capabilities', $capabilities );
 	}
 
 	/**
@@ -121,103 +185,12 @@ class Capabilities {
 	 * @return array
 	 */
 	public static function get_admin_capabilities() {
-		$caps_info         = apply_filters(
-			'masteriyo_admin_core_caps_info',
-			array(
-				'course'            => array( 'read', 'delete', 'delete_others' ),
-				'section'           => array( 'read', 'delete', 'delete_others' ),
-				'lesson'            => array( 'read', 'delete', 'delete_others' ),
-				'faq'               => array( 'read', 'delete', 'delete_others' ),
-				'quiz'              => array( 'read', 'delete', 'delete_others' ),
-				'question'          => array( 'read', 'delete', 'delete_others' ),
-				'order'             => array( 'read', 'read_others', 'edit', 'edit_others', 'delete', 'delete_others' ),
-				'masteriyo_setting' => array( 'manage' ),
-				'course_review'     => array( 'read', 'edit_plural', 'edit_others', 'delete_plural', 'delete_others' ),
-				'users'             => array( 'create', 'read', 'edit', 'delete' ),
-			)
-		);
-		$core_capabilities = self::map_caps( $caps_info );
-		$core_capabilities = array_merge( array_keys( self::get_manager_capabilities() ), $core_capabilities );
+		$capabilities       = array();
+		$administrator_caps = get_role( 'administrator' )->capabilities;
+		$capabilities       = array_merge( $capabilities, $administrator_caps );
+		$capabilities       = array_merge( $capabilities, self::get_manager_capabilities() );
+		$capabilities       = array_unique( $capabilities );
 
-		return apply_filters(
-			'masteriyo_get_administrator_capabilities',
-			array_fill_keys( array_unique( $core_capabilities ), true )
-		);
-	}
-
-	/**
-	 * Get capability types.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return array
-	 */
-	protected static function get_capability_types() {
-		$cap_types = array(
-			'course'            => array( 'course', 'courses' ),
-			'section'           => array( 'section', 'sections' ),
-			'lesson'            => array( 'lesson', 'lessons' ),
-			'faq'               => array( 'faq', 'faqs' ),
-			'question'          => array( 'question', 'questions' ),
-			'quiz'              => array( 'quiz', 'quizzes' ),
-			'order'             => array( 'order', 'orders' ),
-			'masteriyo_setting' => array( 'masteriyo_setting', 'masteriyo_settings' ),
-			'course_review'     => array( 'course_review', 'course_reviews' ),
-			'users'             => array( 'user', 'users' ),
-		);
-
-		return apply_filters( 'masteriyo_cap_types', $cap_types );
-	}
-
-	/**
-	 * Map cap types to a list of capabilities.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param array $caps_info
-	 *
-	 * @return array
-	 */
-	protected static function map_caps( $caps_info ) {
-		$caps          = array();
-		$all_cap_types = self::get_capability_types();
-
-		foreach ( $caps_info as $cap_type => $permissions ) {
-			if ( empty( $all_cap_types[ $cap_type ] ) ) {
-				continue;
-			}
-			$cap_types     = $all_cap_types[ $cap_type ];
-			$singular_type = $cap_types[0];
-			$plural_type   = isset( $cap_types[1] ) ? $cap_types[1] : $singular_type;
-
-			foreach ( $permissions as $permission_type ) {
-				if ( 'edit' === $permission_type ) {
-					$caps[] = "edit_{$singular_type}";
-					$caps[] = "edit_{$plural_type}";
-					$caps[] = "edit_published_{$plural_type}";
-					continue;
-				}
-				if ( 'edit_plural' === $permission_type ) {
-					$caps[] = "edit_{$plural_type}";
-					continue;
-				}
-				if ( 'delete' === $permission_type ) {
-					$caps[] = "delete_{$singular_type}";
-					$caps[] = "delete_{$plural_type}";
-					$caps[] = "delete_published_{$plural_type}";
-					continue;
-				}
-				if ( 'delete_plural' === $permission_type ) {
-					$caps[] = "delete_{$plural_type}";
-					continue;
-				}
-				if ( 'manage_singular' === $permission_type ) {
-					$caps[] = "manage_{$singular_type}";
-					continue;
-				}
-				$caps[] = "{$permission_type}_{$plural_type}";
-			}
-		}
-		return $caps;
+		return apply_filters( 'masteriyo_administrator_capabilities', $capabilities );
 	}
 }

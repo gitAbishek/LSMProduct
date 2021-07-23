@@ -35,13 +35,13 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 
 	const showPayPalOptions = useWatch({
 		name: 'payments.paypal.enable',
-		defaultValue: false,
+		defaultValue: paymentsData?.paypal?.enable,
 		control,
 	});
 
 	const showPayPalSandBoxOptions = useWatch({
 		name: 'payments.paypal.sandbox',
-		defaultValue: true,
+		defaultValue: paymentsData?.paypal?.sandbox,
 		control,
 	});
 

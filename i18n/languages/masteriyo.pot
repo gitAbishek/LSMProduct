@@ -350,7 +350,7 @@ msgstr ""
 #: assets/js/back-end/screens/course-categories/components/DescriptionInput.tsx:16
 #: assets/js/back-end/screens/course-tags/AllCourseTags.tsx:42
 #: assets/js/back-end/screens/course-tags/components/DescriptionInput.tsx:15
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:328
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:326
 msgid "Description"
 msgstr ""
 
@@ -551,7 +551,7 @@ msgid "You can continue editing"
 msgstr ""
 
 #: assets/js/back-end/screens/courses/AllCourses.tsx:64
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:317
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:315
 msgid "Title"
 msgstr ""
 
@@ -782,7 +782,7 @@ msgid "Address 2"
 msgstr ""
 
 #: assets/js/back-end/screens/orders/EditOrder.tsx:450
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:109
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:105
 msgid "City"
 msgstr ""
 
@@ -1296,7 +1296,7 @@ msgid "Use for template debugging"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/AdvancedSettings.tsx:606
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:438
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:436
 msgid "Debug"
 msgstr ""
 
@@ -1407,7 +1407,7 @@ msgid "Email sent to user when they requested to become an instructor"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/EmailSettings.tsx:349
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:292
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:290
 msgid "Enable"
 msgstr ""
 
@@ -1482,169 +1482,169 @@ msgstr ""
 msgid "Display question & answers tab on learning page"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:111
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:107
 msgid "Your city where you are residing"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:133
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:129
 msgid "Adress Line 1"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:135
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:131
 msgid "Your street address"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:151
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:147
 msgid "Adress Line 2"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:153
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:149
 msgid "Your street address 2"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:175
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:171
 #: assets/js/getting-started/screens/payment/Payment.tsx:57
 msgid "Currency"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:177
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:173
 msgid "Select default currency"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:197
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:195
 #: assets/js/getting-started/screens/payment/Payment.tsx:75
 msgid "Currency Position"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:199
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:197
 msgid "Specifies where the currency symbol will appear"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:213
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:211
 #: assets/js/getting-started/screens/payment/Payment.tsx:81
 msgid "Left"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:214
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:212
 #: assets/js/getting-started/screens/payment/Payment.tsx:82
 msgid "Right"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:221
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:219
 #: assets/js/getting-started/screens/payment/Payment.tsx:91
 msgid "Thousand Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:223
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:221
 msgid "It can't be a number and same as decimal separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:242
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:240
 #: assets/js/getting-started/screens/payment/Payment.tsx:127
 msgid "Decimal Separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:244
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:242
 msgid "It can't be a number and same as thousand separator"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:265
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:263
 msgid "Number of Decimals"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:267
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:265
 msgid "Number of digit to show on fractional part"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:294
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:292
 msgid "Use standard paypal on checkout"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:339
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:337
 msgid "Ipn Email Notification"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:341
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:339
 msgid "Get instant email notification after payment"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:368
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:366
 msgid "Email"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:379
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:377
 msgid "Reciever Email"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:390
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:388
 msgid "Indentity Token"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:401
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:399
 msgid "Invoice Prefix"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:412
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:410
 msgid "Payment Actions"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:415
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:413
 msgid "Select Payment Action"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:419
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:417
 msgid "Capture"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:426
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:424
 msgid "Image Url"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:455
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:453
 msgid "Sandbox"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:457
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:455
 msgid "Standard paypal test environment"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:483
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:481
 msgid "Sandbox API Username"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:496
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:494
 msgid "Sandbox API Password"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:509
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:507
 msgid "Sandbox API Signature"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:524
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:522
 msgid "Live API Username"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:535
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:533
 msgid "Live API Password"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:546
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:544
 msgid "Live API Signature"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:76
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:70
 msgid "Store"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:78
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:72
 msgid "Standard Paypal"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:86
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:80
 msgid "Country"
 msgstr ""
 
-#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:88
+#: assets/js/back-end/screens/settings/components/PaymentsSettings.tsx:82
 msgid "Country where you live"
 msgstr ""
 

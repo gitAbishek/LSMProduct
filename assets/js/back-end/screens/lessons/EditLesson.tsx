@@ -26,7 +26,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import MasteriyoBreadCrumb from '../../components/common/MasteriyoBreadCrumb';
+import MasteriyoBreadCrumb from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';

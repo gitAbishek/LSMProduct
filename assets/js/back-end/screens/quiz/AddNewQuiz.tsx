@@ -22,7 +22,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
-import MasteriyoBreadCrumb from '../../components/common/MasteriyoBreadCrumb';
+import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
@@ -41,16 +41,11 @@ const AddNewQuiz: React.FC = () => {
 	const toast = useToast();
 	const contentAPI = new API(urls.contents);
 	const quizAPI = new API(urls.quizes);
-	const courseAPI = new API(urls.courses);
+
 	const tabStyles = {
 		fontWeight: 'medium',
 		py: '4',
 	};
-
-	// Get Course Name
-	const courseQuery = useQuery(['courseList', courseId], () =>
-		courseAPI.get(courseId)
-	);
 
 	// gets total number of content on section
 	const contentQuery = useQuery([`content${sectionId}`, sectionId], () =>
@@ -88,11 +83,7 @@ const AddNewQuiz: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
-					<MasteriyoBreadCrumb
-						isCurrentTitle="Add New Quiz"
-						courseTitle={courseQuery?.data?.name}
-						courseId={courseId}
-					/>
+					<PageNav isCurrentTitle="Add New Quiz" courseId={courseId} />
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">

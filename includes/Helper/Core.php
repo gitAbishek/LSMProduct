@@ -1585,6 +1585,23 @@ function masteriyo_get_current_myaccount_endpoint() {
 }
 
 /**
+ * Return default value if the given value is empty. Uses the php function `empty`.
+ *
+ * @since 0.1.0
+ *
+ * @param mixed $value
+ * @param mixed $default
+ *
+ * @return mixed
+ */
+function if_empty($value, $default = null ) {
+	if ( empty( $value ) ) {
+		return $default;
+	}
+	return $value;
+}
+
+/**
  * Get my account endpoints' slugs.
  *
  * @since 0.1.0
@@ -1595,15 +1612,15 @@ function masteriyo_get_myaccount_endpoints() {
 	return apply_filters(
 		'masteriyo_myaccount_endpoints',
 		array(
-			'view-myaccount' => get_option( 'masteriyo.pages.view_myaccount', 'view-myaccount' ),
-			'edit-myaccount' => get_option( 'masteriyo.pages.edit_account', 'edit-myaccount' ),
-			'dashboard'      => get_option( 'masteriyo.pages.dashboard', 'dashboard' ),
-			'courses'        => get_option( 'masteriyo.pages.my_courses', 'courses' ),
-			'order-history'  => get_option( 'masteriyo.pages.order_history', 'order-history' ),
-			'reset-password' => get_option( 'masteriyo.pages.lost_password', 'reset-password' ),
-			'signup'         => get_option( 'masteriyo.pages.signup', 'signup' ),
-			'user-logout'    => get_option( 'masteriyo.pages.logout', 'user-logout' ),
-			'view-order'     => get_option( 'masteriyo.pages.view_order', 'view-order' ),
+			'view-myaccount' => if_empty( get_option( 'masteriyo.pages.view_myaccount', '' ), 'view-myaccount' ),
+			'edit-myaccount' => if_empty( get_option( 'masteriyo.pages.edit_account', '' ), 'edit-myaccount' ),
+			'dashboard'      => if_empty( get_option( 'masteriyo.pages.dashboard', '' ), 'dashboard' ),
+			'courses'        => if_empty( get_option( 'masteriyo.pages.my_courses', '' ), 'courses' ),
+			'order-history'  => if_empty( get_option( 'masteriyo.pages.order_history', '' ), 'order-history' ),
+			'reset-password' => if_empty( get_option( 'masteriyo.pages.lost_password', '' ), 'reset-password' ),
+			'signup'         => if_empty( get_option( 'masteriyo.pages.signup', '' ), 'signup' ),
+			'user-logout'    => if_empty( get_option( 'masteriyo.pages.logout', '' ), 'user-logout' ),
+			'view-order'     => if_empty( get_option( 'masteriyo.pages.view_order', '' ), 'view-order' ),
 		)
 	);
 }

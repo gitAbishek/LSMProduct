@@ -39,7 +39,7 @@ const AllCourses = () => {
 			borderBottom: 'none',
 		},
 		'tr:nth-of-type(2n+1) td': {
-			bg: 'blue.10',
+			bg: '#f8f9fa',
 		},
 
 		tr: {
@@ -64,7 +64,7 @@ const AllCourses = () => {
 			<Container maxW="container.xl">
 				<Box bg="white" py="12" shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
-						<Table variant="striped" size="sm" sx={tableStyles}>
+						<Table size="sm" sx={tableStyles}>
 							<Thead>
 								<Tr>
 									<Th>{__('Title', 'masteriyo')}</Th>

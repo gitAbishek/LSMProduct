@@ -22,6 +22,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
+import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
@@ -40,6 +41,7 @@ const AddNewQuiz: React.FC = () => {
 	const toast = useToast();
 	const contentAPI = new API(urls.contents);
 	const quizAPI = new API(urls.quizes);
+
 	const tabStyles = {
 		fontWeight: 'medium',
 		py: '4',
@@ -81,6 +83,7 @@ const AddNewQuiz: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
+					<PageNav isCurrentTitle="Add New Quiz" courseId={courseId} />
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">

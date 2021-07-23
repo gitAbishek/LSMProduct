@@ -71,7 +71,7 @@ const AddNewLesson: React.FC = () => {
 		addLesson.mutate(mergeDeep(data, newData));
 	};
 
-	if (sectionQuery.isSuccess && sectionQuery.data.course_id === courseId) {
+	if (sectionQuery.isSuccess && sectionQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />

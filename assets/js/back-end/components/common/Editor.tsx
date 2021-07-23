@@ -60,7 +60,7 @@ const Editor: React.FC<Props> = (props) => {
 				},
 			}}>
 			<Input type="hidden" {...register(name)} defaultValue={defaultValue} />
-			<EditorMenuBar editor={editor} />
+			<EditorMenuBar editor={editor} hasImageUpload={hasImageUpload} />
 			<Box p="3" ref={ref}>
 				<EditorContent editor={editor} />
 			</Box>

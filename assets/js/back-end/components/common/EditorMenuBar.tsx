@@ -11,6 +11,7 @@ import {
 	Tooltip,
 	useDisclosure,
 } from '@chakra-ui/react';
+import { EditorContentProps } from '@tiptap/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import {
@@ -34,7 +35,12 @@ import { ImQuotesLeft } from 'react-icons/im';
 import { mergeDeep } from '../../utils/mergeDeep';
 import ImageUploadModal from './ImageUploadModal';
 
-const EditorMenuBar = ({ editor }: any) => {
+interface Props extends EditorContentProps {
+	hasImageUpload?: boolean;
+}
+
+const EditorMenuBar: React.FC<Props> = (props) => {
+	const { editor, hasImageUpload } = props;
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const buttonStyles = (isActive?: boolean) => {
@@ -290,19 +296,24 @@ const EditorMenuBar = ({ editor }: any) => {
 					</Box>
 				</Tooltip>
 			</Stack>
-			<Stack direction="row" spacing="1" align="center">
-				<Tooltip label={__('Upload Image', 'masteriyo')} hasArrow fontSize="xs">
-					<Box as="span" sx={buttonCommonStyles()} onClick={onOpen}>
-						<Icon as={BiImageAdd} />
-					</Box>
-				</Tooltip>
+			{hasImageUpload && (
+				<Stack direction="row" spacing="1" align="center">
+					<Tooltip
+						label={__('Upload Image', 'masteriyo')}
+						hasArrow
+						fontSize="xs">
+						<Box as="span" sx={buttonCommonStyles()} onClick={onOpen}>
+							<Icon as={BiImageAdd} />
+						</Box>
+					</Tooltip>
 
-				<ImageUploadModal
-					isOpen={isOpen}
-					onClose={onClose}
-					onSucces={onImageUpload}
-				/>
-			</Stack>
+					<ImageUploadModal
+						isOpen={isOpen}
+						onClose={onClose}
+						onSucces={onImageUpload}
+					/>
+				</Stack>
+			)}
 		</Stack>
 	);
 };

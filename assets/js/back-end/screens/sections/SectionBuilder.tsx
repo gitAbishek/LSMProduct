@@ -1,7 +1,7 @@
 import { Center } from '@chakra-ui/layout';
 import { Box, Collapse } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import AddNewButton from '../../components/common/AddNewButton';
 import { reorder } from '../../utils/reorder';
@@ -17,12 +17,19 @@ interface Props {
 const SectionBuilder: React.FC<Props> = (props) => {
 	const { courseId, builderData, setBuilderData } = props;
 	const [isAddNewSection, setIsAddNewSection] = useState(false);
+	const scrollRef = useRef<any>(null);
 
 	const onDragEnd = (result: DropResult) => {
 		const orderedData = reorder(result, builderData);
 		setBuilderData(orderedData);
 	};
 
+	const onAddNewSectionPress = () => {
+		setIsAddNewSection(true);
+		setTimeout(() => {
+			scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+		}, 600);
+	};
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
 			<Droppable droppableId="section" type="section">
@@ -47,15 +54,17 @@ const SectionBuilder: React.FC<Props> = (props) => {
 						})}
 
 						<Collapse in={isAddNewSection} animateOpacity>
-							<NewSection
-								courseId={courseId}
-								onSave={() => setIsAddNewSection(false)}
-								onCancel={() => setIsAddNewSection(false)}
-							/>
+							<Box ref={scrollRef}>
+								<NewSection
+									courseId={courseId}
+									onSave={() => setIsAddNewSection(false)}
+									onCancel={() => setIsAddNewSection(false)}
+								/>
+							</Box>
 						</Collapse>
 
 						<Center mb="8">
-							<AddNewButton onClick={() => setIsAddNewSection(true)}>
+							<AddNewButton onClick={onAddNewSectionPress}>
 								{__('Add New Section', 'masteriyo')}
 							</AddNewButton>
 						</Center>

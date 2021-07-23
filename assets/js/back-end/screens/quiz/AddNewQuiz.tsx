@@ -83,7 +83,7 @@ const AddNewQuiz: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
-					<PageNav isCurrentTitle="Add New Quiz" courseId={courseId} />
+					<PageNav isCurrentTitle={__('Add New Quiz')} courseId={courseId} />
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">

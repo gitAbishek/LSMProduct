@@ -39,9 +39,19 @@ const AllCourses = () => {
 			borderBottom: 'none',
 		},
 		'tr:nth-of-type(2n+1) td': {
-			bg: 'blue.50',
+			bg: 'blue.10',
 		},
 
+		tr: {
+			'th, td': {
+				':first-child': {
+					pl: '12',
+				},
+				':last-child': {
+					pr: '6',
+				},
+			},
+		},
 		td: {
 			borderBottom: 'none',
 		},
@@ -52,13 +62,9 @@ const AllCourses = () => {
 			<Header hideCoursesMenu />
 			<CourseFilter setFilterParams={setFilterParams} />
 			<Container maxW="container.xl">
-				<Box bg="white" p="12" shadow="box" mx="auto">
+				<Box bg="white" py="12" shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
-						<Table
-							variant="striped"
-							colorScheme="blue"
-							size="sm"
-							sx={tableStyles}>
+						<Table variant="striped" size="sm" sx={tableStyles}>
 							<Thead>
 								<Tr>
 									<Th>{__('Title', 'masteriyo')}</Th>

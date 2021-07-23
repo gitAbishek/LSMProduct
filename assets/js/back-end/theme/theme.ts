@@ -4,6 +4,7 @@ import { StepsStyleConfig as Steps } from 'chakra-ui-steps';
 const theme = extendTheme({
 	colors: {
 		blue: {
+			10: '#F7FAFF',
 			50: '#EBF2FF',
 			100: '#DEE9FF',
 			200: '#C4D8FF',

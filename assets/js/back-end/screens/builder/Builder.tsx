@@ -32,6 +32,7 @@ import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { mergeDeep } from '../../utils/mergeDeep';
 import EditCourse from '../courses/EditCourse';
+import SectionBuilder from '../sections/SectionBuilder';
 import CourseSetting from './component/CourseSetting';
 
 const Builder: React.FC = () => {
@@ -202,13 +203,13 @@ const Builder: React.FC = () => {
 											<EditCourse courseData={courseQuery.data} />
 										</TabPanel>
 										<TabPanel sx={tabPanelStyles}>
-											{/* <SectionBuilder
+											<SectionBuilder
 												courseId={courseQuery.data.id}
 												builderData={
 													(builderData && builderData) || builderQuery.data
 												}
 												setBuilderData={setBuilderData}
-											/> */}
+											/>
 										</TabPanel>
 										<TabPanel sx={tabPanelStyles}>
 											<CourseSetting courseData={courseQuery.data} />

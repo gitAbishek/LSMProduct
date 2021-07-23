@@ -31,6 +31,7 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import { LessonSchema } from '../../schemas';
 import API from '../../utils/api';
 import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
@@ -46,8 +47,9 @@ const EditLesson = () => {
 	const lessonAPI = new API(urls.lessons);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
-	const lessonQuery = useQuery([`section${lessonId}`, lessonId], () =>
-		lessonAPI.get(lessonId)
+	const lessonQuery = useQuery<LessonSchema>(
+		[`section${lessonId}`, lessonId],
+		() => lessonAPI.get(lessonId)
 	);
 
 	const updateLesson = useMutation(
@@ -102,7 +104,7 @@ const EditLesson = () => {
 		setDeleteModalOpen(false);
 	};
 
-	if (lessonQuery.isSuccess) {
+	if (lessonQuery.isSuccess && lessonQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />

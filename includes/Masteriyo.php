@@ -325,7 +325,7 @@ class Masteriyo extends Container {
 	public static function add_plugin_action_links( $links ) {
 		$action_links      = array(
 			'settings' => array(
-				'url'        => admin_url( 'admin.php?page=masteriyo' ),
+				'url'        => admin_url( 'admin.php?page=masteriyo#/settings' ),
 				'label'      => __( 'Settings', 'masteriyo' ),
 				'aria-label' => __( 'View masteriyo settings', 'masteriyo' ),
 			),

@@ -104,6 +104,14 @@ const theme = extendTheme({
 				},
 			},
 
+			variants: {
+				outline: {
+					addon: {
+						bg: 'blue.50',
+					},
+				},
+			},
+
 			defaultProps: {
 				_placeholder: {
 					color: 'red',

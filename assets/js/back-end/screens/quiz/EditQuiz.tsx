@@ -20,7 +20,7 @@ import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
-import MasteriyoBreadCrumb from '../../components/common/PageNav';
+import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
@@ -41,7 +41,6 @@ const EditQuiz: React.FC = () => {
 	const history = useHistory();
 	const toast = useToast();
 	const quizAPI = new API(urls.quizes);
-	const courseAPI = new API(urls.courses);
 	const [tabIndex, setTabIndex] = useState<number>(
 		page === 'questions' ? 1 : 0
 	);
@@ -55,10 +54,6 @@ const EditQuiz: React.FC = () => {
 		p: '0',
 	};
 
-	// Get Course Name
-	const courseQuery = useQuery(['courseList', courseId], () =>
-		courseAPI.get(courseId)
-	);
 	// gets total number of content on section
 	const quizQuery = useQuery<QuizSchema>([`quiz${quizId}`, quizId], () =>
 		quizAPI.get(quizId)
@@ -87,11 +82,7 @@ const EditQuiz: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
-					<MasteriyoBreadCrumb
-						isCurrentTitle={quizQuery?.data?.name}
-						courseTitle={courseQuery?.data?.name}
-						courseId={courseId}
-					/>
+					<PageNav isCurrentTitle={quizQuery?.data?.name} courseId={courseId} />
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">

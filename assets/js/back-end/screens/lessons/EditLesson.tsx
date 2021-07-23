@@ -26,7 +26,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import MasteriyoBreadCrumb from '../../components/common/PageNav';
+import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
@@ -44,13 +44,7 @@ const EditLesson = () => {
 	const toast = useToast();
 	const cancelRef = useRef<any>();
 	const lessonAPI = new API(urls.lessons);
-	const courseAPI = new API(urls.courses);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-
-	// Get Course Name
-	const courseQuery = useQuery(['courseList', courseId], () =>
-		courseAPI.get(courseId)
-	);
 
 	const lessonQuery = useQuery([`section${lessonId}`, lessonId], () =>
 		lessonAPI.get(lessonId)
@@ -113,9 +107,8 @@ const EditLesson = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
-					<MasteriyoBreadCrumb
+					<PageNav
 						isCurrentTitle={lessonQuery?.data?.name}
-						courseTitle={courseQuery?.data?.name}
 						courseId={courseId}
 					/>
 					<FormProvider {...methods}>

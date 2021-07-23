@@ -20,7 +20,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import MasteriyoBreadCrumb from '../../components/common/PageNav';
+import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
@@ -39,12 +39,6 @@ const AddNewLesson: React.FC = () => {
 	const history = useHistory();
 	const lessonAPI = new API(urls.lessons);
 	const sectionsAPI = new API(urls.sections);
-	const courseAPI = new API(urls.courses);
-
-	// Get Course Name
-	const courseQuery = useQuery(['courseList', courseId], () =>
-		courseAPI.get(courseId)
-	);
 
 	// checks whether section exist or not
 	const sectionQuery = useQuery([`section${sectionId}`, sectionId], () =>
@@ -80,11 +74,7 @@ const AddNewLesson: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
-					<MasteriyoBreadCrumb
-						isCurrentTitle="Add New Lesson"
-						courseTitle={courseQuery?.data?.name}
-						courseId={courseId}
-					/>
+					<PageNav isCurrentTitle="Add New Lesson" courseId={courseId} />
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">

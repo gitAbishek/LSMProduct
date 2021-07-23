@@ -13,11 +13,11 @@ import {
 	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import ColorInput from 'Components/common/ColorInput';
-import { infoIconStyles } from 'Config/styles';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
+import ColorInput from '../../../components/common/ColorInput';
+import { infoIconStyles } from '../../../config/styles';
 import { GeneralSettingsMap } from '../../../types';
 
 interface Props {

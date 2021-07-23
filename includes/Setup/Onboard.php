@@ -84,6 +84,14 @@ class Onboard {
 			true
 		);
 
+		wp_register_script(
+			'masteriyo-dependencies',
+			plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . '/assets/js/build/masteriyo-dependencies.js',
+			$onboard_dependencies['dependencies'],
+			$onboard_dependencies['version'],
+			true
+		);
+
 		// Add localization vars.
 		wp_localize_script(
 			'masteriyo-onboarding',
@@ -101,6 +109,7 @@ class Onboard {
 		);
 
 		wp_enqueue_script( 'masteriyo-onboarding' );
+		wp_enqueue_script( 'masteriyo-dependencies' );
 
 		ob_start();
 

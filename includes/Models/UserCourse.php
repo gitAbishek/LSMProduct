@@ -441,7 +441,6 @@ class UserCourse extends Model {
 			if ( ! empty( $status_transition['from'] ) ) {
 				do_action( 'masteriyo_user_course_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
 				do_action( 'masteriyo_user_course_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
-				error_log( implode( "|", $status_transition ) );
 			}
 		} catch ( \Exception $e ) { // phpcs:ignore
 			// TODO Log the message.

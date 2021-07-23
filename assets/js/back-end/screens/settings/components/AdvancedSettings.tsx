@@ -1,5 +1,6 @@
 import {
 	Box,
+	Code,
 	FormControl,
 	FormHelperText,
 	FormLabel,
@@ -50,6 +51,9 @@ const tabListStyles = {
 	borderRight: '2px solid',
 	borderRightColor: 'gray.200',
 };
+
+//@ts-ignore
+const courseListSlug = window._MASTERIYO_.pageSlugs.courseList;
 
 const AdvancedSettings: React.FC<Props> = (props) => {
 	const { advanceData } = props;
@@ -187,6 +191,17 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							<FormControl>
 								<FormLabel minW="2xs">
 									{__('Course Category Base', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Enter custom structures for your category URLs here.',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
 								</FormLabel>
 								<Input
 									type="text"
@@ -194,10 +209,22 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.permalinks.category_base')}
 								/>
 							</FormControl>
+							<Code>Hello world</Code>
 
 							<FormControl>
 								<FormLabel minW="2xs">
 									{__('Couses Tag Base', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Enter custom structures for your tag URLs here.',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
 								</FormLabel>
 								<Input
 									type="text"
@@ -209,6 +236,17 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							<FormControl>
 								<FormLabel minW="2xs">
 									{__('Course Difficulty Base', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Enter custom structures for your difficulty URLs here.',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
 								</FormLabel>
 								<Input
 									type="text"
@@ -221,6 +259,17 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								<Stack direction="row">
 									<FormLabel minW="2xs">
 										{__('Single Course Permalink', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Enter custom structures for your course URLs here.',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="advance.permalinks.single_course_permalink"
@@ -231,14 +280,15 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 													advanceData?.permalinks?.single_course_permalink
 												}>
 												<Stack spacing={3} direction="column">
-													<Radio value="default">
+													<Radio value="">
 														<FormHelperText mt="0">
-															http://example.com?masteriyo_course=sample-course
+															http://example.com?course=sample-course
 														</FormHelperText>
 													</Radio>
-													<Radio value="pretty">
+													{/** TS */}
+													<Radio value={courseListSlug}>
 														<FormHelperText mt="0">
-															http://example.com/course/sample-course
+															http://example.com/course-list/sample-course
 														</FormHelperText>
 													</Radio>
 												</Stack>
@@ -251,6 +301,17 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							<FormControl>
 								<FormLabel minW="2xs">
 									{__('Single Section Permalink', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Enter custom structures for your section URLs here.',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
 								</FormLabel>
 								<Input
 									type="text"
@@ -264,6 +325,17 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							<FormControl>
 								<FormLabel minW="2xs">
 									{__('Single Lesson Permalink', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Enter custom structures for your lesson URLs here.',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
 								</FormLabel>
 								<Input
 									type="text"
@@ -277,6 +349,17 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							<FormControl>
 								<FormLabel minW="2xs">
 									{__('Single Quiz Permalink', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Enter custom structures for your quiz URLs here.',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
 								</FormLabel>
 								<Input
 									type="text"

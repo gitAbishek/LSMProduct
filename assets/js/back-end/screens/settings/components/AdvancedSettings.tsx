@@ -1,8 +1,8 @@
 import {
 	Box,
+	Center,
 	Code,
 	FormControl,
-	FormHelperText,
 	FormLabel,
 	Icon,
 	Input,
@@ -22,11 +22,11 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { infoIconStyles } from '../../../config/styles';
-import { AdvancedSettingsMap } from '../../../types';
+import { AdvancedSettingsMap, SetttingsMap } from '../../../types';
 import PagesAPI from '../../../utils/pages';
 
 interface Props {
@@ -55,15 +55,27 @@ const tabListStyles = {
 //@ts-ignore
 const courseListSlug = window._MASTERIYO_.pageSlugs.courseList;
 
+//@ts-ignore
+const homeURL = window._MASTERIYO_.home_url;
+
 const AdvancedSettings: React.FC<Props> = (props) => {
 	const { advanceData } = props;
 	const { register } = useFormContext();
 	const pageAPI = new PagesAPI();
 	const pagesQuery = useQuery('pages', () => pageAPI.list());
 
-	if (pagesQuery.isLoading) {
-		return <Spinner />;
-	}
+	const watchPermalinkData = useWatch<SetttingsMap>({
+		name: 'advance.permalinks',
+		defaultValue: {
+			category_base: advanceData?.permalinks?.category_base,
+			tag_base: advanceData?.permalinks?.tag_base,
+			difficulty_base: advanceData?.permalinks?.difficulty_base,
+			single_section_permalink:
+				advanceData?.permalinks?.single_section_permalink,
+			single_lesson_permalink: advanceData?.permalinks?.single_lesson_permalink,
+			single_quiz_permalink: advanceData?.permalinks?.single_quiz_permalink,
+		},
+	});
 
 	const renderPagesOption = () => {
 		try {
@@ -92,99 +104,105 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 				</TabList>
 				<TabPanels flex="1">
 					<TabPanel>
-						<Stack direction="column" spacing="8">
-							<FormControl>
-								<FormLabel minW="2xs">
-									{__('Course List Page', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'This set course listing page where the courses are display',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<Select
-									placeholder={__('Select a Page', 'masteriyo')}
-									{...register('advance.pages.course_list_page_id')}
-									defaultValue={advanceData?.pages?.course_list_page_id}>
-									{renderPagesOption()}
-								</Select>
-							</FormControl>
+						{pagesQuery.isLoading ? (
+							<Center h="20">
+								<Spinner />
+							</Center>
+						) : (
+							<Stack direction="column" spacing="8">
+								<FormControl>
+									<FormLabel minW="2xs">
+										{__('Course List Page', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'This set course listing page where the courses are display',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Select
+										placeholder={__('Select a Page', 'masteriyo')}
+										{...register('advance.pages.course_list_page_id')}
+										defaultValue={advanceData?.pages?.course_list_page_id}>
+										{renderPagesOption()}
+									</Select>
+								</FormControl>
 
-							<FormControl>
-								<FormLabel minW="2xs">
-									{__('My Account Page', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'Page contents: [masteriyo_my_account]',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<Select
-									{...register('advance.pages.myaccount_page_id')}
-									defaultValue={advanceData?.pages?.myaccount_page_id}
-									placeholder={__('Select a Page', 'masteriyo')}>
-									{renderPagesOption()}
-								</Select>
-							</FormControl>
+								<FormControl>
+									<FormLabel minW="2xs">
+										{__('My Account Page', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Page contents: [masteriyo_my_account]',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Select
+										{...register('advance.pages.myaccount_page_id')}
+										defaultValue={advanceData?.pages?.myaccount_page_id}
+										placeholder={__('Select a Page', 'masteriyo')}>
+										{renderPagesOption()}
+									</Select>
+								</FormControl>
 
-							<FormControl>
-								<FormLabel minW="2xs">
-									{__('Checkout Page', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'Page contents: [masteriyo_checkout]',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<Select
-									placeholder={__('Select a Page', 'masteriyo')}
-									defaultValue={advanceData?.pages?.checkout_page_id}
-									{...register('advance.pages.checkout_page_id')}>
-									{renderPagesOption()}
-								</Select>
-							</FormControl>
+								<FormControl>
+									<FormLabel minW="2xs">
+										{__('Checkout Page', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Page contents: [masteriyo_checkout]',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Select
+										placeholder={__('Select a Page', 'masteriyo')}
+										defaultValue={advanceData?.pages?.checkout_page_id}
+										{...register('advance.pages.checkout_page_id')}>
+										{renderPagesOption()}
+									</Select>
+								</FormControl>
 
-							<FormControl>
-								<FormLabel minW="2xs">
-									{__('Terms and Coditions Page', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'If you define a "Terms" page the customer will be asked if they accept them when checking out.',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<Select
-									placeholder={__('Select a Page', 'masteriyo')}
-									defaultValue={advanceData?.pages?.terms_conditions_page_id}
-									{...register('advance.pages.terms_conditions_page_id')}>
-									{renderPagesOption()}
-								</Select>
-							</FormControl>
-						</Stack>
+								<FormControl>
+									<FormLabel minW="2xs">
+										{__('Terms and Coditions Page', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'If you define a "Terms" page the customer will be asked if they accept them when checking out.',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Select
+										placeholder={__('Select a Page', 'masteriyo')}
+										defaultValue={advanceData?.pages?.terms_conditions_page_id}
+										{...register('advance.pages.terms_conditions_page_id')}>
+										{renderPagesOption()}
+									</Select>
+								</FormControl>
+							</Stack>
+						)}
 					</TabPanel>
 					<TabPanel>
 						<Stack direction="column" spacing="8">
@@ -203,13 +221,18 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										</Box>
 									</Tooltip>
 								</FormLabel>
-								<Input
-									type="text"
-									defaultValue={advanceData?.permalinks?.category_base}
-									{...register('advance.permalinks.category_base')}
-								/>
+								<Stack direction="column">
+									<Input
+										type="text"
+										defaultValue={advanceData?.permalinks?.category_base}
+										{...register('advance.permalinks.category_base')}
+									/>
+									<Code>
+										{homeURL}/{watchPermalinkData.category_base}/
+										{__('uncategorized', 'masteriyo')}
+									</Code>
+								</Stack>
 							</FormControl>
-							<Code>Hello world</Code>
 
 							<FormControl>
 								<FormLabel minW="2xs">
@@ -226,11 +249,17 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										</Box>
 									</Tooltip>
 								</FormLabel>
-								<Input
-									type="text"
-									{...register('advance.permalinks.tag_base')}
-									defaultValue={advanceData?.permalinks?.tag_base}
-								/>
+								<Stack direction="column">
+									<Input
+										type="text"
+										{...register('advance.permalinks.tag_base')}
+										defaultValue={advanceData?.permalinks?.tag_base}
+									/>
+									<Code>
+										{homeURL}/{watchPermalinkData.tag_base}
+										{__('/uncategorized', 'masteriyo')}
+									</Code>
+								</Stack>
 							</FormControl>
 
 							<FormControl>
@@ -248,11 +277,17 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										</Box>
 									</Tooltip>
 								</FormLabel>
-								<Input
-									type="text"
-									{...register('advance.permalinks.difficulty_base')}
-									defaultValue={advanceData?.permalinks?.difficulty_base}
-								/>
+								<Stack direction="column">
+									<Input
+										type="text"
+										{...register('advance.permalinks.difficulty_base')}
+										defaultValue={advanceData?.permalinks?.difficulty_base}
+									/>
+									<Code>
+										{homeURL}/{watchPermalinkData.difficulty_base}
+										{__('/uncategorized', 'masteriyo')}
+									</Code>
+								</Stack>
 							</FormControl>
 
 							<FormControl>
@@ -280,16 +315,18 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 													advanceData?.permalinks?.single_course_permalink
 												}>
 												<Stack spacing={3} direction="column">
-													<Radio value="">
-														<FormHelperText mt="0">
-															http://example.com?course=sample-course
-														</FormHelperText>
+													<Radio value="course">
+														<Code>
+															{homeURL}
+															{__('?course=sample-course', 'masteriyo')}
+														</Code>
 													</Radio>
 													{/** TS */}
 													<Radio value={courseListSlug}>
-														<FormHelperText mt="0">
-															http://example.com/course-list/sample-course
-														</FormHelperText>
+														<Code>
+															{homeURL}/{courseListSlug}
+															{__('/sample-course', 'masteriyo')}
+														</Code>
 													</Radio>
 												</Stack>
 											</RadioGroup>
@@ -313,13 +350,19 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										</Box>
 									</Tooltip>
 								</FormLabel>
-								<Input
-									type="text"
-									defaultValue={
-										advanceData?.permalinks?.single_section_permalink
-									}
-									{...register('advance.permalinks.single_section_permalink')}
-								/>
+								<Stack direction="column">
+									<Input
+										type="text"
+										defaultValue={
+											advanceData?.permalinks?.single_section_permalink
+										}
+										{...register('advance.permalinks.single_section_permalink')}
+									/>
+									<Code>
+										{homeURL}/{watchPermalinkData.single_section_permalink}
+										{__('/sample-section', 'masteriyo')}
+									</Code>
+								</Stack>
 							</FormControl>
 
 							<FormControl>
@@ -337,13 +380,19 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										</Box>
 									</Tooltip>
 								</FormLabel>
-								<Input
-									type="text"
-									{...register('advance.permalinks.single_lesson_permalink')}
-									defaultValue={
-										advanceData?.permalinks?.single_lesson_permalink
-									}
-								/>
+								<Stack direction="column">
+									<Input
+										type="text"
+										{...register('advance.permalinks.single_lesson_permalink')}
+										defaultValue={
+											advanceData?.permalinks?.single_lesson_permalink
+										}
+									/>
+									<Code>
+										{homeURL}/{watchPermalinkData.single_lesson_permalink}
+										{__('/sample-lesson', 'masteriyo')}
+									</Code>
+								</Stack>
 							</FormControl>
 
 							<FormControl>
@@ -361,11 +410,19 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										</Box>
 									</Tooltip>
 								</FormLabel>
-								<Input
-									type="text"
-									{...register('advance.permalinks.single_quiz_permalink')}
-									defaultValue={advanceData?.permalinks?.single_quiz_permalink}
-								/>
+								<Stack direction="column">
+									<Input
+										type="text"
+										{...register('advance.permalinks.single_quiz_permalink')}
+										defaultValue={
+											advanceData?.permalinks?.single_quiz_permalink
+										}
+									/>
+									<Code>
+										{homeURL}/{watchPermalinkData.single_quiz_permalink}
+										{__('/sample-quiz', 'masteriyo')}
+									</Code>
+								</Stack>
 							</FormControl>
 						</Stack>
 					</TabPanel>

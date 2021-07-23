@@ -68,7 +68,6 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 		name: 'advance.permalinks',
 		defaultValue: {
 			category_base: advanceData?.permalinks?.category_base,
-			tag_base: advanceData?.permalinks?.tag_base,
 			difficulty_base: advanceData?.permalinks?.difficulty_base,
 			single_section_permalink:
 				advanceData?.permalinks?.single_section_permalink,
@@ -230,34 +229,6 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									<Code>
 										{homeURL}/{watchPermalinkData.category_base}/
 										{__('uncategorized', 'masteriyo')}
-									</Code>
-								</Stack>
-							</FormControl>
-
-							<FormControl>
-								<FormLabel minW="2xs">
-									{__('Couses Tag Base', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'Enter custom structures for your tag URLs here.',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<Stack direction="column">
-									<Input
-										type="text"
-										{...register('advance.permalinks.tag_base')}
-										defaultValue={advanceData?.permalinks?.tag_base}
-									/>
-									<Code>
-										{homeURL}/{watchPermalinkData.tag_base}
-										{__('/uncategorized', 'masteriyo')}
 									</Code>
 								</Stack>
 							</FormControl>

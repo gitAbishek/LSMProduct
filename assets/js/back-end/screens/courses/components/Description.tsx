@@ -5,11 +5,10 @@ import Editor from '../../../components/common/Editor';
 
 interface Props {
 	defaultValue?: string;
-	hasImageUpload?: boolean;
 }
 
 const Description: React.FC<Props> = (props) => {
-	const { defaultValue, hasImageUpload } = props;
+	const { defaultValue } = props;
 
 	return (
 		<FormControl>
@@ -17,7 +16,7 @@ const Description: React.FC<Props> = (props) => {
 			<Editor
 				name="description"
 				defaultValue={defaultValue}
-				hasImageUpload={hasImageUpload}
+				hasImageUpload={true}
 			/>
 		</FormControl>
 	);

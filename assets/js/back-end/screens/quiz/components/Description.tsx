@@ -13,7 +13,11 @@ const Description: React.FC<Props> = (props) => {
 	return (
 		<FormControl>
 			<FormLabel>{__('Quiz Description', 'masteriyo')}</FormLabel>
-			<Editor name="description" defaultValue={defaultValue} />
+			<Editor
+				name="description"
+				defaultValue={defaultValue}
+				hasImageUpload={true}
+			/>
 		</FormControl>
 	);
 };

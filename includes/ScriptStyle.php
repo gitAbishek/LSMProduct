@@ -467,6 +467,7 @@ class ScriptStyle {
 					'data' => array(
 						'rootApiUrl' => esc_url_raw( untrailingslashit( rest_url() ) ),
 						'nonce'      => wp_create_nonce( 'wp_rest' ),
+						'home_url'   => home_url(),
 						'pageSlugs'  => array(
 							'courseList' => $course_list_slug,
 							'myaccount'  => $myaccount_slug,

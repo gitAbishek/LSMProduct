@@ -254,7 +254,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 															name="regular_price"
 															defaultValue={courseData?.regular_price}
 															render={({ field }) => (
-																<NumberInput {...field} w="full">
+																<NumberInput {...field} w="full" min={0}>
 																	<NumberInputField
 																		borderRadius="sm"
 																		shadow="input"

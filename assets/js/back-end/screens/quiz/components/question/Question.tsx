@@ -26,7 +26,7 @@ import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
 import { QuestionSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
-import { deepMerge } from '../../../../utils/utils';
+import { deepClean, deepMerge } from '../../../../utils/utils';
 import Answers from '../answer/Answers';
 import EditQuestion from './EditQuestion';
 
@@ -103,12 +103,13 @@ const Question: React.FC<Props> = (props) => {
 	};
 
 	const onSubmit = (data: any) => {
+		const cleanData = deepClean(data);
 		const newData = {
-			...(data.type && {
-				type: data.type.value,
+			...(cleanData.type && {
+				type: cleanData.type.value,
 			}),
 		};
-		updateQuestion.mutate(deepMerge(data, newData));
+		updateQuestion.mutate(deepMerge(cleanData, newData));
 	};
 
 	const onDeletePress = () => {

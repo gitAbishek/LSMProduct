@@ -12,10 +12,11 @@ interface Props {
 	name: any;
 	defaultValue?: string;
 	hasImageUpload?: boolean;
+	willReset?: boolean;
 }
 
 const Editor: React.FC<Props> = (props) => {
-	const { name, defaultValue, hasImageUpload } = props;
+	const { name, defaultValue, hasImageUpload, willReset } = props;
 	const { register, setValue } = useFormContext();
 	const ref = React.useRef<any>();
 
@@ -34,7 +35,13 @@ const Editor: React.FC<Props> = (props) => {
 
 	useOutsideClick({
 		ref: ref,
-		handler: () => setValue(name, editor?.getHTML()),
+		handler: () => {
+			setValue(name, editor?.getHTML());
+			willReset &&
+				setTimeout(() => {
+					editor?.commands.clearContent();
+				}, 600);
+		},
 	});
 
 	return (

@@ -29,7 +29,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { QuizSchema } from '../../schemas';
 import API from '../../utils/api';
-import { mergeDeep } from '../../utils/mergeDeep';
+import { deepMerge } from '../../utils/utils';
 import Description from './components/Description';
 import Name from './components/Name';
 import QuizSettings from './components/QuizSettings';
@@ -75,7 +75,7 @@ const AddNewQuiz: React.FC = () => {
 			parent_id: sectionId,
 		};
 
-		addQuiz.mutate(mergeDeep(data, newData));
+		addQuiz.mutate(deepMerge(data, newData));
 	};
 
 	if (contentQuery.isSuccess) {

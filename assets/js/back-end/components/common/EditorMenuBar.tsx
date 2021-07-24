@@ -32,7 +32,7 @@ import {
 	BiSubdirectoryLeft,
 } from 'react-icons/bi';
 import { ImQuotesLeft } from 'react-icons/im';
-import { mergeDeep } from '../../utils/mergeDeep';
+import { deepMerge } from '../../utils/utils';
 import ImageUploadModal from './ImageUploadModal';
 
 interface Props extends EditorContentProps {
@@ -58,7 +58,7 @@ const EditorMenuBar: React.FC<Props> = (props) => {
 	};
 
 	const buttonCommonStyles = (isActive?: boolean) => {
-		return mergeDeep(buttonStyles(isActive), {
+		return deepMerge(buttonStyles(isActive), {
 			fontSize: '16px',
 			minW: 'auto',
 			width: '26px',

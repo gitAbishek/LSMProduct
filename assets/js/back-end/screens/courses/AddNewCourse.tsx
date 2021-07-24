@@ -26,7 +26,7 @@ import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
-import { mergeDeep } from '../../utils/mergeDeep';
+import { deepMerge } from '../../utils/utils';
 import CourseSetting from '../builder/component/CourseSetting';
 import Categories from './components/Categories';
 import Description from './components/Description';
@@ -71,7 +71,7 @@ const AddNewCourse: React.FC = () => {
 
 	// When saved as a draft
 	const onSaveAsDraft = (data: any) => {
-		addMutation.mutate(mergeDeep(data, formatData(data, 'draft')), {
+		addMutation.mutate(deepMerge(data, formatData(data, 'draft')), {
 			onSuccess: (data: any) => {
 				toast({
 					title: __('Added to draft', 'masteriyo'),
@@ -89,7 +89,7 @@ const AddNewCourse: React.FC = () => {
 
 	// On Add Course
 	const onSubmit = (data: any) => {
-		addMutation.mutate(mergeDeep(data, formatData(data, 'publish')), {
+		addMutation.mutate(deepMerge(data, formatData(data, 'publish')), {
 			onSuccess: (data: any) => {
 				history.push({
 					pathname: routes.courses.edit.replace(':courseId', data.id),

@@ -26,7 +26,7 @@ import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
 import { QuestionSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
-import { mergeDeep } from '../../../../utils/mergeDeep';
+import { deepMerge } from '../../../../utils/utils';
 import Answers from '../answer/Answers';
 import EditQuestion from './EditQuestion';
 
@@ -108,7 +108,7 @@ const Question: React.FC<Props> = (props) => {
 				type: data.type.value,
 			}),
 		};
-		updateQuestion.mutate(mergeDeep(data, newData));
+		updateQuestion.mutate(deepMerge(data, newData));
 	};
 
 	const onDeletePress = () => {

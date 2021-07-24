@@ -6,7 +6,7 @@ import { useQuery } from 'react-query';
 import { useOnType } from 'use-ontype';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
-import pickBy from '../../../utils/pickBy';
+import { deepClean } from '../../../utils/utils';
 
 const courseStatusList = [
 	{
@@ -54,7 +54,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 	);
 
 	const onChange = (data: FilterParams) => {
-		setFilterParams(pickBy(data));
+		setFilterParams(deepClean(data));
 	};
 
 	return (

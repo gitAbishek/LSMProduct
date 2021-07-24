@@ -30,7 +30,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
-import { mergeDeep } from '../../utils/mergeDeep';
+import { deepMerge } from '../../utils/utils';
 import EditCourse from '../courses/EditCourse';
 import SectionBuilder from '../sections/SectionBuilder';
 import CourseSetting from './component/CourseSetting';
@@ -120,7 +120,7 @@ const Builder: React.FC = () => {
 			regular_price: `${data.regular_price}`,
 		};
 
-		updateCourse.mutate(mergeDeep(data, newData));
+		updateCourse.mutate(deepMerge(data, newData));
 	};
 
 	if (courseQuery.isSuccess && builderQuery.isSuccess) {

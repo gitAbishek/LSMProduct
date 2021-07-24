@@ -29,7 +29,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { QuizSchema } from '../../schemas';
 import API from '../../utils/api';
-import { deepMerge } from '../../utils/utils';
+import { deepClean, deepMerge } from '../../utils/utils';
 import Description from './components/Description';
 import Name from './components/Name';
 import QuizSettings from './components/QuizSettings';
@@ -70,12 +70,13 @@ const AddNewQuiz: React.FC = () => {
 	});
 
 	const onSubmit = (data: QuizSchema) => {
+		const cleanData = deepClean(data);
 		const newData = {
 			course_id: courseId,
 			parent_id: sectionId,
 		};
 
-		addQuiz.mutate(deepMerge(data, newData));
+		addQuiz.mutate(deepMerge(cleanData, newData));
 	};
 
 	if (contentQuery.isSuccess) {

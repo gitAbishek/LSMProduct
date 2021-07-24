@@ -38,6 +38,7 @@ import urls from '../../constants/urls';
 import { CountrySchema, OrderItemSchema, OrderSchema } from '../../schemas';
 import API from '../../utils/api';
 import countries from '../../utils/countries';
+import { deepClean } from '../../utils/utils';
 
 const orderStatusList = [
 	{
@@ -83,7 +84,6 @@ const EditOrder = () => {
 		handleSubmit,
 		register,
 		formState: { errors },
-		control,
 	} = useForm<OrderSchema>();
 	const toast = useToast();
 	const cancelRef = useRef<any>();
@@ -156,14 +156,7 @@ const EditOrder = () => {
 	);
 
 	const onSubmit = (data: any) => {
-		if (data.billing) {
-			data.billing.country = data.billing.country.value;
-
-			if (typeof data.billing.state !== 'string') {
-				data.billing.state = data.billing.state.value;
-			}
-		}
-		updateOrder.mutate(data);
+		updateOrder.mutate(deepClean(data));
 	};
 
 	const onDeletePress = () => {

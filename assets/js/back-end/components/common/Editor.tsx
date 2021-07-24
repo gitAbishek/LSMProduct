@@ -37,10 +37,7 @@ const Editor: React.FC<Props> = (props) => {
 		ref: ref,
 		handler: () => {
 			setValue(name, editor?.getHTML());
-			willReset &&
-				setTimeout(() => {
-					editor?.commands.clearContent();
-				}, 600);
+			willReset && editor?.commands?.clearContent();
 		},
 	});
 

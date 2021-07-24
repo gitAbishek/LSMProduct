@@ -78,7 +78,7 @@ const EditQuiz: React.FC = () => {
 		updateQuiz.mutate(deepClean(data));
 	};
 
-	if (quizQuery.isSuccess) {
+	if (quizQuery.isSuccess && quizQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />

@@ -27,6 +27,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { QuizSchema } from '../../schemas';
 import API from '../../utils/api';
+import { deepClean } from '../../utils/utils';
 import Description from './components/Description';
 import Name from './components/Name';
 import Questions from './components/question/Questions';
@@ -60,7 +61,7 @@ const EditQuiz: React.FC = () => {
 	);
 
 	const updateQuiz = useMutation(
-		(data: object) => quizAPI.update(quizId, data),
+		(data: QuizSchema) => quizAPI.update(quizId, data),
 		{
 			onSuccess: (data: QuizSchema) => {
 				toast({
@@ -73,8 +74,8 @@ const EditQuiz: React.FC = () => {
 		}
 	);
 
-	const onSubmit = (data: object) => {
-		updateQuiz.mutate(data);
+	const onSubmit = (data: QuizSchema) => {
+		updateQuiz.mutate(deepClean(data));
 	};
 
 	if (quizQuery.isSuccess) {

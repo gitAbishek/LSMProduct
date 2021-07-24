@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import CreateCatModalProvicer from './context/CreateCatProvider';
 import Router from './router/Router';
 import theme from './theme/theme';
-import pickBy from './utils/pickBy';
 
 const App = () => {
 	const queryClient = new QueryClient({
@@ -12,11 +11,6 @@ const App = () => {
 			queries: {
 				refetchOnWindowFocus: false,
 				refetchOnReconnect: false,
-			},
-			mutations: {
-				onMutate: (data: any) => {
-					return pickBy(data);
-				},
 			},
 		},
 	});

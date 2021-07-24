@@ -18,6 +18,7 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import urls from '../../constants/urls';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
+import pickBy from '../../utils/pickBy';
 import AdvancedSettings from './components/AdvancedSettings';
 import CoursesSettings from './components/CoursesSettings';
 import EmailSetttings from './components/EmailSetttings';
@@ -68,6 +69,8 @@ const Settings = () => {
 
 	const onSubmit = (data: SetttingsMap) => {
 		try {
+			console.log(data);
+			console.log(pickBy(data));
 			updateSettings.mutate(data);
 		} catch (err) {
 			console.error(err);

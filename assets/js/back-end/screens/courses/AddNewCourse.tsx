@@ -25,8 +25,9 @@ import AddCategoryModal from '../../components/common/AddCategoryModal';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import { CourseSchema } from '../../schemas';
 import API from '../../utils/api';
-import { deepMerge } from '../../utils/utils';
+import { deepClean, deepMerge } from '../../utils/utils';
 import CourseSetting from '../builder/component/CourseSetting';
 import Categories from './components/Categories';
 import Description from './components/Description';
@@ -70,9 +71,10 @@ const AddNewCourse: React.FC = () => {
 	};
 
 	// When saved as a draft
-	const onSaveAsDraft = (data: any) => {
-		addMutation.mutate(deepMerge(data, formatData(data, 'draft')), {
-			onSuccess: (data: any) => {
+	const onSaveAsDraft = (data: CourseSchema) => {
+		const cleanData = deepClean(data);
+		addMutation.mutate(deepMerge(cleanData, formatData(cleanData, 'draft')), {
+			onSuccess: (data: CourseSchema) => {
 				toast({
 					title: __('Added to draft', 'masteriyo'),
 					description: __('You can continue editing', 'masteriyo'),
@@ -80,7 +82,10 @@ const AddNewCourse: React.FC = () => {
 					status: 'success',
 				});
 				history.push({
-					pathname: routes.courses.edit.replace(':courseId', data.id),
+					pathname: routes.courses.edit.replace(
+						':courseId',
+						data.id.toString()
+					),
 					search: '?type=draft',
 				});
 			},
@@ -88,11 +93,15 @@ const AddNewCourse: React.FC = () => {
 	};
 
 	// On Add Course
-	const onSubmit = (data: any) => {
-		addMutation.mutate(deepMerge(data, formatData(data, 'publish')), {
-			onSuccess: (data: any) => {
+	const onSubmit = (data: CourseSchema) => {
+		const cleanData = deepClean(data);
+		addMutation.mutate(deepMerge(cleanData, formatData(cleanData, 'publish')), {
+			onSuccess: (data: CourseSchema) => {
 				history.push({
-					pathname: routes.courses.edit.replace(':courseId', data.id),
+					pathname: routes.courses.edit.replace(
+						':courseId',
+						data.id.toString()
+					),
 					search: '?page=builder',
 				});
 			},

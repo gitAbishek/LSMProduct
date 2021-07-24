@@ -69,9 +69,7 @@ const Settings = () => {
 
 	const onSubmit = (data: SetttingsMap) => {
 		try {
-			console.log(data);
-			console.log(deepClean(data));
-			updateSettings.mutate(data);
+			updateSettings.mutate(deepClean(data));
 		} catch (err) {
 			console.error(err);
 		}

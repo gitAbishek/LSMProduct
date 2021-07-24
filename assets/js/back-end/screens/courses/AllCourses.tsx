@@ -29,7 +29,6 @@ interface FilterParams {
 const AllCourses = () => {
 	const courseAPI = new API(urls.courses);
 	const [filterParams, setFilterParams] = useState<FilterParams>({});
-	console.log(filterParams);
 	const courseQuery = useQuery(['courseList', filterParams], () =>
 		courseAPI.list(filterParams)
 	);

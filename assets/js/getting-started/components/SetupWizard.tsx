@@ -5,6 +5,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
+import { deepClean } from '../../back-end/utils/utils';
 import * as screens from '../screens';
 
 // Global variable.
@@ -32,8 +33,8 @@ const SetupWizard: React.FC = () => {
 		},
 	});
 
-	const onSubmit = (data?: any) => {
-		addMutation.mutate(data);
+	const onSubmit = (data: any) => {
+		addMutation.mutate(deepClean(data));
 	};
 
 	// Get URL from global var.

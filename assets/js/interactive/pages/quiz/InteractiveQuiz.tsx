@@ -8,6 +8,7 @@ import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoad
 import urls from '../../../back-end/constants/urls';
 import { QuizSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
+import { deepClean } from '../../../back-end/utils/utils';
 import { updateQuizProgress } from '../../actions';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
@@ -53,7 +54,7 @@ const InteractiveQuiz = () => {
 	};
 
 	const onSubmit = (data: any) => {
-		checkQuizAnswers.mutate(data, {
+		checkQuizAnswers.mutate(deepClean(data), {
 			onSuccess: (data: any) => {
 				setScoreBoardData(data);
 				actions.updateQuizProgress({ quizProgress: () => {} });

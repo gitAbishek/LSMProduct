@@ -33,6 +33,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { LessonSchema } from '../../schemas';
 import API from '../../utils/api';
+import { deepClean } from '../../utils/utils';
 import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
@@ -53,9 +54,9 @@ const EditLesson = () => {
 	);
 
 	const updateLesson = useMutation(
-		(data: object) => lessonAPI.update(lessonId, data),
+		(data: LessonSchema) => lessonAPI.update(lessonId, data),
 		{
-			onSuccess: (data: any) => {
+			onSuccess: (data: LessonSchema) => {
 				toast({
 					title: __('Lesson Updated Successfully', 'masteriyo'),
 					description: data.name + __(' has been updated successfully.'),
@@ -88,8 +89,8 @@ const EditLesson = () => {
 		}
 	);
 
-	const onSubmit = (data: object) => {
-		updateLesson.mutate(data);
+	const onSubmit = (data: LessonSchema) => {
+		updateLesson.mutate(deepClean(data));
 	};
 
 	const onDeletePress = () => {

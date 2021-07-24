@@ -44,7 +44,7 @@ const AllCourses = () => {
 
 		tr: {
 			'th, td': {
-				':first-child': {
+				':first-of-type': {
 					pl: '12',
 				},
 				':last-child': {

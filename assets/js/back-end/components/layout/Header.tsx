@@ -42,7 +42,7 @@ const Header: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<Box bg="white" w="full">
+		<Box bg="white" w="full" shadow="header">
 			<Container maxW="container.xl" bg="white">
 				<Flex direction="row" justifyContent="space-between" align="center">
 					<Stack direction="row" spacing="12" align="center" minHeight="16">

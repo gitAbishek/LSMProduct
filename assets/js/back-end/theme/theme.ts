@@ -4,13 +4,13 @@ import { StepsStyleConfig as Steps } from 'chakra-ui-steps';
 const theme = extendTheme({
 	colors: {
 		blue: {
-			10: '#F7FAFF',
-			50: '#EBF2FF',
-			100: '#DEE9FF',
-			200: '#C4D8FF',
-			300: '#ABC8FF',
-			400: '#92B7FF',
-			500: '#78A6FF',
+			10: '#ecf3ff',
+			50: '#b5ceff',
+			100: '#a2c2ff',
+			200: '#7da9ff',
+			300: '#6a9dff',
+			400: '#5890ff',
+			500: '#4584ff',
 			600: '#4584FF',
 			700: '#1263FF',
 			800: '#004CDE',
@@ -62,10 +62,11 @@ const theme = extendTheme({
 		},
 	},
 	shadows: {
-		box: '0px 0px 60px rgba(0, 0, 0, 0.06)',
+		box: '0px 0px 60px rgba(0, 0, 0, 0.08)',
 		input: '0px 1px 0px #EFF0F6',
 		button: '0px 4px 14px rgba(0, 0, 0, 0.13)',
 		boxl: '0px 0px 60px rgba(0, 0, 0, 0.15)',
+		header: '0px 2px 15px rgba(0, 0, 0, 0.04)',
 	},
 	components: {
 		Popover: {

@@ -56,7 +56,9 @@ const AddNewCourse: React.FC = () => {
 		mr: '2',
 	};
 
-	const addMutation = useMutation((data) => courseAPI.store(data));
+	const addMutation = useMutation((data: CourseSchema) =>
+		courseAPI.store(data)
+	);
 
 	const formatData = (data: any, status: string) => {
 		return {

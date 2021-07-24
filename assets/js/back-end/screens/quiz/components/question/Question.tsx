@@ -57,7 +57,7 @@ const Question: React.FC<Props> = (props) => {
 	const queryClient = useQueryClient();
 
 	const duplicateQuestion = useMutation(
-		(data: object) => questionAPI.store(data),
+		(data: any) => questionAPI.store(data),
 		{
 			onSuccess: (data) => {
 				queryClient.invalidateQueries(`questions${data.parent_id}`);
@@ -66,9 +66,9 @@ const Question: React.FC<Props> = (props) => {
 	);
 
 	const updateQuestion = useMutation(
-		(data: object) => questionAPI.update(questionData.id, data),
+		(data: any) => questionAPI.update(questionData.id, data),
 		{
-			onSuccess: (data: any) => {
+			onSuccess: (data: QuestionSchema) => {
 				toast({
 					title: __('Question Updated', 'masteriyo'),
 					description: data.name + __(' has been updated successfully.'),
@@ -80,8 +80,8 @@ const Question: React.FC<Props> = (props) => {
 		}
 	);
 
-	const deleteQuestion = useMutation((id: any) => questionAPI.delete(id), {
-		onSuccess: (data: any) => {
+	const deleteQuestion = useMutation((id: number) => questionAPI.delete(id), {
+		onSuccess: (data: QuestionSchema) => {
 			toast({
 				title: __('Question Deleted', 'masteriyo'),
 				description: data.name + __(' has been deleted successfully.'),

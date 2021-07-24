@@ -27,9 +27,9 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
-import { QuizSchema } from '../../schemas';
+import { QuizSchema, SectionSchema } from '../../schemas';
 import API from '../../utils/api';
-import { mergeDeep } from '../../utils/mergeDeep';
+import { deepClean, deepMerge } from '../../utils/utils';
 import Description from './components/Description';
 import Name from './components/Name';
 import QuizSettings from './components/QuizSettings';
@@ -39,7 +39,7 @@ const AddNewQuiz: React.FC = () => {
 	const methods = useForm<QuizSchema>();
 	const history = useHistory();
 	const toast = useToast();
-	const contentAPI = new API(urls.contents);
+	const sectionsAPI = new API(urls.sections);
 	const quizAPI = new API(urls.quizes);
 
 	const tabStyles = {
@@ -47,9 +47,9 @@ const AddNewQuiz: React.FC = () => {
 		py: '4',
 	};
 
-	// gets total number of content on section
-	const contentQuery = useQuery([`content${sectionId}`, sectionId], () =>
-		contentAPI.list({ section: sectionId })
+	const sectionQuery = useQuery<SectionSchema>(
+		[`section${sectionId}`, sectionId],
+		() => sectionsAPI.get(sectionId)
 	);
 
 	const addQuiz = useMutation((data: QuizSchema) => quizAPI.store(data), {
@@ -70,15 +70,16 @@ const AddNewQuiz: React.FC = () => {
 	});
 
 	const onSubmit = (data: QuizSchema) => {
+		const cleanData = deepClean(data);
 		const newData = {
 			course_id: courseId,
 			parent_id: sectionId,
 		};
 
-		addQuiz.mutate(mergeDeep(data, newData));
+		addQuiz.mutate(deepMerge(cleanData, newData));
 	};
 
-	if (contentQuery.isSuccess) {
+	if (sectionQuery.isSuccess && sectionQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />

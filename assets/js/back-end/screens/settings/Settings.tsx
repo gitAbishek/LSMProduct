@@ -18,6 +18,7 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import urls from '../../constants/urls';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
+import { deepClean } from '../../utils/utils';
 import AdvancedSettings from './components/AdvancedSettings';
 import CoursesSettings from './components/CoursesSettings';
 import EmailSetttings from './components/EmailSetttings';
@@ -68,7 +69,7 @@ const Settings = () => {
 
 	const onSubmit = (data: SetttingsMap) => {
 		try {
-			updateSettings.mutate(data);
+			updateSettings.mutate(deepClean(data));
 		} catch (err) {
 			console.error(err);
 		}

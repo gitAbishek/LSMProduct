@@ -16,7 +16,9 @@ import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import Editor from '../../../components/common/Editor';
 import urls from '../../../constants/urls';
+import { SectionSchema } from '../../../schemas';
 import API from '../../../utils/api';
+import { deepClean } from '../../../utils/utils';
 
 export interface EditSectionProps {
 	id: number;
@@ -44,7 +46,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	const sectionAPI = new API(urls.sections);
 
 	const updateMutation = useMutation(
-		(data: any) => sectionAPI.update(id, data),
+		(data: SectionSchema) => sectionAPI.update(id, data),
 		{
 			onSuccess: (data: any) => {
 				toast({
@@ -59,8 +61,8 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 		}
 	);
 
-	const onUpdate = (data: any) => {
-		updateMutation.mutate(data);
+	const onUpdate = (data: SectionSchema) => {
+		updateMutation.mutate(deepClean(data));
 	};
 
 	return (

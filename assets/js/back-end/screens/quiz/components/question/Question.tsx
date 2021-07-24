@@ -26,7 +26,7 @@ import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
 import { QuestionSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
-import { mergeDeep } from '../../../../utils/mergeDeep';
+import { deepClean, deepMerge } from '../../../../utils/utils';
 import Answers from '../answer/Answers';
 import EditQuestion from './EditQuestion';
 
@@ -57,7 +57,7 @@ const Question: React.FC<Props> = (props) => {
 	const queryClient = useQueryClient();
 
 	const duplicateQuestion = useMutation(
-		(data: object) => questionAPI.store(data),
+		(data: any) => questionAPI.store(data),
 		{
 			onSuccess: (data) => {
 				queryClient.invalidateQueries(`questions${data.parent_id}`);
@@ -66,9 +66,9 @@ const Question: React.FC<Props> = (props) => {
 	);
 
 	const updateQuestion = useMutation(
-		(data: object) => questionAPI.update(questionData.id, data),
+		(data: any) => questionAPI.update(questionData.id, data),
 		{
-			onSuccess: (data: any) => {
+			onSuccess: (data: QuestionSchema) => {
 				toast({
 					title: __('Question Updated', 'masteriyo'),
 					description: data.name + __(' has been updated successfully.'),
@@ -80,8 +80,8 @@ const Question: React.FC<Props> = (props) => {
 		}
 	);
 
-	const deleteQuestion = useMutation((id: any) => questionAPI.delete(id), {
-		onSuccess: (data: any) => {
+	const deleteQuestion = useMutation((id: number) => questionAPI.delete(id), {
+		onSuccess: (data: QuestionSchema) => {
 			toast({
 				title: __('Question Deleted', 'masteriyo'),
 				description: data.name + __(' has been deleted successfully.'),
@@ -103,12 +103,13 @@ const Question: React.FC<Props> = (props) => {
 	};
 
 	const onSubmit = (data: any) => {
+		const cleanData = deepClean(data);
 		const newData = {
-			...(data.type && {
-				type: data.type.value,
+			...(cleanData.type && {
+				type: cleanData.type.value,
 			}),
 		};
-		updateQuestion.mutate(mergeDeep(data, newData));
+		updateQuestion.mutate(deepMerge(cleanData, newData));
 	};
 
 	const onDeletePress = () => {

@@ -30,6 +30,7 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
+import { deepClean } from '../../utils/utils';
 import DescriptionInput from './components/DescriptionInput';
 import Header from './components/Header';
 import NameInput from './components/NameInput';
@@ -104,7 +105,7 @@ const EditCourseCategory = () => {
 	);
 
 	const onSubmit = (data: object) => {
-		updateCategory.mutate(data);
+		updateCategory.mutate(deepClean(data));
 	};
 
 	const onDeletePress = () => {

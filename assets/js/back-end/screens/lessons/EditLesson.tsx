@@ -31,7 +31,9 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import { LessonSchema } from '../../schemas';
 import API from '../../utils/api';
+import { deepClean } from '../../utils/utils';
 import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
@@ -46,14 +48,15 @@ const EditLesson = () => {
 	const lessonAPI = new API(urls.lessons);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
-	const lessonQuery = useQuery([`section${lessonId}`, lessonId], () =>
-		lessonAPI.get(lessonId)
+	const lessonQuery = useQuery<LessonSchema>(
+		[`section${lessonId}`, lessonId],
+		() => lessonAPI.get(lessonId)
 	);
 
 	const updateLesson = useMutation(
-		(data: object) => lessonAPI.update(lessonId, data),
+		(data: LessonSchema) => lessonAPI.update(lessonId, data),
 		{
-			onSuccess: (data: any) => {
+			onSuccess: (data: LessonSchema) => {
 				toast({
 					title: __('Lesson Updated Successfully', 'masteriyo'),
 					description: data.name + __(' has been updated successfully.'),
@@ -86,8 +89,8 @@ const EditLesson = () => {
 		}
 	);
 
-	const onSubmit = (data: object) => {
-		updateLesson.mutate(data);
+	const onSubmit = (data: LessonSchema) => {
+		updateLesson.mutate(deepClean(data));
 	};
 
 	const onDeletePress = () => {
@@ -102,7 +105,7 @@ const EditLesson = () => {
 		setDeleteModalOpen(false);
 	};
 
-	if (lessonQuery.isSuccess) {
+	if (lessonQuery.isSuccess && lessonQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />

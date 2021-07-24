@@ -34,6 +34,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
+import { CourseCategorySchema } from '../../../schemas';
 import API from '../../../utils/api';
 
 interface Props {
@@ -86,8 +87,8 @@ const CourseList: React.FC<Props> = (props) => {
 			</Td>
 			<Td>
 				<Stack direction="row">
-					{categories.map((category: any, index: any) => (
-						<Badge key={index}>{category.name}</Badge>
+					{categories.map((category: CourseCategorySchema) => (
+						<Badge key={category.id}>{category.name}</Badge>
 					))}
 				</Stack>
 			</Td>

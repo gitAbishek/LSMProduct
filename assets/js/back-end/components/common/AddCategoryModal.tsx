@@ -20,6 +20,7 @@ import DescriptionInput from '../../screens/course-categories/components/Descrip
 import NameInput from '../../screens/course-categories/components/NameInput';
 import SlugInput from '../../screens/course-categories/components/SlugInput';
 import API from '../../utils/api';
+import { deepClean } from '../../utils/utils';
 
 interface AddCatData {
 	name: string;
@@ -64,7 +65,7 @@ const AddCategoryModal = () => {
 	);
 
 	const onSubmit = (data: AddCatData) => {
-		createCategory.mutate(data);
+		createCategory.mutate(deepClean(data));
 	};
 
 	return (

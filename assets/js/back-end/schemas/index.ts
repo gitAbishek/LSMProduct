@@ -82,7 +82,7 @@ export interface QuestionSchema {
 	id: number;
 	name: string;
 	slug: string;
-	permalink: string;
+	permalink?: string;
 	date_created: string;
 	date_created_gmt: string;
 	date_modified: string;

@@ -25,8 +25,9 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import { LessonSchema, SectionSchema } from '../../schemas';
 import API from '../../utils/api';
-import { mergeDeep } from '../../utils/mergeDeep';
+import { deepClean, deepMerge } from '../../utils/utils';
 import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
@@ -41,13 +42,14 @@ const AddNewLesson: React.FC = () => {
 	const sectionsAPI = new API(urls.sections);
 
 	// checks whether section exist or not
-	const sectionQuery = useQuery([`section${sectionId}`, sectionId], () =>
-		sectionsAPI.get(sectionId)
+	const sectionQuery = useQuery<SectionSchema>(
+		[`section${sectionId}`, sectionId],
+		() => sectionsAPI.get(sectionId)
 	);
 
 	// adds lesson on the database
-	const addLesson = useMutation((data: object) => lessonAPI.store(data), {
-		onSuccess: (data: any) => {
+	const addLesson = useMutation((data: LessonSchema) => lessonAPI.store(data), {
+		onSuccess: (data: LessonSchema) => {
 			toast({
 				title: __('Lesson Added', 'masteriyo'),
 				description: data.name + __(' is successfully added.', 'masteriyo'),
@@ -61,15 +63,15 @@ const AddNewLesson: React.FC = () => {
 		},
 	});
 
-	const onSubmit = (data: object) => {
+	const onSubmit = (data: LessonSchema) => {
 		const newData = {
 			course_id: courseId,
 			parent_id: sectionId,
 		};
-		addLesson.mutate(mergeDeep(data, newData));
+		addLesson.mutate(deepMerge(deepClean(data), newData));
 	};
 
-	if (sectionQuery.isSuccess) {
+	if (sectionQuery.isSuccess && sectionQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />

@@ -17,6 +17,7 @@ import { useHistory } from 'react-router';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
+import { deepClean } from '../../utils/utils';
 import DescriptionInput from './components/DescriptionInput';
 import NameInput from './components/NameInput';
 import SlugInput from './components/SlugInput';
@@ -53,7 +54,7 @@ const AddNewCourseCategory = () => {
 	);
 
 	const onSubmit = (data: object) => {
-		createCategory.mutate(data);
+		createCategory.mutate(deepClean(data));
 	};
 
 	return (

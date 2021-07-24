@@ -15,7 +15,9 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import Editor from '../../../components/common/Editor';
 import urls from '../../../constants/urls';
+import { SectionSchema } from '../../../schemas';
 import API from '../../../utils/api';
+import { deepClean, deepMerge } from '../../../utils/utils';
 
 export interface NewSectionProps {
 	onSave: () => void;
@@ -48,12 +50,13 @@ const NewSection: React.FC<NewSectionProps> = (props) => {
 		},
 	});
 
-	const onSubmit = (data: any) => {
-		addSection.mutate({
+	const onSubmit = (data: SectionSchema) => {
+		const cleanData = deepClean(data);
+		const newData = {
 			parent_id: courseId,
 			course_id: courseId,
-			...data,
-		});
+		};
+		addSection.mutate(deepMerge(cleanData, newData));
 	};
 
 	return (
@@ -78,7 +81,7 @@ const NewSection: React.FC<NewSectionProps> = (props) => {
 							<FormLabel htmlFor="">
 								{__('Section Description', 'masteriyo')}
 							</FormLabel>
-							<Editor name="description" />
+							<Editor name="description" willReset />
 						</FormControl>
 						<Divider />
 						<ButtonGroup>

@@ -28,15 +28,17 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import ReactSelect from 'react-select';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import { CountrySchema, OrderItemSchema, OrderSchema } from '../../schemas';
 import API from '../../utils/api';
+import countries from '../../utils/countries';
+import { deepClean } from '../../utils/utils';
 
 const orderStatusList = [
 	{
@@ -74,23 +76,6 @@ const paymentMethods = [
 		value: 'paypal',
 	},
 ];
-//@ts-ignore
-const states = window._MASTERIYO_.states;
-//@ts-ignore
-const countries = window._MASTERIYO_.countries;
-const countryOptions = Object.entries(countries).map(([code, name]) => ({
-	value: code,
-	label: name,
-}));
-const hasStates = (countryCode: string) => {
-	return !!states[countryCode];
-};
-const getStateOptions = (countryCode: string) => {
-	return Object.entries(states[countryCode]).map(([code, name]) => ({
-		value: code,
-		label: name,
-	}));
-};
 
 const EditOrder = () => {
 	const { orderId }: any = useParams();
@@ -99,9 +84,7 @@ const EditOrder = () => {
 		handleSubmit,
 		register,
 		formState: { errors },
-		control,
-		watch,
-	} = useForm();
+	} = useForm<OrderSchema>();
 	const toast = useToast();
 	const cancelRef = useRef<any>();
 	const orderAPI = new API(urls.orders);
@@ -134,16 +117,6 @@ const EditOrder = () => {
 			},
 		}
 	);
-
-	const billingCountry = watch('billing[country]');
-	const countryCode = billingCountry
-		? billingCountry.value
-		: orderQuery.data?.billing.country;
-	const isStatesAvailable = hasStates(countryCode);
-	const billingState = watch('billing[state]');
-	const stateCode = billingState
-		? billingState.value
-		: orderQuery.data?.billing.state;
 
 	const updateOrder = useMutation(
 		(data: object) => orderAPI.update(orderId, data),
@@ -183,14 +156,7 @@ const EditOrder = () => {
 	);
 
 	const onSubmit = (data: any) => {
-		if (data.billing) {
-			data.billing.country = data.billing.country.value;
-
-			if (typeof data.billing.state !== 'string') {
-				data.billing.state = data.billing.state.value;
-			}
-		}
-		updateOrder.mutate(data);
+		updateOrder.mutate(deepClean(data));
 	};
 
 	const onDeletePress = () => {
@@ -251,7 +217,7 @@ const EditOrder = () => {
 									</FormControl>
 
 									{/* Order Status */}
-									<FormControl isInvalid={errors?.status} py="3">
+									<FormControl isInvalid={!!errors?.status} py="3">
 										<FormLabel>{__('Status', 'masteriyo')}</FormLabel>
 										<Select
 											defaultValue={orderQuery.data.status}
@@ -271,7 +237,7 @@ const EditOrder = () => {
 									</FormControl>
 
 									{/* Payment Method */}
-									<FormControl isInvalid={errors?.payment_method} py="3">
+									<FormControl isInvalid={!!errors?.payment_method} py="3">
 										<FormLabel>{__('Payment method', 'masteriyo')}</FormLabel>
 										<Select
 											placeholder={__('Select a payment method', 'masteriyo')}
@@ -315,189 +281,154 @@ const EditOrder = () => {
 
 									{/* First Name & Last Name */}
 									<Stack direction="row" spacing="8" py="3">
-										<FormControl isInvalid={!!errors?.first_name}>
+										<FormControl isInvalid={!!errors?.billing?.first_name}>
 											<FormLabel>{__('First Name', 'masteriyo')}</FormLabel>
 											<Input
 												defaultValue={orderQuery.data?.billing.first_name}
-												{...register('billing[first_name]')}
+												{...register('billing.first_name')}
 											/>
 											<FormErrorMessage>
-												{errors?.first_name && errors?.first_name?.message}
+												{errors?.billing?.first_name &&
+													errors?.billing?.first_name?.message}
 											</FormErrorMessage>
 										</FormControl>
-										<FormControl isInvalid={!!errors?.last_name}>
+										<FormControl isInvalid={!!errors?.billing?.last_name}>
 											<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
 											<Input
-												defaultValue={orderQuery.data?.billing.last_name}
-												{...register('billing[last_name]')}
+												defaultValue={orderQuery.data?.billing?.last_name}
+												{...register('billing.last_name')}
 											/>
 											<FormErrorMessage>
-												{errors?.last_name && errors?.last_name?.message}
+												{errors?.billing?.last_name &&
+													errors?.billing?.last_name?.message}
 											</FormErrorMessage>
 										</FormControl>
 									</Stack>
 
 									{/* Company */}
-									<FormControl isInvalid={!!errors?.company} py="3">
+									<FormControl isInvalid={!!errors?.billing?.company} py="3">
 										<FormLabel>{__('Company', 'masteriyo')}</FormLabel>
 										<Input
 											defaultValue={orderQuery.data?.billing.company}
-											{...register('billing[company]')}
+											{...register('billing.company')}
 										/>
 										<FormErrorMessage>
-											{errors?.company && errors?.company?.message}
+											{errors?.billing?.company &&
+												errors?.billing?.company?.message}
 										</FormErrorMessage>
 									</FormControl>
 
 									{/* Country & State */}
 									<Stack direction="row" spacing="8" py="3">
-										<FormControl
-											isInvalid={errors && errors['billing[country]']}>
+										<FormControl isInvalid={!errors?.billing?.country}>
 											<FormLabel>
 												{__('Country / Region', 'masteriyo')}
 											</FormLabel>
-											<Controller
-												defaultValue={
-													orderQuery.data?.billing.country && {
-														label: countries[orderQuery.data?.billing.country],
-														value: orderQuery.data?.billing.country,
-													}
-												}
-												render={(args) => {
-													const { field } = args;
-													return (
-														<ReactSelect
-															{...field}
-															isSearchable
-															options={countryOptions}
-														/>
-													);
-												}}
-												control={control}
-												name="billing[country]"
-											/>
+
+											<Select {...register('billing.country')}>
+												{countries.map((country: CountrySchema) => (
+													<option
+														value={country.countryCode}
+														key={country.countryCode}>
+														{country.countryName}
+													</option>
+												))}
+											</Select>
 											<FormErrorMessage>
-												{errors &&
-													errors['billing[country]'] &&
-													errors['billing[country]'].message}
+												{errors?.billing?.country &&
+													errors?.billing?.country?.message}
 											</FormErrorMessage>
 										</FormControl>
 										<FormControl isInvalid={errors && errors['billing[state]']}>
 											<FormLabel>{__('State / County', 'masteriyo')}</FormLabel>
-											<Controller
-												defaultValue={
-													stateCode && {
-														label: states[stateCode],
-														value: stateCode,
-													}
-												}
-												render={({ field }) => {
-													if (isStatesAvailable) {
-														return (
-															<ReactSelect
-																{...field}
-																defaultValue={
-																	field.value.value && {
-																		label: states[field.value.value],
-																		value: field.value.value,
-																	}
-																}
-																isSearchable
-																options={getStateOptions(countryCode)}
-															/>
-														);
-													}
-													return <Input {...field} value={field.value.value} />;
-												}}
-												control={control}
-												name="billing[state]"
-											/>
+											<Select {...register('billing.state')}></Select>
 											<FormErrorMessage>
-												{errors &&
-													errors['billing[state]'] &&
-													errors['billing[state]'].message}
+												{errors?.billing?.state &&
+													errors?.billing?.state?.message}
 											</FormErrorMessage>
 										</FormControl>
 									</Stack>
 
 									{/* Address Lines */}
 									<Stack direction="row" spacing="8" py="3">
-										<FormControl isInvalid={!!errors?.address_1}>
+										<FormControl isInvalid={!!errors?.billing?.address_1}>
 											<FormLabel>{__('Address 1', 'masteriyo')}</FormLabel>
 											<Input
+												type="text"
 												defaultValue={orderQuery.data?.billing.address_1}
-												{...register('billing[address_1]')}
+												{...register('billing.address_1')}
 											/>
 											<FormErrorMessage>
-												{errors?.address_1 && errors?.address_1?.message}
+												{errors?.billing?.address_1 &&
+													errors?.billing?.address_1?.message}
 											</FormErrorMessage>
 										</FormControl>
-										<FormControl isInvalid={!!errors?.address_2}>
+										<FormControl isInvalid={!!errors?.billing?.address_2}>
 											<FormLabel>{__('Address 2', 'masteriyo')}</FormLabel>
 											<Input
+												type="text"
 												defaultValue={orderQuery.data?.billing.address_2}
-												{...register('billing[address_2]')}
+												{...register('billing.address_2')}
 											/>
 											<FormErrorMessage>
-												{errors?.address_2 && errors?.address_2?.message}
+												{errors?.billing?.address_2 &&
+													errors?.billing?.address_2?.message}
 											</FormErrorMessage>
 										</FormControl>
 									</Stack>
 
 									{/* City & Postcode */}
 									<Stack direction="row" spacing="8" py="3">
-										<FormControl isInvalid={errors && errors['billing[city]']}>
+										<FormControl isInvalid={!!errors?.billing?.city}>
 											<FormLabel>{__('City', 'masteriyo')}</FormLabel>
 											<Input
+												type="text"
 												defaultValue={orderQuery.data?.billing.city}
-												{...register('billing[city]')}
+												{...register('billing.city')}
 											/>
 											<FormErrorMessage>
-												{errors &&
-													errors['billing[city]'] &&
-													errors['billing[city]'].message}
+												{errors?.billing?.city &&
+													errors?.billing?.city?.message}
 											</FormErrorMessage>
 										</FormControl>
-										<FormControl
-											isInvalid={errors && errors['billing[postcode]']}>
+										<FormControl isInvalid={!!errors?.billing?.postcode}>
 											<FormLabel>{__('Postcode / ZIP', 'masteriyo')}</FormLabel>
 											<Input
+												type="number"
 												defaultValue={orderQuery.data?.billing.postcode}
-												{...register('billing[postcode]')}
+												{...register('billing.postcode')}
 											/>
 											<FormErrorMessage>
-												{errors &&
-													errors['billing[postcode]'] &&
-													errors['billing[postcode]'].message}
+												{errors?.billing?.postcode &&
+													errors?.billing?.postcode?.message}
 											</FormErrorMessage>
 										</FormControl>
 									</Stack>
 
 									{/* Email & Phone */}
 									<Stack direction="row" spacing="8" py="3">
-										<FormControl isInvalid={errors && errors['billing[email]']}>
+										<FormControl isInvalid={!!errors?.billing?.email}>
 											<FormLabel>{__('Email address', 'masteriyo')}</FormLabel>
 											<Input
-												defaultValue={orderQuery.data?.billing.email}
-												{...register('billing[email]')}
 												type="email"
+												defaultValue={orderQuery.data?.billing.email}
+												{...register('billing.email')}
 											/>
 											<FormErrorMessage>
-												{errors &&
-													errors['billing[email]'] &&
-													errors['billing[email]'].message}
+												{errors?.billing?.email &&
+													errors?.billing?.email?.message}
 											</FormErrorMessage>
 										</FormControl>
-										<FormControl isInvalid={errors && errors['billing[phone]']}>
+										<FormControl isInvalid={!!errors?.billing?.phone}>
 											<FormLabel>{__('Phone', 'masteriyo')}</FormLabel>
 											<Input
+												type="number"
 												defaultValue={orderQuery.data?.billing.phone}
-												{...register('billing[phone]')}
+												{...register('billing.phone')}
 											/>
 											<FormErrorMessage>
-												{errors &&
-													errors['billing[phone]'] &&
-													errors['billing[phone]'].message}
+												{errors?.billing?.phone &&
+													errors?.billing?.phone?.message}
 											</FormErrorMessage>
 										</FormControl>
 									</Stack>
@@ -512,7 +443,7 @@ const EditOrder = () => {
 								{__('Items', 'masteriyo')}
 							</Heading>
 							{orderItemsQuery.isSuccess &&
-								orderItemsQuery.data.map((orderItem: any) => (
+								orderItemsQuery.data.map((orderItem: OrderItemSchema) => (
 									<Stack key={orderItem.id} direction="row" spacing="6">
 										<Text flexGrow={1} fontWeight="semibold">
 											{orderItem.name}

@@ -64,11 +64,23 @@ const CourseList: React.FC<Props> = (props) => {
 				</Link>
 			</Td>
 			<Td>
-				<Stack direction="row">
-					{categories.map((category: CourseCategorySchema) => (
-						<Badge key={category.id}>{category.name}</Badge>
-					))}
-				</Stack>
+				{categories.map((category: CourseCategorySchema) => (
+					<Text
+						as="span"
+						fontSize="xs"
+						fontWeight="medium"
+						key={category.id}
+						_last={{
+							_after: {
+								content: 'none',
+							},
+						}}
+						_after={{
+							content: `", "`,
+						}}>
+						{category.name}
+					</Text>
+				))}
 			</Td>
 			<Td>
 				<Stack direction="row" spacing="2" alignItems="center">

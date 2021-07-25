@@ -18,7 +18,7 @@ import defaultStyle from '../../config/defaultStyle';
 
 interface Props extends ReactSelectProps {}
 
-const Select = React.forwardRef<ReactSelectProps, Props>((props) => {
+const Select = React.forwardRef<ReactSelectProps, Props>((ref, props) => {
 	const customStyles = {
 		control: (provided: any, state: any) => ({
 			...provided,
@@ -117,6 +117,7 @@ const Select = React.forwardRef<ReactSelectProps, Props>((props) => {
 
 	return (
 		<ReactSelect
+			inputRef={ref}
 			{...props}
 			styles={customStyles}
 			components={{ Option: Option, SingleValue: SingleValue }}

@@ -165,7 +165,7 @@ class QuizesController extends PostsController {
 			'/' . $this->rest_base . '/check_answers',
 			array(
 				'args' => array(
-					'id' => array(
+					'id'   => array(
 						'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
 						'type'        => 'integer',
 						'required'    => true,
@@ -771,6 +771,9 @@ class QuizesController extends PostsController {
 	 * @return array
 	 */
 	protected function get_quiz_data( $quiz, $context = 'view' ) {
+		$course      = get_post( $quiz->get_course_id( $context ) );
+		$course_name = is_null( $course ) ? '' : $course->post_title;
+
 		$data = array(
 			'id'                         => $quiz->get_id(),
 			'name'                       => $quiz->get_name( $context ),
@@ -778,6 +781,7 @@ class QuizesController extends PostsController {
 			'permalink'                  => $quiz->get_permalink(),
 			'parent_id'                  => $quiz->get_parent_id( $context ),
 			'course_id'                  => $quiz->get_course_id( $context ),
+			'course_name'                => $course_name,
 			'menu_order'                 => $quiz->get_menu_order( $context ),
 			'status'                     => $quiz->get_status( $context ),
 			'description'                => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
@@ -903,6 +907,12 @@ class QuizesController extends PostsController {
 					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'course_name'         => array(
+					'description' => __( 'Course name.', 'masteriyo' ),
+					'type'        => 'string',
+					'readonly'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'menu_order'                 => array(

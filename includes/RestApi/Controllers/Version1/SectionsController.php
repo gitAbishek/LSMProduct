@@ -231,6 +231,9 @@ class SectionsController extends PostsController {
 	 * @return array
 	 */
 	protected function get_section_data( $section, $context = 'view' ) {
+		$course      = get_post( $section->get_course_id( $context ) );
+		$course_name = is_null( $course ) ? '' : $course->post_title;
+
 		$data = array(
 			'id'          => $section->get_id(),
 			'name'        => $section->get_name( $context ),
@@ -238,6 +241,7 @@ class SectionsController extends PostsController {
 			'menu_order'  => $section->get_menu_order( $context ),
 			'parent_id'   => $section->get_parent_id( $context ),
 			'course_id'   => $section->get_course_id( $context ),
+			'course_name' => $course_name,
 			'description' => 'view' === $context ? wpautop( do_shortcode( $section->get_description() ) ) : $section->get_description( $context ),
 		);
 
@@ -333,6 +337,12 @@ class SectionsController extends PostsController {
 					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'course_name'       => array(
+					'description' => __( 'Course name.', 'masteriyo' ),
+					'type'        => 'string',
+					'readonly'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'menu_order'        => array(
@@ -478,7 +488,7 @@ class SectionsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid course ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -524,7 +534,7 @@ class SectionsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -570,7 +580,7 @@ class SectionsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}

@@ -254,6 +254,9 @@ class LessonsController extends PostsController {
 	 * @return array
 	 */
 	protected function get_lesson_data( $lesson, $context = 'view' ) {
+		$course      = get_post( $lesson->get_course_id( $context ) );
+		$course_name = is_null( $course ) ? '' : $course->post_title;
+
 		$data = array(
 			'id'                  => $lesson->get_id(),
 			'name'                => $lesson->get_name( $context ),
@@ -266,6 +269,7 @@ class LessonsController extends PostsController {
 			'reviews_allowed'     => $lesson->get_reviews_allowed( $context ),
 			'parent_id'           => $lesson->get_parent_id( $context ),
 			'course_id'           => $lesson->get_course_id( $context ),
+			'course_name'         => $course_name,
 			'featured_image'      => $lesson->get_featured_image( $context ),
 			'video_source'        => $lesson->get_video_source( $context ),
 			'video_source_url'    => $lesson->get_video_source_url( $context ),
@@ -414,6 +418,12 @@ class LessonsController extends PostsController {
 					'description' => __( 'Course ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
+					'context'     => array( 'view', 'edit' ),
+				),
+				'course_name'         => array(
+					'description' => __( 'Course name.', 'masteriyo' ),
+					'type'        => 'string',
+					'readonly'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'menu_order'          => array(

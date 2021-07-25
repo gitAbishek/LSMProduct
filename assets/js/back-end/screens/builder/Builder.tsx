@@ -22,7 +22,12 @@ import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
+import {
+	Link as RouterLink,
+	useHistory,
+	useLocation,
+	useParams,
+} from 'react-router-dom';
 import AddCategoryModal from '../../components/common/AddCategoryModal';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import { Logo } from '../../constants/images';
@@ -41,6 +46,7 @@ const Builder: React.FC = () => {
 	const queryClient = useQueryClient();
 	const toast = useToast();
 	const methods = useForm();
+	const history = useHistory();
 
 	const courseAPI = new API(urls.courses);
 	const builderAPI = new API(urls.builder);
@@ -141,15 +147,37 @@ const Builder: React.FC = () => {
 												</Link>
 											</Box>
 											<TabList borderBottom="none" bg="white">
-												<Tab sx={tabStyles}>
+												<Tab
+													sx={tabStyles}
+													onClick={() => {
+														history.push(
+															routes.courses.edit.replace(':courseId', courseId)
+														);
+													}}>
 													<Icon as={BiBook} sx={iconStyles} />
 													{__('Course', 'masteriyo')}
 												</Tab>
-												<Tab sx={tabStyles}>
+												<Tab
+													sx={tabStyles}
+													onClick={() => {
+														history.push({
+															pathname: routes.courses.edit.replace(
+																':courseId',
+																courseId
+															),
+															search: '?page=builder',
+														});
+													}}>
 													<Icon as={BiEdit} sx={iconStyles} />
 													{__('Builder', 'masteriyo')}
 												</Tab>
-												<Tab sx={tabStyles}>
+												<Tab
+													sx={tabStyles}
+													onClick={() => {
+														history.push(
+															routes.courses.edit.replace(':courseId', courseId)
+														);
+													}}>
 													<Icon as={BiCog} sx={iconStyles} />
 													{__('Settings', 'masteriyo')}
 												</Tab>

@@ -4,6 +4,7 @@ import {
 	ButtonGroup,
 	Container,
 	Flex,
+	Icon,
 	Image,
 	Link,
 	List,
@@ -13,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiBook } from 'react-icons/bi';
+import { BiBook, BiPlus } from 'react-icons/bi';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
@@ -73,7 +74,9 @@ const Header: React.FC<Props> = (props) => {
 					{!hideAddNewCourseBtn && (
 						<ButtonGroup>
 							<RouterLink to={routes.courses.add}>
-								<Button colorScheme="blue">
+								<Button
+									colorScheme="blue"
+									leftIcon={<Icon as={BiPlus} fontSize="xl" />}>
 									{__('Add New Course', 'masteriyo')}
 								</Button>
 							</RouterLink>

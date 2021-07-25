@@ -85,3 +85,10 @@ export const reactSelectStyles = {
 		fontSize: theme.fontSizes.xs,
 	}),
 };
+
+export const whileDraggingStyles = {
+	bg: '#f8f8f8',
+	border: '1px dashed',
+	borderColor: 'gray.200',
+	borderRadius: 'sm',
+};

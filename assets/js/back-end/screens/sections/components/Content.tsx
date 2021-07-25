@@ -5,28 +5,20 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogOverlay,
+	Box,
 	Button,
 	ButtonGroup,
 	Flex,
 	Icon,
 	IconButton,
-	Menu,
-	MenuButton,
-	MenuItem,
-	MenuList,
 	Stack,
 	Text,
+	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import {
-	BiAlignLeft,
-	BiDotsVerticalRounded,
-	BiEdit,
-	BiTimer,
-	BiTrash,
-} from 'react-icons/bi';
+import { BiAlignLeft, BiEdit, BiTimer, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 import { Sortable } from '../../../assets/icons';
@@ -107,16 +99,21 @@ const Content: React.FC<Props> = (props) => {
 					bg="white"
 					border="1px"
 					borderColor="gray.100"
-					p="2"
 					mb="3"
 					_last={{ mb: 0 }}
 					ref={draggableProvided.innerRef}
 					{...draggableProvided.draggableProps}>
 					<Stack direction="row" spacing="3" align="center">
-						<span {...draggableProvided.dragHandleProps}>
+						<Box
+							as="span"
+							p="2"
+							{...draggableProvided.dragHandleProps}
+							borderRight="1px"
+							borderColor="gray.200">
 							<Icon as={Sortable} fontSize="lg" color="gray.500" />
-						</span>
+						</Box>
 						<Icon
+							color="blue.400"
 							as={type === 'lesson' ? BiAlignLeft : BiTimer}
 							fontSize="xl"
 						/>
@@ -124,31 +121,28 @@ const Content: React.FC<Props> = (props) => {
 							{name}
 						</Text>
 					</Stack>
-					<Flex direction="row">
-						<Button
-							variant="outline"
-							size="sm"
-							onClick={onEditPress}
-							mr="2"
-							leftIcon={<BiEdit />}>
-							{__('Edit', 'masteriyo')}
-						</Button>
-						<Menu placement="bottom-end" offset={[0, 0]}>
-							<MenuButton
-								as={IconButton}
-								icon={<BiDotsVerticalRounded />}
-								variant="outline"
-								rounded="sm"
-								size="sm"
-								fontSize="large"
+					<ButtonGroup color="gray.400" size="xs" p="2">
+						<Tooltip label={__('Edit', 'masteriyo')}>
+							<IconButton
+								_hover={{ color: 'gray.700' }}
+								onClick={onEditPress}
+								variant="unstyled"
+								icon={<Icon fontSize="xl" as={BiEdit} />}
+								aria-label={__('Edit')}
 							/>
-							<MenuList>
-								<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
-									{__('Delete', 'masteriyo')}
-								</MenuItem>
-							</MenuList>
-						</Menu>
-					</Flex>
+						</Tooltip>
+
+						<Tooltip label={__('Delete', 'masteriyo')}>
+							<IconButton
+								_hover={{ color: 'red.500' }}
+								onClick={onDeletePress}
+								variant="unstyled"
+								icon={<Icon fontSize="xl" as={BiTrash} />}
+								aria-label={__('Edit')}
+							/>
+						</Tooltip>
+					</ButtonGroup>
+
 					<AlertDialog
 						isOpen={isDeleteModalOpen}
 						onClose={onDeleteModalClose}

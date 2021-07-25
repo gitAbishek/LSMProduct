@@ -10,23 +10,13 @@ import {
 	Flex,
 	Icon,
 	IconButton,
-	Menu,
-	MenuButton,
-	MenuItem,
-	MenuList,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import {
-	BiAlignLeft,
-	BiDotsVerticalRounded,
-	BiEdit,
-	BiTimer,
-	BiTrash,
-} from 'react-icons/bi';
+import { BiAlignLeft, BiCopy, BiEdit, BiTimer, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 import { Sortable } from '../../../assets/icons';
@@ -117,6 +107,7 @@ const Content: React.FC<Props> = (props) => {
 							<Icon as={Sortable} fontSize="lg" color="gray.500" />
 						</span>
 						<Icon
+							color="blue.400"
 							as={type === 'lesson' ? BiAlignLeft : BiTimer}
 							fontSize="xl"
 						/>
@@ -124,31 +115,26 @@ const Content: React.FC<Props> = (props) => {
 							{name}
 						</Text>
 					</Stack>
-					<Flex direction="row">
-						<Button
-							variant="outline"
-							size="sm"
+					<ButtonGroup color="gray.300" size="xs">
+						<IconButton
 							onClick={onEditPress}
-							mr="2"
-							leftIcon={<BiEdit />}>
-							{__('Edit', 'masteriyo')}
-						</Button>
-						<Menu placement="bottom-end" offset={[0, 0]}>
-							<MenuButton
-								as={IconButton}
-								icon={<BiDotsVerticalRounded />}
-								variant="outline"
-								rounded="sm"
-								size="sm"
-								fontSize="large"
-							/>
-							<MenuList>
-								<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
-									{__('Delete', 'masteriyo')}
-								</MenuItem>
-							</MenuList>
-						</Menu>
-					</Flex>
+							variant="unstyled"
+							icon={<Icon fontSize="xl" as={BiEdit} />}
+							aria-label={__('Edit')}
+						/>
+						<IconButton
+							variant="unstyled"
+							icon={<Icon fontSize="xl" as={BiCopy} />}
+							aria-label={__('Edit')}
+						/>
+						<IconButton
+							onClick={onDeletePress}
+							variant="unstyled"
+							icon={<Icon fontSize="xl" as={BiTrash} />}
+							aria-label={__('Edit')}
+						/>
+					</ButtonGroup>
+
 					<AlertDialog
 						isOpen={isDeleteModalOpen}
 						onClose={onDeleteModalClose}

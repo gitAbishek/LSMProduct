@@ -68,6 +68,7 @@ const theme = extendTheme({
 		boxl: '0px 0px 60px rgba(0, 0, 0, 0.15)',
 		header: '0px 2px 15px rgba(0, 0, 0, 0.04)',
 	},
+
 	components: {
 		Popover: {
 			baseStyle: {
@@ -146,6 +147,7 @@ const theme = extendTheme({
 				},
 			},
 		},
+
 		Steps,
 	},
 });

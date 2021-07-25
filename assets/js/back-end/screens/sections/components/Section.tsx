@@ -62,6 +62,13 @@ const Section: React.FC<Props> = (props) => {
 	const queryClient = useQueryClient();
 	const toast = useToast();
 
+	const whileDraggingStyles = {
+		bg: '#f8f8f8',
+		border: '1px dashed',
+		borderColor: 'gray.200',
+		borderRadius: 'sm',
+	};
+
 	const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
 		onSuccess: (data: any) => {
 			toast({
@@ -140,30 +147,31 @@ const Section: React.FC<Props> = (props) => {
 							onCancel={() => setIsEditing(false)}
 						/>
 					</Collapse>
-
-					<Droppable droppableId={id.toString()} type="content">
-						{(droppableProvided, snapshot) => (
-							<Box
-								p="5"
-								minH="8"
-								bgColor={snapshot.isDraggingOver ? 'gray.100' : 'transparent'}
-								ref={droppableProvided.innerRef}
-								{...droppableProvided.droppableProps}>
-								{newContents &&
-									newContents.map((content: any, index: any) => (
-										<Content
-											key={content.id}
-											id={content.id}
-											name={content.name}
-											type={content.type}
-											index={index}
-											courseId={courseId}
-										/>
-									))}
-								{droppableProvided.placeholder}
-							</Box>
-						)}
-					</Droppable>
+					<Box px="2">
+						<Droppable droppableId={id.toString()} type="content">
+							{(droppableProvided, snapshot) => (
+								<Box
+									p="3"
+									minH="8"
+									sx={snapshot.isDraggingOver ? whileDraggingStyles : {}}
+									ref={droppableProvided.innerRef}
+									{...droppableProvided.droppableProps}>
+									{newContents &&
+										newContents.map((content: any, index: any) => (
+											<Content
+												key={content.id}
+												id={content.id}
+												name={content.name}
+												type={content.type}
+												index={index}
+												courseId={courseId}
+											/>
+										))}
+									{droppableProvided.placeholder}
+								</Box>
+							)}
+						</Droppable>
+					</Box>
 
 					<Box p="5">
 						<Menu>

@@ -5,6 +5,7 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogOverlay,
+	Box,
 	Button,
 	ButtonGroup,
 	Flex,
@@ -12,11 +13,12 @@ import {
 	IconButton,
 	Stack,
 	Text,
+	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { BiAlignLeft, BiCopy, BiEdit, BiTimer, BiTrash } from 'react-icons/bi';
+import { BiAlignLeft, BiEdit, BiTimer, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 import { Sortable } from '../../../assets/icons';
@@ -97,15 +99,19 @@ const Content: React.FC<Props> = (props) => {
 					bg="white"
 					border="1px"
 					borderColor="gray.100"
-					p="2"
 					mb="3"
 					_last={{ mb: 0 }}
 					ref={draggableProvided.innerRef}
 					{...draggableProvided.draggableProps}>
 					<Stack direction="row" spacing="3" align="center">
-						<span {...draggableProvided.dragHandleProps}>
+						<Box
+							as="span"
+							p="2"
+							{...draggableProvided.dragHandleProps}
+							borderRight="1px"
+							borderColor="gray.200">
 							<Icon as={Sortable} fontSize="lg" color="gray.500" />
-						</span>
+						</Box>
 						<Icon
 							color="blue.400"
 							as={type === 'lesson' ? BiAlignLeft : BiTimer}
@@ -115,24 +121,26 @@ const Content: React.FC<Props> = (props) => {
 							{name}
 						</Text>
 					</Stack>
-					<ButtonGroup color="gray.300" size="xs">
-						<IconButton
-							onClick={onEditPress}
-							variant="unstyled"
-							icon={<Icon fontSize="xl" as={BiEdit} />}
-							aria-label={__('Edit')}
-						/>
-						<IconButton
-							variant="unstyled"
-							icon={<Icon fontSize="xl" as={BiCopy} />}
-							aria-label={__('Edit')}
-						/>
-						<IconButton
-							onClick={onDeletePress}
-							variant="unstyled"
-							icon={<Icon fontSize="xl" as={BiTrash} />}
-							aria-label={__('Edit')}
-						/>
+					<ButtonGroup color="gray.400" size="xs" p="2">
+						<Tooltip label={__('Edit', 'masteriyo')}>
+							<IconButton
+								_hover={{ color: 'gray.700' }}
+								onClick={onEditPress}
+								variant="unstyled"
+								icon={<Icon fontSize="xl" as={BiEdit} />}
+								aria-label={__('Edit')}
+							/>
+						</Tooltip>
+
+						<Tooltip label={__('Delete', 'masteriyo')}>
+							<IconButton
+								_hover={{ color: 'red.500' }}
+								onClick={onDeletePress}
+								variant="unstyled"
+								icon={<Icon fontSize="xl" as={BiTrash} />}
+								aria-label={__('Edit')}
+							/>
+						</Tooltip>
 					</ButtonGroup>
 
 					<AlertDialog

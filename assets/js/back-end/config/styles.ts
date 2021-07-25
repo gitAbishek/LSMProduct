@@ -1,6 +1,4 @@
 import theme from '../theme/theme';
-import colors from './colors';
-import defaultStyle from './defaultStyle';
 
 export const borderedBoxStyles = {
 	border: '1px',
@@ -33,46 +31,57 @@ export const reactSelectStyles = {
 		...provided,
 		minHeight: '40px',
 		boxShadow: theme.shadows.input,
-		borderRadius: defaultStyle.borderRadius,
+		borderRadius: theme.radii.sm,
 		borderColor: state.isDisabled
-			? colors.BORDER
+			? theme.colors.gray[200]
 			: state.isFocused
-			? colors.PRIMARY
-			: colors.BORDER,
+			? theme.colors.blue
+			: 'inherit',
 		transition: 'all 0.35s ease-in-out',
-		backgroundColor: state.isDisabled
-			? colors.LIGHT_GRAY
-			: state.isFocused
-			? colors.LIGHT_BLUEISH_GRAY
-			: colors.WHITE,
+		backgroundColor: theme.colors.white,
+		opacity: state.isDisabled ? '0.4' : '1',
+		cursor: state.isDisabled ? 'not-allowed' : 'inherit',
+		fontSize: theme.fontSizes.sm,
+
 		'&:hover': {
-			borderColor: colors.PRIMARY,
+			borderColor: theme.colors.gray[300],
 		},
 	}),
 
 	placeholder: (provided: any) => ({
 		...provided,
-		color: colors.PLACEHOLDER,
+		color: theme.colors.gray[300],
 		marginLeft: 0,
 	}),
 
 	indicatorSeparator: (provided: any) => ({
 		...provided,
-		backgroundColor: colors.BORDER,
+		backgroundColor: theme.colors.gray[100],
+	}),
+
+	dropdownIndicator: (provided: any) => ({
+		...provided,
+		color: theme.colors.gray[300],
 	}),
 
 	option: (provided: any, state: any) => ({
 		...provided,
 		backgroundColor: state.isSelected
-			? colors.PRIMARY
+			? theme.colors.blue[300]
 			: state.isFocused
-			? '#ccddff'
+			? theme.colors.blue[10]
 			: 'transparent',
+	}),
+
+	multiValue: (provided: any) => ({
+		...provided,
+		backgroundColor: theme.colors.blue[50],
 	}),
 
 	menu: (provided: any) => ({
 		...provided,
-		borderRadius: defaultStyle,
+		borderRadius: theme.radii.sm,
 		zIndex: '3',
+		fontSize: theme.fontSizes.xs,
 	}),
 };

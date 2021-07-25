@@ -64,6 +64,7 @@ const Categories: React.FC<Props> = (props) => {
 							styles={reactSelectStyles}
 							closeMenuOnSelect={false}
 							isMulti
+							menuIsOpen
 							options={categoriesList}
 						/>
 					)}

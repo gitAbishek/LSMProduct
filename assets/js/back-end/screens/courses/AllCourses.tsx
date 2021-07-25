@@ -95,6 +95,7 @@ const AllCourses = () => {
 				<Box bg="white" py="12" shadow="box" mx="auto">
 					<Stack direction="column" spacing="10">
 						<CourseFilter setFilterParams={setFilterParams} />
+
 						<Stack direction="column" spacing="8">
 							<Table size="sm" sx={tableStyles}>
 								<Thead>

@@ -69,6 +69,7 @@ const CourseList: React.FC<Props> = (props) => {
 						as="span"
 						fontSize="xs"
 						fontWeight="medium"
+						color="gray.600"
 						key={category.id}
 						_last={{
 							_after: {
@@ -92,9 +93,11 @@ const CourseList: React.FC<Props> = (props) => {
 			</Td>
 			<Td>
 				{price === undefined || price < 1 ? (
-					<Badge>{__('Free', 'masteriyo')}</Badge>
+					<Badge textTransform="none">{__('Free', 'masteriyo')}</Badge>
 				) : (
-					price
+					<Text fontWeight="medium" fontSize="xs">
+						{price}
+					</Text>
 				)}
 			</Td>
 			<Td>

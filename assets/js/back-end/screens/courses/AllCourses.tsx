@@ -53,6 +53,7 @@ const AllCourses = () => {
 			},
 		},
 		td: {
+			py: '3',
 			borderBottom: 'none',
 		},
 	};

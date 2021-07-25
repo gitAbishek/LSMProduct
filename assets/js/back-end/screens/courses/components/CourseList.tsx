@@ -119,7 +119,7 @@ const CourseList: React.FC<Props> = (props) => {
 				<ButtonGroup>
 					<RouterLink
 						to={routes.courses.edit.replace(':courseId', id.toString())}>
-						<Button leftIcon={<BiEdit />} colorScheme="blue" size="sm">
+						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
 							{__('Edit')}
 						</Button>
 					</RouterLink>
@@ -130,7 +130,7 @@ const CourseList: React.FC<Props> = (props) => {
 							variant="outline"
 							rounded="sm"
 							fontSize="large"
-							size="sm"
+							size="xs"
 						/>
 						<MenuList>
 							<Link href={permalink} isExternal>

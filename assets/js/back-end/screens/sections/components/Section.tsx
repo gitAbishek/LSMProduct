@@ -35,6 +35,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
 import { Sortable } from '../../../assets/icons';
 import AddNewButton from '../../../components/common/AddNewButton';
+import { whileDraggingStyles } from '../../../config/styles';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
@@ -61,13 +62,6 @@ const Section: React.FC<Props> = (props) => {
 	const newContents = contents?.map((contentId: any) => contentsMap[contentId]);
 	const queryClient = useQueryClient();
 	const toast = useToast();
-
-	const whileDraggingStyles = {
-		bg: '#f8f8f8',
-		border: '1px dashed',
-		borderColor: 'gray.200',
-		borderRadius: 'sm',
-	};
 
 	const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
 		onSuccess: (data: any) => {

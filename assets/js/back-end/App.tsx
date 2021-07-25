@@ -2,6 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import CreateCatModalProvicer from './context/CreateCatProvider';
+import ErrorBoundary from './errors/ErrorBoundary';
 import Router from './router/Router';
 import theme from './theme/theme';
 
@@ -11,17 +12,20 @@ const App = () => {
 			queries: {
 				refetchOnWindowFocus: false,
 				refetchOnReconnect: false,
+				useErrorBoundary: true,
 			},
 		},
 	});
 
 	return (
 		<ChakraProvider theme={theme}>
-			<QueryClientProvider client={queryClient}>
-				<CreateCatModalProvicer>
-					<Router />
-				</CreateCatModalProvicer>
-			</QueryClientProvider>
+			<ErrorBoundary>
+				<QueryClientProvider client={queryClient}>
+					<CreateCatModalProvicer>
+						<Router />
+					</CreateCatModalProvicer>
+				</QueryClientProvider>
+			</ErrorBoundary>
 		</ChakraProvider>
 	);
 };

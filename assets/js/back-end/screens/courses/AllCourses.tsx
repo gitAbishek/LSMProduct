@@ -1,5 +1,13 @@
 import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
 	Box,
+	Button,
+	ButtonGroup,
 	Container,
 	Stack,
 	Table,
@@ -7,10 +15,11 @@ import {
 	Th,
 	Thead,
 	Tr,
+	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import Header from '../../components/layout/Header';
 import urls from '../../constants/urls';
 import { SkeletonCourseList } from '../../skeleton';
@@ -29,9 +38,14 @@ interface FilterParams {
 const AllCourses = () => {
 	const courseAPI = new API(urls.courses);
 	const [filterParams, setFilterParams] = useState<FilterParams>({});
+	const [deleteCourseId, setDeleteCourseId] = useState<number>();
+
+	const queryClient = useQueryClient();
+	const { onClose, onOpen, isOpen } = useDisclosure();
 	const courseQuery = useQuery(['courseList', filterParams], () =>
 		courseAPI.list(filterParams)
 	);
+	const cancelRef = React.useRef<any>();
 
 	const tableStyles = {
 		th: {
@@ -56,6 +70,22 @@ const AllCourses = () => {
 			py: '3',
 			borderBottom: 'none',
 		},
+	};
+
+	const deleteCourse = useMutation((id: number) => courseAPI.delete(id), {
+		onSuccess: () => {
+			queryClient.invalidateQueries('courseList');
+			onClose();
+		},
+	});
+
+	const onDeletePress = (courseId: number) => {
+		onOpen();
+		setDeleteCourseId(courseId);
+	};
+
+	const onDeleteCofirm = () => {
+		deleteCourseId && deleteCourse.mutate(deleteCourseId);
 	};
 
 	return (
@@ -89,6 +119,7 @@ const AllCourses = () => {
 											createdOn={course.date_created}
 											permalink={course.permalink}
 											author={course.author}
+											onDeletePress={onDeletePress}
 										/>
 									))}
 							</Tbody>
@@ -96,6 +127,35 @@ const AllCourses = () => {
 					</Stack>
 				</Box>
 			</Container>
+			<AlertDialog
+				isOpen={isOpen}
+				onClose={onClose}
+				isCentered
+				leastDestructiveRef={cancelRef}>
+				<AlertDialogOverlay>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							{__('Deleting Course')} {name}
+						</AlertDialogHeader>
+						<AlertDialogBody>
+							{__("Are you sure? You can't restore this back", 'masteriyo')}
+						</AlertDialogBody>
+						<AlertDialogFooter>
+							<ButtonGroup>
+								<Button onClick={onClose} variant="outline" ref={cancelRef}>
+									{__('Cancel', 'masteriyo')}
+								</Button>
+								<Button
+									colorScheme="red"
+									isLoading={deleteCourse.isLoading}
+									onClick={onDeleteCofirm}>
+									{__('Delete', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialogOverlay>
+			</AlertDialog>
 		</Stack>
 	);
 };

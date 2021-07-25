@@ -434,11 +434,11 @@ class IpnHandler extends Response {
 	 */
 	protected function get_new_order_settings() {
 		return array(
-			'enable'     => masteriyo_get_setting_value( 'emails.new_order_enable' ),
-			'recipients' => masteriyo_get_setting_value( 'emails.new_order_recipients' ),
-			'subject'    => masteriyo_get_setting_value( 'emails.new_order_subject' ),
-			'heading'    => masteriyo_get_setting_value( 'emails.new_order_heading' ),
-			'content'    => masteriyo_get_setting_value( 'emails.new_order_content' ),
+			'enable'     => masteriyo_get_setting( 'emails.new_order.enable' ),
+			'recipients' => masteriyo_get_setting( 'emails.new_order.recipients' ),
+			'subject'    => masteriyo_get_setting( 'emails.new_order.subject' ),
+			'heading'    => masteriyo_get_setting( 'emails.new_order.heading' ),
+			'content'    => masteriyo_get_setting( 'emails.new_order.content' ),
 		);
 	}
 
@@ -451,24 +451,24 @@ class IpnHandler extends Response {
 	 */
 	protected function get_paypal_settings() {
 		return array(
-			'enable'                 => masteriyo_get_setting_value( 'payments.paypal_enable' ),
-			'title'                  => masteriyo_get_setting_value( 'payments.paypal_title' ),
-			'description'            => masteriyo_get_setting_value( 'payments.paypal_description' ),
-			'ipn_email_notification' => masteriyo_get_setting_value( 'payments.paypal_ipn_email_notification' ),
-			'sandbox'                => masteriyo_get_setting_value( 'payments.paypal_sandbox' ),
-			'email'                  => masteriyo_get_setting_value( 'payments.paypal_email' ),
-			'receiver_email'         => masteriyo_get_setting_value( 'payments.paypal_receiver_email' ),
-			'identity_token'         => masteriyo_get_setting_value( 'payments.paypal_indentity_token' ),
-			'invoice_prefix'         => masteriyo_get_setting_value( 'payments.paypal_invoice_prefix' ),
-			'payment_action'         => masteriyo_get_setting_value( 'payments.paypal_payment_action' ),
-			'image_url'              => masteriyo_get_setting_value( 'payments.paypal_image_url' ),
-			'debug'                  => masteriyo_get_setting_value( 'payments.paypal_debug' ),
-			'sandbox_api_username'   => masteriyo_get_setting_value( 'payments.paypal_sandbox_api_username' ),
-			'sandbox_api_password'   => masteriyo_get_setting_value( 'payments.paypal_sandbox_api_password' ),
-			'sandbox_api_signature'  => masteriyo_get_setting_value( 'payments.paypal_sandbox_api_signature' ),
-			'live_api_username'      => masteriyo_get_setting_value( 'payments.paypal_live_api_username' ),
-			'live_api_password'      => masteriyo_get_setting_value( 'payments.paypal_live_api_password' ),
-			'live_api_signature'     => masteriyo_get_setting_value( 'payments.paypal_live_api_signature' ),
+			'enable'                 => masteriyo_get_setting( 'payments.paypal.enable' ),
+			'title'                  => masteriyo_get_setting( 'payments.paypal.title' ),
+			'description'            => masteriyo_get_setting( 'payments.paypal.description' ),
+			'ipn_email_notification' => masteriyo_get_setting( 'payments.paypal.ipn_email_notification' ),
+			'sandbox'                => masteriyo_get_setting( 'payments.paypal.sandbox' ),
+			'email'                  => masteriyo_get_setting( 'payments.paypal.email' ),
+			'receiver_email'         => masteriyo_get_setting( 'payments.paypal.receiver_email' ),
+			'identity_token'         => masteriyo_get_setting( 'payments.paypal.indentity_token' ),
+			'invoice_prefix'         => masteriyo_get_setting( 'payments.paypal.invoice_prefix' ),
+			'payment_action'         => masteriyo_get_setting( 'payments.paypal.payment_action' ),
+			'image_url'              => masteriyo_get_setting( 'payments.paypal.image_url' ),
+			'debug'                  => masteriyo_get_setting( 'payments.paypal.debug' ),
+			'sandbox_api_username'   => masteriyo_get_setting( 'payments.paypal.sandbox_api_username' ),
+			'sandbox_api_password'   => masteriyo_get_setting( 'payments.paypal.sandbox_api_password' ),
+			'sandbox_api_signature'  => masteriyo_get_setting( 'payments.paypal.sandbox_api_signature' ),
+			'live_api_username'      => masteriyo_get_setting( 'payments.paypal.live_api_username' ),
+			'live_api_password'      => masteriyo_get_setting( 'payments.paypal.live_api_password' ),
+			'live_api_signature'     => masteriyo_get_setting( 'payments.paypal.live_api_signature' ),
 		);
 	}
 }

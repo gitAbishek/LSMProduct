@@ -1264,7 +1264,7 @@ class Order extends AbstractOrder {
 	 * @return string
 	 */
 	public function get_checkout_payment_url() {
-		return get_permalink( get_option( 'masteriyo.pages.checkout_page_id' ) );
+		return masteriyo_get_page_permalink( 'checkout' );
 	}
 
 	/**

@@ -731,11 +731,10 @@ abstract class PaymentGateway {
 	 *
 	 * @param  string $key Option key.
 	 * @param  mixed  $default Value when empty.
-	 * @return string The value specified for the option or a default value for the option.
 	 */
-	public function get_option( $key, $default = null ) {
-		$option_name = 'payments.' . $this->get_name() . '_' . $key;
+	public function get_option( $key ) {
+		$option_name = 'payments.' . $this->get_name() . '.' . $key;
 
-		return masteriyo_get_setting_value( $option_name, $default );
+		return masteriyo_get_setting( $option_name );
 	}
 }

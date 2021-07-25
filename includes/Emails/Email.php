@@ -117,7 +117,7 @@ class Email {
 					'{site_title}'   => $this->get_blogname(),
 					'{site_address}' => wp_parse_url( home_url(), PHP_URL_HOST ),
 					'{site_url}'     => wp_parse_url( home_url(), PHP_URL_HOST ),
-					'{admin_email}'  => get_option('admin_email'),
+					'{admin_email}'  => get_option( 'admin_email' ),
 				),
 				$this->get_placeholders()
 			)
@@ -149,7 +149,7 @@ class Email {
 	public function get_heading() {
 		$setting_name = 'masteriyo.emails.' . $this->setting_name_for_heading;
 		$heading      = get_option( $setting_name, $this->get_default_heading() );
-		$heading      = empty( $heading ) ?  $this->get_default_heading() : $heading;
+		$heading      = empty( $heading ) ? $this->get_default_heading() : $heading;
 
 		return apply_filters( $setting_name, $this->format_string( $heading ), $this->get_object(), $this );
 	}

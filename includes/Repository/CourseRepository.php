@@ -264,8 +264,8 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		if ( $force || array_key_exists( 'category_ids', $changes ) ) {
 			$categories = $model->get_category_ids( 'edit' );
 
-			if ( empty( $categories ) && get_option( 'default_course_cat', 0 ) ) {
-				$categories = array( get_option( 'default_course_cat', 0 ) );
+			if ( empty( $categories ) && get_option( 'masteriyo_default_course_cat', 0 ) ) {
+				$categories = array( get_option( 'masteriyo_default_course_cat', 0 ) );
 			}
 
 			wp_set_post_terms( $model->get_id(), $categories, 'course_cat', false );

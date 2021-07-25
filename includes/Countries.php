@@ -205,7 +205,7 @@ class Countries {
 	 * @return string
 	 */
 	public function get_base_address() {
-		$base_address = get_option( 'masteriyo_store_address', '' );
+		$base_address = masteriyo_get_setting( 'payments.store.address_line1' );
 		return apply_filters( 'masteriyo_countries_base_address', $base_address );
 	}
 
@@ -216,7 +216,7 @@ class Countries {
 	 * @return string
 	 */
 	public function get_base_address_2() {
-		$base_address_2 = get_option( 'masteriyo_store_address_2', '' );
+		$base_address_2 = masteriyo_get_setting( 'payments.store.address_line2' );
 		return apply_filters( 'masteriyo_countries_base_address_2', $base_address_2 );
 	}
 
@@ -251,7 +251,7 @@ class Countries {
 	 * @return string
 	 */
 	public function get_base_city() {
-		$base_city = get_option( 'masteriyo_store_city', '' );
+		$base_city = masteriyo_get_setting( 'payments.store.city' );
 		return apply_filters( 'masteriyo_countries_base_city', $base_city );
 	}
 
@@ -262,7 +262,7 @@ class Countries {
 	 * @return string
 	 */
 	public function get_base_postcode() {
-		$base_postcode = get_option( 'masteriyo_store_postcode', '' );
+		$base_postcode = masteriyo_get_setting( 'payments.store.postcode' );
 		return apply_filters( 'masteriyo_countries_base_postcode', $base_postcode );
 	}
 

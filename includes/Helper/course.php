@@ -107,7 +107,7 @@ function masteriyo_get_course_access_modes() {
 /**
  * Get the placeholder image.
  *
- * Uses wp_get_attachment_image if using an attachment ID @since 3.6.0 to handle responsiveness.
+ * Uses wp_get_attachment_image if using an attachment ID handle responsiveness.
  *
  * @since 0.1.0
  *

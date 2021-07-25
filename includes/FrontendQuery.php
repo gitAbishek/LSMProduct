@@ -115,11 +115,11 @@ class FrontendQuery {
 	 */
 	public function get_endpoints_mask() {
 		if ( 'page' === get_option( 'show_on_front' ) ) {
-			$page_on_front    = get_option( 'page_on_front' );
-			$profile_page_id  = get_option( 'masteriyo_profile_page_id' );
-			$checkout_page_id = get_option( 'masteriyo_checkout_page_id' );
+			$page_on_front     = get_option( 'page_on_front' );
+			$myaccount_page_id = masteriyo_get_setting( 'advance.pages.myaccount_page_id' );
+			$checkout_page_id  = masteriyo_get_setting( 'advance.pages.checkout_page_id' );
 
-			if ( in_array( $page_on_front, array( $profile_page_id, $checkout_page_id ), true ) ) {
+			if ( in_array( $page_on_front, array( $myaccount_page_id, $checkout_page_id ), true ) ) {
 				return EP_ROOT | EP_PAGES;
 			}
 		}
@@ -184,16 +184,17 @@ class FrontendQuery {
 		// Query vars to add to WP.
 		$this->query_vars = array(
 			// Checkout actions.
-			'order-pay'       => get_option( 'masteriyo_checkout_pay_endpoint', 'order-pay' ),
-			'order-received'  => get_option( 'masteriyo_checkout_order_received_endpoint', 'order-received' ),
+			'order-pay'       => masteriyo_get_setting( 'advance.checkout.pay' ),
+			'order-received'  => masteriyo_get_setting( 'advance.checkout.order_received' ),
+
 			// My account actions.
-			'orders'          => get_option( 'masteriyo_profile_orders_endpoint', 'orders' ),
-			'view-order'      => get_option( 'masteriyo_profile_view_order_endpoint', 'view-order' ),
-			'edit-account'    => get_option( 'masteriyo_profile_edit_account_endpoint', 'edit-account' ),
-			'edit-address'    => get_option( 'masteriyo_profile_edit_address_endpoint', 'edit-address' ),
-			'payment-methods' => get_option( 'masteriyo_profile_payment_methods_endpoint', 'payment-methods' ),
-			'lost-password'   => get_option( 'masteriyo_profile_lost_password_endpoint', 'lost-password' ),
-			'customer-logout' => get_option( 'masteriyo_logout_endpoint', 'customer-logout' ),
+			'orders'          => masteriyo_get_setting( 'advance.account.orders' ),
+			'view-order'      => masteriyo_get_setting( 'advance.account.view_order' ),
+			'edit-account'    => masteriyo_get_setting( 'advance.account.edit_account' ),
+			'edit-address'    => masteriyo_get_setting( 'advance.account.edit_address' ),
+			'payment-methods' => masteriyo_get_setting( 'advance.account.payment_methods' ),
+			'lost-password'   => masteriyo_get_setting( 'advance.account.lost_password' ),
+			'customer-logout' => masteriyo_get_setting( 'advance.account.logout' ),
 		);
 	}
 
@@ -457,6 +458,8 @@ class FrontendQuery {
 
 	/**
 	 * Returns an array of arguments for ordering courses based on the selected values.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $orderby Order by param.
 	 * @param string $order Order param.

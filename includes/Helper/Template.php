@@ -206,7 +206,7 @@ function_exists( 'add_action' ) && add_action( 'masteriyo_before_course_list_loo
  * @return int
  */
 function masteriyo_get_default_courses_per_row() {
-	$columns     = get_option( 'masteriyo.courses.per_row', 4 );
+	$columns     = masteriyo_get_setting( 'course_archive.display.per_row' );
 	$course_grid = masteriyo_get_theme_support( 'course_grid' );
 	$min_columns = isset( $course_grid['min_columns'] ) ? absint( $course_grid['min_columns'] ) : 0;
 	$max_columns = isset( $course_grid['max_columns'] ) ? absint( $course_grid['max_columns'] ) : 0;
@@ -231,7 +231,7 @@ function masteriyo_get_default_courses_per_row() {
  * @return int
  */
 function masteriyo_get_default_course_rows_per_page() {
-	$rows        = absint( get_option( 'masteriyo.courses.per_page', 4 ) );
+	$rows        = masteriyo_get_setting( 'course_archive.display.per_page' );
 	$course_grid = masteriyo_get_theme_support( 'course_grid' );
 	$min_rows    = isset( $course_grid['min_rows'] ) ? absint( $course_grid['min_rows'] ) : 0;
 	$max_rows    = isset( $course_grid['max_rows'] ) ? absint( $course_grid['max_rows'] ) : 0;

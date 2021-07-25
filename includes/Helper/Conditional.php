@@ -44,7 +44,7 @@ if ( ! function_exists( 'masteriyo_registration_is_generate_username' ) ) {
 	 * @return boolean
 	 */
 	function masteriyo_registration_is_generate_username() {
-		return 'yes' === masteriyo_get_setting_value( 'masteriyo_registration_is_generate_username', 'no' );
+		return 'yes' === get_option( 'masteriyo_registration_is_generate_username', 'no' );
 	}
 }
 
@@ -57,7 +57,7 @@ if ( ! function_exists( 'masteriyo_registration_is_generate_password' ) ) {
 	 * @return boolean
 	 */
 	function masteriyo_registration_is_generate_password() {
-		return 'yes' === masteriyo_get_setting_value( 'masteriyo_registration_is_generate_password', 'no' );
+		return 'yes' === get_option( 'masteriyo_registration_is_generate_password', 'no' );
 	}
 }
 
@@ -70,7 +70,7 @@ if ( ! function_exists( 'masteriyo_registration_is_auth_new_user' ) ) {
 	 * @return boolean
 	 */
 	function masteriyo_registration_is_auth_new_user() {
-		return 'yes' === masteriyo_get_setting_value( 'masteriyo_registration_is_auth_new_user', 'yes' );
+		return 'yes' === get_option( 'masteriyo_registration_is_auth_new_user', 'yes' );
 	}
 }
 

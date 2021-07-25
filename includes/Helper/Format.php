@@ -212,7 +212,7 @@ function masteriyo_format_decimal( $number, $dp = false, $trim_zeros = false ) {
  * @return string
  */
 function masteriyo_get_price_thousand_separator() {
-	$separator = get_option( 'masteriyo_price_thousand_sep' );
+	$separator = masteriyo_get_setting( 'payments.currency.thousand_separator' );
 	$separator = apply_filters( 'masteriyo_get_price_thousand_separator', $separator );
 	return stripslashes( $separator );
 }
@@ -224,7 +224,7 @@ function masteriyo_get_price_thousand_separator() {
  * @return string
  */
 function masteriyo_get_price_decimal_separator() {
-	$separator = get_option( 'masteriyo_price_decimal_sep' );
+	$separator = masteriyo_get_setting( 'payments.currency.decimal_separator' );
 	$separator = apply_filters( 'masteriyo_get_price_decimal_separator', $separator );
 	return $separator ? stripslashes( $separator ) : '.';
 }
@@ -236,7 +236,7 @@ function masteriyo_get_price_decimal_separator() {
  * @return int
  */
 function masteriyo_get_price_decimals() {
-	$num_decimals = get_option( 'masteriyo_price_num_decimals', 2 );
+	$separator = masteriyo_get_setting( 'payments.currency.number_of_decimals' );
 	$num_decimals = apply_filters( 'masteriyo_get_price_decimals', $num_decimals );
 	return absint( $num_decimals );
 }

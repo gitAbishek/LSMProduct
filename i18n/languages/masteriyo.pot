@@ -185,6 +185,10 @@ msgstr ""
 msgid "Builder"
 msgstr ""
 
+#: assets/js/back-end/errors/ErrorBoundary.tsx:27
+msgid "Something went wrong"
+msgstr ""
+
 #: assets/js/back-end/screens/404/FourOFour.tsx:25
 msgid "Oops - Page Not Found"
 msgstr ""
@@ -324,7 +328,7 @@ msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AddNewCourseCategory.tsx:67
 #: assets/js/back-end/screens/course-categories/components/Header.tsx:19
-#: assets/js/back-end/screens/courses/components/Categories.tsx:81
+#: assets/js/back-end/screens/courses/components/Categories.tsx:77
 msgid "Add New Category"
 msgstr ""
 
@@ -335,7 +339,7 @@ msgstr ""
 
 #: assets/js/back-end/screens/course-categories/AllCourseCategories.tsx:36
 #: assets/js/back-end/screens/courses/AllCourses.tsx:71
-#: assets/js/back-end/screens/courses/components/Categories.tsx:53
+#: assets/js/back-end/screens/courses/components/Categories.tsx:47
 msgid "Categories"
 msgstr ""
 
@@ -980,35 +984,35 @@ msgstr ""
 msgid "Short answer doesn't require any fields"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:115
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:119
 msgid "Please select question type"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:124
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:128
 msgid "Points"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:129
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:133
 msgid "Please provide points for the question"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:150
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:154
 msgid "Question Description"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:81
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:83
 msgid "Question Name"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:84
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:86
 msgid "Your Question Name"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:86
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:88
 msgid "You must provide name for the question"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:97
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:99
 msgid "Question Type"
 msgstr ""
 

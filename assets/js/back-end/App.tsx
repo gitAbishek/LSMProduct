@@ -18,15 +18,15 @@ const App = () => {
 	});
 
 	return (
-		<ErrorBoundary>
-			<ChakraProvider theme={theme}>
+		<ChakraProvider theme={theme}>
+			<ErrorBoundary>
 				<QueryClientProvider client={queryClient}>
 					<CreateCatModalProvicer>
 						<Router />
 					</CreateCatModalProvicer>
 				</QueryClientProvider>
-			</ChakraProvider>
-		</ErrorBoundary>
+			</ErrorBoundary>
+		</ChakraProvider>
 	);
 };
 

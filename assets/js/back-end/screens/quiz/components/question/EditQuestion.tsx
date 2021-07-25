@@ -15,8 +15,10 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import Select from 'react-select';
 import Editor from '../../../../components/common/Editor';
-// import Select from '../../../../components/common/Select';
+import ReactSelectComponent from '../../../../config/ReactSelectComponent';
+import { reactSelectStyles } from '../../../../config/styles';
 
 interface Props {
 	questionData: any;
@@ -95,12 +97,14 @@ const EditQuestion: React.FC<Props> = (props) => {
 				</FormControl>
 				<FormControl>
 					<FormLabel>{__('Question Type', 'masteriyo')}</FormLabel>
-					{/* <Controller
+					<Controller
 						defaultValue={getQuestionTypeDefaultValue()}
 						render={({ field: { onChange, value } }) => (
 							<Select
 								value={value}
 								options={questionType}
+								styles={reactSelectStyles}
+								components={ReactSelectComponent()}
 								onChange={(data: any) => {
 									onChange(data);
 									unregister('answers');
@@ -114,7 +118,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 						rules={{
 							required: __('Please select question type', 'masteriyo'),
 						}}
-					/> */}
+					/>
 					<FormErrorMessage>
 						{errors?.type && errors?.type?.message}
 					</FormErrorMessage>

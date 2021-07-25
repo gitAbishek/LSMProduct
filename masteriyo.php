@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Masteriyo LMS
  * Plugin URI:      https://example.com
- * Description:     WordPress Learing Mangement System(LMS) plugin.
+ * Description:     WordPress Learning Mangement System(LMS) plugin.
  * Author:          ThemeGrill
  * Author URI:      https://themegrill.com
  * Version:         0.1.0

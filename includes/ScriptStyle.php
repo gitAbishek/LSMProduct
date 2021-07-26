@@ -65,9 +65,9 @@ class ScriptStyle {
 	 * @return void
 	 */
 	private static function init_hooks() {
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_public_static scripts_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_public_scripts_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_admin_scripts_styles' ) );
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_public_static localized_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_public_localized_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_admin_localized_scripts' ) );
 
 		// Remove third party styles from interactive page.
@@ -357,7 +357,7 @@ class ScriptStyle {
 	 * @param  boolean  $has_rtl If has RTL version to load too.
 	 */
 	private static function enqueue_style( $handle, $path = '', $deps = array(), $version = '', $media = 'all', $has_rtl = false ) {
-		if ( ! in_array( $handle, self::styles, true ) && $path ) {
+		if ( ! in_array( $handle, self::$styles, true ) && $path ) {
 			self::register_style( $handle, $path, $deps, $version, $media, $has_rtl );
 		}
 		wp_enqueue_style( "masteriyo-{$handle}" );
@@ -567,7 +567,7 @@ class ScriptStyle {
 			)
 		);
 
-		foreach ( self::localized_scripts as $handle => $script ) {
+		foreach ( self::$localized_scripts as $handle => $script ) {
 			\wp_localize_script( "masteriyo-{$handle}", $script['name'], $script['data'] );
 		}
 	}

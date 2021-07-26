@@ -69,13 +69,8 @@ class Masteriyo extends Container {
 		CourseQuestionAnswers::init();
 		Faqs::init();
 		EmailHooks::init();
-
-		// Initialize the rest api controllers.
 		RestApi::init();
-
-		// Register admin menus
-		AdminMenu::instance()->init();
-
+		AdminMenu::init();
 		Ajax::init();
 
 		// Register scripts and styles.

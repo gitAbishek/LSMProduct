@@ -25,6 +25,15 @@ interface Props {
 	nextStep: () => void;
 }
 
+//@ts-ignore
+const courseListID = window._MASTERIYO_.pagesID.courseList;
+
+//@ts-ignore
+const myaccountID = window._MASTERIYO_.pagesID.myaccount;
+
+//@ts-ignore
+const checkoutID = window._MASTERIYO_.pagesID.checkout;
+
 const Pages: React.FC<Props> = (props) => {
 	const { dashboardURL, prevStep, nextStep } = props;
 	const { register } = useFormContext();
@@ -50,7 +59,6 @@ const Pages: React.FC<Props> = (props) => {
 				</>
 			);
 		} catch (error) {
-			console.error(error);
 			return;
 		}
 	};
@@ -76,7 +84,8 @@ const Pages: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Select
 										defaultValue={
-											settingsQuery?.data?.advance?.pages?.course_list_page_id
+											settingsQuery?.data?.advance?.pages
+												?.course_list_page_id || courseListID
 										}
 										w="md"
 										{...register('advance.pages.course_list_page_id')}>
@@ -92,7 +101,8 @@ const Pages: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Select
 										defaultValue={
-											settingsQuery?.data?.advance?.pages?.myaccount_page_id
+											settingsQuery?.data?.advance?.pages?.myaccount_page_id ||
+											myaccountID
 										}
 										w="md"
 										{...register('advance.pages.myaccount_page_id')}>
@@ -108,7 +118,8 @@ const Pages: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Select
 										defaultValue={
-											settingsQuery?.data?.advance?.pages?.checkout_page_id
+											settingsQuery?.data?.advance?.pages?.checkout_page_id ||
+											checkoutID
 										}
 										w="md"
 										{...register('advance.pages.checkout_page_id')}>

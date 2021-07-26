@@ -15,7 +15,7 @@ class Deactivation {
 	 * @since 0.1.0
 	 */
 	public static function init() {
-		register_deactivation_hook( Constants::get('MASTERIYO_PLUGIN_FILE'), array( __CLASS__, 'on_deactivate' ) );
+		register_deactivation_hook( Constants::get( 'MASTERIYO_PLUGIN_FILE' ), array( __CLASS__, 'on_deactivate' ) );
 	}
 
 	/**

@@ -236,7 +236,7 @@ function masteriyo_get_price_decimal_separator() {
  * @return int
  */
 function masteriyo_get_price_decimals() {
-	$separator = masteriyo_get_setting( 'payments.currency.number_of_decimals' );
+	$num_decimals = masteriyo_get_setting( 'payments.currency.number_of_decimals' );
 	$num_decimals = apply_filters( 'masteriyo_get_price_decimals', $num_decimals );
 	return absint( $num_decimals );
 }

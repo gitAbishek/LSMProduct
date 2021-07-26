@@ -2882,7 +2882,7 @@ function masteriyo_get_setting( $name ) {
 }
 
 /**
- * Set the global setting value.
+ * Get the global setting value.
  *
  * @since  0.1.0
  * @param string $name Name of setting to get.

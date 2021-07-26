@@ -1054,7 +1054,7 @@ msgstr ""
 msgid "Please provide points for the question"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:154
+#: assets/js/back-end/screens/quiz/components/question/EditQuestion.tsx:158
 msgid "Question Description"
 msgstr ""
 

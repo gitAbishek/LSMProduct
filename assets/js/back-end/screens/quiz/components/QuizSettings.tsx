@@ -208,6 +208,10 @@ const QuizSettings: React.FC<Props> = (props) => {
 									defaultValue={quizData?.attempts_allowed || 5}
 									rules={{
 										required: __('Attempts allowed is required', 'masteriyo'),
+										max: {
+											value: 20,
+											message: 'Maximum limit for attempt is 20.',
+										},
 									}}
 									render={({ field }) => (
 										<InputGroup>
@@ -281,6 +285,11 @@ const QuizSettings: React.FC<Props> = (props) => {
 															'Question display per page is required',
 															'masteriyo'
 														),
+														max: {
+															value: 30,
+															message:
+																'Question display per page max limit is 30.',
+														},
 													}}
 													render={({ field }) => (
 														<InputGroup>
@@ -289,7 +298,11 @@ const QuizSettings: React.FC<Props> = (props) => {
 																	quizData?.questions_display_per_page || 5
 																}
 																w="full">
-																<NumberInputField {...field} rounded="sm" />
+																<NumberInputField
+																	{...field}
+																	rounded="sm"
+																	min={0}
+																/>
 																<NumberInputStepper>
 																	<NumberIncrementStepper />
 																	<NumberDecrementStepper />

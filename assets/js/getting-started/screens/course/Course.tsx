@@ -78,7 +78,7 @@ const Course: React.FC<Props> = (props) => {
 								</Button>
 							</Link>
 							<Button onClick={nextStep} rounded="3px" colorScheme="blue">
-								{__('Continue', 'masteriyo')}
+								{__('Next', 'masteriyo')}
 							</Button>
 						</ButtonGroup>
 					</Flex>

@@ -22,33 +22,6 @@ use ThemeGrill\Masteriyo\Repository\SettingRepository;
 class Setting extends Model {
 
 	/**
-	 * The plugin ID. Used for option names.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	private $plugin_id = 'masteriyo';
-
-	/**
-	 * Group of the class extending the settings API. Used in option names.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	private $group = '';
-
-	/**
-	 * Validation errors.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var array of strings
-	 */
-	private $errors = array();
-
-	/**
 	 * This is the name of this object type.
 	 *
 	 * @since 0.1.0
@@ -300,52 +273,6 @@ class Setting extends Model {
 	}
 
 	/**
-	 * Default datas, might use for resetting data to default value.
-	 *
-	 * Default data will be returned if not read from store. Otherwise stored datas will return.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param boolean $flat Flat the data.
-	 *
-	 * @return array $data Default datas.
-	 */
-	public function get_default_data( $flat = false ) {
-		$data = array();
-
-		if ( $flat ) {
-			$groups = array_keys( $this->data );
-			foreach ( $groups as $group ) {
-				foreach ( $this->data[ $group ] as $setting => $value ) {
-					$data[ "${group}.${setting}" ] = $value;
-				}
-			}
-		} else {
-			$data = $this->data;
-		}
-
-		return apply_filters( 'masteriyo_setting_default_data', $data, $flat );
-	}
-
-	/**
-	 * Get data keys.
-	 *
-	 * @since 0.1.0
-	 */
-	public function get_data_keys() {
-		$data_keys = array();
-		$groups    = array_keys( $this->data );
-
-		foreach ( $groups as $group ) {
-			foreach ( $this->data[ $group ] as $setting_name => $default_value ) {
-				$data_keys[] = $group . '.' . $setting_name;
-			}
-		}
-
-		return $data_keys;
-	}
-
-	/**
 	 * Initialize sanitize callbacks.
 	 *
 	 * @since 0.1.0
@@ -428,13 +355,11 @@ class Setting extends Model {
 	 * @since 0.1.0
 	 *
 	 * @param string $prop    Name of prop to set.
-	 * @param string $group Name of setting group.
-	 * @param string $sub_group Name of setting sub group.
 	 * @param mixed  $value   Value of the prop.
 	 *
 	 * @return mixed
 	 */
-	protected function sanitize( $prop, $group, $sub_group, $value ) {
+	protected function sanitize( $prop, $value ) {
 		if ( isset( $this->sanitize_callbacks[ $prop ] ) ) {
 			$value = call_user_func_array( $this->sanitize_callbacks[ $prop ], array( $value ) );
 		}
@@ -486,9 +411,10 @@ class Setting extends Model {
 	 * @return mixed
 	 */
 	public function get( $prop, $context = 'view' ) {
-		$group     = '';
-		$sub_group = '';
-		$setting   = '';
+		$prop_arr  = explode( '.', $prop );
+		$group     = 'masteriyo';
+		$sub_group = 'masteriyo';
+		$setting   = 'masteriyo';
 
 		if ( count( $prop_arr ) >= 3 ) {
 			$group     = isset( $prop_arr[0] ) ? $prop_arr[0] : '';
@@ -501,10 +427,7 @@ class Setting extends Model {
 			$setting = isset( $prop_arr[0] ) ? $prop_arr[0] : '';
 		}
 
-		$value = new \WP_Error(
-			'masteriyo_global_setting_value_not_found',
-			__( 'Masteriyo global setting value not found.', 'masteriyo' )
-		);
+		$value = null;
 
 		if ( isset( $this->data[ $group ][ $sub_group ][ $setting ] ) ) {
 			$value = $this->data[ $group ] [ $sub_group ][ $setting ];

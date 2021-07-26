@@ -97,13 +97,8 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$setting, $args = array() ) {
-
-		// Resetting to default data.
-		foreach ( $setting->get_default_data( true ) as $setting_name => $setting_value ) {
-			update_option( 'masteriyo.' . $setting_name, $setting_value, false );
-		}
-
-		$setting->apply_changes();
+		$setting_data = $setting->get_data();
+		update_option( $setting_data );
 
 		do_action( 'masteriyo_reset_setting', $setting );
 	}

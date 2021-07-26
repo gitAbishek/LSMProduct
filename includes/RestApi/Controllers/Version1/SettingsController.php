@@ -201,8 +201,134 @@ class SettingsController extends CrudController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'general'  => array(
+				'general'        => array(
 					'description' => __( 'General Settings.', 'masteriyo' ),
+					'type'        => 'object',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'    => 'object',
+						'styling' => array(
+							'description' => __( 'Styling.', 'masteriyo' ),
+							'type'        => 'object',
+							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type'          => 'object',
+								'primary_color' => array(
+									'description' => __( 'Primary color.', 'masteriyo' ),
+									'type'        => 'string',
+									'format'      => 'hex-color',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'theme'         => array(
+									'description' => __( 'Theme.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
+						),
+					),
+				),
+				'course_archive' => array(
+					'description' => __( 'Courses Settings.', 'masteriyo' ),
+					'type'        => 'object',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'    => 'object',
+						'display' => array(
+							'description' => __( 'Styling.', 'masteriyo' ),
+							'type'        => 'object',
+							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type'           => 'object',
+								'enable_search'  => array(
+									'description' => __( 'Enable course search', 'masteriyo' ),
+									'type'        => 'boolean',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'per_page'       => array(
+									'description' => __( 'Courses per page.', 'masteriyo' ),
+									'type'        => 'integer',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'per_row'        => array(
+									'description' => __( 'Courses per row.', 'masteriyo' ),
+									'type'        => 'integer',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'thumbnail_size' => array(
+									'description' => __( 'Course thumbnail size', 'masteriyo' ),
+									'type'        => 'string',
+									'enum'        => get_intermediate_image_sizes(),
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
+						),
+					),
+				),
+				'single_course'  => array(
+					'description' => __( 'Single course settings.', 'masteriyo' ),
+					'type'        => 'object',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'    => 'object',
+						'display' => array(
+							'description' => __( 'Single course display settings..', 'masteriyo' ),
+							'type'        => 'object',
+							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'enable_review' => array(
+									'description' => __( 'Enable course review', 'masteriyo' ),
+									'type'        => 'boolean',
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
+						),
+					),
+				),
+				'quiz'           => array(
+					'description' => __( 'Quiz Setting', 'masteriyo' ),
+					'type'        => 'object',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'    => 'object',
+						'display' => array(
+							'description' => __( 'Quiz display settings.', 'masteriyo' ),
+							'type'        => 'object',
+							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type' => 'object',
+								'questions_display_per_page' => array(
+									'description' => __( 'Quiz questions display per page', 'masteriyo' ),
+									'type'        => 'integer',
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
+						),
+					),
+				),
+				'learning_page'  => array(
+					'description' => __( 'Learning page settings', 'masteriyo' ),
+					'type'        => 'object',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'    => 'object',
+						'display' => array(
+							'description' => __( 'Learning page display settings.', 'masteriyo' ),
+							'type'        => 'object',
+							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type'                     => 'object',
+								'enable_questions_answers' => array(
+									'description' => __( 'Enable questions answers in learning page.', 'masteriyo' ),
+									'type'        => 'boolean',
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
+						),
+					),
+				),
+				'payments'       => array(
+					'description' => __( 'Payments Settings.', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
@@ -280,223 +406,40 @@ class SettingsController extends CrudController {
 								),
 							),
 						),
-						'styling'  => array(
-							'description' => __( 'Styling.', 'masteriyo' ),
-							'type'        => 'object',
-							'context'     => array( 'view', 'edit' ),
-							'items'       => array(
-								'type'          => 'object',
-								'primary_color' => array(
-									'description' => __( 'Primary color.', 'masteriyo' ),
-									'type'        => 'string',
-									'format'      => 'hex-color',
-									'context'     => array( 'view', 'edit' ),
-								),
-								'theme'         => array(
-									'description' => __( 'Theme.', 'masteriyo' ),
-									'type'        => 'string',
-									'context'     => array( 'view', 'edit' ),
-								),
+						'paypal'   => array(
+							'enable'                 => array(
+								'description' => __( 'Enable standard paypal.', 'masteriyo' ),
+								'type'        => 'boolean',
+								'context'     => array( 'view', 'edit' ),
 							),
-						),
-					),
-				),
-				'courses'  => array(
-					'description' => __( 'Courses Settings.', 'masteriyo' ),
-					'type'        => 'object',
-					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type'                     => 'object',
-						'enable_search'            => array(
-							'description' => __( 'Enable course search', 'masteriyo' ),
-							'type'        => 'boolean',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'placeholder_image'        => array(
-							'description' => __( 'Placeholder image for courses.', 'masteriyo' ),
-							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'per_page'                 => array(
-							'description' => __( 'Courses per page.', 'masteriyo' ),
-							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'per_row'                  => array(
-							'description' => __( 'Courses per row.', 'masteriyo' ),
-							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'category_base'            => array(
-							'description' => __( 'Course category base.', 'masteriyo' ),
-							'type'        => 'string',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'tag_base'                 => array(
-							'description' => __( 'Course tag base', 'masteriyo' ),
-							'type'        => 'string',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'difficulty_base'          => array(
-							'description' => __( 'Course difficulty base', 'masteriyo' ),
-							'type'        => 'string',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'single_course_permalink'  => array(
-							'description' => __( 'Single course permalink.', 'masteriyo' ),
-							'type'        => 'string',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'single_lesson_permalink'  => array(
-							'description' => __( 'Course lessons permalink', 'masteriyo' ),
-							'type'        => 'string',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'single_quiz_permalink'    => array(
-							'description' => __( 'Course quizzes permalink.', 'masteriyo' ),
-							'type'        => 'string',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'single_section_permalink' => array(
-							'description' => __( 'Course sections permalink.', 'masteriyo' ),
-							'type'        => 'string',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'show_thumbnail'           => array(
-							'description' => __( 'Show course thumbnail.', 'masteriyo' ),
-							'type'        => 'boolean',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'thumbnail_size'           => array(
-							'description' => __( 'Course thumbnail size', 'masteriyo' ),
-							'type'        => 'string',
-							'enum'        => get_intermediate_image_sizes(),
-							'context'     => array( 'view', 'edit' ),
-						),
-						'enable_review'            => array(
-							'description' => __( 'Enable course review', 'masteriyo' ),
-							'type'        => 'boolean',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'enable_questions_answers' => array(
-							'description' => __( 'Enable course questions answers', 'masteriyo' ),
-							'type'        => 'boolean',
-							'context'     => array( 'view', 'edit' ),
-						),
-					),
-				),
-				'pages'    => array(
-					'description' => __( 'Pages Setting', 'masteriyo' ),
-					'type'        => 'object',
-					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type'                     => 'object',
-						'myaccount_page_id'        => array(
-							'description' => __( 'My Account page ID.', 'masteriyo' ),
-							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'course_list_page_id'      => array(
-							'description' => __( 'Archive course page ID.', 'masteriyo' ),
-							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'terms_conditions_page_id' => array(
-							'description' => __( 'Terms and conditions page ID.', 'masteriyo' ),
-							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'checkout_page_id'         => array(
-							'description' => __( 'Checkout page ID.', 'masteriyo' ),
-							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-						),
-						'checkout_endpoints'       => array(
-							'pay'                        => array(
-								'description' => __( 'Pay endpoint.', 'masteriyo' ),
+							'title'                  => array(
+								'description' => __( 'Paypal title which the user sees during checkout.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'order_received'             => array(
-								'description' => __( 'Order received endpoint.', 'masteriyo' ),
+							'description'            => array(
+								'description' => __( 'Paypal description which the user sees during checkout.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'add_payment_method'         => array(
-								'description' => __( 'Add payment method endpoint.', 'masteriyo' ),
-								'type'        => 'string',
+							'ipn_email_notifiations' => array(
+								'description' => __( 'Enable IPN email notifications.', 'masteriyo' ),
+								'type'        => 'boolean',
+								'default'     => true,
 								'context'     => array( 'view', 'edit' ),
 							),
-							'delete_payment_method'      => array(
-								'description' => __( 'Delete payment method endpoint.', 'masteriyo' ),
-								'type'        => 'string',
+							'sandbox'                => array(
+								'description' => __( 'Enable sandbox/sandbox mode on paypal.', 'masteriyo' ),
+								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'set_default_payment_method' => array(
-								'description' => __( 'Set default payment menthod endpoint.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-						),
-						'account_endpoints'        => array(
-							'orders'          => array(
-								'description' => __( 'Orders endpoint.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'view_order'      => array(
-								'description' => __( 'View order endpoint.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'my_courses'      => array(
-								'description' => __( 'My courses endpoint.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'edit_account'    => array(
-								'description' => __( 'Edit account endpoint.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'payment_methods' => array(
-								'description' => __( 'Payment methods endpoint.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'lost_password'   => array(
-								'description' => __( 'Lost password endpoint.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'logout'          => array(
-								'description' => __( 'Logout endpoint.', 'masteriyo' ),
-								'type'        => 'string',
+							'email'                  => array(
+								'description' => __( 'Paypal email.', 'masteriyo' ),
+								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
 							),
 						),
-					),
-				),
-				'quizzes'  => array(
-					'description' => __( 'Quizzes Setting', 'masteriyo' ),
-					'type'        => 'object',
-					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type'                       => 'object',
-						'questions_display_per_page' => array(
-							'description' => __( 'Quiz questions display per page', 'masteriyo' ),
-							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-						),
-					),
-				),
-				'payments' => array(
-					'description' => __( 'Payments Settings.', 'masteriyo' ),
-					'type'        => 'object',
-					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type'   => 'object',
-						'paypal' => array(
+						'paypal'   => array(
 							'enable'                 => array(
 								'description' => __( 'Enable standard paypal.', 'masteriyo' ),
 								'type'        => 'boolean',
@@ -595,7 +538,7 @@ class SettingsController extends CrudController {
 						),
 					),
 				),
-				'emails'   => array(
+				'emails'         => array(
 					'description' => __( 'Email Setting', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
@@ -821,33 +764,181 @@ class SettingsController extends CrudController {
 						),
 					),
 				),
-				'advance'  => array(
+				'advance'        => array(
 					'description' => __( 'Advance setting', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'template_debug' => array(
-							'description' => __( 'Enable template debug.', 'masteriyo' ),
-							'type'        => 'boolean',
+						'pages'      => array(
+							'description' => __( 'Pages Setting', 'masteriyo' ),
+							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type'                     => 'object',
+								'myaccount_page_id'        => array(
+									'description' => __( 'My Account page ID.', 'masteriyo' ),
+									'type'        => 'integer',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'course_list_page_id'      => array(
+									'description' => __( 'Archive course page ID.', 'masteriyo' ),
+									'type'        => 'integer',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'terms_conditions_page_id' => array(
+									'description' => __( 'Terms and conditions page ID.', 'masteriyo' ),
+									'type'        => 'integer',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'checkout_page_id'         => array(
+									'description' => __( 'Checkout page ID.', 'masteriyo' ),
+									'type'        => 'integer',
+									'context'     => array( 'view', 'edit' ),
+								),
+
+							),
 						),
-						'debug'          => array(
-							'description' => __( 'Enable debug.', 'masteriyo' ),
-							'type'        => 'boolean',
+						'checkout'   => array(
+							'description' => __( 'Checkout endpoints.', 'masteriyo' ),
+							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'pay'                   => array(
+									'description' => __( 'Pay endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'order_received'        => array(
+									'description' => __( 'Order received endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'add_payment_method'    => array(
+									'description' => __( 'Add payment method endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'delete_payment_method' => array(
+									'description' => __( 'Delete payment method endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'set_default_payment_method' => array(
+									'description' => __( 'Set default payment menthod endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
 						),
-						'style'          => array(
-							'description' => __( 'Choose style.', 'masteriyo' ),
-							'type'        => 'string',
-							'enum'        => array( 'none', 'simple', 'advance' ),
+						'account'    => array(
+							'description' => __( 'Account endpoints', 'masteriyo' ),
+							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'orders'          => array(
+									'description' => __( 'Orders endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'view_order'      => array(
+									'description' => __( 'View order endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'my_courses'      => array(
+									'description' => __( 'My courses endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'edit_account'    => array(
+									'description' => __( 'Edit account endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'payment_methods' => array(
+									'description' => __( 'Payment methods endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'lost_password'   => array(
+									'description' => __( 'Lost password endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'logout'          => array(
+									'description' => __( 'Logout endpoint.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
+						),
+						'permalinks' => array(
+							'description' => __( 'Permalinks', 'masteriyo' ),
+							'type'        => 'object',
+							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type'                     => 'object',
+								'category_base'            => array(
+									'description' => __( 'Course category base.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'tag_base'                 => array(
+									'description' => __( 'Course tag base', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'difficulty_base'          => array(
+									'description' => __( 'Course difficulty base', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'single_course_permalink'  => array(
+									'description' => __( 'Single course permalink.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'single_lesson_permalink'  => array(
+									'description' => __( 'Course lessons permalink', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'single_quiz_permalink'    => array(
+									'description' => __( 'Course quizzes permalink.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'single_section_permalink' => array(
+									'description' => __( 'Course sections permalink.', 'masteriyo' ),
+									'type'        => 'string',
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
+						),
+						'debug'      => array(
+							'description' => __( 'Debug', 'masteriyo' ),
+							'type'        => 'object',
+							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type'           => 'object',
+								'template_debug' => array(
+									'description' => __( 'Enable template debug.', 'masteriyo' ),
+									'type'        => 'boolean',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'debug'          => array(
+									'description' => __( 'Enable debug.', 'masteriyo' ),
+									'type'        => 'boolean',
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
 						),
 					),
 				),
 			),
 		);
 
-		return $schema;
+				return $schema;
 	}
 
 	/**

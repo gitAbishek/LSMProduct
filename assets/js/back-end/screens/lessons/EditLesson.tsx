@@ -113,6 +113,7 @@ const EditLesson = () => {
 				<Container maxW="container.xl">
 					<PageNav
 						isCurrentTitle={lessonQuery?.data?.name}
+						courseName={lessonQuery?.data?.course_name}
 						courseId={courseId}
 					/>
 					<FormProvider {...methods}>

@@ -5,6 +5,7 @@ export interface QuizSchema {
 	permalink: string;
 	parent_id: number;
 	course_id: number;
+	course_name: string;
 	menu_order: number;
 	description: string;
 	short_description: string;
@@ -298,6 +299,7 @@ export interface LessonSchema {
 	video_source: string;
 	video_source_url: string;
 	video_playback_time: number;
+	course_name: string;
 }
 
 export interface SectionSchema {
@@ -311,6 +313,7 @@ export interface SectionSchema {
 	parent_id: number;
 	course_id: number;
 	menu_order: number;
+	course_name: string;
 }
 
 export interface OrderSchema {

@@ -1,41 +1,42 @@
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	Icon,
+} from '@chakra-ui/react';
 import React from 'react';
+import { BiChevronRight } from 'react-icons/bi';
+import { Link as RouterLink } from 'react-router-dom';
+import routes from '../../constants/routes';
 
 interface Props {
 	isCurrentTitle: string;
 	courseId: number;
+	courseName: string;
 }
 
-const PageNav: React.FC<Props> = () => {
-	// const { isCurrentTitle, courseId } = props;
-	// const courseAPI = new API(urls.courses);
+const PageNav: React.FC<Props> = (props) => {
+	const { isCurrentTitle, courseId, courseName } = props;
 
-	// const courseQuery = useQuery<CourseSchema>(`pageNav${courseId}`, () =>
-	// 	courseAPI.get(courseId)
-	// );
-
-	// if (courseQuery.isSuccess) {
-	// 	return (
-	// 		<Breadcrumb
-	// 			fontWeight="medium"
-	// 			fontSize="sm"
-	// 			mb="8"
-	// 			separator={<Icon as={BiChevronRight} color="gray.500" />}>
-	// 			<BreadcrumbItem>
-	// 				<BreadcrumbLink
-	// 					color="gray.500"
-	// 					as={RouterLink}
-	// 					to={routes.courses.edit.replace(':courseId', courseId.toString())}>
-	// 					{courseQuery?.data?.name}
-	// 				</BreadcrumbLink>
-	// 			</BreadcrumbItem>
-	// 			<BreadcrumbItem isCurrentPage>
-	// 				<BreadcrumbLink color="blue.600">{isCurrentTitle}</BreadcrumbLink>
-	// 			</BreadcrumbItem>
-	// 		</Breadcrumb>
-	// 	);
-	// }
-
-	return <></>;
+	return (
+		<Breadcrumb
+			fontWeight="medium"
+			fontSize="sm"
+			mb="8"
+			separator={<Icon as={BiChevronRight} color="gray.500" />}>
+			<BreadcrumbItem>
+				<BreadcrumbLink
+					color="gray.500"
+					as={RouterLink}
+					to={routes.courses.edit.replace(':courseId', courseId.toString())}>
+					{courseName}
+				</BreadcrumbLink>
+			</BreadcrumbItem>
+			<BreadcrumbItem isCurrentPage>
+				<BreadcrumbLink color="blue.600">{isCurrentTitle}</BreadcrumbLink>
+			</BreadcrumbItem>
+		</Breadcrumb>
+	);
 };
 
 export default PageNav;

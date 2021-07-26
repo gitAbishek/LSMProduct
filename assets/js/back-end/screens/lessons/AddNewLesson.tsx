@@ -76,7 +76,11 @@ const AddNewLesson: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
-					<PageNav isCurrentTitle={__('Add New Lesson')} courseId={courseId} />
+					<PageNav
+						isCurrentTitle={__('Add New Lesson')}
+						courseName={sectionQuery?.data?.course_name}
+						courseId={courseId}
+					/>
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">

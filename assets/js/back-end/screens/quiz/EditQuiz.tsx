@@ -94,7 +94,11 @@ const EditQuiz: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
-					<PageNav isCurrentTitle={quizQuery?.data?.name} courseId={courseId} />
+					<PageNav
+						isCurrentTitle={quizQuery?.data?.name}
+						courseName={quizQuery?.data?.course_name}
+						courseId={courseId}
+					/>
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">

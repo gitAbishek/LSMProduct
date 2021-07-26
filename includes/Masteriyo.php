@@ -9,7 +9,6 @@
 
 namespace ThemeGrill\Masteriyo;
 
-use League\Container\Container;
 use ThemeGrill\Masteriyo\AdminMenu;
 use ThemeGrill\Masteriyo\ScriptStyle;
 use ThemeGrill\Masteriyo\Setup\Onboard;
@@ -30,7 +29,7 @@ defined( 'ABSPATH' ) || exit;
  * @class ThemeGrill\Masteriyo\Masteriyo
  */
 
-class Masteriyo extends Container {
+class Masteriyo {
 
 	/**
 	 * Constructor.
@@ -38,8 +37,6 @@ class Masteriyo extends Container {
 	 * @since 0.1.0
 	 */
 	public function __construct() {
-		parent::__construct();
-
 		$this->init();
 	}
 
@@ -60,9 +57,6 @@ class Masteriyo extends Container {
 	 * @since 0.1.0
 	 */
 	protected function init() {
-		// Register service providers.
-		$this->register_service_providers();
-
 		Activation::init();
 		Deactivation::init();
 		FileRestrictions::init();
@@ -76,7 +70,7 @@ class Masteriyo extends Container {
 		ScriptStyle::init();
 		FormHandlers::init();
 
-		// $this->get( 'query.frontend' );
+		FrontendQuery::init();
 
 		$this->define_tables();
 
@@ -148,67 +142,6 @@ class Masteriyo extends Container {
 				$onboard_obj->init();
 			}
 		}
-	}
-
-	/**
-	 * Register service providers.
-	 *
-	 * @since 0.1.0
-	 */
-	private function register_service_providers() {
-		foreach ( $this->get_service_providers() as $p ) {
-			$this->addServiceProvider( $p );
-		}
-	}
-
-	/**
-	 * Get service providers.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return array
-	 */
-	private function get_service_providers() {
-		$namespace = 'ThemeGrill\\Masteriyo\\Providers';
-
-		return array_unique(
-			apply_filters(
-				'masteriyo_service_providers',
-				array(
-					"{$namespace}\\CacheServiceProvider",
-					"{$namespace}\\NoticeServiceProvider",
-					"{$namespace}\\FrontendQueryServiceProvider",
-					"{$namespace}\\CourseServiceProvider",
-					"{$namespace}\\PermissionServiceProvider",
-					"{$namespace}\\SessionServiceProvider",
-					"{$namespace}\\LessonServiceProvider",
-					"{$namespace}\\QuizServiceProvider",
-					"{$namespace}\\SectionServiceProvider",
-					"{$namespace}\\UserServiceProvider",
-					"{$namespace}\\OrderServiceProvider",
-					"{$namespace}\\CourseTagServiceProvider",
-					"{$namespace}\\CourseCategoryServiceProvider",
-					"{$namespace}\\CourseDifficultyServiceProvider",
-					"{$namespace}\\CartServiceProvider",
-					"{$namespace}\\TemplateServiceProvider",
-					"{$namespace}\\QuestionServiceProvider",
-					"{$namespace}\\ShortcodesServiceProvider",
-					"{$namespace}\\SettingsServiceProvider",
-					"{$namespace}\\QueriesServiceProvider",
-					"{$namespace}\\FaqServiceProvider",
-					"{$namespace}\\EmailsServiceProvider",
-					"{$namespace}\\CourseReviewServiceProvider",
-					"{$namespace}\\CourseQuestionAnswerServiceProvider",
-					"{$namespace}\\FrontendQueryServiceProvider",
-					"{$namespace}\\CountriesServiceProvider",
-					"{$namespace}\\CheckoutServiceProvider",
-					"{$namespace}\\PaymentGatewaysServiceProvider",
-					"{$namespace}\\CourseProgressServiceProvider",
-					"{$namespace}\\UserCourseServiceProvider",
-					"{$namespace}\\CourseProgressItemServiceProvider",
-				)
-			)
-		);
 	}
 
 	/**

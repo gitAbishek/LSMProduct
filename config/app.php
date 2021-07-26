@@ -1,0 +1,43 @@
+<?php
+/**
+ * Create the application.
+ *
+ * @since 0.1.0
+ */
+return array_unique(
+	apply_filters(
+		'masteriyo_service_providers',
+		array(
+			'ThemeGrill\Masteriyo\Providers\CacheServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\NoticeServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\CourseServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\PermissionServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\SessionServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\LessonServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\QuizServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\SectionServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\UserServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\OrderServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\CourseTagServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\CourseCategoryServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\CourseDifficultyServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\CartServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\TemplateServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\QuestionServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\ShortcodesServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\SettingsServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\QueriesServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\FaqServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\EmailsServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\CourseReviewServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\CourseQuestionAnswerServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\CountriesServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\CheckoutServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\PaymentGatewaysServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\CourseProgressServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\UserCourseServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\CourseProgressItemServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\AppServiceProvider',
+		)
+	)
+);

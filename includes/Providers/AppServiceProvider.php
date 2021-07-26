@@ -1,16 +1,16 @@
 <?php
 /**
- * Cache model service provider.
+ * App service provider.
  */
 
 namespace ThemeGrill\Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
+use ThemeGrill\Masteriyo\Masteriyo;
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\FrontendQuery;
 
-class FrontendQueryServiceProvider extends AbstractServiceProvider {
+class AppServiceProvider extends AbstractServiceProvider {
 	/**
 	 * The provided array is a way to let the container
 	 * know that a service is provided by this service
@@ -23,8 +23,8 @@ class FrontendQueryServiceProvider extends AbstractServiceProvider {
 	 * @var array
 	 */
 	protected $provides = array(
-		'query.frontend',
-		'\ThemeGrill\Masteriyo\FrontendQuery',
+		'app',
+		'\ThemeGrill\Masteriyo\Masteriyo',
 	);
 
 	/**
@@ -36,8 +36,6 @@ class FrontendQueryServiceProvider extends AbstractServiceProvider {
 	 * @since 0.1.0
 	 */
 	public function register() {
-		$this->getContainer()
-			->add( 'query.frontend', FrontendQuery::class, true )
-			->addArgument( 'notice' );
+		$this->getContainer()->add( 'app', Masteriyo::class, true );
 	}
 }

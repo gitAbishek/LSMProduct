@@ -71,7 +71,7 @@ class Masteriyo extends Container {
 		EmailHooks::init();
 
 		// Initialize the rest api controllers.
-		RestApi::instance()->init();
+		RestApi::init();
 
 		// Register admin menus
 		AdminMenu::instance()->init();

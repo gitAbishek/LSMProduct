@@ -134,6 +134,10 @@ const EditQuestion: React.FC<Props> = (props) => {
 								'Please provide points for the question',
 								'masteriyo'
 							),
+							validate: {
+								positive: (value) =>
+									parseInt(value) >= 0 || 'Points should be positive number.',
+							},
 						}}
 						render={({ field }) => (
 							<NumberInput {...field} w="full" min={0}>

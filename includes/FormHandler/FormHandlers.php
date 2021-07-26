@@ -1,6 +1,6 @@
 <?php
 /**
- * Register form handlers.
+ * Initialize form handlers.
  *
  * @package ThemeGrill\Masetriyo\Classes\
  */
@@ -11,25 +11,29 @@ defined( 'ABSPATH' ) || exit;
 
 
 /**
- * Class Forms
+ * Form Handlers class.
  */
 class FormHandlers {
 	/**
-	 * Undocumented variable
+	 * List of form handlers.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @var FormHandler[]
 	 */
-	private $form_handlers;
+	public static $form_handlers;
 
 	/**
-	 * Constructor.
+	 * Initialize the form handlers.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
 	 */
-	public function __construct() {
+	public static function init() {
 		$namespace = 'ThemeGrill\\Masteriyo\FormHandler';
 
-		$this->form_handlers = apply_filters(
+		self::$form_handlers = apply_filters(
 			'masteriyo_form_handlers',
 			array(
 				"{$namespace}\\RegistrationFormHandler",
@@ -40,17 +44,8 @@ class FormHandlers {
 				"{$namespace}\\CheckoutFormHandler",
 			)
 		);
-	}
 
-	/**
-	 * Register form handlers.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return void
-	 */
-	public function register() {
-		foreach ( $this->form_handlers as $form_handler ) {
+		foreach ( self::$form_handlers as $form_handler ) {
 			$instance = new $form_handler();
 		}
 	}

@@ -16,6 +16,7 @@ use ThemeGrill\Masteriyo\RestApi\RestApi;
 use ThemeGrill\Masteriyo\Emails\EmailHooks;
 use ThemeGrill\Masteriyo\Query\UserCourseQuery;
 use ThemeGrill\Masteriyo\Shortcodes\Shortcodes;
+use ThemeGrill\Masteriyo\FormHandler\FormHandlers;
 use ThemeGrill\Masteriyo\PostType\RegisterPostType;
 use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
 use ThemeGrill\Masteriyo\FileRestrictions\FileRestrictions;
@@ -29,12 +30,6 @@ defined( 'ABSPATH' ) || exit;
  */
 
 class Masteriyo extends Container {
-	/**
-	 * Query instance.
-	 *
-	 * @var Query
-	 */
-	public $query = null;
 
 	/**
 	 * Constructor.
@@ -45,8 +40,6 @@ class Masteriyo extends Container {
 		parent::__construct();
 
 		$this->init();
-
-		$this->query = new Query();
 	}
 
 	/**
@@ -88,9 +81,9 @@ class Masteriyo extends Container {
 		// Register scripts and styles.
 		$this->get( 'script-style' );
 
-		$this->get( 'query.frontend' );
+		FormHandlers::init();
 
-		$this->get( 'formhandlers' )->register();
+		// $this->get( 'query.frontend' );
 
 		$this->define_tables();
 
@@ -215,7 +208,6 @@ class Masteriyo extends Container {
 					"{$namespace}\\CourseReviewServiceProvider",
 					"{$namespace}\\CourseQuestionAnswerServiceProvider",
 					"{$namespace}\\FrontendQueryServiceProvider",
-					"{$namespace}\\FormHandlersServiceProvider",
 					"{$namespace}\\CountriesServiceProvider",
 					"{$namespace}\\CheckoutServiceProvider",
 					"{$namespace}\\PaymentGatewaysServiceProvider",

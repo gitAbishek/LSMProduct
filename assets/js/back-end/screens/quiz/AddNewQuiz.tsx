@@ -27,7 +27,7 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
-import { QuizSchema, SectionSchema } from '../../schemas';
+import { QuizFormSchema, QuizSchema, SectionSchema } from '../../schemas';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
 import Description from './components/Description';
@@ -69,8 +69,12 @@ const AddNewQuiz: React.FC = () => {
 		},
 	});
 
-	const onSubmit = (data: QuizSchema) => {
-		const cleanData = deepClean(data);
+	const onSubmit = (data: QuizFormSchema) => {
+		const duration =
+			+(data?.duration_hour ?? 0) * 60 + +(data?.duration_minute ?? 0);
+		delete data.duration_hour;
+		delete data.duration_minute;
+		const cleanData = deepClean({ ...data, duration });
 		const newData = {
 			course_id: courseId,
 			parent_id: sectionId,

@@ -2,7 +2,6 @@ import {
 	Collapse,
 	FormControl,
 	FormErrorMessage,
-	FormHelperText,
 	FormLabel,
 	InputGroup,
 	InputRightAddon,
@@ -23,7 +22,8 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { QuizSchema } from '../../../schemas';
+import { QuizFormSchema, QuizSchema } from '../../../schemas';
+import { convertMinutesToHours } from '../../../utils/math';
 
 interface Props {
 	quizData?: QuizSchema;
@@ -34,7 +34,9 @@ const QuizSettings: React.FC<Props> = (props) => {
 	const {
 		formState: { errors },
 		setValue,
-	} = useFormContext<QuizSchema>();
+	} = useFormContext<QuizFormSchema>();
+
+	const [hours, minutes] = convertMinutesToHours(quizData?.duration || 0);
 
 	const [displayValue, setDisplayValue] = useState(
 		quizData?.questions_display_per_page != 0 ? '1' : '0'
@@ -121,40 +123,76 @@ const QuizSettings: React.FC<Props> = (props) => {
 								</FormErrorMessage>
 							</FormControl>
 
-							<FormControl isInvalid={!!errors?.duration}>
-								<FormLabel>{__('Duration', 'masteriyo')}</FormLabel>
+							<Stack direction="row">
+								<FormControl isInvalid={!!errors?.duration_hour}>
+									<FormLabel>{__('Hours', 'masteriyo')}</FormLabel>
+									<Controller
+										name="duration_hour"
+										defaultValue={hours || 1}
+										rules={{
+											required: __('Hours is required', 'masteriyo'),
+											min: 1,
+											max: 10,
+										}}
+										render={({ field }) => (
+											<InputGroup>
+												<NumberInput
+													defaultValue={hours || 1}
+													w="sm"
+													min={1}
+													max={10}>
+													<NumberInputField {...field} rounded="sm" />
+													<NumberInputStepper>
+														<NumberIncrementStepper />
+														<NumberDecrementStepper />
+													</NumberInputStepper>
+												</NumberInput>
+												<InputRightAddon>
+													{__('Hours', 'masteriyo')}
+												</InputRightAddon>
+											</InputGroup>
+										)}
+									/>
+									<FormErrorMessage>
+										{errors?.duration_hour && errors?.duration_hour?.message}
+									</FormErrorMessage>
+								</FormControl>
 
-								<Controller
-									name="duration"
-									defaultValue={quizData?.duration || 60}
-									rules={{
-										required: __('Duration is required', 'masteriyo'),
-									}}
-									render={({ field }) => (
-										<InputGroup>
-											<NumberInput
-												defaultValue={quizData?.duration || 60}
-												w="full"
-												min={0}>
-												<NumberInputField {...field} rounded="sm" />
-												<NumberInputStepper>
-													<NumberIncrementStepper />
-													<NumberDecrementStepper />
-												</NumberInputStepper>
-											</NumberInput>
-											<InputRightAddon>
-												{__('Minutes', 'masteriyo')}
-											</InputRightAddon>
-										</InputGroup>
-									)}
-								/>
-								<FormHelperText>
-									{__('Duration should be in minutes', 'masteriyo')}
-								</FormHelperText>
-								<FormErrorMessage>
-									{errors?.duration && errors?.duration?.message}
-								</FormErrorMessage>
-							</FormControl>
+								<FormControl isInvalid={!!errors?.duration_minute}>
+									<FormLabel>{__('Minutes', 'masteriyo')}</FormLabel>
+									<Controller
+										name="duration_minute"
+										defaultValue={minutes || 0}
+										rules={{
+											required: __('Minutes is required', 'masteriyo'),
+											min: 0,
+											max: 60,
+										}}
+										render={({ field }) => (
+											<InputGroup>
+												<NumberInput
+													defaultValue={minutes || 0}
+													w="sm"
+													min={0}
+													max={60}>
+													<NumberInputField {...field} rounded="sm" />
+													<NumberInputStepper>
+														<NumberIncrementStepper />
+														<NumberDecrementStepper />
+													</NumberInputStepper>
+												</NumberInput>
+												<InputRightAddon>
+													{__('Minutes', 'masteriyo')}
+												</InputRightAddon>
+											</InputGroup>
+										)}
+									/>
+									<FormErrorMessage>
+										{errors?.duration_minute &&
+											errors?.duration_minute?.message}
+									</FormErrorMessage>
+								</FormControl>
+							</Stack>
 
 							<FormControl isInvalid={!!errors?.attempts_allowed}>
 								<FormLabel>{__('Attempts Allowed', 'masteriyo')}</FormLabel>

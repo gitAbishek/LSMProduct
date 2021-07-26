@@ -124,8 +124,12 @@ const Builder: React.FC = () => {
 			}),
 			regular_price: `${data.regular_price}`,
 		};
+		const duration =
+			+(data?.duration_hour ?? 0) * 60 + +(data?.duration_minute ?? 0);
+		delete data.duration_hour;
+		delete data.duration_minute;
 
-		updateCourse.mutate(deepMerge(deepClean(data), newData));
+		updateCourse.mutate(deepMerge(deepClean({ ...data, duration }), newData));
 	};
 
 	if (courseQuery.isSuccess && builderQuery.isSuccess) {

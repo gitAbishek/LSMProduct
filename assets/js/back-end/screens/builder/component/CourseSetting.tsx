@@ -28,6 +28,7 @@ import { useQuery } from 'react-query';
 import urls from '../../../constants/urls';
 import { CourseDataMap } from '../../../types/course';
 import API from '../../../utils/api';
+import { convertMinutesToHours } from '../../../utils/math';
 
 interface Props {
 	courseData?: CourseDataMap | any;
@@ -42,6 +43,8 @@ const CourseSetting: React.FC<Props> = (props) => {
 	const [pricingDisplayValue, setPricingDisplayValue] = useState(
 		courseData?.price_type || 'free'
 	);
+
+	const [hours, minutes] = convertMinutesToHours(courseData?.duration || 0);
 
 	const difficultiesAPI = new API(urls.difficulties);
 	const {
@@ -110,7 +113,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 										</Select>
 									</FormControl>
 
-									<FormControl isInvalid={errors?.duration}>
+									{/* <FormControl isInvalid={errors?.duration}>
 										<FormLabel>{__('Course Duration', 'masteriyo')}</FormLabel>
 										<Controller
 											name="duration"
@@ -130,11 +133,82 @@ const CourseSetting: React.FC<Props> = (props) => {
 												</InputGroup>
 											)}
 										/>
-
 										<FormErrorMessage>
 											{errors?.duration && errors?.duration?.message}
 										</FormErrorMessage>
-									</FormControl>
+									</FormControl> */}
+
+									<Stack direction="row">
+										<FormControl isInvalid={!!errors?.duration_hour}>
+											<FormLabel>{__('Hours', 'masteriyo')}</FormLabel>
+											<Controller
+												name="duration_hour"
+												defaultValue={hours || 1}
+												rules={{
+													required: __('Hours is required', 'masteriyo'),
+													min: 1,
+													max: 10,
+												}}
+												render={({ field }) => (
+													<InputGroup>
+														<NumberInput
+															defaultValue={hours || 1}
+															w="sm"
+															min={1}
+															max={10}>
+															<NumberInputField {...field} rounded="sm" />
+															<NumberInputStepper>
+																<NumberIncrementStepper />
+																<NumberDecrementStepper />
+															</NumberInputStepper>
+														</NumberInput>
+														<InputRightAddon>
+															{__('Hours', 'masteriyo')}
+														</InputRightAddon>
+													</InputGroup>
+												)}
+											/>
+											<FormErrorMessage>
+												{errors?.duration_hour &&
+													errors?.duration_hour?.message}
+											</FormErrorMessage>
+										</FormControl>
+
+										<FormControl isInvalid={!!errors?.duration_minute}>
+											<FormLabel>{__('Minutes', 'masteriyo')}</FormLabel>
+											<Controller
+												name="duration_minute"
+												defaultValue={minutes || 0}
+												rules={{
+													required: __('Minutes is required', 'masteriyo'),
+													min: 0,
+													max: 60,
+												}}
+												render={({ field }) => (
+													<InputGroup>
+														<NumberInput
+															defaultValue={minutes || 0}
+															w="sm"
+															min={0}
+															max={60}>
+															<NumberInputField {...field} rounded="sm" />
+															<NumberInputStepper>
+																<NumberIncrementStepper />
+																<NumberDecrementStepper />
+															</NumberInputStepper>
+														</NumberInput>
+														<InputRightAddon>
+															{__('Minutes', 'masteriyo')}
+														</InputRightAddon>
+													</InputGroup>
+												)}
+											/>
+											<FormErrorMessage>
+												{errors?.duration_minute &&
+													errors?.duration_minute?.message}
+											</FormErrorMessage>
+										</FormControl>
+									</Stack>
 
 									<FormControl>
 										<FormLabel>{__('Maximum Students', 'masteriyo')}</FormLabel>

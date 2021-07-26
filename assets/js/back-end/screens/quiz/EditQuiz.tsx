@@ -25,7 +25,7 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
-import { QuizSchema } from '../../schemas';
+import { QuizFormSchema, QuizSchema } from '../../schemas';
 import API from '../../utils/api';
 import { deepClean } from '../../utils/utils';
 import Description from './components/Description';
@@ -74,8 +74,12 @@ const EditQuiz: React.FC = () => {
 		}
 	);
 
-	const onSubmit = (data: QuizSchema) => {
-		updateQuiz.mutate(deepClean(data));
+	const onSubmit = (data: QuizFormSchema) => {
+		const duration =
+			+(data?.duration_hour ?? 0) * 60 + +(data?.duration_minute ?? 0);
+		delete data.duration_hour;
+		delete data.duration_minute;
+		updateQuiz.mutate(deepClean({ ...data, duration }));
 	};
 
 	if (quizQuery.isSuccess && quizQuery.data.course_id == courseId) {

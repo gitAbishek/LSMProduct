@@ -63,6 +63,72 @@ export interface QuizSchema {
 	};
 }
 
+export interface QuizFormSchema {
+	id: number;
+	name: string;
+	slug: string;
+	permalink: string;
+	parent_id: number;
+	course_id: number;
+	menu_order: number;
+	description: string;
+	short_description: string;
+	date_created: string;
+	date_created_gmt: string;
+	date_modified: string;
+	date_modified_gmt: string;
+	status: 'draft' | 'pending' | 'private' | 'publish' | 'future';
+	pass_mark: number;
+	full_mark: number;
+	duration_hour?: number;
+	duration_minute?: number;
+	attempts_allowed: number;
+	questions_display_per_page: number;
+	questions_count: number;
+	navigation: {
+		previous: {
+			id: number;
+			name: string;
+			type: string;
+			parent: {
+				id: number;
+				name: string;
+			};
+		};
+		next: {
+			id: number;
+			name: string;
+			type: string;
+			parent: {
+				id: number;
+				name: string;
+			};
+		};
+	};
+	_links: {
+		self: [
+			{
+				href: string;
+			}
+		];
+		collection: [
+			{
+				href: string;
+			}
+		];
+		previous: [
+			{
+				href: string;
+			}
+		];
+		next: [
+			{
+				href: string;
+			}
+		];
+	};
+}
+
 export interface TrueFalseSchema {
 	name: string;
 	correct: boolean;

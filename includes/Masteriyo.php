@@ -11,6 +11,7 @@ namespace ThemeGrill\Masteriyo;
 
 use League\Container\Container;
 use ThemeGrill\Masteriyo\AdminMenu;
+use ThemeGrill\Masteriyo\ScriptStyle;
 use ThemeGrill\Masteriyo\Setup\Onboard;
 use ThemeGrill\Masteriyo\RestApi\RestApi;
 use ThemeGrill\Masteriyo\Emails\EmailHooks;
@@ -72,10 +73,7 @@ class Masteriyo extends Container {
 		RestApi::init();
 		AdminMenu::init();
 		Ajax::init();
-
-		// Register scripts and styles.
-		$this->get( 'script-style' );
-
+		ScriptStyle::init();
 		FormHandlers::init();
 
 		// $this->get( 'query.frontend' );
@@ -194,7 +192,6 @@ class Masteriyo extends Container {
 					"{$namespace}\\CartServiceProvider",
 					"{$namespace}\\TemplateServiceProvider",
 					"{$namespace}\\QuestionServiceProvider",
-					"{$namespace}\\ScriptStyleServiceProvider",
 					"{$namespace}\\ShortcodesServiceProvider",
 					"{$namespace}\\SettingsServiceProvider",
 					"{$namespace}\\QueriesServiceProvider",

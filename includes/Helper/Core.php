@@ -2903,7 +2903,7 @@ function masteriyo_get_setting( $name ) {
  * @param string $value Setting value.
  * @return mixed
  */
-function masteriyo_set_setting( $name ) {
+function masteriyo_set_setting( $name, $value ) {
 	$setting      = masteriyo( 'setting' );
 	$setting_repo = masteriyo( 'setting.store' );
 

@@ -36,7 +36,7 @@ class Activation {
 	 * @since 0.1.0
 	 */
 	public static function create_pages() {
-		$pages   = apply_filters(
+		$pages = apply_filters(
 			'masteriyo_create_pages',
 			array(
 				'course-list'        => array(
@@ -60,17 +60,12 @@ class Activation {
 				),
 			)
 		);
-		$setting = masteriyo_get_settings();
 
 		foreach ( $pages as $key => $page ) {
 			$setting_name = $page['setting_name'];
 			$page_id      = masteriyo_create_page( esc_sql( $page['name'] ), $setting_name, $page['title'], $page['content'], ! empty( $page['parent'] ) ? masteriyo_get_page_id( $page['parent'] ) : '' );
-
-			if ( $page_id && method_exists( $setting, "set_pages_{$setting_name}" ) ) {
-				call_user_func_array( array( $setting, "set_pages_{$setting_name}" ), array( $page_id ) );
-			}
+			masteriyo_set_setting( "advance.pages.{$setting_name}", $page_id );
 		}
-		$setting->save();
 	}
 
 

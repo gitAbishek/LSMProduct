@@ -173,6 +173,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 															}
 															onClick={() => {
 																setSelectedImage(image.id);
+																setImageUrl(image.source_url);
 															}}
 															src={image.source_url}
 															objectFit="cover"

@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	ButtonGroup,
 	Image,
@@ -9,6 +10,7 @@ import {
 	ModalFooter,
 	ModalHeader,
 	ModalOverlay,
+	Stack,
 	Tab,
 	TabList,
 	TabPanel,
@@ -58,12 +60,16 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 								<ImageUpload onUploadSuccess={setImageUrl} />
 							</TabPanel>
 							<TabPanel>
-								{imagesQuery.isSuccess &&
-									imagesQuery.data.map((image: MediaSchema) => (
-										<span key={image.id}>
-											<Image />
-										</span>
-									))}
+								{imagesQuery.isSuccess && (
+									<Stack direction="row" spacing="1">
+										{imagesQuery.data.map((image: MediaSchema) => (
+											<Box key={image.id}>
+												<Image src={image.source_url} />
+											</Box>
+										))}
+									</Stack>
+								)}
+								;
 							</TabPanel>
 						</TabPanels>
 					</Tabs>

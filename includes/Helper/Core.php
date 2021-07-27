@@ -2907,6 +2907,7 @@ function masteriyo_set_setting( $name, $value ) {
 	$setting      = masteriyo( 'setting' );
 	$setting_repo = masteriyo( 'setting.store' );
 
+	$setting_repo->read( $setting );
 	$setting->set( $name, $value );
 	$setting->save();
 }

@@ -181,10 +181,10 @@ class Setting extends Model {
 		),
 		'advance'        => array(
 			'pages'      => array(
-				'course_list_page_id'      => -1,
-				'myaccount_page_id'        => -1,
-				'checkout_page_id'         => -1,
-				'terms_conditions_page_id' => -1,
+				'course_list_page_id'      => 0,
+				'myaccount_page_id'        => 0,
+				'checkout_page_id'         => 0,
+				'terms_conditions_page_id' => 0,
 			),
 			'permalinks' => array(
 				'category_base'            => 'course-category',

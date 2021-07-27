@@ -41,8 +41,9 @@ const FeaturedImage: React.FC<Props> = (props) => {
 		onClose();
 	};
 
-	const removeImage = () => {
+	const onDelete = () => {
 		setImageId(null);
+		setValue('featured_image', 0);
 	};
 
 	return (
@@ -53,7 +54,7 @@ const FeaturedImage: React.FC<Props> = (props) => {
 				<Stack direction="column" spacing="4">
 					<Image src={imageQuery?.data?.source_url} />
 					<ButtonGroup d="flex" justifyContent="space-between">
-						<Button variant="outline" onClick={removeImage} colorScheme="red">
+						<Button variant="outline" onClick={onDelete} colorScheme="red">
 							{__('Remove Featured Image', 'masteriyo')}
 						</Button>
 						<Button variant="outline" onClick={onOpen} colorScheme="blue">
@@ -73,6 +74,8 @@ const FeaturedImage: React.FC<Props> = (props) => {
 				</ButtonGroup>
 			)}
 			<ImageUploadModal
+				title={__('Featured Image', 'masteriyo')}
+				addButtonText={__('Set Featured Image', 'masteriyo')}
 				isOpen={isOpen}
 				onClose={onClose}
 				onComplete={onComplete}

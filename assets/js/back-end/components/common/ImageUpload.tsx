@@ -1,16 +1,15 @@
 import {
 	Box,
+	Button,
 	Center,
-	Flex,
-	Icon,
 	Spinner,
+	Stack,
 	Text,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
-import { BiPlus } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import MediaAPI from '../../utils/media';
 
@@ -81,10 +80,11 @@ const ImageUpload: React.FC<Props> = (props) => {
 				</Box>
 			)}
 
-			<Box
+			<Center
 				transition="ease-in-out"
 				border="2px"
 				borderStyle="dashed"
+				textAlign="center"
 				borderColor="gray.300"
 				bg={isDragAccept ? 'green.50' : isDragReject ? 'red.50' : 'gray.50'}
 				position="relative"
@@ -92,25 +92,14 @@ const ImageUpload: React.FC<Props> = (props) => {
 				{...getRootProps()}>
 				<input {...getInputProps()} multiple={false} />
 
-				<Flex
-					align="center"
-					justify="center"
-					position="absolute"
-					left="0"
-					right="0"
-					top="0"
-					bottom="0">
-					<Box>
-						<Icon
-							as={BiPlus}
-							h="10"
-							w="10"
-							color={isDragActive ? 'blue.500' : 'gray.500'}
-						/>
-					</Box>
-					<Text>{__('Upload an Image here', 'masteriyo')}</Text>
-				</Flex>
-			</Box>
+				<Stack direction="column">
+					<Text>{__('Drop Files To Upload', 'masteriyo')}</Text>
+					<Text fontSize="xs">{__('Or', 'masteriyo')}</Text>
+					<Button variant="outline" colorScheme="blue">
+						{__('Select Files', 'masteriyo')}
+					</Button>
+				</Stack>
+			</Center>
 		</>
 	);
 };

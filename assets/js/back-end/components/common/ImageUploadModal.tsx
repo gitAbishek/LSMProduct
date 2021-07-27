@@ -2,6 +2,7 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
+	Icon,
 	Image,
 	Modal,
 	ModalBody,
@@ -19,6 +20,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
+import { BiCheck } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { MediaSchema } from '../../schemas';
 import MediaAPI from '../../utils/media';
@@ -33,9 +35,10 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 	const { isOpen, onClose, onSucces } = props;
 	const [imageUrl, setImageUrl] = useState(null);
 	const imageAPi = new MediaAPI();
-	const imagesQuery = useQuery('images', () => imageAPi.list());
+	const imagesQuery = useQuery('medias', () => imageAPi.list());
+	const [imageId, setImageId] = useState<number>();
+	const [tabIndex, setTabIndex] = useState(0);
 
-	console.log(imagesQuery?.data);
 	return (
 		<Modal size="fullSpacing" isOpen={isOpen} onClose={onClose} isCentered>
 			<ModalOverlay />
@@ -49,27 +52,64 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 					{__('Media Manager', 'masteriyo')}
 				</ModalHeader>
 				<ModalCloseButton color="white" />
-				<ModalBody py="6">
-					<Tabs>
+				<ModalBody py="6" p="0">
+					<Tabs
+						onChange={(index) => setTabIndex(index)}
+						index={tabIndex}
+						h="full"
+						d="flex"
+						flexDirection="column">
 						<TabList>
-							<Tab>{__('Upload files')}</Tab>
-							<Tab>{__('Media Library')}</Tab>
+							<Tab fontSize="sm" px="0" py="3" mx="4">
+								{__('Upload files')}
+							</Tab>
+							<Tab fontSize="sm" px="0" py="3" mx="4">
+								{__('Media Library')}
+							</Tab>
 						</TabList>
-						<TabPanels>
-							<TabPanel>
-								<ImageUpload onUploadSuccess={setImageUrl} />
+						<TabPanels flex="1">
+							<TabPanel h="full">
+								<ImageUpload onUploadSuccess={() => setTabIndex(1)} />
 							</TabPanel>
 							<TabPanel>
 								{imagesQuery.isSuccess && (
-									<Stack direction="row" spacing="1">
+									<Stack direction="row" flexWrap="wrap" spacing="2">
 										{imagesQuery.data.map((image: MediaSchema) => (
-											<Box key={image.id}>
-												<Image src={image.source_url} />
+											<Box
+												key={image.id}
+												w="140px"
+												h="140px"
+												position="relative">
+												<Image
+													border="3px solid"
+													cursor="pointer"
+													borderColor={
+														imageId === image.id ? 'blue.500' : 'transparent'
+													}
+													onClick={() => {
+														setImageId(image.id);
+													}}
+													src={image.source_url}
+													objectFit="cover"
+													h="full"
+													w="full"
+												/>
+												{imageId === image.id && (
+													<Icon
+														as={BiCheck}
+														pos="absolute"
+														right="0"
+														top="0"
+														fontSize="xl"
+														color="white"
+														shadow="md"
+														bg="blue.500"
+													/>
+												)}
 											</Box>
 										))}
 									</Stack>
 								)}
-								;
 							</TabPanel>
 						</TabPanels>
 					</Tabs>

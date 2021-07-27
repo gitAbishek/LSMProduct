@@ -21,21 +21,28 @@ class FrontendQuery {
 	 * Query vars to add to wp.
 	 *
 	 * @since 0.1.0
-	 * @static
 	 *
 	 * @var array
 	 */
-	public static $query_vars = array();
+	public $query_vars = array();
 
 	/**
 	 * Reference to the main course query on the page.
 	 *
 	 * @since 0.1.0
-	 * @static
 	 *
 	 * @var WP_Query
 	 */
-	private static $course_query;
+	private $course_query;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1.0
+	 */
+	public function __construct() {
+		$this->init();
+	}
 
 	/**
 	 * Initialize.
@@ -44,9 +51,9 @@ class FrontendQuery {
 	 *
 	 * @return void
 	 */
-	public static function init() {
-		self::init_hooks();
-		self::init_query_vars();
+	public function init() {
+		$this->init_hooks();
+		$this->init_query_vars();
 	}
 
 	/**
@@ -56,8 +63,8 @@ class FrontendQuery {
 	 *
 	 * @return array
 	 */
-	public static function get_query_vars() {
-		return apply_filters( 'masteriyo_get_query_vars', self::$query_vars );
+	public function get_query_vars() {
+		return apply_filters( 'masteriyo_get_query_vars', $this->query_vars );
 	}
 
 	/**
@@ -67,18 +74,18 @@ class FrontendQuery {
 	 *
 	 * @return void
 	 */
-	private static function init_hooks() {
-		add_action( 'init', array( __CLASS__, 'add_endpoints' ) );
+	private function init_hooks() {
+		add_action( 'init', array( $this, 'add_endpoints' ) );
 
 		if ( ! is_admin() ) {
-			add_action( 'wp_loaded', array( __CLASS__, 'get_errors' ), 20 );
-			add_filter( 'query_vars', array( __CLASS__, 'add_query_vars' ), 0 );
-			add_action( 'parse_request', array( __CLASS__, 'parse_request' ), 0 );
-			add_action( 'pre_get_posts', array( __CLASS__, 'pre_get_posts' ) );
-			add_filter( 'get_pagenum_link', array( __CLASS__, 'remove_add_to_cart_pagination' ), 10, 1 );
+			add_action( 'wp_loaded', array( $this, 'get_errors' ), 20 );
+			add_filter( 'query_vars', array( $this, 'add_query_vars' ), 0 );
+			add_action( 'parse_request', array( $this, 'parse_request' ), 0 );
+			add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
+			add_filter( 'get_pagenum_link', array( $this, 'remove_add_to_cart_pagination' ), 10, 1 );
 		}
 
-		self::init_query_vars();
+		$this->init_query_vars();
 	}
 
 	/**
@@ -86,7 +93,7 @@ class FrontendQuery {
 	 *
 	 * @since 0.1.0
 	 */
-	public static function get_errors() {
+	public function get_errors() {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$error = ! empty( $_GET['masteriyo_error'] ) ? sanitize_text_field( wp_unslash( $_GET['masteriyo_error'] ) ) : '';
 
@@ -101,7 +108,7 @@ class FrontendQuery {
 	 * @since 0.1.0
 	 * @return int
 	 */
-	public static function get_endpoints_mask() {
+	public function get_endpoints_mask() {
 		if ( 'page' === get_option( 'show_on_front' ) ) {
 			$page_on_front     = get_option( 'page_on_front' );
 			$myaccount_page_id = masteriyo_get_setting( 'advance.pages.myaccount_page_id' );
@@ -123,8 +130,8 @@ class FrontendQuery {
 	 * @param array $vars Query vars.
 	 * @return array
 	 */
-	public static function add_query_vars( $vars ) {
-		foreach ( self::get_query_vars() as $key => $var ) {
+	public function add_query_vars( $vars ) {
+		foreach ( $this->get_query_vars() as $key => $var ) {
 			$vars[] = $key;
 		}
 
@@ -136,14 +143,14 @@ class FrontendQuery {
 	 *
 	 * @since 0.1.0
 	 */
-	public static function parse_request() {
+	public function parse_request() {
 		global $wp;
 
-		$query_vars = self::get_query_vars();
+		$query_vars = $this->get_query_vars();
 
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended
 		// Map query vars to their keys, or get them if endpoints are not supported.
-		foreach ( self::get_query_vars() as $key => $var ) {
+		foreach ( $this->get_query_vars() as $key => $var ) {
 			if ( isset( $_GET[ $var ] ) ) {
 				$wp->query_vars[ $key ] = sanitize_text_field( wp_unslash( $_GET[ $var ] ) );
 			} elseif ( isset( $wp->query_vars[ $var ] ) ) {
@@ -158,10 +165,10 @@ class FrontendQuery {
 	 *
 	 * @since 0.1.0
 	 */
-	public static function add_endpoints() {
-		$mask = self::get_endpoints_mask();
+	public function add_endpoints() {
+		$mask = $this->get_endpoints_mask();
 
-		foreach ( self::get_query_vars() as $key => $var ) {
+		foreach ( $this->get_query_vars() as $key => $var ) {
 			if ( ! empty( $var ) ) {
 				add_rewrite_endpoint( $var, $mask );
 			}
@@ -173,9 +180,9 @@ class FrontendQuery {
 	 *r
 	 * @since 0.1.0
 	 */
-	public static function init_query_vars() {
+	public function init_query_vars() {
 		// Query vars to add to WP.
-		self::$query_vars = array(
+		$this->query_vars = array(
 			// Checkout actions.
 			'order-pay'       => masteriyo_get_setting( 'advance.checkout.pay' ),
 			'order-received'  => masteriyo_get_setting( 'advance.checkout.order_received' ),
@@ -201,7 +208,7 @@ class FrontendQuery {
 	 *
 	 * @return string The page title.
 	 */
-	public static function get_endpoint_title( $endpoint, $action = '' ) {
+	public function get_endpoint_title( $endpoint, $action = '' ) {
 		global $wp;
 
 		switch ( $endpoint ) {
@@ -270,19 +277,19 @@ class FrontendQuery {
 	 *
 	 * @param WP_Query $q Query instance.
 	 */
-	public static function pre_get_posts( $q ) {
+	public function pre_get_posts( $q ) {
 		// We only want to affect the main query.
 		if ( ! $q->is_main_query() ) {
 			return;
 		}
 
-		// Fixes for queries on static homepages.
-		if ( self::is_showing_page_on_front( $q ) ) {
+		// Fixes for queries on homepages.
+		if ( $this->is_showing_page_on_front( $q ) ) {
 
 			// Fix for endpoints on the homepage.
-			if ( ! self::page_on_front_is( $q->get( 'page_id' ) ) ) {
+			if ( ! $this->page_on_front_is( $q->get( 'page_id' ) ) ) {
 				$_query = wp_parse_args( $q->query );
-				if ( ! empty( $_query ) && array_intersect( array_keys( $_query ), array_keys( self::get_query_vars() ) ) ) {
+				if ( ! empty( $_query ) && array_intersect( array_keys( $_query ), array_keys( $this->get_query_vars() ) ) ) {
 					$q->is_page     = true;
 					$q->is_home     = false;
 					$q->is_singular = true;
@@ -292,7 +299,7 @@ class FrontendQuery {
 			}
 
 			// When orderby is set, WordPress shows posts on the front-page. Get around that here.
-			if ( self::page_on_front_is( masteriyo_get_page_id( 'course-list' ) ) ) {
+			if ( $this->page_on_front_is( masteriyo_get_page_id( 'course-list' ) ) ) {
 				$_query = wp_parse_args( $q->query );
 				if ( empty( $_query ) || ! array_diff( array_keys( $_query ), array( 'preview', 'page', 'paged', 'cpage', 'orderby' ) ) ) {
 					$q->set( 'page_id', (int) get_option( 'page_on_front' ) );
@@ -355,15 +362,15 @@ class FrontendQuery {
 
 			// Fix WP SEO.
 			if ( class_exists( 'WPSEO_Meta' ) ) {
-				add_filter( 'wpseo_metadesc', array( __CLASS__, 'wpseo_metadesc' ) );
-				add_filter( 'wpseo_metakey', array( __CLASS__, 'wpseo_metakey' ) );
+				add_filter( 'wpseo_metadesc', array( $this, 'wpseo_metadesc' ) );
+				add_filter( 'wpseo_metakey', array( $this, 'wpseo_metakey' ) );
 			}
 		} elseif ( ! $q->is_post_type_archive( 'course' ) && ! $q->is_tax( get_object_taxonomies( 'course' ) ) ) {
 			// Only apply to course categories, the course post archive, the course_list page, course tags, and course attribute taxonomies.
 			return;
 		}
 
-		self::course_query( $q );
+		$this->course_query( $q );
 	}
 
 	/**
@@ -374,9 +381,9 @@ class FrontendQuery {
 	 *
 	 * @param WP_Query $q Query instance.
 	 */
-	public static function course_query( $q ) {
+	public function course_query( $q ) {
 		if ( ! is_feed() ) {
-			$ordering = self::get_catalog_ordering_args();
+			$ordering = $this->get_catalog_ordering_args();
 			$q->set( 'orderby', $ordering['orderby'] );
 			$q->set( 'order', $ordering['order'] );
 
@@ -386,8 +393,8 @@ class FrontendQuery {
 		}
 
 		// Query vars that affect posts shown.
-		$q->set( 'meta_query', self::get_meta_query( $q->get( 'meta_query' ), true ) );
-		$q->set( 'tax_query', self::get_tax_query( $q->get( 'tax_query' ), true ) );
+		$q->set( 'meta_query', $this->get_meta_query( $q->get( 'meta_query' ), true ) );
+		$q->set( 'tax_query', $this->get_tax_query( $q->get( 'tax_query' ), true ) );
 		$q->set( 'masteriyo_query', 'course_query' );
 		$q->set( 'post__in', array_unique( (array) apply_filters( 'loop_course_list_post_in', array() ) ) );
 
@@ -401,11 +408,11 @@ class FrontendQuery {
 		);
 
 		// Store reference to this query.
-		self::$course_query = $q;
+		$this->$course_query = $q;
 
 		// Additonal hooks to change WP Query.
-		// add_filter( 'posts_clauses', array( __CLASS__, 'price_filter_post_clauses' ), 10, 2 );
-		add_filter( 'the_posts', array( __CLASS__, 'handle_get_posts' ), 10, 2 );
+		// add_filter( 'posts_clauses', array( $this, 'price_filter_post_clauses' ), 10, 2 );
+		add_filter( 'the_posts', array( $this, 'handle_get_posts' ), 10, 2 );
 
 		do_action( 'masteriyo_course_query', $q );
 	}
@@ -420,11 +427,11 @@ class FrontendQuery {
 	 *
 	 * @return array
 	 */
-	public static function handle_get_posts( $posts, $query ) {
+	public function handle_get_posts( $posts, $query ) {
 		if ( 'course_query' !== $query->get( 'masteriyo_query' ) ) {
 			return $posts;
 		}
-		self::remove_course_query_filters( $posts );
+		$this->remove_course_query_filters( $posts );
 		return $posts;
 	}
 
@@ -437,9 +444,9 @@ class FrontendQuery {
 	 * @param array $posts Posts from WP Query.
 	 * @return array
 	 */
-	public static function remove_course_query_filters( $posts ) {
-		// self::remove_ordering_args();
-		// remove_filter( 'posts_clauses', array( __CLASS__, 'price_filter_post_clauses' ), 10, 2 );
+	public function remove_course_query_filters( $posts ) {
+		// $this->remove_ordering_args();
+		// remove_filter( 'posts_clauses', array( $this, 'price_filter_post_clauses' ), 10, 2 );
 		return $posts;
 	}
 
@@ -450,7 +457,7 @@ class FrontendQuery {
 	 * @param WP_Query $q Query instance.
 	 * @return bool
 	 */
-	private static function is_showing_page_on_front( $q ) {
+	private function is_showing_page_on_front( $q ) {
 		return ( $q->is_home() && ! $q->is_posts_page ) && 'page' === get_option( 'show_on_front' );
 	}
 
@@ -463,7 +470,7 @@ class FrontendQuery {
 	 * @param string $order Order param.
 	 * @return array
 	 */
-	public static function get_catalog_ordering_args( $orderby = '', $order = '' ) {
+	public function get_catalog_ordering_args( $orderby = '', $order = '' ) {
 		// Get ordering from query string unless defined.
 		if ( ! $orderby ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -516,13 +523,13 @@ class FrontendQuery {
 				break;
 			case 'price':
 				$callback = 'DESC' === $order ? 'order_by_price_desc_post_clauses' : 'order_by_price_asc_post_clauses';
-				add_filter( 'posts_clauses', array( __CLASS__, $callback ) );
+				add_filter( 'posts_clauses', array( $this, $callback ) );
 				break;
 			case 'popularity':
-				add_filter( 'posts_clauses', array( __CLASS__, 'order_by_popularity_post_clauses' ) );
+				add_filter( 'posts_clauses', array( $this, 'order_by_popularity_post_clauses' ) );
 				break;
 			case 'rating':
-				add_filter( 'posts_clauses', array( __CLASS__, 'order_by_rating_post_clauses' ) );
+				add_filter( 'posts_clauses', array( $this, 'order_by_rating_post_clauses' ) );
 				break;
 		}
 
@@ -538,7 +545,7 @@ class FrontendQuery {
 	 * @param  bool  $main_query If is main query.
 	 * @return array
 	 */
-	public static function get_meta_query( $meta_query = array(), $main_query = false ) {
+	public function get_meta_query( $meta_query = array(), $main_query = false ) {
 		if ( ! is_array( $meta_query ) ) {
 			$meta_query = array();
 		}
@@ -554,7 +561,7 @@ class FrontendQuery {
 	 * @param  bool  $main_query If is main query.
 	 * @return array
 	 */
-	public static function get_tax_query( $tax_query = array(), $main_query = false ) {
+	public function get_tax_query( $tax_query = array(), $main_query = false ) {
 		if ( ! is_array( $tax_query ) ) {
 			$tax_query = array(
 				'relation' => 'AND',
@@ -609,8 +616,8 @@ class FrontendQuery {
 	 *
 	 * @return WP_Query
 	 */
-	public static function get_main_query() {
-		return self::course_query;
+	public function get_main_query() {
+		return $this->course_query;
 	}
 
 	/**
@@ -621,7 +628,7 @@ class FrontendQuery {
 	 * @param string $url URL.
 	 * @return string
 	 */
-	public static function remove_add_to_cart_pagination( $url ) {
+	public function remove_add_to_cart_pagination( $url ) {
 		return remove_query_arg( 'add-to-cart', $url );
 	}
 }

@@ -1666,7 +1666,7 @@ function masteriyo_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 	}
 
 	// Map endpoint to options.
-	$query_vars = masteriyo()->query->get_query_vars();
+	$query_vars = masteriyo( 'query.frontend' )->get_query_vars();
 	$endpoint   = ! empty( $query_vars[ $endpoint ] ) ? $query_vars[ $endpoint ] : $endpoint;
 
 	if ( get_option( 'permalink_structure' ) ) {

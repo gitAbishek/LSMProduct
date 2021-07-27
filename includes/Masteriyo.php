@@ -68,9 +68,8 @@ class Masteriyo {
 		AdminMenu::init();
 		Ajax::init();
 		ScriptStyle::init();
-		FormHandlers::init();
 
-		FrontendQuery::init();
+		masteriyo( 'query.frontend' );
 
 		$this->define_tables();
 

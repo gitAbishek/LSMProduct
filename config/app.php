@@ -37,6 +37,7 @@ return array_unique(
 			'ThemeGrill\Masteriyo\Providers\CourseProgressServiceProvider',
 			'ThemeGrill\Masteriyo\Providers\UserCourseServiceProvider',
 			'ThemeGrill\Masteriyo\Providers\CourseProgressItemServiceProvider',
+			'ThemeGrill\Masteriyo\Providers\FrontendQueryServiceProvider',
 			'ThemeGrill\Masteriyo\Providers\AppServiceProvider',
 		)
 	)

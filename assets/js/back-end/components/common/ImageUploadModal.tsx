@@ -1,6 +1,7 @@
 import {
 	Button,
 	ButtonGroup,
+	Image,
 	Modal,
 	ModalBody,
 	ModalCloseButton,
@@ -17,6 +18,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import { MediaSchema } from '../../schemas';
 import MediaAPI from '../../utils/media';
 import ImageUpload from './ImageUpload';
 
@@ -55,7 +57,14 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 							<TabPanel>
 								<ImageUpload onUploadSuccess={setImageUrl} />
 							</TabPanel>
-							<TabPanel></TabPanel>
+							<TabPanel>
+								{imagesQuery.isSuccess &&
+									imagesQuery.data.map((image: MediaSchema) => (
+										<span key={image.id}>
+											<Image />
+										</span>
+									))}
+							</TabPanel>
 						</TabPanels>
 					</Tabs>
 				</ModalBody>

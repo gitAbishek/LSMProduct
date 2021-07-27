@@ -2,9 +2,15 @@ import {
 	Box,
 	Collapse,
 	FormControl,
+	FormErrorMessage,
 	FormLabel,
 	Icon,
 	Input,
+	NumberDecrementStepper,
+	NumberIncrementStepper,
+	NumberInput,
+	NumberInputField,
+	NumberInputStepper,
 	Select,
 	Stack,
 	Switch,
@@ -24,6 +30,7 @@ import { infoIconStyles } from '../../../config/styles';
 import { CountrySchema } from '../../../schemas';
 import { PaymentsSettingsMap } from '../../../types';
 import countries from '../../../utils/countries';
+import { hasNumber } from '../../../utils/utils';
 
 interface Props {
 	paymentsData?: PaymentsSettingsMap;
@@ -31,7 +38,11 @@ interface Props {
 
 const PaymentsSettings: React.FC<Props> = (props) => {
 	const { paymentsData } = props;
-	const { register, control } = useFormContext();
+	const {
+		register,
+		control,
+		formState: { errors },
+	} = useFormContext();
 
 	const showPayPalOptions = useWatch({
 		name: 'payments.paypal.enable',
@@ -168,6 +179,30 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									/>
 								</FormControl>
 							</Stack>
+							<Stack direction="row" spacing="8">
+								<FormControl>
+									<FormLabel>
+										{__('State', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Your state where you are residing',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+
+									<Input
+										type="text"
+										{...register('payments.store.state')}
+										defaultValue={paymentsData?.store?.state}
+									/>
+								</FormControl>
+							</Stack>
 						</Stack>
 					</TabPanel>
 					<TabPanel>
@@ -213,7 +248,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</Tooltip>
 									</FormLabel>
 									<Select
-										{...register('payments.store.currency_position')}
+										{...register('payments.currency.currency_position')}
 										defaultValue={paymentsData?.currency?.currency_position}>
 										<option value="left">{__('Left', 'masteriyo')}</option>
 										<option value="right">{__('Right', 'masteriyo')}</option>
@@ -221,7 +256,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 								</FormControl>
 							</Stack>
 							<Stack direction="row" spacing="8">
-								<FormControl>
+								<FormControl
+									isInvalid={!!errors?.payments?.currency?.thousand_separator}>
 									<FormLabel minW="xs">
 										{__('Thousand Separator', 'masteriyo')}
 										<Tooltip
@@ -238,11 +274,26 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Input
 										type="text"
-										{...register('payments.currency.thousand_separator')}
+										{...register('payments.currency.thousand_separator', {
+											maxLength: {
+												value: 1,
+												message:
+													'Thousand separator should be 1 character only.',
+											},
+											required: 'Thousand separator is required.',
+											validate: (value) =>
+												hasNumber(value) ||
+												"Thousand separator can't be a number",
+										})}
 										defaultValue={paymentsData?.currency?.thousand_separator}
 									/>
+									<FormErrorMessage>
+										{errors?.payments?.currency?.thousand_separator &&
+											errors?.payments?.currency?.thousand_separator?.message}
+									</FormErrorMessage>
 								</FormControl>
-								<FormControl>
+								<FormControl
+									isInvalid={!!errors?.payments?.currency?.decimal_separator}>
 									<FormLabel minW="xs">
 										{__('Decimal Separator', 'masteriyo')}
 										<Tooltip
@@ -259,18 +310,33 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Input
 										type="text"
-										{...register('payments.currency.decimal_separator')}
+										{...register('payments.currency.decimal_separator', {
+											required: 'Decimal separator is required.',
+											maxLength: {
+												value: 1,
+												message:
+													'Decimal separator should be 1 character only.',
+											},
+											validate: (value) =>
+												hasNumber(value) ||
+												"Decimal separator can't be a number",
+										})}
 										defaultValue={paymentsData?.currency?.decimal_separator}
 									/>
+									<FormErrorMessage>
+										{errors?.payments?.currency?.decimal_separator &&
+											errors?.payments?.currency?.decimal_separator.message}
+									</FormErrorMessage>
 								</FormControl>
 							</Stack>
 							<Stack direction="row" spacing="8">
-								<FormControl>
+								<FormControl
+									isInvalid={!!errors?.payments?.currency?.number_of_decimals}>
 									<FormLabel minW="xs">
 										{__('Number of Decimals', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'Number of digit to show on fractional part',
+												'Number of digit to show on fractional part. (Max limit is 10)',
 												'masteriyo'
 											)}
 											hasArrow
@@ -280,11 +346,28 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											</Box>
 										</Tooltip>
 									</FormLabel>
-									<Input
-										type="text"
-										{...register('payments.currency.number_of_decimals')}
-										defaultValue={paymentsData?.currency?.number_of_decimals}
+									<Controller
+										name="payments.currency.number_of_decimals"
+										defaultValue={
+											paymentsData?.currency?.number_of_decimals || 2
+										}
+										rules={{
+											required: 'Number of decimals is required',
+										}}
+										render={({ field }) => (
+											<NumberInput {...field} w="full" min={0} max={10}>
+												<NumberInputField />
+												<NumberInputStepper>
+													<NumberIncrementStepper />
+													<NumberDecrementStepper />
+												</NumberInputStepper>
+											</NumberInput>
+										)}
 									/>
+									<FormErrorMessage>
+										{errors?.payments?.currency?.number_of_decimals &&
+											errors?.payments?.currency?.number_of_decimals.message}
+									</FormErrorMessage>
 								</FormControl>
 							</Stack>
 						</Stack>

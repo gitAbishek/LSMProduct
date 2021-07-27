@@ -31,7 +31,10 @@ import SingleCourseSettings from './components/SingleCourseSettings';
 
 const Settings = () => {
 	const settingsApi = new API(urls.settings);
-	const methods = useForm<SetttingsMap>();
+	const methods = useForm<SetttingsMap>({
+		reValidateMode: 'onChange',
+		mode: 'onChange',
+	});
 	const toast = useToast();
 	const queryClient = useQueryClient();
 

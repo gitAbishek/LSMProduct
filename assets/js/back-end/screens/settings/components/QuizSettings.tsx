@@ -1,6 +1,7 @@
 import {
 	Box,
 	FormControl,
+	FormErrorMessage,
 	FormLabel,
 	Icon,
 	NumberDecrementStepper,
@@ -18,7 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
 import { infoIconStyles } from '../../../config/styles';
 import { QuizSettingsMap } from '../../../types';
@@ -29,6 +30,9 @@ interface Props {
 
 const QuizSettings: React.FC<Props> = (props) => {
 	const { quizData } = props;
+	const {
+		formState: { errors },
+	} = useFormContext();
 	const tabStyles = {
 		justifyContent: 'flex-start',
 		w: '180px',
@@ -57,7 +61,8 @@ const QuizSettings: React.FC<Props> = (props) => {
 				<TabPanels flex="1">
 					<TabPanel>
 						<Stack direction="column" spacing="8">
-							<FormControl>
+							<FormControl
+								isInvalid={!!errors?.quiz?.styling?.questions_display_per_page}>
 								<FormLabel minW="2xs">
 									{__('Question Display Per Page', 'masteriyo')}
 									<Tooltip
@@ -75,6 +80,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 								<Controller
 									name="quiz.styling.questions_display_per_page"
 									defaultValue={quizData?.styling?.questions_display_per_page}
+									rules={{ required: 'Question display per page is required.' }}
 									render={({ field }) => (
 										<NumberInput {...field} min={0}>
 											<NumberInputField borderRadius="sm" shadow="input" />
@@ -85,6 +91,10 @@ const QuizSettings: React.FC<Props> = (props) => {
 										</NumberInput>
 									)}
 								/>
+								<FormErrorMessage>
+									{errors?.quiz?.styling?.questions_display_per_page &&
+										errors?.quiz?.styling?.questions_display_per_page.message}
+								</FormErrorMessage>
 							</FormControl>
 						</Stack>
 					</TabPanel>

@@ -1,6 +1,7 @@
 import {
 	Box,
 	FormControl,
+	FormErrorMessage,
 	FormLabel,
 	Icon,
 	NumberDecrementStepper,
@@ -31,7 +32,10 @@ interface Props {
 
 const CourseArchiveSettings: React.FC<Props> = (props) => {
 	const { courseArchiveData } = props;
-	const { register } = useFormContext();
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext();
 
 	const tabStyles = {
 		justifyContent: 'flex-start',
@@ -84,7 +88,8 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 								</Stack>
 							</FormControl>
 
-							<FormControl>
+							<FormControl
+								isInvalid={!!errors?.course_archive?.display?.per_page}>
 								<FormLabel minW="2xs">
 									{__('Course Per Page', 'masteriyo')}
 									<Tooltip
@@ -102,6 +107,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 								<Controller
 									name="course_archive.display.per_page"
 									defaultValue={courseArchiveData?.display?.per_page}
+									rules={{ required: 'Course per page is required.' }}
 									render={({ field }) => (
 										<NumberInput {...field} min={0}>
 											<NumberInputField borderRadius="sm" shadow="input" />
@@ -112,9 +118,14 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 										</NumberInput>
 									)}
 								/>
+								<FormErrorMessage>
+									{errors?.course_archive?.display?.per_page &&
+										errors?.course_archive?.display?.per_page.message}
+								</FormErrorMessage>
 							</FormControl>
 
-							<FormControl>
+							<FormControl
+								isInvalid={!!errors?.course_archive?.display?.per_row}>
 								<FormLabel minW="2xs">
 									{__('Course Per Row', 'masteriyo')}
 									<Tooltip
@@ -132,6 +143,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 								<Controller
 									name="course_archive.display.per_row"
 									defaultValue={courseArchiveData?.display?.per_row}
+									rules={{ required: 'Course per row is required.' }}
 									render={({ field }) => (
 										<NumberInput {...field} min={0}>
 											<NumberInputField borderRadius="sm" shadow="input" />
@@ -142,6 +154,10 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 										</NumberInput>
 									)}
 								/>
+								<FormErrorMessage>
+									{errors?.course_archive?.display?.per_row &&
+										errors?.course_archive?.display?.per_row.message}
+								</FormErrorMessage>
 							</FormControl>
 
 							<FormControl>

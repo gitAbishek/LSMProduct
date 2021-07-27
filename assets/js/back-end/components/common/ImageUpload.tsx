@@ -1,8 +1,7 @@
 import {
-	Box,
 	Button,
 	Center,
-	Spinner,
+	Progress,
 	Stack,
 	Text,
 	useToast,
@@ -59,27 +58,14 @@ const ImageUpload: React.FC<Props> = (props) => {
 			return;
 		}
 	};
-	const {
-		getRootProps,
-		getInputProps,
-		isDragAccept,
-		isDragReject,
-		isDragActive,
-	} = useDropzone({
-		accept: 'image/jpeg, image/png',
-		onDrop: onDrop,
-	});
+	const { getRootProps, getInputProps, isDragAccept, isDragReject } =
+		useDropzone({
+			accept: 'image/jpeg, image/png',
+			onDrop: onDrop,
+		});
 
 	return (
 		<>
-			{uploadMedia.isLoading && (
-				<Box>
-					<Center border="1px" borderColor="gray.100" h="36" overflow="hidden">
-						<Spinner />
-					</Center>
-				</Box>
-			)}
-
 			<Center
 				bg={isDragAccept ? 'green.50' : isDragReject ? 'red.50' : '#f8f8f8'}
 				border="2px dashed"
@@ -92,13 +78,17 @@ const ImageUpload: React.FC<Props> = (props) => {
 				{...getRootProps()}>
 				<input {...getInputProps()} multiple={false} />
 
-				<Stack direction="column">
-					<Text>{__('Drop Files To Upload', 'masteriyo')}</Text>
-					<Text fontSize="xs">{__('Or', 'masteriyo')}</Text>
-					<Button variant="outline" colorScheme="blue">
-						{__('Select Files', 'masteriyo')}
-					</Button>
-				</Stack>
+				{uploadMedia.isLoading ? (
+					<Progress hasStripe size="xs" />
+				) : (
+					<Stack direction="column">
+						<Text>{__('Drop Files To Upload', 'masteriyo')}</Text>
+						<Text fontSize="xs">{__('Or', 'masteriyo')}</Text>
+						<Button variant="outline" colorScheme="blue">
+							{__('Select Files', 'masteriyo')}
+						</Button>
+					</Stack>
+				)}
 			</Center>
 		</>
 	);

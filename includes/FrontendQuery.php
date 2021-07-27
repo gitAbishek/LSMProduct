@@ -408,7 +408,7 @@ class FrontendQuery {
 		);
 
 		// Store reference to this query.
-		$this->$course_query = $q;
+		$this->course_query = $q;
 
 		// Additonal hooks to change WP Query.
 		// add_filter( 'posts_clauses', array( $this, 'price_filter_post_clauses' ), 10, 2 );

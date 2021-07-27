@@ -143,7 +143,7 @@ msgstr ""
 #: assets/js/back-end/screens/quiz/components/question/Question.tsx:210
 #: assets/js/back-end/screens/sections/components/EditSection.tsx:96
 #: assets/js/back-end/screens/sections/components/NewSection.tsx:96
-#: assets/js/back-end/screens/sections/components/Section.tsx:264
+#: assets/js/back-end/screens/sections/components/Section.tsx:230
 msgid "Cancel"
 msgstr ""
 
@@ -469,6 +469,35 @@ msgstr ""
 msgid "Edit Category"
 msgstr ""
 
+#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:193
+#: assets/js/back-end/screens/course-categories/components/CategoryRow.tsx:140
+msgid "Delete Category"
+msgstr ""
+
+#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:197
+#: assets/js/back-end/screens/course-categories/components/CategoryRow.tsx:143
+msgid "Are you sure? You can't restore this category"
+msgstr ""
+
+#: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:214
+#: assets/js/back-end/screens/course-categories/components/CategoryRow.tsx:160
+#: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:206
+#: assets/js/back-end/screens/course-tags/components/ListRow.tsx:151
+#: assets/js/back-end/screens/courses/AllCourses.tsx:155
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:143
+#: assets/js/back-end/screens/lessons/AddNewLesson.tsx:104
+#: assets/js/back-end/screens/lessons/EditLesson.tsx:207
+#: assets/js/back-end/screens/orders/EditOrder.tsx:507
+#: assets/js/back-end/screens/orders/components/OrderRow.tsx:234
+#: assets/js/back-end/screens/quiz/components/answer/types/MultipleChoice.tsx:118
+#: assets/js/back-end/screens/quiz/components/answer/types/SingleChoice.tsx:124
+#: assets/js/back-end/screens/quiz/components/answer/types/TrueFalse.tsx:125
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:216
+#: assets/js/back-end/screens/sections/components/Content.tsx:176
+#: assets/js/back-end/screens/sections/components/Section.tsx:236
+msgid "Delete"
+msgstr ""
+
 #: assets/js/back-end/screens/course-categories/EditCourseCategory.tsx:64
 msgid "Category Updated Successfully"
 msgstr ""
@@ -502,8 +531,8 @@ msgstr ""
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:124
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:101
 #: assets/js/back-end/screens/orders/components/OrderRow.tsx:199
-#: assets/js/back-end/screens/sections/components/Content.tsx:88
-#: assets/js/back-end/screens/sections/components/Section.tsx:165
+#: assets/js/back-end/screens/sections/components/Content.tsx:141
+#: assets/js/back-end/screens/sections/components/Section.tsx:129
 msgid "Edit"
 msgstr ""
 
@@ -1078,6 +1107,12 @@ msgstr ""
 msgid "Delete "
 msgstr ""
 
+#: assets/js/back-end/screens/quiz/components/question/Question.tsx:202
+#: assets/js/back-end/screens/sections/components/Content.tsx:157
+#: assets/js/back-end/screens/sections/components/Section.tsx:219
+msgid "Are you sure? You can't restore this section"
+msgstr ""
+
 #: assets/js/back-end/screens/quiz/components/question/Question.tsx:73
 msgid "Question Updated"
 msgstr ""
@@ -1094,6 +1129,11 @@ msgstr ""
 
 #: assets/js/back-end/screens/sections/SectionBuilder.tsx:70
 msgid "Add New Section"
+msgstr ""
+
+#: assets/js/back-end/screens/sections/components/Content.tsx:154
+#: assets/js/back-end/screens/sections/components/Section.tsx:216
+msgid "Delete Section"
 msgstr ""
 
 #: assets/js/back-end/screens/sections/components/EditSection.tsx:53
@@ -1128,8 +1168,8 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: assets/js/back-end/screens/sections/components/Section.tsx:102
-msgid "Quiz Deleted"
+#: assets/js/back-end/screens/sections/components/Section.tsx:177
+msgid "Add New Content"
 msgstr ""
 
 #: assets/js/back-end/screens/sections/components/Section.tsx:214

@@ -208,18 +208,15 @@ const QuizSettings: React.FC<Props> = (props) => {
 									defaultValue={quizData?.attempts_allowed || 5}
 									rules={{
 										required: __('Attempts allowed is required', 'masteriyo'),
-										max: {
-											value: 20,
-											message: 'Maximum limit for attempt is 20.',
-										},
 									}}
 									render={({ field }) => (
 										<InputGroup>
 											<NumberInput
+												{...field}
 												defaultValue={quizData?.attempts_allowed || 5}
 												w="full"
 												min={0}>
-												<NumberInputField {...field} rounded="sm" />
+												<NumberInputField rounded="sm" />
 												<NumberInputStepper>
 													<NumberIncrementStepper />
 													<NumberDecrementStepper />
@@ -285,30 +282,21 @@ const QuizSettings: React.FC<Props> = (props) => {
 															'Question display per page is required',
 															'masteriyo'
 														),
-														max: {
-															value: 30,
-															message:
-																'Question display per page max limit is 30.',
-														},
 													}}
 													render={({ field }) => (
-														<InputGroup>
-															<NumberInput
-																defaultValue={
-																	quizData?.questions_display_per_page || 5
-																}
-																w="full">
-																<NumberInputField
-																	{...field}
-																	rounded="sm"
-																	min={0}
-																/>
-																<NumberInputStepper>
-																	<NumberIncrementStepper />
-																	<NumberDecrementStepper />
-																</NumberInputStepper>
-															</NumberInput>
-														</InputGroup>
+														<NumberInput
+															{...field}
+															defaultValue={
+																quizData?.questions_display_per_page || 5
+															}
+															w="full"
+															min={0}>
+															<NumberInputField rounded="sm" />
+															<NumberInputStepper>
+																<NumberIncrementStepper />
+																<NumberDecrementStepper />
+															</NumberInputStepper>
+														</NumberInput>
 													)}
 												/>
 												<FormErrorMessage>

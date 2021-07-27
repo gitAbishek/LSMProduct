@@ -94,6 +94,7 @@ class RestApi {
 			'quizzes.builder'       => "{$namespace}\\QuizBuilderController",
 			'course-progress'       => "{$namespace}\\CourseProgressController",
 			'course-progress.items' => "{$namespace}\\CourseProgressItemsController",
+			'data'                  => "{$namespace}\\DataController",
 		);
 	}
 

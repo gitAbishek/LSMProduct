@@ -27,12 +27,17 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
-import { QuizFormSchema, QuizSchema, SectionSchema } from '../../schemas';
+import { QuizSchema as QuizSchemaOld, SectionSchema } from '../../schemas';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
 import Description from './components/Description';
 import Name from './components/Name';
 import QuizSettings from './components/QuizSettings';
+
+interface QuizSchema extends QuizSchemaOld {
+	duration_hour?: number;
+	duration_minute?: number;
+}
 
 const AddNewQuiz: React.FC = () => {
 	const { sectionId, courseId }: any = useParams();
@@ -69,18 +74,17 @@ const AddNewQuiz: React.FC = () => {
 		},
 	});
 
-	const onSubmit = (data: QuizFormSchema) => {
-		const duration =
-			+(data?.duration_hour ?? 0) * 60 + +(data?.duration_minute ?? 0);
-		delete data.duration_hour;
-		delete data.duration_minute;
-		const cleanData = deepClean({ ...data, duration });
+	const onSubmit = (data: QuizSchema) => {
 		const newData = {
 			course_id: courseId,
 			parent_id: sectionId,
+
+			duration: (data?.duration_hour || 0) * 60 + +(data?.duration_minute || 0),
+			duration_hour: null,
+			duration_minute: null,
 		};
 
-		addQuiz.mutate(deepMerge(cleanData, newData));
+		addQuiz.mutate(deepClean(deepMerge(data, newData)));
 	};
 
 	if (sectionQuery.isSuccess && sectionQuery.data.course_id == courseId) {

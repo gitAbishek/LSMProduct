@@ -129,7 +129,7 @@ const Builder: React.FC = () => {
 			regular_price: `${data.regular_price}`,
 		};
 
-		updateCourse.mutate(deepMerge(deepClean(data), newData));
+		updateCourse.mutate(deepClean(deepMerge(data, newData)));
 	};
 
 	if (courseQuery.isSuccess && builderQuery.isSuccess) {

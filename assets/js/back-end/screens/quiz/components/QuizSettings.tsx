@@ -22,11 +22,16 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { QuizFormSchema, QuizSchema } from '../../../schemas';
+import { QuizSchema as QuizSchemaOld } from '../../../schemas';
 import { convertMinutesToHours } from '../../../utils/math';
 
 interface Props {
 	quizData?: QuizSchema;
+}
+
+interface QuizSchema extends QuizSchemaOld {
+	duration_hour?: number;
+	duration_minute?: number;
 }
 
 const QuizSettings: React.FC<Props> = (props) => {
@@ -34,7 +39,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 	const {
 		formState: { errors },
 		setValue,
-	} = useFormContext<QuizFormSchema>();
+	} = useFormContext<QuizSchema>();
 
 	const [hours, minutes] = convertMinutesToHours(quizData?.duration || 0);
 

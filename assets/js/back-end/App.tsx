@@ -14,6 +14,11 @@ const App = () => {
 				refetchOnReconnect: false,
 				useErrorBoundary: true,
 			},
+			mutations: {
+				onMutate: (data) => {
+					console.log(data);
+				},
+			},
 		},
 	});
 

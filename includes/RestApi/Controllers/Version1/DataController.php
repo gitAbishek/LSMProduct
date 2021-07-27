@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 use ThemeGrill\Masteriyo\Helper\Permission;
 
-class DataController extends PostsController {
+class DataController extends CrudController {
 	/**
 	 * Endpoint namespace.
 	 *
@@ -163,7 +163,7 @@ class DataController extends PostsController {
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_currencies( $request ) {
-		$currencies = masteriyo_get_currencies();
+		$currencies = masteriyo_get_currencies_with_symbols();
 		$response   = rest_ensure_response( $currencies );
 
 		/**

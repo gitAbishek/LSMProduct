@@ -20,7 +20,4 @@ foreach ( $masteriyo_service_providers as $p ) {
 	$masteriyo->addServiceProvider( $p );
 }
 
-// Initialize the application.
-$masteriyo->get( 'app' );
-
 return $masteriyo;

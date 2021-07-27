@@ -34,8 +34,8 @@ import urls from '../../constants/urls';
 import { LessonSchema } from '../../schemas';
 import API from '../../utils/api';
 import { deepClean } from '../../utils/utils';
+import FeaturedImage from '../courses/components/FeaturedImage';
 import Description from './components/Description';
-import FeaturedImage from './components/FeaturedImage';
 import Name from './components/Name';
 import VideoSource from './components/VideoSource';
 
@@ -63,6 +63,7 @@ const EditLesson = () => {
 					isClosable: true,
 					status: 'success',
 				});
+
 				history.push({
 					pathname: routes.courses.edit.replace(':courseId', courseId),
 					search: '?page=builder',

@@ -32,6 +32,7 @@ const FeaturedImage: React.FC<Props> = (props) => {
 		() => imageAPi.get(imageId),
 		{
 			enabled: !!imageId,
+			refetchOnWindowFocus: true,
 		}
 	);
 

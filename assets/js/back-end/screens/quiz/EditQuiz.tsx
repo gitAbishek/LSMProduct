@@ -25,13 +25,18 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
-import { QuizSchema } from '../../schemas';
+import { QuizSchema as QuizSchemaOld } from '../../schemas';
 import API from '../../utils/api';
-import { deepClean } from '../../utils/utils';
+import { deepClean, deepMerge } from '../../utils/utils';
 import Description from './components/Description';
 import Name from './components/Name';
 import Questions from './components/question/Questions';
 import QuizSettings from './components/QuizSettings';
+
+interface QuizSchema extends QuizSchemaOld {
+	duration_hour?: number;
+	duration_minute?: number;
+}
 
 const EditQuiz: React.FC = () => {
 	const { quizId, courseId }: any = useParams();
@@ -75,7 +80,13 @@ const EditQuiz: React.FC = () => {
 	);
 
 	const onSubmit = (data: QuizSchema) => {
-		updateQuiz.mutate(deepClean(data));
+		const newData: any = {
+			duration: (data?.duration_hour || 0) * 60 + +(data?.duration_minute || 0),
+			duration_hour: null,
+			duration_minute: null,
+		};
+
+		updateQuiz.mutate(deepClean(deepMerge(data, newData)));
 	};
 
 	if (quizQuery.isSuccess && quizQuery.data.course_id == courseId) {

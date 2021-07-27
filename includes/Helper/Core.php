@@ -1117,6 +1117,20 @@ function masteriyo_get_currency_symbols() {
 }
 
 /**
+ * Get full list of currency codes with symbols.
+ *
+ * @return array
+ */
+function masteriyo_get_currencies_with_symbols() {
+	$currencies = masteriyo_get_currencies();
+
+	foreach ( $currencies as $key => $value ) {
+		$currencies[ $key ] = sprintf( '%s (%s)', $value, masteriyo_get_currency_symbol( $key ) );
+	}
+	return apply_filters( 'masteriyo_currencies_with_symbols', $currencies );
+}
+
+/**
  * Get full list of currency codes.
  *
  * Currency symbols and names should follow the Unicode CLDR recommendation (http://cldr.unicode.org/translation/currency-names)

@@ -81,12 +81,12 @@ const ImageUpload: React.FC<Props> = (props) => {
 			)}
 
 			<Center
+				bg={isDragAccept ? 'green.50' : isDragReject ? 'red.50' : '#f8f8f8'}
+				border="2px dashed"
+				borderColor="gray.200"
+				borderRadius="sm"
 				transition="ease-in-out"
-				border="2px"
-				borderStyle="dashed"
 				textAlign="center"
-				borderColor="gray.300"
-				bg={isDragAccept ? 'green.50' : isDragReject ? 'red.50' : 'gray.50'}
 				position="relative"
 				h="full"
 				{...getRootProps()}>

@@ -54,12 +54,40 @@ export const isString = (arg: any) => {
 };
 
 /**
+ * isNumber :: checks if `arg` is a number.
+ * @param {} arg :: unknown function argument
+ * @returns {Boolean} :: returns true if `arg` is a Number, false otherwise
+ */
+export const isNumber = (arg: any) => {
+	return repr(arg) === '[object Number]';
+};
+
+/**
  * isNull :: checks if `arg` is null.
  * @param {} arg :: unknown function argument
  * @returns {Boolean} :: returns true if `arg` is of type Null, false otherwise
  */
 export const isNull = (arg: any) => {
 	return repr(arg) === '[object Null]';
+};
+
+/**
+ * isPositiveNumber :: checks if `arg` is a positive number.
+ * @param {} arg :: unknown function argument
+ * @returns {Boolean} :: returns true if `arg` is a Positive Number, false otherwise
+ */
+export const isPositiveNumber = (arg: any) => {
+	return parseInt(arg) >= 0;
+};
+
+/**
+ * hasNumber :: checks if `arg` has number..
+ * @param {} arg :: unknown function argument
+ * @returns {Boolean} :: returns true if `arg` has number, false otherwise
+ */
+export const hasNumber = (arg: any) => {
+	const pattern = /^\D+$/i;
+	return pattern.test(arg);
 };
 
 /**

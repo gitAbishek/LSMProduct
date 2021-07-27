@@ -134,20 +134,15 @@ const QuizSettings: React.FC<Props> = (props) => {
 									<FormControl isInvalid={!!errors?.duration_hour}>
 										<Controller
 											name="duration_hour"
-											defaultValue={hours || 1}
+											defaultValue={hours || 0}
 											rules={{
 												required: __('Hours is required', 'masteriyo'),
-												min: 1,
-												max: 10,
+												min: 0,
 											}}
 											render={({ field }) => (
 												<InputGroup>
-													<NumberInput
-														defaultValue={hours || 1}
-														w="sm"
-														min={1}
-														max={10}>
-														<NumberInputField {...field} rounded="sm" />
+													<NumberInput {...field} w="sm" min={0}>
+														<NumberInputField rounded="sm" />
 														<NumberInputStepper>
 															<NumberIncrementStepper />
 															<NumberDecrementStepper />
@@ -171,16 +166,12 @@ const QuizSettings: React.FC<Props> = (props) => {
 											rules={{
 												required: __('Minutes is required', 'masteriyo'),
 												min: 0,
-												max: 60,
+												max: 59,
 											}}
 											render={({ field }) => (
 												<InputGroup>
-													<NumberInput
-														defaultValue={minutes || 0}
-														w="sm"
-														min={0}
-														max={60}>
-														<NumberInputField {...field} rounded="sm" />
+													<NumberInput {...field} w="sm" min={0} max={59}>
+														<NumberInputField rounded="sm" />
 														<NumberInputStepper>
 															<NumberIncrementStepper />
 															<NumberDecrementStepper />

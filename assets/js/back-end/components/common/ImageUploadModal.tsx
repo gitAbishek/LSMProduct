@@ -8,9 +8,16 @@ import {
 	ModalFooter,
 	ModalHeader,
 	ModalOverlay,
+	Tab,
+	TabList,
+	TabPanel,
+	TabPanels,
+	Tabs,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+import MediaAPI from '../../utils/media';
 import ImageUpload from './ImageUpload';
 
 interface Props {
@@ -21,9 +28,12 @@ interface Props {
 const ImageUploadModal: React.FC<Props> = (props) => {
 	const { isOpen, onClose, onSucces } = props;
 	const [imageUrl, setImageUrl] = useState(null);
+	const imageAPi = new MediaAPI();
+	const imagesQuery = useQuery('images', () => imageAPi.list());
 
+	console.log(imagesQuery?.data);
 	return (
-		<Modal size="4xl" isOpen={isOpen} onClose={onClose} isCentered>
+		<Modal size="fullSpacing" isOpen={isOpen} onClose={onClose} isCentered>
 			<ModalOverlay />
 			<ModalContent>
 				<ModalHeader
@@ -36,7 +46,18 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 				</ModalHeader>
 				<ModalCloseButton color="white" />
 				<ModalBody py="6">
-					<ImageUpload onUploadSuccess={setImageUrl} />
+					<Tabs>
+						<TabList>
+							<Tab>{__('Upload files')}</Tab>
+							<Tab>{__('Media Library')}</Tab>
+						</TabList>
+						<TabPanels>
+							<TabPanel>
+								<ImageUpload onUploadSuccess={setImageUrl} />
+							</TabPanel>
+							<TabPanel></TabPanel>
+						</TabPanels>
+					</Tabs>
 				</ModalBody>
 				<ModalFooter bg="gray.50" borderTop="1px" borderColor="gray.100">
 					<ButtonGroup>

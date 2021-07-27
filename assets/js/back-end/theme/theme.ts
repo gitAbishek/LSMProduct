@@ -148,6 +148,19 @@ const theme = extendTheme({
 			},
 		},
 
+		Modal: {
+			sizes: {
+				fullSpacing: {
+					dialog: {
+						w: 'full',
+						h: 'full',
+						maxW: 'calc(100vw - 80px)',
+						maxH: 'calc(100vh - 80px)',
+					},
+				},
+			},
+		},
+
 		Steps,
 	},
 });

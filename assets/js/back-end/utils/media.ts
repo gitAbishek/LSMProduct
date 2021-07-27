@@ -35,6 +35,13 @@ class MediaAPI {
 			},
 		}).then((res) => res.data);
 	}
+
+	async list() {
+		return http({
+			url: this.uri,
+			method: 'GET',
+		}).then((res) => res.data);
+	}
 }
 
 export default MediaAPI;

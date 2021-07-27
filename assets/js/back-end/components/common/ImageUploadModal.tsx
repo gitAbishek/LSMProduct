@@ -36,10 +36,13 @@ interface Props {
 	onComplete?: any;
 	get?: 'id' | 'url';
 	selected?: number;
+	title?: string;
+	addButtonText?: string;
 }
 
 const ImageUploadModal: React.FC<Props> = (props) => {
-	const { isOpen, onClose, onComplete, get, selected } = props;
+	const { isOpen, onClose, onComplete, get, selected, title, addButtonText } =
+		props;
 	const toast = useToast();
 	const imageAPi = new MediaAPI();
 	const [selectedImage, setSelectedImage] = useState<any>(selected);
@@ -101,7 +104,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 					borderTopLeftRadius="xs"
 					color="white"
 					fontSize="sm">
-					{__('Media Manager', 'masteriyo')}
+					{title || __('Media Manager', 'masteriyo')}
 				</ModalHeader>
 				<ModalCloseButton color="white" />
 				<ModalBody py="6" p="0">
@@ -209,7 +212,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 							onClick={() => {
 								onComplete(get === 'url' ? imageUrl : selectedImage);
 							}}>
-							{__('Add Image', 'masteriyo')}
+							{addButtonText || __('Add Image', 'masteriyo')}
 						</Button>
 						<Button variant="outline" onClick={onClose}>
 							{__('Cancel', 'masteriyo')}

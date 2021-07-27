@@ -133,7 +133,7 @@ class Email {
 	 */
 	public function get_subject() {
 		$setting_name = 'masteriyo.emails.' . $this->setting_name_for_subject;
-		$subject      = masteriyo_get_setting_value( $setting_name, $this->get_default_subject() );
+		$subject      = if_empty( masteriyo_get_setting( $setting_name ), $this->get_default_subject() );
 		$subject      = empty( $subject ) ? $this->get_default_subject() : $subject;
 
 		return apply_filters( $setting_name, $this->format_string( $subject ), $this->get_object(), $this );
@@ -163,7 +163,7 @@ class Email {
 	 */
 	public function get_additional_content() {
 		$setting_name = 'masteriyo_email_additional_content_' . $this->get_id();
-		$content      = masteriyo_get_setting_value( $setting_name, $this->get_default_additional_content() );
+		$content      = if_empty( masteriyo_get_setting( $setting_name ), $this->get_default_additional_content() );
 
 		return apply_filters( $setting_name, $this->format_string( $content ), $this->get_object(), $this );
 	}
@@ -337,7 +337,7 @@ class Email {
 	public function get_from_name( $from_name = '' ) {
 		$from_name = apply_filters(
 			'masteriyo_email_from_name',
-			masteriyo_get_setting_value( 'masteriyo_email_from_name', $from_name ),
+			if_empty( masteriyo_get_setting( 'masteriyo_email_from_name' ), $from_name ),
 			$this,
 			$from_name
 		);
@@ -357,7 +357,7 @@ class Email {
 	public function get_from_address( $from_email = '' ) {
 		$from_email = apply_filters(
 			'masteriyo_email_from_address',
-			masteriyo_get_setting_value( 'masteriyo_email_from_address', $from_email ),
+			if_empty( masteriyo_get_setting( 'masteriyo_email_from_address' ), $from_email ),
 			$this,
 			$from_email
 		);

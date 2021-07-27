@@ -77,6 +77,7 @@ const EditorMenuBar: React.FC<Props> = (props) => {
 	}
 
 	const onImageUpload = (imageUrl: string) => {
+		console.log(imageUrl);
 		imageUrl && editor.chain().focus().setImage({ src: imageUrl }).run();
 		onClose();
 	};
@@ -310,7 +311,8 @@ const EditorMenuBar: React.FC<Props> = (props) => {
 					<ImageUploadModal
 						isOpen={isOpen}
 						onClose={onClose}
-						onSucces={onImageUpload}
+						get="url"
+						onComplete={onImageUpload}
 					/>
 				</Stack>
 			)}

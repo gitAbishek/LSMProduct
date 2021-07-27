@@ -29,20 +29,22 @@ import { BiCheck } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { MediaSchema } from '../../schemas';
 import MediaAPI from '../../utils/media';
+import { objectEquals } from '../../utils/utils';
 
 interface Props {
 	isOpen: boolean;
 	onClose: any;
-	onSucces?: any;
-	returnType?: 'id' | 'url';
+	onComplete?: any;
+	get?: 'id' | 'url';
 }
 
 const ImageUploadModal: React.FC<Props> = (props) => {
-	const { isOpen, onClose, onSucces, returnType } = props;
+	const { isOpen, onClose, onComplete, get } = props;
 	const toast = useToast();
 	const imageAPi = new MediaAPI();
 	const imagesQuery = useQuery('medias', () => imageAPi.list());
-	const [imageId, setImageId] = useState<number>();
+	const [selectedImage, setSelectedImage] =
+		useState<{ id: number; source_url: string }>();
 	const [tabIndex, setTabIndex] = useState(0);
 
 	const uploadMedia = useMutation((image: any) => imageAPi.store(image));
@@ -54,7 +56,8 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 		uploadMedia.mutate(formData, {
 			onSuccess: (data: MediaSchema) => {
 				imagesQuery.refetch();
-				onSucces && onSucces(returnType === 'url' ? data.source_url : data.id);
+				setTabIndex(1);
+				setSelectedImage({ id: data.id, source_url: data.source_url });
 			},
 		});
 	};
@@ -161,17 +164,28 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 													border="3px solid"
 													cursor="pointer"
 													borderColor={
-														imageId === image.id ? 'blue.500' : 'transparent'
+														objectEquals(selectedImage, {
+															id: image.id,
+															source_url: image.source_url,
+														})
+															? 'blue.500'
+															: 'transparent'
 													}
 													onClick={() => {
-														setImageId(image.id);
+														console.log('click');
+														console.log(selectedImage);
+														setSelectedImage({
+															id: image.id,
+															source_url: image.source_url,
+														});
 													}}
 													src={image.source_url}
 													objectFit="cover"
 													h="full"
 													w="full"
 												/>
-												{imageId === image.id && (
+												{selectedImage ==
+													{ id: image.id, source_url: image.source_url } && (
 													<Icon
 														as={BiCheck}
 														pos="absolute"
@@ -193,7 +207,15 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 				</ModalBody>
 				<ModalFooter bg="gray.50" borderTop="1px" borderColor="gray.100">
 					<ButtonGroup>
-						<Button colorScheme="blue">{__('Add Image', 'masteriyo')}</Button>
+						<Button
+							colorScheme="blue"
+							onClick={() => {
+								onComplete(
+									get === 'url' ? selectedImage?.source_url : selectedImage?.id
+								);
+							}}>
+							{__('Add Image', 'masteriyo')}
+						</Button>
 						<Button variant="outline" onClick={onClose}>
 							{__('Cancel', 'masteriyo')}
 						</Button>

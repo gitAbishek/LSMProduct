@@ -115,6 +115,7 @@ const Builder: React.FC = () => {
 
 	const onSave = (data: any, type: string) => {
 		updateBuilder.mutate(deepClean(builderData));
+
 		const newData: any = {
 			...(data.categories && {
 				categories: data.categories.map((category: any) => ({
@@ -122,14 +123,13 @@ const Builder: React.FC = () => {
 				})),
 				status: type,
 			}),
+			duration: (data?.duration_hour || 0) * 60 + +(data?.duration_minute || 0),
+			duration_hour: null,
+			duration_minute: null,
 			regular_price: `${data.regular_price}`,
 		};
-		const duration =
-			+(data?.duration_hour ?? 0) * 60 + +(data?.duration_minute ?? 0);
-		delete data.duration_hour;
-		delete data.duration_minute;
 
-		updateCourse.mutate(deepMerge(deepClean({ ...data, duration }), newData));
+		updateCourse.mutate(deepMerge(deepClean(data), newData));
 	};
 
 	if (courseQuery.isSuccess && builderQuery.isSuccess) {

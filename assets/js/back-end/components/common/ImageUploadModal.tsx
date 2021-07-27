@@ -2,6 +2,7 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
+	Center,
 	Icon,
 	Image,
 	Modal,
@@ -11,33 +12,75 @@ import {
 	ModalFooter,
 	ModalHeader,
 	ModalOverlay,
+	Progress,
 	Stack,
 	Tab,
 	TabList,
 	TabPanel,
 	TabPanels,
 	Tabs,
+	Text,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { BiCheck } from 'react-icons/bi';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { MediaSchema } from '../../schemas';
 import MediaAPI from '../../utils/media';
-import ImageUpload from './ImageUpload';
 
 interface Props {
 	isOpen: boolean;
 	onClose: any;
 	onSucces?: any;
+	returnType?: 'id' | 'url';
 }
+
 const ImageUploadModal: React.FC<Props> = (props) => {
-	const { isOpen, onClose, onSucces } = props;
-	const [imageUrl, setImageUrl] = useState(null);
+	const { isOpen, onClose, onSucces, returnType } = props;
+	const toast = useToast();
 	const imageAPi = new MediaAPI();
 	const imagesQuery = useQuery('medias', () => imageAPi.list());
 	const [imageId, setImageId] = useState<number>();
 	const [tabIndex, setTabIndex] = useState(0);
+
+	const uploadMedia = useMutation((image: any) => imageAPi.store(image));
+
+	const onUpload = (file: any) => {
+		let formData = new FormData();
+		formData.append('file', file);
+
+		uploadMedia.mutate(formData, {
+			onSuccess: (data: MediaSchema) => {
+				imagesQuery.refetch();
+				onSucces && onSucces(returnType === 'url' ? data.source_url : data.id);
+			},
+		});
+	};
+
+	const onDrop = (acceptedFiles: any) => {
+		if (acceptedFiles.length) {
+			onUpload(acceptedFiles[0]);
+		} else {
+			toast({
+				title: __('Please upload Valid Image files', 'masteriyo'),
+				description: __(
+					'Media files jpeg, png are only supported',
+					'masteriyo'
+				),
+				status: 'error',
+				isClosable: true,
+			});
+			return;
+		}
+	};
+
+	const { getRootProps, getInputProps, isDragAccept, isDragReject } =
+		useDropzone({
+			accept: 'image/jpeg, image/png',
+			onDrop: onDrop,
+		});
 
 	return (
 		<Modal
@@ -74,7 +117,36 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 						</TabList>
 						<TabPanels flex="1">
 							<TabPanel h="full">
-								<ImageUpload onUploadSuccess={() => setTabIndex(1)} />
+								<Center
+									bg={
+										isDragAccept
+											? 'green.50'
+											: isDragReject
+											? 'red.50'
+											: '#f8f8f8'
+									}
+									border="2px dashed"
+									borderColor="gray.200"
+									borderRadius="sm"
+									transition="ease-in-out"
+									textAlign="center"
+									position="relative"
+									h="full"
+									{...getRootProps()}>
+									<input {...getInputProps()} multiple={false} />
+
+									{uploadMedia.isLoading ? (
+										<Progress hasStripe size="xs" />
+									) : (
+										<Stack direction="column">
+											<Text>{__('Drop Files To Upload', 'masteriyo')}</Text>
+											<Text fontSize="xs">{__('Or', 'masteriyo')}</Text>
+											<Button variant="outline" colorScheme="blue">
+												{__('Select Files', 'masteriyo')}
+											</Button>
+										</Stack>
+									)}
+								</Center>
 							</TabPanel>
 							<TabPanel>
 								{imagesQuery.isSuccess && (
@@ -121,12 +193,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 				</ModalBody>
 				<ModalFooter bg="gray.50" borderTop="1px" borderColor="gray.100">
 					<ButtonGroup>
-						<Button
-							colorScheme="blue"
-							onClick={() => onSucces(imageUrl)}
-							isDisabled={!imageUrl}>
-							{__('Add Image', 'masteriyo')}
-						</Button>
+						<Button colorScheme="blue">{__('Add Image', 'masteriyo')}</Button>
 						<Button variant="outline" onClick={onClose}>
 							{__('Cancel', 'masteriyo')}
 						</Button>

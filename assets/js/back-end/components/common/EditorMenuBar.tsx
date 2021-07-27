@@ -310,7 +310,8 @@ const EditorMenuBar: React.FC<Props> = (props) => {
 					<ImageUploadModal
 						isOpen={isOpen}
 						onClose={onClose}
-						onSucces={onImageUpload}
+						get="url"
+						onComplete={onImageUpload}
 					/>
 				</Stack>
 			)}

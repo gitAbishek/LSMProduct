@@ -77,7 +77,6 @@ const EditorMenuBar: React.FC<Props> = (props) => {
 	}
 
 	const onImageUpload = (imageUrl: string) => {
-		console.log(imageUrl);
 		imageUrl && editor.chain().focus().setImage({ src: imageUrl }).run();
 		onClose();
 	};

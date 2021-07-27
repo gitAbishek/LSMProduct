@@ -42,11 +42,11 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 	const { isOpen, onClose, onComplete, get } = props;
 	const toast = useToast();
 	const imageAPi = new MediaAPI();
-	const imagesQuery = useQuery('medias', () => imageAPi.list());
 	const [selectedImage, setSelectedImage] =
 		useState<{ id: number; source_url: string }>();
 	const [tabIndex, setTabIndex] = useState(0);
 
+	const imagesQuery = useQuery('medias', () => imageAPi.list());
 	const uploadMedia = useMutation((image: any) => imageAPi.store(image));
 
 	const onUpload = (file: any) => {
@@ -154,51 +154,55 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 							<TabPanel>
 								{imagesQuery.isSuccess && (
 									<Stack direction="row" flexWrap="wrap" spacing="2">
-										{imagesQuery.data.map((image: MediaSchema) => (
-											<Box
-												key={image.id}
-												w="140px"
-												h="140px"
-												position="relative">
-												<Image
-													border="3px solid"
-													cursor="pointer"
-													borderColor={
-														objectEquals(selectedImage, {
+										{imagesQuery.data.map((image: MediaSchema) => {
+											if (image.media_type === 'image') {
+												return (
+													<Box
+														key={image.id}
+														w="140px"
+														h="140px"
+														position="relative">
+														<Image
+															border="3px solid"
+															cursor="pointer"
+															borderColor={
+																objectEquals(selectedImage, {
+																	id: image.id,
+																	source_url: image.source_url,
+																})
+																	? 'blue.500'
+																	: 'transparent'
+															}
+															onClick={() => {
+																setSelectedImage({
+																	id: image.id,
+																	source_url: image.source_url,
+																});
+															}}
+															src={image.source_url}
+															objectFit="cover"
+															h="full"
+															w="full"
+														/>
+														{objectEquals(selectedImage, {
 															id: image.id,
 															source_url: image.source_url,
-														})
-															? 'blue.500'
-															: 'transparent'
-													}
-													onClick={() => {
-														console.log('click');
-														console.log(selectedImage);
-														setSelectedImage({
-															id: image.id,
-															source_url: image.source_url,
-														});
-													}}
-													src={image.source_url}
-													objectFit="cover"
-													h="full"
-													w="full"
-												/>
-												{selectedImage ==
-													{ id: image.id, source_url: image.source_url } && (
-													<Icon
-														as={BiCheck}
-														pos="absolute"
-														right="0"
-														top="0"
-														fontSize="xl"
-														color="white"
-														shadow="md"
-														bg="blue.500"
-													/>
-												)}
-											</Box>
-										))}
+														}) && (
+															<Icon
+																as={BiCheck}
+																pos="absolute"
+																right="0"
+																top="0"
+																fontSize="xl"
+																color="white"
+																shadow="md"
+																bg="blue.500"
+															/>
+														)}
+													</Box>
+												);
+											}
+										})}
 									</Stack>
 								)}
 							</TabPanel>

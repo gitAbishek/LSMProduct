@@ -23,7 +23,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 	const [imageUrl, setImageUrl] = useState(null);
 
 	return (
-		<Modal size="lg" isOpen={isOpen} onClose={onClose} isCentered>
+		<Modal size="4xl" isOpen={isOpen} onClose={onClose} isCentered>
 			<ModalOverlay />
 			<ModalContent>
 				<ModalHeader
@@ -32,7 +32,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 					borderTopLeftRadius="xs"
 					color="white"
 					fontSize="sm">
-					{__('Upload an Image', 'masteriyo')}
+					{__('Media Manager', 'masteriyo')}
 				</ModalHeader>
 				<ModalCloseButton color="white" />
 				<ModalBody py="6">

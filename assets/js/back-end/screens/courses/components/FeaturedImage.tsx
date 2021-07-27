@@ -1,8 +1,10 @@
 import {
 	Button,
+	ButtonGroup,
 	FormControl,
 	FormLabel,
 	Image,
+	Stack,
 	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -34,23 +36,47 @@ const FeaturedImage: React.FC<Props> = (props) => {
 	);
 
 	const onComplete = (imageId: number) => {
-		console.log(imageId);
 		setImageId(imageId);
 		setValue('featured_image', imageId);
 		onClose();
 	};
 
+	const removeImage = () => {
+		setImageId(null);
+	};
+
 	return (
 		<FormControl>
 			<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-			{imageQuery.isSuccess && <Image src={imageQuery?.data?.source_url} />}
-			<Button variant="outline" onClick={onOpen} colorScheme="blue">
-				{__('Upload Featured Image', 'masteriyo')}
-			</Button>
+
+			{imageQuery.isSuccess ? (
+				<Stack direction="column" spacing="4">
+					<Image src={imageQuery?.data?.source_url} />
+					<ButtonGroup d="flex" justifyContent="space-between">
+						<Button variant="outline" onClick={removeImage} colorScheme="red">
+							{__('Remove Featured Image', 'masteriyo')}
+						</Button>
+						<Button variant="outline" onClick={onOpen} colorScheme="blue">
+							{__('Add New', 'masteriyo')}
+						</Button>
+					</ButtonGroup>
+				</Stack>
+			) : (
+				<ButtonGroup d="flex" justifyContent="space-between">
+					<Button
+						variant="outline"
+						isFullWidth
+						onClick={onOpen}
+						colorScheme="blue">
+						{__('Add Featured Image', 'masteriyo')}
+					</Button>
+				</ButtonGroup>
+			)}
 			<ImageUploadModal
 				isOpen={isOpen}
 				onClose={onClose}
 				onComplete={onComplete}
+				selected={imageId}
 			/>
 		</FormControl>
 	);

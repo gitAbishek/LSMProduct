@@ -49,7 +49,7 @@ $masteriyo->get( 'app' );
  * @param string $class Class name or alias.
  * @return ThemeGrill\Masteriyo\Masteriyo
  */
-function masteriyo( $class = '' ) {
+function masteriyo( $class = 'app' ) {
 	global $masteriyo;
 
 	return empty( $class ) ? $masteriyo : $masteriyo->get( $class );

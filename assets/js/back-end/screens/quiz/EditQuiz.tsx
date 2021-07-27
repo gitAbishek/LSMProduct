@@ -95,7 +95,7 @@ const EditQuiz: React.FC = () => {
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
 					<PageNav
-						isCurrentTitle={quizQuery?.data?.name}
+						currentTitle={quizQuery?.data?.name}
 						courseName={quizQuery?.data?.course_name}
 						courseId={courseId}
 					/>

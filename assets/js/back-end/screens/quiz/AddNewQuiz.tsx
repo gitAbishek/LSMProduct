@@ -93,7 +93,7 @@ const AddNewQuiz: React.FC = () => {
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
 					<PageNav
-						isCurrentTitle={__('Add New Quiz')}
+						currentTitle={__('Add New Quiz')}
 						courseName={sectionQuery?.data?.course_name}
 						courseId={courseId}
 					/>

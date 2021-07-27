@@ -10,13 +10,13 @@ import { Link as RouterLink } from 'react-router-dom';
 import routes from '../../constants/routes';
 
 interface Props {
-	isCurrentTitle: string;
+	currentTitle: string;
 	courseId: number;
 	courseName: string;
 }
 
 const PageNav: React.FC<Props> = (props) => {
-	const { isCurrentTitle, courseId, courseName } = props;
+	const { currentTitle, courseId, courseName } = props;
 
 	return (
 		<Breadcrumb
@@ -33,7 +33,7 @@ const PageNav: React.FC<Props> = (props) => {
 				</BreadcrumbLink>
 			</BreadcrumbItem>
 			<BreadcrumbItem isCurrentPage>
-				<BreadcrumbLink color="blue.600">{isCurrentTitle}</BreadcrumbLink>
+				<BreadcrumbLink color="blue.600">{currentTitle}</BreadcrumbLink>
 			</BreadcrumbItem>
 		</Breadcrumb>
 	);

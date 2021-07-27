@@ -260,16 +260,18 @@ class Setting extends Model {
 				foreach ( $sub_groups as $sub_group => $props ) {
 					if ( is_array( $props ) ) {
 						foreach ( $props as $prop => $value ) {
-							$this->set( $prop, $group, $sub_group, $value );
+							$this->set( "{$group}.{$sub_group}.{$prop}", $value );
 						}
 					} else {
-						$this->set( $sub_group, $group, '', $props );
+						$this->set( "{$group}.{$sub_group}", $props );
 					}
 				}
 			} else {
-				$this->set( $group, '', '', $sub_groups );
+				$this->set( "{$group}", $sub_groups );
 			}
 		}
+
+		$a = 1;
 	}
 
 	/**

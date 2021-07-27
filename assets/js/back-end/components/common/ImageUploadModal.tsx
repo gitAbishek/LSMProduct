@@ -40,7 +40,12 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 	const [tabIndex, setTabIndex] = useState(0);
 
 	return (
-		<Modal size="fullSpacing" isOpen={isOpen} onClose={onClose} isCentered>
+		<Modal
+			size="fullSpacing"
+			isOpen={isOpen}
+			onClose={onClose}
+			isCentered
+			closeOnEsc={false}>
 			<ModalOverlay />
 			<ModalContent>
 				<ModalHeader

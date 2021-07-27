@@ -1125,7 +1125,7 @@ function masteriyo_get_currencies_with_symbols() {
 	$currencies = masteriyo_get_currencies();
 
 	foreach ( $currencies as $key => $value ) {
-		$currencies[ $key ] = sprintf( '%s (%s)', $value, masteriyo_get_currency_symbol( $key ) );
+		$currencies[ $key ] = sprintf( '%s (%s)', $value, html_entity_decode( masteriyo_get_currency_symbol( $key ) ) );
 	}
 	return apply_filters( 'masteriyo_currencies_with_symbols', $currencies );
 }

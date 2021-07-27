@@ -108,11 +108,7 @@ const Section: React.FC<Props> = (props) => {
 								<Icon as={Sortable} fontSize="lg" color="gray.500" />
 							</span>
 
-							<Text
-								onClick={onEditPress}
-								cursor="pointer"
-								fontWeight="semibold"
-								fontSize="xl">
+							<Text fontWeight="semibold" fontSize="xl">
 								{name}
 							</Text>
 						</Stack>

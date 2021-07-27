@@ -73,6 +73,7 @@ class Setting extends Model {
 			'store'    => array(
 				'country'       => '',
 				'city'          => '',
+				'state'         => '',
 				'address_line1' => '',
 				'address_line2' => '',
 			),

@@ -75,11 +75,22 @@ class DataController extends CrudController {
 					'callback'            => array( $this, 'get_countries' ),
 					'permission_callback' => 'is_user_logged_in',
 				),
-			),
+			)
 		);
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->rest_base . '/states',
+			'/' . $this->rest_base . '/states/(?P<country>[\w]+)',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_states_by_country' ),
+					'permission_callback' => 'is_user_logged_in',
+				),
+			)
+		);
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/states/',
 			array(
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
@@ -112,7 +123,15 @@ class DataController extends CrudController {
 	 */
 	public function get_countries( $request ) {
 		$countries = masteriyo( 'countries' )->get_countries();
-		$response  = rest_ensure_response( $countries );
+
+		foreach ( $countries as $code => $name ) {
+			$countries_arr[] = array(
+				'code' => $code,
+				'name' => $name,
+			);
+		}
+
+		$response = rest_ensure_response( $countries_arr );
 
 		/**
 		 * Filter the data for a response.
@@ -137,7 +156,83 @@ class DataController extends CrudController {
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_states( $request ) {
-		$states   =  masteriyo( 'countries' )->get_states();
+		$countries = array_keys( masteriyo( 'countries' )->get_countries() );
+
+		foreach ( $countries as $country ) {
+			$states = masteriyo( 'countries' )->get_states( $country );
+
+			$states_list = array();
+			if ( ! empty( $states ) ) {
+				foreach ( $states as $state_code => $state_name ) {
+					$states_list[] = array(
+						'code' => $state_code,
+						'name' => $state_name,
+					);
+				}
+			}
+
+			$states_arr[] = array(
+				'country' => $country,
+				'states'  => $states_list,
+			);
+		}
+
+		$response = rest_ensure_response( $states_arr );
+
+		/**
+		 * Filter the data for a response.
+		 *
+		 * The dynamic portion of the hook name, $this->object_type,
+		 * refers to object type being prepared for the response.
+		 *
+		 * @param WP_REST_Response $response The response object.
+		 * @param Model          $object   Object data.
+		 * @param WP_REST_Request  $request  Request object.
+		 */
+		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $states, $request );
+	}
+
+	/**
+	 * Get states list by country.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_Error|WP_REST_Response
+	 */
+	public function get_states_by_country( $request ) {
+		if ( isset( $request['country'] ) ) {
+			$country = masteriyo_strtoupper( $request['country'] );
+		}
+
+		$countries = masteriyo( 'countries' )->get_countries();
+
+		if ( ! isset( $countries[ $country ] ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_invalid_country_code',
+				__( 'Invalid country code.', 'masteriyo' ),
+				array( 'status' => '404' )
+			);
+		}
+
+		$states = masteriyo( 'countries' )->get_states( $country );
+
+		$states_list = array();
+		if ( ! empty( $states ) ) {
+			foreach ( $states as $state_code => $state_name ) {
+				$states_list[] = array(
+					'code' => $state_code,
+					'name' => $state_name,
+				);
+			}
+		}
+
+		$states = array(
+			'country' => $country,
+			'states'  => $states_list,
+		);
+
 		$response = rest_ensure_response( $states );
 
 		/**
@@ -163,8 +258,17 @@ class DataController extends CrudController {
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_currencies( $request ) {
-		$currencies = masteriyo_get_currencies_with_symbols();
-		$response   = rest_ensure_response( $currencies );
+		$currencies = masteriyo_get_currencies();
+
+		foreach ( $currencies as $code => $name ) {
+			$currencies_arr[] = array(
+				'code'   => $code,
+				'name'   => $name,
+				'symbol' => html_entity_decode( masteriyo_get_currency_symbol( $code ) ),
+			);
+		}
+
+		$response = rest_ensure_response( $currencies_arr );
 
 		/**
 		 * Filter the data for a response.

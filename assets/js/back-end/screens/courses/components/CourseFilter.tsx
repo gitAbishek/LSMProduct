@@ -40,14 +40,16 @@ const CourseFilter: React.FC<Props> = (props) => {
 	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list(), {
 		retry: false,
 	});
-	const { handleSubmit, register, reset } = useForm();
+	const { handleSubmit, register, setValue } = useForm();
 	const onSearchInput = useOnType(
 		{
 			onTypeFinish: (val: string) => {
-				reset();
 				setFilterParams({
 					search: val,
 				});
+				setValue('category', '');
+				setValue('status', '');
+				setValue('price', '');
 			},
 		},
 		800

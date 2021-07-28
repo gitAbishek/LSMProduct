@@ -16,7 +16,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { BiCopy, BiPlus, BiTrash } from 'react-icons/bi';
+import { BiPlus, BiTrash } from 'react-icons/bi';
 import { Sortable } from '../../../../../assets/icons';
 import { sectionHeaderStyles } from '../../../../../config/styles';
 
@@ -27,7 +27,12 @@ interface Props {
 const TrueFalse: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
-	const [answers, setAnswers] = useState<any>(answersData || []);
+	const [answers, setAnswers] = useState<any>(
+		answersData || [
+			{ name: 'True', correct: true },
+			{ name: 'False', correct: false },
+		]
+	);
 	const iconStyles = {
 		fontSize: 'x-large',
 		color: 'gray.500',
@@ -38,7 +43,10 @@ const TrueFalse: React.FC<Props> = (props) => {
 	const onAddNewAnswerPress = () => {
 		var newAnswers = [...answers];
 		newAnswers.length < 2 &&
-			setAnswers([...newAnswers, { name: 'new answer', correct: false }]);
+			setAnswers([
+				...newAnswers,
+				{ name: 'new answer' + newAnswers.length, correct: false },
+			]);
 	};
 
 	const onDeletePress = (id: any) => {
@@ -63,11 +71,6 @@ const TrueFalse: React.FC<Props> = (props) => {
 		var newAnswers = [...answers];
 		newAnswers.splice(id, 1, { ...newAnswers[id], name: name });
 		setAnswers(newAnswers);
-	};
-
-	const onDuplicatePress = (name: string) => {
-		var newAnswers = [...answers];
-		setAnswers([...newAnswers, { name: name, correct: false }]);
 	};
 
 	useEffect(() => {
@@ -115,13 +118,6 @@ const TrueFalse: React.FC<Props> = (props) => {
 										<IconButton
 											variant="unstyled"
 											sx={iconStyles}
-											aria-label={__('Duplicate', 'masteriyo')}
-											onClick={() => onDuplicatePress(answer.name)}
-											icon={<BiCopy />}
-										/>
-										<IconButton
-											variant="unstyled"
-											sx={iconStyles}
 											aria-label={__('Delete', 'masteriyo')}
 											icon={<BiTrash />}
 											minW="auto"
@@ -138,8 +134,9 @@ const TrueFalse: React.FC<Props> = (props) => {
 					leftIcon={<Icon as={BiPlus} fontSize="xl" />}
 					variant="link"
 					color="gray.900"
+					isDisabled={answers.length > 1}
 					onClick={onAddNewAnswerPress}>
-					Add New Answer
+					{__('Add New Answer', 'masteriyo')}
 				</Button>
 			</ButtonGroup>
 		</Stack>

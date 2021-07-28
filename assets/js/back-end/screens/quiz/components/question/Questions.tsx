@@ -77,7 +77,9 @@ const Questions: React.FC<Props> = (props) => {
 						</Accordion>
 					)}
 					<Center>
-						<AddNewButton onClick={onAddNewQuestionPress}>
+						<AddNewButton
+							onClick={onAddNewQuestionPress}
+							isLoading={addQuestion.isLoading}>
 							Add New Question
 						</AddNewButton>
 					</Center>

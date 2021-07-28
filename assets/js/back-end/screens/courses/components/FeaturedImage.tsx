@@ -8,7 +8,7 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import ImageUploadModal from '../../../components/common/ImageUploadModal';
@@ -26,6 +26,10 @@ const FeaturedImage: React.FC<Props> = (props) => {
 
 	const { setValue } = useFormContext();
 	const imageAPi = new MediaAPI();
+
+	useEffect(() => {
+		setImageId(defaultValue || null);
+	}, [defaultValue]);
 
 	const imageQuery = useQuery<MediaSchema>(
 		[`featuredImage${imageId}`, imageId],

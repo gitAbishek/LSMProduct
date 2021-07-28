@@ -124,21 +124,19 @@ const Section: React.FC<Props> = (props) => {
 		setIsEditing(true);
 	};
 
-	const newContentsType = newContents?.map((content: any) => content?.type);
-
 	const onContentDeletePress = (contentId: number) => {
 		onOpen();
-		if (newContentsType.type === 'lesson') {
+		if (newContents.map((content: any) => content?.type === 'lesson')) {
 			setDeleteLessonId(contentId);
-		} else if (newContentsType.type === 'quiz') {
+		} else if (newContents?.map((content: any) => content?.type === 'quiz')) {
 			setDeleteQuizId(contentId);
 		}
 	};
 
 	const onDeleteConfirm = () => {
-		if (newContentsType.type === 'lesson') {
+		if (newContents?.map((content: any) => content?.type === 'lesson')) {
 			deleteLessonId && deleteLesson.mutate(deleteLessonId);
-		} else if (newContentsType.type === 'quiz') {
+		} else if (newContents?.map((content: any) => content?.type === 'quiz')) {
 			deleteQuizId && deleteQuiz.mutate(deleteQuizId);
 		}
 	};

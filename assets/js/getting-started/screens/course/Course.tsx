@@ -4,6 +4,7 @@ import {
 	ButtonGroup,
 	Flex,
 	FormControl,
+	FormErrorMessage,
 	FormLabel,
 	Link,
 	NumberDecrementStepper,
@@ -24,42 +25,61 @@ interface Props {
 
 const Course: React.FC<Props> = (props) => {
 	const { dashboardURL, prevStep, nextStep } = props;
-	const { register } = useFormContext();
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext();
 	return (
 		<Box rounded="3px">
 			<Box bg="white" p="30" shadow="box">
 				<Stack direction="column" spacing="8">
-					<FormControl>
+					<FormControl isInvalid={!!errors?.course_archive?.display?.per_row}>
 						<Flex justify="space-between" align="center">
 							<FormLabel sx={{ fontWeight: 'bold' }}>
 								{__('Course Per Row', 'masteriyo')}
 							</FormLabel>
-							<NumberInput w="md" defaultValue={4}>
-								<NumberInputField
-									{...register('course_archive.display.per_row')}
-								/>
-								<NumberInputStepper>
-									<NumberIncrementStepper />
-									<NumberDecrementStepper />
-								</NumberInputStepper>
-							</NumberInput>
+							<Stack direction="column">
+								<NumberInput w="md" defaultValue={4} min={1} max={6}>
+									<NumberInputField
+										{...register('course_archive.display.per_row', {
+											required: 'Course per row is required.',
+										})}
+									/>
+									<NumberInputStepper>
+										<NumberIncrementStepper />
+										<NumberDecrementStepper />
+									</NumberInputStepper>
+								</NumberInput>
+								<FormErrorMessage>
+									{errors?.course_archive?.display?.per_row &&
+										errors?.course_archive?.display?.per_row.message}
+								</FormErrorMessage>
+							</Stack>
 						</Flex>
 					</FormControl>
 
-					<FormControl>
+					<FormControl isInvalid={!!errors?.course_archive?.display?.per_page}>
 						<Flex justify="space-between" align="center">
 							<FormLabel sx={{ fontWeight: 'bold' }}>
 								{__('Course Per Page', 'masteriyo')}
 							</FormLabel>
-							<NumberInput w="md" defaultValue={20}>
-								<NumberInputField
-									{...register('course_archive.display.per_page')}
-								/>
-								<NumberInputStepper>
-									<NumberIncrementStepper />
-									<NumberDecrementStepper />
-								</NumberInputStepper>
-							</NumberInput>
+							<Stack direction="column">
+								<NumberInput w="md" defaultValue={20} min={1}>
+									<NumberInputField
+										{...register('course_archive.display.per_page', {
+											required: 'Course per page is required.',
+										})}
+									/>
+									<NumberInputStepper>
+										<NumberIncrementStepper />
+										<NumberDecrementStepper />
+									</NumberInputStepper>
+								</NumberInput>
+								<FormErrorMessage>
+									{errors?.course_archive?.display?.per_page &&
+										errors?.course_archive?.display?.per_page.message}
+								</FormErrorMessage>
+							</Stack>
 						</Flex>
 					</FormControl>
 

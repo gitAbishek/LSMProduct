@@ -263,7 +263,7 @@ class DataController extends CrudController {
 		foreach ( $currencies as $code => $name ) {
 			$currencies_arr[] = array(
 				'code'   => $code,
-				'name'   => $name,
+				'name'   => html_entity_decode( $name ),
 				'symbol' => html_entity_decode( masteriyo_get_currency_symbol( $code ) ),
 			);
 		}

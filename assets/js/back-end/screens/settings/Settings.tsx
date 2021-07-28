@@ -31,6 +31,7 @@ import SingleCourseSettings from './components/SingleCourseSettings';
 
 const Settings = () => {
 	const settingsApi = new API(urls.settings);
+	const CountriesAPI = new API(urls.countries);
 	const methods = useForm<SetttingsMap>({
 		reValidateMode: 'onChange',
 		mode: 'onChange',
@@ -53,6 +54,8 @@ const Settings = () => {
 		settingsApi.list()
 	);
 
+	const countriesQuery = useQuery('countries', () => CountriesAPI.list());
+
 	const updateSettings = useMutation(
 		(data: SetttingsMap) => settingsApi.store(data),
 		{
@@ -67,11 +70,6 @@ const Settings = () => {
 			},
 		}
 	);
-
-	if (settingsQuery.isLoading) {
-		return <FullScreenLoader />;
-	}
-
 	const onSubmit = (data: SetttingsMap) => {
 		try {
 			updateSettings.mutate(deepClean(data));
@@ -80,78 +78,82 @@ const Settings = () => {
 		}
 	};
 
-	return (
-		<FormProvider {...methods}>
-			<Stack direction="column" spacing="8" width="full" alignItems="center">
-				{/* <Header hideAddNewCourseBtn={true} hideCoursesMenu={true} /> */}
-				<Container maxW="container.xl" pt="5">
-					<Box bg="white" p="10" shadow="box">
-						<Tabs>
-							<TabList justifyContent="center" borderBottom="1px">
-								<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Course Archive', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Single Course', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Learning Page', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Payments', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Quiz', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Emails', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Advanced', 'masteriyo')}</Tab>
-							</TabList>
+	if (settingsQuery.isSuccess && countriesQuery.isSuccess) {
+		return (
+			<FormProvider {...methods}>
+				<Stack direction="column" spacing="8" width="full" alignItems="center">
+					{/* <Header hideAddNewCourseBtn={true} hideCoursesMenu={true} /> */}
+					<Container maxW="container.xl" pt="5">
+						<Box bg="white" p="10" shadow="box">
+							<Tabs>
+								<TabList justifyContent="center" borderBottom="1px">
+									<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Course Archive', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Single Course', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Learning Page', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Payments', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Quiz', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Emails', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Advanced', 'masteriyo')}</Tab>
+								</TabList>
 
-							<form onSubmit={methods.handleSubmit(onSubmit)}>
-								<TabPanels>
-									<TabPanel sx={tabPanelStyles}>
-										<GeneralSettings
-											generalData={settingsQuery.data?.general}
-										/>
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<CourseArchiveSettings
-											courseArchiveData={settingsQuery.data?.course_archive}
-										/>
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<SingleCourseSettings
-											singleCourseData={settingsQuery.data?.single_course}
-										/>
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<LearningPageSettings
-											learningPageData={settingsQuery.data?.learning_page}
-										/>
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<PaymentsSettings
-											paymentsData={settingsQuery.data?.payments}
-										/>
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<QuizSettings quizData={settingsQuery.data?.quiz} />
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<EmailSetttings emailData={settingsQuery.data?.emails} />
-									</TabPanel>
-									<TabPanel sx={tabPanelStyles}>
-										<AdvancedSettings
-											advanceData={settingsQuery.data?.advance}
-										/>
-									</TabPanel>
-								</TabPanels>
-								<ButtonGroup>
-									<Button
-										colorScheme="blue"
-										type="submit"
-										isLoading={updateSettings.isLoading}>
-										{__('Save Settings', 'masteriyo')}
-									</Button>
-								</ButtonGroup>
-							</form>
-						</Tabs>
-					</Box>
-				</Container>
-			</Stack>
-		</FormProvider>
-	);
+								<form onSubmit={methods.handleSubmit(onSubmit)}>
+									<TabPanels>
+										<TabPanel sx={tabPanelStyles}>
+											<GeneralSettings
+												generalData={settingsQuery.data?.general}
+											/>
+										</TabPanel>
+										<TabPanel sx={tabPanelStyles}>
+											<CourseArchiveSettings
+												courseArchiveData={settingsQuery.data?.course_archive}
+											/>
+										</TabPanel>
+										<TabPanel sx={tabPanelStyles}>
+											<SingleCourseSettings
+												singleCourseData={settingsQuery.data?.single_course}
+											/>
+										</TabPanel>
+										<TabPanel sx={tabPanelStyles}>
+											<LearningPageSettings
+												learningPageData={settingsQuery.data?.learning_page}
+											/>
+										</TabPanel>
+										<TabPanel sx={tabPanelStyles}>
+											<PaymentsSettings
+												countries={countriesQuery.data}
+												paymentsData={settingsQuery.data?.payments}
+											/>
+										</TabPanel>
+										<TabPanel sx={tabPanelStyles}>
+											<QuizSettings quizData={settingsQuery.data?.quiz} />
+										</TabPanel>
+										<TabPanel sx={tabPanelStyles}>
+											<EmailSetttings emailData={settingsQuery.data?.emails} />
+										</TabPanel>
+										<TabPanel sx={tabPanelStyles}>
+											<AdvancedSettings
+												advanceData={settingsQuery.data?.advance}
+											/>
+										</TabPanel>
+									</TabPanels>
+									<ButtonGroup>
+										<Button
+											colorScheme="blue"
+											type="submit"
+											isLoading={updateSettings.isLoading}>
+											{__('Save Settings', 'masteriyo')}
+										</Button>
+									</ButtonGroup>
+								</form>
+							</Tabs>
+						</Box>
+					</Container>
+				</Stack>
+			</FormProvider>
+		);
+	}
+	return <FullScreenLoader />;
 };
 
 export default Settings;

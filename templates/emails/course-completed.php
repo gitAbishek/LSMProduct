@@ -20,11 +20,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 do_action( 'masteriyo_email_header', $email_heading, $email ); ?>
 
 <p class="email-template--info">
-	<?php _e( 'You completed the following course:', 'masteriyo' ); ?>
+	<?php esc_html__( 'You completed the following course:', 'masteriyo' ); ?>
 </p>
-<p class="email-template--info">
-	<?php echo $course->get_name(); ?>
-</p>
-<?php
+
+<?php if ( ! is_wp_error( $course ) ) : ?>
+	<p class="email-template--info">
+		<?php echo esc_html( $course->get_name() ); ?>
+	</p>
+<?php endif; ?>
 
 do_action( 'masteriyo_email_footer', $email );

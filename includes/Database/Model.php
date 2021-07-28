@@ -339,7 +339,7 @@ abstract class Model {
 
 
 	/**
-	 * Delete an object, set the ID to 0, and return result.
+	 * Delete an object, set the ID to 0, and returpn result.
 	 *
 	 * @since  2.6.0
 	 * @param  bool $force_delete Should the date be deleted permanently.

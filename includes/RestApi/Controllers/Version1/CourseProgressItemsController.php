@@ -302,7 +302,7 @@ class CourseProgressItemsController extends CrudController {
 		$data = array(
 			'id'           => $course_progress_item->get_id( $context ),
 			'progress_id'  => $course_progress_item->get_progress_id( $context ),
-			'course_id'    => $progress->get_course_id( $context ),
+			'course_id'    => is_null( $progress ) ? '' : $progress->get_course_id( $context ),
 			'user_id'      => $course_progress_item->get_user_id( $context ),
 			'item_id'      => $course_progress_item->get_item_id( $context ),
 			'item_type'    => $course_progress_item->get_item_type( $context ),

@@ -21,7 +21,7 @@ use ThemeGrill\Masteriyo\Models\CourseReview;
  * @since 0.1.0
  *
  * @param int|Course|WP_Post $course Course id or Course Model or Post.
- * @return Course|null
+ * @return Course|WP_Error
  */
 function masteriyo_get_course( $course ) {
 	$course_obj   = masteriyo( 'course' );

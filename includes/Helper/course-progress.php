@@ -34,8 +34,8 @@ function masteriyo_get_course_progress( $course_progress ) {
 		$course_progress_obj_repo->read( $course_progress_obj );
 
 		return $course_progress_obj;
-	} catch ( \ModelException $e ) {
-		$course_progress_obj = new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
+	} catch ( \Exception $e ) {
+		return null;
 	}
 
 	return apply_filters( 'masteriyo_get_course_progress', $course_progress_obj, $course_progress );

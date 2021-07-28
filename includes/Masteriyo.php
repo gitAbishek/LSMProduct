@@ -11,6 +11,7 @@ namespace ThemeGrill\Masteriyo;
 
 use ThemeGrill\Masteriyo\AdminMenu;
 use ThemeGrill\Masteriyo\ScriptStyle;
+use ThemeGrill\Masteriyo\Capabilities;
 use ThemeGrill\Masteriyo\Setup\Onboard;
 use ThemeGrill\Masteriyo\RestApi\RestApi;
 use ThemeGrill\Masteriyo\Emails\EmailHooks;
@@ -57,6 +58,7 @@ class Masteriyo {
 	 * @since 0.1.0
 	 */
 	protected function init() {
+		Capabilities::init();
 		Activation::init();
 		Deactivation::init();
 		FileRestrictions::init();

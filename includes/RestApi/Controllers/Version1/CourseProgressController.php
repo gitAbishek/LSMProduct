@@ -138,7 +138,7 @@ class CourseProgressController extends CrudController {
 					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
 					'args'                => array(
 						'force' => array(
-							'default'     => false,
+							'default'     => true,
 							'description' => __( 'Whether to bypass trash and force deletion.', 'masteriyo' ),
 							'type'        => 'boolean',
 						),
@@ -188,7 +188,6 @@ class CourseProgressController extends CrudController {
 			'type'              => 'integer',
 			'sanitize_callback' => 'absint',
 			'validate_callback' => 'rest_validate_request_arg',
-			'default'           => 0,
 		);
 
 		$params['status'] = array(
@@ -351,6 +350,10 @@ class CourseProgressController extends CrudController {
 
 		$args['paged'] = $args['page'];
 
+		if ( masteriyo_is_current_user_student() ) {
+			$args['user_id'] = get_current_user_id();
+		}
+
 		/**
 		 * Filter the query arguments for a request.
 		 *
@@ -451,7 +454,9 @@ class CourseProgressController extends CrudController {
 			$course_progress->set_user_id( $user_id );
 
 			$course_id = $this->validate_course_id( $request, $creating );
-			$course_progress->set_course_id( $course_id );
+			if ( ! is_null( $course_id ) ) {
+				$course_progress->set_course_id( $course_id );
+			}
 		} catch ( RestException $e ) {
 			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
 		}
@@ -573,8 +578,14 @@ class CourseProgressController extends CrudController {
 			);
 		}
 
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
-			return true;
+		if ( ! $this->permission->rest_check_course_progress_permissions( 'create' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
 		}
 
 		return true;
@@ -596,8 +607,16 @@ class CourseProgressController extends CrudController {
 			);
 		}
 
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
-			return true;
+		$progress = masteriyo_get_course_progress( (int) $request['id'] );
+
+		if ( $progress && ! $this->permission->rest_check_course_progress_permissions( 'update', $request['id'] ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
 		}
 
 		return true;
@@ -616,6 +635,18 @@ class CourseProgressController extends CrudController {
 			return new \WP_Error(
 				'masteriyo_null_permission',
 				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$progress = masteriyo_get_course_progress( (int) $request['id'] );
+
+		if ( $progress && ! $this->permission->rest_check_course_progress_permissions( 'delete', $request['id'] ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_delete',
+				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
 			);
 		}
 

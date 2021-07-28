@@ -206,8 +206,6 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 
 			do_action( 'masteriyo_delete_course_progress', $course_progress->get_id() );
 
-			$course_progress->set_status( 'trash' );
-
 			$this->clear_cache( $course_progress );
 		}
 	}
@@ -232,11 +230,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		);
 
 		if ( ! $progress_obj || 'course_progress' !== $progress_obj->activity_type ) {
-			throw new ModelException(
-				'masteriyo_invalid_course_progress_id',
-				__( 'Invalid course progress ID.', 'masteriyo' ),
-				400
-			);
+			throw new \Exception( __( 'Invalid course progress.', 'masteriyo' ) );
 		}
 
 		$course_progress->set_props(

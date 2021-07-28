@@ -22,6 +22,7 @@ import {
 	MenuItem,
 	MenuList,
 	Select,
+	Skeleton,
 	Stack,
 	Text,
 	useToast,
@@ -35,9 +36,8 @@ import { useHistory, useParams } from 'react-router';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
-import { CountrySchema, OrderItemSchema, OrderSchema } from '../../schemas';
+import { OrderItemSchema, OrderSchema } from '../../schemas';
 import API from '../../utils/api';
-import countries from '../../utils/countries';
 import { deepClean } from '../../utils/utils';
 
 const orderStatusList = [
@@ -84,11 +84,14 @@ const EditOrder = () => {
 		handleSubmit,
 		register,
 		formState: { errors },
+		watch,
 	} = useForm<OrderSchema>();
 	const toast = useToast();
 	const cancelRef = useRef<any>();
 	const orderAPI = new API(urls.orders);
 	const orderItemsAPI = new API(urls.order_items);
+	const countriesAPI = new API(urls.countries);
+	const statesAPI = new API(urls.states);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const queryClient = useQueryClient();
 
@@ -117,6 +120,40 @@ const EditOrder = () => {
 			},
 		}
 	);
+	const countriesQuery = useQuery('countriesList', () => countriesAPI.list(), {
+		onError: (error: any) => {
+			toast({
+				description: `${error.response?.data?.message}`,
+				isClosable: true,
+				status: 'error',
+			});
+		},
+	});
+	const statesQuery = useQuery('statesList', () => statesAPI.list(), {
+		onError: (error: any) => {
+			toast({
+				description: `${error.response?.data?.message}`,
+				isClosable: true,
+				status: 'error',
+			});
+		},
+	});
+	const selectedCountry = watch(
+		'billing.country',
+		orderQuery.data?.billing.country
+	);
+	let currentCountryStates: { code: string; label: string }[] = [];
+
+	if (statesQuery.isSuccess) {
+		const states = statesQuery.data[selectedCountry];
+
+		if (!Array.isArray(states) && typeof states === 'object') {
+			currentCountryStates = Object.keys(states).map((code: string) => ({
+				code,
+				label: states[code],
+			}));
+		}
+	}
 
 	const updateOrder = useMutation(
 		(data: object) => orderAPI.update(orderId, data),
@@ -320,33 +357,59 @@ const EditOrder = () => {
 
 									{/* Country & State */}
 									<Stack direction="row" spacing="8" py="3">
-										<FormControl isInvalid={!errors?.billing?.country}>
-											<FormLabel>
-												{__('Country / Region', 'masteriyo')}
-											</FormLabel>
+										{countriesQuery.isLoading ? (
+											<Skeleton h="6" w="full" />
+										) : (
+											countriesQuery.isSuccess && (
+												<FormControl isInvalid={!errors?.billing?.country}>
+													<FormLabel>
+														{__('Country / Region', 'masteriyo')}
+													</FormLabel>
 
-											<Select {...register('billing.country')}>
-												{countries.map((country: CountrySchema) => (
-													<option
-														value={country.countryCode}
-														key={country.countryCode}>
-														{country.countryName}
-													</option>
-												))}
-											</Select>
-											<FormErrorMessage>
-												{errors?.billing?.country &&
-													errors?.billing?.country?.message}
-											</FormErrorMessage>
-										</FormControl>
-										<FormControl isInvalid={errors && errors['billing[state]']}>
-											<FormLabel>{__('State / County', 'masteriyo')}</FormLabel>
-											<Select {...register('billing.state')}></Select>
-											<FormErrorMessage>
-												{errors?.billing?.state &&
-													errors?.billing?.state?.message}
-											</FormErrorMessage>
-										</FormControl>
+													<Select
+														{...register('billing.country')}
+														placeholder={__('Select a country', 'masteriyo')}
+														defaultValue={orderQuery.data?.billing.country}>
+														{Object.keys(countriesQuery.data).map(
+															(countryCode: string) => (
+																<option value={countryCode} key={countryCode}>
+																	{countriesQuery.data[countryCode]}
+																</option>
+															)
+														)}
+													</Select>
+													<FormErrorMessage>
+														{errors?.billing?.country &&
+															errors?.billing?.country?.message}
+													</FormErrorMessage>
+												</FormControl>
+											)
+										)}
+										{statesQuery.isLoading ? (
+											<Skeleton h="6" w="full" />
+										) : (
+											currentCountryStates.length > 0 && (
+												<FormControl isInvalid={!errors?.billing?.state}>
+													<FormLabel>
+														{__('State / County', 'masteriyo')}
+													</FormLabel>
+													<Select
+														{...register('billing.state')}
+														placeholder={__('Select a state', 'masteriyo')}
+														defaultValue={orderQuery.data?.billing.state}>
+														{currentCountryStates.map((state) => (
+															<option value={state.code} key={state.code}>
+																{state.label}
+															</option>
+														))}
+													</Select>
+													<FormErrorMessage>
+														{errors?.billing?.state &&
+															errors?.billing?.state?.message}
+													</FormErrorMessage>
+												</FormControl>
+											)
+										)}
 									</Stack>
 
 									{/* Address Lines */}

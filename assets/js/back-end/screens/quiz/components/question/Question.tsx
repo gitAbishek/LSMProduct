@@ -10,10 +10,12 @@ import {
 	AlertDialogOverlay,
 	Button,
 	ButtonGroup,
+	Center,
 	Divider,
 	Flex,
 	Icon,
 	IconButton,
+	Spinner,
 	Stack,
 	useToast,
 } from '@chakra-ui/react';
@@ -89,6 +91,7 @@ const Question: React.FC<Props> = (props) => {
 				status: 'error',
 			});
 			queryClient.invalidateQueries(`questions${data.parent_id}`);
+			setDeleteModalOpen(false);
 		},
 	});
 
@@ -121,7 +124,6 @@ const Question: React.FC<Props> = (props) => {
 	};
 	const onDeleteConfirm = () => {
 		deleteQuestion.mutate(questionData.id);
-		setDeleteModalOpen(false);
 	};
 
 	const iconStyles = {
@@ -188,6 +190,11 @@ const Question: React.FC<Props> = (props) => {
 					</FormProvider>
 				</AccordionPanel>
 			</AccordionItem>
+			{duplicateQuestion.isLoading && (
+				<Center>
+					<Spinner />
+				</Center>
+			)}
 			<AlertDialog
 				isOpen={isDeleteModalOpen}
 				onClose={onDeleteModalClose}

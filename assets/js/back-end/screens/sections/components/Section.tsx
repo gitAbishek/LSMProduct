@@ -19,6 +19,7 @@ import {
 	MenuList,
 	Stack,
 	Text,
+	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -50,23 +51,66 @@ interface Props {
 	index: number;
 	contents: any;
 	contentsMap: any;
+	onDeletePress: any;
 }
 
 const Section: React.FC<Props> = (props) => {
-	const { id, name, description, index, contents, contentsMap, courseId } =
-		props;
+	const {
+		id,
+		name,
+		description,
+		index,
+		contents,
+		contentsMap,
+		courseId,
+		onDeletePress,
+	} = props;
 	const [isEditing, setIsEditing] = useState(false);
-	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-	const sectionAPI = new API(urls.sections);
+	const { onClose, onOpen, isOpen } = useDisclosure();
+	const [deleteLessonId, setDeleteLessonId] = useState<number>();
+	const [deleteQuizId, setDeleteQuizId] = useState<number>();
+	// const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	// const sectionAPI = new API(urls.sections);
 	const cancelRef = useRef<any>();
 	const newContents = contents?.map((contentId: any) => contentsMap[contentId]);
 	const queryClient = useQueryClient();
 	const toast = useToast();
 
-	const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
+	const lessonAPI = new API(urls.lessons);
+	const quizAPI = new API(urls.quizes);
+
+	// const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
+	// 	onSuccess: (data: any) => {
+	// 		toast({
+	// 			title: __('Section Deleted', 'masteriyo'),
+	// 			description:
+	// 				data?.name + __(' has been deleted successfully', 'masteriyo'),
+	// 			isClosable: true,
+	// 			status: 'error',
+	// 		});
+	// 		queryClient.invalidateQueries(`builder${courseId}`);
+	// 	},
+	// });
+
+	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
 		onSuccess: (data: any) => {
+			onClose();
 			toast({
-				title: __('Section Deleted', 'masteriyo'),
+				title: __('Lesson Deleted', 'masteriyo'),
+				description:
+					data?.name + __(' has been deleted successfully', 'masteriyo'),
+				isClosable: true,
+				status: 'error',
+			});
+			queryClient.invalidateQueries(`builder${courseId}`);
+		},
+	});
+
+	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
+		onSuccess: (data: any) => {
+			onClose();
+			toast({
+				title: __('Quiz Deleted', 'masteriyo'),
 				description:
 					data?.name + __(' has been deleted successfully', 'masteriyo'),
 				isClosable: true,
@@ -80,17 +124,36 @@ const Section: React.FC<Props> = (props) => {
 		setIsEditing(true);
 	};
 
-	const onDeletePress = () => {
-		setDeleteModalOpen(true);
+	const newContentsType = newContents?.map((content: any) => content?.type);
+
+	const onContentDeletePress = (contentId: number) => {
+		onOpen();
+		if (newContentsType.type === 'lesson') {
+			setDeleteLessonId(contentId);
+		} else if (newContentsType.type === 'quiz') {
+			setDeleteQuizId(contentId);
+		}
 	};
 
 	const onDeleteConfirm = () => {
-		deleteMutation.mutate(id);
+		if (newContentsType.type === 'lesson') {
+			deleteLessonId && deleteLesson.mutate(deleteLessonId);
+		} else if (newContentsType.type === 'quiz') {
+			deleteQuizId && deleteQuiz.mutate(deleteQuizId);
+		}
 	};
 
-	const onDeleteModalClose = () => {
-		setDeleteModalOpen(false);
-	};
+	// const onDeletePress = () => {
+	// 	setDeleteModalOpen(true);
+	// };
+
+	// const onDeleteConfirm = () => {
+	// 	deleteMutation.mutate(id);
+	// };
+
+	// const onDeleteModalClose = () => {
+	// 	setDeleteModalOpen(false);
+	// };
 
 	return (
 		<Draggable draggableId={id.toString()} index={index}>
@@ -124,7 +187,7 @@ const Section: React.FC<Props> = (props) => {
 								<MenuItem onClick={onEditPress} icon={<BiEdit />}>
 									{__('Edit', 'masteriyo')}
 								</MenuItem>
-								<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
+								<MenuItem onClick={() => onDeletePress(id)} icon={<BiTrash />}>
 									{__('Delete', 'masteriyo')}
 								</MenuItem>
 							</MenuList>
@@ -159,6 +222,7 @@ const Section: React.FC<Props> = (props) => {
 												type={content.type}
 												index={index}
 												courseId={courseId}
+												onContentDeletePress={onContentDeletePress}
 											/>
 										))}
 									{droppableProvided.placeholder}
@@ -202,8 +266,8 @@ const Section: React.FC<Props> = (props) => {
 						</Menu>
 					</Box>
 					<AlertDialog
-						isOpen={isDeleteModalOpen}
-						onClose={onDeleteModalClose}
+						isOpen={isOpen}
+						onClose={onClose}
 						isCentered
 						leastDestructiveRef={cancelRef}>
 						<AlertDialogOverlay>
@@ -219,16 +283,15 @@ const Section: React.FC<Props> = (props) => {
 								</AlertDialogBody>
 								<AlertDialogFooter>
 									<ButtonGroup>
-										<Button
-											ref={cancelRef}
-											onClick={onDeleteModalClose}
-											variant="outline">
+										<Button ref={cancelRef} onClick={onClose} variant="outline">
 											{__('Cancel', 'masteriyo')}
 										</Button>
 										<Button
 											colorScheme="red"
 											onClick={onDeleteConfirm}
-											isLoading={deleteMutation.isLoading}>
+											isLoading={
+												deleteQuiz.isLoading || deleteLesson.isLoading
+											}>
 											{__('Delete', 'masteriyo')}
 										</Button>
 									</ButtonGroup>

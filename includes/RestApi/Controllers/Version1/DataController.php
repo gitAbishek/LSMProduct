@@ -161,14 +161,16 @@ class DataController extends CrudController {
 		foreach ( $countries as $country ) {
 			$states = masteriyo( 'countries' )->get_states( $country );
 
+			if ( empty( $states ) ) {
+				continue;
+			}
+
 			$states_list = array();
-			if ( ! empty( $states ) ) {
-				foreach ( $states as $state_code => $state_name ) {
-					$states_list[] = array(
-						'code' => $state_code,
-						'name' => $state_name,
-					);
-				}
+			foreach ( $states as $state_code => $state_name ) {
+				$states_list[] = array(
+					'code' => $state_code,
+					'name' => $state_name,
+				);
 			}
 
 			$states_arr[] = array(

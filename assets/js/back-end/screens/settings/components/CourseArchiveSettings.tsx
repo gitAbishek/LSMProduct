@@ -109,7 +109,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 									defaultValue={courseArchiveData?.display?.per_page}
 									rules={{ required: 'Course per page is required.' }}
 									render={({ field }) => (
-										<NumberInput {...field} min={0}>
+										<NumberInput {...field} min={1}>
 											<NumberInputField borderRadius="sm" shadow="input" />
 											<NumberInputStepper>
 												<NumberIncrementStepper />
@@ -145,7 +145,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 									defaultValue={courseArchiveData?.display?.per_row}
 									rules={{ required: 'Course per row is required.' }}
 									render={({ field }) => (
-										<NumberInput {...field} min={0}>
+										<NumberInput {...field} min={1} max={6}>
 											<NumberInputField borderRadius="sm" shadow="input" />
 											<NumberInputStepper>
 												<NumberIncrementStepper />

@@ -82,7 +82,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 									defaultValue={quizData?.styling?.questions_display_per_page}
 									rules={{ required: 'Question display per page is required.' }}
 									render={({ field }) => (
-										<NumberInput {...field} min={0}>
+										<NumberInput {...field} min={1}>
 											<NumberInputField borderRadius="sm" shadow="input" />
 											<NumberInputStepper>
 												<NumberIncrementStepper />

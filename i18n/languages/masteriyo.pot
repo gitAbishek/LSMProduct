@@ -254,7 +254,7 @@ msgid "Display"
 msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:103
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:89
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:91
 msgid "Pricing"
 msgstr ""
 
@@ -319,7 +319,7 @@ msgid "Pricing Option"
 msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:280
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:90
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:92
 #: assets/js/back-end/screens/courses/components/CourseList.tsx:96
 msgid "Free"
 msgstr ""
@@ -333,7 +333,7 @@ msgid "\tNeed registration"
 msgstr ""
 
 #: assets/js/back-end/screens/builder/component/CourseSetting.tsx:307
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:91
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:93
 msgid "Paid"
 msgstr ""
 
@@ -616,11 +616,11 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:65
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:67
 msgid "Search courses"
 msgstr ""
 
-#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:69
+#: assets/js/back-end/screens/courses/components/CourseFilter.tsx:71
 msgid "All Categories"
 msgstr ""
 

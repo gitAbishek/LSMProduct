@@ -909,7 +909,7 @@ class QuizesController extends PostsController {
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'course_name'         => array(
+				'course_name'                => array(
 					'description' => __( 'Course name.', 'masteriyo' ),
 					'type'        => 'string',
 					'readonly'    => true,
@@ -1160,10 +1160,16 @@ class QuizesController extends PostsController {
 	 * @return WP_Error|boolean
 	 */
 	public function create_item_permissions_check( $request ) {
-		if ( is_null( $this->permission ) ) {
+		$course_id = absint( $request['course_id'] );
+		$course    = get_post( $course_id );
+
+		if ( is_null( $course ) || 'course' !== $course->post_type ) {
 			return new \WP_Error(
-				'masteriyo_null_permission',
-				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+				"masteriyo_rest_{$this->post_type}_invalid_id",
+				__( 'Invalid ID.', 'masteriyo' ),
+				array(
+					'status' => 404,
+				)
 			);
 		}
 
@@ -1171,125 +1177,16 @@ class QuizesController extends PostsController {
 			return true;
 		}
 
-		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'create' ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_create',
-				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code(),
-				)
-			);
+		$result = parent::create_item_permissions_check( $request );
+
+		if ( is_wp_error( $result ) ) {
+			return $result;
 		}
 
-		$course_id = absint( $request['course_id'] );
-		$course    = masteriyo_get_course( $course_id );
-
-		if ( is_null( $course ) ) {
-			return new \WP_Error(
-				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid course ID.', 'masteriyo' ),
-				array(
-					'status' => 404,
-				)
-			);
-		}
-
-		if ( $course->get_author_id() !== get_current_user_id() ) {
+		if ( get_current_user_id() !== absint( $course->post_author ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create quiz for others course.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code(),
-				)
-			);
-		}
-
-		return true;
-	}
-
-	/**
-	 * Check if a given request has access to delete an item.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return WP_Error|boolean
-	 */
-	public function delete_item_permissions_check( $request ) {
-		if ( is_null( $this->permission ) ) {
-			return new \WP_Error(
-				'masteriyo_null_permission',
-				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
-			);
-		}
-
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
-			return true;
-		}
-
-		$id   = absint( $request['id'] );
-		$quiz = masteriyo_get_quiz( $id );
-
-		if ( is_null( $quiz ) ) {
-			return new \WP_Error(
-				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
-				array(
-					'status' => 404,
-				)
-			);
-		}
-
-		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'delete', $id ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_delete',
-				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code(),
-				)
-			);
-		}
-
-		return true;
-	}
-
-	/**
-	 * Check if a given request has access to update an item.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return WP_Error|boolean
-	 */
-	public function update_item_permissions_check( $request ) {
-		if ( is_null( $this->permission ) ) {
-			return new \WP_Error(
-				'masteriyo_null_permission',
-				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
-			);
-		}
-
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
-			return true;
-		}
-
-		$id   = absint( $request['id'] );
-		$quiz = masteriyo_get_quiz( $id );
-
-		if ( is_null( $quiz ) ) {
-			return new \WP_Error(
-				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
-				array(
-					'status' => 404,
-				)
-			);
-		}
-
-		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'update', $id ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_update',
-				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
 				)

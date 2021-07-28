@@ -26,9 +26,12 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
+import { useQuery } from 'react-query';
 import { infoIconStyles } from '../../../config/styles';
+import urls from '../../../constants/urls';
 import { CountrySchema } from '../../../schemas';
 import { PaymentsSettingsMap } from '../../../types';
+import API from '../../../utils/api';
 import countries from '../../../utils/countries';
 import { hasNumber } from '../../../utils/utils';
 
@@ -38,11 +41,16 @@ interface Props {
 
 const PaymentsSettings: React.FC<Props> = (props) => {
 	const { paymentsData } = props;
+
 	const {
 		register,
 		control,
 		formState: { errors },
 	} = useFormContext();
+	const CountriesAPI = new API(urls.countries);
+	const countriesQuery = useQuery('countries', () => CountriesAPI.list());
+
+	console.log(countriesQuery?.data);
 
 	const showPayPalOptions = useWatch({
 		name: 'payments.paypal.enable',
@@ -80,6 +88,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 		borderRightColor: 'gray.200',
 	};
 
+	const getCountires = () => {};
 	return (
 		<Tabs orientation="vertical">
 			<Stack direction="row" flex="1">

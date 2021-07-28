@@ -20,6 +20,7 @@ const urls = {
 	courseProgress: base + 'course-progress',
 	courseProgressItem: base + 'course-progress/items',
 	qa: base + 'courses/questions-answers',
+	countries: base + 'data/countries',
 };
 
 export default urls;

@@ -31,7 +31,6 @@ import SingleCourseSettings from './components/SingleCourseSettings';
 
 const Settings = () => {
 	const settingsApi = new API(urls.settings);
-	const CountriesAPI = new API(urls.countries);
 	const methods = useForm<SetttingsMap>({
 		reValidateMode: 'onChange',
 		mode: 'onChange',
@@ -53,8 +52,6 @@ const Settings = () => {
 	const settingsQuery = useQuery<SetttingsMap>('settings', () =>
 		settingsApi.list()
 	);
-
-	const countriesQuery = useQuery('countries', () => CountriesAPI.list());
 
 	const updateSettings = useMutation(
 		(data: SetttingsMap) => settingsApi.store(data),
@@ -78,7 +75,7 @@ const Settings = () => {
 		}
 	};
 
-	if (settingsQuery.isSuccess && countriesQuery.isSuccess) {
+	if (settingsQuery.isSuccess) {
 		return (
 			<FormProvider {...methods}>
 				<Stack direction="column" spacing="8" width="full" alignItems="center">
@@ -121,7 +118,6 @@ const Settings = () => {
 										</TabPanel>
 										<TabPanel sx={tabPanelStyles}>
 											<PaymentsSettings
-												countries={countriesQuery.data}
 												paymentsData={settingsQuery.data?.payments}
 											/>
 										</TabPanel>

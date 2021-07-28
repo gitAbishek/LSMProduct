@@ -1,4 +1,8 @@
 import {
+	Alert,
+	AlertDescription,
+	AlertIcon,
+	AlertTitle,
 	Box,
 	Button,
 	ButtonGroup,
@@ -19,13 +23,15 @@ import { useFormContext } from 'react-hook-form';
 import { BiPlus, BiTrash } from 'react-icons/bi';
 import { Sortable } from '../../../../../assets/icons';
 import { sectionHeaderStyles } from '../../../../../config/styles';
+import { duplicateObject } from '../../../../../utils/utils';
 
 interface Props {
 	answersData?: any;
+	setIsQuestionDisabled?: any;
 }
 
 const TrueFalse: React.FC<Props> = (props) => {
-	const { answersData } = props;
+	const { answersData, setIsQuestionDisabled } = props;
 	const { register, setValue } = useFormContext();
 	const [answers, setAnswers] = useState<any>(
 		answersData || [
@@ -45,7 +51,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 		newAnswers.length < 2 &&
 			setAnswers([
 				...newAnswers,
-				{ name: 'new answer' + newAnswers.length, correct: false },
+				{ name: 'new answer ' + (answers.length + 1), correct: false },
 			]);
 	};
 
@@ -75,7 +81,8 @@ const TrueFalse: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		setValue('answers', answers);
-	}, [answers, setValue]);
+		setIsQuestionDisabled(duplicateObject('name', answers));
+	}, [answers, setValue, setIsQuestionDisabled]);
 
 	return (
 		<Stack direction="column" spacing="6">
@@ -86,6 +93,15 @@ const TrueFalse: React.FC<Props> = (props) => {
 			</Flex>
 			<Input type="hidden" {...register('answers')} />
 			<Box>
+				{duplicateObject('name', answers) && (
+					<Alert status="error" mb="4" fontSize="xs" p="2">
+						<AlertIcon />
+						<AlertTitle mr={2}>{__('Duplicate Names', 'masteriyo')}</AlertTitle>
+						<AlertDescription>
+							{__('Answer can not be duplicate', 'masteriyo')}
+						</AlertDescription>
+					</Alert>
+				)}
 				{answers &&
 					answers.map(
 						(answer: { name: string; correct: boolean }, index: number) => (

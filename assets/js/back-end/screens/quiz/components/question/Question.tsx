@@ -48,6 +48,7 @@ const Question: React.FC<Props> = (props) => {
 	const toast = useToast();
 	const methods = useForm();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const [isQuestionDisabled, setIsQuestionDisabled] = useState(false);
 	const [answerData, setAnswerData] = useState<any>(
 		questionData?.answers || null
 	);
@@ -175,12 +176,17 @@ const Question: React.FC<Props> = (props) => {
 									setQuestionType={setQuestionType}
 									setAnswerData={setAnswerData}
 								/>
-								<Answers answers={answerData} questionType={questionType} />
+								<Answers
+									answers={answerData}
+									questionType={questionType}
+									setIsQuestionDisabled={setIsQuestionDisabled}
+								/>
 								<Divider />
 								<ButtonGroup>
 									<Button
 										colorScheme="blue"
 										type="submit"
+										isDisabled={isQuestionDisabled}
 										isLoading={updateQuestion.isLoading}>
 										{__('Update', 'masteriyo')}
 									</Button>

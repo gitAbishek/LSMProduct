@@ -67,11 +67,13 @@ const Payment: React.FC<Props> = (props) => {
 									w="md"
 									{...register('payments.currency.currency')}
 									defaultValue="USD">
-									{Object.keys(currenciesQuery.data).map((code: string) => (
-										<option value={code} key={code}>
-											{currenciesQuery.data[code]}
-										</option>
-									))}
+									{currenciesQuery.data.map(
+										(currency: { code: string; name: string }) => (
+											<option value={currency.code} key={currency.code}>
+												{currency.name}
+											</option>
+										)
+									)}
 								</Select>
 							)}
 						</Flex>

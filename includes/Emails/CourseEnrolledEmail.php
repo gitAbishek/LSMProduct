@@ -144,15 +144,18 @@ class CourseEnrolledEmail extends Email {
 			return $this->format_string( $content );
 		}
 
-		$object = $this->get_object();
+		$object       = $this->get_object();
+		$user_courses = masteriyo_get_enrolled_and_all_courses( $object->user->get_id() );
 
 		return masteriyo_get_template_html(
 			$this->html_template,
 			array(
-				'email_heading' => $this->get_heading(),
-				'course'        => $object->course,
-				'user'          => $object->user,
-				'email'         => $this,
+				'email_heading'    => $this->get_heading(),
+				'course'           => $object->course,
+				'user'             => $object->user,
+				'email'            => $this,
+				'enrolled_courses' => $user_courses[ 'enrolled_courses' ],
+				'all_courses'      => $user_courses[ 'all_courses' ],
 			)
 		);
 	}

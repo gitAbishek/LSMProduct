@@ -7,19 +7,16 @@ interface Props {
 	setAnswers: any;
 	answers: any;
 	index: number;
-	setIsQuestionDisabled: any;
 }
 
 const EditableAnswer: React.FC<Props> = (props) => {
-	const { defaultValue, setAnswers, answers, index, setIsQuestionDisabled } =
-		props;
+	const { defaultValue, setAnswers, answers, index } = props;
 	const [editableValue, setEditableValue] = useState(defaultValue);
 
 	const onSubmit = (index: number, value: string) => {
 		var newAnswers = [...answers];
 
 		if (duplicateObject('name', newAnswers)) {
-			setIsQuestionDisabled(true);
 		}
 
 		if (isEmpty(value)) {

@@ -8,40 +8,19 @@ import TrueFalse from './types/TrueFalse';
 interface Props {
 	answers?: any;
 	questionType: string;
-	setIsQuestionDisabled?: any;
 }
 
 const Answers: React.FC<Props> = (props) => {
-	const { answers, questionType, setIsQuestionDisabled } = props;
+	const { answers, questionType } = props;
 
 	if (questionType === 'true-false') {
-		return (
-			<TrueFalse
-				answersData={answers}
-				setIsQuestionDisabled={setIsQuestionDisabled}
-			/>
-		);
+		return <TrueFalse answersData={answers} />;
 	} else if (questionType === 'single-choice') {
-		return (
-			<SingleChoice
-				answersData={answers}
-				// setIsQuestionDisabled={setIsQuestionDisabled}
-			/>
-		);
+		return <SingleChoice answersData={answers} />;
 	} else if (questionType === 'multiple-choice') {
-		return (
-			<MultipleChoice
-				answersData={answers}
-				// setIsQuestionDisabled={setIsQuestionDisabled}
-			/>
-		);
+		return <MultipleChoice answersData={answers} />;
 	} else if (questionType === 'short-answer') {
-		return (
-			<ShortAnswer
-				answersData={answers}
-				// setIsQuestionDisabled={setIsQuestionDisabled}
-			/>
-		);
+		return <ShortAnswer answersData={answers} />;
 	}
 	return (
 		<>

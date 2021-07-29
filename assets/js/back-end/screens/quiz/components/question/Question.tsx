@@ -20,13 +20,15 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiCopy, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
-import QuestionProvider from '../../../../context/QuestionProvider';
+import QuestionProvider, {
+	QuestionContext,
+} from '../../../../context/QuestionProvider';
 import { QuestionSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
 import { deepClean, deepMerge } from '../../../../utils/utils';
@@ -48,8 +50,8 @@ const Question: React.FC<Props> = (props) => {
 	const { questionData } = props;
 	const toast = useToast();
 	const methods = useForm();
+	const { submitQuestionDisabled } = useContext(QuestionContext);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-	const [isQuestionDisabled, setIsQuestionDisabled] = useState(false);
 	const [answerData, setAnswerData] = useState<any>(
 		questionData?.answers || null
 	);
@@ -177,17 +179,13 @@ const Question: React.FC<Props> = (props) => {
 									setQuestionType={setQuestionType}
 									setAnswerData={setAnswerData}
 								/>
-								<Answers
-									answers={answerData}
-									questionType={questionType}
-									setIsQuestionDisabled={setIsQuestionDisabled}
-								/>
+								<Answers answers={answerData} questionType={questionType} />
 								<Divider />
 								<ButtonGroup>
 									<Button
 										colorScheme="blue"
 										type="submit"
-										isDisabled={isQuestionDisabled}
+										isDisabled={submitQuestionDisabled}
 										isLoading={updateQuestion.isLoading}>
 										{__('Update', 'masteriyo')}
 									</Button>

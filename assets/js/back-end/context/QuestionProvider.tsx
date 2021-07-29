@@ -1,18 +1,18 @@
 import React, { createContext, useMemo, useState } from 'react';
 
 export const QuestionContext = createContext<{
-	submitQuestion: boolean;
-	setSubmitQuestion?: any;
-}>({ submitQuestion: false });
+	submitQuestionDisabled: boolean;
+	setSubmitQuestionDisabled?: any;
+}>({ submitQuestionDisabled: false });
 
 const QuestionProvider: React.FC = ({ children }) => {
-	const [submitQuestion, setSubmitQuestion] = useState(false);
+	const [submitQuestionDisabled, setSubmitQuestionDisabled] = useState(false);
 	const providerValue = useMemo(
 		() => ({
-			submitQuestion: submitQuestion,
-			setSubmitQuestion: setSubmitQuestion,
+			submitQuestionDisabled: submitQuestionDisabled,
+			setSubmitQuestionDisabled: setSubmitQuestionDisabled,
 		}),
-		[submitQuestion, setSubmitQuestion]
+		[submitQuestionDisabled, setSubmitQuestionDisabled]
 	);
 
 	return (

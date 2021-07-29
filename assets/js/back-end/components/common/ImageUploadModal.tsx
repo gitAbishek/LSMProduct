@@ -133,7 +133,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 									transition="ease-in-out"
 									textAlign="center"
 									position="relative"
-									h="200px"
+									h="180px"
 									{...getRootProps()}>
 									<input {...getInputProps()} multiple={false} />
 

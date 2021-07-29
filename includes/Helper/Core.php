@@ -2911,3 +2911,18 @@ function masteriyo_set_setting( $name, $value ) {
 	$setting->set( $name, $value );
 	$setting->save();
 }
+
+/**
+ * Get page ID using page slug.
+ *
+ * @param string $page_slug
+ * @return ID
+ */
+function masteriyo_get_page_id_by_slug( $page_slug ) {
+	$page = get_page_by_path( $page_slug );
+	if ( $page ) {
+		return $page->ID;
+	} else {
+		return -1;
+	}
+}

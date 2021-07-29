@@ -14,14 +14,16 @@ import {
 	NumberInputField,
 	NumberInputStepper,
 	Select,
+	Skeleton,
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
-import { CountrySchema } from '../../../back-end/schemas';
+import { useQuery } from 'react-query';
+import urls from '../../../back-end/constants/urls';
 import { SetttingsMap } from '../../../back-end/types';
-import countries from '../../../back-end/utils/countries';
+import API from '../../../back-end/utils/api';
 import { hasNumber } from '../../../back-end/utils/helper';
 interface Props {
 	isButtonLoading: boolean;
@@ -46,6 +48,8 @@ const Payment: React.FC<Props> = (props) => {
 			number_of_decimals: 2,
 		},
 	});
+	const currenciesAPI = new API(urls.currencies);
+	const currenciesQuery = useQuery('currencies', () => currenciesAPI.list());
 
 	return (
 		<Box rounded="3px">
@@ -56,16 +60,26 @@ const Payment: React.FC<Props> = (props) => {
 							<FormLabel sx={{ fontWeight: 'bold' }}>
 								{__('Currency', 'masteriyo')}
 							</FormLabel>
-							<Select
-								w="md"
-								{...register('payments.currency.currency')}
-								defaultValue="USD">
-								{countries.map((country: CountrySchema) => (
-									<option value={country.countryCode} key={country.countryCode}>
-										{country.countryName} ({country.currencyCode})
-									</option>
-								))}
-							</Select>
+							{currenciesQuery.isLoading ? (
+								<Skeleton h="6" w="md" />
+							) : (
+								<Select
+									w="md"
+									{...register('payments.currency.currency')}
+									defaultValue="USD">
+									{currenciesQuery.data.map(
+										(currency: {
+											code: string;
+											name: string;
+											symbol: string;
+										}) => (
+											<option value={currency.code} key={currency.code}>
+												{currency.name} ({currency.symbol})
+											</option>
+										)
+									)}
+								</Select>
+							)}
 						</Flex>
 					</FormControl>
 

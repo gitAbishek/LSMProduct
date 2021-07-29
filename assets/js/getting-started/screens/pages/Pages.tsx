@@ -50,7 +50,6 @@ const Pages: React.FC<Props> = (props) => {
 				</>
 			);
 		} catch (error) {
-			console.error(error);
 			return;
 		}
 	};

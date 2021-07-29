@@ -4,6 +4,7 @@ import {
 	ButtonGroup,
 	Flex,
 	FormControl,
+	FormErrorMessage,
 	FormLabel,
 	InputGroup,
 	Link,
@@ -25,27 +26,39 @@ interface Props {
 
 const Quiz: React.FC<Props> = (props) => {
 	const { dashboardURL, prevStep, nextStep } = props;
-	const { register } = useFormContext();
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext();
 	return (
 		<Box rounded="3px">
 			<Box bg="white" p="30" shadow="box">
 				<Stack direction="column" spacing="8">
-					<FormControl>
+					<FormControl
+						isInvalid={!!errors?.quiz?.styling?.questions_display_per_page}>
 						<Flex justify="space-between" align="center">
 							<FormLabel sx={{ fontWeight: 'bold' }}>
 								{__('Questions Display Per Page', 'masteriyo')}
 							</FormLabel>
-							<InputGroup w="md" size="md">
-								<NumberInput w="md" defaultValue={5}>
-									<NumberInputField
-										{...register('quiz.styling.questions_display_per_page')}
-									/>
-									<NumberInputStepper>
-										<NumberIncrementStepper />
-										<NumberDecrementStepper />
-									</NumberInputStepper>
-								</NumberInput>
-							</InputGroup>
+							<Stack direction="column">
+								<InputGroup w="md" size="md">
+									<NumberInput w="md" defaultValue={5} min={1}>
+										<NumberInputField
+											{...register('quiz.styling.questions_display_per_page', {
+												required: 'Question display per page is required.',
+											})}
+										/>
+										<NumberInputStepper>
+											<NumberIncrementStepper />
+											<NumberDecrementStepper />
+										</NumberInputStepper>
+									</NumberInput>
+								</InputGroup>
+								<FormErrorMessage>
+									{errors?.quiz?.styling?.questions_display_per_page &&
+										errors?.quiz?.styling?.questions_display_per_page.message}
+								</FormErrorMessage>
+							</Stack>
 						</Flex>
 					</FormControl>
 
@@ -64,7 +77,7 @@ const Quiz: React.FC<Props> = (props) => {
 								</Button>
 							</Link>
 							<Button onClick={nextStep} rounded="3px" colorScheme="blue">
-								{__('Continue', 'masteriyo')}
+								{__('Next', 'masteriyo')}
 							</Button>
 						</ButtonGroup>
 					</Flex>

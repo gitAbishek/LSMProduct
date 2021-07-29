@@ -1784,7 +1784,7 @@ msgid "MASTERIYO LMS. Designed by ThemeGrill"
 msgstr ""
 
 #: assets/js/getting-started/screens/course/Course.tsx:72
-#: assets/js/getting-started/screens/pages/Pages.tsx:126
+#: assets/js/getting-started/screens/pages/Pages.tsx:137
 #: assets/js/getting-started/screens/payment/Payment.tsx:186
 #: assets/js/getting-started/screens/quiz/Quiz.tsx:58
 #: assets/js/interactive/components/qa/QaChat.tsx:81
@@ -1792,7 +1792,7 @@ msgid "Back"
 msgstr ""
 
 #: assets/js/getting-started/screens/course/Course.tsx:77
-#: assets/js/getting-started/screens/pages/Pages.tsx:131
+#: assets/js/getting-started/screens/pages/Pages.tsx:142
 #: assets/js/getting-started/screens/payment/Payment.tsx:191
 #: assets/js/getting-started/screens/quiz/Quiz.tsx:63
 #: assets/js/getting-started/screens/welcome/Welcome.tsx:52
@@ -1800,8 +1800,9 @@ msgid "Skip to Dashboard"
 msgstr ""
 
 #: assets/js/getting-started/screens/course/Course.tsx:81
+#: assets/js/getting-started/screens/pages/Pages.tsx:146
 #: assets/js/getting-started/screens/quiz/Quiz.tsx:67
-msgid "Continue"
+msgid "Next"
 msgstr ""
 
 #: assets/js/getting-started/screens/finish/Finish.tsx:35
@@ -1831,24 +1832,20 @@ msgstr ""
 msgid "Create a new course"
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:107
+#: assets/js/getting-started/screens/pages/Pages.tsx:100
+msgid "My Account"
+msgstr ""
+
+#: assets/js/getting-started/screens/pages/Pages.tsx:117
 msgid "Checkout"
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:135
-msgid "Next"
-msgstr ""
-
-#: assets/js/getting-started/screens/pages/Pages.tsx:42
+#: assets/js/getting-started/screens/pages/Pages.tsx:51
 msgid "Select a page..."
 msgstr ""
 
-#: assets/js/getting-started/screens/pages/Pages.tsx:75
+#: assets/js/getting-started/screens/pages/Pages.tsx:83
 msgid "Course List"
-msgstr ""
-
-#: assets/js/getting-started/screens/pages/Pages.tsx:91
-msgid "My Account"
 msgstr ""
 
 #: assets/js/getting-started/screens/payment/Payment.tsx:150

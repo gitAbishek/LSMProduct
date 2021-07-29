@@ -68,9 +68,13 @@ const Payment: React.FC<Props> = (props) => {
 									{...register('payments.currency.currency')}
 									defaultValue="USD">
 									{currenciesQuery.data.map(
-										(currency: { code: string; name: string }) => (
+										(currency: {
+											code: string;
+											name: string;
+											symbol: string;
+										}) => (
 											<option value={currency.code} key={currency.code}>
-												{currency.name}
+												{currency.name} ({currency.symbol})
 											</option>
 										)
 									)}

@@ -158,8 +158,8 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 												return (
 													<Box
 														key={image.id}
-														w="140px"
-														h="140px"
+														w="100px"
+														h="100px"
 														position="relative">
 														<Image
 															border="3px solid"

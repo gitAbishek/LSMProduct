@@ -279,7 +279,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 			$search_criteria[] = $wpdb->prepare( 'user_id = %d', $query_vars['user_id'] );
 		}
 
-		if ( ! empty( $query_vars['course_id'] ) ) {
+		if ( ! in_array( $query_vars['course_id'], array( '', 0 ), true ) ) {
 			$search_criteria[] = $wpdb->prepare( 'item_id = %d', $query_vars['course_id'] );
 		}
 

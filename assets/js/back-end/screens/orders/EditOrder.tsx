@@ -77,6 +77,14 @@ const paymentMethods = [
 	},
 ];
 
+interface StateInterface {
+	country: string;
+	states: {
+		code: string;
+		name: string;
+	}[];
+}
+
 const EditOrder = () => {
 	const { orderId }: any = useParams();
 	const history = useHistory();
@@ -142,17 +150,13 @@ const EditOrder = () => {
 		'billing.country',
 		orderQuery.data?.billing.country
 	);
-	let currentCountryStates: { code: string; label: string }[] = [];
+	let currentCountryStates: { code: string; name: string }[] = [];
 
 	if (statesQuery.isSuccess) {
-		const states = statesQuery.data[selectedCountry];
-
-		if (!Array.isArray(states) && typeof states === 'object') {
-			currentCountryStates = Object.keys(states).map((code: string) => ({
-				code,
-				label: states[code],
-			}));
-		}
+		const states = statesQuery.data.find(
+			(item: StateInterface) => item.country === selectedCountry
+		)?.states;
+		currentCountryStates = Array.isArray(states) ? states : [];
 	}
 
 	const updateOrder = useMutation(
@@ -370,10 +374,10 @@ const EditOrder = () => {
 														{...register('billing.country')}
 														placeholder={__('Select a country', 'masteriyo')}
 														defaultValue={orderQuery.data?.billing.country}>
-														{Object.keys(countriesQuery.data).map(
-															(countryCode: string) => (
-																<option value={countryCode} key={countryCode}>
-																	{countriesQuery.data[countryCode]}
+														{countriesQuery.data.map(
+															(country: { code: string; name: string }) => (
+																<option value={country.code} key={country.code}>
+																	{country.name}
 																</option>
 															)
 														)}
@@ -399,7 +403,7 @@ const EditOrder = () => {
 														defaultValue={orderQuery.data?.billing.state}>
 														{currentCountryStates.map((state) => (
 															<option value={state.code} key={state.code}>
-																{state.label}
+																{state.name}
 															</option>
 														))}
 													</Select>

@@ -59,7 +59,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 		formState: { errors },
 	} = useFormContext();
 
-	const watchSelectedCurrency = useWatch({
+	const watchSelectedCountry = useWatch({
 		name: 'payments.store.country',
 		defaultValue: paymentsData?.store.country,
 		control,
@@ -107,7 +107,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 		statesQuery?.isSuccess
 	) {
 		const matchCountriesData = statesQuery?.data.filter(
-			(statesData: StatesSchema) => statesData.country === watchSelectedCurrency
+			(statesData: StatesSchema) => statesData.country === watchSelectedCountry
 		);
 
 		return (

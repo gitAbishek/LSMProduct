@@ -2,14 +2,12 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Center,
 	Flex,
 	FormControl,
 	FormLabel,
 	Link,
 	Select,
 	Skeleton,
-	Spinner,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
@@ -56,101 +54,92 @@ const Pages: React.FC<Props> = (props) => {
 		}
 	};
 
-	console.log(settingsQuery?.data?.advance?.pages);
-	if (pagesQuery.isSuccess && settingsQuery.isSuccess) {
-		return (
-			<Box rounded="3px">
-				<Box bg="white" p="30" shadow="box">
-					<Stack direction="column" spacing="8">
-						{pagesQuery.isLoading || settingsQuery.isLoading ? (
-							<>
-								<Stack spacing="8">
-									<Skeleton h="6" />
-									<Skeleton h="6" />
-									<Skeleton h="6" />
-								</Stack>
-							</>
-						) : (
-							<>
-								<FormControl>
-									<Flex justify="space-between" align="center">
-										<FormLabel sx={{ fontWeight: 'bold' }}>
-											{__('Course List', 'masteriyo')}
-										</FormLabel>
-										<Select
-											defaultValue={
-												settingsQuery.data.advance.pages.course_list_page_id
-											}
-											w="md"
-											{...register('advance.pages.course_list_page_id')}>
-											{renderPagesOption()}
-										</Select>
-									</Flex>
-								</FormControl>
-
-								<FormControl>
-									<Flex justify="space-between" align="center">
-										<FormLabel sx={{ fontWeight: 'bold' }}>
-											<Text fontSize="sm">{__('My Account', 'masteriyo')}</Text>
-										</FormLabel>
-										<Select
-											defaultValue={
-												settingsQuery.data.advance.pages.myaccount_page_id
-											}
-											w="md"
-											{...register('advance.pages.myaccount_page_id')}>
-											{renderPagesOption()}
-										</Select>
-									</Flex>
-								</FormControl>
-
-								<FormControl>
-									<Flex justify="space-between" align="center">
-										<FormLabel sx={{ fontWeight: 'bold' }}>
-											{__('Checkout', 'masteriyo')}
-										</FormLabel>
-										<Select
-											defaultValue={
-												settingsQuery.data.advance.pages.checkout_page_id
-											}
-											w="md"
-											{...register('advance.pages.checkout_page_id')}>
-											{renderPagesOption()}
-										</Select>
-									</Flex>
-								</FormControl>
-
-								<Flex justify="space-between" align="center">
-									<Button
-										onClick={prevStep}
-										rounded="3px"
-										colorScheme="blue"
-										variant="outline">
-										{__('Back', 'masteriyo')}
-									</Button>
-									<ButtonGroup>
-										<Link href={dashboardURL ? dashboardURL : '#'}>
-											<Button variant="ghost">
-												{__('Skip to Dashboard', 'masteriyo')}
-											</Button>
-										</Link>
-										<Button onClick={nextStep} rounded="3px" colorScheme="blue">
-											{__('Next', 'masteriyo')}
-										</Button>
-									</ButtonGroup>
-								</Flex>
-							</>
-						)}
-					</Stack>
-				</Box>
-			</Box>
-		);
-	}
-
 	return (
-		<Center h="300" w="full">
-			<Spinner />
-		</Center>
+		<Box rounded="3px">
+			<Box bg="white" p="30" shadow="box">
+				<Stack direction="column" spacing="8">
+					{pagesQuery.isLoading || settingsQuery.isLoading ? (
+						<>
+							<Stack spacing="8">
+								<Skeleton h="6" />
+								<Skeleton h="6" />
+								<Skeleton h="6" />
+							</Stack>
+						</>
+					) : (
+						<>
+							<FormControl>
+								<Flex justify="space-between" align="center">
+									<FormLabel sx={{ fontWeight: 'bold' }}>
+										{__('Course List', 'masteriyo')}
+									</FormLabel>
+									<Select
+										defaultValue={
+											settingsQuery?.data?.advance?.pages?.course_list_page_id
+										}
+										w="md"
+										{...register('advance.pages.course_list_page_id')}>
+										{renderPagesOption()}
+									</Select>
+								</Flex>
+							</FormControl>
+
+							<FormControl>
+								<Flex justify="space-between" align="center">
+									<FormLabel sx={{ fontWeight: 'bold' }}>
+										<Text fontSize="sm">{__('My Account', 'masteriyo')}</Text>
+									</FormLabel>
+									<Select
+										defaultValue={
+											settingsQuery?.data?.advance?.pages?.myaccount_page_id
+										}
+										w="md"
+										{...register('advance.pages.myaccount_page_id')}>
+										{renderPagesOption()}
+									</Select>
+								</Flex>
+							</FormControl>
+
+							<FormControl>
+								<Flex justify="space-between" align="center">
+									<FormLabel sx={{ fontWeight: 'bold' }}>
+										{__('Checkout', 'masteriyo')}
+									</FormLabel>
+									<Select
+										defaultValue={
+											settingsQuery?.data?.advance?.pages?.checkout_page_id
+										}
+										w="md"
+										{...register('advance.pages.checkout_page_id')}>
+										{renderPagesOption()}
+									</Select>
+								</Flex>
+							</FormControl>
+
+							<Flex justify="space-between" align="center">
+								<Button
+									onClick={prevStep}
+									rounded="3px"
+									colorScheme="blue"
+									variant="outline">
+									{__('Back', 'masteriyo')}
+								</Button>
+								<ButtonGroup>
+									<Link href={dashboardURL ? dashboardURL : '#'}>
+										<Button variant="ghost">
+											{__('Skip to Dashboard', 'masteriyo')}
+										</Button>
+									</Link>
+									<Button onClick={nextStep} rounded="3px" colorScheme="blue">
+										{__('Next', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
+							</Flex>
+						</>
+					)}
+				</Stack>
+			</Box>
+		</Box>
 	);
 };
 

@@ -39,6 +39,12 @@ interface Props {
 	onDeletePress: any;
 }
 
+//@ts-ignore
+const currencySymbol = window._MASTERIYO_.currency.symbol;
+
+//@ts-ignore
+const currencyPosition = window._MASTERIYO_.currency.position;
+
 const CourseList: React.FC<Props> = (props) => {
 	const {
 		id,
@@ -96,7 +102,9 @@ const CourseList: React.FC<Props> = (props) => {
 					<Badge textTransform="none">{__('Free', 'masteriyo')}</Badge>
 				) : (
 					<Text fontWeight="medium" fontSize="xs">
-						{price}
+						{'left' === currencyPosition
+							? `${currencySymbol}${price}`
+							: `${price}${currencySymbol}`}
 					</Text>
 				)}
 			</Td>

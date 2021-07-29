@@ -4,6 +4,7 @@ import {
 	Collapse,
 	FormControl,
 	FormErrorMessage,
+	FormHelperText,
 	FormLabel,
 	InputGroup,
 	InputRightAddon,
@@ -91,6 +92,12 @@ const CourseSetting: React.FC<Props> = (props) => {
 		borderRight: '2px solid',
 		borderRightColor: 'gray.200',
 	};
+
+	//@ts-ignore
+	const currencyCode = window._MASTERIYO_.currency.code;
+
+	//@ts-ignore
+	const currencySymbol = window._MASTERIYO_.currency.symbol;
 
 	return (
 		<Box bg="white" p="10" shadow="box">
@@ -317,6 +324,9 @@ const CourseSetting: React.FC<Props> = (props) => {
 																</NumberInput>
 															)}
 														/>
+														<FormHelperText>
+															{currencyCode} ({currencySymbol})
+														</FormHelperText>
 													</FormControl>
 												</Collapse>
 											</Stack>

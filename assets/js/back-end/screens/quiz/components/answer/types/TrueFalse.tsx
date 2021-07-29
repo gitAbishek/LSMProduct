@@ -23,7 +23,7 @@ import { useFormContext } from 'react-hook-form';
 import { BiPlus, BiTrash } from 'react-icons/bi';
 import { Sortable } from '../../../../../assets/icons';
 import { sectionHeaderStyles } from '../../../../../config/styles';
-import { duplicateObject } from '../../../../../utils/utils';
+import { duplicateObject, isEmpty } from '../../../../../utils/utils';
 
 interface Props {
 	answersData?: any;
@@ -73,15 +73,18 @@ const TrueFalse: React.FC<Props> = (props) => {
 		setAnswers(newAnswers);
 	};
 
-	const onUpdate = (id: any, name: string) => {
+	const onUpdate = (id: any, value: string, olderValue: string) => {
 		var newAnswers = [...answers];
-		newAnswers.splice(id, 1, { ...newAnswers[id], name: name });
+		let modifiedValue = isEmpty(value) ? olderValue : value;
+		newAnswers.splice(id, 1, { ...newAnswers[id], name: modifiedValue });
+		if (duplicateObject('name', newAnswers)) {
+			setIsQuestionDisabled(true);
+		}
 		setAnswers(newAnswers);
 	};
 
 	useEffect(() => {
 		setValue('answers', answers);
-		setIsQuestionDisabled(duplicateObject('name', answers));
 	}, [answers, setValue, setIsQuestionDisabled]);
 
 	return (
@@ -119,11 +122,12 @@ const TrueFalse: React.FC<Props> = (props) => {
 									<Icon as={Sortable} fontSize="lg" color="gray.500" />
 									<Editable
 										defaultValue={answer?.name}
-										onSubmit={(value) => onUpdate(index, value)}>
+										onSubmit={(value) => onUpdate(index, value, answer.name)}>
 										<EditablePreview minW="sm" />
 										<EditableInput />
 									</Editable>
 								</Stack>
+
 								<Stack direction="row" spacing="4">
 									<Radio
 										colorScheme="green"

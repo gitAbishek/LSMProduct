@@ -22,11 +22,26 @@ const Answers: React.FC<Props> = (props) => {
 			/>
 		);
 	} else if (questionType === 'single-choice') {
-		return <SingleChoice answersData={answers} />;
+		return (
+			<SingleChoice
+				answersData={answers}
+				// setIsQuestionDisabled={setIsQuestionDisabled}
+			/>
+		);
 	} else if (questionType === 'multiple-choice') {
-		return <MultipleChoice answersData={answers} />;
+		return (
+			<MultipleChoice
+				answersData={answers}
+				// setIsQuestionDisabled={setIsQuestionDisabled}
+			/>
+		);
 	} else if (questionType === 'short-answer') {
-		return <ShortAnswer answersData={answers} />;
+		return (
+			<ShortAnswer
+				answersData={answers}
+				// setIsQuestionDisabled={setIsQuestionDisabled}
+			/>
+		);
 	}
 	return (
 		<>

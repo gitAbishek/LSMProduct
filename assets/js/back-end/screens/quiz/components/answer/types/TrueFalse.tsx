@@ -73,7 +73,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 		setAnswers(newAnswers);
 	};
 
-	const onNameChange = (id: any, name: string) => {
+	const onUpdate = (id: any, name: string) => {
 		var newAnswers = [...answers];
 		newAnswers.splice(id, 1, { ...newAnswers[id], name: name });
 		setAnswers(newAnswers);
@@ -117,11 +117,11 @@ const TrueFalse: React.FC<Props> = (props) => {
 								py="1">
 								<Stack direction="row" spacing="2" align="center" flex="1">
 									<Icon as={Sortable} fontSize="lg" color="gray.500" />
-									<Editable value={answer?.name}>
+									<Editable
+										defaultValue={answer?.name}
+										onSubmit={(value) => onUpdate(index, value)}>
 										<EditablePreview minW="sm" />
-										<EditableInput
-											onChange={(e) => onNameChange(index, e.target.value)}
-										/>
+										<EditableInput />
 									</Editable>
 								</Stack>
 								<Stack direction="row" spacing="4">

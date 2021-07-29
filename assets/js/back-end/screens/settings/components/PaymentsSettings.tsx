@@ -148,68 +148,6 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									</FormControl>
 									<FormControl>
 										<FormLabel>
-											{__('City', 'masteriyo')}
-											<Tooltip
-												label={__(
-													'Your city where you are residing',
-													'masteriyo'
-												)}
-												hasArrow
-												fontSize="xs">
-												<Box as="span" sx={infoIconStyles}>
-													<Icon as={BiInfoCircle} />
-												</Box>
-											</Tooltip>
-										</FormLabel>
-
-										<Input
-											type="text"
-											{...register('payments.store.city')}
-											defaultValue={paymentsData?.store?.city}
-										/>
-									</FormControl>
-								</Stack>
-								<Stack direction="row" spacing="8">
-									<FormControl>
-										<FormLabel>
-											{__('Adress Line 1', 'masteriyo')}
-											<Tooltip
-												label={__('Your street address')}
-												hasArrow
-												fontSize="xs">
-												<Box as="span" sx={infoIconStyles}>
-													<Icon as={BiInfoCircle} />
-												</Box>
-											</Tooltip>
-										</FormLabel>
-										<Input
-											type="text"
-											{...register('payments.store.address_line1')}
-											defaultValue={paymentsData?.store?.address_line1}
-										/>
-									</FormControl>
-									<FormControl>
-										<FormLabel>
-											{__('Adress Line 2', 'masteriyo')}
-											<Tooltip
-												label={__('Your street address 2')}
-												hasArrow
-												fontSize="xs">
-												<Box as="span" sx={infoIconStyles}>
-													<Icon as={BiInfoCircle} />
-												</Box>
-											</Tooltip>
-										</FormLabel>
-										<Input
-											type="text"
-											{...register('payments.store.address_line2')}
-											defaultValue={paymentsData?.store?.address_line2}
-										/>
-									</FormControl>
-								</Stack>
-								<Stack direction="row" spacing="8">
-									<FormControl>
-										<FormLabel>
 											{__('State', 'masteriyo')}
 											<Tooltip
 												label={__(
@@ -241,6 +179,66 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</Select>
 									</FormControl>
 								</Stack>
+								<Stack direction="row" spacing="8">
+									<FormControl>
+										<FormLabel>
+											{__('City', 'masteriyo')}
+											<Tooltip
+												label={__(
+													'Your city where you are residing',
+													'masteriyo'
+												)}
+												hasArrow
+												fontSize="xs">
+												<Box as="span" sx={infoIconStyles}>
+													<Icon as={BiInfoCircle} />
+												</Box>
+											</Tooltip>
+										</FormLabel>
+
+										<Input
+											type="text"
+											{...register('payments.store.city')}
+											defaultValue={paymentsData?.store?.city}
+										/>
+									</FormControl>
+									<FormControl>
+										<FormLabel>
+											{__('Adress Line 1', 'masteriyo')}
+											<Tooltip
+												label={__('Your street address')}
+												hasArrow
+												fontSize="xs">
+												<Box as="span" sx={infoIconStyles}>
+													<Icon as={BiInfoCircle} />
+												</Box>
+											</Tooltip>
+										</FormLabel>
+										<Input
+											type="text"
+											{...register('payments.store.address_line1')}
+											defaultValue={paymentsData?.store?.address_line1}
+										/>
+									</FormControl>
+								</Stack>
+								<FormControl>
+									<FormLabel>
+										{__('Adress Line 2', 'masteriyo')}
+										<Tooltip
+											label={__('Your street address 2')}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Input
+										type="text"
+										{...register('payments.store.address_line2')}
+										defaultValue={paymentsData?.store?.address_line2}
+									/>
+								</FormControl>
 							</Stack>
 						</TabPanel>
 						<TabPanel>

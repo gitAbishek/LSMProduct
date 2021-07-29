@@ -152,6 +152,7 @@ const copyToBuild = [
 	() => src(fileList.templates.src).pipe(dest(fileList.templates.dest)),
 	() => src(fileList.i18n.src).pipe(dest(fileList.i18n.dest)),
 	() => src(fileList.bootstrap.src).pipe(dest(fileList.bootstrap.dest)),
+	() => src(fileList.config.src).pipe(dest(fileList.config.dest)),
 	() => src(fileList.composer.src).pipe(dest(fileList.composer.dest)),
 	() => src(fileList.other.src).pipe(dest(fileList.other.dest)),
 ];

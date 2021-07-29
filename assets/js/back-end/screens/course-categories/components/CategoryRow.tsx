@@ -1,10 +1,4 @@
 import {
-	AlertDialog,
-	AlertDialogBody,
-	AlertDialogContent,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogOverlay,
 	Button,
 	ButtonGroup,
 	IconButton,
@@ -15,16 +9,12 @@ import {
 	MenuList,
 	Td,
 	Tr,
-	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { BiDotsVerticalRounded, BiEdit, BiShow, BiTrash } from 'react-icons/bi';
-import { useMutation, useQueryClient } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
 import routes from '../../../constants/routes';
-import urls from '../../../constants/urls';
-import API from '../../../utils/api';
 
 interface Props {
 	id: number;
@@ -33,46 +23,11 @@ interface Props {
 	slug: string;
 	count: Number;
 	link: string;
+	onDeletePress: any;
 }
 
 const CategoryRow: React.FC<Props> = (props) => {
-	const { id, name, description, slug, count, link } = props;
-	const queryClient = useQueryClient();
-	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-	const toast = useToast();
-	const categoryAPI = new API(urls.categories);
-	const cancelRef = useRef<any>();
-
-	const deleteCategory = useMutation(
-		(id: number) => categoryAPI.delete(id, { force: true }),
-		{
-			onSuccess: () => {
-				setDeleteModalOpen(false);
-				queryClient.invalidateQueries('courseCategoriesList');
-			},
-			onError: (error: any) => {
-				setDeleteModalOpen(false);
-				toast({
-					title: __('Failed to delete category', 'masteriyo'),
-					description: `${error.response?.data?.message}`,
-					isClosable: true,
-					status: 'error',
-				});
-			},
-		}
-	);
-
-	const onDeletePress = () => {
-		setDeleteModalOpen(true);
-	};
-
-	const onDeleteModalClose = () => {
-		setDeleteModalOpen(false);
-	};
-
-	const onDeleteConfirm = () => {
-		deleteCategory.mutate(id);
-	};
+	const { id, name, description, slug, count, link, onDeletePress } = props;
 
 	return (
 		<Tr>
@@ -123,47 +78,12 @@ const CategoryRow: React.FC<Props> = (props) => {
 									{__('View Category', 'masteriyo')}
 								</MenuItem>
 							</Link>
-							<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
+							<MenuItem onClick={() => onDeletePress(id)} icon={<BiTrash />}>
 								{__('Delete', 'masteriyo')}
 							</MenuItem>
 						</MenuList>
 					</Menu>
 				</ButtonGroup>
-				<AlertDialog
-					isOpen={isDeleteModalOpen}
-					onClose={onDeleteModalClose}
-					isCentered
-					leastDestructiveRef={cancelRef}>
-					<AlertDialogOverlay>
-						<AlertDialogContent>
-							<AlertDialogHeader>
-								{__('Delete Category')} {name}
-							</AlertDialogHeader>
-							<AlertDialogBody>
-								{__(
-									"Are you sure? You can't restore this category",
-									'masteriyo'
-								)}
-							</AlertDialogBody>
-							<AlertDialogFooter>
-								<ButtonGroup>
-									<Button
-										ref={cancelRef}
-										onClick={onDeleteModalClose}
-										variant="outline">
-										{__('Cancel', 'masteriyo')}
-									</Button>
-									<Button
-										colorScheme="red"
-										onClick={onDeleteConfirm}
-										isLoading={deleteCategory.isLoading}>
-										{__('Delete', 'masteriyo')}
-									</Button>
-								</ButtonGroup>
-							</AlertDialogFooter>
-						</AlertDialogContent>
-					</AlertDialogOverlay>
-				</AlertDialog>
 			</Td>
 		</Tr>
 	);

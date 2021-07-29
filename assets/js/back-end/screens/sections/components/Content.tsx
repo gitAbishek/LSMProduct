@@ -1,12 +1,5 @@
 import {
-	AlertDialog,
-	AlertDialogBody,
-	AlertDialogContent,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogOverlay,
 	Box,
-	Button,
 	ButtonGroup,
 	Flex,
 	Icon,
@@ -16,15 +9,12 @@ import {
 	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { BiAlignLeft, BiEdit, BiTimer, BiTrash } from 'react-icons/bi';
-import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 import { Sortable } from '../../../assets/icons';
 import routes from '../../../constants/routes';
-import urls from '../../../constants/urls';
-import API from '../../../utils/api';
 
 interface Props {
 	id: number;
@@ -32,46 +22,13 @@ interface Props {
 	type: 'lesson' | 'quiz' | string;
 	index: any;
 	courseId: number;
+	onContentDeletePress: any;
 }
 
 const Content: React.FC<Props> = (props) => {
-	const { id, name, type, index, courseId } = props;
-	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-	const queryClient = useQueryClient();
+	const { id, name, type, index, courseId, onContentDeletePress } = props;
+
 	const history = useHistory();
-	const cancelRef = useRef<any>();
-	const lessonAPI = new API(urls.lessons);
-	const quizAPI = new API(urls.quizes);
-
-	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
-		onSuccess: () => {
-			queryClient.invalidateQueries(`builder${courseId}`);
-			setDeleteModalOpen(false);
-		},
-	});
-
-	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
-		onSuccess: () => {
-			queryClient.invalidateQueries(`builder${courseId}`);
-			setDeleteModalOpen(false);
-		},
-	});
-
-	const onDeleteModalClose = () => {
-		setDeleteModalOpen(false);
-	};
-
-	const onDeletePress = () => {
-		setDeleteModalOpen(true);
-	};
-
-	const onDeleteConfirm = () => {
-		if (type === 'lesson') {
-			deleteLesson.mutate(id);
-		} else if (type === 'quiz') {
-			deleteQuiz.mutate(id);
-		}
-	};
 
 	const onEditPress = () => {
 		if (type === 'lesson') {
@@ -135,51 +92,13 @@ const Content: React.FC<Props> = (props) => {
 						<Tooltip label={__('Delete', 'masteriyo')}>
 							<IconButton
 								_hover={{ color: 'red.500' }}
-								onClick={onDeletePress}
+								onClick={() => onContentDeletePress(id, type)}
 								variant="unstyled"
 								icon={<Icon fontSize="xl" as={BiTrash} />}
-								aria-label={__('Edit')}
+								aria-label={__('Delete')}
 							/>
 						</Tooltip>
 					</ButtonGroup>
-
-					<AlertDialog
-						isOpen={isDeleteModalOpen}
-						onClose={onDeleteModalClose}
-						isCentered
-						leastDestructiveRef={cancelRef}>
-						<AlertDialogOverlay>
-							<AlertDialogContent>
-								<AlertDialogHeader>
-									{__('Delete Section')} {name}
-								</AlertDialogHeader>
-								<AlertDialogBody>
-									{__(
-										"Are you sure? You can't restore this section",
-										'masteriyo'
-									)}
-								</AlertDialogBody>
-								<AlertDialogFooter>
-									<ButtonGroup>
-										<Button
-											ref={cancelRef}
-											onClick={onDeleteModalClose}
-											variant="outline">
-											{__('Cancel', 'masteriyo')}
-										</Button>
-										<Button
-											colorScheme="red"
-											onClick={onDeleteConfirm}
-											isLoading={
-												deleteQuiz.isLoading || deleteLesson.isLoading
-											}>
-											{__('Delete', 'masteriyo')}
-										</Button>
-									</ButtonGroup>
-								</AlertDialogFooter>
-							</AlertDialogContent>
-						</AlertDialogOverlay>
-					</AlertDialog>
 				</Flex>
 			)}
 		</Draggable>

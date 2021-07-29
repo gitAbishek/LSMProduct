@@ -1,4 +1,10 @@
 import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
 	Box,
 	Button,
 	ButtonGroup,
@@ -14,11 +20,12 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
+	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import queryString from 'query-string';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -43,15 +50,19 @@ import CourseSetting from './component/CourseSetting';
 const Builder: React.FC = () => {
 	const { courseId }: any = useParams();
 	const { search } = useLocation();
+	const { onClose, onOpen, isOpen } = useDisclosure();
 	const queryClient = useQueryClient();
 	const toast = useToast();
 	const methods = useForm();
 	const history = useHistory();
+	const cancelRef = useRef<any>();
 
 	const courseAPI = new API(urls.courses);
 	const builderAPI = new API(urls.builder);
+	const sectionAPI = new API(urls.sections);
 
 	const [builderData, setBuilderData] = useState<any>(null);
+	const [deleteSectionId, setDeleteSectionId] = useState<number>();
 	const { type, page } = queryString.parse(search);
 	const [tabIndex, setTabIndex] = useState<number>(page === 'builder' ? 1 : 0);
 
@@ -130,6 +141,38 @@ const Builder: React.FC = () => {
 		};
 
 		updateCourse.mutate(deepClean(deepMerge(data, newData)));
+	};
+
+	const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
+		onSuccess: (data: any) => {
+			onClose();
+			toast({
+				title: __('Section Deleted', 'masteriyo'),
+				description:
+					data?.name + __(' has been deleted successfully', 'masteriyo'),
+				isClosable: true,
+				status: 'error',
+			});
+			queryClient.invalidateQueries(`builder${courseId}`);
+		},
+		onError: (error: any) => {
+			onClose();
+			toast({
+				title: __('Failed to delete section', 'masteriyo'),
+				description: `${error.response?.data?.message}`,
+				isClosable: true,
+				status: 'error',
+			});
+		},
+	});
+
+	const onDeletePress = (sectionId: number) => {
+		onOpen();
+		setDeleteSectionId(sectionId);
+	};
+
+	const onDeleteConfirm = () => {
+		deleteSectionId && deleteMutation.mutate(deleteSectionId);
 	};
 
 	if (courseQuery.isSuccess && builderQuery.isSuccess) {
@@ -240,6 +283,7 @@ const Builder: React.FC = () => {
 													(builderData && builderData) || builderQuery.data
 												}
 												setBuilderData={setBuilderData}
+												onDeletePress={onDeletePress}
 											/>
 										</TabPanel>
 										<TabPanel sx={tabPanelStyles}>
@@ -252,6 +296,38 @@ const Builder: React.FC = () => {
 					</Tabs>
 				</FormProvider>
 				<AddCategoryModal />
+				<AlertDialog
+					isOpen={isOpen}
+					onClose={onClose}
+					isCentered
+					leastDestructiveRef={cancelRef}>
+					<AlertDialogOverlay>
+						<AlertDialogContent>
+							<AlertDialogHeader>
+								{__('Delete Section')} {name}
+							</AlertDialogHeader>
+							<AlertDialogBody>
+								{__(
+									"Are you sure? You can't restore this section",
+									'masteriyo'
+								)}
+							</AlertDialogBody>
+							<AlertDialogFooter>
+								<ButtonGroup>
+									<Button ref={cancelRef} onClick={onClose} variant="outline">
+										{__('Cancel', 'masteriyo')}
+									</Button>
+									<Button
+										colorScheme="red"
+										onClick={onDeleteConfirm}
+										isLoading={deleteMutation.isLoading}>
+										{__('Delete', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
+							</AlertDialogFooter>
+						</AlertDialogContent>
+					</AlertDialogOverlay>
+				</AlertDialog>
 			</>
 		);
 	}

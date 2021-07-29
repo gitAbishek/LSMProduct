@@ -1,5 +1,13 @@
 import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
 	Box,
+	Button,
+	ButtonGroup,
 	Container,
 	Flex,
 	Heading,
@@ -9,10 +17,12 @@ import {
 	Th,
 	Thead,
 	Tr,
+	useDisclosure,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
-import { useQuery } from 'react-query';
+import React, { useRef, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import urls from '../../constants/urls';
 import { SkeletonCourseTaxonomy } from '../../skeleton';
 import API from '../../utils/api';
@@ -20,10 +30,44 @@ import CategoryRow from './components/CategoryRow';
 import Header from './components/Header';
 
 const AllCourseCategories = () => {
-	const categoriesAPI = new API(urls.categories);
+	const categoryAPI = new API(urls.categories);
+	const queryClient = useQueryClient();
+	const toast = useToast();
 	const categoriesQuery = useQuery('courseCategoriesList', () =>
-		categoriesAPI.list()
+		categoryAPI.list()
 	);
+	const [deleteCategoryId, setDeleteCategoryId] = useState<number>();
+	const { onClose, onOpen, isOpen } = useDisclosure();
+
+	const cancelRef = useRef<any>();
+
+	const deleteCategory = useMutation(
+		(id: number) => categoryAPI.delete(id, { force: true }),
+		{
+			onSuccess: () => {
+				onClose();
+				queryClient.invalidateQueries('courseCategoriesList');
+			},
+			onError: (error: any) => {
+				onClose();
+				toast({
+					title: __('Failed to delete category', 'masteriyo'),
+					description: `${error.response?.data?.message}`,
+					isClosable: true,
+					status: 'error',
+				});
+			},
+		}
+	);
+
+	const onDeletePress = (categoryId: number) => {
+		onOpen();
+		setDeleteCategoryId(categoryId);
+	};
+
+	const onDeleteConfirm = () => {
+		deleteCategoryId && deleteCategory.mutate(deleteCategoryId);
+	};
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
@@ -59,6 +103,7 @@ const AllCourseCategories = () => {
 											slug={cat.slug}
 											count={cat.count}
 											link={cat.link}
+											onDeletePress={onDeletePress}
 										/>
 									))}
 							</Tbody>
@@ -66,6 +111,35 @@ const AllCourseCategories = () => {
 					</Stack>
 				</Box>
 			</Container>
+			<AlertDialog
+				isOpen={isOpen}
+				onClose={onClose}
+				isCentered
+				leastDestructiveRef={cancelRef}>
+				<AlertDialogOverlay>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							{__('Delete Category')} {name}
+						</AlertDialogHeader>
+						<AlertDialogBody>
+							{__("Are you sure? You can't restore this category", 'masteriyo')}
+						</AlertDialogBody>
+						<AlertDialogFooter>
+							<ButtonGroup>
+								<Button ref={cancelRef} onClick={onClose} variant="outline">
+									{__('Cancel', 'masteriyo')}
+								</Button>
+								<Button
+									colorScheme="red"
+									onClick={onDeleteConfirm}
+									isLoading={deleteCategory.isLoading}>
+									{__('Delete', 'masteriyo')}
+								</Button>
+							</ButtonGroup>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialogOverlay>
+			</AlertDialog>
 		</Stack>
 	);
 };

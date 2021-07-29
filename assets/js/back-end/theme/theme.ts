@@ -30,6 +30,7 @@ const theme = extendTheme({
 						border: '1px',
 						rounded: 'sm',
 						borderColor: 'gray.200',
+						maxW: 'auto',
 						_hover: {
 							borderColor: 'gray.300',
 						},
@@ -91,6 +92,7 @@ const theme = extendTheme({
 				borderRadius: 'sm',
 				shadow: 'input',
 				borderColor: 'inherit',
+				maxWidth: 'full',
 				color: 'inherit',
 				bg: 'white',
 				_hover: {

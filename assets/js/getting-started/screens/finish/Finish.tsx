@@ -4,13 +4,16 @@ import {
 	ButtonGroup,
 	Flex,
 	Heading,
+	Icon,
 	Image,
 	Link,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import { motion } from 'framer-motion';
 import React from 'react';
+import { BiCheck } from 'react-icons/bi';
 import { onboardFinishCover } from '../../../back-end/constants/images';
 
 interface Props {
@@ -22,6 +25,7 @@ interface Props {
 const Welcome: React.FC<Props> = (props) => {
 	const { dashboardURL, siteURL, pageBuilderURL } = props;
 
+	const CircleBox = motion(Box);
 	return (
 		<Box rounded="3px">
 			<Box bg="white" p="30" shadow="box">
@@ -31,6 +35,28 @@ const Welcome: React.FC<Props> = (props) => {
 					</Box>
 
 					<Stack spacing={6} align="center">
+						<CircleBox
+							height="70px"
+							w="70px"
+							border="3px solid"
+							borderColor="green.400"
+							borderRadius="100%"
+							d="flex"
+							alignItems="center"
+							justifyContent="center"
+							fontSize="4xl"
+							color="green.400"
+							animate={{
+								scale: [1, 1.5, 1, 1.2, 1],
+							}}
+							transition={{
+								duration: 1,
+								ease: 'easeInOut',
+								times: [0, 0.2, 0.5, 0.8, 1],
+							}}>
+							<Icon as={BiCheck} />
+						</CircleBox>
+
 						<Heading as="h2" fontSize="24px">
 							{__(`Congratulation, you're all set!`, 'masteriyo')}
 						</Heading>

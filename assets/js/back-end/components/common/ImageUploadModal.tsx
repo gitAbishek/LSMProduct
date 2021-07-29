@@ -108,12 +108,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 				</ModalHeader>
 				<ModalCloseButton color="white" />
 				<ModalBody py="6" p="0">
-					<Tabs
-						onChange={(index) => setTabIndex(index)}
-						index={tabIndex}
-						h="full"
-						d="flex"
-						flexDirection="column">
+					<Tabs onChange={(index) => setTabIndex(index)} index={tabIndex}>
 						<TabList>
 							<Tab fontSize="sm" px="0" py="3" mx="4">
 								{__('Upload files')}
@@ -123,7 +118,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 							</Tab>
 						</TabList>
 						<TabPanels flex="1">
-							<TabPanel h="full">
+							<TabPanel>
 								<Center
 									bg={
 										isDragAccept
@@ -138,7 +133,7 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 									transition="ease-in-out"
 									textAlign="center"
 									position="relative"
-									h="full"
+									h="200px"
 									{...getRootProps()}>
 									<input {...getInputProps()} multiple={false} />
 

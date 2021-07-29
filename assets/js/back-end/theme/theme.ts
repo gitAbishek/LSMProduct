@@ -193,9 +193,9 @@ const theme = extendTheme({
 			sizes: {
 				fullSpacing: {
 					dialog: {
-						w: 'full',
-						h: 'full',
-						maxW: 'calc(100vw - 80px)',
+						w: '100%',
+						maxW: '800px',
+						minH: '400px',
 						maxH: 'calc(100vh - 80px)',
 					},
 				},

@@ -174,7 +174,7 @@ msgid "Settings"
 msgstr ""
 
 #: assets/js/back-end/components/layout/HeaderBuilder.tsx:112
-#: assets/js/back-end/screens/courses/components/CourseList.tsx:131
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:139
 #: assets/js/back-end/screens/orders/components/OrderRow.tsx:152
 msgid "Preview"
 msgstr ""
@@ -237,23 +237,23 @@ msgstr ""
 msgid "You can keep editing it"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:101
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:106
 #: assets/js/back-end/screens/orders/EditOrder.tsx:207
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:73
-#: assets/js/back-end/screens/settings/Settings.tsx:87
-#: assets/js/back-end/screens/settings/components/EmailSettings.tsx:52
+#: assets/js/back-end/screens/settings/Settings.tsx:88
+#: assets/js/back-end/screens/settings/components/EmailSettings.tsx:53
 msgid "General"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:102
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:107
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:74
-#: assets/js/back-end/screens/settings/components/CourseArchiveSettings.tsx:63
+#: assets/js/back-end/screens/settings/components/CourseArchiveSettings.tsx:59
 #: assets/js/back-end/screens/settings/components/LearningPageSettings.tsx:53
 #: assets/js/back-end/screens/settings/components/SingleCourseSettings.tsx:53
 msgid "Display"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:103
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:108
 #: assets/js/back-end/screens/courses/components/CourseFilter.tsx:91
 msgid "Pricing"
 msgstr ""
@@ -262,82 +262,82 @@ msgstr ""
 msgid "Difficulty"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:116
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:117
 msgid "Choose Course Level"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:130
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:155
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:138
 msgid "Hours is required"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:149
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:173
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:156
 msgid "Hours"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:166
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:190
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:172
 msgid "Minutes is required"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:185
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:208
 #: assets/js/back-end/screens/quiz/components/QuizSettings.tsx:190
 msgid "Minutes"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:199
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:221
 msgid "Maximum Students"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:211
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:232
 msgid "No limit"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:214
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:235
 msgid "Limit"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:221
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:240
 msgid "Number of Students"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:250
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:268
 msgid "Curriculum in Single page"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:259
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:277
 msgid "Always Visible"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:262
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:280
 msgid "Only Visible to Enrollers"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:273
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:291
 msgid "Pricing Option"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:280
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:298
 #: assets/js/back-end/screens/courses/components/CourseFilter.tsx:92
-#: assets/js/back-end/screens/courses/components/CourseList.tsx:96
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:102
 msgid "Free"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:290
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:308
 msgid "\tDoes not need registration"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:298
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:316
 msgid "\tNeed registration"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:307
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:325
 #: assets/js/back-end/screens/courses/components/CourseFilter.tsx:93
 msgid "Paid"
 msgstr ""
 
-#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:314
+#: assets/js/back-end/screens/builder/component/CourseSetting.tsx:332
 msgid "One Time Fee"
 msgstr ""
 
@@ -419,7 +419,7 @@ msgstr ""
 #: assets/js/back-end/screens/course-tags/EditCourseTag.tsx:206
 #: assets/js/back-end/screens/course-tags/components/ListRow.tsx:151
 #: assets/js/back-end/screens/courses/AllCourses.tsx:155
-#: assets/js/back-end/screens/courses/components/CourseList.tsx:135
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:143
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:104
 #: assets/js/back-end/screens/lessons/EditLesson.tsx:207
 #: assets/js/back-end/screens/orders/EditOrder.tsx:507
@@ -468,7 +468,7 @@ msgstr ""
 
 #: assets/js/back-end/screens/course-categories/components/CategoryRow.tsx:108
 #: assets/js/back-end/screens/course-tags/components/ListRow.tsx:102
-#: assets/js/back-end/screens/courses/components/CourseList.tsx:116
+#: assets/js/back-end/screens/courses/components/CourseList.tsx:124
 #: assets/js/back-end/screens/lessons/AddNewLesson.tsx:101
 #: assets/js/back-end/screens/orders/components/OrderRow.tsx:199
 #: assets/js/back-end/screens/sections/components/Content.tsx:141

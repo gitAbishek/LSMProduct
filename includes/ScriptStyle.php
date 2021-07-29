@@ -468,7 +468,7 @@ class ScriptStyle {
 						),
 						'currency'   => array(
 							'code'     => \masteriyo_get_currency(),
-							'symbol'   => \masteriyo_get_currency_symbol( masteriyo_get_currency() ),
+							'symbol'   => \html_entity_decode( masteriyo_get_currency_symbol( masteriyo_get_currency() ) ),
 							'position' => masteriyo_get_setting( 'payments.currency.currency_position' ),
 						),
 						'imageSizes' => get_intermediate_image_sizes(),

@@ -25,11 +25,10 @@ import EditableAnswer from '../EditableAnswer';
 
 interface Props {
 	answersData?: any;
-	setIsQuestionDisabled?: any;
 }
 
 const TrueFalse: React.FC<Props> = (props) => {
-	const { answersData, setIsQuestionDisabled } = props;
+	const { answersData } = props;
 	const { register, setValue } = useFormContext();
 	const [answers, setAnswers] = useState<any>(
 		answersData || [
@@ -73,7 +72,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		setValue('answers', answers);
-	}, [answers, setValue, setIsQuestionDisabled]);
+	}, [answers, setValue]);
 
 	return (
 		<Stack direction="column" spacing="6">
@@ -112,7 +111,6 @@ const TrueFalse: React.FC<Props> = (props) => {
 										answers={answers}
 										index={index}
 										setAnswers={setAnswers}
-										setIsQuestionDisabled={setIsQuestionDisabled}
 										defaultValue={answer.name}
 									/>
 								</Stack>

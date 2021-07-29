@@ -26,9 +26,7 @@ import { BiCopy, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
-import QuestionProvider, {
-	QuestionContext,
-} from '../../../../context/QuestionProvider';
+import { QuestionContext } from '../../../../context/QuestionProvider';
 import { QuestionSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
 import { deepClean, deepMerge } from '../../../../utils/utils';
@@ -138,7 +136,7 @@ const Question: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<QuestionProvider>
+		<>
 			<AccordionItem
 				borderWidth="1px"
 				borderColor="gray.100"
@@ -232,7 +230,7 @@ const Question: React.FC<Props> = (props) => {
 					</AlertDialogContent>
 				</AlertDialogOverlay>
 			</AlertDialog>
-		</QuestionProvider>
+		</>
 	);
 };
 

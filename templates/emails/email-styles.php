@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 .email-template--title{
 	font-size: 20px;
 	font-weight: 600;
-	color: #07092F; 
+	color: #07092F;
 }
 .email-template--button{
 	border-radius: 4px;
@@ -40,5 +40,9 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 	color: #fff;
 	text-decoration: none;
 	display: inline-block;
+}
+
+svg {
+	width: 12px;
 }
 <?php

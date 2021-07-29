@@ -7,9 +7,6 @@ import {
 	Button,
 	ButtonGroup,
 	Checkbox,
-	Editable,
-	EditableInput,
-	EditablePreview,
 	Flex,
 	Heading,
 	Icon,
@@ -23,7 +20,8 @@ import { useFormContext } from 'react-hook-form';
 import { BiPlus, BiTrash } from 'react-icons/bi';
 import { Sortable } from '../../../../../assets/icons';
 import { sectionHeaderStyles } from '../../../../../config/styles';
-import { duplicateObject, isEmpty } from '../../../../../utils/utils';
+import { duplicateObject } from '../../../../../utils/utils';
+import EditableAnswer from '../EditableAnswer';
 
 interface Props {
 	answersData?: any;
@@ -73,16 +71,6 @@ const TrueFalse: React.FC<Props> = (props) => {
 		setAnswers(newAnswers);
 	};
 
-	const onUpdate = (id: any, value: string, olderValue: string) => {
-		var newAnswers = [...answers];
-		let modifiedValue = isEmpty(value) ? olderValue : value;
-		newAnswers.splice(id, 1, { ...newAnswers[id], name: modifiedValue });
-		if (duplicateObject('name', newAnswers)) {
-			setIsQuestionDisabled(true);
-		}
-		setAnswers(newAnswers);
-	};
-
 	useEffect(() => {
 		setValue('answers', answers);
 	}, [answers, setValue, setIsQuestionDisabled]);
@@ -120,12 +108,13 @@ const TrueFalse: React.FC<Props> = (props) => {
 								py="1">
 								<Stack direction="row" spacing="2" align="center" flex="1">
 									<Icon as={Sortable} fontSize="lg" color="gray.500" />
-									<Editable
-										defaultValue={answer?.name}
-										onSubmit={(value) => onUpdate(index, value, answer.name)}>
-										<EditablePreview minW="sm" />
-										<EditableInput />
-									</Editable>
+									<EditableAnswer
+										answers={answers}
+										index={index}
+										setAnswers={setAnswers}
+										setIsQuestionDisabled={setIsQuestionDisabled}
+										defaultValue={answer.name}
+									/>
 								</Stack>
 
 								<Stack direction="row" spacing="4">

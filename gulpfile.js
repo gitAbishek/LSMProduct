@@ -39,6 +39,10 @@ const fileList = {
 		src: 'i18n/**/*',
 		dest: 'build/i18n'
 	},
+	"config": {
+		src: 'config/**/*',
+		dest: 'build/config'
+	},
 	bootstrap: {
 		src: 'bootstrap/**/*',
 		dest: 'build/bootstrap'

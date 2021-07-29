@@ -49,132 +49,15 @@ const EmailSetttings: React.FC<Props> = (props) => {
 		<Tabs orientation="vertical">
 			<Stack direction="row" flex="1">
 				<TabList sx={tabListStyles}>
-					<Tab sx={tabStyles}>
-						{__('General', 'masteriyo')}
-						<Tooltip
-							label={__(
-								'Users "new account" emails are sent to the user when a user signs up via checkout or account pages.',
-								'masteriyo'
-							)}
-							hasArrow
-							fontSize="xs">
-							<Box as="span" sx={infoIconStyles}>
-								<Icon as={BiInfoCircle} />
-							</Box>
-						</Tooltip>
-					</Tab>
-					<Tab sx={tabStyles}>
-						{__('New Order', 'masteriyo')}
-						<Tooltip
-							label={__(
-								'New order emails are sent to students when a new order is received.',
-								'masteriyo'
-							)}
-							hasArrow
-							fontSize="xs">
-							<Box as="span" sx={infoIconStyles}>
-								<Icon as={BiInfoCircle} />
-							</Box>
-						</Tooltip>
-					</Tab>
-					<Tab sx={tabStyles}>
-						{__('Processing Order', 'masteriyo')}
-						<Tooltip
-							label={__(
-								'This is an order notification sent to students containing order details after payment.',
-								'masteriyo'
-							)}
-							hasArrow
-							fontSize="xs">
-							<Box as="span" sx={infoIconStyles}>
-								<Icon as={BiInfoCircle} />
-							</Box>
-						</Tooltip>
-					</Tab>
-					<Tab sx={tabStyles}>
-						{__('Completed Order', 'masteriyo')}
-						<Tooltip
-							label={__(
-								'Order complete emails are sent to students when their orders are marked completed.',
-								'masteriyo'
-							)}
-							hasArrow
-							fontSize="xs">
-							<Box as="span" sx={infoIconStyles}>
-								<Icon as={BiInfoCircle} />
-							</Box>
-						</Tooltip>
-					</Tab>
-					<Tab sx={tabStyles}>
-						{__('Onhold Order', 'masteriyo')}
-						<Tooltip
-							label={__(
-								'This is an order notification sent to students containing order details after an order is placed on-hold.',
-								'masteriyo'
-							)}
-							hasArrow
-							fontSize="xs">
-							<Box as="span" sx={infoIconStyles}>
-								<Icon as={BiInfoCircle} />
-							</Box>
-						</Tooltip>
-					</Tab>
-					<Tab sx={tabStyles}>
-						{__('Cancelled Order', 'masteriyo')}
-						<Tooltip
-							label={__(
-								'Cancelled order emails are sent to students when orders have been marked cancelled (if they were previously processing or on-hold).',
-								'masteriyo'
-							)}
-							hasArrow
-							fontSize="xs">
-							<Box as="span" sx={infoIconStyles}>
-								<Icon as={BiInfoCircle} />
-							</Box>
-						</Tooltip>
-					</Tab>
-					<Tab sx={tabStyles}>
-						{__('Enrolled Course', 'masteriyo')}
-						<Tooltip
-							label={__(
-								'Email sent to students when they have enrolled course.',
-								'masteriyo'
-							)}
-							hasArrow
-							fontSize="xs">
-							<Box as="span" sx={infoIconStyles}>
-								<Icon as={BiInfoCircle} />
-							</Box>
-						</Tooltip>
-					</Tab>
-					<Tab sx={tabStyles}>
-						{__('Completed Course', 'masteriyo')}
-						<Tooltip
-							label={__(
-								'Email sent to students when they marked course is completed.',
-								'masteriyo'
-							)}
-							hasArrow
-							fontSize="xs">
-							<Box as="span" sx={infoIconStyles}>
-								<Icon as={BiInfoCircle} />
-							</Box>
-						</Tooltip>
-					</Tab>
-					<Tab sx={tabStyles}>
-						{__('Become an Instructor', 'masteriyo')}
-						<Tooltip
-							label={__(
-								'Email sent to user when they requested to become an instructor',
-								'masteriyo'
-							)}
-							hasArrow
-							fontSize="xs">
-							<Box as="span" sx={infoIconStyles}>
-								<Icon as={BiInfoCircle} />
-							</Box>
-						</Tooltip>
-					</Tab>
+					<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('New Order', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Processing Order', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Completed Order', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Onhold Order', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Cancelled Order', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Enrolled Course', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Completed Course', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Become an Instructor', 'masteriyo')}</Tab>
 				</TabList>
 				<TabPanels flex="1">
 					<TabPanel>
@@ -183,6 +66,17 @@ const EmailSetttings: React.FC<Props> = (props) => {
 								<Stack direction="row">
 									<FormLabel minW="160px">
 										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Users "new account" emails are sent to the user when a user signs up via checkout or account pages.',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="emails.general.enable"
@@ -201,6 +95,17 @@ const EmailSetttings: React.FC<Props> = (props) => {
 								<Stack direction="row">
 									<FormLabel minW="160px">
 										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'New order emails are sent to students when a new order is received.',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="emails.new_order.enable"
@@ -222,6 +127,17 @@ const EmailSetttings: React.FC<Props> = (props) => {
 								<Stack direction="row">
 									<FormLabel minW="160px">
 										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'This is an order notification sent to students containing order details after payment.',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="emails.processing_order.enable"
@@ -243,6 +159,17 @@ const EmailSetttings: React.FC<Props> = (props) => {
 								<Stack direction="row">
 									<FormLabel minW="160px">
 										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Order complete emails are sent to students when their orders are marked completed.',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="emails.completed_order.enable"
@@ -264,6 +191,17 @@ const EmailSetttings: React.FC<Props> = (props) => {
 								<Stack direction="row">
 									<FormLabel minW="160px">
 										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'This is an order notification sent to students containing order details after an order is placed on-hold.',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="emails.onhold_order.enable"
@@ -284,6 +222,17 @@ const EmailSetttings: React.FC<Props> = (props) => {
 								<Stack direction="row">
 									<FormLabel minW="160px">
 										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Cancelled order emails are sent to students when orders have been marked cancelled (if they were previously processing or on-hold).',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="emails.cancelled_order.enable"
@@ -305,6 +254,17 @@ const EmailSetttings: React.FC<Props> = (props) => {
 								<Stack direction="row">
 									<FormLabel minW="160px">
 										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Email sent to students when they have enrolled course.',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="emails.enrolled_course.enable"
@@ -326,6 +286,17 @@ const EmailSetttings: React.FC<Props> = (props) => {
 								<Stack direction="row">
 									<FormLabel minW="160px">
 										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Email sent to students when they marked course is completed.',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="emails.completed_course.enable"
@@ -347,6 +318,17 @@ const EmailSetttings: React.FC<Props> = (props) => {
 								<Stack direction="row">
 									<FormLabel minW="160px">
 										{__('Enable', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Email sent to user when they requested to become an instructor',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="emails.become_an_instructor.enable"

@@ -589,6 +589,25 @@ export interface CountrySchema {
 	continentName: string;
 }
 
+export interface CountriesSchema {
+	code: string;
+	name: string;
+}
+
+export interface CurrenciesSchema {
+	code: string;
+	name: string;
+	symbol: string;
+}
+
+export interface StatesSchema {
+	country: string;
+	states: {
+		code: string;
+		name: string;
+	};
+}
+
 export interface MediaSchema {
 	id: number;
 	date: string;

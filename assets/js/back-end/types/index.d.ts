@@ -28,6 +28,7 @@ export interface PaymentsSettingsMap {
 	store: {
 		country: string;
 		city: string;
+		state: string;
 		address_line1: string;
 		address_line2: string;
 	};

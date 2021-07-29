@@ -150,7 +150,7 @@ const theme = extendTheme({
 			variants: {
 				outline: {
 					addon: {
-						bg: 'blue.10',
+						bg: '#f8f8f8',
 						borderRadius: 'sm',
 						fontSize: 'sm',
 					},

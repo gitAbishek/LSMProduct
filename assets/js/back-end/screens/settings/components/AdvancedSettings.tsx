@@ -1,4 +1,6 @@
 import {
+	Alert,
+	AlertIcon,
 	Box,
 	Center,
 	Code,
@@ -685,6 +687,13 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 					<TabPanel>
 						<Stack direction="column" spacing="6">
 							<Stack direction="column" spacing="8">
+								<Alert status="warning">
+									<AlertIcon />
+									{__(
+										'This section is for the development purpose and not recommended for live site.',
+										'masteriyo'
+									)}
+								</Alert>
 								<FormControl>
 									<Stack direction="row">
 										<FormLabel minW="3xs">

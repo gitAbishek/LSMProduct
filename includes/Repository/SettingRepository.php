@@ -20,7 +20,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 		$posted_setting = $setting->get_data();
 		$setting_in_db  = get_option( 'masteriyo_settings', array() );
 
-		// if courses permalink / slugs changed then update masteriyo_flush_rewrite_rules .
+		// if courses permalink / slugs changed then update masteriyo_flush_rewrite_rules.
 		$should_update_permalink = false;
 		foreach ( $posted_setting['advance']['permalinks'] as $permalink => $value ) {
 			if ( ! isset( $setting_in_db['advance']['permalinks'][ $permalink ] ) ) {

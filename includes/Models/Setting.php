@@ -73,6 +73,7 @@ class Setting extends Model {
 			'store'    => array(
 				'country'       => '',
 				'city'          => '',
+				'state'         => '',
 				'address_line1' => '',
 				'address_line2' => '',
 			),
@@ -181,10 +182,10 @@ class Setting extends Model {
 		),
 		'advance'        => array(
 			'pages'      => array(
-				'course_list_page_id'      => -1,
-				'myaccount_page_id'        => -1,
-				'checkout_page_id'         => -1,
-				'terms_conditions_page_id' => -1,
+				'course_list_page_id'      => 0,
+				'myaccount_page_id'        => 0,
+				'checkout_page_id'         => 0,
+				'terms_conditions_page_id' => 0,
 			),
 			'permalinks' => array(
 				'category_base'            => 'course-category',
@@ -260,16 +261,18 @@ class Setting extends Model {
 				foreach ( $sub_groups as $sub_group => $props ) {
 					if ( is_array( $props ) ) {
 						foreach ( $props as $prop => $value ) {
-							$this->set( $prop, $group, $sub_group, $value );
+							$this->set( "{$group}.{$sub_group}.{$prop}", $value );
 						}
 					} else {
-						$this->set( $sub_group, $group, '', $props );
+						$this->set( "{$group}.{$sub_group}", $props );
 					}
 				}
 			} else {
-				$this->set( $group, '', '', $sub_groups );
+				$this->set( "{$group}", $sub_groups );
 			}
 		}
+
+		$a = 1;
 	}
 
 	/**

@@ -128,75 +128,76 @@ const QuizSettings: React.FC<Props> = (props) => {
 								</FormErrorMessage>
 							</FormControl>
 
-							<Stack direction="row">
-								<FormControl isInvalid={!!errors?.duration_hour}>
-									<FormLabel>{__('Hours', 'masteriyo')}</FormLabel>
-									<Controller
-										name="duration_hour"
-										defaultValue={hours || 1}
-										rules={{
-											required: __('Hours is required', 'masteriyo'),
-											min: 1,
-											max: 10,
-										}}
-										render={({ field }) => (
-											<InputGroup>
-												<NumberInput
-													defaultValue={hours || 1}
-													w="sm"
-													min={1}
-													max={10}>
-													<NumberInputField {...field} rounded="sm" />
-													<NumberInputStepper>
-														<NumberIncrementStepper />
-														<NumberDecrementStepper />
-													</NumberInputStepper>
-												</NumberInput>
-												<InputRightAddon>
-													{__('Hours', 'masteriyo')}
-												</InputRightAddon>
-											</InputGroup>
-										)}
-									/>
-									<FormErrorMessage>
-										{errors?.duration_hour && errors?.duration_hour?.message}
-									</FormErrorMessage>
-								</FormControl>
+							<Stack direction="column" spacing="0">
+								<FormLabel>{__('Duration', 'masteriyo')}</FormLabel>
+								<Stack direction="row">
+									<FormControl isInvalid={!!errors?.duration_hour}>
+										<Controller
+											name="duration_hour"
+											defaultValue={hours || 1}
+											rules={{
+												required: __('Hours is required', 'masteriyo'),
+												min: 1,
+												max: 10,
+											}}
+											render={({ field }) => (
+												<InputGroup>
+													<NumberInput
+														defaultValue={hours || 1}
+														w="sm"
+														min={1}
+														max={10}>
+														<NumberInputField {...field} rounded="sm" />
+														<NumberInputStepper>
+															<NumberIncrementStepper />
+															<NumberDecrementStepper />
+														</NumberInputStepper>
+													</NumberInput>
+													<InputRightAddon>
+														{__('Hours', 'masteriyo')}
+													</InputRightAddon>
+												</InputGroup>
+											)}
+										/>
+										<FormErrorMessage>
+											{errors?.duration_hour && errors?.duration_hour?.message}
+										</FormErrorMessage>
+									</FormControl>
 
-								<FormControl isInvalid={!!errors?.duration_minute}>
-									<FormLabel>{__('Minutes', 'masteriyo')}</FormLabel>
-									<Controller
-										name="duration_minute"
-										defaultValue={minutes || 0}
-										rules={{
-											required: __('Minutes is required', 'masteriyo'),
-											min: 0,
-											max: 60,
-										}}
-										render={({ field }) => (
-											<InputGroup>
-												<NumberInput
-													defaultValue={minutes || 0}
-													w="sm"
-													min={0}
-													max={60}>
-													<NumberInputField {...field} rounded="sm" />
-													<NumberInputStepper>
-														<NumberIncrementStepper />
-														<NumberDecrementStepper />
-													</NumberInputStepper>
-												</NumberInput>
-												<InputRightAddon>
-													{__('Minutes', 'masteriyo')}
-												</InputRightAddon>
-											</InputGroup>
-										)}
-									/>
-									<FormErrorMessage>
-										{errors?.duration_minute &&
-											errors?.duration_minute?.message}
-									</FormErrorMessage>
-								</FormControl>
+									<FormControl isInvalid={!!errors?.duration_minute}>
+										<Controller
+											name="duration_minute"
+											defaultValue={minutes || 0}
+											rules={{
+												required: __('Minutes is required', 'masteriyo'),
+												min: 0,
+												max: 60,
+											}}
+											render={({ field }) => (
+												<InputGroup>
+													<NumberInput
+														defaultValue={minutes || 0}
+														w="sm"
+														min={0}
+														max={60}>
+														<NumberInputField {...field} rounded="sm" />
+														<NumberInputStepper>
+															<NumberIncrementStepper />
+															<NumberDecrementStepper />
+														</NumberInputStepper>
+													</NumberInput>
+													<InputRightAddon>
+														{__('Minutes', 'masteriyo')}
+													</InputRightAddon>
+												</InputGroup>
+											)}
+										/>
+										<FormErrorMessage>
+											{errors?.duration_minute &&
+												errors?.duration_minute?.message}
+										</FormErrorMessage>
+									</FormControl>
+								</Stack>
 							</Stack>
 
 							<FormControl isInvalid={!!errors?.attempts_allowed}>

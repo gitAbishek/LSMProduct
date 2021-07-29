@@ -27,42 +27,8 @@ interface Props {
 
 const Content: React.FC<Props> = (props) => {
 	const { id, name, type, index, courseId, onContentDeletePress } = props;
-	// const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-	// const queryClient = useQueryClient();
+
 	const history = useHistory();
-	// const cancelRef = useRef<any>();
-	// const lessonAPI = new API(urls.lessons);
-	// const quizAPI = new API(urls.quizes);
-
-	// const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
-	// 	onSuccess: () => {
-	// 		queryClient.invalidateQueries(`builder${courseId}`);
-	// 		setDeleteModalOpen(false);
-	// 	},
-	// });
-
-	// const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
-	// 	onSuccess: () => {
-	// 		queryClient.invalidateQueries(`builder${courseId}`);
-	// 		setDeleteModalOpen(false);
-	// 	},
-	// });
-
-	// const onDeleteModalClose = () => {
-	// 	setDeleteModalOpen(false);
-	// };
-
-	// const onDeletePress = () => {
-	// 	setDeleteModalOpen(true);
-	// };
-
-	// const onDeleteConfirm = () => {
-	// 	if (type === 'lesson') {
-	// 		deleteLesson.mutate(id);
-	// 	} else if (type === 'quiz') {
-	// 		deleteQuiz.mutate(id);
-	// 	}
-	// };
 
 	const onEditPress = () => {
 		if (type === 'lesson') {
@@ -126,51 +92,13 @@ const Content: React.FC<Props> = (props) => {
 						<Tooltip label={__('Delete', 'masteriyo')}>
 							<IconButton
 								_hover={{ color: 'red.500' }}
-								onClick={() => onContentDeletePress(id)}
+								onClick={() => onContentDeletePress(id, type)}
 								variant="unstyled"
 								icon={<Icon fontSize="xl" as={BiTrash} />}
 								aria-label={__('Delete')}
 							/>
 						</Tooltip>
 					</ButtonGroup>
-
-					{/* <AlertDialog
-						isOpen={isDeleteModalOpen}
-						onClose={onDeleteModalClose}
-						isCentered
-						leastDestructiveRef={cancelRef}>
-						<AlertDialogOverlay>
-							<AlertDialogContent>
-								<AlertDialogHeader>
-									{__('Delete Section')} {name}
-								</AlertDialogHeader>
-								<AlertDialogBody>
-									{__(
-										"Are you sure? You can't restore this section",
-										'masteriyo'
-									)}
-								</AlertDialogBody>
-								<AlertDialogFooter>
-									<ButtonGroup>
-										<Button
-											ref={cancelRef}
-											onClick={onDeleteModalClose}
-											variant="outline">
-											{__('Cancel', 'masteriyo')}
-										</Button>
-										<Button
-											colorScheme="red"
-											onClick={onDeleteConfirm}
-											isLoading={
-												deleteQuiz.isLoading || deleteLesson.isLoading
-											}>
-											{__('Delete', 'masteriyo')}
-										</Button>
-									</ButtonGroup>
-								</AlertDialogFooter>
-							</AlertDialogContent>
-						</AlertDialogOverlay>
-					</AlertDialog> */}
 				</Flex>
 			)}
 		</Draggable>

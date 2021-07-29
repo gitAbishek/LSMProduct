@@ -67,30 +67,19 @@ const Section: React.FC<Props> = (props) => {
 	} = props;
 	const [isEditing, setIsEditing] = useState(false);
 	const { onClose, onOpen, isOpen } = useDisclosure();
+
 	const [deleteLessonId, setDeleteLessonId] = useState<number>();
 	const [deleteQuizId, setDeleteQuizId] = useState<number>();
-	// const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-	// const sectionAPI = new API(urls.sections);
+	const [contentType, setContentType] = useState<'lesson' | 'quiz'>();
+
 	const cancelRef = useRef<any>();
+
 	const newContents = contents?.map((contentId: any) => contentsMap[contentId]);
 	const queryClient = useQueryClient();
 	const toast = useToast();
 
 	const lessonAPI = new API(urls.lessons);
 	const quizAPI = new API(urls.quizes);
-
-	// const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
-	// 	onSuccess: (data: any) => {
-	// 		toast({
-	// 			title: __('Section Deleted', 'masteriyo'),
-	// 			description:
-	// 				data?.name + __(' has been deleted successfully', 'masteriyo'),
-	// 			isClosable: true,
-	// 			status: 'error',
-	// 		});
-	// 		queryClient.invalidateQueries(`builder${courseId}`);
-	// 	},
-	// });
 
 	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
 		onSuccess: (data: any) => {
@@ -124,34 +113,24 @@ const Section: React.FC<Props> = (props) => {
 		setIsEditing(true);
 	};
 
-	const onContentDeletePress = (contentId: number) => {
+	const onContentDeletePress = (contentId: number, type: 'lesson' | 'quiz') => {
 		onOpen();
-		if (newContents.map((content: any) => content?.type === 'lesson')) {
+		if (type === 'lesson') {
 			setDeleteLessonId(contentId);
-		} else if (newContents?.map((content: any) => content?.type === 'quiz')) {
+			setContentType(type);
+		} else if (type === 'quiz') {
 			setDeleteQuizId(contentId);
+			setContentType(type);
 		}
 	};
 
 	const onDeleteConfirm = () => {
-		if (newContents?.map((content: any) => content?.type === 'lesson')) {
+		if (contentType === 'lesson') {
 			deleteLessonId && deleteLesson.mutate(deleteLessonId);
-		} else if (newContents?.map((content: any) => content?.type === 'quiz')) {
+		} else if (contentType === 'quiz') {
 			deleteQuizId && deleteQuiz.mutate(deleteQuizId);
 		}
 	};
-
-	// const onDeletePress = () => {
-	// 	setDeleteModalOpen(true);
-	// };
-
-	// const onDeleteConfirm = () => {
-	// 	deleteMutation.mutate(id);
-	// };
-
-	// const onDeleteModalClose = () => {
-	// 	setDeleteModalOpen(false);
-	// };
 
 	return (
 		<Draggable draggableId={id.toString()} index={index}>

@@ -58,7 +58,7 @@ const SingleChoice: React.FC<Props> = (props) => {
 		setAnswers(newAnswers);
 	};
 
-	const onCheckPress = (id: any, correct: boolean) => {
+	const onCheckPress = (id: any) => {
 		var newAnswers = [...answers];
 
 		// uncheck other checkbox
@@ -66,7 +66,7 @@ const SingleChoice: React.FC<Props> = (props) => {
 			newAnswers[key] = { ...newAnswers[key], correct: false };
 		}
 
-		newAnswers.splice(id, 1, { ...newAnswers[id], correct: correct });
+		newAnswers.splice(id, 1, { ...newAnswers[id], correct: true });
 		setAnswers(newAnswers);
 	};
 
@@ -124,7 +124,7 @@ const SingleChoice: React.FC<Props> = (props) => {
 									<Checkbox
 										colorScheme="green"
 										isChecked={answer?.correct}
-										onChange={(e) => onCheckPress(index, e.target.checked)}
+										onChange={() => onCheckPress(index)}
 									/>
 									<Stack direction="row" spacing="2">
 										<IconButton

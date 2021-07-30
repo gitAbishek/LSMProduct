@@ -108,7 +108,6 @@ const Question: React.FC<Props> = (props) => {
 	};
 
 	const onSubmit = (data: any) => {
-		console.log(data);
 		const cleanData = deepClean(data);
 		const newData = {
 			...(cleanData.type && {

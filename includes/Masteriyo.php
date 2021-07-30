@@ -61,6 +61,7 @@ class Masteriyo {
 		Capabilities::init();
 		Activation::init();
 		Deactivation::init();
+		FormHandlers::init();
 		FileRestrictions::init();
 		CourseReviews::init();
 		CourseQuestionAnswers::init();

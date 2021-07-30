@@ -155,7 +155,7 @@ class QuizesController extends PostsController {
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'start_quiz' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => 'is_user_logged_in',
 				),
 			)
 		);
@@ -179,8 +179,7 @@ class QuizesController extends PostsController {
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'check_answers' ),
-					'permission_callback' => '__return_true',
-
+					'permission_callback' => 'is_user_logged_in',
 				),
 			)
 		);
@@ -192,8 +191,7 @@ class QuizesController extends PostsController {
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_attempts' ),
-					'permission_callback' => '__return_true',
-
+					'permission_callback' => 'is_user_logged_in',
 					'args'                => array(
 						'quiz_id'  => array(
 							'description'       => __( 'Quiz ID.', 'masteriyo' ),
@@ -262,7 +260,7 @@ class QuizesController extends PostsController {
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_attempt' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => 'is_user_logged_in',
 					'args'                => array(
 						'quiz_id'  => array(
 							'description'       => __( 'Quiz ID.', 'masteriyo' ),

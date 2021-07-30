@@ -92,6 +92,7 @@ class Course extends Model {
 		'billing_cycle'      => '',
 		'show_curriculum'    => true,
 		'purchase_note'      => '',
+		'highlights'         => array(),
 	);
 
 	/**
@@ -650,6 +651,17 @@ class Course extends Model {
 	}
 
 	/**
+	 * Get course highlights.
+	 *
+	 * @since 0.1.0
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 * @return int
+	 */
+	public function get_highlights( $context = 'view' ) {
+		return $this->get_prop( 'highlights', $context );
+	}
+
+	/**
 	 * Get main image ID.
 	 *
 	 * @since  0.1.0
@@ -1009,6 +1021,17 @@ class Course extends Model {
 	 */
 	public function set_purchase_note( $value ) {
 		$this->set_prop( 'purchase_note', $value );
+	}
+
+	/**
+	 * Set the course highlights.
+	 *
+	 *
+	 * @since 0.1.0
+	 * @param array $value
+	 */
+	public function set_highlights( $value ) {
+		$this->set_prop( 'highlights', $value );
 	}
 
 	/**

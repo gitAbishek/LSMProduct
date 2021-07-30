@@ -310,6 +310,7 @@ class CoursesController extends PostsController {
 			'access_mode'       => $course->get_access_mode( $context ),
 			'billing_cycle'     => $course->get_billing_cycle( $context ),
 			'show_curriculum'   => $course->get_show_curriculum( $context ),
+			'highlights'        => $course->get_highlights( $context ),
 			'categories'        => $this->get_taxonomy_terms( $course, 'cat' ),
 			'tags'              => $this->get_taxonomy_terms( $course, 'tag' ),
 			'difficulty'        => $this->get_taxonomy_terms( $course, 'difficulty' ),
@@ -686,6 +687,11 @@ class CoursesController extends PostsController {
 					'default'     => true,
 					'context'     => array( 'view', 'edit' ),
 				),
+				'highlights'         => array(
+					'description' => __( 'Course highlights', 'masteriyo' ),
+					'type'        => 'array',
+					'context'     => array( 'view', 'edit' ),
+				),
 				'meta_data'          => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
@@ -821,6 +827,11 @@ class CoursesController extends PostsController {
 		// Course show curriculum.
 		if ( isset( $request['show_curriculum'] ) ) {
 			$course->set_show_curriculum( $request['show_curriculum'] );
+		}
+
+			// Course highlights.
+		if ( isset( $request['highlights'] ) && is_array( $request['highlights'] ) ) {
+			$course->set_highlights( $request['highlights'] );
 		}
 
 		// Course categories.

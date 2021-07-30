@@ -34,8 +34,8 @@ const FloatingTimer: React.FC<Props> = (props) => {
 			shadow="boxl"
 			rounded="full">
 			<CircularProgress
-				value={minutes}
-				max={60}
+				value={hours * 60 + minutes}
+				max={duration}
 				capIsRound
 				color="blue.500"
 				size="140px"

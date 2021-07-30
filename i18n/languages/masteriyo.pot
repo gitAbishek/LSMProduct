@@ -1127,8 +1127,24 @@ msgid ""
 "Question"
 msgstr ""
 
-#: assets/js/back-end/screens/sections/SectionBuilder.tsx:70
+#: assets/js/back-end/screens/sections/SectionBuilder.tsx:105
+msgid "Not sure how to get started? Learn more in our"
+msgstr ""
+
+#: assets/js/back-end/screens/sections/SectionBuilder.tsx:110
+msgid "Documentation"
+msgstr ""
+
+#: assets/js/back-end/screens/sections/SectionBuilder.tsx:120
 msgid "Add New Section"
+msgstr ""
+
+#: assets/js/back-end/screens/sections/SectionBuilder.tsx:88
+msgid "Get Started"
+msgstr ""
+
+#: assets/js/back-end/screens/sections/SectionBuilder.tsx:92
+msgid "Add new section to add your content"
 msgstr ""
 
 #: assets/js/back-end/screens/sections/components/EditSection.tsx:53

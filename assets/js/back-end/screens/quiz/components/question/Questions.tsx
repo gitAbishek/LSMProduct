@@ -50,6 +50,17 @@ const Questions: React.FC<Props> = (props) => {
 			name: 'New Question',
 			course_id: courseId,
 			parent_id: quizId,
+			type: 'true-false',
+			answers: [
+				{
+					name: 'True',
+					correct: true,
+				},
+				{
+					name: 'False',
+					correct: false,
+				},
+			],
 		});
 	};
 

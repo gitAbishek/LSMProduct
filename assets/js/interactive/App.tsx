@@ -1,5 +1,4 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import 'focus-visible';
 import { createStore, StateMachineProvider } from 'little-state-machine';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';

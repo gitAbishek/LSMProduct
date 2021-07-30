@@ -61,7 +61,10 @@ const AddNewCourseCategory = () => {
 	return (
 		<Container maxW="container.xl" marginTop="6">
 			<Stack direction="column" spacing="6">
-				<PageNav currentTitle="Add New Category" hasCategoryName />
+				<PageNav
+					currentTitle={__('Add New Category', 'masteriyo')}
+					hasCategoryName
+				/>
 				<FormProvider {...methods}>
 					<Box bg="white" p="10" shadow="box">
 						<Stack direction="column" spacing="8">

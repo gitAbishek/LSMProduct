@@ -75,7 +75,7 @@ const AllCourseCategories = () => {
 			<Header />
 			<Container maxW="container.xl">
 				<Stack direction="column" spacing="6">
-					<PageNav currentTitle="Categories" />
+					<PageNav currentTitle={__('Categories', 'masteriyo')} />
 					<Box bg="white" p="12" shadow="box" mx="auto">
 						<Stack direction="column" spacing="8">
 							<Flex justify="space-between" aling="center">

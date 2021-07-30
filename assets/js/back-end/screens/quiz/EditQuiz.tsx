@@ -94,84 +94,88 @@ const EditQuiz: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
-					<PageNav
-						currentTitle={quizQuery?.data?.name}
-						courseName={quizQuery?.data?.course_name}
-						courseId={courseId}
-					/>
-					<FormProvider {...methods}>
-						<Box bg="white" p="10" shadow="box">
-							<Stack direction="column" spacing="8">
-								<Flex aling="center" justify="space-between">
-									<Heading as="h1" fontSize="x-large">
-										{__('Edit Quiz:', 'masteriyo')} {quizQuery?.data?.name}
-									</Heading>
-								</Flex>
+					<Stack direction="column" spacing="6">
+						<PageNav
+							currentTitle={quizQuery?.data?.name}
+							courseName={quizQuery?.data?.course_name}
+							courseId={courseId}
+						/>
+						<FormProvider {...methods}>
+							<Box bg="white" p="10" shadow="box">
+								<Stack direction="column" spacing="8">
+									<Flex aling="center" justify="space-between">
+										<Heading as="h1" fontSize="x-large">
+											{__('Edit Quiz:', 'masteriyo')} {quizQuery?.data?.name}
+										</Heading>
+									</Flex>
 
-								<Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
-									<TabList justifyContent="center" borderBottom="1px">
-										<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
-										<Tab sx={tabStyles}>{__('Questions', 'masteriyo')}</Tab>
-										<Tab sx={tabStyles}>{__('Settings', 'masteriyo')}</Tab>
-									</TabList>
-									<TabPanels>
-										<TabPanel sx={tabPanelStyles}></TabPanel>
-										<TabPanel sx={tabPanelStyles}>
-											<Questions
-												courseId={quizQuery?.data?.course_id}
-												quizId={quizId}
-											/>
-										</TabPanel>
-										<TabPanel sx={tabPanelStyles}></TabPanel>
-									</TabPanels>
-								</Tabs>
-								<form onSubmit={methods.handleSubmit(onSubmit)}>
-									<Stack direction="column" spacing="6">
-										{tabIndex === 0 && (
-											<>
-												<Name defaultValue={quizQuery?.data?.name} />
-												<Description
-													defaultValue={quizQuery?.data?.description}
+									<Tabs
+										index={tabIndex}
+										onChange={(index) => setTabIndex(index)}>
+										<TabList justifyContent="center" borderBottom="1px">
+											<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
+											<Tab sx={tabStyles}>{__('Questions', 'masteriyo')}</Tab>
+											<Tab sx={tabStyles}>{__('Settings', 'masteriyo')}</Tab>
+										</TabList>
+										<TabPanels>
+											<TabPanel sx={tabPanelStyles}></TabPanel>
+											<TabPanel sx={tabPanelStyles}>
+												<Questions
+													courseId={quizQuery?.data?.course_id}
+													quizId={quizId}
 												/>
-											</>
-										)}
+											</TabPanel>
+											<TabPanel sx={tabPanelStyles}></TabPanel>
+										</TabPanels>
+									</Tabs>
+									<form onSubmit={methods.handleSubmit(onSubmit)}>
+										<Stack direction="column" spacing="6">
+											{tabIndex === 0 && (
+												<>
+													<Name defaultValue={quizQuery?.data?.name} />
+													<Description
+														defaultValue={quizQuery?.data?.description}
+													/>
+												</>
+											)}
 
-										{tabIndex === 2 && (
-											<QuizSettings quizData={quizQuery?.data} />
-										)}
+											{tabIndex === 2 && (
+												<QuizSettings quizData={quizQuery?.data} />
+											)}
 
-										{tabIndex !== 1 && (
-											<>
-												<Box py="3">
-													<Divider />
-												</Box>
-												<ButtonGroup>
-													<Button
-														colorScheme="blue"
-														type="submit"
-														isLoading={updateQuiz.isLoading}>
-														{__('Update', 'masteriyo')}
-													</Button>
-													<Button
-														variant="outline"
-														onClick={() =>
-															history.push(
-																routes.courses.edit.replace(
-																	':courseId',
-																	courseId
+											{tabIndex !== 1 && (
+												<>
+													<Box py="3">
+														<Divider />
+													</Box>
+													<ButtonGroup>
+														<Button
+															colorScheme="blue"
+															type="submit"
+															isLoading={updateQuiz.isLoading}>
+															{__('Update', 'masteriyo')}
+														</Button>
+														<Button
+															variant="outline"
+															onClick={() =>
+																history.push(
+																	routes.courses.edit.replace(
+																		':courseId',
+																		courseId
+																	)
 																)
-															)
-														}>
-														{__('Cancel', 'masteriyo')}
-													</Button>
-												</ButtonGroup>
-											</>
-										)}
-									</Stack>
-								</form>
-							</Stack>
-						</Box>
-					</FormProvider>
+															}>
+															{__('Cancel', 'masteriyo')}
+														</Button>
+													</ButtonGroup>
+												</>
+											)}
+										</Stack>
+									</form>
+								</Stack>
+							</Box>
+						</FormProvider>
+					</Stack>
 				</Container>
 			</Stack>
 		);

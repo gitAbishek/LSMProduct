@@ -10,7 +10,6 @@ import {
 	ButtonGroup,
 	Container,
 	Flex,
-	Heading,
 	Icon,
 	Image,
 	Link,
@@ -36,6 +35,7 @@ import {
 	useParams,
 } from 'react-router-dom';
 import AddCategoryModal from '../../components/common/AddCategoryModal';
+import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
@@ -268,10 +268,8 @@ const Builder: React.FC = () => {
 								</Container>
 							</Box>
 							<Container maxW="container.xl">
-								<Stack direction="column" spacing="6">
-									<Heading as="h1" fontSize="x-large">
-										{__('Edit Course: ', 'masteriyo')} {courseQuery.data.name}
-									</Heading>
+								<Stack direction="column" spacing="2">
+									<PageNav currentTitle={courseQuery.data.name} />
 									<TabPanels>
 										<TabPanel sx={tabPanelStyles}>
 											<EditCourse courseData={courseQuery.data} />

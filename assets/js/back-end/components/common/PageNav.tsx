@@ -12,7 +12,7 @@ import routes from '../../constants/routes';
 interface Props {
 	currentTitle: string;
 	courseId?: number;
-	courseName: string;
+	courseName?: string;
 	hasCategoryName?: boolean;
 }
 
@@ -23,7 +23,6 @@ const PageNav: React.FC<Props> = (props) => {
 		<Breadcrumb
 			fontWeight="medium"
 			fontSize="sm"
-			mb="8"
 			separator={<Icon as={BiChevronRight} color="gray.500" />}>
 			<BreadcrumbItem>
 				<BreadcrumbLink

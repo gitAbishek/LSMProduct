@@ -64,9 +64,11 @@ const Builder: React.FC = () => {
 	const [builderData, setBuilderData] = useState<any>(null);
 	const [deleteSectionId, setDeleteSectionId] = useState<number>();
 	const { type, page } = queryString.parse(search);
-	const [tabIndex, setTabIndex] = useState<number>(page === 'builder' ? 1 : 0);
+	const [tabIndex, setTabIndex] = useState<number>(
+		page === 'builder' ? 1 : page === 'settings' ? 2 : 0
+	);
 	const [currentPageName, setCurrentPageName] = useState<string>(
-		page === 'builder' ? 'Builder' : 'Edit'
+		page === 'builder' ? 'Builder' : page === 'settings' ? 'Settings' : 'Edit'
 	);
 
 	const tabStyles = {
@@ -227,9 +229,13 @@ const Builder: React.FC = () => {
 													sx={tabStyles}
 													onClick={() => {
 														setCurrentPageName(__('Settings', 'masteriyo'));
-														history.push(
-															routes.courses.edit.replace(':courseId', courseId)
-														);
+														history.push({
+															pathname: routes.courses.edit.replace(
+																':courseId',
+																courseId
+															),
+															search: '?page=settings',
+														});
 													}}>
 													<Icon as={BiCog} sx={iconStyles} />
 													{__('Settings', 'masteriyo')}

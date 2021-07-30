@@ -191,7 +191,7 @@ const Section: React.FC<Props> = (props) => {
 									ref={droppableProvided.innerRef}
 									{...droppableProvided.droppableProps}>
 									{newContents &&
-										newContents.map((content: any, index: any) => (
+										newContents?.map((content: any, index: any) => (
 											<Content
 												key={content.id}
 												id={content.id}
@@ -210,8 +210,10 @@ const Section: React.FC<Props> = (props) => {
 
 					<Box p="5">
 						<Menu>
-							<MenuButton as={AddNewButton}>
-								{__('Add New Content', 'masteriyo')}
+							<MenuButton>
+								<AddNewButton>
+									{__('Add New Content', 'masteriyo')}
+								</AddNewButton>
 							</MenuButton>
 							<MenuList>
 								<Link

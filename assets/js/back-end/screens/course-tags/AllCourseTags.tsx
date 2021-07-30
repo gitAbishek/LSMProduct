@@ -13,6 +13,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useQuery } from 'react-query';
+import PageNav from '../../components/common/PageNav';
 import urls from '../../constants/urls';
 import { SkeletonCourseTaxonomy } from '../../skeleton';
 import API from '../../utils/api';
@@ -27,42 +28,45 @@ const AllCourseTags = () => {
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header />
 			<Container maxW="container.xl">
-				<Box bg="white" p="12" shadow="box" mx="auto">
-					<Stack direction="column" spacing="8">
-						<Flex justify="space-between" aling="center">
-							<Heading as="h1" size="lg">
-								{__('Tags', 'masteriyo')}
-							</Heading>
-						</Flex>
+				<Stack direction="column" spacing="6">
+					<PageNav currentTitle={__('Tags', 'masteriyo')} />
+					<Box bg="white" p="12" shadow="box" mx="auto">
+						<Stack direction="column" spacing="8">
+							<Flex justify="space-between" aling="center">
+								<Heading as="h1" size="lg">
+									{__('Tags', 'masteriyo')}
+								</Heading>
+							</Flex>
 
-						<Table>
-							<Thead>
-								<Tr>
-									<Th>{__('Name', 'masteriyo')}</Th>
-									<Th>{__('Description', 'masteriyo')}</Th>
-									<Th>{__('Slug', 'masteriyo')}</Th>
-									<Th>{__('Count', 'masteriyo')}</Th>
-									<Th>{__('Actions', 'masteriyo')}</Th>
-								</Tr>
-							</Thead>
-							<Tbody>
-								{tagsQuery.isLoading && <SkeletonCourseTaxonomy />}
-								{tagsQuery.isSuccess &&
-									tagsQuery.data.map((cat: any) => (
-										<ListRow
-											key={cat.id}
-											id={cat.id}
-											name={cat.name}
-											description={cat.description}
-											slug={cat.slug}
-											count={cat.count}
-											link={cat.link}
-										/>
-									))}
-							</Tbody>
-						</Table>
-					</Stack>
-				</Box>
+							<Table>
+								<Thead>
+									<Tr>
+										<Th>{__('Name', 'masteriyo')}</Th>
+										<Th>{__('Description', 'masteriyo')}</Th>
+										<Th>{__('Slug', 'masteriyo')}</Th>
+										<Th>{__('Count', 'masteriyo')}</Th>
+										<Th>{__('Actions', 'masteriyo')}</Th>
+									</Tr>
+								</Thead>
+								<Tbody>
+									{tagsQuery.isLoading && <SkeletonCourseTaxonomy />}
+									{tagsQuery.isSuccess &&
+										tagsQuery.data.map((cat: any) => (
+											<ListRow
+												key={cat.id}
+												id={cat.id}
+												name={cat.name}
+												description={cat.description}
+												slug={cat.slug}
+												count={cat.count}
+												link={cat.link}
+											/>
+										))}
+								</Tbody>
+							</Table>
+						</Stack>
+					</Box>
+				</Stack>
 			</Container>
 		</Stack>
 	);

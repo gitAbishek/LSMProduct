@@ -4,6 +4,7 @@ import {
 	BreadcrumbLink,
 	Icon,
 } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiChevronRight } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
@@ -14,10 +15,19 @@ interface Props {
 	courseId?: number;
 	courseName?: string;
 	hasCategoryName?: boolean;
+	isTag?: boolean;
+	isOrder?: boolean;
 }
 
 const PageNav: React.FC<Props> = (props) => {
-	const { currentTitle, courseId, courseName, hasCategoryName } = props;
+	const {
+		currentTitle,
+		courseId,
+		courseName,
+		hasCategoryName,
+		isTag,
+		isOrder,
+	} = props;
 
 	return (
 		<Breadcrumb
@@ -56,7 +66,29 @@ const PageNav: React.FC<Props> = (props) => {
 						color="gray.500"
 						as={RouterLink}
 						to={routes.course_categories.list}>
-						Categories
+						{__('Categories', 'masteriyo')}
+					</BreadcrumbLink>
+				</BreadcrumbItem>
+			)}
+
+			{isTag && (
+				<BreadcrumbItem>
+					<BreadcrumbLink
+						color="gray.500"
+						as={RouterLink}
+						to={routes.course_tags.list}>
+						{__('Tags', 'masteriyo')}
+					</BreadcrumbLink>
+				</BreadcrumbItem>
+			)}
+
+			{isOrder && (
+				<BreadcrumbItem>
+					<BreadcrumbLink
+						color="gray.500"
+						as={RouterLink}
+						to={routes.orders.list}>
+						{__('Orders', 'masteriyo')}
 					</BreadcrumbLink>
 				</BreadcrumbItem>
 			)}

@@ -94,10 +94,12 @@ const HeaderBuilder: React.FC<Props> = (props) => {
 									as={NavLink}
 									sx={navLinkStyles}
 									_activeLink={navActiveStyles}
-									to={routes.courses.settings.replace(
-										':courseId',
-										courseId.toString()
-									)}>
+									to={
+										routes.courses.edit.replace(
+											':courseId',
+											courseId.toString()
+										) + '?page=settings'
+									}>
 									<ListIcon as={BiCog} />
 									{__('Settings', 'masteriyo')}
 								</Link>

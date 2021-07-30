@@ -14,6 +14,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
+import PageNav from '../../components/common/PageNav';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
@@ -56,43 +57,46 @@ const AddNewCourseTag = () => {
 
 	return (
 		<Container maxW="container.xl" marginTop="6">
-			<FormProvider {...methods}>
-				<Box bg="white" p="10" shadow="box">
-					<Stack direction="column" spacing="8">
-						<Flex aling="center" justify="space-between">
-							<Heading as="h1" fontSize="x-large">
-								{__('Add New Tag', 'masteriyo')}
-							</Heading>
-						</Flex>
+			<Stack direction="column" spacing="6">
+				<PageNav currentTitle={__('Add New Tag', 'masteriyo')} isTag />
+				<FormProvider {...methods}>
+					<Box bg="white" p="10" shadow="box">
+						<Stack direction="column" spacing="8">
+							<Flex aling="center" justify="space-between">
+								<Heading as="h1" fontSize="x-large">
+									{__('Add New Tag', 'masteriyo')}
+								</Heading>
+							</Flex>
 
-						<form onSubmit={methods.handleSubmit(onSubmit)}>
-							<Stack direction="column" spacing="6">
-								<NameInput />
-								<SlugInput />
-								<DescriptionInput />
+							<form onSubmit={methods.handleSubmit(onSubmit)}>
+								<Stack direction="column" spacing="6">
+									<NameInput />
+									<SlugInput />
+									<DescriptionInput />
 
-								<Box py="3">
-									<Divider />
-								</Box>
+									<Box py="3">
+										<Divider />
+									</Box>
 
-								<ButtonGroup>
-									<Button
-										colorScheme="blue"
-										type="submit"
-										isLoading={createTag.isLoading}>
-										{__('Create', 'masteriyo')}
-									</Button>
-									<Button
-										variant="outline"
-										onClick={() => history.push(routes.course_tags.list)}>
-										{__('Cancel', 'masteriyo')}
-									</Button>
-								</ButtonGroup>
-							</Stack>
-						</form>
-					</Stack>
-				</Box>
-			</FormProvider>
+									<ButtonGroup>
+										<Button
+											colorScheme="blue"
+											type="submit"
+											isLoading={createTag.isLoading}>
+											{__('Create', 'masteriyo')}
+										</Button>
+										<Button
+											variant="outline"
+											onClick={() => history.push(routes.course_tags.list)}>
+											{__('Cancel', 'masteriyo')}
+										</Button>
+									</ButtonGroup>
+								</Stack>
+							</form>
+						</Stack>
+					</Box>
+				</FormProvider>
+			</Stack>
 		</Container>
 	);
 };

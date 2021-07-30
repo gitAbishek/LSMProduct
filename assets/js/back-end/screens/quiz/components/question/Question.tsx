@@ -10,20 +10,23 @@ import {
 	AlertDialogOverlay,
 	Button,
 	ButtonGroup,
+	Center,
 	Divider,
 	Flex,
 	Icon,
 	IconButton,
+	Spinner,
 	Stack,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiCopy, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { Sortable } from '../../../../assets/icons';
 import urls from '../../../../constants/urls';
+import { QuestionContext } from '../../../../context/QuestionProvider';
 import { QuestionSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
 import { deepClean, deepMerge } from '../../../../utils/utils';
@@ -45,6 +48,7 @@ const Question: React.FC<Props> = (props) => {
 	const { questionData } = props;
 	const toast = useToast();
 	const methods = useForm();
+	const { submitQuestionDisabled } = useContext(QuestionContext);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const [answerData, setAnswerData] = useState<any>(
 		questionData?.answers || null
@@ -89,6 +93,7 @@ const Question: React.FC<Props> = (props) => {
 				status: 'error',
 			});
 			queryClient.invalidateQueries(`questions${data.parent_id}`);
+			setDeleteModalOpen(false);
 		},
 	});
 
@@ -121,7 +126,6 @@ const Question: React.FC<Props> = (props) => {
 	};
 	const onDeleteConfirm = () => {
 		deleteQuestion.mutate(questionData.id);
-		setDeleteModalOpen(false);
 	};
 
 	const iconStyles = {
@@ -179,6 +183,7 @@ const Question: React.FC<Props> = (props) => {
 									<Button
 										colorScheme="blue"
 										type="submit"
+										isDisabled={submitQuestionDisabled}
 										isLoading={updateQuestion.isLoading}>
 										{__('Update', 'masteriyo')}
 									</Button>
@@ -188,6 +193,11 @@ const Question: React.FC<Props> = (props) => {
 					</FormProvider>
 				</AccordionPanel>
 			</AccordionItem>
+			{duplicateQuestion.isLoading && (
+				<Center>
+					<Spinner />
+				</Center>
+			)}
 			<AlertDialog
 				isOpen={isDeleteModalOpen}
 				onClose={onDeleteModalClose}

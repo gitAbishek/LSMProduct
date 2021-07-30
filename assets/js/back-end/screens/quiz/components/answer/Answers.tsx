@@ -1,5 +1,6 @@
 import { Spinner } from '@chakra-ui/react';
-import React from 'react';
+import React, { useContext } from 'react';
+import { QuestionContext } from '../../../../context/QuestionProvider';
 import MultipleChoice from './types/MultipleChoice';
 import ShortAnswer from './types/ShortAnswer';
 import SingleChoice from './types/SingleChoice';
@@ -12,6 +13,11 @@ interface Props {
 
 const Answers: React.FC<Props> = (props) => {
 	const { answers, questionType } = props;
+	const { setSubmitQuestionDisabled } = useContext(QuestionContext);
+
+	if (questionType === 'short-answer') {
+		setSubmitQuestionDisabled(false);
+	}
 
 	if (questionType === 'true-false') {
 		return <TrueFalse answersData={answers} />;

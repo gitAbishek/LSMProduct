@@ -1,11 +1,12 @@
 import {
+	Alert,
+	AlertDescription,
+	AlertIcon,
+	AlertTitle,
 	Box,
 	Button,
 	ButtonGroup,
 	Checkbox,
-	Editable,
-	EditableInput,
-	EditablePreview,
 	Flex,
 	Heading,
 	Icon,
@@ -14,11 +15,14 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiCopy, BiPlus, BiTrash } from 'react-icons/bi';
 import { Sortable } from '../../../../../assets/icons';
 import { sectionHeaderStyles } from '../../../../../config/styles';
+import { QuestionContext } from '../../../../../context/QuestionProvider';
+import { duplicateObject, existsOnArray } from '../../../../../utils/utils';
+import EditableAnswer from '../EditableAnswer';
 
 interface Props {
 	answersData?: any;
@@ -28,6 +32,8 @@ const SingleChoice: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
 	const [answers, setAnswers] = useState<any>(answersData || []);
+	const { setSubmitQuestionDisabled } = useContext(QuestionContext);
+
 	const iconStyles = {
 		fontSize: 'x-large',
 		color: 'gray.500',
@@ -37,7 +43,13 @@ const SingleChoice: React.FC<Props> = (props) => {
 
 	const onAddNewAnswerPress = () => {
 		var newAnswers = [...answers];
-		setAnswers([...newAnswers, { name: 'new answer', correct: false }]);
+		setAnswers([
+			...newAnswers,
+			{
+				name: 'new answer ' + newAnswers.length,
+				correct: newAnswers.length === 0 ? true : false,
+			},
+		]);
 	};
 
 	const onDeletePress = (id: any) => {
@@ -46,7 +58,7 @@ const SingleChoice: React.FC<Props> = (props) => {
 		setAnswers(newAnswers);
 	};
 
-	const onCheckPress = (id: any, correct: boolean) => {
+	const onCheckPress = (id: any) => {
 		var newAnswers = [...answers];
 
 		// uncheck other checkbox
@@ -54,13 +66,7 @@ const SingleChoice: React.FC<Props> = (props) => {
 			newAnswers[key] = { ...newAnswers[key], correct: false };
 		}
 
-		newAnswers.splice(id, 1, { ...newAnswers[id], correct: correct });
-		setAnswers(newAnswers);
-	};
-
-	const onNameChange = (id: any, name: string) => {
-		var newAnswers = [...answers];
-		newAnswers.splice(id, 1, { ...newAnswers[id], name: name });
+		newAnswers.splice(id, 1, { ...newAnswers[id], correct: true });
 		setAnswers(newAnswers);
 	};
 
@@ -71,7 +77,11 @@ const SingleChoice: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		setValue('answers', answers);
-	}, [answers, setValue]);
+		setSubmitQuestionDisabled(duplicateObject('name', answers) ? true : false);
+		setSubmitQuestionDisabled(
+			existsOnArray(answers, 'correct', true) ? false : true
+		);
+	}, [answers, setValue, setSubmitQuestionDisabled]);
 
 	return (
 		<Stack direction="column" spacing="6">
@@ -82,6 +92,26 @@ const SingleChoice: React.FC<Props> = (props) => {
 			</Flex>
 			<Input type="hidden" {...register('answers')} />
 			<Box>
+				{duplicateObject('name', answers) && (
+					<Alert status="error" mb="4" fontSize="xs" p="2">
+						<AlertIcon />
+						<AlertTitle mr={2}>{__('Duplicate Names', 'masteriyo')}</AlertTitle>
+						<AlertDescription>
+							{__('Answer can not be duplicate', 'masteriyo')}
+						</AlertDescription>
+					</Alert>
+				)}
+				{!existsOnArray(answers, 'correct', true) && (
+					<Alert status="error" mb="4" fontSize="xs" p="2">
+						<AlertIcon />
+						<AlertTitle mr={2}>
+							{__('No answer checked', 'masteriyo')}
+						</AlertTitle>
+						<AlertDescription>
+							{__('Please check at least one answer', 'masteriyo')}
+						</AlertDescription>
+					</Alert>
+				)}
 				{answers &&
 					answers.map(
 						(answer: { name: string; correct: boolean }, index: number) => (
@@ -97,18 +127,18 @@ const SingleChoice: React.FC<Props> = (props) => {
 								py="1">
 								<Stack direction="row" spacing="2" align="center" flex="1">
 									<Icon as={Sortable} fontSize="lg" color="gray.500" />
-									<Editable value={answer?.name}>
-										<EditablePreview minW="sm" />
-										<EditableInput
-											onChange={(e) => onNameChange(index, e.target.value)}
-										/>
-									</Editable>
+									<EditableAnswer
+										index={index}
+										defaultValue={answer.name}
+										answers={answers}
+										setAnswers={setAnswers}
+									/>
 								</Stack>
 								<Stack direction="row" spacing="4">
 									<Checkbox
 										colorScheme="green"
 										isChecked={answer?.correct}
-										onChange={(e) => onCheckPress(index, e.target.checked)}
+										onChange={() => onCheckPress(index)}
 									/>
 									<Stack direction="row" spacing="2">
 										<IconButton

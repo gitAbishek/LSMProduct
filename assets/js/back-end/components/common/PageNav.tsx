@@ -54,7 +54,7 @@ const PageNav: React.FC<Props> = (props) => {
 				</BreadcrumbItem>
 			)}
 
-			{courseName && (
+			{courseName && !courseId && (
 				<BreadcrumbItem isCurrentPage>
 					<BreadcrumbLink>{courseName}</BreadcrumbLink>
 				</BreadcrumbItem>

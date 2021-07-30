@@ -211,7 +211,9 @@ const Section: React.FC<Props> = (props) => {
 					<Box p="5">
 						<Menu>
 							<MenuButton>
-								<AddNewButton></AddNewButton>
+								<AddNewButton>
+									{__('Add New Content', 'masteriyo')}
+								</AddNewButton>
 							</MenuButton>
 							<MenuList>
 								<Link

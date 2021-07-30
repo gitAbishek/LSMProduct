@@ -27,7 +27,7 @@ interface FilterParams {
 	category?: string | number;
 	search?: string;
 	status?: string;
-	price?: string;
+	price_type?: string;
 }
 
 interface Props {
@@ -87,10 +87,10 @@ const CourseFilter: React.FC<Props> = (props) => {
 						))}
 					</Select>
 
-					<Select {...register('price')}>
+					<Select {...register('price_type')}>
 						<option value="">{__('Pricing', 'masteriyo')}</option>
-						<option value="0">{__('Free', 'masteriyo')}</option>
-						<option value="">{__('Paid', 'masteriyo')}</option>
+						<option value="free">{__('Free', 'masteriyo')}</option>
+						<option value="paid">{__('Paid', 'masteriyo')}</option>
 					</Select>
 				</Stack>
 			</form>

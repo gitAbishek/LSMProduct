@@ -13,6 +13,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useQuery } from 'react-query';
+import PageNav from '../../components/common/PageNav';
 import urls from '../../constants/urls';
 import { SkeletonOrdersList } from '../../skeleton';
 import API from '../../utils/api';
@@ -24,34 +25,37 @@ const AllOrders = () => {
 
 	return (
 		<Container maxW="container.xl" marginTop="6">
-			<Box bg="white" p="12" shadow="box" mx="auto">
-				<Stack direction="column" spacing="8">
-					<Flex justify="space-between" aling="center">
-						<Heading as="h1" size="lg">
-							{__('Orders', 'masteriyo')}
-						</Heading>
-					</Flex>
+			<Stack direction="column" spacing="6">
+				<PageNav currentTitle={__('Orders', 'masteriyo')} />
+				<Box bg="white" p="12" shadow="box" mx="auto">
+					<Stack direction="column" spacing="8">
+						<Flex justify="space-between" aling="center">
+							<Heading as="h1" size="lg">
+								{__('Orders', 'masteriyo')}
+							</Heading>
+						</Flex>
 
-					<Table>
-						<Thead>
-							<Tr>
-								<Th>{__('Order', 'masteriyo')}</Th>
-								<Th>{__('Date', 'masteriyo')}</Th>
-								<Th>{__('Status', 'masteriyo')}</Th>
-								<Th>{__('Total', 'masteriyo')}</Th>
-								<Th>{__('Actions', 'masteriyo')}</Th>
-							</Tr>
-						</Thead>
-						<Tbody>
-							{ordersQuery.isLoading && <SkeletonOrdersList />}
-							{ordersQuery.isSuccess &&
-								ordersQuery.data.map((order: any) => (
-									<OrderRow key={order.id} data={order} />
-								))}
-						</Tbody>
-					</Table>
-				</Stack>
-			</Box>
+						<Table>
+							<Thead>
+								<Tr>
+									<Th>{__('Order', 'masteriyo')}</Th>
+									<Th>{__('Date', 'masteriyo')}</Th>
+									<Th>{__('Status', 'masteriyo')}</Th>
+									<Th>{__('Total', 'masteriyo')}</Th>
+									<Th>{__('Actions', 'masteriyo')}</Th>
+								</Tr>
+							</Thead>
+							<Tbody>
+								{ordersQuery.isLoading && <SkeletonOrdersList />}
+								{ordersQuery.isSuccess &&
+									ordersQuery.data.map((order: any) => (
+										<OrderRow key={order.id} data={order} />
+									))}
+							</Tbody>
+						</Table>
+					</Stack>
+				</Box>
+			</Stack>
 		</Container>
 	);
 };

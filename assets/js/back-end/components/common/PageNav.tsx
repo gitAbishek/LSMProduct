@@ -16,10 +16,18 @@ interface Props {
 	courseName?: string;
 	hasCategoryName?: boolean;
 	isTag?: boolean;
+	isOrder?: boolean;
 }
 
 const PageNav: React.FC<Props> = (props) => {
-	const { currentTitle, courseId, courseName, hasCategoryName, isTag } = props;
+	const {
+		currentTitle,
+		courseId,
+		courseName,
+		hasCategoryName,
+		isTag,
+		isOrder,
+	} = props;
 
 	return (
 		<Breadcrumb
@@ -74,6 +82,16 @@ const PageNav: React.FC<Props> = (props) => {
 				</BreadcrumbItem>
 			)}
 
+			{isOrder && (
+				<BreadcrumbItem>
+					<BreadcrumbLink
+						color="gray.500"
+						as={RouterLink}
+						to={routes.orders.list}>
+						{__('Orders', 'masteriyo')}
+					</BreadcrumbLink>
+				</BreadcrumbItem>
+			)}
 			<BreadcrumbItem isCurrentPage>
 				<BreadcrumbLink color="blue.600">{currentTitle}</BreadcrumbLink>
 			</BreadcrumbItem>

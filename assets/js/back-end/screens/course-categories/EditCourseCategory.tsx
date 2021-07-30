@@ -26,6 +26,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
+import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
@@ -128,6 +129,11 @@ const EditCourseCategory = () => {
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header />
 			<Container maxW="container.xl">
+				<PageNav
+					currentTitle={categoryQuery.data.name}
+					hasCategoryName
+					courseName="Courses"
+				/>
 				<FormProvider {...methods}>
 					<Box bg="white" p="10" shadow="box">
 						<Stack direction="column" spacing="8">

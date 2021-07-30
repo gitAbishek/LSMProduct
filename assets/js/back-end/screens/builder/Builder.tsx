@@ -10,7 +10,6 @@ import {
 	ButtonGroup,
 	Container,
 	Flex,
-	Heading,
 	Icon,
 	Image,
 	Link,
@@ -36,6 +35,7 @@ import {
 	useParams,
 } from 'react-router-dom';
 import AddCategoryModal from '../../components/common/AddCategoryModal';
+import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
@@ -65,6 +65,9 @@ const Builder: React.FC = () => {
 	const [deleteSectionId, setDeleteSectionId] = useState<number>();
 	const { type, page } = queryString.parse(search);
 	const [tabIndex, setTabIndex] = useState<number>(page === 'builder' ? 1 : 0);
+	const [currentPageName, setCurrentPageName] = useState<string>(
+		page === 'builder' ? 'Builder' : 'Edit'
+	);
 
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -180,7 +183,7 @@ const Builder: React.FC = () => {
 			<>
 				<FormProvider {...methods}>
 					<Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
-						<Stack direction="column" spacing="10" align="center">
+						<Stack direction="column" spacing="8" align="center">
 							<Box bg="white" w="full">
 								<Container maxW="container.xl">
 									<Flex
@@ -197,6 +200,7 @@ const Builder: React.FC = () => {
 												<Tab
 													sx={tabStyles}
 													onClick={() => {
+														setCurrentPageName(__('Edit', 'masteriyo'));
 														history.push(
 															routes.courses.edit.replace(':courseId', courseId)
 														);
@@ -207,6 +211,7 @@ const Builder: React.FC = () => {
 												<Tab
 													sx={tabStyles}
 													onClick={() => {
+														setCurrentPageName(__('Builder', 'masteriyo'));
 														history.push({
 															pathname: routes.courses.edit.replace(
 																':courseId',
@@ -221,6 +226,7 @@ const Builder: React.FC = () => {
 												<Tab
 													sx={tabStyles}
 													onClick={() => {
+														setCurrentPageName(__('Settings', 'masteriyo'));
 														history.push(
 															routes.courses.edit.replace(':courseId', courseId)
 														);
@@ -268,10 +274,11 @@ const Builder: React.FC = () => {
 								</Container>
 							</Box>
 							<Container maxW="container.xl">
-								<Stack direction="column" spacing="6">
-									<Heading as="h1" fontSize="x-large">
-										{__('Edit Course: ', 'masteriyo')} {courseQuery.data.name}
-									</Heading>
+								<Stack direction="column" spacing="2">
+									<PageNav
+										courseName={courseQuery.data.name}
+										currentTitle={currentPageName}
+									/>
 									<TabPanels>
 										<TabPanel sx={tabPanelStyles}>
 											<EditCourse courseData={courseQuery.data} />

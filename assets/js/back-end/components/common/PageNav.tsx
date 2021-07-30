@@ -11,27 +11,55 @@ import routes from '../../constants/routes';
 
 interface Props {
 	currentTitle: string;
-	courseId: number;
-	courseName: string;
+	courseId?: number;
+	courseName?: string;
+	hasCategoryName?: boolean;
 }
 
 const PageNav: React.FC<Props> = (props) => {
-	const { currentTitle, courseId, courseName } = props;
+	const { currentTitle, courseId, courseName, hasCategoryName } = props;
 
 	return (
 		<Breadcrumb
 			fontWeight="medium"
+			colorScheme="blue"
 			fontSize="sm"
-			mb="8"
 			separator={<Icon as={BiChevronRight} color="gray.500" />}>
 			<BreadcrumbItem>
 				<BreadcrumbLink
 					color="gray.500"
 					as={RouterLink}
-					to={routes.courses.edit.replace(':courseId', courseId.toString())}>
-					{courseName}
+					to={routes.courses.list}>
+					Courses
 				</BreadcrumbLink>
 			</BreadcrumbItem>
+			{courseId && courseName && (
+				<BreadcrumbItem>
+					<BreadcrumbLink
+						color="gray.500"
+						as={RouterLink}
+						to={routes.courses.edit.replace(':courseId', courseId.toString())}>
+						{courseName}
+					</BreadcrumbLink>
+				</BreadcrumbItem>
+			)}
+
+			{courseName && (
+				<BreadcrumbItem isCurrentPage>
+					<BreadcrumbLink>{courseName}</BreadcrumbLink>
+				</BreadcrumbItem>
+			)}
+
+			{hasCategoryName && (
+				<BreadcrumbItem>
+					<BreadcrumbLink
+						color="gray.500"
+						as={RouterLink}
+						to={routes.course_categories.list}>
+						Categories
+					</BreadcrumbLink>
+				</BreadcrumbItem>
+			)}
 			<BreadcrumbItem isCurrentPage>
 				<BreadcrumbLink color="blue.600">{currentTitle}</BreadcrumbLink>
 			</BreadcrumbItem>

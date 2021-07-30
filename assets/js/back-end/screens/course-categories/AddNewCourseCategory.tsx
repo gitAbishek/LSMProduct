@@ -14,6 +14,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
+import PageNav from '../../components/common/PageNav';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
@@ -59,6 +60,11 @@ const AddNewCourseCategory = () => {
 
 	return (
 		<Container maxW="container.xl" marginTop="6">
+			<PageNav
+				currentTitle="Add New Category"
+				hasCategoryName
+				courseName="Courses"
+			/>
 			<FormProvider {...methods}>
 				<Box bg="white" p="10" shadow="box">
 					<Stack direction="column" spacing="8">

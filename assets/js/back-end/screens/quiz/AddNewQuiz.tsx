@@ -92,77 +92,83 @@ const AddNewQuiz: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<HeaderBuilder courseId={courseId} />
 				<Container maxW="container.xl">
-					<PageNav
-						currentTitle={__('Add New Quiz')}
-						courseName={sectionQuery?.data?.course_name}
-						courseId={courseId}
-					/>
-					<FormProvider {...methods}>
-						<Box bg="white" p="10" shadow="box">
-							<Stack direction="column" spacing="8">
-								<Flex aling="center" justify="space-between">
-									<Heading as="h1" fontSize="x-large">
-										{__('Add New Quiz', 'masteriyo')}
-									</Heading>
-								</Flex>
+					<Stack direction="column" spacing="6">
+						<PageNav
+							currentTitle={__('Add New Quiz')}
+							courseName={sectionQuery?.data?.course_name}
+							courseId={courseId}
+						/>
+						<FormProvider {...methods}>
+							<Box bg="white" p="10" shadow="box">
+								<Stack direction="column" spacing="8">
+									<Flex aling="center" justify="space-between">
+										<Heading as="h1" fontSize="x-large">
+											{__('Add New Quiz', 'masteriyo')}
+										</Heading>
+									</Flex>
 
-								<form onSubmit={methods.handleSubmit(onSubmit)}>
-									<Stack direction="column" spacing="6">
-										<Tabs>
-											<TabList justifyContent="center" borderBottom="1px">
-												<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
-												<Tab sx={tabStyles}>{__('Questions', 'masteriyo')}</Tab>
-												<Tab sx={tabStyles}>{__('Settings', 'masteriyo')}</Tab>
-											</TabList>
-											<TabPanels>
-												<TabPanel px="0">
-													<Stack direction="column" spacing="6">
-														<Name />
-														<Description />
-													</Stack>
-												</TabPanel>
-												<TabPanel px="0">
-													<Alert status="error">
-														<AlertIcon />
-														<AlertTitle mr={2}>
-															{__('Add course first', 'masteriyo')}
-														</AlertTitle>
-														<AlertDescription>
-															{__(
-																'In order to add questions. You need to add quiz first',
-																'masteriyo'
-															)}
-														</AlertDescription>
-													</Alert>
-												</TabPanel>
-												<TabPanel px="0">
-													<QuizSettings />
-												</TabPanel>
-											</TabPanels>
-										</Tabs>
+									<form onSubmit={methods.handleSubmit(onSubmit)}>
+										<Stack direction="column" spacing="6">
+											<Tabs>
+												<TabList justifyContent="center" borderBottom="1px">
+													<Tab sx={tabStyles}>{__('Info', 'masteriyo')}</Tab>
+													<Tab sx={tabStyles}>
+														{__('Questions', 'masteriyo')}
+													</Tab>
+													<Tab sx={tabStyles}>
+														{__('Settings', 'masteriyo')}
+													</Tab>
+												</TabList>
+												<TabPanels>
+													<TabPanel px="0">
+														<Stack direction="column" spacing="6">
+															<Name />
+															<Description />
+														</Stack>
+													</TabPanel>
+													<TabPanel px="0">
+														<Alert status="error">
+															<AlertIcon />
+															<AlertTitle mr={2}>
+																{__('Add course first', 'masteriyo')}
+															</AlertTitle>
+															<AlertDescription>
+																{__(
+																	'In order to add questions. You need to add quiz first',
+																	'masteriyo'
+																)}
+															</AlertDescription>
+														</Alert>
+													</TabPanel>
+													<TabPanel px="0">
+														<QuizSettings />
+													</TabPanel>
+												</TabPanels>
+											</Tabs>
 
-										<ButtonGroup>
-											<Button
-												colorScheme="blue"
-												type="submit"
-												isLoading={addQuiz.isLoading}>
-												{__('Add New Quiz', 'masteriyo')}
-											</Button>
-											<Button
-												variant="outline"
-												onClick={() =>
-													history.push(
-														routes.courses.edit.replace(':courseId', courseId)
-													)
-												}>
-												{__('Cancel', 'masteriyo')}
-											</Button>
-										</ButtonGroup>
-									</Stack>
-								</form>
-							</Stack>
-						</Box>
-					</FormProvider>
+											<ButtonGroup>
+												<Button
+													colorScheme="blue"
+													type="submit"
+													isLoading={addQuiz.isLoading}>
+													{__('Add New Quiz', 'masteriyo')}
+												</Button>
+												<Button
+													variant="outline"
+													onClick={() =>
+														history.push(
+															routes.courses.edit.replace(':courseId', courseId)
+														)
+													}>
+													{__('Cancel', 'masteriyo')}
+												</Button>
+											</ButtonGroup>
+										</Stack>
+									</form>
+								</Stack>
+							</Box>
+						</FormProvider>
+					</Stack>
 				</Container>
 			</Stack>
 		);

@@ -23,6 +23,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import PageNav from '../../components/common/PageNav';
 import urls from '../../constants/urls';
 import { SkeletonCourseTaxonomy } from '../../skeleton';
 import API from '../../utils/api';
@@ -73,6 +74,7 @@ const AllCourseCategories = () => {
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header />
 			<Container maxW="container.xl">
+				<PageNav currentTitle="Categories" courseName="Courses" />
 				<Box bg="white" p="12" shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
 						<Flex justify="space-between" aling="center">

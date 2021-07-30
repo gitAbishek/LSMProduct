@@ -1,11 +1,12 @@
 import {
+	Alert,
+	AlertDescription,
+	AlertIcon,
+	AlertTitle,
 	Box,
 	Button,
 	ButtonGroup,
 	Checkbox,
-	Editable,
-	EditableInput,
-	EditablePreview,
 	Flex,
 	Heading,
 	Icon,
@@ -14,11 +15,14 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiCopy, BiPlus, BiTrash } from 'react-icons/bi';
 import { Sortable } from '../../../../../assets/icons';
 import { sectionHeaderStyles } from '../../../../../config/styles';
+import { QuestionContext } from '../../../../../context/QuestionProvider';
+import { duplicateObject, existsOnArray } from '../../../../../utils/utils';
+import EditableAnswer from '../EditableAnswer';
 
 interface Props {
 	answersData?: any;
@@ -28,6 +32,8 @@ const MultipleChoice: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
 	const [answers, setAnswers] = useState<any>(answersData || []);
+	const { setSubmitQuestionDisabled } = useContext(QuestionContext);
+
 	const iconStyles = {
 		fontSize: 'x-large',
 		color: 'gray.500',
@@ -37,7 +43,13 @@ const MultipleChoice: React.FC<Props> = (props) => {
 
 	const onAddNewAnswerPress = () => {
 		var newAnswers = [...answers];
-		setAnswers([...newAnswers, { name: 'new answer', correct: false }]);
+		setAnswers([
+			...newAnswers,
+			{
+				name: 'new answer ' + newAnswers.length,
+				correct: newAnswers.length === 0 ? true : false,
+			},
+		]);
 	};
 
 	const onDeletePress = (id: any) => {
@@ -52,12 +64,6 @@ const MultipleChoice: React.FC<Props> = (props) => {
 		setAnswers(newAnswers);
 	};
 
-	const onNameChange = (id: any, name: string) => {
-		var newAnswers = [...answers];
-		newAnswers.splice(id, 1, { ...newAnswers[id], name: name });
-		setAnswers(newAnswers);
-	};
-
 	const onDuplicatePress = (name: string) => {
 		var newAnswers = [...answers];
 		setAnswers([...newAnswers, { name: name, correct: false }]);
@@ -65,7 +71,11 @@ const MultipleChoice: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		setValue('answers', answers);
-	}, [answers, setValue]);
+		setSubmitQuestionDisabled(duplicateObject('name', answers) ? true : false);
+		setSubmitQuestionDisabled(
+			existsOnArray(answers, 'correct', true) ? false : true
+		);
+	}, [answers, setValue, setSubmitQuestionDisabled]);
 
 	return (
 		<Stack direction="column" spacing="6">
@@ -76,6 +86,26 @@ const MultipleChoice: React.FC<Props> = (props) => {
 			</Flex>
 			<Input type="hidden" {...register('answers')} />
 			<Box>
+				{duplicateObject('name', answers) && (
+					<Alert status="error" mb="4" fontSize="xs" p="2">
+						<AlertIcon />
+						<AlertTitle mr={2}>{__('Duplicate Names', 'masteriyo')}</AlertTitle>
+						<AlertDescription>
+							{__('Answer can not be duplicate', 'masteriyo')}
+						</AlertDescription>
+					</Alert>
+				)}
+				{!existsOnArray(answers, 'correct', true) && (
+					<Alert status="error" mb="4" fontSize="xs" p="2">
+						<AlertIcon />
+						<AlertTitle mr={2}>
+							{__('No answer checked', 'masteriyo')}
+						</AlertTitle>
+						<AlertDescription>
+							{__('Please check at least one answer', 'masteriyo')}
+						</AlertDescription>
+					</Alert>
+				)}
 				{answers &&
 					answers.map(
 						(answer: { name: string; correct: boolean }, index: number) => (
@@ -91,12 +121,12 @@ const MultipleChoice: React.FC<Props> = (props) => {
 								py="1">
 								<Stack direction="row" spacing="2" align="center" flex="1">
 									<Icon as={Sortable} fontSize="lg" color="gray.500" />
-									<Editable value={answer?.name}>
-										<EditablePreview minW="sm" />
-										<EditableInput
-											onChange={(e) => onNameChange(index, e.target.value)}
-										/>
-									</Editable>
+									<EditableAnswer
+										index={index}
+										defaultValue={answer.name}
+										answers={answers}
+										setAnswers={setAnswers}
+									/>
 								</Stack>
 								<Stack direction="row" spacing="4" flexWrap="wrap">
 									<Checkbox

@@ -230,3 +230,11 @@ export const duplicateObject = (propertyName: any, inputArray: any) => {
 
 	return seenDuplicate;
 };
+
+export const existsOnArray = (array: any, property: any, value: any) => {
+	var arr = array;
+
+	return arr.some(function (el: any) {
+		return el[property] === value;
+	});
+};

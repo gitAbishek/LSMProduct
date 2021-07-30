@@ -98,6 +98,7 @@ const SingleChoice: React.FC<Props> = (props) => {
 						</AlertDescription>
 					</Alert>
 				)}
+
 				{answers &&
 					answers.map(
 						(answer: { name: string; correct: boolean }, index: number) => (

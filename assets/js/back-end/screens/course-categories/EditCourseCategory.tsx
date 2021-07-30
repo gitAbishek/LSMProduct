@@ -49,12 +49,7 @@ const EditCourseCategory = () => {
 
 	const categoryQuery = useQuery(
 		[`courseCategory${categoryId}`, categoryId],
-		() => categoryAPI.get(categoryId),
-		{
-			onError: () => {
-				history.push(routes.notFound);
-			},
-		}
+		() => categoryAPI.get(categoryId)
 	);
 
 	const updateCategory = useMutation(
@@ -67,8 +62,9 @@ const EditCourseCategory = () => {
 					isClosable: true,
 					status: 'success',
 				});
-				history.push(routes.course_categories.list);
+				categoryQuery.refetch();
 				queryClient.invalidateQueries('courseCategoriesList');
+				history.push(routes.course_categories.list);
 			},
 			onError: (error: any) => {
 				toast({

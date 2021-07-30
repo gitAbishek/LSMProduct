@@ -22,6 +22,7 @@ const PageNav: React.FC<Props> = (props) => {
 	return (
 		<Breadcrumb
 			fontWeight="medium"
+			colorScheme="blue"
 			fontSize="sm"
 			separator={<Icon as={BiChevronRight} color="gray.500" />}>
 			<BreadcrumbItem>
@@ -32,7 +33,7 @@ const PageNav: React.FC<Props> = (props) => {
 					Courses
 				</BreadcrumbLink>
 			</BreadcrumbItem>
-			{courseId && (
+			{courseId && courseName && (
 				<BreadcrumbItem>
 					<BreadcrumbLink
 						color="gray.500"
@@ -42,6 +43,13 @@ const PageNav: React.FC<Props> = (props) => {
 					</BreadcrumbLink>
 				</BreadcrumbItem>
 			)}
+
+			{courseName && (
+				<BreadcrumbItem isCurrentPage>
+					<BreadcrumbLink>{courseName}</BreadcrumbLink>
+				</BreadcrumbItem>
+			)}
+
 			{hasCategoryName && (
 				<BreadcrumbItem>
 					<BreadcrumbLink

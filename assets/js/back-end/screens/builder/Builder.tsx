@@ -65,6 +65,9 @@ const Builder: React.FC = () => {
 	const [deleteSectionId, setDeleteSectionId] = useState<number>();
 	const { type, page } = queryString.parse(search);
 	const [tabIndex, setTabIndex] = useState<number>(page === 'builder' ? 1 : 0);
+	const [currentPageName, setCurrentPageName] = useState<string>(
+		page === 'builder' ? 'Builder' : 'Edit'
+	);
 
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -180,7 +183,7 @@ const Builder: React.FC = () => {
 			<>
 				<FormProvider {...methods}>
 					<Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
-						<Stack direction="column" spacing="10" align="center">
+						<Stack direction="column" spacing="8" align="center">
 							<Box bg="white" w="full">
 								<Container maxW="container.xl">
 									<Flex
@@ -197,6 +200,7 @@ const Builder: React.FC = () => {
 												<Tab
 													sx={tabStyles}
 													onClick={() => {
+														setCurrentPageName(__('Edit', 'masteriyo'));
 														history.push(
 															routes.courses.edit.replace(':courseId', courseId)
 														);
@@ -207,6 +211,7 @@ const Builder: React.FC = () => {
 												<Tab
 													sx={tabStyles}
 													onClick={() => {
+														setCurrentPageName(__('Builder', 'masteriyo'));
 														history.push({
 															pathname: routes.courses.edit.replace(
 																':courseId',
@@ -221,6 +226,7 @@ const Builder: React.FC = () => {
 												<Tab
 													sx={tabStyles}
 													onClick={() => {
+														setCurrentPageName(__('Settings', 'masteriyo'));
 														history.push(
 															routes.courses.edit.replace(':courseId', courseId)
 														);
@@ -269,7 +275,10 @@ const Builder: React.FC = () => {
 							</Box>
 							<Container maxW="container.xl">
 								<Stack direction="column" spacing="2">
-									<PageNav currentTitle={courseQuery.data.name} />
+									<PageNav
+										courseName={courseQuery.data.name}
+										currentTitle={currentPageName}
+									/>
 									<TabPanels>
 										<TabPanel sx={tabPanelStyles}>
 											<EditCourse courseData={courseQuery.data} />

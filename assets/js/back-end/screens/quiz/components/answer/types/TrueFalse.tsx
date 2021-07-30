@@ -49,10 +49,6 @@ const TrueFalse: React.FC<Props> = (props) => {
 		var newAnswers = [...answers];
 		if (newAnswers.length < 2) {
 			setAnswers([...newAnswers, { name: 'new answer', correct: false }]);
-			setValue('answers', [
-				...newAnswers,
-				{ name: 'new answer', correct: false },
-			]);
 		}
 	};
 
@@ -60,7 +56,6 @@ const TrueFalse: React.FC<Props> = (props) => {
 		var newAnswers = [...answers];
 		newAnswers.splice(id, 1);
 		setAnswers(newAnswers);
-		setValue('answers', newAnswers);
 	};
 
 	const onCheckPress = (id: any) => {
@@ -73,10 +68,10 @@ const TrueFalse: React.FC<Props> = (props) => {
 
 		newAnswers.splice(id, 1, { ...newAnswers[id], correct: true });
 		setAnswers(newAnswers);
-		setValue('answers', newAnswers);
 	};
 
 	useEffect(() => {
+		setValue('answers', answers);
 		setSubmitQuestionDisabled(duplicateObject('name', answers) ? true : false);
 	}, [answers, setValue, setSubmitQuestionDisabled]);
 

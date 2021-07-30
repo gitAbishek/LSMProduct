@@ -74,44 +74,46 @@ const AllCourseCategories = () => {
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header />
 			<Container maxW="container.xl">
-				<PageNav currentTitle="Categories" courseName="Courses" />
-				<Box bg="white" p="12" shadow="box" mx="auto">
-					<Stack direction="column" spacing="8">
-						<Flex justify="space-between" aling="center">
-							<Heading as="h1" size="lg">
-								{__('Categories', 'masteriyo')}
-							</Heading>
-						</Flex>
+				<Stack direction="column" spacing="6">
+					<PageNav currentTitle="Categories" />
+					<Box bg="white" p="12" shadow="box" mx="auto">
+						<Stack direction="column" spacing="8">
+							<Flex justify="space-between" aling="center">
+								<Heading as="h1" size="lg">
+									{__('Categories', 'masteriyo')}
+								</Heading>
+							</Flex>
 
-						<Table>
-							<Thead>
-								<Tr>
-									<Th>{__('Name', 'masteriyo')}</Th>
-									<Th>{__('Description', 'masteriyo')}</Th>
-									<Th>{__('Slug', 'masteriyo')}</Th>
-									<Th>{__('Count', 'masteriyo')}</Th>
-									<Th>{__('Actions', 'masteriyo')}</Th>
-								</Tr>
-							</Thead>
-							<Tbody>
-								{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
-								{categoriesQuery.isSuccess &&
-									categoriesQuery.data.map((cat: any) => (
-										<CategoryRow
-											key={cat.id}
-											id={cat.id}
-											name={cat.name}
-											description={cat.description}
-											slug={cat.slug}
-											count={cat.count}
-											link={cat.link}
-											onDeletePress={onDeletePress}
-										/>
-									))}
-							</Tbody>
-						</Table>
-					</Stack>
-				</Box>
+							<Table>
+								<Thead>
+									<Tr>
+										<Th>{__('Name', 'masteriyo')}</Th>
+										<Th>{__('Description', 'masteriyo')}</Th>
+										<Th>{__('Slug', 'masteriyo')}</Th>
+										<Th>{__('Count', 'masteriyo')}</Th>
+										<Th>{__('Actions', 'masteriyo')}</Th>
+									</Tr>
+								</Thead>
+								<Tbody>
+									{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
+									{categoriesQuery.isSuccess &&
+										categoriesQuery.data.map((cat: any) => (
+											<CategoryRow
+												key={cat.id}
+												id={cat.id}
+												name={cat.name}
+												description={cat.description}
+												slug={cat.slug}
+												count={cat.count}
+												link={cat.link}
+												onDeletePress={onDeletePress}
+											/>
+										))}
+								</Tbody>
+							</Table>
+						</Stack>
+					</Box>
+				</Stack>
 			</Container>
 			<AlertDialog
 				isOpen={isOpen}

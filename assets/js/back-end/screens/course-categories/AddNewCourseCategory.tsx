@@ -60,48 +60,48 @@ const AddNewCourseCategory = () => {
 
 	return (
 		<Container maxW="container.xl" marginTop="6">
-			<PageNav
-				currentTitle="Add New Category"
-				hasCategoryName
-				courseName="Courses"
-			/>
-			<FormProvider {...methods}>
-				<Box bg="white" p="10" shadow="box">
-					<Stack direction="column" spacing="8">
-						<Flex aling="center" justify="space-between">
-							<Heading as="h1" fontSize="x-large">
-								{__('Add New Category', 'masteriyo')}
-							</Heading>
-						</Flex>
+			<Stack direction="column" spacing="6">
+				<PageNav currentTitle="Add New Category" hasCategoryName />
+				<FormProvider {...methods}>
+					<Box bg="white" p="10" shadow="box">
+						<Stack direction="column" spacing="8">
+							<Flex aling="center" justify="space-between">
+								<Heading as="h1" fontSize="x-large">
+									{__('Add New Category', 'masteriyo')}
+								</Heading>
+							</Flex>
 
-						<form onSubmit={methods.handleSubmit(onSubmit)}>
-							<Stack direction="column" spacing="6">
-								<NameInput />
-								<SlugInput />
-								<DescriptionInput />
+							<form onSubmit={methods.handleSubmit(onSubmit)}>
+								<Stack direction="column" spacing="6">
+									<NameInput />
+									<SlugInput />
+									<DescriptionInput />
 
-								<Box py="3">
-									<Divider />
-								</Box>
+									<Box py="3">
+										<Divider />
+									</Box>
 
-								<ButtonGroup>
-									<Button
-										colorScheme="blue"
-										type="submit"
-										isLoading={createCategory.isLoading}>
-										{__('Create', 'masteriyo')}
-									</Button>
-									<Button
-										variant="outline"
-										onClick={() => history.push(routes.course_categories.list)}>
-										{__('Cancel', 'masteriyo')}
-									</Button>
-								</ButtonGroup>
-							</Stack>
-						</form>
-					</Stack>
-				</Box>
-			</FormProvider>
+									<ButtonGroup>
+										<Button
+											colorScheme="blue"
+											type="submit"
+											isLoading={createCategory.isLoading}>
+											{__('Create', 'masteriyo')}
+										</Button>
+										<Button
+											variant="outline"
+											onClick={() =>
+												history.push(routes.course_categories.list)
+											}>
+											{__('Cancel', 'masteriyo')}
+										</Button>
+									</ButtonGroup>
+								</Stack>
+							</form>
+						</Stack>
+					</Box>
+				</FormProvider>
+			</Stack>
 		</Container>
 	);
 };

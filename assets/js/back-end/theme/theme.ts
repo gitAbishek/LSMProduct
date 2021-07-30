@@ -204,6 +204,16 @@ const theme = extendTheme({
 			},
 		},
 
+		Radio: {
+			sizes: {
+				md: {
+					label: {
+						fontSize: 'sm',
+					},
+				},
+			},
+		},
+
 		Steps,
 	},
 });

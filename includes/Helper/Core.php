@@ -2926,3 +2926,23 @@ function masteriyo_get_page_id_by_slug( $page_slug ) {
 		return -1;
 	}
 }
+
+/**
+ * Check whether the string starts with substring.
+ *
+ * @since 0.1.0
+ * @return bool
+ */
+function masteriyo_starts_with( $haystack, $needle ) {
+	return substr( $haystack, 0, strlen( $needle ) ) === $needle;
+}
+
+/**
+ * Check whether the string ends with substring.
+ *
+ * @since 0.1.0
+ * @return bool
+ */
+function masteriyo_ends_with( $haystack, $needle ) {
+	return substr( $haystack, -strlen( $needle ) ) === $needle;
+}

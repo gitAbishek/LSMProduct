@@ -29,7 +29,7 @@ class Capabilities {
 	 * @return array
 	 */
 	public static function map_meta_cap( $caps, $cap, $user_id, $args ) {
-		if ( str_ends_with( $cap, 'course_progress' ) ) {
+		if ( masteriyo_ends_with( $cap, 'course_progress' ) ) {
 			$caps = self::course_progreess_map_meta_cap( $caps, $cap, $user_id, $args );
 		}
 

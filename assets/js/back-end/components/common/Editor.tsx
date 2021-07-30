@@ -1,12 +1,10 @@
 import { Box, Input, useOutsideClick } from '@chakra-ui/react';
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import lowlight from 'lowlight';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import EditorMenuBar from './EditorMenuBar';
@@ -28,9 +26,6 @@ const Editor: React.FC<Props> = (props) => {
 			Image.configure({ inline: true }),
 			Dropcursor,
 			Placeholder,
-			CodeBlockLowlight.configure({
-				lowlight,
-			}),
 			TextAlign.configure({
 				types: ['heading', 'paragraph'],
 			}),

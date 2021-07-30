@@ -314,7 +314,7 @@ class CourseProgressController extends CrudController {
 			'id'           => $course_progress->get_id( $context ),
 			'user_id'      => $course_progress->get_user_id( $context ),
 			'course_id'    => $course_progress->get_course_id( $context ),
-			'name'         => is_wp_error( $course ) ? '' : $course->get_name( $context ),
+			'name'         => $course ? $course->get_name( $context ) : '',
 			'status'       => $course_progress->get_status( $context ),
 			'started_at'   => masteriyo_rest_prepare_date_response( $course_progress->get_started_at( $context ) ),
 			'modified_at'  => masteriyo_rest_prepare_date_response( $course_progress->get_modified_at( $context ) ),
@@ -348,6 +348,8 @@ class CourseProgressController extends CrudController {
 				'completed_at' => null,
 			)
 		);
+
+		$args['paged'] = $args['page'];
 
 		/**
 		 * Filter the query arguments for a request.

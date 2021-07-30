@@ -141,7 +141,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 											}}
 											render={({ field }) => (
 												<InputGroup>
-													<NumberInput {...field} w="sm" min={0}>
+													<NumberInput {...field} flex="1" min={0}>
 														<NumberInputField rounded="sm" />
 														<NumberInputStepper>
 															<NumberIncrementStepper />
@@ -170,7 +170,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 											}}
 											render={({ field }) => (
 												<InputGroup>
-													<NumberInput {...field} w="sm" min={0} max={59}>
+													<NumberInput {...field} flex="1" min={0} max={59}>
 														<NumberInputField rounded="sm" />
 														<NumberInputStepper>
 															<NumberIncrementStepper />

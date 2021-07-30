@@ -1121,7 +1121,7 @@ msgstr ""
 msgid "Question Deleted"
 msgstr ""
 
-#: assets/js/back-end/screens/quiz/components/question/Questions.tsx:69
+#: assets/js/back-end/screens/quiz/components/question/Questions.tsx:80
 msgid ""
 "There are no questions right now, You can add them by clicking on Add New "
 "Question"

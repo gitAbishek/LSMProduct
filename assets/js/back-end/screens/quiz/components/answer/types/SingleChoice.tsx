@@ -21,7 +21,7 @@ import { BiCopy, BiPlus, BiTrash } from 'react-icons/bi';
 import { Sortable } from '../../../../../assets/icons';
 import { sectionHeaderStyles } from '../../../../../config/styles';
 import { QuestionContext } from '../../../../../context/QuestionProvider';
-import { duplicateObject } from '../../../../../utils/utils';
+import { duplicateObject, existsOnArray } from '../../../../../utils/utils';
 import EditableAnswer from '../EditableAnswer';
 
 interface Props {
@@ -78,6 +78,9 @@ const SingleChoice: React.FC<Props> = (props) => {
 	useEffect(() => {
 		setValue('answers', answers);
 		setSubmitQuestionDisabled(duplicateObject('name', answers) ? true : false);
+		setSubmitQuestionDisabled(
+			existsOnArray(answers, 'correct', true) ? false : true
+		);
 	}, [answers, setValue, setSubmitQuestionDisabled]);
 
 	return (
@@ -98,7 +101,17 @@ const SingleChoice: React.FC<Props> = (props) => {
 						</AlertDescription>
 					</Alert>
 				)}
-
+				{!existsOnArray(answers, 'correct', true) && (
+					<Alert status="error" mb="4" fontSize="xs" p="2">
+						<AlertIcon />
+						<AlertTitle mr={2}>
+							{__('No answer checked', 'masteriyo')}
+						</AlertTitle>
+						<AlertDescription>
+							{__('Please check at least one answer', 'masteriyo')}
+						</AlertDescription>
+					</Alert>
+				)}
 				{answers &&
 					answers.map(
 						(answer: { name: string; correct: boolean }, index: number) => (

@@ -556,6 +556,10 @@ class CourseBuilderController extends PostsController {
 		$sections = (array) $request['sections'];
 
 		foreach ( $sections as $section ) {
+			if ( ! isset( $section['contents'] ) ) {
+				continue;
+			}
+
 			$contents = array_unique( (array) $section['contents'] );
 
 			if ( empty( $contents ) ) {

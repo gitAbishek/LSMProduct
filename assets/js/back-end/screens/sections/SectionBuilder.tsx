@@ -38,7 +38,7 @@ const SectionBuilder: React.FC<Props> = (props) => {
 					<Box
 						ref={droppableProvided.innerRef}
 						{...droppableProvided.droppableProps}>
-						{builderData.section_order.map((sectionId: any, index: any) => {
+						{builderData?.section_order?.map((sectionId: any, index: any) => {
 							const section = builderData.sections[sectionId];
 							return (
 								<Section

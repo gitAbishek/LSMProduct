@@ -15,11 +15,12 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiPlus, BiTrash } from 'react-icons/bi';
 import { Sortable } from '../../../../../assets/icons';
 import { sectionHeaderStyles } from '../../../../../config/styles';
+import { QuestionContext } from '../../../../../context/QuestionProvider';
 import { duplicateObject } from '../../../../../utils/utils';
 import EditableAnswer from '../EditableAnswer';
 
@@ -30,6 +31,7 @@ interface Props {
 const TrueFalse: React.FC<Props> = (props) => {
 	const { answersData } = props;
 	const { register, setValue } = useFormContext();
+	const { setSubmitQuestionDisabled } = useContext(QuestionContext);
 	const [answers, setAnswers] = useState<any>(
 		answersData || [
 			{ name: 'True', correct: true },
@@ -45,17 +47,20 @@ const TrueFalse: React.FC<Props> = (props) => {
 
 	const onAddNewAnswerPress = () => {
 		var newAnswers = [...answers];
-		newAnswers.length < 2 &&
-			setAnswers([
+		if (newAnswers.length < 2) {
+			setAnswers([...newAnswers, { name: 'new answer', correct: false }]);
+			setValue('answers', [
 				...newAnswers,
-				{ name: 'new answer ' + (answers.length + 1), correct: false },
+				{ name: 'new answer', correct: false },
 			]);
+		}
 	};
 
 	const onDeletePress = (id: any) => {
 		var newAnswers = [...answers];
 		newAnswers.splice(id, 1);
 		setAnswers(newAnswers);
+		setValue('answers', newAnswers);
 	};
 
 	const onCheckPress = (id: any) => {
@@ -68,11 +73,12 @@ const TrueFalse: React.FC<Props> = (props) => {
 
 		newAnswers.splice(id, 1, { ...newAnswers[id], correct: true });
 		setAnswers(newAnswers);
+		setValue('answers', newAnswers);
 	};
 
 	useEffect(() => {
-		setValue('answers', answers);
-	}, [answers, setValue]);
+		setSubmitQuestionDisabled(duplicateObject('name', answers) ? true : false);
+	}, [answers, setValue, setSubmitQuestionDisabled]);
 
 	return (
 		<Stack direction="column" spacing="6">

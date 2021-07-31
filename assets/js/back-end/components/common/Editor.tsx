@@ -36,9 +36,12 @@ const Editor: React.FC<Props> = (props) => {
 	useOutsideClick({
 		ref: ref,
 		handler: () => {
-			setValue(name, editor?.getHTML());
 			willReset && editor?.commands?.clearContent();
 		},
+	});
+
+	editor?.on('update', () => {
+		setValue(name, editor?.getHTML());
 	});
 
 	return (

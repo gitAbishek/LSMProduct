@@ -418,6 +418,17 @@ class SectionsController extends PostsController {
 		// Menu order.
 		if ( isset( $request['menu_order'] ) ) {
 			$section->set_menu_order( $request['menu_order'] );
+		} else {
+			$query = new \WP_Query(
+				array(
+					'post_type'      => 'section',
+					'post_status'    => 'any',
+					'posts_per_page' => 1,
+					'post_parent'    => $request['parent_id'],
+				)
+			);
+
+			$section->set_menu_order( $query->found_posts );
 		}
 
 		// Section parent ID.

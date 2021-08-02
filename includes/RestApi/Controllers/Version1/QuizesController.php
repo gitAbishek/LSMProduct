@@ -155,7 +155,7 @@ class QuizesController extends PostsController {
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'start_quiz' ),
-					'permission_callback' => 'is_user_logged_in',
+					'permission_callback' => array( $this, 'start_quiz_permissions_check' ),
 				),
 			)
 		);
@@ -316,6 +316,39 @@ class QuizesController extends PostsController {
 			)
 		);
 
+	}
+
+	/**
+	 * Check if a given request has access to start quiz.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function start_quiz_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$course_id = (int) get_post_meta( (int) $request['id'], '_course_id', true );
+
+		$is_user_enrolled = masteriyo_is_user_enrolled_in_course( $course_id, get_current_user_id() );
+
+		if ( ! $is_user_enrolled ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_start_quiz',
+				__( 'Sorry, you are not allowed to start quiz. Please enroll a course first.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
 	}
 
 	/**

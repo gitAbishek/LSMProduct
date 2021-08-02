@@ -290,8 +290,8 @@ class Permission {
 		$contexts = array(
 			'start' => 'start_quiz',
 			'check' => 'check_answers',
-			'read'  => 'read_attempt',
-			'reads' => 'read_attempts',
+			'read'  => 'read_quiz_attempt',
+			'reads' => 'read_quiz_attempts',
 		);
 
 		$cap        = $contexts[ $context ];

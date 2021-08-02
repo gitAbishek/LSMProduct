@@ -83,6 +83,7 @@ const Sidebar: React.FC<Props> = (props) => {
 							height: '60px',
 							color: 'white',
 							fontSize: '12',
+							top: '128px',
 						}}
 						_hover={{
 							backgroundImage: `url(${CloseCone})`,

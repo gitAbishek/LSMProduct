@@ -45,7 +45,7 @@ const Hightlights: React.FC<Props> = (props) => {
 				<EditorContent editor={editor} />
 			</Box>
 			<FormHelperText fontSize="xs">
-				{__('Add your overview on each bullet', 'masteriyo')}
+				{__('Add your course highlight on each bullet', 'masteriyo')}
 			</FormHelperText>
 		</FormControl>
 	);

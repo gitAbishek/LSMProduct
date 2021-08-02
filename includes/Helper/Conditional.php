@@ -125,7 +125,7 @@ function masteriyo_is_rest_api_request() {
  * @return bool
  */
 function masteriyo_is_debug_enabled() {
-	return (bool) Constants::get( 'MASTERIYO_DEBUG' );
+	return masteriyo_get_setting( 'advance.debug.debug' );
 }
 
 /**
@@ -605,8 +605,21 @@ if ( ! function_exists( 'masteriyo_is_interactive_page' ) ) {
 /**
  * Check whether the post type debug is enabbled or not.
  *
- * @return void
+ * @since 0.1.0
+ *
+ * @return bool
  */
 function masteriyo_is_post_type_debug_enabled() {
 	return (bool) Constants::get( 'MASTERIYO_POST_TYPE_DEBUG' );
+}
+
+/**
+ * Is masteriyo template debug enabled.
+ *
+ * @since 0.1.0
+ *
+ * @return bool
+ */
+function masteriyo_is_template_debug_enabled() {
+	return masteriyo_get_setting( 'advance.debug.template_debug' );
 }

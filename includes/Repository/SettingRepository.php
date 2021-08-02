@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting Repository
@@ -5,6 +6,7 @@
 
 namespace ThemeGrill\Masteriyo\Repository;
 
+use ThemeGrill\Masteriyo\Constants;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\Setting;
 
@@ -65,6 +67,8 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 
 		$setting->set_data( $setting_in_db );
 
+		$this->process_setting( $setting );
+
 		$setting->set_object_read( true );
 
 		do_action( 'masteriyo_setting_read', $setting->get_id(), $setting );
@@ -101,5 +105,23 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 		update_option( $setting_data );
 
 		do_action( 'masteriyo_reset_setting', $setting );
+	}
+
+	/**
+	 * Process setting.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  \ThemeGrill\Masteriyo\Models\Setting Setting object.
+	 * @return void
+	 */
+	protected function process_setting( &$setting ) {
+		if ( Constants::get( 'MASTERIYO_TEMPLATE_DEBUG_MODE' ) ) {
+			$setting->set( 'advance.debug.template_debug', Constants::get( 'MASTERIYO_TEMPLATE_DEBUG_MODE' ) );
+		}
+
+		if ( Constants::get( 'MASTERIYO_DEBUG' ) ) {
+			$setting->set( 'advance.debug.debug', Constants::get( 'MASTERIYO_DEBUG' ) );
+		}
 	}
 }

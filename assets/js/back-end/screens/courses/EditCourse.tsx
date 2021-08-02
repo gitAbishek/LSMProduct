@@ -14,7 +14,7 @@ interface Props {
 const EditCourse: React.FC<Props> = (props) => {
 	const { courseData } = props;
 
-	console.log(courseData);
+	// console.log(courseData);
 	return (
 		<form>
 			<Stack direction="row" spacing="8">

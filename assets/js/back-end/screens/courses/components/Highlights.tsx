@@ -23,7 +23,7 @@ const Hightlights: React.FC<Props> = (props) => {
 	});
 
 	editor?.on('update', () => {
-		setValue('overview', editor?.getHTML());
+		setValue('highlights', editor?.getHTML());
 	});
 
 	return (

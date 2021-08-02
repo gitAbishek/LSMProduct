@@ -26,7 +26,7 @@ class Order extends PostType {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$debug = masteriyo_is_debug_enabled();
+		$debug = masteriyo_is_post_type_debug_enabled();
 
 		$this->labels = array(
 			'name'                  => _x( 'Orders', 'Order General Name', 'masteriyo' ),

@@ -601,3 +601,12 @@ if ( ! function_exists( 'masteriyo_is_interactive_page' ) ) {
 		return isset( $_GET['masteriyo-page'] ) && 'interactive' === $_GET['masteriyo-page' ]; // phpcs:ignore
 	}
 }
+
+/**
+ * Check whether the post type debug is enabbled or not.
+ *
+ * @return void
+ */
+function masteriyo_is_post_type_debug_enabled() {
+	return (bool) Constants::get( 'MASTERIYO_POST_TYPE_DEBUG' );
+}

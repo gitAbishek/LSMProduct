@@ -16,17 +16,16 @@ class Course extends PostType {
 	protected $slug = 'course';
 
 	public function __construct() {
-		$debug                = masteriyo_is_debug_enabled();
-		$permalinks           = masteriyo_get_permalink_structure();
+		$debug               = masteriyo_is_post_type_debug_enabled();
+		$permalinks          = masteriyo_get_permalink_structure();
 		$course_list_page_id = masteriyo_get_page_id( 'course-list' );
-		$supports             = array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'publicize', 'wpcom-markdown' );
+		$supports            = array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'publicize', 'wpcom-markdown' );
 
 		if ( $course_list_page_id && get_post( $course_list_page_id ) ) {
 			$has_archive = urldecode( get_page_uri( $course_list_page_id ) );
 		} else {
 			$has_archive = 'courses-list';
 		}
-
 
 		$this->labels = array(
 			'name'                  => _x( 'Courses', 'Course General Name', 'masteriyo' ),

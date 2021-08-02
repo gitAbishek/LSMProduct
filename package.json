@@ -8,6 +8,7 @@
     "@chakra-ui/react": "1.4.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@tiptap/extension-document": "2.0.0-beta.13",
     "@tiptap/extension-dropcursor": "2.0.0-beta.18",
     "@tiptap/extension-image": "2.0.0-beta.14",
     "@tiptap/extension-placeholder": "2.0.0-beta.26",

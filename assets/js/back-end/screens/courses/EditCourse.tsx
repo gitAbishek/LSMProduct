@@ -4,6 +4,7 @@ import { CourseDataMap } from '../../types/course';
 import Categories from './components/Categories';
 import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
+import Hightlights from './components/Highlights';
 import Name from './components/Name';
 
 interface Props {
@@ -25,14 +26,16 @@ const EditCourse: React.FC<Props> = (props) => {
 					flexDirection="column"
 					justifyContent="space-between">
 					<Stack direction="column" spacing="6">
-						<Name defaultValue={courseData.name} />
-						<Description defaultValue={courseData.description} />
+						<Name defaultValue={courseData?.name} />
+						<Description defaultValue={courseData?.description} />
 					</Stack>
 				</Box>
 				<Box w="400px" bg="white" p="10" shadow="box">
 					<Stack direction="column" spacing="6">
-						<Categories defaultValue={courseData.categories} />
-						<FeaturedImage defaultValue={courseData.featured_image} />
+						<Hightlights defaultValue={courseData?.highlights} />
+
+						<Categories defaultValue={courseData?.categories} />
+						<FeaturedImage defaultValue={courseData?.featured_image} />
 					</Stack>
 				</Box>
 			</Stack>

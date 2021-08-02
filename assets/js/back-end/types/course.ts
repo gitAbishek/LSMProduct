@@ -38,4 +38,5 @@ export interface CourseDataMap {
 	access_mode: string;
 	show_curriculum: boolean;
 	_links: CourseLinksMap;
+	highlights: string;
 }

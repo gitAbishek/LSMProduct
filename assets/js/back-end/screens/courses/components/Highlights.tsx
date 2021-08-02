@@ -10,7 +10,7 @@ import { useFormContext } from 'react-hook-form';
 interface Props {
 	defaultValue?: string;
 }
-const OverviewList: React.FC<Props> = (props) => {
+const Hightlights: React.FC<Props> = (props) => {
 	const { setValue } = useFormContext();
 	const { defaultValue } = props;
 	const CustomDocument = Document.extend({
@@ -28,7 +28,7 @@ const OverviewList: React.FC<Props> = (props) => {
 
 	return (
 		<FormControl>
-			<FormLabel>{__('Overview List', 'masteriyo')}</FormLabel>
+			<FormLabel>{__('Course Highlights', 'masteriyo')}</FormLabel>
 			<Box
 				border="1px"
 				fontSize="sm"
@@ -51,4 +51,4 @@ const OverviewList: React.FC<Props> = (props) => {
 	);
 };
 
-export default OverviewList;
+export default Hightlights;

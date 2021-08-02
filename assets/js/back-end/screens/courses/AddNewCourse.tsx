@@ -32,9 +32,8 @@ import CourseSetting from '../builder/component/CourseSetting';
 import Categories from './components/Categories';
 import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
+import Hightlights from './components/Highlights';
 import Name from './components/Name';
-import OverviewList from './components/OverviewList';
-import OverviewTitle from './components/OverviewTitle';
 
 const AddNewCourse: React.FC = () => {
 	const history = useHistory();
@@ -185,8 +184,7 @@ const AddNewCourse: React.FC = () => {
 												</Box>
 												<Box w="400px" bg="white" p="10" shadow="box">
 													<Stack direction="column" spacing="6">
-														<OverviewTitle />
-														<OverviewList />
+														<Hightlights />
 														<Categories />
 														<FeaturedImage />
 													</Stack>

@@ -56,7 +56,7 @@ class Capabilities {
 				if ( $progress->get_user_id() && absint( $user_id ) === $progress->get_user_id() ) {
 					$caps = array( 'edit_course_progresses' );
 				} else {
-					$caps = current_user_can( 'edit_others_course_progresses' ) ? array( 'edit_course_progresses' ) : array( 'do_not_allow' );
+					$caps = user_can( 'edit_others_course_progresses', $user_id ) ? array( 'edit_course_progresses' ) : array( 'do_not_allow' );
 				}
 
 				break;
@@ -72,7 +72,7 @@ class Capabilities {
 				if ( $progress->get_user_id() && absint( $user_id ) === $progress->get_user_id() ) {
 					$caps = array( 'delete_course_progresses' );
 				} else {
-					$caps = current_user_can( 'delete_others_course_progresses' ) ? array( 'delete_course_progresses' ) : array( 'do_not_allow' );
+					$caps = user_can( 'delete_others_course_progresses', $user_id ) ? array( 'delete_course_progresses' ) : array( 'do_not_allow' );
 				}
 
 				break;

@@ -92,8 +92,7 @@ class Course extends Model {
 		'billing_cycle'      => '',
 		'show_curriculum'    => true,
 		'purchase_note'      => '',
-		'overview'           => array(),
-		'overview_title'     => 'Course Overview',
+		'highlights'         => '',
 	);
 
 	/**
@@ -652,25 +651,14 @@ class Course extends Model {
 	}
 
 	/**
-	 * Get course overview.
+	 * Get course highlights.
 	 *
 	 * @since 0.1.0
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return int
 	 */
-	public function get_overview( $context = 'view' ) {
-		return $this->get_prop( 'overview', $context );
-	}
-
-	/**
-	 * Get course overview title.
-	 *
-	 * @since 0.1.0
-	 * @param string $context What the value is for. Valid values are view and edit.
-	 * @return int
-	 */
-	public function get_overview_title( $context = 'view' ) {
-		return $this->get_prop( 'overview_title', $context );
+	public function get_highlights( $context = 'view' ) {
+		return $this->get_prop( 'highlights', $context );
 	}
 
 	/**
@@ -1036,27 +1024,15 @@ class Course extends Model {
 	}
 
 	/**
-	 * Set the course overview.
+	 * Set the course highlights.
 	 *
 	 *
 	 * @since 0.1.0
 	 * @param array $value
 	 */
-	public function set_overview( $value ) {
-		$this->set_prop( 'overview', $value );
+	public function set_highlights( $value ) {
+		$this->set_prop( 'highlights', $value );
 	}
-
-	/**
-	 * Set the course overview title.
-	 *
-	 *
-	 * @since 0.1.0
-	 * @param array $value
-	 */
-	public function set_overview_title( $value ) {
-		$this->set_prop( 'overview_title', $value );
-	}
-
 
 	/**
 	 * Get main image ID.

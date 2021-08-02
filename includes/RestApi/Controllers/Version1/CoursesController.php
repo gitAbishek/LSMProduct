@@ -310,8 +310,7 @@ class CoursesController extends PostsController {
 			'access_mode'       => $course->get_access_mode( $context ),
 			'billing_cycle'     => $course->get_billing_cycle( $context ),
 			'show_curriculum'   => $course->get_show_curriculum( $context ),
-			'overview_title'    => $course->get_overview_title( $context ),
-			'overview'          => $course->get_overview( $context ),
+			'highlights'        => $course->get_highlights( $context ),
 			'categories'        => $this->get_taxonomy_terms( $course, 'cat' ),
 			'tags'              => $this->get_taxonomy_terms( $course, 'tag' ),
 			'difficulty'        => $this->get_taxonomy_terms( $course, 'difficulty' ),
@@ -688,15 +687,9 @@ class CoursesController extends PostsController {
 					'default'     => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'overview_title'     => array(
-					'description' => __( 'Course overview title', 'masteriyo' ),
+				'highlights'         => array(
+					'description' => __( 'Course highlights', 'masteriyo' ),
 					'type'        => 'string',
-					'default'     => 'Course Overview',
-					'context'     => array( 'view', 'edit' ),
-				),
-				'overview'           => array(
-					'description' => __( 'Course overview', 'masteriyo' ),
-					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'meta_data'          => array(
@@ -836,14 +829,9 @@ class CoursesController extends PostsController {
 			$course->set_show_curriculum( $request['show_curriculum'] );
 		}
 
-		// Course overview.
-		if ( isset( $request['overview'] ) ) {
-			$course->set_overview( $request['overview'] );
-		}
-
-		// Course overview title.
-		if ( isset( $request['overview_title'] ) ) {
-			$course->set_overview_title( $request['overview_title'] );
+		// Course highlights.
+		if ( isset( $request['highlights'] ) ) {
+			$course->set_highlights( $request['highlights'] );
 		}
 
 		// Course categories.

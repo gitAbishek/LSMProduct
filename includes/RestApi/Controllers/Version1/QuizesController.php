@@ -336,7 +336,7 @@ class QuizesController extends PostsController {
 
 		$course_id = (int) get_post_meta( (int) $request['id'], '_course_id', true );
 
-		$is_user_enrolled = masteriyo_is_user_enrolled_in_course( $course_id, get_current_user_id() );
+		$is_user_enrolled = masteriyo_can_start_course( $course_id, get_current_user_id() );
 
 		if ( ! $is_user_enrolled ) {
 			return new \WP_Error(

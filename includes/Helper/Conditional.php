@@ -521,7 +521,6 @@ if ( ! function_exists( 'masteriyo_is_user_enrolled_in_course' ) ) {
 	 * @return boolean
 	 */
 	function masteriyo_is_user_enrolled_in_course( $course_id, $user_id = null ) {
-		;
 		if ( is_null( $user_id ) ) {
 			$user_id = get_current_user_id();
 		}

@@ -45,6 +45,25 @@ const currencySymbol = window._MASTERIYO_.currency.symbol;
 //@ts-ignore
 const currencyPosition = window._MASTERIYO_.currency.position;
 
+const priceWithSymbol = (price: string, currencySymbol: string) => {
+	switch (currencyPosition) {
+		case 'left':
+			return `${currencySymbol}${price}`;
+
+		case 'right':
+			return `${price}${currencySymbol}`;
+
+		case 'left_space':
+			return `${currencySymbol} ${price}`;
+
+		case 'right_space':
+			return `${price} ${currencySymbol}`;
+		default:
+			// default set to left.
+			return `${currencySymbol}${price}`;
+	}
+};
+
 const CourseList: React.FC<Props> = (props) => {
 	const {
 		id,
@@ -102,9 +121,7 @@ const CourseList: React.FC<Props> = (props) => {
 					<Badge textTransform="none">{__('Free', 'masteriyo')}</Badge>
 				) : (
 					<Text fontWeight="medium" fontSize="xs">
-						{'left' === currencyPosition
-							? `${currencySymbol}${price}`
-							: `${price}${currencySymbol}`}
+						{priceWithSymbol(price, currencySymbol)}
 					</Text>
 				)}
 			</Td>

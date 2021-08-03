@@ -94,6 +94,12 @@ const Payment: React.FC<Props> = (props) => {
 								{...register('payments.currency.currency_position')}>
 								<option value="left">{__('Left', 'masteriyo')}</option>
 								<option value="right">{__('Right', 'masteriyo')}</option>
+								<option value="left_space">
+									{__('Left Space', 'masteriyo')}
+								</option>
+								<option value="right_space">
+									{__('Right Space', 'masteriyo')}
+								</option>
 							</Select>
 						</Flex>
 					</FormControl>

@@ -165,9 +165,9 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 
 							<FormControl>
 								<FormLabel minW="2xs">
-									{__('Featured Image Size', 'masteriyo')}
+									{__('Thumbnail Size', 'masteriyo')}
 									<Tooltip
-										label={__('Course featured image size', 'masteriyo')}
+										label={__('Course thumbnail size', 'masteriyo')}
 										hasArrow
 										fontSize="xs">
 										<Box as="span" sx={infoIconStyles}>

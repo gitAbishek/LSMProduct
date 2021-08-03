@@ -5,7 +5,6 @@ import {
 	Container,
 	Flex,
 	Heading,
-	Icon,
 	IconButton,
 	Image,
 	List,
@@ -22,11 +21,10 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiChevronDown, BiHeart, BiInfoCircle, BiSearch } from 'react-icons/bi';
+import { BiChevronDown, BiInfoCircle } from 'react-icons/bi';
 import { Logo, Polygon } from '../../back-end/constants/images';
 import { CourseProgressSummaryMap } from '../schemas';
 import AvatarMenu from './AvatarMenu';
-import Notification from './Notification';
 
 interface Props {
 	summary: CourseProgressSummaryMap;
@@ -270,11 +268,7 @@ const Header: React.FC<Props> = (props) => {
 								direction="row"
 								spacing="3"
 								align="center"
-								w="120px"
 								color="gray.400">
-								<Icon as={BiSearch} />
-								<Icon as={BiHeart} />
-								<Notification />
 								<AvatarMenu />
 							</Stack>
 						</Stack>

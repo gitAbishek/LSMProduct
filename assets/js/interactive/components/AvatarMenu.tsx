@@ -10,17 +10,33 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 
 const AvatarMenu = () => {
+	const onMenuItemClick = (path: string) => (window.location.href = `${path}`);
+
 	return (
 		<Menu placement="bottom-end">
 			<MenuButton>
 				<Avatar size="sm" />
 			</MenuButton>
 			<MenuList fontSize="sm">
-				<MenuItem>{__('My Profile', 'masteriyo')}</MenuItem>
-				<MenuItem>{__('Settings', 'masteriyo')}</MenuItem>
-				<MenuItem>{__('My Wishlist', 'masteriyo')}</MenuItem>
+				<MenuItem
+					onClick={() =>
+						onMenuItemClick(
+							//@ts-ignore
+							`${_MASTERIYO_.urls.myaccount}`
+						)
+					}>
+					{__('My Profile', 'masteriyo')}
+				</MenuItem>
 				<MenuDivider />
-				<MenuItem>{__('Log Out', 'masteriyo')}</MenuItem>
+				<MenuItem
+					onClick={() =>
+						onMenuItemClick(
+							//@ts-ignore
+							`${_MASTERIYO_.urls.logout}`
+						)
+					}>
+					{__('Log Out', 'masteriyo')}
+				</MenuItem>
 			</MenuList>
 		</Menu>
 	);

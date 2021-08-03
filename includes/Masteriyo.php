@@ -108,6 +108,8 @@ class Masteriyo {
 		);
 
 		add_action( 'admin_init', array( $this, 'admin_redirects' ) );
+
+		add_action( 'after_setup_theme', array( $this, 'add_image_sizes' ) );
 	}
 
 	/**
@@ -457,6 +459,16 @@ class Masteriyo {
 			do_action( 'masteriyo_api_gateway_paypal' );
 		}
 		// phpcs:enable
+	}
+
+	/**
+	 * Add image sizes.
+	 *
+	 * @since 0.1.0
+	 */
+	public function add_image_sizes() {
+		add_image_size( 'masteriyo_single', 1137, 635 );
+		add_image_size( 'masteriyo_thumbnail', 375, 210 );
 	}
 }
 

@@ -581,7 +581,7 @@ class ScriptStyle {
 		global $wp_styles;
 
 		// Bail early if the page is not interacitve.
-		if ( ! ( isset( $_GET['masteriyo' ] ) && 'interactive' === $_GET['masteriyo'] ) ) { // phpcs:ignore
+		if ( ! ( isset( $_GET['masteriyo-page' ] ) && 'interactive' === $_GET['masteriyo-page'] ) ) { // phpcs:ignore
 			return;
 		}
 
@@ -589,8 +589,13 @@ class ScriptStyle {
 
 		foreach ( $wp_styles->registered as $style ) {
 			if ( ! in_array( $style->handle, $whitelist, true ) ) {
-				wp_dequeue_style( $style->handle );
 				wp_deregister_style( $style->handle );
+			}
+		}
+
+		foreach ( $wp_styles->queue as $handle ) {
+			if ( ! in_array( $handle, $whitelist, true ) ) {
+				wp_dequeue_style( $handle );
 			}
 		}
 	}

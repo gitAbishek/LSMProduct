@@ -59,7 +59,7 @@ const Sidebar: React.FC<Props> = (props) => {
 				justifyContent="center"
 				position="fixed"
 				top="32"
-				fontSize="xl"
+				fontSize="x-large"
 				icon={<BiMenu />}
 				onClick={onOpen}
 				bgSize="cover"
@@ -72,7 +72,7 @@ const Sidebar: React.FC<Props> = (props) => {
 			/>
 			<Drawer isOpen={isOpen} placement="left" onClose={onClose}>
 				<DrawerOverlay bg="rgba(255,255,255,0.1)" />
-				<DrawerContent>
+				<DrawerContent sx={{ top: '72px !important' }}>
 					<DrawerCloseButton
 						sx={{
 							position: 'absolute',
@@ -83,7 +83,6 @@ const Sidebar: React.FC<Props> = (props) => {
 							height: '60px',
 							color: 'white',
 							fontSize: '12',
-							top: '128px',
 						}}
 						_hover={{
 							backgroundImage: `url(${CloseCone})`,

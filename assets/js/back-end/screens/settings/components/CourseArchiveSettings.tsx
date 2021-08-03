@@ -30,6 +30,9 @@ interface Props {
 	courseArchiveData?: CourseArchiveSettingsMap;
 }
 
+//@ts-ignore
+const imageSizes = window._MASTERIYO_.imageSizes;
+
 const CourseArchiveSettings: React.FC<Props> = (props) => {
 	const { courseArchiveData } = props;
 	const {
@@ -175,10 +178,11 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 								<Select
 									defaultValue={courseArchiveData?.display?.thumbnail_size}
 									{...register('course_archive.display.thumbnail_size')}>
-									<option value="thumbnail">Thumbnail</option>
-									<option value="medium">Medium</option>
-									<option value="medium_large">Medium Large</option>
-									<option value="large">large</option>
+									{imageSizes.map((imageSize: string) => (
+										<option value={imageSize} key={imageSize}>
+											{imageSize}
+										</option>
+									))}
 								</Select>
 							</FormControl>
 						</Stack>

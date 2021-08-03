@@ -178,7 +178,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 								<Select
 									defaultValue={courseArchiveData?.display?.thumbnail_size}
 									{...register('course_archive.display.thumbnail_size')}>
-									{imageSizes.map((imageSize: string) => (
+									{imageSizes?.map((imageSize: string) => (
 										<option value={imageSize} key={imageSize}>
 											{imageSize}
 										</option>

@@ -1507,11 +1507,11 @@ msgid "Display number of courses per row on course archive"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/CourseArchiveSettings.tsx:168
-msgid "Featured Image Size"
+msgid "Thumbnail Size"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/CourseArchiveSettings.tsx:170
-msgid "Course featured image size"
+msgid "Course thumbnail size"
 msgstr ""
 
 #: assets/js/back-end/screens/settings/components/CourseArchiveSettings.tsx:74

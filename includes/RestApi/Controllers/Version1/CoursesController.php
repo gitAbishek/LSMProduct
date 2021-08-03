@@ -311,6 +311,7 @@ class CoursesController extends PostsController {
 			'billing_cycle'     => $course->get_billing_cycle( $context ),
 			'show_curriculum'   => $course->get_show_curriculum( $context ),
 			'highlights'        => $course->get_highlights( $context ),
+			'edit_post_link'    => get_edit_post_link( $course->get_id(), $context ),
 			'categories'        => $this->get_taxonomy_terms( $course, 'cat' ),
 			'tags'              => $this->get_taxonomy_terms( $course, 'tag' ),
 			'difficulty'        => $this->get_taxonomy_terms( $course, 'difficulty' ),
@@ -690,6 +691,12 @@ class CoursesController extends PostsController {
 				'highlights'         => array(
 					'description' => __( 'Course highlights', 'masteriyo' ),
 					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'wp_edit_link'       => array(
+					'description' => __( 'Course WordPress ediit link.', 'masteriyo' ),
+					'type'        => 'string',
+					'readonly'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'meta_data'          => array(

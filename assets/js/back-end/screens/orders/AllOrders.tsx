@@ -14,6 +14,7 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useQuery } from 'react-query';
 import PageNav from '../../components/common/PageNav';
+import { tableStyles } from '../../config/styles';
 import urls from '../../constants/urls';
 import { SkeletonOrdersList } from '../../skeleton';
 import API from '../../utils/api';
@@ -35,7 +36,7 @@ const AllOrders = () => {
 							</Heading>
 						</Flex>
 
-						<Table>
+						<Table size="sm" sx={tableStyles}>
 							<Thead>
 								<Tr>
 									<Th>{__('Order', 'masteriyo')}</Th>

@@ -24,6 +24,7 @@ import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import PageNav from '../../components/common/PageNav';
+import { tableStyles } from '../../config/styles';
 import urls from '../../constants/urls';
 import { SkeletonCourseTaxonomy } from '../../skeleton';
 import API from '../../utils/api';
@@ -84,7 +85,7 @@ const AllCourseCategories = () => {
 								</Heading>
 							</Flex>
 
-							<Table>
+							<Table size="sm" sx={tableStyles}>
 								<Thead>
 									<Tr>
 										<Th>{__('Name', 'masteriyo')}</Th>

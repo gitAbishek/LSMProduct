@@ -92,3 +92,17 @@ export const whileDraggingStyles = {
 	borderColor: 'gray.200',
 	borderRadius: 'sm',
 };
+
+export const tableStyles = {
+	th: {
+		pb: '6',
+		borderBottom: 'none',
+	},
+	'tr:nth-of-type(2n+1) td': {
+		bg: '#f8f9fa',
+	},
+	td: {
+		py: '3',
+		borderBottom: 'none',
+	},
+};

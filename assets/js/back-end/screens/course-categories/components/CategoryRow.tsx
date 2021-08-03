@@ -59,7 +59,7 @@ const CategoryRow: React.FC<Props> = (props) => {
 							':categoryId',
 							id.toString()
 						)}>
-						<Button leftIcon={<BiEdit />} colorScheme="blue" size="sm">
+						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
 							{__('Edit')}
 						</Button>
 					</RouterLink>
@@ -70,7 +70,7 @@ const CategoryRow: React.FC<Props> = (props) => {
 							variant="outline"
 							rounded="sm"
 							fontSize="large"
-							size="sm"
+							size="xs"
 						/>
 						<MenuList>
 							<Link href={link} isExternal>

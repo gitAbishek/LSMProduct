@@ -134,7 +134,7 @@ const OrderRow: React.FC<Props> = (props) => {
 				<ButtonGroup>
 					<RouterLink
 						to={routes.orders.edit.replace(':orderId', id.toString())}>
-						<Button leftIcon={<BiEdit />} colorScheme="blue" size="sm">
+						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
 							{__('Edit')}
 						</Button>
 					</RouterLink>
@@ -145,7 +145,7 @@ const OrderRow: React.FC<Props> = (props) => {
 							variant="outline"
 							rounded="sm"
 							fontSize="large"
-							size="sm"
+							size="xs"
 						/>
 						<MenuList>
 							<MenuItem onClick={onPreviewPress} icon={<BiShow />}>

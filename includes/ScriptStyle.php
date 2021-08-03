@@ -562,6 +562,10 @@ class ScriptStyle {
 					'data' => array(
 						'rootApiUrl' => esc_url_raw( rest_url() ),
 						'nonce'      => wp_create_nonce( 'wp_rest' ),
+						'urls'       => array(
+							'logout'    => wp_logout_url( get_home_url() ),
+							'myaccount' => masteriyo_get_page_permalink( 'myaccount' ),
+						),
 					),
 				),
 			)

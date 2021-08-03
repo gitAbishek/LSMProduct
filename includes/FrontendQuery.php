@@ -403,7 +403,8 @@ class FrontendQuery {
 			'posts_per_page',
 			$q->get( 'posts_per_page' ) ? $q->get( 'posts_per_page' ) : apply_filters(
 				'loop_course_list_per_page',
-				\masteriyo_get_default_courses_per_row() * masteriyo_get_default_course_rows_per_page()
+				// \masteriyo_get_default_courses_per_row() * masteriyo_get_default_course_rows_per_page()
+				masteriyo_get_default_course_rows_per_page()
 			)
 		);
 

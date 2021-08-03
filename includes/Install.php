@@ -359,6 +359,7 @@ class Install {
 		}
 
 		$terms = array(
+			'all-levels'   => esc_html__( 'All Levels', 'masteriyo' ),
 			'beginner'     => esc_html__( 'Beginner', 'masteriyo' ),
 			'intermediate' => esc_html__( 'Intermediate', 'masteriyo' ),
 			'expert'       => esc_html__( 'Expert', 'masteriyo' ),

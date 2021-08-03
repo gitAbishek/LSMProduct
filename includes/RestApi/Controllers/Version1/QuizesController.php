@@ -153,9 +153,9 @@ class QuizesController extends PostsController {
 					),
 				),
 				array(
-					'methods'  => \WP_REST_Server::CREATABLE,
-					'callback' => array( $this, 'start_quiz' ),
-					// 'permission_callback' => array( $this, 'check_answer_permissions_check' ),
+					'methods'             => \WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'start_quiz' ),
+					'permission_callback' => '__return_true',
 				),
 			)
 		);
@@ -177,9 +177,10 @@ class QuizesController extends PostsController {
 					),
 				),
 				array(
-					'methods'  => \WP_REST_Server::CREATABLE,
-					'callback' => array( $this, 'check_answers' ),
-					// 'permission_callback' => array( $this, 'check_answer_permissions_check' ),
+					'methods'             => \WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'check_answers' ),
+					'permission_callback' => '__return_true',
+
 				),
 			)
 		);
@@ -189,10 +190,11 @@ class QuizesController extends PostsController {
 			'/' . $this->rest_base . '/attempts',
 			array(
 				array(
-					'methods'  => \WP_REST_Server::READABLE,
-					'callback' => array( $this, 'get_attempts' ),
-					// 'permission_callback' => array( $this, 'get_attempts_permissions_check' ),
-					'args'     => array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_attempts' ),
+					'permission_callback' => '__return_true',
+
+					'args'                => array(
 						'quiz_id'  => array(
 							'description'       => __( 'Quiz ID.', 'masteriyo' ),
 							'type'              => 'integer',
@@ -258,10 +260,10 @@ class QuizesController extends PostsController {
 					),
 				),
 				array(
-					'methods'  => \WP_REST_Server::READABLE,
-					'callback' => array( $this, 'get_attempt' ),
-					// 'permission_callback' => array( $this, 'get_attempt_permissions_check' ),
-					'args'     => array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_attempt' ),
+					'permission_callback' => '__return_true',
+					'args'                => array(
 						'quiz_id'  => array(
 							'description'       => __( 'Quiz ID.', 'masteriyo' ),
 							'type'              => 'integer',

@@ -20,9 +20,9 @@ const urls = {
 	courseProgress: base + 'course-progress',
 	courseProgressItem: base + 'course-progress/items',
 	qa: base + 'courses/questions-answers',
-	countries: base + 'data/countries',
-	states: base + 'data/states',
-	currencies: base + 'data/currencies',
+	countries: base + 'datas/countries',
+	states: base + 'datas/states',
+	currencies: base + 'datas/currencies',
 };
 
 export default urls;

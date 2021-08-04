@@ -22,7 +22,7 @@ class DataController extends CrudController {
 	 *
 	 * @var string
 	 */
-	protected $rest_base = 'data';
+	protected $rest_base = 'datas'; // Cannot use data, since it throws Internal Server error in shared hosting environment.
 
 	/**
 	 * Post type.

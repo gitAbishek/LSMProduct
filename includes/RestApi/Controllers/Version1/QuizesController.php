@@ -334,7 +334,18 @@ class QuizesController extends PostsController {
 			);
 		}
 
-		$course_id = (int) get_post_meta( (int) $request['id'], '_course_id', true );
+		$quiz_id = (int) $request['id'];
+		$quiz    = get_post( $quiz_id );
+
+		if ( empty( $quiz ) || $this->post_type !== $quiz->post_type ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_invalid_id",
+				__( 'Invalid Quiz ID.', 'masteriyo' ),
+				array( 'status' => rest_authorization_required_code() )
+			);
+		}
+
+		$course_id = (int) get_post_meta( $quiz_id, '_course_id', true );
 
 		$is_user_enrolled = masteriyo_can_start_course( $course_id, get_current_user_id() );
 

@@ -84,7 +84,7 @@ const Settings = () => {
 							<Tabs>
 								<TabList justifyContent="center" borderBottom="1px">
 									<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
-									<Tab sx={tabStyles}>{__('Course Archive', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Course List', 'masteriyo')}</Tab>
 									<Tab sx={tabStyles}>{__('Single Course', 'masteriyo')}</Tab>
 									<Tab sx={tabStyles}>{__('Learning Page', 'masteriyo')}</Tab>
 									<Tab sx={tabStyles}>{__('Payments', 'masteriyo')}</Tab>

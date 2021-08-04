@@ -21,6 +21,7 @@ import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import Header from '../../components/layout/Header';
+import { tableStyles } from '../../config/styles';
 import urls from '../../constants/urls';
 import { SkeletonCourseList } from '../../skeleton';
 import API from '../../utils/api';
@@ -46,31 +47,6 @@ const AllCourses = () => {
 		courseAPI.list(filterParams)
 	);
 	const cancelRef = React.useRef<any>();
-
-	const tableStyles = {
-		th: {
-			pb: '6',
-			borderBottom: 'none',
-		},
-		'tr:nth-of-type(2n+1) td': {
-			bg: '#f8f9fa',
-		},
-
-		tr: {
-			'th, td': {
-				':first-of-type': {
-					pl: '12',
-				},
-				':last-child': {
-					pr: '6',
-				},
-			},
-		},
-		td: {
-			py: '3',
-			borderBottom: 'none',
-		},
-	};
 
 	const deleteCourse = useMutation((id: number) => courseAPI.delete(id), {
 		onSuccess: () => {

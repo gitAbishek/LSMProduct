@@ -58,7 +58,7 @@ const Sidebar: React.FC<Props> = (props) => {
 				d="flex"
 				justifyContent="center"
 				position="fixed"
-				top="32"
+				top="20"
 				fontSize="x-large"
 				icon={<BiMenu />}
 				onClick={onOpen}

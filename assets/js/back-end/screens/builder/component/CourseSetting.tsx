@@ -32,6 +32,7 @@ import urls from '../../../constants/urls';
 import { CourseDataMap } from '../../../types/course';
 import API from '../../../utils/api';
 import { convertMinutesToHours } from '../../../utils/math';
+import { decodeEntity } from '../../../utils/utils';
 
 interface Props {
 	courseData?: CourseDataMap | any;
@@ -325,7 +326,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 															)}
 														/>
 														<FormHelperText>
-															{currencyCode} ({currencySymbol})
+															{currencyCode} ({decodeEntity(currencySymbol)})
 														</FormHelperText>
 													</FormControl>
 												</Collapse>

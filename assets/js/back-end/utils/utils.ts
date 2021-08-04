@@ -238,3 +238,9 @@ export const existsOnArray = (array: any, property: any, value: any) => {
 		return el[property] === value;
 	});
 };
+
+export const decodeEntity = (html: string) => {
+	var txt = document.createElement('textarea');
+	txt.innerHTML = html;
+	return txt.value;
+};

@@ -25,14 +25,6 @@ module.exports = (env) => ({
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
-					options: {
-						plugins: [
-							[
-								require.resolve('@wordpress/babel-plugin-makepot'),
-								{ output: 'i18n/languages/masteriyo.pot' },
-							],
-						].filter(Boolean),
-					},
 				},
 			},
 			{

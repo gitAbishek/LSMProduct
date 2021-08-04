@@ -288,7 +288,8 @@ class CourseBuilderController extends PostsController {
 			$contents = $this->get_objects(
 				array(
 					'post_parent' => $section->get_id(),
-					'post_type'   => 'any',
+					'post_type'   => array( 'lesson', 'quiz' ),
+					'post_status' => 'any',
 				)
 			);
 

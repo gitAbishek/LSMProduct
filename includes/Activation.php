@@ -39,22 +39,21 @@ class Activation {
 		$pages = apply_filters(
 			'masteriyo_create_pages',
 			array(
-				'course-list'        => array(
-					'name'         => _x( 'course-list', 'Page slug', 'masteriyo' ),
-					'title'        => _x( 'Masteriyo Course List', 'Page title', 'masteriyo' ),
+				'course-list' => array(
+					'name'         => _x( 'courses', 'Page slug', 'masteriyo' ),
+					'title'        => _x( 'Course List', 'Page title', 'masteriyo' ),
 					'content'      => '',
 					'setting_name' => 'course_list_page_id',
 				),
-				'myaccount'          => array(
-					'name'         => _x( 'myaccount', 'Page slug', 'masteriyo' ),
-					'title'        => _x( 'Masteriyo My Account', 'Page title', 'masteriyo' ),
+				'myaccount'   => array(
+					'name'         => _x( 'my-account', 'Page slug', 'masteriyo' ),
+					'title'        => _x( 'My Account', 'Page title', 'masteriyo' ),
 					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_myaccount_shortcode_tag', 'masteriyo_myaccount' ) . ']<!-- /wp:shortcode -->',
 					'setting_name' => 'myaccount_page_id',
 				),
-				'masteriyo-checkout' => array(
-					// Checkout slug is 'masteriyo-checkout' as 'checkout' slug might be used by other plugins like Masteriyo.
-					'name'         => _x( 'masteriyo-checkout', 'Page slug', 'masteriyo' ),
-					'title'        => _x( 'Masteriyo Checkout', 'Page title', 'masteriyo' ),
+				'checkout'    => array(
+					'name'         => _x( 'checkout', 'Page slug', 'masteriyo' ),
+					'title'        => _x( 'Checkout', 'Page title', 'masteriyo' ),
 					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_checkout_shortcode_tag', 'masteriyo_checkout' ) . ']<!-- /wp:shortcode -->',
 					'setting_name' => 'checkout_page_id',
 				),

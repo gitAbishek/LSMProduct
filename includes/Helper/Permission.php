@@ -277,26 +277,4 @@ class Permission {
 
 		return apply_filters( 'masteriyo_rest_check_user_course_permissions', $permission, $context, $object_id );
 	}
-
-	/**
-	 * Check permissions of quiz on REST API.
-	 *
-	 * @since 0.1.0
-	 * @param string $context Request context.
-	 * @param integer $object_id POST ID.
-	 * @return void
-	 */
-	public function rest_check_quiz_permissions( $context = 'read', $object_id = 0 ) {
-		$contexts = array(
-			'start' => 'start_quiz',
-			'check' => 'check_answers',
-			'read'  => 'read_quiz_attempt',
-			'reads' => 'read_quiz_attempts',
-		);
-
-		$cap        = $contexts[ $context ];
-		$permission = current_user_can( $cap, $object_id );
-
-		return apply_filters( 'masteriyo_rest_check_quiz_permissions', $permission, $context, $object_id );
-	}
 }

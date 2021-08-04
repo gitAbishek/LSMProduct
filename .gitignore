@@ -12,6 +12,7 @@ node_modules/
 *.babel.*
 *.zip.*
 
+
 /vendor/
 build/
 release/
@@ -19,4 +20,4 @@ dist/
 .env
 .parcel-cache
 .cache
-masteriyo.pot
+i18n/languages/masteriyo.pot

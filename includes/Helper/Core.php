@@ -2280,15 +2280,20 @@ function masteriyo_create_page( $slug, $setting_name = '', $page_title = '', $pa
  * @param WP_Post $post        The current post object.
  */
 function masteriyo_add_post_state( $post_states, $post ) {
-
 	if ( masteriyo_get_page_id( 'course-list' ) === $post->ID ) {
 		$post_states['masteriyo_course_list_page'] = __( 'Masteriyo Course List Page', 'masteriyo' );
 	}
+
 	if ( masteriyo_get_page_id( 'myaccount' ) === $post->ID ) {
 		$post_states['masteriyo_myaccount_page'] = __( 'Masteriyo My Account Page', 'masteriyo' );
 	}
+
 	if ( masteriyo_get_page_id( 'checkout' ) === $post->ID ) {
 		$post_states['masteriyo_checkout_page'] = __( 'Masteriyo Checkout Page', 'masteriyo' );
+	}
+
+	if ( masteriyo_get_page_id( 'learning' ) === $post->ID ) {
+		$post_states['masteriyo_learning_page'] = __( 'Masteriyo Learning Page', 'masteriyo' );
 	}
 
 	return $post_states;

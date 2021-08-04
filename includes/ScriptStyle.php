@@ -100,8 +100,7 @@ class ScriptStyle {
 					'src'      => self::get_asset_url( '/assets/js/build/masteriyo-dependencies.js' ),
 					'context'  => array( 'admin', 'public' ),
 					'callback' => function() {
-						$a = masteriyo_is_interactive_page();
-						return masteriyo_is_admin_page() || masteriyo_is_interactive_page();
+						return masteriyo_is_admin_page() || masteriyo_is_learning_page();
 					},
 				),
 				'admin'          => array(

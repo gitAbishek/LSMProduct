@@ -1233,7 +1233,21 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function start_course_url() {
-		return home_url( sprintf( '?course_id=%d&masteriyo-page=interactive#/course/%d', $this->get_id(), $this->get_id() ) );
+		$learning_page_url = masteriyo_get_page_permalink( 'learning' );
+		$url               = trailingslashit( $learning_page_url . 'course/' . $this->get_id() );
+
+		if ( '' === get_option( 'permalink_structure' ) ) {
+			$url = add_query_arg(
+				array(
+					'course' => $this->get_id(),
+				),
+				$learning_page_url
+			);
+		}
+
+		// $url .= '#course/' . $this->get_id();
+
+		return apply_filters( 'masteriyo_start_course_url', $url, $this );
 	}
 
 	/**

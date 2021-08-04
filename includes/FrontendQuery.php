@@ -114,7 +114,7 @@ class FrontendQuery {
 			$myaccount_page_id = masteriyo_get_setting( 'advance.pages.myaccount_page_id' );
 			$checkout_page_id  = masteriyo_get_setting( 'advance.pages.checkout_page_id' );
 
-			if ( in_array( $page_on_front, array( $myaccount_page_id, $checkout_page_id ), true ) ) {
+			if ( in_array( $page_on_front, array( $myaccount_page_id, $checkout_page_id, 7 ), true ) ) {
 				return EP_ROOT | EP_PAGES;
 			}
 		}
@@ -195,6 +195,8 @@ class FrontendQuery {
 			'payment-methods' => masteriyo_get_setting( 'advance.account.payment_methods' ),
 			'lost-password'   => masteriyo_get_setting( 'advance.account.lost_password' ),
 			'customer-logout' => masteriyo_get_setting( 'advance.account.logout' ),
+
+			'sagar'           => 'sagar',
 		);
 	}
 
@@ -403,7 +405,6 @@ class FrontendQuery {
 			'posts_per_page',
 			$q->get( 'posts_per_page' ) ? $q->get( 'posts_per_page' ) : apply_filters(
 				'loop_course_list_per_page',
-				// \masteriyo_get_default_courses_per_row() * masteriyo_get_default_course_rows_per_page()
 				masteriyo_get_default_course_rows_per_page()
 			)
 		);

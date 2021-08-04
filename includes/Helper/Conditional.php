@@ -596,8 +596,14 @@ if ( ! function_exists( 'masteriyo_is_interactive_page' ) ) {
 	 *
 	 * @return bool
 	 */
-	function masteriyo_is_interactive_page() {
-		return isset( $_GET['masteriyo-page'] ) && 'interactive' === $_GET['masteriyo-page' ]; // phpcs:ignore
+	function masteriyo_is_learning_page() {
+		global $post;
+
+		if ( is_null( $post ) ) {
+			return false;
+		}
+
+		return is_page() && masteriyo_get_page_id( 'learning' ) === $post->ID;
 	}
 }
 

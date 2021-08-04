@@ -17,7 +17,7 @@ if ( ! function_exists( 'add_action' ) && function_exists( 'add_filter' ) ) {
  * @since 0.1.0
  */
 function masteriyo_template_redirect() {
-	global $wp_query, $wp;
+	global $wp_query, $wp, $post;
 
 	// phpcs:disable WordPress.Security.NonceVerification.Recommended
 	// When default permalinks are enabled, redirect courses list page to post type archive url.

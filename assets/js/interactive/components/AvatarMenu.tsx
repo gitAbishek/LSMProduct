@@ -1,5 +1,6 @@
 import {
 	Avatar,
+	Link,
 	Menu,
 	MenuButton,
 	MenuDivider,
@@ -10,32 +11,32 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 
 const AvatarMenu = () => {
-	const onMenuItemClick = (path: string) => (window.location.href = `${path}`);
-
 	return (
 		<Menu placement="bottom-end">
 			<MenuButton>
 				<Avatar size="sm" />
 			</MenuButton>
 			<MenuList fontSize="sm">
-				<MenuItem
-					onClick={() =>
-						onMenuItemClick(
+				<MenuItem>
+					<Link
+						href={
 							//@ts-ignore
 							`${_MASTERIYO_.urls.myaccount}`
-						)
-					}>
-					{__('My Profile', 'masteriyo')}
+						}
+						isExternal>
+						{__('My Profile', 'masteriyo')}
+					</Link>
 				</MenuItem>
 				<MenuDivider />
-				<MenuItem
-					onClick={() =>
-						onMenuItemClick(
+				<MenuItem>
+					<Link
+						href={
 							//@ts-ignore
 							`${_MASTERIYO_.urls.logout}`
-						)
-					}>
-					{__('Log Out', 'masteriyo')}
+						}
+						isExternal>
+						{__('Log Out', 'masteriyo')}
+					</Link>
 				</MenuItem>
 			</MenuList>
 		</Menu>

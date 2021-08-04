@@ -106,10 +106,6 @@ class Capabilities {
 			'read_course_progresses'    => true,
 			'publish_course_progresses' => true,
 			'edit_course_progresses'    => true,
-
-			// Quiz
-			'start_quiz'                => true,
-			'check_answers'             => true,
 		);
 
 		$subscriber_caps = get_role( 'subscriber' )->capabilities;
@@ -193,9 +189,6 @@ class Capabilities {
 			// Users
 			'list_users'                      => true,
 
-			// Quiz
-			'read_quiz_attempt'               => true,
-			'read_quiz_attempts'              => true,
 		);
 
 		$author_caps  = get_role( 'author' )->capabilities;

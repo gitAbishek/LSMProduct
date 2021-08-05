@@ -450,7 +450,7 @@ class QuizesController extends PostsController {
 			return new \WP_Error(
 				'masteriyo_rest_user_not_logged_in',
 				__( 'Please sign in to start the quiz.', 'masteriyo' ),
-				array( 'status' => 404 )
+				array( 'status' => 401 )
 			);
 		}
 
@@ -478,8 +478,17 @@ class QuizesController extends PostsController {
 
 		$date = gmdate( 'Y-m-d H:i:s', time() );
 
-		$previous_attempts = masteriyo_get_all_quiz_attempts( $quiz_id, $user_id );
-		$attempted_count   = is_array( $previous_attempts ) ? count( $previous_attempts ) : 0;
+		$previous_attempts   = masteriyo_get_all_quiz_attempts( $quiz_id, $user_id );
+		$attempted_count     = is_array( $previous_attempts ) ? count( $previous_attempts ) : 0;
+		$max_attempt_allowed = get_post_meta( $quiz_id, '_attempts_allowed', true );
+
+		if ( $attempted_count >= $max_attempt_allowed ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_attempt_reached",
+				__( 'The maximum number of attempts for the quiz have been reached.', 'masteriyo' ),
+				array( 'status' => 403 )
+			);
+		}
 
 		$attempt_data = array(
 			'course_id'                => $course_id,

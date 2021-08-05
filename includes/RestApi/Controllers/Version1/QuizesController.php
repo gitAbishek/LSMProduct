@@ -206,6 +206,12 @@ class QuizesController extends PostsController {
 							'sanitize_callback' => 'absint',
 							'validate_callback' => 'rest_validate_request_arg',
 						),
+						'status'   => array(
+							'description'       => __( 'Quiz attempt status.', 'masteriyo' ),
+							'type'              => 'string',
+							'sanitize_callback' => 'sanitize_title',
+							'validate_callback' => 'rest_validate_request_arg',
+						),
 						'orderby'  => array(
 							'description'       => __( 'Sort collection by object attribute.', 'masteriyo' ),
 							'type'              => 'string',
@@ -592,6 +598,7 @@ class QuizesController extends PostsController {
 		$query_vars = array(
 			'user_id'  => $user_id,
 			'quiz_id'  => $quiz_id,
+			'status'   => $parameters['status'],
 			'per_page' => $parameters['per_page'],
 			'paged'    => $parameters['paged'],
 			'orderby'  => $parameters['orderby'],

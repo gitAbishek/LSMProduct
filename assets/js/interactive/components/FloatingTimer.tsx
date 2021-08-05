@@ -15,9 +15,7 @@ interface Props {
 }
 const FloatingTimer: React.FC<Props> = (props) => {
 	const { duration, startedOn } = props;
-	console.log(duration);
-	const parsedDate = Date.parse(startedOn);
-	const time = new Date(parsedDate);
+	const time = new Date(startedOn);
 	const formatDate = time.setMinutes(time.getMinutes() + duration);
 
 	const { hours, seconds, minutes } = useTimer({
@@ -36,8 +34,8 @@ const FloatingTimer: React.FC<Props> = (props) => {
 			shadow="boxl"
 			rounded="full">
 			<CircularProgress
-				value={hours * 60 + minutes}
-				max={duration}
+				value={hours * 60 * 60 + minutes * 60 + seconds}
+				max={duration * 60}
 				capIsRound
 				color="blue.500"
 				size="140px"

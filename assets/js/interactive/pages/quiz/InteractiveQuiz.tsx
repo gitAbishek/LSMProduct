@@ -18,22 +18,21 @@ import ScoreBoard from './components/ScoreBoard';
 const InteractiveQuiz = () => {
 	const { quizId }: any = useParams();
 	const quizAPI = new API(urls.quizes);
+	const quizAttemptsAPI = new API(urls.quizesAttempts);
 	const methods = useForm();
 	const [scoreBoardData, setScoreBoardData] = useState<any>(null);
 	const [quizStartedOn, setQuizStartedOn] = useState<any>(null);
 
-	// const { state, actions } = useStateMachine({
-	// 	updateQuizProgress,
-	// });
-
-	// const startedOn =
-	// 	(state.quizProgress && state?.quizProgress[quizId]?.startedOn) || false;
-
 	const quizQuery = useQuery<QuizSchema, Error>(
 		[`section${quizId}`, quizId],
-		() => quizAPI.get(quizId),
-		{}
+		() => quizAPI.get(quizId)
 	);
+
+	const quizAttemptQuery = useQuery<QuizSchema, Error>(
+		[`attempt${quizId}`, quizId],
+		() => quizAttemptsAPI.list()
+	);
+	console.log(quizAttemptQuery?.data);
 
 	const startQuiz = useMutation((quizId: number) => quizAPI.start(quizId));
 
@@ -55,9 +54,9 @@ const InteractiveQuiz = () => {
 		checkQuizAnswers.mutate(deepClean(data), {
 			onSuccess: (data: any) => {
 				setScoreBoardData(data);
-				// actions.updateQuizProgress({ quizProgress: () => {} });
 			},
 		});
+		setQuizStartedOn(null);
 	};
 
 	if (quizQuery.isSuccess) {

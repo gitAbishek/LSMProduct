@@ -10,6 +10,7 @@ const urls = {
 	lessons: base + 'lessons',
 	questions: base + 'questions',
 	quizes: base + 'quizes',
+	quizesAttempts: base + 'quizes/attempts',
 	sections: base + 'sections',
 	contents: base + 'sections/children',
 	orders: base + 'orders',

@@ -262,54 +262,10 @@ class QuizesController extends PostsController {
 					'callback'            => array( $this, 'get_attempt' ),
 					'permission_callback' => 'is_user_logged_in',
 					'args'                => array(
-						'quiz_id'  => array(
-							'description'       => __( 'Quiz ID.', 'masteriyo' ),
-							'type'              => 'integer',
-							'required'          => true,
-							'sanitize_callback' => 'absint',
-							'validate_callback' => 'rest_validate_request_arg',
-						),
-						'user_id'  => array(
-							'description'       => __( 'User ID.', 'masteriyo' ),
-							'type'              => 'integer',
-							'sanitize_callback' => 'absint',
-							'validate_callback' => 'rest_validate_request_arg',
-						),
-						'orderby'  => array(
-							'description'       => __( 'Sort collection by object attribute.', 'masteriyo' ),
-							'type'              => 'string',
-							'default'           => 'id',
-							'enum'              => array(
-								'id',
-								'course_id',
-								'quiz_id',
-								'attempt_started_at',
-								'attempt_ended_at',
-							),
-							'validate_callback' => 'rest_validate_request_arg',
-						),
-						'order'    => array(
-							'description'       => __( 'Order sort attribute ascending or descending.', 'masteriyo' ),
-							'type'              => 'string',
-							'default'           => 'desc',
-							'enum'              => array( 'asc', 'desc' ),
-							'validate_callback' => 'rest_validate_request_arg',
-						),
-						'paged'    => array(
-							'description'       => __( 'Paginate the quiz attempts.', 'masteriyo' ),
-							'type'              => 'integer',
-							'default'           => 1,
-							'sanitize_callback' => 'absint',
-							'validate_callback' => 'rest_validate_request_arg',
-							'minimum'           => 1,
-						),
-						'per_page' => array(
-							'description'       => __( 'Limit items per page.', 'masteriyo' ),
-							'type'              => 'integer',
-							'default'           => 10,
-							'minimum'           => 1,
-							'sanitize_callback' => 'absint',
-							'validate_callback' => 'rest_validate_request_arg',
+						'context' => $this->get_context_param(
+							array(
+								'default' => 'view',
+							)
 						),
 					),
 				),

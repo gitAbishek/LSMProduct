@@ -200,3 +200,24 @@ function masteriyo_get_quiz_attempts( $query_vars ) {
 
 	return (array) $quiz_attempt;
 }
+
+/**
+ * Get the quiz attempt by attempt ID.
+ *
+ * @since 0.1.0
+ *
+ * @param [type] $attempt_id
+ * @return QuizAttempt
+ */
+function masteriyo_get_quiz_attempt( $attempt_id ) {
+	global $wpdb;
+
+	$attempt = $wpdb->get_row(
+		$wpdb->prepare(
+			"SELECT * FROM {$wpdb->base_prefix}masteriyo_quiz_attempts WHERE id = %d",
+			$attempt_id
+		)
+	);
+
+	return $attempt;
+}

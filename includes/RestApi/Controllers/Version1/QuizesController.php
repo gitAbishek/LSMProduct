@@ -249,7 +249,7 @@ class QuizesController extends PostsController {
 
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->rest_base . '/attempt/(?P<id>[\d]+)',
+			'/' . $this->rest_base . '/attempts/(?P<id>[\d]+)',
 			array(
 				'args' => array(
 					'id' => array(
@@ -673,37 +673,40 @@ class QuizesController extends PostsController {
 	 */
 	public function get_attempt( $request ) {
 		$parameters = $request->get_params();
+		$id         = (int) $request['id'];
+		$attempt    = masteriyo_get_quiz_attempt( $id );
 
-		$id      = (int) $request['id'];
-		$quiz_id = (int) $parameters['quiz_id'];
-		$user_id = isset( $parameters['user_id'] ) ? (int) $parameters['user_id'] : get_current_user_id();
-
-		$query_vars = array(
-			'id'       => $id,
-			'quiz_id'  => $quiz_id,
-			'user_id'  => $user_id,
-			'per_page' => $parameters['per_page'],
-			'paged'    => $parameters['paged'],
-			'orderby'  => $parameters['orderby'],
-			'order'    => $parameters['order'],
-		);
-
-		$attempt_datas = masteriyo_get_quiz_attempts( $query_vars );
-
-		if ( is_array( $attempt_datas ) && ! count( $attempt_datas ) > 0 ) {
+		if ( is_null( $attempt ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_attempt_not_found",
 				__( 'Quiz attempt not found.', 'masteriyo' ),
 				array( 'status' => 404 )
 			);
-		} else {
-			if ( count( $attempt_datas ) === 1 ) {
-				$attempt_datas = (array) $attempt_datas[0];
-			}
-			$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
-			return $response;
 		}
 
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() || masteriyo_is_current_user_instructor() ) {
+			return $attempt;
+		}
+
+		$course = get_post_meta( $attempt->quiz_id, '_course_id', true );
+
+		if ( ! masteriyo_can_start_course( $course ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_course_empty_id',
+				__( 'There is something went wrong with course, please check if quiz attached with a course', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		}
+
+		if ( get_current_user_id() !== absint( $attempt->user_id ) ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_attempt_not_foud",
+				__( 'You are not allowed to read other\'s quiz attempts', 'masteriyo' ),
+				array( 'status' => rest_authorization_required_code() )
+			);
+		}
+
+		return $this->prepare_quiz_attempts_for_response( (array) $attempt );
 	}
 
 	/**

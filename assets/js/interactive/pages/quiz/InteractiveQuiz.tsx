@@ -28,11 +28,22 @@ const InteractiveQuiz = () => {
 		() => quizAPI.get(quizId)
 	);
 
-	const quizAttemptQuery = useQuery<QuizSchema, Error>(
+	useQuery<QuizSchema, Error>(
 		[`attempt${quizId}`, quizId],
-		() => quizAttemptsAPI.list()
+		() =>
+			quizAttemptsAPI.list({
+				quiz_id: quizId,
+				status: 'attempt_started',
+				per_page: 1,
+			}),
+		{
+			onSuccess: (data: any) => {
+				if (data[0]?.attempt_started_at) {
+					setQuizStartedOn(getLocalTime(data[0].attempt_started_at));
+				}
+			},
+		}
 	);
-	console.log(quizAttemptQuery?.data);
 
 	const startQuiz = useMutation((quizId: number) => quizAPI.start(quizId));
 
@@ -44,7 +55,6 @@ const InteractiveQuiz = () => {
 		startQuiz.mutate(quizId, {
 			onSuccess: (data: any) => {
 				setQuizStartedOn(getLocalTime(data.attempt_started_at));
-				console.log(getLocalTime(data.attempt_started_at));
 			},
 		});
 		setScoreBoardData(null);

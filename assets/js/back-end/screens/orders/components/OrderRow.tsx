@@ -119,7 +119,7 @@ const OrderRow: React.FC<Props> = (props) => {
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
 					<Icon as={BiCalendar} />
 					<Text fontSize="sm" fontWeight="medium">
-						{getLocalTime(data?.date_created)}
+						{getLocalTime(data?.date_created).toLocaleString()}
 					</Text>
 				</Stack>
 			</Td>

@@ -217,7 +217,7 @@ const EditOrder = () => {
 													<Input
 														defaultValue={getLocalTime(
 															orderQuery.data.date_created
-														)}
+														).toLocaleString()}
 														disabled
 													/>
 												</FormControl>

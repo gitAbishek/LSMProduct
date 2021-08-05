@@ -11,13 +11,14 @@ import { useTimer } from 'react-timer-hook';
 interface Props {
 	duration: number;
 	quizId: number;
-	startedOn: number;
+	startedOn: any;
 }
 const FloatingTimer: React.FC<Props> = (props) => {
 	const { duration, startedOn } = props;
-	const time = new Date(startedOn);
+	console.log(duration);
+	const parsedDate = Date.parse(startedOn);
+	const time = new Date(parsedDate);
 	const formatDate = time.setMinutes(time.getMinutes() + duration);
-	console.log(startedOn);
 
 	const { hours, seconds, minutes } = useTimer({
 		expiryTimestamp: formatDate,

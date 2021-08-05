@@ -17,6 +17,7 @@ const FloatingTimer: React.FC<Props> = (props) => {
 	const { duration, startedOn } = props;
 	const time = new Date(startedOn);
 	const formatDate = time.setMinutes(time.getMinutes() + duration);
+	console.log(startedOn);
 
 	const { hours, seconds, minutes } = useTimer({
 		expiryTimestamp: formatDate,

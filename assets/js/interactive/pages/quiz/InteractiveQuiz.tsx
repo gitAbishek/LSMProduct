@@ -1,5 +1,4 @@
 import { Box, Container, Heading, Stack, Text } from '@chakra-ui/react';
-import { useStateMachine } from 'little-state-machine';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
@@ -9,7 +8,6 @@ import urls from '../../../back-end/constants/urls';
 import { QuizSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
 import { deepClean } from '../../../back-end/utils/utils';
-import { updateQuizProgress } from '../../actions';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
 import FloatingTimer from '../../components/FloatingTimer';
@@ -22,13 +20,14 @@ const InteractiveQuiz = () => {
 	const quizAPI = new API(urls.quizes);
 	const methods = useForm();
 	const [scoreBoardData, setScoreBoardData] = useState<any>(null);
+	const [quizStartedOn, setQuizStartedOn] = useState<any>(null);
 
-	const { state, actions } = useStateMachine({
-		updateQuizProgress,
-	});
+	// const { state, actions } = useStateMachine({
+	// 	updateQuizProgress,
+	// });
 
-	const startedOn =
-		(state.quizProgress && state?.quizProgress[quizId]?.startedOn) || false;
+	// const startedOn =
+	// 	(state.quizProgress && state?.quizProgress[quizId]?.startedOn) || false;
 
 	const quizQuery = useQuery<QuizSchema, Error>(
 		[`section${quizId}`, quizId],
@@ -37,10 +36,12 @@ const InteractiveQuiz = () => {
 	);
 
 	const startQuiz = useMutation(() => quizAPI.start(quizId), {
-		onSuccess: () => {
-			actions.updateQuizProgress({
-				quizProgress: { [quizId]: { startedOn: Date.now() } },
-			});
+		onSuccess: (data: any) => {
+			console.log(Date.parse(data?.attempt_started_at));
+			setQuizStartedOn(Date.parse(data?.attempt_started_at));
+			// actions.updateQuizProgress({
+			// 	quizProgress: { [quizId]: { startedOn: Date.now() } },
+			// });
 		},
 	});
 
@@ -57,7 +58,7 @@ const InteractiveQuiz = () => {
 		checkQuizAnswers.mutate(deepClean(data), {
 			onSuccess: (data: any) => {
 				setScoreBoardData(data);
-				actions.updateQuizProgress({ quizProgress: () => {} });
+				// actions.updateQuizProgress({ quizProgress: () => {} });
 			},
 		});
 	};
@@ -80,7 +81,7 @@ const InteractiveQuiz = () => {
 										scoreData={scoreBoardData}
 										onStartPress={onStartPress}
 									/>
-								) : startedOn ? (
+								) : quizStartedOn ? (
 									<QuizFields />
 								) : (
 									<QuizStart
@@ -96,9 +97,9 @@ const InteractiveQuiz = () => {
 					navigation={quizQuery?.data?.navigation}
 					courseId={quizQuery?.data?.course_id}
 				/>
-				{startedOn && (
+				{quizStartedOn && (
 					<FloatingTimer
-						startedOn={startedOn}
+						startedOn={quizStartedOn}
 						duration={quizQuery?.data?.duration}
 						quizId={quizQuery?.data?.id}
 					/>

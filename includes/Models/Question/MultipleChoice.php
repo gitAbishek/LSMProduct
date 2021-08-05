@@ -63,7 +63,7 @@ class MultipleChoice extends Question implements QuestionInterface {
 		// Check only if the number of chosen answers is equal to correct answers,
 		// if the number is different the chosen answers id wrong by default.
 		if ( count( $chosen_answers ) === count( $correct_answers ) ) {
-			$correct = $chosen_answer === $correct_answers;
+			$correct = $chosen_answers === $correct_answers;
 		}
 
 		return apply_filters( "masteriyo_question_check_answer_{$this->type}", $correct, $context, $this );

@@ -606,24 +606,19 @@ class QuizesController extends PostsController {
 		);
 
 		$multi_attempts_data = array();
+		$attempts       = masteriyo_get_quiz_attempts( $query_vars );
 
-		$attempt_datas = masteriyo_get_quiz_attempts( $query_vars );
-
-		if ( is_array( $attempt_datas ) && ! count( $attempt_datas ) > 0 ) {
-			return new \WP_Error(
-				"masteriyo_rest_{$this->post_type}_attempts_not_found",
-				__( 'Quiz attempts not found for given user ID.', 'masteriyo' ),
-				array( 'status' => 404 )
-			);
-		} else {
-			foreach ( $attempt_datas as $attempt_data ) {
-				$multi_attempts_data[] = (array) $attempt_data;
-			}
-			$response = $this->prepare_quiz_attempts_for_response( $multi_attempts_data );
-
-			return $response;
-
+		if ( empty( $attempts ) ) {
+			return array();
 		}
+
+		foreach ( $attempts as $attempt ) {
+			$multi_attempts_data[] = (array) $attempt;
+		}
+
+		$response = $this->prepare_quiz_attempts_for_response( $multi_attempts_data );
+
+		return $response;
 	}
 
 	/**

@@ -40,6 +40,9 @@ const Hightlights: React.FC<Props> = (props) => {
 						minH: '100px',
 						py: '2',
 						px: '6',
+						ul: {
+							listStyleType: 'disc',
+						},
 					},
 				}}>
 				<EditorContent editor={editor} />

@@ -101,7 +101,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 */
 	public function delete( Model &$setting, $args = array() ) {
 		$setting_data = $setting->get_data();
-		update_option( $setting_data );
+		update_option( 'masteriyo_settings', $setting_data );
 
 		do_action( 'masteriyo_reset_setting', $setting );
 	}

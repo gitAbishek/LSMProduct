@@ -63,7 +63,7 @@ const Builder: React.FC = () => {
 
 	const [builderData, setBuilderData] = useState<any>(null);
 	const [deleteSectionId, setDeleteSectionId] = useState<number>();
-	const { type, page } = queryString.parse(search);
+	const { page } = queryString.parse(search);
 	const [tabIndex, setTabIndex] = useState<number>(
 		page === 'builder' ? 1 : page === 'settings' ? 2 : 0
 	);
@@ -110,7 +110,22 @@ const Builder: React.FC = () => {
 		{
 			onSuccess: (data: CourseDataMap) => {
 				toast({
-					title: data.name + __(' is updated successfully.', 'masteriyo'),
+					title: data.name + __(' is Published successfully.', 'masteriyo'),
+					description: __('You can keep editing it', 'masteriyo'),
+					status: 'success',
+					isClosable: true,
+				});
+				queryClient.invalidateQueries(`course${data.id}`);
+			},
+		}
+	);
+
+	const draftCourse = useMutation(
+		(data: CourseDataMap) => courseAPI.update(courseId, data),
+		{
+			onSuccess: (data: CourseDataMap) => {
+				toast({
+					title: data.name + __(' is drafted successfully.', 'masteriyo'),
 					description: __('You can keep editing it', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
@@ -145,7 +160,11 @@ const Builder: React.FC = () => {
 			regular_price: `${data.regular_price}`,
 		};
 
-		updateCourse.mutate(deepClean(deepMerge(data, newData)));
+		if (type === 'draft') {
+			draftCourse.mutate(deepClean(deepMerge(data, newData)));
+		} else {
+			updateCourse.mutate(deepClean(deepMerge(data, newData)));
+		}
 	};
 
 	const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
@@ -248,32 +267,25 @@ const Builder: React.FC = () => {
 												isExternal>
 												<Button variant="outline">Preview</Button>
 											</Link>
+											<Button
+												variant="outline"
+												colorScheme="blue"
+												onClick={methods.handleSubmit((data) =>
+													onSave(data, 'draft')
+												)}
+												isDisabled={updateCourse.isLoading}
+												isLoading={draftCourse.isLoading}>
+												{__('Save to Draft', 'masteriyo')}
+											</Button>
 
-											{type && type == 'draft' && (
-												<Button
-													variant="outline"
-													onClick={() => {
-														methods.handleSubmit((data) =>
-															onSave(data, 'draft')
-														)();
-													}}
-													isLoading={
-														updateCourse.isLoading || updateBuilder.isLoading
-													}>
-													{__('Update', 'masteriyo')}
-												</Button>
-											)}
 											<Button
 												colorScheme="blue"
 												onClick={methods.handleSubmit((data) =>
 													onSave(data, 'publish')
 												)}
-												isLoading={
-													updateCourse.isLoading || updateBuilder.isLoading
-												}>
-												{type && type == 'draft'
-													? __('Publish', 'masteriyo')
-													: __('Save', 'masteriyo')}
+												isDisabled={draftCourse.isLoading}
+												isLoading={updateCourse.isLoading}>
+												{__('Publish', 'masteriyo')}
 											</Button>
 										</ButtonGroup>
 									</Flex>

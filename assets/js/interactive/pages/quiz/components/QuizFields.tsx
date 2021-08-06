@@ -1,4 +1,11 @@
-import { Divider, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+	Alert,
+	AlertIcon,
+	Divider,
+	Heading,
+	Stack,
+	Text,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useQuery } from 'react-query';
@@ -11,7 +18,12 @@ import FieldShortAnswer from './FieldShortAnswer';
 import FieldSingleChoice from './FieldSingleChoice';
 import FieldTrueFalse from './FieldTrueFalse';
 
-const QuizFields: React.FC = () => {
+interface Props {
+	quizAboutToExpire: boolean;
+}
+
+const QuizFields: React.FC<Props> = (props) => {
+	const { quizAboutToExpire } = props;
 	const { quizId }: any = useParams();
 	const questionsAPI = new API(urls.questions);
 
@@ -27,6 +39,12 @@ const QuizFields: React.FC = () => {
 		return (
 			<>
 				<Stack direction="column" spacing="16">
+					{quizAboutToExpire && (
+						<Alert status="error" fontSize="sm" p="2.5">
+							<AlertIcon />
+							{__('Your quize time is about to expire!', 'masteriyo')}
+						</Alert>
+					)}
 					{questionQuery.data.map((question: QuestionSchema, index: string) => (
 						<Stack direction="column" spacing="8" key={question.id}>
 							<Stack direction="column">

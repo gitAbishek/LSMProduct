@@ -18,6 +18,7 @@ import {
 	BiInfoCircle,
 	BiInfoSquare,
 	BiTargetLock,
+	BiXCircle,
 } from 'react-icons/bi';
 import { ScoreBoardSchema } from '../../../schemas';
 interface Props {
@@ -36,10 +37,21 @@ const ScoreBoard: React.FC<Props> = (props) => {
 			borderColor: 'gray.100',
 		},
 	};
+
+	const isQuizAnswered =
+		scoreData.total_answered_questions === 0 ? BiXCircle : BiCheckCircle;
+	const checkQuizTotalAnswered =
+		scoreData.total_answered_questions === 0 ? 'red.500' : 'green.500';
+
 	return (
 		<Stack direction="column" spacing="8">
 			<Heading fontSize="x-large" d="flex" alignItems="center">
-				<Icon as={BiCheckCircle} fontSize="xx-large" color="green.400" mr="4" />
+				<Icon
+					as={isQuizAnswered}
+					fontSize="xx-large"
+					color={checkQuizTotalAnswered}
+					mr="4"
+				/>
 				{__('Your Score', 'masteriyo')}
 			</Heading>
 			<List sx={listStyles}>
@@ -51,7 +63,7 @@ const ScoreBoard: React.FC<Props> = (props) => {
 					<Text>{scoreData.total_questions}</Text>
 				</ListItem>
 				<ListItem d="flex" alignItems="center">
-					<ListIcon as={BiCheckCircle} color="green.500" />
+					<ListIcon as={isQuizAnswered} color={checkQuizTotalAnswered} />
 					<Text fontWeight="bold" flex="0 0 200px">
 						{__('Total Answered: ')}
 					</Text>

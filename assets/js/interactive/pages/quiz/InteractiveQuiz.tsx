@@ -1,4 +1,12 @@
-import { Box, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Container,
+	Heading,
+	Stack,
+	Text,
+	useToast,
+} from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
@@ -20,8 +28,10 @@ const InteractiveQuiz = () => {
 	const quizAPI = new API(urls.quizes);
 	const quizAttemptsAPI = new API(urls.quizesAttempts);
 	const methods = useForm();
+	const toast = useToast();
 	const [scoreBoardData, setScoreBoardData] = useState<any>(null);
 	const [quizStartedOn, setQuizStartedOn] = useState<any>(null);
+	const [quizAboutToExpire, setQuizAboutToExpire] = useState<boolean>(false);
 
 	const quizQuery = useQuery<QuizSchema, Error>(
 		[`section${quizId}`, quizId],
@@ -56,8 +66,17 @@ const InteractiveQuiz = () => {
 			onSuccess: (data: any) => {
 				setQuizStartedOn(getLocalTime(data.attempt_started_at));
 			},
+			onError: (error: any) => {
+				toast({
+					title: __('Maximum attempts reached', 'masteriyo'),
+					description: `${error.response?.data?.message}`,
+					isClosable: true,
+					status: 'error',
+				});
+			},
 		});
 		setScoreBoardData(null);
+		setQuizAboutToExpire(false);
 	};
 
 	const onSubmit = (data: any) => {
@@ -90,7 +109,7 @@ const InteractiveQuiz = () => {
 										onStartPress={onStartPress}
 									/>
 								) : quizStartedOn || checkQuizAnswers.isLoading ? (
-									<QuizFields />
+									<QuizFields quizAboutToExpire={quizAboutToExpire} />
 								) : (
 									<QuizStart
 										quizData={quizQuery.data}
@@ -111,6 +130,7 @@ const InteractiveQuiz = () => {
 						duration={quizQuery?.data?.duration}
 						quizId={quizQuery?.data?.id}
 						onQuizeExpire={onQuizeExpire}
+						quizeAboutToExpire={setQuizAboutToExpire}
 					/>
 				)}
 

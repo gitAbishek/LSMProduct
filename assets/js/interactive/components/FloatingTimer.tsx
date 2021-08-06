@@ -5,7 +5,7 @@ import {
 	Text,
 	VStack,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTimer } from 'react-timer-hook';
 
 interface Props {
@@ -13,9 +13,10 @@ interface Props {
 	quizId: number;
 	startedOn: any;
 	onQuizeExpire: () => void;
+	quizeAboutToExpire: (value: boolean) => void;
 }
 const FloatingTimer: React.FC<Props> = (props) => {
-	const { duration, startedOn, onQuizeExpire } = props;
+	const { duration, startedOn, onQuizeExpire, quizeAboutToExpire } = props;
 	const time = new Date(startedOn);
 	const formatDate = time.setMinutes(time.getMinutes() + duration);
 
@@ -28,6 +29,12 @@ const FloatingTimer: React.FC<Props> = (props) => {
 	});
 
 	const quizCounterTime = hours * 60 * 60 + minutes * 60 + seconds;
+
+	useEffect(() => {
+		if (quizCounterTime <= 30) {
+			quizeAboutToExpire(true);
+		}
+	}, [quizCounterTime, quizeAboutToExpire]);
 
 	return (
 		<Center

@@ -12,16 +12,22 @@ interface Props {
 	duration: number;
 	quizId: number;
 	startedOn: any;
+	onQuizeExpire: () => void;
 }
 const FloatingTimer: React.FC<Props> = (props) => {
-	const { duration, startedOn } = props;
+	const { duration, startedOn, onQuizeExpire } = props;
 	const time = new Date(startedOn);
 	const formatDate = time.setMinutes(time.getMinutes() + duration);
 
 	const { hours, seconds, minutes } = useTimer({
 		expiryTimestamp: formatDate,
-		onExpire: () => console.warn('onExpire called'),
+		onExpire: () => {
+			console.warn('onExpire called');
+			onQuizeExpire();
+		},
 	});
+
+	const quizCounterTime = hours * 60 * 60 + minutes * 60 + seconds;
 
 	return (
 		<Center
@@ -34,10 +40,10 @@ const FloatingTimer: React.FC<Props> = (props) => {
 			shadow="boxl"
 			rounded="full">
 			<CircularProgress
-				value={hours * 60 * 60 + minutes * 60 + seconds}
+				value={quizCounterTime}
 				max={duration * 60}
 				capIsRound
-				color="blue.500"
+				color={quizCounterTime <= 30 ? 'red.500' : 'blue.500'}
 				size="140px"
 				trackColor="transparent"
 				thickness="5px">

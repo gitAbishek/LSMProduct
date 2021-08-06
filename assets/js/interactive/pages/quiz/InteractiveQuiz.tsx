@@ -69,6 +69,8 @@ const InteractiveQuiz = () => {
 		setQuizStartedOn(null);
 	};
 
+	const onQuizeExpire = () => onSubmit(methods.getValues());
+
 	if (quizQuery.isSuccess) {
 		return (
 			<Container centerContent maxW="container.xl" py="16">
@@ -87,7 +89,7 @@ const InteractiveQuiz = () => {
 										scoreData={scoreBoardData}
 										onStartPress={onStartPress}
 									/>
-								) : quizStartedOn ? (
+								) : quizStartedOn || checkQuizAnswers.isLoading ? (
 									<QuizFields />
 								) : (
 									<QuizStart
@@ -108,6 +110,7 @@ const InteractiveQuiz = () => {
 						startedOn={quizStartedOn}
 						duration={quizQuery?.data?.duration}
 						quizId={quizQuery?.data?.id}
+						onQuizeExpire={onQuizeExpire}
 					/>
 				)}
 

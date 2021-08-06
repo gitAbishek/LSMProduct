@@ -98,6 +98,7 @@ const AllCourses = () => {
 												permalink={course.permalink}
 												author={course.author}
 												onDeletePress={onDeletePress}
+												status={course.status}
 											/>
 										))}
 								</Tbody>

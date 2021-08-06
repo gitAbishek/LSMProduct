@@ -37,32 +37,8 @@ interface Props {
 	createdOn: string;
 	author: { id: number; display_name: string; avatar_url: string };
 	onDeletePress: any;
+	status?: 'draft' | 'publish';
 }
-
-//@ts-ignore
-const currencySymbol = window._MASTERIYO_.currency.symbol;
-
-//@ts-ignore
-const currencyPosition = window._MASTERIYO_.currency.position;
-
-const priceWithSymbol = (price: string, currencySymbol: string) => {
-	switch (currencyPosition) {
-		case 'left':
-			return `${decodeEntity(currencySymbol)}${price}`;
-
-		case 'right':
-			return `${price}${decodeEntity(currencySymbol)}`;
-
-		case 'left_space':
-			return `${decodeEntity(currencySymbol)} ${price}`;
-
-		case 'right_space':
-			return `${price} ${decodeEntity(currencySymbol)}`;
-		default:
-			// default set to left.
-			return `${decodeEntity(currencySymbol)}${price}`;
-	}
-};
 
 const CourseList: React.FC<Props> = (props) => {
 	const {
@@ -74,9 +50,34 @@ const CourseList: React.FC<Props> = (props) => {
 		createdOn,
 		author,
 		onDeletePress,
+		status,
 	} = props;
-	const createdOnDate = createdOn.split(' ')[0];
 
+	const createdOnDate = createdOn.split(' ')[0];
+	//@ts-ignore
+	const currencySymbol = window._MASTERIYO_.currency.symbol;
+
+	//@ts-ignore
+	const currencyPosition = window._MASTERIYO_.currency.position;
+
+	const priceWithSymbol = (price: string, currencySymbol: string) => {
+		switch (currencyPosition) {
+			case 'left':
+				return `${decodeEntity(currencySymbol)}${price}`;
+
+			case 'right':
+				return `${price}${decodeEntity(currencySymbol)}`;
+
+			case 'left_space':
+				return `${decodeEntity(currencySymbol)} ${price}`;
+
+			case 'right_space':
+				return `${price} ${decodeEntity(currencySymbol)}`;
+			default:
+				// default set to left.
+				return `${decodeEntity(currencySymbol)}${price}`;
+		}
+	};
 	return (
 		<Tr>
 			<Td>
@@ -86,6 +87,11 @@ const CourseList: React.FC<Props> = (props) => {
 					fontWeight="semibold"
 					_hover={{ color: 'blue.500' }}>
 					{name}
+					{status === 'draft' && (
+						<Badge bg="blue.200" fontSize="10px" ml="2" mt="-2">
+							{__('Draft', 'masteriyo')}
+						</Badge>
+					)}
 				</Link>
 			</Td>
 			<Td>

@@ -2,6 +2,7 @@ import {
 	Collapse,
 	FormControl,
 	FormErrorMessage,
+	FormHelperText,
 	FormLabel,
 	InputGroup,
 	InputRightAddon,
@@ -21,7 +22,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { QuizSchema as QuizSchemaOld } from '../../../schemas';
 import { convertMinutesToHours } from '../../../utils/math';
 
@@ -39,6 +40,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 	const {
 		formState: { errors },
 		setValue,
+		control,
 	} = useFormContext<QuizSchema>();
 
 	const [hours, minutes] = convertMinutesToHours(quizData?.duration || 0);
@@ -46,6 +48,12 @@ const QuizSettings: React.FC<Props> = (props) => {
 	const [displayValue, setDisplayValue] = useState(
 		quizData?.questions_display_per_page != 0 ? '1' : '0'
 	);
+
+	const watchQuestionDisplayPerPage = useWatch({
+		name: 'questions_display_per_page',
+		defaultValue: quizData?.questions_display_per_page,
+		control,
+	});
 
 	const tabStyles = {
 		justifyContent: 'flex-start',
@@ -290,6 +298,14 @@ const QuizSettings: React.FC<Props> = (props) => {
 														</NumberInput>
 													)}
 												/>
+												{watchQuestionDisplayPerPage == 0 && (
+													<FormHelperText>
+														{__(
+															'Setting question display per page 0 will display all questions.',
+															'masteriyo'
+														)}
+													</FormHelperText>
+												)}
 												<FormErrorMessage>
 													{errors?.questions_display_per_page &&
 														errors?.questions_display_per_page?.message}

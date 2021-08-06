@@ -234,8 +234,6 @@ function masteriyo_get_quiz_attempt( $attempt_id ) {
 function masteriyo_get_quiz_attempt_count( $quiz_id, $user_id ) {
 	global $wpdb;
 
-	$user_id = $user_id ? $user_id : get_current_user_id();
-
 	$attempt_count = $wpdb->get_var(
 		$wpdb->prepare(
 			"SELECT COUNT(*)

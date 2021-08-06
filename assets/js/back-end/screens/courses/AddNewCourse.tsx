@@ -13,7 +13,6 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
-	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -39,7 +38,6 @@ const AddNewCourse: React.FC = () => {
 	const history = useHistory();
 	const methods = useForm();
 	const courseAPI = new API(urls.courses);
-	const toast = useToast();
 
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -61,44 +59,19 @@ const AddNewCourse: React.FC = () => {
 		courseAPI.store(data)
 	);
 
-	const formatData = (data: any, status: string) => {
-		return {
+	// On Add Course
+	const onSubmit = (data: CourseSchema) => {
+		const newData = {
 			...(data.categories && {
 				categories: data.categories.map((category: any) => ({
 					id: category.value,
 				})),
 			}),
 			regular_price: `${data.regular_price}`,
-			status: status,
+			status: 'draft',
 		};
-	};
 
-	// When saved as a draft
-	const onSaveAsDraft = (data: CourseSchema) => {
-		const cleanData = deepClean(data);
-		addMutation.mutate(deepMerge(cleanData, formatData(cleanData, 'draft')), {
-			onSuccess: (data: CourseSchema) => {
-				toast({
-					title: __('Added to draft', 'masteriyo'),
-					description: __('You can continue editing', 'masteriyo'),
-					isClosable: true,
-					status: 'success',
-				});
-				history.push({
-					pathname: routes.courses.edit.replace(
-						':courseId',
-						data.id.toString()
-					),
-					search: '?type=draft',
-				});
-			},
-		});
-	};
-
-	// On Add Course
-	const onSubmit = (data: CourseSchema) => {
-		const cleanData = deepClean(data);
-		addMutation.mutate(deepMerge(cleanData, formatData(cleanData, 'publish')), {
+		addMutation.mutate(deepClean(deepMerge(data, newData)), {
 			onSuccess: (data: CourseSchema) => {
 				history.push({
 					pathname: routes.courses.edit.replace(
@@ -145,16 +118,10 @@ const AddNewCourse: React.FC = () => {
 									</Stack>
 									<ButtonGroup>
 										<Button
-											variant="outline"
-											onClick={methods.handleSubmit(onSaveAsDraft)}
-											isLoading={addMutation.isLoading}>
-											{__('Save as Draft', 'masteriyo')}
-										</Button>
-										<Button
 											colorScheme="blue"
 											onClick={methods.handleSubmit(onSubmit)}
 											isLoading={addMutation.isLoading}>
-											{__('Add Course', 'masteriyo')}
+											{__('Next', 'masteriyo')}
 										</Button>
 									</ButtonGroup>
 								</Flex>

@@ -106,8 +106,8 @@ const SectionBuilder: React.FC<Props> = (props) => {
 														'Not sure how to get started? Learn more in our',
 														'masteriyo'
 													)}
-													<Text color="gray.800" fontSize="xs">
-														{__('Documentation', 'masteriyo')}
+													<Text as="span" color="gray.800" fontSize="xs">
+														{__(' Documentation', 'masteriyo')}
 													</Text>
 												</Text>
 											</Stack>

@@ -64,7 +64,7 @@ const Course: React.FC<Props> = (props) => {
 								{__('Course Per Page', 'masteriyo')}
 							</FormLabel>
 							<Stack direction="column">
-								<NumberInput w="md" defaultValue={20} min={1}>
+								<NumberInput w="md" defaultValue={12} min={1}>
 									<NumberInputField
 										{...register('course_archive.display.per_page', {
 											required: 'Course per page is required.',

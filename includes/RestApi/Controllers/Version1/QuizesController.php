@@ -450,7 +450,7 @@ class QuizesController extends PostsController {
 			return new \WP_Error(
 				'masteriyo_rest_user_not_logged_in',
 				__( 'Please sign in to start the quiz.', 'masteriyo' ),
-				array( 'status' => 401 )
+				array( 'status' => rest_authorization_required_code() )
 			);
 		}
 
@@ -476,17 +476,16 @@ class QuizesController extends PostsController {
 			);
 		}
 
-		$date = gmdate( 'Y-m-d H:i:s', time() );
+		$date = current_time( 'mysql', true );
 
-		$previous_attempts   = masteriyo_get_all_quiz_attempts( $quiz_id, $user_id );
-		$attempted_count     = is_array( $previous_attempts ) ? count( $previous_attempts ) : 0;
+		$attempted_count     = masteriyo_get_quiz_attempt_count( $quiz_id, $user_id );
 		$max_attempt_allowed = get_post_meta( $quiz_id, '_attempts_allowed', true );
 
 		if ( $attempted_count >= $max_attempt_allowed ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_attempt_reached",
 				__( 'The maximum number of attempts for the quiz have been reached.', 'masteriyo' ),
-				array( 'status' => 403 )
+				array( 'status' => 429 )
 			);
 		}
 
@@ -539,28 +538,27 @@ class QuizesController extends PostsController {
 			);
 		}
 
-		if ( is_array( $answers ) && count( $answers ) > 0 ) {
-			foreach ( $answers as $question_id => $value ) {
-				$object = $this->get_question_object( (int) $question_id );
+		foreach ( $answers as $question_id => $value ) {
+			$object = $this->get_question_object( (int) $question_id );
 
-				if ( ! $object || 0 === $object->get_id() ) {
-					return new \WP_Error(
-						"masteriyo_rest_{$this->post_type}_invalid_id",
-						__( 'Invalid ID.', 'masteriyo' ),
-						array( 'status' => 404 )
-					);
-				}
-
-				$total_question_marks += $object->get_points();
-
-				$is_correct = $object->check_answer( $value, 'view' );
-
-				$is_correct ? $total_correct_answers++ : $total_incorrect_answers++;
-
-				$question_mark       = $is_correct ? $object->get_points() : 0;
-				$total_earned_marks += $question_mark;
-				$attempt_questions++;
+			if ( ! $object || 0 === $object->get_id() ) {
+				return new \WP_Error(
+					"masteriyo_rest_{$this->post_type}_invalid_id",
+					__( 'Invalid ID.', 'masteriyo' ),
+					array( 'status' => 404 )
+				);
 			}
+
+			$total_question_marks += $object->get_points();
+
+			$is_correct = $object->check_answer( $value, 'view' );
+
+			$is_correct ? $total_correct_answers++ : $total_incorrect_answers++;
+
+			$question_mark       = $is_correct ? $object->get_points() : 0;
+			$total_earned_marks += $question_mark;
+			$attempt_questions++;
+		}
 
 			$quiz_questions = masteriyo_get_quiz_questions( $quiz_id, 'post_parent' );
 
@@ -573,7 +571,7 @@ class QuizesController extends PostsController {
 				'total_incorrect_answers'  => $total_incorrect_answers,
 				'answers'                  => maybe_serialize( $answers ),
 				'attempt_status'           => 'attempt_ended',
-				'attempt_ended_at'         => gmdate( 'Y-m-d H:i:s', time() ),
+				'attempt_ended_at'         => current_time( 'mysql', true ),
 			);
 
 			$wpdb->update(
@@ -587,7 +585,6 @@ class QuizesController extends PostsController {
 			$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
 
 			return apply_filters( 'masteriyo_answer_check_rest_reponse', $response );
-		}
 	}
 
 	/**

@@ -560,31 +560,31 @@ class QuizesController extends PostsController {
 			$attempt_questions++;
 		}
 
-			$quiz_questions = masteriyo_get_quiz_questions( $quiz_id, 'post_parent' );
+		$quiz_questions = masteriyo_get_quiz_questions( $quiz_id, 'post_parent' );
 
-			$attempt_detail = array(
-				'total_marks'              => $total_question_marks,
-				'earned_marks'             => $total_earned_marks,
-				'total_questions'          => $quiz_questions->post_count,
-				'total_answered_questions' => $attempt_questions,
-				'total_correct_answers'    => $total_correct_answers,
-				'total_incorrect_answers'  => $total_incorrect_answers,
-				'answers'                  => maybe_serialize( $answers ),
-				'attempt_status'           => 'attempt_ended',
-				'attempt_ended_at'         => current_time( 'mysql', true ),
-			);
+		$attempt_detail = array(
+			'total_marks'              => $total_question_marks,
+			'earned_marks'             => $total_earned_marks,
+			'total_questions'          => $quiz_questions->post_count,
+			'total_answered_questions' => $attempt_questions,
+			'total_correct_answers'    => $total_correct_answers,
+			'total_incorrect_answers'  => $total_incorrect_answers,
+			'answers'                  => maybe_serialize( $answers ),
+			'attempt_status'           => 'attempt_ended',
+			'attempt_ended_at'         => current_time( 'mysql', true ),
+		);
 
-			$wpdb->update(
-				$wpdb->prefix . 'masteriyo_quiz_attempts',
-				$attempt_detail,
-				array( 'id' => $attempt_data->id )
-			);
+		$wpdb->update(
+			$wpdb->prefix . 'masteriyo_quiz_attempts',
+			$attempt_detail,
+			array( 'id' => $attempt_data->id )
+		);
 
-			$attempt_datas = masteriyo_get_quiz_attempt_ended_data( $quiz_id, $attempt_data->id );
+		$attempt_datas = masteriyo_get_quiz_attempt_ended_data( $quiz_id, $attempt_data->id );
 
-			$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
+		$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
 
-			return apply_filters( 'masteriyo_answer_check_rest_reponse', $response );
+		return apply_filters( 'masteriyo_answer_check_rest_reponse', $response );
 	}
 
 	/**
@@ -612,7 +612,7 @@ class QuizesController extends PostsController {
 		);
 
 		$multi_attempts_data = array();
-		$attempts       = masteriyo_get_quiz_attempts( $query_vars );
+		$attempts            = masteriyo_get_quiz_attempts( $query_vars );
 
 		if ( empty( $attempts ) ) {
 			return array();

@@ -268,6 +268,7 @@ class CourseQuestionAnswersController extends CommentsController {
 			'user_name'       => $course_qa->get_user_name( $context ),
 			'user_email'      => $course_qa->get_user_email( $context ),
 			'user_url'        => $course_qa->get_user_url( $context ),
+			'user_avatar'     => $course_qa->get_avatar_url( $context ),
 			'ip_address'      => $course_qa->get_ip_address( $context ),
 			'created_at'      => masteriyo_rest_prepare_date_response( $course_qa->get_created_at( $context ) ),
 			'content'         => $course_qa->get_content( $context ),
@@ -278,8 +279,6 @@ class CourseQuestionAnswersController extends CommentsController {
 			'by_current_user' => $course_qa->is_created_by_current_user(),
 			'sender'          => $course_qa->is_created_by_student() ? 'student' : 'instructor',
 		);
-
-		$course_qa->is_created_by_student();
 
 		if ( 0 === $course_qa->get_parent( $context ) ) {
 			$data['answers_count'] = $course_qa->get_answers_count();

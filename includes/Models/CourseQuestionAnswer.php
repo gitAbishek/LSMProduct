@@ -470,4 +470,18 @@ class CourseQuestionAnswer extends Model {
 	public function is_created_by_administrator() {
 		return $this->is_created_by( 'masteriyo_administrator' );
 	}
+
+	/**
+	 * Retur user avatar url.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return stirng
+	 */
+	public function get_avatar_url( $context = 'view' ) {
+		$avatar_url = get_avatar_url( $this->get_user_id( $context ) );
+		return apply_filters( 'masteriyo_course_qa_avatar_url', $avatar_url );
+	}
 }

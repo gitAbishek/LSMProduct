@@ -99,13 +99,6 @@ class Masteriyo {
 		add_action( 'admin_init', array( $this, 'admin_redirects' ) );
 		add_action( 'after_setup_theme', array( $this, 'add_image_sizes' ) );
 
-		add_filter(
-			'query_vars',
-			function( $query_vars ) {
-				$query_vars[] = 'course';
-				return $query_vars;
-			}
-		);
 	}
 
 	/**
@@ -125,7 +118,7 @@ class Masteriyo {
 
 		$this->handle_paypal_ipn();
 
-		// add_rewrite_rule( '^learning/([^/]*)/?', 'index.php?course=$matches[1]', 'top' );
+		add_rewrite_endpoint( 'course', EP_PAGES | EP_ROOT, 'course_id' );
 
 		do_action( 'masteriyo_init' );
 	}
@@ -276,9 +269,6 @@ class Masteriyo {
 	 */
 	public function template_loader( $template ) {
 		global $post;
-		global $wp_query;
-
-		$a = 1;
 
 		if ( masteriyo_is_single_course_page() ) {
 			masteriyo_setup_course_data( $post );
@@ -289,47 +279,46 @@ class Masteriyo {
 
 		// Handle interactive page.
 		if ( masteriyo_is_learning_page() ) { // phpcs:ignore
-			$course = get_query_var( 'course' );
-			// $course_id = isset( $_GET['course_id'] ) ? absint( $_GET['course_id'] ) : 0 ; // phpcs:ignore
-			// $user_id   = get_current_user_id();
+			$course_id = absint( get_query_var( 'course_id' ) );
+			$user_id   = get_current_user_id();
 
-			// $query = new UserCourseQuery(
-			// 	array(
-			// 		'course_id' => $course_id,
-			// 		'user_id'   => $user_id,
-			// 	)
-			// );
+			$query = new UserCourseQuery(
+				array(
+					'course_id' => $course_id,
+					'user_id'   => $user_id,
+				)
+			);
 
-			// $user_courses = $query->get_user_courses();
+			$user_courses = $query->get_user_courses();
 
-			// $course = masteriyo_get_course( $course_id );
-			// if ( empty( $user_courses ) && ! is_null( $course ) && 'open' === $course->get_access_mode() ) {
-			// 	$user_courses = masteriyo( 'user-course' );
-			// 	$user_courses->set_status( 'active' );
-			// 	$user_courses->set_course_id( $course_id );
-			// 	$user_courses->set_user_id( $user_id );
-			// 	$user_courses->save();
-			// 	$user_courses->set_object_read( true );
-			// }
+			$course = masteriyo_get_course( $course_id );
+			if ( empty( $user_courses ) && ! is_null( $course ) && 'open' === $course->get_access_mode() ) {
+				$user_courses = masteriyo( 'user-course' );
+				$user_courses->set_status( 'active' );
+				$user_courses->set_course_id( $course_id );
+				$user_courses->set_user_id( $user_id );
+				$user_courses->save();
+				$user_courses->set_object_read( true );
+			}
 
-			// if ( empty( $user_courses ) || ! masteriyo_can_start_course( $course_id, $user_id ) ) {
-			// 	wp_safe_redirect( \masteriyo_get_course_list_url(), 307 );
-			// 	exit();
-			// }
+			if ( empty( $user_courses ) || ! masteriyo_can_start_course( $course_id, $user_id ) ) {
+				wp_safe_redirect( \masteriyo_get_course_list_url(), 307 );
+				exit();
+			}
 
-			// $user_course = is_array( $user_courses ) ? $user_courses[0] : $user_courses;
+			$user_course = is_array( $user_courses ) ? $user_courses[0] : $user_courses;
 
-			// if ( 'active' === $user_course->get_status() ) {
-			// 	$user_course->set_date_start( current_time( 'mysql' ), true );
-			// 	$user_course->set_status( 'enrolled' );
-			// }
+			if ( 'active' === $user_course->get_status() ) {
+				$user_course->set_date_start( current_time( 'mysql' ), true );
+				$user_course->set_status( 'enrolled' );
+			}
 
-			// if ( 'enrolled' === $user_course->get_status() ) {
-			// 	$user_course->set_date_modified( current_time( 'mysql' ), true );
-			// 	$user_course->save();
-			// }
+			if ( 'enrolled' === $user_course->get_status() ) {
+				$user_course->set_date_modified( current_time( 'mysql' ), true );
+				$user_course->save();
+			}
 
-			// $template = plugin_dir_path( Constants::get( 'MASTERIYO_PLUGIN_FILE' ) ) . '/templates/learning.php';
+			$template = masteriyo_locate_template( 'learning.php' );
 		}
 
 		return $template;

@@ -2951,3 +2951,25 @@ function masteriyo_starts_with( $haystack, $needle ) {
 function masteriyo_ends_with( $haystack, $needle ) {
 	return substr( $haystack, -strlen( $needle ) ) === $needle;
 }
+
+/**
+ * Get Masteriyo plugin path.
+ *
+ * @since 0.1.0
+ *
+ * @return string
+ */
+function masteriyo_get_plugin_path() {
+	return untrailingslashit( plugin_dir_path( Constants::get( 'MASTERIYO_PLUGIN_FILE' ) ) );
+}
+
+/**
+ * Get Masteriyo templates path.
+ *
+ * @since 0.1.0
+ *
+ * @return string
+ */
+function masteriyo_get_templates_path() {
+	return untrailingslashit( Constants::get( 'MASTERIYO_TEMPLATES' ) );
+}

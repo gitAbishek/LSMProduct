@@ -1239,13 +1239,13 @@ class Course extends Model {
 		if ( '' === get_option( 'permalink_structure' ) ) {
 			$url = add_query_arg(
 				array(
-					'course' => $this->get_id(),
+					'course_id' => $this->get_id(),
 				),
 				$learning_page_url
 			);
 		}
 
-		// $url .= '#course/' . $this->get_id();
+		$url .= '#course/' . $this->get_id();
 
 		return apply_filters( 'masteriyo_start_course_url', $url, $this );
 	}

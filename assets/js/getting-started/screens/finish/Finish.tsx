@@ -1,7 +1,6 @@
 import {
 	Box,
 	Button,
-	ButtonGroup,
 	Flex,
 	Heading,
 	Icon,
@@ -84,16 +83,11 @@ const Welcome: React.FC<Props> = (props) => {
 							</Button>
 						</Link>
 
-						<ButtonGroup>
-							<Button variant="ghost">
-								{__('Install sample course', 'masteriyo')}
+						<Link href={pageBuilderURL ? pageBuilderURL : '#'}>
+							<Button rounded="3px" colorScheme="blue">
+								{__('Create a new course', 'masteriyo')}
 							</Button>
-							<Link href={pageBuilderURL ? pageBuilderURL : '#'}>
-								<Button rounded="3px" colorScheme="blue">
-									{__('Create a new course', 'masteriyo')}
-								</Button>
-							</Link>
-						</ButtonGroup>
+						</Link>
 					</Flex>
 				</Stack>
 			</Box>

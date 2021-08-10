@@ -313,7 +313,7 @@
 				if (isDeletingFlags[review_id] || !masteriyo_helper.confirm()) return;
 
 				isDeletingFlags[review_id] = true;
-				$delete_button.find('.text').text(mto_data.labels.deleting);
+				$delete_button.find('strong').text(mto_data.labels.deleting);
 				masteriyo_api.deleteCourseReview(review_id, {
 					onSuccess: function () {
 						$review.after(

@@ -712,17 +712,20 @@ if ( ! function_exists( 'masteriyo_single_course_curriculum' ) ) {
 	function masteriyo_single_course_curriculum() {
 		global $course;
 
-		$dict = masteriyo_make_section_to_lessons_dictionary( $course );
+		if ( $course->get_show_curriculum() || masteriyo_can_start_course( $course ) ) {
+			$dict = masteriyo_make_section_to_lessons_dictionary( $course );
 
-		masteriyo_get_template(
-			'single-course/curriculum.php',
-			array(
-				'course'     => $course,
-				'sections'   => $dict['sections'],
-				'lessons'    => $dict['lessons'],
-				'dictionary' => $dict['lessons_dictionary'],
-			)
-		);
+			masteriyo_get_template(
+				'single-course/curriculum.php',
+				array(
+					'course'     => $course,
+					'sections'   => $dict['sections'],
+					'lessons'    => $dict['lessons'],
+					'dictionary' => $dict['lessons_dictionary'],
+				)
+			);
+		}
+
 	}
 }
 
@@ -735,22 +738,20 @@ if ( ! function_exists( 'masteriyo_single_course_reviews' ) ) {
 	function masteriyo_single_course_reviews() {
 		global $course;
 
-		// Bail early if the review is not enabled in global setting.
-		if ( ! masteriyo_get_setting( 'single_course.display.enable_review' ) ) {
-			return;
+		if ( masteriyo_get_setting( 'single_course.display.enable_review' ) ) {
+
+			$reviews_and_replies = masteriyo_get_course_reviews_and_replies( $course );
+
+			masteriyo_get_template(
+				'single-course/reviews.php',
+				array(
+					'course'         => $course,
+					'course_reviews' => $reviews_and_replies['reviews'],
+					'replies'        => $reviews_and_replies['replies'],
+					'pp_placeholder' => masteriyo_get_course_review_author_pp_placeholder(),
+				)
+			);
 		}
-
-		$reviews_and_replies = masteriyo_get_course_reviews_and_replies( $course );
-
-		masteriyo_get_template(
-			'single-course/reviews.php',
-			array(
-				'course'         => $course,
-				'course_reviews' => $reviews_and_replies['reviews'],
-				'replies'        => $reviews_and_replies['replies'],
-				'pp_placeholder' => masteriyo_get_course_review_author_pp_placeholder(),
-			)
-		);
 	}
 }
 

@@ -186,6 +186,7 @@ class Setting extends Model {
 				'myaccount_page_id'        => '',
 				'checkout_page_id'         => '',
 				'terms_conditions_page_id' => '',
+				'learning_page_id'         => '',
 			),
 			'permalinks' => array(
 				'category_base'            => 'course-category',

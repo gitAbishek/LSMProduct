@@ -1,74 +1,66 @@
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 768px) {
-  //Form contianer
-  .mto-form-container {
-    width: 80%;
-  }
+	//Form contianer
+	.mto-form-container {
+		width: 80%;
+	}
 }
 
 // X-Small devices (portrait phones, less than 576px)
 @media (max-width: 576px) {
-  // Form container
-  .mto-form-container,
-  .mto-btn {
-    width: 100%;
-  }
-  .mto-login .mto-btn-wrapper,
-  .mto-reset .mto-btn-wrapper {
-    flex-direction: column;
-  }
-  .mto-login .mto-btn,
-  .mto-reset .mto-btn {
-    margin-bottom: 24px;
-  }
-  // Dashbord Continue Studying
-  .mto-cstudy {
-    &--btn {
-      width: inherit;
-    }
-  }
+	// Form container
+	.mto-form-container,
+	.mto-btn {
+		width: 100%;
+	}
+	.mto-login .mto-btn-wrapper,
+	.mto-reset .mto-btn-wrapper {
+		flex-direction: column;
+	}
+	.mto-login .mto-btn,
+	.mto-reset .mto-btn {
+		margin-bottom: 24px;
+	}
+	// Dashbord Continue Studying
+	.mto-cstudy {
+		&--btn {
+			width: inherit;
+		}
+	}
 
-  .mto-course-item,
-  .mto-courses--card {
-    flex-basis: 100%;
-    width: 256px;
-  }
+	.mto-course-item,
+	.mto-courses--card {
+		flex-basis: 100%;
+		// width: 256px;
+		width: 100%;
+	}
 
-  // Course list page responsive
+	// Course list page responsive
 
-  .columns-6 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    grid-gap: 14px;
-  }
+	.columns-4,
+	.columns-3,
+	.columns-2,
+	.columns-1 {
+		gap: 14px;
+		.mto-course {
+			flex-direction: row;
+		}
 
-  .columns-5 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    grid-gap: 14px;
-  }
+		.mto-course-item {
+			flex-basis: 100%;
+		}
+	}
 
-  .columns-4 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    grid-gap: 14px;
-  }
+	.plr-32 {
+		padding-left: 18px !important;
+		padding-right: 18px !important;
+	}
 
-  .columns-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    grid-gap: 14px;
-  }
+	.mto-stab {
+		gap: 32px;
+	}
 
-  .columns-2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    grid-gap: 14px;
-  }
-
-  .columns-1 {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 14px;
-  }
+	.mto-avatar {
+		margin-left: 18px;
+	}
 }

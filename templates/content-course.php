@@ -67,7 +67,7 @@ $difficulty     = $course->get_difficulty();
 			<div class="mto-course-author">
 				<?php if ( $author ) : ?>
 					<img src="<?php echo esc_attr( $author->get_avatar_url() ); ?>" alt="" srcset="">
-					<span class="mto-course-author--name"><?php echo esc_attr( $author->get_username() ); ?></span>
+					<span class="mto-course-author--name"><?php echo esc_attr( $author->get_display_name() ); ?></span>
 				<?php endif; ?>
 			</div>
 			<span class="mto-icon-svg mto-flex mto-rating mto-flex-ycenter">

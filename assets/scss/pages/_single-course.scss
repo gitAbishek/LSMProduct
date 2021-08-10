@@ -9,6 +9,12 @@
 		background-color: $mto-white-color;
 		@include mto-shadow-1;
 		border-radius: 8px;
+
+		.mto-course-author {
+			&--name {
+				max-width: 100% !important;
+			}
+		}
 	}
 
 	&--title {
@@ -50,7 +56,7 @@
 	&--aside {
 		flex: 1 1 31%;
 		background: $mto-white-color;
-		max-height: 50%;
+		// max-height: 50%;
 		height: fit-content;
 		@include mto-shadow-1;
 		border-radius: 8px;
@@ -67,7 +73,7 @@
 
 			.course-overview {
 				> * {
-					font-family: "Roboto", sans-serif;
+					font-family: 'Roboto', sans-serif;
 					font-size: 14px;
 					line-height: 16px;
 				}
@@ -232,7 +238,7 @@
 			display: none;
 		}
 		ul li::before {
-			content: "";
+			content: '';
 			background: $mto-dark-gray;
 			display: inline-block;
 			width: 0.3em;
@@ -439,7 +445,9 @@
 	display: flex;
 	gap: 8px;
 	.mto-single-course-item {
-		flex-basis: 375px;
+		// flex-basis: 375px;
+		display: flex;
+		gap: 24px;
 	}
 }
 

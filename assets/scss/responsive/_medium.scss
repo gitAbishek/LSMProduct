@@ -1,56 +1,48 @@
 // Medium devices (tablets, less than 992px)
 @media (max-width: 992px) {
-  //Form container
-  .mto-form-container {
-    width: 70%;
-  }
+	//Form container
+	.mto-form-container {
+		width: 70%;
+	}
 
-  .mto-cstudy {
-    &--body--pstatus {
-      display: none;
-    }
-  }
+	.mto-cstudy {
+		&--body--pstatus {
+			display: none;
+		}
+	}
 
-  .mto-course,
-  .mto-mycourses--card {
-    // flex-basis: calc((100% / 2) - 30px);
-  }
+	.mto-course,
+	.mto-mycourses--card {
+		// flex-basis: calc((100% / 2) - 30px);
+	}
 
-  // Course list page responsive
+	// Course list page responsive
+	.columns-4,
+	.columns-3,
+	.columns-2 {
+		gap: 14px;
 
-  .columns-6 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    grid-gap: 14px;
-  }
+		.mto-course-item {
+			flex-basis: 335px;
+		}
+	}
 
-  .columns-5 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    grid-gap: 14px;
-  }
+	.columns-1 {
+		gap: 14px;
 
-  .columns-4 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    grid-gap: 14px;
-  }
+		.mto-course-item {
+			flex-basis: 100%;
+		}
+	}
 
-  .columns-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    grid-gap: 14px;
-  }
+	// Related Post
+	.mto-related-post {
+		.mto-single-course-item {
+			flex-direction: column;
+		}
+	}
 
-  .columns-2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    grid-gap: 14px;
-  }
-
-  .columns-1 {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 14px;
-  }
+	.mto-single-course--main {
+		width: 100%;
+	}
 }

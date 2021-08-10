@@ -77,7 +77,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 						<div class="mto-course-author">
 							<?php if ( $author ) : ?>
 								<img src="<?php echo esc_attr( $author->get_avatar_url() ); ?>" alt="" srcset="">
-								<span class="mto-course-author--name"><?php echo esc_attr( $author->get_username() ); ?></span>
+								<span class="mto-course-author--name"><?php echo esc_attr( $author->get_display_name() ); ?></span>
 							<?php endif; ?>
 						</div>
 						<span class="mto-icon-svg mto-flex mto-rating mto-flex-ycenter">
@@ -103,14 +103,6 @@ do_action( 'masteriyo_before_related_posts_content' );
 						<div class="mto-course-stats-curriculum">
 							<?php masteriyo_get_svg( 'book', true ); ?> <span><?php echo esc_html( masteriyo_get_lessons_count( $course ) ); ?></span>
 						</div>
-					</div>
-					<hr>
-					<!-- Price and Enroll Now Button -->
-					<div class="mto-time-btn">
-						<div class="mto-course-price">
-							<span class="current-amount"><?php echo masteriyo_price( $course->get_price() ); ?></span>
-						</div>
-						<?php do_action( 'masteriyo_template_enroll_button' ); ?>
 					</div>
 					<hr>
 					<!-- Price and Enroll Now Button -->

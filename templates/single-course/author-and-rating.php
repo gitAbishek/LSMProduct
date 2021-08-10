@@ -24,7 +24,7 @@ do_action( 'masteriyo_before_single_course_author_and_rating' );
 	<div class="mto-course-author">
 		<img src="<?php echo esc_attr( $author->get_avatar_url() ); ?>">
 		<?php /* translators: %s: Username */ ?>
-		<span class="mto-course-author--name"><?php echo esc_attr( sprintf( __( 'by %s', 'masteriyo' ), $author->get_username() ) ); ?></span>
+		<span class="mto-course-author--name"><?php echo esc_attr( sprintf( __( 'by %s', 'masteriyo' ), $author->get_display_name() ) ); ?></span>
 	</div>
 	<?php endif; ?>
 	<span class="mto-icon-svg mto-flex mto-rating mto-flex-ycenter">

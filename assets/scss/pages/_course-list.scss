@@ -111,17 +111,22 @@
 			}
 			&--name {
 				color: $mto-accent-color;
-				font-size: 14px;
+				font-size: 12px;
 				line-height: 16px;
 				text-decoration: underline;
 				margin-left: 8px;
 				font-weight: 500;
+				overflow-wrap: break-word;
+				max-width: 100px;
 			}
 		}
 		.mto-rating {
 			// margin-left: 62px;
 			svg {
 				fill: $mto-primary-color;
+				width: 12px;
+				height: 12px;
+				font-size: 12px;
 
 				&:last-child {
 					margin-right: 8px;
@@ -143,7 +148,7 @@
 				}
 			}
 			li::before {
-				content: ("\2713");
+				content: ('\2713');
 			}
 		}
 	}
@@ -364,7 +369,7 @@
 		border-radius: 8px;
 		height: 70px;
 		border: none;
-		font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+		font-family: FontAwesome, 'Open Sans', Verdana, sans-serif;
 		font-style: normal;
 		font-weight: normal;
 		text-decoration: inherit;
@@ -407,6 +412,19 @@
 
 	.mto-course-item {
 		flex-basis: 284px;
+
+		.difficulty-badge {
+			left: 16px;
+		}
+
+		.mto-course--header {
+			padding: 18px;
+		}
+
+		.mto-rating {
+			justify-content: flex-end;
+			line-height: 14px;
+		}
 	}
 }
 

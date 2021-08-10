@@ -38,7 +38,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { OrderItemSchema, OrderSchema } from '../../schemas';
 import API from '../../utils/api';
-import { deepClean } from '../../utils/utils';
+import { deepClean, getLocalTime } from '../../utils/utils';
 import CountryStateFormField from './components/CountryStateFormField';
 
 const orderStatusList = [
@@ -215,7 +215,9 @@ const EditOrder = () => {
 														{__('Date created', 'masteriyo')}
 													</FormLabel>
 													<Input
-														defaultValue={orderQuery.data.date_created.date}
+														defaultValue={getLocalTime(
+															orderQuery.data.date_created
+														)}
 														disabled
 													/>
 												</FormControl>

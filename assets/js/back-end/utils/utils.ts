@@ -248,5 +248,5 @@ export const decodeEntity = (html: string) => {
 export const getLocalTime = (date: string) => {
 	const formatString: string = date.replace(' ', 'T') + 'Z';
 	const localDate = new Date(formatString);
-	return localDate;
+	return localDate.toLocaleString();
 };

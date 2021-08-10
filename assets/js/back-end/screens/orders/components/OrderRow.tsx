@@ -34,6 +34,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
+import { getLocalTime } from '../../../utils/utils';
 
 const makeOrderNumberLabel = (order: any) => {
 	if (order.billing.first_name || order.billing.last_name) {
@@ -58,7 +59,7 @@ interface BillingAdress {
 interface Order {
 	id: number;
 	order_number: string;
-	date_created: any;
+	date_created: string;
 	status: any;
 	total: string;
 	currency: string;
@@ -78,7 +79,6 @@ const OrderRow: React.FC<Props> = (props) => {
 	const ordersAPI = new API(urls.orders);
 	const cancelDeleteModalRef = useRef<any>();
 	const cancelOrderPreviewModalRef = useRef<any>();
-	const createdOnDate = data.date_created.date.split(' ')[0];
 
 	const deleteOrder = useMutation((id: number) => ordersAPI.delete(id), {
 		onSuccess: () => {
@@ -119,7 +119,7 @@ const OrderRow: React.FC<Props> = (props) => {
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
 					<Icon as={BiCalendar} />
 					<Text fontSize="sm" fontWeight="medium">
-						{createdOnDate}
+						{getLocalTime(data?.date_created)}
 					</Text>
 				</Stack>
 			</Td>

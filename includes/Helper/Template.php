@@ -624,8 +624,9 @@ if ( ! function_exists( 'masteriyo_single_course_stats' ) ) {
 		masteriyo_get_template(
 			'single-course/course-stats.php',
 			array(
-				'course'         => $course,
-				'comments_count' => $comments_count,
+				'course'               => $course,
+				'comments_count'       => $comments_count,
+				'enrolled_users_count' => masteriyo_count_enrolled_users( $course->get_id() ),
 			)
 		);
 	}

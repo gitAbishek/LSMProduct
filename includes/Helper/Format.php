@@ -314,7 +314,7 @@ function masteriyo_price( $price, $args = array() ) {
  * @return string
  */
 function masteriyo_get_price_format() {
-	$currency_pos = get_option( 'masteriyo_currency_pos' );
+	$currency_pos = masteriyo_get_setting( 'payments.currency.currency_position' );
 	$format       = '%1$s%2$s';
 
 	switch ( $currency_pos ) {

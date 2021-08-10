@@ -87,6 +87,22 @@ const Pages: React.FC<Props> = (props) => {
 							<FormControl>
 								<Flex justify="space-between" align="center">
 									<FormLabel sx={{ fontWeight: 'bold' }}>
+										{__('Learning', 'masteriyo')}
+									</FormLabel>
+									<Select
+										defaultValue={
+											settingsQuery?.data?.advance?.pages?.learning_page_id
+										}
+										w="md"
+										{...register('advance.pages.learning_page_id')}>
+										{renderPagesOption()}
+									</Select>
+								</Flex>
+							</FormControl>
+
+							<FormControl>
+								<Flex justify="space-between" align="center">
+									<FormLabel sx={{ fontWeight: 'bold' }}>
 										<Text fontSize="sm">{__('My Account', 'masteriyo')}</Text>
 									</FormLabel>
 									<Select

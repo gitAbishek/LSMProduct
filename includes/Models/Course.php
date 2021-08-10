@@ -475,20 +475,23 @@ class Course extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return Difficulty
+	 * @return array
 	 */
 	public function get_difficulty() {
-		$difficulty = masteriyo( 'course_difficulty' );
-		$store      = masteriyo( 'course_difficulty.store' );
+		$terms = Utils::get_object_terms( $this->get_id(), 'course_difficulty' );
 
-		try {
-			$difficulty->set_id( $this->get_difficulty_id() );
-			$store->read( $difficulty );
-		} catch ( \Exception $e ) {
-			return null;
-		}
+		$terms = array_map(
+			function( $term ) {
+				return array(
+					'id'   => $term->term_id,
+					'name' => $term->name,
+					'slug' => $term->slug,
+				);
+			},
+			$terms
+		);
 
-		return apply_filters( 'masteriyo_get_course_difficulty_object', $difficulty, $this->get_difficulty_id(), $this );
+		return array_shift( $terms );
 	}
 
 	/**
@@ -1265,7 +1268,7 @@ class Course extends Model {
 
 			$url = add_query_arg(
 				array(
-					'add_to_cart' => $this->get_id(),
+					'add-to-cart' => $this->get_id(),
 				),
 				$base_url
 			);

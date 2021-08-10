@@ -1,8 +1,9 @@
 <?php
+
 /**
- * The Template for displaying course title in single course page
+ * The template for displaying navigation in course archive page.
  *
- * This template can be overridden by copying it to yourtheme/masteriyo/single-course/title.php.
+ * This template can be overridden by copying it to yourtheme/masteriyo/course-pagination.php.
  *
  * HOWEVER, on occasion Masteriyo will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -16,8 +17,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
-?>
-
-<h2 class="mto-single-course--title plr-32"><?php echo esc_html( $course->get_title() ); ?></h2>
-
-<?php
+echo paginate_links(
+	array(
+		'type'      => 'list',
+		'prev_text' => masteriyo_get_svg( 'left-arrow' ),
+		'next_text' => masteriyo_get_svg( 'right-arrow' ),
+	)
+);

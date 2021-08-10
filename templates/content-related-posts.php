@@ -1,7 +1,16 @@
 <?php
 /**
- * Template for displaying related posts/courses.
+ * The Template for displaying related courses in single course page
  *
+ * This template can be overridden by copying it to yourtheme/masteriyo/single-course/content-related-posts.php.
+ *
+ * HOWEVER, on occasion Masteriyo will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @package Masteriyo\Templates
  * @version 0.1.0
  */
 
@@ -18,74 +27,104 @@ do_action( 'masteriyo_before_related_posts_content' );
 
 ?>
 <div class="mto-related-post">
-	<h3 class="mto-related-post--title">Related Post</h3>
+	<h3 class="mto-related-post--title"><?php esc_html_e( 'Related Courses', 'masteriyo' ); ?></h3>
 
-	<div class="mto-scourse mto-item--wrap">
-		<?php foreach ( $related_courses as $course ) { ?>
-			<div class="mto-course-item">
-				<div class="mto-course--card">
+	<div class="mto-single-course mto-item--wrap">
+		<div class="mto-single-course-item">
+		<?php
+		foreach ( $related_courses as $course ) {
+			$author         = masteriyo_get_user( $course->get_author_id() );
+			$comments_count = masteriyo_count_course_comments( $course );
+			$difficulty     = $course->get_difficulty();
+			?>
+			<div class="mto-course-item mto-course--card m-0">
+				<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php esc_attr( $course->get_name() ); ?>">
 					<div class="mto-course--img-wrap">
-						<?php if ( is_numeric( $course->get_price() ) ) : ?>
-							<span class="price-tag">$<?php echo esc_html( $course->get_price() ); ?></span>
+						<!-- Diffculty Badge -->
+						<?php if ( $difficulty ) : ?>
+							<div class="difficulty-badge">
+								<span class="mto-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
+							</div>
 						<?php endif; ?>
 
 						<!-- Featured Image -->
-						<?php if ( empty( $course->get_featured_image_url() ) ) : ?>
-							<img class="mto-w-full" src="https://via.placeholder.com/150" alt="Course featured image">
-						<?php else : ?>
-							<img
-								class="mto-w-full"
-								src="<?php echo $course->get_featured_image_url(); ?>"
-								alt="Course featured image"
-							>
-						<?php endif; ?>
+						<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
 					</div>
+				</a>
 
-					<div class="mto-course--header">
-						<div class="mto-rt">
-							<span class="mto-icon-svg mto-flex mto-rating">
-							<?php masteriyo_render_stars( $course->get_average_rating(), '' ); ?>
+				<div class="mto-course--header">
+					<!-- Course category -->
+					<div class="mto-category">
+						<?php foreach ( $course->get_categories( 'name' ) as $category ) : ?>
+							<span class="mto-category-items mto-tag">
+								<?php echo esc_html( $category->get_name() ); ?>
 							</span>
-
-							<?php
-							if ( count( $course->get_category_ids() ) > 0 ) {
-								$cat = masteriyo_get_course_cat( $course->get_category_ids()[0] );
-
-								printf(
-									'<a href="%s" class="mto-badge mto-badge-pink mto-tag">%s</a>',
-									$cat->get_permalink(),
-									$cat->get_name()
-								);
-							}
-							?>
+						<?php endforeach; ?>
+					</div>
+					<!-- Title of the course -->
+					<h2 class="mto-title">
+						<?php
+						printf(
+							'<a href="%s" title="%s">%s</a>',
+							esc_url( $course->get_permalink() ),
+							esc_html( $course->get_title() ),
+							esc_html( $course->get_title() )
+						);
+						?>
+					</h2>
+					<!-- Course author and course rating -->
+					<div class="mto-rt">
+						<div class="mto-course-author">
+							<?php if ( $author ) : ?>
+								<img src="<?php echo esc_attr( $author->get_avatar_url() ); ?>" alt="" srcset="">
+								<span class="mto-course-author--name"><?php echo esc_attr( $author->get_username() ); ?></span>
+							<?php endif; ?>
 						</div>
-
-
-						<h2 class="mto-title">
-						<?php echo esc_html( $course->get_name() ); ?>
-						</h2>
-						<div class="mto-time-btn">
-							<span class="mto-duration">
-								<span class="mto-icon-svg">
-									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-										<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path>
-										<path d="M13 7h-2v6h6v-2h-4z"></path>
-									</svg>
-								</span>
-
-								<time class="mto-inline-block mto-text-sm">
-									<?php echo masteriyo_get_lecture_hours( $course, '%H%h %M%m' ); ?>
-								</time>
-							</span>
-							<a href="#" class="mto-course--btn mto-btn mto-btn-primary">
-								Enroll Now
-							</a>
+						<span class="mto-icon-svg mto-flex mto-rating mto-flex-ycenter">
+							<?php masteriyo_format_rating( $course->get_average_rating(), true ); ?>
+						</span>
+					</div>
+					<!-- Course description -->
+					<div class="mto-course-description">
+						<!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe dignissimos debitis facilis quisquam libero, explicabo molestias. Quibusdam illo iusto nulla dignissimos corrupti voluptatum officiis asperiores nobis. Obcaecati autem doloremque, libero, quod vel dolore delectus maxime magni eveniet iusto commodi? Adipisci?</p> -->
+						<?php echo $course->get_highlights(); ?>
+					</div>
+					<!-- Four Column (Course duration, comments, student enrolled and curriculum) -->
+					<div class="mto-course-stats">
+						<div class="mto-course-stats-duration">
+							<?php masteriyo_get_svg( 'time', true ); ?> <span><?php echo esc_html( masteriyo_minutes_to_time_length_string( $course->get_duration() ) ); ?></span>
 						</div>
+						<div class="mto-course-stats-comments">
+							<?php masteriyo_get_svg( 'comment', true ); ?><span><?php echo esc_html( $comments_count ); ?></span>
+						</div>
+						<div class="mto-course-stats-students">
+							<?php masteriyo_get_svg( 'group', true ); ?> <span><?php echo esc_html( masteriyo_count_enrolled_users( $course->get_id() ) ); ?></span>
+						</div>
+						<div class="mto-course-stats-curriculum">
+							<?php masteriyo_get_svg( 'book', true ); ?> <span><?php echo esc_html( masteriyo_get_lessons_count( $course ) ); ?></span>
+						</div>
+					</div>
+					<hr>
+					<!-- Price and Enroll Now Button -->
+					<div class="mto-time-btn">
+						<div class="mto-course-price">
+							<span class="current-amount"><?php echo masteriyo_price( $course->get_price() ); ?></span>
+						</div>
+						<?php do_action( 'masteriyo_template_enroll_button' ); ?>
+					</div>
+					<hr>
+					<!-- Price and Enroll Now Button -->
+					<div class="mto-time-btn">
+						<div class="mto-course-price">
+							<span class="current-amount"><?php echo masteriyo_price( $course->get_price() ); ?></span>
+						</div>
+						<?php do_action( 'masteriyo_template_enroll_button' ); ?>
 					</div>
 				</div>
-		</div>
+			</div>
 		<?php } ?>
 	</div>
+</div>
 </div>
 
 <?php

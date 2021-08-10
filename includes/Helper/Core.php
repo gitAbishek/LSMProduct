@@ -736,9 +736,9 @@ function masteriyo_minutes_to_time_length_string( $minutes, $format = null ) {
 		$str = str_replace( '%H%', $hours, $format );
 		$str = str_replace( '%M%', $mins, $str );
 	} else {
-		$str .= $hours > 0 ? sprintf( '%d %s ', $hours, _nx( 'hour', 'hours', $hours, 'hour', 'masteriyo' ) ) : '';
-		$str .= $mins > 0 ? sprintf( ' %d %s', $mins, _nx( 'min', 'mins', $mins, 'minutes', 'masteriyo' ) ) : '';
-		$str  = $minutes > 0 ? $str : __( '0 mins', 'masteriyo' );
+		$str .= $hours > 0 ? sprintf( '%d%s ', $hours, __( 'h', 'masteriyo' ) ) : '';
+		$str .= $mins > 0 ? sprintf( ' %d%s', $mins, __( 'm', 'masteriyo' ) ) : '';
+		$str  = $minutes > 0 ? $str : __( '0m', 'masteriyo' );
 	}
 
 	return $str;
@@ -859,7 +859,7 @@ function masteriyo_make_section_to_lessons_dictionary( $course ) {
 		}
 	}
 
-	return array( $sections, $lessons, $lessons_dictionary );
+	return compact( 'sections', 'lessons', 'lessons_dictionary' );
 }
 
 /** Return "theme support" values from the current theme, if set.

@@ -13,17 +13,29 @@ if ( ! ( function_exists( 'add_filter' ) && function_exists( 'add_action' ) ) ) 
 	return;
 }
 
+add_action( 'masteriyo_template_enroll_button', 'masteriyo_template_enroll_button' );
+
 /**
- * Single product sidebar.
+ * Course Archive.
  */
-add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_enroll', 10 );
-add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_reviews', 20 );
-add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_categories', 30 );
-add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_enrolled_students', 40 );
-add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_hours', 50 );
-add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_lectures', 60 );
-add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_template_sidebar_row_difficulty', 70 );
-add_action( 'masteriyo_single_course_faqs_content', 'masteriyo_single_course_faqs_content', 70 );
+add_action( 'masteriyo_after_main_content', 'masteriyo_archive_navigation' );
+
+/**
+ * Single course.
+ */
+add_action( 'masteriyo_single_course_featured_image', 'masteriyo_single_course_featured_image' );
+add_action( 'masteriyo_single_course_categories', 'masteriyo_single_course_categories' );
+add_action( 'masteriyo_single_course_title', 'masteriyo_single_course_title' );
+add_action( 'masteriyo_single_course_author_and_rating', 'masteriyo_single_course_author_and_rating' );
+add_action( 'masteriyo_single_course_price_and_enroll_button', 'masteriyo_single_course_price_and_enroll_button' );
+add_action( 'masteriyo_single_course_stats', 'masteriyo_single_course_stats' );
+add_action( 'masteriyo_single_course_highlights', 'masteriyo_single_course_highlights' );
+add_action( 'masteriyo_single_course_main_content', 'masteriyo_single_course_main_content' );
+add_action( 'masteriyo_single_course_content', 'masteriyo_single_course_tab_handles', 10 );
+add_action( 'masteriyo_single_course_content', 'masteriyo_single_course_overview', 20 );
+add_action( 'masteriyo_single_course_content', 'masteriyo_single_course_curriculum', 30 );
+add_action( 'masteriyo_single_course_content', 'masteriyo_single_course_reviews', 40 );
+add_action( 'masteriyo_single_course_review_form', 'masteriyo_single_course_review_form' );
 
 /**
  * My account page.
@@ -42,7 +54,7 @@ add_action( 'masteriyo_account_view-order_endpoint', 'masteriyo_account_view_ord
 add_action( 'masteriyo_email_header', 'masteriyo_email_header' );
 add_action( 'masteriyo_email_footer', 'masteriyo_email_footer' );
 add_action( 'masteriyo_email_order_details', 'masteriyo_email_order_details', 20 );
-add_action( 'masteriyo_email_order_meta', 'masteriyo_email_order_meta', 10);
+add_action( 'masteriyo_email_order_meta', 'masteriyo_email_order_meta', 10 );
 add_action( 'masteriyo_email_customer_details', 'masteriyo_email_customer_addresses', 20 );
 
 

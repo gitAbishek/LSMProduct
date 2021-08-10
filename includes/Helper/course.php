@@ -158,7 +158,7 @@ function masteriyo_placeholder_img( $size = 'masteriyo_thumbnail', $attr = '' ) 
  * @return string
  */
 function masteriyo_placeholder_img_src( $size = 'masteriyo_thumbnail' ) {
-	$src               = masteriyo_get_plugin_url() . '/assets/images/placeholder.png';
+	$src               = masteriyo_get_plugin_url() . '/assets/img/placeholder.jpeg';
 	$placeholder_image = get_option( 'masteriyo_placeholder_image', 0 );
 
 	if ( ! empty( $placeholder_image ) ) {
@@ -174,4 +174,60 @@ function masteriyo_placeholder_img_src( $size = 'masteriyo_thumbnail' ) {
 	}
 
 	return apply_filters( 'masteriyo_placeholder_img_src', $src );
+}
+
+/**
+ * Count comments on a course.
+ *
+ * @since 0.1.0
+ *
+ * @param mixed $course
+ *
+ * @return integer
+ */
+function masteriyo_count_course_comments( $course ) {
+	$course = masteriyo_get_course( $course );
+
+	if ( is_null( $course ) ) {
+		return 0;
+	}
+
+	global $wpdb;
+
+	$comments_count = $wpdb->get_var(
+		$wpdb->prepare(
+			"SELECT COUNT(comment_ID)
+			FROM {$wpdb->comments}
+			WHERE comment_approved = '1'
+				AND comment_type = 'course_review'
+				AND comment_post_ID = %d
+			",
+			$course->get_id()
+		)
+	);
+
+	return absint( $comments_count );
+}
+
+/**
+ * Get CSS class for course difficulty badge.
+ *
+ * @since 0.1.0
+ *
+ * @param string $difficulty
+ *
+ * @return string
+ */
+function masteriyo_get_difficulty_badge_css_class( $difficulty ) {
+	$classes     = array(
+		'beginner'     => 'mto-badge-green',
+		'intermediate' => 'mto-badge-yellow',
+		'expert'       => 'mto-badge-pink',
+	);
+	$badge_class = 'mto-badge-green';
+
+	if ( isset( $classes[ $difficulty ] ) ) {
+		$badge_class = $classes[ $difficulty ];
+	}
+	return apply_filters( 'masteriyo_difficulty_badge_css_class', $badge_class, $difficulty );
 }

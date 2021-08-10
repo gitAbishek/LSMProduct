@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Template for displaying course archives, including the main course_list page which is a post type archive
  *
@@ -14,9 +15,9 @@
  * @version 0.1.0
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-get_header( 'course-list' );
+get_header('course-list');
 
 /**
  * Hook: masteriyo_before_main_content.
@@ -25,18 +26,18 @@ get_header( 'course-list' );
  * @hooked masteriyo_breadcrumb - 20
  * @hooked MASTERIYO_Structured_Data::generate_website_data() - 30
  */
-do_action( 'masteriyo_before_main_content' );
+do_action('masteriyo_before_main_content');
 
 ?>
 <header class="masteriyo-courses-header">
-	<?php if ( apply_filters( 'masteriyo_show_page_title', true ) ) : ?>
+	<?php if (apply_filters('masteriyo_show_page_title', true)) : ?>
 		<h1 class="masteriyo-course-list-header__title page-title">
 			<?php masteriyo_page_title(); ?>
 		</h1>
 	<?php endif; ?>
 
 	<?php
-	do_action( 'masteriyo_archive_description' );
+	do_action('masteriyo_archive_description');
 	?>
 </header>
 
@@ -46,26 +47,26 @@ do_action( 'masteriyo_before_main_content' );
  *
  * @hooked masteriyo_course_search_form - 10
  */
-do_action( 'masteriyo_after_archive_header' );
+do_action('masteriyo_after_archive_header');
 ?>
 
 <?php
-if ( masteriyo_course_loop() ) {
+if (masteriyo_course_loop()) {
 
-	do_action( 'masteriyo_before_course_list_loop' );
+	do_action('masteriyo_before_course_list_loop');
 
 	masteriyo_course_loop_start();
 
-	if ( masteriyo_get_loop_prop( 'total' ) ) {
-		while ( have_posts() ) {
+	if (masteriyo_get_loop_prop('total')) {
+		while (have_posts()) {
 			the_post();
 
 			/**
 			 * Hook: masteriyo_course_list_loop.
 			 */
-			do_action( 'masteriyo_course_list_loop' );
+			do_action('masteriyo_course_list_loop');
 
-			\masteriyo_get_template_part( 'content', 'course' );
+			\masteriyo_get_template_part('content', 'course');
 		}
 	}
 
@@ -76,14 +77,14 @@ if ( masteriyo_course_loop() ) {
 	 *
 	 * @hooked masteriyo_pagination - 10
 	 */
-	do_action( 'masteriyo_after_course_list_loop' );
+	do_action('masteriyo_after_course_list_loop');
 } else {
 	/**
 	 * Hook: masteriyo_no_courses_found.
 	 *
 	 * @hooked masteriyo_no_courses_found - 10
 	 */
-	do_action( 'masteriyo_no_courses_found' );
+	do_action('masteriyo_no_courses_found');
 }
 
 /**
@@ -91,13 +92,13 @@ if ( masteriyo_course_loop() ) {
  *
  * @hooked masteriyo_output_content_wrapper_end - 10 (outputs closing divs for the content)
  */
-do_action( 'masteriyo_after_main_content' );
+do_action('masteriyo_after_main_content');
 
 /**
  * Hook: masteriyo_sidebar.
  *
  * @hooked masteriyo_get_sidebar - 10
  */
-do_action( 'masteriyo_sidebar' );
+do_action('masteriyo_sidebar');
 
-get_footer( 'course-list' );
+get_footer('course-list');

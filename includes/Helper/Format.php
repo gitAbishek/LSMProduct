@@ -602,7 +602,7 @@ if ( ! function_exists( 'masteriyo_format_rating' ) ) {
 		// Set full stars.
 		for ( $count = 0; $count < $whole; ++$count ) {
 			++$count_stars;
-			$html .= masteriyo_get_svg( 'full_start' );
+			$html .= masteriyo_get_svg( 'full_star' );
 		}
 
 		// Set half star if there is.

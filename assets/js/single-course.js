@@ -72,25 +72,25 @@
 		removeNotices: function ($element) {
 			$element.find('.mto-notify-message').remove();
 		},
-		get_rating_markup: function( rating ) {
-			rating     = rating === '' ? 0 : rating;
-			rating     = parseFloat(rating);
-			html       = '';
+		get_rating_markup: function (rating) {
+			rating = rating === '' ? 0 : rating;
+			rating = parseFloat(rating);
+			html = '';
 			max_rating = mto_data.max_course_rating;
-			rating     = rating > max_rating ? max_rating : rating;
-			rating     = rating < 0 ? 0 : rating;
-			stars      = mto_data.rating_indicator_markup;
+			rating = rating > max_rating ? max_rating : rating;
+			rating = rating < 0 ? 0 : rating;
+			stars = mto_data.rating_indicator_markup;
 
-			rating_floor = Math.floor( rating );
-			for ( i = 1; i <= rating_floor; i++ ) {
+			rating_floor = Math.floor(rating);
+			for (i = 1; i <= rating_floor; i++) {
 				html += stars.full_star;
 			}
-			if ( rating_floor < rating ) {
+			if (rating_floor < rating) {
 				html += stars.half_star;
 			}
 
-			rating_ceil = Math.ceil( rating );
-			for ( i = rating_ceil; i < max_rating; i++ ) {
+			rating_ceil = Math.ceil(rating);
+			for (i = rating_ceil; i < max_rating; i++) {
 				html += stars.empty_star;
 			}
 			return html;
@@ -112,9 +112,9 @@
 				masteriyo.init_reply_btn_handler();
 			});
 		},
-		init_menu_toggler: function() {
-			$(document.body).on('click', '.menu-toggler', function() {
-				if ( $(this).siblings('.menu').height() == 0 ) {
+		init_menu_toggler: function () {
+			$(document.body).on('click', '.menu-toggler', function () {
+				if ($(this).siblings('.menu').height() == 0) {
 					$(this).siblings('.menu').height('auto');
 					$(this).siblings('.menu').css('max-height', '999px');
 					return;
@@ -123,12 +123,18 @@
 			});
 		},
 		init_rating_widget: function () {
-			$(masteriyo.create_review_form_class).on('click', '.mto-rating-input-icon', function() {
-				var rating = $(this).index() + 1;
+			$(masteriyo.create_review_form_class).on(
+				'click',
+				'.mto-rating-input-icon',
+				function () {
+					var rating = $(this).index() + 1;
 
-				masteriyo.$create_revew_form.find('input[name="rating"]').val(rating);
-				$(this).closest('.mto-rstar').html(masteriyo_helper.get_rating_markup(rating));
-			});
+					masteriyo.$create_revew_form.find('input[name="rating"]').val(rating);
+					$(this)
+						.closest('.mto-rstar')
+						.html(masteriyo_helper.get_rating_markup(rating));
+				}
+			);
 		},
 		init_create_reviews_handler: function () {
 			var isCreating = false;
@@ -153,7 +159,9 @@
 				masteriyo_helper.removeNotices($form);
 				masteriyo_api.createCourseReview(data, {
 					onSuccess: function () {
-						$form.append(masteriyo_utils.getSuccessNotice(mto_data.labels.submit_success));
+						$form.append(
+							masteriyo_utils.getSuccessNotice(mto_data.labels.submit_success)
+						);
 						window.location.reload();
 					},
 					onError: function (xhr, status, error) {
@@ -172,7 +180,7 @@
 				});
 			});
 		},
-		init_reply_btn_handler: function() {
+		init_reply_btn_handler: function () {
 			$(document.body).on('click', '.mto-reply-course-review', function (e) {
 				e.preventDefault();
 
@@ -217,12 +225,14 @@
 				$form.data('review-id', review_id);
 				$form.find('input[name="title"]').val(title);
 				$form.find('input[name="rating"]').val(rating);
-				$form.find('.mto-rstar').html(masteriyo_helper.get_rating_markup(rating));
+				$form
+					.find('.mto-rstar')
+					.html(masteriyo_helper.get_rating_markup(rating));
 				$form.find('[name="content"]').val(content);
 				$form.find('[name="parent"]').val(parent);
 				$submit_button.text(mto_data.labels.update);
 
-				if ( $review.is('.is-course-review-reply') ) {
+				if ($review.is('.is-course-review-reply')) {
 					$('.mto-form-title').text(mto_data.labels.edit_reply);
 					$form.find('.mto-title, .mto-rating').hide();
 					$form.find('[name="content"]').focus();
@@ -268,7 +278,9 @@
 				masteriyo_helper.removeNotices($form);
 				masteriyo_api.updateCourseReview(review_id, data, {
 					onSuccess: function () {
-						$form.append(masteriyo_utils.getSuccessNotice(mto_data.labels.update_success));
+						$form.append(
+							masteriyo_utils.getSuccessNotice(mto_data.labels.update_success)
+						);
 						$submit_button.text(mto_data.labels.update);
 						window.location.reload();
 					},
@@ -304,7 +316,9 @@
 				$delete_button.find('.text').text(mto_data.labels.deleting);
 				masteriyo_api.deleteCourseReview(review_id, {
 					onSuccess: function () {
-						$review.after(masteriyo_utils.getSuccessNotice(mto_data.labels.delete_success));
+						$review.after(
+							masteriyo_utils.getSuccessNotice(mto_data.labels.delete_success)
+						);
 						$review.remove();
 					},
 					onError: function (xhr, status, error) {
@@ -381,7 +395,7 @@
 					if (scroll_position > content_y && scroll_position < content_y2)
 						isSticky = true;
 					if (isSticky) {
-						$('.mto-sticky').css({ position: 'fixed', top: '20px' });
+						$('.mto-sticky').css({ position: 'sticky', top: '0px' });
 					} else {
 						$('.mto-sticky').css({ position: 'relative' });
 					}
@@ -393,25 +407,10 @@
 	masteriyo.init();
 })(jQuery, window.masteriyo_data);
 
-function masteriyo_select_single_course_page_tab(tabIndex) {
-	var countTab;
-	//Hide All Tabs
-	for (countTab = 1; countTab <= 4; countTab++) {
-		var tab_content = document.getElementById('tab' + countTab + 'Content');
-		var tab_handle = document.getElementById('tab' + countTab);
+function masteriyo_select_single_course_page_tab(e, tabContentSelector) {
+	jQuery('.mto-tab').removeClass('active-tab');
+	jQuery('.tab-content').addClass('mto-hidden');
 
-		if (tab_content) {
-			tab_content.style.display = 'none';
-		}
-		if (tab_handle) {
-			tab_handle.classList.remove('active-tab');
-		}
-	}
-
-	//Show the Selected Tab
-	document.getElementById('tab' + tabIndex + 'Content').style.display = 'block';
-	document
-		.getElementById('tab' + tabIndex + 'Content')
-		.classList.remove('mto-hidden');
-	document.getElementById('tab' + tabIndex).classList.add('active-tab');
+	jQuery(e.target).addClass('active-tab');
+	jQuery(tabContentSelector).removeClass('mto-hidden');
 }

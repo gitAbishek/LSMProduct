@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying course search form
  *
@@ -18,24 +19,11 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 <form role="search" method="get" class="masteriyo-course-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-	<label 
-		class="screen-reader-text" 
-		for="masteriyo-course-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>"
-	>
+	<label class="screen-reader-text" for="masteriyo-course-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>">
 		<?php esc_html_e( 'Search for:', 'masteriyo' ); ?>
 	</label>
-	<input 
-		type="search" 
-		id="masteriyo-course-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>" 
-		class="search-field" 
-		placeholder="<?php echo esc_attr__( 'Search courses&hellip;', 'masteriyo' ); ?>" 
-		value="<?php echo get_search_query(); ?>" 
-		name="s" 
-	/>
-	<button 
-		type="submit" 
-		value="<?php echo esc_attr_x( 'Search', 'submit button', 'masteriyo' ); ?>"
-	>
+	<input type="search" id="masteriyo-course-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>" class="search-field mto-input" placeholder="&#xf002; <?php echo esc_attr__( 'Search courses&hellip;', 'masteriyo' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
+	<button type="submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'masteriyo' ); ?>">
 		<?php echo esc_html_x( 'Search', 'submit button', 'masteriyo' ); ?>
 	</button>
 	<input type="hidden" name="post_type" value="course" />

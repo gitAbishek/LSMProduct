@@ -1,236 +1,445 @@
 .mto-course {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-top: -15px;
-  gap: 32px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	margin-top: -15px;
+	gap: 16px;
+	width: 100%;
 
-  &-item {
-    @include mto-shadow-1;
-    background: $mto-white-color;
-    // margin: 15px;
-    flex-basis: calc((100% / 4) - 30px);
-  }
+	&-item {
+		min-width: 275px; //To prevent from shrinking
+		// max-width: 375px;
+		align-self: baseline;
+		width: 100%;
+	}
 
-  &--img-wrap {
-    position: relative;
-  }
+	&-item {
+		background: $mto-white-color;
+		// margin: 15px;
+		flex-basis: calc((100% / 4) - 30px);
+		// cursor: pointer;
+		flex-basis: auto;
 
-  &--img {
-    width: 100%;
-    height: 288px;
-    object-fit: cover;
-  }
+		&:hover {
+			@include mto-shadow-2;
+			transition: 0.5s ease;
+			@include mto-shadow-2;
 
-  &--price-tag {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: $mto-primary-color;
-    border-radius: 0 0 16px 0;
-    padding: 8px 16px;
-    color: $mto-white-color;
-    font-weight: 700;
-  }
+			.mto-title a {
+				color: $mto-btn-hover-blue;
+			}
+		}
+	}
+
+	&--img-wrap {
+		position: relative;
+
+		img {
+			width: 100%;
+			height: 210px;
+			object-fit: cover;
+			border-top-left-radius: 8px;
+			border-top-right-radius: 8px;
+		}
+		.difficulty-badge {
+			position: absolute;
+			left: 24px;
+			top: 24px;
+			z-index: 2;
+		}
+	}
+
+	&--img {
+		width: 100%;
+		height: 210px;
+		object-fit: cover;
+	}
+
+	&--price-tag {
+		position: absolute;
+		top: 0;
+		right: 0;
+		background: $mto-primary-color;
+		border-radius: 0 0 0 16px;
+		padding: 8px 16px;
+		color: $mto-white-color;
+		font-weight: 700;
+		fill: white;
+	}
+}
+
+.mto-course--card {
+	border-radius: 8px;
+	.mto-rt {
+		justify-content: space-between;
+	}
 }
 
 .mto-course--header {
-  padding: 20px 16px;
+	padding: 24px;
 
-  .mto-rt {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-  }
+	// Category
+	.mto-category {
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+		margin-bottom: 14px;
 
-  .mto-icon-svg > svg {
-    width: 16px;
-    height: 16px;
-  }
+		&-items {
+			padding: 2px 8px;
+			color: $mto-primary-color;
+			border-radius: 32px;
+			border: 1px solid $mto-primary-color;
+		}
+	}
 
-  .mto-title {
-    font-size: $mto-text-lg;
-    font-weight: 700;
-    margin: 10px 0 20px 0;
-  }
+	// Author and rating
+	.mto-rt {
+		display: flex;
+		align-items: center;
+		margin-bottom: 14px;
+
+		.mto-course-author {
+			display: flex;
+			align-items: center;
+			img {
+				width: 32px;
+				height: 32px;
+				object-fit: cover;
+				border-radius: 50%;
+			}
+			&--name {
+				color: $mto-accent-color;
+				font-size: 14px;
+				line-height: 16px;
+				text-decoration: underline;
+				margin-left: 8px;
+				font-weight: 500;
+			}
+		}
+		.mto-rating {
+			// margin-left: 62px;
+			svg {
+				fill: $mto-primary-color;
+
+				&:last-child {
+					margin-right: 8px;
+				}
+			}
+		}
+	}
+
+	// course desciption
+	.mto-course-description {
+		ul {
+			list-style: none;
+			margin: 0px;
+			li {
+				display: flex;
+				p {
+					margin: 0px;
+					padding-left: 8px;
+				}
+			}
+			li::before {
+				content: ("\2713");
+			}
+		}
+	}
+
+	// course stats
+	.mto-course-stats {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 18px;
+		margin-bottom: 18px;
+
+		& > div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: $mto-light-text-color;
+
+			span {
+				margin-left: 4px;
+			}
+
+			svg {
+				width: 20px;
+				height: 20px;
+				fill: $mto-light-text-color;
+			}
+		}
+	}
+
+	// price and enroll now
+	.mto-course-price {
+		.old-amount {
+			text-decoration: line-through;
+			font-size: 16px;
+			color: $mto-light-text-color;
+		}
+
+		.current-amount {
+			font-size: 24px;
+			color: $mto-primary-color;
+			font-weight: bold;
+		}
+	}
+
+	.mto-icon-svg > svg {
+		width: 16px;
+		height: 16px;
+		fill: $mto-accent-color;
+	}
+
+	.mto-title {
+		line-height: 18px;
+		a {
+			font-weight: bold;
+			font-size: 18px;
+			margin: 0 px 0 20px 0;
+			color: $mto-dark-gray;
+		}
+	}
 }
 
 .mto-duration {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
 }
 
 .mto-time-btn {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
 }
 
 .mto-course--btn {
-  border-radius: 100px;
-  padding: 8px 16px;
+	border-radius: 100px;
+	padding: 8px 16px;
 }
 
 .mto-title,
 .mto-message {
-  .mto-label {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-  }
+	.mto-label {
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 16px;
+	}
 
-  .mto-input {
-    border: 1px solid #ebecf2;
-    box-sizing: border-box;
-    box-shadow: 0px 1px 0px #eff0f6;
-    border-radius: 3px;
-  }
+	.mto-input {
+		border: 1px solid #ebecf2;
+		box-sizing: border-box;
+		box-shadow: 0px 1px 0px #eff0f6;
+		border-radius: 3px;
+	}
 }
 
 .mto-review {
-  border-bottom: 1px solid $mto-border-color;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
+	border-bottom: 1px solid $mto-border-color;
+	margin-bottom: 16px;
+	padding-bottom: 16px;
 
-  .mto-avatar {
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
+	.mto-avatar {
+		width: 50px;
+		height: 50px;
+		overflow: hidden;
+		border-radius: 50%;
 
-    img {
-      object-fit: cover;
-    }
-  }
+		img {
+			object-fit: cover;
+		}
+	}
 
-  .mto-right {
-    margin-left: 18px;
-    max-width: 90%;
+	.mto-right {
+		margin-left: 18px;
+		max-width: 90%;
 
-    .rating {
-      margin-bottom: 14px;
-    }
+		.rating {
+			margin-bottom: 14px;
 
-    .author-name {
-      color: $mto-primary-color;
-      text-decoration: underline;
-      margin-right: 16px;
-      font-size: 14px;
-      line-height: 16px;
-    }
+			.mto-rstar {
+				svg {
+					fill: $mto-primary-color;
+				}
+			}
+		}
 
-    .date-created {
-      font-size: 12px;
-      line-height: 14px;
-    }
+		.author-name {
+			color: $mto-primary-color;
+			text-decoration: underline;
+			margin-right: 16px;
+			font-size: 14px;
+			line-height: 16px;
+		}
 
-    .title {
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      margin-top: 24px;
-      margin-bottom: 16px;
-    }
+		.date-created {
+			font-size: 12px;
+			line-height: 14px;
+		}
 
-    .content {
-      font-size: 16px;
-      line-height: 27px;
-    }
-  }
+		.title {
+			font-weight: 500;
+			font-size: 16px;
+			line-height: 19px;
+			margin-top: 24px;
+			margin-bottom: 16px;
+		}
+
+		.content {
+			font-size: 16px;
+			line-height: 27px;
+		}
+	}
 }
 
 // form
 .mto-submit-review-form {
-  .mto-btn-primary {
-    margin-top: 32px;
-    margin-bottom: 32px;
-  }
+	.mto-btn-primary {
+		margin-top: 32px;
+		margin-bottom: 32px;
+	}
 }
 
 .mto-btngroup {
-  margin-top: 16px;
+	margin-top: 16px;
 }
 
 .mto-maintitle {
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 24px;
-  margin-bottom: 32px;
-  margin-top: 48px;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 24px;
+	margin-bottom: 32px;
+	margin-top: 48px;
 }
 
 .mto-delete-course-review {
-  margin-left: 16px;
+	margin-left: 16px;
 }
 
 .boxshadow-none {
-  box-shadow: none !important;
-  padding: 0px !important;
+	box-shadow: none !important;
+	padding: 0px !important;
 }
 
 .mto-flex-column {
-  flex-direction: column;
+	flex-direction: column;
 }
 
 .mto-login-msg {
-  text-align: center;
-  margin-top: 24px;
-  margin-bottom: 32px;
-  color: $mto-light-text-color;
+	text-align: center;
+	margin-top: 24px;
+	margin-bottom: 32px;
+	color: $mto-light-text-color;
 }
 .mto-border-none {
-  border: none;
+	border: none;
 }
 
 .mto-feature-img {
-  img {
-    max-height: 480px;
-    object-fit: cover;
-    width: 100%;
-  }
+	img {
+		max-height: 480px;
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
 }
 
-.columns-6 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 14px;
-}
+// Course search page
+.main-search {
+	width: 100%;
+	position: relative;
+	margin-bottom: 62px;
 
-.columns-5 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 14px;
+	.search-field {
+		background: #ffffff;
+		box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
+		border-radius: 8px;
+		height: 70px;
+		border: none;
+		font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+		font-style: normal;
+		font-weight: normal;
+		text-decoration: inherit;
+		border: 1px solid white;
+
+		&:hover,
+		&:active,
+		&:focus,
+		&:active {
+			border: 1px solid $mto-btn-hover-blue !important;
+			transition: 0.5s ease !important;
+			@include mto-shadow-2;
+		}
+	}
+
+	button {
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		height: 72px;
+		background-color: $mto-primary-color;
+		padding-left: 46px;
+		padding-right: 46px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		font-weight: bold;
+
+		&:hover {
+			background-color: $mto-btn-hover-blue;
+		}
+	}
+}
+.masteriyo-courses-header {
+	margin-bottom: 32px;
 }
 
 .columns-4 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 14px;
+	display: flex;
+	gap: 8px;
+
+	.mto-course-item {
+		flex-basis: 284px;
+	}
 }
 
 .columns-3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 14px;
+	display: flex;
+
+	.mto-course-item {
+		flex-basis: 375px;
+	}
 }
 
 .columns-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 14px;
+	display: flex;
+
+	.mto-course-item {
+		flex-basis: 49%;
+	}
 }
 
 .columns-1 {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 14px;
+	display: flex;
+
+	.mto-course-item {
+		flex-basis: 100%;
+	}
 }
 .mto-submit-review-form-container {
-  clear: both;
+	clear: both;
+}
+
+.masteriyo-course-search {
+	button {
+		border-top-right-radius: 8px;
+		border-bottom-right-radius: 8px;
+	}
 }

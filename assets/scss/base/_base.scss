@@ -1,116 +1,161 @@
+.site-main {
+	background: #f8f8f8;
+}
+
 // General
 .mto-hidden {
-  display: none;
+	display: none;
 }
 
 .mto-show {
-  display: show;
+	display: show;
 }
 
 .mto-flex {
-  display: flex;
-  flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .mto-inline-flex {
-  display: inline-flex;
+	display: inline-flex;
 }
 
 .mto-flex-ycenter {
-  align-items: center;
+	align-items: center;
 }
 
 .mto-flex-xcenter {
-  justify-content: center;
+	justify-content: center;
 }
 
 .mto-flex--space-between {
-  justify-content: space-between;
+	justify-content: space-between;
 }
 
 ul {
-  li {
-    list-style-type: none;
-    margin: 0;
-  }
+	li {
+		list-style-type: none;
+		margin: 0;
+	}
 }
 
 // Badge
 .mto-badge {
-  padding: 4px 16px;
-  font-size: 12px;
-  border-radius: 100px;
-  color: $mto-white-color;
+	padding: 8px 14px;
+	font-size: 12px;
+	border-radius: 100px;
+	color: $mto-white-color;
 
-  &.mto-badge-red {
-    background: $mto-badge-red;
-  }
-  &.mto-badge-green {
-    background: $mto-badge-green;
-  }
-  &.mto-badge-blue {
-    background: $mto-badge-blue;
-  }
-
-  &.mto-badge-pink {
-    background: $mto-badge-pink;
-  }
+	&.mto-badge-red {
+		background: $mto-badge-red;
+	}
+	&.mto-badge-green {
+		background: $mto-badge-green;
+	}
+	&.mto-badge-blue {
+		background: $mto-badge-blue;
+	}
+	&.mto-badge-yellow {
+		background: $mto-warning-color;
+	}
+	&.mto-badge-pink {
+		background: $mto-badge-pink;
+	}
 }
 
 //svg icon
 .mto-icon-svg > svg {
-  width: 24px;
-  height: 24px;
-  display: inherit;
+	width: 24px;
+	height: 24px;
+	display: inherit;
 }
 
 // Progress bar
 .mto-pbar {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 }
 .mto-progressbar {
-  height: 16px;
-  position: relative;
-  background: lighten($mto-primary-color, 20%);
-  overflow: hidden;
-  border-radius: 50px;
-  span {
-    display: block;
-    height: 100%;
-  }
+	height: 16px;
+	position: relative;
+	background: lighten($mto-primary-color, 20%);
+	overflow: hidden;
+	border-radius: 50px;
+	span {
+		display: block;
+		height: 100%;
+	}
 }
 
 .mto-progress {
-  background: $mto-primary-color;
-  animation: progressbar 3s ease-in-out;
-  animation-fill-mode: both;
-  padding: 0 10px;
-  font-size: 9px;
-  color: $mto-white-color;
+	background: $mto-primary-color;
+	animation: progressbar 3s ease-in-out;
+	animation-fill-mode: both;
+	padding: 0 10px;
+	font-size: 9px;
+	color: $mto-white-color;
 
-  @keyframes progressbar {
-    0% {
-      width: 0;
-    }
-    100% {
-      width: 100%;
-    }
-  }
+	@keyframes progressbar {
+		0% {
+			width: 0;
+		}
+		100% {
+			width: 100%;
+		}
+	}
 }
 
 .justify-content-between {
-  justify-content: space-between;
+	justify-content: space-between;
 }
 
 .m-0 {
-  margin: 0px !important;
+	margin: 0px !important;
+}
+
+.mb-1 {
+	margin-bottom: 1rem;
 }
 
 .mt-2 {
-  margin-top: 2rem;
+	margin-top: 2rem;
 }
+
+.mb-2 {
+	margin-bottom: 2rem;
+}
+
 .mto-no-flex-wrap {
-  flex-wrap: nowrap;
+	flex-wrap: nowrap;
+}
+
+.p-0 {
+	padding: 0px !important;
+}
+
+.plr-32 {
+	padding: 0px 32px !important;
+}
+
+.pt-2 {
+	padding-top: 2rem !important;
+}
+
+.pb-2 {
+	padding-bottom: 2rem !important;
+}
+
+.site-content {
+	padding-top: 80px;
+	padding-bottom: 80px;
+	margin: 0px !important;
+}
+
+.d-none {
+	display: none;
+}
+
+.cgap-62 {
+	column-gap: 62px;
 }

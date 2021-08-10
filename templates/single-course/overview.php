@@ -1,8 +1,8 @@
 <?php
 /**
- * The Template for displaying course main contents like curriculum, reviews etc in single course page
+ * The Template for displaying course overview in single course page
  *
- * This template can be overridden by copying it to yourtheme/masteriyo/single-course/main-content.php.
+ * This template can be overridden by copying it to yourtheme/masteriyo/single-course/overview.php.
  *
  * HOWEVER, on occasion Masteriyo will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -16,12 +16,20 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-do_action( 'masteriyo_before_single_course_content' );
+global $course;
+
+/**
+ * masteriyo_before_single_course_overview hook.
+ */
+do_action( 'masteriyo_before_single_course_overview' );
 
 ?>
-<div class="mto-single-course-main-content">
-	<?php do_action( 'masteriyo_single_course_content' ); ?>
+<div class="tab-content course-overview plr-32">
+	<?php the_content(); ?>
 </div>
 <?php
 
-do_action( 'masteriyo_after_single_course_content' );
+/**
+ * masteriyo_after_single_course_overview hook.
+ */
+do_action( 'masteriyo_after_single_course_overview' );

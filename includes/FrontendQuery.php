@@ -182,21 +182,17 @@ class FrontendQuery {
 	 */
 	public function init_query_vars() {
 		// Query vars to add to WP.
-		$this->query_vars = array(
-			// Checkout actions.
-			'order-pay'       => masteriyo_get_setting( 'advance.checkout.pay' ),
-			'order-received'  => masteriyo_get_setting( 'advance.checkout.order_received' ),
+		$this->query_vars = array_merge(
+			array(
+				// Checkout actions.
+				'order-pay'       => masteriyo_get_setting( 'advance.checkout.pay' ),
+				'order-received'  => masteriyo_get_setting( 'advance.checkout.order_received' ),
 
-			// My account actions.
-			'orders'          => masteriyo_get_setting( 'advance.account.orders' ),
-			'view-order'      => masteriyo_get_setting( 'advance.account.view_order' ),
-			'edit-account'    => masteriyo_get_setting( 'advance.account.edit_account' ),
-			'edit-address'    => masteriyo_get_setting( 'advance.account.edit_address' ),
-			'payment-methods' => masteriyo_get_setting( 'advance.account.payment_methods' ),
-			'lost-password'   => masteriyo_get_setting( 'advance.account.lost_password' ),
-			'customer-logout' => masteriyo_get_setting( 'advance.account.logout' ),
-
-			'sagar'           => 'sagar',
+				// My account actions.
+				'edit-address'    => masteriyo_get_setting( 'advance.account.edit_address' ),
+				'payment-methods' => masteriyo_get_setting( 'advance.account.payment_methods' ),
+			),
+			masteriyo_get_myaccount_endpoints()
 		);
 	}
 

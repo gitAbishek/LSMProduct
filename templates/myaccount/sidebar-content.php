@@ -25,18 +25,16 @@ do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 				>
 					<?php echo esc_attr( $user->get_display_name() ); ?>
 				</a>
-				<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'edit-myaccount' ) ); ?>">
+				<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'edit-account' ) ); ?>">
 					<?php masteriyo_get_svg( 'edit', true ); ?>
 				</a>
 			</div>
-
-			<span class="mto-profile--tag">Gold Member</span>
 		</div>
 	</div>
 	<nav class="mto-menu">
 	<ul>
-			<?php foreach( $menu_items as $slug => $endpoint ): ?>
-				<li class="<?php masteriyo_echo_if( $slug === $current_endpoint, 'active' ); ?>">
+			<?php foreach ( $menu_items as $slug => $endpoint ) : ?>
+				<li class="<?php masteriyo_echo_if( $slug === $current_endpoint['endpoint'], 'active' ); ?>">
 					<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( $slug ) ); ?>">
 						<?php echo $endpoint['icon']; ?>
 						<span><?php echo esc_html( $endpoint['label'] ); ?></span>

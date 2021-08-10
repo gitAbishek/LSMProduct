@@ -1573,7 +1573,7 @@ function masteriyo_get_myaccount_url() {
 function masteriyo_get_current_myaccount_endpoint() {
 	global $wp;
 
-	$slugs = masteriyo_get_myaccount_endpoints();
+	$endpoints = array_flip( masteriyo_get_myaccount_endpoints() );
 
 	if ( ! empty( $wp->query_vars ) ) {
 		foreach ( $wp->query_vars as $key => $value ) {
@@ -1582,10 +1582,11 @@ function masteriyo_get_current_myaccount_endpoint() {
 				continue;
 			}
 
-			if ( in_array( $key, $slugs, true ) ) {
+			if ( isset( $endpoints[ $key ] ) ) {
 				return array(
-					'slug' => $key,
-					'arg'  => $value,
+					'endpoint' => $endpoints[ $key ],
+					'slug'     => $key,
+					'arg'      => $value,
 				);
 			}
 		}
@@ -1593,7 +1594,8 @@ function masteriyo_get_current_myaccount_endpoint() {
 
 	// No endpoint found? Default to dashboard.
 	return array(
-		'slug' => 'dashboard',
+					'endpoint' => 'dashboard',
+					'slug' => 'dashboard',
 		'arg'  => null,
 	);
 }
@@ -1626,15 +1628,15 @@ function masteriyo_get_myaccount_endpoints() {
 	return apply_filters(
 		'masteriyo_myaccount_endpoints',
 		array(
-			'view-myaccount' => masteriyo_get_setting( 'pages.account.view_myaccount' ),
-			'edit-myaccount' => masteriyo_get_setting( 'pages.account.edit_account' ),
-			'dashboard'      => masteriyo_get_setting( 'pages.account.dashboard' ),
-			'my-courses'     => masteriyo_get_setting( 'pages.account.my_courses' ),
-			'order-history'  => masteriyo_get_setting( 'pages.account.order_history' ),
-			'reset-password' => masteriyo_get_setting( 'pages.account.lost_password' ),
-			'signup'         => masteriyo_get_setting( 'pages.account.signup' ),
-			'user-logout'    => masteriyo_get_setting( 'pages.account.logout' ),
-			'view-order'     => masteriyo_get_setting( 'pages.account.view_order' ),
+			'view-myaccount' => masteriyo_get_setting( 'advance.account.view_myaccount' ),
+			'edit-account'   => masteriyo_get_setting( 'advance.account.edit_account' ),
+			'dashboard'      => masteriyo_get_setting( 'advance.account.dashboard' ),
+			'courses'        => masteriyo_get_setting( 'advance.account.my_courses' ),
+			'order-history'  => masteriyo_get_setting( 'advance.account.order_history' ),
+			'reset-password' => masteriyo_get_setting( 'advance.account.lost_password' ),
+			'signup'         => masteriyo_get_setting( 'advance.account.signup' ),
+			'user-logout'    => masteriyo_get_setting( 'advance.account.logout' ),
+			'view-order'     => masteriyo_get_setting( 'advance.account.view_order' ),
 		)
 	);
 }
@@ -1875,7 +1877,7 @@ function masteriyo_is_view_myaccount_page() {
  * @return boolean
  */
 function masteriyo_is_edit_myaccount_page() {
-	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['edit-myaccount'] );
+	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['edit-account'] );
 }
 
 /**

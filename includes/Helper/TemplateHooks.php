@@ -42,7 +42,7 @@ add_action( 'masteriyo_single_course_review_form', 'masteriyo_single_course_revi
  */
 add_action( 'masteriyo_myaccount_sidebar_content', 'masteriyo_myaccount_sidebar_content' );
 add_action( 'masteriyo_myaccount_main_content', 'masteriyo_myaccount_main_content' );
-add_action( 'masteriyo_account_edit-myaccount_endpoint', 'masteriyo_account_edit_myaccount_endpoint' );
+add_action( 'masteriyo_account_edit-account_endpoint', 'masteriyo_account_edit_myaccount_endpoint' );
 add_action( 'masteriyo_account_view-myaccount_endpoint', 'masteriyo_account_view_myaccount_endpoint' );
 add_action( 'masteriyo_account_courses_endpoint', 'masteriyo_account_courses_endpoint' );
 add_action( 'masteriyo_account_order-history_endpoint', 'masteriyo_account_order_history_endpoint' );

@@ -203,7 +203,7 @@ class Setting extends Model {
 				'orders'          => 'orders',
 				'view_order'      => 'view-order',
 				'order_history'   => 'order-history',
-				'my_courses'      => 'my-courses',
+				'my_courses'      => 'courses',
 				'view_myaccount'  => 'view-myaccount',
 				'edit_account'    => 'edit-account',
 				'payment_methods' => 'payment-methods',

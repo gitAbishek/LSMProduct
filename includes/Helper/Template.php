@@ -350,7 +350,7 @@ if ( ! function_exists( 'masteriyo_myaccount_sidebar_content' ) ) {
 		$data = array(
 			'menu_items'       => masteriyo_get_account_menu_items(),
 			'user'             => masteriyo_get_current_user(),
-			'current_endpoint' => masteriyo_get_current_myaccount_endpoint()['slug'],
+			'current_endpoint' => masteriyo_get_current_myaccount_endpoint(),
 		);
 
 		masteriyo_get_template( 'myaccount/sidebar-content.php', $data );
@@ -492,7 +492,7 @@ if ( ! function_exists( 'masteriyo_myaccount_main_content' ) ) {
 	 */
 	function masteriyo_myaccount_main_content() {
 		$endpoint         = masteriyo_get_current_myaccount_endpoint();
-		$current_endpoint = $endpoint['slug'];
+		$current_endpoint = $endpoint['endpoint'];
 
 		if ( has_action( 'masteriyo_account_' . $current_endpoint . '_endpoint' ) ) {
 			do_action( 'masteriyo_account_' . $current_endpoint . '_endpoint', $endpoint['arg'] );

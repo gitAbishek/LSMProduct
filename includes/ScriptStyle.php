@@ -70,8 +70,8 @@ class ScriptStyle {
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_public_localized_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_admin_localized_scripts' ) );
 
-		// Remove third party styles from interactive page.
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_styles_scripts_in_interactive_page' ), PHP_INT_MAX );
+		// Remove third party styles from learning page.
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_styles_scripts_in_learning_page' ), PHP_INT_MAX );
 	}
 
 	/**
@@ -136,7 +136,7 @@ class ScriptStyle {
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_checkout_page',
 				),
-				'interactive'    => array(
+				'learning'       => array(
 					'src'     => self::get_asset_url( '/assets/js/build/masteriyo-interactive.js' ),
 					'deps'    => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 					'version' => self::get_version(),
@@ -556,7 +556,7 @@ class ScriptStyle {
 						'mto_ajax_url'        => '/?mto-ajax=%%endpoint%%',
 					),
 				),
-				'interactive'    => array(
+				'learning'       => array(
 					'name' => '_MASTERIYO_',
 					'data' => array(
 						'rootApiUrl' => esc_url_raw( rest_url() ),
@@ -576,19 +576,19 @@ class ScriptStyle {
 	}
 
 	/**
-	 * Remove styles and scripts in interactive page.
+	 * Remove styles and scripts in learning page.
 	 *
 	 * @return void
 	 */
-	public static function remove_styles_scripts_in_interactive_page() {
+	public static function remove_styles_scripts_in_learning_page() {
 		global $wp_styles;
 
 		// Bail early if the page is not interacitve.
-		if ( ! ( isset( $_GET['masteriyo-page' ] ) && 'interactive' === $_GET['masteriyo-page'] ) ) { // phpcs:ignore
+		if ( ! masteriyo_is_learning_page() ) {
 			return;
 		}
 
-		$whitelist = self::get_whitelist_styles_in_interactive_page();
+		$whitelist = self::get_whitelist_styles_in_learning_page();
 
 		foreach ( $wp_styles->registered as $style ) {
 			if ( ! in_array( $style->handle, $whitelist, true ) ) {
@@ -604,17 +604,19 @@ class ScriptStyle {
 	}
 
 	/**
-	 * Get the list of whitelist styles in interactive page.
+	 * Get the list of whitelist styles in learning page.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return array
 	 */
-	public static function get_whitelist_styles_in_interactive_page() {
+	public static function get_whitelist_styles_in_learning_page() {
 		return array_unique(
 			apply_filters(
-				'masteriyo_whitelist_scripts_interactive_page',
+				'masteriyo_whitelist_scripts_learning_page',
 				array(
+					'masteriyo-learning',
+					'masteriyo-dependencies',
 					'colors',
 					'common',
 					'forms',

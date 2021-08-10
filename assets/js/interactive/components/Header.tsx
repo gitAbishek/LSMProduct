@@ -132,7 +132,7 @@ const Header: React.FC<Props> = (props) => {
 												{__('lessons left', 'masteriyo')} |{' '}
 											</Text>
 											<Text>
-												{summary.quiz.pending} {__('lessons left', 'masteriyo')}
+												{summary.quiz.pending} {__('quiz left', 'masteriyo')}
 											</Text>
 											<Popover
 												isOpen={isProgressOpen}
@@ -213,7 +213,7 @@ const Header: React.FC<Props> = (props) => {
 																	)}
 																	size="54px"
 																	capIsRound
-																	trackColor="blue.100"
+																	trackColor="gray.100"
 																	color="blue.500">
 																	<CircularProgressLabel fontWeight="bold">
 																		{Math.round(

@@ -110,7 +110,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 						<div class="mto-course-price">
 							<span class="current-amount"><?php echo masteriyo_price( $course->get_price() ); ?></span>
 						</div>
-						<?php do_action( 'masteriyo_template_enroll_button' ); ?>
+						<?php do_action( 'masteriyo_template_enroll_button', $course ); ?>
 					</div>
 				</div>
 			</div>

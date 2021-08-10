@@ -330,8 +330,13 @@ if ( ! function_exists( 'masteriyo_template_enroll_button' ) ) {
 	 *
 	 * @since 0.1.0
 	 */
-	function masteriyo_template_enroll_button() {
-		masteriyo_get_template( 'enroll-button.php' );
+	function masteriyo_template_enroll_button( $course ) {
+		masteriyo_get_template(
+			'enroll-button.php',
+			array(
+				'course' => $course,
+			)
+		);
 	}
 }
 

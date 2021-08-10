@@ -16,6 +16,8 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
+global $course;
+
 do_action( 'masteriyo_before_single_course_price_and_enroll_button' );
 
 ?>
@@ -23,7 +25,7 @@ do_action( 'masteriyo_before_single_course_price_and_enroll_button' );
 	<div class="mto-course-price">
 		<span class="current-amount"><?php echo masteriyo_price( $course->get_price() ); ?></span>
 	</div>
-	<?php do_action( 'masteriyo_template_enroll_button' ); ?>
+	<?php do_action( 'masteriyo_template_enroll_button', $course ); ?>
 </div>
 <?php
 

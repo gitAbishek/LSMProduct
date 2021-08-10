@@ -7,8 +7,6 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-global $course;
-
 if ( ! $course->is_purchasable() ) {
 	return;
 }

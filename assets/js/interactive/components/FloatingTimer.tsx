@@ -23,7 +23,6 @@ const FloatingTimer: React.FC<Props> = (props) => {
 	const { hours, seconds, minutes } = useTimer({
 		expiryTimestamp: formatDate,
 		onExpire: () => {
-			console.warn('onExpire called');
 			onQuizeExpire();
 		},
 	});

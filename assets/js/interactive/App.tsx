@@ -5,10 +5,6 @@ import ErrorBoundary from '../back-end/errors/ErrorBoundary';
 import theme from '../back-end/theme/theme';
 import Router from './router/Router';
 
-// createStore({
-// 	quizProgress: {},
-// });
-
 const App = () => {
 	const queryClient = new QueryClient({
 		defaultOptions: {
@@ -22,13 +18,11 @@ const App = () => {
 
 	return (
 		<ErrorBoundary>
-			{/* <StateMachineProvider> */}
 			<ChakraProvider theme={theme}>
 				<QueryClientProvider client={queryClient}>
 					<Router />
 				</QueryClientProvider>
 			</ChakraProvider>
-			{/* </StateMachineProvider> */}
 		</ErrorBoundary>
 	);
 };

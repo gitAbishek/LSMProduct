@@ -1,4 +1,6 @@
 import {
+	Alert,
+	AlertIcon,
 	Button,
 	ButtonGroup,
 	Icon,
@@ -22,10 +24,11 @@ import { QuizSchema } from '../../../../back-end/schemas';
 interface Props {
 	quizData: QuizSchema;
 	onStartPress: any;
+	attemptMessage: string;
 }
 
 const QuizStart: React.FC<Props> = (props) => {
-	const { quizData, onStartPress } = props;
+	const { quizData, onStartPress, attemptMessage } = props;
 
 	const listItemStyles = {
 		d: 'flex',
@@ -43,6 +46,12 @@ const QuizStart: React.FC<Props> = (props) => {
 
 	return (
 		<Stack direction="column" spacing="8">
+			{attemptMessage && (
+				<Alert status="error" fontSize="sm" p="2.5">
+					<AlertIcon />
+					{__(attemptMessage, 'masteriyo')}
+				</Alert>
+			)}
 			<List
 				bg="blue.500"
 				rounded="sm"

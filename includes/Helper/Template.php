@@ -735,6 +735,11 @@ if ( ! function_exists( 'masteriyo_single_course_reviews' ) ) {
 	function masteriyo_single_course_reviews() {
 		global $course;
 
+		// Bail early if the review is not enabled in global setting.
+		if ( ! masteriyo_get_setting( 'single_course.display.enable_review' ) ) {
+			return;
+		}
+
 		$reviews_and_replies = masteriyo_get_course_reviews_and_replies( $course );
 
 		masteriyo_get_template(

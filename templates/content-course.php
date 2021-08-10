@@ -31,24 +31,28 @@ $difficulty     = $course->get_difficulty();
 ?>
 <div class="mto-course-item mto-course--card m-0">
 	<div class="mto-course--img-wrap">
-		<!-- Diffculty Badge -->
-		<?php if ( $difficulty ) : ?>
-			<div class="difficulty-badge">
-				<span class="mto-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
-			</div>
-		<?php endif; ?>
+		<a href="<?php echo esc_attr( $course->get_permalink() ); ?>">
+			<!-- Diffculty Badge -->
+			<?php if ( $difficulty ) : ?>
+				<div class="difficulty-badge">
+					<span class="mto-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
+				</div>
+			<?php endif; ?>
 
-		<!-- Featured Image -->
-		<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
+			<!-- Featured Image -->
+			<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
+		</a>
 	</div>
 
 	<div class="mto-course--header">
 		<!-- Course category -->
 		<div class="mto-category">
 			<?php foreach ( $course->get_categories( 'name' ) as $category ) : ?>
-				<span class="mto-category-items mto-tag">
-				<?php echo esc_html( $category->get_name() ); ?>
-				</span>
+				<a href="<?php echo esc_attr( $category->get_permalink() ); ?>">
+					<span class="mto-category-items mto-tag">
+					<?php echo esc_html( $category->get_name() ); ?>
+					</span>
+				</a>
 			<?php endforeach; ?>
 		</div>
 		<!-- Title of the course -->

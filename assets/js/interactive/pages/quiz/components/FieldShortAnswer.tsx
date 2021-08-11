@@ -1,5 +1,4 @@
 import { FormControl, FormErrorMessage, Textarea } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -17,11 +16,7 @@ const FieldShortAnswer: React.FC<Props> = (props) => {
 	return (
 		<>
 			<FormControl isInvalid={errors[questionId]}>
-				<Textarea
-					{...register(questionId, {
-						required: __('Answer is required', 'masteriyo'),
-					})}
-				/>
+				<Textarea {...register(questionId)} />
 
 				{errors[questionId] && (
 					<FormErrorMessage fontSize="xs">

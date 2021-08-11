@@ -24,6 +24,7 @@ interface Props {
 	isButtonLoading?: boolean;
 	isButtonDisabled?: boolean;
 	type?: 'lesson' | 'quiz';
+	quizStarted?: boolean;
 }
 
 const ContentNav: React.FC<Props> = (props) => {
@@ -34,6 +35,7 @@ const ContentNav: React.FC<Props> = (props) => {
 		isButtonLoading,
 		isButtonDisabled,
 		type,
+		quizStarted,
 	} = props;
 
 	const cirlceStyles = {
@@ -83,6 +85,7 @@ const ContentNav: React.FC<Props> = (props) => {
 					)}
 				</Box>
 
+				{quizStarted && (
 				<Button
 					onClick={onCompletePress}
 					isLoading={isButtonLoading}
@@ -104,6 +107,7 @@ const ContentNav: React.FC<Props> = (props) => {
 						? __('Submit Quiz', 'masteriyo')
 						: __('Mark as Complete', 'masteriyo')}
 				</Button>
+				)}
 
 				<Box minW="200px">
 					{navigation?.next && (

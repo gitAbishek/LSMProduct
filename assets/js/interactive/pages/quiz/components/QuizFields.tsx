@@ -3,6 +3,7 @@ import {
 	AlertIcon,
 	Divider,
 	Heading,
+	SkeletonText,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
@@ -89,7 +90,7 @@ const QuizFields: React.FC<Props> = (props) => {
 			</>
 		);
 	}
-	return <div></div>;
+	return <SkeletonText noOfLines={4} />;
 };
 
 export default QuizFields;

@@ -7,7 +7,6 @@ import {
 	SimpleGrid,
 	Text,
 } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { SingleChoiceSchema } from '../../../../back-end/schemas';
@@ -28,7 +27,6 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 			<FormControl isInvalid={errors[questionId]}>
 				<Controller
 					name={questionId}
-					rules={{ required: __('Answer is required', 'masteriyo') }}
 					render={({ field }) => (
 						<CheckboxGroup onChange={field.onChange}>
 							<SimpleGrid spacing="4" columns={4}>

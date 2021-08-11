@@ -41,7 +41,7 @@ do_action( 'masteriyo_before_single_course_review_form' );
 			</div>
 			<div class="mto-message mt-2">
 				<label class="mto-label"><?php esc_html_e( 'Content', 'masteriyo' ); ?></label>
-				<textarea type="text" name="content" class="mto-input" required column="10"></textarea>
+				<textarea type="text" name="content" class="mto-input" required column="10" ></textarea>
 			</div>
 			<div>
 				<button type="submit" name="masteriyo-submit-review" value="yes" class="mto-btn-primary">

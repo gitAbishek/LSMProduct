@@ -26,7 +26,7 @@ do_action( 'masteriyo_before_single_course_stats' );
 			<?php masteriyo_get_svg( 'time', true ); ?>
 			<span>
 				<?php /* translators: %s: Human understanble time string */ ?>
-				<?php echo esc_html( sprintf( '%s Duration', masteriyo_minutes_to_time_length_string( $course->get_duration() ) ) ); ?>
+				<?php echo esc_html( sprintf( '%s', masteriyo_minutes_to_time_length_string( $course->get_duration() ) ) ); ?>
 			</span>
 		</div>
 	</div>

@@ -148,7 +148,7 @@
 				}
 			}
 			li::before {
-				content: ("\2713");
+				content: ('\2713');
 			}
 		}
 	}
@@ -233,6 +233,9 @@
 
 .mto-title,
 .mto-message {
+	textarea {
+		resize: vertical;
+	}
 	.mto-label {
 		font-weight: 500;
 		font-size: 14px;
@@ -369,7 +372,7 @@
 		border-radius: 8px;
 		height: 70px;
 		border: none;
-		font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+		font-family: FontAwesome, 'Open Sans', Verdana, sans-serif;
 		font-style: normal;
 		font-weight: normal;
 		text-decoration: inherit;

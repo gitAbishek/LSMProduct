@@ -270,7 +270,7 @@ const EditorMenuBar: React.FC<Props> = (props) => {
 					<Box
 						as="span"
 						sx={buttonCommonStyles(editor.isActive('blockquote'))}
-						onClick={() => editor.chain().focus().toggleCodeBlock().run()}>
+						onClick={() => editor.chain().focus().toggleBlockquote().run()}>
 						<Icon as={ImQuotesLeft} />
 					</Box>
 				</Tooltip>

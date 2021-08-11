@@ -40,6 +40,38 @@ const theme = extendTheme({
 						},
 					},
 				'.ProseMirror': {
+					'h1, h2, h3, h4, h5, h6': {
+						lineHeight: '1.1',
+						fontWeight: '700',
+					},
+					h1: {
+						fontSize: '28px',
+					},
+					h2: {
+						fontSize: '24px',
+					},
+					h3: {
+						fontSize: '20px',
+					},
+					h4: {
+						fontSize: '18px',
+					},
+					h5: {
+						fontSize: '16px',
+					},
+					blockquote: {
+						paddingLeft: '1rem',
+						borderLeft: '2px solid rgba(13,13,13,.1)',
+					},
+					code: {
+						backgroundColor: 'rgba(97,97,97,.1)',
+						color: '#616161',
+						padding: '.1rem .3rem',
+						borderRadius: '4px',
+					},
+					'ul, ol': {
+						padding: '0 .75rem',
+					},
 					pre: {
 						background: '#0D0D0D',
 						color: '#FFF',

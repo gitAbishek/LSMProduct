@@ -15,7 +15,8 @@ const VideoPlayer: React.FC<Props> = (props) => {
 					id="ytplayer"
 					width="100%"
 					height="500"
-					src={'https://www.youtube.com/embed/' + id}></iframe>
+					src={'https://www.youtube.com/embed/' + id}
+					allowFullScreen></iframe>
 			)}
 			{type === 'vimeo' && (
 				<iframe

@@ -36,7 +36,7 @@ do_action( 'masteriyo_before_single_course_stats' );
 		<div class="mto-single-course--enroll mto-single-course--mdetail mto-icon-svg mto-flex">
 			<?php masteriyo_get_svg( 'comment', true ); ?>
 			<span>
-				<?php echo esc_html( $comments_count ); ?> <?php echo esc_html( _nx( 'Comment', 'Comments', $comments_count, 'Comments Count', 'masteriyo' ) ); ?>
+				<?php echo absint( $comments_count ); ?> <?php echo esc_html( _nx( 'Comment', 'Comments', $comments_count, 'Comments Count', 'masteriyo' ) ); ?>
 			</span>
 		</div>
 	</div>
@@ -46,7 +46,7 @@ do_action( 'masteriyo_before_single_course_stats' );
 		<div class="mto-single-course--enroll mto-single-course--mdetail mto-icon-svg mto-flex">
 			<?php masteriyo_get_svg( 'group', true ); ?>
 			<span>
-				<?php echo esc_html( $enrolled_users_count ); ?> <?php echo esc_html( _nx( 'Student', 'Students', $enrolled_users_count, 'Enrolled Students Count', 'masteriyo' ) ); ?>
+				<?php echo absint( $enrolled_users_count ); ?> <?php echo esc_html( _nx( 'Student', 'Students', $enrolled_users_count, 'Enrolled Students Count', 'masteriyo' ) ); ?>
 			</span>
 		</div>
 	</div>

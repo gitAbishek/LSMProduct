@@ -40,13 +40,21 @@ class AdminMenu {
 	 * @return void
 	 */
 	public static function init_menus() {
+		// phpcs:disable
+		if ( isset( $_GET['page'] ) && 'masteriyo' === $_GET['page'] ) {
+			$dashicon = 'data:image/svg+xml;base64,' . base64_encode( masteriyo_get_svg( 'dashicon-white' ) );
+		} else {
+			$dashicon = 'data:image/svg+xml;base64,' . base64_encode( masteriyo_get_svg( 'dashicon-grey' ) );
+		}
+		// phpcs:enable
+
 		add_menu_page(
 			esc_html__( 'Masteriyo', 'masteriyo' ),
 			esc_html__( 'Masteriyo', 'masteriyo' ),
 			'manage_options',
 			'masteriyo',
 			array( __CLASS__, 'display_main_page' ),
-			'dashicons-align-full-width',
+			$dashicon,
 			3
 		);
 

@@ -27,6 +27,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 $author         = masteriyo_get_user( $course->get_author_id() );
 $comments_count = masteriyo_count_course_comments( $course );
 $difficulty     = $course->get_difficulty();
+$categories     = $course->get_categories( 'name' );
 
 ?>
 <div class="mto-course-item mto-course--card m-0">
@@ -46,13 +47,15 @@ $difficulty     = $course->get_difficulty();
 
 	<div class="mto-course--header">
 		<!-- Course category -->
-		<div class="mto-category">
-			<?php foreach ( $course->get_categories( 'name' ) as $category ) : ?>
-				<a href="<?php echo esc_attr( $category->get_permalink() ); ?>" class="mto-category-items mto-tag">
-					<?php echo esc_html( $category->get_name() ); ?>
-				</a>
-			<?php endforeach; ?>
-		</div>
+		<?php if ( ! empty($categories)): ?>
+			<div class="mto-category">
+				<?php foreach ( $categories as $category ) : ?>
+					<a href="<?php echo esc_attr( $category->get_permalink() ); ?>" class="mto-category-items mto-tag">
+						<?php echo esc_html( $category->get_name() ); ?>
+					</a>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
 		<!-- Title of the course -->
 		<h2 class="mto-title">
 			<?php

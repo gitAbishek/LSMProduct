@@ -48,10 +48,8 @@ $difficulty     = $course->get_difficulty();
 		<!-- Course category -->
 		<div class="mto-category">
 			<?php foreach ( $course->get_categories( 'name' ) as $category ) : ?>
-				<a href="<?php echo esc_attr( $category->get_permalink() ); ?>">
-					<span class="mto-category-items mto-tag">
+				<a href="<?php echo esc_attr( $category->get_permalink() ); ?>" class="mto-category-items mto-tag">
 					<?php echo esc_html( $category->get_name() ); ?>
-					</span>
 				</a>
 			<?php endforeach; ?>
 		</div>

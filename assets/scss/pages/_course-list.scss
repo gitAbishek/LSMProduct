@@ -148,7 +148,7 @@
 				}
 			}
 			li::before {
-				content: ('\2713');
+				content: ("\2713");
 			}
 		}
 	}
@@ -326,7 +326,7 @@
 }
 
 .mto-delete-course-review {
-	margin-left: 16px;
+	padding-left: 16px;
 }
 
 .boxshadow-none {
@@ -369,7 +369,7 @@
 		border-radius: 8px;
 		height: 70px;
 		border: none;
-		font-family: FontAwesome, 'Open Sans', Verdana, sans-serif;
+		font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
 		font-style: normal;
 		font-weight: normal;
 		text-decoration: inherit;

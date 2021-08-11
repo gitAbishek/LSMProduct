@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || exit;
 
 $text_align  = is_rtl() ? 'right' : 'left';
 $margin_side = is_rtl() ? 'left' : 'right';
+$plain_text  = '';
 
 foreach ( $items as $item_id => $item ) :
 	$course        = $item->get_course();
@@ -42,10 +43,10 @@ foreach ( $items as $item_id => $item ) :
 			echo wp_kses_post( apply_filters( 'masteriyo_order_item_thumbnail', $image, $item ) );
 		}
 
-		// Product name.
+		// Course name.
 		echo wp_kses_post( apply_filters( 'masteriyo_order_item_name', $item->get_name(), $item, false ) );
 
-		// allow other plugins to add additional product information here.
+		// allow other plugins to add additional course information here.
 		do_action( 'masteriyo_order_item_meta_start', $item_id, $item, $order, $plain_text );
 
 		masteriyo_display_item_meta(
@@ -55,7 +56,7 @@ foreach ( $items as $item_id => $item ) :
 			)
 		);
 
-		// allow other plugins to add additional product information here.
+		// allow other plugins to add additional course information here.
 		do_action( 'masteriyo_order_item_meta_end', $item_id, $item, $order, $plain_text );
 
 		?>
@@ -77,19 +78,13 @@ foreach ( $items as $item_id => $item ) :
 			<?php echo wp_kses_post( $order->get_formatted_line_subtotal( $item ) ); ?>
 		</td>
 	</tr>
-	<?php
 
-	if ( $show_purchase_note && $purchase_note ) {
-		?>
-		<tr>
-			<td colspan="3" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
-				<?php
-				echo wp_kses_post( wpautop( do_shortcode( $purchase_note ) ) );
-				?>
-			</td>
-		</tr>
-		<?php
-	}
-	?>
+	<?php if ( $show_purchase_note && $purchase_note ) : ?>
+	<tr>
+		<td colspan="3" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
+			<?php echo wp_kses_post( wpautop( do_shortcode( $purchase_note ) ) ); ?>
+		</td>
+	</tr>
+	<?php endif; ?>
 
 <?php endforeach; ?>

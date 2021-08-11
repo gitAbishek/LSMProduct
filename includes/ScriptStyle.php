@@ -115,8 +115,8 @@ class ScriptStyle {
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_single_course_page',
 				),
-				'edit-myaccount' => array(
-					'src'      => self::get_asset_url( '/assets/js/edit-myaccount.js' ),
+				'edit-account' => array(
+					'src'      => self::get_asset_url( '/assets/js/edit-account.js' ),
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
@@ -497,7 +497,7 @@ class ScriptStyle {
 		self::$localized_scripts = apply_filters(
 			'masteriyo_localized_scripts',
 			array(
-				'edit-myaccount' => array(
+				'edit-account' => array(
 					'name' => 'masteriyo_data',
 					'data' => array(
 						'rootApiUrl'      => esc_url_raw( rest_url() ),

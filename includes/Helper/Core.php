@@ -1594,9 +1594,9 @@ function masteriyo_get_current_myaccount_endpoint() {
 
 	// No endpoint found? Default to dashboard.
 	return array(
-					'endpoint' => 'dashboard',
-					'slug' => 'dashboard',
-		'arg'  => null,
+		'endpoint' => 'dashboard',
+		'slug'     => 'dashboard',
+		'arg'      => null,
 	);
 }
 

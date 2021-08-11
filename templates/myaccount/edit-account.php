@@ -29,7 +29,7 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 			</div>
 		</div>
 
-		<form id="mto-edtt-profile-form" class="mto-edt-myaccount--form">
+		<form id="mto-edit-profile-form" class="mto-edt-myaccount--form">
 				<div class="mto-username">
 					<label for="user-email" class="mto-label"><?php echo esc_html__( 'Username', 'masteriyo' ); ?></label>
 					<input value="<?php echo esc_attr( $user->get_display_name() ); ?>" id="username" name="text" type="text" required class="mto-input" placeholder="">
@@ -38,12 +38,12 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 				<div class="mto-fname-lname mto-col-2 mto-flex">
 					<div class="mto-fname">
 						<label for="user-first-name" class="mto-label"><?php echo esc_html__( 'First Name', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_first_name() ); ?>" id="user-first-name" name="text" type="text" required class="mto-input" placeholder="">
+						<input value="<?php echo esc_attr( $user->get_first_name() ); ?>" id="user-first-name" name="text" type="text" class="mto-input" placeholder="">
 					</div>
 
 					<div class="mto-lname">
 						<label for="user-last-name" class="mto-label"><?php echo esc_html__( 'Last Name', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_last_name() ); ?>" id="user-last-name" name="text" type="text" required class="mto-input" placeholder="">
+						<input value="<?php echo esc_attr( $user->get_last_name() ); ?>" id="user-last-name" name="text" type="text" class="mto-input" placeholder="">
 					</div>
 				</div>
 
@@ -54,30 +54,30 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 
 				<div class="mto-address">
 					<label for="user-address" class="mto-label"><?php echo esc_html__( 'Address', 'masteriyo' ); ?></label>
-					<input value="<?php echo esc_attr( $user->get_billing_address() ); ?>" id="user-address" name="text" type="text" required class="mto-input" placeholder="">
+					<input value="<?php echo esc_attr( $user->get_billing_address() ); ?>" id="user-address" name="text" type="text" class="mto-input" placeholder="">
 				</div>
 
 				<div class="mto-city-state mto-col-2 mto-flex">
 					<div class="mto-city">
 						<label for="user-city" class="mto-label"><?php echo esc_html__( 'City', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_billing_city() ); ?>" id="user-city" name="text" type="text" required class="mto-input" placeholder="">
+						<input value="<?php echo esc_attr( $user->get_billing_city() ); ?>" id="user-city" name="text" type="text" class="mto-input" placeholder="">
 					</div>
 
 					<div class="mto-state">
 						<label for="user-state" class="mto-label"><?php echo esc_html__( 'State', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_billing_state() ); ?>" id="user-state" name="text" type="text" required class="mto-input" placeholder="">
+						<input value="<?php echo esc_attr( $user->get_billing_state() ); ?>" id="user-state" name="text" type="text" class="mto-input" placeholder="">
 					</div>
 				</div>
 
 				<div class="mto-zip-country mto-col-2 mto-flex">
 					<div class="mto-zip">
 						<label for="user-zip-code" class="mto-label"><?php echo esc_html__( 'Zip Code', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_billing_postcode() ); ?>" id="user-zip-code" name="text" type="text" required class="mto-input" placeholder="">
+						<input value="<?php echo esc_attr( $user->get_billing_postcode() ); ?>" id="user-zip-code" name="text" type="text" class="mto-input" placeholder="">
 					</div>
 
 					<div class="mto-country">
 						<label for="user-country" class="mto-label"><?php echo esc_html__( 'Country', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_billing_country() ); ?>" id="user-country" name="text" type="text" required class="mto-input" placeholder="">
+						<input value="<?php echo esc_attr( $user->get_billing_country() ); ?>" id="user-country" name="text" type="text" class="mto-input" placeholder="">
 					</div>
 				</div>
 

@@ -390,7 +390,7 @@ if ( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 		}
 
 		masteriyo_get_template(
-			'myaccount/my-courses.php',
+			'myaccount/courses.php',
 			array(
 				'enrolled_courses' => $enrolled_courses,
 				'all_courses'      => $all_courses,
@@ -410,7 +410,7 @@ if ( ! function_exists( 'masteriyo_account_edit_myaccount_endpoint' ) ) {
 			'user' => masteriyo_get_current_user(),
 		);
 
-		masteriyo_get_template( 'myaccount/edit-myaccount.php', $data );
+		masteriyo_get_template( 'myaccount/edit-account.php', $data );
 	}
 }
 

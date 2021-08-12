@@ -17,9 +17,11 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $enrolled_courses )
 		<div class="mto-mycourses--list">
 			<?php foreach ( $enrolled_courses as $course ) : ?>
 				<div class="mto-mycourses--card">
-					<div class="mto-mycourses--thumbnail">
-						<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
-					</div>
+					<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">
+						<div class="mto-mycourses--thumbnail">
+							<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
+						</div>
+					</a>
 					<div class="mto-mycourses--detail">
 						<div class="mto-mycourses--header">
 							<div class="mto-mycourses--rt">
@@ -35,7 +37,11 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $enrolled_courses )
 									</a>
 								<?php endforeach; ?>
 							</div>
-							<h3 class="mto-mycourses--header--title"><?php echo esc_html( $course->get_name() ); ?></h3>
+							<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">
+								<h3 class="mto-mycourses--header--title">
+									<?php echo esc_html( $course->get_name() ); ?>
+								</h3>
+							</a>
 						</div>
 						<div class="mto-mycourses--body">
 							<div class="mto-mycourses--body--duration mto-flex mto-flex--space-between">
@@ -96,9 +102,11 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $enrolled_courses )
 		<div class="mto-mycourses--list">
 			<?php foreach ( $all_courses as $course ) : ?>
 				<div class="mto-mycourses--card">
-					<div class="mto-mycourses--thumbnail">
-					<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
-					</div>
+					<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">
+						<div class="mto-mycourses--thumbnail">
+							<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
+						</div>
+						</a>
 					<div class="mto-mycourses--detail">
 						<div class="mto-mycourses--header">
 							<div class="mto-mycourses--rt">
@@ -112,7 +120,11 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $enrolled_courses )
 									</span>
 								<?php endforeach; ?>
 							</div>
-							<h3 class="mto-mycourses--header--title"><?php echo esc_html( $course->get_name() ); ?></h3>
+							<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">
+								<h3 class="mto-mycourses--header--title">
+									<?php echo esc_html( $course->get_name() ); ?>
+								</h3>
+							</a>
 						</div>
 						<div class="mto-mycourses--body">
 							<div class="mto-mycourses--body--duration mto-flex mto-flex--space-between ">

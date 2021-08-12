@@ -204,6 +204,20 @@ const Builder: React.FC = () => {
 								firstBtn={{
 									label: __('Preview', 'masteriyo'),
 									action: () => window.open(courseQuery.data.preview_permalink),
+								}}
+								secondBtn={{
+									label: __('Save To Draft', 'masteriyo'),
+									action: methods.handleSubmit((data) => onSave(data, 'draft')),
+									isLoading: draftCourse.isLoading,
+									isDisabled: updateCourse.isLoading,
+								}}
+								thirdBtn={{
+									label: __('Publish', 'masteriyo'),
+									action: methods.handleSubmit((data) =>
+										onSave(data, 'publish')
+									),
+									isLoading: updateCourse.isLoading,
+									isDisabled: draftCourse.isLoading,
 								}}>
 								<TabList borderBottom="none" bg="white">
 									<Tab

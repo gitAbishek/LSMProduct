@@ -115,9 +115,11 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $enrolled_courses )
 								</span>
 
 								<?php foreach ( $course->get_categories() as $category ) : ?>
+								<a href="<?php echo esc_url( $category->get_permalink() ); ?>" title="<?php echo esc_attr( $category->get_name() ); ?>">
 									<span class="mto-badge mto-badge-pink mto-mycourses--tag ">
 										<?php echo esc_html( $category->get_name() ); ?>
 									</span>
+								</a>
 								<?php endforeach; ?>
 							</div>
 							<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">

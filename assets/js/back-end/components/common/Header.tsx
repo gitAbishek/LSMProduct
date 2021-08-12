@@ -5,9 +5,11 @@ import {
 	Container,
 	Flex,
 	Heading,
+	Image,
 	Stack,
 } from '@chakra-ui/react';
 import React from 'react';
+import { Logo } from '../../constants/images';
 
 interface Props {
 	firstBtn?: {
@@ -29,7 +31,7 @@ interface Props {
 		isLoading?: boolean;
 	};
 	hasLink?: boolean;
-	course: {
+	course?: {
 		name: string;
 		id: number;
 	};
@@ -57,10 +59,14 @@ const Header: React.FC<Props> = (props) => {
 		<Box bg="white" w="full" shadow="header">
 			<Container maxW="container.xl" bg="white">
 				<Flex direction="row" justifyContent="space-between" align="center">
-					<Stack direction="row" spacing="12" align="center" minHeight="16">
-						<Box>
-							<Heading>{course.name}</Heading>
-						</Box>
+					<Stack direction="row" spacing="8" align="center" minHeight="16">
+						<Image src={Logo} h="30px" />
+						{course && (
+							<Heading fontSize="nmd" fontWeight="medium">
+								{course.name}
+							</Heading>
+						)}
+
 						{children}
 					</Stack>
 

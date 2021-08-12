@@ -1628,9 +1628,9 @@ function masteriyo_get_myaccount_endpoints() {
 	return apply_filters(
 		'masteriyo_myaccount_endpoints',
 		array(
+			'dashboard'      => 'dashboard',
 			'view-myaccount' => masteriyo_get_setting( 'advance.account.view_myaccount' ),
 			'edit-account'   => masteriyo_get_setting( 'advance.account.edit_account' ),
-			'dashboard'      => masteriyo_get_setting( 'advance.account.dashboard' ),
 			'courses'        => masteriyo_get_setting( 'advance.account.my_courses' ),
 			'order-history'  => masteriyo_get_setting( 'advance.account.order_history' ),
 			'reset-password' => masteriyo_get_setting( 'advance.account.lost_password' ),

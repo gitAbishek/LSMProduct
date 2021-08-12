@@ -25,10 +25,11 @@ interface Props {
 	quizData: QuizSchema;
 	onStartPress: any;
 	attemptMessage: string;
+	isButtonLoading?: boolean;
 }
 
 const QuizStart: React.FC<Props> = (props) => {
-	const { quizData, onStartPress, attemptMessage } = props;
+	const { quizData, onStartPress, attemptMessage, isButtonLoading } = props;
 
 	const listItemStyles = {
 		d: 'flex',
@@ -83,17 +84,20 @@ const QuizStart: React.FC<Props> = (props) => {
 				</ListItem>
 			</List>
 
-			<ButtonGroup>
-				<Button
-					onClick={onStartPress}
-					colorScheme="blue"
-					rounded="full"
-					fontWeight="bold"
-					rightIcon={<Icon as={BiChevronRight} fontSize="x-large" />}
-					textTransform="uppercase">
-					{__('Start Quiz', 'masteriyo')}
-				</Button>
-			</ButtonGroup>
+			{attemptMessage.length <= 0 && (
+				<ButtonGroup>
+					<Button
+						onClick={onStartPress}
+						isLoading={isButtonLoading}
+						colorScheme="blue"
+						rounded="full"
+						fontWeight="bold"
+						rightIcon={<Icon as={BiChevronRight} fontSize="x-large" />}
+						textTransform="uppercase">
+						{__('Start Quiz', 'masteriyo')}
+					</Button>
+				</ButtonGroup>
+			)}
 		</Stack>
 	);
 };

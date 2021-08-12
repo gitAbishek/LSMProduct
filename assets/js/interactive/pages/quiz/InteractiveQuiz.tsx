@@ -24,7 +24,6 @@ const InteractiveQuiz = () => {
 	const [quizStartedOn, setQuizStartedOn] = useState<any>(null);
 	const [quizAboutToExpire, setQuizAboutToExpire] = useState<boolean>(false);
 	const [attemptMessage, setAttemptMessage] = useState<string>('');
-	const [isQuizStart, setIsQuizStart] = useState<any>(null);
 
 	const quizQuery = useQuery<QuizSchema, Error>(
 		[`section${quizId}`, quizId],
@@ -43,7 +42,6 @@ const InteractiveQuiz = () => {
 			onSuccess: (data: any) => {
 				if (data[0]?.attempt_started_at) {
 					setQuizStartedOn(getLocalTime(data[0].attempt_started_at));
-					setIsQuizStart(getLocalTime(data[0].attempt_started_at));
 				}
 			},
 		}
@@ -59,22 +57,20 @@ const InteractiveQuiz = () => {
 		startQuiz.mutate(quizId, {
 			onSuccess: (data: any) => {
 				setQuizStartedOn(getLocalTime(data.attempt_started_at));
-				setIsQuizStart(getLocalTime(data.attempt_started_at));
+				setScoreBoardData(null);
 			},
 			onError: (error: any) => setAttemptMessage(error.response?.data?.message),
 		});
-		setScoreBoardData(null);
 		setQuizAboutToExpire(false);
 	};
 
 	const onSubmit = (data: any) => {
 		checkQuizAnswers.mutate(deepClean(data), {
 			onSuccess: (data: any) => {
+				setQuizStartedOn(null);
 				setScoreBoardData(data);
-				setIsQuizStart(null);
 			},
 		});
-		setQuizStartedOn(null);
 	};
 
 	const onQuizeExpire = () => onSubmit(methods.getValues());
@@ -92,20 +88,22 @@ const InteractiveQuiz = () => {
 										__html: quizQuery?.data?.description,
 									}}
 								/>
-								{scoreBoardData ? (
+
+								{quizStartedOn ? (
+									<QuizFields quizAboutToExpire={quizAboutToExpire} />
+								) : scoreBoardData ? (
 									<ScoreBoard
 										scoreData={scoreBoardData}
 										onStartPress={onStartPress}
+										isButtonLoading={startQuiz.isLoading}
+										attemptMessage={attemptMessage}
 									/>
-								) : quizStartedOn || checkQuizAnswers.isLoading ? (
-									<QuizFields quizAboutToExpire={quizAboutToExpire} />
-								) : startQuiz.isLoading ? (
-									<FullScreenLoader />
 								) : (
 									<QuizStart
 										quizData={quizQuery.data}
 										onStartPress={onStartPress}
 										attemptMessage={attemptMessage}
+										isButtonLoading={startQuiz.isLoading}
 									/>
 								)}
 							</Stack>
@@ -133,7 +131,7 @@ const InteractiveQuiz = () => {
 					courseId={quizQuery?.data?.course_id}
 					isButtonDisabled={scoreBoardData}
 					isButtonLoading={checkQuizAnswers.isLoading}
-					quizStarted={isQuizStart}
+					quizStarted={quizStartedOn}
 				/>
 			</Container>
 		);

@@ -7,6 +7,7 @@
  */
 
 use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
 
 if ( ! function_exists( 'add_action' ) && function_exists( 'add_filter' ) ) {
 	return;
@@ -500,6 +501,9 @@ if ( ! function_exists( 'masteriyo_myaccount_main_content' ) ) {
 			do_action( 'masteriyo_account_' . $current_endpoint . '_endpoint', $endpoint['arg'] );
 			return;
 		}
+
+		$endpoint['user']           = masteriyo_get_current_user();
+		$endpoint['active_courses'] = masteriyo_get_active_courses( get_current_user_id() );
 
 		// No endpoint found? Default to dashboard.
 		masteriyo_get_template( 'myaccount/dashboard.php', $endpoint );

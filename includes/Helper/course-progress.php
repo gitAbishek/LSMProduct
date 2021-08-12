@@ -125,3 +125,43 @@ function masteriyo_get_course_progress_by_user_and_course( $user, $course ) {
 
 	return apply_filters( 'masteriyo_get_course_progress', $course_progress_obj, $course_progress );
 }
+
+/**
+ * Get active courses.
+ *
+ * @since 0.1.0
+ *
+ * @param ThemeGrill\Masteriyo\Models\User|WP_Post|int $user User object.
+ * @return ThemeGrill\Masteriyo\Model\Course[]
+ */
+function masteriyo_get_active_courses( $user ) {
+	if ( is_a( $user, 'ThemeGrill\Masteriyo\Database\User' ) ) {
+		$id = $user->get_id();
+	} elseif ( is_a( $user, '\WP_User' ) ) {
+		$id = $user->ID;
+	} else {
+		$id = absint( $user );
+	}
+
+	$query = new CourseProgressQuery(
+		array(
+			'user_id' => get_current_user_id(),
+			'status'  => 'started',
+		)
+	);
+
+	$progresses = $query->get_course_progress();
+
+	$active_courses = array_filter(
+		array_map(
+			function( $progress ) {
+				$course           = masteriyo_get_course( $progress->get_course_id() );
+				$course->progress = $progress;
+				return $course;
+			},
+			$progresses
+		)
+	);
+
+	return $active_courses;
+}

@@ -59,7 +59,7 @@ function masteriyo_get_user_course_statuses() {
  * @return integer
  */
 function masteriyo_count_enrolled_users( $course_id ) {
-	$query = new UserCourseQuery(
+	$query                = new UserCourseQuery(
 		array(
 			'course_id' => $course_id,
 			'status'    => 'enrolled',
@@ -68,4 +68,30 @@ function masteriyo_count_enrolled_users( $course_id ) {
 	$enrolled_users_count = count( $query->get_user_courses() );
 
 	return apply_filters( 'masteriyo_count_enrolled_users', $enrolled_users_count, $course_id, $query );
+}
+
+/**
+ * Get the number of active courses.
+ *
+ * @since 0.1.0
+ *
+ * @param \ThemeGrill\Masteriyo\Models\User|int $user User.
+ *
+ * @return int
+ */
+function masteriyo_get_active_courses_count( $user ) {
+	global $wpdb;
+
+	$user_id = is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ? $user->get_id() : $user;
+
+	$count = $wpdb->get_var(
+		$wpdb->prepare(
+			"SELECT COUNT(*) FROM {$wpdb->prefix}masteriyo_user_activities
+			WHERE user_id = %d AND activity_type = 'course_progress'
+			AND activity_status = 'started' AND parent_id = 0",
+			$user_id
+		)
+	);
+
+	return $count;
 }

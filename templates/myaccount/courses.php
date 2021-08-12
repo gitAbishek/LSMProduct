@@ -61,7 +61,7 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $enrolled_courses )
 										/* translators: %s: course progress in percentage */
 										esc_html__( '%s Completed', 'masteriyo' ),
 										esc_html( $course->get_progress_status( true ) )
-									)
+									);
 								?>
 								</div>
 							</div>

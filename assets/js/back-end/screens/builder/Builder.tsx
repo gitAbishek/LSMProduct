@@ -8,7 +8,10 @@ import {
 	Button,
 	ButtonGroup,
 	Container,
+	Icon,
 	Stack,
+	Tab,
+	TabList,
 	TabPanel,
 	TabPanels,
 	Tabs,
@@ -19,12 +22,14 @@ import { __ } from '@wordpress/i18n';
 import queryString from 'query-string';
 import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import AddCategoryModal from '../../components/common/AddCategoryModal';
 import Header from '../../components/common/Header';
 import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
+import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
@@ -199,8 +204,51 @@ const Builder: React.FC = () => {
 								firstBtn={{
 									label: __('Preview', 'masteriyo'),
 									action: () => window.open(courseQuery.data.preview_permalink),
-								}}
-							/>
+								}}>
+								<TabList borderBottom="none" bg="white">
+									<Tab
+										sx={tabStyles}
+										onClick={() => {
+											setCurrentPageName(__('Edit', 'masteriyo'));
+											history.push(
+												routes.courses.edit.replace(':courseId', courseId)
+											);
+										}}>
+										<Icon as={BiBook} sx={iconStyles} />
+										{__('Course', 'masteriyo')}
+									</Tab>
+									<Tab
+										sx={tabStyles}
+										onClick={() => {
+											setCurrentPageName(__('Builder', 'masteriyo'));
+											history.push({
+												pathname: routes.courses.edit.replace(
+													':courseId',
+													courseId
+												),
+												search: '?page=builder',
+											});
+										}}>
+										<Icon as={BiEdit} sx={iconStyles} />
+										{__('Builder', 'masteriyo')}
+									</Tab>
+									<Tab
+										sx={tabStyles}
+										onClick={() => {
+											setCurrentPageName(__('Settings', 'masteriyo'));
+											history.push({
+												pathname: routes.courses.edit.replace(
+													':courseId',
+													courseId
+												),
+												search: '?page=settings',
+											});
+										}}>
+										<Icon as={BiCog} sx={iconStyles} />
+										{__('Settings', 'masteriyo')}
+									</Tab>
+								</TabList>
+							</Header>
 							<Container maxW="container.xl">
 								<Stack direction="column" spacing="2">
 									<PageNav

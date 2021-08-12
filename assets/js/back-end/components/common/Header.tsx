@@ -7,7 +7,7 @@ import {
 	Heading,
 	Stack,
 } from '@chakra-ui/react';
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 interface Props {
 	firstBtn?: {
@@ -33,11 +33,10 @@ interface Props {
 		name: string;
 		id: number;
 	};
-	menu?: ReactElement;
 }
 
 const Header: React.FC<Props> = (props) => {
-	const { firstBtn, secondBtn, thirdBtn, hasLink, course, menu } = props;
+	const { firstBtn, secondBtn, thirdBtn, hasLink, course, children } = props;
 
 	const navLinkStyles = {
 		mr: '10',
@@ -62,7 +61,7 @@ const Header: React.FC<Props> = (props) => {
 						<Box>
 							<Heading>{course.name}</Heading>
 						</Box>
-						{menu && menu}
+						{children}
 					</Stack>
 
 					<ButtonGroup>

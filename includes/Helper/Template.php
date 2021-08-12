@@ -444,7 +444,7 @@ if ( ! function_exists( 'masteriyo_account_order_history_endpoint' ) ) {
 		);
 
 		masteriyo_get_template(
-			'myaccount/my-order-history.php',
+			'myaccount/order-history.php',
 			array(
 				'orders' => $orders,
 			)
@@ -463,7 +463,7 @@ if ( ! function_exists( 'masteriyo_account_view_order_endpoint' ) ) {
 		$customer_id = $order->get_customer_id();
 
 		if ( ! masteriyo_is_current_user_admin() && ! masteriyo_is_current_user_manager() && get_current_user_id() !== $customer_id ) {
-			echo __( 'You are not allowed to view this content', 'masteriyo' );
+			esc_html_e( 'You are not allowed to view this content', 'masteriyo' );
 			return;
 		}
 

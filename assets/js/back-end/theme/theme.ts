@@ -64,8 +64,8 @@ const theme = extendTheme({
 						borderLeft: '2px solid rgba(13,13,13,.1)',
 					},
 					code: {
-						backgroundColor: 'rgba(97,97,97,.1)',
-						color: '#616161',
+						backgroundColor: 'gray.100',
+						color: 'gray.600',
 						padding: '.1rem .3rem',
 						borderRadius: '4px',
 					},
@@ -85,7 +85,7 @@ const theme = extendTheme({
 							fontSize: '0.8rem',
 						},
 						'.hljs-comment,.hljs-quote': {
-							color: '#616161',
+							color: 'gray.600',
 						},
 						'.hljs-variable,.hljs-template-variable,.hljs-attribute,.hljs-tag,.hljs-name,.hljs-regexp,.hljs-link,.hljs-name,.hljs-selector-id,.hljs-selector-class':
 							{

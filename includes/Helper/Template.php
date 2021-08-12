@@ -384,9 +384,10 @@ if ( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 
 			$course->user_course = $user_course;
 
-			if ( masteriyo_is_current_user_enrolled_in_course( $course ) ) {
+			if ( 'enrolled' === $user_course->get_status() ) {
 				$enrolled_courses[] = $course;
 			}
+
 			$all_courses[] = $course;
 		}
 

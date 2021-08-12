@@ -327,7 +327,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 		if ( ! empty( $query_vars['progress_id'] ) ) {
 			$search_criteria[] = $wpdb->prepare( 'parent_id = %d', $query_vars['progress_id'] );
 		} else {
-			$course_progress = \masteriyo_get_course_progress_by_user_and_course( $query_vars['user_id'], $query_vars['course_id'] );
+			$course_progress = \masteriyo_get_course_progress_by_user_and_course( $query_vars['user_id'], $query_vars['item_id'] );
 			if ( ! is_wp_error( $course_progress ) ) {
 				$search_criteria[] = $wpdb->prepare( 'parent_id = %d', $course_progress->get_id() );
 			}

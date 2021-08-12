@@ -18,7 +18,7 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $enrolled_courses )
 			<?php foreach ( $enrolled_courses as $course ) : ?>
 				<div class="mto-mycourses--card">
 					<div class="mto-mycourses--thumbnail">
-						<?php echo wp_get_attachment_image( $course->get_featured_image(), 'masteriyo_thumbnail' ); ?>
+						<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
 					</div>
 					<div class="mto-mycourses--detail">
 						<div class="mto-mycourses--header">
@@ -97,7 +97,7 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $enrolled_courses )
 			<?php foreach ( $all_courses as $course ) : ?>
 				<div class="mto-mycourses--card">
 					<div class="mto-mycourses--thumbnail">
-						<?php echo wp_get_attachment_image( $course->get_featured_image(), 'masteriyo_thumbnail' ); ?>
+					<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
 					</div>
 					<div class="mto-mycourses--detail">
 						<div class="mto-mycourses--header">
@@ -125,8 +125,8 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $enrolled_courses )
 										<?php echo esc_html( masteriyo_minutes_to_time_length_string( $course->get_duration() ) ); ?>
 									</time>
 								</div>
-								<a href="<?php echo esc_url( $course->get_permalink() ); ?>" target="_blank" class="mto-mycourses--btn mto-btn mto-btn-primary">
-									<?php esc_html_e( 'View', 'masteriyo' ); ?>
+								<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="mto-mycourses--btn mto-btn mto-btn-primary">
+									<?php esc_html_e( 'Start Course', 'masteriyo' ); ?>
 								</a>
 							</div>
 						</div>

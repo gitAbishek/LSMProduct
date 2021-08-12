@@ -1352,7 +1352,8 @@ class Course extends Model {
 		$progress = $this->repository->get_progress_status( $this );
 
 		if ( $percentage ) {
-			$progress = masteriyo_round( ( $progress['completed'] / $progress['total'] ) * 100, 2 ) . '%';
+			$progress['total'] = ( 0 === $progress['total'] ) ? 1 : $progress['total'];
+			$progress          = masteriyo_round( ( $progress['completed'] / $progress['total'] ) * 100, 2 ) . '%';
 		} else {
 			$progress = "{$progress['completed']}/{$progress['total']}";
 		}

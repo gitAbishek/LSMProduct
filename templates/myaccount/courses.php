@@ -78,8 +78,11 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $enrolled_courses )
 						</div>
 
 						<div class="mto-mycourses--footer mto-flex mto-flex--space-between mto-no-flex-wrap">
-							<div class="mto-mycourses--date">
-								<?php esc_html_e( 'Started on', 'masteriyo' ); ?> <?php echo esc_html( masteriyo_format_datetime( $course->user_course->get_date_start(), 'Y-m-d' ) ); ?>
+							<div class="mto-time-wrap">
+								<span class="mto-icon-svg"><?php masteriyo_get_svg( 'start-clock', true ); ?></span>
+								<time class="mto-courses--body--time">
+									<?php echo esc_html( masteriyo_format_datetime( $course->user_course->get_date_start(), 'Y-m-d' ) ); ?>
+								</time>
 							</div>
 							<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="mto-mycourses--btn mto-btn mto-btn-primary">
 								<?php esc_html_e( 'Continue', 'masteriyo' ); ?>

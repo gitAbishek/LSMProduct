@@ -126,7 +126,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 						'item_id'         => $course_progress_item->get_item_id( 'edit' ),
 						'parent_id'       => $course_progress_item->get_progress_id( 'edit' ),
 						'activity_type'   => $course_progress_item->get_item_type( 'edit' ),
-						'activity_status' => $course_progress_item->get_completed( 'edit' ) ? 'complete' : 'start',
+						'activity_status' => $course_progress_item->get_completed( 'edit' ) ? 'completed' : 'started',
 						'created_at'      => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_started_at( 'edit' )->getTimestamp() ),
 						'modified_at'     => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_modified_at( 'edit' )->getTimestamp() ),
 						'completed_at'    => $completed_at,
@@ -199,7 +199,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 					'item_id'         => $course_progress_item->get_item_id( 'edit' ),
 					'parent_id'       => $course_progress_item->get_progress_id( 'edit' ),
 					'activity_type'   => $course_progress_item->get_item_type( 'edit' ),
-					'activity_status' => $course_progress_item->get_completed( 'edit' ) ? 'complete' : 'start',
+					'activity_status' => $course_progress_item->get_completed( 'edit' ) ? 'completed' : 'started',
 					'created_at'      => gmdate( 'Y-m-d H:i:s', $course_progress_item->get_started_at( 'edit' )->getTimestamp() ),
 					'modified_at'     => $modified_at,
 					'completed_at'    => $completed_at,
@@ -275,7 +275,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 				'item_id'      => $result->item_id,
 				'progress_id'  => $result->parent_id,
 				'item_type'    => $result->activity_type,
-				'completed'    => 'complete' === $result->activity_status ? true : false,
+				'completed'    => 'completed' === $result->activity_status ? true : false,
 				'started_at'   => $this->string_to_timestamp( $result->created_at ),
 				'modified_at'  => $this->string_to_timestamp( $result->modified_at ),
 				'completed_at' => $this->string_to_timestamp( $result->completed_at ),
@@ -437,7 +437,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 
 		$total_summary = $course_progress->get_summary( 'total' );
 
-		$status = ( 0 === $total_summary['pending'] ) ? 'complete' : 'progress';
+		$status = ( 0 === $total_summary['pending'] ) ? 'completed' : 'progress';
 
 		if ( $status !== $course_progress->get_status( 'edit' ) ) {
 			$course_progress->set_status( $status );

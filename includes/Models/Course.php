@@ -1340,4 +1340,23 @@ class Course extends Model {
 
 		return apply_filters( 'masteriyo_product_get_image', $image, $this, $size, $attr, $placeholder, $image );
 	}
+
+	/**
+	 * Get course progress status.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
+	public function get_progress_status( $percentage = false ) {
+		$progress = $this->repository->get_progress_status( $this );
+
+		if ( $percentage ) {
+			$progress = masteriyo_round( ( $progress['completed'] / $progress['total'] ) * 100, 2 ) . '%';
+		} else {
+			$progress = "{$progress['completed']}/{$progress['total']}";
+		}
+
+		return $progress;
+	}
 }

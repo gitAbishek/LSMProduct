@@ -275,11 +275,11 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		}
 
 		// Construct where clause part.
-		if ( '' !== $query_vars['user_id'] ) {
+		if ( ! empty( $query_vars['user_id'] ) ) {
 			$search_criteria[] = $wpdb->prepare( 'user_id = %d', $query_vars['user_id'] );
 		}
 
-		if ( '' !== $query_vars['course_id'] ) {
+		if ( ! empty( $query_vars['course_id'] ) ) {
 			$search_criteria[] = $wpdb->prepare( 'item_id = %d', $query_vars['course_id'] );
 		}
 

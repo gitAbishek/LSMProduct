@@ -7,9 +7,11 @@
 
 namespace ThemeGrill\Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Models\Course;
 use ThemeGrill\Masteriyo\Helper\Number;
+use ThemeGrill\Masteriyo\Models\Course;
+use ThemeGrill\Masteriyo\Database\Model;
+use ThemeGrill\Masteriyo\Models\CourseProgress;
+use ThemeGrill\Masteriyo\Query\UserCourseQuery;
 
 /**
  * Course repository class.
@@ -41,7 +43,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		'billing_cycle'     => '_billing_cycle',
 		'show_curriculum'   => '_show_curriculum',
 		'purchase_note'     => '_purchase_note',
-		'highlights'          => '_highlights',
+		'highlights'        => '_highlights',
 	);
 
 	/**
@@ -644,5 +646,34 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		}
 
 		return apply_filters( 'masteriyo_course_data_store_cpt_get_courses_query', $wp_query_args, $query_vars, $this );
+	}
+
+	/**
+	 * Get course progress status in fraction.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param ThemeGrill\Masteriyo\Models\Course|int $course Course object.
+	 * @param ThemeGrill\Masteriyo\Models\User|int $user User object.
+	 *
+	 * @return string
+	 */
+	public function get_progress_status( $course, $user = null ) {
+		$course_id = is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ? $course->get_id() : $course;
+		$user_id   = is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ? $user->get_id() : $user;
+		$user_id   = is_null( $user_id ) ? get_current_user_id() : $user_id;
+
+		$course_progress = masteriyo( 'course-progress' );
+		$course_progress->set_course_id( $course_id );
+		$course_progress->set_user_id( $user_id );
+
+		$summary   = $course_progress->get_summary();
+		$completed = $summary['total']['completed'];
+		$total     = array_sum( $summary['total'] );
+
+		return array(
+			'completed' => $completed,
+			'total'     => $total,
+		);
 	}
 }

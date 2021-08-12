@@ -91,7 +91,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		}
 
 		if ( ! $course_progress->get_status( 'edit' ) ) {
-			$course_progress->set_status( 'start' );
+			$course_progress->set_status( 'started' );
 		}
 
 		if ( ! $course_progress->get_started_at( 'edit' ) ) {
@@ -405,6 +405,8 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 
 	/**
 	 * Get total summary(completed, pending).
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param CourseProgress $course_progress Course progress object.
 	 * @param array $items Course progress items (total and quiz),

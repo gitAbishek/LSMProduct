@@ -364,12 +364,13 @@ if ( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_account_courses_endpoint() {
-		$query            = new UserCourseQuery(
+		$query = new UserCourseQuery(
 			array(
 				'user_id' => get_current_user_id(),
 				'limit'   => -1,
 			)
 		);
+
 		$user_courses     = $query->get_user_courses();
 		$enrolled_courses = array();
 		$all_courses      = array();

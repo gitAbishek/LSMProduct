@@ -254,12 +254,12 @@ class CourseProgress extends Model {
 		if ( true === $this->object_read ) {
 			// Only allow valid new status.
 			if ( ! in_array( $new_status, $this->get_valid_statuses(), true ) ) {
-				$new_status = 'start';
+				$new_status = 'started';
 			}
 
 			// If the old status is set but unknown (e.g. start) assume its start for action usage.
 			if ( $old_status && ! in_array( $old_status, $this->get_valid_statuses(), true ) ) {
-				$old_status = 'start';
+				$old_status = 'started';
 			}
 		}
 
@@ -399,7 +399,6 @@ class CourseProgress extends Model {
 			if ( ! empty( $status_transition['from'] ) ) {
 				do_action( 'masteriyo_course_progress_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
 				do_action( 'masteriyo_course_progress_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
-				error_log( 'masteriyo_course_progress_status_' . $status_transition['from'] . '_to_' . $status_transition['to'] );
 			}
 		} catch ( \Exception $e ) { // phpcs:ignore
 			// TODO Log the message.

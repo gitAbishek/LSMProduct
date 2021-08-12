@@ -29,7 +29,7 @@ class UserCourseQuery extends ObjectQuery {
 		return array_merge(
 			parent::get_default_query_vars(),
 			array(
-				'user_id'       => '',
+				'user_id'       => 0,
 				'course_id'     => 0,
 				'status'        => 'any',
 				'date_start'    => null,

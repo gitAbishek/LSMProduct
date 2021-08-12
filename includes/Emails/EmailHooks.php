@@ -39,7 +39,7 @@ class EmailHooks {
 	 * @param mixed $id
 	 */
 	public static function trigger_new_order_email( $id ) {
-		masteriyo('email.new-order')->trigger( $id );
+		masteriyo( 'email.new-order' )->trigger( $id );
 	}
 
 	/**
@@ -95,7 +95,7 @@ class EmailHooks {
 	 * @param CourseProgress $course_progress
 	 */
 	public static function trigger_course_complete_email( $id, $old_status, $new_status, $course_progress ) {
-		if ( 'complete' !== $new_status ) {
+		if ( 'completed' !== $new_status ) {
 			return;
 		}
 

@@ -117,3 +117,18 @@ export const tableStyles = {
 		borderBottom: 'none',
 	},
 };
+
+export const navLinkStyles = {
+	mr: '10',
+	py: '6',
+	d: 'flex',
+	alignItems: 'center',
+	fontWeight: 'medium',
+	fontSize: 'sm',
+};
+
+export const navActiveStyles = {
+	borderBottom: '2px',
+	borderColor: 'blue.500',
+	color: 'blue.500',
+};

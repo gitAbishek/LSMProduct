@@ -9,6 +9,11 @@ import {
 	Button,
 	ButtonGroup,
 	Container,
+	Icon,
+	Link,
+	List,
+	ListIcon,
+	ListItem,
 	Stack,
 	Table,
 	Tbody,
@@ -19,9 +24,16 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
+import { BiBook, BiPlus } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import Header from '../../components/layout/Header';
-import { tableStyles } from '../../config/styles';
+import { NavLink, useHistory } from 'react-router-dom';
+import Header from '../../components/common/Header';
+import {
+	navActiveStyles,
+	navLinkStyles,
+	tableStyles,
+} from '../../config/styles';
+import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonCourseList } from '../../skeleton';
 import API from '../../utils/api';
@@ -38,6 +50,7 @@ interface FilterParams {
 
 const AllCourses = () => {
 	const courseAPI = new API(urls.courses);
+	const history = useHistory();
 	const [filterParams, setFilterParams] = useState<FilterParams>({});
 	const [deleteCourseId, setDeleteCourseId] = useState<number>();
 
@@ -66,7 +79,26 @@ const AllCourses = () => {
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
-			<Header hideCoursesMenu />
+			<Header
+				thirdBtn={{
+					label: __('Add New Course', 'masteriyo'),
+					action: () => history.push(routes.courses.add),
+					icon: <Icon as={BiPlus} fontSize="md" />,
+				}}>
+				<List d="flex">
+					<ListItem mb="0">
+						<Link
+							as={NavLink}
+							sx={navLinkStyles}
+							_activeLink={navActiveStyles}
+							_hover={{ color: 'blue.500' }}
+							to={routes.courses.list}>
+							<ListIcon as={BiBook} />
+							{__('All Courses', 'masteriyo')}
+						</Link>
+					</ListItem>
+				</List>
+			</Header>
 			<Container maxW="container.xl">
 				<Box bg="white" py="12" shadow="box" mx="auto">
 					<Stack direction="column" spacing="10">

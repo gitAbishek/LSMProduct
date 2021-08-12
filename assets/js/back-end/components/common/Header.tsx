@@ -8,7 +8,7 @@ import {
 	Image,
 	Stack,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
@@ -31,8 +31,8 @@ interface Props {
 		action: () => void;
 		isDisabled?: boolean;
 		isLoading?: boolean;
+		icon?: ReactElement;
 	};
-	hasLink?: boolean;
 	course?: {
 		name: string;
 		id: number;
@@ -40,22 +40,7 @@ interface Props {
 }
 
 const Header: React.FC<Props> = (props) => {
-	const { firstBtn, secondBtn, thirdBtn, hasLink, course, children } = props;
-
-	const navLinkStyles = {
-		mr: '10',
-		py: '6',
-		d: 'flex',
-		alignItems: 'center',
-		fontWeight: 'medium',
-		fontSize: 'sm',
-	};
-
-	const navActiveStyles = {
-		borderBottom: '2px',
-		borderColor: 'blue.500',
-		color: 'blue.500',
-	};
+	const { firstBtn, secondBtn, thirdBtn, course, children } = props;
 
 	return (
 		<Box bg="white" w="full" shadow="header">
@@ -70,7 +55,6 @@ const Header: React.FC<Props> = (props) => {
 								{course.name}
 							</Heading>
 						)}
-
 						{children}
 					</Stack>
 
@@ -101,6 +85,7 @@ const Header: React.FC<Props> = (props) => {
 								colorScheme="blue"
 								onClick={thirdBtn.action}
 								isDisabled={thirdBtn.isDisabled}
+								leftIcon={thirdBtn.icon}
 								isLoading={thirdBtn.isLoading}>
 								{thirdBtn.label}
 							</Button>

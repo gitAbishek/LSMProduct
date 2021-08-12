@@ -2221,12 +2221,7 @@ function masteriyo_get_password_reset_link( $reset_key, $user_id ) {
 function masteriyo_create_page( $slug, $setting_name = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
 	global $wpdb;
 
-	$setting        = masteriyo_get_settings();
-	$previous_value = 0;
-
-	if ( method_exists( $setting, "get_pages_{$setting_name}" ) ) {
-		$previous_value = call_user_func_array( array( $setting, "get_pages_{$setting_name}" ), array() );
-	}
+	$previous_value = masteriyo_get_setting( "advance.pages.{$setting_name}" );
 
 	if ( $previous_value > 0 ) {
 		$page_object = get_post( $previous_value );

@@ -9,7 +9,9 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Logo } from '../../constants/images';
+import routes from '../../constants/routes';
 
 interface Props {
 	firstBtn?: {
@@ -60,9 +62,11 @@ const Header: React.FC<Props> = (props) => {
 			<Container maxW="container.xl" bg="white">
 				<Flex direction="row" justifyContent="space-between" align="center">
 					<Stack direction="row" spacing="8" align="center" minHeight="16">
-						<Image src={Logo} h="30px" />
+						<Link to={routes.courses.list}>
+							<Image src={Logo} h="30px" />
+						</Link>
 						{course && (
-							<Heading fontSize="nmd" fontWeight="medium">
+							<Heading fontSize="md" fontWeight="medium">
 								{course.name}
 							</Heading>
 						)}

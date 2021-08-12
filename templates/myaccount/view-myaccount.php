@@ -45,7 +45,7 @@ do_action( 'masteriyo_before_view_myaccount_content' );
 			<li><?php echo esc_html( $user->get_billing_city() ); ?></li>
 			<li><?php echo esc_html( $user->get_billing_state() ); ?></li>
 			<li><?php echo esc_html( $user->get_billing_postcode() ); ?></li>
-			<li><?php echo esc_html( $user->get_billing_country() ); ?></li>
+			<li><?php echo esc_html( masteriyo( 'countries' )->get_country_from_code( $user->get_billing_country() ) ); ?></li>
 		</ul>
 	</div>
 </div>

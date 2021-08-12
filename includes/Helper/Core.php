@@ -1784,6 +1784,14 @@ function masteriyo_get_account_menu_items() {
 			'label' => __( 'My Courses', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'courses' ),
 		),
+		'view-myaccount'       => array(
+			'label' => __( 'Account Details', 'masteriyo' ),
+			'icon'  => masteriyo_get_svg( 'courses' ),
+		),
+		'edit-account'       => array(
+			'label' => __( 'Edit Account', 'masteriyo' ),
+			'icon'  => masteriyo_get_svg( 'courses' ),
+		),
 		'order-history' => array(
 			'label' => __( 'My Order History', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'order-history' ),

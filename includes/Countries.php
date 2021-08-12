@@ -53,7 +53,6 @@ class Countries {
 	 */
 	public $locale = array();
 
-
 	/**
 	 * List of address formats for locales.
 	 *
@@ -62,6 +61,15 @@ class Countries {
 	 * @var array
 	 */
 	public $address_formats = array();
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1.0
+	 */
+	public function __construct() {
+		$this->get_countries();
+	}
 
 	/**
 	 * Get all countries.
@@ -1550,5 +1558,20 @@ class Countries {
 		uasort( $address_fields, 'masteriyo_checkout_fields_uasort_comparison' );
 
 		return $address_fields;
+	}
+
+	/**
+	 * Get country name from country code.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $code Country code.
+	 *
+	 * @return string
+	 */
+	public function get_country_from_code( $code ) {
+		$country = isset( $this->countries[ $code ] ) ? $this->countries[ $code ] : '';
+
+		return apply_filters( 'masteriyo_get_country_from_code', $country, $code );
 	}
 }

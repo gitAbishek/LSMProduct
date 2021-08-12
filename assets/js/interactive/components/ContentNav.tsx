@@ -86,27 +86,27 @@ const ContentNav: React.FC<Props> = (props) => {
 				</Box>
 
 				{quizStarted && (
-				<Button
-					onClick={onCompletePress}
-					isLoading={isButtonLoading}
-					isDisabled={isButtonDisabled}
-					colorScheme="blue"
-					rounded="full"
-					fontWeight="bold"
-					leftIcon={
-						<Icon
-							fontSize="xl"
-							d={isButtonDisabled ? 'block' : 'none'}
-							as={BiCheck}
-						/>
-					}
-					textTransform="uppercase">
-					{isButtonDisabled
-						? __('Completed', 'masteiryo')
-						: type === 'quiz'
-						? __('Submit Quiz', 'masteriyo')
-						: __('Mark as Complete', 'masteriyo')}
-				</Button>
+					<Button
+						onClick={onCompletePress}
+						isLoading={isButtonLoading}
+						isDisabled={isButtonDisabled}
+						colorScheme="blue"
+						rounded="full"
+						fontWeight="bold"
+						leftIcon={
+							<Icon
+								fontSize="xl"
+								d={isButtonDisabled ? 'block' : 'none'}
+								as={BiCheck}
+							/>
+						}
+						textTransform="uppercase">
+						{isButtonDisabled
+							? __('Completed', 'masteiryo')
+							: type === 'quiz'
+							? __('Submit Quiz', 'masteriyo')
+							: __('Mark as Complete', 'masteriyo')}
+					</Button>
 				)}
 
 				<Box minW="200px">

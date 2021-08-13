@@ -372,7 +372,7 @@ export interface OrderItemSchema {
 	name: string;
 	type: string;
 	quantity: number;
-	total: number;
+	total: number | string;
 }
 
 export interface SettingsSchema {

@@ -354,15 +354,16 @@ abstract class RestTermsController extends CrudController {
 		$taxonomy = $this->get_taxonomy( $request );
 
 		$args = array(
-			'taxonomy'       => $taxonomy,
-			'offset'         => $request['offset'],
-			'order'          => $request['order'],
-			'orderby'        => $request['orderby'],
-			'paged'          => $request['page'],
-			'posts_per_page' => $request['per_page'],
-			'slug'           => $request['slug'],
-			'hide_empty'     => $request['hide_empty'],
-			's'              => $request['search'],
+			'taxonomy'   => $taxonomy,
+			'offset'     => $request['offset'],
+			'order'      => $request['order'],
+			'orderby'    => $request['orderby'],
+			'offset'     => $request['page'],
+			'paged'      => $request['page'],
+			'number'     => $request['per_page'],
+			'slug'       => $request['slug'],
+			'hide_empty' => $request['hide_empty'],
+			'search'     => $request['search'],
 		);
 
 		if ( isset( $request['course'] ) ) {
@@ -420,7 +421,7 @@ abstract class RestTermsController extends CrudController {
 		return array(
 			'objects' => array_filter( array_map( array( $this, 'get_object' ), $result ) ),
 			'total'   => (int) $total_posts,
-			'pages'   => (int) ceil( $total_posts / (int) $query->query_vars['posts_per_page'] ),
+			'pages'   => (int) ceil( $total_posts / (int) $query->query_vars['number'] ),
 		);
 	}
 

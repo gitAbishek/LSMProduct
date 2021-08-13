@@ -372,31 +372,29 @@ if ( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 			)
 		);
 
-		$user_courses     = $query->get_user_courses();
-		$enrolled_courses = array();
-		$all_courses      = array();
+		$user_courses = $query->get_user_courses();
+		$all_courses  = array_filter(
+			array_map(
+				function( $user_course ) {
+					$course = masteriyo_get_course( $user_course->get_course_id() );
 
-		foreach ( $user_courses as $user_course ) {
-			$course = masteriyo_get_course( $user_course->get_course_id() );
+					if ( is_null( $course ) ) {
+						return null;
+					}
 
-			if ( is_null( $course ) ) {
-				continue;
-			}
+					return $course;
+				},
+				$user_courses
+			)
+		);
 
-			$course->user_course = $user_course;
-
-			if ( 'enrolled' === $user_course->get_status() ) {
-				$enrolled_courses[] = $course;
-			}
-
-			$all_courses[] = $course;
-		}
-
+		$active_courses = masteriyo_get_active_courses( get_current_user_id() );
+		
 		masteriyo_get_template(
 			'myaccount/courses.php',
 			array(
-				'enrolled_courses' => $enrolled_courses,
-				'all_courses'      => $all_courses,
+				'active_courses' => $active_courses,
+				'all_courses'    => $all_courses,
 			)
 		);
 	}

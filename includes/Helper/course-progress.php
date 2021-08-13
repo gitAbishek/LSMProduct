@@ -141,7 +141,12 @@ function masteriyo_get_active_courses( $user ) {
 	$active_courses = array_filter(
 		array_map(
 			function( $progress ) {
-				$course           = masteriyo_get_course( $progress->get_course_id() );
+				$course = masteriyo_get_course( $progress->get_course_id() );
+
+				if ( is_null( $course ) ) {
+					return null;
+				}
+
 				$course->progress = $progress;
 				return $course;
 			},

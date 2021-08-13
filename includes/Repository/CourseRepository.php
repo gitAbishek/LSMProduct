@@ -12,6 +12,7 @@ use ThemeGrill\Masteriyo\Models\Course;
 use ThemeGrill\Masteriyo\Database\Model;
 use ThemeGrill\Masteriyo\Models\CourseProgress;
 use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
 
 /**
  * Course repository class.
@@ -663,13 +664,23 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		$user_id   = is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ? $user->get_id() : $user;
 		$user_id   = is_null( $user_id ) ? get_current_user_id() : $user_id;
 
-		$course_progress = masteriyo( 'course-progress' );
-		$course_progress->set_course_id( $course_id );
-		$course_progress->set_user_id( $user_id );
+		$query = new CourseProgressQuery(
+			array(
+				'course_id' => $course_id,
+				'user_id'   => $user_id,
+				'per_page'  => 1,
+			)
+		);
 
-		$summary   = $course_progress->get_summary();
-		$completed = $summary['total']['completed'];
-		$total     = array_sum( $summary['total'] );
+		$course_progress = current( $query->get_course_progress() );
+		$completed       = 0;
+		$total           = 0;
+
+		if ( ! empty( $course_progress ) ) {
+			$summary   = $course_progress->get_summary();
+			$completed = $summary['total']['completed'];
+			$total     = array_sum( $summary['total'] );
+		}
 
 		return array(
 			'completed' => $completed,

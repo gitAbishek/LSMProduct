@@ -1,12 +1,8 @@
 import {
 	Box,
-	Button,
-	ButtonGroup,
 	Container,
-	Flex,
 	Heading,
 	Icon,
-	Image,
 	Stack,
 	Tab,
 	TabList,
@@ -19,9 +15,9 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation } from 'react-query';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import AddCategoryModal from '../../components/common/AddCategoryModal';
-import { Logo } from '../../constants/images';
+import Header from '../../components/common/Header';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { CourseSchema } from '../../schemas';
@@ -89,44 +85,27 @@ const AddNewCourse: React.FC = () => {
 			<FormProvider {...methods}>
 				<Tabs>
 					<Stack direction="column" spacing="8" alignItems="center">
-						<Box bg="white" w="full">
-							<Container maxW="container.xl">
-								<Flex
-									direction="row"
-									justifyContent="space-between"
-									align="center">
-									<Stack direction="row" spacing="12" align="center">
-										<Box>
-											<RouterLink to={routes.courses.list}>
-												<Image src={Logo} alt="Masteriyo Logo" w="120px" />
-											</RouterLink>
-										</Box>
-										<TabList borderBottom="none" bg="white">
-											<Tab sx={tabStyles}>
-												<Icon as={BiBook} sx={iconStyles} />
-												{__('Course', 'masteriyo')}
-											</Tab>
-											<Tab sx={tabStyles} isDisabled>
-												<Icon as={BiEdit} sx={iconStyles} />
-												{__('Builder', 'masteriyo')}
-											</Tab>
-											<Tab sx={tabStyles}>
-												<Icon as={BiCog} sx={iconStyles} />
-												{__('Settings', 'masteriyo')}
-											</Tab>
-										</TabList>
-									</Stack>
-									<ButtonGroup>
-										<Button
-											colorScheme="blue"
-											onClick={methods.handleSubmit(onSubmit)}
-											isLoading={addMutation.isLoading}>
-											{__('Next', 'masteriyo')}
-										</Button>
-									</ButtonGroup>
-								</Flex>
-							</Container>
-						</Box>
+						<Header
+							thirdBtn={{
+								label: __('Next', 'masteriyo'),
+								action: methods.handleSubmit(onSubmit),
+								isLoading: addMutation.isLoading,
+							}}>
+							<TabList borderBottom="none" bg="white">
+								<Tab sx={tabStyles}>
+									<Icon as={BiBook} sx={iconStyles} />
+									{__('Course', 'masteriyo')}
+								</Tab>
+								<Tab sx={tabStyles} isDisabled>
+									<Icon as={BiEdit} sx={iconStyles} />
+									{__('Builder', 'masteriyo')}
+								</Tab>
+								<Tab sx={tabStyles}>
+									<Icon as={BiCog} sx={iconStyles} />
+									{__('Settings', 'masteriyo')}
+								</Tab>
+							</TabList>
+						</Header>
 						<Container maxW="container.xl">
 							<Stack direction="column" spacing="8">
 								<Heading as="h1" size="xl">

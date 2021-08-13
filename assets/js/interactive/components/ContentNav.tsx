@@ -85,7 +85,7 @@ const ContentNav: React.FC<Props> = (props) => {
 					)}
 				</Box>
 
-				{quizStarted && (
+				{(quizStarted || type !== 'quiz') && (
 					<Button
 						onClick={onCompletePress}
 						isLoading={isButtonLoading}

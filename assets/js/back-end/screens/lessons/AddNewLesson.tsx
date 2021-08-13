@@ -20,6 +20,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
+import Header from '../../components/common/Header';
 import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
@@ -73,7 +74,7 @@ const AddNewLesson: React.FC = () => {
 	if (sectionQuery.isSuccess && sectionQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
-				{/* <Header showLinks course={{ name:sectionQuery id: courseId} /> */}
+				<Header showLinks />
 				<Container maxW="container.xl">
 					<Stack direction="column" spacing="6">
 						<PageNav

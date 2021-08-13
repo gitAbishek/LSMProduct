@@ -19,6 +19,7 @@ import { NavLink } from 'react-router-dom';
 import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
+import useCourse from '../../hooks/useCourse';
 
 interface Props {
 	firstBtn?: {
@@ -49,7 +50,7 @@ interface Props {
 
 const Header: React.FC<Props> = (props) => {
 	const { firstBtn, secondBtn, thirdBtn, course, children, showLinks } = props;
-
+	const courseDetail = useCourse();
 	return (
 		<Box bg="white" w="full" shadow="header">
 			<Container maxW="container.xl" bg="white">
@@ -61,6 +62,11 @@ const Header: React.FC<Props> = (props) => {
 						{course && (
 							<Heading fontSize="md" fontWeight="medium">
 								{course.name}
+							</Heading>
+						)}
+						{!course && courseDetail.courseName && (
+							<Heading fontSize="md" fontWeight="medium">
+								{courseDetail.courseName}
 							</Heading>
 						)}
 						{children}

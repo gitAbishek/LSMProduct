@@ -258,12 +258,7 @@ const EditOrder = () => {
 															'masteriyo'
 														)}
 														defaultValue={orderQuery.data.payment_method}
-														{...register('payment_method', {
-															required: __(
-																'Please select a payment method',
-																'masteriyo'
-															),
-														})}>
+														{...register('payment_method')}>
 														{paymentMethods.map((option) => (
 															<option key={option.value} value={option.value}>
 																{option.label}

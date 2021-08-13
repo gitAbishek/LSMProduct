@@ -148,7 +148,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 									defaultValue={courseArchiveData?.display?.per_row}
 									rules={{ required: 'Course per row is required.' }}
 									render={({ field }) => (
-										<NumberInput {...field} min={1} max={6}>
+										<NumberInput {...field} min={1} max={4}>
 											<NumberInputField borderRadius="sm" shadow="input" />
 											<NumberInputStepper>
 												<NumberIncrementStepper />

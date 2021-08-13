@@ -355,11 +355,10 @@ abstract class RestTermsController extends CrudController {
 
 		$args = array(
 			'taxonomy'   => $taxonomy,
-			'offset'     => $request['offset'],
 			'order'      => $request['order'],
 			'orderby'    => $request['orderby'],
-			'offset'     => $request['page'],
-			'paged'      => $request['page'],
+			'offset'     => ( $request['page'] - 1 ) * $request['per_page'] + 1,
+			'paged'      => ( $request['page'] - 1 ) * $request['per_page'] + 1,
 			'number'     => $request['per_page'],
 			'slug'       => $request['slug'],
 			'hide_empty' => $request['hide_empty'],
@@ -486,8 +485,8 @@ abstract class RestTermsController extends CrudController {
 			'sanitize_callback' => 'wp_parse_id_list',
 		);
 		if ( ! $taxonomy->hierarchical ) {
-			$params['offset'] = array(
-				'description'       => __( 'Offset the result set by a specific number of items.', 'masteriyo' ),
+			$params['page'] = array(
+				'description'       => __( 'Page of the items.', 'masteriyo' ),
 				'type'              => 'integer',
 				'sanitize_callback' => 'absint',
 				'validate_callback' => 'rest_validate_request_arg',
@@ -508,7 +507,7 @@ abstract class RestTermsController extends CrudController {
 			'description'       => __( 'Sort collection by resource attribute.', 'masteriyo' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_key',
-			'default'           => 'name',
+			'default'           => 'id',
 			'enum'              => array(
 				'id',
 				'include',

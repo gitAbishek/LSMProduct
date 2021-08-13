@@ -33,6 +33,7 @@ import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import PageNav from '../../components/common/PageNav';
+import PriceWithSymbol from '../../components/common/PriceWithSymbol';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
@@ -73,8 +74,12 @@ const orderStatusList = [
 ];
 const paymentMethods = [
 	{
-		label: __('Paypal', 'masteriyo'),
+		label: __('Standard Paypal', 'masteriyo'),
 		value: 'paypal',
+	},
+	{
+		label: __('Offline', 'masteriyo'),
+		value: 'offline',
 	},
 ];
 
@@ -463,7 +468,10 @@ const EditOrder = () => {
 														fontSize="sm"
 														fontWeight="medium"
 														color="gray.600">
-														{orderQuery.data?.currency} {orderItem.total}
+														{PriceWithSymbol(
+															orderItem.total,
+															orderQuery.data?.currency_symbol
+														)}
 													</Text>
 												</Stack>
 											))}

@@ -246,6 +246,7 @@ class OrdersController extends PostsController {
 			'status'               => $order->get_status( $context ),
 			'total'                => $order->get_total( $context ),
 			'currency'             => $order->get_currency( $context ),
+			'currency_symbol'      => html_entity_decode( masteriyo_get_currency_symbol( $order->get_currency( $context ) ) ),
 			'expiry_date'          => $order->get_expiry_date( $context ),
 			'date_created'         => masteriyo_rest_prepare_date_response( $order->get_date_created( $context ) ),
 			'date_modified'        => masteriyo_rest_prepare_date_response( $order->get_date_modified( $context ) ),
@@ -404,7 +405,7 @@ class OrdersController extends PostsController {
 					'description' => __( 'Payment method.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
-					'enum'        => array( 'paypal' ),
+					'enum'        => array( 'paypal', 'offline' ),
 				),
 				'payment_method_title' => array(
 					'description' => __( 'Payment method title.', 'masteriyo' ),
@@ -781,7 +782,7 @@ class OrdersController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -956,7 +957,7 @@ class OrdersController extends PostsController {
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to change the owner of the order.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}

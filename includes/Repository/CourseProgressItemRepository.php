@@ -328,7 +328,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 			$search_criteria[] = $wpdb->prepare( 'parent_id = %d', $query_vars['progress_id'] );
 		} else {
 			$course_progress = \masteriyo_get_course_progress_by_user_and_course( $query_vars['user_id'], $query_vars['item_id'] );
-			if ( ! is_wp_error( $course_progress ) ) {
+			if ( ! empty( $course_progress ) ) {
 				$search_criteria[] = $wpdb->prepare( 'parent_id = %d', $course_progress->get_id() );
 			}
 		}
@@ -383,7 +383,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	protected function validate_course_progress_item( &$course_progress_item ) {
 		// Bail early if the course progress is not valid.
 		$course_progress = masteriyo_get_course_progress_by_user_and_course( $course_progress_item->get_user_id( 'edit' ), $course_progress_item->get_course_id( 'edit' ) );
-		if ( is_wp_error( $course_progress ) ) {
+		if ( empty( $course_progress ) ) {
 			throw new RestException(
 				$course_progress->get_error_code(),
 				$course_progress->get_error_message(),
@@ -431,7 +431,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 			$course_progress = \masteriyo_get_course_progress_by_user_and_course( $user_id, $course_id );
 		}
 
-		if ( is_wp_error( $course_progress ) ) {
+		if ( empty( $course_progress ) ) {
 			return;
 		}
 
@@ -479,7 +479,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 		$status          = $completed ? 'complete' : 'progress';
 		$course_progress = masteriyo_get_course_progress_by_user_and_course( $user_id, $course_id );
 
-		if ( ! is_wp_error( $course_progress ) ) {
+		if ( ! empty( $course_progress ) ) {
 			$course_progress->set_status( $status );
 			$course_progress->save();
 		}

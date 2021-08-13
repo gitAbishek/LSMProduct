@@ -99,31 +99,17 @@ function masteriyo_get_course_progress_by_user_and_course( $user, $course ) {
 		$id = absint( $user );
 	}
 
-	try {
-		$query = new CourseProgressQuery(
-			array(
-				'course_id' => $course,
-				'user_id'   => $user,
-				'per_page'  => 1,
-			)
-		);
+	$query = new CourseProgressQuery(
+		array(
+			'course_id' => $course,
+			'user_id'   => $user,
+			'per_page'  => 1,
+		)
+	);
 
-		$course_progress = $query->get_course_progress();
+	$course_progress = current( $query->get_course_progress() );
 
-		if ( empty( $course_progress ) ) {
-			throw new ModelException(
-				'masteriyo_course_progress_not_exists',
-				__( 'Course progrss for the user\'s course doesn\'t exits.', 'masteriyo' ),
-				400
-			);
-		}
-
-		return $course_progress[0];
-	} catch ( \ModelException $e ) {
-		$course_progress_obj = new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
-	}
-
-	return apply_filters( 'masteriyo_get_course_progress', $course_progress_obj, $course_progress );
+	return apply_filters( 'masteriyo_get_course_progress', $course_progress, $course_progress );
 }
 
 /**

@@ -15,7 +15,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { ReactElement } from 'react';
 import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
@@ -51,6 +51,8 @@ interface Props {
 const Header: React.FC<Props> = (props) => {
 	const { firstBtn, secondBtn, thirdBtn, course, children, showLinks } = props;
 	const courseDetail = useCourse();
+	const location = useLocation();
+	const { courseId }: any = useParams();
 	return (
 		<Box bg="white" w="full" shadow="header">
 			<Container maxW="container.xl" bg="white">
@@ -70,7 +72,7 @@ const Header: React.FC<Props> = (props) => {
 							</Heading>
 						)}
 						{children}
-						{showLinks && course && (
+						{showLinks && courseId && (
 							<List d="flex">
 								<ListItem mb="0">
 									<Link
@@ -79,7 +81,7 @@ const Header: React.FC<Props> = (props) => {
 										_activeLink={navActiveStyles}
 										to={routes.courses.edit.replace(
 											':courseId',
-											course.id.toString()
+											courseId.toString()
 										)}>
 										<ListIcon as={BiBook} />
 										{__('Course', 'masteriyo')}
@@ -90,11 +92,12 @@ const Header: React.FC<Props> = (props) => {
 									<Link
 										as={NavLink}
 										sx={navLinkStyles}
+										isActive={() => location.pathname.includes('/courses')}
 										_activeLink={navActiveStyles}
 										to={
 											routes.courses.edit.replace(
 												':courseId',
-												course.id.toString()
+												courseId.toString()
 											) + '?page=builder'
 										}>
 										<ListIcon as={BiEdit} />
@@ -110,7 +113,7 @@ const Header: React.FC<Props> = (props) => {
 										to={
 											routes.courses.edit.replace(
 												':courseId',
-												course.id.toString()
+												courseId.toString()
 											) + '?page=settings'
 										}>
 										<ListIcon as={BiCog} />

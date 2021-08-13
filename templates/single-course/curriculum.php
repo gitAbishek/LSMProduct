@@ -30,16 +30,33 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 				<h3 class="title"><?php esc_html_e( 'Curriculum', 'masteriyo' ); ?></h3>
 				<ul class="mto-shortinfo-wrap">
 					<li class="mto-list-none">
-						<?php /* translators: %d: Course sections count */ ?>
-						<?php echo esc_html( sprintf( __( '%d section(s)', 'masteriyo' ), count( $sections ) ) ); ?>
+					<?php
+						printf(
+							/* translators: %d: Course sections count */
+							esc_html( _nx( '%s Section', '%s Sections', count( $sections ), 'Sections Count', 'masteriyo' ) ),
+							esc_html( number_format_i18n( count( $sections ) ) )
+						);
+						?>
 					</li>
 					<li>
-						<?php /* translators: %d: Course lessons count */ ?>
-						<?php echo esc_html( sprintf( __( '%d Lecture(s)', 'masteriyo' ), count( $lessons ) ) ); ?>
+					<?php
+						printf(
+							/* translators: %d: Course lessons count */
+							esc_html( _nx( '%s Lesson', '%s Lessons', count( $lessons ), 'Lessons Count', 'masteriyo' ) ),
+							esc_html( number_format_i18n( count( $lessons ) ) )
+						);
+						?>
 					</li>
 					<li>
-						<?php /* translators: %s: Lecture hours */ ?>
-						<?php echo esc_html( sprintf( __( '%s total length', 'masteriyo' ), masteriyo_get_lecture_hours( $course ) ) ); ?>
+					<?php
+						echo esc_html(
+							sprintf(
+								/* translators: %s: Lecture hours */
+								__( '%s Duration', 'masteriyo' ),
+								masteriyo_minutes_to_time_length_string( $course->get_duration() )
+							)
+						);
+						?>
 					</li>
 				</ul>
 			</div>
@@ -56,12 +73,13 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 
 					<div class="mto-ltc mto-flex-ycenter">
 						<span class="mto-clessons">
-							<?php /* translators: %d: Lessons count */ ?>
-							<?php echo esc_html( sprintf( __( '%d lessons', 'masteriyo' ), count( $dictionary[ $section->get_id() ] ) ) ); ?>
-						</span>
-
-						<span class="mto-csection">
-							<?php echo esc_html( masteriyo_get_lecture_hours_of_section( $section ) ); ?>
+							<?php
+							printf(
+								/* translators: %d: Course lessons count */
+								esc_html( _nx( '%s Lesson', '%s Lessons', count( $dictionary[ $section->get_id() ] ), 'Lessons Count', 'masteriyo' ) ),
+								esc_html( number_format_i18n( count( $dictionary[ $section->get_id() ] ) ) )
+							);
+							?>
 						</span>
 
 						<span class="mto-cplus mto-icon-svg">
@@ -80,7 +98,7 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 								<div class="mto-flex mto-flex--space-between mto-flex-ycenter plr-32">
 									<span class="mto-flex mto-flex--space-between mto-flex-ycenter">
 										<span class="mto-lesson-icon">
-											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M7 6v12l10-6z"></path></svg>
+											<?php masteriyo_get_svg( 'play', true ); ?>
 										</span>
 										<?php echo esc_html( $lesson->get_name() ); ?>
 								</span>

@@ -36,7 +36,13 @@ do_action( 'masteriyo_before_single_course_stats' );
 		<div class="mto-single-course--enroll mto-single-course--mdetail mto-icon-svg mto-flex">
 			<?php masteriyo_get_svg( 'comment', true ); ?>
 			<span>
-				<?php echo absint( $comments_count ); ?> <?php echo esc_html( _nx( 'Comment', 'Comments', $comments_count, 'Comments Count', 'masteriyo' ) ); ?>
+				<?php
+					printf(
+						/* translators: %d: Course comments count */
+						esc_html( _nx( '%s Comment', '%s Comments', $comments_count, 'Comments Count', 'masteriyo' ) ),
+						esc_html( number_format_i18n( $comments_count ) )
+					);
+					?>
 			</span>
 		</div>
 	</div>
@@ -46,7 +52,13 @@ do_action( 'masteriyo_before_single_course_stats' );
 		<div class="mto-single-course--enroll mto-single-course--mdetail mto-icon-svg mto-flex">
 			<?php masteriyo_get_svg( 'group', true ); ?>
 			<span>
-				<?php echo absint( $enrolled_users_count ); ?> <?php echo esc_html( _nx( 'Student', 'Students', $enrolled_users_count, 'Enrolled Students Count', 'masteriyo' ) ); ?>
+			<?php
+				printf(
+					/* translators: %d: Enrolled  students count */
+					esc_html( _nx( '%s Student', '%s Students', $enrolled_users_count, 'Enrolled Students Count', 'masteriyo' ) ),
+					esc_html( number_format_i18n( $enrolled_users_count ) )
+				);
+				?>
 			</span>
 		</div>
 	</div>

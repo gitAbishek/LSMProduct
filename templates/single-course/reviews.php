@@ -36,8 +36,13 @@ do_action( 'masteriyo_before_single_course_reviews' );
 	</div>
 	<p class="mto-stab--turating plr-32">
 		<span>
-			<?php /* translators: %s: Review Count */ ?>
-			<?php printf( esc_html__( '%s user ratings', 'masteriyo' ), esc_html( $course->get_review_count() ) ); ?>
+			<?php
+				printf(
+					/* translators: %d: Course comments count */
+					esc_html( _nx( '%s user rating', '%s user ratings', $course->get_review_count(), 'Course reviews', 'masteriyo' ) ),
+					esc_html( number_format_i18n( $course->get_review_count() ) )
+				);
+				?>
 		</span>
 	</p>
 

@@ -31,6 +31,7 @@ import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import useCourse from '../../hooks/useCourse';
 import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
@@ -47,6 +48,7 @@ const Builder: React.FC = () => {
 	const methods = useForm();
 	const history = useHistory();
 	const cancelRef = useRef<any>();
+	const course = useCourse();
 
 	const courseAPI = new API(urls.courses);
 	const builderAPI = new API(urls.builder);
@@ -83,7 +85,12 @@ const Builder: React.FC = () => {
 
 	const courseQuery = useQuery<CourseDataMap>(
 		[`course${courseId}`, courseId],
-		() => courseAPI.get(courseId)
+		() => courseAPI.get(courseId),
+		{
+			onSuccess: (data: CourseDataMap) => {
+				course.setCourseName(data.name);
+			},
+		}
 	);
 
 	const builderQuery = useQuery(

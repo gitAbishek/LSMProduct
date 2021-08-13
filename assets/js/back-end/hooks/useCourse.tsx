@@ -6,11 +6,17 @@ const useCourse = () => {
 	const { mtoOptions, setMtoOptions } = useContext(MasteriyoContext);
 
 	const courseId = (mtoOptions && mtoOptions?.course?.id) || false;
+	const courseName = (mtoOptions && mtoOptions?.course?.name) || false;
+
 	const setCourseId = (id: number) => {
 		setMtoOptions(deepMerge(mtoOptions, { course: { id: id } }));
 	};
 
-	return { courseId, setCourseId };
+	const setCourseName = (name: string) => {
+		setMtoOptions(deepMerge(mtoOptions, { course: { name: name } }));
+	};
+
+	return { courseId, setCourseId, courseName, setCourseName };
 };
 
 export default useCourse;

@@ -31,6 +31,7 @@ import {
 } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
+import PriceWithSymbol from '../../../components/common/PriceWithSymbol';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
@@ -62,7 +63,7 @@ interface Order {
 	date_created: string;
 	status: any;
 	total: string;
-	currency: string;
+	currency_symbol: string;
 	billing: BillingAdress;
 }
 interface Props {
@@ -71,7 +72,7 @@ interface Props {
 
 const OrderRow: React.FC<Props> = (props) => {
 	const { data } = props;
-	const { id, status, total, currency, billing } = data;
+	const { id, status, total, currency_symbol, billing } = data;
 	const order_number = makeOrderNumberLabel(data);
 	const queryClient = useQueryClient();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -126,10 +127,7 @@ const OrderRow: React.FC<Props> = (props) => {
 			<Td>
 				<Badge>{status}</Badge>
 			</Td>
-			<Td>
-				{currency}
-				{total}
-			</Td>
+			<Td>{PriceWithSymbol(total, currency_symbol)}</Td>
 			<Td>
 				<ButtonGroup>
 					<RouterLink

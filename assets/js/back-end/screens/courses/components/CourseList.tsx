@@ -25,9 +25,9 @@ import {
 	BiTrash,
 } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
+import PriceWithSymbol from '../../../components/common/PriceWithSymbol';
 import routes from '../../../constants/routes';
 import { CourseCategorySchema } from '../../../schemas';
-import { decodeEntity } from '../../../utils/utils';
 interface Props {
 	id: number;
 	name: string;
@@ -57,27 +57,6 @@ const CourseList: React.FC<Props> = (props) => {
 	//@ts-ignore
 	const currencySymbol = window._MASTERIYO_.currency.symbol;
 
-	//@ts-ignore
-	const currencyPosition = window._MASTERIYO_.currency.position;
-
-	const priceWithSymbol = (price: string, currencySymbol: string) => {
-		switch (currencyPosition) {
-			case 'left':
-				return `${decodeEntity(currencySymbol)}${price}`;
-
-			case 'right':
-				return `${price}${decodeEntity(currencySymbol)}`;
-
-			case 'left_space':
-				return `${decodeEntity(currencySymbol)} ${price}`;
-
-			case 'right_space':
-				return `${price} ${decodeEntity(currencySymbol)}`;
-			default:
-				// default set to left.
-				return `${decodeEntity(currencySymbol)}${price}`;
-		}
-	};
 	return (
 		<Tr>
 			<Td>
@@ -127,7 +106,7 @@ const CourseList: React.FC<Props> = (props) => {
 					<Badge textTransform="none">{__('Free', 'masteriyo')}</Badge>
 				) : (
 					<Text fontWeight="medium" fontSize="xs">
-						{priceWithSymbol(price, currencySymbol)}
+						{PriceWithSymbol(price, currencySymbol)}
 					</Text>
 				)}
 			</Td>

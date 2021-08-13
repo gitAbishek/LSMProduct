@@ -21,7 +21,6 @@ import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import Header from '../../components/common/Header';
-import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
@@ -77,11 +76,6 @@ const AddNewLesson: React.FC = () => {
 				<Header showLinks />
 				<Container maxW="container.xl">
 					<Stack direction="column" spacing="6">
-						<PageNav
-							currentTitle={__('Add New Lesson')}
-							courseName={sectionQuery?.data?.course_name}
-							courseId={courseId}
-						/>
 						<FormProvider {...methods}>
 							<Box bg="white" p="10" shadow="box">
 								<Stack direction="column" spacing="8">

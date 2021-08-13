@@ -6,10 +6,17 @@ import {
 	Flex,
 	Heading,
 	Image,
+	Link,
+	List,
+	ListIcon,
+	ListItem,
 	Stack,
 } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React, { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
+import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
+import { NavLink } from 'react-router-dom';
+import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 
@@ -37,25 +44,75 @@ interface Props {
 		name: string;
 		id: number;
 	};
+	showLinks?: boolean;
 }
 
 const Header: React.FC<Props> = (props) => {
-	const { firstBtn, secondBtn, thirdBtn, course, children } = props;
+	const { firstBtn, secondBtn, thirdBtn, course, children, showLinks } = props;
 
 	return (
 		<Box bg="white" w="full" shadow="header">
 			<Container maxW="container.xl" bg="white">
 				<Flex direction="row" justifyContent="space-between" align="center">
 					<Stack direction="row" spacing="8" align="center" minHeight="16">
-						<Link to={routes.courses.list}>
+						<NavLink to={routes.courses.list}>
 							<Image src={Logo} h="30px" />
-						</Link>
+						</NavLink>
 						{course && (
 							<Heading fontSize="md" fontWeight="medium">
 								{course.name}
 							</Heading>
 						)}
 						{children}
+						{showLinks && course && (
+							<List d="flex">
+								<ListItem mb="0">
+									<Link
+										as={NavLink}
+										sx={navLinkStyles}
+										_activeLink={navActiveStyles}
+										to={routes.courses.edit.replace(
+											':courseId',
+											course.id.toString()
+										)}>
+										<ListIcon as={BiBook} />
+										{__('Course', 'masteriyo')}
+									</Link>
+								</ListItem>
+
+								<ListItem mb="0">
+									<Link
+										as={NavLink}
+										sx={navLinkStyles}
+										_activeLink={navActiveStyles}
+										to={
+											routes.courses.edit.replace(
+												':courseId',
+												course.id.toString()
+											) + '?page=builder'
+										}>
+										<ListIcon as={BiEdit} />
+										{__('Builder', 'masteriyo')}
+									</Link>
+								</ListItem>
+
+								<ListItem mb="0">
+									<Link
+										as={NavLink}
+										sx={navLinkStyles}
+										_activeLink={navActiveStyles}
+										to={
+											routes.courses.edit.replace(
+												':courseId',
+												course.id.toString()
+											) + '?page=settings'
+										}>
+										<ListIcon as={BiCog} />
+										{__('Settings', 'masteriyo')}
+									</Link>
+								</ListItem>
+							</List>
+						)}
 					</Stack>
 
 					<ButtonGroup>

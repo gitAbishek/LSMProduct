@@ -6,15 +6,12 @@ import {
 	Flex,
 	Image,
 	Link,
-	List,
-	ListIcon,
-	ListItem,
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiBook, BiCog, BiEdit, BiShow } from 'react-icons/bi';
-import { Link as RouterLink, NavLink } from 'react-router-dom';
+import { BiShow } from 'react-icons/bi';
+import { Link as RouterLink } from 'react-router-dom';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 
@@ -57,54 +54,6 @@ const HeaderBuilder: React.FC<Props> = (props) => {
 								<Image src={Logo} alt="Masteriyo Logo" w="120px" />
 							</RouterLink>
 						</Box>
-						<List d="flex">
-							<ListItem mb="0">
-								<Link
-									as={NavLink}
-									sx={navLinkStyles}
-									_activeLink={navActiveStyles}
-									to={routes.courses.edit.replace(
-										':courseId',
-										courseId?.toString()
-									)}>
-									<ListIcon as={BiBook} />
-									{__('Course', 'masteriyo')}
-								</Link>
-							</ListItem>
-
-							{courseId && (
-								<ListItem mb="0">
-									<Link
-										as={NavLink}
-										sx={navLinkStyles}
-										_activeLink={navActiveStyles}
-										to={
-											routes.courses.edit.replace(
-												':courseId',
-												courseId.toString()
-											) + '?page=builder'
-										}>
-										<ListIcon as={BiEdit} />
-										{__('Builder', 'masteriyo')}
-									</Link>
-								</ListItem>
-							)}
-							<ListItem mb="0">
-								<Link
-									as={NavLink}
-									sx={navLinkStyles}
-									_activeLink={navActiveStyles}
-									to={
-										routes.courses.edit.replace(
-											':courseId',
-											courseId.toString()
-										) + '?page=settings'
-									}>
-									<ListIcon as={BiCog} />
-									{__('Settings', 'masteriyo')}
-								</Link>
-							</ListItem>
-						</List>
 					</Stack>
 
 					<ButtonGroup>

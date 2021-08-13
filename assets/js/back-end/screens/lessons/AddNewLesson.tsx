@@ -22,7 +22,6 @@ import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
-import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { LessonSchema, SectionSchema } from '../../schemas';
@@ -74,7 +73,7 @@ const AddNewLesson: React.FC = () => {
 	if (sectionQuery.isSuccess && sectionQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
-				<HeaderBuilder courseId={courseId} />
+				{/* <Header showLinks course={{ name:sectionQuery id: courseId} /> */}
 				<Container maxW="container.xl">
 					<Stack direction="column" spacing="6">
 						<PageNav

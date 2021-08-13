@@ -21,9 +21,9 @@ do_action( 'masteriyo_before_single_course_categories' );
 ?>
 <div class="mto-category plr-32 mt-2">
 	<?php foreach ( $course->get_categories( 'name' ) as $category ) : ?>
-		<span class="mto-category-items mto-tag">
+		<a href="<?php echo esc_attr( $category->get_permalink() ); ?>" class="mto-category-items mto-tag">
 			<?php echo esc_html( $category->get_name() ); ?>
-		</span>
+		</a>
 	<?php endforeach; ?>
 </div>
 <?php

@@ -59,7 +59,7 @@ const Header: React.FC<Props> = (props) => {
 				<Flex direction="row" justifyContent="space-between" align="center">
 					<Stack direction="row" spacing="8" align="center" minHeight="16">
 						<NavLink to={routes.courses.list}>
-							<Image src={Logo} h="30px" />
+							<Image src={Logo} w="36px" />
 						</NavLink>
 						{course && (
 							<Heading fontSize="md" fontWeight="medium">

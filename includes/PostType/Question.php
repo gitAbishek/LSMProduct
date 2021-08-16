@@ -64,7 +64,7 @@ class Question extends PostType {
 			'show_in_admin_bar'   => $debug,
 			'show_in_nav_menus'   => $debug,
 			'can_export'          => true,
-			'show_in_rest'        => true,
+			'show_in_rest'        => false,
 			'has_archive'         => true,
 			'map_meta_cap'        => true,
 			'capability_type'     => array( 'question', 'questions' ),

@@ -72,7 +72,7 @@ class Section extends PostType {
 			'show_in_menu'        => $debug,
 			'show_in_admin_bar'   => $debug,
 			'show_in_nav_menus'   => $debug,
-			'show_in_rest'        => true,
+			'show_in_rest'        => false,
 			'has_archive'         => false,
 			'map_meta_cap'        => true,
 			'capability_type'     => array( 'section', 'sections' ),

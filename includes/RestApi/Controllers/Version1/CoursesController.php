@@ -265,6 +265,27 @@ class CoursesController extends PostsController {
 	}
 
 	/**
+	 * Process objects collection.
+	 *
+	 * @param array $objects Courses data.
+	 * @param array $query_args Query arguments.
+	 * @param array $query_results Courses query result data.
+	 *
+	 * @return array
+	 */
+	protected function process_objects_collection( $objects, $query_args, $query_results ) {
+		return array(
+			'data' => $objects,
+			'meta' => array(
+				'total'        => $query_results['total'],
+				'pages'        => $query_results['pages'],
+				'current_page' => $query_args['paged'],
+				'per_page'     => $query_args['posts_per_page'],
+			),
+		);
+	}
+
+	/**
 	 * Get course data.
 	 *
 	 * @param Course $course Course instance.

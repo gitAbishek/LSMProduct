@@ -46,10 +46,19 @@ interface Props {
 		id: number;
 	};
 	showLinks?: boolean;
+	showPreview?: boolean;
 }
 
 const Header: React.FC<Props> = (props) => {
-	const { firstBtn, secondBtn, thirdBtn, course, children, showLinks } = props;
+	const {
+		firstBtn,
+		secondBtn,
+		thirdBtn,
+		course,
+		children,
+		showLinks,
+		showPreview,
+	} = props;
 	const courseDetail = useCourse();
 	const location = useLocation();
 	const { courseId }: any = useParams();
@@ -135,6 +144,11 @@ const Header: React.FC<Props> = (props) => {
 							</Button>
 						)}
 
+						{showPreview && courseDetail.previewUrl && (
+							<Link href={courseDetail.previewUrl} isExternal>
+								<Button variant="outline">{__('Preview', 'masteriyo')}</Button>
+							</Link>
+						)}
 						{secondBtn && (
 							<Button
 								variant="outline"

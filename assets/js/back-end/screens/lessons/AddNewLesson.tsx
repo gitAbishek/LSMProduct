@@ -24,6 +24,7 @@ import Header from '../../components/common/Header';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import useCourse from '../../hooks/useCourse';
 import { LessonSchema, SectionSchema } from '../../schemas';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
@@ -35,6 +36,7 @@ import VideoSource from './components/VideoSource';
 const AddNewLesson: React.FC = () => {
 	const { sectionId, courseId }: any = useParams();
 	const methods = useForm();
+	const { updateCourse } = useCourse();
 	const toast = useToast();
 	const history = useHistory();
 	const lessonAPI = new API(urls.lessons);
@@ -68,12 +70,20 @@ const AddNewLesson: React.FC = () => {
 			parent_id: sectionId,
 		};
 		addLesson.mutate(deepMerge(deepClean(data), newData));
+		updateCourse(courseId, { status: 'publish' });
 	};
 
 	if (sectionQuery.isSuccess && sectionQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
-				<Header showLinks />
+				<Header
+					showLinks
+					showPreview
+					thirdBtn={{
+						label: 'Publish',
+						action: methods.handleSubmit(onSubmit),
+					}}
+				/>
 				<Container maxW="container.xl">
 					<Stack direction="column" spacing="6">
 						<FormProvider {...methods}>

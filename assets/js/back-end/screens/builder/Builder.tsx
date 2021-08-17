@@ -89,6 +89,7 @@ const Builder: React.FC = () => {
 		{
 			onSuccess: (data: CourseDataMap) => {
 				course.setCourseName(data.name);
+				course.setPreviewUrl(data.preview_permalink);
 			},
 		}
 	);

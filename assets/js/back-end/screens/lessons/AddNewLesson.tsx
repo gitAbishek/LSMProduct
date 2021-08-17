@@ -18,7 +18,7 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import Header from '../../components/common/Header';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
@@ -35,9 +35,10 @@ import VideoSource from './components/VideoSource';
 
 const AddNewLesson: React.FC = () => {
 	const { sectionId, courseId }: any = useParams();
+	const toast = useToast();
+	const queryClient = useQueryClient();
 	const methods = useForm();
 	const { updateCourse } = useCourse();
-	const toast = useToast();
 	const history = useHistory();
 	const lessonAPI = new API(urls.lessons);
 	const sectionsAPI = new API(urls.sections);
@@ -49,28 +50,29 @@ const AddNewLesson: React.FC = () => {
 	);
 
 	// adds lesson on the database
-	const addLesson = useMutation((data: LessonSchema) => lessonAPI.store(data), {
-		onSuccess: (data: LessonSchema) => {
-			toast({
-				title: __('Lesson Added', 'masteriyo'),
-				description: data.name + __(' is successfully added.', 'masteriyo'),
-				isClosable: true,
-				status: 'success',
-			});
-			history.push({
-				pathname: routes.courses.edit.replace(':courseId', courseId),
-				search: '?page=builder',
-			});
-		},
-	});
+	const addLesson = useMutation((data: LessonSchema) => lessonAPI.store(data));
 
-	const onSubmit = (data: LessonSchema) => {
+	const onSubmit = (data: LessonSchema, status: 'publish' | 'draft') => {
 		const newData = {
 			course_id: courseId,
 			parent_id: sectionId,
 		};
-		addLesson.mutate(deepMerge(deepClean(data), newData));
-		updateCourse(courseId, { status: 'publish' });
+		updateCourse.mutate({ id: courseId, data: { status: status } });
+		addLesson.mutate(deepMerge(deepClean(data), newData), {
+			onSuccess: (data: LessonSchema) => {
+				toast({
+					title: data.name + __(' has been added', 'masteriyo'),
+					description: __('You can keep editing it', 'masteriyo'),
+					status: 'success',
+					isClosable: true,
+				});
+				queryClient.invalidateQueries(`course${data.id}`);
+				history.push({
+					pathname: routes.courses.edit.replace(':courseId', courseId),
+					search: '?page=builder',
+				});
+			},
+		});
 	};
 
 	if (sectionQuery.isSuccess && sectionQuery.data.course_id == courseId) {
@@ -81,7 +83,10 @@ const AddNewLesson: React.FC = () => {
 					showPreview
 					thirdBtn={{
 						label: 'Publish',
-						action: methods.handleSubmit(onSubmit),
+						action: methods.handleSubmit((data: LessonSchema) =>
+							onSubmit(data, 'draft')
+						),
+						isLoading: updateCourse.isLoading,
 					}}
 				/>
 				<Container maxW="container.xl">
@@ -112,7 +117,7 @@ const AddNewLesson: React.FC = () => {
 										</Menu>
 									</Flex>
 
-									<form onSubmit={methods.handleSubmit(onSubmit)}>
+									<form>
 										<Stack direction="column" spacing="6">
 											<Name />
 											<Description />

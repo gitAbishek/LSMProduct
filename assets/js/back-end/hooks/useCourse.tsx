@@ -1,5 +1,4 @@
 import { useToast } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
 import { useContext } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import urls from '../constants/urls';
@@ -31,27 +30,10 @@ const useCourse = () => {
 		);
 	};
 
-	const updateCourseMutation = useMutation(
-		({ id, data }: { id: number; data: CourseSchema }) =>
+	const updateCourse = useMutation(
+		({ id, data }: { id: number; data: CourseSchema | any }) =>
 			courseAPI.update(id, data)
 	);
-
-	const updateCourse = (id: number, data: any) => {
-		updateCourseMutation.mutate(
-			{ id, data },
-			{
-				onSuccess: (res: CourseSchema) => {
-					toast({
-						title: res.name + __(' is Published successfully.', 'masteriyo'),
-						description: __('You can keep editing it', 'masteriyo'),
-						status: 'success',
-						isClosable: true,
-					});
-					queryClient.invalidateQueries(`course${res.id}`);
-				},
-			}
-		);
-	};
 
 	return {
 		courseId,

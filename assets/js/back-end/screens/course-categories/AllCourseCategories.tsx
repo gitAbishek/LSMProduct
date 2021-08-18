@@ -8,9 +8,11 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
+	Center,
 	Container,
 	Heading,
 	Icon,
+	Input,
 	Link,
 	List,
 	ListItem,
@@ -26,6 +28,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import { BiPlus } from 'react-icons/bi';
+import { FaChevronLeft } from 'react-icons/fa';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { NavLink, useHistory } from 'react-router-dom';
 import Header from '../../components/common/Header';
@@ -45,11 +48,17 @@ const AllCourseCategories = () => {
 	const queryClient = useQueryClient();
 	const toast = useToast();
 	const history = useHistory();
-	const categoriesQuery = useQuery('courseCategoriesList', () =>
-		categoryAPI.list()
+
+	const [filterParams, setfilterParams] = useState({ page: 1 });
+	const [isLastPage, setIsLastPage] = useState(false);
+	const categoriesQuery = useQuery(['courseCategoriesList', filterParams], () =>
+		categoryAPI.list(filterParams)
 	);
 	const [deleteCategoryId, setDeleteCategoryId] = useState<number>();
 	const { onClose, onOpen, isOpen } = useDisclosure();
+
+	const prevPage = filterParams.page > 1 ? filterParams.page - 1 : 1;
+	const nextPage = filterParams.page + 1;
 
 	const cancelRef = useRef<any>();
 
@@ -140,6 +149,41 @@ const AllCourseCategories = () => {
 							</Table>
 						</Stack>
 					</Stack>
+					{categoriesQuery.isSuccess && (
+						<Center mt="5">
+							<ButtonGroup colorScheme="blue">
+								<Button
+									aria-label="Previous page"
+									onClick={() => {
+										setIsLastPage(false);
+										setfilterParams({
+											page: prevPage,
+										});
+									}}
+									isDisabled={filterParams.page < 2 ? true : false}
+									icon={<FaChevronLeft />}>
+									Previous
+								</Button>
+								<Input
+									type="number"
+									min={1}
+									value={filterParams.page}
+									isReadOnly={true}
+									maxW="12"
+								/>
+								<Button
+									onClick={() => {
+										setIsLastPage(true);
+										setfilterParams({
+											page: nextPage,
+										});
+									}}
+									isDisabled={isLastPage}>
+									Next
+								</Button>
+							</ButtonGroup>
+						</Center>
+					)}
 				</Box>
 			</Container>
 			<AlertDialog

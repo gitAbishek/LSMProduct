@@ -38,7 +38,7 @@ const AddNewLesson: React.FC = () => {
 	const toast = useToast();
 	const queryClient = useQueryClient();
 	const methods = useForm();
-	const { updateCourse } = useCourse();
+	const { draftCourse, publishCourse } = useCourse();
 	const history = useHistory();
 	const lessonAPI = new API(urls.lessons);
 	const sectionsAPI = new API(urls.sections);
@@ -57,7 +57,12 @@ const AddNewLesson: React.FC = () => {
 			course_id: courseId,
 			parent_id: sectionId,
 		};
-		updateCourse.mutate({ id: courseId, data: { status: status } });
+		if (status === 'draft') {
+			draftCourse.mutate(courseId);
+		} else {
+			publishCourse.mutate(courseId);
+		}
+
 		addLesson.mutate(deepMerge(deepClean(data), newData), {
 			onSuccess: (data: LessonSchema) => {
 				toast({
@@ -81,12 +86,19 @@ const AddNewLesson: React.FC = () => {
 				<Header
 					showLinks
 					showPreview
-					thirdBtn={{
-						label: 'Publish',
+					secondBtn={{
+						label: 'Save to Draft',
 						action: methods.handleSubmit((data: LessonSchema) =>
 							onSubmit(data, 'draft')
 						),
-						isLoading: updateCourse.isLoading,
+						isLoading: draftCourse.isLoading,
+					}}
+					thirdBtn={{
+						label: 'Publish',
+						action: methods.handleSubmit((data: LessonSchema) =>
+							onSubmit(data, 'publish')
+						),
+						isLoading: publishCourse.isLoading,
 					}}
 				/>
 				<Container maxW="container.xl">

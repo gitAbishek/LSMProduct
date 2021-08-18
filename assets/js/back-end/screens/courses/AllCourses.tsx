@@ -8,15 +8,19 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
+	Center,
 	Container,
 	Icon,
+	IconButton,
 	Link,
 	List,
 	ListIcon,
 	ListItem,
+	Select,
 	Stack,
 	Table,
 	Tbody,
+	Text,
 	Th,
 	Thead,
 	Tr,
@@ -25,6 +29,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { BiBook, BiPlus } from 'react-icons/bi';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { NavLink, useHistory } from 'react-router-dom';
 import Header from '../../components/common/Header';
@@ -46,6 +51,8 @@ interface FilterParams {
 	status?: string;
 	isOnlyFree?: boolean;
 	price?: string | number;
+	per_page?: number;
+	page?: number;
 }
 
 const AllCourses = () => {
@@ -119,7 +126,7 @@ const AllCourses = () => {
 								<Tbody>
 									{courseQuery.isLoading && <SkeletonCourseList />}
 									{courseQuery.isSuccess &&
-										courseQuery.data.map((course: any) => (
+										courseQuery.data.data.map((course: any) => (
 											<CourseList
 												id={course.id}
 												name={course.name}
@@ -139,6 +146,78 @@ const AllCourses = () => {
 					</Stack>
 				</Box>
 			</Container>
+			{courseQuery.isSuccess && (
+				<Center pb="8">
+					<Text fontSize="sm" fontWeight="semibold">
+						{__('Courses Per Page:', 'masteriyo')}
+					</Text>
+					<Select
+						defaultValue={courseQuery?.data?.meta?.per_page}
+						onChange={(e: any) => {
+							setFilterParams({
+								per_page: parseInt(e.target.value),
+							});
+						}}
+						w="15"
+						ml="2.5"
+						mr="2.5">
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+						<option value="40">40</option>
+						<option value="50">50</option>
+					</Select>
+
+					{/* <Box
+						color="gray.500"
+						borderColor="blue.300"
+						borderWidth="6px"
+						w="36"
+						mr="2.5">
+						<Text textAlign="center" fontSize="sm" fontWeight="semibold">
+							{__(
+								`${courseQuery?.data?.meta?.per_page} of ${courseQuery?.data?.meta?.total} courses`,
+								'masteriyo'
+							)}
+						</Text>
+					</Box> */}
+
+					<ButtonGroup colorScheme="blue">
+						<IconButton
+							isDisabled={courseQuery?.data?.meta?.current_page === 1}
+							aria-label="Previous page"
+							onClick={() =>
+								setFilterParams({
+									page:
+										courseQuery?.data?.meta?.current_page != 1
+											? courseQuery?.data?.meta?.current_page - 1
+											: courseQuery?.data?.meta?.current_page,
+									per_page: filterParams.per_page,
+								})
+							}
+							icon={<FaChevronLeft />}
+						/>
+						<IconButton
+							isDisabled={
+								courseQuery?.data?.meta?.current_page ===
+								courseQuery?.data?.meta?.pages
+							}
+							aria-label="Next page"
+							onClick={() =>
+								setFilterParams({
+									page:
+										courseQuery?.data?.meta?.current_page <
+										courseQuery?.data?.meta?.pages
+											? courseQuery?.data?.meta?.current_page + 1
+											: courseQuery?.data?.meta?.current_page,
+									per_page: filterParams.per_page,
+								})
+							}
+							icon={<FaChevronRight />}
+						/>
+					</ButtonGroup>
+				</Center>
+			)}
 			<AlertDialog
 				isOpen={isOpen}
 				onClose={onClose}

@@ -33,6 +33,16 @@ const useCourse = () => {
 			courseAPI.update(id, data)
 	);
 
+	const draftCourse = useMutation(
+		({ id, data }: { id: number; data: CourseSchema | any }) =>
+			courseAPI.update(id, deepMerge(data, { status: 'draft' }))
+	);
+
+	const publishCourse = useMutation(
+		({ id, data }: { id: number; data: CourseSchema | any }) =>
+			courseAPI.update(id, deepMerge(data, { status: 'publish' }))
+	);
+
 	return {
 		courseId,
 		setCourseId,
@@ -41,6 +51,8 @@ const useCourse = () => {
 		previewUrl,
 		setPreviewUrl,
 		updateCourse,
+		draftCourse,
+		publishCourse,
 	};
 };
 

@@ -88,7 +88,7 @@ class Masteriyo {
 	protected function init_hooks() {
 		add_action( 'init', array( $this, 'after_wp_init' ), 0 );
 		add_action( 'admin_bar_menu', array( $this, 'add_course_list_page_link' ), 35 );
-		add_action( 'admin_notices', array( $this, 'display_admin_notices' ) );
+		add_action( 'admin_notices', array( $this, 'masteriyo_display_compatibilty_notice' ) );
 
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_links' ), 10, 2 );
 		add_filter( 'plugin_action_links_' . Constants::get( 'MASTERIYO_PLUGIN_BASENAME' ), array( $this, 'add_plugin_action_links' ) );
@@ -99,6 +99,7 @@ class Masteriyo {
 		add_action( 'admin_init', array( $this, 'admin_redirects' ) );
 		add_action( 'after_setup_theme', array( $this, 'add_image_sizes' ) );
 
+		add_action( 'in_admin_header', array( __CLASS__, 'hide_admin_notices' ) );
 	}
 
 	/**
@@ -406,12 +407,56 @@ class Masteriyo {
 	 *
 	 * @since 0.1.0
 	 */
-	public function display_admin_notices() {
+	public function masteriyo_display_compatibilty_notice() {
 		if ( version_compare( get_bloginfo( 'version' ), '5.0', '<' ) ) {
 			// translators: %s: Dismiss link
 			$message = sprintf( esc_html__( 'Minimum WordPress version required to work Masteriyo is v5.0.', 'masteriyo' ) );
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			printf( '<div class="notice notice-warning"><p><strong>%s</strong>: %s</p></div>', 'Masteriyo', $message );
+		}
+	}
+
+	/**
+	 * Hide admin notices from Masteriyo admin screens.
+	 *
+	 * @since 0.1.0
+	 */
+	public static function hide_admin_notices() {
+		// Bail if we're not on a Masteriyo screen or page.
+		if ( empty( $_REQUEST['page'] ) || false === strpos( sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ), 'masteriyo' ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			return;
+		}
+
+		global $wp_filter;
+		$ignore_notices = array( 'masteriyo_display_compatibilty_notice' );
+
+		foreach ( array( 'user_admin_notices', 'admin_notices', 'all_admin_notices' ) as $wp_notice ) {
+			if ( empty( $wp_filter[ $wp_notice ] ) ) {
+				continue;
+			}
+
+			$hook_callbacks = $wp_filter[ $wp_notice ]->callbacks;
+
+			if ( empty( $hook_callbacks ) && is_array( $hook_callbacks ) ) {
+				continue;
+			}
+
+			foreach ( $hook_callbacks as $priority => $hooks ) {
+				foreach ( $hooks as $name => $callback ) {
+					if ( ! empty( $name ) && in_array( $name, $ignore_notices, true ) ) {
+						continue;
+					}
+					if (
+						! empty( $callback['function'] ) &&
+						isset( $callback['function'][0], $callback['function'][1] ) &&
+						is_object( $callback['function'][0] ) &&
+						in_array( $callback['function'][1], $ignore_notices, true )
+					) {
+						continue;
+					}
+					unset( $wp_filter[ $wp_notice ]->callbacks[ $priority ][ $name ] );
+				}
+			}
 		}
 	}
 

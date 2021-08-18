@@ -136,7 +136,15 @@ const AddNewLesson: React.FC = () => {
 												</Button>
 												<Button
 													variant="outline"
-													onClick={() => history.goBack()}>
+													onClick={() =>
+														history.push({
+															pathname: routes.courses.edit.replace(
+																':courseId',
+																courseId
+															),
+															search: '?page=builder',
+														})
+													}>
 													{__('Cancel', 'masteriyo')}
 												</Button>
 											</ButtonGroup>

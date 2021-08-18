@@ -1,6 +1,5 @@
-import { useToast } from '@chakra-ui/react';
 import { useContext } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import urls from '../constants/urls';
 import { MasteriyoContext } from '../context/MasteriyoProvider';
 import { CourseSchema } from '../schemas';
@@ -9,8 +8,7 @@ import { deepMerge } from '../utils/utils';
 
 const useCourse = () => {
 	const { mtoOptions, setMtoOptions } = useContext(MasteriyoContext);
-	const toast = useToast();
-	const queryClient = useQueryClient();
+
 	const courseId = (mtoOptions && mtoOptions?.course?.id) || false;
 	const courseName = (mtoOptions && mtoOptions?.course?.name) || false;
 	const previewUrl = (mtoOptions && mtoOptions?.course?.previewUrl) || false;

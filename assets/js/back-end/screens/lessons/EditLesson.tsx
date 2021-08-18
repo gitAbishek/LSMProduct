@@ -26,11 +26,12 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
+import Header from '../../components/common/Header';
 import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
-import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import useCourse from '../../hooks/useCourse';
 import { LessonSchema } from '../../schemas';
 import API from '../../utils/api';
 import { deepClean } from '../../utils/utils';
@@ -41,6 +42,7 @@ import VideoSource from './components/VideoSource';
 
 const EditLesson = () => {
 	const { lessonId, courseId }: any = useParams();
+	const { draftCourse, publishCourse } = useCourse();
 	const history = useHistory();
 	const methods = useForm();
 	const toast = useToast();
@@ -90,7 +92,12 @@ const EditLesson = () => {
 		}
 	);
 
-	const onSubmit = (data: LessonSchema) => {
+	const onSubmit = (data: LessonSchema, status: 'draft' | 'publish') => {
+		if (status === 'draft') {
+			draftCourse.mutate(courseId);
+		} else {
+			publishCourse.mutate(courseId);
+		}
 		updateLesson.mutate(deepClean(data));
 	};
 
@@ -109,7 +116,23 @@ const EditLesson = () => {
 	if (lessonQuery.isSuccess && lessonQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
-				<HeaderBuilder courseId={courseId} />
+				<Header
+					showLinks
+					showPreview
+					secondBtn={{
+						label: 'Save to Draft',
+						action: methods.handleSubmit((data: LessonSchema) =>
+							onSubmit(data, 'draft')
+						),
+						isLoading: draftCourse.isLoading,
+					}}
+					thirdBtn={{
+						label: 'Publish',
+						action: methods.handleSubmit((data: LessonSchema) =>
+							onSubmit(data, 'publish')
+						),
+						isLoading: publishCourse.isLoading,
+					}}></Header>
 				<Container maxW="container.xl">
 					<Stack direction="column" spacing="6">
 						<PageNav
@@ -140,7 +163,10 @@ const EditLesson = () => {
 										</Menu>
 									</Flex>
 
-									<form onSubmit={methods.handleSubmit(onSubmit)}>
+									<form
+										onSubmit={methods.handleSubmit((data: LessonSchema) =>
+											onSubmit(data, 'publish')
+										)}>
 										<Stack direction="column" spacing="6">
 											<Name defaultValue={lessonQuery.data.name} />
 											<Description

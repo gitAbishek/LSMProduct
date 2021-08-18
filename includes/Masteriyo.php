@@ -99,7 +99,7 @@ class Masteriyo {
 		add_action( 'admin_init', array( $this, 'admin_redirects' ) );
 		add_action( 'after_setup_theme', array( $this, 'add_image_sizes' ) );
 
-		add_action( 'in_admin_header', array( __CLASS__, 'hide_admin_notices' ) );
+		add_action( 'in_admin_header', array( $this, 'hide_admin_notices' ) );
 	}
 
 	/**
@@ -421,7 +421,7 @@ class Masteriyo {
 	 *
 	 * @since 0.1.0
 	 */
-	public static function hide_admin_notices() {
+	public function hide_admin_notices() {
 		// Bail if we're not on a Masteriyo screen or page.
 		if ( empty( $_REQUEST['page'] ) || false === strpos( sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ), 'masteriyo' ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			return;

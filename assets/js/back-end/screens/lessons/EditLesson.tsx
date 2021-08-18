@@ -92,12 +92,9 @@ const EditLesson = () => {
 		}
 	);
 
-	const onSubmit = (data: LessonSchema, status: 'draft' | 'publish') => {
-		if (status === 'draft') {
-			draftCourse.mutate(courseId);
-		} else {
-			publishCourse.mutate(courseId);
-		}
+	const onSubmit = (data: LessonSchema, status?: 'draft' | 'publish') => {
+		status === 'draft' && draftCourse.mutate(courseId);
+		status === 'publish' && publishCourse.mutate(courseId);
 		updateLesson.mutate(deepClean(data));
 	};
 
@@ -165,7 +162,7 @@ const EditLesson = () => {
 
 									<form
 										onSubmit={methods.handleSubmit((data: LessonSchema) =>
-											onSubmit(data, 'publish')
+											onSubmit(data)
 										)}>
 										<Stack direction="column" spacing="6">
 											<Name defaultValue={lessonQuery.data.name} />

@@ -1,4 +1,14 @@
 import {
+	Pagination,
+	PaginationContainer,
+	PaginationNext,
+	PaginationPage,
+	PaginationPageGroup,
+	PaginationPrevious,
+	PaginationSeparator,
+	usePagination,
+} from '@ajna/pagination';
+import {
 	AlertDialog,
 	AlertDialogBody,
 	AlertDialogContent,
@@ -8,10 +18,9 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Center,
 	Container,
+	HStack,
 	Icon,
-	IconButton,
 	Link,
 	List,
 	ListIcon,
@@ -66,7 +75,45 @@ const AllCourses = () => {
 	const courseQuery = useQuery(['courseList', filterParams], () =>
 		courseAPI.list(filterParams)
 	);
+
 	const cancelRef = React.useRef<any>();
+
+	const {
+		pages,
+		pagesCount,
+		currentPage,
+		setCurrentPage,
+		pageSize,
+		setPageSize,
+	} = usePagination({
+		total: courseQuery?.data?.meta?.total,
+		limits: {
+			outer: 2,
+			inner: 2,
+		},
+		initialState: {
+			pageSize: 10,
+			isDisabled: false,
+			currentPage: 1,
+		},
+	});
+
+	const handlePageChange = (nextPage: number): void => {
+		setFilterParams({
+			page: nextPage,
+			per_page: pageSize,
+		});
+		setCurrentPage(nextPage);
+	};
+
+	const handlePageSizeChange = (event: any): void => {
+		const pageSize = Number(event.target.value);
+
+		setFilterParams({
+			per_page: pageSize,
+		});
+		setPageSize(pageSize);
+	};
 
 	const deleteCourse = useMutation((id: number) => courseAPI.delete(id), {
 		onSuccess: () => {
@@ -83,6 +130,20 @@ const AllCourses = () => {
 	const onDeleteCofirm = () => {
 		deleteCourseId && deleteCourse.mutate(deleteCourseId);
 	};
+
+	// Current page highest value. For e.g if 1 - 10, 10 is highest.
+	const currentPageHighest =
+		courseQuery?.data?.meta?.per_page * courseQuery?.data?.meta?.current_page;
+
+	// Current page lowest value. For e.g if 1 - 10, 1 is lowest.
+	const displayCurrentPageLowest =
+		currentPageHighest - courseQuery?.data?.meta?.per_page + 1;
+
+	// Setting highest value depending on current page is last page or not.
+	const displayCurrentPageHighest =
+		courseQuery?.data?.meta?.current_page === courseQuery?.data?.meta?.pages
+			? courseQuery?.data?.meta?.total
+			: currentPageHighest;
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
@@ -145,79 +206,78 @@ const AllCourses = () => {
 						</Stack>
 					</Stack>
 				</Box>
-			</Container>
-			{courseQuery.isSuccess && (
-				<Center pb="8">
-					<Text fontSize="sm" fontWeight="semibold">
-						{__('Courses Per Page:', 'masteriyo')}
-					</Text>
-					<Select
-						defaultValue={courseQuery?.data?.meta?.per_page}
-						onChange={(e: any) => {
-							setFilterParams({
-								per_page: parseInt(e.target.value),
-							});
-						}}
-						w="15"
-						ml="2.5"
-						mr="2.5">
-						<option value="10">10</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
-						<option value="40">40</option>
-						<option value="50">50</option>
-					</Select>
-
-					{/* <Box
-						color="gray.500"
-						borderColor="blue.300"
-						borderWidth="6px"
-						w="36"
-						mr="2.5">
-						<Text textAlign="center" fontSize="sm" fontWeight="semibold">
+				{courseQuery.isSuccess && (
+					<Stack
+						mt="8"
+						w="full"
+						direction="row"
+						justifyContent="space-between"
+						pb="4">
+						<Text color="gray.500">
 							{__(
-								`${courseQuery?.data?.meta?.per_page} of ${courseQuery?.data?.meta?.total} courses`,
+								`Showing ${displayCurrentPageLowest} - 
+								${displayCurrentPageHighest}
+								out of ${courseQuery?.data?.meta?.total}`,
 								'masteriyo'
 							)}
 						</Text>
-					</Box> */}
-
-					<ButtonGroup colorScheme="blue">
-						<IconButton
-							isDisabled={courseQuery?.data?.meta?.current_page === 1}
-							aria-label="Previous page"
-							onClick={() =>
-								setFilterParams({
-									page:
-										courseQuery?.data?.meta?.current_page != 1
-											? courseQuery?.data?.meta?.current_page - 1
-											: courseQuery?.data?.meta?.current_page,
-									per_page: filterParams.per_page,
-								})
-							}
-							icon={<FaChevronLeft />}
-						/>
-						<IconButton
-							isDisabled={
-								courseQuery?.data?.meta?.current_page ===
-								courseQuery?.data?.meta?.pages
-							}
-							aria-label="Next page"
-							onClick={() =>
-								setFilterParams({
-									page:
-										courseQuery?.data?.meta?.current_page <
-										courseQuery?.data?.meta?.pages
-											? courseQuery?.data?.meta?.current_page + 1
-											: courseQuery?.data?.meta?.current_page,
-									per_page: filterParams.per_page,
-								})
-							}
-							icon={<FaChevronRight />}
-						/>
-					</ButtonGroup>
-				</Center>
-			)}
+						<HStack>
+							<Text color="gray.500">
+								{__('Courses Per Page:', 'masteriyo')}
+							</Text>
+							<Select
+								defaultValue={courseQuery?.data?.meta?.per_page}
+								ml={3}
+								onChange={handlePageSizeChange}
+								w={20}>
+								<option value="5">5</option>
+								<option value="10">10</option>
+								<option value="20">20</option>
+								<option value="30">30</option>
+								<option value="40">40</option>
+								<option value="50">50</option>
+							</Select>
+							<Pagination
+								pagesCount={pagesCount}
+								currentPage={currentPage}
+								onPageChange={handlePageChange}>
+								<PaginationContainer>
+									<PaginationPrevious>
+										<FaChevronLeft />
+									</PaginationPrevious>
+									<PaginationPageGroup
+										isInline
+										align="center"
+										separator={
+											<PaginationSeparator fontSize="sm" w={7} jumpSize={3} />
+										}>
+										{pages.map((page: number) => (
+											<PaginationPage
+												w={7}
+												key={`pagination_page_${page}`}
+												page={page}
+												fontSize="sm"
+												_hover={{
+													bg: 'blue.400',
+												}}
+												_current={{
+													bg: 'blue.400',
+													fontSize: 'sm',
+													w: 7,
+												}}
+												variant="outline"
+											/>
+										))}
+									</PaginationPageGroup>
+									<PaginationNext>
+										<FaChevronRight />
+									</PaginationNext>
+								</PaginationContainer>
+							</Pagination>
+						</HStack>
+					</Stack>
+				)}
+			</Container>
 			<AlertDialog
 				isOpen={isOpen}
 				onClose={onClose}

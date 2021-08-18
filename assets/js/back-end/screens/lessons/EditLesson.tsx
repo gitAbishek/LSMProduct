@@ -193,9 +193,13 @@ const EditLesson = () => {
 												<Button
 													variant="outline"
 													onClick={() =>
-														history.push(
-															routes.courses.edit.replace(':courseId', courseId)
-														)
+														history.push({
+															pathname: routes.courses.edit.replace(
+																':courseId',
+																courseId
+															),
+															search: '?page=builder',
+														})
 													}>
 													{__('Cancel', 'masteriyo')}
 												</Button>

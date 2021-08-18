@@ -22,11 +22,12 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
+import Header from '../../components/common/Header';
 import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
-import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import useCourse from '../../hooks/useCourse';
 import { QuizSchema as QuizSchemaOld, SectionSchema } from '../../schemas';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
@@ -46,6 +47,7 @@ const AddNewQuiz: React.FC = () => {
 	const toast = useToast();
 	const sectionsAPI = new API(urls.sections);
 	const quizAPI = new API(urls.quizes);
+	const { draftCourse, publishCourse } = useCourse();
 
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -74,7 +76,7 @@ const AddNewQuiz: React.FC = () => {
 		},
 	});
 
-	const onSubmit = (data: QuizSchema) => {
+	const onSubmit = (data: QuizSchema, status?: 'draft' | 'publish') => {
 		const newData = {
 			course_id: courseId,
 			parent_id: sectionId,
@@ -84,13 +86,32 @@ const AddNewQuiz: React.FC = () => {
 			duration_minute: null,
 		};
 
+		status === 'draft' && draftCourse.mutate(courseId);
+		status === 'publish' && publishCourse.mutate(courseId);
+
 		addQuiz.mutate(deepClean(deepMerge(data, newData)));
 	};
 
 	if (sectionQuery.isSuccess && sectionQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
-				<HeaderBuilder courseId={courseId} />
+				<Header
+					showLinks
+					showPreview
+					secondBtn={{
+						label: 'Save to Draft',
+						action: methods.handleSubmit((data: QuizSchema) =>
+							onSubmit(data, 'draft')
+						),
+						isLoading: draftCourse.isLoading,
+					}}
+					thirdBtn={{
+						label: 'Publish',
+						action: methods.handleSubmit((data: QuizSchema) =>
+							onSubmit(data, 'publish')
+						),
+						isLoading: publishCourse.isLoading,
+					}}></Header>
 				<Container maxW="container.xl">
 					<Stack direction="column" spacing="6">
 						<PageNav
@@ -107,7 +128,10 @@ const AddNewQuiz: React.FC = () => {
 										</Heading>
 									</Flex>
 
-									<form onSubmit={methods.handleSubmit(onSubmit)}>
+									<form
+										onSubmit={methods.handleSubmit((data: QuizSchema) =>
+											onSubmit(data)
+										)}>
 										<Stack direction="column" spacing="6">
 											<Tabs>
 												<TabList justifyContent="center" borderBottom="1px">
@@ -156,9 +180,13 @@ const AddNewQuiz: React.FC = () => {
 												<Button
 													variant="outline"
 													onClick={() =>
-														history.push(
-															routes.courses.edit.replace(':courseId', courseId)
-														)
+														history.push({
+															pathname: routes.courses.edit.replace(
+																':courseId',
+																courseId
+															),
+															search: '?page=builder',
+														})
 													}>
 													{__('Cancel', 'masteriyo')}
 												</Button>

@@ -27,7 +27,6 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import AddCategoryModal from '../../components/common/AddCategoryModal';
 import Header from '../../components/common/Header';
-import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
@@ -59,9 +58,6 @@ const Builder: React.FC = () => {
 	const { page } = queryString.parse(search);
 	const [tabIndex, setTabIndex] = useState<number>(
 		page === 'builder' ? 1 : page === 'settings' ? 2 : 0
-	);
-	const [currentPageName, setCurrentPageName] = useState<string>(
-		page === 'builder' ? 'Builder' : page === 'settings' ? 'Settings' : 'Edit'
 	);
 
 	const tabStyles = {
@@ -232,7 +228,6 @@ const Builder: React.FC = () => {
 									<Tab
 										sx={tabStyles}
 										onClick={() => {
-											setCurrentPageName(__('Edit', 'masteriyo'));
 											history.push(
 												routes.courses.edit.replace(':courseId', courseId)
 											);
@@ -243,7 +238,6 @@ const Builder: React.FC = () => {
 									<Tab
 										sx={tabStyles}
 										onClick={() => {
-											setCurrentPageName(__('Builder', 'masteriyo'));
 											history.push({
 												pathname: routes.courses.edit.replace(
 													':courseId',
@@ -258,7 +252,6 @@ const Builder: React.FC = () => {
 									<Tab
 										sx={tabStyles}
 										onClick={() => {
-											setCurrentPageName(__('Settings', 'masteriyo'));
 											history.push({
 												pathname: routes.courses.edit.replace(
 													':courseId',
@@ -274,10 +267,6 @@ const Builder: React.FC = () => {
 							</Header>
 							<Container maxW="container.xl">
 								<Stack direction="column" spacing="2">
-									<PageNav
-										courseName={courseQuery.data.name}
-										currentTitle={currentPageName}
-									/>
 									<TabPanels>
 										<TabPanel sx={tabPanelStyles}>
 											<EditCourse courseData={courseQuery.data} />

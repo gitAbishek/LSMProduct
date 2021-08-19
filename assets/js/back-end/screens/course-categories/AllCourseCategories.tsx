@@ -10,6 +10,11 @@ import {
 	ButtonGroup,
 	Container,
 	Heading,
+	Icon,
+	Link,
+	List,
+	ListIcon,
+	ListItem,
 	Stack,
 	Table,
 	Tbody,
@@ -21,19 +26,26 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
+import { BiBook, BiPlus } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import PageNav from '../../components/common/PageNav';
-import { tableStyles } from '../../config/styles';
+import { NavLink, useHistory } from 'react-router-dom';
+import Header from '../../components/common/Header';
+import {
+	navActiveStyles,
+	navLinkStyles,
+	tableStyles,
+} from '../../config/styles';
+import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonCourseTaxonomy } from '../../skeleton';
 import API from '../../utils/api';
 import CategoryRow from './components/CategoryRow';
-import Header from './components/Header';
 
 const AllCourseCategories = () => {
 	const categoryAPI = new API(urls.categories);
 	const queryClient = useQueryClient();
 	const toast = useToast();
+	const history = useHistory();
 	const categoriesQuery = useQuery('courseCategoriesList', () =>
 		categoryAPI.list()
 	);
@@ -72,49 +84,65 @@ const AllCourseCategories = () => {
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
-			<Header />
+			<Header
+				showLinks
+				thirdBtn={{
+					label: __('Add New Category', 'masteriyo'),
+					action: () => history.push(routes.course_categories.add),
+					icon: <Icon as={BiPlus} fontSize="md" />,
+				}}>
+				<List>
+					<ListItem>
+						<Link
+							as={NavLink}
+							sx={navLinkStyles}
+							_activeLink={navActiveStyles}
+							to={routes.course_categories.list}>
+							<ListIcon as={BiBook} />
+							{__('Categories', 'masteriyo')}
+						</Link>
+					</ListItem>
+				</List>
+			</Header>
 			<Container maxW="container.xl">
-				<Stack direction="column" spacing="6">
-					<PageNav currentTitle={__('Categories', 'masteriyo')} />
-					<Box bg="white" py="12" shadow="box" mx="auto">
+				<Box bg="white" py="12" shadow="box" mx="auto">
+					<Stack direction="column" spacing="8">
+						<Box px="12">
+							<Heading as="h1" size="lg">
+								{__('Categories', 'masteriyo')}
+							</Heading>
+						</Box>
 						<Stack direction="column" spacing="8">
-							<Box px="12">
-								<Heading as="h1" size="lg">
-									{__('Categories', 'masteriyo')}
-								</Heading>
-							</Box>
-							<Stack direction="column" spacing="8">
-								<Table size="sm" sx={tableStyles}>
-									<Thead>
-										<Tr>
-											<Th>{__('Name', 'masteriyo')}</Th>
-											<Th>{__('Description', 'masteriyo')}</Th>
-											<Th>{__('Slug', 'masteriyo')}</Th>
-											<Th>{__('Count', 'masteriyo')}</Th>
-											<Th>{__('Actions', 'masteriyo')}</Th>
-										</Tr>
-									</Thead>
-									<Tbody>
-										{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
-										{categoriesQuery.isSuccess &&
-											categoriesQuery.data.map((cat: any) => (
-												<CategoryRow
-													key={cat.id}
-													id={cat.id}
-													name={cat.name}
-													description={cat.description}
-													slug={cat.slug}
-													count={cat.count}
-													link={cat.link}
-													onDeletePress={onDeletePress}
-												/>
-											))}
-									</Tbody>
-								</Table>
-							</Stack>
+							<Table size="sm" sx={tableStyles}>
+								<Thead>
+									<Tr>
+										<Th>{__('Name', 'masteriyo')}</Th>
+										<Th>{__('Description', 'masteriyo')}</Th>
+										<Th>{__('Slug', 'masteriyo')}</Th>
+										<Th>{__('Count', 'masteriyo')}</Th>
+										<Th>{__('Actions', 'masteriyo')}</Th>
+									</Tr>
+								</Thead>
+								<Tbody>
+									{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
+									{categoriesQuery.isSuccess &&
+										categoriesQuery.data.map((cat: any) => (
+											<CategoryRow
+												key={cat.id}
+												id={cat.id}
+												name={cat.name}
+												description={cat.description}
+												slug={cat.slug}
+												count={cat.count}
+												link={cat.link}
+												onDeletePress={onDeletePress}
+											/>
+										))}
+								</Tbody>
+							</Table>
 						</Stack>
-					</Box>
-				</Stack>
+					</Stack>
+				</Box>
 			</Container>
 			<AlertDialog
 				isOpen={isOpen}

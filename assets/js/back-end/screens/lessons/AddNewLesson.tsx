@@ -52,16 +52,13 @@ const AddNewLesson: React.FC = () => {
 	// adds lesson on the database
 	const addLesson = useMutation((data: LessonSchema) => lessonAPI.store(data));
 
-	const onSubmit = (data: LessonSchema, status: 'publish' | 'draft') => {
+	const onSubmit = (data: LessonSchema, status?: 'publish' | 'draft') => {
 		const newData = {
 			course_id: courseId,
 			parent_id: sectionId,
 		};
-		if (status === 'draft') {
-			draftCourse.mutate(courseId);
-		} else {
-			publishCourse.mutate(courseId);
-		}
+		status === 'draft' && draftCourse.mutate(courseId);
+		status === 'publish' && publishCourse.mutate(courseId);
 
 		addLesson.mutate(deepMerge(deepClean(data), newData), {
 			onSuccess: (data: LessonSchema) => {
@@ -129,7 +126,10 @@ const AddNewLesson: React.FC = () => {
 										</Menu>
 									</Flex>
 
-									<form>
+									<form
+										onSubmit={methods.handleSubmit((data: LessonSchema) =>
+											onSubmit(data)
+										)}>
 										<Stack direction="column" spacing="6">
 											<Name />
 											<Description />

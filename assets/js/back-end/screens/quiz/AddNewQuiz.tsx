@@ -111,7 +111,8 @@ const AddNewQuiz: React.FC = () => {
 							onSubmit(data, 'publish')
 						),
 						isLoading: publishCourse.isLoading,
-					}}></Header>
+					}}
+				/>
 				<Container maxW="container.xl">
 					<Stack direction="column" spacing="6">
 						<PageNav

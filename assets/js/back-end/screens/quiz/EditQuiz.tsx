@@ -20,11 +20,12 @@ import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
+import Header from '../../components/common/Header';
 import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
-import HeaderBuilder from '../../components/layout/HeaderBuilder';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import useCourse from '../../hooks/useCourse';
 import { QuizSchema as QuizSchemaOld } from '../../schemas';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
@@ -42,7 +43,7 @@ const EditQuiz: React.FC = () => {
 	const { quizId, courseId }: any = useParams();
 	const { search } = useLocation();
 	const { page } = queryString.parse(search);
-
+	const { draftCourse, publishCourse } = useCourse();
 	const methods = useForm();
 	const history = useHistory();
 	const toast = useToast();
@@ -79,12 +80,14 @@ const EditQuiz: React.FC = () => {
 		}
 	);
 
-	const onSubmit = (data: QuizSchema) => {
+	const onSubmit = (data: QuizSchema, status?: 'draft' | 'publish') => {
 		const newData: any = {
 			duration: (data?.duration_hour || 0) * 60 + +(data?.duration_minute || 0),
 			duration_hour: null,
 			duration_minute: null,
 		};
+		status === 'draft' && draftCourse.mutate(courseId);
+		status === 'publish' && publishCourse.mutate(courseId);
 
 		updateQuiz.mutate(deepClean(deepMerge(data, newData)));
 	};
@@ -92,7 +95,24 @@ const EditQuiz: React.FC = () => {
 	if (quizQuery.isSuccess && quizQuery.data.course_id == courseId) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
-				<HeaderBuilder courseId={courseId} />
+				<Header
+					showLinks
+					showPreview
+					secondBtn={{
+						label: 'Save to Draft',
+						action: methods.handleSubmit((data: QuizSchema) =>
+							onSubmit(data, 'draft')
+						),
+						isLoading: draftCourse.isLoading,
+					}}
+					thirdBtn={{
+						label: 'Publish',
+						action: methods.handleSubmit((data: QuizSchema) =>
+							onSubmit(data, 'publish')
+						),
+						isLoading: publishCourse.isLoading,
+					}}
+				/>
 				<Container maxW="container.xl">
 					<Stack direction="column" spacing="6">
 						<PageNav
@@ -128,7 +148,10 @@ const EditQuiz: React.FC = () => {
 											<TabPanel sx={tabPanelStyles}></TabPanel>
 										</TabPanels>
 									</Tabs>
-									<form onSubmit={methods.handleSubmit(onSubmit)}>
+									<form
+										onSubmit={methods.handleSubmit((data: QuizSchema) =>
+											onSubmit(data)
+										)}>
 										<Stack direction="column" spacing="6">
 											{tabIndex === 0 && (
 												<>

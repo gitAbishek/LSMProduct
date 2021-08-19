@@ -20,6 +20,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
+import BackToBuilder from '../../components/common/BackToBuilder';
 import Header from '../../components/common/Header';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
@@ -101,6 +102,7 @@ const AddNewLesson: React.FC = () => {
 				/>
 				<Container maxW="container.xl">
 					<Stack direction="column" spacing="6">
+						<BackToBuilder />
 						<FormProvider {...methods}>
 							<Box bg="white" p="10" shadow="box">
 								<Stack direction="column" spacing="8">

@@ -22,8 +22,8 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
+import BackToBuilder from '../../components/common/BackToBuilder';
 import Header from '../../components/common/Header';
-import PageNav from '../../components/common/PageNav';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
@@ -116,11 +116,7 @@ const AddNewQuiz: React.FC = () => {
 				/>
 				<Container maxW="container.xl">
 					<Stack direction="column" spacing="6">
-						<PageNav
-							currentTitle={__('Add New Quiz')}
-							courseName={sectionQuery?.data?.course_name}
-							courseId={courseId}
-						/>
+						<BackToBuilder />
 						<FormProvider {...methods}>
 							<Box bg="white" p="10" shadow="box">
 								<Stack direction="column" spacing="8">

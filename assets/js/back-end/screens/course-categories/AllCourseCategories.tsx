@@ -13,7 +13,6 @@ import {
 	Icon,
 	Link,
 	List,
-	ListIcon,
 	ListItem,
 	Stack,
 	Table,
@@ -26,7 +25,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
-import { BiBook, BiPlus } from 'react-icons/bi';
+import { BiPlus } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { NavLink, useHistory } from 'react-router-dom';
 import Header from '../../components/common/Header';
@@ -98,7 +97,6 @@ const AllCourseCategories = () => {
 							sx={navLinkStyles}
 							_activeLink={navActiveStyles}
 							to={routes.course_categories.list}>
-							<ListIcon as={BiBook} />
 							{__('Categories', 'masteriyo')}
 						</Link>
 					</ListItem>

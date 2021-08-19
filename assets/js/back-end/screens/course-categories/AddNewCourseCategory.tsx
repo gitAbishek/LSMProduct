@@ -6,6 +6,9 @@ import {
 	Divider,
 	Flex,
 	Heading,
+	Link,
+	List,
+	ListItem,
 	Stack,
 	useToast,
 } from '@chakra-ui/react';
@@ -14,7 +17,9 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
-import PageNav from '../../components/common/PageNav';
+import { NavLink } from 'react-router-dom';
+import Header from '../../components/common/Header';
+import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
@@ -59,12 +64,21 @@ const AddNewCourseCategory = () => {
 	};
 
 	return (
-		<Container maxW="container.xl" marginTop="6">
-			<Stack direction="column" spacing="6">
-				<PageNav
-					currentTitle={__('Add New Category', 'masteriyo')}
-					hasCategoryName
-				/>
+		<Stack direction="column" spacing="8" alignItems="center">
+			<Header>
+				<List>
+					<ListItem>
+						<Link
+							as={NavLink}
+							sx={navLinkStyles}
+							_activeLink={navActiveStyles}
+							to={routes.course_categories.add}>
+							{__('Add New Category', 'masteriyo')}
+						</Link>
+					</ListItem>
+				</List>
+			</Header>
+			<Container maxW="container.xl" marginTop="6">
 				<FormProvider {...methods}>
 					<Box bg="white" p="10" shadow="box">
 						<Stack direction="column" spacing="8">
@@ -104,8 +118,8 @@ const AddNewCourseCategory = () => {
 						</Stack>
 					</Box>
 				</FormProvider>
-			</Stack>
-		</Container>
+			</Container>
+		</Stack>
 	);
 };
 

@@ -2,6 +2,9 @@ import {
 	Box,
 	Container,
 	Heading,
+	Link,
+	List,
+	ListItem,
 	Stack,
 	Table,
 	Tbody,
@@ -12,8 +15,14 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useQuery } from 'react-query';
-import PageNav from '../../components/common/PageNav';
-import { tableStyles } from '../../config/styles';
+import { NavLink } from 'react-router-dom';
+import Header from '../../components/common/Header';
+import {
+	navActiveStyles,
+	navLinkStyles,
+	tableStyles,
+} from '../../config/styles';
+import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonOrdersList } from '../../skeleton';
 import API from '../../utils/api';
@@ -24,9 +33,21 @@ const AllOrders = () => {
 	const ordersQuery = useQuery('ordersList', () => ordersAPI.list());
 
 	return (
-		<Container maxW="container.xl" marginTop="6">
-			<Stack direction="column" spacing="6">
-				<PageNav currentTitle={__('Orders', 'masteriyo')} />
+		<Stack direction="column" spacing="8" alignItems="center">
+			<Header showLinks>
+				<List>
+					<ListItem>
+						<Link
+							as={NavLink}
+							sx={navLinkStyles}
+							_activeLink={navActiveStyles}
+							to={routes.orders.list}>
+							{__('Orders', 'masteriyo')}
+						</Link>
+					</ListItem>
+				</List>
+			</Header>
+			<Container maxW="container.xl" marginTop="6">
 				<Box bg="white" py="12" shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
 						<Box px="12">
@@ -56,8 +77,8 @@ const AllOrders = () => {
 						</Stack>
 					</Stack>
 				</Box>
-			</Stack>
-		</Container>
+			</Container>
+		</Stack>
 	);
 };
 

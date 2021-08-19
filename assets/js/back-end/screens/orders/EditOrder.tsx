@@ -17,6 +17,9 @@ import {
 	Heading,
 	IconButton,
 	Input,
+	Link,
+	List,
+	ListItem,
 	Menu,
 	MenuButton,
 	MenuItem,
@@ -32,9 +35,11 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import PageNav from '../../components/common/PageNav';
+import { NavLink } from 'react-router-dom';
+import Header from '../../components/common/Header';
 import PriceWithSymbol from '../../components/common/PriceWithSymbol';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
+import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { OrderItemSchema, OrderSchema } from '../../schemas';
@@ -180,9 +185,21 @@ const EditOrder = () => {
 
 	if (orderQuery.isSuccess && orderItemsQuery.isSuccess) {
 		return (
-			<Container maxW="container.xl" marginTop="6">
-				<Stack direction="column" spacing="6">
-					<PageNav currentTitle={orderQuery.data.id} isOrder />
+			<Stack direction="column" spacing="8" alignItems="center">
+				<Header showLinks>
+					<List>
+						<ListItem>
+							<Link
+								as={NavLink}
+								sx={navLinkStyles}
+								_activeLink={navActiveStyles}
+								to={routes.orders.list}>
+								{__('Orders', 'masteriyo')}
+							</Link>
+						</ListItem>
+					</List>
+				</Header>
+				<Container maxW="container.xl" marginTop="6">
 					<Box bg="white" p="10" shadow="box">
 						<Stack direction="column" spacing="8">
 							<Flex aling="center" justify="space-between">
@@ -534,8 +551,8 @@ const EditOrder = () => {
 							</AlertDialogContent>
 						</AlertDialogOverlay>
 					</AlertDialog>
-				</Stack>
-			</Container>
+				</Container>
+			</Stack>
 		);
 	}
 	return <FullScreenLoader />;

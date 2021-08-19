@@ -98,6 +98,7 @@ const EditQuiz: React.FC = () => {
 				<Header
 					showLinks
 					showPreview
+					showCourseName
 					secondBtn={{
 						label: 'Save to Draft',
 						action: methods.handleSubmit((data: QuizSchema) =>

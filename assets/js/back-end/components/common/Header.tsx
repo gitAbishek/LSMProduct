@@ -47,6 +47,7 @@ interface Props {
 	};
 	showLinks?: boolean;
 	showPreview?: boolean;
+	showCourseName?: boolean;
 }
 
 const Header: React.FC<Props> = (props) => {
@@ -58,6 +59,7 @@ const Header: React.FC<Props> = (props) => {
 		children,
 		showLinks,
 		showPreview,
+		showCourseName,
 	} = props;
 	const courseDetail = useCourse();
 	const location = useLocation();
@@ -70,15 +72,19 @@ const Header: React.FC<Props> = (props) => {
 						<NavLink to={routes.courses.list}>
 							<Image src={Logo} w="36px" />
 						</NavLink>
-						{course && (
-							<Heading fontSize="md" fontWeight="medium">
-								{course.name}
-							</Heading>
-						)}
-						{!course && courseDetail.courseName && (
-							<Heading fontSize="md" fontWeight="medium">
-								{courseDetail.courseName}
-							</Heading>
+						{showCourseName && (
+							<>
+								{course && (
+									<Heading fontSize="md" fontWeight="medium">
+										{course.name}
+									</Heading>
+								)}
+								{!course && courseDetail.courseName && (
+									<Heading fontSize="md" fontWeight="medium">
+										{courseDetail.courseName}
+									</Heading>
+								)}
+							</>
 						)}
 						{children}
 						{showLinks && courseId && (

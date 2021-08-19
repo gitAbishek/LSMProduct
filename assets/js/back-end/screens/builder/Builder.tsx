@@ -205,6 +205,7 @@ const Builder: React.FC = () => {
 					<Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
 						<Stack direction="column" spacing="8" align="center">
 							<Header
+								showCourseName
 								course={{
 									name: courseQuery.data.name,
 									id: courseQuery.data.id,

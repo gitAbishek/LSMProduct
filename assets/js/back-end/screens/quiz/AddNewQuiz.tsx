@@ -97,6 +97,7 @@ const AddNewQuiz: React.FC = () => {
 			<Stack direction="column" spacing="8" alignItems="center">
 				<Header
 					showLinks
+					showCourseName
 					showPreview
 					secondBtn={{
 						label: 'Save to Draft',

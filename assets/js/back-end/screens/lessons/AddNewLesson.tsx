@@ -81,6 +81,7 @@ const AddNewLesson: React.FC = () => {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
 				<Header
+					showCourseName
 					showLinks
 					showPreview
 					secondBtn={{

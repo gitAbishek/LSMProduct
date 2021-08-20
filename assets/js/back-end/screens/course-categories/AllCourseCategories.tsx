@@ -8,10 +8,10 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Center,
 	Container,
 	Heading,
 	Icon,
+	IconButton,
 	Input,
 	Link,
 	List,
@@ -27,8 +27,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
-import { BiPlus } from 'react-icons/bi';
-import { FaChevronLeft } from 'react-icons/fa';
+import { BiChevronLeft, BiChevronRight, BiPlus } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { NavLink, useHistory } from 'react-router-dom';
 import Header from '../../components/common/Header';
@@ -112,79 +111,88 @@ const AllCourseCategories = () => {
 				</List>
 			</Header>
 			<Container maxW="container.xl">
-				<Box bg="white" py="12" shadow="box" mx="auto">
-					<Stack direction="column" spacing="8">
-						<Box px="12">
-							<Heading as="h1" size="lg">
-								{__('Categories', 'masteriyo')}
-							</Heading>
-						</Box>
+				<Stack direction="column" spacing="6">
+					<Box bg="white" py="12" shadow="box" mx="auto" w="full">
 						<Stack direction="column" spacing="8">
-							<Table size="sm" sx={tableStyles}>
-								<Thead>
-									<Tr>
-										<Th>{__('Name', 'masteriyo')}</Th>
-										<Th>{__('Description', 'masteriyo')}</Th>
-										<Th>{__('Slug', 'masteriyo')}</Th>
-										<Th>{__('Count', 'masteriyo')}</Th>
-										<Th>{__('Actions', 'masteriyo')}</Th>
-									</Tr>
-								</Thead>
-								<Tbody>
-									{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
-									{categoriesQuery.isSuccess &&
-										categoriesQuery.data.map((cat: any) => (
-											<CategoryRow
-												key={cat.id}
-												id={cat.id}
-												name={cat.name}
-												description={cat.description}
-												slug={cat.slug}
-												count={cat.count}
-												link={cat.link}
-												onDeletePress={onDeletePress}
-											/>
-										))}
-								</Tbody>
-							</Table>
+							<Box px="12">
+								<Heading as="h1" size="lg">
+									{__('Categories', 'masteriyo')}
+								</Heading>
+							</Box>
+							<Stack direction="column" spacing="8">
+								<Table size="sm" sx={tableStyles}>
+									<Thead>
+										<Tr>
+											<Th>{__('Name', 'masteriyo')}</Th>
+											<Th>{__('Description', 'masteriyo')}</Th>
+											<Th>{__('Slug', 'masteriyo')}</Th>
+											<Th>{__('Count', 'masteriyo')}</Th>
+											<Th>{__('Actions', 'masteriyo')}</Th>
+										</Tr>
+									</Thead>
+									<Tbody>
+										{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
+										{categoriesQuery.isSuccess &&
+											categoriesQuery.data.map((cat: any) => (
+												<CategoryRow
+													key={cat.id}
+													id={cat.id}
+													name={cat.name}
+													description={cat.description}
+													slug={cat.slug}
+													count={cat.count}
+													link={cat.link}
+													onDeletePress={onDeletePress}
+												/>
+											))}
+									</Tbody>
+								</Table>
+							</Stack>
 						</Stack>
-					</Stack>
+					</Box>
 					{categoriesQuery.isSuccess && (
-						<Center mt="5">
-							<ButtonGroup colorScheme="blue">
-								<Button
-									aria-label="Previous page"
-									onClick={() => {
-										setIsLastPage(false);
-										setfilterParams({
-											page: prevPage,
-										});
-									}}
-									isDisabled={filterParams.page < 2 ? true : false}
-									icon={<FaChevronLeft />}>
-									Previous
-								</Button>
-								<Input
-									type="number"
-									min={1}
-									value={filterParams.page}
-									isReadOnly={true}
-									maxW="12"
-								/>
-								<Button
-									onClick={() => {
-										setIsLastPage(true);
-										setfilterParams({
-											page: nextPage,
-										});
-									}}
-									isDisabled={isLastPage}>
-									Next
-								</Button>
-							</ButtonGroup>
-						</Center>
+						<Stack direction="row" spacing="1" justifyContent="flex-end">
+							<IconButton
+								shadow="none"
+								rounded="sm"
+								_hover={{ bg: 'blue.500', color: 'white' }}
+								icon={<Icon fontSize="xl" as={BiChevronLeft} />}
+								size="sm"
+								aria-label="Previous page"
+								onClick={() => {
+									setIsLastPage(false);
+									setfilterParams({
+										page: prevPage,
+									});
+								}}
+								isDisabled={filterParams.page < 2 ? true : false}
+							/>
+							<Input
+								size="sm"
+								w="10"
+								type="number"
+								min={1}
+								value={filterParams.page}
+								isReadOnly={true}
+							/>
+							<IconButton
+								shadow="none"
+								rounded="sm"
+								_hover={{ bg: 'blue.500', color: 'white' }}
+								icon={<Icon fontSize="xl" as={BiChevronRight} />}
+								aria-label="next page"
+								size="sm"
+								onClick={() => {
+									setIsLastPage(true);
+									setfilterParams({
+										page: nextPage,
+									});
+								}}
+								isDisabled={isLastPage}
+							/>
+						</Stack>
 					)}
-				</Box>
+				</Stack>
 			</Container>
 			<AlertDialog
 				isOpen={isOpen}

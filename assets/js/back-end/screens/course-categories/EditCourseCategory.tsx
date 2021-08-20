@@ -12,7 +12,11 @@ import {
 	Divider,
 	Flex,
 	Heading,
+	Icon,
 	IconButton,
+	Link,
+	List,
+	ListItem,
 	Menu,
 	MenuButton,
 	MenuItem,
@@ -23,17 +27,18 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
+import { BiChevronLeft, BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import PageNav from '../../components/common/PageNav';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import Header from '../../components/common/Header';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
+import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import { deepClean } from '../../utils/utils';
 import DescriptionInput from './components/DescriptionInput';
-import Header from './components/Header';
 import NameInput from './components/NameInput';
 import SlugInput from './components/SlugInput';
 
@@ -123,10 +128,31 @@ const EditCourseCategory = () => {
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
-			<Header />
+			<Header showLinks>
+				<List>
+					<ListItem>
+						<Link
+							as={NavLink}
+							sx={navLinkStyles}
+							_activeLink={navActiveStyles}
+							to={routes.course_categories.list}>
+							{__('Categories', 'masteriyo')}
+						</Link>
+					</ListItem>
+				</List>
+			</Header>
 			<Container maxW="container.xl">
 				<Stack direction="column" spacing="6">
-					<PageNav currentTitle={categoryQuery.data.name} hasCategoryName />
+					<ButtonGroup>
+						<RouterLink to={routes.course_categories.list}>
+							<Button
+								variant="link"
+								_hover={{ color: 'blue.500' }}
+								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
+								{__('Back to Categories', 'masteriyo')}
+							</Button>
+						</RouterLink>
+					</ButtonGroup>
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">

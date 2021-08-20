@@ -106,7 +106,7 @@ class ScriptStyle {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return array
+	 * @return string
 	 */
 	private static function init_scripts() {
 		$suffix = self::get_asset_suffix();

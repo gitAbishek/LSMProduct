@@ -4,8 +4,6 @@ import {
 	ButtonGroup,
 	Container,
 	Divider,
-	Flex,
-	Heading,
 	Icon,
 	Link,
 	List,
@@ -95,12 +93,6 @@ const AddNewCourseCategory = () => {
 					<FormProvider {...methods}>
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">
-								<Flex aling="center" justify="space-between">
-									<Heading as="h1" fontSize="x-large">
-										{__('Add New Category', 'masteriyo')}
-									</Heading>
-								</Flex>
-
 								<form onSubmit={methods.handleSubmit(onSubmit)}>
 									<Stack direction="column" spacing="6">
 										<NameInput />

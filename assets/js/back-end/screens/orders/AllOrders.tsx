@@ -11,7 +11,6 @@ import {
 import {
 	Box,
 	Container,
-	Heading,
 	HStack,
 	Link,
 	List,
@@ -123,11 +122,6 @@ const AllOrders = () => {
 			<Container maxW="container.xl" marginTop="6">
 				<Box bg="white" py="12" shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
-						<Box px="12">
-							<Heading as="h1" size="lg">
-								{__('Orders', 'masteriyo')}
-							</Heading>
-						</Box>
 						<Stack direction="column" spacing="8">
 							<Table size="sm" sx={tableStyles}>
 								<Thead>

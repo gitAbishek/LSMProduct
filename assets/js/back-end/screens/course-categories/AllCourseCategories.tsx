@@ -9,7 +9,6 @@ import {
 	Button,
 	ButtonGroup,
 	Container,
-	Heading,
 	Icon,
 	IconButton,
 	Input,
@@ -114,11 +113,6 @@ const AllCourseCategories = () => {
 				<Stack direction="column" spacing="6">
 					<Box bg="white" py="12" shadow="box" mx="auto" w="full">
 						<Stack direction="column" spacing="8">
-							<Box px="12">
-								<Heading as="h1" size="lg">
-									{__('Categories', 'masteriyo')}
-								</Heading>
-							</Box>
 							<Stack direction="column" spacing="8">
 								<Table size="sm" sx={tableStyles}>
 									<Thead>

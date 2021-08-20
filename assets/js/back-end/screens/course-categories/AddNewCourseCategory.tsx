@@ -6,6 +6,7 @@ import {
 	Divider,
 	Flex,
 	Heading,
+	Icon,
 	Link,
 	List,
 	ListItem,
@@ -15,9 +16,10 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { BiChevronLeft } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
-import { NavLink } from 'react-router-dom';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
@@ -79,45 +81,58 @@ const AddNewCourseCategory = () => {
 				</List>
 			</Header>
 			<Container maxW="container.xl" marginTop="6">
-				<FormProvider {...methods}>
-					<Box bg="white" p="10" shadow="box">
-						<Stack direction="column" spacing="8">
-							<Flex aling="center" justify="space-between">
-								<Heading as="h1" fontSize="x-large">
-									{__('Add New Category', 'masteriyo')}
-								</Heading>
-							</Flex>
+				<Stack direction="column" spacing="6">
+					<ButtonGroup>
+						<RouterLink to={routes.course_categories.list}>
+							<Button
+								variant="link"
+								_hover={{ color: 'blue.500' }}
+								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
+								{__('Back to Categories', 'masteriyo')}
+							</Button>
+						</RouterLink>
+					</ButtonGroup>
+					<FormProvider {...methods}>
+						<Box bg="white" p="10" shadow="box">
+							<Stack direction="column" spacing="8">
+								<Flex aling="center" justify="space-between">
+									<Heading as="h1" fontSize="x-large">
+										{__('Add New Category', 'masteriyo')}
+									</Heading>
+								</Flex>
 
-							<form onSubmit={methods.handleSubmit(onSubmit)}>
-								<Stack direction="column" spacing="6">
-									<NameInput />
-									<SlugInput />
-									<DescriptionInput />
+								<form onSubmit={methods.handleSubmit(onSubmit)}>
+									<Stack direction="column" spacing="6">
+										<NameInput />
+										<SlugInput />
+										<DescriptionInput />
 
-									<Box py="3">
-										<Divider />
-									</Box>
+										<Box py="3">
+											<Divider />
+										</Box>
 
-									<ButtonGroup>
-										<Button
-											colorScheme="blue"
-											type="submit"
-											isLoading={createCategory.isLoading}>
-											{__('Create', 'masteriyo')}
-										</Button>
-										<Button
-											variant="outline"
-											onClick={() =>
-												history.push(routes.course_categories.list)
-											}>
-											{__('Cancel', 'masteriyo')}
-										</Button>
-									</ButtonGroup>
-								</Stack>
-							</form>
-						</Stack>
-					</Box>
-				</FormProvider>
+										<ButtonGroup>
+											<Button
+												colorScheme="blue"
+												type="submit"
+												isLoading={createCategory.isLoading}>
+												{__('Create', 'masteriyo')}
+											</Button>
+											<Button
+												variant="outline"
+												onClick={() =>
+													history.push(routes.course_categories.list)
+												}>
+												{__('Cancel', 'masteriyo')}
+											</Button>
+										</ButtonGroup>
+									</Stack>
+								</form>
+							</Stack>
+						</Box>
+					</FormProvider>
+				</Stack>
+				/
 			</Container>
 		</Stack>
 	);

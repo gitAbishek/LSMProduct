@@ -47,6 +47,7 @@ const AddNewCourseCategory = () => {
 				});
 				history.push(routes.course_categories.list);
 				queryClient.invalidateQueries('courseCategoriesList');
+				queryClient.invalidateQueries('categoryLists');
 			},
 			onError: (error: any) => {
 				toast({

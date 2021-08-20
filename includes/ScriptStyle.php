@@ -86,27 +86,19 @@ class ScriptStyle {
 	}
 
 	/**
-	 * Get frontend assets hashes.
+	 * Get asset name suffix.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return array
 	 */
-	private static function get_frontend_assets_hashes() {
-		$script_debug = Constants::is_true( 'SCRIPT_DEBUG' );
-		$hashes       = include Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/assets/frontend.assets.php';
+	public static function get_asset_suffix() {
+		$nano_id = include Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/config/nano-id.php';
 
-		array_walk(
-			$hashes,
-			function( &$hash ) use ( $script_debug ) {
-				if ( $script_debug ) {
-					$hash = '';
-					return;
-				}
-				$hash = '.' . $hash;
-			}
-		);
-		return $hashes;
+		if ( Constants::is_true( 'SCRIPT_DEBUG' ) ) {
+			return '';
+		}
+		return ".{$nano_id}.min";
 	}
 
 	/**
@@ -117,54 +109,53 @@ class ScriptStyle {
 	 * @return array
 	 */
 	private static function init_scripts() {
-		$suffix = Constants::is_true( 'SCRIPT_DEBUG' ) ? '' : '.min';
-		$hashes = self::get_frontend_assets_hashes();
+		$suffix = self::get_asset_suffix();
 
 		self::$scripts = apply_filters(
 			'masteriyo_enqueue_scripts',
 			array(
 				'dependencies'  => array(
-					'src'      => self::get_asset_url( '/assets/js/build/masteriyo-dependencies.js' ),
+					'src'      => self::get_asset_url( "/assets/js/build/masteriyo-dependencies{$suffix}.js" ),
 					'context'  => array( 'admin', 'public' ),
 					'callback' => function() {
 						return masteriyo_is_admin_page() || masteriyo_is_learning_page();
 					},
 				),
 				'admin'         => array(
-					'src'      => self::get_asset_url( '/assets/js/build/masteriyo-backend.js' ),
+					'src'      => self::get_asset_url( "/assets/js/build/masteriyo-backend{$suffix}.js" ),
 					'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
 				),
 				'single-course' => array(
-					'src'      => self::get_asset_url( "/assets/js/frontend/single-course{$hashes['single-course.js']}{$suffix}.js" ),
+					'src'      => self::get_asset_url( "/assets/js/frontend/single-course{$suffix}.js" ),
 					'deps'     => array( 'jquery' ),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_single_course_page',
 				),
 				'edit-account'  => array(
-					'src'      => self::get_asset_url( "/assets/js/frontend/edit-account{$hashes['edit-account.js']}{$suffix}.js" ),
+					'src'      => self::get_asset_url( "/assets/js/frontend/edit-account{$suffix}.js" ),
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_edit_myaccount_page',
 				),
 				'login-form'    => array(
-					'src'      => self::get_asset_url( "/assets/js/frontend/login-form{$hashes['login-form.js']}{$suffix}.js" ),
+					'src'      => self::get_asset_url( "/assets/js/frontend/login-form{$suffix}.js" ),
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_load_login_form_assets',
 				),
 				'checkout'      => array(
-					'src'      => self::get_asset_url( "/assets/js/frontend/checkout{$hashes['checkout.js']}{$suffix}.js" ),
+					'src'      => self::get_asset_url( "/assets/js/frontend/checkout{$suffix}.js" ),
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_checkout_page',
 				),
 				'learning'      => array(
-					'src'     => self::get_asset_url( '/assets/js/build/masteriyo-interactive.js' ),
+					'src'     => self::get_asset_url( "/assets/js/build/masteriyo-interactive{$suffix}.js" ),
 					'deps'    => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 					'version' => self::get_version(),
 					'context' => 'public',
@@ -182,14 +173,13 @@ class ScriptStyle {
 	 * @return array
 	 */
 	private static function init_styles() {
-		$suffix = Constants::is_true( 'SCRIPT_DEBUG' ) ? '' : '.min';
-		$hashes = self::get_frontend_assets_hashes();
+		$suffix = self::get_asset_suffix();
 
 		self::$styles = apply_filters(
 			'masteriyo_enqueue_styles',
 			array(
 				'public' => array(
-					'src'     => self::get_asset_url( "/assets/css/public{$hashes['public.css']}{$suffix}.css" ),
+					'src'     => self::get_asset_url( "/assets/css/public{$suffix}.css" ),
 					'has_rtl' => true,
 					'context' => 'public',
 				),

@@ -3,6 +3,7 @@
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
+const rename = require('gulp-rename');
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 const { dest, series, src, watch, parallel, task } = require('gulp');
 const { exec } = require('child_process');
@@ -12,19 +13,9 @@ const browserSync = require('browser-sync').create();
 const uglify = require('gulp-uglify');
 const autoprefixer = require('gulp-autoprefixer');
 const imagemin = require('gulp-imagemin');
-const CacheBuster = require('gulp-cachebust');
+const { nanoid } = require('nanoid');
 
-const assetContentHashes = [];
-
-const cachebust = new CacheBuster({
-	pathFormatter: function (dirname, basename, extname, checksum) {
-		assetContentHashes.push({
-			name: basename + extname,
-			hash: checksum,
-		});
-		return path.resolve(dirname, basename + '.' + checksum + '.min' + extname);
-	},
-});
+const nanoID = nanoid();
 
 if (!process.env.WORDPRESS_URL && process.env.DEVELOPMENT) {
 	console.error('Please set WORDPRESS_URL on your environment variable');
@@ -77,9 +68,14 @@ const paths = {
 		dest: 'assets/css',
 	},
 
-	js: {
+	frontendJS: {
 		src: ['assets/js/frontend/*.js', '!assets/js/frontend/*.min.js'],
 		dest: 'assets/js/frontend',
+	},
+
+	backendJS: {
+		src: ['assets/js/build/*.js', '!assets/js/build/*.min.js'],
+		dest: 'assets/js/build',
 	},
 
 	images: {
@@ -95,6 +91,12 @@ function removePreviousMinifiedAssets() {
 	return exec('find assets/ -name "*min*" -type f -delete');
 }
 
+function renameBackendAssets() {
+	return src(paths.backendJS.src)
+		.pipe(rename({ suffix: `.${nanoID}.min` }))
+		.pipe(dest(paths.backendJS.dest));
+}
+
 function compileSass() {
 	return src(paths.sass.src)
 		.pipe(
@@ -104,7 +106,7 @@ function compileSass() {
 		)
 		.pipe(autoprefixer())
 		.pipe(browserSync.stream())
-		.pipe(cachebust.resources())
+		.pipe(rename({ suffix: `.${nanoID}.min` }))
 		.pipe(dest(paths.sass.dest));
 }
 
@@ -115,32 +117,21 @@ function startBrowserSync(cb) {
 	cb();
 }
 
-function minifyJs() {
-	return src(paths.js.src)
-		.pipe(uglify())
-		.pipe(cachebust.resources())
-		.pipe(dest(paths.js.dest))
-		.on('end', generateAssetsHashListPhpFile);
-}
-
-function generateAssetsHashListPhpFile() {
-	const fileContent = `<?php
-/**
- * Auto-generated assets content hash list.
- *
- * @since 0.1.0
- */
-return array(
-${assetContentHashes
-	.map((item) => `\t'${item.name}' => '${item.hash}',`)
-	.join('\n')}
-);
-`;
+function generateNanoIdPhp(cb) {
+	const fileContent = `<?php return '${nanoID}';\n`;
 
 	fs.writeFileSync(
-		path.resolve(__dirname, 'assets', 'frontend.assets.php'),
+		path.resolve(__dirname, 'config', 'nano-id.php'),
 		fileContent
 	);
+	cb();
+}
+
+function minifyJs() {
+	return src(paths.frontendJS.src)
+		.pipe(uglify())
+		.pipe(rename({ suffix: `.${nanoID}.min` }))
+		.pipe(dest(paths.frontendJS.dest));
 }
 
 function optimizeImages() {
@@ -154,7 +145,7 @@ function reloadBrowserSync(cb) {
 
 function watchChanges() {
 	watch(paths.sass.src, compileSass);
-	watch(paths.js.src, series(minifyJs, reloadBrowserSync));
+	watch(paths.frontendJS.src, series(minifyJs, reloadBrowserSync));
 	watch(paths.php.src, reloadBrowserSync);
 	watch(paths.images.src, series(optimizeImages, reloadBrowserSync));
 }
@@ -196,18 +187,21 @@ function compressBuildWithVersion() {
 
 const compileAssets = series(
 	removePreviousMinifiedAssets,
-	parallel(compileSass, minifyJs, optimizeImages)
+	parallel(compileSass, minifyJs, optimizeImages),
+	generateNanoIdPhp
 );
 const build = series(
 	removeBuild,
 	compileAssets,
+	renameBackendAssets,
 	parallel(copyToBuild),
 	runComposerInBuild
 );
 const dev = series(
 	removePreviousMinifiedAssets,
 	startBrowserSync,
-	watchChanges
+	watchChanges,
+	generateNanoIdPhp
 );
 const release = series(
 	removeRelease,

@@ -9,6 +9,8 @@
 
 namespace ThemeGrill\Masteriyo\Setup;
 
+use ThemeGrill\Masteriyo\ScriptStyle;
+
 defined( 'ABSPATH' ) || exit;
 
 class Onboard {
@@ -73,10 +75,11 @@ class Onboard {
 		}
 
 		$onboard_dependencies = include_once MASTERIYO_PLUGIN_DIR . '/assets/js/build/masteriyo-gettingStarted.asset.php';
+		$suffix               = ScriptStyle::get_asset_suffix();
 
 		wp_register_script(
 			'masteriyo-onboarding',
-			plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . '/assets/js/build/masteriyo-gettingStarted.js',
+			plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . "/assets/js/build/masteriyo-gettingStarted{$suffix}.js",
 			$onboard_dependencies['dependencies'],
 			$onboard_dependencies['version'],
 			true
@@ -84,7 +87,7 @@ class Onboard {
 
 		wp_register_script(
 			'masteriyo-dependencies',
-			plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . '/assets/js/build/masteriyo-dependencies.js',
+			plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . "/assets/js/build/masteriyo-dependencies{$suffix}.js",
 			$onboard_dependencies['dependencies'],
 			$onboard_dependencies['version'],
 			true

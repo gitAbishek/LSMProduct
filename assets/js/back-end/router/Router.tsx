@@ -30,15 +30,6 @@ const Router: React.FC = () => {
 				<Route path={routes.course_categories.edit} exact>
 					<screens.EditCourseCategory />
 				</Route>
-				<Route path={routes.course_tags.list} exact>
-					<screens.AllCourseTags />
-				</Route>
-				<Route path={routes.course_tags.add} exact>
-					<screens.AddNewCourseTag />
-				</Route>
-				<Route path={routes.course_tags.edit} exact>
-					<screens.EditCourseTag />
-				</Route>
 				<Route path={routes.quiz.add} exact>
 					<AddNewQuiz />
 				</Route>

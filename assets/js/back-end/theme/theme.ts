@@ -39,6 +39,11 @@ const theme = extendTheme({
 							borderColor: 'blue.300',
 						},
 					},
+				ul: {
+					li: {
+						marginBottom: 0,
+					},
+				},
 				'.ProseMirror': {
 					'h1, h2, h3, h4, h5, h6': {
 						lineHeight: '1.1',

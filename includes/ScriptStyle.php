@@ -86,6 +86,30 @@ class ScriptStyle {
 	}
 
 	/**
+	 * Get frontend assets hashes.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array
+	 */
+	private static function get_frontend_assets_hashes() {
+		$script_debug = Constants::is_true( 'SCRIPT_DEBUG' );
+		$hashes       = include Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/assets/frontend.assets.php';
+
+		array_walk(
+			$hashes,
+			function( &$hash ) use ( $script_debug ) {
+				if ( $script_debug ) {
+					$hash = '';
+					return;
+				}
+				$hash = '.' . $hash;
+			}
+		);
+		return $hashes;
+	}
+
+	/**
 	 * Initialize the scripts.
 	 *
 	 * @since 0.1.0
@@ -93,6 +117,9 @@ class ScriptStyle {
 	 * @return array
 	 */
 	private static function init_scripts() {
+		$suffix = Constants::is_true( 'SCRIPT_DEBUG' ) ? '' : '.min';
+		$hashes = self::get_frontend_assets_hashes();
+
 		self::$scripts = apply_filters(
 			'masteriyo_enqueue_scripts',
 			array(
@@ -110,27 +137,27 @@ class ScriptStyle {
 					'callback' => 'masteriyo_is_admin_page',
 				),
 				'single-course' => array(
-					'src'      => self::get_asset_url( '/assets/js/single-course.js' ),
+					'src'      => self::get_asset_url( "/assets/js/frontend/single-course{$hashes['single-course.js']}{$suffix}.js" ),
 					'deps'     => array( 'jquery' ),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_single_course_page',
 				),
 				'edit-account'  => array(
-					'src'      => self::get_asset_url( '/assets/js/edit-account.js' ),
+					'src'      => self::get_asset_url( "/assets/js/frontend/edit-account{$hashes['edit-account.js']}{$suffix}.js" ),
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_edit_myaccount_page',
 				),
 				'login-form'    => array(
-					'src'      => self::get_asset_url( '/assets/js/login-form.js' ),
+					'src'      => self::get_asset_url( "/assets/js/frontend/login-form{$hashes['login-form.js']}{$suffix}.js" ),
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_load_login_form_assets',
 				),
 				'checkout'      => array(
-					'src'      => self::get_asset_url( '/assets/js/frontend/checkout.js' ),
+					'src'      => self::get_asset_url( "/assets/js/frontend/checkout{$hashes['checkout.js']}{$suffix}.js" ),
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
@@ -155,11 +182,14 @@ class ScriptStyle {
 	 * @return array
 	 */
 	private static function init_styles() {
+		$suffix = Constants::is_true( 'SCRIPT_DEBUG' ) ? '' : '.min';
+		$hashes = self::get_frontend_assets_hashes();
+
 		self::$styles = apply_filters(
 			'masteriyo_enqueue_styles',
 			array(
 				'public' => array(
-					'src'     => self::get_asset_url( '/assets/css/public.css' ),
+					'src'     => self::get_asset_url( "/assets/css/public{$hashes['public.css']}{$suffix}.css" ),
 					'has_rtl' => true,
 					'context' => 'public',
 				),

@@ -88,7 +88,7 @@ class Masteriyo {
 	protected function init_hooks() {
 		add_action( 'init', array( $this, 'after_wp_init' ), 0 );
 		add_action( 'admin_bar_menu', array( $this, 'add_course_list_page_link' ), 35 );
-		add_action( 'admin_notices', array( $this, 'masteriyo_display_compatibilty_notice' ) );
+		add_action( 'admin_notices', array( $this, 'masteriyo_display_compatibility_notice' ) );
 
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_links' ), 10, 2 );
 		add_filter( 'plugin_action_links_' . Constants::get( 'MASTERIYO_PLUGIN_BASENAME' ), array( $this, 'add_plugin_action_links' ) );
@@ -407,7 +407,7 @@ class Masteriyo {
 	 *
 	 * @since 0.1.0
 	 */
-	public function masteriyo_display_compatibilty_notice() {
+	public function masteriyo_display_compatibility_notice() {
 		if ( version_compare( get_bloginfo( 'version' ), '5.0', '<' ) ) {
 			// translators: %s: Dismiss link
 			$message = sprintf( esc_html__( 'Minimum WordPress version required to work Masteriyo is v5.0.', 'masteriyo' ) );
@@ -428,7 +428,7 @@ class Masteriyo {
 		}
 
 		global $wp_filter;
-		$ignore_notices = array( 'masteriyo_display_compatibilty_notice' );
+		$ignore_notices = array( 'masteriyo_display_compatibility_notice' );
 
 		foreach ( array( 'user_admin_notices', 'admin_notices', 'all_admin_notices' ) as $wp_notice ) {
 			if ( empty( $wp_filter[ $wp_notice ] ) ) {
@@ -437,7 +437,7 @@ class Masteriyo {
 
 			$hook_callbacks = $wp_filter[ $wp_notice ]->callbacks;
 
-			if ( empty( $hook_callbacks ) && is_array( $hook_callbacks ) ) {
+			if ( empty( $hook_callbacks ) || ! is_array( $hook_callbacks ) ) {
 				continue;
 			}
 

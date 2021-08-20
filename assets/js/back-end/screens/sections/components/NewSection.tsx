@@ -81,7 +81,7 @@ const NewSection: React.FC<NewSectionProps> = (props) => {
 							<FormLabel htmlFor="">
 								{__('Section Description', 'masteriyo')}
 							</FormLabel>
-							<Editor name="description" willReset />
+							<Editor name="description" willReset size="md" />
 						</FormControl>
 						<Divider />
 						<ButtonGroup>

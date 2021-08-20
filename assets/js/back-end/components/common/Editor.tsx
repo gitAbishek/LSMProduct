@@ -13,10 +13,11 @@ interface Props {
 	defaultValue?: string;
 	hasImageUpload?: boolean;
 	willReset?: boolean;
+	size?: 'sm' | 'md' | 'lg';
 }
 
 const Editor: React.FC<Props> = (props) => {
-	const { name, defaultValue, hasImageUpload, willReset } = props;
+	const { name, defaultValue, hasImageUpload, willReset, size = 'lg' } = props;
 	const { register, setValue } = useFormContext();
 	const ref = React.useRef<any>();
 
@@ -32,6 +33,8 @@ const Editor: React.FC<Props> = (props) => {
 		],
 		content: defaultValue,
 	});
+
+	const editorHeight = size === 'sm' ? 50 : size === 'md' ? 100 : 200;
 
 	useOutsideClick({
 		ref: ref,
@@ -53,7 +56,7 @@ const Editor: React.FC<Props> = (props) => {
 			sx={{
 				fontSize: 'sm',
 				'.ProseMirror': {
-					minH: '200px',
+					minH: editorHeight,
 				},
 				'.ProseMirror:focus': {
 					outline: 'none',

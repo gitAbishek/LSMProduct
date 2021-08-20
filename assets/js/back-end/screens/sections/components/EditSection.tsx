@@ -85,7 +85,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 						<FormLabel htmlFor="">
 							{__('Section Description', 'masteriyo')}
 						</FormLabel>
-						<Editor name="description" defaultValue={description} />
+						<Editor name="description" defaultValue={description} size="md" />
 					</FormControl>
 					<Divider />
 					<ButtonGroup>

@@ -60,11 +60,11 @@ const Welcome: React.FC<Props> = (props) => {
 							{__(`Congratulation, you're all set!`, 'masteriyo')}
 						</Heading>
 
-						<Text fontSize="sm" maxW="500px" align="center">
+						<Text fontSize="sm" maxW="550px" align="center">
 							{__(
-								`Massa sed integer amet consequat. Est ultricies nisi, 
-								consectetur pellentesque metus, sit dolor urna. Malesuada 
-								venenatis, nulla quis ac.`,
+								`Masteriyo is successfully running on your website. 
+								You can start creating a course now. 
+								Thank you for using Masteriyo.`,
 								'masteriyo'
 							)}
 						</Text>

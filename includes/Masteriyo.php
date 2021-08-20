@@ -131,9 +131,9 @@ class Masteriyo {
 	 */
 	public function setup_wizard() {
 		// Setup.
-		if ( ! empty( $_GET['page'] ) ) {
+		if ( ! empty( $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-			if ( 'masteriyo-onboard' === $_GET['page'] ) {
+			if ( 'masteriyo-onboard' === $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$onboard_obj = new Onboard();
 				$onboard_obj->init();
 			}
@@ -331,13 +331,13 @@ class Masteriyo {
 	 * @since 0.1.0
 	 */
 	public function redirect_reset_password_link() {
-		if ( masteriyo_is_myaccount_page() && isset( $_GET['key'] ) && ( isset( $_GET['id'] ) || isset( $_GET['login'] ) ) ) {
+		if ( masteriyo_is_myaccount_page() && isset( $_GET['key'] ) && ( isset( $_GET['id'] ) || isset( $_GET['login'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			// If available, get $user_id from query string parameter for fallback purposes.
-			if ( isset( $_GET['login'] ) ) {
-				$user    = get_user_by( 'login', sanitize_user( wp_unslash( $_GET['login'] ) ) );
+			if ( isset( $_GET['login'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$user    = get_user_by( 'login', sanitize_user( wp_unslash( $_GET['login'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$user_id = $user ? $user->ID : 0;
 			} else {
-				$user_id = absint( $_GET['id'] );
+				$user_id = absint( $_GET['id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			}
 
 			// If the reset token is not for the current user, ignore the reset request (don't redirect).
@@ -375,7 +375,7 @@ class Masteriyo {
 
 		delete_transient( '_masteriyo_activation_redirect' );
 
-		if ( ( ! empty( $_GET['page'] ) && in_array( $_GET['page'], array( 'masteriyo-onboard' ) ) ) || is_network_admin() || isset( $_GET['activate-multi'] ) || ! current_user_can( 'manage_options' ) ) {
+		if ( ( ! empty( $_GET['page'] ) && in_array( $_GET['page'], array( 'masteriyo-onboard' ) ) ) || is_network_admin() || isset( $_GET['activate-multi'] ) || ! current_user_can( 'manage_options' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.PHP.StrictInArray.MissingTrueStrict
 			return;
 		}
 

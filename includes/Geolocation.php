@@ -135,7 +135,7 @@ class Geolocation {
 		 * @param array  $geolocation Geolocation data, including country, state, city, and postcode, ip_address.
 		 * @param string $ip_address  IP Address.
 		 */
-		$geolocation  = apply_filters(
+		$geolocation = apply_filters(
 			'masteriyo_get_geolocation',
 			array(
 				'country'    => $country_code,

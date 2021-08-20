@@ -209,8 +209,7 @@ abstract class PostsController extends CrudController {
 					$next     = ( $index + 1 ) < $query->found_posts ? $query->posts[ $index + 1 ] : '';
 				}
 			}
-		} catch ( \Exception $error ) {
-			//
+		} catch ( \Exception $error ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 		}
 
 		return array(

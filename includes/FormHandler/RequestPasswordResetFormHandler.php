@@ -140,9 +140,9 @@ class RequestPasswordResetFormHandler {
 	 * @return array
 	 */
 	protected function get_form_data() {
-		if ( isset( $_POST['user_login'] ) ) {
+		if ( isset( $_POST['user_login'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			return array(
-				'user_login' => sanitize_user( trim( $_POST['user_login'] ) ),
+				'user_login' => sanitize_user( trim( $_POST['user_login'] ) ), // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			);
 		}
 

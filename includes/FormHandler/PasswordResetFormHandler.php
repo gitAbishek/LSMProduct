@@ -32,7 +32,7 @@ class PasswordResetFormHandler {
 	 * @return void
 	 */
 	public function process() {
-		if ( isset( $_GET['password-reset-complete'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		if ( isset( $_GET['password-reset-complete'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			masteriyo_add_notice( __( 'Your password has been reset successfully.', 'masteriyo' ) );
 		}
 
@@ -158,18 +158,18 @@ class PasswordResetFormHandler {
 		$fields = array( 'password', 'confirm-password', 'reset_key', 'reset_login' );
 
 		foreach ( $fields as $key ) {
-			if ( ! isset( $_POST[ $key ] ) ) {
+			if ( ! isset( $_POST[ $key ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$data[ $key ] = '';
 				continue;
 			}
 			if ( 'email' === $key ) {
-				$data[ $key ] = sanitize_email( wp_unslash( trim( $_POST[ $key ] ) ) );
+				$data[ $key ] = sanitize_email( wp_unslash( trim( $_POST[ $key ] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			}
 			if ( 'username' === $key ) {
-				$data[ $key ] = sanitize_user( trim( $_POST[ $key ] ) );
+				$data[ $key ] = sanitize_user( trim( $_POST[ $key ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			}
 
-			$data[ $key ] = wp_unslash( $_POST[ $key ] );
+			$data[ $key ] = wp_unslash( $_POST[ $key ] ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		}
 		return $data;
 	}

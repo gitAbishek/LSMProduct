@@ -7,7 +7,8 @@
  * @version 0.1.0
  */
 
- defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit;
+
 ?>
 
 <div class="mto-checkout-summary-your-order">
@@ -23,16 +24,16 @@
 	<?php foreach ( $courses as $course ) : ?>
 		<li>
 				<span><?php echo esc_html( $course->get_name() ); ?></span>
-				<span><?php echo masteriyo_price( $course->get_price() ); ?></span>
+				<span><?php echo wp_kses_post( masteriyo_price( $course->get_price() ) ); ?></span>
 		</li>
 	<?php endforeach; ?>
 		<li>
 				<strong><?php esc_html_e( 'Subtotal', 'masteriyo' ); ?></strong>
-				<span><?php echo masteriyo_price( $cart->get_subtotal() ); ?></span>
+				<span><?php echo wp_kses_post( masteriyo_price( $cart->get_subtotal() ) ); ?></span>
 		</li>
 		<li>
 				<strong><?php esc_html_e( 'Total', 'masteriyo' ); ?></strong>
-				<strong><?php echo masteriyo_price( $cart->get_total() ); ?></strong>
+				<strong><?php echo wp_kses_post( masteriyo_price( $cart->get_total() ) ); ?></strong>
 		</li>
 	</ul>
 </div>

@@ -131,12 +131,6 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	 *                      emergency|alert|critical|error|warning|notice|info|debug.
 	 */
 	public static function log( $message, $level = 'info' ) {
-		// if ( self::$log_enabled ) {
-		// 	if ( empty( self::$log ) ) {
-		// 		self::$log = masteriyo_get_logger();
-		// 	}
-		// 	self::$log->log( $level, $message, array( 'source' => 'paypal' ) );
-		// }
 	}
 
 	/**

@@ -28,7 +28,7 @@ defined( 'ABSPATH' ) || exit;
 		'<mark class="order-date">' . masteriyo_format_datetime( $order->get_date_created() ) . '</mark>', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		'<mark class="order-status">' . masteriyo_get_order_status_name( $order->get_status() ) . '</mark>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	);
-?>
+	?>
 </p>
 
 <?php if ( $notes ) : ?>
@@ -49,7 +49,8 @@ defined( 'ABSPATH' ) || exit;
 		</li>
 		<?php endforeach; ?>
 	</ol>
-<?php endif;
+	<?php
+endif;
 
 ?>
 <section class="masteriyo-order-details">

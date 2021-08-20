@@ -71,7 +71,7 @@ class OrderQuery extends ObjectQuery {
 	 */
 	public function get_orders() {
 		$args    = apply_filters( 'masteriyo_order_object_query_args', $this->get_query_vars() );
-		$results = masteriyo('order.store' )->query( $args );
+		$results = masteriyo( 'order.store' )->query( $args );
 		return apply_filters( 'masteriyo_order_object_query', $results, $args );
 	}
 }

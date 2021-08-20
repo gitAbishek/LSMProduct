@@ -45,12 +45,12 @@ class Tag extends Taxonomy {
 				'show_in_nav_menus' => true,
 				'show_tag_cloud'    => true,
 				'query_var'         => true,
-				'rewrite'               => array(
+				'rewrite'           => array(
 					'slug'         => $permalinks['course_tag_rewrite_slug'],
 					'with_front'   => false,
 					'hierarchical' => true,
 				),
-				'labels' => array(
+				'labels'            => array(
 					'name'                       => _x( 'Course Tags', 'Taxonomy General Name', 'masteriyo' ),
 					'singular_name'              => _x( 'Course Tag', 'Taxonomy Singular Name', 'masteriyo' ),
 					'menu_name'                  => __( 'Course Tag', 'masteriyo' ),

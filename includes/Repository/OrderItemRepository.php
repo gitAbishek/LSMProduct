@@ -139,8 +139,12 @@ class OrderItemRepository extends AbstractRepository {
 		$data = wp_cache_get( 'item-' . $item->get_id(), 'order-items' );
 
 		if ( false === $data ) {
-			$sql  = $wpdb->prepare( "SELECT order_id, order_item_name FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d LIMIT 1;", $item->get_id() );
-			$data = $wpdb->get_row( $sql );
+			$sql  = $wpdb->prepare(
+				'SELECT order_id, order_item_name FROM %s WHERE order_item_id = %d LIMIT 1;',
+				"{$wpdb->prefix}masteriyo_order_items",
+				$item->get_id()
+			);
+			$data = $wpdb->get_row( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			wp_cache_set( 'item-' . $item->get_id(), $data, 'order-items' );
 		}
 
@@ -232,7 +236,7 @@ class OrderItemRepository extends AbstractRepository {
 				)
 			);
 		} catch ( \Exception $error ) {
-			error_log( $error->getMessage() );
+			error_log( $error->getMessage() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 		}
 
 		return $item_obj;

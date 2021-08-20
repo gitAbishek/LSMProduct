@@ -74,7 +74,7 @@ abstract class Taxonomy {
 	 *
 	 * @param string $label Label. (e.g. name, singular_name, menu_name, etc )
 	 * @param string $value Label text/value.
-	 * @param bool $strict	Strict check the label.(Default: true)
+	 * @param bool $strict  Strict check the label.(Default: true)
 	 *
 	 * @return Masteriyo\Masteriyo\Taxonomy
 	 */
@@ -86,7 +86,7 @@ abstract class Taxonomy {
 		}
 
 		$labels[ $label ] = $value;
-		$args[ 'labels' ] = $labels;
+		$args['labels']   = $labels;
 	}
 
 
@@ -103,7 +103,7 @@ abstract class Taxonomy {
 	public function get_arg( $name ) {
 		$args = $this->get_args();
 
-		$value = ( isset( $arg[ $name ] ) ) ?$arg[ $name ] : null;
+		$value = ( isset( $arg[ $name ] ) ) ? $arg[ $name ] : null;
 
 		return apply_filters( "masteriyo_taxonomy_{$taxonomy}_arg", $value, $name );
 	}

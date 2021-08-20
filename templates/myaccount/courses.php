@@ -19,7 +19,7 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 				<div class="mto-mycourses--card">
 					<a href="<?php echo esc_url( $active_course->get_permalink() ); ?>" title="<?php echo esc_attr( $active_course->get_name() ); ?>">
 						<div class="mto-mycourses--thumbnail">
-							<?php echo $active_course->get_image( 'masteriyo_thumbnail' ); ?>
+							<?php echo wp_kses_post( $active_course->get_image( 'masteriyo_thumbnail' ) ); ?>
 						</div>
 					</a>
 					<div class="mto-mycourses--detail">
@@ -107,7 +107,7 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 				<div class="mto-mycourses--card">
 					<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">
 						<div class="mto-mycourses--thumbnail">
-							<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
+							<?php echo wp_kses_post( $course->get_image( 'masteriyo_thumbnail' ) ); ?>
 						</div>
 						</a>
 					<div class="mto-mycourses--detail">

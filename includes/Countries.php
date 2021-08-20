@@ -515,7 +515,7 @@ class Countries {
 	public function country_dropdown_options( $selected_country = '', $selected_state = '', $escape = false ) {
 		foreach ( $this->get_countries() as $key => $value ) {
 			$states = null;
-			// $states = $this->get_states( $key );
+
 			if ( $states ) {
 				echo '<optgroup label="' . esc_attr( $value ) . '">';
 				foreach ( $states as $state_key => $state_value ) {

@@ -96,47 +96,47 @@ class ScriptStyle {
 		self::$scripts = apply_filters(
 			'masteriyo_enqueue_scripts',
 			array(
-				'dependencies'   => array(
+				'dependencies'  => array(
 					'src'      => self::get_asset_url( '/assets/js/build/masteriyo-dependencies.js' ),
 					'context'  => array( 'admin', 'public' ),
 					'callback' => function() {
 						return masteriyo_is_admin_page() || masteriyo_is_learning_page();
 					},
 				),
-				'admin'          => array(
+				'admin'         => array(
 					'src'      => self::get_asset_url( '/assets/js/build/masteriyo-backend.js' ),
 					'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
 				),
-				'single-course'  => array(
+				'single-course' => array(
 					'src'      => self::get_asset_url( '/assets/js/single-course.js' ),
 					'deps'     => array( 'jquery' ),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_single_course_page',
 				),
-				'edit-account' => array(
+				'edit-account'  => array(
 					'src'      => self::get_asset_url( '/assets/js/edit-account.js' ),
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_edit_myaccount_page',
 				),
-				'login-form'     => array(
+				'login-form'    => array(
 					'src'      => self::get_asset_url( '/assets/js/login-form.js' ),
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_load_login_form_assets',
 				),
-				'checkout'       => array(
+				'checkout'      => array(
 					'src'      => self::get_asset_url( '/assets/js/frontend/checkout.js' ),
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_checkout_page',
 				),
-				'learning'       => array(
+				'learning'      => array(
 					'src'     => self::get_asset_url( '/assets/js/build/masteriyo-interactive.js' ),
 					'deps'    => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 					'version' => self::get_version(),
@@ -497,7 +497,7 @@ class ScriptStyle {
 		self::$localized_scripts = apply_filters(
 			'masteriyo_localized_scripts',
 			array(
-				'edit-account' => array(
+				'edit-account'  => array(
 					'name' => 'masteriyo_data',
 					'data' => array(
 						'rootApiUrl'      => esc_url_raw( rest_url() ),
@@ -511,7 +511,7 @@ class ScriptStyle {
 					),
 				),
 
-				'login-form'     => array(
+				'login-form'    => array(
 					'name' => 'masteriyo_data',
 					'data' => array(
 						'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -522,7 +522,7 @@ class ScriptStyle {
 						),
 					),
 				),
-				'single-course'  => array(
+				'single-course' => array(
 					'name' => 'masteriyo_data',
 					'data' => array(
 						'rootApiUrl'              => esc_url_raw( rest_url() ),
@@ -546,7 +546,7 @@ class ScriptStyle {
 						),
 					),
 				),
-				'checkout'       => array(
+				'checkout'      => array(
 					'name' => 'mto_checkout_params',
 					'data' => array(
 						'ajax_url'            => admin_url( 'admin-ajax.php' ),
@@ -556,7 +556,7 @@ class ScriptStyle {
 						'mto_ajax_url'        => '/?mto-ajax=%%endpoint%%',
 					),
 				),
-				'learning'       => array(
+				'learning'      => array(
 					'name' => '_MASTERIYO_',
 					'data' => array(
 						'rootApiUrl' => esc_url_raw( rest_url() ),

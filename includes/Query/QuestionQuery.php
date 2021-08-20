@@ -29,17 +29,17 @@ class QuestionQuery extends ObjectQuery {
 		return array_merge(
 			parent::get_default_query_vars(),
 			array(
-				'slug'              => '',
-				'date_created'      => null,
-				'date_modified'     => null,
-				'status'            => array( 'draft', 'pending', 'private', 'publish' ),
-				'menu_order'        => '',
-				'parent_id'         => '',
-				'course_id'         => '',
-				'type'              => '',
-				'answer_required'   => '',
-				'randomize'         => '',
-				'points'            => '',
+				'slug'            => '',
+				'date_created'    => null,
+				'date_modified'   => null,
+				'status'          => array( 'draft', 'pending', 'private', 'publish' ),
+				'menu_order'      => '',
+				'parent_id'       => '',
+				'course_id'       => '',
+				'type'            => '',
+				'answer_required' => '',
+				'randomize'       => '',
+				'points'          => '',
 			)
 		);
 	}
@@ -53,7 +53,7 @@ class QuestionQuery extends ObjectQuery {
 	 */
 	public function get_questions() {
 		$args    = apply_filters( 'masteriyo_question_object_query_args', $this->get_query_vars() );
-		$results = masteriyo('question.store' )->query( $args );
+		$results = masteriyo( 'question.store' )->query( $args );
 		return apply_filters( 'masteriyo_question_object_query', $results, $args );
 	}
 }

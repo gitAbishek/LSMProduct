@@ -17,7 +17,7 @@ class TaxonomyFactory {
 	 * @return ThemeGrill\Masteriyo\Taxonomy\Taxonomy;
 	 */
 	public static function create( $taxonomy, $labels = array(), $args = array() ) {
-		if ( 'course_cat' === $taxonomy) {
+		if ( 'course_cat' === $taxonomy ) {
 			return new Course\Category();
 		} elseif ( 'course_tag' === $taxonomy ) {
 			return new Course\Tag();

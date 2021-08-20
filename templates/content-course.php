@@ -41,13 +41,13 @@ $categories     = $course->get_categories( 'name' );
 			<?php endif; ?>
 
 			<!-- Featured Image -->
-			<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
+			<?php echo wp_kses_post( $course->get_image( 'masteriyo_thumbnail' ) ); ?>
 		</a>
 	</div>
 
 	<div class="mto-course--header">
 		<!-- Course category -->
-		<?php if ( ! empty($categories)): ?>
+		<?php if ( ! empty( $categories ) ) : ?>
 			<div class="mto-category">
 				<?php foreach ( $categories as $category ) : ?>
 					<a href="<?php echo esc_attr( $category->get_permalink() ); ?>" class="mto-category-items mto-tag">
@@ -81,7 +81,7 @@ $categories     = $course->get_categories( 'name' );
 		</div>
 		<!-- Course description -->
 		<div class="mto-course-description">
-			<?php echo $course->get_highlights(); ?>
+			<?php echo wp_kses_post( $course->get_highlights() ); ?>
 		</div>
 		<!-- Four Column (Course duration, comments, student enrolled and curriculum) -->
 		<div class="mto-course-stats">
@@ -103,7 +103,7 @@ $categories     = $course->get_categories( 'name' );
 		<!-- Price and Enroll Now Button -->
 		<div class="mto-time-btn">
 			<div class="mto-course-price">
-				<span class="current-amount"><?php echo masteriyo_price( $course->get_price() ); ?></span>
+				<span class="current-amount"><?php echo wp_kses_post( masteriyo_price( $course->get_price() ) ); ?></span>
 			</div>
 			<?php do_action( 'masteriyo_template_enroll_button', $course ); ?>
 		</div>

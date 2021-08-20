@@ -51,16 +51,19 @@ class Ajax {
 	 * @return void
 	 */
 	private static function init_hooks() {
-		self::$actions = apply_filters( 'masteriyo_ajax_actions', array(
-			'login' => array(
-				'priv'   => array( __CLASS__, 'login' ),
-				'nopriv' => array( __CLASS__, 'login' )
-			),
-			'test' => array(
-				'priv'   => array( __CLASS__, 'test' ),
-				'nopriv' => array( __CLASS__, 'test' )
-			),
-		) );
+		self::$actions = apply_filters(
+			'masteriyo_ajax_actions',
+			array(
+				'login' => array(
+					'priv'   => array( __CLASS__, 'login' ),
+					'nopriv' => array( __CLASS__, 'login' ),
+				),
+				'test'  => array(
+					'priv'   => array( __CLASS__, 'test' ),
+					'nopriv' => array( __CLASS__, 'test' ),
+				),
+			)
+		);
 
 		foreach ( self::$actions as $key => $action ) {
 			foreach ( $action as $type => $callback ) {
@@ -99,7 +102,7 @@ class Ajax {
 
 				$creds = array(
 					'user_password' => $password,
-					'remember'      => $remember === 'yes',
+					'remember'      => 'yes' === $remember,
 				);
 
 				if ( is_email( $username ) ) {
@@ -128,7 +131,7 @@ class Ajax {
 						'message' => __( 'Signed in successfully.', 'masteriyo' ),
 					)
 				);
-			} catch ( Exception $e) {
+			} catch ( Exception $e ) {
 				wp_send_json_error(
 					array(
 						'message' => $e->getMessage(),
@@ -153,10 +156,12 @@ class Ajax {
 	 */
 	public static function test() {
 		$course_query = new CourseQuery();
-		$courses      = $course_query->get_courses( array(
-			'page' => 1,
-			'status' => 'publish'
-		));
+		$courses      = $course_query->get_courses(
+			array(
+				'page'   => 1,
+				'status' => 'publish',
+			)
+		);
 	}
 }
 

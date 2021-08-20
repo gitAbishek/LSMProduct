@@ -20,10 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 do_action( 'masteriyo_email_header', $email_heading, $email ); ?>
 
 <p class="email-template--info">
-	<?php _e( 'You enrolled in the following course:', 'masteriyo' ); ?>
+	<?php esc_html_e( 'You enrolled in the following course:', 'masteriyo' ); ?>
 </p>
 <p class="email-template--info">
-	<?php echo $course->get_name(); ?>
+	<?php echo esc_html( $course->get_name() ); ?>
 </p>
 <?php
 

@@ -46,7 +46,7 @@ abstract class FileRestriction {
 	 * @param string $url
 	 */
 	public function redirect( $url ) {
-		wp_redirect( $url, 302, 'Masteriyo' );
+		wp_redirect( $url, 302, 'Masteriyo' ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
 		exit;
 	}
 
@@ -107,7 +107,7 @@ abstract class FileRestriction {
 		$bytes_range['length'] = $file_size;
 
 		if ( isset( $_SERVER['HTTP_RANGE'] ) ) { // @codingStandardsIgnoreLine.
-			$http_range                         = sanitize_text_field( wp_unslash( $_SERVER['HTTP_RANGE'] ) ); // WPCS: input var ok.
+			$http_range                      = sanitize_text_field( wp_unslash( $_SERVER['HTTP_RANGE'] ) ); // WPCS: input var ok.
 			$bytes_range['is_range_request'] = true;
 
 			$c_start = $start;
@@ -198,7 +198,7 @@ abstract class FileRestriction {
 		header( 'Content-Description: File Transfer' );
 		header( 'Content-Transfer-Encoding: binary' );
 
-		$file_size = @filesize( $file_path ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+		$file_size = @filesize( $file_path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 		if ( ! $file_size ) {
 			return;
 		}
@@ -231,10 +231,10 @@ abstract class FileRestriction {
 	protected function check_server_config() {
 		masteriyo_set_time_limit( 0 );
 		if ( function_exists( 'apache_setenv' ) ) {
-			@apache_setenv( 'no-gzip', 1 ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_apache_setenv
+			@apache_setenv( 'no-gzip', 1 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_apache_setenv
 		}
-		@ini_set( 'zlib.output_compression', 'Off' ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_ini_set
-		@session_write_close(); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged, WordPress.VIP.SessionFunctionsUsage.session_session_write_close
+		@ini_set( 'zlib.output_compression', 'Off' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.IniSet.Risky
+		@session_write_close(); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.VIP.SessionFunctionsUsage.session_session_write_close
 	}
 
 	/**
@@ -248,10 +248,10 @@ abstract class FileRestriction {
 		if ( ob_get_level() ) {
 			$levels = ob_get_level();
 			for ( $i = 0; $i < $levels; $i++ ) {
-				@ob_end_clean(); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+				@ob_end_clean(); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 			}
 		} else {
-			@ob_end_clean(); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+			@ob_end_clean(); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 		}
 	}
 
@@ -274,14 +274,14 @@ abstract class FileRestriction {
 		if ( ! Constants::get( 'MASTERIYO_CHUNK_SIZE' ) || (int) Constants::get( 'MASTERIYO_CHUNK_SIZE' ) <= 0 ) {
 			Constants::set( 'MASTERIYO_CHUNK_SIZE', 1024 * 1024 );
 		}
-		$handle = @fopen( $file_path, 'r' ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_read_fopen
+		$handle = @fopen( $file_path, 'r' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_read_fopen
 
 		if ( false === $handle ) {
 			return false;
 		}
 
 		if ( ! $length ) {
-			$length = @filesize( $file_path ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+			$length = @filesize( $file_path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 		}
 
 		$read_length = (int) Constants::get( 'MASTERIYO_CHUNK_SIZE' );
@@ -289,17 +289,17 @@ abstract class FileRestriction {
 		if ( $length ) {
 			$end = $start + $length - 1;
 
-			@fseek( $handle, $start ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
-			$p = @ftell( $handle ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+			@fseek( $handle, $start ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+			$p = @ftell( $handle ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 
-			while ( ! @feof( $handle ) && $p <= $end ) { // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+			while ( ! @feof( $handle ) && $p <= $end ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 				// Don't run past the end of file.
 				if ( $p + $read_length > $end ) {
 					$read_length = $end - $p + 1;
 				}
 
-				echo @fread( $handle, $read_length ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged, WordPress.XSS.EscapeOutput.OutputNotEscaped, WordPress.WP.AlternativeFunctions.file_system_read_fread
-				$p = @ftell( $handle ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+				echo @fread( $handle, $read_length ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.XSS.EscapeOutput.OutputNotEscaped, WordPress.WP.AlternativeFunctions.file_system_read_fread
+				$p = @ftell( $handle ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 
 				if ( ob_get_length() ) {
 					ob_flush();
@@ -316,7 +316,7 @@ abstract class FileRestriction {
 			}
 		}
 
-		return @fclose( $handle ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_read_fclose
+		return @fclose( $handle ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_read_fclose
 	}
 
 	/**
@@ -329,6 +329,6 @@ abstract class FileRestriction {
 	 * @param integer $status  Error status.
 	 */
 	protected function send_error( $message, $title = '', $status = 404 ) {
-		wp_die( $message, $title, array( 'response' => $status ) ); // WPCS: XSS ok.
+		wp_die( $message, $title, array( 'response' => $status ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }

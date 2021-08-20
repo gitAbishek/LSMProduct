@@ -48,7 +48,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 						<?php endif; ?>
 
 						<!-- Featured Image -->
-						<?php echo $course->get_image( 'masteriyo_thumbnail' ); ?>
+						<?php echo wp_kses_post( $course->get_image( 'masteriyo_thumbnail' ) ); ?>
 					</div>
 				</a>
 
@@ -87,7 +87,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 					<!-- Course description -->
 					<div class="mto-course-description">
 						<!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe dignissimos debitis facilis quisquam libero, explicabo molestias. Quibusdam illo iusto nulla dignissimos corrupti voluptatum officiis asperiores nobis. Obcaecati autem doloremque, libero, quod vel dolore delectus maxime magni eveniet iusto commodi? Adipisci?</p> -->
-						<?php echo $course->get_highlights(); ?>
+						<?php echo wp_kses_post( $course->get_highlights() ); ?>
 					</div>
 					<!-- Four Column (Course duration, comments, student enrolled and curriculum) -->
 					<div class="mto-course-stats">
@@ -108,7 +108,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 					<!-- Price and Enroll Now Button -->
 					<div class="mto-time-btn">
 						<div class="mto-course-price">
-							<span class="current-amount"><?php echo masteriyo_price( $course->get_price() ); ?></span>
+							<span class="current-amount"><?php echo wp_kses_post( masteriyo_price( $course->get_price() ) ); ?></span>
 						</div>
 						<?php do_action( 'masteriyo_template_enroll_button', $course ); ?>
 					</div>

@@ -260,7 +260,7 @@ class CourseReview extends Model {
 	 * @return boolean
 	 */
 	public function is_reply() {
-		return absint( $this->get_parent('edit') ) > 0;
+		return absint( $this->get_parent( 'edit' ) ) > 0;
 	}
 
 	/**

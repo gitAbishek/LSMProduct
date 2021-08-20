@@ -49,7 +49,7 @@ class SectionQuery extends ObjectQuery {
 	 */
 	public function get_sections() {
 		$args    = apply_filters( 'masteriyo_section_object_query_args', $this->get_query_vars() );
-		$results = masteriyo('section.store' )->query( $args );
+		$results = masteriyo( 'section.store' )->query( $args );
 		return apply_filters( 'masteriyo_section_object_query', $results, $args );
 	}
 }

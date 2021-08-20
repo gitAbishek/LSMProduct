@@ -422,7 +422,7 @@ abstract class CommentsController extends CrudController {
 				 *
 				 * @param mixed $prepared_args[ $var ] The query_var value.
 				 */
-				$query_args[ $var ] = apply_filters( "masteriyo_rest_query_var-{$var}", $prepared_args[ $var ] );
+				$query_args[ $var ] = apply_filters( "masteriyo_rest_query_var-{$var}", $prepared_args[ $var ] ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
 			}
 		}
 

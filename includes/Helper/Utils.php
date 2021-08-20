@@ -251,7 +251,7 @@ class Utils {
 		if ( ! headers_sent() ) {
 			$cookie_path = COOKIEPATH ? COOKIEPATH : '/';
 			$http_only   = apply_filters( 'masteriyo_cookie_httponly', $httponly, $name, $value, $expire, $secure );
-			setcookie( $name, $value, $expire, $cookie_path , COOKIE_DOMAIN, $secure, $http_only );
+			setcookie( $name, $value, $expire, $cookie_path, COOKIE_DOMAIN, $secure, $http_only );
 		} elseif ( Constants::is_true( 'WP_DEBUG' ) ) {
 			headers_sent( $file, $line );
 			trigger_error( "{$name} cookie cannot be set - headers already sent by {$file} on line {$line}", E_USER_NOTICE ); // @phpcs:ignore

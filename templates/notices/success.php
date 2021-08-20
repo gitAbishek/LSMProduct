@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <div class="mto-notify-message mto-alert mto-success-msg">
-	<span><?php echo $message; ?></span>
+	<span><?php echo wp_kses_post( $message ); ?></span>
 </div>
 
 <?php

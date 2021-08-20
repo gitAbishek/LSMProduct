@@ -90,7 +90,7 @@ class PostType {
 	 */
 	public function set_label( $label, $value ) {
 		$this->labels[ $label ] = $value;
-		$this->args[ 'labels' ] = $this->labels;
+		$this->args['labels']   = $this->labels;
 		return $this;
 	}
 

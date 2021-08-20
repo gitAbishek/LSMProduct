@@ -443,8 +443,6 @@ class FrontendQuery {
 	 * @return array
 	 */
 	public function remove_course_query_filters( $posts ) {
-		// $this->remove_ordering_args();
-		// remove_filter( 'posts_clauses', array( $this, 'price_filter_post_clauses' ), 10, 2 );
 		return $posts;
 	}
 

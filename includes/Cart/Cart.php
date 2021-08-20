@@ -117,8 +117,6 @@ class Cart {
 		// Load the cart from session
 		add_action( 'wp_loaded', array( $this, 'get_cart_from_session' ) );
 		add_action( 'masteriyo_cart_emptied', array( $this, 'destroy_cart_session' ) );
-		// add_action( 'masteriyo_after_calculate_totals', array( $this, 'set_session' ) );
-		// add_action( 'masteriyo_cart_loaded_from_session', array( $this, 'set_session' ) );
 
 		// Cookie events - cart cookies need to be set before headers are sent.
 		add_action( 'masteriyo_add_to_cart', array( $this, 'maybe_set_cart_cookies' ) );

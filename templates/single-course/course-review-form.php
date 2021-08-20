@@ -57,10 +57,12 @@ do_action( 'masteriyo_before_single_course_review_form' );
 		printf(
 			/* translators: %s: Achor tag html with text "logged in" */
 			esc_html__( 'You must be %s to submit a review', 'masteriyo' ),
-			sprintf(
-				'<a href="%s" class="mto-link-primary">%s</a>',
-				masteriyo_get_page_permalink( 'myaccount' ),
-				__( 'logged in', 'masteriyo' )
+			wp_kses_post(
+				sprintf(
+					'<a href="%s" class="mto-link-primary">%s</a>',
+					masteriyo_get_page_permalink( 'myaccount' ),
+					__( 'logged in', 'masteriyo' )
+				)
 			)
 		);
 		?>

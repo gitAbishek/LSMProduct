@@ -489,8 +489,8 @@ abstract class Order extends Model {
 			do_action( 'masteriyo_after_' . $this->object_type . '_object_save', $this, $this->repository );
 
 		} catch ( Exception $e ) {
-			// Log error.
-			error_log( $e->get_message() );
+			// TODO Log error.
+			error_log( $e->get_message() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 		}
 
 		return $this->get_id();

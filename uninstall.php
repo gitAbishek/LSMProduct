@@ -9,9 +9,3 @@
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
-
-global $wpdb, $wp_version;
-
-if ( defined( 'MASTERIYO_REMOVE_ALL_DATA' ) && true === MASTERIYO_REMOVE_ALL_DATA ) {
-
-}

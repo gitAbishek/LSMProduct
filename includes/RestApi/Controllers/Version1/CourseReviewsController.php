@@ -355,18 +355,18 @@ class CourseReviewsController extends CommentsController {
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'title'  => array(
+				'title'        => array(
 					'description' => __( 'Course Review Title.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'content'  => array(
+				'content'      => array(
 					'description' => __( 'Course Review Content.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'required'    => true,
 				),
-				'rating'        => array(
+				'rating'       => array(
 					'description' => __( 'Course Review rating.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
@@ -391,7 +391,7 @@ class CourseReviewsController extends CommentsController {
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'author_id'      => array(
+				'author_id'    => array(
 					'description' => __( 'The User ID.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
@@ -569,7 +569,7 @@ class CourseReviewsController extends CommentsController {
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -598,7 +598,7 @@ class CourseReviewsController extends CommentsController {
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -631,7 +631,7 @@ class CourseReviewsController extends CommentsController {
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create course reviews.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -641,7 +641,7 @@ class CourseReviewsController extends CommentsController {
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, author_id cannot be empty or zero.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -651,7 +651,7 @@ class CourseReviewsController extends CommentsController {
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create course reviews for others.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -663,7 +663,7 @@ class CourseReviewsController extends CommentsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid course ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -673,7 +673,7 @@ class CourseReviewsController extends CommentsController {
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you cannot create review for your own course.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -705,10 +705,10 @@ class CourseReviewsController extends CommentsController {
 
 		if ( ! is_object( $review ) ) {
 			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
+				'masteriyo_rest_invalid_id',
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -718,7 +718,7 @@ class CourseReviewsController extends CommentsController {
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete this resource.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -728,7 +728,7 @@ class CourseReviewsController extends CommentsController {
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -760,10 +760,10 @@ class CourseReviewsController extends CommentsController {
 
 		if ( ! is_object( $review ) ) {
 			return new \WP_Error(
-				"masteriyo_rest_invalid_id",
+				'masteriyo_rest_invalid_id',
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -773,7 +773,7 @@ class CourseReviewsController extends CommentsController {
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update this resource.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -783,7 +783,7 @@ class CourseReviewsController extends CommentsController {
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}
@@ -793,7 +793,7 @@ class CourseReviewsController extends CommentsController {
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you cannot move a review to another course.', 'masteriyo' ),
 				array(
-					'status' => rest_authorization_required_code()
+					'status' => rest_authorization_required_code(),
 				)
 			);
 		}

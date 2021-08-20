@@ -135,6 +135,7 @@ abstract class AbstractRepository {
 	 * @return MetaData[]
 	 */
 	public function read_meta( &$model ) {
+		// phpcs:disable
 		// TODO Abstract global $wpdb;
 		global $wpdb;
 

@@ -237,7 +237,7 @@ function masteriyo_get_default_courses_per_row() {
  * @return int
  */
 function masteriyo_get_default_course_rows_per_page() {
-	 $rows       = masteriyo_get_setting( 'course_archive.display.per_page' );
+	$rows        = masteriyo_get_setting( 'course_archive.display.per_page' );
 	$course_grid = masteriyo_get_theme_support( 'course_grid' );
 	$min_rows    = isset( $course_grid['min_rows'] ) ? absint( $course_grid['min_rows'] ) : 0;
 	$max_rows    = isset( $course_grid['max_rows'] ) ? absint( $course_grid['max_rows'] ) : 0;
@@ -389,7 +389,7 @@ if ( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 		);
 
 		$active_courses = masteriyo_get_active_courses( get_current_user_id() );
-		
+
 		masteriyo_get_template(
 			'myaccount/courses.php',
 			array(
@@ -830,7 +830,7 @@ if ( ! function_exists( 'masteriyo_checkout_payment' ) ) {
 	 * @return void
 	 */
 	function masteriyo_checkout_payment() {
-		 $available_gateways = array();
+		$available_gateways = array();
 
 		if ( masteriyo( 'cart' )->needs_payment() ) {
 			$available_gateways = masteriyo( 'payment-gateways' )->get_available_payment_gateways();
@@ -1015,7 +1015,7 @@ if ( ! function_exists( 'masteriyo_email_order_meta' ) ) {
 		if ( $fields ) {
 			foreach ( $fields as $field ) {
 				if ( isset( $field['label'] ) && isset( $field['value'] ) && $field['value'] ) {
-					echo '<p><strong>' . $field['label'] . ':</strong> ' . $field['value'] . '</p>'; // WPCS: XSS ok.
+					echo wp_kses_post( '<p><strong>' . $field['label'] . ':</strong> ' . $field['value'] . '</p>' );
 				}
 			}
 		}

@@ -270,7 +270,7 @@ class FaqsController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'title'              => array(
+				'title'             => array(
 					'description' => __( 'Faq title.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -297,7 +297,7 @@ class FaqsController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'content'         => array(
+				'content'           => array(
 					'description' => __( 'Faq content.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -327,7 +327,7 @@ class FaqsController extends PostsController {
 	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		$id      = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
+		$id  = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
 		$faq = masteriyo( 'faq' );
 
 		if ( 0 !== $id ) {
@@ -389,16 +389,16 @@ class FaqsController extends PostsController {
 	 * @return array
 	 */
 	protected function get_objects( $query_args ) {
-		$query = new \WP_Comment_Query( $query_args );
-		$faq_posts = $query->comments;
-		$total_posts    = count( $faq_posts );
+		$query       = new \WP_Comment_Query( $query_args );
+		$faq_posts   = $query->comments;
+		$total_posts = count( $faq_posts );
 
 		if ( $total_posts < 1 ) {
 			// Out-of-bounds, run the query again without LIMIT for total count.
 			unset( $query_args['paged'] );
-			$faq_posts = new \WP_Comment_Query( $query_args );
-			$faq_posts = $query->comments;
-			$total_posts    = count( $faq_posts );
+			$faq_posts   = new \WP_Comment_Query( $query_args );
+			$faq_posts   = $query->comments;
+			$total_posts = count( $faq_posts );
 		}
 
 		return array(
@@ -446,7 +446,7 @@ class FaqsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid course ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -492,7 +492,7 @@ class FaqsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}
@@ -538,7 +538,7 @@ class FaqsController extends PostsController {
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),
 				array(
-					'status' => 404
+					'status' => 404,
 				)
 			);
 		}

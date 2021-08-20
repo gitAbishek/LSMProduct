@@ -57,7 +57,8 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 
 			$results = $wpdb->get_results(
 				$wpdb->prepare(
-					"SELECT * FROM {$table_name} WHERE order_item_id = %d LIMIT 1",
+					'SELECT * FROM %s WHERE order_item_id = %d LIMIT 1',
+					$table_name,
 					$order_item->get_id()
 				)
 			);
@@ -275,15 +276,15 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		 * Query for order items.
 		 */
 		$sql_to_fetch_rows = "{$select_clause} {$where_clause} {$limit_clause}";
-		$sql_to_fetch_rows = empty( $where_values ) ? $sql_to_fetch_rows : $wpdb->prepare( $sql_to_fetch_rows, $where_values );
-		$results           = $wpdb->get_results( $sql_to_fetch_rows );
+		$sql_to_fetch_rows = empty( $where_values ) ? $sql_to_fetch_rows : $wpdb->prepare( $sql_to_fetch_rows, $where_values ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$results           = $wpdb->get_results( $sql_to_fetch_rows ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		/**
 		 * Query for counting rows.
 		 */
 		$sql_to_count_rows = "SELECT COUNT(id) FROM {$table_name} {$where_clause}";
-		$sql_to_count_rows = empty( $where_values ) ? $sql_to_count_rows : $wpdb->prepare( $sql_to_count_rows, $where_values );
-		$total_items       = $wpdb->get_var( $sql_to_count_rows );
+		$sql_to_count_rows = empty( $where_values ) ? $sql_to_count_rows : $wpdb->prepare( $sql_to_count_rows, $where_values ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$total_items       = $wpdb->get_var( $sql_to_count_rows ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		$is_return_ids = isset( $query_vars['return'] ) && 'ids' === $query_vars['return'];
 		$order_items   = $is_return_ids ? $results : array_filter( array_map( 'masteriyo_get_order_item', $results ) );
@@ -358,7 +359,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 			$index++;
 		}
 		$sql            = "SELECT order_item_id FROM {$table_name} {$where_clause}";
-		$order_item_ids = $wpdb->get_results( $wpdb->prepare( $sql, $where_values ) );
+		$order_item_ids = $wpdb->get_results( $wpdb->prepare( $sql, $where_values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$order_item_ids = wp_list_pluck( $order_item_ids, 'order_item_id' );
 
 		do_action( 'masteriyo_before_batch_delete_' . $object_type, $query_vars );
@@ -368,7 +369,13 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		 */
 		$meta_table_info = $this->get_meta_table_info();
 		$item_ids_string = implode( ', ', $order_item_ids );
-		$wpdb->query( "DELETE FROM {$meta_table_info['table']} WHERE order_item_id in ({$item_ids_string})" );
+		$wpdb->query(
+			$wpdb->prepare(
+				'DELETE FROM %s WHERE order_item_id in (%s)',
+				$meta_table_info['table'],
+				$item_ids_string
+			)
+		);
 
 		// Delete order items.
 		$result = $wpdb->delete( $table_name, $where, $where_format );

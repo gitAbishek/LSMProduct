@@ -9,8 +9,6 @@
 
 namespace ThemeGrill\Masteriyo\Setup;
 
-// use ThemeGrill\Masteriyo\Setup\Onboard;
-
 defined( 'ABSPATH' ) || exit;
 
 class Onboard {
@@ -70,7 +68,7 @@ class Onboard {
 		update_option( 'masteriyo_first_time_activation_flag', true );
 
 		// Proceeding only when we are on right page.
-		if ( ! isset( $_GET['page'] ) || $this->page_name !== $_GET['page'] ) {
+		if ( ! isset( $_GET['page'] ) || $this->page_name !== $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			return;
 		}
 
@@ -141,7 +139,6 @@ class Onboard {
 						<?php esc_html_e( 'Masteriyo LMS - Onboarding', 'masteriyo' ); ?>
 					</title>
 					<?php wp_print_head_scripts(); ?>
-					<?php // wp_print_styles( 'masteriyo-onboard' ); ?>
 				</head>
 		<?php
 	}

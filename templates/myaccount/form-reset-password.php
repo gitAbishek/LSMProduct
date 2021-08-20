@@ -14,16 +14,16 @@
  * @version 0.1.0
  */
 
-defined('ABSPATH') || exit;
+defined( 'ABSPATH' ) || exit;
 
-do_action('masteriyo_before_password_reset_form');
+do_action( 'masteriyo_before_password_reset_form' );
 
 ?>
 
 <section class="mto-reset">
 		<div class="mto-reset--wrapper mto-form-container">
-			<h3 class="mto-reset--title"><?php echo esc_html__('New password', 'masteriyo'); ?></h3>
-			<p class="mto-reset--msg"><?php echo apply_filters('masteriyo_reset_password_message', esc_html__('Enter a new password below.', 'masteriyo')); ?></p>
+			<h3 class="mto-reset--title"><?php echo esc_html__( 'New password', 'masteriyo' ); ?></h3>
+			<p class="mto-reset--msg"><?php echo esc_html( apply_filters( 'masteriyo_reset_password_message', __( 'Enter a new password below.', 'masteriyo' ) ) ); ?></p>
 
 			<form id="mto-reset--form" class="mto-reset--form" method="post">
 				<input type="hidden" name="remember" value="true">
@@ -38,12 +38,12 @@ do_action('masteriyo_before_password_reset_form');
 
 				<div class="mto-btn-wrapper">
 					<button type="submit" name="masteriyo-password-reset" value="yes" class="mto-reset-btn mto-btn mto-primary">
-						<?php echo esc_html__('Reset', 'masteriyo'); ?>
+						<?php echo esc_html__( 'Reset', 'masteriyo' ); ?>
 					</button>
 
 					<div class="mto-reset-signin">
 						<a href="<?php echo esc_url( masteriyo_get_page_permalink( 'myaccount' ) ); ?>" class="mto-link-primary">
-							<?php echo esc_html__('Go back to sign-in', 'masteriyo'); ?>
+							<?php echo esc_html__( 'Go back to sign-in', 'masteriyo' ); ?>
 						</a>
 					</div>
 				</div>
@@ -51,7 +51,7 @@ do_action('masteriyo_before_password_reset_form');
 				<input type="hidden" name="reset_key" value="<?php echo esc_attr( $key ); ?>" />
 				<input type="hidden" name="reset_login" value="<?php echo esc_attr( $login ); ?>" />
 
-				<?php do_action('masteriyo_password_reset_form'); ?>
+				<?php do_action( 'masteriyo_password_reset_form' ); ?>
 
 				<?php wp_nonce_field( 'masteriyo-password-reset' ); ?>
 			</form>
@@ -62,5 +62,5 @@ do_action('masteriyo_before_password_reset_form');
 
 <?php
 
-do_action('masteriyo_after_password_reset_form');
+do_action( 'masteriyo_after_password_reset_form' );
 

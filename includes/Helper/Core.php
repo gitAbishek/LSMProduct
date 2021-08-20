@@ -1776,27 +1776,27 @@ function masteriyo_get_svg( $name, $echo = false ) {
 function masteriyo_get_account_menu_items() {
 	$endpoints = masteriyo_get_myaccount_endpoints();
 	$items     = array(
-		'dashboard'     => array(
+		'dashboard'      => array(
 			'label' => __( 'Dashboard', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'dashboard' ),
 		),
-		'courses'       => array(
+		'courses'        => array(
 			'label' => __( 'My Courses', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'courses' ),
 		),
-		'view-myaccount'       => array(
+		'view-myaccount' => array(
 			'label' => __( 'Account Details', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'courses' ),
 		),
-		'edit-account'       => array(
+		'edit-account'   => array(
 			'label' => __( 'Edit Account', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'courses' ),
 		),
-		'order-history' => array(
+		'order-history'  => array(
 			'label' => __( 'My Order History', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'order-history' ),
 		),
-		'user-logout'   => array(
+		'user-logout'    => array(
 			'label' => __( 'Logout', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'user-logout' ),
 		),
@@ -2458,11 +2458,11 @@ function masteriyo_set_time_limit( $limit = 0 ) {
 		return;
 	}
 
-	if ( ini_get( 'safe_mode' ) ) {
+	if ( ini_get( 'safe_mode' ) ) { // phpcs:ignore PHPCompatibility.IniDirectives.RemovedIniDirectives.safe_modeDeprecatedRemoved
 		return;
 	}
 
-	@set_time_limit( $limit );
+	@set_time_limit( $limit ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 }
 
 /**
@@ -2555,11 +2555,11 @@ function masteriyo_get_currency_codes() {
  */
 function masteriyo_doing_it_wrong( $function, $message, $version ) {
 	// phpcs: disable
-	$message .= ' Backtrace: ' . wp_debug_backtrace_summary();
+	$message .= ' Backtrace: ' . wp_debug_backtrace_summary(); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_wp_debug_backtrace_summary
 
 	if ( masteriyo_is_ajax() || masteriyo_is_rest_api_request() ) {
 		do_action( 'doing_it_wrong_run', $function, $message, $version );
-		error_log( "{$function} was called incorrectly. {$message}. This message was added in version {$version}." );
+		error_log( "{$function} was called incorrectly. {$message}. This message was added in version {$version}." ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 	} else {
 		_doing_it_wrong( $function, $message, $version );
 	}

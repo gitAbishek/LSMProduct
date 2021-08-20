@@ -90,14 +90,14 @@ class PdtHandler extends Reponse {
 	 * Check Response for PDT.
 	 */
 	public function check_response() {
-		if ( empty( $_REQUEST['cm'] ) || empty( $_REQUEST['tx'] ) || empty( $_REQUEST['st'] ) ) { // WPCS: Input var ok, CSRF ok, sanitization ok.
+		if ( empty( $_REQUEST['cm'] ) || empty( $_REQUEST['tx'] ) || empty( $_REQUEST['st'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			return;
 		}
 
-		$order_id    = masteriyo_clean( wp_unslash( $_REQUEST['cm'] ) ); // WPCS: input var ok, CSRF ok, sanitization ok.
-		$status      = masteriyo_clean( strtolower( wp_unslash( $_REQUEST['st'] ) ) ); // WPCS: input var ok, CSRF ok, sanitization ok.
-		$amount      = isset( $_REQUEST['amt'] ) ? masteriyo_clean( wp_unslash( $_REQUEST['amt'] ) ) : 0; // WPCS: input var ok, CSRF ok, sanitization ok.
-		$transaction = masteriyo_clean( wp_unslash( $_REQUEST['tx'] ) ); // WPCS: input var ok, CSRF ok, sanitization ok.
+		$order_id    = masteriyo_clean( wp_unslash( $_REQUEST['cm'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$status      = masteriyo_clean( strtolower( wp_unslash( $_REQUEST['st'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$amount      = isset( $_REQUEST['amt'] ) ? masteriyo_clean( wp_unslash( $_REQUEST['amt'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$transaction = masteriyo_clean( wp_unslash( $_REQUEST['tx'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$order       = $this->get_paypal_order( $order_id );
 
 		if ( ! $order || ! $order->needs_payment() ) {

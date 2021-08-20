@@ -74,7 +74,7 @@ defined( 'ABSPATH' ) || exit;
 				<div class="mto-cstudy--body--wrap mto-flex mto-flex-ycenter mto-db-card">
 					<div class="mto-cstudy--body--img-title">
 						<a href="<?php echo esc_url( $active_course->get_permalink() ); ?>" title="<?php echo esc_attr( $active_course->get_name() ); ?>">
-							<?php echo $active_course->get_image( 'thumbnail' ); ?>
+							<?php echo wp_kses_post( $active_course->get_image( 'thumbnail' ) ); ?>
 						</a>
 						<div class="mto-cstudy--body--header">
 							<span class="mto-cstudy--body--rating mto-icon-svg">

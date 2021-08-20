@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 <html <?php language_attributes(); ?>>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo( 'charset' ); ?>" />
-		<title><?php echo get_bloginfo( 'name', 'display' ); ?></title>
+		<title><?php echo wp_kses_post( get_bloginfo( 'name', 'display' ) ); ?></title>
 	</head>
 	<body>
 		<div id="content" class="email-template">

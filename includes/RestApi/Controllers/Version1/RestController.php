@@ -406,7 +406,7 @@ abstract class RestController extends \WP_REST_Controller {
 	 * @return string|WP_Error
 	 */
 	public function validate_setting_checkbox_field( $value, $setting ) {
-		if ( in_array( $value, array( 'yes', 'no' ) ) ) {
+		if ( in_array( $value, array( 'yes', 'no' ) ) ) { // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 			return $value;
 		} elseif ( empty( $value ) ) {
 			$value = isset( $setting['default'] ) ? $setting['default'] : 'no';

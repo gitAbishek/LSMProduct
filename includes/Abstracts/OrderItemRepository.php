@@ -228,7 +228,7 @@ class OrderItemRepository extends AbstractRepository {
 				)
 			);
 		} catch ( \Exception $error ) {
-			error_log( $error->getMessage() );
+			error_log( $error->getMessage() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 		}
 
 		return $item_obj;

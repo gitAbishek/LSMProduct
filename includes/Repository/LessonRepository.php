@@ -57,7 +57,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 					'post_password'  => $lesson->get_post_password( 'edit' ),
 					'post_date'      => $lesson->get_date_created( 'edit' ),
 					'post_date_gmt'  => $lesson->get_date_created( 'edit' ),
-					'post_name'      => $lesson->get_slug( 'edit' )
+					'post_name'      => $lesson->get_slug( 'edit' ),
 				),
 				$lesson
 			)
@@ -91,19 +91,21 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			throw new \Exception( __( 'Invalid lesson.', 'masteriyo' ) );
 		}
 
-		$lesson->set_props( array(
-			'name'              => $lesson_post->post_title,
-			'slug'              => $lesson_post->post_name,
-			'date_created'      => $lesson_post->post_date_gmt,
-			'date_modified'     => $lesson_post->post_modified_gmt,
-			'status'            => $lesson_post->post_status,
-			'description'       => $lesson_post->post_content,
-			'short_description' => $lesson_post->post_excerpt,
-			'parent_id'         => $lesson_post->post_parent,
-			'menu_order'        => $lesson_post->menu_order,
-			'post_password'     => $lesson_post->post_password,
-			'reviews_allowed'   => 'open' === $lesson_post->comment_status,
-		) );
+		$lesson->set_props(
+			array(
+				'name'              => $lesson_post->post_title,
+				'slug'              => $lesson_post->post_name,
+				'date_created'      => $lesson_post->post_date_gmt,
+				'date_modified'     => $lesson_post->post_modified_gmt,
+				'status'            => $lesson_post->post_status,
+				'description'       => $lesson_post->post_content,
+				'short_description' => $lesson_post->post_excerpt,
+				'parent_id'         => $lesson_post->post_parent,
+				'menu_order'        => $lesson_post->menu_order,
+				'post_password'     => $lesson_post->post_password,
+				'reviews_allowed'   => 'open' === $lesson_post->comment_status,
+			)
+		);
 
 		$this->read_lesson_data( $lesson );
 		$this->read_extra_data( $lesson );
@@ -134,7 +136,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			'menu_order',
 			'date_created',
 			'date_modified',
-			'slug'
+			'slug',
 		);
 
 		// Only update the post when the post data changes.
@@ -195,7 +197,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 * @since 0.1.0
 	 *
 	 * @param Model $lesson Lesson object.
-	 * @param array $args	Array of args to pass.alert-danger
+	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$lesson, $args = array() ) {
 		$id          = $lesson->get_id();
@@ -225,10 +227,14 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 
 		$set_props = array();
 
-		$meta_values = array_reduce( $meta_values, function( $result, $meta_value ) {
-			$result[ $meta_value->key ][] = $meta_value->value;
-			return $result;
-		}, array() );
+		$meta_values = array_reduce(
+			$meta_values,
+			function( $result, $meta_value ) {
+				$result[ $meta_value->key ][] = $meta_value->value;
+				return $result;
+			},
+			array()
+		);
 
 		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
@@ -290,7 +296,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 
 		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
 			return (object) array(
-				'lessons'      => $lessons,
+				'lessons'       => $lessons,
 				'total'         => $query->found_posts,
 				'max_num_pages' => $query->max_num_pages,
 			);
@@ -309,8 +315,8 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	protected function get_wp_query_args( $query_vars ) {
 		// Map query vars to ones that get_wp_query_args or WP_Query recognize.
 		$key_mapping = array(
-			'status' => 'post_status',
-			'page'   => 'paged',
+			'status'    => 'post_status',
+			'page'      => 'paged',
 			'parent_id' => 'post_parent',
 		);
 
@@ -325,7 +331,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 
 		// These queries cannot be auto-generated so we have to remove them and build them manually.
 		$manual_queries = array(
-			'featured_image'   => '',
+			'featured_image' => '',
 		);
 
 		foreach ( $manual_queries as $key => $manual_query ) {
@@ -346,8 +352,8 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 
 		// Handle date queries.
 		$date_queries = array(
-			'date_created'      => 'post_date',
-			'date_modified'     => 'post_modified',
+			'date_created'  => 'post_date',
+			'date_modified' => 'post_modified',
 		);
 		foreach ( $date_queries as $query_var_key => $db_key ) {
 			if ( isset( $query_vars[ $query_var_key ] ) && '' !== $query_vars[ $query_var_key ] ) {

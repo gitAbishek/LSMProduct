@@ -87,12 +87,12 @@ class MyAccountShortcode extends Shortcode {
 	 * @return string
 	 */
 	protected function get_lost_password_page_template() {
-		if ( ! empty( $_GET['reset-link-sent'] ) ) { // WPCS: input var ok, CSRF ok.
+		if ( ! empty( $_GET['reset-link-sent'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			masteriyo_add_notice( esc_html__( 'Password reset email has been sent.', 'masteriyo' ) );
 
 			return masteriyo( 'template' )->locate( 'myaccount/reset-password-confirmation.php' );
 		}
-		if ( ! empty( $_GET['show-reset-form'] ) ) { // WPCS: input var ok, CSRF ok.
+		if ( ! empty( $_GET['show-reset-form'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			if ( isset( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) && 0 < strpos( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ], ':' ) ) {  // @codingStandardsIgnoreLine
 				list( $rp_id, $rp_key ) = array_map( 'masteriyo_clean', explode( ':', wp_unslash( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ), 2 ) ); // @codingStandardsIgnoreLine
 				$user                   = masteriyo_get_user( absint( $rp_id ) );

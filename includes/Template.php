@@ -44,7 +44,7 @@ class Template implements TemplateInterface {
 				);
 
 				if ( ! $template ) {
-					$fallback = Constants::get('MASTERIYO_PLUGIN_DIR') . "/templates/{$slug}-{$name}.php";
+					$fallback = Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . "/templates/{$slug}-{$name}.php";
 					$template = file_exists( $fallback ) ? $fallback : '';
 				}
 			}
@@ -222,7 +222,7 @@ class Template implements TemplateInterface {
 		}
 
 		if ( ! $default_path ) {
-			$default_path = Constants::get('MASTERIYO_PLUGIN_DIR') . '/templates/';
+			$default_path = Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/templates/';
 		}
 
 		// Look within passed path within the theme - this is priority.

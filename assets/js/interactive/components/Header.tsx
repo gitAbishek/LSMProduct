@@ -85,7 +85,7 @@ const Header: React.FC<Props> = (props) => {
 							py="4"
 							justifyContent="space-between">
 							<Box w="165px">
-								<Image src={Logo} />
+								<Image src={Logo} width="36px" />
 							</Box>
 
 							<Stack

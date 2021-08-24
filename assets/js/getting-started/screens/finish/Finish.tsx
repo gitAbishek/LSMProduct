@@ -7,7 +7,6 @@ import {
 	Image,
 	Link,
 	Stack,
-	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import { motion } from 'framer-motion';
@@ -60,14 +59,6 @@ const Welcome: React.FC<Props> = (props) => {
 							{__(`Congratulation, you're all set!`, 'masteriyo')}
 						</Heading>
 
-						<Text fontSize="sm" maxW="550px" align="center">
-							{__(
-								`Masteriyo is successfully running on your website. 
-								You can start creating a course now. 
-								Thank you for using Masteriyo.`,
-								'masteriyo'
-							)}
-						</Text>
 						<Link
 							textDecoration="underline"
 							fontSize="12px"

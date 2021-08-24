@@ -28,18 +28,13 @@ const Welcome: React.FC<Props> = (props) => {
 					</Box>
 
 					<Stack spacing={6} align="center">
-						<Heading as="h2" fontSize="24px">
-							{__('Welcome To MASTERIYO', 'masteriyo')}
-						</Heading>
 						<Heading as="h2" fontSize="18px">
-							{__('A Simple and Powerful LMS', 'masteriyo')}
+							{__('LMS for WordPress', 'masteriyo')}
 						</Heading>
 						<Text fontSize="sm" maxW="500px" align="center">
 							{__(
-								`Thank you for choosing MASTERIYO LMS for your online 
-								courses. This short setup will guide you through the 
-								basic settings and configure MASTERIYO LMS so you can 
-								get started creating courses faster`,
+								`Thank you for choosing 'LMS for WordPress' by Masteriyo.
+								This short setup wizard will help you setup this plugin faster.`,
 								'masteriyo'
 							)}
 						</Text>

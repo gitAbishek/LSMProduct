@@ -357,7 +357,7 @@ abstract class RestTermsController extends CrudController {
 			'taxonomy'   => $taxonomy,
 			'order'      => $request['order'],
 			'orderby'    => $request['orderby'],
-			'offset'     => ( $request['page'] - 1 ) * $request['per_page'] + 1,
+			'offset'     => ( $request['page'] - 1 ) * $request['per_page'],
 			'paged'      => ( $request['page'] - 1 ) * $request['per_page'] + 1,
 			'number'     => $request['per_page'],
 			'slug'       => $request['slug'],
@@ -496,7 +496,7 @@ abstract class RestTermsController extends CrudController {
 			'description'       => __( 'Order sort attribute ascending or descending.', 'masteriyo' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_key',
-			'default'           => 'asc',
+			'default'           => 'desc',
 			'enum'              => array(
 				'asc',
 				'desc',

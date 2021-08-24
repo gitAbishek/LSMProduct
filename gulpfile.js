@@ -56,7 +56,7 @@ const fileList = {
 		dest: 'build',
 	},
 	other: {
-		src: ['readme.txt', 'changelog.txt', 'masteriyo.php'],
+		src: ['readme.txt', 'changelog.txt', 'lms.php'],
 		dest: 'build',
 	},
 };

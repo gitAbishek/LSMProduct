@@ -13,9 +13,6 @@ const browserSync = require('browser-sync').create();
 const uglify = require('gulp-uglify');
 const autoprefixer = require('gulp-autoprefixer');
 const imagemin = require('gulp-imagemin');
-const { nanoid } = require('nanoid');
-
-const nanoID = nanoid();
 
 if (!process.env.WORDPRESS_URL && process.env.DEVELOPMENT) {
 	console.error('Please set WORDPRESS_URL on your environment variable');
@@ -93,7 +90,7 @@ function removePreviousMinifiedAssets() {
 
 function renameBackendAssets() {
 	return src(paths.backendJS.src)
-		.pipe(rename({ suffix: `.${nanoID}.min` }))
+		.pipe(rename({ suffix: `.${pkg.version}.min` }))
 		.pipe(dest(paths.backendJS.dest));
 }
 
@@ -106,7 +103,7 @@ function compileSass() {
 		)
 		.pipe(autoprefixer())
 		.pipe(browserSync.stream())
-		.pipe(rename({ suffix: `.${nanoID}.min` }))
+		.pipe(rename({ suffix: `.${pkg.version}.min` }))
 		.pipe(dest(paths.sass.dest));
 }
 
@@ -117,20 +114,10 @@ function startBrowserSync(cb) {
 	cb();
 }
 
-function generateNanoIdPhp(cb) {
-	const fileContent = `<?php return '${nanoID}';\n`;
-
-	fs.writeFileSync(
-		path.resolve(__dirname, 'config', 'nano-id.php'),
-		fileContent
-	);
-	cb();
-}
-
 function minifyJs() {
 	return src(paths.frontendJS.src)
 		.pipe(uglify())
-		.pipe(rename({ suffix: `.${nanoID}.min` }))
+		.pipe(rename({ suffix: `.${pkg.version}.min` }))
 		.pipe(dest(paths.frontendJS.dest));
 }
 
@@ -187,8 +174,7 @@ function compressBuildWithVersion() {
 
 const compileAssets = series(
 	removePreviousMinifiedAssets,
-	parallel(compileSass, minifyJs, optimizeImages),
-	generateNanoIdPhp
+	parallel(compileSass, minifyJs, optimizeImages)
 );
 const build = series(
 	removeBuild,
@@ -200,8 +186,7 @@ const build = series(
 const dev = series(
 	removePreviousMinifiedAssets,
 	startBrowserSync,
-	watchChanges,
-	generateNanoIdPhp
+	watchChanges
 );
 const release = series(
 	removeRelease,

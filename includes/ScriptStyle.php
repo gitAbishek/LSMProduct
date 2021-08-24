@@ -93,12 +93,12 @@ class ScriptStyle {
 	 * @return array
 	 */
 	public static function get_asset_suffix() {
-		$nano_id = include Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/config/nano-id.php';
-
 		if ( Constants::is_true( 'SCRIPT_DEBUG' ) ) {
 			return '';
 		}
-		return ".{$nano_id}.min";
+		$version = Constants::get( 'MASTERIYO_VERSION' );
+
+		return ".{$version}.min";
 	}
 
 	/**

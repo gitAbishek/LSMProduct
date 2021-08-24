@@ -4,15 +4,15 @@
  *
  * Extends Exception to provide additional data.
  *
- * @package ThemeGrill\Masteriyo\RestApi
- * @since   2.6.0
+ * @package Masteriyo\RestApi
+ * @since  0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Exceptions;
+namespace Masteriyo\Exceptions;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\ModelException;
+use Masteriyo\ModelException;
 
 /**
  * RestException class.

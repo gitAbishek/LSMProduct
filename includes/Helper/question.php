@@ -40,7 +40,7 @@ function masteriyo_get_question( $question ) {
 	$question_obj   = masteriyo( empty( $type ) ? 'question' : "question.{$type}" );
 	$question_store = masteriyo( 'question.store' );
 
-	if ( is_a( $question, 'ThemeGrill\Masteriyo\Models\Question' ) ) {
+	if ( is_a( $question, 'Masteriyo\Models\Question' ) ) {
 		$id = $question->get_id();
 	} elseif ( is_a( $question, 'WP_Post' ) ) {
 		$id = $question->ID;

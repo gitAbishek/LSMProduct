@@ -5,10 +5,10 @@
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Abstracts;
+namespace Masteriyo\Abstracts;
 
-use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Traits\Singleton;
+use Masteriyo\Constants;
+use Masteriyo\Traits\Singleton;
 
 abstract class FileRestriction {
 	use Singleton;

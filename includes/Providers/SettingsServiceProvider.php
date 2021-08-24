@@ -3,14 +3,14 @@
  * Settings service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\Setting;
-use ThemeGrill\Masteriyo\Repository\SettingRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\SettingsController;
+use Masteriyo\Models\Setting;
+use Masteriyo\Repository\SettingRepository;
+use Masteriyo\RestApi\Controllers\Version1\SettingsController;
 
 class SettingsServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,7 +28,7 @@ class SettingsServiceProvider extends AbstractServiceProvider {
 		'setting',
 		'setting.store',
 		'setting.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\SettingsController',
+		'\Masteriyo\RestApi\Controllers\Version1\SettingsController',
 	);
 
 	/**
@@ -45,7 +45,7 @@ class SettingsServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'setting', Setting::class )
 			->addArgument( 'setting.store' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\SettingsController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\SettingsController' )
 			->addArgument( 'permission' );
 	}
 }

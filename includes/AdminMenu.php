@@ -2,21 +2,21 @@
 /**
  * Ajax.
  *
- * @package ThemeGrill\Masteriyo
+ * @package Masteriyo
  *
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo;
+namespace Masteriyo;
 
-use ThemeGrill\Masteriyo\Constants;
+use Masteriyo\Constants;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Aajx class.
  *
- * @class ThemeGrill\Masteriyo\Ajax
+ * @class Masteriyo\Ajax
  */
 
 class AdminMenu {

@@ -4,17 +4,17 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Providers
+ * @package Masteriyo\Providers
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\CourseProgressItem;
-use ThemeGrill\Masteriyo\Repository\CourseProgressItemRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseProgressItemsController;
+use Masteriyo\Models\CourseProgressItem;
+use Masteriyo\Repository\CourseProgressItemRepository;
+use Masteriyo\RestApi\Controllers\Version1\CourseProgressItemsController;
 
 class CourseProgressItemServiceProvider extends AbstractServiceProvider {
 	/**

@@ -5,15 +5,15 @@
  * @since 0.1.0
  */
 
-use ThemeGrill\Masteriyo\DateTime;
-use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Models\Faq;
-use ThemeGrill\Masteriyo\Geolocation;
-use ThemeGrill\Masteriyo\Models\User;
-use ThemeGrill\Masteriyo\Models\Course;
-use ThemeGrill\Masteriyo\ModelException;
-use ThemeGrill\Masteriyo\Models\Section;
-use ThemeGrill\Masteriyo\Models\CourseReview;
+use Masteriyo\DateTime;
+use Masteriyo\Constants;
+use Masteriyo\Models\Faq;
+use Masteriyo\Geolocation;
+use Masteriyo\Models\User;
+use Masteriyo\Models\Course;
+use Masteriyo\ModelException;
+use Masteriyo\Models\Section;
+use Masteriyo\Models\CourseReview;
 
 /**
  * Get course.
@@ -27,7 +27,7 @@ function masteriyo_get_course( $course ) {
 	$course_obj   = masteriyo( 'course' );
 	$course_store = masteriyo( 'course.store' );
 
-	if ( is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ) {
+	if ( is_a( $course, 'Masteriyo\Models\Course' ) ) {
 		$id = $course->get_id();
 	} elseif ( is_a( $course, 'WP_Post' ) ) {
 		$id = $course->ID;
@@ -58,7 +58,7 @@ function masteriyo_get_lesson( $lesson ) {
 	$lesson_obj   = masteriyo( 'lesson' );
 	$lesson_store = masteriyo( 'lesson.store' );
 
-	if ( is_a( $lesson, 'ThemeGrill\Masteriyo\Models\Lesson' ) ) {
+	if ( is_a( $lesson, 'Masteriyo\Models\Lesson' ) ) {
 		$id = $lesson->get_id();
 	} elseif ( is_a( $lesson, 'WP_Post' ) ) {
 		$id = $lesson->ID;
@@ -89,7 +89,7 @@ function masteriyo_get_section( $section ) {
 	$section_obj   = masteriyo( 'section' );
 	$section_store = masteriyo( 'section.store' );
 
-	if ( is_a( $section, 'ThemeGrill\Masteriyo\Models\Section' ) ) {
+	if ( is_a( $section, 'Masteriyo\Models\Section' ) ) {
 		$id = $section->get_id();
 	} elseif ( is_a( $section, 'WP_Post' ) ) {
 		$id = $section->ID;
@@ -121,7 +121,7 @@ function masteriyo_get_faq( $faq ) {
 	$faq_obj   = masteriyo( 'faq' );
 	$faq_store = masteriyo( 'faq.store' );
 
-	if ( is_a( $faq, 'ThemeGrill\Masteriyo\Models\Faq' ) ) {
+	if ( is_a( $faq, 'Masteriyo\Models\Faq' ) ) {
 		$id = $faq->get_id();
 	} elseif ( is_a( $faq, 'WP_Post' ) ) {
 		$id = $faq->ID;
@@ -227,7 +227,7 @@ function masteriyo_get_course_qa( $course_qa ) {
 	$course_qa_obj   = masteriyo( 'course-qa' );
 	$course_qa_store = masteriyo( 'course-qa.store' );
 
-	if ( is_a( $course_qa, 'ThemeGrill\Masteriyo\Models\CourseReview' ) ) {
+	if ( is_a( $course_qa, 'Masteriyo\Models\CourseReview' ) ) {
 		$id = $course_qa->get_id();
 	} elseif ( is_a( $course_qa, 'WP_Comment' ) ) {
 		$id = $course_qa->comment_ID;
@@ -273,7 +273,7 @@ function masteriyo_get_quiz( $quiz ) {
 	$quiz_obj   = masteriyo( 'quiz' );
 	$quiz_store = masteriyo( 'quiz.store' );
 
-	if ( is_a( $quiz, 'ThemeGrill\Masteriyo\Models\Quiz' ) ) {
+	if ( is_a( $quiz, 'Masteriyo\Models\Quiz' ) ) {
 		$id = $quiz->get_id();
 	} elseif ( is_a( $quiz, 'WP_Post' ) ) {
 		$id = $quiz->ID;
@@ -304,7 +304,7 @@ function masteriyo_get_course_cat( $course_cat ) {
 	$course_cat_obj   = masteriyo( 'course_cat' );
 	$course_cat_store = masteriyo( 'course_cat.store' );
 
-	if ( is_a( $course_cat, 'ThemeGrill\Masteriyo\Models\CourseCategory' ) ) {
+	if ( is_a( $course_cat, 'Masteriyo\Models\CourseCategory' ) ) {
 		$id = $course_cat->get_id();
 	} elseif ( is_a( $course_cat, 'WP_Term' ) ) {
 		$id = $course_cat->term_id;
@@ -335,7 +335,7 @@ function masteriyo_get_course_tag( $course_tag ) {
 	$course_tag_obj   = masteriyo( 'course_tag' );
 	$course_tag_store = masteriyo( 'course_tag.store' );
 
-	if ( is_a( $course_tag, 'ThemeGrill\Masteriyo\Models\CourseTag' ) ) {
+	if ( is_a( $course_tag, 'Masteriyo\Models\CourseTag' ) ) {
 		$id = $course_tag->get_id();
 	} elseif ( is_a( $course_tag, 'WP_Term' ) ) {
 		$id = $course_tag->term_id;
@@ -366,7 +366,7 @@ function masteriyo_get_course_difficulty( $course_difficulty ) {
 	$course_difficulty_obj   = masteriyo( 'course_difficulty' );
 	$course_difficulty_store = masteriyo( 'course_difficulty.store' );
 
-	if ( is_a( $course_difficulty, 'ThemeGrill\Masteriyo\Models\CourseDifficulty' ) ) {
+	if ( is_a( $course_difficulty, 'Masteriyo\Models\CourseDifficulty' ) ) {
 		$id = $course_difficulty->get_id();
 	} elseif ( is_a( $course_difficulty, 'WP_Term' ) ) {
 		$id = $course_difficulty->term_id;
@@ -397,7 +397,7 @@ function masteriyo_get_user( $user ) {
 	$user_obj   = masteriyo( 'user' );
 	$user_store = masteriyo( 'user.store' );
 
-	if ( is_a( $user, 'ThemeGrill\Masteriyo\Database\Model' ) ) {
+	if ( is_a( $user, 'Masteriyo\Database\Model' ) ) {
 		$id = $user->get_id();
 	} elseif ( is_a( $user, 'WP_User' ) ) {
 		$id = $user->ID;
@@ -2151,7 +2151,7 @@ function masteriyo_get_course_review( $course_review ) {
 	$course_review_obj   = masteriyo( 'course_review' );
 	$course_review_store = masteriyo( 'course_review.store' );
 
-	if ( is_a( $course_review, 'ThemeGrill\Masteriyo\Models\CourseReview' ) ) {
+	if ( is_a( $course_review, 'Masteriyo\Models\CourseReview' ) ) {
 		$id = $course_review->get_id();
 	} elseif ( is_a( $course_review, 'WP_Comment' ) ) {
 		$id = $course_review->comment_ID;

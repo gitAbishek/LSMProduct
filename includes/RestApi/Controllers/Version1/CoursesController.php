@@ -3,12 +3,12 @@
  * Abstract class controller.
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Helper\Utils;
-use ThemeGrill\Masteriyo\Helper\Permission;
+use Masteriyo\Helper\Utils;
+use Masteriyo\Helper\Permission;
 
 class CoursesController extends PostsController {
 	/**
@@ -51,7 +51,7 @@ class CoursesController extends PostsController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 * @var Masteriyo\Helper\Permission;
 	 */
 	protected $permission = null;
 
@@ -768,7 +768,7 @@ class CoursesController extends PostsController {
 
 		if ( 0 !== $id ) {
 			$course->set_id( $id );
-			$course_repo = masteriyo( \ThemeGrill\Masteriyo\Repository\CourseRepository::class );
+			$course_repo = masteriyo( \Masteriyo\Repository\CourseRepository::class );
 			$course_repo->read( $course );
 		}
 

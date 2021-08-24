@@ -3,14 +3,14 @@
  * Course review model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\CourseReview;
-use ThemeGrill\Masteriyo\Repository\CourseReviewRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseReviewsController;
+use Masteriyo\Models\CourseReview;
+use Masteriyo\Repository\CourseReviewRepository;
+use Masteriyo\RestApi\Controllers\Version1\CourseReviewsController;
 
 class CourseReviewServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,7 +28,7 @@ class CourseReviewServiceProvider extends AbstractServiceProvider {
 		'course_review',
 		'course_review.store',
 		'course_review.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseReviewsController',
+		'\Masteriyo\RestApi\Controllers\Version1\CourseReviewsController',
 	);
 
 	/**
@@ -45,7 +45,7 @@ class CourseReviewServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'course_review.rest', CourseReviewsController::class )
 		->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseReviewsController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\CourseReviewsController' )
 		->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'course_review', CourseReview::class )

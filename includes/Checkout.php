@@ -8,12 +8,12 @@
  * @version 3.4.0
  */
 
-namespace ThemeGrill\Masteriyo;
+namespace Masteriyo;
 
-use ThemeGrill\Masteriyo\Cart\Cart;
-use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Cart\Cart;
+use Masteriyo\Query\UserCourseQuery;
 
-use ThemeGrill\Masteriyo\Session\Session;
+use Masteriyo\Session\Session;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -27,7 +27,7 @@ class Checkout {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\masteriyo\Cart\Cart
+	 * @var masteriyo\Cart\Cart
 	 */
 	private $cart = null;
 
@@ -36,7 +36,7 @@ class Checkout {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Session\Session
+	 * @var Masteriyo\Session\Session
 	 */
 	private $session = null;
 
@@ -54,7 +54,7 @@ class Checkout {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Models\User
+	 * @var Masteriyo\Models\User
 	 */
 	private $logged_in_user = null;
 
@@ -638,7 +638,7 @@ class Checkout {
 
 			return $order_id;
 		} catch ( Exception $e ) {
-			if ( $order && is_a( $order, 'ThemeGrill\Masteriyo\Models\Order' ) ) {
+			if ( $order && is_a( $order, 'Masteriyo\Models\Order' ) ) {
 				do_action( 'masteriyo_checkout_order_exception', $order );
 			}
 			return new \WP_Error( 'checkout-error', $e->getMessage() );

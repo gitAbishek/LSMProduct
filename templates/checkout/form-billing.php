@@ -3,15 +3,15 @@
 /**
  * Masteriyo billing form.
  *
- * @package ThemeGrill\Masteriyo\Templates
+ * @package Masteriyo\Templates
  * @since 0.1.0
  * @version 0.1.0
  */
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Notice;
-use ThemeGrill\Masteriyo\Countries;
+use Masteriyo\Notice;
+use Masteriyo\Countries;
 
 ?>
 

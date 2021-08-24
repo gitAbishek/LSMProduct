@@ -4,14 +4,14 @@
  *
  * @since 0.1.0
  * @class Session
- * @package ThemeGrill\Masteriyo\Session
+ * @package Masteriyo\Session
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\MetaData;
-use ThemeGrill\Masteriyo\Repository\RepositoryInterface;
+use Masteriyo\Database\Model;
+use Masteriyo\MetaData;
+use Masteriyo\Repository\RepositoryInterface;
 
 defined( 'ABSPATH' ) || exit;
 

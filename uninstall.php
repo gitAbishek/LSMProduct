@@ -4,7 +4,7 @@
  *
  * Uninstalling Masteriyo deletes user roles, pages, tables, and options.
  *
- * @package ThemeGrill\Masteriyo\Uninstaller
+ * @package Masteriyo\Uninstaller
  * @version 0.1.0
  */
 

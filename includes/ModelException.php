@@ -8,7 +8,7 @@
  * @since   0.1.0
  */
 
-namespace ThemeGrill\Masteriyo;
+namespace Masteriyo;
 
 defined( 'ABSPATH' ) || exit;
 

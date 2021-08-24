@@ -3,10 +3,10 @@
  * Lesson Repository
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Models\Lesson;
+use Masteriyo\Database\Model;
+use Masteriyo\Models\Lesson;
 
 class LessonRepository extends AbstractRepository implements RepositoryInterface {
 

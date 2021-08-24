@@ -2,12 +2,12 @@
 /**
  * Email class.
  *
- * @package ThemeGrill\Masteriyo\Emails
+ * @package Masteriyo\Emails
  *
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Emails;
+namespace Masteriyo\Emails;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Emails
+ * @package Masteriyo\Emails
  */
 class Email {
 

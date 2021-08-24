@@ -3,14 +3,14 @@
  * CourseCategory model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\CourseCategory;
-use ThemeGrill\Masteriyo\Repository\CourseCategoryRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController;
+use Masteriyo\Models\CourseCategory;
+use Masteriyo\Repository\CourseCategoryRepository;
+use Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController;
 
 class CourseCategoryServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,7 +28,7 @@ class CourseCategoryServiceProvider extends AbstractServiceProvider {
 		'course_cat',
 		'course_cat.store',
 		'course_cat.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController',
+		'\Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController',
 	);
 
 	/**
@@ -45,7 +45,7 @@ class CourseCategoryServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'course_cat.rest', CourseCategoriesController::class )
 			->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\CourseCategoriesController' )
 			->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'course_cat', CourseCategory::class )

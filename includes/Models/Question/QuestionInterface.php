@@ -4,10 +4,10 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Models\Question
+ * @package Masteriyo\Models\Question
  */
 
-namespace ThemeGrill\Masteriyo\Models\Question;
+namespace Masteriyo\Models\Question;
 
 defined( 'ABSPATH' ) || exit;
 

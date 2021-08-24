@@ -4,12 +4,12 @@
  *
  * @since 0.1.0
  *
- * @package  ThemeGrill\Masteriyo\Setup
+ * @package  Masteriyo\Setup
  */
 
-namespace ThemeGrill\Masteriyo\Setup;
+namespace Masteriyo\Setup;
 
-use ThemeGrill\Masteriyo\ScriptStyle;
+use Masteriyo\ScriptStyle;
 
 defined( 'ABSPATH' ) || exit;
 

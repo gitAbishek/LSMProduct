@@ -4,10 +4,10 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\PostType;
+ * @package PostType;
  */
 
-namespace ThemeGrill\Masteriyo\PostType;
+namespace Masteriyo\PostType;
 
 /**
  * Quizes post type.

@@ -3,12 +3,12 @@
  * Course model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Helper\Permission;
+use Masteriyo\Helper\Permission;
 
 class PermissionServiceProvider extends AbstractServiceProvider {
 	/**

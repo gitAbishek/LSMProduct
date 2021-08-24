@@ -3,17 +3,17 @@
  * Abstract Rest Posts Controller Class
  *
  * @class PostsController
- * @package ThemeGrill/Masteriyo/RestApi
+ * @package Masteriyo/RestApi
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * PostsController
  *
- * @package ThemeGrill/Masteriyo/RestApi
+ * @package Masteriyo/RestApi
  * @version  0.1.0
  */
 abstract class PostsController extends CrudController {

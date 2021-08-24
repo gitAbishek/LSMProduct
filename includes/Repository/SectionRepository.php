@@ -4,13 +4,13 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Repository;
+ * @package Masteriyo\Repository;
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Models\Section;
+use Masteriyo\Database\Model;
+use Masteriyo\Models\Section;
 
 /**
  * SectionRepository class.

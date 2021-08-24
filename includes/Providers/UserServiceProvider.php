@@ -3,14 +3,14 @@
  * User model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\User;
-use ThemeGrill\Masteriyo\Repository\UserRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\UsersController;
+use Masteriyo\Models\User;
+use Masteriyo\Repository\UserRepository;
+use Masteriyo\RestApi\Controllers\Version1\UsersController;
 
 class UserServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,7 +28,7 @@ class UserServiceProvider extends AbstractServiceProvider {
 		'user',
 		'user.store',
 		'user.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\UsersController',
+		'\Masteriyo\RestApi\Controllers\Version1\UsersController',
 	);
 
 	/**
@@ -45,7 +45,7 @@ class UserServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'user.rest', UsersController::class )
 		->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\UsersController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\UsersController' )
 		->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'user', User::class )

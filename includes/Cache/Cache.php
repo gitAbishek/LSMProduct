@@ -7,10 +7,10 @@
  * @package Masteriyo\Classes
  */
 
-namespace ThemeGrill\Masteriyo\Cache;
+namespace Masteriyo\Cache;
 
-use ThemeGrill\Masteriyo\Contracts\Cache as CacheInterface;
-use ThemeGrill\Masteriyo\Traits\Singleton;
+use Masteriyo\Contracts\Cache as CacheInterface;
+use Masteriyo\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;
 

@@ -4,14 +4,14 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Repository;
+ * @package Masteriyo\Repository;
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Models\User;
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\ModelException;
+use Masteriyo\Models\User;
+use Masteriyo\Database\Model;
+use Masteriyo\ModelException;
 
 /**
  * UserRepository class.

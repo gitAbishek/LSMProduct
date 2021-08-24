@@ -3,14 +3,14 @@
  * Cart model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Cart\Cart;
-use ThemeGrill\Masteriyo\Cart\Fees;
-use ThemeGrill\Masteriyo\Cart\Totals;
+use Masteriyo\Cart\Cart;
+use Masteriyo\Cart\Fees;
+use Masteriyo\Cart\Totals;
 
 class CartServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,9 +28,9 @@ class CartServiceProvider extends AbstractServiceProvider {
 		'cart',
 		'cart.fees',
 		'cart.totals',
-		'\ThemeGrill\Masteriyo\Cart\Cart',
-		'\ThemeGrill\Masteriyo\Cart\Fees',
-		'\ThemeGrill\Masteriyo\Cart\Totals',
+		'\Masteriyo\Cart\Cart',
+		'\Masteriyo\Cart\Fees',
+		'\Masteriyo\Cart\Totals',
 	);
 
 	/**

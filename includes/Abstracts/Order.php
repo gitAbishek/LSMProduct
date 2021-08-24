@@ -2,17 +2,17 @@
 /**
  * Abstracr order
  *
- * @package ThemeGrill\Masteriyo\Order
+ * @package Masteriyo\Order
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Abstracts;
+namespace Masteriyo\Abstracts;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Traits\ItemTotals;
-use ThemeGrill\Masteriyo\Repository\OrderRepository;
+use Masteriyo\Database\Model;
+use Masteriyo\Traits\ItemTotals;
+use Masteriyo\Repository\OrderRepository;
 
 /**
  * Abstract class order.
@@ -668,7 +668,7 @@ abstract class Order extends Model {
 	 * @return string
 	 */
 	protected function get_items_key( $item ) {
-		if ( is_a( $item, '\ThemeGrill\Masteriyo\Models\Order\OrderItemCourse' ) ) {
+		if ( is_a( $item, '\Masteriyo\Models\Order\OrderItemCourse' ) ) {
 			return 'course_lines';
 		}
 

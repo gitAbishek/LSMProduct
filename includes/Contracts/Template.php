@@ -4,10 +4,10 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo
+ * @package Masteriyo
  */
 
-namespace ThemeGrill\Masteriyo\Contracts;
+namespace Masteriyo\Contracts;
 
 defined( 'ABSPATH' ) || exit;
 

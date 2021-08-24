@@ -5,15 +5,15 @@
  * Methods are protected and class is final to keep this as an internal API.
  * May be opened in the future once structure is stable.
  *
- * @package ThemeGrill\Masteriyo\Classes
+ * @package Masteriyo\Classes
  * @version 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Cart;
+namespace Masteriyo\Cart;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Traits\ItemTotals;
+use Masteriyo\Traits\ItemTotals;
 
 /**
  * Totals class.
@@ -93,7 +93,7 @@ final class Totals {
 	 * @param Cart $cart Cart object to calculate totals for.
 	 */
 	public function __construct( &$cart = null ) {
-		if ( ! is_a( $cart, '\ThemeGrill\Masteriyo\Cart\Cart' ) ) {
+		if ( ! is_a( $cart, '\Masteriyo\Cart\Cart' ) ) {
 			throw new \Exception( 'A valid Cart object is required' );
 		}
 

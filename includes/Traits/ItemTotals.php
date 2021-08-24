@@ -2,11 +2,11 @@
 /**
  * This ongoing trait will have shared calculation logic between Totals classes.
  *
- * @package ThemeGrill\Masteriyo\Traits
+ * @package Masteriyo\Traits
  * @version 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Traits;
+namespace Masteriyo\Traits;
 
 defined( 'ABSPATH' ) || exit;
 

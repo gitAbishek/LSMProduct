@@ -4,13 +4,13 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Repository
+ * @package Repository
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Models\Quiz;
+use Masteriyo\Database\Model;
+use Masteriyo\Models\Quiz;
 
 /**
  * Quiz repository class.
@@ -40,7 +40,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz Quiz object.
+	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
 	 */
 	public function create( Model &$quiz ) {
 		if ( ! $quiz->get_date_created( 'edit' ) ) {
@@ -86,7 +86,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz Cource object.
+	 * @param Masteriyo\Models\Quiz $quiz Cource object.
 	 * @throws Exception If invalid quiz.
 	 */
 	public function read( Model &$quiz ) {
@@ -122,7 +122,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz Quiz object.
+	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
 	 *
 	 * @return void
 	 */
@@ -194,7 +194,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz Quiz object.
+	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
 	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$quiz, $args = array() ) {
@@ -216,7 +216,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz quiz object.
+	 * @param Masteriyo\Models\Quiz $quiz quiz object.
 	 */
 	protected function read_quiz_data( &$quiz ) {
 		$id          = $quiz->get_id();
@@ -246,7 +246,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param ThemeGrill\Masteriyo\Models\Quiz $quiz quiz object.
+	 * @param Masteriyo\Models\Quiz $quiz quiz object.
 	 */
 	protected function read_extra_data( &$quiz ) {
 		$meta_values = $this->read_meta( $quiz );
@@ -266,7 +266,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 * @since 0.1.0
 	 *
 	 * @param array $query_vars Query vars.
-	 * @return ThemeGrill\Masteriyo\Models\Quiz[]
+	 * @return Masteriyo\Models\Quiz[]
 	 */
 	public function query( $query_vars ) {
 		$args = $this->get_wp_query_args( $query_vars );

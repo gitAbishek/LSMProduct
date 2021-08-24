@@ -3,19 +3,19 @@
  * Order model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Models\Order\Order;
-use ThemeGrill\Masteriyo\Repository\OrderRepository;
-use ThemeGrill\Masteriyo\Models\Order\OrderItemCourse;
-use ThemeGrill\Masteriyo\Repository\OrderItemRepository;
+use Masteriyo\Models\Order\Order;
+use Masteriyo\Repository\OrderRepository;
+use Masteriyo\Models\Order\OrderItemCourse;
+use Masteriyo\Repository\OrderItemRepository;
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\Order\OrderItem;
-use ThemeGrill\Masteriyo\Repository\OrderItemCourseRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrdersController;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrderItemsController;
+use Masteriyo\Models\Order\OrderItem;
+use Masteriyo\Repository\OrderItemCourseRepository;
+use Masteriyo\RestApi\Controllers\Version1\OrdersController;
+use Masteriyo\RestApi\Controllers\Version1\OrderItemsController;
 
 class OrderServiceProvider extends AbstractServiceProvider {
 	/**
@@ -33,11 +33,11 @@ class OrderServiceProvider extends AbstractServiceProvider {
 		'order',
 		'order.store',
 		'order.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrdersController',
+		'\Masteriyo\RestApi\Controllers\Version1\OrdersController',
 		'order-item',
 		'order-item.store',
 		'order-item.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrderItemsController',
+		'\Masteriyo\RestApi\Controllers\Version1\OrderItemsController',
 		'order-item.course',
 		'order-item.course.store',
 	);
@@ -56,7 +56,7 @@ class OrderServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'order.rest', OrdersController::class )
 			->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrdersController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\OrdersController' )
 			->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'order', Order::class )
@@ -69,7 +69,7 @@ class OrderServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'order-item.rest', OrderItemsController::class )
 			->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\OrderItemsController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\OrderItemsController' )
 			->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'order-item', OrderItem::class )

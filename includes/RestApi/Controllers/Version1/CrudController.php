@@ -3,14 +3,14 @@
  * Abstract Rest CRUD Controller Class
  *
  * @class    CrudController
- * @package ThemeGrill/Masteriyo/RestApi
+ * @package Masteriyo/RestApi
  * @version  0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
-use ThemeGrill\Masteriyo\ModelException;
-use ThemeGrill\Masteriyo\Exceptions\RestException;
+use Masteriyo\ModelException;
+use Masteriyo\Exceptions\RestException;
 
 
 defined( 'ABSPATH' ) || exit;

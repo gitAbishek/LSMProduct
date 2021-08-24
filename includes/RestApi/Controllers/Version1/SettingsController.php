@@ -3,13 +3,13 @@
  * Setting rest controller.
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Helper\Utils;
-use ThemeGrill\Masteriyo\Helper\Permission;
-use ThemeGrill\Masteriyo\Models\Setting;
+use Masteriyo\Helper\Utils;
+use Masteriyo\Helper\Permission;
+use Masteriyo\Models\Setting;
 class SettingsController extends CrudController {
 
 	/**
@@ -53,7 +53,7 @@ class SettingsController extends CrudController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Permission
+	 * @var Masteriyo\Helper\Permission
 	 */
 	protected $permission = null;
 

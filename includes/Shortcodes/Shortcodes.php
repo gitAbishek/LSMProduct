@@ -4,12 +4,12 @@
  *
  * @since 0.1.0
  * @class Shortcodes
- * @package ThemeGrill\Masteriyo\Shortcodes
+ * @package Masteriyo\Shortcodes
  */
 
-namespace ThemeGrill\Masteriyo\Shortcodes;
+namespace Masteriyo\Shortcodes;
 
-use ThemeGrill\Masteriyo\Traits\Singleton;
+use Masteriyo\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -40,7 +40,7 @@ class Shortcodes {
 	 * @return array
 	 */
 	protected function get_shortcodes() {
-		$namespace = '\\ThemeGrill\\Masteriyo\\Shortcodes';
+		$namespace = '\\\Masteriyo\\Shortcodes';
 
 		return apply_filters(
 			'masteriyo_shortcodes',

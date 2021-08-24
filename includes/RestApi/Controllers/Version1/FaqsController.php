@@ -4,14 +4,14 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+ * @package Masteriyo\RestApi\Controllers\Version1;
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Helper\Permission;
+use Masteriyo\Helper\Permission;
 
 /**
  * FaqsController class.
@@ -57,7 +57,7 @@ class FaqsController extends PostsController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 * @var Masteriyo\Helper\Permission;
 	 */
 	protected $permission = null;
 

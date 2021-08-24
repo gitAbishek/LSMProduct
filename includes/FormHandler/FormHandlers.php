@@ -2,10 +2,10 @@
 /**
  * Initialize form handlers.
  *
- * @package ThemeGrill\Masetriyo\Classes\
+ * @package Masetriyo\Classes\
  */
 
-namespace ThemeGrill\Masteriyo\FormHandler;
+namespace Masteriyo\FormHandler;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -31,7 +31,7 @@ class FormHandlers {
 	 * @return void
 	 */
 	public static function init() {
-		$namespace = 'ThemeGrill\\Masteriyo\FormHandler';
+		$namespace = '\Masteriyo\FormHandler';
 
 		self::$form_handlers = apply_filters(
 			'masteriyo_form_handlers',

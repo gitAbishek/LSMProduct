@@ -8,8 +8,8 @@
  * @version 0.1.0
  */
 
-use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Constants;
+use Masteriyo\Query\UserCourseQuery;
 
 /**
  * For a given course, and optionally price/qty, work out the price with tax excluded, based on store settings.
@@ -48,16 +48,16 @@ function masteriyo_get_price_excluding_tax( $course, $args = array() ) {
  *
  * @since 0.1.0
  *
- * @param int|ThemeGrill\Masteriyo\Models\Course $course Course object or Course ID.
- * @param int|ThemeGrill\Masteriyo\Models\User $user User object or User ID.
+ * @param int|Masteriyo\Models\Course $course Course object or Course ID.
+ * @param int|Masteriyo\Models\User $user User object or User ID.
  *
  * @return bool
  */
 function masteriyo_can_start_course( $course, $user = null ) {
 	$can_start_course = false;
 	$user             = is_null( $user ) ? masteriyo_get_current_user() : $user;
-	$course_id        = is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ? $course->get_id() : $course;
-	$user_id          = is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ? $user->get_id() : $user;
+	$course_id        = is_a( $course, 'Masteriyo\Models\Course' ) ? $course->get_id() : $course;
+	$user_id          = is_a( $user, 'Masteriyo\Models\User' ) ? $user->get_id() : $user;
 
 	$query = new UserCourseQuery(
 		array(

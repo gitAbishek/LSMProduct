@@ -4,10 +4,10 @@
  *
  * @since 0.1.0
  *
- * @package  ThemeGrill\Masteriyo\RestApi
+ * @package  Masteriyo\RestApi
  */
 
-namespace ThemeGrill\Masteriyo\RestApi;
+namespace Masteriyo\RestApi;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -70,7 +70,7 @@ class RestApi {
 	 * @return array
 	 */
 	protected static function get_v1_controllers() {
-		$namespace = '\\ThemeGrill\\Masteriyo\\RestApi\\Controllers\\Version1';
+		$namespace = '\\\Masteriyo\\RestApi\\Controllers\\Version1';
 
 		return array(
 			'courses'               => "{$namespace}\\CoursesController",

@@ -4,18 +4,18 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Repository;
+ * @package Masteriyo\Repository;
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Models\Order;
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Query\UserCourseQuery;
-use ThemeGrill\Masteriyo\Contracts\OrderRepository as OrderRepositoryInterface;
+use Masteriyo\Constants;
+use Masteriyo\Models\Order;
+use Masteriyo\Database\Model;
+use Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Contracts\OrderRepository as OrderRepositoryInterface;
 
 /**
  * OrderRepository class.
@@ -564,7 +564,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		$order_items = array_filter(
 			$order->get_items(),
 			function( $order_item ) {
-				return is_a( $order_item, '\ThemeGrill\Masteriyo\Models\Order\OrderItemCourse' );
+				return is_a( $order_item, '\Masteriyo\Models\Order\OrderItemCourse' );
 			}
 		);
 

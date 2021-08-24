@@ -4,14 +4,14 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Classes
+ * @package Masteriyo\Classes
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\MetaData;
-use ThemeGrill\Masteriyo\Helper\Utils;
-use ThemeGrill\Masteriyo\DateTime;
+use Masteriyo\MetaData;
+use Masteriyo\Helper\Utils;
+use Masteriyo\DateTime;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -987,7 +987,7 @@ abstract class AbstractRepository {
 
 		try {
 			// Specific time query with a DateTime.
-			if ( is_a( $query_var, 'ThemeGrill\Masteriyo\DateTime' ) ) {
+			if ( is_a( $query_var, 'Masteriyo\DateTime' ) ) {
 				$dates[] = $query_var;
 			} elseif ( is_numeric( $query_var ) ) { // Specific time query with a timestamp.
 				$dates[] = new DateTime( "@{$query_var}", new DateTimeZone( 'UTC' ) );

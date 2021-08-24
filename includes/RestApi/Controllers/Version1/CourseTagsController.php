@@ -9,10 +9,10 @@
  * @since    0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\RestTermsController;
-use ThemeGrill\Masteriyo\Models\CourseTag;
+use Masteriyo\RestApi\Controllers\Version1\RestTermsController;
+use Masteriyo\Models\CourseTag;
 
 defined( 'ABSPATH' ) || exit;
 

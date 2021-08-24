@@ -4,14 +4,14 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Models;
+ * @package Masteriyo\Models;
  */
 
-namespace ThemeGrill\Masteriyo\Models;
+namespace Masteriyo\Models;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Repository\RepositoryInterface;
-use ThemeGrill\Masteriyo\Cache\CacheInterface;
+use Masteriyo\Database\Model;
+use Masteriyo\Repository\RepositoryInterface;
+use Masteriyo\Cache\CacheInterface;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -111,7 +111,7 @@ class UserCourse extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return ThemeGrill\Masteriyo\Models\Course|NULL
+	 * @return Masteriyo\Models\Course|NULL
 	 */
 	public function get_course() {
 		return masteriyo_get_course( $this->get_course_id() );
@@ -122,7 +122,7 @@ class UserCourse extends Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return ThemeGrill\Masteriyo\Models\Order|NULL
+	 * @return Masteriyo\Models\Order|NULL
 	 */
 	public function get_order() {
 		return masteriyo_get_order( $this->get_order_id() );

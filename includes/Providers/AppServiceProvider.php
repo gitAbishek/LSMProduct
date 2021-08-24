@@ -3,11 +3,11 @@
  * App service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Masteriyo;
+use Masteriyo\Masteriyo;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
 class AppServiceProvider extends AbstractServiceProvider {
@@ -24,7 +24,7 @@ class AppServiceProvider extends AbstractServiceProvider {
 	 */
 	protected $provides = array(
 		'app',
-		'\ThemeGrill\Masteriyo\Masteriyo',
+		'\Masteriyo\Masteriyo',
 	);
 
 	/**

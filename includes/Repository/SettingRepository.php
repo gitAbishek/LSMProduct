@@ -3,11 +3,11 @@
  * Setting Repository
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Models\Setting;
+use Masteriyo\Constants;
+use Masteriyo\Database\Model;
+use Masteriyo\Models\Setting;
 
 class SettingRepository extends AbstractRepository implements RepositoryInterface {
 	/**
@@ -111,7 +111,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param  \ThemeGrill\Masteriyo\Models\Setting Setting object.
+	 * @param  \Masteriyo\Models\Setting Setting object.
 	 * @return void
 	 */
 	protected function process_setting( &$setting ) {

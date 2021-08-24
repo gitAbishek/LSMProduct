@@ -2,17 +2,17 @@
 /**
  * Course progress rRepository.
  *
- * @package ThemeGrill\Masteriyo\Repository;
+ * @package Masteriyo\Repository;
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\MetaData;
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\ModelException;
-use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
-use ThemeGrill\Masteriyo\Query\CourseProgressItemQuery;
-use ThemeGrill\Masteriyo\Repository\AbstractRepository;
+use Masteriyo\MetaData;
+use Masteriyo\Database\Model;
+use Masteriyo\ModelException;
+use Masteriyo\Query\CourseProgressQuery;
+use Masteriyo\Query\CourseProgressItemQuery;
+use Masteriyo\Repository\AbstractRepository;
 
 /**
  * Course progress repository class.
@@ -58,7 +58,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 
 		// There can be only one course progress for each course and user.
 		// So, update and return the previous course progreess if it exits.
-		if ( is_a( $progress, 'ThemeGrill\Masteriyo\Models\CourseProgress' ) ) {
+		if ( is_a( $progress, 'Masteriyo\Models\CourseProgress' ) ) {
 			$progress->set_props(
 				array(
 					'user_id'      => $course_progress->get_user_id( 'edit' ),

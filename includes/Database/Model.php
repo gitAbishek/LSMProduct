@@ -4,14 +4,14 @@
  *
  * @since 0.1.0
  * @class Model
- * @package ThemeGrill\Masteriyo\Database
+ * @package Masteriyo\Database
  */
 
-namespace ThemeGrill\Masteriyo\Database;
+namespace Masteriyo\Database;
 
-use ThemeGrill\Masteriyo\ModelException;
-use ThemeGrill\Masteriyo\DateTime;
-use ThemeGrill\Masteriyo\MetaData;
+use Masteriyo\ModelException;
+use Masteriyo\DateTime;
+use Masteriyo\MetaData;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
  * Abstract Model Class.
  *
  * @since 0.1.0
- * @package ThemeGrill\Masteriyo\Database
+ * @package Masteriyo\Database
  */
 abstract class Model {
 
@@ -164,7 +164,7 @@ abstract class Model {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return ThemeGrill\Masteriyo\Repository\RepositoryInterface
+	 * @return Masteriyo\Repository\RepositoryInterface
 	 */
 	public function get_repository() {
 		return $this->repository;
@@ -341,7 +341,7 @@ abstract class Model {
 	/**
 	 * Delete an object, set the ID to 0, and returpn result.
 	 *
-	 * @since  2.6.0
+	 * @since  0.1.0
 	 * @param  bool $force_delete Should the date be deleted permanently.
 	 * @return bool result
 	 */
@@ -645,7 +645,7 @@ abstract class Model {
 				return;
 			}
 
-			if ( is_a( $value, 'ThemeGrill\Masteriyo\DateTime' ) ) {
+			if ( is_a( $value, 'Masteriyo\DateTime' ) ) {
 				$datetime = $value;
 			} elseif ( is_numeric( $value ) ) {
 				// Timestamps are handled as UTC timestamps in all cases.

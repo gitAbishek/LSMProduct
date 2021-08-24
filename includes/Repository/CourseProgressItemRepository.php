@@ -2,17 +2,17 @@
 /**
  * Course progress item repository.
  *
- * @package ThemeGrill\Masteriyo\Repository;
+ * @package Masteriyo\Repository;
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\MetaData;
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\ModelException;
-use ThemeGrill\Masteriyo\Exceptions\RestException;
-use ThemeGrill\Masteriyo\Query\CourseProgressItemQuery;
-use ThemeGrill\Masteriyo\Repository\AbstractRepository;
+use Masteriyo\MetaData;
+use Masteriyo\Database\Model;
+use Masteriyo\ModelException;
+use Masteriyo\Exceptions\RestException;
+use Masteriyo\Query\CourseProgressItemQuery;
+use Masteriyo\Repository\AbstractRepository;
 
 /**
  * Course progress repository class.
@@ -61,7 +61,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 
 		// There can be only one course progress for each course and user.
 		// So, update the return the previous course progreess if it exits.
-		if ( is_a( $progress_item, 'ThemeGrill\Masteriyo\Models\CourseProgressItem' ) ) {
+		if ( is_a( $progress_item, 'Masteriyo\Models\CourseProgressItem' ) ) {
 			// Return the stored completed value if it is not set.
 			$completed = $course_progress_item->get_completed( 'edit' );
 			if ( '' === $course_progress_item->get_completed( 'edit' ) ) {

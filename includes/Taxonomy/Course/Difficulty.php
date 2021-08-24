@@ -3,9 +3,9 @@
  * Courses Course difficulties.
  */
 
-namespace ThemeGrill\Masteriyo\Taxonomy\Course;
+namespace Masteriyo\Taxonomy\Course;
 
-use ThemeGrill\Masteriyo\Taxonomy\Taxonomy;
+use Masteriyo\Taxonomy\Taxonomy;
 
 class Difficulty extends Taxonomy {
 	/**

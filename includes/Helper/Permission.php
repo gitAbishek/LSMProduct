@@ -5,7 +5,7 @@
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Helper;
+namespace Masteriyo\Helper;
 
 defined( 'ABSPATH' ) || exit;
 

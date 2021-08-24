@@ -2,16 +2,16 @@
 /**
  * Order Line Item (course)
  *
- * @package ThemeGrill\Masteriyo\Classes
+ * @package Masteriyo\Classes
  * @version 0.1.0
  * @since   0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Models\Order;
+namespace Masteriyo\Models\Order;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Repository\OrderItemCourseRepository;
+use Masteriyo\Repository\OrderItemCourseRepository;
 
 /**
  * Order item course class.
@@ -218,7 +218,7 @@ class OrderItemCourse extends OrderItem {
 	 * @param Course $course Course instance.
 	 */
 	public function set_course( $course ) {
-		if ( ! is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ) {
+		if ( ! is_a( $course, 'Masteriyo\Models\Course' ) ) {
 			$this->error( 'order_item_course_invalid_course', __( 'Invalid course', 'masteriyo' ) );
 		}
 

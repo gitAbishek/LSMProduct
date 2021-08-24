@@ -10,11 +10,11 @@
  * @since    0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Helper\Permission;
+use Masteriyo\Helper\Permission;
 
 /**
  * REST API course children controller class.
@@ -65,7 +65,7 @@ class CourseChildrenController extends CrudController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 * @var Masteriyo\Helper\Permission;
 	 */
 	protected $permission = null;
 

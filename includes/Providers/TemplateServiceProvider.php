@@ -3,12 +3,12 @@
  * Template model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Template;
+use Masteriyo\Template;
 
 class TemplateServiceProvider extends AbstractServiceProvider {
 	/**
@@ -24,7 +24,7 @@ class TemplateServiceProvider extends AbstractServiceProvider {
 	 */
 	protected $provides = array(
 		'template',
-		'\ThemeGrill\Masteriyo\Template',
+		'\Masteriyo\Template',
 	);
 
 	/**

@@ -6,8 +6,8 @@
  * @since 0.1.0
  */
 
-use ThemeGrill\Masteriyo\Query\UserCourseQuery;
-use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
+use Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Query\CourseProgressQuery;
 
 if ( ! function_exists( 'add_action' ) && function_exists( 'add_filter' ) ) {
 	return;

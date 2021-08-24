@@ -10,12 +10,12 @@
  * @since    0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Helper\Permission;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\PostsController;
+use Masteriyo\Helper\Permission;
+use Masteriyo\RestApi\Controllers\Version1\PostsController;
 
 /**
  * Quiz builder REST API. controller class.
@@ -66,7 +66,7 @@ class QuizBuilderController extends PostsController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 * @var Masteriyo\Helper\Permission;
 	 */
 	protected $permission = null;
 

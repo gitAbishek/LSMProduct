@@ -4,10 +4,10 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masetriyo\Classes
+ * @package Masetriyo\Classes
  */
 
-namespace ThemeGrill\Masteriyo\FormHandler;
+namespace Masteriyo\FormHandler;
 
 defined( 'ABSPATH' ) || exit;
 

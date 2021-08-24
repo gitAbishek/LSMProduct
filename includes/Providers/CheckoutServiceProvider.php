@@ -3,12 +3,12 @@
  * Checkout service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Checkout;
+use Masteriyo\Checkout;
 
 class CheckoutServiceProvider extends AbstractServiceProvider {
 	/**
@@ -24,7 +24,7 @@ class CheckoutServiceProvider extends AbstractServiceProvider {
 	 */
 	protected $provides = array(
 		'checkout',
-		'\ThemeGrill\Masteriyo\Checkout',
+		'\Masteriyo\Checkout',
 	);
 
 	/**

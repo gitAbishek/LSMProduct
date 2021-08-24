@@ -2,19 +2,19 @@
 /**
  * Template functions wrapper class.
  *
- * @package ThemeGrill\Masteriyo
+ * @package Masteriyo
  *
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo;
+namespace Masteriyo;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Cache\Cache;
-use ThemeGrill\Masteriyo\Helper\Utils;
-use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Contracts\Template as TemplateInterface;
+use Masteriyo\Cache\Cache;
+use Masteriyo\Helper\Utils;
+use Masteriyo\Constants;
+use Masteriyo\Contracts\Template as TemplateInterface;
 
 /**
  * Template functions wrapper class.

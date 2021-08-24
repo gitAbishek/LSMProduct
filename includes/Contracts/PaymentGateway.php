@@ -7,7 +7,7 @@
  * @package Masteriyo\Interfaces
  */
 
-namespace ThemeGrill\Masteriyo\Contracts;
+namespace Masteriyo\Contracts;
 
 defined( 'ABSPATH' ) || exit;
 

@@ -4,10 +4,10 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\PostType;
+ * @package Masteriyo\PostType;
  */
 
-namespace ThemeGrill\Masteriyo\PostType;
+namespace Masteriyo\PostType;
 
 /**
  * Sections class.

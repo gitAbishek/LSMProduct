@@ -3,7 +3,7 @@
  * Course question answer functions.
  *
  * @since 0.1.0
- * @package ThemeGrill\Masteriyo\Helper
+ * @package Masteriyo\Helper
  */
 
 /**
@@ -11,7 +11,7 @@
  *
  * @since 0.1.0
  *
- * @param int|WP_Post|ThemeGrill\Masteriyo\Models\Course $course Course object.
+ * @param int|WP_Post|Masteriyo\Models\Course $course Course object.
  *
  * @return int|array
  */
@@ -20,7 +20,7 @@ function masteriyo_get_course_question_count( $course = 0 ) {
 
 	if ( is_a( $course, 'WP_Post' ) ) {
 		$course_id = $course->ID;
-	} elseif ( is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ) {
+	} elseif ( is_a( $course, 'Masteriyo\Models\Course' ) ) {
 		$course_id = $course->get_id();
 	} else {
 		$course_id = (int) $course;
@@ -76,7 +76,7 @@ function masteriyo_get_course_question_count( $course = 0 ) {
  *
  * @since 0.1.0
  *
- * @param int|WP_Post|ThemeGrill\Masteriyo\Models\Course $course Course object.
+ * @param int|WP_Post|Masteriyo\Models\Course $course Course object.
  *
  * @return int|array
  */
@@ -85,7 +85,7 @@ function masteriyo_get_course_answer_count( $course = 0, $question_id = 0 ) {
 
 	if ( is_a( $course, 'WP_Post' ) ) {
 		$course_id = $course->ID;
-	} elseif ( is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ) {
+	} elseif ( is_a( $course, 'Masteriyo\Models\Course' ) ) {
 		$course_id = $course->get_id();
 	} else {
 		$course_id = (int) $course;

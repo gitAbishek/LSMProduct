@@ -5,7 +5,7 @@
  * @package Masteriyo\Gateways
  */
 
-namespace ThemeGrill\Masteriyo\Gateways\Paypal;
+namespace Masteriyo\Gateways\Paypal;
 
 defined( 'ABSPATH' ) || exit;
 

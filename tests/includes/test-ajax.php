@@ -5,7 +5,7 @@
  * @package EverestLMS
  */
 
-use ThemeGrill\Masteriyo\Ajax;
+use Masteriyo\Ajax;
 
 /**
  * Sample test case.

@@ -4,10 +4,10 @@
  *
  * @since 0.1.0
  * @version 0.1.0
- * @package ThemeGrill\Masteriyo\Helper
+ * @package Masteriyo\Helper
  */
 
-use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Query\UserCourseQuery;
 
 /**
  * Get user course.
@@ -15,7 +15,7 @@ use ThemeGrill\Masteriyo\Query\UserCourseQuery;
  * @since 0.1.0
  *
  * @param int $user_course_id User course ID.
- * @return ThemeGrill\Masteriyo\Models\UserCourse|NULL
+ * @return Masteriyo\Models\UserCourse|NULL
  */
 function masteriyo_get_user_course( $user_course_id ) {
 	try {
@@ -75,14 +75,14 @@ function masteriyo_count_enrolled_users( $course_id ) {
  *
  * @since 0.1.0
  *
- * @param \ThemeGrill\Masteriyo\Models\User|int $user User.
+ * @param \Masteriyo\Models\User|int $user User.
  *
  * @return int
  */
 function masteriyo_get_active_courses_count( $user ) {
 	global $wpdb;
 
-	$user_id = is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ? $user->get_id() : $user;
+	$user_id = is_a( $user, 'Masteriyo\Models\User' ) ? $user->get_id() : $user;
 
 	$count = $wpdb->get_var(
 		$wpdb->prepare(

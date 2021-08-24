@@ -5,16 +5,16 @@
  * The Masteriyo cart class stores cart data as well as handling customer sessions and some cart related urls.
  * The cart class also has a price calculation function which calls upon other classes to calculate totals.
  *
- * @package ThemeGrill\Masteriyo\Classes
+ * @package Masteriyo\Classes
  * @version 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Cart;
+namespace Masteriyo\Cart;
 
-use ThemeGrill\Masteriyo\Session\Session;
-use ThemeGrill\Masteriyo\Helper\Utils;
-use ThemeGrill\Masteriyo\Helper\Arr;
-use ThemeGrill\Masteriyo\Notice;
+use Masteriyo\Session\Session;
+use Masteriyo\Helper\Utils;
+use Masteriyo\Helper\Arr;
+use Masteriyo\Notice;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -86,8 +86,8 @@ class Cart {
 	/**
 	 * Constructor for the cart class. Loads options and hooks in the init method.
 	 *
-	 * @param \ThemeGrill\Masteriyo\Session\SessionHanlder $session Session handler.
-	 * @param \ThemeGrill\Masteriyo\Notice                 $notice Notice.
+	 * @param \Masteriyo\Session\SessionHanlder $session Session handler.
+	 * @param \Masteriyo\Notice                 $notice Notice.
 	 *
 	 */
 	public function __construct( Session $session, Notice $notice, Fees $fees_api ) {
@@ -1044,7 +1044,7 @@ class Cart {
 	 * Return reference to fees API.
 	 *
 	 * @since  0.1.0
-	 * @return ThemeGrill\Masteriyo\Cart\Fees
+	 * @return Masteriyo\Cart\Fees
 	 */
 	public function fees_api() {
 		return $this->fees_api;
@@ -1059,7 +1059,7 @@ class Cart {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @uses ThemeGrill\Masteriyo\Cart\Fees::add_fee
+	 * @uses Masteriyo\Cart\Fees::add_fee
 	 * @param string $name      Unique name for the fee. Multiple fees of the same name cannot be added.
 	 * @param float  $amount    Fee amount (do not enter negative amounts).
 	 */
@@ -1077,7 +1077,7 @@ class Cart {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @uses ThemeGrill\Masteriyo\Cart\Fees::get_fees
+	 * @uses Masteriyo\Cart\Fees::get_fees
 	 * @return array
 	 */
 	public function get_fees() {

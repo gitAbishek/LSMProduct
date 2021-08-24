@@ -12,20 +12,20 @@
  * If necessary extend this class and create new abstract classes like `CrudController` or `TermsController`.
  *
  * @class   RestController
- * @package ThemeGrill/Masteriyo/RestApi
+ * @package Masteriyo/RestApi
  * @see     https://developer.wordpress.org/rest-api/extending-the-rest-api/controller-classes/
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Abstract Rest Controller Class
  *
- * @package ThemeGrill/Masteriyo/RestApi
+ * @package Masteriyo/RestApi
  * @extends  WP_REST_Controller
- * @version  2.6.0
+ * @version  0.1.0
  */
 abstract class RestController extends \WP_REST_Controller {
 

@@ -3,12 +3,12 @@
  * Notice model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Notice;
+use Masteriyo\Notice;
 
 class NoticeServiceProvider extends AbstractServiceProvider {
 	/**
@@ -24,7 +24,7 @@ class NoticeServiceProvider extends AbstractServiceProvider {
 	 */
 	protected $provides = array(
 		'notice',
-		'\ThemeGrill\Masteriyo\Notice',
+		'\Masteriyo\Notice',
 	);
 
 	/**

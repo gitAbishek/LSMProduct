@@ -4,14 +4,14 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Repository;
+ * @package Masteriyo\Repository;
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\CourseReviews;
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Models\CourseReview;
+use Masteriyo\CourseReviews;
+use Masteriyo\Database\Model;
+use Masteriyo\Models\CourseReview;
 
 /**
  * CourseReview Repository class.

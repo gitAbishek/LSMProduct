@@ -5,9 +5,9 @@
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\FileRestrictions;
+namespace Masteriyo\FileRestrictions;
 
-use ThemeGrill\Masteriyo\Abstracts\FileRestriction;
+use Masteriyo\Abstracts\FileRestriction;
 
 class LessonVideoRestriction extends FileRestriction {
 	/**

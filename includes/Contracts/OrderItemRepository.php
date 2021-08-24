@@ -3,10 +3,10 @@
  * Order Item repository interface.
  *
  * @version 0.1.0
- * @package ThemeGrill\Masteriyo\Interface
+ * @package Masteriyo\Interface
  */
 
-namespace ThemeGrill\Masteriyo\Contracts;
+namespace Masteriyo\Contracts;
 
 defined( 'ABSPATH' ) || exit;
 

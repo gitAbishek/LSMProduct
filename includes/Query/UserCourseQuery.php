@@ -2,14 +2,14 @@
 /**
  * Class for parameter-based user course query.
  *
- * @package  ThemeGrill\Masteriyo\Query
+ * @package  Masteriyo\Query
  * @version 0.1.0
  * @since   0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Query;
+namespace Masteriyo\Query;
 
-use ThemeGrill\Masteriyo\Abstracts\ObjectQuery;
+use Masteriyo\Abstracts\ObjectQuery;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -45,7 +45,7 @@ class UserCourseQuery extends ObjectQuery {
 	 *
 	 * @since 0.0.1
 	 *
-	 * @return ThemeGrill\Masteriyo\Models\UserCourse[] User course objects.
+	 * @return Masteriyo\Models\UserCourse[] User course objects.
 	 */
 	public function get_user_courses() {
 		$args    = apply_filters( 'masteriyo_user_course_object_query_args', $this->get_query_vars() );

@@ -4,15 +4,15 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+ * @package Masteriyo\RestApi\Controllers\Version1;
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Helper\Utils;
-use ThemeGrill\Masteriyo\Helper\Permission;
+use Masteriyo\Helper\Utils;
+use Masteriyo\Helper\Permission;
 
 /**
  * Main class for CommentController.
@@ -51,7 +51,7 @@ class CourseReviewsController extends CommentsController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 * @var Masteriyo\Helper\Permission;
 	 */
 	protected $permission = null;
 
@@ -444,7 +444,7 @@ class CourseReviewsController extends CommentsController {
 
 		if ( 0 !== $id ) {
 			$course_review->set_id( $id );
-			$course_review_repo = masteriyo( \ThemeGrill\Masteriyo\Repository\CourseReviewRepository::class );
+			$course_review_repo = masteriyo( \Masteriyo\Repository\CourseReviewRepository::class );
 			$course_review_repo->read( $course_review );
 		}
 

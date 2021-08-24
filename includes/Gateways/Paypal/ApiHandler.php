@@ -2,10 +2,10 @@
 /**
  * Paypal Api class file.
  *
- * @package ThemeGrill\Masteriyo\Gateways
+ * @package Masteriyo\Gateways
  */
 
-namespace ThemeGrill\Masteriyo\Gateways\Paypal;
+namespace Masteriyo\Gateways\Paypal;
 
 defined( 'ABSPATH' ) || exit;
 

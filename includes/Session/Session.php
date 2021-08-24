@@ -4,15 +4,15 @@
  *
  * @since 0.1.0
  * @class Session
- * @package ThemeGrill\Masteriyo\Session
+ * @package Masteriyo\Session
  */
 
-namespace ThemeGrill\Masteriyo\Session;
+namespace Masteriyo\Session;
 
-use ThemeGrill\Masteriyo\Abstracts\Session as AbstractSession;
-use ThemeGrill\Masteriyo\Repository\SessionRepository;
-use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Helper\Utils;
+use Masteriyo\Abstracts\Session as AbstractSession;
+use Masteriyo\Repository\SessionRepository;
+use Masteriyo\Constants;
+use Masteriyo\Helper\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -51,7 +51,7 @@ class Session extends AbstractSession {
 	/**
 	 * Constructor for the session class.
 	 *
-	 * @param ThemeGrill\Masteriyo\Repository\SessionRepository $session_repository Session repository.
+	 * @param Masteriyo\Repository\SessionRepository $session_repository Session repository.
 	 *
 	 * @since 0.1.0
 	 */
@@ -66,7 +66,7 @@ class Session extends AbstractSession {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return ThemeGrill\Masteriyo\Abstracts\Session
+	 * @return Masteriyo\Abstracts\Session
 	 */
 	public function start() {
 		$this->init_session_cookie();
@@ -139,7 +139,7 @@ class Session extends AbstractSession {
 	/**
 	 * Get the session based on the ID.
 	 *
-	 * @return \ThemeGrill\Masteriyo\Session\Session
+	 * @return \Masteriyo\Session\Session
 	 */
 	public function read() {
 		$this->repository->read( $this );

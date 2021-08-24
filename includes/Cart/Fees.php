@@ -2,15 +2,15 @@
 /**
  * Cart fees API.
  *
- * @package ThemeGrill\Masteriyo\Classes
+ * @package Masteriyo\Classes
  * @version 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Cart;
+namespace Masteriyo\Cart;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Helper\Utils;
+use Masteriyo\Helper\Utils;
 
 /**
  * Fees class.
@@ -56,7 +56,7 @@ class Fees {
 	 * @param Cart $cart Cart object.
 	 */
 	public function set_cart( &$cart ) {
-		if ( ! is_a( $cart, 'ThemeGrill\Masteriyo\Cart\Cart' ) ) {
+		if ( ! is_a( $cart, 'Masteriyo\Cart\Cart' ) ) {
 			throw new \Exception( 'A valid Cart object is required' );
 		}
 

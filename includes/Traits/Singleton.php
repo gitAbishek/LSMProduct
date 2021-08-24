@@ -2,10 +2,10 @@
 /**
  * Singleton class trait.
  *
- * @package ThemeGrill\Masteriyo\Traits
+ * @package Masteriyo\Traits
  */
 
-namespace ThemeGrill\Masteriyo\Traits;
+namespace Masteriyo\Traits;
 
 /**
  * Singleton trait.

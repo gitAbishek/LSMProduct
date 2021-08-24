@@ -3,14 +3,14 @@
  * Course model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\Course;
-use ThemeGrill\Masteriyo\Repository\CourseRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CoursesController;
+use Masteriyo\Models\Course;
+use Masteriyo\Repository\CourseRepository;
+use Masteriyo\RestApi\Controllers\Version1\CoursesController;
 
 class CourseServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,7 +28,7 @@ class CourseServiceProvider extends AbstractServiceProvider {
 		'course',
 		'course.store',
 		'course.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CoursesController',
+		'\Masteriyo\RestApi\Controllers\Version1\CoursesController',
 	);
 
 	/**
@@ -45,7 +45,7 @@ class CourseServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'course.rest', CoursesController::class )
 			->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CoursesController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\CoursesController' )
 			->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'course', Course::class )

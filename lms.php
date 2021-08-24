@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name:     Masteriyo LMS
- * Plugin URI:      https://example.com
+ * Plugin URI:      https://masteriyo.com
  * Description:     WordPress Learning Mangement System(LMS) plugin.
- * Author:          ThemeGrill
- * Author URI:      https://themegrill.com
+ * Author:          Masteriyo
+ * Author URI:      https://masteriyo.com
  * Version:         0.1.0
  * Text Domain:     masteriyo
  * Domain Path:     /i18n/languages
@@ -12,9 +12,9 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-use ThemeGrill\Masteriyo\Masteriyo;
+use Masteriyo\Masteriyo;
 use League\Container\Container;
-use ThemeGrill\Masteriyo\Activation;
+use Masteriyo\Activation;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -47,7 +47,7 @@ $masteriyo->get( 'app' );
  * @since 0.1.0
  *
  * @param string $class Class name or alias.
- * @return ThemeGrill\Masteriyo\Masteriyo
+ * @return Masteriyo\Masteriyo
  */
 function masteriyo( $class = 'app' ) {
 	global $masteriyo;

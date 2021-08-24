@@ -4,15 +4,15 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Models;
+ * @package Masteriyo\Models;
  */
 
-namespace ThemeGrill\Masteriyo\Models;
+namespace Masteriyo\Models;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Repository\CourseCategoryRepository;
-use ThemeGrill\Masteriyo\Helper\Utils;
-use ThemeGrill\Masteriyo\Cache\CacheInterface;
+use Masteriyo\Database\Model;
+use Masteriyo\Repository\CourseCategoryRepository;
+use Masteriyo\Helper\Utils;
+use Masteriyo\Cache\CacheInterface;
 
 defined( 'ABSPATH' ) || exit;
 

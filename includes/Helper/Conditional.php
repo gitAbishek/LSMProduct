@@ -5,9 +5,9 @@
  * @since 0.1.0
  */
 
-use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Models\CourseReview;
-use ThemeGrill\Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Constants;
+use Masteriyo\Models\CourseReview;
+use Masteriyo\Query\UserCourseQuery;
 
 if ( ! function_exists( 'masteriyo_is_filtered' ) ) {
 	/**

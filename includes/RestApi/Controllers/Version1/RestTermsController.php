@@ -2,14 +2,14 @@
 /**
  * Abstract Rest Terms Controller
  *
- * @package ThemeGrill\RestApi
+ * @package RestApi
  * @version  0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CrudController;
-use ThemeGrill\Masteriyo\Helper\Permission;
+use Masteriyo\RestApi\Controllers\Version1\CrudController;
+use Masteriyo\Helper\Permission;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -32,7 +32,7 @@ abstract class RestTermsController extends CrudController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 * @var Masteriyo\Helper\Permission;
 	 */
 	protected $permission = null;
 

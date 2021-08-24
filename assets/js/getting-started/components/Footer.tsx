@@ -5,7 +5,7 @@ import React from 'react';
 const Footer: React.FC = () => {
 	return (
 		<Text color="gray.500" fontSize="sm" align="center">
-			{__(`MASTERIYO LMS. Designed by ThemeGrill`, 'masteriyo')}
+			{__(`MASTERIYO LMS. Designed by Masteriyo`, 'masteriyo')}
 		</Text>
 	);
 };

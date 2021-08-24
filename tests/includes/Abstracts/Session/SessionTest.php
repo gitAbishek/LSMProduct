@@ -2,10 +2,10 @@
 /**
  * Class this->session Test
  *
- * @package ThemeGrill\Masteriyo
+ * @package Masteriyo
  */
 
-use ThemeGrill\Masteriyo\Abstracts\Session\Session;
+use Masteriyo\Abstracts\Session\Session;
 
 /**
  * this->session test class.
@@ -17,7 +17,7 @@ class SessionTest extends WP_UnitTestCase {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Abstracts\Session\Session
+	 * @var Masteriyo\Abstracts\Session\Session
 	 */
 	private $session;
 

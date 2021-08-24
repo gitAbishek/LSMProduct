@@ -5,12 +5,12 @@
  * @package Masteriyo\Gateways
  */
 
-namespace ThemeGrill\Masteriyo\Gateways\Paypal;
+namespace Masteriyo\Gateways\Paypal;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Gateways\Paypal\Response;
+use Masteriyo\Constants;
+use Masteriyo\Gateways\Paypal\Response;
 
 /**
  * Handle PDT Responses from PayPal.

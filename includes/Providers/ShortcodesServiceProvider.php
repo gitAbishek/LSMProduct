@@ -3,14 +3,14 @@
  * Shortcodes service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Shortcodes\CartShortcode;
-use ThemeGrill\Masteriyo\Shortcodes\CheckoutShortcode;
-use ThemeGrill\Masteriyo\Shortcodes\MyAccountShortcode;
+use Masteriyo\Shortcodes\CartShortcode;
+use Masteriyo\Shortcodes\CheckoutShortcode;
+use Masteriyo\Shortcodes\MyAccountShortcode;
 
 class ShortcodesServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,9 +28,9 @@ class ShortcodesServiceProvider extends AbstractServiceProvider {
 		'shortcode.myaccount',
 		'shortcode.checkout',
 		'shortcode.cart',
-		'\ThemeGrill\Masteriyo\Shortcodes\MyAccountShortcode',
-		'\ThemeGrill\Masteriyo\Shortcodes\CartShortcode',
-		'\ThemeGrill\Masteriyo\Shortcodes\CheckoutShortcode',
+		'\Masteriyo\Shortcodes\MyAccountShortcode',
+		'\Masteriyo\Shortcodes\CartShortcode',
+		'\Masteriyo\Shortcodes\CheckoutShortcode',
 	);
 
 	/**
@@ -46,8 +46,8 @@ class ShortcodesServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'shortcode.checkout', CheckoutShortcode::class );
 		$this->getContainer()->add( 'shortcode.cart', CartShortcode::class );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Shortcodes\MyAccountShortcode' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Shortcodes\CartShortcode' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Shortcodes\CheckoutShortcode' );
+		$this->getContainer()->add( '\Masteriyo\Shortcodes\MyAccountShortcode' );
+		$this->getContainer()->add( '\Masteriyo\Shortcodes\CartShortcode' );
+		$this->getContainer()->add( '\Masteriyo\Shortcodes\CheckoutShortcode' );
 	}
 }

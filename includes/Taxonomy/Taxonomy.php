@@ -3,7 +3,7 @@
  * Abstract taxonomy class.
  */
 
-namespace ThemeGrill\Masteriyo\Taxonomy;
+namespace Masteriyo\Taxonomy;
 
 abstract class Taxonomy {
 	/**

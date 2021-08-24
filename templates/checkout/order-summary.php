@@ -2,7 +2,7 @@
 /**
  * Order summary.
  *
- * @package ThemeGrill\Masteriyo\Templates
+ * @package Masteriyo\Templates
  * @since 0.1.0
  * @version 0.1.0
  */

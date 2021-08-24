@@ -2,7 +2,7 @@
 /**
  * Locales information
  *
- * @package ThemeGrill\Masteriyo\i18n
+ * @package Masteriyo\i18n
  * @version 3.5.0
  */
 

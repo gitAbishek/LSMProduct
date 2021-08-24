@@ -3,14 +3,14 @@
  * Course question-answer model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\CourseQuestionAnswer;
-use ThemeGrill\Masteriyo\Repository\CourseQuestionAnswerRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseQuestionAnswersController;
+use Masteriyo\Models\CourseQuestionAnswer;
+use Masteriyo\Repository\CourseQuestionAnswerRepository;
+use Masteriyo\RestApi\Controllers\Version1\CourseQuestionAnswersController;
 
 class CourseQuestionAnswerServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,7 +28,7 @@ class CourseQuestionAnswerServiceProvider extends AbstractServiceProvider {
 		'course-qa',
 		'course-qa.store',
 		'course-qa.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseQuestionAnswersController',
+		'\Masteriyo\RestApi\Controllers\Version1\CourseQuestionAnswersController',
 	);
 
 	/**
@@ -45,7 +45,7 @@ class CourseQuestionAnswerServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'course-qa.rest', CourseQuestionAnswersController::class )
 		->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseQuestionAnswersController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\CourseQuestionAnswersController' )
 		->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'course-qa', CourseQuestionAnswer::class )

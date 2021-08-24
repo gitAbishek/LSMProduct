@@ -3,21 +3,21 @@
  * Emails service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Emails\BecomeInstructorEmail;
-use ThemeGrill\Masteriyo\Emails\CourseCompletedEmail;
-use ThemeGrill\Masteriyo\Emails\CourseEnrolledEmail;
-use ThemeGrill\Masteriyo\Emails\Email;
-use ThemeGrill\Masteriyo\Emails\NewOrderEmail;
-use ThemeGrill\Masteriyo\Emails\OrderCancelledEmail;
-use ThemeGrill\Masteriyo\Emails\OrderOnHoldEmail;
-use ThemeGrill\Masteriyo\Emails\OrderCompletedEmail;
-use ThemeGrill\Masteriyo\Emails\OrderProcessingEmail;
-use ThemeGrill\Masteriyo\Emails\ResetPasswordEmail;
+use Masteriyo\Emails\BecomeInstructorEmail;
+use Masteriyo\Emails\CourseCompletedEmail;
+use Masteriyo\Emails\CourseEnrolledEmail;
+use Masteriyo\Emails\Email;
+use Masteriyo\Emails\NewOrderEmail;
+use Masteriyo\Emails\OrderCancelledEmail;
+use Masteriyo\Emails\OrderOnHoldEmail;
+use Masteriyo\Emails\OrderCompletedEmail;
+use Masteriyo\Emails\OrderProcessingEmail;
+use Masteriyo\Emails\ResetPasswordEmail;
 
 class EmailsServiceProvider extends AbstractServiceProvider {
 	/**
@@ -42,8 +42,8 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 		'email.order-onhold',
 		'email.order-completed',
 		'email.order-processing',
-		'\ThemeGrill\Masteriyo\Emails\Email',
-		'\ThemeGrill\Masteriyo\Emails\ResetPasswordEmail',
+		'\Masteriyo\Emails\Email',
+		'\Masteriyo\Emails\ResetPasswordEmail',
 	);
 
 	/**
@@ -66,7 +66,7 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'email.order-completed', OrderCompletedEmail::class );
 		$this->getContainer()->add( 'email.order-processing', OrderProcessingEmail::class );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Emails\Email' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Emails\ResetPasswordEmail' );
+		$this->getContainer()->add( '\Masteriyo\Emails\Email' );
+		$this->getContainer()->add( '\Masteriyo\Emails\ResetPasswordEmail' );
 	}
 }

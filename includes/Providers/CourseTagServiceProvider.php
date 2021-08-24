@@ -3,14 +3,14 @@
  * CourseTag model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\CourseTag;
-use ThemeGrill\Masteriyo\Repository\CourseTagRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseTagsController;
+use Masteriyo\Models\CourseTag;
+use Masteriyo\Repository\CourseTagRepository;
+use Masteriyo\RestApi\Controllers\Version1\CourseTagsController;
 
 class CourseTagServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,7 +28,7 @@ class CourseTagServiceProvider extends AbstractServiceProvider {
 		'course_tag',
 		'course_tag.store',
 		'course_tag.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseTagsController',
+		'\Masteriyo\RestApi\Controllers\Version1\CourseTagsController',
 	);
 
 	/**
@@ -45,7 +45,7 @@ class CourseTagServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'course_tag.rest', CourseTagsController::class )
 			->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CourseTagsController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\CourseTagsController' )
 			->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'course_tag', CourseTag::class )

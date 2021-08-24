@@ -4,17 +4,17 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+ * @package Masteriyo\RestApi\Controllers\Version1;
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Helper\Permission;
-use ThemeGrill\Masteriyo\Exceptions\RestException;
-use ThemeGrill\Masteriyo\ModelException;
-use ThemeGrill\Masteriyo\Models\Order\Order;
+use Masteriyo\Helper\Permission;
+use Masteriyo\Exceptions\RestException;
+use Masteriyo\ModelException;
+use Masteriyo\Models\Order\Order;
 
 /**
  * OrdersController class.
@@ -61,7 +61,7 @@ class OrdersController extends PostsController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 * @var Masteriyo\Helper\Permission;
 	 */
 	protected $permission = null;
 

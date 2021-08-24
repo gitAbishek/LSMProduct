@@ -2,19 +2,19 @@
 /**
  * Ajax.
  *
- * @package ThemeGrill\Masteriyo
+ * @package Masteriyo
  *
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo;
+namespace Masteriyo;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Main Masteriyo class.
  *
- * @class ThemeGrill\Masteriyo\Masteriyo
+ * @class Masteriyo\Masteriyo
  */
 
 class ScriptStyle {

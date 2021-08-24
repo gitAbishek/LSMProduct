@@ -2,14 +2,14 @@
 /**
  * Class for parameter-based Course Review querying
  *
- * @package  ThemeGrill\Masteriyo\Query
+ * @package  Masteriyo\Query
  * @version 0.1.0
  * @since   0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Query;
+namespace Masteriyo\Query;
 
-use ThemeGrill\Masteriyo\Abstracts\ObjectQuery;
+use Masteriyo\Abstracts\ObjectQuery;
 
 defined( 'ABSPATH' ) || exit;
 

@@ -7,11 +7,11 @@
  * @version 3.3.0
  */
 
-namespace ThemeGrill\Masteriyo\Gateways\Paypal;
+namespace Masteriyo\Gateways\Paypal;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Gateways\Paypal\Response;
+use Masteriyo\Gateways\Paypal\Response;
 
 /**
  * Paypal_IPN_Handler class.

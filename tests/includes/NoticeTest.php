@@ -2,13 +2,13 @@
 /**
  * Class this->session_handler Test
  *
- * @package ThemeGrill\Masteriyo
+ * @package Masteriyo
  */
 
-use ThemeGrill\Masteriyo\Notice;
-use ThemeGrill\Masteriyo\Session\Session;
-use ThemeGrill\Masteriyo\Repository\SessionRepository;
-use ThemeGrill\Masteriyo\Template;
+use Masteriyo\Notice;
+use Masteriyo\Session\Session;
+use Masteriyo\Repository\SessionRepository;
+use Masteriyo\Template;
 
 /**
  * Session test class.
@@ -20,7 +20,7 @@ class NoticeTest extends WP_UnitTestCase {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Notice
+	 * @var Masteriyo\Notice
 	 */
 	private $notice;
 

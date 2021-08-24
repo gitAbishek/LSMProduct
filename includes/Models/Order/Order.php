@@ -4,16 +4,16 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Models;
+ * @package Masteriyo\Models;
  */
 
-namespace ThemeGrill\Masteriyo\Models\Order;
+namespace Masteriyo\Models\Order;
 
-use ThemeGrill\Masteriyo\Helper\Utils;
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Cache\CacheInterface;
-use ThemeGrill\Masteriyo\Query\UserCourseQuery;
-use ThemeGrill\Masteriyo\Abstracts\Order as AbstractOrder;
+use Masteriyo\Helper\Utils;
+use Masteriyo\Database\Model;
+use Masteriyo\Cache\CacheInterface;
+use Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Abstracts\Order as AbstractOrder;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -617,7 +617,7 @@ class Order extends AbstractOrder {
 	 * @param string|PaymentGateway $payment_method Payment method.
 	 */
 	public function set_payment_method( $payment_method ) {
-		if ( is_a( $payment_method, 'ThemeGrill\Masteriyo\Abstracts\PaymentGateway' ) ) {
+		if ( is_a( $payment_method, 'Masteriyo\Abstracts\PaymentGateway' ) ) {
 			$payment_method = $payment_method->get_method_title();
 		}
 

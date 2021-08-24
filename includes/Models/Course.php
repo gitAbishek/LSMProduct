@@ -4,16 +4,16 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Models;
+ * @package Masteriyo\Models;
  */
 
-namespace ThemeGrill\Masteriyo\Models;
+namespace Masteriyo\Models;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Repository\RepositoryInterface;
-use ThemeGrill\Masteriyo\Helper\Utils;
-use ThemeGrill\Masteriyo\Helper\Format;
-use ThemeGrill\Masteriyo\Cache\CacheInterface;
+use Masteriyo\Database\Model;
+use Masteriyo\Repository\RepositoryInterface;
+use Masteriyo\Helper\Utils;
+use Masteriyo\Helper\Format;
+use Masteriyo\Cache\CacheInterface;
 
 defined( 'ABSPATH' ) || exit;
 

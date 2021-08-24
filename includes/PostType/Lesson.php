@@ -3,7 +3,7 @@
  * Lessons class.
  */
 
-namespace ThemeGrill\Masteriyo\PostType;
+namespace Masteriyo\PostType;
 
 class Lesson extends PostType {
 	/**

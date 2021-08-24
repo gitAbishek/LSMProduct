@@ -3,20 +3,20 @@
  * Queries service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Query\CourseQuestionAnswerQuery;
-use ThemeGrill\Masteriyo\Query\CourseReviewQuery;
-use ThemeGrill\Masteriyo\Query\FaqQuery;
-use ThemeGrill\Masteriyo\Query\LessonQuery;
-use ThemeGrill\Masteriyo\Query\OrderItemQuery;
-use ThemeGrill\Masteriyo\Query\OrderQuery;
-use ThemeGrill\Masteriyo\Query\QuizQuery;
-use ThemeGrill\Masteriyo\Query\QuestionQuery;
-use ThemeGrill\Masteriyo\Query\SectionQuery;
+use Masteriyo\Query\CourseQuestionAnswerQuery;
+use Masteriyo\Query\CourseReviewQuery;
+use Masteriyo\Query\FaqQuery;
+use Masteriyo\Query\LessonQuery;
+use Masteriyo\Query\OrderItemQuery;
+use Masteriyo\Query\OrderQuery;
+use Masteriyo\Query\QuizQuery;
+use Masteriyo\Query\QuestionQuery;
+use Masteriyo\Query\SectionQuery;
 
 class QueriesServiceProvider extends AbstractServiceProvider {
 	/**
@@ -41,15 +41,15 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		'query.course-reviews',
 		'query.course-qas',
 
-		'\ThemeGrill\Masteriyo\Query\SectionQuery',
-		'\ThemeGrill\Masteriyo\Query\LessonQuery',
-		'\ThemeGrill\Masteriyo\Query\QuizQuery',
-		'\ThemeGrill\Masteriyo\Query\QuestionQuery',
-		'\ThemeGrill\Masteriyo\Query\FaqQuery',
-		'\ThemeGrill\Masteriyo\Query\OrderQuery',
-		'\ThemeGrill\Masteriyo\Query\OrderItemQuery',
-		'\ThemeGrill\Masteriyo\Query\CourseReviewQuery',
-		'\ThemeGrill\Masteriyo\Query\CourseQuestionAnswerQuery',
+		'\Masteriyo\Query\SectionQuery',
+		'\Masteriyo\Query\LessonQuery',
+		'\Masteriyo\Query\QuizQuery',
+		'\Masteriyo\Query\QuestionQuery',
+		'\Masteriyo\Query\FaqQuery',
+		'\Masteriyo\Query\OrderQuery',
+		'\Masteriyo\Query\OrderItemQuery',
+		'\Masteriyo\Query\CourseReviewQuery',
+		'\Masteriyo\Query\CourseQuestionAnswerQuery',
 	);
 
 	/**
@@ -71,14 +71,14 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'query.course-reviews', CourseReviewQuery::class );
 		$this->getContainer()->add( 'query.course-qas', CourseQuestionAnswerQuery::class );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\SectionQuery' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\LessonQuery' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\QuizQuery' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\QuestionQuery' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\FaqQuery' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\OrderQuery' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\OrderItemQuery' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\CourseReviewQuery' );
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\Query\CourseQuestionAnswerQuery' );
+		$this->getContainer()->add( '\Masteriyo\Query\SectionQuery' );
+		$this->getContainer()->add( '\Masteriyo\Query\LessonQuery' );
+		$this->getContainer()->add( '\Masteriyo\Query\QuizQuery' );
+		$this->getContainer()->add( '\Masteriyo\Query\QuestionQuery' );
+		$this->getContainer()->add( '\Masteriyo\Query\FaqQuery' );
+		$this->getContainer()->add( '\Masteriyo\Query\OrderQuery' );
+		$this->getContainer()->add( '\Masteriyo\Query\OrderItemQuery' );
+		$this->getContainer()->add( '\Masteriyo\Query\CourseReviewQuery' );
+		$this->getContainer()->add( '\Masteriyo\Query\CourseQuestionAnswerQuery' );
 	}
 }

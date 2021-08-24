@@ -4,10 +4,10 @@
  *
  * @since 0.1.0
  *
- * @package  ThemeGrill\Masteriyo\Abstracts
+ * @package  Masteriyo\Abstracts
  */
 
-namespace ThemeGrill\Masteriyo\Abstracts;
+namespace Masteriyo\Abstracts;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  * Extended by classes to provide a query abstraction layer for safe object searching.
  *
  * @version  0.1.0
- * @package  ThemeGrill\Masteriyo\Abstracts
+ * @package  Masteriyo\Abstracts
  */
 abstract class ObjectQuery {
 

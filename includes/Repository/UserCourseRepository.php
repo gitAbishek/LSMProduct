@@ -2,13 +2,13 @@
 /**
  * User course repository.
  *
- * @package ThemeGrill\Masteriyo\Repository;
+ * @package Masteriyo\Repository;
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Repository\AbstractRepository;
+use Masteriyo\Database\Model;
+use Masteriyo\Repository\AbstractRepository;
 
 /**
  * user course repository class.
@@ -215,7 +215,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param ThemeGrill\Masteriyo\Models\UserCourse $user_course User course object.
+	 * @param Masteriyo\Models\UserCourse $user_course User course object.
 	 */
 	protected function read_user_course_data( &$user_course ) {
 		$id          = $user_course->get_id();
@@ -245,7 +245,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param ThemeGrill\Masteriyo\Models\UserCourse $user_course User course object.
+	 * @param Masteriyo\Models\UserCourse $user_course User course object.
 	 */
 	public function clear_cache( &$user_course ) {
 		wp_cache_delete( 'item' . $user_course->get_id(), 'masteriyo-user-course' );

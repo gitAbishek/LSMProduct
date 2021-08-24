@@ -3,22 +3,22 @@
  * Question model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\Question\Question;
-use ThemeGrill\Masteriyo\Models\Question\TrueFalse;
-use ThemeGrill\Masteriyo\Models\Question\SingleChoice;
-use ThemeGrill\Masteriyo\Models\Question\MultipleChoice;
-use ThemeGrill\Masteriyo\Models\Question\ShortAnswer;
-use ThemeGrill\Masteriyo\Models\Question\ImageMatching;
-use ThemeGrill\Masteriyo\Models\Question\Sortable;
+use Masteriyo\Models\Question\Question;
+use Masteriyo\Models\Question\TrueFalse;
+use Masteriyo\Models\Question\SingleChoice;
+use Masteriyo\Models\Question\MultipleChoice;
+use Masteriyo\Models\Question\ShortAnswer;
+use Masteriyo\Models\Question\ImageMatching;
+use Masteriyo\Models\Question\Sortable;
 
 
-use ThemeGrill\Masteriyo\Repository\QuestionRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuestionsController;
+use Masteriyo\Repository\QuestionRepository;
+use Masteriyo\RestApi\Controllers\Version1\QuestionsController;
 
 class QuestionServiceProvider extends AbstractServiceProvider {
 	/**
@@ -36,7 +36,7 @@ class QuestionServiceProvider extends AbstractServiceProvider {
 		'question',
 		'question.store',
 		'question.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuestionsController',
+		'\Masteriyo\RestApi\Controllers\Version1\QuestionsController',
 		'question.true-false',
 		'question.single-choice',
 		'question.multiple-choice',
@@ -57,7 +57,7 @@ class QuestionServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'question.rest', QuestionsController::class )
 			->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuestionsController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\QuestionsController' )
 			->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'question', Question::class )

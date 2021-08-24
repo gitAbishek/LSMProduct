@@ -4,14 +4,14 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo;
+ * @package Masteriyo;
  * @subpackage Session;
  */
 
-namespace ThemeGrill\Masteriyo\Abstracts;
+namespace Masteriyo\Abstracts;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Contracts\Session as SessionInterface;
+use Masteriyo\Database\Model;
+use Masteriyo\Contracts\Session as SessionInterface;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -182,7 +182,7 @@ abstract class Session extends Model implements SessionInterface {
 	 * @since 0.1.0
 	 *
 	 * @param int $expiry Session expiry timestamp.
-	 * @return ThemeGrill\Masteriyo\Session\Session
+	 * @return Masteriyo\Session\Session
 	 */
 	public function set_expiry( $expiry ) {
 		$this->set_prop( 'expiry', absint( $expiry ) );
@@ -206,7 +206,7 @@ abstract class Session extends Model implements SessionInterface {
 	 * @since 0.1.0
 	 *
 	 * @param int $user_agent Session user_agent timestamp.
-	 * @return ThemeGrill\Masteriyo\Session\Session
+	 * @return Masteriyo\Session\Session
 	 */
 	public function set_user_agent( $user_agent ) {
 		$this->set_prop( 'user_agent', $user_agent );

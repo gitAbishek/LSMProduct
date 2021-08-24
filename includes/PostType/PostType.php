@@ -3,7 +3,7 @@
  * Abstract post type class.
  */
 
-namespace ThemeGrill\Masteriyo\PostType;
+namespace Masteriyo\PostType;
 
 class PostType {
 	/**

@@ -5,7 +5,7 @@
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\FileRestrictions;
+namespace Masteriyo\FileRestrictions;
 
 class FileRestrictions {
 	/**

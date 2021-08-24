@@ -3,13 +3,13 @@
  * Quiz rest controller.
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Helper\Utils;
-use ThemeGrill\Masteriyo\Helper\Permission;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuestionsController;
+use Masteriyo\Helper\Utils;
+use Masteriyo\Helper\Permission;
+use Masteriyo\RestApi\Controllers\Version1\QuestionsController;
 
 class QuizesController extends PostsController {
 	/**
@@ -62,7 +62,7 @@ class QuizesController extends PostsController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 * @var Masteriyo\Helper\Permission;
 	 */
 	protected $permission = null;
 
@@ -384,9 +384,9 @@ class QuizesController extends PostsController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param  int|WP_Post|ThemeGrill\Masteriyo\Models\Quiz $object Object ID or WP_Post or Quiz object.
+	 * @param  int|WP_Post|Masteriyo\Models\Quiz $object Object ID or WP_Post or Quiz object.
 	 *
-	 * @return ThemeGrill\Masteriyo\Models\Quiz|WP_Error Quiz object or WP_Error object.
+	 * @return Masteriyo\Models\Quiz|WP_Error Quiz object or WP_Error object.
 	 */
 	protected function get_object( $object ) {
 		try {

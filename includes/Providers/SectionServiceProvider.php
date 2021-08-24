@@ -3,14 +3,14 @@
  * Section model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\Section;
-use ThemeGrill\Masteriyo\Repository\SectionRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\SectionsController;
+use Masteriyo\Models\Section;
+use Masteriyo\Repository\SectionRepository;
+use Masteriyo\RestApi\Controllers\Version1\SectionsController;
 
 class SectionServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,7 +28,7 @@ class SectionServiceProvider extends AbstractServiceProvider {
 		'section',
 		'section.store',
 		'section.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\SectionsController',
+		'\Masteriyo\RestApi\Controllers\Version1\SectionsController',
 	);
 
 	/**
@@ -45,7 +45,7 @@ class SectionServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'section.rest', SectionsController::class )
 			->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\SectionsController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\SectionsController' )
 			->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'section', Section::class )

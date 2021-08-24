@@ -5,9 +5,9 @@
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\PostType;
+namespace Masteriyo\PostType;
 
-use ThemeGrill\Masteriyo\Traits\Singleton;
+use Masteriyo\Traits\Singleton;
 
 class RegisterPostType {
 
@@ -21,12 +21,12 @@ class RegisterPostType {
 	 * @var array
 	 */
 	private $post_types = array(
-		'course'   => 'ThemeGrill\Masteriyo\PostType\Course',
-		'lesson'   => 'ThemeGrill\Masteriyo\PostType\Lesson',
-		'section'  => 'ThemeGrill\Masteriyo\PostType\Section',
-		'quiz'     => 'ThemeGrill\Masteriyo\PostType\Quiz',
-		'question' => 'ThemeGrill\Masteriyo\PostType\Question',
-		'order'    => 'ThemeGrill\Masteriyo\PostType\Order',
+		'course'   => 'Masteriyo\PostType\Course',
+		'lesson'   => 'Masteriyo\PostType\Lesson',
+		'section'  => 'Masteriyo\PostType\Section',
+		'quiz'     => 'Masteriyo\PostType\Quiz',
+		'question' => 'Masteriyo\PostType\Question',
+		'order'    => 'Masteriyo\PostType\Order',
 	);
 
 	/**

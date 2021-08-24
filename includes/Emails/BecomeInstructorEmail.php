@@ -2,12 +2,12 @@
 /**
  * BecomeInstructorEmail class.
  *
- * @package ThemeGrill\Masteriyo\Emails
+ * @package Masteriyo\Emails
  *
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Emails;
+namespace Masteriyo\Emails;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Emails
+ * @package Masteriyo\Emails
  */
 class BecomeInstructorEmail extends Email {
 	/**

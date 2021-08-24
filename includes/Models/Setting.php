@@ -6,15 +6,15 @@
  *
  * @since 0.1.0
  *
- * @package  ThemeGrill\Masteriyo\Models
+ * @package  Masteriyo\Models
  */
 
-namespace ThemeGrill\Masteriyo\Models;
+namespace Masteriyo\Models;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Repository\SettingRepository;
+use Masteriyo\Database\Model;
+use Masteriyo\Repository\SettingRepository;
 
 /**
  * Setting class.r

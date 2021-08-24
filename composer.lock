@@ -434,16 +434,16 @@
         },
         {
             "name": "antecedent/patchwork",
-            "version": "2.1.12",
+            "version": "2.1.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antecedent/patchwork.git",
-                "reference": "b98e046dd4c0acc34a0846604f06f6111654d9ea"
+                "reference": "0430ceaac7f447f1778c199ec19d7e4362a6f961"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/b98e046dd4c0acc34a0846604f06f6111654d9ea",
-                "reference": "b98e046dd4c0acc34a0846604f06f6111654d9ea",
+                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/0430ceaac7f447f1778c199ec19d7e4362a6f961",
+                "reference": "0430ceaac7f447f1778c199ec19d7e4362a6f961",
                 "shasum": ""
             },
             "require": {
@@ -474,7 +474,7 @@
                 "runkit",
                 "testing"
             ],
-            "time": "2019-12-22T17:52:09+00:00"
+            "time": "2021-08-22T08:00:13+00:00"
         },
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",

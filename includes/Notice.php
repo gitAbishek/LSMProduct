@@ -3,14 +3,14 @@
  * Notice class.
  *
  * @since 0.1.0
- * @package ThemeGrill\Masteriyo
+ * @package Masteriyo
  */
 
-namespace ThemeGrill\Masteriyo;
+namespace Masteriyo;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Session\Session;
+use Masteriyo\Session\Session;
 
 /**
  * Notice class.
@@ -58,7 +58,7 @@ class Notice {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Session\Session
+	 * @var Masteriyo\Session\Session
 	 */
 	private $session;
 

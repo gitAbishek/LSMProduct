@@ -3,7 +3,7 @@
  * Session interfaces.
  */
 
-namespace ThemeGrill\Masteriyo\Contracts;
+namespace Masteriyo\Contracts;
 
 interface Session {
 	/**

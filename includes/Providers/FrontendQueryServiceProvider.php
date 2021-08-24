@@ -3,11 +3,11 @@
  * Frontend query service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\FrontendQuery;
+use Masteriyo\FrontendQuery;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
 class FrontendQueryServiceProvider extends AbstractServiceProvider {
@@ -24,7 +24,7 @@ class FrontendQueryServiceProvider extends AbstractServiceProvider {
 	 */
 	protected $provides = array(
 		'query.frontend',
-		'\ThemeGrill\Masteriyo\FrontendQuery',
+		'\Masteriyo\FrontendQuery',
 	);
 
 	/**

@@ -2,11 +2,11 @@
 /**
  * Class Format Test
  *
- * @package ThemeGrill\Masteriyo
+ * @package Masteriyo
  */
 
-use ThemeGrill\Masteriyo\Helper\Format;
-use ThemeGrill\Masteriyo\Constants;
+use Masteriyo\Helper\Format;
+use Masteriyo\Constants;
 
 /**
  * Session test class.
@@ -18,7 +18,7 @@ class FormatTest extends WP_UnitTestCase {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Format
+	 * @var Masteriyo\Helper\Format
 	 */
 	private $format;
 

@@ -2,10 +2,10 @@
 /**
  * Handle registration form.
  *
- * @package ThemeGrill\Masetriyo\Classes\
+ * @package Masetriyo\Classes\
  */
 
-namespace ThemeGrill\Masteriyo\FormHandler;
+namespace Masteriyo\FormHandler;
 
 defined( 'ABSPATH' ) || exit;
 

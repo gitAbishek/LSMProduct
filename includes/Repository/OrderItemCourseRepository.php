@@ -4,15 +4,15 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Repository;
+ * @package Masteriyo\Repository;
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Models\OrderItem;
-use ThemeGrill\Masteriyo\Repository\OrderItemRepository;
-use ThemeGrill\Masteriyo\Repository\RepositoryInterface;
+use Masteriyo\Database\Model;
+use Masteriyo\Models\OrderItem;
+use Masteriyo\Repository\OrderItemRepository;
+use Masteriyo\Repository\RepositoryInterface;
 
 /**
  * OrderItemCourseRepository class.

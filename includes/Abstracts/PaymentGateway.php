@@ -6,12 +6,12 @@
  *
  * @class PaymentGateway
  * @version 0.1.0
- * @package ThemeGrill|masteriyo\Abstracts
+ * @package Masteriyo\Abstracts
  */
 
-namespace ThemeGrill\Masteriyo\Abstracts;
+namespace Masteriyo\Abstracts;
 
-use ThemeGrill\Masteriyo\Constants;
+use Masteriyo\Constants;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @class       PaymentGateway
  * @version     0.1.0
- * @package     ThemeGrill\Masteriyo\Abstracts
+ * @package     Masteriyo\Abstracts
  */
 abstract class PaymentGateway {
 

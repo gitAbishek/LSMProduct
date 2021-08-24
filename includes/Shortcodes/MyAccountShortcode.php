@@ -4,12 +4,12 @@
  *
  * @since 0.1.0
  * @class MyAccountShortcode
- * @package ThemeGrill\Masteriyo\Shortcodes
+ * @package Masteriyo\Shortcodes
  */
 
-namespace ThemeGrill\Masteriyo\Shortcodes;
+namespace Masteriyo\Shortcodes;
 
-use ThemeGrill\Masteriyo\Abstracts\Shortcode;
+use Masteriyo\Abstracts\Shortcode;
 
 defined( 'ABSPATH' ) || exit;
 

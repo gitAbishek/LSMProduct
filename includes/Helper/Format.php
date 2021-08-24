@@ -5,8 +5,8 @@
  * @since 0.1.0
  */
 
-use ThemeGrill\Masteriyo\DateTime;
-use ThemeGrill\Masteriyo\Constants;
+use Masteriyo\DateTime;
+use Masteriyo\Constants;
 
 /**
  * Converts a string (e.g. 'yes' or 'no') to a bool.
@@ -44,7 +44,7 @@ function masteriyo_bool_to_string( $bool ) {
  *
  * @since  0.1.0
  * @param  string $time_string Time string.
- * @return ThemeGrill\Masteriyo\DateTime
+ * @return Masteriyo\DateTime
  */
 function masteriyo_string_to_datetime( $time_string ) {
 	// Strings are defined in local WP timezone. Convert to UTC.
@@ -671,7 +671,7 @@ function masteriyo_float_to_string( $float ) {
  * Format a date for output.
  *
  * @since  0.1.0
- * @param  ThemeGrill\Masteriyo\DateTime $date   Instance of ThemeGrill\Masteriyo\DateTime.
+ * @param  Masteriyo\DateTime $date   Instance of Masteriyo\DateTime.
  * @param  string      $format Data format.
  *                             Defaults to the masteriyo_date_format function if not set.
  * @return string
@@ -681,7 +681,7 @@ function masteriyo_format_datetime( $date, $format = '' ) {
 		$format = masteriyo_date_format();
 	}
 
-	if ( ! is_a( $date, 'ThemeGrill\Masteriyo\DateTime' ) ) {
+	if ( ! is_a( $date, 'Masteriyo\DateTime' ) ) {
 		return '';
 	}
 
@@ -708,7 +708,7 @@ function masteriyo_rest_prepare_date_response( $date, $utc = true ) {
 		$date->setTimezone( new \DateTimeZone( masteriyo_timezone_string() ) );
 	}
 
-	if ( ! is_a( $date, 'ThemeGrill\Masteriyo\DateTime' ) ) {
+	if ( ! is_a( $date, 'Masteriyo\DateTime' ) ) {
 		return null;
 	}
 

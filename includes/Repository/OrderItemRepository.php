@@ -3,15 +3,15 @@
 /**
  * Class order item repository.
  *
- * @package ThemeGrill\Masteriyo\Abstracts
+ * @package Masteriyo\Abstracts
  * @since 0.1.0
  * @version 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Repository\AbstractRepository;
-use ThemeGrill\Masteriyo\Contracts\OrderItemRepository as OrderItemRepositoryInterface;
+use Masteriyo\Repository\AbstractRepository;
+use Masteriyo\Contracts\OrderItemRepository as OrderItemRepositoryInterface;
 
 defined( 'ABSPATH' ) || exit;
 

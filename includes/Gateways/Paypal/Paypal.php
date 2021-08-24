@@ -10,15 +10,15 @@
  * @package     Masteriyo\Classes\Payment
  */
 
-namespace ThemeGrill\Masteriyo\Gateways\Paypal;
+namespace Masteriyo\Gateways\Paypal;
 
-use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Gateways\Paypal\ApiHandler;
-use ThemeGrill\Masteriyo\Gateways\Paypal\Request;
-use ThemeGrill\Masteriyo\Gateways\Paypal\PdtHandler;
-use ThemeGrill\Masteriyo\Gateways\Paypal\IpnHandler;
-use ThemeGrill\Masteriyo\Abstracts\PaymentGateway;
-use ThemeGrill\Masteriyo\Contracts\PaymentGateway as PaymentGatewayInterface;
+use Masteriyo\Constants;
+use Masteriyo\Gateways\Paypal\ApiHandler;
+use Masteriyo\Gateways\Paypal\Request;
+use Masteriyo\Gateways\Paypal\PdtHandler;
+use Masteriyo\Gateways\Paypal\IpnHandler;
+use Masteriyo\Abstracts\PaymentGateway;
+use Masteriyo\Contracts\PaymentGateway as PaymentGatewayInterface;
 
 defined( 'ABSPATH' ) || exit;
 

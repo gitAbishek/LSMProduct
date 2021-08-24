@@ -2,16 +2,16 @@
 /**
  * Class Offline payment gateway.
  *
- * @package ThemeGrill\Masteriyo\Gateways
+ * @package Masteriyo\Gateways
  */
 
-namespace ThemeGrill\Masteriyo\Gateways\Offline;
+namespace Masteriyo\Gateways\Offline;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Constants;
-use ThemeGrill\Masteriyo\Abstracts\PaymentGateway;
-use ThemeGrill\Masteriyo\Contracts\PaymentGateway as PaymentGatewayInterface;
+use Masteriyo\Constants;
+use Masteriyo\Abstracts\PaymentGateway;
+use Masteriyo\Contracts\PaymentGateway as PaymentGatewayInterface;
 
 /**
  * Cash on Delivery Gateway.

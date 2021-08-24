@@ -5,12 +5,12 @@
  * Loads payment gateways via hooks for use in the store.
  *
  * @version 0.1.0
- * @package ThemeGrill\Masteriyo\Classes
+ * @package Masteriyo\Classes
  */
 
-namespace ThemeGrill\Masteriyo;
+namespace Masteriyo;
 
-use ThemeGrill\Masteriyo\Session\Session;
+use Masteriyo\Session\Session;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -33,7 +33,7 @@ class PaymentGateways {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Session\Session
+	 * @var Masteriyo\Session\Session
 	 */
 	private $session;
 
@@ -55,8 +55,8 @@ class PaymentGateways {
 	 */
 	public function init() {
 		$load_gateways = array(
-			'ThemeGrill\Masteriyo\Gateways\Offline\Offline',
-			'ThemeGrill\Masteriyo\Gateways\Paypal\Paypal',
+			'Masteriyo\Gateways\Offline\Offline',
+			'Masteriyo\Gateways\Paypal\Paypal',
 		);
 
 		// Filter.
@@ -163,7 +163,7 @@ class PaymentGateways {
 	 * @return bool
 	 */
 	protected function filter_valid_gateway_class( $gateway ) {
-		return $gateway && is_a( $gateway, 'ThemeGrill\Masteriyo\Abstracts\PaymentGateway' );
+		return $gateway && is_a( $gateway, 'Masteriyo\Abstracts\PaymentGateway' );
 	}
 
 	/**

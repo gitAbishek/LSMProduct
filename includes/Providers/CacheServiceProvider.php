@@ -3,12 +3,12 @@
  * Cache model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Cache\Cache;
+use Masteriyo\Cache\Cache;
 
 class CacheServiceProvider extends AbstractServiceProvider {
 	/**
@@ -24,7 +24,7 @@ class CacheServiceProvider extends AbstractServiceProvider {
 	 */
 	protected $provides = array(
 		'cache',
-		'\ThemeGrill\Masteriyo\Cache\Cache',
+		'\Masteriyo\Cache\Cache',
 	);
 
 	/**

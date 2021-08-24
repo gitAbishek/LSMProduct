@@ -52,9 +52,9 @@ Now you can use Masteriyo from WordPress Dashboard
 
 ## Author
 
-👤 **Themegrill**
+👤 **Masteriyo**
 
-- Website: https://themegrill.com
+- Website: https://masteriyo.com
 
 ## Show your support
 

@@ -2,7 +2,7 @@
   "name": "wordpress-lms",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "ThemeGrill <themegrill@gmail.com>",
+  "author": "Masteriyo <info@masteriyo.com>",
   "license": "MIT",
   "dependencies": {
     "@ajna/pagination": "1.4.13",

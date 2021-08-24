@@ -1,13 +1,13 @@
 <?php
 
-use ThemeGrill\Masteriyo\ModelException;
-use ThemeGrill\Masteriyo\Query\UserCourseQuery;
-use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
+use Masteriyo\ModelException;
+use Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Query\CourseProgressQuery;
 /**
  * Course progress functions.
  *
  * @since 0.1.0
- * @package ThemeGrill\Masteriyo\Helper
+ * @package Masteriyo\Helper
  */
 
 
@@ -16,12 +16,12 @@ use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
  *
  * @since 0.1.0
  *
- * @param ThemeGrill\Masteriyo\Models\CourseProgress|int $course_progress_id Course progress ID.
+ * @param Masteriyo\Models\CourseProgress|int $course_progress_id Course progress ID.
  *
- * @return ThemeGrill\Masteriyo\Models\CourseProgress\WP_Error
+ * @return Masteriyo\Models\CourseProgress\WP_Error
  */
 function masteriyo_get_course_progress( $course_progress ) {
-	if ( is_a( $course_progress, 'ThemeGrill\Masteriyo\Database\Model' ) ) {
+	if ( is_a( $course_progress, 'Masteriyo\Database\Model' ) ) {
 		$id = $course_progress->get_id();
 	} else {
 		$id = absint( $course_progress );
@@ -48,10 +48,10 @@ function masteriyo_get_course_progress( $course_progress ) {
  *
  * @param int $course_progress_item Course progress ID.
  *
- * @return ThemeGrill\Masteriyo\Models\CourseProgress|WP_Error
+ * @return Masteriyo\Models\CourseProgress|WP_Error
  */
 function masteriyo_get_course_progress_item( $course_progress_item ) {
-	if ( is_a( $course_progress_item, 'ThemeGrill\Masteriyo\Database\Model' ) ) {
+	if ( is_a( $course_progress_item, 'Masteriyo\Database\Model' ) ) {
 		$item_id = $course_progress_item->get_id();
 	} else {
 		$item_id = (int) $course_progress_item;
@@ -77,13 +77,13 @@ function masteriyo_get_course_progress_item( $course_progress_item ) {
  *
  * @since 0.1.0
  *
- * @param ThemeGrill\Masteriyo\Models\Course|WP_Post|int $course Course object.
- * @param ThemeGrill\Masteriyo\Models\User|WP_Post|int $user User object.
+ * @param Masteriyo\Models\Course|WP_Post|int $course Course object.
+ * @param Masteriyo\Models\User|WP_Post|int $user User object.
  *
- * @return ThemeGrill\Masteriyo\Models\CourseProgress|WP_Error
+ * @return Masteriyo\Models\CourseProgress|WP_Error
  */
 function masteriyo_get_course_progress_by_user_and_course( $user, $course ) {
-	if ( is_a( $course, 'ThemeGrill\Masteriyo\Database\Model' ) ) {
+	if ( is_a( $course, 'Masteriyo\Database\Model' ) ) {
 		$id = $course->get_id();
 	} elseif ( is_a( $course, '\WP_Post' ) ) {
 		$id = $course->ID;
@@ -91,7 +91,7 @@ function masteriyo_get_course_progress_by_user_and_course( $user, $course ) {
 		$id = absint( $course );
 	}
 
-	if ( is_a( $user, 'ThemeGrill\Masteriyo\Database\Model' ) ) {
+	if ( is_a( $user, 'Masteriyo\Database\Model' ) ) {
 		$id = $user->get_id();
 	} elseif ( is_a( $user, '\WP_User' ) ) {
 		$id = $user->ID;
@@ -117,11 +117,11 @@ function masteriyo_get_course_progress_by_user_and_course( $user, $course ) {
  *
  * @since 0.1.0
  *
- * @param ThemeGrill\Masteriyo\Models\User|WP_Post|int $user User object.
- * @return ThemeGrill\Masteriyo\Model\Course[]
+ * @param Masteriyo\Models\User|WP_Post|int $user User object.
+ * @return Masteriyo\Model\Course[]
  */
 function masteriyo_get_active_courses( $user ) {
-	if ( is_a( $user, 'ThemeGrill\Masteriyo\Database\User' ) ) {
+	if ( is_a( $user, 'Masteriyo\Database\User' ) ) {
 		$id = $user->get_id();
 	} elseif ( is_a( $user, '\WP_User' ) ) {
 		$id = $user->ID;

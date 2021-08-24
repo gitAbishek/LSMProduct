@@ -4,17 +4,17 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Providers
+ * @package Masteriyo\Providers
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\UserCourse;
-use ThemeGrill\Masteriyo\Repository\UserCourseRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\UserCourseController;
+use Masteriyo\Models\UserCourse;
+use Masteriyo\Repository\UserCourseRepository;
+use Masteriyo\RestApi\Controllers\Version1\UserCourseController;
 
 class UserCourseServiceProvider extends AbstractServiceProvider {
 	/**
@@ -32,7 +32,7 @@ class UserCourseServiceProvider extends AbstractServiceProvider {
 		'user-course',
 		'user-course.store',
 		'user-course.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\UserCourseController',
+		'\Masteriyo\RestApi\Controllers\Version1\UserCourseController',
 	);
 
 	/**
@@ -51,7 +51,7 @@ class UserCourseServiceProvider extends AbstractServiceProvider {
 			->addArgument( 'permission' );
 
 		$this->getContainer()
-			->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\UserCourseController' )
+			->add( '\Masteriyo\RestApi\Controllers\Version1\UserCourseController' )
 			->addArgument( 'permission' );
 
 		$this->getContainer()

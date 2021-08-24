@@ -6,15 +6,15 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\Database
+ * @package Masteriyo\Database
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\MetaData;
+use Masteriyo\Database\Model;
+use Masteriyo\MetaData;
 
 interface RepositoryInterface {
 	/**

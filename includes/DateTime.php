@@ -4,10 +4,10 @@
  * timezone is absent
  *
  * @since   0.1.0
- * @package ThemeGrill\Masteriyo\Classes
+ * @package Masteriyo\Classes
  */
 
-namespace ThemeGrill\Masteriyo;
+namespace Masteriyo;
 
 defined( 'ABSPATH' ) || exit;
 

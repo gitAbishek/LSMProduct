@@ -2,32 +2,32 @@
 /**
  * Masteriyo setup.
  *
- * @package ThemeGrill\Masteriyo
+ * @package Masteriyo
  *
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo;
+namespace Masteriyo;
 
-use ThemeGrill\Masteriyo\AdminMenu;
-use ThemeGrill\Masteriyo\ScriptStyle;
-use ThemeGrill\Masteriyo\Capabilities;
-use ThemeGrill\Masteriyo\Setup\Onboard;
-use ThemeGrill\Masteriyo\RestApi\RestApi;
-use ThemeGrill\Masteriyo\Emails\EmailHooks;
-use ThemeGrill\Masteriyo\Query\UserCourseQuery;
-use ThemeGrill\Masteriyo\Shortcodes\Shortcodes;
-use ThemeGrill\Masteriyo\FormHandler\FormHandlers;
-use ThemeGrill\Masteriyo\PostType\RegisterPostType;
-use ThemeGrill\Masteriyo\Taxonomy\RegisterTaxonomies;
-use ThemeGrill\Masteriyo\FileRestrictions\FileRestrictions;
+use Masteriyo\AdminMenu;
+use Masteriyo\ScriptStyle;
+use Masteriyo\Capabilities;
+use Masteriyo\Setup\Onboard;
+use Masteriyo\RestApi\RestApi;
+use Masteriyo\Emails\EmailHooks;
+use Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Shortcodes\Shortcodes;
+use Masteriyo\FormHandler\FormHandlers;
+use Masteriyo\PostType\RegisterPostType;
+use Masteriyo\Taxonomy\RegisterTaxonomies;
+use Masteriyo\FileRestrictions\FileRestrictions;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Main Masteriyo class.
  *
- * @class ThemeGrill\Masteriyo\Masteriyo
+ * @class Masteriyo\Masteriyo
  */
 
 class Masteriyo {

@@ -5,12 +5,12 @@
  * @since 0.1.0
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\PaymentGateways;
+use Masteriyo\PaymentGateways;
 
 /**
  * Payment gateways service provider class.
@@ -29,7 +29,7 @@ class PaymentGatewaysServiceProvider extends AbstractServiceProvider {
 	 */
 	protected $provides = array(
 		'payment-gateways',
-		'\ThemeGrill\Masteriyo\PaymentGateways',
+		'\Masteriyo\PaymentGateways',
 	);
 
 	/**

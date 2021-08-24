@@ -3,13 +3,13 @@
  * Abstract class controller.
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Store;
+namespace Masteriyo\RestApi\Controllers\Store;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\CrudController;
-use ThemeGrill\Masteriyo\Helper\Utils;
-use ThemeGrill\Masteriyo\Helper\Permission;
+use Masteriyo\RestApi\Controllers\Version1\CrudController;
+use Masteriyo\Helper\Utils;
+use Masteriyo\Helper\Permission;
 
 class CheckoutController extends CrudController {
 	/**
@@ -37,7 +37,7 @@ class CheckoutController extends CrudController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 * @var Masteriyo\Helper\Permission;
 	 */
 	protected $permission = null;
 
@@ -181,7 +181,7 @@ class CheckoutController extends CrudController {
 			$id     = $id instanceof \WP_Post ? $id->ID : $id;
 			$lesson = $masteriyo_container->get( 'lesson' );
 			$lesson->set_id( $id );
-			$lesson_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\LessonRepository::class );
+			$lesson_repo = $masteriyo_container->get( \Masteriyo\Repository\LessonRepository::class );
 			$lesson_repo->read( $lesson );
 		} catch ( \Exception $e ) {
 			return false;
@@ -571,7 +571,7 @@ class CheckoutController extends CrudController {
 
 		if ( 0 !== $id ) {
 			$lesson->set_id( $id );
-			$lesson_repo = $masteriyo_container->get( \ThemeGrill\Masteriyo\Repository\LessonRepository::class );
+			$lesson_repo = $masteriyo_container->get( \Masteriyo\Repository\LessonRepository::class );
 			$lesson_repo->read( $lesson );
 		}
 

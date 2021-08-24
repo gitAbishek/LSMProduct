@@ -3,14 +3,14 @@
  * Quiz model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\Quiz;
-use ThemeGrill\Masteriyo\Repository\QuizRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuizesController;
+use Masteriyo\Models\Quiz;
+use Masteriyo\Repository\QuizRepository;
+use Masteriyo\RestApi\Controllers\Version1\QuizesController;
 
 class QuizServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,7 +28,7 @@ class QuizServiceProvider extends AbstractServiceProvider {
 		'quiz',
 		'quiz.store',
 		'quiz.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuizesController',
+		'\Masteriyo\RestApi\Controllers\Version1\QuizesController',
 	);
 
 	/**
@@ -45,7 +45,7 @@ class QuizServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'quiz.rest', QuizesController::class )
 			->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\QuizesController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\QuizesController' )
 			->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'quiz', Quiz::class )

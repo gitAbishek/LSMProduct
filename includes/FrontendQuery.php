@@ -3,12 +3,12 @@
  * Contains the query functions for Masteriyo which alter the front-end post queries and loops
  *
  * @version 0.1.0
- * @package ThemeGrill\Masteriyo\Classes
+ * @package Masteriyo\Classes
  */
 
-namespace ThemeGrill\Masteriyo;
+namespace Masteriyo;
 
-use ThemeGrill\Masteriyo\Notice;
+use Masteriyo\Notice;
 
 defined( 'ABSPATH' ) || exit;
 

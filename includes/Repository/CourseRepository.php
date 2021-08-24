@@ -2,17 +2,17 @@
 /**
  * Course Repository.
  *
- * @package ThemeGrill\Masteriyo\Repository;
+ * @package Masteriyo\Repository;
  */
 
-namespace ThemeGrill\Masteriyo\Repository;
+namespace Masteriyo\Repository;
 
-use ThemeGrill\Masteriyo\Helper\Number;
-use ThemeGrill\Masteriyo\Models\Course;
-use ThemeGrill\Masteriyo\Database\Model;
-use ThemeGrill\Masteriyo\Models\CourseProgress;
-use ThemeGrill\Masteriyo\Query\UserCourseQuery;
-use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
+use Masteriyo\Helper\Number;
+use Masteriyo\Models\Course;
+use Masteriyo\Database\Model;
+use Masteriyo\Models\CourseProgress;
+use Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Query\CourseProgressQuery;
 
 /**
  * Course repository class.
@@ -654,14 +654,14 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param ThemeGrill\Masteriyo\Models\Course|int $course Course object.
-	 * @param ThemeGrill\Masteriyo\Models\User|int $user User object.
+	 * @param Masteriyo\Models\Course|int $course Course object.
+	 * @param Masteriyo\Models\User|int $user User object.
 	 *
 	 * @return string
 	 */
 	public function get_progress_status( $course, $user = null ) {
-		$course_id = is_a( $course, 'ThemeGrill\Masteriyo\Models\Course' ) ? $course->get_id() : $course;
-		$user_id   = is_a( $user, 'ThemeGrill\Masteriyo\Models\User' ) ? $user->get_id() : $user;
+		$course_id = is_a( $course, 'Masteriyo\Models\Course' ) ? $course->get_id() : $course;
+		$user_id   = is_a( $user, 'Masteriyo\Models\User' ) ? $user->get_id() : $user;
 		$user_id   = is_null( $user_id ) ? get_current_user_id() : $user_id;
 
 		$query = new CourseProgressQuery(

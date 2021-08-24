@@ -4,18 +4,18 @@
  *
  * @since 0.1.0
  *
- * @package ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+ * @package Masteriyo\RestApi\Controllers\Version1;
  */
 
-namespace ThemeGrill\Masteriyo\RestApi\Controllers\Version1;
+namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use ThemeGrill\Masteriyo\Helper\Permission;
-use ThemeGrill\Masteriyo\Models\Order\OrderItem;
-use ThemeGrill\Masteriyo\Exceptions\RestException;
-use ThemeGrill\Masteriyo\Query\CourseProgressQuery;
-use ThemeGrill\Masteriyo\Query\CourseProgressItemQuery;
+use Masteriyo\Helper\Permission;
+use Masteriyo\Models\Order\OrderItem;
+use Masteriyo\Exceptions\RestException;
+use Masteriyo\Query\CourseProgressQuery;
+use Masteriyo\Query\CourseProgressItemQuery;
 
 /**
  * User activities controller class.
@@ -62,7 +62,7 @@ class CourseProgressController extends CrudController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @var ThemeGrill\Masteriyo\Helper\Permission;
+	 * @var Masteriyo\Helper\Permission;
 	 */
 	protected $permission = null;
 
@@ -254,7 +254,7 @@ class CourseProgressController extends CrudController {
 	 */
 	protected function get_object( $id ) {
 		try {
-			$id              = is_a( $id, 'ThemeGrill\Masteriyo\Database\Model' ) ? $id->get_id() : $id;
+			$id              = is_a( $id, 'Masteriyo\Database\Model' ) ? $id->get_id() : $id;
 			$course_progress = masteriyo_get_course_progress( $id );
 		} catch ( \Exception $e ) {
 			return false;

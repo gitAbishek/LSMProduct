@@ -3,7 +3,7 @@
  * Register post types.
  */
 
-namespace ThemeGrill\Masteriyo\Taxonomy;
+namespace Masteriyo\Taxonomy;
 
 class TaxonomyFactory {
 
@@ -14,7 +14,7 @@ class TaxonomyFactory {
 	 *
 	 * @param string $taxonomy Post type taxonomy.
 	 *
-	 * @return ThemeGrill\Masteriyo\Taxonomy\Taxonomy;
+	 * @return Masteriyo\Taxonomy\Taxonomy;
 	 */
 	public static function create( $taxonomy, $labels = array(), $args = array() ) {
 		if ( 'course_cat' === $taxonomy ) {

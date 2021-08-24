@@ -3,14 +3,14 @@
  * Faq model service provider.
  */
 
-namespace ThemeGrill\Masteriyo\Providers;
+namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use ThemeGrill\Masteriyo\Models\Faq;
-use ThemeGrill\Masteriyo\Repository\FaqRepository;
-use ThemeGrill\Masteriyo\RestApi\Controllers\Version1\FaqsController;
+use Masteriyo\Models\Faq;
+use Masteriyo\Repository\FaqRepository;
+use Masteriyo\RestApi\Controllers\Version1\FaqsController;
 
 class FaqServiceProvider extends AbstractServiceProvider {
 	/**
@@ -28,7 +28,7 @@ class FaqServiceProvider extends AbstractServiceProvider {
 		'faq',
 		'faq.store',
 		'faq.rest',
-		'\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\FaqsController',
+		'\Masteriyo\RestApi\Controllers\Version1\FaqsController',
 	);
 
 	/**
@@ -45,7 +45,7 @@ class FaqServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'faq.rest', FaqsController::class )
 			->addArgument( 'permission' );
 
-		$this->getContainer()->add( '\ThemeGrill\Masteriyo\RestApi\Controllers\Version1\FaqsController' )
+		$this->getContainer()->add( '\Masteriyo\RestApi\Controllers\Version1\FaqsController' )
 			->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'faq', Faq::class )

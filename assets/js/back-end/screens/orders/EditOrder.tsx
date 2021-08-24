@@ -515,35 +515,6 @@ const EditOrder = () => {
 																fontSize="sm"
 																fontWeight="medium"
 																color="gray.600">
-																{orderQuery.data?.currency} {orderItem.total}
-															</Text>
-														</Stack>
-													)
-												)}
-
-											<Heading as="h2" fontSize="medium">
-												{__('Items', 'masteriyo')}
-											</Heading>
-											{orderItemsQuery.isSuccess &&
-												orderItemsQuery.data.map(
-													(orderItem: OrderItemSchema) => (
-														<Stack
-															key={orderItem.id}
-															direction="row"
-															spacing="6">
-															<Text flexGrow={1} fontWeight="semibold">
-																{orderItem.name}
-															</Text>
-															<Text
-																fontSize="sm"
-																fontWeight="medium"
-																color="gray.600">
-																x {orderItem.quantity}
-															</Text>
-															<Text
-																fontSize="sm"
-																fontWeight="medium"
-																color="gray.600">
 																{PriceWithSymbol(
 																	orderItem.total,
 																	orderQuery.data?.currency_symbol

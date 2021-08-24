@@ -40,7 +40,7 @@ class Shortcodes {
 	 * @return array
 	 */
 	protected function get_shortcodes() {
-		$namespace = '\\\Masteriyo\\Shortcodes';
+		$namespace = '\\Masteriyo\\Shortcodes';
 
 		return apply_filters(
 			'masteriyo_shortcodes',

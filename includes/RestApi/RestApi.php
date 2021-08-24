@@ -70,7 +70,7 @@ class RestApi {
 	 * @return array
 	 */
 	protected static function get_v1_controllers() {
-		$namespace = '\\\Masteriyo\\RestApi\\Controllers\\Version1';
+		$namespace = '\\Masteriyo\\RestApi\\Controllers\\Version1';
 
 		return array(
 			'courses'               => "{$namespace}\\CoursesController",

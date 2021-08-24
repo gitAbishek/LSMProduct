@@ -1,6 +1,5 @@
 import { Box, Container, Stack } from '@chakra-ui/react';
 import React from 'react';
-import Footer from './Footer';
 import MainLogo from './Logo';
 import SetupWizard from './SetupWizard';
 
@@ -15,8 +14,6 @@ const MainLayout: React.FC = () => {
 						<SetupWizard />
 					</Container>
 				</Box>
-
-				<Footer />
 			</Stack>
 		</Box>
 	);

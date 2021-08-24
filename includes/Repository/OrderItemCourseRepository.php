@@ -50,15 +50,16 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		global $wpdb;
 
 		// Get from cache if available.
-		$order_item_obj = masteriyo( 'cache' )->get( 'masteriyo-order-item-' . $order_item->get_id(), 'masteriyo-order-items' );
+		// $order_item_obj = masteriyo( 'cache' )->get( 'masteriyo-order-item-' . $order_item->get_id(), 'masteriyo-order-items' );
+		$order_item_obj = false;
+
 
 		if ( false === $order_item_obj ) {
 			$table_name = $order_item->get_table_name();
 
 			$results = $wpdb->get_results(
 				$wpdb->prepare(
-					'SELECT * FROM %s WHERE order_item_id = %d LIMIT 1',
-					$table_name,
+					"SELECT * FROM {$wpdb->prefix}masteriyo_order_items WHERE order_item_id = %d LIMIT 1",
 					$order_item->get_id()
 				)
 			);
@@ -69,7 +70,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 
 			$order_item_obj = $results[0];
 
-			masteriyo( 'cache' )->set( 'masteriyo-item-' . $order_item->get_id(), $order_item_obj, 'masteriyo-order-items' );
+			// masteriyo( 'cache' )->set( 'masteriyo-item-' . $order_item->get_id(), $order_item_obj, 'masteriyo-order-items' );
 		}
 
 		$order_item->set_props(

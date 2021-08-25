@@ -59,6 +59,12 @@ function masteriyo_can_start_course( $course, $user = null ) {
 	$course_id        = is_a( $course, 'Masteriyo\Models\Course' ) ? $course->get_id() : $course;
 	$user_id          = is_a( $user, 'Masteriyo\Models\User' ) ? $user->get_id() : $user;
 
+	$course = masteriyo_get_course( $course_id );
+
+	if ( ! is_null( $course ) ) {
+		$can_start_course = 'open' === $course->get_access_mode() ? true : false;
+	}
+
 	if ( ! is_null( $user_id ) ) {
 		$query = new UserCourseQuery(
 			array(
@@ -68,18 +74,12 @@ function masteriyo_can_start_course( $course, $user = null ) {
 			)
 		);
 
-		$course = masteriyo_get_course( $course_id );
+		if ( ! is_null( $course ) && 'open' !== $course->get_access_mode() ) {
+			$user_course = current( $query->get_user_courses() );
 
-		if ( ! is_null( $course ) ) {
-			if ( 'open' === $course->get_access_mode() ) {
-				$can_start_course = true;
-			} else {
-				$user_course = current( $query->get_user_courses() );
-
-				if ( $user_course ) {
-					$order            = $user_course->get_order();
-					$can_start_course = $order ? 'completed' === $order->get_status() : false;
-				}
+			if ( $user_course ) {
+				$order            = $user_course->get_order();
+				$can_start_course = $order ? 'completed' === $order->get_status() : false;
 			}
 		}
 	}

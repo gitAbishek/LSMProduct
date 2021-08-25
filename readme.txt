@@ -1,5 +1,5 @@
 === LMS for WordPress ===
-Contributors: ThemeGrill
+Contributors: Masteriyo
 Tags: lms, learning management system, courses, elearning
 Requires at least: 5.0
 Tested up to: 5.8
@@ -12,13 +12,23 @@ A Complete WordPress LMS plugin to create and sell online courses in no time.
 
 == Description ==
 
-A complete solution to create and sell online courses. The plugin interface is built on react hence creating courses, lessons, quizes are as smooth and easy as it can be.
+A complete solution to create and sell online courses. The plugin is powered by React js; hence creating courses, lessons, quizzes are super smooth and easy. The best part is the beautifully designed interactive learning page with easy course navigation, distraction-free mode, Course Progress bar, and dedicated place for Questions and Answers.
 
 ### Features And Options:
 
 * Unlimited courses and lessons
 * Unlimited Quizes
+* Sell courses
 * Accept Payment via PayPal
+* Clean Design
+* Interactive Learning Page
+* Distraction Free Mode
+* Questions and Answers
+* Course Progress Bar
+* Advanced Quiz Builder
+* Responsive Design
+* Compatible with any theme
+
 
 == Frequently Asked Questions ==
 
@@ -27,5 +37,5 @@ A complete solution to create and sell online courses. The plugin interface is b
 No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
 == Changelog ==
-= 0.1.0 - 21-08-2021 =
+= 0.1.0 - 24-08-2021 =
 * Initial Release

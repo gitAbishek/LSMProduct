@@ -319,6 +319,7 @@ function masteriyo_add_body_class( $classes, $class ) {
 	} elseif ( isset( $_GET['masteriyo'] ) && 'interactive' === $_GET['masteriyo'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$classes[] = 'masteriyo-interactive-page';
 	}
+	$classes[] = 'masteriyo';
 
 	return $classes;
 }

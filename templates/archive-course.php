@@ -20,6 +20,13 @@ defined( 'ABSPATH' ) || exit;
 get_header( 'course-list' );
 
 /**
+ * Wrapper div opening.
+ *
+ * @since 0.1.0
+ */
+echo '<div>';
+
+/**
  * Hook: masteriyo_before_main_content.
  *
  * @hooked masteriyo_output_content_wrapper - 10 (outputs opening divs for the content)
@@ -100,5 +107,12 @@ do_action( 'masteriyo_after_main_content' );
  * @hooked masteriyo_get_sidebar - 10
  */
 do_action( 'masteriyo_sidebar' );
+
+/**
+ * Wrapper div closing.
+ *
+ * @since 0.1.0
+ */
+echo '</div>';
 
 get_footer( 'course-list' );

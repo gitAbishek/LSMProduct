@@ -1097,6 +1097,17 @@ class QuizesController extends PostsController {
 		// Quiz menu order.
 		if ( isset( $request['menu_order'] ) ) {
 			$quiz->set_menu_order( $request['menu_order'] );
+		} else {
+			$query = new \WP_Query(
+				array(
+					'post_type'      => array( 'quiz', 'lesson' ),
+					'post_status'    => 'any',
+					'posts_per_page' => 1,
+					'post_parent'    => $request['parent_id'],
+				)
+			);
+
+			$quiz->set_menu_order( $query->found_posts );
 		}
 
 		// Quiz pass mark.

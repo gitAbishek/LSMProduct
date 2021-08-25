@@ -1,63 +1,41 @@
-# Welcome to masteriyo 👋
+# LMS for WordPress
+Contributors: Masteriyo
+Tags: lms, learning management system, courses, elearning
+Requires at least: 5.0
+Tested up to: 5.8
+Requires PHP: 5.6
+Stable tag: 0.1.0
+License: GNU General Public License v3.0
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000)
-![Prerequisite](https://img.shields.io/badge/node-%3E%3D10.0.0-blue.svg)
-![Prerequisite](https://img.shields.io/badge/npm-%3E%3D6.9.0-blue.svg)
-[![License: GPL--2.0+](https://img.shields.io/badge/License-GPL--2.0+-yellow.svg)](#)
+A Complete WordPress LMS plugin to create and sell online courses in no time.
 
-# Masteriyo
+# Description
 
-## Prerequisites
+A complete solution to create and sell online courses. The plugin is powered by React js; hence creating courses, lessons, quizzes are super smooth and easy. The best part is the beautifully designed interactive learning page with easy course navigation, distraction-free mode, Course Progress bar, and dedicated place for Questions and Answers.
 
-- node >=10.0.0
-- npm >=6.9.0
-- composer >=2.0.0
-- yarn >=1.0.1
+### Features And Options:
 
-## Local Development
+* Unlimited courses and lessons
+* Unlimited Quizes
+* Sell courses
+* Accept Payment via PayPal
+* Clean Design
+* Interactive Learning Page
+* Distraction Free Mode
+* Questions and Answers
+* Course Progress Bar
+* Advanced Quiz Builder
+* Responsive Design
+* Compatible with any theme
 
-Clone repo to your `plugins` folder of WordPress installation
 
-```sh
-git clone https://github.com/wpeverest/wordpress-lms.git
-```
+# Frequently Asked Questions
 
-Make sure you have `node`, `yarn` and `composer` installed. Install packages.
+### Do I need to have coding skills to use the LMS Plugin?
 
-Note: Use `yarn` instead of `npm` to generate only one lock file.
+No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
-```sh
-yarn install
-composer update
-```
-
-This step is only necessary in development mode, make a copy of .env.example as .env
-Set the administrator username and password, and set the base wp-json URL.
-
-Once successfully installed you can run Local Development server using. This will open Webpack development server.
-
-```sh
-yarn start
-```
-
-## Runnig Masteriyo on Dashboard
-
-We can't run development server on WordPress Dashboard. We need to build our app first
-
-```sh
-yarn build
-```
-
-Now you can use Masteriyo from WordPress Dashboard
-
-## Author
-
-👤 **Masteriyo**
-
-- Website: https://masteriyo.com
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
----
+# Changelog
+#### 0.1.0 - 24-08-2021
+* Initial Release

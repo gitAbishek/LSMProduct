@@ -37,6 +37,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 			$comments_count = masteriyo_count_course_comments( $course );
 			$difficulty     = $course->get_difficulty();
 			?>
+	  <div class="col-4">
 			<div class="mto-course-item mto-course--card m-0">
 				<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php esc_attr( $course->get_name() ); ?>">
 					<div class="mto-course--img-wrap">
@@ -114,6 +115,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 					</div>
 				</div>
 			</div>
+	  </div>
 		<?php } ?>
 	</div>
 </div>

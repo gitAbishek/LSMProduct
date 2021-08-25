@@ -1,14 +1,21 @@
 // Title
 .mto-single-course {
 	display: flex;
-	flex-direction: row;
 	flex-wrap: wrap;
-	gap: 30px;
+	margin-right: -15px;
+	margin-left: -15px;
+	flex-direction: row;
+
+	@media only screen and (max-width: 1024px) {
+		margin: 0px;
+	}
 
 	&--main {
 		background-color: $mto-white-color;
 		@include mto-shadow-1;
 		border-radius: 8px;
+		flex: 0 0 70%;
+		height: 100%;
 
 		.mto-course-author {
 			&--name {
@@ -21,6 +28,7 @@
 		font-size: 36px;
 		font-weight: 700;
 		position: relative;
+    margin: 0px 0px 14px 0px;
 	}
 
 	&--title-tag {
@@ -48,13 +56,8 @@
 		font-weight: 600;
 	}
 
-	&--main {
-		flex: 1 1 65%;
-		max-width: 832px;
-	}
-
 	&--aside {
-		flex: 1 1 31%;
+		flex: 0 0 30%;
 		background: $mto-white-color;
 		// max-height: 50%;
 		height: fit-content;
@@ -83,7 +86,7 @@
 				display: grid;
 				grid-template-columns: 1fr 1fr;
 				row-gap: 18px;
-				column-gap: 72px;
+				column-gap: 42px;
 
 				span {
 					color: $mto-text-color;
@@ -445,9 +448,7 @@
 	display: flex;
 	gap: 8px;
 	.mto-single-course-item {
-		// flex-basis: 375px;
 		display: flex;
-		gap: 24px;
 	}
 }
 

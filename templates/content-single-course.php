@@ -35,43 +35,47 @@ $difficulty = $course->get_difficulty();
 ?>
 <?php masteriyo_display_all_notices(); ?>
 
-<div id="course-<?php the_ID(); ?>" class="mto-single-course" style="width:100%;">
+<div id="course-<?php the_ID(); ?>" class="mto-single-course">
+  <div class="col-8">
 	<div class="mto-single-course--main mto-course--header p-0">
-		<div class="mto-course--img-wrap">
-			<!-- Diffculty Badge -->
-			<?php if ( $difficulty ) : ?>
-				<div class="difficulty-badge">
-					<span class="mto-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
-				</div>
-			<?php endif; ?>
+	  <div class="mto-course--img-wrap">
+		<!-- Diffculty Badge -->
+		<?php if ( $difficulty ) : ?>
+		  <div class="difficulty-badge">
+			<span class="mto-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
+		  </div>
+		<?php endif; ?>
 
-			<?php do_action( 'masteriyo_single_course_featured_image' ); ?>
-		</div>
+		<?php do_action( 'masteriyo_single_course_featured_image' ); ?>
+	  </div>
 
-		<!-- Category -->
-		<?php do_action( 'masteriyo_single_course_categories' ); ?>
+	  <!-- Category -->
+	  <?php do_action( 'masteriyo_single_course_categories' ); ?>
 
-		<!-- Title -->
-		<?php do_action( 'masteriyo_single_course_title' ); ?>
+	  <!-- Title -->
+	  <?php do_action( 'masteriyo_single_course_title' ); ?>
 
-		<!-- Author and rating -->
-		<?php do_action( 'masteriyo_single_course_author_and_rating' ); ?>
+	  <!-- Author and rating -->
+	  <?php do_action( 'masteriyo_single_course_author_and_rating' ); ?>
 
-		<!-- Main contents: Overview, Curriculum, Reviews -->
-		<?php do_action( 'masteriyo_single_course_main_content' ); ?>
+	  <!-- Main contents: Overview, Curriculum, Reviews -->
+	  <?php do_action( 'masteriyo_single_course_main_content' ); ?>
 	</div>
+  </div>
 
+  <div class="col-4">
 	<aside class="mto-sticky mto-single-course--aside mto-course--header">
-		<div class="mto-single-course--aside-wrap">
-			<!-- Price and Enroll Now Button -->
-			<?php do_action( 'masteriyo_single_course_price_and_enroll_button' ); ?>
-			<hr>
-			<!-- Course Stats -->
-			<?php do_action( 'masteriyo_single_course_stats' ); ?>
+	  <div class="mto-single-course--aside-wrap">
+		<!-- Price and Enroll Now Button -->
+		<?php do_action( 'masteriyo_single_course_price_and_enroll_button' ); ?>
+		<hr>
+		<!-- Course Stats -->
+		<?php do_action( 'masteriyo_single_course_stats' ); ?>
 
-			<!-- Course Highlights -->
-			<?php do_action( 'masteriyo_single_course_highlights' ); ?>
+		<!-- Course Highlights -->
+		<?php do_action( 'masteriyo_single_course_highlights' ); ?>
 	</aside>
+  </div>
 </div>
 <?php
 /**

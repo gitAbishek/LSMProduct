@@ -15,7 +15,7 @@ do_action( 'masteriyo_before_add_to_cart_button' );
 
 ?>
 <?php if ( masteriyo_can_start_course( $course ) ) : ?>
-	<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="single_add_to_cart_button button alt mto-btn mto-btn-primary mto-single-course--btn mb-0">
+	<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="mto-btn mto-btn-primary mto-single-course--btn mb-0">
 		<?php echo esc_html( $course->single_course_start_text() ); ?>
 	</a>
 <?php else : ?>

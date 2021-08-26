@@ -19,7 +19,6 @@ import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
-import useCourse from '../../hooks/useCourse';
 
 interface Props {
 	firstBtn?: {
@@ -33,6 +32,7 @@ interface Props {
 		action: () => void;
 		isDisabled?: boolean;
 		isLoading?: boolean;
+		icon?: ReactElement;
 	};
 	thirdBtn?: {
 		label: string;
@@ -62,7 +62,7 @@ const Header: React.FC<Props> = (props) => {
 		showPreview,
 		showCourseName,
 	} = props;
-	const courseDetail = useCourse();
+
 	const location = useLocation();
 	const { courseId }: any = useParams();
 	return (
@@ -156,6 +156,7 @@ const Header: React.FC<Props> = (props) => {
 								variant="outline"
 								colorScheme="blue"
 								onClick={secondBtn.action}
+								leftIcon={secondBtn.icon}
 								isDisabled={secondBtn.isDisabled}
 								isLoading={secondBtn.isLoading}>
 								{secondBtn.label}

@@ -241,6 +241,11 @@ const Builder: React.FC = () => {
 										: __('Save To Draft', 'masteriyo'),
 									action: methods.handleSubmit((data) => onSave(data, 'draft')),
 									isLoading: draftCourse.isLoading,
+									icon: isDrafted() ? (
+										<Icon as={BiCheck} fontSize="md" />
+									) : (
+										<></>
+									),
 									isDisabled: isDrafted(),
 								}}
 								thirdBtn={{

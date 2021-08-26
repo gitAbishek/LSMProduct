@@ -4,6 +4,13 @@
 	.mto-form-container {
 		width: 80%;
 	}
+
+	.mto-related-post--title {
+		margin: 15px;
+	}
+	.mto-item--wrap {
+		margin: 0px;
+	}
 }
 
 // X-Small devices (portrait phones, less than 576px)
@@ -37,12 +44,12 @@
 
 	// Course list page responsive
 
-		.col {
-			flex: 0 0 100%;
-			max-width: 100%;
-			padding: 15px;
-			width: 100%;
-		}
+	.col {
+		flex: 0 0 100%;
+		max-width: 100%;
+		padding: 15px;
+		width: 100%;
+	}
 
 	.columns-4,
 	.columns-3,

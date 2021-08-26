@@ -8,6 +8,7 @@
 
 	@media only screen and (max-width: 1024px) {
 		margin: 0px;
+    gap: 14px;
 	}
 
 	&--main {
@@ -444,6 +445,10 @@
 // Related-post
 .mto-related-post {
 	margin-top: 60px;
+
+  .mto-related-post--title{
+    margin-bottom: 14px;
+  }
 }
 
 .mto-item--wrap {

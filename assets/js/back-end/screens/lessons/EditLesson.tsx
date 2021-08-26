@@ -12,6 +12,7 @@ import {
 	Divider,
 	Flex,
 	Heading,
+	Icon,
 	IconButton,
 	Menu,
 	MenuButton,
@@ -23,7 +24,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
+import { BiCheck, BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import BackToBuilder from '../../components/common/BackToBuilder';
@@ -33,6 +34,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import useCourse from '../../hooks/useCourse';
 import { LessonSchema } from '../../schemas';
+import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { deepClean } from '../../utils/utils';
 import FeaturedImage from '../courses/components/FeaturedImage';
@@ -48,7 +50,13 @@ const EditLesson = () => {
 	const toast = useToast();
 	const cancelRef = useRef<any>();
 	const lessonAPI = new API(urls.lessons);
+	const courseAPI = new API(urls.courses);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+
+	const courseQuery = useQuery<CourseDataMap>(
+		[`course${courseId}`, courseId],
+		() => courseAPI.get(courseId)
+	);
 
 	const lessonQuery = useQuery<LessonSchema>(
 		[`section${lessonId}`, lessonId],
@@ -110,27 +118,69 @@ const EditLesson = () => {
 		setDeleteModalOpen(false);
 	};
 
-	if (lessonQuery.isSuccess && lessonQuery.data.course_id == courseId) {
+	const isPublished = () => {
+		if (courseQuery.data?.status === 'publish') {
+			if (methods.formState.isDirty) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	};
+
+	const isDrafted = () => {
+		if (courseQuery.data?.status === 'draft') {
+			if (methods.formState.isDirty) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	};
+
+	if (
+		lessonQuery.isSuccess &&
+		courseQuery.isSuccess &&
+		lessonQuery.data.course_id == courseId
+	) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
 				<Header
 					showCourseName
 					showLinks
 					showPreview
-					secondBtn={{
-						label: 'Save to Draft',
-						action: methods.handleSubmit((data: LessonSchema) =>
-							onSubmit(data, 'draft')
-						),
-						isLoading: draftCourse.isLoading,
+					course={{
+						name: courseQuery.data.name,
+						id: courseQuery.data.id,
+						previewUrl: courseQuery.data.preview_permalink,
 					}}
-					thirdBtn={{
-						label: 'Publish',
+					secondBtn={{
+						label: isDrafted()
+							? __('Saved To Draft', 'masteriyo')
+							: __('Save To Draft', 'masteriyo'),
 						action: methods.handleSubmit((data: LessonSchema) =>
 							onSubmit(data, 'publish')
 						),
+						isLoading: draftCourse.isLoading,
+						icon: isDrafted() ? <Icon as={BiCheck} fontSize="md" /> : <></>,
+						isDisabled: isDrafted(),
+					}}
+					thirdBtn={{
+						label: isPublished()
+							? __('Published', 'masteriyo')
+							: __('Publish', 'masteriyo'),
+						action: methods.handleSubmit((data: LessonSchema) =>
+							onSubmit(data, 'publish')
+						),
+						icon: isPublished() ? <Icon as={BiCheck} fontSize="md" /> : <></>,
 						isLoading: publishCourse.isLoading,
-					}}></Header>
+						isDisabled: isPublished(),
+					}}
+				/>
 				<Container maxW="container.xl">
 					<Stack direction="column" spacing="6">
 						<BackToBuilder />

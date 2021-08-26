@@ -95,18 +95,17 @@ function renameBackendAssets() {
 }
 
 function compileSass() {
-	return (
-		src(paths.sass.src)
-			.pipe(
-				sass({
-					outputStyle: 'compressed',
-				}).on('error', sass.logError)
-			)
-			.pipe(autoprefixer())
-			.pipe(browserSync.stream())
-			// .pipe(rename({ suffix: `.${pkg.version}.min` }))
-			.pipe(dest(paths.sass.dest))
-	);
+	return src(paths.sass.src)
+		.pipe(
+			sass({
+				outputStyle: 'compressed',
+			}).on('error', sass.logError)
+		)
+		.pipe(autoprefixer())
+		.pipe(browserSync.stream())
+		.pipe(dest(paths.sass.dest))
+		.pipe(rename({ suffix: `.${pkg.version}.min` }))
+		.pipe(dest(paths.sass.dest));
 }
 
 function startBrowserSync(cb) {

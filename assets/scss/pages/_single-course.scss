@@ -8,7 +8,7 @@
 
 	@media only screen and (max-width: 1024px) {
 		margin: 0px;
-    gap: 14px;
+		gap: 14px;
 	}
 
 	&--main {
@@ -64,54 +64,50 @@
 		height: fit-content;
 		@include mto-shadow-1;
 		border-radius: 8px;
+		gap: 20px;
+		display: flex;
+		flex-direction: column;
 
-		&-wrap {
-			gap: 20px;
-			display: flex;
-			flex-direction: column;
+		hr {
+			width: 100%;
+			margin-bottom: 0px;
+		}
 
-			hr {
-				width: 100%;
-				margin-bottom: 0px;
+		.course-overview {
+			> * {
+				font-size: 14px;
+				line-height: 16px;
 			}
+		}
 
-			.course-overview {
-				> * {
-					font-family: 'Roboto', sans-serif;
-					font-size: 14px;
-					line-height: 16px;
-				}
+		.mto-single-course-stats {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			row-gap: 18px;
+			column-gap: 35px;
+
+			span {
+				color: $mto-text-color;
+				font-weight: 400;
 			}
-
-			.mto-single-course-stats {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				row-gap: 18px;
-				column-gap: 35px;
-
-				span {
-					color: $mto-text-color;
-					font-weight: 400;
-				}
-				svg {
-					fill: $mto-text-color !important;
-				}
+			svg {
+				fill: $mto-text-color !important;
 			}
+		}
 
-			.mto-course-description {
-				.title {
-					font-weight: bold;
-					font-size: 16px;
-					line-height: 120%;
-				}
-				ul {
-					display: flex;
-					flex-direction: column;
-					gap: 14px;
-					padding-left: 8px;
-					li {
-						margin-bottom: 8px;
-					}
+		.mto-course-description {
+			.title {
+				font-weight: bold;
+				font-size: 16px;
+				line-height: 120%;
+			}
+			ul {
+				display: flex;
+				flex-direction: column;
+				gap: 14px;
+				padding-left: 8px;
+				li {
+					margin-bottom: 8px;
 				}
 			}
 		}
@@ -357,8 +353,8 @@
 
 		.mto-lesson-list {
 			margin: 0px;
-      padding: 0px;
-      list-style: none;
+			padding: 0px;
+			list-style: none;
 		}
 
 		.mto-lesson-list li {
@@ -446,9 +442,9 @@
 .mto-related-post {
 	margin-top: 60px;
 
-  .mto-related-post--title{
-    margin-bottom: 14px;
-  }
+	&__title {
+		margin-bottom: 14px;
+	}
 }
 
 .mto-item--wrap {

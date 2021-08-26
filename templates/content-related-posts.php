@@ -27,7 +27,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 
 ?>
 <div class="mto-related-post">
-	<h3 class="mto-related-post--title"><?php esc_html_e( 'Related Courses', 'masteriyo' ); ?></h3>
+	<h3 class="mto-related-post__title"><?php esc_html_e( 'Related Courses', 'masteriyo' ); ?></h3>
 
 	<div class="mto-item--wrap w-100">
 		<div class="mto-single-course-item w-100">
@@ -37,7 +37,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 			$comments_count = masteriyo_count_course_comments( $course );
 			$difficulty     = $course->get_difficulty();
 			?>
-	  <div class="col-4">
+	  <div class="masteriyo-col-4">
 			<div class="mto-course-item mto-course--card m-0">
 				<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php esc_attr( $course->get_name() ); ?>">
 					<div class="mto-course--img-wrap">

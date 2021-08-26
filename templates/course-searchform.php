@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 	<label class="screen-reader-text" for="masteriyo-course-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>">
 		<?php esc_html_e( 'Search for:', 'masteriyo' ); ?>
 	</label>
-	<span class="icon">
+	<span class="mto-course-search__icon">
 		<?php masteriyo_get_svg( 'search', true ); ?>
 	</span>
 	<input type="search" id="masteriyo-course-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>" class="search-field mto-input" placeholder="<?php echo esc_attr__( 'Search courses&hellip;', 'masteriyo' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />

@@ -1,6 +1,5 @@
 // Medium devices (tablets, less than 992px)
 @media (max-width: 992px) {
-	//Form container
 	.mto-form-container {
 		width: 70%;
 	}
@@ -11,17 +10,11 @@
 		}
 	}
 
-	.mto-course,
-	.mto-mycourses--card {
-		// flex-basis: calc((100% / 2) - 30px);
-	}
-
 	// Course list page responsive
 	.columns-4,
 	.columns-3,
 	.columns-2 {
-
-		.col {
+		.masteriyo-col {
 			flex: 0 0 50%;
 			max-width: 50%;
 			padding: 15px;
@@ -34,8 +27,6 @@
 	}
 
 	.columns-1 {
-		gap: 14px;
-
 		.mto-course-item {
 			flex-basis: 100%;
 		}
@@ -45,11 +36,24 @@
 	.mto-related-post {
 		.mto-single-course-item {
 			flex-direction: column;
-      gap: 14px;
-		} 
+		}
 	}
 
 	.mto-single-course--main {
 		width: 100%;
+	}
+
+	.masteriyo-col-8,
+	.masteriyo-col-4 {
+		width: 100%;
+		flex: 1 1 100%;
+		max-width: 100%;
+	}
+
+	.mto-item--wrap {
+		.mto-single-course-item > div{
+			padding-top: 8px;
+      padding-bottom: 8px;
+		}
 	}
 }

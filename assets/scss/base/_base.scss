@@ -1,10 +1,3 @@
-* {
-	box-sizing: border-box;
-}
-
-// Fontawesome icons
-@import url(https://use.fontawesome.com/releases/v5.6.3/css/all.css);
-
 .site-main {
 	background: #f8f8f8;
 }
@@ -167,7 +160,7 @@ ul {
 	column-gap: 62px;
 }
 
-.col-8 {
+.masteriyo-col-8 {
 	flex: 0 0 66.6666%;
 	max-width: 66.6666%;
 	padding-left: 15px;
@@ -175,21 +168,12 @@ ul {
 	width: 66.6666%;
 }
 
-.col-4 {
+.masteriyo-col-4 {
 	flex: 0 0 33.3333%;
 	max-width: 33.3333%;
 	padding-left: 15px;
 	padding-right: 15px;
 	width: 33.3333%;
-}
-
-@media only screen and (max-width: 1024px) {
-	.col-8,
-	.col-4 {
-		width: 100%;
-		flex: 1 1 100%;
-		max-width: 100%;
-	}
 }
 
 .w-100 {

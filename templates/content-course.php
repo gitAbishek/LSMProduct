@@ -30,7 +30,7 @@ $difficulty     = $course->get_difficulty();
 $categories     = $course->get_categories( 'name' );
 
 ?>
-<div class="col m-0">
+<div class="masteriyo-col m-0">
 	<div class="mto-course-item mto-course-item--wrapper mto-course--card">
 		<div class="mto-course--img-wrap">
 		<a href="<?php echo esc_attr( $course->get_permalink() ); ?>">

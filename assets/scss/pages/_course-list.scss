@@ -423,7 +423,7 @@
 	display: flex;
 	// gap: 8px;
 
-	.col {
+	.masteriyo-col {
 		flex: 0 0 25%;
 		max-width: 25%;
 		padding: 15px;
@@ -447,7 +447,7 @@
 .columns-3 {
 	display: flex;
 
-	.col {
+	.masteriyo-col {
 		flex: 0 0 33.333333%;
 		max-width: 33.333333%;
 		padding: 15px;
@@ -458,7 +458,7 @@
 .columns-2 {
 	display: flex;
 
-	.col {
+	.masteriyo-col {
 		flex: 0 0 50%;
 		max-width: 50%;
 		padding: 15px;
@@ -469,8 +469,11 @@
 .columns-1 {
 	display: flex;
 
-	.col {
-		flex-basis: 100%;
+	.masteriyo-col {
+			flex: 0 0 100%;
+			max-width: 100%;
+			padding: 15px;
+			width: 100%;
 	}
 }
 .mto-submit-review-form-container {
@@ -483,7 +486,7 @@
 		border-top-right-radius: 8px;
 		border-bottom-right-radius: 8px;
 	}
-	.icon {
+	.mto-course-search__icon {
 		position: absolute;
 		left: 14px;
 		top: 24px;

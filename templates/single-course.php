@@ -14,7 +14,7 @@ get_header( 'masteriyo-course' );
  *
  * @since 0.1.0
  */
-echo '<div>';
+echo '<div class="w-100">';
 
 /**
  * masteriyo_before_single_course hook.

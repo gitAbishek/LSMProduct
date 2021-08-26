@@ -121,6 +121,10 @@ const Builder: React.FC = () => {
 					status: 'success',
 					isClosable: true,
 				});
+				methods.reset(data, {
+					keepDirty: false,
+					keepValues: true,
+				});
 				queryClient.invalidateQueries(`course${data.id}`);
 			},
 		}
@@ -190,15 +194,29 @@ const Builder: React.FC = () => {
 		deleteSectionId && deleteMutation.mutate(deleteSectionId);
 	};
 
-	if (courseQuery.data?.status === 'publish') {
-		console.log('it is published');
-		if (methods.formState.isDirty) {
-			console.log('is dirty');
+	const isPublished = () => {
+		if (courseQuery.data?.status === 'publish') {
+			if (methods.formState.isDirty) {
+				return false;
+			} else {
+				return true;
+			}
 		} else {
-			console.log('is false');
+			return false;
 		}
-	} else {
-	}
+	};
+
+	const isDrafted = () => {
+		if (courseQuery.data?.status === 'draft') {
+			if (methods.formState.isDirty) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	};
 
 	if (courseQuery.isSuccess && builderQuery.isSuccess) {
 		return (
@@ -218,19 +236,27 @@ const Builder: React.FC = () => {
 									action: () => window.open(courseQuery.data.preview_permalink),
 								}}
 								secondBtn={{
-									label: __('Save To Draft', 'masteriyo'),
+									label: isDrafted()
+										? __('Saved To Draft', 'masteriyo')
+										: __('Save To Draft', 'masteriyo'),
 									action: methods.handleSubmit((data) => onSave(data, 'draft')),
 									isLoading: draftCourse.isLoading,
-									isDisabled: updateCourse.isLoading,
+									isDisabled: isDrafted(),
 								}}
 								thirdBtn={{
-									label: __('Publish', 'masteriyo'),
+									label: isPublished()
+										? __('Published', 'masteriyo')
+										: __('Publish', 'masteriyo'),
 									action: methods.handleSubmit((data) =>
 										onSave(data, 'publish')
 									),
-									icon: <Icon as={BiCheck} fontSize="md" />,
-
+									icon: isPublished() ? (
+										<Icon as={BiCheck} fontSize="md" />
+									) : (
+										<></>
+									),
 									isLoading: updateCourse.isLoading,
+									isDisabled: isPublished(),
 								}}>
 								<TabList borderBottom="none" bg="white">
 									<Tab

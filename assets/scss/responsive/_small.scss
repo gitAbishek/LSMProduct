@@ -46,6 +46,13 @@
 			flex-direction: row;
 		}
 
+		.col {
+			flex: 0 0 100%;
+			max-width: 100%;
+			padding: 15px;
+			width: 100%;
+		}
+
 		.mto-course-item {
 			flex-basis: 100%;
 		}

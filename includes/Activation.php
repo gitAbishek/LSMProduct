@@ -28,6 +28,7 @@ class Activation {
 	public static function on_activate() {
 		self::create_pages();
 		self::assign_core_capabilities_to_admin();
+		self::attach_placeholder_image();
 	}
 
 	/**
@@ -90,6 +91,55 @@ class Activation {
 
 		foreach ( $capabilities as $cap => $bool ) {
 			wp_roles()->add_cap( 'administrator', $cap );
+		}
+	}
+
+	/**
+	 * Insert masteriyo placeholder image to WP Media library.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
+	public static function attach_placeholder_image() {
+		global $wpdb;
+
+		$img_file = masteriyo_get_plugin_url() . '/assets/img/placeholder.jpeg';
+		$filename = basename( $img_file );
+
+		$count = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(*) FROM {$wpdb->postmeta} 
+				 WHERE meta_value 
+				 LIKE %s",
+				"%/{$filename}"
+			)
+		);
+
+		// Return if image already exists.
+		if ( $count > 0 ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		$upload_file = wp_upload_bits( $filename, null, file_get_contents( $img_file ) );
+
+		if ( ! $upload_file['error'] ) {
+			$wp_filetype = wp_check_filetype( $filename, null );
+
+			$attachment    = array(
+				'post_mime_type' => $wp_filetype['type'],
+				'post_title'     => preg_replace( '/\.[^.]+$/', '', sanitize_file_name( $filename ) ),
+				'post_content'   => '',
+				'post_status'    => 'inherit',
+			);
+			$attachment_id = wp_insert_attachment( $attachment, $upload_file['file'] );
+
+			if ( ! is_wp_error( $attachment_id ) ) {
+				require_once ABSPATH . 'wp-admin/includes/image.php';
+				$attachment_data = wp_generate_attachment_metadata( $attachment_id, $upload_file['file'] );
+				wp_update_attachment_metadata( $attachment_id, $attachment_data );
+			}
 		}
 	}
 }

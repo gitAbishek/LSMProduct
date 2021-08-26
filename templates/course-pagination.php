@@ -17,12 +17,40 @@
 
 defined( 'ABSPATH' ) || exit;
 
-echo wp_kses_post(
+$allowed_tags = array(
+	'ul'   => array(
+		'class' => array(),
+	),
+	'li'   => array(
+		'class' => array(),
+	),
+	'span' => array(
+		'class'        => array(),
+		'aria-current' => array(),
+	),
+	'a'    => array(
+		'class' => array(),
+		'href'  => array(),
+	),
+	'svg'  => array(
+		'class'   => array(),
+		'xmlns'   => array(),
+		'width'   => array(),
+		'height'  => array(),
+		'viewBox' => array(),
+	),
+	'path' => array(
+		'd' => array(),
+	),
+);
+
+echo wp_kses(
 	paginate_links(
 		array(
 			'type'      => 'list',
 			'prev_text' => masteriyo_get_svg( 'left-arrow' ),
 			'next_text' => masteriyo_get_svg( 'right-arrow' ),
 		)
-	)
+	),
+	$allowed_tags
 );

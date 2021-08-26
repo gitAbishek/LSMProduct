@@ -3,6 +3,10 @@ import {
 	Button,
 	ButtonGroup,
 	Container,
+	Link,
+	List,
+	ListIcon,
+	ListItem,
 	Stack,
 	Tab,
 	TabList,
@@ -14,8 +18,13 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { BiBook } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { NavLink } from 'react-router-dom';
+import Header from '../../components/common/Header';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
+import { navActiveStyles, navLinkStyles } from '../../config/styles';
+import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
@@ -79,6 +88,22 @@ const Settings = () => {
 		return (
 			<FormProvider {...methods}>
 				<Stack direction="column" spacing="8" width="full" alignItems="center">
+					<Header>
+						<List d="flex">
+							<ListItem mb="0">
+								<Link
+									as={NavLink}
+									sx={navLinkStyles}
+									_activeLink={navActiveStyles}
+									_hover={{ color: 'blue.500' }}
+									to={routes.settings}>
+									<ListIcon as={BiBook} />
+									{__('Settings', 'masteriyo')}
+								</Link>
+							</ListItem>
+						</List>
+					</Header>
+
 					<Container maxW="container.xl" pt="5">
 						<Box bg="white" p="10" shadow="box">
 							<Tabs>

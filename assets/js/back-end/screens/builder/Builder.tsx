@@ -217,10 +217,13 @@ const Builder: React.FC = () => {
 									isDisabled: updateCourse.isLoading,
 								}}
 								thirdBtn={{
-									label: __('Publish', 'masteriyo'),
-									action: methods.handleSubmit((data) =>
-										onSave(data, 'publish')
-									),
+									label: course.isPublished
+										? __('Publish', 'masteriyo')
+										: __('Published', 'masteriyo'),
+									action: methods.handleSubmit((data) => {
+										onSave(data, 'publish');
+										course.togglePublished();
+									}),
 									isLoading: updateCourse.isLoading,
 									isDisabled: draftCourse.isLoading,
 								}}>

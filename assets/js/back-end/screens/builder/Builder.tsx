@@ -226,14 +226,11 @@ const Builder: React.FC = () => {
 						<Stack direction="column" spacing="8" align="center">
 							<Header
 								showCourseName
+								showPreview
 								course={{
 									name: courseQuery.data.name,
 									id: courseQuery.data.id,
 									previewUrl: courseQuery.data.preview_permalink,
-								}}
-								firstBtn={{
-									label: __('Preview', 'masteriyo'),
-									action: () => window.open(courseQuery.data.preview_permalink),
 								}}
 								secondBtn={{
 									label: isDrafted()

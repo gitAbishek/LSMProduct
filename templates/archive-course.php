@@ -24,7 +24,7 @@ get_header( 'course-list' );
  *
  * @since 0.1.0
  */
-echo '<div>';
+echo '<div class="w-100">';
 
 /**
  * Hook: masteriyo_before_main_content.

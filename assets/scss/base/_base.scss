@@ -184,9 +184,14 @@ ul {
 }
 
 @media only screen and (max-width: 1024px) {
-.col-8, .col-4{
-  width: 100%;
-  flex: 0 0 100%;
-  max-width: 100%;
+	.col-8,
+	.col-4 {
+		width: 100%;
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
 }
+
+.w-100 {
+	width: 100%;
 }

@@ -121,10 +121,16 @@ class Activation {
 			return;
 		}
 
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-		$upload_file = wp_upload_bits( $filename, null, file_get_contents( $img_file ) );
+		// Making masteriyo directory on uploads folder.
+		$directory = ABSPATH . 'wp-content/uploads/masteriyo';
 
-		if ( ! $upload_file['error'] ) {
+		if ( ! file_exists( $directory ) ) {
+			mkdir( $directory );
+		}
+		$attach_file = $directory . '/' . sanitize_file_name( $filename );
+		$upload      = copy( $img_file, $attach_file );
+
+		if ( $upload ) {
 			$wp_filetype = wp_check_filetype( $filename, null );
 
 			$attachment    = array(
@@ -133,11 +139,14 @@ class Activation {
 				'post_content'   => '',
 				'post_status'    => 'inherit',
 			);
-			$attachment_id = wp_insert_attachment( $attachment, $upload_file['file'] );
+			$attachment_id = wp_insert_attachment( $attachment, $attach_file );
+
+			// Update attachment ID.
+			update_option( 'masteriyo_placeholder_image', $attachment_id );
 
 			if ( ! is_wp_error( $attachment_id ) ) {
 				require_once ABSPATH . 'wp-admin/includes/image.php';
-				$attachment_data = wp_generate_attachment_metadata( $attachment_id, $upload_file['file'] );
+				$attachment_data = wp_generate_attachment_metadata( $attachment_id, $attach_file );
 				wp_update_attachment_metadata( $attachment_id, $attachment_data );
 			}
 		}

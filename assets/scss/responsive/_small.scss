@@ -37,6 +37,13 @@
 
 	// Course list page responsive
 
+		.col {
+			flex: 0 0 100%;
+			max-width: 100%;
+			padding: 15px;
+			width: 100%;
+		}
+
 	.columns-4,
 	.columns-3,
 	.columns-2,

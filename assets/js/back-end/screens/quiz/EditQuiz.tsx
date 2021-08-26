@@ -6,6 +6,7 @@ import {
 	Divider,
 	Flex,
 	Heading,
+	Icon,
 	Stack,
 	Tab,
 	TabList,
@@ -18,6 +19,7 @@ import { __ } from '@wordpress/i18n';
 import queryString from 'query-string';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { BiCheck } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import BackToBuilder from '../../components/common/BackToBuilder';
@@ -27,6 +29,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import useCourse from '../../hooks/useCourse';
 import { QuizSchema as QuizSchemaOld } from '../../schemas';
+import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
 import Description from './components/Description';
@@ -48,6 +51,7 @@ const EditQuiz: React.FC = () => {
 	const history = useHistory();
 	const toast = useToast();
 	const quizAPI = new API(urls.quizes);
+	const courseAPI = new API(urls.courses);
 	const [tabIndex, setTabIndex] = useState<number>(
 		page === 'questions' ? 1 : 0
 	);
@@ -60,6 +64,11 @@ const EditQuiz: React.FC = () => {
 	const tabPanelStyles = {
 		p: '0',
 	};
+
+	const courseQuery = useQuery<CourseDataMap>(
+		[`course${courseId}`, courseId],
+		() => courseAPI.get(courseId)
+	);
 
 	// gets total number of content on section
 	const quizQuery = useQuery<QuizSchema>([`quiz${quizId}`, quizId], () =>
@@ -75,6 +84,10 @@ const EditQuiz: React.FC = () => {
 					description: data?.name + __(' is successfully added.', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
+				});
+				methods.reset(data, {
+					keepDirty: false,
+					keepValues: true,
 				});
 			},
 		}
@@ -92,25 +105,64 @@ const EditQuiz: React.FC = () => {
 		updateQuiz.mutate(deepClean(deepMerge(data, newData)));
 	};
 
-	if (quizQuery.isSuccess && quizQuery.data.course_id == courseId) {
+	const isPublished = () => {
+		if (courseQuery.data?.status === 'publish') {
+			if (methods.formState.isDirty) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	};
+
+	const isDrafted = () => {
+		if (courseQuery.data?.status === 'draft') {
+			if (methods.formState.isDirty) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	};
+
+	if (
+		quizQuery.isSuccess &&
+		courseQuery.isSuccess &&
+		quizQuery.data.course_id == courseId
+	) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
 				<Header
+					showCourseName
 					showLinks
 					showPreview
-					showCourseName
-					secondBtn={{
-						label: 'Save to Draft',
-						action: methods.handleSubmit((data: QuizSchema) =>
-							onSubmit(data, 'draft')
-						),
-						isLoading: draftCourse.isLoading,
+					course={{
+						name: courseQuery.data.name,
+						id: courseQuery.data.id,
+						previewUrl: courseQuery.data.preview_permalink,
 					}}
-					thirdBtn={{
-						label: 'Publish',
+					secondBtn={{
+						label: isDrafted()
+							? __('Saved To Draft', 'masteriyo')
+							: __('Save To Draft', 'masteriyo'),
 						action: methods.handleSubmit((data: QuizSchema) =>
 							onSubmit(data, 'publish')
 						),
+						isLoading: draftCourse.isLoading,
+						icon: isDrafted() ? <Icon as={BiCheck} fontSize="md" /> : <></>,
+					}}
+					thirdBtn={{
+						label: isPublished()
+							? __('Published', 'masteriyo')
+							: __('Publish', 'masteriyo'),
+						action: methods.handleSubmit((data: QuizSchema) =>
+							onSubmit(data, 'publish')
+						),
+						icon: isPublished() ? <Icon as={BiCheck} fontSize="md" /> : <></>,
 						isLoading: publishCourse.isLoading,
 					}}
 				/>

@@ -29,8 +29,8 @@ do_action( 'masteriyo_before_related_posts_content' );
 <div class="mto-related-post">
 	<h3 class="mto-related-post--title"><?php esc_html_e( 'Related Courses', 'masteriyo' ); ?></h3>
 
-	<div class="mto-single-course mto-item--wrap">
-		<div class="mto-single-course-item">
+	<div class="mto-item--wrap">
+		<div class="mto-single-course-item w-100">
 		<?php
 		foreach ( $related_courses as $course ) {
 			$author         = masteriyo_get_user( $course->get_author_id() );

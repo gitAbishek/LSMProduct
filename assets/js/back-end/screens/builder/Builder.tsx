@@ -22,7 +22,7 @@ import { __ } from '@wordpress/i18n';
 import queryString from 'query-string';
 import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
+import { BiBook, BiCheck, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import AddCategoryModal from '../../components/common/AddCategoryModal';
@@ -30,7 +30,6 @@ import Header from '../../components/common/Header';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
-import useCourse from '../../hooks/useCourse';
 import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
@@ -47,7 +46,6 @@ const Builder: React.FC = () => {
 	const methods = useForm();
 	const history = useHistory();
 	const cancelRef = useRef<any>();
-	const course = useCourse();
 
 	const courseAPI = new API(urls.courses);
 	const builderAPI = new API(urls.builder);
@@ -81,13 +79,7 @@ const Builder: React.FC = () => {
 
 	const courseQuery = useQuery<CourseDataMap>(
 		[`course${courseId}`, courseId],
-		() => courseAPI.get(courseId),
-		{
-			onSuccess: (data: CourseDataMap) => {
-				course.setCourseName(data.name);
-				course.setPreviewUrl(data.preview_permalink);
-			},
-		}
+		() => courseAPI.get(courseId)
 	);
 
 	const builderQuery = useQuery(
@@ -109,6 +101,10 @@ const Builder: React.FC = () => {
 					description: __('You can keep editing it', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
+				});
+				methods.reset(data, {
+					keepDirty: false,
+					keepValues: true,
 				});
 				queryClient.invalidateQueries(`course${data.id}`);
 			},
@@ -194,6 +190,16 @@ const Builder: React.FC = () => {
 		deleteSectionId && deleteMutation.mutate(deleteSectionId);
 	};
 
+	if (courseQuery.data?.status === 'publish') {
+		console.log('it is published');
+		if (methods.formState.isDirty) {
+			console.log('is dirty');
+		} else {
+			console.log('is false');
+		}
+	} else {
+	}
+
 	if (courseQuery.isSuccess && builderQuery.isSuccess) {
 		return (
 			<>
@@ -205,6 +211,7 @@ const Builder: React.FC = () => {
 								course={{
 									name: courseQuery.data.name,
 									id: courseQuery.data.id,
+									previewUrl: courseQuery.data.preview_permalink,
 								}}
 								firstBtn={{
 									label: __('Preview', 'masteriyo'),
@@ -217,15 +224,13 @@ const Builder: React.FC = () => {
 									isDisabled: updateCourse.isLoading,
 								}}
 								thirdBtn={{
-									label: course.isPublished
-										? __('Publish', 'masteriyo')
-										: __('Published', 'masteriyo'),
-									action: methods.handleSubmit((data) => {
-										onSave(data, 'publish');
-										course.togglePublished();
-									}),
+									label: __('Publish', 'masteriyo'),
+									action: methods.handleSubmit((data) =>
+										onSave(data, 'publish')
+									),
+									icon: <Icon as={BiCheck} fontSize="md" />,
+
 									isLoading: updateCourse.isLoading,
-									isDisabled: draftCourse.isLoading,
 								}}>
 								<TabList borderBottom="none" bg="white">
 									<Tab

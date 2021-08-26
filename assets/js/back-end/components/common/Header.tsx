@@ -44,6 +44,7 @@ interface Props {
 	course?: {
 		name: string;
 		id: number;
+		previewUrl: string;
 	};
 	showLinks?: boolean;
 	showPreview?: boolean;
@@ -77,11 +78,6 @@ const Header: React.FC<Props> = (props) => {
 								{course && (
 									<Heading fontSize="md" fontWeight="medium">
 										{course.name}
-									</Heading>
-								)}
-								{!course && courseDetail.courseName && (
-									<Heading fontSize="md" fontWeight="medium">
-										{courseDetail.courseName}
 									</Heading>
 								)}
 							</>
@@ -150,8 +146,8 @@ const Header: React.FC<Props> = (props) => {
 							</Button>
 						)}
 
-						{showPreview && courseDetail.previewUrl && (
-							<Link href={courseDetail.previewUrl} isExternal>
+						{showPreview && course?.previewUrl && (
+							<Link href={course?.previewUrl} isExternal>
 								<Button variant="outline">{__('Preview', 'masteriyo')}</Button>
 							</Link>
 						)}

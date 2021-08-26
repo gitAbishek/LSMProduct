@@ -28,7 +28,7 @@ do_action( 'masteriyo_before_single_course_author_and_rating' );
 	</div>
 	<?php endif; ?>
 	<span class="mto-icon-svg mto-flex mto-rating mto-flex-ycenter">
-		<?php masteriyo_format_rating( $course->get_average_rating(), true ); ?> <?php echo esc_html( $course->get_average_rating() ); ?> (<?php echo esc_html( $course->get_rating_count() ); ?>)
+		<?php masteriyo_format_rating( $course->get_average_rating(), true ); ?> <?php echo esc_html( masteriyo_format_decimal( $course->get_average_rating(), 1, true ) ); ?> (<?php echo esc_html( $course->get_rating_count() ); ?>)
 	</span>
 </div>
 <?php

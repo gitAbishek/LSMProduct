@@ -22,7 +22,7 @@ import { __ } from '@wordpress/i18n';
 import queryString from 'query-string';
 import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiBook, BiCheck, BiCog, BiEdit } from 'react-icons/bi';
+import { BiBook, BiCog, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import AddCategoryModal from '../../components/common/AddCategoryModal';
@@ -196,11 +196,7 @@ const Builder: React.FC = () => {
 
 	const isPublished = () => {
 		if (courseQuery.data?.status === 'publish') {
-			if (methods.formState.isDirty) {
-				return false;
-			} else {
-				return true;
-			}
+			return true;
 		} else {
 			return false;
 		}
@@ -208,11 +204,7 @@ const Builder: React.FC = () => {
 
 	const isDrafted = () => {
 		if (courseQuery.data?.status === 'draft') {
-			if (methods.formState.isDirty) {
-				return false;
-			} else {
-				return true;
-			}
+			return true;
 		} else {
 			return false;
 		}
@@ -234,31 +226,19 @@ const Builder: React.FC = () => {
 								}}
 								secondBtn={{
 									label: isDrafted()
-										? __('Saved To Draft', 'masteriyo')
-										: __('Save To Draft', 'masteriyo'),
+										? __('Save To Draft', 'masteriyo')
+										: __('Switch To Draft', 'masteriyo'),
 									action: methods.handleSubmit((data) => onSave(data, 'draft')),
 									isLoading: draftCourse.isLoading,
-									icon: isDrafted() ? (
-										<Icon as={BiCheck} fontSize="md" />
-									) : (
-										<></>
-									),
-									isDisabled: isDrafted(),
 								}}
 								thirdBtn={{
 									label: isPublished()
-										? __('Published', 'masteriyo')
+										? __('Update', 'masteriyo')
 										: __('Publish', 'masteriyo'),
 									action: methods.handleSubmit((data) =>
 										onSave(data, 'publish')
 									),
-									icon: isPublished() ? (
-										<Icon as={BiCheck} fontSize="md" />
-									) : (
-										<></>
-									),
 									isLoading: updateCourse.isLoading,
-									isDisabled: isPublished(),
 								}}>
 								<TabList borderBottom="none" bg="white">
 									<Tab

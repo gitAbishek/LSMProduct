@@ -6,7 +6,6 @@ import {
 	Heading,
 	IconButton,
 	Stack,
-	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
@@ -25,7 +24,6 @@ const Sidebar: React.FC<Props> = (props) => {
 	const { items, name } = props;
 	const { courseId }: any = useParams();
 
-	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [currentTab, setCurrentTab] = useState<number>(1);
 
 	const buttonStyles = {
@@ -57,7 +55,6 @@ const Sidebar: React.FC<Props> = (props) => {
 				right="-36px"
 				fontSize="x-large"
 				icon={<BiMenu />}
-				onClick={onOpen}
 				bgSize="cover"
 				minW="auto"
 				w="36px"

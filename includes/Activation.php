@@ -102,22 +102,13 @@ class Activation {
 	 * @return void
 	 */
 	public static function attach_placeholder_image() {
-		global $wpdb;
-
 		$img_file = masteriyo_get_plugin_url() . '/assets/img/placeholder.jpeg';
 		$filename = basename( $img_file );
 
-		$count = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT COUNT(*) FROM {$wpdb->postmeta} 
-				 WHERE meta_value 
-				 LIKE %s",
-				"%/{$filename}"
-			)
-		);
-
 		// Return if image already exists.
-		if ( $count > 0 ) {
+		$prev_attachment_id = get_option( 'masteriyo_placeholder_image', 0 );
+
+		if ( wp_attachment_is_image( $prev_attachment_id ) ) {
 			return;
 		}
 

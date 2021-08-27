@@ -6,7 +6,6 @@ import {
 	Divider,
 	Flex,
 	Heading,
-	Icon,
 	Stack,
 	Tab,
 	TabList,
@@ -19,7 +18,6 @@ import { __ } from '@wordpress/i18n';
 import queryString from 'query-string';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiCheck } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import BackToBuilder from '../../components/common/BackToBuilder';
@@ -85,10 +83,11 @@ const EditQuiz: React.FC = () => {
 					isClosable: true,
 					status: 'success',
 				});
-				methods.reset(data, {
-					keepDirty: false,
-					keepValues: true,
-				});
+				// methods.reset(data, {
+				// 	keepDirty: false,
+				// 	keepValues: true,
+				// });
+				courseQuery.refetch();
 			},
 		}
 	);
@@ -107,11 +106,7 @@ const EditQuiz: React.FC = () => {
 
 	const isPublished = () => {
 		if (courseQuery.data?.status === 'publish') {
-			if (methods.formState.isDirty) {
-				return false;
-			} else {
-				return true;
-			}
+			return true;
 		} else {
 			return false;
 		}
@@ -119,11 +114,7 @@ const EditQuiz: React.FC = () => {
 
 	const isDrafted = () => {
 		if (courseQuery.data?.status === 'draft') {
-			if (methods.formState.isDirty) {
-				return false;
-			} else {
-				return true;
-			}
+			return true;
 		} else {
 			return false;
 		}
@@ -147,22 +138,20 @@ const EditQuiz: React.FC = () => {
 					}}
 					secondBtn={{
 						label: isDrafted()
-							? __('Saved To Draft', 'masteriyo')
-							: __('Save To Draft', 'masteriyo'),
+							? __('Save To Draft', 'masteriyo')
+							: __('Switch To Draft', 'masteriyo'),
 						action: methods.handleSubmit((data: QuizSchema) =>
-							onSubmit(data, 'publish')
+							onSubmit(data, 'draft')
 						),
 						isLoading: draftCourse.isLoading,
-						icon: isDrafted() ? <Icon as={BiCheck} fontSize="md" /> : <></>,
 					}}
 					thirdBtn={{
 						label: isPublished()
-							? __('Published', 'masteriyo')
+							? __('Update', 'masteriyo')
 							: __('Publish', 'masteriyo'),
 						action: methods.handleSubmit((data: QuizSchema) =>
 							onSubmit(data, 'publish')
 						),
-						icon: isPublished() ? <Icon as={BiCheck} fontSize="md" /> : <></>,
 						isLoading: publishCourse.isLoading,
 					}}
 				/>

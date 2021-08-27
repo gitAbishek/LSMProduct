@@ -6,7 +6,6 @@ import {
 	Divider,
 	Flex,
 	Heading,
-	Icon,
 	IconButton,
 	Menu,
 	MenuButton,
@@ -18,12 +17,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import {
-	BiCheck,
-	BiDotsVerticalRounded,
-	BiEdit,
-	BiTrash,
-} from 'react-icons/bi';
+import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import BackToBuilder from '../../components/common/BackToBuilder';
@@ -89,14 +83,9 @@ const AddNewLesson: React.FC = () => {
 			},
 		});
 	};
-
 	const isPublished = () => {
 		if (courseQuery.data?.status === 'publish') {
-			if (methods.formState.isDirty) {
-				return false;
-			} else {
-				return true;
-			}
+			return true;
 		} else {
 			return false;
 		}
@@ -104,11 +93,7 @@ const AddNewLesson: React.FC = () => {
 
 	const isDrafted = () => {
 		if (courseQuery.data?.status === 'draft') {
-			if (methods.formState.isDirty) {
-				return false;
-			} else {
-				return true;
-			}
+			return true;
 		} else {
 			return false;
 		}
@@ -132,25 +117,21 @@ const AddNewLesson: React.FC = () => {
 					}}
 					secondBtn={{
 						label: isDrafted()
-							? __('Saved To Draft', 'masteriyo')
-							: __('Save To Draft', 'masteriyo'),
+							? __('Save To Draft', 'masteriyo')
+							: __('Switch To Draft', 'masteriyo'),
 						action: methods.handleSubmit((data: LessonSchema) =>
-							onSubmit(data, 'publish')
+							onSubmit(data, 'draft')
 						),
 						isLoading: draftCourse.isLoading,
-						icon: isDrafted() ? <Icon as={BiCheck} fontSize="md" /> : <></>,
-						isDisabled: isDrafted(),
 					}}
 					thirdBtn={{
 						label: isPublished()
-							? __('Published', 'masteriyo')
+							? __('Update', 'masteriyo')
 							: __('Publish', 'masteriyo'),
 						action: methods.handleSubmit((data: LessonSchema) =>
 							onSubmit(data, 'publish')
 						),
-						icon: isPublished() ? <Icon as={BiCheck} fontSize="md" /> : <></>,
 						isLoading: publishCourse.isLoading,
-						isDisabled: isPublished(),
 					}}
 				/>
 				<Container maxW="container.xl">

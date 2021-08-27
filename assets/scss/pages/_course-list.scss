@@ -373,6 +373,7 @@
 		&:active,
 		&:focus,
 		&:active {
+      background: $mto-white-color;
 			border: 1px solid $mto-btn-hover-blue;
 			transition: 0.5s ease;
 			@include mto-shadow-2;

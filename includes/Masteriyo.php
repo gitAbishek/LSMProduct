@@ -90,7 +90,7 @@ class Masteriyo {
 		add_action( 'admin_bar_menu', array( $this, 'add_course_list_page_link' ), 35 );
 		add_action( 'admin_notices', array( $this, 'masteriyo_display_compatibility_notice' ) );
 
-		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_links' ), 10, 2 );
+		// add_filter( 'plugin_row_meta', array( $this, 'add_plugin_links' ), 10, 2 );
 		add_filter( 'plugin_action_links_' . Constants::get( 'MASTERIYO_PLUGIN_BASENAME' ), array( $this, 'add_plugin_action_links' ) );
 		add_filter( 'template_include', array( $this, 'template_loader' ) );
 		add_filter( 'template_redirect', array( $this, 'redirect_reset_password_link' ) );

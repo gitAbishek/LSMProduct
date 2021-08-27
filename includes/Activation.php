@@ -121,13 +121,15 @@ class Activation {
 			return;
 		}
 
+		// Get upload directory.
+		$upload_dir = wp_upload_dir();
 		// Making masteriyo directory on uploads folder.
-		$directory = ABSPATH . 'wp-content/uploads/masteriyo';
+		$upload_masteriyo_dir = $upload_dir['basedir'] . '/masteriyo';
 
-		if ( ! file_exists( $directory ) ) {
-			mkdir( $directory );
+		if ( ! file_exists( $upload_masteriyo_dir ) ) {
+			mkdir( $upload_masteriyo_dir );
 		}
-		$attach_file = $directory . '/' . sanitize_file_name( $filename );
+		$attach_file = $upload_masteriyo_dir . '/' . sanitize_file_name( $filename );
 		$upload      = copy( $img_file, $attach_file );
 
 		if ( $upload ) {

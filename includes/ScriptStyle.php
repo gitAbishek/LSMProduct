@@ -65,7 +65,7 @@ class ScriptStyle {
 	 * @return void
 	 */
 	private static function init_hooks() {
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_public_scripts_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_public_scripts_styles' ), PHP_INT_MAX );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_admin_scripts_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_public_localized_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_admin_localized_scripts' ) );

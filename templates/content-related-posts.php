@@ -104,7 +104,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 							<?php masteriyo_get_svg( 'book', true ); ?> <span><?php echo esc_html( masteriyo_get_lessons_count( $course ) ); ?></span>
 						</div>
 					</div>
-					<hr>
+					<hr class="masteriyo-border">
 					<!-- Price and Enroll Now Button -->
 					<div class="mto-time-btn">
 						<div class="mto-course-price">

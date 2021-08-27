@@ -100,7 +100,7 @@ $categories     = $course->get_categories( 'name' );
 			</div>
 		</div>
 		<!-- Border -->
-		<hr>
+		<hr class="masteriyo-border">
 		<!-- Price and Enroll Now Button -->
 		<div class="mto-time-btn">
 			<div class="mto-course-price">

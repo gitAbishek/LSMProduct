@@ -353,7 +353,7 @@
 }
 
 // Course search page
-.main-search {
+.masteriyo-search {
 	width: 100%;
 	position: relative;
 	margin-bottom: 62px;
@@ -363,6 +363,7 @@
 		box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
 		border-radius: 8px;
 		height: 70px;
+    width: 100%;
 		font-weight: 400;
 		text-decoration: inherit;
 		border: 1px solid white;
@@ -407,6 +408,7 @@
 		max-width: 25%;
 		padding: 15px;
 		width: 25%;
+    
 
 		.difficulty-badge {
 			left: 16px;

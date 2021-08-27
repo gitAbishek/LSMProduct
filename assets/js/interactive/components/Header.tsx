@@ -28,19 +28,17 @@ import AvatarMenu from './AvatarMenu';
 
 interface Props {
 	summary: CourseProgressSummaryMap;
+	isOpen: boolean;
+	onToggle: () => void;
 }
 const Header: React.FC<Props> = (props) => {
-	const { summary } = props;
+	const { summary, isOpen, onToggle } = props;
 
 	const {
 		onOpen: onProgressOpen,
 		onClose: onProgressClose,
 		isOpen: isProgressOpen,
 	} = useDisclosure();
-
-	const { isOpen, onToggle } = useDisclosure({
-		defaultIsOpen: true,
-	});
 
 	return (
 		<Box as="header" h="84px">

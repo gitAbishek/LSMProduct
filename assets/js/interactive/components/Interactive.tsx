@@ -17,6 +17,9 @@ const Interactive: React.FC = () => {
 	const location = useLocation();
 	const progressAPI = new API(urls.courseProgress);
 	const { isOpen: isSidebarOpen, onToggle: onSidebarToggle } = useDisclosure();
+	const { isOpen: isHeaderOpen, onToggle: onHeaderToggle } = useDisclosure({
+		defaultIsOpen: true,
+	});
 
 	const courseProgressQuery = useQuery<CourseProgressMap>(
 		[`courseProgress${courseId}`, courseId],
@@ -42,11 +45,16 @@ const Interactive: React.FC = () => {
 	if (courseProgressQuery.isSuccess) {
 		return (
 			<Box h="full" overflowX="hidden" pos="relative">
-				<Header summary={courseProgressQuery.data.summary} />
+				<Header
+					summary={courseProgressQuery.data.summary}
+					isOpen={isHeaderOpen}
+					onToggle={onHeaderToggle}
+				/>
 
 				<Sidebar
 					isOpen={isSidebarOpen}
 					onToggle={onSidebarToggle}
+					isHeaderOpen={isHeaderOpen}
 					items={courseProgressQuery.data.items}
 					name={courseProgressQuery.data.name}
 				/>

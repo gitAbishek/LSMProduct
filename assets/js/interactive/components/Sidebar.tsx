@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
-import { BiAlignLeft, BiInfoCircle, BiMenu } from 'react-icons/bi';
+import { BiAlignLeft, BiInfoCircle, BiMenu, BiX } from 'react-icons/bi';
 import { useParams } from 'react-router-dom';
 import { CloseCone } from '../../back-end/constants/images';
 import { CourseProgressItemMap } from '../schemas';
@@ -21,10 +21,11 @@ interface Props {
 	name: string;
 	onToggle: () => void;
 	isOpen: boolean;
+	isHeaderOpen: boolean;
 }
 
 const Sidebar: React.FC<Props> = (props) => {
-	const { items, name, onToggle, isOpen } = props;
+	const { items, name, onToggle, isOpen, isHeaderOpen } = props;
 	const { courseId }: any = useParams();
 
 	const [currentTab, setCurrentTab] = useState<number>(1);
@@ -49,12 +50,12 @@ const Sidebar: React.FC<Props> = (props) => {
 	return (
 		<Box
 			pos="fixed"
-			top="0"
+			top={isHeaderOpen ? '66px' : 0}
 			left="0"
 			w="300px"
 			bg="white"
 			zIndex="99"
-			h="full"
+			bottom="0"
 			transition="all 0.35s"
 			transform={`translateX(${isOpen ? 0 : '-100%'})`}>
 			<Box pos="relative" h="full">
@@ -65,9 +66,9 @@ const Sidebar: React.FC<Props> = (props) => {
 					justifyContent="center"
 					position="absolute"
 					top="0"
-					right="-36px"
+					right="-35px"
 					fontSize="x-large"
-					icon={<BiMenu />}
+					icon={isOpen ? <BiX /> : <BiMenu />}
 					bgSize="cover"
 					minW="auto"
 					w="36px"

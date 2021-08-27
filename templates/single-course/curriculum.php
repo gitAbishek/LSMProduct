@@ -23,9 +23,9 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 
 ?>
 
-<div class="tab-content course-curriculum mto-hidden">
+<div class="tab-content course-curriculum masteriyo-hidden">
 	<div class="mto-stab--tcurriculum">
-		<div class="mto-stab--shortinfo mto-flex mto-flex--space-between mto-flex-ycenter plr-32">
+		<div class="mto-stab--shortinfo">
 			<div class="title-container">
 				<h3 class="title"><?php esc_html_e( 'Curriculum', 'masteriyo' ); ?></h3>
 				<ul class="mto-shortinfo-wrap">
@@ -68,7 +68,7 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 
 		<?php foreach ( $sections as $section ) : ?>
 			<div class="mto-stab--citems">
-				<div class="mto-cheader  plr-32 pt-2 pb-2">
+				<div class="mto-cheader">
 					<h5 class="mto-ctitle"><?php echo esc_html( $section->get_name() ); ?></h5>
 
 					<div class="mto-ltc mto-flex-ycenter">
@@ -95,8 +95,8 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 					<ol class="mto-lesson-list">
 						<?php foreach ( $dictionary[ $section->get_id() ] as $lesson ) : ?>
 							<li>
-								<div class="mto-flex mto-flex--space-between mto-flex-ycenter plr-32">
-									<span class="mto-flex mto-flex--space-between mto-flex-ycenter">
+								<div class="mto-lesson-list__content">
+									<span class="mto-lesson-list__content-item">
 										<span class="mto-lesson-icon">
 											<?php masteriyo_get_svg( 'play', true ); ?>
 										</span>

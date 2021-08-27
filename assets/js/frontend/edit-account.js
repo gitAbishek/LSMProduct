@@ -10,8 +10,8 @@
 	$(document.body).on('click', '.mto-tab', function () {
 		$(this).siblings('.mto-tab').removeClass('mto-active-tab');
 		$(this).addClass('mto-active-tab');
-		$('.mto-tab-content').addClass('mto-hidden');
-		$('#' + $(this).data('tab')).removeClass('mto-hidden');
+		$('.mto-tab-content').addClass('masteriyo-hidden');
+		$('#' + $(this).data('tab')).removeClass('masteriyo-hidden');
 	});
 
 	/**

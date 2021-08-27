@@ -409,8 +409,8 @@
 
 function masteriyo_select_single_course_page_tab(e, tabContentSelector) {
 	jQuery('.mto-tab').removeClass('active-tab');
-	jQuery('.tab-content').addClass('mto-hidden');
+	jQuery('.tab-content').addClass('masteriyo-hidden');
 
 	jQuery(e.target).addClass('active-tab');
-	jQuery(tabContentSelector).removeClass('mto-hidden');
+	jQuery(tabContentSelector).removeClass('masteriyo-hidden');
 }

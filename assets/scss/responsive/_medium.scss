@@ -10,6 +10,22 @@
 		}
 	}
 
+	// Single course page reviews
+	.mto-single-course--main__content
+		.course-reviews
+		.mto-course-reviews-list
+		.mto-course-review__content {
+		flex-direction: column;
+		.mto-avatar {
+			margin-bottom: 8px;
+		}
+
+		.mto-right {
+			width: 100%;
+			margin: 0px;
+		}
+	}
+
 	// Course list page responsive
 	.columns-4,
 	.columns-3,
@@ -21,13 +37,13 @@
 			width: 50%;
 		}
 
-		.mto-course-item {
+		.mto-course--card {
 			flex-basis: 335px;
 		}
 	}
 
 	.columns-1 {
-		.mto-course-item {
+		.mto-course--card {
 			flex-basis: 100%;
 		}
 	}
@@ -51,9 +67,9 @@
 	}
 
 	.mto-item--wrap {
-		.mto-single-course-item > div{
+		.mto-single-course-item > div {
 			padding-top: 8px;
-      padding-bottom: 8px;
+			padding-bottom: 8px;
 		}
 	}
 }

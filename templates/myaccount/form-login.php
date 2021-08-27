@@ -61,7 +61,7 @@ do_action( 'masteriyo_before_login_form_content' );
 					</div>
 				</div>
 
-				<div id="mto-login-error-msg" class="mto-hidden mto-notify-message mto-alert mto-danger-msg"></div>
+				<div id="mto-login-error-msg" class="masteriyo-hidden mto-notify-message mto-alert mto-danger-msg"></div>
 			</form>
 			<?php masteriyo_display_all_notices(); ?>
 

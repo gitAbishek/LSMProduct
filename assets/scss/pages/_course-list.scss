@@ -1,3 +1,5 @@
+// Course list page
+
 .mto-course {
 	display: flex;
 	flex-wrap: wrap;
@@ -7,26 +9,24 @@
 	justify-content: flex-start;
 	margin-top: -15px;
 
-	&-item {
+	&--card {
+		border-radius: 8px;
+		flex-basis: auto;
 		align-self: baseline;
 		width: 100%;
-	}
-
-	&-item {
-		background: $mto-white-color;
-		// margin: 15px;
-		flex-basis: calc((100% / 4) - 30px);
-		// cursor: pointer;
-		flex-basis: auto;
+		@include mto-shadow-2;
+		cursor: pointer;
 
 		&:hover {
-			@include mto-shadow-2;
+			box-shadow: 0 0 30px rgb(0 0 0 / 10%);
 			transition: 0.5s ease;
-			@include mto-shadow-2;
 
-			.mto-title a {
+			.mto-course--content__title a {
 				color: $mto-btn-hover-blue;
 			}
+		}
+		.mto-rt {
+			justify-content: space-between;
 		}
 	}
 
@@ -35,7 +35,7 @@
 
 		img {
 			width: 100%;
-			height: 210px !important;
+			height: 210px;
 			object-fit: cover;
 			border-top-left-radius: 8px;
 			border-top-right-radius: 8px;
@@ -65,159 +65,159 @@
 		font-weight: 700;
 		fill: white;
 	}
-}
 
-.mto-course--card {
-	border-radius: 8px;
-	.mto-rt {
-		justify-content: space-between;
-	}
-}
+	.mto-course--content {
+		padding: 24px;
+    background-color: $mto-white-color;
 
-.mto-course--header {
-	padding: 24px;
-
-	// Category
-	.mto-category {
-		display: flex;
-		gap: 8px;
-		flex-wrap: wrap;
-		margin-bottom: 14px;
-
-		&-items {
-			padding: 4px 8px;
-			color: $mto-primary-color;
-			border-radius: 32px;
-			border: 1px solid $mto-primary-color;
-		}
-	}
-
-	// Author and rating
-	.mto-rt {
-		display: flex;
-		align-items: center;
-		margin-bottom: 14px;
-
-		.mto-course-author {
+		// Category
+		&__category {
 			display: flex;
-			align-items: center;
-			img {
-				width: 32px;
-				height: 32px;
-				object-fit: cover;
-				border-radius: 50%;
-			}
-			&--name {
-				color: $mto-accent-color;
-				font-size: 12px;
-				line-height: 16px;
-				text-decoration: underline;
-				margin-left: 8px;
-				font-weight: 500;
-				overflow-wrap: break-word;
-				max-width: 100px;
-			}
-		}
-		.mto-rating {
-			// margin-left: 62px;
-			svg {
-				fill: $mto-primary-color;
-				width: 12px;
-				height: 12px;
-				font-size: 12px;
-
-				&:last-child {
-					margin-right: 8px;
-				}
-			}
-		}
-	}
-
-	// course desciption
-	.mto-course-description {
-		.title {
+			gap: 8px;
+			flex-wrap: wrap;
 			margin-bottom: 14px;
-		}
+			padding: 0px;
+			margin-top: 0px;
 
-		ul {
-			list-style: none;
-			margin: 0px;
-      padding: 0px;
-			li {
-				display: flex;
-				p {
-					margin: 0px;
-					padding-left: 8px;
-				}
-			}
-			li::before {
-				content: ('\2713');
+			&-items {
+				padding: 4px 8px;
+				color: $mto-primary-color;
+				border-radius: 32px;
+				border: 1px solid $mto-primary-color;
 			}
 		}
-	}
 
-	// course stats
-	.mto-course-stats {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-top: 18px;
-		margin-bottom: 18px;
-
-		& > div {
+		// Author and rating
+		&__rt {
 			display: flex;
 			align-items: center;
-			justify-content: center;
-			color: $mto-light-text-color;
+			justify-content: space-between;
+			margin-bottom: 14px;
+			padding: 0px;
 
-			span {
-				margin-left: 4px;
+			.mto-course-author {
+				display: flex;
+				align-items: center;
+				img {
+					width: 32px;
+					height: 32px;
+					object-fit: cover;
+					border-radius: 50%;
+				}
+				&--name {
+					color: $mto-accent-color;
+					font-size: 12px;
+					line-height: 16px;
+					text-decoration: underline;
+					margin-left: 8px;
+					font-weight: 500;
+					overflow-wrap: break-word;
+					max-width: 100px;
+				}
+			}
+			.mto-rating {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				svg {
+					fill: $mto-primary-color;
+					width: 12px;
+					height: 12px;
+					font-size: 12px;
+
+					&:last-child {
+						margin-right: 8px;
+					}
+				}
+			}
+		}
+
+		// course desciption
+		&__description {
+			.title {
+				margin-bottom: 14px;
 			}
 
-			svg {
-				width: 20px;
-				height: 20px;
-				fill: $mto-light-text-color;
+			ul {
+				list-style: none;
+				margin: 0px;
+				padding: 0px;
+				li {
+					display: flex;
+					padding: 4px 0px;
+					p {
+						margin: 0px;
+						padding-left: 8px;
+					}
+				}
+				li::before {
+					content: ('\2713');
+				}
+			}
+		}
+
+		// course stats
+		&__stats {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-top: 18px;
+			margin-bottom: 18px;
+
+			& > div {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: $mto-light-text-color;
+
+				span {
+					margin-left: 4px;
+				}
+
+				svg {
+					width: 20px;
+					height: 20px;
+					fill: $mto-light-text-color;
+				}
+			}
+		}
+
+		// price and enroll now
+		.mto-course-price {
+			.old-amount {
+				text-decoration: line-through;
+				font-size: 16px;
+				color: $mto-light-text-color;
+			}
+
+			.current-amount {
+				font-size: 24px;
+				color: $mto-primary-color;
+				font-weight: bold;
+			}
+		}
+
+		&__title {
+			line-height: 18px;
+			margin: 0px 0px 14px 0px;
+
+			&::before {
+				content: '';
+				display: none;
+			}
+			a {
+				font-weight: bold;
+				font-size: 18px;
+				margin: 0 px 0 20px 0;
+				color: $mto-dark-gray;
+				text-decoration: none;
 			}
 		}
 	}
-
-	// price and enroll now
-	.mto-course-price {
-		.old-amount {
-			text-decoration: line-through;
-			font-size: 16px;
-			color: $mto-light-text-color;
-		}
-
-		.current-amount {
-			font-size: 24px;
-			color: $mto-primary-color;
-			font-weight: bold;
-		}
-	}
-
 	.mto-icon-svg > svg {
 		width: 16px;
 		height: 16px;
 		fill: $mto-accent-color;
-	}
-
-	.mto-title {
-		line-height: 18px;
-		margin: 0px 0px 14px 0px;
-
-		&::before {
-			content: '';
-			display: none;
-		}
-		a {
-			font-weight: bold;
-			font-size: 18px;
-			margin: 0 px 0 20px 0;
-			color: $mto-dark-gray;
-			text-decoration: none;
-		}
 	}
 }
 
@@ -273,50 +273,30 @@
 
 		img {
 			object-fit: cover;
-      width: 100%;
-      height: 100%;
+			width: 100%;
+			height: 100%;
 		}
 	}
+}
 
-	.mto-right {
-		margin-left: 18px;
-		max-width: 90%;
+// Single course review
+.course-reviews {
+	.mto-course-reviews-list {
+		padding: 0px 32px;
+	}
 
-		.rating {
-			margin-bottom: 14px;
-
-			.mto-rstar {
-				svg {
-					fill: $mto-primary-color;
-				}
-			}
-		}
-
-		.author-name {
-			color: $mto-primary-color;
-			text-decoration: underline;
-			margin-right: 16px;
-			font-size: 14px;
-			line-height: 16px;
-		}
-
-		.date-created {
-			font-size: 12px;
-			line-height: 14px;
-		}
-
-		.title {
-			font-weight: 500;
-			font-size: 16px;
-			line-height: 19px;
-			margin-top: 24px;
-			margin-bottom: 16px;
-		}
-
-		.content {
-			font-size: 16px;
-			line-height: 27px;
-		}
+	.mto-submit-container {
+		padding: 0px 32px;
+    .mto-rating{
+      margin-top: 14px;
+    }
+	}
+	.mto-login-msg.mto-submit-container {
+		display: flex;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+		padding-top: 24p;
 	}
 }
 
@@ -332,7 +312,7 @@
 	margin-top: 16px;
 }
 
-.mto-maintitle {
+.masteriyo--title {
 	font-weight: 500;
 	font-size: 24px;
 	line-height: 24px;
@@ -345,8 +325,8 @@
 }
 
 .boxshadow-none {
-	box-shadow: none !important;
-	padding: 0px !important;
+	box-shadow: none;
+	padding: 0px;
 }
 
 .mto-flex-column {
@@ -392,8 +372,8 @@
 		&:active,
 		&:focus,
 		&:active {
-			border: 1px solid $mto-btn-hover-blue !important;
-			transition: 0.5s ease !important;
+			border: 1px solid $mto-btn-hover-blue;
+			transition: 0.5s ease;
 			@include mto-shadow-2;
 		}
 	}
@@ -421,7 +401,6 @@
 
 .columns-4 {
 	display: flex;
-	// gap: 8px;
 
 	.masteriyo-col {
 		flex: 0 0 25%;
@@ -433,7 +412,7 @@
 			left: 16px;
 		}
 
-		.mto-course--header {
+		.mto-course--content {
 			padding: 18px;
 		}
 
@@ -470,13 +449,13 @@
 	display: flex;
 
 	.masteriyo-col {
-			flex: 0 0 100%;
-			max-width: 100%;
-			padding: 15px;
-			width: 100%;
+		flex: 0 0 100%;
+		max-width: 100%;
+		padding: 15px;
+		width: 100%;
 	}
 }
-.mto-submit-review-form-container {
+.mto-form-container {
 	clear: both;
 }
 

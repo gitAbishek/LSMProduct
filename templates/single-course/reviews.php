@@ -22,10 +22,10 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 do_action( 'masteriyo_before_single_course_reviews' );
 
 ?>
-<div class="tab-content course-reviews mto-hidden">
-	<div class="mto-stab--treviews plr-32">
-		<div class="mto-stab-rs mto-flex mto-flex-ycenter">
-			<span class="mto-icon-svg mto-flex mto-rstar">
+<div class="tab-content course-reviews masteriyo-hidden">
+	<div class="mto-stab--treviews">
+		<div class="mto-stab-rs">
+			<span class="mto-icon-svg mto-flex mto-rstar">  
 				<?php masteriyo_render_stars( $course->get_average_rating() ); ?>
 			</span>
 
@@ -34,7 +34,7 @@ do_action( 'masteriyo_before_single_course_reviews' );
 			</span>
 		</div>
 	</div>
-	<p class="mto-stab--turating plr-32">
+	<p class="mto-stab--turating">
 		<span>
 			<?php
 				printf(
@@ -46,12 +46,12 @@ do_action( 'masteriyo_before_single_course_reviews' );
 		</span>
 	</p>
 
-	<div class="mto-course-reviews-list plr-32">
+	<div class="mto-course-reviews-list">
 		<?php foreach ( $course_reviews as $course_review ) : ?>
 			<!-- Course Review -->
 			<div class="mto-course-review" data-id="<?php echo esc_attr( $course_review->get_id() ); ?>">
 				<input type="hidden" name="parent" value="<?php echo esc_attr( $course_review->get_parent() ); ?>">
-				<div class="mto-flex mto-review mto-border-none">
+				<div class="mto-flex mto-review mto-border-none mto-course-review__content">
 					<div class="mto-avatar">
 						<?php if ( ! $course_review->get_author() ) : ?>
 							<img src="<?php echo esc_attr( $pp_placeholder ); ?>" />
@@ -59,15 +59,15 @@ do_action( 'masteriyo_before_single_course_reviews' );
 							<img src="<?php echo esc_attr( $course_review->get_author()->get_avatar_url() ); ?>" />
 						<?php endif; ?>
 					</div>
-					<div class="mto-flex mto-flex-column mto-right">
-						<div class="mto-flex justify-content-between">
+					<div class="mto-right">
+						<div class="mto-right__rating">
 							<div class="rating" data-value="<?php echo esc_attr( $course_review->get_rating() ); ?>">
 								<span class="mto-icon-svg mto-flex mto-rstar">
 									<?php masteriyo_render_stars( $course_review->get_rating() ); ?>
 								</span>
 							</div>
 							<?php if ( masteriyo_current_user_can_edit_course_review( $course_review ) ) : ?>
-								<nav class="dropdown">
+								<nav class="mto-dropdown">
 									<label class="menu-toggler">
 										<span class='icon_box'>
 											<?php masteriyo_get_svg( 'small-hamburger', true ); ?>
@@ -115,21 +115,18 @@ do_action( 'masteriyo_before_single_course_reviews' );
 									<?php endif; ?>
 								</div>
 								<div class="mto-flex  justify-content-between mto-reply-replies">
-									<div class="mto-flex mto-flex-column mto-right">
-										<div class="mto-flex">
-											<div class="author-name" data-value="<?php echo esc_attr( $reply->get_author_name() ); ?>">
-												<?php echo esc_html( $reply->get_author_name() ); ?>
-											</div>
-											<div class="date-created" data-value="<?php echo esc_attr( $reply->get_date_created() ); ?>">
-												<?php echo esc_html( $reply->get_date_created() ); ?>
-											</div>
-										</div>
-										<div class="content" data-value="<?php echo esc_attr( $reply->get_content() ); ?>">
-											<?php echo esc_html( $reply->get_content() ); ?>
-										</div>
-									</div>
-									<?php if ( masteriyo_current_user_can_edit_course_review( $reply ) ) : ?>
-										<nav class="dropdown">
+									<div class="mto-right">
+										<div class="mto-reply-replies--title">
+					  <div class="mto-flex">
+						<div class="author-name" data-value="<?php echo esc_attr( $reply->get_author_name() ); ?>">
+						  <?php echo esc_html( $reply->get_author_name() ); ?>
+						</div>
+						<div class="date-created" data-value="<?php echo esc_attr( $reply->get_date_created() ); ?>">
+						  <?php echo esc_html( $reply->get_date_created() ); ?>
+						</div>
+					  </div>
+								 <?php if ( masteriyo_current_user_can_edit_course_review( $reply ) ) : ?>
+										<nav class="mto-dropdown">
 											<label class="menu-toggler">
 												<span class='icon_box'>
 													<?php masteriyo_get_svg( 'small-hamburger', true ); ?>
@@ -141,6 +138,13 @@ do_action( 'masteriyo_before_single_course_reviews' );
 											</ul>
 										</nav>
 									<?php endif; ?>
+
+										</div>
+										<div class="content" data-value="<?php echo esc_attr( $reply->get_content() ); ?>">
+											<?php echo esc_html( $reply->get_content() ); ?>
+										</div>
+									</div>
+								
 								</div>
 							</div>
 						</div>

@@ -41,10 +41,8 @@
 		}
 	}
 
-	.mto-course-item,
 	.mto-courses--card {
 		flex-basis: 100%;
-		// width: 256px;
 		width: 100%;
 	}
 
@@ -72,14 +70,9 @@
 			width: 100%;
 		}
 
-		.mto-course-item {
+		.mto-course--card {
 			flex-basis: 100%;
 		}
-	}
-
-	.plr-32 {
-		padding-left: 18px !important;
-		padding-right: 18px !important;
 	}
 
 	.mto-stab {

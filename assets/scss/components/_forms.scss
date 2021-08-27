@@ -1,6 +1,6 @@
 // Form Container
 .mto-form-container {
-  width: 50%;
+  width: 36em;
   padding: 40px;
   @include mto-shadow-1;
   @include mto-default-border;
@@ -9,10 +9,11 @@
 // Alert messages
 .mto-alert {
   padding: 8px 16px;
-  margin: 8px 0px;
+margin: 8px 0px;
   @include mto-default-border;
   @include mto-border-radius;
 }
+
 // Error
 .mto-error {
   margin: 8px 0px;
@@ -37,14 +38,16 @@
   color: $mto-success-color;
   border-color: $mto-success-color;
 }
+
 // Labels
 .mto-label {
-  font-size: $mto-text-sm;
+  font-size: 14px;
   font-weight: 500;
   color: $mto-heading-color;
   display: inherit;
   margin-bottom: 8px;
 }
+
 // Fields
 .mto-input {
   padding: 16px;

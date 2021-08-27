@@ -13,8 +13,8 @@ defined( 'ABSPATH' ) || exit;
 do_action( 'masteriyo_before_myaccount_content' );
 
 ?>
-<div class="mto-main mto-flex mto-flex--space-between">
-	<div class="menu-open mto-hidden">
+<div class="mto-main">
+	<div class="menu-open masteriyo-hidden">
 		<svg class="mto-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 			<path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
 		</svg>

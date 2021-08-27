@@ -29,7 +29,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 <div class="mto-related-post">
 	<h3 class="mto-related-post__title"><?php esc_html_e( 'Related Courses', 'masteriyo' ); ?></h3>
 
-	<div class="mto-item--wrap w-100">
+	<div class="mto-item--wrap masteriyo-w-100">
 		<?php
 		foreach ( $related_courses as $course ) {
 			$author         = masteriyo_get_user( $course->get_author_id() );
@@ -37,7 +37,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 			$difficulty     = $course->get_difficulty();
 			?>
 	  <div class="masteriyo-col-4">
-			<div class="mto-course-item mto-course--card m-0">
+			<div class="mto-course--card">
 				<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php esc_attr( $course->get_name() ); ?>">
 					<div class="mto-course--img-wrap">
 						<!-- Diffculty Badge -->
@@ -52,17 +52,17 @@ do_action( 'masteriyo_before_related_posts_content' );
 					</div>
 				</a>
 
-				<div class="mto-course--header">
+				<div class="mto-course--content">
 					<!-- Course category -->
-					<div class="mto-category">
+					<div class="mto-course--content__category">
 						<?php foreach ( $course->get_categories( 'name' ) as $category ) : ?>
-							<span class="mto-category-items mto-tag">
+							<span class="mto-course--content__category-items mto-tag">
 								<?php echo esc_html( $category->get_name() ); ?>
 							</span>
 						<?php endforeach; ?>
 					</div>
 					<!-- Title of the course -->
-					<h2 class="mto-title">
+					<h2 class="mto-course--content__title">
 						<?php
 						printf(
 							'<a href="%s" title="%s">%s</a>',
@@ -73,24 +73,24 @@ do_action( 'masteriyo_before_related_posts_content' );
 						?>
 					</h2>
 					<!-- Course author and course rating -->
-					<div class="mto-rt">
+					<div class="mto-course--content__rt">
 						<div class="mto-course-author">
 							<?php if ( $author ) : ?>
 								<img src="<?php echo esc_attr( $author->get_avatar_url() ); ?>" alt="" srcset="">
 								<span class="mto-course-author--name"><?php echo esc_attr( $author->get_display_name() ); ?></span>
 							<?php endif; ?>
 						</div>
-						<span class="mto-icon-svg mto-flex mto-rating mto-flex-ycenter">
+						<span class="mto-icon-svg mto-rating">
 							<?php masteriyo_format_rating( $course->get_average_rating(), true ); ?> <?php echo esc_html( masteriyo_format_decimal( $course->get_average_rating(), 1, true ) ); ?> (<?php echo esc_html( $course->get_rating_count() ); ?>)
 						</span>
 					</div>
 					<!-- Course description -->
-					<div class="mto-course-description">
+					<div class="mto-course--content__description">
 						<!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe dignissimos debitis facilis quisquam libero, explicabo molestias. Quibusdam illo iusto nulla dignissimos corrupti voluptatum officiis asperiores nobis. Obcaecati autem doloremque, libero, quod vel dolore delectus maxime magni eveniet iusto commodi? Adipisci?</p> -->
 						<?php echo wp_kses_post( $course->get_highlights() ); ?>
 					</div>
 					<!-- Four Column (Course duration, comments, student enrolled and curriculum) -->
-					<div class="mto-course-stats">
+					<div class="mto-course--content__stats">
 						<div class="mto-course-stats-duration">
 							<?php masteriyo_get_svg( 'time', true ); ?> <span><?php echo esc_html( masteriyo_minutes_to_time_length_string( $course->get_duration() ) ); ?></span>
 						</div>

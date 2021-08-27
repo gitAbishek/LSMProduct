@@ -55,7 +55,7 @@ do_action( 'masteriyo_before_registration_form_content' );
 							<?php echo esc_html__( 'Confirm Password', 'masteriyo' ); ?>
 						</label>
 						<input id="confirm-password" class="mto-input" name="confirm-password" type="password" autocomplete="current-password" required placeholder="">
-						<div class="mto-msg-different-passwords mto-hidden mto-text-red">
+						<div class="mto-msg-different-passwords masteriyo-hidden mto-text-red">
 							<?php echo esc_html__( 'The passwords doesn\'t match', 'masteriyo' ); ?>
 						</div>
 					</div>
@@ -68,17 +68,17 @@ do_action( 'masteriyo_before_registration_form_content' );
 							<span><?php echo wp_kses_post( sprintf( __( 'I accept the %s.', 'masteriyo' ), '<a href="#" class="mto-link-primary">' . __( 'Terms & Conditions', 'masteriyo' ) . '</a>' ) ); ?></span>
 						</label>
 					</div>
-					<div class="mto-msg-must-accept-terms mto-hidden mto-text-red">
+					<div class="mto-msg-must-accept-terms masteriyo-hidden mto-text-red">
 						<?php echo esc_html__( 'You must accept the Terms & Conditions to proceed', 'masteriyo' ); ?>
 					</div>
 
-				<input class="mto-hidden" type="text" name="_wpnonce" value="<?php echo esc_attr( wp_create_nonce( 'masteriyo-register' ) ); ?>">
+				<input class="masteriyo-hidden" type="text" name="_wpnonce" value="<?php echo esc_attr( wp_create_nonce( 'masteriyo-register' ) ); ?>">
 				<button type="submit" name="masteriyo-registration" value="yes" class="mto-btn-signup mto-btn mto-btn-primary">
 					<?php echo esc_html__( 'Get Started', 'masteriyo' ); ?>
 				</button>
 
-				<div class="mto-notify-message mto-alert mto-danger-msg mto-hidden"></div>
-				<div class="mto-notify-message mto-alert mto-success-msg mto-hidden">
+				<div class="mto-notify-message mto-alert mto-danger-msg masteriyo-hidden"></div>
+				<div class="mto-notify-message mto-alert mto-success-msg masteriyo-hidden">
 					<span><?php echo esc_html__( 'Registration complete.', 'masteriyo' ); ?></span>
 				</div>
 			</form>

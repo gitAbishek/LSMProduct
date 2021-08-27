@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 do_action( 'masteriyo_before_single_course_content' );
 
 ?>
-<div class="mto-single-course-main-content">
+<div class="mto-single-course--main__content">
 	<?php do_action( 'masteriyo_single_course_content' ); ?>
 </div>
 <?php

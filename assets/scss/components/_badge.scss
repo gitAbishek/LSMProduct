@@ -1,0 +1,24 @@
+
+// Badge
+.mto-badge {
+	padding: 8px 14px;
+	font-size: 12px;
+	border-radius: 100px;
+	color: $mto-white-color;
+
+	&.mto-badge-red {
+		background: $mto-badge-red;
+	}
+	&.mto-badge-green {
+		background: $mto-badge-green;
+	}
+	&.mto-badge-blue {
+		background: $mto-badge-blue;
+	}
+	&.mto-badge-yellow {
+		background: $mto-warning-color;
+	}
+	&.mto-badge-pink {
+		background: $mto-badge-pink;
+	}
+}

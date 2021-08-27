@@ -24,7 +24,7 @@ global $course;
 do_action( 'masteriyo_before_single_course_overview' );
 
 ?>
-<div class="tab-content course-overview plr-32">
+<div class="tab-content course-overview">
 	<?php the_content(); ?>
 </div>
 <?php

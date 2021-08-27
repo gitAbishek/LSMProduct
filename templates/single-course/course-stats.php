@@ -22,7 +22,7 @@ do_action( 'masteriyo_before_single_course_stats' );
 <div class="mto-single-course-stats">
 	<!-- Duration -->
 	<div class="duration">
-		<div class="mto-single-course--duration mto-single-course--mdetail mto-icon-svg mto-flex">
+		<div class="mto-single-course--mdetail mto-icon-svg">
 			<?php masteriyo_get_svg( 'time', true ); ?>
 			<span>
 				<?php /* translators: %s: Human understanble time string */ ?>
@@ -33,7 +33,7 @@ do_action( 'masteriyo_before_single_course_stats' );
 
 	<!-- Comment -->
 	<div class="comment">
-		<div class="mto-single-course--enroll mto-single-course--mdetail mto-icon-svg mto-flex">
+		<div class="mto-single-course--mdetail mto-icon-svg">
 			<?php masteriyo_get_svg( 'comment', true ); ?>
 			<span>
 				<?php
@@ -49,7 +49,7 @@ do_action( 'masteriyo_before_single_course_stats' );
 
 	<!-- Student -->
 	<div class="student">
-		<div class="mto-single-course--enroll mto-single-course--mdetail mto-icon-svg mto-flex">
+		<div class="mto-single-course--mdetail mto-icon-svg">
 			<?php masteriyo_get_svg( 'group', true ); ?>
 			<span>
 			<?php
@@ -66,7 +66,7 @@ do_action( 'masteriyo_before_single_course_stats' );
 	<!-- Difficulty -->
 	<?php if ( $course->get_difficulty() ) : ?>
 	<div class="difficulty">
-		<div class="mto-single-course--enroll mto-single-course--mdetail mto-icon-svg mto-flex">
+		<div class="mto-single-course--mdetail mto-icon-svg">
 			<?php masteriyo_get_svg( 'level', true ); ?>
 			<span>
 				<?php echo esc_html( $course->get_difficulty()['name'] ); ?>

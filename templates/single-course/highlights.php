@@ -21,7 +21,7 @@ do_action( 'masteriyo_before_single_course_highlights' );
 ?>
 
 <?php if ( ! empty( $course->get_highlights() ) && ! empty( wp_strip_all_tags( $course->get_highlights(), true ) ) ) : ?>
-	<div class="mto-course-description">
+	<div class="mto-course--content__description">
 		<h5 class="title"><?php esc_html_e( 'This course includes', 'masteriyo' ); ?></h5>
 		<?php echo wp_kses_post( apply_filters( 'masteriyo_single_course_highlights_content', $course->get_highlights() ) ); ?>
 	</div>

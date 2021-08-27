@@ -1,4 +1,5 @@
-// Title
+// Masteriyo Single course
+
 .mto-single-course {
 	display: flex;
 	flex-wrap: wrap;
@@ -17,10 +18,82 @@
 		border-radius: 8px;
 		flex: 0 0 70%;
 		height: 100%;
+		padding: 0px;
 
 		.mto-course-author {
 			&--name {
-				max-width: 100% !important;
+				max-width: 100%;
+			}
+		}
+
+		&__content {
+			// Course review
+			.course-reviews {
+				.mto-course-reviews-list {
+					.mto-course-review {
+						&__content {
+							display: flex;
+							border: none;
+
+							.mto-right {
+								margin-left: 18px;
+								max-width: 90%;
+
+								&__rating {
+									display: flex;
+									justify-content: space-between;
+
+									.rating {
+										margin-bottom: 14px;
+
+										.mto-rstar {
+											display: flex;
+											flex-wrap: wrap;
+											svg {
+												width: 16px;
+												height: 16px;
+												fill: $mto-primary-color;
+											}
+										}
+									}
+								}
+
+								.author-name {
+									color: $mto-primary-color;
+									text-decoration: underline;
+									margin-right: 16px;
+									font-size: 14px;
+									line-height: 16px;
+								}
+
+								.date-created {
+									font-size: 12px;
+									line-height: 14px;
+								}
+
+								.title {
+									font-weight: 500;
+									font-size: 16px;
+									line-height: 19px;
+									margin-top: 24px;
+									margin-bottom: 16px;
+								}
+
+								.content {
+									font-size: 16px;
+									line-height: 27px;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.mto-stab {
+				padding: 0px 32px;
+			}
+			.course-overview {
+				padding: 0px 32px;
 			}
 		}
 	}
@@ -30,10 +103,11 @@
 		font-weight: 700;
 		position: relative;
 		margin: 0px 0px 14px 0px;
+		padding: 0px 32px;
 	}
 
 	&--title-tag {
-		font-size: $mto-text-sm;
+		font-size: 14px;
 		border-radius: 50px;
 		position: absolute;
 		top: 0;
@@ -52,15 +126,20 @@
 	}
 
 	&--mdetail {
-		gap: 8px;
+		display: flex;
 		align-items: center;
 		font-weight: 600;
+
+		svg {
+			margin-right: 8px;
+			fill: $mto-dark-gray;
+		}
 	}
 
 	&--aside {
-		flex: 0 0 30%;
+		padding: 24px;
 		background: $mto-white-color;
-		// max-height: 50%;
+    flex-basis: 100%;
 		height: fit-content;
 		@include mto-shadow-1;
 		border-radius: 8px;
@@ -71,13 +150,6 @@
 		hr {
 			width: 100%;
 			margin-bottom: 0px;
-		}
-
-		.course-overview {
-			> * {
-				font-size: 14px;
-				line-height: 16px;
-			}
 		}
 
 		.mto-single-course-stats {
@@ -91,7 +163,7 @@
 				font-weight: 400;
 			}
 			svg {
-				fill: $mto-text-color !important;
+				fill: $mto-text-color;
 			}
 		}
 
@@ -121,10 +193,235 @@
 			> svg {
 				width: 20px;
 				height: 20px;
-				fill: $mto-primary-color;
+				fill: $mto-dark-gray;
 			}
 		}
 	}
+
+	.mto-course--content {
+		&__title {
+			margin-bottom: 14px;
+			padding: 0 15px;
+		}
+		// Category
+		&__category {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			margin-bottom: 14px;
+			padding: 0px 32px;
+			margin-top: 28px;
+
+			&-items {
+				padding: 4px 8px;
+				color: $mto-primary-color;
+				border-radius: 32px;
+				border: 1px solid $mto-primary-color;
+			}
+		}
+
+		// Author and rating
+		&__rt {
+			display: flex;
+			align-items: center;
+			margin-bottom: 14px;
+			padding: 0px 32px;
+
+			.mto-course-author {
+				display: flex;
+				align-items: center;
+				img {
+					width: 32px;
+					height: 32px;
+					object-fit: cover;
+					border-radius: 50%;
+				}
+				&--name {
+					color: $mto-accent-color;
+					font-size: 12px;
+					line-height: 16px;
+					text-decoration: underline;
+					margin-left: 8px;
+					font-weight: 500;
+					overflow-wrap: break-word;
+				}
+			}
+
+			.mto-rating {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				margin-left: 62px;
+
+				svg {
+					fill: $mto-primary-color;
+					width: 12px;
+					height: 12px;
+					font-size: 12px;
+
+					&:last-child {
+						margin-right: 8px;
+					}
+				}
+			}
+		}
+
+		// course desciption
+		&__description {
+			.title {
+				margin-bottom: 14px;
+			}
+
+			ul {
+				list-style: none;
+				margin: 0px;
+				padding: 0px;
+				li {
+					display: flex;
+					padding: 4px 0px;
+					p {
+						margin: 0px;
+						padding-left: 8px;
+					}
+				}
+				li::before {
+					content: ('\2713');
+				}
+			}
+		}
+
+		// course stats
+		&__stats {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-top: 18px;
+			margin-bottom: 18px;
+
+			& > div {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: $mto-light-text-color;
+
+				span {
+					margin-left: 4px;
+				}
+
+				svg {
+					width: 20px;
+					height: 20px;
+					fill: $mto-light-text-color;
+				}
+			}
+		}
+
+		// price and enroll now
+		.mto-course-price {
+			.old-amount {
+				text-decoration: line-through;
+				font-size: 16px;
+				color: $mto-light-text-color;
+			}
+
+			.current-amount {
+				font-size: 24px;
+				color: $mto-primary-color;
+				font-weight: bold;
+			}
+		}
+
+		&__title {
+			line-height: 18px;
+			margin: 0px 0px 14px 0px;
+
+			&::before {
+				content: '';
+				display: none;
+			}
+			a {
+				font-weight: bold;
+				font-size: 18px;
+				margin: 0 px 0 20px 0;
+				color: $mto-dark-gray;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+// mto-related-post
+.mto-related-post {
+	margin-top: 24px;
+
+	&__title {
+		padding: 0px 15px;
+    margin-bottom: 14px;
+	}
+
+	.mto-course--card {
+		.mto-course--content {
+			padding: 24px;
+
+			&__category {
+				padding: 0px;
+				margin: 0px 0px 14px 0px;
+			}
+
+			&__title {
+				padding: 0px;
+			}
+
+			// Author and rating
+			&__rt {
+				padding: 0px;
+				justify-content: space-between;
+
+				.mto-course-author {
+					display: flex;
+					align-items: center;
+					img {
+						width: 32px;
+						height: 32px;
+						object-fit: cover;
+						border-radius: 50%;
+					}
+					&--name {
+						color: $mto-accent-color;
+						font-size: 12px;
+						line-height: 16px;
+						text-decoration: underline;
+						margin-left: 8px;
+						font-weight: 500;
+						max-width: 100px;
+						overflow-wrap: break-word;
+					}
+				}
+
+				.mto-rating {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					margin-left: 62px;
+					svg {
+						fill: $mto-primary-color;
+						width: 12px;
+						height: 12px;
+						font-size: 12px;
+
+						&:last-child {
+							margin-right: 8px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.mto-stab-rs.boxshadow-none {
+	box-shadow: none;
+	padding: 0px;
 }
 
 // Feature image.
@@ -182,7 +479,7 @@
 	gap: 40px;
 	border-bottom: 2px solid $mto-border-color;
 	border-top: 2px solid $mto-border-color;
-	font-size: $mto-text-lg;
+	font-size: 18px;
 	font-weight: 600;
 	margin-bottom: 24px;
 	margin-top: 32px;
@@ -207,7 +504,13 @@
 	&--tcurriculum {
 		.mto-stab--shortinfo {
 			border-bottom: 2px solid $mto-border-color;
-			padding-bottom: 24px !important;
+			padding-bottom: 24px;
+			padding-left: 32px;
+			padding-right: 32px;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
 
 			.title-container {
 				display: flex;
@@ -267,7 +570,7 @@
 
 			.mto-cplus {
 				svg {
-					fill: $mto-light-text-color !important;
+					fill: $mto-light-text-color;
 				}
 			}
 
@@ -275,7 +578,7 @@
 				border-bottom: 0;
 
 				.mto-cminus {
-					display: flex !important;
+					display: flex;
 					align-items: center;
 					justify-content: center;
 					svg {
@@ -319,6 +622,7 @@
 			flex-direction: row;
 			align-items: center;
 			justify-content: space-between;
+			padding: 24px 32px;
 		}
 
 		.mto-ctitle {
@@ -351,14 +655,27 @@
 			margin: 0px;
 			padding: 0px;
 			list-style: none;
-		}
 
-		.mto-lesson-list li {
-			padding: 16px 0;
-			border-bottom: 1px solid $mto-border-color;
+			li {
+				padding: 16px 0;
+				border-bottom: 1px solid $mto-border-color;
 
-			&:last-of-type {
-				border-bottom: none;
+				&:last-of-type {
+					border-bottom: none;
+				}
+			}
+
+			&__content {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0px 32px;
+
+				&-item {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+				}
 			}
 		}
 
@@ -372,8 +689,8 @@
 		}
 		.mto-time-btn {
 			.mto-btn {
-				padding: 6px 12px !important  ;
-				font-size: 10px !important;
+				padding: 6px 12px;
+				font-size: 10px;
 			}
 		}
 		.mto-lesson-list--btn {
@@ -388,7 +705,7 @@
 			overflow: hidden;
 			border-bottom: 1px solid $mto-border-color;
 			padding: 16px 30px;
-			font-size: $mto-text-base;
+			font-size: 16px;
 			font-weight: 600;
 			cursor: pointer;
 
@@ -413,7 +730,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		gap: 20px;
+		padding: 0px 32px;
 	}
 
 	&-rs {
@@ -423,24 +740,18 @@
 		border-radius: 50px;
 		gap: 20px;
 		font-weight: 600;
+		display: flex;
+		align-items: center;
 
 		.mto-icon-svg > svg {
+			width: 16px;
+			height: 16px;
 			fill: $mto-primary-color;
 		}
 	}
 
 	&--turating {
 		text-align: center;
-	}
-}
-
-// Related-post
-.mto-related-post {
-	margin-top: 60px;
-
-	&__title {
-		margin-bottom: 14px;
-		padding: 0 15px;
 	}
 }
 
@@ -460,11 +771,36 @@
 }
 
 .mto-replies {
+	display: flex;
+	flex-flow: unset;
 	flex-direction: row;
+	.mto-reply-replies--title {
+		.mto-flex {
+			align-items: center;
+		}
+		.author-name {
+			color: $mto-primary-color;
+			text-decoration: underline;
+			margin-right: 16px;
+			font-size: 14px;
+			line-height: 16px;
+		}
+	}
 }
 
 .mto-reply-replies {
-	width: 92%;
+	width: 100%;
+
+	.mto-right {
+		margin-left: 24px;
+
+		.mto-reply-replies--title {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 14px;
+		}
+	}
 }
 
 .mto-course-review-replies {

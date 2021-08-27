@@ -88,7 +88,7 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 				</div>
 		</form>
 	</div>
-	<div id="password-security-tab" class="mto-pwd-security mto-tab-content mto-hidden">
+	<div id="password-security-tab" class="mto-pwd-security mto-tab-content masteriyo-hidden">
 			<h3 class="mto-pwd-security--title"><?php echo esc_html__( 'Change Password', 'masteriyo' ); ?></h3>
 
 			<form class="mto-pwd-security--form" method="POST">

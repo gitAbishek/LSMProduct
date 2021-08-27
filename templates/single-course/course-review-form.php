@@ -20,8 +20,8 @@ do_action( 'masteriyo_before_single_course_review_form' );
 
 ?>
 <?php if ( is_user_logged_in() ) : ?>
-	<div class="mto-submit-review-form-container plr-32">
-		<h3 class="mto-maintitle mto-form-title"><?php esc_html_e( 'Create a new review', 'masteriyo' ); ?></h3>
+	<div class="mto-submit-container">
+		<h3 class="masteriyo--title"><?php esc_html_e( 'Create a new review', 'masteriyo' ); ?></h3>
 		<form method="POST" class="mto-submit-review-form">
 			<input type="hidden" name="id" value="">
 			<input type="hidden" name="course_id" value="<?php echo esc_attr( $course->get_id() ); ?>">
@@ -30,7 +30,7 @@ do_action( 'masteriyo_before_single_course_review_form' );
 				<label class="mto-label"><?php esc_html_e( 'Title', 'masteriyo' ); ?></label>
 				<input type="text" name="title" class="mto-input" />
 			</div>
-			<div class="mto-rating mt-2">
+			<div class="mto-rating">
 				<label class="mto-label"><?php esc_html_e( 'Rating', 'masteriyo' ); ?></label>
 				<input type="hidden" name="rating" value="0" />
 				<div class="mto-stab-rs boxshadow-none ">
@@ -39,7 +39,7 @@ do_action( 'masteriyo_before_single_course_review_form' );
 					</span>
 				</div>
 			</div>
-			<div class="mto-message mt-2">
+			<div class="mto-message">  
 				<label class="mto-label"><?php esc_html_e( 'Content', 'masteriyo' ); ?></label>
 				<textarea type="text" name="content" class="mto-input" required column="10" ></textarea>
 			</div>
@@ -52,7 +52,7 @@ do_action( 'masteriyo_before_single_course_review_form' );
 		</form>
 	</div>
 <?php else : ?>
-	<div class="mto-login-msg mto-submit-review-form-container plr-32 pb-2 pt-2">
+	<div class="mto-login-msg mto-submit-container">
 		<?php
 		printf(
 			/* translators: %s: Achor tag html with text "logged in" */

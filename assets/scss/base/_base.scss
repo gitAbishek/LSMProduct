@@ -1,13 +1,9 @@
-.site-main {
-	background: #f8f8f8;
-}
-
 // General
-.mto-hidden {
+.masteriyo-hidden {
 	display: none;
 }
 
-.mto-show {
+.masteriyo-show {
 	display: show;
 }
 
@@ -30,37 +26,6 @@
 
 .mto-flex--space-between {
 	justify-content: space-between;
-}
-
-ul {
-	li {
-		list-style-type: none;
-		margin: 0;
-	}
-}
-
-// Badge
-.mto-badge {
-	padding: 8px 14px;
-	font-size: 12px;
-	border-radius: 100px;
-	color: $mto-white-color;
-
-	&.mto-badge-red {
-		background: $mto-badge-red;
-	}
-	&.mto-badge-green {
-		background: $mto-badge-green;
-	}
-	&.mto-badge-blue {
-		background: $mto-badge-blue;
-	}
-	&.mto-badge-yellow {
-		background: $mto-warning-color;
-	}
-	&.mto-badge-pink {
-		background: $mto-badge-pink;
-	}
 }
 
 //svg icon
@@ -106,54 +71,8 @@ ul {
 	}
 }
 
-.justify-content-between {
-	justify-content: space-between;
-}
-
-.m-0 {
-	margin: 0px !important;
-}
-
-.mb-1 {
-	margin-bottom: 1rem;
-}
-
-.mt-2 {
-	margin-top: 2rem;
-}
-
-.mb-2 {
-	margin-bottom: 2rem;
-}
-
 .mto-no-flex-wrap {
 	flex-wrap: nowrap;
-}
-
-.p-0 {
-	padding: 0px !important;
-}
-
-.plr-32 {
-	padding: 0px 32px !important;
-}
-
-.pt-2 {
-	padding-top: 2rem !important;
-}
-
-.pb-2 {
-	padding-bottom: 2rem !important;
-}
-
-.site-content {
-	padding-top: 80px;
-	padding-bottom: 80px;
-	margin: 0px !important;
-}
-
-.d-none {
-	display: none;
 }
 
 .cgap-62 {
@@ -163,19 +82,22 @@ ul {
 .masteriyo-col-8 {
 	flex: 0 0 66.6666%;
 	max-width: 66.6666%;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding: 15px;
 	width: 66.6666%;
 }
 
 .masteriyo-col-4 {
 	flex: 0 0 33.3333%;
 	max-width: 33.3333%;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding: 15px;
 	width: 33.3333%;
 }
 
-.w-100 {
+.masteriyo-w-100 {
 	width: 100%;
+}
+
+.masteriyo-wrapper {
+	padding-top: 62px;
+	padding-bottom: 62px;
 }

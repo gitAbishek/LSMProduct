@@ -22,8 +22,6 @@ use Masteriyo\Countries;
 		<?php esc_html_e( 'Payment Details', 'masteriyo' ); ?>
 	</h3>
 
-	<!-- <div class="mto-checkout--alert-msg mto-alert mto-success-msg mto-show">Successfully form submited</div> -->
-
 	<form action="" class="mto-checkout--form">
 		<div class="mto-checkout---fname-lname-wrapper mto-col-2">
 			<div class="mto-checkout----fname">
@@ -102,7 +100,7 @@ use Masteriyo\Countries;
 		<div class="mto-checkout---country-wrapper">
 			<div class="mto-checkout----country">
 				<label for="billing-country" class="mto-label">Country/Region</label>
-				<div class="dropdown mto-country-dropdown">
+				<div class="mto-dropdown mto-country-dropdown">
 					<select name="billing_country" id="billing-country" class="mto-input">
 						<?php masteriyo( 'countries' )->country_dropdown_options(); ?>
 					</select>

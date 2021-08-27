@@ -37,7 +37,7 @@ $difficulty = $course->get_difficulty();
 
 <div id="course-<?php the_ID(); ?>" class="mto-single-course">
 	<div class="masteriyo-col-8">
-		<div class="mto-single-course--main mto-course--header p-0">
+		<div class="mto-single-course--main mto-course--content">
 		<div class="mto-course--img-wrap">
 			<!-- Diffculty Badge -->
 			<?php if ( $difficulty ) : ?>
@@ -64,7 +64,7 @@ $difficulty = $course->get_difficulty();
 	</div>
 
 	<div class="masteriyo-col-4">
-		<aside class="mto-single-course--aside mto-course--header">
+		<aside class="mto-single-course--aside mto-course--content">
 			<!-- Price and Enroll Now Button -->
 			<?php do_action( 'masteriyo_single_course_price_and_enroll_button' ); ?>
 			<hr>

@@ -959,7 +959,7 @@ if ( ! function_exists( 'masteriyo_course_search_form' ) ) {
 	 * @since 0.1.0
 	 */
 	function masteriyo_course_search_form() {       ?>
-		<div class="course-search main-search">
+		<div class="main-search">
 			<?php masteriyo_get_course_search_form(); ?>
 		</div>
 		<?php

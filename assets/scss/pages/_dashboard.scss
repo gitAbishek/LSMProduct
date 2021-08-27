@@ -1,5 +1,8 @@
 .mto-main {
   gap: 64px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
 }
 // Dashboard
 .mto-dashboard {
@@ -27,7 +30,7 @@
 
   .mto-title {
     color: $mto-white-color;
-    font-size: $mto-text-xl;
+    font-size: 24px;
   }
 
   .mto-close {
@@ -88,7 +91,7 @@
       border-radius: 100%;
     }
     .mto-title {
-      font-size: $mto-text-lg;
+      font-size: 18px;
       margin: inherit;
     }
   }
@@ -138,7 +141,7 @@
     gap: 20px;
 
     &--title {
-      font-size: $mto-text-base;
+      font-size: 16px;
       margin: inherit;
     }
 
@@ -178,7 +181,7 @@
   }
 
   &--title {
-    font-size: $mto-text-xl;
+    font-size: 24px;
     margin: inherit;
   }
 
@@ -216,7 +219,7 @@
     }
 
     &--title {
-      font-size: $mto-text-lg;
+      font-size: 18px;
       font-weight: 700;
       margin: inherit;
     }

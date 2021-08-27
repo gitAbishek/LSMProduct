@@ -3,14 +3,9 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
-	Drawer,
-	DrawerBody,
-	DrawerCloseButton,
-	DrawerContent,
-	DrawerFooter,
-	DrawerHeader,
-	DrawerOverlay,
+	Heading,
 	IconButton,
+	Stack,
 	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -51,14 +46,15 @@ const Sidebar: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<Box>
+		<Box w="300px" h="calc(100vh - 84px)" pos="relative" bg="white">
 			<IconButton
 				variant="unstyled"
 				color="white"
 				d="flex"
 				justifyContent="center"
-				position="fixed"
-				top="20"
+				position="absolute"
+				top="0"
+				right="-36px"
 				fontSize="x-large"
 				icon={<BiMenu />}
 				onClick={onOpen}
@@ -70,36 +66,24 @@ const Sidebar: React.FC<Props> = (props) => {
 				bgImage={`url(${CloseCone})`}
 				aria-label="open sidebar"
 			/>
-			<Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-				<DrawerOverlay bg="rgba(255,255,255,0.1)" />
-				<DrawerContent sx={{ top: '72px !important' }}>
-					<DrawerCloseButton
-						sx={{
-							position: 'absolute',
-							right: '-35px',
-							backgroundImage: `url(${CloseCone})`,
-							backgroundSize: 'cover',
-							width: '36px',
-							height: '60px',
-							color: 'white',
-							fontSize: '12',
-						}}
-						_hover={{
-							backgroundImage: `url(${CloseCone})`,
-						}}
-					/>
-					<DrawerHeader
+			<Stack direction="column" justifyContent="space-between" h="full">
+				<Stack direction="column" spacing="0">
+					<Stack
+						direction="column"
+						spacing=""
+						px="4"
 						bg="blue.500"
-						color="white"
-						fontSize="lg"
-						minH="20"
-						d="flex"
-						alignItems="center"
-						fontWeight="semibold">
-						{name}
-					</DrawerHeader>
-
-					<DrawerBody p="0" position="relative" overflowX="hidden">
+						color="white">
+						<Heading
+							fontSize="lg"
+							minH="20"
+							d="flex"
+							alignItems="center"
+							fontWeight="semibold">
+							{name}
+						</Heading>
+					</Stack>
+					<Box p="0" position="relative" overflowX="hidden">
 						{currentTab === 1 && (
 							<Accordion allowToggle>
 								{items.map((item: CourseProgressItemMap) => {
@@ -116,32 +100,31 @@ const Sidebar: React.FC<Props> = (props) => {
 							</Accordion>
 						)}
 						{currentTab === 2 && <QuestionList />}
-					</DrawerBody>
-
-					<DrawerFooter
-						p="0"
-						flexDirection="column"
-						alignItems="flex-start"
-						justifyContent="flex-start">
-						<ButtonGroup d="flex" flex="1" spacing="0" w="full">
-							<Button
-								leftIcon={<BiAlignLeft />}
-								isActive={currentTab === 1}
-								sx={buttonStyles}
-								onClick={() => setCurrentTab(1)}>
-								{__('Lessons', 'masteriyo')}
-							</Button>
-							<Button
-								leftIcon={<BiInfoCircle />}
-								isActive={currentTab === 2}
-								sx={buttonStyles}
-								onClick={() => setCurrentTab(2)}>
-								{__('Questions', 'masteriyo')}
-							</Button>
-						</ButtonGroup>
-					</DrawerFooter>
-				</DrawerContent>
-			</Drawer>
+					</Box>
+				</Stack>
+				<Box
+					p="0"
+					flexDirection="column"
+					alignItems="flex-start"
+					justifyContent="flex-start">
+					<ButtonGroup d="flex" flex="1" spacing="0" w="full">
+						<Button
+							leftIcon={<BiAlignLeft />}
+							isActive={currentTab === 1}
+							sx={buttonStyles}
+							onClick={() => setCurrentTab(1)}>
+							{__('Lessons', 'masteriyo')}
+						</Button>
+						<Button
+							leftIcon={<BiInfoCircle />}
+							isActive={currentTab === 2}
+							sx={buttonStyles}
+							onClick={() => setCurrentTab(2)}>
+							{__('Questions', 'masteriyo')}
+						</Button>
+					</ButtonGroup>
+				</Box>
+			</Stack>
 		</Box>
 	);
 };

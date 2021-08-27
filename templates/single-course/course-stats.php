@@ -32,7 +32,7 @@ do_action( 'masteriyo_before_single_course_stats' );
 	</div>
 
 	<!-- Comment -->
-	<div class="comment">
+	<div class="comments">
 		<div class="mto-single-course--mdetail mto-icon-svg">
 			<?php masteriyo_get_svg( 'comment', true ); ?>
 			<span>

@@ -79,7 +79,7 @@ const Sidebar: React.FC<Props> = (props) => {
 					aria-label="open sidebar"
 				/>
 				<Stack direction="column" justifyContent="space-between" h="full">
-					<Stack direction="column" spacing="0">
+					<Stack direction="column" spacing="0" flex="1">
 						<Stack
 							direction="column"
 							spacing=""
@@ -95,7 +95,7 @@ const Sidebar: React.FC<Props> = (props) => {
 								{name}
 							</Heading>
 						</Stack>
-						<Box p="0" position="relative" overflowX="hidden">
+						<Box p="0" position="relative" overflowX="hidden" flex="1">
 							{currentTab === 1 && (
 								<Accordion allowToggle>
 									{items.map((item: CourseProgressItemMap) => {

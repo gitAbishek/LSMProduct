@@ -10,7 +10,6 @@ import {
 	InputGroup,
 	InputRightElement,
 	Link,
-	Slide,
 	Spinner,
 	Stack,
 	Text,
@@ -90,96 +89,88 @@ const QuestionList: React.FC = () => {
 	if (qaQuery.isSuccess) {
 		return (
 			<>
-				<Slide
-					direction="left"
-					in={isListOpen}
-					style={{ position: 'absolute' }}>
-					<Stack
-						direction="column"
-						spacing="1"
-						h="full"
-						justify="space-between">
-						<Stack direction="column" spacing="0">
-							<Box as="form" action="" p="4">
-								<FormControl>
-									<InputGroup>
-										<Input placeholder="Search a Question" />
-										<InputRightElement>
-											<Icon as={BiSearch} />
-										</InputRightElement>
-									</InputGroup>
-								</FormControl>
-							</Box>
-							{qaQuery.data.map((question: QuestionAnswerSchema) => (
-								<Link
-									key={question.id}
-									_hover={{
-										textDecor: 'none',
-										bg: 'blue.50',
-										color: 'blue.500',
-										'.chakra-icon': {
-											transform: 'translateX(5px)',
-										},
-									}}>
-									<Stack
-										direction="row"
-										align="center"
-										justify="space-between"
-										spacing="4"
-										borderBottom="1px"
-										borderBottomColor="gray.100"
-										px="4"
-										py="2"
-										onClick={() =>
-											onQuestionPress(
-												question.id,
-												question.content,
-												question.answers_count
-											)
-										}>
-										<Stack direction="column" spacing="2">
-											<Heading fontSize="sm">{question.content}</Heading>
-											<Text fontSize="x-small" color="gray.500">
-												{question.answers_count + __(' Answers', 'masteriyo')}
-											</Text>
-										</Stack>
-										<Icon
-											transition="all 0.35s ease-in-out"
-											as={BiChevronRight}
-											fontSize="x-large"
-											color="gray.600"
-										/>
+				<Stack direction="column" spacing="1" h="full" justify="space-between">
+					<Stack direction="column" spacing="0">
+						<Box as="form" action="" p="4">
+							<FormControl>
+								<InputGroup>
+									<Input placeholder="Search a Question" />
+									<InputRightElement>
+										<Icon as={BiSearch} />
+									</InputRightElement>
+								</InputGroup>
+							</FormControl>
+						</Box>
+						{qaQuery.data.map((question: QuestionAnswerSchema) => (
+							<Link
+								key={question.id}
+								_hover={{
+									textDecor: 'none',
+									bg: 'blue.50',
+									color: 'blue.500',
+									'.chakra-icon': {
+										transform: 'translateX(5px)',
+									},
+								}}>
+								<Stack
+									direction="row"
+									align="center"
+									justify="space-between"
+									spacing="4"
+									borderBottom="1px"
+									borderBottomColor="gray.100"
+									px="4"
+									py="2"
+									onClick={() =>
+										onQuestionPress(
+											question.id,
+											question.content,
+											question.answers_count
+										)
+									}>
+									<Stack direction="column" spacing="2">
+										<Heading fontSize="sm">{question.content}</Heading>
+										<Text fontSize="x-small" color="gray.500">
+											{question.answers_count + __(' Answers', 'masteriyo')}
+										</Text>
 									</Stack>
-								</Link>
-							))}
-						</Stack>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<Stack direction="column" spacing="3" w="full" p="4" pb="6">
-								<FormControl isInvalid={!!errors.content}>
-									<Input
-										type="text"
-										fontSize="xs"
-										placeholder="What is your question?"
-										disabled={addNewQuestion.isLoading}
-										{...register('content', {
-											required: __('Please write your message'),
-										})}
+									<Icon
+										transition="all 0.35s ease-in-out"
+										as={BiChevronRight}
+										fontSize="x-large"
+										color="gray.600"
 									/>
-									<FormErrorMessage>
-										{errors?.content && errors?.content?.message}
-									</FormErrorMessage>
-								</FormControl>
-								<Button
-									colorScheme="blue"
-									type="submit"
-									isFullWidth
-									isLoading={addNewQuestion.isLoading}>
-									{__('Ask a Question', 'masteriyo')}
-								</Button>
-							</Stack>
-						</form>
+								</Stack>
+							</Link>
+						))}
 					</Stack>
-				</Slide>
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<Stack direction="column" spacing="3" w="full" p="4" pb="6">
+							<FormControl isInvalid={!!errors.content}>
+								<Input
+									type="text"
+									fontSize="xs"
+									placeholder="What is your question?"
+									disabled={addNewQuestion.isLoading}
+									{...register('content', {
+										required: __('Please write your message'),
+									})}
+								/>
+								<FormErrorMessage>
+									{errors?.content && errors?.content?.message}
+								</FormErrorMessage>
+							</FormControl>
+							<Button
+								colorScheme="blue"
+								type="submit"
+								isFullWidth
+								isLoading={addNewQuestion.isLoading}>
+								{__('Ask a Question', 'masteriyo')}
+							</Button>
+						</Stack>
+					</form>
+				</Stack>
+
 				{chatData && (
 					<QaChat
 						isOpen={isChatOpen}

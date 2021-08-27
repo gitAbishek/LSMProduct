@@ -1,3 +1,4 @@
+import { Box, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
@@ -15,6 +16,7 @@ const Interactive: React.FC = () => {
 	const history = useHistory();
 	const location = useLocation();
 	const progressAPI = new API(urls.courseProgress);
+	const { isOpen: isSidebarOpen, onToggle: onSidebarToggle } = useDisclosure();
 
 	const courseProgressQuery = useQuery<CourseProgressMap>(
 		[`courseProgress${courseId}`, courseId],
@@ -39,14 +41,19 @@ const Interactive: React.FC = () => {
 
 	if (courseProgressQuery.isSuccess) {
 		return (
-			<>
+			<Box h="full" overflowX="hidden" pos="relative">
 				<Header summary={courseProgressQuery.data.summary} />
+
 				<Sidebar
+					isOpen={isSidebarOpen}
+					onToggle={onSidebarToggle}
 					items={courseProgressQuery.data.items}
 					name={courseProgressQuery.data.name}
 				/>
-				<InteractiveRouter />
-			</>
+				<Box transition="all 0.35s" ml={isSidebarOpen ? '300px' : 0}>
+					<InteractiveRouter />
+				</Box>
+			</Box>
 		);
 	}
 

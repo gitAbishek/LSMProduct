@@ -88,8 +88,15 @@ const QuestionList: React.FC = () => {
 
 	if (qaQuery.isSuccess) {
 		return (
-			<>
-				<Stack direction="column" spacing="1" h="full" justify="space-between">
+			<Stack direction="row" spacing="0" overflow="hidden" h="full">
+				<Stack
+					flex="0 0 100%"
+					direction="column"
+					spacing="1"
+					h="full"
+					transition="all 0.35s"
+					justify="space-between"
+					transform={`translateX(${isListOpen ? '0' : '-100%'})`}>
 					<Stack direction="column" spacing="0">
 						<Box as="form" action="" p="4">
 							<FormControl>
@@ -178,7 +185,7 @@ const QuestionList: React.FC = () => {
 						chatData={chatData}
 					/>
 				)}
-			</>
+			</Stack>
 		);
 	}
 

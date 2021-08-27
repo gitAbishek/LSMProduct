@@ -6,7 +6,6 @@ import {
 	FormControl,
 	Icon,
 	Input,
-	Slide,
 	Spinner,
 	Stack,
 	Text,
@@ -69,61 +68,66 @@ const QaChat: React.FC<Props> = (props) => {
 
 	if (chatQuery.isSuccess) {
 		return (
-			<Slide direction="right" in={isOpen} style={{ position: 'absolute' }}>
-				<Stack direction="column" spacing="8" justify="space-between" h="full">
-					<Stack direction="column" spacing="8">
-						<Box as="header">
-							<ButtonGroup px="4" py="2">
-								<Button
-									leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}
-									variant="link"
-									onClick={onBackPress}>
-									{__('Back', 'masteriyo')}
-								</Button>
-							</ButtonGroup>
-							<Stack direction="column" p="4" bg="gray.50" spacing="1">
-								<Text fontWeight="bold">{chatData.name}</Text>
-								<Text fontSize="x-small" color="gray.400">
-									{chatData.answerCount + __(' answers', 'masteriyo')}
-								</Text>
-							</Stack>
-						</Box>
-
-						<Stack direction="column-reverse" spacing="4" px="4">
-							{chatQuery.data.map((chat: QuestionAnswerSchema) => (
-								<Message
-									key={chat.id}
-									name={chat.user_name}
-									avatar="https://i.pravatar.cc/150?img=3"
-									message={chat.content}
-									sender={chat.sender}
-									time={chat.created_at}
-									byCurrentUser={chat.by_current_user}
-								/>
-							))}
-						</Stack>
-					</Stack>
-					<form onSubmit={handleSubmit(onSubmit)}>
-						<Stack direction="column" spacing="3" w="full" p="4" pb="6">
-							<FormControl>
-								<Input
-									type="text"
-									fontSize="xs"
-									{...register('content', { required: true })}
-									disabled={addNewChat.isLoading}
-								/>
-							</FormControl>
+			<Stack
+				flex="0 0 100%"
+				direction="column"
+				spacing="8"
+				justify="space-between"
+				h="full"
+				transition="all 0.35s"
+				transform={`translateX(${isOpen ? '-100%' : '0'})`}>
+				<Stack direction="column" spacing="8">
+					<Box as="header">
+						<ButtonGroup px="4" py="2">
 							<Button
-								colorScheme="blue"
-								type="submit"
-								isFullWidth
-								isLoading={addNewChat.isLoading}>
-								{__('Send', 'masteriyo')}
+								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}
+								variant="link"
+								onClick={onBackPress}>
+								{__('Back', 'masteriyo')}
 							</Button>
+						</ButtonGroup>
+						<Stack direction="column" p="4" bg="gray.50" spacing="1">
+							<Text fontWeight="bold">{chatData.name}</Text>
+							<Text fontSize="x-small" color="gray.400">
+								{chatData.answerCount + __(' answers', 'masteriyo')}
+							</Text>
 						</Stack>
-					</form>
+					</Box>
+
+					<Stack direction="column-reverse" spacing="4" px="4">
+						{chatQuery.data.map((chat: QuestionAnswerSchema) => (
+							<Message
+								key={chat.id}
+								name={chat.user_name}
+								avatar="https://i.pravatar.cc/150?img=3"
+								message={chat.content}
+								sender={chat.sender}
+								time={chat.created_at}
+								byCurrentUser={chat.by_current_user}
+							/>
+						))}
+					</Stack>
 				</Stack>
-			</Slide>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<Stack direction="column" spacing="3" w="full" p="4" pb="6">
+						<FormControl>
+							<Input
+								type="text"
+								fontSize="xs"
+								{...register('content', { required: true })}
+								disabled={addNewChat.isLoading}
+							/>
+						</FormControl>
+						<Button
+							colorScheme="blue"
+							type="submit"
+							isFullWidth
+							isLoading={addNewChat.isLoading}>
+							{__('Send', 'masteriyo')}
+						</Button>
+					</Stack>
+				</form>
+			</Stack>
 		);
 	}
 

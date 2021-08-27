@@ -102,10 +102,6 @@ const Builder: React.FC = () => {
 					status: 'success',
 					isClosable: true,
 				});
-				methods.reset(data, {
-					keepDirty: false,
-					keepValues: true,
-				});
 				queryClient.invalidateQueries(`course${data.id}`);
 			},
 		}
@@ -120,10 +116,6 @@ const Builder: React.FC = () => {
 					description: __('You can keep editing it', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
-				});
-				methods.reset(data, {
-					keepDirty: false,
-					keepValues: true,
 				});
 				queryClient.invalidateQueries(`course${data.id}`);
 			},

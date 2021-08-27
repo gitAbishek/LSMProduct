@@ -448,6 +448,7 @@ class Masteriyo {
 					}
 					if (
 						! empty( $callback['function'] ) &&
+						! is_a( $callback['function'], '\Closure' ) &&
 						isset( $callback['function'][0], $callback['function'][1] ) &&
 						is_object( $callback['function'][0] ) &&
 						in_array( $callback['function'][1], $ignore_notices, true )

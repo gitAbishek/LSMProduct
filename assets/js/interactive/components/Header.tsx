@@ -22,7 +22,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiChevronDown, BiInfoCircle } from 'react-icons/bi';
-import { Logo, Polygon } from '../../back-end/constants/images';
+import { Polygon } from '../../back-end/constants/images';
 import { CourseProgressSummaryMap } from '../schemas';
 import AvatarMenu from './AvatarMenu';
 
@@ -31,6 +31,10 @@ interface Props {
 	isOpen: boolean;
 	onToggle: () => void;
 }
+
+// @ts-ignore
+const logoData = window._MASTERIYO_.logo;
+
 const Header: React.FC<Props> = (props) => {
 	const { summary, isOpen, onToggle } = props;
 
@@ -83,7 +87,7 @@ const Header: React.FC<Props> = (props) => {
 							py="4"
 							justifyContent="space-between">
 							<Box w="165px">
-								<Image src={Logo} width="36px" />
+								<Image src={logoData[0]} width={logoData[1]} />
 							</Box>
 
 							<Stack

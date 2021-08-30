@@ -2978,3 +2978,14 @@ function masteriyo_get_plugin_path() {
 function masteriyo_get_templates_path() {
 	return untrailingslashit( Constants::get( 'MASTERIYO_TEMPLATES' ) );
 }
+
+/**
+ * Get site logo data.
+ *
+ * @return array Logo data.
+ */
+function get_custom_logo_data() {
+	$custom_logo_id = get_theme_mod( 'custom_logo' );
+	$image_data     = wp_get_attachment_image_src( $custom_logo_id, 'full' );
+	return $image_data;
+}

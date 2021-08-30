@@ -29,9 +29,12 @@ echo '<div class="masteriyo-w-100 masteriyo-container">';
 /**
  * Hook: masteriyo_before_main_content.
  *
+ * @hooked masteriyo_course_search_form - 10
  * @hooked masteriyo_output_content_wrapper - 10 (outputs opening divs for the content)
  * @hooked masteriyo_breadcrumb - 20
  * @hooked MASTERIYO_Structured_Data::generate_website_data() - 30
+ *
+ * @since 0.1.0
  */
 do_action( 'masteriyo_before_main_content' );
 
@@ -52,7 +55,7 @@ do_action( 'masteriyo_before_main_content' );
 /**
  * Hook: masteriyo_after_archive_header.
  *
- * @hooked masteriyo_course_search_form - 10
+ * @since 0.1.0
  */
 do_action( 'masteriyo_after_archive_header' );
 ?>

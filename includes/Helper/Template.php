@@ -958,7 +958,14 @@ if ( ! function_exists( 'masteriyo_course_search_form' ) ) {
 	 *
 	 * @since 0.1.0
 	 */
-	function masteriyo_course_search_form() {       ?>
+	function masteriyo_course_search_form() {
+		$show_search_box = masteriyo_get_setting( 'course_archive.display.enable_search' );
+
+		if ( true !== $show_search_box ) {
+			return;
+		}
+
+		?>
 		<div class="masteriyo-search">
 			<?php masteriyo_get_course_search_form(); ?>
 		</div>

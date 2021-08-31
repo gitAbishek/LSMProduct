@@ -586,6 +586,7 @@ class ScriptStyle {
 							'myaccount' => masteriyo_get_page_permalink( 'myaccount' ),
 						),
 						'logo'       => get_custom_logo_data(),
+						'siteTitle'  => get_bloginfo( 'name' ),
 					),
 				),
 			)

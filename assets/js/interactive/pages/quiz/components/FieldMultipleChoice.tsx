@@ -27,8 +27,8 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 			<FormControl isInvalid={errors[questionId]}>
 				<Controller
 					name={questionId}
-					render={({ field }) => (
-						<CheckboxGroup onChange={field.onChange}>
+					render={({ field: { onChange, value } }) => (
+						<CheckboxGroup onChange={onChange} value={value}>
 							<SimpleGrid spacing="4" columns={4}>
 								{answers.map((answer: SingleChoiceSchema, index: number) => (
 									<Flex

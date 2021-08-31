@@ -82,7 +82,11 @@ $categories     = $course->get_categories( 'name' );
 		</div>
 		<!-- Course description -->
 		<div class="mto-course--content__description">
-			<?php echo wp_kses_post( $course->get_highlights() ); ?>
+			<?php if ( empty( $course->get_highlights() ) || empty( trim( wp_strip_all_tags( $course->get_highlights(), true ) ) ) ) : ?>
+				<?php echo wp_kses_post( $course->get_excerpt() ); ?>
+			<?php else : ?>
+				<?php echo wp_kses_post( $course->get_highlights() ); ?>
+			<?php endif; ?>
 		</div>
 		<!-- Four Column (Course duration, comments, student enrolled and curriculum) -->
 		<div class="mto-course--content__stats">

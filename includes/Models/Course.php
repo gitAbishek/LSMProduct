@@ -294,6 +294,44 @@ class Course extends Model {
 	}
 
 	/**
+	 * Get course excerpt.
+	 *
+	 * Reference: https://developer.wordpress.org/reference/functions/wp_trim_excerpt/
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_excerpt( $context = 'view' ) {
+		$short_description = $this->get_short_description( $context );
+
+		if ( ! empty( $short_description ) ) {
+			return apply_filters( 'masteriyo_course_excerpt', $short_description, $this );
+		}
+
+		$description = $this->get_description( $context );
+
+		if ( empty( $description ) ) {
+			return apply_filters( 'masteriyo_course_excerpt', '', $this );
+		}
+
+		$excerpt = strip_shortcodes( $description );
+		$excerpt = excerpt_remove_blocks( $excerpt );
+
+		/** This filter is documented in wp-includes/post-template.php */
+		$excerpt = apply_filters( 'the_content', $excerpt );
+
+		$excerpt        = str_replace( ']]>', ']]&gt;', $excerpt );
+		$excerpt_length = absint( apply_filters( 'masteriyo_course_excerpt_length', 35 ) );
+		$excerpt_more   = apply_filters( 'masteriyo_course_excerpt_more', '&hellip;' );
+		$excerpt        = wp_trim_words( $excerpt, $excerpt_length, $excerpt_more );
+
+		return apply_filters( 'masteriyo_course_excerpt', $excerpt, $this );
+	}
+
+	/**
 	 * Returns the course's password.
 	 *
 	 * @since  0.1.0

@@ -90,7 +90,10 @@ const InteractiveQuiz = () => {
 								/>
 
 								{quizStartedOn ? (
-									<QuizFields quizAboutToExpire={quizAboutToExpire} />
+									<QuizFields
+										quizAboutToExpire={quizAboutToExpire}
+										quizData={quizQuery.data}
+									/>
 								) : scoreBoardData ? (
 									<ScoreBoard
 										scoreData={scoreBoardData}

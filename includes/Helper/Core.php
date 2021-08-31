@@ -262,37 +262,6 @@ function masteriyo_get_course_qas( $args = array() ) {
 }
 
 /**
- * Get quiz.
- *
- * @since 0.1.0
- *
- * @param int|Quiz|WP_Post $quiz Quiz id or Quiz Model or Post.
- * @return Quiz|WP_Error
- */
-function masteriyo_get_quiz( $quiz ) {
-	$quiz_obj   = masteriyo( 'quiz' );
-	$quiz_store = masteriyo( 'quiz.store' );
-
-	if ( is_a( $quiz, 'Masteriyo\Models\Quiz' ) ) {
-		$id = $quiz->get_id();
-	} elseif ( is_a( $quiz, 'WP_Post' ) ) {
-		$id = $quiz->ID;
-	} else {
-		$id = $quiz;
-	}
-
-	try {
-		$id = absint( $id );
-		$quiz_obj->set_id( $id );
-		$quiz_store->read( $quiz_obj );
-	} catch ( \Exception $e ) {
-		$quiz_obj = new \WP_Error( 'invalid_quiz_id', $e->getMessage() );
-	}
-
-	return apply_filters( 'masteriyo_get_quiz', $quiz_obj, $quiz );
-}
-
-/**
  * Get course category.
  *
  * @since 0.1.0

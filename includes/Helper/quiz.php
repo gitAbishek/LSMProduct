@@ -248,3 +248,34 @@ function masteriyo_get_quiz_attempt_count( $quiz_id, $user_id ) {
 
 	return $attempt_count;
 }
+
+/**
+ * Get quiz.
+ *
+ * @since 0.1.0
+ *
+ * @param int|Quiz|WP_Post $quiz Quiz id or Quiz Model or Post.
+ * @return Quiz|null
+ */
+function masteriyo_get_quiz( $quiz ) {
+	$quiz_obj   = masteriyo( 'quiz' );
+	$quiz_store = masteriyo( 'quiz.store' );
+
+	if ( is_a( $quiz, 'Masteriyo\Models\Quiz' ) ) {
+		$id = $quiz->get_id();
+	} elseif ( is_a( $quiz, 'WP_Post' ) ) {
+		$id = $quiz->ID;
+	} else {
+		$id = $quiz;
+	}
+
+	try {
+		$id = absint( $id );
+		$quiz_obj->set_id( $id );
+		$quiz_store->read( $quiz_obj );
+	} catch ( \Exception $e ) {
+		$quiz_obj = null;
+	}
+
+	return apply_filters( 'masteriyo_get_quiz', $quiz_obj, $quiz );
+}

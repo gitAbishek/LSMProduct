@@ -235,7 +235,7 @@ class Geolocation {
 							break;
 						case 'ip-api.com':
 							$data         = json_decode( $response['body'] );
-							$country_code = isset( $data->countryCode ) ? $data->countryCode : ''; // @codingStandardsIgnoreLine
+							$country_code = isset( $data->countryCode ) ? $data->countryCode : ''; // phpcs:ignore
 							break;
 						default:
 							$country_code = apply_filters( 'masteriyo_geolocation_geoip_response_' . $service_name, '', $response['body'] );

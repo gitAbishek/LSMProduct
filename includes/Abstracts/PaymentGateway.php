@@ -690,7 +690,7 @@ abstract class PaymentGateway {
 		$description = $this->get_description();
 
 		if ( $description ) {
-			echo wpautop( wptexturize( $description ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo wp_kses_post( wpautop( wptexturize( $description ) ) );
 		}
 	}
 

@@ -34,7 +34,7 @@ do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 	<nav class="mto-menu">
 	<ul>
 			<?php foreach ( $menu_items as $slug => $endpoint ) : ?>
-				<li class="<?php masteriyo_echo_if( $slug === $current_endpoint['endpoint'], 'active' ); ?>">
+				<li class="<?php echo esc_attr( $slug === $current_endpoint['endpoint'] ? 'active' : '' ); ?>">
 					<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( $slug ) ); ?>">
 						<?php echo wp_kses_post( $endpoint['icon'] ); ?>
 						<span><?php echo esc_html( $endpoint['label'] ); ?></span>

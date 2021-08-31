@@ -17,10 +17,17 @@ defined( 'ABSPATH' ) || exit;
 
 do_action( 'masteriyo_email_header', $email_heading, $email ); ?>
 
-<?php /* translators: %s: Customer billing full name */ ?>
-<p><?php printf( esc_html__( 'You’ve received the following order from %s:', 'masteriyo' ), $order->get_formatted_billing_full_name() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-<?php
+<p>
+	<?php
+		printf(
+			/* translators: %s: Customer billing full name */
+			esc_html__( 'You’ve received the following order from %s:', 'masteriyo' ),
+			esc_html( $order->get_formatted_billing_full_name() )
+		);
+		?>
+</p>
 
+<?php
 do_action( 'masteriyo_email_order_details', $order, $email );
 
 do_action( 'masteriyo_email_order_meta', $order, $email );

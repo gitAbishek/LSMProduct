@@ -669,7 +669,10 @@ abstract class Model {
 			}
 
 			$this->set_prop( $prop, $datetime );
-		} catch ( Exception $e ) {} // @codingStandardsIgnoreLine.
+		} catch ( Exception $e ) {
+			// TODO Log error message.
+			$error = $e->getErrorMessage();
+		}
 	}
 
 	/**

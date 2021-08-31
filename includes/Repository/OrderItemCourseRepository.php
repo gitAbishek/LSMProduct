@@ -53,7 +53,6 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		// $order_item_obj = masteriyo( 'cache' )->get( 'masteriyo-order-item-' . $order_item->get_id(), 'masteriyo-order-items' );
 		$order_item_obj = false;
 
-
 		if ( false === $order_item_obj ) {
 			$table_name = $order_item->get_table_name();
 
@@ -69,7 +68,6 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 			}
 
 			$order_item_obj = $results[0];
-
 			// masteriyo( 'cache' )->set( 'masteriyo-item-' . $order_item->get_id(), $order_item_obj, 'masteriyo-order-items' );
 		}
 

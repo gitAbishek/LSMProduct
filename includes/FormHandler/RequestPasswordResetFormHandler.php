@@ -32,12 +32,21 @@ class RequestPasswordResetFormHandler {
 	 * @return void
 	 */
 	public function process_password_reset_request() {
-		if ( ! isset( $_POST['masteriyo-password-reset-request'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			return;
-		}
 
 		try {
-			$this->verify_nonce();
+			if ( ! isset( $_POST['masteriyo-password-reset-request'] ) ) {
+				return;
+			}
+
+			$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
+
+			if ( empty( $nonce_value ) ) {
+				throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
+			}
+			if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-password-reset-request' ) ) {
+				throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
+			}
+
 			$this->validate_form();
 
 			$data = $this->get_form_data();
@@ -93,22 +102,6 @@ class RequestPasswordResetFormHandler {
 	}
 
 	/**
-	 * Verify nonce.
-	 *
-	 * @since 0.1.0
-	 */
-	protected function verify_nonce() {
-		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
-		if ( empty( $nonce_value ) ) {
-			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
-		}
-		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-password-reset-request' ) ) {
-			throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
-		}
-	}
-
-	/**
 	 * Validate the submitted form.
 	 *
 	 * @since 0.1.0
@@ -140,9 +133,18 @@ class RequestPasswordResetFormHandler {
 	 * @return array
 	 */
 	protected function get_form_data() {
-		if ( isset( $_POST['user_login'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
+
+		if ( empty( $nonce_value ) ) {
+			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
+		}
+		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-password-reset-request' ) ) {
+			throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
+		}
+
+		if ( isset( $_POST['user_login'] ) ) {
 			return array(
-				'user_login' => sanitize_user( trim( $_POST['user_login'] ) ), // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				'user_login' => sanitize_user( trim( $_POST['user_login'] ) ),
 			);
 		}
 

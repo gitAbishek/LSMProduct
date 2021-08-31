@@ -400,8 +400,9 @@ class CourseProgress extends Model {
 				do_action( 'masteriyo_course_progress_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
 				do_action( 'masteriyo_course_progress_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
 			}
-		} catch ( \Exception $e ) { // phpcs:ignore
-			// TODO Log the message.
+		} catch ( \Exception $e ) {
+			// TODO Log the message
+			$error = $e->getErrorMessage();
 		}
 	}
 

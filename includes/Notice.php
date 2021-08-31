@@ -244,7 +244,7 @@ class Notice {
 			return $notice_html;
 		}
 
-		echo $notice_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo wp_kses_post( $notice_html );
 	}
 
 	/**

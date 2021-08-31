@@ -648,7 +648,7 @@ function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
 	}
 
 	if ( true === $echo ) {
-		echo $html; // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo wp_kses_post( $html );
 	} else {
 		return $html;
 	}
@@ -1759,7 +1759,7 @@ function masteriyo_get_svg( $name, $echo = false ) {
 	$file_contents = apply_filters( 'masteriyo_svg_file', $file_contents, $name );
 
 	if ( $echo ) {
-		echo $file_contents;
+		echo wp_kses_post( $file_contents );
 	} else {
 		return $file_contents;
 	}
@@ -1810,20 +1810,6 @@ function masteriyo_get_account_menu_items() {
 	}
 
 	return apply_filters( 'masteriyo_account_menu_items', $items, $endpoints );
-}
-
-/**
- * Echo a string if value of the first argument is truish.
- *
- * @since 0.1.0
- *
- * @param boolean $bool
- * @param string  $str
- */
-function masteriyo_echo_if( $bool, $str = '' ) {
-	if ( ! ! $bool ) {
-		echo $str;
-	}
 }
 
 /**
@@ -2555,11 +2541,11 @@ function masteriyo_get_currency_codes() {
  */
 function masteriyo_doing_it_wrong( $function, $message, $version ) {
 	// phpcs: disable
-	$message .= ' Backtrace: ' . wp_debug_backtrace_summary(); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_wp_debug_backtrace_summary
+	$message .= ' Backtrace: ' . wp_debug_backtrace_summary();
 
 	if ( masteriyo_is_ajax() || masteriyo_is_rest_api_request() ) {
 		do_action( 'doing_it_wrong_run', $function, $message, $version );
-		error_log( "{$function} was called incorrectly. {$message}. This message was added in version {$version}." ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		error_log( "{$function} was called incorrectly. {$message}. This message was added in version {$version}." );
 	} else {
 		_doing_it_wrong( $function, $message, $version );
 	}
@@ -2634,10 +2620,10 @@ function masteriyo_print_r( $expression, $return = false ) {
 		if ( function_exists( $alternative['func'] ) ) {
 			$res = $alternative['func']( ...$alternative['args'] );
 			if ( $return ) {
-				return $res; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				return $res;
 			}
 
-			echo $res; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo wp_kses_post( $res );
 			return true;
 		}
 	}

@@ -223,7 +223,7 @@ class Session extends AbstractSession {
 			setcookie( $name, $value, $expire, COOKIEPATH ? COOKIEPATH : '/', COOKIE_DOMAIN, $secure, apply_filters( 'masteriyocookie_httponly', $httponly, $name, $value, $expire, $secure ) );
 		} elseif ( Constants::is_true( 'WP_DEBUG' ) ) {
 			headers_sent( $file, $line );
-			trigger_error( "{$name} cookie cannot be set - headers already sent by {$file} on line {$line}", E_USER_NOTICE ); // @codingStandardsIgnoreLine
+			trigger_error( "{$name} cookie cannot be set - headers already sent by {$file} on line {$line}", E_USER_NOTICE ); // phpcs:ignore
 		}
 	}
 

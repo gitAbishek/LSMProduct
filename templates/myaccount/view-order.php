@@ -24,9 +24,9 @@ defined( 'ABSPATH' ) || exit;
 	printf(
 		/* translators: 1: order number 2: order date 3: order status */
 		esc_html__( 'Order #%1$s was placed on %2$s and is currently %3$s.', 'masteriyo' ),
-		'<mark class="order-number">' . $order->get_order_number() . '</mark>', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		'<mark class="order-date">' . masteriyo_format_datetime( $order->get_date_created() ) . '</mark>', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		'<mark class="order-status">' . masteriyo_get_order_status_name( $order->get_status() ) . '</mark>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		'<mark class="order-number">' . absint( $order->get_order_number() ) . '</mark>',
+		'<mark class="order-date">' . esc_html( masteriyo_format_datetime( $order->get_date_created() ) ) . '</mark>',
+		'<mark class="order-status">' . esc_html( masteriyo_get_order_status_name( $order->get_status() ) ) . '</mark>'
 	);
 	?>
 </p>
@@ -38,9 +38,9 @@ defined( 'ABSPATH' ) || exit;
 		<li class="comment note">
 			<div class="comment_container">
 				<div class="comment-text">
-					<p class="meta"><?php echo date_i18n( esc_html__( 'l jS \o\f F Y, h:ia', 'masteriyo' ), strtotime( $note->comment_date ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+					<p class="meta"><?php echo esc_html( date_i18n( 'l jS \o\f F Y, h:ia', strtotime( $note->comment_date ) ) ); ?></p>
 					<div class="description">
-						<?php echo wpautop( wptexturize( $note->comment_content ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php echo wp_kses_post( wpautop( wptexturize( $note->comment_content ) ) ); ?>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -61,7 +61,7 @@ endif;
 	<table>
 		<thead>
 			<tr>
-				<th><?php esc_html_e( 'Product', 'masteriyo' ); ?></th>
+				<th><?php esc_html_e( 'course', 'masteriyo' ); ?></th>
 				<th><?php esc_html_e( 'Total', 'masteriyo' ); ?></th>
 			</tr>
 		</thead>
@@ -71,9 +71,9 @@ endif;
 			do_action( 'masteriyo_order_details_before_order_table_items', $order );
 
 			foreach ( $order_items as $item_id => $item ) {
-				$product = $item->get_course();
+				$course = $item->get_course();
 
-				if ( is_null( $product ) ) {
+				if ( is_null( $course ) ) {
 					continue;
 				}
 				?>
@@ -81,9 +81,9 @@ endif;
 
 					<td>
 						<?php
-						$product_permalink = apply_filters( 'masteriyo_order_item_permalink', $product->get_permalink( $item ), $item, $order );
-
-						echo apply_filters( 'masteriyo_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item->get_name() ) : $item->get_name(), $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						$course_permalink = apply_filters( 'masteriyo_order_item_permalink', $course->get_permalink( $item ), $item, $order );
+						$course_name      = $course_permalink ? sprintf( '<a href="%s">%s</a>', $course_permalink, $item->get_name() ) : $item->get_name();
+						echo wp_kses_post( apply_filters( 'masteriyo_order_item_name', $course_name, $item ) );
 
 						$qty          = $item->get_quantity();
 						$refunded_qty = $order->get_qty_refunded_for_item( $item_id );
@@ -94,18 +94,24 @@ endif;
 							$qty_display = esc_html( $qty );
 						}
 
-						echo apply_filters( 'masteriyo_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $qty_display ) . '</strong>', $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo wp_kses_post(
+							apply_filters(
+								'masteriyo_order_item_quantity_html',
+								' <strong class="course-quantity">' . sprintf( '&times;&nbsp;%s', $qty_display ) . '</strong>',
+								$item
+							)
+						);
 
 						do_action( 'masteriyo_order_item_meta_start', $item_id, $item, $order, false );
 
-						masteriyo_display_item_meta( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						masteriyo_display_item_meta( $item );
 
 						do_action( 'masteriyo_order_item_meta_end', $item_id, $item, $order, false );
 						?>
 					</td>
 
-					<td class="product-total">
-						<?php echo $order->get_formatted_line_subtotal( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<td class="course-total">
+						<?php echo wp_kses_post( $order->get_formatted_line_subtotal( $item ) ); ?>
 					</td>
 				</tr>
 				<?php
@@ -115,16 +121,12 @@ endif;
 		</tbody>
 
 		<tfoot>
-			<?php
-			foreach ( $order->get_order_item_totals() as $key => $total ) {
-				?>
-					<tr>
-						<th scope="row"><?php echo esc_html( $total['label'] ); ?></th>
-						<td><?php echo ( 'payment_method' === $key ) ? esc_html( $total['value'] ) : wp_kses_post( $total['value'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
-					</tr>
-				<?php
-			}
-			?>
+			<?php foreach ( $order->get_order_item_totals() as $key => $total ) : ?>
+				<tr>
+					<th scope="row"><?php echo esc_html( $total['label'] ); ?></th>
+					<td><?php echo wp_kses_post( $total['value'] ); ?></td>
+				</tr>
+			<?php endforeach; ?>
 		</tfoot>
 	</table>
 

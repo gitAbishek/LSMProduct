@@ -410,9 +410,11 @@ class Masteriyo {
 	public function masteriyo_display_compatibility_notice() {
 		if ( version_compare( get_bloginfo( 'version' ), '5.0', '<' ) ) {
 			// translators: %s: Dismiss link
-			$message = sprintf( esc_html__( 'Minimum WordPress version required to work Masteriyo is v5.0.', 'masteriyo' ) );
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			printf( '<div class="notice notice-warning"><p><strong>%s</strong>: %s</p></div>', 'Masteriyo', $message );
+			echo wp_sprintf(
+				'<div class="notice notice-warning"><p><strong>%s</strong>: %s</p></div>',
+				'Masteriyo',
+				esc_html__( 'Minimum WordPress version required to work Masteriyo is v5.0.', 'masteriyo' )
+			);
 		}
 	}
 

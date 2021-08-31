@@ -88,8 +88,7 @@ if ( ! function_exists( 'masteriyo_course_loop_start' ) ) {
 		$loop_start = apply_filters( 'masteriyo_course_loop_start', ob_get_clean() );
 
 		if ( $echo ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $loop_start;
+			echo wp_kses_post( $loop_start );
 		} else {
 			return $loop_start;
 		}
@@ -114,8 +113,7 @@ if ( ! function_exists( 'masteriyo_course_loop_end' ) ) {
 		$loop_end = apply_filters( 'masteriyo_course_loop_end', ob_get_clean() );
 
 		if ( $echo ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $loop_end;
+			echo wp_kses_post( $loop_end );
 		} else {
 			return $loop_end;
 		}
@@ -133,7 +131,6 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 	 * @return string
 	 */
 	function masteriyo_page_title( $echo = true ) {
-
 		if ( is_search() ) {
 			/* translators: %s: search query */
 			$page_title = sprintf( __( 'Search results: &ldquo;%s&rdquo;', 'masteriyo' ), get_search_query() );
@@ -152,8 +149,7 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 		$page_title = apply_filters( 'masteriyo_page_title', $page_title );
 
 		if ( $echo ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $page_title;
+			echo esc_html( $page_title );
 		} else {
 			return $page_title;
 		}
@@ -888,8 +884,7 @@ if ( ! function_exists( 'masteriyo_display_item_meta' ) ) {
 		$html = apply_filters( 'masteriyo_display_item_meta', $html, $item, $args );
 
 		if ( $args['echo'] ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $html;
+			echo wp_kses_post( $html );
 		} else {
 			return $html;
 		}
@@ -946,8 +941,7 @@ if ( ! function_exists( 'masteriyo_get_course_search_form' ) ) {
 			return $search_form;
 		}
 
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo $search_form;
+		echo wp_kses_post( $search_form );
 	}
 }
 
@@ -1054,6 +1048,7 @@ if ( ! function_exists( 'masteriyo_get_email_order_items' ) ) {
 	 * @param Order $order Order object.
 	 * @param array $args Arguments.
 	 *
+	 *
 	 * @since 0.1.0
 	 *
 	 * @return string
@@ -1085,6 +1080,24 @@ if ( ! function_exists( 'masteriyo_get_email_order_items' ) ) {
 		);
 
 		return apply_filters( 'masteriyo_email_order_items_table', ob_get_clean(), $order );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_the_email_order_items' ) ) {
+	/**
+	 * Get HTML for the order items to be shown in emails.
+	 *
+	 * @param Order $order Order object.
+	 * @param array $args Arguments.
+	 *
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	function masteriyo_the_email_order_items( $order, $args = array() ) {
+		$html = masteriyo_get_email_order_items( $order, $args );
+		echo wp_kses_post( $html );
 	}
 }
 
@@ -1125,8 +1138,7 @@ if ( ! function_exists( 'masteriyo_display_item_meta' ) ) {
 		$html = apply_filters( 'masteriyo_display_item_meta', $html, $item, $args );
 
 		if ( $args['echo'] ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $html;
+			echo wp_kses_post( $html );
 		} else {
 			return $html;
 		}

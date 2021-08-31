@@ -392,10 +392,6 @@ class QuestionsController extends PostsController {
 	 * @param Question $question Question object.
 	 */
 	protected function process_answers( $answers, $question ) {
-		switch ( $question->get_type( 'edit' ) ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedSwitch
-			// TODO: Filter the correct answers data according to the user role.
-		}
-
 		return $answers;
 	}
 

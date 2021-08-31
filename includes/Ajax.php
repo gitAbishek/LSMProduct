@@ -89,9 +89,9 @@ class Ajax {
 					throw new Exception( __( 'Missing login credentials.', 'masteriyo' ) );
 				}
 
-				$username = isset( $_POST['payload']['username'] ) ? $_POST['payload']['username'] : '';
-				$password = isset( $_POST['payload']['password'] ) ? $_POST['payload']['password'] : '';
-				$remember = isset( $_POST['payload']['remember'] ) ? $_POST['payload']['remember'] : 'no';
+				$username = isset( $_POST['payload']['username'] ) ? sanitize_text_field( $_POST['payload']['username'] ) : '';
+				$password = isset( $_POST['payload']['password'] ) ? sanitize_text_field( $_POST['payload']['password'] ) : '';
+				$remember = isset( $_POST['payload']['remember'] ) ? sanitize_text_field( $_POST['payload']['remember'] ) : 'no';
 
 				if ( empty( $username ) ) {
 					throw new Exception( __( 'Username cannot be empty.', 'masteriyo' ) );

@@ -32,16 +32,26 @@ class PasswordResetFormHandler {
 	 * @return void
 	 */
 	public function process() {
-		if ( isset( $_GET['password-reset-complete'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			masteriyo_add_notice( __( 'Your password has been reset successfully.', 'masteriyo' ) );
-		}
-
-		if ( ! isset( $_POST['masteriyo-password-reset'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			return;
-		}
-
 		try {
-			$this->verify_nonce();
+
+			if ( ! isset( $_POST['masteriyo-password-reset'] ) ) {
+				return;
+			}
+
+			$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
+
+			if ( empty( $nonce_value ) ) {
+				throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
+			}
+
+			if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-password-reset' ) ) {
+				throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
+			}
+
+			if ( isset( $_GET['password-reset-complete'] ) ) {
+				masteriyo_add_notice( __( 'Your password has been reset successfully.', 'masteriyo' ) );
+			}
+
 			$this->validate_form();
 			$user = $this->validate_reset_key();
 			$data = $this->get_form_data();
@@ -64,22 +74,6 @@ class PasswordResetFormHandler {
 			if ( $e->getMessage() ) {
 				masteriyo_add_notice( sprintf( '<strong>%s: %s</strong> ', __( 'Error', 'masteriyo' ), $e->getMessage() ), 'error' );
 			}
-		}
-	}
-
-	/**
-	 * Verify nonce.
-	 *
-	 * @since 0.1.0
-	 */
-	protected function verify_nonce() {
-		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
-		if ( empty( $nonce_value ) ) {
-			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
-		}
-		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-password-reset' ) ) {
-			throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
 		}
 	}
 
@@ -154,22 +148,31 @@ class PasswordResetFormHandler {
 	 * @return array
 	 */
 	protected function get_form_data() {
+		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
+
+		if ( empty( $nonce_value ) ) {
+			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
+		}
+		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-password-reset' ) ) {
+			throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
+		}
+
 		$data   = array();
 		$fields = array( 'password', 'confirm-password', 'reset_key', 'reset_login' );
 
 		foreach ( $fields as $key ) {
-			if ( ! isset( $_POST[ $key ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			if ( ! isset( $_POST[ $key ] ) ) {
 				$data[ $key ] = '';
 				continue;
 			}
 			if ( 'email' === $key ) {
-				$data[ $key ] = sanitize_email( wp_unslash( trim( $_POST[ $key ] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$data[ $key ] = sanitize_email( wp_unslash( trim( $_POST[ $key ] ) ) );
 			}
 			if ( 'username' === $key ) {
-				$data[ $key ] = sanitize_user( trim( $_POST[ $key ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$data[ $key ] = sanitize_user( trim( $_POST[ $key ] ) );
 			}
 
-			$data[ $key ] = wp_unslash( $_POST[ $key ] ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$data[ $key ] = wp_unslash( $_POST[ $key ] );
 		}
 		return $data;
 	}

@@ -37,7 +37,7 @@ do_action( 'masteriyo_email_before_order_table', $order, $email ); ?>
 		</thead>
 		<tbody>
 			<?php
-			echo masteriyo_get_email_order_items( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			masteriyo_the_email_order_items(
 				$order,
 				array(
 					'show_image' => false,

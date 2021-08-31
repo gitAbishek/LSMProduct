@@ -27,9 +27,11 @@ defined( 'ABSPATH' ) || exit;
 					$message = esc_html__( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'masteriyo' );
 				}
 
-				printf(
-					'<li class="mto-notice mto-alert mto-info-msg">%s</li>',
-					$message // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo wp_kses_post(
+					sprintf(
+						'<li class="mto-notice mto-alert mto-info-msg">%s</li>',
+						$message
+					)
 				);
 			}
 			?>

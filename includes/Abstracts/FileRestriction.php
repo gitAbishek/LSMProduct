@@ -46,7 +46,7 @@ abstract class FileRestriction {
 	 * @param string $url
 	 */
 	public function redirect( $url ) {
-		wp_redirect( $url, 302, 'Masteriyo' ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
+		wp_safe_redirect( $url, 302, 'Masteriyo' );
 		exit;
 	}
 

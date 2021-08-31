@@ -118,10 +118,19 @@ class Activation {
 		$upload_masteriyo_dir = $upload_dir['basedir'] . '/masteriyo';
 
 		if ( ! file_exists( $upload_masteriyo_dir ) ) {
-			mkdir( $upload_masteriyo_dir );
+			wp_mkdir_p( $upload_masteriyo_dir );
 		}
 		$attach_file = $upload_masteriyo_dir . '/' . sanitize_file_name( $filename );
-		$upload      = copy( $img_file, $attach_file );
+
+		include_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+		include_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+
+		if ( ! class_exists( 'WP_Filesystem_Direct' ) ) {
+			return false;
+		}
+
+		$wp_filesystem = new \WP_Filesystem_Direct( null );
+		$upload        = $wp_filesystem->copy( $img_file, $attach_file );
 
 		if ( $upload ) {
 			$wp_filetype = wp_check_filetype( $filename, null );

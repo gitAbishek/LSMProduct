@@ -85,7 +85,7 @@ $categories     = $course->get_categories( 'name' );
 			<?php if ( empty( $course->get_highlights() ) || empty( trim( wp_strip_all_tags( $course->get_highlights(), true ) ) ) ) : ?>
 				<?php echo wp_kses_post( $course->get_excerpt() ); ?>
 			<?php else : ?>
-				<?php echo wp_kses_post( $course->get_highlights() ); ?>
+				<?php echo wp_kses_post( masteriyo_trim_course_highlights( $course->get_highlights() ) ); ?>
 			<?php endif; ?>
 		</div>
 		<!-- Four Column (Course duration, comments, student enrolled and curriculum) -->

@@ -87,7 +87,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 					<!-- Course description -->
 					<div class="mto-course--content__description">
 						<!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe dignissimos debitis facilis quisquam libero, explicabo molestias. Quibusdam illo iusto nulla dignissimos corrupti voluptatum officiis asperiores nobis. Obcaecati autem doloremque, libero, quod vel dolore delectus maxime magni eveniet iusto commodi? Adipisci?</p> -->
-						<?php echo wp_kses_post( $course->get_highlights() ); ?>
+						<?php echo wp_kses_post( masteriyo_trim_course_highlights( $course->get_highlights() ) ); ?>
 					</div>
 					<!-- Four Column (Course duration, comments, student enrolled and curriculum) -->
 					<div class="mto-course--content__stats">

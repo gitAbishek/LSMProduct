@@ -233,3 +233,33 @@ function masteriyo_get_difficulty_badge_css_class( $difficulty ) {
 	}
 	return apply_filters( 'masteriyo_difficulty_badge_css_class', $badge_class, $difficulty );
 }
+
+/**
+ * Trim course highlights. Selects only the first given number of items.
+ *
+ * @since 0.1.0
+ *
+ * @param string $highlights
+ * @param integer $limit
+ *
+ * @return string
+ */
+function masteriyo_trim_course_highlights( $highlights, $limit = 3 ) {
+	$limit = apply_filters( 'masteriyo_course_highlights_limit', $limit, $highlights );
+
+	// Reference: https://www.regextester.com/27540
+	$regex       = '/(<\s*li[^>]*>.*?<\s*\/\s*li>){1,' . $limit . '}/m';
+	$result      = preg_match( $regex, $highlights, $matches );
+	$matched_str = '';
+
+	if ( $result && ! empty( $matches ) ) {
+		$matched_str = $matches[0];
+	}
+	$trimmed_highlights = '';
+
+	if ( ! empty( $matched_str ) ) {
+		$trimmed_highlights = '<ul>' . $matched_str . '</ul>';
+	}
+
+	return apply_filters( 'masteriyo_trimmed_course_highlights', $trimmed_highlights, $limit, $highlights );
+}

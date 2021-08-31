@@ -1,18 +1,29 @@
 import {
+	Pagination,
+	PaginationContainer,
+	PaginationNext,
+	PaginationPage,
+	PaginationPageGroup,
+	PaginationPrevious,
+	PaginationSeparator,
+	usePagination,
+} from '@ajna/pagination';
+import {
 	Alert,
 	AlertIcon,
-	Divider,
 	Heading,
+	HStack,
 	SkeletonText,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import React, { useState } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import urls from '../../../../back-end/constants/urls';
-import { QuestionSchema } from '../../../../back-end/schemas';
+import { QuestionSchema, QuizSchema } from '../../../../back-end/schemas';
 import API from '../../../../back-end/utils/api';
 import FieldMultipleChoice from './FieldMultipleChoice';
 import FieldShortAnswer from './FieldShortAnswer';
@@ -21,20 +32,66 @@ import FieldTrueFalse from './FieldTrueFalse';
 
 interface Props {
 	quizAboutToExpire: boolean;
+	quizData: QuizSchema;
+}
+
+interface FilterParams {
+	per_page?: number;
+	page?: number;
 }
 
 const QuizFields: React.FC<Props> = (props) => {
-	const { quizAboutToExpire } = props;
+	const { quizAboutToExpire, quizData } = props;
 	const { quizId }: any = useParams();
 	const questionsAPI = new API(urls.questions);
+	// If individual quiz questions_display_per_page is 0 then set global settings value.
+	const perPage =
+		0 === quizData?.questions_display_per_page
+			? quizData?.questions_display_per_page_global
+			: quizData?.questions_display_per_page;
+	const [filterParams, setFilterParams] = useState<FilterParams>({
+		per_page: perPage,
+	});
 
 	const questionQuery = useQuery(
-		[`interactiveQuestions${quizId}`, quizId],
-		() => questionsAPI.list({ parent: quizId, order: 'asc' }),
+		[`interactiveQuestions${quizId}`, quizId, filterParams],
+		() => questionsAPI.list({ parent: quizId, order: 'asc', ...filterParams }),
 		{
 			enabled: !!quizId,
 		}
 	);
+
+	const { pages, pagesCount, currentPage, setCurrentPage, pageSize } =
+		usePagination({
+			total: quizData?.questions_count,
+			limits: {
+				outer: 2,
+				inner: 2,
+			},
+			initialState: {
+				pageSize: perPage,
+				isDisabled: false,
+				currentPage: 1,
+			},
+		});
+
+	const handlePageChange = (nextPage: number): void => {
+		setFilterParams({
+			page: nextPage,
+			per_page: pageSize,
+		});
+		setCurrentPage(nextPage);
+	};
+
+	// Current page highest value. For e.g if 1 - 10, 10 is highest.
+	const currentPageHighest = perPage * currentPage;
+
+	// Current page lowest value. For e.g if 1 - 10, 1 is lowest.
+	const displayCurrentPageLowest = currentPageHighest - perPage + 1;
+
+	// Setting highest value depending on current page is last page or not.
+	const displayCurrentPageHighest =
+		currentPage === pagesCount ? quizData?.questions_count : currentPageHighest;
 
 	if (questionQuery.isSuccess) {
 		return (
@@ -43,21 +100,11 @@ const QuizFields: React.FC<Props> = (props) => {
 					{quizAboutToExpire && (
 						<Alert status="error" fontSize="sm" p="2.5">
 							<AlertIcon />
-							{__('Your quize time is about to expire!', 'masteriyo')}
+							{__('Your quiz time is about to expire!', 'masteriyo')}
 						</Alert>
 					)}
 					{questionQuery.data.map((question: QuestionSchema, index: string) => (
 						<Stack direction="column" spacing="8" key={question.id}>
-							<Stack direction="column">
-								<Text fontWeight="medium" color="gray.400">
-									{__('Question ') +
-										(index + 1) +
-										'/' +
-										questionQuery.data.length}
-								</Text>
-
-								<Divider variant="dashed" />
-							</Stack>
 							<Heading fontSize="lg">{question.name}</Heading>
 
 							{question.type === 'true-false' && (
@@ -86,6 +133,63 @@ const QuizFields: React.FC<Props> = (props) => {
 							)}
 						</Stack>
 					))}
+					<Stack
+						mt="8"
+						w="full"
+						direction="row"
+						justifyContent="space-between"
+						pb="4"
+						fontSize="sm">
+						<Text color="gray.500">
+							{__(
+								`Showing ${displayCurrentPageLowest} - 
+								${displayCurrentPageHighest}
+								out of ${quizData?.questions_count} Questions`,
+								'masteriyo'
+							)}
+						</Text>
+						<HStack>
+							<Pagination
+								pagesCount={pagesCount}
+								currentPage={currentPage}
+								onPageChange={handlePageChange}>
+								<PaginationContainer>
+									<Stack direction="row" spacing="1">
+										<PaginationPrevious size="sm" shadow="none">
+											<FaChevronLeft />
+										</PaginationPrevious>
+										<PaginationPageGroup
+											isInline
+											align="center"
+											separator={
+												<PaginationSeparator fontSize="sm" w={7} jumpSize={3} />
+											}>
+											{pages.map((page: number) => (
+												<PaginationPage
+													shadow="none"
+													h="8"
+													w="8"
+													key={`pagination_page_${page}`}
+													page={page}
+													_hover={{
+														bg: 'blue.400',
+													}}
+													_current={{
+														bg: 'blue.400',
+														fontSize: 'sm',
+														color: 'white',
+													}}
+												/>
+											))}
+										</PaginationPageGroup>
+										<PaginationNext size="sm" shadow="none">
+											<FaChevronRight />
+										</PaginationNext>
+									</Stack>
+								</PaginationContainer>
+							</Pagination>
+						</HStack>
+					</Stack>
 				</Stack>
 			</>
 		);

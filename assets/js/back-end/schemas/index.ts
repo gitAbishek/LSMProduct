@@ -19,6 +19,7 @@ export interface QuizSchema {
 	duration: number;
 	attempts_allowed: number;
 	questions_display_per_page: number;
+	questions_display_per_page_global: number;
 	questions_count: number;
 	navigation: {
 		previous: {

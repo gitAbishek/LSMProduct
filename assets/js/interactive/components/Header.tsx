@@ -34,6 +34,8 @@ interface Props {
 
 // @ts-ignore
 const logoData = window._MASTERIYO_.logo;
+// @ts-ignore
+const siteTitle = window._MASTERIYO_.siteTitle;
 
 const Header: React.FC<Props> = (props) => {
 	const { summary, isOpen, onToggle } = props;
@@ -87,7 +89,11 @@ const Header: React.FC<Props> = (props) => {
 							py="4"
 							justifyContent="space-between">
 							<Box w="165px">
-								<Image src={logoData[0]} width={logoData[1]} />
+								{'' != logoData ? (
+									<Image src={logoData[0]} height="36px" />
+								) : (
+									<Text textAlign="center">{siteTitle}</Text>
+								)}
 							</Box>
 
 							<Stack

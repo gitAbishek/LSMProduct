@@ -549,8 +549,6 @@ class QuizesController extends PostsController {
 				);
 			}
 
-			$total_question_marks += $object->get_points();
-
 			$is_correct = $object->check_answer( $value, 'view' );
 
 			$is_correct ? $total_correct_answers++ : $total_incorrect_answers++;
@@ -561,9 +559,10 @@ class QuizesController extends PostsController {
 		}
 
 		$quiz_questions = masteriyo_get_quiz_questions( $quiz_id, 'post_parent' );
+		$quiz           = masteriyo_get_quiz( $quiz_id );
 
 		$attempt_detail = array(
-			'total_marks'              => $total_question_marks,
+			'total_marks'              => $quiz->get_full_mark(),
 			'earned_marks'             => $total_earned_marks,
 			'total_questions'          => $quiz_questions->post_count,
 			'total_answered_questions' => $attempt_questions,
@@ -786,24 +785,25 @@ class QuizesController extends PostsController {
 		$course_name = is_null( $course ) ? '' : $course->post_title;
 
 		$data = array(
-			'id'                         => $quiz->get_id(),
-			'name'                       => $quiz->get_name( $context ),
-			'slug'                       => $quiz->get_slug( $context ),
-			'permalink'                  => $quiz->get_permalink(),
-			'parent_id'                  => $quiz->get_parent_id( $context ),
-			'course_id'                  => $quiz->get_course_id( $context ),
-			'course_name'                => $course_name,
-			'menu_order'                 => $quiz->get_menu_order( $context ),
-			'status'                     => $quiz->get_status( $context ),
-			'description'                => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
-			'short_description'          => 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description( $context ),
-			'pass_mark'                  => $quiz->get_pass_mark( $context ),
-			'full_mark'                  => $quiz->get_full_mark( $context ),
-			'duration'                   => $quiz->get_duration( $context ),
-			'attempts_allowed'           => $quiz->get_attempts_allowed( $context ),
-			'questions_display_per_page' => $quiz->get_questions_display_per_page( $context ),
-			'questions_count'            => $quiz->get_questions_count(),
-			'navigation'                 => $this->get_navigation_items( $quiz, $context ),
+			'id'                                => $quiz->get_id(),
+			'name'                              => $quiz->get_name( $context ),
+			'slug'                              => $quiz->get_slug( $context ),
+			'permalink'                         => $quiz->get_permalink(),
+			'parent_id'                         => $quiz->get_parent_id( $context ),
+			'course_id'                         => $quiz->get_course_id( $context ),
+			'course_name'                       => $course_name,
+			'menu_order'                        => $quiz->get_menu_order( $context ),
+			'status'                            => $quiz->get_status( $context ),
+			'description'                       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
+			'short_description'                 => 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description( $context ),
+			'pass_mark'                         => $quiz->get_pass_mark( $context ),
+			'full_mark'                         => $quiz->get_full_mark( $context ),
+			'duration'                          => $quiz->get_duration( $context ),
+			'attempts_allowed'                  => $quiz->get_attempts_allowed( $context ),
+			'questions_display_per_page'        => $quiz->get_questions_display_per_page( $context ),
+			'questions_display_per_page_global' => masteriyo_get_setting( 'quiz.styling.questions_display_per_page' ),
+			'questions_count'                   => $quiz->get_questions_count(),
+			'navigation'                        => $this->get_navigation_items( $quiz, $context ),
 		);
 
 		return $data;

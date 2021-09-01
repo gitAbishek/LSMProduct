@@ -2982,10 +2982,12 @@ function masteriyo_get_templates_path() {
 /**
  * Get site logo data.
  *
+ * @since 0.1.0
+ *
  * @return array Logo data.
  */
-function get_custom_logo_data() {
+function masteriyo_get_custom_logo_data() {
 	$custom_logo_id = get_theme_mod( 'custom_logo' );
 	$image_data     = wp_get_attachment_image_src( $custom_logo_id, 'full' );
-	return $image_data;
+	return apply_filters( 'masteriyo_custom_logo', $image_data );
 }

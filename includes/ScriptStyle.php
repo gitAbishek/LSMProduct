@@ -585,7 +585,7 @@ class ScriptStyle {
 							'logout'    => wp_logout_url( get_home_url() ),
 							'myaccount' => masteriyo_get_page_permalink( 'myaccount' ),
 						),
-						'logo'       => get_custom_logo_data(),
+						'logo'       => masteriyo_get_custom_logo_data(),
 						'siteTitle'  => get_bloginfo( 'name' ),
 					),
 				),

@@ -647,8 +647,27 @@ function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
 		$html .= $stars['empty_star'];
 	}
 
+	$svg_args = array(
+		'svg'   => array(
+			'class'           => true,
+			'aria-hidden'     => true,
+			'aria-labelledby' => true,
+			'role'            => true,
+			'xmlns'           => true,
+			'width'           => true,
+			'height'          => true,
+			'viewbox'         => true, // <= Must be lower case!
+		),
+		'g'     => array( 'fill' => true ),
+		'title' => array( 'title' => true ),
+		'path'  => array(
+			'd'    => true,
+			'fill' => true,
+		),
+	);
+
 	if ( true === $echo ) {
-		echo wp_kses_post( $html );
+		echo wp_kses( $html, $svg_args );
 	} else {
 		return $html;
 	}

@@ -1758,8 +1758,27 @@ function masteriyo_get_svg( $name, $echo = false ) {
 
 	$file_contents = apply_filters( 'masteriyo_svg_file', $file_contents, $name );
 
+	$svg_args = array(
+		'svg'   => array(
+			'class'           => true,
+			'aria-hidden'     => true,
+			'aria-labelledby' => true,
+			'role'            => true,
+			'xmlns'           => true,
+			'width'           => true,
+			'height'          => true,
+			'viewbox'         => true, // <= Must be lower case!
+		),
+		'g'     => array( 'fill' => true ),
+		'title' => array( 'title' => true ),
+		'path'  => array(
+			'd'    => true,
+			'fill' => true,
+		),
+	);
+
 	if ( $echo ) {
-		echo wp_kses_post( $file_contents );
+		echo wp_kses( $file_contents, $svg_args );
 	} else {
 		return $file_contents;
 	}

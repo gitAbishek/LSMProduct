@@ -36,7 +36,7 @@ class OrderOnHoldEmail extends Email {
 	 *
 	 * @var string
 	 */
-	protected $setting_name_for_enable = 'onhold_order_enable';
+	protected $setting_name_for_enable = 'onhold_order.enable';
 
 	/**
 	 * Setting name to get email subject from.

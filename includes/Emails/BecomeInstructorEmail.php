@@ -36,7 +36,7 @@ class BecomeInstructorEmail extends Email {
 	 *
 	 * @var string
 	 */
-	protected $setting_name_for_enable = 'become_an_instructor_enable';
+	protected $setting_name_for_enable = 'become_an_instructor.enable';
 
 	/**
 	 * Setting name to get email subject from.

@@ -36,7 +36,7 @@ class OrderCancelledEmail extends Email {
 	 *
 	 * @var string
 	 */
-	protected $setting_name_for_enable = 'cancelled_order_enable';
+	protected $setting_name_for_enable = 'cancelled_order.enable';
 
 	/**
 	 * Setting name to get email subject from.

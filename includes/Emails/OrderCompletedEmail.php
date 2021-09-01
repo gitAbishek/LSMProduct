@@ -36,7 +36,7 @@ class OrderCompletedEmail extends Email {
 	 *
 	 * @var string
 	 */
-	protected $setting_name_for_enable = 'completed_order_enable';
+	protected $setting_name_for_enable = 'completed_order.enable';
 
 	/**
 	 * Setting name to get email subject from.

@@ -36,7 +36,7 @@ class OrderProcessingEmail extends Email {
 	 *
 	 * @var string
 	 */
-	protected $setting_name_for_enable = 'processing_order_enable';
+	protected $setting_name_for_enable = 'processing_order.enable';
 
 	/**
 	 * Setting name to get email subject from.

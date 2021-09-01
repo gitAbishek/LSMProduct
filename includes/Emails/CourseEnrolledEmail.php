@@ -36,7 +36,7 @@ class CourseEnrolledEmail extends Email {
 	 *
 	 * @var string
 	 */
-	protected $setting_name_for_enable = 'enrolled_course_enable';
+	protected $setting_name_for_enable = 'enrolled_course.enable';
 
 	/**
 	 * Setting name to get email subject from.
@@ -154,8 +154,8 @@ class CourseEnrolledEmail extends Email {
 				'course'           => $object->course,
 				'user'             => $object->user,
 				'email'            => $this,
-				'enrolled_courses' => $user_courses[ 'enrolled_courses' ],
-				'all_courses'      => $user_courses[ 'all_courses' ],
+				'enrolled_courses' => $user_courses['enrolled_courses'],
+				'all_courses'      => $user_courses['all_courses'],
 			)
 		);
 	}

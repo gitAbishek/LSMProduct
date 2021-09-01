@@ -373,8 +373,8 @@ class Email {
 	 * @return bool
 	 */
 	public function is_enabled() {
-		$setting_name = 'masteriyo.emails.' . $this->setting_name_for_enable;
-		$is_enabled   = in_array( get_option( $setting_name, true ), array( 'yes', '1', true ) ); // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+		$setting_name = 'emails.' . $this->setting_name_for_enable;
+		$is_enabled   = in_array( masteriyo_get_setting( $setting_name ), array( 'yes', '1', true ) ); // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 
 		return apply_filters( $setting_name, $is_enabled, $this->get_object(), $this );
 	}

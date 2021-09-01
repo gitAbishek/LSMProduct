@@ -40,7 +40,7 @@ $difficulty = $course->get_difficulty();
   <div class="masteriyo--content">Are you sure? You can't restore this back</div>
   <div class="masteriyo-actions">
 	<button class="mto-btn mto-btn-outline">Cancel</button>
-	<button class="mto-btn mto-btn-primary">Delete</button>
+	<button class="mto-btn mto-btn-warning">Delete</button>
   </div>
 </div>
 

@@ -152,6 +152,36 @@
 			font-size: 16px;
 		}
 	}
+
+  	// Red Buttons
+	&-warning {
+		color: $mto-white-color;
+    border: 1px solid $mto-border-color;
+    background: $mto-badge-red;
+
+		&:hover {
+			color: $mto-white-color;
+			border-color: #E2E8F0;
+      background:  darken($mto-badge-red, 10%);
+		}
+
+		&:focus,
+		&:active {
+			background: $mto-disabled-color;
+			color: $mto-disabled-text-color;
+			border-color: $mto-border-color;
+		}
+
+		&--lg {
+			padding: 12px 16px;
+			font-size: 14px;
+		}
+
+		&--xl {
+			padding: 16px 20px;
+			font-size: 16px;
+		}
+	}
 }
 
 // Links

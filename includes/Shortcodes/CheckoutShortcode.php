@@ -71,6 +71,11 @@ class CheckoutShortcode extends Shortcode {
 	 * @return void
 	 */
 	private function checkout() {
+		// Bail early if the checkout is in admin.
+		if ( is_admin() ) {
+			return;
+		}
+
 		// Check cart has contents.
 		if ( masteriyo( 'cart' )->is_empty() && ! is_customize_preview() && apply_filters( 'masteriyo_checkout_redirect_empty_cart', true ) ) {
 			return;

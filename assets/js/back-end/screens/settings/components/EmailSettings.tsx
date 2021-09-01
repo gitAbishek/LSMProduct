@@ -81,7 +81,10 @@ const EmailSetttings: React.FC<Props> = (props) => {
 									<Controller
 										name="emails.general.enable"
 										render={({ field }) => (
-											<Switch {...field} defaultChecked={false} />
+											<Switch
+												{...field}
+												defaultChecked={emailData?.general?.enable}
+											/>
 										)}
 									/>
 								</Stack>

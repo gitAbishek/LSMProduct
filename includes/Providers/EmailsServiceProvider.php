@@ -18,6 +18,7 @@ use Masteriyo\Emails\OrderOnHoldEmail;
 use Masteriyo\Emails\OrderCompletedEmail;
 use Masteriyo\Emails\OrderProcessingEmail;
 use Masteriyo\Emails\ResetPasswordEmail;
+use Masteriyo\Emails\UserRegisteredEmail;
 
 class EmailsServiceProvider extends AbstractServiceProvider {
 	/**
@@ -33,6 +34,7 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 	 */
 	protected $provides = array(
 		'email',
+		'email.new-user',
 		'email.password-reset',
 		'email.new-order',
 		'email.become-instructor',
@@ -56,6 +58,7 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 	 */
 	public function register() {
 		$this->getContainer()->add( 'email', Email::class );
+		$this->getContainer()->add( 'email.new-user', UserRegisteredEmail::class );
 		$this->getContainer()->add( 'email.password-reset', ResetPasswordEmail::class );
 		$this->getContainer()->add( 'email.new-order', NewOrderEmail::class );
 		$this->getContainer()->add( 'email.become-instructor', BecomeInstructorEmail::class );

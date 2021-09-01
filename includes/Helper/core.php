@@ -2101,7 +2101,7 @@ if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 		$user->set_username( $username );
 		$user->set_password( $password );
 		$user->set_email( $email );
-		$user->set_roles( masteriyo_get_setting_value( 'masteriyo_registration_default_role', 'subscriber' ) );
+		$user->set_roles( masteriyo_get_setting_value( 'masteriyo_registration_default_role', 'masteriyo_student' ) );
 
 		$user = apply_filters( 'masteriyo_new_user_data', $user );
 

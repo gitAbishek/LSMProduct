@@ -31,6 +31,16 @@ class UserRegisteredEmail extends Email {
 	protected $id = 'user_registered';
 
 	/**
+	 * Setting name to check if this email is enabled.
+	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	protected $setting_name_for_enable = 'general.enable';
+
+	/**
 	 * HTML template path.
 	 *
 	 * @since 0.1.0
@@ -57,7 +67,7 @@ class UserRegisteredEmail extends Email {
 		}
 
 		// Bail early if this email notification is disabled.
-		if ( 'yes' === apply_filters( 'masteriyo_disable_user_registered_email', 'no' ) ) {
+		if ( ! $this->is_enabled() ) {
 			return;
 		}
 

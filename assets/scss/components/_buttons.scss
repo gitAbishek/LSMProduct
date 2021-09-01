@@ -1,136 +1,165 @@
 .mto-btn {
-    font-size: 14px;
-    font-weight: 500;
-    padding: 10px 12px;
-    text-align: center;
-    text-decoration: none;
-    @include mto-border-radius;
-    @include mto-default-animate;
+	font-size: 14px;
+	font-weight: 500;
+	padding: 10px 12px;
+	text-align: center;
+	text-decoration: none;
+	@include mto-border-radius;
+	@include mto-default-animate;
 
-    //Default buttons
-    &-default {
-        background: $mto-white-color;
-        @include mto-default-border;
-        color: $mto-btn-gray;
+	//Default buttons
+	&-default {
+		background: $mto-white-color;
+		@include mto-default-border;
+		color: $mto-btn-gray;
 
-        &:hover {
-            background: $mto-btn-active-blue;
-            border-color: $mto-btn-active-blue;
-            color: $mto-white-color;
-            @include mto-shadow-1;
-        }
+		&:hover {
+			background: $mto-btn-active-blue;
+			border-color: $mto-btn-active-blue;
+			color: $mto-white-color;
+			@include mto-shadow-1;
+		}
 
-        &:focus,
-        &:active {
-            background: $mto-btn-active-blue;
-            border-color: $mto-btn-active-blue;
-            color: $mto-white-color;
-        }
+		&:focus,
+		&:active {
+			background: $mto-btn-active-blue;
+			border-color: $mto-btn-active-blue;
+			color: $mto-white-color;
+		}
 
-        &--lg {
-            padding: 12px 16px;
-            font-size: 14px;
-        }
+		&--lg {
+			padding: 12px 16px;
+			font-size: 14px;
+		}
 
-        &--xl {
-            padding: 16px 20px;
-            font-size: 16px;
-        }
-    }
+		&--xl {
+			padding: 16px 20px;
+			font-size: 16px;
+		}
+	}
 
-    // Primary Buttons
-    &-primary {
-        background: $mto-primary-color;
-        border-color: $mto-primary-color;
-        color: $mto-white-color;
+	// Primary Buttons
+	&-primary {
+		background: $mto-primary-color;
+		border-color: $mto-primary-color;
+		color: $mto-white-color;
 
-        &:hover {
-            background: $mto-btn-hover-blue;
-            border-color: $mto-btn-hover-blue;
-        }
+		&:hover {
+			background: $mto-btn-hover-blue;
+			border-color: $mto-btn-hover-blue;
+		}
 
-        &:focus,
-        &:active {
-            background: $mto-btn-active-blue;
-            border-color: $mto-btn-active-blue;
-        }
+		&:focus,
+		&:active {
+			background: $mto-btn-active-blue;
+			border-color: $mto-btn-active-blue;
+		}
 
-        &--lg {
-            padding: 12px 16px;
-            font-size: 14px;
-        }
+		&--lg {
+			padding: 12px 16px;
+			font-size: 14px;
+		}
 
-        &--xl {
-            padding: 16px 20px;
-            font-size: 16px;
-        }
-    }
+		&--xl {
+			padding: 16px 20px;
+			font-size: 16px;
+		}
+	}
 
-    // Accent Buttons
-    &-accent {
-        background: $mto-accent-color;
-        border-color: $mto-accent-color;
-        color: $mto-white-color;
+	// Accent Buttons
+	&-accent {
+		background: $mto-accent-color;
+		border-color: $mto-accent-color;
+		color: $mto-white-color;
 
-        &:hover {
-            background: darken($mto-accent-color, 10%);
-            border-color: darken($mto-accent-color, 10%);
-        }
+		&:hover {
+			background: darken($mto-accent-color, 10%);
+			border-color: darken($mto-accent-color, 10%);
+		}
 
-        &:focus,
-        &:active {
-            background: darken($mto-accent-color, 20%);
-            border-color: darken($mto-accent-color, 20%);
-        }
+		&:focus,
+		&:active {
+			background: darken($mto-accent-color, 20%);
+			border-color: darken($mto-accent-color, 20%);
+		}
 
-        &--lg {
-            padding: 12px 16px;
-            font-size: 14px;
-        }
+		&--lg {
+			padding: 12px 16px;
+			font-size: 14px;
+		}
 
-        &--xl {
-            padding: 16px 20px;
-            font-size: 16px;
-        }
-    }
+		&--xl {
+			padding: 16px 20px;
+			font-size: 16px;
+		}
+	}
 
-    // Disabled button
-    &-disabled {
-        background: $mto-disabled-color;
-        color: $mto-disabled-text-color;
+	// Disabled button
+	&-disabled {
+		background: $mto-disabled-color;
+		color: $mto-disabled-text-color;
 
-        &:hover {
-            background: $mto-disabled-color;
-            color: $mto-disabled-text-color;
-            border-color: $mto-border-color;
-            cursor: not-allowed;
-        }
+		&:hover {
+			background: $mto-disabled-color;
+			color: $mto-disabled-text-color;
+			border-color: $mto-border-color;
+			cursor: not-allowed;
+		}
 
-        &:focus,
-        &:active {
-            background: $mto-disabled-color;
-            color: $mto-disabled-text-color;
-            border-color: $mto-border-color;
-        }
+		&:focus,
+		&:active {
+			background: $mto-disabled-color;
+			color: $mto-disabled-text-color;
+			border-color: $mto-border-color;
+		}
 
-        &--lg {
-            padding: 12px 16px;
-            font-size: 14px;
-        }
+		&--lg {
+			padding: 12px 16px;
+			font-size: 14px;
+		}
 
-        &--xl {
-            padding: 16px 20px;
-            font-size: 16px;
-        }
-    }
+		&--xl {
+			padding: 16px 20px;
+			font-size: 16px;
+		}
+	}
+	// Outline Buttons
+	&-outline {
+		color: $mto-disabled-text-color;
+    border: 1px solid $mto-border-color;
+    background: transparent;
+
+		&:hover {
+			color: $mto-disabled-text-color;
+			border-color: #E2E8F0;
+      background:  #E2E8F0;
+		}
+
+		&:focus,
+		&:active {
+			background: $mto-disabled-color;
+			color: $mto-disabled-text-color;
+			border-color: $mto-border-color;
+		}
+
+		&--lg {
+			padding: 12px 16px;
+			font-size: 14px;
+		}
+
+		&--xl {
+			padding: 16px 20px;
+			font-size: 16px;
+		}
+	}
 }
 
 // Links
 .mto-link-primary {
-    color: $mto-primary-color;
-    font-weight: 500;
-    text-decoration: underline;
-    &:hover {
-        color: rgba($mto-primary-color, 0.8);
-    }
+	color: $mto-primary-color;
+	font-weight: 500;
+	text-decoration: underline;
+	&:hover {
+		color: rgba($mto-primary-color, 0.8);
+	}
 }

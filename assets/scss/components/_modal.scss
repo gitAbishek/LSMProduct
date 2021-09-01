@@ -1,0 +1,26 @@
+.masteriyo--modal {
+  max-width: 500px;
+  width: 100%;
+  background: $mto-white-color;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  visibility: visible;
+  border-radius: 8px;
+
+  .masteriyo--title {
+    padding: 24px 24px 0px 24px;
+    margin: 0;
+  }
+  .masteriyo--content {
+    padding: 14px 24px;
+  }
+  .masteriyo-actions {
+    padding: 0px 24px 24px 24px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    text-align: right;
+
+    .mto-btn:last-child{
+      margin-left: 8px;
+    }
+  }
+}

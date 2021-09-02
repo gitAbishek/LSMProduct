@@ -285,4 +285,28 @@ class CourseCategoriesController extends RestTermsController {
 			'pages'   => (int) ceil( $total_terms / (int) $query_args['posts_per_page'] ),
 		);
 	}
+
+	/**
+	 * Process objects collection.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $objects Course categories data.
+	 * @param array $query_args Query arguments.
+	 * @param array $query_results Course categories query result data.
+	 *
+	 * @return array
+	 */
+	protected function process_objects_collection( $objects, $query_args, $query_results ) {
+		return array(
+			'data' => $objects,
+			'meta' => array(
+				'total'        => $query_results['total'],
+				'pages'        => $query_results['pages'],
+				'current_page' => $query_args['paged'],
+				'per_page'     => $query_args['number'],
+			),
+		);
+	}
+
 }

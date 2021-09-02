@@ -358,7 +358,7 @@ abstract class RestTermsController extends CrudController {
 			'order'      => $request['order'],
 			'orderby'    => $request['orderby'],
 			'offset'     => ( $request['page'] - 1 ) * $request['per_page'],
-			'paged'      => ( $request['page'] - 1 ) * $request['per_page'] + 1,
+			'paged'      => $request['page'],
 			'number'     => $request['per_page'],
 			'slug'       => $request['slug'],
 			'hide_empty' => $request['hide_empty'],
@@ -405,17 +405,16 @@ abstract class RestTermsController extends CrudController {
 	 * @return array
 	 */
 	protected function get_objects( $query_args ) {
-		$query  = new \WP_Term_Query();
-		$result = $query->query( $query_args );
-
-		$total_posts = count( $result );
-		if ( $total_posts < 1 ) {
-			// Out-of-bounds, run the query again without LIMIT for total count.
-			unset( $query_args['paged'] );
-			$count_query = new \WP_Term_Query();
-			$result      = $count_query->query( $query_args );
-			$total_posts = count( $result );
-		}
+		$query       = new \WP_Term_Query();
+		$result      = $query->query( $query_args );
+		$count_args  = array_filter(
+			$query_args,
+			function ( $value, $key ) {
+				return ! empty( $value ) && ! in_array( $key, array( 'paged', 'offset', 'number' ), true );
+			},
+			ARRAY_FILTER_USE_BOTH
+		);
+		$total_posts = wp_count_terms( $count_args );
 
 		return array(
 			'objects' => array_filter( array_map( array( $this, 'get_object' ), $result ) ),

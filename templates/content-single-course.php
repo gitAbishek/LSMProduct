@@ -35,13 +35,15 @@ $difficulty = $course->get_difficulty();
 ?>
 <?php masteriyo_display_all_notices(); ?>
 
-<div class="masteriyo--modal" id="modal">
-  <h4 class="masteriyo--title">Deleting Course</h4>
-  <div class="masteriyo--content">Are you sure? You can't restore this back</div>
-  <div class="masteriyo-actions">
-	<button class="mto-btn mto-btn-outline">Cancel</button>
-	<button class="mto-btn mto-btn-warning">Delete</button>
-  </div>
+<div class="mto-confirm-delete-course-review-modal-content masteriyo-hidden">
+	<div class="masteriyo--modal mto-modal-confirm-delete-course-review">
+		<h4 class="masteriyo--title"><?php esc_html_e( 'Deleting Course Review', 'masteriyo' ); ?></h4>
+		<div class="masteriyo--content"><?php esc_html_e( 'Are you sure? You can\'t restore this back', 'masteriyo' ); ?></div>
+		<div class="masteriyo-actions">
+			<button class="mto-btn mto-btn-outline mto-cancel"><?php esc_html_e( 'Cancel', 'masteriyo' ); ?></button>
+			<button class="mto-btn mto-btn-warning mto-delete"><?php esc_html_e( 'Delete', 'masteriyo' ); ?></button>
+		</div>
+	</div>
 </div>
 
 <div id="course-<?php the_ID(); ?>" class="mto-single-course">

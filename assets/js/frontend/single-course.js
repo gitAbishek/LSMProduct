@@ -96,6 +96,34 @@
 			return html;
 		},
 	};
+	var masteriyo_dialogs = {
+		confirm_delete_course_review: function (options = {}) {
+			// TODO Append to 'body' tag.
+			$('.mto-course-reviews-list').before(
+				$('.mto-confirm-delete-course-review-modal-content').html()
+			);
+			$('.mto-modal-confirm-delete-course-review .mto-cancel').on(
+				'click',
+				function () {
+					$(this).closest('.masteriyo--modal').remove();
+				}
+			);
+			$('.mto-modal-confirm-delete-course-review .mto-delete').on(
+				'click',
+				function () {
+					var $modal = $(this).closest('.masteriyo--modal');
+
+					$(this).text(mto_data.labels.deleting);
+
+					if (typeof options.onConfirm === 'function') {
+						options.onConfirm(function () {
+							$modal.remove();
+						});
+					}
+				}
+			);
+		},
+	};
 	var masteriyo = {
 		$create_revew_form: $('.mto-submit-review-form'),
 		create_review_form_class: '.mto-submit-review-form',
@@ -310,29 +338,36 @@
 				var $delete_button = $(this);
 				var review_id = $review.data('id');
 
-				if (isDeletingFlags[review_id] || !masteriyo_helper.confirm()) return;
+				if (isDeletingFlags[review_id]) return;
 
-				isDeletingFlags[review_id] = true;
-				$delete_button.find('strong').text(mto_data.labels.deleting);
-				masteriyo_api.deleteCourseReview(review_id, {
-					onSuccess: function () {
-						$review.after(
-							masteriyo_utils.getSuccessNotice(mto_data.labels.delete_success)
-						);
-						$review.remove();
-					},
-					onError: function (xhr, status, error) {
-						var message = error;
+				masteriyo_dialogs.confirm_delete_course_review({
+					onConfirm: function (closeModal) {
+						isDeletingFlags[review_id] = true;
 
-						if (xhr.responseJSON && xhr.responseJSON.message) {
-							message = xhr.responseJSON.message;
-						}
+						masteriyo_api.deleteCourseReview(review_id, {
+							onSuccess: function () {
+								$review.after(
+									masteriyo_utils.getSuccessNotice(
+										mto_data.labels.delete_success
+									)
+								);
+								$review.remove();
+							},
+							onError: function (xhr, status, error) {
+								var message = error;
 
-						$review.append(masteriyo_utils.getErrorNotice(message));
-						$delete_button.find('.text').text(mto_data.labels.delete);
-					},
-					onComplete: function () {
-						isDeletingFlags[review_id] = false;
+								if (xhr.responseJSON && xhr.responseJSON.message) {
+									message = xhr.responseJSON.message;
+								}
+
+								$review.append(masteriyo_utils.getErrorNotice(message));
+								$delete_button.find('.text').text(mto_data.labels.delete);
+							},
+							onComplete: function () {
+								isDeletingFlags[review_id] = false;
+								closeModal();
+							},
+						});
 					},
 				});
 			});

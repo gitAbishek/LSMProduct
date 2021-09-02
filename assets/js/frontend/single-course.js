@@ -348,12 +348,9 @@
 
 						masteriyo_api.deleteCourseReview(review_id, {
 							onSuccess: function () {
-								$review.after(
-									masteriyo_utils.getSuccessNotice(
-										mto_data.labels.delete_success
-									)
-								);
-								$review.remove();
+								$review.fadeOut(400, function () {
+									$(this).remove();
+								});
 							},
 							onError: function (xhr, status, error) {
 								var message = error;

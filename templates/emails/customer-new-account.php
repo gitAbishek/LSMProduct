@@ -17,19 +17,23 @@
 
 defined( 'ABSPATH' ) || exit;
 
+$name = $user->get_first_name();
+
+if ( empty( $name ) ) {
+	$name = $user->get_username();
+}
+
 do_action( 'masteriyo_email_header', $email_heading, $email ); ?>
 
 <p class="email-template--info">
 	<?php /* translators: %s: Customer username */ ?>
-	<?php printf( esc_html__( 'Hi %s,', 'masteriyo' ), esc_html( $user->get_username() ) ); ?>
+	<?php printf( esc_html__( 'Hi %s,', 'masteriyo' ), esc_html( $name ) ); ?>
 </p>
 <p class="email-template--info">
-	<?php /* translators: %1$s: Site title, %2$s: Username, %3$s: My account link */ ?>
-	<?php printf( esc_html__( 'Thanks for creating an account on %1$s. Your username is %2$s. You can access your account area to view orders, change your password, and more at: %3$s', 'masteriyo' ), esc_html( $blogname ), '<strong>' . esc_html( $user->get_username() ) . '</strong>', make_clickable( esc_url( masteriyo_get_page_permalink( 'myaccount' ) ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-</p>
-<p class="email-template--info">
-	<?php /* translators: %s: Auto generated password */ ?>
-	<?php printf( esc_html__( 'Your password is: %s', 'masteriyo' ), '<strong>' . esc_html( $user->get_password() ) . '</strong>' ); ?>
+	<?php
+		/* translators: %1$s: Site title, %2$s: Username, %3$s: My account link */
+		printf( esc_html__( 'Thanks for creating an account on %1$s. You can access your account area and view your courses, account details, and more from %2$s', 'masteriyo' ), make_clickable( esc_url( get_home_url() ) ), make_clickable( esc_url( masteriyo_get_page_permalink( 'myaccount' ) ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	?>
 </p>
 
 <?php

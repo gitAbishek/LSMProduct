@@ -1144,3 +1144,14 @@ if ( ! function_exists( 'masteriyo_display_item_meta' ) ) {
 		}
 	}
 }
+
+if ( ! function_exists( 'masteriyo_single_course_modals' ) ) {
+	/**
+	 * Include modals for the single course page.
+	 *
+	 * @since 0.1.0
+	 */
+	function masteriyo_single_course_modals() {
+		masteriyo_get_template( 'single-course/modals.php' );
+	}
+}

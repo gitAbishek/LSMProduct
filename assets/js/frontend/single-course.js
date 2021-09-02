@@ -148,6 +148,9 @@
 				}
 				$(this).siblings('.menu').height(0);
 			});
+			$('.mto-dropdown .menu li').on('click', function () {
+				$(this).closest('.menu').height(0);
+			});
 		},
 		init_rating_widget: function () {
 			$(masteriyo.create_review_form_class).on(

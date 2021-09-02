@@ -125,13 +125,6 @@ class CourseReviewsController extends CommentsController {
 					'methods'             => \WP_REST_Server::DELETABLE,
 					'callback'            => array( $this, 'delete_item' ),
 					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
-					'args'                => array(
-						'force' => array(
-							'default'     => false,
-							'type'        => 'boolean',
-							'description' => __( 'Required to be true, as the resource does not support trashing.', 'masteriyo' ),
-						),
-					),
 				),
 				'schema' => array( $this, 'get_public_item_schema' ),
 			)

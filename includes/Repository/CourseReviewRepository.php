@@ -222,28 +222,16 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	public function delete( Model &$course_review, $args = array() ) {
 		$id          = $course_review->get_id();
 		$object_type = $course_review->get_object_type();
-		$args        = array_merge(
-			array(
-				'force_delete' => false,
-			),
-			$args
-		);
 
 		if ( ! $id ) {
 			return;
 		}
 
-		if ( $args['force_delete'] ) {
-			do_action( 'masteriyo_before_delete_' . $object_type, $id, $course_review );
-			wp_delete_comment( $id, true );
-			$course_review->set_id( 0 );
-			do_action( 'masteriyo_after_delete_' . $object_type, $id, $course_review );
-		} else {
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course_review );
-			wp_trash_comment( $id );
-			$course_review->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course_review );
-		}
+		do_action( 'masteriyo_before_delete_' . $object_type, $id, $course_review );
+		wp_delete_comment( $id, true );
+		$course_review->set_id( 0 );
+		do_action( 'masteriyo_after_delete_' . $object_type, $id, $course_review );
+
 		CourseReviews::update_course_review_stats( $course_review->get_course_id() );
 	}
 

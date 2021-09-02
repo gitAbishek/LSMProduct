@@ -104,13 +104,13 @@
 			$('.mto-modal-confirm-delete-course-review .mto-cancel').on(
 				'click',
 				function () {
-					$(this).closest('.masteriyo--modal').remove();
+					$(this).closest('.masteriyo-overlay').remove();
 				}
 			);
 			$('.mto-modal-confirm-delete-course-review .mto-delete').on(
 				'click',
 				function () {
-					var $modal = $(this).closest('.masteriyo--modal');
+					var $modal = $(this).closest('.masteriyo-overlay');
 
 					$(this).text(mto_data.labels.deleting);
 

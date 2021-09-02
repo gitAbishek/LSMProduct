@@ -780,7 +780,7 @@ class SettingsController extends CrudController {
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),
 								),
-								'course_list_page_id'      => array(
+								'courses_page_id'      => array(
 									'description' => __( 'Archive course page ID.', 'masteriyo' ),
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),

@@ -163,7 +163,7 @@ function masteriyo_is_single_course_page() {
  *
  * @return boolean
  */
-function masteriyo_is_course_list_page() {
+function masteriyo_is_courses_page() {
 	return is_post_type_archive( 'course' );
 }
 

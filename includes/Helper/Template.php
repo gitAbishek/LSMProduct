@@ -199,7 +199,7 @@ function masteriyo_setup_loop( $args = array() ) {
 
 	$GLOBALS['masteriyo_loop'] = wp_parse_args( $args, $default_args );
 }
-function_exists( 'add_action' ) && add_action( 'masteriyo_before_course_list_loop', 'masteriyo_setup_loop' );
+function_exists( 'add_action' ) && add_action( 'masteriyo_before_courses_loop', 'masteriyo_setup_loop' );
 
 /**
  * Get the default columns setting - this is how many courses will be shown per row in loops.
@@ -223,7 +223,7 @@ function masteriyo_get_default_courses_per_row() {
 
 	$columns = max( 1, absint( $columns ) );
 
-	return apply_filters( 'masteriyo_loop_course_list_columns', $columns );
+	return apply_filters( 'masteriyo_loop_courses_columns', $columns );
 }
 
 /**
@@ -272,7 +272,7 @@ function masteriyo_set_loop_prop( $prop, $value = '' ) {
  * @return mixed
  */
 function masteriyo_get_loop_prop( $prop, $default = '' ) {
-	masteriyo_setup_loop(); // Ensure course_list loop is setup.
+	masteriyo_setup_loop(); // Ensure courses loop is setup.
 
 	return isset( $GLOBALS['masteriyo_loop'], $GLOBALS['masteriyo_loop'][ $prop ] ) ? $GLOBALS['masteriyo_loop'][ $prop ] : $default;
 }

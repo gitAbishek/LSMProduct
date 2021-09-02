@@ -301,7 +301,7 @@ class Setting extends Model {
 		$this->add_sanitize_callback( 'advance.permalinks.single_section_permalink', 'sanitize_title' );
 
 		$this->add_sanitize_callback( 'advance.pages.myaccount_page_id', 'absint' );
-		$this->add_sanitize_callback( 'advance.pages.course_list_page_id', 'absint' );
+		$this->add_sanitize_callback( 'advance.pages.courses_page_id', 'absint' );
 		$this->add_sanitize_callback( 'advance.pages.terms_conditions_page_id', 'absint' );
 		$this->add_sanitize_callback( 'advance.pages.checkout_page_id', 'absint' );
 

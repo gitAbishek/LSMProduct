@@ -305,7 +305,7 @@ class FrontendQuery {
 					$q->is_home = false;
 
 					// WP supporting themes show post type archive.
-					if ( current_theme_supports( 'cmasteriyo' ) ) {
+					if ( current_theme_supports( 'masteriyo' ) ) {
 						$q->set( 'post_type', 'course' );
 					} else {
 						$q->is_singular = true;
@@ -324,9 +324,9 @@ class FrontendQuery {
 			$q->is_comment_feed = false;
 		}
 
-		// Special check for course_lists with the COURSE POST TYPE ARCHIVE on front.
-		if ( current_theme_supports( 'cmasteriyo' ) && $q->is_page() && 'page' === get_option( 'show_on_front' ) && absint( $q->get( 'page_id' ) ) === masteriyo_get_page_id( 'courses' ) ) {
-			// This is a front-page course_list.
+		// Special check for coursess with the COURSE POST TYPE ARCHIVE on front.
+		if ( current_theme_supports( 'masteriyo' ) && $q->is_page() && 'page' === get_option( 'show_on_front' ) && absint( $q->get( 'page_id' ) ) === masteriyo_get_page_id( 'courses' ) ) {
+			// This is a front-page courses.
 			$q->set( 'post_type', 'course' );
 			$q->set( 'page_id', '' );
 
@@ -334,8 +334,8 @@ class FrontendQuery {
 				$q->set( 'paged', $q->query['paged'] );
 			}
 
-			// Define a variable so we know this is the front page course_list later on.
-			masteriyo_maybe_define_constant( 'COURSE_LIST_IS_ON_FRONT', true );
+			// Define a variable so we know this is the front page courses later on.
+			masteriyo_maybe_define_constant( 'COURSES_IS_ON_FRONT', true );
 
 			// Get the actual WP page to avoid errors and let us use is_front_page().
 			// This is hacky but works. Awaiting https://core.trac.wordpress.org/ticket/21096.
@@ -364,7 +364,7 @@ class FrontendQuery {
 				add_filter( 'wpseo_metakey', array( $this, 'wpseo_metakey' ) );
 			}
 		} elseif ( ! $q->is_post_type_archive( 'course' ) && ! $q->is_tax( get_object_taxonomies( 'course' ) ) ) {
-			// Only apply to course categories, the course post archive, the course_list page, course tags, and course attribute taxonomies.
+			// Only apply to course categories, the course post archive, the courses page, course tags, and course attribute taxonomies.
 			return;
 		}
 
@@ -394,13 +394,13 @@ class FrontendQuery {
 		$q->set( 'meta_query', $this->get_meta_query( $q->get( 'meta_query' ), true ) );
 		$q->set( 'tax_query', $this->get_tax_query( $q->get( 'tax_query' ), true ) );
 		$q->set( 'masteriyo_query', 'course_query' );
-		$q->set( 'post__in', array_unique( (array) apply_filters( 'loop_course_list_post_in', array() ) ) );
+		$q->set( 'post__in', array_unique( (array) apply_filters( 'loop_courses_post_in', array() ) ) );
 
 		// Work out how many courses to query.
 		$q->set(
 			'posts_per_page',
 			$q->get( 'posts_per_page' ) ? $q->get( 'posts_per_page' ) : apply_filters(
-				'loop_course_list_per_page',
+				'loop_courses_per_page',
 				masteriyo_get_default_course_rows_per_page()
 			)
 		);

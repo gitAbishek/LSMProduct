@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The Template for displaying course archives, including the main course_list page which is a post type archive
+ * The Template for displaying course archives, including the main courses page which is a post type archive
  *
  * This template can be overridden by copying it to yourtheme/masteriyo/archive-course.php.
  *
@@ -63,7 +63,7 @@ do_action( 'masteriyo_after_archive_header' );
 <?php
 if ( masteriyo_course_loop() ) {
 
-	do_action( 'masteriyo_before_course_list_loop' );
+	do_action( 'masteriyo_before_courses_loop' );
 
 	masteriyo_course_loop_start();
 
@@ -72,9 +72,9 @@ if ( masteriyo_course_loop() ) {
 			the_post();
 
 			/**
-			 * Hook: masteriyo_course_list_loop.
+			 * Hook: masteriyo_courses_loop.
 			 */
-			do_action( 'masteriyo_course_list_loop' );
+			do_action( 'masteriyo_courses_loop' );
 
 			\masteriyo_get_template_part( 'content', 'course' );
 		}
@@ -83,11 +83,11 @@ if ( masteriyo_course_loop() ) {
 	masteriyo_course_loop_end();
 
 	/**
-	 * Hook: masteriyo_after_course_list_loop.
+	 * Hook: masteriyo_after_courses_loop.
 	 *
 	 * @hooked masteriyo_pagination - 10
 	 */
-	do_action( 'masteriyo_after_course_list_loop' );
+	do_action( 'masteriyo_after_courses_loop' );
 } else {
 	/**
 	 * Hook: masteriyo_no_courses_found.

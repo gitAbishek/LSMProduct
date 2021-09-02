@@ -410,7 +410,7 @@ export interface SettingsSchema {
 	};
 	pages: {
 		myaccount_page_id: number;
-		course_list_page_id: number;
+		courses_page_id: number;
 		terms_conditions_page_id: number;
 		checkout_page_id: number;
 		checkout_endpoints: {

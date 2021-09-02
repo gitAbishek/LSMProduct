@@ -36,11 +36,12 @@ class MediaAPI {
 		}).then((res) => res.data);
 	}
 
-	async list() {
+	async list(query?: any) {
 		return http({
 			url: this.uri,
 			method: 'GET',
-		}).then((res) => res.data);
+			params: query,
+		}).then((res) => res);
 	}
 }
 

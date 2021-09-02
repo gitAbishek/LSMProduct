@@ -941,7 +941,7 @@ if ( ! function_exists( 'masteriyo_get_course_search_form' ) ) {
 			return $search_form;
 		}
 
-		echo wp_kses_post( $search_form );
+		echo $search_form; // phpcs:ignore
 	}
 }
 

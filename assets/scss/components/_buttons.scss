@@ -126,13 +126,13 @@
 	// Outline Buttons
 	&-outline {
 		color: $mto-disabled-text-color;
-    border: 1px solid $mto-border-color;
-    background: transparent;
+		border: 1px solid $mto-border-color;
+		background: transparent;
 
 		&:hover {
 			color: $mto-disabled-text-color;
-			border-color: #E2E8F0;
-      background:  #E2E8F0;
+			border-color: #e2e8f0;
+			background: #e2e8f0;
 		}
 
 		&:focus,
@@ -153,23 +153,23 @@
 		}
 	}
 
-  	// Red Buttons
+	// Red Buttons
 	&-warning {
 		color: $mto-white-color;
-    border: 1px solid $mto-border-color;
-    background: $mto-badge-red;
+		border: 1px solid $mto-border-color;
+		background: $mto-badge-red;
 
 		&:hover {
 			color: $mto-white-color;
-			border-color: #E2E8F0;
-      background:  darken($mto-badge-red, 10%);
+			border-color: #e2e8f0;
+			background: darken($mto-badge-red, 10%);
 		}
 
 		&:focus,
 		&:active {
-			background: $mto-disabled-color;
-			color: $mto-disabled-text-color;
-			border-color: $mto-border-color;
+			background: darken($mto-badge-red, 10%);
+			color: $mto-white-color;
+			border-color: #e2e8f0;
 		}
 
 		&--lg {

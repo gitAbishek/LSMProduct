@@ -98,8 +98,7 @@
 	};
 	var masteriyo_dialogs = {
 		confirm_delete_course_review: function (options = {}) {
-			// TODO Append to 'body' tag.
-			$('.mto-course-reviews-list').before(
+			$(document.body).append(
 				$('.mto-confirm-delete-course-review-modal-content').html()
 			);
 			$('.mto-modal-confirm-delete-course-review .mto-cancel').on(

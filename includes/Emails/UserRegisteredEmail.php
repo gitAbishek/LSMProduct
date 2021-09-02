@@ -31,16 +31,6 @@ class UserRegisteredEmail extends Email {
 	protected $id = 'user_registered';
 
 	/**
-	 * Setting name to check if this email is enabled.
-	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	protected $setting_name_for_enable = 'general.enable';
-
-	/**
 	 * HTML template path.
 	 *
 	 * @since 0.1.0
@@ -63,11 +53,6 @@ class UserRegisteredEmail extends Email {
 
 		// Bail early if user doesn't exist.
 		if ( is_wp_error( $user ) ) {
-			return;
-		}
-
-		// Bail early if this email notification is disabled.
-		if ( ! $this->is_enabled() ) {
 			return;
 		}
 

@@ -49,15 +49,10 @@ const EmailSetttings: React.FC<Props> = (props) => {
 		<Tabs orientation="vertical">
 			<Stack direction="row" flex="1">
 				<TabList sx={tabListStyles}>
-					<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('New Order', 'masteriyo')}</Tab>
-					<Tab sx={tabStyles}>{__('Processing Order', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Completed Order', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Onhold Order', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Cancelled Order', 'masteriyo')}</Tab>
-					<Tab sx={tabStyles}>{__('Enrolled Course', 'masteriyo')}</Tab>
-					<Tab sx={tabStyles}>{__('Completed Course', 'masteriyo')}</Tab>
-					<Tab sx={tabStyles}>{__('Become an Instructor', 'masteriyo')}</Tab>
 				</TabList>
 				<TabPanels flex="1">
 					<TabPanel>
@@ -68,39 +63,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										{__('Enable', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'Users "new account" emails are sent to the user when a user signs up via checkout or account pages.',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Controller
-										name="emails.general.enable"
-										render={({ field }) => (
-											<Switch
-												{...field}
-												defaultChecked={emailData?.general?.enable}
-											/>
-										)}
-									/>
-								</Stack>
-							</FormControl>
-						</Stack>
-					</TabPanel>
-
-					<TabPanel>
-						<Stack direction="column" spacing="6">
-							<FormControl>
-								<Stack direction="row">
-									<FormLabel minW="160px">
-										{__('Enable', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'New order emails are sent to admin when a new order is received.',
+												'New order emails are sent to students when a new order is received.',
 												'masteriyo'
 											)}
 											hasArrow
@@ -116,38 +79,6 @@ const EmailSetttings: React.FC<Props> = (props) => {
 											<Switch
 												{...field}
 												defaultChecked={emailData?.new_order?.enable}
-											/>
-										)}
-									/>
-								</Stack>
-							</FormControl>
-						</Stack>
-					</TabPanel>
-
-					<TabPanel>
-						<Stack direction="column" spacing="6">
-							<FormControl>
-								<Stack direction="row">
-									<FormLabel minW="160px">
-										{__('Enable', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'This is an order notification sent to students containing order details after payment.',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Controller
-										name="emails.processing_order.enable"
-										render={({ field }) => (
-											<Switch
-												{...field}
-												defaultChecked={emailData?.processing_order?.enable}
 											/>
 										)}
 									/>
@@ -243,102 +174,6 @@ const EmailSetttings: React.FC<Props> = (props) => {
 											<Switch
 												{...field}
 												defaultChecked={emailData?.cancelled_order?.enable}
-											/>
-										)}
-									/>
-								</Stack>
-							</FormControl>
-						</Stack>
-					</TabPanel>
-
-					<TabPanel>
-						<Stack direction="column" spacing="6">
-							<FormControl>
-								<Stack direction="row">
-									<FormLabel minW="160px">
-										{__('Enable', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'Email sent to students when they have enrolled course.',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Controller
-										name="emails.enrolled_course.enable"
-										render={({ field }) => (
-											<Switch
-												{...field}
-												defaultChecked={emailData?.enrolled_course?.enable}
-											/>
-										)}
-									/>
-								</Stack>
-							</FormControl>
-						</Stack>
-					</TabPanel>
-
-					<TabPanel>
-						<Stack direction="column" spacing="6">
-							<FormControl>
-								<Stack direction="row">
-									<FormLabel minW="160px">
-										{__('Enable', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'Email sent to students when they marked course is completed.',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Controller
-										name="emails.completed_course.enable"
-										render={({ field }) => (
-											<Switch
-												{...field}
-												defaultChecked={emailData?.completed_course?.enable}
-											/>
-										)}
-									/>
-								</Stack>
-							</FormControl>
-						</Stack>
-					</TabPanel>
-
-					<TabPanel>
-						<Stack direction="column" spacing="6">
-							<FormControl>
-								<Stack direction="row">
-									<FormLabel minW="160px">
-										{__('Enable', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'Email sent to user when they requested to become an instructor',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Controller
-										name="emails.become_an_instructor.enable"
-										render={({ field }) => (
-											<Switch
-												{...field}
-												defaultChecked={emailData?.become_an_instructor?.enable}
 											/>
 										)}
 									/>

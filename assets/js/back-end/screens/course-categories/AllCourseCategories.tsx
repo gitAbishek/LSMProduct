@@ -53,16 +53,16 @@ const AllCourseCategories = () => {
 	const toast = useToast();
 	const history = useHistory();
 
-	const [filterParams, setfilterParams] = useState({ page: 1 });
+	const [page, setPage] = useState(1);
 	const [isLastPage, setIsLastPage] = useState(false);
-	const categoriesQuery = useQuery(['courseCategoriesList', filterParams], () =>
-		categoryAPI.list(filterParams)
+	const categoriesQuery = useQuery(['courseCategoriesList', page], () =>
+		categoryAPI.list({ page: page })
 	);
 	const [deleteCategoryId, setDeleteCategoryId] = useState<number>();
 	const { onClose, onOpen, isOpen } = useDisclosure();
 
-	const prevPage = filterParams.page > 1 ? filterParams.page - 1 : 1;
-	const nextPage = filterParams.page + 1;
+	const prevPage = page > 1 ? page - 1 : 1;
+	const nextPage = page + 1;
 
 	const cancelRef = useRef<any>();
 
@@ -134,7 +134,7 @@ const AllCourseCategories = () => {
 									<Tbody>
 										{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
 										{categoriesQuery.isSuccess &&
-											categoriesQuery.data.map((cat: any) => (
+											categoriesQuery.data.data.map((cat: any) => (
 												<CategoryRow
 													key={cat.id}
 													id={cat.id}
@@ -162,18 +162,16 @@ const AllCourseCategories = () => {
 								aria-label="Previous page"
 								onClick={() => {
 									setIsLastPage(false);
-									setfilterParams({
-										page: prevPage,
-									});
+									setPage(prevPage);
 								}}
-								isDisabled={filterParams.page < 2 ? true : false}
+								isDisabled={page < 2 ? true : false}
 							/>
 							<Input
 								size="sm"
 								w="10"
 								type="number"
 								min={1}
-								value={filterParams.page}
+								value={page}
 								isReadOnly={true}
 							/>
 							<IconButton
@@ -185,9 +183,7 @@ const AllCourseCategories = () => {
 								size="sm"
 								onClick={() => {
 									setIsLastPage(true);
-									setfilterParams({
-										page: nextPage,
-									});
+									setPage(nextPage);
 								}}
 								isDisabled={isLastPage}
 							/>

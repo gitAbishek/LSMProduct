@@ -30,7 +30,7 @@ const Categories: React.FC<Props> = (props) => {
 		retry: false,
 		onSuccess: (data) => {
 			setCategoriesList(
-				data.map((category: any) => {
+				data.data.map((category: any) => {
 					return {
 						value: category.id,
 						label: category.name,

@@ -70,7 +70,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 					<Select {...register('category')}>
 						<option value="">{__('All Categories', 'masteriyo')}</option>
 						{categoryQuery.isSuccess &&
-							categoryQuery?.data?.map(
+							categoryQuery?.data?.data?.map(
 								(category: { id: number; name: string }) => (
 									<option key={category.id} value={category.id}>
 										{category.name}

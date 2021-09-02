@@ -130,7 +130,7 @@
 		init: function () {
 			$(document).ready(function () {
 				masteriyo.init_rating_widget();
-				masteriyo.init_menu_toggler();
+				masteriyo.init_course_reviews_menu();
 				masteriyo.init_faqs_accordions_handler();
 				masteriyo.init_curriculum_accordions_handler();
 				masteriyo.init_create_reviews_handler();
@@ -139,7 +139,10 @@
 				masteriyo.init_reply_btn_handler();
 			});
 		},
-		init_menu_toggler: function () {
+		init_course_reviews_menu: function () {
+			/**
+			 * Menu toggle handler.
+			 */
 			$(document.body).on('click', '.menu-toggler', function () {
 				if ($(this).siblings('.menu').height() == 0) {
 					$(this).siblings('.menu').height('auto');
@@ -148,8 +151,22 @@
 				}
 				$(this).siblings('.menu').height(0);
 			});
+
+			/**
+			 * Close menu on click menu item.
+			 */
 			$('.mto-dropdown .menu li').on('click', function () {
 				$(this).closest('.menu').height(0);
+			});
+
+			/**
+			 * Close menu on outside click.
+			 */
+			$(document.body).click(function (e) {
+				if ($('.mto-dropdown').has(e.target).length > 0) {
+					return;
+				}
+				$('.mto-dropdown .menu').height(0);
 			});
 		},
 		init_rating_widget: function () {
@@ -348,7 +365,7 @@
 
 						masteriyo_api.deleteCourseReview(review_id, {
 							onSuccess: function () {
-								$review.fadeOut(400, function () {
+								$review.fadeOut(500, function () {
 									$(this).remove();
 								});
 							},

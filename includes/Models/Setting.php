@@ -182,7 +182,7 @@ class Setting extends Model {
 		),
 		'advance'        => array(
 			'pages'      => array(
-				'course_list_page_id'      => '',
+				'courses_page_id'          => '',
 				'myaccount_page_id'        => '',
 				'checkout_page_id'         => '',
 				'terms_conditions_page_id' => '',

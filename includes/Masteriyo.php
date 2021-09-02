@@ -87,7 +87,7 @@ class Masteriyo {
 	 */
 	protected function init_hooks() {
 		add_action( 'init', array( $this, 'after_wp_init' ), 0 );
-		add_action( 'admin_bar_menu', array( $this, 'add_course_list_page_link' ), 35 );
+		add_action( 'admin_bar_menu', array( $this, 'add_courses_page_link' ), 35 );
 		add_action( 'admin_notices', array( $this, 'masteriyo_display_compatibility_notice' ) );
 
 		// add_filter( 'plugin_row_meta', array( $this, 'add_plugin_links' ), 10, 2 );
@@ -154,13 +154,13 @@ class Masteriyo {
 	}
 
 	/**
-	 * Add the "Course List" link in admin bar main menu.
+	 * Add the "Courses" link in admin bar main menu.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param WP_Admin_Bar $wp_admin_bar Admin bar instance.
 	 */
-	public function add_course_list_page_link( $wp_admin_bar ) {
+	public function add_courses_page_link( $wp_admin_bar ) {
 		if ( ! is_admin() || ! is_admin_bar_showing() ) {
 			return;
 		}
@@ -170,13 +170,13 @@ class Masteriyo {
 			return;
 		}
 
-		// Add an option to visit the course list page.
+		// Add an option to visit the courses page.
 		$wp_admin_bar->add_node(
 			array(
 				'parent' => 'site-name',
-				'id'     => 'course-list-page',
-				'title'  => __( 'Course List', 'masteriyo' ),
-				'href'   => masteriyo_get_page_permalink( 'course-list' ),
+				'id'     => 'courses-page',
+				'title'  => __( 'Courses', 'masteriyo' ),
+				'href'   => masteriyo_get_page_permalink( 'courses' ),
 			)
 		);
 	}
@@ -303,7 +303,7 @@ class Masteriyo {
 			}
 
 			if ( empty( $user_courses ) || ! masteriyo_can_start_course( $course_id, $user_id ) ) {
-				wp_safe_redirect( \masteriyo_get_course_list_url(), 307 );
+				wp_safe_redirect( \masteriyo_get_courses_url(), 307 );
 				exit();
 			}
 

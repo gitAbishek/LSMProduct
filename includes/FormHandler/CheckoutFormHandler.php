@@ -38,7 +38,7 @@ class CheckoutFormHandler {
 			masteriyo_nocache_headers();
 
 			if ( masteriyo( 'cart' )->is_empty() ) {
-				wp_safe_redirect( masteriyo_get_course_list_url() );
+				wp_safe_redirect( masteriyo_get_courses_url() );
 				exit;
 			}
 

@@ -553,7 +553,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	}
 
 	/**
-	 * Create or update user's course list.
+	 * Create or update user's course.
 	 *
 	 * @param string $order Order boject.
 	 *

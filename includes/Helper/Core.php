@@ -478,7 +478,7 @@ function masteriyo_locate_template( $template_name, $template_path = '', $defaul
 }
 
 /**
- * Retrieve page ids - used for pages like course list. returns -1 if no page is found.
+ * Retrieve page ids - used for pages like courses. returns -1 if no page is found.
  *
  * @since 0.1.0
  *
@@ -1530,14 +1530,14 @@ function masteriyo_get_checkout_url() {
 }
 
 /**
- * Gets the url to the course list page.
+ * Gets the url to the courses page.
  *
  * @since  0.1.0
  *
- * @return string Url to course list page
+ * @return string Url to courses page
  */
-function masteriyo_get_course_list_url() {
-	return apply_filters( 'masteriyo_get_course_list_url', masteriyo_get_page_permalink( 'course-list' ) );
+function masteriyo_get_courses_url() {
+	return apply_filters( 'masteriyo_get_courses_url', masteriyo_get_page_permalink( 'courses' ) );
 }
 
 /**
@@ -2278,8 +2278,8 @@ function masteriyo_create_page( $slug, $setting_name = '', $page_title = '', $pa
  * @param WP_Post $post        The current post object.
  */
 function masteriyo_add_post_state( $post_states, $post ) {
-	if ( masteriyo_get_page_id( 'course-list' ) === $post->ID ) {
-		$post_states['masteriyo_course_list_page'] = __( 'Masteriyo Course List Page', 'masteriyo' );
+	if ( masteriyo_get_page_id( 'courses' ) === $post->ID ) {
+		$post_states['masteriyo_courses_page'] = __( 'Masteriyo Courses Page', 'masteriyo' );
 	}
 
 	if ( masteriyo_get_page_id( 'myaccount' ) === $post->ID ) {

@@ -40,25 +40,25 @@ class Activation {
 		$pages = apply_filters(
 			'masteriyo_create_pages',
 			array(
-				'course-list' => array(
+				'courses'   => array(
 					'name'         => _x( 'courses', 'Page slug', 'masteriyo' ),
-					'title'        => _x( 'Course List', 'Page title', 'masteriyo' ),
+					'title'        => _x( 'Courses', 'Page title', 'masteriyo' ),
 					'content'      => '',
-					'setting_name' => 'course_list_page_id',
+					'setting_name' => 'courses_page_id',
 				),
-				'myaccount'   => array(
+				'myaccount' => array(
 					'name'         => _x( 'my-account', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'My Account', 'Page title', 'masteriyo' ),
 					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_myaccount_shortcode_tag', 'masteriyo_myaccount' ) . ']<!-- /wp:shortcode -->',
 					'setting_name' => 'myaccount_page_id',
 				),
-				'checkout'    => array(
+				'checkout'  => array(
 					'name'         => _x( 'checkout', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'Checkout', 'Page title', 'masteriyo' ),
 					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_checkout_shortcode_tag', 'masteriyo_checkout' ) . ']<!-- /wp:shortcode -->',
 					'setting_name' => 'checkout_page_id',
 				),
-				'learning'    => array(
+				'learning'  => array(
 					'name'         => _x( 'learning', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'Learning', 'Page title', 'masteriyo' ),
 					'content'      => '',

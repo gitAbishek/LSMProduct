@@ -24,7 +24,7 @@ function masteriyo_template_redirect() {
 	// phpcs:disable WordPress.Security.NonceVerification.Recommended
 	// When default permalinks are enabled, redirect courses list page to post type archive url.
 	if ( ! empty( $_GET['page_id'] ) && '' === get_option( 'permalink_structure' )
-		&& masteriyo_get_page_id( 'course-list' ) === absint( $_GET['page_id'] )
+		&& masteriyo_get_page_id( 'courses' ) === absint( $_GET['page_id'] )
 		&& get_post_type_archive_link( 'course' ) ) {
 			wp_safe_redirect( get_post_type_archive_link( 'course' ) );
 			exit;
@@ -37,7 +37,7 @@ function masteriyo_template_redirect() {
 		&& masteriyo( 'cart' )->is_empty() && empty( $wp->query_vars['order-pay'] ) && ! isset( $wp->query_vars['order-received'] )
 		&& ! is_customize_preview() && apply_filters( 'masteriyo_checkout_redirect_empty_cart', true )
 	) {
-		wp_safe_redirect( masteriyo_get_course_list_url() );
+		wp_safe_redirect( masteriyo_get_courses_url() );
 		exit;
 	}
 
@@ -142,8 +142,8 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 		} elseif ( is_tax() ) {
 			$page_title = single_term_title( '', false );
 		} else {
-			$course_list_page_id = masteriyo_get_page_id( 'course-list' );
-			$page_title          = get_the_title( $course_list_page_id );
+			$courses_page_id = masteriyo_get_page_id( 'courses' );
+			$page_title      = get_the_title( $courses_page_id );
 		}
 
 		$page_title = apply_filters( 'masteriyo_page_title', $page_title );
@@ -311,7 +311,7 @@ function_exists( 'add_action' ) && add_action( 'the_post', 'masteriyo_setup_cour
  */
 function masteriyo_add_body_class( $classes, $class ) {
 	if ( masteriyo_is_archive_course_page() ) {
-		$classes[] = 'masteriyo-course-list-page';
+		$classes[] = 'masteriyo-courses-page';
 	} elseif ( masteriyo_is_learning_page() ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$classes[] = 'masteriyo-interactive-page';
 	}

@@ -107,9 +107,9 @@ class Onboard {
 				'permalinkOptionsPage' => esc_url( admin_url( 'options-permalink.php' ) ),
 				'pageBuilderURL'       => esc_url( admin_url( '/admin.php?page=masteriyo#/courses/add-new-course' ) ),
 				'pagesID'              => array(
-					'courseList' => masteriyo_get_page_id_by_slug( 'course-list' ),
-					'myaccount'  => masteriyo_get_page_id_by_slug( 'myaccount' ),
-					'checkout'   => masteriyo_get_page_id_by_slug( 'masteriyo-checkout' ),
+					'courses'   => masteriyo_get_page_id_by_slug( 'courses' ),
+					'myaccount' => masteriyo_get_page_id_by_slug( 'myaccount' ),
+					'checkout'  => masteriyo_get_page_id_by_slug( 'masteriyo-checkout' ),
 				),
 			)
 		);

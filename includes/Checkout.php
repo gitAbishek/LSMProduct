@@ -124,9 +124,9 @@ class Checkout {
 			if ( $this->cart->is_empty() ) {
 				throw new \Exception(
 					sprintf(
-						/* translators: %s: course list url */
-						__( 'Sorry, your session has expired. <a href="%s" class="masteriyo-backward">Return to course list</a>', 'masteriyo' ),
-						esc_url( masteriyo_get_page_permalink( 'course-list' ) )
+						/* translators: %s: courses page url */
+						__( 'Sorry, your session has expired. <a href="%s" class="masteriyo-backward">Return to courses page</a>', 'masteriyo' ),
+						esc_url( masteriyo_get_page_permalink( 'courses' ) )
 					)
 				);
 			}

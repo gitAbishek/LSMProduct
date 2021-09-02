@@ -136,7 +136,7 @@ export interface EmailsSetttingsMap {
 
 export interface AdvancedSettingsMap {
 	pages: {
-		course_list_page_id: number;
+		courses_page_id: number;
 		learning_page_id: number;
 		myaccount_page_id: number;
 		checkout_page_id: number;

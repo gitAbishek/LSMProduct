@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-get_header( 'course-list' );
+get_header( 'courses' );
 
 /**
  * Wrapper div opening.
@@ -41,7 +41,7 @@ do_action( 'masteriyo_before_main_content' );
 ?>
 <header class="masteriyo-courses-header">
 	<?php if ( apply_filters( 'masteriyo_show_page_title', true ) ) : ?>
-		<h1 class="masteriyo-course-list-header__title page-title">
+		<h1 class="masteriyo-courses-header__title page-title">
 			<?php masteriyo_page_title(); ?>
 		</h1>
 	<?php endif; ?>
@@ -118,4 +118,4 @@ do_action( 'masteriyo_sidebar' );
  */
 echo '</div>';
 
-get_footer( 'course-list' );
+get_footer( 'courses' );

@@ -55,7 +55,7 @@ const tabListStyles = {
 };
 
 //@ts-ignore
-const courseListSlug = window._MASTERIYO_.pageSlugs.courseList;
+const coursesSlug = window._MASTERIYO_.pageSlugs.courses;
 
 //@ts-ignore
 const homeURL = window._MASTERIYO_.home_url;
@@ -128,8 +128,8 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Select
 										placeholder={__('Select a Page', 'masteriyo')}
-										{...register('advance.pages.course_list_page_id')}
-										defaultValue={advanceData?.pages?.course_list_page_id}>
+										{...register('advance.pages.courses_page_id')}
+										defaultValue={advanceData?.pages?.courses_page_id}>
 										{renderPagesOption()}
 									</Select>
 								</FormControl>
@@ -318,9 +318,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 														</Code>
 													</Radio>
 													{/** TS */}
-													<Radio value={courseListSlug}>
+													<Radio value={coursesSlug}>
 														<Code>
-															{homeURL}/{courseListSlug}
+															{homeURL}/{coursesSlug}
 															{__('/sample-course', 'masteriyo')}
 														</Code>
 													</Radio>

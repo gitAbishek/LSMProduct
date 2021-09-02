@@ -464,8 +464,8 @@ class ScriptStyle {
 	 * @since 0.1.1
 	 */
 	public static function load_admin_localized_scripts() {
-		$course_list_page = get_post( masteriyo_get_page_id( 'course-list' ) );
-		$course_list_slug = ! is_null( $course_list_page ) ? $course_list_page->post_name : '';
+		$courses_page = get_post( masteriyo_get_page_id( 'courses' ) );
+		$courses_slug = ! is_null( $courses_page ) ? $courses_page->post_name : '';
 
 		$myaccount_page = get_post( masteriyo_get_page_id( 'myaccount' ) );
 		$myaccount_slug = ! is_null( $myaccount_page ) ? $myaccount_page->post_name : '';
@@ -483,7 +483,7 @@ class ScriptStyle {
 						'nonce'      => wp_create_nonce( 'wp_rest' ),
 						'home_url'   => home_url(),
 						'pageSlugs'  => array(
-							'courseList' => $course_list_slug,
+							'courses' => $courses_slug,
 							'myaccount'  => $myaccount_slug,
 							'checkout'   => $checkout_slug,
 						),

@@ -8,15 +8,11 @@ namespace Masteriyo\Providers;
 defined( 'ABSPATH' ) || exit;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use Masteriyo\Emails\BecomeInstructorEmail;
-use Masteriyo\Emails\CourseCompletedEmail;
-use Masteriyo\Emails\CourseEnrolledEmail;
 use Masteriyo\Emails\Email;
 use Masteriyo\Emails\NewOrderEmail;
 use Masteriyo\Emails\OrderCancelledEmail;
 use Masteriyo\Emails\OrderOnHoldEmail;
 use Masteriyo\Emails\OrderCompletedEmail;
-use Masteriyo\Emails\OrderProcessingEmail;
 use Masteriyo\Emails\ResetPasswordEmail;
 use Masteriyo\Emails\UserRegisteredEmail;
 
@@ -37,13 +33,9 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 		'email.new-user',
 		'email.password-reset',
 		'email.new-order',
-		'email.become-instructor',
-		'email.course-completed',
-		'email.course-enrolled',
 		'email.order-cancelled',
 		'email.order-onhold',
 		'email.order-completed',
-		'email.order-processing',
 		'\Masteriyo\Emails\Email',
 		'\Masteriyo\Emails\ResetPasswordEmail',
 	);
@@ -61,13 +53,9 @@ class EmailsServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'email.new-user', UserRegisteredEmail::class );
 		$this->getContainer()->add( 'email.password-reset', ResetPasswordEmail::class );
 		$this->getContainer()->add( 'email.new-order', NewOrderEmail::class );
-		$this->getContainer()->add( 'email.become-instructor', BecomeInstructorEmail::class );
-		$this->getContainer()->add( 'email.course-completed', CourseCompletedEmail::class );
-		$this->getContainer()->add( 'email.course-enrolled', CourseEnrolledEmail::class );
 		$this->getContainer()->add( 'email.order-cancelled', OrderCancelledEmail::class );
 		$this->getContainer()->add( 'email.order-onhold', OrderOnHoldEmail::class );
 		$this->getContainer()->add( 'email.order-completed', OrderCompletedEmail::class );
-		$this->getContainer()->add( 'email.order-processing', OrderProcessingEmail::class );
 
 		$this->getContainer()->add( '\Masteriyo\Emails\Email' );
 		$this->getContainer()->add( '\Masteriyo\Emails\ResetPasswordEmail' );

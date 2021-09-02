@@ -525,7 +525,7 @@ class Countries {
 						echo ' selected="selected"';
 					}
 
-					echo wp_kses_post( '>' . esc_html( $value ) . ' &mdash; ' . ( $escape ? esc_html( $state_value ) : $state_value ) . '</option>' );
+					echo '>' . esc_html( $value ) . ' &mdash; ' . ( $escape ? esc_html( $state_value ) : $state_value ) . '</option>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 				}
 				echo '</optgroup>';
@@ -534,7 +534,7 @@ class Countries {
 				if ( $selected_country === $key && '*' === $selected_state ) {
 					echo ' selected="selected"';
 				}
-				echo wp_kses_post( ' value="' . esc_attr( $key ) . '">' . ( $escape ? esc_html( $value ) : $value ) . '</option>' );
+				echo ' value="' . esc_attr( $key ) . '">' . ( $escape ? esc_html( $value ) : $value ) . '</option>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		}
 	}

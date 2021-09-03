@@ -299,6 +299,7 @@ export interface LessonSchema {
 	featured_image: number;
 	video_source: string;
 	video_source_url: string;
+	video_source_id: number;
 	video_playback_time: number;
 	course_name: string;
 }

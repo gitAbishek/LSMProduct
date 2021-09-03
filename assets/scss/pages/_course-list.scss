@@ -1,0 +1,67 @@
+// Course search bar.
+.masteriyo {
+	.masteriyo-search {
+		width: 100%;
+		position: relative;
+		margin-bottom: $spacing_64;
+
+		.search-field {
+			background: $masteriyo-white-color;
+			box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
+			border-radius: $border_radius_8;
+			height: 70px;
+			width: 100%;
+			font-weight: 400;
+			text-decoration: inherit;
+			border: 1px solid rgba($masteriyo-light-text-color, 0.2);
+			padding-left: 42px;
+
+			&:hover,
+			&:focus,
+			&:active {
+				background: $masteriyo-white-color;
+				border: 1px solid $masteriyo-btn-hover-blue;
+				transition: 0.5s ease;
+				@include masteriyo-shadow-2;
+			}
+		}
+
+		button {
+			position: absolute;
+			right: 0px;
+			top: 0px;
+			height: 72px;
+			background-color: $masteriyo-primary-color;
+			padding-left: 46px;
+			padding-right: 46px;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+			font-weight: bold;
+
+			&:hover {
+				background-color: $masteriyo-btn-hover-blue;
+			}
+		}
+	}
+
+	.masteriyo-course-search {
+		position: relative;
+
+		button {
+			border-top-right-radius: $border_radius_8;
+			border-bottom-right-radius: $border_radius_8;
+		}
+
+		&__icon {
+			position: absolute;
+			left: 14px;
+			top: 24px;
+			z-index: 1;
+
+			svg {
+				fill: inherit;
+			}
+		}
+	}
+}
+

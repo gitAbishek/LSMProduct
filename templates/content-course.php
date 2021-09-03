@@ -30,13 +30,13 @@ $categories = $course->get_categories( 'name' );
 
 ?>
 <div class="masteriyo-col">
-	<div class="mto-course-item--wrapper mto-course--card">
-		<div class="mto-course--img-wrap">
+	<div class="masteriyo-course-item--wrapper masteriyo-course--card">
+		<div class="masteriyo-course--img-wrap">
 		<a href="<?php echo esc_attr( $course->get_permalink() ); ?>">
 			<!-- Diffculty Badge -->
 			<?php if ( $difficulty ) : ?>
 			<div class="difficulty-badge">
-				<span class="mto-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
+				<span class="masteriyo-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
 			</div>
 			<?php endif; ?>
 
@@ -45,19 +45,19 @@ $categories = $course->get_categories( 'name' );
 		</a>
 		</div>
 
-		<div class="mto-course--content">
+		<div class="masteriyo-course--content">
 		<!-- Course category -->
 		<?php if ( ! empty( $categories ) ) : ?>
-			<div class="mto-course--content__category">
+			<div class="masteriyo-course--content__category">
 				<?php foreach ( $categories as $category ) : ?>
-				<a href="<?php echo esc_attr( $category->get_permalink() ); ?>" class="mto-course--content__category-items mto-tag">
+				<a href="<?php echo esc_attr( $category->get_permalink() ); ?>" class="masteriyo-course--content__category-items masteriyo-tag">
 					<?php echo esc_html( $category->get_name() ); ?>
 				</a>
 			<?php endforeach; ?>
 			</div>
 		<?php endif; ?>
 		<!-- Title of the course -->
-		<h2 class="mto-course--content__title">
+		<h2 class="masteriyo-course--content__title">
 			<?php
 			printf(
 				'<a href="%s" title="%s">%s</a>',
@@ -68,19 +68,19 @@ $categories = $course->get_categories( 'name' );
 			?>
 		</h2>
 		<!-- Course author and course rating -->
-		<div class="mto-course--content__rt">
-			<div class="mto-course-author">
+		<div class="masteriyo-course--content__rt">
+			<div class="masteriyo-course-author">
 			<?php if ( $author ) : ?>
 				<img src="<?php echo esc_attr( $author->get_avatar_url() ); ?>" alt="" srcset="">
-				<span class="mto-course-author--name"><?php echo esc_attr( $author->get_display_name() ); ?></span>
+				<span class="masteriyo-course-author--name"><?php echo esc_attr( $author->get_display_name() ); ?></span>
 			<?php endif; ?>
 			</div>
-			<span class="mto-icon-svg mto-rating">
+			<span class="masteriyo-icon-svg masteriyo-rating">
 			<?php masteriyo_format_rating( $course->get_average_rating(), true ); ?> <?php echo esc_html( masteriyo_format_decimal( $course->get_average_rating(), 1, true ) ); ?> (<?php echo esc_html( $course->get_rating_count() ); ?>)
 			</span>
 		</div>
 		<!-- Course description -->
-		<div class="mto-course--content__description">
+		<div class="masteriyo-course--content__description">
 			<?php if ( empty( $course->get_highlights() ) || empty( trim( wp_strip_all_tags( $course->get_highlights(), true ) ) ) ) : ?>
 				<?php echo wp_kses_post( $course->get_excerpt() ); ?>
 			<?php else : ?>
@@ -88,22 +88,22 @@ $categories = $course->get_categories( 'name' );
 			<?php endif; ?>
 		</div>
 		<!-- Four Column (Course duration, comments, student enrolled and curriculum) -->
-		<div class="mto-course--content__stats">
-			<div class="mto-course-stats-duration">
+		<div class="masteriyo-course--content__stats">
+			<div class="masteriyo-course-stats-duration">
 			<?php masteriyo_get_svg( 'time', true ); ?> <span><?php echo esc_html( masteriyo_minutes_to_time_length_string( $course->get_duration() ) ); ?></span>
 			</div>
-			<div class="mto-course-stats-students">
+			<div class="masteriyo-course-stats-students">
 			<?php masteriyo_get_svg( 'group', true ); ?> <span><?php echo esc_html( masteriyo_count_enrolled_users( $course->get_id() ) ); ?></span>
 			</div>
-			<div class="mto-course-stats-curriculum">
+			<div class="masteriyo-course-stats-curriculum">
 			<?php masteriyo_get_svg( 'book', true ); ?> <span><?php echo esc_html( masteriyo_get_lessons_count( $course ) ); ?></span>
 			</div>
 		</div>
 		<!-- Border -->
 		<hr class="masteriyo-border">
 		<!-- Price and Enroll Now Button -->
-		<div class="mto-time-btn">
-			<div class="mto-course-price">
+		<div class="masteriyo-time-btn">
+			<div class="masteriyo-course-price">
 			<span class="current-amount"><?php echo wp_kses_post( masteriyo_price( $course->get_price() ) ); ?></span>
 			</div>
 			<?php do_action( 'masteriyo_template_enroll_button', $course ); ?>

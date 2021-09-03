@@ -17,4 +17,4 @@
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<div class="mto-course columns-<?php echo esc_attr( masteriyo_get_loop_prop( 'columns' ) ); ?>">
+<div class="masteriyo-course columns-<?php echo esc_attr( masteriyo_get_loop_prop( 'columns' ) ); ?>">

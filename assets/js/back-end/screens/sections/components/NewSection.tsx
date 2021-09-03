@@ -13,7 +13,6 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
-import Editor from '../../../components/common/Editor';
 import urls from '../../../constants/urls';
 import { SectionSchema } from '../../../schemas';
 import API from '../../../utils/api';
@@ -76,12 +75,6 @@ const NewSection: React.FC<NewSectionProps> = (props) => {
 							{errors?.name && (
 								<FormErrorMessage>{errors?.name.message}</FormErrorMessage>
 							)}
-						</FormControl>
-						<FormControl>
-							<FormLabel htmlFor="">
-								{__('Section Description', 'masteriyo')}
-							</FormLabel>
-							<Editor name="description" willReset size="md" />
 						</FormControl>
 						<Divider />
 						<ButtonGroup>

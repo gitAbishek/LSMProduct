@@ -483,9 +483,9 @@ class ScriptStyle {
 						'nonce'      => wp_create_nonce( 'wp_rest' ),
 						'home_url'   => home_url(),
 						'pageSlugs'  => array(
-							'courses' => $courses_slug,
-							'myaccount'  => $myaccount_slug,
-							'checkout'   => $checkout_slug,
+							'courses'   => $courses_slug,
+							'myaccount' => $myaccount_slug,
+							'checkout'  => $checkout_slug,
 						),
 						'currency'   => array(
 							'code'     => masteriyo_get_currency(),
@@ -586,6 +586,7 @@ class ScriptStyle {
 						'urls'       => array(
 							'logout'    => wp_logout_url( get_home_url() ),
 							'myaccount' => masteriyo_get_page_permalink( 'myaccount' ),
+							'courses'   => masteriyo_get_page_permalink( 'courses' ),
 						),
 						'logo'       => masteriyo_get_custom_logo_data(),
 						'siteTitle'  => get_bloginfo( 'name' ),

@@ -1,27 +1,32 @@
 // Font size in rem
 @mixin masteriyo-fontsize($n) {
-    font-size: ($n / 16) + rem;
+	font-size: ($n / 16) + rem;
 }
+
+@function em_value($px, $fontSize) {
+	@return $px / ($fontSize * 10) + em;
+}
+
 // Border
 @mixin masteriyo-default-border($b: 1) {
-    border: ($b) + px solid $masteriyo-border-color;
+	border: ($b) + px solid $masteriyo-border-color;
 }
 @mixin masteriyo-border-radius() {
-    border-radius: 4px;
+	border-radius: 4px;
 }
 // Shadow
 @mixin masteriyo-shadow-1() {
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 @mixin masteriyo-shadow-2() {
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.06);
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.06);
 }
 
 // Animation / Transition
 @mixin masteriyo-animate($property, $duration, $easing) {
-    transition: $property $duration $easing;
+	transition: $property $duration $easing;
 }
 @mixin masteriyo-default-animate($property: all, $duration: 0.15s, $easing: ease-in-out) {
-    transition: $property $duration $easing;
+	transition: $property $duration $easing;
 }

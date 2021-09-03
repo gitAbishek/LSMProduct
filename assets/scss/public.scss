@@ -1,8 +1,9 @@
-// Varibale
-@import "variable/colors";
-
 // Utility
 @import "utility/mixins";
+
+// Varibale
+@import "variable/colors";
+@import "variable/structure";
 
 // Base
 @import "base/base";

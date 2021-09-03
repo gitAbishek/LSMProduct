@@ -209,6 +209,7 @@ const EditLesson = () => {
 											<VideoSource
 												defaultSource={lessonQuery.data.video_source}
 												defaultSourceUrl={lessonQuery.data.video_source_url}
+												defaultSourceID={lessonQuery.data.video_source_id}
 											/>
 											<Box py="3">
 												<Divider />

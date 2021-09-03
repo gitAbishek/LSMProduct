@@ -1,6 +1,6 @@
-.mto-edt-myaccount {
+.masteriyo-edt-myaccount {
   &--tab-menu {
-    border-bottom: 1px solid $mto-border-color;
+    border-bottom: 1px solid $masteriyo-border-color;
     padding: 20px 0;
     margin-bottom: 40px;
     font-weight: 700;
@@ -10,18 +10,18 @@
       cursor: pointer;
     }
 
-    .mto-active-tab {
-      color: $mto-primary-color;
+    .masteriyo-active-tab {
+      color: $masteriyo-primary-color;
     }
   }
 
   // Edit Profile.
-  .mto-edt-profile--wrap {
+  .masteriyo-edt-profile--wrap {
     position: relative;
   }
 
-  .mto-svg-icon svg {
-    background: $mto-primary-color;
+  .masteriyo-svg-icon svg {
+    background: $masteriyo-primary-color;
     width: 32px;
     height: 32px;
     position: absolute;
@@ -34,9 +34,9 @@
     z-index: 9;
   }
 
-  .mto-edt-myaccount--img {
+  .masteriyo-edt-myaccount--img {
     border-radius: 100px;
-    @include mto-shadow-1;
+    @include masteriyo-shadow-1;
   }
 
   //Form.
@@ -47,20 +47,20 @@
     gap: 30px;
   }
 
-  .mto-col-2 {
+  .masteriyo-col-2 {
     gap: 30px;
     & > * {
       flex: 1;
     }
   }
 }
-.mto-pwd-security--btn,
-.mto-edt-myaccount--btn {
+.masteriyo-pwd-security--btn,
+.masteriyo-edt-myaccount--btn {
   border-radius: 100px;
 }
 
 // Password and security.
-.mto-pwd-security {
+.masteriyo-pwd-security {
   &--form {
     display: flex;
     flex-direction: column;

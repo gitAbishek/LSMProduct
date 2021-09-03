@@ -19,9 +19,9 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 do_action( 'masteriyo_before_single_course_categories' );
 
 ?>
-<div class="mto-course--content__category">
+<div class="masteriyo-course--content__category">
 	<?php foreach ( $course->get_categories( 'name' ) as $category ) : ?>
-		<a href="<?php echo esc_attr( $category->get_permalink() ); ?>" class="mto-course--content__category-items mto-tag">
+		<a href="<?php echo esc_attr( $category->get_permalink() ); ?>" class="masteriyo-course--content__category-items masteriyo-tag">
 			<?php echo esc_html( $category->get_name() ); ?>
 		</a>
 	<?php endforeach; ?>

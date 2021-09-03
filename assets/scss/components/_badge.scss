@@ -1,24 +1,23 @@
-
 // Badge
-.mto-badge {
+.masteriyo-badge {
 	padding: 8px 14px;
 	font-size: 12px;
 	border-radius: 100px;
-	color: $mto-white-color;
+	color: $masteriyo-white-color;
 
-	&.mto-badge-red {
-		background: $mto-badge-red;
+	&.masteriyo-badge-red {
+		background: $masteriyo-badge-red;
 	}
-	&.mto-badge-green {
-		background: $mto-badge-green;
+	&.masteriyo-badge-green {
+		background: $masteriyo-badge-green;
 	}
-	&.mto-badge-blue {
-		background: $mto-badge-blue;
+	&.masteriyo-badge-blue {
+		background: $masteriyo-badge-blue;
 	}
-	&.mto-badge-yellow {
-		background: $mto-warning-color;
+	&.masteriyo-badge-yellow {
+		background: $masteriyo-warning-color;
 	}
-	&.mto-badge-pink {
-		background: $mto-badge-pink;
+	&.masteriyo-badge-pink {
+		background: $masteriyo-badge-pink;
 	}
 }

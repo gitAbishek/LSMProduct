@@ -21,8 +21,8 @@ global $course;
 do_action( 'masteriyo_before_single_course_price_and_enroll_button' );
 
 ?>
-<div class="mto-time-btn">
-	<div class="mto-course-price">
+<div class="masteriyo-time-btn">
+	<div class="masteriyo-course-price">
 		<span class="current-amount"><?php echo wp_kses_post( masteriyo_price( $course->get_price() ) ); ?></span>
 	</div>
 	<?php do_action( 'masteriyo_template_enroll_button', $course ); ?>

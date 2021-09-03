@@ -14,11 +14,11 @@ do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 
 ?>
 
-<div class="mto-sidebar-wrapper">
-	<div class="mto-profile">
-		<img class="mto-profile--img" src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" alt="" />
-		<div class="mto-profile--details">
-			<div class="mto-profile--name">
+<div class="masteriyo-sidebar-wrapper">
+	<div class="masteriyo-profile">
+		<img class="masteriyo-profile--img" src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" alt="" />
+		<div class="masteriyo-profile--details">
+			<div class="masteriyo-profile--name">
 				<a
 					id="label-username"
 					href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'view-myaccount' ) ); ?>"
@@ -31,7 +31,7 @@ do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 			</div>
 		</div>
 	</div>
-	<nav class="mto-menu">
+	<nav class="masteriyo-menu">
 	<ul>
 			<?php foreach ( $menu_items as $slug => $endpoint ) : ?>
 				<li class="<?php echo esc_attr( $slug === $current_endpoint['endpoint'] ? 'active' : '' ); ?>">

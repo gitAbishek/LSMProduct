@@ -189,7 +189,7 @@ class OrderItemRepository extends AbstractRepository {
 		$order_items = array();
 		$order       = get_post( $order_id );
 
-		if ( is_null( $order ) || 'mto-order' !== $order->post_type ) {
+		if ( is_null( $order ) || 'masteriyo-order' !== $order->post_type ) {
 			return $order_items;
 		}
 

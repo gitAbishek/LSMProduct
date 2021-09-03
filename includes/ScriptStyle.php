@@ -548,7 +548,7 @@ class ScriptStyle {
 					'data' => array(
 						'rootApiUrl'              => esc_url_raw( rest_url() ),
 						'nonce'                   => wp_create_nonce( 'wp_rest' ),
-						'rating_indicator_markup' => masteriyo_get_rating_indicators_markup( 'mto-rating-input-icon' ),
+						'rating_indicator_markup' => masteriyo_get_rating_indicators_markup( 'masteriyo-rating-input-icon' ),
 						'max_course_rating'       => masteriyo_get_max_course_rating(),
 						'labels'                  => array(
 							'type_confirm'   => __( 'Type CONFIRM to proceed', 'masteriyo' ),
@@ -571,10 +571,10 @@ class ScriptStyle {
 					'name' => 'mto_checkout_params',
 					'data' => array(
 						'ajax_url'            => admin_url( 'admin-ajax.php' ),
-						'checkout_url'        => '/?mto-ajax=checkout',
+						'checkout_url'        => '/?masteriyo-ajax=checkout',
 						'i18n_checkout_error' => esc_html__( 'Error processing checkout. Please try again.', 'masteriyo' ),
 						'is_checkout'         => true,
-						'mto_ajax_url'        => '/?mto-ajax=%%endpoint%%',
+						'mto_ajax_url'        => '/?masteriyo-ajax=%%endpoint%%',
 					),
 				),
 				'learn'         => array(

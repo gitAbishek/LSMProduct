@@ -14,99 +14,99 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 
 ?>
 
-<div class="mto-edt-myaccount mto-tabs">
+<div class="masteriyo-edt-myaccount masteriyo-tabs">
 
-	<div class="mto-edt-myaccount--tab-menu mto-flex">
-		<div data-tab="edit-profile-tab" class="mto-tab mto-active-tab"><?php echo esc_html__( 'Edit Profile', 'masteriyo' ); ?></div>
-		<div data-tab="password-security-tab" class="mto-tab"><?php echo esc_html__( 'Password & Security', 'masteriyo' ); ?></div>
+	<div class="masteriyo-edt-myaccount--tab-menu masteriyo-flex">
+		<div data-tab="edit-profile-tab" class="masteriyo-tab masteriyo-active-tab"><?php echo esc_html__( 'Edit Profile', 'masteriyo' ); ?></div>
+		<div data-tab="password-security-tab" class="masteriyo-tab"><?php echo esc_html__( 'Password & Security', 'masteriyo' ); ?></div>
 	</div>
 
-	<div id="edit-profile-tab" class="mto-edt-myaccount--content mto-tab-content">
-		<div class="mto-edt-profile mto-flex mto-flex-xcenter">
-			<div class="mto-edt-profile--wrap">
-				<img src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" class="mto-edt-myaccount--img" alt="">
+	<div id="edit-profile-tab" class="masteriyo-edt-myaccount--content masteriyo-tab-content">
+		<div class="masteriyo-edt-profile masteriyo-flex masteriyo-flex-xcenter">
+			<div class="masteriyo-edt-profile--wrap">
+				<img src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" class="masteriyo-edt-myaccount--img" alt="">
 			</div>
 		</div>
 
-		<form id="mto-edit-profile-form" class="mto-edt-myaccount--form">
-				<div class="mto-username">
-					<label for="user-email" class="mto-label"><?php echo esc_html__( 'Username', 'masteriyo' ); ?></label>
-					<input value="<?php echo esc_attr( $user->get_display_name() ); ?>" id="username" name="text" type="text" required class="mto-input" placeholder="">
+		<form id="masteriyo-edit-profile-form" class="masteriyo-edt-myaccount--form">
+				<div class="masteriyo-username">
+					<label for="user-email" class="masteriyo-label"><?php echo esc_html__( 'Username', 'masteriyo' ); ?></label>
+					<input value="<?php echo esc_attr( $user->get_display_name() ); ?>" id="username" name="text" type="text" required class="masteriyo-input" placeholder="">
 				</div>
 
-				<div class="mto-fname-lname mto-col-2 mto-flex">
-					<div class="mto-fname">
-						<label for="user-first-name" class="mto-label"><?php echo esc_html__( 'First Name', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_first_name() ); ?>" id="user-first-name" name="text" type="text" class="mto-input" placeholder="">
+				<div class="masteriyo-fname-lname masteriyo-col-2 masteriyo-flex">
+					<div class="masteriyo-fname">
+						<label for="user-first-name" class="masteriyo-label"><?php echo esc_html__( 'First Name', 'masteriyo' ); ?></label>
+						<input value="<?php echo esc_attr( $user->get_first_name() ); ?>" id="user-first-name" name="text" type="text" class="masteriyo-input" placeholder="">
 					</div>
 
-					<div class="mto-lname">
-						<label for="user-last-name" class="mto-label"><?php echo esc_html__( 'Last Name', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_last_name() ); ?>" id="user-last-name" name="text" type="text" class="mto-input" placeholder="">
-					</div>
-				</div>
-
-				<div class="mto-email">
-					<label for="user-email" class="mto-label"><?php echo esc_html__( 'Email', 'masteriyo' ); ?></label>
-					<input value="<?php echo esc_attr( $user->get_email() ); ?>" id="user-email" name="text" type="email" required class="mto-input" placeholder="">
-				</div>
-
-				<div class="mto-address">
-					<label for="user-address" class="mto-label"><?php echo esc_html__( 'Address', 'masteriyo' ); ?></label>
-					<input value="<?php echo esc_attr( $user->get_billing_address() ); ?>" id="user-address" name="text" type="text" class="mto-input" placeholder="">
-				</div>
-
-				<div class="mto-city-state mto-col-2 mto-flex">
-					<div class="mto-city">
-						<label for="user-city" class="mto-label"><?php echo esc_html__( 'City', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_billing_city() ); ?>" id="user-city" name="text" type="text" class="mto-input" placeholder="">
-					</div>
-
-					<div class="mto-state">
-						<label for="user-state" class="mto-label"><?php echo esc_html__( 'State', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_billing_state() ); ?>" id="user-state" name="text" type="text" class="mto-input" placeholder="">
+					<div class="masteriyo-lname">
+						<label for="user-last-name" class="masteriyo-label"><?php echo esc_html__( 'Last Name', 'masteriyo' ); ?></label>
+						<input value="<?php echo esc_attr( $user->get_last_name() ); ?>" id="user-last-name" name="text" type="text" class="masteriyo-input" placeholder="">
 					</div>
 				</div>
 
-				<div class="mto-zip-country mto-col-2 mto-flex">
-					<div class="mto-zip">
-						<label for="user-zip-code" class="mto-label"><?php echo esc_html__( 'Zip Code', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_billing_postcode() ); ?>" id="user-zip-code" name="text" type="text" class="mto-input" placeholder="">
+				<div class="masteriyo-email">
+					<label for="user-email" class="masteriyo-label"><?php echo esc_html__( 'Email', 'masteriyo' ); ?></label>
+					<input value="<?php echo esc_attr( $user->get_email() ); ?>" id="user-email" name="text" type="email" required class="masteriyo-input" placeholder="">
+				</div>
+
+				<div class="masteriyo-address">
+					<label for="user-address" class="masteriyo-label"><?php echo esc_html__( 'Address', 'masteriyo' ); ?></label>
+					<input value="<?php echo esc_attr( $user->get_billing_address() ); ?>" id="user-address" name="text" type="text" class="masteriyo-input" placeholder="">
+				</div>
+
+				<div class="masteriyo-city-state masteriyo-col-2 masteriyo-flex">
+					<div class="masteriyo-city">
+						<label for="user-city" class="masteriyo-label"><?php echo esc_html__( 'City', 'masteriyo' ); ?></label>
+						<input value="<?php echo esc_attr( $user->get_billing_city() ); ?>" id="user-city" name="text" type="text" class="masteriyo-input" placeholder="">
 					</div>
 
-					<div class="mto-country">
-						<label for="user-country" class="mto-label"><?php echo esc_html__( 'Country', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_billing_country() ); ?>" id="user-country" name="text" type="text" class="mto-input" placeholder="">
+					<div class="masteriyo-state">
+						<label for="user-state" class="masteriyo-label"><?php echo esc_html__( 'State', 'masteriyo' ); ?></label>
+						<input value="<?php echo esc_attr( $user->get_billing_state() ); ?>" id="user-state" name="text" type="text" class="masteriyo-input" placeholder="">
 					</div>
 				</div>
 
-				<div class="mto-submit-btn">
-					<button id="mto-btn-submit-edit-profile-form" type="submit" class="mto-edt-myaccount--btn mto-btn mto-btn-primary">
+				<div class="masteriyo-zip-country masteriyo-col-2 masteriyo-flex">
+					<div class="masteriyo-zip">
+						<label for="user-zip-code" class="masteriyo-label"><?php echo esc_html__( 'Zip Code', 'masteriyo' ); ?></label>
+						<input value="<?php echo esc_attr( $user->get_billing_postcode() ); ?>" id="user-zip-code" name="text" type="text" class="masteriyo-input" placeholder="">
+					</div>
+
+					<div class="masteriyo-country">
+						<label for="user-country" class="masteriyo-label"><?php echo esc_html__( 'Country', 'masteriyo' ); ?></label>
+						<input value="<?php echo esc_attr( $user->get_billing_country() ); ?>" id="user-country" name="text" type="text" class="masteriyo-input" placeholder="">
+					</div>
+				</div>
+
+				<div class="masteriyo-submit-btn">
+					<button id="masteriyo-btn-submit-edit-profile-form" type="submit" class="masteriyo-edt-myaccount--btn masteriyo-btn masteriyo-btn-primary">
 						<?php echo esc_html__( 'Save', 'masteriyo' ); ?>
 					</button>
 				</div>
 		</form>
 	</div>
-	<div id="password-security-tab" class="mto-pwd-security mto-tab-content masteriyo-hidden">
-			<h3 class="mto-pwd-security--title"><?php echo esc_html__( 'Change Password', 'masteriyo' ); ?></h3>
+	<div id="password-security-tab" class="masteriyo-pwd-security masteriyo-tab-content masteriyo-hidden">
+			<h3 class="masteriyo-pwd-security--title"><?php echo esc_html__( 'Change Password', 'masteriyo' ); ?></h3>
 
-			<form class="mto-pwd-security--form" method="POST">
-				<div class="mto-cr-pwd">
-					<label for="current_password" class="mto-label"><?php echo esc_html__( 'Current Password', 'masteriyo' ); ?></label>
-					<input id="current_password" name="current_password" type="password" required class="mto-input" placeholder="">
+			<form class="masteriyo-pwd-security--form" method="POST">
+				<div class="masteriyo-cr-pwd">
+					<label for="current_password" class="masteriyo-label"><?php echo esc_html__( 'Current Password', 'masteriyo' ); ?></label>
+					<input id="current_password" name="current_password" type="password" required class="masteriyo-input" placeholder="">
 				</div>
 
-				<div class="mto-nw-pwd password_1">
-					<label for="password_1" class="mto-label"><?php echo esc_html__( 'New Password', 'masteriyo' ); ?></label>
-					<input id="password_1" name="password_1" type="password" required autocomplete="new-password" class="mto-input" placeholder="">
+				<div class="masteriyo-nw-pwd password_1">
+					<label for="password_1" class="masteriyo-label"><?php echo esc_html__( 'New Password', 'masteriyo' ); ?></label>
+					<input id="password_1" name="password_1" type="password" required autocomplete="new-password" class="masteriyo-input" placeholder="">
 				</div>
 
-				<div class="mto-cf-pwd password_2">
-					<label for="password_2" class="mto-label"><?php echo esc_html__( 'Confirm Password', 'masteriyo' ); ?></label>
-					<input id="password_2" name="password_2" type="password" required autocomplete="new-password" class="mto-input" placeholder="">
+				<div class="masteriyo-cf-pwd password_2">
+					<label for="password_2" class="masteriyo-label"><?php echo esc_html__( 'Confirm Password', 'masteriyo' ); ?></label>
+					<input id="password_2" name="password_2" type="password" required autocomplete="new-password" class="masteriyo-input" placeholder="">
 				</div>
-				<div class="mto-cpwd-btn">
-					<button type="submit" name="masteriyo-change-password" value="yes" class="mto-pwd-security--btn mto-btn mto-btn-primary">
+				<div class="masteriyo-cpwd-btn">
+					<button type="submit" name="masteriyo-change-password" value="yes" class="masteriyo-pwd-security--btn masteriyo-btn masteriyo-btn-primary">
 						<?php echo esc_html__( 'Change Password', 'masteriyo' ); ?>
 					</button>
 				</div>

@@ -11,11 +11,11 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 
-<div class="mto-checkout-summary-your-order">
-	<h2 class="mto-checkout-summary--title">
+<div class="masteriyo-checkout-summary-your-order">
+	<h2 class="masteriyo-checkout-summary--title">
 		<?php esc_html_e( 'Your Order', 'masteriyo' ); ?>
 	</h2>
-	<ul class="mto-checkout-summary-order-details">
+	<ul class="masteriyo-checkout-summary-order-details">
 		<li class="h-border">
 				<strong><?php esc_html_e( 'Courses', 'masteriyo' ); ?></strong>
 				<strong><?php esc_html_e( 'Subtotal', 'masteriyo' ); ?></strong>

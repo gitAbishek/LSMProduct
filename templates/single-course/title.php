@@ -18,6 +18,6 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 
-<h2 class="mto-single-course--title"><?php echo esc_html( $course->get_title() ); ?></h2>
+<h2 class="masteriyo-single-course--title"><?php echo esc_html( $course->get_title() ); ?></h2>
 
 <?php

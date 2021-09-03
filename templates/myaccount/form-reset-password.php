@@ -20,29 +20,29 @@ do_action( 'masteriyo_before_password_reset_form' );
 
 ?>
 
-<section class="mto-reset">
-		<div class="mto-reset--wrapper mto-form-container">
-			<h3 class="mto-reset--title"><?php echo esc_html__( 'New password', 'masteriyo' ); ?></h3>
-			<p class="mto-reset--msg"><?php echo esc_html( apply_filters( 'masteriyo_reset_password_message', __( 'Enter a new password below.', 'masteriyo' ) ) ); ?></p>
+<section class="masteriyo-reset">
+		<div class="masteriyo-reset--wrapper masteriyo-form-container">
+			<h3 class="masteriyo-reset--title"><?php echo esc_html__( 'New password', 'masteriyo' ); ?></h3>
+			<p class="masteriyo-reset--msg"><?php echo esc_html( apply_filters( 'masteriyo_reset_password_message', __( 'Enter a new password below.', 'masteriyo' ) ) ); ?></p>
 
-			<form id="mto-reset--form" class="mto-reset--form" method="post">
+			<form id="masteriyo-reset--form" class="masteriyo-reset--form" method="post">
 				<input type="hidden" name="remember" value="true">
-					<div class="mto-username">
-						<label for="password" class="mto-label"><?php echo esc_html__( 'New password', 'masteriyo' ); ?><span class="mto-text-red">*</span></label>
-						<input id="password" class="mto-input" name="password" type="password" required autocomplete="new-password" >
+					<div class="masteriyo-username">
+						<label for="password" class="masteriyo-label"><?php echo esc_html__( 'New password', 'masteriyo' ); ?><span class="masteriyo-text-red">*</span></label>
+						<input id="password" class="masteriyo-input" name="password" type="password" required autocomplete="new-password" >
 					</div>
-					<div class="mto-password">
-						<label for="confirm-password" class="mto-label"><?php echo esc_html__( 'Re-enter new password', 'masteriyo' ); ?><span class="mto-text-red">*</span></label>
-						<input id="confirm-password" class="mto-input" name="confirm-password" type="password" required autocomplete="new-password" >
+					<div class="masteriyo-password">
+						<label for="confirm-password" class="masteriyo-label"><?php echo esc_html__( 'Re-enter new password', 'masteriyo' ); ?><span class="masteriyo-text-red">*</span></label>
+						<input id="confirm-password" class="masteriyo-input" name="confirm-password" type="password" required autocomplete="new-password" >
 					</div>
 
-				<div class="mto-btn-wrapper">
-					<button type="submit" name="masteriyo-password-reset" value="yes" class="mto-reset-btn mto-btn mto-primary">
+				<div class="masteriyo-btn-wrapper">
+					<button type="submit" name="masteriyo-password-reset" value="yes" class="masteriyo-reset-btn masteriyo-btn masteriyo-primary">
 						<?php echo esc_html__( 'Reset', 'masteriyo' ); ?>
 					</button>
 
-					<div class="mto-reset-signin">
-						<a href="<?php echo esc_url( masteriyo_get_page_permalink( 'myaccount' ) ); ?>" class="mto-link-primary">
+					<div class="masteriyo-reset-signin">
+						<a href="<?php echo esc_url( masteriyo_get_page_permalink( 'myaccount' ) ); ?>" class="masteriyo-link-primary">
 							<?php echo esc_html__( 'Go back to sign-in', 'masteriyo' ); ?>
 						</a>
 					</div>

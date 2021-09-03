@@ -35,14 +35,14 @@ $difficulty = $course->get_difficulty();
 ?>
 <?php masteriyo_display_all_notices(); ?>
 
-<div id="course-<?php the_ID(); ?>" class="mto-single-course">
+<div id="course-<?php the_ID(); ?>" class="masteriyo-single-course">
 	<div class="masteriyo-col-8">
-		<div class="mto-single-course--main mto-course--content">
-		<div class="mto-course--img-wrap">
+		<div class="masteriyo-single-course--main masteriyo-course--content">
+		<div class="masteriyo-course--img-wrap">
 			<!-- Diffculty Badge -->
 			<?php if ( $difficulty ) : ?>
 			<div class="difficulty-badge">
-				<span class="mto-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
+				<span class="masteriyo-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
 			</div>
 			<?php endif; ?>
 
@@ -64,7 +64,7 @@ $difficulty = $course->get_difficulty();
 	</div>
 
 	<div class="masteriyo-col-4">
-		<aside class="mto-single-course--aside mto-course--content">
+		<aside class="masteriyo-single-course--aside masteriyo-course--content">
 			<!-- Price and Enroll Now Button -->
 			<?php do_action( 'masteriyo_single_course_price_and_enroll_button' ); ?>
 			<hr class="masteriyo-border">

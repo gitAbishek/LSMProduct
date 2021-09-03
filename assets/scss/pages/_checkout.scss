@@ -1,89 +1,89 @@
-.mto-checkout {
-  .mto-col-2 {
-    gap: 30px;
-    & > * {
-      flex: 1 1 47%;
-    }
-  }
+.masteriyo-checkout {
+	.masteriyo-col-2 {
+		gap: 30px;
+		& > * {
+			flex: 1 1 47%;
+		}
+	}
 
-  &--title,
-  &-summary--title {
-    margin-bottom: 10px;
-    font-size: 24px;
-  }
+	&--title,
+	&-summary--title {
+		margin-bottom: 10px;
+		font-size: 24px;
+	}
 
-  &-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
+	&-wrapper {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 30px;
+	}
 
-  &---fname-lname-wrapper {
-    display: flex;
-    flex-direction: row;
-    column-gap: 30px;
-  }
-  &----street > input {
-    margin-bottom: 12px;
-  }
+	&---fname-lname-wrapper {
+		display: flex;
+		flex-direction: row;
+		column-gap: 30px;
+	}
+	&----street > input {
+		margin-bottom: 12px;
+	}
 
-  &-main {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 60%;
-    gap: 30px;
-    @include mto-shadow-2();
-    padding: 44px;
-    background: $mto-white-color;
-  }
+	&-main {
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 60%;
+		gap: 30px;
+		@include masteriyo-shadow-2();
+		padding: 44px;
+		background: $masteriyo-white-color;
+	}
 
-  // Your order.
-  &-summary {
-    flex: 1 1 35%;
+	// Your order.
+	&-summary {
+		flex: 1 1 35%;
 
-    &-your-order {
-      @include mto-shadow-2();
-      padding: 44px;
-      margin-bottom: 30px;
-      background: $mto-white-color;
+		&-your-order {
+			@include masteriyo-shadow-2();
+			padding: 44px;
+			margin-bottom: 30px;
+			background: $masteriyo-white-color;
 
-      ul {
-        margin: 0;
-      }
-      ul li {
-        list-style-type: none;
-        border-bottom: 1px solid $mto-border-color;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 10px 0px;
+			ul {
+				margin: 0;
+			}
+			ul li {
+				list-style-type: none;
+				border-bottom: 1px solid $masteriyo-border-color;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				padding: 10px 0px;
 
-        &.h-border {
-          border-bottom: 1px solid black;
-        }
+				&.h-border {
+					border-bottom: 1px solid black;
+				}
 
-        &:last-of-type {
-          border-bottom: none;
-        }
-      }
-    }
-  }
+				&:last-of-type {
+					border-bottom: none;
+				}
+			}
+		}
+	}
 
-  //Payment method.
-  &-summary-payment-method {
-    @include mto-shadow-2();
-    padding: 32px 44px;
-    margin-bottom: 30px;
-  }
-  &-summary-paypal {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: $mto-white-color;
-  }
-  &--btn {
-    width: 100%;
-  }
+	//Payment method.
+	&-summary-payment-method {
+		@include masteriyo-shadow-2();
+		padding: 32px 44px;
+		margin-bottom: 30px;
+	}
+	&-summary-paypal {
+		margin-bottom: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background: $masteriyo-white-color;
+	}
+	&--btn {
+		width: 100%;
+	}
 }

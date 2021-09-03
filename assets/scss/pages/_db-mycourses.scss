@@ -1,10 +1,10 @@
-.mto-mycourses {
+.masteriyo-mycourses {
   &--title {
     margin-bottom: 30px;
   }
 }
 // Courses list
-.mto-mycourses {
+.masteriyo-mycourses {
   &--list {
     display: flex;
     flex-direction: row;
@@ -14,8 +14,8 @@
   }
 
   &--card {
-    @include mto-default-border;
-    background: $mto-white-color;
+    @include masteriyo-default-border;
+    background: $masteriyo-white-color;
     margin: 15px 15px 30px 15px;
     flex-basis: calc((100% / 3) - 30px);
     max-width: 256px;
@@ -31,7 +31,7 @@
 
   // Course header
   &--header {
-    .mto-icon-svg > svg {
+    .masteriyo-icon-svg > svg {
       width: 18px;
       height: 18px;
     }
@@ -63,18 +63,18 @@
 
   // Course list body
   &--body {
-    .mto-time-wrap {
+    .masteriyo-time-wrap {
       display: flex;
       align-items: center;
       gap: 4px;
 
-      .mto-icon-svg > svg {
+      .masteriyo-icon-svg > svg {
         width: 16px;
         height: 16px;
       }
     }
   }
-  .mto-pbar {
+  .masteriyo-pbar {
     margin-top: 10px;
   }
 
@@ -87,39 +87,39 @@
 }
 
 // My certificates
-.mto-mycertificates {
+.masteriyo-mycertificates {
   &--list {
     margin-bottom: 40px;
   }
 
   &--list-wrap > li {
     padding: 16px 0;
-    border-bottom: 1px solid $mto-border-color;
+    border-bottom: 1px solid $masteriyo-border-color;
     &:last-of-type {
       border-bottom: none;
     }
   }
 
-  .mto-list-header {
+  .masteriyo-list-header {
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
   }
 
-  .mto-c-img {
+  .masteriyo-c-img {
     width: 40px;
     height: 40px;
-    @include mto-border-radius;
+    @include masteriyo-border-radius;
   }
 
-  .mto-c-title {
+  .masteriyo-c-title {
     margin-left: 16px;
     margin-bottom: inherit;
     font-size: 16px;
     font-weight: 700;
   }
 
-  .mto-c-btn {
+  .masteriyo-c-btn {
     border-radius: 100px;
   }
 }

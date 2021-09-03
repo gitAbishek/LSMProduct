@@ -15,11 +15,11 @@ do_action( 'masteriyo_before_add_to_cart_button' );
 
 ?>
 <?php if ( masteriyo_can_start_course( $course ) ) : ?>
-	<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="mto-btn mto-btn-primary mto-single-course--btn mb-0">
+	<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="masteriyo-btn masteriyo-btn-primary masteriyo-single-course--btn mb-0">
 		<?php echo esc_html( $course->single_course_start_text() ); ?>
 	</a>
 <?php else : ?>
-	<a href="<?php echo esc_url( $course->add_to_cart_url() ); ?>" class="mto-course--btn mto-btn mto-btn-primary">
+	<a href="<?php echo esc_url( $course->add_to_cart_url() ); ?>" class="masteriyo-course--btn masteriyo-btn masteriyo-btn-primary">
 		<?php apply_filters( 'masteriyo_add_to_cart_text', esc_html_e( 'Add to cart', 'masteriyo' ) ); ?>
 	</a>
 <?php endif; ?>

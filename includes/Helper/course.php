@@ -214,11 +214,11 @@ function masteriyo_count_course_comments( $course ) {
  */
 function masteriyo_get_difficulty_badge_css_class( $difficulty ) {
 	$classes     = array(
-		'beginner'     => 'mto-badge-green',
-		'intermediate' => 'mto-badge-yellow',
-		'expert'       => 'mto-badge-pink',
+		'beginner'     => 'masteriyo-badge-green',
+		'intermediate' => 'masteriyo-badge-yellow',
+		'expert'       => 'masteriyo-badge-pink',
 	);
-	$badge_class = 'mto-badge-green';
+	$badge_class = 'masteriyo-badge-green';
 
 	if ( isset( $classes[ $difficulty ] ) ) {
 		$badge_class = $classes[ $difficulty ];

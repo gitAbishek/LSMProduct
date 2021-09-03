@@ -11,51 +11,51 @@ defined( 'ABSPATH' ) || exit;
 do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 ?>
 
-<div class="mto-mycourses">
-	<h2 class="mto-mycourses--title"><?php esc_html_e( 'Active Courses', 'masteriyo' ); ?></h2>
+<div class="masteriyo-mycourses">
+	<h2 class="masteriyo-mycourses--title"><?php esc_html_e( 'Active Courses', 'masteriyo' ); ?></h2>
 	<?php if ( count( $active_courses ) > 0 ) : ?>
-		<div class="mto-mycourses--list">
+		<div class="masteriyo-mycourses--list">
 			<?php foreach ( $active_courses as $active_course ) : ?>
-				<div class="mto-mycourses--card">
+				<div class="masteriyo-mycourses--card">
 					<a href="<?php echo esc_url( $active_course->get_permalink() ); ?>" title="<?php echo esc_attr( $active_course->get_name() ); ?>">
-						<div class="mto-mycourses--thumbnail">
+						<div class="masteriyo-mycourses--thumbnail">
 							<?php echo wp_kses_post( $active_course->get_image( 'masteriyo_thumbnail' ) ); ?>
 						</div>
 					</a>
-					<div class="mto-mycourses--detail">
-						<div class="mto-mycourses--header">
-							<div class="mto-mycourses--rt">
-								<span class="mto-mycourses--rating mto-icon-svg">
+					<div class="masteriyo-mycourses--detail">
+						<div class="masteriyo-mycourses--header">
+							<div class="masteriyo-mycourses--rt">
+								<span class="masteriyo-mycourses--rating masteriyo-icon-svg">
 									<?php masteriyo_render_stars( $active_course->get_average_rating() ); ?>
 								</span>
 
 								<?php foreach ( $active_course->get_categories() as $category ) : ?>
 									<a href="<?php echo esc_url( $category->get_permalink() ); ?>" alt="<?php echo esc_attr( $category->get_name() ); ?>">
-										<span class="mto-badge mto-badge-pink mto-mycourses--tag ">
+										<span class="masteriyo-badge masteriyo-badge-pink masteriyo-mycourses--tag ">
 											<?php echo esc_html( $category->get_name() ); ?>
 										</span>
 									</a>
 								<?php endforeach; ?>
 							</div>
 							<a href="<?php echo esc_url( $active_course->get_permalink() ); ?>" title="<?php echo esc_attr( $active_course->get_name() ); ?>">
-								<h3 class="mto-mycourses--header--title">
+								<h3 class="masteriyo-mycourses--header--title">
 									<?php echo esc_html( $active_course->get_name() ); ?>
 								</h3>
 							</a>
 						</div>
-						<div class="mto-mycourses--body">
-							<div class="mto-mycourses--body--duration mto-flex mto-flex--space-between">
-								<div class="mto-time-wrap">
-									<span class="mto-icon-svg">
+						<div class="masteriyo-mycourses--body">
+							<div class="masteriyo-mycourses--body--duration masteriyo-flex masteriyo-flex--space-between">
+								<div class="masteriyo-time-wrap">
+									<span class="masteriyo-icon-svg">
 										<?php masteriyo_get_svg( 'clock', true ); ?>
 									</span>
 
-									<time class="mto-courses--body--time">
+									<time class="masteriyo-courses--body--time">
 										<?php echo esc_html( masteriyo_minutes_to_time_length_string( $active_course->get_duration() ) ); ?>
 									</time>
 								</div>
 
-								<div class="mto-courses--body--status">
+								<div class="masteriyo-courses--body--status">
 								<?php
 									printf(
 										/* translators: %s: course progress in percentage */
@@ -66,10 +66,10 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 								</div>
 							</div>
 
-							<div class="mto-courses--body--pbar mto-pbar">
-								<div class="mto-progressbar">
-									<span class="mto-bar" style="width:<?php echo esc_attr( $active_course->get_progress_status( true ) ); ?>;">
-										<span class="mto-progress">
+							<div class="masteriyo-courses--body--pbar masteriyo-pbar">
+								<div class="masteriyo-progressbar">
+									<span class="masteriyo-bar" style="width:<?php echo esc_attr( $active_course->get_progress_status( true ) ); ?>;">
+										<span class="masteriyo-progress">
 										<?php echo esc_html( $active_course->get_progress_status( true ) ); ?>
 										</span>
 									</span>
@@ -77,14 +77,14 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 							</div>
 						</div>
 
-						<div class="mto-mycourses--footer mto-flex mto-flex--space-between mto-no-flex-wrap">
-							<div class="mto-time-wrap">
-								<span class="mto-icon-svg"><?php masteriyo_get_svg( 'start-clock', true ); ?></span>
-								<time class="mto-courses--body--time">
+						<div class="masteriyo-mycourses--footer masteriyo-flex masteriyo-flex--space-between masteriyo-no-flex-wrap">
+							<div class="masteriyo-time-wrap">
+								<span class="masteriyo-icon-svg"><?php masteriyo_get_svg( 'start-clock', true ); ?></span>
+								<time class="masteriyo-courses--body--time">
 									<?php echo esc_html( masteriyo_format_datetime( $active_course->progress->get_started_at(), 'Y-m-d' ) ); ?>
 								</time>
 							</div>
-							<a href="<?php echo esc_url( $active_course->start_course_url() ); ?>" target="_blank" class="mto-mycourses--btn mto-btn mto-btn-primary">
+							<a href="<?php echo esc_url( $active_course->start_course_url() ); ?>" target="_blank" class="masteriyo-mycourses--btn masteriyo-btn masteriyo-btn-primary">
 								<?php esc_html_e( 'Continue', 'masteriyo' ); ?>
 							</a>
 						</div>
@@ -93,56 +93,56 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 			<?php endforeach; ?>
 		</div>
 	<?php else : ?>
-		<div class="mto-myachivement--notify-message mto-alert mto-info-msg">
+		<div class="masteriyo-myachivement--notify-message masteriyo-alert masteriyo-info-msg">
 			<span><?php esc_html_e( 'You haven\'t enrolled in any courses yet!', 'masteriyo' ); ?></span>
 		</div>
 	<?php endif; ?>
 
 	<?php do_action( 'masteriyo_after_account_courses_enrolled_courses', $all_courses, $active_courses ); ?>
 
-	<h2 class="mto-mycourses--title"><?php esc_html_e( 'All Courses', 'masteriyo' ); ?></h2>
+	<h2 class="masteriyo-mycourses--title"><?php esc_html_e( 'All Courses', 'masteriyo' ); ?></h2>
 	<?php if ( count( $all_courses ) > 0 ) : ?>
-		<div class="mto-mycourses--list">
+		<div class="masteriyo-mycourses--list">
 			<?php foreach ( $all_courses as $course ) : ?>
-				<div class="mto-mycourses--card">
+				<div class="masteriyo-mycourses--card">
 					<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">
-						<div class="mto-mycourses--thumbnail">
+						<div class="masteriyo-mycourses--thumbnail">
 							<?php echo wp_kses_post( $course->get_image( 'masteriyo_thumbnail' ) ); ?>
 						</div>
 						</a>
-					<div class="mto-mycourses--detail">
-						<div class="mto-mycourses--header">
-							<div class="mto-mycourses--rt">
-								<span class="mto-mycourses--rating mto-icon-svg">
+					<div class="masteriyo-mycourses--detail">
+						<div class="masteriyo-mycourses--header">
+							<div class="masteriyo-mycourses--rt">
+								<span class="masteriyo-mycourses--rating masteriyo-icon-svg">
 									<?php masteriyo_render_stars( $course->get_average_rating() ); ?>
 								</span>
 
 								<?php foreach ( $course->get_categories() as $category ) : ?>
 								<a href="<?php echo esc_url( $category->get_permalink() ); ?>" title="<?php echo esc_attr( $category->get_name() ); ?>">
-									<span class="mto-badge mto-badge-pink mto-mycourses--tag ">
+									<span class="masteriyo-badge masteriyo-badge-pink masteriyo-mycourses--tag ">
 										<?php echo esc_html( $category->get_name() ); ?>
 									</span>
 								</a>
 								<?php endforeach; ?>
 							</div>
 							<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">
-								<h3 class="mto-mycourses--header--title">
+								<h3 class="masteriyo-mycourses--header--title">
 									<?php echo esc_html( $course->get_name() ); ?>
 								</h3>
 							</a>
 						</div>
-						<div class="mto-mycourses--body">
-							<div class="mto-mycourses--body--duration mto-flex mto-flex--space-between ">
-								<div class="mto-time-wrap">
-									<span class="mto-icon-svg">
+						<div class="masteriyo-mycourses--body">
+							<div class="masteriyo-mycourses--body--duration masteriyo-flex masteriyo-flex--space-between ">
+								<div class="masteriyo-time-wrap">
+									<span class="masteriyo-icon-svg">
 										<?php masteriyo_get_svg( 'clock', true ); ?>
 									</span>
 
-									<time class="mto-courses--body--time">
+									<time class="masteriyo-courses--body--time">
 										<?php echo esc_html( masteriyo_minutes_to_time_length_string( $course->get_duration() ) ); ?>
 									</time>
 								</div>
-								<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="mto-mycourses--btn mto-btn mto-btn-primary">
+								<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="masteriyo-mycourses--btn masteriyo-btn masteriyo-btn-primary">
 									<?php esc_html_e( 'Start Course', 'masteriyo' ); ?>
 								</a>
 							</div>
@@ -152,7 +152,7 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 			<?php endforeach; ?>
 		</div>
 	<?php else : ?>
-		<div class="mto-myachivement--notify-message mto-alert mto-info-msg">
+		<div class="masteriyo-myachivement--notify-message masteriyo-alert masteriyo-info-msg">
 			<span><?php esc_html_e( 'No courses yet!', 'masteriyo' ); ?></span>
 		</div>
 	<?php endif; ?>

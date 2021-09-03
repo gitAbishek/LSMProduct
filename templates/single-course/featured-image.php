@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 
-<div class="mto-feature-img">
+<div class="masteriyo-feature-img">
 	<?php echo wp_kses_post( $course->get_image( 'masteriyo_single' ) ); ?>
 </div>
 

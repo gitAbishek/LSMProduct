@@ -82,7 +82,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			apply_filters(
 				'masteriyo_new_order_data',
 				array(
-					'post_type'     => 'mto-order',
+					'post_type'     => 'masteriyo-order',
 					'post_status'   => $order->get_status() ? $order->get_status() : 'pending',
 					'post_author'   => 1,
 					'post_title'    => $this->get_order_title(),
@@ -124,7 +124,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	public function read( Model &$order ) {
 		$order_post = get_post( $order->get_id() );
 
-		if ( ! $order->get_id() || ! $order_post || 'mto-order' !== $order_post->post_type ) {
+		if ( ! $order->get_id() || ! $order_post || 'masteriyo-order' !== $order_post->post_type ) {
 			throw new \Exception( __( 'Invalid order.', 'masteriyo' ) );
 		}
 
@@ -167,7 +167,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		if ( array_intersect( $post_data_keys, array_keys( $changes ) ) ) {
 			$post_data = array(
 				'post_status' => $order->get_status( 'edit' ),
-				'post_type'   => 'mto-order',
+				'post_type'   => 'masteriyo-order',
 			);
 
 			/**
@@ -315,7 +315,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'mto-order' ) );
+			update_post_caches( $query->posts, array( 'masteriyo-order' ) );
 		}
 
 		$orders = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_order', $query->posts ) );
@@ -345,14 +345,14 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			unset( $query_vars['customer_id'] );
 		}
 
-		// Add the 'mto-' prefix to status if needed.
+		// Add the 'masteriyo-' prefix to status if needed.
 		if ( ! empty( $query_vars['status'] ) ) {
 			if ( is_array( $query_vars['status'] ) ) {
 				foreach ( $query_vars['status'] as &$status ) {
-					$status = masteriyo_is_order_status( 'mto-' . $status ) ? 'mto-' . $status : $status;
+					$status = masteriyo_is_order_status( 'masteriyo-' . $status ) ? 'masteriyo-' . $status : $status;
 				}
 			} else {
-				$query_vars['status'] = masteriyo_is_order_status( 'mto-' . $query_vars['status'] ) ? 'mto-' . $query_vars['status'] : $query_vars['status'];
+				$query_vars['status'] = masteriyo_is_order_status( 'masteriyo-' . $query_vars['status'] ) ? 'masteriyo-' . $query_vars['status'] : $query_vars['status'];
 			}
 		}
 
@@ -542,7 +542,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			$wpdb->prepare(
 				"SELECT SUM( postmeta.meta_value )
 				FROM $wpdb->postmeta AS postmeta
-				INNER JOIN $wpdb->posts AS posts ON ( posts.post_type = 'mto-order-refund' AND posts.post_parent = %d )
+				INNER JOIN $wpdb->posts AS posts ON ( posts.post_type = 'masteriyo-order-refund' AND posts.post_parent = %d )
 				WHERE postmeta.meta_key = '_refund_amount'
 				AND postmeta.post_id = posts.ID",
 				$order->get_id()

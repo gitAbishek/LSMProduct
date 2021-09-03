@@ -1,30 +1,30 @@
 // Medium devices (tablets, less than 992px)
 @media (max-width: 992px) {
-	.mto-form-container {
+	.masteriyo-form-container {
 		width: 70%;
 	}
 
-	.mto-cstudy {
+	.masteriyo-cstudy {
 		&--body--pstatus {
 			display: none;
 		}
 	}
 
-	.mto-single-course--aside {
+	.masteriyo-single-course--aside {
 		width: 100%;
 	}
 
 	// Single course page reviews
-	.mto-single-course--main__content
+	.masteriyo-single-course--main__content
 		.course-reviews
-		.mto-course-reviews-list
-		.mto-course-review__content {
+		.masteriyo-course-reviews-list
+		.masteriyo-course-review__content {
 		flex-direction: column;
-		.mto-avatar {
+		.masteriyo-avatar {
 			margin-bottom: 8px;
 		}
 
-		.mto-right {
+		.masteriyo-right {
 			width: 100%;
 			margin: 0px;
 		}
@@ -41,25 +41,25 @@
 			width: 50%;
 		}
 
-		.mto-course--card {
+		.masteriyo-course--card {
 			flex-basis: 335px;
 		}
 	}
 
 	.columns-1 {
-		.mto-course--card {
+		.masteriyo-course--card {
 			flex-basis: 100%;
 		}
 	}
 
 	// Related Post
-	.mto-related-post {
-		.mto-single-course-item {
+	.masteriyo-related-post {
+		.masteriyo-single-course-item {
 			flex-direction: column;
 		}
 	}
 
-	.mto-single-course--main {
+	.masteriyo-single-course--main {
 		width: 100%;
 	}
 
@@ -70,8 +70,8 @@
 		max-width: 100%;
 	}
 
-	.mto-item--wrap {
-		.mto-single-course-item > div {
+	.masteriyo-item--wrap {
+		.masteriyo-single-course-item > div {
 			padding-top: 8px;
 			padding-bottom: 8px;
 		}

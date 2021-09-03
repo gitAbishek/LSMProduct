@@ -37,18 +37,18 @@ if ( ! is_user_logged_in() ) {
 
 ?>
 
-<div class="mto-checkout" id="masteriyo-checkout">
+<div class="masteriyo-checkout" id="masteriyo-checkout">
 	<form
-		name="checkout" method="post" class="mto-checkout--form masteriyo-checkout"
+		name="checkout" method="post" class="masteriyo-checkout--form masteriyo-checkout"
 		action="<?php echo esc_url( masteriyo_get_checkout_url() ); ?>"
 		enctype="multipart/form-data"
 		class="checkout masteriyo-checkout"
 		validate="novalidate">
 
-		<div class="mto-checkout-wrapper">
+		<div class="masteriyo-checkout-wrapper">
 			<?php do_action( 'masteriyo_checkout_form' ); ?>
 
-			<div class="mto-checkout-summary">
+			<div class="masteriyo-checkout-summary">
 				<?php do_action( 'masteriyo_checkout_summary' ); ?>
 			</div>
 		</div>

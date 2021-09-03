@@ -1,7 +1,7 @@
-.mto-myaccount {
+.masteriyo-myaccount {
   gap: 64px;
-// Header
-  &--header{
+  // Header
+  &--header {
     flex: 1 1 15%;
     min-width: 160px;
   }
@@ -11,7 +11,7 @@
     width: 160px;
     height: 160px;
     border-radius: 100px;
-    @include mto-shadow-1;
+    @include masteriyo-shadow-1;
   }
 
   // Profile Name.
@@ -22,7 +22,7 @@
 
   // Membership
   &--membership {
-    color: $mto-light-text-color;
+    color: $masteriyo-light-text-color;
     display: block;
     margin-bottom: 20px;
   }

@@ -24,12 +24,12 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 ?>
 
 <div class="tab-content course-curriculum masteriyo-hidden">
-	<div class="mto-stab--tcurriculum">
-		<div class="mto-stab--shortinfo">
+	<div class="masteriyo-stab--tcurriculum">
+		<div class="masteriyo-stab--shortinfo">
 			<div class="title-container">
 				<h3 class="title"><?php esc_html_e( 'Curriculum', 'masteriyo' ); ?></h3>
-				<ul class="mto-shortinfo-wrap">
-					<li class="mto-list-none">
+				<ul class="masteriyo-shortinfo-wrap">
+					<li class="masteriyo-list-none">
 					<?php
 						printf(
 							/* translators: %d: Course sections count */
@@ -71,17 +71,17 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 			</div>
 
 			<?php if ( $sections_count > 0 ) : ?>
-				<span class="mto-link-primary mto-expand-collape-all"><?php esc_html_e( 'Expand All', 'masteriyo' ); ?></span>
+				<span class="masteriyo-link-primary masteriyo-expand-collape-all"><?php esc_html_e( 'Expand All', 'masteriyo' ); ?></span>
 			<?php endif; ?>
 		</div>
 
 		<?php foreach ( $course_structure as $section ) : ?>
-			<div class="mto-stab--citems">
-				<div class="mto-cheader">
-					<h5 class="mto-ctitle"><?php echo esc_html( $section['name'] ); ?></h5>
+			<div class="masteriyo-stab--citems">
+				<div class="masteriyo-cheader">
+					<h5 class="masteriyo-ctitle"><?php echo esc_html( $section['name'] ); ?></h5>
 
-					<div class="mto-ltc mto-flex-ycenter">
-						<span class="mto-clessons">
+					<div class="masteriyo-ltc masteriyo-flex-ycenter">
+						<span class="masteriyo-clessons">
 							<?php
 							printf(
 								/* translators: %d: Section lessons count */
@@ -90,7 +90,7 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 							);
 							?>
 						</span>
-						<span class="mto-cquizzes">
+						<span class="masteriyo-cquizzes">
 							<?php
 							printf(
 								/* translators: %d: Section quizzes count */
@@ -100,22 +100,22 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 							?>
 						</span>
 
-						<span class="mto-cplus mto-icon-svg">
+						<span class="masteriyo-cplus masteriyo-icon-svg">
 							<?php masteriyo_get_svg( 'plus-icon', true ); ?>
 						</span>
-						<span class="mto-cminus mto-icon-svg">
+						<span class="masteriyo-cminus masteriyo-icon-svg">
 							<?php masteriyo_get_svg( 'minus-icon', true ); ?>
 						</span>
 					</div>
 				</div>
 
-				<div class="mto-cbody">
-					<ol class="mto-lesson-list">
+				<div class="masteriyo-cbody">
+					<ol class="masteriyo-lesson-list">
 						<?php foreach ( $section['contents'] as $content ) : ?>
 							<li>
-								<div class="mto-lesson-list__content">
-									<span class="mto-lesson-list__content-item">
-										<span class="mto-lesson-icon">
+								<div class="masteriyo-lesson-list__content">
+									<span class="masteriyo-lesson-list__content-item">
+										<span class="masteriyo-lesson-icon">
 											<?php if ( 'lesson' === $content['type'] && $content['has_video'] ) : ?>
 												<?php masteriyo_get_svg( 'play', true ); ?>
 											<?php elseif ( 'lesson' === $content['type'] && ! $content['has_video'] ) : ?>

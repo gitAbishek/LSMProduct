@@ -20,31 +20,31 @@ do_action( 'masteriyo_before_single_course_review_form' );
 
 ?>
 <?php if ( is_user_logged_in() ) : ?>
-	<div class="mto-submit-container">
+	<div class="masteriyo-submit-container">
 		<h3 class="masteriyo--title"><?php esc_html_e( 'Create a new review', 'masteriyo' ); ?></h3>
-		<form method="POST" class="mto-submit-review-form">
+		<form method="POST" class="masteriyo-submit-review-form">
 			<input type="hidden" name="id" value="">
 			<input type="hidden" name="course_id" value="<?php echo esc_attr( $course->get_id() ); ?>">
 			<input type="hidden" name="parent" value="0">
-			<div class="mto-title">
-				<label class="mto-label"><?php esc_html_e( 'Title', 'masteriyo' ); ?></label>
-				<input type="text" name="title" class="mto-input" />
+			<div class="masteriyo-title">
+				<label class="masteriyo-label"><?php esc_html_e( 'Title', 'masteriyo' ); ?></label>
+				<input type="text" name="title" class="masteriyo-input" />
 			</div>
-			<div class="mto-rating">
-				<label class="mto-label"><?php esc_html_e( 'Rating', 'masteriyo' ); ?></label>
+			<div class="masteriyo-rating">
+				<label class="masteriyo-label"><?php esc_html_e( 'Rating', 'masteriyo' ); ?></label>
 				<input type="hidden" name="rating" value="0" />
-				<div class="mto-stab-rs boxshadow-none ">
-					<span class="mto-icon-svg mto-flex mto-rstar">
-						<?php masteriyo_render_stars( 0, 'mto-rating-input-icon' ); ?>
+				<div class="masteriyo-stab-rs boxshadow-none ">
+					<span class="masteriyo-icon-svg masteriyo-flex masteriyo-rstar">
+						<?php masteriyo_render_stars( 0, 'masteriyo-rating-input-icon' ); ?>
 					</span>
 				</div>
 			</div>
-			<div class="mto-message">  
-				<label class="mto-label"><?php esc_html_e( 'Content', 'masteriyo' ); ?></label>
-				<textarea type="text" name="content" class="mto-input" required column="10" ></textarea>
+			<div class="masteriyo-message">
+				<label class="masteriyo-label"><?php esc_html_e( 'Content', 'masteriyo' ); ?></label>
+				<textarea type="text" name="content" class="masteriyo-input" required column="10" ></textarea>
 			</div>
 			<div>
-				<button type="submit" name="masteriyo-submit-review" value="yes" class="mto-btn mto-btn-primary">
+				<button type="submit" name="masteriyo-submit-review" value="yes" class="masteriyo-btn masteriyo-btn-primary">
 					<?php esc_html_e( 'Submit', 'masteriyo' ); ?>
 				</button>
 			</div>
@@ -52,14 +52,14 @@ do_action( 'masteriyo_before_single_course_review_form' );
 		</form>
 	</div>
 <?php else : ?>
-	<div class="mto-login-msg mto-submit-container">
+	<div class="masteriyo-login-msg masteriyo-submit-container">
 		<?php
 		printf(
 			/* translators: %s: Achor tag html with text "logged in" */
 			esc_html__( 'You must be %s to submit a review', 'masteriyo' ),
 			wp_kses_post(
 				sprintf(
-					'<a href="%s" class="mto-link-primary">%s</a>',
+					'<a href="%s" class="masteriyo-link-primary">%s</a>',
 					masteriyo_get_page_permalink( 'myaccount' ),
 					__( 'logged in', 'masteriyo' )
 				)

@@ -29,7 +29,7 @@ class OrderQuery extends ObjectQuery {
 		return array_merge(
 			parent::get_default_query_vars(),
 			array(
-				'type'                 => 'mto-order',
+				'type'                 => 'masteriyo-order',
 				'status'               => array_keys( masteriyo_get_order_statuses() ),
 				'total'                => '',
 				'currency'             => '',

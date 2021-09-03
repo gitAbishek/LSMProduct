@@ -13,8 +13,8 @@ defined( 'ABSPATH' ) || exit;
 <?php do_action( 'masteriyo_checkout_before_payment_methods' ); ?>
 
 <?php if ( masteriyo( 'cart' )->needs_payment() ) : ?>
-	<div id="masteriyo-payments" class="mto-checkout-summary-payment-method">
-		<ul class="masteriyo-payment-methods payment-methods methods mto-checkout-payment-method">
+	<div id="masteriyo-payments" class="masteriyo-checkout-summary-payment-method">
+		<ul class="masteriyo-payment-methods payment-methods methods masteriyo-checkout-payment-method">
 			<?php
 			if ( ! empty( $available_gateways ) ) {
 				foreach ( $available_gateways as $gateway ) {
@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) || exit;
 
 				echo wp_kses_post(
 					sprintf(
-						'<li class="mto-notice mto-alert mto-info-msg">%s</li>',
+						'<li class="masteriyo-notice masteriyo-alert masteriyo-info-msg">%s</li>',
 						$message
 					)
 				);
@@ -45,7 +45,7 @@ defined( 'ABSPATH' ) || exit;
 
 <button
 	type="submit"
-	class="mto-checkout--btn mto-button mto-btn-primary alt"
+	class="masteriyo-checkout--btn masteriyo-button masteriyo-btn-primary alt"
 	id="masteriyo-place-order"
 	name="masteriyo_checkout_place_order">
 	<?php echo esc_html( $order_button_text ); ?>

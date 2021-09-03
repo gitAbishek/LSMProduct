@@ -18,14 +18,14 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 
-<div class="mto-confirm-delete-course-review-modal-content masteriyo-hidden">
+<div class="masteriyo-confirm-delete-course-review-modal-content masteriyo-hidden">
 	<div class="masteriyo-overlay">
-		<div class="masteriyo--modal mto-modal-confirm-delete-course-review">
+		<div class="masteriyo--modal masteriyo-modal-confirm-delete-course-review">
 			<h4 class="masteriyo--title"><?php esc_html_e( 'Deleting Course Review', 'masteriyo' ); ?></h4>
 			<div class="masteriyo--content"><?php esc_html_e( 'Are you sure? You can\'t restore this back', 'masteriyo' ); ?></div>
 			<div class="masteriyo-actions">
-				<button class="mto-btn mto-btn-outline mto-cancel"><?php esc_html_e( 'Cancel', 'masteriyo' ); ?></button>
-				<button class="mto-btn mto-btn-warning mto-delete"><?php esc_html_e( 'Delete', 'masteriyo' ); ?></button>
+				<button class="masteriyo-btn masteriyo-btn-outline masteriyo-cancel"><?php esc_html_e( 'Cancel', 'masteriyo' ); ?></button>
+				<button class="masteriyo-btn masteriyo-btn-warning masteriyo-delete"><?php esc_html_e( 'Delete', 'masteriyo' ); ?></button>
 			</div>
 		</div>
 	</div>

@@ -44,7 +44,7 @@ class Faqs {
 	}
 
 	/**
-	 * Make sure WP displays avatars for comments with the `mto-faq` type.
+	 * Make sure WP displays avatars for comments with the `masteriyo-faq` type.
 	 *
 	 * @since 0.1.0
 	 *
@@ -53,7 +53,7 @@ class Faqs {
 	 * @return array
 	 */
 	public static function add_avatar_for_review_comment_type( $comment_types ) {
-		return array_merge( $comment_types, array( 'mto-faq' ) );
+		return array_merge( $comment_types, array( 'masteriyo-faq' ) );
 	}
 
 	/**

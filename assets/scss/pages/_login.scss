@@ -1,33 +1,33 @@
-.mto-login {
+.masteriyo-login {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
   &--wrapper {
-    background: $mto-white-color;
+    background: $masteriyo-white-color;
   }
 
   &--title {
     margin-bottom: 30px;
   }
 
-  .mto-input {
+  .masteriyo-input {
     margin-bottom: 24px;
   }
 
-  .mto-btn-wrapper,
-  .mto-remember-forgot {
+  .masteriyo-btn-wrapper,
+  .masteriyo-remember-forgot {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .mto-remember-forgot {
+  .masteriyo-remember-forgot {
     margin-bottom: 24px;
   }
 
-  .mto-remember-me {
+  .masteriyo-remember-me {
     display: flex;
     align-items: center;
     & > label {

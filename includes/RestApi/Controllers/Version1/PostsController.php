@@ -265,7 +265,7 @@ abstract class PostsController extends CrudController {
 			return '';
 		}
 
-		$object_type = str_replace( 'mto-', '', $object->post_type );
+		$object_type = str_replace( 'masteriyo-', '', $object->post_type );
 		$object_rest = masteriyo( "{$object_type}.rest" );
 		$link        = rest_url( sprintf( '/%s/%s/%d', $object_rest->namespace, $object_rest->rest_base, $object->ID ) );
 
@@ -313,7 +313,7 @@ abstract class PostsController extends CrudController {
 		$previous = array(
 			'id'     => $object->ID,
 			'name'   => $object->post_title,
-			'type'   => str_replace( 'mto-', '', $object->post_type ),
+			'type'   => str_replace( 'masteriyo-', '', $object->post_type ),
 			'parent' => is_null( $previous_parent ) ? null : array(
 				'id'   => $previous_parent->ID,
 				'name' => $previous_parent->post_title,

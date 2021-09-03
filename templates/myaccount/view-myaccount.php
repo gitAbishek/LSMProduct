@@ -14,19 +14,19 @@ do_action( 'masteriyo_before_view_myaccount_content' );
 
 ?>
 
-<div class="mto-myaccount mto-flex">
-	<div class="mto-myaccount--imgwrap">
-		<img class="mto-myaccount-img" src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" alt="" />
+<div class="masteriyo-myaccount masteriyo-flex">
+	<div class="masteriyo-myaccount--imgwrap">
+		<img class="masteriyo-myaccount-img" src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" alt="" />
 	</div>
 
-	<div class="mto-myaccount--detail">
-		<div class="mto-myaccount mto-myaccount--header">
-			<h2 class="mto-myaccount--name"><?php echo esc_html( $user->get_display_name() ); ?></h2>
+	<div class="masteriyo-myaccount--detail">
+		<div class="masteriyo-myaccount masteriyo-myaccount--header">
+			<h2 class="masteriyo-myaccount--name"><?php echo esc_html( $user->get_display_name() ); ?></h2>
 		</div>
 	</div>
 
-	<div class="mto-myaccount--body mto-flex">
-		<ul class="mto-title account-col-1">
+	<div class="masteriyo-myaccount--body masteriyo-flex">
+		<ul class="masteriyo-title account-col-1">
 			<li><strong><?php echo esc_html__( 'Email', 'masteriyo' ); ?></strong></li>
 			<li><strong><?php echo esc_html__( 'First Name', 'masteriyo' ); ?></strong></li>
 			<li><strong><?php echo esc_html__( 'Last Name', 'masteriyo' ); ?></strong></li>
@@ -37,7 +37,7 @@ do_action( 'masteriyo_before_view_myaccount_content' );
 			<li><strong><?php echo esc_html__( 'Country', 'masteriyo' ); ?></strong></li>
 		</ul>
 
-		<ul class="mto-content account-col-2">
+		<ul class="masteriyo-content account-col-2">
 			<li><?php echo esc_html( $user->get_email() ); ?></li>
 			<li><?php echo esc_html( $user->get_first_name() ); ?></li>
 			<li><?php echo esc_html( $user->get_last_name() ); ?></li>

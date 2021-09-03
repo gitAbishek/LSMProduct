@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 
-<div class="mto-notify-message mto-alert mto-danger-msg">
+<div class="masteriyo-notify-message masteriyo-alert masteriyo-danger-msg">
 	<span><?php echo wp_kses_post( $message ); ?></span>
 </div>
 

@@ -7,44 +7,45 @@
 	display: show;
 }
 
-.mto-flex {
+.masteriyo-flex {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.mto-inline-flex {
+.masteriyo-inline-flex {
 	display: inline-flex;
 }
 
-.mto-flex-ycenter {
+.masteriyo-flex-ycenter {
 	align-items: center;
 }
 
-.mto-flex-xcenter {
+.masteriyo-flex-xcenter {
 	justify-content: center;
 }
 
-.mto-flex--space-between {
+.masteriyo-flex--space-between {
 	justify-content: space-between;
 }
 
 //svg icon
-.mto-icon-svg > svg {
+.masteriyo-icon-svg > svg {
 	width: 24px;
 	height: 24px;
 	display: inherit;
 }
 
 // Progress bar
-.mto-pbar {
+.masteriyo-pbar {
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
 }
-.mto-progressbar {
+
+.masteriyo-progressbar {
 	height: 16px;
 	position: relative;
-	background: lighten($mto-primary-color, 20%);
+	background: lighten($masteriyo-primary-color, 20%);
 	overflow: hidden;
 	border-radius: 50px;
 	span {
@@ -53,13 +54,13 @@
 	}
 }
 
-.mto-progress {
-	background: $mto-primary-color;
+.masteriyo-progress {
+	background: $masteriyo-primary-color;
 	animation: progressbar 3s ease-in-out;
 	animation-fill-mode: both;
 	padding: 0 10px;
 	font-size: 9px;
-	color: $mto-white-color;
+	color: $masteriyo-white-color;
 
 	@keyframes progressbar {
 		0% {
@@ -71,7 +72,7 @@
 	}
 }
 
-.mto-no-flex-wrap {
+.masteriyo-no-flex-wrap {
 	flex-wrap: nowrap;
 }
 
@@ -99,7 +100,7 @@
 
 .masteriyo-border {
 	margin: 14px 0px;
-	background-color: $mto-border-color;
+	background-color: $masteriyo-border-color;
 	height: 1px;
 }
 

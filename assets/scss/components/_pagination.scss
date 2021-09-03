@@ -23,7 +23,7 @@
 		height: 2.6rem;
 
 		&:hover {
-			color: $mto-primary-color;
+			color: $masteriyo-primary-color;
 		}
 
 		span {
@@ -33,9 +33,9 @@
 
 			&.current {
 				color: #ffffff;
-				background: $mto-primary-color;
+				background: $masteriyo-primary-color;
 				font-weight: 600;
-				border: 1px solid $mto-primary-color;
+				border: 1px solid $masteriyo-primary-color;
 				border-radius: 8px;
 				box-shadow: 0 0.8rem 2rem rgba(#5a6181, 0.05);
 			}
@@ -44,11 +44,11 @@
 
 	.prev {
 		cursor: pointer;
-		fill: $mto-btn-gray;
+		fill: $masteriyo-btn-gray;
 
 		&:hover {
 			svg {
-				fill: $mto-primary-color !important;
+				fill: $masteriyo-primary-color !important;
 			}
 		}
 	}

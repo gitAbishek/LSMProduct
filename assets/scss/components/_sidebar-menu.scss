@@ -1,7 +1,7 @@
-.mto-vertical-menu {
+.masteriyo-vertical-menu {
   // General
-  border-right: 1px solid $mto-border-color;
-  // background: $mto-$mto-white-color-color;
+  border-right: 1px solid $masteriyo-border-color;
+  // background: $masteriyo-$masteriyo-white-color-color;
   flex: 1 1 20%;
   min-width: 200px;
   padding-top: 40px;
@@ -9,13 +9,13 @@
   & svg {
     width: 24px;
     height: 24px;
-    fill: $mto-light-text-color;
+    fill: $masteriyo-light-text-color;
   }
 }
 
-.mto-sidebar-wrapper {
+.masteriyo-sidebar-wrapper {
   // Profile
-  .mto-profile {
+  .masteriyo-profile {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -23,7 +23,7 @@
       width: 40px;
       height: 40px;
       border-radius: 100%;
-      @include mto-shadow-1;
+      @include masteriyo-shadow-1;
     }
     &--name {
       display: flex;
@@ -47,8 +47,8 @@
   }
 
   // Menu
-  .mto-menu {
-    background: $mto-white-color;
+  .masteriyo-menu {
+    background: $masteriyo-white-color;
     margin-top: 40px;
     ul {
       margin: 0;
@@ -58,16 +58,16 @@
         align-items: center;
         list-style-type: none;
         padding: 16px;
-        border: 1px solid $mto-white-color;
+        border: 1px solid $masteriyo-white-color;
 
         &.active,
         &:hover {
           margin-right: -1px;
-          @include mto-default-border;
+          @include masteriyo-default-border;
           border-radius: 4px 0 0 4px;
-          border-right: 1px solid $mto-white-color;
+          border-right: 1px solid $masteriyo-white-color;
           & svg {
-            fill: $mto-dark-blue-color;
+            fill: $masteriyo-dark-blue-color;
           }
         }
 

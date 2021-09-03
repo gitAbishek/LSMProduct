@@ -1,15 +1,15 @@
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 768px) {
 	//Form contianer
-	.mto-form-container {
+	.masteriyo-form-container {
 		width: 80%;
 	}
 
-	.mto-related-post__title {
+	.masteriyo-related-post__title {
 		margin: 15px;
 	}
 
-	.mto-item--wrap {
+	.masteriyo-item--wrap {
 		margin: 0px;
 
 		.masteriyo-col-4 {
@@ -22,26 +22,26 @@
 // X-Small devices (portrait phones, less than 576px)
 @media (max-width: 576px) {
 	// Form container
-	.mto-form-container,
-	.mto-btn {
+	.masteriyo-form-container,
+	.masteriyo-btn {
 		width: 100%;
 	}
-	.mto-login .mto-btn-wrapper,
-	.mto-reset .mto-btn-wrapper {
+	.masteriyo-login .masteriyo-btn-wrapper,
+	.masteriyo-reset .masteriyo-btn-wrapper {
 		flex-direction: column;
 	}
-	.mto-login .mto-btn,
-	.mto-reset .mto-btn {
+	.masteriyo-login .masteriyo-btn,
+	.masteriyo-reset .masteriyo-btn {
 		margin-bottom: 24px;
 	}
 	// Dashbord Continue Studying
-	.mto-cstudy {
+	.masteriyo-cstudy {
 		&--btn {
 			width: inherit;
 		}
 	}
 
-	.mto-courses--card {
+	.masteriyo-courses--card {
 		flex-basis: 100%;
 		width: 100%;
 	}
@@ -59,7 +59,7 @@
 	.columns-3,
 	.columns-2,
 	.columns-1 {
-		.mto-course {
+		.masteriyo-course {
 			flex-direction: row;
 		}
 
@@ -70,16 +70,16 @@
 			width: 100%;
 		}
 
-		.mto-course--card {
+		.masteriyo-course--card {
 			flex-basis: 100%;
 		}
 	}
 
-	.mto-stab {
+	.masteriyo-stab {
 		gap: 32px;
 	}
 
-	.mto-avatar {
+	.masteriyo-avatar {
 		margin-left: 18px;
 	}
 }

@@ -1,11 +1,11 @@
-.mto-main {
+.masteriyo-main {
   gap: 64px;
   display: flex;
   justify-content: space-between;
   max-width: 100%;
 }
 // Dashboard
-.mto-dashboard {
+.masteriyo-dashboard {
   display: flex;
   flex-direction: column;
   flex: 1 1 74%;
@@ -21,108 +21,108 @@
 }
 
 // Welcome notify
-.mto-welcome-notify {
-  background: $mto-primary-color;
-  @include mto-border-radius;
+.masteriyo-welcome-notify {
+  background: $masteriyo-primary-color;
+  @include masteriyo-border-radius;
   padding: 32px;
-  color: $mto-white-color;
+  color: $masteriyo-white-color;
   position: relative;
 
-  .mto-title {
-    color: $mto-white-color;
+  .masteriyo-title {
+    color: $masteriyo-white-color;
     font-size: 24px;
   }
 
-  .mto-close {
+  .masteriyo-close {
     position: absolute;
     right: 16px;
     top: 16px;
     width: 24px;
     height: 24px;
     border-radius: 100%;
-    .mto-icon-svg {
-      fill: $mto-white-color;
+    .masteriyo-icon-svg {
+      fill: $masteriyo-white-color;
     }
     &:hover {
-      background: rgba($mto-white-color, 0.1);
+      background: rgba($masteriyo-white-color, 0.1);
     }
   }
 
-  .mto-view-myaccount {
+  .masteriyo-view-myaccount {
     display: inline-flex;
     align-items: center;
     border-radius: 100px;
     padding-left: 24px;
     &:hover {
-      .mto-icon-svg {
-        fill: $mto-white-color;
+      .masteriyo-icon-svg {
+        fill: $masteriyo-white-color;
       }
     }
   }
 }
 // Dashboard Card
-.mto-db-card {
-  @include mto-default-border;
-  @include mto-border-radius;
-  @include mto-default-animate;
+.masteriyo-db-card {
+  @include masteriyo-default-border;
+  @include masteriyo-border-radius;
+  @include masteriyo-default-animate;
   padding: 30px;
   flex: 1 1 30%;
-  // background: $mto-$mto-white-color-color;
+  // background: $masteriyo-$masteriyo-white-color-color;
 
   &:hover {
-    @include mto-shadow-1;
+    @include masteriyo-shadow-1;
   }
 }
 
 // User counter
-.mto-counter {
+.masteriyo-counter {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
 
-  .mto-icon-title {
+  .masteriyo-icon-title {
     display: flex;
     align-items: center;
     gap: 16px;
 
-    .mto-icon {
+    .masteriyo-icon {
       display: inherit;
       padding: 10px;
       border-radius: 100%;
     }
-    .mto-title {
+    .masteriyo-title {
       font-size: 18px;
       margin: inherit;
     }
   }
 
-  &--inprogress .mto-icon {
-    background: lighten($mto-green, 30%);
-    &.mto-icon-svg {
-      fill: $mto-green;
+  &--inprogress .masteriyo-icon {
+    background: lighten($masteriyo-green, 30%);
+    &.masteriyo-icon-svg {
+      fill: $masteriyo-green;
     }
   }
-  &--scores .mto-icon {
-    background: lighten($mto-primary-color, 20%);
-    &.mto-icon-svg {
-      fill: $mto-primary-color;
+  &--scores .masteriyo-icon {
+    background: lighten($masteriyo-primary-color, 20%);
+    &.masteriyo-icon-svg {
+      fill: $masteriyo-primary-color;
     }
   }
-  &--certificates .mto-icon {
-    background: lighten($mto-accent-color, 20%);
-    &.mto-icon-svg {
-      fill: $mto-accent-color;
+  &--certificates .masteriyo-icon {
+    background: lighten($masteriyo-accent-color, 20%);
+    &.masteriyo-icon-svg {
+      fill: $masteriyo-accent-color;
     }
   }
 
-  .mto-number {
+  .masteriyo-number {
     font-size: 36px;
     font-weight: 600;
   }
 }
 
 // Statistic and Popular Cources
-.mto-sc {
+.masteriyo-sc {
   gap: 30px;
 
   &--stat {
@@ -152,7 +152,7 @@
     &--img {
       width: 50px;
       height: 50px;
-      @include mto-border-radius;
+      @include masteriyo-border-radius;
     }
 
     &--course {
@@ -167,7 +167,7 @@
 }
 
 // Continue Studing
-.mto-cstudy {
+.masteriyo-cstudy {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -210,10 +210,10 @@
     &--img {
       width: 80px;
       height: 80px;
-      @include mto-border-radius;
+      @include masteriyo-border-radius;
     }
 
-    &--rating.mto-icon-svg > svg {
+    &--rating.masteriyo-icon-svg > svg {
       width: 14px;
       height: 14px;
     }
@@ -229,7 +229,7 @@
       align-items: center;
       gap: 4px;
 
-      .mto-icon-svg > svg {
+      .masteriyo-icon-svg > svg {
         width: 16px;
         height: 16px;
       }

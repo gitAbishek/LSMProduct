@@ -37,7 +37,7 @@ class Faq extends Model {
 	 *
 	 * @var string
 	 */
-	protected $comment_type = 'mto-faq';
+	protected $comment_type = 'masteriyo-faq';
 
 	/**
 	 * Cache group.

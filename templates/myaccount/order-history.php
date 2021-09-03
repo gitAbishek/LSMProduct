@@ -24,7 +24,7 @@ do_action( 'masteriyo_before_account_orders', $orders );
 
 ?>
 <?php if ( count( $orders ) > 0 ) : ?>
-<table class="mto-account-orders-table">
+<table class="masteriyo-account-orders-table">
 	<thead>
 		<tr>
 			<?php foreach ( masteriyo_get_account_orders_columns() as $column_id => $column_name ) : ?>

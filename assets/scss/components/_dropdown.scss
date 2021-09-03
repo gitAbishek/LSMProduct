@@ -1,4 +1,4 @@
-.mto-dropdown {
+.masteriyo-dropdown {
 	width: 32px;
 	height: 32px;
 	position: relative;
@@ -36,7 +36,7 @@ span::after {
 	top: 36px;
 	max-height: 72px;
 	// box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
-	@include mto-shadow-1;
+	@include masteriyo-shadow-1;
 	border-radius: 4px;
 
 	li {
@@ -70,8 +70,8 @@ span::after {
 
 .icon_box {
 	text-align: center;
-	@include mto-shadow-2;
-	border: 1px solid $mto-border-color;
+	@include masteriyo-shadow-2;
+	border: 1px solid $masteriyo-border-color;
 	&:hover {
 		background-color: #dee9ff;
 		border: 1px solid #dee9ff;

@@ -230,7 +230,7 @@ class FaqsController extends PostsController {
 			'paged'    => $request['page'],
 			'per_page' => $request['per_page'],
 			's'        => $request['search'],
-			'type'     => 'mto-faq',
+			'type'     => 'masteriyo-faq',
 		);
 
 		if ( isset( $request['course_id'] ) ) {

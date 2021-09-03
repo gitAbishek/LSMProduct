@@ -1,30 +1,30 @@
-.mto-btn {
+.masteriyo-btn {
 	font-size: 14px;
 	font-weight: 500;
 	padding: 10px 12px;
 	text-align: center;
 	text-decoration: none;
-	@include mto-border-radius;
-	@include mto-default-animate;
+	@include masteriyo-border-radius;
+	@include masteriyo-default-animate;
 
 	//Default buttons
 	&-default {
-		background: $mto-white-color;
-		@include mto-default-border;
-		color: $mto-btn-gray;
+		background: $masteriyo-white-color;
+		@include masteriyo-default-border;
+		color: $masteriyo-btn-gray;
 
 		&:hover {
-			background: $mto-btn-active-blue;
-			border-color: $mto-btn-active-blue;
-			color: $mto-white-color;
-			@include mto-shadow-1;
+			background: $masteriyo-btn-active-blue;
+			border-color: $masteriyo-btn-active-blue;
+			color: $masteriyo-white-color;
+			@include masteriyo-shadow-1;
 		}
 
 		&:focus,
 		&:active {
-			background: $mto-btn-active-blue;
-			border-color: $mto-btn-active-blue;
-			color: $mto-white-color;
+			background: $masteriyo-btn-active-blue;
+			border-color: $masteriyo-btn-active-blue;
+			color: $masteriyo-white-color;
 		}
 
 		&--lg {
@@ -40,19 +40,19 @@
 
 	// Primary Buttons
 	&-primary {
-		background: $mto-primary-color;
-		border-color: $mto-primary-color;
-		color: $mto-white-color;
+		background: $masteriyo-primary-color;
+		border-color: $masteriyo-primary-color;
+		color: $masteriyo-white-color;
 
 		&:hover {
-			background: $mto-btn-hover-blue;
-			border-color: $mto-btn-hover-blue;
+			background: $masteriyo-btn-hover-blue;
+			border-color: $masteriyo-btn-hover-blue;
 		}
 
 		&:focus,
 		&:active {
-			background: $mto-btn-active-blue;
-			border-color: $mto-btn-active-blue;
+			background: $masteriyo-btn-active-blue;
+			border-color: $masteriyo-btn-active-blue;
 		}
 
 		&--lg {
@@ -68,19 +68,19 @@
 
 	// Accent Buttons
 	&-accent {
-		background: $mto-accent-color;
-		border-color: $mto-accent-color;
-		color: $mto-white-color;
+		background: $masteriyo-accent-color;
+		border-color: $masteriyo-accent-color;
+		color: $masteriyo-white-color;
 
 		&:hover {
-			background: darken($mto-accent-color, 10%);
-			border-color: darken($mto-accent-color, 10%);
+			background: darken($masteriyo-accent-color, 10%);
+			border-color: darken($masteriyo-accent-color, 10%);
 		}
 
 		&:focus,
 		&:active {
-			background: darken($mto-accent-color, 20%);
-			border-color: darken($mto-accent-color, 20%);
+			background: darken($masteriyo-accent-color, 20%);
+			border-color: darken($masteriyo-accent-color, 20%);
 		}
 
 		&--lg {
@@ -96,21 +96,21 @@
 
 	// Disabled button
 	&-disabled {
-		background: $mto-disabled-color;
-		color: $mto-disabled-text-color;
+		background: $masteriyo-disabled-color;
+		color: $masteriyo-disabled-text-color;
 
 		&:hover {
-			background: $mto-disabled-color;
-			color: $mto-disabled-text-color;
-			border-color: $mto-border-color;
+			background: $masteriyo-disabled-color;
+			color: $masteriyo-disabled-text-color;
+			border-color: $masteriyo-border-color;
 			cursor: not-allowed;
 		}
 
 		&:focus,
 		&:active {
-			background: $mto-disabled-color;
-			color: $mto-disabled-text-color;
-			border-color: $mto-border-color;
+			background: $masteriyo-disabled-color;
+			color: $masteriyo-disabled-text-color;
+			border-color: $masteriyo-border-color;
 		}
 
 		&--lg {
@@ -125,21 +125,21 @@
 	}
 	// Outline Buttons
 	&-outline {
-		color: $mto-disabled-text-color;
-		border: 1px solid $mto-border-color;
+		color: $masteriyo-disabled-text-color;
+		border: 1px solid $masteriyo-border-color;
 		background: transparent;
 
 		&:hover {
-			color: $mto-disabled-text-color;
+			color: $masteriyo-disabled-text-color;
 			border-color: #e2e8f0;
 			background: #e2e8f0;
 		}
 
 		&:focus,
 		&:active {
-			background: $mto-disabled-color;
-			color: $mto-disabled-text-color;
-			border-color: $mto-border-color;
+			background: $masteriyo-disabled-color;
+			color: $masteriyo-disabled-text-color;
+			border-color: $masteriyo-border-color;
 		}
 
 		&--lg {
@@ -155,20 +155,20 @@
 
 	// Red Buttons
 	&-warning {
-		color: $mto-white-color;
-		border: 1px solid $mto-border-color;
-		background: $mto-badge-red;
+		color: $masteriyo-white-color;
+		border: 1px solid $masteriyo-border-color;
+		background: $masteriyo-badge-red;
 
 		&:hover {
-			color: $mto-white-color;
+			color: $masteriyo-white-color;
 			border-color: #e2e8f0;
-			background: darken($mto-badge-red, 10%);
+			background: darken($masteriyo-badge-red, 10%);
 		}
 
 		&:focus,
 		&:active {
-			background: darken($mto-badge-red, 10%);
-			color: $mto-white-color;
+			background: darken($masteriyo-badge-red, 10%);
+			color: $masteriyo-white-color;
 			border-color: #e2e8f0;
 		}
 
@@ -185,11 +185,11 @@
 }
 
 // Links
-.mto-link-primary {
-	color: $mto-primary-color;
+.masteriyo-link-primary {
+	color: $masteriyo-primary-color;
 	font-weight: 500;
 	text-decoration: underline;
 	&:hover {
-		color: rgba($mto-primary-color, 0.8);
+		color: rgba($masteriyo-primary-color, 0.8);
 	}
 }

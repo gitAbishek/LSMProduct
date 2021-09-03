@@ -365,6 +365,19 @@ class Lesson extends Model {
 	}
 
 	/**
+	 * Get video source id.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return int
+	 */
+	public function get_video_source_id( $context = 'view' ) {
+		return absint( $this->get_prop( 'video_source_url', $context ) );
+	}
+
+	/**
 	 * Get video playback time.
 	 *
 	 * @since 0.1.0

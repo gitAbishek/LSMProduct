@@ -73,5 +73,6 @@ jobs:
           key: ${{ secrets.STAGING_PRIVATE_KEY }}
           script: |
             rm -rf ~/public_html/wp-content/plugins/wordpress-lms
+            rm -rf ~/public_html/wp-content/plugins/learning-management-system
             cd public_html
-            wp plugin install wordpress-lms.zip --force --activate
+            wp plugin install learning-management-system.zip --force --activate

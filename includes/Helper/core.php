@@ -816,7 +816,7 @@ function masteriyo_make_section_to_lessons_dictionary( $course ) {
 	$sections = masteriyo_get_sections(
 		array(
 			'order'     => 'asc',
-			'order_by'  => 'menu_order',
+			'orderby'   => 'menu_order',
 			'course_id' => $course->get_id(),
 		)
 	);
@@ -824,7 +824,7 @@ function masteriyo_make_section_to_lessons_dictionary( $course ) {
 	$lessons = masteriyo_get_lessons(
 		array(
 			'order'     => 'asc',
-			'order_by'  => 'menu_order',
+			'orderby'   => 'menu_order',
 			'course_id' => $course->get_id(),
 		)
 	);

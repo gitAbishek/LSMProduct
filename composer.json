@@ -16,7 +16,7 @@
   "autoload": {
     "files": [
       "includes/Helper/Arr.php",
-      "includes/Helper/Core.php",
+      "includes/Helper/core.php",
       "includes/Helper/Term.php",
       "includes/Helper/Conditional.php",
       "includes/Helper/Format.php",

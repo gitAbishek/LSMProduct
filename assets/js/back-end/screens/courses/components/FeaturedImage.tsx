@@ -1,9 +1,11 @@
 import {
 	Button,
 	ButtonGroup,
+	Center,
 	FormControl,
 	FormLabel,
 	Image,
+	Spinner,
 	Stack,
 	useDisclosure,
 } from '@chakra-ui/react';
@@ -54,7 +56,11 @@ const FeaturedImage: React.FC<Props> = (props) => {
 	return (
 		<FormControl>
 			<FormLabel>{__('Featured Image', 'masteriyo')}</FormLabel>
-
+			{imageQuery.isLoading && (
+				<Center mb="4" mt="4">
+					<Spinner />
+				</Center>
+			)}
 			{imageQuery.isSuccess ? (
 				<Stack direction="column" spacing="4">
 					<Image src={imageQuery?.data?.source_url} />

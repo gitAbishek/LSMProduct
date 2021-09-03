@@ -310,16 +310,17 @@ class CourseProgressController extends CrudController {
 		$course       = masteriyo_get_course( $course_progress->get_course_id( $context ) );
 
 		$data = array(
-			'id'           => $course_progress->get_id( $context ),
-			'user_id'      => $course_progress->get_user_id( $context ),
-			'course_id'    => $course_progress->get_course_id( $context ),
-			'name'         => $course ? $course->get_name( $context ) : '',
-			'status'       => $course_progress->get_status( $context ),
-			'started_at'   => masteriyo_rest_prepare_date_response( $course_progress->get_started_at( $context ) ),
-			'modified_at'  => masteriyo_rest_prepare_date_response( $course_progress->get_modified_at( $context ) ),
-			'completed_at' => masteriyo_rest_prepare_date_response( $course_progress->get_completed_at( $context ) ),
-			'items'        => $this->get_course_progress_items( $course_progress ),
-			'summary'      => $course_progress->get_summary( 'all' ),
+			'id'               => $course_progress->get_id( $context ),
+			'user_id'          => $course_progress->get_user_id( $context ),
+			'course_id'        => $course_progress->get_course_id( $context ),
+			'course_permalink' => get_the_permalink( $course_progress->get_course_id( $context ) ),
+			'name'             => $course ? $course->get_name( $context ) : '',
+			'status'           => $course_progress->get_status( $context ),
+			'started_at'       => masteriyo_rest_prepare_date_response( $course_progress->get_started_at( $context ) ),
+			'modified_at'      => masteriyo_rest_prepare_date_response( $course_progress->get_modified_at( $context ) ),
+			'completed_at'     => masteriyo_rest_prepare_date_response( $course_progress->get_completed_at( $context ) ),
+			'items'            => $this->get_course_progress_items( $course_progress ),
+			'summary'          => $course_progress->get_summary( 'all' ),
 		);
 
 		return $data;

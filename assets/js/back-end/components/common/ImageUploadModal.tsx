@@ -41,14 +41,23 @@ interface Props {
 	selected?: number;
 	title?: string;
 	addButtonText?: string;
+	mediaType?: 'all' | 'video' | 'image';
 }
 
 //@ts-ignore
 const homeURL = window._MASTERIYO_.home_url;
 
 const ImageUploadModal: React.FC<Props> = (props) => {
-	const { isOpen, onClose, onComplete, get, selected, title, addButtonText } =
-		props;
+	const {
+		isOpen,
+		onClose,
+		onComplete,
+		get,
+		selected,
+		title,
+		addButtonText,
+		mediaType = 'image',
+	} = props;
 	const toast = useToast();
 	const imageAPi = new MediaAPI();
 	const [selectedImage, setSelectedImage] = useState<any>(selected);
@@ -57,8 +66,8 @@ const ImageUploadModal: React.FC<Props> = (props) => {
 	const [imageTitle, setImageTitle] = useState<string>('');
 
 	const [page, setPage] = useState(1);
-	const imagesQuery = useQuery(['medias', page], () =>
-		imageAPi.list({ page: page })
+	const imagesQuery = useQuery(['medias', page, mediaType], () =>
+		imageAPi.list({ page: page, media_type: mediaType })
 	);
 
 	const uploadMedia = useMutation((image: any) => imageAPi.store(image));

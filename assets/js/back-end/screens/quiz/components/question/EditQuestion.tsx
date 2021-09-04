@@ -16,7 +16,6 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import Select from 'react-select';
-import Editor from '../../../../components/common/Editor';
 import ReactSelectComponent from '../../../../config/ReactSelectComponent';
 import { reactSelectStyles } from '../../../../config/styles';
 
@@ -154,14 +153,6 @@ const EditQuestion: React.FC<Props> = (props) => {
 					</FormErrorMessage>
 				</FormControl>
 			</Stack>
-			<FormControl>
-				<FormLabel>{__('Question Description', 'masteriyo')}</FormLabel>
-				<Editor
-					name="description"
-					defaultValue={questionData.description}
-					size="md"
-				/>
-			</FormControl>
 		</Stack>
 	);
 };

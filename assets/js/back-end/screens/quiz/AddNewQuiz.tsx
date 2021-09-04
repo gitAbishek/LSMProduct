@@ -32,7 +32,6 @@ import { QuizSchema as QuizSchemaOld, SectionSchema } from '../../schemas';
 import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
-import Description from './components/Description';
 import Name from './components/Name';
 import QuizSettings from './components/QuizSettings';
 
@@ -181,18 +180,17 @@ const AddNewQuiz: React.FC = () => {
 													<TabPanel px="0">
 														<Stack direction="column" spacing="6">
 															<Name />
-															<Description />
 														</Stack>
 													</TabPanel>
 													<TabPanel px="0">
 														<Alert status="error">
 															<AlertIcon />
 															<AlertTitle mr={2}>
-																{__('Add course first', 'masteriyo')}
+																{__('Add Quiz first', 'masteriyo')}
 															</AlertTitle>
 															<AlertDescription>
 																{__(
-																	'In order to add questions. You need to add quiz first',
+																	'In order to add questions. You need to add quiz first.',
 																	'masteriyo'
 																)}
 															</AlertDescription>

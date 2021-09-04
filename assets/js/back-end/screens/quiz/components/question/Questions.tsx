@@ -47,7 +47,7 @@ const Questions: React.FC<Props> = (props) => {
 
 	const onAddNewQuestionPress = () => {
 		addQuestion.mutate({
-			name: 'New Question',
+			name: 'Untitled Question',
 			course_id: courseId,
 			parent_id: quizId,
 			type: 'true-false',

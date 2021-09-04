@@ -46,7 +46,7 @@ const SingleChoice: React.FC<Props> = (props) => {
 		setAnswers([
 			...newAnswers,
 			{
-				name: 'new answer ' + newAnswers.length,
+				name: 'Option ' + (newAnswers.length + 1),
 				correct: newAnswers.length === 0 ? true : false,
 			},
 		]);

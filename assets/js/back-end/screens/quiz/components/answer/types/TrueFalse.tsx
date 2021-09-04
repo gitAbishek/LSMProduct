@@ -48,7 +48,10 @@ const TrueFalse: React.FC<Props> = (props) => {
 	const onAddNewAnswerPress = () => {
 		var newAnswers = [...answers];
 		if (newAnswers.length < 2) {
-			setAnswers([...newAnswers, { name: 'new answer', correct: false }]);
+			setAnswers([
+				...newAnswers,
+				{ name: 'Option ' + (newAnswers.length + 1), correct: false },
+			]);
 		}
 	};
 

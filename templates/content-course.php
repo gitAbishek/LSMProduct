@@ -88,6 +88,7 @@ $categories = $course->get_categories( 'name' );
 			<?php endif; ?>
 		</div>
 		<!-- Four Column (Course duration, comments, student enrolled and curriculum) -->
+		<hr class="masteriyo-border">
 		<div class="masteriyo-course--content__stats">
 			<div class="masteriyo-course-stats-duration">
 			<?php masteriyo_get_svg( 'time', true ); ?> <span><?php echo esc_html( masteriyo_minutes_to_time_length_string( $course->get_duration() ) ); ?></span>

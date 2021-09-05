@@ -2,6 +2,7 @@
 .masteriyo-search {
 	width: 100%;
 	position: relative;
+	margin-top: $spacing_64px;
 	margin-bottom: $spacing_64px;
 
 	.search-field {
@@ -80,10 +81,11 @@
 		align-self: baseline;
 		@include masteriyo-shadow-2;
 		cursor: pointer;
+		border-radius: $border_radius_8;
 
 		&:hover,
 		&:focus {
-			box-shadow: 0 0 30px rgb(0 0 0 / 10%);
+			box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
 			transition: 0.5s ease;
 
 			.masteriyo-course--content__title a {
@@ -99,13 +101,15 @@
 	&--img-wrap {
 		position: relative;
 		width: 100%;
-		height: 210px;
-		object-fit: cover;
+		height: auto;
+		max-height: 210px;
+		overflow: hidden;
 
 		img {
 			width: 100%;
 			height: 210px;
 			object-fit: cover;
+			object-position: center;
 			border-top-left-radius: $border_radius_8;
 			border-top-right-radius: $border_radius_8;
 		}
@@ -129,171 +133,203 @@
 		font-weight: 700;
 		fill: $masteriyo-white-color;
 	}
+}
 
-	.masteriyo-course--content {
-		padding: $spacing_24px;
-		background-color: $masteriyo-white-color;
+.masteriyo-course--content {
+	padding: $spacing_24px;
+	background-color: $masteriyo-white-color;
 
-		// Category list.
-		&__category {
+	// Category list.
+	&__category {
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: $spacing_4px;
+		gap: 8px;
+
+		&-items {
+			font-size: 0.8125rem;
+			font-weight: 500;
+			text-decoration: none;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			padding: 0 $spacing_12px;
+			color: $masteriyo-primary-color;
+			border-radius: $border_radius_50;
+			background-color: rgba($masteriyo-primary-color, 0.1);
+		}
+	}
+
+	// Title.
+	&__title {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin-bottom: $spacing_16px;
+		line-height: 1.5;
+
+		&::before {
+			content: "";
+			display: none;
+		}
+
+		a {
+			margin-bottom: $spacing_20px;
+			color: $masteriyo-dark-gray;
+			text-decoration: none;
+		}
+	}
+
+	// Author and rating.
+	&__rt {
+		display: flex;
+		flex-wrap: wrap;
+		gap: $spacing_8px;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: $spacing_16px;
+
+		.masteriyo-course-author {
+			display: flex;
+			align-items: center;
+			flex-basis: 60%;
+
+			img {
+				width: 32px;
+				height: 32px;
+				object-fit: cover;
+				border-radius: $border_radius_50pct;
+				border: 2px solid rgba(0, 0, 0, 0.1);
+			}
+
+			&--name {
+				color: $masteriyo-accent-color;
+				font-size: 1rem;
+				line-height: 1.5;
+				font-weight: 500;
+				margin-left: $spacing_8px;
+				overflow-wrap: break-word;
+				text-transform: capitalize;
+
+				&:hover,
+				&focus {
+					text-decoration: underline;
+				}
+			}
+		}
+
+		.masteriyo-rating {
 			display: flex;
 			flex-wrap: wrap;
-			margin-bottom: $spacing_14px;
-			gap: 8px;
+			font-size: 1rem;
+			font-weight: 500;
+			align-items: center;
 
-			&-items {
-				padding: 0 $spacing_12px;
-				color: $masteriyo-primary-color;
-				border-radius: $border_radius_50;
-				background-color: rgba($masteriyo-primary-color, 0.1);
+			svg {
+				fill: $masteriyo-primary-color;
+				width: 16px;
+				height: 16px;
+				font-size: 0.75rem;
+
+				&:last-child {
+					margin-right: $spacing_8px;
+				}
 			}
 		}
+	}
 
-		// Title.
-		&__title {
-			font-size: 1.5rem;
-			font-weight: 700;
+	// Course desciption.
+	&__description {
+		margin-bottom: $spacing_20px;
+
+		.title {
 			margin-bottom: $spacing_14px;
-			line-height: 1.5;
-
-			&::before {
-				content: "";
-				display: none;
-			}
-
-			a {
-				margin-bottom: $spacing_20px;
-				color: $masteriyo-dark-gray;
-				text-decoration: none;
-			}
 		}
 
-		// Author and rating.
-		&__rt {
+		ul {
+			list-style: none;
+			margin: 0px;
+			padding: 0px;
+
+			li {
+				display: flex;
+				padding: 4px 0px;
+
+				p {
+					margin: 0px;
+					padding-left: $spacing_8px;
+					font-size: 1rem;
+				}
+
+				&::before {
+					content: ("\2713");
+				}
+			}
+		}
+	}
+
+	// Course stats.
+	&__stats {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin: $spacing_16px 0;
+
+		& > div {
 			display: flex;
 			align-items: center;
-			justify-content: space-between;
-			margin-bottom: $spacing_20px;
+			justify-content: center;
+			color: $masteriyo-light-text-color;
 
-			.masteriyo-course-author {
-				display: flex;
-				align-items: center;
-				flex-basis: 60%;
-
-				img {
-					width: 32px;
-					height: 32px;
-					object-fit: cover;
-					border-radius: $border_radius_50pct;
-					border: 2px solid rgba(0, 0, 0, 0.1);
-				}
-
-				&--name {
-					color: $masteriyo-accent-color;
-					font-size: 1rem;
-					line-height: 1.5;
-					font-weight: 500;
-					margin-left: $spacing_8px;
-					overflow-wrap: break-word;
-					text-transform: capitalize;
-
-					&:hover,
-					&focus {
-						text-decoration: underline;
-					}
-				}
-			}
-
-			.masteriyo-rating {
-				display: flex;
-				flex-wrap: wrap;
+			span {
+				margin-left: 8px;
 				font-size: 1rem;
 				font-weight: 500;
-				align-items: center;
+			}
 
-				svg {
-					fill: $masteriyo-primary-color;
-					width: 16px;
-					height: 16px;
-					font-size: 0.75rem;
-
-					&:last-child {
-						margin-right: $spacing_8px;
-					}
-				}
+			svg {
+				width: 20px;
+				height: 20px;
+				fill: $masteriyo-light-text-color;
 			}
 		}
+	}
 
-		// Course desciption.
-		&__description {
-			margin-bottom: $spacing_20px;
+	// Price and enroll now.
+	.masteriyo-time-btn {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: $spacing_24px;
 
-			.title {
-				margin-bottom: $spacing_14px;
-			}
+		.masteriyo-btn {
+			border-radius: $border_radius_50;
+			padding: $spacing_10px $spacing_24px;
+		}
+	}
 
-			ul {
-				list-style: none;
-				margin: 0px;
-				padding: 0px;
-
-				li {
-					display: flex;
-					padding: 4px 0px;
-
-					p {
-						margin: 0px;
-						padding-left: $spacing_8px;
-						font-size: 1rem;
-					}
-
-					&::before {
-						content: ("\2713");
-					}
-				}
-			}
+	.masteriyo-course-price {
+		.old-amount {
+			text-decoration: line-through;
+			font-size: 1rem;
+			font-weight: 500;
+			color: $masteriyo-light-text-color;
+			margin-right: $spacing_4px;
 		}
 
-		// Course stats.
-		&__stats {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			margin-bottom: $spacing_20px;
-
-			& > div {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				color: $masteriyo-light-text-color;
-
-				span {
-					margin-left: 8px;
-					font-size: 1rem;
-					font-weight: 500;
-				}
-
-				svg {
-					width: 20px;
-					height: 20px;
-					fill: $masteriyo-light-text-color;
-				}
-			}
+		.current-amount {
+			font-size: 1.5rem;
+			color: $masteriyo-primary-color;
+			font-weight: bold;
 		}
+	}
+}
 
-		// Price and enroll now.
-		.masteriyo-course-price {
-			.old-amount {
-				text-decoration: line-through;
-				font-size: 1rem;
-				color: $masteriyo-light-text-color;
-			}
-
-			.current-amount {
-				font-size: 1.5rem;
-				color: $masteriyo-primary-color;
-				font-weight: bold;
-			}
-		}
+.masteriyo-courses-header {
+	&__title,
+	.page-title {
+		font-size: 2rem;
+		font-weight: 600;
+		margin-bottom: $spacing_32px;
 	}
 }

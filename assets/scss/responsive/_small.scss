@@ -22,18 +22,21 @@
 // X-Small devices (portrait phones, less than 576px)
 @media (max-width: 576px) {
 	// Form container
-	.masteriyo-form-container,
-	.masteriyo-btn {
-		width: 100%;
-	}
+	// .masteriyo-form-container,
+	// .masteriyo-btn {
+	// 	width: 100%;
+	// }
+
 	.masteriyo-login .masteriyo-btn-wrapper,
 	.masteriyo-reset .masteriyo-btn-wrapper {
 		flex-direction: column;
 	}
+
 	.masteriyo-login .masteriyo-btn,
 	.masteriyo-reset .masteriyo-btn {
 		margin-bottom: 24px;
 	}
+
 	// Dashbord Continue Studying
 	.masteriyo-cstudy {
 		&--btn {

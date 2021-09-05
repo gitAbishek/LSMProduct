@@ -1,63 +1,298 @@
 // Course search bar.
-.masteriyo {
-	.masteriyo-search {
+.masteriyo-search {
+	width: 100%;
+	position: relative;
+	margin-bottom: $spacing_64px;
+
+	.search-field {
+		background: $masteriyo-white-color;
+		box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
+		border-radius: $border_radius_8;
+		height: 70px;
 		width: 100%;
-		position: relative;
-		margin-bottom: $spacing_64;
+		font-weight: 400;
+		text-decoration: inherit;
+		border: 1px solid rgba($masteriyo-light-text-color, 0.2);
+		padding-left: $spacing_60px;
 
-		.search-field {
+		&:hover,
+		&:focus,
+		&:active {
 			background: $masteriyo-white-color;
-			box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
-			border-radius: $border_radius_8;
-			height: 70px;
-			width: 100%;
-			font-weight: 400;
-			text-decoration: inherit;
-			border: 1px solid rgba($masteriyo-light-text-color, 0.2);
-			padding-left: 42px;
-
-			&:hover,
-			&:focus,
-			&:active {
-				background: $masteriyo-white-color;
-				border: 1px solid $masteriyo-btn-hover-blue;
-				transition: 0.5s ease;
-				@include masteriyo-shadow-2;
-			}
-		}
-
-		button {
-			position: absolute;
-			right: 0px;
-			top: 0px;
-			background-color: $masteriyo-primary-color;
-			padding: 22px 46px;
-			letter-spacing: 0.1em;
-			text-transform: uppercase;
-			font-weight: bold;
-
-			&:hover {
-				background-color: $masteriyo-btn-hover-blue;
-			}
+			border: 1px solid $masteriyo-btn-hover-blue;
+			transition: 0.5s ease;
+			@include masteriyo-shadow-2;
 		}
 	}
 
-	.masteriyo-course-search {
-		position: relative;
+	button {
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		background-color: $masteriyo-primary-color;
+		height: 70px;
+		padding-right: $spacing_40px;
+		padding-left: $spacing_40px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		font-weight: bold;
 
-		button {
-			border-top-right-radius: $border_radius_8;
-			border-bottom-right-radius: $border_radius_8;
+		&:hover {
+			background-color: $masteriyo-btn-hover-blue;
+		}
+	}
+}
+
+.masteriyo-course-search {
+	position: relative;
+
+	button {
+		border-top-right-radius: $border_radius_8;
+		border-bottom-right-radius: $border_radius_8;
+	}
+
+	&__icon {
+		position: absolute;
+		left: 24px;
+		top: 65%;
+		transform: translate(0, -65%);
+		z-index: 1;
+
+		svg {
+			fill: $masteriyo-placeholder-color;
+		}
+	}
+}
+
+//Course card list.
+.masteriyo-course {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-left: -15px;
+	margin-right: -15px;
+	margin-top: -15px;
+
+	&--card {
+		width: 100%;
+		flex-basis: auto;
+		align-self: baseline;
+		@include masteriyo-shadow-2;
+		cursor: pointer;
+
+		&:hover,
+		&:focus {
+			box-shadow: 0 0 30px rgb(0 0 0 / 10%);
+			transition: 0.5s ease;
+
+			.masteriyo-course--content__title a {
+				color: $masteriyo-btn-hover-blue;
+			}
 		}
 
-		&__icon {
-			position: absolute;
-			left: 14px;
-			top: 24px;
-			z-index: 1;
+		.masteriyo-rt {
+			justify-content: space-between;
+		}
+	}
 
-			svg {
-				fill: inherit;
+	&--img-wrap {
+		position: relative;
+		width: 100%;
+		height: 210px;
+		object-fit: cover;
+
+		img {
+			width: 100%;
+			height: 210px;
+			object-fit: cover;
+			border-top-left-radius: $border_radius_8;
+			border-top-right-radius: $border_radius_8;
+		}
+
+		.difficulty-badge {
+			position: absolute;
+			left: 24px;
+			top: 24px;
+			z-index: 2;
+		}
+	}
+
+	&--price-tag {
+		position: absolute;
+		top: 0;
+		right: 0;
+		background: $masteriyo-primary-color;
+		border-radius: 0 0 0 $border_radius_8;
+		padding: $spacing_8px $spacing_16px;
+		color: $masteriyo-white-color;
+		font-weight: 700;
+		fill: $masteriyo-white-color;
+	}
+
+	.masteriyo-course--content {
+		padding: $spacing_24px;
+		background-color: $masteriyo-white-color;
+
+		// Category list.
+		&__category {
+			display: flex;
+			flex-wrap: wrap;
+			margin-bottom: $spacing_14px;
+			gap: 8px;
+
+			&-items {
+				padding: 0 $spacing_12px;
+				color: $masteriyo-primary-color;
+				border-radius: $border_radius_50;
+				background-color: rgba($masteriyo-primary-color, 0.1);
+			}
+		}
+
+		// Title.
+		&__title {
+			font-size: 1.5rem;
+			font-weight: 700;
+			margin-bottom: $spacing_14px;
+			line-height: 1.5;
+
+			&::before {
+				content: "";
+				display: none;
+			}
+
+			a {
+				margin-bottom: $spacing_20px;
+				color: $masteriyo-dark-gray;
+				text-decoration: none;
+			}
+		}
+
+		// Author and rating.
+		&__rt {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: $spacing_20px;
+
+			.masteriyo-course-author {
+				display: flex;
+				align-items: center;
+				flex-basis: 60%;
+
+				img {
+					width: 32px;
+					height: 32px;
+					object-fit: cover;
+					border-radius: $border_radius_50pct;
+					border: 2px solid rgba(0, 0, 0, 0.1);
+				}
+
+				&--name {
+					color: $masteriyo-accent-color;
+					font-size: 1rem;
+					line-height: 1.5;
+					font-weight: 500;
+					margin-left: $spacing_8px;
+					overflow-wrap: break-word;
+					text-transform: capitalize;
+
+					&:hover,
+					&focus {
+						text-decoration: underline;
+					}
+				}
+			}
+
+			.masteriyo-rating {
+				display: flex;
+				flex-wrap: wrap;
+				font-size: 1rem;
+				font-weight: 500;
+				align-items: center;
+
+				svg {
+					fill: $masteriyo-primary-color;
+					width: 16px;
+					height: 16px;
+					font-size: 0.75rem;
+
+					&:last-child {
+						margin-right: $spacing_8px;
+					}
+				}
+			}
+		}
+
+		// Course desciption.
+		&__description {
+			margin-bottom: $spacing_20px;
+
+			.title {
+				margin-bottom: $spacing_14px;
+			}
+
+			ul {
+				list-style: none;
+				margin: 0px;
+				padding: 0px;
+
+				li {
+					display: flex;
+					padding: 4px 0px;
+
+					p {
+						margin: 0px;
+						padding-left: $spacing_8px;
+						font-size: 1rem;
+					}
+
+					&::before {
+						content: ("\2713");
+					}
+				}
+			}
+		}
+
+		// Course stats.
+		&__stats {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: $spacing_20px;
+
+			& > div {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: $masteriyo-light-text-color;
+
+				span {
+					margin-left: 8px;
+					font-size: 1rem;
+					font-weight: 500;
+				}
+
+				svg {
+					width: 20px;
+					height: 20px;
+					fill: $masteriyo-light-text-color;
+				}
+			}
+		}
+
+		// Price and enroll now.
+		.masteriyo-course-price {
+			.old-amount {
+				text-decoration: line-through;
+				font-size: 1rem;
+				color: $masteriyo-light-text-color;
+			}
+
+			.current-amount {
+				font-size: 1.5rem;
+				color: $masteriyo-primary-color;
+				font-weight: bold;
 			}
 		}
 	}

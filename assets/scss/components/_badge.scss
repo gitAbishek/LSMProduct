@@ -1,22 +1,27 @@
 // Badge
 .masteriyo-badge {
-	padding: 8px 14px;
-	font-size: 12px;
-	border-radius: 100px;
+	padding: $spacing_8px $spacing_12px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	border-radius: $border_radius_50;
 	color: $masteriyo-white-color;
 
 	&.masteriyo-badge-red {
 		background: $masteriyo-badge-red;
 	}
+
 	&.masteriyo-badge-green {
 		background: $masteriyo-badge-green;
 	}
+
 	&.masteriyo-badge-blue {
 		background: $masteriyo-badge-blue;
 	}
+
 	&.masteriyo-badge-yellow {
 		background: $masteriyo-warning-color;
 	}
+
 	&.masteriyo-badge-pink {
 		background: $masteriyo-badge-pink;
 	}

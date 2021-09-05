@@ -4,12 +4,20 @@ import {
 	Button,
 	ButtonGroup,
 	Heading,
+	Icon,
 	IconButton,
+	Link,
 	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
-import { BiAlignLeft, BiInfoCircle, BiMenu, BiX } from 'react-icons/bi';
+import {
+	BiAlignLeft,
+	BiChevronLeft,
+	BiInfoCircle,
+	BiMenu,
+	BiX,
+} from 'react-icons/bi';
 import { useParams } from 'react-router-dom';
 import { CloseCone } from '../../back-end/constants/images';
 import { CourseProgressItemMap } from '../schemas';
@@ -22,10 +30,12 @@ interface Props {
 	onToggle: () => void;
 	isOpen: boolean;
 	isHeaderOpen: boolean;
+	coursePermalink: string;
 }
 
 const Sidebar: React.FC<Props> = (props) => {
-	const { items, name, onToggle, isOpen, isHeaderOpen } = props;
+	const { items, name, onToggle, isOpen, isHeaderOpen, coursePermalink } =
+		props;
 	const { courseId }: any = useParams();
 
 	const [currentTab, setCurrentTab] = useState<number>(1);
@@ -65,7 +75,7 @@ const Sidebar: React.FC<Props> = (props) => {
 					d="flex"
 					justifyContent="center"
 					position="absolute"
-					top="0"
+					top="9px"
 					right="-35px"
 					fontSize="x-large"
 					icon={isOpen ? <BiX /> : <BiMenu />}
@@ -82,18 +92,23 @@ const Sidebar: React.FC<Props> = (props) => {
 					<Stack direction="column" spacing="0" flex="1">
 						<Stack
 							direction="column"
-							spacing=""
+							spacing="1"
 							px="4"
 							bg="blue.500"
+							minH="20"
+							justify="center"
 							color="white">
 							<Heading
 								fontSize="lg"
-								minH="20"
 								d="flex"
 								alignItems="center"
 								fontWeight="semibold">
 								{name}
 							</Heading>
+							<Link href={coursePermalink} fontSize="x-small">
+								<Icon as={BiChevronLeft} fontSize="sm" />
+								{__('Back to course', 'masteriyo')}
+							</Link>
 						</Stack>
 						<Box p="0" position="relative" overflowX="hidden" flex="1">
 							{currentTab === 1 && (

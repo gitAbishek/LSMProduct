@@ -52,6 +52,7 @@ export type CourseProgressMap = {
 	completed_at: string | any;
 	items: [CourseProgressItemMap];
 	summary: CourseProgressSummaryMap;
+	course_permalink: string;
 };
 
 export type CourseProgressItemsMap = {

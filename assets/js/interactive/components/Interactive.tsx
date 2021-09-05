@@ -57,6 +57,7 @@ const Interactive: React.FC = () => {
 					isHeaderOpen={isHeaderOpen}
 					items={courseProgressQuery.data.items}
 					name={courseProgressQuery.data.name}
+					coursePermalink={courseProgressQuery.data.course_permalink}
 				/>
 				<Box transition="all 0.35s" ml={isSidebarOpen ? '300px' : 0}>
 					<InteractiveRouter />

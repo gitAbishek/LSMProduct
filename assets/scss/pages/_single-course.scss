@@ -12,6 +12,10 @@
 		gap: 14px;
 	}
 
+	.masteriyo-course--img-wrap {
+		max-height: 100%;
+	}
+
 	&--main {
 		background-color: $masteriyo-white-color;
 		@include masteriyo-shadow-1;
@@ -222,13 +226,6 @@
 			margin-bottom: 14px;
 			padding: 0px 32px;
 			margin-top: 28px;
-
-			&-items {
-				padding: 4px 8px;
-				color: $masteriyo-primary-color;
-				border-radius: 32px;
-				border: 1px solid $masteriyo-primary-color;
-			}
 		}
 
 		// Author and rating

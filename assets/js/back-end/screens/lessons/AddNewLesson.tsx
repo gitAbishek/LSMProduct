@@ -76,6 +76,8 @@ const AddNewLesson: React.FC = () => {
 					isClosable: true,
 				});
 				queryClient.invalidateQueries(`course${data.id}`);
+				//@ts-ignore
+				window.masteriyo_scrollto_section_id = sectionId;
 				history.push({
 					pathname: routes.courses.edit.replace(':courseId', courseId),
 					search: '?page=builder',
@@ -185,15 +187,17 @@ const AddNewLesson: React.FC = () => {
 												</Button>
 												<Button
 													variant="outline"
-													onClick={() =>
+													onClick={() => {
+														//@ts-ignore
+														window.masteriyo_scrollto_section_id = sectionId;
 														history.push({
 															pathname: routes.courses.edit.replace(
 																':courseId',
 																courseId
 															),
 															search: '?page=builder',
-														})
-													}>
+														});
+													}}>
 													{__('Cancel', 'masteriyo')}
 												</Button>
 											</ButtonGroup>

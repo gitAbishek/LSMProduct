@@ -9,6 +9,8 @@
 
 namespace Masteriyo\Emails;
 
+use Masteriyo\Abstracts\Order;
+
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
@@ -59,16 +61,6 @@ class NewOrderEmail extends Email {
 	protected $setting_name_for_heading = 'new_order_enable';
 
 	/**
-	 * Setting name to get email receipients from.
-	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	protected $setting_name_for_receipients = 'new_order_recipients';
-
-	/**
 	 * Setting name to get email content from.
 	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
 	 *
@@ -92,10 +84,12 @@ class NewOrderEmail extends Email {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $order_id Order ID.
+	 * @param Order $order Order object.
 	 */
-	public function trigger( $order_id ) {
-		$order = masteriyo_get_order( $order_id );
+	public function trigger( $order ) {
+		if ( ! $order instanceof Order ) {
+			$order = masteriyo_get_order( $order );
+		}
 
 		// Bail early if order doesn't exist.
 		if ( is_wp_error( $order ) ) {
@@ -124,11 +118,7 @@ class NewOrderEmail extends Email {
 			)
 		);
 
-		$recipients = get_option( 'masteriyo.emails.' . $this->setting_name_for_receipients );
-		if ( empty( $recipients ) ) {
-			$recipients = '{admin_email}';
-		}
-		$this->set_recipient( $recipients );
+		$this->set_recipient( '{admin_email}' );
 
 		// Bail if recipient is empty.
 		if ( empty( $this->get_recipient() ) ) {

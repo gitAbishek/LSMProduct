@@ -25,7 +25,7 @@ class EmailHooks {
 	 * @since 0.1.0
 	 */
 	public static function init() {
-		add_action( 'masteriyo_new_order', array( self::class, 'trigger_new_order_email' ) );
+		add_action( 'masteriyo_new_order', array( self::class, 'trigger_new_order_email' ), 10, 2 );
 		add_action( 'masteriyo_order_status_changed', array( self::class, 'trigger_order_status_change_email' ), 10, 3 );
 		add_action( 'masteriyo_course_progress_status_changed', array( self::class, 'trigger_course_complete_email' ), 10, 4 );
 		add_action( 'masteriyo_user_course_status_changed', array( self::class, 'trigger_course_enrolled_email' ), 10, 4 );
@@ -38,8 +38,8 @@ class EmailHooks {
 	 *
 	 * @param mixed $id
 	 */
-	public static function trigger_new_order_email( $id ) {
-		masteriyo( 'email.new-order' )->trigger( $id );
+	public static function trigger_new_order_email( $id, $order ) {
+		masteriyo( 'email.new-order' )->trigger( $order );
 	}
 
 	/**

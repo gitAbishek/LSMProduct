@@ -97,7 +97,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										{__('Enable', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'New order emails are sent to students when a new order is received.',
+												'New order emails are sent to admin when a new order is received.',
 												'masteriyo'
 											)}
 											hasArrow

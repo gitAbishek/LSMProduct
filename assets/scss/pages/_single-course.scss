@@ -7,11 +7,6 @@
 	margin-left: -15px;
 	flex-direction: row;
 
-	@media only screen and (max-width: 1024px) {
-		margin: 0px;
-		gap: 14px;
-	}
-
 	.masteriyo-course--img-wrap {
 		max-height: 100%;
 	}
@@ -155,7 +150,9 @@
 		padding-bottom: 24px;
 
 		.masteriyo-time-btn {
-			padding: 0px 24px;
+			padding: 0 24px 24px;
+			border-top: none;
+			border-bottom: 1px solid $masteriyo-border-color;
 		}
 
 		hr {
@@ -173,10 +170,12 @@
 
 			span {
 				color: $masteriyo-text-color;
+				font-size: 14px;
 				font-weight: 400;
 			}
-			svg {
-				fill: $masteriyo-text-color;
+
+			.masteriyo-icon-svg > svg {
+				fill: $masteriyo-primary-color;
 			}
 		}
 
@@ -238,6 +237,7 @@
 			.masteriyo-course-author {
 				display: flex;
 				align-items: center;
+
 				img {
 					width: 32px;
 					height: 32px;
@@ -245,10 +245,8 @@
 					border-radius: 50%;
 				}
 				&--name {
-					color: $masteriyo-accent-color;
 					font-size: 12px;
 					line-height: 16px;
-					text-decoration: underline;
 					margin-left: 8px;
 					font-weight: 500;
 					overflow-wrap: break-word;
@@ -397,7 +395,7 @@
 					}
 					&--name {
 						color: $masteriyo-accent-color;
-						font-size: 12px;
+						font-size: 14px;
 						line-height: 16px;
 						text-decoration: underline;
 						margin-left: 8px;

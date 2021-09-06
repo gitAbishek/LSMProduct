@@ -7,10 +7,10 @@
 	/**
 	 * Tabs handler.
 	 */
-	$(document.body).on('click', '.mto-tab', function () {
-		$(this).siblings('.mto-tab').removeClass('mto-active-tab');
+	$(document.body).on('click', '.masteriyo-tab', function () {
+		$(this).siblings('.masteriyo-tab').removeClass('mto-active-tab');
 		$(this).addClass('mto-active-tab');
-		$('.mto-tab-content').addClass('masteriyo-hidden');
+		$('.masteriyo-tab-content').addClass('masteriyo-hidden');
 		$('#' + $(this).data('tab')).removeClass('masteriyo-hidden');
 	});
 

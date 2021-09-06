@@ -67,7 +67,6 @@ $difficulty = $course->get_difficulty();
 		<aside class="masteriyo-single-course--aside masteriyo-course--content">
 			<!-- Price and Enroll Now Button -->
 			<?php do_action( 'masteriyo_single_course_price_and_enroll_button' ); ?>
-			<hr class="masteriyo-border">
 			<!-- Course Stats -->
 			<?php do_action( 'masteriyo_single_course_stats' ); ?>
 

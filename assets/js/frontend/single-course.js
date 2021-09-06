@@ -45,14 +45,14 @@
 	var masteriyo_utils = {
 		getErrorNotice: function (message) {
 			return (
-				'<div class="mto-notify-message mto-alert mto-danger-msg"><span>' +
+				'<div class="masteriyo-notify-message masteriyo-alert masteriyo-danger-msg"><span>' +
 				message +
 				'</span></div>'
 			);
 		},
 		getSuccessNotice: function (message) {
 			return (
-				'<div class="mto-notify-message mto-alert mto-success-msg"><span>' +
+				'<div class="masteriyo-notify-message masteriyo-alert masteriyo-success-msg"><span>' +
 				message +
 				'</span></div>'
 			);
@@ -70,7 +70,7 @@
 			return true;
 		},
 		removeNotices: function ($element) {
-			$element.find('.mto-notify-message').remove();
+			$element.find('.masteriyo-notify-message').remove();
 		},
 		get_rating_markup: function (rating) {
 			rating = rating === '' ? 0 : rating;
@@ -99,15 +99,15 @@
 	var masteriyo_dialogs = {
 		confirm_delete_course_review: function (options = {}) {
 			$(document.body).append(
-				$('.mto-confirm-delete-course-review-modal-content').html()
+				$('.masteriyo-confirm-delete-course-review-modal-content').html()
 			);
-			$('.mto-modal-confirm-delete-course-review .mto-cancel').on(
+			$('.masteriyo-modal-confirm-delete-course-review .masteriyo-cancel').on(
 				'click',
 				function () {
 					$(this).closest('.masteriyo-overlay').remove();
 				}
 			);
-			$('.mto-modal-confirm-delete-course-review .mto-delete').on(
+			$('.masteriyo-modal-confirm-delete-course-review .masteriyo-delete').on(
 				'click',
 				function () {
 					var $modal = $(this).closest('.masteriyo-overlay');
@@ -124,8 +124,8 @@
 		},
 	};
 	var masteriyo = {
-		$create_revew_form: $('.mto-submit-review-form'),
-		create_review_form_class: '.mto-submit-review-form',
+		$create_revew_form: $('.masteriyo-submit-review-form'),
+		create_review_form_class: '.masteriyo-submit-review-form',
 
 		init: function () {
 			$(document).ready(function () {
@@ -155,7 +155,7 @@
 			/**
 			 * Close menu on click menu item.
 			 */
-			$('.mto-dropdown .menu li').on('click', function () {
+			$('.masteriyo-dropdown .menu li').on('click', function () {
 				$(this).closest('.menu').height(0);
 			});
 
@@ -163,22 +163,22 @@
 			 * Close menu on outside click.
 			 */
 			$(document.body).click(function (e) {
-				if ($('.mto-dropdown').has(e.target).length > 0) {
+				if ($('.masteriyo-dropdown').has(e.target).length > 0) {
 					return;
 				}
-				$('.mto-dropdown .menu').height(0);
+				$('.masteriyo-dropdown .menu').height(0);
 			});
 		},
 		init_rating_widget: function () {
 			$(masteriyo.create_review_form_class).on(
 				'click',
-				'.mto-rating-input-icon',
+				'.masteriyo-rating-input-icon',
 				function () {
 					var rating = $(this).index() + 1;
 
 					masteriyo.$create_revew_form.find('input[name="rating"]').val(rating);
 					$(this)
-						.closest('.mto-rstar')
+						.closest('.masteriyo-rstar')
 						.html(masteriyo_helper.get_rating_markup(rating));
 				}
 			);
@@ -228,24 +228,24 @@
 			});
 		},
 		init_reply_btn_handler: function () {
-			$(document.body).on('click', '.mto-reply-course-review', function (e) {
+			$(document.body).on('click', '.masteriyo-reply-course-review', function (e) {
 				e.preventDefault();
 
 				var $form = masteriyo.$create_revew_form;
-				var $review = $(this).closest('.mto-course-review');
+				var $review = $(this).closest('.masteriyo-course-review');
 				var review_id = $review.data('id');
 				var $submit_button = $form.find('button[type="submit"]');
 				var title = $review.find('.title').data('value');
 
 				$form.find('input[name="title"]').val('');
 				$form.find('input[name="rating"]').val(0);
-				$form.find('.mto-rstar').html(masteriyo_helper.get_rating_markup(0));
+				$form.find('.masteriyo-rstar').html(masteriyo_helper.get_rating_markup(0));
 				$form.find('[name="content"]').val('');
 				$form.find('[name="parent"]').val(review_id);
 				$submit_button.text(mto_data.labels.submit);
 
-				$('.mto-form-title').text(mto_data.labels.reply_to + ': ' + title);
-				$form.find('.mto-title, .mto-rating').hide();
+				$('.masteriyo-form-title').text(mto_data.labels.reply_to + ': ' + title);
+				$form.find('.masteriyo-title, .masteriyo-rating').hide();
 				$form.find('[name="content"]').focus();
 				$('html, body').animate(
 					{
@@ -256,11 +256,11 @@
 			});
 		},
 		init_edit_reviews_handler: function () {
-			$(document.body).on('click', '.mto-edit-course-review', function (e) {
+			$(document.body).on('click', '.masteriyo-edit-course-review', function (e) {
 				e.preventDefault();
 
 				var $form = masteriyo.$create_revew_form;
-				var $review = $(this).closest('.mto-course-review');
+				var $review = $(this).closest('.masteriyo-course-review');
 				var review_id = $review.data('id');
 				var $submit_button = $form.find('button[type="submit"]');
 				var title = $review.find('.title').data('value');
@@ -273,15 +273,15 @@
 				$form.find('input[name="title"]').val(title);
 				$form.find('input[name="rating"]').val(rating);
 				$form
-					.find('.mto-rstar')
+					.find('.masteriyo-rstar')
 					.html(masteriyo_helper.get_rating_markup(rating));
 				$form.find('[name="content"]').val(content);
 				$form.find('[name="parent"]').val(parent);
 				$submit_button.text(mto_data.labels.update);
 
 				if ($review.is('.is-course-review-reply')) {
-					$('.mto-form-title').text(mto_data.labels.edit_reply);
-					$form.find('.mto-title, .mto-rating').hide();
+					$('.masteriyo-form-title').text(mto_data.labels.edit_reply);
+					$form.find('.masteriyo-title, .masteriyo-rating').hide();
 					$form.find('[name="content"]').focus();
 					$('html, body').animate(
 						{
@@ -290,8 +290,8 @@
 						500
 					);
 				} else {
-					$('.mto-form-title').text(mto_data.labels.edit_review + ': ' + title);
-					$form.find('.mto-title, .mto-rating').show();
+					$('.masteriyo-form-title').text(mto_data.labels.edit_review + ': ' + title);
+					$form.find('.masteriyo-title, .masteriyo-rating').show();
 					$form.find('input[name="title"]').focus();
 					$('html, body').animate(
 						{
@@ -350,10 +350,10 @@
 		init_delete_reviews_handler: function () {
 			var isDeletingFlags = {};
 
-			$(document.body).on('click', '.mto-delete-course-review', function (e) {
+			$(document.body).on('click', '.masteriyo-delete-course-review', function (e) {
 				e.preventDefault();
 
-				var $review = $(this).closest('.mto-course-review');
+				var $review = $(this).closest('.masteriyo-course-review');
 				var $delete_button = $(this);
 				var review_id = $review.data('id');
 
@@ -390,28 +390,28 @@
 		},
 		init_faqs_accordions_handler: function () {
 			// FAQs accordions handler.
-			$(document.body).on('click', '.mto-faq--item-header', function () {
-				$(this).siblings('.mto-faq--item-body').first().slideToggle('swing');
+			$(document.body).on('click', '.masteriyo-faq--item-header', function () {
+				$(this).siblings('.masteriyo-faq--item-body').first().slideToggle('swing');
 			});
 		},
 		init_curriculum_accordions_handler: function () {
 			// Curriculam Tab
-			$(document.body).on('click', '.mto-cheader', function () {
-				$(this).parent('.mto-stab--citems').toggleClass('active');
+			$(document.body).on('click', '.masteriyo-cheader', function () {
+				$(this).parent('.masteriyo-stab--citems').toggleClass('active');
 				if (
-					$('.mto-stab--citems').length === $('.mto-stab--citems.active').length
+					$('.masteriyo-stab--citems').length === $('.masteriyo-stab--citems.active').length
 				) {
 					expandAllSections();
 				}
 				if (
-					$('.mto-stab--citems').length ===
-					$('.mto-stab--citems').not('.active').length
+					$('.masteriyo-stab--citems').length ===
+					$('.masteriyo-stab--citems').not('.active').length
 				) {
 					collapseAllSections();
 				}
 			});
 			var isCollapsedAll = true;
-			$(document.body).on('click', '.mto-expand-collape-all', function () {
+			$(document.body).on('click', '.masteriyo-expand-collape-all', function () {
 				if (isCollapsedAll) {
 					expandAllSections();
 				} else {
@@ -421,23 +421,23 @@
 
 			// Expand all
 			function expandAllSections() {
-				$('.mto-stab--citems').addClass('active');
-				$('.mto-expand-collape-all').text('Collapse All');
+				$('.masteriyo-stab--citems').addClass('active');
+				$('.masteriyo-expand-collape-all').text('Collapse All');
 				isCollapsedAll = false;
 			}
 
 			// Collapse all
 			function collapseAllSections() {
-				$('.mto-stab--citems').removeClass('active');
-				$('.mto-expand-collape-all').text('Expand All');
+				$('.masteriyo-stab--citems').removeClass('active');
+				$('.masteriyo-expand-collape-all').text('Expand All');
 				isCollapsedAll = true;
 			}
 
-			var $content_ref = $('.mto-scourse--main').get(0);
+			var $content_ref = $('.masteriyo-scourse--main').get(0);
 
 			if ($content_ref) {
 				$(window).scroll(function () {
-					var stickyHeight = $('.mto-sticky').height();
+					var stickyHeight = $('.masteriyo-sticky').height();
 					var scroll_position = $(window).scrollTop();
 					var content_y = $content_ref.offsetTop;
 					var content_y2 = content_y + $content_ref.offsetHeight - stickyHeight;
@@ -446,9 +446,9 @@
 					if (scroll_position > content_y && scroll_position < content_y2)
 						isSticky = true;
 					if (isSticky) {
-						$('.mto-sticky').css({ position: 'sticky', top: '0px' });
+						$('.masteriyo-sticky').css({ position: 'sticky', top: '0px' });
 					} else {
-						$('.mto-sticky').css({ position: 'relative' });
+						$('.masteriyo-sticky').css({ position: 'relative' });
 					}
 				});
 			}
@@ -459,7 +459,7 @@
 })(jQuery, window.masteriyo_data);
 
 function masteriyo_select_single_course_page_tab(e, tabContentSelector) {
-	jQuery('.mto-tab').removeClass('active-tab');
+	jQuery('.materiyo-tab').removeClass('active-tab');
 	jQuery('.tab-content').addClass('masteriyo-hidden');
 
 	jQuery(e.target).addClass('active-tab');

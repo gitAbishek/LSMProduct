@@ -31,27 +31,28 @@
 	}
 
 	// Course list page responsive
-	.columns-4,
-	.columns-3,
-	.columns-2 {
-		.masteriyo-col {
-			flex: 0 0 50%;
-			max-width: 50%;
-			padding: 15px;
-			width: 50%;
+	.masteriyo {
+		.columns-4,
+		.columns-3,
+		.columns-2 {
+			.masteriyo-col {
+				flex: 0 0 50%;
+				max-width: 50%;
+				padding: 15px;
+				width: 50%;
+			}
+
+			.masteriyo-course--card {
+				flex-basis: 335px;
+			}
 		}
 
-		.masteriyo-course--card {
-			flex-basis: 335px;
+		.columns-1 {
+			.masteriyo-course--card {
+				flex-basis: 100%;
+			}
 		}
 	}
-
-	.columns-1 {
-		.masteriyo-course--card {
-			flex-basis: 100%;
-		}
-	}
-
 	// Related Post
 	.masteriyo-related-post {
 		.masteriyo-single-course-item {

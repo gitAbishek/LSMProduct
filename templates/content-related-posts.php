@@ -90,7 +90,6 @@ do_action( 'masteriyo_before_related_posts_content' );
 						<?php echo wp_kses_post( masteriyo_trim_course_highlights( $course->get_highlights() ) ); ?>
 					</div>
 					<!-- Four Column (Course duration, comments, student enrolled and curriculum) -->
-					<hr class="masteriyo-border">
 					<div class="masteriyo-course--content__stats">
 						<div class="masteriyo-course-stats-duration">
 							<?php masteriyo_get_svg( 'time', true ); ?> <span><?php echo esc_html( masteriyo_minutes_to_time_length_string( $course->get_duration() ) ); ?></span>
@@ -105,7 +104,6 @@ do_action( 'masteriyo_before_related_posts_content' );
 							<?php masteriyo_get_svg( 'book', true ); ?> <span><?php echo esc_html( masteriyo_get_lessons_count( $course ) ); ?></span>
 						</div>
 					</div>
-					<hr class="masteriyo-border">
 					<!-- Price and Enroll Now Button -->
 					<div class="masteriyo-time-btn">
 						<div class="masteriyo-course-price">

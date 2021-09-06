@@ -21,12 +21,6 @@
 
 // X-Small devices (portrait phones, less than 576px)
 @media (max-width: 576px) {
-	// Form container
-	// .masteriyo-form-container,
-	// .masteriyo-btn {
-	// 	width: 100%;
-	// }
-
 	.masteriyo-login .masteriyo-btn-wrapper,
 	.masteriyo-reset .masteriyo-btn-wrapper {
 		flex-direction: column;
@@ -58,23 +52,25 @@
 		width: 100%;
 	}
 
-	.columns-4,
-	.columns-3,
-	.columns-2,
-	.columns-1 {
-		.masteriyo-course {
-			flex-direction: row;
-		}
+	.masteriyo {
+		.columns-4,
+		.columns-3,
+		.columns-2,
+		.columns-1 {
+			.masteriyo-course {
+				flex-direction: row;
+			}
 
-		.masteriyo-col {
-			flex: 0 0 100%;
-			max-width: 100%;
-			padding: 15px;
-			width: 100%;
-		}
+			.masteriyo-col {
+				flex: 0 0 100%;
+				max-width: 100%;
+				padding: 15px;
+				width: 100%;
+			}
 
-		.masteriyo-course--card {
-			flex-basis: 100%;
+			.masteriyo-course--card {
+				flex-basis: 100%;
+			}
 		}
 	}
 

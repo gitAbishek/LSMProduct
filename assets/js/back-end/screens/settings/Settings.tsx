@@ -18,7 +18,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiBook } from 'react-icons/bi';
+import { BiCog } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { NavLink } from 'react-router-dom';
 import Header from '../../components/common/Header';
@@ -97,14 +97,14 @@ const Settings = () => {
 									_activeLink={navActiveStyles}
 									_hover={{ color: 'blue.500' }}
 									to={routes.settings}>
-									<ListIcon as={BiBook} />
+									<ListIcon as={BiCog} />
 									{__('Settings', 'masteriyo')}
 								</Link>
 							</ListItem>
 						</List>
 					</Header>
 
-					<Container maxW="container.xl" pt="5">
+					<Container maxW="container.xl">
 						<Box bg="white" p="10" shadow="box">
 							<Tabs>
 								<TabList justifyContent="center" borderBottom="1px">

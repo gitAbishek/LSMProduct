@@ -14,6 +14,7 @@ import {
 	HStack,
 	Link,
 	List,
+	ListIcon,
 	ListItem,
 	Select,
 	Stack,
@@ -26,6 +27,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
+import { BiCart } from 'react-icons/bi';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import { NavLink } from 'react-router-dom';
@@ -114,6 +116,7 @@ const AllOrders = () => {
 							sx={navLinkStyles}
 							_activeLink={navActiveStyles}
 							to={routes.orders.list}>
+							<ListIcon as={BiCart} />
 							{__('Orders', 'masteriyo')}
 						</Link>
 					</ListItem>

@@ -15,9 +15,14 @@
 			padding: 18px;
 		}
 
+		.masteriyo-course-author {
+			flex-basis: auto;
+		}
+
 		.masteriyo-rating {
 			justify-content: flex-end;
 			line-height: 14px;
+			margin-left: 40px;
 		}
 	}
 }

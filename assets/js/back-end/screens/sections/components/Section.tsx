@@ -211,7 +211,7 @@ const Section: React.FC<Props> = (props) => {
 
 					<Box p="5" id={`add-new-section-content-${id}`}>
 						<Menu>
-							<MenuButton as={AddNewButton} ref={scrollRef}>
+							<MenuButton as={AddNewButton}>
 								{__('Add New Content', 'masteriyo')}
 							</MenuButton>
 							<MenuList>

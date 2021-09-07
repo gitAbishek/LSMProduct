@@ -60,9 +60,13 @@ class Permission {
 		if ( 'revision' === $taxonomy ) {
 			$permission = false;
 		} else {
-			$cap             = $contexts[ $context ];
-			$taxonomy_object = get_taxonomy( $taxonomy );
-			$permission      = current_user_can( $taxonomy_object->cap->$cap, $object_id );
+			if ( 'edit' === $context && masteriyo_is_current_user_instructor() && ! masteriyo_is_current_user_manager() && ! masteriyo_is_current_user_admin() ) {
+				$permission = false;
+			} else {
+				$cap             = $contexts[ $context ];
+				$taxonomy_object = get_taxonomy( $taxonomy );
+				$permission      = current_user_can( $taxonomy_object->cap->$cap, $object_id );
+			}
 		}
 
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, $taxonomy );

@@ -72,6 +72,12 @@ class Category extends Taxonomy {
 					'items_list'                 => __( 'Course Categories list', 'masteriyo' ),
 					'items_list_navigation'      => __( 'Course Categories list navigation', 'masteriyo' ),
 				),
+				'capabilities'      => array(
+					'manage_terms' => 'manage_course_categories',
+					'edit_terms'   => 'edit_course_categories',
+					'delete_terms' => 'delete_course_categories',
+					'assign_terms' => 'assign_course_categories',
+				),
 			)
 		);
 	}

@@ -106,6 +106,9 @@ class Capabilities {
 			'read_course_progresses'    => true,
 			'publish_course_progresses' => true,
 			'edit_course_progresses'    => true,
+
+			// Taxonomy.
+			'manage_course_categories'  => true,
 		);
 
 		$subscriber_caps = get_role( 'subscriber' )->capabilities;
@@ -189,6 +192,9 @@ class Capabilities {
 			// Users
 			'list_users'                      => true,
 
+			// Taxonomy.
+			'manage_course_categories'        => true,
+			'edit_course_categories'          => true,
 		);
 
 		$author_caps  = get_role( 'author' )->capabilities;
@@ -250,6 +256,12 @@ class Capabilities {
 			'edit_others_course_progresses'   => true,
 			'delete_others_course_progresses' => true,
 			'delete_course_progresses'        => true,
+
+			// Course Categories.
+			'manage_course_categories'        => true,
+			'edit_course_categories'          => true,
+			'delete_course_categories'        => true,
+			'assign_course_categories'        => true,
 		);
 
 		$editor_caps  = get_role( 'editor' )->capabilities;

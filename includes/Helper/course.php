@@ -160,26 +160,11 @@ function masteriyo_placeholder_img( $size = 'masteriyo_thumbnail', $attr = '' ) 
  * @return string
  */
 function masteriyo_placeholder_img_src( $size = 'masteriyo_thumbnail' ) {
-	$placeholder_image_id = get_option( 'masteriyo_place_holder_image' );
-
-	if ( false === $placeholder_image_id ) {
-		$src = masteriyo_get_plugin_url() . '/assets/img/placeholder.jpeg';
-	} else {
-		$src = wp_get_attachment_image_url( $placeholder_image_id, $size );
-	}
-
+	$src               = masteriyo_get_plugin_url() . '/assets/img/placeholder.jpeg';
 	$placeholder_image = get_option( 'masteriyo_placeholder_image', 0 );
 
-	if ( ! empty( $placeholder_image ) ) {
-		if ( is_numeric( $placeholder_image ) ) {
-			$image = wp_get_attachment_image_src( $placeholder_image, $size );
-
-			if ( ! empty( $image[0] ) ) {
-				$src = $image[0];
-			}
-		} else {
-			$src = $placeholder_image;
-		}
+	if ( ! empty( $placeholder_image ) && is_numeric( $placeholder_image ) ) {
+		$image = wp_get_attachment_image_url( $placeholder_image, $size );
 	}
 
 	return apply_filters( 'masteriyo_placeholder_img_src', $src );

@@ -165,14 +165,16 @@ class PasswordResetFormHandler {
 				$data[ $key ] = '';
 				continue;
 			}
+
 			if ( 'email' === $key ) {
 				$data[ $key ] = sanitize_email( wp_unslash( trim( $_POST[ $key ] ) ) );
 			}
+
 			if ( 'username' === $key ) {
-				$data[ $key ] = sanitize_user( trim( $_POST[ $key ] ) );
+				$data[ $key ] = sanitize_user( trim( $_POST[ $key ] ), true );
 			}
 
-			$data[ $key ] = wp_unslash( $_POST[ $key ] );
+			$data[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
 		}
 		return $data;
 	}

@@ -960,8 +960,6 @@ if ( ! function_exists( 'masteriyo_get_course_search_form' ) ) {
 			)
 		);
 
-		$search_form = apply_filters( 'masteriyo_get_course_search_search_form', ob_get_clean() );
-
 		if ( ! $echo ) {
 			return $search_form;
 		}

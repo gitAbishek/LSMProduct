@@ -254,7 +254,7 @@ class Utils {
 			setcookie( $name, $value, $expire, $cookie_path, COOKIE_DOMAIN, $secure, $http_only );
 		} elseif ( Constants::is_true( 'WP_DEBUG' ) ) {
 			headers_sent( $file, $line );
-			trigger_error( "{$name} cookie cannot be set - headers already sent by {$file} on line {$line}", E_USER_NOTICE ); // @phpcs:ignore
+			trigger_error( "{$name} cookie cannot be set - headers already sent by {$file} on line {$line}", E_USER_NOTICE ); // phpcs:ignore
 		}
 	}
 }

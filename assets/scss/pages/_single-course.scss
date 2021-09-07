@@ -4,8 +4,8 @@
 	display: flex;
 	flex-wrap: wrap;
 	margin-top: $spacing_32px;
-	margin-left: -#{$spacing_15px};
-	margin-right: -#{$spacing_15px};
+	margin-left: -#{$spacing_10px};
+	margin-right: -#{$spacing_10px};
 	flex-direction: row;
 
 	&--main {
@@ -122,6 +122,7 @@
 				font-size: 16px;
 				line-height: 120%;
 			}
+
 			ul {
 				display: flex;
 				flex-direction: column;
@@ -153,6 +154,7 @@
 			margin-bottom: $spacing_14px;
 			padding: 0 $spacing_15px;
 		}
+
 		// Category
 		&__category {
 			display: flex;
@@ -181,14 +183,17 @@
 				list-style: none;
 				margin: 0;
 				padding: 0;
+
 				li {
 					display: flex;
 					padding: $spacing_4px 0;
+
 					p {
 						margin: 0;
 						padding-left: $spacing_8px;
 					}
 				}
+
 				li::before {
 					content: ("\2713");
 				}
@@ -244,6 +249,7 @@
 				content: "";
 				display: none;
 			}
+
 			a {
 				font-weight: bold;
 				font-size: 18px;
@@ -266,6 +272,7 @@
 
 	.masteriyo-course--card {
 		background-color: $masteriyo-white-color;
+
 		.masteriyo-course--content {
 			padding: $spacing_24px;
 
@@ -295,6 +302,7 @@
 // Feature image.
 .masteriyo-feature-img {
 	position: relative;
+
 	img {
 		border-top-left-radius: 8px;
 		border-top-right-radius: 8px;
@@ -409,6 +417,7 @@
 		ul li:first-child::before {
 			display: none;
 		}
+
 		ul li::before {
 			content: "";
 			background: $masteriyo-dark-gray;

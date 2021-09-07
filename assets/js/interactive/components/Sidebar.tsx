@@ -40,6 +40,8 @@ const Sidebar: React.FC<Props> = (props) => {
 
 	const [currentTab, setCurrentTab] = useState<number>(1);
 
+	const hasAdminBar = document.body.classList.contains('admin-bar');
+
 	const buttonStyles = {
 		variant: 'solid',
 		shadow: 'none',
@@ -57,10 +59,26 @@ const Sidebar: React.FC<Props> = (props) => {
 		},
 	};
 
+	const sidebarTop = () => {
+		if (isHeaderOpen) {
+			if (hasAdminBar) {
+				return '98px';
+			} else {
+				return '66px';
+			}
+		} else {
+			if (hasAdminBar) {
+				return '32px';
+			} else {
+				return '0';
+			}
+		}
+	};
+
 	return (
 		<Box
 			pos="fixed"
-			top={isHeaderOpen ? '66px' : 0}
+			top={sidebarTop()}
 			left="0"
 			w="300px"
 			bg="white"

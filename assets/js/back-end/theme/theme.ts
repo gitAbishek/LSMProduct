@@ -127,8 +127,10 @@ const theme = extendTheme({
 			'.wp-admin #masteriyo': {
 				ml: '-20px',
 			},
-			'.admin-bar .masteriyo-interactive-header': {
-				top: '32px !important',
+			'.admin-bar': {
+				' .masteriyo-interactive-header': {
+					top: '32px !important',
+				},
 			},
 			'#masteriyo select': {
 				fontSize: 'sm',

@@ -194,6 +194,7 @@
 				object-fit: cover;
 				border-radius: $border_radius_50pct;
 				border: 2px solid rgba(0, 0, 0, 0.1);
+				margin: 0;
 			}
 
 			&--name {
@@ -252,6 +253,7 @@
 
 				&::before {
 					content: ("\2713");
+					font-size: 16px;
 				}
 			}
 		}

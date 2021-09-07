@@ -23,82 +23,22 @@
 
 		&__content {
 			// Course review
-			.course-reviews {
-				.masteriyo-course-reviews-list {
-					.masteriyo-course-review {
-						&__content {
-							display: flex;
-							border: none;
-							width: 100%;
-
-							.masteriyo-right {
-								margin-left: $spacing_18px;
-								max-width: 90%;
-
-								&__rating {
-									display: flex;
-									justify-content: space-between;
-
-									.rating {
-										margin-bottom: 14px;
-
-										.masteriyo-rstar {
-											display: flex;
-											flex-wrap: wrap;
-											svg {
-												width: 16px;
-												height: 16px;
-												fill: $masteriyo-primary-color;
-											}
-										}
-									}
-								}
-
-								.author-name {
-									color: $masteriyo-primary-color;
-									text-decoration: underline;
-									margin-right: 16px;
-									font-size: 14px;
-									line-height: 16px;
-								}
-
-								.date-created {
-									font-size: 12px;
-									line-height: 14px;
-								}
-
-								.title {
-									font-weight: 500;
-									font-size: 16px;
-									line-height: 19px;
-									margin-top: 24px;
-									margin-bottom: 16px;
-								}
-
-								.content {
-									font-size: 16px;
-									line-height: 27px;
-								}
-							}
-						}
-					}
-				}
-			}
 
 			.masteriyo-stab {
-				padding: 0px 32px;
+				padding: 0 $spacing_32px;
 			}
+
 			.course-overview {
-				padding: 0px 32px;
+				padding: 0 $spacing_32px $spacing_32px;
 			}
 		}
 	}
 
 	&--title {
-		font-size: 36px;
+		font-size: 28px;
 		font-weight: 700;
 		margin-bottom: $spacing_24px;
-		padding: 0 32px;
+		padding: 0 $spacing_32px;
 	}
 
 	&--title-tag {
@@ -117,7 +57,6 @@
 
 	&--btn {
 		border-radius: 100px;
-		// margin-bottom: 30px;
 	}
 
 	&--mdetail {
@@ -126,7 +65,7 @@
 		font-weight: 600;
 
 		svg {
-			margin-right: 8px;
+			margin-right: $spacing_8px;
 			fill: $masteriyo-dark-gray;
 		}
 	}
@@ -137,31 +76,35 @@
 		width: 100%;
 		height: fit-content;
 		@include masteriyo-shadow-1;
-		border-radius: 8px;
+		border-radius: $border_radius_8;
 		gap: 20px;
 		display: flex;
 		flex-direction: column;
-		padding-top: 24px;
-		padding-bottom: 24px;
+		padding-top: $spacing_24px;
+		padding-bottom: $spacing_24px;
 
 		.masteriyo-time-btn {
-			padding: 0 24px 24px;
+			padding: 0 $spacing_24px $spacing_24px;
 			border-top: none;
 			border-bottom: 1px solid $masteriyo-border-color;
 		}
 
 		hr {
 			max-width: 100%;
-			margin-bottom: 0px;
-			padding: 0px 24px;
+			margin-bottom: 0;
+			padding: 0 $spacing_24px;
 		}
 
 		.masteriyo-single-course-stats {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
 			row-gap: 18px;
-			column-gap: 35px;
-			padding: 0px 24px;
+			padding: 0 $spacing_24px;
+
+			& > div {
+				flex: 1 1 50%;
+			}
 
 			span {
 				color: $masteriyo-text-color;
@@ -175,7 +118,7 @@
 		}
 
 		.masteriyo-course--content__description {
-			padding: 0px 24px;
+			padding: 0 $spacing_24px;
 
 			.title {
 				font-weight: bold;
@@ -185,10 +128,10 @@
 			ul {
 				display: flex;
 				flex-direction: column;
-				// gap: 14px;
-				padding-left: 8px;
+				padding-left: $spacing_8px;
+
 				li {
-					margin-bottom: 8px;
+					margin-bottom: $spacing_8px;
 				}
 			}
 		}
@@ -209,25 +152,25 @@
 
 	.masteriyo-course--content {
 		&__title {
-			margin-bottom: 14px;
-			padding: 0 15px;
+			margin-bottom: $spacing_14px;
+			padding: 0 $spacing_15px;
 		}
 		// Category
 		&__category {
 			display: flex;
 			gap: 8px;
 			flex-wrap: wrap;
-			margin-bottom: 14px;
-			padding: 0px 32px;
-			margin-top: 28px;
+			margin-bottom: $spacing_14px;
+			padding: 0 $spacing_32px;
+			margin-top: $spacing_28px;
 		}
 
 		// Author and rating
 		&__rt {
 			display: flex;
 			align-items: center;
-			margin-bottom: 14px;
-			padding: 0px 32px;
+			margin-bottom: $spacing_14px;
+			padding: 0 $spacing_32px;
 
 			.masteriyo-course-author {
 				display: flex;
@@ -238,50 +181,38 @@
 					height: 32px;
 					object-fit: cover;
 					border-radius: 50%;
+					border: 2px solid rgba(0, 0, 0, 0.1);
 				}
+
 				&--name {
 					line-height: 16px;
-					margin-left: 8px;
+					margin-left: $spacing_8px;
 					font-weight: 500;
 					overflow-wrap: break-word;
 				}
 			}
 
 			.masteriyo-rating {
-				display: flex;
-				flex-wrap: wrap;
-				align-items: center;
-				margin-left: 62px;
-
-				svg {
-					fill: $masteriyo-primary-color;
-					width: 12px;
-					height: 12px;
-					font-size: 12px;
-
-					&:last-child {
-						margin-right: 8px;
-					}
-				}
+				font-size: 14px;
 			}
 		}
 
 		// course desciption
 		&__description {
 			.title {
-				margin-bottom: 14px;
+				margin-bottom: $spacing_14px;
 			}
 
 			ul {
 				list-style: none;
-				margin: 0px;
-				padding: 0px;
+				margin: 0;
+				padding: 0;
 				li {
 					display: flex;
-					padding: 4px 0px;
+					padding: $spacing_4px 0;
 					p {
-						margin: 0px;
-						padding-left: 8px;
+						margin: 0;
+						padding-left: $spacing_8px;
 					}
 				}
 				li::before {
@@ -295,8 +226,8 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			margin-top: 18px;
-			margin-bottom: 18px;
+			margin-top: $spacing_18px;
+			margin-bottom: $spacing_18px;
 
 			& > div {
 				display: flex;
@@ -305,7 +236,7 @@
 				color: $masteriyo-light-text-color;
 
 				span {
-					margin-left: 4px;
+					margin-left: $spacing_4px;
 				}
 
 				svg {
@@ -333,7 +264,7 @@
 
 		&__title {
 			line-height: 18px;
-			margin: 0px 0px 14px 0px;
+			margin: 0 0 $spacing_14px 0;
 
 			&::before {
 				content: "";
@@ -342,7 +273,7 @@
 			a {
 				font-weight: bold;
 				font-size: 18px;
-				margin: 0 px 0 20px 0;
+				margin: 0 0 $spacing_20px 0;
 				color: $masteriyo-dark-gray;
 				text-decoration: none;
 			}
@@ -352,30 +283,30 @@
 
 // masteriyo-related-post
 .masteriyo-related-post {
-	margin-top: 24px;
+	margin-top: $spacing_24px;
 
 	&__title {
-		padding: 0px 15px;
-		margin-bottom: 14px;
+		padding: 0 $spacing_15px;
+		margin-bottom: $spacing_14px;
 	}
 
 	.masteriyo-course--card {
 		background-color: $masteriyo-white-color;
 		.masteriyo-course--content {
-			padding: 24px;
+			padding: $spacing_24px;
 
 			&__category {
-				padding: 0px;
-				margin: 0px 0px 14px 0px;
+				padding: 0;
+				margin: 0 0 $spacing_14px 0;
 			}
 
 			&__title {
-				padding: 0px;
+				padding: 0;
 			}
 
 			// Author and rating
 			&__rt {
-				padding: 0px;
+				padding: 0;
 				justify-content: space-between;
 
 				.masteriyo-course-author {
@@ -386,11 +317,13 @@
 						height: 32px;
 						object-fit: cover;
 						border-radius: 50%;
+						border: 2px solid rgba(0, 0, 0, 0.1);
 					}
+
 					&--name {
 						font-size: 14px;
 						line-height: 16px;
-						margin-left: 8px;
+						margin-left: $spacing_8px;
 						font-weight: 500;
 						max-width: 100px;
 						overflow-wrap: break-word;
@@ -401,15 +334,16 @@
 					display: flex;
 					flex-wrap: wrap;
 					align-items: center;
-					margin-left: 62px;
+					margin-left: $spacing_62px;
+					font-size: 14px;
+
 					svg {
 						fill: $masteriyo-primary-color;
-						width: 12px;
-						height: 12px;
-						font-size: 12px;
+						width: 16px;
+						height: 16px;
 
 						&:last-child {
-							margin-right: 8px;
+							margin-right: $spacing_8px;
 						}
 					}
 				}
@@ -452,8 +386,8 @@
 
 	.masteriyo-price-tag {
 		background: $masteriyo-primary-color;
-		border-radius: 0 0 16px 0;
-		padding: 8px 16px;
+		border-radius: 0 0 $border_radius_16 0;
+		padding: $spacing_8px $spacing_16px;
 		color: $masteriyo-white-color;
 	}
 
@@ -461,8 +395,8 @@
 		top: 20px;
 		right: 20px;
 		background: $masteriyo-white-color;
-		border-radius: 100px;
-		padding: 8px;
+		border-radius: $border_radius_100;
+		padding: $spacing_8px;
 		@include masteriyo-shadow-1;
 
 		&:hover {
@@ -476,12 +410,12 @@
 	display: flex;
 	flex-direction: row;
 	gap: 40px;
+	border-top: 1px solid $masteriyo-border-color;
 	border-bottom: 2px solid $masteriyo-border-color;
-	border-top: 2px solid $masteriyo-border-color;
 	font-size: 18px;
 	font-weight: 600;
-	margin-bottom: 24px;
-	margin-top: 32px;
+	margin-bottom: $spacing_24px;
+	margin-top: $spacing_32px;
 	word-break: break-all;
 
 	> div {
@@ -489,7 +423,7 @@
 	}
 
 	> * {
-		padding: 15px 0;
+		padding: $spacing_15px 0;
 		cursor: pointer;
 	}
 
@@ -503,9 +437,9 @@
 	&--tcurriculum {
 		.masteriyo-stab--shortinfo {
 			border-bottom: 2px solid $masteriyo-border-color;
-			padding-bottom: 24px;
-			padding-left: 32px;
-			padding-right: 32px;
+			padding-bottom: $spacing_24px;
+			padding-left: $spacing_32px;
+			padding-right: $spacing_32px;
 			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
@@ -516,11 +450,11 @@
 				flex-direction: column;
 
 				.title {
-					margin: 0px;
+					margin: 0;
 					font-weight: 500;
 					font-size: 24px;
 					line-height: 28px;
-					margin-bottom: 4px;
+					margin-bottom: $spacing_12px;
 				}
 			}
 		}
@@ -531,8 +465,8 @@
 			flex-direction: row;
 			gap: 8px;
 			margin: inherit;
-			font-weight: 400;
 			font-size: 14px;
+			font-weight: 400;
 			line-height: 16px;
 			letter-spacing: 0.005em;
 		}
@@ -546,8 +480,8 @@
 			display: inline-block;
 			width: 0.3em;
 			height: 0.3em;
-			margin: 0 6px 2px 0;
-			border-radius: 50px;
+			margin: 0 $spacing_4px $spacing_2px 0;
+			border-radius: $border_radius_50;
 		}
 
 		.masteriyo-expand-collape-all {
@@ -616,12 +550,11 @@
 		}
 
 		.masteriyo-cheader {
-			padding: 16px;
 			display: flex;
 			flex-direction: row;
 			align-items: center;
 			justify-content: space-between;
-			padding: 24px 32px;
+			padding: $spacing_24px $spacing_32px;
 		}
 
 		.masteriyo-ctitle {
@@ -642,21 +575,21 @@
 			max-height: 0;
 			overflow: hidden;
 			transition: max-height 200ms;
-			border-top: 0px;
+			border-top: 0;
 
 			.masteriyo-lesson-icon {
 				display: flex;
-				margin-right: 8px;
+				margin-right: $spacing_8px;
 			}
 		}
 
 		.masteriyo-lesson-list {
-			margin: 0px;
-			padding: 0px;
+			margin: 0;
+			padding: 0;
 			list-style: none;
 
 			li {
-				padding: 16px 0;
+				padding: $spacing_16px 0;
 				border-bottom: 1px solid $masteriyo-border-color;
 
 				&:last-of-type {
@@ -668,7 +601,7 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				padding: 0px 32px;
+				padding: 0 $spacing_32px;
 
 				&-item {
 					display: flex;
@@ -688,12 +621,12 @@
 		}
 		.masteriyo-time-btn {
 			.masteriyo-btn {
-				padding: 6px 12px;
+				padding: $spacing_6px $spacing_12px;
 				font-size: 10px;
 			}
 		}
 		.masteriyo-lesson-list--btn {
-			border-radius: 100px;
+			border-radius: $border_radius_100;
 			text-transform: uppercase;
 		}
 	}
@@ -703,7 +636,7 @@
 		.masteriyo-faq--item-header {
 			overflow: hidden;
 			border-bottom: 1px solid $masteriyo-border-color;
-			padding: 16px 30px;
+			padding: $spacing_16px $spacing_30px;
 			font-size: 16px;
 			font-weight: 600;
 			cursor: pointer;
@@ -716,7 +649,7 @@
 		.masteriyo-faq--item-body {
 			display: none;
 			border-bottom: 1px solid $masteriyo-border-color;
-			padding: 16px 30px;
+			padding: $spacing_16px $spacing_30px;
 
 			.content {
 				margin: inherit;
@@ -729,13 +662,13 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding: 0px 32px;
+		padding: 0 $spacing_32px;
 	}
 
 	&-rs {
 		@include masteriyo-shadow-2;
-		margin: 20px auto;
-		padding: 20px;
+		margin: $spacing_20px auto;
+		padding: $spacing_20px;
 		border-radius: 50px;
 		gap: 20px;
 		font-weight: 600;
@@ -751,14 +684,123 @@
 
 	&--turating {
 		text-align: center;
+		margin-bottom: $spacing_40px;
 	}
 }
 
 .masteriyo-item--wrap {
 	display: flex;
 	flex-wrap: wrap;
+
 	.masteriyo-single-course-item {
 		display: flex;
+	}
+}
+
+.course-reviews {
+	padding: 0 $spacing_32px $spacing_32px;
+
+	.masteriyo-course-reviews-list {
+		.masteriyo-course-review__content {
+			display: flex;
+			flex-wrap: nowrap;
+			border: none;
+			width: 100%;
+
+			.masteriyo-right {
+				margin-left: $spacing_18px;
+
+				&__rating {
+					display: flex;
+					justify-content: space-between;
+
+					.rating {
+						margin-bottom: $spacing_14px;
+
+						.masteriyo-rstar {
+							display: flex;
+							flex-wrap: wrap;
+
+							svg {
+								width: 20px;
+								height: 20px;
+								fill: $masteriyo-primary-color;
+							}
+						}
+					}
+				}
+
+				.author-name {
+					margin-right: $spacing_16px;
+					font-size: 14px;
+					font-weight: 500;
+					text-transform: capitalize;
+					line-height: 16px;
+				}
+
+				.date-created {
+					font-size: 12px;
+					line-height: 14px;
+				}
+
+				.title {
+					font-size: 16px;
+					font-weight: 700;
+					line-height: 19px;
+					margin-top: $spacing_24px;
+					margin-bottom: $spacing_16px;
+				}
+
+				.content {
+					font-size: 16px;
+					line-height: 27px;
+				}
+			}
+		}
+	}
+
+	.masteriyo-review {
+		border-bottom: 1px solid $masteriyo-border-color;
+		margin-bottom: $spacing_16px;
+		padding-bottom: $spacing_16px;
+
+		.masteriyo-avatar {
+			width: 50px;
+			height: 50px;
+			overflow: hidden;
+			border-radius: $border_radius_50pct;
+
+			img {
+				object-fit: cover;
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+
+	.masteriyo-submit-container {
+		.masteriyo-rating {
+			margin-top: 14px;
+		}
+	}
+
+	.masteriyo-login-msg.masteriyo-submit-container {
+		display: flex;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+		padding-top: 24p;
+	}
+}
+
+// Review form.
+.masteriyo-submit-container {
+	.masteriyo--title {
+		margin-bottom: $spacing_32px;
+	}
+
+	.masteriyo-btn-primary {
+		margin-top: $spacing_32px;
 	}
 }
 
@@ -766,22 +808,24 @@
 	font-size: 14px;
 	line-height: 16px;
 	color: $masteriyo-primary-color;
-	margin-top: 16px;
+	margin-top: $spacing_16px;
 }
 
 .masteriyo-replies {
 	display: flex;
 	flex-flow: unset;
 	flex-direction: row;
+
 	.masteriyo-reply-replies--title {
 		.masteriyo-flex {
 			align-items: center;
 		}
+
 		.author-name {
-			color: $masteriyo-primary-color;
-			text-decoration: underline;
-			margin-right: 16px;
+			margin-right: $spacing_16px;
 			font-size: 14px;
+			font-weight: 500;
+			text-transform: capitalize;
 			line-height: 16px;
 		}
 	}
@@ -791,13 +835,13 @@
 	width: 100%;
 
 	.masteriyo-right {
-		margin-left: 24px;
+		margin-left: $spacing_24px;
 
 		.masteriyo-reply-replies--title {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			margin-bottom: 14px;
+			margin-bottom: $spacing_14px;
 		}
 	}
 }
@@ -814,8 +858,8 @@
 
 	select {
 		border: 1px solid #dee2e6;
-		padding-top: 0px;
-		padding-bottom: 0px;
+		padding-top: 0;
+		padding-bottom: 0;
 	}
 }
 
@@ -826,10 +870,10 @@
 // Overlay
 .masteriyo-overlay {
 	position: fixed;
-	left: 0px;
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.192);

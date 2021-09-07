@@ -11,7 +11,7 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import React from 'react';
-import { BiMinus, BiPlay, BiPlus, BiTimer } from 'react-icons/bi';
+import { BiAlignLeft, BiMinus, BiPlay, BiPlus, BiTimer } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import { CourseContentMap } from '../schemas';
 import { getNavigationRoute } from './FloatingNavigation';
@@ -33,6 +33,19 @@ const SidebarItem: React.FC<Props> = (props) => {
 		rounded: 'full',
 	};
 
+	const getContentIcon = (itemType: 'quiz' | 'lesson', video: boolean) => {
+		if (itemType === 'quiz') {
+			return BiTimer;
+		}
+
+		if (itemType === 'lesson') {
+			if (video) {
+				return BiPlay;
+			} else {
+				return BiAlignLeft;
+			}
+		}
+	};
 	return (
 		<AccordionItem isDisabled={!contents.length} _first={{ borderTop: 0 }}>
 			{({ isExpanded }) => (
@@ -71,7 +84,7 @@ const SidebarItem: React.FC<Props> = (props) => {
 											)}>
 											<Stack direction="row" spacing="2" alignItems="center">
 												<Icon
-													as={content.item_type === 'quiz' ? BiTimer : BiPlay}
+													as={getContentIcon(content.item_type, content.video)}
 													color="blue.500"
 													fontSize="xl"
 												/>

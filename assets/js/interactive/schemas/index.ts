@@ -30,8 +30,9 @@ export type CourseProgressSummaryMap = {
 export type CourseContentMap = {
 	item_id: number;
 	item_title: string;
-	item_type: string;
+	item_type: 'quiz' | 'lesson';
 	completed: boolean;
+	video: boolean;
 };
 
 export type CourseProgressItemMap = {

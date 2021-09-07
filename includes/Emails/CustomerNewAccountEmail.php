@@ -1,6 +1,6 @@
 <?php
 /**
- * UserRegisteredEmail class.
+ * CustomerNewAccountEmail class.
  *
  * @package Masteriyo\Emails
  *
@@ -14,13 +14,13 @@ use Masteriyo\Models\User;
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
- * UserRegisteredEmail Class. Used for sending new account email.
+ * CustomerNewAccountEmail Class. Used for sending new account email.
  *
  * @since 0.1.0
  *
  * @package Masteriyo\Emails
  */
-class UserRegisteredEmail extends Email {
+class CustomerNewAccountEmail extends Email {
 	/**
 	 * Email method ID.
 	 *
@@ -28,7 +28,7 @@ class UserRegisteredEmail extends Email {
 	 *
 	 * @var String
 	 */
-	protected $id = 'user_registered';
+	protected $id = 'customer-new-account';
 
 	/**
 	 * HTML template path.

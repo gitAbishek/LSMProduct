@@ -38,7 +38,7 @@ class EmailHooks {
 	 * @param mixed $user
 	 */
 	public static function trigger_new_user_email( $user ) {
-		masteriyo( 'email.new-user' )->trigger( $user );
+		masteriyo( 'email.customer-new-account' )->trigger( $user );
 	}
 
 	/**

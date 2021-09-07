@@ -528,8 +528,8 @@ class Masteriyo {
 	 * @since 0.1.0
 	 */
 	public function add_image_sizes() {
-		add_image_size( 'masteriyo_single', 1137, 635, true );
-		add_image_size( 'masteriyo_thumbnail', 375, 210, true );
+		add_image_size( 'masteriyo_single', 792, 496, true );
+		add_image_size( 'masteriyo_thumbnail', 270, 170, true );
 	}
 
 	/**

@@ -142,7 +142,8 @@
 
 		.masteriyo-icon-svg {
 			color: $masteriyo-placeholder-color;
-			> svg {
+
+			& > svg {
 				width: 20px;
 				height: 20px;
 				fill: $masteriyo-dark-gray;
@@ -676,8 +677,8 @@
 		align-items: center;
 
 		.masteriyo-icon-svg > svg {
-			width: 16px;
-			height: 16px;
+			width: 20px;
+			height: 20px;
 			fill: $masteriyo-primary-color;
 		}
 	}
@@ -712,6 +713,7 @@
 
 				&__rating {
 					display: flex;
+					align-items: flex-end;
 					justify-content: space-between;
 
 					.rating {
@@ -722,8 +724,8 @@
 							flex-wrap: wrap;
 
 							svg {
-								width: 20px;
-								height: 20px;
+								width: 14px;
+								height: 14px;
 								fill: $masteriyo-primary-color;
 							}
 						}
@@ -769,12 +771,7 @@
 			height: 50px;
 			overflow: hidden;
 			border-radius: $border_radius_50pct;
-
-			img {
-				object-fit: cover;
-				width: 100%;
-				height: 100%;
-			}
+			border: 2px solid rgba(0, 0, 0, 0.1);
 		}
 	}
 
@@ -800,15 +797,19 @@
 	}
 
 	.masteriyo-btn-primary {
-		margin-top: $spacing_32px;
+		margin-top: $spacing_16px;
 	}
 }
 
 .masteriyo-reply-course-review {
 	font-size: 14px;
+	font-weight: 600;
 	line-height: 16px;
 	color: $masteriyo-primary-color;
 	margin-top: $spacing_16px;
+	display: block;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .masteriyo-replies {
@@ -837,6 +838,10 @@
 	.masteriyo-right {
 		margin-left: $spacing_24px;
 
+		.content {
+			font-size: 16px;
+		}
+
 		.masteriyo-reply-replies--title {
 			display: flex;
 			justify-content: space-between;
@@ -849,6 +854,7 @@
 .masteriyo-course-review-replies {
 	width: 90%;
 	float: right;
+	margin-bottom: $spacing_24px;
 }
 
 .masteriyo-country-dropdown {

@@ -39,10 +39,7 @@ const Hightlights: React.FC<Props> = (props) => {
 					'.ProseMirror': {
 						minH: '100px',
 						py: '2',
-						px: '6',
-						ul: {
-							listStyleType: 'disc',
-						},
+						px: '4',
 					},
 				}}>
 				<EditorContent editor={editor} />

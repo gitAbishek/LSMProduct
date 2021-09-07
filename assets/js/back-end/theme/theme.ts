@@ -75,7 +75,13 @@ const theme = extendTheme({
 						borderRadius: '4px',
 					},
 					'ul, ol': {
-						padding: '0 .75rem',
+						padding: '0 0.75rem',
+					},
+					ul: {
+						listStyleType: 'disc',
+					},
+					ol: {
+						padding: '0 1rem',
 					},
 					pre: {
 						background: '#0D0D0D',

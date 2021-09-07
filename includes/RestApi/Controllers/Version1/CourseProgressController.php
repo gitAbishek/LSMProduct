@@ -306,8 +306,7 @@ class CourseProgressController extends CrudController {
 	 * @return array
 	 */
 	protected function get_course_progress_data( $course_progress, $context = 'view' ) {
-		$course_items = $this->get_course_progress_items( $course_progress );
-		$course       = masteriyo_get_course( $course_progress->get_course_id( $context ) );
+		$course = masteriyo_get_course( $course_progress->get_course_id( $context ) );
 
 		$data = array(
 			'id'               => $course_progress->get_id( $context ),
@@ -880,6 +879,8 @@ class CourseProgressController extends CrudController {
 	 * @return array
 	 */
 	protected function get_course_progress_item_data( $course_progress_item, $context = 'view' ) {
+		$lesson = null;
+
 		$data = array(
 			'item_id'   => $course_progress_item->get_item_id( $context ),
 			'item_type' => $course_progress_item->get_item_type( $context ),
@@ -987,13 +988,16 @@ class CourseProgressController extends CrudController {
 
 		$lessons_quizzes = array_map(
 			function( $lesson_quiz ) use ( $progress_items ) {
-				$completed = isset( $progress_items[ $lesson_quiz->ID ] ) ? $progress_items[ $lesson_quiz->ID ]->get_completed() : false;
+				$completed        = isset( $progress_items[ $lesson_quiz->ID ] ) ? $progress_items[ $lesson_quiz->ID ]->get_completed() : false;
+				$video_course_url = get_post_meta( $lesson_quiz->ID, '_video_source_url', true );
+				$video            = ( 'lesson' === $lesson_quiz->post_type && ! empty( $video_course_url ) ) ? true : false;
 
 				return array(
 					'item_id'    => $lesson_quiz->ID,
 					'item_title' => $lesson_quiz->post_title,
 					'item_type'  => $lesson_quiz->post_type,
 					'completed'  => $completed,
+					'video'      => $video,
 				);
 			},
 			$lessons_quizzes

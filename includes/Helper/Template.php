@@ -720,15 +720,40 @@ if ( ! function_exists( 'masteriyo_single_course_curriculum' ) ) {
 		global $course;
 
 		if ( $course->get_show_curriculum() || masteriyo_can_start_course( $course ) ) {
-			$dict = masteriyo_make_section_to_lessons_dictionary( $course );
+			$structure     = masteriyo_get_course_structure( $course->get_id() );
+			$lessons_count = 0;
+			$quiz_count    = 0;
+
+			foreach ( $structure as $section ) {
+				if ( empty( $section ) || ! is_array( $section['contents'] ) ) {
+					continue;
+				}
+				$lessons_count += count(
+					array_filter(
+						$section['contents'],
+						function( $content ) {
+							return 'lesson' === $content['type'];
+						}
+					)
+				);
+				$quiz_count    += count(
+					array_filter(
+						$section['contents'],
+						function( $content ) {
+							return 'quiz' === $content['type'];
+						}
+					)
+				);
+			}
 
 			masteriyo_get_template(
 				'single-course/curriculum.php',
 				array(
-					'course'     => $course,
-					'sections'   => $dict['sections'],
-					'lessons'    => $dict['lessons'],
-					'dictionary' => $dict['lessons_dictionary'],
+					'course'           => $course,
+					'course_structure' => $structure,
+					'sections_count'   => count( $structure ),
+					'lessons_count'    => $lessons_count,
+					'quiz_count'       => $quiz_count,
 				)
 			);
 		}

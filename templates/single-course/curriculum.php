@@ -33,8 +33,8 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 					<?php
 						printf(
 							/* translators: %d: Course sections count */
-							esc_html( _nx( '%s Section', '%s Sections', count( $sections ), 'Sections Count', 'masteriyo' ) ),
-							esc_html( number_format_i18n( count( $sections ) ) )
+							esc_html( _nx( '%s Section', '%s Sections', $sections_count, 'Sections Count', 'masteriyo' ) ),
+							esc_html( number_format_i18n( $sections_count ) )
 						);
 						?>
 					</li>
@@ -42,8 +42,17 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 					<?php
 						printf(
 							/* translators: %d: Course lessons count */
-							esc_html( _nx( '%s Lesson', '%s Lessons', count( $lessons ), 'Lessons Count', 'masteriyo' ) ),
-							esc_html( number_format_i18n( count( $lessons ) ) )
+							esc_html( _nx( '%s Lesson', '%s Lessons', $lessons_count, 'Lessons Count', 'masteriyo' ) ),
+							esc_html( number_format_i18n( $lessons_count ) )
+						);
+						?>
+					</li>
+					<li>
+					<?php
+						printf(
+							/* translators: %d: Course quiz count */
+							esc_html( _nx( '%s Quiz', '%s Quizzes', $quiz_count, 'Quizzes Count', 'masteriyo' ) ),
+							esc_html( number_format_i18n( $quiz_count ) )
 						);
 						?>
 					</li>
@@ -61,23 +70,32 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 				</ul>
 			</div>
 
-			<?php if ( count( $sections ) > 0 ) : ?>
+			<?php if ( $sections_count > 0 ) : ?>
 				<span class="mto-link-primary mto-expand-collape-all"><?php esc_html_e( 'Expand All', 'masteriyo' ); ?></span>
 			<?php endif; ?>
 		</div>
 
-		<?php foreach ( $sections as $section ) : ?>
+		<?php foreach ( $course_structure as $section ) : ?>
 			<div class="mto-stab--citems">
 				<div class="mto-cheader">
-					<h5 class="mto-ctitle"><?php echo esc_html( $section->get_name() ); ?></h5>
+					<h5 class="mto-ctitle"><?php echo esc_html( $section['name'] ); ?></h5>
 
 					<div class="mto-ltc mto-flex-ycenter">
 						<span class="mto-clessons">
 							<?php
 							printf(
-								/* translators: %d: Course lessons count */
-								esc_html( _nx( '%s Lesson', '%s Lessons', count( $dictionary[ $section->get_id() ] ), 'Lessons Count', 'masteriyo' ) ),
-								esc_html( number_format_i18n( count( $dictionary[ $section->get_id() ] ) ) )
+								/* translators: %d: Section lessons count */
+								esc_html( _nx( '%s Lesson', '%s Lessons', $section['lessons_count'], 'Lessons Count', 'masteriyo' ) ),
+								esc_html( number_format_i18n( $section['lessons_count'] ) )
+							);
+							?>
+						</span>
+						<span class="mto-cquizzes">
+							<?php
+							printf(
+								/* translators: %d: Section quizzes count */
+								esc_html( _nx( '%s Quiz', '%s Quizzes', $section['quiz_count'], 'Quizzes Count', 'masteriyo' ) ),
+								esc_html( number_format_i18n( $section['quiz_count'] ) )
 							);
 							?>
 						</span>
@@ -93,14 +111,14 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 
 				<div class="mto-cbody">
 					<ol class="mto-lesson-list">
-						<?php foreach ( $dictionary[ $section->get_id() ] as $lesson ) : ?>
+						<?php foreach ( $section['contents'] as $content ) : ?>
 							<li>
 								<div class="mto-lesson-list__content">
 									<span class="mto-lesson-list__content-item">
 										<span class="mto-lesson-icon">
 											<?php masteriyo_get_svg( 'play', true ); ?>
 										</span>
-										<?php echo esc_html( $lesson->get_name() ); ?>
+										<?php echo esc_html( $content['name'] ); ?>
 								</span>
 								</div>
 							</li>

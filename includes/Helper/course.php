@@ -263,3 +263,139 @@ function masteriyo_trim_course_highlights( $highlights, $limit = 3 ) {
 
 	return apply_filters( 'masteriyo_trimmed_course_highlights', $trimmed_highlights, $limit, $highlights );
 }
+
+/**
+ * Get course contents.
+ *
+ * @since 0.1.0
+ *
+ * @param integer $course_id
+ *
+ * @return array
+ */
+function masteriyo_get_course_contents( $course_id ) {
+	$sections_query = new \WP_Query(
+		array(
+			'post_parent'    => $course_id,
+			'post_type'      => 'section',
+			'posts_per_page' => -1,
+
+		)
+	);
+	$sections = array_map( 'masteriyo_get_section', $sections_query->posts );
+	$objects  = array_merge( array(), $sections );
+
+	foreach ( $sections as $section ) {
+		$section_content_query = new \WP_Query(
+			array(
+				'post_parent' => $section->get_id(),
+				'post_type'   => array( 'lesson', 'quiz' ),
+				'post_status' => 'any',
+
+			)
+		);
+		$contents = array_map(
+			function ( $post ) {
+				if ( 'lesson' === $post->post_type ) {
+					return masteriyo_get_lesson( $post );
+				}
+				if ( 'quiz' === $post->post_type ) {
+					return masteriyo_get_quiz( $post );
+				}
+				return $post;
+			},
+			$section_content_query->posts
+		);
+
+		if ( 0 < count( $contents ) ) {
+			$objects = array_merge( $objects, $contents );
+		}
+	}
+
+	return apply_filters( 'masteriyo_course_contents', $objects, $course_id );
+}
+
+/**
+ * Get course structure.
+ *
+ * @since 0.1.0
+ *
+ * @param integer $course_id
+ *
+ * @return array
+ */
+function masteriyo_get_course_structure( $course_id ) {
+	$objects  = masteriyo_get_course_contents( $course_id );
+	$objects  = array_map(
+		function( $object ) {
+			return array(
+				'id'          => $object->get_id(),
+				'name'        => $object->get_name( 'edit' ),
+				'name'        => $object->get_name( 'edit' ),
+				'description' => $object->get_description( 'edit' ),
+				'permalink'   => $object->get_permalink( 'edit' ),
+				'type'        => $object->get_object_type(),
+				'menu_order'  => $object->get_menu_order( 'edit' ),
+				'parent_id'   => $object->get_parent_id( 'edit' ),
+			);
+		},
+		$objects
+	);
+	$contents = array_values(
+		array_filter(
+			$objects,
+			function( $object ) {
+				return isset( $object['type'] ) && 'section' !== $object['type'];
+			}
+		)
+	);
+	usort(
+		$contents,
+		function( $a, $b ) {
+			return $a['menu_order'] > $b['menu_order'];
+		}
+	);
+
+	$sections = array_values(
+		array_filter(
+			$objects,
+			function( $object ) {
+				return isset( $object['type'] ) && 'section' === $object['type'];
+			}
+		)
+	);
+	usort(
+		$sections,
+		function( $a, $b ) {
+			return $a['menu_order'] > $b['menu_order'];
+		}
+	);
+
+	$ordered_sections = array();
+
+	foreach ( $sections as $section ) {
+		$section_contents = array();
+		$lessons_count    = 0;
+		$quiz_count       = 0;
+
+		foreach ( $contents as $content ) {
+			if ( $content['parent_id'] !== $section['id'] ) {
+				continue;
+			}
+			if ( 'lesson' === $content['type'] ) {
+				$lessons_count++;
+			}
+			if ( 'quiz' === $content['type'] ) {
+				$quiz_count++;
+			}
+			$section_contents[] = $content;
+		}
+
+		$section['contents']      = $section_contents;
+		$section['lessons_count'] = $lessons_count;
+		$section['quiz_count']    = $quiz_count;
+		$ordered_sections[]       = $section;
+	}
+
+	return apply_filters( 'masteriyo_course_structure', $ordered_sections, $course_id );
+}

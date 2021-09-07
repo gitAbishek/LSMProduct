@@ -7,17 +7,13 @@
 	margin-left: -15px;
 	flex-direction: row;
 
-	.masteriyo-course--img-wrap {
-		max-height: 100%;
-	}
-
 	&--main {
 		background-color: $masteriyo-white-color;
 		@include masteriyo-shadow-1;
-		border-radius: 8px;
+		border-radius: $border_radius_8;
 		flex: 0 0 70%;
 		height: 100%;
-		padding: 0px;
+		padding: 0;
 
 		.masteriyo-course-author {
 			&--name {
@@ -36,7 +32,7 @@
 							width: 100%;
 
 							.masteriyo-right {
-								margin-left: 18px;
+								margin-left: $spacing_18px;
 								max-width: 90%;
 
 								&__rating {
@@ -101,9 +97,8 @@
 	&--title {
 		font-size: 36px;
 		font-weight: 700;
-		position: relative;
-		margin: 0px 0px 14px 0px;
-		padding: 0px 32px;
+		margin-bottom: $spacing_24px;
+		padding: 0 32px;
 	}
 
 	&--title-tag {
@@ -245,7 +240,6 @@
 					border-radius: 50%;
 				}
 				&--name {
-					font-size: 12px;
 					line-height: 16px;
 					margin-left: 8px;
 					font-weight: 500;
@@ -394,10 +388,8 @@
 						border-radius: 50%;
 					}
 					&--name {
-						color: $masteriyo-accent-color;
 						font-size: 14px;
 						line-height: 16px;
-						text-decoration: underline;
 						margin-left: 8px;
 						font-weight: 500;
 						max-width: 100px;

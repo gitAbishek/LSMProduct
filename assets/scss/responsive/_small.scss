@@ -20,7 +20,7 @@
 }
 
 // X-Small devices (portrait phones, less than 576px)
-@media (max-width: 576px) {
+@media (max-width: 600px) {
 	.masteriyo-login .masteriyo-btn-wrapper,
 	.masteriyo-reset .masteriyo-btn-wrapper {
 		flex-direction: column;
@@ -64,7 +64,7 @@
 			.masteriyo-col {
 				flex: 0 0 100%;
 				max-width: 100%;
-				padding: 15px;
+				padding: 10px;
 				width: 100%;
 			}
 

@@ -459,7 +459,7 @@
 })(jQuery, window.masteriyo_data);
 
 function masteriyo_select_single_course_page_tab(e, tabContentSelector) {
-	jQuery('.materiyo-tab').removeClass('active-tab');
+	jQuery('.masteriyo-tab').removeClass('active-tab');
 	jQuery('.tab-content').addClass('masteriyo-hidden');
 
 	jQuery(e.target).addClass('active-tab');

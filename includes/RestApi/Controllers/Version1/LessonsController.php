@@ -259,7 +259,7 @@ class LessonsController extends PostsController {
 
 		$data = array(
 			'id'                  => $lesson->get_id(),
-			'name'                => $lesson->get_name( $context ),
+			'name'                => wp_specialchars_decode( $lesson->get_name( $context ) ),
 			'slug'                => $lesson->get_slug( $context ),
 			'permalink'           => $lesson->get_permalink(),
 			'status'              => $lesson->get_status( $context ),

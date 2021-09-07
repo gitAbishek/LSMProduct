@@ -236,7 +236,7 @@ class SectionsController extends PostsController {
 
 		$data = array(
 			'id'          => $section->get_id(),
-			'name'        => $section->get_name( $context ),
+			'name'        => wp_specialchars_decode( $section->get_name( $context ) ),
 			'permalink'   => $section->get_permalink( $context ),
 			'menu_order'  => $section->get_menu_order( $context ),
 			'parent_id'   => $section->get_parent_id( $context ),

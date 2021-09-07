@@ -361,7 +361,7 @@ class QuestionsController extends PostsController {
 	protected function get_question_data( $question, $context = 'view' ) {
 		$data = array(
 			'id'                => $question->get_id(),
-			'name'              => $question->get_name( $context ),
+			'name'              => wp_specialchars_decode( $question->get_name( $context ) ),
 			'permalink'         => $question->get_permalink(),
 			'status'            => $question->get_status( $context ),
 			'description'       => 'view' === $context ? apply_filters( 'masteriyo_description', $question->get_description() ) : $question->get_description( $context ),

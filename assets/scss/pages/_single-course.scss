@@ -3,8 +3,9 @@
 .masteriyo-single-course {
 	display: flex;
 	flex-wrap: wrap;
-	margin-right: -15px;
-	margin-left: -15px;
+	margin-top: $spacing_32px;
+	margin-left: -#{$spacing_15px};
+	margin-right: -#{$spacing_15px};
 	flex-direction: row;
 
 	&--main {
@@ -89,12 +90,6 @@
 			border-bottom: 1px solid $masteriyo-border-color;
 		}
 
-		hr {
-			max-width: 100%;
-			margin-bottom: 0;
-			padding: 0 $spacing_24px;
-		}
-
 		.masteriyo-single-course-stats {
 			display: flex;
 			flex-direction: row;
@@ -119,6 +114,8 @@
 
 		.masteriyo-course--content__description {
 			padding: 0 $spacing_24px;
+			margin-top: $spacing_8px;
+			margin-bottom: 0;
 
 			.title {
 				font-weight: bold;
@@ -172,30 +169,6 @@
 			align-items: center;
 			margin-bottom: $spacing_14px;
 			padding: 0 $spacing_32px;
-
-			.masteriyo-course-author {
-				display: flex;
-				align-items: center;
-
-				img {
-					width: 32px;
-					height: 32px;
-					object-fit: cover;
-					border-radius: 50%;
-					border: 2px solid rgba(0, 0, 0, 0.1);
-				}
-
-				&--name {
-					line-height: 16px;
-					margin-left: $spacing_8px;
-					font-weight: 500;
-					overflow-wrap: break-word;
-				}
-			}
-
-			.masteriyo-rating {
-				font-size: 14px;
-			}
 		}
 
 		// course desciption
@@ -309,45 +282,6 @@
 			&__rt {
 				padding: 0;
 				justify-content: space-between;
-
-				.masteriyo-course-author {
-					display: flex;
-					align-items: center;
-					img {
-						width: 32px;
-						height: 32px;
-						object-fit: cover;
-						border-radius: 50%;
-						border: 2px solid rgba(0, 0, 0, 0.1);
-					}
-
-					&--name {
-						font-size: 14px;
-						line-height: 16px;
-						margin-left: $spacing_8px;
-						font-weight: 500;
-						max-width: 100px;
-						overflow-wrap: break-word;
-					}
-				}
-
-				.masteriyo-rating {
-					display: flex;
-					flex-wrap: wrap;
-					align-items: center;
-					margin-left: $spacing_62px;
-					font-size: 14px;
-
-					svg {
-						fill: $masteriyo-primary-color;
-						width: 16px;
-						height: 16px;
-
-						&:last-child {
-							margin-right: $spacing_8px;
-						}
-					}
-				}
 			}
 		}
 	}

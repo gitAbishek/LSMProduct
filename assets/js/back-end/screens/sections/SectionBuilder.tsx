@@ -9,8 +9,10 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useRef, useState } from 'react';
+import queryString from 'query-string';
+import React, { useEffect, useRef, useState } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { useLocation } from 'react-router-dom';
 import AddNewButton from '../../components/common/AddNewButton';
 import { reorder } from '../../utils/reorder';
 import { isEmpty } from '../../utils/utils';
@@ -28,6 +30,14 @@ const SectionBuilder: React.FC<Props> = (props) => {
 	const { courseId, builderData, setBuilderData, onDeletePress } = props;
 	const [isAddNewSection, setIsAddNewSection] = useState(false);
 	const scrollRef = useRef<any>(null);
+	const { search } = useLocation();
+	const { view } = queryString.parse(search);
+
+	useEffect(() => {
+		document
+			.getElementById(`add-new-section-content-${view}`)
+			?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+	}, [view]);
 
 	const onDragEnd = (result: DropResult) => {
 		const orderedData = reorder(result, builderData);

@@ -23,7 +23,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import {
 	BiAlignLeft,
@@ -81,25 +81,6 @@ const Section: React.FC<Props> = (props) => {
 	const lessonAPI = new API(urls.lessons);
 	const quizAPI = new API(urls.quizes);
 	const scrollRef = useRef<any>(null);
-
-	useEffect(() => {
-		//@ts-ignore
-		const scrolltoSectionId = window.masteriyo_scrollto_section_id + '';
-		const sectionId = id + '';
-
-		if (
-			!scrolltoSectionId ||
-			!scrollRef?.current ||
-			sectionId !== scrolltoSectionId
-		) {
-			return;
-		}
-		setTimeout(() => {
-			scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-			//@ts-ignore
-			window.masteriyo_scrollto_section_id = null;
-		}, 0);
-	}, [id]);
 
 	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
 		onSuccess: (data: any) => {
@@ -228,7 +209,7 @@ const Section: React.FC<Props> = (props) => {
 						</Droppable>
 					</Box>
 
-					<Box p="5">
+					<Box p="5" id={`add-new-section-content-${id}`}>
 						<Menu>
 							<MenuButton as={AddNewButton} ref={scrollRef}>
 								{__('Add New Content', 'masteriyo')}

@@ -3,7 +3,6 @@ import {
 	FormControl,
 	FormLabel,
 	Icon,
-	Select,
 	Stack,
 	Tab,
 	TabList,
@@ -86,29 +85,6 @@ const GeneralSettings: React.FC<Props> = (props) => {
 								/>
 
 								<ColorInput color={primaryColor} setColor={setPrimaryColor} />
-							</FormControl>
-							<FormControl>
-								<FormLabel minW="xs">
-									{__('Theme', 'masteriyo')}
-									<Tooltip
-										label={__('Styling for the theme', 'masteriyo')}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<Select
-									{...register('general.styling.theme')}
-									defaultValue={generalData?.styling?.theme}>
-									<option value="minimum">
-										{__('Minimum Styling', 'masteriyo')}
-									</option>
-									<option value="custom">
-										{__('Custom Styling', 'masteriyo')}
-									</option>
-								</Select>
 							</FormControl>
 						</Stack>
 					</TabPanel>

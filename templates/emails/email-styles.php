@@ -18,28 +18,38 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 
 ?>
 
-.email-template{
-	width: 30%;
-	border:1px solid #EBECF2;
+.email-template {
+	max-width: 600px;
+	border: 1px solid #EBECF2;
 	border-radius: 4px;
-	padding:10px 30px;
+	padding: 10px 30px;
+	margin: 0 auto;
+	margin-top: 32px;
+	background: #fff;
 }
-.email-template p{
+
+.email-template p {
 	line-height: 1.5;
 }
-.email-template--title{
+
+.email-template--title {
 	font-size: 20px;
 	font-weight: 600;
 	color: #07092F;
 }
-.email-template--button{
+
+.email-template--button {
 	border-radius: 4px;
-	background: #78A6FF;
+	background-color: #78A6FF;
 	padding:12px 16px;
 	margin: 10px 0px;
 	color: #fff;
 	text-decoration: none;
 	display: inline-block;
+}
+
+.email-text--bold{
+	font-weight: 700;
 }
 
 svg {

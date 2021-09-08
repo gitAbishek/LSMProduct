@@ -29,6 +29,7 @@ do_action( 'masteriyo_email_header', $email_heading, $email ); ?>
 	<?php /* translators: %s: Customer username */ ?>
 	<?php printf( esc_html__( 'Hi %s,', 'masteriyo' ), esc_html( $name ) ); ?>
 </p>
+
 <p class="email-template--info">
 	<?php
 		/* translators: %1$s: Site title, %2$s: Username, %3$s: account link */

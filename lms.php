@@ -28,6 +28,20 @@ define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
 define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
 define( 'MASTERIYO_PLUGIN_REL_LANGUAGES_PATH', 'i18n/languages' );
 
+add_action(
+	'init',
+	function() {
+		if ( isset( $_GET['test'] ) ) {
+			// masteriyo( 'email.customer-new-account' )->trigger( 1 );
+			masteriyo( 'email.password-reset' )->trigger( 1, 'abc' );
+			// masteriyo('email.new-order')->trigger(order_id_here);
+			// masteriyo('email.order-cancelled')->trigger(order_id_here);
+			// masteriyo('email.order-onhold')->trigger(order_id_here);
+			// masteriyo('email.order-completed')->trigger(order_id_here);
+		}
+	}
+);
+
 /**
  * Include the autoloader.
  */

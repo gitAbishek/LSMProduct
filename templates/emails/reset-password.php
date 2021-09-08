@@ -30,10 +30,12 @@ do_action( 'masteriyo_email_header', $email_heading, $email );
 	<?php /* translators: %s: Site name */ ?>
 	<?php printf( esc_html__( 'Someone has requested a new password for the following account on %s:', 'masteriyo' ), esc_html( $blogname ) ); ?>
 </p>
-<p class="email-template--info">
+
+<p class="email-template--info email-text--bold">
 	<?php /* translators: %s: Username */ ?>
 	<?php printf( esc_html__( 'Username: %s', 'masteriyo' ), esc_html( $user->get_username() ) ); ?>
 </p>
+
 <p class="email-template--info">
 	<?php esc_html_e( 'If you didn\'t make this request, just ignore this email. If you\'d like to proceed:', 'masteriyo' ); ?>
 </p>

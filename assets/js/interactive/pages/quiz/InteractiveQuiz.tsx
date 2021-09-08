@@ -117,7 +117,7 @@ const InteractiveQuiz = () => {
 					navigation={quizQuery?.data?.navigation}
 					courseId={quizQuery?.data?.course_id}
 				/>
-				{quizStartedOn && (
+				{quizStartedOn && quizQuery.data.duration !== 0 && (
 					<FloatingTimer
 						startedOn={quizStartedOn}
 						duration={quizQuery?.data?.duration}

@@ -13,7 +13,7 @@ interface Props {
 	quizId: number;
 	startedOn: any;
 	onQuizeExpire: () => void;
-	quizeAboutToExpire: (value: boolean) => void;
+	quizeAboutToExpire: any;
 }
 const FloatingTimer: React.FC<Props> = (props) => {
 	const { duration, startedOn, onQuizeExpire, quizeAboutToExpire } = props;

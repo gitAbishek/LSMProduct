@@ -12,7 +12,6 @@ import {
 	Alert,
 	AlertIcon,
 	Heading,
-	HStack,
 	SkeletonText,
 	Stack,
 	Text,
@@ -103,7 +102,7 @@ const QuizFields: React.FC<Props> = (props) => {
 							{__('Your quiz time is about to expire!', 'masteriyo')}
 						</Alert>
 					)}
-					{questionQuery.data.map((question: QuestionSchema, index: string) => (
+					{questionQuery.data.map((question: QuestionSchema) => (
 						<Stack direction="column" spacing="8" key={question.id}>
 							<Heading fontSize="lg">{question.name}</Heading>
 
@@ -134,11 +133,10 @@ const QuizFields: React.FC<Props> = (props) => {
 						</Stack>
 					))}
 					<Stack
-						mt="8"
 						w="full"
 						direction="row"
 						justifyContent="space-between"
-						pb="4"
+						align="center"
 						fontSize="sm">
 						<Text color="gray.500">
 							{__(
@@ -148,47 +146,46 @@ const QuizFields: React.FC<Props> = (props) => {
 								'masteriyo'
 							)}
 						</Text>
-						<HStack>
-							<Pagination
-								pagesCount={pagesCount}
-								currentPage={currentPage}
-								onPageChange={handlePageChange}>
-								<PaginationContainer>
-									<Stack direction="row" spacing="1">
-										<PaginationPrevious size="sm" shadow="none">
-											<FaChevronLeft />
-										</PaginationPrevious>
-										<PaginationPageGroup
-											isInline
-											align="center"
-											separator={
-												<PaginationSeparator fontSize="sm" w={7} jumpSize={3} />
-											}>
-											{pages.map((page: number) => (
-												<PaginationPage
-													shadow="none"
-													h="8"
-													w="8"
-													key={`pagination_page_${page}`}
-													page={page}
-													_hover={{
-														bg: 'blue.400',
-													}}
-													_current={{
-														bg: 'blue.400',
-														fontSize: 'sm',
-														color: 'white',
-													}}
-												/>
-											))}
-										</PaginationPageGroup>
-										<PaginationNext size="sm" shadow="none">
-											<FaChevronRight />
-										</PaginationNext>
-									</Stack>
-								</PaginationContainer>
-							</Pagination>
-						</HStack>
+
+						<Pagination
+							pagesCount={pagesCount}
+							currentPage={currentPage}
+							onPageChange={handlePageChange}>
+							<PaginationContainer>
+								<Stack direction="row" spacing="1">
+									<PaginationPrevious size="sm" shadow="none">
+										<FaChevronLeft />
+									</PaginationPrevious>
+									<PaginationPageGroup
+										isInline
+										align="center"
+										separator={
+											<PaginationSeparator fontSize="sm" w={7} jumpSize={3} />
+										}>
+										{pages.map((page: number) => (
+											<PaginationPage
+												shadow="none"
+												h="8"
+												w="8"
+												key={`pagination_page_${page}`}
+												page={page}
+												_hover={{
+													bg: 'blue.400',
+												}}
+												_current={{
+													bg: 'blue.400',
+													fontSize: 'sm',
+													color: 'white',
+												}}
+											/>
+										))}
+									</PaginationPageGroup>
+									<PaginationNext size="sm" shadow="none">
+										<FaChevronRight />
+									</PaginationNext>
+								</Stack>
+							</PaginationContainer>
+						</Pagination>
 					</Stack>
 				</Stack>
 			</>

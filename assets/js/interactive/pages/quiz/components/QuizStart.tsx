@@ -65,7 +65,11 @@ const QuizStart: React.FC<Props> = (props) => {
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiTime} />
 					<Text as="strong">{__('Duration: ')}</Text>
-					<Text ml="1">{humanizeDuration(quizData?.duration * 60 * 1000)}</Text>
+					<Text ml="1">
+						{quizData?.duration === 0
+							? __('No time limit', 'masteriyo')
+							: humanizeDuration(quizData?.duration * 60 * 1000)}
+					</Text>
 				</ListItem>
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiInfoCircle} />

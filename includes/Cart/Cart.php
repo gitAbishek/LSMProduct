@@ -834,6 +834,8 @@ class Cart {
 	public function add_to_cart( $course_id = 0, $quantity = 1, $cart_item_data = array() ) {
 
 		try {
+			$this->clear();
+
 			$course   = masteriyo_get_course( $course_id );
 			$quantity = apply_filters( 'masteriyo_add_to_cart_quantity', $quantity, $course_id, $course );
 

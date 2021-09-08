@@ -23,6 +23,22 @@ do_action( 'masteriyo_before_registration_form_content' );
 			<form id="mto-signup--form" class="mto-signup-form" method="post">
 				<input type="hidden" name="remember" value="true">
 				<div class="">
+					<div class="mto-first-name">
+						<label for="first-name" class="mto-label">
+							<?php echo esc_html__( 'First Name', 'masteriyo' ); ?>
+							<span class="mto-text-red">*</span>
+						</label>
+						<input id="first-name" class="mto-input" name="first-name" type="text" required>
+					</div>
+
+					<div class="mto-last-name">
+						<label for="last-name" class="mto-label">
+							<?php echo esc_html__( 'Last Name', 'masteriyo' ); ?>
+							<span class="mto-text-red">*</span>
+						</label>
+						<input id="last-name" class="mto-input" name="last-name" type="text" required>
+					</div>
+
 					<div class="mto-username">
 						<label for="username" class="mto-label">
 							<?php echo esc_html__( 'Username', 'masteriyo' ); ?>

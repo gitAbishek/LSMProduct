@@ -43,7 +43,15 @@ class RegistrationFormHandler {
 			$this->validate_form();
 
 			$data = $this->get_form_data();
-			$user = masteriyo_create_new_user( $data['email'], $data['username'], $data['password'] );
+			$user = masteriyo_create_new_user(
+				$data['email'],
+				$data['username'],
+				$data['password'],
+				array(
+					'first_name' => $data['first-name'],
+					'last_name'  => $data['last-name'],
+				)
+			);
 
 			if ( is_wp_error( $user ) ) {
 				throw new \Exception( $user->get_error_message() );
@@ -78,6 +86,12 @@ class RegistrationFormHandler {
 
 		if ( empty( $data['email'] ) ) {
 			throw new \Exception( __( 'Email is required', 'masteriyo' ) );
+		}
+		if ( empty( $data['first-name'] ) ) {
+			throw new \Exception( __( 'First name is required', 'masteriyo' ) );
+		}
+		if ( empty( $data['last-name'] ) ) {
+			throw new \Exception( __( 'Last name is required', 'masteriyo' ) );
 		}
 
 		if ( ! masteriyo_registration_is_generate_password() ) {
@@ -148,7 +162,7 @@ class RegistrationFormHandler {
 		}
 
 		$data   = array();
-		$fields = array( 'username', 'email', 'password', 'confirm-password', 'accept-terms-and-conditions' );
+		$fields = array( 'first-name', 'last-name', 'username', 'email', 'password', 'confirm-password', 'accept-terms-and-conditions' );
 
 		foreach ( $fields as $key ) {
 			if ( ! isset( $_POST[ $key ] ) ) {

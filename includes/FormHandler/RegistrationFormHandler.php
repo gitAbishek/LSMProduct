@@ -94,6 +94,10 @@ class RegistrationFormHandler {
 			$error->add( 'email_required', __( 'Email is required.', 'masteriyo' ) );
 		}
 
+		if ( ! is_email( $data['email'] ) ) {
+			$error->add( 'invalid_email', __( 'Email is invalid.', 'masteriyo' ) );
+		}
+
 		if ( empty( $data['first-name'] ) ) {
 			$error->add( 'first_name_required', __( 'First name is required.', 'masteriyo' ) );
 		}

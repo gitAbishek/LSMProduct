@@ -80,7 +80,6 @@ const Section: React.FC<Props> = (props) => {
 
 	const lessonAPI = new API(urls.lessons);
 	const quizAPI = new API(urls.quizes);
-	const scrollRef = useRef<any>(null);
 
 	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
 		onSuccess: (data: any) => {

@@ -38,7 +38,6 @@ const EditQuestion: React.FC<Props> = (props) => {
 		{ value: 'true-false', label: 'True False', icon: 'YesNo' },
 		{ value: 'single-choice', label: 'Single Choice', icon: 'SingleChoice' },
 		{ value: 'multiple-choice', label: 'Multi Choice', icon: 'MultipleChoice' },
-		{ value: 'short-answer', label: 'Short Answer', icon: 'OpenEndedEssay' },
 	];
 
 	const getQuestionTypeDefaultValue = () => {

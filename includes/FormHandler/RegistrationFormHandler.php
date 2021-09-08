@@ -7,6 +7,8 @@
 
 namespace Masteriyo\FormHandler;
 
+use Masteriyo\Notice;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -25,7 +27,6 @@ class RegistrationFormHandler {
 	 * @return void
 	 */
 	public function process_registration() {
-
 		try {
 			if ( ! isset( $_POST['masteriyo-registration'] ) ) {
 				return;
@@ -33,16 +34,21 @@ class RegistrationFormHandler {
 
 			$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
-			if ( empty( $nonce_value ) ) {
-				throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
-			}
 			if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-register' ) ) {
 				throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
 			}
 
-			$this->validate_form();
+			$data  = $this->get_form_data();
+			$error = $this->validate_form( $data );
 
-			$data = $this->get_form_data();
+			if ( is_wp_error( $error ) ) {
+				foreach ( $error->get_error_messages() as $message ) {
+					masteriyo_add_notice( $message, Notice::ERROR );
+				}
+
+				throw new \Exception( 'Registration failed' );
+			}
+
 			$user = masteriyo_create_new_user(
 				$data['email'],
 				$data['username'],
@@ -66,61 +72,60 @@ class RegistrationFormHandler {
 			$this->redirect( $user );
 
 		} catch ( \Exception $e ) {
-			if ( $e->getMessage() ) {
-				masteriyo_add_notice( sprintf( '<strong>%s: %s</strong> ', __( 'Error', 'masteriyo' ), $e->getMessage() ), 'error' );
-			}
+			$error = $e->getMessage();
 		}
 	}
 
 	/**
 	 * Validate the submitted form.
 	 *
+	 * @param array $data Form data.
+	 *
 	 * @since 0.1.0
 	 */
-	protected function validate_form() {
-		$data = $this->get_form_data();
+	protected function validate_form( $data ) {
+		$error = new \WP_Error();
 
 		if ( ! masteriyo_registration_is_generate_username() && empty( $data['username'] ) ) {
-			throw new \Exception( __( 'Username is required', 'masteriyo' ) );
+			$error->add( 'username_required', __( 'Username is required.', 'masteriyo' ) );
 		}
 
 		if ( empty( $data['email'] ) ) {
-			throw new \Exception( __( 'Email is required', 'masteriyo' ) );
+			$error->add( 'email_required', __( 'Email is required.', 'masteriyo' ) );
 		}
+
 		if ( empty( $data['first-name'] ) ) {
-			throw new \Exception( __( 'First name is required', 'masteriyo' ) );
+			$error->add( 'first_name_required', __( 'First name is required.', 'masteriyo' ) );
 		}
+
 		if ( empty( $data['last-name'] ) ) {
-			throw new \Exception( __( 'Last name is required', 'masteriyo' ) );
+			$error->add( 'last_name_required', __( 'Last name is required.', 'masteriyo' ) );
 		}
 
 		if ( ! masteriyo_registration_is_generate_password() ) {
 			if ( empty( $data['password'] ) ) {
-				throw new \Exception( __( 'Password is required', 'masteriyo' ) );
+				$error->add( 'password_required', __( 'Password is required.', 'masteriyo' ) );
 			}
+
 			if ( empty( $data['confirm-password'] ) ) {
-				throw new \Exception( __( 'Confirm password is required', 'masteriyo' ) );
+				$error->add( 'confirm_password_required', __( 'Confirm password is required.', 'masteriyo' ) );
 			}
+
 			if ( $data['password'] !== $data['confirm-password'] ) {
-				throw new \Exception( __( 'The passwords doesn\'t match', 'masteriyo' ) );
+				$error->data( 'passwords_do_not_match', __( 'The passwords doesn\'t match.', 'masteriyo' ) );
 			}
 		}
 
 		if ( ! isset( $data['accept-terms-and-conditions'] ) || 'yes' !== $data['accept-terms-and-conditions'] ) {
-			throw new \Exception( __( 'You must accept the Terms & Conditions to proceed', 'masteriyo' ) );
+			$error->add( 'terms_and_conditions_required', __( 'You must accept the Terms & Conditions to proceed.', 'masteriyo' ) );
 		}
 
-		$validation_error  = new \WP_Error();
-		$validation_error  = apply_filters( 'masteriyo_validate_registration_form_data', $validation_error, $data );
-		$validation_errors = $validation_error->get_error_messages();
+		$error = apply_filters( 'masteriyo_validate_registration_form_data', $error, $data );
 
-		if ( 1 === count( $validation_errors ) ) {
-			throw new \Exception( $validation_error->get_error_message() );
-		} elseif ( $validation_errors ) {
-			foreach ( $validation_errors as $message ) {
-				masteriyo_add_notice( sprintf( '<strong>%s:%s</strong> ', __( 'Error', 'masteriyo' ), $message ), 'error' );
-			}
-			throw new \Exception();
+		if ( $error->has_errors() ) {
+			return $error;
+		} else {
+			return true;
 		}
 	}
 
@@ -173,11 +178,12 @@ class RegistrationFormHandler {
 			if ( 'email' === $key ) {
 				$data[ $key ] = sanitize_email( wp_unslash( trim( $_POST[ $key ] ) ) );
 			}
+
 			if ( 'username' === $key ) {
 				$data[ $key ] = sanitize_user( trim( $_POST[ $key ] ) );
 			}
 
-			$data[ $key ] = wp_unslash( $_POST[ $key ] );
+			$data[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
 		}
 		return $data;
 	}

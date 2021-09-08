@@ -116,10 +116,16 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 								<div class="mto-lesson-list__content">
 									<span class="mto-lesson-list__content-item">
 										<span class="mto-lesson-icon">
-											<?php masteriyo_get_svg( 'play', true ); ?>
+											<?php if ( 'lesson' === $content['type'] && $content['has_video'] ) : ?>
+												<?php masteriyo_get_svg( 'play', true ); ?>
+											<?php elseif ( 'lesson' === $content['type'] && ! $content['has_video'] ) : ?>
+												<?php masteriyo_get_svg( 'left-align', true ); ?>
+											<?php elseif ( 'quiz' === $content['type'] ) : ?>
+												<?php masteriyo_get_svg( 'timer', true ); ?>
+											<?php endif; ?>
 										</span>
 										<?php echo esc_html( $content['name'] ); ?>
-								</span>
+									</span>
 								</div>
 							</li>
 						<?php endforeach; ?>

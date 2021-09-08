@@ -323,12 +323,12 @@ function masteriyo_get_course_structure( $course_id ) {
 			return array(
 				'id'          => $object->get_id(),
 				'name'        => $object->get_name( 'edit' ),
-				'name'        => $object->get_name( 'edit' ),
 				'description' => $object->get_description( 'edit' ),
 				'permalink'   => $object->get_permalink( 'edit' ),
 				'type'        => $object->get_object_type(),
 				'menu_order'  => $object->get_menu_order( 'edit' ),
 				'parent_id'   => $object->get_parent_id( 'edit' ),
+				'has_video'   => 'lesson' === $object->get_object_type() && ! empty( $object->get_video_source_url() ),
 			);
 		},
 		$objects

@@ -9,7 +9,6 @@ import {
 	NumberInput,
 	NumberInputField,
 	NumberInputStepper,
-	Select,
 	Stack,
 	Switch,
 	Tab,
@@ -29,9 +28,6 @@ import { CourseArchiveSettingsMap } from '../../../types';
 interface Props {
 	courseArchiveData?: CourseArchiveSettingsMap;
 }
-
-//@ts-ignore
-const imageSizes = window._MASTERIYO_.imageSizes;
 
 const CourseArchiveSettings: React.FC<Props> = (props) => {
 	const { courseArchiveData } = props;
@@ -161,29 +157,6 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 									{errors?.course_archive?.display?.per_row &&
 										errors?.course_archive?.display?.per_row.message}
 								</FormErrorMessage>
-							</FormControl>
-
-							<FormControl>
-								<FormLabel minW="2xs">
-									{__('Thumbnail Size', 'masteriyo')}
-									<Tooltip
-										label={__('Course thumbnail size', 'masteriyo')}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<Select
-									defaultValue={courseArchiveData?.display?.thumbnail_size}
-									{...register('course_archive.display.thumbnail_size')}>
-									{imageSizes?.map((imageSize: string) => (
-										<option value={imageSize} key={imageSize}>
-											{imageSize}
-										</option>
-									))}
-								</Select>
 							</FormControl>
 						</Stack>
 					</TabPanel>

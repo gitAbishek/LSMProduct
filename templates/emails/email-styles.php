@@ -92,6 +92,10 @@ svg {
 	font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 }
 
+.order-list tfoot .masteriyo-price-amount{
+	font-weight: 700;
+}
+
 .address{
 	line-height: 1.5;
 }

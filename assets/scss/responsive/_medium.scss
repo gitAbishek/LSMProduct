@@ -14,22 +14,6 @@
 		width: 100%;
 	}
 
-	// Single course page reviews
-	.masteriyo-single-course--main__content
-		.course-reviews
-		.masteriyo-course-reviews-list
-		.masteriyo-course-review__content {
-		flex-direction: column;
-		.masteriyo-avatar {
-			margin-bottom: 8px;
-		}
-
-		.masteriyo-right {
-			width: 100%;
-			margin: 0px;
-		}
-	}
-
 	// Course list page responsive
 	.masteriyo {
 		.columns-4,
@@ -62,13 +46,6 @@
 
 	.masteriyo-single-course--main {
 		width: 100%;
-	}
-
-	.masteriyo-col-8,
-	.masteriyo-col-4 {
-		width: 100%;
-		flex: 1 1 100%;
-		max-width: 100%;
 	}
 
 	.masteriyo-item--wrap {

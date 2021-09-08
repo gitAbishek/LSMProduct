@@ -17,6 +17,18 @@
 			padding-bottom: 8px;
 		}
 	}
+
+	.masteriyo-col-8 {
+		width: 100%;
+		flex: 1 1 100%;
+		max-width: 100%;
+	}
+
+	.masteriyo-col-4 {
+		width: 50%;
+		flex: 1 1 50%;
+		max-width: 50%;
+	}
 }
 
 // X-Small devices (portrait phones, less than 576px)
@@ -77,8 +89,21 @@
 	.masteriyo-stab {
 		gap: 32px;
 	}
+	.masteriyo-replies {
+		.masteriyo-reply-replies--title {
+			.masteriyo-flex {
+				flex-direction: column;
+				align-items: self-start;
+			}
+			.author-name {
+				margin-bottom: $spacing_12px;
+			}
+		}
+	}
 
-	.masteriyo-avatar {
-		margin-left: 18px;
+	.masteriyo-col-4 {
+		width: 100%;
+		flex: 1 1 100%;
+		max-width: 100%;
 	}
 }

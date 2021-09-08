@@ -38,28 +38,28 @@ $difficulty = $course->get_difficulty();
 <div id="course-<?php the_ID(); ?>" class="masteriyo-single-course">
 	<div class="masteriyo-col-8">
 		<div class="masteriyo-single-course--main masteriyo-course--content">
-		<div class="masteriyo-course--img-wrap">
-			<!-- Diffculty Badge -->
-			<?php if ( $difficulty ) : ?>
-			<div class="difficulty-badge">
-				<span class="masteriyo-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
+			<div class="masteriyo-course--img-wrap">
+				<!-- Diffculty Badge -->
+				<?php if ( $difficulty ) : ?>
+				<div class="difficulty-badge">
+					<span class="masteriyo-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
+				</div>
+				<?php endif; ?>
+
+				<?php do_action( 'masteriyo_single_course_featured_image' ); ?>
 			</div>
-			<?php endif; ?>
 
-			<?php do_action( 'masteriyo_single_course_featured_image' ); ?>
-		</div>
+			<!-- Category -->
+			<?php do_action( 'masteriyo_single_course_categories' ); ?>
 
-		<!-- Category -->
-		<?php do_action( 'masteriyo_single_course_categories' ); ?>
+			<!-- Title -->
+			<?php do_action( 'masteriyo_single_course_title' ); ?>
 
-		<!-- Title -->
-		<?php do_action( 'masteriyo_single_course_title' ); ?>
+			<!-- Author and rating -->
+			<?php do_action( 'masteriyo_single_course_author_and_rating' ); ?>
 
-		<!-- Author and rating -->
-		<?php do_action( 'masteriyo_single_course_author_and_rating' ); ?>
-
-		<!-- Main contents: Overview, Curriculum, Reviews -->
-		<?php do_action( 'masteriyo_single_course_main_content' ); ?>
+			<!-- Main contents: Overview, Curriculum, Reviews -->
+			<?php do_action( 'masteriyo_single_course_main_content' ); ?>
 		</div>
 	</div>
 

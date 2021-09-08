@@ -90,6 +90,7 @@ do_action( 'masteriyo_before_registration_form_content' );
 									);
 									?>
 							</span>
+							<span class="mto-text-red">*</span>
 						</label>
 					</div>
 					<div class="mto-msg-must-accept-terms masteriyo-hidden mto-text-red">

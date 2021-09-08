@@ -18,7 +18,8 @@ do_action( 'masteriyo_before_registration_form_content' );
 <section class="mto-signup">
 		<div class="mto-signup--wrapper mto-form-container">
 			<h3 class="mto-signup--title"><?php echo esc_html__( 'Create Your Account', 'masteriyo' ); ?></h3>
-			<p class="mto-signup--msg"><?php echo esc_html__( '*Note: All fields are required.', 'masteriyo' ); ?></p>
+
+			<?php masteriyo_display_all_notices(); ?>
 
 			<form id="mto-signup--form" class="mto-signup-form" method="post">
 				<input type="hidden" name="remember" value="true">
@@ -107,8 +108,6 @@ do_action( 'masteriyo_before_registration_form_content' );
 					<span><?php echo esc_html__( 'Registration complete.', 'masteriyo' ); ?></span>
 				</div>
 			</form>
-
-			<?php masteriyo_display_all_notices(); ?>
 		</div>
 </section>
 

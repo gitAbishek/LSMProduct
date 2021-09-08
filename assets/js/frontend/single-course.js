@@ -412,18 +412,20 @@
 
 			if ($content_ref) {
 				$(window).scroll(function () {
-					var stickyHeight = $('.masteriyo-sticky').height();
 					var scroll_position = $(window).scrollTop();
 					var content_y = $content_ref.offsetTop;
-					var content_y2 = content_y + $content_ref.offsetHeight - stickyHeight;
+					var content_y2 = content_y + $content_ref.offsetHeight;
 					var isSticky = false;
 
 					if (scroll_position > content_y && scroll_position < content_y2)
 						isSticky = true;
 					if (isSticky) {
-						$('.masteriyo-sticky').css({ position: 'sticky', top: '0px' });
+						$('.masteriyo-single-course--aside').css({
+							position: 'sticky',
+							top: '0px',
+						});
 					} else {
-						$('.masteriyo-sticky').css({ position: 'relative' });
+						$('.masteriyo-single-course--aside').css({ position: 'relative' });
 					}
 				});
 			}

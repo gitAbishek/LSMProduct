@@ -16,7 +16,7 @@
 		};
 
 		$form
-			.find('button[type=submit')
+			.find('button[type=submit]')
 			.text(mto_data.labels.signing_in)
 			.siblings('.mto-notify-message')
 			.first()
@@ -37,7 +37,7 @@
 				if (res.success) {
 					window.location.reload();
 				} else {
-					$('#mto-login-error-msg').show().text(res.data.message);
+					$('#mto-login-error-msg').show().html(res.data.message);
 				}
 			},
 			error: function (xhr, status, error) {
@@ -45,10 +45,10 @@
 					? xhr.responseJSON.message
 					: error;
 
-				$('#mto-login-error-msg').show().text(message);
+				$('#mto-login-error-msg').show().html(message);
 			},
 			complete: function () {
-				$form.find('button.sign-in').text(mto_data.labels.sign_in);
+				$form.find('button[type=submit]').text(mto_data.labels.sign_in);
 			},
 		});
 	});

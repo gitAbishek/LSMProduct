@@ -284,19 +284,11 @@ class Checkout {
 	 * @param array $data Posted data.
 	 */
 	protected function update_session( $data ) {
-		// Update both shipping and billing to the passed billing address first if set.
+		// Update billing to the passed billing address first if set.
 		$address_fields = array(
 			'first_name',
 			'last_name',
-			'company',
 			'email',
-			'phone',
-			'address_1',
-			'address_2',
-			'city',
-			'postcode',
-			'state',
-			'country',
 		);
 
 		array_walk( $address_fields, array( $this, 'set_user_address_fields' ), $data );

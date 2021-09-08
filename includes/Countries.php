@@ -525,7 +525,7 @@ class Countries {
 						echo ' selected="selected"';
 					}
 
-					echo '>' . esc_html( $value ) . ' &mdash; ' . ( $escape ? esc_html( $state_value ) : $state_value ) . '</option>';
+					echo '>' . esc_html( $value ) . ' &mdash; ' . ( $escape ? esc_html( $state_value ) : $state_value ) . '</option>'; // phpcs:ignore
 
 				}
 				echo '</optgroup>';
@@ -534,7 +534,7 @@ class Countries {
 				if ( $selected_country === $key && '*' === $selected_state ) {
 					echo ' selected="selected"';
 				}
-				echo ' value="' . esc_attr( $key ) . '">' . ( $escape ? esc_html( $value ) : $value ) . '</option>';
+				echo ' value="' . esc_attr( $key ) . '">' . ( $escape ? esc_html( $value ) : $value ) . '</option>'; // phpcs:ignore
 			}
 		}
 	}
@@ -710,12 +710,6 @@ class Countries {
 	 * @return array
 	 */
 	public function get_default_address_fields() {
-		if ( 'optional' === get_option( 'masteriyo_checkout_address_2_field', 'optional' ) ) {
-			$address_2_placeholder = __( 'Apartment, suite, unit, etc. (optional)', 'masteriyo' );
-		} else {
-			$address_2_placeholder = __( 'Apartment, suite, unit, etc.', 'masteriyo' );
-		}
-
 		$fields = array(
 			'first_name' => array(
 				'label'        => __( 'First name', 'masteriyo' ),
@@ -731,94 +725,14 @@ class Countries {
 				'autocomplete' => 'family-name',
 				'priority'     => 20,
 			),
-			'company'    => array(
-				'label'        => __( 'Company name', 'masteriyo' ),
-				'class'        => array( 'form-row-wide' ),
-				'autocomplete' => 'organization',
-				'priority'     => 30,
-				'required'     => 'required' === get_option( 'masteriyo_checkout_company_field', 'optional' ),
-			),
-			'country'    => array(
-				'type'         => 'country',
-				'label'        => __( 'Country / Region', 'masteriyo' ),
-				'required'     => true,
-				'class'        => array( 'form-row-wide', 'address-field', 'update_totals_on_change' ),
-				'autocomplete' => 'country',
-				'priority'     => 40,
-			),
-			'address_1'  => array(
-				'label'        => __( 'Street address', 'masteriyo' ),
-				/* translators: use local order of street name and house number. */
-				'placeholder'  => esc_attr__( 'House number and street name', 'masteriyo' ),
-				'required'     => true,
-				'class'        => array( 'form-row-wide', 'address-field' ),
-				'autocomplete' => 'address-line1',
-				'priority'     => 50,
-			),
-			'address_2'  => array(
-				'placeholder'  => esc_attr( $address_2_placeholder ),
-				'class'        => array( 'form-row-wide', 'address-field' ),
-				'autocomplete' => 'address-line2',
-				'priority'     => 60,
-				'required'     => 'required' === get_option( 'masteriyo_checkout_address_2_field', 'optional' ),
-			),
-			'city'       => array(
-				'label'        => __( 'Town / City', 'masteriyo' ),
-				'required'     => true,
-				'class'        => array( 'form-row-wide', 'address-field' ),
-				'autocomplete' => 'address-level2',
-				'priority'     => 70,
-			),
-			'state'      => array(
-				'type'         => 'state',
-				'label'        => __( 'State / County', 'masteriyo' ),
-				'required'     => true,
-				'class'        => array( 'form-row-wide', 'address-field' ),
-				'validate'     => array( 'state' ),
-				'autocomplete' => 'address-level1',
-				'priority'     => 80,
-			),
-			'postcode'   => array(
-				'label'        => __( 'Postcode / ZIP', 'masteriyo' ),
-				'required'     => true,
-				'class'        => array( 'form-row-wide', 'address-field' ),
-				'validate'     => array( 'postcode' ),
-				'autocomplete' => 'postal-code',
-				'priority'     => 90,
-			),
 		);
 
-		if ( 'hidden' === get_option( 'masteriyo_checkout_company_field', 'optional' ) ) {
-			unset( $fields['company'] );
-		}
-
-		if ( 'hidden' === get_option( 'masteriyo_checkout_address_2_field', 'optional' ) ) {
-			unset( $fields['address_2'] );
-		}
-
 		$default_address_fields = apply_filters( 'masteriyo_default_address_fields', $fields );
+
 		// Sort each of the fields based on priority.
 		uasort( $default_address_fields, 'masteriyo_checkout_fields_uasort_comparison' );
 
 		return $default_address_fields;
-	}
-
-	/**
-	 * Get JS selectors for fields which are shown/hidden depending on the locale.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return array
-	 */
-	public function get_country_locale_field_selectors() {
-		$locale_fields = array(
-			'address_1' => '#billing_address_1_field, #shipping_address_1_field',
-			'address_2' => '#billing_address_2_field, #shipping_address_2_field',
-			'state'     => '#billing_state_field, #shipping_state_field, #calc_shipping_state_field',
-			'postcode'  => '#billing_postcode_field, #shipping_postcode_field, #calc_shipping_postcode_field',
-			'city'      => '#billing_city_field, #shipping_city_field, #calc_shipping_city_field',
-		);
-		return apply_filters( 'masteriyo_country_locale_field_selectors', $locale_fields );
 	}
 
 	/**
@@ -1524,28 +1438,27 @@ class Countries {
 		}
 
 		// Add email and phone fields.
-		if ( 'billing_' === $type ) {
-			if ( 'hidden' !== get_option( 'masteriyo_checkout_phone_field', 'required' ) ) {
-				$address_fields['billing_phone'] = array(
-					'label'        => __( 'Phone', 'masteriyo' ),
-					'required'     => 'required' === get_option( 'masteriyo_checkout_phone_field', 'required' ),
-					'type'         => 'tel',
-					'class'        => array( 'form-row-wide' ),
-					'validate'     => array( 'phone' ),
-					'autocomplete' => 'tel',
-					'priority'     => 100,
-				);
-			}
-			$address_fields['billing_email'] = array(
-				'label'        => __( 'Email address', 'masteriyo' ),
-				'required'     => true,
-				'type'         => 'email',
+		if ( 'hidden' !== get_option( 'masteriyo_checkout_phone_field', 'hidden' ) ) {
+			$address_fields['billing_phone'] = array(
+				'label'        => __( 'Phone', 'masteriyo' ),
+				'required'     => 'required' === get_option( 'masteriyo_checkout_phone_field', 'required' ),
+				'type'         => 'tel',
 				'class'        => array( 'form-row-wide' ),
-				'validate'     => array( 'email' ),
-				'autocomplete' => 'no' === get_option( 'masteriyo_registration_generate_username' ) ? 'email' : 'email username',
-				'priority'     => 110,
+				'validate'     => array( 'phone' ),
+				'autocomplete' => 'tel',
+				'priority'     => 100,
 			);
 		}
+
+		$address_fields['billing_email'] = array(
+			'label'        => __( 'Email address', 'masteriyo' ),
+			'required'     => true,
+			'type'         => 'email',
+			'class'        => array( 'form-row-wide' ),
+			'validate'     => array( 'email' ),
+			'autocomplete' => 'no' === get_option( 'masteriyo_registration_generate_username' ) ? 'email' : 'email username',
+			'priority'     => 110,
+		);
 
 		/**
 		 * Important note on this filter: Changes to address fields can and will be overridden by

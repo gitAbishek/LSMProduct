@@ -101,10 +101,10 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 						</span>
 
 						<span class="masteriyo-cplus masteriyo-icon-svg">
-							<?php masteriyo_get_svg( 'plus-icon', true ); ?>
+							<?php masteriyo_get_svg( 'plus', true ); ?>
 						</span>
 						<span class="masteriyo-cminus masteriyo-icon-svg">
-							<?php masteriyo_get_svg( 'minus-icon', true ); ?>
+							<?php masteriyo_get_svg( 'minus', true ); ?>
 						</span>
 					</div>
 				</div>

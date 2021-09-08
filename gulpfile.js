@@ -85,7 +85,7 @@ const paths = {
 };
 
 function removePreviousMinifiedAssets() {
-	return exec('find assets/ -name "*min*" -type f -delete');
+	return exec('find assets/ -name "*.min.*" -type f -delete');
 }
 
 function renameBackendAssets() {

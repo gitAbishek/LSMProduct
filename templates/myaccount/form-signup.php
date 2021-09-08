@@ -100,7 +100,7 @@ do_action( 'masteriyo_before_registration_form_content' );
 
 				<input class="masteriyo-hidden" type="text" name="_wpnonce" value="<?php echo esc_attr( wp_create_nonce( 'masteriyo-register' ) ); ?>">
 				<button type="submit" name="masteriyo-registration" value="yes" class="mto-btn-signup mto-btn mto-btn-primary">
-					<?php echo esc_html__( 'Get Started', 'masteriyo' ); ?>
+					<?php echo esc_html__( 'Register', 'masteriyo' ); ?>
 				</button>
 
 				<div class="mto-notify-message mto-alert mto-danger-msg masteriyo-hidden"></div>

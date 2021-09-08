@@ -48,11 +48,51 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 	display: inline-block;
 }
 
-.email-text--bold{
+.email-text--bold {
 	font-weight: 700;
 }
 
 svg {
 	width: 12px;
+}
+
+
+//Order table.
+.order_item td {
+	vertical-align: middle;
+	font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+	word-wrap:break-word;
+}
+
+.order-list table {
+	border-collapse: collapse;
+}
+
+.order-list thead th {
+	background-color: #78A6FF;
+	color: #fff
+}
+
+.order-list tbody tr:nth-child(even) {
+	background-color: #EBECF2;
+}
+
+.order-list tr th,
+.order-list tr td {
+	border: 1px solid #EBECF2;
+	padding: 8px;
+}
+
+.order-list {
+	margin-bottom: 40px;
+}
+
+.order-list table {
+	width: 100%;
+	font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+}
+
+.address{
+	line-height: 1.5;
 }
 <?php

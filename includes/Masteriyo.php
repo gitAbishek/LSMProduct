@@ -113,6 +113,7 @@ class Masteriyo {
 		Shortcodes::instance()->register_shortcodes();
 		Install::init();
 
+		$this->restrict_wp_dashboard_and_admin_bar();
 		$this->register_order_status();
 		$this->load_text_domain();
 		$this->setup_wizard();
@@ -507,6 +508,28 @@ class Masteriyo {
 	public function add_image_sizes() {
 		add_image_size( 'masteriyo_single', 1137, 635, true );
 		add_image_size( 'masteriyo_thumbnail', 375, 210, true );
+	}
+
+	/**
+	 * Disable wp dashbaord and admin bar for student.
+	 *
+	 * @since 0.1.0
+	 */
+	public function restrict_wp_dashboard_and_admin_bar() {
+		if (
+			masteriyo_is_current_user_student() &&
+			! masteriyo_is_current_user_admin() &&
+			! masteriyo_is_current_user_manager() &&
+			! masteriyo_is_current_user_instructor()
+		) {
+			add_filter( 'show_admin_bar', '__return_false' );
+
+			if ( ! is_admin() || defined( 'DOING_AJAX' ) ) {
+				return;
+			}
+			wp_safe_redirect( home_url() );
+			exit;
+		}
 	}
 }
 

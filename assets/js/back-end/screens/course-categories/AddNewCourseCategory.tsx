@@ -125,7 +125,6 @@ const AddNewCourseCategory = () => {
 						</Box>
 					</FormProvider>
 				</Stack>
-				/
 			</Container>
 		</Stack>
 	);

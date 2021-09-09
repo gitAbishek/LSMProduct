@@ -31,22 +31,6 @@ do_action( 'masteriyo_before_single_course_stats' );
 		</div>
 	</div>
 
-	<!-- Comment -->
-	<div class="comments">
-		<div class="mto-single-course--mdetail mto-icon-svg">
-			<?php masteriyo_get_svg( 'comment', true ); ?>
-			<span>
-				<?php
-					printf(
-						/* translators: %d: Course comments count */
-						esc_html( _nx( '%s Comment', '%s Comments', $comments_count, 'Comments Count', 'masteriyo' ) ),
-						esc_html( number_format_i18n( $comments_count ) )
-					);
-					?>
-			</span>
-		</div>
-	</div>
-
 	<!-- Student -->
 	<div class="student">
 		<div class="mto-single-course--mdetail mto-icon-svg">

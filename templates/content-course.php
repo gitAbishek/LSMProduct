@@ -24,10 +24,9 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 	return;
 }
 
-$author         = masteriyo_get_user( $course->get_author_id() );
-$comments_count = masteriyo_count_course_comments( $course );
-$difficulty     = $course->get_difficulty();
-$categories     = $course->get_categories( 'name' );
+$author     = masteriyo_get_user( $course->get_author_id() );
+$difficulty = $course->get_difficulty();
+$categories = $course->get_categories( 'name' );
 
 ?>
 <div class="masteriyo-col">
@@ -92,9 +91,6 @@ $categories     = $course->get_categories( 'name' );
 		<div class="mto-course--content__stats">
 			<div class="mto-course-stats-duration">
 			<?php masteriyo_get_svg( 'time', true ); ?> <span><?php echo esc_html( masteriyo_minutes_to_time_length_string( $course->get_duration() ) ); ?></span>
-			</div>
-			<div class="mto-course-stats-comments">
-			<?php masteriyo_get_svg( 'comment', true ); ?><span><?php echo esc_html( $comments_count ); ?></span>
 			</div>
 			<div class="mto-course-stats-students">
 			<?php masteriyo_get_svg( 'group', true ); ?> <span><?php echo esc_html( masteriyo_count_enrolled_users( $course->get_id() ) ); ?></span>

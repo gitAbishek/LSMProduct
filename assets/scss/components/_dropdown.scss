@@ -30,7 +30,7 @@ span::after {
 	overflow: hidden;
 	transition: height 0.4s ease;
 	position: absolute;
-	background: $masteriyo-white-color;
+	background: var(--masteriyo-color-white);
 	right: 0;
 	top: 36px;
 	max-height: 72px;

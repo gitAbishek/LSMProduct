@@ -16,17 +16,15 @@ defined( 'ABSPATH' ) || exit;
  */
 class RegistrationFormHandler {
 	public function __construct() {
-		add_action( 'wp_loaded', array( $this, 'process_registration' ), 20 );
+		add_action( 'wp_loaded', array( $this, 'process' ), 20 );
 	}
 
 	/**
 	 * Handle registration.
 	 *
 	 * @since 0.1.0
-	 *
-	 * @return void
 	 */
-	public function process_registration() {
+	public function process() {
 		try {
 			if ( ! isset( $_POST['masteriyo-registration'] ) ) {
 				return;
@@ -38,42 +36,59 @@ class RegistrationFormHandler {
 				throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
 			}
 
-			$data  = $this->get_form_data();
-			$error = $this->validate_form( $data );
+			$result = $this->register_user();
 
-			if ( is_wp_error( $error ) ) {
-				foreach ( $error->get_error_messages() as $message ) {
+			if ( is_wp_error( $result ) ) {
+				foreach ( $result->get_error_messages() as $message ) {
 					masteriyo_add_notice( $message, Notice::ERROR );
 				}
-
-				throw new \Exception( 'Registration failed' );
 			}
-
-			$user = masteriyo_create_new_user(
-				$data['email'],
-				$data['username'],
-				$data['password'],
-				array(
-					'first_name' => $data['first-name'],
-					'last_name'  => $data['last-name'],
-				)
-			);
-
-			if ( is_wp_error( $user ) ) {
-				throw new \Exception( $user->get_error_message() );
+			if ( $result instanceof \Throwable ) {
+				masteriyo_add_notice( $result->getMessage(), Notice::ERROR );
 			}
-
-			if ( masteriyo_registration_is_generate_password() ) {
-				masteriyo_add_notice( __( 'Your account was created successfully and a password has been sent to your email address.', 'masteriyo' ) );
-			} else {
-				masteriyo_add_notice( __( 'Your account was created successfully. Your login details have been sent to your email address.', 'masteriyo' ) );
-			}
-
-			$this->redirect( $user );
-
-		} catch ( \Exception $e ) {
-			$error = $e->getMessage();
+		} catch ( \Throwable $e ) {
+			masteriyo_add_notice( $e->getMessage(), Notice::ERROR );
 		}
+	}
+
+	/**
+	 * Register user with submitted detail.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return \WP_Error|boolean
+	 */
+	public function register_user() {
+		$data  = $this->get_form_data();
+		$error = $this->validate_form( $data );
+
+		if ( is_wp_error( $error ) ) {
+			return $error;
+		}
+
+		$user = masteriyo_create_new_user(
+			$data['email'],
+			$data['username'],
+			$data['password'],
+			array(
+				'first_name' => $data['first-name'],
+				'last_name'  => $data['last-name'],
+			)
+		);
+
+		if ( is_wp_error( $user ) ) {
+			return $user;
+		}
+
+		if ( masteriyo_registration_is_generate_password() ) {
+			masteriyo_add_notice( __( 'Your account was created successfully and a password has been sent to your email address.', 'masteriyo' ) );
+		} else {
+			masteriyo_add_notice( __( 'Your account was created successfully. Your login details have been sent to your email address.', 'masteriyo' ) );
+		}
+
+		$this->redirect( $user );
+
+		return true;
 	}
 
 	/**
@@ -164,10 +179,10 @@ class RegistrationFormHandler {
 		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
 		if ( empty( $nonce_value ) ) {
-			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
+			throw new \WP_Error( 'nonce_missing', __( 'Nonce is missing', 'masteriyo' ) );
 		}
 		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-register' ) ) {
-			throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
+			throw new \WP_Error( 'invalid_nonce', __( 'Invalid nonce', 'masteriyo' ) );
 		}
 
 		$data   = array();

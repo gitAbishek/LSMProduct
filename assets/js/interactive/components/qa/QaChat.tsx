@@ -99,7 +99,7 @@ const QaChat: React.FC<Props> = (props) => {
 							<Message
 								key={chat.id}
 								name={chat.user_name}
-								avatar="https://i.pravatar.cc/150?img=3"
+								avatar={chat.user_avatar}
 								message={chat.content}
 								sender={chat.sender}
 								time={chat.created_at}

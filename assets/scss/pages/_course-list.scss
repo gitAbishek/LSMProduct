@@ -6,21 +6,21 @@
 	margin-bottom: $spacing_64px;
 
 	.search-field {
-		background: $masteriyo-white-color;
+		background: var(--masteriyo-color-white);
 		box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
 		border-radius: $border_radius_8;
 		height: 70px;
 		width: 100%;
 		font-weight: 400;
 		text-decoration: inherit;
-		border: 1px solid rgba($masteriyo-light-text-color, 0.2);
+		border: 1px solid var(--masteriyo-color-text-light-a20);
 		padding-left: $spacing_60px;
 
 		&:hover,
 		&:focus,
 		&:active {
-			background: $masteriyo-white-color;
-			border: 1px solid $masteriyo-btn-hover-blue;
+			background: var(--masteriyo-color-white);
+			border: 1px solid var(--masteriyo-color-btn-blue-hover);
 			transition: 0.5s ease;
 			@include masteriyo-shadow-2;
 		}
@@ -30,7 +30,7 @@
 		position: absolute;
 		right: 0px;
 		top: 0px;
-		background-color: $masteriyo-primary-color;
+		background-color: var(--masteriyo-color-primary);
 		height: 70px;
 		padding-right: $spacing_40px;
 		padding-left: $spacing_40px;
@@ -39,7 +39,7 @@
 		font-weight: bold;
 
 		&:hover {
-			background-color: $masteriyo-btn-hover-blue;
+			background-color: var(--masteriyo-color-btn-blue-hover);
 		}
 	}
 }
@@ -60,7 +60,7 @@
 		z-index: 1;
 
 		svg {
-			fill: $masteriyo-placeholder-color;
+			fill: var(--masteriyo-color-placeholder);
 		}
 	}
 }
@@ -71,9 +71,9 @@
 	flex-wrap: wrap;
 	flex-direction: row;
 	justify-content: flex-start;
-	margin-left: -10px;
-	margin-right: -10px;
-	margin-top: -15px;
+	margin-left: -#{$spacing_10px};
+	margin-right: -#{$spacing_10px};
+	margin-top: -#{$spacing_15px};
 
 	&--card {
 		width: 100%;
@@ -89,7 +89,7 @@
 			transition: 0.5s ease;
 
 			.masteriyo-course--content__title a {
-				color: $masteriyo-btn-hover-blue;
+				color: var(--masteriyo-color-btn-blue-hover);
 			}
 		}
 
@@ -122,18 +122,18 @@
 		position: absolute;
 		top: 0;
 		right: 0;
-		background: $masteriyo-primary-color;
+		background: var(--masteriyo-color-primary);
 		border-radius: 0 0 0 $border_radius_8;
 		padding: $spacing_8px $spacing_16px;
-		color: $masteriyo-white-color;
+		color: var(--masteriyo-color-white);
 		font-weight: 700;
-		fill: $masteriyo-white-color;
+		fill: var(--masteriyo-color-white);
 	}
 }
 
 .masteriyo-course--content {
 	padding: $spacing_24px;
-	background-color: $masteriyo-white-color;
+	background-color: var(--masteriyo-color-white);
 
 	// Category list.
 	&__category {
@@ -149,9 +149,9 @@
 			text-transform: uppercase;
 			letter-spacing: 0.5px;
 			padding: $spacing_4px $spacing_12px;
-			color: $masteriyo-primary-color;
+			color: var(--masteriyo-color-primary);
 			border-radius: $border_radius_50;
-			background-color: rgba($masteriyo-primary-color, 0.1);
+			background-color: var(--masteriyo-color-primary-a10);
 		}
 	}
 
@@ -169,7 +169,7 @@
 
 		a {
 			margin-bottom: $spacing_20px;
-			color: $masteriyo-dark-gray;
+			color: var(--masteriyo-color-grey-dark);
 			text-decoration: none;
 		}
 	}
@@ -198,7 +198,7 @@
 			}
 
 			&--name {
-				color: $masteriyo-text-color;
+				color: var(--masteriyo-color-text);
 				font-size: 14px;
 				line-height: 1.5;
 				font-weight: 500;
@@ -216,7 +216,7 @@
 			align-items: center;
 
 			svg {
-				fill: $masteriyo-primary-color;
+				fill: var(--masteriyo-color-primary);
 				width: 16px;
 				height: 16px;
 				font-size: 0.75rem;
@@ -265,16 +265,16 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: $spacing_16px 0;
-		border-top: 1px solid $masteriyo-border-color;
+		border-top: 1px solid var(--masteriyo-color-border);
 
 		& > div {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			color: $masteriyo-light-text-color;
+			color: var(--masteriyo-color-text-light);
 
 			span {
-				margin-left: 8px;
+				margin-left: $spacing_8px;
 				font-size: 14px;
 				font-weight: 500;
 			}
@@ -282,7 +282,7 @@
 			svg {
 				width: 20px;
 				height: 20px;
-				fill: $masteriyo-light-text-color;
+				fill: var(--masteriyo-color-text-light);
 			}
 		}
 	}
@@ -295,7 +295,7 @@
 		align-items: center;
 		justify-content: space-between;
 		padding-top: $spacing_24px;
-		border-top: 1px solid $masteriyo-border-color;
+		border-top: 1px solid var(--masteriyo-color-border);
 
 		.masteriyo-btn {
 			border-radius: $border_radius_50;
@@ -304,7 +304,7 @@
 			&:hover,
 			&:focus,
 			&:active {
-				color: $masteriyo_white_color;
+				color: var(--masteriyo-color-white);
 			}
 		}
 	}
@@ -314,13 +314,13 @@
 			text-decoration: line-through;
 			font-size: 16px;
 			font-weight: 500;
-			color: $masteriyo-light-text-color;
+			color: var(--masteriyo-color-text-light);
 			margin-right: $spacing_4px;
 		}
 
 		.current-amount {
 			font-size: 24px;
-			color: $masteriyo-primary-color;
+			color: var(--masteriyo-color-primary);
 			font-weight: bold;
 		}
 	}

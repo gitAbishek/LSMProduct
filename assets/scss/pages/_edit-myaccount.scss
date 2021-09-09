@@ -1,71 +1,72 @@
 .masteriyo-edt-myaccount {
-  &--tab-menu {
-    border-bottom: 1px solid $masteriyo-border-color;
-    padding: 20px 0;
-    margin-bottom: 40px;
-    font-weight: 700;
-    gap: 30px;
+	&--tab-menu {
+		border-bottom: 1px solid var(--masteriyo-color-border);
+		padding: $spacing_20px 0;
+		margin-bottom: $spacing_40px;
+		font-weight: 700;
+		gap: 30px;
 
-    & > * {
-      cursor: pointer;
-    }
+		& > * {
+			cursor: pointer;
+		}
 
-    .masteriyo-active-tab {
-      color: $masteriyo-primary-color;
-    }
-  }
+		.masteriyo-active-tab {
+			color: var(--masteriyo-color-primary);
+		}
+	}
 
-  // Edit Profile.
-  .masteriyo-edt-profile--wrap {
-    position: relative;
-  }
+	// Edit Profile.
+	.masteriyo-edt-profile--wrap {
+		position: relative;
+	}
 
-  .masteriyo-svg-icon svg {
-    background: $masteriyo-primary-color;
-    width: 32px;
-    height: 32px;
-    position: absolute;
-    top: 20px;
-    right: 0px;
-    padding: 5px;
-    fill: #fff;
-    border-radius: 50px;
-    cursor: pointer;
-    z-index: 9;
-  }
+	.masteriyo-svg-icon svg {
+		background: var(--masteriyo-color-primary);
+		width: 32px;
+		height: 32px;
+		position: absolute;
+		top: 20px;
+		right: 0px;
+		padding: $spacing_5px;
+		fill: #fff;
+		border-radius: $border_radius_50;
+		cursor: pointer;
+		z-index: 9;
+	}
 
-  .masteriyo-edt-myaccount--img {
-    border-radius: 100px;
-    @include masteriyo-shadow-1;
-  }
+	.masteriyo-edt-myaccount--img {
+		border-radius: $border_radius_100;
+		@include masteriyo-shadow-1;
+	}
 
-  //Form.
-  &--form {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
+	//Form.
+	&--form {
+		margin-top: $spacing_30px;
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+	}
 
-  .masteriyo-col-2 {
-    gap: 30px;
-    & > * {
-      flex: 1;
-    }
-  }
+	.masteriyo-col-2 {
+		gap: 30px;
+
+		& > * {
+			flex: 1;
+		}
+	}
 }
 .masteriyo-pwd-security--btn,
 .masteriyo-edt-myaccount--btn {
-  border-radius: 100px;
+	border-radius: $border_radius_50;
 }
 
 // Password and security.
 .masteriyo-pwd-security {
-  &--form {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    flex: 50%;
-    margin-top: 30px;
-  }
+	&--form {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+		flex: 50%;
+		margin-top: $spacing_30px;
+	}
 }

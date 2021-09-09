@@ -1,7 +1,7 @@
 .masteriyo-btn {
 	font-size: 14px;
 	font-weight: 500;
-	padding: 10px 12px;
+	padding: $spacing_10px $spacing_12px;
 	text-align: center;
 	text-decoration: none;
 	@include masteriyo-border-radius;
@@ -9,176 +9,176 @@
 
 	//Default buttons
 	&-default {
-		background: $masteriyo-white-color;
+		background-color: var(--masteriyo-color-white);
 		@include masteriyo-default-border;
-		color: $masteriyo-btn-gray;
+		color: var(--masteriyo-color-btn-grey);
 
 		&:hover {
-			background: $masteriyo-btn-active-blue;
-			border-color: $masteriyo-btn-active-blue;
-			color: $masteriyo-white-color;
+			background-color: var(--masteriyo-color-btn-blue-active);
+			border-color: var(--masteriyo-color-btn-blue-active);
+			color: var(--masteriyo-color-white);
 			@include masteriyo-shadow-1;
 		}
 
 		&:focus,
 		&:active {
-			background: $masteriyo-btn-active-blue;
-			border-color: $masteriyo-btn-active-blue;
-			color: $masteriyo-white-color;
+			background-color: var(--masteriyo-color-btn-blue-active);
+			border-color: var(--masteriyo-color-btn-blue-active);
+			color: var(--masteriyo-color-white);
 		}
 
 		&--lg {
-			padding: 12px 16px;
+			padding: $spacing_12px $spacing_16px;
 			font-size: 14px;
 		}
 
 		&--xl {
-			padding: 16px 20px;
+			padding: $spacing_16px $spacing_20px;
 			font-size: 16px;
 		}
 	}
 
 	// Primary Buttons
 	&-primary {
-		background: $masteriyo-primary-color;
-		border-color: $masteriyo-primary-color;
-		color: $masteriyo-white-color;
+		background-color: var(--masteriyo-color-primary);
+		border-color: var(--masteriyo-color-primary);
+		color: var(--masteriyo-color-white);
 
 		&:hover {
-			background: $masteriyo-btn-hover-blue;
-			border-color: $masteriyo-btn-hover-blue;
+			background-color: var(--masteriyo-color-btn-blue-hover);
+			border-color: var(--masteriyo-color-btn-blue-hover);
 		}
 
 		&:focus,
 		&:active {
-			background: $masteriyo-btn-active-blue;
-			border-color: $masteriyo-btn-active-blue;
+			background-color: var(--masteriyo-color-btn-blue-active);
+			border-color: var(--masteriyo-color-btn-blue-active);
 		}
 
 		&--lg {
-			padding: 12px 16px;
+			padding: $spacing_12px $spacing_16px;
 			font-size: 14px;
 		}
 
 		&--xl {
-			padding: 16px 20px;
+			padding: $spacing_16px $spacing_20px;
 			font-size: 16px;
 		}
 	}
 
 	// Accent Buttons
 	&-accent {
-		background: $masteriyo-accent-color;
-		border-color: $masteriyo-accent-color;
-		color: $masteriyo-white-color;
+		background-color: var(--masteriyo-color-accent);
+		-colorborder: var(--masteriyo-color-accent);
+		color: var(--masteriyo-color-white);
 
 		&:hover {
-			background: darken($masteriyo-accent-color, 10%);
-			border-color: darken($masteriyo-accent-color, 10%);
+			background-color: var(--masteriyo-color-accent-dark);
+			border-color: var(--masteriyo-color-accent-dark);
 		}
 
 		&:focus,
 		&:active {
-			background: darken($masteriyo-accent-color, 20%);
-			border-color: darken($masteriyo-accent-color, 20%);
+			background-color: var(--masteriyo-color-accent-darker);
+			border-color: var(--masteriyo-color-accent-darker);
 		}
 
 		&--lg {
-			padding: 12px 16px;
+			padding: $spacing_12px $spacing_16px;
 			font-size: 14px;
 		}
 
 		&--xl {
-			padding: 16px 20px;
+			padding: $spacing_16px $spacing_20px;
 			font-size: 16px;
 		}
 	}
 
 	// Disabled button
 	&-disabled {
-		background: $masteriyo-disabled-color;
-		color: $masteriyo-disabled-text-color;
+		background-color: var(--masteriyo-color-disabled);
+		color: var(--masteriyo-color-disabled-text);
 
 		&:hover {
-			background: $masteriyo-disabled-color;
-			color: $masteriyo-disabled-text-color;
-			border-color: $masteriyo-border-color;
+			background-color: var(--masteriyo-color-disabled);
+			color: var(--masteriyo-color-disabled-text);
+			border-color: var(--masteriyo-color-border);
 			cursor: not-allowed;
 		}
 
 		&:focus,
 		&:active {
-			background: $masteriyo-disabled-color;
-			color: $masteriyo-disabled-text-color;
-			border-color: $masteriyo-border-color;
+			background-color: var(--masteriyo-color-disabled);
+			color: var(--masteriyo-color-disabled-text);
+			border-color: var(--masteriyo-color-border);
 		}
 
 		&--lg {
-			padding: 12px 16px;
+			padding: $spacing_12px $spacing_16px;
 			font-size: 14px;
 		}
 
 		&--xl {
-			padding: 16px 20px;
+			padding: $spacing_16px $spacing_20px;
 			font-size: 16px;
 		}
 	}
 	// Outline Buttons
 	&-outline {
-		color: $masteriyo-disabled-text-color;
-		border: 1px solid $masteriyo-border-color;
+		color: var(--masteriyo-color-disabled-text);
+		border: 1px solid var(--masteriyo-color-border);
 		background: transparent;
 
 		&:hover {
-			color: $masteriyo-disabled-text-color;
-			border-color: #e2e8f0;
-			background: #e2e8f0;
+			color: var(--masteriyo-color-disabled-text);
+			border-color: var(--masteriyo-color-primary-lightest);
+			background-color: var(--masteriyo-color-primary-lightest);
 		}
 
 		&:focus,
 		&:active {
-			background: $masteriyo-disabled-color;
-			color: $masteriyo-disabled-text-color;
-			border-color: $masteriyo-border-color;
+			background: var(--masteriyo-color-disabled);
+			color: var(--masteriyo-color-disabled-text);
+			border-color: var(--masteriyo-color-border);
 		}
 
 		&--lg {
-			padding: 12px 16px;
+			padding: $spacing_12px $spacing_16px;
 			font-size: 14px;
 		}
 
 		&--xl {
-			padding: 16px 20px;
+			padding: $spacing_16px $spacing_20px;
 			font-size: 16px;
 		}
 	}
 
 	// Red Buttons
 	&-warning {
-		color: $masteriyo-white-color;
-		border: 1px solid $masteriyo-border-color;
-		background: $masteriyo-badge-red;
+		color: var(--masteriyo-color-white);
+		border: 1px solid var(--masteriyo-color-border);
+		background-color: var(--masteriyo-color-badge-red);
 
 		&:hover {
-			color: $masteriyo-white-color;
-			border-color: #e2e8f0;
-			background: darken($masteriyo-badge-red, 10%);
+			color: var(--masteriyo-color-white);
+			border-color: var(--masteriyo-color-primary-lightest);
+			background: var(--masteriyo-color-badge-red-dark);
 		}
 
 		&:focus,
 		&:active {
-			background: darken($masteriyo-badge-red, 10%);
-			color: $masteriyo-white-color;
-			border-color: #e2e8f0;
+			background: var(--masteriyo-color-badge-red-dark);
+			color: var(--masteriyo-color-white);
+			border-color: var(--masteriyo-color-primary-lightest);
 		}
 
 		&--lg {
-			padding: 12px 16px;
+			padding: $spacing_12px $spacing_16px;
 			font-size: 14px;
 		}
 
 		&--xl {
-			padding: 16px 20px;
+			padding: $spacing_16px $spacing_20px;
 			font-size: 16px;
 		}
 	}
@@ -186,10 +186,11 @@
 
 // Links
 .masteriyo-link-primary {
-	color: $masteriyo-primary-color;
+	color: var(--masteriyo-color-primary);
 	font-weight: 500;
 	text-decoration: underline;
+
 	&:hover {
-		color: rgba($masteriyo-primary-color, 0.8);
+		color: var(--masteriyo-color-primary-a80);
 	}
 }

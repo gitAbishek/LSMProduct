@@ -1,80 +1,85 @@
 // Form Container
 .masteriyo-form-container {
-  width: 36em;
-  padding: 40px;
-  @include masteriyo-shadow-1;
-  @include masteriyo-default-border;
+	width: 36em;
+	padding: $spacing_40px;
+	@include masteriyo-shadow-1;
+	@include masteriyo-default-border;
 }
 
 // Alert messages
 .masteriyo-alert {
-  padding: 8px 16px;
-  margin: 8px 0px;
-  @include masteriyo-default-border;
-  @include masteriyo-border-radius;
+	padding: $spacing_8px $spacing_16px;
+	margin: $spacing_8px 0;
+	@include masteriyo-default-border;
+	@include masteriyo-border-radius;
 }
 
 // Error
 .masteriyo-error {
-  margin: 8px 0px;
+	margin: $spacing_8px 0;
 }
 .masteriyo-info-msg {
-  background: rgba($masteriyo-info-color, 0.1);
-  color: $masteriyo-info-color;
-  border-color: $masteriyo-info-color;
+	background: var(--masteriyo-color-info-a10);
+	color: var(--masteriyo-color-info);
+	border-color: var(--masteriyo-color-info);
 }
 .masteriyo-warning-msg {
-  background: rgba($masteriyo-warning-color, 0.1);
-  color: $masteriyo-warning-color;
-  border-color: $masteriyo-warning-color;
+	background: var(--masteriyo-color-warning-a10);
+	color: var(--masteriyo-color-warning);
+	border-color: var(--masteriyo-color-warning);
 }
 .masteriyo-danger-msg {
-  background: rgba($masteriyo-danger-color, 0.1);
-  color: $masteriyo-danger-color;
-  border-color: $masteriyo-danger-color;
+	background: var(--masteriyo-color-danger-a10);
+	color: var(--masteriyo-color-danger);
+	border-color: var(--masteriyo-color-danger);
 }
 .masteriyo-success-msg {
-  background: rgba($masteriyo-success-color, 0.1);
-  color: $masteriyo-success-color;
-  border-color: $masteriyo-success-color;
+	background: var(--masteriyo-color-success-a10);
+	color: var(--masteriyo-color-success);
+	border-color: var(--masteriyo-color-success);
 }
 
 // Labels
 .masteriyo-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: $masteriyo-heading-color;
-  display: inherit;
-  margin-bottom: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--masteriyo-color-heading);
+	display: inherit;
+	margin-bottom: $spacing_8px;
 }
 
 // Fields
 .masteriyo-input {
-  padding: 16px;
-  outline: none;
-  width: 100%;
-  @include masteriyo-default-border(2);
-  @include masteriyo-border-radius;
+	padding: $spacing_16px;
+	outline: none;
+	width: 100%;
+	@include masteriyo-default-border(2);
+	@include masteriyo-border-radius;
 
-  &::placeholder {
-    color: $masteriyo-placeholder-color;
-  }
-  &:hover {
-    border-color: $masteriyo-primary-color;
-  }
-  &:focus,
-  &:active {
-    border-color: $masteriyo-primary-color;
-    background-color: $masteriyo-lighter-gray;
-    color: $masteriyo-heading-color;
-  }
-  &.success {
-    border-color: $masteriyo-success-color;
-  }
-  &.danger {
-    border-color: $masteriyo-danger-color;
-  }
-  &.warning {
-    border-color: $masteriyo-warning-color;
-  }
+	&::placeholder {
+		color: var(--masteriyo-color-placeholder);
+	}
+
+	&:hover {
+		border-color: var(--masteriyo-color-primary);
+	}
+
+	&:focus,
+	&:active {
+		border-color: var(--masteriyo-color-primary);
+		background-color: var(--masteriyo-color-lighter);
+		color: var(--masteriyo-color-heading);
+	}
+
+	&.success {
+		border-color: var(--masteriyo-color-success);
+	}
+
+	&.danger {
+		border-color: var(--masteriyo-color-danger);
+	}
+
+	&.warning {
+		border-color: var(--masteriyo-color-warning);
+	}
 }

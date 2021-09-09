@@ -1,38 +1,40 @@
 .masteriyo-myaccount {
-  gap: 64px;
-  // Header
-  &--header {
-    flex: 1 1 15%;
-    min-width: 160px;
-  }
+	gap: 64px;
 
-  // Profile image.
-  &-img {
-    width: 160px;
-    height: 160px;
-    border-radius: 100px;
-    @include masteriyo-shadow-1;
-  }
+	// Header
+	&--header {
+		flex: 1 1 15%;
+		min-width: 160px;
+	}
 
-  // Profile Name.
-  &--name {
-    font-size: 36px;
-    margin-bottom: 10px;
-  }
+	// Profile image.
+	&-img {
+		width: 160px;
+		height: 160px;
+		border-radius: $border_radius_100;
+		@include masteriyo-shadow-1;
+	}
 
-  // Membership
-  &--membership {
-    color: $masteriyo-light-text-color;
-    display: block;
-    margin-bottom: 20px;
-  }
+	// Profile Name.
+	&--name {
+		font-size: 36px;
+		margin-bottom: $spacing_10px;
+	}
 
-  // Body
-  &--body {
-    flex: 1 1 65%;
-    gap: 64px;
-    li {
-      padding: 8px 0px;
-    }
-  }
+	// Membership
+	&--membership {
+		color: var(--masteriyo-color-text-light);
+		display: block;
+		margin-bottom: $spacing_20px;
+	}
+
+	// Body
+	&--body {
+		flex: 1 1 65%;
+		gap: 64px;
+
+		li {
+			padding: $spacing_8px 0;
+		}
+	}
 }

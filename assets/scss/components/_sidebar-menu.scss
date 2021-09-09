@@ -1,83 +1,90 @@
 .masteriyo-vertical-menu {
-  // General
-  border-right: 1px solid $masteriyo-border-color;
-  // background: $masteriyo-$masteriyo-white-color-color;
-  flex: 1 1 20%;
-  min-width: 200px;
-  padding-top: 40px;
+	// General
+	border-right: 1px solid var(--masteriyo-color-border);
+	flex: 1 1 20%;
+	min-width: 200px;
+	padding-top: $spacing_40px;
 
-  & svg {
-    width: 24px;
-    height: 24px;
-    fill: $masteriyo-light-text-color;
-  }
+	& svg {
+		width: 24px;
+		height: 24px;
+		fill: var(--masteriyo-color-text-light);
+	}
 }
 
 .masteriyo-sidebar-wrapper {
-  // Profile
-  .masteriyo-profile {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    &--img {
-      width: 40px;
-      height: 40px;
-      border-radius: 100%;
-      @include masteriyo-shadow-1;
-    }
-    &--name {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 16px;
-      word-break: break-all;
+	// Profile
+	.masteriyo-profile {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 
-      & svg {
-        width: 16px;
-        height: 16px;
-      }
-    }
-    &--name {
-      font-size: 16px;
-      font-weight: 600;
-    }
-    &--details {
-      margin-left: 16px;
-    }
-  }
+		&--img {
+			width: 40px;
+			height: 40px;
+			border-radius: $border_radius_100pct;
+			@include masteriyo-shadow-1;
+		}
 
-  // Menu
-  .masteriyo-menu {
-    background: $masteriyo-white-color;
-    margin-top: 40px;
-    ul {
-      margin: 0;
-      padding: 0;
-      li {
-        display: flex;
-        align-items: center;
-        list-style-type: none;
-        padding: 16px;
-        border: 1px solid $masteriyo-white-color;
+		&--name {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 16px;
+			word-break: break-all;
 
-        &.active,
-        &:hover {
-          margin-right: -1px;
-          @include masteriyo-default-border;
-          border-radius: 4px 0 0 4px;
-          border-right: 1px solid $masteriyo-white-color;
-          & svg {
-            fill: $masteriyo-dark-blue-color;
-          }
-        }
+			& svg {
+				width: 16px;
+				height: 16px;
+			}
+		}
 
-        a {
-          display: inline-flex;
-          width: 100%;
-          gap: 10px;
-          align-items: center;
-        }
-      }
-    }
-  }
+		&--name {
+			font-size: 16px;
+			font-weight: 600;
+		}
+
+		&--details {
+			margin-left: $spacing_16px;
+		}
+	}
+
+	// Menu
+	.masteriyo-menu {
+		background: var(--masteriyo-color-white);
+		margin-top: $spacing_40px;
+
+		ul {
+			margin: 0;
+			padding: 0;
+
+			li {
+				display: flex;
+				align-items: center;
+				list-style-type: none;
+				padding: 16px;
+				border: 1px solid var(--masteriyo-color-white);
+
+				&.active,
+				&:hover {
+					margin-right: -1px;
+					@include masteriyo-default-border;
+					border-radius: $border_radius_4 0 0 $border_radius_4;
+					border-right: 1px solid var(--masteriyo-color-white);
+
+					& svg {
+						fill: var(--masteriyo-color-blue-dark);
+					}
+				}
+
+				a {
+					text-decoration: none;
+					display: inline-flex;
+					width: 100%;
+					gap: 10px;
+					align-items: center;
+				}
+			}
+		}
+	}
 }

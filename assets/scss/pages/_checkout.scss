@@ -8,7 +8,7 @@
 
 	&--title,
 	&-summary--title {
-		margin-bottom: 10px;
+		margin-bottom: $spacing_10px;
 		font-size: 24px;
 	}
 
@@ -25,7 +25,7 @@
 		column-gap: 30px;
 	}
 	&----street > input {
-		margin-bottom: 12px;
+		margin-bottom: $spacing_12px;
 	}
 
 	&-main {
@@ -33,9 +33,9 @@
 		flex-direction: column;
 		flex: 1 1 60%;
 		gap: 30px;
+		padding: $spacing_44px;
+		background: var(--masteriyo-color-white);
 		@include masteriyo-shadow-2();
-		padding: 44px;
-		background: $masteriyo-white-color;
 	}
 
 	// Your order.
@@ -44,23 +44,23 @@
 
 		&-your-order {
 			@include masteriyo-shadow-2();
-			padding: 44px;
-			margin-bottom: 30px;
-			background: $masteriyo-white-color;
+			padding: $spacing_44px;
+			margin-bottom: $spacing_30px;
+			background: var(--masteriyo-color-white);
 
 			ul {
 				margin: 0;
 			}
 			ul li {
 				list-style-type: none;
-				border-bottom: 1px solid $masteriyo-border-color;
+				border-bottom: 1px solid var(--masteriyo-color-border);
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
-				padding: 10px 0px;
+				padding: $spacing_10px 0;
 
 				&.h-border {
-					border-bottom: 1px solid black;
+					border-bottom: 1px solid var(--masteriyo-color-black);
 				}
 
 				&:last-of-type {
@@ -73,15 +73,15 @@
 	//Payment method.
 	&-summary-payment-method {
 		@include masteriyo-shadow-2();
-		padding: 32px 44px;
-		margin-bottom: 30px;
+		padding: $spacing_32px $spacing_44px;
+		margin-bottom: $spacing_30px;
 	}
 	&-summary-paypal {
-		margin-bottom: 20px;
+		margin-bottom: $spacing_20px;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		background: $masteriyo-white-color;
+		background: var(--masteriyo-color-white);
 	}
 	&--btn {
 		width: 100%;

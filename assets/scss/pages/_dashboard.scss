@@ -1,242 +1,255 @@
 .masteriyo-main {
-  gap: 64px;
-  display: flex;
-  justify-content: space-between;
-  max-width: 100%;
+	display: flex;
+	justify-content: space-between;
+	gap: 64px;
+	max-width: 100%;
 }
+
 // Dashboard
 .masteriyo-dashboard {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 74%;
-  gap: 48px;
-  ul {
-    margin: 0;
-    padding: 0;
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 74%;
+	gap: 48px;
 
-    li {
-      list-style-type: none;
-    }
-  }
+	ul {
+		margin: 0;
+		padding: 0;
+
+		li {
+			list-style-type: none;
+		}
+	}
+
+	.masteriyo-btn-primary {
+		color: var(--masteriyo-color-white);
+	}
 }
 
 // Welcome notify
 .masteriyo-welcome-notify {
-  background: $masteriyo-primary-color;
-  @include masteriyo-border-radius;
-  padding: 32px;
-  color: $masteriyo-white-color;
-  position: relative;
+	background: var(--masteriyo-color-primary);
+	@include masteriyo-border-radius;
+	padding: $spacing_32px;
+	color: var(--masteriyo-color-white);
+	position: relative;
 
-  .masteriyo-title {
-    color: $masteriyo-white-color;
-    font-size: 24px;
-  }
+	.masteriyo-title {
+		color: var(--masteriyo-color-white);
+		font-size: 24px;
+	}
 
-  .masteriyo-close {
-    position: absolute;
-    right: 16px;
-    top: 16px;
-    width: 24px;
-    height: 24px;
-    border-radius: 100%;
-    .masteriyo-icon-svg {
-      fill: $masteriyo-white-color;
-    }
-    &:hover {
-      background: rgba($masteriyo-white-color, 0.1);
-    }
-  }
+	.masteriyo-close {
+		position: absolute;
+		right: 16px;
+		top: 16px;
+		width: 24px;
+		height: 24px;
+		border-radius: 100%;
+		.masteriyo-icon-svg {
+			fill: var(--masteriyo-color-white);
+		}
+		&:hover {
+			background: var(--masteriyo-color-white-a10);
+		}
+	}
 
-  .masteriyo-view-myaccount {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 100px;
-    padding-left: 24px;
-    &:hover {
-      .masteriyo-icon-svg {
-        fill: $masteriyo-white-color;
-      }
-    }
-  }
+	.masteriyo-view-myaccount {
+		display: inline-flex;
+		align-items: center;
+		border-radius: $border_radius_100;
+		padding-left: $spacing_24px;
+
+		&:hover {
+			.masteriyo-icon-svg {
+				fill: var(--masteriyo-color-white);
+			}
+		}
+	}
 }
 // Dashboard Card
 .masteriyo-db-card {
-  @include masteriyo-default-border;
-  @include masteriyo-border-radius;
-  @include masteriyo-default-animate;
-  padding: 30px;
-  flex: 1 1 30%;
-  // background: $masteriyo-$masteriyo-white-color-color;
+	@include masteriyo-default-border;
+	@include masteriyo-border-radius;
+	@include masteriyo-default-animate;
+	padding: $spacing_30px;
+	flex: 1 1 30%;
+	background: -var(--masteriyo-color-white);
 
-  &:hover {
-    @include masteriyo-shadow-1;
-  }
+	&:hover {
+		@include masteriyo-shadow-1;
+	}
 }
 
 // User counter
 .masteriyo-counter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
 
-  .masteriyo-icon-title {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+	.masteriyo-icon-title {
+		display: flex;
+		align-items: center;
+		gap: 16px;
 
-    .masteriyo-icon {
-      display: inherit;
-      padding: 10px;
-      border-radius: 100%;
-    }
-    .masteriyo-title {
-      font-size: 18px;
-      margin: inherit;
-    }
-  }
+		.masteriyo-icon {
+			display: inherit;
+			padding: $spacing_10px;
+			border-radius: $border_radius_100pct;
+		}
+		.masteriyo-title {
+			font-size: 18px;
+			margin: inherit;
+		}
+	}
 
-  &--inprogress .masteriyo-icon {
-    background: lighten($masteriyo-green, 30%);
-    &.masteriyo-icon-svg {
-      fill: $masteriyo-green;
-    }
-  }
-  &--scores .masteriyo-icon {
-    background: lighten($masteriyo-primary-color, 20%);
-    &.masteriyo-icon-svg {
-      fill: $masteriyo-primary-color;
-    }
-  }
-  &--certificates .masteriyo-icon {
-    background: lighten($masteriyo-accent-color, 20%);
-    &.masteriyo-icon-svg {
-      fill: $masteriyo-accent-color;
-    }
-  }
+	&--inprogress .masteriyo-icon {
+		background: var(--masteriyo-color-green-a20);
 
-  .masteriyo-number {
-    font-size: 36px;
-    font-weight: 600;
-  }
+		&.masteriyo-icon-svg {
+			fill: var(--masteriyo-color-green);
+		}
+	}
+
+	&--scores .masteriyo-icon {
+		background: var(--masteriyo-color-primary-a20);
+
+		&.masteriyo-icon-svg {
+			fill: var(--masteriyo-color-primary);
+		}
+	}
+
+	&--certificates .masteriyo-icon {
+		background: var(--masteriyo-color-accent-a20);
+
+		&.masteriyo-icon-svg {
+			fill: var(--masteriyo-color-accent);
+		}
+	}
+
+	.masteriyo-number {
+		font-size: 36px;
+		font-weight: 600;
+	}
 }
 
 // Statistic and Popular Cources
 .masteriyo-sc {
-  gap: 30px;
+	gap: 30px;
 
-  &--stat {
-    flex: 1 1 66%;
+	&--stat {
+		flex: 1 1 66%;
 
-    &--header {
-      margin-bottom: 20px;
-    }
-  }
+		&--header {
+			margin-bottom: 20px;
+		}
+	}
 
-  &--pcourse {
-    flex: 1 1 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 20px;
+	&--pcourse {
+		flex: 1 1 30%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 20px;
 
-    &--title {
-      font-size: 16px;
-      margin: inherit;
-    }
+		&--title {
+			font-size: 16px;
+			margin: inherit;
+		}
 
-    &--list {
-      gap: 10px;
-    }
+		&--list {
+			gap: 10px;
+		}
 
-    &--img {
-      width: 50px;
-      height: 50px;
-      @include masteriyo-border-radius;
-    }
+		&--img {
+			width: 50px;
+			height: 50px;
+			@include masteriyo-border-radius;
+		}
 
-    &--course {
-      display: flex;
-      gap: 16px;
-    }
-    &--btn {
-      display: flex;
-      align-items: center;
-    }
-  }
+		&--course {
+			display: flex;
+			gap: 16px;
+		}
+
+		&--btn {
+			display: flex;
+			align-items: center;
+		}
+	}
 }
 
 // Continue Studing
 .masteriyo-cstudy {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 20px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 20px;
 
-  &--header {
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
+	&--header {
+		display: inline-flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-  &--title {
-    font-size: 24px;
-    margin: inherit;
-  }
+	&--title {
+		font-size: 24px;
+		margin: inherit;
+	}
 
-  &--btn {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 100px;
-  }
+	&--btn {
+		display: inline-flex;
+		align-items: center;
+		border-radius: $border_radius_100;
+	}
 
-  &--body {
-    &--wrap {
-      gap: 30px;
-      margin-bottom: 16px;
+	&--body {
+		&--wrap {
+			gap: 30px;
+			margin-bottom: $spacing_16px;
 
-      & > * {
-        flex-grow: 1;
-      }
-    }
+			& > * {
+				flex-grow: 1;
+			}
+		}
 
-    &--img-title {
-      display: flex;
-      flex-direction: row;
-      gap: 16px;
-    }
+		&--img-title {
+			display: flex;
+			flex-direction: row;
+			gap: 16px;
+		}
 
-    &--img {
-      width: 80px;
-      height: 80px;
-      @include masteriyo-border-radius;
-    }
+		&--img {
+			width: 80px;
+			height: 80px;
+			@include masteriyo-border-radius;
+		}
 
-    &--rating.masteriyo-icon-svg > svg {
-      width: 14px;
-      height: 14px;
-    }
+		&--rating.masteriyo-icon-svg > svg {
+			width: 14px;
+			height: 14px;
+		}
 
-    &--title {
-      font-size: 18px;
-      font-weight: 700;
-      margin: inherit;
-    }
+		&--title {
+			font-size: 18px;
+			font-weight: 700;
+			margin: inherit;
+		}
 
-    &--duration {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+		&--duration {
+			display: inline-flex;
+			align-items: center;
+			gap: 4px;
 
-      .masteriyo-icon-svg > svg {
-        width: 16px;
-        height: 16px;
-      }
-    }
+			.masteriyo-icon-svg > svg {
+				width: 16px;
+				height: 16px;
+			}
+		}
 
-    &--btn {
-      border-radius: 100px;
-    }
-  }
+		&--btn {
+			border-radius: $border_radius_100;
+		}
+	}
 }

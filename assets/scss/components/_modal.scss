@@ -1,26 +1,28 @@
 .masteriyo--modal {
-  max-width: 500px;
-  width: 100%;
-  background: $masteriyo-white-color;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-  visibility: visible;
-  border-radius: 8px;
+	max-width: 500px;
+	width: 100%;
+	background-color: var(--masteriyo-color-white);
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+	visibility: visible;
+	border-radius: $border_radius_8;
 
-  .masteriyo--title {
-    padding: 24px 24px 0px 24px;
-    margin: 0;
-  }
-  .masteriyo--content {
-    padding: 14px 24px;
-  }
-  .masteriyo-actions {
-    padding: 0px 24px 24px 24px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    text-align: right;
+	.masteriyo--title {
+		padding: $spacing_24px $spacing_24px 0 $spacing_24px;
+		margin: 0;
+	}
 
-    .masteriyo-btn:last-child {
-      margin-left: 8px;
-    }
-  }
+	.masteriyo--content {
+		padding: $spacing_14px $spacing_24px;
+	}
+
+	.masteriyo-actions {
+		padding: 0 $spacing_24px $spacing_24px $spacing_24px;
+		border-bottom-left-radius: $border_radius_8;
+		border-bottom-right-radius: $border_radius_8;
+		text-align: right;
+
+		.masteriyo-btn:last-child {
+			margin-left: $spacing_8px;
+		}
+	}
 }

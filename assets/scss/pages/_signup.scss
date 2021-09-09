@@ -1,42 +1,43 @@
 .masteriyo-signup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-  &--wrapper {
-    background: $masteriyo-white-color;
-  }
+	&--wrapper {
+		background: var(--masteriyo-color-white);
+	}
 
-  &--title {
-    margin-bottom: 30px;
-  }
+	&--title {
+		margin-bottom: $spacing_30px;
+	}
 
-  .masteriyo-input {
-    margin-bottom: 24px;
-  }
+	.masteriyo-input {
+		margin-bottom: $spacing_24px;
+	}
 
-  .masteriyo-password {
-    .masteriyo-input {
-      margin-bottom: 8px;
-    }
+	.masteriyo-password {
+		.masteriyo-input {
+			margin-bottom: $spacing_8px;
+		}
 
-    .masteriyo-note {
-      margin-bottom: 24px;
-    }
-  }
+		.masteriyo-note {
+			margin-bottom: $spacing_24px;
+		}
+	}
 
-  .masteriyo-btn-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+	.masteriyo-btn-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-  .masteriyo-remember-me {
-    display: flex;
-    align-items: center;
-    margin-bottom: 24px;
-    & > label {
-      margin: 0;
-    }
-  }
+	.masteriyo-remember-me {
+		display: flex;
+		align-items: center;
+		margin-bottom: $spacing_24px;
+
+		& > label {
+			margin: 0;
+		}
+	}
 }

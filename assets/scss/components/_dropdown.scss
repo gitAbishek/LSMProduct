@@ -4,8 +4,8 @@
 	position: relative;
 
 	span {
-		background: #fff;
-		border-radius: 4px;
+		background: var(--masteriyo-color-white);
+		border-radius: $border_radius_4;
 		font-size: 1.2em;
 		font-variant: small-caps;
 		cursor: pointer;
@@ -26,41 +26,41 @@ span::after {
 
 .slide {
 	clear: both;
-	height: 0px;
+	height: 0;
 	overflow: hidden;
 	transition: height 0.4s ease;
 	position: absolute;
-	background: white;
+	background: $masteriyo-white-color;
 	right: 0;
 	top: 36px;
 	max-height: 72px;
 	@include masteriyo-shadow-1;
-	border-radius: 4px;
+	border-radius: $border_radius_4;
 
 	li {
-		padding: 6px 12px;
+		padding: $spacing_6px $spacing_12px;
 		cursor: pointer;
-		border-bottom: 1px solid $masteriyo-border-color;
+		border-bottom: 1px solid var(--masteriyo-color-border);
 
 		strong {
 			font-weight: 400;
 		}
 
 		&:hover {
-			background-color: #dee9ff;
+			background-color: var(--masteriyo-color-primary-lightest);
 		}
 
 		.text {
 			font-size: 12px;
 			line-height: 14px;
-			color: #424360;
+			color: var(--masteriyo-color-text);
 			font-weight: normal;
 			text-decoration: none;
 		}
 
 		&:last-child {
-			padding-top: 6px;
-			padding-bottom: 6px;
+			padding-top: $spacing_6px;
+			padding-bottom: $spacing_6px;
 		}
 	}
 }
@@ -68,17 +68,18 @@ span::after {
 .icon_box {
 	text-align: center;
 	@include masteriyo-shadow-2;
-	border: 1px solid $masteriyo-border-color;
+	border: 1px solid var(--masteriyo-color-border);
+
 	&:hover {
-		background-color: #dee9ff;
-		border: 1px solid #dee9ff;
+		background-color: var(--masteriyo-color-primary-lightest);
+		border: 1px solid var(--masteriyo-color-primary-lightest);
 	}
 }
 
 #touch {
 	position: absolute;
 	opacity: 0;
-	height: 0px;
+	height: 0;
 
 	&:checked + .slide {
 		height: 300px;

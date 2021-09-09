@@ -45,7 +45,7 @@
 .masteriyo-progressbar {
 	height: 16px;
 	position: relative;
-	background: lighten($masteriyo-primary-color, 20%);
+	background: var(--masteriyo-color-primary-a20);
 	overflow: hidden;
 	border-radius: 50px;
 
@@ -56,12 +56,12 @@
 }
 
 .masteriyo-progress {
-	background: $masteriyo-primary-color;
+	background: var(--masteriyo-color-primary);
 	animation: progressbar 3s ease-in-out;
 	animation-fill-mode: both;
-	padding: 0 10px;
+	padding: 0 $spacing_10px;
 	font-size: 9px;
-	color: $masteriyo-white-color;
+	color: var(--masteriyo-color-white);
 
 	@keyframes progressbar {
 		0% {
@@ -84,14 +84,14 @@
 .masteriyo-col-8 {
 	flex: 0 0 66.6666%;
 	max-width: 66.6666%;
-	padding: 10px;
+	padding: $spacing_10px;
 	width: 66.6666%;
 }
 
 .masteriyo-col-4 {
 	flex: 0 0 33.3333%;
 	max-width: 33.3333%;
-	padding: 10px;
+	padding: $spacing_10px;
 	width: 33.3333%;
 }
 
@@ -100,5 +100,5 @@
 }
 
 .masteriyo-border {
-	border-bottom: 1px solid $masteriyo-border-color;
+	border-bottom: 1px solid var(--masteriyo-color-border);
 }

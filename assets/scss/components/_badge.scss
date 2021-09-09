@@ -1,28 +1,28 @@
 // Badge
 .masteriyo-badge {
 	padding: $spacing_8px $spacing_12px;
-	font-size: 0.8125rem;
+	font-size: 13px;
 	font-weight: 600;
 	border-radius: $border_radius_50;
-	color: $masteriyo-white-color;
+	color: var(--masteriyo-color-white);
 
 	&.masteriyo-badge-red {
-		background: $masteriyo-badge-red;
+		background-color: var(--masteriyo-color-badge-red);
 	}
 
 	&.masteriyo-badge-green {
-		background: $masteriyo-badge-green;
+		background-color: var(--masteriyo-color-badge-green);
 	}
 
 	&.masteriyo-badge-blue {
-		background: $masteriyo-badge-blue;
+		background-color: var(--masteriyo-color-badge-blue);
 	}
 
 	&.masteriyo-badge-yellow {
-		background: $masteriyo-warning-color;
+		background-color: var(--masteriyo-color-warning);
 	}
 
 	&.masteriyo-badge-pink {
-		background: $masteriyo-badge-pink;
+		background-color: var(--masteriyo-color-badge-pink);
 	}
 }

@@ -6,15 +6,15 @@
 	}
 
 	.masteriyo-related-post__title {
-		margin: 15px;
+		margin: $spacing_15px;
 	}
 
 	.masteriyo-item--wrap {
-		margin: 0px;
+		margin: 0;
 
 		.masteriyo-col-4 {
-			padding-top: 8px;
-			padding-bottom: 8px;
+			padding-top: $spacing_8px;
+			padding-bottom: $spacing_8px;
 		}
 	}
 
@@ -40,7 +40,7 @@
 
 	.masteriyo-login .masteriyo-btn,
 	.masteriyo-reset .masteriyo-btn {
-		margin-bottom: 24px;
+		margin-bottom: $spacing_24px;
 	}
 
 	// Dashbord Continue Studying
@@ -60,7 +60,7 @@
 	.masteriyo-col {
 		flex: 0 0 100%;
 		max-width: 100%;
-		padding: 15px;
+		padding: $spacing_15px;
 		width: 100%;
 	}
 
@@ -76,7 +76,7 @@
 			.masteriyo-col {
 				flex: 0 0 100%;
 				max-width: 100%;
-				padding: 10px;
+				padding: $spacing_10px;
 				width: 100%;
 			}
 

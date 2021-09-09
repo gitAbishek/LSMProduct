@@ -9,11 +9,13 @@
 
 // Border
 @mixin masteriyo-default-border($b: 1) {
-	border: ($b) + px solid $masteriyo-border-color;
+	border: ($b) + px solid var(--masteriyo-color-border);
 }
+
 @mixin masteriyo-border-radius() {
-	border-radius: 4px;
+	border-radius: $spacing_4px;
 }
+
 // Shadow
 @mixin masteriyo-shadow-1() {
 	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
@@ -27,6 +29,7 @@
 @mixin masteriyo-animate($property, $duration, $easing) {
 	transition: $property $duration $easing;
 }
+
 @mixin masteriyo-default-animate($property: all, $duration: 0.15s, $easing: ease-in-out) {
 	transition: $property $duration $easing;
 }

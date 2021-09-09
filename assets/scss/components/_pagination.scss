@@ -1,11 +1,10 @@
 .page-numbers {
 	display: flex;
 	width: fit-content;
-	border-radius: 8px;
-	background: #ffffff;
-	box-shadow: 0 0.8rem 2rem rgba(#5a6181, 0.05);
+	border-radius: $border_radius_8;
+	background: var(--masteriyo-color-white);
+	box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.05);
 	margin: auto;
-	// margin-top: 2rem;
 
 	.prev,
 	.next {
@@ -23,7 +22,7 @@
 		height: 2.6rem;
 
 		&:hover {
-			color: $masteriyo-primary-color;
+			color: var(--masteriyo-color-primary);
 		}
 
 		span {
@@ -32,23 +31,23 @@
 			justify-content: center;
 
 			&.current {
-				color: #ffffff;
-				background: $masteriyo-primary-color;
+				color: var(--masteriyo-color-white);
+				background: var(--masteriyo-color-primary);
 				font-weight: 600;
-				border: 1px solid $masteriyo-primary-color;
-				border-radius: 8px;
-				box-shadow: 0 0.8rem 2rem rgba(#5a6181, 0.05);
+				border: 1px solid var(--masteriyo-color-primary);
+				border-radius: $border_radius_8;
+				box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.05);
 			}
 		}
 	}
 
 	.prev {
 		cursor: pointer;
-		fill: $masteriyo-btn-gray;
+		fill: var(--masteriyo-color-btn-grey);
 
 		&:hover {
 			svg {
-				fill: $masteriyo-primary-color !important;
+				fill: var(--masteriyo-color-primary) !important;
 			}
 		}
 	}

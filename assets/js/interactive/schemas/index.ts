@@ -74,6 +74,7 @@ export type QuestionAnswerSchema = {
 	course_id: number;
 	user_name: string;
 	user_email: string;
+	user_avatar: string;
 	created_at: string;
 	content: string;
 	parent: number;

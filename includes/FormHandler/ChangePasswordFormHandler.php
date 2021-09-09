@@ -54,7 +54,7 @@ class ChangePasswordFormHandler {
 			$data = $this->get_form_data();
 			$user = masteriyo_get_user( get_current_user_id() );
 
-			$user->set_user_pass( $data['password_1'] );
+			$user->set_password( $data['password_1'] );
 
 			masteriyo( 'user.store' )->update( $user );
 

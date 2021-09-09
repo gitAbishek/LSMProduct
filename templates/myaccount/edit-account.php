@@ -15,7 +15,6 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 ?>
 
 <div class="mto-edt-myaccount mto-tabs">
-	<?php masteriyo_display_all_notices(); ?>
 
 	<div class="mto-edt-myaccount--tab-menu mto-flex">
 		<div data-tab="edit-profile-tab" class="mto-tab mto-active-tab"><?php echo esc_html__( 'Edit Profile', 'masteriyo' ); ?></div>

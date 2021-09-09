@@ -12,6 +12,8 @@ defined( 'ABSPATH' ) || exit;
  */
 do_action( 'masteriyo_before_myaccount_content' );
 
+masteriyo_display_all_notices();
+
 ?>
 <div class="mto-main">
 	<div class="menu-open masteriyo-hidden">

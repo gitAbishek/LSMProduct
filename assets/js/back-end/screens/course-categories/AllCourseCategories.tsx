@@ -10,8 +10,6 @@ import {
 	ButtonGroup,
 	Container,
 	Icon,
-	IconButton,
-	Input,
 	Link,
 	List,
 	ListIcon,
@@ -27,15 +25,12 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
-import {
-	BiChevronLeft,
-	BiChevronRight,
-	BiListUl,
-	BiPlus,
-} from 'react-icons/bi';
+import { BiListUl, BiPlus } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { NavLink, useHistory } from 'react-router-dom';
+import EmptyInfo from '../../components/common/EmptyInfo';
 import Header from '../../components/common/Header';
+import MasteriyoPagination from '../../components/common/MasteriyoPagination';
 import {
 	navActiveStyles,
 	navLinkStyles,
@@ -47,22 +42,23 @@ import { SkeletonCourseTaxonomy } from '../../skeleton';
 import API from '../../utils/api';
 import CategoryRow from './components/CategoryRow';
 
+interface FilterParams {
+	per_page?: number;
+	page?: number;
+}
+
 const AllCourseCategories = () => {
 	const categoryAPI = new API(urls.categories);
 	const queryClient = useQueryClient();
 	const toast = useToast();
 	const history = useHistory();
 
-	const [page, setPage] = useState(1);
-	const [isLastPage, setIsLastPage] = useState(false);
-	const categoriesQuery = useQuery(['courseCategoriesList', page], () =>
-		categoryAPI.list({ page: page })
+	const [filterParams, setFilterParams] = useState<FilterParams>({});
+	const categoriesQuery = useQuery(['courseCategoriesList', filterParams], () =>
+		categoryAPI.list(filterParams)
 	);
 	const [deleteCategoryId, setDeleteCategoryId] = useState<number>();
 	const { onClose, onOpen, isOpen } = useDisclosure();
-
-	const prevPage = page > 1 ? page - 1 : 1;
-	const nextPage = page + 1;
 
 	const cancelRef = useRef<any>();
 
@@ -134,7 +130,10 @@ const AllCourseCategories = () => {
 									<Tbody>
 										{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
 										{categoriesQuery.isSuccess &&
-											categoriesQuery.data.data.map((cat: any) => (
+										categoriesQuery?.data?.data.length === 0 ? (
+											<EmptyInfo message="No categories found." />
+										) : (
+											categoriesQuery?.data?.data.map((cat: any) => (
 												<CategoryRow
 													key={cat.id}
 													id={cat.id}
@@ -145,50 +144,21 @@ const AllCourseCategories = () => {
 													link={cat.link}
 													onDeletePress={onDeletePress}
 												/>
-											))}
+											))
+										)}
 									</Tbody>
 								</Table>
 							</Stack>
 						</Stack>
 					</Box>
-					{categoriesQuery.isSuccess && (
-						<Stack direction="row" spacing="1" justifyContent="flex-end">
-							<IconButton
-								shadow="none"
-								rounded="sm"
-								_hover={{ bg: 'blue.500', color: 'white' }}
-								icon={<Icon fontSize="xl" as={BiChevronLeft} />}
-								size="sm"
-								aria-label="Previous page"
-								onClick={() => {
-									setIsLastPage(false);
-									setPage(prevPage);
-								}}
-								isDisabled={page < 2 ? true : false}
+					{categoriesQuery.isSuccess &&
+						categoriesQuery?.data?.data.length > 0 && (
+							<MasteriyoPagination
+								metaData={categoriesQuery.data.meta}
+								setFilterParams={setFilterParams}
+								perPageText="Categories Per Page:"
 							/>
-							<Input
-								size="sm"
-								w="10"
-								type="number"
-								min={1}
-								value={page}
-								isReadOnly={true}
-							/>
-							<IconButton
-								shadow="none"
-								rounded="sm"
-								_hover={{ bg: 'blue.500', color: 'white' }}
-								icon={<Icon fontSize="xl" as={BiChevronRight} />}
-								aria-label="next page"
-								size="sm"
-								onClick={() => {
-									setIsLastPage(true);
-									setPage(nextPage);
-								}}
-								isDisabled={isLastPage}
-							/>
-						</Stack>
-					)}
+						)}
 				</Stack>
 			</Container>
 			<AlertDialog

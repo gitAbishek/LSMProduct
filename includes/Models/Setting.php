@@ -55,7 +55,7 @@ class Setting extends Model {
 			'display' => array(
 				'enable_search'  => true,
 				'per_page'       => 12,
-				'per_row'        => 4,
+				'per_row'        => 3,
 				'thumbnail_size' => 'masteriyo_thumbnail',
 			),
 		),

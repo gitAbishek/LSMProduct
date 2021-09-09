@@ -8,6 +8,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+$session = masteriyo( 'session' );
+
 /**
  * masteriyo_before_registration_form_content hook.
  */
@@ -29,7 +31,7 @@ do_action( 'masteriyo_before_registration_form_content' );
 							<?php echo esc_html__( 'First Name', 'masteriyo' ); ?>
 							<span class="mto-text-red">*</span>
 						</label>
-						<input id="first-name" class="mto-input" name="first-name" type="text" >
+						<input id="first-name" class="mto-input" name="first-name" type="text" value="<?php echo esc_attr( $session->get( 'user-registration.first-name' ) ); ?>" >
 					</div>
 
 					<div class="mto-last-name">
@@ -37,7 +39,7 @@ do_action( 'masteriyo_before_registration_form_content' );
 							<?php echo esc_html__( 'Last Name', 'masteriyo' ); ?>
 							<span class="mto-text-red">*</span>
 						</label>
-						<input id="last-name" class="mto-input" name="last-name" type="text" >
+						<input id="last-name" class="mto-input" name="last-name" type="text" value="<?php echo esc_attr( $session->get( 'user-registration.last-name' ) ); ?>">
 					</div>
 
 					<div class="mto-username">
@@ -45,7 +47,7 @@ do_action( 'masteriyo_before_registration_form_content' );
 							<?php echo esc_html__( 'Username', 'masteriyo' ); ?>
 							<span class="mto-text-red">*</span>
 						</label>
-						<input id="username" class="mto-input" name="username" type="text"  placeholder="">
+						<input id="username" class="mto-input" name="username" type="text"  value="<?php echo esc_attr( $session->get( 'user-registration.username' ) ); ?>">
 					</div>
 
 					<div class="mto-email">
@@ -53,7 +55,7 @@ do_action( 'masteriyo_before_registration_form_content' );
 							<?php echo esc_html__( 'Email Address', 'masteriyo' ); ?>
 							<span class="mto-text-red">*</span>
 						</label>
-						<input id="email" class="mto-input" name="email" type="text"  placeholder="">
+						<input id="email" class="mto-input" name="email" type="text"  value="<?php echo esc_attr( $session->get( 'user-registration.email' ) ); ?>">
 					</div>
 
 					<div class="mto-password">
@@ -61,7 +63,7 @@ do_action( 'masteriyo_before_registration_form_content' );
 							<?php echo esc_html__( 'Password', 'masteriyo' ); ?>
 							<span class="mto-text-red">*</span>
 						</label>
-						<input id="password" class="mto-input" name="password" type="password" autocomplete="current-password"  placeholder="">
+						<input id="password" class="mto-input" name="password" type="password" autocomplete="current-password"  value="<?php echo esc_attr( $session->get( 'user-registration.password' ) ); ?>">
 					</div>
 
 					<div class="mto-confirm-password">
@@ -69,7 +71,7 @@ do_action( 'masteriyo_before_registration_form_content' );
 							<?php echo esc_html__( 'Confirm Password', 'masteriyo' ); ?>
 							<span class="mto-text-red">*</span>
 						</label>
-						<input id="confirm-password" class="mto-input" name="confirm-password" type="password" autocomplete="current-password"  placeholder="">
+						<input id="confirm-password" class="mto-input" name="confirm-password" type="password" autocomplete="current-password" >
 						<div class="mto-msg-different-passwords masteriyo-hidden mto-text-red">
 							<?php echo esc_html__( 'The passwords doesn\'t match', 'masteriyo' ); ?>
 						</div>

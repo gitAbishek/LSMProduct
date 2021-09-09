@@ -42,12 +42,29 @@ class RegistrationFormHandler {
 				foreach ( $result->get_error_messages() as $message ) {
 					masteriyo_add_notice( $message, Notice::ERROR );
 				}
+				$this->set_form_session();
 			}
 			if ( $result instanceof \Throwable ) {
 				masteriyo_add_notice( $result->getMessage(), Notice::ERROR );
+				$this->set_form_session();
 			}
 		} catch ( \Throwable $e ) {
 			masteriyo_add_notice( $e->getMessage(), Notice::ERROR );
+			$this->set_form_session();
+		}
+	}
+
+	/**
+	 * Set user registration form session.
+	 *
+	 * @since 0.1.0
+	 */
+	protected function set_form_session() {
+		$data    = $this->get_form_data();
+		$session = masteriyo( 'session' );
+
+		foreach ( $data as $key => $value ) {
+			$session->put( "user-registration.{$key}", $value );
 		}
 	}
 
@@ -58,7 +75,7 @@ class RegistrationFormHandler {
 	 *
 	 * @return \WP_Error|boolean
 	 */
-	public function register_user() {
+	protected function register_user() {
 		$data  = $this->get_form_data();
 		$error = $this->validate_form( $data );
 
@@ -131,7 +148,7 @@ class RegistrationFormHandler {
 			}
 
 			if ( $data['password'] !== $data['confirm-password'] ) {
-				$error->data( 'passwords_do_not_match', __( 'The passwords doesn\'t match.', 'masteriyo' ) );
+				$error->add( 'passwords_do_not_match', __( 'The passwords doesn\'t match.', 'masteriyo' ) );
 			}
 		}
 

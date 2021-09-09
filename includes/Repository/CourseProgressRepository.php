@@ -120,7 +120,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 				),
 				$course_progress
 			),
-			array( '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
+			array( '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
 		);
 
 		if ( $result && $wpdb->insert_id ) {

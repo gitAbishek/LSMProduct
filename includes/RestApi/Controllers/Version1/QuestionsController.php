@@ -914,4 +914,75 @@ class QuestionsController extends PostsController {
 
 		return true;
 	}
+
+	/**
+	 * Check if a given request has access to read items.
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function get_items_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$quizzes          = get_posts( array( 'include' => $request['parent'] ) );
+		$courses          = array_filter(
+			array_map(
+				function( $quiz ) {
+					$course_id = get_post_meta( $quiz->ID, '_course_id', true );
+					return masteriyo_get_course( $course_id );
+				},
+				$quizzes
+			)
+		);
+		$all_open_courses = array_reduce(
+			$courses,
+			function( $result, $course ) {
+				return $result && 'open' === $course->get_access_mode();
+			},
+			true
+		);
+
+		if ( $all_open_courses ) {
+			return true;
+		}
+
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'read' ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check permissions for an item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $object_type Object type.
+	 * @param string $context   Request context.
+	 * @param int    $object_id Post ID.
+	 *
+	 * @return bool
+	 */
+	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
+		$course_id = get_post_meta( $object_id, '_course_id', true );
+		$course    = masteriyo_get_course( $course_id );
+
+		if ( $course && 'open' === $course->get_access_mode() ) {
+			return true;
+		}
+
+		return $this->permission->rest_check_post_permissions( $object_type, 'read', $object_id );
+	}
 }

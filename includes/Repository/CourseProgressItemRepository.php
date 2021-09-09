@@ -46,8 +46,6 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	public function create( Model &$course_progress_item ) {
 		global $wpdb;
 
-		$this->validate_course_progress_item( $course_progress_item );
-
 		$query = new CourseProgressItemQuery(
 			array(
 				'item_id'     => $course_progress_item->get_item_id( 'edit' ),
@@ -133,7 +131,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 					),
 					$course_progress_item
 				),
-				array( '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
+				array( '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
 			);
 
 			if ( $result && $wpdb->insert_id ) {
@@ -161,8 +159,6 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	 */
 	public function update( Model &$course_progress_item ) {
 		global $wpdb;
-
-		$this->validate_course_progress_item( $course_progress_item );
 
 		$changes = $course_progress_item->get_changes();
 
@@ -370,48 +366,6 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 		$ids = wp_list_pluck( $course_progress_item, 'id' );
 
 		return array_filter( array_map( 'masteriyo_get_course_progress_item', $ids ) );
-	}
-
-	/**
-	 * Validate the course progress item.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  CourseProgress $course_progress_item Course progress object.
-	 * @return true|Exception
-	 */
-	protected function validate_course_progress_item( &$course_progress_item ) {
-		// Bail early if the course progress is not valid.
-		$course_progress = masteriyo_get_course_progress_by_user_and_course( $course_progress_item->get_user_id( 'edit' ), $course_progress_item->get_course_id( 'edit' ) );
-		if ( empty( $course_progress ) ) {
-			throw new RestException(
-				$course_progress->get_error_code(),
-				$course_progress->get_error_message(),
-				$course_progress->get_error_data( 'status' )
-			);
-		}
-
-		$course_progress_item->set_progress_id( $course_progress->get_id() );
-
-		// Bail early if the user id is invalid.
-		$user = masteriyo_get_user( $course_progress_item->get_user_id() );
-		if ( is_wp_error( $user ) ) {
-			throw new RestException(
-				$user->get_error_code(),
-				$user->get_error_message(),
-				$user->get_error_data( 'status' )
-			);
-		}
-
-		// Bail early if ther item_id is not either lesson or quiz.\
-		$item = get_post( $course_progress_item->get_item_id( 'edit' ) );
-		if ( is_null( $item ) || ! in_array( $item->post_type, array( 'lesson', 'quiz' ), true ) ) {
-			throw new RestException(
-				'masteriyo_invalid_item_id',
-				__( 'Invalid item ID.', 'masteriyo' ),
-				400
-			);
-		}
 	}
 
 	/**

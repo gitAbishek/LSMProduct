@@ -43,6 +43,13 @@ abstract class PostsController extends CrudController {
 
 		$post = get_post( (int) $request['id'] );
 
+		// Allow to get the items for open courses.
+		if ( in_array( $post->post_type, array( 'lesson', 'quiz', 'section', 'question' ), true ) ) {
+			$course_id = get_post_meta( $post->ID, '_course_id', true );
+			$course    = masteriyo_get_course( $course_id );
+			return ! is_null( $course ) && 'open' === $course->get_access_mode();
+		}
+
 		if ( $post && ! $this->permission->rest_check_post_permissions( $this->post_type, 'read', $request['id'] ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',

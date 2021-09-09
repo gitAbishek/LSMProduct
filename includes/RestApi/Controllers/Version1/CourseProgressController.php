@@ -578,6 +578,11 @@ class CourseProgressController extends CrudController {
 			);
 		}
 
+		$course = masteriyo_get_course( $request['course_id'] );
+		if ( ! is_null( $course ) && 'open' === $course->get_access_mode() ) {
+			return true;
+		}
+
 		if ( ! $this->permission->rest_check_course_progress_permissions( 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
@@ -685,12 +690,17 @@ class CourseProgressController extends CrudController {
 		if ( isset( $request['user_id'] ) && ! empty( $request['user_id'] ) ) {
 			$user_id = $request['user_id'];
 		} else {
-			$user_id = get_current_user_id();
+			$user_id = is_user_logged_in() ? get_current_user_id() : masteriyo( 'session' )->start()->get_user_id();
+		}
+
+		// Return the auto generated guest user id.
+		if ( ! is_user_logged_in() ) {
+			return $user_id;
 		}
 
 		// Validate the user ID.
 		$user = get_user_by( 'id', $user_id );
-		if ( ! $user ) {
+		if ( is_user_logged_in() && ! $user ) {
 			throw new RestException(
 				'masteriyo_rest_invalid_user_id',
 				__( 'User ID is invalid.', 'masteriyo' ),

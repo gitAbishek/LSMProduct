@@ -284,6 +284,11 @@ class Masteriyo {
 			$course_id = absint( get_query_var( 'course_id' ) );
 			$user_id   = get_current_user_id();
 
+			if ( ! is_user_logged_in() ) {
+				masteriyo( 'session' )->start();
+				$user_id = masteriyo( 'session' )->get_user_id();
+			}
+
 			$query = new UserCourseQuery(
 				array(
 					'course_id' => $course_id,

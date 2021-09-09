@@ -223,7 +223,7 @@ class CourseProgress extends Model {
 	* @param int $user_id User ID.
 	 */
 	public function set_user_id( $user_id ) {
-		$this->set_prop( 'user_id', absint( $user_id ) );
+		$this->set_prop( 'user_id', $user_id );
 	}
 
 	/**

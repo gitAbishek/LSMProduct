@@ -445,16 +445,26 @@ class CourseProgressItemsController extends CrudController {
 			$course_progress_item_repo->read( $course_progress_item );
 		}
 
-		if ( isset( $request['course_id'] ) ) {
-			$course_progress_item->set_course_id( $request['course_id'] );
+		if ( isset( $request['item_type'] ) ) {
+			$course_progress_item->set_item_type( $request['item_type'] );
 		}
 
 		if ( isset( $request['item_id'] ) ) {
 			$course_progress_item->set_item_id( $request['item_id'] );
 		}
 
-		if ( isset( $request['item_type'] ) ) {
-			$course_progress_item->set_item_type( $request['item_type'] );
+		try {
+			$user_id = $this->validate_user_id( $request, $creating );
+			$course_progress_item->set_user_id( $user_id );
+
+			$course_id = $this->validate_course_id( $request, $creating );
+			if ( ! is_null( $course_id ) ) {
+				$course_progress_item->set_course_id( $course_id );
+			}
+
+			$this->validate_course_progress_item( $course_progress_item );
+		} catch ( RestException $e ) {
+			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
 		}
 
 		if ( isset( $request['user_id'] ) && ! empty( $request['user_id'] ) ) {
@@ -661,7 +671,12 @@ class CourseProgressItemsController extends CrudController {
 		if ( isset( $request['user_id'] ) && ! empty( $request['user_id'] ) ) {
 			$user_id = $request['user_id'];
 		} else {
-			$user_id = get_current_user_id();
+			$user_id = is_user_logged_in() ? get_current_user_id() : masteriyo( 'session' )->start()->get_user_id();
+		}
+
+		// Return the auto generated guest user id.
+		if ( ! is_user_logged_in() ) {
+			return $user_id;
 		}
 
 		// Validate the user ID.
@@ -697,5 +712,57 @@ class CourseProgressItemsController extends CrudController {
 		$items = ( 1 === count( $items ) ) ? $items[0] : $items;
 
 		return $items;
+	}
+
+	/**
+	 * Validate the course ID in the request.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param WP_REST_Request $request Request object.
+	 * @param bool            $creating If is creating a new object.
+	 *
+	 * @return WP_Error|Model
+	 */
+	protected function validate_course_id( $request, $creating = false ) {
+		$course_id = null;
+
+		// Course ID.
+		if ( isset( $request['course_id'] ) && ! empty( $request['course_id'] ) ) {
+			$course_id = $request['course_id'];
+
+			// Validate course ID.
+			$course_post = get_post( $course_id );
+			if ( ! $course_post || 'course' !== $course_post->post_type ) {
+				throw new RestException(
+					'masteriyo_rest_invalid_course_id',
+					__( 'Course ID is invalid.', 'masteriyo' ),
+					400
+				);
+			}
+		}
+
+		return $course_id;
+	}
+
+	/**
+	 * Validate the course progress item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param CourseProgressItem $course_progress_item
+	 * @throw exception
+	 */
+	protected function validate_course_progress_item( $course_progress_item ) {
+		// Bail early if ther item_id is not either lesson or quiz.
+		$item = get_post( $course_progress_item->get_item_id( 'edit' ) );
+
+		if ( is_null( $item ) || ! in_array( $item->post_type, array( 'lesson', 'quiz' ), true ) ) {
+			throw new RestException(
+				'masteriyo_invalid_item_id',
+				__( 'Invalid item ID.', 'masteriyo' ),
+				400
+			);
+		}
 	}
 }

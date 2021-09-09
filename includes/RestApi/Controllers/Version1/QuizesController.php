@@ -179,7 +179,9 @@ class QuizesController extends PostsController {
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'check_answers' ),
-					'permission_callback' => 'is_user_logged_in',
+					'permission_callback' => function() {
+						return is_user_logged_in() || masteriyo( 'session' )->start()->get_user_id();
+					},
 				),
 			)
 		);
@@ -191,7 +193,9 @@ class QuizesController extends PostsController {
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_attempts' ),
-					'permission_callback' => 'is_user_logged_in',
+					'permission_callback' => function() {
+						return is_user_logged_in() || masteriyo( 'session' )->start()->get_user_id();
+					},
 					'args'                => array(
 						'quiz_id'  => array(
 							'description'       => __( 'Quiz ID.', 'masteriyo' ),
@@ -443,37 +447,38 @@ class QuizesController extends PostsController {
 	 * @param WP_REST_Request $request Full details about the request.
 	 */
 	public function start_quiz( $request ) {
-
 		global $wpdb;
 
-		if ( ! is_user_logged_in() ) {
-			return new \WP_Error(
-				'masteriyo_rest_user_not_logged_in',
-				__( 'Please sign in to start the quiz.', 'masteriyo' ),
-				array( 'status' => rest_authorization_required_code() )
-			);
-		}
-
-		$user_id = (int) get_current_user_id();
-		$quiz_id = (int) $request['id'];
-		$quiz    = get_post( $quiz_id );
-
-		if ( empty( $quiz ) || $this->post_type !== $quiz->post_type ) {
-			return new \WP_Error(
-				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid Quiz ID.', 'masteriyo' ),
-				array( 'status' => 404 )
-			);
-		}
-
+		$user_id   = is_user_logged_in() ? get_current_user_id() : masteriyo( 'session' )->start()->get_user_id();
+		$quiz_id   = (int) $request['id'];
+		$quiz      = get_post( $quiz_id );
 		$course_id = (int) get_post_meta( $quiz_id, '_course_id', true );
+		$course    = masteriyo_get_course( $course_id );
 
-		if ( empty( $course_id ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_course_empty_id',
-				__( 'There is something went wrong with course, please check if quiz attached with a course', 'masteriyo' ),
-				array( 'status' => 404 )
-			);
+		if ( ! is_null( $course ) && 'open' !== $course->get_access_mode() ) {
+			if ( ! is_user_logged_in() ) {
+				return new \WP_Error(
+					'masteriyo_rest_user_not_logged_in',
+					__( 'Please sign in to start the quiz.', 'masteriyo' ),
+					array( 'status' => rest_authorization_required_code() )
+				);
+			}
+
+			if ( empty( $quiz ) || $this->post_type !== $quiz->post_type ) {
+				return new \WP_Error(
+					"masteriyo_rest_{$this->post_type}_invalid_id",
+					__( 'Invalid Quiz ID.', 'masteriyo' ),
+					array( 'status' => 404 )
+				);
+			}
+
+			if ( empty( $course_id ) ) {
+				return new \WP_Error(
+					'masteriyo_rest_course_empty_id',
+					__( 'There is something went wrong with course, please check if quiz attached with a course', 'masteriyo' ),
+					array( 'status' => 404 )
+				);
+			}
 		}
 
 		$date = current_time( 'mysql', true );
@@ -503,7 +508,6 @@ class QuizesController extends PostsController {
 		$response = rest_ensure_response( $attempt_data );
 
 		return apply_filters( 'masteriyo_start_quiz_rest_reponse', $response );
-
 	}
 
 	/**

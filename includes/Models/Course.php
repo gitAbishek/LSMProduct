@@ -1280,7 +1280,7 @@ class Course extends Model {
 		if ( '' === get_option( 'permalink_structure' ) ) {
 			$url = add_query_arg(
 				array(
-					'course_id' => $this->get_id(),
+					'course_name' => $this->get_id(),
 				),
 				$learn_page_url
 			);

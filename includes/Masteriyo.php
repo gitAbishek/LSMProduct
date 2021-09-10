@@ -282,20 +282,23 @@ class Masteriyo {
 		}
 
 		// Handle interactive page.
-		if ( masteriyo_is_learn_page() ) { // phpcs:ignore
-			$course_slug = get_query_var( 'course_name' );
+		if ( masteriyo_is_learn_page() ) {
+			if ( '' === get_option( 'permalink_structure' ) ) {
+				$course_id = get_query_var( 'course_name' );
+			} else {
+				$course_slug = get_query_var( 'course_name' );
+				$courses     = get_posts(
+					array(
+						'post_type'   => 'course',
+						'name'        => $course_slug,
+						'numberposts' => 1,
+						'fields'      => 'ids',
+					)
+				);
+				$course_id   = is_array( $courses ) ? current( $courses ) : 0;
+			}
 
-			$courses = get_posts(
-				array(
-					'post_type'   => 'course',
-					'name'        => $course_slug,
-					'numberposts' => 1,
-					'fields'      => 'ids',
-				)
-			);
-
-			$course_id = is_array( $courses ) ? current( $courses ) : 0;
-			$user_id   = get_current_user_id();
+			$user_id = get_current_user_id();
 
 			if ( ! is_user_logged_in() ) {
 				masteriyo( 'session' )->start();

@@ -12,7 +12,7 @@ A Complete WordPress LMS plugin to create and sell online courses in no time.
 
 # Description
 
-A complete solution to create and sell online courses. The plugin is powered by React js; hence creating courses, lessons, quizzes are super smooth and easy. The best part is the beautifully designed interactive learning page with easy course navigation, distraction-free mode, Course Progress bar, and dedicated place for Questions and Answers.
+A complete solution to create and sell online courses. The plugin is powered by React js; hence creating courses, lessons, quizzes are super smooth and easy. The best part is the beautifully designed interactive learn page with easy course navigation, distraction-free mode, Course Progress bar, and dedicated place for Questions and Answers.
 
 ### Features And Options:
 
@@ -21,7 +21,7 @@ A complete solution to create and sell online courses. The plugin is powered by 
 * Sell courses
 * Accept Payment via PayPal
 * Clean Design
-* Interactive Learning Page
+* Interactive Learn Page
 * Distraction Free Mode
 * Questions and Answers
 * Course Progress Bar

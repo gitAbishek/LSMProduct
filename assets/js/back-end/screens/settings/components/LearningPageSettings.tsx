@@ -61,7 +61,7 @@ const LearningPageSettings: React.FC<Props> = (props) => {
 										{__('Enable Questions & Answers', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'Display question & answers tab on learning page',
+												'Display question & answers tab on learn page',
 												'masteriyo'
 											)}
 											hasArrow
@@ -72,9 +72,7 @@ const LearningPageSettings: React.FC<Props> = (props) => {
 										</Tooltip>
 									</FormLabel>
 									<Switch
-										{...register(
-											'learning_page.display.enable_questions_answers'
-										)}
+										{...register('learn_page.display.enable_questions_answers')}
 										defaultChecked={
 											learningPageData?.display?.enable_questions_answers
 										}

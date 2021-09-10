@@ -64,7 +64,7 @@ class Setting extends Model {
 				'enable_review' => true,
 			),
 		),
-		'learning_page'  => array(
+		'learn_page'     => array(
 			'display' => array(
 				'enable_questions_answers' => true,
 			),
@@ -186,7 +186,7 @@ class Setting extends Model {
 				'myaccount_page_id'        => '',
 				'checkout_page_id'         => '',
 				'terms_conditions_page_id' => '',
-				'learning_page_id'         => '',
+				'learn_page_id'            => '',
 			),
 			'permalinks' => array(
 				'category_base'            => 'course-category',

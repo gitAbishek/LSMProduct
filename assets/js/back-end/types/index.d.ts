@@ -137,7 +137,7 @@ export interface EmailsSetttingsMap {
 export interface AdvancedSettingsMap {
 	pages: {
 		courses_page_id: number;
-		learning_page_id: number;
+		learn_page_id: number;
 		myaccount_page_id: number;
 		checkout_page_id: number;
 		terms_conditions_page_id: number;
@@ -177,7 +177,7 @@ export interface SetttingsMap {
 	general: GeneralSettingsMap;
 	course_archive: CourseArchiveSettingsMap;
 	single_course: SingleCourseSettingsMap;
-	learning_page: LearningPageSettingsMap;
+	learn_page: LearningPageSettingsMap;
 	payments: PaymentsSettingsMap;
 	quiz: QuizSettingsMap;
 	emails: EmailsSetttingsMap;

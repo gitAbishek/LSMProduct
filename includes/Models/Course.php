@@ -1274,15 +1274,15 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function start_course_url() {
-		$learning_page_url = masteriyo_get_page_permalink( 'learning' );
-		$url               = trailingslashit( $learning_page_url . 'course/' . $this->get_id() );
+		$learn_page_url = masteriyo_get_page_permalink( 'learn' );
+		$url               = trailingslashit( $learn_page_url . 'course/' . $this->get_id() );
 
 		if ( '' === get_option( 'permalink_structure' ) ) {
 			$url = add_query_arg(
 				array(
 					'course_id' => $this->get_id(),
 				),
-				$learning_page_url
+				$learn_page_url
 			);
 		}
 

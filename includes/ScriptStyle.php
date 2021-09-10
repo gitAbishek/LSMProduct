@@ -70,8 +70,8 @@ class ScriptStyle {
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_public_localized_scripts' ), PHP_INT_MAX - 9 );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_admin_localized_scripts' ) );
 
-		// Remove third party styles from learning page.
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_styles_scripts_in_learning_page' ), PHP_INT_MAX );
+		// Remove third party styles from learn page.
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_styles_scripts_in_learn_page' ), PHP_INT_MAX );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class ScriptStyle {
 	}
 
 	/**
-	 * Initialize the scripts.
+	 * Initialize the scripts.`
 	 *
 	 * @since 0.1.0
 	 *
@@ -118,7 +118,7 @@ class ScriptStyle {
 					'src'      => self::get_asset_url( "/assets/js/build/masteriyo-dependencies{$suffix}.js" ),
 					'context'  => array( 'admin', 'public' ),
 					'callback' => function() {
-						return masteriyo_is_admin_page() || masteriyo_is_learning_page();
+						return masteriyo_is_admin_page() || masteriyo_is_learn_page();
 					},
 				),
 				'admin'         => array(
@@ -154,7 +154,7 @@ class ScriptStyle {
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_checkout_page',
 				),
-				'learning'      => array(
+				'learn'         => array(
 					'src'     => self::get_asset_url( "/assets/js/build/masteriyo-interactive{$suffix}.js" ),
 					'deps'    => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 					'version' => self::get_version(),
@@ -474,7 +474,7 @@ class ScriptStyle {
 		$checkout_slug = ! is_null( $checkout_page ) ? $checkout_page->post_name : '';
 
 		self::$localized_scripts = apply_filters(
-			'masteriyo_localized_scripts',
+			'masteriyo_localized_admin_scripts',
 			array(
 				'admin' => array(
 					'name' => '_MASTERIYO_',
@@ -517,7 +517,7 @@ class ScriptStyle {
 	 */
 	public static function load_public_localized_scripts() {
 		self::$localized_scripts = apply_filters(
-			'masteriyo_localized_scripts',
+			'masteriyo_localized_public_scripts',
 			array(
 				'edit-account'  => array(
 					'name' => 'masteriyo_data',
@@ -532,7 +532,6 @@ class ScriptStyle {
 						),
 					),
 				),
-
 				'login-form'    => array(
 					'name' => 'masteriyo_data',
 					'data' => array(
@@ -578,7 +577,7 @@ class ScriptStyle {
 						'mto_ajax_url'        => '/?mto-ajax=%%endpoint%%',
 					),
 				),
-				'learning'      => array(
+				'learn'         => array(
 					'name' => '_MASTERIYO_',
 					'data' => array(
 						'rootApiUrl' => esc_url_raw( rest_url() ),
@@ -602,19 +601,19 @@ class ScriptStyle {
 	}
 
 	/**
-	 * Remove styles and scripts in learning page.
+	 * Remove styles and scripts in learn page.
 	 *
 	 * @return void
 	 */
-	public static function remove_styles_scripts_in_learning_page() {
+	public static function remove_styles_scripts_in_learn_page() {
 		global $wp_styles;
 
 		// Bail early if the page is not interacitve.
-		if ( ! masteriyo_is_learning_page() ) {
+		if ( ! masteriyo_is_learn_page() ) {
 			return;
 		}
 
-		$whitelist = self::get_whitelist_styles_in_learning_page();
+		$whitelist = self::get_whitelist_styles_in_learn_page();
 
 		foreach ( $wp_styles->registered as $style ) {
 			if ( ! in_array( $style->handle, $whitelist, true ) ) {
@@ -630,18 +629,18 @@ class ScriptStyle {
 	}
 
 	/**
-	 * Get the list of whitelist styles in learning page.
+	 * Get the list of whitelist styles in learn page.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return array
 	 */
-	public static function get_whitelist_styles_in_learning_page() {
+	public static function get_whitelist_styles_in_learn_page() {
 		return array_unique(
 			apply_filters(
-				'masteriyo_whitelist_scripts_learning_page',
+				'masteriyo_whitelist_scripts_learn_page',
 				array(
-					'masteriyo-learning',
+					'masteriyo-learn',
 					'masteriyo-dependencies',
 					'colors',
 					'common',

@@ -280,7 +280,7 @@ class Masteriyo {
 		}
 
 		// Handle interactive page.
-		if ( masteriyo_is_learning_page() ) { // phpcs:ignore
+		if ( masteriyo_is_learn_page() ) { // phpcs:ignore
 			$course_id = absint( get_query_var( 'course_id' ) );
 			$user_id   = get_current_user_id();
 
@@ -325,7 +325,7 @@ class Masteriyo {
 				$user_course->save();
 			}
 
-			$template = masteriyo_locate_template( 'learning.php' );
+			$template = masteriyo_locate_template( 'learn.php' );
 		}
 
 		return $template;

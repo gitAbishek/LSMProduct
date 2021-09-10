@@ -136,10 +136,10 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 
 								<FormControl>
 									<FormLabel minW="2xs">
-										{__('Learning Page', 'masteriyo')}
+										{__('Learn Page', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'This set learning page where the enroll courses can be learned.',
+												'This set learn page where the enroll courses can be learned.',
 												'masteriyo'
 											)}
 											hasArrow
@@ -151,8 +151,8 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Select
 										placeholder={__('Select a Page', 'masteriyo')}
-										{...register('advance.pages.learning_page_id')}
-										defaultValue={advanceData?.pages?.learning_page_id}>
+										{...register('advance.pages.learn_page_id')}
+										defaultValue={advanceData?.pages?.learn_page_id}>
 										{renderPagesOption()}
 									</Select>
 								</FormControl>

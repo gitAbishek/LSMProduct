@@ -306,20 +306,20 @@ class SettingsController extends CrudController {
 						),
 					),
 				),
-				'learning_page'  => array(
-					'description' => __( 'Learning page settings', 'masteriyo' ),
+				'learn_page'     => array(
+					'description' => __( 'Learn page settings', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'    => 'object',
 						'display' => array(
-							'description' => __( 'Learning page display settings.', 'masteriyo' ),
+							'description' => __( 'Learn page display settings.', 'masteriyo' ),
 							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
 								'type'                     => 'object',
 								'enable_questions_answers' => array(
-									'description' => __( 'Enable questions answers in learning page.', 'masteriyo' ),
+									'description' => __( 'Enable questions answers in learn page.', 'masteriyo' ),
 									'type'        => 'boolean',
 									'context'     => array( 'view', 'edit' ),
 								),
@@ -780,7 +780,7 @@ class SettingsController extends CrudController {
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),
 								),
-								'courses_page_id'      => array(
+								'courses_page_id'          => array(
 									'description' => __( 'Archive course page ID.', 'masteriyo' ),
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),

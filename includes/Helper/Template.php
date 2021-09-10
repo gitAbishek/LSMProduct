@@ -312,7 +312,7 @@ function_exists( 'add_action' ) && add_action( 'the_post', 'masteriyo_setup_cour
 function masteriyo_add_body_class( $classes, $class ) {
 	if ( masteriyo_is_archive_course_page() ) {
 		$classes[] = 'masteriyo-courses-page';
-	} elseif ( masteriyo_is_learning_page() ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	} elseif ( masteriyo_is_learn_page() ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$classes[] = 'masteriyo-interactive-page';
 	}
 	$classes[] = 'masteriyo';

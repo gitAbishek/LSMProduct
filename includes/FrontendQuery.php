@@ -476,7 +476,7 @@ class FrontendQuery {
 				if ( is_search() ) {
 					$orderby_value = 'relevance';
 				} else {
-					$orderby_value = apply_filters( 'masteriyo_default_catalog_orderby', get_option( 'masteriyo_default_catalog_orderby', 'menu_order' ) );
+					$orderby_value = apply_filters( 'masteriyo_default_catalog_orderby', get_option( 'masteriyo_default_catalog_orderby', 'date' ) );
 				}
 			}
 

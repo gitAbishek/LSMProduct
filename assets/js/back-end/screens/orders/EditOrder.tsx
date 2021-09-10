@@ -46,7 +46,6 @@ import urls from '../../constants/urls';
 import { OrderItemSchema, OrderSchema } from '../../schemas';
 import API from '../../utils/api';
 import { deepClean, getLocalTime } from '../../utils/utils';
-import CountryStateFormField from './components/CountryStateFormField';
 
 const orderStatusList = [
 	{
@@ -366,125 +365,21 @@ const EditOrder = () => {
 														</FormControl>
 													</Stack>
 
-													{/* Company */}
-													<FormControl
-														isInvalid={!!errors?.billing?.company}
-														py="3">
-														<FormLabel>{__('Company', 'masteriyo')}</FormLabel>
+													{/* Email */}
+													<FormControl isInvalid={!!errors?.billing?.email}>
+														<FormLabel>
+															{__('Email address', 'masteriyo')}
+														</FormLabel>
 														<Input
-															defaultValue={orderQuery.data?.billing.company}
-															{...register('billing.company')}
+															type="email"
+															defaultValue={orderQuery.data?.billing.email}
+															{...register('billing.email')}
 														/>
 														<FormErrorMessage>
-															{errors?.billing?.company &&
-																errors?.billing?.company?.message}
+															{errors?.billing?.email &&
+																errors?.billing?.email?.message}
 														</FormErrorMessage>
 													</FormControl>
-
-													{/* Country & State */}
-													<CountryStateFormField
-														defaultCountry={orderQuery.data?.billing.country}
-														defaultState={orderQuery.data?.billing.state}
-													/>
-
-													{/* Address Lines */}
-													<Stack direction="row" spacing="8" py="3">
-														<FormControl
-															isInvalid={!!errors?.billing?.address_1}>
-															<FormLabel>
-																{__('Address 1', 'masteriyo')}
-															</FormLabel>
-															<Input
-																type="text"
-																defaultValue={
-																	orderQuery.data?.billing.address_1
-																}
-																{...register('billing.address_1')}
-															/>
-															<FormErrorMessage>
-																{errors?.billing?.address_1 &&
-																	errors?.billing?.address_1?.message}
-															</FormErrorMessage>
-														</FormControl>
-														<FormControl
-															isInvalid={!!errors?.billing?.address_2}>
-															<FormLabel>
-																{__('Address 2', 'masteriyo')}
-															</FormLabel>
-															<Input
-																type="text"
-																defaultValue={
-																	orderQuery.data?.billing.address_2
-																}
-																{...register('billing.address_2')}
-															/>
-															<FormErrorMessage>
-																{errors?.billing?.address_2 &&
-																	errors?.billing?.address_2?.message}
-															</FormErrorMessage>
-														</FormControl>
-													</Stack>
-
-													{/* City & Postcode */}
-													<Stack direction="row" spacing="8" py="3">
-														<FormControl isInvalid={!!errors?.billing?.city}>
-															<FormLabel>{__('City', 'masteriyo')}</FormLabel>
-															<Input
-																type="text"
-																defaultValue={orderQuery.data?.billing.city}
-																{...register('billing.city')}
-															/>
-															<FormErrorMessage>
-																{errors?.billing?.city &&
-																	errors?.billing?.city?.message}
-															</FormErrorMessage>
-														</FormControl>
-														<FormControl
-															isInvalid={!!errors?.billing?.postcode}>
-															<FormLabel>
-																{__('Postcode / ZIP', 'masteriyo')}
-															</FormLabel>
-															<Input
-																type="number"
-																defaultValue={orderQuery.data?.billing.postcode}
-																{...register('billing.postcode')}
-															/>
-															<FormErrorMessage>
-																{errors?.billing?.postcode &&
-																	errors?.billing?.postcode?.message}
-															</FormErrorMessage>
-														</FormControl>
-													</Stack>
-
-													{/* Email & Phone */}
-													<Stack direction="row" spacing="8" py="3">
-														<FormControl isInvalid={!!errors?.billing?.email}>
-															<FormLabel>
-																{__('Email address', 'masteriyo')}
-															</FormLabel>
-															<Input
-																type="email"
-																defaultValue={orderQuery.data?.billing.email}
-																{...register('billing.email')}
-															/>
-															<FormErrorMessage>
-																{errors?.billing?.email &&
-																	errors?.billing?.email?.message}
-															</FormErrorMessage>
-														</FormControl>
-														<FormControl isInvalid={!!errors?.billing?.phone}>
-															<FormLabel>{__('Phone', 'masteriyo')}</FormLabel>
-															<Input
-																type="number"
-																defaultValue={orderQuery.data?.billing.phone}
-																{...register('billing.phone')}
-															/>
-															<FormErrorMessage>
-																{errors?.billing?.phone &&
-																	errors?.billing?.phone?.message}
-															</FormErrorMessage>
-														</FormControl>
-													</Stack>
 												</Box>
 											</Stack>
 

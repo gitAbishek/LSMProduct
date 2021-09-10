@@ -33,6 +33,9 @@ interface Props {
 	coursePermalink: string;
 }
 
+//@ts-ignore
+const qaEnable = _MASTERIYO_.qaEnable;
+
 const Sidebar: React.FC<Props> = (props) => {
 	const { items, name, onToggle, isOpen, isHeaderOpen, coursePermalink } =
 		props;
@@ -160,13 +163,15 @@ const Sidebar: React.FC<Props> = (props) => {
 								onClick={() => setCurrentTab(1)}>
 								{__('Lessons', 'masteriyo')}
 							</Button>
-							<Button
-								leftIcon={<BiInfoCircle />}
-								isActive={currentTab === 2}
-								sx={buttonStyles}
-								onClick={() => setCurrentTab(2)}>
-								{__('Questions', 'masteriyo')}
-							</Button>
+							{qaEnable && (
+								<Button
+									leftIcon={<BiInfoCircle />}
+									isActive={currentTab === 2}
+									sx={buttonStyles}
+									onClick={() => setCurrentTab(2)}>
+									{__('Questions', 'masteriyo')}
+								</Button>
+							)}
 						</ButtonGroup>
 					</Box>
 				</Stack>

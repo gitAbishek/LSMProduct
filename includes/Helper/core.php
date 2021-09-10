@@ -2988,3 +2988,34 @@ function masteriyo_get_custom_logo_data() {
 	$image_data     = wp_get_attachment_image_src( $custom_logo_id, 'full' );
 	return apply_filters( 'masteriyo_custom_logo', $image_data );
 }
+
+/**
+ * Get allowed svg elements to use in wp_kses functions.
+ *
+ * @since 0.1.0
+ *
+ * @return array
+ */
+function masteriyo_get_allowed_svg_elements() {
+	return apply_filters(
+		'masteriyo_allowed_svg_elements',
+		array(
+			'svg'   => array(
+				'class'           => true,
+				'aria-hidden'     => true,
+				'aria-labelledby' => true,
+				'role'            => true,
+				'xmlns'           => true,
+				'width'           => true,
+				'height'          => true,
+				'viewbox'         => true,
+			),
+			'g'     => array( 'fill' => true ),
+			'title' => array( 'title' => true ),
+			'path'  => array(
+				'd'    => true,
+				'fill' => true,
+			),
+		)
+	);
+}

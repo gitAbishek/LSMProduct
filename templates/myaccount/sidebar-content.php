@@ -32,11 +32,11 @@ do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 		</div>
 	</div>
 	<nav class="masteriyo-menu">
-	<ul>
+		<ul>
 			<?php foreach ( $menu_items as $slug => $endpoint ) : ?>
 				<li class="<?php echo esc_attr( $slug === $current_endpoint['endpoint'] ? 'active' : '' ); ?>">
 					<a href="<?php echo esc_url( masteriyo_get_account_endpoint_url( $slug ) ); ?>">
-						<?php echo wp_kses_post( $endpoint['icon'] ); ?>
+						<?php echo wp_kses( $endpoint['icon'], masteriyo_get_allowed_svg_elements() ); ?>
 						<span><?php echo esc_html( $endpoint['label'] ); ?></span>
 					</a>
 				</li>

@@ -100,6 +100,7 @@ class Masteriyo {
 		add_action( 'after_setup_theme', array( $this, 'add_image_sizes' ) );
 
 		add_action( 'in_admin_header', array( $this, 'hide_admin_notices' ) );
+		add_action( 'admin_enqueue_scripts', 'wp_enqueue_media' );
 	}
 
 	/**

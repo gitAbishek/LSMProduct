@@ -6,14 +6,12 @@ import {
 	FormLabel,
 	Image,
 	Spinner,
-	Stack,
-	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import ImageUploadModal from '../../../components/common/ImageUploadModal';
+import MediaUploader from '../../../components/common/MediaUploader';
 import { MediaSchema } from '../../../schemas';
 import MediaAPI from '../../../utils/media';
 
@@ -24,7 +22,6 @@ interface Props {
 const FeaturedImage: React.FC<Props> = (props) => {
 	const { defaultValue } = props;
 	const [imageId, setImageId] = useState<any>(defaultValue || null);
-	const { onOpen, onClose, isOpen } = useDisclosure();
 
 	const { setValue } = useFormContext();
 	const imageAPi = new MediaAPI();
@@ -45,7 +42,6 @@ const FeaturedImage: React.FC<Props> = (props) => {
 	const onComplete = (imageId: number) => {
 		setImageId(imageId);
 		setValue('featured_image', imageId);
-		onClose();
 	};
 
 	const onDelete = () => {
@@ -61,37 +57,28 @@ const FeaturedImage: React.FC<Props> = (props) => {
 					<Spinner />
 				</Center>
 			)}
-			{imageQuery.isSuccess ? (
-				<Stack direction="column" spacing="4">
-					<Image src={imageQuery?.data?.source_url} />
-					<ButtonGroup d="flex" justifyContent="space-between">
-						<Button variant="outline" onClick={onDelete} colorScheme="red">
-							{__('Remove Featured Image', 'masteriyo')}
-						</Button>
-						<Button variant="outline" onClick={onOpen} colorScheme="blue">
-							{__('Add New', 'masteriyo')}
-						</Button>
-					</ButtonGroup>
-				</Stack>
-			) : (
-				<ButtonGroup d="flex" justifyContent="space-between">
-					<Button
-						variant="outline"
-						isFullWidth
-						onClick={onOpen}
-						colorScheme="blue">
-						{__('Add Featured Image', 'masteriyo')}
-					</Button>
-				</ButtonGroup>
+			{imageQuery.isSuccess && (
+				<Image w="full" src={imageQuery?.data?.source_url} mb="4" />
 			)}
-			<ImageUploadModal
-				title={__('Featured Image', 'masteriyo')}
-				addButtonText={__('Set Featured Image', 'masteriyo')}
-				isOpen={isOpen}
-				onClose={onClose}
-				onComplete={onComplete}
-				selected={imageId}
-			/>
+			<ButtonGroup d="flex" justifyContent="space-between">
+				{imageId && (
+					<Button variant="outline" onClick={onDelete} colorScheme="red">
+						{__('Remove Featured Image', 'masteriyo')}
+					</Button>
+				)}
+				<MediaUploader
+					buttonLabel={
+						imageId
+							? __('Add New', 'masteriyo')
+							: __('Add Featured Image', 'mastriyo')
+					}
+					modalTitle="Featured Image"
+					onSelect={(data: any) => {
+						onComplete(data[0].id);
+					}}
+					isFullWidth={imageId ? false : true}
+				/>
+			</ButtonGroup>
 		</FormControl>
 	);
 };

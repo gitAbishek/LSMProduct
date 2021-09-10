@@ -10,13 +10,12 @@ import {
 	Select,
 	Spinner,
 	Stack,
-	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import ImageUploadModal from '../../../components/common/ImageUploadModal';
+import MediaUploader from '../../../components/common/MediaUploader';
 import { MediaSchema } from '../../../schemas';
 import MediaAPI from '../../../utils/media';
 
@@ -28,7 +27,6 @@ interface Props {
 const VideoSource: React.FC<Props> = (props) => {
 	const { defaultSource, defaultSourceUrl, defaultSourceID } = props;
 	const [videoId, setVideoId] = useState<any>(null);
-	const { onOpen, onClose, isOpen } = useDisclosure();
 	const {
 		register,
 		control,
@@ -60,7 +58,6 @@ const VideoSource: React.FC<Props> = (props) => {
 	const onComplete = (videoId: number) => {
 		setVideoId(videoId);
 		setValue('video_source_url', videoId.toString());
-		onClose();
 	};
 
 	const onDelete = () => {
@@ -107,44 +104,35 @@ const VideoSource: React.FC<Props> = (props) => {
 							<Spinner />
 						</Center>
 					)}
-					{mediaQuery.isSuccess ? (
-						<Stack direction="column" spacing="4">
-							<AspectRatio ratio={16 / 9}>
-								<video
-									src={mediaQuery?.data?.source_url}
-									title={mediaQuery?.data?.title?.rendered}
-									controls
-								/>
-							</AspectRatio>
-							<ButtonGroup d="flex" justifyContent="space-between">
-								<Button variant="outline" onClick={onDelete} colorScheme="red">
-									{__('Remove Video', 'masteriyo')}
-								</Button>
-								<Button variant="outline" onClick={onOpen} colorScheme="blue">
-									{__('Add New Video', 'masteriyo')}
-								</Button>
-							</ButtonGroup>
-						</Stack>
-					) : (
-						<ButtonGroup d="flex" justifyContent="space-between">
-							<Button
-								variant="outline"
-								isFullWidth
-								onClick={onOpen}
-								colorScheme="blue">
-								{__('Add Video', 'masteriyo')}
-							</Button>
-						</ButtonGroup>
+					{mediaQuery.isSuccess && (
+						<AspectRatio ratio={16 / 9} mb="4">
+							<video
+								src={mediaQuery?.data?.source_url}
+								title={mediaQuery?.data?.title?.rendered}
+								controls
+							/>
+						</AspectRatio>
 					)}
-					<ImageUploadModal
-						title={__('Video', 'masteriyo')}
-						addButtonText={__('Set Video', 'masteriyo')}
-						isOpen={isOpen}
-						onClose={onClose}
-						onComplete={onComplete}
-						selected={videoId}
-						mediaType="video"
-					/>
+					<ButtonGroup d="flex" justifyContent="space-between">
+						{videoId && (
+							<Button variant="outline" onClick={onDelete} colorScheme="red">
+								{__('Remove Video', 'masteriyo')}
+							</Button>
+						)}
+						<MediaUploader
+							buttonLabel={
+								videoId
+									? __('Add New Video', 'masteriyo')
+									: __('Add Video', 'masteriyo')
+							}
+							modalTitle="Self Hosted Video"
+							onSelect={(data: any) => {
+								onComplete(data[0].id);
+							}}
+							isFullWidth={videoId ? false : true}
+							mediaType="video"
+						/>
+					</ButtonGroup>
 				</FormControl>
 			)}
 		</Stack>

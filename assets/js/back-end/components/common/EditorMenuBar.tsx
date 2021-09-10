@@ -9,7 +9,6 @@ import {
 	MenuList,
 	Stack,
 	Tooltip,
-	useDisclosure,
 } from '@chakra-ui/react';
 import { EditorContentProps } from '@tiptap/react';
 import { __ } from '@wordpress/i18n';
@@ -33,7 +32,7 @@ import {
 } from 'react-icons/bi';
 import { ImQuotesLeft } from 'react-icons/im';
 import { deepMerge } from '../../utils/utils';
-import ImageUploadModal from './ImageUploadModal';
+import MediaUploader from './MediaUploader';
 
 interface Props extends EditorContentProps {
 	hasImageUpload?: boolean;
@@ -41,7 +40,6 @@ interface Props extends EditorContentProps {
 
 const EditorMenuBar: React.FC<Props> = (props) => {
 	const { editor, hasImageUpload } = props;
-	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const buttonStyles = (isActive?: boolean) => {
 		if (isActive) {
@@ -78,7 +76,6 @@ const EditorMenuBar: React.FC<Props> = (props) => {
 
 	const onImageUpload = (imageUrl: string) => {
 		imageUrl && editor.chain().focus().setImage({ src: imageUrl }).run();
-		onClose();
 	};
 
 	return (
@@ -302,17 +299,14 @@ const EditorMenuBar: React.FC<Props> = (props) => {
 						label={__('Upload Image', 'masteriyo')}
 						hasArrow
 						fontSize="xs">
-						<Box as="span" sx={buttonCommonStyles()} onClick={onOpen}>
-							<Icon as={BiImageAdd} />
+						<Box as="span" sx={buttonCommonStyles()}>
+							<MediaUploader
+								modalTitle="Upload Media"
+								onSelect={(data: any) => onImageUpload(data[0].url)}
+								icon={{ enable: true, name: BiImageAdd }}
+							/>
 						</Box>
 					</Tooltip>
-
-					<ImageUploadModal
-						isOpen={isOpen}
-						onClose={onClose}
-						get="url"
-						onComplete={onImageUpload}
-					/>
 				</Stack>
 			)}
 		</Stack>

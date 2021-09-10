@@ -70,7 +70,7 @@ const FeaturedImage: React.FC<Props> = (props) => {
 					buttonLabel={
 						imageId
 							? __('Add New', 'masteriyo')
-							: __('Add Featured Image', 'mastriyo')
+							: __('Add Featured Image', 'masteriyo')
 					}
 					modalTitle="Featured Image"
 					onSelect={(data: any) => {

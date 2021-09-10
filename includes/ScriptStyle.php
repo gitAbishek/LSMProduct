@@ -590,6 +590,7 @@ class ScriptStyle {
 						'logo'       => masteriyo_get_custom_logo_data(),
 						'siteTitle'  => get_bloginfo( 'name' ),
 						'userAvatar' => get_avatar_url( get_current_user_id() ),
+						'qaEnable'   => masteriyo_get_setting( 'learning_page.display.enable_questions_answers' ),
 					),
 				),
 			)

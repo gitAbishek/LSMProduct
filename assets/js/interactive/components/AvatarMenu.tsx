@@ -21,29 +21,29 @@ const AvatarMenu = () => {
 				<Avatar src={userAvatar} size="sm" />
 			</MenuButton>
 			<MenuList fontSize="sm" textAlign="center">
-				<MenuItem icon={<BiUserCircle size={22} />}>
-					<Link
-						color="gray.500"
-						href={
-							//@ts-ignore
-							`${_MASTERIYO_.urls.myaccount}`
-						}
-						isExternal>
+				<Link
+					color="gray.500"
+					href={
+						//@ts-ignore
+						`${_MASTERIYO_.urls.myaccount}`
+					}
+					isExternal>
+					<MenuItem icon={<BiUserCircle size={22} />}>
 						{__('My Profile', 'masteriyo')}
-					</Link>
-				</MenuItem>
+					</MenuItem>
+				</Link>
 				<MenuDivider />
-				<MenuItem icon={<BiLogOut size={22} />}>
-					<Link
-						color="gray.500"
-						href={
-							//@ts-ignore
-							`${_MASTERIYO_.urls.logout}`
-						}
-						isExternal>
+				<Link
+					color="gray.500"
+					href={
+						//@ts-ignore
+						`${_MASTERIYO_.urls.logout}`
+					}
+					isExternal>
+					<MenuItem icon={<BiLogOut size={22} />}>
 						{__('Log Out', 'masteriyo')}
-					</Link>
-				</MenuItem>
+					</MenuItem>
+				</Link>
 			</MenuList>
 		</Menu>
 	);

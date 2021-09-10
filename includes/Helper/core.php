@@ -1793,11 +1793,11 @@ function masteriyo_get_account_menu_items() {
 		),
 		'view-myaccount' => array(
 			'label' => __( 'Account Details', 'masteriyo' ),
-			'icon'  => masteriyo_get_svg( 'courses' ),
+			'icon'  => masteriyo_get_svg( 'account-details' ),
 		),
 		'edit-account'   => array(
 			'label' => __( 'Edit Account', 'masteriyo' ),
-			'icon'  => masteriyo_get_svg( 'courses' ),
+			'icon'  => masteriyo_get_svg( 'edit-account' ),
 		),
 		'order-history'  => array(
 			'label' => __( 'My Order History', 'masteriyo' ),

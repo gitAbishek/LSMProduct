@@ -30,6 +30,11 @@
 
 			.course-overview {
 				padding: 0 $spacing_32px $spacing_32px;
+
+				ul li p,
+				ol li p {
+					margin-bottom: $spacing_4px;
+				}
 			}
 		}
 	}

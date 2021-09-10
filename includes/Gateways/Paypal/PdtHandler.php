@@ -15,7 +15,7 @@ use Masteriyo\Gateways\Paypal\Response;
 /**
  * Handle PDT Responses from PayPal.
  */
-class PdtHandler extends Reponse {
+class PdtHandler extends Response {
 
 	/**
 	 * Identity token for PDT support

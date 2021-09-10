@@ -1275,7 +1275,7 @@ class Course extends Model {
 	 */
 	public function start_course_url() {
 		$learn_page_url = masteriyo_get_page_permalink( 'learn' );
-		$url            = trailingslashit( $learn_page_url . 'course/' . $this->get_slug() );
+		$url            = trailingslashit( $learn_page_url ) . 'course/' . $this->get_slug();
 
 		if ( '' === get_option( 'permalink_structure' ) ) {
 			$url = add_query_arg(

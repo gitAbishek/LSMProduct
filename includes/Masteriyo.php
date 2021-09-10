@@ -120,7 +120,7 @@ class Masteriyo {
 
 		$this->handle_paypal_ipn();
 
-		add_rewrite_endpoint( 'course', EP_PAGES | EP_ROOT, 'course_id' );
+		add_rewrite_endpoint( 'course', EP_PAGES | EP_ROOT, 'course_name' );
 
 		do_action( 'masteriyo_init' );
 	}
@@ -272,6 +272,8 @@ class Masteriyo {
 	public function template_loader( $template ) {
 		global $post;
 
+		global $wp_query;
+
 		if ( masteriyo_is_single_course_page() ) {
 			masteriyo_setup_course_data( $post );
 			$template = masteriyo( 'template' )->locate( 'single-course.php' );
@@ -281,7 +283,18 @@ class Masteriyo {
 
 		// Handle interactive page.
 		if ( masteriyo_is_learn_page() ) { // phpcs:ignore
-			$course_id = absint( get_query_var( 'course_id' ) );
+			$course_slug = get_query_var( 'course_name' );
+
+			$courses = get_posts(
+				array(
+					'post_type'   => 'course',
+					'name'        => $course_slug,
+					'numberposts' => 1,
+					'fields'      => 'ids',
+				)
+			);
+
+			$course_id = is_array( $courses ) ? current( $courses ) : 0;
 			$user_id   = get_current_user_id();
 
 			if ( ! is_user_logged_in() ) {

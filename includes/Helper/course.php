@@ -160,7 +160,7 @@ function masteriyo_placeholder_img( $size = 'masteriyo_thumbnail', $attr = '' ) 
  * @return string
  */
 function masteriyo_placeholder_img_src( $size = 'masteriyo_thumbnail' ) {
-	$src               = masteriyo_get_plugin_url() . '/assets/img/placeholder.jpeg';
+	$src               = masteriyo_get_plugin_url() . '/assets/img/placeholder.jpg';
 	$placeholder_image = get_option( 'masteriyo_placeholder_image', 0 );
 
 	if ( ! empty( $placeholder_image ) && is_numeric( $placeholder_image ) ) {

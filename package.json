@@ -107,6 +107,7 @@
     "release": "yarn build && gulp release",
     "lint": "eslint ./assets/js --ext ts,tsx",
     "prettier": "prettier --check ./assets/js/**/*.tsx ./assets/js/**/*.ts",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "reactivate": "wp plugin deactivate wordpress-lms && wp plugin activate wordpress-lms "
   }
 }

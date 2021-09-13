@@ -11,9 +11,7 @@ import {
 	MenuItem,
 	MenuList,
 	Stack,
-	Td,
 	Text,
-	Tr,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -25,6 +23,7 @@ import {
 	BiTrash,
 } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
+import { Td, Tr } from 'react-super-responsive-table';
 import PriceWithSymbol from '../../../components/common/PriceWithSymbol';
 import routes from '../../../constants/routes';
 import { CourseCategorySchema } from '../../../schemas';

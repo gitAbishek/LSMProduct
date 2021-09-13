@@ -15,11 +15,6 @@ import {
 	ListIcon,
 	ListItem,
 	Stack,
-	Table,
-	Tbody,
-	Th,
-	Thead,
-	Tr,
 	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -27,14 +22,12 @@ import React, { useState } from 'react';
 import { BiBook, BiPlus } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { NavLink, useHistory } from 'react-router-dom';
+import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import EmptyInfo from '../../components/common/EmptyInfo';
 import Header from '../../components/common/Header';
 import MasteriyoPagination from '../../components/common/MasteriyoPagination';
-import {
-	navActiveStyles,
-	navLinkStyles,
-	tableStyles,
-} from '../../config/styles';
+import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonCourseList } from '../../skeleton';
@@ -112,7 +105,7 @@ const AllCourses = () => {
 						)}
 
 						<Stack direction="column" spacing="8">
-							<Table size="sm" sx={tableStyles}>
+							<Table>
 								<Thead>
 									<Tr>
 										<Th>{__('Title', 'masteriyo')}</Th>

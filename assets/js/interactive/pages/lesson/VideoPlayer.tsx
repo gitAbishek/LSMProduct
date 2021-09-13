@@ -25,6 +25,9 @@ const VideoPlayer: React.FC<Props> = (props) => {
 					height="500"
 					allow="autoplay; fullscreen; picture-in-picture"></iframe>
 			)}
+			{type === 'self-hosted' && (
+				<iframe width="100%" height="500" src={url} allowFullScreen></iframe>
+			)}
 		</>
 	);
 };

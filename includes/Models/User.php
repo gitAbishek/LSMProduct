@@ -891,7 +891,7 @@ class User extends Model {
 	 *
 	 * @param string $postcode User's billing post code.
 	 */
-	public function set_postcode( $postcode ) {
+	public function set_billing_postcode( $postcode ) {
 		$this->set_prop( 'billing_postcode', $postcode );
 	}
 

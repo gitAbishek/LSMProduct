@@ -1,15 +1,15 @@
 /**
  * global masteriyo_data
  */
-(function ($, mto_data) {
+(function ($, masteriyo_data) {
 	let isSaving = false;
 
 	/**
 	 * Tabs handler.
 	 */
 	$(document.body).on('click', '.masteriyo-tab', function () {
-		$(this).siblings('.masteriyo-tab').removeClass('mto-active-tab');
-		$(this).addClass('mto-active-tab');
+		$(this).siblings('.masteriyo-tab').removeClass('masteriyo-active-tab');
+		$(this).addClass('masteriyo-active-tab');
 		$('.masteriyo-tab-content').addClass('masteriyo-hidden');
 		$('#' + $(this).data('tab')).removeClass('masteriyo-hidden');
 	});
@@ -17,66 +17,76 @@
 	/**
 	 * Edit profile form submission handler.
 	 */
-	$(document.body).on('submit', 'form#mto-edit-profile-form', function (e) {
-		e.preventDefault();
+	$(document.body).on(
+		'submit',
+		'form#masteriyo-edit-profile-form',
+		function (e) {
+			e.preventDefault();
 
-		if (isSaving) return;
+			if (isSaving) return;
 
-		isSaving = true;
+			isSaving = true;
 
-		const userData = {
-			display_name: $('#mto-edit-profile-form #username').val().trim(),
-			first_name: $('#mto-edit-profile-form #user-first-name').val(),
-			last_name: $('#mto-edit-profile-form #user-last-name').val(),
-			user_email: $('#mto-edit-profile-form #user-email').val(),
-			address: $('#mto-edit-profile-form #user-address').val(),
-			city: $('#mto-edit-profile-form #user-city').val(),
-			state: $('#mto-edit-profile-form #user-state').val(),
-			zip_code: $('#mto-edit-profile-form #user-zip-code').val(),
-			country: $('#mto-edit-profile-form #user-country').val(),
-		};
+			const userData = {
+				display_name: $('#masteriyo-edit-profile-form #username').val().trim(),
+				first_name: $('#masteriyo-edit-profile-form #user-first-name').val(),
+				last_name: $('#masteriyo-edit-profile-form #user-last-name').val(),
+				email: $('#masteriyo-edit-profile-form #user-email').val(),
+				billing: {
+					address_1: $('#masteriyo-edit-profile-form #user-address').val(),
+					city: $('#masteriyo-edit-profile-form #user-city').val(),
+					state: $('#masteriyo-edit-profile-form #user-state').val(),
+					postcode: $('#masteriyo-edit-profile-form #user-zip-code').val(),
+					country: $('#masteriyo-edit-profile-form #user-country').val(),
+				},
+			};
 
-		// Show saving process indicator.
-		$('#mto-btn-submit-edit-profile-form')
-			.text(mto_data.labels.saving)
-			.siblings('.mto-notify-message')
-			.remove();
+			// Show saving process indicator.
+			$('#masteriyo-btn-submit-edit-profile-form')
+				.text(masteriyo_data.labels.saving)
+				.siblings('.masteriyo-notify-message')
+				.remove();
 
-		$.ajax({
-			type: 'POST',
-			dataType: 'json',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-WP-Nonce': mto_data.nonce,
-			},
-			url:
-				mto_data.rootApiUrl + 'masteriyo/v1/users/' + mto_data.current_user_id,
-			data: JSON.stringify(userData),
-			success: function (res) {
-				// Update username on the sidebar.
-				$('#label-username').text(res.display_name);
+			$.ajax({
+				type: 'POST',
+				dataType: 'json',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-WP-Nonce': masteriyo_data.nonce,
+				},
+				url:
+					masteriyo_data.rootApiUrl +
+					'masteriyo/v1/users/' +
+					masteriyo_data.current_user_id,
+				data: JSON.stringify(userData),
+				success: function (res) {
+					// Update username on the sidebar.
+					$('#label-username').text(res.display_name);
 
-				// Show success message.
-				$('#mto-btn-submit-edit-profile-form').after(
-					'<div class="mto-notify-message mto-success-msg"><span>' +
-						mto_data.labels.profile_update_success +
-						'</span></div>'
-				);
-			},
-			error: function (xhr) {
-				// Show failure message.
-				$('#mto-btn-submit-edit-profile-form').after(
-					'<div class="mto-notify-message mto-error-msg mto-text-red-700 mto-bg-red-100 mto-border-red-300"><span>' +
-						xhr.responseJSON.message +
-						'</span></div>'
-				);
-			},
-			complete: function () {
-				isSaving = false;
+					// Show success message.
+					$('#masteriyo-btn-submit-edit-profile-form').after(
+						'<div class="masteriyo-notify-message masteriyo-success-msg"><span>' +
+							masteriyo_data.labels.profile_update_success +
+							'</span></div>'
+					);
+				},
+				error: function (xhr) {
+					// Show failure message.
+					$('#masteriyo-btn-submit-edit-profile-form').after(
+						'<div class="masteriyo-notify-message masteriyo-error-msg masteriyo-text-red-700 masteriyo-bg-red-100 masteriyo-border-red-300"><span>' +
+							xhr.responseJSON.message +
+							'</span></div>'
+					);
+				},
+				complete: function () {
+					isSaving = false;
 
-				// Remove saving process indicator.
-				$('#mto-btn-submit-edit-profile-form').text(mto_data.labels.save);
-			},
-		});
-	});
+					// Remove saving process indicator.
+					$('#masteriyo-btn-submit-edit-profile-form').text(
+						masteriyo_data.labels.save
+					);
+				},
+			});
+		}
+	);
 })(jQuery, window.masteriyo_data);

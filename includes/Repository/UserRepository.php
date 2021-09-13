@@ -55,6 +55,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		'billing_address_2'    => '_billing_address_2',
 		'billing_city'         => '_billing_city',
 		'billing_usercode'     => '_billing_usercode',
+		'billing_postcode'     => '_billing_postcode',
 		'billing_country'      => '_billing_country',
 		'billing_state'        => '_billing_state',
 		'billing_email'        => '_billing_email',

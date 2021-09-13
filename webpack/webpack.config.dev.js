@@ -47,6 +47,21 @@ module.exports = (env) => ({
 					},
 				],
 			},
+
+			{
+				test: /\.scss$/i,
+				use: [
+					{
+						loader: 'style-loader',
+					},
+					{
+						loader: 'css-loader',
+					},
+					{
+						loader: 'sass-loader',
+					},
+				],
+			},
 		],
 	},
 

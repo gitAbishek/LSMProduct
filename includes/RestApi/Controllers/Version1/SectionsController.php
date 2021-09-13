@@ -418,7 +418,10 @@ class SectionsController extends PostsController {
 		// Menu order.
 		if ( isset( $request['menu_order'] ) ) {
 			$section->set_menu_order( $request['menu_order'] );
-		} else {
+		}
+
+		// Automatically set the menu order if it's not set and the operation is POST.
+		if ( ! isset( $request['menu_order'] ) && $creating ) {
 			$query = new \WP_Query(
 				array(
 					'post_type'      => 'section',

@@ -193,7 +193,6 @@ const theme = extendTheme({
 					borderBottom: '2px solid #333',
 				},
 				'.responsiveTable tbody tr': {
-					border: '1px solid #000',
 					padding: '.25em',
 				},
 				'.responsiveTable td.pivoted': {

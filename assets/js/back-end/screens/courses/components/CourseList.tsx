@@ -27,6 +27,7 @@ import { Td, Tr } from 'react-super-responsive-table';
 import PriceWithSymbol from '../../../components/common/PriceWithSymbol';
 import routes from '../../../constants/routes';
 import { CourseCategorySchema } from '../../../schemas';
+import { isEmpty } from '../../../utils/utils';
 interface Props {
 	id: number;
 	name: string;
@@ -73,24 +74,30 @@ const CourseList: React.FC<Props> = (props) => {
 				</Link>
 			</Td>
 			<Td>
-				{categories?.map((category: CourseCategorySchema) => (
-					<Text
-						as="span"
-						fontSize="xs"
-						fontWeight="medium"
-						color="gray.600"
-						key={category?.id}
-						_last={{
-							_after: {
-								content: 'none',
-							},
-						}}
-						_after={{
-							content: `", "`,
-						}}>
-						{category?.name}
+				{!isEmpty(categories) ? (
+					categories?.map((category: CourseCategorySchema) => (
+						<Text
+							as="span"
+							fontSize="xs"
+							fontWeight="medium"
+							color="gray.600"
+							key={category?.id}
+							_last={{
+								_after: {
+									content: 'none',
+								},
+							}}
+							_after={{
+								content: `", "`,
+							}}>
+							{category?.name}
+						</Text>
+					))
+				) : (
+					<Text as="span" fontSize="xs" fontWeight="medium" color="gray.600">
+						{__('Uncategorized', 'masteriyo')}
 					</Text>
-				))}
+				)}
 			</Td>
 			<Td>
 				<Stack direction="row" spacing="2" alignItems="center">
@@ -119,12 +126,12 @@ const CourseList: React.FC<Props> = (props) => {
 			</Td>
 			<Td>
 				<ButtonGroup>
-					<RouterLink
-						to={routes.courses.edit.replace(':courseId', id.toString())}>
-						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
+					<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
+						<RouterLink
+							to={routes.courses.edit.replace(':courseId', id.toString())}>
 							{__('Edit')}
-						</Button>
-					</RouterLink>
+						</RouterLink>
+					</Button>
 					<Menu placement="bottom-end">
 						<MenuButton
 							as={IconButton}

@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import CreateCatModalProvicer from './context/CreateCatProvider';
 import MasteriyoProvider from './context/MasteriyoProvider';
 import ErrorBoundary from './errors/ErrorBoundary';
-import './index.scss';
 import Router from './router/Router';
 import theme from './theme/theme';
 

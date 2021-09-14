@@ -31,7 +31,7 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 
 								<?php foreach ( $active_course->get_categories() as $category ) : ?>
 									<a href="<?php echo esc_url( $category->get_permalink() ); ?>" alt="<?php echo esc_attr( $category->get_name() ); ?>">
-										<span class="masteriyo-badge masteriyo-badge-pink masteriyo-mycourses--tag ">
+										<span class="masteriyo-badge masteriyo-mycourses--tag ">
 											<?php echo esc_html( $category->get_name() ); ?>
 										</span>
 									</a>
@@ -119,7 +119,7 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 
 								<?php foreach ( $course->get_categories() as $category ) : ?>
 								<a href="<?php echo esc_url( $category->get_permalink() ); ?>" title="<?php echo esc_attr( $category->get_name() ); ?>">
-									<span class="masteriyo-badge masteriyo-badge-pink masteriyo-mycourses--tag ">
+									<span class="masteriyo-badge masteriyo-mycourses--tag ">
 										<?php echo esc_html( $category->get_name() ); ?>
 									</span>
 								</a>

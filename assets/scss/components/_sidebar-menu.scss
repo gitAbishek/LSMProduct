@@ -4,6 +4,7 @@
 	flex: 1 1 20%;
 	min-width: 200px;
 	padding-top: $spacing_40px;
+	padding-left: $spacing_8px;
 
 	& svg {
 		width: 24px;
@@ -46,12 +47,12 @@
 
 		&--details {
 			margin-left: $spacing_16px;
+			margin-right: $spacing_16px;
 		}
 	}
 
 	// Menu
 	.masteriyo-menu {
-		background: var(--masteriyo-color-white);
 		margin-top: $spacing_40px;
 
 		ul {
@@ -63,7 +64,7 @@
 				align-items: center;
 				list-style-type: none;
 				padding: 16px;
-				border: 1px solid var(--masteriyo-color-white);
+				border: 1px solid transparent;
 
 				&.active,
 				&:hover {
@@ -71,6 +72,7 @@
 					@include masteriyo-default-border;
 					border-radius: $border_radius_4 0 0 $border_radius_4;
 					border-right: 1px solid var(--masteriyo-color-white);
+					background-color: var(--masteriyo-color-white);
 
 					& svg {
 						fill: var(--masteriyo-color-blue-dark);

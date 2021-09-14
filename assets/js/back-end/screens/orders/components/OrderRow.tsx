@@ -16,9 +16,7 @@ import {
 	MenuItem,
 	MenuList,
 	Stack,
-	Td,
 	Text,
-	Tr,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
@@ -31,6 +29,7 @@ import {
 } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
+import { Td, Tr } from 'react-super-responsive-table';
 import PriceWithSymbol from '../../../components/common/PriceWithSymbol';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';

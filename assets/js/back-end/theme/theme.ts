@@ -192,9 +192,7 @@ const theme = extendTheme({
 					left: '-9999px',
 					borderBottom: '2px solid #333',
 				},
-				'.responsiveTable tbody tr': {
-					padding: '.25em',
-				},
+
 				'.responsiveTable td.pivoted': {
 					border: 'none !important',
 					position: 'relative',
@@ -202,16 +200,18 @@ const theme = extendTheme({
 					textAlign: 'left !important',
 					whiteSpace: 'pre-wrap',
 					overflowWrap: 'break-word',
+					pr: '6',
 				},
 				'.responsiveTable td .tdBefore': {
 					position: 'absolute',
 					display: 'block',
-					left: '1rem',
+					left: '6',
 					width: 'calc(50% - 20px)',
 					whiteSpace: 'pre-wrap',
 					overflowWrap: 'break-word',
 					textAlign: 'left !important',
 					fontWeight: '600',
+					fontSize: 'sm',
 				},
 			},
 		},

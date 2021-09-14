@@ -76,7 +76,9 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 
 					<div class="masteriyo-country">
 						<label for="user-country" class="masteriyo-label"><?php echo esc_html__( 'Country', 'masteriyo' ); ?></label>
-						<input value="<?php echo esc_attr( $user->get_billing_country() ); ?>" id="user-country" name="text" type="text" class="masteriyo-input" placeholder="">
+						<select id="user-country" class="masteriyo-input">
+							<?php masteriyo( 'countries' )->country_dropdown_options( $user->get_billing_country(), '*' ); ?>
+						</select>
 					</div>
 				</div>
 

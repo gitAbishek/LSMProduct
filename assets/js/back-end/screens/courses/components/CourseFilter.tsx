@@ -1,12 +1,12 @@
 import {
 	Box,
 	Collapse,
+	Flex,
 	IconButton,
 	Input,
 	Select,
 	Stack,
 	useMediaQuery,
-	VStack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
@@ -77,7 +77,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 
 	return (
 		<Box px={{ base: 6, md: 12 }}>
-			<VStack spacing="6" align="end">
+			<Flex justify="end">
 				{!isMobile && (
 					<IconButton
 						icon={<BiDotsVerticalRounded />}
@@ -88,42 +88,45 @@ const CourseFilter: React.FC<Props> = (props) => {
 						onClick={() => setIsOpen(!isOpen)}
 					/>
 				)}
-				<Collapse in={isOpen}>
-					<form onChange={handleSubmit(onChange)}>
-						<Stack direction={['column', null, 'row']} spacing="4">
-							<Input
-								placeholder={__('Search courses', 'masteriyo')}
-								{...onSearchInput}
-							/>
-							<Select {...register('category')}>
-								<option value="">{__('All Categories', 'masteriyo')}</option>
-								{categoryQuery.isSuccess &&
-									categoryQuery?.data?.data?.map(
-										(category: { id: number; name: string }) => (
-											<option key={category.id} value={category.id}>
-												{category.name}
-											</option>
-										)
-									)}
-							</Select>
+			</Flex>
+			<Collapse in={isOpen}>
+				<form onChange={handleSubmit(onChange)}>
+					<Stack
+						direction={['column', null, 'row']}
+						spacing="4"
+						mt={[6, null, 0]}>
+						<Input
+							placeholder={__('Search courses', 'masteriyo')}
+							{...onSearchInput}
+						/>
+						<Select {...register('category')}>
+							<option value="">{__('All Categories', 'masteriyo')}</option>
+							{categoryQuery.isSuccess &&
+								categoryQuery?.data?.data?.map(
+									(category: { id: number; name: string }) => (
+										<option key={category.id} value={category.id}>
+											{category.name}
+										</option>
+									)
+								)}
+						</Select>
 
-							<Select {...register('status')}>
-								{courseStatusList.map((option: any) => (
-									<option key={option.value} value={option.value}>
-										{option.label}
-									</option>
-								))}
-							</Select>
+						<Select {...register('status')}>
+							{courseStatusList.map((option: any) => (
+								<option key={option.value} value={option.value}>
+									{option.label}
+								</option>
+							))}
+						</Select>
 
-							<Select {...register('price_type')}>
-								<option value="">{__('Pricing', 'masteriyo')}</option>
-								<option value="free">{__('Free', 'masteriyo')}</option>
-								<option value="paid">{__('Paid', 'masteriyo')}</option>
-							</Select>
-						</Stack>
-					</form>
-				</Collapse>
-			</VStack>
+						<Select {...register('price_type')}>
+							<option value="">{__('Pricing', 'masteriyo')}</option>
+							<option value="free">{__('Free', 'masteriyo')}</option>
+							<option value="paid">{__('Paid', 'masteriyo')}</option>
+						</Select>
+					</Stack>
+				</form>
+			</Collapse>
 		</Box>
 	);
 };

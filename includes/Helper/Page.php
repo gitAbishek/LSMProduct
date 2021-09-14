@@ -13,5 +13,5 @@
  * @return boolean
  */
 function masteriyo_is_archive_course_page() {
-	return is_post_type_archive( 'course' );
+	return is_post_type_archive( 'mto-course' );
 }

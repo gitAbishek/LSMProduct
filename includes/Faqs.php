@@ -37,7 +37,7 @@ class Faqs {
 	 * @return bool
 	 */
 	public static function comments_open( $open, $post_id ) {
-		if ( 'course' === get_post_type( $post_id ) ) {
+		if ( 'mto-course' === get_post_type( $post_id ) ) {
 			$open = false;
 		}
 		return $open;
@@ -69,7 +69,7 @@ class Faqs {
 	public static function comment_moderation_recipients( $emails, $comment_id ) {
 		$comment = get_comment( $comment_id );
 
-		if ( $comment && 'course' === get_post_type( $comment->comment_post_ID ) ) {
+		if ( $comment && 'mto-course' === get_post_type( $comment->comment_post_ID ) ) {
 			$emails = array( get_option( 'admin_email' ) );
 		}
 

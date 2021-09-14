@@ -63,7 +63,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			apply_filters(
 				'masteriyo_new_course_data',
 				array(
-					'post_type'      => 'course',
+					'post_type'      => 'mto-course',
 					'post_status'    => $course->get_status() ? $course->get_status() : 'publish',
 					'post_author'    => get_current_user_id(),
 					'post_title'     => $course->get_name() ? $course->get_name() : __( 'Course', 'masteriyo' ),
@@ -109,7 +109,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	public function read( Model &$course ) {
 		$course_post = get_post( $course->get_id() );
 
-		if ( ! $course->get_id() || ! $course_post || 'course' !== $course_post->post_type ) {
+		if ( ! $course->get_id() || ! $course_post || 'mto-course' !== $course_post->post_type ) {
 			throw new \Exception( __( 'Invalid course.', 'masteriyo' ) );
 		}
 
@@ -175,7 +175,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 				'menu_order'     => $course->get_menu_order( 'edit' ),
 				'post_password'  => $course->get_post_password( 'edit' ),
 				'post_name'      => $course->get_slug( 'edit' ),
-				'post_type'      => 'course',
+				'post_type'      => 'mto-course',
 			);
 
 			/**
@@ -456,7 +456,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'course' ) );
+			update_post_caches( $query->posts, array( 'mto-course' ) );
 		}
 
 		$courses = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_course', $query->posts ) );

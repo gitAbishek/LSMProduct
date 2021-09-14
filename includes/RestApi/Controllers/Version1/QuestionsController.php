@@ -36,7 +36,7 @@ class QuestionsController extends PostsController {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'question';
+	protected $post_type = 'mto-question';
 
 	/**
 	 * Object type.

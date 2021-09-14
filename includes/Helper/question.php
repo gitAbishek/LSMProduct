@@ -82,7 +82,7 @@ function masteriyo_get_questions_count_by_quiz( $quiz ) {
 	$count = $wpdb->get_var(
 		$wpdb->prepare(
 			"SELECT COUNT(ID) FROM {$wpdb->base_prefix}posts WHERE post_type = %s AND post_parent = %d",
-			'question',
+			'mto-question',
 			$quiz_obj->get_id()
 		)
 	);

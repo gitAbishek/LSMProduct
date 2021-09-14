@@ -29,7 +29,7 @@ class CourseQuery extends ObjectQuery {
 		return array_merge(
 			parent::get_default_query_vars(),
 			array(
-				'type'              => 'course',
+				'type'              => 'mto-course',
 				'status'            => array( 'draft', 'pending', 'private', 'publish' ),
 				'include'           => array(),
 				'date_created'      => '',

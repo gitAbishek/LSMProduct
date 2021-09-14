@@ -37,7 +37,7 @@ class CoursesController extends PostsController {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'course';
+	protected $post_type = 'mto-course';
 
 	/**
 	 * If object is hierarchical.
@@ -963,7 +963,7 @@ class CoursesController extends PostsController {
 
 		$query = new \WP_Query(
 			array(
-				'post_type'      => array( 'lesson', 'quiz' ),
+				'post_type'      => array( 'mto-lesson', 'mto-quiz' ),
 				'post_status'    => 'publish',
 				'posts_per_page' => 1,
 				'meta_key'       => '_course_id',

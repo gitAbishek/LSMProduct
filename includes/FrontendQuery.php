@@ -306,7 +306,7 @@ class FrontendQuery {
 
 					// WP supporting themes show post type archive.
 					if ( current_theme_supports( 'masteriyo' ) ) {
-						$q->set( 'post_type', 'course' );
+						$q->set( 'post_type', 'mto-course' );
 					} else {
 						$q->is_singular = true;
 					}
@@ -320,14 +320,14 @@ class FrontendQuery {
 		}
 
 		// Fix course feeds.
-		if ( $q->is_feed() && $q->is_post_type_archive( 'course' ) ) {
+		if ( $q->is_feed() && $q->is_post_type_archive( 'mto-course' ) ) {
 			$q->is_comment_feed = false;
 		}
 
 		// Special check for coursess with the COURSE POST TYPE ARCHIVE on front.
 		if ( current_theme_supports( 'masteriyo' ) && $q->is_page() && 'page' === get_option( 'show_on_front' ) && absint( $q->get( 'page_id' ) ) === masteriyo_get_page_id( 'courses' ) ) {
 			// This is a front-page courses.
-			$q->set( 'post_type', 'course' );
+			$q->set( 'post_type', 'mto-course' );
 			$q->set( 'page_id', '' );
 
 			if ( isset( $q->query['paged'] ) ) {
@@ -343,11 +343,11 @@ class FrontendQuery {
 
 			$courses_page = get_post( masteriyo_get_page_id( 'courses' ) );
 
-			$wp_post_types['course']->ID         = $courses_page->ID;
-			$wp_post_types['course']->post_title = $courses_page->post_title;
-			$wp_post_types['course']->post_name  = $courses_page->post_name;
-			$wp_post_types['course']->post_type  = $courses_page->post_type;
-			$wp_post_types['course']->ancestors  = get_ancestors( $courses_page->ID, $courses_page->post_type );
+			$wp_post_types['mto-course']->ID         = $courses_page->ID;
+			$wp_post_types['mto-course']->post_title = $courses_page->post_title;
+			$wp_post_types['mto-course']->post_name  = $courses_page->post_name;
+			$wp_post_types['mto-course']->post_type  = $courses_page->post_type;
+			$wp_post_types['mto-course']->ancestors  = get_ancestors( $courses_page->ID, $courses_page->post_type );
 
 			// Fix conditional Functions like is_front_page.
 			$q->is_singular          = false;
@@ -363,7 +363,7 @@ class FrontendQuery {
 				add_filter( 'wpseo_metadesc', array( $this, 'wpseo_metadesc' ) );
 				add_filter( 'wpseo_metakey', array( $this, 'wpseo_metakey' ) );
 			}
-		} elseif ( ! $q->is_post_type_archive( 'course' ) && ! $q->is_tax( get_object_taxonomies( 'course' ) ) ) {
+		} elseif ( ! $q->is_post_type_archive( 'mto-course' ) && ! $q->is_tax( get_object_taxonomies( 'mto-course' ) ) ) {
 			// Only apply to course categories, the course post archive, the courses page, course tags, and course attribute taxonomies.
 			return;
 		}

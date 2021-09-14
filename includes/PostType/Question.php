@@ -15,8 +15,11 @@ class Question extends PostType {
 	 *
 	 * @var string
 	 */
-	protected $slug = 'question';
+	protected $slug = 'mto-question';
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		$debug = masteriyo_is_post_type_debug_enabled();
 

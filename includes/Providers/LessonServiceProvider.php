@@ -28,6 +28,9 @@ class LessonServiceProvider extends AbstractServiceProvider {
 		'lesson',
 		'lesson.store',
 		'lesson.rest',
+		'mto-lesson',
+		'mto-lesson.store',
+		'mto-lesson.rest',
 		'\Masteriyo\RestApi\Controllers\Version1\LessonsController',
 	);
 
@@ -50,5 +53,14 @@ class LessonServiceProvider extends AbstractServiceProvider {
 
 		$this->getContainer()->add( 'lesson', Lesson::class )
 			->addArgument( 'lesson.store' );
+
+		// Register based on post type.
+		$this->getContainer()->add( 'mto-lesson.store', LessonRepository::class );
+
+		$this->getContainer()->add( 'mto-lesson.rest', LessonsController::class )
+			->addArgument( 'permission' );
+
+		$this->getContainer()->add( 'mto-lesson', Lesson::class )
+			->addArgument( 'mto-lesson.store' );
 	}
 }

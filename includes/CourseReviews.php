@@ -38,7 +38,7 @@ class CourseReviews {
 	 * @return bool
 	 */
 	public static function comments_open( $open, $post_id ) {
-		if ( 'course' === get_post_type( $post_id ) ) {
+		if ( 'mto-course' === get_post_type( $post_id ) ) {
 			$open = false;
 		}
 		return $open;
@@ -52,7 +52,7 @@ class CourseReviews {
 	 * @param int $post
 	 */
 	public static function wp_update_comment_count( $post ) {
-		if ( 'course' === get_post_type( $post ) ) {
+		if ( 'mto-course' === get_post_type( $post ) ) {
 			self::update_course_review_stats( $post );
 		}
 	}
@@ -87,7 +87,7 @@ class CourseReviews {
 	 * @return array
 	 */
 	public static function add_avatar_for_review_comment_type( $comment_types ) {
-		return array_merge( $comment_types, array( 'course_review' ) );
+		return array_merge( $comment_types, array( 'mto_course_review' ) );
 	}
 
 	/**
@@ -103,7 +103,7 @@ class CourseReviews {
 	public static function comment_moderation_recipients( $emails, $comment_id ) {
 		$comment = get_comment( $comment_id );
 
-		if ( $comment && 'course' === get_post_type( $comment->comment_post_ID ) ) {
+		if ( $comment && 'mto-course' === get_post_type( $comment->comment_post_ID ) ) {
 			$emails = array( get_option( 'admin_email' ) );
 		}
 
@@ -131,7 +131,7 @@ class CourseReviews {
 					SELECT SUM(comment_karma) FROM $wpdb->comments
 					WHERE comment_post_ID = %d
 					AND comment_approved = '1'
-					AND comment_type = 'course_review'
+					AND comment_type = 'mto_course_review'
 					AND comment_karma > 0
 					",
 					$course->get_id()
@@ -164,7 +164,7 @@ class CourseReviews {
 				WHERE comment_parent = 0
 				AND comment_post_ID = %d
 				AND comment_approved = '1'
-				AND comment_type = 'course_review'
+				AND comment_type = 'mto_course_review'
 				",
 				$course->get_id()
 			)
@@ -193,7 +193,7 @@ class CourseReviews {
 				WHERE comment_post_ID = %d
 				AND comment_approved = '1'
 				AND comment_karma > 0
-				AND comment_type = 'course_review'
+				AND comment_type = 'mto_course_review'
 				GROUP BY comment_karma
 				",
 				$course->get_id()

@@ -37,7 +37,7 @@ class SectionsController extends PostsController {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'section';
+	protected $post_type = 'mto-section';
 
 	/**
 	 * Object type.
@@ -424,7 +424,7 @@ class SectionsController extends PostsController {
 		if ( ! isset( $request['menu_order'] ) && $creating ) {
 			$query = new \WP_Query(
 				array(
-					'post_type'      => 'section',
+					'post_type'      => 'mto-section',
 					'post_status'    => 'any',
 					'posts_per_page' => 1,
 					'post_parent'    => $request['parent_id'],

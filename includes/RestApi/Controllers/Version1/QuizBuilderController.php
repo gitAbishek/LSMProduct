@@ -59,7 +59,7 @@ class QuizBuilderController extends PostsController {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'quiz';
+	protected $post_type = 'mto-quiz';
 
 	/**
 	 * Permission class.
@@ -137,7 +137,7 @@ class QuizBuilderController extends PostsController {
 			);
 		}
 
-		if ( ! $this->permission->rest_check_post_permissions( 'quiz', 'read' ) ) {
+		if ( ! $this->permission->rest_check_post_permissions( 'mto-quiz', 'read' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
@@ -256,7 +256,7 @@ class QuizBuilderController extends PostsController {
 		$questions = $this->get_objects(
 			array(
 				'post_parent' => $request['id'],
-				'post_type'   => 'question',
+				'post_type'   => 'mto-question',
 			)
 		);
 
@@ -396,7 +396,7 @@ class QuizBuilderController extends PostsController {
 			);
 		}
 
-		if ( ! $this->permission->rest_check_post_permissions( 'quiz', 'update', $request['id'] ) ) {
+		if ( ! $this->permission->rest_check_post_permissions( 'mto-quiz', 'update', $request['id'] ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
@@ -448,7 +448,7 @@ class QuizBuilderController extends PostsController {
 	protected function filter_questions( $question ) {
 		$post = get_post( absint( $question ) );
 
-		return $post && 'question' === $post->post_type;
+		return $post && 'mto-question' === $post->post_type;
 	}
 
 	/**

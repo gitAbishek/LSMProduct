@@ -740,7 +740,7 @@ class CourseProgressController extends CrudController {
 
 			// Validate course ID.
 			$course_post = get_post( $course_id );
-			if ( ! $course_post || 'course' !== $course_post->post_type ) {
+			if ( ! $course_post || 'mto-course' !== $course_post->post_type ) {
 				throw new RestException(
 					'masteriyo_rest_invalid_course_id',
 					__( 'Course ID is invalid.', 'masteriyo' ),
@@ -917,7 +917,7 @@ class CourseProgressController extends CrudController {
 
 		$query = new \WP_Query(
 			array(
-				'post_type'      => array( 'section', 'lesson', 'quiz' ),
+				'post_type'      => array( 'mto-section', 'mto-lesson', 'mto-quiz' ),
 				'post_status'    => 'any',
 				'posts_per_page' => -1,
 				'meta_key'       => '_course_id',
@@ -946,7 +946,7 @@ class CourseProgressController extends CrudController {
 		$sections = array_filter(
 			$posts,
 			function( $post ) {
-				return 'section' === $post->post_type;
+				return 'mto-section' === $post->post_type;
 			}
 		);
 
@@ -962,7 +962,7 @@ class CourseProgressController extends CrudController {
 				return array(
 					'item_id'    => $section->ID,
 					'item_title' => $section->post_title,
-					'item_type'  => $section->post_type,
+					'item_type'  => str_replace( 'mto-', '', $section->post_type ),
 				);
 			},
 			$sections
@@ -985,7 +985,7 @@ class CourseProgressController extends CrudController {
 		$lessons_quizzes = array_filter(
 			$posts,
 			function( $post ) use ( $section_id ) {
-				return in_array( $post->post_type, array( 'lesson', 'quiz' ), true ) && $section_id === $post->post_parent;
+				return in_array( $post->post_type, array( 'mto-lesson', 'mto-quiz' ), true ) && $section_id === $post->post_parent;
 			}
 		);
 
@@ -1000,12 +1000,12 @@ class CourseProgressController extends CrudController {
 			function( $lesson_quiz ) use ( $progress_items ) {
 				$completed        = isset( $progress_items[ $lesson_quiz->ID ] ) ? $progress_items[ $lesson_quiz->ID ]->get_completed() : false;
 				$video_course_url = get_post_meta( $lesson_quiz->ID, '_video_source_url', true );
-				$video            = ( 'lesson' === $lesson_quiz->post_type && ! empty( $video_course_url ) ) ? true : false;
+				$video            = ( 'mto-lesson' === $lesson_quiz->post_type && ! empty( $video_course_url ) ) ? true : false;
 
 				return array(
 					'item_id'    => $lesson_quiz->ID,
 					'item_title' => $lesson_quiz->post_title,
-					'item_type'  => $lesson_quiz->post_type,
+					'item_type'  => str_replace( 'mto-', '', $lesson_quiz->post_type ),
 					'completed'  => $completed,
 					'video'      => $video,
 				);

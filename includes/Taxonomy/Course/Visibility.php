@@ -23,7 +23,7 @@ class Visibility extends Taxonomy {
 	 *
 	 * @since 0.1.0
 	 */
-	protected $post_type = 'course';
+	protected $post_type = 'mto-course';
 
 	/**
 	 * Get labels.

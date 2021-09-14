@@ -37,7 +37,7 @@ class LessonsController extends PostsController {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'lesson';
+	protected $post_type = 'mto-lesson';
 
 	/**
 	 * If object is hierarchical.
@@ -540,7 +540,7 @@ class LessonsController extends PostsController {
 		if ( ! isset( $request['menu_order'] ) && $creating ) {
 			$query = new \WP_Query(
 				array(
-					'post_type'      => array( 'quiz', 'lesson' ),
+					'post_type'      => array( 'mto-quiz', 'mto-lesson' ),
 					'post_status'    => 'any',
 					'posts_per_page' => 1,
 					'post_parent'    => $request['parent_id'],

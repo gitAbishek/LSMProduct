@@ -53,7 +53,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			apply_filters(
 				'masteriyo_new_question_data',
 				array(
-					'post_type'     => 'question',
+					'post_type'     => 'mto-question',
 					'post_status'   => $question->get_status() ? $question->get_status() : 'publish',
 					'post_author'   => get_current_user_id(),
 					'post_title'    => $question->get_name() ? $question->get_name() : __( 'Question', 'masteriyo' ),
@@ -93,7 +93,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	public function read( Model &$question ) {
 		$question_post = get_post( $question->get_id() );
 
-		if ( ! $question->get_id() || ! $question_post || 'question' !== $question_post->post_type ) {
+		if ( ! $question->get_id() || ! $question_post || 'mto-question' !== $question_post->post_type ) {
 			throw new \Exception( __( 'Invalid question.', 'masteriyo' ) );
 		}
 
@@ -149,7 +149,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 				'menu_order'   => $question->get_menu_order( 'edit' ),
 				'post_name'    => '',
 				'post_parent'  => $question->get_parent_id( 'edit' ),
-				'post_type'    => 'question',
+				'post_type'    => 'mto-question',
 			);
 
 			/**
@@ -282,7 +282,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'question' ) );
+			update_post_caches( $query->posts, array( 'mto-question' ) );
 		}
 
 		$questions = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_question', $query->posts ) );
@@ -320,7 +320,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			}
 		}
 
-		$query_vars['post_type'] = 'question';
+		$query_vars['post_type'] = 'mto-question';
 
 		$wp_query_args = parent::get_wp_query_args( $query_vars );
 

@@ -44,7 +44,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			apply_filters(
 				'masteriyo_new_lesson_data',
 				array(
-					'post_type'      => 'lesson',
+					'post_type'      => 'mto-lesson',
 					'post_status'    => $lesson->get_status() ? $lesson->get_status() : 'publish',
 					'post_author'    => get_current_user_id(),
 					'post_title'     => $lesson->get_name() ? $lesson->get_name() : __( 'Lesson', 'masteriyo' ),
@@ -87,7 +87,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	public function read( Model &$lesson ) {
 		$lesson_post = get_post( $lesson->get_id() );
 
-		if ( ! $lesson->get_id() || ! $lesson_post || 'lesson' !== $lesson_post->post_type ) {
+		if ( ! $lesson->get_id() || ! $lesson_post || 'mto-lesson' !== $lesson_post->post_type ) {
 			throw new \Exception( __( 'Invalid lesson.', 'masteriyo' ) );
 		}
 
@@ -151,7 +151,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 				'menu_order'     => $lesson->get_menu_order( 'edit' ),
 				'post_password'  => $lesson->get_post_password( 'edit' ),
 				'post_name'      => $lesson->get_slug( 'edit' ),
-				'post_type'      => 'lesson',
+				'post_type'      => 'mto-lesson',
 			);
 
 			/**
@@ -327,7 +327,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			}
 		}
 
-		$query_vars['post_type'] = 'lesson';
+		$query_vars['post_type'] = 'mto-lesson';
 
 		// These queries cannot be auto-generated so we have to remove them and build them manually.
 		$manual_queries = array(

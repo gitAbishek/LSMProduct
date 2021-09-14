@@ -293,7 +293,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	public function query( $query_vars ) {
 		$args = $this->get_wp_query_args( $query_vars );
 		// Fetching review of comment_type 'course_review', 'type' already map to 'post_type' so need to add 'type' as 'comment_type' here.
-		$args = array_merge( $args, array( 'type' => 'course_review' ) );
+		$args = array_merge( $args, array( 'type' => 'mto_course_review' ) );
 
 		if ( isset( $query_vars['course_id'] ) ) {
 			$args['post_id'] = $query_vars['course_id'];

@@ -20,7 +20,7 @@
 function masteriyo_get_quiz_questions( $quiz_id, $by ) {
 
 	$args = array(
-		'post_type'     => 'question',
+		'post_type'     => 'mto-question',
 		'post_per_page' => -1,
 		'post_status'   => 'publish',
 	);

@@ -39,7 +39,7 @@ class Section extends Model {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'section';
+	protected $post_type = 'mto-section';
 
 	/**
 	 * Cache group.
@@ -122,6 +122,17 @@ class Section extends Model {
 	 */
 	public function get_object_type() {
 		return $this->object_type;
+	}
+
+	/**
+	 * Get the post type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_post_type() {
+		return 'mto-section';
 	}
 
 	/*

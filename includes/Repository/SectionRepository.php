@@ -43,7 +43,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 			apply_filters(
 				'masteriyo_new_section_data',
 				array(
-					'post_type'      => 'section',
+					'post_type'      => 'mto-section',
 					'post_status'    => 'publish',
 					'post_author'    => get_current_user_id(),
 					'post_title'     => $section->get_name(),
@@ -83,7 +83,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	public function read( Model &$section ) {
 		$section_post = get_post( $section->get_id() );
 
-		if ( ! $section->get_id() || ! $section_post || 'section' !== $section_post->post_type ) {
+		if ( ! $section->get_id() || ! $section_post || 'mto-section' !== $section_post->post_type ) {
 			throw new \Exception( __( 'Invalid section.', 'masteriyo' ) );
 		}
 
@@ -135,7 +135,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 				'comment_status' => 'closed',
 				'post_status'    => 'publish',
 				'menu_order'     => $section->get_menu_order( 'edit' ),
-				'post_type'      => 'section',
+				'post_type'      => 'mto-section',
 			);
 
 			/**
@@ -270,7 +270,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'section' ) );
+			update_post_caches( $query->posts, array( 'mto-section' ) );
 		}
 
 		$sections = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_section', $query->posts ) );
@@ -309,7 +309,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 			}
 		}
 
-		$query_vars['post_type'] = 'section';
+		$query_vars['post_type'] = 'mto-section';
 
 		$wp_query_args = parent::get_wp_query_args( $query_vars );
 

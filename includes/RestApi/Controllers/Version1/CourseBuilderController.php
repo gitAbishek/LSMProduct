@@ -59,7 +59,7 @@ class CourseBuilderController extends PostsController {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'course';
+	protected $post_type = 'mto-course';
 
 	/**
 	 * Permission class.
@@ -255,7 +255,7 @@ class CourseBuilderController extends PostsController {
 		$objects = $this->get_course_contents( $request );
 
 		foreach ( $objects as $object ) {
-			if ( ! $this->check_item_permission( $object->get_object_type(), 'read', $object->get_id() ) ) {
+			if ( ! $this->check_item_permission( $object->get_post_type(), 'read', $object->get_id() ) ) {
 				continue;
 			}
 
@@ -278,7 +278,7 @@ class CourseBuilderController extends PostsController {
 		$sections = $this->get_objects(
 			array(
 				'post_parent' => $request['id'],
-				'post_type'   => 'section',
+				'post_type'   => 'mto-section',
 			)
 		);
 
@@ -288,7 +288,7 @@ class CourseBuilderController extends PostsController {
 			$contents = $this->get_objects(
 				array(
 					'post_parent' => $section->get_id(),
-					'post_type'   => array( 'lesson', 'quiz' ),
+					'post_type'   => array( 'mto-lesson', 'mto-quiz' ),
 					'post_status' => 'any',
 				)
 			);
@@ -313,7 +313,7 @@ class CourseBuilderController extends PostsController {
 		$query_args['posts_per_page'] = -1;
 		$query                        = new \WP_Query( $query_args );
 
-		return array_map( array( $this, 'get_object' ), $query->posts );
+		return array_filter( array_map( array( $this, 'get_object' ), $query->posts ) );
 	}
 
 	/**

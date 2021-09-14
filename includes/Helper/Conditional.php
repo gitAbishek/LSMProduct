@@ -153,7 +153,7 @@ function masteriyo_is_admin_page() {
  * @return boolean
  */
 function masteriyo_is_single_course_page() {
-	return is_singular( 'course' );
+	return is_singular( 'mto-course' );
 }
 
 /**
@@ -164,7 +164,7 @@ function masteriyo_is_single_course_page() {
  * @return boolean
  */
 function masteriyo_is_courses_page() {
-	return is_post_type_archive( 'course' );
+	return is_post_type_archive( 'mto-course' );
 }
 
 if ( ! function_exists( 'masteriyo_prices_include_tax' ) ) {
@@ -377,7 +377,7 @@ function masteriyo_is_course( $course_id ) {
 	$course_id = absint( $course_id );
 	$course    = get_post( $course_id );
 
-	if ( is_null( $course ) || 'course' !== $course->post_type ) {
+	if ( is_null( $course ) || 'mto-course' !== $course->post_type ) {
 		return new \WP_Error( 'rest_invalid_course', 'invalid course id' );
 	}
 

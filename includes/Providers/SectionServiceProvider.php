@@ -28,6 +28,9 @@ class SectionServiceProvider extends AbstractServiceProvider {
 		'section',
 		'section.store',
 		'section.rest',
+		'mto-section',
+		'mto-section.store',
+		'mto-section.rest',
 		'\Masteriyo\RestApi\Controllers\Version1\SectionsController',
 	);
 
@@ -50,5 +53,15 @@ class SectionServiceProvider extends AbstractServiceProvider {
 
 		$this->getContainer()->add( 'section', Section::class )
 			->addArgument( 'section.store' );
+
+		// Register based on post type.
+		$this->getContainer()->add( 'mto-section', Section::class )
+			->addArgument( 'section.store' );
+
+		$this->getContainer()->add( 'mto-section.store', SectionRepository::class );
+
+		$this->getContainer()->add( 'mto-section.rest', SectionsController::class )
+				->addArgument( 'permission' );
+
 	}
 }

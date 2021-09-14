@@ -13,7 +13,7 @@ class Lesson extends PostType {
 	 *
 	 * @var string
 	 */
-	protected $slug = 'lesson';
+	protected $slug = 'mto-lesson';
 
 	public function __construct() {
 		$debug      = masteriyo_is_post_type_debug_enabled();

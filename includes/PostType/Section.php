@@ -20,7 +20,7 @@ class Section extends PostType {
 	 *
 	 * @var string
 	 */
-	protected $slug = 'section';
+	protected $slug = 'mto-section';
 
 	/**
 	 * Constructor.

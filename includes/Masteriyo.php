@@ -290,7 +290,7 @@ class Masteriyo {
 				$course_slug = get_query_var( 'course_name' );
 				$courses     = get_posts(
 					array(
-						'post_type'   => 'course',
+						'post_type'   => 'mto-course',
 						'name'        => $course_slug,
 						'numberposts' => 1,
 						'fields'      => 'ids',

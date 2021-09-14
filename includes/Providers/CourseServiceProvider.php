@@ -28,6 +28,9 @@ class CourseServiceProvider extends AbstractServiceProvider {
 		'course',
 		'course.store',
 		'course.rest',
+		'mto-course',
+		'mto-course.store',
+		'mto-course.rest',
 		'\Masteriyo\RestApi\Controllers\Version1\CoursesController',
 	);
 
@@ -50,5 +53,15 @@ class CourseServiceProvider extends AbstractServiceProvider {
 
 		$this->getContainer()->add( 'course', Course::class )
 			->addArgument( 'course.store' );
+
+		// Register based on post type.
+		$this->getContainer()->add( 'mto-course.store', CourseRepository::class );
+
+		$this->getContainer()->add( 'mto-course.rest', CoursesController::class )
+			->addArgument( 'permission' );
+
+		$this->getContainer()->add( 'mto-course', Course::class )
+			->addArgument( 'mto-course.store' );
+
 	}
 }

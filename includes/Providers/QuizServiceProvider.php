@@ -28,6 +28,9 @@ class QuizServiceProvider extends AbstractServiceProvider {
 		'quiz',
 		'quiz.store',
 		'quiz.rest',
+		'mto-quiz',
+		'mto-quiz.store',
+		'mto-quiz.rest',
 		'\Masteriyo\RestApi\Controllers\Version1\QuizesController',
 	);
 
@@ -50,5 +53,15 @@ class QuizServiceProvider extends AbstractServiceProvider {
 
 		$this->getContainer()->add( 'quiz', Quiz::class )
 			->addArgument( 'quiz.store' );
+
+		// Register based on post type.
+		$this->getContainer()->add( 'mto-quiz.store', QuizRepository::class );
+
+		$this->getContainer()->add( 'mto-quiz.rest', QuizesController::class )
+			->addArgument( 'permission' );
+
+		$this->getContainer()->add( 'mto-quiz', Quiz::class )
+			->addArgument( 'mto-quiz.store' );
+
 	}
 }

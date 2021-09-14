@@ -193,7 +193,7 @@ function masteriyo_count_course_comments( $course ) {
 			"SELECT COUNT(comment_ID)
 			FROM {$wpdb->comments}
 			WHERE comment_approved = '1'
-				AND comment_type = 'course_review'
+				AND comment_type = 'mto_course_review'
 				AND comment_post_ID = %d
 			",
 			$course->get_id()
@@ -269,7 +269,7 @@ function masteriyo_get_course_contents( $course_id ) {
 	$sections_query = new \WP_Query(
 		array(
 			'post_parent'    => $course_id,
-			'post_type'      => 'section',
+			'post_type'      => 'mto-section',
 			'posts_per_page' => -1,
 
 		)
@@ -281,17 +281,17 @@ function masteriyo_get_course_contents( $course_id ) {
 		$section_content_query = new \WP_Query(
 			array(
 				'post_parent' => $section->get_id(),
-				'post_type'   => array( 'lesson', 'quiz' ),
+				'post_type'   => array( 'mto-lesson', 'mto-quiz' ),
 				'post_status' => 'any',
 
 			)
 		);
 		$contents = array_map(
 			function ( $post ) {
-				if ( 'lesson' === $post->post_type ) {
+				if ( 'mto-lesson' === $post->post_type ) {
 					return masteriyo_get_lesson( $post );
 				}
-				if ( 'quiz' === $post->post_type ) {
+				if ( 'mto-quiz' === $post->post_type ) {
 					return masteriyo_get_quiz( $post );
 				}
 				return $post;

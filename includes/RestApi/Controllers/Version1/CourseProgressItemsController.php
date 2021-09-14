@@ -733,7 +733,7 @@ class CourseProgressItemsController extends CrudController {
 
 			// Validate course ID.
 			$course_post = get_post( $course_id );
-			if ( ! $course_post || 'course' !== $course_post->post_type ) {
+			if ( ! $course_post || 'mto-course' !== $course_post->post_type ) {
 				throw new RestException(
 					'masteriyo_rest_invalid_course_id',
 					__( 'Course ID is invalid.', 'masteriyo' ),
@@ -757,7 +757,7 @@ class CourseProgressItemsController extends CrudController {
 		// Bail early if ther item_id is not either lesson or quiz.
 		$item = get_post( $course_progress_item->get_item_id( 'edit' ) );
 
-		if ( is_null( $item ) || ! in_array( $item->post_type, array( 'lesson', 'quiz' ), true ) ) {
+		if ( is_null( $item ) || ! in_array( $item->post_type, array( 'mto-lesson', 'mto-quiz' ), true ) ) {
 			throw new RestException(
 				'masteriyo_invalid_item_id',
 				__( 'Invalid item ID.', 'masteriyo' ),

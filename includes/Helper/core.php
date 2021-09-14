@@ -670,7 +670,7 @@ function masteriyo_get_related_courses( $course ) {
 		),
 		'post__not_in'   => array( $course->get_id() ),
 		'posts_per_page' => $max_related_posts,
-		'post_type'      => 'course',
+		'post_type'      => 'mto-course',
 	);
 	$query           = new WP_Query( $args );
 	$related_courses = array_map( 'masteriyo_get_course', $query->posts );
@@ -1364,7 +1364,7 @@ function_exists( 'add_action' ) && add_action( 'masteriyo_after_register_post_ty
  */
 function masteriyo_course_post_type_link( $permalink, $post ) {
 	// Abort if post is not a course.
-	if ( 'course' !== $post->post_type ) {
+	if ( 'mto-course' !== $post->post_type ) {
 		return $permalink;
 	}
 

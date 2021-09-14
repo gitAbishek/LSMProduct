@@ -25,8 +25,8 @@ function masteriyo_template_redirect() {
 	// When default permalinks are enabled, redirect courses list page to post type archive url.
 	if ( ! empty( $_GET['page_id'] ) && '' === get_option( 'permalink_structure' )
 		&& masteriyo_get_page_id( 'courses' ) === absint( $_GET['page_id'] )
-		&& get_post_type_archive_link( 'course' ) ) {
-			wp_safe_redirect( get_post_type_archive_link( 'course' ) );
+		&& get_post_type_archive_link( 'mto-course' ) ) {
+			wp_safe_redirect( get_post_type_archive_link( 'mto-course' ) );
 			exit;
 	}
 	// phpcs:enable WordPress.Security.NonceVerification.Recommended
@@ -43,7 +43,7 @@ function masteriyo_template_redirect() {
 
 	// Redirect to the course page if we have a single course.
 	if (
-		is_search() && is_post_type_archive( 'course' )
+		is_search() && is_post_type_archive( 'mto-course' )
 		&& apply_filters( 'masteriyo_redirect_single_search_result', true ) && 1 === absint( $wp_query->found_posts )
 	) {
 		$course = masteriyo_get_course( $wp_query->post );
@@ -290,7 +290,7 @@ function masteriyo_setup_course_data( $post ) {
 		$post = get_post( $post );
 	}
 
-	if ( empty( $post->post_type ) || ! in_array( $post->post_type, array( 'course' ), true ) ) {
+	if ( empty( $post->post_type ) || ! in_array( $post->post_type, array( 'mto-course' ), true ) ) {
 		return;
 	}
 

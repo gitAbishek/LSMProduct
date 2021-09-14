@@ -471,14 +471,14 @@ abstract class CrudController extends RestController {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $object_type Object type.
+	 * @param string $post_type Post type.
 	 * @param string $context   Request context.
 	 * @param int    $object_id Post ID.
 	 *
 	 * @return bool
 	 */
-	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
-		return $this->permission->rest_check_post_permissions( $object_type, 'read', $object_id );
+	protected function check_item_permission( $post_type, $context = 'read', $object_id = 0 ) {
+		return $this->permission->rest_check_post_permissions( $post_type, 'read', $object_id );
 	}
 
 	/**
@@ -496,7 +496,7 @@ abstract class CrudController extends RestController {
 
 		$objects = array();
 		foreach ( $query_results['objects'] as $object ) {
-			if ( ! $this->check_item_permission( $object->get_object_type(), 'read', $object->get_id() ) ) {
+			if ( ! $this->check_item_permission( $this->post_type, 'read', $object->get_id() ) ) {
 				continue;
 			}
 

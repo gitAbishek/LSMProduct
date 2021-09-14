@@ -13,8 +13,11 @@ class Course extends PostType {
 	 *
 	 * @var string
 	 */
-	protected $slug = 'course';
+	protected $slug = 'mto-course';
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		$debug           = masteriyo_is_post_type_debug_enabled();
 		$permalinks      = masteriyo_get_permalink_structure();

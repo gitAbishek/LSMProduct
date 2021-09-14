@@ -117,7 +117,7 @@ class SectionChildrenController extends CrudController {
 			);
 		}
 
-		if ( ! $this->permission->rest_check_post_permissions( 'section', 'read' ) ) {
+		if ( ! $this->permission->rest_check_post_permissions( 'mto-section', 'read' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),

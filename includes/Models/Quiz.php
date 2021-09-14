@@ -39,7 +39,7 @@ class Quiz extends Model {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'quiz';
+	protected $post_type = 'mto-quiz';
 
 	/**
 	 * Cache group.
@@ -144,6 +144,17 @@ class Quiz extends Model {
 	 */
 	public function get_questions_count() {
 		return masteriyo_get_questions_count_by_quiz( $this->get_id() );
+	}
+
+	/**
+	 * Get the post type.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	public function get_post_type() {
+		return $this->post_type;
 	}
 
 	/*

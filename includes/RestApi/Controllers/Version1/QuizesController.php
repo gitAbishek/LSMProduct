@@ -46,7 +46,7 @@ class QuizesController extends PostsController {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'quiz';
+	protected $post_type = 'mto-quiz';
 
 	/**
 	 * If object is hierarchical.
@@ -1107,7 +1107,7 @@ class QuizesController extends PostsController {
 		if ( ! isset( $request['menu_order'] ) && $creating ) {
 			$query = new \WP_Query(
 				array(
-					'post_type'      => array( 'quiz', 'lesson' ),
+					'post_type'      => array( 'mto-quiz', 'mto-lesson' ),
 					'post_status'    => 'any',
 					'posts_per_page' => 1,
 					'post_parent'    => $request['parent_id'],
@@ -1192,7 +1192,7 @@ class QuizesController extends PostsController {
 		$course_id = absint( $request['course_id'] );
 		$course    = get_post( $course_id );
 
-		if ( is_null( $course ) || 'course' !== $course->post_type ) {
+		if ( is_null( $course ) || 'mto-course' !== $course->post_type ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
 				__( 'Invalid ID.', 'masteriyo' ),

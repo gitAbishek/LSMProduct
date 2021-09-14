@@ -275,7 +275,7 @@ class CourseReviewsController extends CommentsController {
 			'paged'    => $request['page'],
 			'per_page' => $request['per_page'],
 			's'        => $request['search'],
-			'type'     => 'course_review',
+			'type'     => 'mto_course_review',
 		);
 
 		/**

@@ -39,7 +39,7 @@ class CourseReview extends Model {
 	 *
 	 * @var string
 	 */
-	protected $cache_group = 'course_reviews';
+	protected $cache_group = 'mto_course_reviews';
 
 
 	/**
@@ -61,7 +61,7 @@ class CourseReview extends Model {
 		'rating'       => 0,
 		'status'       => 'approve',
 		'agent'        => '',
-		'type'         => 'course_review',
+		'type'         => 'mto_course_review',
 		'parent'       => 0,
 		'author_id'    => 0,
 	);

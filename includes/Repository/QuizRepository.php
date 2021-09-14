@@ -51,7 +51,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			apply_filters(
 				'masteriyo_new_quiz_data',
 				array(
-					'post_type'     => 'quiz',
+					'post_type'     => 'mto-quiz',
 					'post_status'   => $quiz->get_status() ? $quiz->get_status() : 'publish',
 					'post_author'   => get_current_user_id(),
 					'post_title'    => $quiz->get_name() ? $quiz->get_name() : __( 'Quiz', 'masteriyo' ),
@@ -92,7 +92,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	public function read( Model &$quiz ) {
 		$quiz_post = get_post( $quiz->get_id() );
 
-		if ( ! $quiz->get_id() || ! $quiz_post || 'quiz' !== $quiz_post->post_type ) {
+		if ( ! $quiz->get_id() || ! $quiz_post || 'mto-quiz' !== $quiz_post->post_type ) {
 			throw new \Exception( __( 'Invalid quiz.', 'masteriyo' ) );
 		}
 
@@ -149,7 +149,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 				'post_status'  => $quiz->get_status( 'edit' ) ? $quiz->get_status( 'edit' ) : 'publish',
 				'post_name'    => $quiz->get_slug( 'edit' ),
 				'post_parent'  => $quiz->get_parent_id(),
-				'post_type'    => 'quiz',
+				'post_type'    => 'mto-quiz',
 			);
 
 			/**
@@ -283,7 +283,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'quiz' ) );
+			update_post_caches( $query->posts, array( 'mto-quiz' ) );
 		}
 
 		$quizes = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_quiz', $query->posts ) );
@@ -321,7 +321,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			}
 		}
 
-		$query_vars['post_type'] = 'quiz';
+		$query_vars['post_type'] = 'mto-quiz';
 
 		$wp_query_args = parent::get_wp_query_args( $query_vars );
 

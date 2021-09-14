@@ -44,7 +44,7 @@ abstract class PostsController extends CrudController {
 		$post = get_post( (int) $request['id'] );
 
 		// Allow to get the items for open courses.
-		if ( $post && in_array( $post->post_type, array( 'lesson', 'quiz', 'section', 'question' ), true ) ) {
+		if ( $post && in_array( $post->post_type, array( 'mto-lesson', 'mto-quiz', 'mto-section', 'mto-question' ), true ) ) {
 			$course_id = get_post_meta( $post->ID, '_course_id', true );
 			$course    = masteriyo_get_course( $course_id );
 
@@ -199,7 +199,7 @@ abstract class PostsController extends CrudController {
 
 		$query = new \WP_Query(
 			array(
-				'post_type'      => array( 'lesson', 'quiz' ),
+				'post_type'      => array( 'mto-lesson', 'mto-quiz' ),
 				'post_status'    => 'publish',
 				'posts_per_page' => -1,
 				'meta_key'       => '_course_id',

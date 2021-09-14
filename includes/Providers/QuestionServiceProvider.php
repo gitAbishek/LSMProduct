@@ -33,14 +33,24 @@ class QuestionServiceProvider extends AbstractServiceProvider {
 	 * @var array
 	 */
 	protected $provides = array(
+		'\Masteriyo\RestApi\Controllers\Version1\QuestionsController',
+
 		'question',
 		'question.store',
 		'question.rest',
-		'\Masteriyo\RestApi\Controllers\Version1\QuestionsController',
 		'question.true-false',
 		'question.single-choice',
 		'question.multiple-choice',
 		'question.short-answer',
+
+		// Post type.
+		'mto-question',
+		'mto-question.store',
+		'mto-question.rest',
+		'mto-question.true-false',
+		'mto-question.single-choice',
+		'mto-question.multiple-choice',
+		'mto-question.short-answer',
 	);
 
 	/**
@@ -74,5 +84,26 @@ class QuestionServiceProvider extends AbstractServiceProvider {
 
 		$this->getContainer()->add( 'question.short-answer', ShortAnswer::class )
 			->addArgument( 'question.store' );
+
+		// Register based on post type.
+		$this->getContainer()->add( 'mto-question.store', QuestionRepository::class );
+
+		$this->getContainer()->add( 'mto-question.rest', QuestionsController::class )
+			->addArgument( 'permission' );
+
+		$this->getContainer()->add( 'mto-question', Question::class )
+			->addArgument( 'mto-question.store' );
+
+		$this->getContainer()->add( 'mto-question.true-false', TrueFalse::class )
+			->addArgument( 'mto-question.store' );
+
+		$this->getContainer()->add( 'mto-question.single-choice', SingleChoice::class )
+			->addArgument( 'mto-question.store' );
+
+		$this->getContainer()->add( 'mto-question.multiple-choice', MultipleChoice::class )
+			->addArgument( 'mto-question.store' );
+
+		$this->getContainer()->add( 'mto-question.short-answer', ShortAnswer::class )
+			->addArgument( 'mto-question.store' );
 	}
 }

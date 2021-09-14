@@ -416,7 +416,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	protected function get_total_summary( $course_progress, $items ) {
 		$query = new \WP_Query(
 			array(
-				'post_type'    => array( 'lesson', 'quiz' ),
+				'post_type'    => array( 'mto-lesson', 'mto-quiz' ),
 				'post_status'  => 'any',
 				'meta_key'     => '_course_id',
 				'meta_value'   => $course_progress->get_course_id(),
@@ -452,7 +452,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	protected function get_lesson_summary( $course_progress, $items ) {
 		$query = new \WP_Query(
 			array(
-				'post_type'    => 'lesson',
+				'post_type'    => 'mto-lesson',
 				'post_status'  => 'any',
 				'meta_key'     => '_course_id',
 				'meta_value'   => $course_progress->get_course_id(),
@@ -488,7 +488,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	protected function get_quiz_summary( $course_progress, $items ) {
 		$query = new \WP_Query(
 			array(
-				'post_type'    => 'quiz',
+				'post_type'    => 'mto-quiz',
 				'post_status'  => 'any',
 				'meta_key'     => '_course_id',
 				'meta_value'   => $course_progress->get_course_id(),

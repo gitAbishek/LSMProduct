@@ -23,7 +23,6 @@ import { BiBook, BiPlus } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import EmptyInfo from '../../components/common/EmptyInfo';
 import Header from '../../components/common/Header';
 import MasteriyoPagination from '../../components/common/MasteriyoPagination';

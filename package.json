@@ -50,7 +50,6 @@
     "@types/fork-ts-checker-webpack-plugin": "0.4.5",
     "@types/humanize-duration": "3.25.0",
     "@types/react-beautiful-dnd": "13.0.0",
-    "@types/react-collapse": "5.0.0",
     "@types/react-color": "3.0.5",
     "@types/react-router-dom": "5.1.7",
     "@types/react-select": "4.0.13",

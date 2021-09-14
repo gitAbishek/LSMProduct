@@ -2349,13 +2349,6 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-collapse@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@types/react-collapse/-/react-collapse-5.0.0.tgz#ffe6173db457b4b147319e1bd522b5b9d3d68fac"
-  integrity sha512-iM5QPtS0JVbL5TWm8vilaG4iYiQIFSSqXDHcRUA50qBLSgC0GURk7VZYmgo6u4YF0LnpvKBQYRhPv1ut9DukIg==
-  dependencies:
-    "@types/react" "*"
-
 "@types/react-color@3.0.5":
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/@types/react-color/-/react-color-3.0.5.tgz#b8bdf8df7085bd1577658fb37d9a18d7ba3963bb"

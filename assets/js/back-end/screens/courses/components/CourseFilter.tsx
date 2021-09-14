@@ -1,7 +1,17 @@
-import { Box, Input, Select, Stack } from '@chakra-ui/react';
+import {
+	Box,
+	Collapse,
+	IconButton,
+	Input,
+	Select,
+	Stack,
+	useMediaQuery,
+	VStack,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { useOnType } from 'use-ontype';
 import urls from '../../../constants/urls';
@@ -41,6 +51,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 		retry: false,
 	});
 	const { handleSubmit, register, setValue } = useForm();
+	const [isMobile] = useMediaQuery('(min-width: 48em)');
 	const onSearchInput = useOnType(
 		{
 			onTypeFinish: (val: string) => {
@@ -54,46 +65,65 @@ const CourseFilter: React.FC<Props> = (props) => {
 		},
 		800
 	);
+	const [isOpen, setIsOpen] = useState(isMobile);
 
 	const onChange = (data: FilterParams) => {
 		setFilterParams(deepClean(data));
 	};
 
+	useEffect(() => {
+		setIsOpen(isMobile);
+	}, [isMobile]);
+
 	return (
-		<Box px="12">
-			<form onChange={handleSubmit(onChange)}>
-				<Stack direction={['column', null, 'row']} spacing="4">
-					<Input
-						placeholder={__('Search courses', 'masteriyo')}
-						{...onSearchInput}
+		<Box px={{ base: 6, md: 12 }}>
+			<VStack spacing="6" align="end">
+				{!isMobile && (
+					<IconButton
+						icon={<BiDotsVerticalRounded />}
+						variant="outline"
+						rounded="sm"
+						fontSize="large"
+						aria-label={__('toggle filter')}
+						onClick={() => setIsOpen(!isOpen)}
 					/>
-					<Select {...register('category')}>
-						<option value="">{__('All Categories', 'masteriyo')}</option>
-						{categoryQuery.isSuccess &&
-							categoryQuery?.data?.data?.map(
-								(category: { id: number; name: string }) => (
-									<option key={category.id} value={category.id}>
-										{category.name}
+				)}
+				<Collapse in={isOpen}>
+					<form onChange={handleSubmit(onChange)}>
+						<Stack direction={['column', null, 'row']} spacing="4">
+							<Input
+								placeholder={__('Search courses', 'masteriyo')}
+								{...onSearchInput}
+							/>
+							<Select {...register('category')}>
+								<option value="">{__('All Categories', 'masteriyo')}</option>
+								{categoryQuery.isSuccess &&
+									categoryQuery?.data?.data?.map(
+										(category: { id: number; name: string }) => (
+											<option key={category.id} value={category.id}>
+												{category.name}
+											</option>
+										)
+									)}
+							</Select>
+
+							<Select {...register('status')}>
+								{courseStatusList.map((option: any) => (
+									<option key={option.value} value={option.value}>
+										{option.label}
 									</option>
-								)
-							)}
-					</Select>
+								))}
+							</Select>
 
-					<Select {...register('status')}>
-						{courseStatusList.map((option: any) => (
-							<option key={option.value} value={option.value}>
-								{option.label}
-							</option>
-						))}
-					</Select>
-
-					<Select {...register('price_type')}>
-						<option value="">{__('Pricing', 'masteriyo')}</option>
-						<option value="free">{__('Free', 'masteriyo')}</option>
-						<option value="paid">{__('Paid', 'masteriyo')}</option>
-					</Select>
-				</Stack>
-			</form>
+							<Select {...register('price_type')}>
+								<option value="">{__('Pricing', 'masteriyo')}</option>
+								<option value="free">{__('Free', 'masteriyo')}</option>
+								<option value="paid">{__('Paid', 'masteriyo')}</option>
+							</Select>
+						</Stack>
+					</form>
+				</Collapse>
+			</VStack>
 		</Box>
 	);
 };

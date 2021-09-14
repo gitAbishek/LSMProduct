@@ -1,11 +1,11 @@
 /**
  * global masteriyo_data
  */
-(function ($, mto_data) {
+(function ($, masteriyo_data) {
 	/**
 	 * Login form submission handler.
 	 */
-	$(document.body).on('submit', 'form.mto-login--form', function (e) {
+	$(document.body).on('submit', 'form.masteriyo-login--form', function (e) {
 		e.preventDefault();
 
 		const $form = $(this);
@@ -17,27 +17,27 @@
 
 		$form
 			.find('button[type=submit]')
-			.text(mto_data.labels.signing_in)
-			.siblings('.mto-notify-message')
+			.text(masteriyo_data.labels.signing_in)
+			.siblings('.masteriyo-notify-message')
 			.first()
 			.remove();
 
-		$(this).find('#mto-login-error-msg').hide();
+		$(this).find('#masteriyo-login-error-msg').hide();
 
 		$.ajax({
 			type: 'post',
 			dataType: 'json',
-			url: mto_data.ajax_url,
+			url: masteriyo_data.ajax_url,
 			data: {
 				action: 'masteriyo_login',
-				nonce: mto_data.nonce,
+				nonce: masteriyo_data.nonce,
 				payload: userData,
 			},
 			success: function (res) {
 				if (res.success) {
 					window.location.reload();
 				} else {
-					$('#mto-login-error-msg').show().html(res.data.message);
+					$('#masteriyo-login-error-msg').show().html(res.data.message);
 				}
 			},
 			error: function (xhr, status, error) {
@@ -45,10 +45,10 @@
 					? xhr.responseJSON.message
 					: error;
 
-				$('#mto-login-error-msg').show().html(message);
+				$('#masteriyo-login-error-msg').show().html(message);
 			},
 			complete: function () {
-				$form.find('button[type=submit]').text(mto_data.labels.sign_in);
+				$form.find('button[type=submit]').text(masteriyo_data.labels.sign_in);
 			},
 		});
 	});

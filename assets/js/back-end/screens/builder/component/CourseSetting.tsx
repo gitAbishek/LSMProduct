@@ -311,7 +311,11 @@ const CourseSetting: React.FC<Props> = (props) => {
 														</FormLabel>
 														<Controller
 															name="regular_price"
-															defaultValue={courseData?.regular_price}
+															defaultValue={
+																courseData?.regular_price
+																	? courseData.regular_price
+																	: ''
+															}
 															render={({ field }) => (
 																<NumberInput {...field} w="full" min={0}>
 																	<NumberInputField

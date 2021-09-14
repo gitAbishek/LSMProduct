@@ -154,6 +154,9 @@ const theme = extendTheme({
 				th: {
 					pb: '6',
 					borderBottom: 'none',
+					textTransform: 'uppercase',
+					fontSize: 'xs',
+					textAlign: 'left',
 				},
 				'tr:nth-of-type(2n+1) td': {
 					bg: '#f8f9fa',

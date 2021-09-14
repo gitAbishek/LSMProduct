@@ -62,7 +62,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 	return (
 		<Box px="12">
 			<form onChange={handleSubmit(onChange)}>
-				<Stack direction="row" spacing="4">
+				<Stack direction={['column', null, 'row']} spacing="4">
 					<Input
 						placeholder={__('Search courses', 'masteriyo')}
 						{...onSearchInput}

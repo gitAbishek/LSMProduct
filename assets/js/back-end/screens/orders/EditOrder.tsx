@@ -239,7 +239,6 @@ const EditOrder = () => {
 														{__('General', 'masteriyo')}
 													</Heading>
 
-													{/* Date Created */}
 													<FormControl py="3">
 														<FormLabel>
 															{__('Date created', 'masteriyo')}
@@ -252,7 +251,6 @@ const EditOrder = () => {
 														/>
 													</FormControl>
 
-													{/* Order Status */}
 													<FormControl isInvalid={!!errors?.status} py="3">
 														<FormLabel>{__('Status', 'masteriyo')}</FormLabel>
 														<Select
@@ -275,7 +273,6 @@ const EditOrder = () => {
 														</FormErrorMessage>
 													</FormControl>
 
-													{/* Payment Method */}
 													<FormControl
 														isInvalid={!!errors?.payment_method}
 														py="3">
@@ -307,7 +304,6 @@ const EditOrder = () => {
 														</FormErrorMessage>
 													</FormControl>
 
-													{/* Transaction ID */}
 													<FormControl
 														isInvalid={!!errors?.transaction_id}
 														py="3">
@@ -329,7 +325,6 @@ const EditOrder = () => {
 														{__('Billing', 'masteriyo')}
 													</Heading>
 
-													{/* First Name & Last Name */}
 													<Stack direction="row" spacing="8" py="3">
 														<FormControl
 															isInvalid={!!errors?.billing?.first_name}>
@@ -365,7 +360,6 @@ const EditOrder = () => {
 														</FormControl>
 													</Stack>
 
-													{/* Email */}
 													<FormControl isInvalid={!!errors?.billing?.email}>
 														<FormLabel>
 															{__('Email address', 'masteriyo')}

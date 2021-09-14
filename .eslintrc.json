@@ -6,7 +6,8 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "max-len": ["error", { "code": 500 }]
   },
   "parser": "@typescript-eslint/parser",
   "extends": ["plugin:react/recommended"],

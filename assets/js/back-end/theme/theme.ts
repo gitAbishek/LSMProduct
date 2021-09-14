@@ -149,27 +149,54 @@ const theme = extendTheme({
 			'::placeholder': {
 				fontSize: 'sm',
 			},
-			'.responsiveTable': { width: '100%' },
-			'.responsiveTable_td__tdBefore': { display: 'none' },
+			'.responsiveTable': {
+				width: '100%',
+				th: {
+					pb: '6',
+					borderBottom: 'none',
+				},
+				'tr:nth-of-type(2n+1) td': {
+					bg: '#f8f9fa',
+				},
+
+				tr: {
+					'th, td': {
+						':first-of-type': {
+							pl: '12',
+						},
+						':last-child': {
+							pr: '6',
+						},
+					},
+				},
+				td: {
+					py: '3',
+					borderBottom: 'none',
+				},
+			},
+			'.responsiveTable td .tdBefore': { display: 'none' },
 			'@media screen and (max-width: 40em)': {
-				__expression__: 'screen and (max-width: 40em)',
-				'.responsiveTable_table': { display: 'block' },
-				'.responsiveTable_thead': { display: 'block' },
-				'.responsiveTable_tbody': { display: 'block' },
-				'.responsiveTable_th': { display: 'block' },
-				'.responsiveTable_td': { display: 'block' },
-				'.responsiveTable_tr': { display: 'block' },
-				'.responsiveTable_thead_tr': {
+				'.responsiveTable table': { display: 'block' },
+				'.responsiveTable thead': { display: 'block' },
+				'.responsiveTable tbody': { display: 'block' },
+				'.responsiveTable th': {
+					display: 'block',
+				},
+				'.responsiveTable td': { display: 'block' },
+				'.responsiveTable tr': {
+					display: 'block',
+				},
+				'.responsiveTable thead tr': {
 					position: 'absolute',
 					top: '-9999px',
 					left: '-9999px',
 					borderBottom: '2px solid #333',
 				},
-				'.responsiveTable_tbody_tr': {
+				'.responsiveTable tbody tr': {
 					border: '1px solid #000',
 					padding: '.25em',
 				},
-				'.responsiveTable_td_pivoted': {
+				'.responsiveTable td.pivoted': {
 					border: 'none !important',
 					position: 'relative',
 					paddingLeft: 'calc(50% + 10px) !important',
@@ -177,7 +204,7 @@ const theme = extendTheme({
 					whiteSpace: 'pre-wrap',
 					overflowWrap: 'break-word',
 				},
-				'.responsiveTable_td__tdBefore': {
+				'.responsiveTable td .tdBefore': {
 					position: 'absolute',
 					display: 'block',
 					left: '1rem',

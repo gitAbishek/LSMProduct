@@ -164,7 +164,7 @@ function masteriyo_placeholder_img_src( $size = 'masteriyo_thumbnail' ) {
 	$placeholder_image = get_option( 'masteriyo_placeholder_image', 0 );
 
 	if ( ! empty( $placeholder_image ) && is_numeric( $placeholder_image ) ) {
-		$image = wp_get_attachment_image_url( $placeholder_image, $size );
+		$src = wp_get_attachment_image_url( $placeholder_image, $size );
 	}
 
 	return apply_filters( 'masteriyo_placeholder_img_src', $src );

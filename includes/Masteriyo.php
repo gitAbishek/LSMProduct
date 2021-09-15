@@ -530,6 +530,7 @@ class Masteriyo {
 	public function add_image_sizes() {
 		add_image_size( 'masteriyo_single', 792, 496, true );
 		add_image_size( 'masteriyo_thumbnail', 270, 170, true );
+		add_image_size( 'masteriyo_medium', 180, 112, true );
 	}
 
 	/**

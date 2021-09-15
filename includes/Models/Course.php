@@ -113,11 +113,11 @@ class Course extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_featured_image_url() {
+	public function get_featured_image_url( $size = 'thumbnail' ) {
 		if ( empty( $this->get_featured_image() ) ) {
-			return '';
+			return masteriyo_placeholder_img_src( $size );
 		}
-		return wp_get_attachment_url( $this->get_featured_image() );
+		return wp_get_attachment_image_url( $this->get_featured_image(), $size );
 	}
 
 	/**

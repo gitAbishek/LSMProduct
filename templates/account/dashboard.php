@@ -73,7 +73,7 @@ defined( 'ABSPATH' ) || exit;
 				<div class="masteriyo-cstudy--body--wrap masteriyo-flex masteriyo-flex-ycenter masteriyo-db-card">
 					<div class="masteriyo-cstudy--body--img-title">
 						<a href="<?php echo esc_url( $active_course->get_permalink() ); ?>" title="<?php echo esc_attr( $active_course->get_name() ); ?>">
-							<?php echo wp_kses_post( $active_course->get_image( 'thumbnail' ) ); ?>
+							<img src="<?php echo esc_attr( $active_course->get_featured_image_url( 'masteriyo_medium' ) ); ?>" alt="thumbnail" />
 						</a>
 
 						<div class="masteriyo-cstudy--body--header">
@@ -93,18 +93,20 @@ defined( 'ABSPATH' ) || exit;
 								</h3>
 							</a>
 
-							<span class="masteriyo-cstudy--body--rating masteriyo-icon-svg">
-								<?php masteriyo_render_stars( $active_course->get_average_rating() ); ?>
-							</span>
-
-							<div class="masteriyo-cstudy--body--duration">
-								<span class="masteriyo-icon-svg">
-									<?php masteriyo_get_svg( 'clock', true ); ?>
+							<div class="masteriyo-cstudy--body--rt">
+								<span class="masteriyo-cstudy--body--rating masteriyo-icon-svg">
+									<?php masteriyo_render_stars( $active_course->get_average_rating() ); ?>
 								</span>
 
-								<time class="masteriyo-cstudy--body--time">
-									<?php echo esc_html( masteriyo_minutes_to_time_length_string( $active_course->get_duration() ) ); ?>
-								</time>
+								<div class="masteriyo-cstudy--body--duration">
+									<span class="masteriyo-icon-svg">
+										<?php masteriyo_get_svg( 'clock', true ); ?>
+									</span>
+
+									<time class="masteriyo-cstudy--body--time">
+										<?php echo esc_html( masteriyo_minutes_to_time_length_string( $active_course->get_duration() ) ); ?>
+									</time>
+								</div>
 							</div>
 						</div>
 					</div>

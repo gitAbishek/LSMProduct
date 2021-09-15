@@ -17,7 +17,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( ! $order ) {
-	echo esc_html(
+	echo wp_kses_post(
 		sprintf(
 			'<p class = "masteriyo-notice masteriyo-notice--success masteriyo-thankyou-order-received">%s</p>',
 			apply_filters( 'masteriyo_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'masteriyo' ), null )
@@ -48,6 +48,16 @@ if ( ! $order ) {
 				</a>
 			<?php endif; ?>
 		</p>
+
+		<?php
+			echo wp_kses_post(
+				sprintf(
+					'Go to %courses%s page.',
+					wp_kses_post( '<a href="' . esc_url( masteriyo_get_page_permalink( 'courses' ) ) . '">' ),
+					wp_kses_post( '</a>' )
+				)
+			);
+		?>
 
 	<?php else : ?>
 
@@ -85,8 +95,17 @@ if ( ! $order ) {
 					<strong><?php echo esc_html( $order->get_payment_method_title() ); ?></strong>
 				</li>
 			<?php endif; ?>
-
 		</ul>
+
+		<?php
+			echo wp_kses_post(
+				sprintf(
+					'Go to %saccount%s page.',
+					wp_kses_post( '<a href="' . esc_url( masteriyo_get_account_endpoint_url( 'courses' ) ) . '">' ),
+					wp_kses_post( '</a>' )
+				)
+			);
+		?>
 
 	<?php endif; ?>
 

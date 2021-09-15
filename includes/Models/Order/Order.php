@@ -625,12 +625,17 @@ class Order extends AbstractOrder {
 	 *
 	 * @param string|PaymentGateway $payment_method Payment method.
 	 */
-	public function set_payment_method( $payment_method ) {
+	public function set_payment_method( $payment_method = '' ) {
+		$payment_method_name  = '';
+		$payment_method_title = '';
+
 		if ( is_a( $payment_method, 'Masteriyo\Abstracts\PaymentGateway' ) ) {
-			$payment_method = $payment_method->get_name();
+			$payment_method_name  = $payment_method->get_name();
+			$payment_method_title = $payment_method->get_title();
 		}
 
-		$this->set_prop( 'payment_method', $payment_method );
+		$this->set_prop( 'payment_method', $payment_method_name );
+		$this->set_prop( 'payment_method_title', $payment_method_title );
 	}
 
 	/**

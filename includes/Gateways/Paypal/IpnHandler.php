@@ -102,7 +102,7 @@ class IpnHandler extends Response {
 			'httpversion' => '1.1',
 			'compress'    => false,
 			'decompress'  => false,
-			'user-agent'  => 'Masteriyo/' . MASTERIYO()->version,
+			'user-agent'  => 'Masteriyo/' . masteriyo_get_version(),
 		);
 
 		// Post back to get a response.

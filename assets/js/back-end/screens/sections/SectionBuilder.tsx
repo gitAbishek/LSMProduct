@@ -5,6 +5,7 @@ import {
 	ButtonGroup,
 	Collapse,
 	Heading,
+	Link,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
@@ -116,9 +117,13 @@ const SectionBuilder: React.FC<Props> = (props) => {
 														'Not sure how to get started? Learn more in our',
 														'masteriyo'
 													)}
-													<Text as="span" color="gray.800" fontSize="xs">
-														{__(' Documentation', 'masteriyo')}
-													</Text>
+													<Link
+														isExternal
+														href="https://docs.masteriyo.com/docs/how-to-add-courses/#1-toc-title">
+														<Text as="span" color="gray.800" fontSize="xs">
+															{__(' Documentation', 'masteriyo')}
+														</Text>
+													</Link>
 												</Text>
 											</Stack>
 										</Stack>

@@ -9,12 +9,6 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <div class="masteriyo-welcome-notify">
-	<a class="masteriyo-close" href="#">
-		<span class="masteriyo-icon-svg">
-			<?php masteriyo_get_svg( 'cross', true ); ?>
-		</span>
-	</a>
-
 	<h3 class="masteriyo-title">
 		<?php esc_html_e( 'Hello', 'masteriyo' ); ?>, <span class="masteriyo-profile-name"><?php echo esc_html( $user->get_display_name() ); ?></span>
 	</h3>

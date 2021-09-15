@@ -75,6 +75,10 @@
 		@include masteriyo-shadow-2();
 		padding: $spacing_32px $spacing_44px;
 		margin-bottom: $spacing_30px;
+
+		li.payment-method {
+			list-style-type: none;
+		}
 	}
 	&-summary-paypal {
 		margin-bottom: $spacing_20px;

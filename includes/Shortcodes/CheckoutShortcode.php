@@ -71,8 +71,8 @@ class CheckoutShortcode extends Shortcode {
 	 * @return void
 	 */
 	private function checkout() {
-		// Bail early if the checkout is in admin.
-		if ( is_admin() ) {
+		// Bail early if the checkout is in admin or REST API Request.
+		if ( is_admin() || masteriyo_is_rest_api_request() ) {
 			return;
 		}
 

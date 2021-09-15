@@ -25,7 +25,7 @@ const AvatarMenu = () => {
 					color="gray.500"
 					href={
 						//@ts-ignore
-						`${_MASTERIYO_.urls.myaccount}`
+						`${_MASTERIYO_.urls.account}`
 					}
 					isExternal>
 					<MenuItem icon={<BiUserCircle size={22} />}>

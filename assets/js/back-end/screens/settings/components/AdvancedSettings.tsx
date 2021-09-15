@@ -173,8 +173,8 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										</Tooltip>
 									</FormLabel>
 									<Select
-										{...register('advance.pages.myaccount_page_id')}
-										defaultValue={advanceData?.pages?.myaccount_page_id}
+										{...register('advance.pages.account_page_id')}
+										defaultValue={advanceData?.pages?.account_page_id}
 										placeholder={__('Select a Page', 'masteriyo')}>
 										{renderPagesOption()}
 									</Select>

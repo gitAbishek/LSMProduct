@@ -138,7 +138,7 @@ export interface AdvancedSettingsMap {
 	pages: {
 		courses_page_id: number;
 		learn_page_id: number;
-		myaccount_page_id: number;
+		account_page_id: number;
 		checkout_page_id: number;
 		terms_conditions_page_id: number;
 	};

@@ -410,7 +410,7 @@ export interface SettingsSchema {
 		enable_questions_answers: boolean;
 	};
 	pages: {
-		myaccount_page_id: number;
+		account_page_id: number;
 		courses_page_id: number;
 		terms_conditions_page_id: number;
 		checkout_page_id: number;

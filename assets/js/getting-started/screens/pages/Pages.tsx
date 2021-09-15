@@ -107,10 +107,10 @@ const Pages: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Select
 										defaultValue={
-											settingsQuery?.data?.advance?.pages?.myaccount_page_id
+											settingsQuery?.data?.advance?.pages?.account_page_id
 										}
 										w="md"
-										{...register('advance.pages.myaccount_page_id')}>
+										{...register('advance.pages.account_page_id')}>
 										{renderPagesOption()}
 									</Select>
 								</Flex>

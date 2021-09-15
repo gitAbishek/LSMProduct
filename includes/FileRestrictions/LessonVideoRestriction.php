@@ -30,11 +30,19 @@ class LessonVideoRestriction extends FileRestriction {
 
 		$course = masteriyo_get_course( $_GET['course_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
+		if ( 'open' === $course->get_access_mode() ) {
+			$this->send_lesson_video_file();
+		}
+
+		if ( ! is_user_logged_in() ) {
+			$this->send_error( __( 'You are not allowed to access this file', 'masteriyo' ), '', 403 );
+		}
+
 		if ( $course->get_author_id() === get_current_user_id() ) {
 			$this->send_lesson_video_file();
 		}
 
-		if ( masteriyo_is_current_user_enrolled_in_course( $course->get_id() ) ) {
+		if ( masteriyo_can_start_course( $course ) ) {
 			$this->send_lesson_video_file();
 		}
 

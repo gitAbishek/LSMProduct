@@ -6,25 +6,17 @@ import {
 	ListIcon,
 	ListItem,
 	Stack,
-	Table,
-	Tbody,
-	Th,
-	Thead,
-	Tr,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { BiCart } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { NavLink } from 'react-router-dom';
+import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
 import EmptyInfo from '../../components/common/EmptyInfo';
 import Header from '../../components/common/Header';
 import MasteriyoPagination from '../../components/common/MasteriyoPagination';
-import {
-	navActiveStyles,
-	navLinkStyles,
-	tableStyles,
-} from '../../config/styles';
+import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonOrdersList } from '../../skeleton';
@@ -60,10 +52,10 @@ const AllOrders = () => {
 				</List>
 			</Header>
 			<Container maxW="container.xl" marginTop="6">
-				<Box bg="white" py="12" shadow="box" mx="auto">
+				<Box bg="white" py={{ base: 6, md: 12 }} shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
 						<Stack direction="column" spacing="8">
-							<Table size="sm" sx={tableStyles}>
+							<Table>
 								<Thead>
 									<Tr>
 										<Th>{__('Order', 'masteriyo')}</Th>

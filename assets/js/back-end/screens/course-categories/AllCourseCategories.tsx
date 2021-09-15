@@ -15,11 +15,6 @@ import {
 	ListIcon,
 	ListItem,
 	Stack,
-	Table,
-	Tbody,
-	Th,
-	Thead,
-	Tr,
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
@@ -28,14 +23,11 @@ import React, { useRef, useState } from 'react';
 import { BiListUl, BiPlus } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { NavLink, useHistory } from 'react-router-dom';
+import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
 import EmptyInfo from '../../components/common/EmptyInfo';
 import Header from '../../components/common/Header';
 import MasteriyoPagination from '../../components/common/MasteriyoPagination';
-import {
-	navActiveStyles,
-	navLinkStyles,
-	tableStyles,
-} from '../../config/styles';
+import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonCourseTaxonomy } from '../../skeleton';
@@ -113,11 +105,11 @@ const AllCourseCategories = () => {
 				</List>
 			</Header>
 			<Container maxW="container.xl">
-				<Stack direction="column" spacing="6">
+				<Stack direction="column" spacing="6" py={{ base: 6, md: 12 }}>
 					<Box bg="white" py="12" shadow="box" mx="auto" w="full">
 						<Stack direction="column" spacing="8">
 							<Stack direction="column" spacing="8">
-								<Table size="sm" sx={tableStyles}>
+								<Table>
 									<Thead>
 										<Tr>
 											<Th>{__('Name', 'masteriyo')}</Th>

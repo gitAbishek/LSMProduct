@@ -7,13 +7,13 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
-	Td,
-	Tr,
+	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiDotsVerticalRounded, BiEdit, BiShow, BiTrash } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
+import { Td, Tr } from 'react-super-responsive-table';
 import routes from '../../../constants/routes';
 
 interface Props {
@@ -43,9 +43,11 @@ const CategoryRow: React.FC<Props> = (props) => {
 					{name}
 				</Link>
 			</Td>
-			<Td
-				dangerouslySetInnerHTML={{ __html: description ? description : '—' }}
-			/>
+			<Td>
+				<Text
+					dangerouslySetInnerHTML={{ __html: description ? description : '—' }}
+				/>
+			</Td>
 			<Td>{slug}</Td>
 			<Td>
 				<Link href={link} isExternal>

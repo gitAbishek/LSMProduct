@@ -183,7 +183,7 @@ class Setting extends Model {
 		'advance'        => array(
 			'pages'      => array(
 				'courses_page_id'          => '',
-				'myaccount_page_id'        => '',
+				'account_page_id'          => '',
 				'checkout_page_id'         => '',
 				'terms_conditions_page_id' => '',
 				'learn_page_id'            => '',
@@ -204,7 +204,7 @@ class Setting extends Model {
 				'view_order'      => 'view-order',
 				'order_history'   => 'order-history',
 				'my_courses'      => 'courses',
-				'view_myaccount'  => 'view-myaccount',
+				'view_account'    => 'view-account',
 				'edit_account'    => 'edit-account',
 				'payment_methods' => 'payment-methods',
 				'lost_password'   => 'lost-methods',
@@ -300,7 +300,7 @@ class Setting extends Model {
 		$this->add_sanitize_callback( 'advance.permalinks.single_quiz_permalink', 'sanitize_title' );
 		$this->add_sanitize_callback( 'advance.permalinks.single_section_permalink', 'sanitize_title' );
 
-		$this->add_sanitize_callback( 'advance.pages.myaccount_page_id', 'absint' );
+		$this->add_sanitize_callback( 'advance.pages.account_page_id', 'absint' );
 		$this->add_sanitize_callback( 'advance.pages.courses_page_id', 'absint' );
 		$this->add_sanitize_callback( 'advance.pages.terms_conditions_page_id', 'absint' );
 		$this->add_sanitize_callback( 'advance.pages.checkout_page_id', 'absint' );
@@ -316,7 +316,7 @@ class Setting extends Model {
 		$this->add_sanitize_callback( 'advance.account.view_order', 'sanitize_title' );
 		$this->add_sanitize_callback( 'advance.account.order_history', 'sanitize_title' );
 		$this->add_sanitize_callback( 'advance.account.my_courses', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.account.view_myaccount', 'sanitize_title' );
+		$this->add_sanitize_callback( 'advance.account.view_account', 'sanitize_title' );
 		$this->add_sanitize_callback( 'advance.account.edit_account', 'sanitize_title' );
 		$this->add_sanitize_callback( 'advance.account.payment_methods', 'sanitize_title' );
 		$this->add_sanitize_callback( 'advance.account.lost_password', 'sanitize_title' );

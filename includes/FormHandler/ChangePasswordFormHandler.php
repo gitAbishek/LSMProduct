@@ -1,6 +1,6 @@
 <?php
 /**
- * Change password form handler class. The form is located in myaccount page.
+ * Change password form handler class. The form is located in account page.
  *
  * @package Masetriyo\Classes\
  */

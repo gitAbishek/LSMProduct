@@ -299,7 +299,7 @@ function masteriyo_get_account_orders_actions( $order ) {
 			'name' => __( 'View', 'masteriyo' ),
 		),
 		'cancel' => array(
-			'url'  => $order->get_cancel_order_url( masteriyo_get_page_permalink( 'myaccount' ) ),
+			'url'  => $order->get_cancel_order_url( masteriyo_get_page_permalink( 'account' ) ),
 			'url'  => '#',
 			'name' => __( 'Cancel', 'masteriyo' ),
 		),

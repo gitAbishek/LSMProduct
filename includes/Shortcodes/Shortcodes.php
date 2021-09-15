@@ -45,9 +45,9 @@ class Shortcodes {
 		return apply_filters(
 			'masteriyo_shortcodes',
 			array(
-				'myaccount' => "{$namespace}\\MyAccountShortcode",
-				'checkout'  => "{$namespace}\\CheckoutShortcode",
-				'cart'      => "{$namespace}\\CartShortcode",
+				'account'  => "{$namespace}\\AccountShortcode",
+				'checkout' => "{$namespace}\\CheckoutShortcode",
+				'cart'     => "{$namespace}\\CartShortcode",
 			)
 		);
 	}

@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying myaccount.
+ * The template for displaying account.
  *
  * @version 0.1.0
  */
@@ -8,9 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_myaccount_content hook.
+ * masteriyo_before_account_content hook.
  */
-do_action( 'masteriyo_before_myaccount_content' );
+do_action( 'masteriyo_before_account_content' );
 
 masteriyo_display_all_notices();
 
@@ -25,13 +25,13 @@ masteriyo_display_all_notices();
 
 	<div id="vertical-menu" class="masteriyo-vertical-menu">
 		<?php
-		do_action( 'masteriyo_myaccount_sidebar_content' );
+		do_action( 'masteriyo_account_sidebar_content' );
 		?>
 	</div>
 
 	<main class="masteriyo-dashboard">
 		<?php
-		do_action( 'masteriyo_myaccount_main_content' );
+		do_action( 'masteriyo_account_main_content' );
 		?>
 	</main>
 </div>
@@ -39,6 +39,6 @@ masteriyo_display_all_notices();
 <?php
 
 /**
- * masteriyo_after_myaccount_content hook.
+ * masteriyo_after_account_content hook.
  */
-do_action( 'masteriyo_after_myaccount_content' );
+do_action( 'masteriyo_after_account_content' );

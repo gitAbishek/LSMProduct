@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use Masteriyo\Shortcodes\CartShortcode;
 use Masteriyo\Shortcodes\CheckoutShortcode;
-use Masteriyo\Shortcodes\MyAccountShortcode;
+use Masteriyo\Shortcodes\AccountShortcode;
 
 class ShortcodesServiceProvider extends AbstractServiceProvider {
 	/**
@@ -25,10 +25,10 @@ class ShortcodesServiceProvider extends AbstractServiceProvider {
 	 * @var array
 	 */
 	protected $provides = array(
-		'shortcode.myaccount',
+		'shortcode.account',
 		'shortcode.checkout',
 		'shortcode.cart',
-		'\Masteriyo\Shortcodes\MyAccountShortcode',
+		'\Masteriyo\Shortcodes\AccountShortcode',
 		'\Masteriyo\Shortcodes\CartShortcode',
 		'\Masteriyo\Shortcodes\CheckoutShortcode',
 	);
@@ -42,11 +42,11 @@ class ShortcodesServiceProvider extends AbstractServiceProvider {
 	 * @since 0.1.0
 	 */
 	public function register() {
-		$this->getContainer()->add( 'shortcode.myaccount', MyAccountShortcode::class );
+		$this->getContainer()->add( 'shortcode.account', AccountShortcode::class );
 		$this->getContainer()->add( 'shortcode.checkout', CheckoutShortcode::class );
 		$this->getContainer()->add( 'shortcode.cart', CartShortcode::class );
 
-		$this->getContainer()->add( '\Masteriyo\Shortcodes\MyAccountShortcode' );
+		$this->getContainer()->add( '\Masteriyo\Shortcodes\AccountShortcode' );
 		$this->getContainer()->add( '\Masteriyo\Shortcodes\CartShortcode' );
 		$this->getContainer()->add( '\Masteriyo\Shortcodes\CheckoutShortcode' );
 	}

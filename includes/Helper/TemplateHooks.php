@@ -41,10 +41,10 @@ add_action( 'masteriyo_after_single_course', 'masteriyo_single_course_modals' );
 /**
  * My account page.
  */
-add_action( 'masteriyo_myaccount_sidebar_content', 'masteriyo_myaccount_sidebar_content' );
-add_action( 'masteriyo_myaccount_main_content', 'masteriyo_myaccount_main_content' );
-add_action( 'masteriyo_account_edit-account_endpoint', 'masteriyo_account_edit_myaccount_endpoint' );
-add_action( 'masteriyo_account_view-myaccount_endpoint', 'masteriyo_account_view_myaccount_endpoint' );
+add_action( 'masteriyo_account_sidebar_content', 'masteriyo_account_sidebar_content' );
+add_action( 'masteriyo_account_main_content', 'masteriyo_account_main_content' );
+add_action( 'masteriyo_account_edit-account_endpoint', 'masteriyo_account_edit_account_endpoint' );
+add_action( 'masteriyo_account_view-account_endpoint', 'masteriyo_account_view_account_endpoint' );
 add_action( 'masteriyo_account_courses_endpoint', 'masteriyo_account_courses_endpoint' );
 add_action( 'masteriyo_account_order-history_endpoint', 'masteriyo_account_order_history_endpoint' );
 add_action( 'masteriyo_account_view-order_endpoint', 'masteriyo_account_view_order_endpoint' );

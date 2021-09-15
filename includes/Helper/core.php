@@ -1547,21 +1547,21 @@ function masteriyo_get_courses_url() {
  *
  * @return string Url to checkout page
  */
-function masteriyo_get_myaccount_url() {
-	return apply_filters( 'masteriyo_get_myaccount_url', masteriyo_get_page_permalink( 'myaccount' ) );
+function masteriyo_get_account_url() {
+	return apply_filters( 'masteriyo_get_account_url', masteriyo_get_page_permalink( 'account' ) );
 }
 
 /**
- * Get current endpoint in the myaccount page.
+ * Get current endpoint in the account page.
  *
  * @since 0.1.0
  *
  * @return string
  */
-function masteriyo_get_current_myaccount_endpoint() {
+function masteriyo_get_current_account_endpoint() {
 	global $wp;
 
-	$endpoints = array_flip( masteriyo_get_myaccount_endpoints() );
+	$endpoints = array_flip( masteriyo_get_account_endpoints() );
 
 	if ( ! empty( $wp->query_vars ) ) {
 		foreach ( $wp->query_vars as $key => $value ) {
@@ -1612,12 +1612,12 @@ function if_empty( $value, $default = null ) {
  *
  * @return array
  */
-function masteriyo_get_myaccount_endpoints() {
+function masteriyo_get_account_endpoints() {
 	return apply_filters(
-		'masteriyo_myaccount_endpoints',
+		'masteriyo_account_endpoints',
 		array(
 			'dashboard'      => 'dashboard',
-			'view-myaccount' => masteriyo_get_setting( 'advance.account.view_myaccount' ),
+			'view-account'   => masteriyo_get_setting( 'advance.account.view_account' ),
 			'edit-account'   => masteriyo_get_setting( 'advance.account.edit_account' ),
 			'courses'        => masteriyo_get_setting( 'advance.account.my_courses' ),
 			'order-history'  => masteriyo_get_setting( 'advance.account.order_history' ),
@@ -1640,14 +1640,14 @@ function masteriyo_get_myaccount_endpoints() {
  */
 function masteriyo_get_account_endpoint_url( $endpoint ) {
 	if ( 'dashboard' === $endpoint ) {
-		return masteriyo_get_page_permalink( 'myaccount' );
+		return masteriyo_get_page_permalink( 'account' );
 	}
 
 	if ( 'user-logout' === $endpoint ) {
 		return masteriyo_logout_url();
 	}
 
-	return masteriyo_get_endpoint_url( $endpoint, '', masteriyo_get_page_permalink( 'myaccount' ) );
+	return masteriyo_get_endpoint_url( $endpoint, '', masteriyo_get_page_permalink( 'account' ) );
 }
 
 
@@ -1706,7 +1706,7 @@ function masteriyo_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
  * @return string
  */
 function masteriyo_logout_url( $redirect = '' ) {
-	$redirect = $redirect ? $redirect : apply_filters( 'masteriyo_logout_default_redirect_url', masteriyo_get_page_permalink( 'myaccount' ) );
+	$redirect = $redirect ? $redirect : apply_filters( 'masteriyo_logout_default_redirect_url', masteriyo_get_page_permalink( 'account' ) );
 
 	if ( masteriyo_get_setting( 'logout', 'advance', 'account' ) ) {
 		return wp_nonce_url( masteriyo_get_endpoint_url( 'user-logout', '', $redirect ), 'user-logout' );
@@ -1781,29 +1781,29 @@ function masteriyo_get_svg( $name, $echo = false ) {
  * @return array
  */
 function masteriyo_get_account_menu_items() {
-	$endpoints = masteriyo_get_myaccount_endpoints();
+	$endpoints = masteriyo_get_account_endpoints();
 	$items     = array(
-		'dashboard'      => array(
+		'dashboard'     => array(
 			'label' => __( 'Dashboard', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'dashboard' ),
 		),
-		'courses'        => array(
+		'courses'       => array(
 			'label' => __( 'My Courses', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'courses' ),
 		),
-		'view-myaccount' => array(
+		'view-account'  => array(
 			'label' => __( 'Account Details', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'account-details' ),
 		),
-		'edit-account'   => array(
+		'edit-account'  => array(
 			'label' => __( 'Edit Account', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'edit-account' ),
 		),
-		'order-history'  => array(
+		'order-history' => array(
 			'label' => __( 'My Order History', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'order-history' ),
 		),
-		'user-logout'    => array(
+		'user-logout'   => array(
 			'label' => __( 'Logout', 'masteriyo' ),
 			'icon'  => masteriyo_get_svg( 'user-logout' ),
 		),
@@ -1820,17 +1820,17 @@ function masteriyo_get_account_menu_items() {
 }
 
 /**
- * Check if the current page is the myaccount page.
+ * Check if the current page is the account page.
  *
  * @since 0.1.0
  *
  * @return boolean
  */
-function masteriyo_is_myaccount_page() {
+function masteriyo_is_account_page() {
 	global $post;
 
 	if ( $post instanceof \WP_Post ) {
-		$page_id = masteriyo_get_page_id( 'myaccount' );
+		$page_id = masteriyo_get_page_id( 'account' );
 
 		return $post->ID === $page_id;
 	}
@@ -1845,7 +1845,7 @@ function masteriyo_is_myaccount_page() {
  * @return boolean
  */
 function masteriyo_is_lost_password_page() {
-	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['reset-password'] );
+	return masteriyo_is_account_page() && isset( $GLOBALS['wp']->query_vars['reset-password'] );
 }
 
 /**
@@ -1856,29 +1856,29 @@ function masteriyo_is_lost_password_page() {
  * @return boolean
  */
 function masteriyo_is_signup_page() {
-	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['signup'] );
+	return masteriyo_is_account_page() && isset( $GLOBALS['wp']->query_vars['signup'] );
 }
 
 /**
- * Check if the current page is view myaccount page.
+ * Check if the current page is view account page.
  *
  * @since 0.1.0
  *
  * @return boolean
  */
-function masteriyo_is_view_myaccount_page() {
-	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['view-myaccount'] );
+function masteriyo_is_view_account_page() {
+	return masteriyo_is_account_page() && isset( $GLOBALS['wp']->query_vars['view-account'] );
 }
 
 /**
- * Check if the current page is edit myaccount page.
+ * Check if the current page is edit account page.
  *
  * @since 0.1.0
  *
  * @return boolean
  */
-function masteriyo_is_edit_myaccount_page() {
-	return masteriyo_is_myaccount_page() && isset( $GLOBALS['wp']->query_vars['edit-account'] );
+function masteriyo_is_edit_account_page() {
+	return masteriyo_is_account_page() && isset( $GLOBALS['wp']->query_vars['edit-account'] );
 }
 
 /**
@@ -2282,8 +2282,8 @@ function masteriyo_add_post_state( $post_states, $post ) {
 		$post_states['masteriyo_courses_page'] = __( 'Masteriyo Courses Page', 'masteriyo' );
 	}
 
-	if ( masteriyo_get_page_id( 'myaccount' ) === $post->ID ) {
-		$post_states['masteriyo_myaccount_page'] = __( 'Masteriyo My Account Page', 'masteriyo' );
+	if ( masteriyo_get_page_id( 'account' ) === $post->ID ) {
+		$post_states['masteriyo_account_page'] = __( 'Masteriyo My Account Page', 'masteriyo' );
 	}
 
 	if ( masteriyo_get_page_id( 'checkout' ) === $post->ID ) {

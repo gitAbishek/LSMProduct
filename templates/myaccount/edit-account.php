@@ -8,27 +8,27 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_edit_myaccount_tab_content hook.
+ * masteriyo_before_edit_account_tab_content hook.
  */
-do_action( 'masteriyo_before_edit_myaccount_tab_content' );
+do_action( 'masteriyo_before_edit_account_tab_content' );
 
 ?>
 
-<div class="masteriyo-edt-myaccount masteriyo-tabs">
+<div class="masteriyo-edt-account masteriyo-tabs">
 
-	<div class="masteriyo-edt-myaccount--tab-menu masteriyo-flex">
+	<div class="masteriyo-edt-account--tab-menu masteriyo-flex">
 		<div data-tab="edit-profile-tab" class="masteriyo-tab masteriyo-active-tab"><?php echo esc_html__( 'Edit Profile', 'masteriyo' ); ?></div>
 		<div data-tab="password-security-tab" class="masteriyo-tab"><?php echo esc_html__( 'Password & Security', 'masteriyo' ); ?></div>
 	</div>
 
-	<div id="edit-profile-tab" class="masteriyo-edt-myaccount--content masteriyo-tab-content">
+	<div id="edit-profile-tab" class="masteriyo-edt-account--content masteriyo-tab-content">
 		<div class="masteriyo-edt-profile masteriyo-flex masteriyo-flex-xcenter">
 			<div class="masteriyo-edt-profile--wrap">
-				<img src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" class="masteriyo-edt-myaccount--img" alt="">
+				<img src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" class="masteriyo-edt-account--img" alt="">
 			</div>
 		</div>
 
-		<form id="masteriyo-edit-profile-form" class="masteriyo-edt-myaccount--form">
+		<form id="masteriyo-edit-profile-form" class="masteriyo-edt-account--form">
 				<div class="masteriyo-username">
 					<label for="user-email" class="masteriyo-label"><?php echo esc_html__( 'Username', 'masteriyo' ); ?></label>
 					<input value="<?php echo esc_attr( $user->get_display_name() ); ?>" id="username" name="text" type="text" required class="masteriyo-input" placeholder="">
@@ -83,7 +83,7 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 				</div>
 
 				<div class="masteriyo-submit-btn">
-					<button id="masteriyo-btn-submit-edit-profile-form" type="submit" class="masteriyo-edt-myaccount--btn masteriyo-btn masteriyo-btn-primary">
+					<button id="masteriyo-btn-submit-edit-profile-form" type="submit" class="masteriyo-edt-account--btn masteriyo-btn masteriyo-btn-primary">
 						<?php echo esc_html__( 'Save', 'masteriyo' ); ?>
 					</button>
 				</div>
@@ -121,6 +121,6 @@ do_action( 'masteriyo_before_edit_myaccount_tab_content' );
 <?php
 
 /**
- * masteriyo_after_edit_myaccount_tab_content hook.
+ * masteriyo_after_edit_account_tab_content hook.
  */
-do_action( 'masteriyo_after_edit_myaccount_tab_content' );
+do_action( 'masteriyo_after_edit_account_tab_content' );

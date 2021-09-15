@@ -46,11 +46,11 @@ class Activation {
 					'content'      => '',
 					'setting_name' => 'courses_page_id',
 				),
-				'myaccount'        => array(
+				'account'          => array(
 					'name'         => _x( 'my-account', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'My Account', 'Page title', 'masteriyo' ),
-					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_myaccount_shortcode_tag', 'masteriyo_myaccount' ) . ']<!-- /wp:shortcode -->',
-					'setting_name' => 'myaccount_page_id',
+					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_account_shortcode_tag', 'masteriyo_account' ) . ']<!-- /wp:shortcode -->',
+					'setting_name' => 'account_page_id',
 				),
 				'checkout'         => array(
 					'name'         => _x( 'checkout', 'Page slug', 'masteriyo' ),

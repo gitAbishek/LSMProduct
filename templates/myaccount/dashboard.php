@@ -16,8 +16,8 @@ defined( 'ABSPATH' ) || exit;
 	<p class="masteriyo-welcome-msg"><?php esc_html_e( 'Welcome to your dashboard here you can view your overview and your stats', 'masteriyo' ); ?></p>
 
 	<a
-		class="masteriyo-view-myaccount masteriyo-btn masteriyo-btn-default"
-		href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'view-myaccount' ) ); ?>"
+		class="masteriyo-view-account masteriyo-btn masteriyo-btn-default"
+		href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'view-account' ) ); ?>"
 	>
 		<span class="masteriyo-text-pColor"><?php esc_html_e( 'View Profile', 'masteriyo' ); ?></span>
 		<span class="masteriyo-icon-svg">

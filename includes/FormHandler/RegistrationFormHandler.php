@@ -177,8 +177,8 @@ class RegistrationFormHandler {
 		if ( apply_filters( 'masteriyo_registration_auth_new_user', masteriyo_registration_is_auth_new_user(), $user ) ) {
 			masteriyo_set_customer_auth_cookie( $user->get_id() );
 
-			$redirection_url = apply_filters( 'masteriyo_registration_redirect_url', masteriyo_get_page_permalink( 'myaccount' ) );
-			$redirection_url = wp_validate_redirect( $redirection_url, masteriyo_get_page_permalink( 'myaccount' ) );
+			$redirection_url = apply_filters( 'masteriyo_registration_redirect_url', masteriyo_get_page_permalink( 'account' ) );
+			$redirection_url = wp_validate_redirect( $redirection_url, masteriyo_get_page_permalink( 'account' ) );
 
 			wp_redirect( $redirection_url ); //phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
 			exit;

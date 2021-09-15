@@ -29,7 +29,7 @@ do_action( 'masteriyo_before_password_reset_request_form' );
 					</button>
 
 					<div class="masteriyo-reset-signin">
-						<a href="<?php echo esc_url( masteriyo_get_page_permalink( 'myaccount' ) ); ?>" class="masteriyo-link-primary">
+						<a href="<?php echo esc_url( masteriyo_get_page_permalink( 'account' ) ); ?>" class="masteriyo-link-primary">
 							<?php echo esc_html__( 'Go back to sign-in', 'masteriyo' ); ?>
 						</a>
 					</div>

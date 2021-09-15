@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for sidebar in myaccount.
+ * The template for sidebar in account.
  *
  * @version 0.1.0
  */
@@ -8,9 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_myaccount_page_sidebar_content hook.
+ * masteriyo_before_account_page_sidebar_content hook.
  */
-do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
+do_action( 'masteriyo_before_account_page_sidebar_content' );
 
 ?>
 
@@ -21,7 +21,7 @@ do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 			<div class="masteriyo-profile--name">
 				<a
 					id="label-username"
-					href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'view-myaccount' ) ); ?>"
+					href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'view-account' ) ); ?>"
 				>
 					<?php echo esc_attr( $user->get_display_name() ); ?>
 				</a>
@@ -48,6 +48,6 @@ do_action( 'masteriyo_before_myaccount_page_sidebar_content' );
 <?php
 
 /**
- * masteriyo_after_myaccount_page_sidebar_content hook.
+ * masteriyo_after_account_page_sidebar_content hook.
  */
-do_action( 'masteriyo_after_myaccount_page_sidebar_content' );
+do_action( 'masteriyo_after_account_page_sidebar_content' );

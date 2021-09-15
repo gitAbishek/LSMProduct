@@ -43,7 +43,7 @@ if ( ! $order ) {
 				<?php esc_html_e( 'Pay', 'masteriyo' ); ?>
 			</a>
 			<?php if ( is_user_logged_in() ) : ?>
-				<a href="<?php echo esc_url( masteriyo_get_page_permalink( 'myaccount' ) ); ?>" class="button pay">
+				<a href="<?php echo esc_url( masteriyo_get_page_permalink( 'account' ) ); ?>" class="button pay">
 					<?php esc_html_e( 'My account', 'masteriyo' ); ?>
 				</a>
 			<?php endif; ?>

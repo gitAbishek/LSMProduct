@@ -68,7 +68,7 @@ class PasswordResetFormHandler {
 
 			do_action( 'masteriyo_user_password_reset', $user, $data );
 
-			wp_safe_redirect( add_query_arg( 'password-reset-complete', 'true', masteriyo_get_page_permalink( 'myaccount' ) ) );
+			wp_safe_redirect( add_query_arg( 'password-reset-complete', 'true', masteriyo_get_page_permalink( 'account' ) ) );
 			exit;
 		} catch ( \Exception $e ) {
 			if ( $e->getMessage() ) {

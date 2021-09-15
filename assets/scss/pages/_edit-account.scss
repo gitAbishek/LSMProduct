@@ -1,4 +1,4 @@
-.masteriyo-edt-myaccount {
+.masteriyo-edt-account {
 	&--tab-menu {
 		border-bottom: 1px solid var(--masteriyo-color-border);
 		padding: $spacing_20px 0;
@@ -34,7 +34,7 @@
 		z-index: 9;
 	}
 
-	.masteriyo-edt-myaccount--img {
+	.masteriyo-edt-account--img {
 		border-radius: $border_radius_100;
 		@include masteriyo-shadow-1;
 	}
@@ -56,7 +56,7 @@
 	}
 }
 .masteriyo-pwd-security--btn,
-.masteriyo-edt-myaccount--btn {
+.masteriyo-edt-account--btn {
 	border-radius: $border_radius_50;
 }
 

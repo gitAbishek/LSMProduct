@@ -18,7 +18,7 @@ if ( ! is_user_logged_in() ) {
 			// translators: %s: My account page link
 			__( 'You must be %1$slogged in%2$s to checkout.', 'masteriyo' )
 		),
-		'<a href="' . esc_url( masteriyo_get_myaccount_url() ) . '">',
+		'<a href="' . esc_url( masteriyo_get_account_url() ) . '">',
 		'</a>'
 	);
 

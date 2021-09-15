@@ -31,7 +31,7 @@ if ( ! function_exists( 'masteriyo_is_load_login_form_assets' ) ) {
 	 * @return boolean
 	 */
 	function masteriyo_is_load_login_form_assets() {
-		return ! is_user_logged_in() && masteriyo_is_myaccount_page();
+		return ! is_user_logged_in() && masteriyo_is_account_page();
 	}
 }
 
@@ -447,7 +447,7 @@ if ( ! function_exists( 'masteriyo_is_add_payment_method_page' ) ) {
 	function masteriyo_is_add_payment_method_page() {
 		global $wp;
 
-		$page_id = masteriyo_get_page_id( 'myaccount' );
+		$page_id = masteriyo_get_page_id( 'account' );
 
 		return ( $page_id && is_page( $page_id ) && ( isset( $wp->query_vars['payment-methods'] ) || isset( $wp->query_vars['add-payment-method'] ) ) );
 	}

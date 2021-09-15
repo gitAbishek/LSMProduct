@@ -1,6 +1,6 @@
 <?php
 /**
- * View myaccount template.
+ * View account template.
  *
  * @version 0.1.0
  */
@@ -8,24 +8,24 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_view_myaccount_content hook.
+ * masteriyo_before_view_account_content hook.
  */
-do_action( 'masteriyo_before_view_myaccount_content' );
+do_action( 'masteriyo_before_view_account_content' );
 
 ?>
 
-<div class="masteriyo-myaccount masteriyo-flex">
-	<div class="masteriyo-myaccount--imgwrap">
-		<img class="masteriyo-myaccount-img" src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" alt="" />
+<div class="masteriyo-account masteriyo-flex">
+	<div class="masteriyo-account--imgwrap">
+		<img class="masteriyo-account-img" src="<?php echo esc_attr( $user->get_avatar_url() ); ?>" alt="" />
 	</div>
 
-	<div class="masteriyo-myaccount--detail">
-		<div class="masteriyo-myaccount masteriyo-myaccount--header">
-			<h2 class="masteriyo-myaccount--name"><?php echo esc_html( $user->get_display_name() ); ?></h2>
+	<div class="masteriyo-account--detail">
+		<div class="masteriyo-account masteriyo-account--header">
+			<h2 class="masteriyo-account--name"><?php echo esc_html( $user->get_display_name() ); ?></h2>
 		</div>
 	</div>
 
-	<div class="masteriyo-myaccount--body masteriyo-flex">
+	<div class="masteriyo-account--body masteriyo-flex">
 		<ul class="masteriyo-title account-col-1">
 			<li><strong><?php echo esc_html__( 'Email', 'masteriyo' ); ?></strong></li>
 			<li><strong><?php echo esc_html__( 'First Name', 'masteriyo' ); ?></strong></li>
@@ -53,6 +53,6 @@ do_action( 'masteriyo_before_view_myaccount_content' );
 <?php
 
 /**
- * masteriyo_after_view_myaccount_content hook.
+ * masteriyo_after_view_account_content hook.
  */
-do_action( 'masteriyo_after_view_myaccount_content' );
+do_action( 'masteriyo_after_view_account_content' );

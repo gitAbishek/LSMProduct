@@ -1261,7 +1261,7 @@ class Order extends AbstractOrder {
 	 * @return string
 	 */
 	public function get_view_order_url() {
-		$url = masteriyo_get_endpoint_url( 'view-order', $this->get_id(), masteriyo_get_page_permalink( 'myaccount' ) );
+		$url = masteriyo_get_endpoint_url( 'view-order', $this->get_id(), masteriyo_get_page_permalink( 'account' ) );
 		return apply_filters( 'masteriyo_get_view_order_url', $url, $this );
 	}
 

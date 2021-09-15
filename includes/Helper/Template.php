@@ -338,26 +338,26 @@ if ( ! function_exists( 'masteriyo_template_enroll_button' ) ) {
 	}
 }
 
-if ( ! function_exists( 'masteriyo_myaccount_sidebar_content' ) ) {
+if ( ! function_exists( 'masteriyo_account_sidebar_content' ) ) {
 	/**
-	 * Show sidebar on myaccount page.
+	 * Show sidebar on account page.
 	 *
 	 * @since 0.1.0
 	 */
-	function masteriyo_myaccount_sidebar_content() {
+	function masteriyo_account_sidebar_content() {
 		$data = array(
 			'menu_items'       => masteriyo_get_account_menu_items(),
 			'user'             => masteriyo_get_current_user(),
-			'current_endpoint' => masteriyo_get_current_myaccount_endpoint(),
+			'current_endpoint' => masteriyo_get_current_account_endpoint(),
 		);
 
-		masteriyo_get_template( 'myaccount/sidebar-content.php', $data );
+		masteriyo_get_template( 'account/sidebar-content.php', $data );
 	}
 }
 
 if ( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 	/**
-	 * Show courses on myaccount page.
+	 * Show courses on account page.
 	 *
 	 * @since 0.1.0
 	 */
@@ -388,7 +388,7 @@ if ( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 		$active_courses = masteriyo_get_active_courses( get_current_user_id() );
 
 		masteriyo_get_template(
-			'myaccount/courses.php',
+			'account/courses.php',
 			array(
 				'active_courses' => $active_courses,
 				'all_courses'    => $all_courses,
@@ -397,39 +397,39 @@ if ( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 	}
 }
 
-if ( ! function_exists( 'masteriyo_account_edit_myaccount_endpoint' ) ) {
+if ( ! function_exists( 'masteriyo_account_edit_account_endpoint' ) ) {
 	/**
-	 * Edit myaccount on myaccount page.
+	 * Edit account on account page.
 	 *
 	 * @since 0.1.0
 	 */
-	function masteriyo_account_edit_myaccount_endpoint() {
+	function masteriyo_account_edit_account_endpoint() {
 		$data = array(
 			'user' => masteriyo_get_current_user(),
 		);
 
-		masteriyo_get_template( 'myaccount/edit-account.php', $data );
+		masteriyo_get_template( 'account/edit-account.php', $data );
 	}
 }
 
-if ( ! function_exists( 'masteriyo_account_view_myaccount_endpoint' ) ) {
+if ( ! function_exists( 'masteriyo_account_view_account_endpoint' ) ) {
 	/**
-	 * View profile on myaccount page.
+	 * View profile on account page.
 	 *
 	 * @since 0.1.0
 	 */
-	function masteriyo_account_view_myaccount_endpoint() {
+	function masteriyo_account_view_account_endpoint() {
 		$data = array(
 			'user' => masteriyo_get_current_user(),
 		);
 
-		masteriyo_get_template( 'myaccount/view-myaccount.php', $data );
+		masteriyo_get_template( 'account/view-account.php', $data );
 	}
 }
 
 if ( ! function_exists( 'masteriyo_account_order_history_endpoint' ) ) {
 	/**
-	 * Show order history on myaccount page.
+	 * Show order history on account page.
 	 *
 	 * @since 0.1.0
 	 */
@@ -441,7 +441,7 @@ if ( ! function_exists( 'masteriyo_account_order_history_endpoint' ) ) {
 		);
 
 		masteriyo_get_template(
-			'myaccount/order-history.php',
+			'account/order-history.php',
 			array(
 				'orders' => $orders,
 			)
@@ -451,7 +451,7 @@ if ( ! function_exists( 'masteriyo_account_order_history_endpoint' ) ) {
 
 if ( ! function_exists( 'masteriyo_account_view_order_endpoint' ) ) {
 	/**
-	 * Show order detail on myaccount page.
+	 * Show order detail on account page.
 	 *
 	 * @since 0.1.0
 	 */
@@ -470,7 +470,7 @@ if ( ! function_exists( 'masteriyo_account_view_order_endpoint' ) ) {
 		$show_customer_details = masteriyo_is_current_user_admin() || ( is_user_logged_in() && $order->get_user_id() === get_current_user_id() );
 
 		masteriyo_get_template(
-			'myaccount/view-order.php',
+			'account/view-order.php',
 			array(
 				'order'                 => $order,
 				'notes'                 => $notes,
@@ -482,14 +482,14 @@ if ( ! function_exists( 'masteriyo_account_view_order_endpoint' ) ) {
 	}
 }
 
-if ( ! function_exists( 'masteriyo_myaccount_main_content' ) ) {
+if ( ! function_exists( 'masteriyo_account_main_content' ) ) {
 	/**
-	 * Handle myaccount page's main content.
+	 * Handle account page's main content.
 	 *
 	 * @since 0.1.0
 	 */
-	function masteriyo_myaccount_main_content() {
-		$endpoint         = masteriyo_get_current_myaccount_endpoint();
+	function masteriyo_account_main_content() {
+		$endpoint         = masteriyo_get_current_account_endpoint();
 		$current_endpoint = $endpoint['endpoint'];
 
 		if ( has_action( 'masteriyo_account_' . $current_endpoint . '_endpoint' ) ) {
@@ -501,7 +501,7 @@ if ( ! function_exists( 'masteriyo_myaccount_main_content' ) ) {
 		$endpoint['active_courses'] = masteriyo_get_active_courses( get_current_user_id() );
 
 		// No endpoint found? Default to dashboard.
-		masteriyo_get_template( 'myaccount/dashboard.php', $endpoint );
+		masteriyo_get_template( 'account/dashboard.php', $endpoint );
 	}
 }
 

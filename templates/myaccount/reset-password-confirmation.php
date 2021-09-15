@@ -2,7 +2,7 @@
 /**
  * Password reset request confirmation.
  *
- * This template can be overridden by copying it to yourtheme/masteriyo/myaccount/lost-password-confirmation.php.
+ * This template can be overridden by copying it to yourtheme/masteriyo/account/lost-password-confirmation.php.
  *
  * HOWEVER, on occasion Masteriyo will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to

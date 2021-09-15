@@ -60,7 +60,7 @@ do_action( 'masteriyo_before_single_course_review_form' );
 			wp_kses_post(
 				sprintf(
 					'<a href="%s" class="masteriyo-link-primary">%s</a>',
-					masteriyo_get_page_permalink( 'myaccount' ),
+					masteriyo_get_page_permalink( 'account' ),
 					__( 'logged in', 'masteriyo' )
 				)
 			)

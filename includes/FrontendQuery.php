@@ -111,10 +111,10 @@ class FrontendQuery {
 	public function get_endpoints_mask() {
 		if ( 'page' === get_option( 'show_on_front' ) ) {
 			$page_on_front     = get_option( 'page_on_front' );
-			$myaccount_page_id = masteriyo_get_setting( 'advance.pages.myaccount_page_id' );
+			$account_page_id = masteriyo_get_setting( 'advance.pages.account_page_id' );
 			$checkout_page_id  = masteriyo_get_setting( 'advance.pages.checkout_page_id' );
 
-			if ( in_array( $page_on_front, array( $myaccount_page_id, $checkout_page_id, 7 ), true ) ) {
+			if ( in_array( $page_on_front, array( $account_page_id, $checkout_page_id, 7 ), true ) ) {
 				return EP_ROOT | EP_PAGES;
 			}
 		}
@@ -192,7 +192,7 @@ class FrontendQuery {
 				'edit-address'    => masteriyo_get_setting( 'advance.account.edit_address' ),
 				'payment-methods' => masteriyo_get_setting( 'advance.account.payment_methods' ),
 			),
-			masteriyo_get_myaccount_endpoints()
+			masteriyo_get_account_endpoints()
 		);
 	}
 

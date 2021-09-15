@@ -2,7 +2,7 @@
 /**
  * Password reset form.
  *
- * This template can be overridden by copying it to yourtheme/masteriyo/myaccount/form-reset-password.php.
+ * This template can be overridden by copying it to yourtheme/masteriyo/account/form-reset-password.php.
  *
  * HOWEVER, on occasion Masteriyo will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -10,7 +10,7 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @package Masteriyo\Templates\MyAccount
+ * @package Masteriyo\Templates\Account
  * @version 0.1.0
  */
 
@@ -42,7 +42,7 @@ do_action( 'masteriyo_before_password_reset_form' );
 					</button>
 
 					<div class="masteriyo-reset-signin">
-						<a href="<?php echo esc_url( masteriyo_get_page_permalink( 'myaccount' ) ); ?>" class="masteriyo-link-primary">
+						<a href="<?php echo esc_url( masteriyo_get_page_permalink( 'account' ) ); ?>" class="masteriyo-link-primary">
 							<?php echo esc_html__( 'Go back to sign-in', 'masteriyo' ); ?>
 						</a>
 					</div>

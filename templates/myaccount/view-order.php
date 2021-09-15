@@ -4,7 +4,7 @@
  *
  * Shows the details of a particular order on the account page.
  *
- * This template can be overridden by copying it to yourtheme/masteriyo/myaccount/view-order.php.
+ * This template can be overridden by copying it to yourtheme/masteriyo/account/view-order.php.
  *
  * HOWEVER, on occasion masteriyo will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to

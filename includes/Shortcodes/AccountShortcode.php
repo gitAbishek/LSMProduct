@@ -1,9 +1,9 @@
 <?php
 /**
- * Myaccount shortcode.
+ * Account shortcode.
  *
  * @since 0.1.0
- * @class MyAccountShortcode
+ * @class AccountShortcode
  * @package Masteriyo\Shortcodes
  */
 
@@ -14,9 +14,9 @@ use Masteriyo\Abstracts\Shortcode;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Myaccount shortcode.
+ * Account shortcode.
  */
-class MyAccountShortcode extends Shortcode {
+class AccountShortcode extends Shortcode {
 
 	/**
 	 * Shortcode tag.
@@ -25,7 +25,7 @@ class MyAccountShortcode extends Shortcode {
 	 *
 	 * @var string
 	 */
-	protected $tag = 'masteriyo_myaccount';
+	protected $tag = 'masteriyo_account';
 
 	/**
 	 * Shortcode attributes with default values.
@@ -67,16 +67,16 @@ class MyAccountShortcode extends Shortcode {
 	 */
 	protected function get_template_path() {
 		if ( masteriyo_is_signup_page() ) {
-			return masteriyo( 'template' )->locate( 'myaccount/form-signup.php' );
+			return masteriyo( 'template' )->locate( 'account/form-signup.php' );
 		}
 		if ( masteriyo_is_lost_password_page() ) {
 			return $this->get_lost_password_page_template();
 		}
 		if ( is_user_logged_in() ) {
-			return masteriyo( 'template' )->locate( 'myaccount.php' );
+			return masteriyo( 'template' )->locate( 'account.php' );
 		}
 
-		return masteriyo( 'template' )->locate( 'myaccount/form-login.php' );
+		return masteriyo( 'template' )->locate( 'account/form-login.php' );
 	}
 
 	/**
@@ -90,7 +90,7 @@ class MyAccountShortcode extends Shortcode {
 		if ( ! empty( $_GET['reset-link-sent'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			masteriyo_add_notice( esc_html__( 'Password reset email has been sent.', 'masteriyo' ) );
 
-			return masteriyo( 'template' )->locate( 'myaccount/reset-password-confirmation.php' );
+			return masteriyo( 'template' )->locate( 'account/reset-password-confirmation.php' );
 		}
 		if ( ! empty( $_GET['show-reset-form'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			if ( isset( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) && 0 < strpos( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ], ':' ) ) {  // @codingStandardsIgnoreLine
@@ -107,11 +107,11 @@ class MyAccountShortcode extends Shortcode {
 							'login' => $rp_login,
 						)
 					);
-					return masteriyo( 'template' )->locate( 'myaccount/form-reset-password.php' );
+					return masteriyo( 'template' )->locate( 'account/form-reset-password.php' );
 				}
 			}
 		}
 
-		return masteriyo( 'template' )->locate( 'myaccount/form-reset-password-request.php' );
+		return masteriyo( 'template' )->locate( 'account/form-reset-password-request.php' );
 	}
 }

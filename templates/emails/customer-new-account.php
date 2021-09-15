@@ -32,7 +32,7 @@ do_action( 'masteriyo_email_header', $email_heading, $email ); ?>
 <p class="email-template--info">
 	<?php
 		/* translators: %1$s: Site title, %2$s: Username, %3$s: My account link */
-		printf( esc_html__( 'Thanks for creating an account on %1$s. You can access your account area and view your courses, account details, and more from %2$s', 'masteriyo' ), make_clickable( esc_url( get_home_url() ) ), make_clickable( esc_url( masteriyo_get_page_permalink( 'myaccount' ) ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		printf( esc_html__( 'Thanks for creating an account on %1$s. You can access your account area and view your courses, account details, and more from %2$s', 'masteriyo' ), make_clickable( esc_url( get_home_url() ) ), make_clickable( esc_url( masteriyo_get_page_permalink( 'account' ) ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	?>
 </p>
 

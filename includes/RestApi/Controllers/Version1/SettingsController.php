@@ -775,7 +775,7 @@ class SettingsController extends CrudController {
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
 								'type'                     => 'object',
-								'myaccount_page_id'        => array(
+								'account_page_id'        => array(
 									'description' => __( 'My Account page ID.', 'masteriyo' ),
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),

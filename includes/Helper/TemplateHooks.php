@@ -39,7 +39,7 @@ add_action( 'masteriyo_single_course_review_form', 'masteriyo_single_course_revi
 add_action( 'masteriyo_after_single_course', 'masteriyo_single_course_modals' );
 
 /**
- * My account page.
+ * Account page.
  */
 add_action( 'masteriyo_account_sidebar_content', 'masteriyo_account_sidebar_content' );
 add_action( 'masteriyo_account_main_content', 'masteriyo_account_main_content' );

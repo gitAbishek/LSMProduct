@@ -159,7 +159,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 
 								<FormControl>
 									<FormLabel minW="2xs">
-										{__('My Account Page', 'masteriyo')}
+										{__('Account Page', 'masteriyo')}
 										<Tooltip
 											label={__(
 												'Page contents: [masteriyo_my_account]',
@@ -435,7 +435,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Orders', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "My account - Orders" page',
+											'Endpoint for the "Account - Orders" page',
 											'masteriyo'
 										)}
 										hasArrow
@@ -457,7 +457,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('View Order', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "My account - View order" page',
+											'Endpoint for the "Account - View order" page',
 											'masteriyo'
 										)}
 										hasArrow
@@ -479,7 +479,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('My Courses', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "My account - My courses" page',
+											'Endpoint for the "Account - My courses" page',
 											'masteriyo'
 										)}
 										hasArrow
@@ -501,7 +501,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Edit Account', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "My account - Edit Account" page',
+											'Endpoint for the "Account - Edit Account" page',
 											'masteriyo'
 										)}
 										hasArrow
@@ -523,7 +523,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Payment Methods', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "My account - Payment methods" page',
+											'Endpoint for the "Account - Payment methods" page',
 											'masteriyo'
 										)}
 										hasArrow
@@ -545,7 +545,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Lost Password', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "My account - Lost password" page',
+											'Endpoint for the "Account - Lost password" page',
 											'masteriyo'
 										)}
 										hasArrow

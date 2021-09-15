@@ -47,8 +47,8 @@ class Activation {
 					'setting_name' => 'courses_page_id',
 				),
 				'account'          => array(
-					'name'         => _x( 'my-account', 'Page slug', 'masteriyo' ),
-					'title'        => _x( 'My Account', 'Page title', 'masteriyo' ),
+					'name'         => _x( 'account', 'Page slug', 'masteriyo' ),
+					'title'        => _x( 'Account', 'Page title', 'masteriyo' ),
 					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_account_shortcode_tag', 'masteriyo_account' ) . ']<!-- /wp:shortcode -->',
 					'setting_name' => 'account_page_id',
 				),

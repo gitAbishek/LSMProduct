@@ -188,7 +188,7 @@ class FrontendQuery {
 				'order-pay'       => masteriyo_get_setting( 'advance.checkout.pay' ),
 				'order-received'  => masteriyo_get_setting( 'advance.checkout.order_received' ),
 
-				// My account actions.
+				// Account actions.
 				'edit-address'    => masteriyo_get_setting( 'advance.account.edit_address' ),
 				'payment-methods' => masteriyo_get_setting( 'advance.account.payment_methods' ),
 			),

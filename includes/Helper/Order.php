@@ -253,7 +253,7 @@ function masteriyo_get_order_id_by_order_key( $order_key ) {
 }
 
 /**
- * Get My Account > Orders columns.
+ * Get Account > Orders columns.
  *
  * @since 0.1.0
  *

@@ -103,7 +103,7 @@ const Pages: React.FC<Props> = (props) => {
 							<FormControl>
 								<Flex justify="space-between" align="center">
 									<FormLabel sx={{ fontWeight: 'bold' }}>
-										<Text fontSize="sm">{__('My Account', 'masteriyo')}</Text>
+										<Text fontSize="sm">{__('Account', 'masteriyo')}</Text>
 									</FormLabel>
 									<Select
 										defaultValue={

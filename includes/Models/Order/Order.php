@@ -1254,7 +1254,7 @@ class Order extends AbstractOrder {
 	}
 
 	/**
-	 * Generates a URL to view an order from the my account page.
+	 * Generates a URL to view an order from the account page.
 	 *
 	 * @since 0.1.0
 	 *

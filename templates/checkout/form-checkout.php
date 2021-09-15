@@ -15,7 +15,7 @@ if ( ! is_user_logged_in() ) {
 	$message = sprintf(
 		apply_filters(
 			'masteriyo_checkout_must_be_logged_in_message',
-			// translators: %s: My account page link
+			// translators: %s: account page link
 			__( 'You must be %1$slogged in%2$s to checkout.', 'masteriyo' )
 		),
 		'<a href="' . esc_url( masteriyo_get_account_url() ) . '">',

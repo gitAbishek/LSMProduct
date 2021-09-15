@@ -1541,7 +1541,7 @@ function masteriyo_get_courses_url() {
 }
 
 /**
- * Gets the url to the my account page.
+ * Gets the url to the account page.
  *
  * @since  0.1.0
  *
@@ -1606,7 +1606,7 @@ function if_empty( $value, $default = null ) {
 }
 
 /**
- * Get my account endpoints' slugs.
+ * Get account endpoints' slugs.
  *
  * @since 0.1.0
  *
@@ -1774,7 +1774,7 @@ function masteriyo_get_svg( $name, $echo = false ) {
 }
 
 /**
- * Get My Account menu items.
+ * Get Account menu items.
  *
  * @since 0.1.0
  *
@@ -2283,7 +2283,7 @@ function masteriyo_add_post_state( $post_states, $post ) {
 	}
 
 	if ( masteriyo_get_page_id( 'account' ) === $post->ID ) {
-		$post_states['masteriyo_account_page'] = __( 'Masteriyo My Account Page', 'masteriyo' );
+		$post_states['masteriyo_account_page'] = __( 'Masteriyo Account Page', 'masteriyo' );
 	}
 
 	if ( masteriyo_get_page_id( 'checkout' ) === $post->ID ) {

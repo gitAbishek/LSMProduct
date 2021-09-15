@@ -45,6 +45,10 @@ const theme = extendTheme({
 					},
 				},
 				'.ProseMirror': {
+					'*': {
+						whiteSpace: 'pre-wrap',
+						wordWrap: 'break-word',
+					},
 					'h1, h2, h3, h4, h5, h6': {
 						lineHeight: '1.1',
 						fontWeight: '700',

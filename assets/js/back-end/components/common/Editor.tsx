@@ -32,6 +32,9 @@ const Editor: React.FC<Props> = (props) => {
 			}),
 		],
 		content: defaultValue,
+		parseOptions: {
+			preserveWhitespace: 'full',
+		},
 	});
 
 	const editorHeight = size === 'sm' ? 50 : size === 'md' ? 100 : 200;

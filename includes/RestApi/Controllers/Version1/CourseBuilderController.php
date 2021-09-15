@@ -388,6 +388,10 @@ class CourseBuilderController extends PostsController {
 			'parent_id'   => $course_item->get_parent_id( $context ),
 		);
 
+		if ( 'mto-lesson' === $course_item->get_post_type() ) {
+			$data['video'] = ! empty( $course_item->get_video_source_url() );
+		}
+
 		return $data;
 	}
 

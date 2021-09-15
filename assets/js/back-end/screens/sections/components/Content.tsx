@@ -11,7 +11,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { BiAlignLeft, BiEdit, BiTimer, BiTrash } from 'react-icons/bi';
+import { BiAlignLeft, BiEdit, BiPlay, BiTimer, BiTrash } from 'react-icons/bi';
 import { useHistory } from 'react-router';
 import { Sortable } from '../../../assets/icons';
 import routes from '../../../constants/routes';
@@ -19,14 +19,30 @@ import routes from '../../../constants/routes';
 interface Props {
 	id: number;
 	name: string;
-	type: 'lesson' | 'quiz' | string;
+	type: 'lesson' | 'quiz';
 	index: any;
 	courseId: number;
 	onContentDeletePress: any;
+	hasVideo: boolean;
 }
 
 const Content: React.FC<Props> = (props) => {
-	const { id, name, type, index, courseId, onContentDeletePress } = props;
+	const { id, name, type, index, courseId, onContentDeletePress, hasVideo } =
+		props;
+
+	const getContentIcon = (itemType: 'quiz' | 'lesson', video: boolean) => {
+		if (itemType === 'quiz') {
+			return BiTimer;
+		}
+
+		if (itemType === 'lesson') {
+			if (video) {
+				return BiPlay;
+			} else {
+				return BiAlignLeft;
+			}
+		}
+	};
 
 	const history = useHistory();
 
@@ -71,7 +87,7 @@ const Content: React.FC<Props> = (props) => {
 						</Box>
 						<Icon
 							color="blue.400"
-							as={type === 'lesson' ? BiAlignLeft : BiTimer}
+							as={getContentIcon(type, hasVideo)}
 							fontSize="xl"
 						/>
 						<Text fontSize="sm" onClick={onEditPress}>

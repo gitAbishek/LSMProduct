@@ -191,17 +191,28 @@ const Section: React.FC<Props> = (props) => {
 									ref={droppableProvided.innerRef}
 									{...droppableProvided.droppableProps}>
 									{newContents &&
-										newContents?.map((content: any, index: any) => (
-											<Content
-												key={content.id}
-												id={content.id}
-												name={content.name}
-												type={content.type}
-												index={index}
-												courseId={courseId}
-												onContentDeletePress={onContentDeletePress}
-											/>
-										))}
+										newContents?.map(
+											(
+												content: {
+													id: number;
+													video: boolean;
+													type: 'lesson' | 'quiz';
+													name: string;
+												},
+												index: any
+											) => (
+												<Content
+													key={content.id}
+													id={content.id}
+													name={content.name}
+													type={content.type}
+													hasVideo={content.video}
+													index={index}
+													courseId={courseId}
+													onContentDeletePress={onContentDeletePress}
+												/>
+											)
+										)}
 									{droppableProvided.placeholder}
 								</Box>
 							)}

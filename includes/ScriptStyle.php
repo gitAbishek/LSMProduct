@@ -183,12 +183,6 @@ class ScriptStyle {
 					'has_rtl' => true,
 					'context' => 'public',
 				),
-				'backend' => array(
-					'src'      => self::get_asset_url( '/assets/js/build/masteriyo-backend.css' ),
-					'context'  => 'admin',
-					'has_rtl'  => true,
-					'callback' => 'masteriyo_is_admin_page',
-				),
 			)
 		);
 	}

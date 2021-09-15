@@ -210,6 +210,7 @@
 						$form.append(
 							masteriyo_utils.getSuccessNotice(mto_data.labels.submit_success)
 						);
+						$form.trigger('reset');
 						window.location.reload();
 					},
 					onError: function (xhr, status, error) {
@@ -344,6 +345,7 @@
 							masteriyo_utils.getSuccessNotice(mto_data.labels.update_success)
 						);
 						$submit_button.text(mto_data.labels.update);
+						$form.trigger('reset');
 						window.location.reload();
 					},
 					onError: function (xhr, status, error) {

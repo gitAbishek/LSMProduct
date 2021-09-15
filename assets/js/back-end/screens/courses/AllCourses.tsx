@@ -99,7 +99,7 @@ const AllCourses = () => {
 			<Container maxW="container.xl">
 				<Box bg="white" py={{ base: 6, md: 12 }} shadow="box" mx="auto">
 					<Stack direction="column" spacing="10">
-						{courseQuery.isSuccess && courseQuery?.data?.data.length > 0 && (
+						{courseQuery.isSuccess && (
 							<CourseFilter setFilterParams={setFilterParams} />
 						)}
 

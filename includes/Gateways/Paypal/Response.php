@@ -90,8 +90,8 @@ abstract class Response {
 	protected function payment_on_hold( $order, $reason = '' ) {
 		$order->update_status( 'on-hold', $reason );
 
-		if ( isset( MASTERIYO()->cart ) ) {
-			MASTERIYO()->cart->empty_cart();
+		if ( masteriyo( 'cart' ) ) {
+			masteriyo( 'cart' )->clear();
 		}
 	}
 }

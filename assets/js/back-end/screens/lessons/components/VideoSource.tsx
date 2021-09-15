@@ -70,9 +70,9 @@ const VideoSource: React.FC<Props> = (props) => {
 			<FormControl>
 				<FormLabel>{__('Video Source', 'masteriyo')}</FormLabel>
 				<Select {...register('video_source')} defaultValue={defaultSource}>
-					<option value="self-hosted">{__('Self Hosted', 'materiyo')}</option>
-					<option value="youtube">{__('YouTube', 'materiyo')}</option>
-					<option value="vimeo">{__('Vimeo', 'materiyo')}</option>
+					<option value="self-hosted">{__('Self Hosted', 'masteriyo')}</option>
+					<option value="youtube">{__('YouTube', 'masteriyo')}</option>
+					<option value="vimeo">{__('Vimeo', 'masteriyo')}</option>
 				</Select>
 			</FormControl>
 			{watchSource !== 'self-hosted' && (

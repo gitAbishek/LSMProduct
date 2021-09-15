@@ -238,7 +238,7 @@ class Permission {
 	 */
 	public function rest_check_order_permissions( $context = 'read', $object_id = 0 ) {
 		$object_id = absint( $object_id );
-		$post_type = 'masteriyo-order';
+		$post_type = 'mto-order';
 		$cap       = $context;
 		$contexts  = array(
 			'read'   => 'read',

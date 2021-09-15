@@ -38,7 +38,7 @@ abstract class Order extends Model {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'masteriyo-order';
+	protected $post_type = 'mto-order';
 
 	/**
 	 * Cache group.
@@ -828,7 +828,7 @@ abstract class Order extends Model {
 	public function get_refunds() {
 		$this->refunds = masteriyo_get_orders(
 			array(
-				'type'   => 'masteriyo-order-refund',
+				'type'   => 'mto-order-refund',
 				'parent' => $this->get_id(),
 				'limit'  => -1,
 			)

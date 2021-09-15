@@ -82,7 +82,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			apply_filters(
 				'masteriyo_new_order_data',
 				array(
-					'post_type'     => 'masteriyo-order',
+					'post_type'     => 'mto-order',
 					'post_status'   => $order->get_status() ? $order->get_status() : 'pending',
 					'post_author'   => 1,
 					'post_title'    => $this->get_order_title(),
@@ -124,7 +124,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	public function read( Model &$order ) {
 		$order_post = get_post( $order->get_id() );
 
-		if ( ! $order->get_id() || ! $order_post || 'masteriyo-order' !== $order_post->post_type ) {
+		if ( ! $order->get_id() || ! $order_post || 'mto-order' !== $order_post->post_type ) {
 			throw new \Exception( __( 'Invalid order.', 'masteriyo' ) );
 		}
 
@@ -167,7 +167,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		if ( array_intersect( $post_data_keys, array_keys( $changes ) ) ) {
 			$post_data = array(
 				'post_status' => $order->get_status( 'edit' ),
-				'post_type'   => 'masteriyo-order',
+				'post_type'   => 'mto-order',
 			);
 
 			/**
@@ -315,7 +315,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'masteriyo-order' ) );
+			update_post_caches( $query->posts, array( 'mto-order' ) );
 		}
 
 		$orders = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_order', $query->posts ) );
@@ -412,9 +412,9 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		$order_items = array();
 
 		// Get from cache if available.
-		if ( $order->get_id() ) {
-			$order_items = masteriyo( 'cache' )->get( 'masteriyo-order-items-' . $order->get_id(), 'masteriyo-orders' );
-		}
+		// if ( $order->get_id() ) {
+		// 	$order_items = masteriyo( 'cache' )->get( 'masteriyo-order-items-' . $order->get_id(), 'masteriyo-orders' );
+		// }
 
 		if ( ! empty( $order_items ) ) {
 			return $order_items;
@@ -427,13 +427,13 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			)
 		);
 
-		foreach ( $order_items as $item ) {
-			masteriyo( 'cache' )->set( 'masteriyo-item-' . $item->get_id(), $item, 'masteriyo-order-items' );
-		}
+		// foreach ( $order_items as $item ) {
+		// 	masteriyo( 'cache' )->set( 'masteriyo-item-' . $item->get_id(), $item, 'masteriyo-order-items' );
+		// }
 
-		if ( $order->get_id() ) {
-			masteriyo( 'cache' )->set( 'masteriyo-order-items-' . $order->get_id(), $order_items, 'masteriyo-orders' );
-		}
+		// if ( $order->get_id() ) {
+		// 	masteriyo( 'cache' )->set( 'masteriyo-order-items-' . $order->get_id(), $order_items, 'masteriyo-orders' );
+		// }
 
 		return $order_items;
 	}
@@ -542,7 +542,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			$wpdb->prepare(
 				"SELECT SUM( postmeta.meta_value )
 				FROM $wpdb->postmeta AS postmeta
-				INNER JOIN $wpdb->posts AS posts ON ( posts.post_type = 'masteriyo-order-refund' AND posts.post_parent = %d )
+				INNER JOIN $wpdb->posts AS posts ON ( posts.post_type = 'mto-order-refund' AND posts.post_parent = %d )
 				WHERE postmeta.meta_key = '_refund_amount'
 				AND postmeta.post_id = posts.ID",
 				$order->get_id()

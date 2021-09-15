@@ -86,7 +86,16 @@ class Order extends AbstractOrder {
 	 * @since 0.1.0
 	 */
 	public function get_object_type() {
-		return 'masteriyo-order';
+		return $this->object_type;
+	}
+
+	/**
+	 * Get post type.
+	 *
+	 * @since 0.1.0
+	 */
+	public function get_post_type() {
+		return $this->post_type;
 	}
 
 	/**
@@ -1418,7 +1427,7 @@ class Order extends AbstractOrder {
 			return 0;
 		}
 
-		if ( is_user_logged_in() && current_user_can( 'edit_masteriyo-orders', $this->get_id() ) && $added_by_user ) {
+		if ( is_user_logged_in() && current_user_can( 'edit_orders', $this->get_id() ) && $added_by_user ) {
 			$user                 = get_user_by( 'id', get_current_user_id() );
 			$comment_author       = $user->display_name;
 			$comment_author_email = $user->user_email;

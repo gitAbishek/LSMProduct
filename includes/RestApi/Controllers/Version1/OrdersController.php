@@ -47,7 +47,7 @@ class OrdersController extends PostsController {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'masteriyo-order';
+	protected $post_type = 'mto-order';
 
 	/**
 	 * If object is hierarchical.

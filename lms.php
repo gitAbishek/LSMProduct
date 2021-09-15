@@ -1,13 +1,15 @@
 <?php
 /**
- * Plugin Name:     Masteriyo - LMS for WordPress
- * Plugin URI:      https://masteriyo.com/wordpress-lms/
- * Description:     A Complete WordPress LMS plugin to create and sell online courses in no time.
- * Author:          Masteriyo
- * Author URI:      https://masteriyo.com
- * Version:         0.1.0
- * Text Domain:     masteriyo
- * Domain Path:     /i18n/languages
+ * Plugin Name: Masteriyo - LMS for WordPress
+ * Plugin URI: https://masteriyo.com/learning-management-system/
+ * Description: A Complete WordPress LMS plugin to create and sell online courses in no time.
+ * Author: Masteriyo
+ * Author URI: https://masteriyo.com
+ * Version: 0.1.0
+ * Requires at least: 5.0
+ * Requires PHP: 7.0
+ * Text Domain: masteriyo
+ * Domain Path: /i18n/languages
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */

@@ -113,7 +113,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							<Stack direction="column" spacing="8">
 								<FormControl>
 									<FormLabel minW="2xs">
-										{__('Course List Page', 'masteriyo')}
+										{__('Courses Page', 'masteriyo')}
 										<Tooltip
 											label={__(
 												'This set course listing page where the courses are display',
@@ -205,7 +205,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 
 								<FormControl>
 									<FormLabel minW="2xs">
-										{__('Terms and Coditions Page', 'masteriyo')}
+										{__('Terms and Conditions Page', 'masteriyo')}
 										<Tooltip
 											label={__(
 												'If you define a "Terms" page the customer will be asked if they accept them when checking out.',

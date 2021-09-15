@@ -204,7 +204,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									</FormControl>
 									<FormControl>
 										<FormLabel>
-											{__('Adress Line 1', 'masteriyo')}
+											{__('Address Line 1', 'masteriyo')}
 											<Tooltip
 												label={__('Your street address')}
 												hasArrow
@@ -223,7 +223,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 								</Stack>
 								<FormControl>
 									<FormLabel>
-										{__('Adress Line 2', 'masteriyo')}
+										{__('Address Line 2', 'masteriyo')}
 										<Tooltip
 											label={__('Your street address 2')}
 											hasArrow

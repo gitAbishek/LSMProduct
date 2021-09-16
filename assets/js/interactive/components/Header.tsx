@@ -91,7 +91,7 @@ const Header: React.FC<Props> = (props) => {
 							justifyContent="space-between">
 							<Box w="165px">
 								{'' != logoData ? (
-									<Image src={logoData[0]} height="36px" />
+									<Image src={logoData[0]} width="36px" />
 								) : (
 									<Text textAlign="center">{siteTitle}</Text>
 								)}

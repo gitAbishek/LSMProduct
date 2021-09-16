@@ -245,7 +245,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 							<Stack direction="column" spacing="6">
 								<Stack direction="row" spacing="8">
 									<FormControl>
-										<FormLabel minW="xs">
+										<FormLabel>
 											{__('Currency', 'masteriyo')}
 											<Tooltip
 												label={__('Select default currency', 'masteriyo')}
@@ -269,7 +269,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</Select>
 									</FormControl>
 									<FormControl>
-										<FormLabel minW="xs">
+										<FormLabel>
 											{__('Currency Position', 'masteriyo')}
 											<Tooltip
 												label={__(
@@ -302,7 +302,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										isInvalid={
 											!!errors?.payments?.currency?.thousand_separator
 										}>
-										<FormLabel minW="xs">
+										<FormLabel>
 											{__('Thousand Separator', 'masteriyo')}
 											<Tooltip
 												label={__(
@@ -338,7 +338,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									</FormControl>
 									<FormControl
 										isInvalid={!!errors?.payments?.currency?.decimal_separator}>
-										<FormLabel minW="xs">
+										<FormLabel>
 											{__('Decimal Separator', 'masteriyo')}
 											<Tooltip
 												label={__(
@@ -378,7 +378,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										isInvalid={
 											!!errors?.payments?.currency?.number_of_decimals
 										}>
-										<FormLabel minW="xs">
+										<FormLabel>
 											{__('Number of Decimals', 'masteriyo')}
 											<Tooltip
 												label={__(

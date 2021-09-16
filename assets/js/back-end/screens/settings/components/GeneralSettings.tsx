@@ -49,7 +49,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 					<TabPanel>
 						<Stack direction="column" spacing="6">
 							<FormControl>
-								<FormLabel minW="xs">
+								<FormLabel>
 									{__('Primary Color', 'masteriyo')}
 									<Tooltip
 										label={__(

@@ -29,6 +29,21 @@
 		flex: 1 1 50%;
 		max-width: 50%;
 	}
+
+	.masteriyo-vertical-menu {
+		flex-basis: 100%;
+	}
+
+	.masteriyo-main,
+	.entry-content
+		> *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator):not(.woocommerce) {
+		width: 100%;
+		display: block;
+
+		.masteriyo-vertical-menu {
+			border-right: none;
+		}
+	}
 }
 
 // X-Small devices (portrait phones, less than 576px)
@@ -105,5 +120,23 @@
 		width: 100%;
 		flex: 1 1 100%;
 		max-width: 100%;
+	}
+
+	.masteriyo-counter {
+		.masteriyo-db-card {
+			flex-basis: 100%;
+		}
+	}
+
+	.masteriyo-cstudy--body {
+		&--wrap {
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		&--pbar {
+			flex-basis: 100%;
+			margin: 0;
+		}
 	}
 }

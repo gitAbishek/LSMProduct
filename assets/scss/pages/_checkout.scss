@@ -1,4 +1,6 @@
 .masteriyo-checkout {
+	margin: 0 auto;
+
 	.masteriyo-col-2 {
 		gap: 30px;
 		& > * {
@@ -24,6 +26,7 @@
 		flex-direction: row;
 		column-gap: 30px;
 	}
+
 	&----street > input {
 		margin-bottom: $spacing_12px;
 	}
@@ -50,7 +53,9 @@
 
 			ul {
 				margin: 0;
+				padding: 0;
 			}
+
 			ul li {
 				list-style-type: none;
 				border-bottom: 1px solid var(--masteriyo-color-border);
@@ -75,11 +80,23 @@
 		@include masteriyo-shadow-2();
 		padding: $spacing_32px $spacing_44px;
 		margin-bottom: $spacing_30px;
+		background-color: var(--masteriyo-color-white);
 
 		li.payment-method {
 			list-style-type: none;
 		}
+
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+
+			label {
+				padding: 0;
+			}
+		}
 	}
+
 	&-summary-paypal {
 		margin-bottom: $spacing_20px;
 		display: flex;
@@ -87,6 +104,7 @@
 		justify-content: space-between;
 		background: var(--masteriyo-color-white);
 	}
+
 	&--btn {
 		width: 100%;
 	}

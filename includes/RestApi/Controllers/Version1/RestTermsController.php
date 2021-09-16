@@ -3,7 +3,7 @@
  * Abstract Rest Terms Controller
  *
  * @package RestApi
- * @version  0.1.0
+ * @version  1.0.0
  */
 
 namespace Masteriyo\RestApi\Controllers\Version1;
@@ -21,7 +21,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -30,7 +30,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -39,7 +39,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission
 	 */
@@ -50,7 +50,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Register the routes for terms.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function register_routes() {
 		register_rest_route(
@@ -140,7 +140,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Check permissions for an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $object_type Object type.
 	 * @param string $context   Request context.
 	 * @param int    $object_id Post ID.
@@ -233,7 +233,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Check if a given request has access to delete a term.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -275,7 +275,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Check permissions.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @param string          $context Request context.
@@ -307,7 +307,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model           $term   Model object.
 	 * @param WP_REST_Request $request Full details about the request.
@@ -340,7 +340,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Get the terms attached to a course.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * This is an alternative to `get_terms()` that uses `get_the_terms()`
 	 * instead, which hits the object cache. There are a few things not
@@ -387,7 +387,7 @@ abstract class RestTermsController extends CrudController {
 	 * Determine the allowed query_vars for a get_items() response and
 	 * prepare for WP_Query.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array           $prepared_args Prepared arguments.
 	 * @param WP_REST_Request $request Request object.
@@ -400,7 +400,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Get objects.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  array $query_args Query args.
 	 * @return array
 	 */
@@ -428,7 +428,7 @@ abstract class RestTermsController extends CrudController {
 	 *
 	 * Uses `$this->sort_column` to determine field to sort by.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param stdClass $left Term object.
 	 * @param stdClass $right Term object.
@@ -449,7 +449,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Get the query params for collections
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -550,7 +550,7 @@ abstract class RestTermsController extends CrudController {
 	/**
 	 * Get taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return int|WP_Error

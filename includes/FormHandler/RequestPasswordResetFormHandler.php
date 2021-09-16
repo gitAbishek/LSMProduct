@@ -12,13 +12,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Password reset request form handler class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class RequestPasswordResetFormHandler {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'wp_loaded', array( $this, 'process_password_reset_request' ), 20 );
@@ -27,7 +27,7 @@ class RequestPasswordResetFormHandler {
 	/**
 	 * Handle Password reset request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -104,7 +104,7 @@ class RequestPasswordResetFormHandler {
 	/**
 	 * Validate the submitted form.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function validate_form() {
 		$data = $this->get_form_data();
@@ -128,7 +128,7 @@ class RequestPasswordResetFormHandler {
 	/**
 	 * Get the submitted form data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

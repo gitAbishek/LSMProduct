@@ -2,7 +2,7 @@
 /**
  * Order repository interface.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Contracts
  */
@@ -21,7 +21,7 @@ interface OrderRepository {
 	/**
 	 * Get amount already refunded.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param ORder $order Order object.
 	 * @return float
@@ -31,7 +31,7 @@ interface OrderRepository {
 	/**
 	 * Read order items of a specific type from the database for this order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 * @param string  $type Order item type.
@@ -42,7 +42,7 @@ interface OrderRepository {
 	/**
 	 * Remove all line items from an order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 * @param string  $type Order item type. Default null.
@@ -52,7 +52,7 @@ interface OrderRepository {
 	/**
 	 * Get token ids for an order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 * @return array
@@ -62,7 +62,7 @@ interface OrderRepository {
 	/**
 	 * Update token ids for an order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 * @param array    $token_ids Token IDs.

@@ -12,7 +12,7 @@ class Tag extends Taxonomy {
 	/**
 	 * Taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -21,14 +21,14 @@ class Tag extends Taxonomy {
 	/**
 	 * Post type the taxonomy belongs to.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected $post_type = 'mto-course';
 
 	/**
 	 * Default labels.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

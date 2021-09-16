@@ -5,7 +5,7 @@
  * Hanldes generic payment gateway functionality which is extended by idividual payment gateways.
  *
  * @class PaymentGateway
- * @version 0.1.0
+ * @version 1.0.0
  * @package Masteriyo\Abstracts
  */
 
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  * Extended by individual payment gateways to handle payments.
  *
  * @class       PaymentGateway
- * @version     0.1.0
+ * @version     1.0.0
  * @package     Masteriyo\Abstracts
  */
 abstract class PaymentGateway {
@@ -29,7 +29,7 @@ abstract class PaymentGateway {
 	/**
 	 * Payment gateway id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -38,7 +38,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set if the place order button should be renamed on selection.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -47,7 +47,7 @@ abstract class PaymentGateway {
 	/**
 	 * Yes or no based on whether the method is enabled.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -56,7 +56,7 @@ abstract class PaymentGateway {
 	/**
 	 * Payment method title for the frontend.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -65,7 +65,7 @@ abstract class PaymentGateway {
 	/**
 	 * Payment method description for the frontend.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -74,7 +74,7 @@ abstract class PaymentGateway {
 	/**
 	 * Chosen payment method id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool
 	 */
@@ -83,7 +83,7 @@ abstract class PaymentGateway {
 	/**
 	 * Gateway title.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -92,7 +92,7 @@ abstract class PaymentGateway {
 	/**
 	 * Gateway description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -101,7 +101,7 @@ abstract class PaymentGateway {
 	/**
 	 * True if the gateway shows fields on the checkout.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool
 	 */
@@ -110,7 +110,7 @@ abstract class PaymentGateway {
 	/**
 	 * Countries this gateway is allowed for.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -119,7 +119,7 @@ abstract class PaymentGateway {
 	/**
 	 * Available for all counties or specific.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -128,7 +128,7 @@ abstract class PaymentGateway {
 	/**
 	 * Icon for the gateway.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -137,7 +137,7 @@ abstract class PaymentGateway {
 	/**
 	 * Supported features such as 'default_credit_card_form', 'refunds'.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -146,7 +146,7 @@ abstract class PaymentGateway {
 	/**
 	 * Maximum transaction amount, zero does not define a maximum.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var int
 	 */
@@ -155,7 +155,7 @@ abstract class PaymentGateway {
 	/**
 	 * Optional URL to view a transaction.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -165,7 +165,7 @@ abstract class PaymentGateway {
 	 * Optional label to show for "new payment method" in the payment
 	 * method/token selection radio selection.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -174,7 +174,7 @@ abstract class PaymentGateway {
 	/**
 	 * Pay button ID if supported.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -187,7 +187,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get the payment gatewy id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -198,7 +198,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get order button text.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -209,7 +209,7 @@ abstract class PaymentGateway {
 	/**
 	 * Check whether the gateway is enabled or not.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -220,7 +220,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get payment method title for the frontend.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -231,7 +231,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get payment method description for the frontend.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -242,7 +242,7 @@ abstract class PaymentGateway {
 	/**
 	 * Is the payment method choosen?
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -253,7 +253,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get gateway title.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -264,7 +264,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get gateway description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -275,7 +275,7 @@ abstract class PaymentGateway {
 	/**
 	 * True if the gateway shows fields on the checkout.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -286,7 +286,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get countries the gateway is allowed for.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -297,7 +297,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get available for all countries or specific.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -308,7 +308,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get gateway icon.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -322,7 +322,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get supported features such as 'default_credit_card_form', 'refunds'.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -333,7 +333,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get maximum transaction amount, zero does not define a maximum.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var int
 	 */
@@ -344,7 +344,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get option url to view a transaciton.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -356,7 +356,7 @@ abstract class PaymentGateway {
 	 * Get optional label to show for "new payment method" in the payment
 	 * method/token selection radio selection.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -367,7 +367,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get pay button ID if supported.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -382,7 +382,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set order button text.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $order_button_text Order button text.
 	 */
@@ -393,7 +393,7 @@ abstract class PaymentGateway {
 	/**
 	 * Check whether the gateway is enabled or not.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param boolean $enabled
 	 */
@@ -404,7 +404,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set payment method title for the frontend.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $title Payment method title for the frontend.
 	 */
@@ -415,7 +415,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set payment method description for the frontend.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $description Payment method description for the frontend.
 	 */
@@ -426,7 +426,7 @@ abstract class PaymentGateway {
 	/**
 	 * Is the payment method choosen?
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param boolean $chosen
 	 */
@@ -437,7 +437,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set gateway title.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $title Gateway title.
 	 */
@@ -448,7 +448,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set gateway description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $description Gateway description.
 	 */
@@ -459,7 +459,7 @@ abstract class PaymentGateway {
 	/**
 	 * True if the gateway shows fields on the checkout.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param boolean $has_fields
 	 */
@@ -470,7 +470,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set countries the gateway is allowed for.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $countries List of countries the gateway is allowed for.
 	 */
@@ -481,7 +481,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set available for all countries or specific.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $availability List of available countries or specific.
 	 */
@@ -492,7 +492,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set gateway icon.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $icon Gateway icon.
 	 */
@@ -503,7 +503,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set supported features such as 'default_credit_card_form', 'refunds'.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $supports List of supported features.
 	 */
@@ -514,7 +514,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set maximum transaction amount, zero does not define a maximum.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $max_amount Maximum transaction amount.
 	 */
@@ -525,7 +525,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set option url to view a transaciton.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $url Transaction url.
 	 */
@@ -537,7 +537,7 @@ abstract class PaymentGateway {
 	 * Set optional label to show for "new payment method" in the payment
 	 * method/token selection radio selection.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $label New payment method label.
 	 */
@@ -548,7 +548,7 @@ abstract class PaymentGateway {
 	/**
 	 * Set pay button ID if supported.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $id Pay button id.
 	 */
@@ -563,7 +563,7 @@ abstract class PaymentGateway {
 	/**
 	 * Init settings for gateways.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function init_settings() {
 		$this->enabled = $this->get_option( 'enable', false );
@@ -575,7 +575,7 @@ abstract class PaymentGateway {
 	 * When this gateway is toggled on via AJAX, if this returns true a
 	 * redirect will occur to the settings page instead.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return bool
 	 */
 	public function needs_setup() {
@@ -585,7 +585,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get the return url (thank you page).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order|null $order Order object.
 	 * @return string
@@ -603,7 +603,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get a link to the transaction on the 3rd party gateway site (if applicable).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order the order object.
 	 * @return string transaction URL, or empty string.
@@ -622,7 +622,7 @@ abstract class PaymentGateway {
 	/**
 	 * Get the order total in checkout and pay_for_order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return float
 	 */
@@ -648,7 +648,7 @@ abstract class PaymentGateway {
 	/**
 	 * Check if the gateway is available for use.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -699,7 +699,7 @@ abstract class PaymentGateway {
 	 *
 	 * Gateways should override this to declare support (or lack of support) for a feature.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $feature string The name of a feature to test support for.
 	 * @return bool True if the gateway supports the feature, false otherwise.
@@ -713,7 +713,7 @@ abstract class PaymentGateway {
 	 *
 	 * Should be extended by gateways to do their own checks.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @return bool If false, the automatic refund button is hidden in the UI.
@@ -727,7 +727,7 @@ abstract class PaymentGateway {
 	 *
 	 * Gets an option from the settings API, using defaults if necessary to prevent undefined notices.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $key Option key.
 	 * @param  mixed  $default Value when empty.

@@ -4,7 +4,7 @@
  *
  * @package Masteriyo
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -18,7 +18,7 @@ class CourseQuestionAnswers {
 	/**
 	 * Init.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function init() {
 		add_filter( 'comments_open', array( __CLASS__, 'comments_open' ), 10, 2 );
@@ -29,7 +29,7 @@ class CourseQuestionAnswers {
 	/**
 	 * See if comments are open.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  bool $open    Whether the current post is open for comments.
 	 * @param  int  $post_id Post ID.
@@ -46,7 +46,7 @@ class CourseQuestionAnswers {
 	/**
 	 * Make sure WP displays avatars for comments with the `course_review` type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $comment_types Comment types.
 	 *
@@ -59,7 +59,7 @@ class CourseQuestionAnswers {
 	/**
 	 * Modify recipient of review email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $emails     Emails.
 	 * @param int   $comment_id Comment ID.

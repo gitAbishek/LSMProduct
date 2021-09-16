@@ -2,7 +2,7 @@
 /**
  * User Repository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Repository;
  */
@@ -21,7 +21,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Meta type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -30,7 +30,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -65,7 +65,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Create a user in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $user User object.
 	 */
@@ -106,7 +106,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Read a user.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $user User object.
 	 *
@@ -148,7 +148,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Update a user in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $user User object.
 	 *
@@ -201,7 +201,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Delete a user from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $user User object.
 	 * @param array $args Array of args to pass.alert-danger.
@@ -231,7 +231,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Read user data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param User $user User object.
 	 */
@@ -261,7 +261,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Read extra data associated with the user.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param User $user User object.
 	 */
@@ -280,7 +280,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Helper method that updates all the user meta for a model based on it's settings in the Model class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $model model object.
 	 * @param bool  $force Force update. Used during create.
@@ -353,7 +353,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * Note: WordPress `get_metadata` function returns an empty string when meta data does not exist.
 	 *
-	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
+	 * @since 1.0.0 Added to prevent empty meta being stored unless required.
 	 *
 	 * @param Model $object The Model object
 	 * @param string  $meta_key Meta key to update.

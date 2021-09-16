@@ -2,7 +2,7 @@
 /**
  * CourseTag model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * CourseTag model (post type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class CourseTag extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -35,7 +35,7 @@ class CourseTag extends Model {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -44,7 +44,7 @@ class CourseTag extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -53,7 +53,7 @@ class CourseTag extends Model {
 	/**
 	 * Stores course_tag data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -71,7 +71,7 @@ class CourseTag extends Model {
 	/**
 	 * Get the course tag if ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseTagRepository $course_tag_repository Course Tag Repository.
 	 */
@@ -88,7 +88,7 @@ class CourseTag extends Model {
 	/**
 	 * Get the course tag's title. For course tags this is the course tag name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -99,7 +99,7 @@ class CourseTag extends Model {
 	/**
 	 * Course tag permalink.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -110,7 +110,7 @@ class CourseTag extends Model {
 	/**
 	 * Returns the children IDs if applicable. Overridden by child classes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array of IDs
 	 */
@@ -127,7 +127,7 @@ class CourseTag extends Model {
 	/**
 	 * Get course tag name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -140,7 +140,7 @@ class CourseTag extends Model {
 	/**
 	 * Get course tag slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -153,7 +153,7 @@ class CourseTag extends Model {
 	/**
 	 * Get course tag description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -166,7 +166,7 @@ class CourseTag extends Model {
 	/**
 	 * Get course tag term group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -179,7 +179,7 @@ class CourseTag extends Model {
 	/**
 	 * Get course tag term taxonomy id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -192,7 +192,7 @@ class CourseTag extends Model {
 	/**
 	 * Get course tag taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -205,7 +205,7 @@ class CourseTag extends Model {
 	/**
 	 * Get number of course for the tag.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -218,7 +218,7 @@ class CourseTag extends Model {
 	/**
 	 * Get term order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -232,7 +232,7 @@ class CourseTag extends Model {
 	 * Get course tag parent id. For course tag, there won't be any parent so it will
 	 * always return false.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function get_parent_id() {
 		return false;
@@ -247,7 +247,7 @@ class CourseTag extends Model {
 	/**
 	 * Set course tag name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name Course tag name.
 	 */
@@ -258,7 +258,7 @@ class CourseTag extends Model {
 	/**
 	 * Set course tag slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $slug Course tag slug.
 	 */
@@ -269,7 +269,7 @@ class CourseTag extends Model {
 	/**
 	 * Set course tag description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $description Course tag description.
 	 */
@@ -280,7 +280,7 @@ class CourseTag extends Model {
 	/**
 	 * Set course tag term group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $term_group Course tag term group.
 	 */
@@ -291,7 +291,7 @@ class CourseTag extends Model {
 	/**
 	 * Set course tag term taxonomy id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $term_taxonomy_id Course tag term taxonomy id.
 	 */
@@ -302,7 +302,7 @@ class CourseTag extends Model {
 	/**
 	 * Set course tag taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $taxonomy Course tag taxonomy.
 	 */
@@ -313,7 +313,7 @@ class CourseTag extends Model {
 	/**
 	 * Set number of course for the tag.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $count Number of posts for the course tag term.
 	 */
@@ -324,7 +324,7 @@ class CourseTag extends Model {
 	/**
 	 * Set term order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $term_order Course tag term order.
 	 */

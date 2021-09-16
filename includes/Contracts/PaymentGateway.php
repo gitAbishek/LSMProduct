@@ -2,7 +2,7 @@
 /**
  * Payment Gateway interface.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Interfaces
  */
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Payment Gateway interface.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 interface PaymentGateway {
@@ -30,7 +30,7 @@ interface PaymentGateway {
 	 *            'redirect' => $this->get_return_url( $order )
 	 *        );
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $order_id Order ID.
 	 * @return array
@@ -43,7 +43,7 @@ interface PaymentGateway {
 	 * If the gateway declares 'refund' support, this will allow it to refund.
 	 * a passed in amount.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int        $order_id Order ID.
 	 * @param  float|null $amount Refund amount.

@@ -2,7 +2,7 @@
 /**
  * Abstract class to handle session.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo;
  * @subpackage Session;
@@ -23,7 +23,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * User ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var int $user_id User ID.
 	 */
@@ -32,7 +32,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Stores session expiry.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string session due to expire timestamp
 	 */
@@ -41,7 +41,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Stores session due to expire timestamp.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string session expiration timestamp
 	 */
@@ -50,7 +50,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -59,7 +59,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -68,7 +68,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Stores course data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -84,7 +84,7 @@ abstract class Session extends Model implements SessionInterface {
 	 *
 	 * Uses Portable PHP password hashing framework to generate a unique cryptographically strong ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -107,7 +107,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Get the current session ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -127,7 +127,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Get the current session key.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -147,7 +147,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Get the current session data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -167,7 +167,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Get session expiry.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return int
@@ -179,7 +179,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Set session expiry.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $expiry Session expiry timestamp.
 	 * @return Masteriyo\Session\Session
@@ -191,7 +191,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Get session user agent.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return int
@@ -203,7 +203,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Set session user agent.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $user_agent Session user_agent timestamp.
 	 * @return Masteriyo\Session\Session
@@ -215,7 +215,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Get an item from the session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $key     Session item key.
 	 * @param mixed $default  Session item default value.
@@ -232,7 +232,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Put a key/value pair in the session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $key   Session item key.
 	 * @param mixed $value  Session item value.
@@ -247,7 +247,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Get all the session data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -260,7 +260,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Check if a key exists.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|array $key Session data key/keys.
 	 * @return bool
@@ -282,7 +282,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Check if a key is present and not null.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $key Session data key.
 	 * @return boolean
@@ -304,7 +304,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Remove an item from the session, returning its value.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $key Session data key.
 	 * @return mixed
@@ -326,7 +326,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Remove one or many items from the session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|array $keys Session or array of session data keys.
 	 * @return void
@@ -350,7 +350,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Remvoe all of the items from the session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function flush() {
 		$this->set_prop( 'data', array() );
@@ -359,7 +359,7 @@ abstract class Session extends Model implements SessionInterface {
 	/**
 	 * Check whether the session is changed or not
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */

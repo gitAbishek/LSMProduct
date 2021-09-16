@@ -2,7 +2,7 @@
 /**
  * CourseCategoryRepository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Repository;
  */
@@ -20,7 +20,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Meta type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -39,7 +39,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Create a course_cat in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_cat Course_cat object.
 	 */
@@ -78,7 +78,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Read a course_cat.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_cat Cource object.
 	 *
@@ -114,7 +114,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Update a course_cat in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_cat Course_cat object.
 	 *
@@ -172,7 +172,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Delete a course_cat from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_cat Course_cat object.
 	 * @param array $args   Array of args to pass.alert-danger.
@@ -195,7 +195,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Read course_cat data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseCategory $course_cat course_cat object.
 	 */
@@ -225,7 +225,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Read extra data associated with the course_cat, like button text or course_cat URL for external course_cats.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseCategory $course_cat course_cat object.
 	 */

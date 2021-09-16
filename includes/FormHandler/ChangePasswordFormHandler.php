@@ -12,13 +12,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Change password form handler class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class ChangePasswordFormHandler {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'wp_loaded', array( $this, 'handle' ), 20 );
@@ -27,7 +27,7 @@ class ChangePasswordFormHandler {
 	/**
 	 * Handle change password form.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -72,7 +72,7 @@ class ChangePasswordFormHandler {
 	/**
 	 * Validate the submitted form.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function validate_form() {
 		$data = $this->get_form_data();
@@ -112,7 +112,7 @@ class ChangePasswordFormHandler {
 	/**
 	 * Get the submitted form data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

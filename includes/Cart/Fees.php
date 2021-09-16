@@ -3,7 +3,7 @@
  * Cart fees API.
  *
  * @package Masteriyo\Classes
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 namespace Masteriyo\Cart;
@@ -15,14 +15,14 @@ use Masteriyo\Helper\Utils;
 /**
  * Fees class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class Fees {
 
 	/**
 	 * An array of fee objects.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var object[]
 	 */
 	private $fees = array();
@@ -30,7 +30,7 @@ class Fees {
 	/**
 	 * Reference to cart object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var Cart
 	 */
 	private $cart;
@@ -38,7 +38,7 @@ class Fees {
 	/**
 	 * New fees are made out of these props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	private $default_props = array(
@@ -51,7 +51,7 @@ class Fees {
 	/**
 	 * Set cart.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @throws Exception If missing Cart object.
 	 * @param Cart $cart Cart object.
 	 */
@@ -66,7 +66,7 @@ class Fees {
 	/**
 	 * Add a fee. Fee IDs must be unique.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $args Array of fee properties.
 	 * @return object Either a fee object if added, or a WP_Error if it failed.
 	 */
@@ -91,7 +91,7 @@ class Fees {
 	/**
 	 * Get fees.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -104,7 +104,7 @@ class Fees {
 	/**
 	 * Set fees.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param object[] $raw_fees Array of fees.
 	 */
@@ -119,7 +119,7 @@ class Fees {
 	/**
 	 * Remove all fees.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function remove_all() {
 		$this->set_fees();
@@ -128,7 +128,7 @@ class Fees {
 	/**
 	 * Sort fees by amount.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param stdClass $a Fee object.
 	 * @param stdClass $b Fee object.
@@ -138,7 +138,7 @@ class Fees {
 		/**
 		 * Filter sort fees callback.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 * @param int Sort order, -1 or 1.
 		 * @param stdClass $a Fee object.
 		 * @param stdClass $b Fee object.
@@ -149,7 +149,7 @@ class Fees {
 	/**
 	 * Generate a unique ID for the fee being added.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $fee Fee object.
 	 * @return string fee key.
 	 */

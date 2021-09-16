@@ -3,8 +3,8 @@
  * Class for parameter-based course progress query.
  *
  * @package  Masteriyo\Query
- * @version 0.1.0
- * @since   0.1.0
+ * @version 1.0.0
+ * @since   1.0.0
  */
 
 namespace Masteriyo\Query;
@@ -21,7 +21,7 @@ class CourseProgressQuery extends ObjectQuery {
 	/**
 	 * Valid query vars for course progress.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

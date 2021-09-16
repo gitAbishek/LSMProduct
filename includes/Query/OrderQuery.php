@@ -3,8 +3,8 @@
  * Class for parameter-based order querying
  *
  * @package  Masteriyo\Query
- * @version 0.1.0
- * @since   0.1.0
+ * @version 1.0.0
+ * @since   1.0.0
  */
 
 namespace Masteriyo\Query;
@@ -21,7 +21,7 @@ class OrderQuery extends ObjectQuery {
 	/**
 	 * Valid query vars for orders.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -65,7 +65,7 @@ class OrderQuery extends ObjectQuery {
 	/**
 	 * Get orders matching the current query vars.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array|Model order objects
 	 */

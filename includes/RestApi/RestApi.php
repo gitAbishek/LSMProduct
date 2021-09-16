@@ -2,7 +2,7 @@
 /**
  * Initialize REST API.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package  Masteriyo\RestApi
  */
@@ -16,7 +16,7 @@ class RestApi {
 	/**
 	 * REST API namespaces and endpoints.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -25,7 +25,7 @@ class RestApi {
 	/**
 	 * Hook into WordPress ready to init the REST API as needed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function init() {
 		add_action( 'rest_api_init', array( __CLASS__, 'register_rest_routes' ) );
@@ -34,7 +34,7 @@ class RestApi {
 	/**
 	 * Register REST API routes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function register_rest_routes() {
 		foreach ( self::get_rest_namespaces() as $namespace => $controllers ) {
@@ -48,7 +48,7 @@ class RestApi {
 	/**
 	 * Get API namespaces - new namespaces should be registered here.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array List of Namespaces and Main controller classes.
 	 */
@@ -64,7 +64,7 @@ class RestApi {
 	/**
 	 * List of controllers in the masteriyo/v1 namespace.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @static
 	 *
 	 * @return array
@@ -101,7 +101,7 @@ class RestApi {
 	/**
 	 * Return the path to the package.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @static
 	 *
 	 * @return string

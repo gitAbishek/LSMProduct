@@ -2,7 +2,7 @@
 /**
  * SectionRepository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Repository;
  */
@@ -20,7 +20,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
@@ -30,7 +30,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Create a section in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $section Section object.
 	 */
@@ -75,7 +75,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Read a section.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $section Section object.
 	 * @throws \Exception If invalid section.
@@ -108,7 +108,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Update a section in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $section Section object.
 	 *
@@ -178,7 +178,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Delete a section from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $section Section object.
 	 * @param array $args   Array of args to pass.alert-danger.
@@ -200,7 +200,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Read section data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Section $section Section object.
 	 */
@@ -230,7 +230,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Read extra data associated with the section, like button text or section URL for external sections.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Section $section Section object.
 	 */
@@ -250,7 +250,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Fetch sections.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return Section[]
@@ -289,7 +289,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Get valid WP_Query args from a SectionQuery's query variables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $query_vars Query vars from a SectionQuery.
 	 * @return array
 	 */

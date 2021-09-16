@@ -4,7 +4,7 @@
  *
  * @package Masteriyo
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -18,7 +18,7 @@ class CourseReviews {
 	/**
 	 * Init.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function init() {
 		add_filter( 'comments_open', array( __CLASS__, 'comments_open' ), 10, 2 );
@@ -30,7 +30,7 @@ class CourseReviews {
 	/**
 	 * See if comments are open.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  bool $open    Whether the current post is open for comments.
 	 * @param  int  $post_id Post ID.
@@ -47,7 +47,7 @@ class CourseReviews {
 	/**
 	 * Ensure course average rating and review count is kept up to date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $post
 	 */
@@ -60,7 +60,7 @@ class CourseReviews {
 	/**
 	 * Update average rating and review counts of course.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string|WP_Post|Course $course
 	 */
@@ -80,7 +80,7 @@ class CourseReviews {
 	/**
 	 * Make sure WP displays avatars for comments with the `course_review` type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $comment_types Comment types.
 	 *
@@ -93,7 +93,7 @@ class CourseReviews {
 	/**
 	 * Modify recipient of review email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $emails     Emails.
 	 * @param int   $comment_id Comment ID.
@@ -113,7 +113,7 @@ class CourseReviews {
 	/**
 	 * Get course rating for a course. Please note this is not cached.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Course $course course instance.
 	 *
@@ -148,7 +148,7 @@ class CourseReviews {
 	/**
 	 * Get course review count for a course (not replies). Please note this is not cached.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Course $course course instance.
 	 *
@@ -176,7 +176,7 @@ class CourseReviews {
 	/**
 	 * Get course rating count for a course. Please note this is not cached.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Course $course course instance.
 	 *

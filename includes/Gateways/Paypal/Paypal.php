@@ -30,7 +30,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Payment gateway name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -39,7 +39,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * True if the gateway shows fields on the checkout.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool
 	 */
@@ -62,7 +62,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Constructor for the gateway.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->order_button_text = __( 'Proceed to PayPal', 'masteriyo' );
@@ -114,7 +114,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	 * When this gateway is toggled on via AJAX, if this returns true a
 	 * redirect will occur to the settings page instead.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return bool
 	 */
 	public function needs_setup() {
@@ -124,7 +124,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Logging method.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $message Log message.
 	 * @param string $level Optional. Default 'info'. Possible values:
@@ -136,7 +136,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Get gateway icon.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -163,7 +163,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Get the link for an icon based on country.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $country Country two letter code.
 	 * @return string
@@ -185,7 +185,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Get PayPal images for a country.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $country Country code.
 	 * @return array of image URLs
@@ -257,7 +257,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Check if this gateway is available in the user's country based on currency.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -275,7 +275,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Get the transaction URL.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @return string
@@ -293,7 +293,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Process the payment and return the result.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int $order_id Order ID.
 	 * @return array
@@ -311,7 +311,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Can the order be refunded via PayPal?
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @return bool
@@ -331,7 +331,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Init the API class and set the username/password etc.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function init_api() {
 		if ( $this->sandbox ) {
@@ -350,7 +350,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Process a refund if supported.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int    $order_id Order ID.
 	 * @param  float  $amount Refund amount.
@@ -391,7 +391,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Capture payment when the order is changed from on-hold to complete or processing
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int $order_id Order ID.
 	 */
@@ -433,7 +433,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Custom PayPal order received text.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string   $text Default text.
 	 * @param Order $order Order data.
 	 * @return string

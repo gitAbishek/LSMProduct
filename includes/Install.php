@@ -2,7 +2,7 @@
 /**
  * Install
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -12,7 +12,7 @@ class Install {
 	/**
 	 * Initialization.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -27,7 +27,7 @@ class Install {
 	/**
 	 * Update Masteriyo information.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function install() {
 		$masteriyo_version = get_option( 'masteriyo_plugin_version' );
@@ -50,7 +50,7 @@ class Install {
 	/**
 	 * Initialize database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -73,7 +73,7 @@ class Install {
 	/**
 	 * Get session table schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $charset_collate   Database charset collate.
 	 * @param string $base_prefix       Table prefix.
@@ -97,7 +97,7 @@ class Install {
 	/**
 	 * Get order items table schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $charset_collate   Database charset collate.
 	 * @param string $base_prefix       Table prefix.
@@ -121,7 +121,7 @@ class Install {
 	/**
 	 * Get order item meta table schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $charset_collate   Database charset collate.
 	 * @param string $base_prefix       Table prefix.
@@ -145,7 +145,7 @@ class Install {
 	/**
 	 * Get user activity table schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $charset_collate   Database charset collate.
 	 * @param string $base_prefix       Table prefix.
@@ -181,7 +181,7 @@ class Install {
 	/**
 	 * Get user acitivty item meta table schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $charset_collate   Database charset collate.
 	 * @param string $base_prefix       Table prefix.
@@ -205,7 +205,7 @@ class Install {
 	/**
 	 * Get user items table schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $charset_collate   Database charset collate.
 	 * @param string $base_prefix       Table prefix.
@@ -240,7 +240,7 @@ class Install {
 	/**
 	 * Get user items meta table schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $charset_collate   Database charset collate.
 	 * @param string $base_prefix       Table prefix.
@@ -264,7 +264,7 @@ class Install {
 	/**
 	 * Get quiz attempts meta table schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $charset_collate   Database charset collate.
 	 * @param string $base_prefix       Table prefix.
@@ -302,7 +302,7 @@ class Install {
 	/**
 	 * Create roles.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -315,7 +315,7 @@ class Install {
 	/**
 	 * Return the list of tables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -331,7 +331,7 @@ class Install {
 	/**
 	 * Drop tables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -348,7 +348,7 @@ class Install {
 	/**
 	 * Create default difficulties.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function create_difficulties() {
 		$activation = get_option( 'masteriyo_first_time_activation_flag', false );

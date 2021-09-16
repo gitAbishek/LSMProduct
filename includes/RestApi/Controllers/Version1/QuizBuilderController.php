@@ -7,7 +7,7 @@
  * @author   mi5t4n
  * @category API
  * @package Masteriyo\RestApi
- * @since    0.1.0
+ * @since   1.0.0
  */
 
 namespace Masteriyo\RestApi\Controllers\Version1;
@@ -28,7 +28,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Endpoint namespace.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -37,7 +37,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Route base.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -46,7 +46,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -55,7 +55,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -64,7 +64,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -73,7 +73,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission
 	 */
@@ -84,7 +84,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Register the routes for terms.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function register_routes() {
 
@@ -124,7 +124,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Check if a given request has access to read the terms.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -153,7 +153,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Get the quiz builder schema, conforming to JSON Schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -214,7 +214,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Get the quiz contents.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return array
 	 */
@@ -247,7 +247,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Get quiz contents(Questions).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return Model[]
@@ -266,7 +266,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Get objects(sections, quizes, lessons, etc.).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string[] $query_args WP_Query args.
 	 *
 	 * @return Model[]
@@ -281,7 +281,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_Post $post Post object.
 	 * @return object Model object or WP_Error object.
@@ -302,7 +302,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  Model         $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -321,7 +321,7 @@ class QuizBuilderController extends PostsController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param WP_REST_Response $response The response object.
 		 * @param Model          $object   Object data.
@@ -356,7 +356,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Format the quiz items according to the builder format.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model[] $objects Quiz contents(sections, quizes, lessons)
 	 * @return Model[]
@@ -370,7 +370,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Check permissions for an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $object_type Object type.
 	 * @param string $context   Request context.
 	 * @param int    $object_id Post ID.
@@ -383,7 +383,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Check if a given request has access to create an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -412,7 +412,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Save an object data.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  WP_REST_Request $request  Full details about the request.
 	 * @return Model|WP_Error
 	 */
@@ -440,7 +440,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Filter question.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $question
 	 * @return array
@@ -454,7 +454,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Save question order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 */
@@ -471,7 +471,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Update post if the parent id or menu order is changed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $id Post ID.
 	 */

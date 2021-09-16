@@ -2,7 +2,7 @@
 /**
  * Order Item repository interface.
  *
- * @version 0.1.0
+ * @version 1.0.0
  * @package Masteriyo\Interface
  */
 
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * Functions that must be defined by the order item data store (for functions).
  *
- * @version  0.1.0
+ * @version  1.0.0
  */
 interface OrderItemRepository {
 

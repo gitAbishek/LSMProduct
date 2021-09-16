@@ -3,7 +3,7 @@
  * This ongoing trait will have shared calculation logic between Totals classes.
  *
  * @package Masteriyo\Traits
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 namespace Masteriyo\Traits;
@@ -15,14 +15,14 @@ defined( 'ABSPATH' ) || exit;
  *
  * Right now this do not have much, but plan is to eventually move all shared calculation logic between Orders and Cart in this file.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 trait ItemTotals {
 
 	/**
 	 * Line items to calculate. Define in child class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $field Field name to calculate upon.
 	 *
 	 * @return array having `total`|`subtotal` property.
@@ -32,7 +32,7 @@ trait ItemTotals {
 	/**
 	 * Return rounded total based on settings. Will be used by Cart and Orders.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $values Values to round. Should be with precision.
 	 *
@@ -50,7 +50,7 @@ trait ItemTotals {
 	/**
 	 * Apply rounding to item subtotal before summing.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param float $value Item subtotal value.
 	 * @return float
 	 */
@@ -64,7 +64,7 @@ trait ItemTotals {
 	/**
 	 * Should always round at subtotal?
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return bool
 	 */
 	protected static function round_at_subtotal() {

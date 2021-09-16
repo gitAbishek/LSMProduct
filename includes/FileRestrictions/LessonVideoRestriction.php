@@ -2,7 +2,7 @@
 /**
  * FileRestrictions class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo\FileRestrictions;
@@ -13,7 +13,7 @@ class LessonVideoRestriction extends FileRestriction {
 	/**
 	 * Run the lesson video file restriction.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function run() {
 		if ( ! isset( $_GET['masteriyo_lesson_vid'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -52,7 +52,7 @@ class LessonVideoRestriction extends FileRestriction {
 	/**
 	 * Send the lesson video file.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function send_lesson_video_file() {
 		$lesson = masteriyo_get_lesson( $_GET['lesson_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -82,7 +82,7 @@ class LessonVideoRestriction extends FileRestriction {
 	/**
 	 * Validate the lesson video URL.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function validate_lesson_video_url() {
 		if ( empty( $_GET['course_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended

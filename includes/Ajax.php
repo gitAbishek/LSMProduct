@@ -4,7 +4,7 @@
  *
  * @package Masteriyo
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -26,7 +26,7 @@ class Ajax {
 	 * Actions.
 	 *
 	 * @static
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -36,7 +36,7 @@ class Ajax {
 	 * Initialize
 	 *
 	 * @static
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function init() {
 		self::init_hooks();
@@ -46,7 +46,7 @@ class Ajax {
 	 * Initialize hooks.
 	 *
 	 * @static
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -77,7 +77,7 @@ class Ajax {
 	/**
 	 * Login a user.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function login() {
 		if ( isset( $_POST['nonce'] ) ) {
@@ -150,7 +150,7 @@ class Ajax {
 	/**
 	 * Test ajax function.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */

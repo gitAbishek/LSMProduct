@@ -2,7 +2,7 @@
 /**
  * Cache helper class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Classes
  */
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Cache helper.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 class Cache implements CacheInterface {
@@ -25,7 +25,7 @@ class Cache implements CacheInterface {
 	/**
 	 * Get prefix for use with wp_cache_set. Allows all cache in a group to be invalidated at once.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $group Group of cache to get.
 	 *
@@ -46,7 +46,7 @@ class Cache implements CacheInterface {
 	/**
 	 * Invalidate cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $group Group of cache to clear.
 	 */
@@ -57,7 +57,7 @@ class Cache implements CacheInterface {
 	/**
 	 * Retrieves the cache contents from the cache by key and group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string $key   The key under which the cache contents are stored.
 	 * @param string $group     Where the cache contents are grouped
@@ -73,7 +73,7 @@ class Cache implements CacheInterface {
 	/**
 	 * Saves the data to cache.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed      $data       The contents to store in the cache.
@@ -89,7 +89,7 @@ class Cache implements CacheInterface {
 	/**
 	 * Adds data to the cache, if the cache key doesn’t already exist.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed $data       The data to add to the cache.
@@ -105,7 +105,7 @@ class Cache implements CacheInterface {
 	/**
 	 * Replaces the contents of the cache with new data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed $data       The new data to store in the cache.
@@ -121,7 +121,7 @@ class Cache implements CacheInterface {
 	/**
 	 * Removes the cache contents matching key and group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string $key   What the contents in the cache are called.
 	 * @param string $group Where the cache contents are grouped.
@@ -134,7 +134,7 @@ class Cache implements CacheInterface {
 	/**
 	 * Removes all cache items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool True on success, false on failure.
 	 */

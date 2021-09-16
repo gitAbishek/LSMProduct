@@ -2,7 +2,7 @@
 /**
  * Conditional functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 use Masteriyo\Constants;
@@ -13,7 +13,7 @@ if ( ! function_exists( 'masteriyo_is_filtered' ) ) {
 	/**
 	 * masteriyo_Is_filtered - Returns true when filtering products using layered nav or price sliders.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -26,7 +26,7 @@ if ( ! function_exists( 'masteriyo_is_load_login_form_assets' ) ) {
 	/**
 	 * Check if assets for login form should be loaded.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -39,7 +39,7 @@ if ( ! function_exists( 'masteriyo_registration_is_generate_username' ) ) {
 	/**
 	 * Check if the username should be gerenated for new users.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -52,7 +52,7 @@ if ( ! function_exists( 'masteriyo_registration_is_generate_password' ) ) {
 	/**
 	 * Check if the password should be gerenated for new users.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -65,7 +65,7 @@ if ( ! function_exists( 'masteriyo_registration_is_auth_new_user' ) ) {
 	/**
 	 * Check if new users should be logged in after registration.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -77,7 +77,7 @@ if ( ! function_exists( 'masteriyo_registration_is_auth_new_user' ) ) {
 /**
  * What type of request is this?
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  string $type admin, ajax, cron or frontend.
  * @return bool
@@ -102,7 +102,7 @@ function masteriyo_is_request( $type ) {
  *
  * @todo: replace this function once core WP function is available: https://core.trac.wordpress.org/ticket/42061.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return bool
  */
@@ -120,7 +120,7 @@ function masteriyo_is_rest_api_request() {
 /**
  * Is masteriyo in debug enabled.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return bool
  */
@@ -131,7 +131,7 @@ function masteriyo_is_debug_enabled() {
 /**
  * Is masteriyo admin page.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return bool
  */
@@ -148,7 +148,7 @@ function masteriyo_is_admin_page() {
 /**
  * Check if the current page is a single course page.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return boolean
  */
@@ -159,7 +159,7 @@ function masteriyo_is_single_course_page() {
 /**
  * Check if the current page is a single course page.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return boolean
  */
@@ -172,7 +172,7 @@ if ( ! function_exists( 'masteriyo_prices_include_tax' ) ) {
 	/**
 	 * Are prices inclusive of tax?
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -189,7 +189,7 @@ if ( ! function_exists( 'masteriyo_prices_include_tax' ) ) {
 /**
  * Validates a phone number using a regular expression.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  string $phone Phone number to validate.
  * @return bool
@@ -205,7 +205,7 @@ function masteriyo_is_phone( $phone ) {
 /**
  * Checks for a valid postcode.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  string $postcode Postcode to validate.
  * @param  string $country Country to validate the postcode for.
@@ -294,7 +294,7 @@ function masteriyo_is_postcode( $postcode, $country ) {
 /**
  * Check if is a GB postcode.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  string $to_check A postcode.
  * @return bool
@@ -364,7 +364,7 @@ if ( ! function_exists( 'masteriyo_is_ajax' ) ) {
 /**
  * Validate course id.
  *
- * @since 0.1.0.
+ * @since 1.0.0.
  *
  * @param int $course_id Course Id.
  * @return boolean|WP_Error
@@ -388,7 +388,7 @@ if ( ! function_exists( 'masteriyo_is_current_user_admin' ) ) {
 	/**
 	 * Check if the current user is admin.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -401,7 +401,7 @@ if ( ! function_exists( 'masteriyo_is_current_user_manager' ) ) {
 	/**
 	 * Check if the current user is masteriyo manager.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -414,7 +414,7 @@ if ( ! function_exists( 'masteriyo_is_current_user_student' ) ) {
 	/**
 	 * Check if the current user is masteriyo student.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -427,7 +427,7 @@ if ( ! function_exists( 'masteriyo_is_current_user_instructor' ) ) {
 	/**
 	 * Check if the current user is masteriyo instructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -441,7 +441,7 @@ if ( ! function_exists( 'masteriyo_is_add_payment_method_page' ) ) {
 	/**
 	 * Returns true when viewing the add payment method page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return bool
 	 */
 	function masteriyo_is_add_payment_method_page() {
@@ -457,7 +457,7 @@ if ( ! function_exists( 'masteriyo_is_current_user_post_author' ) ) {
 	/**
 	 * Check if the current user is the author of a post.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param integer|string $post_id Post ID.
 	 *
@@ -478,7 +478,7 @@ if ( ! function_exists( 'masteriyo_is_tax_enabled' ) ) {
 	/**
 	 * Are store-wide taxes enabled?
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -492,7 +492,7 @@ if ( ! function_exists( 'masteriyo_is_checkout_page' ) ) {
 	/**
 	 * Return true if the current page is checkout page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -513,7 +513,7 @@ if ( ! function_exists( 'masteriyo_is_user_enrolled_in_course' ) ) {
 	/**
 	 * Check if a user is enrolled in a course.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param integer|string $course_id
 	 * @param integer|string $user_id
@@ -553,7 +553,7 @@ if ( ! function_exists( 'masteriyo_is_current_user_enrolled_in_course' ) ) {
 	/**
 	 * Check if the current logged in user is enrolled in a course.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param integer|string $course_id
 	 *
@@ -568,7 +568,7 @@ if ( ! function_exists( 'masteriyo_current_user_can_edit_course_review' ) ) {
 	/**
 	 * Check if the current logged in user can edit a course review.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string|WP_Comment|CourseReview $course_review_id
 	 *
@@ -592,7 +592,7 @@ if ( ! function_exists( 'masteriyo_is_interactive_page' ) ) {
 	/**
 	 * Return true if the page is interactive.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -610,7 +610,7 @@ if ( ! function_exists( 'masteriyo_is_interactive_page' ) ) {
 /**
  * Check whether the post type debug is enabbled or not.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return bool
  */
@@ -621,7 +621,7 @@ function masteriyo_is_post_type_debug_enabled() {
 /**
  * Is masteriyo template debug enabled.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return bool
  */

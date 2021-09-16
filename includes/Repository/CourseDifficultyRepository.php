@@ -2,7 +2,7 @@
 /**
  * CourseDifficultyRepository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Repository;
  */
@@ -20,7 +20,7 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 	/**
 	 * Meta type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -37,7 +37,7 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 	/**
 	 * Create a course_difficulty in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_difficulty CourseDifficulty object.
 	 */
@@ -74,7 +74,7 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 	/**
 	 * Read a course_difficulty.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model $course_difficulty CourseDifficulty object.
 	 *
@@ -109,7 +109,7 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 	/**
 	 * Update a course_difficulty in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_difficulty CourseDifficulty object.
 	 *
@@ -165,7 +165,7 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 	/**
 	 * Delete a course_difficulty from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_difficulty CourseDifficulty object.
 	 * @param array $args       Array of args to pass.alert-danger.
@@ -187,7 +187,7 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 	/**
 	 * Read course_difficulty data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseDifficulty $course_difficulty CourseDifficulty object.
 	 */
@@ -217,7 +217,7 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 	/**
 	 * Read extra data associated with the course_difficulty.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseDifficulty $course_difficulty CourseDifficulty object.
 	 */

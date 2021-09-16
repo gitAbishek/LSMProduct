@@ -17,7 +17,7 @@ abstract class Response {
 	/**
 	 * Sandbox mode
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool
 	 */
@@ -26,7 +26,7 @@ abstract class Response {
 	/**
 	 * Get the order from the PayPal 'Custom' variable.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $raw_custom JSON Data passed back by PayPal.
 	 * @return bool|Order object
@@ -62,7 +62,7 @@ abstract class Response {
 	/**
 	 * Complete order, add transaction ID and note.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @param  string   $txn_id Transaction ID.
@@ -82,7 +82,7 @@ abstract class Response {
 	/**
 	 * Hold order and add note.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @param  string   $reason Reason why the payment is on hold.

@@ -2,7 +2,7 @@
 /**
  * Shortcodes initializer.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @class Shortcodes
  * @package Masteriyo\Shortcodes
  */
@@ -22,7 +22,7 @@ class Shortcodes {
 	/**
 	 * Register shortcodes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -35,7 +35,7 @@ class Shortcodes {
 	/**
 	 * Get shortcodes list.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

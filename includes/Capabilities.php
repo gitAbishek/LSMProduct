@@ -2,7 +2,7 @@
 /**
  * Capabilities class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -19,7 +19,7 @@ class Capabilities {
 	/**
 	 * Map custom capabilities.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string[] $caps    Primitive capabilities required of the user.
 	 * @param string   $cap     Capability being checked.
@@ -39,7 +39,7 @@ class Capabilities {
 	/**
 	 * Handle course progress meta cap.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -84,7 +84,7 @@ class Capabilities {
 	/**
 	 * Get masteriyo student capabilites.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -120,7 +120,7 @@ class Capabilities {
 	/**
 	 * Get masteriyo instructor capabilites.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -207,7 +207,7 @@ class Capabilities {
 	/**
 	 * Get masteriyo manager capabilites.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -274,7 +274,7 @@ class Capabilities {
 	/**
 	 * Get admin's core capabilites.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

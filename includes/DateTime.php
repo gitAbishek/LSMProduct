@@ -3,7 +3,7 @@
  * Masteriyo Wrapper for PHP DateTime which adds support for gmt/utc offset when a
  * timezone is absent
  *
- * @since   0.1.0
+ * @since   1.0.0
  * @package Masteriyo\Classes
  */
 
@@ -27,7 +27,7 @@ class DateTime extends \DateTime {
 	/**
 	 * Output an ISO 8601 date string in local (WordPress) timezone.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return string
 	 */
 	public function __toString() {
@@ -64,7 +64,7 @@ class DateTime extends \DateTime {
 	/**
 	 * Missing in PHP 5.2 so just here so it can be supported consistently.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return int
 	 */
 	public function getTimestamp() {
@@ -74,7 +74,7 @@ class DateTime extends \DateTime {
 	/**
 	 * Get the timestamp with the WordPress timezone offset added or subtracted.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return int
 	 */
 	public function getOffsetTimestamp() {
@@ -84,7 +84,7 @@ class DateTime extends \DateTime {
 	/**
 	 * Format a date based on the offset timestamp.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $format Date format.
 	 * @return string
 	 */
@@ -95,7 +95,7 @@ class DateTime extends \DateTime {
 	/**
 	 * Return a localised date based on offset timestamp. Wrapper for date_i18n function.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $format Date format.
 	 * @return string
 	 */

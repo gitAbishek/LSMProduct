@@ -2,7 +2,7 @@
 /**
  * Masteriyo Onboard class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package  Masteriyo\Setup
  */
@@ -18,7 +18,7 @@ class Onboard {
 	/**
 	 * Page name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @access private
 	 * @var string Current page name.
 	 */
@@ -27,7 +27,7 @@ class Onboard {
 	/**
 	 * Initializing onboarding class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function init() {
@@ -46,7 +46,7 @@ class Onboard {
 	/**
 	 * Add Menu for onboard process.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function add_onboarding_admin_menu() {
 		add_menu_page(
@@ -61,7 +61,7 @@ class Onboard {
 	/**
 	 * Onboarding process.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function onboard_setup_wizard() {
 
@@ -129,7 +129,7 @@ class Onboard {
 	/**
 	 * Setup wizard header content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function setup_wizard_header() {
 		?>
@@ -149,7 +149,7 @@ class Onboard {
 	/**
 	 * Setup wizard body content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function setup_wizard_body() {
 		?>
@@ -163,7 +163,7 @@ class Onboard {
 	/**
 	 * Setup wizard footer content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function setup_wizard_footer() {
 		if ( function_exists( 'wp_print_media_templates' ) ) {

@@ -25,7 +25,7 @@ class Checkout {
 	/**
 	 * Cart instance.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var masteriyo\Cart\Cart
 	 */
@@ -34,7 +34,7 @@ class Checkout {
 	/**
 	 * Session instance.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Session\Session
 	 */
@@ -43,7 +43,7 @@ class Checkout {
 	/**
 	 * Checkout fields.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -52,7 +52,7 @@ class Checkout {
 	/**
 	 * Caches User object. @see get_value.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Models\User
 	 */
@@ -72,7 +72,7 @@ class Checkout {
 	 * Initialize hooks.
 	 *
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	private function init_hooks() {
 		add_action( 'masteriyo_checkout_form', array( $this, 'billing_form' ), 10 );
@@ -81,7 +81,7 @@ class Checkout {
 	/**
 	 * Display the billing form.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function billing_form() {
 		$current_user = masteriyo_get_current_user();
@@ -102,7 +102,7 @@ class Checkout {
 	/**
 	 * Process the checkout after the confirm order button is pressed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @throws Exception When validation fails.
 	 */
@@ -180,7 +180,7 @@ class Checkout {
 	/**
 	 * Get posted data from the checkout form.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return array of data.
 	 */
 	public function get_posted_data() {
@@ -233,7 +233,7 @@ class Checkout {
 	/**
 	 * See if a fieldset should be skipped.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $fieldset_key Fieldset key.
 	 * @param array  $data         Posted data.
 	 * @return bool
@@ -245,7 +245,7 @@ class Checkout {
 	/**
 	 * Is registration required to checkout?
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return boolean
 	 */
 	public function is_registration_required() {
@@ -256,7 +256,7 @@ class Checkout {
 	/**
 	 * Get an array of checkout fields.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $fieldset to get.
 	 * @return array
@@ -280,7 +280,7 @@ class Checkout {
 	/**
 	 * Update user and session data from the posted checkout data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $data Posted data.
 	 */
 	protected function update_session( $data ) {
@@ -303,7 +303,7 @@ class Checkout {
 	/**
 	 * Set address field for user.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $field String to update.
 	 * @param string $key   Field key.
 	 * @param array  $data  Array of data to get the value from.
@@ -324,7 +324,7 @@ class Checkout {
 	/**
 	 * Gets the value either from POST.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $input Name of the input we want to grab data for. e.g. billing_country.
 	 * @return string The default value.
@@ -348,7 +348,7 @@ class Checkout {
 	/**
 	 * Validates that the checkout has enough info to proceed.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  array    $data   An array of posted data.
 	 * @param  WP_Error $errors Validation errors.
 	 */
@@ -386,7 +386,7 @@ class Checkout {
 	/**
 	 * Validates the posted checkout data based on field properties.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  array    $data   An array of posted data.
 	 * @param  WP_Error $errors Validation error.
 	 */
@@ -531,7 +531,7 @@ class Checkout {
 			/**
 			 * Action hook to adjust user before save during checkout.
 			 *
-			 * @since 0.1.0
+			 * @since 1.0.0
 			 */
 			do_action( 'masteriyo_checkout_update_user', $user, $data );
 
@@ -549,7 +549,7 @@ class Checkout {
 	 *      525 - Cannot create line item.
 	 *      526 - Cannot create fee item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @throws Exception When checkout validation fails.
 	 * @param  array $data Posted data.
@@ -607,7 +607,7 @@ class Checkout {
 			/**
 			 * Action hook to adjust order before save.
 			 *
-			 * @since 0.1.0
+			 * @since 1.0.0
 			 */
 			do_action( 'masteriyo_checkout_create_order', $order, $data );
 
@@ -617,14 +617,14 @@ class Checkout {
 			/**
 			 * Action hook fired after an order is created used to add custom meta to the order.
 			 *
-			 * @since 0.1.0
+			 * @since 1.0.0
 			 */
 			do_action( 'masteriyo_checkout_update_order_meta', $order_id, $data );
 
 			/**
 			 * Action hook fired after an order is created.
 			 *
-			 * @since 0.1.0
+			 * @since 1.0.0
 			 */
 			do_action( 'masteriyo_checkout_order_created', $order );
 
@@ -640,7 +640,7 @@ class Checkout {
 	/**
 	 * If checkout failed during an AJAX call, send failure response.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function send_ajax_failure_response() {
 		// Bail early if not ajax.
@@ -669,7 +669,7 @@ class Checkout {
 	/**
 	 * Copy line items, tax, totals data from cart to order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 *
@@ -683,7 +683,7 @@ class Checkout {
 	/**
 	 * Add line items to the order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order instance.
 	 */
@@ -719,7 +719,7 @@ class Checkout {
 	/**
 	 * Process an order that does require payment.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param int    $order_id       Order ID.
 	 * @param string $payment_method Payment method.
 	 */
@@ -755,7 +755,7 @@ class Checkout {
 	/**
 	 * Process an order that doesn't require payment.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param int $order_id Order ID.
 	 */
 	protected function process_order_without_payment( $order_id ) {

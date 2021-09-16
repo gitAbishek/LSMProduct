@@ -2,7 +2,7 @@
 /**
  * The Template for displaying single course.
  *
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -12,7 +12,7 @@ get_header( 'masteriyo-course' );
 /**
  * Wrapper div opening.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 echo '<div class="masteriyo-w-100 masteriyo-container">';
 
@@ -43,7 +43,7 @@ do_action( 'masteriyo_after_related_posts' );
 /**
  * Wrapper div closing.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 echo '</div>';
 

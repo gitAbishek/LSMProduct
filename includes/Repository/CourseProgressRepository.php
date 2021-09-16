@@ -22,7 +22,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Meta type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -39,7 +39,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Create a course progress in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_progress CourseProgress object.
 	 */
@@ -137,7 +137,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Update a course progress item in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param CourseProgress $course_progress Course progress object.
 	 */
 	public function update( Model &$course_progress ) {
@@ -191,7 +191,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Remove an course progress from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param CourseProgress $course_progress Course progress object.
 	 * @param array         $args Array of args to pass to the delete method.
 	 */
@@ -213,7 +213,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Read a course progress from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseProgress $course_progress Course progress object.
 	 *
@@ -253,7 +253,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Clear meta cache.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseProgress $course_progress Course progress object.
 	 */
@@ -266,7 +266,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Fetch course progress items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return CourseProgress[]
@@ -323,7 +323,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Get course progress items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -373,7 +373,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Get course progress summary.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $type
 	 * @return array
@@ -388,7 +388,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Get all course progress summary.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseProgress $course_progress
 	 * @param array $items Course progress items (total and quiz),
@@ -406,7 +406,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Get total summary(completed, pending).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseProgress $course_progress Course progress object.
 	 * @param array $items Course progress items (total and quiz),

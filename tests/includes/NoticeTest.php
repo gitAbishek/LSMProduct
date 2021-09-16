@@ -18,7 +18,7 @@ class NoticeTest extends WP_UnitTestCase {
 	/**
 	 * Notice instance.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Notice
 	 */
@@ -27,7 +27,7 @@ class NoticeTest extends WP_UnitTestCase {
 	/**
 	 * Setup.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function setUp() {
 		parent::setUp();
@@ -74,7 +74,7 @@ class NoticeTest extends WP_UnitTestCase {
 	/**
 	 * Teardown
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function tearDown() {
 		$this->addToAssertionCount(
@@ -86,7 +86,7 @@ class NoticeTest extends WP_UnitTestCase {
 	/**
 	 * Test count.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_count() {
 		$this->assertEquals( $this->notice->count() , 5 );
@@ -97,7 +97,7 @@ class NoticeTest extends WP_UnitTestCase {
 	/**
 	 * Test has.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_has() {
 		$this->assertTrue( $this->notice->has( 'Notice Success 1', Notice::SUCCESS ) );
@@ -108,7 +108,7 @@ class NoticeTest extends WP_UnitTestCase {
 	/**
 	 * Test get.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_get() {
 		$this->assertEquals( count( $this->notice->get() ), 5 );
@@ -119,7 +119,7 @@ class NoticeTest extends WP_UnitTestCase {
 	/**
 	 * Test add.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */

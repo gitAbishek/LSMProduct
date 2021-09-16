@@ -5,7 +5,7 @@
  * Functions for course specific things.
  *
  * @package Masteriyo\Functions
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 use Masteriyo\Constants;
@@ -14,7 +14,7 @@ use Masteriyo\Query\UserCourseQuery;
 /**
  * For a given course, and optionally price/qty, work out the price with tax excluded, based on store settings.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  Course $course MASTERIYO_Course object.
  * @param  array      $args Optional arguments to pass course quantity and price.
  * @return float|string Price with tax excluded, or an empty string if price calculation failed.
@@ -46,7 +46,7 @@ function masteriyo_get_price_excluding_tax( $course, $args = array() ) {
 /**
  * Check whether the current user can start taking the course.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Masteriyo\Models\Course $course Course object or Course ID.
  * @param int|Masteriyo\Models\User $user User object or User ID.
@@ -90,7 +90,7 @@ function masteriyo_can_start_course( $course, $user = null ) {
 /**
  * Get masteriyo access modes.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @return string
  */
 function masteriyo_get_course_access_modes() {
@@ -111,7 +111,7 @@ function masteriyo_get_course_access_modes() {
  *
  * Uses wp_get_attachment_image if using an attachment ID handle responsiveness.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string       $size Image size.
  * @param string|array $attr Optional. Attributes for the image markup. Default empty.
@@ -154,7 +154,7 @@ function masteriyo_placeholder_img( $size = 'masteriyo_thumbnail', $attr = '' ) 
 /**
  * Get the placeholder image URL either from media, or use the fallback image.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $size Thumbnail size to use.
  * @return string
@@ -173,7 +173,7 @@ function masteriyo_placeholder_img_src( $size = 'masteriyo_thumbnail' ) {
 /**
  * Count comments on a course.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param mixed $course
  *
@@ -206,7 +206,7 @@ function masteriyo_count_course_comments( $course ) {
 /**
  * Get CSS class for course difficulty badge.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $difficulty
  *
@@ -229,7 +229,7 @@ function masteriyo_get_difficulty_badge_css_class( $difficulty ) {
 /**
  * Trim course highlights. Selects only the first given number of items.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $highlights
  * @param integer $limit
@@ -259,7 +259,7 @@ function masteriyo_trim_course_highlights( $highlights, $limit = 3 ) {
 /**
  * Get course contents.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param integer $course_id
  *
@@ -310,7 +310,7 @@ function masteriyo_get_course_contents( $course_id ) {
 /**
  * Get course structure.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param integer $course_id
  *

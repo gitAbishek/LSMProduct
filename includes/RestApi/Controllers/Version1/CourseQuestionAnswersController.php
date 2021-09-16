@@ -2,7 +2,7 @@
 /**
  * CommentController class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\RestApi\Controllers\Version1;
  */
@@ -49,7 +49,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -58,7 +58,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission Permission instance.
 	 */
@@ -69,7 +69,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Register Routes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -141,7 +141,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -168,7 +168,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int|WP_Comment|Model $object Object ID or WP_Comment or Model.
 	 *
@@ -196,7 +196,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Get objects.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  array $query_args Query args.
 	 * @return array
 	 */
@@ -224,7 +224,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
@@ -290,7 +290,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Get the Course question-answer's schema, conforming to JSON Schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -509,7 +509,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Checks if a given request has access to get a specific item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
@@ -542,7 +542,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Check if a given request has access to create an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -575,7 +575,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Check if a given request has access to delete an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -630,7 +630,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Check if a given request has access to update an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -685,7 +685,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Check permissions for an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $object_type Object type.
 	 * @param string $context   Request context.

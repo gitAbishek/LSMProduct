@@ -2,7 +2,7 @@
 /**
  * Core functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 use Masteriyo\DateTime;
@@ -18,7 +18,7 @@ use Masteriyo\Models\CourseReview;
 /**
  * Get course.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Course|WP_Post $course Course id or Course Model or Post.
  * @return Course|WP_Error
@@ -49,7 +49,7 @@ function masteriyo_get_course( $course ) {
 /**
  * Get lesson.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Lesson|WP_Post $lesson Lesson id or Lesson Model or Post.
  * @return Lesson|null
@@ -80,7 +80,7 @@ function masteriyo_get_lesson( $lesson ) {
 /**
  * Get section.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Section|WP_Post $section Section id or Section Model or Post.
  * @return Section|null
@@ -111,7 +111,7 @@ function masteriyo_get_section( $section ) {
 /**
  * Get Faq.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Faq|WP_Post $faq Faq id or Faq Model or Post.
  *
@@ -143,7 +143,7 @@ function masteriyo_get_faq( $faq ) {
 /**
  * Get sections.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param array $args Query arguments.
  *
@@ -158,7 +158,7 @@ function masteriyo_get_sections( $args = array() ) {
 /**
  * Get lessons.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param array $args Query arguments.
  *
@@ -173,7 +173,7 @@ function masteriyo_get_lessons( $args = array() ) {
 /**
  * Get quizes.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param array $args Query arguments.
  *
@@ -188,7 +188,7 @@ function masteriyo_get_quizes( $args = array() ) {
 /**
  * Get Faqs
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param array $args Query arguments.
  *
@@ -203,7 +203,7 @@ function masteriyo_get_faqs( $args = array() ) {
 /**
  * Get course reviews.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param array $args Query arguments.
  *
@@ -218,7 +218,7 @@ function masteriyo_get_course_reviews( $args = array() ) {
 /**
  * Get course question-answer.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  int|WP_Comment|Model $course_qa Object ID or WP_Comment or Model.
  * @return CourseQuestionAnswer|null
@@ -249,7 +249,7 @@ function masteriyo_get_course_qa( $course_qa ) {
 /**
  * Get course question-answers.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param array $args Query arguments.
  *
@@ -264,7 +264,7 @@ function masteriyo_get_course_qas( $args = array() ) {
 /**
  * Get course category.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|CourseCategory|WP_Term $course_cat Course Category id or Course Category Model or Term.
  * @return CourseCategory|null
@@ -295,7 +295,7 @@ function masteriyo_get_course_cat( $course_cat ) {
 /**
  * Get course tag.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|CourseTag|WP_Term $course_tag Course Tag id or Course Tag Model or Term.
  * @return CourseTag|null
@@ -326,7 +326,7 @@ function masteriyo_get_course_tag( $course_tag ) {
 /**
  * Get course difficulty.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|CourseDifficulty|WP_Term $course_difficulty Course Difficulty id or Course Difficulty Model or Term.
  * @return CourseDifficulty|null
@@ -357,7 +357,7 @@ function masteriyo_get_course_difficulty( $course_difficulty ) {
 /**
  * Get user.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|User|WP_User $user User  id or User Model or WP+User.
  * @return User|WP_Error
@@ -390,7 +390,7 @@ function masteriyo_get_user( $user ) {
  *
  * MASTERIYO_TEMPLATE_DEBUG_MODE will prevent overrides in themes from taking priority.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param mixed  $slug Template slug.
  * @param string $name Template name (default: '').
@@ -402,7 +402,7 @@ function masteriyo_get_template_part( $slug, $name = '' ) {
 /**
  * Get other templates and include the file.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $template_name Template name.
  * @param array  $args          Arguments. (default: array).
@@ -416,7 +416,7 @@ function masteriyo_get_template( $template_name, $args = array(), $template_path
 /**
  * Like get_template, but returns the HTML instead of outputting.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @see get_template
  *
@@ -434,7 +434,7 @@ function masteriyo_get_template_html( $template_name, $args = array(), $template
 /**
  * Add a template to the template cache.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $cache_key Object cache key.
  * @param string $template Located template.
@@ -446,7 +446,7 @@ function masteriyo_set_template_cache( $cache_key, $template ) {
 /**
  * Get template cache.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $cache_key Object cache key.
  *
@@ -465,7 +465,7 @@ function masteriyo_get_template_cache( $cache_key ) {
  * yourtheme/$template_name
  * $default_path/$template_name
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $template_name Template name.
  * @param string $template_path Template path. (default: '').
@@ -480,7 +480,7 @@ function masteriyo_locate_template( $template_name, $template_path = '', $defaul
 /**
  * Retrieve page ids - used for pages like courses. returns -1 if no page is found.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $page Page slug.
  *
@@ -497,7 +497,7 @@ function masteriyo_get_page_id( $page ) {
 /**
  * Retrieve page permalink.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string      $page page slug.
  * @param string|bool $fallback Fallback URL if page is not set. Defaults to home URL.
@@ -518,7 +518,7 @@ function masteriyo_get_page_permalink( $page, $fallback = null ) {
 /**
  * Get image asset URL.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $file Image file name.
  *
@@ -533,7 +533,7 @@ function masteriyo_img_url( $file ) {
 /**
  * Get current logged in user.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return User
  */
@@ -548,7 +548,7 @@ function masteriyo_get_current_user() {
 /**
  * Get markup for rating indicators.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $classes
  * @return array
@@ -576,7 +576,7 @@ function masteriyo_get_rating_indicators_markup( $classes = '' ) {
 /**
  * Get max allowed rating for course.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return integer
  */
@@ -587,7 +587,7 @@ function masteriyo_get_max_course_rating() {
 /**
  * Render stars based on rating.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|float $rating Given rating.
  * @param string $classes Extra classes to add to the svgs.
@@ -645,7 +645,7 @@ function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
 /**
  * Get related courses.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param Course $course
  *
@@ -681,7 +681,7 @@ function masteriyo_get_related_courses( $course ) {
 /**
  * Get lessons count for a course.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Course|WP_Post $course
  *
@@ -707,7 +707,7 @@ function masteriyo_get_lessons_count( $course ) {
 /**
  * Convert minutes to time length string to display on screen.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int    $minutes Total length in minutes.
  * @param string $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
@@ -735,7 +735,7 @@ function masteriyo_minutes_to_time_length_string( $minutes, $format = null ) {
 /**
  * Get lecture hours for a course as string to display on screen.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Course|WP_Post $course
  * @param string             $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
@@ -767,7 +767,7 @@ function masteriyo_get_lecture_hours( $course, $format = null ) {
 /**
  * Get lecture hours for a section as string to display on screen.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Section|WP_Post $course
  * @param string              $format Required format. Example: "%H% : %M%". '%H%' for placing hours and '%M%' for minutes.
@@ -799,7 +799,7 @@ function masteriyo_get_lecture_hours_of_section( $section, $format = null ) {
 /**
  * Make a dictionary with section id as key and its lessons as value from a course.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Course|WP_Post $course
  *
@@ -852,7 +852,7 @@ function masteriyo_make_section_to_lessons_dictionary( $course ) {
 
 /** Return "theme support" values from the current theme, if set.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  string $prop Name of prop (or key::subkey for arrays of props) if you want a specific value. Leave blank to get all props as an array.
  * @param  mixed  $default Optional value to return if the theme does not declare support for a prop.
  * @return mixed  Value of prop(s).
@@ -1303,7 +1303,7 @@ function masteriyo_get_currencies() {
 /**
  * Get permalink settings for things like courses and taxonomies.
  *
- * @since  0.1.0
+ * @since  1.0.0
  *
  * @param string $id Permalink id.
  *
@@ -1344,7 +1344,7 @@ function masteriyo_get_permalink_structure() {
 /**
  * Check whether to flush rules or not after settings saved.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 function masteriyo_maybe_flush_rewrite() {
 
@@ -1436,7 +1436,7 @@ function_exists( 'add_filter' ) && add_filter( 'post_type_link', 'masteriyo_cour
 /**
  * Switch Masteriyo to site language.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 function masteriyo_switch_to_site_locale() {
 	if ( function_exists( 'switch_to_locale' ) ) {
@@ -1453,7 +1453,7 @@ function masteriyo_switch_to_site_locale() {
 /**
  * Switch Masteriyo language to original.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 function masteriyo_restore_locale() {
 	if ( function_exists( 'restore_previous_locale' ) ) {
@@ -1470,7 +1470,7 @@ function masteriyo_restore_locale() {
 /**
  * Define a constant if it is not already defined.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @param string $name  Constant name.
  * @param mixed  $value Value.
  */
@@ -1484,7 +1484,7 @@ function masteriyo_maybe_define_constant( $name, $value ) {
 /**
  * Wrapper for nocache_headers which also disables page caching.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 function masteriyo_nocache_headers() {
 	masteriyo_set_nocache_constants();
@@ -1495,7 +1495,7 @@ function masteriyo_nocache_headers() {
 /**
  * Set constants to prevent caching by some plugins.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  mixed $return Value to return. Previously hooked into a filter.
  * @return mixed
@@ -1510,7 +1510,7 @@ function masteriyo_set_nocache_constants( $return = true ) {
 /**
  * Gets the url to the cart page.
  *
- * @since  0.1.0
+ * @since  1.0.0
  *
  * @return string Url to cart page
  */
@@ -1521,7 +1521,7 @@ function masteriyo_get_cart_url() {
 /**
  * Gets the url to the checkout page.
  *
- * @since  0.1.0
+ * @since  1.0.0
  *
  * @return string Url to checkout page
  */
@@ -1532,7 +1532,7 @@ function masteriyo_get_checkout_url() {
 /**
  * Gets the url to the courses page.
  *
- * @since  0.1.0
+ * @since  1.0.0
  *
  * @return string Url to courses page
  */
@@ -1543,7 +1543,7 @@ function masteriyo_get_courses_url() {
 /**
  * Gets the url to the account page.
  *
- * @since  0.1.0
+ * @since  1.0.0
  *
  * @return string Url to checkout page
  */
@@ -1554,7 +1554,7 @@ function masteriyo_get_account_url() {
 /**
  * Get current endpoint in the account page.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return string
  */
@@ -1591,7 +1591,7 @@ function masteriyo_get_current_account_endpoint() {
 /**
  * Return default value if the given value is empty. Uses the php function `empty`.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param mixed $value
  * @param mixed $default
@@ -1608,7 +1608,7 @@ function if_empty( $value, $default = null ) {
 /**
  * Get account endpoints' slugs.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return array
  */
@@ -1632,7 +1632,7 @@ function masteriyo_get_account_endpoints() {
 /**
  * Get account endpoint URL.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $endpoint Endpoint.
  *
@@ -1656,7 +1656,7 @@ function masteriyo_get_account_endpoint_url( $endpoint ) {
  *
  * Gets the URL for an endpoint, which varies depending on permalink settings.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  string $endpoint  Endpoint slug.
  * @param  string $value     Query param value.
@@ -1699,7 +1699,7 @@ function masteriyo_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 /**
  * Get logout endpoint.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $redirect Redirect URL.
  *
@@ -1718,7 +1718,7 @@ function masteriyo_logout_url( $redirect = '' ) {
 /**
  * Get a svg file contents.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string  $name SVG filename.
  * @param boolean $echo Whether to echo the contents or not.
@@ -1776,7 +1776,7 @@ function masteriyo_get_svg( $name, $echo = false ) {
 /**
  * Get Account menu items.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return array
  */
@@ -1822,7 +1822,7 @@ function masteriyo_get_account_menu_items() {
 /**
  * Check if the current page is the account page.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return boolean
  */
@@ -1840,7 +1840,7 @@ function masteriyo_is_account_page() {
 /**
  * Check if the current page is password reset page.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return boolean
  */
@@ -1851,7 +1851,7 @@ function masteriyo_is_lost_password_page() {
 /**
  * Check if the current page is signup page.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return boolean
  */
@@ -1862,7 +1862,7 @@ function masteriyo_is_signup_page() {
 /**
  * Check if the current page is view account page.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return boolean
  */
@@ -1873,7 +1873,7 @@ function masteriyo_is_view_account_page() {
 /**
  * Check if the current page is edit account page.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return boolean
  */
@@ -1884,7 +1884,7 @@ function masteriyo_is_edit_account_page() {
 /**
  * Get value of an option.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $setting_name
  * @param mixed  $default
@@ -1931,7 +1931,7 @@ if ( ! function_exists( 'masteriyo_create_new_user_username' ) ) {
 	/**
 	 * Create a unique username for a new customer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $email New customer email address.
 	 * @param array  $new_user_args Array of new user args, maybe including first and last names.
@@ -1986,7 +1986,7 @@ if ( ! function_exists( 'masteriyo_create_new_user_username' ) ) {
 		/**
 		 * WordPress 4.4 - filters the list of blocked usernames.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param array $usernames Array of blocked usernames.
 		 */
@@ -1999,7 +1999,7 @@ if ( ! function_exists( 'masteriyo_create_new_user_username' ) ) {
 			/**
 			 * Filter generated username.
 			 *
-			 * @since 0.1.0
+			 * @since 1.0.0
 			 *
 			 * @param string $username      Generated username.
 			 * @param string $email         New user email address.
@@ -2026,7 +2026,7 @@ if ( ! function_exists( 'masteriyo_create_new_user_username' ) ) {
 		/**
 		 * Filter new customer username.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param string $username      Customer username.
 		 * @param string $email         New customer email address.
@@ -2041,7 +2041,7 @@ if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 	/**
 	 * Create a new customer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $email    Customer email.
 	 * @param  string $username Customer username.
@@ -2120,7 +2120,7 @@ if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 /**
  * Login a customer (set auth cookie and set global user object).
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int $user_id Customer ID.
  */
@@ -2135,7 +2135,7 @@ function masteriyo_set_customer_auth_cookie( $user_id ) {
 /**
  * Get course review.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  int|WP_Comment|Model $course_review Object ID or WP_Comment or Model.
  * @return CourseReview|null
@@ -2166,7 +2166,7 @@ function masteriyo_get_course_review( $course_review ) {
 /**
  * Set password reset cookie.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $value Cookie value.
  */
@@ -2184,7 +2184,7 @@ function masteriyo_set_password_reset_cookie( $value = '' ) {
 /**
  * Get password reset link.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $reset_key
  * @param int    $user_id
@@ -2202,7 +2202,7 @@ function masteriyo_get_password_reset_link( $reset_key, $user_id ) {
 /*
  * Create a page and store the ID in an option.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param mixed  $slug Slug for the new page.
  * @param string $setting_name Setting name to store the page's ID.
@@ -2272,7 +2272,7 @@ function masteriyo_create_page( $slug, $setting_name = '', $page_title = '', $pa
 /**
  * Add a post display state for special masteriyo pages in the page list table.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param array   $post_states An array of post display states.
  * @param WP_Post $post        The current post object.
@@ -2332,7 +2332,7 @@ function masteriyo_asort_by_locale( &$data, $locale = '' ) {
 /**
  * Get the store's base location.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @return array
  */
 function masteriyo_get_base_location() {
@@ -2364,7 +2364,7 @@ function masteriyo_format_country_state_string( $country_string ) {
 /**
  * Check whetheter redirect to cart after course is added.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return bool
  */
@@ -2377,7 +2377,7 @@ function masteriyo_cart_redirect_after_add() {
 /**
  * Add precision to a number and return a number.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  float $value Number to add precision to.
  * @param  bool  $round If should round after adding precision.
  * @return int|float
@@ -2391,7 +2391,7 @@ function masteriyo_add_number_precision( $value, $round = true ) {
 /**
  * Add precision to an array of number and return an array of int.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  array $value Number to add precision to.
  * @param  bool  $round Should we round after adding precision?.
  * @return int|array
@@ -2411,7 +2411,7 @@ function masteriyo_add_number_precision_deep( $value, $round = true ) {
 /**
  * Remove precision from a number and return a float.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  float $value Number to add precision to.
  * @return float
  */
@@ -2423,7 +2423,7 @@ function masteriyo_remove_number_precision( $value ) {
 /**
  * Remove precision from an array of number and return an array of int.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  array $value Number to add precision to.
  * @return int|array
  */
@@ -2442,7 +2442,7 @@ function masteriyo_remove_number_precision_deep( $value ) {
 /**
  * Wrapper for set_time_limit to see if it is enabled.
  *
- * @since 0.1.0.
+ * @since 1.0.0.
  *
  * @param int $limit Time limit.
  */
@@ -2465,7 +2465,7 @@ function masteriyo_set_time_limit( $limit = 0 ) {
 /**
  * Get data if set, otherwise return a default value or null. Prevents notices when data is not set.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  mixed  $var     Variable.
  * @param  string $default Default value.
  * @return mixed
@@ -2477,7 +2477,7 @@ function masteriyo_get_var( &$var, $default = null ) {
 /**
  * User to sort checkout fields based on priority with uasort.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @param array $a First field to compare.
  * @param array $b Second field to compare.
  * @return int
@@ -2498,7 +2498,7 @@ function masteriyo_checkout_fields_uasort_comparison( $a, $b ) {
 /**
  * User to sort two values with ausort.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @param int $a First value to compare.
  * @param int $b Second value to compare.
  * @return int
@@ -2513,7 +2513,7 @@ function masteriyo_uasort_comparison( $a, $b ) {
 /**
  * Get user agent string.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @return string
  */
 function masteriyo_get_user_agent() {
@@ -2523,7 +2523,7 @@ function masteriyo_get_user_agent() {
 /**
  * Get WordPress user roles.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @return string[]
  */
 function masteriyo_get_wp_roles() {
@@ -2534,7 +2534,7 @@ function masteriyo_get_wp_roles() {
 /**
  * Get currency code.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return string[]
  */
@@ -2545,7 +2545,7 @@ function masteriyo_get_currency_codes() {
 /**
  * Wrapper for _doing_it_wrong().
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param string $function Function used.
  * @param string $message Message to log.
  * @param string $version Version the message was added in.
@@ -2566,7 +2566,7 @@ function masteriyo_doing_it_wrong( $function, $message, $version ) {
 /**
  * Return the Nasteriyo API URL for a given request.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string    $request Requested endpoint.
  * @param bool|null $ssl     If should use SSL, null if should auto detect. Default: null.
@@ -2598,7 +2598,7 @@ function masteriyo_api_request_url( $request, $ssl = null ) {
  * Some server environments block some debugging functions. This function provides a safe way to
  * turn an expression into a printable, readable form without calling blocked functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param mixed $expression The expression to be printed.
  * @param bool  $return     Optional. Default false. Set to true to return the human-readable string.
@@ -2645,7 +2645,7 @@ function masteriyo_print_r( $expression, $return = false ) {
 /**
  * Get Masteriyo version.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return string
  */
@@ -2656,7 +2656,7 @@ function masteriyo_get_version() {
 /**
  * Get Masteriyo plugin url.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return string
  */
@@ -2667,7 +2667,7 @@ function masteriyo_get_plugin_url() {
 /**
  * Get available lesson video sources.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return array
  */
@@ -2685,7 +2685,7 @@ function masteriyo_get_lesson_video_sources() {
 /**
  * Generate URL for a self hosted lesson video file.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param integer|string $lesson_id
  *
@@ -2711,7 +2711,7 @@ function masteriyo_generate_self_hosted_lesson_video_url( $lesson_id ) {
 /**
  * Get setting object containg all the masteriyo settings.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return Setting
  */
@@ -2726,7 +2726,7 @@ function masteriyo_get_settings() {
 /**
  * Get user acitivity statuses.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return array
  */
@@ -2744,7 +2744,7 @@ function masteriyo_get_user_activity_statuses() {
 /**
  * Get ip address for current request.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return string
  */
@@ -2756,7 +2756,7 @@ function masteriyo_get_current_ip_address() {
 /**
  * Get placeholder image for an author of a course review.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return string
  */
@@ -2767,7 +2767,7 @@ function masteriyo_get_course_review_author_pp_placeholder() {
 /**
  * Get course reviews and replies.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param integer|string|Course|WP_Post $course_id
  *
@@ -2819,7 +2819,7 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
  * Sizes defined by the theme take priority over settings. Settings are hidden when a theme
  * defines sizes.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param array|string $image_size Name of the image size to get, or an array of dimensions.
  * @return array Array of dimensions including width, height, and cropping mode. Cropping mode is 0 for no crop, and 1 for hard crop.
@@ -2890,7 +2890,7 @@ function masteriyo_get_image_size( $image_size ) {
 /**
  * Get the global setting value.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  string $name Name of setting to get.
  * @return mixed
  */
@@ -2905,7 +2905,7 @@ function masteriyo_get_setting( $name ) {
 /**
  * Get the global setting value.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param string $name Name of setting to get.
  * @param string $value Setting value.
  * @return mixed
@@ -2937,7 +2937,7 @@ function masteriyo_get_page_id_by_slug( $page_slug ) {
 /**
  * Check whether the string starts with substring.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @return bool
  */
 function masteriyo_starts_with( $haystack, $needle ) {
@@ -2947,7 +2947,7 @@ function masteriyo_starts_with( $haystack, $needle ) {
 /**
  * Check whether the string ends with substring.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @return bool
  */
 function masteriyo_ends_with( $haystack, $needle ) {
@@ -2957,7 +2957,7 @@ function masteriyo_ends_with( $haystack, $needle ) {
 /**
  * Get Masteriyo plugin path.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return string
  */
@@ -2968,7 +2968,7 @@ function masteriyo_get_plugin_path() {
 /**
  * Get Masteriyo templates path.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return string
  */
@@ -2979,7 +2979,7 @@ function masteriyo_get_templates_path() {
 /**
  * Get site logo data.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return array Logo data.
  */
@@ -2992,7 +2992,7 @@ function masteriyo_get_custom_logo_data() {
 /**
  * Get allowed svg elements to use in wp_kses functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return array
  */

@@ -2,13 +2,13 @@
 /**
  * Utility functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 /**
  * Check if the current page is a single course page.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return boolean
  */

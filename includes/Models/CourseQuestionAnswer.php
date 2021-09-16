@@ -2,7 +2,7 @@
 /**
  * Comment model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -17,14 +17,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * CourseQuestionAnswer Model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class CourseQuestionAnswer extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -33,7 +33,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -43,7 +43,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Stores course question answer data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -64,7 +64,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get the course question-answer if ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseQuestionAnswerRepository $mto_course_qa_repository Course question answer Repository.
 	 */
@@ -75,7 +75,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get user.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @return User
 	 */
@@ -92,7 +92,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get course_id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -105,7 +105,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get user_name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -118,7 +118,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get user_email.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -131,7 +131,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get user_url.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -144,7 +144,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get ip_address.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -157,7 +157,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get created_at.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -170,7 +170,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get content.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -183,7 +183,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get status.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -196,7 +196,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get agent.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -209,7 +209,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get type.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -222,7 +222,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get parent.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -235,7 +235,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Check if this is an answer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -246,7 +246,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get user_id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -265,7 +265,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Set course_id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $course_id course_id.
 	 */
@@ -276,7 +276,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Set user_name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $user_name Comment user name.
 	 */
@@ -287,7 +287,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Set user_email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $user_email Comment user email.
 	 */
@@ -298,7 +298,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Set user_url.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $user_url Comment user url.
 	 */
@@ -309,7 +309,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Set ip_address.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $ip_address Comment user IP.
 	 */
@@ -320,7 +320,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Set created_at.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $created_at Comment created_at.
 	 */
@@ -331,7 +331,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Set content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $content Comment content.
 	 */
@@ -342,7 +342,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Set status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $status Comment status.
 	 */
@@ -353,7 +353,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Set agent.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $agent Comment Agent.
 	 */
@@ -364,7 +364,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Set parent.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $parent Comment Parent.
 	 */
@@ -375,7 +375,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Set user_id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $user_id User ID.
 	 */
@@ -390,7 +390,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Return true if the course qa is created by the current user.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -401,7 +401,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Get answers count for the question.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return int
 	 */
@@ -412,7 +412,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Return if the course QA is created by the user role.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $role User's role.
 	 * @return boolean
@@ -430,7 +430,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Return true if the course QA is created by student.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -441,7 +441,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Return true if the course QA is created by instructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -452,7 +452,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Return true if the course QA is created by manager.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -463,7 +463,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Return true if the course QA is created by manager.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -474,7 +474,7 @@ class CourseQuestionAnswer extends Model {
 	/**
 	 * Retur user avatar url.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *

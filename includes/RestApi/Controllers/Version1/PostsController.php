@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * PostsController
  *
  * @package Masteriyo/RestApi
- * @version  0.1.0
+ * @version  1.0.0
  */
 abstract class PostsController extends CrudController {
 
@@ -28,7 +28,7 @@ abstract class PostsController extends CrudController {
 	/**
 	 * Checks if a given request has access to get a specific item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
@@ -96,7 +96,7 @@ abstract class PostsController extends CrudController {
 	/**
 	 * Check if a given request has access to create an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -125,7 +125,7 @@ abstract class PostsController extends CrudController {
 	/**
 	 * Check if a given request has access to delete an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -156,7 +156,7 @@ abstract class PostsController extends CrudController {
 	/**
 	 * Check if a given request has access to update an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -188,7 +188,7 @@ abstract class PostsController extends CrudController {
 		/**
 	 * Get previous and next links for the request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model           $object  Object data.
 	 * @return array                   Links for the given post.
@@ -233,7 +233,7 @@ abstract class PostsController extends CrudController {
 	/**
 	 * Get previous and next links for the request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model           $object  Object data.
 	 * @return array                   Links for the given post.
@@ -255,7 +255,7 @@ abstract class PostsController extends CrudController {
 	/**
 	 * Get navigation link.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_Post $object Post object.
 	 * @return string
@@ -275,7 +275,7 @@ abstract class PostsController extends CrudController {
 	/**
 	 * Get navigation items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_Post $model WP_Post object.
 	 * @param string $context Request context.
@@ -295,7 +295,7 @@ abstract class PostsController extends CrudController {
 	/**
 	 * Get navigation item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_Post $object WP_Post object.
 	 * @param string $context Request context.

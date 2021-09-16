@@ -2,7 +2,7 @@
 /**
  * Cart page shortcode.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @class CartShortcode
  * @package Masteriyo\Shortcodes
  */
@@ -21,7 +21,7 @@ class CartShortcode extends Shortcode {
 	/**
 	 * Shortcode tag.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -30,7 +30,7 @@ class CartShortcode extends Shortcode {
 	/**
 	 * Shortcode attributes with default values.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -39,7 +39,7 @@ class CartShortcode extends Shortcode {
 	/**
 	 * Get shortcode content.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @return string
 	 */

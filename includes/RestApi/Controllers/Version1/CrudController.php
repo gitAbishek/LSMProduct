@@ -4,7 +4,7 @@
  *
  * @class    CrudController
  * @package Masteriyo/RestApi
- * @version  0.1.0
+ * @version  1.0.0
  */
 
 namespace Masteriyo\RestApi\Controllers\Version1;
@@ -25,7 +25,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Endpoint namespace.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -34,7 +34,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * If object is hierarchical.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool
 	 */
@@ -43,7 +43,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Controls visibility on frontend.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -52,7 +52,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int $id Object ID.
 	 * @return object Model object or WP_Error object.
@@ -69,7 +69,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Get object permalink.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  object $object Object.
 	 *
@@ -82,7 +82,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  Model           $object  Object data.
 	 * @param  WP_REST_Request $request Request object.
@@ -97,7 +97,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Prepares one object for create or update operation.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  WP_REST_Request $request Request object.
 	 * @param  bool            $creating If is creating a new object.
@@ -112,7 +112,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Get a single item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -138,7 +138,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Save an object data.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  WP_REST_Request $request  Full details about the request.
 	 * @param  bool            $creating If is creating a new object.
@@ -171,7 +171,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Create a single item.
 	 *
-	 * @since 0.1.00
+	 * @since 1.0.00
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -195,7 +195,7 @@ abstract class CrudController extends RestController {
 			/**
 			 * Fires after a single object is created or updated via the REST API.
 			 *
-			 * @since 0.1.0
+			 * @since 1.0.0
 			 *
 			 * @param Model         $object    Inserted object.
 			 * @param WP_REST_Request $request   Request object.
@@ -222,7 +222,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Update a single post.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -266,7 +266,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Prepare objects query.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 *
@@ -323,7 +323,7 @@ abstract class CrudController extends RestController {
 	 * Determine the allowed query_vars for a get_items() response and
 	 * prepare for WP_Query.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array           $prepared_args Prepared arguments.
 	 * @param WP_REST_Request $request Request object.
@@ -364,7 +364,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Get all the WP Query vars that are allowed for the API request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -440,7 +440,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Get objects.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  array $query_args Query args.
 	 *
@@ -469,7 +469,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Check permissions for an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $post_type Post type.
 	 * @param string $context   Request context.
@@ -484,7 +484,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Get a collection of posts.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -542,7 +542,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Delete a single item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -564,7 +564,7 @@ abstract class CrudController extends RestController {
 		 *
 		 * Return false to disable trash support for the object.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param boolean $supports_trash Whether the object type support trashing.
 		 * @param Model $object         The object being considered for trashing support.
@@ -605,7 +605,7 @@ abstract class CrudController extends RestController {
 		/**
 		 * Fires after a single object is deleted or trashed via the REST API.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param Model          $object   The deleted or trashed object.
 		 * @param WP_REST_Response $response The response data.
@@ -619,7 +619,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model           $object  Object data.
 	 * @param WP_REST_Request $request Request object.
@@ -641,7 +641,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @return array
 	 */
@@ -763,7 +763,7 @@ abstract class CrudController extends RestController {
 		 * collection parameter to an internal WP_Query parameter. Use the
 		 * `rest_{$this->object_type}_query` filter to set WP_Query parameters.
 		 *
-		 * @siince 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param array        $query_params JSON Schema-formatted collection parameters.
 		 * @param WP_object_type $object_type    Post type object.

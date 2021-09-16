@@ -4,7 +4,7 @@
  *
  * @package Masteriyo\Emails
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo\Emails;
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Email Class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Emails
  */
@@ -23,7 +23,7 @@ class Email {
 	/**
 	 * Email method ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var String
 	 */
@@ -32,7 +32,7 @@ class Email {
 	/**
 	 * 'yes' if the method is enabled.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string yes, no
 	 */
@@ -42,7 +42,7 @@ class Email {
 	 * Setting name to check if this email is enabled.
 	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -52,7 +52,7 @@ class Email {
 	 * Setting name to get email subject from.
 	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -62,7 +62,7 @@ class Email {
 	 * Setting name to get email heading from.
 	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -72,7 +72,7 @@ class Email {
 	 * Setting name to get email receipients from.
 	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -81,7 +81,7 @@ class Email {
 	/**
 	 * Recipients for the email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -90,7 +90,7 @@ class Email {
 	/**
 	 * Object associated with this email, for example a customer, product, or email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var object|bool
 	 */
@@ -99,7 +99,7 @@ class Email {
 	/**
 	 * Strings to find/replace in subjects/headings.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -108,7 +108,7 @@ class Email {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->set_placeholders(
@@ -127,7 +127,7 @@ class Email {
 	/**
 	 * Get email subject.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -141,7 +141,7 @@ class Email {
 	/**
 	 * Get email heading.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -156,7 +156,7 @@ class Email {
 	/**
 	 * Get content to show above the email footer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -170,7 +170,7 @@ class Email {
 	/**
 	 * Format email string. Like processing placeholders.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $string Text to format.
 	 *
@@ -186,7 +186,7 @@ class Email {
 	/**
 	 * Set the locale to the site locale to make sure emails are in the site language.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function setup_locale() {
 		if ( apply_filters( 'masteriyo_email_setup_locale', true ) ) {
@@ -197,7 +197,7 @@ class Email {
 	/**
 	 * Restore the locale to the default locale. Use after finished with setup_locale.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function restore_locale() {
 		if ( apply_filters( 'masteriyo_email_restore_locale', true ) ) {
@@ -208,7 +208,7 @@ class Email {
 	/**
 	 * Send an email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $to Email to.
 	 * @param string $subject Email subject.
@@ -238,7 +238,7 @@ class Email {
 	/**
 	 * Get email headers.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -255,7 +255,7 @@ class Email {
 	/**
 	 * Get email attachments.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -266,7 +266,7 @@ class Email {
 	/**
 	 * Get email content type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -277,7 +277,7 @@ class Email {
 	/**
 	 * Get WordPress blog name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -288,7 +288,7 @@ class Email {
 	/**
 	 * Get email content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -299,7 +299,7 @@ class Email {
 	/**
 	 * Apply styles to dynamic content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $content Content to apply styles on.
 	 *
@@ -327,7 +327,7 @@ class Email {
 	/**
 	 * Get the from_name for outgoing emails.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $from_name Default wp_mail() name associated with the "from" email address.
 	 *
@@ -342,7 +342,7 @@ class Email {
 	/**
 	 * Get the from_address for outgoing emails.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $from_email Default wp_mail() email address to send from.
 	 *
@@ -357,7 +357,7 @@ class Email {
 	/**
 	 * Get email identifier.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -368,7 +368,7 @@ class Email {
 	/**
 	 * Check if this email is enabled.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -382,7 +382,7 @@ class Email {
 	/**
 	 * Set recipients.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $recipient
 	 */
@@ -393,7 +393,7 @@ class Email {
 	/**
 	 * Get valid recipients.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -408,7 +408,7 @@ class Email {
 	/**
 	 * Set associated object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param object $object
 	 */
@@ -421,7 +421,7 @@ class Email {
 	/**
 	 * Get the associated object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return object
 	 */
@@ -432,7 +432,7 @@ class Email {
 	/**
 	 * Get placeholders.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -443,7 +443,7 @@ class Email {
 	/**
 	 * Set placeholders.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $placeholders
 	 */
@@ -454,7 +454,7 @@ class Email {
 	/**
 	 * Get email subject.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -465,7 +465,7 @@ class Email {
 	/**
 	 * Get email heading.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -476,7 +476,7 @@ class Email {
 	/**
 	 * Default content to show below main email content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */

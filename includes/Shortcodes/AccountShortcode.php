@@ -2,7 +2,7 @@
 /**
  * Account shortcode.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @class AccountShortcode
  * @package Masteriyo\Shortcodes
  */
@@ -21,7 +21,7 @@ class AccountShortcode extends Shortcode {
 	/**
 	 * Shortcode tag.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -30,7 +30,7 @@ class AccountShortcode extends Shortcode {
 	/**
 	 * Shortcode attributes with default values.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -39,7 +39,7 @@ class AccountShortcode extends Shortcode {
 	/**
 	 * Get shortcode content.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @return string
 	 */
@@ -61,7 +61,7 @@ class AccountShortcode extends Shortcode {
 	/**
 	 * Get template path to render.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @return string
 	 */
@@ -82,7 +82,7 @@ class AccountShortcode extends Shortcode {
 	/**
 	 * Get lost password page template.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @return string
 	 */

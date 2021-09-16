@@ -2,7 +2,7 @@
 /**
  * CourseQuestionAnswer Repository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Repository;
  */
@@ -19,7 +19,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	/**
 	* Meta type.
 	*
-	* @since 0.1.0
+	* @since 1.0.0
 	*
 	* @var string
 	*/
@@ -28,7 +28,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $internal_meta_keys = array();
@@ -36,7 +36,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	/**
 	 * Create course question answer (comment) in database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_qa Course question-answer object.
 	 */
@@ -111,7 +111,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	/**
 	 * Read a course question-answer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_qa course question-answer object.
 	 *
@@ -158,7 +158,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	/**
 	 * Update a course question-answer in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_qa course question-answer object.
 	 *
@@ -203,7 +203,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	/**
 	 * Delete a course question-answer from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_qa course question-answer object.
 	 * @param array $args Array of args to pass.alert-danger.
@@ -238,7 +238,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	/**
 	 * Read course question-answer data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param User $course_qa Course question-answer object.
 	 */
@@ -265,7 +265,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	/**
 	 * Read extra data associated with the course question-answer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseQuestionAnswer $course_qa course question-answer object.
 	 */
@@ -284,7 +284,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	/**
 	 * Fetch course question-answers.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return CourseQuestionAnswer[]

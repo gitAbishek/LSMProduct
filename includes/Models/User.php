@@ -2,7 +2,7 @@
 /**
  * User model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -20,14 +20,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * User model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class User extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -36,7 +36,7 @@ class User extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -45,7 +45,7 @@ class User extends Model {
 	/**
 	 * Stores user data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -90,7 +90,7 @@ class User extends Model {
 	/**
 	 * Get the user if ID
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param UserRepository $user_repository User Repository.
 	 */
@@ -101,7 +101,7 @@ class User extends Model {
 	/**
 	 * Get User's avatar URL.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $args Avatar arguments.
 	 *
@@ -120,7 +120,7 @@ class User extends Model {
 	/**
 	 * Get user's login username.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -133,7 +133,7 @@ class User extends Model {
 	/**
 	 * Get users's login password(hash format).
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -146,7 +146,7 @@ class User extends Model {
 	/**
 	 * Get URL-friendly user name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -159,7 +159,7 @@ class User extends Model {
 	/**
 	 * Get user's email address.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -172,7 +172,7 @@ class User extends Model {
 	/**
 	 * Get user's URL.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -185,7 +185,7 @@ class User extends Model {
 	/**
 	 * Get created/registered date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -198,7 +198,7 @@ class User extends Model {
 	/**
 	 * Get password reset key.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -211,7 +211,7 @@ class User extends Model {
 	/**
 	 * Get user's status.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -224,7 +224,7 @@ class User extends Model {
 	/**
 	 * Get user's display name. Default is the user's username.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -237,7 +237,7 @@ class User extends Model {
 	/**
 	 * Get user's nickname. Default is the user's username.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -250,7 +250,7 @@ class User extends Model {
 	/**
 	 * Get user's first name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -263,7 +263,7 @@ class User extends Model {
 	/**
 	 * Get users's last name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -276,7 +276,7 @@ class User extends Model {
 	/**
 	 * Get the user's biographical description.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -289,7 +289,7 @@ class User extends Model {
 	/**
 	 * Get whether to enable the rich-editor for the user. Default true.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -302,7 +302,7 @@ class User extends Model {
 	/**
 	 * Get whether to enable the rich code editor for the user. Default true.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -315,7 +315,7 @@ class User extends Model {
 	/**
 	 * Get whether to enable comment moderation keyboard shortcuts for the user. Default false.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -328,7 +328,7 @@ class User extends Model {
 	/**
 	 * Get admin color scheme for the user. Default 'fresh'.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -341,7 +341,7 @@ class User extends Model {
 	/**
 	 * Get whether the user should always access the admin over https. Default false.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -354,7 +354,7 @@ class User extends Model {
 	/**
 	 * Multisite only. Whether the user is marked as spam. Default false.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -367,7 +367,7 @@ class User extends Model {
 	/**
 	 * Get whether to display the Admin Bar for the user on the site's front end. Default true.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -380,7 +380,7 @@ class User extends Model {
 	/**
 	 * Get user's locale. Default empty.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -393,7 +393,7 @@ class User extends Model {
 	/**
 	 * Get user's roles.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -406,7 +406,7 @@ class User extends Model {
 	/**
 	 * Get user's billing first name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -419,7 +419,7 @@ class User extends Model {
 	/**
 	 * Get user's billing last name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -432,7 +432,7 @@ class User extends Model {
 	/**
 	 * Get user's billing company.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -445,7 +445,7 @@ class User extends Model {
 	/**
 	 * Get user's billing address.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -458,7 +458,7 @@ class User extends Model {
 	/**
 	 * Get user's billing address 1.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -471,7 +471,7 @@ class User extends Model {
 	/**
 	 * Get user's billing address 1.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -484,7 +484,7 @@ class User extends Model {
 	/**
 	 * Get user's billing city.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -497,7 +497,7 @@ class User extends Model {
 	/**
 	 * Get user's billing post code.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -510,7 +510,7 @@ class User extends Model {
 	/**
 	 * Get user's billing country.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -523,7 +523,7 @@ class User extends Model {
 	/**
 	 * Get user's billing state.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -536,7 +536,7 @@ class User extends Model {
 	/**
 	 * Get user's billing email.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -549,7 +549,7 @@ class User extends Model {
 	/**
 	 * Get user's billing phone number.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -568,7 +568,7 @@ class User extends Model {
 	/**
 	 * Set user's username.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $username User's username.
 	 */
@@ -579,7 +579,7 @@ class User extends Model {
 	/**
 	 * Set user's password.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $password User's password.
 	 */
@@ -590,7 +590,7 @@ class User extends Model {
 	/**
 	 * Set user's nicename.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $nicename User's nicename.
 	 */
@@ -601,7 +601,7 @@ class User extends Model {
 	/**
 	 * Set user's email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $email User's email.
 	 */
@@ -612,7 +612,7 @@ class User extends Model {
 	/**
 	 * Set user's url.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $url User's url.
 	 */
@@ -623,7 +623,7 @@ class User extends Model {
 	/**
 	 * Set user's registration/creation date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $date_created User's date_created.
 	 */
@@ -634,7 +634,7 @@ class User extends Model {
 	/**
 	 * Set user's password reset/activation key.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $activation_key User's activation_key.
 	 */
@@ -645,7 +645,7 @@ class User extends Model {
 	/**
 	 * Set user's status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $status User's status.
 	 */
@@ -656,7 +656,7 @@ class User extends Model {
 	/**
 	 * Set user's display_name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $display_name User's display_name.
 	 */
@@ -667,7 +667,7 @@ class User extends Model {
 	/**
 	 * Set user's nickname.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $nickname User's nickname.
 	 */
@@ -678,7 +678,7 @@ class User extends Model {
 	/**
 	 * Set user's first name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $first_name User's first_name.
 	 */
@@ -689,7 +689,7 @@ class User extends Model {
 	/**
 	 * Set user's last name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $last_name User's last_name.
 	 */
@@ -700,7 +700,7 @@ class User extends Model {
 	/**
 	 * Set user's biographical description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $description User's description.
 	 */
@@ -711,7 +711,7 @@ class User extends Model {
 	/**
 	 * Set the rich-editor for the user.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $rich_editing User's rich_editing.
 	 */
@@ -722,7 +722,7 @@ class User extends Model {
 	/**
 	 * Set the rich code editor for the user.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $syntax_highlighting User's syntax highlighting.
 	 */
@@ -733,7 +733,7 @@ class User extends Model {
 	/**
 	 * Set comment moderation keyboard shortcuts for the user.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $comment_shortcuts User's comment shortcuts.
 	 */
@@ -744,7 +744,7 @@ class User extends Model {
 	/**
 	 * Set admin color scheme for the user.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $admin_color Admin color scheme of the user.
 	 */
@@ -755,7 +755,7 @@ class User extends Model {
 	/**
 	 * Set the user should always access the admin over https.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $use_ssl User's use_ssl.
 	 */
@@ -766,7 +766,7 @@ class User extends Model {
 	/**
 	 * Set the user as spam. Multisite only.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $span
 	 */
@@ -777,7 +777,7 @@ class User extends Model {
 	/**
 	 * Set display the Admin Bar for the user on the site's front end.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $show_admin_bar_front User's show admin bar front..
 	 */
@@ -788,7 +788,7 @@ class User extends Model {
 	/**
 	 * Set user's locale.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $locale User's locale.
 	 */
@@ -799,7 +799,7 @@ class User extends Model {
 	/**
 	 * Set user's roles.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $roles User's roles.
 	 */
@@ -816,7 +816,7 @@ class User extends Model {
 	/**
 	 * Set user's billing first name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $first_name User's billing first name.
 	 * @return void
@@ -828,7 +828,7 @@ class User extends Model {
 	/**
 	 * Set user's billing last name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $last_name User's billing last name.
 	 * @return void
@@ -840,7 +840,7 @@ class User extends Model {
 	/**
 	 * Set user's billing company.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $company User's billing company.
 	 * @return void
@@ -852,7 +852,7 @@ class User extends Model {
 	/**
 	 * Set user's billing address_1.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $address_1 User's billing address_1.
 	 * @return void
@@ -864,7 +864,7 @@ class User extends Model {
 	/**
 	 * Set user's billing address_2.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $address_2 User's billing address_2.
 	 * @return void
@@ -876,7 +876,7 @@ class User extends Model {
 	/**
 	 * Set user's billing city.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $city User's billing city.
 	 */
@@ -887,7 +887,7 @@ class User extends Model {
 	/**
 	 * Set user's billing post code.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $postcode User's billing post code.
 	 */
@@ -899,7 +899,7 @@ class User extends Model {
 	/**
 	 * Set user's billing country.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $country User's country.
 	 */
@@ -910,7 +910,7 @@ class User extends Model {
 	/**
 	 * Set user's billing state.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $state User's billing state.
 	 */
@@ -921,7 +921,7 @@ class User extends Model {
 	/**
 	 * Set user's billing email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $email User's billing email.
 	 */
@@ -932,7 +932,7 @@ class User extends Model {
 	/**
 	 * Set user's billing phone.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $phone User's billing phone.
 	 */

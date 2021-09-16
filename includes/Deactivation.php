@@ -2,7 +2,7 @@
 /**
  * Deactivation class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -12,7 +12,7 @@ class Deactivation {
 	/**
 	 * Initialization.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function init() {
 		register_deactivation_hook( Constants::get( 'MASTERIYO_PLUGIN_FILE' ), array( __CLASS__, 'on_deactivate' ) );
@@ -21,7 +21,7 @@ class Deactivation {
 	/**
 	 * Callback for plugin deactivation hook.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function on_deactivate() {
 		self::remove_roles();
@@ -30,7 +30,7 @@ class Deactivation {
 	/**
 	 * Remove roles.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function remove_roles() {
 		foreach ( Roles::get_all() as $role_slug => $role ) {

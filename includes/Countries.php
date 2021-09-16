@@ -3,7 +3,7 @@
  * Masteriyo countries
  *
  * @package Masteriyo\l10n
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 namespace Masteriyo;
@@ -20,7 +20,7 @@ class Countries {
 	/**
 	 * Countries list.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -29,7 +29,7 @@ class Countries {
 	/**
 	 * States list.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -38,7 +38,7 @@ class Countries {
 	/**
 	 * Calling codes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -47,7 +47,7 @@ class Countries {
 	/**
 	 * Locales list.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -56,7 +56,7 @@ class Countries {
 	/**
 	 * List of address formats for locales.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -65,7 +65,7 @@ class Countries {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->get_countries();
@@ -74,7 +74,7 @@ class Countries {
 	/**
 	 * Get all countries.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -96,7 +96,7 @@ class Countries {
 	/**
 	 * Check if a given code represents a valid ISO 3166-1 alpha-2 code for a country known to us.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $country_code The country code to check as a ISO 3166-1 alpha-2 code.
 	 * @return bool True if the country is known to us, false otherwise.
 	 */
@@ -107,7 +107,7 @@ class Countries {
 	/**
 	 * Get all continents.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -125,7 +125,7 @@ class Countries {
 	/**
 	 * Get continent code for a country code.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $cc Country code.
 	 * @return string
 	 */
@@ -146,7 +146,7 @@ class Countries {
 	/**
 	 * Get calling code for a country code.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $cc Country code.
 	 * @return string|array Some countries have multiple. The code will be stripped of - and spaces and always be prefixed with +.
 	 */
@@ -167,7 +167,7 @@ class Countries {
 	/**
 	 * Get continents that the store ships to.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return array
 	 */
 	public function get_shipping_continents() {
@@ -188,7 +188,7 @@ class Countries {
 	/**
 	 * Get the states for a country.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $cc Country code.
 	 * @return false|array of states
@@ -209,7 +209,7 @@ class Countries {
 	/**
 	 * Get the base address (first line) for the store.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return string
 	 */
 	public function get_base_address() {
@@ -220,7 +220,7 @@ class Countries {
 	/**
 	 * Get the base address (second line) for the store.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return string
 	 */
 	public function get_base_address_2() {
@@ -231,7 +231,7 @@ class Countries {
 	/**
 	 * Get the base country for the store.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -243,7 +243,7 @@ class Countries {
 	/**
 	 * Get the base state for the store.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -255,7 +255,7 @@ class Countries {
 	/**
 	 * Get the base city for the store.
 	 *
-	 * @version 0.1.0
+	 * @version 1.0.0
 	 * @return string
 	 */
 	public function get_base_city() {
@@ -266,7 +266,7 @@ class Countries {
 	/**
 	 * Get the base postcode for the store.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return string
 	 */
 	public function get_base_postcode() {
@@ -277,7 +277,7 @@ class Countries {
 	/**
 	 * Get countries that the store sells to.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -316,7 +316,7 @@ class Countries {
 	/**
 	 * Get countries that the store ships to.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -345,7 +345,7 @@ class Countries {
 	/**
 	 * Get allowed country states.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -372,7 +372,7 @@ class Countries {
 	/**
 	 * Get shipping country states.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -403,7 +403,7 @@ class Countries {
 	/**
 	 * Gets an array of countries in the EU.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $type Type of countries to retrieve. Blank for EU member countries. eu_vat for EU VAT countries.
 	 * @return string[]
@@ -422,7 +422,7 @@ class Countries {
 	/**
 	 * Gets an array of countries using VAT.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return string[] of country codes.
 	 */
 	public function get_vat_countries() {
@@ -435,7 +435,7 @@ class Countries {
 	/**
 	 * Gets the correct string for shipping - either 'to the' or 'to'.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $country_code Country code.
 	 * @return string
@@ -451,7 +451,7 @@ class Countries {
 	/**
 	 * Prefix certain countries with 'the'.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $country_code Country code.
 	 * @return string
@@ -467,7 +467,7 @@ class Countries {
 	/**
 	 * Correctly name tax in some countries VAT on the frontend.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -480,7 +480,7 @@ class Countries {
 	/**
 	 * Include the Inc Tax label.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -493,7 +493,7 @@ class Countries {
 	/**
 	 * Include the Ex Tax label.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -506,7 +506,7 @@ class Countries {
 	/**
 	 * Outputs the list of countries and states for use in dropdown boxes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $selected_country Selected country.
 	 * @param string $selected_state   Selected state.
@@ -542,7 +542,7 @@ class Countries {
 	/**
 	 * Get country address formats.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * These define how addresses are formatted for display in various countries.
 	 *
@@ -602,7 +602,7 @@ class Countries {
 	/**
 	 * Get country address format.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  array  $args Arguments.
 	 * @param  string $separator How to separate address lines. @since 3.5.0.
@@ -693,7 +693,7 @@ class Countries {
 	/**
 	 * Trim white space and commas off a line.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $line Line.
 	 * @return string
@@ -705,7 +705,7 @@ class Countries {
 	/**
 	 * Returns the fields we show by default. This can be filtered later on.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -740,7 +740,7 @@ class Countries {
 	 *
 	 * These locales override the default country selections after a country is chosen.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -1408,7 +1408,7 @@ class Countries {
 	/**
 	 * Apply locale and get address fields.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  mixed  $country Country.
 	 * @param  string $type    Address type, defaults to 'billing_'.
@@ -1476,7 +1476,7 @@ class Countries {
 	/**
 	 * Get country name from country code.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $code Country code.
 	 *

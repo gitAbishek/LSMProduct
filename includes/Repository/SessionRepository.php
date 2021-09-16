@@ -2,7 +2,7 @@
 /**
  * Session Repository
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @class Session
  * @package Masteriyo\Session
  */
@@ -19,7 +19,7 @@ class SessionRepository implements RepositoryInterface {
 	/**
 	 * Create a session in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $session session object.
 	 */
@@ -48,7 +48,7 @@ class SessionRepository implements RepositoryInterface {
 	/**
 	 * Delete a session from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $session Session object.
 	 * @param array $args   Array of args to pass.
@@ -65,7 +65,7 @@ class SessionRepository implements RepositoryInterface {
 	/**
 	 * Read a session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $session Cource object.
 	 * @throws Exception If invalid session.
@@ -99,7 +99,7 @@ class SessionRepository implements RepositoryInterface {
 	/**
 	 * Update a session in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $session Session object.
 	 *
@@ -130,7 +130,7 @@ class SessionRepository implements RepositoryInterface {
 	/**
 	 * Returns an array of meta for an object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model  $model a Model object.
 	 * @return MetaData[]
@@ -142,7 +142,7 @@ class SessionRepository implements RepositoryInterface {
 	/**
 	 * Deletes meta based on meta ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model  $model a Model object.
 	 * @param  MetaData  $meta Meta object (containing at least ->id).
@@ -155,7 +155,7 @@ class SessionRepository implements RepositoryInterface {
 	/**
 	 * Add new piece of meta.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model  $model a Model object.
 	 * @param  MetaData  $meta Meta object (containing ->key and ->value).
@@ -168,7 +168,7 @@ class SessionRepository implements RepositoryInterface {
 	/**
 	 * Update meta.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model  $model a Model object.
 	 * @param  MetaData  $meta Meta object (containing ->id, ->key and ->value).

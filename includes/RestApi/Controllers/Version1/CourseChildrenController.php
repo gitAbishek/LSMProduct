@@ -7,7 +7,7 @@
  * @author   mi5t4n
  * @category API
  * @package Masteriyo\RestApi
- * @since    0.1.0
+ * @since    1.0.0
  */
 
 namespace Masteriyo\RestApi\Controllers\Version1;
@@ -27,7 +27,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Endpoint namespace.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -36,7 +36,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Route base.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -45,7 +45,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -54,7 +54,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -63,7 +63,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -72,7 +72,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission
 	 */
@@ -83,7 +83,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Register the routes for terms.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function register_routes() {
 		register_rest_route(
@@ -104,7 +104,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Check if a given request has access to read the terms.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -133,7 +133,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Get the query params for collections
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -156,7 +156,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Prepare objects query.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return array
 	 */
@@ -169,7 +169,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_Post $post Post object.
 	 * @return object Model object or WP_Error object.
@@ -190,7 +190,7 @@ class CourseChildrenController extends CrudController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  Model         $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.

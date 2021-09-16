@@ -2,7 +2,7 @@
 /**
  * Handle data for the current user's session based on cookie..
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @class Session
  * @package Masteriyo\Session
  */
@@ -24,7 +24,7 @@ class Session extends AbstractSession {
 	/**
 	 * Cookie name used for the session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string cookie name.
 	 */
@@ -33,7 +33,7 @@ class Session extends AbstractSession {
 	/**
 	 * True when the cookie exists.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool Based on whether a cookie exists.
 	 */
@@ -42,7 +42,7 @@ class Session extends AbstractSession {
 	/**
 	 * Table name for session data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string Custom session table name.
 	 */
@@ -53,7 +53,7 @@ class Session extends AbstractSession {
 	 *
 	 * @param Masteriyo\Repository\SessionRepository $session_repository Session repository.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct( SessionRepository $session_repository ) {
 		$this->repository = $session_repository;
@@ -64,7 +64,7 @@ class Session extends AbstractSession {
 	/**
 	 * Init hooks and session data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return Masteriyo\Abstracts\Session
 	 */
@@ -81,7 +81,7 @@ class Session extends AbstractSession {
 	/**
 	 * Should the session cookie be secure?
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -94,7 +94,7 @@ class Session extends AbstractSession {
 	 *
 	 * Session cookies without a customer ID are invalid.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool|array
 	 */
@@ -125,7 +125,7 @@ class Session extends AbstractSession {
 	/**
 	 * Save data and delete guest session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param integer $old_session_key session Key before user logs in.
 	 */
@@ -149,7 +149,7 @@ class Session extends AbstractSession {
 	/**
 	 * Setup cookie and customer ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function init_session_cookie() {
 		$cookie = $this->get_session_cookie();
@@ -190,7 +190,7 @@ class Session extends AbstractSession {
 	 *
 	 * Warning: Cookies will only be set if this is called before the headers are sent.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $set Should the session cookie be set.
 	 */
@@ -210,7 +210,7 @@ class Session extends AbstractSession {
 	/**
 	 * Set a cookie - wrapper for setcookie using WP constants.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string  $name   Name of the cookie being set.
 	 * @param  string  $value  Value of the cookie.
@@ -230,7 +230,7 @@ class Session extends AbstractSession {
 	/**
 	 * Get session data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -241,7 +241,7 @@ class Session extends AbstractSession {
 	/**
 	 * Set session expiration.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function set_session_expiration() {
 		$this->expiring   = time() + (int) apply_filters( 'masteriyo_session_expiring', 47 * HOUR_IN_SECONDS );
@@ -253,7 +253,7 @@ class Session extends AbstractSession {
 	/**
 	 * Return true if the current user has an active session, i.e. a cookie to retrieve values.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -264,7 +264,7 @@ class Session extends AbstractSession {
 	/**
 	 * Return true if the cookie is set.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -275,7 +275,7 @@ class Session extends AbstractSession {
 	/**
 	 * Get the name of the session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -286,7 +286,7 @@ class Session extends AbstractSession {
 	/**
 	 * Get session table.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */

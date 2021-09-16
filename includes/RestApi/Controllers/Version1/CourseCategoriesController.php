@@ -50,7 +50,7 @@ class CourseCategoriesController extends RestTermsController {
 	/**
 	 * Taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -183,7 +183,7 @@ class CourseCategoriesController extends RestTermsController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int|WP_Term|Model $object Object ID or WP_Term or Model.
 	 *
@@ -210,7 +210,7 @@ class CourseCategoriesController extends RestTermsController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
@@ -241,7 +241,7 @@ class CourseCategoriesController extends RestTermsController {
 	/**
 	 * Get course category data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseCategory $course_cat Course instance.
 	 * @param string         $context Request context. Options: 'view' and 'edit'.
@@ -267,7 +267,7 @@ class CourseCategoriesController extends RestTermsController {
 	/**
 	 * Get objects.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  array $query_args Query args.
 	 * @return array
 	 */
@@ -289,7 +289,7 @@ class CourseCategoriesController extends RestTermsController {
 	/**
 	 * Process objects collection.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $objects Course categories data.
 	 * @param array $query_args Query arguments.

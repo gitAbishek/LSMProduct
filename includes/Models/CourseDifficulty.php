@@ -2,7 +2,7 @@
 /**
  * CourseDifficulty model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * CourseDifficulty model (post type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class CourseDifficulty extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -35,7 +35,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -44,7 +44,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -53,7 +53,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Stores course_difficulty data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -71,7 +71,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Get the course difficulty if ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseDifficultyRepository $course_difficulty_repository Course Difficulty Repository.
 	 */
@@ -88,7 +88,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Get the course difficulty's title. For course difficultys this is the course difficulty name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -99,7 +99,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Course difficulty permalink.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -110,7 +110,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Returns the children IDs if applicable. Overridden by child classes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array of IDs
 	 */
@@ -127,7 +127,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Get course difficulty name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -140,7 +140,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Get course difficulty slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -153,7 +153,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Get course difficulty description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -166,7 +166,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Get course difficulty term group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -179,7 +179,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Get course difficulty term taxonomy id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -192,7 +192,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Get course difficulty taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -205,7 +205,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Get number of course for the difficulty.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -218,7 +218,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Get term order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -232,7 +232,7 @@ class CourseDifficulty extends Model {
 	 * Get course difficulty parent id. For course difficulty, there won't be any parent so it will
 	 * always return false.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function get_parent_id() {
 		return false;
@@ -247,7 +247,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Set course difficulty name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name Course difficulty name.
 	 */
@@ -258,7 +258,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Set course difficulty slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $slug Course difficulty slug.
 	 */
@@ -269,7 +269,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Set course difficulty description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $description Course difficulty description.
 	 */
@@ -280,7 +280,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Set course difficulty term group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $term_group Course difficulty term group.
 	 */
@@ -291,7 +291,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Set course difficulty term taxonomy id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $term_taxonomy_id Course difficulty term taxonomy id.
 	 */
@@ -302,7 +302,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Set course difficulty taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $taxonomy Course difficulty taxonomy.
 	 */
@@ -313,7 +313,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Set number of course for the difficulty.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $count Number of posts for the course difficulty term.
 	 */
@@ -324,7 +324,7 @@ class CourseDifficulty extends Model {
 	/**
 	 * Set term order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $term_order Course difficulty term order.
 	 */

@@ -2,7 +2,7 @@
 /**
  * Course progress model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Course progress model (custom table).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class CourseProgress extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -35,7 +35,7 @@ class CourseProgress extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -44,7 +44,7 @@ class CourseProgress extends Model {
 	/**
 	 * Stores data about status changes so relevant hooks can be fired.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool|array
 	 */
@@ -54,7 +54,7 @@ class CourseProgress extends Model {
 	/**
 	 * Course progress items (lesson, quiz) etc.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -63,7 +63,7 @@ class CourseProgress extends Model {
 	/**
 	 * Store items which are changed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -72,7 +72,7 @@ class CourseProgress extends Model {
 	/**
 	 * Stores user course progress data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -88,7 +88,7 @@ class CourseProgress extends Model {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param RepositoryInterface $course_progress_repository Course progress Repository,
 	 */
@@ -105,7 +105,7 @@ class CourseProgress extends Model {
 	/**
 	 * Get user course progress table.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -124,7 +124,7 @@ class CourseProgress extends Model {
 	/**
 	 * Get user ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param  string $context What the value is for. Valid values are view and edit.
 
@@ -137,7 +137,7 @@ class CourseProgress extends Model {
 	/**
 	 * Get course id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param  string $context What the value is for. Valid values are view and edit.
 
@@ -150,7 +150,7 @@ class CourseProgress extends Model {
 	/**
 	 * Get course progress type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param  string $context What the value is for. valid values are view and edit.
 
@@ -163,7 +163,7 @@ class CourseProgress extends Model {
 	/**
 	 * Get course progress status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param  string $context What the value is for. valid values are view and edit.
 
@@ -176,7 +176,7 @@ class CourseProgress extends Model {
 	/**
 	 * Get course progress start.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. valid values are view and edit.
 	 * @return DateTime|null
@@ -188,7 +188,7 @@ class CourseProgress extends Model {
 	/**
 	 * Get course progress update.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. valid values are view and edit.
 	 * @return DateTime|null
@@ -200,7 +200,7 @@ class CourseProgress extends Model {
 	/**
 	 * Get course progress complete.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. valid values are view and edit.
 	 * @return DateTime|null
@@ -218,7 +218,7 @@ class CourseProgress extends Model {
 	/**
 	 * Set user ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param int $user_id User ID.
 	 */
@@ -229,7 +229,7 @@ class CourseProgress extends Model {
 	/**
 	 * Set course ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param int $course_id Course ID.
 	 */
@@ -240,7 +240,7 @@ class CourseProgress extends Model {
 	/**
 	 * Set user's course progress status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $new_status    Status to change the course_progress to.
 	 * @param string $note          Optional note to add.
@@ -288,7 +288,7 @@ class CourseProgress extends Model {
 	/**
 	 * Set course progress start.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $start Course progress start.
 	 */
@@ -299,7 +299,7 @@ class CourseProgress extends Model {
 	/**
 	 * Set course progress update.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $update Course progress update.
 	 */
@@ -310,7 +310,7 @@ class CourseProgress extends Model {
 	/**
 	 * Set course progress complete.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $complete Course progress complete.
 	 */
@@ -328,7 +328,7 @@ class CourseProgress extends Model {
 	/**
 	 * Save data to the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return int Course progress ID
 	 */
 	public function save() {
@@ -347,7 +347,7 @@ class CourseProgress extends Model {
 	/**
 	 * Get user course progress items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -371,7 +371,7 @@ class CourseProgress extends Model {
 	/**
 	 * Get all valid statuses for this course progress
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return array Internal status keys e.g. (start, progress, complete)
 	 */
 	protected function get_valid_statuses() {
@@ -381,7 +381,7 @@ class CourseProgress extends Model {
 	/**
 	 * Handle the status transition.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function status_transition() {
 		$status_transition = $this->status_transition;
@@ -409,7 +409,7 @@ class CourseProgress extends Model {
 	/**
 	 * Get status transition.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -420,7 +420,7 @@ class CourseProgress extends Model {
 	/**
 	 * Set status transition.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function set_status_transition( $status_transition ) {
 		$this->status_transition = $status_transition;

@@ -4,7 +4,7 @@
  *
  * @package Masteriyo\Emails
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo\Emails;
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 /**
  * CustomerNewAccountEmail Class. Used for sending new account email.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Emails
  */
@@ -24,7 +24,7 @@ class CustomerNewAccountEmail extends Email {
 	/**
 	 * Email method ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var String
 	 */
@@ -33,7 +33,7 @@ class CustomerNewAccountEmail extends Email {
 	/**
 	 * HTML template path.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -42,7 +42,7 @@ class CustomerNewAccountEmail extends Email {
 	/**
 	 * Send this email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param User $user
 	 */
@@ -80,7 +80,7 @@ class CustomerNewAccountEmail extends Email {
 	/**
 	 * Get email content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -100,7 +100,7 @@ class CustomerNewAccountEmail extends Email {
 	/**
 	 * Get default email subject.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -111,7 +111,7 @@ class CustomerNewAccountEmail extends Email {
 	/**
 	 * Get default email heading.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -122,7 +122,7 @@ class CustomerNewAccountEmail extends Email {
 	/**
 	 * Default content to show above the email footer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */

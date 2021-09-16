@@ -2,7 +2,7 @@
 /**
  * CourseTagRepository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Repository;
  */
@@ -20,7 +20,7 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 	/**
 	 * Meta type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -37,7 +37,7 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 	/**
 	 * Create a course_tag in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_tag CourseTag object.
 	 */
@@ -74,7 +74,7 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 	/**
 	 * Read a course_tag.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model $course_tag CourseTag object.
 	 *
@@ -109,7 +109,7 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 	/**
 	 * Update a course_tag in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_tag CourseTag object.
 	 *
@@ -165,7 +165,7 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 	/**
 	 * Delete a course_tag from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_tag Course_Tag object.
 	 * @param array $args       Array of args to pass.alert-danger.
@@ -188,7 +188,7 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 	/**
 	 * Read course_tag data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseTag $course_tag CourseTag object.
 	 */
@@ -218,7 +218,7 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 	/**
 	 * Read extra data associated with the course_tag.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseTag $course_tag CourseTag object.
 	 */

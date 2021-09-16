@@ -2,7 +2,7 @@
 /**
  * OrderItemCourseRepository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Repository;
  */
@@ -22,7 +22,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -36,7 +36,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	/**
 	 * Read an order item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $order_item Cource object.
 	 *
@@ -89,7 +89,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	/**
 	 * Update an order item in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $order_item Order Item object.
 	 *
@@ -124,7 +124,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	/**
 	 * Delete an order item from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $order_item Order Item object.
 	 * @param  array $args Array of args to pass to the delete method.
@@ -163,7 +163,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	/**
 	 * Read order item data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param OrderItem $order_item Order Item object.
 	 */
@@ -193,7 +193,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	/**
 	 * Read extra data associated with the order item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param OrderItem $order_item Order Item object.
 	 */
@@ -213,7 +213,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	/**
 	 * Fetch order items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return OrderItem[]
@@ -302,7 +302,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	/**
 	 * Delete order items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return OrderItem[]

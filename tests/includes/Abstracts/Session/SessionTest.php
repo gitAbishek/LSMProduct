@@ -15,7 +15,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Session instance.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Abstracts\Session\Session
 	 */
@@ -24,7 +24,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Setup.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function setUp() {
 		parent::setUp();
@@ -35,7 +35,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Teardown
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function tearDown() {
 		$this->addToAssertionCount(
@@ -47,7 +47,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test get id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_get_id() {
 		$this->session->set_id( 12 );
@@ -59,7 +59,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test get id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_set_id() {
 		$this->session->set_id( 'session124' );
@@ -70,7 +70,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test get expiry.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_get_expiry() {
 		$this->session->set_expiry( 12345 );
@@ -81,7 +81,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test set expiry.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_set_expiry() {
 		$this->session->set_expiry( -12345 );
@@ -93,7 +93,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test generate user id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_generate_id() {
 		// Test when user is not logged in.
@@ -120,7 +120,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test get.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_get() {
 		$this->session->put( 'firstname', 'john' );
@@ -131,7 +131,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test set.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_set() {
 		$this->session->put( 'weekdays', array( 'sunday', 'monday' ) );
@@ -144,7 +144,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test all.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_all() {
 		$this->session->put( 'firstname', 'john' );
@@ -157,7 +157,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test exists.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_exists() {
 		$this->session->put( 'firstname', 'john' );
@@ -171,7 +171,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test has.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_has() {
 		$this->session->put( 'firstname', 'john' );
@@ -189,7 +189,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test remove.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_remove() {
 		$this->session->put( 'firstname', 'john' );
@@ -202,7 +202,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test forget.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_forget() {
 		$this->session->put( 'firstname', 'john' );

@@ -4,7 +4,7 @@
  *
  * @package Masteriyo\Emails
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo\Emails;
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 /**
  * ResetPasswordEmail Class. Used for sending password reset email.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Emails
  */
@@ -22,7 +22,7 @@ class ResetPasswordEmail extends Email {
 	/**
 	 * Email method ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var String
 	 */
@@ -31,7 +31,7 @@ class ResetPasswordEmail extends Email {
 	/**
 	 * Password reset key.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -40,7 +40,7 @@ class ResetPasswordEmail extends Email {
 	/**
 	 * HTML template path.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -49,7 +49,7 @@ class ResetPasswordEmail extends Email {
 	/**
 	 * Send this email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $user_id User ID.
 	 * @param string $reset_key Password reset key.
@@ -92,7 +92,7 @@ class ResetPasswordEmail extends Email {
 	/**
 	 * Get email content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -113,7 +113,7 @@ class ResetPasswordEmail extends Email {
 	/**
 	 * Get default email subject.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -124,7 +124,7 @@ class ResetPasswordEmail extends Email {
 	/**
 	 * Get default email heading.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -135,7 +135,7 @@ class ResetPasswordEmail extends Email {
 	/**
 	 * Default content to show above the email footer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -146,7 +146,7 @@ class ResetPasswordEmail extends Email {
 	/**
 	 * Set the pasword reset key.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $key
 	 */
@@ -157,7 +157,7 @@ class ResetPasswordEmail extends Email {
 	/**
 	 * Get the password reset key.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */

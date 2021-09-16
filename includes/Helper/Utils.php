@@ -2,7 +2,7 @@
 /**
  * Utility functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo\Helper;
@@ -13,7 +13,7 @@ class Utils {
 	/**
 	 * Wrapper for mb_strtoupper which see's if supported first.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $string String to format.
 	 * @return string
 	 */
@@ -25,7 +25,7 @@ class Utils {
 	 * Make a string lowercase.
 	 * Try to use mb_strtolower() when available.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $string String to format.
 	 * @return string
 	 */
@@ -36,7 +36,7 @@ class Utils {
 	/**
 	 * Converts a bool to a 'yes' or 'no'.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param bool $bool String to convert.
 	 * @return string
 	 */
@@ -47,7 +47,7 @@ class Utils {
 	/**
 	 * Converts a string (e.g. 'yes' or 'no') to a bool.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $string String to convert.
 	 * @return bool
 	 */
@@ -59,7 +59,7 @@ class Utils {
 	 * Helper to get cached object terms and filter by field using wp_list_pluck().
 	 * Works as a cached alternative for wp_get_post_terms() and wp_get_object_terms().
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  int    $object_id Object ID.
 	 * @param  string $taxonomy  Taxonomy slug.
@@ -81,7 +81,7 @@ class Utils {
 	/**
 	 * Wrapper for _doing_it_wrong().
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param string $function Function used.
 	 * @param string $message Message to log.
@@ -103,7 +103,7 @@ class Utils {
 	/**
 	 * Given a path, this will convert any of the subpaths into their corresponding tokens.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $path The absolute path to tokenize.
 	 * @param array  $path_tokens An array keyed with the token, containing paths that should be replaced.
 	 * @return string The tokenized path.
@@ -142,7 +142,7 @@ class Utils {
 	/**
 	 * Given a tokenized path, this will expand the tokens to their full path.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $path The absolute path to expand.
 	 * @param array  $path_tokens An array keyed with the token, containing paths that should be expanded.
 	 * @return string The absolute path.
@@ -211,7 +211,7 @@ class Utils {
 	/**
 	 * Check if the home URL is https. If it is, we don't need to do things such as 'force ssl'.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @return bool
 	 */
@@ -223,7 +223,7 @@ class Utils {
 	 * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
 	 * Non-scalar values are ignored.
 	 *
-	 * @since 0.1.0s
+	 * @since 1.0.0s
 	 *
 	 * @param string|array $var Data to sanitize.
 	 * @return string|array
@@ -239,7 +239,7 @@ class Utils {
 	/**
 	 * Set a cookie - wrapper for setcookie using WP constants.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string  $name   Name of the cookie being set.
 	 * @param  string  $value  Value of the cookie.

@@ -2,7 +2,7 @@
 /**
  * Checkout page shortcode.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @class CheckoutShortcode
  * @package Masteriyo\Shortcodes
  */
@@ -21,7 +21,7 @@ class CheckoutShortcode extends Shortcode {
 	/**
 	 * Shortcode tag.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -30,7 +30,7 @@ class CheckoutShortcode extends Shortcode {
 	/**
 	 * Shortcode attributes with default values.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -41,7 +41,7 @@ class CheckoutShortcode extends Shortcode {
 	/**
 	 * Get shortcode content.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @return string
 	 */
@@ -110,7 +110,7 @@ class CheckoutShortcode extends Shortcode {
 	/**
 	 * Show thank you page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param integer $order_id Order ID.
 	 */

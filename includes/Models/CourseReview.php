@@ -2,7 +2,7 @@
 /**
  * Comment model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * CourseReview Model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class CourseReview extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -35,7 +35,7 @@ class CourseReview extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -45,7 +45,7 @@ class CourseReview extends Model {
 	/**
 	 * Stores course review data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -69,7 +69,7 @@ class CourseReview extends Model {
 	/**
 	 * Get the course review if ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseReviewRepository $course_review_repository Course Review Repository.
 	 */
@@ -86,7 +86,7 @@ class CourseReview extends Model {
 	/**
 	 * Get course_id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -99,7 +99,7 @@ class CourseReview extends Model {
 	/**
 	 * Get author_name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -112,7 +112,7 @@ class CourseReview extends Model {
 	/**
 	 * Get author_email.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -125,7 +125,7 @@ class CourseReview extends Model {
 	/**
 	 * Get author_url.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -138,7 +138,7 @@ class CourseReview extends Model {
 	/**
 	 * Get ip_address.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -151,7 +151,7 @@ class CourseReview extends Model {
 	/**
 	 * Get date_created.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -164,7 +164,7 @@ class CourseReview extends Model {
 	/**
 	 * Get title.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -177,7 +177,7 @@ class CourseReview extends Model {
 	/**
 	 * Get content.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -190,7 +190,7 @@ class CourseReview extends Model {
 	/**
 	 * Get rating.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -203,7 +203,7 @@ class CourseReview extends Model {
 	/**
 	 * Get status.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -216,7 +216,7 @@ class CourseReview extends Model {
 	/**
 	 * Get agent.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -229,7 +229,7 @@ class CourseReview extends Model {
 	/**
 	 * Get type.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -242,7 +242,7 @@ class CourseReview extends Model {
 	/**
 	 * Get parent.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -255,7 +255,7 @@ class CourseReview extends Model {
 	/**
 	 * Check if this is a reply.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -266,7 +266,7 @@ class CourseReview extends Model {
 	/**
 	 * Get author_id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -279,7 +279,7 @@ class CourseReview extends Model {
 	/**
 	 * Get author.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @return User
 	 */
@@ -296,7 +296,7 @@ class CourseReview extends Model {
 	/**
 	 * Set course_id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $course_id course_id.
 	 */
@@ -307,7 +307,7 @@ class CourseReview extends Model {
 	/**
 	 * Set author_name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $author_name Comment author name.
 	 */
@@ -318,7 +318,7 @@ class CourseReview extends Model {
 	/**
 	 * Set author_email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $author_email Comment author email.
 	 */
@@ -329,7 +329,7 @@ class CourseReview extends Model {
 	/**
 	 * Set author_url.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $author_url Comment author url.
 	 */
@@ -340,7 +340,7 @@ class CourseReview extends Model {
 	/**
 	 * Set ip_address.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $ip_address Comment author IP.
 	 */
@@ -351,7 +351,7 @@ class CourseReview extends Model {
 	/**
 	 * Set date_created.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $date_created Comment date_created.
 	 */
@@ -362,7 +362,7 @@ class CourseReview extends Model {
 	/**
 	 * Set title.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $title Comment title.
 	 */
@@ -373,7 +373,7 @@ class CourseReview extends Model {
 	/**
 	 * Set content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $content Comment content.
 	 */
@@ -384,7 +384,7 @@ class CourseReview extends Model {
 	/**
 	 * Set rating.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $rating Comment rating.
 	 */
@@ -395,7 +395,7 @@ class CourseReview extends Model {
 	/**
 	 * Set status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $status Comment status.
 	 */
@@ -406,7 +406,7 @@ class CourseReview extends Model {
 	/**
 	 * Set agent.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $agent Comment Agent.
 	 */
@@ -417,7 +417,7 @@ class CourseReview extends Model {
 	/**
 	 * Set type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $type Comment Type.
 	 */
@@ -428,7 +428,7 @@ class CourseReview extends Model {
 	/**
 	 * Set parent.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $parent Comment Parent.
 	 */
@@ -439,7 +439,7 @@ class CourseReview extends Model {
 	/**
 	 * Set author_id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $author_id User ID.
 	 */

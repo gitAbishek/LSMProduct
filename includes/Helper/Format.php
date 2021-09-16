@@ -2,7 +2,7 @@
 /**
  * Masteriyo formatting functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 use Masteriyo\DateTime;
@@ -11,7 +11,7 @@ use Masteriyo\Constants;
 /**
  * Converts a string (e.g. 'yes' or 'no') to a bool.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @param string|bool $string String to convert. If a bool is passed it will be returned as-is.
  * @return bool
  */
@@ -28,7 +28,7 @@ function masteriyo_string_to_bool( $string ) {
 /**
  * Converts a bool to a 'yes' or 'no'.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @param bool|string $bool Bool to convert. If a string is passed it will first be converted to a bool.
  * @return string
  */
@@ -42,7 +42,7 @@ function masteriyo_bool_to_string( $bool ) {
 /**
  * Convert a date string to a DateTime.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  string $time_string Time string.
  * @return Masteriyo\DateTime
  */
@@ -69,7 +69,7 @@ function masteriyo_string_to_datetime( $time_string ) {
 /**
  * Get timezone offset in seconds.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @return float
  */
 function masteriyo_timezone_offset() {
@@ -88,7 +88,7 @@ function masteriyo_timezone_offset() {
  *
  * Based on masteriyos_strtotime_dark_knight() from MASTERIYO Subscriptions by Prospress.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  string   $time_string    Time string.
  * @param  int|null $from_timestamp Timestamp to convert from.
  * @return int
@@ -118,7 +118,7 @@ function masteriyo_string_to_timestamp( $time_string, $from_timestamp = null ) {
  *
  * Adapted from https://secure.php.net/manual/en/function.timezone-name-from-abbr.php#89155.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @return string PHP timezone string for the site
  */
 function masteriyo_timezone_string() {
@@ -169,7 +169,7 @@ function masteriyo_timezone_string() {
  *
  * This function does not remove thousands - this should be done before passing a value to the function.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  float|string $number     Expects either a float or a string with a decimal separator only (no thousands).
  * @param  mixed        $dp number  Number of decimal points to use, blank to use masteriyo_price_num_decimals, or false to avoid all rounding.
@@ -208,7 +208,7 @@ function masteriyo_format_decimal( $number, $dp = false, $trim_zeros = false ) {
 /**
  * Return the thousand separator for prices.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @return string
  */
 function masteriyo_get_price_thousand_separator() {
@@ -220,7 +220,7 @@ function masteriyo_get_price_thousand_separator() {
 /**
  * Return the decimal separator for prices.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @return string
  */
 function masteriyo_get_price_decimal_separator() {
@@ -232,7 +232,7 @@ function masteriyo_get_price_decimal_separator() {
 /**
  * Return the number of decimals after the decimal point.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @return int
  */
 function masteriyo_get_price_decimals() {
@@ -244,7 +244,7 @@ function masteriyo_get_price_decimals() {
 /**
  * Format the price with a currency symbol.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  float $price Raw price.
  * @param  array $args  Arguments to format a price {
@@ -296,7 +296,7 @@ function masteriyo_price( $price, $args = array() ) {
 	/**
 	 * Filters the string of price markup.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $html              Price HTML markup.
 	 * @param string $price             Formatted price.
@@ -309,7 +309,7 @@ function masteriyo_price( $price, $args = array() ) {
 /**
  * Get the price format depending on the currency position.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return string
  */
@@ -338,7 +338,7 @@ function masteriyo_get_price_format() {
 /**
  * Get rounding precision for internal MASTERIYO calculations.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @return int
  */
 function masteriyo_get_rounding_precision() {
@@ -353,7 +353,7 @@ function masteriyo_get_rounding_precision() {
 /**
  * Trim trailing zeros off prices.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string|float|int $price Price.
  * @return string
@@ -366,7 +366,7 @@ function masteriyo_trim_zeros( $price ) {
  * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
  * Non-scalar values are ignored.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string|array $var Data to sanitize.
  * @return string|array
@@ -383,7 +383,7 @@ function masteriyo_clean( $var ) {
 /**
  * Masteriyo Date Format - Allows to change date format for everything Masteriyo.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return string
  */
@@ -400,7 +400,7 @@ function masteriyo_date_format() {
 /**
  * Masteriyo Time Format - Allows to change time format for everything Masteriyo.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return string
  */
@@ -418,7 +418,7 @@ function masteriyo_time_format() {
  *
  * Cannot use masteriyo_clean because it sometimes strips % chars and breaks the user's setting.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  string $value Permalink.
  * @return string
  */
@@ -440,7 +440,7 @@ function masteriyo_sanitize_permalink( $value ) {
  * Make a string lowercase.
  * Try to use mb_strtolower() when available.
  *
- * @since  0.1.0
+ * @since  1.0.0
  *
  * @param  string $string String to format.
  *
@@ -453,7 +453,7 @@ function masteriyo_strtolower( $string ) {
 /**
  * Wrapper for mb_strtoupper which see's if supported first.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  string $string String to format.
  * @return string
  */
@@ -464,7 +464,7 @@ function masteriyo_strtoupper( $string ) {
 /**
  * Formats a stock amount by running it through a filter.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  int|float $amount Stock amount.
  * @return int|float
@@ -482,7 +482,7 @@ function masteriyo_stock_amount( $amount ) {
  * but in PHP 8 it throws an error. Specifically, in Masteriyo we have a few places where
  * round('') is often executed.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param mixed $val The value to round.
  * @param int   $precision The optional number of decimal digits to round to.
@@ -501,7 +501,7 @@ function masteriyo_round( $val, $precision = 0, $mode = PHP_ROUND_HALF_UP ) {
 /**
  * Format the postcode according to the country and length of the postcode.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $postcode Unformatted postcode.
  * @param string $country  Base country.
@@ -545,7 +545,7 @@ function masteriyo_format_postcode( $postcode, $country ) {
  *
  * Remove spaces and convert characters to uppercase.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @param string $postcode Postcode.
  * @return string
  */
@@ -556,7 +556,7 @@ function masteriyo_normalize_postcode( $postcode ) {
 /**
  * Format phone numbers.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $phone Phone number.
  * @return string
@@ -572,7 +572,7 @@ function masteriyo_format_phone_number( $phone ) {
  * Sanitize phone number.
  * Allows only numbers and "+" (plus sign).
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @param string $phone Phone number.
  * @return string
  */
@@ -584,7 +584,7 @@ if ( ! function_exists( 'masteriyo_format_rating' ) ) {
 	/**
 	 * Format ratint to SVGs.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param float $rating
 	 * @param boolean $echo
@@ -646,7 +646,7 @@ if ( ! function_exists( 'masteriyo_format_rating' ) ) {
 /**
  * Trim a string and append a suffix.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  string  $string String to trim.
  * @param  integer $chars  Amount of characters.
@@ -669,7 +669,7 @@ function masteriyo_trim_string( $string, $chars = 200, $suffix = '...' ) {
 /**
  * Convert a float to a string without locale formatting which PHP adds when changing floats to strings.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param  float $float Float value to format.
  * @return string
@@ -689,7 +689,7 @@ function masteriyo_float_to_string( $float ) {
 /**
  * Format a date for output.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  Masteriyo\DateTime $date   Instance of Masteriyo\DateTime.
  * @param  string      $format Data format.
  *                             Defaults to the masteriyo_date_format function if not set.
@@ -713,7 +713,7 @@ function masteriyo_format_datetime( $date, $format = '' ) {
  * Required WP 4.4 or later.
  * See https://developer.wordpress.org/reference/functions/mysql_to_rfc3339/
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @param  string|null|DateTime $date Date.
  * @param  bool                    $utc  Send false to get local/offset time.
  * @return string|null ISO8601/RFC3339 formatted datetime.
@@ -741,7 +741,7 @@ function masteriyo_rest_prepare_date_response( $date, $utc = true ) {
  * Remove formatting and allow "+".
  * Example and specs: https://developer.mozilla.org/en/docs/Web/HTML/Element/a#Creating_a_phone_link
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string $phone Content to convert phone number.
  * @return string Content with converted phone number.

@@ -2,7 +2,7 @@
 /**
  * Course model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -20,14 +20,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Course model (post type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class Course extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -36,7 +36,7 @@ class Course extends Model {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -45,7 +45,7 @@ class Course extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -54,7 +54,7 @@ class Course extends Model {
 	/**
 	 * Stores course data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -98,7 +98,7 @@ class Course extends Model {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param RepositoryInterface $course_repository Course Repository,
 	 */
@@ -109,7 +109,7 @@ class Course extends Model {
 	/**
 	 * Get featured image URL.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -123,7 +123,7 @@ class Course extends Model {
 	/**
 	 * If the stock level comes from another product ID, this should be modified.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return int
 	 */
 	public function get_stock_managed_by_id() {
@@ -175,7 +175,7 @@ class Course extends Model {
 	/**
 	 * Get lecture hours in human readable format.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @return string
 	 */
@@ -186,7 +186,7 @@ class Course extends Model {
 	/**
 	 * Get the object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -197,7 +197,7 @@ class Course extends Model {
 	/**
 	 * Get the post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -214,7 +214,7 @@ class Course extends Model {
 	/**
 	 * Get course name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -227,7 +227,7 @@ class Course extends Model {
 	/**
 	 * Get course slug.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -240,7 +240,7 @@ class Course extends Model {
 	/**
 	 * Get course created date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -253,7 +253,7 @@ class Course extends Model {
 	/**
 	 * Get course modified date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -266,7 +266,7 @@ class Course extends Model {
 	/**
 	 * Get course status.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -279,7 +279,7 @@ class Course extends Model {
 	/**
 	 * Get catalog visibility.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -292,7 +292,7 @@ class Course extends Model {
 	/**
 	 * Get course description.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -305,7 +305,7 @@ class Course extends Model {
 	/**
 	 * Get course short description.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -320,7 +320,7 @@ class Course extends Model {
 	 *
 	 * Reference: https://developer.wordpress.org/reference/functions/wp_trim_excerpt/
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -356,7 +356,7 @@ class Course extends Model {
 	/**
 	 * Returns the course's password.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -369,7 +369,7 @@ class Course extends Model {
 	/**
 	 * Returns whether review is allowed or not..
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string price
@@ -382,7 +382,7 @@ class Course extends Model {
 	/**
 	 * Get date on sale from.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string|NULL object if the date is set or null if there is no date.
 	 */
@@ -393,7 +393,7 @@ class Course extends Model {
 	/**
 	 * Get date on sale to.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return DateTime|NULL object if the date is set or null if there is no date.
 	 */
@@ -404,7 +404,7 @@ class Course extends Model {
 	/**
 	 * Returns course author id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -417,7 +417,7 @@ class Course extends Model {
 	/**
 	 * Returns course parent id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -430,7 +430,7 @@ class Course extends Model {
 	/**
 	 * Returns course menu order.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -443,7 +443,7 @@ class Course extends Model {
 	/**
 	 * Returns course's active price.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -456,7 +456,7 @@ class Course extends Model {
 	/**
 	 * Returns course's regular price.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -469,7 +469,7 @@ class Course extends Model {
 	/**
 	 * Returns course's sale price.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -481,7 +481,7 @@ class Course extends Model {
 	/**
 	 * Returns course's price type.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -494,7 +494,7 @@ class Course extends Model {
 	/**
 	 * Returns course category ids.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -507,7 +507,7 @@ class Course extends Model {
 	/**
 	 * Returns course tag ids.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -520,7 +520,7 @@ class Course extends Model {
 	/**
 	 * Returns course difficulty id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -533,7 +533,7 @@ class Course extends Model {
 	/**
 	 * Get the difficulty object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -557,7 +557,7 @@ class Course extends Model {
 	/**
 	 * Returns course tag ids.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -570,7 +570,7 @@ class Course extends Model {
 	/**
 	 * Check whether the course is featured or not.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -583,7 +583,7 @@ class Course extends Model {
 	/**
 	 * Returns whether or not the course is featured.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -594,7 +594,7 @@ class Course extends Model {
 	/**
 	 * Get the total amount (COUNT) of ratings, or just the count for one rating e.g. number of 5 star ratings.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int $value Optional. Rating value to get the count for. By default returns the count of all rating values.
 	 *
@@ -614,7 +614,7 @@ class Course extends Model {
 	/**
 	 * Get rating count.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return array of counts
 	 */
@@ -625,7 +625,7 @@ class Course extends Model {
 	/**
 	 * Get average rating.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return float
 	 */
@@ -636,7 +636,7 @@ class Course extends Model {
 	/**
 	 * Get review count.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return int
 	 */
@@ -647,7 +647,7 @@ class Course extends Model {
 	/**
 	 * Get the enrollment limit (maximum number of students allowed to enroll).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return int
 	 */
@@ -658,7 +658,7 @@ class Course extends Model {
 	/**
 	 * Get course duration.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return int
 	 */
@@ -669,7 +669,7 @@ class Course extends Model {
 	/**
 	 * Get course access mode.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return int
 	 */
@@ -680,7 +680,7 @@ class Course extends Model {
 	/**
 	 * Get course billing cycle.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return int
 	 */
@@ -694,7 +694,7 @@ class Course extends Model {
 	 * True = Visible to all.
 	 * False = Visible to only enrollees.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return int
 	 */
@@ -705,7 +705,7 @@ class Course extends Model {
 	/**
 	 * Get course purchase note.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return int
 	 */
@@ -716,7 +716,7 @@ class Course extends Model {
 	/**
 	 * Get course highlights.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return int
 	 */
@@ -727,7 +727,7 @@ class Course extends Model {
 	/**
 	 * Get main image ID.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string
 	 */
@@ -744,7 +744,7 @@ class Course extends Model {
 	/**
 	 * Set course name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name course name.
 	 */
@@ -755,7 +755,7 @@ class Course extends Model {
 	/**
 	 * Set course slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $slug course slug.
 	 */
@@ -766,7 +766,7 @@ class Course extends Model {
 	/**
 	 * Set course created date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -777,7 +777,7 @@ class Course extends Model {
 	/**
 	 * Set course modified date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -788,7 +788,7 @@ class Course extends Model {
 	/**
 	 * Set course status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $status course status.
 	 */
@@ -799,7 +799,7 @@ class Course extends Model {
 	/**
 	 * Set course description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $description Course description.
 	 */
@@ -810,7 +810,7 @@ class Course extends Model {
 	/**
 	 * Set course short description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $short_description Course short description.
 	 */
@@ -821,7 +821,7 @@ class Course extends Model {
 	/**
 	 * Set the course's password.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $password Password.
 	 */
@@ -832,7 +832,7 @@ class Course extends Model {
 	/**
 	 * Set the course's review status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $reviews_allowed Reviews allowed.( Value can be 'open' or 'closed')
 	 */
@@ -843,7 +843,7 @@ class Course extends Model {
 	/**
 	 * Set the course author id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $author_id Author id.
 	 */
@@ -854,7 +854,7 @@ class Course extends Model {
 	/**
 	 * Set the course parent id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $parent Parent id.
 	 */
@@ -865,7 +865,7 @@ class Course extends Model {
 	/**
 	 * Set the course menu order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $menu_order Menu order id.
 	 */
@@ -876,7 +876,7 @@ class Course extends Model {
 	/**
 	 * Set the course's active price.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $price Price.
 	 */
@@ -887,7 +887,7 @@ class Course extends Model {
 	/**
 	 * Set the course's regular price.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $price Regular price.
 	 */
@@ -898,7 +898,7 @@ class Course extends Model {
 	/**
 	 * Set the course's sale price.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $price Sale price.
 	 */
@@ -909,7 +909,7 @@ class Course extends Model {
 	/**
 	 * Set the course's price type (free or paid).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $type Course's price type (free or paid)
 	 */
@@ -920,7 +920,7 @@ class Course extends Model {
 	/**
 	 * Set date on sale from.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
 	public function set_date_on_sale_from( $date = null ) {
@@ -930,7 +930,7 @@ class Course extends Model {
 	/**
 	 * Set date on sale to.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
 	public function set_date_on_sale_to( $date = null ) {
@@ -940,7 +940,7 @@ class Course extends Model {
 	/**
 	 * Set the course category ids.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $category_ids Category ids.
 	 */
@@ -951,7 +951,7 @@ class Course extends Model {
 	/**
 	 * Set the course tag ids.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $tag_ids Tag ids.
 	 */
@@ -962,7 +962,7 @@ class Course extends Model {
 	/**
 	 * Set the course difficulty id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $difficulty_id Difficulty id.
 	 */
@@ -973,7 +973,7 @@ class Course extends Model {
 	/**
 	 * Set the featured image, in other words thumbnail post id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $featured_image Featured image id.
 	 */
@@ -984,7 +984,7 @@ class Course extends Model {
 	/**
 	 * Set the featured.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $featured Featured.
 	 */
@@ -995,7 +995,7 @@ class Course extends Model {
 	/**
 	 * Set rating counts. Read only.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $counts Course rating counts.
 	 */
 	public function set_rating_counts( $counts ) {
@@ -1005,7 +1005,7 @@ class Course extends Model {
 	/**
 	 * Set average rating. Read only.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param float $average Course average rating.
 	 */
 	public function set_average_rating( $average ) {
@@ -1015,7 +1015,7 @@ class Course extends Model {
 	/**
 	 * Set review count. Read only.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param int $count Course review count.
 	 */
 	public function set_review_count( $count ) {
@@ -1025,7 +1025,7 @@ class Course extends Model {
 	/**
 	 * Set the enrollment limit. (maximum number of students allowed )
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param int $value Enrollment limit.
 	 */
 	public function set_enrollment_limit( $value ) {
@@ -1035,7 +1035,7 @@ class Course extends Model {
 	/**
 	 * Set the course duration (minutes).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param int $value Course duration (minutes).
 	 */
 	public function set_duration( $value ) {
@@ -1045,7 +1045,7 @@ class Course extends Model {
 	/**
 	 * Set the course access mode.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $value Course access mode (open, need_registration, one_time, recurring ).
 	 */
 	public function set_access_mode( $value ) {
@@ -1055,7 +1055,7 @@ class Course extends Model {
 	/**
 	 * Set the course billing cycle.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $value Course billing cycle (1d, 2w, 3m, 4y)
 	 */
 	public function set_billing_cycle( $value ) {
@@ -1068,7 +1068,7 @@ class Course extends Model {
 	 * True = Visible to all.
 	 * False = Visible to only enrollees.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $value
 	 */
 	public function set_show_curriculum( $value ) {
@@ -1079,7 +1079,7 @@ class Course extends Model {
 	 * Set the course purchase note.
 	 *
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $value
 	 */
 	public function set_purchase_note( $value ) {
@@ -1090,7 +1090,7 @@ class Course extends Model {
 	 * Set the course highlights.
 	 *
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $value
 	 */
 	public function set_highlights( $value ) {
@@ -1100,7 +1100,7 @@ class Course extends Model {
 	/**
 	 * Get main image ID.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $value Set main image ID.
 	 * @return string
 	 */
@@ -1117,7 +1117,7 @@ class Course extends Model {
 	/**
 	 * Returns whether or not the course is on sale.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return bool
@@ -1142,7 +1142,7 @@ class Course extends Model {
 	/**
 	 * Returns false if the course cannot be bought.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -1157,7 +1157,7 @@ class Course extends Model {
 	/**
 	 * Check whether the course exists in the database or not.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -1168,7 +1168,7 @@ class Course extends Model {
 	/**
 	 * Returns whether or not the course is visible in the catalog.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -1201,7 +1201,7 @@ class Course extends Model {
 	/**
 	 * Get course category list (CourseCategory objects).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array[CourseCategory]
 	 */
@@ -1226,7 +1226,7 @@ class Course extends Model {
 	/**
 	 * Get course tag list (CourseTag objects).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array[CourseTag]
 	 */
@@ -1251,7 +1251,7 @@ class Course extends Model {
 	/**
 	 * Get course difficulties list (Coursedifficulties objects).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array[Coursedifficulties]
 	 */
@@ -1269,7 +1269,7 @@ class Course extends Model {
 	/**
 	 * Get add_to_cart now button text for the single page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -1280,7 +1280,7 @@ class Course extends Model {
 	/**
 	 * Get start course button text for the single page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -1291,7 +1291,7 @@ class Course extends Model {
 	/**
 	 * Get start course URL.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -1316,7 +1316,7 @@ class Course extends Model {
 	/**
 	 * Get add_to_cart url.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -1340,7 +1340,7 @@ class Course extends Model {
 	/**
 	 * Get add_to_cart text.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -1358,7 +1358,7 @@ class Course extends Model {
 	/**
 	 * Get add_to_cart  button text description - used in aria tags.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return string
 	 */
 	public function add_to_cart_description() {
@@ -1376,7 +1376,7 @@ class Course extends Model {
 	/**
 	 * Returns the main product image.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $size (default: 'masteriyo_thumbnail').
 	 * @param  array  $attr Image attributes.
@@ -1404,7 +1404,7 @@ class Course extends Model {
 	/**
 	 * Get course progress status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */

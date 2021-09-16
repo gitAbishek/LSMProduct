@@ -3,8 +3,8 @@
  * Order Line Item (course)
  *
  * @package Masteriyo\Classes
- * @version 0.1.0
- * @since   0.1.0
+ * @version 1.0.0
+ * @since   1.0.0
  */
 
 namespace Masteriyo\Models\Order;
@@ -21,7 +21,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Stores order item data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -35,7 +35,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Get the order item if ID
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param OrderItemCourseRepository $repository Order Repository.
 	 */
@@ -54,7 +54,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Get the course ID.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -67,7 +67,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Get the course type.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -80,7 +80,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Get the courses quantity.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -93,7 +93,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Get the sub total amount.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *r
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -106,7 +106,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Get the total amount.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *r
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -125,7 +125,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Set course id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $course_id Course ID.
 	 */
@@ -139,7 +139,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Set the course type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $type course ID.
 	 */
@@ -150,7 +150,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Set the course quantity.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $quantity course ID.
 	 */
@@ -161,7 +161,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Line subtotal (before discounts).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $sub_total Subtotal.
 	 */
@@ -178,7 +178,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Setline total amount (after discounts).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param double $total Total amount.
 	 */
@@ -200,7 +200,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Get the associated course.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return Course|bool
 	 */
@@ -213,7 +213,7 @@ class OrderItemCourse extends OrderItem {
 	/**
 	 * Set properties based on passed in course object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Course $course Course instance.
 	 */

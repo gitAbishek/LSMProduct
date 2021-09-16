@@ -2,7 +2,7 @@
 /**
  * Faq model (comment type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -17,14 +17,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Faq model (post type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class Faq extends Model {
 
 	/**
 	 * This is the title of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -33,7 +33,7 @@ class Faq extends Model {
 	/**
 	 * Comment type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -42,7 +42,7 @@ class Faq extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -51,7 +51,7 @@ class Faq extends Model {
 	/**
 	 * Stores Faq data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -73,7 +73,7 @@ class Faq extends Model {
 	/**
 	 * Get the faq if ID
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param FaqRepository $faq_repository Faq Repository.
 	 */
@@ -90,7 +90,7 @@ class Faq extends Model {
 	/**
 	 * Get comment type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -108,7 +108,7 @@ class Faq extends Model {
 	/**
 	 * Get Faq title.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -121,7 +121,7 @@ class Faq extends Model {
 	/**
 	 * Get faq content.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -134,7 +134,7 @@ class Faq extends Model {
 	/**
 	 * Returns faq parent id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -147,7 +147,7 @@ class Faq extends Model {
 	/**
 	 * Get user ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -160,7 +160,7 @@ class Faq extends Model {
 	/**
 	 * Get user name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -173,7 +173,7 @@ class Faq extends Model {
 	/**
 	 * Get user email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -186,7 +186,7 @@ class Faq extends Model {
 	/**
 	 * Get user url.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -199,7 +199,7 @@ class Faq extends Model {
 	/**
 	 * Get user ip.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -212,7 +212,7 @@ class Faq extends Model {
 	/**
 	 * Get user agent.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -225,7 +225,7 @@ class Faq extends Model {
 	/**
 	 * Get faq status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -238,7 +238,7 @@ class Faq extends Model {
 	/**
 	 * Get faq created date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -251,7 +251,7 @@ class Faq extends Model {
 	/**
 	 * Returns faq menu order.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -270,7 +270,7 @@ class Faq extends Model {
 	/**
 	 * Set faq title.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $title faq title.
 	 */
@@ -281,7 +281,7 @@ class Faq extends Model {
 	/**
 	 * Set faq content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $content Faq content.
 	 */
@@ -292,7 +292,7 @@ class Faq extends Model {
 	/**
 	 * Set the faq course ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $value Course ID.
 	 */
@@ -303,7 +303,7 @@ class Faq extends Model {
 	/**
 	 * Set the faq user ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $value User ID.
 	 */
@@ -314,7 +314,7 @@ class Faq extends Model {
 	/**
 	 * Set user's email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $value User's email.
 	 */
@@ -325,7 +325,7 @@ class Faq extends Model {
 	/**
 	 * Set user's url.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $value User's url.
 	 */
@@ -336,7 +336,7 @@ class Faq extends Model {
 	/**
 	 * Set user's ip.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $value User's ip.
 	 */
@@ -347,7 +347,7 @@ class Faq extends Model {
 	/**
 	 * Set user's agent.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $value User's agent.
 	 */
@@ -358,7 +358,7 @@ class Faq extends Model {
 	/**
 	 * Set the faq menu order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $sort_order Menu order id.
 	 */
@@ -369,7 +369,7 @@ class Faq extends Model {
 	/**
 	 * Set the faq status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $status Faq status.
 	 */
@@ -380,7 +380,7 @@ class Faq extends Model {
 	/**
 	 * Set faq created date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */

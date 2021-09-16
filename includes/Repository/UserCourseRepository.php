@@ -19,7 +19,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	/**
 	 * Meta type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -28,7 +28,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
@@ -39,7 +39,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	/**
 	 * Create a user course in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $user_course UserCourse object.
 	 */
@@ -95,7 +95,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	/**
 	 * Update a user course item in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param UserCourse $user_course user course object.
 	 */
 	public function update( Model &$user_course ) {
@@ -148,7 +148,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	/**
 	 * Remove an user course from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param UserCourse $user_course user course object.
 	 * @param array         $args Array of args to pass to the delete method.
 	 */
@@ -172,7 +172,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	/**
 	 * Read a user course from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param UserCourse $user_course user course object.
 	 *
@@ -213,7 +213,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	/**
 	 * Read user course data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Masteriyo\Models\UserCourse $user_course User course object.
 	 */
@@ -243,7 +243,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	/**
 	 * Clear meta cache.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Masteriyo\Models\UserCourse $user_course User course object.
 	 */
@@ -256,7 +256,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	/**
 	 * Fetch user course items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return UserCourse[]

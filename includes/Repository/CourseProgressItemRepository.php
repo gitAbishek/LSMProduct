@@ -22,7 +22,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	/**
 	 * Meta type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -39,7 +39,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	/**
 	 * Create a course progress item in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_progress_item Course progress item object.
 	 */
@@ -154,7 +154,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	/**
 	 * Update a course progress item in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param CourseProgressItem $course_progress_item Course progress item object.
 	 */
 	public function update( Model &$course_progress_item ) {
@@ -217,7 +217,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	/**
 	 * Remove an course progress item from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param CourseProgressItem $course_progress_item Course progress item object.
 	 * @param array         $args Array of args to pass to the delete method.
 	 */
@@ -241,7 +241,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	/**
 	 * Read a course progress from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseProgress $course_progress_item Course progress object.
 	 *
@@ -287,7 +287,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	/**
 	 * Clear meta cache.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseProgressItem $course_progress_item Course progress item object.
 	 */
@@ -300,7 +300,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	/**
 	 * Fetch course progress items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return CourseProgressItem[]
@@ -373,7 +373,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	 *
 	 * @param CourseProgressItem $course_progress_item Course progress item object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function update_course_progress_status( $course_progress_item ) {
 		$user_id   = $course_progress_item->get_user_id( 'edit' );
@@ -404,7 +404,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	 *
 	 * If all the course progress items are completed, set the course progress to complete as well.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseProgressItem $course_progress_item Course progress item object.
 	 *

@@ -7,7 +7,7 @@
  * @author   mi5t4n
  * @category API
  * @package Masteriyo\RestApi
- * @since    0.1.0
+ * @since    1.0.0
  */
 
 namespace Masteriyo\RestApi\Controllers\Version1;
@@ -28,7 +28,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Endpoint namespace.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -37,7 +37,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Route base.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -46,7 +46,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -55,7 +55,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -64,7 +64,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -73,7 +73,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission
 	 */
@@ -84,7 +84,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Register the routes for terms.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function register_routes() {
 
@@ -124,7 +124,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Get the course builder schema, conforming to JSON Schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -236,7 +236,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Get the course contents.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return array
 	 */
@@ -269,7 +269,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Get course contents(sections, lessons, quizes).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return Model[]
@@ -304,7 +304,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Get objects(sections, quizes, lessons, etc.).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string[] $query_args WP_Query args.
 	 *
 	 * @return Model[]
@@ -319,7 +319,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_Post $post Post object.
 	 * @return object Model object or WP_Error object.
@@ -340,7 +340,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  Model         $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -398,7 +398,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Format the course items according to the builder format.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model[] $objects Course contents(sections, quizes, lessons)
 	 * @return Model[]
@@ -427,7 +427,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Filters sections from objects and order be menu order in ascending order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $objects
 	 * @return void
@@ -464,7 +464,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Filters sections items (quiz, lesson) from objects and order be menu order in ascending order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $objects
 	 * @return void
@@ -493,7 +493,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Check permissions for an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $object_type Object type.
 	 * @param string $context   Request context.
 	 * @param int    $object_id Post ID.
@@ -506,7 +506,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Save an object data.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  WP_REST_Request $request  Full details about the request.
 	 * @return Model|WP_Error
 	 */
@@ -537,7 +537,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Save section order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 */
@@ -552,7 +552,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Save section contents menu order and parent id(section).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 */
@@ -579,7 +579,7 @@ class CourseBuilderController extends PostsController {
 	/**
 	 * Update post if the parent id or menu order is changed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $id Post ID.
 	 */

@@ -2,7 +2,7 @@
 /**
  * Course progress items controller.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\RestApi\Controllers\Version1;
  */
@@ -45,7 +45,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -54,7 +54,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission Permision object.
 	 */
@@ -65,7 +65,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Register routes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -137,7 +137,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -238,7 +238,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int|CourseProgress $id Object ID.
 	 * @return object Model object or WP_Error object.
@@ -257,7 +257,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -276,7 +276,7 @@ class CourseProgressItemsController extends CrudController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param WP_REST_Response $response The response object.
 		 * @param Model          $object   Object data.
@@ -288,7 +288,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Get user activity data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseProgress  $course_progress_item User activity instance.
 	 * @param string $context Request context.
@@ -318,7 +318,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Prepare objects query.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -344,7 +344,7 @@ class CourseProgressItemsController extends CrudController {
 		 * Enables adding extra arguments or setting defaults for a post
 		 * collection request.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param array           $args    Key value array of query var to query value.
 		 * @param WP_REST_Request $request The request used.
@@ -357,7 +357,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Get the orders' schema, conforming to JSON Schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -428,7 +428,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Prepare a single course progress for create or update.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
@@ -499,7 +499,7 @@ class CourseProgressItemsController extends CrudController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param Model         $course_progress_item  Object object.
 		 * @param WP_REST_Request $request  Request object.
@@ -511,7 +511,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Get objects.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  array $query_args Query args.
 	 * @return array
 	 */
@@ -531,7 +531,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Check if a given request has access to read item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -554,7 +554,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Check if a given request has access to read items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -577,7 +577,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Check if a given request has access to create an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -600,7 +600,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Check if a given request has access to create/update an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -623,7 +623,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Check if a given request has access to delete an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -642,7 +642,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Check permissions for an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $object_type Object type.
 	 * @param string $context   Request context.
@@ -657,7 +657,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Validate the user ID in the request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
@@ -717,7 +717,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Validate the course ID in the request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
@@ -748,7 +748,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Validate the course progress item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseProgressItem $course_progress_item
 	 * @throw exception

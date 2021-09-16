@@ -9,7 +9,7 @@ abstract class Taxonomy {
 	/**
 	 * Taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -18,14 +18,14 @@ abstract class Taxonomy {
 	/**
 	 * Post type the taxonomy belongs to.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected $post_type = 'post';
 
 	/**
 	 * Register taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function register() {
 		register_taxonomy(
@@ -38,7 +38,7 @@ abstract class Taxonomy {
 	/**
 	 * Get all labels.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -53,7 +53,7 @@ abstract class Taxonomy {
 	/**
 	 * Get label.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $label Label. (e.g. name, singular_name, menu_name, etc )
 	 *
@@ -70,7 +70,7 @@ abstract class Taxonomy {
 	/**
 	 * Set label.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $label Label. (e.g. name, singular_name, menu_name, etc )
 	 * @param string $value Label text/value.
@@ -94,7 +94,7 @@ abstract class Taxonomy {
 	/**
 	 * Get arg.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name Arg name. (e.g. label, args, menu_position, etc )
 	 *
@@ -112,7 +112,7 @@ abstract class Taxonomy {
 	/**
 	 * Get taxonomy args which includes labels and other args.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

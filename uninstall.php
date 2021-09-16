@@ -5,7 +5,7 @@
  * Uninstalling Masteriyo deletes user roles, pages, tables, and options.
  *
  * @package Masteriyo\Uninstaller
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;

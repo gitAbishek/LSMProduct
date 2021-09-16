@@ -4,7 +4,7 @@
  *
  * @package Masteriyo
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -24,7 +24,7 @@ class AdminMenu {
 	/**
 	 * Initialize.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -35,7 +35,7 @@ class AdminMenu {
 	/**
 	 * Initialize admin menus.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -100,7 +100,7 @@ class AdminMenu {
 	/**
 	 * Initialize hooks.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -111,7 +111,7 @@ class AdminMenu {
 	/**
 	 * Display main page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */

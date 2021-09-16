@@ -2,7 +2,7 @@
 /**
  * Utility functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 /**
@@ -10,7 +10,7 @@
  *
  * Source:  https://gist.github.com/Nickology/f700e319cbafab5eaedc
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @return array
  */
 function masteriyo_array_merge_recursive_numeric() {

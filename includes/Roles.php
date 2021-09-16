@@ -2,7 +2,7 @@
 /**
  * Roles class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -11,7 +11,7 @@ class Roles {
 	/**
 	 * Retun all roles.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

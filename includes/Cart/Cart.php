@@ -6,7 +6,7 @@
  * The cart class also has a price calculation function which calls upon other classes to calculate totals.
  *
  * @package Masteriyo\Classes
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 namespace Masteriyo\Cart;
@@ -25,7 +25,7 @@ class Cart {
 	/**
 	 * Contains an array of cart items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	public $cart_contents = array();
@@ -33,7 +33,7 @@ class Cart {
 	/**
 	 * Contains an array of removed cart items so we can restore them if needed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -42,7 +42,7 @@ class Cart {
 	/**
 	 * Total defaults used to reset.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -56,7 +56,7 @@ class Cart {
 	/**
 	 * Store calculated totals.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -106,7 +106,7 @@ class Cart {
 	/**
 	 * Initialization hooks.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function init_hooks() {
 		add_action( 'masteriyo_add_to_cart', array( $this, 'calculate_totals' ), 20, 0 );
@@ -127,7 +127,7 @@ class Cart {
 	/**
 	 * Will set cart cookies if needed and when possible.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function maybe_set_cart_cookies() {
 		if ( ! headers_sent() && did_action( 'wp_loaded' ) ) {
@@ -142,7 +142,7 @@ class Cart {
 	/**
 	 * Set cart hash cookie and items in cart if not already set.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $set Should cookies be set (true) or unset.
 	 */
@@ -176,7 +176,7 @@ class Cart {
 	/**
 	 * Get the cart data from the PHP session and store it in class variables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function get_cart_from_session() {
 		do_action( 'masteriyo_load_cart_from_session' );
@@ -218,7 +218,7 @@ class Cart {
 			/**
 			 * Allow 3rd parties to validate this item before it's added to cart and add their own notices.
 			 *
-			 * @since 0.1.0
+			 * @since 1.0.0
 			 *
 			 * @param bool $remove_cart_item_from_session If true, the item will not be added to the cart. Default: false.
 			 * @param string $key Cart item key.
@@ -294,7 +294,7 @@ class Cart {
 	/**
 	 * Returns the contents of the cart in an array without the 'data' element.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array contents of the cart
 	 */
@@ -432,7 +432,7 @@ class Cart {
 	/**
 	 * Gets cart contents.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return array of cart items
 	 */
 	public function get_cart_contents() {
@@ -442,7 +442,7 @@ class Cart {
 	/**
 	 * Return items removed from the cart.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return array
 	 */
 	public function get_removed_cart_contents() {
@@ -452,7 +452,7 @@ class Cart {
 	/**
 	 * Return all calculated totals.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return array
 	 */
 	public function get_totals() {
@@ -462,7 +462,7 @@ class Cart {
 	/**
 	 * Get a total.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $key Key of element in $totals array.
 	 * @return mixed
 	 */
@@ -473,7 +473,7 @@ class Cart {
 	/**
 	 * Get subtotal.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return float
 	 */
 	public function get_subtotal() {
@@ -483,7 +483,7 @@ class Cart {
 	/**
 	 * Gets cart total. This is the total of items in the cart.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return float
 	 */
 	public function get_cart_contents_total() {
@@ -493,7 +493,7 @@ class Cart {
 	/**
 	 * Gets cart total after calculation.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return float
 	 */
 	public function get_total() {
@@ -503,7 +503,7 @@ class Cart {
 	/**
 	 * Get total fee amount.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return float
 	 */
 	public function get_fee_total() {
@@ -530,7 +530,7 @@ class Cart {
 	/**
 	 * Set items removed from the cart.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $value Item array.
 	 */
 	public function set_removed_cart_contents( $value = array() ) {
@@ -540,7 +540,7 @@ class Cart {
 	/**
 	 * Set all calculated totals.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $value Value to set.
 	 */
 	public function set_totals( $value = array() ) {
@@ -550,7 +550,7 @@ class Cart {
 	/**
 	 * Set subtotal.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $value Value to set.
 	 */
 	public function set_subtotal( $value ) {
@@ -560,7 +560,7 @@ class Cart {
 	/**
 	 * Set cart_contents_total.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $value Value to set.
 	 */
 	public function set_cart_contents_total( $value ) {
@@ -570,7 +570,7 @@ class Cart {
 	/**
 	 * Set cart total.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $value Value to set.
 	 */
 	public function set_total( $value ) {
@@ -580,7 +580,7 @@ class Cart {
 	/**
 	 * Set fee amount.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $value Value to set.
 	 */
 	public function set_fee_total( $value ) {
@@ -600,7 +600,7 @@ class Cart {
 	 */
 	public function get_cart() {
 		if ( ! did_action( 'wp_loaded' ) ) {
-			Utils::doing_it_wrong( __FUNCTION__, __( 'Get cart should not be called before the wp_loaded action.', 'masteriyo' ), '0.1.0' );
+			Utils::doing_it_wrong( __FUNCTION__, __( 'Get cart should not be called before the wp_loaded action.', 'masteriyo' ), '1.0.0' );
 		}
 		if ( ! did_action( 'masteriyo_load_cart_from_session' ) ) {
 			$this->get_cart_from_session();
@@ -622,7 +622,7 @@ class Cart {
 	/**
 	 * Checks if the cart is empty.
 	 *
-	 * @since 0.1.0.
+	 * @since 1.0.0.
 	 *
 	 * @return bool
 	 */
@@ -634,7 +634,7 @@ class Cart {
 	/**
 	 * Empties the cart and optionally the persistent cart too.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $clear_persistent_cart Should the persistant cart be cleared too. Defaults to true.
 	 */
@@ -773,7 +773,7 @@ class Cart {
 	 * Determines the value that the customer spent and the subtotal
 	 * displayed, used for things like coupon validation.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return string
 	 */
 	public function get_displayed_subtotal() {
@@ -862,7 +862,7 @@ class Cart {
 				/**
 				 * Filters message about course unable to be purchased.
 				 *
-				 * @since 0.1.0
+				 * @since 1.0.0
 				 * @param string $message Message.
 				 * @param Course $course Course data.
 				 */
@@ -982,7 +982,7 @@ class Cart {
 		/**
 		 * Fired after qty has been changed.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 * @param string  $cart_item_key contains the id of the cart item. This may be empty if the cart item does not exist any more.
 		 * @param int     $quantity contains the quantity of the item.
 		 * @param Cart $this Cart class.
@@ -1005,7 +1005,7 @@ class Cart {
 	/**
 	 * Calculate totals for the items in the cart.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @uses Cart_Totals
 	 */
@@ -1045,7 +1045,7 @@ class Cart {
 	/**
 	 * Return reference to fees API.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return Masteriyo\Cart\Fees
 	 */
 	public function fees_api() {
@@ -1059,7 +1059,7 @@ class Cart {
 	 * masteriyo_cart_calculate_fees action during cart/checkout. Fees do not
 	 * persist.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @uses Masteriyo\Cart\Fees::add_fee
 	 * @param string $name      Unique name for the fee. Multiple fees of the same name cannot be added.
@@ -1077,7 +1077,7 @@ class Cart {
 	/**
 	 * Return all added fees from the Fees API.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @uses Masteriyo\Cart\Fees::get_fees
 	 * @return array
@@ -1094,7 +1094,7 @@ class Cart {
 	/**
 	 * Gets the cart contents total (after calculation).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return string formatted price
 	 */
 	public function get_cart_total() {
@@ -1104,7 +1104,7 @@ class Cart {
 	/**
 	 * Gets the sub total (after calculation).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string formatted price
 	 */
@@ -1116,7 +1116,7 @@ class Cart {
 	/**
 	 * Get the course row price per item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Course $course Course object.
 	 * @return string formatted price
@@ -1129,7 +1129,7 @@ class Cart {
 	/**
 	 * Get the course row subtotal.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param MASTERIYO_Course $course Course object.
 	 * @param int        $quantity Quantity being purchased.
@@ -1146,7 +1146,7 @@ class Cart {
 	/**
 	 * Reset cart totals to the defaults. Useful before running calculations.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	private function reset_totals() {
 		$this->totals = $this->default_totals;
@@ -1156,7 +1156,7 @@ class Cart {
 	/**
 	 * Returns the hash based on cart contents.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return string hash for cart content
 	 */
 	public function get_cart_hash() {
@@ -1171,7 +1171,7 @@ class Cart {
 	 *
 	 * The masteriyo_cart_item_data_to_validate filter can be used to add custom properties.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Course $course Course object.
 	 * @return string
@@ -1194,7 +1194,7 @@ class Cart {
 	/**
 	 * Delete the persistent cart permanently.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function persistent_cart_destroy() {
 		if ( get_current_user_id() && apply_filters( 'masteriyo_persistent_cart_enabled', true ) ) {
@@ -1205,7 +1205,7 @@ class Cart {
 	/**
 	 * Destroy cart session data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function destroy_cart_session() {
 		$this->session->put( 'cart', null );

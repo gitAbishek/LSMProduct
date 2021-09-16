@@ -2,7 +2,7 @@
 /**
  * Notice class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @package Masteriyo
  */
 
@@ -20,7 +20,7 @@ class Notice {
 	/**
 	 * Success notice type.
 	 *
-	 * @since0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -29,7 +29,7 @@ class Notice {
 	/**
 	 * Error notice type.
 	 *
-	 * @since0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -38,7 +38,7 @@ class Notice {
 	/**
 	 * Info notice type.
 	 *
-	 * @since0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -47,7 +47,7 @@ class Notice {
 	/**
 	 * Warning notice type.
 	 *
-	 * @since0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -56,7 +56,7 @@ class Notice {
 	/**
 	 * Session handler.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Session\Session
 	 */
@@ -69,7 +69,7 @@ class Notice {
 	 * Get the count of notices added, either for all notices (default) or for one.
 	 * particular notice type specified by $type.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $type Optional. The name of the notice type - either error, success or notice.
 	 * @return int
 	 */
@@ -95,7 +95,7 @@ class Notice {
 	/**
 	 * Check if a notice has already been added.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $message The text to display in the notice.
 	 * @param  string $type Optional. The name of the notice type - either error, success or notice.
 	 * @return bool
@@ -115,7 +115,7 @@ class Notice {
 	/**
 	 * Returns all queued notices, optionally filtered by a notice type.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $type Optional. The singular name of the notice type - either error, success or notice.
 	 * @return array[]
 	 */
@@ -137,7 +137,7 @@ class Notice {
 	/**
 	 * Add and store a notice.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $message The text to display in the notice.
 	 * @param string $type    Optional. The name of the notice type - either error, success or notice.
 	 * @param array  $data    Optional notice data.
@@ -160,7 +160,7 @@ class Notice {
 	/**
 	 * Add notices for WP Errors.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_Error $errors Errors.
 	 */
@@ -174,7 +174,7 @@ class Notice {
 	/**
 	 * Unset all notices.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function clear() {
 		$this->session->put( 'notices', array() );
@@ -183,7 +183,7 @@ class Notice {
 	/**
 	 * Display a single notice immediately.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $message The text to display in the notice.
 	 * @param string $type Optional. The singular name of the notice type - either error, success or notice.
 	 * @param array  $data        Optional notice data.
@@ -203,7 +203,7 @@ class Notice {
 	/**
 	 * Prints messages and errors which are stored in the session, then clears them.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param bool $return true to return rather than echo.
 	 * @param string $type Notice type. Default: ''
 	 * @return string|null
@@ -250,7 +250,7 @@ class Notice {
 	/**
 	 * Filters out the same tags as wp_kses_post, but allows tabindex for <a> element.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $message Content to filter through kses.
 	 * @return string
 	 */
@@ -267,7 +267,7 @@ class Notice {
 		/**
 		 * Kses notice allowed tags.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 * @param array[]|string $allowed_tags An array of allowed HTML elements and attributes, or a context name such as 'post'.
 		 */
 		return wp_kses( $message, apply_filters( 'masteriyo_kses_notice_allowed_tags', $allowed_tags ) );
@@ -276,7 +276,7 @@ class Notice {
 	/**
 	 * Get notice by type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return string
 	 */
 	public function get_by_id( $id, $type = '' ) {
@@ -300,7 +300,7 @@ class Notice {
 	/**
 	 * Remove notices.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param [type] $type Notice type.
 	 * @return void

@@ -11,7 +11,7 @@ interface Session {
 	 *
 	 * Uses Portable PHP password hashing framework to generate a unique cryptographically strong ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -20,7 +20,7 @@ interface Session {
 	/**
 	 * Get the name of the session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -29,7 +29,7 @@ interface Session {
 	/**
 	 * Get the current session ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *r
 	 * @return string
 	 */
@@ -38,7 +38,7 @@ interface Session {
 	/**
 	 * Set the current session ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $id Set the session ID.
 	 *
@@ -49,7 +49,7 @@ interface Session {
 	/**
 	 * Get the current session key.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *r
 	 * @return string
 	 */
@@ -58,7 +58,7 @@ interface Session {
 	/**
 	 * Set the current session key.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $key Set the session key.
 	 *
@@ -69,7 +69,7 @@ interface Session {
 	/**
 	 * Start the session, reading the data from a handler.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -85,7 +85,7 @@ interface Session {
 	/**
 	 * Get all the session data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -96,7 +96,7 @@ interface Session {
 	/**
 	 * Check if a key exists.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|array $key Session data keys.
 	 * @return bool
@@ -106,7 +106,7 @@ interface Session {
 	/**
 	 * Check if a key is present and not null.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|array $key Session data keys.
 	 * @return boolean
@@ -116,7 +116,7 @@ interface Session {
 	/**
 	 * Get an item from the session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $key       Session item key.
 	 * @param mixed $default    Session item default value.
@@ -138,7 +138,7 @@ interface Session {
 	/**
 	 * Remove an item from the session, returning its value.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $key Session data key.
 	 * @return mixed
@@ -148,7 +148,7 @@ interface Session {
 	/**
 	 * Remove one or many items from the session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|array $keys Session or array of session data keys.
 	 * @return void
@@ -158,7 +158,7 @@ interface Session {
 	/**
 	 * Remove all of the items from the session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -167,7 +167,7 @@ interface Session {
 	/**
 	 * Return true if the current user has an active session, i.e. a cookie to retrieve values.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -176,7 +176,7 @@ interface Session {
 	/**
 	 * Check whether the session is changed or not.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */

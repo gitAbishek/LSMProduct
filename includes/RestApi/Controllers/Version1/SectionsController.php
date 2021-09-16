@@ -2,7 +2,7 @@
 /**
  * SectionsController class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\RestApi\Controllers\Version1;
  */
@@ -56,7 +56,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -65,7 +65,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission
 	 */
@@ -76,7 +76,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Register routes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -141,7 +141,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -165,7 +165,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int|Model|WP_Post $object Object ID or Model or WP_Post object.
 	 * @return object Model object or WP_Error object.
@@ -192,7 +192,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -222,7 +222,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Get section data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Section $section section instance.
 	 * @param string  $context Request context.
@@ -253,7 +253,7 @@ class SectionsController extends PostsController {
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return array
 	 */
 	protected function prepare_objects_query( $request ) {
@@ -279,7 +279,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Get the sections'schema, conforming to JSON Schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -467,7 +467,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Check if a given request has access to create an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -523,7 +523,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Check if a given request has access to delete an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -569,7 +569,7 @@ class SectionsController extends PostsController {
 	/**
 	 * Check if a given request has access to update an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean

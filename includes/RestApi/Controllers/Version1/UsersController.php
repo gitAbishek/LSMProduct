@@ -2,7 +2,7 @@
 /**
  * UsersController class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\RestApi\Controllers\Version1;
  */
@@ -49,7 +49,7 @@ class UsersController extends PostsController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -58,7 +58,7 @@ class UsersController extends PostsController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission Permission instance.
 	 */
@@ -69,7 +69,7 @@ class UsersController extends PostsController {
 	/**
 	 * Register routes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -141,7 +141,7 @@ class UsersController extends PostsController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -186,7 +186,7 @@ class UsersController extends PostsController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int|WP_user|Model $object Object ID or WP_user or Model.
 	 *
@@ -213,7 +213,7 @@ class UsersController extends PostsController {
 	/**
 	 * Get objects.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  array $query_args Query args.
 	 * @return array
 	 */
@@ -238,7 +238,7 @@ class UsersController extends PostsController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
@@ -318,7 +318,7 @@ class UsersController extends PostsController {
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @return array
 	 */
@@ -354,7 +354,7 @@ class UsersController extends PostsController {
 	/**
 	 * Get the User's schema, conforming to JSON Schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -588,7 +588,7 @@ class UsersController extends PostsController {
 	/**`
 	 * Prepare a single user object for create or update.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
@@ -768,7 +768,7 @@ class UsersController extends PostsController {
 	/**
 	 * Checks if a given request has access to get a specific item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
@@ -799,7 +799,7 @@ class UsersController extends PostsController {
 	/**
 	 * Check if a given request has access to read items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 *
@@ -829,7 +829,7 @@ class UsersController extends PostsController {
 	/**
 	 * Check if a given request has access to create an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 *
@@ -859,7 +859,7 @@ class UsersController extends PostsController {
 	/**
 	 * Check if a given request has access to delete an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 *
@@ -900,7 +900,7 @@ class UsersController extends PostsController {
 	/**
 	 * Check if a given request has access to update an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 *
@@ -932,7 +932,7 @@ class UsersController extends PostsController {
 	/**
 	 * Check permissions for an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $object_type Object type.
 	 * @param string $context   Request context.

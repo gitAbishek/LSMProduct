@@ -4,7 +4,7 @@
  *
  * @package Masteriyo
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -25,7 +25,7 @@ class Template implements TemplateInterface {
 	 *
 	 * MASTERIYO_TEMPLATE_DEBUG_MODE will prevent overrides in themes from taking priority.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param mixed  $slug Template slug.
 	 * @param string $name Template name (default: '').
@@ -79,7 +79,7 @@ class Template implements TemplateInterface {
 	/**
 	 * Get other templates and include the file.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $template_name Template name.
 	 * @param array  $args          Arguments. (default: array).
@@ -108,7 +108,7 @@ class Template implements TemplateInterface {
 		if ( $filter_template !== $template ) {
 			if ( ! file_exists( $filter_template ) ) {
 				/* translators: %s template */
-				Utils::doing_it_wrong( __FUNCTION__, sprintf( __( '%s does not exist.', 'masteriyo' ), '<code>' . $filter_template . '</code>' ), '0.1.0' );
+				Utils::doing_it_wrong( __FUNCTION__, sprintf( __( '%s does not exist.', 'masteriyo' ), '<code>' . $filter_template . '</code>' ), '1.0.0' );
 				return;
 			}
 			$template = $filter_template;
@@ -126,7 +126,7 @@ class Template implements TemplateInterface {
 				Utils::doing_it_wrong(
 					__FUNCTION__,
 					__( 'action_args should not be overwritten when calling get_template.', 'masteriyo' ),
-					'0.1.0'
+					'1.0.0'
 				);
 				unset( $args['action_args'] );
 			}
@@ -143,7 +143,7 @@ class Template implements TemplateInterface {
 	/**
 	 * Like get_template, but returns the HTML instead of outputting.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @see get_template
 	 *
@@ -163,7 +163,7 @@ class Template implements TemplateInterface {
 	/**
 	 * Add a template to the template cache.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $cache_key Object cache key.
 	 * @param string $template Located template.
@@ -187,7 +187,7 @@ class Template implements TemplateInterface {
 	/**
 	 * Get template cache.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $cache_key Object cache key.
 	 *
@@ -208,7 +208,7 @@ class Template implements TemplateInterface {
 	 * yourtheme/$template_name
 	 * $default_path/$template_name
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $template_name Template name.
 	 * @param string $template_path Template path. (default: '').

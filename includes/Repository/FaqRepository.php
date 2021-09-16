@@ -2,7 +2,7 @@
 /**
  * FaqRepository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Repository;
  */
@@ -19,7 +19,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Meta type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -28,7 +28,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
@@ -39,7 +39,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Create a faq in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $faq Faq object.
 	 */
@@ -84,7 +84,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Read a Faq.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $faq Faq object.
 	 * @throws \Exception If invalid faq.
@@ -126,7 +126,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Update a faq in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $faq Faq object.
 	 *
@@ -176,7 +176,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Delete a Faq from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $faq Faq object.
 	 * @param array $args   Array of args to pass.alert-danger.
@@ -198,7 +198,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Fetch faqs.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return Faq[]
@@ -245,7 +245,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Get valid WP_Query args from a FaqQuery's query variables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $query_vars Query vars from a FaqQuery.
 	 * @return array
 	 */
@@ -308,7 +308,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Read comment meta data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Faq $faq Course review object.
 	 */

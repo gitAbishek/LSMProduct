@@ -4,7 +4,7 @@
  *
  * @package Masteriyo
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -35,7 +35,7 @@ class Masteriyo {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->init();
@@ -44,7 +44,7 @@ class Masteriyo {
 	/**
 	 * Get applicaiton version.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -55,7 +55,7 @@ class Masteriyo {
 	/**
 	 * Initialize the applicaiton.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function init() {
 		Capabilities::init();
@@ -83,7 +83,7 @@ class Masteriyo {
 	/**
 	 * Initialize hooks.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function init_hooks() {
 		add_action( 'init', array( $this, 'after_wp_init' ), 0 );
@@ -106,7 +106,7 @@ class Masteriyo {
 	/**
 	 * Initialization after WordPress is initialized.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function after_wp_init() {
 		RegisterPostType::instance()->register();
@@ -145,7 +145,7 @@ class Masteriyo {
 	/**
 	 * Load plugin textdomain.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function load_text_domain() {
 		load_plugin_textdomain(
@@ -158,7 +158,7 @@ class Masteriyo {
 	/**
 	 * Add the "Courses" link in admin bar main menu.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_Admin_Bar $wp_admin_bar Admin bar instance.
 	 */
@@ -186,7 +186,7 @@ class Masteriyo {
 	/**
 	 * Add plugin links on the plugins screen.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param mixed $links Plugin Row Meta.
 	 * @param mixed $file  Plugin Base file.
@@ -231,7 +231,7 @@ class Masteriyo {
 	/**
 	 * Add action links on the plugins screen.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param mixed $links Plugin Action links.
 	 *
@@ -264,7 +264,7 @@ class Masteriyo {
 	 *
 	 * Handles template usage so that we can use our own templates instead of the theme's.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $template Template to load.
 	 *
@@ -351,7 +351,7 @@ class Masteriyo {
 	/**
 	 * Redirect to password reset form after setting password reset cookie.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function redirect_reset_password_link() {
 		if ( masteriyo_is_account_page() && isset( $_GET['key'] ) && ( isset( $_GET['id'] ) || isset( $_GET['login'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -388,7 +388,7 @@ class Masteriyo {
 	/**
 	 * Redirecting user to onboard or other page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function admin_redirects() {
 
@@ -413,7 +413,7 @@ class Masteriyo {
 	/**
 	 * Register order status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -428,7 +428,7 @@ class Masteriyo {
 	/**
 	 * Display admin notices.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function masteriyo_display_compatibility_notice() {
 		if ( version_compare( get_bloginfo( 'version' ), '5.0', '<' ) ) {
@@ -444,7 +444,7 @@ class Masteriyo {
 	/**
 	 * Hide admin notices from Masteriyo admin screens.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function hide_admin_notices() {
 		// Bail if we're not on a Masteriyo screen or page.
@@ -489,7 +489,7 @@ class Masteriyo {
 	/**
 	 * Register custom tables within $wpdb object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function define_tables() {
 		global $wpdb;
@@ -525,7 +525,7 @@ class Masteriyo {
 	/**
 	 * Add image sizes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function add_image_sizes() {
 		add_image_size( 'masteriyo_single', 792, 496, true );
@@ -535,7 +535,7 @@ class Masteriyo {
 	/**
 	 * Disable wp dashbaord and admin bar for student.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function restrict_wp_dashboard_and_admin_bar() {
 		if (

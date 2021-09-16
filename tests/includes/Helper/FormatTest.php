@@ -16,7 +16,7 @@ class FormatTest extends WP_UnitTestCase {
 	/**
 	 * Format instance.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Format
 	 */
@@ -25,7 +25,7 @@ class FormatTest extends WP_UnitTestCase {
 	/**
 	 * Setup.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function setUp() {
 		parent::setUp();
@@ -37,7 +37,7 @@ class FormatTest extends WP_UnitTestCase {
 	/**
 	 * Teardown
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function tearDown() {
 		$this->addToAssertionCount(
@@ -50,7 +50,7 @@ class FormatTest extends WP_UnitTestCase {
 	/**
 	 * Test get_price_decimal_separator.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -65,7 +65,7 @@ class FormatTest extends WP_UnitTestCase {
 	/**
 	 * Test get_price_decimal_separator.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -103,7 +103,7 @@ class FormatTest extends WP_UnitTestCase {
 	/**
 	 * Test get_price_decimals.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -141,7 +141,7 @@ class FormatTest extends WP_UnitTestCase {
 	/**
 	 * Test get_price_format.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -203,7 +203,7 @@ class FormatTest extends WP_UnitTestCase {
 	/**
 	 * Test get_rounding_precision.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_get_rounding_precision() {
 		$format = $this->getMockBuilder( Format::class )

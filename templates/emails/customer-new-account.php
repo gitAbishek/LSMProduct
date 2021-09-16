@@ -12,7 +12,7 @@
  *
  * @package Masteriyo\Templates\Emails
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;

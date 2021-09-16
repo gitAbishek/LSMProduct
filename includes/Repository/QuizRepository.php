@@ -2,7 +2,7 @@
 /**
  * Quiz repository.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Repository
  */
@@ -15,14 +15,14 @@ use Masteriyo\Models\Quiz;
 /**
  * Quiz repository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class QuizRepository extends AbstractRepository implements RepositoryInterface {
 
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -38,7 +38,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Create a quiz in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
 	 */
@@ -84,7 +84,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Read a quiz.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Masteriyo\Models\Quiz $quiz Cource object.
 	 * @throws Exception If invalid quiz.
@@ -120,7 +120,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Update a quiz in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
 	 *
@@ -192,7 +192,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Delete a quiz from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
 	 * @param array $args   Array of args to pass.alert-danger
@@ -214,7 +214,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Read quiz data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Masteriyo\Models\Quiz $quiz quiz object.
 	 */
@@ -244,7 +244,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Read extra data associated with the quiz, like button text or quiz URL for external quizs.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Masteriyo\Models\Quiz $quiz quiz object.
 	 */
@@ -263,7 +263,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Fetch quizes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return Masteriyo\Models\Quiz[]
@@ -302,7 +302,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Get valid WP_Query args from a QuizQuery's query variables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $query_vars Query vars from a QuizQuery.
 	 * @return array
 	 */

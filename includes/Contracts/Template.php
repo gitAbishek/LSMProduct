@@ -2,7 +2,7 @@
 /**
  * Template handler class interface.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo
  */
@@ -17,7 +17,7 @@ interface Template {
 	 *
 	 * MASTERIYO_TEMPLATE_DEBUG_MODE will prevent overrides in themes from taking priority.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param mixed  $slug Template slug.
 	 * @param string $name Template name (default: '').
@@ -27,7 +27,7 @@ interface Template {
 	/**
 	 * Get other templates and include the file.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $template_name Template name.
 	 * @param array  $args          Arguments. (default: array).
@@ -39,7 +39,7 @@ interface Template {
 	/**
 	 * Like get_template, but returns the HTML instead of outputting.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @see get_template
 	 * @param string $template_name Template name.
@@ -54,7 +54,7 @@ interface Template {
 	/**
 	 * Add a template to the template cache.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $cache_key Object cache key.
 	 * @param string $template Located template.
@@ -64,7 +64,7 @@ interface Template {
 	/**
 	 * Get template cache.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $cache_key Object cache key.
 	 *
@@ -81,7 +81,7 @@ interface Template {
 	 * yourtheme/$template_name
 	 * $default_path/$template_name
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $template_name Template name.
 	 * @param string $template_path Template path. (default: '').

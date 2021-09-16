@@ -2,7 +2,7 @@
 /**
  * OrderItem model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * OrderItem model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class OrderItem extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -35,7 +35,7 @@ class OrderItem extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -44,7 +44,7 @@ class OrderItem extends Model {
 	/**
 	 * Stores order item data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -62,7 +62,7 @@ class OrderItem extends Model {
 	/**
 	 * Get the order ID.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -75,7 +75,7 @@ class OrderItem extends Model {
 	/**
 	 * Get the course name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -88,7 +88,7 @@ class OrderItem extends Model {
 	/**
 	 * Get order item type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -99,7 +99,7 @@ class OrderItem extends Model {
 	/**
 	 * Get quantity.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return int
 	 */
@@ -110,7 +110,7 @@ class OrderItem extends Model {
 	/**
 	 * Get parent order object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return Order
 	 */
@@ -127,7 +127,7 @@ class OrderItem extends Model {
 	/**
 	 * Set order id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $order_id Course ID.
 	 */
@@ -138,7 +138,7 @@ class OrderItem extends Model {
 	/**
 	 * Set the course name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name Course ID.
 	 */
@@ -155,7 +155,7 @@ class OrderItem extends Model {
 	/**
 	 * OrderItem type checking.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string|array $type Type.
 	 * @return boolean
@@ -222,7 +222,7 @@ class OrderItem extends Model {
 	/**
 	 * Get the order items table name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */

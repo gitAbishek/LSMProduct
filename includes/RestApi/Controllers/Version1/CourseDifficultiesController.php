@@ -6,7 +6,7 @@
  *
  * @category API
  * @package  Masteriyo\RestApi
- * @since    0.1.0
+ * @since    1.0.0
  */
 
 namespace Masteriyo\RestApi\Controllers\Version1;
@@ -56,7 +56,7 @@ class CourseDifficultiesController extends RestTermsController {
 	/**
 	 * Taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -166,7 +166,7 @@ class CourseDifficultiesController extends RestTermsController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int|WP_Term|Model $object Object ID or WP_Term or Model.
 	 *
@@ -193,7 +193,7 @@ class CourseDifficultiesController extends RestTermsController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
@@ -224,7 +224,7 @@ class CourseDifficultiesController extends RestTermsController {
 	/**
 	 * Get course difficulty data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseDifficulty $course_difficulty Course instance.
 	 * @param string           $context    Request context. Options: 'view' and 'edit'.
@@ -248,7 +248,7 @@ class CourseDifficultiesController extends RestTermsController {
 	/**
 	 * Get objects.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  array $query_args Query args.
 	 * @return array
 	 */

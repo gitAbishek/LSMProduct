@@ -3,7 +3,7 @@
 /**
  * Get full list of course visibilty term ids.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @return int[]
  */
 function masteriyo_get_course_visibility_term_ids() {

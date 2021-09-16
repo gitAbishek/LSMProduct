@@ -2,7 +2,7 @@
 /**
  * Question model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models
  */
@@ -18,14 +18,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Question model (post type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class Question extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -34,7 +34,7 @@ class Question extends Model {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -43,7 +43,7 @@ class Question extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -52,14 +52,14 @@ class Question extends Model {
 	/**
 	 * Question type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected $type = '';
 
 	/**
 	 * Stores question data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -85,7 +85,7 @@ class Question extends Model {
 	/**
 	 * Get the question if ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param QuestionRepository $question_repository Question Repository,
 	 */
@@ -102,7 +102,7 @@ class Question extends Model {
 	/**
 	 * Get the question's title. For questions this is the question name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -122,7 +122,7 @@ class Question extends Model {
 	/**
 	 * Returns the children IDs if applicable. Overridden by child classes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array of IDs
 	 */
@@ -133,7 +133,7 @@ class Question extends Model {
 	/**
 	 * Get the object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -144,7 +144,7 @@ class Question extends Model {
 	/**
 	 * Get the post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -162,7 +162,7 @@ class Question extends Model {
 	/**
 	 * Get question name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -175,7 +175,7 @@ class Question extends Model {
 	/**
 	 * Returns the question's course id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -188,7 +188,7 @@ class Question extends Model {
 	/**
 	 * Returns question parent id (quiz id ).
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -202,7 +202,7 @@ class Question extends Model {
 	/**
 	 * Get question created date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -215,7 +215,7 @@ class Question extends Model {
 	/**
 	 * Get question modified date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -228,7 +228,7 @@ class Question extends Model {
 	/**
 	 * Get question status.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -241,7 +241,7 @@ class Question extends Model {
 	/**
 	 * Get question description.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -254,7 +254,7 @@ class Question extends Model {
 	/**
 	 * Get question answers.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -267,7 +267,7 @@ class Question extends Model {
 	/**
 	 * Get question type.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -286,7 +286,7 @@ class Question extends Model {
 	/**
 	 * Check whether the answer is requierd for the question.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -299,7 +299,7 @@ class Question extends Model {
 	/**
 	 * Check whether the answers should be randomized or not.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -312,7 +312,7 @@ class Question extends Model {
 	/**
 	 * Return question points.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -325,7 +325,7 @@ class Question extends Model {
 	/**
 	 * Return question positive feedback.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -338,7 +338,7 @@ class Question extends Model {
 	/**
 	 * Return question negative feedback.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -351,7 +351,7 @@ class Question extends Model {
 	/**
 	 * Return question feedback.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -364,7 +364,7 @@ class Question extends Model {
 	/**
 	 * Returns question menu order.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -383,7 +383,7 @@ class Question extends Model {
 	/**
 	 * Set question name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name question name.
 	 */
@@ -394,7 +394,7 @@ class Question extends Model {
 	/**
 	 * Set the question's course id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $course_id Course id.
 	 */
@@ -405,7 +405,7 @@ class Question extends Model {
 	/**
 	 * Set question created date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -416,7 +416,7 @@ class Question extends Model {
 	/**
 	 * Set question modified date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -427,7 +427,7 @@ class Question extends Model {
 	/**
 	 * Set question status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $status question status.
 	 */
@@ -438,7 +438,7 @@ class Question extends Model {
 	/**
 	 * Set question description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $description Question description.
 	 */
@@ -449,7 +449,7 @@ class Question extends Model {
 	/**
 	 * Set question type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $type Question type.
 	 */
@@ -460,7 +460,7 @@ class Question extends Model {
 	/**
 	 * Set the question parent id(quiz id).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $parent Parent id.
 	 */
@@ -471,7 +471,7 @@ class Question extends Model {
 	/**
 	 * Set question's answer list.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $answers List of answers.
 	 */
@@ -482,7 +482,7 @@ class Question extends Model {
 	/**
 	 * Set question's answer required.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $answer_required Answer required for the question.
 	 */
@@ -493,7 +493,7 @@ class Question extends Model {
 	/**
 	 * Randomize the answers.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $randomize Randomize.
 	 */
@@ -504,7 +504,7 @@ class Question extends Model {
 	/**
 	 * Set the points for the question.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $points Points.
 	 */
@@ -515,7 +515,7 @@ class Question extends Model {
 	/**
 	 * Set the positive feedback  for the answer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $positive_feedback Positive feedback.
 	 */
@@ -526,7 +526,7 @@ class Question extends Model {
 	/**
 	 * Set the negative feedback.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $negative_feedback Negative feedback.
 	 */
@@ -537,7 +537,7 @@ class Question extends Model {
 	/**
 	 * Set the feedback.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $feedback feedback.
 	 */
@@ -548,7 +548,7 @@ class Question extends Model {
 	/**
 	 * Set the question menu order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $menu_order Menu order id.
 	 */

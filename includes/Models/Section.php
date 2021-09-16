@@ -2,7 +2,7 @@
 /**
  * Section model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Section model (post type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class Section extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -35,7 +35,7 @@ class Section extends Model {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -44,7 +44,7 @@ class Section extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -53,7 +53,7 @@ class Section extends Model {
 	/**
 	 * Stores section data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -72,7 +72,7 @@ class Section extends Model {
 	/**
 	 * Get the section if ID
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param SectionRepository $section_repository Section Repository.
 	 */
@@ -116,7 +116,7 @@ class Section extends Model {
 	/**
 	 * Get the object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -127,7 +127,7 @@ class Section extends Model {
 	/**
 	 * Get the post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -144,7 +144,7 @@ class Section extends Model {
 	/**
 	 * Get section name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -157,7 +157,7 @@ class Section extends Model {
 	/**
 	 * Get section created date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -170,7 +170,7 @@ class Section extends Model {
 	/**
 	 * Get section modified date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -183,7 +183,7 @@ class Section extends Model {
 	/**
 	 * Get section description.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -196,7 +196,7 @@ class Section extends Model {
 	/**
 	 * Returns section parent id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -209,7 +209,7 @@ class Section extends Model {
 	/**
 	 * Returns the section's course id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -222,7 +222,7 @@ class Section extends Model {
 	/**
 	 * Returns section menu order.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -235,7 +235,7 @@ class Section extends Model {
 	/**
 	 * Get section status.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -254,7 +254,7 @@ class Section extends Model {
 	/**
 	 * Set section name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name section name.
 	 */
@@ -265,7 +265,7 @@ class Section extends Model {
 	/**
 	 * Set section created date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -276,7 +276,7 @@ class Section extends Model {
 	/**
 	 * Set section modified date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -287,7 +287,7 @@ class Section extends Model {
 	/**
 	 * Set section description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $description Section description.
 	 */
@@ -298,7 +298,7 @@ class Section extends Model {
 	/**
 	 * Set the section parent id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $parent Parent id.
 	 */
@@ -309,7 +309,7 @@ class Section extends Model {
 	/**
 	 * Set the section's course id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $course_id Course id.
 	 */
@@ -320,7 +320,7 @@ class Section extends Model {
 	/**
 	 * Set the section menu order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $menu_order Menu order id.
 	 */
@@ -331,7 +331,7 @@ class Section extends Model {
 	/**
 	 * Set section status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $status Section status.
 	 */

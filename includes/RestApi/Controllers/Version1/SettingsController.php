@@ -15,7 +15,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Endpoint namespace.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -24,7 +24,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Route base.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -33,7 +33,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -42,7 +42,7 @@ class SettingsController extends CrudController {
 	/**
 	 * If object is hierarchical.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool
 	 */
@@ -51,7 +51,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission
 	 */
@@ -60,7 +60,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission
 	 */
@@ -71,7 +71,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Register routes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -104,7 +104,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Check if a given request has access to read items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -123,7 +123,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Check if a given request has access to update an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -142,7 +142,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Check if a given request has access to delete an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -161,7 +161,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -180,7 +180,7 @@ class SettingsController extends CrudController {
 		 * collection parameter to an internal WP_Query parameter. Use the
 		 * `rest_{$this->object_type}_query` filter to set WP_Query parameters.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param array        $query_params JSON Schema-formatted collection parameters.
 		 * @param WP_object_type $object_type    Post type object.
@@ -191,7 +191,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Get the settings' schema, conforming to JSON Schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -775,7 +775,7 @@ class SettingsController extends CrudController {
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
 								'type'                     => 'object',
-								'account_page_id'        => array(
+								'account_page_id'          => array(
 									'description' => __( 'Account page ID.', 'masteriyo' ),
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),
@@ -944,7 +944,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Prepare objects query.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return array
 	 */
@@ -962,7 +962,7 @@ class SettingsController extends CrudController {
 		 * Enables adding extra arguments or setting defaults for a post
 		 * collection request.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param array           $args    Key value array of query var to query value.
 		 * @param WP_REST_Request $request The request used.
@@ -975,7 +975,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Get a collection of posts.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -994,7 +994,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Check permissions for an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $object_type Object type.
 	 * @param string $context   Request context.
 	 * @param int    $object_id Post ID.
@@ -1007,7 +1007,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $option Option.
 	 * @return Setting
@@ -1027,7 +1027,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Reset the default value to settings.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return Setting
 	 */
 	public function delete_items( $request ) {
@@ -1043,7 +1043,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  Model         $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -1061,7 +1061,7 @@ class SettingsController extends CrudController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param WP_REST_Response $response The response object.
 		 * @param Model            $object   Object data.
@@ -1073,7 +1073,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Get settings data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param object $setting Setting instance.
 	 * @param string $context Request context. Options: 'view' and 'edit'.
@@ -1105,7 +1105,7 @@ class SettingsController extends CrudController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param Model         $setting  Object object.
 		 * @param WP_REST_Request $request  Request object.
@@ -1117,7 +1117,7 @@ class SettingsController extends CrudController {
 	/**
 	 * Return settings as object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function process_objects_collection( $settings ) {
 		return array_shift( $settings );

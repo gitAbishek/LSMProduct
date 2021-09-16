@@ -18,7 +18,7 @@ use Masteriyo\Contracts\PaymentGateway as PaymentGatewayInterface;
  *
  * Provides a Cash on Delivery Payment Gateway.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @class       Offline
  * @extends     PaymentGateway
  */
@@ -27,7 +27,7 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Constructor for the gateway.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		// Setup general properties.
@@ -46,7 +46,7 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Setup general properties for the gateway.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function setup_properties() {
 		$this->name               = 'offline';
@@ -65,7 +65,7 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Process the payment and return the result.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $order_id Order ID.
 	 * @return array
@@ -94,7 +94,7 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Output for the order received page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function thankyou_page() {
 		if ( $this->instructions ) {
@@ -105,7 +105,7 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Change payment complete order status to completed for Offline orders.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string         $status Current order status.
 	 * @param  int            $order_id Order ID.
@@ -123,7 +123,7 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Add content to the Masteriyo emails.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 * @param bool     $sent_to_admin  Sent to admin.
@@ -139,7 +139,7 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 	/**
 	 * Process refund.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int        $order_id Order ID.
 	 * @param  float|null $amount Refund amount.

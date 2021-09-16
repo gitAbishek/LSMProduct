@@ -49,7 +49,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -58,7 +58,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission
 	 */
@@ -69,7 +69,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Register routes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -134,7 +134,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -189,7 +189,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int|WP_Post|Model $object Object ID or WP_Post or Model.
 	 *
@@ -217,7 +217,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since   0.1.0
+	 * @since   1.0.0
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -286,7 +286,7 @@ class LessonsController extends PostsController {
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
-	 * @since   0.1.0
+	 * @since   1.0.0
 	 * @return array
 	 */
 	protected function prepare_objects_query( $request ) {
@@ -312,7 +312,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Get the lessons'schema, conforming to JSON Schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -489,7 +489,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Prepare a single lesson for create or update.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
@@ -608,7 +608,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model           $object  Object data.
 	 * @param WP_REST_Request $request Request object.
@@ -625,7 +625,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Check if a given request has access to create an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -681,7 +681,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Check if a given request has access to delete an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -727,7 +727,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Check if a given request has access to update an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean

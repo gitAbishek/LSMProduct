@@ -13,7 +13,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Create a setting in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $setting Setting object.
 	 */
@@ -51,7 +51,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Read a setting.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $setting Cource object.
 	 * @param mixed $default Default value.
@@ -76,7 +76,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Update a setting in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $setting Setting object.
 	 *
@@ -94,7 +94,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Delete a setting from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $setting Setting object.
 	 * @param array $args   Array of args to pass.alert-danger
@@ -109,7 +109,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Process setting.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  \Masteriyo\Models\Setting Setting object.
 	 * @return void

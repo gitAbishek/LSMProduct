@@ -2,7 +2,7 @@
 /**
  * Question repository.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Repository
  */
@@ -15,14 +15,14 @@ use Masteriyo\Models\Question;
 /**
  * Question repository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class QuestionRepository extends AbstractRepository implements RepositoryInterface {
 
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -40,7 +40,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	/**
 	 * Create a question in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $question Question object.
 	 */
@@ -85,7 +85,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	/**
 	 * Read a question.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $question Question object.
 	 * @throws Exception If invalid question.
@@ -120,7 +120,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	/**
 	 * Update a question in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $question Question object.
 	 *
@@ -192,7 +192,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	/**
 	 * Delete a question from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $question Question object.
 	 * @param array $args   Array of args to pass.alert-danger
@@ -214,7 +214,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	/**
 	 * Read question data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Question $question question object.
 	 */
@@ -243,7 +243,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	/**
 	 * Read extra data associated with the question, like button text or question URL for external questions.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Question $question question object.
 	 */
@@ -262,7 +262,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	/**
 	 * Fetch questions.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return Question[]
@@ -301,7 +301,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	/**
 	 * Get valid WP_Query args from a QuestionQuery's query variables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $query_vars Query vars from a QuestionQuery.
 	 * @return array
 	 */

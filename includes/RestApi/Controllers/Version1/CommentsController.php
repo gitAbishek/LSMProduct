@@ -14,14 +14,14 @@ defined( 'ABSPATH' ) || exit;
  * CommentsController
  *
  * @package Masteriyo/RestApi
- * @version  0.1.0
+ * @version  1.0.0
  */
 abstract class CommentsController extends CrudController {
 
 	/**
 	 * Retrieves the query params for collections.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array Comments collection parameters.
 	 */
@@ -179,7 +179,7 @@ abstract class CommentsController extends CrudController {
 	/**
 	 * Checks if a given request has access to get a specific item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
@@ -237,7 +237,7 @@ abstract class CommentsController extends CrudController {
 	/**
 	 * Check if a given request has access to create an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -266,7 +266,7 @@ abstract class CommentsController extends CrudController {
 	/**
 	 * Check if a given request has access to delete an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -297,7 +297,7 @@ abstract class CommentsController extends CrudController {
 	/**
 	 * Check if a given request has access to update an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -328,7 +328,7 @@ abstract class CommentsController extends CrudController {
 	/**
 	 * Check permissions for an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $object_type Object type.
 	 * @param string $context   Request context.
@@ -343,7 +343,7 @@ abstract class CommentsController extends CrudController {
 	/**
 	 * Prepare objects query.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 *
@@ -388,7 +388,7 @@ abstract class CommentsController extends CrudController {
 		 * Enables adding extra arguments or setting defaults for a post
 		 * collection request.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param array           $args    Key value array of query var to query value.
 		 * @param WP_REST_Request $request The request used.
@@ -402,7 +402,7 @@ abstract class CommentsController extends CrudController {
 	 * Determine the allowed query_vars for a get_items() response and
 	 * prepare for WP_Comment_Query.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array           $prepared_args Prepared arguments.
 	 * @param WP_REST_Request $request Request object.
@@ -438,7 +438,7 @@ abstract class CommentsController extends CrudController {
 		/**
 	 * Get all the WP Query vars that are allowed for the API request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

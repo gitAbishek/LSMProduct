@@ -4,7 +4,7 @@
  *
  * @package Masteriyo
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -22,7 +22,7 @@ class ScriptStyle {
 	/**
 	 * Scripts.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -31,7 +31,7 @@ class ScriptStyle {
 	/**
 	 * Styles.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -40,7 +40,7 @@ class ScriptStyle {
 	/**
 	 * Localized scripts.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -49,7 +49,7 @@ class ScriptStyle {
 	/**
 	 * Initialization.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function init() {
 		self::init_hooks();
@@ -60,7 +60,7 @@ class ScriptStyle {
 	/**
 	 * Initialize hooks.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -77,7 +77,7 @@ class ScriptStyle {
 	/**
 	 * Get application version.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -88,7 +88,7 @@ class ScriptStyle {
 	/**
 	 * Get asset name suffix.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -104,7 +104,7 @@ class ScriptStyle {
 	/**
 	 * Initialize the scripts.`
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -168,7 +168,7 @@ class ScriptStyle {
 	/**
 	 * Initialize the styles.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -178,7 +178,7 @@ class ScriptStyle {
 		self::$styles = apply_filters(
 			'masteriyo_enqueue_styles',
 			array(
-				'public'  => array(
+				'public' => array(
 					'src'     => self::get_asset_url( "/assets/css/public{$suffix}.css" ),
 					'has_rtl' => true,
 					'context' => 'public',
@@ -190,7 +190,7 @@ class ScriptStyle {
 	/**
 	 * Get styles according to context.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context Style/Script context (admin, public  none, etc.)
 	 *
@@ -219,7 +219,7 @@ class ScriptStyle {
 	/**
 	 * Get scripts.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context Script context. (admin, public,static  none).
 	 *
@@ -248,7 +248,7 @@ class ScriptStyle {
 	/**
 	 * Default script options.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -270,7 +270,7 @@ class ScriptStyle {
 	/**
 	 * Default style options.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -294,7 +294,7 @@ class ScriptStyle {
 	/**
 	 * Return asset URL.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $path Assets path.
 	 *
@@ -307,7 +307,7 @@ class ScriptStyle {
 	/**
 	 * Register a script for use.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @uses   wp_register_script()
 	 * @param  string   $handle    Name of the script. Should be unique.
@@ -323,7 +323,7 @@ class ScriptStyle {
 	/**
 	 * Register and enqueue a script for use.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @uses   wp_enqueue_script()
 	 * @param  string   $handle    Name of the script. Should be unique.
@@ -343,7 +343,7 @@ class ScriptStyle {
 	 * Register a style for use.
 	 *
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @uses   wp_register_style()
 	 * @param  string   $handle  Name of the stylesheet. Should be unique.
@@ -365,7 +365,7 @@ class ScriptStyle {
 	/**
 	 * Register and enqueue a styles for use.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @uses   wp_enqueue_style()
 	 * @param  string   $handle  Name of the stylesheet. Should be unique.
@@ -385,7 +385,7 @@ class ScriptStyle {
 	/**
 	 * Load public static scripts and styles.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function load_public_scripts_styles() {
 		$scripts = self::get_scripts( 'public' );
@@ -636,7 +636,7 @@ class ScriptStyle {
 	/**
 	 * Get the list of whitelist styles in learn page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

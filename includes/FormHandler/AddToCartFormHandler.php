@@ -17,7 +17,7 @@ class AddToCartFormHandler {
 	/**
 	 * Constructor
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'wp_loaded', array( $this, 'add_to_cart' ), 20 );
@@ -26,7 +26,7 @@ class AddToCartFormHandler {
 	/**
 	 * Handle addtocart.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -63,7 +63,7 @@ class AddToCartFormHandler {
 	/**
 	 * Handle adding simple courses to the cart.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param int $course_id Course ID to add to the cart.
 	 * @return bool success or not
 	 */

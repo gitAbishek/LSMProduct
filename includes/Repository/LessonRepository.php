@@ -13,7 +13,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -31,7 +31,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Create a lesson in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $lesson Lesson object.
 	 */
@@ -79,7 +79,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Read a lesson.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $lesson Cource object.
 	 * @throws Exception If invalid lesson.
@@ -117,7 +117,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Update a lesson in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $lesson Lesson object.
 	 *
@@ -194,7 +194,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Delete a lesson from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $lesson Lesson object.
 	 * @param array $args   Array of args to pass.alert-danger
@@ -217,7 +217,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Read lesson data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Lesson $lesson lesson object.
 	 */
@@ -250,7 +250,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Read extra data associated with the lesson, like button text or lesson URL for external lessons.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Lesson $lesson lesson object.
 	 */
@@ -269,7 +269,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Fetch lessons.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return Lesson[]
@@ -308,7 +308,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Get valid WP_Query args from a LessonQuery's query variables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $query_vars Query vars from a LessonQuery.
 	 * @return array
 	 */

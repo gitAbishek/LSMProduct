@@ -2,7 +2,7 @@
 /**
  * OrderRepository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Repository;
  */
@@ -62,7 +62,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Create a order in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $order order object.
 	 */
@@ -115,7 +115,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Read an order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $order Cource object.
 	 *
@@ -147,7 +147,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Update an order in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $order order object.
 	 *
@@ -210,7 +210,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Delete an order from the database.r
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $order order object.
 	 * @param array $args   Array of args to pass.alert-danger.
@@ -246,7 +246,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Read order data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order order object.
 	 */
@@ -276,7 +276,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Read extra data associated with the order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 */
@@ -295,7 +295,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Fetch orders.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return Order[]
@@ -334,7 +334,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Get valid WP_Query args from a OrderQuery's query variables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $query_vars Query vars from a OrderQuery.
 	 * @return array
 	 */
@@ -401,7 +401,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Read order items of a specific type from the database for this order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @param  string $type Order item type.
@@ -441,7 +441,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Remove all line items (orders) from the order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 * @param string $type Order item type. Default null.
@@ -466,7 +466,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Get token ids for an order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 * @return array
@@ -479,7 +479,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Update token ids for an order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 * @param array    $token_ids Payment token ids.
@@ -491,7 +491,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Clear any caches.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 */
@@ -504,7 +504,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Get a title for the new post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -518,7 +518,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Get order key.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 * @return string
@@ -530,7 +530,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Get amount already refunded.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @return float
@@ -557,7 +557,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 *
 	 * @param string $order Order boject.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function create_or_update_user_course( $order ) {
 		// Filter order item courses.

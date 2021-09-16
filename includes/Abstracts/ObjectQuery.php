@@ -2,7 +2,7 @@
 /**
  * Query abstraction layer functionality.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package  Masteriyo\Abstracts
  */
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * Extended by classes to provide a query abstraction layer for safe object searching.
  *
- * @version  0.1.0
+ * @version  1.0.0
  * @package  Masteriyo\Abstracts
  */
 abstract class ObjectQuery {
@@ -24,7 +24,7 @@ abstract class ObjectQuery {
 	/**
 	 * Stores query data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -33,7 +33,7 @@ abstract class ObjectQuery {
 	/**
 	 * Create a new query.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $args Criteria to query on in a format similar to WP_Query.
 	 */
@@ -46,7 +46,7 @@ abstract class ObjectQuery {
 	/**
 	 * Get the current query vars.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -57,7 +57,7 @@ abstract class ObjectQuery {
 	/**
 	 * Get the value of a query variable.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $query_var Query variable to get value for.
 	 * @param mixed  $default Default value if query variable is not set.
@@ -73,7 +73,7 @@ abstract class ObjectQuery {
 	/**
 	 * Set a query variable.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $query_var Query variable to set.
 	 * @param mixed  $value Value to set for query variable.
@@ -85,7 +85,7 @@ abstract class ObjectQuery {
 	/**
 	 * Set a query variables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query variables to set.
 	 */
@@ -99,7 +99,7 @@ abstract class ObjectQuery {
 	/**
 	 * Get the default allowed query vars.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -124,7 +124,7 @@ abstract class ObjectQuery {
 	/**
 	 * Parse query vars.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */

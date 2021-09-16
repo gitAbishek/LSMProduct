@@ -2,7 +2,7 @@
 /**
  * Permission functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo\Helper;
@@ -13,7 +13,7 @@ class Permission {
 	/**
 	 * Check permissions of posts on REST API.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $post_type Post type.
 	 * @param string $context   Request context.
 	 * @param int    $object_id Post ID.
@@ -42,7 +42,7 @@ class Permission {
 	/**
 	 * Check permissions for terms on REST API.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $taxonomy  Taxonomy.
 	 * @param string $context   Request context.
 	 * @param int    $object_id Term ID.
@@ -75,7 +75,7 @@ class Permission {
 	/**
 	 * Check permissions for manipulating users on REST API.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context Request context.
 	 *
@@ -99,7 +99,7 @@ class Permission {
 	/**
 	 * Check permissions for checking answers on REST API.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -112,7 +112,7 @@ class Permission {
 	/**
 	 * Check manager permissions on REST API.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $object  Object.
 	 * @param string $context Request context.
 	 * @return bool
@@ -132,7 +132,7 @@ class Permission {
 	/**
 	 * Check course reviews permissions on REST API.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context   Request context.
 	 * @param string $object_id Object ID.
 	 * @return bool
@@ -157,7 +157,7 @@ class Permission {
 	/**
 	 * Check FAQ permissions on REST API.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context   Request context.
 	 * @param string $object_id Object ID.
 	 * @return bool
@@ -181,7 +181,7 @@ class Permission {
 	/**
 	 * Check course question-answer permissions on REST API.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context   Request context.
 	 * @param string $object_id Object ID.
 	 * @return bool
@@ -206,7 +206,7 @@ class Permission {
 	/**
 	 * Check course question-answer permissions on REST API.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context   Request context.
 	 * @param string $object_id Object ID.
 	 * @return bool
@@ -231,7 +231,7 @@ class Permission {
 	/**
 	 * Check order permissions.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context   Request context.
 	 * @param string $object_id Object ID.
 	 * @return bool
@@ -262,7 +262,7 @@ class Permission {
 	/**
 	 * Check permissions of course progress on REST API.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $context   Request context.
 	 * @param int    $object_id Post ID.
 	 * @return bool

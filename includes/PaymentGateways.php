@@ -4,7 +4,7 @@
  *
  * Loads payment gateways via hooks for use in the store.
  *
- * @version 0.1.0
+ * @version 1.0.0
  * @package Masteriyo\Classes
  */
 
@@ -22,7 +22,7 @@ class PaymentGateways {
 	/**
 	 * Payment gateway classes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -31,7 +31,7 @@ class PaymentGateways {
 	/**
 	 * Session class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Session\Session
 	 */
@@ -40,7 +40,7 @@ class PaymentGateways {
 	/**
 	 * Initialize payment gateways.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct( Session $session ) {
 		$this->session = $session;
@@ -51,7 +51,7 @@ class PaymentGateways {
 	/**
 	 * Load gateways and hook in functions.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function init() {
 		$load_gateways = array(
@@ -93,7 +93,7 @@ class PaymentGateways {
 	/**
 	 * Get gateways.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -112,7 +112,7 @@ class PaymentGateways {
 	/**
 	 * Get array of registered gateway ids
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return array of strings
 	 */
 	public function get_payment_gateway_ids() {
@@ -122,7 +122,7 @@ class PaymentGateways {
 	/**
 	 * Get available gateways.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -157,7 +157,7 @@ class PaymentGateways {
 	/**
 	 * Callback for array filter. Returns true if gateway is of correct type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param object $gateway Gateway to check.
 	 * @return bool
@@ -169,7 +169,7 @@ class PaymentGateways {
 	/**
 	 * Set the current, active gateway.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $gateways Available payment gateways.
 	 */

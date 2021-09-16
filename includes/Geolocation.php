@@ -2,7 +2,7 @@
 /**
  * Geolocation class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @package Masteriyo
  */
 
@@ -17,7 +17,7 @@ class Geolocation {
 	/**
 	 * API endpoints for looking up user IP address.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -31,7 +31,7 @@ class Geolocation {
 	/**
 	 * API endpoints for geolocating an IP address.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -43,7 +43,7 @@ class Geolocation {
 	/**
 	 * Get current user IP Address from headers.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -63,7 +63,7 @@ class Geolocation {
 	/**
 	 * Get user IP Address using an external service.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -100,7 +100,7 @@ class Geolocation {
 	/**
 	 * Geolocate an IP address.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $ip_address   IP Address.
 	 * @param  bool   $fallback     If true, fallbacks to alternative IP detection (can be slower).
@@ -130,7 +130,7 @@ class Geolocation {
 		/**
 		 * Get geolocation filter.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param array  $geolocation Geolocation data, including country, state, city, and postcode, ip_address.
 		 * @param string $ip_address  IP Address.
@@ -174,7 +174,7 @@ class Geolocation {
 	/**
 	 * Fetches the country code from the request headers, if available.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string The country code pulled from the headers, or empty string if not found.
 	 */
@@ -203,7 +203,7 @@ class Geolocation {
 	/**
 	 * Use APIs to Geolocate the user.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $ip_address IP address.
 	 *

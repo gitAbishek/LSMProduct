@@ -2,7 +2,7 @@
 /**
  * Handle meta table functionality.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Classes
  */
@@ -20,7 +20,7 @@ abstract class AbstractRepository {
 	/**
 	 * Meta type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -31,7 +31,7 @@ abstract class AbstractRepository {
 	 * This should be the name of the field your table uses for associating meta with objects.
 	 * For example, in payment_tokenmeta, this would be payment_token_id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -40,7 +40,7 @@ abstract class AbstractRepository {
 	/**
 	 * Data stored in meta keys, but not considered "meta" for an object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -49,7 +49,7 @@ abstract class AbstractRepository {
 	/**
 	 * Meta data which should exist in the DB, even if empty.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -58,7 +58,7 @@ abstract class AbstractRepository {
 	/**
 	 * Data stored in separate lookup table.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -67,7 +67,7 @@ abstract class AbstractRepository {
 	/**
 	 * If we have already saved our extra data, don't do automatic / default handling.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool
 	 */
@@ -76,7 +76,7 @@ abstract class AbstractRepository {
 	/**
 	 * Stores updated props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -85,7 +85,7 @@ abstract class AbstractRepository {
 	/**
 	 * Deletes a meta based on meta ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $model      Model object.
 	 * @param MetaData $meta    MetaData object.
@@ -100,7 +100,7 @@ abstract class AbstractRepository {
 	/**
 	 * Add new piece of meta.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $model      Model object.
 	 * @param MetaData $meta    MetaData object.
@@ -114,7 +114,7 @@ abstract class AbstractRepository {
 	/**
 	 * Update meta.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $mode       Model object.
 	 * @param MetaData $meta    MetaData object.
@@ -128,7 +128,7 @@ abstract class AbstractRepository {
 	/**
 	 * Read meta.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $model Model object.
 	 *
@@ -172,7 +172,7 @@ abstract class AbstractRepository {
 	/**
 	 * Helper method to filter internal meta keys from all meta data rows for the object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $model        Model object.
 	 * @param array   $raw_meta_data Array of std object of meta data to be filtered.
@@ -188,7 +188,7 @@ abstract class AbstractRepository {
 	/**
 	 * Callback to remove unwanted meta data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param object $meta Meta object to check if it should be excluded or not.
 	 * @return bool
@@ -206,7 +206,7 @@ abstract class AbstractRepository {
 	 *
 	 * Note: WordPress `get_metadata` function returns an empty string when meta data does not exist.
 	 *
-	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
+	 * @since 1.0.0 Added to prevent empty meta being stored unless required.
 	 *
 	 * @param Model $object The WP_Data object.
 	 * @param string  $meta_key Meta key to update.
@@ -234,7 +234,7 @@ abstract class AbstractRepository {
 	 *
 	 * Note: WordPress `get_metadata` function returns an empty string when meta data does not exist.
 	 *
-	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
+	 * @since 1.0.0 Added to prevent empty meta being stored unless required.
 	 *
 	 * @param Model $object The Model object.
 	 * @param string  $meta_key Meta key to update.
@@ -262,7 +262,7 @@ abstract class AbstractRepository {
 	 *
 	 * Note: WordPress `get_metadata` function returns an empty string when meta data does not exist.
 	 *
-	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
+	 * @since 1.0.0 Added to prevent empty meta being stored unless required.
 	 *
 	 * @param Model $object The Model object.
 	 * @param string  $meta_key Meta key to update.
@@ -290,7 +290,7 @@ abstract class AbstractRepository {
 	 *
 	 * Note: WordPress `get_metadata` function returns an empty string when meta data does not exist.
 	 *
-	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
+	 * @since 1.0.0 Added to prevent empty meta being stored unless required.
 	 *
 	 * @param Model $object The WP_Data object.
 	 * @param string  $meta_key Meta key to update.
@@ -317,7 +317,7 @@ abstract class AbstractRepository {
 	 *
 	 * Note: WordPress `get_metadata` function returns an empty string when meta data does not exist.
 	 *
-	 * @since 0.1.0 Added to prevent empty meta being stored unless required.
+	 * @since 1.0.0 Added to prevent empty meta being stored unless required.
 	 *
 	 * @param Model $object The Model objec
 	 * @param Model $object The Model object.
@@ -340,7 +340,7 @@ abstract class AbstractRepository {
 	/**
 	 * Returns meta table info.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -379,7 +379,7 @@ abstract class AbstractRepository {
 	/**
 	 * Retrieve stopwords used when parsing search terms.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array Stopwords.
 	 */
@@ -406,7 +406,7 @@ abstract class AbstractRepository {
 	/**
 	 * Get and store terms from a taxonomy.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  Model|integer $model Model model or model ID.
 	 * @param  string          $taxonomy Taxonomy name e.g. model_cat.
 	 * @return array of terms
@@ -430,7 +430,7 @@ abstract class AbstractRepository {
 	 * term matching when searching for posts. The list of English stopwords is
 	 * the approximate search engines list, and is translatable.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $terms Terms to check.
 	 *
@@ -467,7 +467,7 @@ abstract class AbstractRepository {
 	 * Internal meta keys we don't want exposed as part of meta_data. This is in
 	 * addition to all data props with _ prefix.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $key Prefix to be added to meta keys.
 	 *
@@ -480,7 +480,7 @@ abstract class AbstractRepository {
 	/**
 	 * Get data to save to a lookup table.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int    $id ID of object to update.
 	 * @param string $table Lookup table name.
@@ -494,7 +494,7 @@ abstract class AbstractRepository {
 	/**
 	 * Get primary key name for lookup table.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $table Lookup table name.
 	 *
@@ -508,7 +508,7 @@ abstract class AbstractRepository {
 	 * Gets a list of props and meta keys that need updated based on change state
 	 * or if they are present in the database or not.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model   $model               The Model model.
 	 * @param  array   $meta_key_to_props   A mapping of meta keys => prop names.
@@ -533,7 +533,7 @@ abstract class AbstractRepository {
 	/**
 	 * Update a lookup table for an object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int    $id ID of object to update.
 	 * @param string $table Lookup table name.
@@ -565,7 +565,7 @@ abstract class AbstractRepository {
 	/**
 	 * Delete lookup table data for an ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int    $id ID of model to update.
 	 * @param string $table Lookup table name.
@@ -596,7 +596,7 @@ abstract class AbstractRepository {
 	/**
 	 * Helper method that updates all the user meta for a model based on it's settings in the Model class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $model model object.
 	 * @param bool  $force Force update. Used during create.
@@ -629,7 +629,7 @@ abstract class AbstractRepository {
 	/**
 	 * Helper method that updates all the post meta for a model based on it's settings in the Model class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $model model object.
 	 * @param bool  $force Force update. Used during create.
@@ -692,7 +692,7 @@ abstract class AbstractRepository {
 	/**
 	 * Helper method that updates all the comments meta for a model based on it's settings in the Model class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $model model object.
 	 * @param bool  $force Force update. Used during create.
@@ -749,7 +749,7 @@ abstract class AbstractRepository {
 	/**
 	 * Helper method that updates all the custom table meta for a model based on it's settings in the Model class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $model model object.
 	 * @param bool  $force Force update. Used during create.
@@ -806,7 +806,7 @@ abstract class AbstractRepository {
 	/**
 	 * Helper method that updates all the post meta for a model based on it's settings in the Model class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $model model object.
 	 * @param bool  $force Force update. Used during create.
@@ -869,7 +869,7 @@ abstract class AbstractRepository {
 	/**
 	 * Get internal meta keys.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -880,7 +880,7 @@ abstract class AbstractRepository {
 	/**
 	 * Get must exist meta keys.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -891,7 +891,7 @@ abstract class AbstractRepository {
 	/**
 	 * Get lookup data keys.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -902,7 +902,7 @@ abstract class AbstractRepository {
 	/**
 	 * Get valid WP_Query args from a ObjectQuery's query variables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $query_vars query vars from a ObjectQuery.
 	 * @return array
 	 */
@@ -969,7 +969,7 @@ abstract class AbstractRepository {
 	 * Valid date formats: YYYY-MM-DD or timestamp, possibly combined with an operator from $valid_operators.
 	 * Also accepts a DateTime object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param mixed  $query_var A valid date format.
 	 * @param string $key meta or db column key.
 	 * @param array  $wp_query_args WP_Query args.
@@ -1135,7 +1135,7 @@ abstract class AbstractRepository {
 	/**
 	 * Converts a WP post date string into a timestamp.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $time_string The WP post date string.
 	 * @return int|null The date string converted to a timestamp or null.

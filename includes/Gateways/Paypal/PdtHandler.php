@@ -20,7 +20,7 @@ class PdtHandler extends Response {
 	/**
 	 * Identity token for PDT support
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -29,7 +29,7 @@ class PdtHandler extends Response {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool   $sandbox Whether to use sandbox mode or not.
 	 * @param string $identity_token Identity token for PDT support.
@@ -44,7 +44,7 @@ class PdtHandler extends Response {
 	/**
 	 * Validate a PDT transaction to ensure its authentic.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $transaction TX ID.
 	 * @return bool|array False or result array if successful and valid.

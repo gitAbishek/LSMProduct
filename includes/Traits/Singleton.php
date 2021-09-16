@@ -14,7 +14,7 @@ trait Singleton {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var object
 	 */
@@ -23,7 +23,7 @@ trait Singleton {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -32,7 +32,7 @@ trait Singleton {
 	/**
 	 * Get class instance.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return object Instance.
 	 */
@@ -46,14 +46,14 @@ trait Singleton {
 	/**
 	 * Prevent cloning.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	private function __clone() {}
 
 	/**
 	 * Prevent unserializing.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	private function __wakeup() {}
 }

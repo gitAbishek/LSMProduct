@@ -2,7 +2,7 @@
 /**
  * Payment gateways service provider.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo\Providers;
@@ -23,7 +23,7 @@ class PaymentGatewaysServiceProvider extends AbstractServiceProvider {
 	 * this service provider must have an alias added
 	 * to this array or it will be ignored
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -38,7 +38,7 @@ class PaymentGatewaysServiceProvider extends AbstractServiceProvider {
 	* that you need to, but remember, every alias registered
 	* within this method must be declared in the `$provides` array.
 	*
-	* @since 0.1.0
+	* @since 1.0.0
 	*/
 	public function register() {
 		$this->getContainer()

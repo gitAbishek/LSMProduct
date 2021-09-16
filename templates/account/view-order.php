@@ -13,7 +13,7 @@
  * the readme will list any important changes.
  *
  * @package Masteriyo\Templates
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -137,7 +137,7 @@ endif;
 /**
  * Action hook fired after the order details.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @param Order $order Order data.
  */
 do_action( 'masteriyo_after_order_details', $order );

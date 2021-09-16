@@ -2,7 +2,7 @@
 /**
  * Cache interface.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Interfaces
  */
@@ -14,14 +14,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Cache interface.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 interface Cache {
 	/**
 	 * Get prefix for use with wp_cache_set. Allows all cache in a group to be invalidated at once.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $group Group of cache to get.
 	 *
@@ -40,7 +40,7 @@ interface Cache {
 	/**
 	 * Retrieves the cache contents from the cache by key and group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string $key   The key under which the cache contents are stored.
 	 * @param string $group     Where the cache contents are grouped
@@ -54,7 +54,7 @@ interface Cache {
 	/**
 	 * Saves the data to cache.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed $data       The contents to store in the cache.
@@ -68,7 +68,7 @@ interface Cache {
 	/**
 	 * Adds data to the cache, if the cache key doesn’t already exist.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed $data       The data to add to the cache.
@@ -82,7 +82,7 @@ interface Cache {
 	/**
 	 * Replaces the contents of the cache with new data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed $data       The new data to store in the cache.
@@ -96,7 +96,7 @@ interface Cache {
 	/**
 	 * Retrieves the cache contents from the cache by key and group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int|string $key   The key under which the cache contents are stored.
 	 * @param string $group     Where the cache contents are grouped
@@ -108,7 +108,7 @@ interface Cache {
 	/**
 	 * Removes all cache items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool True on success, false on failure.
 	 */

@@ -6,7 +6,7 @@
  * May be opened in the future once structure is stable.
  *
  * @package Masteriyo\Classes
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 namespace Masteriyo\Cart;
@@ -18,7 +18,7 @@ use Masteriyo\Traits\ItemTotals;
 /**
  * Totals class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 final class Totals {
 	use ItemTotals;
@@ -26,7 +26,7 @@ final class Totals {
 	/**
 	 * Reference to cart object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var Cart
 	 */
 	protected $cart;
@@ -34,7 +34,7 @@ final class Totals {
 	/**
 	 * Reference to customer object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $customer;
@@ -42,7 +42,7 @@ final class Totals {
 	/**
 	 * Line items to calculate.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $items = array();
@@ -50,7 +50,7 @@ final class Totals {
 	/**
 	 * Fees to calculate.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $fees = array();
@@ -58,7 +58,7 @@ final class Totals {
 	/**
 	 * Applied coupon objects.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $coupons = array();
@@ -66,7 +66,7 @@ final class Totals {
 	/**
 	 * Item/coupon discount totals.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $coupon_discount_totals = array();
@@ -74,7 +74,7 @@ final class Totals {
 	/**
 	 * Stores totals.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $totals = array(
@@ -88,7 +88,7 @@ final class Totals {
 	/**
 	 * Sets up the items provided, and calculate totals.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @throws Exception If missing Cart object.
 	 * @param Cart $cart Cart object to calculate totals for.
 	 */
@@ -104,7 +104,7 @@ final class Totals {
 	/**
 	 * Run all calculation methods on the given items in sequence.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function calculate() {
 		$this->calculate_item_totals();
@@ -115,7 +115,7 @@ final class Totals {
 	/**
 	 * Get default blank set of props used per item.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return array
 	 */
 	protected function get_default_item_props() {
@@ -131,7 +131,7 @@ final class Totals {
 	/**
 	 * Get default blank set of props used per fee.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return array
 	 */
 	protected function get_default_fee_props() {
@@ -151,7 +151,7 @@ final class Totals {
 	 *  - price: The line price in cents.
 	 *  - product: The product object this cart item is for.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function get_items_from_cart() {
 		$this->items = array();
@@ -171,7 +171,7 @@ final class Totals {
 	 * Get fee objects from the cart. Normalises data
 	 * into the same format for use by this class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function get_fees_from_cart() {
 		$this->fees = array();
@@ -205,7 +205,7 @@ final class Totals {
 	/**
 	 * Only ran if masteriyo_adjust_non_base_location_prices is true.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param object $item Item to adjust the prices of.
 	 * @return object
 	 */
@@ -216,7 +216,7 @@ final class Totals {
 	/**
 	 * Get discounted price of an item with precision (in cents).
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  object $item_key Item to get the price of.
 	 * @return int
 	 */
@@ -229,7 +229,7 @@ final class Totals {
 	/**
 	 * Get a single total with or without precision (in cents).
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $key Total to get.
 	 * @param  bool   $in_cents Should the totals be returned in cents, or without precision.
 	 * @return int|float
@@ -242,7 +242,7 @@ final class Totals {
 	/**
 	 * Set a single total.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param string $key Total name you want to set.
 	 * @param int    $total Total to set.
 	 */
@@ -253,7 +253,7 @@ final class Totals {
 	/**
 	 * Get all totals with or without precision (in cents).
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  bool $in_cents Should the totals be returned in cents, or without precision.
 	 * @return array.
 	 */
@@ -280,7 +280,7 @@ final class Totals {
 	/**
 	 * Calculate item totals.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function calculate_item_totals() {
 		$this->get_items_from_cart();
@@ -319,7 +319,7 @@ final class Totals {
 	 * otherwise we'll see errors such as when working with a 9.99 inc price, 20% VAT which would.
 	 * be 8.325 leading to totals being 1p off.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function calculate_item_subtotals() {
 		$adjust_non_base_location_prices = apply_filters( 'masteriyo_adjust_non_base_location_prices', true );
@@ -341,7 +341,7 @@ final class Totals {
 	 *
 	 * Note: This class sets the totals for the 'object' as they are calculated. This is so that APIs like the fees API can see these totals if needed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function calculate_fee_totals() {
 		$this->get_fees_from_cart();
@@ -355,7 +355,7 @@ final class Totals {
 	/**
 	 * Main cart totals.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function calculate_totals() {
 		$this->set_total( 'total', masteriyo_round( $this->get_total( 'items_total', true ) + $this->get_total( 'fees_total', true ), 0 ) );

@@ -2,7 +2,7 @@
 /**
  * Abstract Model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @class Model
  * @package Masteriyo\Database
  */
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Abstract Model Class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @package Masteriyo\Database
  */
 abstract class Model {
@@ -26,7 +26,7 @@ abstract class Model {
 	/**
 	 * ID for this object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var int
 	 */
@@ -35,7 +35,7 @@ abstract class Model {
 	/**
 	 * Primary key column name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -44,7 +44,7 @@ abstract class Model {
 	/**
 	 * Core data for this object. Name value pairs.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -53,7 +53,7 @@ abstract class Model {
 		/**
 	 * Core data changes for this object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $changes = array();
@@ -61,7 +61,7 @@ abstract class Model {
 	/**
 	 * This is false until the object is read from the DB.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var bool
 	 */
 	protected $object_read = false;
@@ -69,7 +69,7 @@ abstract class Model {
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var string
 	 */
 	protected $object_type = 'data';
@@ -79,7 +79,7 @@ abstract class Model {
 	 * Used as a standard way for sub classes (like product types) to add
 	 * additional information to an inherited class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $extra_data = array();
@@ -87,7 +87,7 @@ abstract class Model {
 	/**
 	 * Set to _data on construct so we can track and reset data if needed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $default_data = array();
@@ -95,7 +95,7 @@ abstract class Model {
 	/**
 	 * Contains a reference to the data store for this class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var object
 	 */
 	protected $repository;
@@ -104,7 +104,7 @@ abstract class Model {
 	 * Stores meta in cache for future reads.
 	 * A group must be set to to enable caching.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var string
 	 */
 	protected $cache_group = '';
@@ -112,7 +112,7 @@ abstract class Model {
 	/**
 	 * Stores additional meta data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $meta_data = array();
@@ -120,7 +120,7 @@ abstract class Model {
 	/**
 	 * Features supported by the model.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $supports = array();
@@ -162,7 +162,7 @@ abstract class Model {
 	/**
 	 * Get the repository.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return Masteriyo\Repository\RepositoryInterface
 	 */
@@ -173,7 +173,7 @@ abstract class Model {
 	/**
 	 * Get ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function get_id() {
 		return $this->id;
@@ -182,7 +182,7 @@ abstract class Model {
 	/**
 	 * Set ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param int $id ID.
 	 */
 	public function set_id( $id ) {
@@ -192,7 +192,7 @@ abstract class Model {
 	/**
 	 * Set all props to default values.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function set_defaults() {
 		$this->data    = $this->default_data;
@@ -203,7 +203,7 @@ abstract class Model {
 	/**
 	 * Set object read property.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param boolean $read Should read?.
 	 */
 	public function set_object_read( $read = true ) {
@@ -213,7 +213,7 @@ abstract class Model {
 	/**
 	 * Get object read property.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return boolean
 	 */
 	public function get_object_read() {
@@ -223,7 +223,7 @@ abstract class Model {
 	/**
 	 * Return data changes only.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return array
 	 */
 	public function get_changes() {
@@ -233,7 +233,7 @@ abstract class Model {
 	/**
 	 * Merge changes with data and clear.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function apply_changes() {
 		$this->data    = array_replace_recursive( $this->data, $this->changes );
@@ -244,7 +244,7 @@ abstract class Model {
 	/**
 	 * Prefix for action and filter hooks on data.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return string
 	 */
 	protected function get_hook_prefix() {
@@ -257,7 +257,7 @@ abstract class Model {
 	 * Gets the value from either current pending changes, or the data itself.
 	 * Context controls what happens to the value before it's returned.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $prop Name of prop to get.
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return mixed
@@ -280,7 +280,7 @@ abstract class Model {
 	 * Set a collection of props in one go, collect any errors, and return the result.
 	 * Only sets using public methods.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param array  $props Key value pairs to set. Key is the prop and should map to a setter function name.
 	 * @param string $context In what context to run this.
@@ -321,7 +321,7 @@ abstract class Model {
 	 * This stores changes in a special array so we can track what needs saving
 	 * the the DB later.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $prop Name of prop to set.
 	 * @param mixed  $value Value of the prop.
 	 */
@@ -341,7 +341,7 @@ abstract class Model {
 	/**
 	 * Delete an object, set the ID to 0, and returpn result.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  bool $force_delete Should the date be deleted permanently.
 	 * @return bool result
 	 */
@@ -357,7 +357,7 @@ abstract class Model {
 	/**
 	 * Create or update based on object existence.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return int
 	 */
@@ -369,7 +369,7 @@ abstract class Model {
 		/**
 		 * Trigger action before saving to the DB. Allows you to adjust object props before save.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param Model                 $this       The object being saved.
 		 * @param RepositoryInterface   $repository The data store persisting the data.
@@ -385,7 +385,7 @@ abstract class Model {
 		/**
 		 * Trigger action after saving to the DB.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param Model                 $this       The object being saved.
 		 * @param RepositoryInterface   $repository The repository persisting the data.
@@ -399,7 +399,7 @@ abstract class Model {
 	/**
 	 * Change data to JSON format.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return string Data in JSON format.
 	 */
 	public function __toString() {
@@ -409,7 +409,7 @@ abstract class Model {
 	/**
 	 * Returns all data for this object.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return array
 	 */
 	public function get_data() {
@@ -423,7 +423,7 @@ abstract class Model {
 	/**
 	 * Returns array of expected data keys for this object.
 	 *
-	 * @since   0.1.0
+	 * @since   1.0.0
 	 * @return array
 	 */
 	public function get_data_keys() {
@@ -433,7 +433,7 @@ abstract class Model {
 	/**
 	 * Returns all "extra" data keys for an object (for sub objects like product types).
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @return array
 	 */
 	public function get_extra_data_keys() {
@@ -443,7 +443,7 @@ abstract class Model {
 	/**
 	 * Get meta data by key.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $key Meta Key.
 	 * @param  bool   $single return first found meta with key, or all with $key.
 	 * @param  string $context What the value is for. Valid values are view and edit.
@@ -480,7 +480,7 @@ abstract class Model {
 	/**
 	 * Get All Meta Data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return array of objects.
 	 */
 	public function get_meta_data() {
@@ -505,7 +505,7 @@ abstract class Model {
 	/**
 	 * Read meta data if null.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -519,7 +519,7 @@ abstract class Model {
 	 * Read meta data from the database. Ignore internal properties.
 	 * Uses it's own caches because get_metadata doesn't provide meta_ids.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param boolean $force_read
 	 * @return void
@@ -546,7 +546,7 @@ abstract class Model {
 	/**
 	 * Add meta data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string       $key Meta key.
 	 * @param string|array $value Meta value.
@@ -576,7 +576,7 @@ abstract class Model {
 	/**
 	 * Update Meta Data in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function save_meta_data() {
 		if ( ! $this->repository || is_null( $this->meta_data ) ) {
@@ -606,7 +606,7 @@ abstract class Model {
 	/**
 	 * Delete meta data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $key Meta key.
 	 */
 	public function delete_meta_data( $key ) {
@@ -623,7 +623,7 @@ abstract class Model {
 	/**
 	 * Get object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -634,7 +634,7 @@ abstract class Model {
 	/**
 	 * Sets a date prop whilst handling formatting and datetime objects.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string         $prop Name of prop to set.
 	 * @param string|integer $value Value of the prop.
 	 */
@@ -679,7 +679,7 @@ abstract class Model {
 	 * When invalid data is found, throw an exception unless reading from the DB.
 	 *
 	 * @throws ModelException Data Exception.
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $code             Error code.
 	 * @param string $message          Error message.
 	 * @param int    $http_status_code HTTP status code.

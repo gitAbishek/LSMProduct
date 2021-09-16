@@ -4,7 +4,7 @@
  *
  * It should implemented by all the repositiries.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Database
  */
@@ -20,7 +20,7 @@ interface RepositoryInterface {
 	/**
 	 * Method to create a new record of a Model based object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model  $model a Model object.
 	 */
@@ -29,7 +29,7 @@ interface RepositoryInterface {
 	/**
 	 * Method to read a record. Creates a new Model based object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model  $model a Model object.
 	 */
@@ -38,7 +38,7 @@ interface RepositoryInterface {
 	/**
 	 * Updates a record in thModel e modelbase.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model  $model a Model object.
 	 */
@@ -56,7 +56,7 @@ interface RepositoryInterface {
 	/**
 	 * Returns an array of meta for an object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model  $model a Model object.
 	 * @return MetaData[]
@@ -66,7 +66,7 @@ interface RepositoryInterface {
 	/**
 	 * Deletes meta based on meta ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model  $model a Model object.
 	 * @param  MetaData  $meta Meta object (containing at least ->id).
@@ -77,7 +77,7 @@ interface RepositoryInterface {
 	/**
 	 * Add new piece of meta.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model  $model a Model object.
 	 * @param  MetaData  $meta Meta object (containing ->key and ->value).
@@ -88,7 +88,7 @@ interface RepositoryInterface {
 	/**
 	 * Update meta.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model  $model a Model object.
 	 * @param  MetaData  $meta Meta object (containing ->id, ->key and ->value).
@@ -98,7 +98,7 @@ interface RepositoryInterface {
 	// /**
 	//  * Fetch the records.
 	//  *
-	//  * @since 0.1.0
+	//  * @since 1.0.0
 	//  * @param array $args Arguments.
 	//  */
 	// public function query( $args );

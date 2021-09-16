@@ -16,7 +16,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Session instance.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Session\Session
 	 */
@@ -25,7 +25,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Setup.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function setUp() {
 		parent::setUp();
@@ -36,7 +36,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Teardown
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function tearDown() {
 		$this->addToAssertionCount(
@@ -48,7 +48,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test start hooks and session data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_start() {
 		// Test actions are added.
@@ -72,7 +72,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test get session cookie.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_get_session_cookie() {
 		// Should return false, when no cookie is set.
@@ -109,7 +109,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test init session cookie.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_init_session_cookie() {
 		// Return true, when there is cookie is set.
@@ -126,7 +126,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test is_started
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function test_is_started() {
 		// Return true, when there is cookie is set.
@@ -158,7 +158,7 @@ class SessionTest extends WP_UnitTestCase {
 	/**
 	 * Test has cookie.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function has_cookie() {
 		// Return false, when the cookie is not set.

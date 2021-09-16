@@ -12,14 +12,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Handles Refunds and other API requests such as capture.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class ApiHandler {
 
 	/**
 	 * API Username.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -28,7 +28,7 @@ class ApiHandler {
 	/**
 	 * API Password.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -37,7 +37,7 @@ class ApiHandler {
 	/**
 	 * API Signature.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -46,7 +46,7 @@ class ApiHandler {
 	/**
 	 * Sandbox
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool
 	 */
@@ -56,7 +56,7 @@ class ApiHandler {
 	 * Get capture request args.
 	 * See https://developer.paypal.com/docs/classic/api/merchant/DoCapture_API_Operation_NVP/.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @param  float    $amount Amount.
@@ -80,7 +80,7 @@ class ApiHandler {
 	/**
 	 * Get refund request args.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @param  float    $amount Refund amount.
@@ -143,7 +143,7 @@ class ApiHandler {
 	/**
 	 * Refund an order via PayPal.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @param  float    $amount Refund amount.

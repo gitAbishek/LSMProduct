@@ -2,7 +2,7 @@
 /**
  * Activation class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -12,7 +12,7 @@ class Activation {
 	/**
 	 * Initialization.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -23,7 +23,7 @@ class Activation {
 	/**
 	 * Callback for plugin activation hook.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function on_activate() {
 		self::create_pages();
@@ -34,7 +34,7 @@ class Activation {
 	/**
 	 * Create pages that the plugin relies on, storing page IDs in variables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function create_pages() {
 		$pages = apply_filters(
@@ -84,7 +84,7 @@ class Activation {
 	/**
 	 * Assign core capabilities to admin role.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -103,7 +103,7 @@ class Activation {
 	/**
 	 * Insert masteriyo placeholder image to WP Media library.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */

@@ -2,7 +2,7 @@
 /**
  * The template for editing user profile.
  *
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;

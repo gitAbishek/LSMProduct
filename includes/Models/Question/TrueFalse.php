@@ -2,7 +2,7 @@
 /**
  * True/False question model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models
  */
@@ -16,13 +16,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * True/False question model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class TrueFalse extends Question implements QuestionInterface {
 	/**
 	 * Question type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string $type Question type.
 	 */

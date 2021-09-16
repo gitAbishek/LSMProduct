@@ -35,7 +35,7 @@ class CheckoutController extends CrudController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -44,7 +44,7 @@ class CheckoutController extends CrudController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission
 	 */
@@ -55,7 +55,7 @@ class CheckoutController extends CrudController {
 	/**
 	 * Register routes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -127,7 +127,7 @@ class CheckoutController extends CrudController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -194,7 +194,7 @@ class CheckoutController extends CrudController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since   0.1.0
+	 * @since   1.0.0
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -256,7 +256,7 @@ class CheckoutController extends CrudController {
 	/**
 	 * Get taxonomy terms.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Lesson $lesson Lesson object.
 	 * @param string $taxonomy Taxonomy slug.
@@ -285,7 +285,7 @@ class CheckoutController extends CrudController {
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
-	 * @since   0.1.0
+	 * @since   1.0.0
 	 * @return array
 	 */
 	protected function prepare_objects_query( $request ) {
@@ -339,7 +339,7 @@ class CheckoutController extends CrudController {
 	/**
 	 * Get the lessons'schema, conforming to JSON Schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -556,7 +556,7 @@ class CheckoutController extends CrudController {
 	/**
 	 * Prepare a single lesson for create or update.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
@@ -668,7 +668,7 @@ class CheckoutController extends CrudController {
 	/**
 	 * Save taxonomy terms.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Lesson $lesson  Lesson instance.
 	 * @param array  $terms    Terms data.

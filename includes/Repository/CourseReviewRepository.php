@@ -2,7 +2,7 @@
 /**
  * CourseReview Repository class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Repository;
  */
@@ -20,7 +20,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Meta type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -29,7 +29,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
@@ -39,7 +39,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Create course review (comment) in database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_review Course review object.
 	 */
@@ -117,7 +117,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Read a course review.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_review course review object.
 	 *
@@ -166,7 +166,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Update a course review in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_review course review object.
 	 *
@@ -214,7 +214,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Delete a course review from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_review course review object.
 	 * @param array $args Array of args to pass.alert-danger.
@@ -238,7 +238,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Read course review data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param User $course_review Course review object.
 	 */
@@ -266,7 +266,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Read extra data associated with the course review.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseReview $course_review course review object.
 	 */
@@ -285,7 +285,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Fetch courses reviews.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return CourseReview[]

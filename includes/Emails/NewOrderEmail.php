@@ -4,7 +4,7 @@
  *
  * @package Masteriyo\Emails
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo\Emails;
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 /**
  * NewOrderEmail Class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Emails
  */
@@ -24,7 +24,7 @@ class NewOrderEmail extends Email {
 	/**
 	 * Email method ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var String
 	 */
@@ -34,7 +34,7 @@ class NewOrderEmail extends Email {
 	 * Setting name to check if this email is enabled.
 	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -44,7 +44,7 @@ class NewOrderEmail extends Email {
 	 * Setting name to get email subject from.
 	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -54,7 +54,7 @@ class NewOrderEmail extends Email {
 	 * Setting name to get email heading from.
 	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -64,7 +64,7 @@ class NewOrderEmail extends Email {
 	 * Setting name to get email content from.
 	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -73,7 +73,7 @@ class NewOrderEmail extends Email {
 	/**
 	 * HTML template path.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -82,7 +82,7 @@ class NewOrderEmail extends Email {
 	/**
 	 * Send this email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 */
@@ -142,7 +142,7 @@ class NewOrderEmail extends Email {
 	/**
 	 * Get email content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -166,7 +166,7 @@ class NewOrderEmail extends Email {
 	/**
 	 * Get default email subject.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -177,7 +177,7 @@ class NewOrderEmail extends Email {
 	/**
 	 * Get default email heading.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -188,7 +188,7 @@ class NewOrderEmail extends Email {
 	/**
 	 * Default content to show above the email footer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */

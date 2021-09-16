@@ -4,8 +4,8 @@
  * Class order item repository.
  *
  * @package Masteriyo\Abstracts
- * @since 0.1.0
- * @version 0.1.0
+ * @since 1.0.0
+ * @version 1.0.0
  */
 
 namespace Masteriyo\Repository;
@@ -41,7 +41,7 @@ class OrderItemRepository extends AbstractRepository {
 	/**
 	 * Create a new order item in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param OrderItem $item Order item object.
 	 */
 	public function create( &$item ) {
@@ -75,7 +75,7 @@ class OrderItemRepository extends AbstractRepository {
 	/**
 	 * Update a order item in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param OrderItem $item Order item object.
 	 */
 	public function update( Model &$item ) {
@@ -106,7 +106,7 @@ class OrderItemRepository extends AbstractRepository {
 	/**
 	 * Remove an order item from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param OrderItem $item Order item object.
 	 * @param array         $args Array of args to pass to the delete method.
 	 */
@@ -124,7 +124,7 @@ class OrderItemRepository extends AbstractRepository {
 	/**
 	 * Read a order item from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param OrderItem $item Order item object.
 	 *
@@ -176,7 +176,7 @@ class OrderItemRepository extends AbstractRepository {
 	/**
 	 * Fetch courses.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return OrderItem[]
@@ -217,7 +217,7 @@ class OrderItemRepository extends AbstractRepository {
 	/**
 	 * Get order item object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param stdclass $item Order item
 	 * @return OrderItem
@@ -245,7 +245,7 @@ class OrderItemRepository extends AbstractRepository {
 	/**
 	 * Get order item meta.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param OrderItem $item Order item object.
 	 * @param stdclass $item_metas List of all order item meta.
@@ -269,7 +269,7 @@ class OrderItemRepository extends AbstractRepository {
 	/**
 	 * Delete all line items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function delete_batch( $args ) {
 		global $wpdb;
@@ -346,7 +346,7 @@ class OrderItemRepository extends AbstractRepository {
 	/**
 	 * Get table name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */

@@ -2,7 +2,7 @@
 /**
  * FileRestrictions class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo\Abstracts;
@@ -16,7 +16,7 @@ abstract class FileRestriction {
 	/**
 	 * Initialize by instantiating this class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function init() {
 		self::instance();
@@ -25,7 +25,7 @@ abstract class FileRestriction {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function __construct() {
 		add_action( 'init', array( $this, 'run' ) );
@@ -34,14 +34,14 @@ abstract class FileRestriction {
 	/**
 	 * Run this restriction script.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	abstract public function run();
 
 	/**
 	 * Redirect to a URL.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $url
 	 */
@@ -53,7 +53,7 @@ abstract class FileRestriction {
 	/**
 	 * Send a file as response.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $file_path
 	 */
@@ -77,7 +77,7 @@ abstract class FileRestriction {
 	 * Parse the HTTP_RANGE request.
 	 * Does not support multi-range requests.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $file_size Size of file in bytes.
 	 *
@@ -158,7 +158,7 @@ abstract class FileRestriction {
 	/**
 	 * Get content type of the file.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $file_path File path.
 	 *
@@ -183,7 +183,7 @@ abstract class FileRestriction {
 	/**
 	 * Send headers for the file.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $file_path   File path.
 	 * @param array  $bytes_range Array containing info about bytes range request (see {@see get_requested_bytes_range} for structure).
@@ -226,7 +226,7 @@ abstract class FileRestriction {
 	/**
 	 * Check and set certain server config variables to ensure file transfer work as intended.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function check_server_config() {
 		masteriyo_set_time_limit( 0 );
@@ -242,7 +242,7 @@ abstract class FileRestriction {
 	 *
 	 * Can prevent errors, for example: transfer closed with 3 bytes remaining to read.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function clean_buffers() {
 		if ( ob_get_level() ) {
@@ -262,7 +262,7 @@ abstract class FileRestriction {
 	 * - https://forum.codeigniter.com/thread-38732.html
 	 * - http://codeigniter.com/wiki/Download_helper_for_large_files/
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $file_path  File.
 	 * @param integer $start     Byte offset/position of the beginning from which to read from the file.
@@ -322,7 +322,7 @@ abstract class FileRestriction {
 	/**
 	 * Die with an error message.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string  $message Error message.
 	 * @param string  $title   Error title.

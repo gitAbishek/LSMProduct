@@ -2,7 +2,7 @@
 /**
  * Contains the query functions for Masteriyo which alter the front-end post queries and loops
  *
- * @version 0.1.0
+ * @version 1.0.0
  * @package Masteriyo\Classes
  */
 
@@ -20,7 +20,7 @@ class FrontendQuery {
 	/**
 	 * Query vars to add to wp.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -29,7 +29,7 @@ class FrontendQuery {
 	/**
 	 * Reference to the main course query on the page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var WP_Query
 	 */
@@ -38,7 +38,7 @@ class FrontendQuery {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->init();
@@ -47,7 +47,7 @@ class FrontendQuery {
 	/**
 	 * Initialize.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -59,7 +59,7 @@ class FrontendQuery {
 	/**
 	 * Get query vars.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -70,7 +70,7 @@ class FrontendQuery {
 	/**
 	 * Initialize hooks.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -91,7 +91,7 @@ class FrontendQuery {
 	/**
 	 * Get any errors from querystring.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function get_errors() {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -105,14 +105,14 @@ class FrontendQuery {
 	/**
 	 * Endpoint mask describing the places the endpoint should be added.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return int
 	 */
 	public function get_endpoints_mask() {
 		if ( 'page' === get_option( 'show_on_front' ) ) {
-			$page_on_front     = get_option( 'page_on_front' );
-			$account_page_id = masteriyo_get_setting( 'advance.pages.account_page_id' );
-			$checkout_page_id  = masteriyo_get_setting( 'advance.pages.checkout_page_id' );
+			$page_on_front    = get_option( 'page_on_front' );
+			$account_page_id  = masteriyo_get_setting( 'advance.pages.account_page_id' );
+			$checkout_page_id = masteriyo_get_setting( 'advance.pages.checkout_page_id' );
 
 			if ( in_array( $page_on_front, array( $account_page_id, $checkout_page_id, 7 ), true ) ) {
 				return EP_ROOT | EP_PAGES;
@@ -125,7 +125,7 @@ class FrontendQuery {
 	/**
 	 * Add query vars.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $vars Query vars.
 	 * @return array
@@ -141,7 +141,7 @@ class FrontendQuery {
 	/**
 	 * Parse the request and look for query vars - endpoints may not be supported.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function parse_request() {
 		global $wp;
@@ -163,7 +163,7 @@ class FrontendQuery {
 	/**
 	 * Add endpoints for query vars.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function add_endpoints() {
 		$mask = $this->get_endpoints_mask();
@@ -178,7 +178,7 @@ class FrontendQuery {
 	/**
 	 * Init query vars by loading options.
 	 *r
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function init_query_vars() {
 		// Query vars to add to WP.
@@ -199,7 +199,7 @@ class FrontendQuery {
 	/**
 	 * Get page title for an endpoint.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $endpoint Endpoint key.
 	 * @param string $action Optional action or variation within the endpoint.
@@ -259,7 +259,7 @@ class FrontendQuery {
 		/**
 		 * Filters the page title used for my-account endpoints.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param string $title Default title.
 		 * @param string $endpoint Endpoint key.
@@ -271,7 +271,7 @@ class FrontendQuery {
 	/**
 	 * Hook into pre_get_posts to do the main course query.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_Query $q Query instance.
 	 */
@@ -375,7 +375,7 @@ class FrontendQuery {
 	 * Query the courses, applying sorting/ordering etc.
 	 * This applies to the main WordPress loop.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_Query $q Query instance.
 	 */
@@ -418,7 +418,7 @@ class FrontendQuery {
 	/**
 	 * Handler for the 'the_posts' WP filter.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array    $posts Posts from WP Query.
 	 * @param WP_Query $query Current query.
@@ -449,7 +449,7 @@ class FrontendQuery {
 	/**
 	 * Are we currently on the front page?
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param WP_Query $q Query instance.
 	 * @return bool
 	 */
@@ -460,7 +460,7 @@ class FrontendQuery {
 	/**
 	 * Returns an array of arguments for ordering courses based on the selected values.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $orderby Order by param.
 	 * @param string $order Order param.
@@ -535,7 +535,7 @@ class FrontendQuery {
 	/**
 	 * Appends meta queries to an array.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $meta_query Meta query.
 	 * @param  bool  $main_query If is main query.
@@ -551,7 +551,7 @@ class FrontendQuery {
 	/**
 	 * Appends tax queries to an array.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $tax_query  Tax query.
 	 * @param  bool  $main_query If is main query.
@@ -619,7 +619,7 @@ class FrontendQuery {
 	/**
 	 * Remove the add-to-cart param from pagination urls.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $url URL.
 	 * @return string

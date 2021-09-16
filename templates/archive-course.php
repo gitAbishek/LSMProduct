@@ -12,7 +12,7 @@
  * the readme will list any important changes.
  *
  * @package Masteriyo\Templates
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -22,7 +22,7 @@ get_header( 'courses' );
 /**
  * Wrapper div opening.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 echo '<div class="masteriyo-w-100 masteriyo-container">';
 
@@ -34,7 +34,7 @@ echo '<div class="masteriyo-w-100 masteriyo-container">';
  * @hooked masteriyo_breadcrumb - 20
  * @hooked MASTERIYO_Structured_Data::generate_website_data() - 30
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 do_action( 'masteriyo_before_main_content' );
 
@@ -55,7 +55,7 @@ do_action( 'masteriyo_before_main_content' );
 /**
  * Hook: masteriyo_after_archive_header.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_archive_header' );
 ?>
@@ -114,7 +114,7 @@ do_action( 'masteriyo_sidebar' );
 /**
  * Wrapper div closing.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 echo '</div>';
 

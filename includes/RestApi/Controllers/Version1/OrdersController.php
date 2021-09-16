@@ -2,7 +2,7 @@
 /**
  * Abstract class controller.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\RestApi\Controllers\Version1;
  */
@@ -59,7 +59,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -68,7 +68,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission Permision object.
 	 */
@@ -79,7 +79,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Register routes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -144,7 +144,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -345,7 +345,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Get the orders' schema, conforming to JSON Schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -778,7 +778,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Checks if a given request has access to get a specific item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
@@ -826,7 +826,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Check if a given request has access to read items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -859,7 +859,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Check permissions for an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $object_type Object type.
 	 * @param string $context   Request context.
@@ -887,7 +887,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Check if a given request has access to create an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -920,7 +920,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Check if a given request has access to delete an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -953,7 +953,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Check if a given request has access to update an item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -999,7 +999,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Get course order items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param OrderItem[] $items
 	 * @return void
@@ -1033,7 +1033,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Save an object data.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @throws RestException But all errors are validated before returning any data.
 	 * @param  WP_REST_Request $request  Full details about the request.
 	 * @param  bool            $creating If is creating a new object.
@@ -1097,7 +1097,7 @@ class OrdersController extends PostsController {
 	 * When updating, the item ID provided is checked to ensure it is associated
 	 * with the order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order order object.
 	 * @param string   $item_type The item type.
@@ -1137,7 +1137,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Gets the course ID from the SKU or posted ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @throws RestException When SKU or ID is not valid.
 	 * @param array  $posted Request data.
@@ -1158,7 +1158,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Create or update a course item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array  $posted Line item data.
 	 * @param string $action 'create' to add line item or 'update' to update it.
@@ -1198,7 +1198,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Maybe set an item prop if the value was posted.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param OrderItem $item   Order item.
 	 * @param string        $prop   Order property.
@@ -1213,7 +1213,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Maybe set item props if the values were posted.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param OrderItem $item   Order item data.
 	 * @param string[]      $props  Properties.
@@ -1228,7 +1228,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Maybe set item meta if posted.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param OrderItem $item   Order item data.
 	 * @param array         $posted Request data.

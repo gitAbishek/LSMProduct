@@ -49,7 +49,7 @@ class CoursesController extends PostsController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -58,7 +58,7 @@ class CoursesController extends PostsController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission
 	 */
@@ -69,7 +69,7 @@ class CoursesController extends PostsController {
 	/**
 	 * Register routes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -141,7 +141,7 @@ class CoursesController extends PostsController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -210,7 +210,7 @@ class CoursesController extends PostsController {
 	/**
 	 * Get object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Model|WP_Post $object Model or WP_Post object.
 	 * @return object Model object or WP_Error object.
@@ -344,7 +344,7 @@ class CoursesController extends PostsController {
 	/**
 	 * Get taxonomy terms.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Course $course Course object.
 	 * @param string $taxonomy Taxonomy slug.
@@ -449,7 +449,7 @@ class CoursesController extends PostsController {
 	/**
 	 * Get the courses'schema, conforming to JSON Schema.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -900,7 +900,7 @@ class CoursesController extends PostsController {
 	/**
 	 * Save taxonomy terms.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Course $course  Course instance.
 	 * @param array  $terms    Terms data.
@@ -952,7 +952,7 @@ class CoursesController extends PostsController {
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model           $object  Object data.
 	 * @param WP_REST_Request $request Request object.

@@ -21,7 +21,7 @@ class IpnHandler extends Response {
 	/**
 	 * Receiver email address to validate.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string Receiver email address.
 	 */
@@ -30,7 +30,7 @@ class IpnHandler extends Response {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool   $sandbox Use sandbox or not.
 	 * @param string $receiver_email Email to receive IPN from.
@@ -46,7 +46,7 @@ class IpnHandler extends Response {
 	/**
 	 * Check for PayPal IPN Response.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function check_response() {
 		if ( ! empty( $_POST ) && $this->validate_ipn() ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
@@ -62,7 +62,7 @@ class IpnHandler extends Response {
 	/**
 	 * There was a valid response.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $posted Post data after wp_unslash.
 	 */
@@ -86,7 +86,7 @@ class IpnHandler extends Response {
 	/**
 	 * Check PayPal IPN validity.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function validate_ipn() {
 		Paypal::log( 'Checking IPN response is valid' );
@@ -128,7 +128,7 @@ class IpnHandler extends Response {
 	/**
 	 * Check for a valid transaction type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $txn_type Transaction type.
 	 */
@@ -144,7 +144,7 @@ class IpnHandler extends Response {
 	/**
 	 * Check currency from IPN matches the order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order    Order object.
 	 * @param string   $currency Currency code.
@@ -162,7 +162,7 @@ class IpnHandler extends Response {
 	/**
 	 * Check payment amount from IPN matches the order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param int      $amount Amount to validate.
@@ -181,7 +181,7 @@ class IpnHandler extends Response {
 	 * Check receiver email from PayPal. If the receiver email in the IPN is different than what is stored in.
 	 * Masteriyo -> Settings -> Checkout -> PayPal, it will log an error about it.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order          Order object.
 	 * @param string   $receiver_email Email to validate.
@@ -199,7 +199,7 @@ class IpnHandler extends Response {
 	/**
 	 * Handle a completed payment.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param array    $posted Posted data.
@@ -239,7 +239,7 @@ class IpnHandler extends Response {
 	/**
 	 * Handle a pending payment.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param array    $posted Posted data.
@@ -251,7 +251,7 @@ class IpnHandler extends Response {
 	/**
 	 * Handle a failed payment.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param array    $posted Posted data.
@@ -264,7 +264,7 @@ class IpnHandler extends Response {
 	/**
 	 * Handle a denied payment.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param array    $posted Posted data.
@@ -276,7 +276,7 @@ class IpnHandler extends Response {
 	/**
 	 * Handle an expired payment.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param array    $posted Posted data.
@@ -288,7 +288,7 @@ class IpnHandler extends Response {
 	/**
 	 * Handle a voided payment.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param array    $posted Posted data.
@@ -300,7 +300,7 @@ class IpnHandler extends Response {
 	/**
 	 * When a user cancelled order is marked paid.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param array    $posted Posted data.
@@ -317,7 +317,7 @@ class IpnHandler extends Response {
 	/**
 	 * Handle a refunded order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param array    $posted Posted data.
@@ -341,7 +341,7 @@ class IpnHandler extends Response {
 	/**
 	 * Handle a reversal.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param array    $posted Posted data.
@@ -361,7 +361,7 @@ class IpnHandler extends Response {
 	/**
 	 * Handle a cancelled reversal.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param array    $posted Posted data.
@@ -382,7 +382,7 @@ class IpnHandler extends Response {
 	/**
 	 * Save important data from the IPN to the order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order  Order object.
 	 * @param array    $posted Posted data.
@@ -402,7 +402,7 @@ class IpnHandler extends Response {
 	/**
 	 * Send a notification to the user handling orders.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $subject Email subject.
 	 * @param string $message Email message.
@@ -428,7 +428,7 @@ class IpnHandler extends Response {
 	/**
 	 * Get email nrew order settings.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -445,7 +445,7 @@ class IpnHandler extends Response {
 	/**
 	 * Get paypal settings.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

@@ -2,7 +2,7 @@
 /**
  * Course model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -18,14 +18,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Course model (post type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class UserCourse extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -34,7 +34,7 @@ class UserCourse extends Model {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -43,7 +43,7 @@ class UserCourse extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -52,7 +52,7 @@ class UserCourse extends Model {
 	/**
 	 * Stores data about status changes so relevant hooks can be fired.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool|array
 	 */
@@ -61,7 +61,7 @@ class UserCourse extends Model {
 	/**
 	 * Stores user courses data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -79,7 +79,7 @@ class UserCourse extends Model {
 	/**
 	 * Get the use course if ID
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param RepositoryInterface $course_repository Course Repository,
 	 */
@@ -96,7 +96,7 @@ class UserCourse extends Model {
 	/**
 	 * Get table name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -109,7 +109,7 @@ class UserCourse extends Model {
 	/**
 	 * Get course object.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return Masteriyo\Models\Course|NULL
 	 */
@@ -120,7 +120,7 @@ class UserCourse extends Model {
 	/**
 	 * Get order associated with the course.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return Masteriyo\Models\Order|NULL
 	 */
@@ -137,7 +137,7 @@ class UserCourse extends Model {
 	/**
 	 * Get user's course ID.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -150,7 +150,7 @@ class UserCourse extends Model {
 	/**
 	 * Get user ID.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -163,7 +163,7 @@ class UserCourse extends Model {
 	/**
 	 * Get user's course status.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -176,7 +176,7 @@ class UserCourse extends Model {
 	/**
 	 * Get user's course status.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -189,7 +189,7 @@ class UserCourse extends Model {
 	/**
 	 * Get user's course date start.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -202,7 +202,7 @@ class UserCourse extends Model {
 	/**
 	 * Get user's course date modified.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -215,7 +215,7 @@ class UserCourse extends Model {
 	/**
 	 * Get user's course date end.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -228,7 +228,7 @@ class UserCourse extends Model {
 	/**
 	 * Get user's course associated recent order ID.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -241,7 +241,7 @@ class UserCourse extends Model {
 	/**
 	 * Get user's course recent price.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -261,7 +261,7 @@ class UserCourse extends Model {
 	/**
 	 * Set user's course ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $value User course ID.
 	 */
@@ -272,7 +272,7 @@ class UserCourse extends Model {
 	/**
 	 * Set user's ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $value User ID.
 	 */
@@ -283,7 +283,7 @@ class UserCourse extends Model {
 	/**
 	 * Set user's course status (does nothing).
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param string $value User item type.
 	 */
@@ -294,7 +294,7 @@ class UserCourse extends Model {
 	/**
 	 * Set user's course status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $new_status    Status to change the user_course to.
 	 * @param string $note          Optional note to add.
@@ -342,7 +342,7 @@ class UserCourse extends Model {
 	/**
 	 * Set user's course start date
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $value User's course start date.
 	 */
@@ -353,7 +353,7 @@ class UserCourse extends Model {
 	/**
 	 * Set user's course modified date
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $value User's course modified date.
 	 */
@@ -364,7 +364,7 @@ class UserCourse extends Model {
 	/**
 	 * Set user's course end date
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $value User's course end date.
 	 */
@@ -375,7 +375,7 @@ class UserCourse extends Model {
 	/**
 	 * Set user's course associated recent order ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $value User's course end date.
 	 */
@@ -386,7 +386,7 @@ class UserCourse extends Model {
 	/**
 	 * Set user's course price.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $value User's course end date.
 	 */
@@ -403,7 +403,7 @@ class UserCourse extends Model {
 	/**
 	 * Save data to the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return int user_course ID
 	 */
 	public function save() {
@@ -423,7 +423,7 @@ class UserCourse extends Model {
 	/**
 	 * Handle the status transition.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function status_transition() {
 		$status_transition = $this->status_transition;
@@ -451,7 +451,7 @@ class UserCourse extends Model {
 	/**
 	 * Get all valid statuses for this user course
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return array Internal status keys e.g. ('active', 'enrolled )
 	 */
 	protected function get_valid_statuses() {

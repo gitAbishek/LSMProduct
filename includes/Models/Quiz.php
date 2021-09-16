@@ -2,7 +2,7 @@
 /**
  * Quiz model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Quiz model (post type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class Quiz extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -35,7 +35,7 @@ class Quiz extends Model {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -44,7 +44,7 @@ class Quiz extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -53,7 +53,7 @@ class Quiz extends Model {
 	/**
 	 * Stores quiz data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -78,7 +78,7 @@ class Quiz extends Model {
 	/**
 	 * Get the quiz if ID
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param QuizRepository $quiz_repository Quiz Repository,
 	 */
@@ -122,7 +122,7 @@ class Quiz extends Model {
 	/**
 	 * Get questions.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return Masteriyo\Models\Question
 	 */
@@ -138,7 +138,7 @@ class Quiz extends Model {
 	/**
 	 * Get number of questions.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return int|WP_Error
 	 */
@@ -149,7 +149,7 @@ class Quiz extends Model {
 	/**
 	 * Get the post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -166,7 +166,7 @@ class Quiz extends Model {
 	/**
 	 * Get quiz name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -179,7 +179,7 @@ class Quiz extends Model {
 	/**
 	 * Get quiz slug.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -192,7 +192,7 @@ class Quiz extends Model {
 	/**
 	 * Get quiz created date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -205,7 +205,7 @@ class Quiz extends Model {
 	/**
 	 * Get quiz modified date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -218,7 +218,7 @@ class Quiz extends Model {
 	/**
 	 * Get quiz status.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -231,7 +231,7 @@ class Quiz extends Model {
 	/**
 	 * Get quiz description.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -244,7 +244,7 @@ class Quiz extends Model {
 	/**
 	 * Get quiz short description.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -257,7 +257,7 @@ class Quiz extends Model {
 	/**
 	 * Returns quiz parent id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -270,7 +270,7 @@ class Quiz extends Model {
 	/**
 	 * Returns the quiz's course id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -283,7 +283,7 @@ class Quiz extends Model {
 	/**
 	 * Returns quiz menu order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -296,7 +296,7 @@ class Quiz extends Model {
 	/**
 	 * Returns quiz pass mark.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -309,7 +309,7 @@ class Quiz extends Model {
 	/**
 	 * Returns quiz full mark.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -322,7 +322,7 @@ class Quiz extends Model {
 	/**
 	 * Returns quiz duration.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -335,7 +335,7 @@ class Quiz extends Model {
 	/**
 	 * Returns quiz attempts allowed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -348,7 +348,7 @@ class Quiz extends Model {
 	/**
 	 * Returns quiz questions display per page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -367,7 +367,7 @@ class Quiz extends Model {
 	/**
 	 * Set quiz name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name quiz name.
 	 */
@@ -378,7 +378,7 @@ class Quiz extends Model {
 	/**
 	 * Set quiz slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $slug quiz slug.
 	 */
@@ -389,7 +389,7 @@ class Quiz extends Model {
 	/**
 	 * Set quiz created date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -400,7 +400,7 @@ class Quiz extends Model {
 	/**
 	 * Set quiz modified date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -411,7 +411,7 @@ class Quiz extends Model {
 	/**
 	 * Set quiz status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $status quiz status.
 	 */
@@ -422,7 +422,7 @@ class Quiz extends Model {
 	/**
 	 * Set quiz description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $description Quiz description.
 	 */
@@ -433,7 +433,7 @@ class Quiz extends Model {
 	/**
 	 * Set quiz short description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $short_description Quiz short description.
 	 */
@@ -444,7 +444,7 @@ class Quiz extends Model {
 	/**
 	 * Set the quiz parent id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $parent Parent id.
 	 */
@@ -455,7 +455,7 @@ class Quiz extends Model {
 	/**
 	 * Set the quiz's course id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $course_id Course id.
 	 */
@@ -466,7 +466,7 @@ class Quiz extends Model {
 	/**
 	 * Set the quiz menu order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $menu_order menu order.
 	 */
@@ -477,7 +477,7 @@ class Quiz extends Model {
 	/**
 	 * Set the quiz pass mark.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $pass_mark pass mark.
 	 */
@@ -488,7 +488,7 @@ class Quiz extends Model {
 	/**
 	 * Set the quiz full mark.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $full_mark full mark.
 	 */
@@ -499,7 +499,7 @@ class Quiz extends Model {
 	/**
 	 * Set the quiz duration.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $duration duration (seconds).
 	 */
@@ -510,7 +510,7 @@ class Quiz extends Model {
 	/**
 	 * Set the quiz attempts allowed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $attempts_allowed attempts allowed.
 	 */
@@ -521,7 +521,7 @@ class Quiz extends Model {
 	/**
 	 * Set the quiz question display per page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $questions_display_per_page Question display per page.
 	 */

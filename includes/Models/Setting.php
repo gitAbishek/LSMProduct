@@ -4,7 +4,7 @@
  *
  * Admin Settings API used by Integrations, Shipping Methods, and Payment Gateways.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package  Masteriyo\Models
  */
@@ -24,7 +24,7 @@ class Setting extends Model {
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var string
 	 */
 	protected $object_type = 'setting';
@@ -32,7 +32,7 @@ class Setting extends Model {
 	/**
 	 * Callbacks for sanitize.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var string
 	 */
 	protected $sanitize_callbacks = array();
@@ -40,7 +40,7 @@ class Setting extends Model {
 	/**
 	 * The posted settings data. When empty, $_POST data will be used.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -229,7 +229,7 @@ class Setting extends Model {
 	/**
 	 * Get the setting if ID
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param SettingRepository $setting_repository Setting Repository,
 	 */
@@ -241,7 +241,7 @@ class Setting extends Model {
 	/**
 	 * Get data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -252,7 +252,7 @@ class Setting extends Model {
 	/**
 	 * Set data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $data
 	 */
@@ -279,7 +279,7 @@ class Setting extends Model {
 	/**
 	 * Initialize sanitize callbacks.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function init_sanitize_callbacks() {
 		$this->add_sanitize_callback( 'payments.currency.number_of_decimals', 'absint' );
@@ -344,7 +344,7 @@ class Setting extends Model {
 	/**
 	 * Sanitize the settings
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $prop    Name of prop to set.
 	 * @param array|string $callback Sanitize callback.
@@ -356,7 +356,7 @@ class Setting extends Model {
 	/**
 	 * Sanitize the settings
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $prop    Name of prop to set.
 	 * @param mixed  $value   Value of the prop.
@@ -374,7 +374,7 @@ class Setting extends Model {
 	/**
 	 * Sets a prop for a setter method.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $prop    Name of prop to set.
 	 * @param mixed  $value   Value of the prop.
 	 */
@@ -409,7 +409,7 @@ class Setting extends Model {
 	/**
 	 * Gets a prop for a getter method.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $prop Name of prop to get.
 	 * @param  string $context What the value is for. Valid values are 'view' and 'edit'. What the value is for. Valid values are view and edit.
 	 * @return mixed

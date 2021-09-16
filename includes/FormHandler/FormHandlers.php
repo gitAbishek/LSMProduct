@@ -17,7 +17,7 @@ class FormHandlers {
 	/**
 	 * List of form handlers.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var FormHandler[]
 	 */
@@ -26,7 +26,7 @@ class FormHandlers {
 	/**
 	 * Initialize the form handlers.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */

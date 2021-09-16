@@ -5,13 +5,13 @@
  * Functions for quiz specific things.
  *
  * @package Masteriyo\Functions
- * @version 0.1.0
+ * @version 1.0.0
  */
 
 /**
  * Get quiz question.
  *
- * @since  0.1.0
+ * @since  1.0.0
  *
  * @param integer $quiz_id Quiz ID.
  * @param string  $by String e.g 'post_parent.
@@ -44,7 +44,7 @@ function masteriyo_get_quiz_questions( $quiz_id, $by ) {
 /**
  * Determine if there is any started quiz exists.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int $quiz_id
  *
@@ -75,7 +75,7 @@ function masteriyo_is_quiz_started( $quiz_id = 0 ) {
 /**
  * Get quiz attempt data according to attempt id and after attempt ended.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int $quiz Quiz ID.
  * @param int $id User Attempt ID.
@@ -108,7 +108,7 @@ function masteriyo_get_quiz_attempt_ended_data( $quiz_id = 0, $id ) {
  *
  * Get all of the attempts by an user of a quiz.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int $quiz_id
  * @param int $user_id
@@ -143,7 +143,7 @@ function masteriyo_get_all_quiz_attempts( $quiz_id = 0, $user_id = 0 ) {
 /**
  * Fetch quiz attempts.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param array $query_vars Query vars.
  * @return QuizAttempt[]
@@ -204,7 +204,7 @@ function masteriyo_get_quiz_attempts( $query_vars ) {
 /**
  * Get the quiz attempt by attempt ID.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param [type] $attempt_id
  * @return QuizAttempt
@@ -225,7 +225,7 @@ function masteriyo_get_quiz_attempt( $attempt_id ) {
 /**
  * Get quiz attempt count based on quiz id.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int $quiz_id
  * @param int $user_id
@@ -252,7 +252,7 @@ function masteriyo_get_quiz_attempt_count( $quiz_id, $user_id ) {
 /**
  * Get quiz.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Quiz|WP_Post $quiz Quiz id or Quiz Model or Post.
  * @return Quiz|null

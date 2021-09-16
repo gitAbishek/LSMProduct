@@ -5,7 +5,7 @@
  * Extends Exception to provide additional data.
  *
  * @package Masteriyo\RestApi
- * @since  0.1.0
+ * @since  1.0.0
  */
 
 namespace Masteriyo\Exceptions;

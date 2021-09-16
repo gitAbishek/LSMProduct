@@ -4,7 +4,7 @@
  *
  * @package Masteriyo
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo;
@@ -18,7 +18,7 @@ class Constants {
 	/**
 	 * A container for all defined constants.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @access public
 	 * @static
@@ -31,7 +31,7 @@ class Constants {
 	 * Checks if a "constant" has been set in constants Manager
 	 * and has the value of true
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name The name of the constant.
 	 *
@@ -45,7 +45,7 @@ class Constants {
 	 * Checks if a "constant" has been set in constants Manager, and if not,
 	 * checks if the constant was defined with define( 'name', 'value ).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name The name of the constant.
 	 *
@@ -62,7 +62,7 @@ class Constants {
 	 * then attempts to get the constant with the constant() function. If that also hasn't
 	 * been set, attempts to get a value from filters.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name The name of the constant.
 	 *
@@ -91,7 +91,7 @@ class Constants {
 	/**
 	 * Sets the value of the "constant" within constants Manager.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name The name of the constant.
 	 * @param string $value The value of the constant.
@@ -103,7 +103,7 @@ class Constants {
 	/**
 	 * Will unset a "constant" from constants Manager if the constant exists.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name The name of the constant.
 	 *
@@ -122,7 +122,7 @@ class Constants {
 	/**
 	 * Resets all of the constants within constants Manager.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public static function clear_all() {
 		self::$set_constants = array();

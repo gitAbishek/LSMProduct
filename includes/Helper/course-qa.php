@@ -2,14 +2,14 @@
 /**
  * Course question answer functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @package Masteriyo\Helper
  */
 
 /**
  * Get the course QA question count.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|WP_Post|Masteriyo\Models\Course $course Course object.
  *
@@ -74,7 +74,7 @@ function masteriyo_get_course_question_count( $course = 0 ) {
 /**
  * Get the course QA answer count.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|WP_Post|Masteriyo\Models\Course $course Course object.
  *

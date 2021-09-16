@@ -17,7 +17,7 @@ class Request {
 	/**
 	 * Stores line items to send to PayPal.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -26,7 +26,7 @@ class Request {
 	/**
 	 * Pointer to gateway making the request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Paypal
 	 */
@@ -35,7 +35,7 @@ class Request {
 	/**
 	 * Endpoint for requests from PayPal.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -44,7 +44,7 @@ class Request {
 	/**
 	 * Endpoint for requests to PayPal.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -54,7 +54,7 @@ class Request {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Paypal $gateway Paypal gateway object.
 	 */
@@ -66,7 +66,7 @@ class Request {
 	/**
 	 * Get the PayPal request URL for an order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @param  bool     $sandbox Whether to use sandbox mode or not.
@@ -101,7 +101,7 @@ class Request {
 	/**
 	 * Limit length of an arg.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string  $string Argument to limit.
 	 * @param  integer $limit Limit size in characters.
@@ -124,7 +124,7 @@ class Request {
 	/**
 	 * Get transaction args for paypal request, except for line item args.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order object.
 	 * @return array
@@ -173,7 +173,7 @@ class Request {
 	 * URL character limit via:
 	 * https://support.microsoft.com/en-us/help/208427/maximum-url-length-is-2-083-characters-in-internet-explorer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order to be sent to Paypal.
 	 * @param array    $paypal_args Arguments sent to Paypal in the request.
@@ -201,7 +201,7 @@ class Request {
 	/**
 	 * Get PayPal Args for passing to PP.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @return array
@@ -230,7 +230,7 @@ class Request {
 	/**
 	 * Get phone number args for paypal request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @return array
@@ -264,7 +264,7 @@ class Request {
 	/**
 	 * Get line item args for paypal request as a single line item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @return array
@@ -281,7 +281,7 @@ class Request {
 	/**
 	 * Get line item args for paypal request.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @param  bool     $force_one_line_item Create only one item for this order.
@@ -318,7 +318,7 @@ class Request {
 	/**
 	 * Get order item names as a string.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 * @return string
@@ -354,7 +354,7 @@ class Request {
 	/**
 	 * Get order item names as a string.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order      $order Order object.
 	 * @param  Order_Item $item Order item object.
@@ -385,7 +385,7 @@ class Request {
 	/**
 	 * Return all line items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function get_line_items() {
 		return $this->line_items;
@@ -394,7 +394,7 @@ class Request {
 	/**
 	 * Remove all line items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function delete_line_items() {
 		$this->line_items = array();
@@ -405,7 +405,7 @@ class Request {
 	 *
 	 * The line items are invalid in case of mismatch in totals or if any amount < 0.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Order $order Order to be examined.
 	 * @return bool
@@ -437,7 +437,7 @@ class Request {
 	/**
 	 * Get line items to send to paypal.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  Order $order Order object.
 	 */
@@ -461,7 +461,7 @@ class Request {
 	/**
 	 * Add PayPal Line Item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $item_name Item name.
 	 * @param  int    $quantity Item quantity.
@@ -494,7 +494,7 @@ class Request {
 	/**
 	 * Get the state to send to paypal.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $cc Country two letter code.
 	 * @param  string $state State code.
@@ -517,7 +517,7 @@ class Request {
 	/**
 	 * Check if currency has decimals.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $currency Currency to check.
 	 * @return bool
@@ -533,7 +533,7 @@ class Request {
 	/**
 	 * Round prices.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  double   $price Price to round.
 	 * @param  Order $order Order object.
@@ -552,7 +552,7 @@ class Request {
 	/**
 	 * Format prices.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  float|int $price Price to format.
 	 * @param  Order  $order Order object.

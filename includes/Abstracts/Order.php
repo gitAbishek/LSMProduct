@@ -3,7 +3,7 @@
  * Abstracr order
  *
  * @package Masteriyo\Order
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo\Abstracts;
@@ -17,7 +17,7 @@ use Masteriyo\Repository\OrderRepository;
 /**
  * Abstract class order.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 abstract class Order extends Model {
 	use ItemTotals;
@@ -25,7 +25,7 @@ abstract class Order extends Model {
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -34,7 +34,7 @@ abstract class Order extends Model {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -43,7 +43,7 @@ abstract class Order extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -52,7 +52,7 @@ abstract class Order extends Model {
 	/**
 	 * Order items will be stored here, sometimes before they persist in the DB.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $items = array();
@@ -60,12 +60,12 @@ abstract class Order extends Model {
 	/**
 	 * Data array.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	/**
 	 * Stores order data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -84,7 +84,7 @@ abstract class Order extends Model {
 	/**
 	 * Order items that need deleting are stored here.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $items_to_delete = array();
@@ -92,7 +92,7 @@ abstract class Order extends Model {
 	/**
 	 * Get the order if ID
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param OrderRepository $order_repository Order Repository.
 	 */
@@ -147,7 +147,7 @@ abstract class Order extends Model {
 	/**
 	 * Get all class data in array format.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return array
 	 */
 	public function get_data() {
@@ -166,7 +166,7 @@ abstract class Order extends Model {
 	/**
 	 * Checks the order status against a passed in status.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param array|string $status Status to check.
 	 *
@@ -186,7 +186,7 @@ abstract class Order extends Model {
 	/**
 	 * Get order parent id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -199,7 +199,7 @@ abstract class Order extends Model {
 	/**
 	 * Get order status.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -211,7 +211,7 @@ abstract class Order extends Model {
 	/**
 	 * Get the currency.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -224,7 +224,7 @@ abstract class Order extends Model {
 	/**
 	 * Get version.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -237,7 +237,7 @@ abstract class Order extends Model {
 	/**
 	 * Check whether the prices include tax.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -250,7 +250,7 @@ abstract class Order extends Model {
 	/**
 	 * Get order created date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -263,7 +263,7 @@ abstract class Order extends Model {
 	/**
 	 * Get order modified date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -276,7 +276,7 @@ abstract class Order extends Model {
 	/**
 	 * Get the total.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -339,7 +339,7 @@ abstract class Order extends Model {
 	/**
 	 * Set order parent id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return int
 	 */
@@ -354,7 +354,7 @@ abstract class Order extends Model {
 	/**
 	 * Set order status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $status Order status to change the order to.
 	 * @return array details of change
@@ -386,7 +386,7 @@ abstract class Order extends Model {
 	/**
 	 * Set order currency.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $currency Money currency.
 	 */
@@ -397,7 +397,7 @@ abstract class Order extends Model {
 	/**
 	 * Set version.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $version Version.
 	 */
@@ -417,7 +417,7 @@ abstract class Order extends Model {
 	/**
 	 * Set order created date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -428,7 +428,7 @@ abstract class Order extends Model {
 	/**
 	 * Set order modified date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -439,7 +439,7 @@ abstract class Order extends Model {
 	/**
 	 * Set order total.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param double $total order total.
 	 */
@@ -499,7 +499,7 @@ abstract class Order extends Model {
 	/**
 	 * Save all order items which are part of this order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function save_items() {
 		$items_changed = false;
@@ -539,7 +539,7 @@ abstract class Order extends Model {
 	/**
 	 * Remove all line items (products, coupons, shipping, taxes) from the order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $type Order item type. Default null.
 	 */
@@ -561,7 +561,7 @@ abstract class Order extends Model {
 	/**
 	 * Convert a type to a types group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $type type to lookup.
 	 * @return string
@@ -583,7 +583,7 @@ abstract class Order extends Model {
 	/**
 	 * Return an array of items/products within this order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|array $types Types of line items to get (array or string).
 	 * @return OrderItem[]
@@ -610,7 +610,7 @@ abstract class Order extends Model {
 	/**
 	 * Gets the count of order items of a certain type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $item_type Item type to lookup.
 	 * @return int|string
@@ -629,7 +629,7 @@ abstract class Order extends Model {
 	/**
 	 * Get an order item object, based on its type.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  int  $item_id ID of item to get.
 	 * @param  bool $load_from_db Prior to 3.2 this item was loaded direct from MASTERIYO_Order_Factory, not this object. This param is here for backwards compatility with that. If false, uses the local items variable instead.
 	 * @return OrderItem|false
@@ -663,7 +663,7 @@ abstract class Order extends Model {
 	/**
 	 * Get key for where a certain item type is stored in _items.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  string $item object Order item (product, shipping, fee, coupon, tax).
 	 * @return string
 	 */
@@ -678,7 +678,7 @@ abstract class Order extends Model {
 	/**
 	 * Remove item from the order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $item_id Item ID to delete.
 	 * @return false|void
@@ -699,7 +699,7 @@ abstract class Order extends Model {
 	/**
 	 * Adds an order item to this order. The order item will not persist until save.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param OrderItem $item Order item object (product, shipping, fee, coupon, tax).
 	 * @return false|void
 	 */
@@ -732,7 +732,7 @@ abstract class Order extends Model {
 	 * Helper function.
 	 * If you add all items in this order in cart again, this would be the cart subtotal (assuming all other settings are same).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return float Cart subtotal.
 	 */
@@ -748,7 +748,7 @@ abstract class Order extends Model {
 	 * Helper function.
 	 * If you add all items in this order in cart again, this would be the cart total (assuming all other settings are same).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return float Cart total.
 	 */
@@ -763,7 +763,7 @@ abstract class Order extends Model {
 	/**
 	 * Calculate totals by looking at the contents of the order. Stores the totals and returns the orders final total.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param  bool $and_taxes Calc taxes if true.
 	 * @return float calculated grand total.
 	 */
@@ -785,7 +785,7 @@ abstract class Order extends Model {
 	/**
 	 * Get item subtotal - this is the cost before discount.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param object $item Item to get total from.
 	 * @param bool   $inc_tax (default: false).
@@ -811,7 +811,7 @@ abstract class Order extends Model {
 	/**
 	 * Get all valid statuses for this order
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return array Internal status keys e.g. 'masteriyo-processing'
 	 */
 	protected function get_valid_statuses() {
@@ -821,7 +821,7 @@ abstract class Order extends Model {
 	/**
 	 * Get order refunds.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array[Order]
 	 */
@@ -840,7 +840,7 @@ abstract class Order extends Model {
 	/**
 	 * Get the refunded amount for a line item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  int    $item_id   ID of the item we're checking.
 	 * @param  string $item_type Type of the item we're checking, if not a course.
@@ -862,7 +862,7 @@ abstract class Order extends Model {
 	/**
 	 * Get line subtotal.
 	 *
-	 *  @since 0.1.0
+	 *  @since 1.0.0
 	 *
 	 * @param object $item Item to get total from.
 	 * @param bool   $round (default: true).
@@ -882,7 +882,7 @@ abstract class Order extends Model {
 	/**
 	 * Gets line subtotal - formatted for display.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param object $item Item to get total from.
 	 *
@@ -897,7 +897,7 @@ abstract class Order extends Model {
 	/**
 	 * Add total row for grand total.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array  $total_rows Reference to total rows array.
 	 */

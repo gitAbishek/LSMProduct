@@ -25,7 +25,7 @@ class OrderServiceProvider extends AbstractServiceProvider {
 	 * this service provider must have an alias added
 	 * to this array or it will be ignored
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -48,7 +48,7 @@ class OrderServiceProvider extends AbstractServiceProvider {
 	* that you need to, but remember, every alias registered
 	* within this method must be declared in the `$provides` array.
 	*
-	* @since 0.1.0
+	* @since 1.0.0
 	*/
 	public function register() {
 		$this->getContainer()->add( 'order.store', OrderRepository::class );

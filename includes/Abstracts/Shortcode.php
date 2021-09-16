@@ -2,7 +2,7 @@
 /**
  * Shortcode abstract class.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @class Shortcode
  * @package Masteriyo\Abstracts
  */
@@ -19,7 +19,7 @@ abstract class Shortcode {
 	/**
 	 * Shortcode tag.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -28,7 +28,7 @@ abstract class Shortcode {
 	/**
 	 * Shortcode attributes with default values.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -37,7 +37,7 @@ abstract class Shortcode {
 	/**
 	 * Arguments to pass to the template.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -46,7 +46,7 @@ abstract class Shortcode {
 	/**
 	 * Get shortcode attributes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -57,7 +57,7 @@ abstract class Shortcode {
 	/**
 	 * Set shortcode attributes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return $this
 	 */
@@ -68,7 +68,7 @@ abstract class Shortcode {
 	/**
 	 * Set template args.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return
 	 */
@@ -79,7 +79,7 @@ abstract class Shortcode {
 	/**
 	 * Get template args.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -90,7 +90,7 @@ abstract class Shortcode {
 	/**
 	 * Get shortcode tag.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -101,7 +101,7 @@ abstract class Shortcode {
 	/**
 	 * Parse shortcode attributes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $attributes Shortcode attributes.
 	 *
@@ -118,7 +118,7 @@ abstract class Shortcode {
 	/**
 	 * Register this shortcode.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -129,7 +129,7 @@ abstract class Shortcode {
 	/**
 	 * Shortcode callback.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $attributes
 	 *
@@ -143,7 +143,7 @@ abstract class Shortcode {
 	/**
 	 * Get shortcode content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -152,7 +152,7 @@ abstract class Shortcode {
 	/**
 	 * Get rendered html after injecting the data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $data Data to inject.
 	 * @param string $file_path Path of the php file containing HTML.

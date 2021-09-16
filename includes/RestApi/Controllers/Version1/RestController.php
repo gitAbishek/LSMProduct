@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @package Masteriyo/RestApi
  * @extends  WP_REST_Controller
- * @version  0.1.0
+ * @version  1.0.0
  */
 abstract class RestController extends \WP_REST_Controller {
 
@@ -573,7 +573,7 @@ abstract class RestController extends \WP_REST_Controller {
 	/**
 	 * Handle namespace and rest_base properties access.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return mixed
 	 */
@@ -588,7 +588,7 @@ abstract class RestController extends \WP_REST_Controller {
 	/**
 	 * Retrieves an array of endpoint arguments from the item schema and endpoint method.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array  $schema The full JSON schema for the endpoint.
 	 * @param string $method Optional. HTTP method of the endpoint. The arguments for `CREATABLE` endpoints are

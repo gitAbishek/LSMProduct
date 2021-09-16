@@ -6,7 +6,7 @@ use Masteriyo\Query\CourseProgressQuery;
 /**
  * Course progress functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @package Masteriyo\Helper
  */
 
@@ -14,7 +14,7 @@ use Masteriyo\Query\CourseProgressQuery;
 /**
  * Get course progress.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param Masteriyo\Models\CourseProgress|int $course_progress_id Course progress ID.
  *
@@ -44,7 +44,7 @@ function masteriyo_get_course_progress( $course_progress ) {
 /**
  * Get course progress item.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int $course_progress_item Course progress ID.
  *
@@ -75,7 +75,7 @@ function masteriyo_get_course_progress_item( $course_progress_item ) {
 /**
  * Get course progress.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param Masteriyo\Models\Course|WP_Post|int $course Course object.
  * @param Masteriyo\Models\User|WP_Post|int $user User object.
@@ -115,7 +115,7 @@ function masteriyo_get_course_progress_by_user_and_course( $user, $course ) {
 /**
  * Get active courses.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param Masteriyo\Models\User|WP_Post|int $user User object.
  * @return Masteriyo\Model\Course[]

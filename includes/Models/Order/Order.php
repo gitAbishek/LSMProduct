@@ -2,7 +2,7 @@
 /**
  * Order model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -20,14 +20,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Order model (post type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class Order extends AbstractOrder {
 
 	/**
 	 * Stores data about status changes so relevant hooks can be fired.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var bool|array
 	 */
@@ -36,7 +36,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Stores order data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -83,7 +83,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function get_object_type() {
 		return $this->object_type;
@@ -92,7 +92,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function get_post_type() {
 		return $this->post_type;
@@ -101,7 +101,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get a formatted billing full name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -113,7 +113,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Updates status of order immediately.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @uses Order::set_status()
 	 * @param string $new_status    Status to change the order to.
@@ -142,7 +142,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Handle the status transition.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function status_transition() {
 		$status_transition = $this->status_transition;
@@ -179,7 +179,7 @@ class Order extends AbstractOrder {
 					/**
 					 * Fires when the order progresses from a pending payment status to a paid one.
 					 *
-					 * @since 0.1.0
+					 * @since 1.0.0
 					 * @param int Order ID
 					 * @param Order Order object
 					 */
@@ -207,7 +207,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get the expiry date.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -220,7 +220,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get customer/user ID.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -233,7 +233,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get the payment method.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -246,7 +246,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get the transaction id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -259,7 +259,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get the date of the payment.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -272,7 +272,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get the date of order completion.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -285,7 +285,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get the order creation method. It might be admin, checkout, or any other way.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -298,7 +298,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get the customer IP address.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -311,7 +311,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get the customer's user agent.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -325,7 +325,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get order_key.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -338,7 +338,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get customer_note.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -351,7 +351,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get cart_hash.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -364,7 +364,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing first name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -377,7 +377,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing last name.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -390,7 +390,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing company.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -403,7 +403,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing address.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -416,7 +416,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing address 1.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -429,7 +429,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing address 1.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -442,7 +442,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing city.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -455,7 +455,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing post code.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -468,7 +468,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing country.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -481,7 +481,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing state.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -494,7 +494,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing email.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -507,7 +507,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get user's billing phone number.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -520,7 +520,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Alias for get_customer_id().
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return integer
@@ -532,7 +532,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get the customer associated with the order. False for guests.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return User|false
 	 */
@@ -543,7 +543,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Alias for get_customer().
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return User|false
 	 */
@@ -554,7 +554,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get payment method title.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string
@@ -566,7 +566,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Returns the order billing address in raw, non-formatted way.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array The stored address after filter.
 	 */
@@ -599,7 +599,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set order expiry date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $expiry_date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -610,7 +610,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set customer/user ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param integer $id Customer/User ID.
 	 */
@@ -621,7 +621,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set payment method.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|PaymentGateway $payment_method Payment method.
 	 */
@@ -641,7 +641,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set transaction ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $transaction_id Transaction ID.
 	 */
@@ -652,7 +652,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set date of payment.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $date_paid Date.
 	 */
@@ -663,7 +663,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set date of order completion.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $date_completed Date.
 	 */
@@ -674,7 +674,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set method of order creation. Like admin, checkout etc.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $created_via Method.
 	 */
@@ -685,7 +685,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set customer's IP address.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $customer_ip_address IP address.
 	 */
@@ -696,7 +696,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set customer's user agent.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $customer_user_agent User agent.
 	 */
@@ -707,7 +707,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set order_key.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $order_key order_key.
 	 */
@@ -718,7 +718,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set customer note.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $customer_note Customer note.
 	 */
@@ -729,7 +729,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set cart_hash.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $cart_hash cart_hash.
 	 */
@@ -740,7 +740,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set user's billing first name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $first_name User's billing first name.
 	 * @return void
@@ -752,7 +752,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set user's billing last name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $last_name User's billing last name.
 	 * @return void
@@ -764,7 +764,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set user's billing company.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $company User's billing company.
 	 * @return void
@@ -776,7 +776,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set user's billing address_1.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $address_1 User's billing address_1.
 	 * @return void
@@ -788,7 +788,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set user's billing address_2.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $address_2 User's billing address_2.
 	 * @return void
@@ -800,7 +800,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set user's billing city.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $city User's billing city.
 	 */
@@ -811,7 +811,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set user's billing post code.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $postcode User's billing post code.
 	 */
@@ -823,7 +823,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set user's billing country.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $country User's country.
 	 */
@@ -834,7 +834,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set user's billing state.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $state User's billing state.
 	 */
@@ -845,7 +845,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set user's billing email.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $email User's billing email.
 	 */
@@ -856,7 +856,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set user's billing phone.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $phone User's billing phone.
 	 */
@@ -867,7 +867,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set payment method title.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $value Payment method title.
 	 */
@@ -886,7 +886,7 @@ class Order extends AbstractOrder {
 	 * This ensures the data exists even if a gateway does not use the
 	 * `payment_complete` method.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function maybe_set_date_paid() {
 		// This logic only runs if the date_paid prop has not been set yet.
@@ -914,7 +914,7 @@ class Order extends AbstractOrder {
 	 *
 	 * Sets the date completed variable when transitioning to completed status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function maybe_set_date_completed() {
 		if ( $this->has_status( 'completed' ) ) {
@@ -931,7 +931,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Save data to the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return int order ID
 	 */
 	public function save() {
@@ -945,7 +945,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Maybe set empty billing email to that of the user who owns the order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function maybe_set_user_billing_email() {
 		$user = $this->get_user();
@@ -972,7 +972,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Returns true if the order has a billing address.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return boolean
 	 */
@@ -983,7 +983,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Check if an order key is valid.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $key Order key.
 	 *
@@ -996,7 +996,7 @@ class Order extends AbstractOrder {
 	/**
 	 * See if order matches cart_hash.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $cart_hash Cart hash.
 	 *
@@ -1009,7 +1009,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Checks if an order can be edited, specifically for use on the Edit Order screen.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -1020,7 +1020,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Returns if an order has been paid for based on the order status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -1031,7 +1031,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Checks if an order needs payment, based on status and order total.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -1049,7 +1049,7 @@ class Order extends AbstractOrder {
 	 * Sales are also recorded for products.
 	 * Finally, record the date of payment.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $transaction_id Optional transaction id to store in post meta.
 	 * @return bool success
@@ -1100,7 +1100,7 @@ class Order extends AbstractOrder {
 	/**
 	 * See if the order needs processing before it can be completed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return bool
 	 */
 	public function needs_processing() {
@@ -1110,7 +1110,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Set order status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $new_status    Status to change the order to. No internal masteriyo- prefix is required.
 	 * @param string $note          Optional note to add.
 	 * @param bool   $manual_update Is this a manual order status change?.
@@ -1141,7 +1141,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get amount already refunded.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return string
 	 */
 	public function get_total_refunded() {
@@ -1162,7 +1162,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Gets order total - formatted for display.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $tax_display      Type of tax display.
 	 * @param bool   $display_refunded If should include refunded value.
@@ -1181,7 +1181,7 @@ class Order extends AbstractOrder {
 		/**
 		 * Filter Masteriyo formatted order total.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 *
 		 * @param string   $formatted_total  Total to display.
 		 * @param Order    $order            Order data.
@@ -1193,7 +1193,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Gets the order number for display (by default, order ID).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -1204,7 +1204,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Check if order has been created via admin, checkout, or in another way.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param string $modus Way of creating the order to test for.
 	* @return bool
 	 */
@@ -1221,7 +1221,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Generates a URL for the thanks page (order received).
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -1235,7 +1235,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Generates a URL so that a customer can cancel their (unpaid - pending) order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $redirect Redirect URL.
 	 * @return string
@@ -1261,7 +1261,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Generates a URL to view an order from the account page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -1273,7 +1273,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get a checkout page URL.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -1284,7 +1284,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get's the URL to edit the order in the backend.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @return string
 	 */
 	public function get_edit_order_url() {
@@ -1295,7 +1295,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Generates a raw (unescaped) cancel-order URL for use by payment gateways.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $redirect Redirect URL.
 	 * @return string The unescaped cancel-order URL.
@@ -1319,7 +1319,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Helper method to return the cancel endpoint.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string the cancel endpoint; either the cart page or the home page.
 	 */
@@ -1339,7 +1339,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Add total row for the payment method.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array  $total_rows  Total rows.
 	 */
@@ -1355,7 +1355,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Add total row for refunds.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array  $total_rows  Total rows.
 	 */
@@ -1374,7 +1374,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get totals for display on pages and in emails.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -1391,7 +1391,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Get a formatted billing address for the order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $empty_content Content to show if no address is present. @since 3.3.0.
 	 * @return string
@@ -1403,10 +1403,10 @@ class Order extends AbstractOrder {
 		/**
 		 * Filter orders formatterd billing address.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 * @param string   $address     Formatted billing address string.
 		 * @param array    $raw_address Raw billing address.
-		 * @param Order $order       Order data. @since 0.1.0
+		 * @param Order $order       Order data. @since 1.0.0
 		 */
 		return apply_filters( 'masteriyo_order_get_formatted_billing_address', $address ? $address : $empty_content, $raw_address, $this );
 	}
@@ -1420,7 +1420,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Adds a note (comment) to the order. Order must exist.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $note              Note to add.
 	 * @param  int    $is_customer_note  Is this a note for the customer?.
@@ -1483,7 +1483,7 @@ class Order extends AbstractOrder {
 		 * @param int      $order_note_id Order note ID.
 		 * @param Order $order         Order data.
 		 *
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 */
 		do_action( 'masteriyo_order_note_added', $comment_id, $this );
 
@@ -1493,7 +1493,7 @@ class Order extends AbstractOrder {
 	/**
 	 * Add an order note for status transition
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @uses Order::add_order_note()
 	 * @param string $note          Note to be added giving status transition from and to details.
 	 * @param bool   $transition    Details of the status transition.
@@ -1506,7 +1506,7 @@ class Order extends AbstractOrder {
 	/**
 	 * List order notes (public) for the customer.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

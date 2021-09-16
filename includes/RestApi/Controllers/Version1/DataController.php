@@ -41,7 +41,7 @@ class DataController extends CrudController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -50,7 +50,7 @@ class DataController extends CrudController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Permission $permission
 	 */
@@ -61,7 +61,7 @@ class DataController extends CrudController {
 	/**
 	 * Register routes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -115,7 +115,7 @@ class DataController extends CrudController {
 	/**
 	 * Get countries list.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -149,7 +149,7 @@ class DataController extends CrudController {
 	/**
 	 * Get states list.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -197,7 +197,7 @@ class DataController extends CrudController {
 	/**
 	 * Get states list by country.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -253,7 +253,7 @@ class DataController extends CrudController {
 	/**
 	 * Get currencies list.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *

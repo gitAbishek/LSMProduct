@@ -50,7 +50,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Create a course in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course Course object.
 	 */
@@ -101,7 +101,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Read a course.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course Cource object.
 	 * @throws Exception If invalid course.
@@ -141,7 +141,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Update a course in the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course Course object.
 	 *
@@ -221,7 +221,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Delete a course from the database.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $course Course object.
 	 * @param array $args   Array of args to pass.alert-danger
@@ -257,7 +257,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * For all stored terms in all taxonomies, save them to the DB.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Model $model Model object.
 	 * @param bool       $force Force update. Used during create.
@@ -287,7 +287,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Handle updated meta props after updating meta data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param Course $course Course Object.
 	 */
 	protected function handle_updated_props( $course ) {
@@ -334,7 +334,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Update visibility terms based on props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Course $course Course object.
 	 * @param bool       $force Force update. Used during create.
@@ -383,7 +383,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Read course data. Can be overridden by child classes to load other props.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Course $course course object.
 	 */
@@ -417,7 +417,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Read extra data associated with the course, like button text or course URL for external courses.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Course $course course object.
 	 */
@@ -436,7 +436,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Fetch courses.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
 	 * @return Course[]
@@ -509,7 +509,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Get valid WP_Query args from a CourseQuery's query variables.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param array $query_vars Query vars from a CourseQuery.
 	 * @return array
 	 */
@@ -652,7 +652,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Get course progress status in fraction.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param Masteriyo\Models\Course|int $course Course object.
 	 * @param Masteriyo\Models\User|int $user User object.

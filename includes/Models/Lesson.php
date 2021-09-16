@@ -2,7 +2,7 @@
 /**
  * Lesson model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -18,14 +18,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Lesson model (post type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class Lesson extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -34,7 +34,7 @@ class Lesson extends Model {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -43,7 +43,7 @@ class Lesson extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -52,7 +52,7 @@ class Lesson extends Model {
 	/**
 	 * Stores lesson data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -81,7 +81,7 @@ class Lesson extends Model {
 	/**
 	 * Get the lesson if ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param LessonRepository $lesson_repository Lesson Repository,
 	 */
@@ -98,7 +98,7 @@ class Lesson extends Model {
 	/**
 	 * Get the product's title. For products this is the product name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -109,7 +109,7 @@ class Lesson extends Model {
 	/**
 	 * Product permalink.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -120,7 +120,7 @@ class Lesson extends Model {
 	/**
 	 * Returns the children IDs if applicable. Overridden by child classes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array Array of IDs.
 	 */
@@ -131,7 +131,7 @@ class Lesson extends Model {
 	/**
 	 * Get the object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -142,7 +142,7 @@ class Lesson extends Model {
 	/**
 	 * Get the post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -159,7 +159,7 @@ class Lesson extends Model {
 	/**
 	 * Get lesson name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -172,7 +172,7 @@ class Lesson extends Model {
 	/**
 	 * Get lesson slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -185,7 +185,7 @@ class Lesson extends Model {
 	/**
 	 * Get lesson created date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -198,7 +198,7 @@ class Lesson extends Model {
 	/**
 	 * Get lesson modified date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -211,7 +211,7 @@ class Lesson extends Model {
 	/**
 	 * Get lesson status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -224,7 +224,7 @@ class Lesson extends Model {
 	/**
 	 * Get catalog visibility.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -237,7 +237,7 @@ class Lesson extends Model {
 	/**
 	 * Get lesson description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -250,7 +250,7 @@ class Lesson extends Model {
 	/**
 	 * Get lesson short description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -263,7 +263,7 @@ class Lesson extends Model {
 	/**
 	 * Returns the lesson's password.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -276,7 +276,7 @@ class Lesson extends Model {
 	/**
 	 * Returns whether review is allowed or not..
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -290,7 +290,7 @@ class Lesson extends Model {
 	/**
 	 * Returns lesson parent id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -303,7 +303,7 @@ class Lesson extends Model {
 	/**
 	 * Returns the section's course id.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -316,7 +316,7 @@ class Lesson extends Model {
 	/**
 	 * Returns lesson menu order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -329,7 +329,7 @@ class Lesson extends Model {
 	/**
 	 * Returns lesson featured image.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -342,7 +342,7 @@ class Lesson extends Model {
 	/**
 	 * Get video source.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -355,7 +355,7 @@ class Lesson extends Model {
 	/**
 	 * Get video source.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -378,7 +378,7 @@ class Lesson extends Model {
 	/**
 	 * Get video source id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -391,7 +391,7 @@ class Lesson extends Model {
 	/**
 	 * Get video playback time.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $context What the value is for. Valid values are view and edit.
 	 *
@@ -404,7 +404,7 @@ class Lesson extends Model {
 	/**
 	 * Get rating count.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -417,7 +417,7 @@ class Lesson extends Model {
 	/**
 	 * Get average rating.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -430,7 +430,7 @@ class Lesson extends Model {
 	/**
 	 * Get review count.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -443,7 +443,7 @@ class Lesson extends Model {
 	/**
 	 * Set lesson name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name lesson name.
 	 */
@@ -454,7 +454,7 @@ class Lesson extends Model {
 	/**
 	 * Set lesson slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $slug lesson slug.
 	 */
@@ -465,7 +465,7 @@ class Lesson extends Model {
 	/**
 	 * Set lesson created date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -476,7 +476,7 @@ class Lesson extends Model {
 	/**
 	 * Set lesson modified date.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -487,7 +487,7 @@ class Lesson extends Model {
 	/**
 	 * Set lesson status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $status lesson status.
 	 */
@@ -498,7 +498,7 @@ class Lesson extends Model {
 	/**
 	 * Set lesson description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $description Lesson description.
 	 */
@@ -509,7 +509,7 @@ class Lesson extends Model {
 	/**
 	 * Set lesson short description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $short_description Lesson short description.
 	 */
@@ -520,7 +520,7 @@ class Lesson extends Model {
 	/**
 	 * Set the lesson's password.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $password Password.
 	 */
@@ -531,7 +531,7 @@ class Lesson extends Model {
 	/**
 	 * Set the lesson's review status.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $reviews_allowed Reviews allowed.( Value can be 'open' or 'closed')
 	 */
@@ -542,7 +542,7 @@ class Lesson extends Model {
 	/**
 	 * Set the lesson parent id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $parent Parent id.
 	 */
@@ -553,7 +553,7 @@ class Lesson extends Model {
 	/**
 	 * Set the lesson's course id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $course_id Course id.
 	 */
@@ -564,7 +564,7 @@ class Lesson extends Model {
 	/**
 	 * Set the lesson menu order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $menu_order Menu order id.
 	 */
@@ -575,7 +575,7 @@ class Lesson extends Model {
 	/**
 	 * Set the featured image, in other words thumbnail post id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $featured_image Featured image id.
 	 */
@@ -586,7 +586,7 @@ class Lesson extends Model {
 	/**
 	 * Set video source.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $video_source Video source.
 	 */
@@ -597,7 +597,7 @@ class Lesson extends Model {
 	/**
 	 * Set video source url.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $video_source_url Video source url.
 	 */
@@ -608,7 +608,7 @@ class Lesson extends Model {
 	/**
 	 * Set video playback time.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $video_playback_time Video playback time.
 	 */
@@ -619,7 +619,7 @@ class Lesson extends Model {
 	/**
 	 * Set rating counts. Read only.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $counts Product rating counts.
 	 */
@@ -631,7 +631,7 @@ class Lesson extends Model {
 	/**
 	 * Set average rating. Read only.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param float $average Product average rating.
 	 */
@@ -642,7 +642,7 @@ class Lesson extends Model {
 	/**
 	 * Set review count. Read only.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $count Product review count.
 	 */

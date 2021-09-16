@@ -5,7 +5,7 @@
  * The main idea behind this class is to avoid doing unneeded
  * SQL updates if nothing changed.
  *
- * @version 0.1.0
+ * @version 1.0.0
  * @package Masteriyo
  */
 

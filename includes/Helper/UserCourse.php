@@ -2,8 +2,8 @@
 /**
  * User course functions.
  *
- * @since 0.1.0
- * @version 0.1.0
+ * @since 1.0.0
+ * @version 1.0.0
  * @package Masteriyo\Helper
  */
 
@@ -12,7 +12,7 @@ use Masteriyo\Query\UserCourseQuery;
 /**
  * Get user course.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int $user_course_id User course ID.
  * @return Masteriyo\Models\UserCourse|NULL
@@ -34,7 +34,7 @@ function masteriyo_get_user_course( $user_course_id ) {
 /**
  * Get list of status for user course.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return array
  */
@@ -54,7 +54,7 @@ function masteriyo_get_user_course_statuses() {
 /**
  * Count enrolled users in a course.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @return integer
  */
@@ -73,7 +73,7 @@ function masteriyo_count_enrolled_users( $course_id ) {
 /**
  * Get the number of active courses.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param \Masteriyo\Models\User|int $user User.
  *

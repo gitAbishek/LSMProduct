@@ -2,7 +2,7 @@
 /**
  * Course progress item model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Course progress item model (custom table).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class CourseProgressItem extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -35,7 +35,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -44,7 +44,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Stores user course progress data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -63,7 +63,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param RepositoryInterface $course_progress_item_item_repository Course progress Repository,
 	 */
@@ -80,7 +80,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Get user course progress table.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -99,7 +99,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Get user ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param  string $context What the value is for. Valid values are view and edit.
 
@@ -112,7 +112,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Get course progress(quiz, lesson) item ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param  string $context What the value is for. Valid values are view and edit.
 
@@ -125,7 +125,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Get course progress id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param  string $context What the value is for. Valid values are view and edit.
 
@@ -138,7 +138,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Get course course id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param  string $context What the value is for. Valid values are view and edit.
 
@@ -151,7 +151,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Get course progress type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param  string $context What the value is for. valid values are view and edit.
 
@@ -164,7 +164,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Check whether the course progress item is completed or not.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param  string $context What the value is for. valid values are view and edit.
 
@@ -177,7 +177,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Get course progress start.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. valid values are view and edit.
 	 * @return DateTime|null
@@ -189,7 +189,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Get course progress update.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. valid values are view and edit.
 	 * @return DateTime|null
@@ -201,7 +201,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Get course progress complete.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. valid values are view and edit.
 	 * @return DateTime|null
@@ -219,7 +219,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Set user ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param int $user_id User ID.
 	 */
@@ -230,7 +230,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Set course progress item (course, quiz) ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param int $item_id Course progress item (course, quiz) ID.
 	 */
@@ -241,7 +241,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Set course progress ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param int $progress_id Course ID.
 	 */
@@ -252,7 +252,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Se course ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	* @param int $course_id Course ID.
 	 */
@@ -263,7 +263,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Set course progress type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $type Course progress type.
 	 */
@@ -274,7 +274,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Set course progress complete.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param boolean $completed
 	 */
@@ -285,7 +285,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Set course progress start.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $start Course progress start.
 	 */
@@ -296,7 +296,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Set course progress update.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $update Course progress update.
 	 */
@@ -307,7 +307,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Set course progress complete.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $complete Course progress complete.
 	 */
@@ -324,7 +324,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Get user course progress items.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -335,7 +335,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Set course progress item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $items Course progress items.
 	 */
@@ -352,7 +352,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Set course items which are changed.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $progress_item Progress item.
 	 */
@@ -376,7 +376,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Get course progress item changes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -387,7 +387,7 @@ class CourseProgressItem extends Model {
 	/**
 	 * Set course progress item.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param array $item Course progress item
 	 */

@@ -2,7 +2,7 @@
 /**
  * Course_Category model.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masteriyo\Models;
  */
@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Course_Category model (post type).
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 class CourseCategory extends Model {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -35,7 +35,7 @@ class CourseCategory extends Model {
 	/**
 	 * Post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -44,7 +44,7 @@ class CourseCategory extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -53,7 +53,7 @@ class CourseCategory extends Model {
 	/**
 	 * Stores course_category data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -73,7 +73,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get the course category if ID.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param CourseCategoryRepository $course_category_repository Course Category Repository.
 	 */
@@ -90,7 +90,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get the course category's title. For course categorys this is the course category name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -101,7 +101,7 @@ class CourseCategory extends Model {
 	/**
 	 * Course category permalink.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -112,7 +112,7 @@ class CourseCategory extends Model {
 	/**
 	 * Returns the children IDs if applicable. Overridden by child classes.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array of IDs
 	 */
@@ -129,7 +129,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get course category name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -142,7 +142,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get course category slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -155,7 +155,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get course category description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -168,7 +168,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get course category term group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -181,7 +181,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get course category term taxonomy id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -194,7 +194,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get course category taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -207,7 +207,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get course category parent id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -220,7 +220,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get number of course for the category.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -233,7 +233,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get term order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -246,7 +246,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get course category archive display type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -265,7 +265,7 @@ class CourseCategory extends Model {
 	/**
 	 * Set course category name.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $name Course category name.
 	 */
@@ -276,7 +276,7 @@ class CourseCategory extends Model {
 	/**
 	 * Set course category slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $slug Course cateogy slug.
 	 */
@@ -287,7 +287,7 @@ class CourseCategory extends Model {
 	/**
 	 * Set course category description.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $description Course category description.
 	 */
@@ -298,7 +298,7 @@ class CourseCategory extends Model {
 	/**
 	 * Set course category parent id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $parent_id Course category parent id.
 	 */
@@ -309,7 +309,7 @@ class CourseCategory extends Model {
 	/**
 	 * Set course category term group.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $term_group Course category term group.
 	 */
@@ -320,7 +320,7 @@ class CourseCategory extends Model {
 	/**
 	 * Set course category term taxonomy id.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $term_taxonomy_id Course category term taxonomy id.
 	 */
@@ -331,7 +331,7 @@ class CourseCategory extends Model {
 	/**
 	 * Set course category taxonomy.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $taxonomy Course category taxonomy.
 	 */
@@ -342,7 +342,7 @@ class CourseCategory extends Model {
 	/**
 	 * Set number of course for the category.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $count Number of posts for the course category term.
 	 */
@@ -353,7 +353,7 @@ class CourseCategory extends Model {
 	/**
 	 * Set term order.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param int $term_order Course category term order.
 	 */
@@ -364,7 +364,7 @@ class CourseCategory extends Model {
 	/**
 	 * Set category display type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $display Category archive display type.
 	 */

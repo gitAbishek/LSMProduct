@@ -3,7 +3,7 @@
 /**
  * Template functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 use Masteriyo\Query\UserCourseQuery;
@@ -16,7 +16,7 @@ if ( ! function_exists( 'add_action' ) && function_exists( 'add_filter' ) ) {
 /**
  * Handle redirects before content is output - hooked into template_redirect so is_page works.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 function masteriyo_template_redirect() {
 	global $wp_query, $wp;
@@ -61,7 +61,7 @@ function_exists( 'add_action' ) && add_action( 'template_redirect', 'masteriyo_t
  *
  * This will return true if we have posts (courses) or if we have subcats to display.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @return bool
  */
 function masteriyo_course_loop() {
@@ -73,7 +73,7 @@ if ( ! function_exists( 'masteriyo_course_loop_start' ) ) {
 	/**
 	 * Output the start of a course loop. By default this is a UL.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $echo Should echo?.
 	 * @return stringe
@@ -100,7 +100,7 @@ if ( ! function_exists( 'masteriyo_course_loop_end' ) ) {
 	/**
 	 * Output the end of a course loop. By default this is a UL.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param bool $echo Should echo?.
 	 * @return string
@@ -125,7 +125,7 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 	/**
 	 * Page Title function.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param  bool $echo Should echo title.
 	 * @return string
@@ -159,7 +159,7 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 /**
  * Sets up the masteriyo_loop global from the passed args or from the main query.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @param array $args Args to pass into the global.
  */
 function masteriyo_setup_loop( $args = array() ) {
@@ -229,7 +229,7 @@ function masteriyo_get_default_courses_per_row() {
 /**
  * Get the default rows setting - this is how many course rows will be shown in loops.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @return int
  */
 function masteriyo_get_default_course_rows_per_page() {
@@ -252,7 +252,7 @@ function masteriyo_get_default_course_rows_per_page() {
 /**
  * Sets a property in the masteriyo_loop global.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @param string $prop Prop to set.
  * @param string $value Value to set.
  */
@@ -266,7 +266,7 @@ function masteriyo_set_loop_prop( $prop, $value = '' ) {
 /**
  * Gets a property from the masteriyo_loop global.
  *
- * @since 0.1.0
+ * @since 1.0.0
  * @param string $prop Prop to get.
  * @param string $default Default if the prop does not exist.
  * @return mixed
@@ -303,7 +303,7 @@ function_exists( 'add_action' ) && add_action( 'the_post', 'masteriyo_setup_cour
 /**
  * Add class to the body tag.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param string[] $classes An array of body class names.
  * @param string[] $class   An array of additional class names added to the body.
@@ -326,7 +326,7 @@ if ( ! function_exists( 'masteriyo_template_enroll_button' ) ) {
 	/**
 	 * Show enroll now button.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_template_enroll_button( $course ) {
 		masteriyo_get_template(
@@ -342,7 +342,7 @@ if ( ! function_exists( 'masteriyo_account_sidebar_content' ) ) {
 	/**
 	 * Show sidebar on account page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_account_sidebar_content() {
 		$data = array(
@@ -359,7 +359,7 @@ if ( ! function_exists( 'masteriyo_account_courses_endpoint' ) ) {
 	/**
 	 * Show courses on account page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_account_courses_endpoint() {
 		$query = new UserCourseQuery(
@@ -401,7 +401,7 @@ if ( ! function_exists( 'masteriyo_account_edit_account_endpoint' ) ) {
 	/**
 	 * Edit account on account page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_account_edit_account_endpoint() {
 		$data = array(
@@ -416,7 +416,7 @@ if ( ! function_exists( 'masteriyo_account_view_account_endpoint' ) ) {
 	/**
 	 * View profile on account page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_account_view_account_endpoint() {
 		$data = array(
@@ -431,7 +431,7 @@ if ( ! function_exists( 'masteriyo_account_order_history_endpoint' ) ) {
 	/**
 	 * Show order history on account page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_account_order_history_endpoint() {
 		$orders = masteriyo_get_orders(
@@ -453,7 +453,7 @@ if ( ! function_exists( 'masteriyo_account_view_order_endpoint' ) ) {
 	/**
 	 * Show order detail on account page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_account_view_order_endpoint( $order_id ) {
 		$order       = masteriyo_get_order( $order_id );
@@ -486,7 +486,7 @@ if ( ! function_exists( 'masteriyo_account_main_content' ) ) {
 	/**
 	 * Handle account page's main content.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_account_main_content() {
 		$endpoint         = masteriyo_get_current_account_endpoint();
@@ -529,7 +529,7 @@ if ( ! function_exists( 'masteriyo_single_course_featured_image' ) ) {
 	/**
 	 * Show course featured image.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_featured_image() {
 		global $course;
@@ -547,7 +547,7 @@ if ( ! function_exists( 'masteriyo_single_course_categories' ) ) {
 	/**
 	 * Show course categories.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_categories() {
 		global $course;
@@ -565,7 +565,7 @@ if ( ! function_exists( 'masteriyo_single_course_title' ) ) {
 	/**
 	 * Show course title.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_title() {
 		global $course;
@@ -583,7 +583,7 @@ if ( ! function_exists( 'masteriyo_single_course_author_and_rating' ) ) {
 	/**
 	 * Show course author and rating.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_author_and_rating() {
 		global $course;
@@ -602,7 +602,7 @@ if ( ! function_exists( 'masteriyo_single_course_price_and_enroll_button' ) ) {
 	/**
 	 * Show course price and enroll button.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_price_and_enroll_button() {
 		global $course;
@@ -620,7 +620,7 @@ if ( ! function_exists( 'masteriyo_single_course_stats' ) ) {
 	/**
 	 * Show course stats in single course page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_stats() {
 		global $course;
@@ -642,7 +642,7 @@ if ( ! function_exists( 'masteriyo_single_course_highlights' ) ) {
 	/**
 	 * Show course highlights in single course page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_highlights() {
 		global $course;
@@ -660,7 +660,7 @@ if ( ! function_exists( 'masteriyo_single_course_main_content' ) ) {
 	/**
 	 * Show course main content in single course page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_main_content() {
 		global $course;
@@ -678,7 +678,7 @@ if ( ! function_exists( 'masteriyo_single_course_tab_handles' ) ) {
 	/**
 	 * Show tab handles in single course page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_tab_handles() {
 		global $course;
@@ -696,7 +696,7 @@ if ( ! function_exists( 'masteriyo_single_course_overview' ) ) {
 	/**
 	 * Show course overview in single course page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_overview() {
 		global $course;
@@ -714,7 +714,7 @@ if ( ! function_exists( 'masteriyo_single_course_curriculum' ) ) {
 	/**
 	 * Show course curriculum in single course page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_curriculum() {
 		global $course;
@@ -765,7 +765,7 @@ if ( ! function_exists( 'masteriyo_single_course_reviews' ) ) {
 	/**
 	 * Show course reviews in single course page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_reviews() {
 		global $course;
@@ -791,7 +791,7 @@ if ( ! function_exists( 'masteriyo_single_course_review_form' ) ) {
 	/**
 	 * Show course review form in single course page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_review_form() {
 		global $course;
@@ -809,7 +809,7 @@ if ( ! function_exists( 'masteriyo_checkout_order_summary' ) ) {
 	/**
 	 * Display billing form.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_checkout_order_summary() {
 		$cart = masteriyo( 'cart' );
@@ -847,7 +847,7 @@ if ( ! function_exists( 'masteriyo_checkout_payment' ) ) {
 	/**
 	 * Display checkout form payement.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -876,7 +876,7 @@ if ( ! function_exists( 'masteriyo_display_item_meta' ) ) {
 	/**
 	 * Display item meta data.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  OrderItem $item Order Item.
 	 * @param  array         $args Arguments.
 	 * @return string|void
@@ -921,7 +921,7 @@ if ( ! function_exists( 'masteriyo_archive_navigation' ) ) {
 	/**
 	 * Display course archive navigation.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_archive_navigation() {
 		masteriyo_get_template( 'course-pagination.php' );
@@ -938,7 +938,7 @@ if ( ! function_exists( 'masteriyo_get_course_search_form' ) ) {
 	 *
 	 * The default searchform uses html5.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * @param bool $echo (default: true).
 	 * @return string
 	 */
@@ -975,7 +975,7 @@ if ( ! function_exists( 'masteriyo_course_search_form' ) ) {
 	/**
 	 * Course Search Form.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_course_search_form() {
 		$show_search_box = masteriyo_get_setting( 'course_archive.display.enable_search' );
@@ -997,7 +997,7 @@ if ( ! function_exists( 'masteriyo_email_order_details' ) ) {
 	/**
 	 * Show order details.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_email_order_details( $order, $email = null ) {
 		masteriyo_get_template(
@@ -1014,7 +1014,7 @@ if ( ! function_exists( 'masteriyo_email_order_meta' ) ) {
 	/**
 	 * Show order metas.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_email_order_meta( $order = false ) {
 		$fields = apply_filters( 'masteriyo_email_order_meta_fields', array(), $order );
@@ -1053,7 +1053,7 @@ if ( ! function_exists( 'masteriyo_email_customer_addresses' ) ) {
 	/**
 	 * Show order metas.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_email_customer_addresses( $order, $email = null ) {
 		masteriyo_get_template(
@@ -1074,7 +1074,7 @@ if ( ! function_exists( 'masteriyo_get_email_order_items' ) ) {
 	 * @param array $args Arguments.
 	 *
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -1116,7 +1116,7 @@ if ( ! function_exists( 'masteriyo_the_email_order_items' ) ) {
 	 * @param array $args Arguments.
 	 *
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -1130,7 +1130,7 @@ if ( ! function_exists( 'masteriyo_display_item_meta' ) ) {
 	/**
 	 * Display item meta data.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @param  OrderItem $item Order Item.
 	 * @param  array         $args Arguments.
 	 * @return string|void
@@ -1174,7 +1174,7 @@ if ( ! function_exists( 'masteriyo_single_course_modals' ) ) {
 	/**
 	 * Include modals for the single course page.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	function masteriyo_single_course_modals() {
 		masteriyo_get_template( 'single-course/modals.php' );

@@ -9,7 +9,7 @@ class PostType {
 	/**
 	 * Post slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -18,7 +18,7 @@ class PostType {
 	/**
 	 * An array of labels for this post type. If not set, post labels are inherited for non-hierarchical types and page labels for hierarchical ones.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -27,7 +27,7 @@ class PostType {
 	/**
 	 * Array or string of arguments for registering a post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -36,7 +36,7 @@ class PostType {
 	/**
 	 * Register post type.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -47,7 +47,7 @@ class PostType {
 	/**
 	 * Get label.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $label Label. (e.g. name, singular_name, menu_name, etc )
 	 *
@@ -64,7 +64,7 @@ class PostType {
 	/**
 	 * Get label.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $arg Arguments. (e.g. label, supports, menu_position, etc )
 	 *
@@ -81,7 +81,7 @@ class PostType {
 	/**
 	 * Set label.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $label Label. (e.g. name, singular_name, menu_name, etc )
 	 * @param string $value Label text/value.
@@ -97,7 +97,7 @@ class PostType {
 	/**
 	 * Set arg.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param string $arg Arguments. (e.g. label, supports, menu_position, etc )
 	 * @param string $value Arguments value.
@@ -112,7 +112,7 @@ class PostType {
 	/**
 	 * Get labels.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -123,7 +123,7 @@ class PostType {
 	/**
 	 * Get args.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

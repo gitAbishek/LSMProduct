@@ -2,7 +2,7 @@
 /**
  * Handle checkout form.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @package Masetriyo\Classes
  */
@@ -19,7 +19,7 @@ class CheckoutFormHandler {
 	/**
 	 * Constructor
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'wp_loaded', array( $this, 'checkout' ), 20 );
@@ -28,7 +28,7 @@ class CheckoutFormHandler {
 	/**
 	 * Process checkout form.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */

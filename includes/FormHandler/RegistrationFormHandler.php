@@ -22,7 +22,7 @@ class RegistrationFormHandler {
 	/**
 	 * Handle registration.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	public function process() {
 		try {
@@ -57,7 +57,7 @@ class RegistrationFormHandler {
 	/**
 	 * Set user registration form session.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function set_form_session() {
 		$data    = $this->get_form_data();
@@ -71,7 +71,7 @@ class RegistrationFormHandler {
 	/**
 	 * Register user with submitted detail.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return \WP_Error|boolean
 	 */
@@ -113,7 +113,7 @@ class RegistrationFormHandler {
 	 *
 	 * @param array $data Form data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	protected function validate_form( $data ) {
 		$error = new \WP_Error();
@@ -168,7 +168,7 @@ class RegistrationFormHandler {
 	/**
 	 * Redirect after registration.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @param User $user
 	 */
@@ -188,7 +188,7 @@ class RegistrationFormHandler {
 	/**
 	 * Get the submitted form data.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

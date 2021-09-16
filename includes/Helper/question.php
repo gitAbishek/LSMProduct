@@ -2,14 +2,14 @@
 /**
  * Question functions.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 
 /**
  * Get questions
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param array $args Query arguments.
  *
@@ -24,7 +24,7 @@ function masteriyo_get_questions( $args = array() ) {
 /**
  * Get question.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Question|WP_Post $question Question id or Question Model or Post.
  * @return Question|null
@@ -63,7 +63,7 @@ function masteriyo_get_question( $question ) {
 /**
  * Get the number of questions of a quiz.
  *
- * @since 0.1.0
+ * @since 1.0.0
  *
  * @param int|Question|WP_Post $question Question id or Question Model or Post.
  *

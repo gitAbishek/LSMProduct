@@ -2,7 +2,7 @@
 /**
  * Question post type.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 namespace Masteriyo\PostType;
@@ -11,7 +11,7 @@ class Question extends PostType {
 	/**
 	 * Post slug.
 	 *
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */

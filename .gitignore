@@ -20,9 +20,9 @@ dist/
 .env
 .parcel-cache
 .cache
-i18n/languages/masteriyo.pot
 i18n/languages/*.json
 i18n/languages/*.mo
 i18n/languages/*.po
 i18n/languages/*.po~
+!i18n/languages/masteriyo.pot
 .vscode/launch.json

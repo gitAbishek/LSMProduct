@@ -45,9 +45,6 @@ jobs:
       - name: Compile typescript
         run: yarn build
 
-      - name: Generate pot file.
-        run: composer run makepot
-
       - name: WordPress Plugin Deploy
         uses: 10up/action-wordpress-plugin-deploy@stable
         with:

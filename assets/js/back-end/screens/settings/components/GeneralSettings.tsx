@@ -16,7 +16,11 @@ import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
 import ColorInput from '../../../components/common/ColorInput';
-import { infoIconStyles } from '../../../config/styles';
+import {
+	infoIconStyles,
+	tabListStyles,
+	tabStyles,
+} from '../../../config/styles';
 import { GeneralSettingsMap } from '../../../types';
 
 interface Props {
@@ -30,25 +34,6 @@ const GeneralSettings: React.FC<Props> = (props) => {
 	const [primaryColor, setPrimaryColor] = useState(
 		generalData?.styling?.primary_color || '#787DFF'
 	);
-
-	const tabStyles = {
-		justifyContent: 'flex-start',
-		w: '180px',
-		borderLeft: 0,
-		borderRight: '2px solid',
-		borderRightColor: 'transparent',
-		marginLeft: 0,
-		marginRight: '-2px',
-		pl: 0,
-		fontSize: 'sm',
-		textAlign: 'left',
-	};
-
-	const tabListStyles = {
-		borderLeft: 0,
-		borderRight: '2px solid',
-		borderRightColor: 'gray.200',
-	};
 
 	useEffect(() => {
 		setValue('general.styling.primary_color', primaryColor);

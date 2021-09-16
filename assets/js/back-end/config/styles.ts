@@ -132,3 +132,22 @@ export const navActiveStyles = {
 	borderColor: 'blue.500',
 	color: 'blue.500',
 };
+
+export const tabStyles = {
+	justifyContent: 'flex-start',
+	flex: [null, null, '0 0 180px'],
+	borderLeft: 0,
+	borderRight: '2px solid',
+	borderRightColor: 'transparent',
+	marginLeft: 0,
+	marginRight: '-2px',
+	pl: 0,
+	fontSize: ['xs', null, 'sm'],
+	textAlign: 'left',
+};
+
+export const tabListStyles = {
+	borderLeft: 0,
+	borderRight: '2px solid',
+	borderRightColor: 'gray.200',
+};

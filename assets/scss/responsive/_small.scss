@@ -44,6 +44,13 @@
 			border-right: none;
 		}
 	}
+
+	.masteriyo-mycourses {
+		&--card {
+			flex-basis: calc((100% / 2) - 30px);
+			max-width: 100%;
+		}
+	}
 }
 
 // X-Small devices (portrait phones, less than 576px)
@@ -136,6 +143,13 @@
 		&--pbar {
 			flex-basis: 100%;
 			margin: 0;
+		}
+	}
+
+	.masteriyo-mycourses {
+		&--card {
+			flex-basis: 100%;
+			max-width: 100%;
 		}
 	}
 }

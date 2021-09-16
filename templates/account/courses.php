@@ -116,25 +116,29 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 						</a>
 					<div class="masteriyo-mycourses--detail">
 						<div class="masteriyo-mycourses--header">
-							<div class="masteriyo-mycourses--rt">
-								<span class="masteriyo-mycourses--rating masteriyo-icon-svg">
-									<?php masteriyo_render_stars( $course->get_average_rating() ); ?>
-								</span>
-
+							<div class="masteriyo-course--content__category">
 								<?php foreach ( $course->get_categories() as $category ) : ?>
-								<a href="<?php echo esc_url( $category->get_permalink() ); ?>" title="<?php echo esc_attr( $category->get_name() ); ?>">
+									<a href="<?php echo esc_url( $category->get_permalink() ); ?>" title="<?php echo esc_attr( $category->get_name() ); ?>">
 									<span class="masteriyo-badge masteriyo-mycourses--tag ">
 										<?php echo esc_html( $category->get_name() ); ?>
 									</span>
 								</a>
 								<?php endforeach; ?>
 							</div>
-							<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">
-								<h3 class="masteriyo-mycourses--header--title">
+
+							<h3 class="masteriyo-mycourses--header--title">
+								<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">
 									<?php echo esc_html( $course->get_name() ); ?>
-								</h3>
-							</a>
+								</a>
+							</h3>
+
+							<div class="masteriyo-mycourses--rt">
+								<span class="masteriyo-mycourses--rating masteriyo-icon-svg">
+									<?php masteriyo_render_stars( $course->get_average_rating() ); ?>
+								</span>
+							</div>
 						</div>
+
 						<div class="masteriyo-mycourses--body">
 							<div class="masteriyo-mycourses--body--duration masteriyo-flex masteriyo-flex--space-between ">
 								<div class="masteriyo-time-wrap">

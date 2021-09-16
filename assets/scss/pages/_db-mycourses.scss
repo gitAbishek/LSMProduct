@@ -1,13 +1,12 @@
-.masteriyo-mycourses {
-	&--title {
-		margin-bottom: $spacing_30px;
-	}
-}
-
 // Courses list
 .masteriyo-mycourses {
 	a {
 		display: block;
+	}
+
+	&--title {
+		font-size: 24px;
+		margin-bottom: $spacing_20px;
 	}
 
 	&--list {
@@ -52,6 +51,7 @@
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
+		margin-top: $spacing_8px;
 	}
 
 	&--detail {
@@ -63,8 +63,6 @@
 	&--header--title {
 		font-size: 18px;
 		font-weight: 700;
-		margin: $spacing_16px 0 0;
-		padding-top: $spacing_14px;
 	}
 
 	// Course list body

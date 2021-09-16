@@ -222,6 +222,10 @@
 			justify-content: space-between;
 		}
 
+		&--header {
+			max-width: 245px;
+		}
+
 		&--img-title {
 			display: flex;
 			flex-direction: row;
@@ -229,6 +233,9 @@
 		}
 
 		&--tag {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 4px;
 			margin-bottom: $spacing_4px;
 		}
 

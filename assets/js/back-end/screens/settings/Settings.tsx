@@ -49,8 +49,6 @@ const Settings = () => {
 
 	const tabStyles = {
 		fontWeight: 'medium',
-		fontSize: 'sm',
-		py: '4',
 	};
 
 	const tabPanelStyles = {
@@ -105,19 +103,68 @@ const Settings = () => {
 					</Header>
 
 					<Container maxW="container.xl">
-						<Box bg="white" p="10" shadow="box">
+						<Box bg="white" p={['4', null, '10']} shadow="box">
 							<Tabs>
-								<TabList justifyContent="center" borderBottom="1px">
-									<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
-									<Tab sx={tabStyles}>{__('Courses Page', 'masteriyo')}</Tab>
-									<Tab sx={tabStyles}>
+								<TabList
+									justifyContent="center"
+									borderBottom="1px"
+									flexWrap="wrap">
+									<Tab
+										sx={tabStyles}
+										py={['2', '4']}
+										fontSize={['xs', null, 'sm']}
+										px={['1', '2', '4']}>
+										{__('General', 'masteriyo')}
+									</Tab>
+									<Tab
+										sx={tabStyles}
+										py={['2', '4']}
+										fontSize={['xs', null, 'sm']}
+										px={['1', '2', '4']}>
+										{__('Courses Page', 'masteriyo')}
+									</Tab>
+									<Tab
+										sx={tabStyles}
+										py={['2', '4']}
+										fontSize={['xs', null, 'sm']}
+										px={['1', '2', '4']}>
 										{__('Single Course Page', 'masteriyo')}
 									</Tab>
-									<Tab sx={tabStyles}>{__('Learn Page', 'masteriyo')}</Tab>
-									<Tab sx={tabStyles}>{__('Payments', 'masteriyo')}</Tab>
-									<Tab sx={tabStyles}>{__('Quiz', 'masteriyo')}</Tab>
-									<Tab sx={tabStyles}>{__('Emails', 'masteriyo')}</Tab>
-									<Tab sx={tabStyles}>{__('Advanced', 'masteriyo')}</Tab>
+									<Tab
+										sx={tabStyles}
+										py={['2', '4']}
+										fontSize={['xs', null, 'sm']}
+										px={['1', '2', '4']}>
+										{__('Learn Page', 'masteriyo')}
+									</Tab>
+									<Tab
+										sx={tabStyles}
+										py={['2', '4']}
+										fontSize={['xs', null, 'sm']}
+										px={['1', '2', '4']}>
+										{__('Payments', 'masteriyo')}
+									</Tab>
+									<Tab
+										sx={tabStyles}
+										py={['2', '4']}
+										fontSize={['xs', null, 'sm']}
+										px={['1', '2', '4']}>
+										{__('Quiz', 'masteriyo')}
+									</Tab>
+									<Tab
+										sx={tabStyles}
+										py={['2', '4']}
+										fontSize={['xs', null, 'sm']}
+										px={['1', null]}>
+										{__('Emails', 'masteriyo')}
+									</Tab>
+									<Tab
+										sx={tabStyles}
+										py={['2', '4']}
+										fontSize={['xs', null, 'sm']}
+										px={['1', null]}>
+										{__('Advanced', 'masteriyo')}
+									</Tab>
 								</TabList>
 
 								<form onSubmit={methods.handleSubmit(onSubmit)}>

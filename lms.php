@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Masteriyo - LMS for WordPress
- * Plugin URI: https://masteriyo.com/learning-management-system/
+ * Plugin URI: https://masteriyo.com/wordpress-lms/
  * Description: A Complete WordPress LMS plugin to create and sell online courses in no time.
  * Author: Masteriyo
  * Author URI: https://masteriyo.com

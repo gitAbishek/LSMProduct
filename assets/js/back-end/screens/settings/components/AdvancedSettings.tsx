@@ -27,32 +27,17 @@ import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
 import { useQuery } from 'react-query';
-import { infoIconStyles } from '../../../config/styles';
+import {
+	infoIconStyles,
+	tabListStyles,
+	tabStyles,
+} from '../../../config/styles';
 import { AdvancedSettingsMap, SetttingsMap } from '../../../types';
 import PagesAPI from '../../../utils/pages';
 
 interface Props {
 	advanceData?: AdvancedSettingsMap;
 }
-
-const tabStyles = {
-	justifyContent: 'flex-start',
-	w: '180px',
-	borderLeft: 0,
-	borderRight: '2px solid',
-	borderRightColor: 'transparent',
-	marginLeft: 0,
-	marginRight: '-2px',
-	pl: 0,
-	fontSize: 'sm',
-	textAlign: 'left',
-};
-
-const tabListStyles = {
-	borderLeft: 0,
-	borderRight: '2px solid',
-	borderRightColor: 'gray.200',
-};
 
 //@ts-ignore
 const coursesSlug = window._MASTERIYO_.pageSlugs.courses;
@@ -112,7 +97,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 						) : (
 							<Stack direction="column" spacing="8">
 								<FormControl>
-									<FormLabel minW="2xs">
+									<FormLabel>
 										{__('Courses Page', 'masteriyo')}
 										<Tooltip
 											label={__(
@@ -135,7 +120,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								</FormControl>
 
 								<FormControl>
-									<FormLabel minW="2xs">
+									<FormLabel>
 										{__('Learn Page', 'masteriyo')}
 										<Tooltip
 											label={__(
@@ -158,7 +143,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								</FormControl>
 
 								<FormControl>
-									<FormLabel minW="2xs">
+									<FormLabel>
 										{__('Account Page', 'masteriyo')}
 										<Tooltip
 											label={__(
@@ -181,7 +166,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								</FormControl>
 
 								<FormControl>
-									<FormLabel minW="2xs">
+									<FormLabel>
 										{__('Checkout Page', 'masteriyo')}
 										<Tooltip
 											label={__(
@@ -204,7 +189,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								</FormControl>
 
 								<FormControl>
-									<FormLabel minW="2xs">
+									<FormLabel>
 										{__('Terms and Conditions Page', 'masteriyo')}
 										<Tooltip
 											label={__(
@@ -231,7 +216,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 					<TabPanel>
 						<Stack direction="column" spacing="8">
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Course Category Base', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -259,7 +244,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Course Difficulty Base', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -288,7 +273,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 
 							<FormControl>
 								<Stack direction="row">
-									<FormLabel minW="2xs">
+									<FormLabel>
 										{__('Single Course Permalink', 'masteriyo')}
 										<Tooltip
 											label={__(
@@ -332,7 +317,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Single Section Permalink', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -362,7 +347,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Single Lesson Permalink', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -392,7 +377,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Single Quiz Permalink', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -431,7 +416,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								)}
 							</Text>
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Orders', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -453,7 +438,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('View Order', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -475,7 +460,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('My Courses', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -497,7 +482,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Edit Account', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -519,7 +504,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Payment Methods', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -541,7 +526,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Lost Password', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -563,7 +548,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Logout', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -595,7 +580,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</Text>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Pay', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -617,7 +602,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Order Recieved', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -639,7 +624,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Add Payment Method', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -661,7 +646,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Delete Payment Method', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -683,7 +668,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Set Default Payment Method', 'masteriyo')}
 									<Tooltip
 										label={__(

@@ -22,6 +22,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import { tabListStyles, tabStyles } from '../../../config/styles';
 import { QuizSchema as QuizSchemaOld } from '../../../schemas';
 import { convertMinutesToHours } from '../../../utils/math';
 
@@ -46,25 +47,6 @@ const QuizSettings: React.FC<Props> = (props) => {
 	const [displayValue, setDisplayValue] = useState(
 		quizData?.questions_display_per_page != 0 ? '1' : '0'
 	);
-
-	const tabStyles = {
-		justifyContent: 'flex-start',
-		w: '180px',
-		borderLeft: 0,
-		borderRight: '2px solid',
-		borderRightColor: 'transparent',
-		marginLeft: 0,
-		marginRight: '-2px',
-		pl: 0,
-		fontSize: 'sm',
-		textAlign: 'left',
-	};
-
-	const tabListStyles = {
-		borderLeft: 0,
-		borderRight: '2px solid',
-		borderRightColor: 'gray.200',
-	};
 
 	return (
 		<Tabs orientation="vertical">

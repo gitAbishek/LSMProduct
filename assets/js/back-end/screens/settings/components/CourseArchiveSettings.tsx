@@ -22,7 +22,11 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
-import { infoIconStyles } from '../../../config/styles';
+import {
+	infoIconStyles,
+	tabListStyles,
+	tabStyles,
+} from '../../../config/styles';
 import { CourseArchiveSettingsMap } from '../../../types';
 
 interface Props {
@@ -36,25 +40,6 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 		formState: { errors },
 	} = useFormContext();
 
-	const tabStyles = {
-		justifyContent: 'flex-start',
-		w: '180px',
-		borderLeft: 0,
-		borderRight: '2px solid',
-		borderRightColor: 'transparent',
-		marginLeft: 0,
-		marginRight: '-2px',
-		pl: 0,
-		fontSize: 'sm',
-		textAlign: 'left',
-	};
-
-	const tabListStyles = {
-		borderLeft: 0,
-		borderRight: '2px solid',
-		borderRightColor: 'gray.200',
-	};
-
 	return (
 		<Tabs orientation="vertical">
 			<Stack direction="row" flex="1">
@@ -66,7 +51,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 						<Stack direction="column" spacing="8">
 							<FormControl>
 								<Stack direction="row" spacing="4">
-									<FormLabel minW="2xs">
+									<FormLabel>
 										{__('Show/Hide Search', 'masteriyo')}
 										<Tooltip
 											label={__(
@@ -89,7 +74,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 
 							<FormControl
 								isInvalid={!!errors?.course_archive?.display?.per_page}>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Course Per Page', 'masteriyo')}
 									<Tooltip
 										label={__(
@@ -125,7 +110,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 
 							<FormControl
 								isInvalid={!!errors?.course_archive?.display?.per_row}>
-								<FormLabel minW="2xs">
+								<FormLabel>
 									{__('Course Per Row', 'masteriyo')}
 									<Tooltip
 										label={__(

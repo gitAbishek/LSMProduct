@@ -16,7 +16,11 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
-import { infoIconStyles } from '../../../config/styles';
+import {
+	infoIconStyles,
+	tabListStyles,
+	tabStyles,
+} from '../../../config/styles';
 import { SingleCourseSettingsMap } from '../../../types';
 
 interface Props {
@@ -26,25 +30,6 @@ interface Props {
 const SingleCourseSettings: React.FC<Props> = (props) => {
 	const { singleCourseData } = props;
 	const { register } = useFormContext();
-
-	const tabStyles = {
-		justifyContent: 'flex-start',
-		w: '180px',
-		borderLeft: 0,
-		borderRight: '2px solid',
-		borderRightColor: 'transparent',
-		marginLeft: 0,
-		marginRight: '-2px',
-		pl: 0,
-		fontSize: 'sm',
-		textAlign: 'left',
-	};
-
-	const tabListStyles = {
-		borderLeft: 0,
-		borderRight: '2px solid',
-		borderRightColor: 'gray.200',
-	};
 
 	return (
 		<Tabs orientation="vertical">
@@ -57,7 +42,7 @@ const SingleCourseSettings: React.FC<Props> = (props) => {
 						<Stack direction="column" spacing="8">
 							<FormControl>
 								<Stack direction="row" spacing="4">
-									<FormLabel minW="2xs">
+									<FormLabel>
 										{__('Enable Review', 'masteriyo')}
 										<Tooltip
 											label={__(

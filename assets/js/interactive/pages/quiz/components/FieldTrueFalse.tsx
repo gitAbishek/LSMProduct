@@ -4,7 +4,7 @@ import {
 	FormErrorMessage,
 	Radio,
 	RadioGroup,
-	Stack,
+	SimpleGrid,
 	Text,
 } from '@chakra-ui/react';
 import React from 'react';
@@ -29,7 +29,7 @@ const FieldTrueFalse: React.FC<Props> = (props) => {
 					name={questionId}
 					render={({ field }) => (
 						<RadioGroup {...field}>
-							<Stack direction="row" spacing="4">
+							<SimpleGrid spacing="4" columns={[1, 2, 3, 4]}>
 								{answers.map((answer: SingleChoiceSchema, index: number) => (
 									<Flex
 										key={index}
@@ -47,7 +47,7 @@ const FieldTrueFalse: React.FC<Props> = (props) => {
 										<Radio value={answer.name}></Radio>
 									</Flex>
 								))}
-							</Stack>
+							</SimpleGrid>
 						</RadioGroup>
 					)}
 				/>

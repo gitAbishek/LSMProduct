@@ -29,7 +29,7 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 					name={questionId}
 					render={({ field: { onChange, value } }) => (
 						<CheckboxGroup onChange={onChange} value={value}>
-							<SimpleGrid spacing="4" columns={4}>
+							<SimpleGrid spacing="4" columns={[1, 2, 3, 4]}>
 								{answers.map((answer: SingleChoiceSchema, index: number) => (
 									<Flex
 										key={index}

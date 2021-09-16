@@ -78,16 +78,18 @@ const InteractiveQuiz = () => {
 	if (quizQuery.isSuccess) {
 		return (
 			<Container centerContent maxW="container.xl" py="16">
-				<Box bg="white" p="14" shadow="box" w="full">
+				<Box bg="white" p={['5', null, '14']} shadow="box" w="full">
 					<FormProvider {...methods}>
 						<form onSubmit={methods.handleSubmit(onSubmit)}>
 							<Stack direction="column" spacing="8">
 								<Heading as="h5">{quizQuery?.data?.name}</Heading>
-								<Text
-									dangerouslySetInnerHTML={{
-										__html: quizQuery?.data?.description,
-									}}
-								/>
+								{quizQuery?.data?.description && (
+									<Text
+										dangerouslySetInnerHTML={{
+											__html: quizQuery?.data?.description,
+										}}
+									/>
+								)}
 
 								{quizStartedOn ? (
 									<QuizFields

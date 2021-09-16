@@ -161,6 +161,10 @@ function runComposerInBuild() {
 	return exec('cd build && composer install --no-dev --optimize-autoloader');
 }
 
+function makePotFile() {
+	return exec('composer run makepot');
+}
+
 function compressBuildWithoutVersion() {
 	return src('build/**/*')
 		.pipe(zip(`${pkg.name}.zip`))
@@ -181,8 +185,7 @@ const build = series(
 	removeBuild,
 	compileAssets,
 	renameBackendAssets,
-	parallel(copyToBuild),
-	runComposerInBuild
+	makePotFile
 );
 const dev = series(
 	removePreviousMinifiedAssets,
@@ -192,6 +195,8 @@ const dev = series(
 const release = series(
 	removeRelease,
 	build,
+	parallel(copyToBuild),
+	runComposerInBuild,
 	parallel(compressBuildWithVersion, compressBuildWithoutVersion)
 );
 

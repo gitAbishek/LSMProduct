@@ -69,7 +69,7 @@ const Header: React.FC<Props> = (props) => {
 	const buttonSize = useBreakpointValue(['sm', 'md']);
 	const [isDesktop] = useMediaQuery('(min-width: 48em)');
 	return (
-		<Box bg="white" w="full" shadow="header" pb={['3', '3', 0]}>
+		<Box bg="white" w="full" shadow="header" pb={['3', 0, 0]}>
 			<Container maxW="container.xl">
 				<Stack
 					direction={['column', 'row']}
@@ -80,7 +80,7 @@ const Header: React.FC<Props> = (props) => {
 						spacing={['3', null, '8']}
 						align="center"
 						minHeight="16">
-						<Box d={['none', 'block']}>
+						<Box d={['none', null, 'block']}>
 							<NavLink to={routes.courses.list}>
 								<Image src={Logo} w="36px" />
 							</NavLink>

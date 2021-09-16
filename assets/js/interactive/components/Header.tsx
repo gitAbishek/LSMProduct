@@ -22,6 +22,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiChevronDown, BiInfoCircle } from 'react-icons/bi';
+import MobileHidden from '../../back-end/components/common/MobileHidden';
 import { Polygon } from '../../back-end/constants/images';
 import { CourseProgressSummaryMap } from '../schemas';
 import AvatarMenu from './AvatarMenu';
@@ -90,7 +91,7 @@ const Header: React.FC<Props> = (props) => {
 							justifyContent="space-between">
 							<Box w="165px">
 								{'' != logoData ? (
-									<Image src={logoData[0]} height="36px" />
+									<Image src={logoData[0]} width="36px" />
 								) : (
 									<Text textAlign="center">{siteTitle}</Text>
 								)}
@@ -125,143 +126,148 @@ const Header: React.FC<Props> = (props) => {
 												{__('Complete', 'masteriyo')}
 											</Text>
 										</Stack>
-										<Stack
-											direction="row"
-											fontSize="xs"
-											fontWeight="medium"
-											color="gray.600">
-											<Text>
-												{summary.total.pending}/
-												{summary.total.completed + summary.total.pending}
-												{__(' Completed', 'masteriyo')} |{' '}
-											</Text>
-											<Text>
-												{summary.lesson.pending}{' '}
-												{__('lessons left', 'masteriyo')} |{' '}
-											</Text>
-											<Text>
-												{summary.quiz.pending} {__('quiz left', 'masteriyo')}
-											</Text>
-											<Popover
-												isOpen={isProgressOpen}
-												onClose={onProgressClose}
-												onOpen={onProgressOpen}>
-												<PopoverTrigger>
-													<IconButton
-														py="0"
-														minW="0"
-														variant="link"
-														minH="auto"
-														icon={<BiInfoCircle />}
-														aria-label="open progress"
-													/>
-												</PopoverTrigger>
-												<PopoverContent p="6" w="240px">
-													<PopoverArrow />
-													<List>
-														<ListItem
-															borderBottom="1px"
-															borderColor="gray.100"
-															pb="6">
-															<Stack direction="row" spacing="2">
-																<CircularProgress
-																	value={Math.round(
-																		(summary.lesson.completed /
-																			(summary.lesson.pending +
-																				summary.lesson.completed)) *
-																			100
-																	)}
-																	size="54px"
-																	capIsRound
-																	trackColor="blue.100"
-																	color="blue.500">
-																	<CircularProgressLabel fontWeight="bold">
-																		{Math.round(
+										<MobileHidden>
+											<Stack
+												direction="row"
+												fontSize="xs"
+												fontWeight="medium"
+												color="gray.600">
+												<Text>
+													{summary.total.pending}/
+													{summary.total.completed + summary.total.pending}
+													{__(' Completed', 'masteriyo')} |{' '}
+												</Text>
+
+												<Text>
+													{summary.lesson.pending}{' '}
+													{__('lessons left', 'masteriyo')} |{' '}
+												</Text>
+
+												<Text>
+													{summary.quiz.pending} {__('quiz left', 'masteriyo')}
+												</Text>
+
+												<Popover
+													isOpen={isProgressOpen}
+													onClose={onProgressClose}
+													onOpen={onProgressOpen}>
+													<PopoverTrigger>
+														<IconButton
+															py="0"
+															minW="0"
+															variant="link"
+															minH="auto"
+															icon={<BiInfoCircle />}
+															aria-label="open progress"
+														/>
+													</PopoverTrigger>
+													<PopoverContent p="6" w="240px">
+														<PopoverArrow />
+														<List>
+															<ListItem
+																borderBottom="1px"
+																borderColor="gray.100"
+																pb="6">
+																<Stack direction="row" spacing="2">
+																	<CircularProgress
+																		value={Math.round(
 																			(summary.lesson.completed /
 																				(summary.lesson.pending +
 																					summary.lesson.completed)) *
 																				100
 																		)}
-																		{__('%', 'masteriyo')}
-																	</CircularProgressLabel>
-																</CircularProgress>
-																<Stack direction="column" spacing="1">
-																	<Text
-																		textTransform="uppercase"
-																		fontSize="x-small"
-																		color="gray.500"
-																		fontWeight="bold">
-																		{__('Lesson', 'masteriyo')}
-																	</Text>
-																	<Text
-																		fontSize="x-small"
-																		fontWeight="bold"
+																		size="54px"
+																		capIsRound
+																		trackColor="blue.100"
 																		color="blue.500">
-																		{summary.lesson.completed}
-																		{__(' Completed', 'masteriyo')}
-																	</Text>
-																	<Text
-																		fontSize="x-small"
-																		fontWeight="bold"
-																		color="gray.700">
-																		{summary.lesson.pending}
-																		{__(' Left', 'masteriyo')}
-																	</Text>
+																		<CircularProgressLabel fontWeight="bold">
+																			{Math.round(
+																				(summary.lesson.completed /
+																					(summary.lesson.pending +
+																						summary.lesson.completed)) *
+																					100
+																			)}
+																			{__('%', 'masteriyo')}
+																		</CircularProgressLabel>
+																	</CircularProgress>
+																	<Stack direction="column" spacing="1">
+																		<Text
+																			textTransform="uppercase"
+																			fontSize="x-small"
+																			color="gray.500"
+																			fontWeight="bold">
+																			{__('Lesson', 'masteriyo')}
+																		</Text>
+																		<Text
+																			fontSize="x-small"
+																			fontWeight="bold"
+																			color="blue.500">
+																			{summary.lesson.completed}
+																			{__(' Completed', 'masteriyo')}
+																		</Text>
+																		<Text
+																			fontSize="x-small"
+																			fontWeight="bold"
+																			color="gray.700">
+																			{summary.lesson.pending}
+																			{__(' Left', 'masteriyo')}
+																		</Text>
+																	</Stack>
 																</Stack>
-															</Stack>
-														</ListItem>
-														<ListItem pt="6">
-															<Stack direction="row" spacing="2">
-																<CircularProgress
-																	value={Math.round(
-																		(summary.quiz.completed /
-																			(summary.quiz.pending +
-																				summary.quiz.completed)) *
-																			100
-																	)}
-																	size="54px"
-																	capIsRound
-																	trackColor="gray.100"
-																	color="blue.500">
-																	<CircularProgressLabel fontWeight="bold">
-																		{Math.round(
+															</ListItem>
+															<ListItem pt="6">
+																<Stack direction="row" spacing="2">
+																	<CircularProgress
+																		value={Math.round(
 																			(summary.quiz.completed /
 																				(summary.quiz.pending +
 																					summary.quiz.completed)) *
 																				100
 																		)}
-																		{__('%', 'masteriyo')}
-																	</CircularProgressLabel>
-																</CircularProgress>
-																<Stack direction="column" spacing="1">
-																	<Text
-																		textTransform="uppercase"
-																		fontSize="x-small"
-																		color="gray.500"
-																		fontWeight="bold">
-																		{__('Quiz', 'masteriyo')}
-																	</Text>
-																	<Text
-																		fontSize="x-small"
-																		fontWeight="bold"
+																		size="54px"
+																		capIsRound
+																		trackColor="gray.100"
 																		color="blue.500">
-																		{summary.quiz.completed}
-																		{__(' Completed', 'masteriyo')}
-																	</Text>
-																	<Text
-																		fontSize="x-small"
-																		fontWeight="bold"
-																		color="gray.700">
-																		{summary.quiz.pending}
-																		{__(' Left', 'masteriyo')}
-																	</Text>
+																		<CircularProgressLabel fontWeight="bold">
+																			{Math.round(
+																				(summary.quiz.completed /
+																					(summary.quiz.pending +
+																						summary.quiz.completed)) *
+																					100
+																			)}
+																			{__('%', 'masteriyo')}
+																		</CircularProgressLabel>
+																	</CircularProgress>
+																	<Stack direction="column" spacing="1">
+																		<Text
+																			textTransform="uppercase"
+																			fontSize="x-small"
+																			color="gray.500"
+																			fontWeight="bold">
+																			{__('Quiz', 'masteriyo')}
+																		</Text>
+																		<Text
+																			fontSize="x-small"
+																			fontWeight="bold"
+																			color="blue.500">
+																			{summary.quiz.completed}
+																			{__(' Completed', 'masteriyo')}
+																		</Text>
+																		<Text
+																			fontSize="x-small"
+																			fontWeight="bold"
+																			color="gray.700">
+																			{summary.quiz.pending}
+																			{__(' Left', 'masteriyo')}
+																		</Text>
+																	</Stack>
 																</Stack>
-															</Stack>
-														</ListItem>
-													</List>
-												</PopoverContent>
-											</Popover>
-										</Stack>
+															</ListItem>
+														</List>
+													</PopoverContent>
+												</Popover>
+											</Stack>
+										</MobileHidden>
 									</Stack>
 									<Progress
 										value={summary.total.completed}

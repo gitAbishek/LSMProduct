@@ -51,9 +51,13 @@ jobs:
           yarn prettier
 
       - name: Build the application
-        run: |
-          yarn build
-          yarn release
+        run: yarn build
+
+       - name: Generate pot file.
+        run: composer run makepot
+
+      - name: Build the application
+        run: yarn release
 
       - name: Deploy to staging server
         uses: wlixcc/SFTP-Deploy-Action@v1.0

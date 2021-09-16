@@ -14,6 +14,7 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiCheck, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
+import MobileHidden from '../../back-end/components/common/MobileHidden';
 import { ContentNavigationSchema } from '../schemas';
 import { getNavigationRoute } from './FloatingNavigation';
 
@@ -108,31 +109,32 @@ const ContentNav: React.FC<Props> = (props) => {
 							: __('Mark as Complete', 'masteriyo')}
 					</Button>
 				)}
-
-				<Box minW="200px">
-					{navigation?.next && (
-						<Link
-							as={RouterLink}
-							to={getNavigationRoute(
-								navigation?.next?.id,
-								navigation?.next?.type,
-								courseId
-							)}
-							sx={navLinkStyles}>
-							<HStack spacing="4" justify="flex-end">
-								<Stack direction="column" spacing="0">
-									<Text fontSize="xs" color="gray.500">
-										Next
-									</Text>
-									<Heading fontSize="xs">{navigation?.next.name}</Heading>
-								</Stack>
-								<Center sx={cirlceStyles}>
-									<Icon as={BiChevronRight} />
-								</Center>
-							</HStack>
-						</Link>
-					)}
-				</Box>
+				<MobileHidden>
+					<Box minW="200px">
+						{navigation?.next && (
+							<Link
+								as={RouterLink}
+								to={getNavigationRoute(
+									navigation?.next?.id,
+									navigation?.next?.type,
+									courseId
+								)}
+								sx={navLinkStyles}>
+								<HStack spacing="4" justify="flex-end">
+									<Stack direction="column" spacing="0">
+										<Text fontSize="xs" color="gray.500">
+											Next
+										</Text>
+										<Heading fontSize="xs">{navigation?.next.name}</Heading>
+									</Stack>
+									<Center sx={cirlceStyles}>
+										<Icon as={BiChevronRight} />
+									</Center>
+								</HStack>
+							</Link>
+						)}
+					</Box>
+				</MobileHidden>
 			</ButtonGroup>
 		</Box>
 	);

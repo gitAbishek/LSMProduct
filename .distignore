@@ -4,8 +4,8 @@ Thumbs.db
 behat.yml
 bitbucket-pipelines.yml
 bin
-build
-release
+/build
+/release
 composer.json
 composer.lock
 dependencies.yml

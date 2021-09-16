@@ -3,7 +3,6 @@ import {
 	Button,
 	ButtonGroup,
 	Container,
-	Flex,
 	Heading,
 	Image,
 	Link,
@@ -70,17 +69,22 @@ const Header: React.FC<Props> = (props) => {
 	const buttonSize = useBreakpointValue(['sm', 'md']);
 	const [isDesktop] = useMediaQuery('(min-width: 48em)');
 	return (
-		<Box bg="white" w="full" shadow="header">
-			<Container maxW="container.xl" bg="white">
-				<Flex direction="row" justifyContent="space-between" align="center">
+		<Box bg="white" w="full" shadow="header" pb={['3', '3', 0]}>
+			<Container maxW="container.xl">
+				<Stack
+					direction={['column', 'row']}
+					justifyContent="space-between"
+					align="center">
 					<Stack
-						direction="row"
+						direction={['column', null, 'row']}
 						spacing={['3', null, '8']}
 						align="center"
 						minHeight="16">
-						<NavLink to={routes.courses.list}>
-							<Image src={Logo} w="36px" d={['none', 'block']} />
-						</NavLink>
+						<Box d={['none', 'block']}>
+							<NavLink to={routes.courses.list}>
+								<Image src={Logo} w="36px" />
+							</NavLink>
+						</Box>
 						{showCourseName && (
 							<>
 								{course && (
@@ -187,7 +191,7 @@ const Header: React.FC<Props> = (props) => {
 							</Button>
 						)}
 					</ButtonGroup>
-				</Flex>
+				</Stack>
 			</Container>
 		</Box>
 	);

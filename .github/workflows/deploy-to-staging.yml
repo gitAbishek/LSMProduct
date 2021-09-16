@@ -53,7 +53,7 @@ jobs:
       - name: Build the application
         run: yarn build
 
-       - name: Generate pot file.
+      - name: Generate pot file.
         run: composer run makepot
 
       - name: Generate zip of the application.

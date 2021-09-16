@@ -52,6 +52,7 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.MASTERIYO_SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.MASTERIYO_SVN_PASSWORD }}
+          SLUG: learning-management-system
 
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
@@ -60,5 +61,5 @@ jobs:
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: ${{ steps.deploy.outputs.zip-path }}
-          asset_name: ${{ github.event.repository.name }}.zip
+          asset_name: learning-management-system.zip
           asset_content_type: application/zip

@@ -16,11 +16,11 @@ const EditCourse: React.FC<Props> = (props) => {
 
 	return (
 		<form>
-			<Stack direction="row" spacing="8">
+			<Stack direction={['column', null, 'row']} spacing="8">
 				<Box
 					flex="1"
 					bg="white"
-					p="10"
+					p={['4', null, '10']}
 					shadow="box"
 					d="flex"
 					flexDirection="column"
@@ -30,7 +30,7 @@ const EditCourse: React.FC<Props> = (props) => {
 						<Description defaultValue={courseData?.description} />
 					</Stack>
 				</Box>
-				<Box w="400px" bg="white" p="10" shadow="box">
+				<Box w="400px" bg="white" p={['4', null, '10']} shadow="box">
 					<Stack direction="column" spacing="6">
 						<Hightlights defaultValue={courseData?.highlights} />
 

@@ -132,7 +132,7 @@ class PdtHandler extends Response {
 				if ( 'authorization' === $transaction_result['pending_reason'] ) {
 					$this->payment_on_hold( $order, __( 'Payment authorized. Change payment status to processing or complete to capture funds.', 'masteriyo' ) );
 				} else {
-					/* translators: 1: Pending reason */
+					/* translators: %s: Pending reason. */
 					$this->payment_on_hold( $order, sprintf( __( 'Payment pending (%s).', 'masteriyo' ), $transaction_result['pending_reason'] ) );
 				}
 			}

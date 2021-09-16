@@ -416,6 +416,10 @@ class ScriptStyle {
 				self::enqueue_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
 			}
 		}
+
+		if ( function_exists( 'wp_set_script_translations' ) ) {
+			wp_set_script_translations( 'masteriyo-learn', 'masteriyo', Constants::get( 'MASTERIYO_LANGUAGES' ) );
+		}
 	}
 
 	/**

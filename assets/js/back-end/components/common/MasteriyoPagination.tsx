@@ -90,10 +90,10 @@ const MasteriyoPagination: React.FC<Props> = (props) => {
 		<Stack
 			mt="8"
 			w="full"
-			direction="row"
+			direction={['column', null, 'row']}
 			justifyContent="space-between"
 			pb="4"
-			fontSize="sm">
+			fontSize={['xs', null, 'sm']}>
 			<Text color="gray.500">
 				{__(
 					`Showing ${displayCurrentPageLowest} - 

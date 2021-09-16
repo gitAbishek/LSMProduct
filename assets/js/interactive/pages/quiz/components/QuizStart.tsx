@@ -57,8 +57,8 @@ const QuizStart: React.FC<Props> = (props) => {
 				bg="blue.500"
 				rounded="sm"
 				d="flex"
-				flexDirection="row"
-				alignItems="center"
+				flexDirection={['column', null, 'row']}
+				alignItems={[null, null, 'center']}
 				py="3"
 				color="white"
 				fontSize="xs">

@@ -16,6 +16,7 @@ import {
 	BiChevronRight,
 } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
+import MobileHidden from '../../back-end/components/common/MobileHidden';
 import routes from '../constants/routes';
 import { ContentNavigationSchema } from '../schemas';
 
@@ -122,7 +123,7 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 			)}
 
 			{navigation?.next && (
-				<>
+				<MobileHidden>
 					<Box
 						bg="white"
 						shadow="box"
@@ -180,7 +181,7 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						_hover={{ color: 'blue.500' }}>
 						<Icon as={BiChevronRight} fontSize="5rem" />
 					</Link>
-				</>
+				</MobileHidden>
 			)}
 		</>
 	);

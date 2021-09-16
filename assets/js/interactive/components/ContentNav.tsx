@@ -60,31 +60,36 @@ const ContentNav: React.FC<Props> = (props) => {
 
 	return (
 		<Box as="nav" w="full" p="6">
-			<ButtonGroup d="flex" justifyContent="space-between" alignItems="center">
-				<Box minW="200px">
-					{navigation?.previous && (
-						<Link
-							as={RouterLink}
-							to={getNavigationRoute(
-								navigation?.previous?.id,
-								navigation?.previous?.type,
-								courseId
-							)}
-							sx={navLinkStyles}>
-							<HStack spacing="4">
-								<Center sx={cirlceStyles}>
-									<Icon as={BiChevronLeft} />
-								</Center>
-								<Stack direction="column" spacing="0">
-									<Text fontSize="xs" color="gray.500">
-										Prev
-									</Text>
-									<Heading fontSize="xs">{navigation?.previous.name}</Heading>
-								</Stack>
-							</HStack>
-						</Link>
-					)}
-				</Box>
+			<ButtonGroup
+				d="flex"
+				justifyContent={['center', null, 'space-between']}
+				alignItems="center">
+				<MobileHidden>
+					<Box minW="200px">
+						{navigation?.previous && (
+							<Link
+								as={RouterLink}
+								to={getNavigationRoute(
+									navigation?.previous?.id,
+									navigation?.previous?.type,
+									courseId
+								)}
+								sx={navLinkStyles}>
+								<HStack spacing="4">
+									<Center sx={cirlceStyles}>
+										<Icon as={BiChevronLeft} />
+									</Center>
+									<Stack direction="column" spacing="0">
+										<Text fontSize="xs" color="gray.500">
+											Prev
+										</Text>
+										<Heading fontSize="xs">{navigation?.previous.name}</Heading>
+									</Stack>
+								</HStack>
+							</Link>
+						)}
+					</Box>
+				</MobileHidden>
 
 				{(quizStarted || type !== 'quiz') && (
 					<Button

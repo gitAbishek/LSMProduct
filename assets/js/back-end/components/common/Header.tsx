@@ -11,6 +11,8 @@ import {
 	ListIcon,
 	ListItem,
 	Stack,
+	useBreakpointValue,
+	useMediaQuery,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { ReactElement } from 'react';
@@ -65,13 +67,19 @@ const Header: React.FC<Props> = (props) => {
 
 	const location = useLocation();
 	const { courseId }: any = useParams();
+	const buttonSize = useBreakpointValue(['sm', 'md']);
+	const [isDesktop] = useMediaQuery('(min-width: 48em)');
 	return (
 		<Box bg="white" w="full" shadow="header">
 			<Container maxW="container.xl" bg="white">
 				<Flex direction="row" justifyContent="space-between" align="center">
-					<Stack direction="row" spacing="8" align="center" minHeight="16">
+					<Stack
+						direction="row"
+						spacing={['3', null, '8']}
+						align="center"
+						minHeight="16">
 						<NavLink to={routes.courses.list}>
-							<Image src={Logo} w="36px" />
+							<Image src={Logo} w="36px" d={['none', 'block']} />
 						</NavLink>
 						{showCourseName && (
 							<>
@@ -138,6 +146,7 @@ const Header: React.FC<Props> = (props) => {
 					<ButtonGroup>
 						{firstBtn && (
 							<Button
+								size={buttonSize}
 								variant="outline"
 								onClick={firstBtn.action}
 								isLoading={firstBtn.isLoading}
@@ -148,11 +157,14 @@ const Header: React.FC<Props> = (props) => {
 
 						{showPreview && course?.previewUrl && (
 							<Link href={course?.previewUrl} isExternal>
-								<Button variant="outline">{__('Preview', 'masteriyo')}</Button>
+								<Button size={buttonSize} variant="outline">
+									{__('Preview', 'masteriyo')}
+								</Button>
 							</Link>
 						)}
 						{secondBtn && (
 							<Button
+								size={buttonSize}
 								variant="outline"
 								colorScheme="blue"
 								onClick={secondBtn.action}
@@ -165,10 +177,11 @@ const Header: React.FC<Props> = (props) => {
 
 						{thirdBtn && (
 							<Button
+								size={buttonSize}
 								colorScheme="blue"
 								onClick={thirdBtn.action}
 								isDisabled={thirdBtn.isDisabled}
-								leftIcon={thirdBtn.icon}
+								leftIcon={isDesktop ? thirdBtn.icon : <></>}
 								isLoading={thirdBtn.isLoading}>
 								{thirdBtn.label}
 							</Button>

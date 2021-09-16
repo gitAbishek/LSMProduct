@@ -124,7 +124,7 @@ export const navLinkStyles = {
 	d: 'flex',
 	alignItems: 'center',
 	fontWeight: 'medium',
-	fontSize: 'sm',
+	fontSize: ['xs', null, 'sm'],
 };
 
 export const navActiveStyles = {

@@ -116,7 +116,7 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						onMouseEnter={onPrevOpen}
 						onMouseLeave={onPrevClose}
 						_hover={{ color: 'blue.500' }}>
-						<Icon as={BiChevronLeft} fontSize="5rem" />
+						<Icon as={BiChevronLeft} fontSize={['3rem', null, '5rem']} />
 					</Link>
 				</>
 			)}
@@ -130,7 +130,7 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						p="6"
 						pr="80px"
 						top="50vh"
-						zIndex="999"
+						zIndex="99"
 						right="0"
 						transition="all 0.35s ease-in-out"
 						transform={
@@ -180,7 +180,7 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						onMouseEnter={onNextOpen}
 						onMouseLeave={onNextClose}
 						_hover={{ color: 'blue.500' }}>
-						<Icon as={BiChevronRight} fontSize="5rem" />
+						<Icon as={BiChevronRight} fontSize={['3rem', null, '5rem']} />
 					</Link>
 				</>
 			)}

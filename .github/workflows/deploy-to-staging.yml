@@ -56,7 +56,7 @@ jobs:
        - name: Generate pot file.
         run: composer run makepot
 
-      - name: Build the application
+      - name: Generate zip of the application.
         run: yarn release
 
       - name: Deploy to staging server

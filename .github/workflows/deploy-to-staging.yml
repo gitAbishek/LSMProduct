@@ -43,7 +43,7 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Install php dependencies
-        run: composer install --optimize-autoloader
+        run: composer install --no-dev --optimize-autoloader
 
       - name: Checking code and formattings
         run: |

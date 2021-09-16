@@ -438,6 +438,18 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormControl>
 											<FormLabel minW="160px">
 												{__('Title', 'masteriyo')}
+												<Tooltip
+													textAlign="center"
+													label={__(
+														'This controls the title which the user sees during checkout.',
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Input
 												type="text"
@@ -449,6 +461,18 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormControl>
 											<FormLabel minW="160px">
 												{__('Description', 'masteriyo')}
+												<Tooltip
+													textAlign="center"
+													label={__(
+														'This controls the description which the user sees during checkout.',
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Textarea
 												{...register('payments.paypal.description')}
@@ -461,8 +485,11 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<FormLabel minW="160px">
 													{__('Ipn Email Notification', 'masteriyo')}
 													<Tooltip
+														textAlign="center"
 														label={__(
-															'Get instant email notification after payment',
+															`Send notifications when an IPN is received from 
+															ayPal indicating refunds, chargebacks and 
+															cancellations.`,
 															'masteriyo'
 														)}
 														hasArrow
@@ -488,7 +515,20 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 
 										<FormControl>
 											<FormLabel minW="160px">
-												{__('Email', 'masteriyo')}
+												{__('Paypal Email', 'masteriyo')}
+												<Tooltip
+													textAlign="center"
+													label={__(
+														`Please enter your PayPal email address; this is 
+														needed in order to take payment.`,
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Input
 												type="email"
@@ -500,6 +540,21 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormControl>
 											<FormLabel minW="160px">
 												{__('Reciever Email', 'masteriyo')}
+												<Tooltip
+													textAlign="center"
+													label={__(
+														`If your main PayPal email differs from the PayPal 
+														email entered above, input your main receiver email 
+														for your PayPal account here. This is used to 
+														validate IPN requests.`,
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Input
 												type="email"
@@ -511,6 +566,22 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormControl>
 											<FormLabel minW="160px">
 												{__('Indentity Token', 'masteriyo')}
+												<Tooltip
+													textAlign="center"
+													label={__(
+														`Optionally enable "Payment Data Transfer" (Profile 
+															> Profile and Settings > My Selling Tools > Website 
+															Preferences) and then copy your identity token here. 
+															This will allow payments to be verified without 
+															the need for PayPal IPN.`,
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Input
 												type="text"
@@ -522,6 +593,21 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormControl>
 											<FormLabel minW="160px">
 												{__('Invoice Prefix', 'masteriyo')}
+												<Tooltip
+													textAlign="center"
+													label={__(
+														`If you use your PayPal account with more than one 
+														installation, please use a distinct prefix to 
+														separate those installations. Please do not use 
+														numbers in your prefix.`,
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Input
 												type="text"
@@ -533,6 +619,20 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormControl>
 											<FormLabel minW="160px">
 												{__('Payment Actions', 'masteriyo')}
+												<Tooltip
+													textAlign="center"
+													label={__(
+														`The intent to either capture payment immediately 
+														or authorize a payment for an order after order 
+														creation.`,
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Select
 												placeholder={__('Select Payment Action', 'masteriyo')}
@@ -541,14 +641,32 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<option value="capture">
 													{__('Capture', 'masteriyo')}
 												</option>
+												<option value="authorize">
+													{__('Authorize', 'masteriyo')}
+												</option>
 											</Select>
 										</FormControl>
 
 										<FormControl>
 											<FormLabel minW="160px">
 												{__('Image Url', 'masteriyo')}
+												<Tooltip
+													textAlign="center"
+													label={__(
+														`Optionally enter the URL to a 150x50px image 
+														displayed as your logo in the upper left corner of 
+														the PayPal checkout pages.`,
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Input
+												placeholder="Optional"
 												type="text"
 												{...register('payments.paypal.image_url')}
 												defaultValue={paymentsData?.paypal?.image_url}
@@ -558,7 +676,21 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormControl>
 											<Stack direction="row">
 												<FormLabel minW="160px">
-													{__('Debug', 'masteriyo')}
+													{__('Debug Log', 'masteriyo')}
+													<Tooltip
+														textAlign="center"
+														label={__(
+															`Note: this may log personal information. We 
+																recommend using this for debugging purposes only 
+																and deleting the logs when finished.`,
+															'masteriyo'
+														)}
+														hasArrow
+														fontSize="xs">
+														<Box as="span" sx={infoIconStyles}>
+															<Icon as={BiInfoCircle} />
+														</Box>
+													</Tooltip>
 												</FormLabel>
 												<Controller
 													name="payments.paypal.debug"
@@ -578,7 +710,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 													{__('Sandbox', 'masteriyo')}
 													<Tooltip
 														label={__(
-															'Standard paypal test environment',
+															'PayPal sandbox can be used to test payments.',
 															'masteriyo'
 														)}
 														hasArrow
@@ -604,8 +736,20 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<FormControl>
 													<FormLabel minW="160px">
 														{__('Sandbox API Username', 'masteriyo')}
+														<Tooltip
+															label={__(
+																'Get your API credentials from PayPal.',
+																'masteriyo'
+															)}
+															hasArrow
+															fontSize="xs">
+															<Box as="span" sx={infoIconStyles}>
+																<Icon as={BiInfoCircle} />
+															</Box>
+														</Tooltip>
 													</FormLabel>
 													<Input
+														placeholder="Optional"
 														type="text"
 														{...register(
 															'payments.paypal.sandbox_api_username'
@@ -619,8 +763,20 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<FormControl>
 													<FormLabel minW="160px">
 														{__('Sandbox API Password', 'masteriyo')}
+														<Tooltip
+															label={__(
+																'Get your API credentials from PayPal.',
+																'masteriyo'
+															)}
+															hasArrow
+															fontSize="xs">
+															<Box as="span" sx={infoIconStyles}>
+																<Icon as={BiInfoCircle} />
+															</Box>
+														</Tooltip>
 													</FormLabel>
 													<Input
+														placeholder="Optional"
 														type="password"
 														{...register(
 															'payments.paypal.sandbox_api_password'
@@ -634,8 +790,20 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<FormControl>
 													<FormLabel minW="160px">
 														{__('Sandbox API Signature', 'masteriyo')}
+														<Tooltip
+															label={__(
+																'Get your API credentials from PayPal.',
+																'masteriyo'
+															)}
+															hasArrow
+															fontSize="xs">
+															<Box as="span" sx={infoIconStyles}>
+																<Icon as={BiInfoCircle} />
+															</Box>
+														</Tooltip>
 													</FormLabel>
 													<Input
+														placeholder="Optional"
 														type="text"
 														{...register(
 															'payments.paypal.sandbox_api_signature'
@@ -651,8 +819,20 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormControl>
 											<FormLabel minW="160px">
 												{__('Live API Username', 'masteriyo')}
+												<Tooltip
+													label={__(
+														'Get your API credentials from PayPal.',
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Input
+												placeholder="Optional"
 												type="text"
 												{...register('payments.paypal.live_api_username')}
 												defaultValue={paymentsData?.paypal?.live_api_username}
@@ -662,8 +842,20 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormControl>
 											<FormLabel minW="160px">
 												{__('Live API Password', 'masteriyo')}
+												<Tooltip
+													label={__(
+														'Get your API credentials from PayPal.',
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Input
+												placeholder="Optional"
 												type="password"
 												{...register('payments.paypal.live_api_password')}
 												defaultValue={paymentsData?.paypal?.live_api_password}
@@ -673,8 +865,20 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormControl>
 											<FormLabel minW="160px">
 												{__('Live API Signature', 'masteriyo')}
+												<Tooltip
+													label={__(
+														'Get your API credentials from PayPal.',
+														'masteriyo'
+													)}
+													hasArrow
+													fontSize="xs">
+													<Box as="span" sx={infoIconStyles}>
+														<Icon as={BiInfoCircle} />
+													</Box>
+												</Tooltip>
 											</FormLabel>
 											<Input
+												placeholder="Optional"
 												type="text"
 												{...register('payments.paypal.live_api_signature')}
 												defaultValue={paymentsData?.paypal?.live_api_signature}

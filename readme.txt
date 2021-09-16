@@ -54,5 +54,5 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
-= 0.1.0 - 16-09-2021 =
+= 1.0 - 16-09-2021 =
 * Initial Release

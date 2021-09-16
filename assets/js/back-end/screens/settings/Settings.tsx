@@ -49,6 +49,9 @@ const Settings = () => {
 
 	const tabStyles = {
 		fontWeight: 'medium',
+		py: ['2', '4'],
+		fontSize: ['xs', null, 'sm'],
+		px: ['1', '2', '4'],
 	};
 
 	const tabPanelStyles = {
@@ -109,62 +112,16 @@ const Settings = () => {
 									justifyContent="center"
 									borderBottom="1px"
 									flexWrap="wrap">
-									<Tab
-										sx={tabStyles}
-										py={['2', '4']}
-										fontSize={['xs', null, 'sm']}
-										px={['1', '2', '4']}>
-										{__('General', 'masteriyo')}
-									</Tab>
-									<Tab
-										sx={tabStyles}
-										py={['2', '4']}
-										fontSize={['xs', null, 'sm']}
-										px={['1', '2', '4']}>
-										{__('Courses Page', 'masteriyo')}
-									</Tab>
-									<Tab
-										sx={tabStyles}
-										py={['2', '4']}
-										fontSize={['xs', null, 'sm']}
-										px={['1', '2', '4']}>
+									<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Courses Page', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>
 										{__('Single Course Page', 'masteriyo')}
 									</Tab>
-									<Tab
-										sx={tabStyles}
-										py={['2', '4']}
-										fontSize={['xs', null, 'sm']}
-										px={['1', '2', '4']}>
-										{__('Learn Page', 'masteriyo')}
-									</Tab>
-									<Tab
-										sx={tabStyles}
-										py={['2', '4']}
-										fontSize={['xs', null, 'sm']}
-										px={['1', '2', '4']}>
-										{__('Payments', 'masteriyo')}
-									</Tab>
-									<Tab
-										sx={tabStyles}
-										py={['2', '4']}
-										fontSize={['xs', null, 'sm']}
-										px={['1', '2', '4']}>
-										{__('Quiz', 'masteriyo')}
-									</Tab>
-									<Tab
-										sx={tabStyles}
-										py={['2', '4']}
-										fontSize={['xs', null, 'sm']}
-										px={['1', null]}>
-										{__('Emails', 'masteriyo')}
-									</Tab>
-									<Tab
-										sx={tabStyles}
-										py={['2', '4']}
-										fontSize={['xs', null, 'sm']}
-										px={['1', null]}>
-										{__('Advanced', 'masteriyo')}
-									</Tab>
+									<Tab sx={tabStyles}>{__('Learn Page', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Payments', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Quiz', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Emails', 'masteriyo')}</Tab>
+									<Tab sx={tabStyles}>{__('Advanced', 'masteriyo')}</Tab>
 								</TabList>
 
 								<form onSubmit={methods.handleSubmit(onSubmit)}>

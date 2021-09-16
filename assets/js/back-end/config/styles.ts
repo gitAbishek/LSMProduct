@@ -135,7 +135,7 @@ export const navActiveStyles = {
 
 export const tabStyles = {
 	justifyContent: 'flex-start',
-	flex: [null, null, '0 0 180px'],
+	width: [null, null, '180px'],
 	borderLeft: 0,
 	borderRight: '2px solid',
 	borderRightColor: 'transparent',

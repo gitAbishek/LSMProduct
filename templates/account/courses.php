@@ -25,15 +25,17 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 
 					<div class="masteriyo-mycourses--detail">
 						<div class="masteriyo-mycourses--header">
-							<div class="masteriyo-course--content__category">
-								<?php foreach ( $active_course->get_categories() as $category ) : ?>
-									<a href="<?php echo esc_url( $category->get_permalink() ); ?>" alt="<?php echo esc_attr( $category->get_name() ); ?>">
-										<span class="masteriyo-badge masteriyo-mycourses--tag ">
-											<?php echo esc_html( $category->get_name() ); ?>
-										</span>
-									</a>
-								<?php endforeach; ?>
-							</div>
+							<?php if ( ! empty( $active_course->get_categories() ) ) : ?>
+								<div class="masteriyo-course--content__category">
+									<?php foreach ( $active_course->get_categories() as $category ) : ?>
+										<a href="<?php echo esc_url( $category->get_permalink() ); ?>" alt="<?php echo esc_attr( $category->get_name() ); ?>">
+											<span class="masteriyo-badge masteriyo-mycourses--tag ">
+												<?php echo esc_html( $category->get_name() ); ?>
+											</span>
+										</a>
+									<?php endforeach; ?>
+								</div>
+							<?php endif; ?>
 
 							<h2 class="masteriyo-course--content__title">
 								<a href="<?php echo esc_url( $active_course->get_permalink() ); ?>" title="<?php echo esc_attr( $active_course->get_name() ); ?>">
@@ -116,15 +118,18 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 						</a>
 					<div class="masteriyo-mycourses--detail">
 						<div class="masteriyo-mycourses--header">
-							<div class="masteriyo-course--content__category">
-								<?php foreach ( $course->get_categories() as $category ) : ?>
-									<a href="<?php echo esc_url( $category->get_permalink() ); ?>" title="<?php echo esc_attr( $category->get_name() ); ?>">
-									<span class="masteriyo-badge masteriyo-mycourses--tag ">
-										<?php echo esc_html( $category->get_name() ); ?>
-									</span>
-								</a>
-								<?php endforeach; ?>
-							</div>
+
+							<?php if ( ! empty( $course->get_categories() ) ) : ?>
+								<div class="masteriyo-course--content__category">
+									<?php foreach ( $course->get_categories() as $category ) : ?>
+										<a href="<?php echo esc_url( $category->get_permalink() ); ?>" title="<?php echo esc_attr( $category->get_name() ); ?>">
+										<span class="masteriyo-badge masteriyo-mycourses--tag ">
+											<?php echo esc_html( $category->get_name() ); ?>
+										</span>
+									</a>
+									<?php endforeach; ?>
+								</div>
+							<?php endif; ?>
 
 							<h3 class="masteriyo-mycourses--header--title">
 								<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">

@@ -139,16 +139,16 @@
 	&__category {
 		display: flex;
 		flex-wrap: wrap;
-		margin-bottom: $spacing_2px;
+		margin-bottom: $spacing_4px;
 		gap: 8px;
 
 		&-items {
-			font-size: 12px;
+			font-size: 10px;
 			font-weight: 500;
 			text-decoration: none;
 			text-transform: uppercase;
 			letter-spacing: 0.5px;
-			padding: $spacing_4px $spacing_12px;
+			padding: $spacing_2px $spacing_8px;
 			color: var(--masteriyo-color-primary);
 			border-radius: $border_radius_50;
 			background-color: var(--masteriyo-color-primary-a10);
@@ -215,7 +215,7 @@
 			align-items: center;
 
 			svg {
-				fill: var(--masteriyo-color-primary);
+				fill: var(--masteriyo-color-golden);
 				width: 16px;
 				height: 16px;
 				font-size: 0.75rem;
@@ -242,7 +242,6 @@
 
 			li {
 				display: flex;
-				padding: 4px 0px;
 
 				p {
 					margin: 0px;

@@ -1,306 +1,316 @@
-.masteriyo-main,
-.entry-content
-	> *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator):not(.woocommerce) {
-	display: flex;
-	justify-content: space-between;
-	flex-direction: row;
-	gap: 40px;
-	max-width: 100%;
-}
+.masteriyo {
+	.masteriyo-main,
+	.entry-content
+		> *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator):not(.woocommerce) {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: row;
+		gap: 40px;
+		max-width: 100%;
+	}
 
-// Dashboard
-.masteriyo-dashboard {
-	display: flex;
-	flex-direction: column;
-	flex: 1 1 74%;
-	gap: 30px;
+	// Dashboard
+	.masteriyo-dashboard {
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 74%;
+		gap: 30px;
 
-	ul {
-		margin: 0;
-		padding: 0;
+		ul {
+			margin: 0;
+			padding: 0;
 
-		li {
-			list-style-type: none;
+			li {
+				list-style-type: none;
+			}
+		}
+
+		.masteriyo-btn-primary {
+			color: var(--masteriyo-color-white);
+		}
+
+		.masteriyo-button {
+			color: var(--masteriyo-color-primary);
+			padding: 0;
+			background-color: transparent;
 		}
 	}
 
-	.masteriyo-btn-primary {
+	// Welcome notify
+	.masteriyo-welcome-notify {
+		background: var(--masteriyo-color-primary);
+		@include masteriyo-border-radius;
+		padding: $spacing_32px;
 		color: var(--masteriyo-color-white);
-	}
-}
+		position: relative;
 
-// Welcome notify
-.masteriyo-welcome-notify {
-	background: var(--masteriyo-color-primary);
-	@include masteriyo-border-radius;
-	padding: $spacing_32px;
-	color: var(--masteriyo-color-white);
-	position: relative;
-
-	.masteriyo-title {
-		font-size: 24px;
-		font-weight: 500;
-		color: var(--masteriyo-color-white);
-		margin-bottom: $spacing_16px;
-	}
-
-	.masteriyo-close {
-		position: absolute;
-		right: 16px;
-		top: 16px;
-		width: 24px;
-		height: 24px;
-		border-radius: 100%;
-
-		.masteriyo-icon-svg {
-			fill: var(--masteriyo-color-white);
+		.masteriyo-title {
+			font-size: 24px;
+			font-weight: 500;
+			color: var(--masteriyo-color-white);
+			margin-bottom: $spacing_16px;
 		}
 
-		&:hover {
-			background: var(--masteriyo-color-white-a10);
-		}
-	}
+		.masteriyo-close {
+			position: absolute;
+			right: 16px;
+			top: 16px;
+			width: 24px;
+			height: 24px;
+			border-radius: 100%;
 
-	.masteriyo-view-account {
-		display: inline-flex;
-		align-items: center;
-		border-radius: $border_radius_100;
-		padding-left: $spacing_24px;
-		margin-top: $spacing_24px;
-
-		&:hover {
 			.masteriyo-icon-svg {
 				fill: var(--masteriyo-color-white);
 			}
+
+			&:hover {
+				background: var(--masteriyo-color-white-a10);
+			}
+		}
+
+		.masteriyo-view-account {
+			display: inline-flex;
+			align-items: center;
+			border-radius: $border_radius_100;
+			padding-left: $spacing_24px;
+			margin-top: $spacing_24px;
+
+			&:hover {
+				.masteriyo-icon-svg {
+					fill: var(--masteriyo-color-white);
+				}
+			}
 		}
 	}
-}
-// Dashboard Card
-.masteriyo-db-card {
-	@include masteriyo-default-border;
-	@include masteriyo-border-radius;
-	@include masteriyo-default-animate;
-	padding: $spacing_30px;
-	flex: 0 1 calc((100% / 3) - 20px);
-	background-color: var(--masteriyo-color-white);
+	// Dashboard Card
+	.masteriyo-db-card {
+		@include masteriyo-default-border;
+		@include masteriyo-border-radius;
+		@include masteriyo-default-animate;
+		padding: $spacing_30px;
+		flex: 0 1 calc((100% / 3) - 20px);
+		background-color: var(--masteriyo-color-white);
 
-	&:hover {
-		@include masteriyo-shadow-1;
+		&:hover {
+			@include masteriyo-shadow-1;
+		}
 	}
-}
 
-// User counter
-.masteriyo-counter {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 30px;
-
-	.masteriyo-icon-title {
+	// User counter
+	.masteriyo-counter {
 		display: flex;
-		align-items: center;
-		gap: 16px;
+		flex-wrap: wrap;
+		gap: 30px;
 
-		.masteriyo-icon {
-			display: inherit;
-			padding: $spacing_10px;
-			border-radius: $border_radius_100pct;
+		.masteriyo-icon-title {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+
+			.masteriyo-icon {
+				display: inherit;
+				padding: $spacing_10px;
+				border-radius: $border_radius_100pct;
+			}
+
+			.masteriyo-title {
+				font-size: 18px;
+				font-weight: 500;
+				margin: inherit;
+			}
 		}
-		.masteriyo-title {
-			font-size: 18px;
-			margin: inherit;
+
+		&--inprogress .masteriyo-icon {
+			background: var(--masteriyo-color-green-a20);
+
+			&.masteriyo-icon-svg {
+				fill: var(--masteriyo-color-green);
+			}
 		}
-	}
 
-	&--inprogress .masteriyo-icon {
-		background: var(--masteriyo-color-green-a20);
+		&--scores .masteriyo-icon {
+			background: var(--masteriyo-color-primary-a20);
 
-		&.masteriyo-icon-svg {
-			fill: var(--masteriyo-color-green);
+			&.masteriyo-icon-svg {
+				fill: var(--masteriyo-color-primary);
+			}
 		}
-	}
 
-	&--scores .masteriyo-icon {
-		background: var(--masteriyo-color-primary-a20);
+		&--certificates .masteriyo-icon {
+			background: var(--masteriyo-color-accent-a20);
 
-		&.masteriyo-icon-svg {
-			fill: var(--masteriyo-color-primary);
+			&.masteriyo-icon-svg {
+				fill: var(--masteriyo-color-accent);
+			}
 		}
-	}
 
-	&--certificates .masteriyo-icon {
-		background: var(--masteriyo-color-accent-a20);
-
-		&.masteriyo-icon-svg {
-			fill: var(--masteriyo-color-accent);
-		}
-	}
-
-	.masteriyo-number {
-		font-size: 36px;
-		font-weight: 600;
-	}
-}
-
-// Statistic and Popular Cources
-.masteriyo-sc {
-	gap: 30px;
-
-	&--stat {
-		flex: 1 1 66%;
-
-		&--header {
-			margin-bottom: 20px;
+		.masteriyo-number {
+			font-size: 36px;
+			font-weight: 600;
 		}
 	}
 
-	&--pcourse {
-		flex: 1 1 30%;
+	// Statistic and Popular Cources
+	.masteriyo-sc {
+		gap: 30px;
+
+		&--stat {
+			flex: 1 1 66%;
+
+			&--header {
+				margin-bottom: 20px;
+			}
+		}
+
+		&--pcourse {
+			flex: 1 1 30%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			gap: 20px;
+
+			&--title {
+				font-size: 16px;
+				margin: inherit;
+			}
+
+			&--list {
+				gap: 10px;
+			}
+
+			&--img {
+				width: 50px;
+				height: 50px;
+				@include masteriyo-border-radius;
+			}
+
+			&--course {
+				display: flex;
+				gap: 16px;
+			}
+
+			&--btn {
+				display: flex;
+				align-items: center;
+			}
+		}
+	}
+
+	// Continue Studing
+	.masteriyo-cstudy {
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
+		flex-wrap: wrap;
 		gap: 20px;
 
-		&--title {
-			font-size: 16px;
-			margin: inherit;
-		}
-
-		&--list {
-			gap: 10px;
-		}
-
-		&--img {
-			width: 50px;
-			height: 50px;
-			@include masteriyo-border-radius;
-		}
-
-		&--course {
-			display: flex;
-			gap: 16px;
-		}
-
-		&--btn {
-			display: flex;
-			align-items: center;
-		}
-	}
-}
-
-// Continue Studing
-.masteriyo-cstudy {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	gap: 20px;
-
-	a {
-		text-decoration: none;
-	}
-
-	&--header {
-		display: inline-flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	&--title {
-		font-size: 24px;
-		margin: inherit;
-	}
-
-	&--btn {
-		display: inline-flex;
-		align-items: center;
-		border-radius: $border_radius_100;
-	}
-
-	&--body {
-		&--wrap {
-			margin-bottom: $spacing_16px;
-			justify-content: space-between;
+		a {
+			text-decoration: none;
 		}
 
 		&--header {
-			max-width: 245px;
-		}
-
-		&--img-title {
-			display: flex;
+			display: inline-flex;
 			flex-direction: row;
-			gap: 16px;
-		}
-
-		&--tag {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 4px;
-			margin-bottom: $spacing_4px;
-		}
-
-		&--pbar {
-			flex: 1;
-			margin-left: 30px;
-			margin-right: 30px;
-		}
-
-		&--img {
-			width: 80px;
-			height: 80px;
-			@include masteriyo-border-radius;
-		}
-
-		&--rating {
-			display: flex;
-			flex-wrap: nowrap;
-
-			&.masteriyo-icon-svg > svg {
-				width: 16px;
-				height: 16px;
-			}
+			justify-content: space-between;
+			align-items: center;
 		}
 
 		&--title {
-			font-size: 18px;
-			font-weight: 700;
-			margin-bottom: $spacing_8px;
-		}
-
-		&--rt {
-			display: flex;
-			flex-wrap: nowrap;
-			align-items: center;
-		}
-
-		&--duration {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: nowrap;
-			align-items: center;
-			gap: 4px;
-			font-size: 14px;
-			font-weight: 600;
-			margin-left: 16px;
-
-			.masteriyo-icon-svg > svg {
-				width: 16px;
-				height: 16px;
-			}
-		}
-
-		&--pstatus {
-			font-size: 16px;
-			font-weight: 600;
-		}
-
-		&--caption {
-			font-size: 12px;
-			font-weight: 600;
+			font-size: 24px;
+			margin: inherit;
 		}
 
 		&--btn {
+			display: inline-flex;
+			align-items: center;
 			border-radius: $border_radius_100;
+		}
+
+		&--body {
+			&--wrap {
+				margin-bottom: $spacing_16px;
+				justify-content: space-between;
+			}
+
+			&--header {
+				max-width: 245px;
+			}
+
+			&--img-title {
+				display: flex;
+				flex-direction: row;
+				gap: 16px;
+			}
+
+			&--tag {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 4px;
+				margin-bottom: $spacing_4px;
+			}
+
+			&--pbar {
+				flex: 1;
+				margin-left: 30px;
+				margin-right: 30px;
+			}
+
+			&--img {
+				width: 80px;
+				height: 80px;
+				@include masteriyo-border-radius;
+			}
+
+			&--rating {
+				display: flex;
+				flex-wrap: nowrap;
+
+				&.masteriyo-icon-svg > svg {
+					width: 16px;
+					height: 16px;
+				}
+			}
+
+			&--title {
+				font-size: 18px;
+				font-weight: 700;
+				margin-bottom: $spacing_8px;
+			}
+
+			&--rt {
+				display: flex;
+				flex-wrap: nowrap;
+				align-items: center;
+			}
+
+			&--duration {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: nowrap;
+				align-items: center;
+				gap: 4px;
+				font-size: 14px;
+				font-weight: 600;
+				margin-left: 16px;
+
+				.masteriyo-icon-svg > svg {
+					width: 16px;
+					height: 16px;
+				}
+			}
+
+			&--pstatus {
+				font-size: 16px;
+				font-weight: 600;
+			}
+
+			&--caption {
+				font-size: 12px;
+				font-weight: 600;
+			}
+
+			&--btn {
+				border-radius: $border_radius_100;
+			}
 		}
 	}
 }

@@ -45,10 +45,12 @@
 		}
 	}
 
-	.masteriyo-mycourses {
-		&--card {
-			flex-basis: calc((100% / 2) - 30px);
-			max-width: 100%;
+	.masteriyo {
+		.masteriyo-mycourses {
+			&--card {
+				flex-basis: calc((100% / 2) - 30px);
+				max-width: 100%;
+			}
 		}
 	}
 }
@@ -146,10 +148,14 @@
 		}
 	}
 
-	.masteriyo-mycourses {
-		&--card {
+	.masteriyo {
+		.masteriyo-mycourses--card {
 			flex-basis: 100%;
 			max-width: 100%;
+		}
+
+		.masteriyo-placeholder {
+			width: 100%;
 		}
 	}
 }

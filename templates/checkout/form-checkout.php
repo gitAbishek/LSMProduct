@@ -39,7 +39,7 @@ if ( ! is_user_logged_in() ) {
 
 <div class="masteriyo-checkout" id="masteriyo-checkout">
 	<form
-		name="checkout" method="post" class="masteriyo-checkout--form masteriyo-checkout"
+		name="checkout" method="post" class="masteriyo-w-100 masteriyo-container masteriyo-checkout--form masteriyo-checkout"
 		action="<?php echo esc_url( masteriyo_get_checkout_url() ); ?>"
 		enctype="multipart/form-data"
 		class="checkout masteriyo-checkout"

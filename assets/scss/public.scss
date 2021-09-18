@@ -1,40 +1,41 @@
 // Varibale
-@import 'variable/colors';
-@import 'variable/structure';
+@import "variable/colors";
+@import "variable/structure";
 
 // Utility
-@import 'utility/mixins';
-@import 'utility/columns';
+@import "utility/mixins";
+@import "utility/columns";
 
 // Base
-@import 'base/base';
-@import 'base/container';
+@import "base/base";
+@import "base/container";
 
 // Components
-@import 'components/buttons';
-@import 'components/forms';
-@import 'components/sidebar-menu';
-@import 'components/dropdown';
-@import 'components/pagination';
-@import 'components/badge';
-@import 'components/modal';
+@import "components/buttons";
+@import "components/forms";
+@import "components/sidebar-menu";
+@import "components/dropdown";
+@import "components/pagination";
+@import "components/badge";
+@import "components/modal";
 
 // Pages
-@import 'pages/login';
-@import 'pages/reset-password';
-@import 'pages/signup';
-@import 'pages/dashboard';
-@import 'pages/db-mycourses';
-@import 'pages/account';
-@import 'pages/edit-account';
-@import 'pages/checkout';
-@import 'pages/course-list';
-@import 'pages/single-course';
+@import "pages/login";
+@import "pages/reset-password";
+@import "pages/signup";
+@import "pages/dashboard";
+@import "pages/db-mycourses";
+@import "pages/account";
+@import "pages/edit-account";
+@import "pages/checkout";
+@import "pages/checkout-detail";
+@import "pages/course-list";
+@import "pages/single-course";
 
 // Support Theme
-@import 'theme/_twentytwentytheme';
+@import "theme/_twentytwentytheme";
 
 // Media
-@import 'responsive/large';
-@import 'responsive/medium';
-@import 'responsive/small';
+@import "responsive/large";
+@import "responsive/medium";
+@import "responsive/small";

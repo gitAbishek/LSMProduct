@@ -29,7 +29,7 @@ if ( ! $order ) {
 
 ?>
 
-<div class="masteriyo-order">
+<div class="masteriyo-w-100 masteriyo-container masteriyo-order">
 <?php do_action( 'masteriyo_before_thankyou', $order->get_id() ); ?>
 
 	<?php if ( $order->has_status( 'failed' ) ) : ?>

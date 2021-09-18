@@ -1,0 +1,40 @@
+.masteriyo {
+	.masteriyo-order,
+	.entry-content
+		> *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator):not(.woocommerce) {
+		flex-direction: column;
+		background-color: var(--masteriyo-color-white);
+		@include masteriyo-shadow-1;
+		padding: $spacing_30px;
+		gap: 16px;
+		border-radius: $border_radius_8;
+
+		.masteriyo-notice {
+			margin-bottom: $spacing_30px;
+			border-radius: $border_radius_4;
+			font-size: 14px;
+			font-weight: 500;
+
+			&--danger {
+				background-color: var(--masteriyo-color-danger);
+			}
+
+			&--success {
+				background-color: var(--masteriyo-color-success);
+			}
+
+			&--info {
+				background-color: var(--masteriyo-color-info);
+			}
+
+			&--warning {
+				background-color: var(--masteriyo-color-warning);
+			}
+		}
+
+		.masteriyo-order-overview {
+			list-style-type: none;
+			padding-left: 0;
+		}
+	}
+}

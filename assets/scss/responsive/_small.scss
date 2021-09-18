@@ -53,6 +53,14 @@
 			}
 		}
 	}
+
+	.masteriyo-single-course {
+		.masteriyo-col-4 {
+			width: 100%;
+			flex: 1 1 100%;
+			max-width: 100%;
+		}
+	}
 }
 
 // X-Small devices (portrait phones, less than 576px)
@@ -113,12 +121,14 @@
 	.masteriyo-stab {
 		gap: 32px;
 	}
+
 	.masteriyo-replies {
 		.masteriyo-reply-replies--title {
 			.masteriyo-flex {
 				flex-direction: column;
 				align-items: self-start;
 			}
+
 			.author-name {
 				margin-bottom: $spacing_12px;
 			}

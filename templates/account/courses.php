@@ -37,11 +37,11 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 								</div>
 							<?php endif; ?>
 
-							<h2 class="masteriyo-course--content__title">
+							<h3 class="masteriyo-mycourses--header--title">
 								<a href="<?php echo esc_url( $active_course->get_permalink() ); ?>" title="<?php echo esc_attr( $active_course->get_name() ); ?>">
 									<?php echo esc_html( $active_course->get_name() ); ?>
 								</a>
-							</h2>
+							</h3>
 
 							<span class="masteriyo-icon-svg masteriyo-rating">
 								<?php masteriyo_render_stars( $active_course->get_average_rating() ); ?>
@@ -71,7 +71,7 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 								</div>
 							</div>
 
-							<div class="masteriyo-courses--body--pbar masteriyo-pbar">
+							<div class="masteriyo-mycourses--body--pbar masteriyo-pbar">
 								<div class="masteriyo-progressbar">
 									<span class="masteriyo-bar" style="width:<?php echo esc_attr( $active_course->get_progress_status( true ) ); ?>;">
 										<span class="masteriyo-progress">
@@ -80,19 +80,17 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 									</span>
 								</div>
 							</div>
+
+							<time class="masteriyo-mycourses--body--time">
+								<span>Started</span>
+								<?php echo esc_html( masteriyo_format_datetime( $active_course->progress->get_started_at(), 'Y-m-d' ) ); ?>
+							</time>
 						</div>
 
 						<div class="masteriyo-mycourses--footer">
-							<div class="masteriyo-time-btn">
-								<time class="masteriyo-courses--body--time">
-									<span>Started</span>
-									<?php echo esc_html( masteriyo_format_datetime( $active_course->progress->get_started_at(), 'Y-m-d' ) ); ?>
-								</time>
-
-								<a href="<?php echo esc_url( $active_course->start_course_url() ); ?>" target="_blank" class="masteriyo-mycourses--btn masteriyo-btn masteriyo-btn-primary">
-									<?php esc_html_e( 'Continue', 'masteriyo' ); ?>
-								</a>
-							</div>
+							<a href="<?php echo esc_url( $active_course->start_course_url() ); ?>" target="_blank" class="masteriyo-mycourses--btn masteriyo-btn masteriyo-btn-primary">
+								<?php esc_html_e( 'Continue', 'masteriyo' ); ?>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -145,19 +143,24 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 						</div>
 
 						<div class="masteriyo-mycourses--body">
-							<div class="masteriyo-mycourses--body--duration masteriyo-flex masteriyo-flex--space-between ">
-								<div class="masteriyo-time-wrap">
-									<span class="masteriyo-icon-svg">
-										<?php masteriyo_get_svg( 'clock', true ); ?>
-									</span>
-
-									<time class="masteriyo-courses--body--time">
-										<?php echo esc_html( masteriyo_minutes_to_time_length_string( $course->get_duration() ) ); ?>
-									</time>
+							<div class="masteriyo-mycourses--body--duration">
+								<div class="masteriyo-course--content__stats">
+									<div class="masteriyo-course-stats-duration">
+									<?php masteriyo_get_svg( 'time', true ); ?> <span><?php echo esc_html( masteriyo_minutes_to_time_length_string( $course->get_duration() ) ); ?></span>
+									</div>
+									<div class="masteriyo-course-stats-students">
+									<?php masteriyo_get_svg( 'group', true ); ?> <span><?php echo esc_html( masteriyo_count_enrolled_users( $course->get_id() ) ); ?></span>
+									</div>
+									<div class="masteriyo-course-stats-curriculum">
+									<?php masteriyo_get_svg( 'book', true ); ?> <span><?php echo esc_html( masteriyo_get_lessons_count( $course ) ); ?></span>
+									</div>
 								</div>
-								<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="masteriyo-mycourses--btn masteriyo-btn masteriyo-btn-primary">
-									<?php esc_html_e( 'Start Course', 'masteriyo' ); ?>
-								</a>
+
+								<div class="masteriyo-mycourses--btn--wrap">
+									<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="masteriyo-mycourses--btn  masteriyo-btn masteriyo-btn-primary">
+										<?php esc_html_e( 'Start Course', 'masteriyo' ); ?>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>

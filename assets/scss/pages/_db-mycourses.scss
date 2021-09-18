@@ -1,146 +1,148 @@
 // Courses list
-.masteriyo-mycourses {
-	a {
-		display: block;
-	}
-
-	&--title {
-		font-size: 24px;
-		margin-bottom: $spacing_20px;
-	}
-
-	&--list {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		margin: 0 -#{$spacing_15px};
-		margin-bottom: $spacing_10px;
-	}
-
-	&--card {
-		@include masteriyo-default-border;
-		background: var(--masteriyo-color-white);
-		margin: $spacing_15px $spacing_15px $spacing_30px $spacing_15px;
-		flex-basis: calc((100% / 3) - 30px);
-		max-width: 256px;
-	}
-
-	&--img {
-		width: 100%;
-	}
-
-	&--detail {
-		padding: $spacing_20px;
-	}
-
-	// Course header
-	&--header {
-		.masteriyo-icon-svg > svg {
-			width: 16px;
-			height: 16px;
-			fill: var(--masteriyo-color-primary);
+.masteriyo {
+	.masteriyo-mycourses {
+		a {
+			display: block;
+			text-decoration: none;
 		}
 
-		.masteriyo-course--content__title {
-			margin-bottom: 0;
+		&--title {
+			font-size: 24px;
+			margin-bottom: $spacing_20px;
 		}
-	}
 
-	&--rt,
-	&--rating {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		margin-top: $spacing_8px;
-	}
+		&--list {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			margin: 0 -#{$spacing_15px};
+			margin-bottom: $spacing_10px;
+		}
 
-	&--detail {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-	}
+		&--card {
+			@include masteriyo-default-border;
+			background: var(--masteriyo-color-white);
+			margin: $spacing_15px $spacing_15px $spacing_30px $spacing_15px;
+			flex-basis: calc((100% / 3) - 30px);
+			max-width: 256px;
+		}
 
-	&--header--title {
-		font-size: 18px;
-		font-weight: 700;
-	}
+		&--img {
+			width: 100%;
+		}
 
-	// Course list body
-	&--body {
-		.masteriyo-time-wrap {
+		&--detail {
+			padding: $spacing_20px;
+		}
+
+		// Course header
+		&--header {
+			.masteriyo-icon-svg > svg {
+				width: 14px;
+				height: 14px;
+				fill: var(--masteriyo-color-golden);
+			}
+
+			&--title {
+				font-size: 18px;
+				font-weight: 700;
+				margin-bottom: $spacing_4px;
+			}
+		}
+
+		&--rt,
+		&--rating {
 			display: flex;
 			align-items: center;
-			gap: 4px;
+			flex-wrap: wrap;
+		}
 
-			.masteriyo-icon-svg > svg {
-				width: 16px;
-				height: 16px;
+		&--detail {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		// Course list body
+		&--body {
+			.masteriyo-time-wrap {
+				display: flex;
+				align-items: center;
+				gap: 4px;
+
+				.masteriyo-icon-svg > svg {
+					width: 16px;
+					height: 16px;
+				}
 			}
-		}
 
-		&--duration {
-			font-size: 14px;
-		}
-	}
-
-	.masteriyo-pbar {
-		margin-top: $spacing_10px;
-	}
-
-	&--footer {
-		align-items: center;
-
-		.masteriyo-time-btn {
-			text-align: center;
-
-			time {
-				display: block;
-				font-size: 14px;
+			&--duration {
+				font-size: 12px;
 				font-weight: 500;
-				margin-bottom: 10px;
+			}
+
+			&--time {
+				margin-top: $spacing_4px;
+				font-size: 12px;
+				font-weight: 500;
+			}
+
+			&--pbar {
+				margin-top: $spacing_4px;
 			}
 		}
-	}
-	&--btn {
-		border-radius: $border_radius_100;
-	}
-}
 
-// My certificates
-.masteriyo-mycertificates {
-	&--list {
-		margin-bottom: $spacing_40px;
-	}
+		&--footer {
+			margin-top: $spacing_8px;
+			align-items: center;
+		}
 
-	&--list-wrap > li {
-		padding: $spacing_16px 0;
-		border-bottom: 1px solid var(--masteriyo-color-border);
+		&--btn--wrap {
+			border-top: 1px solid var(--masteriyo-color-border);
+			padding-top: $spacing_20px;
+		}
 
-		&:last-of-type {
-			border-bottom: none;
+		&--btn {
+			border-radius: $border_radius_100;
 		}
 	}
 
-	.masteriyo-list-header {
-		font-size: 16px;
-		font-weight: 600;
-		text-transform: uppercase;
-	}
+	// My certificates
+	.masteriyo-mycertificates {
+		&--list {
+			margin-bottom: $spacing_40px;
+		}
 
-	.masteriyo-c-img {
-		width: 40px;
-		height: 40px;
-		@include masteriyo-border-radius;
-	}
+		&--list-wrap > li {
+			padding: $spacing_16px 0;
+			border-bottom: 1px solid var(--masteriyo-color-border);
 
-	.masteriyo-c-title {
-		margin-left: $spacing_16px;
-		margin-bottom: inherit;
-		font-size: 16px;
-		font-weight: 700;
-	}
+			&:last-of-type {
+				border-bottom: none;
+			}
+		}
 
-	.masteriyo-c-btn {
-		border-radius: $border_radius_100;
+		.masteriyo-list-header {
+			font-size: 16px;
+			font-weight: 600;
+			text-transform: uppercase;
+		}
+
+		.masteriyo-c-img {
+			width: 40px;
+			height: 40px;
+			@include masteriyo-border-radius;
+		}
+
+		.masteriyo-c-title {
+			margin-left: $spacing_16px;
+			margin-bottom: inherit;
+			font-size: 16px;
+			font-weight: 700;
+		}
+
+		.masteriyo-c-btn {
+			border-radius: $border_radius_100;
+		}
 	}
 }

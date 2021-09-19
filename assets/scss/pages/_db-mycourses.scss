@@ -25,6 +25,11 @@
 			margin: $spacing_15px $spacing_15px $spacing_30px $spacing_15px;
 			flex-basis: calc((100% / 3) - 30px);
 			max-width: 256px;
+
+			&:focus,
+			&:hover {
+				@include masteriyo-shadow-1;
+			}
 		}
 
 		&--img {

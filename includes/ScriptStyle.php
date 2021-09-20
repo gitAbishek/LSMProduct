@@ -93,11 +93,11 @@ class ScriptStyle {
 	 * @return array
 	 */
 	public static function get_asset_suffix() {
-		if ( Constants::is_true( 'SCRIPT_DEBUG' ) ) {
-			return '';
-		}
 		$version = Constants::get( 'MASTERIYO_VERSION' );
 
+		if ( Constants::is_true( 'SCRIPT_DEBUG' ) ) {
+			return ".{$version}";
+		}
 		return ".{$version}.min";
 	}
 

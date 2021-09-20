@@ -66,12 +66,20 @@ const paths = {
 	},
 
 	frontendJS: {
-		src: ['assets/js/frontend/*.js', '!assets/js/frontend/*.min.js'],
+		src: [
+			'assets/js/frontend/*.js',
+			'!assets/js/frontend/*.min.js',
+			`!assets/js/frontend/*.${pkg.version}.js`,
+		],
 		dest: 'assets/js/frontend',
 	},
 
 	backendJS: {
-		src: ['assets/js/build/*.js', '!assets/js/build/*.min.js'],
+		src: [
+			'assets/js/build/*.js',
+			'!assets/js/build/*.min.js',
+			`!assets/js/build/*.${pkg.version}.js`,
+		],
 		dest: 'assets/js/build',
 	},
 
@@ -88,9 +96,29 @@ function removePreviousMinifiedAssets() {
 	return exec('find assets/ -name "*.min.*" -type f -delete');
 }
 
+function removeVersionedUnminifiedAssets() {
+	return exec(
+		'find assets/ -type f -regextype posix-extended -regex ".*[0-9]+\\.[0-9]+\\.[0-9]+*\\.(js|css)$" -delete'
+	);
+}
+
+function removeVersionedUnminifiedFrontendJS() {
+	return exec(
+		'find assets/js/frontend/ -type f -regextype posix-extended -regex ".*[0-9]+\\.[0-9]+\\.[0-9]+*\\.js$" -delete'
+	);
+}
+
+function removeVersionedUnminifiedCSS() {
+	return exec(
+		'find assets/ -type f -regextype posix-extended -regex ".*[0-9]+\\.[0-9]+\\.[0-9]+*\\.css$" -delete'
+	);
+}
+
 function renameBackendAssets() {
 	return src(paths.backendJS.src)
-		.pipe(rename({ suffix: `.${pkg.version}.min` }))
+		.pipe(rename({ suffix: `.${pkg.version}` }))
+		.pipe(dest(paths.backendJS.dest))
+		.pipe(rename({ suffix: `.min` }))
 		.pipe(dest(paths.backendJS.dest));
 }
 
@@ -104,7 +132,9 @@ function compileSass() {
 		.pipe(autoprefixer())
 		.pipe(browserSync.stream())
 		.pipe(dest(paths.sass.dest))
-		.pipe(rename({ suffix: `.${pkg.version}.min` }))
+		.pipe(rename({ suffix: `.${pkg.version}` }))
+		.pipe(dest(paths.sass.dest))
+		.pipe(rename({ suffix: `.min` }))
 		.pipe(dest(paths.sass.dest));
 }
 
@@ -117,8 +147,10 @@ function startBrowserSync(cb) {
 
 function minifyJs() {
 	return src(paths.frontendJS.src)
+		.pipe(rename({ suffix: `.${pkg.version}` }))
+		.pipe(dest(paths.frontendJS.dest))
 		.pipe(uglify())
-		.pipe(rename({ suffix: `.${pkg.version}.min` }))
+		.pipe(rename({ suffix: `.min` }))
 		.pipe(dest(paths.frontendJS.dest));
 }
 
@@ -132,8 +164,11 @@ function reloadBrowserSync(cb) {
 }
 
 function watchChanges() {
-	watch(paths.sass.src, compileSass);
-	watch(paths.frontendJS.src, series(minifyJs, reloadBrowserSync));
+	watch(paths.sass.src, series(removeVersionedUnminifiedCSS, compileSass));
+	watch(
+		paths.frontendJS.src,
+		series(removeVersionedUnminifiedFrontendJS, minifyJs, reloadBrowserSync)
+	);
 	watch(paths.php.src, reloadBrowserSync);
 	watch(paths.images.src, series(optimizeImages, reloadBrowserSync));
 }
@@ -175,13 +210,10 @@ function compressBuildWithVersion() {
 
 const compileAssets = series(
 	removePreviousMinifiedAssets,
+	removeVersionedUnminifiedAssets,
 	parallel(compileSass, minifyJs, optimizeImages)
 );
-const build = series(
-	removeBuild,
-	compileAssets,
-	renameBackendAssets
-);
+const build = series(removeBuild, compileAssets, renameBackendAssets);
 const dev = series(
 	removePreviousMinifiedAssets,
 	startBrowserSync,

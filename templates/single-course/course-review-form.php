@@ -59,7 +59,7 @@ do_action( 'masteriyo_before_single_course_review_form' );
 			esc_html__( 'You must be %s to submit a review', 'masteriyo' ),
 			wp_kses_post(
 				sprintf(
-					'<a href="%s" class="masteriyo-link-primary">%s</a>',
+					'<a href="%s" class="masteriyo-link-primary masteriyo-link-login">%s</a>',
 					masteriyo_get_page_permalink( 'account' ),
 					__( 'logged in', 'masteriyo' )
 				)

@@ -643,7 +643,7 @@
 
 	&--turating {
 		text-align: center;
-		margin-bottom: $spacing_40px;
+		margin-bottom: $spacing_30px;
 	}
 }
 
@@ -709,7 +709,7 @@
 					font-size: 16px;
 					font-weight: 700;
 					line-height: 19px;
-					margin-top: $spacing_24px;
+					margin-top: $spacing_16px;
 					margin-bottom: $spacing_8px;
 				}
 
@@ -724,7 +724,7 @@
 	.masteriyo-review {
 		border-top: 1px solid var(--masteriyo-color-border);
 		margin-top: $spacing_24px;
-		padding-top: $spacing_16px;
+		padding-top: $spacing_24px;
 
 		.masteriyo-avatar {
 			img {
@@ -743,6 +743,11 @@
 		align-items: center;
 		justify-content: center;
 		padding-top: $spacing_24px;
+		margin-top: $spacing_40px;
+	}
+
+	.masteriyo-link-login {
+		margin: 0 $spacing_4px;
 	}
 }
 

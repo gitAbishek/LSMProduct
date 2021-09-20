@@ -32,11 +32,13 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonCourseTaxonomy } from '../../skeleton';
 import API from '../../utils/api';
+import CategoriesFilter from './components/CategoriesFilter';
 import CategoryRow from './components/CategoryRow';
 
 interface FilterParams {
 	per_page?: number;
 	page?: number;
+	search?: string;
 }
 
 const AllCourseCategories = () => {
@@ -107,7 +109,13 @@ const AllCourseCategories = () => {
 			<Container maxW="container.xl">
 				<Stack direction="column" spacing="6" py={{ base: 6, md: 12 }}>
 					<Box bg="white" py="12" shadow="box" mx="auto" w="full">
-						<Stack direction="column" spacing="8">
+						<Stack direction="column" spacing="10">
+							{categoriesQuery.isSuccess && (
+								<CategoriesFilter
+									filterParams={filterParams}
+									setFilterParams={setFilterParams}
+								/>
+							)}
 							<Stack direction="column" spacing="8">
 								<Table>
 									<Thead>

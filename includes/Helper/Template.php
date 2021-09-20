@@ -552,6 +552,10 @@ if ( ! function_exists( 'masteriyo_single_course_categories' ) ) {
 	function masteriyo_single_course_categories() {
 		global $course;
 
+		if ( empty( $course->get_categories() ) ) {
+			return;
+		}
+
 		masteriyo_get_template(
 			'single-course/categories.php',
 			array(

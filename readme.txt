@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning
 Requires at least: 5.0
 Tested up to: 5.8.1
 Requires PHP: 7.0
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,7 +21,7 @@ Need any help? [Check Documentation](https://docs.masteriyo.com/)
 ### Features And Options:
 
 * Unlimited courses and lessons
-* Unlimited Quizes
+* Unlimited Quizzes
 * Sell courses
 * Inbuilt Order System
 * Accept Payment via PayPal
@@ -54,6 +54,12 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.0.2 - 21-09-2021 =
+* Enhancement - Added search on categories page admin side.
+* Enhancement - Account page Responsive.
+* Fix - Course question answers for open courses.
+* Fix - White space issue in learn page content.
 
 = 1.0.1 - 16-09-2021 =
 * Release of version 1.0.1

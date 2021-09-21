@@ -1,12 +1,12 @@
 # LMS for WordPress
-Contributors: Masteriyo
-Tags: lms, learning management system, courses, elearning
-Requires at least: 5.0
-Tested up to: 5.8.1
-Requires PHP: 7.0
-Stable tag: 1.0.1
-License: GNU General Public License v3.0
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+**Contributors****: Masteriyo  
+**Tags**: lms, learning management system, courses, elearning  
+**Requires at least**: 5.0  
+**Tested up to**: 5.8.1  Cancel changes
+**Requires PHP**: 7.0  
+**Stable tag**: 1.0.1  
+**License: GNU** General Public License v3.0  
+**License URI**: http://www.gnu.org/licenses/gpl-3.0.html
 
 A Complete WordPress LMS plugin to create and sell online courses in no time.
 

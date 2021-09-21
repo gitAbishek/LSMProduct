@@ -51,6 +51,10 @@
 			margin-bottom: $spacing_16px;
 		}
 
+		.masteriyo-welcome-msg {
+			color: var(--masteriyo-color-white);
+		}
+
 		.masteriyo-close {
 			position: absolute;
 			right: 16px;
@@ -267,6 +271,7 @@
 				&.masteriyo-icon-svg > svg {
 					width: 16px;
 					height: 16px;
+					fill: var(--masteriyo-color-golden);
 				}
 			}
 
@@ -274,6 +279,7 @@
 				font-size: 18px;
 				font-weight: 700;
 				margin-bottom: $spacing_8px;
+				padding: 0;
 			}
 
 			&--rt {

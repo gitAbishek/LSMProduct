@@ -489,6 +489,16 @@ class CourseQuestionAnswersController extends CommentsController {
 			);
 		}
 
+		if ( ! is_user_logged_in() ) {
+			return new \WP_Error(
+				'masteriyo_user_not_logged_in',
+				__( 'You must be logged in to ask question.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
 			return true;
 		}

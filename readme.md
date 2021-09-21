@@ -1,4 +1,6 @@
-# LMS for WordPress
+![WordPress LMS](https://ps.w.org/learning-management-system/assets/banner-1544x500.png?rev=2599799)
+
+# LMS for WordPress ![status](https://github.com/wpeverest/wordpress-lms/actions/workflows/deploy-to-staging.yml/badge.svg)
 **Contributors****: Masteriyo  
 **Tags**: lms, learning management system, courses, elearning  
 **Requires at least**: 5.0  

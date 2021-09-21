@@ -33,7 +33,7 @@ const Editor: React.FC<Props> = (props) => {
 		],
 		content: defaultValue,
 		parseOptions: {
-			preserveWhitespace: 'full',
+			preserveWhitespace: true,
 		},
 	});
 

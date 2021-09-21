@@ -22,7 +22,7 @@ const theme = extendTheme({
 			'html,body': {
 				bg: 'gray.50',
 			},
-			'#masteriyo, #masteriyo-onboarding': {
+			'#masteriyo, #masteriyo-onboarding, #masteriyo-interactive-course': {
 				'input[type="color"], input[type="date"], input[type="datetime-local"], input[type="datetime"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], select, textarea, #rfs-btn':
 					{
 						shadow: 'input',
@@ -44,29 +44,37 @@ const theme = extendTheme({
 						marginBottom: 0,
 					},
 				},
-				'.ProseMirror': {
-					'*': {
-						whiteSpace: 'pre-wrap',
-						wordWrap: 'break-word',
-					},
+				'.ProseMirror, .masteriyo-interactive-description': {
 					'h1, h2, h3, h4, h5, h6': {
 						lineHeight: '1.1',
 						fontWeight: '700',
 					},
 					h1: {
 						fontSize: '28px',
+						my: '0.67em',
 					},
 					h2: {
 						fontSize: '24px',
+						my: '0.75em',
 					},
 					h3: {
 						fontSize: '20px',
+						my: '0.83em',
 					},
 					h4: {
 						fontSize: '18px',
+						my: '1.12em',
 					},
 					h5: {
 						fontSize: '16px',
+						my: '1.5em',
+					},
+					h6: {
+						fontSize: '14px',
+						my: '1.67em',
+					},
+					p: {
+						mb: '1rem',
 					},
 					blockquote: {
 						paddingLeft: '1rem',
@@ -85,7 +93,7 @@ const theme = extendTheme({
 						listStyleType: 'disc',
 					},
 					ol: {
-						padding: '0 1rem',
+						pl: '1.2rem',
 					},
 					pre: {
 						background: '#0D0D0D',

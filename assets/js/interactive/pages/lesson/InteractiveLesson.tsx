@@ -101,6 +101,7 @@ const InteractiveLesson = () => {
 					)}
 					<Image src={imageQuery?.data?.source_url} />
 					<Text
+						className="masteriyo-interactive-description"
 						dangerouslySetInnerHTML={{ __html: lessonQuery?.data?.description }}
 					/>
 				</Stack>

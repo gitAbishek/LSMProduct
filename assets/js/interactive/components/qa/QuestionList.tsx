@@ -1,4 +1,6 @@
 import {
+	Alert,
+	AlertIcon,
 	Box,
 	Button,
 	Center,
@@ -27,6 +29,9 @@ import API from '../../../back-end/utils/api';
 import { QuestionAnswerSchema } from '../../schemas';
 import QaChat from './QaChat';
 
+// @ts-ignore
+const myAccountUrl = window._MASTERIYO_.urls.account;
+
 const QuestionList: React.FC = () => {
 	const { courseId }: any = useParams();
 	const toast = useToast();
@@ -46,11 +51,18 @@ const QuestionList: React.FC = () => {
 	});
 	const { isOpen: isChatOpen, onToggle: onChatToggle } = useDisclosure();
 
-	const qaQuery = useQuery([`qa${courseId}`, courseId], () =>
-		qaAPI.list({
-			course_id: courseId,
-			parent: 0,
-		})
+	const qaQuery = useQuery(
+		[`qa${courseId}`, courseId],
+		() =>
+			qaAPI.list({
+				course_id: courseId,
+				parent: 0,
+			}),
+		{
+			useErrorBoundary: false,
+			retry: false,
+			retryOnMount: false,
+		}
 	);
 
 	const addNewQuestion = useMutation(
@@ -186,6 +198,23 @@ const QuestionList: React.FC = () => {
 					/>
 				)}
 			</Stack>
+		);
+	}
+
+	if (qaQuery.isError) {
+		return (
+			<Alert mt="6" status="warning">
+				<AlertIcon />
+				<Text color="gray.600" fontSize="xs">
+					{__(
+						'You must be logged in to ask question. You can register from',
+						'masteriyo'
+					)}
+					<Link isExternal color="blue.500" href={myAccountUrl}>
+						{__(' here.', 'masteriyo')}
+					</Link>
+				</Text>
+			</Alert>
 		);
 	}
 

@@ -2,7 +2,7 @@
 
 # LMS for WordPress ![status](https://github.com/wpeverest/wordpress-lms/actions/workflows/deploy-to-staging.yml/badge.svg)
 
-**Contributors\*\***: Masteriyo  
+**Contributors**: Masteriyo  
 **Tags**: lms, learning management system, courses, elearning  
 **Requires at least**: 5.0  
 **Tested up to**: 5.8.1

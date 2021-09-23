@@ -211,18 +211,18 @@ class Permission {
 	 * @param string $object_id Object ID.
 	 * @return bool
 	 */
-	public function rest_check_mto_course_qas_permissions( $context = 'read', $object_id = 0 ) {
+	public function rest_check_course_qas_permissions( $context = 'read', $object_id = 0 ) {
 		$permission = false;
 		$contexts   = array(
 			'read'   => 'moderate_comments',
 			'create' => 'moderate_comments',
-			'edit'   => 'moderate_comments',
-			'delete' => 'moderate_comments',
-			'batch'  => 'moderate_comments',
+			'edit'   => 'edit_course_qa',
+			'delete' => 'delete_course_qa',
+			'batch'  => 'edit_others_course_qas',
 		);
 
 		if ( isset( $contexts[ $context ] ) ) {
-			$permission = current_user_can( $contexts[ $context ] );
+			$permission = current_user_can( $contexts[ $context ], $object_id );
 		}
 
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'course_review' );

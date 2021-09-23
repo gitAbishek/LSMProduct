@@ -1,12 +1,13 @@
 import {
 	Box,
 	Button,
-	ButtonGroup,
 	Center,
+	Flex,
 	Heading,
 	HStack,
 	Icon,
 	Link,
+	SimpleGrid,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
@@ -60,12 +61,9 @@ const ContentNav: React.FC<Props> = (props) => {
 
 	return (
 		<Box as="nav" w="full" p="6">
-			<ButtonGroup
-				d="flex"
-				justifyContent={['center', null, 'space-between']}
-				alignItems="center">
+			<SimpleGrid columns={[1, 1, 3]}>
 				<MobileHidden>
-					<Box minW="200px">
+					<Box minW="100px">
 						{navigation?.previous && (
 							<Link
 								as={RouterLink}
@@ -92,30 +90,32 @@ const ContentNav: React.FC<Props> = (props) => {
 				</MobileHidden>
 
 				{(quizStarted || type !== 'quiz') && (
-					<Button
-						onClick={onCompletePress}
-						isLoading={isButtonLoading}
-						isDisabled={isButtonDisabled}
-						colorScheme="blue"
-						rounded="full"
-						fontWeight="bold"
-						leftIcon={
-							<Icon
-								fontSize="xl"
-								d={isButtonDisabled ? 'block' : 'none'}
-								as={BiCheck}
-							/>
-						}
-						textTransform="uppercase">
-						{isButtonDisabled
-							? __('Completed', 'masteiryo')
-							: type === 'quiz'
-							? __('Submit Quiz', 'masteriyo')
-							: __('Mark as Complete', 'masteriyo')}
-					</Button>
+					<Flex align="center" justify="center">
+						<Button
+							onClick={onCompletePress}
+							isLoading={isButtonLoading}
+							isDisabled={isButtonDisabled}
+							colorScheme="blue"
+							rounded="full"
+							fontWeight="bold"
+							leftIcon={
+								<Icon
+									fontSize="xl"
+									d={isButtonDisabled ? 'block' : 'none'}
+									as={BiCheck}
+								/>
+							}
+							textTransform="uppercase">
+							{isButtonDisabled
+								? __('Completed', 'masteiryo')
+								: type === 'quiz'
+								? __('Submit Quiz', 'masteriyo')
+								: __('Mark as Complete', 'masteriyo')}
+						</Button>
+					</Flex>
 				)}
 				<MobileHidden>
-					<Box minW="200px">
+					<Box minW="100px" maxW="300px">
 						{navigation?.next && (
 							<Link
 								as={RouterLink}
@@ -140,7 +140,7 @@ const ContentNav: React.FC<Props> = (props) => {
 						)}
 					</Box>
 				</MobileHidden>
-			</ButtonGroup>
+			</SimpleGrid>
 		</Box>
 	);
 };

@@ -125,7 +125,9 @@ const ScoreBoard: React.FC<Props> = (props) => {
 						isLoading={isFinishButtonLoading}
 						onClick={onCompletePress}
 						textTransform="uppercase">
-						{__('Finish Quiz', 'masteriyo')}
+						{isButtonDisabled
+							? __('Completed', 'masteriyo')
+							: __('Complete Quiz', 'masteriyo')}
 					</Button>
 					<Button
 						onClick={onStartPress}

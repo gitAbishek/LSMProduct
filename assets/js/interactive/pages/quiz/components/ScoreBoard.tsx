@@ -34,6 +34,8 @@ interface Props {
 	attemptMessage: string;
 	courseId: number;
 	navigation: ContentNavigationSchema;
+	isButtonDisabled?: boolean;
+	isFinishButtonLoading: boolean;
 }
 
 const ScoreBoard: React.FC<Props> = (props) => {
@@ -44,6 +46,8 @@ const ScoreBoard: React.FC<Props> = (props) => {
 		attemptMessage,
 		navigation,
 		courseId,
+		isButtonDisabled,
+		isFinishButtonLoading,
 	} = props;
 
 	const listStyles = {
@@ -129,6 +133,8 @@ const ScoreBoard: React.FC<Props> = (props) => {
 							rounded="full"
 							fontWeight="bold"
 							leftIcon={<Icon as={BiCheck} fontSize="xl" />}
+							isDisabled={isButtonDisabled}
+							isLoading={isFinishButtonLoading}
 							textTransform="uppercase">
 							{__('Finish Quiz', 'masteriyo')}
 						</Button>

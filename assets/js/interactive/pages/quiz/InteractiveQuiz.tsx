@@ -1,7 +1,15 @@
-import { Box, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Container,
+	Heading,
+	Stack,
+	Text,
+	useToast,
+} from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
@@ -11,12 +19,13 @@ import { deepClean, getLocalTime } from '../../../back-end/utils/utils';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
 import FloatingTimer from '../../components/FloatingTimer';
+import { CourseProgressItemsMap } from '../../schemas';
 import QuizFields from './components/QuizFields';
 import QuizStart from './components/QuizStart';
 import ScoreBoard from './components/ScoreBoard';
 
 const InteractiveQuiz = () => {
-	const { quizId }: any = useParams();
+	const { quizId, courseId }: any = useParams();
 	const quizAPI = new API(urls.quizes);
 	const quizAttemptsAPI = new API(urls.quizesAttempts);
 	const methods = useForm();
@@ -24,6 +33,9 @@ const InteractiveQuiz = () => {
 	const [quizStartedOn, setQuizStartedOn] = useState<any>(null);
 	const [quizAboutToExpire, setQuizAboutToExpire] = useState<boolean>(false);
 	const [attemptMessage, setAttemptMessage] = useState<string>('');
+	const progressAPI = new API(urls.courseProgressItem);
+	const queryClient = useQueryClient();
+	const toast = useToast();
 
 	const quizQuery = useQuery<QuizSchema, Error>(
 		[`section${quizId}`, quizId],
@@ -49,8 +61,16 @@ const InteractiveQuiz = () => {
 
 	const startQuiz = useMutation((quizId: number) => quizAPI.start(quizId));
 
+	const completeMutation = useMutation((data: CourseProgressItemsMap) =>
+		progressAPI.store(data)
+	);
+
 	const checkQuizAnswers = useMutation((data: any) =>
 		quizAPI.check(quizId, data)
+	);
+	const completeQuery = useQuery<CourseProgressItemsMap>(
+		[`completeQuery${quizId}`, quizId],
+		() => progressAPI.list({ item_id: quizId, course_id: courseId })
 	);
 
 	const onStartPress = () => {
@@ -71,6 +91,30 @@ const InteractiveQuiz = () => {
 				setScoreBoardData(data);
 			},
 		});
+	};
+
+	const onCompletePress = () => {
+		completeMutation.mutate(
+			{
+				course_id: courseId,
+				item_id: quizId,
+				item_type: 'lesson',
+				completed: true,
+			},
+			{
+				onSuccess: () => {
+					queryClient.invalidateQueries(`completeQuery${quizId}`);
+					queryClient.invalidateQueries(`courseProgress${courseId}`);
+
+					toast({
+						title: __('Mark as completed', 'masteriyo'),
+						description: __('Quiz has been marked as completed', 'masteriyo'),
+						isClosable: true,
+						status: 'success',
+					});
+				},
+			}
+		);
 	};
 
 	const onQuizeExpire = () => onSubmit(methods.getValues());
@@ -102,8 +146,10 @@ const InteractiveQuiz = () => {
 										scoreData={scoreBoardData}
 										onStartPress={onStartPress}
 										isButtonLoading={startQuiz.isLoading}
+										isFinishButtonLoading={completeMutation.isLoading}
 										attemptMessage={attemptMessage}
 										navigation={quizQuery?.data?.navigation}
+										isButtonDisabled={completeQuery?.data?.completed}
 									/>
 								) : (
 									<QuizStart

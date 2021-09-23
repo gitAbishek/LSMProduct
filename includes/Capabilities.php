@@ -30,7 +30,7 @@ class Capabilities {
 	 */
 	public static function map_meta_cap( $caps, $cap, $user_id, $args ) {
 		if ( masteriyo_ends_with( $cap, 'course_progress' ) ) {
-			$caps = self::course_progreess_map_meta_cap( $caps, $cap, $user_id, $args );
+			$caps = self::course_progress_map_meta_cap( $caps, $cap, $user_id, $args );
 		}
 
 		return $caps;
@@ -43,7 +43,7 @@ class Capabilities {
 	 *
 	 * @return array
 	 */
-	protected static function course_progreess_map_meta_cap( $caps, $cap, $user_id, $args ) {
+	protected static function course_progress_map_meta_cap( $caps, $cap, $user_id, $args ) {
 		switch ( $cap ) {
 			case 'edit_course_progress':
 				$progress = masteriyo_get_course_progress( $args[0] );
@@ -53,10 +53,12 @@ class Capabilities {
 					break;
 				}
 
-				if ( $progress->get_user_id() && absint( $user_id ) === $progress->get_user_id() ) {
+				if ( $progress->get_user_id() && strval( $user_id ) === $progress->get_user_id() ) {
 					$caps = array( 'edit_course_progresses' );
 				} else {
-					$caps = user_can( 'edit_others_course_progresses', $user_id ) ? array( 'edit_course_progresses' ) : array( 'do_not_allow' );
+					$caps = user_can( $user_id, 'edit_others_course_progresses' )
+					? array( 'edit_course_progresses' )
+					: array( 'do_not_allow' );
 				}
 
 				break;
@@ -69,13 +71,14 @@ class Capabilities {
 					break;
 				}
 
-				if ( $progress->get_user_id() && absint( $user_id ) === $progress->get_user_id() ) {
+				if ( $progress->get_user_id() && strval( $user_id ) === $progress->get_user_id() ) {
 					$caps = array( 'delete_course_progresses' );
 				} else {
-					$caps = user_can( 'delete_others_course_progresses', $user_id ) ? array( 'delete_course_progresses' ) : array( 'do_not_allow' );
+					$caps = user_can( $user_id, 'delete_others_course_progresses' ) ? array( 'delete_course_progresses' ) : array( 'do_not_allow' );
 				}
 
 				break;
+
 		}
 
 		return $caps;

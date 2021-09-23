@@ -254,6 +254,8 @@ class CoursesController extends PostsController {
 		/**
 		 * Filter the data for a response.
 		 *
+		 * @since 0.1.0
+		 *
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *

@@ -328,6 +328,32 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	 * @return void
 	 */
 	public function get_course_progress_items( $course_progress ) {
+		$query = new \WP_Query(
+			array(
+				'post_type'      => array( 'mto-lesson', 'mto-quiz' ),
+				'post_status'    => 'any',
+				'posts_per_page' => -1,
+				'meta_key'       => '_course_id',
+				'meta_value'     => $course_progress->get_course_id( 'edit' ),
+			)
+		);
+
+		$total_items = array_map(
+			function( $lesson_quiz ) use ( $course_progress ) {
+				$item = masteriyo( 'course-progress-item' );
+				$item->set_props(
+					array(
+						'user_id'   => $course_progress->get_user_id(),
+						'item_id'   => $lesson_quiz->ID,
+						'item_type' => str_replace( 'mto-', '', $lesson_quiz->post_type ),
+					)
+				);
+
+				return $item;
+			},
+			$query->posts
+		);
+
 		$query = new CourseProgressItemQuery(
 			array(
 				'user_id'     => $course_progress->get_user_id( 'edit' ),
@@ -339,35 +365,40 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			)
 		);
 
-		$items = $query->get_course_progress_items();
+		$items_in_table = $query->get_course_progress_items();
 
-		if ( ! isset( $request['items'] ) || empty( $request['items'] ) ) {
-			return $items;
+		// Create map of actual course progress item created.
+		foreach ( $items_in_table as $item ) {
+			$items_in_table_map[ $item->get_item_id() ] = $item;
 		}
 
-		$progress_items = $request['items'];
+		// Sync the total progress items with the progress items in table.
+		$total_items = array_map(
+			function( $item ) use ( $items_in_table_map ) {
+				if ( ! isset( $items_in_table_map[ $item->get_item_id() ] ) ) {
+					return $item;
+				}
 
-		// Create a map of progress items which are from DB.
-		foreach ( $items as $item ) {
-			$item_key               = $item->get_item_id() . ':' . $item->get_user_id() . ':' . $item->get_item_type() . ':' . $item->get_progress_id();
-			$items_map[ $item_key ] = $item;
-		}
+				$item_in_table = $items_in_table_map[ $item->get_item_id() ];
 
-		foreach ( $progress_items as $progress_item ) {
-			$item_key               = $progress_item['item_id'] . ':' . $user_id . ':' . $progress_item['item_type'] . ':' . $course_progress->get_id();
-			$item_obj               = isset( $items_map[ $item_key ] ) ? $items_map[ $item_key ] : masteriyo( 'course-progress-item' );
-			$items_map[ $item_key ] = $item_obj;
+				$item->set_props(
+					array(
+						'progress_id'  => $item_in_table->get_progress_id(),
+						'course_id'    => $item_in_table->get_course_id(),
+						'completed'    => $item_in_table->get_completed(),
+						'started_at'   => $item_in_table->get_started_at(),
+						'modified_at'  => $item_in_table->get_modified_at(),
+						'completed_at' => $item_in_table->get_completed_at(),
+					)
+				);
 
-			$item_obj->set_item_id( $progress_item['item_id'] );
-			$item_obj->set_item_type( $progress_item['item_type'] );
-			$item_obj->set_completed( isset( $progress_item['completed'] ) ? $progress_item['completed'] : false );
-			$item_obj->set_user_id( $user_id );
-			$item_obj->set_progress_id( $course_progress->get_id() );
+				return $item;
 
-			$item_obj->save();
-		}
+			},
+			$total_items
+		);
 
-		return array_values( $items_map );
+		return $total_items;
 	}
 
 	/**

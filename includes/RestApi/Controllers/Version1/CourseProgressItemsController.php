@@ -467,10 +467,10 @@ class CourseProgressItemsController extends CrudController {
 			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
 		}
 
-		if ( isset( $request['user_id'] ) && ! empty( $request['user_id'] ) ) {
-			$course_progress_item->set_user_id( $request['user_id'] );
-		} else {
-			$course_progress_item->set_user_id( get_current_user_id() );
+		// Course progress id.
+		$course_progress = \masteriyo_get_course_progress_by_user_and_course( $user_id, $course_id );
+		if ( $course_progress ) {
+			$course_progress_item->set_progress_id( $course_progress->get_id() );
 		}
 
 		// Course progress item completion.

@@ -54,7 +54,7 @@ class CourseProgressItem extends Model {
 		'item_type'    => '',
 		'progress_id'  => 0,
 		'course_id'    => 0,
-		'completed'    => '',
+		'completed'    => false,
 		'started_at'   => null,
 		'modified_at'  => null,
 		'completed_at' => null,
@@ -88,6 +88,24 @@ class CourseProgressItem extends Model {
 		global $wpdb;
 
 		return "{$wpdb->base_prefix}masteriyo_user_activities";
+	}
+
+	/**
+	 * Get course progress item title.
+	 *
+	 * @since 1.0.3
+	 *
+	 * @return string
+	 */
+	public function get_item_title() {
+		$item_title = '';
+		$post       = get_post( $this->get_item_id() );
+
+		if ( $post ) {
+			$item_title = $post->post_title;
+		}
+
+		return apply_filters( 'masteriyo_course_progress_item_title', $item_title, $this );
 	}
 
 	/*
@@ -394,4 +412,6 @@ class CourseProgressItem extends Model {
 	public function add_item( $context = 'view' ) {
 		$this->items[] = item;
 	}
+
+
 }

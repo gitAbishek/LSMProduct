@@ -503,7 +503,7 @@ class CourseQuestionAnswersController extends CommentsController {
 			return true;
 		}
 
-		if ( ! $this->permission->rest_check_mto_course_qas_permissions( 'read' ) ) {
+		if ( ! $this->permission->rest_check_course_qas_permissions( 'read' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),
@@ -536,7 +536,7 @@ class CourseQuestionAnswersController extends CommentsController {
 			return true;
 		}
 
-		if ( ! $this->permission->rest_check_mto_course_qas_permissions( 'read', absint( $request['id'] ) ) ) {
+		if ( ! $this->permission->rest_check_course_qas_permissions( 'read', absint( $request['id'] ) ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
@@ -569,7 +569,7 @@ class CourseQuestionAnswersController extends CommentsController {
 			return true;
 		}
 
-		if ( ! $this->permission->rest_check_mto_course_qas_permissions( 'create' ) ) {
+		if ( ! $this->permission->rest_check_course_qas_permissions( 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
 				__( 'Sorry, you are not allowed to create resources.', 'masteriyo' ),
@@ -624,7 +624,7 @@ class CourseQuestionAnswersController extends CommentsController {
 			);
 		}
 
-		if ( ! $this->permission->rest_check_mto_course_qas_permissions( 'delete', absint( $request['id'] ) ) ) {
+		if ( ! $this->permission->rest_check_course_qas_permissions( 'delete', absint( $request['id'] ) ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
@@ -665,21 +665,7 @@ class CourseQuestionAnswersController extends CommentsController {
 			);
 		}
 
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
-			return true;
-		}
-
-		if ( get_current_user_id() !== $question_answer->get_user_id() ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_update',
-				__( 'Sorry, you are not allowed to update this resource.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code(),
-				)
-			);
-		}
-
-		if ( ! $this->permission->rest_check_mto_course_qas_permissions( 'edit', absint( $request['id'] ) ) ) {
+		if ( ! $this->permission->rest_check_course_qas_permissions( 'edit', absint( $request['id'] ) ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),

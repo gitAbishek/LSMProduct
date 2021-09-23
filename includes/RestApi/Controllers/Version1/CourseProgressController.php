@@ -897,6 +897,7 @@ class CourseProgressController extends CrudController {
 
 		$data = array(
 			'item_id'   => $course_progress_item->get_item_id( $context ),
+			'item_title'   => $course_progress_item->get_item_title( $context ),
 			'item_type' => $course_progress_item->get_item_type( $context ),
 			'completed' => $course_progress_item->get_completed( $context ),
 			'video'     => ! empty( trim( $video ) ),

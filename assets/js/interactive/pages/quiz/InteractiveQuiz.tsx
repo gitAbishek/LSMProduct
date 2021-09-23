@@ -142,14 +142,13 @@ const InteractiveQuiz = () => {
 									/>
 								) : scoreBoardData ? (
 									<ScoreBoard
-										courseId={quizQuery.data?.course_id}
 										scoreData={scoreBoardData}
 										onStartPress={onStartPress}
 										isButtonLoading={startQuiz.isLoading}
 										isFinishButtonLoading={completeMutation.isLoading}
 										attemptMessage={attemptMessage}
-										navigation={quizQuery?.data?.navigation}
 										isButtonDisabled={completeQuery?.data?.completed}
+										onCompletePress={onCompletePress}
 									/>
 								) : (
 									<QuizStart

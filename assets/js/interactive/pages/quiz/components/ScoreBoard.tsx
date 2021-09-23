@@ -5,7 +5,6 @@ import {
 	ButtonGroup,
 	Heading,
 	Icon,
-	Link,
 	List,
 	ListIcon,
 	ListItem,
@@ -24,18 +23,15 @@ import {
 	BiTargetLock,
 	BiXCircle,
 } from 'react-icons/bi';
-import { Link as RouterLink } from 'react-router-dom';
-import { getNavigationRoute } from '../../../components/FloatingNavigation';
-import { ContentNavigationSchema, ScoreBoardSchema } from '../../../schemas';
+import { ScoreBoardSchema } from '../../../schemas';
 interface Props {
 	scoreData: ScoreBoardSchema;
 	onStartPress: any;
 	isButtonLoading?: boolean;
 	attemptMessage: string;
-	courseId: number;
-	navigation: ContentNavigationSchema;
 	isButtonDisabled?: boolean;
 	isFinishButtonLoading: boolean;
+	onCompletePress: () => void;
 }
 
 const ScoreBoard: React.FC<Props> = (props) => {
@@ -44,8 +40,7 @@ const ScoreBoard: React.FC<Props> = (props) => {
 		onStartPress,
 		isButtonLoading,
 		attemptMessage,
-		navigation,
-		courseId,
+		onCompletePress,
 		isButtonDisabled,
 		isFinishButtonLoading,
 	} = props;
@@ -121,24 +116,17 @@ const ScoreBoard: React.FC<Props> = (props) => {
 
 			{attemptMessage.length <= 0 && (
 				<ButtonGroup>
-					<Link
-						as={RouterLink}
-						to={getNavigationRoute(
-							navigation?.previous?.id,
-							navigation?.previous?.type,
-							courseId
-						)}>
-						<Button
-							colorScheme="green"
-							rounded="full"
-							fontWeight="bold"
-							leftIcon={<Icon as={BiCheck} fontSize="xl" />}
-							isDisabled={isButtonDisabled}
-							isLoading={isFinishButtonLoading}
-							textTransform="uppercase">
-							{__('Finish Quiz', 'masteriyo')}
-						</Button>
-					</Link>
+					<Button
+						colorScheme="green"
+						rounded="full"
+						fontWeight="bold"
+						leftIcon={<Icon as={BiCheck} fontSize="xl" />}
+						isDisabled={isButtonDisabled}
+						isLoading={isFinishButtonLoading}
+						onClick={onCompletePress}
+						textTransform="uppercase">
+						{__('Finish Quiz', 'masteriyo')}
+					</Button>
 					<Button
 						onClick={onStartPress}
 						colorScheme="blue"

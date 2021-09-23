@@ -36,6 +36,16 @@
 				flex-basis: 100%;
 			}
 		}
+
+		.masteriyo-mycourses--card {
+			flex-basis: calc((100% / 2) - 30px);
+		}
+
+		.masteriyo-mycourses--thumbnail {
+			.masteriyo-placeholder {
+				width: 100%;
+			}
+		}
 	}
 	// Related Post
 	.masteriyo-related-post {

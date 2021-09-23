@@ -32,20 +32,21 @@
 
 	.masteriyo-vertical-menu {
 		flex-basis: 100%;
-	}
-
-	.masteriyo-main,
-	.entry-content
-		> *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator):not(.woocommerce) {
-		width: 100%;
-		display: block;
-
-		.masteriyo-vertical-menu {
-			border-right: none;
-		}
+		padding-left: 0;
 	}
 
 	.masteriyo {
+		.masteriyo-main,
+		.entry-content
+			> *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator):not(.woocommerce) {
+			width: 100%;
+			display: block;
+
+			.masteriyo-vertical-menu {
+				border-right: none;
+			}
+		}
+
 		.masteriyo-mycourses {
 			&--card {
 				flex-basis: calc((100% / 2) - 30px);

@@ -33,6 +33,10 @@ class Capabilities {
 			$caps = self::course_progress_map_meta_cap( $caps, $cap, $user_id, $args );
 		}
 
+		if ( masteriyo_ends_with( $cap, 'course_qa' ) ) {
+			$caps = self::course_qa_map_meta_cap( $caps, $cap, $user_id, $args );
+		}
+
 		return $caps;
 	}
 
@@ -85,6 +89,51 @@ class Capabilities {
 	}
 
 	/**
+	 * Handle course questions & answers meta cap.
+	 *
+	 * @since 1.0.3
+	 *
+	 * @return array
+	 */
+	protected static function course_qa_map_meta_cap( $caps, $cap, $user_id, $args ) {
+		switch ( $cap ) {
+			case 'edit_course_qa':
+				$question_answers = masteriyo_get_course_qa( $args[0] );
+
+				if ( ! $question_answers ) {
+					$caps[] = 'do_not_allow';
+					break;
+				}
+
+				if ( $question_answers->get_user_id() && absint( $user_id ) === $question_answers->get_user_id() ) {
+					$caps = array( 'edit_course_qas' );
+				} else {
+					$caps = user_can( $user_id, 'edit_others_course_qas' ) ? array( 'edit_course_qas' ) : array( 'do_not_allow' );
+				}
+
+				break;
+
+			case 'delete_course_qa':
+				$question_answers = masteriyo_get_course_qa( $args[0] );
+
+				if ( ! $question_answers ) {
+					$caps[] = 'do_not_allow';
+					break;
+				}
+
+				if ( $question_answers->get_user_id() && absint( $user_id ) === $question_answers->get_user_id() ) {
+					$caps = array( 'delete_course_qas' );
+				} else {
+					$caps = user_can( $user_id, 'delete_others_course_qas' ) ? array( 'delete_course_qas' ) : array( 'do_not_allow' );
+				}
+
+				break;
+		}
+
+		return $caps;
+	}
+
+	/**
 	 * Get masteriyo student capabilites.
 	 *
 	 * @since 1.0.0
@@ -109,6 +158,9 @@ class Capabilities {
 			'read_course_progresses'    => true,
 			'publish_course_progresses' => true,
 			'edit_course_progresses'    => true,
+
+			// Course Qas
+			'edit_course_qas'           => true,
 
 			// Taxonomy.
 			'manage_course_categories'  => true,

@@ -181,14 +181,14 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 		// Only update the course question-answer when the course question-answer data changes.
 		if ( array_intersect( $course_qa_data_keys, array_keys( $changes ) ) ) {
 			$course_qa_data = array(
-				'comment_author'       => $course_qa->get_author_name( 'edit' ),
-				'comment_author_email' => $course_qa->get_author_email( 'edit' ),
-				'comment_author_url'   => $course_qa->get_author_url( 'edit' ),
+				'comment_author'       => $course_qa->get_user_name( 'edit' ),
+				'comment_author_email' => $course_qa->get_user_email( 'edit' ),
+				'comment_author_url'   => $course_qa->get_user_url( 'edit' ),
 				'comment_author_IP'    => $course_qa->get_ip_address( 'edit' ),
 				'comment_content'      => $course_qa->get_content( 'edit' ),
 				'comment_approved'     => $course_qa->get_status( 'edit' ),
 				'comment_parent'       => $course_qa->get_parent( 'edit' ),
-				'user_id'              => $course_qa->get_author_id( 'edit' ),
+				'user_id'              => $course_qa->get_user_id( 'edit' ),
 			);
 
 			wp_update_comment( array_merge( array( 'comment_ID' => $course_qa->get_id() ), $course_qa_data ) );

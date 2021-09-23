@@ -108,12 +108,15 @@ const Header: React.FC<Props> = (props) => {
 										<Stack direction="row" alignItems="center">
 											<Flex>
 												<Heading fontSize="lg">
-													{Math.round(
-														(summary.total.completed /
-															(summary.total.pending +
-																summary.total.completed)) *
-															100
-													)}
+													{summary.total.completed === 0 &&
+													summary.total.pending === 0
+														? 0
+														: Math.round(
+																(summary.total.completed /
+																	(summary.total.pending +
+																		summary.total.completed)) *
+																	100
+														  )}
 												</Heading>
 												<Text fontSize="xs">%</Text>
 											</Flex>
@@ -135,7 +138,7 @@ const Header: React.FC<Props> = (props) => {
 												<Text>
 													{summary.total.pending}/
 													{summary.total.completed + summary.total.pending}
-													{__(' Completed', 'masteriyo')} |{' '}
+													{__(' Left', 'masteriyo')} |{' '}
 												</Text>
 
 												<Text>

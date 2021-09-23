@@ -5,6 +5,7 @@ import {
 	ButtonGroup,
 	Heading,
 	Icon,
+	Link,
 	List,
 	ListIcon,
 	ListItem,
@@ -23,16 +24,27 @@ import {
 	BiTargetLock,
 	BiXCircle,
 } from 'react-icons/bi';
-import { ScoreBoardSchema } from '../../../schemas';
+import { Link as RouterLink } from 'react-router-dom';
+import { getNavigationRoute } from '../../../components/FloatingNavigation';
+import { ContentNavigationSchema, ScoreBoardSchema } from '../../../schemas';
 interface Props {
 	scoreData: ScoreBoardSchema;
 	onStartPress: any;
 	isButtonLoading?: boolean;
 	attemptMessage: string;
+	courseId: number;
+	navigation: ContentNavigationSchema;
 }
 
 const ScoreBoard: React.FC<Props> = (props) => {
-	const { scoreData, onStartPress, isButtonLoading, attemptMessage } = props;
+	const {
+		scoreData,
+		onStartPress,
+		isButtonLoading,
+		attemptMessage,
+		navigation,
+		courseId,
+	} = props;
 
 	const listStyles = {
 		li: {
@@ -105,14 +117,22 @@ const ScoreBoard: React.FC<Props> = (props) => {
 
 			{attemptMessage.length <= 0 && (
 				<ButtonGroup>
-					<Button
-						colorScheme="green"
-						rounded="full"
-						fontWeight="bold"
-						leftIcon={<Icon as={BiCheck} fontSize="xl" />}
-						textTransform="uppercase">
-						{__('Finish Quiz', 'masteriyo')}
-					</Button>
+					<Link
+						as={RouterLink}
+						to={getNavigationRoute(
+							navigation?.previous?.id,
+							navigation?.previous?.type,
+							courseId
+						)}>
+						<Button
+							colorScheme="green"
+							rounded="full"
+							fontWeight="bold"
+							leftIcon={<Icon as={BiCheck} fontSize="xl" />}
+							textTransform="uppercase">
+							{__('Finish Quiz', 'masteriyo')}
+						</Button>
+					</Link>
 					<Button
 						onClick={onStartPress}
 						colorScheme="blue"

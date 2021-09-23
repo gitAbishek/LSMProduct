@@ -40,7 +40,7 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 
 # Changelog
 
-#### 1.0.1 - 21-09-2021
+#### 1.0.2 - 21-09-2021
 
 - Enhancement - Added search on categories page admin side.
 - Enhancement - Account page Responsive.

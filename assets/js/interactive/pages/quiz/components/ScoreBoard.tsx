@@ -14,11 +14,12 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import {
+	BiCheck,
 	BiCheckCircle,
-	BiChevronRight,
 	BiFlag,
 	BiInfoCircle,
 	BiInfoSquare,
+	BiRefresh,
 	BiTargetLock,
 	BiXCircle,
 } from 'react-icons/bi';
@@ -105,12 +106,20 @@ const ScoreBoard: React.FC<Props> = (props) => {
 			{attemptMessage.length <= 0 && (
 				<ButtonGroup>
 					<Button
+						colorScheme="green"
+						rounded="full"
+						fontWeight="bold"
+						leftIcon={<Icon as={BiCheck} fontSize="xl" />}
+						textTransform="uppercase">
+						{__('Finish Quiz', 'masteriyo')}
+					</Button>
+					<Button
 						onClick={onStartPress}
 						colorScheme="blue"
 						isLoading={isButtonLoading}
 						rounded="full"
 						fontWeight="bold"
-						rightIcon={<Icon as={BiChevronRight} fontSize="x-large" />}
+						leftIcon={<Icon as={BiRefresh} fontSize="xl" />}
 						textTransform="uppercase">
 						{__('Start Quiz Again', 'masteriyo')}
 					</Button>

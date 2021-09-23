@@ -61,9 +61,9 @@ const ContentNav: React.FC<Props> = (props) => {
 
 	return (
 		<Box as="nav" w="full" p="6">
-			<SimpleGrid columns={[1, 1, 3]}>
+			<SimpleGrid columns={[1, 1, 3]} minChildWidth="100px">
 				<MobileHidden>
-					<Box minW="100px">
+					<Box>
 						{navigation?.previous && (
 							<Link
 								as={RouterLink}
@@ -115,7 +115,7 @@ const ContentNav: React.FC<Props> = (props) => {
 					</Flex>
 				)}
 				<MobileHidden>
-					<Box minW="100px" maxW="300px">
+					<Box>
 						{navigation?.next && (
 							<Link
 								as={RouterLink}

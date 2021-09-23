@@ -16,6 +16,10 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
+if ( empty( $course->get_categories() ) ) {
+	return;
+}
+
 do_action( 'masteriyo_before_single_course_categories' );
 
 ?>

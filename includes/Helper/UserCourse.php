@@ -95,3 +95,26 @@ function masteriyo_get_active_courses_count( $user ) {
 
 	return $count;
 }
+
+/**
+ * Get the number of user courses.
+ *
+ * @since 1.0.0
+ *
+ * @return int
+ */
+function masteriyo_get_user_courses_count_by_course( $course ) {
+	global $wpdb;
+
+	$course_id = is_a( $course, 'Masteriyo\Models\Course' ) ? $course->get_id() : $course;
+
+	$count = $wpdb->get_var(
+		$wpdb->prepare(
+			"SELECT COUNT(*) FROM {$wpdb->prefix}masteriyo_user_items
+			WHERE item_id = %d AND item_type = 'user_course'",
+			$course_id
+		)
+	);
+
+	return $count;
+}

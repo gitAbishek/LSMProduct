@@ -33,7 +33,7 @@ do_action( 'masteriyo_before_single_course_content' );
 $difficulty = $course->get_difficulty();
 
 ?>
-<?php masteriyo_display_all_notices(); ?>
+<?php //masteriyo_display_all_notices(); ?>
 
 <div id="course-<?php the_ID(); ?>" class="masteriyo-single-course">
 	<div class="masteriyo-col-8">

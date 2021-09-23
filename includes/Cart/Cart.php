@@ -857,6 +857,19 @@ class Cart {
 			// Find the cart item key in the existing cart.
 			$cart_item_key = $this->find_course_in_cart( $cart_id );
 
+			if ( ! $course->get_available_seats() ) {
+				$message = __( 'Sorry, students limit reached. Course closed for enrollment.', 'masteriyo' );
+				/**
+				 * Filters message about course enrollment limit reached
+				 *
+				 * @since 1.0.0
+				 * @param string $message Message.
+				 * @param Course $course Course data.
+				 */
+				$message = apply_filters( 'masteriyo_cart_course_enrollment_limit_message', $message, $course );
+				throw new \Exception( $message );
+			}
+
 			if ( ! $course->is_purchasable() ) {
 				$message = __( 'Sorry, this course cannot be purchased.', 'masteriyo' );
 				/**
@@ -902,7 +915,7 @@ class Cart {
 
 		} catch ( \Exception $e ) {
 			if ( $e->getMessage() ) {
-				$this->notice->add( $e->getMessage(), Notice::ERROR );
+				$this->notice->add( $e->getMessage(), Notice::WARNING );
 			}
 			return false;
 		}

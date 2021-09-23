@@ -1149,7 +1149,7 @@ class Course extends Model {
 	public function is_purchasable() {
 		return apply_filters(
 			'masteriyo_is_purchasable',
-			( 'publish' === $this->get_status() || current_user_can( 'edit_post', $this->get_id() ) ) && '' !== $this->get_price(),
+			( 'publish' === $this->get_status() || current_user_can( 'edit_post', $this->get_id() ) ) && '' !== $this->get_price() && ( 0 === $this->get_enrollment_limit() || $this->get_available_seats() > 0 ),
 			$this
 		);
 	}
@@ -1419,5 +1419,19 @@ class Course extends Model {
 		}
 
 		return $progress;
+	}
+
+	/**
+	 * Get available seats.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return int
+	 */
+	public function get_available_seats() {
+		$total_courses_bought = masteriyo_get_user_courses_count_by_course( $this->get_id() );
+		$available_seats      = $this->get_enrollment_limit() - $total_courses_bought;
+
+		return max( $available_seats, 0 );
 	}
 }

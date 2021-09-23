@@ -5,7 +5,16 @@
  * @version 1.0.0
  */
 
+use Masteriyo\Notice;
+
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
+
+if ( 0 !== $course->get_enrollment_limit() && 0 === $course->get_available_seats() ) {
+	masteriyo_display_notice(
+		esc_html__( 'Sorry, students limit reached. Course closed for enrollment.', 'masteriyo' ),
+		Notice::WARNING
+	);
+}
 
 if ( ! $course->is_purchasable() ) {
 	return;
@@ -25,4 +34,5 @@ do_action( 'masteriyo_before_add_to_cart_button' );
 <?php endif; ?>
 
 <?php
+
 do_action( 'masteriyo_after_add_to_cart_button' );

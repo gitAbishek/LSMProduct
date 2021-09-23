@@ -118,3 +118,21 @@ function masteriyo_clear_notices( $type = '' ) {
 
 	$notice->remove( $type );
 }
+
+/**
+ * Display a single notice immediately.
+ *
+ * @since 1.0.0
+ * @param string $message The text to display in the notice.
+ * @param string $type Optional. The singular name of the notice type - either error, success or notice.
+ * @param array  $data        Optional notice data.
+ */
+function masteriyo_display_notice( $message, $type = self::SUCCESS, $data = array() ) {
+	$notice = masteriyo( 'notice' );
+
+	if ( is_null( $notice ) ) {
+		return;
+	}
+
+	$notice->display( $message, $type, $data );
+}

@@ -5,10 +5,6 @@
 		width: 80%;
 	}
 
-	.masteriyo-related-post__title {
-		margin: $spacing_15px;
-	}
-
 	.masteriyo-item--wrap {
 		margin: 0;
 
@@ -18,16 +14,19 @@
 		}
 	}
 
-	.masteriyo-col-8 {
+	.masteriyo-col-8,
+	.masteriyo-single-course .masteriyo-col-4 {
 		width: 100%;
 		flex: 1 1 100%;
 		max-width: 100%;
 	}
 
-	.masteriyo-col-4 {
-		width: 50%;
-		flex: 1 1 50%;
-		max-width: 50%;
+	.masteriyo-related-post {
+		.masteriyo-col-4 {
+			width: 50%;
+			flex: 1 1 50%;
+			max-width: 50%;
+		}
 	}
 
 	.masteriyo-vertical-menu {
@@ -52,14 +51,6 @@
 				flex-basis: calc((100% / 2) - 30px);
 				max-width: 100%;
 			}
-		}
-	}
-
-	.masteriyo-single-course {
-		.masteriyo-col-4 {
-			width: 100%;
-			flex: 1 1 100%;
-			max-width: 100%;
 		}
 	}
 }
@@ -136,6 +127,7 @@
 		}
 	}
 
+	.masteriyo-related-post .masteriyo-col-4,
 	.masteriyo-col-4 {
 		width: 100%;
 		flex: 1 1 100%;

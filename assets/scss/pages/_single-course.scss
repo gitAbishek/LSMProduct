@@ -209,8 +209,6 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			margin-top: $spacing_18px;
-			margin-bottom: $spacing_18px;
 
 			& > div {
 				display: flex;
@@ -267,6 +265,7 @@
 // masteriyo-related-post
 .masteriyo-related-post {
 	margin-top: $spacing_24px;
+	width: 100%;
 
 	&__title {
 		padding: 0 $spacing_15px;

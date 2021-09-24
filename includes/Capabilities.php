@@ -106,6 +106,15 @@ class Capabilities {
 
 				break;
 
+			case 'create_course_qa':
+				if ( user_can( $user_id, 'create_course_qas' ) ) {
+					$caps = array( 'create_course_qas' );
+				} else {
+					$caps[] = 'do_not_allow';
+				}
+
+				break;
+
 			case 'edit_course_qa':
 				$question_answers = masteriyo_get_course_qa( $args[0] );
 
@@ -169,9 +178,9 @@ class Capabilities {
 
 			// Course Qas
 			'read_course_qas'           => true,
+			'create_course_qas'         => true,
 			'edit_course_qas'           => true,
 			'delete_course_qas'         => true,
-			'moderate_comments'         => true,
 
 			// Taxonomy.
 			'manage_course_categories'  => true,

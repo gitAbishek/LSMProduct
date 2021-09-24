@@ -215,7 +215,7 @@ class Permission {
 		$permission = false;
 		$contexts   = array(
 			'read'   => 'read_course_qa',
-			'create' => 'edit_course_qa',
+			'create' => 'create_course_qa',
 			'edit'   => 'edit_course_qa',
 			'delete' => 'delete_course_qa',
 			'batch'  => 'edit_others_course_qas',

@@ -43,11 +43,18 @@ const InteractiveQuiz = () => {
 		() => quizAPI.get(quizId)
 	);
 
-	const quizProgress = useQuery<any, Error>([`attempt${quizId}`, quizId], () =>
-		quizAttemptsAPI.list({
-			quiz_id: quizId,
-			per_page: 1,
-		})
+	const quizProgress = useQuery<any, Error>(
+		[`attempt${quizId}`, quizId],
+		() =>
+			quizAttemptsAPI.list({
+				quiz_id: quizId,
+				per_page: 1,
+			}),
+		{
+			onSuccess: (data: any) => {
+				setScoreBoardData(data[0]);
+			},
+		}
 	);
 
 	const startQuiz = useMutation((quizId: number) => quizAPI.start(quizId));
@@ -66,6 +73,20 @@ const InteractiveQuiz = () => {
 	);
 
 	const onStartPress = () => {
+		completeMutation.mutate(
+			{
+				course_id: courseId,
+				item_id: quizId,
+				item_type: 'quiz',
+				completed: false,
+			},
+			{
+				onSuccess: () => {
+					completeQuiz.refetch();
+				},
+			}
+		);
+
 		startQuiz.mutate(quizId, {
 			onSuccess: (data: any) => {
 				setQuizStartedOn(getLocalTime(data.attempt_started_at));
@@ -131,7 +152,10 @@ const InteractiveQuiz = () => {
 								quizQuery?.data?.attempts_allowed ? (
 									<Alert status="error" fontSize="sm" p="2.5">
 										<AlertIcon />
-										{__('You have reached the Limit', 'masteriyo')}
+										{__(
+											'You have reached the Maximum Limit to start quiz',
+											'masteriyo'
+										)}
 									</Alert>
 								) : quizStartedOn ? (
 									<QuizFields

@@ -127,15 +127,13 @@ const InteractiveQuiz = () => {
 									/>
 								)}
 
-								{quizProgress.data[0].total_attempts >=
-									quizQuery.data.attempts_allowed && (
+								{quizProgress?.data[0]?.total_attempts >=
+								quizQuery?.data?.attempts_allowed ? (
 									<Alert status="error" fontSize="sm" p="2.5">
 										<AlertIcon />
 										{__('You have reached the Limit', 'masteriyo')}
 									</Alert>
-								)}
-
-								{quizStartedOn ? (
+								) : quizStartedOn ? (
 									<QuizFields
 										quizAboutToExpire={quizAboutToExpire}
 										quizData={quizQuery.data}

@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning
 Requires at least: 5.0
 Tested up to: 5.8.1
 Requires PHP: 7.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -54,6 +54,17 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.0.3 - 24-09-2021 =
+* Enhancement - Make course category slug optional while creating category.
+* Enhancement - Cache bust the default frontend and backend JS and CSS assets as well.
+* Enhancement - Added enrollment limit to courses.
+* Enhancement - Added course question answer (QA) permission.
+* Fix - Course progress issue.
+* Fix - Course progress permission issue.
+* Fix - Difficulty badge spacing and font color.
+* Fix - Myaccount responsive issue.
+* Fix - Single course related post width issue.
 
 = 1.0.2 - 21-09-2021 =
 * Enhancement - Added search on categories page admin side.

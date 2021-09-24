@@ -1149,7 +1149,7 @@ class Course extends Model {
 	public function is_purchasable() {
 		return apply_filters(
 			'masteriyo_is_purchasable',
-			( 'publish' === $this->get_status() || current_user_can( 'edit_post', $this->get_id() ) ) && '' !== $this->get_price() && ( 0 === $this->get_enrollment_limit() || $this->get_available_seats() > 0 ),
+			( 'publish' === $this->get_status() || current_user_can( 'edit_post', $this->get_id() ) ) && '' !== $this->get_price(),
 			$this
 		);
 	}

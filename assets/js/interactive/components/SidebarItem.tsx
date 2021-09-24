@@ -82,7 +82,6 @@ const SidebarItem: React.FC<Props> = (props) => {
 												content.item_type,
 												courseId
 											)}>
-											{content.item_type}
 											<Stack direction="row" spacing="2" alignItems="center">
 												<Icon
 													as={getContentIcon(content.item_type, content.video)}

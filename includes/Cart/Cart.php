@@ -857,7 +857,7 @@ class Cart {
 			// Find the cart item key in the existing cart.
 			$cart_item_key = $this->find_course_in_cart( $cart_id );
 
-			if ( ! $course->get_available_seats() ) {
+			if ( 0 !== $course->get_enrollment_limit() && 0 === $course->get_available_seats() ) {
 				$message = __( 'Sorry, students limit reached. Course closed for enrollment.', 'masteriyo' );
 				/**
 				 * Filters message about course enrollment limit reached

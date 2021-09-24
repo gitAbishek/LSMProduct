@@ -47,6 +47,23 @@ const Header: React.FC<Props> = (props) => {
 		isOpen: isProgressOpen,
 	} = useDisclosure();
 
+	const lessonProgress =
+		summary.lesson.completed === 0 && summary.lesson.pending === 0
+			? 0
+			: Math.round(
+					(summary.lesson.completed /
+						(summary.lesson.pending + summary.lesson.completed)) *
+						100
+			  );
+	const quizProgress =
+		summary.quiz.completed === 0 && summary.quiz.pending === 0
+			? 0
+			: Math.round(
+					(summary.quiz.completed /
+						(summary.quiz.pending + summary.quiz.completed)) *
+						100
+			  );
+
 	return (
 		<Box as="header" h="84px">
 			<Slide
@@ -173,24 +190,13 @@ const Header: React.FC<Props> = (props) => {
 																pb="6">
 																<Stack direction="row" spacing="2">
 																	<CircularProgress
-																		value={Math.round(
-																			(summary.lesson.completed /
-																				(summary.lesson.pending +
-																					summary.lesson.completed)) *
-																				100
-																		)}
+																		value={lessonProgress}
 																		size="54px"
 																		capIsRound
 																		trackColor="blue.100"
 																		color="blue.500">
 																		<CircularProgressLabel fontWeight="bold">
-																			{Math.round(
-																				(summary.lesson.completed /
-																					(summary.lesson.pending +
-																						summary.lesson.completed)) *
-																					100
-																			)}
-																			{__('%', 'masteriyo')}
+																			{lessonProgress + __('%', 'masteriyo')}
 																		</CircularProgressLabel>
 																	</CircularProgress>
 																	<Stack direction="column" spacing="1">
@@ -221,24 +227,13 @@ const Header: React.FC<Props> = (props) => {
 															<ListItem pt="6">
 																<Stack direction="row" spacing="2">
 																	<CircularProgress
-																		value={Math.round(
-																			(summary.quiz.completed /
-																				(summary.quiz.pending +
-																					summary.quiz.completed)) *
-																				100
-																		)}
+																		value={quizProgress}
 																		size="54px"
 																		capIsRound
 																		trackColor="gray.100"
 																		color="blue.500">
 																		<CircularProgressLabel fontWeight="bold">
-																			{Math.round(
-																				(summary.quiz.completed /
-																					(summary.quiz.pending +
-																						summary.quiz.completed)) *
-																					100
-																			)}
-																			{__('%', 'masteriyo')}
+																			{quizProgress + __('%', 'masteriyo')}
 																		</CircularProgressLabel>
 																	</CircularProgress>
 																	<Stack direction="column" spacing="1">

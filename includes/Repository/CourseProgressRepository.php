@@ -365,7 +365,8 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			)
 		);
 
-		$items_in_table = $query->get_course_progress_items();
+		$items_in_table     = $query->get_course_progress_items();
+		$items_in_table_map = array();
 
 		// Create map of actual course progress item created.
 		foreach ( $items_in_table as $item ) {

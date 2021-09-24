@@ -29,5 +29,5 @@ defined( 'ABSPATH' ) || exit;
 	<button type="submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'masteriyo' ); ?>">
 		<?php echo esc_html_x( 'Search', 'submit button', 'masteriyo' ); ?>
 	</button>
-	<input type="hidden" name="post_type" value="course" />
+	<input type="hidden" name="post_type" value="mto-course" />
 </form>

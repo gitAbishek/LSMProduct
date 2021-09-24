@@ -32,7 +32,6 @@ const InteractiveQuiz = () => {
 	const [scoreBoardData, setScoreBoardData] = useState<any>(null);
 	const [quizStartedOn, setQuizStartedOn] = useState<any>(null);
 	const [quizAboutToExpire, setQuizAboutToExpire] = useState<boolean>(false);
-	const [attemptMessage, setAttemptMessage] = useState<string>('');
 	const progressAPI = new API(urls.courseProgressItem);
 	const queryClient = useQueryClient();
 	const toast = useToast();
@@ -42,22 +41,16 @@ const InteractiveQuiz = () => {
 		() => quizAPI.get(quizId)
 	);
 
-	useQuery<QuizSchema, Error>(
+	const quizProgress = useQuery<QuizProgressSchema, Error>(
 		[`attempt${quizId}`, quizId],
 		() =>
 			quizAttemptsAPI.list({
 				quiz_id: quizId,
-				status: 'attempt_started',
 				per_page: 1,
-			}),
-		{
-			onSuccess: (data: any) => {
-				if (data[0]?.attempt_started_at) {
-					setQuizStartedOn(getLocalTime(data[0].attempt_started_at));
-				}
-			},
-		}
+			})
 	);
+
+	console.log(quizProgress?.data);
 
 	const startQuiz = useMutation((quizId: number) => quizAPI.start(quizId));
 
@@ -68,7 +61,8 @@ const InteractiveQuiz = () => {
 	const checkQuizAnswers = useMutation((data: any) =>
 		quizAPI.check(quizId, data)
 	);
-	const completeQuery = useQuery<CourseProgressItemsMap>(
+
+	const completeQuiz = useQuery<CourseProgressItemsMap>(
 		[`completeQuery${quizId}`, quizId],
 		() => progressAPI.list({ item_id: quizId, course_id: courseId })
 	);
@@ -79,7 +73,6 @@ const InteractiveQuiz = () => {
 				setQuizStartedOn(getLocalTime(data.attempt_started_at));
 				setScoreBoardData(null);
 			},
-			onError: (error: any) => setAttemptMessage(error.response?.data?.message),
 		});
 		setQuizAboutToExpire(false);
 	};
@@ -98,7 +91,7 @@ const InteractiveQuiz = () => {
 			{
 				course_id: courseId,
 				item_id: quizId,
-				item_type: 'lesson',
+				item_type: 'quiz',
 				completed: true,
 			},
 			{
@@ -127,6 +120,7 @@ const InteractiveQuiz = () => {
 						<form onSubmit={methods.handleSubmit(onSubmit)}>
 							<Stack direction="column" spacing="8">
 								<Heading as="h5">{quizQuery?.data?.name}</Heading>
+
 								{quizQuery?.data?.description && (
 									<Text
 										dangerouslySetInnerHTML={{
@@ -146,15 +140,13 @@ const InteractiveQuiz = () => {
 										onStartPress={onStartPress}
 										isButtonLoading={startQuiz.isLoading}
 										isFinishButtonLoading={completeMutation.isLoading}
-										attemptMessage={attemptMessage}
-										isButtonDisabled={completeQuery?.data?.completed}
+										isButtonDisabled={completeQuiz?.data?.completed}
 										onCompletePress={onCompletePress}
 									/>
 								) : (
 									<QuizStart
 										quizData={quizQuery.data}
 										onStartPress={onStartPress}
-										attemptMessage={attemptMessage}
 										isButtonLoading={startQuiz.isLoading}
 									/>
 								)}

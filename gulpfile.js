@@ -71,7 +71,7 @@ const paths = {
 			'!assets/js/frontend/*.min.js',
 			`!assets/js/frontend/*.${pkg.version}.js`,
 		],
-		dest: 'assets/js/frontend',
+		dest: 'assets/js/build/frontend',
 	},
 
 	backendJS: {
@@ -214,11 +214,7 @@ const compileAssets = series(
 	parallel(compileSass, minifyJs, optimizeImages)
 );
 const build = series(removeBuild, compileAssets, renameBackendAssets);
-const dev = series(
-	removePreviousMinifiedAssets,
-	startBrowserSync,
-	watchChanges
-);
+const dev = series(startBrowserSync, watchChanges);
 const release = series(
 	removeRelease,
 	build,

@@ -29,10 +29,7 @@ const DateRangePicker: React.FC<Props> = (props) => {
 				}}
 				onDayChange={(selectedFrom) => {
 					setFrom(selectedFrom);
-
-					if (selectedFrom && to) {
-						onChange(selectedFrom.toISOString(), to.toISOString());
-					}
+					onChange(selectedFrom?.toISOString(), to?.toISOString());
 				}}
 			/>
 			<Text> — </Text>
@@ -51,10 +48,7 @@ const DateRangePicker: React.FC<Props> = (props) => {
 					}}
 					onDayChange={(selectedTo) => {
 						setTo(selectedTo);
-
-						if (from && selectedTo) {
-							onChange(from.toISOString(), selectedTo.toISOString());
-						}
+						onChange(from?.toISOString(), selectedTo?.toISOString());
 					}}
 				/>
 			</span>

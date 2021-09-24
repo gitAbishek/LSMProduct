@@ -22,10 +22,14 @@ import urls from '../../constants/urls';
 import { SkeletonOrdersList } from '../../skeleton';
 import API from '../../utils/api';
 import OrderRow from './components/OrderRow';
+import OrdersFilter from './components/OrdersFilter';
 
 interface FilterParams {
 	per_page?: number;
 	page?: number;
+	status?: string;
+	after?: string;
+	before?: string;
 }
 
 const AllOrders = () => {
@@ -54,11 +58,14 @@ const AllOrders = () => {
 			<Container maxW="container.xl" marginTop="6">
 				<Box bg="white" py={{ base: 6, md: 12 }} shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
+						<OrdersFilter setFilterParams={setFilterParams} />
 						<Stack direction="column" spacing="8">
 							<Table>
 								<Thead>
 									<Tr>
 										<Th>{__('Order', 'masteriyo')}</Th>
+										<Th>{__('First Name', 'masteriyo')}</Th>
+										<Th>{__('Last Name', 'masteriyo')}</Th>
 										<Th>{__('Date', 'masteriyo')}</Th>
 										<Th>{__('Status', 'masteriyo')}</Th>
 										<Th>{__('Total', 'masteriyo')}</Th>

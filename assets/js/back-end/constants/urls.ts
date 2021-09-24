@@ -15,7 +15,7 @@ const urls = {
 	contents: base + 'sections/children',
 	orders: base + 'orders',
 	order_items: base + 'order-items',
-	users: '/wp/v2/users',
+	users: base + 'users',
 	settings: base + 'settings',
 	builder: base + 'coursebuilder',
 	courseProgress: base + 'course-progress',

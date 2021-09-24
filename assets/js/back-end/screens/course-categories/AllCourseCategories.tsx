@@ -110,12 +110,10 @@ const AllCourseCategories = () => {
 				<Stack direction="column" spacing="6" py={{ base: 6, md: 12 }}>
 					<Box bg="white" py="12" shadow="box" mx="auto" w="full">
 						<Stack direction="column" spacing="10">
-							{categoriesQuery.isSuccess && (
-								<CategoriesFilter
-									filterParams={filterParams}
-									setFilterParams={setFilterParams}
-								/>
-							)}
+							<CategoriesFilter
+								filterParams={filterParams}
+								setFilterParams={setFilterParams}
+							/>
 							<Stack direction="column" spacing="8">
 								<Table>
 									<Thead>

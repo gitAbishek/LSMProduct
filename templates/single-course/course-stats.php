@@ -58,26 +58,6 @@ do_action( 'masteriyo_before_single_course_stats' );
 		</div>
 	</div>
 	<?php endif; ?>
-
-	<!-- Seats available -->
-	<div class="enrollment-limit">
-		<div class="masteriyo-single-course--mdetail masteriyo-icon-svg">
-			<?php masteriyo_get_svg( 'group', true ); ?>
-			<span>
-			<?php
-			if ( $course->get_enrollment_limit() ) {
-				printf(
-					/* translators: %d: Enrolled  seats count */
-					esc_html( _nx( '%d Seat Available', '%d Seats Available', $course->get_available_seats(), 'Seats available', 'masteriyo' ) ),
-					absint( $course->get_available_seats() )
-				);
-			} else {
-				esc_html_e( 'Unlimited', 'masteriyo' );
-			}
-			?>
-			</span>
-		</div>
-	</div>
 </div>
 <?php
 

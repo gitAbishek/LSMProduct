@@ -324,13 +324,14 @@ class UsersController extends PostsController {
 	 */
 	protected function prepare_objects_query( $request ) {
 		$args = array(
-			'offset'  => $request['offset'],
-			'order'   => $request['order'],
-			'orderby' => $request['orderby'],
-			'paged'   => $request['page'],
-			's'       => $request['search'],
-			'role'    => $request['role'],
-			'number'  => $request['per_page'],
+			'offset'         => $request['offset'],
+			'order'          => $request['order'],
+			'orderby'        => $request['orderby'],
+			'paged'          => $request['page'],
+			'search'         => '*' . esc_attr( $request['search'] ) . '*',
+			'search_columns' => array( 'user_login', 'user_url', 'user_email', 'user_nicename', 'display_name' ),
+			'role'           => $request['role'],
+			'number'         => $request['per_page'],
 		);
 
 		if ( 'date' === $args['orderby'] ) {

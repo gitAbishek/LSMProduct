@@ -97,6 +97,15 @@ class Capabilities {
 	 */
 	protected static function course_qa_map_meta_cap( $caps, $cap, $user_id, $args ) {
 		switch ( $cap ) {
+			case 'read_course_qa':
+				if ( user_can( $user_id, 'read_course_qas' ) ) {
+					$caps = array( 'read_course_qas' );
+				} else {
+					$caps[] = 'do_not_allow';
+				}
+
+				break;
+
 			case 'edit_course_qa':
 				$question_answers = masteriyo_get_course_qa( $args[0] );
 
@@ -134,7 +143,7 @@ class Capabilities {
 	}
 
 	/**
-	 * Get masteriyo student capabilites.
+	 * Get masteriyo student capabilities.
 	 *
 	 * @since 1.0.0
 	 *
@@ -151,7 +160,6 @@ class Capabilities {
 			'read_orders'               => true,
 			'read_users'                => true,
 			'read_course_reviews'       => true,
-			'read_course_qas'           => true,
 			'read_user_courses'         => true,
 
 			// Course Progress
@@ -160,7 +168,10 @@ class Capabilities {
 			'edit_course_progresses'    => true,
 
 			// Course Qas
+			'read_course_qas'           => true,
 			'edit_course_qas'           => true,
+			'delete_course_qas'         => true,
+			'moderate_comments'         => true,
 
 			// Taxonomy.
 			'manage_course_categories'  => true,
@@ -173,7 +184,7 @@ class Capabilities {
 	}
 
 	/**
-	 * Get masteriyo instructor capabilites.
+	 * Get masteriyo instructor capabilities.
 	 *
 	 * @since 1.0.0
 	 *
@@ -234,15 +245,6 @@ class Capabilities {
 			'delete_course_reviews'           => true,
 			'delete_published_course_reviews' => true,
 			'delete_private_course_reviews'   => true,
-
-			// Course QAs
-			'publish_course_qas'              => true,
-			'edit_course_qas'                 => true,
-			'edit_private_course_qas'         => true,
-			'edit_published_course_qas'       => true,
-			'delete_course_qas'               => true,
-			'delete_published_course_qas'     => true,
-			'delete_private_course_qas'       => true,
 
 			// Users
 			'list_users'                      => true,

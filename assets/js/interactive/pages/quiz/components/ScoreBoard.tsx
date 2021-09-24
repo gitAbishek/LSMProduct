@@ -1,6 +1,4 @@
 import {
-	Alert,
-	AlertIcon,
 	Button,
 	ButtonGroup,
 	Heading,
@@ -28,7 +26,6 @@ interface Props {
 	scoreData: ScoreBoardSchema;
 	onStartPress: any;
 	isButtonLoading?: boolean;
-	attemptMessage: string;
 	isButtonDisabled?: boolean;
 	isFinishButtonLoading: boolean;
 	onCompletePress: () => void;
@@ -39,7 +36,6 @@ const ScoreBoard: React.FC<Props> = (props) => {
 		scoreData,
 		onStartPress,
 		isButtonLoading,
-		attemptMessage,
 		onCompletePress,
 		isButtonDisabled,
 		isFinishButtonLoading,
@@ -61,12 +57,6 @@ const ScoreBoard: React.FC<Props> = (props) => {
 
 	return (
 		<Stack direction="column" spacing="8">
-			{attemptMessage && (
-				<Alert status="error" fontSize="sm" p="2.5">
-					<AlertIcon />
-					{__(attemptMessage, 'masteriyo')}
-				</Alert>
-			)}
 			<Heading fontSize="x-large" d="flex" alignItems="center">
 				<Icon
 					as={isQuizAnswered}
@@ -114,33 +104,31 @@ const ScoreBoard: React.FC<Props> = (props) => {
 				</ListItem>
 			</List>
 
-			{attemptMessage.length <= 0 && (
-				<ButtonGroup>
-					<Button
-						colorScheme="green"
-						rounded="full"
-						fontWeight="bold"
-						leftIcon={<Icon as={BiCheck} fontSize="xl" />}
-						isDisabled={isButtonDisabled}
-						isLoading={isFinishButtonLoading}
-						onClick={onCompletePress}
-						textTransform="uppercase">
-						{isButtonDisabled
-							? __('Completed', 'masteriyo')
-							: __('Complete Quiz', 'masteriyo')}
-					</Button>
-					<Button
-						onClick={onStartPress}
-						colorScheme="blue"
-						isLoading={isButtonLoading}
-						rounded="full"
-						fontWeight="bold"
-						leftIcon={<Icon as={BiRefresh} fontSize="xl" />}
-						textTransform="uppercase">
-						{__('Start Quiz Again', 'masteriyo')}
-					</Button>
-				</ButtonGroup>
-			)}
+			<ButtonGroup>
+				<Button
+					colorScheme="green"
+					rounded="full"
+					fontWeight="bold"
+					leftIcon={<Icon as={BiCheck} fontSize="xl" />}
+					isDisabled={isButtonDisabled}
+					isLoading={isFinishButtonLoading}
+					onClick={onCompletePress}
+					textTransform="uppercase">
+					{isButtonDisabled
+						? __('Completed', 'masteriyo')
+						: __('Complete Quiz', 'masteriyo')}
+				</Button>
+				<Button
+					onClick={onStartPress}
+					colorScheme="blue"
+					isLoading={isButtonLoading}
+					rounded="full"
+					fontWeight="bold"
+					leftIcon={<Icon as={BiRefresh} fontSize="xl" />}
+					textTransform="uppercase">
+					{__('Start Quiz Again', 'masteriyo')}
+				</Button>
+			</ButtonGroup>
 		</Stack>
 	);
 };

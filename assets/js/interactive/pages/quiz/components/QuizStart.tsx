@@ -1,6 +1,4 @@
 import {
-	Alert,
-	AlertIcon,
 	Button,
 	ButtonGroup,
 	Icon,
@@ -24,12 +22,11 @@ import { QuizSchema } from '../../../../back-end/schemas';
 interface Props {
 	quizData: QuizSchema;
 	onStartPress: any;
-	attemptMessage: string;
 	isButtonLoading?: boolean;
 }
 
 const QuizStart: React.FC<Props> = (props) => {
-	const { quizData, onStartPress, attemptMessage, isButtonLoading } = props;
+	const { quizData, onStartPress, isButtonLoading } = props;
 
 	const listItemStyles = {
 		d: 'flex',
@@ -47,12 +44,6 @@ const QuizStart: React.FC<Props> = (props) => {
 
 	return (
 		<Stack direction="column" spacing="8">
-			{attemptMessage && (
-				<Alert status="error" fontSize="sm" p="2.5">
-					<AlertIcon />
-					{__(attemptMessage, 'masteriyo')}
-				</Alert>
-			)}
 			<List
 				bg="blue.500"
 				rounded="sm"
@@ -88,20 +79,18 @@ const QuizStart: React.FC<Props> = (props) => {
 				</ListItem>
 			</List>
 
-			{attemptMessage.length <= 0 && (
-				<ButtonGroup>
-					<Button
-						onClick={onStartPress}
-						isLoading={isButtonLoading}
-						colorScheme="blue"
-						rounded="full"
-						fontWeight="bold"
-						rightIcon={<Icon as={BiChevronRight} fontSize="x-large" />}
-						textTransform="uppercase">
-						{__('Start Quiz', 'masteriyo')}
-					</Button>
-				</ButtonGroup>
-			)}
+			<ButtonGroup>
+				<Button
+					onClick={onStartPress}
+					isLoading={isButtonLoading}
+					colorScheme="blue"
+					rounded="full"
+					fontWeight="bold"
+					rightIcon={<Icon as={BiChevronRight} fontSize="x-large" />}
+					textTransform="uppercase">
+					{__('Start Quiz', 'masteriyo')}
+				</Button>
+			</ButtonGroup>
 		</Stack>
 	);
 };

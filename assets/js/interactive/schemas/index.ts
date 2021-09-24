@@ -62,7 +62,7 @@ export type CourseProgressItemsMap = {
 	course_id?: number;
 	user_id?: number;
 	item_id?: number;
-	item_type?: 'lesson';
+	item_type?: 'lesson' | 'quiz';
 	completed?: boolean;
 	started_at?: string;
 	modified_at?: string;

@@ -1,4 +1,6 @@
 import {
+	Alert,
+	AlertIcon,
 	Box,
 	Container,
 	Heading,
@@ -41,16 +43,12 @@ const InteractiveQuiz = () => {
 		() => quizAPI.get(quizId)
 	);
 
-	const quizProgress = useQuery<QuizProgressSchema, Error>(
-		[`attempt${quizId}`, quizId],
-		() =>
-			quizAttemptsAPI.list({
-				quiz_id: quizId,
-				per_page: 1,
-			})
+	const quizProgress = useQuery<any, Error>([`attempt${quizId}`, quizId], () =>
+		quizAttemptsAPI.list({
+			quiz_id: quizId,
+			per_page: 1,
+		})
 	);
-
-	console.log(quizProgress?.data);
 
 	const startQuiz = useMutation((quizId: number) => quizAPI.start(quizId));
 
@@ -112,7 +110,7 @@ const InteractiveQuiz = () => {
 
 	const onQuizeExpire = () => onSubmit(methods.getValues());
 
-	if (quizQuery.isSuccess) {
+	if (quizQuery.isSuccess && quizProgress.isSuccess) {
 		return (
 			<Container centerContent maxW="container.xl" py="16">
 				<Box bg="white" p={['5', null, '14']} shadow="box" w="full">
@@ -127,6 +125,14 @@ const InteractiveQuiz = () => {
 											__html: quizQuery?.data?.description,
 										}}
 									/>
+								)}
+
+								{quizProgress.data[0].total_attempts >=
+									quizQuery.data.attempts_allowed && (
+									<Alert status="error" fontSize="sm" p="2.5">
+										<AlertIcon />
+										{__('You have reached the Limit', 'masteriyo')}
+									</Alert>
 								)}
 
 								{quizStartedOn ? (

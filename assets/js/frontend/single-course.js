@@ -171,18 +171,57 @@
 			});
 		},
 		init_rating_widget: function () {
-			$(masteriyo.create_review_form_class).on(
-				'click',
-				'.masteriyo-rating-input-icon',
-				function () {
-					var rating = $(this).index() + 1;
+			function addClickListener($starsParent) {
+				$starsParent
+					.find('.masteriyo-rating-input-icon')
+					.on('click', function () {
+						var rating = $(this).index() + 1;
 
-					masteriyo.$create_revew_form.find('input[name="rating"]').val(rating);
-					$(this)
-						.closest('.masteriyo-rstar')
+						masteriyo.$create_revew_form
+							.find('input[name="rating"]')
+							.val(rating);
+						$(this)
+							.closest('.masteriyo-rstar')
+							.html(masteriyo_helper.get_rating_markup(rating));
+					});
+			}
+
+			var isDoneReset = false;
+			var lastHoveredRating = null;
+
+			masteriyo.$create_revew_form.on('mouseover', function (e) {
+				var $star = $(e.target).closest('.masteriyo-rating-input-icon');
+
+				if ($star.length === 0) {
+					if (isDoneReset) {
+						return;
+					}
+					var rating = masteriyo.$create_revew_form
+						.find('input[name="rating"]')
+						.val();
+
+					masteriyo.$create_revew_form
+						.find('.masteriyo-rstar')
 						.html(masteriyo_helper.get_rating_markup(rating));
+
+					isDoneReset = true;
+					lastHoveredRating = null;
+
+					return;
 				}
-			);
+				var rating = $star.index() + 1;
+				var $starsParent = $star.closest('.masteriyo-rstar');
+
+				isDoneReset = false;
+
+				if (lastHoveredRating === rating) {
+					return;
+				}
+				lastHoveredRating = rating;
+
+				$starsParent.html(masteriyo_helper.get_rating_markup(rating));
+				addClickListener($starsParent);
+			});
 		},
 		init_create_reviews_handler: function () {
 			var isCreating = false;

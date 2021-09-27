@@ -25,6 +25,8 @@ class CourseReviews {
 		add_action( 'comment_moderation_recipients', array( __CLASS__, 'comment_moderation_recipients' ), 10, 2 );
 		add_action( 'wp_update_comment_count', array( __CLASS__, 'wp_update_comment_count' ) );
 		add_filter( 'get_avatar_comment_types', array( __CLASS__, 'add_avatar_for_review_comment_type' ) );
+		add_action( 'parse_comment_query', array( __CLASS__, 'remove_course_review_from_query' ) );
+
 	}
 
 	/**
@@ -205,5 +207,31 @@ class CourseReviews {
 		}
 
 		return $counts;
+	}
+
+	/**
+	 * Remove the course review from the comments query.
+	 *
+	 * @since 1.0.4
+	 *
+	 * @param WP_Comment_Query $query
+	 */
+	public static function remove_course_review_from_query( $query ) {
+		// Bail early if  global pagnow is not set or isn't admin dashboard.
+		if ( ! isset( $GLOBALS['pagenow'] ) || ! is_admin() ) {
+			return;
+		}
+
+		// Bail if the page is not wp comments list page or dashboard.
+		if ( ! in_array( $GLOBALS['pagenow'], array( 'edit-comments.php', 'index.php' ), true ) ) {
+			return;
+		}
+
+		if ( ! isset( $query->query_vars['type__not_in'] ) ) {
+			$query->query_vars['type__not_in'] = array();
+		}
+
+		$query->query_vars['type__not_in'] = (array) $query->query_vars['type__not_in'];
+		$query->query_vars['type__not_in'] = array_unique( array_merge( $query->query_vars['type__not_in'], array( 'mto_course_review' ) ) );
 	}
 }

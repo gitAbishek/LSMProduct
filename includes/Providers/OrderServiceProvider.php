@@ -7,14 +7,15 @@ namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\OrderNotes;
 use Masteriyo\Models\Order\Order;
+use Masteriyo\Models\Order\OrderItem;
 use Masteriyo\Repository\OrderRepository;
 use Masteriyo\Models\Order\OrderItemCourse;
 use Masteriyo\Repository\OrderItemRepository;
-use League\Container\ServiceProvider\AbstractServiceProvider;
-use Masteriyo\Models\Order\OrderItem;
 use Masteriyo\Repository\OrderItemCourseRepository;
 use Masteriyo\RestApi\Controllers\Version1\OrdersController;
+use League\Container\ServiceProvider\AbstractServiceProvider;
 use Masteriyo\RestApi\Controllers\Version1\OrderItemsController;
 
 class OrderServiceProvider extends AbstractServiceProvider {
@@ -40,6 +41,7 @@ class OrderServiceProvider extends AbstractServiceProvider {
 		'\Masteriyo\RestApi\Controllers\Version1\OrderItemsController',
 		'order-item.course',
 		'order-item.course.store',
+		'order-notes',
 	);
 
 	/**
@@ -77,5 +79,7 @@ class OrderServiceProvider extends AbstractServiceProvider {
 
 		$this->getContainer()->add( 'order-item.course', OrderItemCourse::class )
 			->addArgument( 'order-item.course.store' );
+
+		$this->getContainer()->add( 'order-notes', OrderNotes::class, true );
 	}
 }

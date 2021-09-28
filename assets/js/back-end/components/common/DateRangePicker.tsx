@@ -1,4 +1,4 @@
-import { Stack, Text } from '@chakra-ui/react';
+import { Input, Stack, Text } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
@@ -18,6 +18,7 @@ const DateRangePicker: React.FC<Props> = (props) => {
 		<Stack direction="row" align="center">
 			<DayPickerInput
 				value={from}
+				component={Input}
 				placeholder={__('From', 'masteriyo')}
 				dayPickerProps={{
 					selectedDays: [from, { from, to }],
@@ -37,6 +38,7 @@ const DateRangePicker: React.FC<Props> = (props) => {
 				<DayPickerInput
 					ref={toRef}
 					value={to}
+					component={Input}
 					placeholder={__('To', 'masteriyo')}
 					dayPickerProps={{
 						selectedDays: [from, { from, to }],

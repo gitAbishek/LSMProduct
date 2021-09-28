@@ -30,7 +30,7 @@ export const reactSelectStyles = {
 	control: (provided: any, state: any) => ({
 		...provided,
 		minHeight: '40px',
-		minWidth: '250px',
+		minWidth: '300px',
 		boxShadow: theme.shadows.input,
 		borderRadius: theme.radii.sm,
 		borderColor: state.isDisabled

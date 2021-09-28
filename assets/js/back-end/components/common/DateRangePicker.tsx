@@ -15,10 +15,11 @@ const DateRangePicker: React.FC<Props> = (props) => {
 	const toRef = useRef<any>();
 
 	return (
-		<Stack direction="row" align="center">
+		<Stack direction="row" align="center" minW="40%">
 			<DayPickerInput
 				value={from}
 				component={Input}
+				style={{ flexGrow: 1 }}
 				placeholder={__('From', 'masteriyo')}
 				dayPickerProps={{
 					selectedDays: [from, { from, to }],
@@ -29,15 +30,17 @@ const DateRangePicker: React.FC<Props> = (props) => {
 					onDayClick: () => toRef.current?.getInput().focus(),
 				}}
 				onDayChange={(selectedFrom) => {
+					selectedFrom?.setHours(0, 0, 0, 0);
 					setFrom(selectedFrom);
 					onChange(selectedFrom?.toISOString(), to?.toISOString());
 				}}
 			/>
-			<Text> — </Text>
+			<Text> - </Text>
 			<span className="masteriyo-orders-filter-daypicker-to">
 				<DayPickerInput
 					ref={toRef}
 					value={to}
+					style={{ flexGrow: 1 }}
 					component={Input}
 					placeholder={__('To', 'masteriyo')}
 					dayPickerProps={{
@@ -49,6 +52,7 @@ const DateRangePicker: React.FC<Props> = (props) => {
 						numberOfMonths: 2,
 					}}
 					onDayChange={(selectedTo) => {
+						selectedTo?.setHours(0, 0, 0, 0);
 						setTo(selectedTo);
 						onChange(from?.toISOString(), selectedTo?.toISOString());
 					}}

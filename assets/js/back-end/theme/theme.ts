@@ -249,7 +249,7 @@ const theme = extendTheme({
 				width: '550px',
 			},
 			'.masteriyo-orders-filter-daypicker-to .DayPickerInput-Overlay': {
-				marginLeft: '-206px',
+				marginLeft: '-240px',
 			},
 			'.DayPickerInput input': {
 				textAlign: 'center',

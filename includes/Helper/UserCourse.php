@@ -40,11 +40,8 @@ function masteriyo_get_user_course( $user_course_id ) {
  */
 function masteriyo_get_user_course_statuses() {
 	$statuses = array(
-		'active'   => array(
+		'active' => array(
 			'label' => _x( 'Active.', 'User Course status', 'masteriyo' ),
-		),
-		'enrolled' => array(
-			'label' => _x( 'Enrolled.', 'User Course status', 'masteriyo' ),
 		),
 	);
 
@@ -62,7 +59,7 @@ function masteriyo_count_enrolled_users( $course_id ) {
 	$query                = new UserCourseQuery(
 		array(
 			'course_id' => $course_id,
-			'status'    => 'enrolled',
+			'status'    => 'active',
 		)
 	);
 	$enrolled_users_count = count( $query->get_user_courses() );

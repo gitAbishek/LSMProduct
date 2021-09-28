@@ -31,9 +31,9 @@ class OrderNotes {
 	 * @since 1.0.4
 	 */
 	protected function init() {
-		add_filter( 'comments_open', array( __CLASS__, 'comments_open' ), 10, 2 );
-		add_action( 'comment_moderation_recipients', array( __CLASS__, 'comment_moderation_recipients' ), 10, 2 );
-		add_action( 'parse_comment_query', array( __CLASS__, 'remove_order_note_from_query' ) );
+		add_filter( 'comments_open', array( $this, 'comments_open' ), 10, 2 );
+		add_action( 'comment_moderation_recipients', array( $this, 'comment_moderation_recipients' ), 10, 2 );
+		add_action( 'parse_comment_query', array( $this, 'remove_order_note_from_query' ) );
 	}
 
 	/**

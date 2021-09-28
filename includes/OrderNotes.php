@@ -96,6 +96,6 @@ class OrderNotes {
 		}
 
 		$query->query_vars['type__not_in'] = (array) $query->query_vars['type__not_in'];
-		$query->query_vars['type__not_in'] = array_unique( array_merge( $query->query_vars['type__not_in'], array( 'order_note' ) ) );
+		$query->query_vars['type__not_in'] = array_unique( array_merge( $query->query_vars['type__not_in'], array( 'mto_order_note' ) ) );
 	}
 }

@@ -1453,7 +1453,7 @@ class Order extends AbstractOrder {
 				'comment_author_url'   => '',
 				'comment_content'      => $note,
 				'comment_agent'        => 'Masteriyo',
-				'comment_type'         => 'order_note',
+				'comment_type'         => 'mto_order_note',
 				'comment_parent'       => 0,
 				'comment_approved'     => 1,
 			),

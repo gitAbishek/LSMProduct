@@ -229,6 +229,54 @@ const theme = extendTheme({
 					fontSize: 'sm',
 				},
 			},
+			'.react-datepicker': {
+				fontFamily:
+					"-apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+				overflow: 'hidden',
+			},
+			'.react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button)':
+				{
+					right: '90px',
+				},
+			'.react-datepicker__navigation--previous,\n.react-datepicker__navigation--next':
+				{
+					height: '8px',
+				},
+			'.react-datepicker__navigation--previous': {
+				borderRightColor: '#cbd5e0',
+				'&:hover': { borderRightColor: '#a0aec0' },
+			},
+			'.react-datepicker__navigation--next': {
+				borderLeftColor: '#cbd5e0',
+				'&:hover': { borderLeftColor: '#a0aec0' },
+			},
+			'.react-datepicker-wrapper,\n.react-datepicker__input-container': {
+				display: 'block',
+			},
+			'.react-datepicker__header': { borderRadius: '0', background: '#f7fafc' },
+			'.react-datepicker,\n.react-datepicker__header,\n.react-datepicker__time-container':
+				{
+					borderColor: '#e2e8f0',
+				},
+			'.react-datepicker__current-month,\n.react-datepicker-time__header,\n.react-datepicker-year-header':
+				{
+					fontSize: 'inherit',
+					fontWeight: 600,
+				},
+			'.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item':
+				{
+					margin: '0 1px 0 0',
+					height: 'auto',
+					padding: '7px 10px',
+					'&:hover': { background: '#edf2f7' },
+				},
+			'.react-datepicker__day:hover': { background: '#edf2f7' },
+			'.react-datepicker__day--selected,\n.react-datepicker__day--in-selecting-range,\n.react-datepicker__day--in-range,\n.react-datepicker__month-text--selected,\n.react-datepicker__month-text--in-selecting-range,\n.react-datepicker__month-text--in-range,\n.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected':
+				{
+					background: '#3182ce',
+					fontWeight: 'normal',
+					'&:hover': { background: '#2a69ac' },
+				},
 		},
 	},
 	shadows: {

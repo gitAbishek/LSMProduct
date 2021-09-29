@@ -112,6 +112,7 @@
 				function () {
 					var $modal = $(this).closest('.masteriyo-overlay');
 
+					$modal.find('.masteriyo-cancel').attr('disabled', true);
 					$(this).text(mto_data.labels.deleting);
 
 					if (typeof options.onConfirm === 'function') {
@@ -425,10 +426,23 @@
 							masteriyo_api.deleteCourseReview(review_id, {
 								onSuccess: function () {
 									if ($review.hasClass('is-course-review-reply')) {
-										var isDeleteParent = $review.siblings().length === 0;
+										var isDeleteReplyContainer =
+											$review.siblings().length === 0;
+										var $parentReview = $review
+											.closest('.masteriyo-course-review-replies')
+											.prev();
+
+										if (
+											isDeleteReplyContainer &&
+											$parentReview.hasClass('masteriyo-delete-review-notice')
+										) {
+											$parentReview.fadeOut(500, function () {
+												$(this).remove();
+											});
+										}
 
 										$review.fadeOut(500, function () {
-											if (isDeleteParent) {
+											if (isDeleteReplyContainer) {
 												$review
 													.closest('.masteriyo-course-review-replies')
 													.remove();

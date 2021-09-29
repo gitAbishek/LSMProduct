@@ -34,7 +34,7 @@ import PriceWithSymbol from '../../../components/common/PriceWithSymbol';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
-import { getLocalTime, isEmpty } from '../../../utils/utils';
+import { getLocalTime } from '../../../utils/utils';
 
 const makeOrderNumberLabel = (order: any) => {
 	if (order.billing.first_name || order.billing.last_name) {
@@ -114,12 +114,6 @@ const OrderRow: React.FC<Props> = (props) => {
 					_hover={{ color: 'blue.500' }}>
 					{`#${id}`}
 				</Link>
-			</Td>
-			<Td>
-				<Text>{isEmpty(billing.first_name) ? '—' : billing.first_name}</Text>
-			</Td>
-			<Td>
-				<Text>{isEmpty(billing.last_name) ? '—' : billing.last_name}</Text>
 			</Td>
 			<Td>
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">

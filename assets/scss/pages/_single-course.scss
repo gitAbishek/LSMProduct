@@ -834,12 +834,13 @@
 	margin-bottom: $spacing_24px;
 }
 
-.masteriyo-delete-review {
+.masteriyo-delete-review-notice {
 	width: 100%;
 	display: inline-block;
 	margin-top: $spacing_24px;
 	padding-top: $spacing_24px;
 	border-top: 1px solid var(--masteriyo-color-border);
+	font-style: italic;
 }
 
 .masteriyo-country-dropdown {

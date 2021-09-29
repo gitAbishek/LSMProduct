@@ -632,6 +632,12 @@ class Order extends AbstractOrder {
 		if ( is_a( $payment_method, 'Masteriyo\Abstracts\PaymentGateway' ) ) {
 			$payment_method_name  = $payment_method->get_name();
 			$payment_method_title = $payment_method->get_title();
+		} else {
+			$payment_gateway = masteriyo( 'payment-gateways' )->get_payment_gateway( $payment_method );
+			if ( $payment_gateway ) {
+				$payment_method_name  = $payment_gateway->get_name();
+				$payment_method_title = $payment_gateway->get_title();
+			}
 		}
 
 		$this->set_prop( 'payment_method', $payment_method_name );

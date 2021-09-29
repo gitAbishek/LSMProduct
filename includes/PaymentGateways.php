@@ -198,4 +198,22 @@ class PaymentGateways {
 			$current_gateway->set_current();
 		}
 	}
+
+	/**
+	 * Get payment gateway from ID.
+	 *
+	 * @since 1.0.4
+	 *
+	 * @param string $payment_gateway_name
+	 * @return Masteriyo\Abstracts\PaymentGateway
+	 */
+	public function get_payment_gateway( $payment_gateway_name ) {
+		foreach ( $this->payment_gateways as $payment_gateway ) {
+			if ( $payment_gateway_name === $payment_gateway->get_name() ) {
+				return $payment_gateway;
+			}
+		}
+
+		return null;
+	}
 }

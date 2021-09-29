@@ -74,7 +74,6 @@ const OrdersFilter: React.FC<Props> = (props) => {
 	const [isOpen, setIsOpen] = useState(isMobile);
 
 	const onChange = (data: FilterParams) => {
-		console.log(data);
 		const formattedDate = {
 			before: data?.before?.toISOString(),
 			after: data?.after?.toISOString(),
@@ -94,7 +93,7 @@ const OrdersFilter: React.FC<Props> = (props) => {
 				<Box>
 					<Controller
 						control={control}
-						name="before"
+						name="after"
 						render={({ field: { onChange: onDateChange, value } }) => (
 							<ReactDatePicker
 								dateFormat="yyyy-MM-dd"
@@ -113,7 +112,7 @@ const OrdersFilter: React.FC<Props> = (props) => {
 				<Box>
 					<Controller
 						control={control}
-						name="after"
+						name="before"
 						render={({ field: { onChange: onDateChange, value } }) => (
 							<ReactDatePicker
 								dateFormat="yyyy-MM-dd"

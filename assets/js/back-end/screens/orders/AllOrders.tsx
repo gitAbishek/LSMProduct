@@ -13,7 +13,6 @@ import { BiCart } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { NavLink } from 'react-router-dom';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
-import EmptyInfo from '../../components/common/EmptyInfo';
 import Header from '../../components/common/Header';
 import MasteriyoPagination from '../../components/common/MasteriyoPagination';
 import { navActiveStyles, navLinkStyles } from '../../config/styles';
@@ -21,6 +20,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonOrdersList } from '../../skeleton';
 import API from '../../utils/api';
+import NoOrdersNotice from './components/NoOrdersNotice';
 import OrderRow from './components/OrderRow';
 import OrdersFilter from './components/OrdersFilter';
 
@@ -76,7 +76,7 @@ const AllOrders = () => {
 									{ordersQuery.isLoading && <SkeletonOrdersList />}
 									{ordersQuery.isSuccess &&
 									ordersQuery?.data?.data.length === 0 ? (
-										<EmptyInfo message="No orders found." />
+										<NoOrdersNotice />
 									) : (
 										ordersQuery?.data?.data.map((order: any) => (
 											<OrderRow key={order.id} data={order} />
@@ -91,7 +91,7 @@ const AllOrders = () => {
 					<MasteriyoPagination
 						metaData={ordersQuery.data.meta}
 						setFilterParams={setFilterParams}
-						perPageText="Orders Per Page:"
+						perPageText={__('Orders Per Page:', 'masteriyo')}
 					/>
 				)}
 			</Container>

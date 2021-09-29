@@ -402,8 +402,10 @@ function masteriyo_get_course_structure( $course_id ) {
 function masteriyo_get_review_deleted_notice() {
 	ob_start();
 	?>
-	<div class="masteriyo-notify-message masteriyo-alert masteriyo-info-msg">
-		<span><?php esc_html_e( 'This review was deleted.', 'masteriyo' ); ?></span>
+	<div class="masteriyo-delete-review">
+		<div class="masteriyo-notify-message masteriyo-alert masteriyo-delete-msg">
+			<span><?php esc_html_e( 'This review was deleted.', 'masteriyo' ); ?></span>
+		</div>
 	</div>
 	<?php
 	return apply_filters( 'masteriyo_get_review_deleted_notice', ob_get_clean() );

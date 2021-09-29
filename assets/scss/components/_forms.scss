@@ -18,25 +18,35 @@
 .masteriyo-error {
 	margin: $spacing_8px 0;
 }
+
 .masteriyo-info-msg {
 	background: var(--masteriyo-color-info-a10);
 	color: var(--masteriyo-color-info);
 	border-color: var(--masteriyo-color-info);
 }
+
 .masteriyo-warning-msg {
 	background: var(--masteriyo-color-warning-a10);
 	color: var(--masteriyo-color-warning);
 	border-color: var(--masteriyo-color-warning);
 }
+
 .masteriyo-danger-msg {
 	background: var(--masteriyo-color-danger-a10);
 	color: var(--masteriyo-color-danger);
 	border-color: var(--masteriyo-color-danger);
 }
+
 .masteriyo-success-msg {
 	background: var(--masteriyo-color-success-a10);
 	color: var(--masteriyo-color-success);
 	border-color: var(--masteriyo-color-success);
+}
+
+.masteriyo-delete-msg {
+	background: var(--masteriyo-color-grey-light);
+	color: var(--masteriyo-color-text-light);
+	border-color: var(--masteriyo-color-border);
 }
 
 // Labels

@@ -644,7 +644,64 @@ export interface MediaSchema {
 		width: number;
 		height: number;
 		file: string;
-		sizes: {};
+		sizes: {
+			full: {
+				file: string;
+				height: number;
+				mime_type: string;
+				source_url: string;
+				width: number;
+			};
+			large: {
+				file: string;
+				height: number;
+				mime_type: string;
+				source_url: string;
+				width: number;
+			};
+			masteriyo_medium: {
+				file: string;
+				height: number;
+				mime_type: string;
+				source_url: string;
+				width: number;
+			};
+			masteriyo_single: {
+				file: string;
+				height: number;
+				mime_type: string;
+				source_url: string;
+				width: number;
+			};
+			masteriyo_thumbnail: {
+				file: string;
+				height: number;
+				mime_type: string;
+				source_url: string;
+				width: number;
+			};
+			medium: {
+				file: string;
+				height: number;
+				mime_type: string;
+				source_url: string;
+				width: number;
+			};
+			medium_large: {
+				file: string;
+				height: number;
+				mime_type: string;
+				source_url: string;
+				width: number;
+			};
+			thumbnail: {
+				file: string;
+				height: number;
+				mime_type: string;
+				source_url: string;
+				width: number;
+			};
+		};
 		image_meta: {
 			aperture: string;
 			credit: string;

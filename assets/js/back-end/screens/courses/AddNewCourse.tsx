@@ -132,7 +132,7 @@ const AddNewCourse: React.FC = () => {
 													<Stack direction="column" spacing="6">
 														<Hightlights />
 														<Categories />
-														<FeaturedImage />
+														<FeaturedImage size="masteriyo_thumbnail" />
 													</Stack>
 												</Box>
 											</Stack>

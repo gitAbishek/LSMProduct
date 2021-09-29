@@ -17,10 +17,11 @@ import MediaAPI from '../../../utils/media';
 
 interface Props {
 	defaultValue?: number;
+	size?: 'masteriyo_thumbnail' | 'full';
 }
 
 const FeaturedImage: React.FC<Props> = (props) => {
-	const { defaultValue } = props;
+	const { defaultValue, size = 'full' } = props;
 	const [imageId, setImageId] = useState<any>(defaultValue || null);
 
 	const { setValue } = useFormContext();
@@ -58,7 +59,11 @@ const FeaturedImage: React.FC<Props> = (props) => {
 				</Center>
 			)}
 			{imageQuery.isSuccess && (
-				<Image w="full" src={imageQuery?.data?.source_url} mb="4" />
+				<Image
+					w="full"
+					src={imageQuery?.data?.media_details?.sizes?.[size]?.source_url}
+					mb="4"
+				/>
 			)}
 			<ButtonGroup d="flex" justifyContent="space-between">
 				{imageId && (

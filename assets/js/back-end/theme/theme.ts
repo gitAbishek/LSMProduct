@@ -229,16 +229,19 @@ const theme = extendTheme({
 					fontSize: 'sm',
 				},
 			},
-			'.react-datepicker': {
-				fontFamily:
-					"-apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
-				overflow: 'hidden',
-			},
 
 			'.react-datepicker-wrapper,\n.react-datepicker__input-container': {
 				display: 'block',
 			},
-			'.react-datepicker__header': { borderRadius: '0', background: '#f7fafc' },
+
+			'.react-datepicker__header': {
+				borderRadius: '0',
+				background: 'blue.100',
+			},
+
+			'.react-datepicker__navigation': {
+				top: '8px',
+			},
 			'.react-datepicker,\n.react-datepicker__header,\n.react-datepicker__time-container':
 				{
 					borderColor: '#e2e8f0',
@@ -262,6 +265,9 @@ const theme = extendTheme({
 					fontWeight: 'normal',
 					'&:hover': { background: '#2a69ac' },
 				},
+			'.react-datepicker__triangle': {
+				d: 'none',
+			},
 		},
 	},
 	shadows: {

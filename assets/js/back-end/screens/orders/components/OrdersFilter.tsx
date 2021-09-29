@@ -3,13 +3,16 @@ import {
 	Collapse,
 	Flex,
 	IconButton,
+	Input,
 	Select,
 	Stack,
 	useMediaQuery,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { forwardRef, useEffect, useState } from 'react';
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { Controller, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import AsyncSelect from 'react-select/async';
 import DesktopHidden from '../../../components/common/DesktopHidden';
@@ -17,7 +20,7 @@ import MobileHidden from '../../../components/common/MobileHidden';
 import { reactSelectStyles } from '../../../config/styles';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
-import { deepClean } from '../../../utils/utils';
+import { deepClean, deepMerge } from '../../../utils/utils';
 
 const courseStatusList = [
 	{
@@ -56,8 +59,8 @@ const courseStatusList = [
 
 interface FilterParams {
 	status?: string;
-	after?: string;
-	before?: string;
+	after?: Date;
+	before?: Date;
 }
 
 interface Props {
@@ -66,12 +69,19 @@ interface Props {
 
 const OrdersFilter: React.FC<Props> = (props) => {
 	const { setFilterParams } = props;
-	const { handleSubmit, register, setValue } = useForm();
+	const { handleSubmit, register, setValue, control } = useForm();
 	const [isMobile] = useMediaQuery('(min-width: 48em)');
 	const [isOpen, setIsOpen] = useState(isMobile);
 
 	const onChange = (data: FilterParams) => {
-		setFilterParams(deepClean(data));
+		const formattedDate = {
+			before: data?.before?.toISOString(),
+			after: data?.after?.toISOString(),
+		};
+
+		setFilterParams(deepClean(deepMerge(data, formattedDate)));
+
+		console.log(data);
 	};
 
 	useEffect(() => {
@@ -79,9 +89,45 @@ const OrdersFilter: React.FC<Props> = (props) => {
 	}, [isMobile]);
 
 	const usersAPI = new API(urls.users);
+
+	const InputDatePicker = forwardRef((props: any) => {
+		return <Input {...props} />;
+	});
+
+	InputDatePicker.displayName = 'InputDatePicker';
+
 	const orderFilterForm = (
 		<form onChange={handleSubmit(onChange)}>
 			<Stack direction={['column', null, 'row']} spacing="4" mt={[6, null, 0]}>
+				<Controller
+					control={control}
+					name="before"
+					render={({ field: { onChange, value } }) => (
+						<ReactDatePicker
+							dateFormat="yyyy-MM-dd"
+							onChange={onChange}
+							selected={value as unknown as Date}
+							customInput={<InputDatePicker />}
+							placeholderText={__('From', 'masteriyo')}
+							autoComplete="off"
+						/>
+					)}
+				/>
+
+				<Controller
+					control={control}
+					name="after"
+					render={({ field: { onChange, value } }) => (
+						<ReactDatePicker
+							dateFormat="yyyy-MM-dd"
+							onChange={onChange}
+							selected={value as unknown as Date}
+							customInput={<InputDatePicker />}
+							placeholderText={__('To', 'masteriyo')}
+							autoComplete="off"
+						/>
+					)}
+				/>
 				<AsyncSelect
 					styles={reactSelectStyles}
 					cacheOptions={true}

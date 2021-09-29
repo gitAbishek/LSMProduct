@@ -99,35 +99,38 @@ const OrdersFilter: React.FC<Props> = (props) => {
 	const orderFilterForm = (
 		<form onChange={handleSubmit(onChange)}>
 			<Stack direction={['column', null, 'row']} spacing="4" mt={[6, null, 0]}>
-				<Controller
-					control={control}
-					name="before"
-					render={({ field: { onChange, value } }) => (
-						<ReactDatePicker
-							dateFormat="yyyy-MM-dd"
-							onChange={onChange}
-							selected={value as unknown as Date}
-							customInput={<InputDatePicker />}
-							placeholderText={__('From', 'masteriyo')}
-							autoComplete="off"
-						/>
-					)}
-				/>
-
-				<Controller
-					control={control}
-					name="after"
-					render={({ field: { onChange, value } }) => (
-						<ReactDatePicker
-							dateFormat="yyyy-MM-dd"
-							onChange={onChange}
-							selected={value as unknown as Date}
-							customInput={<InputDatePicker />}
-							placeholderText={__('To', 'masteriyo')}
-							autoComplete="off"
-						/>
-					)}
-				/>
+				<Box>
+					<Controller
+						control={control}
+						name="before"
+						render={({ field: { onChange, value } }) => (
+							<ReactDatePicker
+								dateFormat="yyyy-MM-dd"
+								onChange={onChange}
+								selected={value as unknown as Date}
+								customInput={<InputDatePicker />}
+								placeholderText={__('From', 'masteriyo')}
+								autoComplete="off"
+							/>
+						)}
+					/>
+				</Box>
+				<Box>
+					<Controller
+						control={control}
+						name="after"
+						render={({ field: { onChange, value } }) => (
+							<ReactDatePicker
+								dateFormat="yyyy-MM-dd"
+								onChange={onChange}
+								selected={value as unknown as Date}
+								customInput={<InputDatePicker />}
+								placeholderText={__('To', 'masteriyo')}
+								autoComplete="off"
+							/>
+						)}
+					/>
+				</Box>
 				<AsyncSelect
 					styles={reactSelectStyles}
 					cacheOptions={true}
@@ -157,13 +160,15 @@ const OrdersFilter: React.FC<Props> = (props) => {
 						});
 					}}
 				/>
-				<Select {...register('status')}>
-					{courseStatusList.map((option: any) => (
-						<option key={option.value} value={option.value}>
-							{option.label}
-						</option>
-					))}
-				</Select>
+				<Box flex="1">
+					<Select {...register('status')}>
+						{courseStatusList.map((option: any) => (
+							<option key={option.value} value={option.value}>
+								{option.label}
+							</option>
+						))}
+					</Select>
+				</Box>
 			</Stack>
 		</form>
 	);

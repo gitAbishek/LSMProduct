@@ -107,7 +107,7 @@ const AllCourseCategories = () => {
 				</List>
 			</Header>
 			<Container maxW="container.xl">
-				<Stack direction="column" spacing="6" py={{ base: 6, md: 12 }}>
+				<Stack direction="column" spacing="6">
 					<Box bg="white" py="12" shadow="box" mx="auto" w="full">
 						<Stack direction="column" spacing="10">
 							<CategoriesFilter

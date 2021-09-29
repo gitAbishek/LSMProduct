@@ -9,7 +9,7 @@ import {
 	useMediaQuery,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Controller, useForm } from 'react-hook-form';
@@ -90,12 +90,6 @@ const OrdersFilter: React.FC<Props> = (props) => {
 
 	const usersAPI = new API(urls.users);
 
-	const InputDatePicker = forwardRef((props: any) => {
-		return <Input {...props} />;
-	});
-
-	InputDatePicker.displayName = 'InputDatePicker';
-
 	const orderFilterForm = (
 		<form onChange={handleSubmit(onChange)}>
 			<Stack direction={['column', null, 'row']} spacing="4" mt={[6, null, 0]}>
@@ -108,7 +102,7 @@ const OrdersFilter: React.FC<Props> = (props) => {
 								dateFormat="yyyy-MM-dd"
 								onChange={onChange}
 								selected={value as unknown as Date}
-								customInput={<InputDatePicker />}
+								customInput={<Input />}
 								placeholderText={__('From', 'masteriyo')}
 								autoComplete="off"
 							/>
@@ -124,7 +118,7 @@ const OrdersFilter: React.FC<Props> = (props) => {
 								dateFormat="yyyy-MM-dd"
 								onChange={onChange}
 								selected={value as unknown as Date}
-								customInput={<InputDatePicker />}
+								customInput={<Input />}
 								placeholderText={__('To', 'masteriyo')}
 								autoComplete="off"
 							/>

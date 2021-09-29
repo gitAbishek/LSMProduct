@@ -753,10 +753,11 @@
 // Review form.
 .masteriyo-submit-container {
 	.masteriyo--title {
-		margin-top: $spacing_60px;
+		margin-top: $spacing_40px;
 		margin-bottom: $spacing_16px;
 		font-size: 24px;
 		font-weight: 500;
+		display: inline-block;
 	}
 
 	.masteriyo-rating {
@@ -778,7 +779,7 @@
 	line-height: 16px;
 	color: var(--masteriyo-color-primary);
 	margin-top: $spacing_16px;
-	display: block;
+	display: inline-block;
 	text-decoration: underline;
 	cursor: pointer;
 }

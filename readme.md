@@ -7,7 +7,7 @@
 **Requires at least**: 5.0
 **Tested up to**: 5.8.1
 **Requires PHP**: 7.0
-**Stable tag**: 1.0.3
+**Stable tag**: 1.0.4
 **License: GNU** General Public License v3.0
 **License URI**: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -40,6 +40,15 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 
 # Changelog
 
+#### 1.0.4 - 29-09-2021
+
+- Enhancement - Added filter to order listing page in backend..
+- Enhancement - Remove course reviews, course question answers and order notes form the WordPress comments page and activity widget.
+- Enhancement - Added supported for primary color change.
+- Enhancement - Added hover effecting to course review rating.
+- Fix - Remove the gap between the categories list and the navigation bar.
+- Fix - Filter disappearance while using filter in courses and categories listing page.
+- Fix - Logo size issue in learn page.
 #### 1.0.3 - 24-09-2021
 
 - Enhancement - Make course category slug optional while creating category.
@@ -49,7 +58,7 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 - Fix - Course progress issue.
 - Fix - Course progress permission issue.
 - Fix - Difficulty badge spacing and font color.
-- Fix - Myaccount responsive issue.
+- Fix - Account page responsive issue.
 - Fix - Single course related post width issue.
 
 #### 1.0.2 - 21-09-2021

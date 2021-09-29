@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Masteriyo - LMS for WordPress 1.0.3\n"
+"Project-Id-Version: Masteriyo - LMS for WordPress 1.0.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-lms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-09-24T14:29:31+00:00\n"
+"POT-Creation-Date: 2021-09-29T16:40:19+05:45\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: masteriyo\n"
@@ -29,8 +29,8 @@ msgstr ""
 #. Author of the plugin
 #: includes/AdminMenu.php:52
 #: includes/AdminMenu.php:53
-#: includes/Models/Order/Order.php:1440
-#: includes/Models/Order/Order.php:1441
+#: includes/Models/Order/Order.php:1446
+#: includes/Models/Order/Order.php:1447
 msgid "Masteriyo"
 msgstr ""
 
@@ -110,7 +110,7 @@ msgstr ""
 
 #: includes/AdminMenu.php:63
 #: includes/AdminMenu.php:64
-#: includes/Masteriyo.php:180
+#: includes/Masteriyo.php:182
 #: includes/PostType/Course.php:36
 #: includes/PostType/Course.php:64
 msgid "Courses"
@@ -133,7 +133,7 @@ msgstr ""
 
 #: includes/AdminMenu.php:90
 #: includes/AdminMenu.php:91
-#: includes/Masteriyo.php:244
+#: includes/Masteriyo.php:246
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Settings"
 msgstr ""
@@ -1808,11 +1808,6 @@ msgctxt "User Course status"
 msgid "Active."
 msgstr ""
 
-#: includes/Helper/UserCourse.php:47
-msgctxt "User Course status"
-msgid "Enrolled."
-msgstr ""
-
 #: includes/Install.php:362
 msgid "Beginner"
 msgstr ""
@@ -1825,39 +1820,39 @@ msgstr ""
 msgid "Expert"
 msgstr ""
 
-#: includes/Masteriyo.php:204
+#: includes/Masteriyo.php:206
 msgid "Docs"
 msgstr ""
 
-#: includes/Masteriyo.php:205
+#: includes/Masteriyo.php:207
 msgid "View masteriyo documentation"
 msgstr ""
 
-#: includes/Masteriyo.php:209
+#: includes/Masteriyo.php:211
 msgid "API docs"
 msgstr ""
 
-#: includes/Masteriyo.php:210
+#: includes/Masteriyo.php:212
 msgid "View masteriyo API docs"
 msgstr ""
 
-#: includes/Masteriyo.php:214
+#: includes/Masteriyo.php:216
 msgid "Community Support"
 msgstr ""
 
-#: includes/Masteriyo.php:215
+#: includes/Masteriyo.php:217
 msgid "Visit community forums"
 msgstr ""
 
-#: includes/Masteriyo.php:245
+#: includes/Masteriyo.php:247
 msgid "View masteriyo settings"
 msgstr ""
 
-#: includes/Masteriyo.php:369
+#: includes/Masteriyo.php:357
 msgid "This password reset key is for a different user account. Please log out and try again."
 msgstr ""
 
-#: includes/Masteriyo.php:439
+#: includes/Masteriyo.php:427
 msgid "Minimum WordPress version required to work Masteriyo is v5.0."
 msgstr ""
 
@@ -1911,11 +1906,11 @@ msgstr ""
 msgid "Error during status transition."
 msgstr ""
 
-#: includes/Models/Order/Order.php:1349
+#: includes/Models/Order/Order.php:1355
 msgid "Payment method:"
 msgstr ""
 
-#: includes/Models/Order/Order.php:1367
+#: includes/Models/Order/Order.php:1373
 msgid "Refund"
 msgstr ""
 
@@ -2629,7 +2624,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/SectionsController.php:109
 #: includes/RestApi/Controllers/Version1/SectionsController.php:293
 #: includes/RestApi/Controllers/Version1/UsersController.php:102
-#: includes/RestApi/Controllers/Version1/UsersController.php:368
+#: includes/RestApi/Controllers/Version1/UsersController.php:369
 msgid "Unique identifier for the resource."
 msgstr ""
 
@@ -2853,7 +2848,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:587
 #: includes/RestApi/Controllers/Version1/QuizesController.php:1015
 #: includes/RestApi/Controllers/Version1/SectionsController.php:354
-#: includes/RestApi/Controllers/Version1/UsersController.php:557
+#: includes/RestApi/Controllers/Version1/UsersController.php:558
 msgid "Meta data."
 msgstr ""
 
@@ -2867,7 +2862,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:594
 #: includes/RestApi/Controllers/Version1/QuizesController.php:1022
 #: includes/RestApi/Controllers/Version1/SectionsController.php:361
-#: includes/RestApi/Controllers/Version1/UsersController.php:564
+#: includes/RestApi/Controllers/Version1/UsersController.php:565
 msgid "Meta ID."
 msgstr ""
 
@@ -2881,7 +2876,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:600
 #: includes/RestApi/Controllers/Version1/QuizesController.php:1028
 #: includes/RestApi/Controllers/Version1/SectionsController.php:367
-#: includes/RestApi/Controllers/Version1/UsersController.php:570
+#: includes/RestApi/Controllers/Version1/UsersController.php:571
 msgid "Meta key."
 msgstr ""
 
@@ -2895,7 +2890,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:605
 #: includes/RestApi/Controllers/Version1/QuizesController.php:1033
 #: includes/RestApi/Controllers/Version1/SectionsController.php:372
-#: includes/RestApi/Controllers/Version1/UsersController.php:575
+#: includes/RestApi/Controllers/Version1/UsersController.php:576
 msgid "Meta value."
 msgstr ""
 
@@ -3040,11 +3035,11 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/SettingsController.php:116
 #: includes/RestApi/Controllers/Version1/SettingsController.php:135
 #: includes/RestApi/Controllers/Version1/SettingsController.php:154
-#: includes/RestApi/Controllers/Version1/UsersController.php:780
-#: includes/RestApi/Controllers/Version1/UsersController.php:812
-#: includes/RestApi/Controllers/Version1/UsersController.php:842
-#: includes/RestApi/Controllers/Version1/UsersController.php:872
-#: includes/RestApi/Controllers/Version1/UsersController.php:913
+#: includes/RestApi/Controllers/Version1/UsersController.php:781
+#: includes/RestApi/Controllers/Version1/UsersController.php:813
+#: includes/RestApi/Controllers/Version1/UsersController.php:843
+#: includes/RestApi/Controllers/Version1/UsersController.php:873
+#: includes/RestApi/Controllers/Version1/UsersController.php:914
 msgid "Sorry, the permission object for this resource is null."
 msgstr ""
 
@@ -3056,7 +3051,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/OrdersController.php:849
 #: includes/RestApi/Controllers/Version1/PostsController.php:59
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:202
-#: includes/RestApi/Controllers/Version1/UsersController.php:789
+#: includes/RestApi/Controllers/Version1/UsersController.php:790
 msgid "Sorry, you are not allowed to read resources."
 msgstr ""
 
@@ -3070,7 +3065,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/QuizBuilderController.php:143
 #: includes/RestApi/Controllers/Version1/RestTermsController.php:167
 #: includes/RestApi/Controllers/Version1/SectionChildrenController.php:123
-#: includes/RestApi/Controllers/Version1/UsersController.php:819
+#: includes/RestApi/Controllers/Version1/UsersController.php:820
 msgid "Sorry, you cannot list resources."
 msgstr ""
 
@@ -3086,7 +3081,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/QuizBuilderController.php:402
 #: includes/RestApi/Controllers/Version1/RestTermsController.php:187
 #: includes/RestApi/Controllers/Version1/SectionsController.php:490
-#: includes/RestApi/Controllers/Version1/UsersController.php:849
+#: includes/RestApi/Controllers/Version1/UsersController.php:850
 msgid "Sorry, you are not allowed to create resources."
 msgstr ""
 
@@ -3101,7 +3096,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/PostsController.php:146
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:862
 #: includes/RestApi/Controllers/Version1/SectionsController.php:559
-#: includes/RestApi/Controllers/Version1/UsersController.php:890
+#: includes/RestApi/Controllers/Version1/UsersController.php:891
 msgid "Sorry, you are not allowed to delete resources."
 msgstr ""
 
@@ -3116,7 +3111,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/PostsController.php:177
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:908
 #: includes/RestApi/Controllers/Version1/SectionsController.php:605
-#: includes/RestApi/Controllers/Version1/UsersController.php:922
+#: includes/RestApi/Controllers/Version1/UsersController.php:923
 msgid "Sorry, you are not allowed to update resources."
 msgstr ""
 
@@ -4905,140 +4900,140 @@ msgstr ""
 msgid "Number of users per page."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:374
+#: includes/RestApi/Controllers/Version1/UsersController.php:375
 msgid "User login username."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:380
+#: includes/RestApi/Controllers/Version1/UsersController.php:381
 msgid "User login password."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:385
+#: includes/RestApi/Controllers/Version1/UsersController.php:386
 msgid "User nicename."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:390
+#: includes/RestApi/Controllers/Version1/UsersController.php:391
 msgid "User email."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:395
+#: includes/RestApi/Controllers/Version1/UsersController.php:396
 msgid "Site url of the user."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:400
+#: includes/RestApi/Controllers/Version1/UsersController.php:401
 msgid "User date created"
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:406
+#: includes/RestApi/Controllers/Version1/UsersController.php:407
 msgid "User activation key."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:412
+#: includes/RestApi/Controllers/Version1/UsersController.php:413
 msgid "User status."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:417
+#: includes/RestApi/Controllers/Version1/UsersController.php:418
 msgid "Display name."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:422
+#: includes/RestApi/Controllers/Version1/UsersController.php:423
 msgid "User nickname."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:427
+#: includes/RestApi/Controllers/Version1/UsersController.php:428
 msgid "User first name."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:432
+#: includes/RestApi/Controllers/Version1/UsersController.php:433
 msgid "User last name."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:437
+#: includes/RestApi/Controllers/Version1/UsersController.php:438
 msgid "User description."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:442
+#: includes/RestApi/Controllers/Version1/UsersController.php:443
 msgid "Enable rich editing."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:448
+#: includes/RestApi/Controllers/Version1/UsersController.php:449
 msgid "Enable syntax highlighting."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:454
+#: includes/RestApi/Controllers/Version1/UsersController.php:455
 msgid "Enable comment shortcuts."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:460
+#: includes/RestApi/Controllers/Version1/UsersController.php:461
 msgid "Mark the user as spam. Multi site only."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:466
+#: includes/RestApi/Controllers/Version1/UsersController.php:467
 msgid "Use SSL."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:472
+#: includes/RestApi/Controllers/Version1/UsersController.php:473
 msgid "Whether to show the admin bar on the frontend."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:478
+#: includes/RestApi/Controllers/Version1/UsersController.php:479
 msgid "User specific locale."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:483
+#: includes/RestApi/Controllers/Version1/UsersController.php:484
 msgid "User role."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:489
+#: includes/RestApi/Controllers/Version1/UsersController.php:490
 msgid "User billing details."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:495
+#: includes/RestApi/Controllers/Version1/UsersController.php:496
 msgid "User billing first name."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:500
+#: includes/RestApi/Controllers/Version1/UsersController.php:501
 msgid "User billing last name."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:505
+#: includes/RestApi/Controllers/Version1/UsersController.php:506
 msgid "User billing company name."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:510
-#: includes/RestApi/Controllers/Version1/UsersController.php:515
+#: includes/RestApi/Controllers/Version1/UsersController.php:511
+#: includes/RestApi/Controllers/Version1/UsersController.php:516
 msgid "User billing address 1."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:520
+#: includes/RestApi/Controllers/Version1/UsersController.php:521
 msgid "User billing address 2."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:525
+#: includes/RestApi/Controllers/Version1/UsersController.php:526
 msgid "User billing city."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:530
+#: includes/RestApi/Controllers/Version1/UsersController.php:531
 msgid "User billing post code."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:535
+#: includes/RestApi/Controllers/Version1/UsersController.php:536
 msgid "User billing country."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:540
+#: includes/RestApi/Controllers/Version1/UsersController.php:541
 msgid "User billing state."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:545
+#: includes/RestApi/Controllers/Version1/UsersController.php:546
 msgid "User billing email address."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:550
+#: includes/RestApi/Controllers/Version1/UsersController.php:551
 msgid "User billing phone number."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/UsersController.php:881
+#: includes/RestApi/Controllers/Version1/UsersController.php:882
 msgid "Sorry, you cannot delete yourself."
 msgstr ""
 
@@ -5054,82 +5049,82 @@ msgstr ""
 msgid "Masteriyo Student"
 msgstr ""
 
-#: includes/ScriptStyle.php:533
+#: includes/ScriptStyle.php:566
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Save"
 msgstr ""
 
-#: includes/ScriptStyle.php:534
+#: includes/ScriptStyle.php:567
 msgid "Saving..."
 msgstr ""
 
-#: includes/ScriptStyle.php:535
+#: includes/ScriptStyle.php:568
 msgid "Your profile was updated successfully"
 msgstr ""
 
-#: includes/ScriptStyle.php:545
+#: includes/ScriptStyle.php:578
 msgid "Sign In"
 msgstr ""
 
-#: includes/ScriptStyle.php:546
+#: includes/ScriptStyle.php:579
 msgid "Signing In..."
 msgstr ""
 
-#: includes/ScriptStyle.php:558
+#: includes/ScriptStyle.php:591
 msgid "Type CONFIRM to proceed"
 msgstr ""
 
-#: includes/ScriptStyle.php:559
+#: includes/ScriptStyle.php:592
 msgid "Try again"
 msgstr ""
 
-#: includes/ScriptStyle.php:560
+#: includes/ScriptStyle.php:593
 msgid "Submit"
 msgstr ""
 
-#: includes/ScriptStyle.php:561
+#: includes/ScriptStyle.php:594
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Update"
 msgstr ""
 
-#: includes/ScriptStyle.php:562
+#: includes/ScriptStyle.php:595
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Delete"
 msgstr ""
 
-#: includes/ScriptStyle.php:563
+#: includes/ScriptStyle.php:596
 msgid "Submitting..."
 msgstr ""
 
-#: includes/ScriptStyle.php:564
+#: includes/ScriptStyle.php:597
 msgid "Deleting..."
 msgstr ""
 
-#: includes/ScriptStyle.php:565
+#: includes/ScriptStyle.php:598
 msgid "Reply to"
 msgstr ""
 
-#: includes/ScriptStyle.php:566
+#: includes/ScriptStyle.php:599
 msgid "Edit reply"
 msgstr ""
 
-#: includes/ScriptStyle.php:567
+#: includes/ScriptStyle.php:600
 msgid "Edit review"
 msgstr ""
 
-#: includes/ScriptStyle.php:568
+#: includes/ScriptStyle.php:601
 msgid "Submitted successfully"
 msgstr ""
 
-#: includes/ScriptStyle.php:569
+#: includes/ScriptStyle.php:602
 msgid "Updated successfully"
 msgstr ""
 
-#: includes/ScriptStyle.php:570
+#: includes/ScriptStyle.php:603
 msgid "Deleted successfully"
 msgstr ""
 
-#: includes/ScriptStyle.php:579
+#: includes/ScriptStyle.php:612
 msgid "Error processing checkout. Please try again."
 msgstr ""
 
@@ -5470,6 +5465,11 @@ msgstr ""
 
 #: includes/Template.php:128
 msgid "action_args should not be overwritten when calling get_template."
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.js:1
+#: assets/js/build/masteriyo-interactive.js:1
+msgid "Something went wrong"
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
@@ -6001,6 +6001,10 @@ msgid "Are you sure? You can't restore this lesson"
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
+msgid "No orders found."
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.js:1
 msgid "Billing details"
 msgstr ""
 
@@ -6013,6 +6017,10 @@ msgid "Are you sure? You can't restore this order."
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
+msgid "All Status"
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.js:1
 msgid "Pending"
 msgstr ""
 
@@ -6021,7 +6029,7 @@ msgid "Processing"
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
-msgid "On Hold"
+msgid "On-hold"
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
@@ -6039,6 +6047,34 @@ msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Failed"
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.js:1
+msgid "From"
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.js:1
+msgid "To"
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.js:1
+msgid "Searching..."
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.js:1
+msgid "Please enter 3 or more characters"
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.js:1
+msgid "Search by customer"
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.js:1
+msgid "Orders Per Page:"
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.js:1
+msgid "On Hold"
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
@@ -6854,11 +6890,6 @@ msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Edit Quiz:"
-msgstr ""
-
-#: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-interactive.js:1
-msgid "Something went wrong"
 msgstr ""
 
 #: assets/js/build/masteriyo-interactive.js:1

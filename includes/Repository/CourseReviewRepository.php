@@ -222,15 +222,28 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	public function delete( Model &$course_review, $args = array() ) {
 		$id          = $course_review->get_id();
 		$object_type = $course_review->get_object_type();
+		$args        = array_merge(
+			array(
+				'force_delete' => false,
+			),
+			$args
+		);
 
 		if ( ! $id ) {
 			return;
 		}
 
-		do_action( 'masteriyo_before_delete_' . $object_type, $id, $course_review );
-		wp_delete_comment( $id, true );
-		$course_review->set_id( 0 );
-		do_action( 'masteriyo_after_delete_' . $object_type, $id, $course_review );
+		if ( $args['force_delete'] ) {
+			do_action( 'masteriyo_before_delete_' . $object_type, $id, $course_review );
+			wp_delete_comment( $id, true );
+			$course_review->set_id( 0 );
+			do_action( 'masteriyo_after_delete_' . $object_type, $id, $course_review );
+		} else {
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course_review );
+			wp_trash_comment( $id );
+			$course_review->set_status( 'trash' );
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course_review );
+		}
 
 		CourseReviews::update_course_review_stats( $course_review->get_course_id() );
 	}
@@ -291,7 +304,13 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	 * @return CourseReview[]
 	 */
 	public function query( $query_vars ) {
-		$args = $this->get_wp_query_args( $query_vars );
+		$status = $query_vars['status'];
+
+		unset( $query_vars['status'] );
+
+		$args           = $this->get_wp_query_args( $query_vars );
+		$args['status'] = $status;
+
 		// Fetching review of comment_type 'course_review', 'type' already map to 'post_type' so need to add 'type' as 'comment_type' here.
 		$args = array_merge( $args, array( 'type' => 'mto_course_review' ) );
 

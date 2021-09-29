@@ -30,6 +30,7 @@ class CourseReviewQuery extends ObjectQuery {
 			parent::get_default_query_vars(),
 			array(
 				'course_id' => '',
+				'status'    => 'all',
 			)
 		);
 	}

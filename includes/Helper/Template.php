@@ -1184,3 +1184,14 @@ if ( ! function_exists( 'masteriyo_single_course_modals' ) ) {
 		masteriyo_get_template( 'single-course/modals.php' );
 	}
 }
+
+if ( ! function_exists( 'masteriyo_deleted_review_notice' ) ) {
+	/**
+	 * Print review deleted notice.
+	 *
+	 * @since 1.0.3
+	 */
+	function masteriyo_deleted_review_notice() {
+		echo masteriyo_get_review_deleted_notice(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
+}

@@ -49,55 +49,68 @@ do_action( 'masteriyo_before_single_course_reviews' );
 	<div class="masteriyo-course-reviews-list">
 		<?php foreach ( $course_reviews as $course_review ) : ?>
 			<!-- Course Review -->
-			<div class="masteriyo-course-review" data-id="<?php echo esc_attr( $course_review->get_id() ); ?>">
-				<input type="hidden" name="parent" value="<?php echo esc_attr( $course_review->get_parent() ); ?>">
-				<div class="masteriyo-flex masteriyo-review masteriyo-border-none masteriyo-course-review__content">
-					<div class="masteriyo-avatar">
-						<?php if ( ! $course_review->get_author() ) : ?>
-							<img src="<?php echo esc_attr( $pp_placeholder ); ?>" />
-						<?php else : ?>
-							<img src="<?php echo esc_attr( $course_review->get_author()->get_avatar_url() ); ?>" />
-						<?php endif; ?>
-					</div>
-					<div class="masteriyo-right">
-						<div class="masteriyo-right__rating">
-							<div class="rating" data-value="<?php echo esc_attr( $course_review->get_rating() ); ?>">
-								<span class="masteriyo-icon-svg masteriyo-flex masteriyo-rstar">
-									<?php masteriyo_render_stars( $course_review->get_rating() ); ?>
-								</span>
-							</div>
-							<?php if ( masteriyo_current_user_can_edit_course_review( $course_review ) ) : ?>
-								<nav class="masteriyo-dropdown">
-									<label class="menu-toggler">
-										<span class='icon_box'>
-											<?php masteriyo_get_svg( 'small-hamburger', true ); ?>
-										</span>
-									</label>
-									<ul class="slide menu">
-										<li class="masteriyo-edit-course-review"><strong><?php esc_html_e( 'Edit', 'masteriyo' ); ?></strong></li>
-										<li class="masteriyo-delete-course-review"><strong><?php esc_html_e( 'Delete', 'masteriyo' ); ?></strong></li>
-									</ul>
-								</nav>
+			<?php if ( 'trash' === $course_review->get_status() ) : ?>
+				<?php
+				/**
+				 * Hook: masteriyo_deleted_review_notice.
+				 *
+				 * @hooked masteriyo_deleted_review_notice - 10
+				 *
+				 * @since 1.0.3
+				 */
+				do_action( 'masteriyo_deleted_review_notice' );
+				?>
+			<?php else : ?>
+				<div class="masteriyo-course-review" data-id="<?php echo esc_attr( $course_review->get_id() ); ?>">
+					<input type="hidden" name="parent" value="<?php echo esc_attr( $course_review->get_parent() ); ?>">
+					<div class="masteriyo-flex masteriyo-review masteriyo-border-none masteriyo-course-review__content">
+						<div class="masteriyo-avatar">
+							<?php if ( ! $course_review->get_author() ) : ?>
+								<img src="<?php echo esc_attr( $pp_placeholder ); ?>" />
+							<?php else : ?>
+								<img src="<?php echo esc_attr( $course_review->get_author()->get_avatar_url() ); ?>" />
 							<?php endif; ?>
 						</div>
-						<div class="masteriyo-flex">
-							<div class="author-name" data-value="<?php echo esc_attr( $course_review->get_author_name() ); ?>">
-								<?php echo esc_html( $course_review->get_author_name() ); ?>
+						<div class="masteriyo-right">
+							<div class="masteriyo-right__rating">
+								<div class="rating" data-value="<?php echo esc_attr( $course_review->get_rating() ); ?>">
+									<span class="masteriyo-icon-svg masteriyo-flex masteriyo-rstar">
+										<?php masteriyo_render_stars( $course_review->get_rating() ); ?>
+									</span>
+								</div>
+								<?php if ( masteriyo_current_user_can_edit_course_review( $course_review ) ) : ?>
+									<nav class="masteriyo-dropdown">
+										<label class="menu-toggler">
+											<span class='icon_box'>
+												<?php masteriyo_get_svg( 'small-hamburger', true ); ?>
+											</span>
+										</label>
+										<ul class="slide menu">
+											<li class="masteriyo-edit-course-review"><strong><?php esc_html_e( 'Edit', 'masteriyo' ); ?></strong></li>
+											<li class="masteriyo-delete-course-review"><strong><?php esc_html_e( 'Delete', 'masteriyo' ); ?></strong></li>
+										</ul>
+									</nav>
+								<?php endif; ?>
 							</div>
-							<div class="date-created" data-value="<?php echo esc_attr( $course_review->get_date_created() ); ?>">
-								<?php echo esc_html( $course_review->get_date_created() ); ?>
+							<div class="masteriyo-flex">
+								<div class="author-name" data-value="<?php echo esc_attr( $course_review->get_author_name() ); ?>">
+									<?php echo esc_html( $course_review->get_author_name() ); ?>
+								</div>
+								<div class="date-created" data-value="<?php echo esc_attr( $course_review->get_date_created() ); ?>">
+									<?php echo esc_html( $course_review->get_date_created() ); ?>
+								</div>
 							</div>
+							<div class="title" data-value="<?php echo esc_attr( $course_review->get_title() ); ?>">
+								<?php echo esc_html( $course_review->get_title() ); ?>
+							</div>
+							<div class="content" data-value="<?php echo esc_attr( $course_review->get_content() ); ?>">
+								<?php echo esc_html( $course_review->get_content() ); ?>
+							</div>
+							<span class="masteriyo-reply-course-review"><?php esc_html_e( 'Reply', 'masteriyo' ); ?></span>
 						</div>
-						<div class="title" data-value="<?php echo esc_attr( $course_review->get_title() ); ?>">
-							<?php echo esc_html( $course_review->get_title() ); ?>
-						</div>
-						<div class="content" data-value="<?php echo esc_attr( $course_review->get_content() ); ?>">
-							<?php echo esc_html( $course_review->get_content() ); ?>
-						</div>
-						<span class="masteriyo-reply-course-review"><?php esc_html_e( 'Reply', 'masteriyo' ); ?></span>
 					</div>
 				</div>
-			</div>
+			<?php endif; ?>
 
 			<?php if ( ! empty( $replies[ $course_review->get_id() ] ) ) : ?>
 				<div class="masteriyo-course-review-replies">
@@ -117,28 +130,27 @@ do_action( 'masteriyo_before_single_course_reviews' );
 								<div class="masteriyo-flex  justify-content-between masteriyo-reply-replies">
 									<div class="masteriyo-right">
 										<div class="masteriyo-reply-replies--title">
-					  <div class="masteriyo-flex">
-						<div class="author-name" data-value="<?php echo esc_attr( $reply->get_author_name() ); ?>">
-						  <?php echo esc_html( $reply->get_author_name() ); ?>
-						</div>
-						<div class="date-created" data-value="<?php echo esc_attr( $reply->get_date_created() ); ?>">
-						  <?php echo esc_html( $reply->get_date_created() ); ?>
-						</div>
-					  </div>
-								 <?php if ( masteriyo_current_user_can_edit_course_review( $reply ) ) : ?>
-										<nav class="masteriyo-dropdown">
-											<label class="menu-toggler">
-												<span class='icon_box'>
-													<?php masteriyo_get_svg( 'small-hamburger', true ); ?>
-												</span>
-											</label>
-											<ul class="slide menu">
-												<li class="masteriyo-edit-course-review"><strong><?php esc_html_e( 'Edit', 'masteriyo' ); ?></strong></li>
-												<li class="masteriyo-delete-course-review"><strong><?php esc_html_e( 'Delete', 'masteriyo' ); ?></strong></li>
-											</ul>
-										</nav>
-									<?php endif; ?>
-
+											<div class="masteriyo-flex">
+												<div class="author-name" data-value="<?php echo esc_attr( $reply->get_author_name() ); ?>">
+													<?php echo esc_html( $reply->get_author_name() ); ?>
+												</div>
+												<div class="date-created" data-value="<?php echo esc_attr( $reply->get_date_created() ); ?>">
+													<?php echo esc_html( $reply->get_date_created() ); ?>
+												</div>
+											</div>
+											<?php if ( masteriyo_current_user_can_edit_course_review( $reply ) ) : ?>
+												<nav class="masteriyo-dropdown">
+													<label class="menu-toggler">
+														<span class='icon_box'>
+															<?php masteriyo_get_svg( 'small-hamburger', true ); ?>
+														</span>
+													</label>
+													<ul class="slide menu">
+														<li class="masteriyo-edit-course-review"><strong><?php esc_html_e( 'Edit', 'masteriyo' ); ?></strong></li>
+														<li class="masteriyo-delete-course-review"><strong><?php esc_html_e( 'Delete', 'masteriyo' ); ?></strong></li>
+													</ul>
+												</nav>
+											<?php endif; ?>
 										</div>
 										<div class="content" data-value="<?php echo esc_attr( $reply->get_content() ); ?>">
 											<?php echo esc_html( $reply->get_content() ); ?>

@@ -2783,25 +2783,64 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
 		);
 	}
 
-	$course_reviews   = masteriyo_get_course_reviews(
+	$course_reviews     = masteriyo_get_course_reviews(
 		array(
 			'course_id' => $course->get_id(),
+			'status'    => array( 'approve', 'trash' ),
 		)
 	);
-	$filtered_reviews = array();
-	$replies          = array();
+	$filtered_reviews   = array();
+	$sorted_reviews     = array();
+	$replies            = array();
+	$reply_counts = [];
+	$trash_reply_counts = array();
 
 	foreach ( $course_reviews as $review ) {
 		if ( ! $review->is_reply() ) {
-			$filtered_reviews[] = $review;
+			$sorted_reviews[] = $review;
 			continue;
 		}
-		$key = $review->get_parent();
+		$key       = $review->get_parent();
+		$review_id = $review->get_id();
 
+		if ( ! isset( $trash_reply_counts[ $key ] ) ) {
+			$trash_reply_counts[ $key ] = 0;
+		}
+		if ( 'trash' === $review->get_status() ) {
+			$trash_reply_counts[ $key ] += 1;
+		}
 		if ( ! isset( $replies[ $key ] ) ) {
 			$replies[ $key ] = array();
 		}
+		if ( ! isset( $reply_counts[ $key ] ) ) {
+			$reply_counts[ $key ] = 0;
+		}
+		$reply_counts[ $key ] += 1;
+
+		if ( 'trash' === $review->get_status() ) {
+			continue;
+		}
+
 		$replies[ $key ][] = $review;
+	}
+
+	// Remove unnecessary items.
+	foreach ( $sorted_reviews as $review ) {
+		$review_id = $review->get_id();
+
+		if ( 'trash' === $review->get_status() ) {
+			if (
+				! isset( $replies[ $review_id ] ) ||
+				$reply_counts[ $review_id ] === $trash_reply_counts[ $review_id ]
+			) {
+				continue;
+			}
+		}
+		$filtered_reviews[] = $review;
+
+		if ( isset( $replies[ $review_id ] ) && $reply_counts[ $review_id ] === $trash_reply_counts[ $review_id ] ) {
+			unset( $replies[ $review_id ] );
+		}
 	}
 
 	return array(

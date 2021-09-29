@@ -424,9 +424,26 @@
 
 							masteriyo_api.deleteCourseReview(review_id, {
 								onSuccess: function () {
-									$review.fadeOut(500, function () {
-										$(this).remove();
-									});
+									if ($review.hasClass('is-course-review-reply')) {
+										var isDeleteParent = $review.siblings().length === 0;
+
+										$review.fadeOut(500, function () {
+											if (isDeleteParent) {
+												$review
+													.closest('.masteriyo-course-review-replies')
+													.remove();
+											}
+											$(this).remove();
+										});
+										return;
+									}
+
+									if (
+										$review.next().hasClass('masteriyo-course-review-replies')
+									) {
+										$review.after(mto_data.review_deleted_notice);
+									}
+									$review.remove();
 								},
 								onError: function (xhr, status, error) {
 									var message = error;

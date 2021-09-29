@@ -420,6 +420,28 @@ class ScriptStyle {
 		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations( 'masteriyo-learn', 'masteriyo', Constants::get( 'MASTERIYO_LANGUAGES' ) );
 		}
+
+		self::load_custom_inline_styles();
+	}
+
+	/**
+	 * Load inline custom colors.
+	 *
+	 * @since 1.0.4
+	 */
+	public static function load_custom_inline_styles() {
+		$primary_color = masteriyo_get_setting( 'general.styling.primary_color' );
+		$primary_light = masteriyo_color_luminance( $primary_color, 0.3 );
+		$primary_dark  = masteriyo_color_luminance( $primary_color, -0.05 );
+		$custom_css    = "
+			:root {
+				--masteriyo-color-primary: ${primary_color};
+				--masteriyo-color-primary-light: ${primary_light};
+				--masteriyo-color-primary-dark: ${primary_dark};
+				--masteriyo-color-btn-blue-hover: ${primary_light};
+			}
+		";
+		wp_add_inline_style( 'masteriyo-public', $custom_css );
 	}
 
 	/**

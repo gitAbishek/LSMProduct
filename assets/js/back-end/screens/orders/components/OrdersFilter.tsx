@@ -12,7 +12,6 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import AsyncSelect from 'react-select/async';
-import DateRangePicker from '../../../components/common/DateRangePicker';
 import DesktopHidden from '../../../components/common/DesktopHidden';
 import MobileHidden from '../../../components/common/MobileHidden';
 import { reactSelectStyles } from '../../../config/styles';
@@ -83,13 +82,6 @@ const OrdersFilter: React.FC<Props> = (props) => {
 	const orderFilterForm = (
 		<form onChange={handleSubmit(onChange)}>
 			<Stack direction={['column', null, 'row']} spacing="4" mt={[6, null, 0]}>
-				<DateRangePicker
-					onChange={(from: string, to: string) => {
-						setValue('after', from);
-						setValue('before', to);
-						handleSubmit(onChange)();
-					}}
-				/>
 				<AsyncSelect
 					styles={reactSelectStyles}
 					cacheOptions={true}

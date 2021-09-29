@@ -229,31 +229,6 @@ const theme = extendTheme({
 					fontSize: 'sm',
 				},
 			},
-			'.DayPickerInput .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside)':
-				{
-					backgroundColor: '#f0f8ff !important',
-					color: '#4a90e2',
-				},
-			'.DayPickerInput .DayPicker-Day': {
-				borderRadius: '0 !important',
-			},
-			'.DayPickerInput .DayPicker-Day--start': {
-				borderTopLeftRadius: '50% !important',
-				borderBottomLeftRadius: '50% !important',
-			},
-			'.DayPickerInput .DayPicker-Day--end': {
-				borderTopRightRadius: '50% !important',
-				borderBottomRightRadius: '50% !important',
-			},
-			'.DayPickerInput .DayPickerInput-Overlay': {
-				width: '550px',
-			},
-			'.DayPickerInput input': {
-				textAlign: 'center',
-			},
-			'.DayPickerInput input:focus': {
-				outline: 'none',
-			},
 		},
 	},
 	shadows: {

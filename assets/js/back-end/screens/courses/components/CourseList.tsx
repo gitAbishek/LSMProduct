@@ -126,12 +126,12 @@ const CourseList: React.FC<Props> = (props) => {
 			</Td>
 			<Td>
 				<ButtonGroup>
-					<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
-						<RouterLink
-							to={routes.courses.edit.replace(':courseId', id.toString())}>
+					<RouterLink
+						to={routes.courses.edit.replace(':courseId', id.toString())}>
+						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
 							{__('Edit')}
-						</RouterLink>
-					</Button>
+						</Button>
+					</RouterLink>
 					<Menu placement="bottom-end">
 						<MenuButton
 							as={IconButton}

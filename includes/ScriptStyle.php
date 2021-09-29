@@ -164,7 +164,6 @@ class ScriptStyle {
 		);
 	}
 
-
 	/**
 	 * Initialize the styles.
 	 *
@@ -178,10 +177,15 @@ class ScriptStyle {
 		self::$styles = apply_filters(
 			'masteriyo_enqueue_styles',
 			array(
-				'public' => array(
+				'public'       => array(
 					'src'     => self::get_asset_url( "/assets/css/public{$suffix}.css" ),
-					'has_rtl' => true,
+					'has_rtl' => false,
 					'context' => 'public',
+				),
+				'dependencies' => array(
+					'src'     => self::get_asset_url( '/assets/js/build/masteriyo-dependencies.css' ),
+					'has_rtl' => false,
+					'context' => 'admin',
 				),
 			)
 		);

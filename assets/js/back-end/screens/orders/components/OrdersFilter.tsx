@@ -74,14 +74,12 @@ const OrdersFilter: React.FC<Props> = (props) => {
 	const [isOpen, setIsOpen] = useState(isMobile);
 
 	const onChange = (data: FilterParams) => {
+		console.log(data);
 		const formattedDate = {
 			before: data?.before?.toISOString(),
 			after: data?.after?.toISOString(),
 		};
-
 		setFilterParams(deepClean(deepMerge(data, formattedDate)));
-
-		console.log(data);
 	};
 
 	useEffect(() => {
@@ -97,10 +95,13 @@ const OrdersFilter: React.FC<Props> = (props) => {
 					<Controller
 						control={control}
 						name="before"
-						render={({ field: { onChange, value } }) => (
+						render={({ field: { onChange: onDateChange, value } }) => (
 							<ReactDatePicker
 								dateFormat="yyyy-MM-dd"
-								onChange={onChange}
+								onChange={(value: Date) => {
+									onDateChange(value);
+									handleSubmit(onChange)();
+								}}
 								selected={value as unknown as Date}
 								customInput={<Input />}
 								placeholderText={__('From', 'masteriyo')}
@@ -113,10 +114,13 @@ const OrdersFilter: React.FC<Props> = (props) => {
 					<Controller
 						control={control}
 						name="after"
-						render={({ field: { onChange, value } }) => (
+						render={({ field: { onChange: onDateChange, value } }) => (
 							<ReactDatePicker
 								dateFormat="yyyy-MM-dd"
-								onChange={onChange}
+								onChange={(value: Date) => {
+									onDateChange(value);
+									handleSubmit(onChange)();
+								}}
 								selected={value as unknown as Date}
 								customInput={<Input />}
 								placeholderText={__('To', 'masteriyo')}

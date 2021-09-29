@@ -210,7 +210,7 @@ function compressBuildWithVersion() {
 
 const compileAssets = series(
 	removePreviousMinifiedAssets,
-	removeVersionedUnminifiedAssets,
+	// removeVersionedUnminifiedAssets,
 	parallel(compileSass, minifyJs, optimizeImages)
 );
 const build = series(removeBuild, compileAssets, renameBackendAssets);

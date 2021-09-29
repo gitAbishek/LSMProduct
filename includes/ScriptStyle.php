@@ -431,9 +431,16 @@ class ScriptStyle {
 	 */
 	public static function load_custom_inline_styles() {
 		$primary_color = masteriyo_get_setting( 'general.styling.primary_color' );
+
+		// Bail early if the primary color is not set.
+		if ( empty( trim( $primary_color ) ) ) {
+			return;
+		}
+
 		$primary_light = masteriyo_color_luminance( $primary_color, 0.3 );
 		$primary_dark  = masteriyo_color_luminance( $primary_color, -0.05 );
-		$custom_css    = "
+
+		$custom_css = "
 			:root {
 				--masteriyo-color-primary: ${primary_color};
 				--masteriyo-color-primary-light: ${primary_light};

@@ -6,7 +6,7 @@ const path = require('path');
 const rename = require('gulp-rename');
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 const { dest, series, src, watch, parallel, task } = require('gulp');
-const { exec } = require('child_process');
+const { exec, execSync } = require('child_process');
 const zip = require('gulp-zip');
 const { sass } = require('@mr-hope/gulp-sass');
 const browserSync = require('browser-sync').create();
@@ -92,28 +92,6 @@ const paths = {
 	},
 };
 
-function removePreviousMinifiedAssets() {
-	return exec('find assets/ -name "*.min.*" -type f -delete');
-}
-
-function removeVersionedUnminifiedAssets() {
-	return exec(
-		'find assets/ -type f -regextype posix-extended -regex ".*[0-9]+\\.[0-9]+\\.[0-9]+*\\.(js|css)$" -delete'
-	);
-}
-
-function removeVersionedUnminifiedFrontendJS() {
-	return exec(
-		'find assets/js/frontend/ -type f -regextype posix-extended -regex ".*[0-9]+\\.[0-9]+\\.[0-9]+*\\.js$" -delete'
-	);
-}
-
-function removeVersionedUnminifiedCSS() {
-	return exec(
-		'find assets/ -type f -regextype posix-extended -regex ".*[0-9]+\\.[0-9]+\\.[0-9]+*\\.css$" -delete'
-	);
-}
-
 function renameBackendAssets() {
 	return src(paths.backendJS.src)
 		.pipe(rename({ suffix: `.${pkg.version}` }))
@@ -164,10 +142,10 @@ function reloadBrowserSync(cb) {
 }
 
 function watchChanges() {
-	watch(paths.sass.src, series(removeVersionedUnminifiedCSS, compileSass));
+	watch(paths.sass.src, series(compileSass));
 	watch(
 		paths.frontendJS.src,
-		series(removeVersionedUnminifiedFrontendJS, minifyJs, reloadBrowserSync)
+		series(minifyJs, reloadBrowserSync)
 	);
 	watch(paths.php.src, reloadBrowserSync);
 	watch(paths.images.src, series(optimizeImages, reloadBrowserSync));
@@ -179,6 +157,10 @@ function removeBuild() {
 
 function removeRelease() {
 	return exec('rm -rf release');
+}
+
+function removeCompiledAssets() {
+	return exec('rm -rf assets/js/build/frontend && rm -rf assets/css');
 }
 
 const copyToBuild = [
@@ -208,11 +190,7 @@ function compressBuildWithVersion() {
 		.pipe(dest('release'));
 }
 
-const compileAssets = series(
-	removePreviousMinifiedAssets,
-	// removeVersionedUnminifiedAssets,
-	parallel(compileSass, minifyJs, optimizeImages)
-);
+const compileAssets = series(removeCompiledAssets, parallel(compileSass, minifyJs, optimizeImages));
 const build = series(removeBuild, compileAssets, renameBackendAssets);
 const dev = series(startBrowserSync, watchChanges);
 const release = series(
@@ -223,7 +201,7 @@ const release = series(
 	parallel(compressBuildWithVersion, compressBuildWithoutVersion)
 );
 
-exports.clean = parallel(removeBuild, removeRelease);
+exports.clean = parallel(removeBuild, removeRelease, removeCompiledAssets);
 exports.dev = dev;
 exports.build = build;
 exports.release = release;

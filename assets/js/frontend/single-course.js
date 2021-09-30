@@ -494,7 +494,7 @@
 					if (isSticky) {
 						$('.masteriyo-single-course--aside').css({
 							position: 'sticky',
-							top: '0px',
+							top: '7.5rem',
 						});
 					} else {
 						$('.masteriyo-single-course--aside').css({ position: 'relative' });

@@ -30,49 +30,43 @@ if ( empty( $course ) || ! $course->is_visible() ) {
  */
 do_action( 'masteriyo_before_single_course_content' );
 
-$difficulty = $course->get_difficulty();
-
 ?>
-<?php //masteriyo_display_all_notices(); ?>
-
 <div id="course-<?php the_ID(); ?>" class="masteriyo-single-course">
 	<div class="masteriyo-col-8">
 		<div class="masteriyo-single-course--main masteriyo-course--content">
-			<div class="masteriyo-course--img-wrap">
-				<!-- Diffculty Badge -->
-				<?php if ( $difficulty ) : ?>
-				<div class="difficulty-badge">
-					<span class="masteriyo-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
-				</div>
-				<?php endif; ?>
-
-				<?php do_action( 'masteriyo_single_course_featured_image' ); ?>
-			</div>
-
-			<!-- Category -->
-			<?php do_action( 'masteriyo_single_course_categories' ); ?>
-
-			<!-- Title -->
-			<?php do_action( 'masteriyo_single_course_title' ); ?>
-
-			<!-- Author and rating -->
-			<?php do_action( 'masteriyo_single_course_author_and_rating' ); ?>
-
-			<!-- Main contents: Overview, Curriculum, Reviews -->
-			<?php do_action( 'masteriyo_single_course_main_content' ); ?>
+			<?php
+			/**
+			 * Action Hook: masteriyo_single_course_content
+			 *
+			 * @hooked masteriyo_single_course_featured_image - 10
+			 * @hooked masteriyo_single_course_categories - 20
+			 * @hooked masteriyo_single_course_title - 30
+			 * @hooked masteriyo_single_course_author_and_rating - 40
+			 * @hooked masteriyo_single_course_main_content_template - 50
+			 *
+			 * @since 1.0.4
+			 */
+			do_action( 'masteriyo_single_course_content', $course );
+			?>
 		</div>
 	</div>
 
 	<div class="masteriyo-col-4">
 		<aside class="masteriyo-single-course--aside masteriyo-course--content">
-			<!-- Price and Enroll Now Button -->
-			<?php do_action( 'masteriyo_single_course_price_and_enroll_button' ); ?>
-			<!-- Course Stats -->
-			<?php do_action( 'masteriyo_single_course_stats' ); ?>
-
-			<!-- Course Highlights -->
-			<?php do_action( 'masteriyo_single_course_highlights' ); ?>
+			<?php
+			/**
+			 * Action Hook: masteriyo_single_course_sidebar_content
+			 *
+			 * @hooked masteriyo_single_course_price_and_enroll_button - 10
+			 * @hooked masteriyo_single_course_stats - 20
+			 * @hooked masteriyo_single_course_highlights - 30
+			 *
+			 * @since 1.0.4
+			 */
+			do_action( 'masteriyo_single_course_sidebar_content', $course );
+			?>
 		</aside>
+	</div>
 </div>
 <?php
 /**

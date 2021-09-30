@@ -20,7 +20,19 @@ do_action( 'masteriyo_before_single_course_content' );
 
 ?>
 <div class="masteriyo-single-course--main__content">
-	<?php do_action( 'masteriyo_single_course_content' ); ?>
+	<?php
+	/**
+	 * Action Hook: masteriyo_single_course_main_content
+	 *
+	 * @hooked masteriyo_single_course_tab_handles - 10
+	 * @hooked masteriyo_single_course_overview - 20
+	 * @hooked masteriyo_single_course_curriculum - 30
+	 * @hooked masteriyo_single_course_reviews - 40
+	 *
+	 * @since 1.0.4
+	 */
+	do_action( 'masteriyo_single_course_main_content', $course );
+	?>
 </div>
 <?php
 

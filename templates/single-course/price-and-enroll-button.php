@@ -16,8 +16,6 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-global $course;
-
 do_action( 'masteriyo_before_single_course_price_and_enroll_button' );
 
 ?>

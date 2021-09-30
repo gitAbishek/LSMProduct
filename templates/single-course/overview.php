@@ -16,8 +16,6 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-global $course;
-
 /**
  * masteriyo_before_single_course_overview hook.
  */

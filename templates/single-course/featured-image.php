@@ -16,10 +16,20 @@
 
 defined( 'ABSPATH' ) || exit;
 
+$difficulty = $course->get_difficulty();
+
 ?>
 
-<div class="masteriyo-feature-img">
-	<?php echo wp_kses_post( $course->get_image( 'masteriyo_single' ) ); ?>
+<div class="masteriyo-course--img-wrap">
+	<?php if ( $difficulty ) : ?>
+		<div class="difficulty-badge">
+			<span class="masteriyo-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
+		</div>
+	<?php endif; ?>
+
+	<div class="masteriyo-feature-img">
+		<?php echo wp_kses_post( $course->get_image( 'masteriyo_single' ) ); ?>
+	</div>
 </div>
 
 <?php

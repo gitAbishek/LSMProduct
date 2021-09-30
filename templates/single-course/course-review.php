@@ -22,7 +22,7 @@ if ( 'trash' === $course_review->get_status() ) {
 	 *
 	 * @hooked masteriyo_deleted_review_notice - 10
 	 *
-	 * @since 1.0.3
+	 * @since 1.0.4
 	 */
 	do_action( 'masteriyo_deleted_review_notice' );
 	return;

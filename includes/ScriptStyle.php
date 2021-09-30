@@ -587,7 +587,7 @@ class ScriptStyle {
 						'nonce'                   => wp_create_nonce( 'wp_rest' ),
 						'rating_indicator_markup' => masteriyo_get_rating_indicators_markup( 'masteriyo-rating-input-icon' ),
 						'max_course_rating'       => masteriyo_get_max_course_rating(),
-						'review_deleted_notice'   => masteriyo_get_review_deleted_notice(),
+						'review_deleted_notice'   => masteriyo_get_template_html( 'notices/review-deleted.php' ),
 						'labels'                  => array(
 							'type_confirm'   => __( 'Type CONFIRM to proceed', 'masteriyo' ),
 							'try_again'      => __( 'Try again', 'masteriyo' ),

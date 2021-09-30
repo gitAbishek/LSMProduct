@@ -222,12 +222,6 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	public function delete( Model &$course_review, $args = array() ) {
 		$id          = $course_review->get_id();
 		$object_type = $course_review->get_object_type();
-		$args        = array_merge(
-			array(
-				'force_delete' => false,
-			),
-			$args
-		);
 
 		if ( ! $id ) {
 			return;

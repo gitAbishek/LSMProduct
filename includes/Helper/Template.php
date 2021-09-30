@@ -784,7 +784,6 @@ if ( ! function_exists( 'masteriyo_single_course_reviews' ) ) {
 					'course'         => $course,
 					'course_reviews' => $reviews_and_replies['reviews'],
 					'replies'        => $reviews_and_replies['replies'],
-					'pp_placeholder' => masteriyo_get_course_review_author_pp_placeholder(),
 				)
 			);
 		}
@@ -1192,6 +1191,58 @@ if ( ! function_exists( 'masteriyo_deleted_review_notice' ) ) {
 	 * @since 1.0.3
 	 */
 	function masteriyo_deleted_review_notice() {
-		echo masteriyo_get_review_deleted_notice(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		masteriyo_get_template( 'notices/review-deleted.php' );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_course_review_template' ) ) {
+	/**
+	 * Print course review item.
+	 *
+	 * @since 1.0.3
+	 */
+	function masteriyo_course_review_template( $course_review ) {
+		masteriyo_get_template(
+			'single-course/course-review.php',
+			array(
+				'pp_placeholder' => masteriyo_get_course_review_author_pp_placeholder(),
+				'course_review'  => $course_review,
+			)
+		);
+	}
+}
+
+if ( ! function_exists( 'masteriyo_course_review_reply_template' ) ) {
+	/**
+	 * Print course review reply.
+	 *
+	 * @since 1.0.3
+	 */
+	function masteriyo_course_review_reply_template( $args = array() ) {
+		$args['pp_placeholder'] = masteriyo_get_course_review_author_pp_placeholder();
+
+		masteriyo_get_template( 'single-course/course-review-reply.php', $args );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_course_reviews_stats_template' ) ) {
+	/**
+	 * Print course reviews stats.
+	 *
+	 * @since 1.0.3
+	 */
+	function masteriyo_course_reviews_stats_template( $course, $course_reviews, $replies ) {
+		masteriyo_get_template( 'single-course/reviews-stats.php', compact( 'course', 'course_reviews', 'replies' ) );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_course_reviews_list_template' ) ) {
+	/**
+	 * Print course reviews list.
+	 *
+	 * @since 1.0.3
+	 */
+	function masteriyo_course_reviews_list_template( $course, $course_reviews, $replies ) {
+		masteriyo_get_template( 'single-course/reviews-list.php', compact( 'course', 'course_reviews', 'replies' ) );
 	}
 }

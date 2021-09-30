@@ -125,7 +125,7 @@
 		},
 	};
 	var masteriyo = {
-		$create_revew_form: $('.masteriyo-submit-review-form'),
+		$create_review_form: $('.masteriyo-submit-review-form'),
 		create_review_form_class: '.masteriyo-submit-review-form',
 
 		init: function () {
@@ -178,7 +178,7 @@
 					.on('click', function () {
 						var rating = $(this).index() + 1;
 
-						masteriyo.$create_revew_form
+						masteriyo.$create_review_form
 							.find('input[name="rating"]')
 							.val(rating);
 						$(this)
@@ -190,18 +190,18 @@
 			var isDoneReset = false;
 			var lastHoveredRating = null;
 
-			masteriyo.$create_revew_form.on('mouseover', function (e) {
+			masteriyo.$create_review_form.on('mouseover', function (e) {
 				var $star = $(e.target).closest('.masteriyo-rating-input-icon');
 
 				if ($star.length === 0) {
 					if (isDoneReset) {
 						return;
 					}
-					var rating = masteriyo.$create_revew_form
+					var rating = masteriyo.$create_review_form
 						.find('input[name="rating"]')
 						.val();
 
-					masteriyo.$create_revew_form
+					masteriyo.$create_review_form
 						.find('.masteriyo-rstar')
 						.html(masteriyo_helper.get_rating_markup(rating));
 
@@ -227,10 +227,10 @@
 		init_create_reviews_handler: function () {
 			var isCreating = false;
 
-			masteriyo.$create_revew_form.on('submit', function (e) {
+			masteriyo.$create_review_form.on('submit', function (e) {
 				e.preventDefault();
 
-				var $form = masteriyo.$create_revew_form;
+				var $form = masteriyo.$create_review_form;
 				var $submit_button = $form.find('button[type="submit"]');
 				var data = {
 					title: $form.find('input[name="title"]').val(),
@@ -276,7 +276,7 @@
 				function (e) {
 					e.preventDefault();
 
-					var $form = masteriyo.$create_revew_form;
+					var $form = masteriyo.$create_review_form;
 					var $review = $(this).closest('.masteriyo-course-review');
 					var review_id = $review.data('id');
 					var $submit_button = $form.find('button[type="submit"]');
@@ -312,7 +312,7 @@
 				function (e) {
 					e.preventDefault();
 
-					var $form = masteriyo.$create_revew_form;
+					var $form = masteriyo.$create_review_form;
 					var $review = $(this).closest('.masteriyo-course-review');
 					var review_id = $review.data('id');
 					var $submit_button = $form.find('button[type="submit"]');
@@ -360,10 +360,10 @@
 
 			var isSubmitting = false;
 
-			masteriyo.$create_revew_form.on('submit', function (e) {
+			masteriyo.$create_review_form.on('submit', function (e) {
 				e.preventDefault();
 
-				var $form = masteriyo.$create_revew_form;
+				var $form = masteriyo.$create_review_form;
 				var review_id = $form.data('review-id');
 				var $submit_button = $form.find('button[type="submit"]');
 				var data = {
@@ -512,7 +512,7 @@
 			});
 		},
 		init_curriculum_accordions_handler: function () {
-			// Curriculam Tab
+			// Curriculum Tab
 			$(document.body).on('click', '.masteriyo-cheader', function () {
 				$(this).parent('.masteriyo-stab--citems').toggleClass('active');
 				if (

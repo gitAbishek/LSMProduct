@@ -38,6 +38,11 @@ add_action( 'masteriyo_single_course_content', 'masteriyo_single_course_curricul
 add_action( 'masteriyo_single_course_content', 'masteriyo_single_course_reviews', 40 );
 add_action( 'masteriyo_single_course_review_form', 'masteriyo_single_course_review_form' );
 add_action( 'masteriyo_after_single_course', 'masteriyo_single_course_modals' );
+add_action( 'masteriyo_course_review_template', 'masteriyo_course_review_template' );
+add_action( 'masteriyo_course_review_reply_template', 'masteriyo_course_review_reply_template' );
+add_action( 'masteriyo_course_reviews_content', 'masteriyo_course_reviews_stats_template', 10, 3 );
+add_action( 'masteriyo_course_reviews_content', 'masteriyo_course_reviews_list_template', 20, 3 );
+add_action( 'masteriyo_course_reviews_content', 'masteriyo_single_course_review_form', 30, 3 );
 
 /**
  * Account page.

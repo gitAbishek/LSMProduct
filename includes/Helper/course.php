@@ -391,22 +391,3 @@ function masteriyo_get_course_structure( $course_id ) {
 
 	return apply_filters( 'masteriyo_course_structure', $ordered_sections, $course_id );
 }
-
-/**
- * Get html markup for review deleted notice.
- *
- * @since 1.0.3
- *
- * @return string
- */
-function masteriyo_get_review_deleted_notice() {
-	ob_start();
-	?>
-	<div class="masteriyo-delete-review-notice">
-		<div class="masteriyo-notify-message masteriyo-alert masteriyo-delete-msg">
-			<span><?php esc_html_e( 'This review was deleted.', 'masteriyo' ); ?></span>
-		</div>
-	</div>
-	<?php
-	return apply_filters( 'masteriyo_get_review_deleted_notice', ob_get_clean() );
-}

@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Masteriyo - LMS for WordPress 1.0.4\n"
+"Project-Id-Version: Masteriyo - LMS for WordPress 1.0.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-lms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-09-29T16:40:19+05:45\n"
+"POT-Creation-Date: 2021-10-01T18:39:00+05:45\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: masteriyo\n"
@@ -1799,7 +1799,7 @@ msgid "You are not allowed to view this content"
 msgstr ""
 
 #. translators: Cart total order
-#: includes/Helper/Template.php:866
+#: includes/Helper/Template.php:839
 msgid "Confirm Payment"
 msgstr ""
 
@@ -2600,7 +2600,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:102
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:304
 #: includes/RestApi/Controllers/Version1/CourseReviewsController.php:102
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:309
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:373
 #: includes/RestApi/Controllers/Version1/CoursesController.php:102
 #: includes/RestApi/Controllers/Version1/CoursesController.php:465
 #: includes/RestApi/Controllers/Version1/CourseTagsController.php:77
@@ -2840,7 +2840,7 @@ msgstr ""
 
 #: includes/RestApi/Controllers/Store/CartItemsController.php:525
 #: includes/RestApi/Controllers/Store/CheckoutController.php:525
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:394
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:458
 #: includes/RestApi/Controllers/Version1/CoursesController.php:726
 #: includes/RestApi/Controllers/Version1/LessonsController.php:458
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:320
@@ -2854,7 +2854,7 @@ msgstr ""
 
 #: includes/RestApi/Controllers/Store/CartItemsController.php:532
 #: includes/RestApi/Controllers/Store/CheckoutController.php:532
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:401
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:465
 #: includes/RestApi/Controllers/Version1/CoursesController.php:733
 #: includes/RestApi/Controllers/Version1/LessonsController.php:465
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:327
@@ -2868,7 +2868,7 @@ msgstr ""
 
 #: includes/RestApi/Controllers/Store/CartItemsController.php:538
 #: includes/RestApi/Controllers/Store/CheckoutController.php:538
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:407
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:471
 #: includes/RestApi/Controllers/Version1/CoursesController.php:739
 #: includes/RestApi/Controllers/Version1/LessonsController.php:471
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:333
@@ -2882,7 +2882,7 @@ msgstr ""
 
 #: includes/RestApi/Controllers/Store/CartItemsController.php:543
 #: includes/RestApi/Controllers/Store/CheckoutController.php:543
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:412
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:476
 #: includes/RestApi/Controllers/Version1/CoursesController.php:744
 #: includes/RestApi/Controllers/Version1/LessonsController.php:476
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:338
@@ -2994,11 +2994,11 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:564
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:597
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:652
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:556
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:585
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:614
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:689
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:744
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:620
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:649
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:678
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:753
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:808
 #: includes/RestApi/Controllers/Version1/FaqsController.php:423
 #: includes/RestApi/Controllers/Version1/FaqsController.php:479
 #: includes/RestApi/Controllers/Version1/FaqsController.php:525
@@ -3045,7 +3045,7 @@ msgstr ""
 
 #: includes/RestApi/Controllers/Version1/CommentsController.php:200
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:542
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:592
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:656
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:521
 #: includes/RestApi/Controllers/Version1/OrdersController.php:816
 #: includes/RestApi/Controllers/Version1/OrdersController.php:849
@@ -3058,7 +3058,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/CommentsController.php:227
 #: includes/RestApi/Controllers/Version1/CourseChildrenController.php:123
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:509
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:563
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:627
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:567
 #: includes/RestApi/Controllers/Version1/PostsController.php:86
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:957
@@ -3088,7 +3088,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/CommentsController.php:287
 #: includes/RestApi/Controllers/Version1/CourseProgressController.php:651
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:630
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:722
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:786
 #: includes/RestApi/Controllers/Version1/FaqsController.php:503
 #: includes/RestApi/Controllers/Version1/LessonsController.php:717
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:668
@@ -3103,7 +3103,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/CommentsController.php:318
 #: includes/RestApi/Controllers/Version1/CourseProgressController.php:620
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:671
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:777
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:841
 #: includes/RestApi/Controllers/Version1/FaqsController.php:549
 #: includes/RestApi/Controllers/Version1/LessonsController.php:763
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:730
@@ -3179,8 +3179,9 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/CourseBuilderController.php:519
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:610
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:661
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:702
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:757
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:217
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:766
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:821
 #: includes/RestApi/Controllers/Version1/CrudController.php:125
 #: includes/RestApi/Controllers/Version1/CrudController.php:235
 #: includes/RestApi/Controllers/Version1/CrudController.php:557
@@ -3388,7 +3389,7 @@ msgid "Limit result set to comments assigned to specific course IDs."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:310
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:315
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:379
 msgid "Course ID"
 msgstr ""
 
@@ -3409,7 +3410,7 @@ msgid "The IP address of the question answerer"
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:336
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:341
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:405
 #: includes/RestApi/Controllers/Version1/CoursesController.php:495
 msgid "The date the course was created, in the site's timezone."
 msgstr ""
@@ -3443,76 +3444,88 @@ msgid "You must be logged in to ask question."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:620
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:712
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:776
 #: includes/RestApi/Controllers/Version1/RestTermsController.php:249
 msgid "Sorry, you are not allowed to delete this resource."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:320
+#. translators: %s: post type
+#. translators: %s: post type
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:230
+#: includes/RestApi/Controllers/Version1/CrudController.php:592
+msgid "The %s has already been deleted."
+msgstr ""
+
+#. translators: %s: post type
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:239
+msgid "The %s could not be deleted."
+msgstr ""
+
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:384
 msgid "Course Reviewer Author."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:325
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:389
 msgid "Course Reviewer Author Email."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:330
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:394
 msgid "Course Reviewer Author URL."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:335
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:399
 msgid "The IP address of the reviewer"
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:347
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:411
 msgid "Course Review Description."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:352
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:416
 msgid "Course Review Title."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:357
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:421
 msgid "Course Review Content."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:363
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:427
 msgid "Course Review rating."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:368
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:432
 msgid "Course Review Status."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:373
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:437
 msgid "Course Review Agent."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:378
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:442
 msgid "Course Review Type."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:383
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:447
 msgid "Course Review Parent."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:388
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:452
 msgid "The User ID."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:625
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:689
 msgid "Sorry, you are not allowed to create course reviews."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:635
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:699
 msgid "Sorry, author_id cannot be empty or zero."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:645
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:709
 msgid "Sorry, you are not allowed to create course reviews for others."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:657
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:721
 #: includes/RestApi/Controllers/Version1/FaqsController.php:447
 #: includes/RestApi/Controllers/Version1/LessonsController.php:661
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:806
@@ -3520,15 +3533,15 @@ msgstr ""
 msgid "Invalid course ID."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:667
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:731
 msgid "Sorry, you cannot create review for your own course."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:767
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:831
 msgid "Sorry, you are not allowed to update this resource."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:787
+#: includes/RestApi/Controllers/Version1/CourseReviewsController.php:851
 msgid "Sorry, you cannot move a review to another course."
 msgstr ""
 
@@ -3711,11 +3724,6 @@ msgstr ""
 #. translators: %s: post type
 #: includes/RestApi/Controllers/Version1/CrudController.php:585
 msgid "The %s does not support trashing."
-msgstr ""
-
-#. translators: %s: post type
-#: includes/RestApi/Controllers/Version1/CrudController.php:592
-msgid "The %s has already been deleted."
 msgstr ""
 
 #. translators: %s: post type
@@ -5070,61 +5078,61 @@ msgstr ""
 msgid "Signing In..."
 msgstr ""
 
-#: includes/ScriptStyle.php:591
+#: includes/ScriptStyle.php:592
 msgid "Type CONFIRM to proceed"
 msgstr ""
 
-#: includes/ScriptStyle.php:592
+#: includes/ScriptStyle.php:593
 msgid "Try again"
 msgstr ""
 
-#: includes/ScriptStyle.php:593
-msgid "Submit"
-msgstr ""
-
 #: includes/ScriptStyle.php:594
-#: assets/js/build/masteriyo-backend.js:1
-msgid "Update"
+msgid "Submit"
 msgstr ""
 
 #: includes/ScriptStyle.php:595
 #: assets/js/build/masteriyo-backend.js:1
-msgid "Delete"
+msgid "Update"
 msgstr ""
 
 #: includes/ScriptStyle.php:596
-msgid "Submitting..."
+#: assets/js/build/masteriyo-backend.js:1
+msgid "Delete"
 msgstr ""
 
 #: includes/ScriptStyle.php:597
-msgid "Deleting..."
+msgid "Submitting..."
 msgstr ""
 
 #: includes/ScriptStyle.php:598
-msgid "Reply to"
+msgid "Deleting..."
 msgstr ""
 
 #: includes/ScriptStyle.php:599
-msgid "Edit reply"
+msgid "Reply to"
 msgstr ""
 
 #: includes/ScriptStyle.php:600
-msgid "Edit review"
+msgid "Edit reply"
 msgstr ""
 
 #: includes/ScriptStyle.php:601
-msgid "Submitted successfully"
+msgid "Edit review"
 msgstr ""
 
 #: includes/ScriptStyle.php:602
-msgid "Updated successfully"
+msgid "Submitted successfully"
 msgstr ""
 
 #: includes/ScriptStyle.php:603
+msgid "Updated successfully"
+msgstr ""
+
+#: includes/ScriptStyle.php:604
 msgid "Deleted successfully"
 msgstr ""
 
-#: includes/ScriptStyle.php:612
+#: includes/ScriptStyle.php:613
 msgid "Error processing checkout. Please try again."
 msgstr ""
 
@@ -5465,11 +5473,6 @@ msgstr ""
 
 #: includes/Template.php:128
 msgid "action_args should not be overwritten when calling get_template."
-msgstr ""
-
-#: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-interactive.js:1
-msgid "Something went wrong"
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
@@ -6001,10 +6004,6 @@ msgid "Are you sure? You can't restore this lesson"
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
-msgid "No orders found."
-msgstr ""
-
-#: assets/js/build/masteriyo-backend.js:1
 msgid "Billing details"
 msgstr ""
 
@@ -6017,10 +6016,6 @@ msgid "Are you sure? You can't restore this order."
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
-msgid "All Status"
-msgstr ""
-
-#: assets/js/build/masteriyo-backend.js:1
 msgid "Pending"
 msgstr ""
 
@@ -6029,7 +6024,7 @@ msgid "Processing"
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
-msgid "On-hold"
+msgid "On Hold"
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
@@ -6047,34 +6042,6 @@ msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Failed"
-msgstr ""
-
-#: assets/js/build/masteriyo-backend.js:1
-msgid "From"
-msgstr ""
-
-#: assets/js/build/masteriyo-backend.js:1
-msgid "To"
-msgstr ""
-
-#: assets/js/build/masteriyo-backend.js:1
-msgid "Searching..."
-msgstr ""
-
-#: assets/js/build/masteriyo-backend.js:1
-msgid "Please enter 3 or more characters"
-msgstr ""
-
-#: assets/js/build/masteriyo-backend.js:1
-msgid "Search by customer"
-msgstr ""
-
-#: assets/js/build/masteriyo-backend.js:1
-msgid "Orders Per Page:"
-msgstr ""
-
-#: assets/js/build/masteriyo-backend.js:1
-msgid "On Hold"
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
@@ -6890,6 +6857,11 @@ msgstr ""
 
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Edit Quiz:"
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.js:1
+#: assets/js/build/masteriyo-interactive.js:1
+msgid "Something went wrong"
 msgstr ""
 
 #: assets/js/build/masteriyo-interactive.js:1

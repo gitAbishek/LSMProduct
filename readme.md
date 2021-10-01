@@ -3,12 +3,19 @@
 # LMS for WordPress ![status](https://github.com/wpeverest/wordpress-lms/actions/workflows/deploy-to-staging.yml/badge.svg)
 
 **Contributors**: Masteriyo
+
 **Tags**: lms, learning management system, courses, elearning
+
 **Requires at least**: 5.0
+
 **Tested up to**: 5.8.1
+
 **Requires PHP**: 7.0
-**Stable tag**: 1.0.4
+
+**Stable tag**: 1.0.5
+
 **License: GNU** General Public License v3.0
+
 **License URI**: http://www.gnu.org/licenses/gpl-3.0.html
 
 A Complete WordPress LMS plugin to create and sell online courses in no time.
@@ -40,26 +47,32 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 
 # Changelog
 
+#### 1.0.5 - 01-10-2021
+
+- Enhancement - Show review deleted message if it still has some replies.
+- Fix - The course edit button which worked only when clicked on the button's text.
+
 #### 1.0.4 - 29-09-2021
 
-- Enhancement - Added filter to order listing page in backend..
-- Enhancement - Remove course reviews, course question answers and order notes form the WordPress comments page and activity widget.
-- Enhancement - Added supported for primary color change.
+- Enhancement - Added filter to order listing page in backend.
+- Enhancement - Remove course reviews, course question answers and order notes from the WordPress comments page and activity widget.
+- Enhancement - Added support for primary colour change.
 - Enhancement - Added hover effecting to course review rating.
 - Fix - Remove the gap between the categories list and the navigation bar.
-- Fix - Filter disappearance while using filter in courses and categories listing page.
+- Fix - Filter disappearance while using the filter in courses and categories listing page.
 - Fix - Logo size issue in learn page.
+
 #### 1.0.3 - 24-09-2021
 
-- Enhancement - Make course category slug optional while creating category.
+- Enhancement - Make course category slug optional while creating a category.
 - Enhancement - Cache bust the default frontend and backend JS and CSS assets as well.
 - Enhancement - Added enrollment limit to courses.
-- Enhancement - Added course question answer (QA) permission.
+- Enhancement - Added course question-answer (QA) permission.
 - Fix - Course progress issue.
 - Fix - Course progress permission issue.
-- Fix - Difficulty badge spacing and font color.
+- Fix - Difficulty badge spacing and font colour.
 - Fix - Account page responsive issue.
-- Fix - Single course related post width issue.
+- Fix - Single course-related post width issue.
 
 #### 1.0.2 - 21-09-2021
 

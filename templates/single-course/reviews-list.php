@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 ?>
 <div class="masteriyo-course-reviews-list">
 	<?php foreach ( $course_reviews as $course_review ) : ?>
-		<?php do_action( 'masteriyo_course_review_template', $course_review ); ?>
+		<?php do_action( 'masteriyo_template_course_review', $course_review ); ?>
 
 		<?php if ( ! empty( $replies[ $course_review->get_id() ] ) ) : ?>
 			<div class="masteriyo-course-review-replies">
 				<?php
 				foreach ( $replies[ $course_review->get_id() ] as $reply ) {
 					do_action(
-						'masteriyo_course_review_reply_template',
+						'masteriyo_template_course_review_reply',
 						array(
 							'course_review' => $course_review,
 							'reply'         => $reply,

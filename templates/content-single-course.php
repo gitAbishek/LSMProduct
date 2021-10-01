@@ -42,7 +42,7 @@ do_action( 'masteriyo_before_single_course_content' );
 			 * @hooked masteriyo_single_course_categories - 20
 			 * @hooked masteriyo_single_course_title - 30
 			 * @hooked masteriyo_single_course_author_and_rating - 40
-			 * @hooked masteriyo_single_course_main_content_template - 50
+			 * @hooked masteriyo_template_single_course_main_content - 50
 			 *
 			 * @since 1.0.4
 			 */

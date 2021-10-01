@@ -282,6 +282,11 @@ const CourseSetting: React.FC<Props> = (props) => {
 															<Stack direction="column" spacing="3" ml="5">
 																<Radio
 																	value="open"
+																	isChecked={
+																		courseData?.access_mode == 'open'
+																			? true
+																			: false
+																	}
 																	{...register('access_mode')}>
 																	{__(
 																		'	Does not need registration',
@@ -290,6 +295,12 @@ const CourseSetting: React.FC<Props> = (props) => {
 																</Radio>
 																<Radio
 																	value="need_registration"
+																	isChecked={
+																		courseData?.access_mode ==
+																		'need_registration'
+																			? true
+																			: false
+																	}
 																	{...register('access_mode')}>
 																	{__('	Need registration', 'masteriyo')}
 																</Radio>

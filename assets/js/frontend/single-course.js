@@ -497,7 +497,10 @@
 							top: '7.5rem',
 						});
 					} else {
-						$('.masteriyo-single-course--aside').css({ position: 'relative' });
+						$('.masteriyo-single-course--aside').css({
+							position: 'relative',
+							top: '0',
+						});
 					}
 				});
 			}

@@ -1158,17 +1158,6 @@ if ( ! function_exists( 'masteriyo_single_course_modals' ) ) {
 	}
 }
 
-if ( ! function_exists( 'masteriyo_deleted_review_notice' ) ) {
-	/**
-	 * Print review deleted notice.
-	 *
-	 * @since 1.0.4
-	 */
-	function masteriyo_deleted_review_notice() {
-		masteriyo_get_template( 'notices/review-deleted.php' );
-	}
-}
-
 if ( ! function_exists( 'masteriyo_course_review_template' ) ) {
 	/**
 	 * Print course review item.
@@ -1176,6 +1165,11 @@ if ( ! function_exists( 'masteriyo_course_review_template' ) ) {
 	 * @since 1.0.4
 	 */
 	function masteriyo_course_review_template( $course_review ) {
+		if ( 'trash' === $course_review->get_status() ) {
+			masteriyo_get_template( 'notices/review-deleted.php' );
+			return;
+		}
+
 		masteriyo_get_template(
 			'single-course/course-review.php',
 			array(

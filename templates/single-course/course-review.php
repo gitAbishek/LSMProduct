@@ -16,18 +16,6 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-if ( 'trash' === $course_review->get_status() ) {
-	/**
-	 * Hook: masteriyo_deleted_review_notice.
-	 *
-	 * @hooked masteriyo_deleted_review_notice - 10
-	 *
-	 * @since 1.0.4
-	 */
-	do_action( 'masteriyo_deleted_review_notice' );
-	return;
-}
-
 ?>
 <div class="masteriyo-course-review" data-id="<?php echo esc_attr( $course_review->get_id() ); ?>">
 	<input type="hidden" name="parent" value="<?php echo esc_attr( $course_review->get_parent() ); ?>">

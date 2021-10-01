@@ -391,3 +391,29 @@ function masteriyo_get_course_structure( $course_id ) {
 
 	return apply_filters( 'masteriyo_course_structure', $ordered_sections, $course_id );
 }
+
+/**
+ * Get count of a course review's replies.
+ *
+ * @since 1.0.5
+ *
+ * @param integer $course_id
+ *
+ * @return integer
+ */
+function masteriyo_get_course_review_replies_count( $course_id ) {
+	global $wpdb;
+
+	$replies_count = (int) $wpdb->get_var(
+		$wpdb->prepare(
+			"
+			SELECT COUNT(*) FROM $wpdb->comments
+			WHERE comment_parent = %d
+			AND comment_approved = '1'
+			AND comment_type = 'mto_course_review'
+			",
+			absint( $course_id )
+		)
+	);
+	return apply_filters( 'masteriyo_get_course_review_replies_count', $replies_count, $course_id );
+}

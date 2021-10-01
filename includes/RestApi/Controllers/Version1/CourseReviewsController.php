@@ -222,17 +222,7 @@ class CourseReviewsController extends CommentsController {
 		$force    = $object->is_reply();
 
 		if ( ! $object->is_reply() ) {
-			$replies_count = (int) $wpdb->get_var(
-				$wpdb->prepare(
-					"
-					SELECT COUNT(*) FROM $wpdb->comments
-					WHERE comment_parent = %d
-					AND comment_approved = '1'
-					AND comment_type = 'mto_course_review'
-					",
-					$object->get_id()
-				)
-			);
+			$replies_count = masteriyo_get_course_review_replies_count( $object->get_id() );
 			$force         = 0 === $replies_count;
 
 			if ( ! $force && 'trash' === $object->get_status() ) {
@@ -251,17 +241,7 @@ class CourseReviewsController extends CommentsController {
 
 		// Delete parent review if there is no remaining reply.
 		if ( $object->is_reply() ) {
-			$replies_count = (int) $wpdb->get_var(
-				$wpdb->prepare(
-					"
-					SELECT COUNT(*) FROM $wpdb->comments
-					WHERE comment_parent = %d
-					AND comment_approved = '1'
-					AND comment_type = 'mto_course_review'
-					",
-					$object->get_parent()
-				)
-			);
+			$replies_count = masteriyo_get_course_review_replies_count( $object->get_parent() );
 
 			if ( 0 === $replies_count ) {
 				$this->get_object( $object->get_parent() )->delete( true );

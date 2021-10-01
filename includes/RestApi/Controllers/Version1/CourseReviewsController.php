@@ -125,12 +125,6 @@ class CourseReviewsController extends CommentsController {
 					'methods'             => \WP_REST_Server::DELETABLE,
 					'callback'            => array( $this, 'delete_item' ),
 					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
-					'args'                => array(
-						'force' => array(
-							'type'    => 'boolean',
-							'default' => false,
-						),
-					),
 				),
 				'schema' => array( $this, 'get_public_item_schema' ),
 			)
@@ -202,6 +196,90 @@ class CourseReviewsController extends CommentsController {
 			'total'   => (int) $total_posts,
 			'pages'   => (int) ceil( $total_posts / (int) 10 ),
 		);
+	}
+
+	/**
+	 * Delete a single item.
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function delete_item( $request ) {
+		global $wpdb;
+
+		$object = $this->get_object( absint( $request['id'] ) );
+		$result = false;
+
+		if ( ! $object || 0 === $object->get_id() ) {
+			return new \WP_Error( "masteriyo_rest_{$this->object_type}_invalid_id", __( 'Invalid ID.', 'masteriyo' ), array( 'status' => 404 ) );
+		}
+
+		$request->set_param( 'context', 'edit' );
+		$response = $this->prepare_object_for_response( $object, $request );
+		$force    = $object->is_reply();
+
+		if ( ! $object->is_reply() ) {
+			$replies_count = (int) $wpdb->get_var(
+				$wpdb->prepare(
+					"
+					SELECT COUNT(*) FROM $wpdb->comments
+					WHERE comment_parent = %d
+					AND comment_approved = '1'
+					AND comment_type = 'mto_course_review'
+					",
+					$object->get_id()
+				)
+			);
+			$force         = 0 === $replies_count;
+
+			if ( ! $force && 'trash' === $object->get_status() ) {
+				/* translators: %s: post type */
+				return new \WP_Error( 'masteriyo_rest_already_trashed', sprintf( __( 'The %s has already been deleted.', 'masteriyo' ), $this->object_type ), array( 'status' => 410 ) );
+			}
+		}
+
+		$object->delete( $force );
+		$result = $force ? 0 === $object->get_id() : 'trash' === $object->get_status();
+
+		if ( ! $result ) {
+			/* translators: %s: post type */
+			return new \WP_Error( 'masteriyo_rest_cannot_delete', sprintf( __( 'The %s could not be deleted.', 'masteriyo' ), $this->object_type ), array( 'status' => 500 ) );
+		}
+
+		// Delete parent review if there is no remaining reply.
+		if ( $object->is_reply() ) {
+			$replies_count = (int) $wpdb->get_var(
+				$wpdb->prepare(
+					"
+					SELECT COUNT(*) FROM $wpdb->comments
+					WHERE comment_parent = %d
+					AND comment_approved = '1'
+					AND comment_type = 'mto_course_review'
+					",
+					$object->get_parent()
+				)
+			);
+
+			if ( 0 === $replies_count ) {
+				$this->get_object( $object->get_parent() )->delete( true );
+			}
+		}
+
+		/**
+		 * Fires after a single object is deleted or trashed via the REST API.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Model          $object   The deleted or trashed object.
+		 * @param WP_REST_Response $response The response data.
+		 * @param WP_REST_Request  $request  The request sent to the API.
+		 */
+		do_action( "masteriyo_rest_delete_{$this->object_type}_object", $object, $response, $request );
+
+		return $response;
 	}
 
 	/**

@@ -1162,7 +1162,7 @@ if ( ! function_exists( 'masteriyo_template_course_review' ) ) {
 	/**
 	 * Print course review item.
 	 *
-	 * @since 1.0.4
+	 * @since 1.0.5
 	 */
 	function masteriyo_template_course_review( $course_review ) {
 		if ( 'trash' === $course_review->get_status() ) {
@@ -1184,7 +1184,7 @@ if ( ! function_exists( 'masteriyo_template_course_review_reply' ) ) {
 	/**
 	 * Print course review reply.
 	 *
-	 * @since 1.0.4
+	 * @since 1.0.5
 	 */
 	function masteriyo_template_course_review_reply( $args = array() ) {
 		$args['pp_placeholder'] = masteriyo_get_course_review_author_pp_placeholder();
@@ -1197,7 +1197,7 @@ if ( ! function_exists( 'masteriyo_template_course_reviews_stats' ) ) {
 	/**
 	 * Print course reviews stats.
 	 *
-	 * @since 1.0.4
+	 * @since 1.0.5
 	 */
 	function masteriyo_template_course_reviews_stats( $course, $course_reviews, $replies ) {
 		masteriyo_get_template( 'single-course/reviews-stats.php', compact( 'course', 'course_reviews', 'replies' ) );
@@ -1208,7 +1208,7 @@ if ( ! function_exists( 'masteriyo_template_course_reviews_list' ) ) {
 	/**
 	 * Print course reviews list.
 	 *
-	 * @since 1.0.4
+	 * @since 1.0.5
 	 */
 	function masteriyo_template_course_reviews_list( $course, $course_reviews, $replies ) {
 		masteriyo_get_template( 'single-course/reviews-list.php', compact( 'course', 'course_reviews', 'replies' ) );

@@ -29,7 +29,7 @@ do_action( 'masteriyo_before_single_course_content' );
 	 * @hooked masteriyo_single_course_curriculum - 30
 	 * @hooked masteriyo_single_course_reviews - 40
 	 *
-	 * @since 1.0.4
+	 * @since 1.0.5
 	 */
 	do_action( 'masteriyo_single_course_main_content', $course );
 	?>

@@ -2,7 +2,7 @@
 /**
  * Review deleted notice.
  *
- * @version 1.0.0
+ * @version 1.0.5
  */
 
 defined( 'ABSPATH' ) || exit;

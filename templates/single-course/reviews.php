@@ -23,7 +23,18 @@ do_action( 'masteriyo_before_single_course_reviews' );
 
 ?>
 <div class="tab-content course-reviews masteriyo-hidden">
-	<?php do_action( 'masteriyo_course_reviews_content', $course, $course_reviews, $replies ); ?>
+	<?php
+	/**
+	 * Action Hook: masteriyo_course_reviews_content
+	 *
+	 * @hooked masteriyo_template_course_reviews_stats - 10
+	 * @hooked masteriyo_template_course_reviews_list - 20
+	 * @hooked masteriyo_single_course_review_form - 30
+	 *
+	 * @since 1.0.5
+	 */
+	do_action( 'masteriyo_course_reviews_content', $course, $course_reviews, $replies );
+	?>
 </div>
 <?php
 

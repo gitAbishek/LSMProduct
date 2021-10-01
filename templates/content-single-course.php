@@ -44,7 +44,7 @@ do_action( 'masteriyo_before_single_course_content' );
 			 * @hooked masteriyo_single_course_author_and_rating - 40
 			 * @hooked masteriyo_template_single_course_main_content - 50
 			 *
-			 * @since 1.0.4
+			 * @since 1.0.5
 			 */
 			do_action( 'masteriyo_single_course_content', $course );
 			?>
@@ -61,7 +61,7 @@ do_action( 'masteriyo_before_single_course_content' );
 			 * @hooked masteriyo_single_course_stats - 20
 			 * @hooked masteriyo_single_course_highlights - 30
 			 *
-			 * @since 1.0.4
+			 * @since 1.0.5
 			 */
 			do_action( 'masteriyo_single_course_sidebar_content', $course );
 			?>

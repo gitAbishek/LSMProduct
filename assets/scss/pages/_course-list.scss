@@ -136,7 +136,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		margin-bottom: $spacing_4px;
-		gap: 8px;
 
 		&-items {
 			font-size: 10px;
@@ -179,7 +178,7 @@
 	&__rt {
 		display: flex;
 		flex-wrap: wrap;
-		gap: $spacing_8px;
+		// gap: $spacing_8px;
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: $spacing_16px;

@@ -110,10 +110,6 @@
 		}
 	}
 
-	.masteriyo-stab {
-		gap: 32px;
-	}
-
 	.masteriyo-replies {
 		.masteriyo-reply-replies--title {
 			.masteriyo-flex {
@@ -149,6 +145,10 @@
 			flex-basis: 100%;
 			margin: 0;
 		}
+	}
+
+	.masteriyo-stab > div {
+		flex-basis: 100%;
 	}
 
 	.masteriyo {

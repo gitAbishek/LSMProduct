@@ -128,6 +128,7 @@ const AllCourses = () => {
 												key={course.id}
 												createdOn={course.date_created}
 												permalink={course.permalink}
+												editPostLink={course.edit_post_link}
 												author={course.author}
 												onDeletePress={onDeletePress}
 												status={course.status}

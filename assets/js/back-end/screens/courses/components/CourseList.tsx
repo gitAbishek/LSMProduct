@@ -21,6 +21,7 @@ import {
 	BiEdit,
 	BiShow,
 	BiTrash,
+	BiWrench,
 } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import { Td, Tr } from 'react-super-responsive-table';
@@ -34,6 +35,7 @@ interface Props {
 	price?: any;
 	categories?: any;
 	permalink: string;
+	editPostLink: string;
 	createdOn: string;
 	author: { id: number; display_name: string; avatar_url: string };
 	onDeletePress: any;
@@ -47,6 +49,7 @@ const CourseList: React.FC<Props> = (props) => {
 		price,
 		categories,
 		permalink,
+		editPostLink,
 		createdOn,
 		author,
 		onDeletePress,
@@ -145,6 +148,11 @@ const CourseList: React.FC<Props> = (props) => {
 							<Link href={permalink} isExternal>
 								<MenuItem icon={<BiShow />}>
 									{__('Preview', 'masteriyo')}
+								</MenuItem>
+							</Link>
+							<Link href={editPostLink} isExternal>
+								<MenuItem icon={<BiWrench />}>
+									{__('Wordpress Editor', 'masteriyo')}
 								</MenuItem>
 							</Link>
 							<MenuItem onClick={() => onDeletePress(id)} icon={<BiTrash />}>

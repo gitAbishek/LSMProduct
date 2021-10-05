@@ -86,10 +86,6 @@
 		&:focus {
 			box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
 			transition: 0.5s ease;
-
-			.masteriyo-course--content__title a {
-				color: var(--masteriyo-color-btn-blue-hover);
-			}
 		}
 
 		.masteriyo-rt {
@@ -103,6 +99,7 @@
 		a {
 			display: block;
 		}
+
 		img {
 			width: 100%;
 			border-top-left-radius: $border_radius_8;
@@ -170,6 +167,11 @@
 		a {
 			color: var(--masteriyo-color-grey-dark);
 			text-decoration: none;
+
+			&:hover,
+			&:focus {
+				color: var(--masteriyo-color-btn-blue-hover);
+			}
 		}
 	}
 

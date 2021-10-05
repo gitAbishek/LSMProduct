@@ -107,7 +107,7 @@ const ContentNav: React.FC<Props> = (props) => {
 							}
 							textTransform="uppercase">
 							{isButtonDisabled
-								? __('Completed', 'masteiryo')
+								? __('Completed', 'masteriyo')
 								: type === 'quiz'
 								? __('Submit Quiz', 'masteriyo')
 								: __('Mark as Complete', 'masteriyo')}

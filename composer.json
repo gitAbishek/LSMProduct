@@ -72,7 +72,7 @@
       "wp i18n make-pot . --slug=wp-plugin-starter"
     ],
     "makepot": [
-      "\"vendor/bin/wp\" i18n make-pot . ./i18n/languages/masteriyo.pot --include=\"assets/js/build/masteriyo-backend.1.0.0.min.js,assets/js/build/masteriyo-interactive.1.0.0.min.js,assets/js/build/masteriyo-backend.js,assets/js/build/masteriyo-interactive.js,includes\""
+      "\"vendor/bin/wp\" i18n make-pot . ./i18n/languages/masteriyo.pot --include=\"assets/js/build,includes,templates\""
     ]
   },
   "extra": {

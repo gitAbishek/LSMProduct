@@ -59,7 +59,7 @@ function masteriyo_count_enrolled_users( $course_id ) {
 	$query                = new UserCourseQuery(
 		array(
 			'course_id' => $course_id,
-			'status'    => 'active',
+			'status'    => array( 'active', 'enrolled' ),
 		)
 	);
 	$enrolled_users_count = count( $query->get_user_courses() );

@@ -286,7 +286,18 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		$search_criteria[] = $wpdb->prepare( 'item_type = %s', 'user_course' );
 
 		if ( ! empty( $query_vars['status'] ) && 'any' !== $query_vars['status'] ) {
-			$search_criteria[] = $wpdb->prepare( 'status = %s', $query_vars['status'] );
+			if ( is_array( $query_vars['status'] ) ) {
+				$statuses          = array_map(
+					function( $status ) {
+						return "'" . esc_sql( $status ) . "'";
+
+					},
+					$query_vars['status']
+				);
+				$search_criteria[] = 'status IN(' . implode( ', ', $statuses ) . ')';
+			} else {
+				$search_criteria[] = $wpdb->prepare( 'status = %s', $query_vars['status'] );
+			}
 		}
 
 		if ( 1 <= count( $search_criteria ) ) {

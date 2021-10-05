@@ -26,10 +26,9 @@
       "includes/Helper/Notice.php",
       "includes/Helper/Order.php",
       "includes/Helper/course.php",
-      "includes/Helper/UserCourse.php",
+      "includes/Helper/user-course.php",
       "includes/Helper/question.php",
       "includes/Helper/course-progress.php",
-      "includes/Helper/UserCourse.php",
       "includes/Helper/quiz.php",
       "includes/Helper/course-qa.php"
     ],

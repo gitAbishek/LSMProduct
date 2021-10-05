@@ -152,7 +152,7 @@ const CourseList: React.FC<Props> = (props) => {
 							</Link>
 							<Link href={editPostLink} isExternal>
 								<MenuItem icon={<BiWrench />}>
-									{__('Wordpress Editor', 'masteriyo')}
+									{__('WordPress Editor', 'masteriyo')}
 								</MenuItem>
 							</Link>
 							<MenuItem onClick={() => onDeletePress(id)} icon={<BiTrash />}>

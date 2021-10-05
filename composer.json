@@ -78,9 +78,9 @@
   "extra": {
     "scripts-description": {
       "phpcs": "Analyze code against the WordPress coding standard with PHP_CodeSniffer",
-      "phpcbf": "Fix coding standards warnings/errors automattically with PHP Code Beautifier",
-      "makepot-audit": "Generate langauges/wp-plugin-starter.pot file and run audit",
-      "makepot": "Generate langauges/wp-plugin-starter.pot file"
+      "phpcbf": "Fix coding standards warnings/errors automatically with PHP Code Beautifier",
+      "makepot-audit": "Generate languages/wp-plugin-starter.pot file and run audit",
+      "makepot": "Generate languages/wp-plugin-starter.pot file"
     }
   }
 }

@@ -14,7 +14,7 @@ use Masteriyo\Constants;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Aajx class.
+ * Ajax class.
  *
  * @class Masteriyo\Ajax
  */

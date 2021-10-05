@@ -271,7 +271,7 @@ class Capabilities {
 	}
 
 	/**
-	 * Get masteriyo manager capabilites.
+	 * Get masteriyo manager capabilities.
 	 *
 	 * @since 1.0.0
 	 *
@@ -318,7 +318,7 @@ class Capabilities {
 			'edit_others_course_qas'          => true,
 			'delete_others_course_qas'        => true,
 
-			// Course Progrsses
+			// Course Progresses
 			'edit_others_course_progresses'   => true,
 			'delete_others_course_progresses' => true,
 			'delete_course_progresses'        => true,
@@ -338,7 +338,7 @@ class Capabilities {
 	}
 
 	/**
-	 * Get admin's core capabilites.
+	 * Get admin's core capabilities.
 	 *
 	 * @since 1.0.0
 	 *

@@ -15,7 +15,7 @@ use Masteriyo\Query\CourseQuery;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Aajx class.
+ * Ajax class.
  *
  * @class Masteriyo\Ajax
  */
@@ -100,7 +100,7 @@ class Ajax {
 					throw new Exception( __( 'Password cannot be empty.', 'masteriyo' ) );
 				}
 
-				$creds = array(
+				$credentials = array(
 					'user_password' => $password,
 					'remember'      => 'yes' === $remember,
 				);
@@ -109,15 +109,15 @@ class Ajax {
 					$user = get_user_by( 'email', $username );
 
 					if ( isset( $user->user_login ) ) {
-						$creds['user_login'] = $user->user_login;
+						$credentials['user_login'] = $user->user_login;
 					} else {
 						throw new Exception( __( 'No user found with the given email address.', 'masteriyo' ) );
 					}
 				} else {
-					$creds['user_login'] = $username;
+					$credentials['user_login'] = $username;
 				}
 
-				$user = wp_signon( $creds, is_ssl() );
+				$user = wp_signon( $credentials, is_ssl() );
 
 				if ( is_wp_error( $user ) ) {
 					if ( 'incorrect_password' === $user->get_error_code() ) {

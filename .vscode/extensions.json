@@ -1,6 +1,12 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "neilbrayfield.php-docblocker",
+    "wongjn.php-sniffer",
+    "felixfbecker.php-intellisense",
+    "mehedidracula.php-namespace-resolver",
+    "felixfbecker.php-debug"
   ]
 }

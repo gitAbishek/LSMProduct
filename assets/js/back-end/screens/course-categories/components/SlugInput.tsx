@@ -31,7 +31,7 @@ const SlugInput: React.FC<Props> = (props) => {
 							: true,
 				})}
 			/>
-			<FormHelperText>
+			<FormHelperText fontSize="xs">
 				{__(
 					'The “slug” is the URL-friendly version of the name. It should be all lowercase and contains only letters, numbers, and hyphens.',
 					'masteriyo'

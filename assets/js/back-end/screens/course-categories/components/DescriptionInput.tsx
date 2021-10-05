@@ -18,6 +18,7 @@ const DescriptionInput: React.FC<Props> = (props) => {
 				name="description"
 				defaultValue={defaultValue}
 				hasImageUpload={hasImageUpload}
+				size="md"
 			/>
 		</FormControl>
 	);

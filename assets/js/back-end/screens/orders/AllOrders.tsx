@@ -64,6 +64,7 @@ const AllOrders = () => {
 								<Thead>
 									<Tr>
 										<Th>{__('Order', 'masteriyo')}</Th>
+										<Th>{__('Course', 'masteriyo')}</Th>
 										<Th>{__('Date', 'masteriyo')}</Th>
 										<Th>{__('Status', 'masteriyo')}</Th>
 										<Th>{__('Total', 'masteriyo')}</Th>

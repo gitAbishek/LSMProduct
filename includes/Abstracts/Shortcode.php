@@ -26,13 +26,22 @@ abstract class Shortcode {
 	protected $tag = '';
 
 	/**
-	 * Shortcode attributes with default values.
+	 * Shortcode attributes.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
 	protected $attributes = array();
+
+	/**
+	 * Shortcode default attributes.
+	 *
+	 * @since 1.0.6
+	 *
+	 * @var array
+	 */
+	protected $default_attributes = array();
 
 	/**
 	 * Arguments to pass to the template.
@@ -109,7 +118,7 @@ abstract class Shortcode {
 	 */
 	protected function parse_attributes( $attributes ) {
 		return shortcode_atts(
-			$this->get_attributes(),
+			$this->default_attributes,
 			$attributes,
 			$this->get_tag()
 		);

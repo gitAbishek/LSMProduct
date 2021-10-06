@@ -28,17 +28,6 @@ class CheckoutShortcode extends Shortcode {
 	protected $tag = 'masteriyo_checkout';
 
 	/**
-	 * Shortcode attributes with default values.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var array
-	 */
-	protected $attributes = array(
-		'user_id' => null,
-	);
-
-	/**
 	 * Get shortcode content.
 	 *
 	 * @since  1.0.0
@@ -47,8 +36,6 @@ class CheckoutShortcode extends Shortcode {
 	 */
 	public function get_content() {
 		global $wp;
-
-		$data = $this->get_attributes();
 
 		// Bail early if the cart is null.
 		if ( is_null( masteriyo( 'cart' ) ) ) {

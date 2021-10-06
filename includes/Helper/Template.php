@@ -202,6 +202,15 @@ function masteriyo_setup_loop( $args = array() ) {
 function_exists( 'add_action' ) && add_action( 'masteriyo_before_courses_loop', 'masteriyo_setup_loop' );
 
 /**
+ * Resets the masteriyo_loop global.
+ *
+ * @since 1.0.6
+ */
+function masteriyo_reset_loop() {
+	unset( $GLOBALS['masteriyo_loop'] );
+}
+
+/**
  * Get the default columns setting - this is how many courses will be shown per row in loops.
  *
  * @since 0

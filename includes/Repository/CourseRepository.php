@@ -618,7 +618,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		);
 
 		foreach ( $query_vars as $query_var => $value ) {
-			if ( in_array( $meta_queries, $query_var, true ) ) {
+			if ( in_array( $query_var, $meta_queries, true ) ) {
 				$wp_query_vars['meta_query'][] = array(
 					'key'     => $query_var,
 					'value'   => $value,

@@ -48,6 +48,7 @@ class Shortcodes {
 				'account'  => "{$namespace}\\AccountShortcode",
 				'checkout' => "{$namespace}\\CheckoutShortcode",
 				'cart'     => "{$namespace}\\CartShortcode",
+				'courses'  => "{$namespace}\\CoursesShortcode",
 			)
 		);
 	}

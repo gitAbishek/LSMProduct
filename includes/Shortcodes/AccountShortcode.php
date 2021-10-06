@@ -28,15 +28,6 @@ class AccountShortcode extends Shortcode {
 	protected $tag = 'masteriyo_account';
 
 	/**
-	 * Shortcode attributes with default values.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var array
-	 */
-	protected $attributes = array();
-
-	/**
 	 * Get shortcode content.
 	 *
 	 * @since  1.0.0

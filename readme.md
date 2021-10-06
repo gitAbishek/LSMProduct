@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.0.5
+**Stable tag**: 1.0.6
 
 **License: GNU** General Public License v3.0
 
@@ -46,6 +46,19 @@ A complete solution to create and sell online courses. The plugin is powered by 
 No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
 # Changelog
+
+### 1.0.6 - 06-10-2021
+
+- Enhancement - Added user and course information on the order list page.
+- Enhancement - Added `masteriyo_courses` shortcode.
+- Enhancement - Added ability to switch to WordPress editor for courses.
+- Enhancement - Decreased the size of the "Add New Category" modal.
+- Fix -  Remove title hover effect while hovering course list card in courses archive page.
+- Fix - Pagination alignment in the courses, categories, and orders backend list page.
+- Fix - Use of smaller image for course feature image.
+- Fix - Overflow of course single page sidebar.
+- Fix - String translation issue.
+- Fix - Student count issue in the single course and course archive page.
 
 #### 1.0.5 - 01-10-2021
 

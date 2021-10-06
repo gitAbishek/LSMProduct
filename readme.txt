@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning
 Requires at least: 5.0
 Tested up to: 5.8.1
 Requires PHP: 7.0
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -54,6 +54,18 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.0.6 - 06-10-2021 =
+- Enhancement - Added user and course information on the order list page.
+- Enhancement - Added `masteriyo_courses` shortcode.
+- Enhancement - Added ability to switch to WordPress editor for courses.
+- Enhancement - Decreased the size of the "Add New Category" modal.
+- Fix -  Remove title hover effect while hovering course list card in courses archive page.
+- Fix - Pagination alignment in the courses, categories, and orders backend list page.
+- Fix - Use of smaller image for course feature image.
+- Fix - Overflow of course single page sidebar.
+- Fix - String translation issue.
+- Fix - Student count issue in the single course and course archive page.
 
 = 1.0.5 - 01-10-2021 =
 - Enhancement - Show review deleted message if it still has some replies.

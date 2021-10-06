@@ -45,9 +45,10 @@ const makeOrderNumberLabel = (order: any) => {
 	return `#${order.id}`;
 };
 
-interface BillingAdress {
+interface BillingAddress {
 	first_name: string;
 	last_name: string;
+	email: string;
 	company: string;
 	address_1: string;
 	address_2: string;
@@ -56,6 +57,17 @@ interface BillingAdress {
 	postcode: string;
 	country: string;
 }
+
+interface CourseInfo {
+	id: number;
+	name: string;
+	type: string;
+	course_id: number;
+	quantity: number;
+	subtotal: string;
+	total: string;
+}
+
 interface Order {
 	id: number;
 	order_number: string;
@@ -63,7 +75,8 @@ interface Order {
 	status: any;
 	total: string;
 	currency_symbol: string;
-	billing: BillingAdress;
+	billing: BillingAddress;
+	course_lines: CourseInfo[];
 }
 interface Props {
 	data: Order;
@@ -107,13 +120,24 @@ const OrderRow: React.FC<Props> = (props) => {
 	return (
 		<Tr>
 			<Td>
-				<Link
-					as={RouterLink}
-					to={routes.orders.edit.replace(':orderId', id.toString())}
-					fontWeight="semibold"
-					_hover={{ color: 'blue.500' }}>
-					{`#${id}`}
-				</Link>
+				<Stack direction="column">
+					<Link
+						as={RouterLink}
+						to={routes.orders.edit.replace(':orderId', id.toString())}
+						fontWeight="semibold"
+						fontSize="sm"
+						_hover={{ color: 'blue.500' }}>
+						{`#${id} ${data?.billing?.first_name} ${data?.billing?.last_name}`}
+					</Link>
+					<Text fontSize="xs" color="gray.600">
+						{data?.billing?.email}
+					</Text>
+				</Stack>
+			</Td>
+			<Td>
+				<Text fontSize="sm" color="gray.600">
+					{data?.course_lines[0]?.name}
+				</Text>
 			</Td>
 			<Td>
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">

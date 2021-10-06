@@ -135,9 +135,7 @@
 	&__category {
 		display: flex;
 		flex-wrap: wrap;
-		margin-right: -#{$spacing_4px};
-		margin-left: -#{$spacing_4px};
-		margin-top: -#{$spacing_4px};
+		margin: -#{$spacing_4px} -#{$spacing_4px} $spacing_4px -#{$spacing_4px};
 
 		&-items {
 			font-size: 10px;

@@ -140,7 +140,6 @@ export interface AdvancedSettingsMap {
 		learn_page_id: number;
 		account_page_id: number;
 		checkout_page_id: number;
-		terms_conditions_page_id: number;
 	};
 	permalinks: {
 		category_base: string;

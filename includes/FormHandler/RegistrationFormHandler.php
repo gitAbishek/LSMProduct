@@ -152,10 +152,6 @@ class RegistrationFormHandler {
 			}
 		}
 
-		if ( ! isset( $data['accept-terms-and-conditions'] ) || 'yes' !== $data['accept-terms-and-conditions'] ) {
-			$error->add( 'terms_and_conditions_required', __( 'You must accept the Terms & Conditions to proceed.', 'masteriyo' ) );
-		}
-
 		$error = apply_filters( 'masteriyo_validate_registration_form_data', $error, $data );
 
 		if ( $error->has_errors() ) {
@@ -203,7 +199,7 @@ class RegistrationFormHandler {
 		}
 
 		$data   = array();
-		$fields = array( 'first-name', 'last-name', 'username', 'email', 'password', 'confirm-password', 'accept-terms-and-conditions' );
+		$fields = array( 'first-name', 'last-name', 'username', 'email', 'password', 'confirm-password' );
 
 		foreach ( $fields as $key ) {
 			if ( ! isset( $_POST[ $key ] ) ) {

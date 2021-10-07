@@ -2294,10 +2294,6 @@ function masteriyo_add_post_state( $post_states, $post ) {
 		$post_states['masteriyo_learn_page'] = __( 'Masteriyo Learn Page', 'masteriyo' );
 	}
 
-	if ( masteriyo_get_page_id( 'terms-conditions' ) === $post->ID ) {
-		$post_states['masteriyo_terms_conditions_page'] = __( 'Masteriyo Terms and Conditions Page', 'masteriyo' );
-	}
-
 	return $post_states;
 }
 function_exists( 'add_filter' ) && add_filter( 'display_post_states', 'masteriyo_add_post_state', 10, 2 );

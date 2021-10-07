@@ -187,29 +187,6 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										{renderPagesOption()}
 									</Select>
 								</FormControl>
-
-								<FormControl>
-									<FormLabel>
-										{__('Terms and Conditions Page', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'If you define a "Terms" page the customer will be asked if they accept them when checking out.',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Select
-										placeholder={__('Select a Page', 'masteriyo')}
-										defaultValue={advanceData?.pages?.terms_conditions_page_id}
-										{...register('advance.pages.terms_conditions_page_id')}>
-										{renderPagesOption()}
-									</Select>
-								</FormControl>
 							</Stack>
 						)}
 					</TabPanel>

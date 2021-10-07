@@ -40,35 +40,29 @@ class Activation {
 		$pages = apply_filters(
 			'masteriyo_create_pages',
 			array(
-				'courses'          => array(
+				'courses'  => array(
 					'name'         => _x( 'courses', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'Courses', 'Page title', 'masteriyo' ),
 					'content'      => '',
 					'setting_name' => 'courses_page_id',
 				),
-				'account'          => array(
+				'account'  => array(
 					'name'         => _x( 'account', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'Account', 'Page title', 'masteriyo' ),
 					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_account_shortcode_tag', 'masteriyo_account' ) . ']<!-- /wp:shortcode -->',
 					'setting_name' => 'account_page_id',
 				),
-				'checkout'         => array(
+				'checkout' => array(
 					'name'         => _x( 'checkout', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'Checkout', 'Page title', 'masteriyo' ),
 					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_checkout_shortcode_tag', 'masteriyo_checkout' ) . ']<!-- /wp:shortcode -->',
 					'setting_name' => 'checkout_page_id',
 				),
-				'learn'            => array(
+				'learn'    => array(
 					'name'         => _x( 'learn', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'Learn', 'Page title', 'masteriyo' ),
 					'content'      => '',
 					'setting_name' => 'learn_page_id',
-				),
-				'terms_conditions' => array(
-					'name'         => _x( 'terms-and-conditions', 'Page slug', 'masteriyo' ),
-					'title'        => _x( 'Terms and Conditions', 'Page title', 'masteriyo' ),
-					'content'      => '',
-					'setting_name' => 'terms_conditions_page_id',
 				),
 			)
 		);

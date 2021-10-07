@@ -74,27 +74,6 @@ do_action( 'masteriyo_before_registration_form_content' );
 					</div>
 				</div>
 
-					<div class="masteriyo-remember-me">
-						<input id="accept-terms-and-conditions" name="accept-terms-and-conditions" value="yes" type="checkbox">
-						<label for="accept-terms-and-conditions" class="masteriyo-mb-0 masteriyo-block masteriyo-text-sm masteriyo-text-gray-900">
-							<span>
-								<?php
-									echo wp_kses_post(
-										sprintf(
-											/* translators: %s: Terms & Conditions Label */
-											__( 'I accept the %s.', 'masteriyo' ),
-											'<a href="' . esc_url( masteriyo_get_page_permalink( 'terms_conditions' ) ) . '" class="masteriyo-link-primary">' . __( 'Terms & Conditions', 'masteriyo' ) . '</a>'
-										)
-									);
-									?>
-							</span>
-							<span class="mto-text-red">*</span>
-						</label>
-					</div>
-					<div class="masteriyo-msg-must-accept-terms masteriyo-hidden masteriyo-text-red">
-						<?php echo esc_html__( 'You must accept the Terms & Conditions to proceed', 'masteriyo' ); ?>
-					</div>
-
 				<?php wp_nonce_field( 'masteriyo-register' ); ?>
 				<button type="submit" name="masteriyo-registration" value="yes" class="masteriyo-btn-signup masteriyo-btn masteriyo-btn-primary">
 					<?php echo esc_html__( 'Register', 'masteriyo' ); ?>

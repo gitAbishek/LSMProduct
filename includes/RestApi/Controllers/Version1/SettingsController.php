@@ -785,11 +785,6 @@ class SettingsController extends CrudController {
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),
 								),
-								'terms_conditions_page_id' => array(
-									'description' => __( 'Terms and conditions page ID.', 'masteriyo' ),
-									'type'        => 'integer',
-									'context'     => array( 'view', 'edit' ),
-								),
 								'checkout_page_id'         => array(
 									'description' => __( 'Checkout page ID.', 'masteriyo' ),
 									'type'        => 'integer',

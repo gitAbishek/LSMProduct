@@ -182,11 +182,10 @@ class Setting extends Model {
 		),
 		'advance'        => array(
 			'pages'      => array(
-				'courses_page_id'          => '',
-				'account_page_id'          => '',
-				'checkout_page_id'         => '',
-				'terms_conditions_page_id' => '',
-				'learn_page_id'            => '',
+				'courses_page_id'  => '',
+				'account_page_id'  => '',
+				'checkout_page_id' => '',
+				'learn_page_id'    => '',
 			),
 			'permalinks' => array(
 				'category_base'            => 'course-category',
@@ -302,7 +301,6 @@ class Setting extends Model {
 
 		$this->add_sanitize_callback( 'advance.pages.account_page_id', 'absint' );
 		$this->add_sanitize_callback( 'advance.pages.courses_page_id', 'absint' );
-		$this->add_sanitize_callback( 'advance.pages.terms_conditions_page_id', 'absint' );
 		$this->add_sanitize_callback( 'advance.pages.checkout_page_id', 'absint' );
 
 		$this->add_sanitize_callback( 'advance.checkout.pay', 'sanitize_title' );

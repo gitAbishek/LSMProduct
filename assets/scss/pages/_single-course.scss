@@ -41,7 +41,7 @@
 	&--title {
 		font-size: 28px;
 		font-weight: 700;
-		margin-bottom: $spacing_24px;
+		margin-bottom: $spacing_16px;
 		padding: 0 $spacing_32px;
 	}
 
@@ -89,7 +89,6 @@
 			display: flex;
 			flex-direction: row;
 			flex-wrap: wrap;
-			margin-top: $spacing_20px;
 			padding: 0 $spacing_24px;
 
 			& > div {
@@ -348,8 +347,8 @@
 	border-bottom: 2px solid var(--masteriyo-color-border);
 	font-size: 18px;
 	font-weight: 600;
+	margin-top: $spacing_12px;
 	margin-bottom: $spacing_24px;
-	margin-top: $spacing_14px;
 	word-break: break-all;
 
 	> div {

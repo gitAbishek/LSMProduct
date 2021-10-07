@@ -157,7 +157,6 @@
 		&__category {
 			display: flex;
 			flex-wrap: wrap;
-			margin-bottom: $spacing_14px;
 			padding: 0 $spacing_32px;
 		}
 
@@ -165,7 +164,6 @@
 		&__rt {
 			display: flex;
 			align-items: center;
-			margin-bottom: $spacing_14px;
 			padding: 0 $spacing_32px;
 		}
 
@@ -351,7 +349,7 @@
 	font-size: 18px;
 	font-weight: 600;
 	margin-bottom: $spacing_24px;
-	margin-top: $spacing_32px;
+	margin-top: $spacing_14px;
 	word-break: break-all;
 
 	> div {

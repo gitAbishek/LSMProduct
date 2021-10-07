@@ -52,6 +52,15 @@
 				max-width: 100%;
 			}
 		}
+
+		.masteriyo-dashboard {
+			margin-top: $spacing_40px;
+			margin-left: 0;
+		}
+
+		.masteriyo-cstudy--body--wrap{
+			padding: $spacing_16px;
+		}
 	}
 }
 
@@ -136,22 +145,19 @@
 		}
 	}
 
-	.masteriyo-cstudy--body {
-		&--wrap {
-			gap: 16px;
-		}
-
-		&--pbar {
-			flex-basis: 100%;
-			margin: 0;
-		}
-	}
-
 	.masteriyo-stab > div {
 		flex-basis: 100%;
 	}
 
 	.masteriyo {
+		.masteriyo-cstudy--body {
+			&--pbar {
+				flex-basis: 100%;
+				margin-left: 0;
+				margin-right: 0;
+			}
+		}
+
 		.masteriyo-mycourses--card {
 			flex-basis: 100%;
 			max-width: 100%;
@@ -160,9 +166,5 @@
 		.masteriyo-placeholder {
 			width: 100%;
 		}
-	}
-
-	.masteriyo-dashboard {
-		margin-top: $spacing_40px;
 	}
 }

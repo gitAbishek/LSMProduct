@@ -5,7 +5,6 @@
 		display: flex;
 		justify-content: space-between;
 		flex-direction: row;
-		gap: 40px;
 		max-width: 100%;
 	}
 
@@ -14,7 +13,7 @@
 		display: flex;
 		flex-direction: column;
 		flex: 1 1 74%;
-		gap: 30px;
+		margin-left: $spacing_40px;
 
 		ul {
 			margin: 0;
@@ -53,6 +52,7 @@
 
 		.masteriyo-welcome-msg {
 			color: var(--masteriyo-color-white);
+			margin: 0;
 		}
 
 		.masteriyo-close {
@@ -91,9 +91,11 @@
 		@include masteriyo-default-border;
 		@include masteriyo-border-radius;
 		@include masteriyo-default-animate;
-		padding: $spacing_30px;
 		flex: 0 1 calc((100% / 3) - 20px);
 		background-color: var(--masteriyo-color-white);
+		padding: $spacing_30px;
+		margin-left: $spacing_15px;
+		margin-right: $spacing_15px;
 
 		&:hover {
 			@include masteriyo-shadow-1;
@@ -104,12 +106,11 @@
 	.masteriyo-counter {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 30px;
+		margin: $spacing_30px -#{$spacing_15px} 0 -#{$spacing_15px};
 
 		.masteriyo-icon-title {
 			display: flex;
 			align-items: center;
-			gap: 16px;
 
 			.masteriyo-icon {
 				display: inherit;
@@ -121,6 +122,7 @@
 				font-size: 18px;
 				font-weight: 500;
 				margin: inherit;
+				margin-left: $spacing_16px;
 			}
 		}
 
@@ -154,58 +156,12 @@
 		}
 	}
 
-	// Statistic and Popular Cources
-	.masteriyo-sc {
-		gap: 30px;
-
-		&--stat {
-			flex: 1 1 66%;
-
-			&--header {
-				margin-bottom: 20px;
-			}
-		}
-
-		&--pcourse {
-			flex: 1 1 30%;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			gap: 20px;
-
-			&--title {
-				font-size: 16px;
-				margin: inherit;
-			}
-
-			&--list {
-				gap: 10px;
-			}
-
-			&--img {
-				width: 50px;
-				height: 50px;
-				@include masteriyo-border-radius;
-			}
-
-			&--course {
-				display: flex;
-				gap: 16px;
-			}
-
-			&--btn {
-				display: flex;
-				align-items: center;
-			}
-		}
-	}
-
 	// Continue Studing
 	.masteriyo-cstudy {
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
-		gap: 20px;
+		margin-top: $spacing_30px;
 
 		a {
 			text-decoration: none;
@@ -216,11 +172,13 @@
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: center;
+			margin-bottom: $spacing_15px;
 		}
 
 		&--title {
 			font-size: 24px;
 			margin: inherit;
+			margin-bottom: 0;
 		}
 
 		&--btn {
@@ -230,32 +188,34 @@
 		}
 
 		&--body {
+			margin-left: -#{$spacing_15px};
+			margin-right: -#{$spacing_15px};
+
 			&--wrap {
-				margin-bottom: $spacing_16px;
 				justify-content: space-between;
-				gap: $spacing_30px;
+				margin-top: $spacing_15px;
 			}
 
 			&--header {
 				width: 210px;
+				margin-left: $spacing_16px;
 			}
 
 			&--img-title {
 				display: flex;
 				flex-direction: row;
-				gap: 16px;
 			}
 
 			&--tag {
 				display: flex;
 				flex-wrap: wrap;
-				gap: 4px;
 				margin-bottom: $spacing_4px;
 			}
 
 			&--pbar {
 				flex: 1;
 				min-width: 150px;
+				margin: $spacing_15px;
 			}
 
 			&--img {
@@ -293,7 +253,6 @@
 				flex-direction: row;
 				flex-wrap: nowrap;
 				align-items: center;
-				gap: 4px;
 				font-size: 14px;
 				font-weight: 600;
 				margin-left: 16px;
@@ -302,6 +261,10 @@
 					width: 16px;
 					height: 16px;
 				}
+			}
+
+			&--time {
+				margin-left: $spacing_4px;
 			}
 
 			&--pstatus {
@@ -316,6 +279,8 @@
 
 			&--btn {
 				border-radius: $border_radius_100;
+				margin-top: $spacing_15px;
+				margin-bottom: $spacing_15px;
 			}
 		}
 	}

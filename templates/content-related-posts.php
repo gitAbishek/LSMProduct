@@ -40,7 +40,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 			<div class="masteriyo-course--card">
 				<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php esc_attr( $course->get_name() ); ?>">
 					<div class="masteriyo-course--img-wrap">
-						<!-- Diffculty Badge -->
+						<!-- Difficulty Badge -->
 						<?php if ( $difficulty ) : ?>
 							<div class="difficulty-badge">
 								<span class="masteriyo-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
@@ -86,7 +86,6 @@ do_action( 'masteriyo_before_related_posts_content' );
 					</div>
 					<!-- Course description -->
 					<div class="masteriyo-course--content__description">
-						<!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe dignissimos debitis facilis quisquam libero, explicabo molestias. Quibusdam illo iusto nulla dignissimos corrupti voluptatum officiis asperiores nobis. Obcaecati autem doloremque, libero, quod vel dolore delectus maxime magni eveniet iusto commodi? Adipisci?</p> -->
 						<?php echo wp_kses_post( masteriyo_trim_course_highlights( $course->get_highlights() ) ); ?>
 					</div>
 					<!-- Four Column (Course duration, comments, student enrolled and curriculum) -->

@@ -290,8 +290,21 @@ function masteriyo_price( $price, $args = array() ) {
 		$price = masteriyo_trim_zeros( $price );
 	}
 
-	$formatted_price = ( $unformatted_price < 0 ? '-' : '' ) . sprintf( $args['price_format'], '<span class="masteriyo-price-currencySymbol">' . masteriyo_get_currency_symbol( $args['currency'] ) . '</span>', $price );
-	$html            = '<span class="masteriyo-price-amount amount"><bdi>' . $formatted_price . '</bdi></span>';
+	if ( 0 === intval( masteriyo_round( $price ) ) ) {
+		/**
+		 * Filter to change the 'Free' text instead of $0.00.
+		 *
+		 * @since 1.0.7
+		 *
+		 * @param string Free text.
+		 * @param string $price Price.
+		 */
+		$formatted_price = apply_filters( 'masteriyo_price_free_text', __( 'Free', 'masteriyo' ), $price );
+	} else {
+		$formatted_price = sprintf( $args['price_format'], '<span class="masteriyo-price-currencySymbol">' . masteriyo_get_currency_symbol( $args['currency'] ) . '</span>', $price );
+	}
+
+	$html = '<span class="masteriyo-price-amount amount"><bdi>' . $formatted_price . '</bdi></span>';
 
 	/**
 	 * Filters the string of price markup.

@@ -795,7 +795,7 @@ class QuizesController extends PostsController {
 			'permalink'                         => $quiz->get_permalink(),
 			'parent_id'                         => $quiz->get_parent_id( $context ),
 			'course_id'                         => $quiz->get_course_id( $context ),
-			'course_name'                       => $course_name,
+			'course_name'                       => wp_specialchars_decode( $course_name ),
 			'menu_order'                        => $quiz->get_menu_order( $context ),
 			'status'                            => $quiz->get_status( $context ),
 			'description'                       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),

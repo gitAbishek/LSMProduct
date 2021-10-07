@@ -231,7 +231,7 @@ class QuestionsController extends PostsController {
 			'message'    => $is_correct ? $correct_answer_msg : $incorrect_answer_msg,
 		);
 
-		return apply_filters( 'masteriyo_answer_check_rest_reponse', $response );
+		return apply_filters( 'masteriyo_answer_check_rest_response', $response );
 	}
 
 	/**
@@ -253,7 +253,7 @@ class QuestionsController extends PostsController {
 
 		$params['status'] = array(
 			'default'           => 'any',
-			'description'       => __( 'Limit result set to questiones assigned a specific status.', 'masteriyo' ),
+			'description'       => __( 'Limit result set to questions assigned a specific status.', 'masteriyo' ),
 			'type'              => 'string',
 			'enum'              => array_merge( array( 'any', 'future' ), array_keys( get_post_statuses() ) ),
 			'sanitize_callback' => 'sanitize_key',
@@ -261,7 +261,7 @@ class QuestionsController extends PostsController {
 		);
 
 		$params['type'] = array(
-			'description'       => __( 'Limit result set to questiones assigned a specific type.', 'masteriyo' ),
+			'description'       => __( 'Limit result set to questions assigned a specific type.', 'masteriyo' ),
 			'type'              => 'string',
 			'enum'              => apply_filters( 'masteriyo_question_types', $this->get_types() ),
 			'sanitize_callback' => 'sanitize_key',
@@ -421,7 +421,7 @@ class QuestionsController extends PostsController {
 			);
 		}
 
-		// Taxonomy query to filter questiones by type, category,
+		// Taxonomy query to filter questions by type, category,
 		// tag, shipping class, and attribute.
 		$tax_query = array();
 
@@ -466,7 +466,7 @@ class QuestionsController extends PostsController {
 	}
 
 	/**
-	 * Get the questiones'schema, conforming to JSON Schema.
+	 * Get the question's schema, conforming to JSON Schema.
 	 *
 	 * @since 1.0.0
 	 *

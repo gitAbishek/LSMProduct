@@ -70,7 +70,7 @@ class OrdersController extends PostsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Permission $permission Permision object.
+	 * @param Permission $permission Permission object.
 	 */
 	public function __construct( Permission $permission = null ) {
 		$this->permission = $permission;

@@ -343,14 +343,14 @@ class CourseQuestionAnswersController extends CommentsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'status'          => array(
-					'description' => __( 'Course question answer stattis.', 'masteriyo' ),
+					'description' => __( 'Course question answer status.', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'approve',
 					'enum'        => array( 'approve', 'hold', 'trash', 'spam' ),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'agent'           => array(
-					'description' => __( 'Course questio answer agent.', 'masteriyo' ),
+					'description' => __( 'Course question answer agent.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),

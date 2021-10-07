@@ -98,13 +98,13 @@ abstract class RestController extends \WP_REST_Controller {
 	}
 
 	/**
-	 * Change datatypes `date-time` to string, and `mixed` to composite of all built in types. This is required for maintaining forward compatibility with WP 5.5 since custom post types are not supported anymore.
+	 * Change datatype `date-time` to string, and `mixed` to composite of all built in types. This is required for maintaining forward compatibility with WP 5.5 since custom post types are not supported anymore.
 	 *
 	 * See @link https://core.trac.wordpress.org/changeset/48306
 	 *
 	 * We still use the 'mixed' type, since if we convert to composite type everywhere, it won't work in 5.4 anymore because they require to define the full schema.
 	 *
-	 * @param array $endpoint_args Schema with datatypes to convert.
+	 * @param array $endpoint_args Schema with datatype to convert.
 
 	 * @return mixed Schema with converted datatype.
 	 */

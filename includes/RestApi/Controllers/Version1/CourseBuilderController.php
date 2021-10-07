@@ -267,7 +267,7 @@ class CourseBuilderController extends PostsController {
 	}
 
 	/**
-	 * Get course contents(sections, lessons, quizes).
+	 * Get course contents(sections, lessons, quizzes).
 	 *
 	 * @since 1.0.0
 	 *
@@ -302,7 +302,7 @@ class CourseBuilderController extends PostsController {
 	}
 
 	/**
-	 * Get objects(sections, quizes, lessons, etc.).
+	 * Get objects(sections, quizzes, lessons, etc.).
 	 *
 	 * @since 1.0.0
 	 * @param string[] $query_args WP_Query args.
@@ -379,7 +379,7 @@ class CourseBuilderController extends PostsController {
 	protected function get_course_child_data( $course_item, $context = 'view' ) {
 		$data = array(
 			'id'          => $course_item->get_id(),
-			'name'        => $course_item->get_name( $context ),
+			'name'        => wp_specialchars_decode( $course_item->get_name( $context ) ),
 			'name'        => $course_item->get_name( $context ),
 			'description' => $course_item->get_description( $context ),
 			'permalink'   => $course_item->get_permalink( $context ),
@@ -400,10 +400,22 @@ class CourseBuilderController extends PostsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model[] $objects Course contents(sections, quizes, lessons)
+	 * @param Model[] $objects Course contents(sections, quizzes, lessons)
 	 * @return Model[]
 	 */
 	protected function process_objects_collection( $objects ) {
+		// Decode HTML entity object's name.
+		$objects = array_map(
+			function( $object ) {
+				if ( isset( $object['name'] ) ) {
+					$object['name'] = wp_specialchars_decode( $object['name'] );
+				}
+
+				return $object;
+			},
+			$objects
+		);
+
 		$contents = $this->filter_section_contents( $objects );
 
 		$sections        = $this->filter_sections( $objects );
@@ -524,7 +536,7 @@ class CourseBuilderController extends PostsController {
 		// Save section order.
 		$this->save_section_order( $request );
 
-		// Save section contents order(quizes, lessons)
+		// Save section contents order(quizzes, lessons)
 		$this->save_section_contents( $request );
 
 		return $this->get_item(

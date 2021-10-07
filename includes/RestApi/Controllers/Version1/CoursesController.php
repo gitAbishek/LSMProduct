@@ -717,7 +717,7 @@ class CoursesController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'wp_edit_link'       => array(
-					'description' => __( 'Course WordPress ediit link.', 'masteriyo' ),
+					'description' => __( 'Course WordPress edit link.', 'masteriyo' ),
 					'type'        => 'string',
 					'readonly'    => true,
 					'context'     => array( 'view', 'edit' ),

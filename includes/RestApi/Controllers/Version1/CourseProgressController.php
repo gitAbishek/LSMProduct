@@ -71,7 +71,7 @@ class CourseProgressController extends CrudController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Permission $permission Permision object.
+	 * @param Permission $permission Permission object.
 	 */
 	public function __construct( Permission $permission = null ) {
 		$this->permission = $permission;
@@ -313,7 +313,7 @@ class CourseProgressController extends CrudController {
 			'user_id'          => $course_progress->get_user_id( $context ),
 			'course_id'        => $course_progress->get_course_id( $context ),
 			'course_permalink' => get_the_permalink( $course_progress->get_course_id( $context ) ),
-			'name'             => $course ? $course->get_name( $context ) : '',
+			'name'             => $course ? wp_specialchars_decode( $course->get_name( $context ) ) : '',
 			'status'           => $course_progress->get_status( $context ),
 			'started_at'       => masteriyo_rest_prepare_date_response( $course_progress->get_started_at( $context ) ),
 			'modified_at'      => masteriyo_rest_prepare_date_response( $course_progress->get_modified_at( $context ) ),
@@ -896,11 +896,11 @@ class CourseProgressController extends CrudController {
 		}
 
 		$data = array(
-			'item_id'   => $course_progress_item->get_item_id( $context ),
-			'item_title'   => $course_progress_item->get_item_title( $context ),
-			'item_type' => $course_progress_item->get_item_type( $context ),
-			'completed' => $course_progress_item->get_completed( $context ),
-			'video'     => ! empty( trim( $video ) ),
+			'item_id'    => $course_progress_item->get_item_id( $context ),
+			'item_title' => wp_specialchars_decode( $course_progress_item->get_item_title( $context ) ),
+			'item_type'  => $course_progress_item->get_item_type( $context ),
+			'completed'  => $course_progress_item->get_completed( $context ),
+			'video'      => ! empty( trim( $video ) ),
 		);
 
 		return apply_filters( 'masteriyo_course_progress_item_data', $data, $course_progress_item, $context );
@@ -967,7 +967,7 @@ class CourseProgressController extends CrudController {
 			function( $section ) {
 				return array(
 					'item_id'    => $section->ID,
-					'item_title' => $section->post_title,
+					'item_title' => wp_specialchars_decode( $section->post_title ),
 					'item_type'  => str_replace( 'mto-', '', $section->post_type ),
 				);
 			},
@@ -983,7 +983,7 @@ class CourseProgressController extends CrudController {
 	 * @since 1.0.0
 	 *
 	 * @param WP_Post[] $posts
-	 * @param int $seciton_id Section ID.
+	 * @param int $section_id Section ID.
 	 * @return array
 	 */
 	protected function filter_course_lessons_quizzes( $posts, $section_id ) {

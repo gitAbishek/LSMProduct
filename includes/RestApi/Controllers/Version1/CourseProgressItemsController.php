@@ -56,7 +56,7 @@ class CourseProgressItemsController extends CrudController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Permission $permission Permision object.
+	 * @param Permission $permission Permission object.
 	 */
 	public function __construct( Permission $permission = null ) {
 		$this->permission = $permission;
@@ -754,7 +754,7 @@ class CourseProgressItemsController extends CrudController {
 	 * @throw exception
 	 */
 	protected function validate_course_progress_item( $course_progress_item ) {
-		// Bail early if ther item_id is not either lesson or quiz.
+		// Bail early if item_id is not either lesson or quiz.
 		$item = get_post( $course_progress_item->get_item_id( 'edit' ) );
 
 		if ( is_null( $item ) || ! in_array( $item->post_type, array( 'mto-lesson', 'mto-quiz' ), true ) ) {

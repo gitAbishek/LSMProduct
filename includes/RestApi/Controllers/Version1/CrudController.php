@@ -157,7 +157,7 @@ abstract class CrudController extends RestController {
 			$new_object = $this->get_object( $object );
 
 			if ( ! $new_object ) {
-				throw new ModelException( 'masteriyo_rest_object_not_read', __( 'Faild to read an object!', 'masteriyo' ) );
+				throw new ModelException( 'masteriyo_rest_object_not_read', __( 'Failed to read an object!', 'masteriyo' ) );
 			}
 
 			return $new_object;

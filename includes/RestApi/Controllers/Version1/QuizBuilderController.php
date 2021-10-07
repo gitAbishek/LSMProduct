@@ -2,7 +2,7 @@
 /**
  * Quiz builder REST API.
  *
- * Handles requests to the quizs/builder endpoint.
+ * Handles requests to the quizzes/builder endpoint.
  *
  * @author   mi5t4n
  * @category API
@@ -264,7 +264,7 @@ class QuizBuilderController extends PostsController {
 	}
 
 	/**
-	 * Get objects(sections, quizes, lessons, etc.).
+	 * Get objects(sections, quizzes, lessons, etc.).
 	 *
 	 * @since 1.0.0
 	 * @param string[] $query_args WP_Query args.
@@ -358,7 +358,7 @@ class QuizBuilderController extends PostsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model[] $objects Quiz contents(sections, quizes, lessons)
+	 * @param Model[] $objects Quiz contents(sections, quizzes, lessons)
 	 * @return Model[]
 	 */
 	protected function process_objects_collection( $objects ) {

@@ -41,7 +41,11 @@ const MainToolbar = () => {
 				<Flex direction="row" justifyContent="space-between" align="center">
 					<Stack direction="row" spacing="12" align="center">
 						<Box>
-							<Image src={LogoImg} alt="Masteriyo Logo" w="100px" />
+							<Image
+								src={LogoImg}
+								alt={__('Masteriyo Logo', 'masteriyo')}
+								w="100px"
+							/>
 						</Box>
 						<List d="flex">
 							<ListItem>
@@ -51,7 +55,7 @@ const MainToolbar = () => {
 									_activeLink={navActiveStyles}
 									to={routes.courses.list}>
 									<ListIcon as={BiBook} />
-									Courses
+									{__('Courses', 'masteriyo')}
 								</Link>
 							</ListItem>
 							<ListItem>
@@ -61,7 +65,7 @@ const MainToolbar = () => {
 									_activeLink={navActiveStyles}
 									to={routes.courses.add}>
 									<ListIcon as={BiEdit} />
-									Course Builder
+									{__('Course Builder', 'masteriyo')}
 								</Link>
 							</ListItem>
 							<ListItem>
@@ -71,7 +75,7 @@ const MainToolbar = () => {
 									_activeLink={navActiveStyles}
 									to={routes.settings}>
 									<ListIcon as={BiCog} />
-									Settings
+									{__('Settings', 'masteriyo')}
 								</Link>
 							</ListItem>
 						</List>

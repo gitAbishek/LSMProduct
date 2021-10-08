@@ -36,7 +36,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 				<TabList sx={tabListStyles}>
 					<Tab sx={tabStyles}>{__('New Order', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Completed Order', 'masteriyo')}</Tab>
-					<Tab sx={tabStyles}>{__('Onhold Order', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('OnHold Order', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Cancelled Order', 'masteriyo')}</Tab>
 				</TabList>
 				<TabPanels flex="1">

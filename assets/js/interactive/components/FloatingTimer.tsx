@@ -5,6 +5,7 @@ import {
 	Text,
 	VStack,
 } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React, { useEffect } from 'react';
 import { useTimer } from 'react-timer-hook';
 
@@ -59,7 +60,7 @@ const FloatingTimer: React.FC<Props> = (props) => {
 							{hours}:{minutes}:{seconds}
 						</Text>
 						<Text fontSize="10px" color="gray.500">
-							ANSWERED:{' '}
+							{__('ANSWERED', 'masteriyo')}:{' '}
 							<Text as="span" color="gray.700">
 								1
 							</Text>

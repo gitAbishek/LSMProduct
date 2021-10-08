@@ -580,7 +580,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 
 							<FormControl>
 								<FormLabel>
-									{__('Order Recieved', 'masteriyo')}
+									{__('Order Received', 'masteriyo')}
 									<Tooltip
 										label={__(
 											'Endpoint for the "Checkout - Order received" page',

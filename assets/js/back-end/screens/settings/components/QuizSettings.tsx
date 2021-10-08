@@ -66,7 +66,12 @@ const QuizSettings: React.FC<Props> = (props) => {
 								<Controller
 									name="quiz.styling.questions_display_per_page"
 									defaultValue={quizData?.styling?.questions_display_per_page}
-									rules={{ required: 'Question display per page is required.' }}
+									rules={{
+										required: __(
+											'Question display per page is required.',
+											'masteriyo'
+										),
+									}}
 									render={({ field }) => (
 										<NumberInput {...field} min={1}>
 											<NumberInputField borderRadius="sm" shadow="input" />

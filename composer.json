@@ -69,7 +69,7 @@
       "phpcbf"
     ],
     "makepot-audit": [
-      "wp i18n make-pot . --slug=wp-plugin-starter"
+      "wp i18n make-pot . --slug=masteriyo"
     ],
     "makepot": [
       "\"vendor/bin/wp\" i18n make-pot . ./i18n/languages/masteriyo.pot --include=\"assets/js/build,includes,templates\""
@@ -79,8 +79,8 @@
     "scripts-description": {
       "phpcs": "Analyze code against the WordPress coding standard with PHP_CodeSniffer",
       "phpcbf": "Fix coding standards warnings/errors automatically with PHP Code Beautifier",
-      "makepot-audit": "Generate languages/wp-plugin-starter.pot file and run audit",
-      "makepot": "Generate languages/wp-plugin-starter.pot file"
+      "makepot-audit": "Generate i18n/languages/masteriyo.pot file and run audit",
+      "makepot": "Generate i18n/languages/masteriyo.pot file"
     }
   }
 }

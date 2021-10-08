@@ -129,7 +129,9 @@ const AllCourseCategories = () => {
 										{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
 										{categoriesQuery.isSuccess &&
 										categoriesQuery?.data?.data.length === 0 ? (
-											<EmptyInfo message="No categories found." />
+											<EmptyInfo
+												message={__('No categories found.', 'masteriyo')}
+											/>
 										) : (
 											categoriesQuery?.data?.data.map((cat: any) => (
 												<CategoryRow
@@ -154,7 +156,7 @@ const AllCourseCategories = () => {
 							<MasteriyoPagination
 								metaData={categoriesQuery.data.meta}
 								setFilterParams={setFilterParams}
-								perPageText="Categories Per Page:"
+								perPageText={__('Categories Per Page:', 'masteriyo')}
 							/>
 						)}
 				</Stack>

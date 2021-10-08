@@ -162,7 +162,7 @@ const MultipleChoice: React.FC<Props> = (props) => {
 					variant="link"
 					color="gray.900"
 					onClick={onAddNewAnswerPress}>
-					Add New Answer
+					{__('Add New Answer', 'masteriyo')}
 				</Button>
 			</ButtonGroup>
 		</Stack>

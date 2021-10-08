@@ -301,8 +301,9 @@ const CourseSetting: React.FC<Props> = (props) => {
 																			: false
 																	}
 																	{...register('access_mode')}>
+																	{'	'}
 																	{__(
-																		'	Does not need registration',
+																		'Does not need registration',
 																		'masteriyo'
 																	)}
 																</Radio>
@@ -315,7 +316,8 @@ const CourseSetting: React.FC<Props> = (props) => {
 																			: false
 																	}
 																	{...register('access_mode')}>
-																	{__('	Need registration', 'masteriyo')}
+																	{'	'}
+																	{__('Need registration', 'masteriyo')}
 																</Radio>
 															</Stack>
 														</RadioGroup>

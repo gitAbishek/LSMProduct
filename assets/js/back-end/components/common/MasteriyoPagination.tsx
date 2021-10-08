@@ -96,7 +96,7 @@ const MasteriyoPagination: React.FC<Props> = (props) => {
 			fontSize={['xs', null, 'sm']}>
 			<Text color="gray.500">
 				{__(
-					`Showing ${displayCurrentPageLowest} - 
+					`Showing ${displayCurrentPageLowest} -
 					${displayCurrentPageHighest}
 					out of ${metaData?.total}`,
 					'masteriyo'

@@ -307,13 +307,21 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											{...register('payments.currency.thousand_separator', {
 												maxLength: {
 													value: 1,
-													message:
+													message: __(
 														'Thousand separator should be 1 character only.',
+														'masteriyo'
+													),
 												},
-												required: 'Thousand separator is required.',
+												required: __(
+													'Thousand separator is required.',
+													'masteriyo'
+												),
 												validate: (value) =>
 													hasNumber(value) ||
-													"Thousand separator can't be a number",
+													__(
+														"Thousand separator can't be a number",
+														'masteriyo'
+													),
 											})}
 											defaultValue={paymentsData?.currency?.thousand_separator}
 										/>
@@ -341,15 +349,23 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Input
 											type="text"
 											{...register('payments.currency.decimal_separator', {
-												required: 'Decimal separator is required.',
+												required: __(
+													'Decimal separator is required.',
+													'masteriyo'
+												),
 												maxLength: {
 													value: 1,
-													message:
+													message: __(
 														'Decimal separator should be 1 character only.',
+														'masteriyo'
+													),
 												},
 												validate: (value) =>
 													hasNumber(value) ||
-													"Decimal separator can't be a number",
+													__(
+														"Decimal separator can't be a number",
+														'masteriyo'
+													),
 											})}
 											defaultValue={paymentsData?.currency?.decimal_separator}
 										/>
@@ -384,7 +400,10 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												paymentsData?.currency?.number_of_decimals || 2
 											}
 											rules={{
-												required: 'Number of decimals is required',
+												required: __(
+													'Number of decimals is required',
+													'masteriyo'
+												),
 											}}
 											render={({ field }) => (
 												<NumberInput {...field} w="full" min={0} max={10}>
@@ -487,8 +506,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 													<Tooltip
 														textAlign="center"
 														label={__(
-															`Send notifications when an IPN is received from 
-															ayPal indicating refunds, chargebacks and 
+															`Send notifications when an IPN is received from
+															ayPal indicating refunds, charge-backs and
 															cancellations.`,
 															'masteriyo'
 														)}
@@ -519,7 +538,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`Please enter your PayPal email address; this is 
+														`Please enter your PayPal email address; this is
 														needed in order to take payment.`,
 														'masteriyo'
 													)}
@@ -539,13 +558,13 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 
 										<FormControl>
 											<FormLabel minW="160px">
-												{__('Reciever Email', 'masteriyo')}
+												{__('Receiver Email', 'masteriyo')}
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`If your main PayPal email differs from the PayPal 
-														email entered above, input your main receiver email 
-														for your PayPal account here. This is used to 
+														`If your main PayPal email differs from the PayPal
+														email entered above, input your main receiver email
+														for your PayPal account here. This is used to
 														validate IPN requests.`,
 														'masteriyo'
 													)}
@@ -565,14 +584,14 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 
 										<FormControl>
 											<FormLabel minW="160px">
-												{__('Indentity Token', 'masteriyo')}
+												{__('Identity Token', 'masteriyo')}
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`Optionally enable "Payment Data Transfer" (Profile 
-															> Profile and Settings > My Selling Tools > Website 
-															Preferences) and then copy your identity token here. 
-															This will allow payments to be verified without 
+														`Optionally enable "Payment Data Transfer" (Profile
+															> Profile and Settings > My Selling Tools > Website
+															Preferences) and then copy your identity token here.
+															This will allow payments to be verified without
 															the need for PayPal IPN.`,
 														'masteriyo'
 													)}
@@ -596,9 +615,9 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`If you use your PayPal account with more than one 
-														installation, please use a distinct prefix to 
-														separate those installations. Please do not use 
+														`If you use your PayPal account with more than one
+														installation, please use a distinct prefix to
+														separate those installations. Please do not use
 														numbers in your prefix.`,
 														'masteriyo'
 													)}
@@ -622,8 +641,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`The intent to either capture payment immediately 
-														or authorize a payment for an order after order 
+														`The intent to either capture payment immediately
+														or authorize a payment for an order after order
 														creation.`,
 														'masteriyo'
 													)}
@@ -653,8 +672,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`Optionally enter the URL to a 150x50px image 
-														displayed as your logo in the upper left corner of 
+														`Optionally enter the URL to a 150x50px image
+														displayed as your logo in the upper left corner of
 														the PayPal checkout pages.`,
 														'masteriyo'
 													)}
@@ -680,8 +699,8 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 													<Tooltip
 														textAlign="center"
 														label={__(
-															`Note: this may log personal information. We 
-																recommend using this for debugging purposes only 
+															`Note: this may log personal information. We
+																recommend using this for debugging purposes only
 																and deleting the logs when finished.`,
 															'masteriyo'
 														)}

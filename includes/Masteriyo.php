@@ -111,6 +111,8 @@ class Masteriyo {
 	 * @since 1.0.0
 	 */
 	public function after_wp_init() {
+		$this->load_text_domain();
+
 		RegisterPostType::instance()->register();
 		RegisterTaxonomies::register();
 		Shortcodes::instance()->register_shortcodes();
@@ -118,7 +120,6 @@ class Masteriyo {
 
 		$this->restrict_wp_dashboard_and_admin_bar();
 		$this->register_order_status();
-		$this->load_text_domain();
 		$this->setup_wizard();
 
 		$this->handle_paypal_ipn();

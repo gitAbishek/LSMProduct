@@ -47,7 +47,7 @@ const Questions: React.FC<Props> = (props) => {
 
 	const onAddNewQuestionPress = () => {
 		addQuestion.mutate({
-			name: 'Untitled Question',
+			name: __('Untitled Question', 'masteriyo'),
 			course_id: courseId,
 			parent_id: quizId,
 			type: 'true-false',
@@ -93,7 +93,7 @@ const Questions: React.FC<Props> = (props) => {
 							<AddNewButton
 								onClick={onAddNewQuestionPress}
 								isLoading={addQuestion.isLoading}>
-								Add New Question
+								{__('Add New Question', 'masteriyo')}
 							</AddNewButton>
 						</Center>
 					</>

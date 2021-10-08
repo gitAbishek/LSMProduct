@@ -91,7 +91,9 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 								<Controller
 									name="course_archive.display.per_page"
 									defaultValue={courseArchiveData?.display?.per_page}
-									rules={{ required: 'Course per page is required.' }}
+									rules={{
+										required: __('Course per page is required.', 'masteriyo'),
+									}}
 									render={({ field }) => (
 										<NumberInput {...field} min={1}>
 											<NumberInputField borderRadius="sm" shadow="input" />
@@ -127,7 +129,9 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 								<Controller
 									name="course_archive.display.per_row"
 									defaultValue={courseArchiveData?.display?.per_row}
-									rules={{ required: 'Course per row is required.' }}
+									rules={{
+										required: __('Course per row is required.', 'masteriyo'),
+									}}
 									render={({ field }) => (
 										<NumberInput {...field} min={1} max={4}>
 											<NumberInputField borderRadius="sm" shadow="input" />

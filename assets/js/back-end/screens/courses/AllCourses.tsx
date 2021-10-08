@@ -117,7 +117,7 @@ const AllCourses = () => {
 									{courseQuery.isLoading && <SkeletonCourseList />}
 									{courseQuery.isSuccess &&
 									courseQuery?.data?.data.length === 0 ? (
-										<EmptyInfo message="No courses found." />
+										<EmptyInfo message={__('No courses found.', 'masteriyo')} />
 									) : (
 										courseQuery?.data?.data.map((course: any) => (
 											<CourseList
@@ -144,7 +144,7 @@ const AllCourses = () => {
 					<MasteriyoPagination
 						metaData={courseQuery.data.meta}
 						setFilterParams={setFilterParams}
-						perPageText="Courses Per Page:"
+						perPageText={__('Courses Per Page:', 'masteriyo')}
 					/>
 				)}
 			</Container>

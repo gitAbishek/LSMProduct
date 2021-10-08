@@ -143,7 +143,7 @@ const EditorMenuBar: React.FC<Props> = (props) => {
 				</Center>
 				<Menu>
 					<Tooltip label={__('Headings', 'masteriyo')} hasArrow fontSize="xs">
-						<MenuButton as="span">Headings</MenuButton>
+						<MenuButton as="span">{__('Headings', 'masteriyo')}</MenuButton>
 					</Tooltip>
 
 					<MenuList fontSize="xs">

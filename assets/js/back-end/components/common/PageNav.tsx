@@ -40,7 +40,7 @@ const PageNav: React.FC<Props> = (props) => {
 					color="gray.500"
 					as={RouterLink}
 					to={routes.courses.list}>
-					Courses
+					{__('Courses', 'masteriyo')}
 				</BreadcrumbLink>
 			</BreadcrumbItem>
 			{courseId && courseName && (

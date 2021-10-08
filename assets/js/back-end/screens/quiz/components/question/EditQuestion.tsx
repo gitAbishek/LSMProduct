@@ -73,7 +73,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 				borderColor="gray.100"
 				pb="3">
 				<Heading fontSize="lg" fontWeight="semibold">
-					Question
+					{__('Question', 'masteriyo')}
 				</Heading>
 			</Flex>
 			<Stack direction="row" spacing="6">
@@ -134,7 +134,8 @@ const EditQuestion: React.FC<Props> = (props) => {
 							),
 							validate: {
 								positive: (value) =>
-									parseInt(value) >= 0 || 'Points should be positive number.',
+									parseInt(value) >= 0 ||
+									__('Points should be positive number.', 'masteriyo'),
 							},
 						}}
 						render={({ field }) => (

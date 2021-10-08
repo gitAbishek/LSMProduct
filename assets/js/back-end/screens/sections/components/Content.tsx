@@ -101,7 +101,7 @@ const Content: React.FC<Props> = (props) => {
 								onClick={onEditPress}
 								variant="unstyled"
 								icon={<Icon fontSize="xl" as={BiEdit} />}
-								aria-label={__('Edit')}
+								aria-label={__('Edit', 'masteriyo')}
 							/>
 						</Tooltip>
 
@@ -111,7 +111,7 @@ const Content: React.FC<Props> = (props) => {
 								onClick={() => onContentDeletePress(id, type)}
 								variant="unstyled"
 								icon={<Icon fontSize="xl" as={BiTrash} />}
-								aria-label={__('Delete')}
+								aria-label={__('Delete', 'masteriyo')}
 							/>
 						</Tooltip>
 					</ButtonGroup>

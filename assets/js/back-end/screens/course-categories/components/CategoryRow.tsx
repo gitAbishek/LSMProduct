@@ -62,7 +62,7 @@ const CategoryRow: React.FC<Props> = (props) => {
 							id.toString()
 						)}>
 						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
-							{__('Edit')}
+							{__('Edit', 'masteriyo')}
 						</Button>
 					</RouterLink>
 					<Menu placement="bottom-end">

@@ -206,7 +206,7 @@ const Question: React.FC<Props> = (props) => {
 				<AlertDialogOverlay>
 					<AlertDialogContent>
 						<AlertDialogHeader>
-							{__('Delete') + ' ' + questionData.name}
+							{__('Delete', 'masteriyo') + ' ' + questionData.name}
 						</AlertDialogHeader>
 						<AlertDialogBody>
 							{__("Are you sure? You can't restore this section", 'masteriyo')}

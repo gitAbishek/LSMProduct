@@ -132,7 +132,7 @@ const CourseList: React.FC<Props> = (props) => {
 					<RouterLink
 						to={routes.courses.edit.replace(':courseId', id.toString())}>
 						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
-							{__('Edit')}
+							{__('Edit', 'masteriyo')}
 						</Button>
 					</RouterLink>
 					<Menu placement="bottom-end">

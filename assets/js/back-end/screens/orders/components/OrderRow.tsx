@@ -156,7 +156,7 @@ const OrderRow: React.FC<Props> = (props) => {
 					<RouterLink
 						to={routes.orders.edit.replace(':orderId', id.toString())}>
 						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
-							{__('Edit')}
+							{__('Edit', 'masteriyo')}
 						</Button>
 					</RouterLink>
 					<Menu placement="bottom-end">

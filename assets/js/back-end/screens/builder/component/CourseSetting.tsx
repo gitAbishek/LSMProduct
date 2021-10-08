@@ -100,6 +100,11 @@ const CourseSetting: React.FC<Props> = (props) => {
 	//@ts-ignore
 	const currencySymbol = window._MASTERIYO_.currency.symbol;
 
+	const onChangePriceType = (priceType: string) => {
+		setPricingDisplayValue(priceType);
+		setValue('price_type', priceType);
+	};
+
 	return (
 		<Box bg="white" p="10" shadow="box">
 			<form>
@@ -268,17 +273,25 @@ const CourseSetting: React.FC<Props> = (props) => {
 									<FormControl>
 										<FormLabel>{__('Pricing Option', 'masteriyo')}</FormLabel>
 										<RadioGroup
-											onChange={setPricingDisplayValue}
+											onChange={onChangePriceType}
 											value={pricingDisplayValue}
 											defaultValue={courseData?.price_type}>
 											<Stack direction="column" spacing="4">
 												<Stack direction="column">
-													<Radio value="free">{__('Free', 'masteriyo')}</Radio>
+													<Radio
+														value="free"
+														onChange={() => setValue('access_mode', 'open')}>
+														{__('Free', 'masteriyo')}
+													</Radio>
 													<Collapse
 														in={pricingDisplayValue != 'paid'}
 														animateOpacity>
 														<RadioGroup
-															defaultValue={courseData?.access_mode || 'open'}>
+															defaultValue={
+																'one_time' === courseData?.access_mode
+																	? 'open'
+																	: courseData?.access_mode
+															}>
 															<Stack direction="column" spacing="3" ml="5">
 																<Radio
 																	value="open"

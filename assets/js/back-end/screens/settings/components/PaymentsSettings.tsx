@@ -507,7 +507,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 														textAlign="center"
 														label={__(
 															`Send notifications when an IPN is received from
-															ayPal indicating refunds, charge-backs and
+															PayPal indicating refunds, charge-backs and
 															cancellations.`,
 															'masteriyo'
 														)}
@@ -641,9 +641,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`The intent to either capture payment immediately
-														or authorize a payment for an order after order
-														creation.`,
+														`The intent to either capture payment immediately or authorize a payment for an order after order creation.`,
 														'masteriyo'
 													)}
 													hasArrow
@@ -672,9 +670,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`Optionally enter the URL to a 150x50px image
-														displayed as your logo in the upper left corner of
-														the PayPal checkout pages.`,
+														`Optionally enter the URL to a 150x50px image displayed as your logo in the upper left corner of the PayPal checkout pages.`,
 														'masteriyo'
 													)}
 													hasArrow

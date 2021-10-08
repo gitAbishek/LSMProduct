@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-10-07T19:35:08+05:45\n"
+"POT-Creation-Date: 2021-10-08T09:14:51+05:45\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: masteriyo\n"
@@ -111,7 +111,7 @@ msgstr ""
 
 #: includes/AdminMenu.php:63
 #: includes/AdminMenu.php:64
-#: includes/Masteriyo.php:186
+#: includes/Masteriyo.php:183
 #: includes/PostType/Course.php:36
 #: includes/PostType/Course.php:64
 #: templates/account/dashboard.php:48
@@ -140,7 +140,7 @@ msgstr ""
 
 #: includes/AdminMenu.php:90
 #: includes/AdminMenu.php:91
-#: includes/Masteriyo.php:250
+#: includes/Masteriyo.php:247
 #: assets/js/build/masteriyo-backend.1.0.6.js:1
 #: assets/js/build/masteriyo-backend.1.0.6.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
@@ -1877,39 +1877,39 @@ msgstr ""
 msgid "Expert"
 msgstr ""
 
-#: includes/Masteriyo.php:210
+#: includes/Masteriyo.php:207
 msgid "Docs"
 msgstr ""
 
-#: includes/Masteriyo.php:211
+#: includes/Masteriyo.php:208
 msgid "View masteriyo documentation"
 msgstr ""
 
-#: includes/Masteriyo.php:215
+#: includes/Masteriyo.php:212
 msgid "API docs"
 msgstr ""
 
-#: includes/Masteriyo.php:216
+#: includes/Masteriyo.php:213
 msgid "View masteriyo API docs"
 msgstr ""
 
-#: includes/Masteriyo.php:220
+#: includes/Masteriyo.php:217
 msgid "Community Support"
 msgstr ""
 
-#: includes/Masteriyo.php:221
+#: includes/Masteriyo.php:218
 msgid "Visit community forums"
 msgstr ""
 
-#: includes/Masteriyo.php:251
+#: includes/Masteriyo.php:248
 msgid "View masteriyo settings"
 msgstr ""
 
-#: includes/Masteriyo.php:361
+#: includes/Masteriyo.php:358
 msgid "This password reset key is for a different user account. Please log out and try again."
 msgstr ""
 
-#: includes/Masteriyo.php:431
+#: includes/Masteriyo.php:428
 msgid "Minimum WordPress version required to work Masteriyo is v5.0."
 msgstr ""
 
@@ -6738,6 +6738,12 @@ msgstr ""
 #: assets/js/build/masteriyo-backend.1.0.6.js:1
 #: assets/js/build/masteriyo-backend.1.0.6.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
+msgid "Showing %d - %d out of %d"
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.1.0.6.js:1
+#: assets/js/build/masteriyo-backend.1.0.6.min.js:1
+#: assets/js/build/masteriyo-backend.js:1
 msgid "Search categories"
 msgstr ""
 
@@ -7865,7 +7871,7 @@ msgstr ""
 #: assets/js/build/masteriyo-backend.js:1
 msgid ""
 "Send notifications when an IPN is received from\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tayPal indicating refunds, charge-backs and\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPayPal indicating refunds, charge-backs and\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tcancellations."
 msgstr ""
 
@@ -7941,10 +7947,7 @@ msgstr ""
 #: assets/js/build/masteriyo-backend.1.0.6.js:1
 #: assets/js/build/masteriyo-backend.1.0.6.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-msgid ""
-"The intent to either capture payment immediately\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\t\tor authorize a payment for an order after order\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\t\tcreation."
+msgid "The intent to either capture payment immediately or authorize a payment for an order after order creation."
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.1.0.6.js:1
@@ -7974,10 +7977,7 @@ msgstr ""
 #: assets/js/build/masteriyo-backend.1.0.6.js:1
 #: assets/js/build/masteriyo-backend.1.0.6.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-msgid ""
-"Optionally enter the URL to a 150x50px image\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\t\tdisplayed as your logo in the upper left corner of\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\t\tthe PayPal checkout pages."
+msgid "Optionally enter the URL to a 150x50px image displayed as your logo in the upper left corner of the PayPal checkout pages."
 msgstr ""
 
 #: assets/js/build/masteriyo-backend.1.0.6.js:1

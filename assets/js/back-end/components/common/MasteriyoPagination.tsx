@@ -9,7 +9,7 @@ import {
 	usePagination,
 } from '@ajna/pagination';
 import { HStack, Select, Stack, Text } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
+import { sprintf, __ } from '@wordpress/i18n';
 import React from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
@@ -95,11 +95,12 @@ const MasteriyoPagination: React.FC<Props> = (props) => {
 			pb="4"
 			fontSize={['xs', null, 'sm']}>
 			<Text color="gray.500">
-				{__(
-					`Showing ${displayCurrentPageLowest} -
-					${displayCurrentPageHighest}
-					out of ${metaData?.total}`,
-					'masteriyo'
+				{sprintf(
+					/* translators: %1$d: shown results from, %2$d shown results to, %3$d total count */
+					__('Showing %d - %d out of %d', 'masteriyo'),
+					displayCurrentPageLowest,
+					displayCurrentPageHighest,
+					metaData?.total
 				)}
 			</Text>
 			<HStack>

@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.0.6
+**Stable tag**: 1.0.7
 
 **License: GNU** General Public License v3.0
 
@@ -39,13 +39,21 @@ A complete solution to create and sell online courses. The plugin is powered by 
 - Responsive Design
 - Compatible with any theme
 
-# Frequently Asked Questions
+# Frequently Asked **Questions**
 
 ### Do I need to have coding skills to use the LMS Plugin?
 
 No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
 # Changelog
+
+### 1.0.7 - 18-10-2021
+- Fix - Missing translations in react codebase
+- Fix - Course pricing setting for free option acting inconsistently.
+- Fix - Categories listing issue on add/edit course categories select option for categories greater than 20.
+- Fix - Special chars issue in the course, lesson, section, and quiz name.
+- Enhancement - Remove the terms and conditions page.
+- Enhancement - Use free text to show free courses instead of price.
 
 ### 1.0.6 - 06-10-2021
 

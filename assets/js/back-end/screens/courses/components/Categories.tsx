@@ -26,19 +26,23 @@ const Categories: React.FC<Props> = (props) => {
 	const { setIsCreateCatModalOpen } = useContext(CreateCatModal);
 
 	const categoryAPI = new API(urls.categories);
-	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list(), {
-		retry: false,
-		onSuccess: (data) => {
-			setCategoriesList(
-				data.data.map((category: any) => {
-					return {
-						value: category.id,
-						label: category.name,
-					};
-				})
-			);
-		},
-	});
+	const categoryQuery = useQuery(
+		'categoryLists',
+		() => categoryAPI.list({ per_page: 100 }),
+		{
+			retry: false,
+			onSuccess: (data) => {
+				setCategoriesList(
+					data.data.map((category: any) => {
+						return {
+							value: category.id,
+							label: category.name,
+						};
+					})
+				);
+			},
+		}
+	);
 	const { control } = useFormContext();
 
 	if (categoryQuery.isSuccess) {

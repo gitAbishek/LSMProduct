@@ -15,8 +15,6 @@
  */
 
 use Masteriyo\Masteriyo;
-use League\Container\Container;
-use Masteriyo\Activation;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -29,6 +27,35 @@ define( 'MASTERIYO_ASSETS', dirname( __FILE__ ) . '/assets' );
 define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
 define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
 define( 'MASTERIYO_PLUGIN_REL_LANGUAGES_PATH', 'i18n/languages' );
+
+// Check for the existence of autoloader file.
+if ( ! file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
+	add_action(
+		'admin_notices',
+		function() {
+			printf(
+				'<div class="notice notice-error is-dismissible"><p><strong>%s </strong>%s</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">%s</span></button></div>',
+				esc_html( 'Masteriyo:' ),
+				wp_kses_post( 'Requires autoloader files to work properly. Run <code>composer update</code> from the wp-content/plugins/wordpress-lms directory.', 'masteriyo' ),
+				esc_html__( 'Dismiss this notice.', 'masteriyo' )
+			);
+		}
+	);
+
+	add_action(
+		'admin_init',
+		function() {
+			deactivate_plugins( plugin_basename( MASTERIYO_PLUGIN_FILE ) );
+
+			if ( isset( $_GET['activate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				unset( $_GET['activate'] );
+			}
+		}
+	);
+
+	return;
+}
 
 /**
  * Include the autoloader.

@@ -26,7 +26,6 @@ define( 'MASTERIYO_PLUGIN_DIR', dirname( __FILE__ ) );
 define( 'MASTERIYO_ASSETS', dirname( __FILE__ ) . '/assets' );
 define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
 define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
-define( 'MASTERIYO_PLUGIN_REL_LANGUAGES_PATH', 'i18n/languages' );
 
 // Check whether assets are built or not.
 if ( ! file_exists( dirname( __FILE__ ) . '/assets/js/build/masteriyo-backend.js' ) ) {

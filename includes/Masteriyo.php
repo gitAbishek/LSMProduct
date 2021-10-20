@@ -151,11 +151,12 @@ class Masteriyo {
 	 * @since 1.0.0
 	 */
 	public function load_text_domain() {
-		load_plugin_textdomain(
-			'masteriyo',
-			false,
-			dirname( plugin_basename( Constants::get( 'MASTERIYO_PLUGIN_FILE' ) ) ) . '/' . Constants::get( 'MASTERIYO_PLUGIN_REL_LANGUAGES_PATH' )
-		);
+		$locale = determine_locale();
+		$locale = apply_filters( 'plugin_locale', $locale, 'masteriyo' );
+
+		unload_textdomain( 'masteriyo' );
+		load_textdomain( 'masteriyo', WP_LANG_DIR . '/masteriyo/masteriyo-' . $locale . '.mo' );
+		load_plugin_textdomain( 'masteriyo', false, plugin_basename( dirname( MASTERIYO_PLUGIN_FILE ) ) . '/i18n/languages' );
 	}
 
 	/**

@@ -831,74 +831,78 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											</Stack>
 										</Collapse>
 
-										<FormControl>
-											<FormLabel minW="160px">
-												{__('Live API Username', 'masteriyo')}
-												<Tooltip
-													label={__(
-														'Get your API credentials from PayPal.',
-														'masteriyo'
-													)}
-													hasArrow
-													fontSize="xs">
-													<Box as="span" sx={infoIconStyles}>
-														<Icon as={BiInfoCircle} />
-													</Box>
-												</Tooltip>
-											</FormLabel>
-											<Input
-												placeholder="Optional"
-												type="text"
-												{...register('payments.paypal.live_api_username')}
-												defaultValue={paymentsData?.paypal?.live_api_username}
-											/>
-										</FormControl>
+										<Collapse in={!showPayPalSandBoxOptions}>
+											<FormControl>
+												<FormLabel minW="160px">
+													{__('Live API Username', 'masteriyo')}
+													<Tooltip
+														label={__(
+															'Get your API credentials from PayPal.',
+															'masteriyo'
+														)}
+														hasArrow
+														fontSize="xs">
+														<Box as="span" sx={infoIconStyles}>
+															<Icon as={BiInfoCircle} />
+														</Box>
+													</Tooltip>
+												</FormLabel>
+												<Input
+													placeholder="Optional"
+													type="text"
+													{...register('payments.paypal.live_api_username')}
+													defaultValue={paymentsData?.paypal?.live_api_username}
+												/>
+											</FormControl>
 
-										<FormControl>
-											<FormLabel minW="160px">
-												{__('Live API Password', 'masteriyo')}
-												<Tooltip
-													label={__(
-														'Get your API credentials from PayPal.',
-														'masteriyo'
-													)}
-													hasArrow
-													fontSize="xs">
-													<Box as="span" sx={infoIconStyles}>
-														<Icon as={BiInfoCircle} />
-													</Box>
-												</Tooltip>
-											</FormLabel>
-											<Input
-												placeholder="Optional"
-												type="password"
-												{...register('payments.paypal.live_api_password')}
-												defaultValue={paymentsData?.paypal?.live_api_password}
-											/>
-										</FormControl>
+											<FormControl>
+												<FormLabel minW="160px">
+													{__('Live API Password', 'masteriyo')}
+													<Tooltip
+														label={__(
+															'Get your API credentials from PayPal.',
+															'masteriyo'
+														)}
+														hasArrow
+														fontSize="xs">
+														<Box as="span" sx={infoIconStyles}>
+															<Icon as={BiInfoCircle} />
+														</Box>
+													</Tooltip>
+												</FormLabel>
+												<Input
+													placeholder="Optional"
+													type="password"
+													{...register('payments.paypal.live_api_password')}
+													defaultValue={paymentsData?.paypal?.live_api_password}
+												/>
+											</FormControl>
 
-										<FormControl>
-											<FormLabel minW="160px">
-												{__('Live API Signature', 'masteriyo')}
-												<Tooltip
-													label={__(
-														'Get your API credentials from PayPal.',
-														'masteriyo'
-													)}
-													hasArrow
-													fontSize="xs">
-													<Box as="span" sx={infoIconStyles}>
-														<Icon as={BiInfoCircle} />
-													</Box>
-												</Tooltip>
-											</FormLabel>
-											<Input
-												placeholder="Optional"
-												type="text"
-												{...register('payments.paypal.live_api_signature')}
-												defaultValue={paymentsData?.paypal?.live_api_signature}
-											/>
-										</FormControl>
+											<FormControl>
+												<FormLabel minW="160px">
+													{__('Live API Signature', 'masteriyo')}
+													<Tooltip
+														label={__(
+															'Get your API credentials from PayPal.',
+															'masteriyo'
+														)}
+														hasArrow
+														fontSize="xs">
+														<Box as="span" sx={infoIconStyles}>
+															<Icon as={BiInfoCircle} />
+														</Box>
+													</Tooltip>
+												</FormLabel>
+												<Input
+													placeholder="Optional"
+													type="text"
+													{...register('payments.paypal.live_api_signature')}
+													defaultValue={
+														paymentsData?.paypal?.live_api_signature
+													}
+												/>
+											</FormControl>
+										</Collapse>
 									</Stack>
 								</Collapse>
 							</Stack>

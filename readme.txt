@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning
 Requires at least: 5.0
 Tested up to: 5.8.1
 Requires PHP: 7.0
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -197,8 +197,15 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
 
+### 1.0.8 - 22-10-2021
+- Tweak - Show admin error notice when assets are not built.
+- Tweak - Show admin error notice when autoload.php file does not exist.
+- Fix - Editor not typing issue.
+- Fix - Design issue in safari.
+- Fix - Elementor width issue.
+
 = 1.0.7 - 18-10-2021 =
-- Fix - Missing translations in react codebase
+- Fix - Missing translations.
 - Fix - Course pricing setting for free option acting inconsistently.
 - Fix - Categories listing issue on add/edit course categories select option for categories greater than 20.
 - Fix - Special chars issue in the course, lesson, section, and quiz name.

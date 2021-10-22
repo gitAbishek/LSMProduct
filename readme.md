@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.0.7
+**Stable tag**: 1.0.8
 
 **License: GNU** General Public License v3.0
 
@@ -47,8 +47,15 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 
 # Changelog
 
+### 1.0.8 - 22-10-2021
+- Tweak - Show admin error notice when assets are not built.
+- Tweak - Show admin error notice when autoload.php file does not exist.
+- Fix - Editor not typing issue.
+- Fix - Design issue in safari.
+- Fix - Elementor width issue.
+
 ### 1.0.7 - 18-10-2021
-- Fix - Missing translations in react codebase
+- Fix - Missing translations.
 - Fix - Course pricing setting for free option acting inconsistently.
 - Fix - Categories listing issue on add/edit course categories select option for categories greater than 20.
 - Fix - Special chars issue in the course, lesson, section, and quiz name.

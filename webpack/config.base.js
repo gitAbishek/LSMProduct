@@ -14,6 +14,7 @@ module.exports = {
 				'assets/js/getting-started',
 				'index.tsx'
 			),
+			account: path.resolve(process.cwd(), 'assets/js/account', 'index.tsx'),
 		},
 		output: path.resolve(process.cwd(), 'assets/js/build'),
 	},

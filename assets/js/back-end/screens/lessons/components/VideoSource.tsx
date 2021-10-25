@@ -125,7 +125,7 @@ const VideoSource: React.FC<Props> = (props) => {
 									? __('Add New Video', 'masteriyo')
 									: __('Add Video', 'masteriyo')
 							}
-							modalTitle={__("Self Hosted Video", 'masteriyo')}
+							modalTitle={__('Self Hosted Video', 'masteriyo')}
 							onSelect={(data: any) => {
 								onComplete(data[0].id);
 							}}

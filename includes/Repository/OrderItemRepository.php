@@ -219,7 +219,7 @@ class OrderItemRepository extends AbstractRepository {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param stdclass $item Order item
+	 * @param stdClass $item Order item
 	 * @return OrderItem
 	 */
 	public function get_order_item_object( $item ) {
@@ -248,7 +248,6 @@ class OrderItemRepository extends AbstractRepository {
 	 * @since 1.0.0
 	 *
 	 * @param OrderItem $item Order item object.
-	 * @param stdclass $item_metas List of all order item meta.
 	 *
 	 * @return
 	 */
@@ -259,7 +258,11 @@ class OrderItemRepository extends AbstractRepository {
 			$function = "set_{$meta_value->key}";
 
 			if ( is_callable( array( $item, $function ) ) ) {
-				$item->$function( maybe_unserialize( $meta_value->value ) );
+				try {
+					call_user_func_array( array( $item, $function ), array( maybe_unserialize( $meta_value->value ) ) );
+				} catch ( \Exception $e ) {
+					$message = $e->getMessage();
+				}
 			}
 		}
 

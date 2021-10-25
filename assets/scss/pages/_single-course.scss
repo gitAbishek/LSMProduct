@@ -3,7 +3,7 @@
 .masteriyo-single-course {
 	display: flex;
 	flex-wrap: wrap;
-	margin-top: $spacing_32px;
+	margin-top: -#{$spacing_15px};
 	margin-left: -#{$spacing_15px};
 	margin-right: -#{$spacing_15px};
 	flex-direction: row;

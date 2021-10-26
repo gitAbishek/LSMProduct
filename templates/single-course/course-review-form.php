@@ -33,7 +33,7 @@ do_action( 'masteriyo_before_single_course_review_form' );
 			<div class="masteriyo-rating">
 				<label class="masteriyo-label"><?php esc_html_e( 'Rating', 'masteriyo' ); ?></label>
 				<input type="hidden" name="rating" value="0" />
-				<div class="masteriyo-stab-rs boxshadow-none ">
+				<div class="masteriyo-stab-rs border-none">
 					<span class="masteriyo-icon-svg masteriyo-flex masteriyo-rstar">
 						<?php masteriyo_render_stars( 0, 'masteriyo-rating-input-icon' ); ?>
 					</span>

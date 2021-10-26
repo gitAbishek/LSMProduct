@@ -277,8 +277,8 @@
 	}
 }
 
-.masteriyo-stab-rs.boxshadow-none {
-	box-shadow: none;
+.masteriyo-stab-rs.border-none {
+	border: none;
 	padding: 0;
 }
 
@@ -668,7 +668,7 @@
 	}
 
 	&-rs {
-		@include masteriyo-shadow-2;
+		border: 1px solid var(--masteriyo-color-border);
 		margin: $spacing_20px auto;
 		padding: $spacing_20px;
 		border-radius: $border_radius_50;
@@ -683,7 +683,7 @@
 		}
 
 		.masteriyo-rnumber {
-			margin-left: $spacing_20px;
+			margin-left: $spacing_8px;
 		}
 	}
 

@@ -75,11 +75,9 @@ const CourseCard: React.FC<Props> = ({
 						.map((_, i) => (
 							<StarEmptyIcon key={i} color={'green'} />
 						))}
-					<Box>
-						<Badge borderRadius="full" px="2" colorScheme="pink" color="white">
-							{tag}
-						</Badge>
-					</Box>
+					<Badge borderRadius="full" px="2" colorScheme="pink" color="white">
+						{tag}
+					</Badge>
 				</Stack>
 
 				<Box mt="1" fontWeight="bold" as="h4" lineHeight="tight" isTruncated>
@@ -128,9 +126,6 @@ const CourseCard: React.FC<Props> = ({
 						rounded={'full'}
 						bg={'blue.600'}
 						color={'white'}
-						boxShadow={
-							'0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-						}
 						_hover={{
 							bg: 'blue.500',
 						}}

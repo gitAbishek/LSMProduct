@@ -22,7 +22,7 @@ do_action( 'masteriyo_before_add_to_cart_button' );
 	</a>
 <?php else : ?>
 	<a href="<?php echo esc_url( $course->add_to_cart_url() ); ?>" class="masteriyo-course--btn masteriyo-btn masteriyo-btn-primary">
-		<?php apply_filters( 'masteriyo_add_to_cart_text', esc_html_e( 'Add to cart', 'masteriyo' ) ); ?>
+		<?php echo esc_html( apply_filters( 'masteriyo_add_to_cart_text', __( 'Add to cart', 'masteriyo' ) ) ); ?>
 	</a>
 <?php endif; ?>
 

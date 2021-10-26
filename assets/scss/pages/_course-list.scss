@@ -79,12 +79,12 @@
 		width: 100%;
 		flex-basis: auto;
 		align-self: baseline;
-		@include masteriyo-shadow-2;
 		border-radius: $border_radius_8;
+		background-color: var(--masteriyo-color-white);
+		border: 1px solid rgba(0, 0, 0, 0.1);
 
 		&:hover,
 		&:focus {
-			box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
 			transition: 0.5s ease;
 		}
 
@@ -129,7 +129,6 @@
 
 .masteriyo-course--content {
 	padding: $spacing_20px;
-	background-color: var(--masteriyo-color-white);
 
 	// Category list.
 	&__category {

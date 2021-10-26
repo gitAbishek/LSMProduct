@@ -8,5 +8,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "typescript.preferences.jsxAttributeCompletionStyle": "braces",
-  "javascript.preferences.jsxAttributeCompletionStyle": "braces"
+  "javascript.preferences.jsxAttributeCompletionStyle": "braces",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.eol": "\n"
 }

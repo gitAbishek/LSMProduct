@@ -16,7 +16,7 @@ const CoursesData = [
 		id: 2,
 		imageUrl:
 			'https://www.freecodecamp.org/news/content/images/2020/05/Python-language.png',
-		tag: 'Audio Book',
+		tag: 'Book',
 		time: 15,
 		percent: 15,
 		title: 'Python Courses',

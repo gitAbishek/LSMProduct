@@ -7,7 +7,7 @@ const Achievement = () => {
 			<Stack px={10}>
 				<Heading>My Achievements</Heading>
 				<Box py={10}>
-					<Alert status="success">
+					<Alert colorScheme={'blue.200'}>
 						You have no achievements yet. Enroll in course to get an
 						achievements
 					</Alert>

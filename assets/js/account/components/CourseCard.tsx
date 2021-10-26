@@ -12,7 +12,7 @@ import moment from 'moment';
 import React from 'react';
 import { default as StarEmptyIcon } from '../../../img/svgs/star-empty.js';
 import { default as StarFullIcon } from '../../../img/svgs/star-full.js';
-import { default as StarHalfIcon } from '../../../img/svgs/star-half.svg';
+import { default as StarHalfIcon } from '../../../img/svgs/star-half.js';
 
 interface Props {
 	id: number;
@@ -68,10 +68,7 @@ const CourseCard: React.FC<Props> = ({
 					{Array(noOfHalfStars)
 						.fill('')
 						.map((_, i) => (
-							<StarHalfIcon
-								key={i}
-								color={i < roundedRating ? '#FD739C' : 'gray.300'}
-							/>
+							<StarHalfIcon key={i} color={'green'} />
 						))}
 					{Array(noOfEmptyStars)
 						.fill('')

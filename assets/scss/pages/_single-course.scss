@@ -10,8 +10,8 @@
 
 	&--main {
 		background-color: var(--masteriyo-color-white);
-		@include masteriyo-shadow-1;
 		border-radius: $border_radius_8;
+		border: 1px solid var(--masteriyo-color-border);
 		flex: 0 0 70%;
 		height: 100%;
 		padding: 0;
@@ -72,12 +72,12 @@
 		flex-basis: 100%;
 		width: 100%;
 		height: fit-content;
-		@include masteriyo-shadow-1;
 		border-radius: $border_radius_8;
 		display: flex;
 		flex-direction: column;
 		padding-top: $spacing_24px;
 		padding-bottom: $spacing_24px;
+		border: 1px solid var(--masteriyo-color-border);
 
 		.masteriyo-time-btn {
 			padding: 0 $spacing_24px $spacing_24px;
@@ -137,7 +137,7 @@
 	.masteriyo-course--content {
 		//Image
 		.masteriyo-course--img-wrap {
-			margin-bottom: $spacing_28px;
+			margin-bottom: $spacing_20px;
 		}
 
 		//Title
@@ -218,8 +218,8 @@
 
 			.current-amount {
 				font-size: 24px;
-				color: var(--masteriyo-color-primary);
-				font-weight: bold;
+				color: var(--masteriyo-color-text);
+				font-weight: 700;
 			}
 		}
 
@@ -358,9 +358,71 @@
 	}
 
 	// Curriculum tab
+	.tab-content {
+		.masteriyo-stab--shortinfo {
+			padding-bottom: $spacing_24px;
+			padding-left: $spacing_32px;
+			padding-right: $spacing_32px;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+
+			.title-container {
+				display: flex;
+				flex-direction: column;
+
+				.title {
+					margin: 0;
+					font-weight: 500;
+					font-size: 24px;
+					line-height: 28px;
+					margin-bottom: $spacing_12px;
+				}
+			}
+		}
+
+		ul.masteriyo-shortinfo-wrap {
+			list-style: none;
+			display: flex;
+			flex-direction: row;
+			margin: inherit;
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 16px;
+			letter-spacing: 0.005em;
+			padding: 0;
+			margin-left: -#{$spacing_8px};
+			margin-right: -#{$spacing_8px};
+		}
+
+		ul.masteriyo-shortinfo-wrap li {
+			margin-left: $spacing_8px;
+			margin-right: $spacing_8px;
+
+			&:first-child::before {
+				display: none;
+			}
+
+			&::before {
+				content: "";
+				background: var(--masteriyo-color-grey-dark);
+				display: inline-block;
+				width: 0.3em;
+				height: 0.3em;
+				margin: 0 $spacing_4px $spacing_2px 0;
+				border-radius: $border_radius_50;
+			}
+		}
+
+		.masteriyo-expand-collape-all {
+			cursor: pointer;
+			text-decoration: none;
+		}
+	}
+
 	&--tcurriculum {
 		.masteriyo-stab--shortinfo {
-			border-bottom: 2px solid var(--masteriyo-color-border);
 			padding-bottom: $spacing_24px;
 			padding-left: $spacing_32px;
 			padding-right: $spacing_32px;
@@ -421,16 +483,25 @@
 			text-decoration: none;
 		}
 
+		& > div {
+			&:not(:first-child) {
+				border-top: 1px solid var(--masteriyo-color-border);
+			}
+
+			&:nth-child(2) {
+				border-top-width: 2px;
+			}
+		}
+
 		.masteriyo-stab--citems {
-			border-bottom: 1px solid var(--masteriyo-color-border);
 			cursor: pointer;
+
+			&:first-of-type {
+				border-top-width: 2px;
+			}
 
 			.masteriyo-cminus {
 				display: none;
-			}
-
-			&:last-of-type {
-				border: none;
 			}
 
 			.masteriyo-cplus {

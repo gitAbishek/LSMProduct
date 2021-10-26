@@ -81,7 +81,7 @@
 		align-self: baseline;
 		border-radius: $border_radius_8;
 		background-color: var(--masteriyo-color-white);
-		border: 1px solid rgba(0, 0, 0, 0.1);
+		border: 1px solid var(--masteriyo-color-border);
 
 		&:hover,
 		&:focus {

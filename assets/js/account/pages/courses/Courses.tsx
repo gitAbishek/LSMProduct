@@ -3,15 +3,16 @@ import { Box, Button, Container, Heading, Stack } from '@chakra-ui/react';
 import React from 'react';
 import CourseCard from '../../components/CourseCard';
 import Achievement from '../achievements/Achievement';
+import Certificate from '../certificates/Certificate';
 import data from './CoursesData';
 
 const Courses: React.FC = () => {
 	return (
 		<>
 			<Container maxW="container.lg">
-				<Box mt={10}>
+				<Box py={20}>
 					<Heading px={10}>My Courses</Heading>
-					<Stack direction="row" spacing="7" m={10}>
+					<Stack direction="row" spacing="7" m={10} display={{ md: 'flex' }}>
 						{data.map((itemProps, key) => {
 							return <CourseCard key={key} {...itemProps} />;
 						})}
@@ -28,6 +29,7 @@ const Courses: React.FC = () => {
 					</Box>
 				</Box>
 				<Achievement />
+				<Certificate />
 			</Container>
 		</>
 	);

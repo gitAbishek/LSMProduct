@@ -3,7 +3,7 @@ import React from 'react';
 
 const Achievement = () => {
 	return (
-		<Box mt={10}>
+		<Box py={10}>
 			<Stack px={10}>
 				<Heading>My Achievements</Heading>
 				<Box py={10}>

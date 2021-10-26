@@ -2,7 +2,7 @@
 .masteriyo-form-container {
 	width: 36em;
 	padding: $spacing_40px;
-	@include masteriyo-shadow-1;
+	border: 1px solid var(--masteriyo-color-border);
 	@include masteriyo-default-border;
 }
 

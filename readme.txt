@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning
 Requires at least: 5.0
 Tested up to: 5.8.1
 Requires PHP: 7.0
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -197,7 +197,12 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
 
-### 1.0.8 - 22-10-2021
+= 1.0.9 - 26-10-2021
+- Fix - Add to cart button text filter in courses and single course page.
+- Fix - Backend order API listing issue when the course in order is deleted.
+- Tweak - Changed single course heading tag to h1.
+
+= 1.0.8 - 22-10-2021
 - Tweak - Show admin error notice when assets are not built.
 - Tweak - Show admin error notice when autoload.php file does not exist.
 - Fix - Editor not typing issue.

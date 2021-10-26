@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.0.8
+**Stable tag**: 1.0.9
 
 **License: GNU** General Public License v3.0
 
@@ -46,6 +46,11 @@ A complete solution to create and sell online courses. The plugin is powered by 
 No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
 # Changelog
+
+### 1.0.9 - 26-10-2021
+- Fix - Add to cart button text filter in courses and single course page.
+- Fix - Backend order API listing issue when the course in order is deleted.
+- Tweak - Changed single course heading tag to h1.
 
 ### 1.0.8 - 22-10-2021
 - Tweak - Show admin error notice when assets are not built.

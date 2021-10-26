@@ -6,6 +6,11 @@ import {
 	Container,
 	Flex,
 	Stack,
+	Tab,
+	TabList,
+	TabPanel,
+	TabPanels,
+	Tabs,
 	Text,
 } from '@chakra-ui/react';
 import React from 'react';
@@ -41,7 +46,24 @@ const Dashboard = () => {
 						<Center>Dashboard</Center>
 					</Box>
 				</Stack>
+				<Stack direction="column" mt={10} px={10}>
+					<Tabs variant="soft-rounded" colorScheme="green" direction="column">
+						<TabList>
+							<Tab>Tab 1</Tab>
+							<Tab>Tab 2</Tab>
+						</TabList>
+						<TabPanels>
+							<TabPanel>
+								<p>one!</p>
+							</TabPanel>
+							<TabPanel>
+								<p>two!</p>
+							</TabPanel>
+						</TabPanels>
+					</Tabs>
+				</Stack>
 			</Container>
+
 			<Courses />
 		</Flex>
 	);

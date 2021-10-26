@@ -11,7 +11,9 @@ const Courses: React.FC = () => {
 		<>
 			<Container maxW="container.lg">
 				<Box py={20}>
-					<Heading px={10}>My Courses</Heading>
+					<Heading as="h1" size="xl" px={10}>
+						My Courses
+					</Heading>
 					<Stack direction="row" spacing="7" m={10} display={{ md: 'flex' }}>
 						{data.map((itemProps, key) => {
 							return <CourseCard key={key} {...itemProps} />;

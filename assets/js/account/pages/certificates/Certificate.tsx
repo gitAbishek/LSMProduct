@@ -9,7 +9,9 @@ const Certificate = () => {
 		<>
 			<Box py={5}>
 				<Stack px={10}>
-					<Heading>My Certificates</Heading>
+					<Heading as="h1" size="xl">
+						My Certificates
+					</Heading>
 				</Stack>
 			</Box>
 			<Flex px={5}>
@@ -33,7 +35,7 @@ const Certificate = () => {
 					color="#7C7D8F"
 					borderRadius="20px"
 					variant="outline">
-					SHOW ALL Certificates
+					SHOW ALL CERTIFICATES
 				</Button>
 			</Box>
 		</>

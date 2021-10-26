@@ -5,9 +5,11 @@ const Achievement = () => {
 	return (
 		<Box py={10}>
 			<Stack px={10}>
-				<Heading>My Achievements</Heading>
+				<Heading as="h1" size="xl">
+					My Achievements
+				</Heading>
 				<Box py={10}>
-					<Alert colorScheme={'blue.200'}>
+					<Alert colorScheme={'blue.200'} color={'blue.400'} borderRadius={5}>
 						You have no achievements yet. Enroll in course to get an
 						achievements
 					</Alert>

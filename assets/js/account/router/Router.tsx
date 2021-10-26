@@ -7,6 +7,7 @@ import MyCourses from '../pages/courses/MyCouses';
 import Dashboard from '../pages/dashboard/Dashboard';
 import Header from '../pages/Header';
 import OrderHistory from '../pages/order-history/OrderHistory';
+import ProfilePage from '../pages/ProfilePage';
 
 const Router: React.FC = () => {
 	return (
@@ -27,6 +28,9 @@ const Router: React.FC = () => {
 						</Route>
 						<Route>
 							<Dashboard />
+						</Route>
+						<Route path={routes.profilePage} exact>
+							<ProfilePage />
 						</Route>
 					</Switch>
 				</Stack>

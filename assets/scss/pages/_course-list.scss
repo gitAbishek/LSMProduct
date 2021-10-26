@@ -135,7 +135,7 @@
 	&__category {
 		display: flex;
 		flex-wrap: wrap;
-		margin: -#{$spacing_2px} -#{$spacing_4px} $spacing_2px -#{$spacing_4px};
+		margin: -#{$spacing_2px} -#{$spacing_2px} $spacing_4px -#{$spacing_2px};
 
 		&-items {
 			font-size: 10px;
@@ -147,7 +147,7 @@
 			color: var(--masteriyo-color-primary);
 			border-radius: $border_radius_50;
 			border: 1px solid rgba(0, 0, 0, 0.1);
-			margin: $spacing_2px $spacing_4px;
+			margin: $spacing_2px;
 		}
 	}
 

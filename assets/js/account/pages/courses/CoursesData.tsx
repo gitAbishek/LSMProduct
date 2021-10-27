@@ -32,7 +32,7 @@ const CoursesData = [
 		time: 13,
 		percent: 90,
 		title: 'Swift Courses',
-		rating: 3.2,
+		rating: 3.5,
 		started: new Date('Jan 5, 2020'),
 		progressValue: 90,
 	},

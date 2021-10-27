@@ -21,18 +21,20 @@ defined( 'ABSPATH' ) || exit;
 		<?php checked( $gateway->is_chosen(), true ); ?>
 		data-order_button_text="<?php echo esc_attr( $gateway->get_order_button_text() ); ?>" />
 
-	<label for="payment_method_<?php echo esc_attr( $gateway->get_name() ); ?>" class="masteriyo-label">
-		<?php
-			echo esc_html( $gateway->get_title() );
-			echo wp_kses_post( $gateway->get_icon() );
-		?>
-	</label>
+	<div class="payment-method__detail">
+		<label for="payment-method-<?php echo esc_attr( $gateway->get_name() ); ?>" class="masteriyo-label">
+			<?php
+				echo esc_html( $gateway->get_title() );
+				echo wp_kses_post( $gateway->get_icon() );
+			?>
+		</label>
 
-	<?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
-		<div class="payment-box payment-method-<?php echo esc_attr( $gateway->get_name() ); ?>" <?php ( ! $gateway->is_chosen() ) ? 'style="display:block;' : ''; ?>>
-			<?php $gateway->payment_fields(); ?>
-		</div>
-	<?php endif; ?>
+		<?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
+			<div class="payment-box payment-method-<?php echo esc_attr( $gateway->get_name() ); ?>" <?php ( ! $gateway->is_chosen() ) ? 'style="display:block;' : ''; ?>>
+				<?php $gateway->payment_fields(); ?>
+			</div>
+		<?php endif; ?>
+	</div>
 </li>
 <?php
 

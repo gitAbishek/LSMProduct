@@ -1,5 +1,6 @@
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Button, Flex, Heading, Spacer, Stack } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React from 'react';
 import CertificateCard from '../../components/CertificateCard';
 import data from './CertificateData';
@@ -10,17 +11,17 @@ const Certificate = () => {
 			<Box py={5}>
 				<Stack px={10}>
 					<Heading as="h1" size="xl">
-						My Certificates
+						{__('My Certificates', 'masteriyo')}
 					</Heading>
 				</Stack>
 			</Box>
 			<Flex px={5}>
 				<Box p="4" fontWeight={'bold'}>
-					COURSES
+					{__('COURSES', 'masteriyo')}
 				</Box>
 				<Spacer />
 				<Box p="4" fontWeight={'bold'}>
-					CERTIFICATE
+					{__('CERTIFICATE', 'masteriyo')}
 				</Box>
 			</Flex>
 
@@ -35,7 +36,7 @@ const Certificate = () => {
 					color="#7C7D8F"
 					borderRadius="20px"
 					variant="outline">
-					SHOW ALL CERTIFICATES
+					{__('SHOW ALL CERTIFICATES', 'masteriyo')}
 				</Button>
 			</Box>
 		</>

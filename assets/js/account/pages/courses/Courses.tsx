@@ -1,5 +1,6 @@
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Button, Container, Heading, Stack } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React from 'react';
 import CourseCard from '../../components/CourseCard';
 import Achievement from '../achievements/Achievement';
@@ -12,7 +13,7 @@ const Courses: React.FC = () => {
 			<Container maxW="container.lg">
 				<Box py={20}>
 					<Heading as="h1" size="xl" px={10}>
-						My Courses
+						{__('My Courses', 'masteriyo')}
 					</Heading>
 					<Stack direction="row" spacing="7" m={10} display={{ md: 'flex' }}>
 						{data.map((itemProps, key) => {
@@ -26,7 +27,7 @@ const Courses: React.FC = () => {
 							color="#7C7D8F"
 							borderRadius="20px"
 							variant="outline">
-							SHOW ALL COURSES
+							{__('SHOW ALL COURSES', 'masteriyo')}
 						</Button>
 					</Box>
 				</Box>

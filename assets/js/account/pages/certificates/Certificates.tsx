@@ -2,10 +2,10 @@ import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Button, Flex, Heading, Spacer, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import CertificateCard from '../../components/CertificateCard';
+import Certificate from '../../components/Certificate';
 import data from './CertificateData';
 
-const Certificate = () => {
+const Certificates = () => {
 	return (
 		<>
 			<Box py={5}>
@@ -26,15 +26,15 @@ const Certificate = () => {
 			</Flex>
 
 			{data.map((itemProps, key) => {
-				return <CertificateCard key={key} {...itemProps} />;
+				return <Certificate key={key} {...itemProps} />;
 			})}
 
 			<Box px={10} py={10}>
 				<Button
-					rightIcon={<ChevronRightIcon boxSize={6} />}
-					colorScheme="gray.100"
-					color="#7C7D8F"
-					borderRadius="20px"
+					rightIcon={<ChevronRightIcon boxSize={6} color={'gray.500'} />}
+					color="gray.500"
+					borderRadius="md"
+					borderColor="gray.400"
 					variant="outline">
 					{__('SHOW ALL CERTIFICATES', 'masteriyo')}
 				</Button>
@@ -43,4 +43,4 @@ const Certificate = () => {
 	);
 };
 
-export default Certificate;
+export default Certificates;

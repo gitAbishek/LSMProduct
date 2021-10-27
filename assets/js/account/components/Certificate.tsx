@@ -15,7 +15,7 @@ interface Props {
 	title: string;
 }
 
-const CertificateCard: React.FC<Props> = ({ id, title }) => {
+const Certificate: React.FC<Props> = ({ id, title }) => {
 	return (
 		<Flex px={2}>
 			<Box p="4">
@@ -44,4 +44,4 @@ const CertificateCard: React.FC<Props> = ({ id, title }) => {
 	);
 };
 
-export default CertificateCard;
+export default Certificate;

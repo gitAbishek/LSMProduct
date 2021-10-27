@@ -8,7 +8,7 @@ const CoursesData = [
 		percent: 50,
 		title: 'DJango Courses',
 		rating: 4.6,
-		started: new Date('Jan 5, 2020'),
+		started: 'Jan 5, 2020',
 		progressValue: 50,
 	},
 
@@ -21,7 +21,7 @@ const CoursesData = [
 		percent: 15,
 		title: 'Python Courses',
 		rating: 3.4,
-		started: new Date('Jan 5, 2020'),
+		started: 'Jan 5, 2020',
 		progressValue: 15,
 	},
 
@@ -33,7 +33,7 @@ const CoursesData = [
 		percent: 90,
 		title: 'Swift Courses',
 		rating: 3.5,
-		started: new Date('Jan 5, 2020'),
+		started: 'Jan 5, 2020',
 		progressValue: 90,
 	},
 ];

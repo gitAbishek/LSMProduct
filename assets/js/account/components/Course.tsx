@@ -1,4 +1,4 @@
-import { TimeIcon } from '@chakra-ui/icons';
+import { StarIcon, TimeIcon } from '@chakra-ui/icons';
 import {
 	Badge,
 	Box,
@@ -8,12 +8,9 @@ import {
 	Stack,
 	Text,
 } from '@chakra-ui/react';
-import moment from 'moment';
 import React from 'react';
-import { default as StarEmptyIcon } from '../../../img/svgs/star-empty.js';
-import { default as StarFullIcon } from '../../../img/svgs/star-full.js';
-import { default as StarHalfIcon } from '../../../img/svgs/star-half.js';
-
+import { BsStarHalf } from 'react-icons/bs';
+import { ImStarEmpty } from 'react-icons/im';
 interface Props {
 	id: number;
 	title: string;
@@ -23,10 +20,10 @@ interface Props {
 	time: number;
 	percent: number;
 	progressValue: number;
-	started: Date;
+	started: string;
 }
 
-const CourseCard: React.FC<Props> = ({
+const Course: React.FC<Props> = ({
 	id,
 	title,
 	imageUrl,
@@ -52,9 +49,8 @@ const CourseCard: React.FC<Props> = ({
 		<Box
 			maxW="sm"
 			borderWidth="1px"
-			// borderRadius="lg"
 			borderRadius="none"
-			borderColor="hsl(240deg 8% 93% / 60%)"
+			borderColor="gray.100"
 			overflow="hidden">
 			<Image src={imageUrl} alt={`${title} image`} />
 			<Box p="6">
@@ -62,18 +58,18 @@ const CourseCard: React.FC<Props> = ({
 					{Array(noOfFullStars)
 						.fill('')
 						.map((_, i) => (
-							<StarFullIcon key={i} color={'green'} />
+							<StarIcon key={i} />
 						))}
 
 					{Array(noOfHalfStars)
 						.fill('')
 						.map((_, i) => (
-							<StarHalfIcon key={i} color={'green'} />
+							<BsStarHalf key={i} />
 						))}
 					{Array(noOfEmptyStars)
 						.fill('')
 						.map((_, i) => (
-							<StarEmptyIcon key={i} color={'green'} />
+							<ImStarEmpty key={i} />
 						))}
 					<Badge borderRadius="full" px="2" colorScheme="pink" color="white">
 						{tag}
@@ -118,7 +114,7 @@ const CourseCard: React.FC<Props> = ({
 						_focus={{
 							bg: 'gray.200',
 						}}>
-						{'Started ' + moment(started).format('MMMM D, YYYY')}
+						{'Started ' + started}
 					</Text>
 					<Button
 						flex={1}
@@ -140,4 +136,4 @@ const CourseCard: React.FC<Props> = ({
 	);
 };
 
-export default CourseCard;
+export default Course;

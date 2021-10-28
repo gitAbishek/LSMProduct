@@ -8,15 +8,14 @@ import {
 	Stack,
 	Text,
 } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BsStarHalf } from 'react-icons/bs';
-import { ImStarEmpty } from 'react-icons/im';
+
 interface Props {
 	id: number;
 	title: string;
 	imageUrl: string;
 	tag: string;
-	rating: number;
 	time: number;
 	percent: number;
 	progressValue: number;
@@ -28,49 +27,22 @@ const Course: React.FC<Props> = ({
 	title,
 	imageUrl,
 	tag,
-	rating,
 	started,
 	time,
 	percent,
 	progressValue,
 }) => {
-	const totalNumberOfStars = 5;
-	const roundedRating =
-		(Math.floor(rating / (totalNumberOfStars / 10)) * totalNumberOfStars) / 10;
-	const noOfFullStars = Math.floor(roundedRating);
-	const noOfHalfStars = noOfFullStars !== roundedRating ? 1 : 0;
-	const noOfEmptyStars = Math.floor(
-		totalNumberOfStars - noOfFullStars - noOfHalfStars
-	);
-
-	console.log(noOfFullStars, noOfHalfStars, noOfEmptyStars, roundedRating);
-
 	return (
-		<Box
-			maxW="sm"
-			borderWidth="1px"
-			borderRadius="none"
-			borderColor="gray.100"
-			overflow="hidden">
+		<Box maxW="sm" borderWidth="1px" borderColor="gray.100" overflow="hidden">
 			<Image src={imageUrl} alt={`${title} image`} />
 			<Box p="6">
 				<Stack direction={'row'} spacing={4}>
-					{Array(noOfFullStars)
+					{Array(5)
 						.fill('')
 						.map((_, i) => (
 							<StarIcon key={i} />
 						))}
 
-					{Array(noOfHalfStars)
-						.fill('')
-						.map((_, i) => (
-							<BsStarHalf key={i} />
-						))}
-					{Array(noOfEmptyStars)
-						.fill('')
-						.map((_, i) => (
-							<ImStarEmpty key={i} />
-						))}
 					<Badge borderRadius="full" px="2" colorScheme="pink" color="white">
 						{tag}
 					</Badge>
@@ -84,22 +56,23 @@ const Course: React.FC<Props> = ({
 					<Text
 						flex={1}
 						fontSize={13}
-						color={'#424360'}
+						color={'gray.400'}
 						fontWeight={'500'}
 						_focus={{
 							bg: 'gray.200',
 						}}>
-						<TimeIcon /> {time} hrs
+						<TimeIcon /> {time}
+						{__('hrs', 'masteriyo')}
 					</Text>
 					<Text
 						flex={1}
 						fontSize={13}
 						fontWeight={'500'}
-						color={'#7C7D8F'}
+						color={'gray.500'}
 						_focus={{
-							bg: '#424360',
+							bg: 'gray.200',
 						}}>
-						{percent}% Complete
+						{percent}% {__('Complete', 'masteriyo')}
 					</Text>
 				</Stack>
 				<Box mt={5}>
@@ -110,7 +83,7 @@ const Course: React.FC<Props> = ({
 					<Text
 						flex={1}
 						fontSize={12}
-						color={'#7C7D8F'}
+						color={'gray.500'}
 						_focus={{
 							bg: 'gray.200',
 						}}>

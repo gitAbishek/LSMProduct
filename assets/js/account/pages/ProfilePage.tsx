@@ -60,132 +60,112 @@ const ProfilePage = () => {
 											alt="Segun Adebayo"
 											borderRadius="full"
 											boxSize="10rem"
-											border="2px solid #f1f1f1"
+											border="2px"
+											borderColor="gray.100"
 											mt="5"
 										/>
 										<Stack direction="column" spacing="8">
 											<Box>
-												<Text as="h3" fontSize="2.25rem" fontWeight="500">
+												<Text as="h3" fontSize="4xl" fontWeight="medium">
 													{__('Jamie Oliver', 'masteriyo')}
 												</Text>
 												<Text
 													as="span"
-													color="#acacbe"
-													fontSize="0.9rem"
-													fontWeight="500">
+													color="gray.400"
+													fontSize="sm"
+													fontWeight="medium">
 													{__('Gold Member', 'masteriyo')}
 												</Text>
 											</Box>
 											<Table>
 												<Tr>
 													<Td
-														fontSize="0.9rem"
-														fontWeight="500"
-														color="#000000"
+														fontSize="sm"
+														fontWeight="medium"
+														color="black"
 														pl="0"
 														borderBottom="none">
 														{__('Email', 'masteriyo')}
 													</Td>
-													<Td
-														fontSize="0.9rem"
-														color="#7C7D8F"
-														borderBottom="none">
+													<Td fontSize="sm" color="gray" borderBottom="none">
 														{__('jamie.oliver@gmail.com', 'masteriyo')}
 													</Td>
 												</Tr>
 												<Tr>
 													<Td
-														fontSize="0.9rem"
-														fontWeight="500"
-														color="#000000"
+														fontSize="md"
+														fontWeight="medium"
+														color="black"
 														pl="0"
 														borderBottom="none">
 														{__('Contact Number', 'masteriyo')}
 													</Td>
-													<Td
-														fontSize="0.9rem"
-														color="#7C7D8F"
-														borderBottom="none">
-														{__('+8 123-489-1236', 'masteriyo')}
+													<Td fontSize="sm" color="gray" borderBottom="none">
+														{__('123-456-7980', 'masteriyo')}
 													</Td>
 												</Tr>
 												<Tr>
 													<Td
-														fontSize="0.9rem"
-														fontWeight="500"
-														color="#000000"
+														fontSize="sm"
+														fontWeight="medium"
+														color="black"
 														pl="0"
 														borderBottom="none">
 														{__('Address', 'masteriyo')}
 													</Td>
-													<Td
-														fontSize="0.9rem"
-														color="#7C7D8F"
-														borderBottom="none">
+													<Td fontSize="sm" color="gray" borderBottom="none">
 														{__('123 Moon Street, Mars', 'masteriyo')}
 													</Td>
 												</Tr>
 												<Tr>
 													<Td
-														fontSize="0.9rem"
-														fontWeight="500"
-														color="#000000"
+														fontSize="sm"
+														fontWeight="medium"
+														color="black"
 														pl="0"
 														borderBottom="none">
 														{__('City', 'masteriyo')}
 													</Td>
-													<Td
-														fontSize="0.9rem"
-														color="#7C7D8F"
-														borderBottom="none">
+													<Td fontSize="sm" color="gray" borderBottom="none">
 														{__('Nuwa', 'masteriyo')}
 													</Td>
 												</Tr>
 												<Tr>
 													<Td
-														fontSize="0.9rem"
-														fontWeight="500"
-														color="#000000"
+														fontSize="sm"
+														fontWeight="medium"
+														color="black"
 														pl="0"
 														borderBottom="none">
 														{__('State', 'masteriyo')}
 													</Td>
-													<Td
-														fontSize="0.9rem"
-														color="#7C7D8F"
-														borderBottom="none">
+													<Td fontSize="sm" color="gray" borderBottom="none">
 														{__('Abiboo', 'masteriyo')}
 													</Td>
 												</Tr>
 												<Tr>
 													<Td
-														fontSize="0.9rem"
-														fontWeight="500"
-														color="#000000"
+														fontSize="sm"
+														fontWeight="medium"
+														color="black"
 														pl="0"
 														borderBottom="none">
 														{__('Zip Code', 'masteriyo')}
 													</Td>
-													<Td
-														fontSize="0.9rem"
-														color="#7C7D8F"
-														borderBottom="none">
+													<Td fontSize="sm" color="gray" borderBottom="none">
 														{__('8899', 'masteriyo')}
 													</Td>
 												</Tr>
 												<Tr>
 													<Td
-														fontSize="0.9rem"
-														fontWeight="500"
-														color="#000000"
+														fontSize="sm"
+														fontWeight="medium"
+														color="black"
 														pl="0"
 														borderBottom="none">
 														{__('Country', 'masteriyo')}
 													</Td>
-													<Td
-														fontSize="0.9rem"
-														color="#7C7D8F"
-														borderBottom="none">
+													<Td fontSize="sm" color="gray" borderBottom="none">
 														{__('Sinara', 'masteriyo')}
 													</Td>
 												</Tr>

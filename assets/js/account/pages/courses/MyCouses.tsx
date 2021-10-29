@@ -7,7 +7,7 @@ import Achievement from '../achievements/Achievement';
 import Certificates from '../certificates/Certificates';
 import data from './CoursesData';
 
-const Courses: React.FC = () => {
+const MyCourses: React.FC = () => {
 	return (
 		<>
 			<Container maxW="container.lg">
@@ -38,4 +38,4 @@ const Courses: React.FC = () => {
 	);
 };
 
-export default Courses;
+export default MyCourses;

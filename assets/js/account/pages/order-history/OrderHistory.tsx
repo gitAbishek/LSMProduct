@@ -10,11 +10,19 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
+import data from './OrderData';
 
-const OrderHistory = () => {
+interface Props {
+	order: string;
+	date: string;
+	status: string;
+	total: number;
+}
+
+const OrderHistory: React.FC<Props> = ({ order, date, status, total }) => {
 	return (
 		<Container maxWidth="xl" py={10}>
-			<Box bg="white" shadow="box" w="full">
+			<Box bg="white" shadow="box">
 				<Table variant="simple">
 					<Thead>
 						<Tr>
@@ -26,13 +34,15 @@ const OrderHistory = () => {
 						</Tr>
 					</Thead>
 					<Tbody>
-						<Tr>
-							<Td>666</Td>
-							<Td>October 29, 2021</Td>
-							<Td>On Hold</Td>
-							<Td>$39.90 for 1 item</Td>
-							<Td>View</Td>
-						</Tr>
+						{data.map((data, key) => {
+							<Tr key={key}>
+								<Td>{data.order}</Td>
+								<Td>{data.date}</Td>
+								<Td>{data.status}</Td>
+								<Td>{data.total} for 1 item</Td>
+								<Td>{__('View', 'masteriyo')}</Td>
+							</Tr>;
+						})}
 					</Tbody>
 				</Table>
 			</Box>

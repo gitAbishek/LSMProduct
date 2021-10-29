@@ -1,25 +1,10 @@
-import {
-	Box,
-	Container,
-	Table,
-	Tbody,
-	Td,
-	Th,
-	Thead,
-	Tr,
-} from '@chakra-ui/react';
+import { Box, Container, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import data from './OrderData';
+import OrderHistoryItem from '../../components/OrderHistoryItem';
+import data from '../../dummyData/OrderHistoryData';
 
-interface Props {
-	order: string;
-	date: string;
-	status: string;
-	total: number;
-}
-
-const OrderHistory: React.FC<Props> = ({ order, date, status, total }) => {
+const OrderHistory: React.FC = () => {
 	return (
 		<Container maxWidth="xl" py={10}>
 			<Box bg="white" shadow="box">
@@ -34,14 +19,8 @@ const OrderHistory: React.FC<Props> = ({ order, date, status, total }) => {
 						</Tr>
 					</Thead>
 					<Tbody>
-						{data.map((data, key) => {
-							<Tr key={key}>
-								<Td>{data.order}</Td>
-								<Td>{data.date}</Td>
-								<Td>{data.status}</Td>
-								<Td>{data.total} for 1 item</Td>
-								<Td>{__('View', 'masteriyo')}</Td>
-							</Tr>;
+						{data.map((itemProps, key) => {
+							return <OrderHistoryItem key={key} {...itemProps} />;
 						})}
 					</Tbody>
 				</Table>

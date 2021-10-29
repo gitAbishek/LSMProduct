@@ -2,7 +2,7 @@ import {
 	Badge,
 	Box,
 	Button,
-	HStack,
+	Heading,
 	Icon,
 	Image,
 	Progress,
@@ -11,8 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiStar } from 'react-icons/bi';
-import { WiTime4 } from 'react-icons/wi';
+import { BiStar, BiTime } from 'react-icons/bi';
 
 interface Props {
 	id: number;
@@ -35,86 +34,80 @@ const CourseItem: React.FC<Props> = ({
 	progressValue,
 }) => {
 	return (
-		<Box maxW="sm" borderWidth="1px" borderColor="gray.100" overflow="hidden">
+		<Box borderWidth="1px" borderColor="gray.100">
 			<Image src={imageUrl} alt={`${title} image`} />
-			<Box p="6">
-				<Stack direction="row" spacing="3">
-					<Stack direction="row" spacing="1">
-						{Array(5)
-							.fill('')
-							.map((_, i) => (
-								<Icon as={BiStar} key={i} />
-							))}
+			<Stack direction="column" p="6" spacing="3">
+				<Stack direction="column" spacing="6">
+					<Stack direction="column" spacing="3">
+						<Stack direction="row" spacing="3">
+							<Stack direction="row" spacing="1">
+								{Array(5)
+									.fill('')
+									.map((_, i) => (
+										<Icon as={BiStar} key={i} />
+									))}
+							</Stack>
+							<Badge
+								borderRadius="full"
+								bg="pink.500"
+								fontSize="xx-small"
+								color="white">
+								{tag}
+							</Badge>
+						</Stack>
+
+						<Heading as="h3" fontSize="lg">
+							{title}
+						</Heading>
 					</Stack>
-					<Badge
-						borderRadius="full"
-						bg="pink.500"
-						fontSize="xx-small"
-						color="white">
-						{tag}
-					</Badge>
-				</Stack>
 
-				<Box mt="2" fontWeight="bold" as="h4" lineHeight="tight" isTruncated>
-					{title}
-				</Box>
-
-				<Stack mt={8} direction="row" spacing="10">
-					<HStack>
-						<WiTime4 />
+					<Stack direction="row" justify="space-between" align="center">
+						<Stack direction="row" align="center" spacing="1">
+							<Icon as={BiTime} />
+							<Text
+								fontSize={13}
+								color={'gray.400'}
+								fontWeight={'500'}
+								_focus={{
+									bg: 'gray.200',
+								}}>
+								{time}
+								{__('hrs', 'masteriyo')}
+							</Text>
+						</Stack>
 						<Text
-							flex={1}
 							fontSize={13}
-							color={'gray.400'}
 							fontWeight={'500'}
+							color={'gray.500'}
 							_focus={{
 								bg: 'gray.200',
 							}}>
-							{time}
-							{__('hrs', 'masteriyo')}
+							{percent}% {__('Complete', 'masteriyo')}
 						</Text>
-					</HStack>
-					<Text
-						flex={1}
-						fontSize={13}
-						fontWeight={'500'}
-						color={'gray.500'}
-						_focus={{
-							bg: 'gray.200',
-						}}>
-						{percent}% {__('Complete', 'masteriyo')}
-					</Text>
-				</Stack>
-				<Box mt={5}>
-					<Progress value={progressValue} size="xs" />
-				</Box>
+					</Stack>
+					<Box mt={5}>
+						<Progress rounded="full" value={progressValue} size="xs" />
+					</Box>
 
-				<Stack mt={8} direction={'row'} spacing={4}>
-					<Text
-						flex={1}
-						fontSize={12}
-						color={'gray.500'}
-						_focus={{
-							bg: 'gray.200',
-						}}>
-						{'Started ' + started}
-					</Text>
-					<Button
-						flex={1}
-						fontSize={'sm'}
-						rounded={'full'}
-						bg={'blue.600'}
-						color={'white'}
-						_hover={{
-							bg: 'blue.500',
-						}}
-						_focus={{
-							bg: 'blue.500',
-						}}>
-						Continue
-					</Button>
+					<Stack
+						direction="row"
+						spacing="4"
+						justify="space-between"
+						align="center">
+						<Text
+							fontSize={12}
+							color={'gray.500'}
+							_focus={{
+								bg: 'gray.200',
+							}}>
+							{'Started ' + started}
+						</Text>
+						<Button colorScheme="blue" size="sm" rounded="full">
+							{__('Continue', 'masteriyo')}
+						</Button>
+					</Stack>
 				</Stack>
-			</Box>
+			</Stack>
 		</Box>
 	);
 };

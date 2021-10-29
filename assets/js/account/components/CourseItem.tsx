@@ -35,7 +35,12 @@ const CourseItem: React.FC<Props> = ({
 }) => {
 	return (
 		<Box borderWidth="1px" borderColor="gray.100">
-			<Image src={imageUrl} alt={`${title} image`} />
+			<Image
+				src={imageUrl}
+				alt={`${title} image`}
+				height="3xs"
+				objectFit="cover"
+			/>
 			<Stack direction="column" p="6" spacing="3">
 				<Stack direction="column" spacing="6">
 					<Stack direction="column" spacing="3">

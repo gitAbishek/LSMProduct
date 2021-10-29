@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.0.9
+**Stable tag**: 1.0.10
 
 **License: GNU** General Public License v3.0
 
@@ -46,6 +46,10 @@ A complete solution to create and sell online courses. The plugin is powered by 
 No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
 # Changelog
+
+### 1.0.10 - 29-10-2021
+- Fix - Missing translation in learn page.
+- Fix - Standard paypal sandbox toggle issue.
 
 ### 1.0.9 - 26-10-2021
 - Fix - Add to cart button text filter in courses and single course page.

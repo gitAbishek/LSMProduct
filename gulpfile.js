@@ -190,12 +190,17 @@ function compressBuildWithVersion() {
 		.pipe(dest('release'));
 }
 
+function makePot() {
+	return exec('composer run makepot');
+}
+
 const compileAssets = series(removeCompiledAssets, parallel(compileSass, minifyJs, optimizeImages));
 const build = series(removeBuild, compileAssets, renameBackendAssets);
 const dev = series(startBrowserSync, watchChanges);
 const release = series(
 	removeRelease,
 	build,
+	makePot,
 	parallel(copyToBuild),
 	runComposerInBuild,
 	parallel(compressBuildWithVersion, compressBuildWithoutVersion)

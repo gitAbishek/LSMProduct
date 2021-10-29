@@ -6,7 +6,7 @@ import data from '../../dummyData/OrderHistoryData';
 
 const OrderHistory: React.FC = () => {
 	return (
-		<Container maxWidth="xl" py={10}>
+		<Container maxWidth="xl" py="12">
 			<Box bg="white" shadow="box">
 				<Table variant="simple">
 					<Thead>

@@ -11,12 +11,6 @@ const OrderData = [
 		status: 'On hold',
 		total: '$39.90 ',
 	},
-	{
-		order: '#824',
-		date: 'October 29, 2021',
-		status: 'On hold',
-		total: '$45.90 ',
-	},
 ];
 
 export default OrderData;

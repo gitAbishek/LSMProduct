@@ -1,6 +1,7 @@
 import { Td, Tr } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface Props {
 	order: string;
@@ -12,11 +13,19 @@ interface Props {
 const OrderHistoryItem: React.FC<Props> = ({ order, date, status, total }) => {
 	return (
 		<Tr>
-			<Td>{order}</Td>
+			<Td>
+				<Link to="#" style={{ color: 'blue' }}>
+					{order}
+				</Link>
+			</Td>
 			<Td>{date}</Td>
 			<Td>{status}</Td>
 			<Td>{total} for 1 item</Td>
-			<Td>{__('View', 'masteriyo')}</Td>
+			<Td>
+				<Link to="#" style={{ color: 'blue' }}>
+					{__('View', 'masteriyo')}
+				</Link>
+			</Td>
 		</Tr>
 	);
 };

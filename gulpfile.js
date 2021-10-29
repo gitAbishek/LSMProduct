@@ -163,6 +163,10 @@ function removeCompiledAssets() {
 	return exec('rm -rf assets/js/build/frontend && rm -rf assets/css');
 }
 
+function removeLanguageFiles() {
+	return exec('rm i18n/languages/masteriyo-*');
+}
+
 const copyToBuild = [
 	() => src(fileList.includes.src).pipe(dest(fileList.includes.dest)),
 	() => src(fileList.assets.src).pipe(dest(fileList.assets.dest)),
@@ -206,7 +210,7 @@ const release = series(
 	parallel(compressBuildWithVersion, compressBuildWithoutVersion)
 );
 
-exports.clean = parallel(removeBuild, removeRelease, removeCompiledAssets);
+exports.clean = parallel(removeBuild, removeRelease, removeCompiledAssets, removeLanguageFiles);
 exports.dev = dev;
 exports.build = build;
 exports.release = release;

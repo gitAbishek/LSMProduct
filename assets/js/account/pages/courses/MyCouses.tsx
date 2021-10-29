@@ -1,4 +1,11 @@
-import { Box, Button, Container, Heading, Stack } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Container,
+	Heading,
+	SimpleGrid,
+	Stack,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
@@ -10,17 +17,17 @@ import Certificates from '../certificates/Certificates';
 const MyCourses: React.FC = () => {
 	return (
 		<>
-			<Container maxW="container.lg">
-				<Box py={20}>
-					<Heading as="h1" size="xl" px={10}>
+			<Container maxW="container.xl" py="16">
+				<Stack direction="column" spacing="8">
+					<Heading as="h1" size="xl">
 						{__('My Courses', 'masteriyo')}
 					</Heading>
-					<Stack direction="row" spacing="7" m={10} display={{ md: 'flex' }}>
+					<SimpleGrid columns={4} spacing="3">
 						{CoursesData.map((itemProps, key) => {
 							return <CourseItem key={key} {...itemProps} />;
 						})}
-					</Stack>
-					<Box px={10}>
+					</SimpleGrid>
+					<Box>
 						<Button
 							rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
 							color="gray.500"
@@ -30,9 +37,10 @@ const MyCourses: React.FC = () => {
 							{__('SHOW ALL COURSES', 'masteriyo')}
 						</Button>
 					</Box>
-				</Box>
-				<Achievement />
-				<Certificates />
+
+					<Achievement />
+					<Certificates />
+				</Stack>
 			</Container>
 		</>
 	);

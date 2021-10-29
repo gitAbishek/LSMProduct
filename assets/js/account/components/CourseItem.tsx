@@ -38,7 +38,7 @@ const CourseItem: React.FC<Props> = ({
 			<Image
 				src={imageUrl}
 				alt={`${title} image`}
-				height="3xs"
+				height="200px"
 				objectFit="cover"
 			/>
 			<Stack direction="column" p="6" spacing="3">

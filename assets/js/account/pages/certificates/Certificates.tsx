@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Spacer, Stack } from '@chakra-ui/react';
+import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
@@ -8,28 +8,25 @@ import data from './CertificateData';
 const Certificates = () => {
 	return (
 		<>
-			<Box py={5}>
-				<Stack px={10}>
-					<Heading as="h1" size="xl">
-						{__('My Certificates', 'masteriyo')}
-					</Heading>
-				</Stack>
-			</Box>
-			<Flex px={5}>
-				<Box p="4" fontWeight={'bold'}>
+			<Heading as="h1" size="xl">
+				{__('My Certificates', 'masteriyo')}
+			</Heading>
+
+			<Stack direction="row" spacing="2" justify="space-between">
+				<Text fontWeight={'bold'}>
 					{__('COURSES', 'masteriyo')}
-				</Box>
-				<Spacer />
-				<Box p="4" fontWeight={'bold'}>
+				</Text>
+
+				<Text fontWeight={'bold'}>
 					{__('CERTIFICATE', 'masteriyo')}
-				</Box>
-			</Flex>
+				</Text>
+			</Stack>
 
 			{data.map((itemProps, key) => {
 				return <Certificate key={key} {...itemProps} />;
 			})}
 
-			<Box px={10} py={10}>
+			<Box>
 				<Button
 					rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
 					color="gray.500"

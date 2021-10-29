@@ -3,6 +3,7 @@ import {
 	Box,
 	Button,
 	HStack,
+	Icon,
 	Image,
 	Progress,
 	Stack,
@@ -10,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { AiFillStar } from 'react-icons/ai';
+import { BiStar } from 'react-icons/bi';
 import { WiTime4 } from 'react-icons/wi';
 
 interface Props {
@@ -37,14 +38,19 @@ const CourseItem: React.FC<Props> = ({
 		<Box maxW="sm" borderWidth="1px" borderColor="gray.100" overflow="hidden">
 			<Image src={imageUrl} alt={`${title} image`} />
 			<Box p="6">
-				<Stack direction={'row'} spacing={4}>
-					{Array(5)
-						.fill('')
-						.map((_, i) => (
-							<AiFillStar key={i} />
-						))}
-
-					<Badge borderRadius="full" px="2" colorScheme="pink" color="white">
+				<Stack direction="row" spacing="3">
+					<Stack direction="row" spacing="1">
+						{Array(5)
+							.fill('')
+							.map((_, i) => (
+								<Icon as={BiStar} key={i} />
+							))}
+					</Stack>
+					<Badge
+						borderRadius="full"
+						bg="pink.500"
+						fontSize="xx-small"
+						color="white">
 						{tag}
 					</Badge>
 				</Stack>
@@ -53,7 +59,7 @@ const CourseItem: React.FC<Props> = ({
 					{title}
 				</Box>
 
-				<Stack mt={8} direction={'row'} spacing={10}>
+				<Stack mt={8} direction="row" spacing="10">
 					<HStack>
 						<WiTime4 />
 						<Text

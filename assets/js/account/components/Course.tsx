@@ -1,8 +1,8 @@
-import { StarIcon, TimeIcon } from '@chakra-ui/icons';
 import {
 	Badge,
 	Box,
 	Button,
+	HStack,
 	Image,
 	Progress,
 	Stack,
@@ -10,6 +10,8 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
+import { AiFillStar } from 'react-icons/ai';
+import { WiTime4 } from 'react-icons/wi';
 
 interface Props {
 	id: number;
@@ -40,7 +42,7 @@ const Course: React.FC<Props> = ({
 					{Array(5)
 						.fill('')
 						.map((_, i) => (
-							<StarIcon key={i} />
+							<AiFillStar key={i} />
 						))}
 
 					<Badge borderRadius="full" px="2" colorScheme="pink" color="white">
@@ -48,22 +50,25 @@ const Course: React.FC<Props> = ({
 					</Badge>
 				</Stack>
 
-				<Box mt="1" fontWeight="bold" as="h4" lineHeight="tight" isTruncated>
+				<Box mt="2" fontWeight="bold" as="h4" lineHeight="tight" isTruncated>
 					{title}
 				</Box>
 
-				<Stack mt={8} direction={'row'} spacing={4}>
-					<Text
-						flex={1}
-						fontSize={13}
-						color={'gray.400'}
-						fontWeight={'500'}
-						_focus={{
-							bg: 'gray.200',
-						}}>
-						<TimeIcon /> {time}
-						{__('hrs', 'masteriyo')}
-					</Text>
+				<Stack mt={8} direction={'row'} spacing={10}>
+					<HStack>
+						<WiTime4 />
+						<Text
+							flex={1}
+							fontSize={13}
+							color={'gray.400'}
+							fontWeight={'500'}
+							_focus={{
+								bg: 'gray.200',
+							}}>
+							{time}
+							{__('hrs', 'masteriyo')}
+						</Text>
+					</HStack>
 					<Text
 						flex={1}
 						fontSize={13}

@@ -1,7 +1,7 @@
-import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Button, Container, Heading, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
+import { IoIosArrowForward } from 'react-icons/io';
 import Course from '../../components/Course';
 import Achievement from '../achievements/Achievement';
 import Certificates from '../certificates/Certificates';
@@ -22,7 +22,7 @@ const Courses: React.FC = () => {
 					</Stack>
 					<Box px={10}>
 						<Button
-							rightIcon={<ChevronRightIcon boxSize={6} color={'gray.500'} />}
+							rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
 							color="gray.500"
 							borderRadius="md"
 							borderColor="gray.400"

@@ -24,8 +24,7 @@ interface Props {
 	started: string;
 }
 
-const Course: React.FC<Props> = ({
-	id,
+const CourseItem: React.FC<Props> = ({
 	title,
 	imageUrl,
 	tag,
@@ -114,4 +113,4 @@ const Course: React.FC<Props> = ({
 	);
 };
 
-export default Course;
+export default CourseItem;

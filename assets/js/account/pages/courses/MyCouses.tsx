@@ -2,10 +2,10 @@ import { Box, Button, Container, Heading, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
-import Course from '../../components/Course';
+import CourseItem from '../../components/CourseItem';
+import CoursesData from '../../dummyData/courses';
 import Achievement from '../achievements/Achievement';
 import Certificates from '../certificates/Certificates';
-import data from './CoursesData';
 
 const MyCourses: React.FC = () => {
 	return (
@@ -16,8 +16,8 @@ const MyCourses: React.FC = () => {
 						{__('My Courses', 'masteriyo')}
 					</Heading>
 					<Stack direction="row" spacing="7" m={10} display={{ md: 'flex' }}>
-						{data.map((itemProps, key) => {
-							return <Course key={key} {...itemProps} />;
+						{CoursesData.map((itemProps, key) => {
+							return <CourseItem key={key} {...itemProps} />;
 						})}
 					</Stack>
 					<Box px={10}>

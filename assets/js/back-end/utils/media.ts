@@ -29,7 +29,10 @@ class MediaAPI {
 	async delete(id: number) {
 		return http({
 			url: this.uri + id,
-			method: 'DELETE',
+			method: 'POST',
+			headers: {
+				'x-http-method-override': 'DELETE',
+			},
 			params: {
 				force: true,
 			},

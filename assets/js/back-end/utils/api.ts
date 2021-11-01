@@ -33,7 +33,10 @@ class API {
 	async update(id: number, data: any) {
 		return http({
 			url: this.uri + id,
-			method: 'put',
+			method: 'post',
+			headers: {
+				'x-http-method-override': 'PUT',
+			},
 			data: data,
 		}).then((res) => res.data);
 	}
@@ -41,7 +44,10 @@ class API {
 	async delete(id: number, params?: any) {
 		return http({
 			url: this.uri + id,
-			method: 'delete',
+			method: 'post',
+			headers: {
+				'x-http-method-override': 'DELETE',
+			},
 			params: params,
 		}).then((res) => res.data);
 	}

@@ -14,7 +14,7 @@ const OrderHistoryItem: React.FC<Props> = ({ order, date, status, total }) => {
 	return (
 		<Tr>
 			<Td>
-				<Link to="#" style={{ color: 'blue' }}>
+				<Link to="#" style={{ color: 'blue', textDecoration: 'underline' }}>
 					{order}
 				</Link>
 			</Td>
@@ -22,7 +22,7 @@ const OrderHistoryItem: React.FC<Props> = ({ order, date, status, total }) => {
 			<Td>{status}</Td>
 			<Td>{total} for 1 item</Td>
 			<Td>
-				<Link to="#" style={{ color: 'blue' }}>
+				<Link to="#" style={{ color: 'blue', textDecoration: 'underline' }}>
 					{__('View', 'masteriyo')}
 				</Link>
 			</Td>

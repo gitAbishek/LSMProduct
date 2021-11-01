@@ -2,7 +2,7 @@ import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import routes from '../constants/routes';
 import MyCourses from '../pages/courses/MyCouses';
-import Dashboard from '../pages/Dashboard';
+import Dashboard from '../pages/dashboard/Dashboard';
 import Header from '../pages/Header';
 
 const Router: React.FC = () => {

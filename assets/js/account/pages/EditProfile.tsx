@@ -25,9 +25,15 @@ const EditProfile = () => {
 				<Tabs>
 					<Stack py="10">
 						<TabList>
-							<Tab>{__('Edit Profile', 'masteriyo')}</Tab>
-							<Tab>{__('Notifications', 'masteriyo')}</Tab>
-							<Tab>{__('Password  & Security', 'masteriyo')}</Tab>
+							<Tab style={{ fontWeight: 600 }}>
+								{__('Edit Profile', 'masteriyo')}
+							</Tab>
+							<Tab style={{ fontWeight: 600 }}>
+								{__('Notifications', 'masteriyo')}
+							</Tab>
+							<Tab style={{ fontWeight: 600 }}>
+								{__('Password  & Security', 'masteriyo')}
+							</Tab>
 						</TabList>
 
 						<TabPanels>

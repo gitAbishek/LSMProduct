@@ -8,7 +8,7 @@ const OrderHistory: React.FC = () => {
 	return (
 		<Container maxWidth="xl" py="12">
 			<Box bg="white" shadow="box">
-				<Table variant="simple">
+				<Table>
 					<Thead>
 						<Tr>
 							<Th>{__('Order', 'masteriyo')}</Th>

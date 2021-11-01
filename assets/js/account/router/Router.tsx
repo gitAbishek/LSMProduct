@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar';
 import routes from '../constants/routes';
 import MyCourses from '../pages/courses/MyCouses';
 import Dashboard from '../pages/dashboard/Dashboard';
+import EditProfile from '../pages/EditProfile';
 import Header from '../pages/Header';
 import OrderHistory from '../pages/order-history/OrderHistory';
 import ProfilePage from '../pages/ProfilePage';
@@ -33,6 +34,9 @@ const Router: React.FC = () => {
 							<ProfilePage />
 						</Route>
 					</Switch>
+					<Route path={routes.editProfile} exact>
+						<EditProfile />
+					</Route>
 				</Stack>
 			</Container>
 		</HashRouter>

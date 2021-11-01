@@ -102,8 +102,12 @@ const EditProfile = () => {
 								</Stack>
 								<Stack py="10">
 									<ButtonGroup>
-										<Button colorScheme="blue" borderRadius="md">
-											Save
+										<Button
+											colorScheme="blue"
+											rounded="full"
+											fontSize="small"
+											px="18">
+											{__('SAVE', 'masteriyo')}
 										</Button>
 									</ButtonGroup>
 								</Stack>

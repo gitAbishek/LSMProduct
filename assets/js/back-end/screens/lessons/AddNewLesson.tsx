@@ -170,7 +170,7 @@ const AddNewLesson: React.FC = () => {
 										<Stack direction="column" spacing="6">
 											<Name />
 											<Description />
-											<FeaturedImage />
+											<FeaturedImage size="masteriyo_single" />
 											<VideoSource />
 											<Box py="3">
 												<Divider />

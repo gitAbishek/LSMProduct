@@ -205,6 +205,7 @@ const EditLesson = () => {
 											/>
 											<FeaturedImage
 												defaultValue={lessonQuery.data.featured_image}
+												size="masteriyo_single"
 											/>
 											<VideoSource
 												defaultSource={lessonQuery.data.video_source}

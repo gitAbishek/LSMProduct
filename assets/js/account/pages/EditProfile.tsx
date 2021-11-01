@@ -9,6 +9,11 @@ import {
 	FormLabel,
 	Input,
 	Stack,
+	Tab,
+	TabList,
+	TabPanel,
+	TabPanels,
+	Tabs,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -17,75 +22,89 @@ const EditProfile = () => {
 	return (
 		<Box bg="white" width="full">
 			<Container maxWidth="container.lg">
-				<Stack>
-					<Center>
-						<Avatar
-							size="xl"
-							name="Rose Pett"
-							mt="10"
-							src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-						/>{' '}
-					</Center>
-				</Stack>
-				<Stack spacing="8" mt="8">
-					<Stack direction="row" spacing="8">
-						<FormControl id="Fisrt Name">
-							<FormLabel> {__('First Name', 'masteriyo')}</FormLabel>
-							<Input type="text" />
-						</FormControl>
-						<FormControl id="Last Name">
-							<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
-							<Input type="text" />
-						</FormControl>
-					</Stack>
+				<Tabs>
+					<Stack py="10">
+						<TabList>
+							<Tab>{__('Edit Profile', 'masteriyo')}</Tab>
+							<Tab>{__('Notifications', 'masteriyo')}</Tab>
+							<Tab>{__('Password  & Security', 'masteriyo')}</Tab>
+						</TabList>
 
-					<Stack>
-						<FormControl id="email">
-							<FormLabel>{__('Email', 'masteriyo')}</FormLabel>
-							<Input type="email" />
-						</FormControl>
-					</Stack>
-					<Stack>
-						<FormControl id="contact">
-							<FormLabel>{__('Contact Number', 'masteriyo')}</FormLabel>
-							<Input type="number" />
-						</FormControl>
-					</Stack>
-					<Stack>
-						<FormControl id="address">
-							<FormLabel>{__('Address', 'masteriyo')}</FormLabel>
-							<Input type="type" />
-						</FormControl>
-					</Stack>
-					<Stack direction="row" spacing="8">
-						<FormControl id="city">
-							<FormLabel>{__('City', 'masteriyo')}</FormLabel>
-							<Input type="text" />
-						</FormControl>
-						<FormControl id="state">
-							<FormLabel>{__('State', 'masteriyo')}</FormLabel>
-							<Input type="text" />
-						</FormControl>
-					</Stack>
+						<TabPanels>
+							<TabPanel>
+								<Stack>
+									<Center>
+										<Avatar
+											size="xl"
+											name="Rose Pett"
+											mt="10"
+											src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+										/>{' '}
+									</Center>
+								</Stack>
+								<Stack spacing="8" mt="8">
+									<Stack direction="row" spacing="8">
+										<FormControl id="Fisrt Name">
+											<FormLabel> {__('First Name', 'masteriyo')}</FormLabel>
+											<Input type="text" />
+										</FormControl>
+										<FormControl id="Last Name">
+											<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
+											<Input type="text" />
+										</FormControl>
+									</Stack>
 
-					<Stack direction="row" spacing="8">
-						<FormControl id="zipcode">
-							<FormLabel>{__('Zip Code', 'masteriyo')}</FormLabel>
-							<Input type="number" />
-						</FormControl>
-						<FormControl id="country">
-							<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
-							<Input type="text" />
-						</FormControl>
+									<Stack>
+										<FormControl id="email">
+											<FormLabel>{__('Email', 'masteriyo')}</FormLabel>
+											<Input type="email" />
+										</FormControl>
+									</Stack>
+									<Stack>
+										<FormControl id="contact">
+											<FormLabel>{__('Contact Number', 'masteriyo')}</FormLabel>
+											<Input type="number" />
+										</FormControl>
+									</Stack>
+									<Stack>
+										<FormControl id="address">
+											<FormLabel>{__('Address', 'masteriyo')}</FormLabel>
+											<Input type="type" />
+										</FormControl>
+									</Stack>
+									<Stack direction="row" spacing="8">
+										<FormControl id="city">
+											<FormLabel>{__('City', 'masteriyo')}</FormLabel>
+											<Input type="text" />
+										</FormControl>
+										<FormControl id="state">
+											<FormLabel>{__('State', 'masteriyo')}</FormLabel>
+											<Input type="text" />
+										</FormControl>
+									</Stack>
+
+									<Stack direction="row" spacing="8">
+										<FormControl id="zipcode">
+											<FormLabel>{__('Zip Code', 'masteriyo')}</FormLabel>
+											<Input type="number" />
+										</FormControl>
+										<FormControl id="country">
+											<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
+											<Input type="text" />
+										</FormControl>
+									</Stack>
+								</Stack>
+								<Stack py="10">
+									<ButtonGroup>
+										<Button colorScheme="blue" borderRadius="md">
+											Save
+										</Button>
+									</ButtonGroup>
+								</Stack>
+							</TabPanel>
+						</TabPanels>
 					</Stack>
-				</Stack>
-				<Stack py="10">
-					<ButtonGroup>
-						<Button colorScheme="blue" type="submit" borderRadius="xl">
-							Save
-						</Button>
-					</ButtonGroup>
-				</Stack>
+				</Tabs>
 			</Container>
 		</Box>
 	);

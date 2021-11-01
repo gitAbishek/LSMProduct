@@ -17,7 +17,7 @@ import MediaAPI from '../../../utils/media';
 
 interface Props {
 	defaultValue?: number;
-	size?: 'masteriyo_thumbnail' | 'full';
+	size?: 'masteriyo_thumbnail' | 'masteriyo_single' | 'full';
 }
 
 const FeaturedImage: React.FC<Props> = (props) => {
@@ -61,7 +61,11 @@ const FeaturedImage: React.FC<Props> = (props) => {
 			{imageQuery.isSuccess && (
 				<Image
 					w="full"
-					src={imageQuery?.data?.media_details?.sizes?.[size]?.source_url}
+					src={
+						imageQuery?.data?.media_details?.sizes?.[size]?.source_url
+							? imageQuery?.data?.media_details?.sizes?.[size]?.source_url
+							: imageQuery?.data?.source_url
+					}
 					mb="4"
 				/>
 			)}

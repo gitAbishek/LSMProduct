@@ -6,6 +6,7 @@ import {
 	Center,
 	Container,
 	FormControl,
+	FormErrorMessage,
 	FormLabel,
 	Input,
 	Stack,
@@ -73,7 +74,7 @@ const EditProfile: React.FC = () => {
 								<form onSubmit={onSubmit}>
 									<Stack spacing="8" mt="8">
 										<Stack direction="row" spacing="8">
-											<FormControl>
+											<FormControl isInvalid={!!errors?.firstName}>
 												<FormLabel> {__('First Name', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
@@ -84,8 +85,13 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
+												{errors?.firstName && (
+													<FormErrorMessage>
+														{errors?.firstName.message}
+													</FormErrorMessage>
+												)}
 											</FormControl>
-											<FormControl>
+											<FormControl isInvalid={!!errors?.lastName}>
 												<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
@@ -96,11 +102,16 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
+												{errors?.lastName && (
+													<FormErrorMessage>
+														{errors?.lastName.message}
+													</FormErrorMessage>
+												)}
 											</FormControl>
 										</Stack>
 
 										<Stack>
-											<FormControl>
+											<FormControl isInvalid={!!errors?.email}>
 												<FormLabel>{__('Email', 'masteriyo')}</FormLabel>
 												<Input
 													type="email"
@@ -111,10 +122,15 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
+												{errors?.email && (
+													<FormErrorMessage>
+														{errors?.email.message}
+													</FormErrorMessage>
+												)}
 											</FormControl>
 										</Stack>
 										<Stack>
-											<FormControl>
+											<FormControl isInvalid={!!errors?.contact}>
 												<FormLabel>
 													{__('Contact Number', 'masteriyo')}
 												</FormLabel>
@@ -127,10 +143,15 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
+												{errors?.contact && (
+													<FormErrorMessage>
+														{errors?.contact.message}
+													</FormErrorMessage>
+												)}
 											</FormControl>
 										</Stack>
 										<Stack>
-											<FormControl>
+											<FormControl isInvalid={!!errors?.address}>
 												<FormLabel>{__('Address', 'masteriyo')}</FormLabel>
 												<Input
 													type="type"
@@ -141,10 +162,15 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
+												{errors?.address && (
+													<FormErrorMessage>
+														{errors?.address.message}
+													</FormErrorMessage>
+												)}
 											</FormControl>
 										</Stack>
 										<Stack direction="row" spacing="8">
-											<FormControl>
+											<FormControl isInvalid={!!errors?.city}>
 												<FormLabel>{__('City', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
@@ -155,8 +181,13 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
+												{errors?.city && (
+													<FormErrorMessage>
+														{errors?.city.message}
+													</FormErrorMessage>
+												)}
 											</FormControl>
-											<FormControl>
+											<FormControl isInvalid={!!errors?.state}>
 												<FormLabel>{__('State', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
@@ -167,11 +198,16 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
+												{errors?.state && (
+													<FormErrorMessage>
+														{errors?.state.message}
+													</FormErrorMessage>
+												)}
 											</FormControl>
 										</Stack>
 
 										<Stack direction="row" spacing="8">
-											<FormControl>
+											<FormControl isInvalid={!!errors?.zipcode}>
 												<FormLabel>{__('Zip Code', 'masteriyo')}</FormLabel>
 												<Input
 													type="number"
@@ -182,8 +218,13 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
+												{errors?.zipcode && (
+													<FormErrorMessage>
+														{errors?.zipcode.message}
+													</FormErrorMessage>
+												)}
 											</FormControl>
-											<FormControl>
+											<FormControl isInvalid={!!errors?.country}>
 												<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
@@ -194,6 +235,11 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
+												{errors?.country && (
+													<FormErrorMessage>
+														{errors?.country.message}
+													</FormErrorMessage>
+												)}
 											</FormControl>
 										</Stack>
 									</Stack>

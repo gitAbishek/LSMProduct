@@ -2,7 +2,7 @@
 /**
  * Categories listing shortcode.
  *
- * @since 1.0.10
+ * @since 1.2.0
  * @class CourseCategoriesShortcode
  * @package Masteriyo\Shortcodes
  */
@@ -19,7 +19,7 @@ class CourseCategoriesShortcode extends Shortcode {
 	/**
 	 * Shortcode tag.
 	 *
-	 * @since 1.0.10
+	 * @since 1.2.0
 	 *
 	 * @var string
 	 */
@@ -28,7 +28,7 @@ class CourseCategoriesShortcode extends Shortcode {
 	/**
 	 * Shortcode default attributes.
 	 *
-	 * @since 1.0.10
+	 * @since 1.2.0
 	 *
 	 * @var array
 	 */
@@ -41,7 +41,7 @@ class CourseCategoriesShortcode extends Shortcode {
 	/**
 	 * Get shortcode content.
 	 *
-	 * @since  1.0.10
+	 * @since  1.2.0
 	 *
 	 * @return string
 	 */
@@ -68,7 +68,7 @@ class CourseCategoriesShortcode extends Shortcode {
 	/**
 	 * Get categories to display for the shortcode.
 	 *
-	 * @since 1.0.10
+	 * @since 1.2.0
 	 *
 	 * @return Array[CourseCategory]
 	 */

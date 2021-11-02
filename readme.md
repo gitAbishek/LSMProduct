@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.0.10
+**Stable tag**: 1.2.0
 
 **License: GNU** General Public License v3.0
 
@@ -46,6 +46,11 @@ A complete solution to create and sell online courses. The plugin is powered by 
 No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
 # Changelog
+
+### 1.2.0 - 02-11-2021
+- Fix - Course update and delete when the PUT and DELETE HTTP methods are blocked.
+- Feature - Added students list on WordPress backend.
+- Feature - Added course categories shortcode.
 
 ### 1.0.10 - 29-10-2021
 - Fix - Missing translation in learn page.

@@ -11,7 +11,7 @@
  * the readme will list any important changes.
  *
  * @package Masteriyo\Templates
- * @version 1.0.10
+ * @version 1.2.0
  */
 
 defined( 'ABSPATH' ) || exit;

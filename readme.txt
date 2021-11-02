@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning
 Requires at least: 5.0
 Tested up to: 5.8.1
 Requires PHP: 7.0
-Stable tag: 1.0.10
+Stable tag: 1.2.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -196,6 +196,11 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.2.0 - 02-11-2021 =
+- Fix - Course update and delete when the PUT and DELETE HTTP methods are blocked.
+- Feature - Added students list on WordPress backend.
+- Feature - Added course categories shortcode.
 
 = 1.0.10 - 29-10-2021 =
 - Fix - Missing translation in learn page.

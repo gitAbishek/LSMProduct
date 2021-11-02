@@ -264,6 +264,8 @@ class UsersController extends PostsController {
 	/**
 	 * Process objects collection.
 	 *
+	 * @since 1.2.0
+	 *
 	 * @param array $objects Users data.
 	 * @param array $query_args Query arguments.
 	 * @param array $query_results Users query result data.

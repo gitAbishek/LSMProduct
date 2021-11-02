@@ -72,6 +72,8 @@ add_action( 'masteriyo_checkout_summary', 'masteriyo_checkout_payment', 20 );
 
 /**
  * Course categories shortcode.
+ *
+ * @since 1.2.0
  */
 add_action( 'masteriyo_template_shortcode_course_categories', 'masteriyo_template_shortcode_course_categories' );
 add_action( 'masteriyo_template_shortcode_course_category', 'masteriyo_template_shortcode_course_category' );

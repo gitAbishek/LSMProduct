@@ -260,7 +260,7 @@ class CourseCategory extends Model {
 	/**
 	 * Returns course tag ids.
 	 *
-	 * @since  1.0.10
+	 * @since  1.2.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -273,7 +273,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get main image ID.
 	 *
-	 * @since  1.0.10
+	 * @since  1.2.0
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string
 	 */
@@ -284,7 +284,7 @@ class CourseCategory extends Model {
 	/**
 	 * Get featured image URL.
 	 *
-	 * @since 1.0.10
+	 * @since 1.2.0
 	 *
 	 * @return string
 	 */
@@ -298,7 +298,7 @@ class CourseCategory extends Model {
 	/**
 	 * Returns the main product image.
 	 *
-	 * @since 1.0.10
+	 * @since 1.2.0
 	 *
 	 * @param  string $size (default: 'masteriyo_thumbnail').
 	 * @param  array  $attr Image attributes.
@@ -333,7 +333,7 @@ class CourseCategory extends Model {
 	/**
 	 * Set the featured image, in other words thumbnail post id.
 	 *
-	 * @since 1.0.10
+	 * @since 1.2.0
 	 *
 	 * @param int $featured_image Featured image id.
 	 */

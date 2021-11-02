@@ -11,7 +11,7 @@
  * the readme will list any important changes.
  *
  * @package Masteriyo\Templates
- * @version 1.0.10
+ * @version 1.2.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -24,7 +24,7 @@ foreach ( $categories as $category ) {
 	 *
 	 * @hooked masteriyo_template_shortcode_course_category - 10
 	 *
-	 * @since 1.0.10
+	 * @since 1.2.0
 	 */
 	do_action(
 		'masteriyo_template_shortcode_course_category',

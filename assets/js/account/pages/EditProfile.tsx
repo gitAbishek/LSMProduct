@@ -73,7 +73,7 @@ const EditProfile: React.FC = () => {
 								<form onSubmit={onSubmit}>
 									<Stack spacing="8" mt="8">
 										<Stack direction="row" spacing="8">
-											<FormControl id="Fisrt Name">
+											<FormControl>
 												<FormLabel> {__('First Name', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
@@ -85,7 +85,7 @@ const EditProfile: React.FC = () => {
 													})}
 												/>
 											</FormControl>
-											<FormControl id="Last Name">
+											<FormControl>
 												<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
@@ -100,7 +100,7 @@ const EditProfile: React.FC = () => {
 										</Stack>
 
 										<Stack>
-											<FormControl id="email">
+											<FormControl>
 												<FormLabel>{__('Email', 'masteriyo')}</FormLabel>
 												<Input
 													type="email"
@@ -114,7 +114,7 @@ const EditProfile: React.FC = () => {
 											</FormControl>
 										</Stack>
 										<Stack>
-											<FormControl id="contact">
+											<FormControl>
 												<FormLabel>
 													{__('Contact Number', 'masteriyo')}
 												</FormLabel>
@@ -130,7 +130,7 @@ const EditProfile: React.FC = () => {
 											</FormControl>
 										</Stack>
 										<Stack>
-											<FormControl id="address">
+											<FormControl>
 												<FormLabel>{__('Address', 'masteriyo')}</FormLabel>
 												<Input
 													type="type"
@@ -144,7 +144,7 @@ const EditProfile: React.FC = () => {
 											</FormControl>
 										</Stack>
 										<Stack direction="row" spacing="8">
-											<FormControl id="city">
+											<FormControl>
 												<FormLabel>{__('City', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
@@ -156,7 +156,7 @@ const EditProfile: React.FC = () => {
 													})}
 												/>
 											</FormControl>
-											<FormControl id="state">
+											<FormControl>
 												<FormLabel>{__('State', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
@@ -171,7 +171,7 @@ const EditProfile: React.FC = () => {
 										</Stack>
 
 										<Stack direction="row" spacing="8">
-											<FormControl id="zipcode">
+											<FormControl>
 												<FormLabel>{__('Zip Code', 'masteriyo')}</FormLabel>
 												<Input
 													type="number"
@@ -183,7 +183,7 @@ const EditProfile: React.FC = () => {
 													})}
 												/>
 											</FormControl>
-											<FormControl id="country">
+											<FormControl>
 												<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"

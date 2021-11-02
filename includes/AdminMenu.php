@@ -87,6 +87,15 @@ class AdminMenu {
 
 		add_submenu_page(
 			'masteriyo',
+			esc_html__( 'Users', 'masteriyo' ),
+			esc_html__( 'Users', 'masteriyo' ),
+			'manage_options',
+			'masteriyo#/users',
+			array( __CLASS__, 'display_main_page' )
+		);
+
+		add_submenu_page(
+			'masteriyo',
 			esc_html__( 'Settings', 'masteriyo' ),
 			esc_html__( 'Settings', 'masteriyo' ),
 			'manage_options',

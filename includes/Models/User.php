@@ -806,7 +806,7 @@ class User extends Model {
 	public function set_roles( $roles ) {
 		global $wp_roles;
 
-		if ( $roles && ! empty( $wp_roless->roles ) && ! in_array( $roles, array_keys( $wp_roles->roles ), true ) ) {
+		if ( $roles && ! empty( $wp_roles->roles ) && ! in_array( $roles, array_keys( $wp_roles->roles ), true ) ) {
 			throw new ModelException( 'user_invalid_roles', __( 'Invalid roles', 'masteriyo' ) );
 		}
 

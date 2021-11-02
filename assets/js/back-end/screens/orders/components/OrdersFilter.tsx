@@ -147,7 +147,7 @@ const OrdersFilter: React.FC<Props> = (props) => {
 						}
 						usersAPI.list({ search: searchValue }).then((data) => {
 							callback(
-								data.map((user: any) => {
+								data.data.map((user: any) => {
 									return {
 										value: user.id,
 										label: `${user.display_name} (#${user.id} – ${user.email})`,

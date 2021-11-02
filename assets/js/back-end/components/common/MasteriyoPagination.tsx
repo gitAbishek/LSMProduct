@@ -26,6 +26,7 @@ interface Props {
 	perPageText: string;
 	outerLimits?: number;
 	innerLimits?: number;
+	extraFilterParams?: any;
 }
 
 const MasteriyoPagination: React.FC<Props> = (props) => {
@@ -35,6 +36,7 @@ const MasteriyoPagination: React.FC<Props> = (props) => {
 		perPageText,
 		outerLimits = 2,
 		innerLimits = 2,
+		extraFilterParams,
 	} = props;
 
 	const {
@@ -61,15 +63,16 @@ const MasteriyoPagination: React.FC<Props> = (props) => {
 		setFilterParams({
 			page: nextPage,
 			per_page: pageSize,
+			...extraFilterParams,
 		});
 		setCurrentPage(nextPage);
 	};
 
 	const handlePageSizeChange = (event: any): void => {
 		const pageSize = Number(event.target.value);
-
 		setFilterParams({
 			per_page: pageSize,
+			...extraFilterParams,
 		});
 		setPageSize(pageSize);
 	};

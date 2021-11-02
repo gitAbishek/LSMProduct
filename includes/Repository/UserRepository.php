@@ -130,7 +130,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 				'nicename'       => $user_obj->data->user_nicename,
 				'email'          => $user_obj->data->user_email,
 				'url'            => $user_obj->data->user_url,
-				'registered'     => $user_obj->data->user_registered,
+				'date_created'   => $user_obj->data->user_registered,
 				'activation_key' => $user_obj->data->user_activation_key,
 				'status'         => $user_obj->data->user_status,
 				'display_name'   => $user_obj->data->display_name,

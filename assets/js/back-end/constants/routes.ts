@@ -29,6 +29,10 @@ const routes = {
 		add: '/courses/tags/new',
 		edit: '/courses/tags/:tagId',
 	},
+	users: {
+		list: '/users',
+		edit: '/users/:userId',
+	},
 	settings: '/settings',
 	notFound: '/not-found',
 };

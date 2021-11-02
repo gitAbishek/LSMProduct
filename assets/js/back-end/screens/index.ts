@@ -12,3 +12,5 @@ export { default as AllOrders } from './orders/AllOrders';
 export { default as EditOrder } from './orders/EditOrder';
 export { default as SectionBuilder } from './sections/SectionBuilder';
 export { default as Settings } from './settings/Settings';
+export { default as EditUser } from './users/EditUser';
+export { default as Users } from './users/Users';

@@ -45,6 +45,12 @@ const Router: React.FC = () => {
 				<Route path={routes.lesson.edit} exact>
 					<screens.EditLesson />
 				</Route>
+				<Route path={routes.users.list} exact>
+					<screens.Users />
+				</Route>
+				<Route path={routes.users.edit} exact>
+					<screens.EditUser />
+				</Route>
 				<Route path={routes.settings} exact>
 					<screens.Settings />
 				</Route>

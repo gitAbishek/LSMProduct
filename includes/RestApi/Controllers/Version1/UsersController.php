@@ -127,7 +127,7 @@ class UsersController extends PostsController {
 					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
 					'args'                => array(
 						'force' => array(
-							'default'     => false,
+							'default'     => true,
 							'type'        => 'boolean',
 							'description' => __( 'Required to be true, as the resource does not support trashing.', 'masteriyo' ),
 						),
@@ -174,12 +174,6 @@ class UsersController extends PostsController {
 			'enum'              => masteriyo_get_wp_roles(),
 
 		);
-		$params['per_page'] = array(
-			'description'       => __( 'Number of users per page.', 'masteriyo' ),
-			'type'              => 'number',
-			'sanitize_callback' => 'absint',
-			'validate_callback' => 'rest_validate_request_arg',
-		);
 
 		return apply_filters( 'masteriyo_user_collection_params', $params );
 	}
@@ -218,20 +212,22 @@ class UsersController extends PostsController {
 	 * @return array
 	 */
 	protected function get_objects( $query_args ) {
-		$users       = get_users( $query_args );
-		$total_posts = count( $users );
+		$users  = new \WP_User_Query( $query_args );
+		$result = $users->get_results();
 
-		if ( $total_posts < 1 ) {
+		$total_users = $users->total_users;
+		if ( $total_users < 1 ) {
 			// Out-of-bounds, run the query again without LIMIT for total count.
 			unset( $query_args['paged'] );
-			$users       = get_users( $query_args );
-			$total_posts = count( $users );
+			$count_users = new \WP_User_Query( $query_args );
+			$count_users->get_results();
+			$total_users = $count_users->total_users;
 		}
 
 		return array(
-			'objects' => array_filter( array_map( array( $this, 'get_object' ), $users ) ),
-			'total'   => (int) $total_posts,
-			'pages'   => (int) ceil( $total_posts / (int) 10 ),
+			'objects' => array_filter( array_map( array( $this, 'get_object' ), $result ) ),
+			'total'   => (int) $total_users,
+			'pages'   => (int) ceil( $total_users / (int) $query_args['number'] ),
 		);
 	}
 
@@ -263,6 +259,27 @@ class UsersController extends PostsController {
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
+	}
+
+	/**
+	 * Process objects collection.
+	 *
+	 * @param array $objects Users data.
+	 * @param array $query_args Query arguments.
+	 * @param array $query_results Users query result data.
+	 *
+	 * @return array
+	 */
+	protected function process_objects_collection( $objects, $query_args, $query_results ) {
+		return array(
+			'data' => $objects,
+			'meta' => array(
+				'total'        => $query_results['total'],
+				'pages'        => $query_results['pages'],
+				'current_page' => $query_args['paged'],
+				'per_page'     => $query_args['number'],
+			),
+		);
 	}
 
 	/**
@@ -697,8 +714,8 @@ class UsersController extends PostsController {
 		}
 
 		// User's role.
-		if ( isset( $request['roles'] ) ) {
-			$user->set_roles( $request['roles'] );
+		if ( isset( $request['role'] ) ) {
+			$user->set_roles( $request['role'] );
 		}
 
 		// User billing details.

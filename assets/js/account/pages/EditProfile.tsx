@@ -84,7 +84,6 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
-												{errors?.firstName && <p>{errors.firstName.message}</p>}
 											</FormControl>
 											<FormControl id="Last Name">
 												<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
@@ -97,7 +96,6 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
-												{errors?.lastName && <p>{errors.lastName.message}</p>}
 											</FormControl>
 										</Stack>
 
@@ -113,7 +111,6 @@ const EditProfile: React.FC = () => {
 														),
 													})}
 												/>
-												{errors?.email && <p>{errors.email.message}</p>}
 											</FormControl>
 										</Stack>
 										<Stack>

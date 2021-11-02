@@ -69,7 +69,7 @@ const StudentsFilter: React.FC<Props> = (props) => {
 						spacing="4"
 						mt={[6, null, 0]}>
 						<Input
-							placeholder={__('Filter by username and email', 'masteriyo')}
+							placeholder={__('Search by username or email', 'masteriyo')}
 							{...onSearchInput}
 						/>
 					</Stack>

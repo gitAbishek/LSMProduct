@@ -135,7 +135,8 @@ const EditProfile: React.FC = () => {
 													{__('Contact Number', 'masteriyo')}
 												</FormLabel>
 												<Input
-													type="number"
+													type="text"
+													pattern="[7-9]{1}[0-9]{9}"
 													{...register('contact', {
 														required: __(
 															'This field cannot be empty',

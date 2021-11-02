@@ -177,6 +177,11 @@ class CourseCategoriesController extends RestTermsController {
 			$course_cat->set_display( $request['display'] );
 		}
 
+		// Featured image.
+		if ( isset( $request['featured_image'] ) ) {
+			$course_cat->set_featured_image( $request['featured_image'] );
+		}
+
 		return $course_cat;
 	}
 
@@ -250,15 +255,16 @@ class CourseCategoriesController extends RestTermsController {
 	 */
 	protected function get_course_cat_data( $course_cat, $context = 'view' ) {
 		$data = array(
-			'id'          => $course_cat->get_id(),
-			'name'        => $course_cat->get_name( $context ),
-			'slug'        => $course_cat->get_slug( $context ),
-			'link'        => $course_cat->get_permalink( $context ),
-			'taxonomy'    => $course_cat->get_taxonomy( $context ),
-			'description' => 'view' === $context ? wpautop( do_shortcode( $course_cat->get_description() ) ) : $course_cat->get_description( $context ),
-			'parent_id'   => $course_cat->get_parent_id( $context ),
-			'count'       => $course_cat->get_count( $context ),
-			'display'     => $course_cat->get_display( $context ),
+			'id'             => $course_cat->get_id(),
+			'name'           => $course_cat->get_name( $context ),
+			'slug'           => $course_cat->get_slug( $context ),
+			'link'           => $course_cat->get_permalink( $context ),
+			'taxonomy'       => $course_cat->get_taxonomy( $context ),
+			'description'    => 'view' === $context ? wpautop( do_shortcode( $course_cat->get_description() ) ) : $course_cat->get_description( $context ),
+			'parent_id'      => $course_cat->get_parent_id( $context ),
+			'count'          => $course_cat->get_count( $context ),
+			'display'        => $course_cat->get_display( $context ),
+			'featured_image' => $course_cat->get_featured_image( $context ),
 		);
 
 		return $data;

@@ -9,6 +9,7 @@
  */
 
 use Masteriyo\Constants;
+use Masteriyo\Models\CourseCategory;
 use Masteriyo\Query\UserCourseQuery;
 
 /**

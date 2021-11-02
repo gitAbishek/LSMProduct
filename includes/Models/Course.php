@@ -1388,7 +1388,7 @@ class Course extends Model {
 		if ( $this->get_image_id() ) {
 			$image = wp_get_attachment_image( $this->get_image_id(), $size, false, $attr );
 		} elseif ( $this->get_parent_id() ) {
-			$parent_product = masteriyo_get_product( $this->get_parent_id() );
+			$parent_product = masteriyo_get_course( $this->get_parent_id() );
 			if ( $parent_product ) {
 				$image = $parent_product->get_image( $size, $attr, $placeholder );
 			}

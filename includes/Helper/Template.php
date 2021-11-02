@@ -1223,3 +1223,25 @@ if ( ! function_exists( 'masteriyo_template_course_reviews_list' ) ) {
 		masteriyo_get_template( 'single-course/reviews-list.php', compact( 'course', 'course_reviews', 'replies' ) );
 	}
 }
+
+if ( ! function_exists( 'masteriyo_template_shortcode_course_categories' ) ) {
+	/**
+	 * Print course categories.
+	 *
+	 * @since 1.0.10
+	 */
+	function masteriyo_template_shortcode_course_categories( $attrs ) {
+		masteriyo_get_template( 'shortcodes/course-categories/list.php', $attrs );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_template_shortcode_course_category' ) ) {
+	/**
+	 * Print course category.
+	 *
+	 * @since 1.0.10
+	 */
+	function masteriyo_template_shortcode_course_category( $attrs ) {
+		masteriyo_get_template( 'shortcodes/course-categories/list-item.php', $attrs );
+	}
+}

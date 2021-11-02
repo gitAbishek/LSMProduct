@@ -24,6 +24,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
 import { deepClean } from '../../utils/utils';
+import FeaturedImage from '../courses/components/FeaturedImage';
 import DescriptionInput from './components/DescriptionInput';
 import NameInput from './components/NameInput';
 import SlugInput from './components/SlugInput';
@@ -99,6 +100,7 @@ const AddNewCourseCategory = () => {
 										<NameInput />
 										<SlugInput />
 										<DescriptionInput />
+										<FeaturedImage />
 
 										<Box py="3">
 											<Divider />

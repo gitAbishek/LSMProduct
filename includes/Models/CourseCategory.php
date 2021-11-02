@@ -68,6 +68,7 @@ class CourseCategory extends Model {
 		'count'            => 0,
 		'term_order'       => 0,
 		'display'          => 'default',
+		'featured_image'   => '',
 	);
 
 	/**
@@ -256,11 +257,89 @@ class CourseCategory extends Model {
 		return $this->get_prop( 'display', $context );
 	}
 
+	/**
+	 * Returns course tag ids.
+	 *
+	 * @since  1.0.10
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string price
+	 */
+	public function get_featured_image( $context = 'view' ) {
+		return $this->get_prop( 'featured_image', $context );
+	}
+
+	/**
+	 * Get main image ID.
+	 *
+	 * @since  1.0.10
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return string
+	 */
+	public function get_image_id( $context = 'view' ) {
+		return $this->get_featured_image( $context );
+	}
+
+	/**
+	 * Get featured image URL.
+	 *
+	 * @since 1.0.10
+	 *
+	 * @return string
+	 */
+	public function get_featured_image_url( $size = 'thumbnail' ) {
+		if ( empty( $this->get_featured_image() ) ) {
+			return masteriyo_placeholder_img_src( $size );
+		}
+		return wp_get_attachment_image_url( $this->get_featured_image(), $size );
+	}
+
+	/**
+	 * Returns the main product image.
+	 *
+	 * @since 1.0.10
+	 *
+	 * @param  string $size (default: 'masteriyo_thumbnail').
+	 * @param  array  $attr Image attributes.
+	 * @param  bool   $placeholder True to return $placeholder if no image is found, or false to return an empty string.
+	 * @return string
+	 */
+	public function get_image( $size = 'masteriyo_thumbnail', $attr = array(), $placeholder = true ) {
+		$image = '';
+		if ( $this->get_image_id() ) {
+			$image = wp_get_attachment_image( $this->get_image_id(), $size, false, $attr );
+		} elseif ( $this->get_parent_id() ) {
+			$parent_cat = masteriyo_get_course_cat( $this->get_parent_id() );
+
+			if ( $parent_cat ) {
+				$image = $parent_cat->get_image( $size, $attr, $placeholder );
+			}
+		}
+
+		if ( ! $image && $placeholder ) {
+			$image = masteriyo_placeholder_img( $size, $attr );
+		}
+
+		return apply_filters( 'masteriyo_course_category_get_image', $image, $this, $size, $attr, $placeholder, $image );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| CRUD Setters
 	|--------------------------------------------------------------------------
 	*/
+
+	/**
+	 * Set the featured image, in other words thumbnail post id.
+	 *
+	 * @since 1.0.10
+	 *
+	 * @param int $featured_image Featured image id.
+	 */
+	public function set_featured_image( $featured_image ) {
+		$this->set_prop( 'featured_image', absint( $featured_image ) );
+	}
 
 	/**
 	 * Set course category name.

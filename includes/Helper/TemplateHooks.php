@@ -70,3 +70,8 @@ add_action( 'masteriyo_checkout_summary', 'masteriyo_checkout_order_summary', 10
 add_action( 'masteriyo_checkout_summary', 'masteriyo_checkout_payment', 20 );
 
 
+/**
+ * Course categories shortcode.
+ */
+add_action( 'masteriyo_template_shortcode_course_categories', 'masteriyo_template_shortcode_course_categories' );
+add_action( 'masteriyo_template_shortcode_course_category', 'masteriyo_template_shortcode_course_category' );

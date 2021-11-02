@@ -825,7 +825,7 @@ abstract class AbstractRepository {
 			$props_to_update = $this->get_props_to_update( $model, $this->get_internal_meta_keys() );
 		}
 
-		foreach ( $props_to_update as $meta_key => $prop ) {
+		foreach ( $props_to_update as $prop => $meta_key ) {
 			if ( ! is_callable( array( $model, "get_{$prop}" ) ) ) {
 				continue;
 			}

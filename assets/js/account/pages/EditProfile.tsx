@@ -75,9 +75,10 @@ const EditProfile: React.FC = () => {
 									<Stack spacing="8" mt="8">
 										<Stack direction="row" spacing="8">
 											<FormControl isInvalid={!!errors?.firstName}>
-												<FormLabel> {__('First Name', 'masteriyo')}</FormLabel>
+												<FormLabel>{__('First Name', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
+													placeholder="Rose"
 													{...register('firstName', {
 														required: __(
 															'This field cannot be empty',
@@ -95,6 +96,7 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
+													placeholder="Pett"
 													{...register('lastName', {
 														required: __(
 															'This field cannot be empty',
@@ -115,6 +117,7 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('Email', 'masteriyo')}</FormLabel>
 												<Input
 													type="email"
+													placeholder="rose@gmail.com"
 													{...register('email', {
 														required: __(
 															'This field cannot be empty',
@@ -137,6 +140,7 @@ const EditProfile: React.FC = () => {
 												<Input
 													type="text"
 													pattern="[7-9]{1}[0-9]{9}"
+													placeholder="9855666555"
 													{...register('contact', {
 														required: __(
 															'This field cannot be empty',
@@ -156,6 +160,7 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('Address', 'masteriyo')}</FormLabel>
 												<Input
 													type="type"
+													placeholder="Address"
 													{...register('address', {
 														required: __(
 															'This field cannot be empty',
@@ -175,6 +180,7 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('City', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
+													placeholder="City"
 													{...register('city', {
 														required: __(
 															'This field cannot be empty',
@@ -192,6 +198,7 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('State', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
+													placeholder="State"
 													{...register('state', {
 														required: __(
 															'This field cannot be empty',
@@ -212,6 +219,7 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('Zip Code', 'masteriyo')}</FormLabel>
 												<Input
 													type="number"
+													placeholder="Zip Code"
 													{...register('zipcode', {
 														required: __(
 															'This field cannot be empty',
@@ -229,6 +237,7 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
+													placeholder="Country"
 													{...register('country', {
 														required: __(
 															'This field cannot be empty',

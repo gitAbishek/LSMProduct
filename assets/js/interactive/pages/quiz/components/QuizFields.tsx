@@ -16,7 +16,7 @@ import {
 	Stack,
 	Text,
 } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
+import { sprintf, __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useQuery } from 'react-query';
@@ -139,11 +139,12 @@ const QuizFields: React.FC<Props> = (props) => {
 						align="center"
 						fontSize="sm">
 						<Text color="gray.500">
-							{__(
-								`Showing ${displayCurrentPageLowest} - 
-								${displayCurrentPageHighest}
-								out of ${quizData?.questions_count} Questions`,
-								'masteriyo'
+							{sprintf(
+								/* translators: %1$d: shown results from, %2$d shown results to, %3$d total count */
+								__('Showing %d - %d out of %d Questions', 'masteriyo'),
+								displayCurrentPageLowest,
+								displayCurrentPageHighest,
+								quizData?.questions_count
 							)}
 						</Text>
 

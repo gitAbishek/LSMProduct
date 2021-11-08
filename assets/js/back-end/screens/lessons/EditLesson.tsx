@@ -68,7 +68,8 @@ const EditLesson = () => {
 			onSuccess: (data: LessonSchema) => {
 				toast({
 					title: __('Lesson Updated Successfully', 'masteriyo'),
-					description: data.name + __(' has been updated successfully.'),
+					description:
+						data.name + __(' has been updated successfully.', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
 				});
@@ -87,7 +88,8 @@ const EditLesson = () => {
 			onSuccess: (data: any) => {
 				toast({
 					title: __('Lesson Deleted Successfully', 'masteriyo'),
-					description: data.name + __(' has been deleted successfully.'),
+					description:
+						data.name + __(' has been deleted successfully.', 'masteriyo'),
 					isClosable: true,
 					status: 'error',
 				});
@@ -249,7 +251,7 @@ const EditLesson = () => {
 								<AlertDialogOverlay>
 									<AlertDialogContent>
 										<AlertDialogHeader>
-											{__('Delete Lesson')} {name}
+											{__('Delete Lesson', 'masteriyo')} {name}
 										</AlertDialogHeader>
 
 										<AlertDialogBody>

@@ -156,7 +156,7 @@ const AllCourses = () => {
 				<AlertDialogOverlay>
 					<AlertDialogContent>
 						<AlertDialogHeader>
-							{__('Deleting Course')} {name}
+							{__('Deleting Course', 'masteriyo')} {name}
 						</AlertDialogHeader>
 						<AlertDialogBody>
 							{__("Are you sure? You can't restore this back", 'masteriyo')}

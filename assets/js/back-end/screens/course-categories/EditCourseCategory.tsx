@@ -64,7 +64,8 @@ const EditCourseCategory = () => {
 			onSuccess: (data: any) => {
 				toast({
 					title: __('Category Updated Successfully', 'masteriyo'),
-					description: data.name + __(' has been updated successfully.'),
+					description:
+						data.name + __(' has been updated successfully.', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
 				});
@@ -89,7 +90,8 @@ const EditCourseCategory = () => {
 			onSuccess: (data: any) => {
 				toast({
 					title: __('Category Deleted Successfully', 'masteriyo'),
-					description: data.name + __(' has been deleted successfully.'),
+					description:
+						data.name + __(' has been deleted successfully.', 'masteriyo'),
 					isClosable: true,
 					status: 'error',
 				});
@@ -219,7 +221,7 @@ const EditCourseCategory = () => {
 							<AlertDialogOverlay>
 								<AlertDialogContent>
 									<AlertDialogHeader>
-										{__('Delete Category')} {name}
+										{__('Delete Category', 'masteriyo')} {name}
 									</AlertDialogHeader>
 
 									<AlertDialogBody>

@@ -55,7 +55,7 @@ const QuizStart: React.FC<Props> = (props) => {
 				fontSize="xs">
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiTime} />
-					<Text as="strong">{__('Duration: ')}</Text>
+					<Text as="strong">{__('Duration: ', 'masteriyo')}</Text>
 					<Text ml="1">
 						{quizData?.duration === 0
 							? __('No time limit', 'masteriyo')
@@ -64,17 +64,17 @@ const QuizStart: React.FC<Props> = (props) => {
 				</ListItem>
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiInfoCircle} />
-					<Text as="strong">{__('Questions: ')}</Text>
+					<Text as="strong">{__('Questions: ', 'masteriyo')}</Text>
 					<Text ml="1">{quizData?.questions_count}</Text>
 				</ListItem>
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiCheckCircle} />
-					<Text as="strong">{__('Mark: ')}</Text>
+					<Text as="strong">{__('Mark: ', 'masteriyo')}</Text>
 					<Text ml="1">{quizData?.full_mark}</Text>
 				</ListItem>
 				<ListItem sx={listItemStyles}>
 					<ListIcon as={BiCheckDouble} />
-					<Text as="strong">{__('Pass Mark: ')}</Text>
+					<Text as="strong">{__('Pass Mark: ', 'masteriyo')}</Text>
 					<Text ml="1">{quizData?.pass_mark}</Text>
 				</ListItem>
 			</List>

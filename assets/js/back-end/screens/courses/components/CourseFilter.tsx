@@ -84,7 +84,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 						variant="outline"
 						rounded="sm"
 						fontSize="large"
-						aria-label={__('toggle filter')}
+						aria-label={__('toggle filter', 'masteriyo')}
 						onClick={() => setIsOpen(!isOpen)}
 					/>
 				)}

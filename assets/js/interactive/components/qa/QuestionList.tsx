@@ -172,7 +172,7 @@ const QuestionList: React.FC = () => {
 									placeholder="What is your question?"
 									disabled={addNewQuestion.isLoading}
 									{...register('content', {
-										required: __('Please write your message'),
+										required: __('Please write your message', 'masteriyo'),
 									})}
 								/>
 								<FormErrorMessage>

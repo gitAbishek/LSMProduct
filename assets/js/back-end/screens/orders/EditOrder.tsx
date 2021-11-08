@@ -136,7 +136,10 @@ const EditOrder = () => {
 			onSuccess: (data: any) => {
 				toast({
 					title: __('Order updated successfully', 'masteriyo'),
-					description: `#${data.id} ${__(' has been updated successfully.')}`,
+					description: `#${data.id} ${__(
+						' has been updated successfully.',
+						'masteriyo'
+					)}`,
 					isClosable: true,
 					status: 'success',
 				});
@@ -157,7 +160,10 @@ const EditOrder = () => {
 			onSuccess: (data: any) => {
 				toast({
 					title: __('Order Deleted Successfully', 'masteriyo'),
-					description: `#${data.id} ${__(' has been deleted successfully.')}`,
+					description: `#${data.id} ${__(
+						' has been deleted successfully.',
+						'masteriyo'
+					)}`,
 					isClosable: true,
 					status: 'error',
 				});
@@ -442,7 +448,7 @@ const EditOrder = () => {
 							<AlertDialogOverlay>
 								<AlertDialogContent>
 									<AlertDialogHeader>
-										{__('Delete Order')} {name}
+										{__('Delete Order', 'masteriyo')} {name}
 									</AlertDialogHeader>
 
 									<AlertDialogBody>

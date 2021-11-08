@@ -137,7 +137,7 @@ const StudentList: React.FC<Props> = (props) => {
 					<AlertDialogOverlay>
 						<AlertDialogContent>
 							<AlertDialogHeader>
-								{__('Delete User')} {data?.display_name}
+								{__('Delete User', 'masteriyo')} {data?.display_name}
 							</AlertDialogHeader>
 							<AlertDialogBody>
 								{__("Are you sure? You can't restore the user.", 'masteriyo')}

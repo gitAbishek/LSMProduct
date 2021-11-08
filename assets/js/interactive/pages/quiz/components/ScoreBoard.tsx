@@ -70,35 +70,35 @@ const ScoreBoard: React.FC<Props> = (props) => {
 				<ListItem d="flex" alignItems="center">
 					<ListIcon as={BiInfoCircle} color="green.500" />
 					<Text fontWeight="bold" flex="0 0 150px">
-						{__('Total Questions: ')}
+						{__('Total Questions: ', 'masteriyo')}
 					</Text>
 					<Text>{scoreData.total_questions}</Text>
 				</ListItem>
 				<ListItem d="flex" alignItems="center">
 					<ListIcon as={isQuizAnswered} color={checkQuizTotalAnswered} />
 					<Text fontWeight="bold" flex="0 0 150px">
-						{__('Total Answered: ')}
+						{__('Total Answered: ', 'masteriyo')}
 					</Text>
 					<Text>{scoreData.total_answered_questions}</Text>
 				</ListItem>
 				<ListItem d="flex" alignItems="center">
 					<ListIcon as={BiTargetLock} color="green.500" />
 					<Text fontWeight="bold" flex="0 0 150px">
-						{__('Total Attempts: ')}
+						{__('Total Attempts: ', 'masteriyo')}
 					</Text>
 					<Text>{scoreData.total_attempts}</Text>
 				</ListItem>
 				<ListItem d="flex" alignItems="center">
 					<ListIcon as={BiInfoSquare} color="green.500" />
 					<Text fontWeight="bold" flex="0 0 150px">
-						{__('Total Marks: ')}
+						{__('Total Marks: ', 'masteriyo')}
 					</Text>
 					<Text>{scoreData.total_marks}</Text>
 				</ListItem>
 				<ListItem d="flex" alignItems="center">
 					<ListIcon as={BiFlag} color="green.500" />
 					<Text fontWeight="bold" flex="0 0 150px">
-						{__('Marks Earned: ')}
+						{__('Marks Earned: ', 'masteriyo')}
 					</Text>
 					<Text>{scoreData.earned_marks}</Text>
 				</ListItem>

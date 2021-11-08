@@ -169,7 +169,7 @@ const AllCourseCategories = () => {
 				<AlertDialogOverlay>
 					<AlertDialogContent>
 						<AlertDialogHeader>
-							{__('Delete Category')} {name}
+							{__('Delete Category', 'masteriyo')} {name}
 						</AlertDialogHeader>
 						<AlertDialogBody>
 							{__("Are you sure? You can't restore this category", 'masteriyo')}

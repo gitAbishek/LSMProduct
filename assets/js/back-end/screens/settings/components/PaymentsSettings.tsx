@@ -192,7 +192,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormLabel>
 											{__('Address Line 1', 'masteriyo')}
 											<Tooltip
-												label={__('Your street address')}
+												label={__('Your street address', 'masteriyo')}
 												hasArrow
 												fontSize="xs">
 												<Box as="span" sx={infoIconStyles}>
@@ -211,7 +211,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									<FormLabel>
 										{__('Address Line 2', 'masteriyo')}
 										<Tooltip
-											label={__('Your street address 2')}
+											label={__('Your street address 2', 'masteriyo')}
 											hasArrow
 											fontSize="xs">
 											<Box as="span" sx={infoIconStyles}>

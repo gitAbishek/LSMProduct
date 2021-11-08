@@ -235,7 +235,7 @@ const OrderRow: React.FC<Props> = (props) => {
 					<AlertDialogOverlay>
 						<AlertDialogContent>
 							<AlertDialogHeader>
-								{__('Delete Order')} {order_number}
+								{__('Delete Order', 'masteriyo')} {order_number}
 							</AlertDialogHeader>
 							<AlertDialogBody>
 								{__("Are you sure? You can't restore this order.", 'masteriyo')}

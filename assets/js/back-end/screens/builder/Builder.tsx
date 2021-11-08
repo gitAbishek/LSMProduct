@@ -307,7 +307,7 @@ const Builder: React.FC = () => {
 					<AlertDialogOverlay>
 						<AlertDialogContent>
 							<AlertDialogHeader>
-								{__('Delete Section')} {name}
+								{__('Delete Section', 'masteriyo')} {name}
 							</AlertDialogHeader>
 							<AlertDialogBody>
 								{__(

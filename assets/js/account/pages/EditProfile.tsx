@@ -138,8 +138,7 @@ const EditProfile: React.FC = () => {
 													{__('Contact Number', 'masteriyo')}
 												</FormLabel>
 												<Input
-													type="text"
-													pattern="[7-9]{1}[0-9]{9}"
+													type="number"
 													placeholder="9855666555"
 													{...register('contact', {
 														required: __(

@@ -13,13 +13,9 @@ const Certificates = () => {
 			</Heading>
 
 			<Stack direction="row" spacing="2" justify="space-between">
-				<Text fontWeight={'bold'}>
-					{__('COURSES', 'masteriyo')}
-				</Text>
+				<Text fontWeight={'bold'}>{__('COURSES', 'masteriyo')}</Text>
 
-				<Text fontWeight={'bold'}>
-					{__('CERTIFICATE', 'masteriyo')}
-				</Text>
+				<Text fontWeight={'bold'}>{__('CERTIFICATE', 'masteriyo')}</Text>
 			</Stack>
 
 			{data.map((itemProps, key) => {

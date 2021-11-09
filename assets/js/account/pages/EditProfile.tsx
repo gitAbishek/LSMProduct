@@ -66,7 +66,7 @@ const EditProfile: React.FC = () => {
 										<Center>
 											<Avatar
 												size="xl"
-												name="	Rose Pett"
+												name="Rose Pett"
 												src={Ellipse8}
 												background="none">
 												<AvatarBadge

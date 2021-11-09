@@ -1,5 +1,4 @@
 import {
-	Avatar,
 	Box,
 	Button,
 	ButtonGroup,
@@ -8,6 +7,7 @@ import {
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
+	Image,
 	Input,
 	Stack,
 	Tab,
@@ -19,6 +19,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { Ellipse8 } from '../constants/images';
 
 type IFormInputs = {
 	firstName: string;
@@ -62,12 +63,12 @@ const EditProfile: React.FC = () => {
 								<TabPanel>
 									<Stack mt="10">
 										<Center>
-											<Avatar
+											<Image
 												size="xl"
 												name="Rose Pett"
-												src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+												src={Ellipse8}
 												style={{
-													filter: 'drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.2))',
+													filter: 'drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.1))',
 												}}
 											/>{' '}
 										</Center>

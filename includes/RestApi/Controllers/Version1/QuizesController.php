@@ -490,7 +490,7 @@ class QuizesController extends PostsController {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_attempt_reached",
 				__( 'The maximum number of attempts for the quiz have been reached.', 'masteriyo' ),
-				array( 'status' => 429 )
+				array( 'status' => 403 )
 			);
 		}
 

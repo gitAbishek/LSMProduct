@@ -64,8 +64,7 @@ const EditProfile: React.FC = () => {
 									<Stack mt="10">
 										<Center>
 											<Image
-												size="xl"
-												name="Rose Pett"
+												alt="Rose Pett"
 												src={Ellipse8}
 												style={{
 													filter: 'drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.1))',

@@ -259,7 +259,6 @@ const EditProfile: React.FC = () => {
 												<Button
 													colorScheme="blue"
 													rounded="full"
-													fontSize="small"
 													type="submit"
 													px="18">
 													{__('SAVE', 'masteriyo')}

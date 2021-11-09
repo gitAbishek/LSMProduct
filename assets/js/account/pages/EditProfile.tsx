@@ -1,4 +1,6 @@
 import {
+	Avatar,
+	AvatarBadge,
 	Box,
 	Button,
 	ButtonGroup,
@@ -7,7 +9,6 @@ import {
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
-	Image,
 	Input,
 	Stack,
 	Tab,
@@ -63,13 +64,17 @@ const EditProfile: React.FC = () => {
 								<TabPanel>
 									<Stack mt="10">
 										<Center>
-											<Image
-												alt="Rose Pett"
+											<Avatar
+												size="xl"
+												name="	Rose Pett"
 												src={Ellipse8}
-												style={{
-													filter: 'drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.1))',
-												}}
-											/>{' '}
+												background="none">
+												<AvatarBadge
+													boxSize="1.08em"
+													bg="blue.500"
+													top="-17px"
+												/>
+											</Avatar>
 										</Center>
 									</Stack>
 									<form onSubmit={onSubmit}>

@@ -23,7 +23,6 @@ const Router: React.FC = () => {
 				<Route>
 					<Dashboard />
 				</Route>
-				s{' '}
 			</Switch>
 		</HashRouter>
 	);

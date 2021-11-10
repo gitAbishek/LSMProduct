@@ -160,9 +160,9 @@ class Install {
 			`activity_type` VARCHAR(20) DEFAULT NULL,
 			`activity_status` VARCHAR(20) DEFAULT NULL,
 			`parent_id` BIGINT UNSIGNED NOT NULL DEFAULT '0',
-			`created_at` datetime DEFAULT '0000-00-00 00:00:00',
-			`modified_at` datetime DEFAULT '0000-00-00 00:00:00',
-			`completed_at` datetime DEFAULT '0000-00-00 00:00:00',
+			`created_at` DATETIME DEFAULT '0000-00-00 00:00:00',
+			`modified_at` DATETIME DEFAULT '0000-00-00 00:00:00',
+			`completed_at` DATETIME DEFAULT '0000-00-00 00:00:00',
 			PRIMARY KEY (`id`),
 			KEY `user_id` (`user_id`),
 			KEY `item_id` (`item_id`),
@@ -179,7 +179,7 @@ class Install {
 
 
 	/**
-	 * Get user acitivty item meta table schema.
+	 * Get user activity item meta table schema.
 	 *
 	 * @since 1.0.0
 	 *
@@ -220,9 +220,9 @@ class Install {
 			`item_type` VARCHAR(255) NOT NULL DEFAULT '',
 			`status` VARCHAR(255) NOT NULL DEFAULT '',
 			`parent_id` BIGINT UNSIGNED NOT NULL DEFAULT 0,
-			`date_start` datetime DEFAULT '0000-00-00 00:00:00',
-			`date_modified` datetime DEFAULT '0000-00-00 00:00:00',
-			`date_end` datetime DEFAULT '0000-00-00 00:00:00',
+			`date_start` DATETIME DEFAULT '0000-00-00 00:00:00',
+			`date_modified` DATETIME DEFAULT '0000-00-00 00:00:00',
+			`date_end` DATETIME DEFAULT '0000-00-00 00:00:00',
 			PRIMARY KEY (`id`),
 			KEY `user_id` (`user_id`),
 			KEY `item_id` (`item_id`),
@@ -279,15 +279,15 @@ class Install {
 			user_id CHAR(32) NOT NULL,
 			total_questions BIGINT UNSIGNED NOT NULL,
 			total_answered_questions BIGINT UNSIGNED NOT NULL,
-			total_marks decimal(9,2) DEFAULT NULL,
+			total_marks DECIMAL(9,2) DEFAULT NULL,
 			total_attempts BIGINT UNSIGNED NOT NULL,
 			total_correct_answers BIGINT UNSIGNED NOT NULL,
 			total_incorrect_answers BIGINT UNSIGNED NOT NULL,
-			earned_marks decimal(9,2) DEFAULT NULL,
-			answers text,
-			attempt_status varchar(50) DEFAULT NULL,
-			attempt_started_at datetime DEFAULT NULL,
-			attempt_ended_at datetime DEFAULT NULL,
+			earned_marks DECIMAL(9,2) DEFAULT NULL,
+			answers TEXT,
+			attempt_status VARCHAR(50) DEFAULT NULL,
+			attempt_started_at DATETIME DEFAULT NULL,
+			attempt_ended_at DATETIME DEFAULT NULL,
 			PRIMARY KEY (`id`),
 			KEY `course_id` (`course_id`),
 			KEY `quiz_id` (`quiz_id`),

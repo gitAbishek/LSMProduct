@@ -42,7 +42,7 @@ class Masteriyo {
 	}
 
 	/**
-	 * Get applicaiton version.
+	 * Get application version.
 	 *
 	 * @since 1.0.0
 	 *
@@ -53,7 +53,7 @@ class Masteriyo {
 	}
 
 	/**
-	 * Initialize the applicaiton.
+	 * Initialize the application.
 	 *
 	 * @since 1.0.0
 	 */
@@ -78,7 +78,7 @@ class Masteriyo {
 
 		$this->define_tables();
 
-		// Initilize the hooks.
+		// Initialize the hooks.
 		$this->init_hooks();
 	}
 
@@ -249,10 +249,10 @@ class Masteriyo {
 				'aria-label' => __( 'View masteriyo settings', 'masteriyo' ),
 			),
 		);
-		$action_link_htmls = array();
+		$action_links_html = array();
 
 		foreach ( $action_links as $key => $link ) {
-			$action_link_htmls[ $key ] = sprintf(
+			$action_links_html[ $key ] = sprintf(
 				'<a href="%s" aria-label="%s">%s</a>',
 				esc_url( $link['url'] ),
 				esc_attr( $link['aria-label'] ),
@@ -260,7 +260,7 @@ class Masteriyo {
 			);
 		}
 
-		return array_merge( $action_link_htmls, $links );
+		return array_merge( $action_links_html, $links );
 	}
 
 	/**
@@ -301,35 +301,40 @@ class Masteriyo {
 				$course_id   = is_array( $courses ) ? current( $courses ) : 0;
 			}
 
-			$user_id = get_current_user_id();
-
-			if ( ! is_user_logged_in() ) {
-				masteriyo( 'session' )->start();
-				$user_id = masteriyo( 'session' )->get_user_id();
-			}
-
-			$query = new UserCourseQuery(
-				array(
-					'course_id' => $course_id,
-					'user_id'   => $user_id,
-				)
-			);
-
-			$user_courses = $query->get_user_courses();
-
 			$course = masteriyo_get_course( $course_id );
-			if ( empty( $user_courses ) && ! is_null( $course ) && 'open' === $course->get_access_mode() ) {
-				$user_courses = masteriyo( 'user-course' );
-				$user_courses->set_status( 'active' );
-				$user_courses->set_course_id( $course_id );
-				$user_courses->set_user_id( $user_id );
-				$user_courses->save();
-				$user_courses->set_object_read( true );
-			}
 
-			if ( empty( $user_courses ) || ! masteriyo_can_start_course( $course_id, $user_id ) ) {
+			// Bail early if the course doesn't exits.
+			if ( is_null( $course ) ) {
 				wp_safe_redirect( \masteriyo_get_courses_url(), 307 );
 				exit();
+			}
+
+			if ( 'open' === $course->get_access_mode() && ! is_user_logged_in() ) {
+				masteriyo( 'session' )->start()->set_user_session_cookie( true );
+			} else {
+				$query = new UserCourseQuery(
+					array(
+						'course_id' => $course_id,
+						'user_id'   => get_current_user_id(),
+					)
+				);
+
+				$user_courses = $query->get_user_courses();
+
+				if ( empty( $user_courses ) && 'open' === $course->get_access_mode() ) {
+					$user_courses = masteriyo( 'user-course' );
+					$user_courses->set_status( 'active' );
+					$user_courses->set_course_id( $course_id );
+					$user_courses->set_user_id( get_current_user_id() );
+					$user_courses->set_date_start( current_time( 'mysql', true ) );
+					$user_courses->save();
+					$user_courses->set_object_read( true );
+				}
+
+				if ( empty( $user_courses ) || ! masteriyo_can_start_course( $course_id, get_current_user_id() ) ) {
+					wp_safe_redirect( \masteriyo_get_courses_url(), 307 );
+					exit();
+				}
 			}
 
 			$template = masteriyo_locate_template( 'learn.php' );

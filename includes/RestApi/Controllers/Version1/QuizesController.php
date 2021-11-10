@@ -180,7 +180,7 @@ class QuizesController extends PostsController {
 					'methods'             => \WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'check_answers' ),
 					'permission_callback' => function() {
-						return is_user_logged_in() || masteriyo( 'session' )->start()->get_user_id();
+						return true;
 					},
 				),
 			)
@@ -338,18 +338,18 @@ class QuizesController extends PostsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		// The quizes should be order by menu which is the sort order.
+		// The quizzes should be order by menu which is the sort order.
 		$params['order']['default']   = 'asc';
 		$params['orderby']['default'] = 'menu_order';
 
 		$params['slug']       = array(
-			'description'       => __( 'Limit result set to quizes with a specific slug.', 'masteriyo' ),
+			'description'       => __( 'Limit result set to quizzes with a specific slug.', 'masteriyo' ),
 			'type'              => 'string',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 		$params['status']     = array(
 			'default'           => 'any',
-			'description'       => __( 'Limit result set to quizes assigned a specific status.', 'masteriyo' ),
+			'description'       => __( 'Limit result set to quizzes assigned a specific status.', 'masteriyo' ),
 			'type'              => 'string',
 			'enum'              => array_merge( array( 'any', 'future' ), array_keys( get_post_statuses() ) ),
 			'sanitize_callback' => 'sanitize_key',
@@ -362,19 +362,19 @@ class QuizesController extends PostsController {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 		$params['category']   = array(
-			'description'       => __( 'Limit result set to quizes assigned a specific category ID.', 'masteriyo' ),
+			'description'       => __( 'Limit result set to quizzes assigned a specific category ID.', 'masteriyo' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 		$params['tag']        = array(
-			'description'       => __( 'Limit result set to quizes assigned a specific tag ID.', 'masteriyo' ),
+			'description'       => __( 'Limit result set to quizzes assigned a specific tag ID.', 'masteriyo' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 		$params['difficulty'] = array(
-			'description'       => __( 'Limit result set to quizes assigned a specific difficulty ID.', 'masteriyo' ),
+			'description'       => __( 'Limit result set to quizzes assigned a specific difficulty ID.', 'masteriyo' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
@@ -503,11 +503,23 @@ class QuizesController extends PostsController {
 			'attempt_status'           => 'attempt_started',
 			'attempt_started_at'       => $date,
 		);
-		$wpdb->insert( $wpdb->prefix . 'masteriyo_quiz_attempts', $attempt_data );
+		$wpdb->insert(
+			$wpdb->prefix . 'masteriyo_quiz_attempts',
+			$attempt_data,
+			array(
+				'%d',
+				'%d',
+				'%s',
+				'%d',
+				'%d',
+				'%s',
+				'%s',
+			)
+		);
 
 		$response = rest_ensure_response( $attempt_data );
 
-		return apply_filters( 'masteriyo_start_quiz_rest_reponse', $response );
+		return apply_filters( 'masteriyo_start_quiz_rest_response', $response );
 	}
 
 	/**
@@ -538,7 +550,7 @@ class QuizesController extends PostsController {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_is_not_started",
 				__( 'Quiz is not started.', 'masteriyo' ),
-				array( 'status' => 404 )
+				array( 'status' => 403 )
 			);
 		}
 
@@ -587,7 +599,7 @@ class QuizesController extends PostsController {
 
 		$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
 
-		return apply_filters( 'masteriyo_answer_check_rest_reponse', $response );
+		return apply_filters( 'masteriyo_answer_check_rest_response', $response );
 	}
 
 	/**

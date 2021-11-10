@@ -33,6 +33,16 @@ const CoursesData = [
 		started: 'Jan 5, 2020',
 		progressValue: 90,
 	},
+	{
+		id: 3,
+		imageUrl: 'https://miro.medium.com/max/750/1*OgeU8HPo8TFF1cZQ-4XjJw.jpeg',
+		tag: 'Book',
+		time: 13,
+		percent: 90,
+		title: 'Next.js next level',
+		started: 'Jan 5, 2020',
+		progressValue: 90,
+	},
 ];
 
 export default CoursesData;

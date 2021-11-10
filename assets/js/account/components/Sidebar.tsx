@@ -26,7 +26,7 @@ const Sidebar = () => {
 	return (
 		<List
 			mr="6"
-			flex="0 0 240px"
+			flex="0 0 200px"
 			borderRight="1px"
 			borderRightColor="gray.100"
 			spacing="6"

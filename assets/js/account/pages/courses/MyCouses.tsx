@@ -14,7 +14,7 @@ const MyCourses: React.FC = () => {
 				<Heading as="h1" size="xl">
 					{__('My Courses', 'masteriyo')}
 				</Heading>
-				<SimpleGrid columns={4} spacing="3">
+				<SimpleGrid columns={4} spacing="4">
 					{CoursesData.map((itemProps, key) => {
 						return <CourseItem key={key} {...itemProps} />;
 					})}

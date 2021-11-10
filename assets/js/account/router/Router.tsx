@@ -1,6 +1,6 @@
 import { Box, Container, Stack } from '@chakra-ui/react';
 import React from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import routes from '../constants/routes';
 import MyCourses from '../pages/courses/MyCouses';
@@ -31,10 +31,13 @@ const Router: React.FC = () => {
 							<Route path={routes.myProfile} exact>
 								<ProfilePage />
 							</Route>
+							<Route path={routes.editProfile} exact>
+								<EditProfile />
+							</Route>
+							<Route>
+								<Redirect to={routes.dashboard} />
+							</Route>
 						</Switch>
-						<Route path={routes.editProfile} exact>
-							<EditProfile />
-						</Route>
 					</Stack>
 				</Container>
 			</HashRouter>

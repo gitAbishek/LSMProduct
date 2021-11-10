@@ -26,7 +26,7 @@ const Sidebar = () => {
 	return (
 		<List
 			mr="6"
-			w="xs"
+			w="240px"
 			borderRight="1px"
 			borderRightColor="gray.100"
 			spacing="6"

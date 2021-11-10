@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/react';
+import { Container, Stack } from '@chakra-ui/react';
 import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
@@ -12,23 +12,25 @@ const Router: React.FC = () => {
 	return (
 		<HashRouter>
 			<Header />
-			<Stack direction="row" spacing="8">
-				<Sidebar />
-				<Switch>
-					<Route path={routes.dashboard}>
-						<Dashboard />
-					</Route>
-					<Route path={routes.myCourses}>
-						<MyCourses />
-					</Route>
-					<Route path={routes.myOrderHistory}>
-						<OrderHistory />
-					</Route>
-					<Route>
-						<Dashboard />
-					</Route>
-				</Switch>
-			</Stack>
+			<Container maxW="container.xl" py="16">
+				<Stack direction="row" spacing="8">
+					<Sidebar />
+					<Switch>
+						<Route path={routes.dashboard}>
+							<Dashboard />
+						</Route>
+						<Route path={routes.myCourses}>
+							<MyCourses />
+						</Route>
+						<Route path={routes.myOrderHistory}>
+							<OrderHistory />
+						</Route>
+						<Route>
+							<Dashboard />
+						</Route>
+					</Switch>
+				</Stack>
+			</Container>
 		</HashRouter>
 	);
 };

@@ -1,13 +1,10 @@
 import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import routes from '../constants/routes';
-<<<<<<< HEAD
 import MyCourses from '../pages/courses/MyCouses';
 import Dashboard from '../pages/dashboard/Dashboard';
 import Header from '../pages/Header';
-=======
-import Dashboard from '../pages/Dashboard';
->>>>>>> 10dd25df (implemented table)
+import OrderHistory from '../pages/order-history/OrderHistory';
 
 const Router: React.FC = () => {
 	return (
@@ -19,6 +16,9 @@ const Router: React.FC = () => {
 				</Route>
 				<Route path={routes.myCourses}>
 					<MyCourses />
+				</Route>
+				<Route path={routes.myOrderHistory}>
+					<OrderHistory />
 				</Route>
 				<Route>
 					<Dashboard />

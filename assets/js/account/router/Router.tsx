@@ -27,15 +27,16 @@ const Router: React.FC = () => {
 						<Route path={routes.myOrderHistory}>
 							<OrderHistory />
 						</Route>
-						<Route>
-							<Dashboard />
-						</Route>
-						<Route path={routes.profilePage} exact>
+
+						<Route path={routes.myProfile} exact>
 							<ProfilePage />
 						</Route>
 					</Switch>
 					<Route path={routes.editProfile} exact>
 						<EditProfile />
+					</Route>
+					<Route>
+						<Dashboard />
 					</Route>
 				</Stack>
 			</Container>

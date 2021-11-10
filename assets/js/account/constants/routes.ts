@@ -3,7 +3,6 @@ const routes = {
 	myCourses: '/courses',
 	myProfile: '/profile',
 	myOrderHistory: '/order-history',
-	profilePage: '/profile',
 	editProfile: '/edit-profile',
 };
 

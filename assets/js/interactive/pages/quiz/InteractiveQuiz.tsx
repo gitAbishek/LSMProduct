@@ -34,6 +34,7 @@ const InteractiveQuiz = () => {
 	const [scoreBoardData, setScoreBoardData] = useState<any>(null);
 	const [quizStartedOn, setQuizStartedOn] = useState<any>(null);
 	const [quizAboutToExpire, setQuizAboutToExpire] = useState<boolean>(false);
+	const [limitReached, setLimitReached] = useState(false);
 	const progressAPI = new API(urls.courseProgressItem);
 	const queryClient = useQueryClient();
 	const toast = useToast();
@@ -92,6 +93,9 @@ const InteractiveQuiz = () => {
 				setQuizStartedOn(getLocalTime(data.attempt_started_at));
 				setScoreBoardData(null);
 			},
+			onError: () => {
+				setLimitReached(true);
+			},
 		});
 		setQuizAboutToExpire(false);
 	};
@@ -149,7 +153,7 @@ const InteractiveQuiz = () => {
 								)}
 
 								{quizProgress?.data[0]?.total_attempts >=
-								quizQuery?.data?.attempts_allowed ? (
+									quizQuery?.data?.attempts_allowed || limitReached ? (
 									<Alert status="error" fontSize="sm" p="2.5">
 										<AlertIcon />
 										{__(

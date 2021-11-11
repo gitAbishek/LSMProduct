@@ -3102,7 +3102,6 @@ function masteriyo_get_page_content( $id, $num_of_words = 55 ) {
 	return $content;
 }
 
-
 /**
  * Output the page/post content.
  *
@@ -3114,5 +3113,22 @@ function masteriyo_get_page_content( $id, $num_of_words = 55 ) {
  * @return string
  */
 function masteriyo_the_page_content( $id, $num_of_words = 55 ) {
-	echo masteriyo_get_page_content( $id, $num_of_words );
+	echo masteriyo_get_page_content( $id, $num_of_words ); // phpcs:ignore
+}
+
+/** Get the current user ID.
+ *
+ * @since 1.2.1
+ *
+ * @return string|int
+ */
+function masteriyo_get_current_user_id() {
+	if ( is_user_logged_in() ) {
+		$user_id = get_current_user_id();
+	} else {
+		masteriyo( 'session' )->start()->set_user_session_cookie( true );
+		$user_id = masteriyo( 'session' )->get_user_id();
+	}
+
+	return apply_filters( 'masteriyo_get_current_user_id', $user_id );
 }

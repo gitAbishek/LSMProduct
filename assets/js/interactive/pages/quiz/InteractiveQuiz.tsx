@@ -152,8 +152,10 @@ const InteractiveQuiz = () => {
 									/>
 								)}
 
-								{quizProgress?.data[0]?.total_attempts >=
-									quizQuery?.data?.attempts_allowed || limitReached ? (
+								{(quizQuery?.data?.attempts_allowed != 0 &&
+									quizProgress?.data[0]?.total_attempts >=
+										quizQuery?.data?.attempts_allowed) ||
+								limitReached ? (
 									<Alert status="error" fontSize="sm" p="2.5">
 										<AlertIcon />
 										{__(

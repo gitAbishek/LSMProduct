@@ -246,7 +246,7 @@ function masteriyo_get_quiz_attempt_count( $quiz_id, $user_id ) {
 		)
 	);
 
-	return $attempt_count;
+	return absint( $attempt_count );
 }
 
 /**

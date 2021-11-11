@@ -5,6 +5,7 @@
  * @since 1.0.0
  */
 
+use Exception;
 use Masteriyo\Constants;
 use Masteriyo\Models\CourseReview;
 use Masteriyo\Query\UserCourseQuery;
@@ -37,7 +38,7 @@ if ( ! function_exists( 'masteriyo_is_load_login_form_assets' ) ) {
 
 if ( ! function_exists( 'masteriyo_registration_is_generate_username' ) ) {
 	/**
-	 * Check if the username should be gerenated for new users.
+	 * Check if the username should be generated for new users.
 	 *
 	 * @since 1.0.0
 	 *
@@ -50,7 +51,7 @@ if ( ! function_exists( 'masteriyo_registration_is_generate_username' ) ) {
 
 if ( ! function_exists( 'masteriyo_registration_is_generate_password' ) ) {
 	/**
-	 * Check if the password should be gerenated for new users.
+	 * Check if the password should be generated for new users.
 	 *
 	 * @since 1.0.0
 	 *
@@ -608,7 +609,7 @@ if ( ! function_exists( 'masteriyo_is_interactive_page' ) ) {
 }
 
 /**
- * Check whether the post type debug is enabbled or not.
+ * Check whether the post type debug is enabled or not.
  *
  * @since 1.0.0
  *
@@ -627,4 +628,41 @@ function masteriyo_is_post_type_debug_enabled() {
  */
 function masteriyo_is_template_debug_enabled() {
 	return masteriyo_get_setting( 'advance.debug.template_debug' );
+}
+
+if ( ! function_exists( 'masteriyo_is_quiz_attempt_limit_reached' ) ) {
+	/**
+	 * Is quiz attempt limit reached.
+	 *
+	 * @since 1.2.1
+	 *
+	 * @param int|WP_Post|Masteriyo\Models\Quiz $quiz Quiz object or ID.
+	 * @param int|WP_User|Masteriyo\Models\User $user User object or ID.
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_quiz_attempt_limit_reached( $quiz, $user ) {
+		if ( is_int( $quiz ) ) {
+			$quiz = masteriyo_get_quiz( $quiz );
+		} elseif ( is_a( $quiz, '\WP_Post' ) ) {
+			$quiz = masteriyo_get_quiz( $quiz->ID );
+		}
+
+		if ( is_int( $user ) ) {
+			$user = masteriyo_get_user( $user );
+		} elseif ( is_a( $user, '\WP_User' ) ) {
+			$user = masteriyo_get_user( $user->ID );
+		}
+
+		// Get the total quiz attempt count.
+		if ( is_a( $user, 'Masteriyo\Models\User' ) ) {
+			$attempted_count = masteriyo_get_quiz_attempt_count( $quiz->get_id(), $user->get_id() );
+		} else {
+			$attempted_count = masteriyo_get_quiz_attempt_count( $quiz->get_id(), $user );
+		}
+
+		$is_limit_reached = 0 !== $quiz->get_attempts_allowed() && $attempted_count >= $quiz->get_attempts_allowed();
+
+		return apply_filters( 'masteriyo_is_quiz_attempt_limit_reached', $is_limit_reached, $quiz, $user );
+	}
 }

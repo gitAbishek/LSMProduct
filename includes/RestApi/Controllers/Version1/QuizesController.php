@@ -481,12 +481,18 @@ class QuizesController extends PostsController {
 			}
 		}
 
-		$date = current_time( 'mysql', true );
+		$attempted_count = masteriyo_get_quiz_attempt_count( $quiz_id, $user_id );
+		$quiz            = masteriyo_get_quiz( $quiz_id );
 
-		$attempted_count     = masteriyo_get_quiz_attempt_count( $quiz_id, $user_id );
-		$max_attempt_allowed = get_post_meta( $quiz_id, '_attempts_allowed', true );
+		if ( ! $quiz ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->post_type}_invalid_id",
+				__( 'Invalid Quiz ID.', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		}
 
-		if ( $attempted_count >= $max_attempt_allowed ) {
+		if ( masteriyo_is_quiz_attempt_limit_reached( $quiz, $user_id ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_attempt_reached",
 				__( 'The maximum number of attempts for the quiz have been reached.', 'masteriyo' ),
@@ -501,7 +507,7 @@ class QuizesController extends PostsController {
 			'total_answered_questions' => 0,
 			'total_attempts'           => ++$attempted_count,
 			'attempt_status'           => 'attempt_started',
-			'attempt_started_at'       => $date,
+			'attempt_started_at'       => current_time( 'mysql', true ),
 		);
 		$wpdb->insert(
 			$wpdb->prefix . 'masteriyo_quiz_attempts',
@@ -614,7 +620,7 @@ class QuizesController extends PostsController {
 		$parameters = $request->get_params();
 
 		$quiz_id = (int) $parameters['quiz_id'];
-		$user_id = isset( $parameters['user_id'] ) ? (int) $parameters['user_id'] : get_current_user_id();
+		$user_id = isset( $parameters['user_id'] ) ? (int) $parameters['user_id'] : masteriyo_get_current_user_id();
 
 		$query_vars = array(
 			'user_id'  => $user_id,
@@ -679,7 +685,7 @@ class QuizesController extends PostsController {
 
 		if ( get_current_user_id() !== absint( $attempt->user_id ) ) {
 			return new \WP_Error(
-				"masteriyo_rest_{$this->post_type}_attempt_not_foud",
+				"masteriyo_rest_{$this->post_type}_attempt_not_found",
 				__( 'You are not allowed to read other\'s quiz attempts', 'masteriyo' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
@@ -721,7 +727,7 @@ class QuizesController extends PostsController {
 				}
 			}
 
-			// Unserialized the answers for response.
+			// Unserialize the answers for response.
 			if ( ! empty( $attempt_datas['answers'] ) ) {
 				$attempt_datas['answers'] = maybe_unserialize( $attempt_datas['answers'] );
 			}
@@ -737,7 +743,7 @@ class QuizesController extends PostsController {
 						$attempt_data[ $key ] = (int) $attempt_data[ $key ];
 					}
 
-					// Unserialized the answers for response.
+					// Unserialize the answers for response.
 					if ( ! empty( $attempt_data['answers'] ) ) {
 						$attempt_data['answers'] = maybe_unserialize( $attempt_data['answers'] );
 					}
@@ -851,7 +857,7 @@ class QuizesController extends PostsController {
 			);
 		}
 
-		// Taxonomy query to filter quizes by type, category,
+		// Taxonomy query to filter quizzes by type, category,
 		// tag, shipping class, and attribute.
 		$tax_query = array();
 
@@ -896,7 +902,7 @@ class QuizesController extends PostsController {
 	}
 
 	/**
-	 * Get the quizes'schema, conforming to JSON Schema.
+	 * Get the quizzes schema, conforming to JSON Schema.
 	 *
 	 * @since 1.0.0
 	 *
@@ -943,7 +949,7 @@ class QuizesController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'menu_order'                 => array(
-					'description' => __( 'Menu order, used to custom sort quizes.', 'masteriyo' ),
+					'description' => __( 'Menu order, used to custom sort quizzes.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),

@@ -60,6 +60,10 @@ do_action( 'masteriyo_before_main_content' );
 do_action( 'masteriyo_after_archive_header' );
 ?>
 
+<div class="masteriyo-courses--content">
+	<?php masteriyo_the_page_content( masteriyo_get_page_id( 'courses' ) ); ?>
+</div>
+
 <?php
 if ( masteriyo_course_loop() ) {
 

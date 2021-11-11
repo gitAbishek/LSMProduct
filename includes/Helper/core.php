@@ -171,7 +171,7 @@ function masteriyo_get_lessons( $args = array() ) {
 }
 
 /**
- * Get quizes.
+ * Get quizzes.
  *
  * @since 1.0.0
  *
@@ -853,7 +853,7 @@ function masteriyo_make_section_to_lessons_dictionary( $course ) {
 /** Return "theme support" values from the current theme, if set.
  *
  * @since  1.0.0
- * @param  string $prop Name of prop (or key::subkey for arrays of props) if you want a specific value. Leave blank to get all props as an array.
+ * @param  string $prop Name of prop (or key::sub-key for arrays of props) if you want a specific value. Leave blank to get all props as an array.
  * @param  mixed  $default Optional value to return if the theme does not declare support for a prop.
  * @return mixed  Value of prop(s).
  */
@@ -2358,7 +2358,7 @@ function masteriyo_format_country_state_string( $country_string ) {
 }
 
 /**
- * Check whetheter redirect to cart after course is added.
+ * Check whether redirect to cart after course is added.
  *
  * @since 1.0.0
  *
@@ -2560,7 +2560,7 @@ function masteriyo_doing_it_wrong( $function, $message, $version ) {
 }
 
 /**
- * Return the Nasteriyo API URL for a given request.
+ * Return the Masteriyo API URL for a given request.
  *
  * @since 1.0.0
  *
@@ -2705,7 +2705,7 @@ function masteriyo_generate_self_hosted_lesson_video_url( $lesson_id ) {
 }
 
 /**
- * Get setting object containg all the masteriyo settings.
+ * Get setting object containing all the masteriyo settings.
  *
  * @since 1.0.0
  *
@@ -2720,7 +2720,7 @@ function masteriyo_get_settings() {
 }
 
 /**
- * Get user acitivity statuses.
+ * Get user activity statuses.
  *
  * @since 1.0.0
  *
@@ -2788,7 +2788,7 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
 	$filtered_reviews   = array();
 	$sorted_reviews     = array();
 	$replies            = array();
-	$reply_counts = [];
+	$reply_counts       = array();
 	$trash_reply_counts = array();
 
 	foreach ( $course_reviews as $review ) {
@@ -2849,7 +2849,7 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
  * Get an image size by name or defined dimensions.
  *
  * The returned variable is filtered by masteriyo_get_image_size_{image_size} filter to
- * allow 3rd party customisation.
+ * allow 3rd party customization.
  *
  * Sizes defined by the theme take priority over settings. Settings are hidden when a theme
  * defines sizes.
@@ -3063,7 +3063,7 @@ function masteriyo_get_allowed_svg_elements() {
  *
  * @param string $hex Colour as hexadecimal (with or without hash);
  * @percent float $percent Decimal ( 0.2 = lighten by 20%(), -0.4 = darken by 40%() )
- * @return string Lightened/Darkend colour as hexadecimal (with hash);
+ * @return string Lightened/Darkened colour as hexadecimal (with hash);
  */
 function masteriyo_color_luminance( $hex, $percent ) {
 	// validate hex string
@@ -3084,3 +3084,35 @@ function masteriyo_color_luminance( $hex, $percent ) {
 	return $new_hex;
 }
 
+/**
+ * Get the page/post content.
+ *
+ * @since 1.2.1
+ *
+ * @param int $id Post/Page ID.
+ * @param int $num_of_words Number of words to extract.
+ *
+ * @return string
+ */
+function masteriyo_get_page_content( $id, $num_of_words = 55 ) {
+	$content = get_the_content( null, false, $id );
+	$content = apply_filters( 'the_content', $content );
+	$content = str_replace( ']]>', ']]&gt;', $content );
+
+	return $content;
+}
+
+
+/**
+ * Output the page/post content.
+ *
+ * @since 1.2.1
+ *
+ * @param int $id Post/Page ID.
+ * @param int $num_of_words Number of words to extract.
+ *
+ * @return string
+ */
+function masteriyo_the_page_content( $id, $num_of_words = 55 ) {
+	echo masteriyo_get_page_content( $id, $num_of_words );
+}

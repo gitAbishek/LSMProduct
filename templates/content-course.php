@@ -33,7 +33,7 @@ $categories = $course->get_categories( 'name' );
 	<div class="masteriyo-course-item--wrapper masteriyo-course--card">
 		<div class="masteriyo-course--img-wrap">
 		<a href="<?php echo esc_attr( $course->get_permalink() ); ?>">
-			<!-- Diffculty Badge -->
+			<!-- Difficulty Badge -->
 			<?php if ( $difficulty ) : ?>
 			<div class="difficulty-badge">
 				<span class="masteriyo-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>

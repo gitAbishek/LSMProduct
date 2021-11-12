@@ -157,7 +157,7 @@ const InteractiveQuiz = () => {
 									<Alert status="error" fontSize="sm" p="2.5">
 										<AlertIcon />
 										{__(
-											'You have reached the Maximum Limit to start quiz',
+											'You have reached the maximum limit to start quiz.',
 											'masteriyo'
 										)}
 									</Alert>

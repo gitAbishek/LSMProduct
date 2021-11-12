@@ -305,7 +305,12 @@ const Header: React.FC<Props> = (props) => {
 			{summary.total.completed ===
 				summary.total.pending + summary.total.completed && (
 				<Container centerContent maxW="container.xl">
-					<Alert status="success" variant="top-accent" fontSize="sm">
+					<Alert
+						status="success"
+						variant="top-accent"
+						fontSize="sm"
+						mt="4"
+						mb="-1.5">
 						<Stack
 							direction="row"
 							align="center"

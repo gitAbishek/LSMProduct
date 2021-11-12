@@ -34,7 +34,6 @@ const InteractiveQuiz = () => {
 	const [scoreBoardData, setScoreBoardData] = useState<any>(null);
 	const [quizStartedOn, setQuizStartedOn] = useState<any>(null);
 	const [quizAboutToExpire, setQuizAboutToExpire] = useState<boolean>(false);
-	const [limitReached, setLimitReached] = useState(false);
 	const progressAPI = new API(urls.courseProgressItem);
 	const queryClient = useQueryClient();
 	const toast = useToast();
@@ -93,9 +92,6 @@ const InteractiveQuiz = () => {
 				setQuizStartedOn(getLocalTime(data.attempt_started_at));
 				setScoreBoardData(null);
 			},
-			onError: () => {
-				setLimitReached(true);
-			},
 		});
 		setQuizAboutToExpire(false);
 	};
@@ -105,6 +101,8 @@ const InteractiveQuiz = () => {
 			onSuccess: (data: any) => {
 				setQuizStartedOn(null);
 				setScoreBoardData(data);
+				quizProgress.refetch();
+				quizQuery.refetch();
 			},
 		});
 	};
@@ -136,6 +134,10 @@ const InteractiveQuiz = () => {
 	const onQuizeExpire = () => onSubmit(methods.getValues());
 
 	if (quizQuery.isSuccess && quizProgress.isSuccess) {
+		const maxLimitReached =
+			quizQuery?.data?.attempts_allowed != 0 &&
+			quizProgress?.data[0]?.total_attempts >=
+				quizQuery?.data?.attempts_allowed;
 		return (
 			<Container centerContent maxW="container.xl" py="16">
 				<Box bg="white" p={['5', null, '14']} shadow="box" w="full">
@@ -151,11 +153,7 @@ const InteractiveQuiz = () => {
 										}}
 									/>
 								)}
-
-								{(quizQuery?.data?.attempts_allowed != 0 &&
-									quizProgress?.data[0]?.total_attempts >=
-										quizQuery?.data?.attempts_allowed) ||
-								limitReached ? (
+								{maxLimitReached && (
 									<Alert status="error" fontSize="sm" p="2.5">
 										<AlertIcon />
 										{__(
@@ -163,7 +161,9 @@ const InteractiveQuiz = () => {
 											'masteriyo'
 										)}
 									</Alert>
-								) : quizStartedOn ? (
+								)}
+
+								{quizStartedOn ? (
 									<QuizFields
 										quizAboutToExpire={quizAboutToExpire}
 										quizData={quizQuery.data}
@@ -176,6 +176,7 @@ const InteractiveQuiz = () => {
 										isFinishButtonLoading={completeMutation.isLoading}
 										isButtonDisabled={completeQuiz?.data?.completed}
 										onCompletePress={onCompletePress}
+										limitReached={maxLimitReached}
 									/>
 								) : (
 									<QuizStart

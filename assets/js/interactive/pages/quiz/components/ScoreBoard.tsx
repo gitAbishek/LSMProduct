@@ -29,6 +29,7 @@ interface Props {
 	isButtonDisabled?: boolean;
 	isFinishButtonLoading: boolean;
 	onCompletePress: () => void;
+	limitReached: boolean;
 }
 
 const ScoreBoard: React.FC<Props> = (props) => {
@@ -39,6 +40,7 @@ const ScoreBoard: React.FC<Props> = (props) => {
 		onCompletePress,
 		isButtonDisabled,
 		isFinishButtonLoading,
+		limitReached,
 	} = props;
 
 	const listStyles = {
@@ -122,6 +124,7 @@ const ScoreBoard: React.FC<Props> = (props) => {
 					onClick={onStartPress}
 					colorScheme="blue"
 					isLoading={isButtonLoading}
+					isDisabled={limitReached}
 					rounded="full"
 					fontWeight="bold"
 					leftIcon={<Icon as={BiRefresh} fontSize="xl" />}

@@ -83,6 +83,7 @@ const InteractiveQuiz = () => {
 			{
 				onSuccess: () => {
 					completeQuiz.refetch();
+					queryClient.invalidateQueries(`courseProgress${courseId}`);
 				},
 			}
 		);

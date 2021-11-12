@@ -306,14 +306,27 @@ const Header: React.FC<Props> = (props) => {
 				summary.total.pending + summary.total.completed && (
 				<Container centerContent maxW="container.lg">
 					<Alert status="success" variant="top-accent" fontSize="sm">
-						<AlertIcon />
-						<AlertTitle mr={2}>{__('Congratulation!', 'masteriyo')}</AlertTitle>
-						<AlertDescription>
-							{__('You have successfully completed this course.', 'masteriyo')}
-						</AlertDescription>
-						<Link href={courseUrl}>
-							<Button>{__('Back to Course', 'masteriyo')}</Button>
-						</Link>
+						<Stack
+							direction="row"
+							align="center"
+							justify="space-between"
+							w="full">
+							<Stack direction="row">
+								<AlertIcon />
+								<AlertTitle mr={2}>
+									{__('Congratulation!', 'masteriyo')}
+								</AlertTitle>
+								<AlertDescription>
+									{__(
+										'You have successfully completed this course.',
+										'masteriyo'
+									)}
+								</AlertDescription>
+							</Stack>
+							<Link href={courseUrl}>
+								<Button size="sm">{__('Back to Course', 'masteriyo')}</Button>
+							</Link>
+						</Stack>
 					</Alert>
 				</Container>
 			)}

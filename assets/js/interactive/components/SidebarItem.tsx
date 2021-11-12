@@ -13,7 +13,7 @@ import {
 import React from 'react';
 import {
 	BiAlignLeft,
-	BiCheck,
+	BiCheckCircle,
 	BiMinus,
 	BiPlay,
 	BiPlus,
@@ -82,24 +82,38 @@ const SidebarItem: React.FC<Props> = (props) => {
 										borderTop="1px"
 										borderTopColor="gray.200"
 										px="3"
-										py="3">
+										py="3"
+										pr="5">
 										<Link
 											to={getNavigationRoute(
 												content.item_id,
 												content.item_type,
 												courseId
 											)}>
-											<Stack direction="row" spacing="2" alignItems="center">
-												<Icon
-													as={getContentIcon(content.item_type, content.video)}
-													color="blue.500"
-													fontSize="xl"
-												/>
-												<Text color="gray.300" fontSize="xs" fontWeight="bold">
-													{index + 1}
-												</Text>
-												<Text fontSize="xs">{content.item_title}</Text>
-												{content.completed && <Icon as={BiCheck} />}
+											<Stack
+												direction="row"
+												justify="space-between"
+												align="center">
+												<Stack direction="row" spacing="2" alignItems="center">
+													<Icon
+														as={getContentIcon(
+															content.item_type,
+															content.video
+														)}
+														color="blue.500"
+														fontSize="xl"
+													/>
+													<Text
+														color="gray.300"
+														fontSize="xs"
+														fontWeight="bold">
+														{index + 1}
+													</Text>
+													<Text fontSize="xs">{content.item_title}</Text>
+												</Stack>
+												{content.completed && (
+													<Icon as={BiCheckCircle} color="green.400" />
+												)}
 											</Stack>
 										</Link>
 									</ListItem>

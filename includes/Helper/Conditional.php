@@ -5,7 +5,6 @@
  * @since 1.0.0
  */
 
-use Exception;
 use Masteriyo\Constants;
 use Masteriyo\Models\CourseReview;
 use Masteriyo\Query\UserCourseQuery;

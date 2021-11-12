@@ -11,7 +11,14 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import React from 'react';
-import { BiAlignLeft, BiMinus, BiPlay, BiPlus, BiTimer } from 'react-icons/bi';
+import {
+	BiAlignLeft,
+	BiCheck,
+	BiMinus,
+	BiPlay,
+	BiPlus,
+	BiTimer,
+} from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import { CourseContentMap } from '../schemas';
 import { getNavigationRoute } from './FloatingNavigation';
@@ -92,6 +99,7 @@ const SidebarItem: React.FC<Props> = (props) => {
 													{index + 1}
 												</Text>
 												<Text fontSize="xs">{content.item_title}</Text>
+												{content.completed && <Icon as={BiCheck} />}
 											</Stack>
 										</Link>
 									</ListItem>

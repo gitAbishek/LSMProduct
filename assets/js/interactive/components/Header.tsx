@@ -1,7 +1,10 @@
 import {
 	Alert,
+	AlertDescription,
 	AlertIcon,
+	AlertTitle,
 	Box,
+	Button,
 	CircularProgress,
 	CircularProgressLabel,
 	Container,
@@ -9,6 +12,7 @@ import {
 	Heading,
 	IconButton,
 	Image,
+	Link,
 	List,
 	ListItem,
 	Popover,
@@ -303,7 +307,13 @@ const Header: React.FC<Props> = (props) => {
 				<Container centerContent maxW="container.lg">
 					<Alert status="success" variant="top-accent" fontSize="sm">
 						<AlertIcon />
-						{__('You have successfully completed this course.', 'masteriyo')}
+						<AlertTitle mr={2}>{__('Congratulation!', 'masteriyo')}</AlertTitle>
+						<AlertDescription>
+							{__('You have successfully completed this course.', 'masteriyo')}
+						</AlertDescription>
+						<Link href={courseUrl}>
+							<Button>{__('Back to Course', 'masteriyo')}</Button>
+						</Link>
 					</Alert>
 				</Container>
 			)}

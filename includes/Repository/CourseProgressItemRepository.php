@@ -147,8 +147,6 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 
 			}
 		}
-
-		$this->update_course_progress( $course_progress_item );
 	}
 
 	/**

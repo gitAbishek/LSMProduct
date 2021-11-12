@@ -306,7 +306,12 @@ class CourseProgressController extends CrudController {
 	 * @return array
 	 */
 	protected function get_course_progress_data( $course_progress, $context = 'view' ) {
-		$course = masteriyo_get_course( $course_progress->get_course_id( $context ) );
+		$course  = masteriyo_get_course( $course_progress->get_course_id( $context ) );
+		$summary = $course_progress->get_summary( 'all' );
+
+		if ( 0 === $summary['total']['pending'] ) {
+			$course_progress->set_status( 'completed' );
+		}
 
 		$data = array(
 			'id'               => $course_progress->get_id( $context ),
@@ -319,7 +324,7 @@ class CourseProgressController extends CrudController {
 			'modified_at'      => masteriyo_rest_prepare_date_response( $course_progress->get_modified_at( $context ) ),
 			'completed_at'     => masteriyo_rest_prepare_date_response( $course_progress->get_completed_at( $context ) ),
 			'items'            => $this->get_course_progress_items( $course_progress ),
-			'summary'          => $course_progress->get_summary( 'all' ),
+			'summary'          => $summary,
 		);
 
 		return $data;

@@ -57,7 +57,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		$progress = current( $query->get_course_progress() );
 
 		// There can be only one course progress for each course and user.
-		// So, update and return the previous course progreess if it exits.
+		// So, update and return the previous course progress if it exits.
 		if ( is_a( $progress, 'Masteriyo\Models\CourseProgress' ) ) {
 			$progress->set_props(
 				array(
@@ -156,7 +156,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 
 		if ( array_intersect( $course_progress_data_keys, array_keys( $changes ) ) ) {
 			$completed_at = '';
-			if ( 'complete' === $course_progress->get_status( 'edit' ) ) {
+			if ( 'completed' === $course_progress->get_status( 'edit' ) ) {
 				$completed_at = $course_progress->get_completed_at( 'edit' );
 				$completed_at = is_null( $completed_at ) ? current_time( 'mysql', true ) : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
 			}

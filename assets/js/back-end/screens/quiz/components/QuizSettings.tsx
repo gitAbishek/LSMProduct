@@ -43,6 +43,9 @@ const QuizSettings: React.FC<Props> = (props) => {
 	} = useFormContext<QuizSchema>();
 
 	const [hours, minutes] = convertMinutesToHours(quizData?.duration || 0);
+	const [attemptsDisplayValue, setAttemptsDisplayValue] = useState(
+		quizData?.attempts_allowed != 0 ? '1' : '0'
+	);
 
 	const [displayValue, setDisplayValue] = useState(
 		quizData?.questions_display_per_page != 0 ? '1' : '0'
@@ -172,39 +175,74 @@ const QuizSettings: React.FC<Props> = (props) => {
 									</FormControl>
 								</Stack>
 							</Stack>
-
-							<FormControl isInvalid={!!errors?.attempts_allowed}>
+							<FormControl>
 								<FormLabel>{__('Attempts Allowed', 'masteriyo')}</FormLabel>
+								<RadioGroup
+									onChange={setAttemptsDisplayValue}
+									value={attemptsDisplayValue}>
+									<Stack direction="column" spacing="4">
+										<Stack direction="row" spacing="8" align="flex-start">
+											<Radio
+												onChange={(e: any) =>
+													setValue('attempts_allowed', e.target.value)
+												}
+												value="0">
+												{__('No limit', 'masteriyo')}
+											</Radio>
 
-								<Controller
-									name="attempts_allowed"
-									defaultValue={quizData?.attempts_allowed || 5}
-									rules={{
-										required: __('Attempts allowed is required', 'masteriyo'),
-									}}
-									render={({ field }) => (
-										<InputGroup>
-											<NumberInput
-												{...field}
-												defaultValue={quizData?.attempts_allowed || 5}
-												w="full"
-												min={0}>
-												<NumberInputField rounded="sm" />
-												<NumberInputStepper>
-													<NumberIncrementStepper />
-													<NumberDecrementStepper />
-												</NumberInputStepper>
-											</NumberInput>
-											<InputRightAddon>
-												{__('Attempts', 'masteriyo')}
-											</InputRightAddon>
-										</InputGroup>
-									)}
-								/>
-								<FormErrorMessage>
-									{errors?.attempts_allowed &&
-										errors?.attempts_allowed?.message}
-								</FormErrorMessage>
+											<Radio
+												value="1"
+												onChange={() =>
+													setValue(
+														'attempts_allowed',
+														quizData?.attempts_allowed || 50
+													)
+												}>
+												{__('Limit', 'masteriyo')}
+											</Radio>
+										</Stack>
+										<Collapse in={attemptsDisplayValue != '0'} animateOpacity>
+											<FormControl isInvalid={!!errors?.attempts_allowed}>
+												<FormLabel>
+													{__('Number of Attempts', 'masteriyo')}
+												</FormLabel>
+
+												<Controller
+													name="attempts_allowed"
+													defaultValue={quizData?.attempts_allowed || 50}
+													rules={{
+														required: __(
+															'Attempts allowed is required',
+															'masteriyo'
+														),
+													}}
+													render={({ field }) => (
+														<InputGroup>
+															<NumberInput
+																{...field}
+																defaultValue={quizData?.attempts_allowed || 50}
+																w="full"
+																min={1}>
+																<NumberInputField rounded="sm" />
+																<NumberInputStepper>
+																	<NumberIncrementStepper />
+																	<NumberDecrementStepper />
+																</NumberInputStepper>
+															</NumberInput>
+															<InputRightAddon>
+																{__('Attempts', 'masteriyo')}
+															</InputRightAddon>
+														</InputGroup>
+													)}
+												/>
+												<FormErrorMessage>
+													{errors?.attempts_allowed &&
+														errors?.attempts_allowed?.message}
+												</FormErrorMessage>
+											</FormControl>
+										</Collapse>
+									</Stack>
+								</RadioGroup>
 							</FormControl>
 						</Stack>
 					</TabPanel>

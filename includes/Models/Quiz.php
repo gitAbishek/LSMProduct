@@ -71,7 +71,7 @@ class Quiz extends Model {
 		'pass_mark'                  => 0,
 		'full_mark'                  => 0,
 		'duration'                   => 0, // Seconds
-		'attempts_allowed'           => 5,
+		'attempts_allowed'           => 0,
 		'questions_display_per_page' => 0,
 	);
 

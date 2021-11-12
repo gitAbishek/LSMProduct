@@ -625,7 +625,7 @@ class QuizesController extends PostsController {
 		$query_vars = array(
 			'user_id'  => $user_id,
 			'quiz_id'  => $quiz_id,
-			'status'   => $parameters['status'],
+			'status'   => isset( $parameters['status'] ) ? $parameters['status'] : '',
 			'per_page' => $parameters['per_page'],
 			'paged'    => $parameters['paged'],
 			'orderby'  => $parameters['orderby'],

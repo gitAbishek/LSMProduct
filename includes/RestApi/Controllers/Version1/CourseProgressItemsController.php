@@ -330,7 +330,7 @@ class CourseProgressItemsController extends CrudController {
 			array(
 				'paged'        => 1,
 				'per_page'     => 10,
-				'user_id'      => get_current_user_id(),
+				'user_id'      => masteriyo_get_current_user_id(),
 				'status'       => 'any',
 				'started_at'   => null,
 				'modified_at'  => null,

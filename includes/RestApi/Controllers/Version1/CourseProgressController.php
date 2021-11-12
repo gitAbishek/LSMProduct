@@ -1011,7 +1011,7 @@ class CourseProgressController extends CrudController {
 				function( $lesson_quiz ) {
 					$query = new CourseProgressItemQuery(
 						array(
-							'user_id' => get_current_user_id(),
+							'user_id' => masteriyo_get_current_user_id(),
 							'item_id' => $lesson_quiz->ID,
 						)
 					);

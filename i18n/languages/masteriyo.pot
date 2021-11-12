@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Masteriyo - LMS for WordPress 1.2.0\n"
+"Project-Id-Version: Masteriyo - LMS for WordPress 1.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-lms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-11-08T13:24:04+05:45\n"
+"POT-Creation-Date: 2021-11-12T15:08:28+05:45\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: masteriyo\n"
@@ -111,8 +111,8 @@ msgstr ""
 
 #: includes/AdminMenu.php:72
 #: includes/AdminMenu.php:73
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Categories"
 msgstr ""
@@ -122,8 +122,8 @@ msgstr ""
 #: includes/FrontendQuery.php:224
 #: includes/PostType/Order.php:34
 #: includes/PostType/Order.php:62
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Orders"
 msgstr ""
@@ -136,8 +136,8 @@ msgstr ""
 #: includes/AdminMenu.php:99
 #: includes/AdminMenu.php:100
 #: includes/Masteriyo.php:248
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Settings"
 msgstr ""
@@ -357,8 +357,8 @@ msgstr ""
 #: includes/Countries.php:1331
 #: templates/account/edit-account.php:66
 #: templates/account/view-account.php:35
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "State"
 msgstr ""
@@ -452,8 +452,8 @@ msgid "Phone"
 msgstr ""
 
 #: includes/Countries.php:1454
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Email address"
 msgstr ""
@@ -481,8 +481,8 @@ msgstr ""
 
 #: includes/Emails/NewOrderEmail.php:185
 #: includes/PostType/Order.php:42
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "New Order"
 msgstr ""
@@ -623,8 +623,8 @@ msgid "Username is required."
 msgstr ""
 
 #: includes/FormHandler/RegistrationFormHandler.php:126
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Email is required."
 msgstr ""
@@ -713,8 +713,8 @@ msgid "Lost password"
 msgstr ""
 
 #: includes/Gateways/Offline/Offline.php:54
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Offline"
 msgstr ""
@@ -873,8 +873,8 @@ msgstr ""
 #: includes/Gateways/Paypal/Request.php:276
 #: includes/Helper/Order.php:266
 #: includes/PostType/Order.php:35
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Order"
 msgstr ""
@@ -1592,8 +1592,8 @@ msgid "Dashboard"
 msgstr ""
 
 #: includes/Helper/core.php:1791
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "My Courses"
 msgstr ""
@@ -1603,8 +1603,8 @@ msgid "Account Details"
 msgstr ""
 
 #: includes/Helper/core.php:1799
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Edit Account"
 msgstr ""
@@ -1614,8 +1614,8 @@ msgid "My Order History"
 msgstr ""
 
 #: includes/Helper/core.php:1807
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Logout"
 msgstr ""
@@ -1661,22 +1661,22 @@ msgid "Masteriyo Learn Page"
 msgstr ""
 
 #: includes/Helper/core.php:2674
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Self Hosted"
 msgstr ""
 
 #: includes/Helper/core.php:2675
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "YouTube"
 msgstr ""
 
 #: includes/Helper/core.php:2676
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Vimeo"
 msgstr ""
@@ -1686,8 +1686,8 @@ msgid "Placeholder"
 msgstr ""
 
 #: includes/Helper/Format.php:302
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Free"
 msgstr ""
@@ -1782,15 +1782,15 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/Helper/Order.php:267
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Date"
 msgstr ""
 
 #: includes/Helper/Order.php:268
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Status"
 msgstr ""
@@ -1798,23 +1798,23 @@ msgstr ""
 #: includes/Helper/Order.php:269
 #: templates/account/view-order.php:65
 #: templates/checkout/order-summary.php:35
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Total"
 msgstr ""
 
 #: includes/Helper/Order.php:270
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Actions"
 msgstr ""
 
 #: includes/Helper/Order.php:294
 #: templates/checkout/thankyou.php:43
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Pay"
 msgstr ""
@@ -1825,8 +1825,8 @@ msgstr ""
 
 #: includes/Helper/Order.php:304
 #: templates/single-course/modals.php:27
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Cancel"
 msgstr ""
@@ -1895,11 +1895,11 @@ msgstr ""
 msgid "View masteriyo settings"
 msgstr ""
 
-#: includes/Masteriyo.php:359
+#: includes/Masteriyo.php:364
 msgid "This password reset key is for a different user account. Please log out and try again."
 msgstr ""
 
-#: includes/Masteriyo.php:429
+#: includes/Masteriyo.php:434
 msgid "Minimum WordPress version required to work Masteriyo is v5.0."
 msgstr ""
 
@@ -1988,8 +1988,8 @@ msgstr ""
 
 #: includes/PostType/Course.php:37
 #: includes/Repository/CourseRepository.php:69
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Course"
 msgstr ""
@@ -2008,8 +2008,8 @@ msgstr ""
 
 #: includes/PostType/Course.php:41
 #: templates/account/courses.php:107
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "All Courses"
 msgstr ""
@@ -2029,8 +2029,8 @@ msgstr ""
 #: includes/PostType/Question.php:36
 #: includes/PostType/Quiz.php:44
 #: includes/PostType/Section.php:42
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add New"
 msgstr ""
@@ -2083,8 +2083,8 @@ msgstr ""
 #: includes/PostType/Question.php:45
 #: includes/PostType/Quiz.php:53
 #: includes/PostType/Section.php:51
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Featured Image"
 msgstr ""
@@ -2152,16 +2152,16 @@ msgstr ""
 
 #: includes/PostType/Lesson.php:25
 #: includes/PostType/Lesson.php:53
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Lessons"
 msgstr ""
 
 #: includes/PostType/Lesson.php:26
 #: includes/Repository/LessonRepository.php:50
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Lesson"
 msgstr ""
@@ -2187,15 +2187,15 @@ msgid "New Lesson"
 msgstr ""
 
 #: includes/PostType/Lesson.php:34
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Edit Lesson"
 msgstr ""
 
 #: includes/PostType/Lesson.php:35
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Update Lesson"
 msgstr ""
@@ -2263,22 +2263,22 @@ msgid "All Orders"
 msgstr ""
 
 #: includes/PostType/Order.php:43
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Edit Order"
 msgstr ""
 
 #: includes/PostType/Order.php:44
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Update Order"
 msgstr ""
 
 #: includes/PostType/Order.php:45
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "View Order"
 msgstr ""
@@ -2327,19 +2327,19 @@ msgstr ""
 
 #: includes/PostType/Question.php:29
 #: includes/PostType/Question.php:57
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Questions"
 msgstr ""
 
 #: includes/PostType/Question.php:30
 #: includes/Repository/QuestionRepository.php:59
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Question"
 msgstr ""
@@ -2425,11 +2425,11 @@ msgstr ""
 
 #: includes/PostType/Quiz.php:38
 #: includes/Repository/QuizRepository.php:57
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Quiz"
 msgstr ""
@@ -2594,7 +2594,7 @@ msgstr ""
 msgid "Invalid course_difficulty."
 msgstr ""
 
-#: includes/Repository/CourseProgressItemRepository.php:263
+#: includes/Repository/CourseProgressItemRepository.php:261
 msgid "Invalid course progress item ID."
 msgstr ""
 
@@ -2678,7 +2678,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/CourseCategoriesController.php:71
 #: includes/RestApi/Controllers/Version1/CourseDifficultiesController.php:77
 #: includes/RestApi/Controllers/Version1/CourseProgressController.php:113
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:387
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:392
 #: includes/RestApi/Controllers/Version1/CourseProgressItemsController.php:98
 #: includes/RestApi/Controllers/Version1/CourseProgressItemsController.php:371
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:102
@@ -2703,7 +2703,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/QuizesController.php:150
 #: includes/RestApi/Controllers/Version1/QuizesController.php:169
 #: includes/RestApi/Controllers/Version1/QuizesController.php:266
-#: includes/RestApi/Controllers/Version1/QuizesController.php:900
+#: includes/RestApi/Controllers/Version1/QuizesController.php:918
 #: includes/RestApi/Controllers/Version1/RestTermsController.php:91
 #: includes/RestApi/Controllers/Version1/SectionsController.php:109
 #: includes/RestApi/Controllers/Version1/SectionsController.php:293
@@ -2930,7 +2930,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:320
 #: includes/RestApi/Controllers/Version1/OrdersController.php:617
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:587
-#: includes/RestApi/Controllers/Version1/QuizesController.php:1015
+#: includes/RestApi/Controllers/Version1/QuizesController.php:1033
 #: includes/RestApi/Controllers/Version1/SectionsController.php:354
 #: includes/RestApi/Controllers/Version1/UsersController.php:577
 msgid "Meta data."
@@ -2944,7 +2944,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:327
 #: includes/RestApi/Controllers/Version1/OrdersController.php:624
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:594
-#: includes/RestApi/Controllers/Version1/QuizesController.php:1022
+#: includes/RestApi/Controllers/Version1/QuizesController.php:1040
 #: includes/RestApi/Controllers/Version1/SectionsController.php:361
 #: includes/RestApi/Controllers/Version1/UsersController.php:584
 msgid "Meta ID."
@@ -2958,7 +2958,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:333
 #: includes/RestApi/Controllers/Version1/OrdersController.php:630
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:600
-#: includes/RestApi/Controllers/Version1/QuizesController.php:1028
+#: includes/RestApi/Controllers/Version1/QuizesController.php:1046
 #: includes/RestApi/Controllers/Version1/SectionsController.php:367
 #: includes/RestApi/Controllers/Version1/UsersController.php:590
 msgid "Meta key."
@@ -2972,7 +2972,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/OrderItemsController.php:338
 #: includes/RestApi/Controllers/Version1/OrdersController.php:635
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:605
-#: includes/RestApi/Controllers/Version1/QuizesController.php:1033
+#: includes/RestApi/Controllers/Version1/QuizesController.php:1051
 #: includes/RestApi/Controllers/Version1/SectionsController.php:372
 #: includes/RestApi/Controllers/Version1/UsersController.php:595
 msgid "Meta value."
@@ -3063,11 +3063,11 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/CommentsController.php:278
 #: includes/RestApi/Controllers/Version1/CommentsController.php:309
 #: includes/RestApi/Controllers/Version1/CourseChildrenController.php:116
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:531
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:554
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:577
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:611
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:642
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:536
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:559
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:582
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:616
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:647
 #: includes/RestApi/Controllers/Version1/CourseProgressItemsController.php:543
 #: includes/RestApi/Controllers/Version1/CourseProgressItemsController.php:566
 #: includes/RestApi/Controllers/Version1/CourseProgressItemsController.php:589
@@ -3154,7 +3154,7 @@ msgid "Sorry, you cannot list resources."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/CommentsController.php:256
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:589
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:594
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:575
 #: includes/RestApi/Controllers/Version1/FaqsController.php:434
 #: includes/RestApi/Controllers/Version1/LessonsController.php:648
@@ -3170,7 +3170,7 @@ msgid "Sorry, you are not allowed to create resources."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/CommentsController.php:287
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:651
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:656
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:630
 #: includes/RestApi/Controllers/Version1/CourseReviewsController.php:786
 #: includes/RestApi/Controllers/Version1/FaqsController.php:503
@@ -3185,7 +3185,7 @@ msgid "Sorry, you are not allowed to delete resources."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/CommentsController.php:318
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:620
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:625
 #: includes/RestApi/Controllers/Version1/CourseQuestionAnswersController.php:671
 #: includes/RestApi/Controllers/Version1/CourseReviewsController.php:841
 #: includes/RestApi/Controllers/Version1/FaqsController.php:549
@@ -3281,8 +3281,8 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:898
 #: includes/RestApi/Controllers/Version1/QuizBuilderController.php:228
 #: includes/RestApi/Controllers/Version1/QuizBuilderController.php:425
-#: includes/RestApi/Controllers/Version1/QuizesController.php:551
-#: includes/RestApi/Controllers/Version1/QuizesController.php:1198
+#: includes/RestApi/Controllers/Version1/QuizesController.php:569
+#: includes/RestApi/Controllers/Version1/QuizesController.php:1216
 #: includes/RestApi/Controllers/Version1/SectionsController.php:549
 #: includes/RestApi/Controllers/Version1/SectionsController.php:595
 msgid "Invalid ID."
@@ -3341,7 +3341,7 @@ msgid "Limit course progress per page."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/CourseProgressController.php:179
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:393
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:398
 #: includes/RestApi/Controllers/Version1/CourseProgressItemsController.php:171
 #: includes/RestApi/Controllers/Version1/CourseProgressItemsController.php:383
 #: includes/RestApi/Controllers/Version1/QuizesController.php:208
@@ -3349,11 +3349,11 @@ msgid "User ID."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/CourseProgressController.php:187
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:398
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:403
 #: includes/RestApi/Controllers/Version1/FaqsController.php:306
 #: includes/RestApi/Controllers/Version1/LessonsController.php:419
 #: includes/RestApi/Controllers/Version1/QuestionsController.php:540
-#: includes/RestApi/Controllers/Version1/QuizesController.php:922
+#: includes/RestApi/Controllers/Version1/QuizesController.php:940
 #: includes/RestApi/Controllers/Version1/SectionsController.php:337
 msgid "Course ID."
 msgstr ""
@@ -3371,57 +3371,57 @@ msgstr ""
 msgid "Limit response to resources started after a given ISO8601 compliant date."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:403
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:408
 msgid "Course progress status."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:409
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:414
 msgid "Course progress start date in GMT."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:415
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:420
 msgid "Course progress modified date in GMT."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:421
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:426
 msgid "Course progress complete date in GMT."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:706
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:711
 #: includes/RestApi/Controllers/Version1/CourseProgressItemsController.php:687
 msgid "User ID is invalid."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:716
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:721
 #: includes/RestApi/Controllers/Version1/CourseProgressItemsController.php:697
 msgid "Student cannot access other's course progress."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:746
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:751
 #: includes/RestApi/Controllers/Version1/CourseProgressItemsController.php:739
 msgid "Course ID is invalid."
 msgstr ""
 
 #. translators: %s: item id
 #. translators: %s: item type
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:776
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:785
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:781
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:790
 msgid "Missing parameter(s): %s"
 msgstr ""
 
 #. translators: %s: item type
 #. translators: %s: item type
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:794
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:812
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:799
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:817
 msgid "Invalid parameter(s): %s"
 msgstr ""
 
 #. translators: %s: item types
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:800
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:805
 msgid "item_type is not of type %s"
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/CourseProgressController.php:816
+#: includes/RestApi/Controllers/Version1/CourseProgressController.php:821
 msgid "completed is not of type boolean"
 msgstr ""
 
@@ -3666,7 +3666,7 @@ msgstr ""
 #: includes/RestApi/Controllers/Version1/CoursesController.php:471
 #: includes/RestApi/Controllers/Version1/LessonsController.php:425
 #: includes/RestApi/Controllers/Version1/OrdersController.php:587
-#: includes/RestApi/Controllers/Version1/QuizesController.php:928
+#: includes/RestApi/Controllers/Version1/QuizesController.php:946
 #: includes/RestApi/Controllers/Version1/SectionsController.php:343
 msgid "Course name."
 msgstr ""
@@ -4264,6 +4264,7 @@ msgstr ""
 
 #: includes/RestApi/Controllers/Version1/QuizesController.php:309
 #: includes/RestApi/Controllers/Version1/QuizesController.php:470
+#: includes/RestApi/Controllers/Version1/QuizesController.php:490
 msgid "Invalid Quiz ID."
 msgstr ""
 
@@ -4272,11 +4273,11 @@ msgid "Sorry, you are not allowed to start quiz. Please enroll a course first."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/QuizesController.php:346
-msgid "Limit result set to quizes with a specific slug."
+msgid "Limit result set to quizzes with a specific slug."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/QuizesController.php:352
-msgid "Limit result set to quizes assigned a specific status."
+msgid "Limit result set to quizzes assigned a specific status."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/QuizesController.php:359
@@ -4284,15 +4285,15 @@ msgid "Limit results by course id."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/QuizesController.php:365
-msgid "Limit result set to quizes assigned a specific category ID."
+msgid "Limit result set to quizzes assigned a specific category ID."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/QuizesController.php:371
-msgid "Limit result set to quizes assigned a specific tag ID."
+msgid "Limit result set to quizzes assigned a specific tag ID."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/QuizesController.php:377
-msgid "Limit result set to quizes assigned a specific difficulty ID."
+msgid "Limit result set to quizzes assigned a specific difficulty ID."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/QuizesController.php:462
@@ -4300,96 +4301,96 @@ msgid "Please sign in to start the quiz."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/QuizesController.php:478
-#: includes/RestApi/Controllers/Version1/QuizesController.php:663
+#: includes/RestApi/Controllers/Version1/QuizesController.php:681
 msgid "There is something went wrong with course, please check if quiz attached with a course"
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:492
+#: includes/RestApi/Controllers/Version1/QuizesController.php:498
 msgid "The maximum number of attempts for the quiz have been reached."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:540
+#: includes/RestApi/Controllers/Version1/QuizesController.php:558
 msgid "Quiz is not started."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:649
+#: includes/RestApi/Controllers/Version1/QuizesController.php:667
 msgid "Quiz attempt not found."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:671
+#: includes/RestApi/Controllers/Version1/QuizesController.php:689
 msgid "You are not allowed to read other's quiz attempts"
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:906
+#: includes/RestApi/Controllers/Version1/QuizesController.php:924
 msgid "Quiz name."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:911
+#: includes/RestApi/Controllers/Version1/QuizesController.php:929
 msgid "Quiz slug."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:916
+#: includes/RestApi/Controllers/Version1/QuizesController.php:934
 msgid "Quiz parent ID."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:934
-msgid "Menu order, used to custom sort quizes."
+#: includes/RestApi/Controllers/Version1/QuizesController.php:952
+msgid "Menu order, used to custom sort quizzes."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:939
+#: includes/RestApi/Controllers/Version1/QuizesController.php:957
 msgid "Quiz URL."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:946
+#: includes/RestApi/Controllers/Version1/QuizesController.php:964
 msgid "The date the quiz was created, in the site's timezone."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:951
+#: includes/RestApi/Controllers/Version1/QuizesController.php:969
 msgid "The date the quiz was created, as GMT."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:956
+#: includes/RestApi/Controllers/Version1/QuizesController.php:974
 msgid "The date the quiz was last modified, in the site's timezone."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:962
+#: includes/RestApi/Controllers/Version1/QuizesController.php:980
 msgid "The date the quiz was last modified, as GMT."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:968
+#: includes/RestApi/Controllers/Version1/QuizesController.php:986
 msgid "Quiz status (post status)."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:975
+#: includes/RestApi/Controllers/Version1/QuizesController.php:993
 msgid "Quiz description."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:980
+#: includes/RestApi/Controllers/Version1/QuizesController.php:998
 msgid "Quiz short description."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:985
+#: includes/RestApi/Controllers/Version1/QuizesController.php:1003
 msgid "Quiz pass mark."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:991
+#: includes/RestApi/Controllers/Version1/QuizesController.php:1009
 msgid "Quiz full mark.."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:997
+#: includes/RestApi/Controllers/Version1/QuizesController.php:1015
 msgid "Quiz duration (seconds)."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:1003
+#: includes/RestApi/Controllers/Version1/QuizesController.php:1021
 msgid "Quiz attempts allowed."
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:1009
+#: includes/RestApi/Controllers/Version1/QuizesController.php:1027
 #: includes/RestApi/Controllers/Version1/SettingsController.php:301
 msgid "Quiz questions display per page"
 msgstr ""
 
-#: includes/RestApi/Controllers/Version1/QuizesController.php:1218
+#: includes/RestApi/Controllers/Version1/QuizesController.php:1236
 msgid "Sorry, you are not allowed to create quiz for others course."
 msgstr ""
 
@@ -4935,8 +4936,8 @@ msgid "Logout endpoint."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/SettingsController.php:871
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Permalinks"
 msgstr ""
@@ -4970,8 +4971,8 @@ msgid "Course sections permalink."
 msgstr ""
 
 #: includes/RestApi/Controllers/Version1/SettingsController.php:914
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Debug"
 msgstr ""
@@ -5139,8 +5140,8 @@ msgstr ""
 
 #: includes/ScriptStyle.php:566
 #: templates/account/edit-account.php:87
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Save"
 msgstr ""
@@ -5176,8 +5177,8 @@ msgid "Submit"
 msgstr ""
 
 #: includes/ScriptStyle.php:595
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Update"
 msgstr ""
@@ -5186,8 +5187,8 @@ msgstr ""
 #: templates/single-course/course-review-reply.php:51
 #: templates/single-course/course-review.php:46
 #: templates/single-course/modals.php:28
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Delete"
 msgstr ""
@@ -5633,8 +5634,8 @@ msgstr ""
 
 #: templates/account/edit-account.php:33
 #: templates/account/form-signup.php:46
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Username"
 msgstr ""
@@ -5643,8 +5644,8 @@ msgstr ""
 #: templates/account/form-signup.php:31
 #: templates/account/view-account.php:31
 #: templates/checkout/form-billing.php:29
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "First Name"
 msgstr ""
@@ -5653,16 +5654,16 @@ msgstr ""
 #: templates/account/form-signup.php:39
 #: templates/account/view-account.php:32
 #: templates/checkout/form-billing.php:44
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Last Name"
 msgstr ""
 
 #: templates/account/edit-account.php:50
 #: templates/account/view-account.php:30
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Email"
 msgstr ""
@@ -5674,8 +5675,8 @@ msgstr ""
 
 #: templates/account/edit-account.php:61
 #: templates/account/view-account.php:34
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "City"
 msgstr ""
@@ -5687,8 +5688,8 @@ msgstr ""
 
 #: templates/account/edit-account.php:78
 #: templates/account/view-account.php:37
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Country"
 msgstr ""
@@ -5884,8 +5885,8 @@ msgid "Unfortunately your order cannot be processed as the originating bank/merc
 msgstr ""
 
 #: templates/checkout/thankyou.php:47
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Account"
 msgstr ""
@@ -5968,8 +5969,8 @@ msgid "Quantity"
 msgstr ""
 
 #: templates/emails/order-details.php:35
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Price"
 msgstr ""
@@ -6014,8 +6015,8 @@ msgid "Create a new review"
 msgstr ""
 
 #: templates/single-course/course-review-form.php:30
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Title"
 msgstr ""
@@ -6039,8 +6040,8 @@ msgstr ""
 
 #: templates/single-course/course-review-reply.php:50
 #: templates/single-course/course-review.php:45
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Edit"
 msgstr ""
@@ -6108,8 +6109,8 @@ msgid "Deleting Course Review"
 msgstr ""
 
 #: templates/single-course/modals.php:25
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Are you sure? You can't restore this back"
 msgstr ""
@@ -6134,1769 +6135,1769 @@ msgstr ""
 msgid "Reviews"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Something went wrong"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "404"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Oops - Page Not Found"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "We can not find the page you are looking for"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Back to Courses"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Bold"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Italic"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Strike"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Code"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Paragraph"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Headings"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Align Left"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Align Center"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Align Right"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Justify"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Bullet List"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Ordered List"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Code Block"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Blockquote"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Horizontal Rule"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Hard Break"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Upload Image"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Description"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Your Category Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "You must provide name for the category"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Slug"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Spaces are not allowed"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "The “slug” is the URL-friendly version of the name. It should be all lowercase and contains only letters, numbers, and hyphens."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Category Added"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "You can select the new category form dropdown"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Failed to create category"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add new category"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add new Category"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Builder"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Preview"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add New Category"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Course Description"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Remove Featured Image"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add Featured Image"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Course Highlights"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add your course highlight on each bullet"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Course Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Your Course Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "You must provide name for the course"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Section Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Your Section Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Section name cannot be empty"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Updated Successfully"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid " is updated succesffuly"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Lesson Deleted"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid " has been deleted successfully"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Quiz Deleted"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add New Content"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add New Lesson"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add New Quiz"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Delete Section"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Are you sure? You can't restore this section"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add new section to add your content"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add New Section"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Not sure how to get started? Learn more in our"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid " Documentation"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "General"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Display"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Pricing"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Difficulty"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Choose Course Level"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Duration"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Hours is required"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Hours"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Minutes is required"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Minutes"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Maximum Students"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "No limit"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Limit"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Number of Students"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Curriculum in Single page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Always Visible"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Only Visible to Enrollers"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Pricing Option"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Does not need registration"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Need registration"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Paid"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "One Time Fee"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid " is Published successfully."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "You can keep editing it"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid " is drafted successfully."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Section Deleted"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Failed to delete section"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Save To Draft"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Switch To Draft"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Publish"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid " is successfully added."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Back to Categories"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Create"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Showing %d - %d out of %d"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "toggle filter"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Search categories"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "View Category"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Failed to delete category"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Count"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "No categories found."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Categories Per Page:"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Delete Category"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Are you sure? You can't restore this category"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Category Updated Successfully"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid " has been updated successfully."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Failed to update category"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Category Deleted Successfully"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid " has been deleted successfully."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Edit Category"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Next"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add New Course"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "All"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Published"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Draft"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Search courses"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "All Categories"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Uncategorized"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "WordPress Editor"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Author"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "No courses found."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Courses Per Page:"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Deleting Course"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Back to Builder"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Lesson Description"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Lesson Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Your lesson Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "You must provide name for the lesson"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Video Source"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Video Source URL"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Please Provide Valid URL"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Self Hosted Video"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Remove Video"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add New Video"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add Video"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid " has been added"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Lesson Updated Successfully"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Lesson Deleted Successfully"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Delete Lesson"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Are you sure? You can't restore this lesson"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "No orders found."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Billing details"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "OK"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Delete Order"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Are you sure? You can't restore this order."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "All Status"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Pending"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Processing"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "On-hold"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Completed"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Cancelled"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Refunded"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Failed"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "From"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "To"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Searching..."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Please enter 3 or more characters"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Search by customer"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Orders Per Page:"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "On Hold"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Standard Paypal"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Order updated successfully"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Order Deleted Successfully"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Back to Orders"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Date created"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Please select a status"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Payment method"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Select a payment method"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Please select a payment method"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Transaction ID"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Billing"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Items"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Are you sure? You can't restore this order"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Pages Setup"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Account Endpoints"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Checkout Endpoints"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Courses Page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "This set course listing page where the courses are display"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Select a Page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Learn Page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "This set learn page where the enroll courses can be learned."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Account Page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Page contents: [masteriyo_my_account]"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Checkout Page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Page contents: [masteriyo_checkout]"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Course Category Base"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Enter custom structures for your category URLs here."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "uncategorized"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Course Difficulty Base"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Enter custom structures for your difficulty URLs here."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "/uncategorized"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Single Course Permalink"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Enter custom structures for your course URLs here."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "?course=sample-course"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "/sample-course"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Single Section Permalink"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Enter custom structures for your section URLs here."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "/sample-section"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Single Lesson Permalink"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Enter custom structures for your lesson URLs here."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "/sample-lesson"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Single Quiz Permalink"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Enter custom structures for your quiz URLs here."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "/sample-quiz"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoints are appended to your page URLs to handle specific actions on the accounts pages. They should be unique and can be left blank to disable the endpoint."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the \"Account - Orders\" page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the \"Account - View order\" page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the \"Account - My courses\" page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the \"Account - Edit Account\" page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Payment Methods"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the \"Account - Payment methods\" page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Lost Password"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the \"Account - Lost password\" page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the triggering logout"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoints are appended to your page URLs to handle specific actions during the checkout process. They should be unique."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the \"Checkout - Pay\" page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Order Received"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the \"Checkout - Order received\" page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add Payment Method"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the \"Checkout - Add payment method\" page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Delete Payment Method"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the delete payment method page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Set Default Payment Method"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Endpoint for the setting a default payment method page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "This section is for the development purpose and not recommended for live site."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Template Debug"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Use for template debugging"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Use for plugin debugging"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Show/Hide Search"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Display search on course archive page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Course Per Page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Display number of courses per page on course archive"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Course per page is required."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Course Per Row"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Display number of courses per row on course archive"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Course per row is required."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Completed Order"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "OnHold Order"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Cancelled Order"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Enable"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "New order emails are sent to students when a new order is received."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Order complete emails are sent to students when their orders are marked completed."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "This is an order notification sent to students containing order details after an order is placed on-hold."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Cancelled order emails are sent to students when orders have been marked cancelled (if they were previously processing or on-hold)."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Styling"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Primary Color"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Main color use for overall content"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Enable Questions & Answers"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Display question & answers tab on learn page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Store"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Currency"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Offline Payment"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Country where you live"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Your state where you are residing"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "No state founds"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Your city where you are residing"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Address Line 1"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Your street address"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Address Line 2"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Your street address 2"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Select default currency"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Currency Position"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Specifies where the currency symbol will appear"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Left"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Right"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Left Space"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Right Space"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Thousand Separator"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "It can't be a number and same as decimal separator"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Thousand separator should be 1 character only."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Thousand separator is required."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Thousand separator can't be a number"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Decimal Separator"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "It can't be a number and same as thousand separator"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Decimal separator is required."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Decimal separator should be 1 character only."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Decimal separator can't be a number"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Number of Decimals"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Number of digit to show on fractional part. (Max limit is 10)"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Number of decimals is required"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Use standard paypal on checkout"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "This controls the description which the user sees during checkout."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Ipn Email Notification"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid ""
 "Send notifications when an IPN is received from\n"
@@ -7904,28 +7905,28 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tcancellations."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Paypal Email"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid ""
 "Please enter your PayPal email address; this is\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\tneeded in order to take payment."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Receiver Email"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid ""
 "If your main PayPal email differs from the PayPal\n"
@@ -7934,14 +7935,14 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\tvalidate IPN requests."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Identity Token"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid ""
 "Optionally enable \"Payment Data Transfer\" (Profile\n"
@@ -7951,14 +7952,14 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tthe need for PayPal IPN."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Invoice Prefix"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid ""
 "If you use your PayPal account with more than one\n"
@@ -7967,56 +7968,56 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\tnumbers in your prefix."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Payment Actions"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "The intent to either capture payment immediately or authorize a payment for an order after order creation."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Select Payment Action"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Capture"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Authorize"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Image Url"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Optionally enter the URL to a 150x50px image displayed as your logo in the upper left corner of the PayPal checkout pages."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Debug Log"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid ""
 "Note: this may log personal information. We\n"
@@ -8024,856 +8025,880 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tand deleting the logs when finished."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Sandbox"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "PayPal sandbox can be used to test payments."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Sandbox API Username"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Get your API credentials from PayPal."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Sandbox API Password"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Sandbox API Signature"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Live API Username"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Live API Password"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Live API Signature"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Use offline payment on checkout"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Instructions"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Question Display Per Page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Display number of questions per page during quiz"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Question display per page is required."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Enable Review"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Display review tab on single course page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Settings is Updated"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "You can keep changing settings"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Single Course Page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Payments"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Emails"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Advanced"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Save Settings"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "User updated successfully"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid " has been updated successfully"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Edit User"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Back to Users"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Username cannot be changed."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Nickname"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Nickname is required."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Contact Info"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Website URL"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Update User"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "User deleted successfully"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Delete User"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Are you sure? You can't restore the user."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Search by username or email"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Registered On"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "No students found."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Students Per Page:"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Students"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Quiz Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Your Quiz Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "You must provide name for the quiz"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Full Mark"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Full Mark is required for the quiz"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Pass Mark"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Pass mark is required for the quiz"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Attempts Allowed"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
+#: assets/js/build/masteriyo-backend.js:1
+msgid "Number of Attempts"
+msgstr ""
+
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Attempts allowed is required"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Attempts"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Questions Display Per Page"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "From Global Settings"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Set Individually"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Question display per page is required"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Quiz Added"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Info"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add Quiz first"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "In order to add questions. You need to add quiz first."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Quiz Description"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Answers"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Duplicate Names"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Answer can not be duplicate"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "No answer checked"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Please check at least one answer"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Duplicate"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add New Answer"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Short answer doesn't require any fields"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Question Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Your Question Name"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "You must provide name for the question"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Question Type"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Please select question type"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Points"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Please provide points for the question"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Points should be positive number."
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Question Updated"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Question Deleted"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "There are no questions right now, You can add them by clicking on Add New Question"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Untitled Question"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Add New Question"
 msgstr ""
 
-#: assets/js/build/masteriyo-backend.1.2.0.js:1
-#: assets/js/build/masteriyo-backend.1.2.0.min.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.js:1
+#: assets/js/build/masteriyo-backend.1.2.1.min.js:1
 #: assets/js/build/masteriyo-backend.js:1
 msgid "Edit Quiz:"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "LMS for WordPress"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid ""
 "Thank you for choosing 'LMS for WordPress' by Masteriyo.\n"
 "\t\t\t\t\t\t\t\tThis short setup wizard will help you setup this plugin faster."
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Start Now"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Skip to Dashboard"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Back"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Select a page..."
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Course List"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Learning"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Checkout"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Thousand and Decimal separator can't be same."
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Number of Decimal"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Finish"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Congratulation, you're all set!"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Visit your site"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Back to dashboard"
 msgstr ""
 
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.js:1
-#: assets/js/build/masteriyo-gettingStarted.1.2.0.min.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.js:1
+#: assets/js/build/masteriyo-gettingStarted.1.2.1.min.js:1
 #: assets/js/build/masteriyo-gettingStarted.js:1
 msgid "Create a new course"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Prev"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Submit Quiz"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Mark as Complete"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Mark as completed"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Lesson has been marked as completed"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "ANSWERED"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Your quiz time is about to expire!"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Showing %d - %d out of %d Questions"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Duration: "
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "No time limit"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Questions: "
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Mark: "
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Pass Mark: "
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Start Quiz"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Your Score"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Total Questions: "
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Total Answered: "
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Total Attempts: "
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Total Marks: "
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Marks Earned: "
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Complete Quiz"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Start Quiz Again"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
-msgid "You have reached the Maximum Limit to start quiz"
+msgid "You have reached the maximum limit to start quiz."
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Quiz has been marked as completed"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "My Profile"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Log Out"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Toggle Header"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Complete"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid " Left"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "lessons left"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "quiz left"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "%"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid " Completed"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
+#: assets/js/build/masteriyo-interactive.js:1
+msgid "Congratulation!"
+msgstr ""
+
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
+#: assets/js/build/masteriyo-interactive.js:1
+msgid "You have successfully completed this course."
+msgstr ""
+
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
+#: assets/js/build/masteriyo-interactive.js:1
+msgid "Back to Course"
+msgstr ""
+
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid " answers"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Send"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Your question has been asked"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "You will get your answer as soon as possible"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid " Answers"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Please write your message"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Ask a Question"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "You must be logged in to ask question. You can register from"
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid " here."
 msgstr ""
 
-#: assets/js/build/masteriyo-interactive.1.2.0.js:1
-#: assets/js/build/masteriyo-interactive.1.2.0.min.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.js:1
+#: assets/js/build/masteriyo-interactive.1.2.1.min.js:1
 #: assets/js/build/masteriyo-interactive.js:1
 msgid "Back to course"
 msgstr ""

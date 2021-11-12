@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.2.0
+**Stable tag**: 1.2.1
 
 **License: GNU** General Public License v3.0
 
@@ -47,10 +47,18 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 
 # Changelog
 
+### 1.2.1 - 12-11-2021
+- Enhancement - Added unlimited quiz attempt limit option.
+- Enhancement - Display courses page content in the courses list page.
+- Enhancement - Show completion icon to the completed lesson and quiz in the learn page.
+- Enhancement - Added course completion header in learn page.
+- Fix - Quiz limit attempt share between users.
+- Fix - Translation strings for quiz in learn page.
+
 ### 1.2.0 - 02-11-2021
 - Fix - Course update and delete when the PUT and DELETE HTTP methods are blocked.
 - Feature - Added students list on WordPress backend.
-- Feature - Added course categories shortcode.
+- Feature - Added course categories shortcode [masteriyo_course_categories].
 
 ### 1.0.10 - 29-10-2021
 - Fix - Missing translation in learn page.

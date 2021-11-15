@@ -65,12 +65,12 @@ const paths = {
 	},
 
 	js: {
-		src: [
-			'assets/js/build/*.js',
-			'assets/js/frontend/*.js',
-			'!assets/js/*.min.js',
-		],
+		src: ['assets/js/build/*.js', '!assets/js/*.min.js'],
 		dest: 'assets/js/build',
+	},
+
+	frontEndJs: {
+		src: ['assets/js/frontend/*.js', '!assets/js/frontend*.min.js'],
 	},
 
 	images: {
@@ -105,10 +105,14 @@ function startBrowserSync(cb) {
 	cb();
 }
 
+function moveFrontEndJs() {
+	return src(paths.frontEndJs.src)
+		.pipe(rename({ suffix: `.${pkg.version}` }))
+		.pipe(dest(paths.js.dest));
+}
+
 function minifyJs() {
 	return src(paths.js.src)
-		.pipe(rename({ suffix: `.${pkg.version}` }))
-		.pipe(dest(paths.js.dest))
 		.pipe(uglify())
 		.pipe(rename({ suffix: `.min` }))
 		.pipe(dest(paths.js.dest));
@@ -125,7 +129,10 @@ function reloadBrowserSync(cb) {
 
 function watchChanges() {
 	watch(paths.sass.src, series(compileSass));
-	watch(paths.frontendJS.src, series(minifyJs, reloadBrowserSync));
+	watch(
+		paths.frontEndJs.src,
+		series(moveFrontEndJs, minifyJs, reloadBrowserSync)
+	);
 	watch(paths.php.src, reloadBrowserSync);
 	watch(paths.images.src, series(optimizeImages, reloadBrowserSync));
 }
@@ -139,7 +146,7 @@ function removeRelease() {
 }
 
 function removeCompiledAssets() {
-	return exec('rm -rf assets/js/build/frontend && rm -rf assets/css');
+	return exec('rm -rf assets/css');
 }
 
 function removeLanguageFiles() {
@@ -173,11 +180,14 @@ function compressBuildWithVersion() {
 		.pipe(dest('release'));
 }
 
-const compileAssets = series(
+const build = series(
+	removeBuild,
 	removeCompiledAssets,
-	parallel(compileSass, minifyJs, optimizeImages)
+	moveFrontEndJs,
+	compileSass,
+	minifyJs,
+	optimizeImages
 );
-const build = series(removeBuild, compileAssets);
 const dev = series(startBrowserSync, watchChanges);
 const release = series(
 	removeRelease,

@@ -51,7 +51,7 @@ class AdminMenu {
 		add_menu_page(
 			esc_html__( 'Masteriyo', 'masteriyo' ),
 			esc_html__( 'Masteriyo', 'masteriyo' ),
-			'manage_options',
+			'manage_masteriyo_settings',
 			'masteriyo',
 			array( __CLASS__, 'display_main_page' ),
 			$dashicon,
@@ -62,7 +62,7 @@ class AdminMenu {
 			'masteriyo',
 			esc_html__( 'Courses', 'masteriyo' ),
 			esc_html__( 'Courses', 'masteriyo' ),
-			'manage_options',
+			'manage_masteriyo_settings',
 			'masteriyo#/courses',
 			array( __CLASS__, 'display_main_page' )
 		);
@@ -71,7 +71,7 @@ class AdminMenu {
 			'masteriyo',
 			esc_html__( 'Categories', 'masteriyo' ),
 			esc_html__( 'Categories', 'masteriyo' ),
-			'manage_options',
+			'manage_masteriyo_settings',
 			'masteriyo#/courses/categories',
 			array( __CLASS__, 'display_main_page' )
 		);
@@ -80,7 +80,7 @@ class AdminMenu {
 			'masteriyo',
 			esc_html__( 'Orders', 'masteriyo' ),
 			esc_html__( 'Orders', 'masteriyo' ),
-			'manage_options',
+			'manage_masteriyo_settings',
 			'masteriyo#/orders',
 			array( __CLASS__, 'display_main_page' )
 		);
@@ -89,7 +89,7 @@ class AdminMenu {
 			'masteriyo',
 			esc_html__( 'Users', 'masteriyo' ),
 			esc_html__( 'Users', 'masteriyo' ),
-			'manage_options',
+			'manage_masteriyo_settings',
 			'masteriyo#/users',
 			array( __CLASS__, 'display_main_page' )
 		);
@@ -98,7 +98,7 @@ class AdminMenu {
 			'masteriyo',
 			esc_html__( 'Settings', 'masteriyo' ),
 			esc_html__( 'Settings', 'masteriyo' ),
-			'manage_options',
+			'manage_masteriyo_settings',
 			'masteriyo#/settings',
 			array( __CLASS__, 'display_main_page' )
 		);

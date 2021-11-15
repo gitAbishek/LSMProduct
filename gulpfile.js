@@ -73,15 +73,6 @@ const paths = {
 		dest: 'assets/js/build',
 	},
 
-	backendJS: {
-		src: [
-			'assets/js/build/*.js',
-			'!assets/js/build/*.min.js',
-			`!assets/js/build/*.${pkg.version}.js`,
-		],
-		dest: 'assets/js/build',
-	},
-
 	images: {
 		src: ['assets/img/*.png', 'assets/img/*.jpg'],
 		dest: 'assets/img',

@@ -8,12 +8,14 @@ const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
 const BundleAnalyzerPlugin =
 	require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const PACKAGE = require('../package.json');
+const version = PACKAGE.version;
 
 module.exports = (env) => ({
 	entry: baseConfig.paths.entry,
 
 	output: {
-		filename: 'masteriyo-[name].js',
+		filename: `masteriyo-[name].${version}.js`,
 		path: baseConfig.paths.output,
 	},
 

@@ -64,13 +64,13 @@ const paths = {
 		dest: 'assets/css',
 	},
 
-	frontendJS: {
+	js: {
 		src: [
+			'assets/js/build/*.js',
 			'assets/js/frontend/*.js',
-			'!assets/js/frontend/*.min.js',
-			`!assets/js/frontend/*.${pkg.version}.js`,
+			'!assets/js/*.min.js',
 		],
-		dest: 'assets/js/build/frontend',
+		dest: 'assets/js/build',
 	},
 
 	backendJS: {
@@ -115,12 +115,12 @@ function startBrowserSync(cb) {
 }
 
 function minifyJs() {
-	return src(paths.frontendJS.src)
+	return src(paths.js.src)
 		.pipe(rename({ suffix: `.${pkg.version}` }))
-		.pipe(dest(paths.frontendJS.dest))
+		.pipe(dest(paths.js.dest))
 		.pipe(uglify())
 		.pipe(rename({ suffix: `.min` }))
-		.pipe(dest(paths.frontendJS.dest));
+		.pipe(dest(paths.js.dest));
 }
 
 function optimizeImages() {

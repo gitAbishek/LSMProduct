@@ -65,7 +65,7 @@ const paths = {
 	},
 
 	js: {
-		src: ['assets/js/build/*.js', '!assets/js/*.min.js'],
+		src: ['assets/js/build/*.js', '!assets/js/build/*.min.js'],
 		dest: 'assets/js/build',
 	},
 

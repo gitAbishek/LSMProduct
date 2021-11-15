@@ -1,6 +1,5 @@
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const baseConfig = require('./config.base');
@@ -66,6 +65,7 @@ module.exports = (env) => ({
 	},
 
 	optimization: {
+		minimize: false,
 		splitChunks: {
 			cacheGroups: {
 				vendor: {

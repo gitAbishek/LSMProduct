@@ -2,11 +2,10 @@
 
 require('dotenv').config();
 const fs = require('fs');
-const path = require('path');
 const rename = require('gulp-rename');
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 const { dest, series, src, watch, parallel, task } = require('gulp');
-const { exec, execSync } = require('child_process');
+const { exec } = require('child_process');
 const zip = require('gulp-zip');
 const { sass } = require('@mr-hope/gulp-sass');
 const browserSync = require('browser-sync').create();
@@ -92,14 +91,6 @@ const paths = {
 	},
 };
 
-function renameBackendAssets() {
-	return src(paths.backendJS.src)
-		.pipe(rename({ suffix: `.${pkg.version}` }))
-		.pipe(dest(paths.backendJS.dest))
-		.pipe(rename({ suffix: `.min` }))
-		.pipe(dest(paths.backendJS.dest));
-}
-
 function compileSass() {
 	return src(paths.sass.src)
 		.pipe(
@@ -143,10 +134,7 @@ function reloadBrowserSync(cb) {
 
 function watchChanges() {
 	watch(paths.sass.src, series(compileSass));
-	watch(
-		paths.frontendJS.src,
-		series(minifyJs, reloadBrowserSync)
-	);
+	watch(paths.frontendJS.src, series(minifyJs, reloadBrowserSync));
 	watch(paths.php.src, reloadBrowserSync);
 	watch(paths.images.src, series(optimizeImages, reloadBrowserSync));
 }
@@ -194,8 +182,11 @@ function compressBuildWithVersion() {
 		.pipe(dest('release'));
 }
 
-const compileAssets = series(removeCompiledAssets, parallel(compileSass, minifyJs, optimizeImages));
-const build = series(removeBuild, compileAssets, renameBackendAssets);
+const compileAssets = series(
+	removeCompiledAssets,
+	parallel(compileSass, minifyJs, optimizeImages)
+);
+const build = series(removeBuild, compileAssets);
 const dev = series(startBrowserSync, watchChanges);
 const release = series(
 	removeRelease,
@@ -205,7 +196,12 @@ const release = series(
 	parallel(compressBuildWithVersion, compressBuildWithoutVersion)
 );
 
-exports.clean = parallel(removeBuild, removeRelease, removeCompiledAssets, removeLanguageFiles);
+exports.clean = parallel(
+	removeBuild,
+	removeRelease,
+	removeCompiledAssets,
+	removeLanguageFiles
+);
 exports.dev = dev;
 exports.build = build;
 exports.release = release;

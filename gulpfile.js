@@ -192,12 +192,12 @@ const dev = series(startBrowserSync, watchChanges);
 const release = series(
 	removeRelease,
 	build,
-	parallel(copyToBuild),
+	copyToBuild,
 	runComposerInBuild,
 	parallel(compressBuildWithVersion, compressBuildWithoutVersion)
 );
 
-exports.clean = parallel(
+exports.clean = series(
 	removeBuild,
 	removeRelease,
 	removeCompiledAssets,

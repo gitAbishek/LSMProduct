@@ -22,7 +22,7 @@ class Course extends PostType {
 		$debug           = masteriyo_is_post_type_debug_enabled();
 		$permalinks      = masteriyo_get_permalink_structure();
 		$courses_page_id = masteriyo_get_page_id( 'courses' );
-		$supports        = array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'publicize', 'wpcom-markdown' );
+		$supports        = array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'author', 'publicize', 'wpcom-markdown' );
 
 		if ( $courses_page_id && get_post( $courses_page_id ) ) {
 			$has_archive = urldecode( get_page_uri( $courses_page_id ) );

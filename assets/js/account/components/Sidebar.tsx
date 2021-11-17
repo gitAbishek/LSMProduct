@@ -1,15 +1,24 @@
 import {
 	Avatar,
-	Heading,
+	Box,
+	Icon,
 	Link,
 	List,
 	ListIcon,
 	ListItem,
 	Stack,
+	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiBook, BiGrid, BiHistory, BiLogOut, BiUser } from 'react-icons/bi';
+import {
+	BiBook,
+	BiDotsVerticalRounded,
+	BiGrid,
+	BiHistory,
+	BiLogOut,
+	BiUser,
+} from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
 import routes from '../constants/routes';
 
@@ -34,9 +43,23 @@ const Sidebar = () => {
 			fontWeight="medium"
 			color="gray.600">
 			<ListItem>
-				<Stack direction="row" align="center">
-					<Avatar size="sm" showBorder />
-					<Heading fontSize="sm">John Doe</Heading>
+				<Stack direction="row" align="center" spacing="3">
+					<Avatar
+						size="md"
+						name="Jamie Oliver"
+						src="https://bit.ly/sage-adebayo"
+					/>
+					<Stack direction="column">
+						<Box>
+							<Text as="h3" fontSize="lg" fontWeight="medium" color="blue.900">
+								{__('Jamie Oliver', 'masteriyo')}
+							</Text>
+							<Text color="gray.300" fontSize="sm" fontWeight="medium">
+								{__('Gold Member', 'masteriyo')}
+							</Text>
+						</Box>
+					</Stack>
+					<Icon as={BiDotsVerticalRounded} w={6} h={6} color="gray.300" />
 				</Stack>
 			</ListItem>
 			<ListItem>

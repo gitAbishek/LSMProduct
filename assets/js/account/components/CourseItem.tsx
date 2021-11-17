@@ -1,5 +1,5 @@
 import {
-	Badge,
+	Avatar,
 	Box,
 	Button,
 	Heading,
@@ -7,11 +7,14 @@ import {
 	Image,
 	Progress,
 	Stack,
+	Tag,
+	TagLabel,
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiStar, BiTime } from 'react-icons/bi';
+import { BiTime } from 'react-icons/bi';
+import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from 'react-icons/io';
 
 interface Props {
 	id: number;
@@ -27,7 +30,6 @@ interface Props {
 const CourseItem: React.FC<Props> = ({
 	title,
 	imageUrl,
-	tag,
 	started,
 	time,
 	percent,
@@ -35,35 +37,69 @@ const CourseItem: React.FC<Props> = ({
 }) => {
 	return (
 		<Box borderWidth="1px" borderColor="gray.100">
-			<Image
-				src={imageUrl}
-				alt={`${title} image`}
-				height="180px"
-				objectFit="cover"
-			/>
+			<Box as="figure" pos="relative">
+				<Image
+					src={imageUrl}
+					alt={`${title} image`}
+					height="180px"
+					objectFit="cover"
+				/>
+				<Tag
+					pos="absolute"
+					top="3"
+					left="3"
+					bg="blue.500"
+					color="white"
+					borderRadius="full"
+					fontWeight="medium"
+					size="sm">
+					<TagLabel>Beginner</TagLabel>
+				</Tag>
+			</Box>
 			<Stack direction="column" p="6" spacing="3">
 				<Stack direction="column" spacing="6">
 					<Stack direction="column" spacing="3">
-						<Stack direction="row" spacing="3">
-							<Stack direction="row" spacing="1">
-								{Array(5)
-									.fill('')
-									.map((_, i) => (
-										<Icon as={BiStar} key={i} />
-									))}
-							</Stack>
-							<Badge
+						<Stack direction="row" spacing="1">
+							<Tag
+								size="sm"
 								borderRadius="full"
-								bg="pink.500"
-								fontSize="xx-small"
-								color="white">
-								{tag}
-							</Badge>
+								colorScheme="blue"
+								border="1px"
+								borderColor="gray.200">
+								<TagLabel>Art</TagLabel>
+							</Tag>
+							<Tag
+								size="sm"
+								borderRadius="full"
+								colorScheme="blue"
+								border="1px"
+								borderColor="gray.200">
+								<TagLabel>Drawing</TagLabel>
+							</Tag>
 						</Stack>
 
 						<Heading as="h3" fontSize="lg">
 							{title}
 						</Heading>
+						<Stack
+							direction="row"
+							spacing="3"
+							align="center"
+							justify="space-between">
+							<Stack direction="row" spacing="1" align="center">
+								<Avatar size="xs" />
+								<Text fontSize="xs" fontWeight="bold">
+									John Doe
+								</Text>
+							</Stack>
+							<Stack direction="row" spacing="0">
+								<Icon as={IoMdStar} />
+								<Icon as={IoMdStar} />
+								<Icon as={IoMdStar} />
+								<Icon as={IoMdStarHalf} />
+								<Icon as={IoMdStarOutline} />
+							</Stack>
+						</Stack>
 					</Stack>
 
 					<Stack direction="row" justify="space-between" align="center">
@@ -107,7 +143,7 @@ const CourseItem: React.FC<Props> = ({
 							}}>
 							{'Started ' + started}
 						</Text>
-						<Button colorScheme="blue" size="sm" rounded="full">
+						<Button colorScheme="blue" size="sm">
 							{__('Continue', 'masteriyo')}
 						</Button>
 					</Stack>

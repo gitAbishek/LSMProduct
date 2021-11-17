@@ -1,6 +1,7 @@
 import { Box, Input, useOutsideClick } from '@chakra-ui/react';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import Image from '@tiptap/extension-image';
+import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
 import { EditorContent, useEditor } from '@tiptap/react';
@@ -27,6 +28,9 @@ const Editor: React.FC<Props> = (props) => {
 			Image.configure({ inline: true }),
 			Dropcursor,
 			Placeholder,
+			Link.configure({
+				openOnClick: false,
+			}),
 			TextAlign.configure({
 				types: ['heading', 'paragraph'],
 			}),

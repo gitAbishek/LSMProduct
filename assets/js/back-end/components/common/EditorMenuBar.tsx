@@ -23,12 +23,14 @@ import {
 	BiCodeBlock,
 	BiImageAdd,
 	BiItalic,
+	BiLink,
 	BiListOl,
 	BiListUl,
 	BiMinus,
 	BiParagraph,
 	BiStrikethrough,
 	BiSubdirectoryLeft,
+	BiUnlink,
 } from 'react-icons/bi';
 import { ImQuotesLeft } from 'react-icons/im';
 import { deepMerge } from '../../utils/utils';
@@ -76,6 +78,26 @@ const EditorMenuBar: React.FC<Props> = (props) => {
 
 	const onImageUpload = (imageUrl: string) => {
 		imageUrl && editor.chain().focus().setImage({ src: imageUrl }).run();
+	};
+
+	const setLink = () => {
+		const previousUrl = editor.getAttributes('link').href;
+		const url = window.prompt('URL', previousUrl);
+
+		// cancelled
+		if (url === null) {
+			return;
+		}
+
+		// empty
+		if (url === '') {
+			editor.chain().focus().extendMarkRange('link').unsetLink().run();
+
+			return;
+		}
+
+		// update link
+		editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
 	};
 
 	return (
@@ -135,6 +157,22 @@ const EditorMenuBar: React.FC<Props> = (props) => {
 						sx={buttonCommonStyles(editor.isActive('paragraph'))}
 						onClick={() => editor.chain().focus().setParagraph().run()}>
 						<Icon as={BiParagraph} />
+					</Box>
+				</Tooltip>
+				<Center height="20px">
+					<Divider orientation="vertical" />
+				</Center>
+
+				<Tooltip label={__('Set Link', 'masteriyo')} hasArrow fontSize="xs">
+					<Box as="span" onClick={setLink}>
+						<Icon as={BiLink} />
+					</Box>
+				</Tooltip>
+				<Tooltip label={__('Unset Link', 'masteriyo')} hasArrow fontSize="xs">
+					<Box
+						as="span"
+						onClick={() => editor.chain().focus().unsetLink().run()}>
+						<Icon as={BiUnlink} />
 					</Box>
 				</Tooltip>
 

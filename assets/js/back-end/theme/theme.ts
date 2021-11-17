@@ -76,6 +76,11 @@ const theme = extendTheme({
 					p: {
 						mb: '1rem',
 					},
+					a: {
+						textDecoration: 'underline',
+						color: 'blue.500',
+						cursor: 'pointer',
+					},
 					blockquote: {
 						paddingLeft: '1rem',
 						borderLeft: '2px solid rgba(13,13,13,.1)',

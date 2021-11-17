@@ -14,7 +14,7 @@ const Dashboard: React.FC = () => {
 				<Heading as="h1" size="xl">
 					{__('My Courses', 'masteriyo')}
 				</Heading>
-				<SimpleGrid columns={4} spacing="6">
+				<SimpleGrid columns={3} spacing="6">
 					{CoursesData.map((itemProps, key) => {
 						return <CourseItem key={key} {...itemProps} />;
 					})}

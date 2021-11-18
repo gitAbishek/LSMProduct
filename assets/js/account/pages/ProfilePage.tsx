@@ -6,6 +6,7 @@ import {
 	Box,
 	Button,
 	CloseButton,
+	Link,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
@@ -16,9 +17,9 @@ import { IoIosArrowForward } from 'react-icons/io';
 
 const ProfilePage = () => {
 	return (
-		<Stack direction="column" spacing="8">
+		<Stack direction="column" spacing="8" width="full">
 			<Alert bg="blue.500" color="white" py="8">
-				<Box flex="1">
+				<Box flex="1" px="3">
 					<AlertTitle>{__('Hello, Jamie!', 'masteriyo')}</AlertTitle>
 					<AlertDescription display="block" fontSize="sm">
 						{__(
@@ -27,15 +28,17 @@ const ProfilePage = () => {
 						)}
 					</AlertDescription>
 					<Box mt="4">
-						<Button
-							rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
-							color="gray.500"
-							bg="white"
-							px="6"
-							textTransform="uppercase"
-							rounded="full">
-							{__('Edit Profile', 'masteriyo')}
-						</Button>
+						<Link to="/edit-profile">
+							<Button
+								rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
+								color="gray.500"
+								bg="white"
+								px="6"
+								textTransform="uppercase"
+								rounded="full">
+								{__('Edit Profile', 'masteriyo')}
+							</Button>
+						</Link>
 					</Box>
 				</Box>
 				<CloseButton position="absolute" right="8px" top="8px" />

@@ -1,6 +1,6 @@
+import { Link } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Td, Tr } from 'react-super-responsive-table';
 
 interface Props {
@@ -11,18 +11,26 @@ interface Props {
 }
 
 const OrderHistoryItem: React.FC<Props> = ({ order, date, status, total }) => {
+	const getStatusColor = (status: any) => {
+		if (status === 'Completed') {
+			return { color: 'green' };
+		} else {
+			return { color: 'red' };
+		}
+	};
+
 	return (
 		<Tr>
 			<Td>
-				<Link to="#" style={{ color: 'blue', textDecoration: 'underline' }}>
+				<Link to="#" color="blue.900" fontWeight="bold">
 					{order}
 				</Link>
 			</Td>
 			<Td>{date}</Td>
-			<Td>{status}</Td>
+			<Td style={getStatusColor(status)}>{status}</Td>
 			<Td>{total} for 1 item</Td>
 			<Td>
-				<Link to="#" style={{ color: 'blue', textDecoration: 'underline' }}>
+				<Link to="#" color="blue.600" textDecoration="underline">
 					{__('View', 'masteriyo')}
 				</Link>
 			</Td>

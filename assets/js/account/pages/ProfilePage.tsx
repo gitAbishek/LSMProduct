@@ -28,7 +28,7 @@ const ProfilePage = () => {
 						)}
 					</AlertDescription>
 					<Box mt="4">
-						<Link to="/edit-profile">
+						<Link href="/account.html#/edit-profile">
 							<Button
 								rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
 								color="gray.500"

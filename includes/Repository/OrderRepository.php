@@ -25,7 +25,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 3.0.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(

@@ -494,7 +494,7 @@ abstract class Model {
 	/**
 	 * Filter null meta values from array.
 	 *
-	 * @since  3.0.0
+	 * @since  1.0.0
 	 * @param mixed $meta Meta value to check.
 	 * @return bool
 	 */

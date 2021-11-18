@@ -22,7 +22,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Data stored in meta keys, but not considered "meta".
 	 *
-	 * @since 3.0.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $internal_meta_keys = array(
@@ -477,7 +477,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	 * Catalog visibility valid values are 'visible', 'catalog', 'search', and 'hidden'.
 	 *
 	 * @param Course $course Course object.
-	 * @since 3.0.0
+	 * @since 1.0.0
 	 */
 	protected function read_visibility( &$course ) {
 		$terms           = get_the_terms( $course->get_id(), 'course_visibility' );

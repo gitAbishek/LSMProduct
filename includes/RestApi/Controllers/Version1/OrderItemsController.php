@@ -192,7 +192,7 @@ class OrderItemsController extends PostsController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  3.0.0
+	 * @since  1.0.0
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.

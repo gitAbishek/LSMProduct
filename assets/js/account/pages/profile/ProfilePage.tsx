@@ -51,7 +51,6 @@ const ProfilePage = () => {
 					boxSize="10rem"
 					border="2px"
 					borderColor="gray.100"
-					mt="5"
 				/>
 				<Stack direction="column" spacing="8">
 					<Box>
@@ -64,12 +63,7 @@ const ProfilePage = () => {
 					</Box>
 					<Table>
 						<Tr>
-							<Td
-								fontSize="sm"
-								fontWeight="medium"
-								color="black"
-								pl="0"
-								borderBottom="none">
+							<Td fontSize="sm" fontWeight="medium" borderBottom="none">
 								{__('Email', 'masteriyo')}
 							</Td>
 							<Td fontSize="sm" color="gray" borderBottom="none">
@@ -77,12 +71,7 @@ const ProfilePage = () => {
 							</Td>
 						</Tr>
 						<Tr>
-							<Td
-								fontSize="md"
-								fontWeight="medium"
-								color="black"
-								pl="0"
-								borderBottom="none">
+							<Td fontSize="md" fontWeight="medium" borderBottom="none">
 								{__('Contact Number', 'masteriyo')}
 							</Td>
 							<Td fontSize="sm" color="gray" borderBottom="none">
@@ -90,12 +79,7 @@ const ProfilePage = () => {
 							</Td>
 						</Tr>
 						<Tr>
-							<Td
-								fontSize="sm"
-								fontWeight="medium"
-								color="black"
-								pl="0"
-								borderBottom="none">
+							<Td fontSize="sm" fontWeight="medium" borderBottom="none">
 								{__('Address', 'masteriyo')}
 							</Td>
 							<Td fontSize="sm" color="gray" borderBottom="none">
@@ -103,12 +87,7 @@ const ProfilePage = () => {
 							</Td>
 						</Tr>
 						<Tr>
-							<Td
-								fontSize="sm"
-								fontWeight="medium"
-								color="black"
-								pl="0"
-								borderBottom="none">
+							<Td fontSize="sm" fontWeight="medium" borderBottom="none">
 								{__('City', 'masteriyo')}
 							</Td>
 							<Td fontSize="sm" color="gray" borderBottom="none">
@@ -116,12 +95,7 @@ const ProfilePage = () => {
 							</Td>
 						</Tr>
 						<Tr>
-							<Td
-								fontSize="sm"
-								fontWeight="medium"
-								color="black"
-								pl="0"
-								borderBottom="none">
+							<Td fontSize="sm" fontWeight="medium" borderBottom="none">
 								{__('State', 'masteriyo')}
 							</Td>
 							<Td fontSize="sm" color="gray" borderBottom="none">
@@ -129,12 +103,7 @@ const ProfilePage = () => {
 							</Td>
 						</Tr>
 						<Tr>
-							<Td
-								fontSize="sm"
-								fontWeight="medium"
-								color="black"
-								pl="0"
-								borderBottom="none">
+							<Td fontSize="sm" fontWeight="medium" borderBottom="none">
 								{__('Zip Code', 'masteriyo')}
 							</Td>
 							<Td fontSize="sm" color="gray" borderBottom="none">
@@ -142,12 +111,7 @@ const ProfilePage = () => {
 							</Td>
 						</Tr>
 						<Tr>
-							<Td
-								fontSize="sm"
-								fontWeight="medium"
-								color="black"
-								pl="0"
-								borderBottom="none">
+							<Td fontSize="sm" fontWeight="medium" borderBottom="none">
 								{__('Country', 'masteriyo')}
 							</Td>
 							<Td fontSize="sm" color="gray" borderBottom="none">

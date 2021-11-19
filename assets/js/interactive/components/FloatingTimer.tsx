@@ -60,11 +60,7 @@ const FloatingTimer: React.FC<Props> = (props) => {
 							{hours}:{minutes}:{seconds}
 						</Text>
 						<Text fontSize="10px" color="gray.500">
-							{__('ANSWERED', 'masteriyo')}:{' '}
-							<Text as="span" color="gray.700">
-								1
-							</Text>
-							:5
+							{__('Time Left', 'masteriyo')}
 						</Text>
 					</VStack>
 				</CircularProgressLabel>

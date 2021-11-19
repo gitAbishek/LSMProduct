@@ -5,8 +5,6 @@ import {
 	AlertTitle,
 	Box,
 	Button,
-	CloseButton,
-	Link,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
@@ -14,34 +12,35 @@ import { Table, Td, Tr } from '@chakra-ui/table';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
+import { Link } from 'react-router-dom';
+import routes from '../../constants/routes';
 
 const ProfilePage = () => {
 	return (
 		<Stack direction="column" spacing="8" width="full">
-			<Alert bg="blue.500" color="white" py="8">
-				<Box flex="1" px="3">
-					<AlertTitle>{__('Hello, Jamie!', 'masteriyo')}</AlertTitle>
-					<AlertDescription display="block" fontSize="sm">
-						{__(
-							'	Welcome to your dashboard here you can edit your overview and your stats',
-							'masteriyo'
-						)}
-					</AlertDescription>
-					<Box mt="4">
-						<Link href="/account.html#/edit-profile">
-							<Button
-								rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
-								color="gray.500"
-								bg="white"
-								px="6"
-								textTransform="uppercase"
-								rounded="full">
-								{__('Edit Profile', 'masteriyo')}
-							</Button>
-						</Link>
-					</Box>
-				</Box>
-				<CloseButton position="absolute" right="8px" top="8px" />
+			<Alert bg="blue.500" color="white" p="6">
+				<Stack direction="column" spacing="5">
+					<Stack direction="column" spacing="0.5">
+						<AlertTitle>{__('Hello, Jamie!', 'masteriyo')}</AlertTitle>
+						<AlertDescription display="block" fontSize="sm">
+							{__(
+								'	Welcome to your dashboard here you can edit your overview and your stats',
+								'masteriyo'
+							)}
+						</AlertDescription>
+					</Stack>
+					<Link to={routes.editProfile}>
+						<Button
+							rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
+							color="gray.500"
+							bg="white"
+							px="6"
+							textTransform="uppercase"
+							rounded="full">
+							{__('Edit Profile', 'masteriyo')}
+						</Button>
+					</Link>
+				</Stack>
 			</Alert>
 
 			<Stack direction="row" spacing="10">

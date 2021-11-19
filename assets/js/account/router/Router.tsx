@@ -5,16 +5,14 @@ import Sidebar from '../components/Sidebar';
 import routes from '../constants/routes';
 import MyCourses from '../pages/courses/MyCouses';
 import Dashboard from '../pages/dashboard/Dashboard';
-import EditProfile from '../pages/EditProfile';
-import Header from '../pages/Header';
 import OrderHistory from '../pages/order-history/OrderHistory';
-import ProfilePage from '../pages/ProfilePage';
+import EditProfile from '../pages/profile/EditProfile';
+import ProfilePage from '../pages/profile/ProfilePage';
 
 const Router: React.FC = () => {
 	return (
 		<Box bg="white" minH="100vh">
 			<HashRouter>
-				<Header />
 				<Container maxW="container.xl" py="16">
 					<Stack direction="row" spacing="8">
 						<Sidebar />

@@ -20,7 +20,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Ellipse8 } from '../constants/images';
+import { Ellipse8 } from '../../constants/images';
 
 type IFormInputs = {
 	firstName: string;
@@ -42,6 +42,10 @@ const EditProfile: React.FC = () => {
 	} = useForm<IFormInputs>();
 	const onSubmit = handleSubmit((data) => console.log(data));
 
+	const tabStyles = {
+		fontWeight: 'semibold',
+	};
+
 	return (
 		<Box bg="white" width="full">
 			<Container maxWidth="container.lg">
@@ -49,13 +53,9 @@ const EditProfile: React.FC = () => {
 					<Stack>
 						<Stack>
 							<TabList>
-								<Tab style={{ fontWeight: 600 }}>
-									{__('Edit Profile', 'masteriyo')}
-								</Tab>
-								<Tab style={{ fontWeight: 600 }}>
-									{__('Notifications', 'masteriyo')}
-								</Tab>
-								<Tab style={{ fontWeight: 600 }}>
+								<Tab sx={tabStyles}>{__('Edit Profile', 'masteriyo')}</Tab>
+								<Tab sx={tabStyles}>{__('Notifications', 'masteriyo')}</Tab>
+								<Tab sx={tabStyles}>
 									{__('Password  & Security', 'masteriyo')}
 								</Tab>
 							</TabList>

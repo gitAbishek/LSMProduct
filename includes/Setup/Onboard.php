@@ -74,7 +74,7 @@ class Onboard {
 			return;
 		}
 
-		$onboard_dependencies = include_once MASTERIYO_PLUGIN_DIR . '/assets/js/build/masteriyo-gettingStarted.asset.php';
+		$onboard_dependencies = include_once MASTERIYO_PLUGIN_DIR . '/assets/js/build/masteriyo-gettingStarted.' . MASTERIYO_VERSION . '.asset.php';
 		$suffix               = ScriptStyle::get_asset_suffix();
 
 		wp_register_script(

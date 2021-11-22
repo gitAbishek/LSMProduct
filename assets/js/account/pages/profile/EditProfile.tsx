@@ -21,6 +21,7 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Ellipse8 } from '../../constants/images';
+import PasswordSecurity from './PasswordSecurity';
 
 type IFormInputs = {
 	firstName: string;
@@ -271,6 +272,10 @@ const EditProfile: React.FC = () => {
 											</ButtonGroup>
 										</Stack>
 									</form>
+								</TabPanel>
+								<TabPanel>Notifications</TabPanel>
+								<TabPanel>
+									<PasswordSecurity />
 								</TabPanel>
 							</TabPanels>
 						</Stack>

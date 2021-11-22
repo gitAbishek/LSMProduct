@@ -19,7 +19,6 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Ellipse8 } from '../../constants/images';
 import PasswordSecurity from './PasswordSecurity';
 
 type IFormInputs = {
@@ -67,7 +66,7 @@ const EditProfile: React.FC = () => {
 											<Avatar
 												size="xl"
 												name="Rose Pett"
-												src={Ellipse8}
+												src="https://api.lorem.space/image/fashion?w=150&h=150"
 												background="none"></Avatar>
 										</Center>
 									</Stack>

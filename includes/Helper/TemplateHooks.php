@@ -14,6 +14,8 @@ if ( ! ( function_exists( 'add_filter' ) && function_exists( 'add_action' ) ) ) 
 }
 
 add_action( 'masteriyo_template_enroll_button', 'masteriyo_template_enroll_button' );
+add_filter( 'admin_body_class', 'masteriyo_add_admin_body_class' );
+add_filter( 'body_class', 'masteriyo_add_body_class', 10, 2 );
 
 /**
  * Course Archive.

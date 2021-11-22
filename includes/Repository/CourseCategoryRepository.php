@@ -241,4 +241,43 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 			}
 		}
 	}
+
+	/**
+	 * Fetch course categories.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param array $query_vars Query vars.
+	 * @return CourseCategory[]
+	 */
+	public function query( $query_vars ) {
+		$categories = array();
+		$args       = $this->get_wp_query_args( $query_vars );
+
+		if ( ! empty( $args['errors'] ) ) {
+			$query = (object) array(
+				'terms' => array(),
+			);
+		} else {
+			$query = new \WP_Term_Query( $args );
+		}
+
+		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->terms ) ) {
+			// Prime caches before grabbing objects.
+			update_term_cache( $query->terms, array( 'course_cat' ) );
+		}
+
+		if ( $query->terms ) {
+			$categories = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->terms : array_filter( array_map( 'masteriyo_get_course_cat', $query->terms ) );
+
+			if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
+				return (object) array(
+					'categories' => $categories,
+					'total'      => count( $query->terms ),
+				);
+			}
+		}
+
+		return $categories;
+	}
 }

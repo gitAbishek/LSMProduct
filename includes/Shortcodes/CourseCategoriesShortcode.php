@@ -76,7 +76,7 @@ class CourseCategoriesShortcode extends Shortcode {
 		$attr       = $this->get_attributes();
 		$args       = array(
 			'taxonomy'   => 'course_cat',
-			'order'      => 'DESC',
+			'order'      => 'ASC',
 			'orderby'    => 'name',
 			'number'     => absint( $attr['count'] ),
 			'hide_empty' => false,

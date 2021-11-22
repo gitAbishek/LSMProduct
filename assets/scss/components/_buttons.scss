@@ -39,10 +39,11 @@
 	}
 
 	// Primary Buttons
-	&-primary {
+	&#{&}-primary {
 		background-color: var(--masteriyo-color-primary);
 		border-color: var(--masteriyo-color-primary);
 		color: var(--masteriyo-color-white);
+		text-decoration: none;
 
 		&:hover {
 			background-color: var(--masteriyo-color-btn-blue-hover);

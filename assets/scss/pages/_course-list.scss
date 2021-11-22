@@ -150,8 +150,12 @@
 		}
 	}
 
+	& &__category a {
+		text-decoration: none;
+	}
+
 	// Title.
-	&__title {
+	& &__title {
 		font-size: 18px;
 		font-weight: 700;
 		margin-top: 0;
@@ -162,15 +166,15 @@
 			content: "";
 			display: none;
 		}
+	}
 
-		a {
-			color: var(--masteriyo-color-grey-dark);
-			text-decoration: none;
+	& &__title a {
+		color: var(--masteriyo-color-grey-dark);
+		text-decoration: none;
 
-			&:hover,
-			&:focus {
-				color: var(--masteriyo-color-btn-blue-hover);
-			}
+		&:hover,
+		&:focus {
+			color: var(--masteriyo-color-btn-blue-hover);
 		}
 	}
 
@@ -237,30 +241,31 @@
 		.title {
 			margin-bottom: $spacing_14px;
 		}
+	}
 
-		ul {
-			list-style: none;
-			margin: 0px;
-			padding: 0px;
+	& &__description ul,
+	& &__description ol {
+		list-style: none;
+		margin: 0px;
+		padding: 0px;
 
-			li {
-				display: flex;
+		li {
+			display: flex;
 
-				&:not(:last-child) {
-					margin-bottom: $spacing_4px;
-				}
+			&:not(:last-child) {
+				margin-bottom: $spacing_4px;
+			}
 
-				p {
-					margin: 0px;
-					padding-left: $spacing_8px;
-					font-size: 14px;
-					line-height: 1.618;
-				}
+			p {
+				margin: 0px;
+				padding-left: $spacing_8px;
+				font-size: 14px;
+				line-height: 1.618;
+			}
 
-				&::before {
-					content: ("\2713");
-					font-size: 16px;
-				}
+			&::before {
+				content: ("\2713");
+				font-size: 16px;
 			}
 		}
 	}

@@ -541,7 +541,8 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			$wp_query_args['tax_query'][] = array(
 				'taxonomy' => 'course_cat',
 				'field'    => 'slug',
-				'terms'    => $query_vars['category'],
+				'terms'    => is_array( $query_vars['category'] ) ? $query_vars['category'] : array( $query_vars['category'] ),
+				'operator' => 'IN',
 			);
 		}
 

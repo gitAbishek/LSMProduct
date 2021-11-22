@@ -72,8 +72,8 @@ class Masteriyo {
 		Ajax::init();
 		ScriptStyle::init();
 
+		masteriyo( 'blocks' )->init();
 		masteriyo( 'order-notes' );
-
 		masteriyo( 'query.frontend' );
 
 		$this->define_tables();

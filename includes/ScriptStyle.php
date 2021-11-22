@@ -9,6 +9,8 @@
 
 namespace Masteriyo;
 
+use Masteriyo\Query\CourseCategoryQuery;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -65,6 +67,7 @@ class ScriptStyle {
 	 * @return void
 	 */
 	private static function init_hooks() {
+		add_action( 'init', array( __CLASS__, 'after_wp_init' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_public_scripts_styles' ), PHP_INT_MAX - 10 );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_admin_scripts_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_public_localized_scripts' ), PHP_INT_MAX - 9 );
@@ -72,6 +75,16 @@ class ScriptStyle {
 
 		// Remove third party styles from learn page.
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_styles_scripts_in_learn_page' ), PHP_INT_MAX );
+	}
+
+	/**
+	 * Initialization after WordPress is initialized.
+	 *
+	 * @since 1.3.0
+	 */
+	public static function after_wp_init() {
+		self::register_block_scripts_and_styles();
+		self::localize_block_scripts();
 	}
 
 	/**
@@ -120,6 +133,13 @@ class ScriptStyle {
 					'callback' => function() {
 						return masteriyo_is_admin_page() || masteriyo_is_learn_page();
 					},
+				),
+				'blocks'        => array(
+					'src'           => self::get_asset_url( "/assets/js/build/blocks{$suffix}.js" ),
+					'deps'          => array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-hooks' ),
+					'context'       => 'blocks',
+					'deps'          => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
+					'register_only' => true,
 				),
 				'admin'         => array(
 					'src'      => self::get_asset_url( "/assets/js/build/masteriyo-backend{$suffix}.js" ),
@@ -180,7 +200,7 @@ class ScriptStyle {
 				'public'       => array(
 					'src'     => self::get_asset_url( "/assets/css/public{$suffix}.css" ),
 					'has_rtl' => false,
-					'context' => 'public',
+					'context' => array( 'public', 'blocks' ),
 				),
 				'dependencies' => array(
 					'src'     => self::get_asset_url( '/assets/js/build/masteriyo-dependencies.css' ),
@@ -213,7 +233,7 @@ class ScriptStyle {
 		$styles = array_filter(
 			$styles,
 			function( $style ) use ( $context ) {
-				return $style['context'] === $context;
+				return in_array( $context, (array) $style['context'], true );
 			}
 		);
 
@@ -287,7 +307,7 @@ class ScriptStyle {
 				'version'       => self::get_version(),
 				'media'         => 'all',
 				'has_rtl'       => false,
-				'context'       => 'none',
+				'context'       => array( 'none' ),
 				'in_footer'     => true,
 				'register_only' => false,
 				'callback'      => '',
@@ -358,7 +378,15 @@ class ScriptStyle {
 	 * @param  boolean  $has_rtl If has RTL version to load too.
 	 */
 	private static function register_style( $handle, $path, $deps = array(), $version = '', $media = 'all', $has_rtl = false ) {
-		self::$styles[] = $handle;
+		if ( ! isset( self::$styles[ $handle ] ) ) {
+			self::$styles[ $handle ] = array(
+				'src'     => $path,
+				'deps'    => $deps,
+				'version' => $version,
+				'media'   => $media,
+				'has_rtl' => $has_rtl,
+			);
+		}
 		wp_register_style( "masteriyo-{$handle}", $path, $deps, $version, $media );
 
 		if ( $has_rtl ) {
@@ -426,6 +454,7 @@ class ScriptStyle {
 		}
 
 		self::load_custom_inline_styles();
+		self::load_block_styles();
 	}
 
 	/**
@@ -453,6 +482,101 @@ class ScriptStyle {
 			}
 		";
 		wp_add_inline_style( 'masteriyo-public', $custom_css );
+	}
+
+	/**
+	 * Load block styles.
+	 *
+	 * @since 1.3.0
+	 */
+	public static function load_block_styles() {
+		$post_id = get_the_ID();
+
+		if ( empty( $post_id ) ) {
+			return;
+		}
+		$css = get_post_meta( $post_id, '_masteriyo_css', true );
+
+		if ( empty( $css ) ) {
+			return;
+		}
+		wp_add_inline_style( 'masteriyo-public', $css );
+	}
+
+	/**
+	 * Register block scripts and styles.
+	 *
+	 * @since 1.3.0
+	 */
+	public static function register_block_scripts_and_styles() {
+		$scripts = self::get_scripts( 'blocks' );
+		$styles  = self::get_styles( 'blocks' );
+
+		foreach ( $scripts as $handle => $script ) {
+			if ( true === (bool) $script['register_only'] ) {
+				self::register_script( $handle, $script['src'], $script['deps'], $script['version'] );
+				continue;
+			}
+
+			if ( empty( $script['callback'] ) ) {
+				self::enqueue_script( $handle, $script['src'], $script['deps'], $script['version'] );
+			} elseif ( is_callable( $script['callback'] ) && call_user_func_array( $script['callback'], array() ) ) {
+				self::enqueue_script( $handle, $script['src'], $script['deps'], $script['version'] );
+			}
+		}
+
+		foreach ( $styles as $handle => $style ) {
+			if ( true === (bool) $style['register_only'] ) {
+				self::register_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
+				continue;
+			}
+
+			if ( empty( $style['callback'] ) ) {
+				self::enqueue_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
+			} elseif ( is_callable( $style['callback'] ) && call_user_func_array( $style['callback'], array() ) ) {
+				self::enqueue_style( $handle, $style['src'], $style['deps'], $style['version'], $style['media'], $style['has_rtl'] );
+			}
+		}
+
+		if ( function_exists( 'wp_set_script_translations' ) ) {
+			wp_set_script_translations( 'masteriyo-blocks', 'masteriyo', Constants::get( 'MASTERIYO_LANGUAGES' ) );
+		}
+	}
+
+	/**
+	 * Localize block scripts.
+	 *
+	 * @since 1.3.0
+	 */
+	public static function localize_block_scripts() {
+		$args       = array(
+			'order'   => 'ASC',
+			'orderby' => 'name',
+			'number'  => '',
+		);
+		$query      = new CourseCategoryQuery( $args );
+		$categories = $query->get_categories();
+
+		self::$localized_scripts = apply_filters(
+			'masteriyo_localized_block_scripts',
+			array(
+				'blocks' => array(
+					'name' => '_MASTERIYO_BLOCKS_DATA_',
+					'data' => array(
+						'categories' => array_map(
+							function( $category ) {
+								return $category->get_data();
+							},
+							$categories
+						),
+					),
+				),
+			)
+		);
+
+		foreach ( self::$localized_scripts as $handle => $script ) {
+			\wp_localize_script( "masteriyo-{$handle}", $script['name'], $script['data'] );
+		}
 	}
 
 	/**

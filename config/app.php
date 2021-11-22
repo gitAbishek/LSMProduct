@@ -39,6 +39,7 @@ return array_unique(
 			'Masteriyo\Providers\CourseProgressItemServiceProvider',
 			'Masteriyo\Providers\FrontendQueryServiceProvider',
 			'Masteriyo\Providers\AppServiceProvider',
+			'Masteriyo\Providers\BlocksServiceProvider',
 		)
 	)
 );

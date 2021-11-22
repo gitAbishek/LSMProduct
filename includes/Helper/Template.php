@@ -328,8 +328,21 @@ function masteriyo_add_body_class( $classes, $class ) {
 
 	return $classes;
 }
-function_exists( 'add_filter' ) && add_filter( 'body_class', 'masteriyo_add_body_class', 10, 2 );
 
+if ( ! function_exists( 'masteriyo_add_admin_body_class' ) ) {
+	/**
+	 * Add class to the body tag in admin page.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $classes An string of body class names.
+	 *
+	 * @return string
+	 */
+	function masteriyo_add_admin_body_class( $classes ) {
+		return $classes . ' masteriyo ';
+	}
+}
 
 if ( ! function_exists( 'masteriyo_template_enroll_button' ) ) {
 	/**

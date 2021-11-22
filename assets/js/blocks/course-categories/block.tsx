@@ -8,7 +8,7 @@ import './editor.scss';
 export function register_course_categories_block() {
 	wp.blocks.registerBlockType('masteriyo/course-categories', {
 		title: 'Course Categories',
-		description: __('List out course categories.', 'masteriyo'),
+		description: __('Display a collection of course categories.', 'masteriyo'),
 		icon: <Icon type="blockIcon" name="course-categories" size={24} />,
 		category: 'masteriyo',
 		keywords: ['Course Categories Block'],

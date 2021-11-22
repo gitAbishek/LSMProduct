@@ -17,6 +17,7 @@ interface FilterParams {
 	page?: number;
 	role?: string;
 	search?: string;
+	approved?: boolean | string;
 }
 const Instructors: React.FC = () => {
 	const [filterParams, setFilterParams] = useState<FilterParams>({});
@@ -30,14 +31,16 @@ const Instructors: React.FC = () => {
 			<Container maxW="container.xl">
 				<Box bg="white" py={{ base: 6, md: 12 }} shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
-						<InstructorsFilter setFilterParams={setFilterParams} />
+						<InstructorsFilter
+							setFilterParams={setFilterParams}
+							filterParams={filterParams}
+						/>
 						<Table>
 							<Thead>
 								<Tr>
 									<Th>{__('Name', 'masteriyo')}</Th>
 									<Th>{__('Email', 'masteriyo')}</Th>
 									<Th>{__('Registered On', 'masteriyo')}</Th>
-									<Th>{__('Approved', 'masteriyo')}</Th>
 									<Th>{__('Actions', 'masteriyo')}</Th>
 								</Tr>
 							</Thead>
@@ -61,6 +64,10 @@ const Instructors: React.FC = () => {
 						metaData={usersQuery.data.meta}
 						setFilterParams={setFilterParams}
 						perPageText={__('Instructors Per Page:', 'masteriyo')}
+						extraFilterParams={{
+							approved: filterParams.approved,
+							search: filterParams.search,
+						}}
 					/>
 				)}
 			</Container>

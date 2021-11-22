@@ -17,7 +17,7 @@ const UserHeader: React.FC = () => {
 						as={NavLink}
 						sx={navLinkStyles}
 						_activeLink={navActiveStyles}
-						to={routes.users.studentsList}>
+						to={routes.users.students.list}>
 						<ListIcon as={FaUserFriends} />
 						{__('Students', 'masteriyo')}
 					</Link>
@@ -29,7 +29,7 @@ const UserHeader: React.FC = () => {
 						sx={navLinkStyles}
 						isActive={() => location.pathname.includes('/instructors')}
 						_activeLink={navActiveStyles}
-						to={routes.users.instructorsList}>
+						to={routes.users.instructors.list}>
 						<ListIcon as={FaUserTie} />
 						{__('Instructors', 'masteriyo')}
 					</Link>

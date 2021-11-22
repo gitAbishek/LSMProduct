@@ -24,20 +24,20 @@ import { BiChevronLeft, BiInfoCircle } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
-import Header from '../../components/common/Header';
-import FullScreenLoader from '../../components/layout/FullScreenLoader';
+import Header from '../../../../components/common/Header';
+import FullScreenLoader from '../../../../components/layout/FullScreenLoader';
 import {
 	infoIconStyles,
 	navActiveStyles,
 	navLinkStyles,
-} from '../../config/styles';
-import routes from '../../constants/routes';
-import urls from '../../constants/urls';
-import { UserSchema } from '../../schemas';
-import API from '../../utils/api';
-import { deepClean } from '../../utils/utils';
+} from '../../../../config/styles';
+import routes from '../../../../constants/routes';
+import urls from '../../../../constants/urls';
+import { UserSchema } from '../../../../schemas';
+import API from '../../../../utils/api';
+import { deepClean } from '../../../../utils/utils';
 
-const EditUser: React.FC = () => {
+const EditStudent: React.FC = () => {
 	const { userId }: any = useParams();
 	const history = useHistory();
 	const formMethods = useForm<UserSchema>();
@@ -99,12 +99,8 @@ const EditUser: React.FC = () => {
 								sx={navLinkStyles}
 								isActive={() => location.hash.includes('/users/')}
 								_activeLink={navActiveStyles}
-								to={
-									userQuery?.data?.roles.includes('masteriyo_student')
-										? routes.users.studentsList
-										: routes.users.instructorsList
-								}>
-								{__('Edit User', 'masteriyo')}
+								to={routes.users.students.list}>
+								{__('Edit Student', 'masteriyo')}
 							</Link>
 						</ListItem>
 					</List>
@@ -112,17 +108,12 @@ const EditUser: React.FC = () => {
 				<Container maxW="container.xl" mt="6">
 					<Stack direction="column" spacing="6">
 						<ButtonGroup>
-							<RouterLink
-								to={
-									userQuery?.data?.roles.includes('masteriyo_student')
-										? routes.users.studentsList
-										: routes.users.instructorsList
-								}>
+							<RouterLink to={routes.users.students.list}>
 								<Button
 									variant="link"
 									_hover={{ color: 'blue.500' }}
 									leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
-									{__('Back to Users', 'masteriyo')}
+									{__('Back to Students', 'masteriyo')}
 								</Button>
 							</RouterLink>
 						</ButtonGroup>
@@ -249,16 +240,12 @@ const EditUser: React.FC = () => {
 												colorScheme="blue"
 												type="submit"
 												isLoading={updateUser.isLoading}>
-												{__('Update User', 'masteriyo')}
+												{__('Update', 'masteriyo')}
 											</Button>
 											<Button
 												variant="outline"
 												onClick={() =>
-													history.push(
-														userQuery?.data?.roles.includes('masteriyo_student')
-															? routes.users.studentsList
-															: routes.users.instructorsList
-													)
+													history.push(routes.users.students.list)
 												}>
 												{__('Cancel', 'masteriyo')}
 											</Button>
@@ -275,4 +262,4 @@ const EditUser: React.FC = () => {
 	return <FullScreenLoader />;
 };
 
-export default EditUser;
+export default EditStudent;

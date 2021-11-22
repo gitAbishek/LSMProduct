@@ -16,14 +16,12 @@ import {
 	MenuItem,
 	MenuList,
 	Stack,
-	Switch,
 	Text,
 	Tooltip,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import {
 	BiCalendar,
 	BiDotsVerticalRounded,
@@ -39,7 +37,7 @@ import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
 import { UserSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
-import { deepClean, getLocalTime } from '../../../../utils/utils';
+import { getLocalTime } from '../../../../utils/utils';
 
 interface Props {
 	data: UserSchema;
@@ -48,14 +46,10 @@ interface Props {
 const InstructorList: React.FC<Props> = (props) => {
 	const { data } = props;
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-	const [isStatusModalOpen, setStatusModalOpen] = useState(false);
 	const queryClient = useQueryClient();
 	const usersAPI = new API(urls.instructors);
 	const cancelDeleteModalRef = useRef<any>();
-	const cancelStatusModalRef = useRef<any>();
 	const toast = useToast();
-	const { register, handleSubmit } = useForm();
-	const [isChecked, setIsChecked] = useState(data?.approved);
 
 	const deleteUser = useMutation((id: number) => usersAPI.delete(id), {
 		onSuccess: () => {
@@ -72,52 +66,6 @@ const InstructorList: React.FC<Props> = (props) => {
 			queryClient.invalidateQueries('instructorsList');
 		},
 	});
-
-	const updateUser = useMutation(
-		(datas: object) => usersAPI.update(data?.id, datas),
-		{
-			onSuccess: (data: any) => {
-				setStatusModalOpen(false);
-				toast({
-					title: data?.approved
-						? __('User approved successfully', 'masteriyo')
-						: __('User unapproved successfully', 'masteriyo'),
-					description: data?.approved
-						? `${data.display_name} ${__(
-								' has been approved successfully',
-								'masteriyo'
-						  )}`
-						: `${data.display_name} ${__(
-								' has been unapproved successfully',
-								'masteriyo'
-						  )}`,
-					isClosable: true,
-					status: 'success',
-				});
-				queryClient.invalidateQueries('instructorsList');
-			},
-			onError: (error: any) => {
-				toast({
-					description: `${error.response?.data?.message}`,
-					isClosable: true,
-					status: 'error',
-				});
-			},
-		}
-	);
-
-	const onStatusChange = (e: any) => {
-		setIsChecked(e.target.checked);
-		setStatusModalOpen(true);
-	};
-
-	const onStatusModalClose = () => {
-		setStatusModalOpen(false);
-	};
-
-	const onSubmit = (data: any) => {
-		updateUser.mutate(deepClean(data));
-	};
 
 	const onDeletePress = () => {
 		setDeleteModalOpen(true);
@@ -136,19 +84,31 @@ const InstructorList: React.FC<Props> = (props) => {
 					<Stack direction="row" spacing="1">
 						<Link
 							as={RouterLink}
-							to={routes.users.edit.replace(':userId', data?.id.toString())}
+							to={routes.users.instructors.edit.replace(
+								':userId',
+								data?.id.toString()
+							)}
 							fontWeight="semibold"
 							fontSize="sm"
 							_hover={{ color: 'blue.500' }}>
 							{`#${data?.id} ${data?.first_name} ${data?.last_name}`}{' '}
 						</Link>
-						{data?.approved && (
+						{data?.approved ? (
 							<Tooltip
 								label={__('Approved Instructor', 'masteriyo')}
 								hasArrow
 								fontSize="xs">
 								<Box as="span" sx={infoIconStyles}>
 									<Icon boxSize="3" as={FaCheckCircle} color="green" />
+								</Box>
+							</Tooltip>
+						) : (
+							<Tooltip
+								label={__('Pending Approval', 'masteriyo')}
+								hasArrow
+								fontSize="xs">
+								<Box as="span" sx={infoIconStyles}>
+									<Icon boxSize="3" as={FaCheckCircle} />
 								</Box>
 							</Tooltip>
 						)}
@@ -173,82 +133,12 @@ const InstructorList: React.FC<Props> = (props) => {
 				</Stack>
 			</Td>
 			<Td>
-				<form>
-					<Stack direction="row" spacing="2">
-						<Tooltip
-							label={__(
-								'Approve or Unapproved the user as instructor.',
-								'masteriyo'
-							)}
-							hasArrow
-							fontSize="xs">
-							<Box as="span" sx={infoIconStyles}>
-								<Switch
-									colorScheme="green"
-									{...register('approved')}
-									onChangeCapture={onStatusChange}
-									isChecked={isChecked}
-								/>
-							</Box>
-						</Tooltip>
-
-						{/* Status Change Dialog */}
-						<AlertDialog
-							isOpen={isStatusModalOpen}
-							onClose={onStatusModalClose}
-							isCentered
-							leastDestructiveRef={cancelStatusModalRef}>
-							<AlertDialogOverlay>
-								<AlertDialogContent>
-									<AlertDialogHeader>
-										{isChecked
-											? `${__('Approve', 'masteriyo')} ${data?.display_name}`
-											: `${__('Unapproved', 'masteriyo')} ${
-													data?.display_name
-											  }`}
-									</AlertDialogHeader>
-									<AlertDialogBody>
-										{isChecked
-											? __(
-													'Are you sure? You want to approve the user as instructor.',
-													'masteriyo'
-											  )
-											: __(
-													'Are you sure? You want to unapproved the user as instructor.',
-													'masteriyo'
-											  )}
-									</AlertDialogBody>
-									<AlertDialogFooter>
-										<ButtonGroup>
-											<Button
-												ref={cancelStatusModalRef}
-												onClick={() => {
-													onStatusModalClose();
-													setIsChecked(data?.approved);
-												}}
-												variant="outline">
-												{__('Cancel', 'masteriyo')}
-											</Button>
-											<Button
-												onClick={handleSubmit(onSubmit)}
-												colorScheme="blue"
-												isLoading={updateUser.isLoading}>
-												{isChecked
-													? __('Approve', 'masteriyo')
-													: __('Unapprove', 'masteriyo')}
-											</Button>
-										</ButtonGroup>
-									</AlertDialogFooter>
-								</AlertDialogContent>
-							</AlertDialogOverlay>
-						</AlertDialog>
-					</Stack>
-				</form>
-			</Td>
-			<Td>
 				<ButtonGroup>
 					<RouterLink
-						to={routes.users.edit.replace(':userId', data?.id.toString())}>
+						to={routes.users.instructors.edit.replace(
+							':userId',
+							data?.id.toString()
+						)}>
 						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
 							{__('Edit', 'masteriyo')}
 						</Button>

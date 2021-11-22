@@ -2,7 +2,7 @@
 /**
  * Instructor controller class.
  *
- * @since 1.2.3
+ * @since 1.3.0
  *
  * @package Masteriyo\RestApi\Controllers\Version1;
  */
@@ -49,7 +49,7 @@ class InstructorsController extends UsersController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 1.2.3
+	 * @since 1.3.0
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -58,7 +58,7 @@ class InstructorsController extends UsersController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 1.2.3
+	 * @since 1.3.0
 	 *
 	 * @param Permission $permission Permission instance.
 	 */
@@ -69,7 +69,7 @@ class InstructorsController extends UsersController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since 1.2.2
+	 * @since 1.3.0
 	 *
 	 * @return array
 	 */
@@ -90,7 +90,7 @@ class InstructorsController extends UsersController {
 	/**
 	 * Get the User's schema, conforming to JSON Schema.
 	 *
-	 * @since 1.2.2
+	 * @since 1.3.0
 	 *
 	 * @return array
 	 */
@@ -118,7 +118,7 @@ class InstructorsController extends UsersController {
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
-	 * @since  1.2.2
+	 * @since  1.3.0
 	 *
 	 * @return array
 	 */
@@ -158,7 +158,7 @@ class InstructorsController extends UsersController {
 	/**
 	 * Get object.
 	 *
-	 * @since 1.2.2
+	 * @since 1.3.0
 	 *
 	 * @param  int|WP_user|Model $object Object ID or WP_user or Model.
 	 *
@@ -185,7 +185,7 @@ class InstructorsController extends UsersController {
 	/**
 	 * Get instructor data.
 	 *
-	 * @since 1.2.2
+	 * @since 1.3.0
 	 *
 	 * @param Instructor   $instructor instructor instance.
 	 * @param string $context Request context.
@@ -209,7 +209,7 @@ class InstructorsController extends UsersController {
 	/**
 	 * Prepare a single user object for create or update.
 	 *
-	 * @since 1.2.2
+	 * @since 1.3.0
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.

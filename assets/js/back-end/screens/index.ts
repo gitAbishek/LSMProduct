@@ -12,6 +12,7 @@ export { default as AllOrders } from './orders/AllOrders';
 export { default as EditOrder } from './orders/EditOrder';
 export { default as SectionBuilder } from './sections/SectionBuilder';
 export { default as Settings } from './settings/Settings';
+export { default as EditInstructor } from './users/components/instructors/EditInstructor';
 export { default as Instructors } from './users/components/instructors/Instructors';
+export { default as EditStudent } from './users/components/students/EditStudent';
 export { default as Students } from './users/components/students/Students';
-export { default as EditUser } from './users/EditUser';

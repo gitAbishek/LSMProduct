@@ -79,7 +79,10 @@ const StudentList: React.FC<Props> = (props) => {
 				<Stack direction="column">
 					<Link
 						as={RouterLink}
-						to={routes.users.edit.replace(':userId', data?.id.toString())}
+						to={routes.users.students.edit.replace(
+							':userId',
+							data?.id.toString()
+						)}
 						fontWeight="semibold"
 						fontSize="sm"
 						_hover={{ color: 'blue.500' }}>
@@ -106,7 +109,10 @@ const StudentList: React.FC<Props> = (props) => {
 			<Td>
 				<ButtonGroup>
 					<RouterLink
-						to={routes.users.edit.replace(':userId', data?.id.toString())}>
+						to={routes.users.students.edit.replace(
+							':userId',
+							data?.id.toString()
+						)}>
 						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
 							{__('Edit', 'masteriyo')}
 						</Button>

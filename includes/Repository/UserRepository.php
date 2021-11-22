@@ -54,7 +54,6 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		'billing_address_1'    => '_billing_address_1',
 		'billing_address_2'    => '_billing_address_2',
 		'billing_city'         => '_billing_city',
-		'billing_usercode'     => '_billing_usercode',
 		'billing_postcode'     => '_billing_postcode',
 		'billing_country'      => '_billing_country',
 		'billing_state'        => '_billing_state',
@@ -72,6 +71,10 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	public function create( Model &$user ) {
 		if ( ! $user->get_date_created( 'edit' ) ) {
 			$user->set_date_created( current_time( 'mysql', true ) );
+		}
+
+		if ( ! $user->get_nickname() ) {
+			$user->set_nickName( $user->get_username( 'edit' ) );
 		}
 
 		$id = wp_insert_user(

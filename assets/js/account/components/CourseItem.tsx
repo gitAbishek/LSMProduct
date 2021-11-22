@@ -143,7 +143,7 @@ const CourseItem: React.FC<Props> = ({
 							}}>
 							{'Started ' + started}
 						</Text>
-						<Button colorScheme="blue" size="sm">
+						<Button colorScheme="blue" size="sm" borderRadius="full">
 							{__('Continue', 'masteriyo')}
 						</Button>
 					</Stack>

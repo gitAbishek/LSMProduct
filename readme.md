@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.2.1
+**Stable tag**: 1.3.0
 
 **License: GNU** General Public License v3.0
 
@@ -46,6 +46,16 @@ A complete solution to create and sell online courses. The plugin is powered by 
 No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
 # Changelog
+
+### 1.3.0 - 22-11-2021
+- Feature - Instructor registration system.
+- Feature - Instructor approval system.
+- Feature - Instructor listing in the backend.
+- Feature - Added courses gutenberg block.
+- Feature - Added courses categories gutenberg block.
+- Tweak - Added author support to course post type.
+- Tweak - Added support of links in the editor.
+- Fix - Remove the static ANSWERED from the floating quiz timer in learn page.
 
 ### 1.2.1 - 12-11-2021
 - Enhancement - Added unlimited quiz attempt limit option.

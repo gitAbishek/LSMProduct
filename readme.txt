@@ -2,9 +2,9 @@
 Contributors: Masteriyo
 Tags: lms, learning management system, courses, elearning
 Requires at least: 5.0
-Tested up to: 5.8.1
+Tested up to: 5.8.2
 Requires PHP: 7.0
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -196,6 +196,16 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.3.0 - 22-11-2021 =
+- Feature - Instructor registration system.
+- Feature - Instructor approval system.
+- Feature - Instructor listing in the backend.
+- Feature - Added courses gutenberg block.
+- Feature - Added courses categories gutenberg block.
+- Tweak - Added author support to course post type.
+- Tweak - Added support of links in the editor.
+- Fix - Remove the static ANSWERED from the floating quiz timer in learn page.
 
 = 1.2.1 - 12-11-2021 =
 - Enhancement - Added unlimited quiz attempt limit option.

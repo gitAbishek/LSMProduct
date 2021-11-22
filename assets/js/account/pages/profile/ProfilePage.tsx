@@ -21,7 +21,7 @@ const ProfilePage = () => {
 			<Alert bg="blue.500" color="white" p="6">
 				<Stack direction="column" spacing="5">
 					<Stack direction="column" spacing="0.5">
-						<AlertTitle>{__('Hello, Jamie!', 'masteriyo')}</AlertTitle>
+						<AlertTitle>{__('Hello, Jamie', 'masteriyo')}</AlertTitle>
 						<AlertDescription display="block" fontSize="sm">
 							{__(
 								'	Welcome to your dashboard here you can edit your overview and your stats',

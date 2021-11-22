@@ -7,10 +7,11 @@ namespace Masteriyo\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
-use League\Container\ServiceProvider\AbstractServiceProvider;
 use Masteriyo\Models\User;
+use Masteriyo\Models\Instructor;
 use Masteriyo\Repository\UserRepository;
 use Masteriyo\RestApi\Controllers\Version1\UsersController;
+use League\Container\ServiceProvider\AbstractServiceProvider;
 
 class UserServiceProvider extends AbstractServiceProvider {
 	/**
@@ -29,6 +30,8 @@ class UserServiceProvider extends AbstractServiceProvider {
 		'user.store',
 		'user.rest',
 		'\Masteriyo\RestApi\Controllers\Version1\UsersController',
+
+		'instructor',
 	);
 
 	/**
@@ -49,6 +52,9 @@ class UserServiceProvider extends AbstractServiceProvider {
 		->addArgument( 'permission' );
 
 		$this->getContainer()->add( 'user', User::class )
+		->addArgument( 'user.store' );
+
+		$this->getContainer()->add( 'instructor', Instructor::class )
 		->addArgument( 'user.store' );
 	}
 }

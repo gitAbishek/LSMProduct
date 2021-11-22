@@ -19,10 +19,10 @@ class Roles {
 		return apply_filters(
 			'masteriyo_user_roles',
 			array(
-				'masteriyo_manager'    => array(
-					'display_name' => esc_html__( 'Masteriyo Manager', 'masteriyo' ),
-					'capabilities' => Capabilities::get_manager_capabilities(),
-				),
+				// 'masteriyo_manager'    => array(
+				// 	'display_name' => esc_html__( 'Masteriyo Manager', 'masteriyo' ),
+				// 	'capabilities' => Capabilities::get_manager_capabilities(),
+				// ),
 				'masteriyo_instructor' => array(
 					'display_name' => esc_html__( 'Masteriyo Instructor', 'masteriyo' ),
 					'capabilities' => Capabilities::get_instructor_capabilities(),

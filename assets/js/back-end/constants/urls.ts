@@ -24,6 +24,7 @@ const urls = {
 	countries: base + 'datas/countries',
 	states: base + 'datas/states',
 	currencies: base + 'datas/currencies',
+	instructors: base + 'users/instructors',
 };
 
 export default urls;

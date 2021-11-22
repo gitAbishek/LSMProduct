@@ -97,8 +97,13 @@ const EditUser: React.FC = () => {
 							<Link
 								as={NavLink}
 								sx={navLinkStyles}
+								isActive={() => location.hash.includes('/users/')}
 								_activeLink={navActiveStyles}
-								to={routes.users.list}>
+								to={
+									userQuery?.data?.roles.includes('masteriyo_student')
+										? routes.users.studentsList
+										: routes.users.instructorsList
+								}>
 								{__('Edit User', 'masteriyo')}
 							</Link>
 						</ListItem>
@@ -107,7 +112,12 @@ const EditUser: React.FC = () => {
 				<Container maxW="container.xl" mt="6">
 					<Stack direction="column" spacing="6">
 						<ButtonGroup>
-							<RouterLink to={routes.users.list}>
+							<RouterLink
+								to={
+									userQuery?.data?.roles.includes('masteriyo_student')
+										? routes.users.studentsList
+										: routes.users.instructorsList
+								}>
 								<Button
 									variant="link"
 									_hover={{ color: 'blue.500' }}
@@ -243,7 +253,13 @@ const EditUser: React.FC = () => {
 											</Button>
 											<Button
 												variant="outline"
-												onClick={() => history.push(routes.users.list)}>
+												onClick={() =>
+													history.push(
+														userQuery?.data?.roles.includes('masteriyo_student')
+															? routes.users.studentsList
+															: routes.users.instructorsList
+													)
+												}>
 												{__('Cancel', 'masteriyo')}
 											</Button>
 										</ButtonGroup>

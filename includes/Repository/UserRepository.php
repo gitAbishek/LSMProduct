@@ -87,16 +87,24 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 					'user_activation_key' => $user->get_activation_key( 'edit' ),
 					'user_status'         => $user->get_status( 'edit' ),
 					'display_name'        => $user->get_display_name( 'edit' ),
-					'role'                => $user->get_roles( 'edit' ),
+					'role'                => empty( $user->get_roles( 'edit' ) ) ? 'masteriyo_student' : current( $user->get_roles( 'edit' ) ),
 				),
 				$user
 			)
 		);
 
 		if ( $id && ! is_wp_error( $id ) ) {
+			// Append roles if there are more than one roles.
+			if ( count( $user->get_roles( 'edit' ) ) > 1 ) {
+				$wp_user = get_user_by( 'id', $id );
+				foreach ( $user->get_roles( 'edit' ) as $role ) {
+					$wp_user->add_role( $role );
+				}
+			}
+
 			$user->set_id( $id );
 			$this->update_user_meta( $user, true );
-			$user->apply_changes();\
+			$user->apply_changes();
 
 			do_action( 'masteriyo_new_user', $id, $user );
 		}
@@ -164,6 +172,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 			'date_created',
 			'status',
 			'display_name',
+			'roles',
 		);
 
 		// Only update the user when the user data changes.
@@ -176,9 +185,18 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 				'user_activation_key' => $user->get_activation_key( 'edit' ),
 				'user_status'         => $user->get_status( 'edit' ),
 				'display_name'        => $user->get_display_name( 'edit' ),
+				'role'                => empty( $user->get_roles( 'edit' ) ) ? 'masteriyo_student' : current( $user->get_roles( 'edit' ) ),
 			);
 
 			wp_update_user( array_merge( array( 'ID' => $user->get_id() ), $user_data ) );
+
+			// Append roles if there are more than one roles.
+			if ( count( $user->get_roles( 'edit' ) ) > 1 ) {
+				$wp_user = get_user_by( 'id', $id );
+				foreach ( $user->get_roles( 'edit' ) as $role ) {
+					$wp_user->add_role( $role );
+				}
+			}
 		}
 
 		// Only update password if a new one was set with set_password.
@@ -268,6 +286,15 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	protected function read_extra_data( &$user ) {
 		$meta_values = $this->read_meta( $user );
 
+		$meta_values = array_reduce(
+			$meta_values,
+			function( $result, $meta_value ) {
+				$result[ $meta_value->key ] = $meta_value->value;
+				return $result;
+			},
+			array()
+		);
+
 		foreach ( $user->get_extra_data_keys() as $key ) {
 			$function = 'set_' . $key;
 			if ( is_callable( array( $user, $function ) )
@@ -287,16 +314,19 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 */
 	protected function update_user_meta( &$model, $force = false ) {
 		// Make sure to take extra data into account.
-		$extra_data_keys = $model->get_extra_data_keys();
+		$extra_data_keys   = $model->get_extra_data_keys();
+		$meta_key_to_props = $this->get_internal_meta_keys();
 
 		foreach ( $extra_data_keys as $key ) {
-			$meta_key_to_props[ '_' . $key ] = $key;
+			$meta_key_to_props[ $key ] = '_' . $key;
 		}
+
+		$meta_key_to_props = array_merge( $meta_key_to_props, $this->get_internal_meta_keys() );
 
 		if ( $force ) {
 			$props_to_update = $this->get_internal_meta_keys();
 		} else {
-			$props_to_update = $this->get_props_to_update( $model, $this->get_internal_meta_keys() );
+			$props_to_update = $this->get_props_to_update( $model, $meta_key_to_props, 'user' );
 		}
 
 		foreach ( $props_to_update as $prop => $meta_key ) {

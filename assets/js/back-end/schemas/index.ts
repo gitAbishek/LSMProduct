@@ -413,6 +413,7 @@ export interface SettingsSchema {
 		account_page_id: number;
 		courses_page_id: number;
 		checkout_page_id: number;
+		instructor_registration_page_id: number;
 		checkout_endpoints: {
 			pay: string;
 			order_received: string;
@@ -555,6 +556,7 @@ export interface UserSchema {
 		email: string;
 		phone: string;
 	};
+	approved: boolean;
 }
 
 export interface CourseBuilderSchema {

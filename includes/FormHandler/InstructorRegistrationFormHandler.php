@@ -1,7 +1,7 @@
 <?php
 /**
- * Handle registration form.
- * @since 1.0.0
+ * Handle instructor registration form.
+ * @since 1.2.0
  *
  * @package Masteriyo\Classes\
  */
@@ -13,9 +13,17 @@ use Masteriyo\Notice;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Registration class.
+ * Instructor registration form handler class.
+ *
+ * @since 1.2.0
  */
-class RegistrationFormHandler {
+class InstructorRegistrationFormHandler {
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 1.2.0
+	 */
 	public function __construct() {
 		add_action( 'wp_loaded', array( $this, 'process' ), 20 );
 	}
@@ -23,21 +31,21 @@ class RegistrationFormHandler {
 	/**
 	 * Handle registration.
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public function process() {
 		try {
-			if ( ! isset( $_POST['masteriyo-registration'] ) ) {
+			if ( ! isset( $_POST['masteriyo-instructor-registration'] ) ) {
 				return;
 			}
 
 			$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
-			if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-register' ) ) {
+			if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-instructor-registration' ) ) {
 				throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
 			}
 
-			$result = $this->register_user();
+			$result = $this->register_instructor();
 
 			if ( is_wp_error( $result ) ) {
 				foreach ( $result->get_error_messages() as $message ) {
@@ -45,6 +53,7 @@ class RegistrationFormHandler {
 				}
 				$this->set_form_session();
 			}
+
 			if ( $result instanceof \Throwable ) {
 				masteriyo_add_notice( $result->getMessage(), Notice::ERROR );
 				$this->set_form_session();
@@ -58,7 +67,7 @@ class RegistrationFormHandler {
 	/**
 	 * Set user registration form session.
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	protected function set_form_session() {
 		$data    = $this->get_form_data();
@@ -72,11 +81,11 @@ class RegistrationFormHandler {
 	/**
 	 * Register user with submitted detail.
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 *
 	 * @return \WP_Error|boolean
 	 */
-	protected function register_user() {
+	protected function register_instructor() {
 		$data  = $this->get_form_data();
 		$error = $this->validate_form( $data );
 
@@ -88,7 +97,7 @@ class RegistrationFormHandler {
 			$data['email'],
 			$data['username'],
 			$data['password'],
-			'masteriyo_student',
+			'masteriyo_instructor',
 			array(
 				'first_name' => $data['first-name'],
 				'last_name'  => $data['last-name'],
@@ -115,7 +124,7 @@ class RegistrationFormHandler {
 	 *
 	 * @param array $data Form data.
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	protected function validate_form( $data ) {
 		$error = new \WP_Error();
@@ -166,7 +175,7 @@ class RegistrationFormHandler {
 	/**
 	 * Redirect after registration.
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 *
 	 * @param User $user
 	 */
@@ -186,7 +195,7 @@ class RegistrationFormHandler {
 	/**
 	 * Get the submitted form data.
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 *
 	 * @return array
 	 */
@@ -194,10 +203,10 @@ class RegistrationFormHandler {
 		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
 		if ( empty( $nonce_value ) ) {
-			throw new \WP_Error( 'nonce_missing', __( 'Nonce is missing', 'masteriyo' ) );
+			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
 		}
-		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-register' ) ) {
-			throw new \WP_Error( 'invalid_nonce', __( 'Invalid nonce', 'masteriyo' ) );
+		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-instructor-registration' ) ) {
+			throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
 		}
 
 		$data   = array();

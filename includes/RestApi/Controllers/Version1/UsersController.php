@@ -11,7 +11,6 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
 
 /**
@@ -177,6 +176,7 @@ class UsersController extends PostsController {
 
 		return apply_filters( 'masteriyo_user_collection_params', $params );
 	}
+
 	/**
 	 * Get object.
 	 *
@@ -191,7 +191,7 @@ class UsersController extends PostsController {
 			if ( is_int( $object ) ) {
 				$id = $object;
 			} else {
-				$id = is_a( $object, '\WP_user' ) ? $object->ID : $object->get_id();
+				$id = is_a( $object, '\WP_User' ) ? $object->ID : $object->get_id();
 			}
 			$user = masteriyo( 'user' );
 			$user->set_id( $id );
@@ -287,6 +287,8 @@ class UsersController extends PostsController {
 	/**
 	 * Get user data.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param User   $user User instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
@@ -363,10 +365,12 @@ class UsersController extends PostsController {
 		 * Enables adding extra arguments or setting defaults for a post
 		 * collection request.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param array           $args    Key value array of query var to query value.
 		 * @param WP_REST_Request $request The request used.
 		 */
-		$args = apply_filters( "masteriyo_rest_{$this->post_type}_object_query", $args, $request );
+		$args = apply_filters( "masteriyo_rest_{$this->object_type}_object_query", $args, $request );
 
 		return $args;
 	}
@@ -605,7 +609,7 @@ class UsersController extends PostsController {
 		return $schema;
 	}
 
-	/**`
+	/**
 	 * Prepare a single user object for create or update.
 	 *
 	 * @since 1.0.0

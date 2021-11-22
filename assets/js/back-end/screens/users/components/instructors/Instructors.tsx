@@ -6,11 +6,11 @@ import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
 import EmptyInfo from '../../../../components/common/EmptyInfo';
 import MasteriyoPagination from '../../../../components/common/MasteriyoPagination';
 import urls from '../../../../constants/urls';
-import { SkeletonStudentsList } from '../../../../skeleton';
+import { SkeletonInstructorsList } from '../../../../skeleton/index';
 import API from '../../../../utils/api';
 import UserHeader from '../../UserHeader';
-import StudentList from './StudentList';
-import StudentsFilter from './StudentsFilter';
+import InstructorList from './InstructorList';
+import InstructorsFilter from './InstructorsFilter';
 
 interface FilterParams {
 	per_page?: number;
@@ -18,40 +18,38 @@ interface FilterParams {
 	role?: string;
 	search?: string;
 }
-
-const Students: React.FC = () => {
-	const [filterParams, setFilterParams] = useState<FilterParams>({
-		role: 'masteriyo_student',
-	});
-
-	const usersAPI = new API(urls.users);
-	const usersQuery = useQuery(['usersList', filterParams], () =>
+const Instructors: React.FC = () => {
+	const [filterParams, setFilterParams] = useState<FilterParams>({});
+	const usersAPI = new API(urls.instructors);
+	const usersQuery = useQuery(['instructorsList', filterParams], () =>
 		usersAPI.list(filterParams)
 	);
-
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
 			<UserHeader />
 			<Container maxW="container.xl">
 				<Box bg="white" py={{ base: 6, md: 12 }} shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">
-						<StudentsFilter setFilterParams={setFilterParams} />
+						<InstructorsFilter setFilterParams={setFilterParams} />
 						<Table>
 							<Thead>
 								<Tr>
 									<Th>{__('Name', 'masteriyo')}</Th>
 									<Th>{__('Email', 'masteriyo')}</Th>
 									<Th>{__('Registered On', 'masteriyo')}</Th>
+									<Th>{__('Approved', 'masteriyo')}</Th>
 									<Th>{__('Actions', 'masteriyo')}</Th>
 								</Tr>
 							</Thead>
 							<Tbody>
-								{usersQuery.isLoading && <SkeletonStudentsList />}
+								{usersQuery.isLoading && <SkeletonInstructorsList />}
 								{usersQuery.isSuccess && usersQuery?.data?.data.length === 0 ? (
-									<EmptyInfo message={__('No students found.', 'masteriyo')} />
+									<EmptyInfo
+										message={__('No instructors found.', 'masteriyo')}
+									/>
 								) : (
 									usersQuery?.data?.data.map((user: any) => (
-										<StudentList key={user.id} data={user} />
+										<InstructorList key={user.id} data={user} />
 									))
 								)}
 							</Tbody>
@@ -62,8 +60,7 @@ const Students: React.FC = () => {
 					<MasteriyoPagination
 						metaData={usersQuery.data.meta}
 						setFilterParams={setFilterParams}
-						perPageText={__('Students Per Page:', 'masteriyo')}
-						extraFilterParams={{ role: 'masteriyo_student' }}
+						perPageText={__('Instructors Per Page:', 'masteriyo')}
 					/>
 				)}
 			</Container>
@@ -71,4 +68,4 @@ const Students: React.FC = () => {
 	);
 };
 
-export default Students;
+export default Instructors;

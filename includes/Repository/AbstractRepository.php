@@ -592,40 +592,6 @@ abstract class AbstractRepository {
 		wp_cache_delete( 'lookup_table', 'model_' . $id );
 	}
 
-
-	/**
-	 * Helper method that updates all the user meta for a model based on it's settings in the Model class.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param Model $model model object.
-	 * @param bool  $force Force update. Used during create.
-	 */
-	protected function update_user_meta( &$model, $force = false ) {
-		// Make sure to take extra data into account.
-		$extra_data_keys = $model->get_extra_data_keys();
-
-		foreach ( $extra_data_keys as $key ) {
-			$meta_key_to_props[ '_' . $key ] = $key;
-		}
-
-		if ( $force ) {
-			$props_to_update = $this->get_internal_meta_keys();
-		} else {
-			$props_to_update = $this->get_props_to_update( $model, $this->get_internal_meta_keys(), 'user' );
-		}
-
-		foreach ( $props_to_update as $prop => $meta_key ) {
-			$value   = $model->{"get_$prop"}( 'edit' );
-			$value   = is_string( $value ) ? wp_slash( $value ) : $value;
-			$updated = $this->update_or_delete_user_meta( $model, $meta_key, $value );
-
-			if ( $updated ) {
-				$this->updated_props[] = $prop;
-			}
-		}
-	}
-
 	/**
 	 * Helper method that updates all the post meta for a model based on it's settings in the Model class.
 	 *
@@ -639,7 +605,7 @@ abstract class AbstractRepository {
 		$extra_data_keys = $model->get_extra_data_keys();
 
 		foreach ( $extra_data_keys as $key ) {
-			$meta_key_to_props[ '_' . $key ] = $key;
+			$meta_key_to_props[ $key ] = '_' . $key;
 		}
 
 		if ( $force ) {

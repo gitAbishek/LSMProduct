@@ -96,6 +96,7 @@ class RestApi {
 			'course-progress.items' => "{$namespace}\\CourseProgressItemsController",
 			'data'                  => "{$namespace}\\DataController",
 			'blocks'                => "{$namespace}\\BlocksController",
+			'instructors'           => "{$namespace}\\InstructorsController",
 		);
 	}
 

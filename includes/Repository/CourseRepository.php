@@ -556,7 +556,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			);
 		}
 
-		// Handle course difficultyies.
+		// Handle course difficulties.
 		if ( ! empty( $query_vars['difficulty'] ) ) {
 			unset( $wp_query_args['difficulty'] );
 			$wp_query_args['tax_query'][] = array(

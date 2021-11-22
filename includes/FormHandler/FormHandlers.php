@@ -42,6 +42,7 @@ class FormHandlers {
 				"{$namespace}\\ChangePasswordFormHandler",
 				"{$namespace}\\AddToCartFormHandler",
 				"{$namespace}\\CheckoutFormHandler",
+				"{$namespace}\\InstructorRegistrationFormHandler",
 			)
 		);
 

@@ -54,6 +54,7 @@ add_action( 'masteriyo_account_view-account_endpoint', 'masteriyo_account_view_a
 add_action( 'masteriyo_account_courses_endpoint', 'masteriyo_account_courses_endpoint' );
 add_action( 'masteriyo_account_order-history_endpoint', 'masteriyo_account_order_history_endpoint' );
 add_action( 'masteriyo_account_view-order_endpoint', 'masteriyo_account_view_order_endpoint' );
+add_action( 'masteriyo_before_account_content', 'masteriyo_template_show_account_approved_notice' );
 
 /**
  * Emails.

@@ -182,10 +182,11 @@ class Setting extends Model {
 		),
 		'advance'        => array(
 			'pages'      => array(
-				'courses_page_id'  => '',
-				'account_page_id'  => '',
-				'checkout_page_id' => '',
-				'learn_page_id'    => '',
+				'courses_page_id'                 => '',
+				'account_page_id'                 => '',
+				'checkout_page_id'                => '',
+				'learn_page_id'                   => '',
+				'instructor_registration_page_id' => '',
 			),
 			'permalinks' => array(
 				'category_base'            => 'course-category',
@@ -213,7 +214,7 @@ class Setting extends Model {
 			// Checkout endpoints.
 			'checkout'   => array(
 				'pay'                        => 'order-pay',
-				'order_received'             => 'order-recieved',
+				'order_received'             => 'order-received',
 				'add_payment_method'         => 'add-payment-method',
 				'delete_payment_method'      => 'delete-payment-method',
 				'set_default_payment_method' => 'set-default-payment-method',
@@ -271,8 +272,6 @@ class Setting extends Model {
 				$this->set( "{$group}", $sub_groups );
 			}
 		}
-
-		$a = 1;
 	}
 
 	/**
@@ -289,7 +288,7 @@ class Setting extends Model {
 
 		$this->add_sanitize_callback( 'single_course.display.enable_review', 'masteriyo_string_to_bool' );
 
-		$this->add_sanitize_callback( 'learing_page.display.enable_questions_answers', 'masteriyo_string_to_bool' );
+		$this->add_sanitize_callback( 'learn_page.display.enable_questions_answers', 'masteriyo_string_to_bool' );
 
 		$this->add_sanitize_callback( 'advance.permalinks.category_base', 'sanitize_title' );
 		$this->add_sanitize_callback( 'advance.permalinks.tag_base', 'sanitize_title' );
@@ -302,6 +301,7 @@ class Setting extends Model {
 		$this->add_sanitize_callback( 'advance.pages.account_page_id', 'absint' );
 		$this->add_sanitize_callback( 'advance.pages.courses_page_id', 'absint' );
 		$this->add_sanitize_callback( 'advance.pages.checkout_page_id', 'absint' );
+		$this->add_sanitize_callback( 'advance.pages.instructor_registration_page_id', 'absint' );
 
 		$this->add_sanitize_callback( 'advance.checkout.pay', 'sanitize_title' );
 		$this->add_sanitize_callback( 'advance.checkout.order_received', 'sanitize_title' );

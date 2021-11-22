@@ -30,8 +30,9 @@ const routes = {
 		edit: '/courses/tags/:tagId',
 	},
 	users: {
-		list: '/users',
 		edit: '/users/:userId',
+		studentsList: '/users/students',
+		instructorsList: '/users/instructors',
 	},
 	settings: '/settings',
 	notFound: '/not-found',

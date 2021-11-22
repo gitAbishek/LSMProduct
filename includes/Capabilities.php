@@ -255,16 +255,13 @@ class Capabilities {
 			'delete_published_course_reviews' => true,
 			'delete_private_course_reviews'   => true,
 
-			// Users
-			'list_users'                      => true,
-
 			// Taxonomy.
+			'manage_terms'                    => true,
+			'manage_course_difficulties'      => true,
 			'manage_course_categories'        => true,
 			'edit_course_categories'          => true,
 		);
 
-		$author_caps  = get_role( 'author' )->capabilities;
-		$capabilities = array_merge( $capabilities, $author_caps );
 		$capabilities = array_merge( $capabilities, self::get_student_capabilities() );
 
 		return apply_filters( 'masteriyo_instructor_capabilities', $capabilities );
@@ -324,14 +321,17 @@ class Capabilities {
 			'delete_course_progresses'        => true,
 
 			// Course Categories.
-			'manage_course_categories'        => true,
-			'edit_course_categories'          => true,
 			'delete_course_categories'        => true,
 			'assign_course_categories'        => true,
+
+			// Users
+			'list_users'                      => true,
+
+			// Course Difficulties.
+			'delete_course_difficulties'      => true,
+			'assign_course_difficulties'      => true,
 		);
 
-		$editor_caps  = get_role( 'editor' )->capabilities;
-		$capabilities = array_merge( $capabilities, $editor_caps );
 		$capabilities = array_merge( $capabilities, self::get_instructor_capabilities() );
 
 		return apply_filters( 'masteriyo_manager_capabilities', $capabilities );

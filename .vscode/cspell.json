@@ -66,13 +66,17 @@
     "monthnum",
     "multiselect",
     "multisite",
+    "nicename",
+    "nopriv",
     "ncipe",
     "nocache",
+    "nicename",
     "nopriv",
     "numberposts",
     "ontype",
     "pagename",
     "pcexp",
+    "onhold",
     "pelago",
     "phpcbf",
     "phpcodesniffer",
@@ -91,7 +95,7 @@
     "setcookies",
     "Seychellois",
     "shortcode",
-    "shortcodes",
+    "Shortcodes",
     "signon",
     "sirbrillig",
     "soberano",
@@ -118,18 +122,18 @@
     "VARCHAR",
     "Verdean",
     "webpackbar",
+    "unslash",
     "woocommerce",
     "wpautop",
     "wpcs",
     "wpeverest",
     "xdbb",
     "xfdfc",
+    "wpnonce",
     "zeroise"
   ],
   // flagWords - list of words to be always considered incorrect
   // This is useful for offensive words and common spelling errors.
   // For example "hte" should be "the"
-  "flagWords": [
-    "hte"
-  ]
+  "flagWords": ["hte"]
 }

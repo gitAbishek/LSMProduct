@@ -73,6 +73,12 @@ class Difficulty extends Taxonomy {
 					'items_list'                 => __( 'Course Difficulties list', 'masteriyo' ),
 					'items_list_navigation'      => __( 'Course Difficulties list navigation', 'masteriyo' ),
 				),
+				'capabilities'      => array(
+					'manage_terms' => 'manage_course_difficulties',
+					'edit_terms'   => 'edit_course_difficulties',
+					'delete_terms' => 'delete_course_difficulties',
+					'assign_terms' => 'assign_course_difficulties',
+				),
 			)
 		);
 	}

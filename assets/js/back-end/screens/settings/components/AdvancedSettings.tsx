@@ -187,6 +187,33 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										{renderPagesOption()}
 									</Select>
 								</FormControl>
+
+								<FormControl>
+									<FormLabel>
+										{__('Instructor Registration Page', 'masteriyo')}
+										<Tooltip
+											label={__(
+												'Page contents: [masteriyo_instructor_registration]',
+												'masteriyo'
+											)}
+											hasArrow
+											fontSize="xs">
+											<Box as="span" sx={infoIconStyles}>
+												<Icon as={BiInfoCircle} />
+											</Box>
+										</Tooltip>
+									</FormLabel>
+									<Select
+										placeholder={__('Select a Page', 'masteriyo')}
+										defaultValue={
+											advanceData?.pages?.instructor_registration_page_id
+										}
+										{...register(
+											'advance.pages.instructor_registration_page_id'
+										)}>
+										{renderPagesOption()}
+									</Select>
+								</FormControl>
 							</Stack>
 						)}
 					</TabPanel>

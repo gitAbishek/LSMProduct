@@ -5,13 +5,11 @@
  * @since 1.0.0
  */
 
-use Masteriyo\DateTime;
 use Masteriyo\Constants;
 use Masteriyo\Models\Faq;
 use Masteriyo\Geolocation;
 use Masteriyo\Models\User;
 use Masteriyo\Models\Course;
-use Masteriyo\ModelException;
 use Masteriyo\Models\Section;
 use Masteriyo\Models\CourseReview;
 
@@ -1882,35 +1880,6 @@ function masteriyo_is_edit_account_page() {
 }
 
 /**
- * Get value of an option.
- *
- * @since 1.0.0
- *
- * @param string $setting_name
- * @param mixed  $default
- *
- * @return mixed
- */
-function masteriyo_get_setting_value( $setting_name, $default = null ) {
-	$setting = masteriyo( 'setting' );
-
-	if ( is_null( $setting ) ) {
-		return $default;
-	}
-
-	masteriyo( 'setting.store' )->read( $setting, $default );
-
-	$value        = $default;
-	$setting_name = str_replace( '.', '_', $setting_name );
-
-	if ( is_callable( array( $setting, "get_{$setting_name}" ) ) ) {
-		$value = call_user_func_array( array( $setting, "get_{$setting_name}" ), array() );
-	}
-
-	return apply_filters( "masteriyo_setting_{$setting_name}_value", $value );
-}
-
-/**
  * See if a course has FAQs.
  *
  * @param integer $course_id
@@ -2039,18 +2008,21 @@ if ( ! function_exists( 'masteriyo_create_new_user_username' ) ) {
 
 if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 	/**
-	 * Create a new customer.
+	 * Create a new user.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  string $email    Customer email.
-	 * @param  string $username Customer username.
-	 * @param  string $password Customer password.
-	 * @param  array  $args     List of other arguments.
+	 * @updated 1.2.0 Added roles parameter.
+	 *
+	 * @param string $email User email.
+	 * @param string $username User username.
+	 * @param string $password User password.
+	 * @param string|array $role User roles.
+	 * @param array  $args List of other arguments.
 	 *
 	 * @return int|User|WP_Error Returns WP_Error on failure, Int (user ID) on success.
 	 */
-	function masteriyo_create_new_user( $email, $username = '', $password = '', $args = array() ) {
+	function masteriyo_create_new_user( $email, $username = '', $password = '', $roles = 'masteriyo_student', $args = array() ) {
 		if ( empty( $email ) || ! is_email( $email ) ) {
 			return new \WP_Error( 'registration-error-invalid-email', __( 'Please provide a valid email address.', 'masteriyo' ) );
 		}
@@ -2101,7 +2073,7 @@ if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 		$user->set_username( $username );
 		$user->set_password( $password );
 		$user->set_email( $email );
-		$user->set_roles( masteriyo_get_setting_value( 'masteriyo_registration_default_role', 'masteriyo_student' ) );
+		$user->set_roles( $roles );
 
 		$user = apply_filters( 'masteriyo_new_user_data', $user );
 
@@ -2292,6 +2264,10 @@ function masteriyo_add_post_state( $post_states, $post ) {
 
 	if ( masteriyo_get_page_id( 'learn' ) === $post->ID ) {
 		$post_states['masteriyo_learn_page'] = __( 'Masteriyo Learn Page', 'masteriyo' );
+	}
+
+	if ( masteriyo_get_page_id( 'instructor-registration' ) === $post->ID ) {
+		$post_states['masteriyo_instructor_registration_page'] = __( 'Masteriyo Instructor Registration Page', 'masteriyo' );
 	}
 
 	return $post_states;
@@ -3131,4 +3107,24 @@ function masteriyo_get_current_user_id() {
 	}
 
 	return apply_filters( 'masteriyo_get_current_user_id', $user_id );
+}
+
+/**
+ * Get current logged in instructor.
+ *
+ * @since 1.2.3
+ *
+ * @return Masteriyo\Models\Instructor
+ */
+function masteriyo_get_current_instructor() {
+	if ( is_user_logged_in() && masteriyo_is_current_user_instructor() ) {
+		$instructor = masteriyo( 'instructor' );
+		$instructor->set_id( get_current_user_id() );
+		$store = masteriyo( 'user.store' );
+		$store->read( $instructor );
+
+		return $instructor;
+	}
+
+	return null;
 }

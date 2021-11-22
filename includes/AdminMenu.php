@@ -40,6 +40,11 @@ class AdminMenu {
 	 * @return void
 	 */
 	public static function init_menus() {
+		// Bail early if the admin menus is not visible.
+		if ( ! masteriyo_is_admin_menus_visible() ) {
+			return true;
+		}
+
 		// phpcs:disable
 		if ( isset( $_GET['page'] ) && 'masteriyo' === $_GET['page'] ) {
 			$dashicon = 'data:image/svg+xml;base64,' . base64_encode( masteriyo_get_svg( 'dashicon-white' ) );
@@ -51,7 +56,7 @@ class AdminMenu {
 		add_menu_page(
 			esc_html__( 'Masteriyo', 'masteriyo' ),
 			esc_html__( 'Masteriyo', 'masteriyo' ),
-			'manage_masteriyo_settings',
+			'edit_courses',
 			'masteriyo',
 			array( __CLASS__, 'display_main_page' ),
 			$dashicon,
@@ -62,7 +67,7 @@ class AdminMenu {
 			'masteriyo',
 			esc_html__( 'Courses', 'masteriyo' ),
 			esc_html__( 'Courses', 'masteriyo' ),
-			'manage_masteriyo_settings',
+			'edit_courses',
 			'masteriyo#/courses',
 			array( __CLASS__, 'display_main_page' )
 		);
@@ -71,7 +76,7 @@ class AdminMenu {
 			'masteriyo',
 			esc_html__( 'Categories', 'masteriyo' ),
 			esc_html__( 'Categories', 'masteriyo' ),
-			'manage_masteriyo_settings',
+			'manage_course_categories',
 			'masteriyo#/courses/categories',
 			array( __CLASS__, 'display_main_page' )
 		);
@@ -90,7 +95,7 @@ class AdminMenu {
 			esc_html__( 'Users', 'masteriyo' ),
 			esc_html__( 'Users', 'masteriyo' ),
 			'manage_masteriyo_settings',
-			'masteriyo#/users',
+			'masteriyo#/users/students',
 			array( __CLASS__, 'display_main_page' )
 		);
 

@@ -665,3 +665,74 @@ if ( ! function_exists( 'masteriyo_is_quiz_attempt_limit_reached' ) ) {
 		return apply_filters( 'masteriyo_is_quiz_attempt_limit_reached', $is_limit_reached, $quiz, $user );
 	}
 }
+
+
+if ( ! function_exists( 'masteriyo_is_instructor_registration_page' ) ) {
+
+	/**
+	 * Check if the current page is signup page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_instructor_registration_page() {
+		global $post;
+
+		$is_page = isset( $GLOBALS['wp']->query_vars['instructor-registration'] );
+
+		if ( $post instanceof \WP_Post ) {
+			$page_id = masteriyo_get_page_id( 'instructor-registration' );
+
+			$is_page = $is_page && $post->ID === $page_id;
+		}
+
+		return apply_filters( 'masteriyo_is_instructor_registration_page', $is_page, $page_id );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_is_role_exists' ) ) {
+	/**
+	 * Check whether the user role exists or not.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @param string|array $roles List of roles.
+	 * @return boolean
+	 */
+	function masteriyo_is_role_exists( $roles ) {
+		$roles       = (array) $roles;
+		$role_exists = true;
+
+		foreach ( $roles as $role ) {
+			if ( ! in_array( $role, array_keys( $GLOBALS['wp_roles']->roles ), true ) ) {
+				$role_exists = false;
+				break;
+			}
+		}
+
+		return apply_filters( 'masteriyo_is_role_exists', $role_exists, $roles );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_is_admin_menus_visible' ) ) {
+	/**
+	 * Return true if the admin menus is visible.
+	 *
+	 * @since 1.2.2
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_admin_menus_visible() {
+		$is_visible = false;
+
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			$is_visible = true;
+		} elseif ( masteriyo_is_current_user_instructor() ) {
+			$instructor = masteriyo_get_current_instructor();
+			$is_visible = $instructor->is_approved();
+		}
+
+		return apply_filters( 'masteriyo_is_admin_menus_visible', $is_visible );
+	}
+}

@@ -1258,3 +1258,27 @@ if ( ! function_exists( 'masteriyo_template_shortcode_course_category' ) ) {
 		masteriyo_get_template( 'shortcodes/course-categories/list-item.php', $attrs );
 	}
 }
+
+if ( ! function_exists( 'masteriyo_template_show_account_approved_notice' ) ) {
+	/**
+	 * Display account approved notice if the user is instructor and is not approved.
+	 *
+	 * @since 1.2.3
+	 */
+	function masteriyo_template_show_account_approved_notice() {
+		$instructor = masteriyo_get_current_instructor();
+
+		if ( is_null( $instructor ) ) {
+			return;
+		}
+
+		if ( ! $instructor->is_approved() ) {
+			masteriyo_get_template(
+				'notices/warning.php',
+				array(
+					'message' => __( 'You need to be approved by the manager before you can create posts.', 'masteriyo' ),
+				)
+			);
+		}
+	}
+}

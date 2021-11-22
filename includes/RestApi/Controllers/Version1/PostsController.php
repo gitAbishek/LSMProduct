@@ -109,6 +109,17 @@ abstract class PostsController extends CrudController {
 			);
 		}
 
+		$instructor = masteriyo_get_current_instructor();
+		if ( $instructor && ! $instructor->is_approved() ) {
+			return new \WP_Error(
+				'masteriyo_rest_user_not_approved',
+				__( 'Sorry, you are not approved by the manager.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
 		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'create' ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
@@ -135,6 +146,17 @@ abstract class PostsController extends CrudController {
 			return new \WP_Error(
 				'masteriyo_null_permission',
 				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$instructor = masteriyo_get_current_instructor();
+		if ( $instructor && ! $instructor->is_approved() ) {
+			return new \WP_Error(
+				'masteriyo_rest_user_not_approved',
+				__( 'Sorry, you are not approved by the manager.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
 			);
 		}
 
@@ -166,6 +188,17 @@ abstract class PostsController extends CrudController {
 			return new \WP_Error(
 				'masteriyo_null_permission',
 				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$instructor = masteriyo_get_current_instructor();
+		if ( $instructor && ! $instructor->is_approved() ) {
+			return new \WP_Error(
+				'masteriyo_rest_user_not_approved',
+				__( 'Sorry, you are not approved by the manager.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
 			);
 		}
 
@@ -321,5 +354,35 @@ abstract class PostsController extends CrudController {
 		);
 
 		return $previous;
+	}
+
+	/**
+	 * Prepare objects query.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @since  1.0.0
+	 * @return array
+	 */
+	protected function prepare_objects_query( $request ) {
+		$args = parent::prepare_objects_query( $request );
+
+		$object_types = apply_filters(
+			'masteriyo_rest_hide_object_types_from_instructor',
+			array(
+				'course',
+				'lesson',
+				'quiz',
+				'section',
+				'question',
+			)
+		);
+
+		if ( masteriyo_is_current_user_instructor() && in_array( $this->object_type, $object_types, true ) ) {
+			$args = array_merge( $args, array( 'author' => get_current_user_id() ) );
+		}
+
+		return $args;
+
 	}
 }

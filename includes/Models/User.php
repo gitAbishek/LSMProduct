@@ -95,6 +95,7 @@ class User extends Model {
 	 * @param UserRepository $user_repository User Repository.
 	 */
 	public function __construct( UserRepository $user_repository ) {
+		parent::__construct();
 		$this->repository = $user_repository;
 	}
 
@@ -804,10 +805,19 @@ class User extends Model {
 	 * @param string $roles User's roles.
 	 */
 	public function set_roles( $roles ) {
-		global $wp_roles;
+		$roles = (array) $roles;
 
-		if ( $roles && ! empty( $wp_roles->roles ) && ! in_array( $roles, array_keys( $wp_roles->roles ), true ) ) {
+		if ( $roles && ! masteriyo_is_role_exists( $roles ) ) {
 			throw new ModelException( 'user_invalid_roles', __( 'Invalid roles', 'masteriyo' ) );
+		}
+		$roles = (array) $roles;
+
+		if ( is_array( $roles ) && ! empty( $roles ) && ! empty( $wp_roles->roles ) ) {
+			foreach ( $roles as $role ) {
+				if ( ! in_array( $role, array_keys( $wp_roles->roles ), true ) ) {
+					throw new ModelException( 'user_invalid_roles', __( 'Invalid roles', 'masteriyo' ) );
+				}
+			}
 		}
 
 		$this->set_prop( 'roles', $roles );

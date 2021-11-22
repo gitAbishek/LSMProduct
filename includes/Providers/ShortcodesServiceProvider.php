@@ -28,9 +28,11 @@ class ShortcodesServiceProvider extends AbstractServiceProvider {
 		'shortcode.account',
 		'shortcode.checkout',
 		'shortcode.cart',
+		'shortcode.instructor-registration',
 		'\Masteriyo\Shortcodes\AccountShortcode',
 		'\Masteriyo\Shortcodes\CartShortcode',
 		'\Masteriyo\Shortcodes\CheckoutShortcode',
+		'\Masteriyo\Shortcodes\InstructorRegistrationShortcode',
 	);
 
 	/**
@@ -45,9 +47,12 @@ class ShortcodesServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'shortcode.account', AccountShortcode::class );
 		$this->getContainer()->add( 'shortcode.checkout', CheckoutShortcode::class );
 		$this->getContainer()->add( 'shortcode.cart', CartShortcode::class );
+		$this->getContainer()->add( 'shortcode.instructor-registration', CartShortcode::class );
+
 
 		$this->getContainer()->add( '\Masteriyo\Shortcodes\AccountShortcode' );
 		$this->getContainer()->add( '\Masteriyo\Shortcodes\CartShortcode' );
 		$this->getContainer()->add( '\Masteriyo\Shortcodes\CheckoutShortcode' );
+		$this->getContainer()->add( '\Masteriyo\Shortcodes\InstructorRegistrationShortcode' );
 	}
 }

@@ -45,11 +45,12 @@ class Shortcodes {
 		return apply_filters(
 			'masteriyo_shortcodes',
 			array(
-				'account'           => "{$namespace}\\AccountShortcode",
-				'checkout'          => "{$namespace}\\CheckoutShortcode",
-				'cart'              => "{$namespace}\\CartShortcode",
-				'courses'           => "{$namespace}\\CoursesShortcode",
-				'course_categories' => "{$namespace}\\CourseCategoriesShortcode",
+				'account'                 => "{$namespace}\\AccountShortcode",
+				'checkout'                => "{$namespace}\\CheckoutShortcode",
+				'cart'                    => "{$namespace}\\CartShortcode",
+				'courses'                 => "{$namespace}\\CoursesShortcode",
+				'course_categories'       => "{$namespace}\\CourseCategoriesShortcode",
+				'instructor-registration' => "{$namespace}\\InstructorRegistrationShortcode",
 			)
 		);
 	}

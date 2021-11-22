@@ -20,6 +20,7 @@ class Install {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		self::install();
 		self::init_db();
+		self::remove_roles();
 		self::create_roles();
 		self::create_difficulties();
 	}
@@ -297,6 +298,20 @@ class Install {
 		) $charset_collate;";
 
 		return $sql;
+	}
+
+	/**
+	 * Remove previous roles.
+	 *
+	 * @since 1.2.3
+	 */
+	private static function remove_roles() {
+		// Remove the masteriyo manager role for now.
+		remove_role( 'masteriyo_manager' );
+
+		foreach ( Roles::get_all() as $role_slug => $role ) {
+			remove_role( $role_slug );
+		}
 	}
 
 	/**

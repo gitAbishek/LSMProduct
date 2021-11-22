@@ -30,7 +30,7 @@ Built with passionate instructors and eager students in mind, Masteriyo is indee
 
 You may teach anything, you may not have any coding skills, but you can easily build an online teaching website with Masteriyo and help your students succeed.
 
-[Masteriyo Site](https://masteriyo.com/wordpress-lms/) | [Demo](https://demo.masteriyo.com/default/) | [Documentation](https://docs.masteriyo.com/)
+[Masteriyo Site](https://masteriyo.com/wordpress-lms/) | [Demo](https://demo.masteriyo.com/elearning/) | [Documentation](https://docs.masteriyo.com/)
 
 ### Masteriyo WordPress Learning Management System (LMS) Features
 Masteriyo LMS is power-packed with incredible LMS features to help you create an online learning platform.

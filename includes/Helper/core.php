@@ -3112,7 +3112,7 @@ function masteriyo_get_current_user_id() {
 /**
  * Get current logged in instructor.
  *
- * @since 1.2.3
+ * @since 1.3.0
  *
  * @return Masteriyo\Models\Instructor
  */

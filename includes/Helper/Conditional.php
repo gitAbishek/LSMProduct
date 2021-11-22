@@ -719,7 +719,7 @@ if ( ! function_exists( 'masteriyo_is_admin_menus_visible' ) ) {
 	/**
 	 * Return true if the admin menus is visible.
 	 *
-	 * @since 1.2.2
+	 * @since 1.3.0
 	 *
 	 * @return boolean
 	 */

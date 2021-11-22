@@ -1263,7 +1263,7 @@ if ( ! function_exists( 'masteriyo_template_show_account_approved_notice' ) ) {
 	/**
 	 * Display account approved notice if the user is instructor and is not approved.
 	 *
-	 * @since 1.2.3
+	 * @since 1.3.0
 	 */
 	function masteriyo_template_show_account_approved_notice() {
 		$instructor = masteriyo_get_current_instructor();
@@ -1276,7 +1276,7 @@ if ( ! function_exists( 'masteriyo_template_show_account_approved_notice' ) ) {
 			masteriyo_get_template(
 				'notices/warning.php',
 				array(
-					'message' => __( 'You need to be approved by the manager before you can create posts.', 'masteriyo' ),
+					'message' => __( 'You need to be approved by the administrator before you can create courses.', 'masteriyo' ),
 				)
 			);
 		}

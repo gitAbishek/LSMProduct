@@ -303,7 +303,7 @@ class Install {
 	/**
 	 * Remove previous roles.
 	 *
-	 * @since 1.2.3
+	 * @since 1.3.0
 	 */
 	private static function remove_roles() {
 		// Remove the masteriyo manager role for now.

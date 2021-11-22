@@ -2,7 +2,7 @@
 /**
  * Instructor model.
  *
- * @since 1.2.3
+ * @since 1.3.0
  *
  * @package Masteriyo\Models;
  */
@@ -17,14 +17,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Instructor model.
  *
- * @since 1.2.3
+ * @since 1.3.0
  */
 class Instructor extends User {
 
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since 1.2.3
+	 * @since 1.3.0
 	 *
 	 * @var string
 	 */
@@ -33,7 +33,7 @@ class Instructor extends User {
 	/**
 	 * Cache group.
 	 *
-	 * @since 1.2.3
+	 * @since 1.3.0
 	 *
 	 * @var string
 	 */
@@ -42,7 +42,7 @@ class Instructor extends User {
 	/**
 	 * Extra data for only instructor.
 	 *
-	 * @since 1.2.3
+	 * @since 1.3.0
 	 * @var array
 	 */
 	protected $extra_data = array(
@@ -58,7 +58,7 @@ class Instructor extends User {
 	/**
 	 * Get whether the instructor is approved by the manager/administrator or not.
 	 *
-	 * @since 1.2.3
+	 * @since 1.3.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return boolean
@@ -76,7 +76,7 @@ class Instructor extends User {
 	/**
 	 * Set the approved.
 	 *
-	 * @since 1.2.3
+	 * @since 1.3.0
 	 */
 	public function set_approved( $approved ) {
 		$this->set_prop( 'approved', masteriyo_string_to_bool( $approved ) );
@@ -90,7 +90,7 @@ class Instructor extends User {
 	/**
 	 * Return true if the instructor is approved.
 	 *
-	 * @since 1.2.3
+	 * @since 1.3.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return boolean

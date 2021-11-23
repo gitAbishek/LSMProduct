@@ -42,7 +42,7 @@ class QuizQuery extends ObjectQuery {
 	/**
 	 * Get quizes matching the current query vars.
 	 *
-	 * @since 0.0.1
+	 * @since 1.0.0
 	 *
 	 * @return array|Model quiz objects
 	 */

@@ -43,7 +43,7 @@ class UserCourseQuery extends ObjectQuery {
 	/**
 	 * Get user courses matching the current query vars.
 	 *
-	 * @since 0.0.1
+	 * @since 1.0.0
 	 *
 	 * @return Masteriyo\Models\UserCourse[] User course objects.
 	 */

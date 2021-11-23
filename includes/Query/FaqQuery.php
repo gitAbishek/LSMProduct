@@ -40,7 +40,7 @@ class FaqQuery extends ObjectQuery {
 	/**
 	 * Get Faqs matching the current query vars.
 	 *
-	 * @since 0.0.1
+	 * @since 1.0.0
 	 *
 	 * @return array|Model Faq objects
 	 */

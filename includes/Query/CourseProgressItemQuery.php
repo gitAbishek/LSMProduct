@@ -45,7 +45,7 @@ class CourseProgressItemQuery extends ObjectQuery {
 	/**
 	 * Get course progress item matching the current query vars.
 	 *
-	 * @since 0.0.1
+	 * @since 1.0.0
 	 *
 	 * @return array|CourseProgressItem Course progress item objects
 	 */

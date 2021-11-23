@@ -47,7 +47,7 @@ class QuestionQuery extends ObjectQuery {
 	/**
 	 * Get questions matching the current query vars.
 	 *
-	 * @since 0.0.1
+	 * @since 1.0.0
 	 *
 	 * @return array|Model Question objects
 	 */

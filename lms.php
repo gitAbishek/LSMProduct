@@ -35,7 +35,7 @@ if ( ! file_exists( dirname( __FILE__ ) . '/assets/js/build/masteriyo-backend.' 
 			printf(
 				'<div class="notice notice-error is-dismissible"><p><strong>%s </strong>%s</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">%s</span></button></div>',
 				esc_html( 'Masteriyo:' ),
-				wp_kses_post( 'Assets are need to be built. Run <code>yarn && yarn build</code> from the wp-content/plugins/wordpress-lms directory.', 'masteriyo' ),
+				wp_kses_post( 'Assets are need to be built. Run <code>yarn && yarn build</code> from the wp-content/plugins/learning-management-system directory.', 'masteriyo' ),
 				esc_html__( 'Dismiss this notice.', 'masteriyo' )
 			);
 		}
@@ -64,7 +64,7 @@ if ( ! file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 			printf(
 				'<div class="notice notice-error is-dismissible"><p><strong>%s </strong>%s</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">%s</span></button></div>',
 				esc_html( 'Masteriyo:' ),
-				wp_kses_post( 'Requires autoloader files to work properly. Run <code>composer update</code> from the wp-content/plugins/wordpress-lms directory.', 'masteriyo' ),
+				wp_kses_post( 'Requires autoloader files to work properly. Run <code>composer update</code> from the wp-content/plugins/learning-management-system directory.', 'masteriyo' ),
 				esc_html__( 'Dismiss this notice.', 'masteriyo' )
 			);
 		}

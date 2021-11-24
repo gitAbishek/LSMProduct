@@ -1,6 +1,6 @@
 import {
 	Avatar,
-	Box,
+	Heading,
 	Icon,
 	Link,
 	List,
@@ -45,19 +45,19 @@ const Sidebar = () => {
 			<ListItem>
 				<Stack direction="row" align="center" spacing="3">
 					<Avatar
-						size="md"
+						size="sm"
 						name="Jamie Oliver"
 						src="https://bit.ly/sage-adebayo"
+						showBorder
+						shadow="md"
 					/>
-					<Stack direction="column">
-						<Box>
-							<Text as="h3" fontSize="lg" fontWeight="medium" color="blue.900">
-								{__('Jamie Oliver', 'masteriyo')}
-							</Text>
-							<Text color="gray.300" fontSize="sm" fontWeight="medium">
-								{__('Gold Member', 'masteriyo')}
-							</Text>
-						</Box>
+					<Stack direction="column" spacing="0">
+						<Heading as="h5" fontSize="sm" fontWeight="medium">
+							{__('Jamie Oliver', 'masteriyo')}
+						</Heading>
+						<Text color="gray.300" fontSize="xx-small" fontWeight="medium">
+							{__('Gold Member', 'masteriyo')}
+						</Text>
 					</Stack>
 					<Icon as={BiDotsVerticalRounded} w={6} h={6} color="gray.300" />
 				</Stack>

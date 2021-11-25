@@ -49,7 +49,7 @@ class UserCourseQuery extends ObjectQuery {
 	 */
 	public function get_user_courses() {
 		$args    = apply_filters( 'masteriyo_user_course_object_query_args', $this->get_query_vars() );
-		$results = masteriyo( 'user-course.store' )->query( $args );
+		$results = masteriyo( 'user-course.store' )->query( $args, $this );
 		return apply_filters( 'masteriyo_user_course_object_query', $results, $args );
 	}
 }

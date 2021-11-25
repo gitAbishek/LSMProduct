@@ -112,6 +112,6 @@
     "lint": "eslint ./assets/js --ext ts,tsx",
     "prettier": "prettier --check ./assets/js/**/*.tsx ./assets/js/**/*.ts",
     "prepare": "husky install",
-    "reactivate": "wp plugin deactivate wordpress-lms && wp plugin activate wordpress-lms "
+    "reactivate": "wp plugin deactivate learning-management-system && wp plugin activate learning-management-system "
   }
 }

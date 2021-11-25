@@ -261,7 +261,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	 * @param array $query_vars Query vars.
 	 * @return UserCourse[]
 	 */
-	public function query( $query_vars ) {
+	public function query( $query_vars, $query ) {
 		global $wpdb;
 
 		$search_criteria = array();
@@ -276,7 +276,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 
 		// Construct where clause part.
 		if ( ! empty( $query_vars['user_id'] ) ) {
-			$search_criteria[] = $wpdb->prepare( 'user_id = %d', $query_vars['user_id'] );
+			$search_criteria[] = $wpdb->prepare( 'user_id = %s', $query_vars['user_id'] );
 		}
 
 		if ( ! in_array( $query_vars['course_id'], array( '', 0 ), true ) ) {
@@ -317,6 +317,11 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		$page     = $query_vars['page'];
 
 		if ( $page > 0 && $per_page > 0 ) {
+			$count_sql         = $sql;
+			$count_sql[0]      = "SELECT COUNT(*) FROM {$wpdb->base_prefix}masteriyo_user_items";
+			$count_sql         = implode( ' ', $count_sql ) . ';';
+			$query->found_rows = absint( $wpdb->get_var( $count_sql ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
 			$offset = ( $page - 1 ) * $per_page;
 			$sql[]  = $wpdb->prepare( 'LIMIT %d, %d', $offset, $per_page );
 		}
@@ -328,6 +333,8 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		$user_course = $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		$ids = wp_list_pluck( $user_course, 'id' );
+
+		$query->rows_count = count( $ids );
 
 		return array_filter( array_map( 'masteriyo_get_user_course', $ids ) );
 	}

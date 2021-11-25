@@ -269,6 +269,8 @@ class CoursesController extends PostsController {
 	/**
 	 * Process objects collection.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param array $objects Courses data.
 	 * @param array $query_args Query arguments.
 	 * @param array $query_results Courses query result data.
@@ -289,6 +291,8 @@ class CoursesController extends PostsController {
 
 	/**
 	 * Get course data.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param Course $course Course instance.
 	 * @param string $context Request context.

@@ -22,6 +22,24 @@ defined( 'ABSPATH' ) || exit;
 abstract class ObjectQuery {
 
 	/**
+	 * The amount of rows for the current query.
+	 *
+	 * @since 1.3.1
+	 * @var int
+	 */
+	public $rows_count = 0;
+
+	/**
+	 * The amount of found rows for the current query.
+	 *
+	 * If limit clause was not used, equals $rows_count.
+	 *
+	 * @since 1.3.1
+	 * @var int
+	 */
+	public $found_rows = 0;
+
+	/**
 	 * Stores query data.
 	 *
 	 * @since 1.0.0

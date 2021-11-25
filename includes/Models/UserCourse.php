@@ -128,6 +128,17 @@ class UserCourse extends Model {
 		return masteriyo_get_order( $this->get_order_id() );
 	}
 
+	/**
+	 * Get course permalink.
+	 *
+	 * @since 1.3.1
+	 *
+	 * @return string
+	 */
+	public function get_permalink() {
+		return strval( get_the_permalink( $this->get_course_id() ) );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Getters

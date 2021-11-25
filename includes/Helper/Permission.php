@@ -264,7 +264,7 @@ class Permission {
 	 *
 	 * @since 1.0.0
 	 * @param string $context   Request context.
-	 * @param int    $object_id Post ID.
+	 * @param int    $object_id Course progress ID.
 	 * @return bool
 	 */
 	public function rest_check_course_progress_permissions( $context = 'read', $object_id = 0 ) {
@@ -274,6 +274,29 @@ class Permission {
 			'update' => 'edit_course_progress',
 			'delete' => 'delete_course_progress',
 			'batch'  => 'edit_others_course_progresses',
+		);
+
+		$cap        = $contexts[ $context ];
+		$permission = current_user_can( $cap, $object_id );
+
+		return apply_filters( 'masteriyo_rest_check_course_progress_permissions', $permission, $context, $object_id );
+	}
+
+	/**
+	 * Check permissions of user course on REST API.
+	 *
+	 * @since 1.3.1
+	 * @param string $context   Request context.
+	 * @param int    $object_id User course ID.
+	 * @return bool
+	 */
+	public function rest_check_user_course_permissions( $context = 'read', $object_id = 0 ) {
+		$contexts = array(
+			'read'   => 'read_user_courses',
+			'create' => 'publish_user_courses',
+			'update' => 'edit_user_course',
+			'delete' => 'delete_user_course',
+			'batch'  => 'edit_others_user_courses',
 		);
 
 		$cap        = $contexts[ $context ];

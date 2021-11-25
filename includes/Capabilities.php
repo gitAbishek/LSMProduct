@@ -37,6 +37,10 @@ class Capabilities {
 			$caps = self::course_qa_map_meta_cap( $caps, $cap, $user_id, $args );
 		}
 
+		if ( masteriyo_ends_with( $cap, 'user_course' ) ) {
+			$caps = self::user_course_map_meta_cap( $caps, $cap, $user_id, $args );
+		}
+
 		return $caps;
 	}
 
@@ -152,6 +156,69 @@ class Capabilities {
 	}
 
 	/**
+	 * Handle user course meta cap.
+	 *
+	 * @since 1.3.1
+	 *
+	 * @return array
+	 */
+	protected static function user_course_map_meta_cap( $caps, $cap, $user_id, $args ) {
+		switch ( $cap ) {
+			case 'read_user_course':
+				if ( user_can( $user_id, 'read_user_courses' ) ) {
+					$caps = array( 'read_user_courses' );
+				} else {
+					$caps[] = 'do_not_allow';
+				}
+
+				break;
+
+			case 'create_user_course':
+				if ( user_can( $user_id, 'create_user_courses' ) ) {
+					$caps = array( 'create_user_courses' );
+				} else {
+					$caps[] = 'do_not_allow';
+				}
+
+				break;
+
+			case 'edit_user_course':
+				$user_course = masteriyo_get_user_course( $args[0] );
+
+				if ( ! $user_course ) {
+					$caps[] = 'do_not_allow';
+					break;
+				}
+
+				if ( $user_course->get_user_id() && absint( $user_id ) === $user_course->get_user_id() ) {
+					$caps = array( 'edit_user_courses' );
+				} else {
+					$caps = user_can( $user_id, 'edit_others_user_courses' ) ? array( 'edit_user_courses' ) : array( 'do_not_allow' );
+				}
+
+				break;
+
+			case 'delete_user_course':
+				$user_course = masteriyo_get_user_course( $args[0] );
+
+				if ( ! $user_course ) {
+					$caps[] = 'do_not_allow';
+					break;
+				}
+
+				if ( $user_course->get_user_id() && absint( $user_id ) === $user_course->get_user_id() ) {
+					$caps = array( 'delete_user_courses' );
+				} else {
+					$caps = user_can( $user_id, 'delete_others_user_courses' ) ? array( 'delete_user_courses' ) : array( 'do_not_allow' );
+				}
+
+				break;
+		}
+
+		return $caps;
+	}
+
+	/**
 	 * Get masteriyo student capabilities.
 	 *
 	 * @since 1.0.0
@@ -181,6 +248,9 @@ class Capabilities {
 			'create_course_qas'         => true,
 			'edit_course_qas'           => true,
 			'delete_course_qas'         => true,
+
+			// User courses
+			'read_user_courses'         => true,
 
 			// Taxonomy.
 			'manage_course_categories'  => true,
@@ -323,6 +393,13 @@ class Capabilities {
 			// Course Categories.
 			'delete_course_categories'        => true,
 			'assign_course_categories'        => true,
+
+			// User courses.
+			'publish_user_courses'            => true,
+			'edit_user_courses'               => true,
+			'edit_others_user_courses'        => true,
+			'delete_user_courses'             => true,
+			'delete_others_user_courses'      => true,
 
 			// Users
 			'list_users'                      => true,

@@ -97,6 +97,7 @@ class RestApi {
 			'data'                  => "{$namespace}\\DataController",
 			'blocks'                => "{$namespace}\\BlocksController",
 			'instructors'           => "{$namespace}\\InstructorsController",
+			'users.courses'         => "{$namespace}\\UserCoursesController",
 		);
 	}
 

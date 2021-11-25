@@ -69,6 +69,8 @@ abstract class PostsController extends CrudController {
 	/**
 	 * Check if a given request has access to read items.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */

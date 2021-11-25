@@ -26,7 +26,7 @@ function masteriyo_get_user_course( $user_course_id ) {
 		$user_course_repo->read( $user_course );
 
 		return $user_course;
-	} catch ( \Except $e ) {
+	} catch ( \Exception $e ) {
 		return null;
 	}
 }

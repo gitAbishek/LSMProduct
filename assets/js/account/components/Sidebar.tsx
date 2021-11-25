@@ -27,6 +27,12 @@ const Sidebar = () => {
 		borderRight: '2px',
 		d: 'block',
 		borderColor: 'transparent',
+		color: 'gray.600',
+		fontWeight: 'medium',
+		textDecoration: 'none',
+		_hover: {
+			color: 'blue.500',
+		},
 	};
 	const navActiveStyles = {
 		borderColor: 'blue.500',
@@ -68,7 +74,7 @@ const Sidebar = () => {
 					sx={navLinkStyles}
 					_activeLink={navActiveStyles}
 					to={routes.dashboard}>
-					<ListIcon as={BiGrid} />
+					<ListIcon fontSize="md" mr="3" as={BiGrid} />
 					{__('Dashboard', 'masteriyo')}
 				</Link>
 			</ListItem>
@@ -78,7 +84,7 @@ const Sidebar = () => {
 					sx={navLinkStyles}
 					_activeLink={navActiveStyles}
 					to={routes.myCourses}>
-					<ListIcon as={BiBook} />
+					<ListIcon fontSize="md" mr="3" as={BiBook} />
 					{__('My Courses')}
 				</Link>
 			</ListItem>
@@ -88,7 +94,7 @@ const Sidebar = () => {
 					sx={navLinkStyles}
 					_activeLink={navActiveStyles}
 					to={routes.myProfile}>
-					<ListIcon as={BiUser} />
+					<ListIcon fontSize="md" mr="3" as={BiUser} />
 					{__('My Profile')}
 				</Link>
 			</ListItem>
@@ -99,13 +105,13 @@ const Sidebar = () => {
 					sx={navLinkStyles}
 					_activeLink={navActiveStyles}
 					to={routes.myOrderHistory}>
-					<ListIcon as={BiHistory} />
+					<ListIcon fontSize="md" mr="3" as={BiHistory} />
 					{__('My Order History')}
 				</Link>
 			</ListItem>
 
 			<ListItem>
-				<ListIcon as={BiLogOut} />
+				<ListIcon fontSize="md" mr="3" as={BiLogOut} />
 				{__('Logout')}
 			</ListItem>
 		</List>

@@ -333,6 +333,7 @@ class UserCoursesController extends CrudController {
 			$data['course']['author'] = array(
 				'id'           => $author->get_id(),
 				'display_name' => $author->get_display_name( $context ),
+				'avatar_url'   => $author->get_avatar_url(),
 			);
 		}
 

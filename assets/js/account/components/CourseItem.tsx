@@ -15,32 +15,20 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
 import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from 'react-icons/io';
+import { MyCoursesSchema } from '../schemas';
 
 interface Props {
-	id: number;
-	title: string;
-	imageUrl: string;
-	tag: string;
-	time: number;
-	percent: number;
-	progressValue: number;
-	started: string;
+	courseData: MyCoursesSchema;
 }
 
-const CourseItem: React.FC<Props> = ({
-	title,
-	imageUrl,
-	started,
-	time,
-	percent,
-	progressValue,
-}) => {
+const CourseItem: React.FC<Props> = (props) => {
+	const { id, course_id, name, status } = props.courseData;
 	return (
 		<Box borderWidth="1px" borderColor="gray.100">
 			<Box as="figure" pos="relative">
 				<Image
-					src={imageUrl}
-					alt={`${title} image`}
+					src="https://api.lorem.space/image/book?w=250&h=220"
+					alt={name}
 					height="180px"
 					objectFit="cover"
 				/>
@@ -79,7 +67,7 @@ const CourseItem: React.FC<Props> = ({
 						</Stack>
 
 						<Heading as="h3" fontSize="lg">
-							{title}
+							{name}
 						</Heading>
 						<Stack
 							direction="row"

@@ -22,52 +22,51 @@ interface Props {
 }
 
 const CourseItem: React.FC<Props> = (props) => {
-	const { id, course_id, name, status, started_at } = props.courseData;
+	const { id, course, type, status, started_at } = props.courseData;
 	return (
 		<Box borderWidth="1px" borderColor="gray.100">
 			<Box as="figure" pos="relative">
 				<Image
-					src="https://api.lorem.space/image/book?w=250&h=220"
-					alt={name}
+					src={course?.featured_image_url}
+					alt={course?.name}
 					height="180px"
 					objectFit="cover"
 				/>
-				<Tag
-					pos="absolute"
-					top="3"
-					left="3"
-					bg="blue.500"
-					color="white"
-					borderRadius="full"
-					fontWeight="medium"
-					size="sm">
-					<TagLabel>Beginner</TagLabel>
-				</Tag>
+				{course?.difficulty && (
+					<Tag
+						pos="absolute"
+						top="3"
+						left="3"
+						bg="blue.500"
+						color="white"
+						borderRadius="full"
+						fontWeight="medium"
+						size="sm">
+						<TagLabel>{course?.difficulty?.name}</TagLabel>
+					</Tag>
+				)}
 			</Box>
 			<Stack direction="column" p="6" spacing="3">
 				<Stack direction="column" spacing="6">
 					<Stack direction="column" spacing="3">
 						<Stack direction="row" spacing="1">
-							<Tag
-								size="sm"
-								borderRadius="full"
-								colorScheme="blue"
-								border="1px"
-								borderColor="gray.200">
-								<TagLabel>Art</TagLabel>
-							</Tag>
-							<Tag
-								size="sm"
-								borderRadius="full"
-								colorScheme="blue"
-								border="1px"
-								borderColor="gray.200">
-								<TagLabel>Drawing</TagLabel>
-							</Tag>
+							{course?.categories?.map(
+								(category: { id: number; name: string; slug: string }) => (
+									<Tag
+										key={category.id}
+										size="sm"
+										borderRadius="full"
+										colorScheme="blue"
+										border="1px"
+										borderColor="gray.200">
+										<TagLabel>{category.name}</TagLabel>
+									</Tag>
+								)
+							)}
 						</Stack>
 
 						<Heading as="h3" fontSize="lg">
-							{name}
+							{course.name}
 						</Heading>
 						<Stack
 							direction="row"

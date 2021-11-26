@@ -5,6 +5,7 @@ import {
 	Heading,
 	Icon,
 	Image,
+	Link,
 	Progress,
 	Stack,
 	Tag,
@@ -12,9 +13,11 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import humanizeDuration from 'humanize-duration';
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
 import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from 'react-icons/io';
+import { getLocalTime } from '../../back-end/utils/utils';
 import { MyCoursesSchema } from '../schemas';
 
 interface Props {
@@ -23,6 +26,7 @@ interface Props {
 
 const CourseItem: React.FC<Props> = (props) => {
 	const { id, course, type, status, started_at } = props.courseData;
+	console.log(started_at);
 	return (
 		<Box borderWidth="1px" borderColor="gray.100">
 			<Box as="figure" pos="relative">
@@ -89,28 +93,18 @@ const CourseItem: React.FC<Props> = (props) => {
 						</Stack>
 					</Stack>
 
-					<Stack direction="row" justify="space-between" align="center">
+					<Stack
+						direction="row"
+						justify="space-between"
+						align="center"
+						fontSize="sm"
+						fontWeight="500"
+						color="gray.500">
 						<Stack direction="row" align="center" spacing="1">
 							<Icon as={BiTime} />
-							<Text
-								fontSize={13}
-								color={'gray.400'}
-								fontWeight={'500'}
-								_focus={{
-									bg: 'gray.200',
-								}}>
-								{__('hrs', 'masteriyo')}
-							</Text>
+							<Text>{humanizeDuration(course.duration * 60 * 1000)}</Text>
 						</Stack>
-						<Text
-							fontSize={13}
-							fontWeight={'500'}
-							color={'gray.500'}
-							_focus={{
-								bg: 'gray.200',
-							}}>
-							2% {__('Complete', 'masteriyo')}
-						</Text>
+						<Text>2% {__('Complete', 'masteriyo')}</Text>
 					</Stack>
 					<Box mt={5}>
 						<Progress rounded="full" value={20} size="xs" />
@@ -120,18 +114,17 @@ const CourseItem: React.FC<Props> = (props) => {
 						direction="row"
 						spacing="4"
 						justify="space-between"
-						align="center">
-						<Text
-							fontSize={12}
-							color={'gray.500'}
-							_focus={{
-								bg: 'gray.200',
-							}}>
-							{'Started ' + started_at}
-						</Text>
-						<Button colorScheme="blue" size="sm" borderRadius="full">
-							{__('Continue', 'masteriyo')}
-						</Button>
+						align="center"
+						color="gray.500"
+						fontSize="xs">
+						{started_at && (
+							<Text>{getLocalTime(started_at).toLocaleString()}</Text>
+						)}
+						<Link href={course.start_course_url}>
+							<Button colorScheme="blue" size="sm" borderRadius="full">
+								{__('Continue', 'masteriyo')}
+							</Button>
+						</Link>
 					</Stack>
 				</Stack>
 			</Stack>

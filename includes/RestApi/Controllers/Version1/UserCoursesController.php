@@ -301,6 +301,7 @@ class UserCoursesController extends CrudController {
 	 */
 	protected function get_user_course_data( $user_course, $context = 'view' ) {
 		$course = masteriyo_get_course( $user_course->get_course_id( $context ) );
+		$author = masteriyo_get_user( $user_course->get_user_id( $context ) );
 
 		$data = array(
 			'id'          => $user_course->get_id( $context ),
@@ -324,10 +325,18 @@ class UserCoursesController extends CrudController {
 				'average_rating'     => $course->get_average_rating( $context ),
 				'review_count'       => $course->get_review_count( $context ),
 				'start_course_url'   => $course->start_course_url(),
+				'author'             => null,
 			);
 		}
 
-		return $data;
+		if ( ! is_wp_error( $author ) ) {
+			$data['course']['author'] = array(
+				'id'           => $author->get_id(),
+				'display_name' => $author->get_display_name( $context ),
+			);
+		}
+
+			return $data;
 	}
 
 	/**

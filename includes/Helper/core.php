@@ -10,6 +10,7 @@ use Masteriyo\Models\Faq;
 use Masteriyo\Geolocation;
 use Masteriyo\Models\User;
 use Masteriyo\Models\Course;
+use Masteriyo\ModelException;
 use Masteriyo\Models\Section;
 use Masteriyo\Models\CourseReview;
 
@@ -376,7 +377,7 @@ function masteriyo_get_user( $user ) {
 		$id = absint( $id );
 		$user_obj->set_id( $id );
 		$user_store->read( $user_obj );
-	} catch ( \ModelException $e ) {
+	} catch ( ModelException $e ) {
 		$user_obj = new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
 	}
 

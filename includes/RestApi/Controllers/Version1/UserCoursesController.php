@@ -11,6 +11,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
 use Masteriyo\Query\UserCourseQuery;
 use Masteriyo\Exceptions\RestException;

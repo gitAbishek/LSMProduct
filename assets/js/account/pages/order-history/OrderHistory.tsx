@@ -1,9 +1,7 @@
 import { Heading, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
-import OrderHistoryItem from '../../components/OrderHistoryItem';
-import data from '../../dummyData/OrderHistoryData';
+import { Table, Th, Thead, Tr } from 'react-super-responsive-table';
 
 const OrderHistory: React.FC = () => {
 	return (
@@ -21,11 +19,6 @@ const OrderHistory: React.FC = () => {
 						<Th style={{ color: '#878F9D' }}>{__('Actions', 'masteriyo')}</Th>
 					</Tr>
 				</Thead>
-				<Tbody>
-					{data.map((itemProps, key) => {
-						return <OrderHistoryItem key={key} {...itemProps} />;
-					})}
-				</Tbody>
 			</Table>
 		</Stack>
 	);

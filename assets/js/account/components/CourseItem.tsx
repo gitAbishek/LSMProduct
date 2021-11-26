@@ -22,7 +22,7 @@ interface Props {
 }
 
 const CourseItem: React.FC<Props> = (props) => {
-	const { id, course_id, name, status } = props.courseData;
+	const { id, course_id, name, status, started_at } = props.courseData;
 	return (
 		<Box borderWidth="1px" borderColor="gray.100">
 			<Box as="figure" pos="relative">
@@ -100,7 +100,6 @@ const CourseItem: React.FC<Props> = (props) => {
 								_focus={{
 									bg: 'gray.200',
 								}}>
-								{time}
 								{__('hrs', 'masteriyo')}
 							</Text>
 						</Stack>
@@ -111,11 +110,11 @@ const CourseItem: React.FC<Props> = (props) => {
 							_focus={{
 								bg: 'gray.200',
 							}}>
-							{percent}% {__('Complete', 'masteriyo')}
+							2% {__('Complete', 'masteriyo')}
 						</Text>
 					</Stack>
 					<Box mt={5}>
-						<Progress rounded="full" value={progressValue} size="xs" />
+						<Progress rounded="full" value={20} size="xs" />
 					</Box>
 
 					<Stack
@@ -129,7 +128,7 @@ const CourseItem: React.FC<Props> = (props) => {
 							_focus={{
 								bg: 'gray.200',
 							}}>
-							{'Started ' + started}
+							{'Started ' + started_at}
 						</Text>
 						<Button colorScheme="blue" size="sm" borderRadius="full">
 							{__('Continue', 'masteriyo')}

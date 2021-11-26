@@ -314,6 +314,7 @@ class UserCoursesController extends CrudController {
 
 		if ( $course ) {
 			$data['course'] = array(
+				'id'                 => $course->get_id(),
 				'name'               => wp_specialchars_decode( $course->get_name( $context ) ),
 				'permalink'          => $course->get_permalink( $context ),
 				'featured_image_url' => $course->get_featured_image_url( 'masteriyo_thumbnail' ),

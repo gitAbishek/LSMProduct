@@ -304,14 +304,26 @@ class UserCoursesController extends CrudController {
 		$data = array(
 			'id'          => $user_course->get_id( $context ),
 			'user_id'     => $user_course->get_user_id( $context ),
-			'course_id'   => $user_course->get_course_id( $context ),
+			'course'      => null,
 			'type'        => $user_course->get_type( $context ),
-			'permalink'   => $user_course->get_permalink( $context ),
-			'name'        => $course ? wp_specialchars_decode( $course->get_name( $context ) ) : '',
 			'status'      => $user_course->get_status( $context ),
 			'started_at'  => masteriyo_rest_prepare_date_response( $user_course->get_date_start( $context ) ),
 			'modified_at' => masteriyo_rest_prepare_date_response( $user_course->get_date_modified( $context ) ),
 		);
+
+		if ( $course ) {
+			$data['course'] = array(
+				'name'               => wp_specialchars_decode( $course->get_name( $context ) ),
+				'permalink'          => $course->get_permalink( $context ),
+				'featured_image_url' => $course->get_featured_image_url( 'masteriyo_thumbnail' ),
+				'categories'         => $this->get_taxonomy_terms( $course, 'cat' ),
+				'difficulty'         => $this->get_taxonomy_terms( $course, 'difficulty' ),
+				'duration'           => $course->get_duration( $context ),
+				'average_rating'     => $course->get_average_rating( $context ),
+				'review_count'       => $course->get_review_count( $context ),
+				'start_course_url'   => $course->start_course_url(),
+			);
+		}
 
 		return $data;
 	}
@@ -761,5 +773,34 @@ class UserCoursesController extends CrudController {
 		}
 
 		return $course_id;
+	}
+
+	/**
+	 * Get taxonomy terms.
+	 *
+	 * @since 1.3.1
+	 *
+	 * @param Course $course Course object.
+	 * @param string $taxonomy Taxonomy slug.
+	 *
+	 * @return array
+	 */
+	protected function get_taxonomy_terms( $course, $taxonomy = 'cat' ) {
+		$terms = Utils::get_object_terms( $course->get_id(), 'course_' . $taxonomy );
+
+		$terms = array_map(
+			function( $term ) {
+				return array(
+					'id'   => $term->term_id,
+					'name' => $term->name,
+					'slug' => $term->slug,
+				);
+			},
+			$terms
+		);
+
+		$terms = 'difficulty' === $taxonomy ? array_shift( $terms ) : $terms;
+
+		return $terms;
 	}
 }

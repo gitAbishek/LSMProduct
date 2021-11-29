@@ -156,7 +156,7 @@ class UsersController extends PostsController {
 				'name',
 				'include',
 				'login',
-				'nicename'.
+				'nicename',
 				'email',
 				'url',
 				'registered',

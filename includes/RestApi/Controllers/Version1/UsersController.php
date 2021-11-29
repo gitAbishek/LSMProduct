@@ -360,22 +360,6 @@ class UsersController extends PostsController {
 			$args['orderby'] = 'date ID';
 		}
 
-		if ( ! empty( $request['search'] ) ) {
-			$args['meta_query'] = array(
-				'relation' => 'OR',
-				array(
-					'key'     => 'first_name',
-					'value'   => esc_attr( trim( $request['search'] ) ),
-					'compare' => 'LIKE',
-				),
-				array(
-					'key'     => 'last_name',
-					'value'   => esc_attr( trim( $request['search'] ) ),
-					'compare' => 'LIKE',
-				),
-			);
-		}
-
 		/**
 		 * Filter the query arguments for a request.
 		 *

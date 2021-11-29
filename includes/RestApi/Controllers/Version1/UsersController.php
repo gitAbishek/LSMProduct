@@ -148,17 +148,18 @@ class UsersController extends PostsController {
 		$params = parent::get_collection_params();
 
 		$params['orderby'] = array(
-			'default'     => 'name',
 			'description' => __( 'Sort collection by object attribute.', 'masteriyo' ),
+			'default'     => 'id',
 			'enum'        => array(
 				'id',
-				'include',
+				'display_name',
 				'name',
-				'date_created',
-				'slug',
-				'include_slugs',
+				'include',
+				'login',
+				'nicename'.
 				'email',
 				'url',
+				'registered',
 			),
 			'type'        => 'string',
 		);
@@ -350,13 +351,29 @@ class UsersController extends PostsController {
 			'orderby'        => $request['orderby'],
 			'paged'          => $request['page'],
 			'search'         => '*' . esc_attr( $request['search'] ) . '*',
-			'search_columns' => array( 'user_login', 'user_url', 'user_email', 'user_nicename', 'display_name' ),
+			'search_columns' => array( 'ID', 'user_login', 'user_url', 'user_email', 'user_nicename', 'display_name' ),
 			'role'           => $request['role'],
 			'number'         => $request['per_page'],
 		);
 
 		if ( 'date' === $args['orderby'] ) {
 			$args['orderby'] = 'date ID';
+		}
+
+		if ( ! empty( $request['search'] ) ) {
+			$args['meta_query'] = array(
+				'relation' => 'OR',
+				array(
+					'key'     => 'first_name',
+					'value'   => esc_attr( trim( $request['search'] ) ),
+					'compare' => 'LIKE',
+				),
+				array(
+					'key'     => 'last_name',
+					'value'   => esc_attr( trim( $request['search'] ) ),
+					'compare' => 'LIKE',
+				),
+			);
 		}
 
 		/**

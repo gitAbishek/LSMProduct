@@ -53,10 +53,6 @@ const orderStatusList = [
 		value: 'pending',
 	},
 	{
-		label: __('Processing', 'masteriyo'),
-		value: 'processing',
-	},
-	{
 		label: __('On Hold', 'masteriyo'),
 		value: 'on-hold',
 	},

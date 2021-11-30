@@ -12,6 +12,9 @@ const Router: React.FC = () => {
 				<Route path={routes.orders.list} exact>
 					<screens.AllOrders />
 				</Route>
+				<Route path={routes.orders.add} exact>
+					<screens.CreateNewOrder />
+				</Route>
 				<Route path={routes.orders.edit} exact>
 					<screens.EditOrder />
 				</Route>

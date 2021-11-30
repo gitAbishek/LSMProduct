@@ -356,15 +356,17 @@ export interface OrderSchema {
 		phone: string;
 	};
 	set_paid: boolean;
-	course_lines: {
-		id: number;
-		course_id: number;
-		name: string;
-		quantity: number;
-		subtotal: string;
-		total: string;
-		price: number;
-	};
+	course_lines: [
+		{
+			id: number;
+			course_id: number;
+			name: string;
+			quantity: number;
+			subtotal: string;
+			total: string;
+			price: number;
+		}
+	];
 }
 
 export interface OrderItemSchema {

@@ -32,10 +32,6 @@ const courseStatusList = [
 		value: 'pending',
 	},
 	{
-		label: __('Processing', 'masteriyo'),
-		value: 'processing',
-	},
-	{
 		label: __('On-hold', 'masteriyo'),
 		value: 'on-hold',
 	},

@@ -1,6 +1,7 @@
 import {
 	Box,
 	Container,
+	Icon,
 	Link,
 	List,
 	ListIcon,
@@ -9,9 +10,9 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
-import { BiCart } from 'react-icons/bi';
+import { BiCart, BiPlus } from 'react-icons/bi';
 import { useQuery } from 'react-query';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
 import Header from '../../components/common/Header';
 import MasteriyoPagination from '../../components/common/MasteriyoPagination';
@@ -38,10 +39,17 @@ const AllOrders = () => {
 	const ordersQuery = useQuery(['ordersList', filterParams], () =>
 		ordersAPI.list(filterParams)
 	);
+	const history = useHistory();
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
-			<Header showLinks>
+			<Header
+				showLinks
+				thirdBtn={{
+					label: __('Create New Order', 'masteriyo'),
+					action: () => history.push(routes.orders.add),
+					icon: <Icon as={BiPlus} fontSize="md" />,
+				}}>
 				<List>
 					<ListItem>
 						<Link

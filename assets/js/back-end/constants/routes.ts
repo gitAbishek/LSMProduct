@@ -8,6 +8,7 @@ const routes = {
 	},
 	orders: {
 		list: '/orders',
+		add: '/orders/create-new-order',
 		edit: '/orders/:orderId',
 	},
 	section: '/courses/:courseId/section',

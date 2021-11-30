@@ -695,6 +695,11 @@ class OrdersController extends PostsController {
 			$order->set_customer_note( $request['customer_note'] );
 		}
 
+		// Set order status.
+		if ( isset( $request['status'] ) ) {
+			$order->set_status( $request['status'] );
+		}
+
 		// Set set paid.
 		if ( $request['set_paid'] ) {
 			$order->set_status( 'completed' );

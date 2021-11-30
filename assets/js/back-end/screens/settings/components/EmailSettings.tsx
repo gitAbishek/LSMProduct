@@ -143,7 +143,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										{__('Enable', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'Cancelled order emails are sent to students when orders have been marked cancelled (if they were previously processing or on-hold).',
+												'Cancelled order emails are sent to students when orders have been marked cancelled (if they were previously on-hold).',
 												'masteriyo'
 											)}
 											hasArrow

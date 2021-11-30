@@ -8,11 +8,11 @@
 
 **Requires at least**: 5.0
 
-**Tested up to**: 5.8.1
+**Tested up to**: 5.8.2
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.3.0
+**Stable tag**: 1.3.1
 
 **License: GNU** General Public License v3.0
 
@@ -46,6 +46,13 @@ A complete solution to create and sell online courses. The plugin is powered by 
 No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
 # Changelog
+
+### 1.3.1 - 30-11-2021
+- Feature - Allow manual order creation from the backend by an administrator.
+- Enhancement - Added user course REST API.
+- Tweak - Load students and instructs list in descending order by ID.
+- Tweak - Renamed plugin slug from admin notices.
+- Fix - Fatal error due to PHP dependency issue.
 
 ### 1.3.0 - 22-11-2021
 - Feature - Instructor registration system.

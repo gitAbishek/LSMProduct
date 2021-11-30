@@ -119,7 +119,6 @@ const AllCourseCategories = () => {
 									<Thead>
 										<Tr>
 											<Th>{__('Name', 'masteriyo')}</Th>
-											<Th>{__('Description', 'masteriyo')}</Th>
 											<Th>{__('Slug', 'masteriyo')}</Th>
 											<Th>{__('Count', 'masteriyo')}</Th>
 											<Th>{__('Actions', 'masteriyo')}</Th>
@@ -138,7 +137,6 @@ const AllCourseCategories = () => {
 													key={cat.id}
 													id={cat.id}
 													name={cat.name}
-													description={cat.description}
 													slug={cat.slug}
 													count={cat.count}
 													link={cat.link}

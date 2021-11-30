@@ -7,7 +7,6 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
-	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -19,7 +18,6 @@ import routes from '../../../constants/routes';
 interface Props {
 	id: number;
 	name: string;
-	description: string;
 	slug: string;
 	count: Number;
 	link: string;
@@ -27,7 +25,7 @@ interface Props {
 }
 
 const CategoryRow: React.FC<Props> = (props) => {
-	const { id, name, description, slug, count, link, onDeletePress } = props;
+	const { id, name, slug, count, link, onDeletePress } = props;
 
 	return (
 		<Tr>
@@ -42,11 +40,6 @@ const CategoryRow: React.FC<Props> = (props) => {
 					_hover={{ color: 'blue.500' }}>
 					{name}
 				</Link>
-			</Td>
-			<Td>
-				<Text
-					dangerouslySetInnerHTML={{ __html: description ? description : '—' }}
-				/>
 			</Td>
 			<Td>{slug}</Td>
 			<Td>

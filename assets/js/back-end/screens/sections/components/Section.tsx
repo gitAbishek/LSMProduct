@@ -257,7 +257,7 @@ const Section: React.FC<Props> = (props) => {
 						<AlertDialogOverlay>
 							<AlertDialogContent>
 								<AlertDialogHeader>
-									{__('Delete Section', 'masteriyo')} {name}
+									{__('Confirm Delete', 'masteriyo')} {name}
 								</AlertDialogHeader>
 								<AlertDialogBody>
 									{__(

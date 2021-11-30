@@ -97,8 +97,7 @@ const Builder: React.FC = () => {
 		{
 			onSuccess: (data: CourseDataMap) => {
 				toast({
-					title: data.name + __(' is Published successfully.', 'masteriyo'),
-					description: __('You can keep editing it', 'masteriyo'),
+					title: __('Course Updated.', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
 				});
@@ -112,8 +111,7 @@ const Builder: React.FC = () => {
 		{
 			onSuccess: (data: CourseDataMap) => {
 				toast({
-					title: data.name + __(' is drafted successfully.', 'masteriyo'),
-					description: __('You can keep editing it', 'masteriyo'),
+					title: data.name + __(' drafted.', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
 				});
@@ -155,12 +153,10 @@ const Builder: React.FC = () => {
 	};
 
 	const deleteMutation = useMutation((id: number) => sectionAPI.delete(id), {
-		onSuccess: (data: any) => {
+		onSuccess: () => {
 			onClose();
 			toast({
 				title: __('Section Deleted', 'masteriyo'),
-				description:
-					data?.name + __(' has been deleted successfully', 'masteriyo'),
 				isClosable: true,
 				status: 'error',
 			});

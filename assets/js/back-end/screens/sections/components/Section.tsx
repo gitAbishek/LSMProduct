@@ -86,8 +86,6 @@ const Section: React.FC<Props> = (props) => {
 			onClose();
 			toast({
 				title: __('Lesson Deleted', 'masteriyo'),
-				description:
-					data?.name + __(' has been deleted successfully', 'masteriyo'),
 				isClosable: true,
 				status: 'error',
 			});
@@ -100,8 +98,6 @@ const Section: React.FC<Props> = (props) => {
 			onClose();
 			toast({
 				title: __('Quiz Deleted', 'masteriyo'),
-				description:
-					data?.name + __(' has been deleted successfully', 'masteriyo'),
 				isClosable: true,
 				status: 'error',
 			});

@@ -69,7 +69,6 @@ const AddNewQuiz: React.FC = () => {
 		onSuccess: (data: QuizSchema) => {
 			toast({
 				title: __('Quiz Added', 'masteriyo'),
-				description: data.name + __(' is successfully added.', 'masteriyo'),
 				isClosable: true,
 				status: 'success',
 			});

@@ -65,11 +65,9 @@ const EditLesson = () => {
 	const updateLesson = useMutation(
 		(data: LessonSchema) => lessonAPI.update(lessonId, data),
 		{
-			onSuccess: (data: LessonSchema) => {
+			onSuccess: () => {
 				toast({
-					title: __('Lesson Updated Successfully', 'masteriyo'),
-					description:
-						data.name + __(' has been updated successfully.', 'masteriyo'),
+					title: __('Lesson Updated', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
 				});
@@ -87,9 +85,7 @@ const EditLesson = () => {
 		{
 			onSuccess: (data: any) => {
 				toast({
-					title: __('Lesson Deleted Successfully', 'masteriyo'),
-					description:
-						data.name + __(' has been deleted successfully.', 'masteriyo'),
+					title: __('Lesson Deleted', 'masteriyo'),
 					isClosable: true,
 					status: 'error',
 				});

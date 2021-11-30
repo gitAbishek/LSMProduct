@@ -68,8 +68,7 @@ const Settings = () => {
 		{
 			onSuccess: () => {
 				toast({
-					title: __('Settings is Updated', 'masteriyo'),
-					description: __('You can keep changing settings', 'masteriyo'),
+					title: __('Settings Updated', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
 				});

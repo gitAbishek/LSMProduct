@@ -76,10 +76,9 @@ const EditQuiz: React.FC = () => {
 	const updateQuiz = useMutation(
 		(data: QuizSchema) => quizAPI.update(quizId, data),
 		{
-			onSuccess: (data: QuizSchema) => {
+			onSuccess: () => {
 				toast({
-					title: __('Quiz Added', 'masteriyo'),
-					description: data?.name + __(' is successfully added.', 'masteriyo'),
+					title: __('Quiz Updated', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
 				});

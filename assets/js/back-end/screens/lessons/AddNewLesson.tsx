@@ -71,7 +71,6 @@ const AddNewLesson: React.FC = () => {
 			onSuccess: (data: LessonSchema) => {
 				toast({
 					title: data.name + __(' has been added', 'masteriyo'),
-					description: __('You can keep editing it', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
 				});

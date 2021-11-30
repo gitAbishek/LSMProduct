@@ -75,8 +75,6 @@ const Question: React.FC<Props> = (props) => {
 			onSuccess: (data: QuestionSchema) => {
 				toast({
 					title: __('Question Updated', 'masteriyo'),
-					description:
-						data.name + __(' has been updated successfully.', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
 				});
@@ -89,8 +87,6 @@ const Question: React.FC<Props> = (props) => {
 		onSuccess: (data: QuestionSchema) => {
 			toast({
 				title: __('Question Deleted', 'masteriyo'),
-				description:
-					data.name + __(' has been deleted successfully.', 'masteriyo'),
 				isClosable: true,
 				status: 'error',
 			});

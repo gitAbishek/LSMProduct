@@ -129,13 +129,9 @@ const EditOrder = () => {
 	const updateOrder = useMutation(
 		(data: object) => orderAPI.update(orderId, data),
 		{
-			onSuccess: (data: any) => {
+			onSuccess: () => {
 				toast({
-					title: __('Order updated successfully', 'masteriyo'),
-					description: `#${data.id} ${__(
-						' has been updated successfully.',
-						'masteriyo'
-					)}`,
+					title: __('Order updated', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
 				});
@@ -153,13 +149,9 @@ const EditOrder = () => {
 	const deleteOrder = useMutation(
 		(orderId: number) => orderAPI.delete(orderId),
 		{
-			onSuccess: (data: any) => {
+			onSuccess: () => {
 				toast({
-					title: __('Order Deleted Successfully', 'masteriyo'),
-					description: `#${data.id} ${__(
-						' has been deleted successfully.',
-						'masteriyo'
-					)}`,
+					title: __('Order Deleted', 'masteriyo'),
 					isClosable: true,
 					status: 'error',
 				});

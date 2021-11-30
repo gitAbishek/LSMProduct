@@ -63,13 +63,9 @@ const EditStudent: React.FC = () => {
 	const updateUser = useMutation(
 		(data: object) => userAPI.update(userId, data),
 		{
-			onSuccess: (data: any) => {
+			onSuccess: () => {
 				toast({
-					title: __('User updated successfully', 'masteriyo'),
-					description: `#${data.id} ${__(
-						' has been updated successfully',
-						'masteriyo'
-					)}`,
+					title: __('User updated', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
 				});

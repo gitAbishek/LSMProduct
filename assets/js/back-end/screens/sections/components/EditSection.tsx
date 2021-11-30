@@ -34,7 +34,7 @@ type SectionInputs = {
 };
 
 const EditSection: React.FC<EditSectionProps> = (props) => {
-	const { id, name, description, onSave, onCancel, courseId } = props;
+	const { id, name, onSave, onCancel, courseId } = props;
 	const {
 		register,
 		handleSubmit,
@@ -47,10 +47,9 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 	const updateMutation = useMutation(
 		(data: SectionSchema) => sectionAPI.update(id, data),
 		{
-			onSuccess: (data: any) => {
+			onSuccess: () => {
 				toast({
-					title: __('Updated Successfully', 'masteriyo'),
-					description: data.name + __(' is updated succesffuly', 'masteriyo'),
+					title: __('Updated', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
 				});

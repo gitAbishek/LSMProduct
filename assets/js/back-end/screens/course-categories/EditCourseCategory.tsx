@@ -61,11 +61,9 @@ const EditCourseCategory = () => {
 	const updateCategory = useMutation(
 		(data: object) => categoryAPI.update(categoryId, data),
 		{
-			onSuccess: (data: any) => {
+			onSuccess: () => {
 				toast({
-					title: __('Category Updated Successfully', 'masteriyo'),
-					description:
-						data.name + __(' has been updated successfully.', 'masteriyo'),
+					title: __('Category Updated', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
 				});
@@ -87,11 +85,9 @@ const EditCourseCategory = () => {
 	const deleteCategory = useMutation(
 		(categoryId: number) => categoryAPI.delete(categoryId, { force: true }),
 		{
-			onSuccess: (data: any) => {
+			onSuccess: () => {
 				toast({
-					title: __('Category Deleted Successfully', 'masteriyo'),
-					description:
-						data.name + __(' has been deleted successfully.', 'masteriyo'),
+					title: __('Category Deleted', 'masteriyo'),
 					isClosable: true,
 					status: 'error',
 				});

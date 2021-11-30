@@ -39,10 +39,9 @@ const AddNewCourseCategory = () => {
 	const createCategory = useMutation(
 		(data: object) => categoryAPI.store(data),
 		{
-			onSuccess: (data: any) => {
+			onSuccess: () => {
 				toast({
 					title: __('Category Added', 'masteriyo'),
-					description: data.name + __(' is successfully added.', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
 				});

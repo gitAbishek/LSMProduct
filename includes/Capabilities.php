@@ -237,6 +237,7 @@ class Capabilities {
 			'read_users'                => true,
 			'read_course_reviews'       => true,
 			'read_user_courses'         => true,
+			'read_orders'               => true,
 
 			// Course Progress
 			'read_course_progresses'    => true,
@@ -376,6 +377,17 @@ class Capabilities {
 			// Questions
 			'edit_others_questions'           => true,
 			'delete_others_questions'         => true,
+
+			// Orders
+			'publish_orders'                  => true,
+			'edit_orders'                     => true,
+			'edit_private_orders'             => true,
+			'edit_published_orders'           => true,
+			'delete_orders'                   => true,
+			'delete_published_orders'         => true,
+			'delete_private_orders'           => true,
+			'edit_others_orders'              => true,
+			'delete_others_orders'            => true,
 
 			// Course reviews
 			'edit_others_course_reviews'      => true,

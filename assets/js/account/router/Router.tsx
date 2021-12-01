@@ -16,26 +16,28 @@ const Router: React.FC = () => {
 				<Container maxW="container.xl" py="16">
 					<Stack direction="row" spacing="8">
 						<Sidebar />
-						<Switch>
-							<Route path={routes.dashboard} exact>
-								<Dashboard />
-							</Route>
-							<Route path={routes.myCourses} exact>
-								<MyCourses />
-							</Route>
-							<Route path={routes.myOrderHistory} exact>
-								<OrderHistory />
-							</Route>
-							<Route path={routes.myProfile} exact>
-								<ProfilePage />
-							</Route>
-							<Route path={routes.editProfile} exact>
-								<EditProfile />
-							</Route>
-							<Route>
-								<Redirect to={routes.dashboard} />
-							</Route>
-						</Switch>
+						<Box flex="1">
+							<Switch>
+								<Route path={routes.dashboard} exact>
+									<Dashboard />
+								</Route>
+								<Route path={routes.myCourses} exact>
+									<MyCourses />
+								</Route>
+								<Route path={routes.myOrderHistory} exact>
+									<OrderHistory />
+								</Route>
+								<Route path={routes.myProfile} exact>
+									<ProfilePage />
+								</Route>
+								<Route path={routes.editProfile} exact>
+									<EditProfile />
+								</Route>
+								<Route>
+									<Redirect to={routes.dashboard} />
+								</Route>
+							</Switch>
+						</Box>
 					</Stack>
 				</Container>
 			</HashRouter>

@@ -13,12 +13,18 @@ import React from 'react';
 import { HiOutlineAcademicCap } from 'react-icons/hi';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useQuery } from 'react-query';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
+=======
+>>>>>>> e58395ab (Implement course api for the course list on dashboard)
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
 import CourseGridItem from '../../components/CourseGridItem';
+<<<<<<< HEAD
 import routes from '../../constants/routes';
+=======
+>>>>>>> e58395ab (Implement course api for the course list on dashboard)
 import { MyCoursesSchema } from '../../schemas';
 
 const Dashboard: React.FC = () => {
@@ -32,6 +38,7 @@ const Dashboard: React.FC = () => {
 				<Stack direction="column" spacing="10">
 					<Stack direction="row" spacing="8">
 						<Stack direction="row" spacing="8" justify="space-around">
+<<<<<<< HEAD
 							{dashboardCourseQuery?.data?.data && (
 								<Box w="xs" borderWidth="1px" borderColor="gray.100">
 									<Stack p="6">
@@ -64,6 +71,38 @@ const Dashboard: React.FC = () => {
 									</Stack>
 								</Box>
 							)}
+=======
+							<Box w="xs" borderWidth="1px" borderColor="gray.100">
+								<Stack p="6">
+									<Stack direction="row" spacing="4">
+										<Stack
+											direction="row"
+											spacing="4"
+											align="center"
+											justify="space-between">
+											<Center
+												bg="green.10"
+												w="10"
+												h="10"
+												rounded="full"
+												color="green.400"
+												fontSize="lg">
+												<Icon as={HiOutlineAcademicCap} />
+											</Center>
+											<Heading size="sm" color="blue.900">
+												{__('In Progress', 'masteriyo')}
+											</Heading>
+										</Stack>
+									</Stack>
+									<Stack direction="column">
+										<Text fontWeight="bold" color="blue.900" fontSize="xl">
+											2
+										</Text>
+										<Text color="gray.700"> {__('Courses', 'masteriyo')} </Text>
+									</Stack>
+								</Stack>
+							</Box>
+>>>>>>> e58395ab (Implement course api for the course list on dashboard)
 						</Stack>
 					</Stack>
 
@@ -79,6 +118,7 @@ const Dashboard: React.FC = () => {
 								</Heading>
 							</Stack>
 							<ButtonGroup>
+<<<<<<< HEAD
 								<Link to={routes.myCourses}>
 									<Button
 										rightIcon={
@@ -92,6 +132,17 @@ const Dashboard: React.FC = () => {
 										{__('SHOW ALL', 'masteriyo')}
 									</Button>
 								</Link>
+=======
+								<Button
+									rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
+									color="gray.500"
+									size="sm"
+									borderRadius="full"
+									borderColor="gray.400"
+									variant="outline">
+									{__('SHOW ALL', 'masteriyo')}
+								</Button>
+>>>>>>> e58395ab (Implement course api for the course list on dashboard)
 							</ButtonGroup>
 						</Stack>
 						{dashboardCourseQuery?.data?.data?.map(

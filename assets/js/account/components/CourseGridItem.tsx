@@ -3,6 +3,7 @@ import {
 	Button,
 	Icon,
 	Image,
+	Link,
 	Progress,
 	Stack,
 	Tag,
@@ -15,7 +16,10 @@ import { BiTime } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
-import { shortEnglishHumanizer } from '../../back-end/utils/utils';
+import {
+	getLocalTime,
+	shortEnglishHumanizer,
+} from '../../back-end/utils/utils';
 import { CourseProgressMap } from '../../interactive/schemas';
 import { MyCoursesSchema } from '../schemas';
 
@@ -56,7 +60,7 @@ const CourseGridItem: React.FC<Props> = (props) => {
 							)}
 						</Stack>
 						<Text fontSize="md" fontWeight="bold">
-							{__('Swift Courses', 'masteriyo')}
+							{course?.name}
 						</Text>
 
 						<Stack
@@ -107,18 +111,23 @@ const CourseGridItem: React.FC<Props> = (props) => {
 								</Text>
 							</Stack>
 						)}
-						<Text color="gray.500" fontSize="xs">
-							{started_at}
-						</Text>
+						{started_at && (
+							<Text color="gray.500" fontSize="xs">
+								{__('Started on ', 'masteriyo')}
+								{getLocalTime(started_at).toLocaleString()}
+							</Text>
+						)}
 					</Stack>
-					<Button
-						colorScheme="blue"
-						boxShadow="none"
-						size="sm"
-						borderRadius="full"
-						textTransform="uppercase">
-						{__('Continue', 'masteriyo')}
-					</Button>
+					<Link href={course?.start_course_url}>
+						<Button
+							colorScheme="blue"
+							boxShadow="none"
+							size="sm"
+							borderRadius="full"
+							textTransform="uppercase">
+							{__('Continue', 'masteriyo')}
+						</Button>
+					</Link>
 				</Stack>
 			</Stack>
 		</Box>

@@ -30,36 +30,38 @@ const Dashboard: React.FC = () => {
 				<Stack direction="column" spacing="10">
 					<Stack direction="row" spacing="8">
 						<Stack direction="row" spacing="8" justify="space-around">
-							<Box w="xs" borderWidth="1px" borderColor="gray.100">
-								<Stack p="6">
-									<Stack direction="row" spacing="4">
-										<Stack
-											direction="row"
-											spacing="4"
-											align="center"
-											justify="space-between">
-											<Center
-												bg="green.10"
-												w="10"
-												h="10"
-												rounded="full"
-												color="green.400"
-												fontSize="lg">
-												<Icon as={HiOutlineAcademicCap} />
-											</Center>
-											<Heading size="sm" color="blue.900">
-												{__('In Progress', 'masteriyo')}
-											</Heading>
+							{dashboardCourseQuery?.data?.data && (
+								<Box w="xs" borderWidth="1px" borderColor="gray.100">
+									<Stack p="6">
+										<Stack direction="row" spacing="4">
+											<Stack
+												direction="row"
+												spacing="4"
+												align="center"
+												justify="space-between">
+												<Center
+													bg="green.10"
+													w="10"
+													h="10"
+													rounded="full"
+													color="green.400"
+													fontSize="lg">
+													<Icon as={HiOutlineAcademicCap} />
+												</Center>
+												<Heading size="sm" color="blue.900">
+													{__('In Progress', 'masteriyo')}
+												</Heading>
+											</Stack>
+										</Stack>
+										<Stack direction="column">
+											<Text fontWeight="bold" color="blue.900" fontSize="xl">
+												{dashboardCourseQuery?.data?.data?.length}
+											</Text>
+											<Text color="gray.700">{__('Courses', 'masteriyo')}</Text>
 										</Stack>
 									</Stack>
-									<Stack direction="column">
-										<Text fontWeight="bold" color="blue.900" fontSize="xl">
-											2
-										</Text>
-										<Text color="gray.700"> {__('Courses', 'masteriyo')} </Text>
-									</Stack>
-								</Stack>
-							</Box>
+								</Box>
+							)}
 						</Stack>
 					</Stack>
 

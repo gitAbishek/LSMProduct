@@ -12,63 +12,52 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
-import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from 'react-icons/io';
+import { shortEnglishHumanizer } from '../../back-end/utils/utils';
+import { MyCoursesSchema } from '../schemas';
 
-const CourseGridItem = () => {
+interface Props {
+	course: MyCoursesSchema;
+}
+
+const CourseGridItem: React.FC<Props> = (props) => {
+	const { course, started_at } = props.course;
+
 	return (
 		<Box p="5" border="1px" borderColor="gray.100">
 			<Stack direction="row" spacing="10" align="center">
 				<Stack direction="row" spacing="4">
-					<Image
-						w="80px"
-						src="https://api.lorem.space/image/game?w=150&h=150"
-					/>
+					<Image w="80px" src={course?.featured_image_url} />
 					<Stack direction="column" spacing="2">
 						<Stack direction="row" spacing="1">
-							<Tag
-								size="sm"
-								borderRadius="full"
-								colorScheme="blue"
-								border="1px"
-								borderColor="gray.200">
-								<TagLabel>Art</TagLabel>
-							</Tag>
-							<Tag
-								size="sm"
-								borderRadius="full"
-								colorScheme="blue"
-								border="1px"
-								borderColor="gray.200">
-								<TagLabel>Drawing</TagLabel>
-							</Tag>
+							{course?.categories?.map(
+								(category: { id: number; name: string; slug: string }) => (
+									<Tag
+										key={category.id}
+										size="sm"
+										borderRadius="full"
+										colorScheme="blue"
+										border="1px"
+										borderColor="gray.200">
+										<TagLabel>{category?.name}</TagLabel>
+									</Tag>
+								)
+							)}
 						</Stack>
 						<Text fontSize="md" fontWeight="bold">
 							{__('Swift Courses', 'masteriyo')}
 						</Text>
+
 						<Stack
 							direction="row"
-							spacing="2"
-							align="center"
-							fontSize="sm"
-							fontWeight="medium">
-							<Stack direction="row" spacing="0">
-								<Icon as={IoMdStar} />
-								<Icon as={IoMdStar} />
-								<Icon as={IoMdStar} />
-								<Icon as={IoMdStarHalf} />
-								<Icon as={IoMdStarOutline} />
-							</Stack>
-							<Stack
-								direction="row"
-								spacing="0.5"
-								color="gray.700"
-								align="center">
-								<Icon as={BiTime} />
-								<Text fontSize="sm" fontWeight="medium">
-									15
-									{__('hrs', 'masteriyo')}
-								</Text>
-							</Stack>
+							spacing="0.5"
+							color="gray.700"
+							align="center">
+							<Icon as={BiTime} />
+							<Text fontSize="xs" fontWeight="medium">
+								{shortEnglishHumanizer(course?.duration * 60 * 1000, {
+									units: ['h', 'm'],
+								})}
+							</Text>
 						</Stack>
 					</Stack>
 				</Stack>

@@ -10,10 +10,7 @@ import { MyCoursesSchema } from '../../schemas';
 
 const MyCourses: React.FC = () => {
 	const courseAPI = new API(urls.myCourses);
-
 	const myCourseQuery = useQuery(['myCourses'], () => courseAPI.list());
-
-	console.log(myCourseQuery?.data);
 
 	if (myCourseQuery.isSuccess) {
 		return (

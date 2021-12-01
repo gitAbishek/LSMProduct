@@ -1,3 +1,4 @@
+import humanizeDuration from 'humanize-duration';
 import { stringify } from 'query-string';
 
 /**
@@ -273,3 +274,21 @@ export const formatParams = (params: any) => {
 export const isDevelopment = process.env.NODE_ENV === 'development';
 
 export const isProduction = process.env.NODE_ENV === 'production';
+
+export const shortEnglishHumanizer = humanizeDuration.humanizer({
+	language: 'shortEn',
+	languages: {
+		shortEn: {
+			y: () => 'y',
+			mo: () => 'mo',
+			w: () => 'w',
+			d: () => 'd',
+			h: () => 'h',
+			m: () => 'm',
+			s: () => 's',
+			ms: () => 'ms',
+		},
+	},
+});
+
+shortEnglishHumanizer(15600000);

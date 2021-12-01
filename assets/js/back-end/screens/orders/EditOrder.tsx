@@ -208,6 +208,9 @@ const EditOrder = () => {
 						<Box bg="white" p="10" shadow="box">
 							<Stack direction="column" spacing="8">
 								<Flex aling="center" justify="space-between">
+									<Heading as="h1" fontSize="x-large">
+										{__('Edit Order', 'masteriyo')}
+									</Heading>
 									<Menu placement="bottom-end">
 										<MenuButton
 											as={IconButton}

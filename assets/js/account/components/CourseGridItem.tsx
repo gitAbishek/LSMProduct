@@ -12,7 +12,11 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
+import { useQuery } from 'react-query';
+import urls from '../../back-end/constants/urls';
+import API from '../../back-end/utils/api';
 import { shortEnglishHumanizer } from '../../back-end/utils/utils';
+import { CourseProgressMap } from '../../interactive/schemas';
 import { MyCoursesSchema } from '../schemas';
 
 interface Props {
@@ -21,7 +25,15 @@ interface Props {
 
 const CourseGridItem: React.FC<Props> = (props) => {
 	const { course, started_at } = props.course;
+	const progressAPI = new API(urls.courseProgress);
 
+	const courseProgressQuery = useQuery<CourseProgressMap>(
+		[`courseProgress${course?.id}`, course?.id],
+		() => progressAPI.store({ course_id: course?.id }),
+		{
+			enabled: !!course?.id,
+		}
+	);
 	return (
 		<Box p="5" border="1px" borderColor="gray.100">
 			<Stack direction="row" spacing="10" align="center">
@@ -68,14 +80,35 @@ const CourseGridItem: React.FC<Props> = (props) => {
 						justifyContent="center"
 						spacing="2"
 						flex="1">
-						<Stack direction="row" spacing="4" align="center">
-							<Progress size="sm" value={20} rounded="full" w="full" />
-							<Text fontWeight="medium" fontSize="sm" w="3xs">
-								{__('15% Complete', 'masteriyo')}
-							</Text>
-						</Stack>
+						{courseProgressQuery.isSuccess && (
+							<Stack direction="row" spacing="4" align="center">
+								<Progress
+									size="sm"
+									rounded="full"
+									w="full"
+									value={courseProgressQuery?.data?.summary.total.completed}
+									max={
+										courseProgressQuery?.data?.summary.total.completed +
+										courseProgressQuery?.data?.summary.total.pending
+									}
+								/>
+								<Text fontWeight="medium" fontSize="sm" w="3xs">
+									{courseProgressQuery?.data?.summary?.total?.completed === 0 &&
+									courseProgressQuery?.data?.summary?.total?.pending === 0
+										? 0
+										: Math?.round(
+												(courseProgressQuery?.data?.summary?.total?.completed /
+													(courseProgressQuery?.data?.summary?.total?.pending +
+														courseProgressQuery?.data?.summary?.total
+															?.completed)) *
+													100
+										  )}
+									{__('% Complete', 'masteriyo')}
+								</Text>
+							</Stack>
+						)}
 						<Text color="gray.500" fontSize="xs">
-							{__('Started Jan 5, 2020', 'masteriyo')}
+							{started_at}
 						</Text>
 					</Stack>
 					<Button

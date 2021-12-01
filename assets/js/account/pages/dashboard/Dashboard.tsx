@@ -13,10 +13,12 @@ import React from 'react';
 import { HiOutlineAcademicCap } from 'react-icons/hi';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
 import CourseGridItem from '../../components/CourseGridItem';
+import routes from '../../constants/routes';
 import { MyCoursesSchema } from '../../schemas';
 
 const Dashboard: React.FC = () => {
@@ -77,15 +79,19 @@ const Dashboard: React.FC = () => {
 								</Heading>
 							</Stack>
 							<ButtonGroup>
-								<Button
-									rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
-									color="gray.500"
-									size="sm"
-									borderRadius="full"
-									borderColor="gray.400"
-									variant="outline">
-									{__('SHOW ALL', 'masteriyo')}
-								</Button>
+								<Link to={routes.myCourses}>
+									<Button
+										rightIcon={
+											<IoIosArrowForward size={15} color={'gray.500'} />
+										}
+										color="gray.500"
+										size="sm"
+										borderRadius="full"
+										borderColor="gray.400"
+										variant="outline">
+										{__('SHOW ALL', 'masteriyo')}
+									</Button>
+								</Link>
 							</ButtonGroup>
 						</Stack>
 						{dashboardCourseQuery?.data?.data?.map(

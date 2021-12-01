@@ -77,6 +77,7 @@ class Lesson extends Model {
 		'rating_counts'       => array(),
 		'average_rating'      => 0,
 		'review_count'        => 0,
+		'attachments'         => array(),
 	);
 
 	/**
@@ -455,6 +456,25 @@ class Lesson extends Model {
 	}
 
 	/**
+	 * Get attachments.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return int
+	 */
+	public function get_attachments( $context = 'view' ) {
+		return $this->get_prop( 'attachments', $context );
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| CRUD Setters
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
 	 * Set lesson name.
 	 *
 	 * @since 1.0.0
@@ -673,5 +693,16 @@ class Lesson extends Model {
 	 */
 	public function set_review_count( $count ) {
 		$this->set_prop( 'review_count', absint( $count ) );
+	}
+
+	/**
+	 * Set attachments.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param array $attachments Attachment IDs or URLs.
+	 */
+	public function set_attachments( $attachments ) {
+		$this->set_prop( 'attachments', $attachments );
 	}
 }

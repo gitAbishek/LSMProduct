@@ -26,6 +26,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 		'average_rating'      => '_average_rating',
 		'review_count'        => '_review_count',
 		'course_id'           => '_course_id',
+		'attachments'         => '_attachments',
 	);
 
 	/**
@@ -91,7 +92,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $lesson Course object.
+	 * @param Model $lesson Lesson object.
 	 * @throws Exception If invalid lesson.
 	 */
 	public function read( Model &$lesson ) {

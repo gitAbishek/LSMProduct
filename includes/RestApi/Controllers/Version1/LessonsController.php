@@ -275,6 +275,7 @@ class LessonsController extends PostsController {
 			'video_source_url'    => $lesson->get_video_source_url( $context ),
 			'video_source_id'     => $lesson->get_video_source_id( $context ),
 			'video_playback_time' => $lesson->get_video_playback_time( $context ),
+			'attachments'         => $this->get_attachments( $lesson, $context ),
 			'navigation'          => $this->get_navigation_items( $lesson, $context ),
 		);
 
@@ -454,6 +455,29 @@ class LessonsController extends PostsController {
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
+				'attachments'         => array(
+					'description' => __( 'Attachments.', 'masteriyo' ),
+					'type'        => 'array',
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type'       => 'object',
+						'properties' => array(
+							'id'  => array(
+								'description' => __( 'Attachment ID.', 'masteriyo' ),
+								'type'        => 'integer',
+								'default'     => 0,
+								'context'     => array( 'view', 'edit' ),
+							),
+							'url' => array(
+								'description' => __( 'Attachment URL.', 'masteriyo' ),
+								'type'        => 'string',
+								'format'      => 'uri',
+								'context'     => array( 'view', 'edit' ),
+								'readonly'    => true,
+							),
+						),
+					),
+				),
 				'meta_data'           => array(
 					'description' => __( 'Meta data.', 'masteriyo' ),
 					'type'        => 'array',
@@ -583,6 +607,11 @@ class LessonsController extends PostsController {
 		// Lesson video playback time.
 		if ( isset( $request['video_playback_time'] ) ) {
 			$lesson->set_video_playback_time( $request['video_playback_time'] );
+		}
+
+		// Lesson attachments.
+		if ( isset( $request['attachments'] ) ) {
+			$lesson->set_attachments( wp_list_pluck( $request['attachments'], 'id' ) );
 		}
 
 		// Allow set meta_data.
@@ -768,5 +797,29 @@ class LessonsController extends PostsController {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Get lesson attachments.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param Lesson $lesson Lesson object.
+	 * @param string $context Request context.
+	 *
+	 * @return array
+	 */
+	protected function get_attachments( $lesson, $context ) {
+		$attachments = array_reduce(
+			$lesson->get_attachments( $context ),
+			function( $result, $attachment ) {
+				$result['id']  = $attachment;
+				$result['url'] = wp_get_attachment_image_url( $attachment );
+				return $result;
+			},
+			array()
+		);
+
+		return $attachments;
 	}
 }

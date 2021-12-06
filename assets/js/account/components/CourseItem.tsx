@@ -92,9 +92,9 @@ const CourseItem: React.FC<Props> = (props) => {
 								align="center"
 								justify="space-between">
 								<Stack direction="row" spacing="1" align="center">
-									<Avatar size="xs" />
+									<Avatar src={course?.author?.avatar_url} size="xs" />
 									<Text fontSize="xs" fontWeight="bold">
-										John Doe
+										{course?.author?.display_name}
 									</Text>
 								</Stack>
 								<Stack direction="row" spacing="0">

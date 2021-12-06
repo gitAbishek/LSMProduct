@@ -22,6 +22,11 @@ export interface MyCoursesSchema {
 		average_rating: string;
 		review_count: number;
 		start_course_url: string;
+		author: {
+			id: number;
+			display_name: string;
+			avatar_url: string;
+		};
 	};
 	type: string;
 	status: string;

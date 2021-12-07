@@ -287,6 +287,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 														in={pricingDisplayValue != 'paid'}
 														animateOpacity>
 														<RadioGroup
+															value={courseData?.access_mode}
 															defaultValue={
 																'one_time' === courseData?.access_mode
 																	? 'open'

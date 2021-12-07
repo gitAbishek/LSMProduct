@@ -25,7 +25,7 @@ import {
 	Tabs,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import urls from '../../../constants/urls';
@@ -46,6 +46,10 @@ const CourseSetting: React.FC<Props> = (props) => {
 
 	const [pricingDisplayValue, setPricingDisplayValue] = useState(
 		courseData?.price_type || 'free'
+	);
+
+	const [accessModeType, setAccessModeType] = useState(
+		courseData?.access_mode || 'open'
 	);
 
 	const [hours, minutes] = convertMinutesToHours(courseData?.duration || 0);
@@ -104,6 +108,10 @@ const CourseSetting: React.FC<Props> = (props) => {
 		setPricingDisplayValue(priceType);
 		setValue('price_type', priceType);
 	};
+
+	useEffect(() => {
+		setValue('access_mode', courseData?.access_mode);
+	}, [courseData?.access_mode, setValue]);
 
 	return (
 		<Box bg="white" p="10" shadow="box">
@@ -287,12 +295,11 @@ const CourseSetting: React.FC<Props> = (props) => {
 														in={pricingDisplayValue != 'paid'}
 														animateOpacity>
 														<RadioGroup
-															value={courseData?.access_mode}
-															defaultValue={
-																'one_time' === courseData?.access_mode
-																	? 'open'
-																	: courseData?.access_mode
-															}>
+															onChange={(accessMode: string) => {
+																setValue('access_mode', accessMode);
+																setAccessModeType(accessMode);
+															}}
+															defaultValue={accessModeType}>
 															<Stack direction="column" spacing="3" ml="5">
 																<Radio
 																	value="open"
@@ -300,9 +307,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 																		courseData?.access_mode == 'open'
 																			? true
 																			: false
-																	}
-																	{...register('access_mode')}>
-																	{'	'}
+																	}>
 																	{__(
 																		'Does not need registration',
 																		'masteriyo'
@@ -315,9 +320,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 																		'need_registration'
 																			? true
 																			: false
-																	}
-																	{...register('access_mode')}>
-																	{'	'}
+																	}>
 																	{__('Need registration', 'masteriyo')}
 																</Radio>
 															</Stack>

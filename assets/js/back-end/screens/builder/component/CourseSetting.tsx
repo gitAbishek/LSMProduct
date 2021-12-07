@@ -25,7 +25,7 @@ import {
 	Tabs,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import urls from '../../../constants/urls';
@@ -108,10 +108,6 @@ const CourseSetting: React.FC<Props> = (props) => {
 		setPricingDisplayValue(priceType);
 		setValue('price_type', priceType);
 	};
-
-	useEffect(() => {
-		setValue('access_mode', courseData?.access_mode);
-	}, [courseData?.access_mode, setValue]);
 
 	return (
 		<Box bg="white" p="10" shadow="box">
@@ -288,7 +284,10 @@ const CourseSetting: React.FC<Props> = (props) => {
 												<Stack direction="column">
 													<Radio
 														value="free"
-														onChange={() => setValue('access_mode', 'open')}>
+														onChange={() => {
+															setAccessModeType('open');
+															setValue('access_mode', 'open');
+														}}>
 														{__('Free', 'masteriyo')}
 													</Radio>
 													<Collapse
@@ -299,15 +298,11 @@ const CourseSetting: React.FC<Props> = (props) => {
 																setValue('access_mode', accessMode);
 																setAccessModeType(accessMode);
 															}}
-															defaultValue={accessModeType}>
+															value={accessModeType}>
 															<Stack direction="column" spacing="3" ml="5">
 																<Radio
 																	value="open"
-																	isChecked={
-																		courseData?.access_mode == 'open'
-																			? true
-																			: false
-																	}>
+																	isChecked={accessModeType === 'open'}>
 																	{__(
 																		'Does not need registration',
 																		'masteriyo'
@@ -316,10 +311,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 																<Radio
 																	value="need_registration"
 																	isChecked={
-																		courseData?.access_mode ==
-																		'need_registration'
-																			? true
-																			: false
+																		accessModeType === 'need_registration'
 																	}>
 																	{__('Need registration', 'masteriyo')}
 																</Radio>

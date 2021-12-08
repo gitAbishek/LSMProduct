@@ -3,7 +3,6 @@ import {
 	Alert,
 	AlertDescription,
 	AlertTitle,
-	Box,
 	Button,
 	Stack,
 	Text,
@@ -58,7 +57,7 @@ const ProfilePage = () => {
 					</Stack>
 				</Alert>
 
-				<Stack direction="row" spacing="10">
+				<Stack direction="row" spacing="6">
 					<Image
 						src="https://bit.ly/sage-adebayo"
 						alt={userQuery?.data?.first_name + userQuery?.data?.last_name}
@@ -67,12 +66,11 @@ const ProfilePage = () => {
 						border="2px"
 						borderColor="gray.100"
 					/>
-					<Stack direction="column" spacing="8">
-						<Box>
-							<Text as="h3" fontSize="4xl" fontWeight="medium">
-								{userQuery?.data?.first_name} {userQuery?.data?.last_name}
-							</Text>
-						</Box>
+					<Stack direction="column" spacing="4">
+						<Text as="h3" fontSize="4xl" fontWeight="medium" px="6">
+							{userQuery?.data?.first_name} {userQuery?.data?.last_name}
+						</Text>
+
 						<Table>
 							<Tbody>
 								<Tr>

@@ -45,7 +45,7 @@ const logoData = window._MASTERIYO_.logo;
 const siteTitle = window._MASTERIYO_.siteTitle;
 
 // @ts-ignore
-const courseUrl = window._MASTERIYO_.urls.course;
+const courseUrl = window._MASTERIYO_.urls.courses;
 
 const Header: React.FC<Props> = (props) => {
 	const { summary, isOpen, onToggle } = props;

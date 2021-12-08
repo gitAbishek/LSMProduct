@@ -8,7 +8,7 @@ import {
 	Stack,
 	Text,
 } from '@chakra-ui/react';
-import { Table, Td, Tr } from '@chakra-ui/table';
+import { Table, Tbody, Td, Tr } from '@chakra-ui/table';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
@@ -29,6 +29,7 @@ const ProfilePage = () => {
 		userAPI.get(userId)
 	);
 
+	console.log(userQuery?.data);
 	if (userQuery.isSuccess) {
 		return (
 			<Stack direction="column" spacing="8" width="full">
@@ -60,7 +61,7 @@ const ProfilePage = () => {
 				<Stack direction="row" spacing="10">
 					<Image
 						src="https://bit.ly/sage-adebayo"
-						alt="Segun Adebayo"
+						alt={userQuery?.data?.first_name + userQuery?.data?.last_name}
 						borderRadius="full"
 						boxSize="10rem"
 						border="2px"
@@ -69,73 +70,68 @@ const ProfilePage = () => {
 					<Stack direction="column" spacing="8">
 						<Box>
 							<Text as="h3" fontSize="4xl" fontWeight="medium">
-								{__('Jamie Oliver', 'masteriyo')}
-							</Text>
-							<Text
-								as="span"
-								color="gray.400"
-								fontSize="sm"
-								fontWeight="medium">
-								{__('Gold Member', 'masteriyo')}
+								{userQuery?.data?.first_name} {userQuery?.data?.last_name}
 							</Text>
 						</Box>
 						<Table>
-							<Tr>
-								<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-									{__('Email', 'masteriyo')}
-								</Td>
-								<Td fontSize="sm" color="gray" borderBottom="none">
-									{__('jamie.oliver@gmail.com', 'masteriyo')}
-								</Td>
-							</Tr>
-							<Tr>
-								<Td fontSize="md" fontWeight="medium" borderBottom="none">
-									{__('Contact Number', 'masteriyo')}
-								</Td>
-								<Td fontSize="sm" color="gray" borderBottom="none">
-									{__('123-456-7980', 'masteriyo')}
-								</Td>
-							</Tr>
-							<Tr>
-								<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-									{__('Address', 'masteriyo')}
-								</Td>
-								<Td fontSize="sm" color="gray" borderBottom="none">
-									{__('123 Moon Street, Mars', 'masteriyo')}
-								</Td>
-							</Tr>
-							<Tr>
-								<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-									{__('City', 'masteriyo')}
-								</Td>
-								<Td fontSize="sm" color="gray" borderBottom="none">
-									{__('Nuwa', 'masteriyo')}
-								</Td>
-							</Tr>
-							<Tr>
-								<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-									{__('State', 'masteriyo')}
-								</Td>
-								<Td fontSize="sm" color="gray" borderBottom="none">
-									{__('Abiboo', 'masteriyo')}
-								</Td>
-							</Tr>
-							<Tr>
-								<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-									{__('Zip Code', 'masteriyo')}
-								</Td>
-								<Td fontSize="sm" color="gray" borderBottom="none">
-									{__('8899', 'masteriyo')}
-								</Td>
-							</Tr>
-							<Tr>
-								<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-									{__('Country', 'masteriyo')}
-								</Td>
-								<Td fontSize="sm" color="gray" borderBottom="none">
-									{__('Sinara', 'masteriyo')}
-								</Td>
-							</Tr>
+							<Tbody>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Email', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{__('jamie.oliver@gmail.com', 'masteriyo')}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="md" fontWeight="medium" borderBottom="none">
+										{__('Contact Number', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{__('123-456-7980', 'masteriyo')}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Address', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{__('123 Moon Street, Mars', 'masteriyo')}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('City', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{__('Nuwa', 'masteriyo')}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('State', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{__('Abiboo', 'masteriyo')}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Zip Code', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{__('8899', 'masteriyo')}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Country', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{__('Sinara', 'masteriyo')}
+									</Td>
+								</Tr>
+							</Tbody>
 						</Table>
 					</Stack>
 				</Stack>

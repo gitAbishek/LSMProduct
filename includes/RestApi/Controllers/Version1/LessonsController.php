@@ -469,6 +469,12 @@ class LessonsController extends PostsController {
 								'context'     => array( 'view', 'edit' ),
 							),
 							'url' => array(
+								'description' => __( 'Attachment title.', 'masteriyo' ),
+								'type'        => 'string',
+								'context'     => array( 'view', 'edit' ),
+								'readonly'    => true,
+							),
+							'url' => array(
 								'description' => __( 'Attachment URL.', 'masteriyo' ),
 								'type'        => 'string',
 								'format'      => 'uri',
@@ -810,16 +816,44 @@ class LessonsController extends PostsController {
 	 * @return array
 	 */
 	protected function get_attachments( $lesson, $context ) {
+		// Filter invalid attachments.
+		$attachments = array_filter(
+			array_map(
+				function( $attachment ) {
+					$post = get_post( $attachment );
+
+					if ( $post && 'attachment' === $post->post_type ) {
+						return $post;
+					}
+
+					return false;
+				},
+				$lesson->get_attachments( $context )
+			)
+		);
+
+		// Convert the attachments to the response format.
 		$attachments = array_reduce(
-			$lesson->get_attachments( $context ),
+			$attachments,
 			function( $result, $attachment ) {
-				$result['id']  = $attachment;
-				$result['url'] = wp_get_attachment_image_url( $attachment );
+				$result[] = array(
+					'id'    => $attachment->ID,
+					'url'   => wp_get_attachment_image_url( $attachment->ID ),
+					'title' => $attachment->post_title,
+				);
+
 				return $result;
 			},
 			array()
 		);
 
-		return $attachments;
+		/**
+		 * Lesson attachment filter.
+		 *
+		 * @since x.x.x
+		 *
+		 * @return string[] Attachments array.
+		 */
+		return apply_filters( "masteriyo_rest_{$this->object_type}_attachments", $attachments, $lesson, $context );
 	}
 }

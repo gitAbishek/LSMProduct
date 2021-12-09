@@ -24,12 +24,12 @@ const ProfilePage = () => {
 	const userId = 1;
 	const userAPI = new API(urls.users);
 
-	const userQuery = useQuery<UserSchema>([`userProfile${userId}`, userId], () =>
-		userAPI.get(userId)
+	const { data, isSuccess } = useQuery<UserSchema>(
+		[`userProfile${userId}`, userId],
+		() => userAPI.get(userId)
 	);
 
-	console.log(userQuery?.data);
-	if (userQuery.isSuccess) {
+	if (isSuccess) {
 		return (
 			<Stack direction="column" spacing="8" width="full">
 				<Alert bg="blue.500" color="white" p="6">
@@ -60,7 +60,7 @@ const ProfilePage = () => {
 				<Stack direction="row" spacing="6">
 					<Image
 						src="https://bit.ly/sage-adebayo"
-						alt={userQuery?.data?.first_name + userQuery?.data?.last_name}
+						alt={data?.first_name}
 						borderRadius="full"
 						boxSize="10rem"
 						border="2px"
@@ -68,7 +68,7 @@ const ProfilePage = () => {
 					/>
 					<Stack direction="column" spacing="4">
 						<Text as="h3" fontSize="4xl" fontWeight="medium" px="6">
-							{userQuery?.data?.first_name} {userQuery?.data?.last_name}
+							{data?.first_name} {data?.last_name}
 						</Text>
 
 						<Table>
@@ -78,23 +78,16 @@ const ProfilePage = () => {
 										{__('Email', 'masteriyo')}
 									</Td>
 									<Td fontSize="sm" color="gray" borderBottom="none">
-										{__('jamie.oliver@gmail.com', 'masteriyo')}
+										{data?.email}
 									</Td>
 								</Tr>
-								<Tr>
-									<Td fontSize="md" fontWeight="medium" borderBottom="none">
-										{__('Contact Number', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{__('123-456-7980', 'masteriyo')}
-									</Td>
-								</Tr>
+
 								<Tr>
 									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
 										{__('Address', 'masteriyo')}
 									</Td>
 									<Td fontSize="sm" color="gray" borderBottom="none">
-										{__('123 Moon Street, Mars', 'masteriyo')}
+										{data.}
 									</Td>
 								</Tr>
 								<Tr>

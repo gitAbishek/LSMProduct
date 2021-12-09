@@ -31,7 +31,7 @@ import PasswordSecurity from './PasswordSecurity';
 const EditProfile: React.FC = () => {
 	const toast = useToast();
 	const userAPI = new API(urls.currentUser);
-	const { data, isSuccess } = useQuery<UserSchema>('userProfile', () =>
+	const { data, isSuccess, refetch } = useQuery<UserSchema>('userProfile', () =>
 		userAPI.get()
 	);
 
@@ -43,6 +43,7 @@ const EditProfile: React.FC = () => {
 
 	const updateUser = useMutation((data: UserSchema) => userAPI.store(data), {
 		onSuccess: () => {
+			refetch();
 			toast({
 				title: __('Profile Updated', 'masteriyo'),
 				isClosable: true,
@@ -245,6 +246,7 @@ const EditProfile: React.FC = () => {
 										<ButtonGroup>
 											<Button
 												colorScheme="blue"
+												isLoading={updateUser?.isLoading}
 												rounded="full"
 												type="submit"
 												px="19">

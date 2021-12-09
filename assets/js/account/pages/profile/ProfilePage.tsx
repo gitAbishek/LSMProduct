@@ -86,9 +86,7 @@ const ProfilePage = () => {
 									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
 										{__('Address', 'masteriyo')}
 									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data.}
-									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none"></Td>
 								</Tr>
 								<Tr>
 									<Td fontSize="sm" fontWeight="medium" borderBottom="none">

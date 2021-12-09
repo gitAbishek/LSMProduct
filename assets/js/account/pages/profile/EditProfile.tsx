@@ -10,6 +10,7 @@ import {
 	FormLabel,
 	Input,
 	SimpleGrid,
+	Spacer,
 	Stack,
 	Tab,
 	TabList,
@@ -50,16 +51,15 @@ const EditProfile: React.FC = () => {
 
 							<TabPanels>
 								<TabPanel>
-									<Center>
-										<Avatar
-											size="xl"
-											name="Rose Pett"
-											src="https://api.lorem.space/image/fashion?w=150&h=150"
-											background="none"></Avatar>
-									</Center>
-
 									<form onSubmit={onSubmit}>
 										<Stack direction="column" spacing="6">
+											<Center>
+												<Avatar
+													size="xl"
+													name="Rose Pett"
+													src="https://api.lorem.space/image/fashion?w=150&h=150"
+													background="none"></Avatar>
+											</Center>
 											<SimpleGrid columns={2} spacing="6">
 												<FormControl isInvalid={!!errors?.first_name}>
 													<FormLabel>{__('First Name', 'masteriyo')}</FormLabel>
@@ -229,7 +229,7 @@ const EditProfile: React.FC = () => {
 													)}
 												</FormControl>
 											</Stack>
-
+											<Spacer />
 											<ButtonGroup>
 												<Button
 													colorScheme="blue"

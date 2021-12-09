@@ -20,13 +20,10 @@ import API from '../../../back-end/utils/api';
 import routes from '../../constants/routes';
 
 const ProfilePage = () => {
-	// temporary userId
-	const userId = 1;
 	const userAPI = new API(urls.users);
 
-	const { data, isSuccess } = useQuery<UserSchema>(
-		[`userProfile${userId}`, userId],
-		() => userAPI.get(userId)
+	const { data, isSuccess } = useQuery<UserSchema>('userProfile', () =>
+		userAPI.get('me')
 	);
 
 	if (isSuccess) {

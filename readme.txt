@@ -1,4 +1,4 @@
-=== Best Free WordPress Learning Management System, eLearning Platform & Online Course Builder – Masteriyo LMS ===
+=== LMS by Masteriyo - WordPress Learning Management System, eLearning Platform, Online Education System & Online Course Builder ===
 Contributors: Masteriyo
 Tags: lms, learning management system, courses, elearning
 Requires at least: 5.0
@@ -8,11 +8,11 @@ Stable tag: 1.3.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-A revolutionary WordPress LMS plugin to create online courses or eLearning platform easily and quickly. Teach anything anytime from anywhere. :)
+WordPress LMS & eLearning plugin to create and sell online courses. Easy quiz creation with inbuilt quiz builder. Teach anything anytime from anywhere. :)
 
 == Description ==
 
-### Masteriyo LMS - Best Free WordPress LMS Plugin
+### Best Free WordPress LMS & eLearning Plugin - Masteriyo LMS
 
 Masteriyo LMS is the most user-friendly and most powerful WordPress LMS solution to create and sell online courses. Comes with a super-fast and minimalist course builder that lets you make online course easily and quickly. And, absolutely no coding is required.
 

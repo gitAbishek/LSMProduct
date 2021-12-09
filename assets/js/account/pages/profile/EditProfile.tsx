@@ -9,6 +9,7 @@ import {
 	FormErrorMessage,
 	FormLabel,
 	Input,
+	SimpleGrid,
 	Stack,
 	Tab,
 	TabList,
@@ -19,26 +20,15 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { UserSchema } from '../../../back-end/schemas';
 import PasswordSecurity from './PasswordSecurity';
-
-type IFormInputs = {
-	firstName: string;
-	lastName: string;
-	email: string;
-	contact: number;
-	address: string;
-	city: string;
-	state: string;
-	zipcode: number;
-	country: string;
-};
 
 const EditProfile: React.FC = () => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<IFormInputs>();
+	} = useForm<UserSchema>();
 	const onSubmit = handleSubmit((data) => console.log(data));
 
 	const tabStyles = {
@@ -53,7 +43,6 @@ const EditProfile: React.FC = () => {
 						<Stack spacing="8">
 							<TabList>
 								<Tab sx={tabStyles}>{__('Edit Profile', 'masteriyo')}</Tab>
-								<Tab sx={tabStyles}>{__('Notifications', 'masteriyo')}</Tab>
 								<Tab sx={tabStyles}>
 									{__('Password  & Security', 'masteriyo')}
 								</Tab>
@@ -61,216 +50,199 @@ const EditProfile: React.FC = () => {
 
 							<TabPanels>
 								<TabPanel>
-									<Stack spacing="8">
-										<Center>
-											<Avatar
-												size="xl"
-												name="Rose Pett"
-												src="https://api.lorem.space/image/fashion?w=150&h=150"
-												background="none"></Avatar>
-										</Center>
-									</Stack>
-									<Stack p="6">
-										<form onSubmit={onSubmit}>
-											<Stack spacing="8">
-												<Stack direction="row" spacing="8">
-													<FormControl isInvalid={!!errors?.firstName}>
-														<FormLabel>
-															{__('First Name', 'masteriyo')}
-														</FormLabel>
-														<Input
-															type="text"
-															placeholder="Rose"
-															{...register('firstName', {
-																required: __(
-																	'This field cannot be empty',
-																	'masteriyo'
-																),
-															})}
-														/>
-														{errors?.firstName && (
-															<FormErrorMessage>
-																{errors?.firstName.message}
-															</FormErrorMessage>
-														)}
-													</FormControl>
-													<FormControl isInvalid={!!errors?.lastName}>
-														<FormLabel>
-															{__('Last Name', 'masteriyo')}
-														</FormLabel>
-														<Input
-															type="text"
-															placeholder="Pett"
-															{...register('lastName', {
-																required: __(
-																	'This field cannot be empty',
-																	'masteriyo'
-																),
-															})}
-														/>
-														{errors?.lastName && (
-															<FormErrorMessage>
-																{errors?.lastName.message}
-															</FormErrorMessage>
-														)}
-													</FormControl>
-												</Stack>
+									<Center>
+										<Avatar
+											size="xl"
+											name="Rose Pett"
+											src="https://api.lorem.space/image/fashion?w=150&h=150"
+											background="none"></Avatar>
+									</Center>
 
-												<Stack>
-													<FormControl isInvalid={!!errors?.email}>
-														<FormLabel>{__('Email', 'masteriyo')}</FormLabel>
-														<Input
-															type="email"
-															placeholder="rose@gmail.com"
-															{...register('email', {
-																required: __(
-																	'This field cannot be empty',
-																	'masteriyo'
-																),
-															})}
-														/>
-														{errors?.email && (
-															<FormErrorMessage>
-																{errors?.email.message}
-															</FormErrorMessage>
-														)}
-													</FormControl>
-												</Stack>
-												<Stack>
-													<FormControl isInvalid={!!errors?.contact}>
-														<FormLabel>
-															{__('Contact Number', 'masteriyo')}
-														</FormLabel>
-														<Input
-															type="number"
-															placeholder="222-222-333"
-															{...register('contact', {
-																required: __(
-																	'This field cannot be empty',
-																	'masteriyo'
-																),
-															})}
-														/>
-														{errors?.contact && (
-															<FormErrorMessage>
-																{errors?.contact.message}
-															</FormErrorMessage>
-														)}
-													</FormControl>
-												</Stack>
-												<Stack>
-													<FormControl isInvalid={!!errors?.address}>
-														<FormLabel>{__('Address', 'masteriyo')}</FormLabel>
-														<Input
-															type="type"
-															placeholder="Address"
-															{...register('address', {
-																required: __(
-																	'This field cannot be empty',
-																	'masteriyo'
-																),
-															})}
-														/>
-														{errors?.address && (
-															<FormErrorMessage>
-																{errors?.address.message}
-															</FormErrorMessage>
-														)}
-													</FormControl>
-												</Stack>
-												<Stack direction="row" spacing="8">
-													<FormControl isInvalid={!!errors?.city}>
-														<FormLabel>{__('City', 'masteriyo')}</FormLabel>
-														<Input
-															type="text"
-															placeholder="City"
-															{...register('city', {
-																required: __(
-																	'This field cannot be empty',
-																	'masteriyo'
-																),
-															})}
-														/>
-														{errors?.city && (
-															<FormErrorMessage>
-																{errors?.city.message}
-															</FormErrorMessage>
-														)}
-													</FormControl>
-													<FormControl isInvalid={!!errors?.state}>
-														<FormLabel>{__('State', 'masteriyo')}</FormLabel>
-														<Input
-															type="text"
-															placeholder="State"
-															{...register('state', {
-																required: __(
-																	'This field cannot be empty',
-																	'masteriyo'
-																),
-															})}
-														/>
-														{errors?.state && (
-															<FormErrorMessage>
-																{errors?.state.message}
-															</FormErrorMessage>
-														)}
-													</FormControl>
-												</Stack>
+									<form onSubmit={onSubmit}>
+										<Stack direction="column" spacing="6">
+											<SimpleGrid columns={2} spacing="6">
+												<FormControl isInvalid={!!errors?.first_name}>
+													<FormLabel>{__('First Name', 'masteriyo')}</FormLabel>
+													<Input
+														type="text"
+														{...register('first_name', {
+															required: __(
+																'This field cannot be empty',
+																'masteriyo'
+															),
+														})}
+													/>
+													{errors?.first_name && (
+														<FormErrorMessage>
+															{errors?.first_name.message}
+														</FormErrorMessage>
+													)}
+												</FormControl>
+												<FormControl isInvalid={!!errors?.last_name}>
+													<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
+													<Input
+														type="text"
+														{...register('last_name', {
+															required: __(
+																'This field cannot be empty',
+																'masteriyo'
+															),
+														})}
+													/>
+													{errors?.last_name && (
+														<FormErrorMessage>
+															{errors?.last_name.message}
+														</FormErrorMessage>
+													)}
+												</FormControl>
+											</SimpleGrid>
 
-												<Stack direction="row" spacing="8">
-													<FormControl isInvalid={!!errors?.zipcode}>
-														<FormLabel>{__('Zip Code', 'masteriyo')}</FormLabel>
-														<Input
-															type="number"
-															placeholder="Zip Code"
-															{...register('zipcode', {
-																required: __(
-																	'This field cannot be empty',
-																	'masteriyo'
-																),
-															})}
-														/>
-														{errors?.zipcode && (
-															<FormErrorMessage>
-																{errors?.zipcode.message}
-															</FormErrorMessage>
-														)}
-													</FormControl>
-													<FormControl isInvalid={!!errors?.country}>
-														<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
-														<Input
-															type="text"
-															placeholder="Country"
-															{...register('country', {
-																required: __(
-																	'This field cannot be empty',
-																	'masteriyo'
-																),
-															})}
-														/>
-														{errors?.country && (
-															<FormErrorMessage>
-																{errors?.country.message}
-															</FormErrorMessage>
-														)}
-													</FormControl>
-												</Stack>
-												<Stack py="6">
-													<ButtonGroup>
-														<Button
-															colorScheme="blue"
-															rounded="full"
-															type="submit"
-															px="19">
-															{__('SAVE', 'masteriyo')}
-														</Button>
-													</ButtonGroup>
-												</Stack>
+											<Stack>
+												<FormControl isInvalid={!!errors?.email}>
+													<FormLabel>{__('Email', 'masteriyo')}</FormLabel>
+													<Input
+														type="email"
+														{...register('email', {
+															required: __(
+																'This field cannot be empty',
+																'masteriyo'
+															),
+														})}
+													/>
+													{errors?.email && (
+														<FormErrorMessage>
+															{errors?.email.message}
+														</FormErrorMessage>
+													)}
+												</FormControl>
 											</Stack>
-										</form>
-									</Stack>
+											<Stack>
+												<FormControl isInvalid={!!errors?.billing?.phone}>
+													<FormLabel>
+														{__('Contact Number', 'masteriyo')}
+													</FormLabel>
+													<Input
+														type="number"
+														{...register('billing.phone', {
+															required: __(
+																'This field cannot be empty',
+																'masteriyo'
+															),
+														})}
+													/>
+													{errors?.billing?.phone && (
+														<FormErrorMessage>
+															{errors?.billing?.phone.message}
+														</FormErrorMessage>
+													)}
+												</FormControl>
+											</Stack>
+											<Stack>
+												<FormControl isInvalid={!!errors?.billing?.address_1}>
+													<FormLabel>{__('Address', 'masteriyo')}</FormLabel>
+													<Input
+														type="type"
+														{...register('billing.address_1', {
+															required: __(
+																'This field cannot be empty',
+																'masteriyo'
+															),
+														})}
+													/>
+													{errors?.billing?.address_1 && (
+														<FormErrorMessage>
+															{errors?.billing?.address_1.message}
+														</FormErrorMessage>
+													)}
+												</FormControl>
+											</Stack>
+											<Stack direction="row" spacing="8">
+												<FormControl isInvalid={!!errors?.billing?.city}>
+													<FormLabel>{__('City', 'masteriyo')}</FormLabel>
+													<Input
+														type="text"
+														{...register('billing.city', {
+															required: __(
+																'This field cannot be empty',
+																'masteriyo'
+															),
+														})}
+													/>
+													{errors?.billing?.city && (
+														<FormErrorMessage>
+															{errors?.billing.city.message}
+														</FormErrorMessage>
+													)}
+												</FormControl>
+												<FormControl isInvalid={!!errors?.billing?.state}>
+													<FormLabel>{__('State', 'masteriyo')}</FormLabel>
+													<Input
+														type="text"
+														{...register('billing.state', {
+															required: __(
+																'This field cannot be empty',
+																'masteriyo'
+															),
+														})}
+													/>
+													{errors?.billing?.state && (
+														<FormErrorMessage>
+															{errors?.billing.state.message}
+														</FormErrorMessage>
+													)}
+												</FormControl>
+											</Stack>
+
+											<Stack direction="row" spacing="8">
+												<FormControl isInvalid={!!errors?.billing?.postcode}>
+													<FormLabel>{__('Zip Code', 'masteriyo')}</FormLabel>
+													<Input
+														type="number"
+														{...register('billing.postcode', {
+															required: __(
+																'This field cannot be empty',
+																'masteriyo'
+															),
+														})}
+													/>
+													{errors?.billing?.postcode && (
+														<FormErrorMessage>
+															{errors?.billing?.postcode.message}
+														</FormErrorMessage>
+													)}
+												</FormControl>
+												<FormControl isInvalid={!!errors?.billing?.country}>
+													<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
+													<Input
+														type="text"
+														{...register('billing.country', {
+															required: __(
+																'This field cannot be empty',
+																'masteriyo'
+															),
+														})}
+													/>
+													{errors?.billing?.country && (
+														<FormErrorMessage>
+															{errors?.billing?.country.message}
+														</FormErrorMessage>
+													)}
+												</FormControl>
+											</Stack>
+
+											<ButtonGroup>
+												<Button
+													colorScheme="blue"
+													rounded="full"
+													type="submit"
+													px="19">
+													{__('SAVE', 'masteriyo')}
+												</Button>
+											</ButtonGroup>
+										</Stack>
+									</form>
 								</TabPanel>
-								<TabPanel>Notifications</TabPanel>
+
 								<TabPanel>
 									<PasswordSecurity />
 								</TabPanel>

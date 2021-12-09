@@ -94,6 +94,31 @@ class UsersController extends PostsController {
 
 		register_rest_route(
 			$this->namespace,
+			'/' . $this->rest_base . '/me',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_item' ),
+					'permission_callback' => array( $this, 'get_item_permissions_check' ),
+					'args'                => array(
+						'context' => $this->get_context_param(
+							array(
+								'default' => 'view',
+							)
+						),
+					),
+				),
+				array(
+					'methods'             => \WP_REST_Server::EDITABLE,
+					'callback'            => array( $this, 'update_item' ),
+					'permission_callback' => array( $this, 'update_item_permissions_check' ),
+					'args'                => $this->get_endpoint_args_for_item_schema( \WP_REST_Server::EDITABLE ),
+				),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
 			'/' . $this->rest_base . '/(?P<id>[\d]+)',
 			array(
 				'args'   => array(
@@ -806,7 +831,9 @@ class UsersController extends PostsController {
 			);
 		}
 
-		$user = get_user_by( 'id', (int) $request['id'] );
+		// Set the current user id for the user/me endpoint.
+		$request['id'] = isset( $request['id'] ) ? $request['id'] : get_current_user_id();
+		$user          = get_user_by( 'id', (int) $request['id'] );
 
 		if ( $user && ! $this->permission->rest_check_users_manipulation_permissions( 'read' ) ) {
 			return new \WP_Error(
@@ -939,7 +966,9 @@ class UsersController extends PostsController {
 			);
 		}
 
-		$user = get_user_by( 'id', (int) $request['id'] );
+		// Set the current user id for the user/me endpoint.
+		$request['id'] = isset( $request['id'] ) ? $request['id'] : get_current_user_id();
+		$user          = get_user_by( 'id', (int) $request['id'] );
 
 		if ( ! $user || ! $this->permission->rest_check_users_manipulation_permissions( 'edit' ) ) {
 			return new \WP_Error(

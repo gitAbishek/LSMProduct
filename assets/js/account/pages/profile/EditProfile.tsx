@@ -77,7 +77,7 @@ const EditProfile: React.FC = () => {
 										<Center>
 											<Avatar
 												size="xl"
-												name="Rose Pett"
+												name={data?.first_name}
 												src="https://api.lorem.space/image/fashion?w=150&h=150"
 												background="none"></Avatar>
 										</Center>
@@ -86,6 +86,7 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('First Name', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
+													defaultValue={data?.first_name}
 													{...register('first_name', {
 														required: __(
 															'This field cannot be empty',
@@ -102,6 +103,7 @@ const EditProfile: React.FC = () => {
 											<FormControl isInvalid={!!errors?.last_name}>
 												<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
 												<Input
+													defaultValue={data?.last_name}
 													type="text"
 													{...register('last_name', {
 														required: __(
@@ -122,6 +124,7 @@ const EditProfile: React.FC = () => {
 											<FormControl isInvalid={!!errors?.email}>
 												<FormLabel>{__('Email', 'masteriyo')}</FormLabel>
 												<Input
+													defaultValue={data?.email}
 													type="email"
 													{...register('email', {
 														required: __(
@@ -143,13 +146,9 @@ const EditProfile: React.FC = () => {
 													{__('Contact Number', 'masteriyo')}
 												</FormLabel>
 												<Input
+													defaultValue={data?.billing.phone}
 													type="number"
-													{...register('billing.phone', {
-														required: __(
-															'This field cannot be empty',
-															'masteriyo'
-														),
-													})}
+													{...register('billing.phone')}
 												/>
 												{errors?.billing?.phone && (
 													<FormErrorMessage>
@@ -163,12 +162,8 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('Address', 'masteriyo')}</FormLabel>
 												<Input
 													type="type"
-													{...register('billing.address_1', {
-														required: __(
-															'This field cannot be empty',
-															'masteriyo'
-														),
-													})}
+													defaultValue={data?.billing.address_1}
+													{...register('billing.address_1')}
 												/>
 												{errors?.billing?.address_1 && (
 													<FormErrorMessage>
@@ -181,13 +176,9 @@ const EditProfile: React.FC = () => {
 											<FormControl isInvalid={!!errors?.billing?.city}>
 												<FormLabel>{__('City', 'masteriyo')}</FormLabel>
 												<Input
+													defaultValue={data?.billing?.city}
 													type="text"
-													{...register('billing.city', {
-														required: __(
-															'This field cannot be empty',
-															'masteriyo'
-														),
-													})}
+													{...register('billing.city')}
 												/>
 												{errors?.billing?.city && (
 													<FormErrorMessage>
@@ -199,12 +190,8 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('State', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
-													{...register('billing.state', {
-														required: __(
-															'This field cannot be empty',
-															'masteriyo'
-														),
-													})}
+													defaultValue={data?.billing?.state}
+													{...register('billing.state')}
 												/>
 												{errors?.billing?.state && (
 													<FormErrorMessage>
@@ -219,12 +206,8 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('Zip Code', 'masteriyo')}</FormLabel>
 												<Input
 													type="number"
-													{...register('billing.postcode', {
-														required: __(
-															'This field cannot be empty',
-															'masteriyo'
-														),
-													})}
+													defaultValue={data?.billing?.postcode}
+													{...register('billing.postcode')}
 												/>
 												{errors?.billing?.postcode && (
 													<FormErrorMessage>
@@ -236,12 +219,8 @@ const EditProfile: React.FC = () => {
 												<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
-													{...register('billing.country', {
-														required: __(
-															'This field cannot be empty',
-															'masteriyo'
-														),
-													})}
+													defaultValue={data?.billing?.country}
+													{...register('billing.country')}
 												/>
 												{errors?.billing?.country && (
 													<FormErrorMessage>

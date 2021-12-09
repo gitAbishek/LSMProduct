@@ -66,7 +66,7 @@ const ProfilePage = () => {
 						border="2px"
 						borderColor="gray.100"
 					/>
-					<Stack direction="column" spacing="4">
+					<Stack direction="column" spacing="6">
 						<Text as="h3" fontSize="4xl" fontWeight="medium" px="6">
 							{data?.first_name} {data?.last_name}
 						</Text>
@@ -75,49 +75,18 @@ const ProfilePage = () => {
 							<Tbody>
 								<Tr>
 									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Username', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.username}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
 										{__('Email', 'masteriyo')}
 									</Td>
 									<Td fontSize="sm" color="gray" borderBottom="none">
 										{data?.email}
-									</Td>
-								</Tr>
-
-								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Address', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none"></Td>
-								</Tr>
-								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('City', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{__('Nuwa', 'masteriyo')}
-									</Td>
-								</Tr>
-								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('State', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{__('Abiboo', 'masteriyo')}
-									</Td>
-								</Tr>
-								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Zip Code', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{__('8899', 'masteriyo')}
-									</Td>
-								</Tr>
-								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Country', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{__('Sinara', 'masteriyo')}
 									</Td>
 								</Tr>
 							</Tbody>

@@ -25,16 +25,26 @@ import { UserSchema } from '../../../back-end/schemas';
 import PasswordSecurity from './PasswordSecurity';
 
 const EditProfile: React.FC = () => {
+	const tabStyles = {
+		fontWeight: 'medium',
+		fontSize: 'sm',
+		py: '6',
+		px: 0,
+		mr: 4,
+		_hover: {
+			color: 'blue.500',
+		},
+	};
+
+	const tabPanelStyles = {
+		px: '0',
+	};
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<UserSchema>();
 	const onSubmit = handleSubmit((data) => console.log(data));
-
-	const tabStyles = {
-		fontWeight: 'semibold',
-	};
 
 	return (
 		<Box bg="white" width="full">
@@ -50,7 +60,7 @@ const EditProfile: React.FC = () => {
 							</TabList>
 
 							<TabPanels>
-								<TabPanel>
+								<TabPanel sx={tabPanelStyles}>
 									<form onSubmit={onSubmit}>
 										<Stack direction="column" spacing="6">
 											<Center>
@@ -243,7 +253,7 @@ const EditProfile: React.FC = () => {
 									</form>
 								</TabPanel>
 
-								<TabPanel>
+								<TabPanel sx={tabPanelStyles}>
 									<PasswordSecurity />
 								</TabPanel>
 							</TabPanels>

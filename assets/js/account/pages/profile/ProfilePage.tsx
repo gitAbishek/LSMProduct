@@ -20,10 +20,10 @@ import API from '../../../back-end/utils/api';
 import routes from '../../constants/routes';
 
 const ProfilePage = () => {
-	const userAPI = new API(urls.users);
+	const userAPI = new API(urls.currentUser);
 
 	const { data, isSuccess } = useQuery<UserSchema>('userProfile', () =>
-		userAPI.get('me')
+		userAPI.get()
 	);
 
 	if (isSuccess) {

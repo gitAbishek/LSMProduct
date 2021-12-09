@@ -15,24 +15,24 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
 import { UserSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
+import { deepClean } from '../../../back-end/utils/utils';
 import PasswordSecurity from './PasswordSecurity';
 
 const EditProfile: React.FC = () => {
-	// temporary userId
-	const userId = 1;
-	const userAPI = new API(urls.users);
-	const { data, isSuccess } = useQuery<UserSchema>(
-		[`userProfile${userId}`, userId],
-		() => userAPI.get(userId)
+	const toast = useToast();
+	const userAPI = new API(urls.currentUser);
+	const { data, isSuccess } = useQuery<UserSchema>('userProfile', () =>
+		userAPI.get()
 	);
 
 	const {
@@ -41,7 +41,19 @@ const EditProfile: React.FC = () => {
 		formState: { errors },
 	} = useForm<UserSchema>();
 
-	const onSubmit = handleSubmit((data) => console.log(data));
+	const updateUser = useMutation((data: UserSchema) => userAPI.store(data), {
+		onSuccess: () => {
+			toast({
+				title: __('Profile Updated', 'masteriyo'),
+				isClosable: true,
+				status: 'success',
+			});
+		},
+	});
+
+	const onSubmit = (data: UserSchema) => {
+		updateUser.mutate(deepClean(data));
+	};
 
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -72,7 +84,7 @@ const EditProfile: React.FC = () => {
 
 						<TabPanels>
 							<TabPanel sx={tabPanelStyles}>
-								<form onSubmit={onSubmit}>
+								<form onSubmit={handleSubmit(onSubmit)}>
 									<Stack direction="column" spacing="6">
 										<Center>
 											<Avatar

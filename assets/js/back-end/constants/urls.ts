@@ -15,6 +15,7 @@ const urls = {
 	orders: base + 'orders',
 	order_items: base + 'order-items',
 	users: base + 'users',
+	currentUser: base + 'users/me',
 	settings: base + 'settings',
 	builder: base + 'coursebuilder',
 	courseProgress: base + 'course-progress',

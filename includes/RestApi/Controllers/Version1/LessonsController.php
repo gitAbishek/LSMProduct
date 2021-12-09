@@ -838,7 +838,7 @@ class LessonsController extends PostsController {
 			function( $result, $attachment ) {
 				$result[] = array(
 					'id'    => $attachment->ID,
-					'url'   => wp_get_attachment_image_url( $attachment->ID ),
+					'url'   => wp_get_attachment_url( $attachment->ID ),
 					'title' => $attachment->post_title,
 				);
 

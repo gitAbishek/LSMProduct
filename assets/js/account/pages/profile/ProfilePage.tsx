@@ -4,6 +4,7 @@ import {
 	AlertDescription,
 	AlertTitle,
 	Button,
+	Heading,
 	Stack,
 	Text,
 } from '@chakra-ui/react';
@@ -32,10 +33,12 @@ const ProfilePage = () => {
 				<Alert bg="blue.500" color="white" p="6">
 					<Stack direction="column" spacing="5">
 						<Stack direction="column" spacing="0.5">
-							<AlertTitle>{__('Hello, Jamie', 'masteriyo')}</AlertTitle>
+							<AlertTitle>
+								{__('Hello, ', 'masteriyo')} {data?.first_name}
+							</AlertTitle>
 							<AlertDescription display="block" fontSize="sm">
 								{__(
-									'	Welcome to your dashboard here you can edit your overview and your stats',
+									'You can edit your profile here. Would you like to edit your profile?',
 									'masteriyo'
 								)}
 							</AlertDescription>
@@ -72,6 +75,22 @@ const ProfilePage = () => {
 							<Tbody>
 								<Tr>
 									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('First Name', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.first_name}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Last Name', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.last_name}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
 										{__('Username', 'masteriyo')}
 									</Td>
 									<Td fontSize="sm" color="gray" borderBottom="none">
@@ -84,6 +103,29 @@ const ProfilePage = () => {
 									</Td>
 									<Td fontSize="sm" color="gray" borderBottom="none">
 										{data?.email}
+									</Td>
+								</Tr>
+							</Tbody>
+						</Table>
+						<Heading fontSize="lg" px="6">
+							{__('Billing', 'masteriyo')}
+						</Heading>
+						<Table>
+							<Tbody>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('First Name', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.billing?.first_name}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Last Name', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.billing?.last_name}
 									</Td>
 								</Tr>
 							</Tbody>

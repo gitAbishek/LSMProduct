@@ -11,13 +11,14 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiBook, BiGrid, BiHistory, BiLogOut, BiUser } from 'react-icons/bi';
 import { useQuery } from 'react-query';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import urls from '../../back-end/constants/urls';
 import { UserSchema } from '../../back-end/schemas';
 import API from '../../back-end/utils/api';
 import routes from '../constants/routes';
 
 const Sidebar = () => {
+	const location = useLocation();
 	const userAPI = new API(urls.currentUser);
 
 	const { data, isSuccess } = useQuery<UserSchema>('userProfile', () =>
@@ -88,9 +89,13 @@ const Sidebar = () => {
 			<ListItem>
 				<Link
 					as={NavLink}
-					sx={navLinkStyles}
+					sx={
+						location.pathname?.includes('/user')
+							? navActiveStyles
+							: navLinkStyles
+					}
 					_activeLink={navActiveStyles}
-					to={routes.myProfile}>
+					to={routes.user.profile}>
 					<ListIcon fontSize="md" mr="3" as={BiUser} />
 					{__('My Profile')}
 				</Link>

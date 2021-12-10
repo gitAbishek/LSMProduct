@@ -27,10 +27,10 @@ const Router: React.FC = () => {
 								<Route path={routes.myOrderHistory} exact>
 									<OrderHistory />
 								</Route>
-								<Route path={routes.myProfile} exact>
+								<Route path={routes.user.profile} exact>
 									<ProfilePage />
 								</Route>
-								<Route path={routes.editProfile} exact>
+								<Route path={routes.user.edit} exact>
 									<EditProfile />
 								</Route>
 								<Route>

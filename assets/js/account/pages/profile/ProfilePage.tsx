@@ -43,7 +43,7 @@ const ProfilePage = () => {
 								)}
 							</AlertDescription>
 						</Stack>
-						<Link to={routes.editProfile}>
+						<Link to={routes.user.edit}>
 							<Button
 								rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
 								color="gray.500"

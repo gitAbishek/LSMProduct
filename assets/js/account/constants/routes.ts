@@ -1,9 +1,11 @@
 const routes = {
 	dashboard: '/dashboard',
+	user: {
+		profile: '/user/profile',
+		edit: '/user/edit-user',
+	},
 	myCourses: '/courses',
-	myProfile: '/profile',
 	myOrderHistory: '/order-history',
-	editProfile: '/edit-profile',
 };
 
 export default routes;

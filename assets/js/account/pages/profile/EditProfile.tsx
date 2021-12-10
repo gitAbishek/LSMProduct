@@ -190,12 +190,12 @@ const EditProfile: React.FC = () => {
 											</Tooltip>
 										</Heading>
 										<SimpleGrid columns={2} spacing="6">
-											<FormControl isInvalid={!!errors?.first_name}>
+											<FormControl isInvalid={!!errors?.billing?.first_name}>
 												<FormLabel>{__('First Name', 'masteriyo')}</FormLabel>
 												<Input
 													type="text"
-													defaultValue={data?.first_name}
-													{...register('first_name', {
+													defaultValue={data?.billing?.first_name}
+													{...register('billing.first_name', {
 														required: __(
 															'This field cannot be empty',
 															'masteriyo'
@@ -208,12 +208,12 @@ const EditProfile: React.FC = () => {
 													</FormErrorMessage>
 												)}
 											</FormControl>
-											<FormControl isInvalid={!!errors?.last_name}>
+											<FormControl isInvalid={!!errors?.billing?.last_name}>
 												<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
 												<Input
-													defaultValue={data?.last_name}
+													defaultValue={data?.billing?.last_name}
 													type="text"
-													{...register('last_name', {
+													{...register('billing.last_name', {
 														required: __(
 															'This field cannot be empty',
 															'masteriyo'

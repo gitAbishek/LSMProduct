@@ -228,12 +228,7 @@ const EditProfile: React.FC = () => {
 														defaultValue={
 															userDataQuery?.data?.billing?.first_name
 														}
-														{...register('billing.first_name', {
-															required: __(
-																'This field cannot be empty',
-																'masteriyo'
-															),
-														})}
+														{...register('billing.first_name')}
 													/>
 													{errors?.first_name && (
 														<FormErrorMessage>
@@ -248,12 +243,7 @@ const EditProfile: React.FC = () => {
 															userDataQuery?.data?.billing?.last_name
 														}
 														type="text"
-														{...register('billing.last_name', {
-															required: __(
-																'This field cannot be empty',
-																'masteriyo'
-															),
-														})}
+														{...register('billing.last_name')}
 													/>
 													{errors?.last_name && (
 														<FormErrorMessage>

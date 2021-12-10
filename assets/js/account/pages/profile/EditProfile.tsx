@@ -272,21 +272,7 @@ const EditProfile: React.FC = () => {
 												)}
 											</FormControl>
 										</Stack>
-										<Stack>
-											<FormControl isInvalid={!!errors?.billing?.address_1}>
-												<FormLabel>{__('Address', 'masteriyo')}</FormLabel>
-												<Input
-													type="type"
-													defaultValue={data?.billing.address_1}
-													{...register('billing.address_1')}
-												/>
-												{errors?.billing?.address_1 && (
-													<FormErrorMessage>
-														{errors?.billing?.address_1.message}
-													</FormErrorMessage>
-												)}
-											</FormControl>
-										</Stack>
+
 										<Stack direction="row" spacing="8">
 											<FormControl isInvalid={!!errors?.billing?.country}>
 												<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
@@ -364,6 +350,34 @@ const EditProfile: React.FC = () => {
 												{errors?.billing?.postcode && (
 													<FormErrorMessage>
 														{errors?.billing?.postcode.message}
+													</FormErrorMessage>
+												)}
+											</FormControl>
+										</Stack>
+										<Stack direction="row" spacing="8">
+											<FormControl isInvalid={!!errors?.billing?.address_1}>
+												<FormLabel>{__('Address 1', 'masteriyo')}</FormLabel>
+												<Input
+													type="type"
+													defaultValue={data?.billing.address_1}
+													{...register('billing.address_1')}
+												/>
+												{errors?.billing?.address_1 && (
+													<FormErrorMessage>
+														{errors?.billing?.address_1.message}
+													</FormErrorMessage>
+												)}
+											</FormControl>
+											<FormControl isInvalid={!!errors?.billing?.address_1}>
+												<FormLabel>{__('Address 2', 'masteriyo')}</FormLabel>
+												<Input
+													type="type"
+													defaultValue={data?.billing.address_1}
+													{...register('billing.address_2')}
+												/>
+												{errors?.billing?.address_1 && (
+													<FormErrorMessage>
+														{errors?.billing?.address_1.message}
 													</FormErrorMessage>
 												)}
 											</FormControl>

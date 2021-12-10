@@ -17,6 +17,7 @@ interface Props {
 		enable?: boolean;
 		name?: IconType;
 	};
+	size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 const MediaUploader: React.FC<Props> = (props) => {
@@ -25,6 +26,7 @@ const MediaUploader: React.FC<Props> = (props) => {
 		buttonLabel,
 		isMultiple = false,
 		onSelect,
+		size = 'md',
 		isFullWidth = false,
 		mediaType = 'image',
 		icon = {
@@ -65,6 +67,7 @@ const MediaUploader: React.FC<Props> = (props) => {
 		<Icon onClick={handleButtonClick} as={icon.name} />
 	) : (
 		<Button
+			size={size}
 			variant="outline"
 			isFullWidth={isFullWidth}
 			colorScheme="blue"

@@ -3,7 +3,6 @@ import {
 	ButtonGroup,
 	FormControl,
 	FormLabel,
-	HStack,
 	Icon,
 	Spinner,
 	Stack,
@@ -60,20 +59,25 @@ const Attachment: React.FC<Props> = (props) => {
 				{mediaQuery.isLoading && <Spinner />}
 
 				{mediaQuery.isSuccess && (
-					<HStack align="flex-start">
+					<Stack direction="row" align="center">
 						<Icon color="blue.500" as={FaFileAlt} />
 						<Text color="gray.600" fontSize="md">
 							{getFileNameFromURL(mediaQuery?.data?.source_url)}
 						</Text>
-					</HStack>
+					</Stack>
 				)}
 				<ButtonGroup>
 					{attachmentId && (
-						<Button variant="outline" onClick={onDelete} colorScheme="red">
+						<Button
+							variant="outline"
+							onClick={onDelete}
+							colorScheme="red"
+							size="sm">
 							{__('Remove', 'masteriyo')}
 						</Button>
 					)}
 					<MediaUploader
+						size="sm"
 						buttonLabel={
 							attachmentId
 								? __('Upload New', 'masteriyo')

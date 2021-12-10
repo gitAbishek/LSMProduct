@@ -45,6 +45,8 @@ const EditProfile: React.FC = () => {
 	const {
 		register,
 		handleSubmit,
+		setValue,
+		getValues,
 		formState: { errors },
 	} = useForm<UserSchema>();
 
@@ -76,6 +78,11 @@ const EditProfile: React.FC = () => {
 
 	const tabPanelStyles = {
 		px: '0',
+	};
+
+	const copyToBilling = () => {
+		setValue('billing.first_name', getValues('first_name'));
+		setValue('billing.last_name', getValues('last_name'));
 	};
 
 	if (isSuccess) {
@@ -180,12 +187,13 @@ const EditProfile: React.FC = () => {
 											borderColor="gray.100"
 											py="6">
 											{__('Billing', 'masteriyo')}
-											<Tooltip label={__('Fill from the profile')}>
+											<Tooltip label={__('Copy from the profile')}>
 												<IconButton
 													fontSize="md"
 													variant="link"
-													aria-label={__('Copy from profile', 'masteriyo')}
+													aria-label={__('Copy from the profile', 'masteriyo')}
 													icon={<BiCopy />}
+													onClick={copyToBilling}
 												/>
 											</Tooltip>
 										</Heading>

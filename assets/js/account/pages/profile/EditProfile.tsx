@@ -1,11 +1,14 @@
 import {
 	Avatar,
+	AvatarBadge,
+	Box,
 	Button,
 	ButtonGroup,
 	Center,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
+	Icon,
 	Input,
 	SimpleGrid,
 	Spacer,
@@ -15,11 +18,13 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
+	Tooltip,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
@@ -87,12 +92,25 @@ const EditProfile: React.FC = () => {
 							<TabPanel sx={tabPanelStyles}>
 								<form onSubmit={handleSubmit(onSubmit)}>
 									<Stack direction="column" spacing="6">
-										<Center>
+										<Center pos="relative">
 											<Avatar
 												size="xl"
+												fontSize="3xl"
 												name={data?.first_name}
-												src="https://api.lorem.space/image/fashion?w=150&h=150"
-												background="none"></Avatar>
+												src={data?.avatar_url}
+												background="none">
+												<AvatarBadge boxSize="1.25em" bg="gray.400">
+													<Tooltip
+														label={__(
+															'Avatar should be changed from gravatar',
+															'masteriyo'
+														)}>
+														<Box pb="1">
+															<Icon as={BiEdit} fontSize="sm" />
+														</Box>
+													</Tooltip>
+												</AvatarBadge>
+											</Avatar>
 										</Center>
 										<SimpleGrid columns={2} spacing="6">
 											<FormControl isInvalid={!!errors?.first_name}>

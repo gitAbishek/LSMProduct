@@ -568,6 +568,7 @@ export interface UserSchema {
 		phone: string;
 	};
 	approved: boolean;
+	avatar_url: string;
 }
 
 export interface CourseBuilderSchema {

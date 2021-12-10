@@ -49,13 +49,24 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			$question->set_date_created( current_time( 'mysql', true ) );
 		}
 
+		// Author of the question should be same as that of course, because questions are children of courses.
+		if ( $question->get_course_id() ) {
+			$question->set_author_id( masteriyo_get_course_author_id( $question->get_course_id() ) );
+		}
+
+		// Set the author of the question to the current user id, if the question doesn't have a author.
+		if ( empty( $question->get_course_id() ) ) {
+			$question->set_author_id( get_current_user_id() );
+		}
+
+
 		$id = wp_insert_post(
 			apply_filters(
 				'masteriyo_new_question_data',
 				array(
 					'post_type'     => 'mto-question',
 					'post_status'   => $question->get_status() ? $question->get_status() : 'publish',
-					'post_author'   => get_current_user_id(),
+					'post_author'   => $question->get_author_id( 'edit' ),
 					'post_title'    => $question->get_name() ? $question->get_name() : __( 'Question', 'masteriyo' ),
 					'post_content'  => wp_json_encode( $question->get_answers() ),
 					'post_excerpt'  => $question->get_description(),

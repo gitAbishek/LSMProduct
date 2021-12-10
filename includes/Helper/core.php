@@ -20,7 +20,7 @@ use Masteriyo\Models\CourseReview;
  * @since 1.0.0
  *
  * @param int|Course|WP_Post $course Course id or Course Model or Post.
- * @return Course|WP_Error
+ * @return Course|null
  */
 function masteriyo_get_course( $course ) {
 	$course_obj   = masteriyo( 'course' );
@@ -3128,4 +3128,22 @@ function masteriyo_get_current_instructor() {
 	}
 
 	return null;
+}
+
+/**
+ * Get author id of a course.
+ *
+ * @since x.x.x
+ *
+ * @param integer|Course|WP_Post $course Course id or Course Model or Post.
+ *
+ * @return integer
+ */
+function masteriyo_get_course_author_id( $course ) {
+	$course = masteriyo_get_course( $course );
+
+	if ( is_null( $course ) ) {
+		return 0;
+	}
+	return $course->get_author_id();
 }

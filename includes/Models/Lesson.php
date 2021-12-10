@@ -68,6 +68,7 @@ class Lesson extends Model {
 		'post_password'       => '',
 		'parent_id'           => 0,
 		'course_id'           => 0,
+		'author_id'           => 0,
 		'reviews_allowed'     => true,
 		'featured_image'      => '',
 		'video_source'        => '',
@@ -301,7 +302,7 @@ class Lesson extends Model {
 	}
 
 	/**
-	 * Returns the section's course id.
+	 * Returns the lesson's course id.
 	 *
 	 * @since  1.0.0
 	 *
@@ -311,6 +312,19 @@ class Lesson extends Model {
 	 */
 	public function get_course_id( $context = 'view' ) {
 		return $this->get_prop( 'course_id', $context );
+	}
+
+	/**
+	 * Returns the lesson's author id.
+	 *
+	 * @since  x.x.x
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_author_id( $context = 'view' ) {
+		return $this->get_prop( 'author_id', $context );
 	}
 
 	/**
@@ -552,13 +566,24 @@ class Lesson extends Model {
 
 	/**
 	 * Set the lesson's course id.
-	 *
 	 * @since 1.0.0
 	 *
 	 * @param int $course_id Course id.
 	 */
 	public function set_course_id( $course_id ) {
 		$this->set_prop( 'course_id', absint( $course_id ) );
+	}
+
+
+	/**
+	 * Set the lesson's author id.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param int $author_id author id.
+	 */
+	public function set_author_id( $author_id ) {
+		$this->set_prop( 'author_id', absint( $author_id ) );
 	}
 
 	/**

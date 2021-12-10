@@ -803,6 +803,11 @@ class CoursesController extends PostsController {
 			$course->set_slug( $request['slug'] );
 		}
 
+		// Author/Instructor.
+		if ( isset( $request['author_id'] ) ) {
+			$course->set_author_id( $request['author_id'] );
+		}
+
 		// Menu order.
 		if ( isset( $request['menu_order'] ) ) {
 			$course->set_menu_order( $request['menu_order'] );

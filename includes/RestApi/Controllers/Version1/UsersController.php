@@ -194,9 +194,9 @@ class UsersController extends PostsController {
 			'type'              => 'array',
 			'items'             => array(
 				'type' => 'string',
+				'enum' => masteriyo_get_wp_roles(),
 			),
 			'validate_callback' => 'rest_validate_request_arg',
-			'enum'              => masteriyo_get_wp_roles(),
 
 		);
 
@@ -384,6 +384,9 @@ class UsersController extends PostsController {
 
 		if ( 'date' === $args['orderby'] ) {
 			$args['orderby'] = 'date ID';
+		}
+		if ( isset( $request['roles'] ) ) {
+			$args['role__in'] = (array) $request['roles'];
 		}
 
 		/**

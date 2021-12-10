@@ -40,13 +40,23 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			$lesson->set_date_created( current_time( 'mysql', true ) );
 		}
 
+		// Author of the lesson should be same as that of course, because lessons are children of courses.
+		if ( $lesson->get_course_id() ) {
+			$lesson->set_author_id( masteriyo_get_course_author_id( $lesson->get_course_id() ) );
+		}
+
+		// Set the author of the lesson to the current user id, if the lesson doesn't have a author.
+		if ( empty( $lesson->get_course_id() ) ) {
+			$lesson->set_author_id( get_current_user_id() );
+		}
+
 		$id = wp_insert_post(
 			apply_filters(
 				'masteriyo_new_lesson_data',
 				array(
 					'post_type'      => 'mto-lesson',
 					'post_status'    => $lesson->get_status() ? $lesson->get_status() : 'publish',
-					'post_author'    => get_current_user_id(),
+					'post_author'    => $lesson->get_author_id(),
 					'post_title'     => $lesson->get_name() ? $lesson->get_name() : __( 'Lesson', 'masteriyo' ),
 					'post_content'   => $lesson->get_description(),
 					'post_excerpt'   => $lesson->get_short_description(),
@@ -81,7 +91,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $lesson Cource object.
+	 * @param Model $lesson Course object.
 	 * @throws Exception If invalid lesson.
 	 */
 	public function read( Model &$lesson ) {

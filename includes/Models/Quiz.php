@@ -64,6 +64,7 @@ class Quiz extends Model {
 		'date_modified'              => null,
 		'parent_id'                  => 0,
 		'course_id'                  => 0,
+		'author_id'                  => 0,
 		'menu_order'                 => 0,
 		'status'                     => false,
 		'description'                => '',
@@ -281,6 +282,19 @@ class Quiz extends Model {
 	}
 
 	/**
+	 * Returns the quiz's author id.
+	 *
+	 * @since  x.x.x
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_author_id( $context = 'view' ) {
+		return $this->get_prop( 'author_id', $context );
+	}
+
+	/**
 	 * Returns quiz menu order.
 	 *
 	 * @since 1.0.0
@@ -461,6 +475,17 @@ class Quiz extends Model {
 	 */
 	public function set_course_id( $course_id ) {
 		$this->set_prop( 'course_id', absint( $course_id ) );
+	}
+
+	/**
+	 * Set the quiz's author id.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param int $author_id author id.
+	 */
+	public function set_author_id( $author_id ) {
+		$this->set_prop( 'author_id', absint( $author_id ) );
 	}
 
 	/**

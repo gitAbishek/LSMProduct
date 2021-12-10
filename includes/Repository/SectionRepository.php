@@ -39,13 +39,23 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 			$section->set_date_created( current_time( 'mysql', true ) );
 		}
 
+		// Author of the section should be same as that of course, because sections are children of courses.
+		if ( $section->get_course_id() ) {
+			$section->set_author_id( masteriyo_get_course_author_id( $section->get_course_id() ) );
+		}
+
+		// Set the author of the section to the current user id, if the section doesn't have a author.
+		if ( empty( $section->get_course_id() ) ) {
+			$section->set_author_id( get_current_user_id() );
+		}
+
 		$id = wp_insert_post(
 			apply_filters(
 				'masteriyo_new_section_data',
 				array(
 					'post_type'      => 'mto-section',
 					'post_status'    => 'publish',
-					'post_author'    => get_current_user_id(),
+					'post_author'    => $section->get_author_id( 'edit' ),
 					'post_title'     => $section->get_name(),
 					'post_content'   => $section->get_description(),
 					'post_parent'    => $section->get_parent_id(),

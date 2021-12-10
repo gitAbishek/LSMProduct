@@ -47,13 +47,23 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			$quiz->set_date_created( current_time( 'mysql', true ) );
 		}
 
+		// Author of the quiz should be same as that of course, because quizzes are children of courses.
+		if ( $quiz->get_course_id() ) {
+			$quiz->set_author_id( masteriyo_get_course_author_id( $quiz->get_course_id() ) );
+		}
+
+		// Set the author of the quiz to the current user id, if the quiz doesn't have a author.
+		if ( empty( $quiz->get_course_id() ) ) {
+			$quiz->set_author_id( get_current_user_id() );
+		}
+
 		$id = wp_insert_post(
 			apply_filters(
 				'masteriyo_new_quiz_data',
 				array(
 					'post_type'     => 'mto-quiz',
 					'post_status'   => $quiz->get_status() ? $quiz->get_status() : 'publish',
-					'post_author'   => get_current_user_id(),
+					'post_author'   => $quiz->get_author_id( 'edit' ),
 					'post_title'    => $quiz->get_name() ? $quiz->get_name() : __( 'Quiz', 'masteriyo' ),
 					'post_content'  => $quiz->get_description(),
 					'post_excerpt'  => $quiz->get_short_description(),

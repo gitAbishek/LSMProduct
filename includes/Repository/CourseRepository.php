@@ -59,13 +59,17 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			$course->set_date_created( current_time( 'mysql', true ) );
 		}
 
+		if ( empty( $course->get_author_id() ) ) {
+			$course->set_author_id( get_current_user_id() );
+		}
+
 		$id = wp_insert_post(
 			apply_filters(
 				'masteriyo_new_course_data',
 				array(
 					'post_type'      => 'mto-course',
 					'post_status'    => $course->get_status() ? $course->get_status() : 'publish',
-					'post_author'    => get_current_user_id(),
+					'post_author'    => $course->get_author_id( 'edit' ),
 					'post_title'     => $course->get_name() ? $course->get_name() : __( 'Course', 'masteriyo' ),
 					'post_content'   => $course->get_description(),
 					'post_excerpt'   => $course->get_short_description(),
@@ -103,7 +107,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course Cource object.
+	 * @param Model $course Course object.
 	 * @throws Exception If invalid course.
 	 */
 	public function read( Model &$course ) {
@@ -161,6 +165,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			'date_created',
 			'date_modified',
 			'slug',
+			'author_id',
 		);
 
 		// Only update the post when the post data changes.
@@ -175,6 +180,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 				'menu_order'     => $course->get_menu_order( 'edit' ),
 				'post_password'  => $course->get_post_password( 'edit' ),
 				'post_name'      => $course->get_slug( 'edit' ),
+				'post_author'    => $course->get_author_id( 'edit' ),
 				'post_type'      => 'mto-course',
 			);
 
@@ -193,6 +199,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			} else {
 				wp_update_post( array_merge( array( 'ID' => $course->get_id() ), $post_data ) );
 			}
+
 			$course->read_meta_data( true ); // Refresh internal meta data, in case things were hooked into `save_post` or another WP hook.
 		} else { // Only update post modified time to record this save event.
 			$GLOBALS['wpdb']->update(
@@ -208,6 +215,10 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			clean_post_cache( $course->get_id() );
 		}
 
+		if ( isset( $changes['author_id'] ) ) {
+			$this->update_authors( $course );
+		}
+
 		$this->update_post_meta( $course );
 		$this->update_terms( $course );
 		$this->handle_updated_props( $course );
@@ -216,6 +227,48 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		$course->apply_changes();
 
 		do_action( 'masteriyo_update_course', $course->get_id(), $course );
+	}
+
+	/**
+	 * Update the authors of the course's children (lesson, section, quiz and question).
+	 *
+	 * @since x.x.x
+	 *
+	 * @param Course $course Course id or Course Model or Post.
+	 */
+	protected function update_authors( $course ) {
+		global $wpdb;
+
+		$query = new \WP_Query(
+			array(
+				'post_type'      => array( 'mto-lesson', 'mto-question', 'mto-quiz', 'mto-section' ),
+				'post_status'    => array( 'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash' ),
+				'nopaging'       => true,
+				'posts_per_page' => -1,
+				'meta_query'     => array(
+					'course' => array(
+						'key'   => '_course_id',
+						'value' => $course->get_id(),
+						'type'  => 'NUMERIC',
+					),
+				),
+				'fields'         => 'ids',
+			)
+		);
+
+		$children_ids = (array) $query->posts;
+
+		// Bail early if the course doesn't have children.
+		if ( empty( $children_ids ) ) {
+			return;
+		}
+
+		$sql = $wpdb->prepare(
+			"UPDATE {$wpdb->posts} SET post_author = %d WHERE ID IN (" . implode( ', ', $children_ids ) . ')', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$course->get_author_id()
+		);
+
+		$wpdb->query( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 	}
 
 	/**
@@ -404,7 +457,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 
 		foreach ( $this->internal_meta_keys as $prop => $meta_key ) {
 			$meta_value         = isset( $meta_values[ $meta_key ][0] ) ? $meta_values[ $meta_key ][0] : null;
-			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserializes single values.
+			$set_props[ $prop ] = maybe_unserialize( $meta_value ); // get_post_meta only unserialize single values.
 		}
 
 		$set_props['category_ids']  = $this->get_term_ids( $course, 'course_cat' );

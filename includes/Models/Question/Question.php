@@ -47,7 +47,7 @@ class Question extends Model {
 	 *
 	 * @var string
 	 */
-	protected $cache_group = 'questiones';
+	protected $cache_group = 'questions';
 
 	/**
 	 * Question type.
@@ -80,6 +80,7 @@ class Question extends Model {
 		'feedback'          => '',
 		'menu_order'        => 0,
 		'course_id'         => 0,
+		'author_id' => 0,
 	);
 
 	/**
@@ -183,6 +184,19 @@ class Question extends Model {
 	 */
 	public function get_course_id( $context = 'view' ) {
 		return $this->get_prop( 'course_id', $context );
+	}
+
+	/**
+	 * Returns the question's author id.
+	 *
+	 * @since  x.x.x
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_author_id( $context = 'view' ) {
+		return $this->get_prop( 'author_id', $context );
 	}
 
 	/**
@@ -400,6 +414,17 @@ class Question extends Model {
 	 */
 	public function set_course_id( $course_id ) {
 		$this->set_prop( 'course_id', absint( $course_id ) );
+	}
+
+	/**
+	 * Set the question's author id.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param int $author_id author id.
+	 */
+	public function set_author_id( $author_id ) {
+		$this->set_prop( 'author_id', absint( $author_id ) );
 	}
 
 	/**

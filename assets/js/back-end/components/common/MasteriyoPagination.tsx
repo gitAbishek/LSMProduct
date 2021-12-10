@@ -125,7 +125,7 @@ const MasteriyoPagination: React.FC<Props> = (props) => {
 					pagesCount={pagesCount}
 					currentPage={currentPage}
 					onPageChange={handlePageChange}>
-					<PaginationContainer>
+					<PaginationContainer sx={{ li: { m: '0' } }}>
 						<Stack direction="row" spacing="1">
 							<PaginationPrevious size="sm" shadow="none">
 								<FaChevronLeft />

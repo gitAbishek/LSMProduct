@@ -59,7 +59,7 @@ const ProfilePage = () => {
 
 				<Stack direction="row" spacing="6">
 					<Image
-						src="https://bit.ly/sage-adebayo"
+						src={data?.avatar_url}
 						alt={data?.first_name}
 						borderRadius="full"
 						boxSize="10rem"

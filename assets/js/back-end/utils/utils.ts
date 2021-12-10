@@ -250,3 +250,8 @@ export const getLocalTime = (date: string) => {
 	const localDate = new Date(formatString);
 	return localDate;
 };
+
+export const getFileNameFromURL = (url: string) => {
+	const fileNameWithType = url.substring(url.lastIndexOf('/') + 1);
+	return fileNameWithType;
+};

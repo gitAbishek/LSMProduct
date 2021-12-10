@@ -12,6 +12,7 @@ import {
 	Icon,
 	IconButton,
 	Input,
+	Select,
 	SimpleGrid,
 	Spacer,
 	Stack,
@@ -25,28 +26,38 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { BiCopy, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
-import { UserSchema } from '../../../back-end/schemas';
+import {
+	CountriesSchema,
+	StatesSchema,
+	UserSchema,
+} from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
-import { deepClean } from '../../../back-end/utils/utils';
+import { deepClean, isEmpty } from '../../../back-end/utils/utils';
 import PasswordSecurity from './PasswordSecurity';
 
 const EditProfile: React.FC = () => {
 	const toast = useToast();
 	const userAPI = new API(urls.currentUser);
+	const statesAPI = new API(urls.states);
+	const countriesAPI = new API(urls.countries);
+
 	const { data, isSuccess, refetch } = useQuery<UserSchema>('userProfile', () =>
 		userAPI.get()
 	);
+	const countriesQuery = useQuery('countries', () => countriesAPI.list());
+	const statesQuery = useQuery('states', () => statesAPI.list());
 
 	const {
 		register,
 		handleSubmit,
 		setValue,
 		getValues,
+		control,
 		formState: { errors },
 	} = useForm<UserSchema>();
 
@@ -85,7 +96,16 @@ const EditProfile: React.FC = () => {
 		setValue('billing.last_name', getValues('last_name'));
 	};
 
-	if (isSuccess) {
+	const watchSelectedCountry = useWatch({
+		name: 'billing.country',
+		defaultValue: data?.billing?.country,
+		control,
+	});
+
+	if (isSuccess && countriesQuery?.isSuccess && statesQuery.isSuccess) {
+		const matchCountriesData = statesQuery?.data.filter(
+			(statesData: StatesSchema) => statesData.country === watchSelectedCountry
+		);
 		return (
 			<Stack spacing="8">
 				<Tabs>
@@ -268,6 +288,59 @@ const EditProfile: React.FC = () => {
 											</FormControl>
 										</Stack>
 										<Stack direction="row" spacing="8">
+											<FormControl isInvalid={!!errors?.billing?.country}>
+												<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
+												<Select
+													{...register('billing.country')}
+													defaultValue={data?.billing?.country}>
+													<option value="">
+														{__('Select a country', 'masteriyo')}
+													</option>
+													{countriesQuery?.data.map(
+														(country: CountriesSchema) => (
+															<option value={country.code} key={country.code}>
+																{country.name}
+															</option>
+														)
+													)}
+												</Select>
+												{errors?.billing?.country && (
+													<FormErrorMessage>
+														{errors?.billing?.country.message}
+													</FormErrorMessage>
+												)}
+											</FormControl>
+
+											<FormControl isInvalid={!!errors?.billing?.state}>
+												<FormLabel>{__('State', 'masteriyo')}</FormLabel>
+												<Select
+													{...register('billing.state')}
+													defaultValue={data?.billing?.state}>
+													{!isEmpty(matchCountriesData) ? (
+														matchCountriesData[0].states.map(
+															(stateData: { code: string; name: string }) => (
+																<option
+																	value={stateData.code}
+																	key={stateData.code}>
+																	{stateData.name}
+																</option>
+															)
+														)
+													) : (
+														<option>
+															{__('No state founds', 'masteriyo')}
+														</option>
+													)}
+												</Select>
+												{errors?.billing?.state && (
+													<FormErrorMessage>
+														{errors?.billing.state.message}
+													</FormErrorMessage>
+												)}
+											</FormControl>
+										</Stack>
+
+										<Stack direction="row" spacing="8">
 											<FormControl isInvalid={!!errors?.billing?.city}>
 												<FormLabel>{__('City', 'masteriyo')}</FormLabel>
 												<Input
@@ -281,22 +354,6 @@ const EditProfile: React.FC = () => {
 													</FormErrorMessage>
 												)}
 											</FormControl>
-											<FormControl isInvalid={!!errors?.billing?.state}>
-												<FormLabel>{__('State', 'masteriyo')}</FormLabel>
-												<Input
-													type="text"
-													defaultValue={data?.billing?.state}
-													{...register('billing.state')}
-												/>
-												{errors?.billing?.state && (
-													<FormErrorMessage>
-														{errors?.billing.state.message}
-													</FormErrorMessage>
-												)}
-											</FormControl>
-										</Stack>
-
-										<Stack direction="row" spacing="8">
 											<FormControl isInvalid={!!errors?.billing?.postcode}>
 												<FormLabel>{__('Zip Code', 'masteriyo')}</FormLabel>
 												<Input
@@ -307,19 +364,6 @@ const EditProfile: React.FC = () => {
 												{errors?.billing?.postcode && (
 													<FormErrorMessage>
 														{errors?.billing?.postcode.message}
-													</FormErrorMessage>
-												)}
-											</FormControl>
-											<FormControl isInvalid={!!errors?.billing?.country}>
-												<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
-												<Input
-													type="text"
-													defaultValue={data?.billing?.country}
-													{...register('billing.country')}
-												/>
-												{errors?.billing?.country && (
-													<FormErrorMessage>
-														{errors?.billing?.country.message}
 													</FormErrorMessage>
 												)}
 											</FormControl>

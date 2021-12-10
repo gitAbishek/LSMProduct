@@ -1,28 +1,29 @@
 import {
 	Avatar,
 	Heading,
-	Icon,
 	Link,
 	List,
 	ListIcon,
 	ListItem,
 	Stack,
-	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import {
-	BiBook,
-	BiDotsVerticalRounded,
-	BiGrid,
-	BiHistory,
-	BiLogOut,
-	BiUser,
-} from 'react-icons/bi';
+import { BiBook, BiGrid, BiHistory, BiLogOut, BiUser } from 'react-icons/bi';
+import { useQuery } from 'react-query';
 import { NavLink } from 'react-router-dom';
+import urls from '../../back-end/constants/urls';
+import { UserSchema } from '../../back-end/schemas';
+import API from '../../back-end/utils/api';
 import routes from '../constants/routes';
 
 const Sidebar = () => {
+	const userAPI = new API(urls.currentUser);
+
+	const { data, isSuccess } = useQuery<UserSchema>('userProfile', () =>
+		userAPI.get()
+	);
+
 	const navLinkStyles = {
 		borderRight: '2px',
 		d: 'block',
@@ -52,20 +53,16 @@ const Sidebar = () => {
 				<Stack direction="row" align="center" spacing="3">
 					<Avatar
 						size="sm"
-						name="Jamie Oliver"
-						src="https://bit.ly/sage-adebayo"
+						name={data?.first_name}
+						src={data?.avatar_url}
 						showBorder
 						shadow="md"
 					/>
 					<Stack direction="column" spacing="0">
-						<Heading as="h5" fontSize="sm" fontWeight="medium">
-							{__('Jamie Oliver', 'masteriyo')}
+						<Heading as="h5" fontSize="xs" fontWeight="medium">
+							{data?.first_name} {data?.last_name}
 						</Heading>
-						<Text color="gray.300" fontSize="xx-small" fontWeight="medium">
-							{__('Gold Member', 'masteriyo')}
-						</Text>
 					</Stack>
-					<Icon as={BiDotsVerticalRounded} w={6} h={6} color="gray.300" />
 				</Stack>
 			</ListItem>
 			<ListItem>

@@ -102,13 +102,15 @@ const InteractiveLesson = () => {
 						/>
 					)}
 					<Image src={imageQuery?.data?.source_url} />
-					{!isEmpty(lessonQuery?.data?.attachments) && (
-						<LessonAttachment lessonQuery={lessonQuery?.data} />
-					)}
+
 					<Text
 						className="masteriyo-interactive-description"
 						dangerouslySetInnerHTML={{ __html: lessonQuery?.data?.description }}
 					/>
+
+					{!isEmpty(lessonQuery?.data?.attachments) && (
+						<LessonAttachment lessonQuery={lessonQuery?.data} />
+					)}
 				</Stack>
 				<FloatingNavigation
 					navigation={lessonQuery?.data?.navigation}

@@ -18,13 +18,18 @@ interface AttachmentSchema {
 const LessonAttachment: React.FC<Props> = (props) => {
 	const { lessonQuery } = props;
 	return (
-		<>
-			<Heading fontSize="lg" as="h5">
+		<Stack direction="column" spacing="4">
+			<Heading
+				fontSize="xl"
+				as="h5"
+				pb="4"
+				borderBottom="1px"
+				borderColor="gray.100">
 				{__('Lesson Material', 'masteriyo')}
 			</Heading>
 			{lessonQuery?.attachments?.map((attachment: AttachmentSchema) => {
 				return (
-					<Stack key={attachment?.id} direction="row">
+					<Stack key={attachment?.id} direction="row" align="center">
 						<Icon color="blue.400" as={FaFileDownload} />
 						<Link href={attachment?.url} title={attachment?.title}>
 							<Text color="blue.500">
@@ -34,7 +39,7 @@ const LessonAttachment: React.FC<Props> = (props) => {
 					</Stack>
 				);
 			})}
-		</>
+		</Stack>
 	);
 };
 

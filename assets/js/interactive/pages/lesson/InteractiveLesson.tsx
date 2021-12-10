@@ -15,11 +15,9 @@ import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoad
 import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
 import MediaAPI from '../../../back-end/utils/media';
-import { isEmpty } from '../../../back-end/utils/utils';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
 import { CourseProgressItemsMap } from '../../schemas';
-import LessonAttachment from './LessonAttachment';
 import VideoPlayer from './VideoPlayer';
 
 const InteractiveLesson = () => {
@@ -108,9 +106,9 @@ const InteractiveLesson = () => {
 						dangerouslySetInnerHTML={{ __html: lessonQuery?.data?.description }}
 					/>
 
-					{!isEmpty(lessonQuery?.data?.attachments) && (
+					{/* {!isEmpty(lessonQuery?.data?.attachments) && (
 						<LessonAttachment lessonQuery={lessonQuery?.data} />
-					)}
+					)} */}
 				</Stack>
 				<FloatingNavigation
 					navigation={lessonQuery?.data?.navigation}

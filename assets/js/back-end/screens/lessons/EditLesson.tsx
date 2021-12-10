@@ -37,7 +37,6 @@ import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { deepClean } from '../../utils/utils';
 import FeaturedImage from '../courses/components/FeaturedImage';
-import Attachment from './components/Attachment';
 import Description from './components/Description';
 import Name from './components/Name';
 import VideoSource from './components/VideoSource';
@@ -212,13 +211,13 @@ const EditLesson = () => {
 												defaultSourceID={lessonQuery.data.video_source_id}
 											/>
 
-											<Box py="3">
+											{/* <Box py="3">
 												<Divider />
 											</Box>
 
 											<Attachment
 												defaultSourceID={lessonQuery?.data?.attachments[0]?.id}
-											/>
+											/> */}
 											<Box py="3">
 												<Divider />
 											</Box>

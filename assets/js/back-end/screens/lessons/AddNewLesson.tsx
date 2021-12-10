@@ -31,7 +31,6 @@ import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
 import FeaturedImage from '../courses/components/FeaturedImage';
-import Attachment from './components/Attachment';
 import Description from './components/Description';
 import Name from './components/Name';
 import VideoSource from './components/VideoSource';
@@ -173,11 +172,11 @@ const AddNewLesson: React.FC = () => {
 											<FeaturedImage size="masteriyo_single" />
 											<VideoSource />
 
-											<Box py="3">
+											{/* <Box py="3">
 												<Divider />
 											</Box>
 
-											<Attachment />
+											<Attachment /> */}
 
 											<Box py="3">
 												<Divider />

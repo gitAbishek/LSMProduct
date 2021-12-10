@@ -1,6 +1,6 @@
 === LMS by Masteriyo - WordPress Learning Management System, eLearning Platform, Online Education System & Online Course Builder ===
 Contributors: Masteriyo
-Tags: lms, learning management system, courses, elearning
+Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
 Tested up to: 5.8.2
 Requires PHP: 7.0
@@ -8,7 +8,7 @@ Stable tag: 1.3.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-WordPress LMS & eLearning plugin to create and sell online courses. Easy quiz creation with inbuilt quiz builder. Teach anything anytime from anywhere. :)
+WordPress LMS & e-Learning plugin to create and sell online courses. Easy quiz creation with inbuilt quiz builder. Teach anything anytime from anywhere. :)
 
 == Description ==
 

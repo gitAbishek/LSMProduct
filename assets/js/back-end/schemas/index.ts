@@ -301,6 +301,12 @@ export interface LessonSchema {
 	video_source_url: string;
 	video_source_id: number;
 	video_playback_time: number;
+	attachments: [
+		{
+			id: number;
+			url: string;
+		}
+	];
 	course_name: string;
 }
 

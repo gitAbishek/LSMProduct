@@ -8,7 +8,9 @@ import {
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
+	Heading,
 	Icon,
+	IconButton,
 	Input,
 	SimpleGrid,
 	Spacer,
@@ -24,7 +26,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { BiEdit } from 'react-icons/bi';
+import { BiCopy, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
@@ -171,6 +173,60 @@ const EditProfile: React.FC = () => {
 												)}
 											</FormControl>
 										</Stack>
+
+										<Heading
+											fontSize="lg"
+											borderBottom="1px"
+											borderColor="gray.100"
+											py="6">
+											{__('Billing', 'masteriyo')}
+											<Tooltip label={__('Fill from the profile')}>
+												<IconButton
+													fontSize="md"
+													variant="link"
+													aria-label={__('Copy from profile', 'masteriyo')}
+													icon={<BiCopy />}
+												/>
+											</Tooltip>
+										</Heading>
+										<SimpleGrid columns={2} spacing="6">
+											<FormControl isInvalid={!!errors?.first_name}>
+												<FormLabel>{__('First Name', 'masteriyo')}</FormLabel>
+												<Input
+													type="text"
+													defaultValue={data?.first_name}
+													{...register('first_name', {
+														required: __(
+															'This field cannot be empty',
+															'masteriyo'
+														),
+													})}
+												/>
+												{errors?.first_name && (
+													<FormErrorMessage>
+														{errors?.first_name.message}
+													</FormErrorMessage>
+												)}
+											</FormControl>
+											<FormControl isInvalid={!!errors?.last_name}>
+												<FormLabel>{__('Last Name', 'masteriyo')}</FormLabel>
+												<Input
+													defaultValue={data?.last_name}
+													type="text"
+													{...register('last_name', {
+														required: __(
+															'This field cannot be empty',
+															'masteriyo'
+														),
+													})}
+												/>
+												{errors?.last_name && (
+													<FormErrorMessage>
+														{errors?.last_name.message}
+													</FormErrorMessage>
+												)}
+											</FormControl>
+										</SimpleGrid>
 										<Stack>
 											<FormControl isInvalid={!!errors?.billing?.phone}>
 												<FormLabel>

@@ -128,6 +128,62 @@ const ProfilePage = () => {
 										{data?.billing?.last_name}
 									</Td>
 								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Contact Number', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.billing?.phone}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Country', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.billing?.country}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('State', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.billing?.state}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('City', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.billing?.city}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Zip Code', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.billing?.postcode}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Address 1', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.billing?.address_1}
+									</Td>
+								</Tr>
+								<Tr>
+									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
+										{__('Address 2', 'masteriyo')}
+									</Td>
+									<Td fontSize="sm" color="gray" borderBottom="none">
+										{data?.billing?.address_2}
+									</Td>
+								</Tr>
 							</Tbody>
 						</Table>
 					</Stack>

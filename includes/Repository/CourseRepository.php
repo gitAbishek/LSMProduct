@@ -232,7 +232,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Update the authors of the course's children (lesson, section, quiz and question).
 	 *
-	 * @since x.x.x
+	 * @since 1.3.2
 	 *
 	 * @param Course $course Course id or Course Model or Post.
 	 */

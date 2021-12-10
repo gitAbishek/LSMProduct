@@ -80,7 +80,7 @@ class Question extends Model {
 		'feedback'          => '',
 		'menu_order'        => 0,
 		'course_id'         => 0,
-		'author_id' => 0,
+		'author_id'         => 0,
 	);
 
 	/**
@@ -189,7 +189,7 @@ class Question extends Model {
 	/**
 	 * Returns the question's author id.
 	 *
-	 * @since  x.x.x
+	 * @since  1.3.2
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -419,7 +419,7 @@ class Question extends Model {
 	/**
 	 * Set the question's author id.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.2
 	 *
 	 * @param int $author_id author id.
 	 */

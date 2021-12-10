@@ -3133,7 +3133,7 @@ function masteriyo_get_current_instructor() {
 /**
  * Get author id of a course.
  *
- * @since x.x.x
+ * @since 1.3.2
  *
  * @param integer|Course|WP_Post $course Course id or Course Model or Post.
  *

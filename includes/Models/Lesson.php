@@ -318,7 +318,7 @@ class Lesson extends Model {
 	/**
 	 * Returns the lesson's author id.
 	 *
-	 * @since  x.x.x
+	 * @since  1.3.2
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -458,7 +458,7 @@ class Lesson extends Model {
 	/**
 	 * Get attachments.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.2
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
@@ -598,7 +598,7 @@ class Lesson extends Model {
 	/**
 	 * Set the lesson's author id.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.2
 	 *
 	 * @param int $author_id author id.
 	 */
@@ -698,7 +698,7 @@ class Lesson extends Model {
 	/**
 	 * Set attachments.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.2
 	 *
 	 * @param array $attachments Attachment IDs or URLs.
 	 */

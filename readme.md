@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.3.1
+**Stable tag**: 1.3.2
 
 **License: GNU** General Public License v3.0
 
@@ -46,6 +46,20 @@ A complete solution to create and sell online courses. The plugin is powered by 
 No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
 # Changelog
+
+### 1.3.2 - 10-12-2021
+- Enhancement - Quiz Attempts Listing on the back-end.
+- Enhancement - Allow the administrator to change the instructor of the course.
+- Enhancement - Added users/me REST API endpoint.
+- Enhancement - Optimize images.
+- Enhancement - Populate checkout form with current user information.
+- Tweak - Remove the description column from the category list.
+- Tweak - Optimize the toast messages in the back-end.
+- Tweak - Moved the delete menu inside the order edit page to right.
+- Fix - Paid course being converted to free course issue.
+- Fix - Back to course button link in the course complete message.
+- Fix - Section title issue in the delete confirmation message.
+- Fix - Pagination button jumping up and down.
 
 ### 1.3.1 - 30-11-2021
 - Feature - Allow manual order creation from the backend by an administrator.

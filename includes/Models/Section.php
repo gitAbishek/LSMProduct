@@ -223,7 +223,7 @@ class Section extends Model {
 	/**
 	 * Returns the section's author id.
 	 *
-	 * @since  x.x.x
+	 * @since  1.3.2
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -334,7 +334,7 @@ class Section extends Model {
 	/**
 	 * Set the section's author id.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.2
 	 *
 	 * @param int $author_id author id.
 	 */

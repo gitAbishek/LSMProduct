@@ -808,7 +808,7 @@ class LessonsController extends PostsController {
 	/**
 	 * Get lesson attachments.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.2
 	 *
 	 * @param Lesson $lesson Lesson object.
 	 * @param string $context Request context.
@@ -850,7 +850,7 @@ class LessonsController extends PostsController {
 		/**
 		 * Lesson attachment filter.
 		 *
-		 * @since x.x.x
+		 * @since 1.3.2
 		 *
 		 * @return string[] Attachments array.
 		 */

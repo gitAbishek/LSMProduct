@@ -11,6 +11,7 @@ export { default as EditLesson } from './lessons/EditLesson';
 export { default as AllOrders } from './orders/AllOrders';
 export { default as CreateNewOrder } from './orders/CreateNewOrder';
 export { default as EditOrder } from './orders/EditOrder';
+export { default as AllQuizAttempts } from './quiz-attempts/AllQuizAttempts';
 export { default as SectionBuilder } from './sections/SectionBuilder';
 export { default as Settings } from './settings/Settings';
 export { default as EditInstructor } from './users/components/instructors/EditInstructor';

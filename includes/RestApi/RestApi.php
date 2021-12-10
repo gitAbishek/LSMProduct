@@ -81,6 +81,7 @@ class RestApi {
 			'lessons'               => "{$namespace}\\LessonsController",
 			'questions'             => "{$namespace}\\QuestionsController",
 			'quizzes'               => "{$namespace}\\QuizesController",
+			'quizzes.attempts'      => "{$namespace}\\QuizAttemptsController",
 			'sections'              => "{$namespace}\\SectionsController",
 			'sections.children'     => "{$namespace}\\SectionChildrenController",
 			'faqs'                  => "{$namespace}\\FaqsController",

@@ -40,6 +40,10 @@ const routes = {
 			edit: '/users/instructors/:userId',
 		},
 	},
+	quiz_attempts: {
+		list: '/quiz-attempts',
+		edit: '/quiz-attempts/:quizId',
+	},
 	settings: '/settings',
 	notFound: '/not-found',
 };

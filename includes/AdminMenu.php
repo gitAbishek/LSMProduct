@@ -92,6 +92,15 @@ class AdminMenu {
 
 		add_submenu_page(
 			'masteriyo',
+			esc_html__( 'Quiz Attempts', 'masteriyo' ),
+			esc_html__( 'Quiz Attempts', 'masteriyo' ),
+			'manage_masteriyo_settings',
+			'masteriyo#/quiz-attempts',
+			array( __CLASS__, 'display_main_page' )
+		);
+
+		add_submenu_page(
+			'masteriyo',
 			esc_html__( 'Users', 'masteriyo' ),
 			esc_html__( 'Users', 'masteriyo' ),
 			'manage_masteriyo_settings',

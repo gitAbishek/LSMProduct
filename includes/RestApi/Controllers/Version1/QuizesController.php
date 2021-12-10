@@ -186,102 +186,6 @@ class QuizesController extends PostsController {
 			)
 		);
 
-		register_rest_route(
-			$this->namespace,
-			'/' . $this->rest_base . '/attempts',
-			array(
-				array(
-					'methods'             => \WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_attempts' ),
-					'permission_callback' => function() {
-						return is_user_logged_in() || masteriyo( 'session' )->start()->get_user_id();
-					},
-					'args'                => array(
-						'quiz_id'  => array(
-							'description'       => __( 'Quiz ID.', 'masteriyo' ),
-							'type'              => 'integer',
-							'required'          => true,
-							'sanitize_callback' => 'absint',
-							'validate_callback' => 'rest_validate_request_arg',
-						),
-						'user_id'  => array(
-							'description'       => __( 'User ID.', 'masteriyo' ),
-							'type'              => 'integer',
-							'sanitize_callback' => 'absint',
-							'validate_callback' => 'rest_validate_request_arg',
-						),
-						'status'   => array(
-							'description'       => __( 'Quiz attempt status.', 'masteriyo' ),
-							'type'              => 'string',
-							'sanitize_callback' => 'sanitize_title',
-							'validate_callback' => 'rest_validate_request_arg',
-						),
-						'orderby'  => array(
-							'description'       => __( 'Sort collection by object attribute.', 'masteriyo' ),
-							'type'              => 'string',
-							'default'           => 'id',
-							'enum'              => array(
-								'id',
-								'course_id',
-								'quiz_id',
-								'attempt_started_at',
-								'attempt_ended_at',
-							),
-							'validate_callback' => 'rest_validate_request_arg',
-						),
-						'order'    => array(
-							'description'       => __( 'Order sort attribute ascending or descending.', 'masteriyo' ),
-							'type'              => 'string',
-							'default'           => 'desc',
-							'enum'              => array( 'asc', 'desc' ),
-							'validate_callback' => 'rest_validate_request_arg',
-						),
-						'paged'    => array(
-							'description'       => __( 'Paginate the quiz attempts.', 'masteriyo' ),
-							'type'              => 'integer',
-							'default'           => 1,
-							'sanitize_callback' => 'absint',
-							'validate_callback' => 'rest_validate_request_arg',
-							'minimum'           => 1,
-						),
-						'per_page' => array(
-							'description'       => __( 'Limit items per page.', 'masteriyo' ),
-							'type'              => 'integer',
-							'default'           => 10,
-							'minimum'           => 1,
-							'sanitize_callback' => 'absint',
-							'validate_callback' => 'rest_validate_request_arg',
-						),
-					),
-				),
-			)
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/' . $this->rest_base . '/attempts/(?P<id>[\d]+)',
-			array(
-				'args' => array(
-					'id' => array(
-						'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
-						'type'        => 'integer',
-					),
-				),
-				array(
-					'methods'             => \WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_attempt' ),
-					'permission_callback' => 'is_user_logged_in',
-					'args'                => array(
-						'context' => $this->get_context_param(
-							array(
-								'default' => 'view',
-							)
-						),
-					),
-				),
-			)
-		);
-
 	}
 
 	/**
@@ -546,6 +450,7 @@ class QuizesController extends PostsController {
 		$total_question_marks    = 0;
 		$total_correct_answers   = 0;
 		$total_incorrect_answers = 0;
+		$answers_data            = array();
 
 		if ( isset( $answers['id'] ) ) {
 			unset( $answers['id'] );
@@ -573,6 +478,11 @@ class QuizesController extends PostsController {
 
 			$is_correct = $object->check_answer( $value, 'view' );
 
+			$answers_data[ $question_id ] = array(
+				'answered' => $value,
+				'correct'  => $is_correct,
+			);
+
 			$is_correct ? $total_correct_answers++ : $total_incorrect_answers++;
 
 			$question_mark       = $is_correct ? $object->get_points() : 0;
@@ -590,7 +500,7 @@ class QuizesController extends PostsController {
 			'total_answered_questions' => $attempt_questions,
 			'total_correct_answers'    => $total_correct_answers,
 			'total_incorrect_answers'  => $total_incorrect_answers,
-			'answers'                  => maybe_serialize( $answers ),
+			'answers'                  => maybe_serialize( $answers_data ),
 			'attempt_status'           => 'attempt_ended',
 			'attempt_ended_at'         => current_time( 'mysql', true ),
 		);

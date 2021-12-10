@@ -231,6 +231,8 @@ class OrdersController extends PostsController {
 	/**
 	 * Process objects collection.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param array $objects Orders data.
 	 * @param array $query_args Query arguments.
 	 * @param array $query_results Orders query result data.

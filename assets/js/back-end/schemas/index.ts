@@ -752,3 +752,34 @@ export interface MediaSchema {
 		];
 	};
 }
+
+export interface QuizAttempt {
+	id: number;
+	total_questions: number;
+	total_answered_questions: number;
+	total_marks: string;
+	total_attempts: number;
+	total_correct_answers: number;
+	total_incorrect_answers: number;
+	earned_marks: string;
+	answers: {};
+	attempt_status: string;
+	attempt_started_at: string;
+	attempt_ended_at: string;
+	course: {
+		id: number;
+		name: string;
+	};
+	quiz: {
+		id: number;
+		name: string;
+		pass_mark: number;
+	};
+	user: {
+		id: number;
+		display_name: string;
+		first_name: string;
+		last_name: string;
+		email: string;
+	};
+}

@@ -30,7 +30,13 @@ use Masteriyo\Countries;
 					<span>*</span>
 				</label>
 
-				<input type="text" id="billing-first-name" class="masteriyo-input" name="billing_first_name" value="" />
+				<input
+					type="text"
+					id="billing-first-name"
+					class="masteriyo-input"
+					name="billing_first_name"
+					value="<?php echo esc_attr( $user->get_first_name() ); ?>"
+					/>
 
 				<?php if ( masteriyo_notice_exists( 'billing_first_name', Notice::ERROR ) ) : ?>
 					<div class="masteriyo-error masteriyo-danger-msg">
@@ -45,7 +51,13 @@ use Masteriyo\Countries;
 					<span>*</span>
 				</label>
 
-				<input type="text" id="billing-last-name" class="masteriyo-input" name="billing_last_name" value="" />
+				<input
+					type="text"
+					id="billing-last-name"
+					class="masteriyo-input"
+					name="billing_last_name"
+					value="<?php echo esc_attr( $user->get_last_name() ); ?>"
+					/>
 
 				<?php if ( masteriyo_notice_exists( 'billing_last_name', Notice::ERROR ) ) : ?>
 					<div class="masteriyo-error masteriyo-danger-msg">
@@ -61,7 +73,13 @@ use Masteriyo\Countries;
 					<?php esc_html_e( 'Email Address', 'masteriyo' ); ?>
 					<span>*</span>
 				</label>
-				<input type="text" id="billing-email" class="masteriyo-input" name="billing_email" value="" />
+				<input
+					type="text"
+					id="billing-email"
+					class="masteriyo-input"
+					name="billing_email"
+					value="<?php echo esc_attr( $user->get_email() ); ?>"
+					/>
 			</div>
 			<?php if ( masteriyo_notice_exists( 'billing_email', Notice::ERROR ) ) : ?>
 				<div class="masteriyo-error masteriyo-danger-msg">

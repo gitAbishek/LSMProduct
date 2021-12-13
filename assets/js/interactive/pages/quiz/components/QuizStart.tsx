@@ -23,10 +23,11 @@ interface Props {
 	quizData: QuizSchema;
 	onStartPress: any;
 	isButtonLoading?: boolean;
+	isDisabled?: boolean;
 }
 
 const QuizStart: React.FC<Props> = (props) => {
-	const { quizData, onStartPress, isButtonLoading } = props;
+	const { quizData, onStartPress, isButtonLoading, isDisabled } = props;
 
 	const listItemStyles = {
 		d: 'flex',
@@ -83,6 +84,7 @@ const QuizStart: React.FC<Props> = (props) => {
 				<Button
 					onClick={onStartPress}
 					isLoading={isButtonLoading}
+					isDisabled={isDisabled}
 					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"

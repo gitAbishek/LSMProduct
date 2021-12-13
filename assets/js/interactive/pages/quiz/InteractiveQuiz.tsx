@@ -52,7 +52,7 @@ const InteractiveQuiz = () => {
 			}),
 		{
 			onSuccess: (data: any) => {
-				setScoreBoardData(data[0]);
+				setScoreBoardData(data.data[0]);
 			},
 		}
 	);
@@ -102,8 +102,6 @@ const InteractiveQuiz = () => {
 			onSuccess: (data: any) => {
 				setQuizStartedOn(null);
 				setScoreBoardData(data);
-				quizProgress.refetch();
-				quizQuery.refetch();
 			},
 		});
 	};
@@ -137,8 +135,9 @@ const InteractiveQuiz = () => {
 	if (quizQuery.isSuccess && quizProgress.isSuccess) {
 		const maxLimitReached =
 			quizQuery?.data?.attempts_allowed != 0 &&
-			quizProgress?.data[0]?.total_attempts >=
+			quizProgress?.data.data[0]?.total_attempts >=
 				quizQuery?.data?.attempts_allowed;
+
 		return (
 			<Container centerContent maxW="container.xl" py="16">
 				<Box bg="white" p={['5', null, '14']} shadow="box" w="full">
@@ -183,6 +182,7 @@ const InteractiveQuiz = () => {
 									<QuizStart
 										quizData={quizQuery.data}
 										onStartPress={onStartPress}
+										isDisabled={maxLimitReached}
 										isButtonLoading={startQuiz.isLoading}
 									/>
 								)}

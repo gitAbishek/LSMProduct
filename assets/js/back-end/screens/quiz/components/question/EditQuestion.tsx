@@ -126,7 +126,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 					<FormLabel>{__('Points', 'masteriyo')}</FormLabel>
 					<Controller
 						name="points"
-						defaultValue={questionData.points || 0}
+						defaultValue={questionData.points || 1}
 						rules={{
 							required: __(
 								'Please provide points for the question',

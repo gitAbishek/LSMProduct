@@ -74,7 +74,7 @@ class Question extends Model {
 		'answers'           => array(),
 		'answer_required'   => true,
 		'randomize'         => false,
-		'points'            => 0,
+		'points'            => 1,
 		'positive_feedback' => '',
 		'negative_feedback' => '',
 		'feedback'          => '',

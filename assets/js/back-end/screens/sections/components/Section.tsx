@@ -82,7 +82,7 @@ const Section: React.FC<Props> = (props) => {
 	const quizAPI = new API(urls.quizes);
 
 	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
-		onSuccess: (data: any) => {
+		onSuccess: () => {
 			onClose();
 			toast({
 				title: __('Lesson Deleted', 'masteriyo'),
@@ -94,7 +94,7 @@ const Section: React.FC<Props> = (props) => {
 	});
 
 	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
-		onSuccess: (data: any) => {
+		onSuccess: () => {
 			onClose();
 			toast({
 				title: __('Quiz Deleted', 'masteriyo'),

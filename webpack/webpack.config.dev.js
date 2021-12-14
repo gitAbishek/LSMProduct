@@ -95,6 +95,4 @@ module.exports = (env) => ({
 	].filter(Boolean),
 
 	resolve: baseConfig.resolver,
-
-	devtool: 'cheap-module-source-map',
 });

@@ -20,7 +20,7 @@ import {
 	Tabs,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { tabListStyles, tabStyles } from '../../../config/styles';
 import { QuizSchema as QuizSchemaOld } from '../../../schemas';
@@ -44,12 +44,17 @@ const QuizSettings: React.FC<Props> = (props) => {
 
 	const [hours, minutes] = convertMinutesToHours(quizData?.duration || 0);
 	const [attemptsDisplayValue, setAttemptsDisplayValue] = useState(
-		quizData?.attempts_allowed != 0 ? '1' : '0'
+		quizData && quizData?.attempts_allowed != 0 ? '1' : '0'
 	);
 
 	const [displayValue, setDisplayValue] = useState(
 		quizData?.questions_display_per_page != 0 ? '1' : '0'
 	);
+
+	// Default attempts allowed to no limit for newly added quiz.
+	useEffect(() => {
+		setValue('attempts_allowed', quizData?.attempts_allowed || 0);
+	}, [quizData?.attempts_allowed, setValue]);
 
 	return (
 		<Tabs orientation="vertical">
@@ -62,13 +67,13 @@ const QuizSettings: React.FC<Props> = (props) => {
 					<TabPanel>
 						<Stack direction="column" spacing="6">
 							<FormControl isInvalid={!!errors?.full_mark}>
-								<FormLabel>{__('Full Mark', 'masteriyo')}</FormLabel>
+								<FormLabel>{__('Full Point', 'masteriyo')}</FormLabel>
 								<Controller
 									name="full_mark"
 									defaultValue={quizData?.full_mark || 100}
 									rules={{
 										required: __(
-											'Full Mark is required for the quiz',
+											'Full Point is required for the quiz',
 											'masteriyo'
 										),
 									}}
@@ -88,13 +93,13 @@ const QuizSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl isInvalid={!!errors?.pass_mark}>
-								<FormLabel>{__('Pass Mark', 'masteriyo')}</FormLabel>
+								<FormLabel>{__('Pass Point', 'masteriyo')}</FormLabel>
 								<Controller
 									name="pass_mark"
 									defaultValue={quizData?.pass_mark || 40}
 									rules={{
 										required: __(
-											'Pass mark is required for the quiz',
+											'Pass Point is required for the quiz',
 											'masteriyo'
 										),
 									}}
@@ -195,7 +200,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 												onChange={() =>
 													setValue(
 														'attempts_allowed',
-														quizData?.attempts_allowed || 50
+														quizData?.attempts_allowed || 5
 													)
 												}>
 												{__('Limit', 'masteriyo')}
@@ -209,7 +214,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 
 												<Controller
 													name="attempts_allowed"
-													defaultValue={quizData?.attempts_allowed || 50}
+													defaultValue={quizData?.attempts_allowed || 5}
 													rules={{
 														required: __(
 															'Attempts allowed is required',
@@ -218,11 +223,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 													}}
 													render={({ field }) => (
 														<InputGroup>
-															<NumberInput
-																{...field}
-																defaultValue={quizData?.attempts_allowed || 50}
-																w="full"
-																min={1}>
+															<NumberInput {...field} w="full" min={1}>
 																<NumberInputField rounded="sm" />
 																<NumberInputStepper>
 																	<NumberIncrementStepper />

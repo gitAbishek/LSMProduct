@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const baseConfig = require('./config.base');
 const WebpackBar = require('webpackbar');
@@ -84,10 +83,7 @@ module.exports = (env) => ({
 			template: './assets/js/getting-started/index.html',
 		}),
 
-		new ReactRefreshWebpackPlugin({
-			overlay: false,
-		}),
-		new ErrorOverlayPlugin(),
+		new ReactRefreshWebpackPlugin(),
 		new Dotenv(),
 		new WebpackBar(),
 		new ForkTsCheckerPlugin({
@@ -99,8 +95,6 @@ module.exports = (env) => ({
 	].filter(Boolean),
 
 	resolve: baseConfig.resolver,
-
-	devServer: baseConfig.devServer,
 
 	devtool: 'cheap-module-source-map',
 });

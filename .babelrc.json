@@ -4,5 +4,6 @@
     "@babel/preset-react",
     "@babel/preset-typescript",
     "@dr.pogodin/babel-preset-svgr"
-  ]
+  ],
+  "plugins": ["@babel/plugin-transform-runtime"]
 }

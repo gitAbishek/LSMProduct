@@ -56,14 +56,11 @@ export const SkeletonEditCourse: React.FC = () => {
 };
 
 export const SkeletonCourseTaxonomy: React.FC = () => {
-	const lengths = [1, 2, 3, 4];
+	const lengths = [1, 2, 3];
 	return (
 		<>
 			{lengths.map((index) => (
 				<Tr key={index}>
-					<Td>
-						<SkeletonText noOfLines={1} />
-					</Td>
 					<Td>
 						<SkeletonText noOfLines={1} />
 					</Td>

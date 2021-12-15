@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	ButtonGroup,
 	IconButton,
@@ -58,26 +59,28 @@ const CategoryRow: React.FC<Props> = (props) => {
 							{__('Edit', 'masteriyo')}
 						</Button>
 					</RouterLink>
-					<Menu placement="bottom-end">
-						<MenuButton
-							as={IconButton}
-							icon={<BiDotsVerticalRounded />}
-							variant="outline"
-							rounded="sm"
-							fontSize="large"
-							size="xs"
-						/>
-						<MenuList>
-							<Link href={link} isExternal>
-								<MenuItem icon={<BiShow />}>
-									{__('View Category', 'masteriyo')}
+					<Box>
+						<Menu placement="bottom-end">
+							<MenuButton
+								as={IconButton}
+								icon={<BiDotsVerticalRounded />}
+								variant="outline"
+								rounded="sm"
+								fontSize="large"
+								size="xs"
+							/>
+							<MenuList>
+								<Link href={link} isExternal>
+									<MenuItem icon={<BiShow />}>
+										{__('View Category', 'masteriyo')}
+									</MenuItem>
+								</Link>
+								<MenuItem onClick={() => onDeletePress(id)} icon={<BiTrash />}>
+									{__('Delete', 'masteriyo')}
 								</MenuItem>
-							</Link>
-							<MenuItem onClick={() => onDeletePress(id)} icon={<BiTrash />}>
-								{__('Delete', 'masteriyo')}
-							</MenuItem>
-						</MenuList>
-					</Menu>
+							</MenuList>
+						</Menu>
+					</Box>
 				</ButtonGroup>
 			</Td>
 		</Tr>

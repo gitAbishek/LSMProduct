@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.3.2
+**Stable tag**: 1.3.3
 
 **License: GNU** General Public License v3.0
 
@@ -47,7 +47,17 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 
 # Changelog
 
+### 1.3.3 - 15-12-2021
+
+- Fix - Quiz result not showing after submitting a quiz.
+- Fix - Disable start quiz button on attempts limit reached.
+- Fix - Edit button and menu layout design issue on categories backend.
+- Tweak - By default, set question point to 1.
+- Tweak - By default, set attempts allowed to no limit on quiz setting.
+- Tweak - Renamed strings 'Full mark' and 'Pass mark' to 'Full point' and 'Pass Point' on quiz setting.
+
 ### 1.3.2 - 10-12-2021
+
 - Enhancement - Quiz Attempts Listing on the back-end.
 - Enhancement - Allow the administrator to change the instructor of the course.
 - Enhancement - Added users/me REST API endpoint.
@@ -62,6 +72,7 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 - Fix - Pagination button jumping up and down.
 
 ### 1.3.1 - 30-11-2021
+
 - Feature - Allow manual order creation from the backend by an administrator.
 - Enhancement - Added user course REST API.
 - Tweak - Load students and instructs list in descending order by ID.
@@ -69,6 +80,7 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 - Fix - Fatal error due to PHP dependency issue.
 
 ### 1.3.0 - 22-11-2021
+
 - Feature - Instructor registration system.
 - Feature - Instructor approval system.
 - Feature - Instructor listing in the backend.
@@ -79,6 +91,7 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 - Fix - Remove the static ANSWERED from the floating quiz timer in learn page.
 
 ### 1.2.1 - 12-11-2021
+
 - Enhancement - Added unlimited quiz attempt limit option.
 - Enhancement - Display courses page content in the courses list page.
 - Enhancement - Show completion icon to the completed lesson and quiz in the learn page.
@@ -87,20 +100,24 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 - Fix - Translation strings for quiz in learn page.
 
 ### 1.2.0 - 02-11-2021
+
 - Fix - Course update and delete when the PUT and DELETE HTTP methods are blocked.
 - Feature - Added students list on WordPress backend.
 - Feature - Added course categories shortcode [masteriyo_course_categories].
 
 ### 1.0.10 - 29-10-2021
+
 - Fix - Missing translation in learn page.
 - Fix - Standard paypal sandbox toggle issue.
 
 ### 1.0.9 - 26-10-2021
+
 - Fix - Add to cart button text filter in courses and single course page.
 - Fix - Backend order API listing issue when the course in order is deleted.
 - Tweak - Changed single course heading tag to h1.
 
 ### 1.0.8 - 22-10-2021
+
 - Tweak - Show admin error notice when assets are not built.
 - Tweak - Show admin error notice when autoload.php file does not exist.
 - Fix - Editor not typing issue.
@@ -108,6 +125,7 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 - Fix - Elementor width issue.
 
 ### 1.0.7 - 18-10-2021
+
 - Fix - Missing translations.
 - Fix - Course pricing setting for free option acting inconsistently.
 - Fix - Categories listing issue on add/edit course categories select option for categories greater than 20.
@@ -121,7 +139,7 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 - Enhancement - Added `masteriyo_courses` shortcode.
 - Enhancement - Added ability to switch to WordPress editor for courses.
 - Enhancement - Decreased the size of the "Add New Category" modal.
-- Fix -  Remove title hover effect while hovering course list card in courses archive page.
+- Fix - Remove title hover effect while hovering course list card in courses archive page.
 - Fix - Pagination alignment in the courses, categories, and orders backend list page.
 - Fix - Use of smaller image for course feature image.
 - Fix - Overflow of course single page sidebar.

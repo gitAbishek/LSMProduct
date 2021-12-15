@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
 Tested up to: 5.8.2
 Requires PHP: 7.0
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -196,6 +196,14 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.3.3 - 15-12-2021 =
+- Fix - Quiz result not showing after submitting a quiz.
+- Fix - Disable start quiz button on attempts limit reached.
+- Fix - Edit button and menu layout design issue on categories backend.
+- Tweak - By default, set question point to 1.
+- Tweak - By default, set attempts allowed to no limit on quiz setting.
+- Tweak - Renamed strings 'Full mark' and 'Pass mark' to 'Full point' and 'Pass Point' on quiz setting.
 
 = 1.3.2 - 10-12-2021 =
 - Enhancement - Quiz Attempts Listing on the back-end.

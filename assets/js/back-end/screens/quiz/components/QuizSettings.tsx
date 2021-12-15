@@ -20,7 +20,7 @@ import {
 	Tabs,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { tabListStyles, tabStyles } from '../../../config/styles';
 import { QuizSchema as QuizSchemaOld } from '../../../schemas';
@@ -50,11 +50,6 @@ const QuizSettings: React.FC<Props> = (props) => {
 	const [displayValue, setDisplayValue] = useState(
 		quizData?.questions_display_per_page != 0 ? '1' : '0'
 	);
-
-	// Default attempts allowed to no limit for newly added quiz.
-	useEffect(() => {
-		setValue('attempts_allowed', quizData?.attempts_allowed || 0);
-	}, [quizData?.attempts_allowed, setValue]);
 
 	return (
 		<Tabs orientation="vertical">
@@ -214,7 +209,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 
 												<Controller
 													name="attempts_allowed"
-													defaultValue={quizData?.attempts_allowed || 5}
+													defaultValue={quizData?.attempts_allowed || 0}
 													rules={{
 														required: __(
 															'Attempts allowed is required',

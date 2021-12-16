@@ -12,7 +12,7 @@ module.exports = (env) => ({
 	output: {
 		filename: '[name].js',
 		path: baseConfig.paths.output,
-		publicPath: 'http://localhost:3003/dist/',
+		publicPath: 'http://localhost:3000/dist',
 	},
 
 	module: {
@@ -86,19 +86,9 @@ module.exports = (env) => ({
 
 	resolve: baseConfig.resolver,
 	devServer: {
-		port: 3003,
 		headers: { 'Access-Control-Allow-Origin': '*' },
-		static: [path.resolve(__dirname, 'dist')],
-		proxy: {
-			'/': {
-				target: 'http://masteriyo.test/',
-				secure: false,
-				changeOrigin: true,
-				autoRewrite: true,
-				headers: {
-					Connection: 'keep-alive',
-				},
-			},
-		},
+		allowedHosts: ['masteriyo.test'],
+		host: 'localhost',
+		port: 3000,
 	},
 });

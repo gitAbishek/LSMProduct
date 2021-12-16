@@ -127,13 +127,13 @@ class ScriptStyle {
 		self::$scripts = apply_filters(
 			'masteriyo_enqueue_scripts',
 			array(
-				'dependencies'  => array(
-					'src'      => self::get_asset_url( "/assets/js/build/masteriyo-dependencies{$suffix}.js" ),
-					'context'  => array( 'admin', 'public' ),
-					'callback' => function() {
-						return masteriyo_is_admin_page() || masteriyo_is_learn_page();
-					},
-				),
+				// 'dependencies'  => array(
+				// 	'src'      => self::get_asset_url( "/assets/js/build/masteriyo-dependencies{$suffix}.js" ),
+				// 	'context'  => array( 'admin', 'public' ),
+				// 	'callback' => function() {
+				// 		return masteriyo_is_admin_page() || masteriyo_is_learn_page();
+				// 	},
+				// ),
 				'blocks'        => array(
 					'src'           => self::get_asset_url( "/assets/js/build/blocks{$suffix}.js" ),
 					'deps'          => array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-hooks' ),
@@ -142,7 +142,7 @@ class ScriptStyle {
 					'register_only' => true,
 				),
 				'admin'         => array(
-					'src'      => "http://localhost:8887/backend.js",
+					'src'      => "http://localhost:3000/dist/backend.js",
 					'deps'     => array( 'react', 'wp-data', 'wp-core-data', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',

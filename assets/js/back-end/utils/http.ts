@@ -1,5 +1,4 @@
 import axios from 'axios';
-import urls from '../constants/urls';
 
 const configProduction = {
 	//@ts-ignore
@@ -8,17 +7,6 @@ const configProduction = {
 		'Content-Type': 'application/json',
 		//@ts-ignore
 		'X-WP-Nonce': _MASTERIYO_.nonce,
-	},
-};
-
-const configDevelopment = {
-	baseURL: urls.base,
-	headers: {
-		'Content-Type': 'application/json',
-	},
-	auth: {
-		username: process.env.WORDPRESS_USERNAME || '',
-		password: process.env.WORDPRESS_PASSWORD || '',
 	},
 };
 

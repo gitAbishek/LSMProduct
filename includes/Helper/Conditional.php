@@ -736,3 +736,30 @@ if ( ! function_exists( 'masteriyo_is_admin_menus_visible' ) ) {
 		return apply_filters( 'masteriyo_is_admin_menus_visible', $is_visible );
 	}
 }
+
+
+if ( ! function_exists( 'masteriyo_is_development' ) ) {
+	/**
+	 * Return masteriyo development.
+	 *
+	 * @since X.X.X
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_development() {
+		return Constants::is_true( 'MASTERIYO_DEVELOPMENT' );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_is_production' ) ) {
+	/**
+	 * Return masteriyo development.
+	 *
+	 * @since X.X.X
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_production() {
+		return ! Constants::is_true( 'MASTERIYO_DEVELOPMENT' );
+	}
+}

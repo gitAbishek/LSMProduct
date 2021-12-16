@@ -29,6 +29,41 @@ define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
 
 use Masteriyo\Constants;
 
+/**
+ * Include the autoloader.
+ */
+require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+
+// Check whether assets are built or not.
+if ( masteriyo_is_production() && ! file_exists( dirname( __FILE__ ) . '/assets/js/build/masteriyo-backend.' . MASTERIYO_VERSION . '.js' ) ) {
+	add_action(
+		'admin_notices',
+		function() {
+			printf(
+				'<div class="notice notice-error is-dismissible"><p><strong>%s </strong>%s</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">%s</span></button></div>',
+				esc_html( 'Masteriyo:' ),
+				wp_kses_post( 'Assets are need to be built. Run <code>yarn && yarn build</code> from the wp-content/plugins/learning-management-system directory.', 'masteriyo' ),
+				esc_html__( 'Dismiss this notice.', 'masteriyo' )
+			);
+		}
+	);
+
+	add_action(
+		'admin_init',
+		function() {
+			deactivate_plugins( plugin_basename( MASTERIYO_PLUGIN_FILE ) );
+
+			if ( isset( $_GET['activate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				unset( $_GET['activate'] );
+			}
+		}
+	);
+
+	return;
+}
+
+
 // Check for the existence of autoloader file.
 if ( ! file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 	add_action(
@@ -58,10 +93,6 @@ if ( ! file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 	return;
 }
 
-/**
- * Include the autoloader.
- */
-require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 
 /**
  * Bootstrap the application.
@@ -83,35 +114,4 @@ function masteriyo( $class = 'app' ) {
 	global $masteriyo;
 
 	return empty( $class ) ? $masteriyo : $masteriyo->get( $class );
-}
-
-if ( !Constants::is_true( 'MASTERIYO_DEVELOPMENT') ) {
-	// Check whether assets are built or not.
-	if ( ! file_exists( dirname( __FILE__ ) . '/assets/js/build/masteriyo-backend.' . MASTERIYO_VERSION . '.js' ) ) {
-		add_action(
-			'admin_notices',
-			function() {
-				printf(
-					'<div class="notice notice-error is-dismissible"><p><strong>%s </strong>%s</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">%s</span></button></div>',
-					esc_html( 'Masteriyo:' ),
-					wp_kses_post( 'Assets are need to be built. Run <code>yarn && yarn build</code> from the wp-content/plugins/learning-management-system directory.', 'masteriyo' ),
-					esc_html__( 'Dismiss this notice.', 'masteriyo' )
-				);
-			}
-		);
-
-		add_action(
-			'admin_init',
-			function() {
-				deactivate_plugins( plugin_basename( MASTERIYO_PLUGIN_FILE ) );
-
-				if ( isset( $_GET['activate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					unset( $_GET['activate'] );
-				}
-			}
-		);
-
-		return;
-	}
 }

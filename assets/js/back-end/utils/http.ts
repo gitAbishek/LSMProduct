@@ -1,6 +1,5 @@
 import axios from 'axios';
 import urls from '../constants/urls';
-import { isProduction } from './helper';
 
 const configProduction = {
 	//@ts-ignore
@@ -23,7 +22,7 @@ const configDevelopment = {
 	},
 };
 
-const config = isProduction ? configProduction : configDevelopment;
+const config = configProduction;
 
 const http = axios.create(config);
 

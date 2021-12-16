@@ -142,7 +142,7 @@ class ScriptStyle {
 					'register_only' => true,
 				),
 				'admin'         => array(
-					'src'      => self::get_asset_url( "/assets/js/build/masteriyo-backend{$suffix}.js" ),
+					'src'      => "http://localhost:8887/backend.js",
 					'deps'     => array( 'react', 'wp-data', 'wp-core-data', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',

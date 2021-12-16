@@ -124,16 +124,24 @@ class ScriptStyle {
 	private static function init_scripts() {
 		$suffix = self::get_asset_suffix();
 
+		$admin_src = self::get_asset_url( "/assets/js/build/backend{$suffix}.js" );
+		$learn_src = self::get_asset_url( "/assets/js/build/masteriyo-interactive{$suffix}.js" );
+
+		if ( masteriyo_is_development() ) {
+			$admin_src = 'http://localhost:3000/dist/backend.js';
+			$learn_src = 'http://localhost:3000/dist/interactive.js';
+		}
+
 		self::$scripts = apply_filters(
 			'masteriyo_enqueue_scripts',
 			array(
-				// 'dependencies'  => array(
-				// 	'src'      => self::get_asset_url( "/assets/js/build/masteriyo-dependencies{$suffix}.js" ),
-				// 	'context'  => array( 'admin', 'public' ),
-				// 	'callback' => function() {
-				// 		return masteriyo_is_admin_page() || masteriyo_is_learn_page();
-				// 	},
-				// ),
+				'dependencies'  => array(
+					'src'      => self::get_asset_url( "/assets/js/build/masteriyo-dependencies{$suffix}.js" ),
+					'context'  => array( 'admin', 'public' ),
+					'callback' => function() {
+						return masteriyo_is_production() && ( masteriyo_is_admin_page() || masteriyo_is_learn_page() );
+					},
+				),
 				'blocks'        => array(
 					'src'           => self::get_asset_url( "/assets/js/build/blocks{$suffix}.js" ),
 					'deps'          => array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-hooks' ),
@@ -142,7 +150,7 @@ class ScriptStyle {
 					'register_only' => true,
 				),
 				'admin'         => array(
-					'src'      => "http://localhost:3000/dist/backend.js",
+					'src'      => $admin_src,
 					'deps'     => array( 'react', 'wp-data', 'wp-core-data', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
@@ -175,11 +183,13 @@ class ScriptStyle {
 					'callback' => 'masteriyo_is_checkout_page',
 				),
 				'learn'         => array(
-					'src'     => self::get_asset_url( "/assets/js/build/masteriyo-interactive{$suffix}.js" ),
-					'deps'    => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
-					'version' => self::get_version(),
-					'context' => 'public',
+					'src'      => $learn_src,
+					'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
+					'version'  => self::get_version(),
+					'context'  => 'public',
+					'callback' => 'masteriyo_is_learn_page',
 				),
+
 			)
 		);
 	}

@@ -78,7 +78,7 @@ const AllCourses = () => {
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header
 				thirdBtn={{
-					label: __('Working on dev', 'masteriyo'),
+					label: __('Add New Course', 'masteriyo'),
 					action: () => history.push(routes.courses.add),
 					icon: <Icon as={BiPlus} fontSize="md" />,
 				}}>

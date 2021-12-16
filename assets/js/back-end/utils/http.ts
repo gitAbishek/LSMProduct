@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const configProduction = {
+const http = axios.create({
 	//@ts-ignore
 	baseURL: _MASTERIYO_.rootApiUrl,
 	headers: {
@@ -8,10 +8,6 @@ const configProduction = {
 		//@ts-ignore
 		'X-WP-Nonce': _MASTERIYO_.nonce,
 	},
-};
-
-const config = configProduction;
-
-const http = axios.create(config);
+});
 
 export default http;

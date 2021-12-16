@@ -12,6 +12,7 @@ module.exports = (env) => ({
 	output: {
 		filename: '[name].js',
 		path: baseConfig.paths.output,
+		publicPath: 'http://localhost:3003/dist/',
 	},
 
 	module: {
@@ -65,24 +66,6 @@ module.exports = (env) => ({
 	},
 
 	plugins: [
-		new HtmlWebpackPlugin({
-			filename: 'index.html',
-			chunks: ['backend'],
-			template: './assets/js/back-end/index.html',
-		}),
-
-		new HtmlWebpackPlugin({
-			filename: 'interactive.html',
-			chunks: ['interactive'],
-			template: './assets/js/interactive/index.html',
-		}),
-
-		new HtmlWebpackPlugin({
-			filename: 'getting-started.html',
-			chunks: ['gettingStarted'],
-			template: './assets/js/getting-started/index.html',
-		}),
-
 		new ReactRefreshWebpackPlugin(),
 		new Dotenv(),
 		new WebpackBar(),
@@ -94,5 +77,28 @@ module.exports = (env) => ({
 		}),
 	].filter(Boolean),
 
+	// optimization: {
+	//   splitChunks: {
+	//     // include all types of chunks
+	//     chunks: 'all',
+	//   },
+	// },
+
 	resolve: baseConfig.resolver,
+	devServer: {
+		port: 3003,
+		headers: { 'Access-Control-Allow-Origin': '*' },
+		static: [path.resolve(__dirname, 'dist')],
+		proxy: {
+			'/': {
+				target: 'http://masteriyo.test/',
+				secure: false,
+				changeOrigin: true,
+				autoRewrite: true,
+				headers: {
+					Connection: 'keep-alive',
+				},
+			},
+		},
+	},
 });

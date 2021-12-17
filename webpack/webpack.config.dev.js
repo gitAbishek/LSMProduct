@@ -1,4 +1,3 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const baseConfig = require('./config.base');
@@ -77,17 +76,10 @@ module.exports = (env) => ({
 		}),
 	].filter(Boolean),
 
-	// optimization: {
-	//   splitChunks: {
-	//     // include all types of chunks
-	//     chunks: 'all',
-	//   },
-	// },
-
 	resolve: baseConfig.resolver,
 	devServer: {
 		headers: { 'Access-Control-Allow-Origin': '*' },
-		allowedHosts: ['masteriyo.test'],
+		allowedHosts: [env.WORDPRESS_URL],
 		host: 'localhost',
 		port: 3000,
 	},

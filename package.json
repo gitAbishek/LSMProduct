@@ -63,7 +63,7 @@
     "@wordpress/babel-plugin-makepot": "4.0.1",
     "@wordpress/babel-preset-default": "^4.18.0",
     "@wordpress/data": "6.1.4",
-    "@wordpress/dependency-extraction-webpack-plugin": "2.8.0",
+    "@wordpress/dependency-extraction-webpack-plugin": "3.2.1",
     "autoprefixer": "^9",
     "babel-loader": "^8.1.0",
     "browser-sync": "2.26.14",

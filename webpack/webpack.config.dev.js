@@ -64,7 +64,6 @@ module.exports = () => ({
 			},
 		],
 	},
-	devtool: 'cheap-module-source-map',
 
 	plugins: [
 		new ReactRefreshWebpackPlugin({
@@ -80,10 +79,12 @@ module.exports = () => ({
 		new WebpackBar(),
 	].filter(Boolean),
 
+	resolve: baseConfig.resolver,
 	devServer: {
 		headers: { 'Access-Control-Allow-Origin': '*' },
 		allowedHosts: DotEnv.parsed.WORDPRESS_URL.replace('http://', ''),
 		host: 'localhost',
 		port: 3000,
 	},
+	devtool: 'eval',
 });

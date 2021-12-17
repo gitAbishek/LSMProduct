@@ -1,11 +1,11 @@
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const DotEnv = require('dotenv').config();
+const WebPackDotEnv = require('dotenv-webpack');
 const baseConfig = require('./config.base');
-const WebpackBar = require('webpackbar');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
 
-module.exports = (env) => ({
+module.exports = () => ({
 	entry: baseConfig.paths.entry,
 
 	output: {
@@ -66,8 +66,7 @@ module.exports = (env) => ({
 
 	plugins: [
 		new ReactRefreshWebpackPlugin(),
-		new Dotenv(),
-		new WebpackBar(),
+		new WebPackDotEnv(),
 		new ForkTsCheckerPlugin({
 			async: true,
 		}),
@@ -79,7 +78,7 @@ module.exports = (env) => ({
 	resolve: baseConfig.resolver,
 	devServer: {
 		headers: { 'Access-Control-Allow-Origin': '*' },
-		allowedHosts: [env.WORDPRESS_URL],
+		allowedHosts: DotEnv.parsed.WORDPRESS_URL.replace('http://', ''),
 		host: 'localhost',
 		port: 3000,
 	},

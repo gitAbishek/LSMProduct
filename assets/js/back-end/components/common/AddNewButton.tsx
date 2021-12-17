@@ -1,7 +1,6 @@
 import { Button, ButtonProps, Icon } from '@chakra-ui/react';
 import React, { forwardRef } from 'react';
 import { BiPlus } from 'react-icons/bi';
-import { isDevelopment } from '../../utils/helper';
 
 const AddNewButton = forwardRef<HTMLButtonElement, ButtonProps>(
 	(props, ref) => {
@@ -33,8 +32,6 @@ const AddNewButton = forwardRef<HTMLButtonElement, ButtonProps>(
 	}
 );
 
-if (isDevelopment) {
-	AddNewButton.displayName = 'AddNewButton';
-}
+AddNewButton.displayName = 'AddNewButton';
 
 export default AddNewButton;

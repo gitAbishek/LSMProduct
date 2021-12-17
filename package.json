@@ -86,7 +86,7 @@
     "gulp-uglify": "3.0.2",
     "gulp-zip": "5.1.0",
     "husky": "6.0.0",
-    "mini-css-extract-plugin": "^2.1.0",
+    "panic-overlay": "1.0.51",
     "prettier": "2.3.1",
     "prettier-plugin-organize-imports": "2.2.0",
     "react-refresh": "^0.11.0",
@@ -102,10 +102,10 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.4.0",
     "webpack-mode": "1.0.2",
-    "webpackbar": "5.0.0-3"
+    "webpackbar": "5.0.2"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --hot --open --config ./webpack/webpack.config.dev.js",
+    "start": "webpack-dev-server --mode development --hot --config ./webpack/webpack.config.dev.js",
     "build": "webpack --mode production --config ./webpack/webpack.config.prod.js && yarn build:blocks && gulp build",
     "build:analyze": "webpack --mode production --env.addons=bundleanalyzer --config ./webpack/webpack.config.prod.js",
     "dev:blocks": "webpack --watch --mode development --config ./webpack/webpack.blocks.dev.js",

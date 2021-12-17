@@ -4,6 +4,7 @@ const WebPackDotEnv = require('dotenv-webpack');
 const baseConfig = require('./config.base');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
+const WebpackBar = require('webpackbar');
 
 module.exports = () => ({
 	entry: baseConfig.paths.entry,
@@ -63,9 +64,12 @@ module.exports = () => ({
 			},
 		],
 	},
+	devtool: 'cheap-module-source-map',
 
 	plugins: [
-		new ReactRefreshWebpackPlugin(),
+		new ReactRefreshWebpackPlugin({
+			overlay: false,
+		}),
 		new WebPackDotEnv(),
 		new ForkTsCheckerPlugin({
 			async: true,
@@ -73,9 +77,9 @@ module.exports = () => ({
 		new EslintPlugin({
 			extensions: ['js', 'jsx', 'ts', 'tsx'],
 		}),
+		new WebpackBar(),
 	].filter(Boolean),
 
-	resolve: baseConfig.resolver,
 	devServer: {
 		headers: { 'Access-Control-Allow-Origin': '*' },
 		allowedHosts: DotEnv.parsed.WORDPRESS_URL.replace('http://', ''),

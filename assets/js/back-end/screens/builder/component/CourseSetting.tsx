@@ -31,7 +31,6 @@ import { useQuery } from 'react-query';
 import urls from '../../../constants/urls';
 import { CourseDataMap } from '../../../types/course';
 import API from '../../../utils/api';
-import { isProduction } from '../../../utils/helper';
 import { convertMinutesToHours } from '../../../utils/math';
 import { decodeEntity } from '../../../utils/utils';
 import ChangeInstructorSetting from './ChangeInstructorSetting';
@@ -130,9 +129,8 @@ const CourseSetting: React.FC<Props> = (props) => {
 									</Center>
 								) : (
 									<Stack direction="column" spacing="8">
-										{isProduction && (
-											<ChangeInstructorSetting courseData={courseData} />
-										)}
+										<ChangeInstructorSetting courseData={courseData} />
+
 										<FormControl>
 											<FormLabel>{__('Difficulty', 'masteriyo')}</FormLabel>
 											<Select

@@ -45,6 +45,8 @@ A complete solution to create and sell online courses. The plugin is powered by 
 
 No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
+# Contribute to Masteriyo
+Want to contribute? Please have a look at [Contributer Guidelines](docs/contributer-guide.md)
 # Changelog
 
 ### 1.3.3 - 15-12-2021

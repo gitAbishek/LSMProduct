@@ -124,7 +124,7 @@ class ScriptStyle {
 	private static function init_scripts() {
 		$suffix = self::get_asset_suffix();
 
-		$admin_src = self::get_asset_url( "/assets/js/build/backend{$suffix}.js" );
+		$admin_src = self::get_asset_url( "/assets/js/build/masteriyo-backend{$suffix}.js" );
 		$learn_src = self::get_asset_url( "/assets/js/build/masteriyo-interactive{$suffix}.js" );
 
 		if ( masteriyo_is_development() ) {

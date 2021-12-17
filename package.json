@@ -86,6 +86,7 @@
     "gulp-uglify": "3.0.2",
     "gulp-zip": "5.1.0",
     "husky": "6.0.0",
+    "mini-css-extract-plugin": "2.4.5",
     "panic-overlay": "1.0.51",
     "prettier": "2.3.1",
     "prettier-plugin-organize-imports": "2.2.0",

@@ -10,41 +10,37 @@ class MediaAPI {
 
 	async get(id: number) {
 		return http({
-			url: this.uri + id,
+			path: this.uri + id,
 			method: 'GET',
-		}).then((res) => res.data);
+		}).then((res: any) => res);
 	}
 
 	async store(data: any) {
 		return http({
-			url: this.uri,
+			path: this.uri,
 			method: 'POST',
 			data: data,
 			headers: {
 				'Content-Type': 'multipart/form-data',
 			},
-		}).then((res) => res.data);
+		}).then((res: any) => res);
 	}
 
 	async delete(id: number) {
 		return http({
-			url: this.uri + id,
+			path: this.uri + id + '?force=true',
 			method: 'POST',
 			headers: {
 				'x-http-method-override': 'DELETE',
 			},
-			params: {
-				force: true,
-			},
-		}).then((res) => res.data);
+		}).then((res: any) => res);
 	}
 
 	async list(query?: any) {
 		return http({
-			url: this.uri,
+			path: query ? `${this.uri}?${query}` : this.uri,
 			method: 'GET',
-			params: query,
-		}).then((res) => res);
+		}).then((res: any) => res);
 	}
 }
 

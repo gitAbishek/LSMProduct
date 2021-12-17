@@ -9,64 +9,61 @@ class API {
 
 	async list(query?: any) {
 		return http({
-			url: this.uri,
+			path: query ? `${this.uri}?${query}` : this.uri,
 			method: 'get',
-			params: query,
-		}).then((res) => res.data);
+		}).then((res: any) => res);
 	}
 
 	async get(id: number) {
 		return http({
-			url: this.uri + id,
+			path: this.uri + id,
 			method: 'get',
-		}).then((res) => res.data);
+		}).then((res: any) => res);
 	}
 
 	async store(data: any) {
 		return http({
-			url: this.uri,
+			path: this.uri,
 			method: 'post',
 			data: data,
-		}).then((res) => res.data);
+		}).then((res: any) => res);
 	}
 
 	async update(id: number, data: any) {
 		return http({
-			url: this.uri + id,
+			path: this.uri + id,
 			method: 'post',
 			headers: {
 				'x-http-method-override': 'PUT',
 			},
 			data: data,
-		}).then((res) => res.data);
+		}).then((res: any) => res);
 	}
 
 	async delete(id: number, params?: any) {
 		return http({
-			url: this.uri + id,
+			path: params ? `${this.uri}${id}?${params}` : this.uri + id,
 			method: 'post',
 			headers: {
 				'x-http-method-override': 'DELETE',
 			},
-
-			params: params,
-		}).then((res) => res.data);
+		}).then((res: any) => res);
 	}
 
 	async start(id: number) {
 		return http({
-			url: this.uri + 'start_quiz',
+			path: this.uri + 'start_quiz',
 			data: { id },
 			method: 'post',
-		}).then((res) => res.data);
+		}).then((res: any) => res);
 	}
 
 	async check(id: number, data: any) {
 		return http({
-			url: this.uri + 'check_answers',
+			path: this.uri + 'check_answers',
 			data: { id, data },
 			method: 'post',
-		}).then((res) => res.data);
+		}).then((res: any) => res);
 	}
 }
 

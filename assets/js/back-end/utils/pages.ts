@@ -10,9 +10,9 @@ class PagesAPI {
 
 	async list() {
 		return http({
-			url: this.uri,
-			method: 'GET',
-		}).then((res) => res.data);
+			path: this.uri,
+			method: 'get',
+		}).then((res: any) => res);
 	}
 }
 

@@ -1,4 +1,3 @@
-import { isProduction } from './helper';
 import http from './http';
 
 class API {
@@ -35,11 +34,9 @@ class API {
 		return http({
 			url: this.uri + id,
 			method: 'post',
-			headers: isProduction
-				? {
-						'x-http-method-override': 'PUT',
-				  }
-				: '',
+			headers: {
+				'x-http-method-override': 'PUT',
+			},
 			data: data,
 		}).then((res) => res.data);
 	}
@@ -48,11 +45,10 @@ class API {
 		return http({
 			url: this.uri + id,
 			method: 'post',
-			headers: isProduction
-				? {
-						'x-http-method-override': 'DELETE',
-				  }
-				: '',
+			headers: {
+				'x-http-method-override': 'DELETE',
+			},
+
 			params: params,
 		}).then((res) => res.data);
 	}

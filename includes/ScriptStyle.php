@@ -75,6 +75,9 @@ class ScriptStyle {
 
 		// Remove third party styles from learn page.
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_styles_scripts_in_learn_page' ), PHP_INT_MAX );
+
+		// Remove react on development
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'remove_styles_scripts_in_learn_page' ), PHP_INT_MAX );
 	}
 
 	/**
@@ -192,6 +195,7 @@ class ScriptStyle {
 
 			)
 		);
+
 	}
 
 	/**
@@ -797,6 +801,38 @@ class ScriptStyle {
 		foreach ( $wp_styles->queue as $handle ) {
 			if ( ! in_array( $handle, $whitelist, true ) ) {
 				wp_dequeue_style( $handle );
+			}
+		}
+	}
+
+	/**
+	 * Remove react in admin page.
+	 *
+	 * @since X.X.X
+	 * @return void
+	 */
+	public static function remove_styles_scripts_in_admin_page() {
+		global $wp_scripts;
+
+		// Bail early if the page is not admin.
+		if ( ! masteriyo_is_admin_page() ) {
+			return;
+		}
+
+		$blacklist = apply_filters(
+			'masteriyo_whitelist_scripts_learn_page',
+			array( 'react' )
+		);
+
+		foreach ( $wp_scripts->registered as $script ) {
+			if ( in_array( $script->handle, $blacklist, true ) ) {
+				wp_deregister_script( $script->handle );
+			}
+		}
+
+		foreach ( $wp_scripts->queue as $handle ) {
+			if ( in_array( $handle, $blacklist, true ) ) {
+				wp_dequeue_script( $handle );
 			}
 		}
 	}

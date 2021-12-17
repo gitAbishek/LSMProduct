@@ -5,6 +5,7 @@ const baseConfig = require('./config.base');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
 const WebpackBar = require('webpackbar');
+const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 
 module.exports = () => ({
 	entry: baseConfig.paths.entry,
@@ -73,6 +74,7 @@ module.exports = () => ({
 		new ForkTsCheckerPlugin({
 			async: true,
 		}),
+		new DependencyExtractionWebpackPlugin(),
 		new EslintPlugin({
 			extensions: ['js', 'jsx', 'ts', 'tsx'],
 		}),
@@ -86,5 +88,5 @@ module.exports = () => ({
 		host: 'localhost',
 		port: 3000,
 	},
-	devtool: 'eval',
+	devtool: 'source-map',
 });

@@ -1,5 +1,6 @@
 import urls from '../constants/urls';
 import http from './http';
+import { formatParams } from './utils';
 
 class MediaAPI {
 	uri: string;
@@ -38,7 +39,7 @@ class MediaAPI {
 
 	async list(query?: any) {
 		return http({
-			path: query ? `${this.uri}?${query}` : this.uri,
+			path: query ? `${this.uri}?${formatParams(query)}` : this.uri,
 			method: 'GET',
 		}).then((res: any) => res);
 	}

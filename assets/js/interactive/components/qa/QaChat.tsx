@@ -21,6 +21,9 @@ import API from '../../../back-end/utils/api';
 import { QuestionAnswerSchema } from '../../schemas';
 import Message from './Message';
 
+/*
+TODO: implement infinite scroll on chat
+*/
 interface Props {
 	isOpen: boolean;
 	onBackPress: any;

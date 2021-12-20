@@ -32,6 +32,10 @@ import QaChat from './QaChat';
 // @ts-ignore
 const myAccountUrl = window._MASTERIYO_.urls.account;
 
+/*
+TODO: implement infinite scroll on question list
+*/
+
 const QuestionList: React.FC = () => {
 	const { courseId }: any = useParams();
 	const toast = useToast();

@@ -67,33 +67,6 @@ module.exports = () => ({
 	},
 
 	plugins: [
-<<<<<<< HEAD
-=======
-		new HtmlWebpackPlugin({
-			filename: 'index.html',
-			chunks: ['backend'],
-			template: './assets/js/back-end/index.html',
-		}),
-
-		new HtmlWebpackPlugin({
-			filename: 'interactive.html',
-			chunks: ['interactive'],
-			template: './assets/js/interactive/index.html',
-		}),
-
-		new HtmlWebpackPlugin({
-			filename: 'getting-started.html',
-			chunks: ['gettingStarted'],
-			template: './assets/js/getting-started/index.html',
-		}),
-
-		new HtmlWebpackPlugin({
-			filename: 'account.html',
-			chunks: ['account'],
-			template: './assets/js/account/index.html',
-		}),
-
->>>>>>> 18723e19 (Setup account page and its development)
 		new ReactRefreshWebpackPlugin({
 			overlay: false,
 		}),

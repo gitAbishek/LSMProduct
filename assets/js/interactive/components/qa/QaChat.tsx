@@ -41,6 +41,7 @@ const QaChat: React.FC<Props> = (props) => {
 			qaAPI.list({
 				course_id: courseId,
 				parent: chatData.parentId,
+				per_page: -1,
 			}),
 		{
 			refetchInterval: 60000,

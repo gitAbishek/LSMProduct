@@ -57,6 +57,7 @@ const QuestionList: React.FC = () => {
 			qaAPI.list({
 				course_id: courseId,
 				parent: 0,
+				per_page: -1,
 			}),
 		{
 			useErrorBoundary: false,

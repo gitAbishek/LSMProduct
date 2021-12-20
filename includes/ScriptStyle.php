@@ -210,12 +210,22 @@ class ScriptStyle {
 				'public'       => array(
 					'src'     => self::get_asset_url( "/assets/css/public{$suffix}.css" ),
 					'has_rtl' => false,
-					'context' => array( 'public', 'blocks' ),
+					'context' => 'public',
 				),
 				'dependencies' => array(
 					'src'     => self::get_asset_url( '/assets/js/build/masteriyo-dependencies.css' ),
 					'has_rtl' => false,
 					'context' => 'admin',
+				),
+				'block'        => array(
+					'src'      => self::get_asset_url( "/assets/css/block{$suffix}.css" ),
+					'has_rtl'  => false,
+					'context'  => 'admin',
+					'callback' => function() {
+						$screen = get_current_screen();
+
+						return $screen && $screen->is_block_editor();
+					},
 				),
 			)
 		);

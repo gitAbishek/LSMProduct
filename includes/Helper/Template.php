@@ -320,11 +320,11 @@ function_exists( 'add_action' ) && add_action( 'the_post', 'masteriyo_setup_cour
  */
 function masteriyo_add_body_class( $classes, $class ) {
 	if ( masteriyo_is_archive_course_page() ) {
-		$classes[] = 'masteriyo-courses-page';
+		$classes[] = 'masteriyo masteriyo-courses-page';
 	} elseif ( masteriyo_is_learn_page() ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$classes[] = 'masteriyo-interactive-page';
+		$classes[] = 'masteriyo masteriyo-interactive-page';
 	}
-	$classes[] = 'masteriyo';
+
 
 	return $classes;
 }
@@ -340,7 +340,7 @@ if ( ! function_exists( 'masteriyo_add_admin_body_class' ) ) {
 	 * @return string
 	 */
 	function masteriyo_add_admin_body_class( $classes ) {
-		return $classes . ' masteriyo ';
+		return $classes;
 	}
 }
 

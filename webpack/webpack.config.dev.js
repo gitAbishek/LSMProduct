@@ -88,5 +88,5 @@ module.exports = () => ({
 		host: 'localhost',
 		port: 3000,
 	},
-	devtool: 'eval',
+	devtool: 'cheap-module-source-map',
 });

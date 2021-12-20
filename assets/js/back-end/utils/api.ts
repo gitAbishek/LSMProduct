@@ -17,7 +17,7 @@ class API {
 
 	async get(id?: number | any) {
 		return http({
-			url: id ? this.uri + id : this.uri,
+			path: id ? this.uri + id : this.uri,
 			method: 'get',
 		}).then((res: any) => res);
 	}

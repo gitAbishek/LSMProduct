@@ -10,5 +10,19 @@
   "typescript.preferences.jsxAttributeCompletionStyle": "braces",
   "javascript.preferences.jsxAttributeCompletionStyle": "braces",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "intelephense.stubs": [
+    "Core",
+    "standard",
+    "xdebug",
+    "superglobals",
+    "crypto",
+    "mcrypt",
+    "ctype",
+    "zend",
+    "wordpress",
+    "pcre",
+    "json",
+    "date",
+  ],
 }

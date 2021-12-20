@@ -124,12 +124,14 @@ class ScriptStyle {
 	private static function init_scripts() {
 		$suffix = self::get_asset_suffix();
 
-		$admin_src = self::get_asset_url( "/assets/js/build/masteriyo-backend{$suffix}.js" );
-		$learn_src = self::get_asset_url( "/assets/js/build/masteriyo-interactive{$suffix}.js" );
+		$account_src = self::get_asset_url( "/assets/js/build/masteriyo-account{$suffix}.js" );
+		$admin_src   = self::get_asset_url( "/assets/js/build/masteriyo-backend{$suffix}.js" );
+		$learn_src   = self::get_asset_url( "/assets/js/build/masteriyo-interactive{$suffix}.js" );
 
 		if ( masteriyo_is_development() ) {
-			$admin_src = 'http://localhost:3000/dist/backend.js';
-			$learn_src = 'http://localhost:3000/dist/interactive.js';
+			$account_src = 'http://localhost:3000/dist/account.js';
+			$admin_src   = 'http://localhost:3000/dist/backend.js';
+			$learn_src   = 'http://localhost:3000/dist/interactive.js';
 		}
 
 		self::$scripts = apply_filters(
@@ -160,12 +162,12 @@ class ScriptStyle {
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_single_course_page',
 				),
-				'edit-account'  => array(
-					'src'      => self::get_asset_url( "/assets/js/build/edit-account{$suffix}.js" ),
-					'deps'     => array( 'jquery' ),
-					'version'  => self::get_version(),
-					'context'  => 'public',
-					'callback' => 'masteriyo_is_edit_account_page',
+				'account'       => array(
+					'src'     => $account_src,
+					'deps'    => array( 'react', 'react-dom', 'wp-api-fetch', 'wp-i18n', 'wp-polyfill' ),
+					'version' => self::get_version(),
+					'context' => 'public',
+					// 'callback' => 'masteriyo_is_account_page',
 				),
 				'login-form'    => array(
 					'src'      => self::get_asset_url( "/assets/js/build/login-form{$suffix}.js" ),
@@ -705,10 +707,11 @@ class ScriptStyle {
 		self::$localized_scripts = apply_filters(
 			'masteriyo_localized_public_scripts',
 			array(
-				'edit-account'  => array(
-					'name' => 'masteriyo_data',
+				'account'       => array(
+					'name' => '_MASTERIYO_',
+
 					'data' => array(
-						'rootApiUrl'      => esc_url_raw( rest_url() ),
+						'rootApiUrl'      => esc_url_raw( untrailingslashit( rest_url() ) ),
 						'current_user_id' => get_current_user_id(),
 						'nonce'           => wp_create_nonce( 'wp_rest' ),
 						'labels'          => array(

@@ -24,6 +24,7 @@ import { useForm } from 'react-hook-form';
 import { BiChevronRight, BiSearch } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { useOnType } from 'use-ontype';
 import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
 import { QuestionAnswerSchema } from '../../schemas';
@@ -38,6 +39,7 @@ TODO: implement infinite scroll on question list
 
 const QuestionList: React.FC = () => {
 	const { courseId }: any = useParams();
+	const [searchQuery, setSearchQuery] = useState<string>();
 	const toast = useToast();
 	const queryClient = useQueryClient();
 	const [chatData, setChatData] = useState<any>(null);
@@ -46,7 +48,7 @@ const QuestionList: React.FC = () => {
 		register,
 		reset,
 		formState: { errors },
-	} = useForm<{ content: string }>();
+	} = useForm<{ content: string; search: string }>();
 
 	const qaAPI = new API(urls.qa);
 
@@ -56,18 +58,29 @@ const QuestionList: React.FC = () => {
 	const { isOpen: isChatOpen, onToggle: onChatToggle } = useDisclosure();
 
 	const qaQuery = useQuery(
-		[`qa${courseId}`, courseId],
+		[`qa${courseId}`, courseId, searchQuery],
 		() =>
 			qaAPI.list({
 				course_id: courseId,
 				parent: 0,
 				per_page: -1,
+				search: searchQuery,
 			}),
 		{
 			useErrorBoundary: false,
 			retry: false,
 			retryOnMount: false,
+			keepPreviousData: true,
 		}
+	);
+
+	const onSearchInput = useOnType(
+		{
+			onTypeFinish: (val: string) => {
+				setSearchQuery(val);
+			},
+		},
+		800
 	);
 
 	const addNewQuestion = useMutation(
@@ -115,10 +128,14 @@ const QuestionList: React.FC = () => {
 					justify="space-between"
 					transform={`translateX(${isListOpen ? '0' : '-100%'})`}>
 					<Stack direction="column" spacing="0" overflow="hidden">
-						<Box as="form" action="" p="4">
+						<Box p="4">
 							<FormControl>
 								<InputGroup>
-									<Input placeholder="Search a Question" />
+									<Input
+										defaultValue={searchQuery}
+										placeholder={__('Search a Question', 'masteriyo')}
+										{...onSearchInput}
+									/>
 									<InputRightElement>
 										<Icon as={BiSearch} />
 									</InputRightElement>
@@ -126,48 +143,50 @@ const QuestionList: React.FC = () => {
 							</FormControl>
 						</Box>
 						<Stack direction="column" spacing="0" flex="1" overflowY="auto">
-							{qaQuery.data.map((question: QuestionAnswerSchema) => (
-								<Link
-									key={question.id}
-									_hover={{
-										textDecor: 'none',
-										bg: 'blue.50',
-										color: 'blue.500',
-										'.chakra-icon': {
-											transform: 'translateX(5px)',
-										},
-									}}>
-									<Stack
-										direction="row"
-										align="center"
-										justify="space-between"
-										spacing="4"
-										borderBottom="1px"
-										borderBottomColor="gray.100"
-										px="4"
-										py="2"
-										onClick={() =>
-											onQuestionPress(
-												question.id,
-												question.content,
-												question.answers_count
-											)
-										}>
-										<Stack direction="column" spacing="2">
-											<Heading fontSize="sm">{question.content}</Heading>
-											<Text fontSize="x-small" color="gray.500">
-												{question.answers_count + __(' Answers', 'masteriyo')}
-											</Text>
+							{qaQuery.data.map(
+								(question: QuestionAnswerSchema, index: number) => (
+									<Link
+										key={index}
+										_hover={{
+											textDecor: 'none',
+											bg: 'blue.50',
+											color: 'blue.500',
+											'.chakra-icon': {
+												transform: 'translateX(5px)',
+											},
+										}}>
+										<Stack
+											direction="row"
+											align="center"
+											justify="space-between"
+											spacing="4"
+											borderBottom="1px"
+											borderBottomColor="gray.100"
+											px="4"
+											py="2"
+											onClick={() =>
+												onQuestionPress(
+													question.id,
+													question.content,
+													question.answers_count
+												)
+											}>
+											<Stack direction="column" spacing="2">
+												<Heading fontSize="sm">{question.content}</Heading>
+												<Text fontSize="x-small" color="gray.500">
+													{question.answers_count + __(' Answers', 'masteriyo')}
+												</Text>
+											</Stack>
+											<Icon
+												transition="all 0.35s ease-in-out"
+												as={BiChevronRight}
+												fontSize="x-large"
+												color="gray.600"
+											/>
 										</Stack>
-										<Icon
-											transition="all 0.35s ease-in-out"
-											as={BiChevronRight}
-											fontSize="x-large"
-											color="gray.600"
-										/>
-									</Stack>
-								</Link>
-							))}
+									</Link>
+								)
+							)}
 						</Stack>
 					</Stack>
 					<form onSubmit={handleSubmit(onSubmit)}>

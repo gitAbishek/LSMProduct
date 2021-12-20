@@ -1,4 +1,5 @@
 import http from './http';
+import { formatParams } from './utils';
 
 class API {
 	uri: string;
@@ -9,12 +10,12 @@ class API {
 
 	async list(query?: any) {
 		return http({
-			path: query ? `${this.uri}?${query}` : this.uri,
+			path: query ? `${this.uri}?${formatParams(query)}` : this.uri,
 			method: 'get',
 		}).then((res: any) => res);
 	}
 
-	async get(id: number) {
+	async get(id?: number) {
 		return http({
 			path: this.uri + id,
 			method: 'get',
@@ -42,7 +43,7 @@ class API {
 
 	async delete(id: number, params?: any) {
 		return http({
-			path: params ? `${this.uri}${id}?${params}` : this.uri + id,
+			path: params ? `${this.uri}${id}?${formatParams(params)}` : this.uri + id,
 			method: 'post',
 			headers: {
 				'x-http-method-override': 'DELETE',

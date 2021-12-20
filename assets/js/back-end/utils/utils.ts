@@ -1,3 +1,5 @@
+import { stringify } from 'query-string';
+
 /**
  * repr :: gets the string representation of `arg`
  * @param {} arg :: unknown function argument
@@ -254,4 +256,11 @@ export const getLocalTime = (date: string) => {
 export const getFileNameFromURL = (url: string) => {
 	const fileNameWithType = url.substring(url.lastIndexOf('/') + 1);
 	return fileNameWithType;
+};
+
+export const formatParams = (params: any) => {
+	if (isObject(params)) {
+		return stringify(params);
+	}
+	return params;
 };

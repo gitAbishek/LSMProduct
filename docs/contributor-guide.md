@@ -1,4 +1,4 @@
-# Contributer Guidelines
+# Contributor Guidelines
 Welcome to Masteriyo Learning Management System. 
 
 # How can I contribute?

@@ -184,7 +184,7 @@ class ScriptStyle {
 				),
 				'learn'         => array(
 					'src'      => $learn_src,
-					'deps'     => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
+					'deps'     => array( 'react', 'react-dom', 'wp-api-fetch', 'wp-i18n', 'wp-polyfill' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_learn_page',

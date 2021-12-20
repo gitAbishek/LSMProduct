@@ -109,7 +109,7 @@ const QuestionList: React.FC = () => {
 					transition="all 0.35s"
 					justify="space-between"
 					transform={`translateX(${isListOpen ? '0' : '-100%'})`}>
-					<Stack direction="column" spacing="0">
+					<Stack direction="column" spacing="0" overflow="hidden">
 						<Box as="form" action="" p="4">
 							<FormControl>
 								<InputGroup>
@@ -120,48 +120,50 @@ const QuestionList: React.FC = () => {
 								</InputGroup>
 							</FormControl>
 						</Box>
-						{qaQuery.data.map((question: QuestionAnswerSchema) => (
-							<Link
-								key={question.id}
-								_hover={{
-									textDecor: 'none',
-									bg: 'blue.50',
-									color: 'blue.500',
-									'.chakra-icon': {
-										transform: 'translateX(5px)',
-									},
-								}}>
-								<Stack
-									direction="row"
-									align="center"
-									justify="space-between"
-									spacing="4"
-									borderBottom="1px"
-									borderBottomColor="gray.100"
-									px="4"
-									py="2"
-									onClick={() =>
-										onQuestionPress(
-											question.id,
-											question.content,
-											question.answers_count
-										)
-									}>
-									<Stack direction="column" spacing="2">
-										<Heading fontSize="sm">{question.content}</Heading>
-										<Text fontSize="x-small" color="gray.500">
-											{question.answers_count + __(' Answers', 'masteriyo')}
-										</Text>
+						<Stack direction="column" spacing="0" flex="1" overflowY="auto">
+							{qaQuery.data.map((question: QuestionAnswerSchema) => (
+								<Link
+									key={question.id}
+									_hover={{
+										textDecor: 'none',
+										bg: 'blue.50',
+										color: 'blue.500',
+										'.chakra-icon': {
+											transform: 'translateX(5px)',
+										},
+									}}>
+									<Stack
+										direction="row"
+										align="center"
+										justify="space-between"
+										spacing="4"
+										borderBottom="1px"
+										borderBottomColor="gray.100"
+										px="4"
+										py="2"
+										onClick={() =>
+											onQuestionPress(
+												question.id,
+												question.content,
+												question.answers_count
+											)
+										}>
+										<Stack direction="column" spacing="2">
+											<Heading fontSize="sm">{question.content}</Heading>
+											<Text fontSize="x-small" color="gray.500">
+												{question.answers_count + __(' Answers', 'masteriyo')}
+											</Text>
+										</Stack>
+										<Icon
+											transition="all 0.35s ease-in-out"
+											as={BiChevronRight}
+											fontSize="x-large"
+											color="gray.600"
+										/>
 									</Stack>
-									<Icon
-										transition="all 0.35s ease-in-out"
-										as={BiChevronRight}
-										fontSize="x-large"
-										color="gray.600"
-									/>
-								</Stack>
-							</Link>
-						))}
+								</Link>
+							))}
+						</Stack>
 					</Stack>
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<Stack direction="column" spacing="3" w="full" p="4" pb="6">

@@ -110,7 +110,7 @@ const Sidebar: React.FC<Props> = (props) => {
 					aria-label="open sidebar"
 				/>
 				<Stack direction="column" justifyContent="space-between" h="full">
-					<Stack direction="column" spacing="0" flex="1">
+					<Stack direction="column" spacing="0" flex="1" overflowY="hidden">
 						<Stack
 							direction="column"
 							spacing="1"

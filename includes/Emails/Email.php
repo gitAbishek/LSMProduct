@@ -9,6 +9,9 @@
 
 namespace Masteriyo\Emails;
 
+use Pelago\Emogrifier;
+use Pelago\Emogrifier\HtmlProcessor\HtmlPruner;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -69,14 +72,14 @@ class Email {
 	protected $setting_name_for_heading = '';
 
 	/**
-	 * Setting name to get email receipients from.
+	 * Setting name to get email recipients from.
 	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
 	 *
 	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
-	protected $setting_name_for_receipients = '';
+	protected $setting_name_for_recipients = '';
 
 	/**
 	 * Recipients for the email.
@@ -309,12 +312,12 @@ class Email {
 		$css = apply_filters( 'masteriyo_email_styles', masteriyo_get_template_html( 'emails/email-styles.php' ), $this );
 
 		try {
-			$emogrifier = new \Pelago\Emogrifier( $content, $css );
+			$emogrifier = new Emogrifier( $content, $css );
 
 			do_action( 'masteriyo_emogrifier', $emogrifier, $this );
 
 			$content    = $emogrifier->emogrify();
-			$html_prune = \Pelago\Emogrifier\HtmlProcessor\HtmlPruner::fromHtml( $content );
+			$html_prune = HtmlPruner::fromHtml( $content );
 			$html_prune->removeElementsWithDisplayNone();
 			$content = $html_prune->render();
 		} catch ( \Exception $e ) {
@@ -334,6 +337,7 @@ class Email {
 	 * @return string
 	 */
 	public function get_from_name( $from_name = '' ) {
+		$from_name = masteriyo_get_setting( 'emails.general.from_name' );
 		$from_name = apply_filters( 'masteriyo_email_from_name', $from_name, $this );
 
 		return wp_specialchars_decode( esc_html( $from_name ), ENT_QUOTES );
@@ -349,6 +353,7 @@ class Email {
 	 * @return string
 	 */
 	public function get_from_address( $from_email = '' ) {
+		$from_email = masteriyo_get_setting( 'emails.general.from_email' );
 		$from_email = apply_filters( 'masteriyo_email_from_address', $from_email, $this );
 
 		return sanitize_email( $from_email );

@@ -59,14 +59,14 @@ class OrderCancelledEmail extends Email {
 	protected $setting_name_for_heading = 'cancelled_order_enable';
 
 	/**
-	 * Setting name to get email receipients from.
+	 * Setting name to get email recipients from.
 	 * Option name will be in format of "masteriyo.emails.{setting_name}" .
 	 *
 	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
-	protected $setting_name_for_receipients = 'cancelled_order_recipients';
+	protected $setting_name_for_recipients = 'cancelled_order_recipients';
 
 	/**
 	 * Setting name to get email content from.
@@ -124,7 +124,7 @@ class OrderCancelledEmail extends Email {
 			)
 		);
 
-		$recipients = get_option( 'masteriyo.emails.' . $this->setting_name_for_receipients );
+		$recipients = get_option( 'masteriyo.emails.' . $this->setting_name_for_recipients );
 		if ( empty( $recipients ) ) {
 			$recipients = '{customer_email}';
 		}

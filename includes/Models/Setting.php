@@ -235,7 +235,23 @@ class Setting extends Model {
 	 */
 	public function __construct( SettingRepository $setting_repository ) {
 		$this->repository = $setting_repository;
+		$this->set_default_values();
 		$this->init_sanitize_callbacks();
+	}
+
+	/**
+	 * Set default values.
+	 *
+	 * @since x.x.x
+	 */
+	protected function set_default_values() {
+		if ( empty( trim( $this->get( 'email.general.from_email' ) ) ) ) {
+			$this->set( 'emails.general.from_email', get_bloginfo( 'admin_email' ) );
+		}
+
+		if ( empty( trim( $this->get( 'email.general.from_name' ) ) ) ) {
+			$this->set( 'emails.general.from_name', get_bloginfo( 'name' ) );
+		}
 	}
 
 	/**
@@ -272,6 +288,8 @@ class Setting extends Model {
 				$this->set( "{$group}", $sub_groups );
 			}
 		}
+
+		$this->set_default_values();
 	}
 
 	/**

@@ -84,7 +84,7 @@ module.exports = () => ({
 	resolve: baseConfig.resolver,
 	devServer: {
 		headers: { 'Access-Control-Allow-Origin': '*' },
-		allowedHosts: DotEnv.parsed.WORDPRESS_URL.replace('http://', ''),
+		allowedHosts: [DotEnv.parsed.WORDPRESS_URL.replace('http://', '')],
 		host: 'localhost',
 		port: 3000,
 	},

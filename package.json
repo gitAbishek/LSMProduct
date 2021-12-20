@@ -118,7 +118,7 @@
     "prettier": "prettier --check ./assets/js/**/*.tsx ./assets/js/**/*.ts",
     "prepare": "husky install",
     "reactivate": "wp plugin deactivate learning-management-system && wp plugin activate learning-management-system ",
-    "configDev": "replace-in-file \"define( 'MASTERIYO_DEVELOPMENT', false);\" \"define( 'MASTERIYO_DEVELOPMENT', true);\" ../../../wp-config.php",
-    "configProd": "replace-in-file \"define( 'MASTERIYO_DEVELOPMENT', true);\" \"define( 'MASTERIYO_DEVELOPMENT', false);\" ../../../wp-config.php"
+    "switchDev": "replace-in-file \"define( 'MASTERIYO_DEVELOPMENT', false);\" \"define( 'MASTERIYO_DEVELOPMENT', true);\" ../../../wp-config.php",
+    "switchProd": "replace-in-file \"define( 'MASTERIYO_DEVELOPMENT', true);\" \"define( 'MASTERIYO_DEVELOPMENT', false);\" ../../../wp-config.php"
   }
 }

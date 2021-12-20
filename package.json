@@ -50,11 +50,7 @@
     "@babel/runtime": "7.16.5",
     "@dr.pogodin/babel-preset-svgr": "1.3.0",
     "@mr-hope/gulp-sass": "2.0.0",
-<<<<<<< HEAD
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.3",
-=======
-    "@pmmmwh/react-refresh-webpack-plugin": "0.4.2",
->>>>>>> 5c38faf6 (changes colors and remove unwanted packages)
     "@types/fork-ts-checker-webpack-plugin": "0.4.5",
     "@types/humanize-duration": "3.25.0",
     "@types/react-beautiful-dnd": "13.0.0",

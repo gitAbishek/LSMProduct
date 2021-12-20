@@ -22,7 +22,7 @@ import {
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
+import { sprintf, __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import {
@@ -51,81 +51,53 @@ interface Props {
 	index: number;
 	contents: any;
 	contentsMap: any;
-	onDeletePress: any;
 }
 
 const Section: React.FC<Props> = (props) => {
-	const {
-		id,
-		name,
-		description,
-		index,
-		contents,
-		contentsMap,
-		courseId,
-		onDeletePress,
-	} = props;
+	const { id, name, description, index, contents, contentsMap, courseId } =
+		props;
 	const [isEditing, setIsEditing] = useState(false);
 	const { onClose, onOpen, isOpen } = useDisclosure();
-
-	const [deleteLessonId, setDeleteLessonId] = useState<number>();
-	const [deleteQuizId, setDeleteQuizId] = useState<number>();
-	const [contentType, setContentType] = useState<'lesson' | 'quiz'>();
+	const newContents = contents?.map((contentId: any) => contentsMap[contentId]);
 
 	const cancelRef = useRef<any>();
 
-	const newContents = contents?.map((contentId: any) => contentsMap[contentId]);
 	const queryClient = useQueryClient();
 	const toast = useToast();
 
-	const lessonAPI = new API(urls.lessons);
-	const quizAPI = new API(urls.quizes);
+	const sectionAPI = new API(urls.sections);
 
-	const deleteLesson = useMutation((id: number) => lessonAPI.delete(id), {
+	const deleteSection = useMutation((id: number) => sectionAPI.delete(id), {
 		onSuccess: () => {
 			onClose();
 			toast({
-				title: __('Lesson Deleted', 'masteriyo'),
+				title: __('Section Deleted', 'masteriyo'),
 				isClosable: true,
 				status: 'error',
 			});
 			queryClient.invalidateQueries(`builder${courseId}`);
 		},
-	});
-
-	const deleteQuiz = useMutation((id: number) => quizAPI.delete(id), {
-		onSuccess: () => {
+		onError: (error: any) => {
 			onClose();
 			toast({
-				title: __('Quiz Deleted', 'masteriyo'),
+				title: __('Failed to delete section', 'masteriyo'),
+				description: `${error.response?.data?.message}`,
 				isClosable: true,
 				status: 'error',
 			});
-			queryClient.invalidateQueries(`builder${courseId}`);
 		},
 	});
 
-	const onEditPress = () => {
-		setIsEditing(true);
-	};
-
-	const onContentDeletePress = (contentId: number, type: 'lesson' | 'quiz') => {
+	const onDeletePress = () => {
 		onOpen();
-		if (type === 'lesson') {
-			setDeleteLessonId(contentId);
-			setContentType(type);
-		} else if (type === 'quiz') {
-			setDeleteQuizId(contentId);
-			setContentType(type);
-		}
 	};
 
 	const onDeleteConfirm = () => {
-		if (contentType === 'lesson') {
-			deleteLessonId && deleteLesson.mutate(deleteLessonId);
-		} else if (contentType === 'quiz') {
-			deleteQuizId && deleteQuiz.mutate(deleteQuizId);
-		}
+		deleteSection.mutate(id);
+	};
+
+	const onEditPress = () => {
+		setIsEditing(true);
 	};
 
 	return (
@@ -160,7 +132,7 @@ const Section: React.FC<Props> = (props) => {
 								<MenuItem onClick={onEditPress} icon={<BiEdit />}>
 									{__('Edit', 'masteriyo')}
 								</MenuItem>
-								<MenuItem onClick={() => onDeletePress(id)} icon={<BiTrash />}>
+								<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
 									{__('Delete', 'masteriyo')}
 								</MenuItem>
 							</MenuList>
@@ -195,7 +167,7 @@ const Section: React.FC<Props> = (props) => {
 													type: 'lesson' | 'quiz';
 													name: string;
 												},
-												index: any
+												index: number
 											) => (
 												<Content
 													key={content.id}
@@ -205,7 +177,6 @@ const Section: React.FC<Props> = (props) => {
 													hasVideo={content.video}
 													index={index}
 													courseId={courseId}
-													onContentDeletePress={onContentDeletePress}
 												/>
 											)
 										)}
@@ -249,6 +220,7 @@ const Section: React.FC<Props> = (props) => {
 							</MenuList>
 						</Menu>
 					</Box>
+
 					<AlertDialog
 						isOpen={isOpen}
 						onClose={onClose}
@@ -257,7 +229,7 @@ const Section: React.FC<Props> = (props) => {
 						<AlertDialogOverlay>
 							<AlertDialogContent>
 								<AlertDialogHeader>
-									{__('Confirm Delete', 'masteriyo')} {name}
+									{sprintf(__('Delete Section - %s?', 'masteriyo'), name)}
 								</AlertDialogHeader>
 								<AlertDialogBody>
 									{__(
@@ -273,9 +245,7 @@ const Section: React.FC<Props> = (props) => {
 										<Button
 											colorScheme="red"
 											onClick={onDeleteConfirm}
-											isLoading={
-												deleteQuiz.isLoading || deleteLesson.isLoading
-											}>
+											isLoading={deleteSection.isLoading}>
 											{__('Delete', 'masteriyo')}
 										</Button>
 									</ButtonGroup>

@@ -24,11 +24,10 @@ interface Props {
 	courseId: number | any;
 	builderData: any;
 	setBuilderData: any;
-	onDeletePress: any;
 }
 
 const SectionBuilder: React.FC<Props> = (props) => {
-	const { courseId, builderData, setBuilderData, onDeletePress } = props;
+	const { courseId, builderData, setBuilderData } = props;
 	const [isAddNewSection, setIsAddNewSection] = useState(false);
 	const scrollRef = useRef<any>(null);
 	const { search } = useLocation();
@@ -70,7 +69,6 @@ const SectionBuilder: React.FC<Props> = (props) => {
 									courseId={courseId}
 									contents={section.contents}
 									contentsMap={builderData.contents}
-									onDeletePress={onDeletePress}
 								/>
 							);
 						})}

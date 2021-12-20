@@ -76,7 +76,7 @@ const QaChat: React.FC<Props> = (props) => {
 				h="full"
 				transition="all 0.35s"
 				transform={`translateX(${isOpen ? '-100%' : '0'})`}>
-				<Stack direction="column" spacing="8">
+				<Stack direction="column" spacing="8" overflowY="hidden">
 					<Box as="header">
 						<ButtonGroup px="4" py="2">
 							<Button
@@ -94,7 +94,7 @@ const QaChat: React.FC<Props> = (props) => {
 						</Stack>
 					</Box>
 
-					<Stack direction="column-reverse" spacing="4" px="4">
+					<Stack direction="column-reverse" spacing="4" px="4" overflowY="auto">
 						{chatQuery.data.map((chat: QuestionAnswerSchema) => (
 							<Message
 								key={chat.id}
@@ -109,7 +109,7 @@ const QaChat: React.FC<Props> = (props) => {
 					</Stack>
 				</Stack>
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<Stack direction="column" spacing="3" w="full" p="4" pb="6">
+					<Stack direction="column" spacing="3" w="full" px="4" pb="6">
 						<FormControl>
 							<Input
 								type="text"

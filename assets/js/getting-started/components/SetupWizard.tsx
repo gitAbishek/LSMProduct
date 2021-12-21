@@ -1,4 +1,5 @@
 import { Container, useToast } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import { Step, Steps, useSteps } from 'chakra-ui-steps';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -6,7 +7,7 @@ import { useMutation } from 'react-query';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
 import { deepClean } from '../../back-end/utils/utils';
-import * as screens from '../screens';
+import { Course, Finish, Pages, Payment, Quiz, Welcome } from '../screens';
 
 // Global variable.
 declare var _MASTERIYO_: any;
@@ -41,10 +42,14 @@ const SetupWizard: React.FC = () => {
 	const { adminURL, siteURL, pageBuilderURL } =
 		'undefined' != typeof _MASTERIYO_ && _MASTERIYO_;
 
-	let steps = [];
-	for (const [key, StepContent] of Object.entries(screens)) {
-		steps.push({ label: key, StepContent });
-	}
+	let steps = [
+		{ label: __('Welcome', 'masteriyo'), StepContent: Welcome },
+		{ label: __('Course', 'masteriyo'), StepContent: Course },
+		{ label: __('Quiz', 'masteriyo'), StepContent: Quiz },
+		{ label: __('Pages', 'masteriyo'), StepContent: Pages },
+		{ label: __('Payment', 'masteriyo'), StepContent: Payment },
+		{ label: __('Finish', 'masteriyo'), StepContent: Finish },
+	];
 
 	return (
 		<FormProvider {...methods}>

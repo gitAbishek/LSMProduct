@@ -41,6 +41,7 @@ return array_unique(
 			'Masteriyo\Providers\AppServiceProvider',
 			'Masteriyo\Providers\BlocksServiceProvider',
 			'Masteriyo\Providers\QuizAttemptServiceProvider',
+			'Masteriyo\Providers\MigratorServiceProvider',
 		)
 	)
 );

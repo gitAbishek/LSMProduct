@@ -12,6 +12,7 @@ namespace Masteriyo;
 use Masteriyo\AdminMenu;
 use Masteriyo\ScriptStyle;
 use Masteriyo\Capabilities;
+use Masteriyo\Database\Migrator;
 use Masteriyo\Setup\Onboard;
 use Masteriyo\RestApi\RestApi;
 use Masteriyo\Emails\EmailHooks;
@@ -58,6 +59,8 @@ class Masteriyo {
 	 * @since 1.0.0
 	 */
 	protected function init() {
+		masteriyo( 'migrator' )->migrate();
+
 		Capabilities::init();
 		Activation::init();
 		Deactivation::init();
@@ -103,6 +106,8 @@ class Masteriyo {
 
 		add_action( 'in_admin_header', array( $this, 'hide_admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', 'wp_enqueue_media' );
+
+		add_action( 'cli_init', array( 'Masteriyo\Cli\Cli', 'register' ) );
 	}
 
 	/**
@@ -524,7 +529,7 @@ class Masteriyo {
 	}
 
 	/**
-	 * Disable wp dashbaord and admin bar for student.
+	 * Disable wp dashboard and admin bar for student.
 	 *
 	 * @since 1.0.0
 	 */
@@ -545,5 +550,3 @@ class Masteriyo {
 		}
 	}
 }
-
-

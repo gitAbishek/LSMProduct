@@ -764,3 +764,77 @@ function masteriyo_make_phone_clickable( $phone ) {
 
 	return $number ? '<a href="tel:' . esc_attr( $number ) . '">' . esc_html( $phone ) . '</a>' : '';
 }
+
+/**
+ * Convert kebab-case to PascalCase
+ *
+ * @since x.x.x
+ *
+ * @param string $text
+ * @return string
+ */
+function masteriyo_kebab_to_pascal( $text ) {
+	return str_replace( ' ', '', ucwords( str_replace( '-', ' ', $text ) ) );
+}
+
+/**
+ * Convert snake_case to PascalCase
+ *
+ * @since x.x.x
+ *
+ * @param string $text
+ * @return string
+ */
+function masteriyo_snake_to_pascal( $text ) {
+	return str_replace( ' ', '', ucwords( str_replace( '_', ' ', $text ) ) );
+}
+
+/**
+ * Convert snake_case to camelCase.
+ *
+ * @since x.x.x
+ *
+ * @param string $text
+ * @return string
+ */
+function masteriyo_snake_to_camel( $text ) {
+	return lcfirst( masteriyo_snake_to_pascal( $text ) );
+}
+
+/**
+ * Convert kebab-case to camelCase.
+ *
+ * @since x.x.x
+ *
+ * @param string $text
+ * @return string
+ */
+function masteriyo_kebab_to_camel( $text ) {
+	return lcfirst( masteriyo_kebab_to_pascal( $text ) );
+}
+
+
+/**
+ * Convert kebab-case to snake_case.
+ *
+ * @since x.x.x
+ *
+ * @param string $text
+ * @return string
+ */
+function masteriyo_kebab_to_snake( $text ) {
+	return str_replace( ' ', '', str_replace( '-', '_', $text ) );
+}
+
+
+/**
+ * Convert snake_case to kebab-case.
+ *
+ * @since x.x.x
+ *
+ * @param string $text
+ * @return string
+ */
+function masteriyo_snake_to_kebab( $text ) {
+	return str_replace( ' ', '', str_replace( '_', '-', $text ) );
+}

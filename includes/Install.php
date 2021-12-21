@@ -17,9 +17,9 @@ class Install {
 	 * @return void
 	 */
 	public static function init() {
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		// require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		self::install();
-		self::init_db();
+		// self::init_db();
 		self::remove_roles();
 		self::create_roles();
 		self::create_difficulties();

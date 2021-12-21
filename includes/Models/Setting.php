@@ -242,7 +242,7 @@ class Setting extends Model {
 	/**
 	 * Set default values.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 */
 	protected function set_default_values() {
 		if ( empty( trim( $this->get( 'email.general.from_email' ) ) ) ) {

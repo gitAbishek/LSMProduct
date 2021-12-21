@@ -2,7 +2,7 @@
 /**
  * CLI Migration.
  *
- * @since x.x.x
+ * @since 1.3.4
  * @package Masteriyo\Cli
  */
 
@@ -15,7 +15,7 @@ class Migration {
 	/**
 	 * WordPress direct filesystem.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @var WP_Filesystem_Direct
 	 */
@@ -24,7 +24,7 @@ class Migration {
 	/**
 	 * Constructor.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 */
 	public function __construct() {
 		global $wp_filesystem;
@@ -43,7 +43,7 @@ class Migration {
 	/**
 	 * Create migration.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param Array $args Arguments in array format.
 	 * @param Array $assoc_args Key value arguments stored in associated array format.
@@ -73,7 +73,7 @@ class Migration {
 	/**
 	 * Validate the migration creation.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param Array $args Arguments in array format.
 	 * @param Array $assoc_args Key value arguments stored in associated array format.
@@ -87,7 +87,7 @@ class Migration {
 	/**
 	 * Migrate migrations.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param Array $args Arguments in array format.
 	 * @param Array $assoc_args Key value arguments stored in associated array format.
@@ -117,7 +117,7 @@ class Migration {
 	/**
 	 * Rollback migrations.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param Array $args Arguments in array format.
 	 * @param Array $assoc_args Key value arguments stored in associated array format.
@@ -148,7 +148,7 @@ class Migration {
 	/**
 	 * Reset all the migrations.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param Array $args Arguments in array format.
 	 * @param Array $assoc_args Key value arguments stored in associated array format.

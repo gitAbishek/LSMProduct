@@ -2,7 +2,7 @@
 /**
  * Create user activities table.
  *
- * @since x.x.x
+ * @since 1.3.4
  */
 
 use Masteriyo\Database\Migration;
@@ -10,7 +10,7 @@ use Masteriyo\Database\Migration;
 /**
  * User activities table.
  *
- * @since x.x.x
+ * @since 1.3.4
  */
 class CreateUserActivitiesTable extends Migration {
 	/**
@@ -44,7 +44,7 @@ class CreateUserActivitiesTable extends Migration {
 	/**
 	 * Reverse the migrations.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 */
 	public function down() {
 		$this->connection->query( "DROP TABLE IF EXISTS {$this->prefix}masteriyo_user_activities;" );

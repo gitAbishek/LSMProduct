@@ -742,7 +742,7 @@ if ( ! function_exists( 'masteriyo_is_development' ) ) {
 	/**
 	 * Return masteriyo development.
 	 *
-	 * @since X.X.X
+	 * @since 1.3.4
 	 *
 	 * @return boolean
 	 */
@@ -755,7 +755,7 @@ if ( ! function_exists( 'masteriyo_is_production' ) ) {
 	/**
 	 * Return masteriyo development.
 	 *
-	 * @since X.X.X
+	 * @since 1.3.4
 	 *
 	 * @return boolean
 	 */

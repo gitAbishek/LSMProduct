@@ -2,7 +2,7 @@
 /**
  * Create session table.
  *
- * @since x.x.x
+ * @since 1.3.4
  */
 
 use Masteriyo\Database\Migration;
@@ -10,13 +10,13 @@ use Masteriyo\Database\Migration;
 /**
  * Create session table.
  *
- * @since x.x.x
+ * @since 1.3.4
  */
 class CreateSessionTable extends Migration {
 	/**
 	 * Run the migration.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 */
 	public function up() {
 		$sql = "CREATE TABLE {$this->prefix}masteriyo_sessions (
@@ -35,7 +35,7 @@ class CreateSessionTable extends Migration {
 	/**
 	 * Reverse the migrations.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 */
 	public function down() {
 		$this->connection->query( "DROP TABLE IF EXISTS {$this->prefix}masteriyo_sessions;" );

@@ -18,7 +18,7 @@ class MigratorServiceProvider extends AbstractServiceProvider {
 	 * this service provider must have an alias added
 	 * to this array or it will be ignored
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @var array
 	 */
@@ -33,7 +33,7 @@ class MigratorServiceProvider extends AbstractServiceProvider {
 	 * that you need to, but remember, every alias registered
 	 * within this method must be declared in the `$provides` array.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 */
 	public function register() {
 		$this->getContainer()->add( 'migrator', Migrator::class, true );

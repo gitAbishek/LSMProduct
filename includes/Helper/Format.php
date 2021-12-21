@@ -768,7 +768,7 @@ function masteriyo_make_phone_clickable( $phone ) {
 /**
  * Convert kebab-case to PascalCase
  *
- * @since x.x.x
+ * @since 1.3.4
  *
  * @param string $text
  * @return string
@@ -780,7 +780,7 @@ function masteriyo_kebab_to_pascal( $text ) {
 /**
  * Convert snake_case to PascalCase
  *
- * @since x.x.x
+ * @since 1.3.4
  *
  * @param string $text
  * @return string
@@ -792,7 +792,7 @@ function masteriyo_snake_to_pascal( $text ) {
 /**
  * Convert snake_case to camelCase.
  *
- * @since x.x.x
+ * @since 1.3.4
  *
  * @param string $text
  * @return string
@@ -804,7 +804,7 @@ function masteriyo_snake_to_camel( $text ) {
 /**
  * Convert kebab-case to camelCase.
  *
- * @since x.x.x
+ * @since 1.3.4
  *
  * @param string $text
  * @return string
@@ -817,7 +817,7 @@ function masteriyo_kebab_to_camel( $text ) {
 /**
  * Convert kebab-case to snake_case.
  *
- * @since x.x.x
+ * @since 1.3.4
  *
  * @param string $text
  * @return string
@@ -830,7 +830,7 @@ function masteriyo_kebab_to_snake( $text ) {
 /**
  * Convert snake_case to kebab-case.
  *
- * @since x.x.x
+ * @since 1.3.4
  *
  * @param string $text
  * @return string

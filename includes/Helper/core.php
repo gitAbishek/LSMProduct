@@ -3151,7 +3151,7 @@ function masteriyo_get_course_author_id( $course ) {
 /**
  * Get all the shortcodes with the prefix.
  *
- * @since x.xx.
+ * @since 1.3.4
  *
  * @param string $prefix
  * @return array

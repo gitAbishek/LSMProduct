@@ -2,7 +2,7 @@
 /**
  * Create order items meta table.
  *
- * @since x.x.x
+ * @since 1.3.4
  */
 
 use Masteriyo\Database\Migration;
@@ -11,7 +11,7 @@ class CreateOrderItemsMetaTable extends Migration {
 	/**
 	 * Run the migration.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 */
 	public function up() {
 		$sql = "CREATE TABLE {$this->prefix}masteriyo_order_itemmeta (
@@ -30,7 +30,7 @@ class CreateOrderItemsMetaTable extends Migration {
 	/**
 	 * Reverse the migrations.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 */
 	public function down() {
 		$this->connection->query( "DROP TABLE IF EXISTS {$this->prefix}masteriyo_order_itemmeta;" );

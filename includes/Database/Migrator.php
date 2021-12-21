@@ -2,7 +2,7 @@
 /**
  * Class to run the migration.
  *
- * @since x.x.x
+ * @since 1.3.4
  */
 
 namespace Masteriyo\Database;
@@ -11,7 +11,7 @@ class Migrator {
 	/**
 	 * The name of the database connection to use.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @var wpdb
 	 */
@@ -20,7 +20,7 @@ class Migrator {
 	/**
 	 * Migration table name.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @var string
 	 */
@@ -29,7 +29,7 @@ class Migrator {
 	/**
 	 * Constructor.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 */
 	public function __construct() {
 		$this->init();
@@ -38,7 +38,7 @@ class Migrator {
 	/**
 	 * Initialize.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 */
 	public function init() {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -53,7 +53,7 @@ class Migrator {
 	/**
 	 * Get the connection.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @return wpdb
 	 */
@@ -64,7 +64,7 @@ class Migrator {
 	/**
 	 * Get table name.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @return string
 	 */
@@ -75,7 +75,7 @@ class Migrator {
 	/**
 	 * Get database charset collate.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @return string
 	 */
@@ -86,7 +86,7 @@ class Migrator {
 	/**
 	 * Set up the table needed for storing the migrations.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @return bool
 	 */
@@ -123,7 +123,7 @@ class Migrator {
 	/**
 	 * Get all the migration files
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param array       $exclude   Filenames without extension to exclude
 	 * @param string|null $migration Single migration class name to only perform the migration for.
@@ -186,7 +186,7 @@ class Migrator {
 	/**
 	 * Get all the migrations to be run
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param string|null $migration
 	 * @return array
@@ -203,7 +203,7 @@ class Migrator {
 	/**
 	 * Get next migration batch.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @return int
 	 */
@@ -218,7 +218,7 @@ class Migrator {
 	/**
 	 * Migrate the migrations.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param string|null $migration Migration to run.
 	 *
@@ -256,7 +256,7 @@ class Migrator {
 	/**
 	 * Migration to rollback to by step.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param integer $step Step to rollback.
 	 * @param string|null $migration Migration to run.
@@ -299,7 +299,7 @@ class Migrator {
 	/**
 	 * Reset the migrations.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @return string[]
 	 */
@@ -330,7 +330,7 @@ class Migrator {
 	/**
 	 * Run individual migration.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param string $file File path.
 	 * @param string $name Migration name to run.
@@ -364,7 +364,7 @@ class Migrator {
 	/**
 	 * Get class with namespace.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param string $class_name
 	 * @return string|boolean
@@ -384,7 +384,7 @@ class Migrator {
 	/**
 	 * Get the class name in camel case.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param string $class Class class
 	 * @return void
@@ -396,7 +396,7 @@ class Migrator {
 	/**
 	 * Get the plugin base path.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.4
 	 *
 	 * @param string $path Path to append.
 	 * @return string

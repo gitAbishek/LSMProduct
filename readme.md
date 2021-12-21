@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.3.3
+**Stable tag**: 1.3.4
 
 **License: GNU** General Public License v3.0
 
@@ -46,8 +46,21 @@ A complete solution to create and sell online courses. The plugin is powered by 
 No, you don't need any coding skills. One can click and create courses, lessons and publish.
 
 # Contribute to Masteriyo
+
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
+
 # Changelog
+
+### 1.3.4 - 21-12-2021
+
+- Enhancement - Added scrolling on learn page sidebar.
+- Enhancement - Implemented database migration.
+- Enhancement - Decreased the JS bundle size.
+- Enhancement - Improve the page loading speed.
+- Tweak - Show name on delete confirm modal in section builder.
+- Fix - Question search on learn page sidebar.
+- Fix - Classic editor compatibility issue.
+- Fix - Used admin email address as a sender email address.
 
 ### 1.3.3 - 15-12-2021
 

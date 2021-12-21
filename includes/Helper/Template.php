@@ -59,7 +59,7 @@ function_exists( 'add_action' ) && add_action( 'template_redirect', 'masteriyo_t
 /**
  * Should the Masteriyo loop be displayed?
  *
- * This will return true if we have posts (courses) or if we have subcats to display.
+ * This will return true if we have posts (courses) or if we have sub categories to display.
  *
  * @since 1.0.0
  * @return bool
@@ -76,7 +76,7 @@ if ( ! function_exists( 'masteriyo_course_loop_start' ) ) {
 	 * @since 1.0.0
 	 *
 	 * @param bool $echo Should echo?.
-	 * @return stringe
+	 * @return string
 	 */
 	function masteriyo_course_loop_start( $echo = true ) {
 		ob_start();
@@ -319,12 +319,25 @@ function_exists( 'add_action' ) && add_action( 'the_post', 'masteriyo_setup_cour
  * @return string[]
  */
 function masteriyo_add_body_class( $classes, $class ) {
+	global $post;
+
 	if ( masteriyo_is_archive_course_page() ) {
 		$classes[] = 'masteriyo masteriyo-courses-page';
 	} elseif ( masteriyo_is_learn_page() ) {
 		$classes[] = 'masteriyo masteriyo-interactive-page';
 	} elseif ( masteriyo_is_account_page() ) {
 		$classes[] = 'masteriyo masteriyo-account-page';
+	}
+
+	if ( $post ) {
+		$tags = masteriyo_get_shortcode_tags();
+
+		foreach ( $tags as $tag ) {
+			if ( has_shortcode( $post->post_content, $tag ) ) {
+				$classes[] = 'masteriyo';
+				break;
+			}
+		}
 	}
 
 	return $classes;

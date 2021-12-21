@@ -3147,3 +3147,21 @@ function masteriyo_get_course_author_id( $course ) {
 	}
 	return $course->get_author_id();
 }
+
+/**
+ * Get all the shortcodes with the prefix.
+ *
+ * @since x.xx.
+ *
+ * @param string $prefix
+ * @return array
+ */
+function masteriyo_get_shortcode_tags( $prefix = 'masteriyo' ) {
+	return array_filter(
+		array_keys( $GLOBALS['shortcode_tags'] ),
+		function( $shortcode_tag ) use ( $prefix ) {
+			return masteriyo_starts_with( $shortcode_tag, $prefix );
+		}
+	);
+}
+

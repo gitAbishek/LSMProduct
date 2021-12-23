@@ -13,7 +13,6 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
-<<<<<<< HEAD
 import { useQuery } from 'react-query';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
@@ -22,15 +21,11 @@ import {
 	shortEnglishHumanizer,
 } from '../../back-end/utils/utils';
 import { CourseProgressMap } from '../../interactive/schemas';
-=======
-import { shortEnglishHumanizer } from '../../back-end/utils/utils';
->>>>>>> e58395ab (Implement course api for the course list on dashboard)
 import { MyCoursesSchema } from '../schemas';
 
 interface Props {
 	course: MyCoursesSchema;
 }
-<<<<<<< HEAD
 
 const CourseGridItem: React.FC<Props> = (props) => {
 	const { course, started_at } = props.course;
@@ -43,12 +38,7 @@ const CourseGridItem: React.FC<Props> = (props) => {
 			enabled: !!course?.id,
 		}
 	);
-=======
 
-const CourseGridItem: React.FC<Props> = (props) => {
-	const { course, started_at } = props.course;
-
->>>>>>> e58395ab (Implement course api for the course list on dashboard)
 	return (
 		<Box p="5" border="1px" borderColor="gray.100">
 			<Stack direction="row" spacing="10" align="center">

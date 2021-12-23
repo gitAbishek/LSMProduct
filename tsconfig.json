@@ -28,7 +28,7 @@
     "acceptance-tests",
     "webpack",
     "jest",
-    "./assets/js/blocks"
+    "assets/js/blocks"
   ],
   "include": [
     "./assets/js"

@@ -719,6 +719,11 @@ class ScriptStyle {
 							'saving'                 => __( 'Saving...', 'masteriyo' ),
 							'profile_update_success' => __( 'Your profile was updated successfully.', 'masteriyo' ),
 						),
+						'currency'        => array(
+							'code'     => masteriyo_get_currency(),
+							'symbol'   => html_entity_decode( masteriyo_get_currency_symbol( masteriyo_get_currency() ) ),
+							'position' => masteriyo_get_setting( 'payments.currency.currency_position' ),
+						),
 					),
 				),
 				'login-form'    => array(

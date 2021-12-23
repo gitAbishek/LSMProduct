@@ -74,7 +74,6 @@ const EditProfile: React.FC = () => {
 	});
 
 	const onSubmit = (data: UserSchema) => {
-		console.log(data);
 		updateUser.mutate(deepClean(data));
 	};
 
@@ -97,8 +96,6 @@ const EditProfile: React.FC = () => {
 		setValue('billing.first_name', getValues('first_name'));
 		setValue('billing.last_name', getValues('last_name'));
 	};
-
-	console.log(userDataQuery?.data?.billing);
 
 	if (
 		userDataQuery?.isSuccess &&

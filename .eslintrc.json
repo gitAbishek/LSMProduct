@@ -5,12 +5,20 @@
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "no-console": "warn",
     "react/prop-types": "off",
     "no-unused-vars": "warn",
-    "max-len": ["error", { "code": 500 }]
+    "max-len": [
+      "error",
+      {
+        "code": 500
+      }
+    ]
   },
   "parser": "@typescript-eslint/parser",
-  "extends": ["plugin:react/recommended"],
+  "extends": [
+    "plugin:react/recommended"
+  ],
   "settings": {
     "react": {
       "version": "detect"
@@ -23,5 +31,9 @@
     }
   },
   "root": true,
-  "plugins": ["import", "@typescript-eslint", "react-hooks"]
+  "plugins": [
+    "import",
+    "@typescript-eslint",
+    "react-hooks"
+  ]
 }

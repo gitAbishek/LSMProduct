@@ -430,6 +430,11 @@ class UsersController extends PostsController {
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
+				'old_password'         => array(
+					'description' => __( 'User login old password.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
 				'password'             => array(
 					'description' => __( 'User login password.', 'masteriyo' ),
 					'type'        => 'string',
@@ -974,10 +979,20 @@ class UsersController extends PostsController {
 		$request['id'] = isset( $request['id'] ) ? $request['id'] : get_current_user_id();
 		$user          = get_user_by( 'id', (int) $request['id'] );
 
-		if ( ! $user || ! $this->permission->rest_check_users_manipulation_permissions( 'edit' ) ) {
+		if ( ! $user || ! $this->permission->rest_check_users_manipulation_permissions( 'edit', $user->ID ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_update',
 				__( 'Sorry, you are not allowed to update resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		if ( isset( $request['old_password'] ) && ! wp_check_password( $request['old_password'], $user->user_pass, $user->ID ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, invalid old password.', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
 				)

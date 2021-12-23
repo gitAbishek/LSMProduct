@@ -78,10 +78,11 @@ class Permission {
 	 * @since 1.0.0
 	 *
 	 * @param string $context Request context.
-	 *
+	 * @param int    $user_id User ID.
+
 	 * @return bool
 	 */
-	public function rest_check_users_manipulation_permissions( $context = 'read' ) {
+	public function rest_check_users_manipulation_permissions( $context = 'read', $user_id = 0 ) {
 		$contexts   = array(
 			'read'    => 'read_users',
 			'create'  => 'create_users',
@@ -93,7 +94,18 @@ class Permission {
 		$cap        = $contexts[ $context ];
 		$permission = current_user_can( $cap );
 
-		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context );
+		if ( false === $permission && $user_id ) {
+			$permission = get_current_user_id() === $user_id;
+		}
+
+		$permission = apply_filters( 'masteriyo_rest_check_permissions', $permission, $context );
+
+		/**
+		 * Users check permission
+		 *
+		 * @since x.x.x
+		 */
+		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $user_id, 'users' );
 	}
 
 	/**

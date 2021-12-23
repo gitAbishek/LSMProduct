@@ -18,30 +18,28 @@ const OrderHistory: React.FC = () => {
 			<Heading as="h4" size="md" fontWeight="bold" color="blue.900" px="8">
 				{__('Order History', 'masteriyo')}
 			</Heading>
-			<Stack direction="column" spacing="8">
-				<Table>
-					<Thead>
-						<Tr>
-							<Th>{__('Order', 'masteriyo')}</Th>
-							<Th>{__('Course', 'masteriyo')}</Th>
-							<Th>{__('Date', 'masteriyo')}</Th>
-							<Th>{__('Status', 'masteriyo')}</Th>
-							<Th>{__('Total', 'masteriyo')}</Th>
-							<Th>{__('Actions', 'masteriyo')}</Th>
-						</Tr>
-					</Thead>
-					<Tbody>
-						{ordersQuery.isLoading && <SkeletonOrdersList />}
-						{ordersQuery.isSuccess && ordersQuery?.data?.data.length === 0 ? (
-							<NoOrdersNotice />
-						) : (
-							ordersQuery?.data?.data.map((order: any) => (
-								<OrderList key={order.id} data={order} />
-							))
-						)}
-					</Tbody>
-				</Table>
-			</Stack>
+
+			<Table>
+				<Thead>
+					<Tr>
+						<Th>{__('Order', 'masteriyo')}</Th>
+						<Th>{__('Course', 'masteriyo')}</Th>
+						<Th>{__('Date', 'masteriyo')}</Th>
+						<Th>{__('Status', 'masteriyo')}</Th>
+						<Th>{__('Total', 'masteriyo')}</Th>
+					</Tr>
+				</Thead>
+				<Tbody>
+					{ordersQuery.isLoading && <SkeletonOrdersList />}
+					{ordersQuery.isSuccess && ordersQuery?.data?.data.length === 0 ? (
+						<NoOrdersNotice />
+					) : (
+						ordersQuery?.data?.data.map((order: any) => (
+							<OrderList key={order.id} data={order} />
+						))
+					)}
+				</Tbody>
+			</Table>
 		</Stack>
 	);
 };

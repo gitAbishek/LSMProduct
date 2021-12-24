@@ -79,7 +79,10 @@ const InteractiveLesson = () => {
 
 					toast({
 						title: __('Mark as completed', 'masteriyo'),
-						description: __('Lesson has been marked as completed', 'masteriyo'),
+						description: __(
+							'Lesson has been marked as completed.',
+							'masteriyo'
+						),
 						isClosable: true,
 						status: 'success',
 					});

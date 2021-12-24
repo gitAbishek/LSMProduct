@@ -260,7 +260,7 @@ const EditLesson = () => {
 
 										<AlertDialogBody>
 											{__(
-												"Are you sure? You can't restore this lesson",
+												'Are you sure? You can’t restore after deleting.',
 												'masteriyo'
 											)}
 										</AlertDialogBody>

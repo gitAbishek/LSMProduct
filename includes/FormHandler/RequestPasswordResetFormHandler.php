@@ -41,7 +41,7 @@ class RequestPasswordResetFormHandler {
 			$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
 			if ( empty( $nonce_value ) ) {
-				throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
+				throw new \Exception( __( 'Nonce is missing.', 'masteriyo' ) );
 			}
 			if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-password-reset-request' ) ) {
 				throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
@@ -77,7 +77,7 @@ class RequestPasswordResetFormHandler {
 			do_action( 'retrieve_password', $user->get_username() );
 
 			if ( ! apply_filters( 'allow_password_reset', true, $user ) ) {
-				throw new \Exception( __( 'Password reset is not allowed for this user', 'masteriyo' ) );
+				throw new \Exception( __( 'Password reset is not allowed for this user.', 'masteriyo' ) );
 			}
 
 			// Get password reset key (function introduced in WordPress 4.4).
@@ -110,7 +110,7 @@ class RequestPasswordResetFormHandler {
 		$data = $this->get_form_data();
 
 		if ( empty( $data['user_login'] ) ) {
-			throw new \Exception( __( 'Enter a username or email address', 'masteriyo' ) );
+			throw new \Exception( __( 'Enter a username or email address.', 'masteriyo' ) );
 		}
 
 		$validation_error  = new \WP_Error();
@@ -136,7 +136,7 @@ class RequestPasswordResetFormHandler {
 		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
 		if ( empty( $nonce_value ) ) {
-			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
+			throw new \Exception( __( 'Nonce is missing.', 'masteriyo' ) );
 		}
 		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-password-reset-request' ) ) {
 			throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );

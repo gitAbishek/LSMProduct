@@ -57,7 +57,7 @@ do_action( 'masteriyo_before_single_course_review_form' );
 			<?php
 			printf(
 				/* translators: %s: Achor tag html with text "logged in" */
-				esc_html__( 'You must be %s to submit a review', 'masteriyo' ),
+				esc_html__( 'You must be %s to submit a review.', 'masteriyo' ),
 				wp_kses_post(
 					sprintf(
 						'<a href="%s" class="masteriyo-link-primary">%s</a>',

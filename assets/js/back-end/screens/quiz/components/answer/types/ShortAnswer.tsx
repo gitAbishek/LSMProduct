@@ -18,7 +18,7 @@ const ShortAnswer: React.FC<Props> = () => {
 			<Box>
 				<Alert status="info" fontSize="sm">
 					<AlertIcon />
-					{__("Short answer doesn't require any fields", 'masteriyo')}
+					{__('Short answer doesn’t require any options.', 'masteriyo')}
 				</Alert>
 			</Box>
 		</Stack>

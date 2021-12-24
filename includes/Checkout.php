@@ -125,7 +125,7 @@ class Checkout {
 				throw new \Exception(
 					sprintf(
 						/* translators: %s: courses page url */
-						__( 'Sorry, your session has expired. <a href="%s" class="masteriyo-backward">Return to courses page</a>', 'masteriyo' ),
+						__( 'Sorry, your session has expired. <a href="%s" class="masteriyo-backward">Return to courses page</a>.', 'masteriyo' ),
 						esc_url( masteriyo_get_page_permalink( 'courses' ) )
 					)
 				);

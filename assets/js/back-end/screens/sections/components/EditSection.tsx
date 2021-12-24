@@ -73,7 +73,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 							placeholder={__('Your Section Name', 'masteriyo')}
 							defaultValue={name}
 							{...register('name', {
-								required: __('Section name cannot be empty', 'masteriyo'),
+								required: __('Section name cannot be empty.', 'masteriyo'),
 							})}></Input>
 						{errors?.name && (
 							<FormErrorMessage>{errors?.name.message}</FormErrorMessage>

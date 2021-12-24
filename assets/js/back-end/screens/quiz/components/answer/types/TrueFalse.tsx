@@ -92,7 +92,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 						<AlertIcon />
 						<AlertTitle mr={2}>{__('Duplicate Names', 'masteriyo')}</AlertTitle>
 						<AlertDescription>
-							{__('Answer can not be duplicate', 'masteriyo')}
+							{__('Answer cannot be duplicate.', 'masteriyo')}
 						</AlertDescription>
 					</Alert>
 				)}

@@ -233,7 +233,7 @@ const Section: React.FC<Props> = (props) => {
 								</AlertDialogHeader>
 								<AlertDialogBody>
 									{__(
-										"Are you sure? You can't restore this section",
+										'Are you sure? You can’t restore after deleting.',
 										'masteriyo'
 									)}
 								</AlertDialogBody>

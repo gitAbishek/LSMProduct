@@ -1274,7 +1274,7 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function single_add_to_cart_text() {
-		return apply_filters( 'masteriyo_single_course_add_to_cart_text', __( 'Add to cart', 'masteriyo' ), $this );
+		return apply_filters( 'masteriyo_single_course_add_to_cart_text', __( 'Buy Now', 'masteriyo' ), $this );
 	}
 
 	/**

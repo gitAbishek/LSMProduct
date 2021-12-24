@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php esc_html_e( 'Hello', 'masteriyo' ); ?>, <span class="masteriyo-profile-name"><?php echo esc_html( $user->get_display_name() ); ?></span>
 	</h3>
 
-	<p class="masteriyo-welcome-msg"><?php esc_html_e( 'Welcome to your dashboard here you can view your overview and your stats', 'masteriyo' ); ?></p>
+	<p class="masteriyo-welcome-msg"><?php esc_html_e( 'Welcome to your dashboard here you can view your overview and your stats.', 'masteriyo' ); ?></p>
 
 	<a
 		class="masteriyo-view-account masteriyo-btn masteriyo-btn-default"

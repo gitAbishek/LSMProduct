@@ -52,12 +52,9 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 							<FormControl>
 								<Stack direction="row" spacing="4">
 									<FormLabel>
-										{__('Show/Hide Search', 'masteriyo')}
+										{__('Show Search', 'masteriyo')}
 										<Tooltip
-											label={__(
-												'Display search on course archive page',
-												'masteriyo'
-											)}
+											label={__('Display search on courses page.', 'masteriyo')}
 											hasArrow
 											fontSize="xs">
 											<Box as="span" sx={infoIconStyles}>
@@ -75,10 +72,10 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 							<FormControl
 								isInvalid={!!errors?.course_archive?.display?.per_page}>
 								<FormLabel>
-									{__('Course Per Page', 'masteriyo')}
+									{__('Courses Per Page', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Display number of courses per page on course archive',
+											'Total number of courses to be shown in courses page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -92,7 +89,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 									name="course_archive.display.per_page"
 									defaultValue={courseArchiveData?.display?.per_page}
 									rules={{
-										required: __('Course per page is required.', 'masteriyo'),
+										required: __('Courses per page is required.', 'masteriyo'),
 									}}
 									render={({ field }) => (
 										<NumberInput {...field} min={1}>
@@ -113,10 +110,10 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 							<FormControl
 								isInvalid={!!errors?.course_archive?.display?.per_row}>
 								<FormLabel>
-									{__('Course Per Row', 'masteriyo')}
+									{__('Courses Per Row', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Display number of courses per row on course archive',
+											'Total number of courses to be shown per row in courses page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -130,7 +127,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 									name="course_archive.display.per_row"
 									defaultValue={courseArchiveData?.display?.per_row}
 									rules={{
-										required: __('Course per row is required.', 'masteriyo'),
+										required: __('Courses per row is required.', 'masteriyo'),
 									}}
 									render={({ field }) => (
 										<NumberInput {...field} min={1} max={4}>

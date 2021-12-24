@@ -253,10 +253,7 @@ const EditOrder = () => {
 														<Select
 															defaultValue={orderQuery.data.status}
 															{...register('status', {
-																required: __(
-																	'Please select a status',
-																	'masteriyo'
-																),
+																required: __('Select a status.', 'masteriyo'),
 															})}>
 															{orderStatusList.map((option) => (
 																<option key={option.value} value={option.value}>
@@ -278,13 +275,13 @@ const EditOrder = () => {
 														</FormLabel>
 														<Select
 															placeholder={__(
-																'Select a payment method',
+																'Select a payment method.',
 																'masteriyo'
 															)}
 															defaultValue={orderQuery.data.payment_method}
 															{...register('payment_method', {
 																required: __(
-																	'Please select a payment method',
+																	'Select a payment method.',
 																	'masteriyo'
 																),
 															})}>
@@ -444,7 +441,7 @@ const EditOrder = () => {
 
 									<AlertDialogBody>
 										{__(
-											"Are you sure? You can't restore this order",
+											'Are you sure? You can’t restore after deleting.',
 											'masteriyo'
 										)}
 									</AlertDialogBody>

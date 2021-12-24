@@ -709,7 +709,7 @@ class ScriptStyle {
 						'labels'          => array(
 							'save'                   => __( 'Save', 'masteriyo' ),
 							'saving'                 => __( 'Saving...', 'masteriyo' ),
-							'profile_update_success' => __( 'Your profile was updated successfully', 'masteriyo' ),
+							'profile_update_success' => __( 'Your profile was updated successfully.', 'masteriyo' ),
 						),
 					),
 				),
@@ -733,7 +733,7 @@ class ScriptStyle {
 						'max_course_rating'       => masteriyo_get_max_course_rating(),
 						'review_deleted_notice'   => masteriyo_get_template_html( 'notices/review-deleted.php' ),
 						'labels'                  => array(
-							'type_confirm'   => __( 'Type CONFIRM to proceed', 'masteriyo' ),
+							'type_confirm'   => __( 'Type CONFIRM to proceed.', 'masteriyo' ),
 							'try_again'      => __( 'Try again', 'masteriyo' ),
 							'submit'         => __( 'Submit', 'masteriyo' ),
 							'update'         => __( 'Update', 'masteriyo' ),

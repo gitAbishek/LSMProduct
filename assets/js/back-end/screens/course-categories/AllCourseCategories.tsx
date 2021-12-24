@@ -170,7 +170,10 @@ const AllCourseCategories = () => {
 							{__('Delete Category', 'masteriyo')} {name}
 						</AlertDialogHeader>
 						<AlertDialogBody>
-							{__("Are you sure? You can't restore this category", 'masteriyo')}
+							{__(
+								'Are you sure? You can’t restore after deleting.',
+								'masteriyo'
+							)}
 						</AlertDialogBody>
 						<AlertDialogFooter>
 							<ButtonGroup>

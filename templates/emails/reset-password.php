@@ -44,7 +44,7 @@ do_action( 'masteriyo_email_header', $email_heading, $email );
 	class="email-template--button"
 	href="<?php echo esc_url( masteriyo_get_password_reset_link( $reset_key, $user->get_id() ) ); ?>"
 >
-	<?php esc_html_e( 'Click here to reset your password', 'masteriyo' ); ?>
+	<?php esc_html_e( 'Click here to reset your password.', 'masteriyo' ); ?>
 </a>
 
 <?php

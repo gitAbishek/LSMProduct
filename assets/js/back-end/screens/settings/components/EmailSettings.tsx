@@ -48,7 +48,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										{__('Enable', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'New order emails are sent to students when a new order is received.',
+												'Email sent to user when a new order is received.',
 												'masteriyo'
 											)}
 											hasArrow
@@ -80,7 +80,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										{__('Enable', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'Order complete emails are sent to students when their orders are marked completed.',
+												'Email sent to user when an order is complete.',
 												'masteriyo'
 											)}
 											hasArrow
@@ -112,7 +112,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										{__('Enable', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'This is an order notification sent to students containing order details after an order is placed on-hold.',
+												'Email sent to user when an order is placed on-hold.',
 												'masteriyo'
 											)}
 											hasArrow
@@ -143,7 +143,7 @@ const EmailSetttings: React.FC<Props> = (props) => {
 										{__('Enable', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'Cancelled order emails are sent to students when orders have been marked cancelled (if they were previously on-hold).',
+												'Email sent to user when an order is cancelled.',
 												'masteriyo'
 											)}
 											hasArrow

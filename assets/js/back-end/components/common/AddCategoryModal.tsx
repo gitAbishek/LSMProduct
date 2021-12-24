@@ -43,7 +43,7 @@ const AddCategoryModal = () => {
 				toast({
 					title: __('Category Added', 'masteriyo'),
 					description: __(
-						'You can select the new category form dropdown',
+						'You can select the new category from dropdown.',
 						'masteriyo'
 					),
 					isClosable: true,
@@ -78,7 +78,7 @@ const AddCategoryModal = () => {
 			<ModalContent>
 				<FormProvider {...methods}>
 					<form onSubmit={methods.handleSubmit(onSubmit)}>
-						<ModalHeader>{__('Add new category', 'masteriyo')}</ModalHeader>
+						<ModalHeader>{__('Add New Category', 'masteriyo')}</ModalHeader>
 						<ModalCloseButton />
 						<ModalBody>
 							<Stack direction="column" spacing="4">
@@ -94,7 +94,7 @@ const AddCategoryModal = () => {
 								type="submit"
 								isFullWidth
 								isLoading={createCategory.isLoading}>
-								{__('Add new Category', 'masteriyo')}
+								{__('Add New Category', 'masteriyo')}
 							</Button>
 						</ModalFooter>
 					</form>

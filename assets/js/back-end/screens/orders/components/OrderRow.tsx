@@ -238,7 +238,10 @@ const OrderRow: React.FC<Props> = (props) => {
 								{__('Delete Order', 'masteriyo')} {order_number}
 							</AlertDialogHeader>
 							<AlertDialogBody>
-								{__("Are you sure? You can't restore this order.", 'masteriyo')}
+								{__(
+									'Are you sure? You can’t restore after deleting.',
+									'masteriyo'
+								)}
 							</AlertDialogBody>
 							<AlertDialogFooter>
 								<ButtonGroup>

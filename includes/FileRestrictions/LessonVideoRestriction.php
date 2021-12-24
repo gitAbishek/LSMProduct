@@ -31,7 +31,7 @@ class LessonVideoRestriction extends FileRestriction {
 		}
 
 		if ( ! is_user_logged_in() ) {
-			$this->send_error( __( 'You are not allowed to access this file', 'masteriyo' ), '', 403 );
+			$this->send_error( __( 'You are not allowed to access this file.', 'masteriyo' ), '', 403 );
 		}
 
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
@@ -46,7 +46,7 @@ class LessonVideoRestriction extends FileRestriction {
 			$this->send_lesson_video_file();
 		}
 
-		$this->send_error( __( 'You are not allowed to access this file', 'masteriyo' ), '', 403 );
+		$this->send_error( __( 'You are not allowed to access this file.', 'masteriyo' ), '', 403 );
 	}
 
 	/**
@@ -64,7 +64,7 @@ class LessonVideoRestriction extends FileRestriction {
 			$file_url = apply_filters( 'masteriyo_self_hosted_lesson_video_fileurl', $file_url, $lesson );
 
 			if ( ! is_string( $file_url ) || empty( $file_url ) ) {
-				$this->send_error( __( 'File not found', 'masteriyo' ) );
+				$this->send_error( __( 'File not found.', 'masteriyo' ) );
 			}
 			$this->redirect( $file_url );
 		}
@@ -73,7 +73,7 @@ class LessonVideoRestriction extends FileRestriction {
 		$file_path = apply_filters( 'masteriyo_self_hosted_lesson_video_filepath', $file_path, $lesson );
 
 		if ( ! is_string( $file_path ) || empty( $file_path ) ) {
-			$this->send_error( __( 'File not found', 'masteriyo' ) );
+			$this->send_error( __( 'File not found.', 'masteriyo' ) );
 		}
 
 		$this->send_file( $file_path );

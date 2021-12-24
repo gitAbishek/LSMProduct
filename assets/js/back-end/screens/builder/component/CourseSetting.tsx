@@ -148,7 +148,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 														name="duration_hour"
 														defaultValue={hours || 0}
 														rules={{
-															required: __('Hours is required', 'masteriyo'),
+															required: __('Hours is required.', 'masteriyo'),
 															min: 0,
 														}}
 														render={({ field }) => (
@@ -177,7 +177,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 														name="duration_minute"
 														defaultValue={minutes || 0}
 														rules={{
-															required: __('Minutes is required', 'masteriyo'),
+															required: __('Minutes is required.', 'masteriyo'),
 															min: 0,
 															max: 59,
 														}}

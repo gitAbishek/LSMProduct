@@ -46,7 +46,7 @@ const SingleCourseSettings: React.FC<Props> = (props) => {
 										{__('Enable Review', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'Display review tab on single course page',
+												'Display review tab in single course page.',
 												'masteriyo'
 											)}
 											hasArrow

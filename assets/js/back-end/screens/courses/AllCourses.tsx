@@ -107,7 +107,7 @@ const AllCourses = () => {
 									<Tr>
 										<Th>{__('Title', 'masteriyo')}</Th>
 										<Th>{__('Categories', 'masteriyo')}</Th>
-										<Th>{__('Author', 'masteriyo')}</Th>
+										<Th>{__('Instructor', 'masteriyo')}</Th>
 										<Th>{__('Price', 'masteriyo')}</Th>
 										<Th>{__('Date', 'masteriyo')}</Th>
 										<Th>{__('Actions', 'masteriyo')}</Th>
@@ -159,7 +159,10 @@ const AllCourses = () => {
 							{__('Deleting Course', 'masteriyo')} {name}
 						</AlertDialogHeader>
 						<AlertDialogBody>
-							{__("Are you sure? You can't restore this back", 'masteriyo')}
+							{__(
+								'Are you sure? You can’t restore after deleting.',
+								'masteriyo'
+							)}
 						</AlertDialogBody>
 						<AlertDialogFooter>
 							<ButtonGroup>

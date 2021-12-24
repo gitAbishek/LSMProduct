@@ -36,13 +36,13 @@ const Course: React.FC<Props> = (props) => {
 					<FormControl isInvalid={!!errors?.course_archive?.display?.per_row}>
 						<Flex justify="space-between" align="center">
 							<FormLabel sx={{ fontWeight: 'bold' }}>
-								{__('Course Per Row', 'masteriyo')}
+								{__('Courses Per Row', 'masteriyo')}
 							</FormLabel>
 							<Stack direction="column">
 								<NumberInput w="md" defaultValue={3} min={1} max={4}>
 									<NumberInputField
 										{...register('course_archive.display.per_row', {
-											required: 'Course per row is required.',
+											required: 'Courses per row is required.',
 										})}
 									/>
 									<NumberInputStepper>
@@ -61,13 +61,13 @@ const Course: React.FC<Props> = (props) => {
 					<FormControl isInvalid={!!errors?.course_archive?.display?.per_page}>
 						<Flex justify="space-between" align="center">
 							<FormLabel sx={{ fontWeight: 'bold' }}>
-								{__('Course Per Page', 'masteriyo')}
+								{__('Courses Per Page', 'masteriyo')}
 							</FormLabel>
 							<Stack direction="column">
 								<NumberInput w="md" defaultValue={12} min={1}>
 									<NumberInputField
 										{...register('course_archive.display.per_page', {
-											required: 'Course per page is required.',
+											required: 'Courses per page is required.',
 										})}
 									/>
 									<NumberInputStepper>

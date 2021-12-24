@@ -211,7 +211,7 @@ class Masteriyo {
 			'docs'    => array(
 				'url'        => apply_filters( 'masteriyo_docs_url', 'https://docs.masteriyo.com/' ),
 				'label'      => __( 'Docs', 'masteriyo' ),
-				'aria-label' => __( 'View masteriyo documentation', 'masteriyo' ),
+				'aria-label' => __( 'View Masteriyo documentation', 'masteriyo' ),
 			),
 			'support' => array(
 				'url'        => apply_filters( 'masteriyo_community_support_url', 'https://wordpress.org/support/plugin/learning-management-system/' ),
@@ -246,7 +246,7 @@ class Masteriyo {
 			'settings' => array(
 				'url'        => admin_url( 'admin.php?page=masteriyo#/settings' ),
 				'label'      => __( 'Settings', 'masteriyo' ),
-				'aria-label' => __( 'View masteriyo settings', 'masteriyo' ),
+				'aria-label' => __( 'View Masteriyo settings', 'masteriyo' ),
 			),
 		);
 		$action_links_html = array();
@@ -431,7 +431,7 @@ class Masteriyo {
 			echo wp_sprintf(
 				'<div class="notice notice-warning"><p><strong>%s</strong>: %s</p></div>',
 				'Masteriyo',
-				esc_html__( 'Minimum WordPress version required to work Masteriyo is v5.0.', 'masteriyo' )
+				esc_html__( 'Minimum WordPress version required for Masteriyo to work is v5.0.', 'masteriyo' )
 			);
 		}
 	}

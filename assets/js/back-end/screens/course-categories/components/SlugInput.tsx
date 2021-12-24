@@ -27,7 +27,7 @@ const SlugInput: React.FC<Props> = (props) => {
 				{...register('slug', {
 					validate: (value) =>
 						value.includes(' ')
-							? __('Spaces are not allowed', 'masteriyo')
+							? __('Spaces are not allowed.', 'masteriyo')
 							: true,
 				})}
 			/>

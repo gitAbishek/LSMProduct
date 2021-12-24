@@ -91,7 +91,7 @@ const MultipleChoice: React.FC<Props> = (props) => {
 						<AlertIcon />
 						<AlertTitle mr={2}>{__('Duplicate Names', 'masteriyo')}</AlertTitle>
 						<AlertDescription>
-							{__('Answer can not be duplicate', 'masteriyo')}
+							{__('Answer cannot be duplicate.', 'masteriyo')}
 						</AlertDescription>
 					</Alert>
 				)}
@@ -99,10 +99,10 @@ const MultipleChoice: React.FC<Props> = (props) => {
 					<Alert status="error" mb="4" fontSize="xs" p="2">
 						<AlertIcon />
 						<AlertTitle mr={2}>
-							{__('No answer checked', 'masteriyo')}
+							{__('No answer checked.', 'masteriyo')}
 						</AlertTitle>
 						<AlertDescription>
-							{__('Please check at least one answer', 'masteriyo')}
+							{__('Please check at least one answer.', 'masteriyo')}
 						</AlertDescription>
 					</Alert>
 				)}

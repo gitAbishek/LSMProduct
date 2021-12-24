@@ -128,7 +128,7 @@ const Sidebar: React.FC<Props> = (props) => {
 							</Heading>
 							<Link href={coursePermalink} fontSize="x-small">
 								<Icon as={BiChevronLeft} fontSize="sm" />
-								{__('Back to course', 'masteriyo')}
+								{__('Back to Course', 'masteriyo')}
 							</Link>
 						</Stack>
 						<Box p="0" position="relative" overflowX="hidden" flex="1">

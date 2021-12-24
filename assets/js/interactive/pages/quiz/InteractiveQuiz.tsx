@@ -121,7 +121,7 @@ const InteractiveQuiz = () => {
 
 					toast({
 						title: __('Mark as completed', 'masteriyo'),
-						description: __('Quiz has been marked as completed', 'masteriyo'),
+						description: __('Quiz has been marked as completed.', 'masteriyo'),
 						isClosable: true,
 						status: 'success',
 					});

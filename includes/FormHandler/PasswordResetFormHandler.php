@@ -41,7 +41,7 @@ class PasswordResetFormHandler {
 			$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
 			if ( empty( $nonce_value ) ) {
-				throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
+				throw new \Exception( __( 'Nonce is missing.', 'masteriyo' ) );
 			}
 
 			if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-password-reset' ) ) {
@@ -86,10 +86,10 @@ class PasswordResetFormHandler {
 		$data = $this->get_form_data();
 
 		if ( empty( $data['password'] ) ) {
-			throw new \Exception( __( 'Password is required', 'masteriyo' ) );
+			throw new \Exception( __( 'Password is required.', 'masteriyo' ) );
 		}
 		if ( empty( $data['confirm-password'] ) ) {
-			throw new \Exception( __( 'Confirm password is required', 'masteriyo' ) );
+			throw new \Exception( __( 'Confirm password is required..', 'masteriyo' ) );
 		}
 		if ( $data['password'] !== $data['confirm-password'] ) {
 			throw new \Exception( __( 'The passwords doesn\'t match', 'masteriyo' ) );
@@ -122,7 +122,7 @@ class PasswordResetFormHandler {
 		$user = check_password_reset_key( $data['reset_key'], $data['reset_login'] );
 
 		if ( is_wp_error( $user ) ) {
-			throw new \Exception( __( 'This key is invalid or has already been used. Please reset your password again if needed', 'masteriyo' ) );
+			throw new \Exception( __( 'This key is invalid or has already been used. Please reset your password again if needed.', 'masteriyo' ) );
 		}
 
 		$validation_error = new \WP_Error();
@@ -151,7 +151,7 @@ class PasswordResetFormHandler {
 		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
 		if ( empty( $nonce_value ) ) {
-			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
+			throw new \Exception( __( 'Nonce is missing.', 'masteriyo' ) );
 		}
 		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-password-reset' ) ) {
 			throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );

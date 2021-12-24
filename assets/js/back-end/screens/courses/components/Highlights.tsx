@@ -1,4 +1,4 @@
-import { Box, FormControl, FormHelperText, FormLabel } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel } from '@chakra-ui/react';
 import Document from '@tiptap/extension-document';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import { EditorContent, useEditor } from '@tiptap/react';
@@ -44,9 +44,6 @@ const Hightlights: React.FC<Props> = (props) => {
 				}}>
 				<EditorContent editor={editor} />
 			</Box>
-			<FormHelperText fontSize="xs">
-				{__('Add your course highlight on each bullet', 'masteriyo')}
-			</FormHelperText>
 		</FormControl>
 	);
 };

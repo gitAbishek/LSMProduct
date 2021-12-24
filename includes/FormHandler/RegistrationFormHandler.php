@@ -142,11 +142,11 @@ class RegistrationFormHandler {
 
 		if ( ! masteriyo_registration_is_generate_password() ) {
 			if ( empty( $data['password'] ) ) {
-				$error->add( 'password_required', __( 'Password is required.', 'masteriyo' ) );
+				$error->add( 'password_required', __( 'Password is required..', 'masteriyo' ) );
 			}
 
 			if ( empty( $data['confirm-password'] ) ) {
-				$error->add( 'confirm_password_required', __( 'Confirm password is required.', 'masteriyo' ) );
+				$error->add( 'confirm_password_required', __( 'Confirm password is required...', 'masteriyo' ) );
 			}
 
 			if ( $data['password'] !== $data['confirm-password'] ) {
@@ -194,7 +194,7 @@ class RegistrationFormHandler {
 		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
 		if ( empty( $nonce_value ) ) {
-			throw new \WP_Error( 'nonce_missing', __( 'Nonce is missing', 'masteriyo' ) );
+			throw new \WP_Error( 'nonce_missing', __( 'Nonce is missing.', 'masteriyo' ) );
 		}
 		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-register' ) ) {
 			throw new \WP_Error( 'invalid_nonce', __( 'Invalid nonce', 'masteriyo' ) );

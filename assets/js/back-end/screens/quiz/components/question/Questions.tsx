@@ -77,10 +77,7 @@ const Questions: React.FC<Props> = (props) => {
 						{questionQuery.data.length == 0 ? (
 							<Alert status="info" fontSize="sm" p="2.5">
 								<AlertIcon />
-								{__(
-									'There are no questions right now, You can add them by clicking on Add New Question',
-									'masteriyo'
-								)}
+								{__('No questions found.', 'masteriyo')}
 							</Alert>
 						) : (
 							<Accordion allowToggle>

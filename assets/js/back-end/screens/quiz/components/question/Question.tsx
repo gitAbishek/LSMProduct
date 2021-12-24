@@ -207,7 +207,10 @@ const Question: React.FC<Props> = (props) => {
 							{__('Delete', 'masteriyo') + ' ' + questionData.name}
 						</AlertDialogHeader>
 						<AlertDialogBody>
-							{__("Are you sure? You can't restore this section", 'masteriyo')}
+							{__(
+								'Are you sure? You can’t restore after deleting.',
+								'masteriyo'
+							)}
 						</AlertDialogBody>
 						<AlertDialogFooter>
 							<ButtonGroup>

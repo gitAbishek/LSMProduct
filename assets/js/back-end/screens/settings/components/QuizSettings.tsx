@@ -50,10 +50,10 @@ const QuizSettings: React.FC<Props> = (props) => {
 							<FormControl
 								isInvalid={!!errors?.quiz?.styling?.questions_display_per_page}>
 								<FormLabel>
-									{__('Question Display Per Page', 'masteriyo')}
+									{__('Questions Per Page', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Display number of questions per page during quiz',
+											'Total number of questions to be shown per page for a quiz.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -68,7 +68,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 									defaultValue={quizData?.styling?.questions_display_per_page}
 									rules={{
 										required: __(
-											'Question display per page is required.',
+											'Questions per page is required.',
 											'masteriyo'
 										),
 									}}

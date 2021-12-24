@@ -62,13 +62,13 @@ const QuizSettings: React.FC<Props> = (props) => {
 					<TabPanel>
 						<Stack direction="column" spacing="6">
 							<FormControl isInvalid={!!errors?.full_mark}>
-								<FormLabel>{__('Full Point', 'masteriyo')}</FormLabel>
+								<FormLabel>{__('Full Points', 'masteriyo')}</FormLabel>
 								<Controller
 									name="full_mark"
 									defaultValue={quizData?.full_mark || 100}
 									rules={{
 										required: __(
-											'Full Point is required for the quiz',
+											'Full points is required for the quiz.',
 											'masteriyo'
 										),
 									}}
@@ -88,13 +88,13 @@ const QuizSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl isInvalid={!!errors?.pass_mark}>
-								<FormLabel>{__('Pass Point', 'masteriyo')}</FormLabel>
+								<FormLabel>{__('Pass Points', 'masteriyo')}</FormLabel>
 								<Controller
 									name="pass_mark"
 									defaultValue={quizData?.pass_mark || 40}
 									rules={{
 										required: __(
-											'Pass Point is required for the quiz',
+											'Pass points is required for the quiz.',
 											'masteriyo'
 										),
 									}}
@@ -121,7 +121,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 											name="duration_hour"
 											defaultValue={hours || 0}
 											rules={{
-												required: __('Hours is required', 'masteriyo'),
+												required: __('Hours is required.', 'masteriyo'),
 												min: 0,
 											}}
 											render={({ field }) => (
@@ -149,7 +149,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 											name="duration_minute"
 											defaultValue={minutes || 0}
 											rules={{
-												required: __('Minutes is required', 'masteriyo'),
+												required: __('Minutes is required.', 'masteriyo'),
 												min: 0,
 												max: 59,
 											}}
@@ -212,7 +212,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 													defaultValue={quizData?.attempts_allowed || 0}
 													rules={{
 														required: __(
-															'Attempts allowed is required',
+															'Attempts allowed is required.',
 															'masteriyo'
 														),
 													}}
@@ -245,9 +245,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 					<TabPanel>
 						<Stack direction="column" spacing="6">
 							<FormControl>
-								<FormLabel>
-									{__('Questions Display Per Page', 'masteriyo')}
-								</FormLabel>
+								<FormLabel>{__('Questions Per Page', 'masteriyo')}</FormLabel>
 								<RadioGroup onChange={setDisplayValue} value={displayValue}>
 									<Stack direction="column" spacing="4">
 										<Stack direction="row" spacing="6" align="flex-start">
@@ -286,7 +284,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 													}
 													rules={{
 														required: __(
-															'Question display per page is required',
+															'Questions per page is required.',
 															'masteriyo'
 														),
 													}}

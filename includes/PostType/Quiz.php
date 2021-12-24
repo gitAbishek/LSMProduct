@@ -49,7 +49,7 @@ class Quiz extends PostType {
 			'view_items'            => __( 'View Quizzes', 'masteriyo' ),
 			'search_items'          => __( 'Search Quiz', 'masteriyo' ),
 			'not_found'             => __( 'Not found', 'masteriyo' ),
-			'not_found_in_trash'    => __( 'Not found in Trash', 'masteriyo' ),
+			'not_found_in_trash'    => __( 'Not found in Trash.', 'masteriyo' ),
 			'featured_image'        => __( 'Featured Image', 'masteriyo' ),
 			'set_featured_image'    => __( 'Set featured image', 'masteriyo' ),
 			'remove_featured_image' => __( 'Remove featured image', 'masteriyo' ),

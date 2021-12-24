@@ -90,7 +90,7 @@ const QuestionList: React.FC = () => {
 				toast({
 					title: __('Your question has been asked', 'masteriyo'),
 					description: __(
-						'You will get your answer as soon as possible',
+						'You will get your answer as soon as possible.',
 						'masteriyo'
 					),
 					status: 'success',
@@ -198,7 +198,7 @@ const QuestionList: React.FC = () => {
 									placeholder="What is your question?"
 									disabled={addNewQuestion.isLoading}
 									{...register('content', {
-										required: __('Please write your message', 'masteriyo'),
+										required: __('Please write your message.', 'masteriyo'),
 									})}
 								/>
 								<FormErrorMessage>

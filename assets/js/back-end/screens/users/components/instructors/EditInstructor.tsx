@@ -237,7 +237,7 @@ const EditInstructor: React.FC = () => {
 														<FormLabel>{__('Approved', 'masteriyo')}</FormLabel>
 														<Tooltip
 															label={__(
-																'Approve or Unapproved the user as instructor.',
+																'Approve or unapprove the user as instructor.',
 																'masteriyo'
 															)}
 															hasArrow

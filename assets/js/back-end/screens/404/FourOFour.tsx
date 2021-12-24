@@ -25,7 +25,7 @@ const FourOFour = () => {
 							{__('Oops - Page Not Found', 'masteriyo')}
 						</Heading>
 						<Text fontSize="sm" color="gray.500">
-							{__('We can not find the page you are looking for', 'masteriyo')}
+							{__('We cannot find the page you are looking for.', 'masteriyo')}
 						</Text>
 						<Link to={routes.courses.list}>
 							<Button colorScheme="blue">

@@ -46,7 +46,7 @@ const LearningPageSettings: React.FC<Props> = (props) => {
 										{__('Enable Questions & Answers', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'Display question & answers tab on learn page',
+												'Display questions & answers tab in learn page.',
 												'masteriyo'
 											)}
 											hasArrow

@@ -84,7 +84,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 						placeholder={__('Your Question Name', 'masteriyo')}
 						{...register('name', {
 							required: __(
-								'You must provide name for the question',
+								'You must provide name for the question.',
 								'masteriyo'
 							),
 						})}
@@ -129,7 +129,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 						defaultValue={questionData.points || 1}
 						rules={{
 							required: __(
-								'Please provide points for the question',
+								'Please provide points for the question.',
 								'masteriyo'
 							),
 							validate: {

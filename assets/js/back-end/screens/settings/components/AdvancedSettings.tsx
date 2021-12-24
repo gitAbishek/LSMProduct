@@ -101,7 +101,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										{__('Courses Page', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'This set course listing page where the courses are display',
+												'Select a page to be set as courses page. This page will show all available courses.',
 												'masteriyo'
 											)}
 											hasArrow
@@ -124,7 +124,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										{__('Learn Page', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'This set learn page where the enroll courses can be learned.',
+												'Select a page to be set as learning page. This page runs the distraction free course learning page for any course.',
 												'masteriyo'
 											)}
 											hasArrow
@@ -147,7 +147,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										{__('Account Page', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'Page contents: [masteriyo_my_account]',
+												'Select a page to be set as account page. This page shows the account of both student or instructor. The page should contain shortcode [masteriyo_account].',
 												'masteriyo'
 											)}
 											hasArrow
@@ -170,7 +170,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										{__('Checkout Page', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'Page contents: [masteriyo_checkout]',
+												'Select a page to be set as checkout page. This page shows the checkout page while purchasing any course. The page should contain shortcode [masteriyo_checkout].',
 												'masteriyo'
 											)}
 											hasArrow
@@ -193,7 +193,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										{__('Instructor Registration Page', 'masteriyo')}
 										<Tooltip
 											label={__(
-												'Page contents: [masteriyo_instructor_registration]',
+												'Select a page to be set as instructor registration page. This page shows the signup form to apply as an instructor. The page should contain shortcode [masteriyo_instructor_registration].',
 												'masteriyo'
 											)}
 											hasArrow
@@ -220,20 +220,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 					<TabPanel>
 						<Stack direction="column" spacing="8">
 							<FormControl>
-								<FormLabel>
-									{__('Course Category Base', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'Enter custom structures for your category URLs here.',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
+								<FormLabel>{__('Course Category Base', 'masteriyo')}</FormLabel>
 								<Stack direction="column">
 									<Input
 										type="text"
@@ -250,17 +237,6 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							<FormControl>
 								<FormLabel>
 									{__('Course Difficulty Base', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'Enter custom structures for your difficulty URLs here.',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
 								</FormLabel>
 								<Stack direction="column">
 									<Input
@@ -279,17 +255,6 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								<Stack direction="row">
 									<FormLabel>
 										{__('Single Course Permalink', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'Enter custom structures for your course URLs here.',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
 									</FormLabel>
 									<Controller
 										name="advance.permalinks.single_course_permalink"
@@ -702,7 +667,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								<Alert status="warning">
 									<AlertIcon />
 									{__(
-										'This section is for the development purpose and not recommended for live site.',
+										'This section is for development and testing purpose only and not recommended to be used in a live site.',
 										'masteriyo'
 									)}
 								</Alert>
@@ -711,7 +676,10 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										<FormLabel minW="3xs">
 											{__('Template Debug', 'masteriyo')}
 											<Tooltip
-												label={__('Use for template debugging', 'masteriyo')}
+												label={__(
+													'Enable it for template debugging.',
+													'masteriyo'
+												)}
 												hasArrow
 												fontSize="xs">
 												<Box as="span" sx={infoIconStyles}>
@@ -737,7 +705,10 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										<FormLabel minW="3xs">
 											{__('Debug', 'masteriyo')}
 											<Tooltip
-												label={__('Use for plugin debugging', 'masteriyo')}
+												label={__(
+													'Enable it for plugin debugging.',
+													'masteriyo'
+												)}
 												hasArrow
 												fontSize="xs">
 												<Box as="span" sx={infoIconStyles}>

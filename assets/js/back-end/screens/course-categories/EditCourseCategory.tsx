@@ -222,7 +222,7 @@ const EditCourseCategory = () => {
 
 									<AlertDialogBody>
 										{__(
-											"Are you sure? You can't restore this category",
+											'Are you sure? You can’t restore after deleting.',
 											'masteriyo'
 										)}
 									</AlertDialogBody>

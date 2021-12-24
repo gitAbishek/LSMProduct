@@ -116,7 +116,7 @@ class CustomerNewAccountEmail extends Email {
 	 * @return string
 	 */
 	public function get_default_heading() {
-		return __( 'New user registered', 'masteriyo' );
+		return __( 'New user registered.', 'masteriyo' );
 	}
 
 	/**

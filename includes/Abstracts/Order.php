@@ -345,7 +345,7 @@ abstract class Order extends Model {
 	 */
 	public function set_parent_id( $parent_id ) {
 		if ( $parent_id && ( $parent_id === $this->get_id() || is_null( masteriyo_get_order( $parent_id ) ) ) ) {
-			$this->error( 'order_invalid_parent_id', __( 'Invalid parent ID', 'masteriyo' ) );
+			$this->error( 'order_invalid_parent_id', __( 'Invalid parent ID.', 'masteriyo' ) );
 		}
 
 		$this->set_prop( 'parent_id', absint( $parent_id ) );

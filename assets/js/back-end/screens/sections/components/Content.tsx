@@ -183,7 +183,10 @@ const Content: React.FC<Props> = (props) => {
 							{sprintf(__('Delete %s - %s?', 'masteriyo'), type, name)}
 						</AlertDialogHeader>
 						<AlertDialogBody>
-							{__("Are you sure? You can't restore this section", 'masteriyo')}
+							{__(
+								'Are you sure? You can’t restore after deleting.',
+								'masteriyo'
+							)}
 						</AlertDialogBody>
 						<AlertDialogFooter>
 							<ButtonGroup>

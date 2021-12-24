@@ -79,7 +79,7 @@ const ScoreBoard: React.FC<Props> = (props) => {
 				<ListItem d="flex" alignItems="center">
 					<ListIcon as={isQuizAnswered} color={checkQuizTotalAnswered} />
 					<Text fontWeight="bold" flex="0 0 150px">
-						{__('Total Answered: ', 'masteriyo')}
+						{__('Answered Questions: ', 'masteriyo')}
 					</Text>
 					<Text>{scoreData.total_answered_questions}</Text>
 				</ListItem>
@@ -93,14 +93,14 @@ const ScoreBoard: React.FC<Props> = (props) => {
 				<ListItem d="flex" alignItems="center">
 					<ListIcon as={BiInfoSquare} color="green.500" />
 					<Text fontWeight="bold" flex="0 0 150px">
-						{__('Total Marks: ', 'masteriyo')}
+						{__('Total Points: ', 'masteriyo')}
 					</Text>
 					<Text>{scoreData.total_marks}</Text>
 				</ListItem>
 				<ListItem d="flex" alignItems="center">
 					<ListIcon as={BiFlag} color="green.500" />
 					<Text fontWeight="bold" flex="0 0 150px">
-						{__('Marks Earned: ', 'masteriyo')}
+						{__('Earned Points:', 'masteriyo')}
 					</Text>
 					<Text>{scoreData.earned_marks}</Text>
 				</ListItem>

@@ -25,7 +25,7 @@ const Name: React.FC<Props> = (props) => {
 				defaultValue={defaultValue}
 				placeholder={__('Your Quiz Name', 'masteriyo')}
 				{...register('name', {
-					required: __('You must provide name for the quiz', 'masteriyo'),
+					required: __('You must provide name for the quiz.', 'masteriyo'),
 				})}
 			/>
 			<FormErrorMessage>

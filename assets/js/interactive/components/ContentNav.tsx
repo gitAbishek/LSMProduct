@@ -79,7 +79,7 @@ const ContentNav: React.FC<Props> = (props) => {
 									</Center>
 									<Stack direction="column" spacing="0">
 										<Text fontSize="xs" color="gray.500">
-											{__('Prev', 'masteriyo')}
+											{__('Pervious', 'masteriyo')}
 										</Text>
 										<Heading fontSize="xs">{navigation?.previous.name}</Heading>
 									</Stack>

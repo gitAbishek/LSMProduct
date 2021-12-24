@@ -910,13 +910,13 @@ class QuizesController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'pass_mark'                  => array(
-					'description' => __( 'Quiz pass mark.', 'masteriyo' ),
+					'description' => __( 'Quiz pass points.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => false,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'full_mark'                  => array(
-					'description' => __( 'Quiz full mark..', 'masteriyo' ),
+					'description' => __( 'Quiz total points..', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => false,
 					'context'     => array( 'view', 'edit' ),
@@ -934,7 +934,7 @@ class QuizesController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'questions_display_per_page' => array(
-					'description' => __( 'Quiz questions display per page', 'masteriyo' ),
+					'description' => __( 'Quiz questions per page.', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => false,
 					'context'     => array( 'view', 'edit' ),

@@ -241,7 +241,7 @@ class SettingsController extends CrudController {
 							'items'       => array(
 								'type'           => 'object',
 								'enable_search'  => array(
-									'description' => __( 'Enable course search', 'masteriyo' ),
+									'description' => __( 'Enable course search.', 'masteriyo' ),
 									'type'        => 'boolean',
 									'context'     => array( 'view', 'edit' ),
 								),
@@ -256,7 +256,7 @@ class SettingsController extends CrudController {
 									'context'     => array( 'view', 'edit' ),
 								),
 								'thumbnail_size' => array(
-									'description' => __( 'Course thumbnail size', 'masteriyo' ),
+									'description' => __( 'Course thumbnail size.', 'masteriyo' ),
 									'type'        => 'string',
 									'enum'        => get_intermediate_image_sizes(),
 									'context'     => array( 'view', 'edit' ),
@@ -277,7 +277,7 @@ class SettingsController extends CrudController {
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
 								'enable_review' => array(
-									'description' => __( 'Enable course review', 'masteriyo' ),
+									'description' => __( 'Enable course review.', 'masteriyo' ),
 									'type'        => 'boolean',
 									'context'     => array( 'view', 'edit' ),
 								),
@@ -298,7 +298,7 @@ class SettingsController extends CrudController {
 							'items'       => array(
 								'type' => 'object',
 								'questions_display_per_page' => array(
-									'description' => __( 'Quiz questions display per page', 'masteriyo' ),
+									'description' => __( 'Quiz questions per page.', 'masteriyo' ),
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),
 								),
@@ -774,18 +774,18 @@ class SettingsController extends CrudController {
 							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
-								'type'                     => 'object',
-								'account_page_id'          => array(
+								'type'             => 'object',
+								'account_page_id'  => array(
 									'description' => __( 'Account page ID.', 'masteriyo' ),
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),
 								),
-								'courses_page_id'          => array(
+								'courses_page_id'  => array(
 									'description' => __( 'Archive course page ID.', 'masteriyo' ),
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),
 								),
-								'checkout_page_id'         => array(
+								'checkout_page_id' => array(
 									'description' => __( 'Checkout page ID.', 'masteriyo' ),
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),

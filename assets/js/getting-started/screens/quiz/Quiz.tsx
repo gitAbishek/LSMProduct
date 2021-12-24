@@ -38,14 +38,14 @@ const Quiz: React.FC<Props> = (props) => {
 						isInvalid={!!errors?.quiz?.styling?.questions_display_per_page}>
 						<Flex justify="space-between" align="center">
 							<FormLabel sx={{ fontWeight: 'bold' }}>
-								{__('Questions Display Per Page', 'masteriyo')}
+								{__('Questions Per Page', 'masteriyo')}
 							</FormLabel>
 							<Stack direction="column">
 								<InputGroup w="md" size="md">
 									<NumberInput w="md" defaultValue={5} min={1}>
 										<NumberInputField
 											{...register('quiz.styling.questions_display_per_page', {
-												required: 'Question display per page is required.',
+												required: 'Questions per page is required.',
 											})}
 										/>
 										<NumberInputStepper>

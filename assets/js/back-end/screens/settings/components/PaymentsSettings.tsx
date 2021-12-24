@@ -110,17 +110,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 							<Stack direction="column" spacing="6">
 								<Stack direction="row" spacing="8">
 									<FormControl>
-										<FormLabel>
-											{__('Country', 'masteriyo')}
-											<Tooltip
-												label={__('Country where you live', 'masteriyo')}
-												hasArrow
-												fontSize="xs">
-												<Box as="span" sx={infoIconStyles}>
-													<Icon as={BiInfoCircle} />
-												</Box>
-											</Tooltip>
-										</FormLabel>
+										<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
 
 										<Select
 											{...register('payments.store.country')}
@@ -133,20 +123,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</Select>
 									</FormControl>
 									<FormControl>
-										<FormLabel>
-											{__('State', 'masteriyo')}
-											<Tooltip
-												label={__(
-													'Your state where you are residing',
-													'masteriyo'
-												)}
-												hasArrow
-												fontSize="xs">
-												<Box as="span" sx={infoIconStyles}>
-													<Icon as={BiInfoCircle} />
-												</Box>
-											</Tooltip>
-										</FormLabel>
+										<FormLabel>{__('State', 'masteriyo')}</FormLabel>
 
 										<Select
 											{...register('payments.store.state')}
@@ -167,20 +144,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 								</Stack>
 								<Stack direction="row" spacing="8">
 									<FormControl>
-										<FormLabel>
-											{__('City', 'masteriyo')}
-											<Tooltip
-												label={__(
-													'Your city where you are residing',
-													'masteriyo'
-												)}
-												hasArrow
-												fontSize="xs">
-												<Box as="span" sx={infoIconStyles}>
-													<Icon as={BiInfoCircle} />
-												</Box>
-											</Tooltip>
-										</FormLabel>
+										<FormLabel>{__('City', 'masteriyo')}</FormLabel>
 
 										<Input
 											type="text"
@@ -189,17 +153,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										/>
 									</FormControl>
 									<FormControl>
-										<FormLabel>
-											{__('Address Line 1', 'masteriyo')}
-											<Tooltip
-												label={__('Your street address', 'masteriyo')}
-												hasArrow
-												fontSize="xs">
-												<Box as="span" sx={infoIconStyles}>
-													<Icon as={BiInfoCircle} />
-												</Box>
-											</Tooltip>
-										</FormLabel>
+										<FormLabel>{__('Address Line 1', 'masteriyo')}</FormLabel>
 										<Input
 											type="text"
 											{...register('payments.store.address_line1')}
@@ -208,17 +162,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 									</FormControl>
 								</Stack>
 								<FormControl>
-									<FormLabel>
-										{__('Address Line 2', 'masteriyo')}
-										<Tooltip
-											label={__('Your street address 2', 'masteriyo')}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
+									<FormLabel>{__('Address Line 2', 'masteriyo')}</FormLabel>
 									<Input
 										type="text"
 										{...register('payments.store.address_line2')}
@@ -234,7 +178,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormLabel>
 											{__('Currency', 'masteriyo')}
 											<Tooltip
-												label={__('Select default currency', 'masteriyo')}
+												label={__('Select default currency.', 'masteriyo')}
 												hasArrow
 												fontSize="xs">
 												<Box as="span" sx={infoIconStyles}>
@@ -259,7 +203,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											{__('Currency Position', 'masteriyo')}
 											<Tooltip
 												label={__(
-													'Specifies where the currency symbol will appear',
+													'Specifies where the currency symbol will appear.',
 													'masteriyo'
 												)}
 												hasArrow
@@ -292,7 +236,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											{__('Thousand Separator', 'masteriyo')}
 											<Tooltip
 												label={__(
-													"It can't be a number and same as decimal separator",
+													"It can't be a number and same as decimal separator.",
 													'masteriyo'
 												)}
 												hasArrow
@@ -319,7 +263,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												validate: (value) =>
 													hasNumber(value) ||
 													__(
-														"Thousand separator can't be a number",
+														"Thousand separator can't be a number.",
 														'masteriyo'
 													),
 											})}
@@ -336,7 +280,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											{__('Decimal Separator', 'masteriyo')}
 											<Tooltip
 												label={__(
-													"It can't be a number and same as thousand separator",
+													"It can't be a number and same as thousand separator.",
 													'masteriyo'
 												)}
 												hasArrow
@@ -363,7 +307,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												validate: (value) =>
 													hasNumber(value) ||
 													__(
-														"Decimal separator can't be a number",
+														"Decimal separator can't be a number.",
 														'masteriyo'
 													),
 											})}
@@ -384,7 +328,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											{__('Number of Decimals', 'masteriyo')}
 											<Tooltip
 												label={__(
-													'Number of digit to show on fractional part. (Max limit is 10)',
+													'Number of digits to show on fractional part. Maximum limit is 10.',
 													'masteriyo'
 												)}
 												hasArrow
@@ -401,7 +345,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											}
 											rules={{
 												required: __(
-													'Number of decimals is required',
+													'Number of decimals is required.',
 													'masteriyo'
 												),
 											}}
@@ -431,7 +375,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											{__('Enable', 'masteriyo')}
 											<Tooltip
 												label={__(
-													'Use standard paypal on checkout',
+													'Use Standard PayPal on checkout.',
 													'masteriyo'
 												)}
 												hasArrow
@@ -460,7 +404,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														'This controls the title which the user sees during checkout.',
+														'The title of payment method which the user sees during checkout.',
 														'masteriyo'
 													)}
 													hasArrow
@@ -483,7 +427,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														'This controls the description which the user sees during checkout.',
+														'The description of payment method which the user sees during checkout.',
 														'masteriyo'
 													)}
 													hasArrow
@@ -502,13 +446,11 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<FormControl>
 											<Stack direction="row">
 												<FormLabel minW="160px">
-													{__('Ipn Email Notification', 'masteriyo')}
+													{__('IPN Email Notification', 'masteriyo')}
 													<Tooltip
 														textAlign="center"
 														label={__(
-															`Send notifications when an IPN is received from
-															PayPal indicating refunds, charge-backs and
-															cancellations.`,
+															'Send notifications when an IPN is received from PayPal indicating refunds, charge-backs and cancellations.',
 															'masteriyo'
 														)}
 														hasArrow
@@ -538,8 +480,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`Please enter your PayPal email address; this is
-														needed in order to take payment.`,
+														'Please enter your PayPal email address; this is needed in order to take payment.',
 														'masteriyo'
 													)}
 													hasArrow
@@ -562,10 +503,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`If your main PayPal email differs from the PayPal
-														email entered above, input your main receiver email
-														for your PayPal account here. This is used to
-														validate IPN requests.`,
+														'If your main PayPal email differs from the PayPal email entered above, input your main receiver email for your PayPal account here. This is used to validate IPN requests.If your main PayPal email differs from the PayPal email entered above, input your main receiver email for your PayPal account here. This is used to validate IPN requests.',
 														'masteriyo'
 													)}
 													hasArrow
@@ -588,11 +526,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`Optionally enable "Payment Data Transfer" (Profile
-															> Profile and Settings > My Selling Tools > Website
-															Preferences) and then copy your identity token here.
-															This will allow payments to be verified without
-															the need for PayPal IPN.`,
+														'Optionally enable "Payment Data Transfer" (Profile > Profile and Settings > My Selling Tools > Website Preferences) and then copy your identity token here. This will allow payments to be verified without the need for PayPal IPN.',
 														'masteriyo'
 													)}
 													hasArrow
@@ -615,10 +549,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														`If you use your PayPal account with more than one
-														installation, please use a distinct prefix to
-														separate those installations. Please do not use
-														numbers in your prefix.`,
+														'If you use your PayPal account with more than one installation, please use a distinct prefix to separate those installations. Please do not use numbers in your prefix.',
 														'masteriyo'
 													)}
 													hasArrow
@@ -921,7 +852,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 											{__('Enable', 'masteriyo')}
 											<Tooltip
 												label={__(
-													'Use offline payment on checkout',
+													'Use offline payment on checkout.',
 													'masteriyo'
 												)}
 												hasArrow

@@ -68,7 +68,7 @@ abstract class FileRestriction {
 		$length = isset( $bytes_range['length'] ) ? $bytes_range['length'] : 0;
 
 		if ( ! $this->send_file_in_chunks( $file_path, $start, $length ) ) {
-			$this->send_error( __( 'File not found', 'masteriyo' ) );
+			$this->send_error( __( 'File not found.', 'masteriyo' ) );
 		}
 		exit;
 	}

@@ -40,7 +40,7 @@ class ChangePasswordFormHandler {
 			$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
 			if ( empty( $nonce_value ) ) {
-				throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
+				throw new \Exception( __( 'Nonce is missing.', 'masteriyo' ) );
 			}
 
 			if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-change-password' ) ) {
@@ -58,7 +58,7 @@ class ChangePasswordFormHandler {
 
 			masteriyo( 'user.store' )->update( $user );
 
-			masteriyo_add_notice( __( 'Your password was changed successfully', 'masteriyo' ) );
+			masteriyo_add_notice( __( 'Your password was changed successfully.', 'masteriyo' ) );
 
 			do_action( 'masteriyo_changed_password', $user, $data );
 
@@ -79,22 +79,22 @@ class ChangePasswordFormHandler {
 		$user = wp_get_current_user();
 
 		if ( ! empty( $data['current_password'] ) && empty( $data['password_1'] ) && empty( $data['password_2'] ) ) {
-			throw new \Exception( __( 'Please fill out all password fields', 'masteriyo' ) );
+			throw new \Exception( __( 'Please fill out all password fields.', 'masteriyo' ) );
 		}
 		if ( empty( $data['current_password'] ) ) {
-			throw new \Exception( __( 'Please enter your current password', 'masteriyo' ) );
+			throw new \Exception( __( 'Please enter your current password.', 'masteriyo' ) );
 		}
 		if ( ! wp_check_password( $data['current_password'], $user->user_pass, $user->ID ) ) {
-			throw new \Exception( __( 'Your current password is incorrect', 'masteriyo' ) );
+			throw new \Exception( __( 'Your current password is incorrect.', 'masteriyo' ) );
 		}
 		if ( empty( $data['password_1'] ) ) {
-			throw new \Exception( __( 'Please enter a new password', 'masteriyo' ) );
+			throw new \Exception( __( 'Please enter a new password.', 'masteriyo' ) );
 		}
 		if ( empty( $data['password_2'] ) ) {
 			throw new \Exception( __( 'Please re-enter your new password', 'masteriyo' ) );
 		}
 		if ( $data['password_1'] !== $data['password_2'] ) {
-			throw new \Exception( __( 'New passwords do not match', 'masteriyo' ) );
+			throw new \Exception( __( 'Please re-enter your new password.', 'masteriyo' ) );
 		}
 
 		$validation_error  = new \WP_Error();
@@ -120,7 +120,7 @@ class ChangePasswordFormHandler {
 		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
 		if ( empty( $nonce_value ) ) {
-			throw new \Exception( __( 'Nonce is missing', 'masteriyo' ) );
+			throw new \Exception( __( 'Nonce is missing.', 'masteriyo' ) );
 		}
 
 		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-change-password' ) ) {

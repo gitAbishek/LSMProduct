@@ -585,7 +585,7 @@ msgstr ""
 
 #: includes/FileRestrictions/LessonVideoRestriction.php:34
 #: includes/FileRestrictions/LessonVideoRestriction.php:49
-msgid "You are not allowed to access this file"
+msgid "You are not allowed to access this file."
 msgstr ""
 
 #: includes/FileRestrictions/LessonVideoRestriction.php:89
@@ -603,7 +603,7 @@ msgstr ""
 #: includes/FormHandler/RegistrationFormHandler.php:197
 #: includes/FormHandler/RequestPasswordResetFormHandler.php:44
 #: includes/FormHandler/RequestPasswordResetFormHandler.php:139
-msgid "Nonce is missing"
+msgid "Nonce is missing."
 msgstr ""
 
 #: includes/FormHandler/ChangePasswordFormHandler.php:47
@@ -620,7 +620,7 @@ msgid "Invalid nonce"
 msgstr ""
 
 #: includes/FormHandler/ChangePasswordFormHandler.php:61
-msgid "Your password was changed successfully"
+msgid "Your password was changed successfully."
 msgstr ""
 
 #: includes/FormHandler/ChangePasswordFormHandler.php:67
@@ -634,19 +634,19 @@ msgid "Error"
 msgstr ""
 
 #: includes/FormHandler/ChangePasswordFormHandler.php:82
-msgid "Please fill out all password fields"
+msgid "Please fill out all password fields."
 msgstr ""
 
 #: includes/FormHandler/ChangePasswordFormHandler.php:85
-msgid "Please enter your current password"
+msgid "Please enter your current password."
 msgstr ""
 
 #: includes/FormHandler/ChangePasswordFormHandler.php:88
-msgid "Your current password is incorrect"
+msgid "Your current password is incorrect."
 msgstr ""
 
 #: includes/FormHandler/ChangePasswordFormHandler.php:91
-msgid "Please enter a new password"
+msgid "Please enter a new password."
 msgstr ""
 
 #: includes/FormHandler/ChangePasswordFormHandler.php:94
@@ -654,7 +654,7 @@ msgid "Please re-enter your new password"
 msgstr ""
 
 #: includes/FormHandler/ChangePasswordFormHandler.php:97
-msgid "New passwords do not match"
+msgid "Please re-enter your new password."
 msgstr ""
 
 #: includes/FormHandler/InstructorRegistrationFormHandler.php:112
@@ -727,7 +727,7 @@ msgid "The passwords doesn't match"
 msgstr ""
 
 #: includes/FormHandler/PasswordResetFormHandler.php:125
-msgid "This key is invalid or has already been used. Please reset your password again if needed"
+msgid "This key is invalid or has already been used. Please reset your password again if needed."
 msgstr ""
 
 #: includes/FormHandler/RequestPasswordResetFormHandler.php:61
@@ -736,11 +736,11 @@ msgid "Invalid username or email"
 msgstr ""
 
 #: includes/FormHandler/RequestPasswordResetFormHandler.php:80
-msgid "Password reset is not allowed for this user"
+msgid "Password reset is not allowed for this user."
 msgstr ""
 
 #: includes/FormHandler/RequestPasswordResetFormHandler.php:113
-msgid "Enter a username or email address"
+msgid "Enter a username or email address."
 msgstr ""
 
 #: includes/FrontendQuery.php:214

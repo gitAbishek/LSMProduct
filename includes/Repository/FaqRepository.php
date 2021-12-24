@@ -87,13 +87,13 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	 * @since 1.0.0
 	 *
 	 * @param Model $faq Faq object.
-	 * @throws \Exception If invalid faq.
+	 * @throws \Exception If invalid FAQ.
 	 */
 	public function read( Model &$faq ) {
 		$faq_post = get_comment( $faq->get_id() );
 
 		if ( ! $faq->get_id() || ! $faq_post || $faq->get_type() !== $faq_post->comment_type ) {
-			throw new \Exception( __( 'Invalid Faq.', 'masteriyo' ) );
+			throw new \Exception( __( 'Invalid FAQ.', 'masteriyo' ) );
 		}
 
 		// Map the comment status from numberical to word.

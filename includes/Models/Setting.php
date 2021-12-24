@@ -35,7 +35,107 @@ class Setting extends Model {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	protected $sanitize_callbacks = array();
+	protected $sanitize_callbacks = array(
+		'payments'       => array(
+			'currency' => array(
+				'number_of_decimals' => 'absint',
+			),
+		),
+		'course_archive' => array(
+			'display' => array(
+				'enable_search' => 'masteriyo_string_to_bool',
+				'per_page'      => 'absint',
+				'per_row'       => 'absint',
+			),
+		),
+		'single_course'  => array(
+			'display' => array(
+				'enable_review' => 'masteriyo_string_to_bool',
+			),
+		),
+		'advance'        => array(
+			'permalinks' => array(
+				'category_base'            => 'sanitize_title',
+				'tag_base'                 => 'sanitize_title',
+				'difficulty_base'          => 'sanitize_title',
+				'single_course_permalink'  => 'sanitize_title',
+				'single_lesson_permalink'  => 'sanitize_title',
+				'single_quiz_permalink'    => 'sanitize_title',
+				'single_section_permalink' => 'sanitize_title',
+			),
+			'pages'      => array(
+				'account_page_id'                 => 'absint',
+				'courses_page_id'                 => 'absint',
+				'checkout_page_id'                => 'absint',
+				'instructor_registration_page_id' => 'absint',
+			),
+			'checkout'   => array(
+				'pay'                        => 'sanitize_title',
+				'order_received'             => 'sanitize_title',
+				'add_payment_method'         => 'sanitize_title',
+				'delete_payment_method'      => 'sanitize_title',
+				'set_default_payment_method' => 'sanitize_title',
+			),
+			'account'    => array(
+				'dashboard'       => 'sanitize_title',
+				'orders'          => 'sanitize_title',
+				'view_order'      => 'sanitize_title',
+				'order_history'   => 'sanitize_title',
+				'my_courses'      => 'sanitize_title',
+				'view_account'    => 'sanitize_title',
+				'edit_account'    => 'sanitize_title',
+				'payment_methods' => 'sanitize_title',
+				'lost_password'   => 'sanitize_title',
+				'signup'          => 'sanitize_title',
+				'logout'          => 'sanitize_title',
+			),
+		),
+		'quiz'           => array(
+			'styling' => array(
+				'questions_display_per_page' => 'absint',
+			),
+		),
+		'payments'       => array(
+			'offline' => array(
+				'enable' => 'masteriyo_string_to_bool',
+			),
+			'paypal'  => array(
+				'enable'                  => 'masteriyo_string_to_bool',
+				'ipn_email_notifications' => 'masteriyo_string_to_bool',
+				'sandbox'                 => 'masteriyo_string_to_bool',
+				'debug'                   => 'masteriyo_string_to_bool',
+			),
+		),
+		'emails'         => array(
+			'general'              => array(
+				'enable' => 'masteriyo_string_to_bool',
+			),
+			'new_order'            => array(
+				'enable' => 'masteriyo_string_to_bool',
+			),
+			'processing_order'     => array(
+				'enable' => 'masteriyo_string_to_bool',
+			),
+			'completed_order'      => array(
+				'enable' => 'masteriyo_string_to_bool',
+			),
+			'onhold_order'         => array(
+				'enable' => 'masteriyo_string_to_bool',
+			),
+			'cancelled_order'      => array(
+				'enable' => 'masteriyo_string_to_bool',
+			),
+			'enrolled_course'      => array(
+				'enable' => 'masteriyo_string_to_bool',
+			),
+			'completed_course'     => array(
+				'enable' => 'masteriyo_string_to_bool',
+			),
+			'become_an_instructor' => array(
+				'enable' => 'masteriyo_string_to_bool',
+			),
+		),
+	);
 
 	/**
 	 * The posted settings data. When empty, $_POST data will be used.
@@ -236,7 +336,6 @@ class Setting extends Model {
 	public function __construct( SettingRepository $setting_repository ) {
 		$this->repository = $setting_repository;
 		$this->set_default_values();
-		$this->init_sanitize_callbacks();
 	}
 
 	/**
@@ -273,100 +372,13 @@ class Setting extends Model {
 	 * @param array $data
 	 */
 	public function set_data( $data ) {
-		foreach ( $data as $group => $sub_groups ) {
-			if ( is_array( $sub_groups ) ) {
-				foreach ( $sub_groups as $sub_group => $props ) {
-					if ( is_array( $props ) ) {
-						foreach ( $props as $prop => $value ) {
-							$this->set( "{$group}.{$sub_group}.{$prop}", $value );
-						}
-					} else {
-						$this->set( "{$group}.{$sub_group}", $props );
-					}
-				}
-			} else {
-				$this->set( "{$group}", $sub_groups );
-			}
+		$data_dot_arr = masteriyo_array_dot( $data );
+
+		foreach ( $data_dot_arr as $prop => $value ) {
+			$this->set( $prop, $value );
 		}
 
 		$this->set_default_values();
-	}
-
-	/**
-	 * Initialize sanitize callbacks.
-	 *
-	 * @since 1.0.0
-	 */
-	protected function init_sanitize_callbacks() {
-		$this->add_sanitize_callback( 'payments.currency.number_of_decimals', 'absint' );
-
-		$this->add_sanitize_callback( 'course_archive.display.enable_search', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'course_archive.display.per_page', 'absint' );
-		$this->add_sanitize_callback( 'course_archive.display.per_row', 'absint' );
-
-		$this->add_sanitize_callback( 'single_course.display.enable_review', 'masteriyo_string_to_bool' );
-
-		$this->add_sanitize_callback( 'learn_page.display.enable_questions_answers', 'masteriyo_string_to_bool' );
-
-		$this->add_sanitize_callback( 'advance.permalinks.category_base', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.permalinks.tag_base', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.permalinks.difficulty_base', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.permalinks.single_course_permalink', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.permalinks.single_lesson_permalink', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.permalinks.single_quiz_permalink', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.permalinks.single_section_permalink', 'sanitize_title' );
-
-		$this->add_sanitize_callback( 'advance.pages.account_page_id', 'absint' );
-		$this->add_sanitize_callback( 'advance.pages.courses_page_id', 'absint' );
-		$this->add_sanitize_callback( 'advance.pages.checkout_page_id', 'absint' );
-		$this->add_sanitize_callback( 'advance.pages.instructor_registration_page_id', 'absint' );
-
-		$this->add_sanitize_callback( 'advance.checkout.pay', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.checkout.order_received', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.checkout.add_payment_method', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.checkout.delete_payment_method', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.checkout.set_default_payment_method', 'sanitize_title' );
-
-		$this->add_sanitize_callback( 'advance.account.dashboard', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.account.orders', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.account.view_order', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.account.order_history', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.account.my_courses', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.account.view_account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.account.edit_account', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.account.payment_methods', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.account.lost_password', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.account.signup', 'sanitize_title' );
-		$this->add_sanitize_callback( 'advance.account.logout', 'sanitize_title' );
-
-		$this->add_sanitize_callback( 'quiz.styling.questions_display_per_page', 'absint' );
-
-		$this->add_sanitize_callback( 'payments.offline.enable', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'payments.offline.ipn_email_notifications', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'payments.offline.sandbox', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'payments.offline.debug', 'masteriyo_string_to_bool' );
-
-		$this->add_sanitize_callback( 'emails.general.enable', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'emails.new_order.enable', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'emails.processing_order.enable', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'emails.completed_order.enable', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'emails.onhold_order.enable', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'emails.cancelled_order.enable', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'emails.enrolled_course.enable', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'emails.completed_course.enable', 'masteriyo_string_to_bool' );
-		$this->add_sanitize_callback( 'emails.become_an_instructor.enable', 'masteriyo_string_to_bool' );
-	}
-
-	/**
-	 * Sanitize the settings
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $prop    Name of prop to set.
-	 * @param array|string $callback Sanitize callback.
-	 */
-	protected function add_sanitize_callback( $prop, $callback ) {
-		$this->sanitize_callbacks[ $prop ] = $callback;
 	}
 
 	/**
@@ -380,8 +392,10 @@ class Setting extends Model {
 	 * @return mixed
 	 */
 	protected function sanitize( $prop, $value ) {
-		if ( isset( $this->sanitize_callbacks[ $prop ] ) ) {
-			$value = call_user_func_array( $this->sanitize_callbacks[ $prop ], array( $value ) );
+		$callback = masteriyo_array_get( $this->sanitize_callbacks, $prop );
+
+		if ( null !== $callback ) {
+			$value = call_user_func_array( $callback, array( $value ) );
 		}
 
 		return $value;
@@ -395,31 +409,8 @@ class Setting extends Model {
 	 * @param mixed  $value   Value of the prop.
 	 */
 	public function set( $prop, $value ) {
-		$prop_arr  = explode( '.', $prop );
-		$group     = '';
-		$sub_group = '';
-		$setting   = '';
-
-		if ( count( $prop_arr ) >= 3 ) {
-			$group     = isset( $prop_arr[0] ) ? $prop_arr[0] : '';
-			$sub_group = isset( $prop_arr[1] ) ? $prop_arr[1] : '';
-			$setting   = isset( $prop_arr[2] ) ? $prop_arr[2] : '';
-		} elseif ( count( $prop_arr ) >= 2 ) {
-			$group   = isset( $prop_arr[0] ) ? $prop_arr[0] : '';
-			$setting = isset( $prop_arr[1] ) ? $prop_arr[1] : '';
-		} else {
-			$setting = isset( $prop_arr[0] ) ? $prop_arr[0] : '';
-		}
-
 		$value = $this->sanitize( $prop, $value );
-
-		if ( ! empty( $sub_group ) && ! empty( $group ) && ! empty( $setting ) ) {
-			$this->data[ $group ][ $sub_group ][ $setting ] = $value;
-		} elseif ( ! empty( $group ) && ! empty( $setting ) ) {
-			$this->data[ $group ][ $setting ] = $value;
-		} elseif ( ! empty( $setting ) ) {
-			$this->data[ $setting ] = $value;
-		}
+		masteriyo_array_set( $this->data, $prop, $value );
 	}
 
 	/**
@@ -431,31 +422,7 @@ class Setting extends Model {
 	 * @return mixed
 	 */
 	public function get( $prop, $context = 'view' ) {
-		$prop_arr  = explode( '.', $prop );
-		$group     = 'masteriyo';
-		$sub_group = 'masteriyo';
-		$setting   = 'masteriyo';
-
-		if ( count( $prop_arr ) >= 3 ) {
-			$group     = isset( $prop_arr[0] ) ? $prop_arr[0] : '';
-			$sub_group = isset( $prop_arr[1] ) ? $prop_arr[1] : '';
-			$setting   = isset( $prop_arr[2] ) ? $prop_arr[2] : '';
-		} elseif ( count( $prop_arr ) >= 2 ) {
-			$group   = isset( $prop_arr[0] ) ? $prop_arr[0] : '';
-			$setting = isset( $prop_arr[1] ) ? $prop_arr[1] : '';
-		} else {
-			$setting = isset( $prop_arr[0] ) ? $prop_arr[0] : '';
-		}
-
-		$value = null;
-
-		if ( isset( $this->data[ $group ][ $sub_group ][ $setting ] ) ) {
-			$value = $this->data[ $group ] [ $sub_group ][ $setting ];
-		} elseif ( isset( $this->data[ $group ] [ $setting ] ) ) {
-			$value = $this->data[ $group ] [ $setting ];
-		} elseif ( isset( $this->dat[ $setting ] ) ) {
-			$value = $this->data[ $setting ];
-		}
+		$value = masteriyo_array_get( $this->data, $prop );
 
 		if ( 'view' === $context ) {
 			$value = apply_filters( 'masteriyo_get_setting_value', $value, $prop, $this );

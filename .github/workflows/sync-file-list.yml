@@ -1,0 +1,17 @@
+wpeverest/learning-management-system-pro@develop:
+  - source: assets
+    dest: learning-management-system-pro/assets
+  - source: bin
+    dest: learning-management-system-pro/bin
+  - source: bootstrap
+    dest: learning-management-system-pro/bootstrap
+  - source: config
+    dest: learning-management-system-pro/config
+  - source: database
+    dest: learning-management-system-pro/database
+  - source: i18n
+    dest: learning-management-system-pro/i18n
+  - source: includes
+    dest: learning-management-system-pro/includes
+  - source: templates
+    dest: learning-management-system-pro/templates

@@ -3,4 +3,4 @@
  * Main masteriyo page.
  */
 ?>
-<div id="masteriyo"></div>
+<div id="masteriyo" class="notranslate" translate="no"></div>

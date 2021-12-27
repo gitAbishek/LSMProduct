@@ -394,7 +394,7 @@ class Setting extends Model {
 	protected function sanitize( $prop, $value ) {
 		$callback = masteriyo_array_get( $this->sanitize_callbacks, $prop );
 
-		if ( null !== $callback ) {
+		if ( is_callable( $callback ) ) {
 			$value = call_user_func_array( $callback, array( $value ) );
 		}
 

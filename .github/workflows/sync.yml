@@ -16,5 +16,5 @@ jobs:
         with:
           GH_PAT: ${{ secrets.REPO_SYNC }}
           COMMIT_BODY: 'Update: Sync changes from main repository'
-          ASSIGNEES: wpeverest
+          ASSIGNEES: rabinstha
           CONFIG_PATH: .github/workflows/sync-file-list.yml

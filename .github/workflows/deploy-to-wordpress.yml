@@ -43,7 +43,9 @@ jobs:
         run: composer install --no-dev --optimize-autoloader
 
       - name: Compile typescript
-        run: yarn build
+        run: |
+          yarn build
+          yarn build:blocks
 
       - name: WordPress Plugin Deploy
         id: deploy

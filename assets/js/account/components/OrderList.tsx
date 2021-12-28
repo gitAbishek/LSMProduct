@@ -4,8 +4,8 @@ import { BiCalendar } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import { Td, Tr } from 'react-super-responsive-table';
 import PriceWithSymbol from '../../back-end/components/common/PriceWithSymbol';
-import routes from '../../back-end/constants/routes';
 import { getLocalTime } from '../../back-end/utils/utils';
+import routes from '../constants/routes';
 
 interface BillingAddress {
 	first_name: string;
@@ -55,7 +55,7 @@ const OrderList: React.FC<Props> = (props) => {
 				<Stack direction="column">
 					<Link
 						as={RouterLink}
-						to={routes.orders.edit.replace(':orderId', id.toString())}
+						to={routes.order.view.replace(':orderId', id.toString())}
 						fontWeight="semibold"
 						fontSize="sm"
 						_hover={{ color: 'blue.500' }}>

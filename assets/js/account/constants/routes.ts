@@ -7,7 +7,7 @@ const routes = {
 	courses: '/courses',
 	order: {
 		list: '/order-history',
-		view: '/order/:orderId',
+		view: '/order-history/:orderId',
 	},
 };
 

@@ -79,19 +79,21 @@ class Onboard {
 
 		wp_register_script(
 			'masteriyo-onboarding',
-			plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . "/assets/js/build/masteriyo-gettingStarted{$suffix}.js",
+			masteriyo_is_production() ? plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . "/assets/js/build/masteriyo-gettingStarted{$suffix}.js" : 'http://localhost:3000/dist/gettingStarted.js',
 			$onboard_dependencies['dependencies'],
 			$onboard_dependencies['version'],
 			true
 		);
 
-		wp_register_script(
-			'masteriyo-dependencies',
-			plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . "/assets/js/build/masteriyo-dependencies{$suffix}.js",
-			$onboard_dependencies['dependencies'],
-			$onboard_dependencies['version'],
-			true
-		);
+		if ( masteriyo_is_production() ) {
+			wp_register_script(
+				'masteriyo-dependencies',
+				plugin_dir_url( MASTERIYO_PLUGIN_FILE ) . "/assets/js/build/masteriyo-dependencies{$suffix}.js",
+				$onboard_dependencies['dependencies'],
+				$onboard_dependencies['version'],
+				true
+			);
+		}
 
 		// Add localization vars.
 		wp_localize_script(

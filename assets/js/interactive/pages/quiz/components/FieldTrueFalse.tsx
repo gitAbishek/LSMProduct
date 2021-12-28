@@ -43,8 +43,9 @@ const FieldTrueFalse: React.FC<Props> = (props) => {
 										px="4"
 										minW="200px"
 										shadow="input">
-										<Text fontSize="sm">{answer.name}</Text>
-										<Radio value={answer.name}></Radio>
+										<Radio value={answer.name}>
+											<Text fontSize="sm">{answer.name}</Text>
+										</Radio>
 									</Flex>
 								))}
 							</SimpleGrid>

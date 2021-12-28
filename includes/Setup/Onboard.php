@@ -153,7 +153,7 @@ class Onboard {
 	 */
 	public function setup_wizard_body() {
 		?>
-			<body class="masteriyo-user-onboarding-wizard">
+			<body class="masteriyo-user-onboarding-wizard notranslate" translate="no">
 				<div id="masteriyo-onboarding" class="masteriyo-main-wrap">
 				</div>
 			</body>

@@ -79,9 +79,7 @@ const Settings = () => {
 	const onSubmit = (data: SetttingsMap) => {
 		try {
 			updateSettings.mutate(deepClean(data));
-		} catch (err) {
-			console.error(err);
-		}
+		} catch (err) {}
 	};
 
 	if (settingsQuery.isSuccess) {

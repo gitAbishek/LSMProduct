@@ -1,6 +1,6 @@
 import { Box, Center, Heading, Icon } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { Component, ErrorInfo, PropsWithChildren } from 'react';
+import React, { Component, PropsWithChildren } from 'react';
 import { Five0Five } from '../constants/images';
 
 class ErrorBoundary extends Component<PropsWithChildren<any>, any> {
@@ -11,10 +11,6 @@ class ErrorBoundary extends Component<PropsWithChildren<any>, any> {
 
 	static getDerivedStateFromError() {
 		return { hasError: true };
-	}
-
-	componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-		console.error('Uncaught error:', error, errorInfo);
 	}
 
 	render() {

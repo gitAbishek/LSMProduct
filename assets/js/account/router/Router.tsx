@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar';
 import routes from '../constants/routes';
 import MyCourses from '../pages/courses/MyCouses';
 import Dashboard from '../pages/dashboard/Dashboard';
-import OrderHistory from '../pages/order-history/OrderHistory';
+import OrderHistory from '../pages/order/OrderHistory';
 import EditProfile from '../pages/profile/EditProfile';
 import ProfilePage from '../pages/profile/ProfilePage';
 

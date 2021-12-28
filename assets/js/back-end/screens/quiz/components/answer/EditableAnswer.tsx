@@ -39,9 +39,7 @@ const EditableAnswer: React.FC<Props> = (props) => {
 			setSubmitQuestionDisabled(
 				duplicateObject('name', answers) ? true : false
 			);
-		} catch (error) {
-			console.error(error);
-		}
+		} catch (error) {}
 	}, [answers, setSubmitQuestionDisabled]);
 
 	return (

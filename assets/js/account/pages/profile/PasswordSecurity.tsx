@@ -27,7 +27,7 @@ const PasswordSecurity = () => {
 	} = useForm<IFormInputs>();
 	const password = useRef({});
 	password.current = watch('password', '');
-	const onSubmit = handleSubmit((data) => console.log(data));
+	const onSubmit = handleSubmit(() => {});
 
 	return (
 		<form onSubmit={onSubmit}>

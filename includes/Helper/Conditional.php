@@ -763,3 +763,33 @@ if ( ! function_exists( 'masteriyo_is_production' ) ) {
 		return ! Constants::is_true( 'MASTERIYO_DEVELOPMENT' );
 	}
 }
+
+if ( ! function_exists( 'masteriyo_is_block_editor' ) ) {
+	/**
+	 * Return true if block editor is active.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return true
+	 */
+	function masteriyo_is_block_editor() {
+		$screen = get_current_screen();
+
+		return $screen && $screen->is_block_editor();
+	}
+}
+
+if ( ! function_exists( 'masteriyo_is_post_edit_page' ) ) {
+	/**
+	 * Return true if block editor is active.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return true
+	 */
+	function masteriyo_is_post_edit_page() {
+		global $pagenow;
+
+		return $pagenow && in_array( $pagenow, array( 'post.php', 'post-new.php' ), true );
+	}
+}

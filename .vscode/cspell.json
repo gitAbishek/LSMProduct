@@ -71,6 +71,7 @@
     "onhold",
     "ontype",
     "pagename",
+    "pagenow",
     "pcexp",
     "pelago",
     "phpcbf",

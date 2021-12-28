@@ -354,6 +354,10 @@ if ( ! function_exists( 'masteriyo_add_admin_body_class' ) ) {
 	 * @return string
 	 */
 	function masteriyo_add_admin_body_class( $classes ) {
+		if ( masteriyo_is_post_edit_page() && masteriyo_is_block_editor() ) {
+			$classes .= ' masteriyo';
+		}
+
 		return $classes;
 	}
 }

@@ -221,11 +221,7 @@ class ScriptStyle {
 					'src'      => self::get_asset_url( "/assets/css/block{$suffix}.css" ),
 					'has_rtl'  => false,
 					'context'  => 'admin',
-					'callback' => function() {
-						$screen = get_current_screen();
-
-						return $screen && $screen->is_block_editor();
-					},
+					'callback' => 'masteriyo_is_block_editor',
 				),
 			)
 		);

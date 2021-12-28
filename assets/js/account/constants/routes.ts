@@ -4,8 +4,11 @@ const routes = {
 		profile: '/user/profile',
 		edit: '/user/edit-user',
 	},
-	myCourses: '/courses',
-	myOrderHistory: '/order-history',
+	courses: '/courses',
+	order: {
+		list: '/order-history',
+		view: '/order/:orderId',
+	},
 };
 
 export default routes;

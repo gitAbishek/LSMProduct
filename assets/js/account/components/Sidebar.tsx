@@ -83,7 +83,7 @@ const Sidebar = () => {
 						as={NavLink}
 						sx={navLinkStyles}
 						_activeLink={navActiveStyles}
-						to={routes.myCourses}>
+						to={routes.courses}>
 						<ListIcon fontSize="md" mr="3" as={BiBook} />
 						{__('My Courses')}
 					</Link>
@@ -108,7 +108,7 @@ const Sidebar = () => {
 						as={NavLink}
 						sx={navLinkStyles}
 						_activeLink={navActiveStyles}
-						to={routes.myOrderHistory}>
+						to={routes.order.list}>
 						<ListIcon fontSize="md" mr="3" as={BiHistory} />
 						{__('My Order History')}
 					</Link>

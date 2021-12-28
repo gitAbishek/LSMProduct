@@ -79,7 +79,7 @@ const Dashboard: React.FC = () => {
 								</Heading>
 							</Stack>
 							<ButtonGroup>
-								<Link to={routes.myCourses}>
+								<Link to={routes.courses}>
 									<Button
 										rightIcon={
 											<IoIosArrowForward size={15} color={'gray.500'} />

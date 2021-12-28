@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar';
 import routes from '../constants/routes';
 import MyCourses from '../pages/courses/MyCouses';
 import Dashboard from '../pages/dashboard/Dashboard';
+import OrderDetails from '../pages/order/OrderDetails';
 import OrderHistory from '../pages/order/OrderHistory';
 import EditProfile from '../pages/profile/EditProfile';
 import ProfilePage from '../pages/profile/ProfilePage';
@@ -21,11 +22,14 @@ const Router: React.FC = () => {
 								<Route path={routes.dashboard} exact>
 									<Dashboard />
 								</Route>
-								<Route path={routes.myCourses} exact>
+								<Route path={routes.courses} exact>
 									<MyCourses />
 								</Route>
-								<Route path={routes.myOrderHistory} exact>
+								<Route path={routes.order.list} exact>
 									<OrderHistory />
+								</Route>
+								<Route path={routes.order.view} exact>
+									<OrderDetails />
 								</Route>
 								<Route path={routes.user.profile} exact>
 									<ProfilePage />

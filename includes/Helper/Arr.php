@@ -90,7 +90,7 @@ function masteriyo_array_overlay( $a1, $a2 ) {
 /**
  * Flatten a multi-dimensional associative array with dots.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @param  string  $prepend
@@ -113,7 +113,7 @@ function masteriyo_array_dot( $array, $prepend = '' ) {
  /**
  * Convert a flatten "dot" notation array into an expanded array.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  iterable  $array
  * @return array
@@ -133,7 +133,7 @@ function masteriyo_array_undot( $array ) {
  *
  * If no key is given to the method, the entire array will be replaced.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @param  string|null  $key
@@ -173,7 +173,7 @@ function masteriyo_array_set( &$array, $key, $value ) {
 /**
  * Shuffle the given array and return the result.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @param  int|null  $seed
@@ -194,7 +194,7 @@ function masteriyo_array_shuffle( $array, $seed = null ) {
 /**
  * Determine whether the given value is array accessible.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  mixed  $value
  * @return bool
@@ -206,7 +206,7 @@ function masteriyo_array_is_accessible( $value ) {
 /**
  * Add an element to an array using "dot" notation if it doesn't exist.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @param  string  $key
@@ -224,7 +224,7 @@ function masteriyo_array_add( $array, $key, $value ) {
 /**
  * Divide an array into two arrays. One with keys and the other with values.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @return array
@@ -236,7 +236,7 @@ function masteriyo_array_divide( $array ) {
 /**
  * Get all of the given array except for a specified array of keys.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @param  array|string  $keys
@@ -251,7 +251,7 @@ function masteriyo_array_except( $array, $keys ) {
 /**
  * Return the first element in an array passing a given truth test.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  iterable|array  $array
  * @param  callable|null  $callback
@@ -281,7 +281,7 @@ function masteriyo_array_first( $array, callable $callback = null, $default = nu
 /**
  * Return the last element in an array passing a given truth test.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @param  callable|null  $callback
@@ -299,7 +299,7 @@ function masteriyo_array_last( $array, callable $callback = null, $default = nul
 /**
  * Get an item from an array using "dot" notation.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  \ArrayAccess|array  $array
  * @param  string|int|null  $key
@@ -337,7 +337,7 @@ function masteriyo_array_get( $array, $key, $default = null ) {
 /**
  * If the given value is not an array and not null, wrap it in one.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  mixed  $value
  * @return array
@@ -353,7 +353,7 @@ function masteriyo_array_wrap( $value ) {
 /**
  * Conditionally compile classes from an array into a CSS class list.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @return string
@@ -378,7 +378,7 @@ function masteriyo_array_to_css_classes( $array ) {
  *
  * An array is "associative" if it doesn't have sequential numerical keys beginning with zero.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @return bool
@@ -392,7 +392,7 @@ function masteriyo_array_is_assoc( array $array ) {
 /**
  * Recursively sort an array by keys and values.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @param  int  $options
@@ -420,7 +420,7 @@ function masteriyo_array_sort_recursive( $array, $options = SORT_REGULAR, $desce
  *
  * An array is a "list" if all array keys are sequential integers starting from 0 with no gaps in between.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @return bool
@@ -432,7 +432,7 @@ function masteriyo_array_is_list( $array ) {
 /**
  * Determine if the given key exists in the provided array.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  \ArrayAccess|array  $array
  * @param  string|int  $key
@@ -453,7 +453,7 @@ function masteriyo_array_exists( $array, $key ) {
 /**
  * Check if an item or items exist in an array using "dot" notation.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  \ArrayAccess|array  $array
  * @param  string|array  $keys
@@ -488,7 +488,7 @@ function masteriyo_array_has( $array, $keys ) {
 /**
  * Determine if any of the keys exist in an array using "dot" notation.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  \ArrayAccess|array  $array
  * @param  string|array  $keys
@@ -563,7 +563,7 @@ function masteriyo_array_forget( &$array, $keys ) {
 /**
  * Flatten a multi-dimensional array into a single level.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  iterable|array  $array
  * @param  int  $depth
@@ -590,7 +590,7 @@ function masteriyo_array_flatten( $array, $depth = INF ) {
 /**
  * Get a subset of the items from the given array.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @param  array|string  $keys
@@ -603,7 +603,7 @@ function masteriyo_array_only( $array, $keys ) {
   /**
  * Push an item onto the beginning of an array.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @param  mixed  $value
@@ -623,7 +623,7 @@ function masteriyo_array_prepend( $array, $value, $key = null ) {
  /**
  * Get a value from the array, and remove it.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @param  string  $key
@@ -641,7 +641,7 @@ function masteriyo_array_pull( &$array, $key, $default = null ) {
 /**
  * Get one or a specified number of random values from an array.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  array  $array
  * @param  int|null  $number
@@ -689,7 +689,7 @@ function masteriyo_array_random( $array, $number = null, $preserve_keys = false 
 /**
  * Return the default value of the given value.
  *
- * @since x.x.x
+ * @since 1.3.6
  *
  * @param  mixed  $value
  * @return mixed

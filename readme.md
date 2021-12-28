@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.3.5
+**Stable tag**: 1.3.6
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,14 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.3.6 - 28-12-2021
+- Enhancement - Getting started page.
+- Enhancement - Refactor global settings.
+- Enhancement - String refinements.
+- Fix - 505 error due to google translation.
+- Fix - Log file size increase due to invalid callbacks.
+- Fix - Student account details update issue.
 
 ### 1.3.5 - 21-12-2021
 

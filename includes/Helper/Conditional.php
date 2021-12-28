@@ -768,7 +768,7 @@ if ( ! function_exists( 'masteriyo_is_block_editor' ) ) {
 	/**
 	 * Return true if block editor is active.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.6
 	 *
 	 * @return true
 	 */
@@ -783,7 +783,7 @@ if ( ! function_exists( 'masteriyo_is_post_edit_page' ) ) {
 	/**
 	 * Return true if block editor is active.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.6
 	 *
 	 * @return true
 	 */

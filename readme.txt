@@ -197,6 +197,14 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
 
+= 1.3.6 - 28-12-2021 =
+- Enhancement - Getting started page.
+- Enhancement - Refactor global settings.
+- Enhancement - String refinements.
+- Fix - 505 error due to google translation.
+- Fix - Log file size increase due to invalid callbacks.
+- Fix - Student account details update issue.
+
 = 1.3.5 - 21-12-2021 =
 - Fix - Getting started steps issue.
 

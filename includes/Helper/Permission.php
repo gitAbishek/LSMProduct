@@ -103,7 +103,7 @@ class Permission {
 		/**
 		 * Users check permission
 		 *
-		 * @since x.x.x
+		 * @since 1.3.6
 		 */
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $user_id, 'users' );
 	}

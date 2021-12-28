@@ -13,7 +13,7 @@
 		<?php wp_head(); ?>
 	</head>
 
-	<body <?php body_class(); ?>>
+	<body <?php body_class(); ?> translate="no">
 		<div id="masteriyo-interactive-course"></div>
 		<?php wp_footer(); ?>
 	</body>

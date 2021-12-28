@@ -324,7 +324,7 @@ function masteriyo_add_body_class( $classes, $class ) {
 	if ( masteriyo_is_archive_course_page() ) {
 		$classes[] = 'masteriyo masteriyo-courses-page';
 	} elseif ( masteriyo_is_learn_page() ) {
-		$classes[] = 'masteriyo masteriyo-interactive-page';
+		$classes[] = 'masteriyo notranslate masteriyo-interactive-page';
 	} elseif ( masteriyo_is_account_page() ) {
 		$classes[] = 'masteriyo masteriyo-account-page';
 	}

@@ -5,7 +5,6 @@ module.exports = {
 	rules: {
 		'react-hooks/rules-of-hooks': 'error',
 		'react-hooks/exhaustive-deps': 'warn',
-		'no-console': 'warn',
 		'react/prop-types': 'off',
 		'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 		'max-len': [

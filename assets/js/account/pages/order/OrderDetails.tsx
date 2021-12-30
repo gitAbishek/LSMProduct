@@ -1,8 +1,8 @@
 import { Heading, Stack } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
+import { sprintf, __ } from '@wordpress/i18n';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Table, Tbody, Td, Th, Thead, Tr } from 'react-super-responsive-table';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
@@ -11,18 +11,18 @@ import API from '../../../back-end/utils/api';
 
 const OrderDetails: React.FC = () => {
 	const ordersAPI = new API(urls.orders);
-	const { orderId }: any = useLocation();
+	const { orderId }: any = useParams();
 
-	const { data, isSuccess } = useQuery([`myOrder${orderId}`, orderId], () =>
+	const orderQuery = useQuery<OrderSchema>([`myOrder${orderId}`, orderId], () =>
 		ordersAPI.get(orderId)
 	);
-	console.log(orderId);
 
-	if (isSuccess) {
+	console.log(orderQuery?.data);
+	if (orderQuery.isSuccess) {
 		return (
 			<Stack direction="column" spacing="8" width="full">
 				<Heading as="h4" size="md" fontWeight="bold" color="blue.900" px="8">
-					{__('Order History', 'masteriyo')}
+					{sprintf(__('Order #%s', 'masteriyo'), orderQuery?.data?.id)}
 				</Heading>
 				<Table>
 					<Thead>
@@ -38,18 +38,17 @@ const OrderDetails: React.FC = () => {
 						</Tr>
 					</Thead>
 					<Tbody>
-						{data?.data?.map((order: OrderSchema) => (
-							<Tr key={order.id}>
-								<Td>{order?.date_created}</Td>
-								<Td>
-									{order?.billing?.first_name} {order?.billing?.last_name}
-								</Td>
-								<Td>{order?.billing?.email}</Td>
-								<Td>{order?.payment_method}</Td>
-								<Td>{order?.transaction_id}</Td>
-								<Td>{order?.status}</Td>
-							</Tr>
-						))}
+						<Tr key={orderQuery?.data?.id}>
+							<Td>{orderQuery?.data?.date_created}</Td>
+							<Td>
+								{orderQuery?.data?.billing?.first_name}{' '}
+								{orderQuery?.data?.billing?.last_name}
+							</Td>
+							<Td>{orderQuery?.data?.billing?.email}</Td>
+							<Td>{orderQuery?.data?.payment_method}</Td>
+							<Td>{orderQuery?.data?.transaction_id}</Td>
+							<Td>{orderQuery?.data?.status}</Td>
+						</Tr>
 					</Tbody>
 				</Table>
 			</Stack>

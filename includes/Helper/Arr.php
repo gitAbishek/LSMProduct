@@ -576,7 +576,7 @@ function masteriyo_array_flatten( $array, $depth = INF ) {
 		if ( ! is_array( $item ) ) {
 			$result[] = $item;
 		} else {
-			$values = $depth === 1 ? array_values( $item ) : masteriyo_array_flatten( $item, $depth - 1 );
+			$values = 1 === $depth ? array_values( $item ) : masteriyo_array_flatten( $item, $depth - 1 );
 
 			foreach ( $values as $value ) {
 				$result[] = $value;

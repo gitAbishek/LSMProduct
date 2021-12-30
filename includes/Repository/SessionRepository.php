@@ -74,11 +74,12 @@ class SessionRepository implements RepositoryInterface {
 		global $wpdb;
 
 		if ( ! empty( $session->get_key() ) ) {
-			$query  = $wpdb->prepare(
-				"SELECT * FROM {$wpdb->base_prefix}masteriyo_sessions WHERE session_key = %s",
-				$session->get_key()
+			$result = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->base_prefix}masteriyo_sessions WHERE session_key = %s",
+					$session->get_key()
+				)
 			);
-			$result = $wpdb->get_row( $query ); // phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
 
 			if ( ! is_null( $result ) ) {
 				$session->set_props(

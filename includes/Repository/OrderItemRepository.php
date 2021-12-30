@@ -139,12 +139,13 @@ class OrderItemRepository extends AbstractRepository {
 		$data = wp_cache_get( 'item-' . $item->get_id(), 'order-items' );
 
 		if ( false === $data ) {
-			$sql  = $wpdb->prepare(
-				'SELECT order_id, order_item_name FROM %s WHERE order_item_id = %d LIMIT 1;',
-				"{$wpdb->prefix}masteriyo_order_items",
-				$item->get_id()
+			$data = $wpdb->get_row(
+				$wpdb->prepare(
+					'SELECT order_id, order_item_name FROM %s WHERE order_item_id = %d LIMIT 1;',
+					"{$wpdb->prefix}masteriyo_order_items",
+					$item->get_id()
+				)
 			);
-			$data = $wpdb->get_row( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			wp_cache_set( 'item-' . $item->get_id(), $data, 'order-items' );
 		}
 

@@ -42,7 +42,7 @@ class Countries {
 	 *
 	 * @var array
 	 */
-	private $calling_coodes = array();
+	private $calling_codes = array();
 
 	/**
 	 * Locales list.
@@ -116,8 +116,8 @@ class Countries {
 			return $this->continents;
 		}
 
-		$contientnts      = require Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/i18n/continents.php';
-		$this->continents = apply_filters( 'masteriyo_continents', $contientnts );
+		$continents      = require Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/i18n/continents.php';
+		$this->continents = apply_filters( 'masteriyo_continents', $continents );
 
 		return $this->continents;
 	}

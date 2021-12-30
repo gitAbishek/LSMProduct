@@ -59,7 +59,6 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			$question->set_author_id( get_current_user_id() );
 		}
 
-
 		$id = wp_insert_post(
 			apply_filters(
 				'masteriyo_new_question_data',

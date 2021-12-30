@@ -155,7 +155,7 @@ class Checkout {
 				$order    = masteriyo_get_order( $order_id );
 
 				if ( is_wp_error( $order_id ) ) {
-					throw new Exception( $order_id->get_error_message() );
+					throw new \Exception( $order_id->get_error_message() );
 				}
 
 				if ( ! $order ) {
@@ -170,7 +170,7 @@ class Checkout {
 					$this->process_order_without_payment( $order_id );
 				}
 			}
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			masteriyo_add_notice( $e->getMessage(), Notice::ERROR );
 		}
 

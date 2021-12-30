@@ -49,7 +49,6 @@ class ShortcodesServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'shortcode.cart', CartShortcode::class );
 		$this->getContainer()->add( 'shortcode.instructor-registration', CartShortcode::class );
 
-
 		$this->getContainer()->add( '\Masteriyo\Shortcodes\AccountShortcode' );
 		$this->getContainer()->add( '\Masteriyo\Shortcodes\CartShortcode' );
 		$this->getContainer()->add( '\Masteriyo\Shortcodes\CheckoutShortcode' );

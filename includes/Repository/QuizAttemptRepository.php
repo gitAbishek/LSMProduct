@@ -39,11 +39,12 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 	public function read( Model &$quiz_attempt ) {
 		global $wpdb;
 
-		$sql  = $wpdb->prepare(
-			"SELECT * FROM {$wpdb->prefix}masteriyo_quiz_attempts WHERE id = %d LIMIT 1;",
-			$quiz_attempt->get_id()
+		$data = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}masteriyo_quiz_attempts WHERE id = %d LIMIT 1;",
+				$quiz_attempt->get_id()
+			)
 		);
-		$data = $wpdb->get_row( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		if ( ! $data ) {
 			throw new \Exception( __( 'Invalid quiz attempt.', 'masteriyo' ) );

@@ -593,7 +593,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 
 			$user_course->set_user_id( $order->get_customer_id( 'edit' ) );
 			$user_course->set_status( 'active' );
-			$user_course->set_date_start( current_time( 'mysql', true ));
+			$user_course->set_date_start( current_time( 'mysql', true ) );
 			$user_course->set_order_id( $order->get_id() );
 			$user_course->set_course_id( $order_item->get_course_id( 'edit' ) );
 			$user_course->set_price( $order_item->get_total( 'edit' ) );

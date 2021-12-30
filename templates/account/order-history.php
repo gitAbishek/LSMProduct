@@ -81,7 +81,7 @@ do_action( 'masteriyo_before_account_orders', $orders );
 								foreach ( $order_actions as $key => $order_action ) {
 									echo wp_kses_post(
 										sprintf(
-											/* translators: 1: Order action url 2: Order action class 3: Order anchohr title 4:Order action name */
+											/* translators: 1: Order action url 2: Order action class 3: Order action title 4:Order action name */
 											__( '<a href="%1$s" class="%2$s" title="%3$s">%4$s</a>', 'masteriyo' ),
 											esc_url( $order->get_view_order_url() ),
 											esc_attr( 'masteriyo-button button ' . sanitize_html_class( $key ) ),

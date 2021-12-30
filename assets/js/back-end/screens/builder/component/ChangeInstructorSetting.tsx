@@ -108,7 +108,7 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 						usersAPI
 							.list({
 								search: searchValue,
-								roles: ['administrator', 'masteriyo_instructor'],
+								roles: 'administrator,masteriyo_instructor',
 							})
 							.then((data) => {
 								callback(

@@ -7,7 +7,7 @@ module.exports = {
 		'react-hooks/exhaustive-deps': 'warn',
 		'no-console': 'warn',
 		'react/prop-types': 'off',
-		'no-unused-vars': 'warn',
+		'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 		'max-len': [
 			'error',
 			{

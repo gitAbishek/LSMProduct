@@ -337,6 +337,7 @@ export interface OrderSchema {
 	status: string;
 	total: number;
 	currency: string;
+	currency_symbol: string;
 	expiry_date: string;
 	customer_id: string;
 	payment_method: string;

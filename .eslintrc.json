@@ -22,5 +22,6 @@
       }
     }
   },
+  "root": true,
   "plugins": ["import", "@typescript-eslint", "react-hooks"]
 }

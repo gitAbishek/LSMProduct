@@ -187,7 +187,7 @@ class Utils {
 	 * @return string
 	 */
 	public static function template_path() {
-		return apply_filters( 'masteriyo_template_path', 'wordpress-lms/' );
+		return apply_filters( 'masteriyo_template_path', 'masteriyo/' );
 	}
 
 	/**

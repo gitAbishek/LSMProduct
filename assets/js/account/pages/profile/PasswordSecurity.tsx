@@ -7,16 +7,20 @@ import {
 	Heading,
 	Input,
 	Stack,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import urls from '../../../back-end/constants/urls';
+import API from '../../../back-end/utils/api';
 
-type IFormInputs = {
-	password: string | number;
-	newPassword: string | number;
-	confirmPassword: string | number;
-};
+interface PasswordSchema {
+	password: string;
+	old_password: string;
+	confirm_password: string;
+}
 
 const PasswordSecurity = () => {
 	const {
@@ -24,64 +28,89 @@ const PasswordSecurity = () => {
 		handleSubmit,
 		watch,
 		formState: { errors },
-	} = useForm<IFormInputs>();
+	} = useForm<PasswordSchema>();
+
 	const password = useRef({});
 	password.current = watch('password', '');
-	const onSubmit = handleSubmit(() => {});
+
+	const userAPI = new API(urls.currentUser);
+	const toast = useToast();
+
+	const changePasword = useMutation(
+		(data: PasswordSchema) => userAPI.store(data),
+		{
+			onSuccess: () => {
+				toast({
+					title: __('Password Successfully Changed', 'masteriyo'),
+					isClosable: true,
+					status: 'success',
+				});
+			},
+			onError: () => {
+				toast({
+					title: __('Password cannot be changed', 'masteriyo'),
+					description: __(
+						'Please make sure your old password is corrent',
+						'masteriyo'
+					),
+					isClosable: true,
+					status: 'error',
+				});
+			},
+		}
+	);
+
+	const onSubmit = (data: PasswordSchema) => {
+		changePasword.mutate(data);
+	};
 
 	return (
-		<form onSubmit={onSubmit}>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<Stack spacing="9" w="md">
 				<Heading as="h4" size="lg" fontWeight="medium">
-					Change Password
+					{__('Change Password', 'masteriyo')}
 				</Heading>
 				<Stack direction="column" spacing="8">
 					<FormControl isInvalid={!!errors?.password}>
 						<FormLabel>{__('Current Password', 'masteriyo')}</FormLabel>
 						<Input
 							type="password"
+							{...register('old_password', {
+								required: __('This field cannot be empty', 'masteriyo'),
+							})}
+						/>
+						{errors?.old_password && (
+							<FormErrorMessage>
+								{errors?.old_password.message}
+							</FormErrorMessage>
+						)}
+					</FormControl>
+					<FormControl isInvalid={!!errors?.password}>
+						<FormLabel>{__('New Password', 'masteriyo')}</FormLabel>
+						<Input
+							type="password"
 							{...register('password', {
 								required: __('This field cannot be empty', 'masteriyo'),
-								minLength: {
-									value: 8,
-									message: 'Password must have at least 8 characters',
-								},
 							})}
 						/>
 						{errors?.password && (
 							<FormErrorMessage>{errors?.password.message}</FormErrorMessage>
 						)}
 					</FormControl>
-					<FormControl isInvalid={!!errors?.newPassword}>
-						<FormLabel>{__('New Password', 'masteriyo')}</FormLabel>
-						<Input
-							type="password"
-							{...register('newPassword', {
-								required: __('This field cannot be empty', 'masteriyo'),
-								minLength: {
-									value: 8,
-									message: 'Password must have at least 8 characters',
-								},
-							})}
-						/>
-						{errors?.newPassword && (
-							<FormErrorMessage>{errors?.newPassword.message}</FormErrorMessage>
-						)}
-					</FormControl>
-					<FormControl isInvalid={!!errors?.confirmPassword}>
+					<FormControl isInvalid={!!errors?.confirm_password}>
 						<FormLabel>{__('Confirm New Password', 'masteriyo')}</FormLabel>
 						<Input
 							type="password"
-							{...register('confirmPassword', {
+							{...register('confirm_password', {
 								required: __('This field cannot be empty', 'masteriyo'),
 								validate: (value) =>
 									value === password.current ||
-									__('The passwords do not match'),
+									__('The passwords do not match', 'masteriyo'),
 							})}
 						/>
-						{errors?.confirmPassword && (
+						{errors?.confirm_password && (
 							<FormErrorMessage>
-								{errors?.confirmPassword.message}
+								{errors?.confirm_password.message}
 							</FormErrorMessage>
 						)}
 					</FormControl>

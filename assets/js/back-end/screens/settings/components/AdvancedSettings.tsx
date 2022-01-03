@@ -4,6 +4,7 @@ import {
 	Box,
 	Center,
 	Code,
+	Flex,
 	FormControl,
 	FormLabel,
 	Icon,
@@ -56,10 +57,6 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 		defaultValue: {
 			category_base: advanceData?.permalinks?.category_base,
 			difficulty_base: advanceData?.permalinks?.difficulty_base,
-			single_section_permalink:
-				advanceData?.permalinks?.single_section_permalink,
-			single_lesson_permalink: advanceData?.permalinks?.single_lesson_permalink,
-			single_quiz_permalink: advanceData?.permalinks?.single_quiz_permalink,
 		},
 	});
 
@@ -265,113 +262,50 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 													advanceData?.permalinks?.single_course_permalink
 												}>
 												<Stack spacing={3} direction="column">
-													<Radio value="course">
-														<Code>
-															{homeURL}
-															{__('?course=sample-course', 'masteriyo')}
-														</Code>
+													<Radio value="course" w="100%">
+														<Flex>
+															<Text fontSize="sm" w="150px">
+																{__('Default', 'masteriyo')}
+															</Text>
+															<Code flex="1">
+																{homeURL}
+																{__('?course=sample-course', 'masteriyo')}
+															</Code>
+														</Flex>
 													</Radio>
 													{/** TS */}
 													<Radio value={coursesSlug}>
-														<Code>
-															{homeURL}/{coursesSlug}
-															{__('/sample-course', 'masteriyo')}
-														</Code>
+														<Flex>
+															<Text fontSize="sm" w="150px">
+																{__('Courses page base', 'masteriyo')}
+															</Text>
+															<Code flex="1">
+																{homeURL}/{coursesSlug}
+																{__('/sample-course', 'masteriyo')}
+															</Code>
+														</Flex>
+													</Radio>
+													<Radio value={coursesSlug + '/%course_cat%/'}>
+														<Flex>
+															<Text fontSize="sm" w="150px">
+																{__(
+																	'Courses page base with category',
+																	'masteriyo'
+																)}
+															</Text>
+															<Code flex="1">
+																{homeURL}/{coursesSlug}
+																{__(
+																	'/course-category/sample-course',
+																	'masteriyo'
+																)}
+															</Code>
+														</Flex>
 													</Radio>
 												</Stack>
 											</RadioGroup>
 										)}
 									/>
-								</Stack>
-							</FormControl>
-
-							<FormControl>
-								<FormLabel>
-									{__('Single Section Permalink', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'Enter custom structures for your section URLs here.',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<Stack direction="column">
-									<Input
-										type="text"
-										defaultValue={
-											advanceData?.permalinks?.single_section_permalink
-										}
-										{...register('advance.permalinks.single_section_permalink')}
-									/>
-									<Code>
-										{homeURL}/{watchPermalinkData.single_section_permalink}
-										{__('/sample-section', 'masteriyo')}
-									</Code>
-								</Stack>
-							</FormControl>
-
-							<FormControl>
-								<FormLabel>
-									{__('Single Lesson Permalink', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'Enter custom structures for your lesson URLs here.',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<Stack direction="column">
-									<Input
-										type="text"
-										{...register('advance.permalinks.single_lesson_permalink')}
-										defaultValue={
-											advanceData?.permalinks?.single_lesson_permalink
-										}
-									/>
-									<Code>
-										{homeURL}/{watchPermalinkData.single_lesson_permalink}
-										{__('/sample-lesson', 'masteriyo')}
-									</Code>
-								</Stack>
-							</FormControl>
-
-							<FormControl>
-								<FormLabel>
-									{__('Single Quiz Permalink', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'Enter custom structures for your quiz URLs here.',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<Stack direction="column">
-									<Input
-										type="text"
-										{...register('advance.permalinks.single_quiz_permalink')}
-										defaultValue={
-											advanceData?.permalinks?.single_quiz_permalink
-										}
-									/>
-									<Code>
-										{homeURL}/{watchPermalinkData.single_quiz_permalink}
-										{__('/sample-quiz', 'masteriyo')}
-									</Code>
 								</Stack>
 							</FormControl>
 						</Stack>

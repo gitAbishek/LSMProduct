@@ -58,7 +58,7 @@ class Setting extends Model {
 				'category_base'            => 'sanitize_title',
 				'tag_base'                 => 'sanitize_title',
 				'difficulty_base'          => 'sanitize_title',
-				'single_course_permalink'  => 'sanitize_title',
+				'single_course_permalink'  => 'sanitize_text',
 				'single_lesson_permalink'  => 'sanitize_title',
 				'single_quiz_permalink'    => 'sanitize_title',
 				'single_section_permalink' => 'sanitize_title',

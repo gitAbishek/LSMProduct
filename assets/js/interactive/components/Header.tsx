@@ -47,6 +47,9 @@ const siteTitle = window._MASTERIYO_.siteTitle;
 // @ts-ignore
 const courseUrl = window._MASTERIYO_.urls.courses;
 
+// @ts-ignore
+const homeUrl = window._MASTERIYO_.urls.home;
+
 const Header: React.FC<Props> = (props) => {
 	const { summary, isOpen, onToggle } = props;
 
@@ -117,11 +120,13 @@ const Header: React.FC<Props> = (props) => {
 								py="4"
 								justifyContent="space-between">
 								<Box w="165px">
-									{'' != logoData ? (
-										<Image src={logoData[0]} height="36px" />
-									) : (
-										<Text textAlign="center">{siteTitle}</Text>
-									)}
+									<Link href={homeUrl}>
+										{'' != logoData ? (
+											<Image src={logoData[0]} height="36px" />
+										) : (
+											<Text textAlign="center">{siteTitle}</Text>
+										)}
+									</Link>
 								</Box>
 
 								<Stack

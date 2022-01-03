@@ -17,7 +17,7 @@ interface Props {
 		enable?: boolean;
 		name?: IconType;
 	};
-	size?: 'sm' | 'md' | 'lg' | 'xl';
+	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
 const MediaUploader: React.FC<Props> = (props) => {

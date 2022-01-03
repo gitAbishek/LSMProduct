@@ -312,6 +312,19 @@ class SettingsController extends CrudController {
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'    => 'object',
+						'general' => array(
+							'description' => __( 'Learn page general settings.', 'masteriyo' ),
+							'type'        => 'object',
+							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type'    => 'object',
+								'logo_id' => array(
+									'description' => __( 'Learn page logo id.', 'masteriyo' ),
+									'type'        => 'number',
+									'context'     => array( 'view', 'edit' ),
+								),
+							),
+						),
 						'display' => array(
 							'description' => __( 'Learn page display settings.', 'masteriyo' ),
 							'type'        => 'object',

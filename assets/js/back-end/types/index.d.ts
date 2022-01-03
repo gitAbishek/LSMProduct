@@ -20,6 +20,9 @@ export interface SingleCourseSettingsMap {
 }
 
 export interface LearningPageSettingsMap {
+	general: {
+		logo_id: number;
+	};
 	display: {
 		enable_questions_answers: boolean;
 	};

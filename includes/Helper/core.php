@@ -3165,3 +3165,16 @@ function masteriyo_get_shortcode_tags( $prefix = 'masteriyo' ) {
 	);
 }
 
+/**
+ * Get learn page logo data.
+ *
+ * @since x.x.x
+ *
+ * @return array|false
+ */
+function masteriyo_get_learn_page_logo_data() {
+	$logo_id    = masteriyo_get_setting( 'learn_page.general.logo_id' );
+	$image_data = wp_get_attachment_image_src( $logo_id, 'full' );
+
+	return $image_data;
+}

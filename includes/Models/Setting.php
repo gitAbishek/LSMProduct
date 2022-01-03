@@ -165,6 +165,9 @@ class Setting extends Model {
 			),
 		),
 		'learn_page'     => array(
+			'general' => array(
+				'logo_id' => '',
+			),
 			'display' => array(
 				'enable_questions_answers' => true,
 			),

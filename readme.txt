@@ -1,5 +1,5 @@
 === LMS by Masteriyo - WordPress Learning Management System, eLearning Platform, Online Education System & Online Course Builder ===
-Contributors: Masteriyo, Sanjiv Saha
+Contributors: Masteriyo, sanjiv-saha
 Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
 Tested up to: 5.8.2

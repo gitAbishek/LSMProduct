@@ -43,8 +43,10 @@ const FieldSingleChoice: React.FC<Props> = (props) => {
 										px="4"
 										minW="200px"
 										shadow="input">
-										<Text fontSize="sm">{answer.name}</Text>
-										<Radio value={answer.name}></Radio>
+										<Radio value={answer.name} isFullWidth>
+											{' '}
+											<Text fontSize="sm">{answer.name}</Text>
+										</Radio>
 									</Flex>
 								))}
 							</SimpleGrid>

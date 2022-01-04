@@ -42,8 +42,9 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 										py="3"
 										px="4"
 										shadow="input">
-										<Text fontSize="sm">{answer.name}</Text>
-										<Checkbox value={answer.name} />
+										<Checkbox value={answer.name} width="full">
+											<Text fontSize="sm">{answer.name}</Text>
+										</Checkbox>
 									</Flex>
 								))}
 							</SimpleGrid>

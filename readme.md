@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.3.7
+**Stable tag**: 1.3.8
 
 **License: GNU** General Public License v3.0
 
@@ -51,10 +51,33 @@ Want to contribute? Please have a look at [Contributor Guidelines](docs/contribu
 
 # Changelog
 
+### 1.3.8 - 04-01-2022
+
+- Feature - Forms to add students and instructors in backend.
+- Feature - Added setting to add unique logo image to learn page.
+- Enhancement - Added currency position info in payment settings inside the setup wizard.
+- Enhancement - Remove unnecessary fields from the payment settings inside the setup wizard.
+- Enhancement - Make the pages tab more informative in the setup wizard.
+- Enhancement - Change question display per page setting from input to a slider in the setup wizard.
+- Enhancement - Change course per page setting from input to a slider in the setup wizard.
+- Enhancement - Liked the site logo in the learn page to the site homepage.
+- Enhancement - Improved UX in the setup wizard.
+- Enhancement - Remove unnecessary fields from the advance settings tab.
+- Enhancement - Added one more option to the single course permalink setting.
+- Enhancement - Check/Uncheck quiz-radio input when clicked on its label inside the learn page.
+- Fix - Typo 'pervious' in the learn page
+- Fix - Admins not being listed in instructor setting of a course.
+- Fix - Blocks not being translated.
+- Fix - Blocks properly not working in the widgets editor and the theme customizer.
+- Fix - Mark as complete button not working as expected for guest users in learn page.
+- Fix - Students not being able to update the country and address fields.
+
 ### 1.3.7 - 28-12-2021
+
 - Fix - Course categories block CSS issue.
 
 ### 1.3.6 - 28-12-2021
+
 - Enhancement - Getting started page.
 - Enhancement - Refactor global settings.
 - Enhancement - String refinements.

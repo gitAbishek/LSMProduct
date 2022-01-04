@@ -794,7 +794,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Save an object data.
 	 *
-	 * @since  x.x.x
+	 * @since  1.3.8
 	 *
 	 * @param  WP_REST_Request $request  Full details about the request.
 	 * @param  bool            $creating If is creating a new object.
@@ -814,7 +814,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Save an object in the session.
 	 *
-	 * @since  x.x.x
+	 * @since  1.3.8
 	 *
 	 * @param  WP_REST_Request $request  Full details about the request.
 	 * @param  bool            $creating If is creating a new object.
@@ -861,7 +861,7 @@ class CourseProgressItemsController extends CrudController {
 	/**
 	 * Get the course progress item.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param Masteriyo\Models\CourseProgressItem $course_progress_item Course progress item object.
 	 *

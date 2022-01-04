@@ -213,7 +213,7 @@ class QuizAttemptsController extends CrudController {
 	/**
 	 * Get quiz attempts from session.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param array $query_args
 	 * @return array
@@ -247,7 +247,7 @@ class QuizAttemptsController extends CrudController {
 	/**
 	 * Get quiz attempts from database.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param array $query_args
 	 * @return array

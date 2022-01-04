@@ -257,7 +257,7 @@ class QuizesController extends PostsController {
 	/**
 	 * Check and validate the quiz answers.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return bool
@@ -417,7 +417,7 @@ class QuizesController extends PostsController {
 	/**
 	 * Check whether the attempt limit is reached or not.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param Masteriyo\Models\Quiz $quiz
 	 * @return boolean
@@ -444,7 +444,7 @@ class QuizesController extends PostsController {
 	/**
 	 * Save quiz attempts in session.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return array
@@ -477,7 +477,7 @@ class QuizesController extends PostsController {
 	/**
 	 * Save quiz attempts in database.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -520,7 +520,7 @@ class QuizesController extends PostsController {
 	/**
 	 * Check whether the quiz is started or not.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param int $quiz_id Quiz ID
 	 * @return boolean|array Return false if the quiz is not started else return last attempt data.
@@ -600,7 +600,7 @@ class QuizesController extends PostsController {
 	/**
 	 * Grade quiz.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param array $answers
 	 * @return array

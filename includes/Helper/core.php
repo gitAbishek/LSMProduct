@@ -3167,7 +3167,7 @@ function masteriyo_get_shortcode_tags( $prefix = 'masteriyo' ) {
 /**
  * Get learn page logo data.
  *
- * @since x.x.x
+ * @since 1.3.8
  *
  * @return array|false
  */
@@ -3182,7 +3182,7 @@ function masteriyo_get_learn_page_logo_data() {
 /**
  * Get masteriyo blocks.
  *
- * @since x.x.x
+ * @since 1.3.8
  *
  * @return array
  */

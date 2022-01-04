@@ -48,7 +48,7 @@ class SessionRepository implements RepositoryInterface {
 		/**
 		 * Create session action.
 		 *
-		 * @since x.x.x
+		 * @since 1.3.8
 		 */
 		do_action( 'masteriyo_new_session', $session->get_id(), $session );
 	}
@@ -73,7 +73,7 @@ class SessionRepository implements RepositoryInterface {
 			/**
 			 * Before session delete action.
 			 *
-			 * @since x.x.x
+			 * @since 1.3.8
 			 */
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $session );
 
@@ -82,7 +82,7 @@ class SessionRepository implements RepositoryInterface {
 			/**
 			 * After session delete action.
 			 *
-			 * @since x.x.x
+			 * @since 1.3.8
 			 */
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $session );
 		}
@@ -157,7 +157,7 @@ class SessionRepository implements RepositoryInterface {
 		/**
 		 * Update session action.
 		 *
-		 * @since x.x.x
+		 * @since 1.3.8
 		 */
 		do_action( 'masteriyo_update_session', $session->get_id(), $session );
 	}

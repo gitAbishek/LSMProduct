@@ -933,7 +933,7 @@ class CourseProgressController extends CrudController {
 	/**
 	 * Get course progress items from database.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param \Masteriyo\Models\CourseProgress $course_progress Course progress object.
 	 * @return array
@@ -967,7 +967,7 @@ class CourseProgressController extends CrudController {
 	/**
 	 * Get course progress items from session.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param \Masteriyo\Models\CourseProgress $course_progress Course progress object.
 	 * @return array
@@ -1102,7 +1102,7 @@ class CourseProgressController extends CrudController {
 	/**
 	 * Get the course progress item.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param \WP_Post $lesson_quiz Either lesson or quiz post type.
 	 * @return Masteriyo\Models\CourseProgressItem
@@ -1138,7 +1138,7 @@ class CourseProgressController extends CrudController {
 	/**
 	 * Save an object data.
 	 *
-	 * @since  x.x.x
+	 * @since  1.3.8
 	 *
 	 * @param  WP_REST_Request $request  Full details about the request.
 	 * @param  bool            $creating If is creating a new object.
@@ -1158,7 +1158,7 @@ class CourseProgressController extends CrudController {
 	/**
 	 * Save an object in the session.
 	 *
-	 * @since  x.x.x
+	 * @since  1.3.8
 	 *
 	 * @param  WP_REST_Request $request  Full details about the request.
 	 * @param  bool            $creating If is creating a new object.
@@ -1204,7 +1204,7 @@ class CourseProgressController extends CrudController {
 	/**
 	 * Get course progress summary.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param Masteriyo\Models\CourseProgress $course_progress Course progress object.
 	 *
@@ -1223,7 +1223,7 @@ class CourseProgressController extends CrudController {
 	/**
 	 * Get the summary of course progress items by type.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param array $course_progress_items Array of course progress items.
 	 * @param string $type Course progress item type. (lesson and quiz).
@@ -1256,7 +1256,7 @@ class CourseProgressController extends CrudController {
 	/**
 	 * Get course progress summary from session for guest user.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.8
 	 *
 	 * @param Masteriyo\Models\CourseProgress $course_progress Course progress object.
 	 * @return array

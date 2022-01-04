@@ -19,6 +19,10 @@ if (!process.env.WORDPRESS_URL && process.env.DEVELOPMENT) {
 }
 
 const fileList = {
+	database: {
+		src: 'database/**/*',
+		dest: 'build/database',
+	},
 	includes: {
 		src: 'includes/**/*',
 		dest: 'build/includes',
@@ -154,6 +158,7 @@ function removeLanguageFiles() {
 }
 
 const copyToBuild = [
+	() => src(fileList.database.src).pipe(dest(fileList.database.dest)),
 	() => src(fileList.includes.src).pipe(dest(fileList.includes.dest)),
 	() => src(fileList.assets.src).pipe(dest(fileList.assets.dest)),
 	() => src(fileList.templates.src).pipe(dest(fileList.templates.dest)),

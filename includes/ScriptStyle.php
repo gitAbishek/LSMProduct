@@ -183,7 +183,7 @@ class ScriptStyle {
 				),
 				'learn'         => array(
 					'src'      => $learn_src,
-					'deps'     => array( 'react', 'react-dom', 'wp-api-fetch', 'wp-i18n', 'wp-polyfill' ),
+					'deps'     => array( 'react', 'wp-data', 'wp-core-data', 'wp-components', 'wp-element', 'react-dom', 'wp-api-fetch', 'wp-i18n', 'wp-polyfill' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_learn_page',
@@ -607,7 +607,7 @@ class ScriptStyle {
 	/**
 	 * Load public static scripts and styles.
 	 *
-	 * @since 0.1.1
+	 * @since 1.0.0
 	 */
 	public static function load_admin_scripts_styles() {
 		$scripts = self::get_scripts( 'admin' );
@@ -647,7 +647,7 @@ class ScriptStyle {
 	/**
 	 * Load admin localized scripts.
 	 *
-	 * @since 0.1.1
+	 * @since 1.0.0
 	 */
 	public static function load_admin_localized_scripts() {
 		$courses_page = get_post( masteriyo_get_page_id( 'courses' ) );
@@ -699,7 +699,7 @@ class ScriptStyle {
 	/**
 	 * Load public static localized scripts.
 	 *
-	 * @since 0.1.1
+	 * @since 1.0.0
 	 */
 	public static function load_public_localized_scripts() {
 		self::$localized_scripts = apply_filters(
@@ -792,12 +792,14 @@ class ScriptStyle {
 	/**
 	 * Remove styles and scripts in learn page.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return void
 	 */
 	public static function remove_styles_scripts_in_learn_page() {
 		global $wp_styles;
 
-		// Bail early if the page is not interacitve.
+		// Bail early if the page is not learn.
 		if ( ! masteriyo_is_learn_page() ) {
 			return;
 		}

@@ -937,6 +937,8 @@ class CoursesController extends PostsController {
 	 * Validate the existence of featured image.
 	 * Since the featured image will use the WordPress attachment.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param int $featured_image_id Featured image id.
 	 * @return bool|WP_Error
 	 */
@@ -945,15 +947,9 @@ class CoursesController extends PostsController {
 			return new \WP_Error( 'rest_invalid_type', 'featured image is not of type integer' );
 		}
 
-		$featured_image_id = absint( $featured_image_id );
-		$featured_image    = get_post(
-			$featured_image_id,
-			array(
-				'post_type' => 'attachment',
-			)
-		);
+		$featured_image = get_post( absint( $featured_image_id ) );
 
-		if ( is_null( $featured_image_obj ) ) {
+		if ( ! $featured_image || 'attachment' !== $featured_image->post_type ) {
 			return new \WP_Error( 'rest_invalid_featured_image', 'invalid featured image id' );
 		}
 

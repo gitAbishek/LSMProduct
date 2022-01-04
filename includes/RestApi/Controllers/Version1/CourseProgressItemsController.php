@@ -11,6 +11,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\ModelException;
 use Masteriyo\Helper\Permission;
 use Masteriyo\Exceptions\RestException;
 use Masteriyo\Query\CourseProgressQuery;
@@ -240,13 +241,17 @@ class CourseProgressItemsController extends CrudController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  int|CourseProgress $id Object ID.
+	 * @param  int|CourseProgressItem $id Object ID or object.
 	 * @return object Model object or WP_Error object.
 	 */
-	protected function get_object( $id ) {
+	protected function get_object( $course_progress_item ) {
 		try {
-			$id                   = is_a( $id, 'Masteriyo\Database\Model' ) ? $id->get_id() : $id;
-			$course_progress_item = masteriyo_get_course_progress_item( $id );
+			if ( is_int( $course_progress_item ) ) {
+				$course_progress_item = masteriyo_get_course_progress_item( $course_progress_item );
+			} else {
+				$course_progress_item = $this->get_course_progress_item( $course_progress_item );
+
+			}
 		} catch ( \Exception $e ) {
 			return false;
 		}
@@ -302,7 +307,7 @@ class CourseProgressItemsController extends CrudController {
 		$data = array(
 			'id'           => $course_progress_item->get_id( $context ),
 			'progress_id'  => $course_progress_item->get_progress_id( $context ),
-			'course_id'    => is_null( $progress ) ? '' : $progress->get_course_id( $context ),
+			'course_id'    => is_null( $progress ) ? $course_progress_item->get_item_id( $context ) : $progress->get_course_id( $context ),
 			'user_id'      => $course_progress_item->get_user_id( $context ),
 			'item_id'      => $course_progress_item->get_item_id( $context ),
 			'item_type'    => $course_progress_item->get_item_type( $context ),
@@ -516,10 +521,30 @@ class CourseProgressItemsController extends CrudController {
 	 * @return array
 	 */
 	protected function get_objects( $query_args ) {
-		$query   = new CourseProgressItemQuery( $query_args );
-		$objects = $query->get_course_progress_items();
+		if ( is_user_logged_in() ) {
+			$query   = new CourseProgressItemQuery( $query_args );
+			$objects = $query->get_course_progress_items();
+		} else {
+			$session = masteriyo( 'session' );
 
-		$total_items = count( $objects );
+			$objects = array_filter(
+				array_map(
+					function( $object ) use ( $query_args ) {
+						$course_progress_item = null;
+
+						if ( absint( $query_args['item_id'] ) === $object['item_id'] && $object['course_id'] === $query_args['course_id'] ) {
+							$course_progress_item = masteriyo( 'course-progress-item' );
+							$course_progress_item->set_props( $object );
+						}
+
+						return $course_progress_item;
+					},
+					$session->get( 'course_progress_items', array() )
+				)
+			);
+		}
+
+		$total_items = count( array_values( $objects ) );
 
 		return array(
 			'objects' => $objects,
@@ -671,7 +696,7 @@ class CourseProgressItemsController extends CrudController {
 		if ( isset( $request['user_id'] ) && ! empty( $request['user_id'] ) ) {
 			$user_id = $request['user_id'];
 		} else {
-			$user_id = is_user_logged_in() ? get_current_user_id() : masteriyo( 'session' )->start()->get_user_id();
+			$user_id = get_current_user_id();
 		}
 
 		// Return the auto generated guest user id.
@@ -764,5 +789,120 @@ class CourseProgressItemsController extends CrudController {
 				400
 			);
 		}
+	}
+
+	/**
+	 * Save an object data.
+	 *
+	 * @since  x.x.x
+	 *
+	 * @param  WP_REST_Request $request  Full details about the request.
+	 * @param  bool            $creating If is creating a new object.
+	 *
+	 * @return Model|WP_Error
+	 */
+	protected function save_object( $request, $creating = false ) {
+		// Save the object to database if the user is logged in.
+		if ( is_user_logged_in() ) {
+			$object = parent::save_object( $request, $creating );
+			return $object;
+		}
+
+		return $this->save_object_in_session( $request, $creating );
+	}
+
+	/**
+	 * Save an object in the session.
+	 *
+	 * @since  x.x.x
+	 *
+	 * @param  WP_REST_Request $request  Full details about the request.
+	 * @param  bool            $creating If is creating a new object.
+	 *
+	 * @return Model|WP_Error
+	 */
+	protected function save_object_in_session( $request, $creating = false ) {
+		try {
+			$session = masteriyo( 'session' );
+
+			$progress_item = $this->prepare_object_for_database( $request, $creating );
+
+			if ( is_wp_error( $progress_item ) ) {
+				return $progress_item;
+			}
+
+			if ( ! $progress_item->get_started_at() ) {
+				$progress_item->set_started_at( current_time( 'mysql' ) );
+			}
+
+			$progress_item->set_modified_at( current_time( 'mysql' ) );
+
+			if ( $progress_item->get_completed() ) {
+				$progress_item->set_completed_at( current_time( 'mysql' ) );
+			} else {
+				$progress_item->set_completed_at( null );
+			}
+
+			$course_progress = $session->get( 'course_progress_items', array() );
+
+			$key                     = $progress_item->get_item_id() . ':' . $progress_item->get_item_type() . ':' . $progress_item->get_course_id();
+			$course_progress[ $key ] = $progress_item->get_data();
+
+			$session->put( 'course_progress_items', $course_progress );
+
+			return $progress_item;
+		} catch ( ModelException $e ) {
+			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
+		} catch ( RestException $e ) {
+			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
+		}
+	}
+
+	/**
+	 * Get the course progress item.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param Masteriyo\Models\CourseProgressItem $course_progress_item Course progress item object.
+	 *
+	 * @return Masteriyo\Models\CourseProgressItem
+	 */
+	protected function get_course_progress_item( $course_progress_item ) {
+		$post = get_post( $course_progress_item->get_item_id() );
+
+		if ( ! $post || $course_progress_item->get_item_type() !== str_replace( 'mto-', '', $post->post_type ) ) {
+			return new \WP_Error(
+				'masteriyo_invalid_course_progress_item',
+				__( 'Course progress item ID is invalid.', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		}
+
+		// Get the course progress items from the database if the user is logged in
+		// else from the session.
+		if ( is_user_logged_in() ) {
+			$query = new CourseProgressItemQuery(
+				array(
+					'user_id' => masteriyo_get_current_user_id(),
+					'item_id' => $course_progress_item->get_item_id(),
+				)
+			);
+
+			$course_progress_item = current( $query->get_course_progress_items() );
+		} else {
+			$session = masteriyo( 'session' );
+
+			$item_id               = $course_progress_item->get_item_id();
+			$course_progress_items = $session->get( 'course_progress_items', array() );
+
+			if ( isset( $course_progress_items[ $item_id ] ) ) {
+				$course_progress_item = masteriyo( 'course-progress-item' );
+				$course_progress_item->set_item_id( $item_id );
+				$course_progress_item->set_item_type( str_replace( 'mto-', '', $post->post_type ) );
+				$course_progress_item->set_completed( $course_progress_items[ $post->ID ]['completed'] );
+			}
+		}
+
+		return apply_filters( 'masteriyo_rest_get_course_progress_item', $course_progress_item, $this );
 	}
 }

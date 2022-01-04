@@ -100,6 +100,7 @@ const InteractiveQuiz = () => {
 	const onSubmit = (data: any) => {
 		checkQuizAnswers.mutate(deepClean(data), {
 			onSuccess: (data: any) => {
+				queryClient.invalidateQueries(`attempt${quizId}`);
 				setQuizStartedOn(null);
 				setScoreBoardData(data);
 			},

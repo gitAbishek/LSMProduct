@@ -2102,7 +2102,7 @@ function masteriyo_set_customer_auth_cookie( $user_id ) {
 	wp_set_auth_cookie( $user_id, true );
 
 	// Update session.
-	masteriyo( 'session' )->init_session_cookie();
+	masteriyo( 'session' );
 }
 
 /**
@@ -3103,7 +3103,6 @@ function masteriyo_get_current_user_id() {
 	if ( is_user_logged_in() ) {
 		$user_id = get_current_user_id();
 	} else {
-		masteriyo( 'session' )->start()->set_user_session_cookie( true );
 		$user_id = masteriyo( 'session' )->get_user_id();
 	}
 

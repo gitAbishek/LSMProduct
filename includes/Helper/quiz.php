@@ -53,7 +53,7 @@ function masteriyo_get_quiz_questions( $quiz_id, $by ) {
 function masteriyo_is_quiz_started( $quiz_id = 0 ) {
 	global $wpdb;
 
-	$user_id = is_user_logged_in() ? get_current_user_id() : masteriyo( 'session' )->start()->get_user_id();
+	$user_id = get_current_user_id();
 
 	$is_started = $wpdb->get_row(
 		$wpdb->prepare(

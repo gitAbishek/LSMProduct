@@ -59,6 +59,8 @@ class Session extends AbstractSession {
 		$this->repository = $session_repository;
 		$this->cookie     = apply_filters( 'masteriyo_cookie', 'wp_masteriyo_session_' . COOKIEHASH );
 		$this->table      = $GLOBALS['wpdb']->base_prefix . 'masteriyo_sessions';
+
+		$this->start();
 	}
 
 	/**
@@ -113,9 +115,9 @@ class Session extends AbstractSession {
 
 		// Validate hash.
 		$to_hash = $user_id . '|' . $expiration;
-		$hash    = hash_hmac( 'md5', $to_hash, wp_hash( $to_hash ) );
+		$hash    = \hash_hmac( 'md5', $to_hash, wp_hash( $to_hash ) );
 
-		if ( empty( $cookie_hash ) || ! hash_equals( $hash, $cookie_hash ) ) {
+		if ( empty( $cookie_hash ) || ! \hash_equals( $hash, $cookie_hash ) ) {
 			return false;
 		}
 
@@ -139,11 +141,12 @@ class Session extends AbstractSession {
 	/**
 	 * Get the session based on the ID.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return \Masteriyo\Session\Session
 	 */
 	public function read() {
 		$this->repository->read( $this );
-		return $this;
 	}
 
 	/**
@@ -180,8 +183,8 @@ class Session extends AbstractSession {
 		} else {
 			$this->set_session_expiration();
 			$this->user_id = $this->generate_user_id();
-			$this->set_prop( 'key', $this->user_id );
-			$this->set_prop( 'data', $this->all() );
+			$this->set_key( $this->user_id );
+			$this->set_data( $this->all() );
 		}
 	}
 
@@ -197,7 +200,7 @@ class Session extends AbstractSession {
 	public function set_user_session_cookie( $set ) {
 		if ( $set ) {
 			$to_hash          = $this->user_id . '|' . $this->expiration;
-			$cookie_hash      = hash_hmac( 'md5', $to_hash, wp_hash( $to_hash ) );
+			$cookie_hash      = \hash_hmac( 'md5', $to_hash, wp_hash( $to_hash ) );
 			$cookie_value     = $this->user_id . '||' . $this->expiration . '||' . $this->expiring . '||' . $cookie_hash;
 			$this->has_cookie = true;
 

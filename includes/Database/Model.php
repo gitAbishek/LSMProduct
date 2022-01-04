@@ -153,7 +153,7 @@ abstract class Model {
 	public function __wakeup() {
 		try {
 			$this->__construct( absint( $this->id ) );
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			$this->set_id( 0 );
 			$this->set_object_read( true );
 		}

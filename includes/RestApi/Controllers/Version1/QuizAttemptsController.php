@@ -7,8 +7,8 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
+use Masteriyo\Models\QuizAttempt;
 use Masteriyo\Query\QuizAttemptQuery;
 
 class QuizAttemptsController extends CrudController {
@@ -68,7 +68,7 @@ class QuizAttemptsController extends CrudController {
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_items' ),
 					'permission_callback' => function() {
-						return is_user_logged_in() || masteriyo( 'session' )->start()->get_user_id();
+						return is_user_logged_in() || masteriyo( 'session' )->get_user_id();
 					},
 					'args'                => $this->get_collection_params(),
 				),
@@ -201,6 +201,58 @@ class QuizAttemptsController extends CrudController {
 	 * @return array
 	 */
 	protected function get_objects( $query_args ) {
+		if ( is_user_logged_in() ) {
+			$result = $this->get_quiz_attempts_from_db( $query_args );
+		} else {
+			$result = $this->get_quiz_attempts_from_session( $query_args );
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Get quiz attempts from session.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param array $query_args
+	 * @return array
+	 */
+	protected function get_quiz_attempts_from_session( $query_args ) {
+		$session = masteriyo( 'session' );
+
+		$quiz_id      = absint( $query_args['quiz_id'] );
+		$all_attempts = $session->get( 'quiz_attempts', array() );
+		$attempts     = isset( $all_attempts[ $quiz_id ] ) ? $all_attempts[ $quiz_id ] : array();
+		$total_items  = count( $attempts );
+
+		$attempts = array_map(
+			function( $attempt ) {
+				$quiz_attempt = masteriyo( 'quiz-attempt' );
+				$quiz_attempt->set_id( 0 );
+				$quiz_attempt->set_props( $attempt );
+
+				return $quiz_attempt;
+			},
+			$attempts
+		);
+
+		return array(
+			'objects' => array_reverse( $attempts ),
+			'total'   => (int) $total_items,
+			'pages'   => (int) ceil( $total_items / (int) $query_args['per_page'] ),
+		);
+	}
+
+	/**
+	 * Get quiz attempts from database.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param array $query_args
+	 * @return array
+	 */
+	protected function get_quiz_attempts_from_db( $query_args ) {
 		global $wpdb;
 
 		$query   = new QuizAttemptQuery( $query_args );
@@ -212,7 +264,7 @@ class QuizAttemptsController extends CrudController {
 		if ( ! empty( $query_args['user_id'] ) && ! empty( $query_args['quiz_id'] ) ) {
 			$total_items = $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT COUNT(*) FROM {$wpdb->base_prefix}masteriyo_quiz_attempts  
+					"SELECT COUNT(*) FROM {$wpdb->base_prefix}masteriyo_quiz_attempts
 					WHERE user_id = %d
 					AND quiz_id = %d",
 					$query_args['user_id'],
@@ -222,7 +274,7 @@ class QuizAttemptsController extends CrudController {
 		} elseif ( ! empty( $query_args['user_id'] ) ) {
 			$total_items = $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT COUNT(*) FROM {$wpdb->base_prefix}masteriyo_quiz_attempts  
+					"SELECT COUNT(*) FROM {$wpdb->base_prefix}masteriyo_quiz_attempts
 					WHERE user_id = %d",
 					$query_args['user_id']
 				)
@@ -230,7 +282,7 @@ class QuizAttemptsController extends CrudController {
 		} elseif ( ! empty( $query_args['quiz_id'] ) ) {
 			$total_items = $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT COUNT(*) FROM {$wpdb->base_prefix}masteriyo_quiz_attempts  
+					"SELECT COUNT(*) FROM {$wpdb->base_prefix}masteriyo_quiz_attempts
 					WHERE quiz_id = %d",
 					$query_args['quiz_id']
 				)

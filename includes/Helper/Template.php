@@ -7,9 +7,8 @@
  */
 
 use Masteriyo\Query\UserCourseQuery;
-use Masteriyo\Query\CourseProgressQuery;
 
-if ( ! function_exists( 'add_action' ) && function_exists( 'add_filter' ) ) {
+if ( ! ( function_exists( 'add_action' ) && function_exists( 'add_filter' ) ) ) {
 	return;
 }
 
@@ -318,6 +317,7 @@ function_exists( 'add_action' ) && add_action( 'the_post', 'masteriyo_setup_cour
  * @param string[] $class   An array of additional class names added to the body.
  * @return string[]
  */
+
 function masteriyo_add_body_class( $classes, $class ) {
 	global $post;
 

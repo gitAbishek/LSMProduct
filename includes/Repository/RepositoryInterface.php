@@ -36,7 +36,7 @@ interface RepositoryInterface {
 	public function read( Model &$model );
 
 	/**
-	 * Updates a record in thModel e modelbase.
+	 * Updates a record in the database.
 	 *
 	 * @since 1.0.0
 	 *
@@ -45,7 +45,7 @@ interface RepositoryInterface {
 	public function update( Model &$model );
 
 	/**
-	 * Deletes a record from thModel e modelbase.
+	 * Deletes a record from the database.
 	 *
 	 * @param  Model  $model a Model object.
 	 * @param  array   $args Array of args to pass to the delete method.

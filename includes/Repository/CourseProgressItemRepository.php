@@ -311,7 +311,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 
 		// Construct where clause part.
 		if ( ! empty( $query_vars['user_id'] ) ) {
-			$search_criteria[] = $wpdb->prepare( 'user_id = %s', $query_vars['user_id'] );
+			$search_criteria[] = $wpdb->prepare( 'user_id = %d', $query_vars['user_id'] );
 		}
 
 		if ( ! empty( $query_vars['item_id'] ) ) {

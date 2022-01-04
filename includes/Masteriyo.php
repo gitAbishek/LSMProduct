@@ -310,7 +310,7 @@ class Masteriyo {
 			}
 
 			if ( 'open' === $course->get_access_mode() && ! is_user_logged_in() ) {
-				masteriyo( 'session' )->start()->set_user_session_cookie( true );
+				masteriyo( 'session' )->set_user_session_cookie( true );
 			} else {
 				$query = new UserCourseQuery(
 					array(

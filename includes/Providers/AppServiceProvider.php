@@ -1,6 +1,8 @@
 <?php
 /**
  * App service provider.
+ *
+ * @since 1.0.0
  */
 
 namespace Masteriyo\Providers;
@@ -10,6 +12,11 @@ defined( 'ABSPATH' ) || exit;
 use Masteriyo\Masteriyo;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
+/**
+ * App service provider.
+ *
+ * @since 1.0.0
+ */
 class AppServiceProvider extends AbstractServiceProvider {
 	/**
 	 * The provided array is a way to let the container

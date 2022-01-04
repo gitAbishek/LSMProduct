@@ -11,6 +11,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\ModelException;
 use Masteriyo\Helper\Permission;
 use Masteriyo\Models\Order\OrderItem;
 use Masteriyo\Exceptions\RestException;
@@ -307,7 +308,7 @@ class CourseProgressController extends CrudController {
 	 */
 	protected function get_course_progress_data( $course_progress, $context = 'view' ) {
 		$course  = masteriyo_get_course( $course_progress->get_course_id( $context ) );
-		$summary = $course_progress->get_summary( 'all' );
+		$summary = $this->get_course_progress_summary( $course_progress );
 
 		if ( 0 === $summary['total']['pending'] ) {
 			$course_progress->set_status( 'completed' );
@@ -695,7 +696,7 @@ class CourseProgressController extends CrudController {
 		if ( isset( $request['user_id'] ) && ! empty( $request['user_id'] ) ) {
 			$user_id = $request['user_id'];
 		} else {
-			$user_id = is_user_logged_in() ? get_current_user_id() : masteriyo( 'session' )->start()->get_user_id();
+			$user_id = get_current_user_id();
 		}
 
 		// Return the auto generated guest user id.
@@ -920,6 +921,24 @@ class CourseProgressController extends CrudController {
 	 * @return array
 	 */
 	protected function get_course_progress_items( $course_progress ) {
+		if ( is_user_logged_in() ) {
+			$progress_items = $this->get_course_progress_items_from_db( $course_progress );
+		} else {
+			$progress_items = $this->get_course_progress_items_from_session( $course_progress );
+		}
+
+		return $progress_items;
+	}
+
+	/**
+	 * Get course progress items from database.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param \Masteriyo\Models\CourseProgress $course_progress Course progress object.
+	 * @return array
+	 */
+	protected function get_course_progress_items_from_db( $course_progress ) {
 		$progress_items = array();
 
 		foreach ( $course_progress->get_items() as $progress_item ) {
@@ -943,6 +962,60 @@ class CourseProgressController extends CrudController {
 		}
 
 		return $sections;
+	}
+
+	/**
+	 * Get course progress items from session.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param \Masteriyo\Models\CourseProgress $course_progress Course progress object.
+	 * @return array
+	 */
+	protected function get_course_progress_items_from_session( $course_progress ) {
+		$session = masteriyo( 'session' );
+
+		$progress_items_from_db = $this->get_course_progress_items_from_db( $course_progress );
+
+		foreach ( $progress_items_from_db as $index => $progress_item_from_db ) {
+			if ( 'section' !== $progress_item_from_db['item_type'] ) {
+				continue;
+			}
+
+			$lesson_quizzes = $progress_item_from_db['contents'];
+
+			// Convert the actual all course progress items to dictionary.
+			$lesson_quizzes_map = array_reduce(
+				$lesson_quizzes,
+				function( $result, $lesson_quiz ) use ( $course_progress ) {
+					$key            = $lesson_quiz['item_id'] . ':' . $lesson_quiz['item_type'] . ':' . $course_progress->get_course_id();
+					$result[ $key ] = $lesson_quiz;
+
+					return $result;
+				},
+				array()
+			);
+
+			// Get the course progress items of the specific course from session.
+			$lesson_quizzes_from_session = array_filter(
+				$session->get( 'course_progress_items', array() ),
+				function( $lesson_quiz ) use ( $course_progress ) {
+					return $course_progress->get_course_id() === $lesson_quiz['course_id'];
+				}
+			);
+
+			// Merge course progress items from session to the actual course progress items list.
+			foreach ( $lesson_quizzes_from_session as $key => $lesson_quiz ) {
+				if ( isset( $lesson_quizzes_map[ $key ] ) ) {
+					$lesson_quizzes_map[ $key ]['completed'] = $lesson_quiz['completed'];
+				}
+			}
+
+			$progress_item_from_db['contents'] = array_values( $lesson_quizzes_map );
+			$progress_items_from_db[ $index ]  = $progress_item_from_db;
+		}
+
+		return $progress_items_from_db;
 	}
 
 	/**
@@ -1009,14 +1082,7 @@ class CourseProgressController extends CrudController {
 		$lessons_quizzes = array_filter(
 			array_map(
 				function( $lesson_quiz ) {
-					$query = new CourseProgressItemQuery(
-						array(
-							'user_id' => masteriyo_get_current_user_id(),
-							'item_id' => $lesson_quiz->ID,
-						)
-					);
-
-					$progress_item = current( $query->get_course_progress_items() );
+					$progress_item = $this->get_course_progress_item( $lesson_quiz );
 
 					if ( ! $progress_item ) {
 						$progress_item = masteriyo( 'course-progress-item' );
@@ -1031,5 +1097,194 @@ class CourseProgressController extends CrudController {
 		);
 
 		return $lessons_quizzes;
+	}
+
+	/**
+	 * Get the course progress item.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param \WP_Post $lesson_quiz Either lesson or quiz post type.
+	 * @return Masteriyo\Models\CourseProgressItem
+	 */
+	protected function get_course_progress_item( $lesson_quiz ) {
+		$course_progress_item = null;
+
+		if ( is_user_logged_in() ) {
+			$query = new CourseProgressItemQuery(
+				array(
+					'user_id' => masteriyo_get_current_user_id(),
+					'item_id' => $lesson_quiz->ID,
+				)
+			);
+
+			$course_progress_item = current( $query->get_course_progress_items() );
+		} else {
+			$session = masteriyo( 'session' );
+
+			$course_progress_items = $session->get( 'course_progress_items', array() );
+
+			if ( isset( $course_progress_items[ $lesson_quiz->ID ] ) ) {
+				$course_progress_item = masteriyo( 'course-progress-item' );
+				$course_progress_item->set_item_id( $lesson_quiz->ID );
+				$course_progress_item->set_item_type( str_replace( 'mto-', '', $lesson_quiz->post_type ) );
+				$course_progress_item->set_completed( $course_progress_items[ $lesson_quiz->ID ]['completed'] );
+			}
+		}
+
+		return apply_filters( 'masteriyo_rest_get_course_progress_item', $course_progress_item, $lesson_quiz, $this );
+	}
+
+	/**
+	 * Save an object data.
+	 *
+	 * @since  x.x.x
+	 *
+	 * @param  WP_REST_Request $request  Full details about the request.
+	 * @param  bool            $creating If is creating a new object.
+	 *
+	 * @return Model|WP_Error
+	 */
+	protected function save_object( $request, $creating = false ) {
+		// Save the object to database if the user is logged in.
+		if ( is_user_logged_in() ) {
+			$object = parent::save_object( $request, $creating );
+			return $object;
+		}
+
+		return $this->save_object_in_session( $request, $creating );
+	}
+
+	/**
+	 * Save an object in the session.
+	 *
+	 * @since  x.x.x
+	 *
+	 * @param  WP_REST_Request $request  Full details about the request.
+	 * @param  bool            $creating If is creating a new object.
+	 *
+	 * @return Model|WP_Error
+	 */
+	protected function save_object_in_session( $request, $creating = false ) {
+		try {
+			$session = masteriyo( 'session' );
+
+			$object = $this->prepare_object_for_database( $request, $creating );
+
+			if ( is_wp_error( $object ) ) {
+				return $object;
+			}
+
+			if ( ! $object->get_started_at() ) {
+				$object->set_started_at( current_time( 'mysql' ) );
+			}
+
+			$object->set_modified_at( current_time( 'mysql' ) );
+
+			if ( 'completed' === $object->get_status() ) {
+				$object->set_completed_at( current_time( 'mysql' ) );
+			}
+
+			$course_progress = $session->get( 'course_progress', array() );
+
+			if ( ! isset( $course_progress[ $object->get_course_id() ] ) ) {
+				$course_progress[] = $object->get_data();
+			}
+
+			$session->put( 'course_progress', $course_progress );
+
+			return $object;
+		} catch ( ModelException $e ) {
+			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
+		} catch ( RestException $e ) {
+			return new \WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
+		}
+	}
+
+	/**
+	 * Get course progress summary.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param Masteriyo\Models\CourseProgress $course_progress Course progress object.
+	 *
+	 * @return array
+	 */
+	protected function get_course_progress_summary( $course_progress ) {
+		if ( is_user_logged_in() ) {
+			$summary = $course_progress->get_summary( 'all' );
+		} else {
+			$summary = $this->get_course_progress_summary_from_session( $course_progress );
+		}
+
+		return apply_filters( "masteriyo_rest_{$this->object_type}_summary", $summary, $course_progress, $this );
+	}
+
+	/**
+	 * Get the summary of course progress items by type.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param array $course_progress_items Array of course progress items.
+	 * @param string $type Course progress item type. (lesson and quiz).
+	 *
+	 * @return array
+	 */
+	protected function get_course_progress_item_summary( $course_progress_items, $type ) {
+		// Get the specific type of course progress items only.
+		$course_progress_items = array_filter(
+			$course_progress_items,
+			function( $course_progress_item ) use ( $type ) {
+				return $type === $course_progress_item['item_type'];
+			}
+		);
+
+		// Get the completed course progress items.
+		$completed_course_progress_items = array_filter(
+			$course_progress_items,
+			function( $course_progress_item ) {
+				return $course_progress_item['completed'];
+			}
+		);
+
+		return array(
+			'completed' => count( $completed_course_progress_items ),
+			'pending'   => count( $course_progress_items ) - count( $completed_course_progress_items ),
+		);
+	}
+
+	/**
+	 * Get course progress summary from session for guest user.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param Masteriyo\Models\CourseProgress $course_progress Course progress object.
+	 * @return array
+	 */
+	protected function get_course_progress_summary_from_session( $course_progress ) {
+		$course_progress_items = $this->get_course_progress_items_from_session( $course_progress );
+
+		// Get the lessons and quizzes from the course progress items.
+		$lesson_quizzes_items = array_reduce(
+			$course_progress_items,
+			function( $result, $course_progress_item ) {
+				if ( ! empty( $course_progress_item['contents'] ) ) {
+					$result = $course_progress_item['contents'];
+				}
+
+				return $result;
+			},
+			array()
+		);
+
+		$summary['lesson'] = $this->get_course_progress_item_summary( $lesson_quizzes_items, 'lesson' );
+		$summary['quiz']   = $this->get_course_progress_item_summary( $lesson_quizzes_items, 'quiz' );
+
+		$summary['total'] = array(
+			'completed' => $summary['lesson']['completed'] + $summary['quiz']['completed'],
+			'pending'   => $summary['lesson']['pending'] + $summary['quiz']['pending'],
+		);
+
+		return $summary;
 	}
 }

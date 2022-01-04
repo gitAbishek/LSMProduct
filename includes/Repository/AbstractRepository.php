@@ -319,7 +319,7 @@ abstract class AbstractRepository {
 	 *
 	 * @since 1.0.0 Added to prevent empty meta being stored unless required.
 	 *
-	 * @param Model $object The Model objec
+	 * @param Model $object The Model object
 	 * @param Model $object The Model object.
 	 * @param string  $meta_key Meta key to update.
 	 * @param mixed   $meta_value Value to save.

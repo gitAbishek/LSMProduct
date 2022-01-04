@@ -149,7 +149,7 @@ abstract class Session extends Model implements SessionInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return string
+	 * @return array
 	 */
 	public function get_data() {
 		return $this->get_prop( 'data' );
@@ -224,7 +224,7 @@ abstract class Session extends Model implements SessionInterface {
 	 * @return mixed
 	 */
 	public function get( $key, $default = null, $context = 'view' ) {
-		$session_data = $this->get_prop( 'data', $context );
+		$session_data = $this->get_data( $context );
 		$session_data = isset( $session_data[ $key ] ) ? $session_data[ $key ] : $default;
 		return $session_data;
 	}
@@ -239,9 +239,9 @@ abstract class Session extends Model implements SessionInterface {
 	 * @return void
 	 */
 	public function put( $key, $value = null ) {
-		$session_data         = $this->get_prop( 'data' );
+		$session_data         = $this->get_data();
 		$session_data[ $key ] = $value;
-		$this->set_prop( 'data', $session_data );
+		$this->set_data( $session_data );
 	}
 
 	/**
@@ -254,7 +254,8 @@ abstract class Session extends Model implements SessionInterface {
 	 * @return array
 	 */
 	public function all( $context = 'view' ) {
-		return $this->get_prop( 'data', $context );
+		$changes = isset( $this->changes['data'] ) ? $this->changes['data'] : array();
+		return array_replace_recursive( $this->data['data'], $changes );
 	}
 
 	/**
@@ -267,7 +268,7 @@ abstract class Session extends Model implements SessionInterface {
 	 */
 	public function exists( $key ) {
 		$keys         = (array) $key;
-		$session_data = $this->get_prop( 'data' );
+		$session_data = $this->get_data();
 		$result       = array_reduce(
 			$keys,
 			function( $result, $key ) use ( $session_data ) {
@@ -289,7 +290,7 @@ abstract class Session extends Model implements SessionInterface {
 	 */
 	public function has( $key ) {
 		$keys         = (array) $key;
-		$session_data = $this->get_prop( 'data' );
+		$session_data = $this->get_data();
 		$result       = array_reduce(
 			$keys,
 			function( $result, $key ) use ( $session_data ) {
@@ -311,14 +312,14 @@ abstract class Session extends Model implements SessionInterface {
 	 */
 	public function remove( $key ) {
 		$value        = null;
-		$session_data = $this->get_prop( 'data' );
+		$session_data = $this->get_data();
 
 		if ( isset( $session_data[ $key ] ) ) {
 			$value = $session_data[ $key ];
 			unset( $session_data[ $key ] );
 		}
 
-		$this->set_prop( 'data', $session_data );
+		$this->set_data( $session_data );
 
 		return $value;
 	}
@@ -332,7 +333,7 @@ abstract class Session extends Model implements SessionInterface {
 	 * @return void
 	 */
 	public function forget( $keys ) {
-		$session_data = $this->get_prop( 'data' );
+		$session_data = $this->get_data();
 		$keys         = (array) $keys;
 		$keys         = is_array( $keys ) ? array_flip( $keys ) : $keys;
 
@@ -344,16 +345,16 @@ abstract class Session extends Model implements SessionInterface {
 			ARRAY_FILTER_USE_KEY
 		);
 
-		$this->set_prop( 'data', $session_data );
+		$this->set_data( $session_data );
 	}
 
 	/**
-	 * Remvoe all of the items from the session.
+	 * Remove all of the items from the session.
 	 *
 	 * @since 1.0.0
 	 */
 	public function flush() {
-		$this->set_prop( 'data', array() );
+		$this->set_data( array() );
 	}
 
 	/**
@@ -369,6 +370,8 @@ abstract class Session extends Model implements SessionInterface {
 
 	/**
 	 * Get user ID.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @return int
 	 */

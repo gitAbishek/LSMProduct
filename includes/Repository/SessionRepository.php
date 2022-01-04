@@ -43,6 +43,14 @@ class SessionRepository implements RepositoryInterface {
 
 		$session->set_id( $wpdb->insert_id );
 		$session->set_object_read( true );
+		$session->apply_changes();
+
+		/**
+		 * Create session action.
+		 *
+		 * @since x.x.x
+		 */
+		do_action( 'masteriyo_new_session', $session->get_id(), $session );
 	}
 
 	/**
@@ -56,9 +64,27 @@ class SessionRepository implements RepositoryInterface {
 	public function delete( Model &$session, $args = array() ) {
 		global $wpdb;
 
+		$id          = $session->get_id();
+		$object_type = $session->get_object_type();
+
 		if ( $session->get_id() ) {
 			$session_table = $session->get_table();
+
+			/**
+			 * Before session delete action.
+			 *
+			 * @since x.x.x
+			 */
+			do_action( 'masteriyo_before_delete_' . $object_type, $id, $session );
+
 			$wpdb->delete( $session_table, array( 'session_id' => $session->get_id() ) );
+
+			/**
+			 * After session delete action.
+			 *
+			 * @since x.x.x
+			 */
+			do_action( 'masteriyo_before_delete_' . $object_type, $id, $session );
 		}
 	}
 
@@ -67,7 +93,7 @@ class SessionRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $session Cource object.
+	 * @param Model $session Course object.
 	 * @throws Exception If invalid session.
 	 */
 	public function read( Model &$session ) {
@@ -95,6 +121,8 @@ class SessionRepository implements RepositoryInterface {
 				$session->set_object_read( true );
 			}
 		}
+
+		do_action( 'masteriyo_session_read', $session->get_id(), $session );
 	}
 
 	/**
@@ -109,11 +137,9 @@ class SessionRepository implements RepositoryInterface {
 	public function update( Model &$session ) {
 		global $wpdb;
 
-		$session_table = $session->get_table();
-
 		if ( $session->is_dirty() ) {
 			$wpdb->update(
-				$session_table,
+				$session->get_table(),
 				array(
 					'session_key'    => $session->get_key(),
 					'session_data'   => maybe_serialize( $session->all() ),
@@ -126,6 +152,14 @@ class SessionRepository implements RepositoryInterface {
 			);
 		}
 
+		$session->apply_changes();
+
+		/**
+		 * Update session action.
+		 *
+		 * @since x.x.x
+		 */
+		do_action( 'masteriyo_update_session', $session->get_id(), $session );
 	}
 
 	/**

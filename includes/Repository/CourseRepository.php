@@ -2,6 +2,8 @@
 /**
  * Course Repository.
  *
+ * @since 1.0.0
+ *
  * @package Masteriyo\Repository;
  */
 
@@ -16,6 +18,8 @@ use Masteriyo\Query\CourseProgressQuery;
 
 /**
  * Course repository class.
+ *
+ * @since 1.0.0
  */
 class CourseRepository extends AbstractRepository implements RepositoryInterface {
 

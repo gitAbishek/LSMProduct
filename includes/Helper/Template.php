@@ -338,6 +338,14 @@ function masteriyo_add_body_class( $classes, $class ) {
 				break;
 			}
 		}
+
+		$blocks = masteriyo_get_blocks();
+		foreach ( $blocks as $block ) {
+			if ( has_block( $block, $post->post_content ) ) {
+				$classes[] = 'masteriyo';
+				break;
+			}
+		}
 	}
 
 	return $classes;

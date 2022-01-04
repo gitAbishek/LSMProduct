@@ -3175,5 +3175,23 @@ function masteriyo_get_learn_page_logo_data() {
 	$logo_id    = masteriyo_get_setting( 'learn_page.general.logo_id' );
 	$image_data = wp_get_attachment_image_src( $logo_id, 'full' );
 
-	return $image_data;
+	return apply_filters( 'masteriyo_get_learn_page_logo', $image_data, $logo_id );
+}
+
+
+/**
+ * Get masteriyo blocks.
+ *
+ * @since x.x.x
+ *
+ * @return array
+ */
+function masteriyo_get_blocks() {
+	return apply_filters(
+		'masteriyo_get_blocks',
+		array(
+			'masteriyo/courses',
+			'masteriyo/course-categories',
+		)
+	);
 }

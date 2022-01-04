@@ -167,20 +167,10 @@ const EditStudent: React.FC = () => {
 												</FormControl>
 
 												<FormControl isInvalid={!!errors?.nickname} py="3">
-													<FormLabel>
-														{__('Nickname', 'masteriyo')}
-														<span style={{ color: 'red' }} className="required">
-															*
-														</span>
-													</FormLabel>
+													<FormLabel>{__('Nickname', 'masteriyo')}</FormLabel>
 													<Input
 														defaultValue={userQuery?.data?.nickname}
-														{...register('nickname', {
-															required: __(
-																'Nickname is required.',
-																'masteriyo'
-															),
-														})}
+														{...register('nickname')}
 													/>
 													<FormErrorMessage>
 														{errors?.nickname && errors?.nickname?.message}
@@ -240,9 +230,8 @@ const EditStudent: React.FC = () => {
 											</Button>
 											<Button
 												variant="outline"
-												onClick={() =>
-													history.push(routes.users.students.list)
-												}>
+												onClick={() => history.push(routes.users.students.list)}
+												isDisabled={updateUser.isLoading}>
 												{__('Cancel', 'masteriyo')}
 											</Button>
 										</ButtonGroup>

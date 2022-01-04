@@ -48,14 +48,20 @@ const Router: React.FC = () => {
 				<Route path={routes.lesson.edit} exact>
 					<screens.EditLesson />
 				</Route>
+				<Route path={routes.users.students.add} exact>
+					<screens.AddStudent />
+				</Route>
 				<Route path={routes.users.students.list} exact>
 					<screens.Students />
 				</Route>
-				<Route path={routes.users.instructors.list} exact>
-					<screens.Instructors />
-				</Route>
 				<Route path={routes.users.students.edit} exact>
 					<screens.EditStudent />
+				</Route>
+				<Route path={routes.users.instructors.add} exact>
+					<screens.AddInstructor />
+				</Route>
+				<Route path={routes.users.instructors.list} exact>
+					<screens.Instructors />
 				</Route>
 				<Route path={routes.users.instructors.edit} exact>
 					<screens.EditInstructor />

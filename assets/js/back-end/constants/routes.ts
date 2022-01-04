@@ -33,10 +33,12 @@ const routes = {
 	users: {
 		students: {
 			list: '/users/students',
+			add: '/users/students/new',
 			edit: '/users/students/:userId',
 		},
 		instructors: {
 			list: '/users/instructors',
+			add: '/users/instructors/new',
 			edit: '/users/instructors/:userId',
 		},
 	},

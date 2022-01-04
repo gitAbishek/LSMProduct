@@ -1,10 +1,13 @@
-import { Box, Container, Stack } from '@chakra-ui/react';
+import { Box, Container, Icon, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
+import { BiPlus } from 'react-icons/bi';
 import { useQuery } from 'react-query';
+import { useHistory } from 'react-router-dom';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
 import EmptyInfo from '../../../../components/common/EmptyInfo';
 import MasteriyoPagination from '../../../../components/common/MasteriyoPagination';
+import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
 import { SkeletonInstructorsList } from '../../../../skeleton/index';
 import API from '../../../../utils/api';
@@ -25,9 +28,16 @@ const Instructors: React.FC = () => {
 	const usersQuery = useQuery(['instructorsList', filterParams], () =>
 		usersAPI.list(filterParams)
 	);
+	const history = useHistory();
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
-			<UserHeader />
+			<UserHeader
+				thirdBtn={{
+					label: __('Add New Instructor', 'masteriyo'),
+					action: () => history.push(routes.users.instructors.add),
+					icon: <Icon as={BiPlus} fontSize="md" />,
+				}}
+			/>
 			<Container maxW="container.xl">
 				<Box bg="white" py={{ base: 6, md: 12 }} shadow="box" mx="auto">
 					<Stack direction="column" spacing="8">

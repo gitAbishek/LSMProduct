@@ -104,7 +104,7 @@ const AddStudent: React.FC = () => {
 							<form onSubmit={handleSubmit(onSubmit)}>
 								<Stack direction="column" spacing="6">
 									<Stack direction="row" spacing="6">
-										<Stack py="3" spacing="3">
+										<Stack py="3" spacing="3" flex="1">
 											<Heading as="h2" fontSize="lg">
 												{__('Name', 'masteriyo')}
 											</Heading>
@@ -169,7 +169,7 @@ const AddStudent: React.FC = () => {
 												</FormErrorMessage>
 											</FormControl>
 										</Stack>
-										<Stack spacing="3">
+										<Stack spacing="3" flex="1">
 											<Heading as="h2" fontSize="lg">
 												{__('Contact Info', 'masteriyo')}
 											</Heading>

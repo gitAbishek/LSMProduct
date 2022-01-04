@@ -1,15 +1,14 @@
 import { Image } from '@chakra-ui/react';
+import { InspectorControls } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { CourseCategoriesBlockGridDesign } from '../../../back-end/constants/images';
 import { Panel, Slider, Tab, TabPanel } from '../../components';
 import Toggle from '../../components/toggle';
 
-const { InspectorControls } = wp.blockEditor;
-
 const BlockSettings = (props: any) => {
 	const {
-		attributes: { count, columns, hide_courses_count, categoryIds, clientId },
+		attributes: { count, columns, hide_courses_count },
 		setAttributes,
 	} = props;
 

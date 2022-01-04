@@ -1,11 +1,11 @@
-const { useEffect, useRef } = wp.element;
+import { useEffect, useRef } from '@wordpress/element';
 
 const useClickOutside = (
 	elRef: React.MutableRefObject<any>,
 	callback: CallableFunction,
 	extraElRef: React.MutableRefObject<any> | null = null
 ) => {
-	const callbackRef = useRef();
+	const callbackRef = useRef<any>();
 	callbackRef.current = callback;
 
 	useEffect(() => {

@@ -1,22 +1,20 @@
+import { useInstanceId } from '@wordpress/compose';
+import { useEffect, useRef, useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import React from 'react';
 import useClickOutside from '../../hooks/useClickOutside';
+import { useDeviceType } from '../../hooks/useDeviceType';
 import DeviceSelector from '../device-selector';
 import { Icon } from '../index';
 import './editor.scss';
 
-const { useState, useRef, useEffect } = wp.element;
-const { compose, useInstanceId } = wp.compose;
-const { withSelect } = wp.data;
-const { __ } = wp.i18n;
-
 interface PropsType {
-	min: number;
-	step: number;
-	max: number;
-	deviceType: string;
+	min?: number;
+	step?: number;
+	max?: number;
 	units: string[];
-	defaultUnit: string;
+	defaultUnit?: string;
 	onChange: any;
 	value: {
 		left?: number;
@@ -62,13 +60,12 @@ interface PropsType {
 
 const Dimensions: React.FC<PropsType> = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const unitSelectRef = useRef();
+	const unitSelectRef = useRef<any>();
 	const {
 		value: total,
 		onChange,
 		responsive = false,
 		label,
-		deviceType,
 		units,
 		min = -Infinity,
 		max = Infinity,
@@ -89,6 +86,7 @@ const Dimensions: React.FC<PropsType> = (props) => {
 	};
 	const dimensionProps = dimensionLabels;
 	const instanceId = useInstanceId(Dimensions);
+	const [deviceType] = useDeviceType();
 
 	useClickOutside(unitSelectRef, () => setIsOpen(false));
 
@@ -178,9 +176,10 @@ const Dimensions: React.FC<PropsType> = (props) => {
 		);
 		setIsOpen(false);
 	};
+	const lockValue = getValue('lock');
 
 	useEffect(() => {
-		if (!getValue('lock')) {
+		if (!lockValue) {
 			return;
 		}
 
@@ -225,7 +224,8 @@ const Dimensions: React.FC<PropsType> = (props) => {
 			}
 			onChange(Object.assign({}, total));
 		}
-	}, [getValue('lock')]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [lockValue, deviceType, responsive, dimensionProps, total, onChange]);
 
 	return (
 		<div
@@ -339,19 +339,4 @@ const Dimensions: React.FC<PropsType> = (props) => {
 	);
 };
 
-export default compose([
-	withSelect((select: any) => {
-		const { __experimentalGetPreviewDeviceType: getPreviewDeviceType } =
-			select('core/edit-post') || false;
-
-		if (!getPreviewDeviceType) {
-			return {
-				deviceType: null,
-			};
-		}
-
-		return {
-			deviceType: getPreviewDeviceType().toLowerCase(),
-		};
-	}),
-])(Dimensions);
+export default Dimensions;

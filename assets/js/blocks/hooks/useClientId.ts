@@ -1,4 +1,4 @@
-const { useEffect } = wp.element;
+import { useEffect } from '@wordpress/element';
 
 const useClientId = (
 	id: string,

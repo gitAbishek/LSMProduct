@@ -1,4 +1,5 @@
 import { Image } from '@chakra-ui/react';
+import { InspectorControls } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import classNames from 'classnames';
 import React from 'react';
@@ -7,7 +8,6 @@ import { CoursesBlockGridDesign } from '../../../back-end/constants/images';
 import { Panel, Slider, Tab, TabPanel } from '../../components';
 import BorderSetting from './BorderSetting';
 
-const { InspectorControls } = wp.blockEditor;
 const categoryOptions = _MASTERIYO_BLOCKS_DATA_.categories.map((category) => ({
 	label: category.name,
 	value: category.slug,

@@ -226,6 +226,11 @@ class SettingsController extends CrudController {
 								),
 							),
 						),
+						'widgets_css' => array(
+							'description' => __( 'Widgets CSS.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
 					),
 				),
 				'course_archive' => array(

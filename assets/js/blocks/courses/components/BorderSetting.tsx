@@ -4,6 +4,7 @@ import { Dimensions } from '../../components';
 
 const BorderSetting: React.FC<{
 	value: any;
+	// eslint-disable-next-line no-unused-vars
 	onChange: (value: any) => void;
 }> = (props) => {
 	const {
@@ -28,7 +29,6 @@ const BorderSetting: React.FC<{
 					min={0}
 					max={100}
 					onChange={(val: any) => setSetting('radius', val)}
-					isLinked
 					dimensionLabels={{
 						top: __('Top Left', 'masteriyo'),
 						right: __('Top Right', 'masteriyo'),

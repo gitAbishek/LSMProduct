@@ -1,9 +1,8 @@
+import { useInstanceId } from '@wordpress/compose';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import './editor.scss';
-
-const { useInstanceId } = wp.compose;
 
 interface PropTypes {
 	checked: boolean;

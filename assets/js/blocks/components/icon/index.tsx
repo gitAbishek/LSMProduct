@@ -1,3 +1,4 @@
+import { Icon as WPIcon } from '@wordpress/components';
 import classnames from 'classnames';
 import React from 'react';
 import icons from './icons';
@@ -29,10 +30,12 @@ const Icon: React.FC<PropsType> = (props) => {
 	}
 
 	return (
-		<wp.components.Icon
+		<WPIcon
 			className={classnames('masteriyo-icon', className)}
 			icon={icons[type][name] || ''}
 			size={size}
+			type={type}
+			name={name}
 			{...otherProps}
 		/>
 	);

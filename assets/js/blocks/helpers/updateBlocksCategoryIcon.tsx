@@ -1,7 +1,8 @@
+import { updateCategory } from '@wordpress/blocks';
 import React from 'react';
 
 export function updateBlocksCategoryIcon() {
-	wp.blocks.updateCategory('masteriyo', {
+	updateCategory('masteriyo', {
 		icon: (
 			<svg
 				version="1.1"

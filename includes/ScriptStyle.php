@@ -144,9 +144,8 @@ class ScriptStyle {
 				),
 				'blocks'        => array(
 					'src'           => self::get_asset_url( "/assets/js/build/blocks{$suffix}.js" ),
-					'deps'          => array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-hooks' ),
 					'context'       => 'blocks',
-					'deps'          => array( 'react', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
+					'deps'          => array( 'jquery', 'wp-api-fetch', 'wp-block-editor', 'wp-blocks', 'wp-components', 'wp-compose', 'wp-data', 'wp-dom-ready', 'wp-element', 'wp-hooks', 'wp-i18n', 'wp-keyboard-shortcuts', 'wp-polyfill' ),
 					'register_only' => true,
 				),
 				'admin'         => array(
@@ -221,7 +220,11 @@ class ScriptStyle {
 					'src'      => self::get_asset_url( "/assets/css/block{$suffix}.css" ),
 					'has_rtl'  => false,
 					'context'  => 'admin',
-					'callback' => 'masteriyo_is_block_editor',
+					'callback' => function() {
+						$screen = get_current_screen();
+
+						return $screen && ( $screen->is_block_editor() || 'customize' === $screen->id );
+					},
 				),
 			)
 		);
@@ -506,7 +509,10 @@ class ScriptStyle {
 	 * @since 1.3.0
 	 */
 	public static function load_block_styles() {
-		$post_id = get_the_ID();
+		$post_id  = get_the_ID();
+		$settings = masteriyo_get_settings();
+
+		wp_add_inline_style( 'masteriyo-public', $settings->get( 'general.widgets_css' ) );
 
 		if ( empty( $post_id ) ) {
 			return;
@@ -565,6 +571,7 @@ class ScriptStyle {
 	 * @since 1.3.0
 	 */
 	public static function localize_block_scripts() {
+		global $pagenow;
 		$args       = array(
 			'order'   => 'ASC',
 			'orderby' => 'name',
@@ -579,12 +586,14 @@ class ScriptStyle {
 				'blocks' => array(
 					'name' => '_MASTERIYO_BLOCKS_DATA_',
 					'data' => array(
-						'categories' => array_map(
+						'categories'      => array_map(
 							function( $category ) {
 								return $category->get_data();
 							},
 							$categories
 						),
+						'isWidgetsEditor' => 'widgets.php' === $pagenow ? 'yes' : 'no',
+						'isCustomizer'    => 'customize.php' === $pagenow ? 'yes' : 'no',
 					),
 				),
 			)

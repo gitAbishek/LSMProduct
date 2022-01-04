@@ -5,7 +5,7 @@ import attributes from './attributes';
 import Edit from './Edit';
 import './editor.scss';
 
-export function register_courses_block() {
+export function registerCoursesBlock() {
 	wp.blocks.registerBlockType('masteriyo/courses', {
 		title: 'Courses',
 		description: __('Display a collection of courses.', 'masteriyo'),

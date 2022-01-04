@@ -7,55 +7,54 @@
 	margin-right: -#{$spacing_15px};
 	margin-top: -#{$spacing_15px};
 }
-.masteriyo {
-	.masteriyo-category-card {
-		background-color: var(--masteriyo-color-white);
-		border: 1px solid rgba(0, 0, 0, 0.1);
-		@include masteriyo-border-radius;
 
-		&__image {
-			img {
-				width: 100%;
-				border-top-left-radius: 3px;
-				border-top-right-radius: 3px;
-			}
+.masteriyo-category-card {
+	background-color: var(--masteriyo-color-white);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	@include masteriyo-border-radius;
+
+	&__image {
+		img {
+			width: 100%;
+			border-top-left-radius: 3px;
+			border-top-right-radius: 3px;
 		}
+	}
 
-		&__detail {
-			padding: $spacing_16px $spacing_20px;
-		}
+	&__detail {
+		padding: $spacing_16px $spacing_20px;
+	}
 
-		h2,
-		&__title {
-			font-size: 18px;
-			font-weight: 700;
-			margin-top: 0;
-			line-height: 1.5;
-			margin-bottom: 0;
+	h2,
+	&__title {
+		font-size: 18px;
+		font-weight: 700;
+		margin-top: 0;
+		line-height: 1.5;
+		margin-bottom: 0;
 
-			a {
-				color: var(--masteriyo-color-grey-dark);
+		a {
+			color: var(--masteriyo-color-grey-dark);
+			text-decoration: none;
+
+			&:hover {
 				text-decoration: none;
-
-				&:hover {
-					text-decoration: none;
-					color: var(--masteriyo-color-primary);
-				}
+				color: var(--masteriyo-color-primary);
 			}
 		}
+	}
 
-		&__courses {
-			font-size: 13px;
-			margin-top: $spacing_4px;
+	&__courses {
+		font-size: 13px;
+		margin-top: $spacing_4px;
 
-			span {
-				margin-right: $spacing_8px;
-			}
+		span {
+			margin-right: $spacing_8px;
 		}
+	}
 
-		&__description {
-			font-size: 14px;
-			margin-top: $spacing_12px;
-		}
+	&__description {
+		font-size: 14px;
+		margin-top: $spacing_12px;
 	}
 }

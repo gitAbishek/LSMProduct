@@ -1,17 +1,17 @@
+import { useInstanceId } from '@wordpress/compose';
+import { Fragment, useEffect, useRef, useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import React from 'react';
 import useClickOutside from '../../hooks/useClickOutside';
+import { useDeviceType } from '../../hooks/useDeviceType';
 import DeviceSelector from '../device-selector';
 import Icon from '../icon';
 import './editor.scss';
 
-const { useState, useRef, Fragment, useEffect } = wp.element;
-const { __ } = wp.i18n;
-const { compose, useInstanceId } = wp.compose;
-const { withSelect } = wp.data;
-
 interface PropsType {
 	value: any;
+	// eslint-disable-next-line no-unused-vars
 	onChange: (value: any) => void;
 	label: string;
 	options: {
@@ -22,7 +22,6 @@ interface PropsType {
 	placeholder: string;
 	responsive: boolean;
 	search: boolean;
-	deviceType: string;
 }
 
 const Select: React.FC<PropsType> = (props) => {
@@ -37,26 +36,28 @@ const Select: React.FC<PropsType> = (props) => {
 		inline = true,
 		placeholder = __('Select', 'masteriyo'),
 		responsive = false,
-		deviceType,
 		search = false,
 	} = props;
-	const selectRef = useRef();
-	const inputRef = useRef();
+	const selectRef = useRef<any>();
+	const inputRef = useRef<any>();
 	const id = useInstanceId(Select);
 	const devices = {
 		desktop: 'Desktop',
 		tablet: 'Tablet',
 		mobile: 'Mobile',
 	};
+	const [deviceType] = useDeviceType();
 
 	useEffect(() => {
-		if (isOpen && inputRef.current) {
-			inputRef.current.focus();
+		const ref = inputRef.current;
+
+		if (isOpen && ref) {
+			ref.focus();
 		}
 
 		return () => {
-			if (inputRef.current) {
-				inputRef.current.blur();
+			if (ref) {
+				ref.blur();
 			}
 		};
 	}, [isOpen]);
@@ -304,19 +305,4 @@ const Select: React.FC<PropsType> = (props) => {
 	);
 };
 
-export default compose([
-	withSelect((select: any) => {
-		const { __experimentalGetPreviewDeviceType: getPreviewDeviceType } =
-			select('core/edit-post') || false;
-
-		if (!getPreviewDeviceType) {
-			return {
-				deviceType: null,
-			};
-		}
-
-		return {
-			deviceType: getPreviewDeviceType().toLowerCase(),
-		};
-	}),
-])(Select);
+export default Select;

@@ -1,9 +1,8 @@
+import { useState } from '@wordpress/element';
 import classnames from 'classnames';
 import React from 'react';
 import Icon from '../icon';
 import './editor.scss';
-
-const { useState } = wp.element;
 
 interface PropsType {
 	title: string;

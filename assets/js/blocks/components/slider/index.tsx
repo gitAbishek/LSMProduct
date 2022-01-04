@@ -1,37 +1,34 @@
+import { useInstanceId } from '@wordpress/compose';
+import { useRef, useState } from '@wordpress/element';
 import classnames from 'classnames';
 import React from 'react';
 import useClickOutside from '../../hooks/useClickOutside';
+import { useDeviceType } from '../../hooks/useDeviceType';
 import DeviceSelector from '../device-selector';
 import './editor.scss';
-
-const { useState, useRef } = wp.element;
-const { compose, useInstanceId } = wp.compose;
-const { withSelect } = wp.data;
 
 interface PropsType {
 	value: any;
 	onChange: CallableFunction;
-	min: number;
-	max: number;
-	defaultUnit: string;
-	deviceType: string;
+	min?: number;
+	max?: number;
+	defaultUnit?: string;
 	label?: string;
 	responsive?: boolean;
 	step?: number;
 	units?: string[];
-	inline: boolean;
+	inline?: boolean;
 	showUnit?: boolean;
 }
 
 const Slider: React.FC<PropsType> = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const unitSelectRef = useRef();
+	const unitSelectRef = useRef<any>();
 	const {
 		value: total = {},
 		onChange,
 		responsive = false,
 		label,
-		deviceType,
 		units = [],
 		min = -Infinity,
 		max = Infinity,
@@ -46,6 +43,7 @@ const Slider: React.FC<PropsType> = (props) => {
 		mobile: 'Mobile',
 	};
 	const id = useInstanceId(Slider);
+	const [deviceType] = useDeviceType();
 
 	useClickOutside(unitSelectRef, () => setIsOpen(false));
 
@@ -234,19 +232,4 @@ const Slider: React.FC<PropsType> = (props) => {
 	);
 };
 
-export default compose([
-	withSelect((select: any) => {
-		const { __experimentalGetPreviewDeviceType: getPreviewDeviceType } =
-			select('core/edit-post') || false;
-
-		if (!getPreviewDeviceType) {
-			return {
-				deviceType: null,
-			};
-		}
-
-		return {
-			deviceType: getPreviewDeviceType().toLowerCase(),
-		};
-	}),
-])(Slider);
+export default Slider;

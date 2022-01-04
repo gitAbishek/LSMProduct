@@ -16,6 +16,7 @@ interface CSSForDevices {
 	mobile: string[];
 }
 
+// eslint-disable-next-line no-unused-vars
 type SettingStyleGenerator = (props: {
 	blockID: string;
 	settingName: string;
@@ -186,6 +187,8 @@ export const generateBlockCSS = (
 		mobile: [],
 	};
 	const attributesDef = getBlockAttributesDef('masteriyo/' + blockName);
+
+	if (!attributesDef) return '';
 
 	Object.entries(settings).forEach(([settingName, settingValue]) => {
 		const attributeDef = attributesDef[settingName];

@@ -2,20 +2,18 @@ import { Fragment } from '@wordpress/element';
 import React from 'react';
 import { useBlockCSS } from '../hooks/useBlockCSS';
 import useClientId from '../hooks/useClientId';
+import { useDeviceType } from '../hooks/useDeviceType';
 import BlockSettings from './components/BlockSettings';
-
-const ServerSideRender = wp.serverSideRender
-	? wp.serverSideRender
-	: wp.components.ServerSideRender;
-const { compose } = wp.compose;
-const { withSelect } = wp.data;
 
 const Edit: React.FC<any> = (props) => {
 	const {
 		attributes: { clientId },
-		deviceType,
 		setAttributes,
 	} = props;
+	const ServerSideRender = wp.serverSideRender
+		? wp.serverSideRender
+		: wp.components.ServerSideRender;
+	const [deviceType] = useDeviceType();
 
 	useClientId(props.clientId, setAttributes, props.attributes);
 	useBlockCSS({
@@ -45,19 +43,4 @@ const Edit: React.FC<any> = (props) => {
 	);
 };
 
-export default compose([
-	withSelect((select: any) => {
-		const { __experimentalGetPreviewDeviceType: getPreviewDeviceType } =
-			select('core/edit-post') || false;
-
-		if (!getPreviewDeviceType) {
-			return {
-				deviceType: null,
-			};
-		}
-
-		return {
-			deviceType: getPreviewDeviceType().toLowerCase(),
-		};
-	}),
-])(Edit);
+export default Edit;

@@ -1,4 +1,5 @@
 declare var wp: any;
+declare var jQuery: any;
 declare var _MASTERIYO_BLOCKS_DATA_: {
 	categories: {
 		count: number;
@@ -10,4 +11,6 @@ declare var _MASTERIYO_BLOCKS_DATA_: {
 		taxonomy: 'course_cat';
 		term_taxonomy_id: number;
 	}[];
+	isWidgetsEditor: 'yes' | 'no';
+	isCustomizer: 'yes' | 'no';
 };

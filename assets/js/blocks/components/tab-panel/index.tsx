@@ -1,8 +1,7 @@
+import { useEffect, useRef, useState } from '@wordpress/element';
 import classnames from 'classnames';
 import React from 'react';
 import './editor.scss';
-
-const { useState, useRef, useEffect } = wp.element;
 
 interface PropsType {
 	hasIcon?: boolean;
@@ -15,7 +14,7 @@ const TabPanel: React.FC<PropsType> = (props) => {
 	const { children: tabs, hasIcon = false, className, label } = props;
 	const firstTab = tabs && tabs?.length > 0 ? tabs[0] : null;
 	const [isActive, setIsActive] = useState(firstTab?.props?.tabTitle);
-	const tabPanelRef = useRef();
+	const tabPanelRef = useRef<any>();
 
 	useEffect(() => {
 		if (!tabs) {

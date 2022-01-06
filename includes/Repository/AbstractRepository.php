@@ -1113,7 +1113,7 @@ abstract class AbstractRepository {
 	/**
 	 * Create sql where part for the array items.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.9
 	 *
 	 * @param string $column Table column name.
 	 * @param array $items Number of items in IN query.

@@ -132,7 +132,7 @@ function masteriyo_get_active_courses( $user ) {
 	$query = new CourseProgressQuery(
 		array(
 			'user_id' => get_current_user_id(),
-			'status'  => 'started',
+			'status'  => array( 'started', 'progress' ),
 		)
 	);
 

@@ -85,7 +85,7 @@ function masteriyo_get_active_courses_count( $user ) {
 		$wpdb->prepare(
 			"SELECT COUNT(*) FROM {$wpdb->prefix}masteriyo_user_activities
 			WHERE user_id = %d AND activity_type = 'course_progress'
-			AND activity_status = 'started' AND parent_id = 0",
+			AND ( activity_status = 'started' OR activity_status = 'progress' )  AND parent_id = 0",
 			$user_id
 		)
 	);

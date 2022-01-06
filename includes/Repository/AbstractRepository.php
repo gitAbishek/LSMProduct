@@ -143,13 +143,13 @@ abstract class AbstractRepository {
 
 		// phpcs:disable
 		$raw_meta_data = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT {$meta_table_info['meta_id_field']} as  meta_id, meta_key, meta_value
+		$wpdb->prepare(
+			"SELECT {$meta_table_info['meta_id_field']} as  meta_id, meta_key, meta_value
 				FROM {$meta_table_info['table']}
 				WHERE {$meta_table_info['object_id_field']} = %d
 				ORDER BY {$meta_table_info['meta_id_field']}",
-				$model->get_id()
-			)
+			$model->get_id()
+		)
 		);
 		// phpcs:enable
 
@@ -522,7 +522,7 @@ abstract class AbstractRepository {
 		// Props should be updated if they are a part of the $changed array or don't exist yet.
 		foreach ( $meta_key_to_props as $meta_key => $prop ) {
 			if ( array_key_exists( $prop, $changed_props )
-				|| ! metadata_exists( $meta_type, $model->get_id(), $meta_key ) ) {
+			|| ! metadata_exists( $meta_type, $model->get_id(), $meta_key ) ) {
 				$props_to_update[ $meta_key ] = $prop;
 			}
 		}
@@ -1108,5 +1108,30 @@ abstract class AbstractRepository {
 	 */
 	protected function string_to_timestamp( $time_string ) {
 		return '0000-00-00 00:00:00' !== $time_string ? masteriyo_string_to_timestamp( $time_string ) : null;
+	}
+
+	/**
+	 * Create sql where part for the array items.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param string $column Table column name.
+	 * @param array $items Number of items in IN query.
+	 * @return string
+	 */
+	protected function create_sql_in_query( $column, $fields ) {
+		global $wpdb;
+
+		if ( is_array( $fields ) && count( $fields ) > 1 ) {
+			$fields_count = count( $fields );
+			$placeholders = array_fill( 0, $fields_count, '%s' );
+			$placeholders = implode( ', ', $placeholders );
+			return $wpdb->prepare( "{$column} IN ({$placeholders})", $fields ); //phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		} elseif ( is_array( $fields ) && 1 === count( $fields ) ) {
+			$fields = current( $fields );
+			return $wpdb->prepare( "$column = %s", $fields ); //phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		} else {
+			return $wpdb->prepare( "$column = %s", $fields ); //phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		}
 	}
 }

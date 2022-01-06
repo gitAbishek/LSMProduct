@@ -8,12 +8,12 @@ import {
 	Stack,
 	Text,
 } from '@chakra-ui/react';
-import { Table, Tbody, Td, Tr } from '@chakra-ui/table';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import { Table, Tbody, Td, Tr } from 'react-super-responsive-table';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
 import { UserSchema } from '../../../back-end/schemas';
@@ -66,8 +66,8 @@ const ProfilePage = () => {
 						border="2px"
 						borderColor="gray.100"
 					/>
-					<Stack direction="column" spacing="6">
-						<Text as="h3" fontSize="4xl" fontWeight="medium" px="6">
+					<Stack direction="column" spacing="6" flex="1">
+						<Text as="h3" fontSize="4xl" fontWeight="medium">
 							{data?.first_name} {data?.last_name}
 						</Text>
 

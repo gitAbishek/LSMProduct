@@ -172,5 +172,18 @@ export const accountStyles = {
 				},
 			},
 		},
+
+		table: {
+			tr: {
+				td: {
+					border: 'none',
+					px: '2',
+				},
+
+				'td, th': {
+					fontSize: 'md',
+				},
+			},
+		},
 	},
 };

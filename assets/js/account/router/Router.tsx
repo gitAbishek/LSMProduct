@@ -1,6 +1,7 @@
 import { Box, Container, Stack } from '@chakra-ui/react';
 import React from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { accountStyles } from '../../back-end/config/styles';
 import Sidebar from '../components/Sidebar';
 import routes from '../constants/routes';
 import MyCourses from '../pages/courses/MyCouses';
@@ -12,10 +13,10 @@ import ProfilePage from '../pages/profile/ProfilePage';
 
 const Router: React.FC = () => {
 	return (
-		<Box bg="white" minH="100vh">
+		<Box bg="white" minH="100vh" sx={accountStyles}>
 			<HashRouter>
 				<Container maxW="container.xl" py="16">
-					<Stack direction="row" spacing="8">
+					<Stack direction="row" spacing="8" id="masteriyo-account-container">
 						<Sidebar />
 						<Box flex="1">
 							<Switch>

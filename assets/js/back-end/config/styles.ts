@@ -152,3 +152,25 @@ export const tabListStyles = {
 	borderRight: '2px solid',
 	borderRightColor: 'gray.200',
 };
+
+export const accountStyles = {
+	'#masteriyo-account-container': {
+		p: {
+			mb: 0,
+		},
+		ul: {
+			li: {
+				a: {
+					textDecoration: 'none',
+					color: 'gray.700',
+					':hover': {
+						color: 'blue.500',
+					},
+					'&.active': {
+						color: 'blue.500',
+					},
+				},
+			},
+		},
+	},
+};

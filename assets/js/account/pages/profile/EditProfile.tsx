@@ -208,6 +208,7 @@ const EditProfile: React.FC = () => {
 													<IconButton
 														fontSize="md"
 														variant="link"
+														className="copy-from"
 														aria-label={__(
 															'Copy from the profile',
 															'masteriyo'

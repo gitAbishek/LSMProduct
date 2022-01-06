@@ -175,15 +175,24 @@ export const accountStyles = {
 
 		table: {
 			tr: {
-				td: {
+				'td, th': {
 					border: 'none',
 					px: '2',
-				},
-
-				'td, th': {
-					fontSize: 'md',
+					a: {
+						textDecoration: 'none',
+					},
 				},
 			},
+		},
+
+		'.chakra-tabs__tablist': {
+			button: {
+				bg: 'none',
+			},
+		},
+
+		'.copy-from': {
+			bg: 'none',
 		},
 	},
 };

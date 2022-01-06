@@ -44,8 +44,8 @@ const CourseGridItem: React.FC<Props> = (props) => {
 			<Stack direction="row" spacing="10" align="center">
 				<Stack direction="row" spacing="4">
 					<Image w="80px" src={course?.featured_image_url} />
-					<Stack direction="column" spacing="2">
-						<Stack direction="row" spacing="1">
+					<Stack direction="column" spacing="2" w="120px">
+						<Stack direction="row" spacing="1" flexWrap="wrap">
 							{course?.categories?.map(
 								(category: { id: number; name: string; slug: string }) => (
 									<Tag

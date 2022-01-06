@@ -66,7 +66,7 @@ const PasswordSecurity = () => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<Stack spacing="9" w="md">
+			<Stack spacing="9" w="xl">
 				<Heading as="h4" size="lg" fontWeight="medium">
 					{__('Change Password', 'masteriyo')}
 				</Heading>

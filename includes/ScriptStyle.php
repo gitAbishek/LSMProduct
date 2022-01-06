@@ -140,9 +140,7 @@ class ScriptStyle {
 				'dependencies'  => array(
 					'src'      => self::get_asset_url( "/assets/js/build/masteriyo-dependencies{$suffix}.js" ),
 					'context'  => array( 'admin', 'public' ),
-					'callback' => function() {
-						return masteriyo_is_production() && ( masteriyo_is_admin_page() || masteriyo_is_learn_page() );
-					},
+					'callback' => 'masteriyo_is_production',
 				),
 				'blocks'        => array(
 					'src'           => self::get_asset_url( "/assets/js/build/blocks{$suffix}.js" ),
@@ -167,7 +165,6 @@ class ScriptStyle {
 					'deps'    => array( 'react', 'react-dom', 'wp-api-fetch', 'wp-i18n', 'wp-polyfill' ),
 					'version' => self::get_version(),
 					'context' => 'public',
-					// 'callback' => 'masteriyo_is_account_page',
 				),
 				'login-form'    => array(
 					'src'      => self::get_asset_url( "/assets/js/build/login-form{$suffix}.js" ),

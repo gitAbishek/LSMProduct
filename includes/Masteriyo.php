@@ -218,11 +218,16 @@ class Masteriyo {
 				'label'      => __( 'Community Support', 'masteriyo' ),
 				'aria-label' => __( 'Visit community forums', 'masteriyo' ),
 			),
+			'review'  => array(
+				'url'        => apply_filters( 'masteriyo_review_url', 'https://wordpress.org/plugins/learning-management-system/#reviews' ),
+				'label'      => __( 'Rate the plugin ★★★★★', 'masteriyo' ),
+				'aria-label' => __( 'Rate the plugin.', 'masteriyo' ),
+			),
 		);
 
 		foreach ( $masteriyo_links as $key => $link ) {
 			$links[ $key ] = sprintf(
-				'<a href="%s" aria-label="%s">%s</a>',
+				'<a target="_blank" href="%s" aria-label="%s">%s</a>',
 				esc_url( $link['url'] ),
 				esc_attr( $link['aria-label'] ),
 				esc_html( $link['label'] )

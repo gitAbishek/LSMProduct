@@ -116,7 +116,13 @@ const CourseItem: React.FC<Props> = (props) => {
 							color="gray.500">
 							<Stack direction="row" spacing="1">
 								<Icon as={BiTime} mt="1" />
-								<Text>{humanizeDuration(course?.duration * 60 * 1000)}</Text>
+								<Text>
+									{
+										humanizeDuration(course?.duration * 60 * 1000).split(
+											', '
+										)[0]
+									}
+								</Text>
 							</Stack>
 							{courseProgressQuery.isSuccess && (
 								<Text>

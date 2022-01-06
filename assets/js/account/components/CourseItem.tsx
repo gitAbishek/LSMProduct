@@ -156,7 +156,9 @@ const CourseItem: React.FC<Props> = (props) => {
 							color="gray.500"
 							fontSize="xs">
 							{started_at && (
-								<Text>{getLocalTime(started_at).toLocaleString()}</Text>
+								<Text>
+									{getLocalTime(started_at).toLocaleString().split(', ')[0]}
+								</Text>
 							)}
 							<Link href={course?.start_course_url}>
 								<Button colorScheme="blue" size="sm" borderRadius="full">

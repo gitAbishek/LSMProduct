@@ -528,9 +528,9 @@ class Masteriyo {
 	 * @since 1.0.0
 	 */
 	public function add_image_sizes() {
-		add_image_size( 'masteriyo_single', 792, 496, true );
-		add_image_size( 'masteriyo_thumbnail', 270, 170, true );
-		add_image_size( 'masteriyo_medium', 180, 112, true );
+		add_image_size( 'masteriyo_single', 1584, 992, true );
+		add_image_size( 'masteriyo_thumbnail', 540, 340, true );
+		add_image_size( 'masteriyo_medium', 360, 224, true );
 	}
 
 	/**

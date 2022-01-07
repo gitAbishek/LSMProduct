@@ -710,7 +710,6 @@ class ScriptStyle {
 			array(
 				'account'       => array(
 					'name' => '_MASTERIYO_',
-
 					'data' => array(
 						'rootApiUrl'      => esc_url_raw( untrailingslashit( rest_url() ) ),
 						'current_user_id' => get_current_user_id(),
@@ -724,6 +723,12 @@ class ScriptStyle {
 							'code'     => masteriyo_get_currency(),
 							'symbol'   => html_entity_decode( masteriyo_get_currency_symbol( masteriyo_get_currency() ) ),
 							'position' => masteriyo_get_setting( 'payments.currency.currency_position' ),
+						),
+						'urls'            => array(
+							'logout'  => wp_logout_url( get_home_url() ),
+							'account' => masteriyo_get_page_permalink( 'account' ),
+							'courses' => masteriyo_get_page_permalink( 'courses' ),
+							'home'    => home_url(),
 						),
 					),
 				),

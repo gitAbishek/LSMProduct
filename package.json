@@ -121,6 +121,8 @@
     "prepare": "husky install",
     "reactivate": "wp plugin deactivate learning-management-system && wp plugin activate learning-management-system ",
     "switchDev": "replace-in-file \"define( 'MASTERIYO_DEVELOPMENT', false);\" \"define( 'MASTERIYO_DEVELOPMENT', true);\" ../../../wp-config.php",
-    "switchProd": "replace-in-file \"define( 'MASTERIYO_DEVELOPMENT', true);\" \"define( 'MASTERIYO_DEVELOPMENT', false);\" ../../../wp-config.php"
+    "switchProd": "replace-in-file \"define( 'MASTERIYO_DEVELOPMENT', true);\" \"define( 'MASTERIYO_DEVELOPMENT', false);\" ../../../wp-config.php",
+    "makepot": "composer run makepot",
+    "test:php:unit": "composer run test"
   }
 }

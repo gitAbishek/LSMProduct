@@ -27,3 +27,4 @@ i18n/languages/*.po~
 !i18n/languages/masteriyo.pot
 .vscode/launch.json
 assets/css/
+tests/wordpress

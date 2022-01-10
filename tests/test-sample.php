@@ -2,7 +2,7 @@
 /**
  * Class SampleTest
  *
- * @package EverestLMS
+ * @package Masteriyo
  */
 
 /**

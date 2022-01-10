@@ -2638,6 +2638,17 @@ function masteriyo_get_plugin_url() {
 }
 
 /**
+ * Get Masteriyo plugin url.
+ *
+ * @since x.x.x
+ *
+ * @return string
+ */
+function masteriyo_get_plugin_dir() {
+	return untrailingslashit( plugin_dir_path( Constants::get( 'MASTERIYO_PLUGIN_FILE' ) ) );
+}
+
+/**
  * Get available lesson video sources.
  *
  * @since 1.0.0

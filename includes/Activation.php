@@ -108,7 +108,7 @@ class Activation {
 	 * @return void
 	 */
 	public static function attach_placeholder_image() {
-		$img_file = masteriyo_get_plugin_url() . '/assets/img/placeholder.jpg';
+		$img_file = masteriyo_get_plugin_dir() . '/assets/img/placeholder.jpg';
 		$filename = basename( $img_file );
 
 		// Return if image already exists.
@@ -136,7 +136,7 @@ class Activation {
 		}
 
 		$wp_filesystem = new \WP_Filesystem_Direct( null );
-		$upload        = $wp_filesystem->copy( $img_file, $attach_file );
+		$upload        = $wp_filesystem->copy( $img_file, $attach_file, true );
 
 		if ( $upload ) {
 			$wp_filetype = wp_check_filetype( $filename, null );

@@ -28,7 +28,7 @@ $difficulty = $course->get_difficulty();
 	<?php endif; ?>
 
 	<div class="masteriyo-feature-img">
-		<?php echo wp_kses_post( $course->get_image( 'masteriyo_single' ) ); ?>
+		<?php echo wp_kses( $course->get_image( 'masteriyo_single' ), 'masteriyo_image' ); ?>
 	</div>
 </div>
 

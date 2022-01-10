@@ -9,11 +9,12 @@
 
 namespace Masteriyo\Models;
 
-use Masteriyo\Database\Model;
-use Masteriyo\Repository\RepositoryInterface;
+use Masteriyo\Activation;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Format;
+use Masteriyo\Database\Model;
 use Masteriyo\Cache\CacheInterface;
+use Masteriyo\Repository\RepositoryInterface;
 
 defined( 'ABSPATH' ) || exit;
 

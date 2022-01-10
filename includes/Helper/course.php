@@ -9,6 +9,7 @@
  */
 
 use Masteriyo\Constants;
+use Masteriyo\Activation;
 use Masteriyo\Models\CourseCategory;
 use Masteriyo\Query\UserCourseQuery;
 
@@ -129,24 +130,16 @@ function masteriyo_placeholder_img( $size = 'masteriyo_thumbnail', $attr = '' ) 
 
 	$attr = wp_parse_args( $attr, $default_attr );
 
-	if ( wp_attachment_is_image( $placeholder_image ) ) {
-		$image_html = wp_get_attachment_image(
-			$placeholder_image,
-			$size,
-			false,
-			$attr
-		);
-	} else {
-		$image      = masteriyo_placeholder_img_src( $size );
-		$hwstring   = image_hwstring( $dimensions['width'], $dimensions['height'] );
-		$attributes = array();
-
-		foreach ( $attr as $name => $value ) {
-			$attribute[] = esc_attr( $name ) . '="' . esc_attr( $value ) . '"';
-		}
-
-		$image_html = '<img src="' . esc_url( $image ) . '" ' . $hwstring . implode( ' ', $attribute ) . '/>';
+	if ( ! wp_attachment_is_image( $placeholder_image ) ) {
+		Activation::attach_placeholder_image();
 	}
+
+	$image_html = wp_get_attachment_image(
+		$placeholder_image,
+		$size,
+		false,
+		$attr
+	);
 
 	return apply_filters( 'masteriyo_placeholder_img', $image_html, $size, $dimensions );
 }

@@ -108,6 +108,8 @@ class Masteriyo {
 		add_action( 'admin_enqueue_scripts', 'wp_enqueue_media' );
 
 		add_action( 'cli_init', array( 'Masteriyo\Cli\Cli', 'register' ) );
+
+		add_filter( 'wp_kses_allowed_html', array( $this, 'register_custom_kses_allowed_html' ), 10, 2 );
 	}
 
 	/**
@@ -552,6 +554,52 @@ class Masteriyo {
 			}
 			wp_safe_redirect( home_url() );
 			exit;
+		}
+	}
+
+	/**
+	 * Register custom kses allowed html.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return array
+	 */
+	public function register_custom_kses_allowed_html( $allowed_tags, $context ) {
+		$custom_context = array( 'masteriyo_image' );
+
+		if ( ! in_array( $context, $custom_context, true ) ) {
+			return $allowed_tags;
+		}
+
+		switch ( $context ) {
+			case 'masteriyo_image':
+				return array(
+					'div'  => array(
+						'class'  => true,
+						'id'     => true,
+						'data-*' => true,
+					),
+					'span' => array(
+						'class'  => true,
+						'id'     => true,
+						'data-*' => true,
+					),
+					'img'  => array(
+						'width'    => true,
+						'height'   => true,
+						'src'      => true,
+						'class'    => true,
+						'id'       => true,
+						'alt'      => true,
+						'loading'  => true,
+						'srcset'   => true,
+						'longdesc' => true,
+						'sizes'    => true,
+						'data-*'   => true,
+					),
+				);
+			default:
+				return $allowed_tags;
 		}
 	}
 }

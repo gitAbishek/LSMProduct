@@ -41,7 +41,7 @@ $categories = $course->get_categories( 'name' );
 			<?php endif; ?>
 
 			<!-- Featured Image -->
-			<?php echo wp_kses_post( $course->get_image( 'masteriyo_thumbnail' ) ); ?>
+			<?php echo wp_kses( $course->get_image( 'masteriyo_thumbnail' ), 'masteriyo_image' ); ?>
 		</a>
 		</div>
 

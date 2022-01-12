@@ -102,7 +102,7 @@ class SessionRepository implements RepositoryInterface {
 		if ( ! empty( $session->get_key() ) ) {
 			$result = $wpdb->get_row(
 				$wpdb->prepare(
-					"SELECT * FROM {$wpdb->base_prefix}masteriyo_sessions WHERE session_key = %s",
+					"SELECT * FROM {$wpdb->prefix}masteriyo_sessions WHERE session_key = %s",
 					$session->get_key()
 				)
 			);

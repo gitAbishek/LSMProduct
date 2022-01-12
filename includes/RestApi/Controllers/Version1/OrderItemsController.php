@@ -445,7 +445,7 @@ class OrderItemsController extends PostsController {
 		 */
 		$result = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->base_prefix}masteriyo_order_items WHERE order_id = %d LIMIT %d, %d",
+				"SELECT * FROM {$wpdb->prefix}masteriyo_order_items WHERE order_id = %d LIMIT %d, %d",
 				$order_id,
 				$offset,
 				$per_page
@@ -457,7 +457,7 @@ class OrderItemsController extends PostsController {
 		 */
 		$total_items = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(order_item_id) FROM {$wpdb->base_prefix}masteriyo_order_items WHERE order_id = %d",
+				"SELECT COUNT(order_item_id) FROM {$wpdb->prefix}masteriyo_order_items WHERE order_id = %d",
 				$order_id
 			)
 		);

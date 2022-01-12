@@ -152,7 +152,7 @@ function masteriyo_get_quiz_attempts( $query_vars ) {
 	global $wpdb;
 
 	$search_criteria = array();
-	$sql[]           = "SELECT * FROM {$wpdb->base_prefix}masteriyo_quiz_attempts";
+	$sql[]           = "SELECT * FROM {$wpdb->prefix}masteriyo_quiz_attempts";
 
 	// Construct where clause part.
 	if ( ! empty( $query_vars['id'] ) ) {
@@ -214,7 +214,7 @@ function masteriyo_get_quiz_attempt( $attempt_id ) {
 
 	$attempt = $wpdb->get_row(
 		$wpdb->prepare(
-			"SELECT * FROM {$wpdb->base_prefix}masteriyo_quiz_attempts WHERE id = %d",
+			"SELECT * FROM {$wpdb->prefix}masteriyo_quiz_attempts WHERE id = %d",
 			$attempt_id
 		)
 	);

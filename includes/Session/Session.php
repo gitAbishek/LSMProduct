@@ -58,7 +58,7 @@ class Session extends AbstractSession {
 	public function __construct( SessionRepository $session_repository ) {
 		$this->repository = $session_repository;
 		$this->cookie     = apply_filters( 'masteriyo_cookie', 'wp_masteriyo_session_' . COOKIEHASH );
-		$this->table      = $GLOBALS['wpdb']->base_prefix . 'masteriyo_sessions';
+		$this->table      = $GLOBALS['wpdb']->prefix . 'masteriyo_sessions';
 
 		$this->start();
 	}

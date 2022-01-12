@@ -229,6 +229,6 @@ class OrderItem extends Model {
 	public function get_table_name() {
 		global $wpdb;
 
-		return "{$wpdb->base_prefix}masteriyo_order_items";
+		return "{$wpdb->prefix}masteriyo_order_items";
 	}
 }

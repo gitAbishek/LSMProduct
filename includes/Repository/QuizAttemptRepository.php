@@ -108,7 +108,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 		global $wpdb;
 
 		$search_criteria = array();
-		$sql[]           = "SELECT * FROM {$wpdb->base_prefix}masteriyo_quiz_attempts";
+		$sql[]           = "SELECT * FROM {$wpdb->prefix}masteriyo_quiz_attempts";
 
 		// Construct where clause part.
 		if ( ! empty( $query_vars['id'] ) ) {

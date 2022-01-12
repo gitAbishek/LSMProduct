@@ -201,8 +201,8 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		if ( $course_progress->get_id() ) {
 			do_action( 'masteriyo_before_delete_course_progress', $course_progress->get_id() );
 
-			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_activities', array( 'id' => $course_progress->get_id() ) );
-			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_activitymeta', array( 'user_activity_id' => $course_progress->get_id() ) );
+			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activities', array( 'id' => $course_progress->get_id() ) );
+			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activitymeta', array( 'user_activity_id' => $course_progress->get_id() ) );
 
 			do_action( 'masteriyo_delete_course_progress', $course_progress->get_id() );
 
@@ -275,7 +275,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		global $wpdb;
 
 		$search_criteria = array();
-		$sql[]           = "SELECT * FROM {$wpdb->base_prefix}masteriyo_user_activities";
+		$sql[]           = "SELECT * FROM {$wpdb->prefix}masteriyo_user_activities";
 
 		$search_criteria[] = $wpdb->prepare( 'activity_type = %s', 'course_progress' );
 

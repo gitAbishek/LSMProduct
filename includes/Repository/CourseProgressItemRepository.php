@@ -225,8 +225,8 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 		if ( $course_progress_item->get_id() ) {
 			do_action( 'masteriyo_before_delete_course_progress_item', $course_progress_item->get_id() );
 
-			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_activities', array( 'id' => $course_progress_item->get_id() ) );
-			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_activitymeta', array( 'user_activity_id' => $course_progress_item->get_id() ) );
+			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activities', array( 'id' => $course_progress_item->get_id() ) );
+			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activitymeta', array( 'user_activity_id' => $course_progress_item->get_id() ) );
 
 			do_action( 'masteriyo_delete_course_progress', $course_progress_item->get_id() );
 
@@ -307,7 +307,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 		global $wpdb;
 
 		$search_criteria = array();
-		$sql[]           = "SELECT * FROM {$wpdb->base_prefix}masteriyo_user_activities";
+		$sql[]           = "SELECT * FROM {$wpdb->prefix}masteriyo_user_activities";
 
 		// Construct where clause part.
 		if ( ! empty( $query_vars['user_id'] ) ) {

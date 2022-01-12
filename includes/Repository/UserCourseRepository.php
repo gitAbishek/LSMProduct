@@ -158,8 +158,8 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		if ( $user_course->get_id() ) {
 			do_action( 'masteriyo_before_delete_user_course', $user_course->get_id() );
 
-			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_items', array( 'id' => $user_course->get_id() ) );
-			$wpdb->delete( $wpdb->base_prefix . 'masteriyo_user_itemmeta', array( 'user_item_id' => $user_course->get_id() ) );
+			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_items', array( 'id' => $user_course->get_id() ) );
+			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_itemmeta', array( 'user_item_id' => $user_course->get_id() ) );
 
 			do_action( 'masteriyo_delete_user_course', $user_course->get_id() );
 
@@ -265,7 +265,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		global $wpdb;
 
 		$search_criteria = array();
-		$sql[]           = "SELECT * FROM {$wpdb->base_prefix}masteriyo_user_items";
+		$sql[]           = "SELECT * FROM {$wpdb->prefix}masteriyo_user_items";
 
 		// Generate meta query.
 		$meta_sql = $this->parse_meta_query( $query_vars );
@@ -318,7 +318,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 
 		if ( $page > 0 && $per_page > 0 ) {
 			$count_sql         = $sql;
-			$count_sql[0]      = "SELECT COUNT(*) FROM {$wpdb->base_prefix}masteriyo_user_items";
+			$count_sql[0]      = "SELECT COUNT(*) FROM {$wpdb->prefix}masteriyo_user_items";
 			$count_sql         = implode( ' ', $count_sql ) . ';';
 			$query->found_rows = absint( $wpdb->get_var( $count_sql ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
@@ -373,7 +373,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 
 		$meta_query = new \WP_Meta_Query();
 		$meta_query->parse_query_vars( array( 'meta_query' => $meta_query_arr ) );
-		$sql = $meta_query->get_sql( 'user_item', "{$wpdb->base_prefix}masteriyo_user_items", 'id', null );
+		$sql = $meta_query->get_sql( 'user_item', "{$wpdb->prefix}masteriyo_user_items", 'id', null );
 
 		return $sql;
 	}

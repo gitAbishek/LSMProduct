@@ -264,7 +264,7 @@ class QuizAttemptsController extends CrudController {
 		if ( ! empty( $query_args['user_id'] ) && ! empty( $query_args['quiz_id'] ) ) {
 			$total_items = $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT COUNT(*) FROM {$wpdb->base_prefix}masteriyo_quiz_attempts
+					"SELECT COUNT(*) FROM {$wpdb->prefix}masteriyo_quiz_attempts
 					WHERE user_id = %d
 					AND quiz_id = %d",
 					$query_args['user_id'],
@@ -274,7 +274,7 @@ class QuizAttemptsController extends CrudController {
 		} elseif ( ! empty( $query_args['user_id'] ) ) {
 			$total_items = $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT COUNT(*) FROM {$wpdb->base_prefix}masteriyo_quiz_attempts
+					"SELECT COUNT(*) FROM {$wpdb->prefix}masteriyo_quiz_attempts
 					WHERE user_id = %d",
 					$query_args['user_id']
 				)
@@ -282,13 +282,13 @@ class QuizAttemptsController extends CrudController {
 		} elseif ( ! empty( $query_args['quiz_id'] ) ) {
 			$total_items = $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT COUNT(*) FROM {$wpdb->base_prefix}masteriyo_quiz_attempts
+					"SELECT COUNT(*) FROM {$wpdb->prefix}masteriyo_quiz_attempts
 					WHERE quiz_id = %d",
 					$query_args['quiz_id']
 				)
 			);
 		} else {
-			$total_items = $wpdb->get_var( "SELECT COUNT( * ) FROM {$wpdb->base_prefix}masteriyo_quiz_attempts" );
+			$total_items = $wpdb->get_var( "SELECT COUNT( * ) FROM {$wpdb->prefix}masteriyo_quiz_attempts" );
 		}
 
 		return array(

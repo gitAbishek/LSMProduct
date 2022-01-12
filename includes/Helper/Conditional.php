@@ -384,6 +384,19 @@ function masteriyo_is_course( $course_id ) {
 	return true;
 }
 
+if ( ! function_exists( 'masteriyo_is_current_user_super_admin' ) ) {
+	/**
+	 * Check if the current user is super admin.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_current_user_super_admin() {
+		return function_exists( 'current_user_can' ) && current_user_can( 'create_sites' );
+	}
+}
+
 if ( ! function_exists( 'masteriyo_is_current_user_admin' ) ) {
 	/**
 	 * Check if the current user is admin.
@@ -726,7 +739,7 @@ if ( ! function_exists( 'masteriyo_is_admin_menus_visible' ) ) {
 	function masteriyo_is_admin_menus_visible() {
 		$is_visible = false;
 
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+		if ( masteriyo_is_current_user_super_admin() || masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
 			$is_visible = true;
 		} elseif ( masteriyo_is_current_user_instructor() ) {
 			$instructor = masteriyo_get_current_instructor();

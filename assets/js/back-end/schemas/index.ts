@@ -26,6 +26,7 @@ export interface QuizSchema {
 			id: number;
 			name: string;
 			type: string;
+			video: boolean;
 			parent: {
 				id: number;
 				name: string;
@@ -35,6 +36,7 @@ export interface QuizSchema {
 			id: number;
 			name: string;
 			type: string;
+			video: boolean;
 			parent: {
 				id: number;
 				name: string;

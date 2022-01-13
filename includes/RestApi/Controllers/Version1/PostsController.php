@@ -344,11 +344,13 @@ abstract class PostsController extends CrudController {
 		}
 
 		$previous_parent = get_post( $object->post_parent );
+		$video           = get_post_meta( $object->ID, '_video_source_url', true );
 
 		$previous = array(
 			'id'     => $object->ID,
 			'name'   => wp_specialchars_decode( $object->post_title ),
 			'type'   => str_replace( 'mto-', '', $object->post_type ),
+			'video'  => ! empty( trim( $video ) ),
 			'parent' => is_null( $previous_parent ) ? null : array(
 				'id'   => $previous_parent->ID,
 				'name' => $previous_parent->post_title,

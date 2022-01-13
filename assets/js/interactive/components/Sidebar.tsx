@@ -4,10 +4,12 @@ import {
 	Button,
 	ButtonGroup,
 	Heading,
+	HStack,
 	Icon,
 	IconButton,
 	Link,
 	Stack,
+	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
@@ -127,8 +129,10 @@ const Sidebar: React.FC<Props> = (props) => {
 								{name}
 							</Heading>
 							<Link href={coursePermalink} fontSize="x-small">
-								<Icon as={BiChevronLeft} fontSize="sm" />
-								{__('Back to Course', 'masteriyo')}
+								<HStack spacing="1" align="flex-start">
+									<Icon as={BiChevronLeft} fontSize="sm" />
+									<Text>{__('Back to Course', 'masteriyo')}</Text>
+								</HStack>
 							</Link>
 						</Stack>
 						<Box p="0" position="relative" overflowX="hidden" flex="1">

@@ -10,10 +10,11 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import {
-	BiAlarm,
 	BiAlignLeft,
 	BiChevronLeft,
 	BiChevronRight,
+	BiPlay,
+	BiTimer,
 } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import routes from '../constants/routes';
@@ -55,6 +56,23 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 		onClose: onNextClose,
 	} = useDisclosure();
 
+	const getContentIcon = (
+		itemType: 'quiz' | 'lesson' | string,
+		video: boolean
+	) => {
+		if (itemType === 'quiz') {
+			return BiTimer;
+		}
+
+		if (itemType === 'lesson') {
+			if (video) {
+				return BiPlay;
+			} else {
+				return BiAlignLeft;
+			}
+		}
+	};
+
 	return (
 		<>
 			{navigation?.previous && (
@@ -90,11 +108,10 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 									fontSize="x-large"
 									color="blue.500">
 									<Icon
-										as={
-											navigation?.previous?.type === 'quiz'
-												? BiAlarm
-												: BiAlignLeft
-										}
+										as={getContentIcon(
+											navigation?.previous?.type,
+											navigation?.previous?.video
+										)}
 									/>
 								</Center>
 							</Stack>
@@ -149,9 +166,10 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 									fontSize="x-large"
 									color="blue.500">
 									<Icon
-										as={
-											navigation?.next?.type === 'quiz' ? BiAlarm : BiAlignLeft
-										}
+										as={getContentIcon(
+											navigation?.next?.type,
+											navigation?.next?.video
+										)}
 									/>
 								</Center>
 								<Stack direction="column" spacing="0">

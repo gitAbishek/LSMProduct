@@ -2,6 +2,7 @@ export type ContentNavigationButtonSchema = {
 	id: number;
 	name: string;
 	type: string;
+	video: boolean;
 	parent: {
 		id: number;
 		name: string;

@@ -18,7 +18,7 @@ import {
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
+import { sprintf, _nx, __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiChevronRight, BiSearch } from 'react-icons/bi';
@@ -70,7 +70,8 @@ const QuestionList: React.FC = () => {
 			useErrorBoundary: false,
 			retry: false,
 			retryOnMount: false,
-			keepPreviousData: true,
+			// keepPreviousData: true,
+			refetchInterval: 10000,
 		}
 	);
 
@@ -174,7 +175,16 @@ const QuestionList: React.FC = () => {
 											<Stack direction="column" spacing="2">
 												<Heading fontSize="sm">{question.content}</Heading>
 												<Text fontSize="x-small" color="gray.500">
-													{question.answers_count + __(' Answers', 'masteriyo')}
+													{sprintf(
+														_nx(
+															'%d Answer',
+															'%d Answers',
+															question.answers_count,
+															'number of answers',
+															'masteriyo'
+														),
+														question.answers_count
+													)}
 												</Text>
 											</Stack>
 											<Icon

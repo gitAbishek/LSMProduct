@@ -10,7 +10,7 @@ import {
 	Stack,
 	Text,
 } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
+import { sprintf, _nx, __ } from '@wordpress/i18n';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { BiChevronLeft } from 'react-icons/bi';
@@ -93,7 +93,16 @@ const QaChat: React.FC<Props> = (props) => {
 						<Stack direction="column" p="4" bg="gray.50" spacing="1">
 							<Text fontWeight="bold">{chatData.name}</Text>
 							<Text fontSize="x-small" color="gray.400">
-								{chatData.answerCount + __(' answers', 'masteriyo')}
+								{sprintf(
+									_nx(
+										'%d Answer',
+										'%d Answers',
+										chatData.answerCount,
+										'number of answers',
+										'masteriyo'
+									),
+									chatData.answerCount
+								)}
 							</Text>
 						</Stack>
 					</Box>

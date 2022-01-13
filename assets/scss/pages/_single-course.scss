@@ -535,6 +535,7 @@
 					max-height: 999px;
 					@include masteriyo-default-border;
 					background: var(--masteriyo-color-primary-lightest);
+					cursor: default;
 				}
 
 				.masteriyo-cplus {

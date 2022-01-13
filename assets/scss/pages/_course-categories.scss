@@ -18,6 +18,8 @@
 			width: 100%;
 			border-top-left-radius: 3px;
 			border-top-right-radius: 3px;
+			margin-bottom: 0;
+			padding-bottom: 0;
 		}
 	}
 
@@ -29,9 +31,10 @@
 	&__title {
 		font-size: 18px;
 		font-weight: 700;
-		margin-top: 0;
 		line-height: 1.5;
+		margin-top: 0;
 		margin-bottom: 0;
+		padding-bottom: 0;
 
 		a {
 			color: var(--masteriyo-color-grey-dark);

@@ -104,6 +104,8 @@
 			width: 100%;
 			border-top-left-radius: $border_radius_8;
 			border-top-right-radius: $border_radius_8;
+			margin-bottom: 0;
+			padding-bottom: 0;
 		}
 
 		.difficulty-badge {
@@ -158,12 +160,13 @@
 	& &__title {
 		font-size: 18px;
 		font-weight: 700;
+		line-height: 1.5;
 		margin-top: 0;
 		margin-bottom: $spacing_12px;
-		line-height: 1.5;
+		padding-bottom: 0;
 
 		&::before {
-			content: '';
+			content: "";
 			display: none;
 		}
 	}
@@ -264,7 +267,7 @@
 			}
 
 			&::before {
-				content: ('\2713');
+				content: ("\2713");
 				font-size: 16px;
 			}
 		}

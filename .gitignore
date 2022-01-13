@@ -28,3 +28,4 @@ i18n/languages/*.po~
 .vscode/launch.json
 assets/css/
 tests/wordpress
+wp-content/

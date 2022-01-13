@@ -140,7 +140,7 @@ class SectionsController extends PostsController {
 						),
 						'children' => array(
 							'default'     => true,
-							'description' => __( 'Whether to delete the children(lessons, quizzes and questions) under the quiz.', 'masteriyo' ),
+							'description' => __( 'Whether to delete the children(lessons, quizzes and questions) under the section.', 'masteriyo' ),
 							'type'        => 'boolean',
 						),
 					),

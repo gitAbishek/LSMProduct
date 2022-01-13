@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc115a8dcd37005abb726a5b44fb5beb",
+    "content-hash": "50239c1d7427674bcd004f00b6805aeb",
     "packages": [
         {
             "name": "league/container",
@@ -1315,16 +1315,16 @@
         },
         {
             "name": "mck89/peast",
-            "version": "v1.13.10",
+            "version": "v1.13.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mck89/peast.git",
-                "reference": "05ad3e6f66e6b35aa2247ef69b1a0c23c45a567b"
+                "reference": "78c57966f3da5f223636ea0417d71ac6ff61e47f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mck89/peast/zipball/05ad3e6f66e6b35aa2247ef69b1a0c23c45a567b",
-                "reference": "05ad3e6f66e6b35aa2247ef69b1a0c23c45a567b",
+                "url": "https://api.github.com/repos/mck89/peast/zipball/78c57966f3da5f223636ea0417d71ac6ff61e47f",
+                "reference": "78c57966f3da5f223636ea0417d71ac6ff61e47f",
                 "shasum": ""
             },
             "require": {
@@ -1337,7 +1337,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13.10-dev"
+                    "dev-master": "1.13.11-dev"
                 }
             },
             "autoload": {
@@ -1357,7 +1357,7 @@
                 }
             ],
             "description": "Peast is PHP library that generates AST for JavaScript code",
-            "time": "2021-12-24T10:38:18+00:00"
+            "time": "2022-01-11T17:58:18+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -2637,7 +2637,8 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/refs/tags/5.8.3"
+                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/refs/tags/5.8.3",
+                "reference": "5.8.3"
             },
             "require": {
                 "php": ">=5.3.2",
@@ -4555,16 +4556,16 @@
         },
         {
             "name": "wp-cli/db-command",
-            "version": "v2.0.18",
+            "version": "v2.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/db-command.git",
-                "reference": "de3eddeaa224e617a05fb3a8a97d77fefc456c4f"
+                "reference": "3f87474f4c845c8df6f9d6c2dbe748b4f3367dd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/db-command/zipball/de3eddeaa224e617a05fb3a8a97d77fefc456c4f",
-                "reference": "de3eddeaa224e617a05fb3a8a97d77fefc456c4f",
+                "url": "https://api.github.com/repos/wp-cli/db-command/zipball/3f87474f4c845c8df6f9d6c2dbe748b4f3367dd2",
+                "reference": "3f87474f4c845c8df6f9d6c2dbe748b4f3367dd2",
                 "shasum": ""
             },
             "require": {
@@ -4621,25 +4622,25 @@
             ],
             "description": "Performs basic database operations using credentials stored in wp-config.php.",
             "homepage": "https://github.com/wp-cli/db-command",
-            "time": "2021-12-13T16:26:20+00:00"
+            "time": "2022-01-11T20:05:28+00:00"
         },
         {
             "name": "wp-cli/i18n-command",
-            "version": "v2.2.11",
+            "version": "v2.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/i18n-command.git",
-                "reference": "2688b3626440d952eeb10b43a483e151d8faf51b"
+                "reference": "77ece9e2c914bb56ea72b9ee9f00556dece07b3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/i18n-command/zipball/2688b3626440d952eeb10b43a483e151d8faf51b",
-                "reference": "2688b3626440d952eeb10b43a483e151d8faf51b",
+                "url": "https://api.github.com/repos/wp-cli/i18n-command/zipball/77ece9e2c914bb56ea72b9ee9f00556dece07b3f",
+                "reference": "77ece9e2c914bb56ea72b9ee9f00556dece07b3f",
                 "shasum": ""
             },
             "require": {
                 "gettext/gettext": "^4.8",
-                "mck89/peast": "^1.13.9",
+                "mck89/peast": "^1.13.11",
                 "wp-cli/wp-cli": "^2.5"
             },
             "require-dev": {
@@ -4652,7 +4653,7 @@
             "type": "wp-cli-package",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-main": "2.x-dev"
                 },
                 "bundled": true,
                 "commands": [
@@ -4681,7 +4682,7 @@
             ],
             "description": "Provides internationalization tools for WordPress projects.",
             "homepage": "https://github.com/wp-cli/i18n-command",
-            "time": "2022-01-06T00:01:01+00:00"
+            "time": "2022-01-13T01:40:51+00:00"
         },
         {
             "name": "wp-cli/mustangostang-spyc",
@@ -4895,7 +4896,7 @@
         },
         {
             "name": "wp-phpunit/wp-phpunit",
-            "version": "5.8.2",
+            "version": "5.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-phpunit/wp-phpunit.git",

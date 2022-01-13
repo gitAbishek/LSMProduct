@@ -383,7 +383,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Delete lessons, quizzes and questions under the section.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.10
 	 *
 	 * @param Masteriyo\Models\Section $section Section object.
 	 */

@@ -395,7 +395,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	/**
 	 * Delete questions under the quiz.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.10
 	 *
 	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
 	 */

@@ -388,7 +388,7 @@ if ( ! function_exists( 'masteriyo_is_current_user_super_admin' ) ) {
 	/**
 	 * Check if the current user is super admin.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.10
 	 *
 	 * @return boolean
 	 */

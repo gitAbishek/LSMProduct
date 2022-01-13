@@ -2,9 +2,9 @@
 Contributors: Masteriyo, sanjiv-saha
 Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
-Tested up to: 5.8.2
+Tested up to: 5.8.3
 Requires PHP: 7.0
-Stable tag: 1.3.9
+Stable tag: 1.3.10
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -197,6 +197,16 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
 
+= 1.3.10 - 13-01-2022 =
+- Fix - Not able to set WordPress default role by an administrator.
+- Fix - Image blurring in courses and single course page.
+- Fix - Course sections, quizzes, lessons and questions are not completely deleted.
+- Fix - CSS issue in Spacious theme single course page.
+- Enhancement - Added support for multisite.
+- Enhancement - Back to course button does not align properly in learn page sidebar.
+- Enhancement - Singular and plural text for string Answer and Answers in learn page QA chat and questions list.
+- Enhancement - Added respective icon for lesson containing videos in learn page navigation.
+
 = 1.3.9 - 06-01-2022 =
 - Fix - Active courses, enrolled courses and course progress status not working on the Account page.
 
@@ -238,7 +248,7 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 - Enhancement - Added scrolling on learn page sidebar.
 - Enhancement - Implemented database migration.
 - Enhancement - Decreased the JS bundle size.
-- Enhancement - Improve the page loading speed.
+- Enhancement - Improve the plugin performance.
 - Tweak - Show name on delete confirm modal in section builder.
 - Fix - Question search on learn page sidebar.
 - Fix - Classic editor compatibility issue.

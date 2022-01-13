@@ -2640,7 +2640,7 @@ function masteriyo_get_plugin_url() {
 /**
  * Get Masteriyo plugin url.
  *
- * @since x.x.x
+ * @since 1.3.10
  *
  * @return string
  */

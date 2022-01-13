@@ -753,7 +753,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	/**
 	 * Delete sections, lessons, quizzes and questions under the course.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.10
 	 *
 	 * @param Masteriyo\Models\Course $course Course object.
 	 */

@@ -560,7 +560,7 @@ class Masteriyo {
 	/**
 	 * Register custom kses allowed html.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.10
 	 *
 	 * @return array
 	 */

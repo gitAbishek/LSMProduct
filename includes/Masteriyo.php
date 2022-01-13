@@ -221,7 +221,7 @@ class Masteriyo {
 				'aria-label' => __( 'Visit community forums', 'masteriyo' ),
 			),
 			'review'  => array(
-				'url'        => apply_filters( 'masteriyo_review_url', 'https://wordpress.org/plugins/learning-management-system/#reviews' ),
+				'url'        => apply_filters( 'masteriyo_review_url', 'https://wordpress.org/support/plugin/learning-management-system/reviews/#new-post' ),
 				'label'      => __( 'Rate the plugin ★★★★★', 'masteriyo' ),
 				'aria-label' => __( 'Rate the plugin.', 'masteriyo' ),
 			),

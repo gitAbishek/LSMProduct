@@ -96,7 +96,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Masteriyo\Models\Quiz $quiz Cource object.
+	 * @param Masteriyo\Models\Quiz $quiz Course object.
 	 * @throws Exception If invalid quiz.
 	 */
 	public function read( Model &$quiz ) {
@@ -205,20 +205,39 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 * @since 1.0.0
 	 *
 	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
-	 * @param array $args   Array of args to pass.alert-danger
+	 * @param array $args   Array of args to pass.
 	 */
 	public function delete( Model &$quiz, $args = array() ) {
 		$id          = $quiz->get_id();
 		$object_type = $quiz->get_object_type();
 
+		$args = array_merge(
+			array(
+				'force_delete' => false,
+				'children'     => false,
+			),
+			$args
+		);
+
 		if ( ! $id ) {
 			return;
 		}
 
-		do_action( 'masteriyo_before_delete_' . $object_type, $id, $quiz );
-		wp_delete_post( $id, true );
-		$quiz->set_id( 0 );
-		do_action( 'masteriyo_after_delete_' . $object_type, $id, $quiz );
+		if ( $args['children'] ) {
+			$this->delete_questions( $quiz );
+		}
+
+		if ( $args['force_delete'] ) {
+			do_action( 'masteriyo_before_delete_' . $object_type, $id, $quiz );
+			wp_delete_post( $id, true );
+			$quiz->set_id( 0 );
+			do_action( 'masteriyo_after_delete_' . $object_type, $id, $quiz );
+		} else {
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $quiz );
+			wp_trash_post( $id );
+			$quiz->set_status( 'trash' );
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $quiz );
+		}
 	}
 
 	/**
@@ -271,7 +290,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	}
 
 	/**
-	 * Fetch quizes.
+	 * Fetch quizzes.
 	 *
 	 * @since 1.0.0
 	 *
@@ -296,17 +315,17 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			update_post_caches( $query->posts, array( 'mto-quiz' ) );
 		}
 
-		$quizes = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_quiz', $query->posts ) );
+		$quizzes = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_quiz', $query->posts ) );
 
 		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
 			return (object) array(
-				'quizes'        => $quizes,
+				'quizes'        => $quizzes,
 				'total'         => $query->found_posts,
 				'max_num_pages' => $query->max_num_pages,
 			);
 		}
 
-		return $quizes;
+		return $quizzes;
 	}
 
 	/**
@@ -371,5 +390,28 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 		}
 
 		return apply_filters( 'masteriyo_quiz_data_store_cpt_get_quizes_query', $wp_query_args, $query_vars, $this );
+	}
+
+	/**
+	 * Delete questions under the quiz.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
+	 */
+	protected function delete_questions( $quiz ) {
+		$questions = get_posts(
+			array(
+				'numberposts' => -1,
+				'post_type'   => 'mto-question',
+				'post_status' => 'any',
+				'post_parent' => $quiz->get_id(),
+				'fields'      => 'ids',
+			)
+		);
+
+		foreach ( $questions as $question ) {
+			wp_delete_post( $question, true );
+		}
 	}
 }

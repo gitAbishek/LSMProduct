@@ -197,14 +197,33 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 		$id          = $section->get_id();
 		$object_type = $section->get_object_type();
 
+		$args = array_merge(
+			array(
+				'force_delete' => false,
+				'children'     => false,
+			),
+			$args
+		);
+
 		if ( ! $id ) {
 			return;
 		}
 
-		do_action( 'masteriyo_before_delete_' . $object_type, $id, $section );
-		wp_delete_post( $id, true );
-		$section->set_id( 0 );
-		do_action( 'masteriyo_after_delete_' . $object_type, $id, $section );
+		if ( $args['children'] ) {
+			$this->delete_children( $section );
+		}
+
+		if ( $args['force_delete'] ) {
+			do_action( 'masteriyo_before_delete_' . $object_type, $id, $section );
+			wp_delete_post( $id, true );
+			$section->set_id( 0 );
+			do_action( 'masteriyo_after_delete_' . $object_type, $id, $section );
+		} else {
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $section );
+			wp_trash_post( $id );
+			$section->set_status( 'trash' );
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $section );
+		}
 	}
 
 	/**
@@ -359,5 +378,56 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 		}
 
 		return apply_filters( 'masteriyo_section_wp_query_args', $wp_query_args, $query_vars, $this );
+	}
+
+	/**
+	 * Delete lessons, quizzes and questions under the section.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param Masteriyo\Models\Section $section Section object.
+	 */
+	protected function delete_children( $section ) {
+		$lessons = get_posts(
+			array(
+				'numberposts' => -1,
+				'post_type'   => array( 'mto-lesson' ),
+				'post_status' => 'any',
+				'post_parent' => $section->get_id(),
+				'fields'      => 'ids',
+			)
+		);
+
+		foreach ( $lessons as $lesson ) {
+			wp_delete_post( $lesson, true );
+		}
+
+		$quizzes = get_posts(
+			array(
+				'numberposts' => -1,
+				'post_type'   => array( 'mto-quiz' ),
+				'post_status' => 'any',
+				'post_parent' => $section->get_id(),
+				'fields'      => 'ids',
+			)
+		);
+
+		foreach ( $quizzes as $quiz ) {
+			wp_delete_post( $quiz, true );
+		}
+
+		$questions = get_posts(
+			array(
+				'numberposts'     => -1,
+				'post_type'       => 'mto-question',
+				'post_status'     => 'any',
+				'post_parent__in' => $quizzes,
+				'fields'          => 'ids',
+			)
+		);
+
+		foreach ( $questions as $question ) {
+			wp_delete_post( $question, true );
+		}
 	}
 }

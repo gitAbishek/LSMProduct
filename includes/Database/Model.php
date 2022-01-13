@@ -345,9 +345,15 @@ abstract class Model {
 	 * @param  bool $force_delete Should the date be deleted permanently.
 	 * @return bool result
 	 */
-	public function delete( $force_delete = false ) {
+	public function delete( $force_delete = false, $children = false ) {
 		if ( $this->repository ) {
-			$this->repository->delete( $this, array( 'force_delete' => $force_delete ) );
+			$this->repository->delete(
+				$this,
+				array(
+					'force_delete' => $force_delete,
+					'children'     => $children,
+				)
+			);
 			$this->set_id( 0 );
 			return true;
 		}

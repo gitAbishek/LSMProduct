@@ -286,16 +286,20 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	public function delete( Model &$course, $args = array() ) {
 		$id          = $course->get_id();
 		$object_type = $course->get_object_type();
-
-		$args = array_merge(
+		$args        = array_merge(
 			array(
 				'force_delete' => false,
+				'children'     => false,
 			),
 			$args
 		);
 
 		if ( ! $id ) {
 			return;
+		}
+
+		if ( $args['children'] ) {
+			$this->delete_children( $course );
 		}
 
 		if ( $args['force_delete'] ) {
@@ -744,5 +748,29 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			'completed' => $completed,
 			'total'     => $total,
 		);
+	}
+
+	/**
+	 * Delete sections, lessons, quizzes and questions under the course.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param Masteriyo\Models\Course $course Course object.
+	 */
+	protected function delete_children( $course ) {
+		$children = get_posts(
+			array(
+				'numberposts' => -1,
+				'post_type'   => array( 'mto-section', 'mto-lesson', 'mto-quiz', 'mto-question' ),
+				'post_status' => 'any',
+				'fields'      => 'ids',
+				'meta_key'    => '_course_id',
+				'meta_value'  => $course->get_id(),
+			)
+		);
+
+		foreach ( $children as $child ) {
+			wp_delete_post( $child, true );
+		}
 	}
 }

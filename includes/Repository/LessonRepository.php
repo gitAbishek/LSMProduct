@@ -214,14 +214,28 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 		$id          = $lesson->get_id();
 		$object_type = $lesson->get_object_type();
 
+		$args = array_merge(
+			array(
+				'force_delete' => false,
+			),
+			$args
+		);
+
 		if ( ! $id ) {
 			return;
 		}
 
-		do_action( 'masteriyo_before_delete_' . $object_type, $id, $lesson );
-		wp_delete_post( $id, true );
-		$lesson->set_id( 0 );
-		do_action( 'masteriyo_after_delete_' . $object_type, $id, $lesson );
+		if ( $args['force_delete'] ) {
+			do_action( 'masteriyo_before_delete_' . $object_type, $id, $lesson );
+			wp_delete_post( $id, true );
+			$lesson->set_id( 0 );
+			do_action( 'masteriyo_after_delete_' . $object_type, $id, $lesson );
+		} else {
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $lesson );
+			wp_trash_post( $id );
+			$lesson->set_status( 'trash' );
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $lesson );
+		}
 	}
 
 

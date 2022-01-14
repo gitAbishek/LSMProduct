@@ -28,8 +28,8 @@ class ShortAnswer extends Question {
 	 */
 	protected $type = 'short-answer';
 
-		/**
-	 * Check whether the short answert is correct or not.
+	/**
+	 * Check whether the short answer is correct or not.
 	 *
 	 * @param array  $chosen_answer Answer chosen by user.
 	 * @param string $context Options: 'edit', 'view'.

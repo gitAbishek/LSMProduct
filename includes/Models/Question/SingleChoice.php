@@ -31,6 +31,8 @@ class SingleChoice extends Question implements QuestionInterface {
 	/**
 	 * Check whether the chosen answer is correct or not.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param string $chosen_answer Answer chosen by user.
 	 * @param string $context Options: 'edit', 'view'.
 	 *
@@ -43,20 +45,13 @@ class SingleChoice extends Question implements QuestionInterface {
 		$correct_answers = array_filter(
 			$answers,
 			function( $answer ) {
-				return $answer->correct;
+				return isset( $answer->correct ) && $answer->correct;
 			}
 		);
 
-		$correct_answers = array_values(
-			array_map(
-				function( $correct_answer ) {
-					return $correct_answer->name;
-				},
-				$correct_answers
-			)
-		);
+		$correct_answers = array_column( $correct_answers, 'name' );
 
-		// There can only be one corrent answer for SingleChoice question type.
+		// There can only be one correct answer for SingleChoice question type.
 		$correct_answers = (array) current( $correct_answers );
 
 		$correct = $chosen_answer === $correct_answers;

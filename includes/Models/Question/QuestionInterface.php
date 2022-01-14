@@ -20,6 +20,8 @@ interface QuestionInterface {
 	/**
 	 * Check whether the chosen answer is correct or not.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param mixed  $chosen_answer Answer chosen by user.
 	 * @param string $context Options: 'edit', 'view'.
 	 */

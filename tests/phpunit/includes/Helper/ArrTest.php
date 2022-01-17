@@ -6,7 +6,7 @@
  */
 
 /**
- * Sample test case.
+ * Arr helper file test.
  */
 class ArrTest extends WP_UnitTestCase {
 
@@ -14,6 +14,10 @@ class ArrTest extends WP_UnitTestCase {
 	 * A single example test.
 	 */
 	public function test_masteriyo_array_is_list() {
-		$this->assertTrue( masteriyo_array_is_list( array( 'John Doe', '18') ) );
+		$list = array( 'John Doe', '18');
+		$this->assertTrue( masteriyo_array_is_list( $list, 'Array should list.' ) );
+
+		$assoc = array( 'name' => 'John Doe', 'age' => 18 );
+		$this->assertFalse( masteriyo_array_is_list( $assoc, 'Array should not be associative.'));
 	}
 }

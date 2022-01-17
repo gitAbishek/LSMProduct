@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50239c1d7427674bcd004f00b6805aeb",
+    "content-hash": "176c0febd235a8fd153544c10f89c284",
     "packages": [
         {
             "name": "league/container",
@@ -386,68 +386,6 @@
     ],
     "packages-dev": [
         {
-            "name": "10up/wp_mock",
-            "version": "dev-enhance/allow-to-enable-disable-mock-constants-functions",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mi5t4n/wp_mock.git",
-                "reference": "7da05e6cf81290308af5da1346ca15b8f41e5fe1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mi5t4n/wp_mock/zipball/7da05e6cf81290308af5da1346ca15b8f41e5fe1",
-                "reference": "7da05e6cf81290308af5da1346ca15b8f41e5fe1",
-                "shasum": ""
-            },
-            "require": {
-                "antecedent/patchwork": "^2.1",
-                "mockery/mockery": "^1.0",
-                "php": ">=7.1",
-                "phpunit/phpunit": ">=7.0"
-            },
-            "require-dev": {
-                "behat/behat": "^3.0",
-                "php-coveralls/php-coveralls": "^2.1",
-                "sebastian/comparator": ">=1.2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "WP_Mock\\": "./php/WP_Mock"
-                },
-                "classmap": [
-                    "php/WP_Mock.php"
-                ]
-            },
-            "scripts": {
-                "test:behat": [
-                    "behat"
-                ],
-                "test:phpunit": [
-                    "phpunit"
-                ],
-                "test:phpunitcov": [
-                    "phpunit --coverage-clover build/logs/clover.xml"
-                ],
-                "test": [
-                    "@test:behat",
-                    "@test:phpunit"
-                ],
-                "coverage": [
-                    "@test:behat",
-                    "@test:phpunitcov"
-                ]
-            },
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "A mocking library to take the pain out of unit testing for WordPress",
-            "support": {
-                "source": "https://github.com/mi5t4n/wp_mock/tree/enhance/allow-to-enable-disable-mock-constants-functions"
-            },
-            "time": "2021-01-05T07:50:28+00:00"
-        },
-        {
             "name": "antecedent/patchwork",
             "version": "2.1.17",
             "source": {
@@ -490,6 +428,72 @@
                 "testing"
             ],
             "time": "2021-10-21T14:22:43+00:00"
+        },
+        {
+            "name": "brain/monkey",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Brain-WP/BrainMonkey.git",
+                "reference": "a31c84515bb0d49be9310f52ef1733980ea8ffbb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Brain-WP/BrainMonkey/zipball/a31c84515bb0d49be9310f52ef1733980ea8ffbb",
+                "reference": "a31c84515bb0d49be9310f52ef1733980ea8ffbb",
+                "shasum": ""
+            },
+            "require": {
+                "antecedent/patchwork": "^2.1.17",
+                "mockery/mockery": "^1.3.5 || ^1.4.4",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+                "phpcompatibility/php-compatibility": "^9.3.0",
+                "phpunit/phpunit": "^5.7.26 || ^6.0 || ^7.0 || >=8.0 <8.5.12 || ^8.5.14 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-version/1": "1.x-dev",
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Brain\\Monkey\\": "src/"
+                },
+                "files": [
+                    "inc/api.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Giuseppe Mazzapica",
+                    "email": "giuseppe.mazzapica@gmail.com",
+                    "homepage": "https://gmazzap.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Mocking utility for PHP functions and WordPress plugin API",
+            "keywords": [
+                "Monkey Patching",
+                "interception",
+                "mock",
+                "mock functions",
+                "mockery",
+                "patchwork",
+                "redefinition",
+                "runkit",
+                "test",
+                "testing"
+            ],
+            "time": "2021-11-11T15:53:55+00:00"
         },
         {
             "name": "clue/stdio-react",
@@ -2637,8 +2641,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/refs/tags/5.8.3",
-                "reference": "5.8.3"
+                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/refs/tags/5.8.3"
             },
             "require": {
                 "php": ">=5.3.2",
@@ -4995,6 +4998,70 @@
             "time": "2021-11-23T01:37:03+00:00"
         },
         {
+            "name": "yoast/wp-test-utils",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Yoast/wp-test-utils.git",
+                "reference": "21df3a08974ee62f489f64e34be7f26a32ec872c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Yoast/wp-test-utils/zipball/21df3a08974ee62f489f64e34be7f26a32ec872c",
+                "reference": "21df3a08974ee62f489f64e34be7f26a32ec872c",
+                "shasum": ""
+            },
+            "require": {
+                "brain/monkey": "^2.6.0",
+                "php": ">=5.6",
+                "yoast/phpunit-polyfills": "^1.0.1"
+            },
+            "require-dev": {
+                "yoast/yoastcs": "^2.2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.x-dev",
+                    "dev-develop": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ],
+                "exclude-from-classmap": [
+                    "/src/WPIntegration/TestCase.php",
+                    "/src/WPIntegration/TestCaseNoPolyfills.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Team Yoast",
+                    "email": "support@yoast.com",
+                    "homepage": "https://yoast.com"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/Yoast/wp-test-utils/graphs/contributors"
+                }
+            ],
+            "description": "PHPUnit cross-version compatibility layer for testing plugins and themes build for WordPress",
+            "homepage": "https://github.com/Yoast/wp-test-utils/",
+            "keywords": [
+                "brainmonkey",
+                "integration-testing",
+                "phpunit",
+                "unit-testing",
+                "wordpress"
+            ],
+            "time": "2021-09-27T05:50:36+00:00"
+        },
+        {
             "name": "yosymfony/resource-watcher",
             "version": "v2.0.1",
             "source": {
@@ -5050,9 +5117,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "10up/wp_mock": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

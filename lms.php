@@ -97,6 +97,7 @@ if ( ! file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
  */
 $GLOBALS['masteriyo'] = require_once dirname( __FILE__ ) . '/bootstrap/app.php';
 
+
 // Initialize the application.
 $masteriyo->get( 'app' );
 

@@ -1,4 +1,4 @@
-name: Run unit tests on PR
+name: Run PHP Unit tests on PR
 on:
   pull_request:
     branches:
@@ -43,6 +43,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install javascript dependencies
+        run: yarn install
+
+      - name: Compile typescript
+        run: |
+          yarn build
+          yarn build:blocks
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2

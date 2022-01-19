@@ -13,7 +13,9 @@ use Masteriyo\Activation;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Format;
 use Masteriyo\Database\Model;
+use Masteriyo\Query\SectionQuery;
 use Masteriyo\Cache\CacheInterface;
+use Masteriyo\Query\LessonQuery;
 use Masteriyo\Repository\RepositoryInterface;
 
 defined( 'ABSPATH' ) || exit;
@@ -1315,10 +1317,13 @@ class Course extends Model {
 	 * Get start course URL.
 	 *
 	 * @since 1.0.0
+	 * @updated x.x.x Added whether to append lesson to the URL or not.
 	 *
 	 * @return string
 	 */
-	public function start_course_url() {
+	public function start_course_url( $append_lesson = true ) {
+		$lesson_or_quiz = $this->get_first_lesson_or_quiz();
+
 		$learn_page_url = masteriyo_get_page_permalink( 'learn' );
 		$url            = trailingslashit( $learn_page_url ) . 'course/' . $this->get_slug();
 
@@ -1332,6 +1337,10 @@ class Course extends Model {
 		}
 
 		$url .= '#course/' . $this->get_id();
+
+		if ( $append_lesson && $lesson_or_quiz ) {
+			$url .= '/lesson/' . $lesson_or_quiz->get_id();
+		}
 
 		return apply_filters( 'masteriyo_start_course_url', $url, $this );
 	}
@@ -1456,5 +1465,47 @@ class Course extends Model {
 		$available_seats      = $this->get_enrollment_limit() - $total_courses_bought;
 
 		return max( $available_seats, 0 );
+	}
+
+	/**
+	 * Get the first lesson or quiz of the course.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return null|Masteriyo\Models\Lesson
+	*/
+	public function get_first_lesson_or_quiz() {
+		$query = new SectionQuery(
+			array(
+				'menu_order' => 0,
+				'limit'      => 1,
+				'parent_id'  => $this->get_id(),
+				'course_id'  => $this->get_id(),
+			)
+		);
+
+		$first_section = current( $query->get_sections() );
+
+		if ( $first_section ) {
+			$posts = get_posts(
+				array(
+					'menu_order'  => 0,
+					'numberposts' => 1,
+					'post_parent' => $first_section->get_id(),
+					'post_type'   => array( 'mto-lesson', 'mto-quiz' ),
+					'post_status' => 'any',
+				)
+			);
+
+			$first_lesson_or_quiz = current( $posts );
+
+			if ( $first_lesson_or_quiz && 'mto-lesson' === $first_lesson_or_quiz->post_type ) {
+				$first_lesson_or_quiz = masteriyo_get_lesson( $first_lesson_or_quiz );
+			} elseif ( $first_lesson_or_quiz && 'mto-quiz' === $first_lesson_or_quiz->post_type ) {
+				$first_lesson_or_quiz = masteriyo_get_quiz( $first_lesson_or_quiz );
+			}
+		}
+
+		return apply_filters( 'masteriyo_single_course_get_first_lesson_or_quiz', $first_lesson_or_quiz, $this );
 	}
 }

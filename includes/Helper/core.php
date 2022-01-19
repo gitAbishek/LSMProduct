@@ -13,6 +13,8 @@ use Masteriyo\Models\Course;
 use Masteriyo\ModelException;
 use Masteriyo\Models\Section;
 use Masteriyo\Models\CourseReview;
+use Masteriyo\Query\CourseQuery;
+use Masteriyo\Query\SectionQuery;
 
 /**
  * Get course.

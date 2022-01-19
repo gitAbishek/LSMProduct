@@ -138,7 +138,7 @@ class SessionRepository implements RepositoryInterface {
 		global $wpdb;
 
 		if ( $session->is_dirty() ) {
-			$wpdb->update(
+			$wpdb->replace(
 				$session->get_table(),
 				array(
 					'session_key'    => $session->get_key(),
@@ -146,13 +146,14 @@ class SessionRepository implements RepositoryInterface {
 					'session_expiry' => $session->get_expiry(),
 					'user_agent'     => $session->get_user_agent( 'edit ' ),
 				),
-				array( 'session_id' => $session->get_id() ),
-				array( '%s', '%s', '%d', '%s' ),
-				array( '%d' )
+				array( '%s', '%s', '%d', '%s' )
 			);
 		}
 
-		$session->apply_changes();
+		if ( $wpdb->insert_id ) {
+			$session->apply_changes();
+			$session->set_id( $wpdb->insert_id );
+		}
 
 		/**
 		 * Update session action.

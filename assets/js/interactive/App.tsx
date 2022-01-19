@@ -1,6 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import ErrorBoundary from '../back-end/errors/ErrorBoundary';
 import theme from '../back-end/theme/theme';
 import Router from './router/Router';
@@ -11,7 +12,7 @@ const App = () => {
 			queries: {
 				refetchOnWindowFocus: false,
 				refetchOnReconnect: false,
-				useErrorBoundary: true,
+				// useErrorBoundary: true,
 			},
 		},
 	});
@@ -20,6 +21,7 @@ const App = () => {
 		<ErrorBoundary>
 			<ChakraProvider theme={theme}>
 				<QueryClientProvider client={queryClient}>
+					<ReactQueryDevtools initialIsOpen={false} />
 					<Router />
 				</QueryClientProvider>
 			</ChakraProvider>

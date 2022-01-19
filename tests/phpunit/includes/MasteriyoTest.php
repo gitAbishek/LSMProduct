@@ -7,8 +7,6 @@
 
 use Masteriyo\Constants;
 use Masteriyo\Masteriyo;
-use Brain\Monkey;
-use Brain\Monkey\Filters;
 
 
 /**
@@ -33,15 +31,13 @@ class MasteriyoTest extends WP_UnitTestCase {
 	}
 
 	 protected function set_up() {
-        parent::set_up();
-        Monkey\setUp();
+		parent::set_up();
     }
 
 	/**
 	 * Tear down
 	 */
 	protected function tear_down() {
-		Monkey\tearDown();
         parent::tear_down();
     }
 
@@ -67,6 +63,18 @@ class MasteriyoTest extends WP_UnitTestCase {
 		$this->assertNotFalse( has_action( 'cli_init', array( 'Masteriyo\Cli\Cli', 'register' ), 'CLI is not hooked.' ) );
 
 		$this->assertNotFalse( has_action( 'wp_kses_allowed_html', array( self::$masteriyo, 'register_custom_kses_allowed_html' ), 'Custom WP Kses allowed html not hooked.' ) );
+	}
+
+	/**
+	 * Test load text domain.
+	 */
+	public function test_load_text_domain() {
+		$mock = new MockAction();
+		add_filter( 'plugin_locale', array( &$mock, 'filter' ) );
+
+		self::$masteriyo->load_text_domain();
+
+		$this->assertGreaterThan( 0, $mock->get_call_count(), 'plugin_locale filter should be called.' );
 	}
 
 	/**

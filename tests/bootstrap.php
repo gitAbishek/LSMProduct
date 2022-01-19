@@ -5,7 +5,10 @@
  * @package EverestForms
  */
 
+use Yoast\WPTestUtils\WPIntegration;
+
 // Require composer dependencies.
+require_once dirname( __DIR__ ) . '/vendor/yoast/wp-test-utils/src/WPIntegration/bootstrap-functions.php';
 require_once dirname( __DIR__ ) . '/vendor/autoload.php';
 
 // Load tests environment variables.
@@ -64,3 +67,5 @@ require $_tests_dir . '/includes/bootstrap.php';
 
 // Use existing behavior for wp_die during actual test execution.
 remove_filter( 'wp_die_handler', 'handle_wp_setup_failure' );
+
+WPIntegration\bootstrap_it();

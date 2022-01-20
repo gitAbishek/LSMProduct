@@ -6,12 +6,11 @@ import {
 	FormLabel,
 	Icon,
 	Input,
-	NumberDecrementStepper,
-	NumberIncrementStepper,
-	NumberInput,
-	NumberInputField,
-	NumberInputStepper,
 	Select,
+	Slider,
+	SliderFilledTrack,
+	SliderThumb,
+	SliderTrack,
 	Stack,
 	Switch,
 	Tab,
@@ -19,6 +18,7 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
+	Text,
 	Textarea,
 	Tooltip,
 } from '@chakra-ui/react';
@@ -66,6 +66,12 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 	const watchSelectedCountry = useWatch({
 		name: 'payments.store.country',
 		defaultValue: paymentsData?.store.country,
+		control,
+	});
+
+	const watchNoOfDecimals = useWatch({
+		name: 'payments.currency.number_of_decimals',
+		defaultValue: paymentsData?.currency.number_of_decimals,
 		control,
 	});
 
@@ -216,13 +222,17 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										<Select
 											{...register('payments.currency.currency_position')}
 											defaultValue={paymentsData?.currency?.currency_position}>
-											<option value="left">{__('Left', 'masteriyo')}</option>
-											<option value="right">{__('Right', 'masteriyo')}</option>
+											<option value="left">
+												{__('Left ($99.99)', 'masteriyo')}
+											</option>
+											<option value="right">
+												{__('Right (99.99$)', 'masteriyo')}
+											</option>
 											<option value="left_space">
-												{__('Left Space', 'masteriyo')}
+												{__('Left Space ($ 99.99)', 'masteriyo')}
 											</option>
 											<option value="right_space">
-												{__('Right Space', 'masteriyo')}
+												{__('Right Space  (99.99 $)', 'masteriyo')}
 											</option>
 										</Select>
 									</FormControl>
@@ -350,13 +360,24 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												),
 											}}
 											render={({ field }) => (
-												<NumberInput {...field} w="full" min={0} max={10}>
-													<NumberInputField />
-													<NumberInputStepper>
-														<NumberIncrementStepper />
-														<NumberDecrementStepper />
-													</NumberInputStepper>
-												</NumberInput>
+												<Slider
+													{...field}
+													aria-label="course-per-page"
+													defaultValue={watchNoOfDecimals || 2}
+													max={10}
+													min={1}>
+													<SliderTrack>
+														<SliderFilledTrack />
+													</SliderTrack>
+													<SliderThumb boxSize="6" bgColor="blue.500">
+														<Text
+															fontSize="xs"
+															fontWeight="semibold"
+															color="white">
+															{watchNoOfDecimals || 2}
+														</Text>
+													</SliderThumb>
+												</Slider>
 											)}
 										/>
 										<FormErrorMessage>

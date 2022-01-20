@@ -4,22 +4,22 @@ import {
 	FormErrorMessage,
 	FormLabel,
 	Icon,
-	NumberDecrementStepper,
-	NumberIncrementStepper,
-	NumberInput,
-	NumberInputField,
-	NumberInputStepper,
+	Slider,
+	SliderFilledTrack,
+	SliderThumb,
+	SliderTrack,
 	Stack,
 	Tab,
 	TabList,
 	TabPanel,
 	TabPanels,
 	Tabs,
+	Text,
 	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
 import {
 	infoIconStyles,
@@ -36,7 +36,14 @@ const QuizSettings: React.FC<Props> = (props) => {
 	const { quizData } = props;
 	const {
 		formState: { errors },
+		control,
 	} = useFormContext();
+
+	const watchQuestionsPerPage = useWatch({
+		name: 'quiz.styling.questions_display_per_page',
+		defaultValue: quizData?.styling.questions_display_per_page,
+		control,
+	});
 
 	return (
 		<Tabs orientation="vertical">
@@ -73,13 +80,21 @@ const QuizSettings: React.FC<Props> = (props) => {
 										),
 									}}
 									render={({ field }) => (
-										<NumberInput {...field} min={1}>
-											<NumberInputField borderRadius="sm" shadow="input" />
-											<NumberInputStepper>
-												<NumberIncrementStepper />
-												<NumberDecrementStepper />
-											</NumberInputStepper>
-										</NumberInput>
+										<Slider
+											{...field}
+											aria-label="questions-per-page"
+											defaultValue={watchQuestionsPerPage || 12}
+											max={24}
+											min={1}>
+											<SliderTrack>
+												<SliderFilledTrack />
+											</SliderTrack>
+											<SliderThumb boxSize="6" bgColor="blue.500">
+												<Text fontSize="xs" fontWeight="semibold" color="white">
+													{watchQuestionsPerPage || 12}
+												</Text>
+											</SliderThumb>
+										</Slider>
 									)}
 								/>
 								<FormErrorMessage>

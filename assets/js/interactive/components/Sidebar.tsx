@@ -33,14 +33,22 @@ interface Props {
 	isOpen: boolean;
 	isHeaderOpen: boolean;
 	coursePermalink: string;
+	activeIndex: number;
 }
 
 //@ts-ignore
 const qaEnable = _MASTERIYO_.qaEnable;
 
 const Sidebar: React.FC<Props> = (props) => {
-	const { items, name, onToggle, isOpen, isHeaderOpen, coursePermalink } =
-		props;
+	const {
+		items,
+		name,
+		onToggle,
+		isOpen,
+		isHeaderOpen,
+		coursePermalink,
+		activeIndex,
+	} = props;
 	const { courseId }: any = useParams();
 
 	const [currentTab, setCurrentTab] = useState<number>(1);
@@ -137,13 +145,13 @@ const Sidebar: React.FC<Props> = (props) => {
 						</Stack>
 						<Box p="0" position="relative" overflowX="hidden" flex="1">
 							{currentTab === 1 && (
-								<Accordion allowToggle>
+								<Accordion allowToggle defaultIndex={activeIndex}>
 									{items.map((item: CourseProgressItemMap) => {
 										return (
 											<SidebarItem
 												key={item.item_id}
 												courseId={courseId}
-												id={item.item_id}
+												id={item.item_id.toString()}
 												name={item.item_title}
 												contents={item.contents}
 											/>

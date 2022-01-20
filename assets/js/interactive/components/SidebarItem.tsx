@@ -25,13 +25,13 @@ import { getNavigationRoute } from './FloatingNavigation';
 
 interface Props {
 	courseId: number;
-	id: number;
+	id: string;
 	name: string;
 	contents: any;
 }
 
 const SidebarItem: React.FC<Props> = (props) => {
-	const { courseId, name, contents } = props;
+	const { courseId, name, contents, id } = props;
 
 	const centerStyles = {
 		width: '23px',
@@ -54,7 +54,11 @@ const SidebarItem: React.FC<Props> = (props) => {
 		}
 	};
 	return (
-		<AccordionItem isDisabled={!contents.length} _first={{ borderTop: 0 }}>
+		<AccordionItem
+			id={id}
+			className={id}
+			isDisabled={!contents.length}
+			_first={{ borderTop: 0 }}>
 			{({ isExpanded }) => (
 				<>
 					<h2>

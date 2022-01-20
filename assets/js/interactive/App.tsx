@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import ErrorBoundary from '../back-end/errors/ErrorBoundary';
 import theme from '../back-end/theme/theme';
+import { isProduction } from '../back-end/utils/utils';
 import Router from './router/Router';
 
 const App = () => {
@@ -12,7 +13,7 @@ const App = () => {
 			queries: {
 				refetchOnWindowFocus: false,
 				refetchOnReconnect: false,
-				// useErrorBoundary: true,
+				useErrorBoundary: isProduction,
 			},
 		},
 	});

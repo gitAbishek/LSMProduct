@@ -118,6 +118,7 @@ const InteractiveLesson = () => {
 					items={courseProgressQuery.data.items}
 					name={courseProgressQuery.data.name}
 					coursePermalink={courseProgressQuery.data.course_permalink}
+					activeIndex={lessonQuery?.data?.menu_order}
 				/>
 				<Container centerContent maxW="container.lg" py="16">
 					<Box bg="white" p={['5', null, '14']} shadow="box" w="full">

@@ -42,7 +42,7 @@ const InteractiveLesson = () => {
 	});
 
 	const courseProgressQuery = useQuery<CourseProgressMap>(
-		[`courseProgressItem${courseId}`, courseId],
+		[`courseProgress${courseId}`, courseId],
 		() => progressAPI.store({ course_id: courseId })
 	);
 
@@ -61,7 +61,7 @@ const InteractiveLesson = () => {
 
 	const completeQuery = useQuery<CourseProgressItemsMap>(
 		[`completeQuery${lessonId}`, lessonId],
-		() => progressAPI.list({ item_id: lessonId, course_id: courseId })
+		() => progressItemAPI.list({ item_id: lessonId, course_id: courseId })
 	);
 
 	const imageQuery = useQuery(

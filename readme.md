@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.3.10
+**Stable tag**: 1.3.11
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,17 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.3.11 - 20-01-2022
+
+- Enhancement - Redirect to first quiz or lesson on learning page.
+- Enhancement - The sidebar on the learning page now opens by default.
+- Enhancement - Active menu section now expands by default on the sidebar of the learning page.
+- Enhancement - Active menu item is now highlighted on the sidebar.
+- Enhancement - Global settings UI.
+- Enhancement - Text strings refinement.
+- Enhancement - Updated 'Start Course' text to 'Continue' and 'Completed' for in-progress and completed course respectively.
+- Enhancement - Open the first section by default for the curriculum tab on the single course page.
 
 ### 1.3.10 - 13-01-2022
 

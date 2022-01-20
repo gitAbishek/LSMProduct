@@ -50,7 +50,7 @@ const InteractiveQuiz = () => {
 	});
 
 	const courseProgressQuery = useQuery<CourseProgressMap>(
-		[`courseProgressItem${courseId}`, courseId],
+		[`courseProgress${courseId}`, courseId],
 		() => progressAPI.store({ course_id: courseId })
 	);
 

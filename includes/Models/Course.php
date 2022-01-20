@@ -1294,7 +1294,7 @@ class Course extends Model {
 	/**
 	 * Get continue course button text for the single page.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.11
 	 *
 	 * @return string
 	 */
@@ -1305,7 +1305,7 @@ class Course extends Model {
 	/**
 	 * Get continue course button text for the single page.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.11
 	 *
 	 * @return string
 	 */
@@ -1317,7 +1317,7 @@ class Course extends Model {
 	 * Get start course URL.
 	 *
 	 * @since 1.0.0
-	 * @updated x.x.x Added whether to append lesson to the URL or not.
+	 * @updated 1.3.11 Added whether to append lesson to the URL or not.
 	 *
 	 * @return string
 	 */
@@ -1470,7 +1470,7 @@ class Course extends Model {
 	/**
 	 * Get the first lesson or quiz of the course.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.11
 	 *
 	 * @return null|Masteriyo\Models\Lesson
 	*/

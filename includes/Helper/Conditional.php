@@ -813,7 +813,7 @@ if ( ! function_exists( 'masteriyo_has_course_started' ) ) {
 	/**
 	 * Has course started.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.11
 	 *
 	 * @param WP_Post|int|Masteriyo\Models\Course $course Course.
 	 * @param WP_User|int|Masteriyo\Models\User $user User.

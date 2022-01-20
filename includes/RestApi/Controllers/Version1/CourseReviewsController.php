@@ -214,7 +214,7 @@ class CourseReviewsController extends CommentsController {
 		$result = false;
 
 		if ( ! $object || 0 === $object->get_id() ) {
-			return new \WP_Error( "masteriyo_rest_{$this->object_type}_invalid_id", __( 'Invalid ID.', 'masteriyo' ), array( 'status' => 404 ) );
+			return new \WP_Error( "masteriyo_rest_{$this->object_type}_invalid_id", __( 'Invalid ID', 'masteriyo' ), array( 'status' => 404 ) );
 		}
 
 		$request->set_param( 'context', 'edit' );
@@ -455,25 +455,25 @@ class CourseReviewsController extends CommentsController {
 					'readonly'    => true,
 				),
 				'meta_data'    => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
+					'description' => __( 'Meta data', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
+								'description' => __( 'Meta ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
+								'description' => __( 'Meta key', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
+								'description' => __( 'Meta value', 'masteriyo' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),
@@ -718,7 +718,7 @@ class CourseReviewsController extends CommentsController {
 		if ( is_null( $course ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid course ID.', 'masteriyo' ),
+				__( 'Invalid course ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)
@@ -763,7 +763,7 @@ class CourseReviewsController extends CommentsController {
 		if ( ! is_object( $review ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_invalid_id',
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
 				)
@@ -818,7 +818,7 @@ class CourseReviewsController extends CommentsController {
 		if ( ! is_object( $review ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_invalid_id',
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
 				)

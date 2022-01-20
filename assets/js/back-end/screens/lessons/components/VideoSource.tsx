@@ -87,7 +87,7 @@ const VideoSource: React.FC<Props> = (props) => {
 									watchSource === 'youtube'
 										? /\/\/(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=|embed\/)?([a-z0-9_\-]+)/i
 										: /\/\/(?:www\.)?vimeo.com\/([0-9a-z\-_]+)/i,
-								message: __('Please Provide Valid URL', 'masteriyo'),
+								message: __('Please Provide Valid URL.', 'masteriyo'),
 							},
 						})}
 					/>

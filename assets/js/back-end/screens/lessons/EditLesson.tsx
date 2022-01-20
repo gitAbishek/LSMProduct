@@ -85,7 +85,7 @@ const EditLesson = () => {
 		{
 			onSuccess: (data: any) => {
 				toast({
-					title: __('Lesson Deleted', 'masteriyo'),
+					title: __('Lesson Deleted.', 'masteriyo'),
 					isClosable: true,
 					status: 'error',
 				});

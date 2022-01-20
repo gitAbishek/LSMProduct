@@ -185,7 +185,7 @@ class UserCoursesController extends CrudController {
 		);
 
 		$params['user_id'] = array(
-			'description'       => __( 'User ID.', 'masteriyo' ),
+			'description'       => __( 'User ID', 'masteriyo' ),
 			'type'              => 'integer',
 			'sanitize_callback' => 'absint',
 			'validate_callback' => 'rest_validate_request_arg',
@@ -193,7 +193,7 @@ class UserCoursesController extends CrudController {
 		);
 
 		$params['status'] = array(
-			'description'       => __( 'User course status.', 'masteriyo' ),
+			'description'       => __( 'User course status', 'masteriyo' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_title',
 			'validate_callback' => 'rest_validate_request_arg',
@@ -428,18 +428,18 @@ class UserCoursesController extends CrudController {
 					'readonly'    => true,
 				),
 				'user_id'     => array(
-					'description' => __( 'User ID.', 'masteriyo' ),
+					'description' => __( 'User ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_id'   => array(
-					'description' => __( 'Course ID.', 'masteriyo' ),
+					'description' => __( 'Course ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'type'        => array(
-					'description' => __( 'Item type. (e.g. Course)', 'masteriyo' ),
+					'description' => __( 'Item type (e.g. Course)', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),

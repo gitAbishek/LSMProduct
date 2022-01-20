@@ -52,7 +52,7 @@ const AddStudent: React.FC = () => {
 		onSuccess: () => {
 			queryClient.invalidateQueries('usersList');
 			toast({
-				title: __('New student added successfully', 'masteriyo'),
+				title: __('New student added successfully.', 'masteriyo'),
 				isClosable: true,
 				status: 'success',
 			});

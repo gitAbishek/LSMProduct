@@ -271,44 +271,44 @@ class FaqsController extends PostsController {
 					'readonly'    => true,
 				),
 				'title'             => array(
-					'description' => __( 'Faq title.', 'masteriyo' ),
+					'description' => __( 'FAQ title.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_created'      => array(
-					'description' => __( "The date the Faq was created, in the site's timezone.", 'masteriyo' ),
+					'description' => __( "The date the FAQ was created, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_created_gmt'  => array(
-					'description' => __( 'The date the Faq was created, as GMT.', 'masteriyo' ),
+					'description' => __( 'The date the FAQ was created, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_modified'     => array(
-					'description' => __( "The date the Faq was last modified, in the site's timezone.", 'masteriyo' ),
+					'description' => __( "The date the FAQ was last modified, in the site's timezone.", 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'date_modified_gmt' => array(
-					'description' => __( 'The date the Faq was last modified, as GMT.', 'masteriyo' ),
+					'description' => __( 'The date the FAQ was last modified, as GMT.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'content'           => array(
-					'description' => __( 'Faq content.', 'masteriyo' ),
+					'description' => __( 'FAQ content.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_id'         => array(
-					'description' => __( 'Course ID.', 'masteriyo' ),
+					'description' => __( 'Course ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'sort_order'        => array(
-					'description' => __( 'Sort order, used to custom sort Faqs.', 'masteriyo' ),
+					'description' => __( 'Sort order, used to custom sort FAQs.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -444,7 +444,7 @@ class FaqsController extends PostsController {
 		if ( is_null( $course ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid course ID.', 'masteriyo' ),
+				__( 'Invalid course ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)
@@ -454,7 +454,7 @@ class FaqsController extends PostsController {
 		if ( $course->get_author_id() !== get_current_user_id() ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
-				__( 'Sorry, you are not allowed to create faq for others course.', 'masteriyo' ),
+				__( "Sorry, you are not allowed to create FAQs for other's course.", 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
 				)
@@ -490,7 +490,7 @@ class FaqsController extends PostsController {
 		if ( is_null( $faq ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)
@@ -536,7 +536,7 @@ class FaqsController extends PostsController {
 		if ( is_null( $faq ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)

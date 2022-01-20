@@ -287,27 +287,27 @@ class OrderItemsController extends PostsController {
 					'readonly'    => true,
 				),
 				'order_id'  => array(
-					'description' => __( 'Order ID.', 'masteriyo' ),
+					'description' => __( 'Order ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_id' => array(
-					'description' => __( 'Product ID.', 'masteriyo' ),
+					'description' => __( 'Product ID', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'name'      => array(
-					'description' => __( 'Order item name.', 'masteriyo' ),
+					'description' => __( 'Order item name', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'type'      => array(
-					'description' => __( 'Order item type.', 'masteriyo' ),
+					'description' => __( 'Order item type', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'quantity'  => array(
-					'description' => __( 'Quantity.', 'masteriyo' ),
+					'description' => __( 'Quantity', 'masteriyo' ),
 					'type'        => 'number',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -317,25 +317,25 @@ class OrderItemsController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'meta_data' => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
+					'description' => __( 'Meta data', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
+								'description' => __( 'Meta ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
+								'description' => __( 'Meta key', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
+								'description' => __( 'Meta value', 'masteriyo' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),
@@ -494,7 +494,7 @@ class OrderItemsController extends PostsController {
 		if ( ! is_object( $order_item ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_invalid_id',
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
 				)
@@ -700,7 +700,7 @@ class OrderItemsController extends PostsController {
 		if ( ! is_object( $order_item ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_invalid_id',
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
 				)

@@ -132,7 +132,7 @@ class Migration {
 			\WP_CLI::success(
 				sprintf(
 					// translators: Migration file name.
-					esc_html__( '%s rollback successfully.', 'masteriyo' ),
+					esc_html__( 'Successful %s rollback.', 'masteriyo' ),
 					$migration
 				)
 			);
@@ -141,7 +141,7 @@ class Migration {
 		if ( empty( $migrations ) ) {
 			\WP_CLI::success( esc_html__( 'Nothing to rollback.', 'masteriyo' ) );
 		} else {
-			\WP_CLI::success( esc_html__( 'Migrations rollback successfully.', 'masteriyo' ) );
+			\WP_CLI::success( esc_html__( 'Successful migrations rollback.', 'masteriyo' ) );
 		}
 	}
 

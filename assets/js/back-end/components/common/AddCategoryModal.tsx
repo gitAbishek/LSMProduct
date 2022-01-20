@@ -55,7 +55,7 @@ const AddCategoryModal = () => {
 			},
 			onError: (error: any) => {
 				toast({
-					title: __('Failed to create category', 'masteriyo'),
+					title: __('Failed to create category.', 'masteriyo'),
 					description: `${error.response?.data?.message}`,
 					isClosable: true,
 					status: 'error',

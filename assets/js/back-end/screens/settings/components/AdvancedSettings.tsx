@@ -323,7 +323,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Orders', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "Account - Orders" page',
+											'Endpoint for the "Account - Orders" page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -345,7 +345,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('View Order', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "Account - View order" page',
+											'Endpoint for the "Account - View order" page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -367,7 +367,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('My Courses', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "Account - My courses" page',
+											'Endpoint for the "Account - My courses" page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -389,7 +389,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Edit Account', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "Account - Edit Account" page',
+											'Endpoint for the "Account - Edit Account" page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -433,7 +433,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Lost Password', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "Account - Lost password" page',
+											'Endpoint for the "Account - Lost password" page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -455,7 +455,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Logout', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the triggering logout',
+											'Endpoint for the triggering logout.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -487,7 +487,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Pay', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "Checkout - Pay" page',
+											'Endpoint for the "Checkout - Pay" page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -509,7 +509,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Order Received', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "Checkout - Order received" page',
+											'Endpoint for the "Checkout - Order received" page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -531,7 +531,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Add Payment Method', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the "Checkout - Add payment method" page',
+											'Endpoint for the "Checkout - Add payment method" page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -553,7 +553,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Delete Payment Method', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the delete payment method page',
+											'Endpoint for the delete payment method page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -575,7 +575,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{__('Set Default Payment Method', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Endpoint for the setting a default payment method page',
+											'Endpoint for the setting a default payment method page.',
 											'masteriyo'
 										)}
 										hasArrow
@@ -601,7 +601,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								<Alert status="warning">
 									<AlertIcon />
 									{__(
-										'This section is for development and testing purpose only and not recommended to be used in a live site.',
+										"This section is for development and testing purpose only. It's not recommended to be used in a live site.",
 										'masteriyo'
 									)}
 								</Alert>

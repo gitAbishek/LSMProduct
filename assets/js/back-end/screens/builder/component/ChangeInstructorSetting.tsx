@@ -85,7 +85,7 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 					cacheOptions={true}
 					loadingMessage={() => __('Searching...', 'masteriyo')}
 					noOptionsMessage={() =>
-						__('Please enter 3 or more characters', 'masteriyo')
+						__('Please enter 3 or more characters.', 'masteriyo')
 					}
 					isClearable={true}
 					placeholder={__('Search by username or email', 'masteriyo')}

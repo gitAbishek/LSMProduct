@@ -361,12 +361,12 @@ class CheckoutController extends CrudController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'slug'                => array(
-					'description' => __( 'Lesson slug.', 'masteriyo' ),
+					'description' => __( 'Lesson slug', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'permalink'           => array(
-					'description' => __( 'Lesson URL.', 'masteriyo' ),
+					'description' => __( 'Lesson URL', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
@@ -402,25 +402,25 @@ class CheckoutController extends CrudController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'featured'            => array(
-					'description' => __( 'Featured lesson.', 'masteriyo' ),
+					'description' => __( 'Featured lesson', 'masteriyo' ),
 					'type'        => 'boolean',
 					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'catalog_visibility'  => array(
-					'description' => __( 'Catalog visibility.', 'masteriyo' ),
+					'description' => __( 'Catalog visibility', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'visible',
 					'enum'        => array( 'visible', 'catalog', 'search', 'hidden' ),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'description'         => array(
-					'description' => __( 'Lesson description.', 'masteriyo' ),
+					'description' => __( 'Lesson description', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'short_description'   => array(
-					'description' => __( 'Lesson short description.', 'masteriyo' ),
+					'description' => __( 'Lesson short description', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -437,13 +437,13 @@ class CheckoutController extends CrudController {
 					'readonly'    => true,
 				),
 				'rating_count'        => array(
-					'description' => __( 'Amount of reviews that the lesson have.', 'masteriyo' ),
+					'description' => __( 'Amount of reviews that the lesson has.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'parent_id'           => array(
-					'description' => __( 'Lesson parent ID.', 'masteriyo' ),
+					'description' => __( 'Lesson parent ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -455,18 +455,18 @@ class CheckoutController extends CrudController {
 						'type'       => 'object',
 						'properties' => array(
 							'id'   => array(
-								'description' => __( 'Category ID.', 'masteriyo' ),
+								'description' => __( 'Category ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'name' => array(
-								'description' => __( 'Category name.', 'masteriyo' ),
+								'description' => __( 'Category name', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'slug' => array(
-								'description' => __( 'Category slug.', 'masteriyo' ),
+								'description' => __( 'Category slug', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
@@ -475,25 +475,25 @@ class CheckoutController extends CrudController {
 					),
 				),
 				'tags'                => array(
-					'description' => __( 'List of tags.', 'masteriyo' ),
+					'description' => __( 'List of tags', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'   => array(
-								'description' => __( 'Tag ID.', 'masteriyo' ),
+								'description' => __( 'Tag ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'name' => array(
-								'description' => __( 'Tag name.', 'masteriyo' ),
+								'description' => __( 'Tag name', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'slug' => array(
-								'description' => __( 'Tag slug.', 'masteriyo' ),
+								'description' => __( 'Tag slug', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
@@ -507,40 +507,40 @@ class CheckoutController extends CrudController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'video_source'        => array(
-					'description' => __( 'Video source.', 'masteriyo' ),
+					'description' => __( 'Video source', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'video_source_url'    => array(
-					'description' => __( 'Video source URL.', 'masteriyo' ),
+					'description' => __( 'Video source URL', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'video_playback_time' => array(
-					'description' => __( 'Video playback time.', 'masteriyo' ),
+					'description' => __( 'Video playback time', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'meta_data'           => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
+					'description' => __( 'Meta data', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
+								'description' => __( 'Meta ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
+								'description' => __( 'Meta key', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
+								'description' => __( 'Meta value', 'masteriyo' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),

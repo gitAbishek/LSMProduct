@@ -131,7 +131,7 @@ class OrderItemCourse extends OrderItem {
 	 */
 	public function set_course_id( $course_id ) {
 		if ( $course_id > 0 && 'mto-course' !== get_post_type( absint( $course_id ) ) ) {
-			$this->error( 'order_item_course_invalid_course_id', __( 'Invalid course ID.', 'masteriyo' ) );
+			$this->error( 'order_item_course_invalid_course_id', __( 'Invalid course ID', 'masteriyo' ) );
 		}
 		$this->set_prop( 'course_id', absint( $course_id ) );
 	}

@@ -308,7 +308,7 @@ class SectionsController extends PostsController {
 					'readonly'    => true,
 				),
 				'name'              => array(
-					'description' => __( 'Section name.', 'masteriyo' ),
+					'description' => __( 'Section name', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -335,24 +335,24 @@ class SectionsController extends PostsController {
 					'readonly'    => true,
 				),
 				'description'       => array(
-					'description' => __( 'Section description.', 'masteriyo' ),
+					'description' => __( 'Section description', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'parent_id'         => array(
-					'description' => __( 'Section parent ID.', 'masteriyo' ),
+					'description' => __( 'Section parent ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_id'         => array(
-					'description' => __( 'Course ID.', 'masteriyo' ),
+					'description' => __( 'Course ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_name'       => array(
-					'description' => __( 'Course name.', 'masteriyo' ),
+					'description' => __( 'Course name', 'masteriyo' ),
 					'type'        => 'string',
 					'readonly'    => true,
 					'context'     => array( 'view', 'edit' ),
@@ -363,25 +363,25 @@ class SectionsController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'meta_data'         => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
+					'description' => __( 'Meta data', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
+								'description' => __( 'Meta ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
+								'description' => __( 'Meta key', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
+								'description' => __( 'Meta value', 'masteriyo' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),
@@ -512,7 +512,7 @@ class SectionsController extends PostsController {
 		if ( is_null( $course ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid course ID.', 'masteriyo' ),
+				__( 'Invalid course ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)
@@ -558,7 +558,7 @@ class SectionsController extends PostsController {
 		if ( is_null( $section ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)
@@ -604,7 +604,7 @@ class SectionsController extends PostsController {
 		if ( is_null( $section ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)

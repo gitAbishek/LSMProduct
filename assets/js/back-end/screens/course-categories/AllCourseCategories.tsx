@@ -66,7 +66,7 @@ const AllCourseCategories = () => {
 			onError: (error: any) => {
 				onClose();
 				toast({
-					title: __('Failed to delete category', 'masteriyo'),
+					title: __('Failed to delete category.', 'masteriyo'),
 					description: `${error.response?.data?.message}`,
 					isClosable: true,
 					status: 'error',

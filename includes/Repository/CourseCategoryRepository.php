@@ -83,13 +83,13 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	 *
 	 * @param Model $course_cat Cource object.
 	 *
-	 * @throws \Exception If invalid course_cat.
+	 * @throws \Exception If Invalid course_cat
 	 */
 	public function read( Model &$course_cat ) {
 		$term = get_term( $course_cat->get_id() );
 
 		if ( ! $course_cat->get_id() || ! $term || 'course_cat' !== $term->taxonomy ) {
-			throw new \Exception( __( 'Invalid course_cat.', 'masteriyo' ) );
+			throw new \Exception( __( 'Invalid course_cat', 'masteriyo' ) );
 		}
 
 		$course_cat->set_props(

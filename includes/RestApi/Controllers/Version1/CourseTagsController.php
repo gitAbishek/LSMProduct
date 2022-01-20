@@ -80,7 +80,7 @@ class CourseTagsController extends RestTermsController {
 					'readonly'    => true,
 				),
 				'name'        => array(
-					'description' => __( 'Tag name.', 'masteriyo' ),
+					'description' => __( 'Tag name', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'arg_options' => array(

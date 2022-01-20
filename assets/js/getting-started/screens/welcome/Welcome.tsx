@@ -33,7 +33,7 @@ const Welcome: React.FC<Props> = (props) => {
 						</Heading>
 						<Text fontSize="sm" maxW="500px" align="center">
 							{__(
-								"Thank you for choosing 'LMS for WordPress' by Masteriyo. This short setup wizard will help you setup this plugin faster.",
+								"Thank you for choosing 'LMS for WordPress' by Masteriyo. This short setup wizard will help you setup the plugin faster.",
 								'masteriyo'
 							)}
 						</Text>

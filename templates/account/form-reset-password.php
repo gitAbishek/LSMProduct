@@ -32,7 +32,7 @@ do_action( 'masteriyo_before_password_reset_form' );
 						<input id="password" class="masteriyo-input" name="password" type="password" required autocomplete="new-password" >
 					</div>
 					<div class="masteriyo-password">
-						<label for="confirm-password" class="masteriyo-label"><?php echo esc_html__( 'Re-enter new password', 'masteriyo' ); ?><span class="masteriyo-text-red">*</span></label>
+						<label for="confirm-password" class="masteriyo-label"><?php echo esc_html__( 'Re-enter new password.', 'masteriyo' ); ?><span class="masteriyo-text-red">*</span></label>
 						<input id="confirm-password" class="masteriyo-input" name="confirm-password" type="password" required autocomplete="new-password" >
 					</div>
 

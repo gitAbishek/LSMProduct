@@ -55,9 +55,9 @@ const InstructorList: React.FC<Props> = (props) => {
 		onSuccess: () => {
 			setDeleteModalOpen(false);
 			toast({
-				title: __('User deleted successfully', 'masteriyo'),
+				title: __('User deleted successfully.', 'masteriyo'),
 				description: `#${data.id} ${__(
-					' has been deleted successfully',
+					' has been deleted successfully.',
 					'masteriyo'
 				)}`,
 				isClosable: true,

@@ -126,7 +126,7 @@ class PdtHandler extends Response {
 						$order->add_meta_data( 'Payment type', masteriyo_clean( $transaction_result['payment_type'] ) );
 					}
 
-					$this->payment_complete( $order, $transaction, __( 'PDT payment completed', 'masteriyo' ) );
+					$this->payment_complete( $order, $transaction, __( 'PDT payment completed.', 'masteriyo' ) );
 				}
 			} else {
 				if ( 'authorization' === $transaction_result['pending_reason'] ) {

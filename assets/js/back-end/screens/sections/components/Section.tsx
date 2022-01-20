@@ -71,7 +71,7 @@ const Section: React.FC<Props> = (props) => {
 		onSuccess: () => {
 			onClose();
 			toast({
-				title: __('Section Deleted', 'masteriyo'),
+				title: __('Section Deleted.', 'masteriyo'),
 				isClosable: true,
 				status: 'error',
 			});
@@ -80,7 +80,7 @@ const Section: React.FC<Props> = (props) => {
 		onError: (error: any) => {
 			onClose();
 			toast({
-				title: __('Failed to delete section', 'masteriyo'),
+				title: __('Failed to delete section.', 'masteriyo'),
 				description: `${error.response?.data?.message}`,
 				isClosable: true,
 				status: 'error',

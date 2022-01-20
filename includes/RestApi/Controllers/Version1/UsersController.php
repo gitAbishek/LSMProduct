@@ -190,7 +190,7 @@ class UsersController extends PostsController {
 		);
 
 		$params['roles'] = array(
-			'description'       => __( 'Limit result set to users matching at least one specific role provided. Accepts csv list or single role.', 'masteriyo' ),
+			'description'       => __( 'Limit result set to users matching at least one specific role provided. Accepts CSV list or single role.', 'masteriyo' ),
 			'type'              => 'array',
 			'items'             => array(
 				'type' => 'string',
@@ -441,12 +441,12 @@ class UsersController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'nicename'             => array(
-					'description' => __( 'User nicename.', 'masteriyo' ),
+					'description' => __( 'User nickname', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'email'                => array(
-					'description' => __( 'User email.', 'masteriyo' ),
+					'description' => __( 'User email', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -468,32 +468,32 @@ class UsersController extends PostsController {
 					'readonly'    => true,
 				),
 				'status'               => array(
-					'description' => __( 'User status.', 'masteriyo' ),
+					'description' => __( 'User status', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'display_name'         => array(
-					'description' => __( 'Display name.', 'masteriyo' ),
+					'description' => __( 'Display name', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'nickname'             => array(
-					'description' => __( 'User nickname.', 'masteriyo' ),
+					'description' => __( 'User nickname', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'first_name'           => array(
-					'description' => __( 'User first name.', 'masteriyo' ),
+					'description' => __( 'User first name', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'last_name'            => array(
-					'description' => __( 'User last name.', 'masteriyo' ),
+					'description' => __( 'User last name', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'description'          => array(
-					'description' => __( 'User description.', 'masteriyo' ),
+					'description' => __( 'User description', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -534,12 +534,12 @@ class UsersController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'locale'               => array(
-					'description' => __( 'User specific locale.', 'masteriyo' ),
+					'description' => __( 'User specific locale', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'roles'                => array(
-					'description' => __( 'User role.', 'masteriyo' ),
+					'description' => __( 'User role', 'masteriyo' ),
 					'type'        => 'array',
 					'enum'        => masteriyo_get_wp_roles(),
 					'context'     => array( 'view', 'edit' ),
@@ -613,25 +613,25 @@ class UsersController extends PostsController {
 					),
 				),
 				'meta_data'            => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
+					'description' => __( 'Meta data', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
+								'description' => __( 'Meta ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
+								'description' => __( 'Meta key', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
+								'description' => __( 'Meta value', 'masteriyo' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),

@@ -169,7 +169,7 @@ class CourseProgressItemsController extends CrudController {
 		);
 
 		$params['user_id'] = array(
-			'description'       => __( 'User ID.', 'masteriyo' ),
+			'description'       => __( 'User ID', 'masteriyo' ),
 			'type'              => 'integer',
 			'sanitize_callback' => 'absint',
 			'validate_callback' => 'rest_validate_request_arg',
@@ -385,12 +385,12 @@ class CourseProgressItemsController extends CrudController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'user_id'      => array(
-					'description' => __( 'User ID.', 'masteriyo' ),
+					'description' => __( 'User ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'item_id'      => array(
-					'description' => __( 'Lesson/Quiz ID.', 'masteriyo' ),
+					'description' => __( 'Lesson/Quiz ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),

@@ -202,45 +202,45 @@ class SettingsController extends CrudController {
 			'type'       => 'object',
 			'properties' => array(
 				'general'        => array(
-					'description' => __( 'General Settings.', 'masteriyo' ),
+					'description' => __( 'General Settings', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'    => 'object',
-						'styling' => array(
-							'description' => __( 'Styling.', 'masteriyo' ),
+						'type'        => 'object',
+						'styling'     => array(
+							'description' => __( 'Styling', 'masteriyo' ),
 							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
 								'type'          => 'object',
 								'primary_color' => array(
-									'description' => __( 'Primary color.', 'masteriyo' ),
+									'description' => __( 'Primary color', 'masteriyo' ),
 									'type'        => 'string',
 									'format'      => 'hex-color',
 									'context'     => array( 'view', 'edit' ),
 								),
 								'theme'         => array(
-									'description' => __( 'Theme.', 'masteriyo' ),
+									'description' => __( 'Theme', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
 							),
 						),
 						'widgets_css' => array(
-							'description' => __( 'Widgets CSS.', 'masteriyo' ),
+							'description' => __( 'Widgets CSS', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
 					),
 				),
 				'course_archive' => array(
-					'description' => __( 'Courses Settings.', 'masteriyo' ),
+					'description' => __( 'Courses Settings', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'    => 'object',
 						'display' => array(
-							'description' => __( 'Styling.', 'masteriyo' ),
+							'description' => __( 'Styling', 'masteriyo' ),
 							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
@@ -277,7 +277,7 @@ class SettingsController extends CrudController {
 					'items'       => array(
 						'type'    => 'object',
 						'display' => array(
-							'description' => __( 'Single course display settings..', 'masteriyo' ),
+							'description' => __( 'Single course display settings.', 'masteriyo' ),
 							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
@@ -346,78 +346,78 @@ class SettingsController extends CrudController {
 					),
 				),
 				'payments'       => array(
-					'description' => __( 'Payments Settings.', 'masteriyo' ),
+					'description' => __( 'Payments Settings', 'masteriyo' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'     => 'object',
 						'store'    => array(
-							'description' => __( 'General Settings.', 'masteriyo' ),
+							'description' => __( 'General Settings', 'masteriyo' ),
 							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
 								'type'          => 'object',
 								'address_line1' => array(
-									'description' => __( 'Address Line 1.', 'masteriyo' ),
+									'description' => __( 'Address Line 1', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
 								'address_line2' => array(
-									'description' => __( 'Address Line 2.', 'masteriyo' ),
+									'description' => __( 'Address Line 2', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
 								'city'          => array(
-									'description' => __( 'City Name.', 'masteriyo' ),
+									'description' => __( 'City Name', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
 								'country'       => array(
-									'description' => __( 'Country Name.', 'masteriyo' ),
+									'description' => __( 'Country Name', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
 								'postcode'      => array(
-									'description' => __( 'Postal Code.', 'masteriyo' ),
+									'description' => __( 'Postal Code', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
 							),
 						),
 						'currency' => array(
-							'description' => __( 'Currency ettings.', 'masteriyo' ),
+							'description' => __( 'Currency Settings', 'masteriyo' ),
 							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
 								'type'               => 'object',
 								'currency'           => array(
-									'description' => __( 'Currency Code.', 'masteriyo' ),
+									'description' => __( 'Currency Code', 'masteriyo' ),
 									'type'        => 'string',
 									'default'     => 'USD',
 									'enum'        => masteriyo_get_currency_codes(),
 									'context'     => array( 'view', 'edit' ),
 								),
 								'currency_position'  => array(
-									'description' => __( 'Position of Currency.', 'masteriyo' ),
+									'description' => __( 'Position of Currency', 'masteriyo' ),
 									'type'        => 'string',
 									'default'     => 'left',
 									'enum'        => array( 'left', 'right', 'left_space', 'right_space' ),
 									'context'     => array( 'view', 'edit' ),
 								),
 								'thousand_separator' => array(
-									'description' => __( 'Thousand Separator.', 'masteriyo' ),
+									'description' => __( 'Thousand Separator', 'masteriyo' ),
 									'type'        => 'string',
 									'default'     => ',',
 									'context'     => array( 'view', 'edit' ),
 								),
 								'decimal_separator'  => array(
-									'description' => __( 'Decimal Separator.', 'masteriyo' ),
+									'description' => __( 'Decimal Separator', 'masteriyo' ),
 									'type'        => 'string',
 									'default'     => '.',
 									'context'     => array( 'view', 'edit' ),
 								),
 								'number_of_decimals' => array(
-									'description' => __( 'Number of Decimals.', 'masteriyo' ),
+									'description' => __( 'Number of Decimals', 'masteriyo' ),
 									'type'        => 'integer',
 									'default'     => 3,
 									'context'     => array( 'view', 'edit' ),
@@ -794,17 +794,17 @@ class SettingsController extends CrudController {
 							'items'       => array(
 								'type'             => 'object',
 								'account_page_id'  => array(
-									'description' => __( 'Account page ID.', 'masteriyo' ),
+									'description' => __( 'Account page ID', 'masteriyo' ),
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),
 								),
 								'courses_page_id'  => array(
-									'description' => __( 'Archive course page ID.', 'masteriyo' ),
+									'description' => __( 'Archive course page ID', 'masteriyo' ),
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),
 								),
 								'checkout_page_id' => array(
-									'description' => __( 'Checkout page ID.', 'masteriyo' ),
+									'description' => __( 'Checkout page ID', 'masteriyo' ),
 									'type'        => 'integer',
 									'context'     => array( 'view', 'edit' ),
 								),
@@ -812,12 +812,12 @@ class SettingsController extends CrudController {
 							),
 						),
 						'checkout'   => array(
-							'description' => __( 'Checkout endpoints.', 'masteriyo' ),
+							'description' => __( 'Checkout endpoints', 'masteriyo' ),
 							'type'        => 'object',
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
 								'pay'                   => array(
-									'description' => __( 'Pay endpoint.', 'masteriyo' ),
+									'description' => __( 'Pay endpoint', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
@@ -849,7 +849,7 @@ class SettingsController extends CrudController {
 							'context'     => array( 'view', 'edit' ),
 							'items'       => array(
 								'orders'          => array(
-									'description' => __( 'Orders endpoint.', 'masteriyo' ),
+									'description' => __( 'Orders endpoint', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
@@ -892,7 +892,7 @@ class SettingsController extends CrudController {
 							'items'       => array(
 								'type'                     => 'object',
 								'category_base'            => array(
-									'description' => __( 'Course category base.', 'masteriyo' ),
+									'description' => __( 'Course category base', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
@@ -907,7 +907,7 @@ class SettingsController extends CrudController {
 									'context'     => array( 'view', 'edit' ),
 								),
 								'single_course_permalink'  => array(
-									'description' => __( 'Single course permalink.', 'masteriyo' ),
+									'description' => __( 'Single course permalink', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
@@ -917,12 +917,12 @@ class SettingsController extends CrudController {
 									'context'     => array( 'view', 'edit' ),
 								),
 								'single_quiz_permalink'    => array(
-									'description' => __( 'Course quizzes permalink.', 'masteriyo' ),
+									'description' => __( 'Course quizzes permalink', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
 								'single_section_permalink' => array(
-									'description' => __( 'Course sections permalink.', 'masteriyo' ),
+									'description' => __( 'Course sections permalink', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),

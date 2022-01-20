@@ -238,7 +238,7 @@ class QuizesController extends PostsController {
 		if ( ! $course ) {
 			return new \WP_Error(
 				'masteriyo_rest_invalid_course',
-				__( 'Invalid Course ID.', 'masteriyo' ),
+				__( 'Invalid course ID', 'masteriyo' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}
@@ -632,7 +632,7 @@ class QuizesController extends PostsController {
 			if ( ! $object || 0 === $object->get_id() ) {
 				return new \WP_Error(
 					"masteriyo_rest_{$this->post_type}_invalid_id",
-					__( 'Invalid ID.', 'masteriyo' ),
+					__( 'Invalid ID', 'masteriyo' ),
 					array( 'status' => 404 )
 				);
 			}
@@ -734,7 +734,7 @@ class QuizesController extends PostsController {
 		if ( ! masteriyo_can_start_course( $course ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_course_empty_id',
-				__( 'There is something went wrong with course, please check if quiz attached with a course', 'masteriyo' ),
+				__( 'Something went wrong with the course. Please check if a quiz attached with the course.', 'masteriyo' ),
 				array( 'status' => 404 )
 			);
 		}
@@ -977,29 +977,29 @@ class QuizesController extends PostsController {
 					'readonly'    => true,
 				),
 				'name'                       => array(
-					'description' => __( 'Quiz name.', 'masteriyo' ),
+					'description' => __( 'Quiz name', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'slug'                       => array(
-					'description' => __( 'Quiz slug.', 'masteriyo' ),
+					'description' => __( 'Quiz slug', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'parent_id'                  => array(
-					'description' => __( 'Quiz parent ID.', 'masteriyo' ),
+					'description' => __( 'Quiz parent ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_id'                  => array(
-					'description' => __( 'Course ID.', 'masteriyo' ),
+					'description' => __( 'Course ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_name'                => array(
-					'description' => __( 'Course name.', 'masteriyo' ),
+					'description' => __( 'Course name', 'masteriyo' ),
 					'type'        => 'string',
 					'readonly'    => true,
 					'context'     => array( 'view', 'edit' ),
@@ -1010,7 +1010,7 @@ class QuizesController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'permalink'                  => array(
-					'description' => __( 'Quiz URL.', 'masteriyo' ),
+					'description' => __( 'Quiz URL', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
@@ -1046,29 +1046,29 @@ class QuizesController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'description'                => array(
-					'description' => __( 'Quiz description.', 'masteriyo' ),
+					'description' => __( 'Quiz description', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'short_description'          => array(
-					'description' => __( 'Quiz short description.', 'masteriyo' ),
+					'description' => __( 'Quiz short description', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'pass_mark'                  => array(
-					'description' => __( 'Quiz pass points.', 'masteriyo' ),
+					'description' => __( 'Quiz pass points', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => false,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'full_mark'                  => array(
-					'description' => __( 'Quiz total points..', 'masteriyo' ),
+					'description' => __( 'Quiz total points', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => false,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'duration'                   => array(
-					'description' => __( 'Quiz duration (seconds).', 'masteriyo' ),
+					'description' => __( 'Quiz duration (seconds)', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => false,
 					'context'     => array( 'view', 'edit' ),
@@ -1086,25 +1086,25 @@ class QuizesController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'meta_data'                  => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
+					'description' => __( 'Meta data', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
+								'description' => __( 'Meta ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
+								'description' => __( 'Meta key', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
+								'description' => __( 'Meta value', 'masteriyo' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),
@@ -1269,7 +1269,7 @@ class QuizesController extends PostsController {
 		if ( is_null( $course ) || 'mto-course' !== $course->post_type ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)

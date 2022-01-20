@@ -41,7 +41,7 @@ function masteriyo_get_user_course( $user_course_id ) {
 function masteriyo_get_user_course_statuses() {
 	$statuses = array(
 		'active' => array(
-			'label' => _x( 'Active.', 'User Course status', 'masteriyo' ),
+			'label' => _x( 'Active', 'User Course status', 'masteriyo' ),
 		),
 	);
 

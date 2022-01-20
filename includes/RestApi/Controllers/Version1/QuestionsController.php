@@ -163,7 +163,7 @@ class QuestionsController extends PostsController {
 					'permission_callback' => array( $this, 'check_answer_permissions_check' ),
 					'args'                => array(
 						'id'            => array(
-							'description'       => __( 'Question ID.', 'masteriyo' ),
+							'description'       => __( 'Question ID', 'masteriyo' ),
 							'type'              => 'integer',
 							'required'          => true,
 							'sanitize_callback' => 'absint',
@@ -219,7 +219,7 @@ class QuestionsController extends PostsController {
 		$object = $this->get_object( (int) $request['id'] );
 
 		if ( ! $object || 0 === $object->get_id() ) {
-			return new \WP_Error( "masteriyo_rest_{$this->post_type}_invalid_id", __( 'Invalid ID.', 'masteriyo' ), array( 'status' => 404 ) );
+			return new \WP_Error( "masteriyo_rest_{$this->post_type}_invalid_id", __( 'Invalid ID', 'masteriyo' ), array( 'status' => 404 ) );
 		}
 
 		$chosen_answer        = isset( $request['chosen_answer'] ) ? $request['chosen_answer'] : null;
@@ -485,17 +485,17 @@ class QuestionsController extends PostsController {
 					'readonly'    => true,
 				),
 				'name'              => array(
-					'description' => __( 'Question name.', 'masteriyo' ),
+					'description' => __( 'Question name', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'slug'              => array(
-					'description' => __( 'Question slug.', 'masteriyo' ),
+					'description' => __( 'Question slug', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'permalink'         => array(
-					'description' => __( 'Question URL.', 'masteriyo' ),
+					'description' => __( 'Question URL', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
@@ -537,7 +537,7 @@ class QuestionsController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_id'         => array(
-					'description' => __( 'Course ID.', 'masteriyo' ),
+					'description' => __( 'Course ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
@@ -584,25 +584,25 @@ class QuestionsController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'meta_data'         => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
+					'description' => __( 'Meta data', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
+								'description' => __( 'Meta ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
+								'description' => __( 'Meta key', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
+								'description' => __( 'Meta value', 'masteriyo' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),
@@ -803,7 +803,7 @@ class QuestionsController extends PostsController {
 		if ( is_null( $course ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid course ID.', 'masteriyo' ),
+				__( 'Invalid course ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)
@@ -849,7 +849,7 @@ class QuestionsController extends PostsController {
 		if ( is_null( $question ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)
@@ -895,7 +895,7 @@ class QuestionsController extends PostsController {
 		if ( is_null( $question ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)

@@ -364,7 +364,7 @@ class OrdersController extends PostsController {
 					'readonly'    => true,
 				),
 				'permalink'            => array(
-					'description' => __( 'Order URL.', 'masteriyo' ),
+					'description' => __( 'Order URL', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
@@ -395,7 +395,7 @@ class OrdersController extends PostsController {
 					'readonly'    => true,
 				),
 				'status'               => array(
-					'description' => __( 'Order status.', 'masteriyo' ),
+					'description' => __( 'Order status', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'pending',
 					'enum'        => array_keys( masteriyo_get_order_statuses() ),
@@ -408,7 +408,7 @@ class OrdersController extends PostsController {
 					'readonly'    => true,
 				),
 				'currency'             => array(
-					'description' => __( 'Currency.', 'masteriyo' ),
+					'description' => __( 'Currency', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'enum'        => masteriyo_get_currency_codes(),
@@ -420,7 +420,7 @@ class OrdersController extends PostsController {
 					'readonly'    => true,
 				),
 				'customer_id'          => array(
-					'description' => __( 'Customer ID.', 'masteriyo' ),
+					'description' => __( 'Customer ID', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -437,7 +437,7 @@ class OrdersController extends PostsController {
 					'enum'        => array( 'Paypal' ),
 				),
 				'transaction_id'       => array(
-					'description' => __( 'Transaction ID.', 'masteriyo' ),
+					'description' => __( 'Transaction ID', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -460,13 +460,13 @@ class OrdersController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'customer_ip_address'  => array(
-					'description' => __( 'Customer IP address.', 'masteriyo' ),
+					'description' => __( 'Customer IP address', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'customer_user_agent'  => array(
-					'description' => __( 'Customer user agent.', 'masteriyo' ),
+					'description' => __( 'Customer user agent', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
@@ -478,7 +478,7 @@ class OrdersController extends PostsController {
 					'readonly'    => true,
 				),
 				'order_key'            => array(
-					'description' => __( 'Order key.', 'masteriyo' ),
+					'description' => __( 'Order key', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
@@ -569,13 +569,13 @@ class OrdersController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_lines'         => array(
-					'description' => __( 'Course items data.', 'masteriyo' ),
+					'description' => __( 'Course items data', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'      => 'object',
 						'id'        => array(
-							'description' => __( 'Item ID.', 'masteriyo' ),
+							'description' => __( 'Item ID', 'masteriyo' ),
 							'type'        => 'integer',
 							'context'     => array( 'view', 'edit' ),
 						),
@@ -586,7 +586,7 @@ class OrdersController extends PostsController {
 							'context'     => array( 'view', 'edit' ),
 						),
 						'name'      => array(
-							'description' => __( 'Course name.', 'masteriyo' ),
+							'description' => __( 'Course name', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
@@ -608,7 +608,7 @@ class OrdersController extends PostsController {
 							'context'     => array( 'view', 'edit' ),
 						),
 						'price'     => array(
-							'description' => __( 'Course price.', 'masteriyo' ),
+							'description' => __( 'Course price', 'masteriyo' ),
 							'type'        => 'number',
 							'readonly'    => true,
 							'context'     => array( 'view', 'edit' ),
@@ -616,25 +616,25 @@ class OrdersController extends PostsController {
 					),
 				),
 				'meta_data'            => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
+					'description' => __( 'Meta data', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
+								'description' => __( 'Meta ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
+								'description' => __( 'Meta key', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
+								'description' => __( 'Meta value', 'masteriyo' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),
@@ -808,7 +808,7 @@ class OrdersController extends PostsController {
 		if ( is_null( $order ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)

@@ -121,7 +121,7 @@ const InteractiveQuiz = () => {
 					queryClient.invalidateQueries(`courseProgress${courseId}`);
 
 					toast({
-						title: __('Mark as completed', 'masteriyo'),
+						title: __('Mark as Completed', 'masteriyo'),
 						description: __('Quiz has been marked as completed.', 'masteriyo'),
 						isClosable: true,
 						status: 'success',

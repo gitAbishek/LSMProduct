@@ -21,7 +21,7 @@ do_action( 'masteriyo_before_single_course_review_form' );
 ?>
 <?php if ( is_user_logged_in() ) : ?>
 	<div class="masteriyo-submit-container">
-		<h3 class="masteriyo--title"><?php esc_html_e( 'Create a new review', 'masteriyo' ); ?></h3>
+		<h3 class="masteriyo--title"><?php esc_html_e( 'Create a new review.', 'masteriyo' ); ?></h3>
 		<form method="POST" class="masteriyo-submit-review-form">
 			<input type="hidden" name="id" value="">
 			<input type="hidden" name="course_id" value="<?php echo esc_attr( $course->get_id() ); ?>">

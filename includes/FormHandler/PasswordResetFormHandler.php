@@ -89,7 +89,7 @@ class PasswordResetFormHandler {
 			throw new \Exception( __( 'Password is required.', 'masteriyo' ) );
 		}
 		if ( empty( $data['confirm-password'] ) ) {
-			throw new \Exception( __( 'Confirm password is required..', 'masteriyo' ) );
+			throw new \Exception( __( 'Confirm password is required...', 'masteriyo' ) );
 		}
 		if ( $data['password'] !== $data['confirm-password'] ) {
 			throw new \Exception( __( 'The passwords doesn\'t match', 'masteriyo' ) );

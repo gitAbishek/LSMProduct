@@ -324,7 +324,7 @@ const Header: React.FC<Props> = (props) => {
 							<Stack direction="row">
 								<AlertIcon />
 								<AlertTitle mr={2}>
-									{__('Congratulation!', 'masteriyo')}
+									{__('Congratulations!', 'masteriyo')}
 								</AlertTitle>
 								<AlertDescription>
 									{__(

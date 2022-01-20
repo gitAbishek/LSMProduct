@@ -53,7 +53,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 									{__('Primary Color', 'masteriyo')}
 									<Tooltip
 										label={__(
-											'Choose a color to match your brand or site. This color reflects on buttons, links and few other elements.',
+											'Choose a color to match your brand or site. This color reflects on buttons, links, and few other elements.',
 											'masteriyo'
 										)}
 										hasArrow

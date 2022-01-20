@@ -477,24 +477,24 @@ class CoursesController extends PostsController {
 					'readonly'    => true,
 				),
 				'name'               => array(
-					'description' => __( 'Course name.', 'masteriyo' ),
+					'description' => __( 'Course name', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'slug'               => array(
-					'description' => __( 'Course slug.', 'masteriyo' ),
+					'description' => __( 'Course slug', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'permalink'          => array(
-					'description' => __( 'Course URL.', 'masteriyo' ),
+					'description' => __( 'Course URL', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'preview_permalink'  => array(
-					'description' => __( 'Course Preview URL.', 'masteriyo' ),
+					'description' => __( 'Course Preview URL', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
@@ -536,7 +536,7 @@ class CoursesController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'catalog_visibility' => array(
-					'description' => __( 'Catalog visibility.', 'masteriyo' ),
+					'description' => __( 'Catalog visibility', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'visible',
 					'enum'        => array( 'visible', 'catalog', 'search', 'hidden' ),
@@ -612,18 +612,18 @@ class CoursesController extends PostsController {
 						'type'       => 'object',
 						'properties' => array(
 							'id'   => array(
-								'description' => __( 'Category ID.', 'masteriyo' ),
+								'description' => __( 'Category ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'name' => array(
-								'description' => __( 'Category name.', 'masteriyo' ),
+								'description' => __( 'Category name', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'slug' => array(
-								'description' => __( 'Category slug.', 'masteriyo' ),
+								'description' => __( 'Category slug', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
@@ -632,25 +632,25 @@ class CoursesController extends PostsController {
 					),
 				),
 				'tags'               => array(
-					'description' => __( 'List of tags.', 'masteriyo' ),
+					'description' => __( 'List of tags', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'   => array(
-								'description' => __( 'Tag ID.', 'masteriyo' ),
+								'description' => __( 'Tag ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'name' => array(
-								'description' => __( 'Tag name.', 'masteriyo' ),
+								'description' => __( 'Tag name', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'slug' => array(
-								'description' => __( 'Tag slug.', 'masteriyo' ),
+								'description' => __( 'Tag slug', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
@@ -732,25 +732,25 @@ class CoursesController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'meta_data'          => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
+					'description' => __( 'Meta data', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
+								'description' => __( 'Meta ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
+								'description' => __( 'Meta key', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
+								'description' => __( 'Meta value', 'masteriyo' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),

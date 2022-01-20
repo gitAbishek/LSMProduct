@@ -225,7 +225,7 @@ class IpnHandler extends Response {
 				$order->add_meta_data( 'PayPal Transaction Fee', masteriyo_clean( $posted['mc_fee'] ) );
 			}
 
-			$this->payment_complete( $order, ( ! empty( $posted['txn_id'] ) ? masteriyo_clean( $posted['txn_id'] ) : '' ), __( 'IPN payment completed', 'masteriyo' ) );
+			$this->payment_complete( $order, ( ! empty( $posted['txn_id'] ) ? masteriyo_clean( $posted['txn_id'] ) : '' ), __( 'IPN payment completed.', 'masteriyo' ) );
 		} else {
 			if ( 'authorization' === $posted['pending_reason'] ) {
 				$this->payment_on_hold( $order, __( 'Payment authorized. Change payment status to processing or complete to capture funds.', 'masteriyo' ) );
@@ -308,7 +308,7 @@ class IpnHandler extends Response {
 	protected function payment_status_paid_cancelled_order( $order, $posted ) {
 		$this->send_ipn_email_notification(
 		/* translators: %s: order link. */
-			sprintf( __( 'Payment for cancelled order %s received', 'masteriyo' ), '<a class="link" href="' . esc_url( $order->get_edit_order_url() ) . '">' . $order->get_order_number() . '</a>' ),
+			sprintf( __( 'Payment for cancelled order %s received.', 'masteriyo' ), '<a class="link" href="' . esc_url( $order->get_edit_order_url() ) . '">' . $order->get_order_number() . '</a>' ),
 			/* translators: %s: order ID. */
 			sprintf( __( 'Order #%s has been marked paid by PayPal IPN, but was previously cancelled. Admin handling required.', 'masteriyo' ), $order->get_order_number() )
 		);
@@ -331,7 +331,7 @@ class IpnHandler extends Response {
 
 			$this->send_ipn_email_notification(
 			/* translators: %s: order link. */
-				sprintf( __( 'Payment for order %s refunded', 'masteriyo' ), '<a class="link" href="' . esc_url( $order->get_edit_order_url() ) . '">' . $order->get_order_number() . '</a>' ),
+				sprintf( __( 'Payment for order %s refunded.', 'masteriyo' ), '<a class="link" href="' . esc_url( $order->get_edit_order_url() ) . '">' . $order->get_order_number() . '</a>' ),
 				/* translators: %1$s: order ID, %2$s: reason code. */
 				sprintf( __( 'Order #%1$s has been marked as refunded - PayPal reason code: %2$s', 'masteriyo' ), $order->get_order_number(), $posted['reason_code'] )
 			);
@@ -352,7 +352,7 @@ class IpnHandler extends Response {
 
 		$this->send_ipn_email_notification(
 		/* translators: %s: order link. */
-			sprintf( __( 'Payment for order %s reversed', 'masteriyo' ), '<a class="link" href="' . esc_url( $order->get_edit_order_url() ) . '">' . $order->get_order_number() . '</a>' ),
+			sprintf( __( 'Payment for order %s reversed.', 'masteriyo' ), '<a class="link" href="' . esc_url( $order->get_edit_order_url() ) . '">' . $order->get_order_number() . '</a>' ),
 			/* translators: %1$s: order ID, %2$s: reason code. */
 			sprintf( __( 'Order #%1$s has been marked on-hold due to a reversal - PayPal reason code: %2$s', 'masteriyo' ), $order->get_order_number(), masteriyo_clean( $posted['reason_code'] ) )
 		);
@@ -369,7 +369,7 @@ class IpnHandler extends Response {
 	protected function payment_status_canceled_reversal( $order, $posted ) {
 		$this->send_ipn_email_notification(
 			/* translators: %s: order link. */
-			sprintf( __( 'Reversal cancelled for order #%s', 'masteriyo' ), $order->get_order_number() ),
+			sprintf( __( 'Reversal cancelled for order #%s.', 'masteriyo' ), $order->get_order_number() ),
 			sprintf(
 				/* translators: %1$s: order ID, %2$s: order link. */
 				__( 'Order #%1$s has had a reversal cancelled. Please check the status of payment and update the order status accordingly here: %2$s', 'masteriyo' ),

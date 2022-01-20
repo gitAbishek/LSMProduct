@@ -70,7 +70,7 @@ const Content: React.FC<Props> = (props) => {
 		onSuccess: () => {
 			onClose();
 			toast({
-				title: __('Lesson Deleted', 'masteriyo'),
+				title: __('Lesson Deleted.', 'masteriyo'),
 				isClosable: true,
 				status: 'error',
 			});
@@ -82,7 +82,7 @@ const Content: React.FC<Props> = (props) => {
 		onSuccess: () => {
 			onClose();
 			toast({
-				title: __('Quiz Deleted', 'masteriyo'),
+				title: __('Quiz Deleted.', 'masteriyo'),
 				isClosable: true,
 				status: 'error',
 			});

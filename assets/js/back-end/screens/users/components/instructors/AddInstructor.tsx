@@ -53,7 +53,7 @@ const AddInstructor: React.FC = () => {
 		onSuccess: () => {
 			queryClient.invalidateQueries('instructorsList');
 			toast({
-				title: __('New instructor added successfully', 'masteriyo'),
+				title: __('New instructor added successfully.', 'masteriyo'),
 				isClosable: true,
 				status: 'success',
 			});

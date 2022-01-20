@@ -150,7 +150,7 @@ class RegistrationFormHandler {
 			}
 
 			if ( $data['password'] !== $data['confirm-password'] ) {
-				$error->add( 'passwords_do_not_match', __( "The passwords doesn't match.", 'masteriyo' ) );
+				$error->add( 'passwords_do_not_match', __( 'The passwords do not match.', 'masteriyo' ) );
 			}
 		}
 

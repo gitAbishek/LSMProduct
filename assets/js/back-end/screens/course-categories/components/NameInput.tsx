@@ -25,7 +25,10 @@ const NameInput: React.FC<Props> = (props) => {
 				defaultValue={defaultValue}
 				placeholder={__('Your Category Name', 'masteriyo')}
 				{...register('name', {
-					required: __('You must provide name for the category.', 'masteriyo'),
+					required: __(
+						'You must provide a name for the category.',
+						'masteriyo'
+					),
 				})}
 			/>
 			<FormErrorMessage>

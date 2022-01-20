@@ -70,7 +70,7 @@ const AddNewLesson: React.FC = () => {
 		addLesson.mutate(deepMerge(deepClean(data), newData), {
 			onSuccess: (data: LessonSchema) => {
 				toast({
-					title: data.name + __(' has been added', 'masteriyo'),
+					title: data.name + __(' has been added.', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
 				});

@@ -450,7 +450,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 													<Tooltip
 														textAlign="center"
 														label={__(
-															'Send notifications when an IPN is received from PayPal indicating refunds, charge-backs and cancellations.',
+															'Send notifications when an IPN is received from PayPal indicating refunds, charge-backs, and cancellations.',
 															'masteriyo'
 														)}
 														hasArrow
@@ -503,7 +503,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														'If your main PayPal email differs from the PayPal email entered above, input your main receiver email for your PayPal account here. This is used to validate IPN requests.If your main PayPal email differs from the PayPal email entered above, input your main receiver email for your PayPal account here. This is used to validate IPN requests.',
+														'If your main PayPal email differs from the PayPal email entered above, input your main receiver email for your PayPal account here. This is used to validate IPN requests. If your main PayPal email differs from the PayPal email entered above, input your main receiver email for your PayPal account here. This is used to validate IPN requests.',
 														'masteriyo'
 													)}
 													hasArrow
@@ -597,7 +597,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 
 										<FormControl>
 											<FormLabel minW="160px">
-												{__('Image Url', 'masteriyo')}
+												{__('Image URL', 'masteriyo')}
 												<Tooltip
 													textAlign="center"
 													label={__(
@@ -626,9 +626,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 													<Tooltip
 														textAlign="center"
 														label={__(
-															`Note: this may log personal information. We
-																recommend using this for debugging purposes only
-																and deleting the logs when finished.`,
+															'Note: This may log personal information. We recommend using this for debugging purposes only and deleting the logs when finished.',
 															'masteriyo'
 														)}
 														hasArrow

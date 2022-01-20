@@ -84,7 +84,7 @@ const Builder: React.FC = () => {
 		{
 			onSuccess: (data: CourseDataMap) => {
 				toast({
-					title: __('Course Updated.', 'masteriyo'),
+					title: __('Course Updated', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
 				});
@@ -98,7 +98,7 @@ const Builder: React.FC = () => {
 		{
 			onSuccess: (data: CourseDataMap) => {
 				toast({
-					title: data.name + __(' drafted.', 'masteriyo'),
+					title: data.name + __(' drafted', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
 				});

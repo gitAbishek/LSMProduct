@@ -317,7 +317,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 																	isChecked={
 																		accessModeType === 'need_registration'
 																	}>
-																	{__('Need registration', 'masteriyo')}
+																	{__('Needs registration', 'masteriyo')}
 																</Radio>
 															</Stack>
 														</RadioGroup>

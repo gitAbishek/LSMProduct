@@ -164,7 +164,7 @@ class QuizBuilderController extends PostsController {
 			'type'       => 'object',
 			'properties' => array(
 				'contents' => array(
-					'description' => __( 'Quiz contents(question)', 'masteriyo' ),
+					'description' => __( 'Quiz contents (question)', 'masteriyo' ),
 					'type'        => 'array',
 					'required'    => false,
 					'context'     => array( 'view', 'edit' ),
@@ -172,18 +172,18 @@ class QuizBuilderController extends PostsController {
 						'type'       => 'object',
 						'properties' => array(
 							'id'         => array(
-								'description' => __( 'Question ID.', 'masteriyo' ),
+								'description' => __( 'Question ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'name'       => array(
-								'description' => __( 'Question name.', 'masteriyo' ),
+								'description' => __( 'Question name', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'permalink'  => array(
-								'description' => __( 'Question permalink.', 'masteriyo' ),
+								'description' => __( 'Question permalink', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
@@ -193,12 +193,12 @@ class QuizBuilderController extends PostsController {
 								'context'     => array( 'view', 'edit' ),
 							),
 							'menu_order' => array(
-								'description' => __( 'Question menu order.', 'masteriyo' ),
+								'description' => __( 'Question menu order', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'parent_id'  => array(
-								'description' => __( 'Quiz parent id.', 'masteriyo' ),
+								'description' => __( 'Quiz parent ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
@@ -225,7 +225,7 @@ class QuizBuilderController extends PostsController {
 		if ( is_null( $quiz ) || $this->post_type !== $quiz->post_type ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array( 'status' => 400 )
 			);
 		}
@@ -422,7 +422,7 @@ class QuizBuilderController extends PostsController {
 		if ( is_null( $quiz ) || $this->post_type !== $quiz->post_type ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array( 'status' => 400 )
 			);
 		}

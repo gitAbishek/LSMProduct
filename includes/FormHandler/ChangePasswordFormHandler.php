@@ -91,7 +91,7 @@ class ChangePasswordFormHandler {
 			throw new \Exception( __( 'Please enter a new password.', 'masteriyo' ) );
 		}
 		if ( empty( $data['password_2'] ) ) {
-			throw new \Exception( __( 'Please re-enter your new password', 'masteriyo' ) );
+			throw new \Exception( __( 'Please re-enter your new password.', 'masteriyo' ) );
 		}
 		if ( $data['password_1'] !== $data['password_2'] ) {
 			throw new \Exception( __( 'Please re-enter your new password.', 'masteriyo' ) );

@@ -189,7 +189,7 @@ const AddNewQuiz: React.FC = () => {
 															</AlertTitle>
 															<AlertDescription>
 																{__(
-																	'In order to add questions. You need to add quiz first.',
+																	'In order to add questions, you need to add a quiz first.',
 																	'masteriyo'
 																)}
 															</AlertDescription>

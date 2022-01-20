@@ -67,9 +67,9 @@ const EditInstructor: React.FC = () => {
 		{
 			onSuccess: (data: any) => {
 				toast({
-					title: __('User updated successfully', 'masteriyo'),
+					title: __('User updated successfully.', 'masteriyo'),
 					description: `#${data.id} ${__(
-						' has been updated successfully',
+						' has been updated successfully.',
 						'masteriyo'
 					)}`,
 					isClosable: true,

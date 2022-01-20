@@ -73,7 +73,7 @@ const EditCourseCategory = () => {
 			},
 			onError: (error: any) => {
 				toast({
-					title: __('Failed to update category', 'masteriyo'),
+					title: __('Failed to update category.', 'masteriyo'),
 					description: `${error.response?.data?.message}`,
 					isClosable: true,
 					status: 'error',
@@ -96,7 +96,7 @@ const EditCourseCategory = () => {
 			},
 			onError: (error: any) => {
 				toast({
-					title: __('Failed to delete category', 'masteriyo'),
+					title: __('Failed to delete category.', 'masteriyo'),
 					description: `${error.response?.data?.message}`,
 					isClosable: true,
 					status: 'error',

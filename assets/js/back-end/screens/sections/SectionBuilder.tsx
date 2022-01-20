@@ -99,7 +99,7 @@ const SectionBuilder: React.FC<Props> = (props) => {
 											<Stack direction="column" spacing="6">
 												<Text color="gray.500" fontSize="xs">
 													{__(
-														'Add new section to add your content',
+														'Add new section to add your content.',
 														'masteriyo'
 													)}
 												</Text>

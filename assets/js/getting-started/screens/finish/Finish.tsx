@@ -56,7 +56,7 @@ const Welcome: React.FC<Props> = (props) => {
 						</CircleBox>
 
 						<Heading as="h2" fontSize="24px">
-							{__(`Congratulation, you're all set!`, 'masteriyo')}
+							{__("Congratulations, you're all set!", 'masteriyo')}
 						</Heading>
 
 						<Link

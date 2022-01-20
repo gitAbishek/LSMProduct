@@ -328,7 +328,7 @@ class CourseQuestionAnswersController extends CommentsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'ip_address'      => array(
-					'description' => __( 'The IP address of the question answerer', 'masteriyo' ),
+					'description' => __( 'The IP address of the question answerer.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -607,7 +607,7 @@ class CourseQuestionAnswersController extends CommentsController {
 		if ( ! is_object( $question_answer ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_invalid_id',
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
 				)
@@ -658,7 +658,7 @@ class CourseQuestionAnswersController extends CommentsController {
 		if ( ! is_object( $question_answer ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_invalid_id',
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
 				)

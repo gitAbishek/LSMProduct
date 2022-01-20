@@ -247,7 +247,7 @@ class CourseBuilderController extends PostsController {
 		if ( is_null( $course ) || $this->post_type !== $course->post_type ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array( 'status' => 400 )
 			);
 		}
@@ -528,7 +528,7 @@ class CourseBuilderController extends PostsController {
 		if ( is_null( $course ) || $this->post_type !== $course->post_type ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array( 'status' => 400 )
 			);
 		}

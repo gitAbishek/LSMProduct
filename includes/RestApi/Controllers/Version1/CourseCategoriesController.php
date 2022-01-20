@@ -74,7 +74,7 @@ class CourseCategoriesController extends RestTermsController {
 					'readonly'    => true,
 				),
 				'name'        => array(
-					'description' => __( 'Category name.', 'masteriyo' ),
+					'description' => __( 'Category name', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'arg_options' => array(

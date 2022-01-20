@@ -89,7 +89,7 @@ const QuestionList: React.FC = () => {
 		{
 			onSuccess: () => {
 				toast({
-					title: __('Your question has been asked', 'masteriyo'),
+					title: __('Your question has been asked.', 'masteriyo'),
 					description: __(
 						'You will get your answer as soon as possible.',
 						'masteriyo'

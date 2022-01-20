@@ -111,13 +111,13 @@ class QuizAttemptsController extends CrudController {
 	public function get_collection_params() {
 		$params = array(
 			'quiz_id'  => array(
-				'description'       => __( 'Quiz ID.', 'masteriyo' ),
+				'description'       => __( 'Quiz ID', 'masteriyo' ),
 				'type'              => 'integer',
 				'sanitize_callback' => 'absint',
 				'validate_callback' => 'rest_validate_request_arg',
 			),
 			'user_id'  => array(
-				'description'       => __( 'User ID.', 'masteriyo' ),
+				'description'       => __( 'User ID', 'masteriyo' ),
 				'type'              => 'integer',
 				'sanitize_callback' => 'absint',
 				'validate_callback' => 'rest_validate_request_arg',

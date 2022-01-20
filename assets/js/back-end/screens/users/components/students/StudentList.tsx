@@ -53,7 +53,7 @@ const StudentList: React.FC<Props> = (props) => {
 			toast({
 				title: __('User deleted', 'masteriyo'),
 				description: `#${data.id} ${__(
-					' has been deleted successfully',
+					' has been deleted successfully.',
 					'masteriyo'
 				)}`,
 				isClosable: true,

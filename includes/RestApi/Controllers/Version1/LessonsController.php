@@ -330,17 +330,17 @@ class LessonsController extends PostsController {
 					'readonly'    => true,
 				),
 				'name'                => array(
-					'description' => __( 'Lesson name.', 'masteriyo' ),
+					'description' => __( 'Lesson name', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'slug'                => array(
-					'description' => __( 'Lesson slug.', 'masteriyo' ),
+					'description' => __( 'Lesson slug', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'permalink'           => array(
-					'description' => __( 'Lesson URL.', 'masteriyo' ),
+					'description' => __( 'Lesson URL', 'masteriyo' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
@@ -376,19 +376,19 @@ class LessonsController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'catalog_visibility'  => array(
-					'description' => __( 'Catalog visibility.', 'masteriyo' ),
+					'description' => __( 'Catalog visibility', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => 'visible',
 					'enum'        => array( 'visible', 'catalog', 'search', 'hidden' ),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'description'         => array(
-					'description' => __( 'Lesson description.', 'masteriyo' ),
+					'description' => __( 'Lesson description', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'short_description'   => array(
-					'description' => __( 'Lesson short description.', 'masteriyo' ),
+					'description' => __( 'Lesson short description', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
@@ -405,25 +405,25 @@ class LessonsController extends PostsController {
 					'readonly'    => true,
 				),
 				'rating_count'        => array(
-					'description' => __( 'Amount of reviews that the lesson have.', 'masteriyo' ),
+					'description' => __( 'Amount of reviews that the lesson has.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'parent_id'           => array(
-					'description' => __( 'Lesson parent ID.', 'masteriyo' ),
+					'description' => __( 'Lesson parent ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_id'           => array(
-					'description' => __( 'Course ID.', 'masteriyo' ),
+					'description' => __( 'Course ID', 'masteriyo' ),
 					'type'        => 'integer',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'course_name'         => array(
-					'description' => __( 'Course name.', 'masteriyo' ),
+					'description' => __( 'Course name', 'masteriyo' ),
 					'type'        => 'string',
 					'readonly'    => true,
 					'context'     => array( 'view', 'edit' ),
@@ -439,43 +439,43 @@ class LessonsController extends PostsController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'video_source'        => array(
-					'description' => __( 'Video source.', 'masteriyo' ),
+					'description' => __( 'Video source', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'default'     => 'self-hosted',
 					'enum'        => array_keys( masteriyo_get_lesson_video_sources() ),
 				),
 				'video_source_url'    => array(
-					'description' => __( 'Video source URL.', 'masteriyo' ),
+					'description' => __( 'Video source URL', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'video_playback_time' => array(
-					'description' => __( 'Video playback time.', 'masteriyo' ),
+					'description' => __( 'Video playback time', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'attachments'         => array(
-					'description' => __( 'Attachments.', 'masteriyo' ),
+					'description' => __( 'Attachments', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'  => array(
-								'description' => __( 'Attachment ID.', 'masteriyo' ),
+								'description' => __( 'Attachment ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'default'     => 0,
 								'context'     => array( 'view', 'edit' ),
 							),
 							'url' => array(
-								'description' => __( 'Attachment title.', 'masteriyo' ),
+								'description' => __( 'Attachment title', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'url' => array(
-								'description' => __( 'Attachment URL.', 'masteriyo' ),
+								'description' => __( 'Attachment URL', 'masteriyo' ),
 								'type'        => 'string',
 								'format'      => 'uri',
 								'context'     => array( 'view', 'edit' ),
@@ -485,25 +485,25 @@ class LessonsController extends PostsController {
 					),
 				),
 				'meta_data'           => array(
-					'description' => __( 'Meta data.', 'masteriyo' ),
+					'description' => __( 'Meta data', 'masteriyo' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
 							'id'    => array(
-								'description' => __( 'Meta ID.', 'masteriyo' ),
+								'description' => __( 'Meta ID', 'masteriyo' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
 							'key'   => array(
-								'description' => __( 'Meta key.', 'masteriyo' ),
+								'description' => __( 'Meta key', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
 							'value' => array(
-								'description' => __( 'Meta value.', 'masteriyo' ),
+								'description' => __( 'Meta value', 'masteriyo' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),
@@ -693,7 +693,7 @@ class LessonsController extends PostsController {
 		if ( is_null( $course ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid course ID.', 'masteriyo' ),
+				__( 'Invalid course ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)
@@ -739,7 +739,7 @@ class LessonsController extends PostsController {
 		if ( is_null( $lesson ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)
@@ -785,7 +785,7 @@ class LessonsController extends PostsController {
 		if ( is_null( $lesson ) ) {
 			return new \WP_Error(
 				"masteriyo_rest_{$this->post_type}_invalid_id",
-				__( 'Invalid ID.', 'masteriyo' ),
+				__( 'Invalid ID', 'masteriyo' ),
 				array(
 					'status' => 404,
 				)

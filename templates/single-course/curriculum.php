@@ -75,8 +75,11 @@ do_action( 'masteriyo_before_single_course_curriculum' );
 			<?php endif; ?>
 		</div>
 
-		<?php foreach ( $course_structure as $section ) : ?>
-			<div class="masteriyo-stab--citems">
+		<?php
+
+		foreach ( $course_structure as $index => $section ) :
+			?>
+			<div class="masteriyo-stab--citems <?php echo esc_attr( 0 === $index ? 'active' : '' ); ?>">
 				<div class="masteriyo-cheader">
 					<h5 class="masteriyo-ctitle"><?php echo esc_html( $section['name'] ); ?></h5>
 

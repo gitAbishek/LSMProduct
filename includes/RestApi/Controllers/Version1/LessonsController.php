@@ -254,8 +254,8 @@ class LessonsController extends PostsController {
 	 * @return array
 	 */
 	protected function get_lesson_data( $lesson, $context = 'view' ) {
-		$course      = get_post( $lesson->get_course_id( $context ) );
-		$course_name = is_null( $course ) ? '' : $course->post_title;
+		$section = masteriyo_get_section( $lesson->get_parent_id() );
+		$course  = masteriyo_get_course( $lesson->get_course_id( $context ) );
 
 		$data = array(
 			'id'                  => $lesson->get_id(),
@@ -266,10 +266,11 @@ class LessonsController extends PostsController {
 			'description'         => 'view' === $context ? wpautop( do_shortcode( $lesson->get_description() ) ) : $lesson->get_description( $context ),
 			'short_description'   => 'view' === $context ? apply_filters( 'masteriyo_short_description', $lesson->get_short_description() ) : $lesson->get_short_description( $context ),
 			'menu_order'          => $lesson->get_menu_order( $context ),
+			'parent_menu_order'   => $section ? $section->get_menu_order( $context ) : 0,
 			'reviews_allowed'     => $lesson->get_reviews_allowed( $context ),
 			'parent_id'           => $lesson->get_parent_id( $context ),
-			'course_id'           => $lesson->get_course_id( $context ),
-			'course_name'         => $course_name,
+			'course_id'           => $course ? $course->get_id() : 0,
+			'course_name'         => $course ? wp_specialchars_decode( $course->get_name( $context ) ) : '',
 			'featured_image'      => $lesson->get_featured_image( $context ),
 			'video_source'        => $lesson->get_video_source( $context ),
 			'video_source_url'    => $lesson->get_video_source_url( $context ),

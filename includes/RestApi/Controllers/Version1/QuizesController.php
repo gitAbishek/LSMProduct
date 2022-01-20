@@ -859,8 +859,8 @@ class QuizesController extends PostsController {
 	 * @return array
 	 */
 	protected function get_quiz_data( $quiz, $context = 'view' ) {
-		$course      = get_post( $quiz->get_course_id( $context ) );
-		$course_name = is_null( $course ) ? '' : $course->post_title;
+		$section = masteriyo_get_section( $quiz->get_parent_id( $context ) );
+		$course  = masteriyo_get_course( $quiz->get_course_id( $context ) );
 
 		$data = array(
 			'id'                                => $quiz->get_id(),
@@ -869,8 +869,9 @@ class QuizesController extends PostsController {
 			'permalink'                         => $quiz->get_permalink(),
 			'parent_id'                         => $quiz->get_parent_id( $context ),
 			'course_id'                         => $quiz->get_course_id( $context ),
-			'course_name'                       => wp_specialchars_decode( $course_name ),
+			'course_name'                       => $course ? wp_specialchars_decode( $course->get_name( $context ) ) : '',
 			'menu_order'                        => $quiz->get_menu_order( $context ),
+			'parent_menu_order'                 => $section ? $section->get_menu_order( $context ) : 0,
 			'status'                            => $quiz->get_status( $context ),
 			'description'                       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
 			'short_description'                 => 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description( $context ),

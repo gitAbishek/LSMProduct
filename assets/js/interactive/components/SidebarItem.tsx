@@ -19,7 +19,7 @@ import {
 	BiPlus,
 	BiTimer,
 } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { CourseContentMap } from '../schemas';
 import { getNavigationRoute } from './FloatingNavigation';
 
@@ -32,6 +32,7 @@ interface Props {
 
 const SidebarItem: React.FC<Props> = (props) => {
 	const { courseId, name, contents, id } = props;
+	const { lessonId, quizId }: any = useParams();
 
 	const centerStyles = {
 		width: '23px',
@@ -53,6 +54,19 @@ const SidebarItem: React.FC<Props> = (props) => {
 			}
 		}
 	};
+
+	const isActive = (type: 'quiz' | 'lesson', id: number) => {
+		if (type === 'lesson' && id == lessonId) {
+			return true;
+		}
+
+		if (type === 'quiz' && id == quizId) {
+			return true;
+		}
+
+		return false;
+	};
+
 	return (
 		<AccordionItem
 			id={id}
@@ -82,7 +96,21 @@ const SidebarItem: React.FC<Props> = (props) => {
 							<List>
 								{contents.map((content: CourseContentMap, index: number) => (
 									<ListItem
-										key={index}
+										key={content.item_id}
+										sx={
+											isActive(content.item_type, content.item_id)
+												? {
+														bg: 'blue.500',
+														color: 'white',
+														p: {
+															color: 'white',
+														},
+														svg: {
+															fill: 'white',
+														},
+												  }
+												: {}
+										}
 										borderTop="1px"
 										borderTopColor="gray.200"
 										px="3"

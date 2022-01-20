@@ -16,8 +16,16 @@ if ( ! $course->is_purchasable() ) {
 do_action( 'masteriyo_before_add_to_cart_button' );
 
 ?>
-<?php if ( masteriyo_can_start_course( $course ) ) : ?>
-	<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="masteriyo-btn masteriyo-btn-primary masteriyo-single-course--btn mb-0">
+<?php if ( $progress && 'completed' === $progress->get_status() ) : ?>
+	<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="masteriyo-btn masteriyo-course-complete masteriyo-btn-primary masteriyo-single-course--btn mb-0">
+		<?php echo esc_html( $course->single_course_completed_text() ); ?>
+	</a>
+<?php elseif ( $progress && in_array( $progress->get_status(), array( 'started', 'progress' ), true ) ) : ?>
+	<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="masteriyo-btn masteriyo-course-continue masteriyo-btn-primary masteriyo-single-course--btn mb-0">
+		<?php echo esc_html( $course->single_course_continue_text() ); ?>
+	</a>
+<?php elseif ( masteriyo_can_start_course( $course ) ) : ?>
+	<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="masteriyo-btn masteriyo-course-start-course masteriyo-btn-primary masteriyo-single-course--btn mb-0">
 		<?php echo esc_html( $course->single_course_start_text() ); ?>
 	</a>
 <?php else : ?>

@@ -7,6 +7,7 @@
 
 use Masteriyo\Constants;
 use Masteriyo\Models\CourseReview;
+use Masteriyo\Query\CourseProgressQuery;
 use Masteriyo\Query\UserCourseQuery;
 
 if ( ! function_exists( 'masteriyo_is_filtered' ) ) {
@@ -804,5 +805,42 @@ if ( ! function_exists( 'masteriyo_is_post_edit_page' ) ) {
 		global $pagenow;
 
 		return $pagenow && in_array( $pagenow, array( 'post.php', 'post-new.php' ), true );
+	}
+}
+
+
+if ( ! function_exists( 'masteriyo_has_course_started' ) ) {
+	/**
+	 * Has course started.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param WP_Post|int|Masteriyo\Models\Course $course Course.
+	 * @param WP_User|int|Masteriyo\Models\User $user User.
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_has_course_started( $course, $user = null ) {
+		$user = is_null( $user ) ? get_current_user_id() : $user;
+
+		$course = masteriyo_get_course( $course );
+		$user   = masteriyo_get_user( $user );
+
+		if ( is_null( $course ) || is_null( $user ) || is_wp_error( $user ) ) {
+			return null;
+		}
+
+		$query = new CourseProgressQuery(
+			array(
+				'course_id' => $course->get_id(),
+				'user_id'   => $user->get_id(),
+				'status'    => array( 'started', 'progress' ),
+				'per_page'  => 1,
+			)
+		);
+
+		$started_courses = $query->get_course_progress();
+
+		return 1 === count( $started_courses );
 	}
 }

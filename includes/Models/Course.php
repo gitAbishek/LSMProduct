@@ -1290,6 +1290,28 @@ class Course extends Model {
 	}
 
 	/**
+	 * Get continue course button text for the single page.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string
+	 */
+	public function single_course_continue_text() {
+		return apply_filters( 'masteriyo_single_course_continue_text', __( 'Continue', 'masteriyo' ), $this );
+	}
+
+	/**
+	 * Get continue course button text for the single page.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string
+	 */
+	public function single_course_completed_text() {
+		return apply_filters( 'masteriyo_single_course_completed_text', __( 'Completed', 'masteriyo' ), $this );
+	}
+
+	/**
 	 * Get start course URL.
 	 *
 	 * @since 1.0.0

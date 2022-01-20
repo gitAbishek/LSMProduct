@@ -156,3 +156,5 @@ function masteriyo_get_active_courses( $user ) {
 
 	return $active_courses;
 }
+
+

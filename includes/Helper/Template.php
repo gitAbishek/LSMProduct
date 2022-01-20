@@ -6,6 +6,7 @@
  * @since 1.0.0
  */
 
+use Masteriyo\Query\CourseProgressQuery;
 use Masteriyo\Query\UserCourseQuery;
 
 if ( ! ( function_exists( 'add_action' ) && function_exists( 'add_filter' ) ) ) {
@@ -377,10 +378,20 @@ if ( ! function_exists( 'masteriyo_template_enroll_button' ) ) {
 	 * @since 1.0.0
 	 */
 	function masteriyo_template_enroll_button( $course ) {
+		$query = new CourseProgressQuery(
+			array(
+				'course_id' => $course->get_id(),
+				'user_id'   => get_current_user_id(),
+			)
+		);
+
+		$progress = current( $query->get_course_progress() );
+
 		masteriyo_get_template(
 			'enroll-button.php',
 			array(
-				'course' => $course,
+				'course'   => $course,
+				'progress' => $progress,
 			)
 		);
 	}

@@ -6,6 +6,7 @@ import {
 	Heading,
 	Stack,
 	Text,
+	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -21,7 +22,9 @@ import { deepClean, getLocalTime } from '../../../back-end/utils/utils';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
 import FloatingTimer from '../../components/FloatingTimer';
-import { CourseProgressItemsMap } from '../../schemas';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+import { CourseProgressItemsMap, CourseProgressMap } from '../../schemas';
 import QuizFields from './components/QuizFields';
 import QuizStart from './components/QuizStart';
 import ScoreBoard from './components/ScoreBoard';
@@ -34,9 +37,20 @@ const InteractiveQuiz = () => {
 	const [scoreBoardData, setScoreBoardData] = useState<any>(null);
 	const [quizStartedOn, setQuizStartedOn] = useState<any>(null);
 	const [quizAboutToExpire, setQuizAboutToExpire] = useState<boolean>(false);
-	const progressAPI = new API(urls.courseProgressItem);
+	const progressItemAPI = new API(urls.courseProgressItem);
+	const progressAPI = new API(urls.courseProgress);
+
 	const queryClient = useQueryClient();
 	const toast = useToast();
+	const { isOpen: isSidebarOpen, onToggle: onSidebarToggle } = useDisclosure();
+	const { isOpen: isHeaderOpen, onToggle: onHeaderToggle } = useDisclosure({
+		defaultIsOpen: true,
+	});
+
+	const courseProgressQuery = useQuery<CourseProgressMap>(
+		[`courseProgressItem${courseId}`, courseId],
+		() => progressAPI.store({ course_id: courseId })
+	);
 
 	const quizQuery = useQuery<QuizSchema, Error>(
 		[`section${quizId}`, quizId],
@@ -60,7 +74,7 @@ const InteractiveQuiz = () => {
 	const startQuiz = useMutation((quizId: number) => quizAPI.start(quizId));
 
 	const completeMutation = useMutation((data: CourseProgressItemsMap) =>
-		progressAPI.store(data)
+		progressItemAPI.store(data)
 	);
 
 	const checkQuizAnswers = useMutation((data: any) =>
@@ -69,7 +83,7 @@ const InteractiveQuiz = () => {
 
 	const completeQuiz = useQuery<CourseProgressItemsMap>(
 		[`completeQuery${quizId}`, quizId],
-		() => progressAPI.list({ item_id: quizId, course_id: courseId })
+		() => progressItemAPI.list({ item_id: quizId, course_id: courseId })
 	);
 
 	const onStartPress = () => {
@@ -133,88 +147,111 @@ const InteractiveQuiz = () => {
 
 	const onQuizeExpire = () => onSubmit(methods.getValues());
 
-	if (quizQuery.isSuccess && quizProgress.isSuccess) {
+	if (
+		quizQuery.isSuccess &&
+		quizProgress.isSuccess &&
+		courseProgressQuery.isSuccess
+	) {
 		const maxLimitReached =
 			quizQuery?.data?.attempts_allowed != 0 &&
 			quizProgress?.data.data[0]?.total_attempts >=
 				quizQuery?.data?.attempts_allowed;
 
 		return (
-			<Container centerContent maxW="container.xl" py="16">
-				<Box bg="white" p={['5', null, '14']} shadow="box" w="full">
-					<FormProvider {...methods}>
-						<form onSubmit={methods.handleSubmit(onSubmit)}>
-							<Stack direction="column" spacing="8">
-								<Heading as="h5">{quizQuery?.data?.name}</Heading>
-
-								{quizQuery?.data?.description && (
-									<Text
-										dangerouslySetInnerHTML={{
-											__html: quizQuery?.data?.description,
-										}}
-									/>
-								)}
-								{maxLimitReached && (
-									<Alert status="error" fontSize="sm" p="2.5">
-										<AlertIcon />
-										{__(
-											'You have reached the maximum limit to start quiz.',
-											'masteriyo'
-										)}
-									</Alert>
-								)}
-
-								{quizStartedOn ? (
-									<QuizFields
-										quizAboutToExpire={quizAboutToExpire}
-										quizData={quizQuery.data}
-									/>
-								) : scoreBoardData ? (
-									<ScoreBoard
-										scoreData={scoreBoardData}
-										onStartPress={onStartPress}
-										isButtonLoading={startQuiz.isLoading}
-										isFinishButtonLoading={completeMutation.isLoading}
-										isButtonDisabled={completeQuiz?.data?.completed}
-										onCompletePress={onCompletePress}
-										limitReached={maxLimitReached}
-									/>
-								) : (
-									<QuizStart
-										quizData={quizQuery.data}
-										onStartPress={onStartPress}
-										isDisabled={maxLimitReached}
-										isButtonLoading={startQuiz.isLoading}
-									/>
-								)}
-							</Stack>
-						</form>
-					</FormProvider>
-				</Box>
-				<FloatingNavigation
-					navigation={quizQuery?.data?.navigation}
-					courseId={quizQuery?.data?.course_id}
+			<Box h="full" overflowX="hidden" pos="relative">
+				<Sidebar
+					isOpen={isSidebarOpen}
+					onToggle={onSidebarToggle}
+					isHeaderOpen={isHeaderOpen}
+					items={courseProgressQuery.data.items}
+					name={courseProgressQuery.data.name}
+					coursePermalink={courseProgressQuery.data.course_permalink}
+					activeIndex={quizQuery?.data?.parent_menu_order}
 				/>
-				{quizStartedOn && quizQuery.data.duration !== 0 && (
-					<FloatingTimer
-						startedOn={quizStartedOn}
-						duration={quizQuery?.data?.duration}
-						quizId={quizQuery?.data?.id}
-						onQuizeExpire={onQuizeExpire}
-						quizeAboutToExpire={setQuizAboutToExpire}
+				<Box transition="all 0.35s" ml={isSidebarOpen ? '300px' : 0}>
+					<Header
+						summary={courseProgressQuery.data.summary}
+						isOpen={isHeaderOpen}
+						onToggle={onHeaderToggle}
 					/>
-				)}
 
-				<ContentNav
-					type="quiz"
-					onCompletePress={methods.handleSubmit(onSubmit)}
-					navigation={quizQuery?.data?.navigation}
-					courseId={quizQuery?.data?.course_id}
-					isButtonDisabled={scoreBoardData}
-					isButtonLoading={checkQuizAnswers.isLoading}
-					quizStarted={quizStartedOn}
-				/>
-			</Container>
+					<Container centerContent maxW="container.xl" py="16">
+						<Box bg="white" p={['5', null, '14']} shadow="box" w="full">
+							<FormProvider {...methods}>
+								<form onSubmit={methods.handleSubmit(onSubmit)}>
+									<Stack direction="column" spacing="8">
+										<Heading as="h5">{quizQuery?.data?.name}</Heading>
+
+										{quizQuery?.data?.description && (
+											<Text
+												dangerouslySetInnerHTML={{
+													__html: quizQuery?.data?.description,
+												}}
+											/>
+										)}
+										{maxLimitReached && (
+											<Alert status="error" fontSize="sm" p="2.5">
+												<AlertIcon />
+												{__(
+													'You have reached the maximum limit to start quiz.',
+													'masteriyo'
+												)}
+											</Alert>
+										)}
+
+										{quizStartedOn ? (
+											<QuizFields
+												quizAboutToExpire={quizAboutToExpire}
+												quizData={quizQuery.data}
+											/>
+										) : scoreBoardData ? (
+											<ScoreBoard
+												scoreData={scoreBoardData}
+												onStartPress={onStartPress}
+												isButtonLoading={startQuiz.isLoading}
+												isFinishButtonLoading={completeMutation.isLoading}
+												isButtonDisabled={completeQuiz?.data?.completed}
+												onCompletePress={onCompletePress}
+												limitReached={maxLimitReached}
+											/>
+										) : (
+											<QuizStart
+												quizData={quizQuery.data}
+												onStartPress={onStartPress}
+												isDisabled={maxLimitReached}
+												isButtonLoading={startQuiz.isLoading}
+											/>
+										)}
+									</Stack>
+								</form>
+							</FormProvider>
+						</Box>
+						<FloatingNavigation
+							navigation={quizQuery?.data?.navigation}
+							courseId={quizQuery?.data?.course_id}
+						/>
+						{quizStartedOn && quizQuery.data.duration !== 0 && (
+							<FloatingTimer
+								startedOn={quizStartedOn}
+								duration={quizQuery?.data?.duration}
+								quizId={quizQuery?.data?.id}
+								onQuizeExpire={onQuizeExpire}
+								quizeAboutToExpire={setQuizAboutToExpire}
+							/>
+						)}
+
+						<ContentNav
+							type="quiz"
+							onCompletePress={methods.handleSubmit(onSubmit)}
+							navigation={quizQuery?.data?.navigation}
+							courseId={quizQuery?.data?.course_id}
+							isButtonDisabled={scoreBoardData}
+							isButtonLoading={checkQuizAnswers.isLoading}
+							quizStarted={quizStartedOn}
+						/>
+					</Container>
+				</Box>
+			</Box>
 		);
 	}
 

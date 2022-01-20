@@ -7,6 +7,7 @@ export interface QuizSchema {
 	course_id: number;
 	course_name: string;
 	menu_order: number;
+	parent_menu_order: number;
 	description: string;
 	short_description: string;
 	date_created: string;

@@ -104,13 +104,6 @@ const InteractiveLesson = () => {
 	if (courseProgressQuery.isSuccess && lessonQuery.isSuccess) {
 		return (
 			<Box h="full" overflowX="hidden" pos="relative">
-				<Box transition="all 0.35s" ml={isSidebarOpen ? '300px' : 0}></Box>
-				<Header
-					summary={courseProgressQuery.data.summary}
-					isOpen={isHeaderOpen}
-					onToggle={onHeaderToggle}
-				/>
-
 				<Sidebar
 					isOpen={isSidebarOpen}
 					onToggle={onSidebarToggle}
@@ -120,42 +113,50 @@ const InteractiveLesson = () => {
 					coursePermalink={courseProgressQuery.data.course_permalink}
 					activeIndex={lessonQuery?.data?.parent_menu_order}
 				/>
-				<Container centerContent maxW="container.lg" py="16">
-					<Box bg="white" p={['5', null, '14']} shadow="box" w="full">
-						<Stack direction="column" spacing="8">
-							<Heading as="h5">{lessonQuery?.data?.name}</Heading>
-							{lessonQuery?.data?.video_source_url && (
-								<VideoPlayer
-									type={lessonQuery?.data?.video_source}
-									url={lessonQuery?.data?.video_source_url}
+				<Box transition="all 0.35s" ml={isSidebarOpen ? '300px' : 0}>
+					<Header
+						summary={courseProgressQuery.data.summary}
+						isOpen={isHeaderOpen}
+						onToggle={onHeaderToggle}
+					/>
+
+					<Container centerContent maxW="container.lg" py="16">
+						<Box bg="white" p={['5', null, '14']} shadow="box" w="full">
+							<Stack direction="column" spacing="8">
+								<Heading as="h5">{lessonQuery?.data?.name}</Heading>
+								{lessonQuery?.data?.video_source_url && (
+									<VideoPlayer
+										type={lessonQuery?.data?.video_source}
+										url={lessonQuery?.data?.video_source_url}
+									/>
+								)}
+								<Image src={imageQuery?.data?.source_url} />
+
+								<Text
+									className="masteriyo-interactive-description"
+									dangerouslySetInnerHTML={{
+										__html: lessonQuery?.data?.description,
+									}}
 								/>
-							)}
-							<Image src={imageQuery?.data?.source_url} />
 
-							<Text
-								className="masteriyo-interactive-description"
-								dangerouslySetInnerHTML={{
-									__html: lessonQuery?.data?.description,
-								}}
-							/>
-
-							{/* {!isEmpty(lessonQuery?.data?.attachments) && (
+								{/* {!isEmpty(lessonQuery?.data?.attachments) && (
 						<LessonAttachment lessonQuery={lessonQuery?.data} />
 					)} */}
-						</Stack>
-						<FloatingNavigation
+							</Stack>
+							<FloatingNavigation
+								navigation={lessonQuery?.data?.navigation}
+								courseId={courseId}
+							/>
+						</Box>
+						<ContentNav
 							navigation={lessonQuery?.data?.navigation}
 							courseId={courseId}
+							onCompletePress={onCompletePress}
+							isButtonLoading={completeMutation.isLoading}
+							isButtonDisabled={completeQuery?.data?.completed}
 						/>
-					</Box>
-					<ContentNav
-						navigation={lessonQuery?.data?.navigation}
-						courseId={courseId}
-						onCompletePress={onCompletePress}
-						isButtonLoading={completeMutation.isLoading}
-						isButtonDisabled={completeQuery?.data?.completed}
-					/>
-				</Container>
+					</Container>
+				</Box>
 			</Box>
 		);
 	}

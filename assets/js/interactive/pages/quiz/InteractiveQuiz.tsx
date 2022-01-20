@@ -42,7 +42,9 @@ const InteractiveQuiz = () => {
 
 	const queryClient = useQueryClient();
 	const toast = useToast();
-	const { isOpen: isSidebarOpen, onToggle: onSidebarToggle } = useDisclosure();
+	const { isOpen: isSidebarOpen, onToggle: onSidebarToggle } = useDisclosure({
+		defaultIsOpen: true,
+	});
 	const { isOpen: isHeaderOpen, onToggle: onHeaderToggle } = useDisclosure({
 		defaultIsOpen: true,
 	});

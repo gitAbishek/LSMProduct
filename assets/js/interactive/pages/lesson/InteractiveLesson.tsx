@@ -34,7 +34,9 @@ const InteractiveLesson = () => {
 	const progressAPI = new API(urls.courseProgress);
 	const progressItemAPI = new API(urls.courseProgressItem);
 
-	const { isOpen: isSidebarOpen, onToggle: onSidebarToggle } = useDisclosure();
+	const { isOpen: isSidebarOpen, onToggle: onSidebarToggle } = useDisclosure({
+		defaultIsOpen: true,
+	});
 	const { isOpen: isHeaderOpen, onToggle: onHeaderToggle } = useDisclosure({
 		defaultIsOpen: true,
 	});

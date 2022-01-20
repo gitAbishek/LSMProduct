@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/types/devtools';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import CreateCatModalProvicer from './context/CreateCatProvider';
 import MasteriyoProvider from './context/MasteriyoProvider';
 import ErrorBoundary from './errors/ErrorBoundary';

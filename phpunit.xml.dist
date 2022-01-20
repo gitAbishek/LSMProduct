@@ -3,6 +3,9 @@
 	<php>
 		<const name="WP_TESTS_PHPUNIT_POLYFILLS_PATH" value="./vendor/yoast/phpunit-polyfills" />
 	</php>
+	<php>
+		<const name="WP_TESTS_DIR" value="./tests/wordpress" />
+	</php>
 	<testsuites>
 		<testsuite name="Test">
 			<directory suffix="Test.php">./tests/</directory>

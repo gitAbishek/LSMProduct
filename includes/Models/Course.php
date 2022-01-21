@@ -1475,6 +1475,8 @@ class Course extends Model {
 	 * @return null|Masteriyo\Models\Lesson
 	*/
 	public function get_first_lesson_or_quiz() {
+		$first_lesson_or_quiz = null;
+
 		$query = new SectionQuery(
 			array(
 				'menu_order' => 0,

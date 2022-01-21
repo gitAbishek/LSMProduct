@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "176c0febd235a8fd153544c10f89c284",
+    "content-hash": "c8c92bc6f081d0db5e83edd10891a48d",
     "packages": [
         {
             "name": "league/container",
@@ -387,16 +387,16 @@
     "packages-dev": [
         {
             "name": "antecedent/patchwork",
-            "version": "2.1.17",
+            "version": "2.1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antecedent/patchwork.git",
-                "reference": "df5aba175a44c2996ced4edf8ec9f9081b5348c0"
+                "reference": "94fe587cb0a6c1695b1ddc650e877231be80b8bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/df5aba175a44c2996ced4edf8ec9f9081b5348c0",
-                "reference": "df5aba175a44c2996ced4edf8ec9f9081b5348c0",
+                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/94fe587cb0a6c1695b1ddc650e877231be80b8bc",
+                "reference": "94fe587cb0a6c1695b1ddc650e877231be80b8bc",
                 "shasum": ""
             },
             "require": {
@@ -427,7 +427,7 @@
                 "runkit",
                 "testing"
             ],
-            "time": "2021-10-21T14:22:43+00:00"
+            "time": "2022-01-20T04:47:04+00:00"
         },
         {
             "name": "brain/monkey",

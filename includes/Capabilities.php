@@ -331,6 +331,9 @@ class Capabilities {
 			'manage_course_difficulties'      => true,
 			'manage_course_categories'        => true,
 			'edit_course_categories'          => true,
+
+			// Other
+			'upload_files'                    => true,
 		);
 
 		$capabilities = array_merge( $capabilities, self::get_student_capabilities() );

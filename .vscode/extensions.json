@@ -5,7 +5,6 @@
     "streetsidesoftware.code-spell-checker",
     "neilbrayfield.php-docblocker",
     "wongjn.php-sniffer",
-    "mehedidracula.php-namespace-resolver",
-    "felixfbecker.php-debug"
+    "mehedidracula.php-namespace-resolver"
   ]
 }

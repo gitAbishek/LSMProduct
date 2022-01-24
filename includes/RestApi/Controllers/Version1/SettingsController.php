@@ -10,6 +10,8 @@ defined( 'ABSPATH' ) || exit;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
 use Masteriyo\Models\Setting;
+use stdClass;
+
 class SettingsController extends CrudController {
 
 	/**
@@ -169,6 +171,17 @@ class SettingsController extends CrudController {
 		$params                       = array();
 		$params['context']            = $this->get_context_param();
 		$params['context']['default'] = 'view';
+
+		/**
+		 * Added name parameter to get the group or single setting.
+		 *
+		 * @since x.x.x
+		 */
+		$params['name'] = array(
+			'description'       => __( 'Group setting or single setting.', 'masteriyo' ),
+			'type'              => 'string',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
 
 		/**
 		 * Filter collection parameters for the posts controller.
@@ -826,7 +839,7 @@ class SettingsController extends CrudController {
 									'context'     => array( 'view', 'edit' ),
 								),
 								'set_default_payment_method' => array(
-									'description' => __( 'Set default payment menthod endpoint.', 'masteriyo' ),
+									'description' => __( 'Set default payment method endpoint.', 'masteriyo' ),
 									'type'        => 'string',
 									'context'     => array( 'view', 'edit' ),
 								),
@@ -940,7 +953,7 @@ class SettingsController extends CrudController {
 			),
 		);
 
-				return $schema;
+		return $schema;
 	}
 
 	/**
@@ -992,7 +1005,6 @@ class SettingsController extends CrudController {
 		return $this->prepare_object_for_response( $setting, $request );
 	}
 
-
 	/**
 	 * Check permissions for an item.
 	 *
@@ -1033,12 +1045,12 @@ class SettingsController extends CrudController {
 	 * @return Setting
 	 */
 	public function delete_items( $request ) {
-			$setting = masteriyo( 'setting' );
-			$setting->delete( $setting );
-			$request->set_param( 'context', 'edit' );
-			$response = $this->prepare_object_for_response( $setting, $request );
+		$setting = masteriyo( 'setting' );
+		$setting->delete( $setting );
+		$request->set_param( 'context', 'edit' );
+		$response = $this->prepare_object_for_response( $setting, $request );
 
-			return $response;
+		return $response;
 	}
 
 
@@ -1052,7 +1064,9 @@ class SettingsController extends CrudController {
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
 		$context = ! empty( $request['context'] ) ? $request['context'] : 'view';
-		$data    = $this->get_setting_data( $object, $context );
+		$name    = ! empty( $request['name'] ) ? $request['name'] : '';
+
+		$data = $this->get_setting_data( $object, $context, $name );
 
 		$data     = $this->filter_response_by_context( $data, $context );
 		$response = rest_ensure_response( $data );
@@ -1076,18 +1090,28 @@ class SettingsController extends CrudController {
 	 * Get settings data.
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Added 'name' parameter to fetch group or individual setting.
 	 *
 	 * @param object $setting Setting instance.
 	 * @param string $context Request context. Options: 'view' and 'edit'.
+	 * @param string $name Setting name.
 	 *
 	 * @return array
 	 */
-	protected function get_setting_data( $setting, $context = 'view' ) {
-		return $setting->get_data();
+	protected function get_setting_data( $setting, $context = 'view', $name = '' ) {
+		if ( empty( $name ) ) {
+			$value = $setting->get_data();
+		} else {
+			$value = $setting->get( $name, $context );
+		}
+
+		return $value;
 	}
 
 	/**
 	 * Prepare a single settings for create or update.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.

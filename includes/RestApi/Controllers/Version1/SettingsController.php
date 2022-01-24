@@ -175,7 +175,7 @@ class SettingsController extends CrudController {
 		/**
 		 * Added name parameter to get the group or single setting.
 		 *
-		 * @since x.x.x
+		 * @since 1.3.13
 		 */
 		$params['name'] = array(
 			'description'       => __( 'Group setting or single setting.', 'masteriyo' ),
@@ -1090,7 +1090,7 @@ class SettingsController extends CrudController {
 	 * Get settings data.
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Added 'name' parameter to fetch group or individual setting.
+	 * @since 1.3.13 Added 'name' parameter to fetch group or individual setting.
 	 *
 	 * @param object $setting Setting instance.
 	 * @param string $context Request context. Options: 'view' and 'edit'.

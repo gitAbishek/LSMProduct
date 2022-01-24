@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.3.12
+**Stable tag**: 1.3.13
 
 **License: GNU** General Public License v3.0
 
@@ -51,8 +51,14 @@ Want to contribute? Please have a look at [Contributor Guidelines](docs/contribu
 
 # Changelog
 
+### 1.3.13 - 24-01-2022
+
+- Enhancement - Push floating navigation previous button to the right if sidebar is opened.
+- Fix - WP Media Manager file upload permission for instructor.
+
 ### 1.3.12 - 20-01-2022
-	- Fix - Minor fixes.
+
+- Fix - Minor fixes.
 
 ### 1.3.11 - 20-01-2022
 

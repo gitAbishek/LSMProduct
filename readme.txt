@@ -197,14 +197,14 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
 
-### 1.3.13 - 24-01-2022
+= 1.3.13 - 24-01-2022 =
 - Enhancement - Push floating navigation previous button to the right if sidebar is opened.
 - Fix - WP Media Manager file upload permission for instructor.
 
-### 1.3.12 - 20-01-2022
+= 1.3.12 - 20-01-2022 =
 - Fix - Minor fixes.
 
-### 1.3.11 - 20-01-2022
+= 1.3.11 - 20-01-2022 =
 - Enhancement - Redirect to first quiz or lesson on learning page.
 - Enhancement - The sidebar on the learning page now opens by default.
 - Enhancement - Active menu section now expands by default on the sidebar of the learning page.

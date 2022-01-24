@@ -424,131 +424,120 @@ class SettingsController extends CrudController {
 								),
 							),
 						),
-						'paypal'   => array(
-							'enable'                 => array(
-								'description' => __( 'Enable standard paypal.', 'masteriyo' ),
+						'offline'  => array(
+							'enable'       => array(
+								'description' => __( 'Enable offline payment.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'title'                  => array(
-								'description' => __( 'Paypal title which the user sees during checkout.', 'masteriyo' ),
+							'title'        => array(
+								'description' => __( 'Offline payment title which the user sees during checkout.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'description'            => array(
-								'description' => __( 'Paypal description which the user sees during checkout.', 'masteriyo' ),
+							'description'  => array(
+								'description' => __( 'Offline payment description which the user sees during checkout.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'ipn_email_notifiations' => array(
-								'description' => __( 'Enable IPN email notifications.', 'masteriyo' ),
-								'type'        => 'boolean',
+							'instructions' => array(
+								'description' => __( 'Offline payment instructions.', 'masteriyo' ),
 								'default'     => true,
-								'context'     => array( 'view', 'edit' ),
-							),
-							'sandbox'                => array(
-								'description' => __( 'Enable sandbox/sandbox mode on paypal.', 'masteriyo' ),
-								'type'        => 'boolean',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'email'                  => array(
-								'description' => __( 'Paypal email.', 'masteriyo' ),
-								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
 							),
 						),
 						'paypal'   => array(
-							'enable'                 => array(
+							'enable'                  => array(
 								'description' => __( 'Enable standard paypal.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'title'                  => array(
+							'title'                   => array(
 								'description' => __( 'Paypal title which the user sees during checkout.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'description'            => array(
+							'description'             => array(
 								'description' => __( 'Paypal description which the user sees during checkout.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'ipn_email_notifiations' => array(
+							'ipn_email_notifications' => array(
 								'description' => __( 'Enable IPN email notifications.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'default'     => true,
 								'context'     => array( 'view', 'edit' ),
 							),
-							'sandbox'                => array(
+							'sandbox'                 => array(
 								'description' => __( 'Enable sandbox/sandbox mode on paypal.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'email'                  => array(
+							'email'                   => array(
 								'description' => __( 'Paypal email.', 'masteriyo' ),
 								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'receiver_email'         => array(
+							'receiver_email'          => array(
 								'description' => __( 'Paypal receiver email.', 'masteriyo' ),
 								'type'        => 'email',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'identity_token'         => array(
+							'identity_token'          => array(
 								'description' => __( 'Paypal identity token.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'invoice_prefix'         => array(
+							'invoice_prefix'          => array(
 								'description' => __( 'Paypal invoice prefix.', 'masteriyo' ),
 								'type'        => 'string',
 								'default'     => 'masteriyo-',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'payment_action'         => array(
+							'payment_action'          => array(
 								'description' => __( 'Paypal payment action.', 'masteriyo' ),
 								'type'        => 'string',
 								'default'     => 'capture',
 								'enum'        => array( 'capture', 'authorize' ),
 								'context'     => array( 'view', 'edit' ),
 							),
-							'image_url'              => array(
+							'image_url'               => array(
 								'description' => __( 'Paypal image url.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'debug'                  => array(
+							'debug'                   => array(
 								'description' => __( 'Enable log.', 'masteriyo' ),
 								'type'        => 'boolean',
 								'default'     => false,
 								'context'     => array( 'view', 'edit' ),
 							),
-							'sandbox_api_username'   => array(
+							'sandbox_api_username'    => array(
 								'description' => __( 'Paypal sandbox API username.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'sandbox_api_password'   => array(
+							'sandbox_api_password'    => array(
 								'description' => __( 'Paypal sandbox API password.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'sandbox_api_signature'  => array(
+							'sandbox_api_signature'   => array(
 								'description' => __( 'Paypal sandbox API signature.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'live_api_username'      => array(
+							'live_api_username'       => array(
 								'description' => __( 'Paypal live API username.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'live_api_password'      => array(
+							'live_api_password'       => array(
 								'description' => __( 'Paypal live API password.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'live_api_signature'     => array(
+							'live_api_signature'      => array(
 								'description' => __( 'Paypal live API signature.', 'masteriyo' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),

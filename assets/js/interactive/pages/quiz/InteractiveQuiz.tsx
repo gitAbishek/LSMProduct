@@ -231,6 +231,7 @@ const InteractiveQuiz = () => {
 						<FloatingNavigation
 							navigation={quizQuery?.data?.navigation}
 							courseId={quizQuery?.data?.course_id}
+							isSidebarOpened={isSidebarOpen}
 						/>
 						{quizStartedOn && quizQuery.data.duration !== 0 && (
 							<FloatingTimer

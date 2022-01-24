@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
-import { getNavigationRoute } from '../../components/FloatingNavigation';
+import { getNavigationRoute } from '../../../back-end/utils/nav';
 import { CourseProgressMap } from '../../schemas';
 import FourOFour from '../not-found/FourOFour';
 

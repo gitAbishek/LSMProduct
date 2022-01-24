@@ -16,8 +16,8 @@ import React from 'react';
 import { BiCheck, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import MobileHidden from '../../back-end/components/common/MobileHidden';
+import { getNavigationRoute } from '../../back-end/utils/nav';
 import { ContentNavigationSchema } from '../schemas';
-import { getNavigationRoute } from './FloatingNavigation';
 
 interface Props {
 	courseId: number;

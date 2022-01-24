@@ -148,6 +148,7 @@ const InteractiveLesson = () => {
 							<FloatingNavigation
 								navigation={lessonQuery?.data?.navigation}
 								courseId={courseId}
+								isSidebarOpened={isSidebarOpen}
 							/>
 						</Box>
 						<ContentNav

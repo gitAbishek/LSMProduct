@@ -20,8 +20,8 @@ import {
 	BiTimer,
 } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
+import { getNavigationRoute } from '../../back-end/utils/nav';
 import { CourseContentMap } from '../schemas';
-import { getNavigationRoute } from './FloatingNavigation';
 
 interface Props {
 	courseId: number;

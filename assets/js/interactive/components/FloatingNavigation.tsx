@@ -17,33 +17,17 @@ import {
 	BiTimer,
 } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
-import routes from '../constants/routes';
+import { getNavigationRoute } from '../../back-end/utils/nav';
 import { ContentNavigationSchema } from '../schemas';
 
 interface Props {
 	navigation: ContentNavigationSchema;
 	courseId: number;
+	isSidebarOpened: boolean;
 }
 
-export const getNavigationRoute = (
-	id: number,
-	type: string,
-	courseId: number
-) => {
-	if (type === 'lesson') {
-		return routes.lesson
-			.replace(':lessonId', id.toString())
-			.replace(':courseId', courseId.toString());
-	} else if (type === 'quiz') {
-		return routes.quiz
-			.replace(':quizId', id.toString())
-			.replace(':courseId', courseId.toString());
-	}
-	return '';
-};
-
 const FloatingNavigation: React.FC<Props> = (props) => {
-	const { navigation, courseId } = props;
+	const { navigation, courseId, isSidebarOpened } = props;
 
 	const {
 		isOpen: isPrevOpen,
@@ -84,7 +68,7 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						p="6"
 						pl="80px"
 						top="50vh"
-						left="0"
+						left={isSidebarOpened ? '300px' : 0}
 						transition="all 0.35s ease-in-out"
 						transform={
 							isPrevOpen ? 'translate(0, -50%)' : 'translate(-100%, -50%)'
@@ -125,9 +109,10 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 							courseId
 						)}
 						position="fixed"
+						transition="all 0.35s ease-in-out"
 						top="50%"
 						transform="translateY(-50%)"
-						left="0"
+						left={isSidebarOpened ? '300px' : 0}
 						cursor="pointer"
 						color="gray.200"
 						onMouseEnter={onPrevOpen}

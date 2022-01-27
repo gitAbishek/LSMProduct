@@ -24,7 +24,7 @@ const ProfilePage = () => {
 			<Stack direction="column" spacing="8" width="full">
 				<Flex justify={'space-between'}>
 					<Heading as="h4" size="md" fontWeight="bold" color="blue.900" px="8">
-						{__('Order History', 'masteriyo')}
+						{__('Profile', 'masteriyo')}
 					</Heading>
 					<Link to={routes.user.edit}>
 						<Button

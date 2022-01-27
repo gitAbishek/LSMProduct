@@ -12,6 +12,7 @@ import {
 	Icon,
 	IconButton,
 	Input,
+	Link,
 	SimpleGrid,
 	Spacer,
 	Stack,
@@ -26,14 +27,16 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiCopy, BiEdit } from 'react-icons/bi';
+import { BiChevronLeft, BiCopy, BiEdit } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
+import { Link as RouterLink } from 'react-router-dom';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
 import { UserSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
 import { deepClean } from '../../../back-end/utils/utils';
 import CountryState from '../../components/CountryState';
+import routes from '../../constants/routes';
 import PasswordSecurity from './PasswordSecurity';
 
 const EditProfile: React.FC = () => {
@@ -80,7 +83,7 @@ const EditProfile: React.FC = () => {
 	const tabStyles = {
 		fontWeight: 'medium',
 		fontSize: 'sm',
-		py: '6',
+		py: '4',
 		px: 0,
 		mr: 4,
 		_hover: {
@@ -112,6 +115,17 @@ const EditProfile: React.FC = () => {
 								<Tab sx={tabStyles}>
 									{__('Password  & Security', 'masteriyo')}
 								</Tab>
+								<Link as={RouterLink} to={routes.user.profile} ml="auto" mt="3">
+									<Button
+										leftIcon={<BiChevronLeft size={15} color={'gray.500'} />}
+										color="gray.500"
+										size="sm"
+										borderRadius="full"
+										borderColor="gray.400"
+										variant="outline">
+										{__('View Profile', 'masteriyo')}
+									</Button>
+								</Link>
 							</TabList>
 
 							<TabPanels>

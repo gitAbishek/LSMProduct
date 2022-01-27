@@ -158,7 +158,7 @@ export interface CourseProgressSchema {
 	id: number;
 	user_id: number;
 	course_id: number;
-	status: string;
+	status: 'started' | 'completed' | 'progress';
 	started_at: string;
 	modified_at: string;
 	completed_at: string;

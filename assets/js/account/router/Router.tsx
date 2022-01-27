@@ -13,7 +13,7 @@ import ProfilePage from '../pages/profile/ProfilePage';
 
 const Router: React.FC = () => {
 	return (
-		<Box bg="white" minH="100vh" sx={accountStyles}>
+		<Box bg="white" sx={accountStyles}>
 			<HashRouter>
 				<Container maxW="container.xl" py="16">
 					<Stack direction="row" spacing="8" id="masteriyo-account-container">

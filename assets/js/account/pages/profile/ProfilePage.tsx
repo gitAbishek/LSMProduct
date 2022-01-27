@@ -1,16 +1,8 @@
 import { Image } from '@chakra-ui/image';
-import {
-	Alert,
-	AlertDescription,
-	AlertTitle,
-	Button,
-	Heading,
-	Stack,
-	Text,
-} from '@chakra-ui/react';
+import { Button, Flex, Heading, Stack, Text } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { IoIosArrowForward } from 'react-icons/io';
+import { BiEdit } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { Table, Tbody, Td, Tr } from 'react-super-responsive-table';
@@ -30,33 +22,22 @@ const ProfilePage = () => {
 	if (isSuccess) {
 		return (
 			<Stack direction="column" spacing="8" width="full">
-				<Alert bg="blue.500" color="white" p="6">
-					<Stack direction="column" spacing="5">
-						<Stack direction="column" spacing="0.5">
-							<AlertTitle>
-								{__('Hello, ', 'masteriyo')} {data?.first_name}
-							</AlertTitle>
-							<AlertDescription display="block" fontSize="sm">
-								{__(
-									'You can edit your profile here. Would you like to edit your profile?',
-									'masteriyo'
-								)}
-							</AlertDescription>
-						</Stack>
-						<Link to={routes.user.edit}>
-							<Button
-								rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
-								color="gray.500"
-								bg="white"
-								px="6"
-								textTransform="uppercase"
-								rounded="full">
-								{__('Edit Profile', 'masteriyo')}
-							</Button>
-						</Link>
-					</Stack>
-				</Alert>
-
+				<Flex justify={'space-between'}>
+					<Heading as="h4" size="md" fontWeight="bold" color="blue.900" px="8">
+						{__('Order History', 'masteriyo')}
+					</Heading>
+					<Link to={routes.user.edit}>
+						<Button
+							leftIcon={<BiEdit size={15} color={'gray.500'} />}
+							color="gray.500"
+							size="sm"
+							borderRadius="full"
+							borderColor="gray.400"
+							variant="outline">
+							{__('Edit Profile', 'masteriyo')}
+						</Button>
+					</Link>
+				</Flex>
 				<Stack direction="row" spacing="6">
 					<Image
 						src={data?.avatar_url}

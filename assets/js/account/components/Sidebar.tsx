@@ -63,7 +63,9 @@ const Sidebar = () => {
 						/>
 						<Stack direction="column" spacing="0">
 							<Heading as="h5" fontSize="xs" fontWeight="medium">
-								{data?.first_name} {data?.last_name}
+								{data?.first_name && data?.last_name
+									? `${data?.first_name} ${data?.last_name}`
+									: data?.username}
 							</Heading>
 						</Stack>
 					</Stack>
@@ -85,7 +87,7 @@ const Sidebar = () => {
 						_activeLink={navActiveStyles}
 						to={routes.courses}>
 						<ListIcon fontSize="md" mr="3" as={BiBook} />
-						{__('My Courses')}
+						{__('Enrolled Courses')}
 					</Link>
 				</ListItem>
 				<ListItem>
@@ -99,7 +101,7 @@ const Sidebar = () => {
 						_activeLink={navActiveStyles}
 						to={routes.user.profile}>
 						<ListIcon fontSize="md" mr="3" as={BiUser} />
-						{__('My Profile')}
+						{__('Profile')}
 					</Link>
 				</ListItem>
 
@@ -110,7 +112,7 @@ const Sidebar = () => {
 						_activeLink={navActiveStyles}
 						to={routes.order.list}>
 						<ListIcon fontSize="md" mr="3" as={BiHistory} />
-						{__('My Order History')}
+						{__('Order History')}
 					</Link>
 				</ListItem>
 

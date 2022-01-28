@@ -38,19 +38,18 @@ const Dashboard: React.FC = () => {
 		(course: CourseProgressSchema) => course.status === 'completed'
 	).length;
 
-	const startedCoursesCount = courseProgressQuery?.data?.filter(
-		(course: CourseProgressSchema) => course.status === 'started'
-	).length;
-
-	console.log(
-		inProgressCoursesCount,
-		completedCoursesCount,
-		startedCoursesCount
+	// Extracts started and inprogress courses from course progress
+	const validCourses = courseProgressQuery?.data?.filter(
+		(course: CourseProgressSchema) =>
+			['started', 'progress'].includes(course.status)
 	);
 
-	console.log(courseProgressQuery?.data);
+	// Adds started and inprogress courses id to an array
+	const validCoursesIds = validCourses?.map(
+		(course: CourseProgressSchema) => course.course_id
+	);
 
-	if (dashboardCourseQuery.isSuccess) {
+	if (dashboardCourseQuery.isSuccess && courseProgressQuery.isSuccess) {
 		return (
 			<>
 				<Stack direction="column" spacing="10">
@@ -74,7 +73,7 @@ const Dashboard: React.FC = () => {
 						<Col sm={12} md={4}>
 							<CountBox
 								title="Completed Courses"
-								count={enrolledCoursesCount}
+								count={completedCoursesCount}
 								icon={<Icon as={HiAcademicCap} fontSize="2xl" />}
 								colorScheme="green"
 							/>
@@ -108,10 +107,10 @@ const Dashboard: React.FC = () => {
 								</Link>
 							</ButtonGroup>
 						</Stack>
-						{dashboardCourseQuery?.data?.data?.map(
-							(course: MyCoursesSchema) => (
+						{dashboardCourseQuery?.data?.data?.map((course: MyCoursesSchema) =>
+							validCoursesIds.includes(course.course.id) ? (
 								<CourseGridItem key={course.id} course={course} />
-							)
+							) : null
 						)}
 					</Stack>
 				</Stack>

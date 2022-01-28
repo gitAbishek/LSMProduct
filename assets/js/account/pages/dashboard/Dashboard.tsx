@@ -1,16 +1,7 @@
-import {
-	Box,
-	Button,
-	ButtonGroup,
-	Center,
-	Heading,
-	Icon,
-	Stack,
-	Text,
-} from '@chakra-ui/react';
+import { Button, ButtonGroup, Heading, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { HiOutlineAcademicCap } from 'react-icons/hi';
+import { Col, Row } from 'react-grid-system';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
@@ -18,6 +9,7 @@ import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoad
 import urls from '../../../back-end/constants/urls';
 import { CourseProgressSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
+import CountBox from '../../components/CountBox';
 import CourseGridItem from '../../components/CourseGridItem';
 import routes from '../../constants/routes';
 import { MyCoursesSchema } from '../../schemas';
@@ -60,100 +52,15 @@ const Dashboard: React.FC = () => {
 		return (
 			<>
 				<Stack direction="column" spacing="10">
-					<Stack direction="row" spacing="8">
-						<Stack direction="row" spacing="8" justify="space-around">
-							<Box w="xs" borderWidth="1px" borderColor="gray.100">
-								<Stack p="6">
-									<Stack direction="row" spacing="4">
-										<Stack
-											direction="row"
-											spacing="4"
-											align="center"
-											justify="space-between">
-											<Center
-												bg="blue.10"
-												w="10"
-												h="10"
-												rounded="full"
-												color="blue.400"
-												fontSize="lg">
-												<Icon as={HiOutlineAcademicCap} />
-											</Center>
-											<Heading size="sm" color="blue.900">
-												{__('Enrolled', 'masteriyo')}
-											</Heading>
-										</Stack>
-									</Stack>
-									<Stack direction="column">
-										<Text fontWeight="bold" color="blue.900" fontSize="xl">
-											{enrolledCoursesCount}
-										</Text>
-										<Text color="gray.700">{__('Courses', 'masteriyo')}</Text>
-									</Stack>
-								</Stack>
-							</Box>
-							<Box w="xs" borderWidth="1px" borderColor="gray.100">
-								<Stack p="6">
-									<Stack direction="row" spacing="4">
-										<Stack
-											direction="row"
-											spacing="4"
-											align="center"
-											justify="space-between">
-											<Center
-												bg="orange.100"
-												w="10"
-												h="10"
-												rounded="full"
-												color="orange.400"
-												fontSize="lg">
-												<Icon as={HiOutlineAcademicCap} />
-											</Center>
-											<Heading size="sm" color="blue.900">
-												{__('In Progress', 'masteriyo')}
-											</Heading>
-										</Stack>
-									</Stack>
-									<Stack direction="column">
-										<Text fontWeight="bold" color="blue.900" fontSize="xl">
-											{inProgressCoursesCount}
-										</Text>
-										<Text color="gray.700">{__('Courses', 'masteriyo')}</Text>
-									</Stack>
-								</Stack>
-							</Box>
-							<Box w="xs" borderWidth="1px" borderColor="gray.100">
-								<Stack p="6">
-									<Stack direction="row" spacing="4">
-										<Stack
-											direction="row"
-											spacing="4"
-											align="center"
-											justify="space-between">
-											<Center
-												bg="green.10"
-												w="10"
-												h="10"
-												rounded="full"
-												color="green.400"
-												fontSize="lg">
-												<Icon as={HiOutlineAcademicCap} />
-											</Center>
-											<Heading size="sm" color="blue.900">
-												{__('Completed', 'masteriyo')}
-											</Heading>
-										</Stack>
-									</Stack>
-									<Stack direction="column">
-										<Text fontWeight="bold" color="blue.900" fontSize="xl">
-											{completedCoursesCount}
-										</Text>
-										<Text color="gray.700">{__('Courses', 'masteriyo')}</Text>
-									</Stack>
-								</Stack>
-							</Box>
-						</Stack>
-					</Stack>
+					<Row gutterWidth={30}>
+						<Col>
+							<CountBox
+								title="Enrolled Courses"
+								count={enrolledCoursesCount}
+								colorScheme="blue"
+							/>
+						</Col>
+					</Row>
 
 					<Stack direction="column" spacing="8">
 						<Stack

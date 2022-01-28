@@ -2,23 +2,22 @@ import {
 	Box,
 	Center,
 	Heading,
-	Icon,
 	Stack,
 	Text,
 	ThemingProps,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
-import { HiOutlineAcademicCap } from 'react-icons/hi';
+import React, { ReactNode } from 'react';
 
 interface Props {
 	count: number;
 	title: string;
 	colorScheme: ThemingProps['colorScheme'];
+	icon: ReactNode;
 }
 
 const CountBox: React.FC<Props> = (props) => {
-	const { title, count, colorScheme } = props;
+	const { title, count, colorScheme, icon } = props;
 
 	return (
 		<Box w="xs" borderWidth="1px" borderColor="gray.100">
@@ -33,9 +32,8 @@ const CountBox: React.FC<Props> = (props) => {
 						w="16"
 						h="16"
 						rounded="xl"
-						color={`${colorScheme}.500`}
-						fontSize="3xl">
-						<Icon as={HiOutlineAcademicCap} />
+						color={`${colorScheme}.500`}>
+						{icon}
 					</Center>
 					<Stack direction="column">
 						<Heading size="sm" color="gray.800">

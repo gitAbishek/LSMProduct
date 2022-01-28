@@ -1,7 +1,9 @@
-import { Button, ButtonGroup, Heading, Stack } from '@chakra-ui/react';
+import { Button, ButtonGroup, Heading, Icon, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Col, Row } from 'react-grid-system';
+import { BsBook, BsBookHalf } from 'react-icons/bs';
+import { HiAcademicCap } from 'react-icons/hi';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
@@ -53,11 +55,28 @@ const Dashboard: React.FC = () => {
 			<>
 				<Stack direction="column" spacing="10">
 					<Row gutterWidth={30}>
-						<Col>
+						<Col sm={12} md={4}>
 							<CountBox
 								title="Enrolled Courses"
 								count={enrolledCoursesCount}
+								icon={<Icon as={BsBook} fontSize="xl" />}
+								colorScheme="cyan"
+							/>
+						</Col>
+						<Col sm={12} md={4}>
+							<CountBox
+								title="In Progress Courses"
+								count={inProgressCoursesCount}
+								icon={<Icon as={BsBookHalf} fontSize="xl" />}
 								colorScheme="blue"
+							/>
+						</Col>
+						<Col sm={12} md={4}>
+							<CountBox
+								title="Completed Courses"
+								count={enrolledCoursesCount}
+								icon={<Icon as={HiAcademicCap} fontSize="2xl" />}
+								colorScheme="green"
 							/>
 						</Col>
 					</Row>

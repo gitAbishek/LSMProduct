@@ -233,6 +233,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		if ( $args['force_delete'] ) {
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $order );
 			wp_delete_post( $id, true );
+			$this->delete_items( $order );
 			$order->set_id( 0 );
 			do_action( 'masteriyo_after_delete_' . $object_type, $id, $order );
 		} else {
@@ -411,11 +412,6 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		$type        = trim( $type );
 		$order_items = array();
 
-		// Get from cache if available.
-		// if ( $order->get_id() ) {
-		// 	$order_items = masteriyo( 'cache' )->get( 'masteriyo-order-items-' . $order->get_id(), 'masteriyo-orders' );
-		// }
-
 		if ( ! empty( $order_items ) ) {
 			return $order_items;
 		}
@@ -426,14 +422,6 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 				'order_id' => $order->get_id(),
 			)
 		);
-
-		// foreach ( $order_items as $item ) {
-		// 	masteriyo( 'cache' )->set( 'masteriyo-item-' . $item->get_id(), $item, 'masteriyo-order-items' );
-		// }
-
-		// if ( $order->get_id() ) {
-		// 	masteriyo( 'cache' )->set( 'masteriyo-order-items-' . $order->get_id(), $order_items, 'masteriyo-orders' );
-		// }
 
 		return $order_items;
 	}
@@ -449,16 +437,12 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	public function delete_items( $order, $type = null ) {
 		$order_items_repo = masteriyo( 'order-item.store' );
 
-		if ( ! empty( $type ) ) {
-			$order_items_repo->delete_batch(
-				array(
-					'order_id' => $order->get_id(),
-					'type'     => $type,
-				)
-			);
-		} else {
-			$order_items_repo->delete_batch( array( 'order_id' => $order->get_id() ) );
-		}
+		$order_items_repo->delete_batch(
+			array(
+				'order_id' => $order->get_id(),
+				'type'     => $type,
+			)
+		);
 
 		$this->clear_caches( $order );
 	}
@@ -555,9 +539,9 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Create or update user's course.
 	 *
-	 * @param string $order Order boject.
-	 *
 	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\Order $order Order object.
 	 */
 	public function create_or_update_user_course( $order ) {
 		// Filter order item courses.

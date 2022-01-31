@@ -281,67 +281,41 @@ class OrderItemRepository extends AbstractRepository {
 		$args = wp_parse_args(
 			$args,
 			array(
-				'order_id' => '',
+				'order_id' => 0,
 				'type'     => '',
 			)
 		);
 
-		$order_id       = absint( $args['order_id'] );
-		$type           = trim( $args['type'] );
-		$order_item_ids = array();
-
-		if ( empty( $order_id ) ) {
+		if ( empty( $args['order_id'] ) ) {
 			return;
 		}
 
-		if ( empty( $type ) ) {
-			$order_item_ids = $wpdb->get_col(
+		if ( empty( $args['type'] ) ) {
+			$wpdb->query(
 				$wpdb->prepare(
-					"SELECT * FROM {$wpdb->prefix}masteriyo_order_items WHERE order_id = %d",
-					$order_id
+					"DELETE FROM itemmeta USING {$wpdb->prefix}masteriyo_order_itemmeta itemmeta INNER JOIN {$wpdb->prefix}masteriyo_order_items items WHERE itemmeta.order_item_id = items.order_item_id AND items.order_id = %d",
+					$args['order_id']
 				)
 			);
-
-			$wpdb->delete(
-				"{$wpdb->prefix}masteriyo_order_items",
-				array(
-					'order_id' => $order_id,
-				),
-				array(
-					'%d',
+			$wpdb->query(
+				$wpdb->prepare(
+					"DELETE FROM {$wpdb->prefix}masteriyo_order_items WHERE order_id = %d",
+					$args['order_id']
 				)
 			);
 		} else {
-			$order_item_ids = $wpdb->get_col(
-				$wpdb->prepare(
-					"SELECT * FROM {$wpdb->prefix}masteriyo_order_items WHERE order_id = %d AND order_item_type = %s",
-					$order_id,
-					$type
-				)
-			);
-
-			$wpdb->delete(
-				"{$wpdb->prefix}masteriyo_order_items",
-				array(
-					'order_id' => $order_id,
-					'type'     => $type,
-				),
-				array(
-					'%d',
-					'%s',
-				)
-			);
-		}
-
-		$order_item_ids    = array_map( 'absint', $order_item_ids );
-		$in_order_item_ids = array_fill( 0, count( $order_item_ids ), '%d' );
-		$in_order_item_ids = join( ',', $in_order_item_ids );
-
-		if ( ! empty( $order_item_ids ) ) {
 			$wpdb->query(
 				$wpdb->prepare(
-					"DELETE FROM {$wpdb->prefix}masteriyo_order_itemmeta WHERE order_item_id IN ($in_order_item_ids)", // phpcs:ignore
-					$order_item_ids
+					"DELETE FROM itemmeta USING {$wpdb->prefix}masteriyo_order_itemmeta itemmeta INNER JOIN {$wpdb->prefix}masteriyo_order_items items WHERE itemmeta.order_item_id = items.order_item_id AND items.order_id = %d AND items.order_item_type = %s",
+					$args['order_id'],
+					$args['type']
+				)
+			);
+			$wpdb->query(
+				$wpdb->prepare(
+					"DELETE FROM {$wpdb->prefix}masteriyo_order_items WHERE order_id = %d AND order_item_type = %s",
+					$args['order_id'],
+					$args['type']
 				)
 			);
 		}

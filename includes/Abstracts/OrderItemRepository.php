@@ -211,7 +211,7 @@ class OrderItemRepository extends AbstractRepository {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param stdclass $item Order item
+	 * @param stdClass $item Order item
 	 * @return OrderItem
 	 */
 	public function get_order_item_object( $item ) {
@@ -240,7 +240,7 @@ class OrderItemRepository extends AbstractRepository {
 	 * @since 1.0.0
 	 *
 	 * @param OrderItem $item Order item object.
-	 * @param stdclass $item_metas List of all order item meta.
+	 * @param stdClass $item List of all order item meta.
 	 *
 	 * @return
 	 */

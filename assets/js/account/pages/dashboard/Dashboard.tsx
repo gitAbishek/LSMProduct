@@ -108,7 +108,7 @@ const Dashboard: React.FC = () => {
 							</ButtonGroup>
 						</Stack>
 						{dashboardCourseQuery?.data?.data?.map((course: MyCoursesSchema) =>
-							validCoursesIds.includes(course.course.id) ? (
+							validCoursesIds?.includes(course.course.id) ? (
 								<CourseGridItem key={course.id} course={course} />
 							) : null
 						)}

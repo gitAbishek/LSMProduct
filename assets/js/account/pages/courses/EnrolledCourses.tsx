@@ -8,15 +8,15 @@ import API from '../../../back-end/utils/api';
 import CourseItem from '../../components/CourseItem';
 import { MyCoursesSchema } from '../../schemas';
 
-const MyCourses: React.FC = () => {
+const EnrolledCourses: React.FC = () => {
 	const courseAPI = new API(urls.myCourses);
 	const myCourseQuery = useQuery(['myCourses'], () => courseAPI.list());
 
 	if (myCourseQuery.isSuccess) {
 		return (
 			<Stack direction="column" spacing="8">
-				<Heading as="h1" size="xl">
-					{__('My Courses', 'masteriyo')}
+				<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
+					{__('Courses', 'masteriyo')}
 				</Heading>
 				<SimpleGrid columns={3} spacing="6">
 					{myCourseQuery?.data?.data.map((myCourse: MyCoursesSchema) => {
@@ -29,4 +29,4 @@ const MyCourses: React.FC = () => {
 	return <FullScreenLoader />;
 };
 
-export default MyCourses;
+export default EnrolledCourses;

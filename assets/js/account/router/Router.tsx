@@ -4,7 +4,7 @@ import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { accountStyles } from '../../back-end/config/styles';
 import Sidebar from '../components/Sidebar';
 import routes from '../constants/routes';
-import MyCourses from '../pages/courses/MyCouses';
+import EnrolledCourses from '../pages/courses/EnrolledCourses';
 import Dashboard from '../pages/dashboard/Dashboard';
 import OrderDetails from '../pages/order/OrderDetails';
 import OrderHistory from '../pages/order/OrderHistory';
@@ -24,7 +24,7 @@ const Router: React.FC = () => {
 									<Dashboard />
 								</Route>
 								<Route path={routes.courses} exact>
-									<MyCourses />
+									<EnrolledCourses />
 								</Route>
 								<Route path={routes.order.list} exact>
 									<OrderHistory />

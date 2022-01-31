@@ -1,5 +1,6 @@
 import {
 	Avatar,
+	Divider,
 	Heading,
 	Link,
 	List,
@@ -9,7 +10,14 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { BiBook, BiGrid, BiHistory, BiLogOut, BiUser } from 'react-icons/bi';
+import {
+	BiBook,
+	BiGrid,
+	BiHistory,
+	BiLogOut,
+	BiPlus,
+	BiUser,
+} from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { NavLink, useLocation } from 'react-router-dom';
 import FullScreenLoader from '../../back-end/components/layout/FullScreenLoader';
@@ -22,9 +30,7 @@ const Sidebar = () => {
 	const location = useLocation();
 	const userAPI = new API(urls.currentUser);
 
-	const { data, isSuccess } = useQuery<UserSchema>('userProfile', () =>
-		userAPI.get()
-	);
+	const userQuery = useQuery<UserSchema>('userProfile', () => userAPI.get());
 
 	const navLinkStyles = {
 		borderRight: '2px',
@@ -41,7 +47,7 @@ const Sidebar = () => {
 		borderColor: 'blue.500',
 		color: 'blue.500',
 	};
-	if (isSuccess) {
+	if (userQuery.isSuccess) {
 		return (
 			<List
 				mr="6"
@@ -56,16 +62,16 @@ const Sidebar = () => {
 					<Stack direction="row" align="center" spacing="3">
 						<Avatar
 							size="sm"
-							name={data?.first_name}
-							src={data?.avatar_url}
+							name={userQuery?.data?.first_name}
+							src={userQuery?.data?.avatar_url}
 							showBorder
 							shadow="md"
 						/>
 						<Stack direction="column" spacing="0">
 							<Heading as="h5" fontSize="xs" fontWeight="medium">
-								{data?.first_name && data?.last_name
-									? `${data?.first_name} ${data?.last_name}`
-									: data?.username}
+								{userQuery?.data?.first_name && userQuery?.data?.last_name
+									? `${userQuery?.data?.first_name} ${userQuery?.data?.last_name}`
+									: userQuery?.data?.username}
 							</Heading>
 						</Stack>
 					</Stack>
@@ -80,6 +86,19 @@ const Sidebar = () => {
 						{__('Dashboard', 'masteriyo')}
 					</Link>
 				</ListItem>
+
+				{userQuery?.data?.roles.includes('masteriyo_instructor') ? (
+					<>
+						<Divider />
+						<ListItem>
+							<Link href="somethithe">
+								<ListIcon fontSize="md" mr="3" as={BiPlus} />
+								{__('Add course', 'masteriyo')}
+							</Link>
+						</ListItem>
+						<Divider />
+					</>
+				) : null}
 				<ListItem>
 					<Link
 						as={NavLink}

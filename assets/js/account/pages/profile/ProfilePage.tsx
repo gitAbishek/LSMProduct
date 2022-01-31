@@ -33,9 +33,6 @@ const ProfilePage = () => {
 					fontSize: 'sm',
 					color: 'gray.600',
 
-					':first-of-type': {
-						pl: '6',
-					},
 					':first-child': {
 						fontWeight: 'medium',
 						color: 'gray.900',

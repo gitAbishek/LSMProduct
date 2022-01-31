@@ -275,7 +275,7 @@ export const isDevelopment = process.env.NODE_ENV === 'development';
 
 export const isProduction = process.env.NODE_ENV === 'production';
 
-export const shortEnglishHumanizer = humanizeDuration.humanizer({
+export const humanizeTime = humanizeDuration.humanizer({
 	language: 'shortEn',
 	languages: {
 		shortEn: {
@@ -289,6 +289,8 @@ export const shortEnglishHumanizer = humanizeDuration.humanizer({
 			ms: () => 'ms',
 		},
 	},
-});
+	conjunction: ' ',
+	spacer: '',
 
-shortEnglishHumanizer(15600000);
+	units: ['h', 'm'],
+});

@@ -16,10 +16,7 @@ import { BiTime } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
-import {
-	getLocalTime,
-	shortEnglishHumanizer,
-} from '../../back-end/utils/utils';
+import { getLocalTime, humanizeTime } from '../../back-end/utils/utils';
 import { CourseProgressMap } from '../../interactive/schemas';
 import { MyCoursesSchema } from '../schemas';
 
@@ -71,9 +68,7 @@ const CourseGridItem: React.FC<Props> = (props) => {
 							align="center">
 							<Icon as={BiTime} />
 							<Text fontSize="xs" fontWeight="medium">
-								{shortEnglishHumanizer(course?.duration * 60 * 1000, {
-									units: ['h', 'm'],
-								})}
+								{humanizeTime(course?.duration * 60 * 1000)}
 							</Text>
 						</Stack>
 					</Stack>
@@ -115,7 +110,7 @@ const CourseGridItem: React.FC<Props> = (props) => {
 						{started_at && (
 							<Text color="gray.500" fontSize="xs">
 								{__('Started on ', 'masteriyo')}
-								{getLocalTime(started_at).toLocaleString()}
+								{getLocalTime(started_at).toLocaleString().split(', ')[0]}
 							</Text>
 						)}
 					</Stack>

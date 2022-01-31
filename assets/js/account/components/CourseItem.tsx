@@ -13,14 +13,13 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import humanizeDuration from 'humanize-duration';
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
 import { IoMdStar, IoMdStarOutline } from 'react-icons/io';
 import { useQuery } from 'react-query';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
-import { getLocalTime } from '../../back-end/utils/utils';
+import { getLocalTime, humanizeTime } from '../../back-end/utils/utils';
 import { CourseProgressMap } from '../../interactive/schemas';
 import { MyCoursesSchema } from '../schemas';
 
@@ -43,8 +42,6 @@ const CourseItem: React.FC<Props> = (props) => {
 	const renderRatings = () => {
 		const average = Number(course.average_rating);
 		let stars = [];
-
-		console.log(average);
 
 		for (let i = 1; i <= 5; i++) {
 			if (i <= average) {
@@ -132,13 +129,7 @@ const CourseItem: React.FC<Props> = (props) => {
 							color="gray.500">
 							<Stack direction="row" spacing="1">
 								<Icon as={BiTime} mt="1" />
-								<Text>
-									{
-										humanizeDuration(course?.duration * 60 * 1000).split(
-											', '
-										)[0]
-									}
-								</Text>
+								<Text>{humanizeTime(course?.duration * 60 * 1000)}</Text>
 							</Stack>
 							{courseProgressQuery.isSuccess && (
 								<Text>

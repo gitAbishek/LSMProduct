@@ -54,7 +54,11 @@ const CourseItem: React.FC<Props> = (props) => {
 			}
 		}
 
-		return <>{stars}</>;
+		return (
+			<Stack direction="row" spacing="0" color="orange.300">
+				{stars}
+			</Stack>
+		);
 	};
 
 	if (course) {
@@ -114,9 +118,8 @@ const CourseItem: React.FC<Props> = (props) => {
 										{course?.author?.display_name}
 									</Text>
 								</Stack>
-								<Stack direction="row" spacing="0">
-									{renderRatings()}
-								</Stack>
+
+								{renderRatings()}
 							</Stack>
 						</Stack>
 

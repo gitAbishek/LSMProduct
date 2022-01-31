@@ -59,6 +59,8 @@ class Masteriyo {
 	 * @since 1.0.0
 	 */
 	protected function init() {
+		do_action( 'masteriyo_before_init', $this );
+
 		masteriyo( 'migrator' )->migrate();
 
 		Capabilities::init();
@@ -83,6 +85,8 @@ class Masteriyo {
 
 		// Initialize the hooks.
 		$this->init_hooks();
+
+		do_action( 'masteriyo_after_init', $this );
 	}
 
 	/**

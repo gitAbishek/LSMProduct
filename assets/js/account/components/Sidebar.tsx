@@ -24,14 +24,13 @@ import FullScreenLoader from '../../back-end/components/layout/FullScreenLoader'
 import urls from '../../back-end/constants/urls';
 import { UserSchema } from '../../back-end/schemas';
 import API from '../../back-end/utils/api';
+import localized from '../../back-end/utils/global';
 import routes from '../constants/routes';
 
 const Sidebar = () => {
 	const location = useLocation();
 	const userAPI = new API(urls.currentUser);
-
 	const userQuery = useQuery<UserSchema>('userProfile', () => userAPI.get());
-
 	const navLinkStyles = {
 		borderRight: '2px',
 		d: 'block',
@@ -91,7 +90,7 @@ const Sidebar = () => {
 					<>
 						<Divider />
 						<ListItem>
-							<Link href="somethithe">
+							<Link href={localized.ur}>
 								<ListIcon fontSize="md" mr="3" as={BiPlus} />
 								{__('Add course', 'masteriyo')}
 							</Link>

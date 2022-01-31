@@ -186,3 +186,27 @@ export interface SetttingsMap {
 	emails: EmailsSetttingsMap;
 	advance: AdvancedSettingsMap;
 }
+
+export type MasteriyoLocalized = {
+	rootApiUrl: string;
+	current_user_id: string;
+	nonce: string;
+	labels: {
+		save: string;
+		saving: string;
+		profile_update_success: string;
+	};
+	currency: {
+		code: string;
+		symbol: string;
+		position: string;
+	};
+	urls: {
+		logout: string;
+		account: string;
+		courses: string;
+		home: string;
+		myCourses: string;
+		addNewCourse: string;
+	};
+};

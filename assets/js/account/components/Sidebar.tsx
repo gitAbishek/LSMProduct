@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import {
 	BiBook,
+	BiBookAlt,
 	BiGrid,
 	BiHistory,
 	BiLogOut,
@@ -90,9 +91,15 @@ const Sidebar = () => {
 					<>
 						<Divider />
 						<ListItem>
-							<Link href={localized.ur}>
+							<Link sx={navLinkStyles} href={localized.urls.addNewCourse}>
 								<ListIcon fontSize="md" mr="3" as={BiPlus} />
 								{__('Add course', 'masteriyo')}
+							</Link>
+						</ListItem>
+						<ListItem>
+							<Link sx={navLinkStyles} href={localized.urls.myCourses}>
+								<ListIcon fontSize="md" mr="3" as={BiBookAlt} />
+								{__('My Courses', 'masteriyo')}
 							</Link>
 						</ListItem>
 						<Divider />
@@ -135,8 +142,10 @@ const Sidebar = () => {
 				</ListItem>
 
 				<ListItem>
-					<ListIcon fontSize="md" mr="3" as={BiLogOut} />
-					{__('Logout')}
+					<Link sx={navLinkStyles} href={localized.urls.logout}>
+						<ListIcon fontSize="md" mr="3" as={BiLogOut} />
+						{__('Logout')}
+					</Link>
 				</ListItem>
 			</List>
 		);

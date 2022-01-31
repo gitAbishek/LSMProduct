@@ -16,7 +16,7 @@ import { __ } from '@wordpress/i18n';
 import humanizeDuration from 'humanize-duration';
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
-import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from 'react-icons/io';
+import { IoMdStar, IoMdStarOutline } from 'react-icons/io';
 import { useQuery } from 'react-query';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
@@ -39,6 +39,23 @@ const CourseItem: React.FC<Props> = (props) => {
 			enabled: !!course?.id,
 		}
 	);
+
+	const renderRatings = () => {
+		const average = Number(course.average_rating);
+		let stars = [];
+
+		console.log(average);
+
+		for (let i = 1; i <= 5; i++) {
+			if (i <= average) {
+				stars.push(<Icon key={i} as={IoMdStar} />);
+			} else {
+				stars.push(<Icon key={i} as={IoMdStarOutline} />);
+			}
+		}
+
+		return <>{stars}</>;
+	};
 
 	if (course) {
 		return (
@@ -98,11 +115,7 @@ const CourseItem: React.FC<Props> = (props) => {
 									</Text>
 								</Stack>
 								<Stack direction="row" spacing="0">
-									<Icon as={IoMdStar} />
-									<Icon as={IoMdStar} />
-									<Icon as={IoMdStar} />
-									<Icon as={IoMdStarHalf} />
-									<Icon as={IoMdStarOutline} />
+									{renderRatings()}
 								</Stack>
 							</Stack>
 						</Stack>

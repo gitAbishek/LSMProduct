@@ -16,7 +16,7 @@ const EnrolledCourses: React.FC = () => {
 		return (
 			<Stack direction="column" spacing="8">
 				<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
-					{__('Courses', 'masteriyo')}
+					{__('Enrolled Courses', 'masteriyo')}
 				</Heading>
 				<SimpleGrid columns={3} spacing="6">
 					{myCourseQuery?.data?.data.map((myCourse: MyCoursesSchema) => {

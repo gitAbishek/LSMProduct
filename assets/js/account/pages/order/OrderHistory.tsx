@@ -15,7 +15,7 @@ const OrderHistory: React.FC = () => {
 
 	return (
 		<Stack direction="column" spacing="8" width="full">
-			<Heading as="h4" size="md" fontWeight="bold" color="blue.900" px="8">
+			<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
 				{__('Order History', 'masteriyo')}
 			</Heading>
 

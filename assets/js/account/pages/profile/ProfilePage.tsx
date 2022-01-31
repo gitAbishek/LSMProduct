@@ -1,5 +1,12 @@
-import { Image } from '@chakra-ui/image';
-import { Button, Flex, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+	Avatar,
+	Button,
+	CSSObject,
+	Flex,
+	Heading,
+	Stack,
+	Text,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiEdit } from 'react-icons/bi';
@@ -19,11 +26,30 @@ const ProfilePage = () => {
 		userAPI.get()
 	);
 
+	const tableStyles: CSSObject = {
+		table: {
+			tr: {
+				td: {
+					fontSize: 'sm',
+					color: 'gray.600',
+
+					':first-of-type': {
+						pl: '6',
+					},
+					':first-child': {
+						fontWeight: 'medium',
+						color: 'gray.900',
+					},
+				},
+			},
+		},
+	};
+
 	if (isSuccess) {
 		return (
 			<Stack direction="column" spacing="8" width="full">
 				<Flex justify={'space-between'}>
-					<Heading as="h4" size="md" fontWeight="bold" color="blue.900" px="8">
+					<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
 						{__('Profile', 'masteriyo')}
 					</Heading>
 					<Link to={routes.user.edit}>
@@ -38,132 +64,78 @@ const ProfilePage = () => {
 						</Button>
 					</Link>
 				</Flex>
-				<Stack direction="row" spacing="6">
-					<Image
-						src={data?.avatar_url}
-						alt={data?.first_name}
-						borderRadius="full"
-						boxSize="10rem"
-						border="2px"
-						borderColor="gray.100"
-					/>
+				<Stack direction="row" spacing="6" sx={tableStyles}>
+					<Avatar src={data?.avatar_url} size="xl" />
+
 					<Stack direction="column" spacing="6" flex="1">
 						<Text as="h3" fontSize="4xl" fontWeight="medium">
-							{data?.first_name} {data?.last_name}
+							{data?.first_name && data?.last_name
+								? `${data?.first_name} ${data?.last_name}`
+								: data?.username}
 						</Text>
 
 						<Table>
 							<Tbody>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('First Name', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.first_name}
-									</Td>
+									<Td>{__('First Name', 'masteriyo')}</Td>
+									<Td>{data?.first_name}</Td>
 								</Tr>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Last Name', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.last_name}
-									</Td>
+									<Td>{__('Last Name', 'masteriyo')}</Td>
+									<Td>{data?.last_name}</Td>
 								</Tr>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Username', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.username}
-									</Td>
+									<Td>{__('Username', 'masteriyo')}</Td>
+									<Td>{data?.username}</Td>
 								</Tr>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Email', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.email}
-									</Td>
+									<Td>{__('Email', 'masteriyo')}</Td>
+									<Td>{data?.email}</Td>
 								</Tr>
 							</Tbody>
 						</Table>
+
 						<Heading fontSize="lg" px="6">
 							{__('Billing', 'masteriyo')}
 						</Heading>
+
 						<Table>
 							<Tbody>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('First Name', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.billing?.first_name}
-									</Td>
+									<Td>{__('First Name', 'masteriyo')}</Td>
+									<Td>{data?.billing?.first_name}</Td>
 								</Tr>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Last Name', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.billing?.last_name}
-									</Td>
+									<Td>{__('Last Name', 'masteriyo')}</Td>
+									<Td>{data?.billing?.last_name}</Td>
 								</Tr>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Contact Number', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.billing?.phone}
-									</Td>
+									<Td>{__('Contact Number', 'masteriyo')}</Td>
+									<Td>{data?.billing?.phone}</Td>
 								</Tr>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Country', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.billing?.country}
-									</Td>
+									<Td>{__('Country', 'masteriyo')}</Td>
+									<Td>{data?.billing?.country}</Td>
 								</Tr>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('State', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.billing?.state}
-									</Td>
+									<Td>{__('State', 'masteriyo')}</Td>
+									<Td>{data?.billing?.state}</Td>
 								</Tr>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('City', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.billing?.city}
-									</Td>
+									<Td>{__('City', 'masteriyo')}</Td>
+									<Td>{data?.billing?.city}</Td>
 								</Tr>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Zip Code', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.billing?.postcode}
-									</Td>
+									<Td>{__('Zip Code', 'masteriyo')}</Td>
+									<Td>{data?.billing?.postcode}</Td>
 								</Tr>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Address 1', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.billing?.address_1}
-									</Td>
+									<Td>{__('Address 1', 'masteriyo')}</Td>
+									<Td>{data?.billing?.address_1}</Td>
 								</Tr>
 								<Tr>
-									<Td fontSize="sm" fontWeight="medium" borderBottom="none">
-										{__('Address 2', 'masteriyo')}
-									</Td>
-									<Td fontSize="sm" color="gray" borderBottom="none">
-										{data?.billing?.address_2}
-									</Td>
+									<Td>{__('Address 2', 'masteriyo')}</Td>
+									<Td>{data?.billing?.address_2}</Td>
 								</Tr>
 							</Tbody>
 						</Table>

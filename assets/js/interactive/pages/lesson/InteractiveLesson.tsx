@@ -9,11 +9,12 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useState } from 'react';
+import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
+import { LessonSchema, MediaSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
 import MediaAPI from '../../../back-end/utils/media';
 import ContentNav from '../../components/ContentNav';
@@ -26,7 +27,6 @@ import VideoPlayer from './VideoPlayer';
 const InteractiveLesson = () => {
 	const { lessonId, courseId }: any = useParams();
 	const lessonAPI = new API(urls.lessons);
-	const [mediaId, setMediaId] = useState(0);
 	const toast = useToast();
 	const queryClient = useQueryClient();
 
@@ -46,17 +46,9 @@ const InteractiveLesson = () => {
 		() => progressAPI.store({ course_id: courseId })
 	);
 
-	const lessonQuery = useQuery(
+	const lessonQuery = useQuery<LessonSchema>(
 		[`interactiveLesson${lessonId}`, lessonId],
-		() => lessonAPI.get(lessonId),
-		{
-			onSuccess: (data: any) => {
-				setMediaId(data.featured_image);
-			},
-			onError: () => {
-				return;
-			},
-		}
+		() => lessonAPI.get(lessonId)
 	);
 
 	const completeQuery = useQuery<CourseProgressItemsMap>(
@@ -64,12 +56,12 @@ const InteractiveLesson = () => {
 		() => progressItemAPI.list({ item_id: lessonId, course_id: courseId })
 	);
 
-	const imageQuery = useQuery(
-		[`interactiveLessonimage${mediaId}`, mediaId],
-		() => imageAPi.get(mediaId),
-		{
-			enabled: mediaId !== 0,
-		}
+	const imageQuery = useQuery<MediaSchema>(
+		[
+			`interactiveLessonimage${lessonQuery?.data?.featured_image}`,
+			lessonQuery?.data?.featured_image,
+		],
+		() => imageAPi.get(lessonQuery?.data?.featured_image || 0)
 	);
 
 	const completeMutation = useMutation((data: CourseProgressItemsMap) =>

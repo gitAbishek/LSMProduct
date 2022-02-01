@@ -300,10 +300,11 @@ export interface LessonSchema {
 	course_id: number;
 	menu_order: number;
 	featured_image: number;
-	video_source: string;
+	video_source: 'self-hosted' | 'youtube' | 'vimeo';
 	video_source_url: string;
 	video_source_id: number;
 	video_playback_time: number;
+	parent_menu_order: number;
 	attachments: [
 		{
 			id: number;
@@ -311,6 +312,7 @@ export interface LessonSchema {
 		}
 	];
 	course_name: string;
+	navigation: any;
 }
 
 export interface SectionSchema {

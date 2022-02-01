@@ -146,11 +146,16 @@ class Setting extends Model {
 	 */
 	protected $data = array(
 		'general'        => array(
-			'styling'     => array(
+			'styling'       => array(
 				'primary_color' => '',
 				'theme'         => 'minimum',
 			),
-			'widgets_css' => '',
+			'widgets_css'   => '',
+			'review_notice' => array(
+				'time_to_ask'  => null,
+				'reviewed'     => false,
+				'closed_count' => 0,
+			),
 		),
 		'course_archive' => array(
 			'display' => array(

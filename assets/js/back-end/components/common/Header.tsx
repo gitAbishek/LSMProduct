@@ -20,6 +20,7 @@ import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
+import ReviewNotice from './ReviewNotice';
 
 interface Props {
 	firstBtn?: {
@@ -69,131 +70,134 @@ const Header: React.FC<Props> = (props) => {
 	const buttonSize = useBreakpointValue(['sm', 'md']);
 	const [isDesktop] = useMediaQuery('(min-width: 48em)');
 	return (
-		<Box bg="white" w="full" shadow="header" pb={['3', 0, 0]}>
-			<Container maxW="container.xl">
-				<Stack
-					direction={['column', 'row']}
-					justifyContent="space-between"
-					align="center">
+		<>
+			<Box bg="white" w="full" shadow="header" pb={['3', 0, 0]}>
+				<Container maxW="container.xl">
 					<Stack
-						direction={['column', null, 'row']}
-						spacing={['3', null, '8']}
-						align="center"
-						minHeight="16">
-						<Box d={['none', null, 'block']}>
-							<NavLink to={routes.courses.list}>
-								<Image src={Logo} w="36px" />
-							</NavLink>
-						</Box>
-						{showCourseName && (
-							<>
-								{course && (
-									<Heading fontSize="md" fontWeight="medium">
-										{course.name}
-									</Heading>
-								)}
-							</>
-						)}
-						{children}
-						{showLinks && courseId && (
-							<List d="flex">
-								<ListItem mb="0">
-									<Link
-										as={NavLink}
-										sx={navLinkStyles}
-										_activeLink={navActiveStyles}
-										to={routes.courses.edit.replace(
-											':courseId',
-											courseId.toString()
-										)}>
-										<ListIcon as={BiBook} />
-										{__('Course', 'masteriyo')}
-									</Link>
-								</ListItem>
-
-								<ListItem mb="0">
-									<Link
-										as={NavLink}
-										sx={navLinkStyles}
-										isActive={() => location.pathname.includes('/courses')}
-										_activeLink={navActiveStyles}
-										to={
-											routes.courses.edit.replace(
+						direction={['column', 'row']}
+						justifyContent="space-between"
+						align="center">
+						<Stack
+							direction={['column', null, 'row']}
+							spacing={['3', null, '8']}
+							align="center"
+							minHeight="16">
+							<Box d={['none', null, 'block']}>
+								<NavLink to={routes.courses.list}>
+									<Image src={Logo} w="36px" />
+								</NavLink>
+							</Box>
+							{showCourseName && (
+								<>
+									{course && (
+										<Heading fontSize="md" fontWeight="medium">
+											{course.name}
+										</Heading>
+									)}
+								</>
+							)}
+							{children}
+							{showLinks && courseId && (
+								<List d="flex">
+									<ListItem mb="0">
+										<Link
+											as={NavLink}
+											sx={navLinkStyles}
+											_activeLink={navActiveStyles}
+											to={routes.courses.edit.replace(
 												':courseId',
 												courseId.toString()
-											) + '?page=builder'
-										}>
-										<ListIcon as={BiEdit} />
-										{__('Builder', 'masteriyo')}
-									</Link>
-								</ListItem>
+											)}>
+											<ListIcon as={BiBook} />
+											{__('Course', 'masteriyo')}
+										</Link>
+									</ListItem>
 
-								<ListItem mb="0">
-									<Link
-										as={NavLink}
-										sx={navLinkStyles}
-										_activeLink={navActiveStyles}
-										to={
-											routes.courses.edit.replace(
-												':courseId',
-												courseId.toString()
-											) + '?page=settings'
-										}>
-										<ListIcon as={BiCog} />
-										{__('Settings', 'masteriyo')}
-									</Link>
-								</ListItem>
-							</List>
-						)}
-					</Stack>
+									<ListItem mb="0">
+										<Link
+											as={NavLink}
+											sx={navLinkStyles}
+											isActive={() => location.pathname.includes('/courses')}
+											_activeLink={navActiveStyles}
+											to={
+												routes.courses.edit.replace(
+													':courseId',
+													courseId.toString()
+												) + '?page=builder'
+											}>
+											<ListIcon as={BiEdit} />
+											{__('Builder', 'masteriyo')}
+										</Link>
+									</ListItem>
 
-					<ButtonGroup>
-						{firstBtn && (
-							<Button
-								size={buttonSize}
-								variant="outline"
-								onClick={firstBtn.action}
-								isLoading={firstBtn.isLoading}
-								isDisabled={firstBtn.isDisabled}>
-								{firstBtn.label}
-							</Button>
-						)}
+									<ListItem mb="0">
+										<Link
+											as={NavLink}
+											sx={navLinkStyles}
+											_activeLink={navActiveStyles}
+											to={
+												routes.courses.edit.replace(
+													':courseId',
+													courseId.toString()
+												) + '?page=settings'
+											}>
+											<ListIcon as={BiCog} />
+											{__('Settings', 'masteriyo')}
+										</Link>
+									</ListItem>
+								</List>
+							)}
+						</Stack>
 
-						{showPreview && course?.previewUrl && (
-							<Link href={course?.previewUrl} isExternal>
-								<Button size={buttonSize} variant="outline">
-									{__('Preview', 'masteriyo')}
+						<ButtonGroup>
+							{firstBtn && (
+								<Button
+									size={buttonSize}
+									variant="outline"
+									onClick={firstBtn.action}
+									isLoading={firstBtn.isLoading}
+									isDisabled={firstBtn.isDisabled}>
+									{firstBtn.label}
 								</Button>
-							</Link>
-						)}
-						{secondBtn && (
-							<Button
-								size={buttonSize}
-								variant="outline"
-								colorScheme="blue"
-								onClick={secondBtn.action}
-								leftIcon={secondBtn.icon}
-								isDisabled={secondBtn.isDisabled}
-								isLoading={secondBtn.isLoading}>
-								{secondBtn.label}
-							</Button>
-						)}
+							)}
 
-						{thirdBtn && (
-							<Button
-								size={buttonSize}
-								colorScheme="blue"
-								onClick={thirdBtn.action}
-								isDisabled={thirdBtn.isDisabled}
-								leftIcon={isDesktop ? thirdBtn.icon : <></>}
-								isLoading={thirdBtn.isLoading}>
-								{thirdBtn.label}
-							</Button>
-						)}
-					</ButtonGroup>
-				</Stack>
-			</Container>
-		</Box>
+							{showPreview && course?.previewUrl && (
+								<Link href={course?.previewUrl} isExternal>
+									<Button size={buttonSize} variant="outline">
+										{__('Preview', 'masteriyo')}
+									</Button>
+								</Link>
+							)}
+							{secondBtn && (
+								<Button
+									size={buttonSize}
+									variant="outline"
+									colorScheme="blue"
+									onClick={secondBtn.action}
+									leftIcon={secondBtn.icon}
+									isDisabled={secondBtn.isDisabled}
+									isLoading={secondBtn.isLoading}>
+									{secondBtn.label}
+								</Button>
+							)}
+
+							{thirdBtn && (
+								<Button
+									size={buttonSize}
+									colorScheme="blue"
+									onClick={thirdBtn.action}
+									isDisabled={thirdBtn.isDisabled}
+									leftIcon={isDesktop ? thirdBtn.icon : <></>}
+									isLoading={thirdBtn.isLoading}>
+									{thirdBtn.label}
+								</Button>
+							)}
+						</ButtonGroup>
+					</Stack>
+				</Container>
+			</Box>
+			<ReviewNotice />
+		</>
 	);
 };
 

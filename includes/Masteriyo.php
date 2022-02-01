@@ -108,6 +108,7 @@ class Masteriyo {
 		add_action( 'admin_init', array( $this, 'admin_redirects' ) );
 		add_action( 'after_setup_theme', array( $this, 'add_image_sizes' ) );
 
+		add_action( 'admin_notices', array( $this, 'add_review_notice' ) );
 		add_action( 'in_admin_header', array( $this, 'hide_admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', 'wp_enqueue_media' );
 
@@ -445,6 +446,18 @@ class Masteriyo {
 				esc_html__( 'Minimum WordPress version required for Masteriyo to work is v5.0.', 'masteriyo' )
 			);
 		}
+	}
+
+	/**
+	 * Add admin review notice.
+	 *
+	 * @since x.x.x
+	 */
+	public function add_review_notice() {
+		if ( ! masteriyo_is_show_review_notice() ) {
+			return;
+		}
+		masteriyo_get_template( 'notices/ask-review.php' );
 	}
 
 	/**

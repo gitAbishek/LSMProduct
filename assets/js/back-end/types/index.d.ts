@@ -189,8 +189,10 @@ export interface SetttingsMap {
 
 export type MasteriyoLocalized = {
 	rootApiUrl: string;
+	ajax_url: string;
 	current_user_id: string;
 	nonce: string;
+	review_notice_nonce: string;
 	labels: {
 		save: string;
 		saving: string;
@@ -209,4 +211,5 @@ export type MasteriyoLocalized = {
 		myCourses: string;
 		addNewCourse: string;
 	};
+	show_review_notice: 'yes' | 'no';
 };

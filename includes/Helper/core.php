@@ -1757,6 +1757,7 @@ function masteriyo_get_svg( $name, $echo = false ) {
 			'width'           => true,
 			'height'          => true,
 			'viewbox'         => true, // <= Must be lower case!
+			'fill'            => true,
 		),
 		'g'     => array( 'fill' => true ),
 		'title' => array( 'title' => true ),

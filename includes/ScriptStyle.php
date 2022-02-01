@@ -183,6 +183,13 @@ class ScriptStyle {
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_checkout_page',
 				),
+				'ask-review'    => array(
+					'src'      => self::get_asset_url( "/assets/js/build/ask-review{$suffix}.js" ),
+					'deps'     => array( 'jquery' ),
+					'version'  => self::get_version(),
+					'context'  => 'admin',
+					'callback' => 'masteriyo_is_show_review_notice',
+				),
 				'learn'         => array(
 					'src'      => $learn_src,
 					'deps'     => array( 'react', 'wp-data', 'wp-core-data', 'wp-components', 'wp-element', 'react-dom', 'wp-api-fetch', 'wp-i18n', 'wp-polyfill' ),
@@ -207,17 +214,17 @@ class ScriptStyle {
 		self::$styles = apply_filters(
 			'masteriyo_enqueue_styles',
 			array(
-				'public'       => array(
+				'public'        => array(
 					'src'     => self::get_asset_url( "/assets/css/public{$suffix}.css" ),
 					'has_rtl' => false,
 					'context' => 'public',
 				),
-				'dependencies' => array(
+				'dependencies'  => array(
 					'src'     => self::get_asset_url( '/assets/js/build/masteriyo-dependencies.css' ),
 					'has_rtl' => false,
 					'context' => 'admin',
 				),
-				'block'        => array(
+				'block'         => array(
 					'src'      => self::get_asset_url( "/assets/css/block{$suffix}.css" ),
 					'has_rtl'  => false,
 					'context'  => 'admin',
@@ -226,6 +233,12 @@ class ScriptStyle {
 
 						return $screen && ( $screen->is_block_editor() || 'customize' === $screen->id );
 					},
+				),
+				'review-notice' => array(
+					'src'      => self::get_asset_url( "/assets/css/review-notice{$suffix}.css" ),
+					'has_rtl'  => false,
+					'context'  => 'admin',
+					'callback' => 'masteriyo_is_show_review_notice',
 				),
 			)
 		);
@@ -663,30 +676,40 @@ class ScriptStyle {
 		self::$localized_scripts = apply_filters(
 			'masteriyo_localized_admin_scripts',
 			array(
-				'admin' => array(
+				'admin'      => array(
 					'name' => '_MASTERIYO_',
 					'data' => array(
-						'rootApiUrl' => esc_url_raw( untrailingslashit( rest_url() ) ),
-						'nonce'      => wp_create_nonce( 'wp_rest' ),
-						'home_url'   => home_url(),
-						'pageSlugs'  => array(
+						'rootApiUrl'          => esc_url_raw( untrailingslashit( rest_url() ) ),
+						'nonce'               => wp_create_nonce( 'wp_rest' ),
+						'review_notice_nonce' => wp_create_nonce( 'masteriyo_review_notice_nonce' ),
+						'ajax_url'            => admin_url( 'admin-ajax.php' ),
+						'home_url'            => home_url(),
+						'pageSlugs'           => array(
 							'courses'  => $courses_slug,
 							'account'  => $account_slug,
 							'checkout' => $checkout_slug,
 						),
-						'currency'   => array(
+						'currency'            => array(
 							'code'     => masteriyo_get_currency(),
 							'symbol'   => html_entity_decode( masteriyo_get_currency_symbol( masteriyo_get_currency() ) ),
 							'position' => masteriyo_get_setting( 'payments.currency.currency_position' ),
 						),
-						'imageSizes' => get_intermediate_image_sizes(),
-						'countries'  => masteriyo( 'countries' )->get_countries(),
-						'states'     => array_filter(
+						'imageSizes'          => get_intermediate_image_sizes(),
+						'countries'           => masteriyo( 'countries' )->get_countries(),
+						'states'              => array_filter(
 							masteriyo( 'countries' )->get_states(),
 							function( $state ) {
 								return ! empty( $state );
 							}
 						),
+						'show_review_notice'  => masteriyo_is_show_review_notice() ? 'yes' : 'no',
+					),
+				),
+				'ask-review' => array(
+					'name' => '_MASTERIYO_ASK_REVIEW_DATA_',
+					'data' => array(
+						'ajax_url' => admin_url( 'admin-ajax.php' ),
+						'nonce'    => wp_create_nonce( 'masteriyo_review_notice_nonce' ),
 					),
 				),
 			)

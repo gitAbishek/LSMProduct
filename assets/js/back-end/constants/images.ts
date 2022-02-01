@@ -15,3 +15,4 @@ export { default as CoursePerRow3Active } from '../../../svg/course-per-row-3-ac
 export { default as CoursePerRow3 } from '../../../svg/course-per-row-3.svg';
 export { default as CoursePerRow4Active } from '../../../svg/course-per-row-4-active.svg';
 export { default as CoursePerRow4 } from '../../../svg/course-per-row-4.svg';
+export { default as FullStar } from '../../../svg/full_star.svg';

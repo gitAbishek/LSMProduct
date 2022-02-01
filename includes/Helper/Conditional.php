@@ -844,3 +844,40 @@ if ( ! function_exists( 'masteriyo_has_course_started' ) ) {
 		return 1 === count( $started_courses );
 	}
 }
+
+if ( ! function_exists( 'masteriyo_is_show_review_notice' ) ) {
+	/**
+	 * Check if conditions are met to show review notice.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_show_review_notice() {
+		$reviewed = masteriyo_get_setting( 'general.review_notice.reviewed' );
+
+		if ( $reviewed ) {
+			return false;
+		}
+
+		$closed_count = absint( masteriyo_get_setting( 'general.review_notice.closed_count' ) );
+		$time_to_ask  = masteriyo_get_setting( 'general.review_notice.time_to_ask' );
+		$current_time = time();
+
+		if ( empty( $time_to_ask ) ) {
+			$time_to_ask = $current_time + WEEK_IN_SECONDS;
+			masteriyo_set_setting( 'general.review_notice.time_to_ask', $time_to_ask );
+		}
+		if ( $closed_count >= 2 ) {
+			return false;
+		}
+
+		if ( $time_to_ask > $current_time ) {
+			return false;
+		}
+		if ( is_super_admin() || current_user_can( 'manage_masteriyo' ) ) {
+			return true;
+		}
+		return false;
+	}
+}

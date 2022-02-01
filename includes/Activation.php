@@ -72,10 +72,16 @@ class Activation {
 				),
 			)
 		);
-
 		foreach ( $pages as $key => $page ) {
 			$setting_name = $page['setting_name'];
-			$page_id      = masteriyo_create_page( esc_sql( $page['name'] ), $setting_name, $page['title'], $page['content'], ! empty( $page['parent'] ) ? masteriyo_get_page_id( $page['parent'] ) : '' );
+			$post_id      = masteriyo_get_setting( "advance.pages.{$setting_name}" );
+			$post         = get_post( $post_id );
+
+			if ( $post && 'page' === $post->post_type ) {
+				continue;
+			}
+
+			$page_id = masteriyo_create_page( esc_sql( $page['name'] ), $setting_name, $page['title'], $page['content'], ! empty( $page['parent'] ) ? masteriyo_get_page_id( $page['parent'] ) : '' );
 			masteriyo_set_setting( "advance.pages.{$setting_name}", $page_id );
 		}
 	}

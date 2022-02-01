@@ -2,9 +2,9 @@
 Contributors: Masteriyo, sanjiv-saha
 Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
-Tested up to: 5.8.3
+Tested up to: 5.9
 Requires PHP: 7.0
-Stable tag: 1.3.13
+Stable tag: 1.4.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -196,6 +196,14 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.4.0 - 01-02-2022 =
+- Enhancement - Migrate Account page from PHP to React JS.
+- Enhancement - For Instructor, account page now comes with 'Add New Course' and 'My Courses' menu options.
+- Enhancement - Minor enhancements in account page.
+- Tweak - Add admin notice for plugin review.
+- Fix - Delete order items from database when order is deleted.
+- Fix - Main pages duplication issue after plugin reactivate.
 
 = 1.3.13 - 24-01-2022 =
 - Enhancement - Push floating navigation previous button to the right if sidebar is opened.

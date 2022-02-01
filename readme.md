@@ -8,11 +8,11 @@
 
 **Requires at least**: 5.0
 
-**Tested up to**: 5.8.3
+**Tested up to**: 5.9
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.3.13
+**Stable tag**: 1.4.0
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,15 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.4.0 - 01-02-2022
+
+- Enhancement - Migrate Account page from PHP to React JS.
+- Enhancement - For Instructor, account page now comes with 'Add New Course' and 'My Courses' menu options.
+- Enhancement - Minor enhancements in account page.
+- Tweak - Add admin notice for plugin review.
+- Fix - Delete order items from database when order is deleted.
+- Fix - Main pages duplication issue after plugin reactivate.
 
 ### 1.3.13 - 24-01-2022
 

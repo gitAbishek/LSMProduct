@@ -153,7 +153,7 @@ class Ajax {
 	/**
 	 * Review notice action.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.0
 	 */
 	public static function review_notice() {
 		if ( ! isset( $_POST['nonce'] ) ) {

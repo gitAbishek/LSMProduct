@@ -2,7 +2,7 @@
 /**
  * Admin notice to ask for review.
  *
- * @since x.x.x
+ * @since 1.4.0
  * @version 1.0.0
  */
 

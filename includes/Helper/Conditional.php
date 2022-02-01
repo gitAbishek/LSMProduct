@@ -849,7 +849,7 @@ if ( ! function_exists( 'masteriyo_is_show_review_notice' ) ) {
 	/**
 	 * Check if conditions are met to show review notice.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.0
 	 *
 	 * @return boolean
 	 */

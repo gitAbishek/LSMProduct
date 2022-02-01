@@ -451,7 +451,7 @@ class Masteriyo {
 	/**
 	 * Add admin review notice.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.0
 	 */
 	public function add_review_notice() {
 		if ( ! masteriyo_is_show_review_notice() ) {

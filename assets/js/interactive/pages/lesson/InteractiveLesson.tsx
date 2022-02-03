@@ -16,6 +16,7 @@ import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoad
 import urls from '../../../back-end/constants/urls';
 import { LessonSchema, MediaSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
+import { getSrcSet } from '../../../back-end/utils/image';
 import MediaAPI from '../../../back-end/utils/media';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
@@ -95,7 +96,11 @@ const InteractiveLesson = () => {
 		);
 	};
 
-	if (courseProgressQuery.isSuccess && lessonQuery.isSuccess) {
+	if (
+		courseProgressQuery.isSuccess &&
+		lessonQuery.isSuccess &&
+		imageQuery.isSuccess
+	) {
 		return (
 			<Box h="full" overflowX="hidden" pos="relative">
 				<Sidebar
@@ -124,7 +129,10 @@ const InteractiveLesson = () => {
 										url={lessonQuery?.data?.video_source_url}
 									/>
 								)}
-								<Image src={imageQuery?.data?.source_url} />
+								<Image
+									src={imageQuery?.data?.source_url}
+									srcSet={getSrcSet(imageQuery?.data)}
+								/>
 
 								<Text
 									className="masteriyo-interactive-description"

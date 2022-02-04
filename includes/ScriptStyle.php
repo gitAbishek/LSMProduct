@@ -115,6 +115,30 @@ class ScriptStyle {
 	}
 
 	/**
+	 * Get asset dependencies.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param string $asset_name
+	 *
+	 * @return array
+	 */
+	public static function get_asset_deps( $asset_name ) {
+		$version        = Constants::get( 'MASTERIYO_VERSION' );
+		$asset_filepath = Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . "/assets/js/build/{$asset_name}.{$version}.asset.php";
+
+		if ( ! file_exists( $asset_filepath ) || ! is_readable( $asset_filepath ) ) {
+			return array();
+		}
+		$asset = (array) include_once $asset_filepath;
+
+		if ( isset( $asset['dependencies'] ) ) {
+			return $asset['dependencies'];
+		}
+		return array();
+	}
+
+	/**
 	 * Initialize the scripts.`
 	 *
 	 * @since 1.0.0
@@ -147,12 +171,12 @@ class ScriptStyle {
 				'blocks'        => array(
 					'src'           => self::get_asset_url( "/assets/js/build/blocks{$suffix}.js" ),
 					'context'       => 'blocks',
-					'deps'          => array( 'jquery', 'wp-api-fetch', 'wp-block-editor', 'wp-blocks', 'wp-components', 'wp-compose', 'wp-data', 'wp-dom-ready', 'wp-element', 'wp-hooks', 'wp-i18n', 'wp-keyboard-shortcuts', 'wp-polyfill' ),
+					'deps'          => array_merge( self::get_asset_deps( 'blocks' ), array( 'jquery', 'wp-dom-ready', 'wp-hooks', 'wp-keyboard-shortcuts' ) ),
 					'register_only' => true,
 				),
 				'admin'         => array(
 					'src'      => $admin_src,
-					'deps'     => array( 'react', 'wp-data', 'wp-core-data', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill' ),
+					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-backend' ), array( 'wp-core-data', 'wp-components', 'wp-element' ) ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
 				),
@@ -164,7 +188,7 @@ class ScriptStyle {
 				),
 				'account'       => array(
 					'src'      => $account_src,
-					'deps'     => array( 'react', 'react-dom', 'wp-api-fetch', 'wp-i18n', 'wp-polyfill' ),
+					'deps'     => self::get_asset_deps( 'masteriyo-account' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'is_user_logged_in',
@@ -192,7 +216,7 @@ class ScriptStyle {
 				),
 				'learn'         => array(
 					'src'      => $learn_src,
-					'deps'     => array( 'react', 'wp-data', 'wp-core-data', 'wp-components', 'wp-element', 'react-dom', 'wp-api-fetch', 'wp-i18n', 'wp-polyfill' ),
+					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-interactive' ), array( 'wp-data', 'wp-core-data', 'wp-components', 'wp-element' ) ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_learn_page',

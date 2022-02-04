@@ -20,7 +20,6 @@ defined( 'ABSPATH' ) || exit;
  * @package  Masteriyo\Abstracts
  */
 abstract class ObjectQuery {
-
 	/**
 	 * The amount of rows for the current query.
 	 *

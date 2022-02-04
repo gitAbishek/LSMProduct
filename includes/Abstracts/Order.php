@@ -467,6 +467,8 @@ abstract class Order extends Model {
 			/**
 			 * Trigger action before saving to the DB. Allows you to adjust object props before save.
 			 *
+			 * @since 1.0.0
+			 *
 			 * @param Model          $this The object being saved.
 			 * @param Repository $repository THe data store persisting the data.
 			 */
@@ -483,12 +485,14 @@ abstract class Order extends Model {
 			/**
 			 * Trigger action after saving to the DB.
 			 *
+			 * @since 1.0.0
+			 *
 			 * @param Model          $this The object being saved.
 			 * @param Repository $repository THe data store persisting the data.
 			 */
 			do_action( 'masteriyo_after_' . $this->object_type . '_object_save', $this, $this->repository );
 
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			// TODO Log error.
 			error_log( $e->get_message() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 		}

@@ -7,9 +7,7 @@
 
 namespace Masteriyo\Repository;
 
-use Masteriyo\MetaData;
 use Masteriyo\Database\Model;
-use Masteriyo\ModelException;
 use Masteriyo\Query\CourseProgressQuery;
 use Masteriyo\Query\CourseProgressItemQuery;
 use Masteriyo\Repository\AbstractRepository;

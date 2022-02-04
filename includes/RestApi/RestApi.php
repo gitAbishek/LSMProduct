@@ -99,6 +99,7 @@ class RestApi {
 			'blocks'                => "{$namespace}\\BlocksController",
 			'instructors'           => "{$namespace}\\InstructorsController",
 			'users.courses'         => "{$namespace}\\UserCoursesController",
+			'notifications'         => "{$namespace}\\NotificationsController",
 		);
 	}
 

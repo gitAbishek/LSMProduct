@@ -9,7 +9,6 @@
 
 namespace Masteriyo\Repository;
 
-use Masteriyo\QuizAttempt;
 use Masteriyo\Database\Model;
 
 /**

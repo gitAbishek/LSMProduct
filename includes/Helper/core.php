@@ -5,6 +5,7 @@
  * @since 1.0.0
  */
 
+use Joli\JoliNotif\Notifier;
 use Masteriyo\Constants;
 use Masteriyo\Models\Faq;
 use Masteriyo\Geolocation;
@@ -13,8 +14,10 @@ use Masteriyo\Models\Course;
 use Masteriyo\ModelException;
 use Masteriyo\Models\Section;
 use Masteriyo\Models\CourseReview;
-use Masteriyo\Query\CourseQuery;
-use Masteriyo\Query\SectionQuery;
+use Masteriyo\Enums\NotificationLevel;
+use Masteriyo\Enums\NotificationStatus;
+use Masteriyo\Enums\NotificationType;
+use Masteriyo\Models\Notification;
 
 /**
  * Get course.
@@ -3206,6 +3209,72 @@ function masteriyo_get_blocks() {
 		array(
 			'masteriyo/courses',
 			'masteriyo/course-categories',
+		)
+	);
+}
+
+/**
+ * Return masteriyo notification levels.
+ *
+ * @since x.x.x
+ *
+ * @return array
+ */
+function masteriyo_get_notification_levels() {
+	return array_unique(
+		apply_filters(
+			'masteriyo_notification_levels',
+			array(
+				NotificationLevel::ERROR,
+				NotificationLevel::INFO,
+				NotificationLevel::SUCCESS,
+				NotificationLevel::WARNING,
+			)
+		)
+	);
+}
+
+/**
+ * Return masteriyo notification statuses.
+ *
+ * @since x.x.x
+ *
+ * @return array
+ */
+function masteriyo_get_notification_statuses() {
+	return array_unique(
+		apply_filters(
+			'masteriyo_notification_levels',
+			array(
+				NotificationStatus::READ,
+				NotificationStatus::UNREAD,
+			)
+		)
+	);
+}
+
+/**
+ * Return masteriyo notification types.
+ *
+ * @since x.x.x
+ *
+ * @return array
+ */
+function masteriyo_get_notification_types() {
+	return array_unique(
+		apply_filters(
+			'masteriyo_notification_types',
+			array(
+				NotificationType::ALL,
+				NotificationType::FLASH,
+				NotificationType::ADMIN,
+				NotificationType::WPADMIN,
+				NotificationType::ACCOUNT,
+				NotificationType::LEARN,
+				NotificationType::BOTH_ADMIN,
+				NotificationType::BOTH_ADMIN_AND_ACCOUNT,
+				NotificationType::BOTH_ADMIN_AND_LEARN,
+			)
 		)
 	);
 }

@@ -906,6 +906,8 @@ class CoursesController extends PostsController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param Model         $course  Object object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.

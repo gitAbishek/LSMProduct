@@ -62,7 +62,10 @@ const InteractiveLesson = () => {
 			`interactiveLessonimage${lessonQuery?.data?.featured_image}`,
 			lessonQuery?.data?.featured_image,
 		],
-		() => imageAPi.get(lessonQuery?.data?.featured_image || 0)
+		() => imageAPi.get(lessonQuery?.data?.featured_image || 0),
+		{
+			enabled: lessonQuery.isSuccess,
+		}
 	);
 
 	const completeMutation = useMutation((data: CourseProgressItemsMap) =>

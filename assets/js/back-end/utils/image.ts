@@ -1,24 +1,25 @@
 import { MediaSchema } from '../schemas';
 
 export const getSrcSet = (mediaObject: MediaSchema) => {
+	if (!mediaObject) return;
+
 	const mediaDetails = mediaObject.media_details.sizes;
-	const mainData: string[] = [];
+	let imageUrls: string[] = [];
 
-	const mediaDetailsArr = Object.entries(mediaDetails);
-	const filteredArr = mediaDetailsArr.filter(function ([key, value]) {
-		return !key.includes('masteriyo_');
-	});
+	if (mediaDetails.thumbnail)
+		imageUrls.push(
+			`${mediaDetails.thumbnail.source_url} ${mediaDetails.thumbnail.width}w`
+		);
 
-	filteredArr.length > 0 &&
-		filteredArr.map((sizes) => {
-			sizes.map((size: any) => {
-				size.source_url
-					? mainData.push(size.source_url + ' ' + size.width + 'w')
-					: null;
-			});
-		});
+	if (mediaDetails.medium)
+		imageUrls.push(
+			`${mediaDetails.medium.source_url} ${mediaDetails.medium.width}w`
+		);
 
-	const srcSet = mainData.join(',');
+	if (mediaDetails.large)
+		imageUrls.push(
+			`${mediaDetails.large.source_url} ${mediaDetails.large.width}w`
+		);
 
-	return srcSet;
+	return imageUrls.join(', ');
 };

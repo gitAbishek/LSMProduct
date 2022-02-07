@@ -10,6 +10,8 @@ class MediaAPI {
 	}
 
 	async get(id: number) {
+		if (!id) return;
+
 		return http({
 			path: this.uri + id,
 			method: 'GET',

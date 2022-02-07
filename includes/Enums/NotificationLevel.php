@@ -47,4 +47,25 @@ class NotificationLevel {
 	 * @var string
 	 */
 	const INFO = 'info';
+
+	/**
+	 * Return all notification levels.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return array
+	 */
+	public static function all() {
+		return array_unique(
+			apply_filters(
+				'masteriyo_notification_levels',
+				array(
+					self::ERROR,
+					self::INFO,
+					self::SUCCESS,
+					self::WARNING,
+				)
+			)
+		);
+	}
 }

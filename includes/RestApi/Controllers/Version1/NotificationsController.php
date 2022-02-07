@@ -260,20 +260,20 @@ class NotificationsController extends CrudController {
 				'status'        => array(
 					'description' => __( 'Notification status.', 'masteriyo' ),
 					'type'        => 'string',
-					'enum'        => masteriyo_get_notification_statuses(),
+					'enum'        => NotificationStatus::all(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'type'          => array(
 					'description' => __( 'Notification type.', 'masteriyo' ),
 					'type'        => 'string',
-					'enum'        => masteriyo_get_notification_types(),
+					'enum'        => NotificationType::all(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'level'         => array(
 					'description' => __( 'Notification level.', 'masteriyo' ),
 					'type'        => 'string',
 					'default'     => NotificationLevel::INFO,
-					'enum'        => masteriyo_get_notification_levels(),
+					'enum'        => NotificationLevel::all(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'action_ok'     => array(

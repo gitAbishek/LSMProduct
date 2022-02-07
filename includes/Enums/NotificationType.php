@@ -87,4 +87,31 @@ class NotificationType {
 	 * @var string
 	 */
 	const BOTH_ADMIN_AND_ACCOUNT = 'both-admin-account';
+
+
+	/**
+	 * Return all notification types.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return array
+	 */
+	public static function all() {
+		return array_unique(
+			apply_filters(
+				'masteriyo_notification_types',
+				array(
+					self::ALL,
+					self::FLASH,
+					self::ADMIN,
+					self::WPADMIN,
+					self::ACCOUNT,
+					self::LEARN,
+					self::BOTH_ADMIN,
+					self::BOTH_ADMIN_AND_ACCOUNT,
+					self::BOTH_ADMIN_AND_LEARN,
+				)
+			)
+		);
+	}
 }

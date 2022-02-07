@@ -50,7 +50,7 @@ const PasswordSecurity = () => {
 				toast({
 					title: __('Password cannot be changed', 'masteriyo'),
 					description: __(
-						'Please make sure your old password is corrent',
+						'Please make sure your old password is correct',
 						'masteriyo'
 					),
 					isClosable: true,

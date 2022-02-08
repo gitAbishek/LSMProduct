@@ -1,8 +1,8 @@
 name: Run PHP Unit tests on PR
-on:
-  pull_request:
-    branches:
-      - 'develop'
+# on:
+#   pull_request:
+#     branches:
+#       - 'develop'
 
 # Cancels all previous workflow runs for pull requests that have not completed.
 concurrency:

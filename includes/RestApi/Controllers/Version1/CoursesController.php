@@ -321,7 +321,7 @@ class CoursesController extends PostsController {
 			'name'              => wp_specialchars_decode( $course->get_name( $context ) ),
 			'slug'              => $course->get_slug( $context ),
 			'permalink'         => $course->get_permalink(),
-			'preview_permalink' => $course->get_preview_course_link(),
+			'preview_permalink' => $course->get_preview_link(),
 			'status'            => $course->get_status( $context ),
 			'description'       => 'view' === $context ? wpautop( do_shortcode( $course->get_description() ) ) : $course->get_description( $context ),
 			'short_description' => 'view' === $context ? apply_filters( 'masteriyo_short_description', $course->get_short_description() ) : $course->get_short_description( $context ),

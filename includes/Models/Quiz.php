@@ -158,6 +158,48 @@ class Quiz extends Model {
 		return $this->post_type;
 	}
 
+	/**
+	 * Get post preview link.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string
+	 */
+	public function get_post_preview_link() {
+		$preview_link = get_preview_post_link( $this->get_id() );
+
+		/**
+		 * Quiz post preview link.
+		 *
+		 * @since x.x.x
+		 */
+		return apply_filters( 'masteriyo_quiz_post_preview_link', $preview_link, $this );
+	}
+
+	/**
+	 * Get preview link in learn page.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string
+	 */
+	public function get_preview_link( $learn = false ) {
+		$preview_link = '';
+		$course       = masteriyo_get_course( $this->get_course_id() );
+
+		if ( $course ) {
+			$course_preview_link = $course->start_course_url( false );
+			$preview_link        = trailingslashit( $course_preview_link ) . 'quiz/' . $this->get_id();
+		}
+
+		/**
+		 * Quiz preview link for learn page.
+		 *
+		 * @since x.x.x
+		 */
+		return apply_filters( 'masteriyo_quiz_preview_link', $preview_link, $this );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Getters

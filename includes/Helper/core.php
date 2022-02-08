@@ -2019,7 +2019,7 @@ if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @updated 1.2.0 Added roles parameter.
+	 * @since 1.2.0 Added roles parameter.
 	 *
 	 * @param string $email User email.
 	 * @param string $username User username.

@@ -867,6 +867,7 @@ class QuizesController extends PostsController {
 			'name'                              => wp_specialchars_decode( $quiz->get_name( $context ) ),
 			'slug'                              => $quiz->get_slug( $context ),
 			'permalink'                         => $quiz->get_permalink(),
+			'preview_link'                      => $quiz->get_preview_link(),
 			'parent_id'                         => $quiz->get_parent_id( $context ),
 			'course_id'                         => $quiz->get_course_id( $context ),
 			'course_name'                       => $course ? wp_specialchars_decode( $course->get_name( $context ) ) : '',

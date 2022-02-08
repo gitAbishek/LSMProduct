@@ -152,6 +152,48 @@ class Lesson extends Model {
 		return $this->post_type;
 	}
 
+	/**
+	 * Get post preview link.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string
+	 */
+	public function get_post_preview_link() {
+		$preview_link = get_preview_post_link( $this->get_id() );
+
+		/**
+		 * Lesson post preview link.
+		 *
+		 * @since x.x.x
+		 */
+		return apply_filters( 'masteriyo_lesson_post_preview_link', $preview_link, $this );
+	}
+
+	/**
+	 * Get preview link in learn page.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string
+	 */
+	public function get_preview_link() {
+		$preview_link = '';
+		$course       = masteriyo_get_course( $this->get_course_id() );
+
+		if ( $course ) {
+			$course_preview_link = $course->get_preview_link( false );
+			$preview_link        = trailingslashit( $course_preview_link ) . 'lesson/' . $this->get_id();
+		}
+
+		/**
+		 * Lesson preview link for learn page.
+		 *
+		 * @since x.x.x
+		 */
+		return apply_filters( 'masteriyo_lesson_preview_link', $preview_link, $this );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| CRUD Getters

@@ -356,6 +356,8 @@ class CourseBuilderController extends PostsController {
 		/**
 		 * Filter the data for a response.
 		 *
+		 * @since 1.0.0
+		 *
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
@@ -366,9 +368,10 @@ class CourseBuilderController extends PostsController {
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
 	}
 
-
 	/**
 	 * Get course child data.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param Model $course_item Course instance.
 	 * @param string     $context Request context.
@@ -378,14 +381,15 @@ class CourseBuilderController extends PostsController {
 	 */
 	protected function get_course_child_data( $course_item, $context = 'view' ) {
 		$data = array(
-			'id'          => $course_item->get_id(),
-			'name'        => wp_specialchars_decode( $course_item->get_name( $context ) ),
-			'name'        => $course_item->get_name( $context ),
-			'description' => $course_item->get_description( $context ),
-			'permalink'   => $course_item->get_permalink( $context ),
-			'type'        => $course_item->get_object_type(),
-			'menu_order'  => $course_item->get_menu_order( $context ),
-			'parent_id'   => $course_item->get_parent_id( $context ),
+			'id'                => $course_item->get_id(),
+			'name'              => wp_specialchars_decode( $course_item->get_name( $context ) ),
+			'name'              => $course_item->get_name( $context ),
+			'description'       => $course_item->get_description( $context ),
+			'permalink'         => $course_item->get_permalink( $context ),
+			'preview_permalink' => $course_item->get_preview_link(),
+			'type'              => $course_item->get_object_type(),
+			'menu_order'        => $course_item->get_menu_order( $context ),
+			'parent_id'         => $course_item->get_parent_id( $context ),
 		);
 
 		if ( 'mto-lesson' === $course_item->get_post_type() ) {
@@ -416,9 +420,9 @@ class CourseBuilderController extends PostsController {
 			$objects
 		);
 
-		$contents = $this->filter_section_contents( $objects );
+		$contents = (array) $this->filter_section_contents( $objects );
 
-		$sections        = $this->filter_sections( $objects );
+		$sections        = (array) $this->filter_sections( $objects );
 		$section_ids     = wp_list_pluck( $sections, 'id' );
 		$section_ids_map = array_flip( $section_ids );
 

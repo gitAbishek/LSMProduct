@@ -881,3 +881,35 @@ if ( ! function_exists( 'masteriyo_is_show_review_notice' ) ) {
 		return false;
 	}
 }
+
+if ( ! function_exists( 'masteriyo_is_course_previewable' ) ) {
+	/**
+	 * Is course previewable?
+	 *
+	 * @since x.x.x
+	 *
+	 * @param int|WP_Post|Masteriyo\Models\Course $course Course ID or object.
+	 */
+	function masteriyo_is_course_previewable( $course ) {
+		$preview = false;
+		$course  = masteriyo_get_course( $course );
+
+		if ( $course ) {
+			if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() || masteriyo_is_current_user_super_admin() ) {
+				$preview = true;
+			} else {
+				$preview = get_current_user() === $course->get_author_id();
+			}
+		}
+
+		/**
+		 * Course preview filter.
+		 *
+		 * @param boolean $preview Is course preview?
+		 * @param Masteriyo\Models\Course $course Course object.
+		 *
+		 * @since x.x.x
+		 */
+		return apply_filters( 'masteriyo_is_course_previewable', $preview, $course );
+	}
+}

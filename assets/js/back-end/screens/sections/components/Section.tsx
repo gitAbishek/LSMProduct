@@ -166,6 +166,7 @@ const Section: React.FC<Props> = (props) => {
 													video: boolean;
 													type: 'lesson' | 'quiz';
 													name: string;
+													preview_permalink: string;
 												},
 												index: number
 											) => (
@@ -177,6 +178,7 @@ const Section: React.FC<Props> = (props) => {
 													hasVideo={content.video}
 													index={index}
 													courseId={courseId}
+													previewPermalink={content.preview_permalink}
 												/>
 											)
 										)}

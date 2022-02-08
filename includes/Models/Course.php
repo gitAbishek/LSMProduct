@@ -9,13 +9,9 @@
 
 namespace Masteriyo\Models;
 
-use Masteriyo\Activation;
 use Masteriyo\Helper\Utils;
-use Masteriyo\Helper\Format;
 use Masteriyo\Database\Model;
 use Masteriyo\Query\SectionQuery;
-use Masteriyo\Cache\CacheInterface;
-use Masteriyo\Query\LessonQuery;
 use Masteriyo\Repository\RepositoryInterface;
 
 defined( 'ABSPATH' ) || exit;
@@ -142,6 +138,8 @@ class Course extends Model {
 	/**
 	 * Get the course's title. For courses this is the course name.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
 	 */
 	public function get_title() {
@@ -151,6 +149,8 @@ class Course extends Model {
 	/**
 	 * Course permalink.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
 	 */
 	public function get_permalink() {
@@ -158,7 +158,9 @@ class Course extends Model {
 	}
 
 	/**
-	 * Course Preview URL;
+	 * Course post preview URL.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -167,7 +169,32 @@ class Course extends Model {
 	}
 
 	/**
+	 * Get course preview link with learn page.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string
+	 */
+	public function get_preview_link() {
+		$learn_page_url = masteriyo_get_page_permalink( 'learn' );
+
+		$preview_link = add_query_arg(
+			array(
+				'course_name' => $this->get_id(),
+				'preview'     => 'true',
+			),
+			$learn_page_url
+		);
+
+		$preview_link .= '#course/' . $this->get_id();
+
+		return apply_filters( 'masteriyo_course_preview_link', $preview_link, $this );
+	}
+
+	/**
 	 * Returns the children IDs if applicable. Overridden by child classes.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @return array of IDs
 	 */
@@ -1252,11 +1279,11 @@ class Course extends Model {
 	}
 
 	/**
-	 * Get course difficulties list (Coursedifficulties objects).
+	 * Get course difficulties list (CourseDifficulties objects).
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array[Coursedifficulties]
+	 * @return array[CourseDifficulties]
 	 */
 	public function get_difficulties() {
 		$difficulty_id = $this->get_difficulty_id();
@@ -1317,13 +1344,14 @@ class Course extends Model {
 	 * Get start course URL.
 	 *
 	 * @since 1.0.0
-	 * @updated 1.3.11 Added whether to append lesson to the URL or not.
+	 * @since 1.3.11 Added whether to append first lesson  or quiz to the URL or not.
+	 *
+	 * @param boolean $append_first_lesson_or_quiz Whether to append first lesson or quiz or not.
 	 *
 	 * @return string
 	 */
-	public function start_course_url( $append_lesson = true ) {
+	public function start_course_url( $append_first_lesson_or_quiz = true ) {
 		$lesson_or_quiz = $this->get_first_lesson_or_quiz();
-
 		$learn_page_url = masteriyo_get_page_permalink( 'learn' );
 		$url            = trailingslashit( $learn_page_url ) . 'course/' . $this->get_slug();
 
@@ -1338,7 +1366,7 @@ class Course extends Model {
 
 		$url .= '#course/' . $this->get_id();
 
-		if ( $append_lesson && $lesson_or_quiz ) {
+		if ( $append_first_lesson_or_quiz && $lesson_or_quiz ) {
 			$url .= '/lesson/' . $lesson_or_quiz->get_id();
 		}
 

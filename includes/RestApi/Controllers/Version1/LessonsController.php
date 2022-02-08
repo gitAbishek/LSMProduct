@@ -7,9 +7,6 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use Masteriyo\Helper\Utils;
-use Masteriyo\Query\CourseQuery;
-
 use Masteriyo\Helper\Permission;
 
 class LessonsController extends PostsController {
@@ -247,6 +244,8 @@ class LessonsController extends PostsController {
 	/**
 	 * Get lesson data.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param Lesson $lesson Lesson instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
@@ -262,6 +261,7 @@ class LessonsController extends PostsController {
 			'name'                => wp_specialchars_decode( $lesson->get_name( $context ) ),
 			'slug'                => $lesson->get_slug( $context ),
 			'permalink'           => $lesson->get_permalink(),
+			'preview_link'        => $lesson->get_preview_link(),
 			'status'              => $lesson->get_status( $context ),
 			'description'         => 'view' === $context ? wpautop( do_shortcode( $lesson->get_description() ) ) : $lesson->get_description( $context ),
 			'short_description'   => 'view' === $context ? apply_filters( 'masteriyo_short_description', $lesson->get_short_description() ) : $lesson->get_short_description( $context ),

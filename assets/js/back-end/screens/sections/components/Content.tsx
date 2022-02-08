@@ -11,6 +11,7 @@ import {
 	Flex,
 	Icon,
 	IconButton,
+	Link,
 	Stack,
 	Text,
 	Tooltip,
@@ -20,7 +21,14 @@ import {
 import { sprintf, __ } from '@wordpress/i18n';
 import React, { useRef } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { BiAlignLeft, BiEdit, BiPlay, BiTimer, BiTrash } from 'react-icons/bi';
+import {
+	BiAlignLeft,
+	BiEdit,
+	BiPlay,
+	BiShow,
+	BiTimer,
+	BiTrash,
+} from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 import { Sortable } from '../../../assets/icons';
@@ -35,10 +43,12 @@ interface Props {
 	index: any;
 	courseId: number;
 	hasVideo: boolean;
+	previewPermalink: string;
 }
 
 const Content: React.FC<Props> = (props) => {
-	const { id, name, type, index, courseId, hasVideo } = props;
+	const { id, name, type, index, courseId, hasVideo, previewPermalink } = props;
+
 	const history = useHistory();
 	const toast = useToast();
 	const queryClient = useQueryClient();
@@ -149,6 +159,17 @@ const Content: React.FC<Props> = (props) => {
 							</Text>
 						</Stack>
 						<ButtonGroup color="gray.400" size="xs" p="2">
+							<Tooltip label={__('Preview', 'masteriyo')}>
+								<Link href={previewPermalink} isExternal>
+									<IconButton
+										_hover={{ color: 'gray.700' }}
+										variant="unstyled"
+										icon={<Icon fontSize="xl" as={BiShow} />}
+										aria-label={__('Preview', 'masteriyo')}
+									/>
+								</Link>
+							</Tooltip>
+
 							<Tooltip label={__('Edit', 'masteriyo')}>
 								<IconButton
 									_hover={{ color: 'gray.700' }}

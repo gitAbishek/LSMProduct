@@ -886,7 +886,7 @@ if ( ! function_exists( 'masteriyo_is_course_previewable' ) ) {
 	/**
 	 * Is course previewable?
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param int|WP_Post|Masteriyo\Models\Course $course Course ID or object.
 	 */
@@ -908,7 +908,7 @@ if ( ! function_exists( 'masteriyo_is_course_previewable' ) ) {
 		 * @param boolean $preview Is course preview?
 		 * @param Masteriyo\Models\Course $course Course object.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.1
 		 */
 		return apply_filters( 'masteriyo_is_course_previewable', $preview, $course );
 	}

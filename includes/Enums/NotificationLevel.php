@@ -2,7 +2,7 @@
 /**
  * Notification level enums.
  *
- * @since x.x.x
+ * @since 1.4.1
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Notification level enum class.
  *
- * @since x.x.x
+ * @since 1.4.1
  */
 class NotificationLevel {
 	/**
 	 * Notification success level.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const SUCCESS = 'success';
@@ -27,7 +27,7 @@ class NotificationLevel {
 	/**
 	 * Notification error level.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const ERROR = 'error';
@@ -35,7 +35,7 @@ class NotificationLevel {
 	/**
 	 * Notification warning level.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const WARNING = 'warning';
@@ -43,7 +43,7 @@ class NotificationLevel {
 	/**
 	 * Notification information level.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const INFO = 'info';
@@ -51,7 +51,7 @@ class NotificationLevel {
 	/**
 	 * Return all notification levels.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return array
 	 */

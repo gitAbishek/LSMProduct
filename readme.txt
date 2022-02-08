@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 7.0
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -196,6 +196,13 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.4.1 - 08-02-2022 =
+- Feature - Added course trash and restore functionality.
+- Feature - Added Order trash and restore functionality.
+- Enhancement - Added lesson and quiz preview from course builder backend.
+- Enhancement - Added srcset attributes on learn page image tag to support different screen size images.
+- Fix - Typo ('Please make sure your old password is corrent' to 'Please make sure your old password is correct').
 
 = 1.4.0 - 01-02-2022 =
 - Enhancement - Migrate Account page from PHP to React JS.

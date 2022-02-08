@@ -2,7 +2,7 @@
 /**
  * Notification type enums.
  *
- * @since x.x.x
+ * @since 1.4.1
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Notification type enum class.
  *
- * @since x.x.x
+ * @since 1.4.1
  */
 class NotificationType {
 	/**
 	 * Notification all type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const ALL = 'all';
@@ -27,7 +27,7 @@ class NotificationType {
 	/**
 	 * Notification flash type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const FLASH = 'flash';
@@ -35,7 +35,7 @@ class NotificationType {
 	/**
 	 * Notification WP admin type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const WPADMIN = 'wpadmin';
@@ -43,7 +43,7 @@ class NotificationType {
 	/**
 	 * Notification masteriyo admin type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const ADMIN = 'admin';
@@ -51,7 +51,7 @@ class NotificationType {
 	/**
 	 * Notification learn type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const LEARN = 'learn';
@@ -59,7 +59,7 @@ class NotificationType {
 	/**
 	 * Notification account type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const ACCOUNT = 'account';
@@ -67,7 +67,7 @@ class NotificationType {
 	/**
 	 * Notification WP admin and Masteriyo admin type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const BOTH_ADMIN = 'both-admin';
@@ -75,7 +75,7 @@ class NotificationType {
 	/**
 	 * Notification WP admin, Masteriyo admin and learn type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const BOTH_ADMIN_AND_LEARN = 'both-admin-learn';
@@ -83,7 +83,7 @@ class NotificationType {
 	/**
 	 * Notification WP admin, Masteriyo admin and account type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const BOTH_ADMIN_AND_ACCOUNT = 'both-admin-account';
@@ -92,7 +92,7 @@ class NotificationType {
 	/**
 	 * Return all notification types.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return array
 	 */

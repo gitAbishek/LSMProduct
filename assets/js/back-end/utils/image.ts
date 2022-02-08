@@ -22,5 +22,5 @@ export const getSrcSet = (mediaObject: MediaSchema) => {
 			`${mediaDetails.large.source_url} ${mediaDetails.large.width}w`
 		);
 
-	return !isEmpty(imageUrls) ? imageUrls.join(', ') : null;
+	return !isEmpty(imageUrls) ? imageUrls.join(', ') : '';
 };

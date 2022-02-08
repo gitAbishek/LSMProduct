@@ -18,7 +18,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Endpoint namespace.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @var string
 	 */
@@ -28,7 +28,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Object type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @var string
 	 */
@@ -37,7 +37,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Route base.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @var string
 	 */
@@ -46,7 +46,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Permission class.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -55,7 +55,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Constructor.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param Permission $permission
 	 */
@@ -124,7 +124,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Get the query params for collections of attachments.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return array
 	 */
@@ -326,7 +326,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Get object.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  int $id Object ID.
 	 * @return object Model object or WP_Error object.
@@ -349,7 +349,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Get objects.
 	 *
-	 * @since  x.x.x
+	 * @since  1.4.1
 	 *
 	 * @param  array $query_args Query args.
 	 * @return array
@@ -368,7 +368,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Process objects collection.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param array $objects Orders data.
 	 * @param array $query_args Query arguments.
@@ -391,7 +391,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Check permissions for an item.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $post_type Post type.
 	 * @param string $context   Request context.
@@ -408,7 +408,7 @@ class NotificationsController extends CrudController {
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
-	 * @since  x.x.x
+	 * @since  1.4.1
 	 *
 	 * @return array
 	 */
@@ -432,7 +432,7 @@ class NotificationsController extends CrudController {
 		 * Enables adding extra arguments or setting defaults for a post
 		 * collection request.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.1
 		 *
 		 * @param array           $args    Key value array of query var to query value.
 		 * @param WP_REST_Request $request The request used.
@@ -445,7 +445,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Prepare a single notification for create or update.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param WP_REST_Request $request Request object.
 /
@@ -546,7 +546,7 @@ class NotificationsController extends CrudController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.1
 		 *
 		 * @param Model         $notification  Object object.
 		 * @param WP_REST_Request $request  Request object.
@@ -557,7 +557,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since  x.x.x
+	 * @since  1.4.1
 	 * @param  Model           $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -576,7 +576,7 @@ class NotificationsController extends CrudController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.1
 		 *
 		 * @param WP_REST_Response $response The response object.
 		 * @param Model          $object   Object data.
@@ -588,7 +588,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Get notification data.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param Notification $notification notification instance.
 	 * @param string $context Request context.
@@ -621,7 +621,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Check if a given request has access to create an item.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -649,7 +649,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Checks if a given request has access to get a specific item.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
@@ -679,7 +679,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Check if a given request has access to delete an item.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean
@@ -709,7 +709,7 @@ class NotificationsController extends CrudController {
 	/**
 	 * Check if a given request has access to read items.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean

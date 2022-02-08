@@ -2,7 +2,7 @@
 /**
  * Notification model.
  *
- * @since x.x.x
+ * @since 1.4.1
  *
  * @package Masteriyo\Models;
  */
@@ -17,13 +17,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Notification model (post type).
  *
- * @since x.x.x
+ * @since 1.4.1
  */
 class Notification extends Model {
 	/**
 	 * This is the name of this object type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @var string
 	 */
@@ -32,7 +32,7 @@ class Notification extends Model {
 	/**
 	 * Post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @var string
 	 */
@@ -41,7 +41,7 @@ class Notification extends Model {
 	/**
 	 * Cache group.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @var string
 	 */
@@ -50,7 +50,7 @@ class Notification extends Model {
 	/**
 	 * Stores notification data.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @var array
 	 */
@@ -76,7 +76,7 @@ class Notification extends Model {
 	/**
 	 * Constructor.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param RepositoryInterface $notification_repository Notification Repository,
 	 */
@@ -106,7 +106,7 @@ class Notification extends Model {
 	/**
 	 * Get notification title.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string
@@ -118,7 +118,7 @@ class Notification extends Model {
 	/**
 	 * Get notification description.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string
@@ -130,7 +130,7 @@ class Notification extends Model {
 	/**
 	 * Get notification user id.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return integer
@@ -142,7 +142,7 @@ class Notification extends Model {
 	/**
 	 * Get notification created by.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return integer
@@ -154,7 +154,7 @@ class Notification extends Model {
 	/**
 	 * Get notification code.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string
@@ -166,7 +166,7 @@ class Notification extends Model {
 	/**
 	 * Get notification status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string
@@ -178,7 +178,7 @@ class Notification extends Model {
 	/**
 	 * Get notification type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string
@@ -190,7 +190,7 @@ class Notification extends Model {
 	/**
 	 * Get notification level.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return string
@@ -202,7 +202,7 @@ class Notification extends Model {
 	/**
 	 * Get notification action 1.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return array
@@ -214,7 +214,7 @@ class Notification extends Model {
 	/**
 	 * Get notification action 2.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return array
@@ -226,7 +226,7 @@ class Notification extends Model {
 	/**
 	 * Get notification action 3.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return array
@@ -238,7 +238,7 @@ class Notification extends Model {
 	/**
 	 * Get notification action 4.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return array
@@ -250,7 +250,7 @@ class Notification extends Model {
 	/**
 	 * Get notification action 5.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return array
@@ -262,7 +262,7 @@ class Notification extends Model {
 	/**
 	 * Get notification created at.
 	 *
-	 * @since  x.x.x
+	 * @since  1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -275,7 +275,7 @@ class Notification extends Model {
 	/**
 	 * Get notification modified at.
 	 *
-	 * @since  x.x.x
+	 * @since  1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -288,7 +288,7 @@ class Notification extends Model {
 	/**
 	 * Get notification expiry at.
 	 *
-	 * @since  x.x.x
+	 * @since  1.4.1
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -307,7 +307,7 @@ class Notification extends Model {
 	/**
 	 * Set notification title.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $title Notification title.
 	 */
@@ -318,7 +318,7 @@ class Notification extends Model {
 	/**
 	 * Set notification description.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $description Notification description.
 	 */
@@ -329,7 +329,7 @@ class Notification extends Model {
 	/**
 	 * Set notification user id.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $user_id Notification user id.
 	 */
@@ -340,7 +340,7 @@ class Notification extends Model {
 	/**
 	 * Set notification created by.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $created_by Notification created by user.
 	 */
@@ -351,7 +351,7 @@ class Notification extends Model {
 	/**
 	 * Set notification code.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $code Notification code.
 	 */
@@ -362,7 +362,7 @@ class Notification extends Model {
 	/**
 	 * Set notification status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $status Notification status.
 	 */
@@ -373,7 +373,7 @@ class Notification extends Model {
 	/**
 	 * Set notification type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $type Notification type.
 	 */
@@ -384,7 +384,7 @@ class Notification extends Model {
 	/**
 	 * Set notification level.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $level Notification level.
 	 */
@@ -395,7 +395,7 @@ class Notification extends Model {
 	/**
 	 * Set notification action 1.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $action_1 Notification action 1.
 	 */
@@ -406,7 +406,7 @@ class Notification extends Model {
 	/**
 	 * Set notification action 2.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $action_2 Notification action 2.
 	 */
@@ -417,7 +417,7 @@ class Notification extends Model {
 	/**
 	 * Set notification action 3.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $action_3 Notification action 3.
 	 */
@@ -428,7 +428,7 @@ class Notification extends Model {
 	/**
 	 * Set notification action okay.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $action_ok Notification action 4.
 	 */
@@ -439,7 +439,7 @@ class Notification extends Model {
 	/**
 	 * Set notification action cancel.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $action_cancel Notification action 5.
 	 */
@@ -450,7 +450,7 @@ class Notification extends Model {
 	/**
 	 * Set notification created at.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $created_at Notification created at.
 	 */
@@ -461,7 +461,7 @@ class Notification extends Model {
 	/**
 	 * Set notification modified at.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
@@ -472,7 +472,7 @@ class Notification extends Model {
 	/**
 	 * Set notification expiry at.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */

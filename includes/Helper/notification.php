@@ -6,7 +6,7 @@
 /**
  * Get notification.
  *
- * @since x.x.x
+ * @since 1.4.1
  *
  * @param int|Masteriyo\Models\Notification $notification Notification ID or object.
  * @return Masteriyo\Models\Notification

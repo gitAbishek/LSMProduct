@@ -2,7 +2,7 @@
 /**
  * Notification status enums.
  *
- * @since x.x.x
+ * @since 1.4.1
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Notification status enum class.
  *
- * @since x.x.x
+ * @since 1.4.1
  */
 class NotificationStatus {
 	/**
 	 * Notification read status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const READ = 'read';
@@ -27,7 +27,7 @@ class NotificationStatus {
 	/**
 	 * Notification unread status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 * @var string
 	 */
 	const UNREAD = 'unread';
@@ -35,7 +35,7 @@ class NotificationStatus {
 	/**
 	 * Return notification statuses.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return array
 	 */

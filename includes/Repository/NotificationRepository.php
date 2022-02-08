@@ -2,7 +2,7 @@
 /**
  * Notification Repository class.
  *
- * @since x.x.x
+ * @since 1.4.1
  *
  * @package Masteriyo\Repository
  */
@@ -18,7 +18,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Create notification in database.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param Model $notification Notification object.
 	 */
@@ -70,7 +70,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Read a notification.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param Model $notification notification object.
 	 *
@@ -116,7 +116,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 		/**
 		 * Notification read hook.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.1
 		 *
 		 * @param int $id Notification ID.
 		 * @param Masteriyo\Models\Notification $notification Notification object.
@@ -127,7 +127,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Update a notification.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param Model $notification notification object.
 	 *
@@ -195,7 +195,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Delete a notification.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param Model $notification notification object.
 	 * @param array $args Array of args to pass.alert-danger.
@@ -217,7 +217,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Clear meta cache.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param Notification $notification Notification object.
 	 */
@@ -229,7 +229,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Fetch notifications.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param array $query_vars Query vars.
 	 * @param Masteriyo\Query\NotificationQuery $query Notification query object.
@@ -301,7 +301,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Get total rows or rows count
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string[] $sql SQL Array.
 	 * @return void

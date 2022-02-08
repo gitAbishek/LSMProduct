@@ -117,7 +117,7 @@ class ScriptStyle {
 	/**
 	 * Get asset dependencies.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param string $asset_name
 	 *

@@ -1286,7 +1286,7 @@ class OrdersController extends PostsController {
 	/**
 	 * Restore order.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *

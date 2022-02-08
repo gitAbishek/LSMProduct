@@ -3,7 +3,7 @@
  * Class for parameter-based notification query.
  *
  * @package  Masteriyo\Query
- * @since   x.x.x
+ * @since   1.4.1
  */
 
 namespace Masteriyo\Query;
@@ -20,7 +20,7 @@ class NotificationQuery extends ObjectQuery {
 	/**
 	 * Valid query vars for notification.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return array
 	 */
@@ -45,7 +45,7 @@ class NotificationQuery extends ObjectQuery {
 	/**
 	 * Get notification matching the current query vars.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return array|Model Course objects
 	 */

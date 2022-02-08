@@ -155,7 +155,7 @@ class Lesson extends Model {
 	/**
 	 * Get post preview link.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return string
 	 */
@@ -165,7 +165,7 @@ class Lesson extends Model {
 		/**
 		 * Lesson post preview link.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.1
 		 */
 		return apply_filters( 'masteriyo_lesson_post_preview_link', $preview_link, $this );
 	}
@@ -173,7 +173,7 @@ class Lesson extends Model {
 	/**
 	 * Get preview link in learn page.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return string
 	 */
@@ -189,7 +189,7 @@ class Lesson extends Model {
 		/**
 		 * Lesson preview link for learn page.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.1
 		 */
 		return apply_filters( 'masteriyo_lesson_preview_link', $preview_link, $this );
 	}

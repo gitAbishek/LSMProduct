@@ -161,7 +161,7 @@ class Quiz extends Model {
 	/**
 	 * Get post preview link.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return string
 	 */
@@ -171,7 +171,7 @@ class Quiz extends Model {
 		/**
 		 * Quiz post preview link.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.1
 		 */
 		return apply_filters( 'masteriyo_quiz_post_preview_link', $preview_link, $this );
 	}
@@ -179,7 +179,7 @@ class Quiz extends Model {
 	/**
 	 * Get preview link in learn page.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return string
 	 */
@@ -195,7 +195,7 @@ class Quiz extends Model {
 		/**
 		 * Quiz preview link for learn page.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.1
 		 */
 		return apply_filters( 'masteriyo_quiz_preview_link', $preview_link, $this );
 	}

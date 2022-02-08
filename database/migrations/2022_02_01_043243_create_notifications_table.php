@@ -2,7 +2,7 @@
 /**
  * Notification table migration class.
  *
- * @since x.x.x
+ * @since 1.4.1
  */
 
 use Masteriyo\Database\Migration;
@@ -11,7 +11,7 @@ class CreateNotificationsTable extends Migration {
 	/**
 	 * Run the migration.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 */
 	public function up() {
 		$sql = "CREATE TABLE {$this->prefix}masteriyo_notifications (
@@ -49,7 +49,7 @@ class CreateNotificationsTable extends Migration {
 	/**
 	 * Reverse the migrations.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 */
 	public function down() {
 		$this->connection->query( "DROP TABLE IF EXISTS {$this->prefix}masteriyo_quiz_attempts;" );

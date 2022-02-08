@@ -363,7 +363,7 @@ abstract class Model {
 	/**
 	 * Restore an object and return result.
 	 *
-	 * @since  x.x.x
+	 * @since  1.4.1
 	 * @return bool result
 	 */
 	public function restore() {

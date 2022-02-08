@@ -247,7 +247,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	/**
 	 * Restore an order from the database to previous status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @param Model $order order object.
 	 * @param array $args   Array of args to pass.

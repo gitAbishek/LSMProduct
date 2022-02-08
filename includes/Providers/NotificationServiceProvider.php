@@ -2,7 +2,7 @@
 /**
  * Notification service provider.
  *
- * @since x.x.x
+ * @since 1.4.1
  */
 
 namespace Masteriyo\Providers;
@@ -22,7 +22,7 @@ class NotificationServiceProvider extends AbstractServiceProvider {
 	 * this service provider must have an alias added
 	 * to this array or it will be ignored
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @var array
 	 */
@@ -38,7 +38,7 @@ class NotificationServiceProvider extends AbstractServiceProvider {
 	 * that you need to, but remember, every alias registered
 	 * within this method must be declared in the `$provides` array.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 */
 	public function register() {
 		$this->getContainer()->add( 'notification.store', NotificationRepository::class );

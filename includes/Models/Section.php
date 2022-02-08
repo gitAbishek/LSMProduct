@@ -137,7 +137,7 @@ class Section extends Model {
 	/**
 	 * Get post preview link.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return string
 	 */
@@ -147,7 +147,7 @@ class Section extends Model {
 		/**
 		 * Section post preview link.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.1
 		 */
 		return apply_filters( 'masteriyo_section_post_preview_link', $preview_link, $this );
 	}
@@ -155,7 +155,7 @@ class Section extends Model {
 	/**
 	 * Get preview link in learn page.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.1
 	 *
 	 * @return string
 	 */
@@ -171,7 +171,7 @@ class Section extends Model {
 		/**
 		 * Section preview link for learn page.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.1
 		 */
 		return apply_filters( 'masteriyo_section_preview_link', $preview_link, $this );
 	}

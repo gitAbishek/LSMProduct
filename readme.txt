@@ -199,7 +199,7 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 = 1.4.1 - 08-02-2022 =
 - Feature - Added course trash and restore functionality.
-- Feature - Added Order trash and restore functionality.
+- Feature - Added order trash and restore functionality.
 - Enhancement - Added lesson and quiz preview from course builder backend.
 - Enhancement - Added srcset attributes on learn page image tag to support different screen size images.
 - Fix - Typo ('Please make sure your old password is corrent' to 'Please make sure your old password is correct').

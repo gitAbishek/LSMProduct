@@ -16,7 +16,7 @@ import { useQuery } from 'react-query';
 import { useOnType } from 'use-ontype';
 import urls from '../../../constants/urls';
 import API from '../../../utils/api';
-import { deepClean } from '../../../utils/utils';
+import { deepClean, deepMerge } from '../../../utils/utils';
 
 const courseStatusList = [
 	{
@@ -31,6 +31,10 @@ const courseStatusList = [
 		label: __('Draft', 'masteriyo'),
 		value: 'draft',
 	},
+	{
+		label: __('Trash', 'masteriyo'),
+		value: 'trash',
+	},
 ];
 
 interface FilterParams {
@@ -42,25 +46,30 @@ interface FilterParams {
 
 interface Props {
 	setFilterParams: any;
+	filterParams: FilterParams;
 }
 
 const CourseFilter: React.FC<Props> = (props) => {
-	const { setFilterParams } = props;
+	const { setFilterParams, filterParams } = props;
 	const categoryAPI = new API(urls.categories);
-	const categoryQuery = useQuery('categoryLists', () => categoryAPI.list(), {
-		retry: false,
-	});
-	const { handleSubmit, register, setValue } = useForm();
+	const categoryQuery = useQuery(
+		'categoryLists',
+		() => categoryAPI.list({ per_page: 100 }),
+		{
+			retry: false,
+		}
+	);
+	const { handleSubmit, register } = useForm();
 	const [isMobile] = useMediaQuery('(min-width: 48em)');
 	const onSearchInput = useOnType(
 		{
 			onTypeFinish: (val: string) => {
 				setFilterParams({
 					search: val,
+					category: filterParams.category,
+					status: filterParams.status,
+					price_type: filterParams.price_type,
 				});
-				setValue('category', '');
-				setValue('status', '');
-				setValue('price', '');
 			},
 		},
 		800
@@ -68,7 +77,9 @@ const CourseFilter: React.FC<Props> = (props) => {
 	const [isOpen, setIsOpen] = useState(isMobile);
 
 	const onChange = (data: FilterParams) => {
-		setFilterParams(deepClean(data));
+		setFilterParams(
+			deepClean(deepMerge(data, { search: filterParams.search }))
+		);
 	};
 
 	useEffect(() => {

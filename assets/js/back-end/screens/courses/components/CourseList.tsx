@@ -38,8 +38,10 @@ interface Props {
 	editPostLink: string;
 	createdOn: string;
 	author: { id: number; display_name: string; avatar_url: string };
-	onDeletePress: any;
-	status?: 'draft' | 'publish';
+	onDeletePress: (id: number) => void;
+	onTrashPress: (id: number) => void;
+	onRestorePress: (id: number) => void;
+	status?: 'draft' | 'publish' | 'trash';
 }
 
 const CourseList: React.FC<Props> = (props) => {
@@ -53,6 +55,8 @@ const CourseList: React.FC<Props> = (props) => {
 		createdOn,
 		author,
 		onDeletePress,
+		onTrashPress,
+		onRestorePress,
 		status,
 	} = props;
 
@@ -63,18 +67,22 @@ const CourseList: React.FC<Props> = (props) => {
 	return (
 		<Tr>
 			<Td>
-				<Link
-					as={RouterLink}
-					to={routes.courses.edit.replace(':courseId', id.toString())}
-					fontWeight="semibold"
-					_hover={{ color: 'blue.500' }}>
-					{name}
-					{status === 'draft' && (
-						<Badge bg="blue.200" fontSize="10px" ml="2" mt="-2">
-							{__('Draft', 'masteriyo')}
-						</Badge>
-					)}
-				</Link>
+				{status === 'trash' ? (
+					<Text fontWeight="semibold">{name}</Text>
+				) : (
+					<Link
+						as={RouterLink}
+						to={routes.courses.edit.replace(':courseId', id.toString())}
+						fontWeight="semibold"
+						_hover={{ color: 'blue.500' }}>
+						{name}
+						{status === 'draft' ? (
+							<Badge bg="blue.200" fontSize="10px" ml="2" mt="-2">
+								{__('Draft', 'masteriyo')}
+							</Badge>
+						) : null}
+					</Link>
+				)}
 			</Td>
 			<Td>
 				{!isEmpty(categories) ? (
@@ -128,13 +136,7 @@ const CourseList: React.FC<Props> = (props) => {
 				</Stack>
 			</Td>
 			<Td>
-				<ButtonGroup>
-					<RouterLink
-						to={routes.courses.edit.replace(':courseId', id.toString())}>
-						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
-							{__('Edit', 'masteriyo')}
-						</Button>
-					</RouterLink>
+				{status === 'trash' ? (
 					<Menu placement="bottom-end">
 						<MenuButton
 							as={IconButton}
@@ -145,22 +147,58 @@ const CourseList: React.FC<Props> = (props) => {
 							size="xs"
 						/>
 						<MenuList>
-							<Link href={permalink} isExternal>
-								<MenuItem icon={<BiShow />}>
-									{__('Preview', 'masteriyo')}
-								</MenuItem>
-							</Link>
-							<Link href={editPostLink} isExternal>
-								<MenuItem icon={<BiWrench />}>
-									{__('WordPress Editor', 'masteriyo')}
-								</MenuItem>
-							</Link>
-							<MenuItem onClick={() => onDeletePress(id)} icon={<BiTrash />}>
-								{__('Delete', 'masteriyo')}
+							<MenuItem
+								onClick={() => onRestorePress(id)}
+								icon={<BiShow />}
+								_hover={{ color: 'blue.500' }}>
+								{__('Restore', 'masteriyo')}
+							</MenuItem>
+							<MenuItem
+								onClick={() => onDeletePress(id)}
+								icon={<BiTrash />}
+								_hover={{ color: 'red.500' }}>
+								{__('Delete Permanently', 'masteriyo')}
 							</MenuItem>
 						</MenuList>
 					</Menu>
-				</ButtonGroup>
+				) : (
+					<ButtonGroup>
+						<RouterLink
+							to={routes.courses.edit.replace(':courseId', id.toString())}>
+							<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
+								{__('Edit', 'masteriyo')}
+							</Button>
+						</RouterLink>
+						<Menu placement="bottom-end">
+							<MenuButton
+								as={IconButton}
+								icon={<BiDotsVerticalRounded />}
+								variant="outline"
+								rounded="sm"
+								fontSize="large"
+								size="xs"
+							/>
+							<MenuList>
+								<Link href={permalink} isExternal>
+									<MenuItem icon={<BiShow />}>
+										{__('Preview', 'masteriyo')}
+									</MenuItem>
+								</Link>
+								<Link href={editPostLink} isExternal>
+									<MenuItem icon={<BiWrench />}>
+										{__('WordPress Editor', 'masteriyo')}
+									</MenuItem>
+								</Link>
+								<MenuItem
+									onClick={() => onTrashPress(id)}
+									icon={<BiTrash />}
+									_hover={{ color: 'red.500' }}>
+									{__('Trash', 'masteriyo')}
+								</MenuItem>
+							</MenuList>
+						</Menu>
+					</ButtonGroup>
+				)}
 			</Td>
 		</Tr>
 	);

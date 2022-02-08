@@ -16,6 +16,7 @@ import {
 	ListItem,
 	Stack,
 	useDisclosure,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
@@ -47,6 +48,7 @@ interface FilterParams {
 const AllCourses = () => {
 	const courseAPI = new API(urls.courses);
 	const history = useHistory();
+	const toast = useToast();
 	const [filterParams, setFilterParams] = useState<FilterParams>({});
 	const [deleteCourseId, setDeleteCourseId] = useState<number>();
 
@@ -58,20 +60,53 @@ const AllCourses = () => {
 
 	const cancelRef = React.useRef<any>();
 
-	const deleteCourse = useMutation((id: number) => courseAPI.delete(id), {
+	const deleteCourse = useMutation(
+		(id: number) => courseAPI.delete(id, { force: true, children: true }),
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries('courseList');
+				onClose();
+			},
+		}
+	);
+
+	const restoreCourse = useMutation((id: number) => courseAPI.restore(id), {
 		onSuccess: () => {
+			toast({
+				title: __('Course Restored', 'masteriyo'),
+				isClosable: true,
+				status: 'success',
+			});
 			queryClient.invalidateQueries('courseList');
-			onClose();
 		},
 	});
+
+	const trashCourse = useMutation((id: number) => courseAPI.delete(id), {
+		onSuccess: () => {
+			queryClient.invalidateQueries('courseList');
+			toast({
+				title: __('Course Trashed', 'masteriyo'),
+				isClosable: true,
+				status: 'success',
+			});
+		},
+	});
+
+	const onTrashPress = (courseId: number) => {
+		courseId && trashCourse.mutate(courseId);
+	};
 
 	const onDeletePress = (courseId: number) => {
 		onOpen();
 		setDeleteCourseId(courseId);
 	};
 
-	const onDeleteCofirm = () => {
-		deleteCourseId && deleteCourse.mutate(deleteCourseId);
+	const onDeleteConfirm = () => {
+		deleteCourseId ? deleteCourse.mutate(deleteCourseId) : null;
+	};
+
+	const onRestorePress = (courseId: number) => {
+		courseId ? restoreCourse.mutate(courseId) : null;
 	};
 
 	return (
@@ -99,7 +134,10 @@ const AllCourses = () => {
 			<Container maxW="container.xl">
 				<Box bg="white" py={{ base: 6, md: 12 }} shadow="box" mx="auto">
 					<Stack direction="column" spacing="10">
-						<CourseFilter setFilterParams={setFilterParams} />
+						<CourseFilter
+							setFilterParams={setFilterParams}
+							filterParams={filterParams}
+						/>
 
 						<Stack direction="column" spacing="8">
 							<Table>
@@ -131,6 +169,8 @@ const AllCourses = () => {
 												editPostLink={course.edit_post_link}
 												author={course.author}
 												onDeletePress={onDeletePress}
+												onTrashPress={onTrashPress}
+												onRestorePress={onRestorePress}
 												status={course.status}
 											/>
 										))
@@ -145,6 +185,12 @@ const AllCourses = () => {
 						metaData={courseQuery.data.meta}
 						setFilterParams={setFilterParams}
 						perPageText={__('Courses Per Page:', 'masteriyo')}
+						extraFilterParams={{
+							search: filterParams.search,
+							status: filterParams.status,
+							category: filterParams.category,
+							price_type: filterParams.price,
+						}}
 					/>
 				)}
 			</Container>
@@ -172,7 +218,7 @@ const AllCourses = () => {
 								<Button
 									colorScheme="red"
 									isLoading={deleteCourse.isLoading}
-									onClick={onDeleteCofirm}>
+									onClick={onDeleteConfirm}>
 									{__('Delete', 'masteriyo')}
 								</Button>
 							</ButtonGroup>

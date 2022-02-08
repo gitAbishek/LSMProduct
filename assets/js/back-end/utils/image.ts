@@ -1,7 +1,8 @@
 import { MediaSchema } from '../schemas';
+import { isEmpty } from './utils';
 
 export const getSrcSet = (mediaObject: MediaSchema) => {
-	if (!mediaObject) return;
+	if (isEmpty(mediaObject)) return;
 
 	const mediaDetails = mediaObject.media_details.sizes;
 	let imageUrls: string[] = [];
@@ -21,5 +22,5 @@ export const getSrcSet = (mediaObject: MediaSchema) => {
 			`${mediaDetails.large.source_url} ${mediaDetails.large.width}w`
 		);
 
-	return imageUrls.join(', ');
+	return !isEmpty(imageUrls) ? imageUrls.join(', ') : null;
 };

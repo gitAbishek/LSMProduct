@@ -17,6 +17,7 @@ import {
 	MenuList,
 	Stack,
 	Text,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
@@ -87,18 +88,22 @@ const OrderRow: React.FC<Props> = (props) => {
 	const { id, status, total, currency_symbol, billing } = data;
 	const order_number = makeOrderNumberLabel(data);
 	const queryClient = useQueryClient();
+	const toast = useToast();
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const [isOrderPreviewModalOpen, setOrderPreviewModalOpen] = useState(false);
 	const ordersAPI = new API(urls.orders);
 	const cancelDeleteModalRef = useRef<any>();
 	const cancelOrderPreviewModalRef = useRef<any>();
 
-	const deleteOrder = useMutation((id: number) => ordersAPI.delete(id), {
-		onSuccess: () => {
-			setDeleteModalOpen(false);
-			queryClient.invalidateQueries('ordersList');
-		},
-	});
+	const deleteOrder = useMutation(
+		(id: number) => ordersAPI.delete(id, { force: true }),
+		{
+			onSuccess: () => {
+				setDeleteModalOpen(false);
+				queryClient.invalidateQueries('ordersList');
+			},
+		}
+	);
 
 	const onDeletePress = () => {
 		setDeleteModalOpen(true);
@@ -117,18 +122,50 @@ const OrderRow: React.FC<Props> = (props) => {
 		setOrderPreviewModalOpen(false);
 	};
 
+	const restoreOrder = useMutation((id: number) => ordersAPI.restore(id), {
+		onSuccess: () => {
+			toast({
+				title: __('Order Restored', 'masteriyo'),
+				isClosable: true,
+				status: 'success',
+			});
+			queryClient.invalidateQueries('ordersList');
+		},
+	});
+
+	const trashOrder = useMutation((id: number) => ordersAPI.delete(id), {
+		onSuccess: () => {
+			queryClient.invalidateQueries('ordersList');
+			toast({
+				title: __('Order Trashed', 'masteriyo'),
+				isClosable: true,
+				status: 'success',
+			});
+		},
+	});
+
+	const onTrashPress = () => trashOrder.mutate(id);
+
+	const onRestorePress = () => restoreOrder.mutate(id);
+
 	return (
 		<Tr>
 			<Td>
 				<Stack direction="column">
-					<Link
-						as={RouterLink}
-						to={routes.orders.edit.replace(':orderId', id.toString())}
-						fontWeight="semibold"
-						fontSize="sm"
-						_hover={{ color: 'blue.500' }}>
-						{`#${id} ${data?.billing?.first_name} ${data?.billing?.last_name}`}
-					</Link>
+					{status === 'trash' ? (
+						<Text fontWeight="semibold">
+							{`#${id} ${data?.billing?.first_name} ${data?.billing?.last_name}`}
+						</Text>
+					) : (
+						<Link
+							as={RouterLink}
+							to={routes.orders.edit.replace(':orderId', id.toString())}
+							fontWeight="semibold"
+							fontSize="sm"
+							_hover={{ color: 'blue.500' }}>
+							{`#${id} ${data?.billing?.first_name} ${data?.billing?.last_name}`}
+						</Link>
+					)}
 					<Text fontSize="xs" color="gray.600">
 						{data?.billing?.email}
 					</Text>
@@ -152,13 +189,7 @@ const OrderRow: React.FC<Props> = (props) => {
 			</Td>
 			<Td>{PriceWithSymbol(total, currency_symbol)}</Td>
 			<Td>
-				<ButtonGroup>
-					<RouterLink
-						to={routes.orders.edit.replace(':orderId', id.toString())}>
-						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
-							{__('Edit', 'masteriyo')}
-						</Button>
-					</RouterLink>
+				{status === 'trash' ? (
 					<Menu placement="bottom-end">
 						<MenuButton
 							as={IconButton}
@@ -169,15 +200,51 @@ const OrderRow: React.FC<Props> = (props) => {
 							size="xs"
 						/>
 						<MenuList>
-							<MenuItem onClick={onPreviewPress} icon={<BiShow />}>
-								{__('Preview', 'masteriyo')}
+							<MenuItem
+								onClick={() => onRestorePress()}
+								icon={<BiShow />}
+								_hover={{ color: 'blue.500' }}>
+								{__('Restore', 'masteriyo')}
 							</MenuItem>
-							<MenuItem onClick={onDeletePress} icon={<BiTrash />}>
-								{__('Delete', 'masteriyo')}
+							<MenuItem
+								onClick={() => onDeletePress()}
+								icon={<BiTrash />}
+								_hover={{ color: 'red.500' }}>
+								{__('Delete Permanently', 'masteriyo')}
 							</MenuItem>
 						</MenuList>
 					</Menu>
-				</ButtonGroup>
+				) : (
+					<ButtonGroup>
+						<RouterLink
+							to={routes.orders.edit.replace(':orderId', id.toString())}>
+							<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
+								{__('Edit', 'masteriyo')}
+							</Button>
+						</RouterLink>
+						<Menu placement="bottom-end">
+							<MenuButton
+								as={IconButton}
+								icon={<BiDotsVerticalRounded />}
+								variant="outline"
+								rounded="sm"
+								fontSize="large"
+								size="xs"
+							/>
+							<MenuList>
+								<MenuItem onClick={onPreviewPress} icon={<BiShow />}>
+									{__('Preview', 'masteriyo')}
+								</MenuItem>
+								<MenuItem
+									onClick={onTrashPress}
+									icon={<BiTrash />}
+									_hover={{ color: 'red.500' }}>
+									{__('Trash', 'masteriyo')}
+								</MenuItem>
+							</MenuList>
+						</Menu>
+					</ButtonGroup>
+				)}
 
 				{/* Order Preview Dialog */}
 				<AlertDialog

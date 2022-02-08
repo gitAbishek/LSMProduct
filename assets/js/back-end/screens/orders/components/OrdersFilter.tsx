@@ -51,6 +51,10 @@ const courseStatusList = [
 		label: __('Failed', 'masteriyo'),
 		value: 'failed',
 	},
+	{
+		label: __('Trash', 'masteriyo'),
+		value: 'trash',
+	},
 ];
 
 interface FilterParams {

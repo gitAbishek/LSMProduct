@@ -66,6 +66,13 @@ class API {
 			method: 'post',
 		}).then((res: any) => res);
 	}
+
+	async restore(id: number) {
+		return http({
+			path: this.uri + id + '/restore',
+			method: 'post',
+		}).then((res: any) => res);
+	}
 }
 
 export default API;

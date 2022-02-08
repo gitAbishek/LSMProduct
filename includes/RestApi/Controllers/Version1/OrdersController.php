@@ -135,8 +135,40 @@ class OrdersController extends PostsController {
 					'methods'             => \WP_REST_Server::DELETABLE,
 					'callback'            => array( $this, 'delete_item' ),
 					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
+					'args'                => array(
+						'force' => array(
+							'default'     => false,
+							'description' => __( 'Whether to bypass trash and force deletion.', 'masteriyo' ),
+							'type'        => 'boolean',
+						),
+					),
 				),
 				'schema' => array( $this, 'get_public_item_schema' ),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/(?P<id>[\d]+)/restore',
+			array(
+				'args' => array(
+					'id' => array(
+						'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
+						'type'        => 'integer',
+					),
+				),
+				array(
+					'methods'             => \WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'restore_item' ),
+					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
+					'args'                => array(
+						'context' => $this->get_context_param(
+							array(
+								'default' => 'view',
+							)
+						),
+					),
+				),
 			)
 		);
 	}
@@ -154,7 +186,7 @@ class OrdersController extends PostsController {
 		$params['status'] = array(
 			'description'       => __( 'Limit result set to orders assigned a specific status.', 'masteriyo' ),
 			'type'              => 'string',
-			'enum'              => array_merge( array_keys( masteriyo_get_order_statuses() ), array( 'any' ) ),
+			'enum'              => array_merge( array_keys( masteriyo_get_order_statuses() ), array( 'any', 'trash' ) ),
 			'default'           => 'any',
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
@@ -1249,5 +1281,33 @@ class OrdersController extends PostsController {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Restore order.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_Error|WP_REST_Response
+	 */
+	public function restore_item( $request ) {
+		$object = $this->get_object( (int) $request['id'] );
+
+		if ( ! $object || 0 === $object->get_id() ) {
+			return new \WP_Error( "masteriyo_rest_{$this->object_type}_invalid_id", __( 'Invalid ID.', 'masteriyo' ), array( 'status' => 404 ) );
+		}
+
+		$object->restore();
+
+		$data     = $this->prepare_object_for_response( $object, $request );
+		$response = rest_ensure_response( $data );
+
+		if ( $this->public ) {
+			$response->link_header( 'alternate', $this->get_permalink( $object ), array( 'type' => 'text/html' ) );
+		}
+
+		return $response;
 	}
 }

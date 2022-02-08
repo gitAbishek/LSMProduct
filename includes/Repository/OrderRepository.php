@@ -117,7 +117,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $order Cource object.
+	 * @param Model $order Course object.
 	 *
 	 * @throws \Exception If invalid order.
 	 */
@@ -208,12 +208,12 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	}
 
 	/**
-	 * Delete an order from the database.r
+	 * Delete an order from the database.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param Model $order order object.
-	 * @param array $args   Array of args to pass.alert-danger.
+	 * @param array $args   Array of args to pass.
 	 */
 	public function delete( Model &$order, $args = array() ) {
 		$id          = $order->get_id();
@@ -242,6 +242,46 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			$order->set_status( 'trash' );
 			do_action( 'masteriyo_before_trash_' . $object_type, $id, $order );
 		}
+	}
+
+	/**
+	 * Restore an order from the database to previous status.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param Model $order order object.
+	 * @param array $args   Array of args to pass.
+	 */
+	public function restore( Model &$order, $args = array() ) {
+
+		$previous_status = get_post_meta( $order->get_id(), '_wp_trash_meta_status', true );
+
+		wp_untrash_post( $order->get_id() );
+
+		$order->set_status( $previous_status );
+
+		$post_data = array(
+			'post_status'       => $order->get_status( 'edit' ),
+			'post_type'         => 'mto-order',
+			'post_modified'     => current_time( 'mysql' ),
+			'post_modified_gmt' => current_time( 'mysql', true ),
+		);
+
+		/**
+		 * When updating this object, to prevent infinite loops, use $wpdb
+		 * to update data, since wp_update_post spawns more calls to the
+		 * save_post action.
+		 *
+		 * This ensures hooks are fired by either WP itself (admin screen save),
+		 * or an update purely from CRUD.
+		 */
+		if ( doing_action( 'save_post' ) ) {
+			// TODO Abstract the $wpdb WordPress class.
+			$GLOBALS['wpdb']->update( $GLOBALS['wpdb']->posts, $post_data, array( 'ID' => $order->get_id() ) );
+		} else {
+			wp_update_post( array_merge( array( 'ID' => $order->get_id() ), $post_data ) );
+		}
+		clean_post_cache( $order->get_id() );
 	}
 
 	/**

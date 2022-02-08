@@ -361,6 +361,22 @@ abstract class Model {
 	}
 
 	/**
+	 * Restore an object and return result.
+	 *
+	 * @since  x.x.x
+	 * @return bool result
+	 */
+	public function restore() {
+		if ( $this->repository ) {
+			$this->repository->restore(
+				$this
+			);
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Create or update based on object existence.
 	 *
 	 * @since 1.0.0

@@ -3057,14 +3057,19 @@ function masteriyo_get_allowed_svg_elements() {
  *
  * @param string $hex Colour as hexadecimal (with or without hash);
  * @percent float $percent Decimal ( 0.2 = lighten by 20%(), -0.4 = darken by 40%() )
- * @return string Lightened/Darkened colour as hexadecimal (with hash);
+ * @return string|false Lightened/Darkened colour as hexadecimal (with hash); (False if the string is not in hexcolor )
  */
 function masteriyo_color_luminance( $hex, $percent ) {
 	// validate hex string
 	$hex     = preg_replace( '/[^0-9a-f]/i', '', $hex );
 	$new_hex = '#';
 
-	if ( strlen( $hex ) < 6 ) {
+	// Validate hex string.
+	if ( ! ctype_xdigit( $hex ) ) {
+		return false;
+	}
+
+	if ( strlen( $hex ) > 3 && strlen( $hex ) < 6 ) {
 		$hex = $hex[0] + $hex[0] + $hex[1] + $hex[1] + $hex[2] + $hex[2];
 	}
 

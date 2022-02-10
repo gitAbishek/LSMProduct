@@ -19,7 +19,9 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <div class="masteriyo-col">
 	<div class="masteriyo-category-card">
-		<div class="masteriyo-category-card__image"><?php echo wp_kses_post( $category->get_image() ); ?></div>
+		<a href="<?php echo esc_attr( $category->get_permalink() ); ?>">
+			<div class="masteriyo-category-card__image"><?php echo wp_kses_post( $category->get_image() ); ?></div>
+		</a>
 		<div class="masteriyo-category-card__detail">
 			<h2 class="masteriyo-category-card__title">
 				<a href="<?php echo esc_attr( $category->get_permalink() ); ?>"><?php echo esc_html( $category->get_name() ); ?></a>

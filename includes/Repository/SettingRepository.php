@@ -21,6 +21,9 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 		$posted_setting = $setting->get_data();
 		$setting_in_db  = get_option( 'masteriyo_settings', array() );
 
+		$posted_setting = $this->clean_setting( $posted_setting );
+		$setting_in_db  = $this->clean_setting( $setting_in_db );
+
 		// if courses permalink / slugs changed then update masteriyo_flush_rewrite_rules.
 		$should_update_permalink = false;
 		foreach ( $posted_setting['advance']['permalinks'] as $permalink => $value ) {
@@ -41,6 +44,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 
 		$setting_in_db = wp_parse_args( $posted_setting, $setting_in_db );
 
+		$setting->reset();
 		$setting->set_data( $setting_in_db );
 
 		update_option( 'masteriyo_settings', $setting->get_data() );
@@ -53,7 +57,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $setting Cource object.
+	 * @param Model $setting Course object.
 	 * @param mixed $default Default value.
 	 *
 	 * @throws Exception If invalid setting.
@@ -63,6 +67,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 
 		$setting_in_db = get_option( 'masteriyo_settings', array() );
 		$setting_in_db = wp_parse_args( $setting_in_db, $setting->get_data() );
+		$setting_in_db = $this->clean_setting( $setting_in_db );
 
 		$setting->set_data( $setting_in_db );
 
@@ -122,5 +127,30 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 		if ( Constants::get( 'MASTERIYO_DEBUG' ) ) {
 			$setting->set( 'advance.debug.debug', Constants::get( 'MASTERIYO_DEBUG' ) );
 		}
+	}
+
+	/**
+	 * Clean setting and store only which are in the $data of the Setting model.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param array $setting Setting array.
+	 */
+	protected function clean_setting( $setting ) {
+		$setting_dot_arr = masteriyo_array_dot( $setting );
+
+		// Default $data array.
+		$setting_object          = masteriyo( 'setting' );
+		$default_setting_dot_arr = masteriyo_array_dot( $setting_object->get_data() );
+
+		$setting_dot_arr = array_filter(
+			$setting_dot_arr,
+			function ( $key ) use ( $default_setting_dot_arr ) {
+				return isset( $default_setting_dot_arr[ $key ] );
+			},
+			ARRAY_FILTER_USE_KEY
+		);
+
+		return masteriyo_array_undot( $setting_dot_arr );
 	}
 }

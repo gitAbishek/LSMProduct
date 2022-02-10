@@ -110,7 +110,7 @@ function masteriyo_array_dot( $array, $prepend = '' ) {
 	return $results;
 }
 
- /**
+/**
  * Convert a flatten "dot" notation array into an expanded array.
  *
  * @since 1.3.6

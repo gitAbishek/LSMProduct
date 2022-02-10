@@ -439,4 +439,14 @@ class Setting extends Model {
 
 		return $value;
 	}
+
+	/**
+	 * Reset defaults.
+	 *
+	 * @since x.x.x
+	 */
+	public function reset() {
+		$setting    = masteriyo( 'setting' );
+		$this->data = $setting->get_data();
+	}
 }

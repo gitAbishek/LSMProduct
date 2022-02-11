@@ -3070,7 +3070,7 @@ function masteriyo_color_luminance( $hex, $percent ) {
 	}
 
 	if ( strlen( $hex ) >= 3 && strlen( $hex ) < 6 ) {
-		$hex = $hex[0] + $hex[0] + $hex[1] + $hex[1] + $hex[2] + $hex[2];
+		$hex = dechex( hexdec( $hex[0] ) + hexdec( $hex[0] ) + hexdec( $hex[1] ) + hexdec( $hex[1] ) + hexdec( $hex[2] ) + hexdec( $hex[2] ) );
 	}
 
 	// convert to decimal and change luminosity

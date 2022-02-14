@@ -3217,3 +3217,21 @@ function masteriyo_get_blocks() {
 		)
 	);
 }
+
+
+/**
+ * Get checkout endpoint URL.
+ *
+ * @since x.x.x
+ *
+ * @param string $endpoint
+ *
+ * @return string
+ */
+function masteriyo_get_checkout_endpoint_url( $endpoint ) {
+	$checkout_url = masteriyo_get_page_permalink( 'checkout' );
+	$endpoint     = masteriyo_get_setting( 'advance.checkout.order_received' );
+	$endpoint_url = $checkout_url . '/' . $endpoint;
+
+	return apply_filters( 'masteriyo_get_checkout_endpoint_url', $endpoint_url, $endpoint );
+}

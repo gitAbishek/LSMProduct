@@ -34,11 +34,11 @@ defined( 'ABSPATH' ) || exit;
 		<a href="https://wordpress.org/support/plugin/learning-management-system/reviews/?rate=5#new-post" class="button button-primary masteriyo-leave-review" target="_blank" rel="noopener noreferrer">
 			<?php esc_html_e( 'Sure, I\'d love to', 'masteriyo' ); ?>
 		</a>
-		<a href="#" class="button button-secondary masteriyo-remind-me-later">
+		<button class="button button-secondary masteriyo-remind-me-later">
 			<?php esc_html_e( 'Maybe later', 'masteriyo' ); ?>
-		</a>
-		<a href="#" class="button button-secondary masteriyo-already-reviewed">
+		</button>
+		<button class="button button-secondary masteriyo-already-reviewed">
 			<?php esc_html_e( 'I already did', 'masteriyo' ); ?>
-		</a>
+		</button>
 	</div>
 </div>

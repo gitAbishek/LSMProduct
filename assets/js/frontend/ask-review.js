@@ -11,7 +11,7 @@
 				nonce: masteriyo_data.nonce,
 				masteriyo_action: 'review_received',
 			});
-			$('.masteriyo-review-notice').remove();
+			$('.masteriyo-review-notice').slideUp();
 		}
 	);
 	$(document).on(
@@ -25,7 +25,7 @@
 				nonce: masteriyo_data.nonce,
 				masteriyo_action: 'remind_me_later',
 			});
-			$('.masteriyo-review-notice').remove();
+			$('.masteriyo-review-notice').slideUp();
 		}
 	);
 	$(document).on(
@@ -39,7 +39,7 @@
 				nonce: masteriyo_data.nonce,
 				masteriyo_action: 'already_reviewed',
 			});
-			$('.masteriyo-review-notice').remove();
+			$('.masteriyo-review-notice').slideUp();
 		}
 	);
 	$(document).on('click', '.masteriyo-x-icon-container svg', function (e) {
@@ -48,6 +48,6 @@
 			nonce: masteriyo_data.nonce,
 			masteriyo_action: 'close_notice',
 		});
-		$('.masteriyo-review-notice').remove();
+		$('.masteriyo-review-notice').slideUp();
 	});
 })(jQuery, window._MASTERIYO_ASK_REVIEW_DATA_);

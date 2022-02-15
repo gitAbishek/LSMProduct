@@ -59,6 +59,13 @@ class Masteriyo {
 	 * @since 1.0.0
 	 */
 	protected function init() {
+		/**
+		 * Fire before masteriyo is initialized.
+		 *
+		 * @use Initialize addon using this hook.
+		 *
+		 * @since 1.4.0
+		 */
 		do_action( 'masteriyo_before_init', $this );
 
 		masteriyo( 'migrator' )->migrate();
@@ -86,6 +93,11 @@ class Masteriyo {
 		// Initialize the hooks.
 		$this->init_hooks();
 
+		/**
+		 * Fire after masteriyo is initialized.
+		 *
+		 * @since 1.4.0
+		 */
 		do_action( 'masteriyo_after_init', $this );
 	}
 

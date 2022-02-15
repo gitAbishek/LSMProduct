@@ -443,7 +443,7 @@ class Setting extends Model {
 	/**
 	 * Reset defaults.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.2
 	 */
 	public function reset() {
 		$setting    = masteriyo( 'setting' );

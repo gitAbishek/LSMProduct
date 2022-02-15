@@ -132,7 +132,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	/**
 	 * Clean setting and store only which are in the $data of the Setting model.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.2
 	 *
 	 * @param array $setting Setting array.
 	 */

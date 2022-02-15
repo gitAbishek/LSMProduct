@@ -3224,7 +3224,7 @@ function masteriyo_get_blocks() {
 /**
  * Get checkout endpoint URL.
  *
- * @since x.x.x
+ * @since 1.4.2
  *
  * @param string $endpoint
  *

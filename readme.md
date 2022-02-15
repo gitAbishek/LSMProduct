@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.4.1
+**Stable tag**: 1.4.2
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,13 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.4.2 - 15-02-2022
+
+- Fix - Add a link to an image in course categories shortcode or blocks.
+- Fix - Blank iframe tag on learn page while removing the self-hosted video.
+- Fix - Spacing on plugin review admin notice.
+- Enhancement - Text strings refinement.
 
 ### 1.4.1 - 08-02-2022
 

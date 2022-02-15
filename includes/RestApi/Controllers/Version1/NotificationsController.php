@@ -302,18 +302,18 @@ class NotificationsController extends CrudController {
 					'context'     => array( 'view', 'edit' ),
 				),
 				'created_at'    => array(
-					'description' => __( 'The date the notification was created, in the GTM timezone.', 'masteriyo' ),
+					'description' => __( 'Notification created date, in the GMT timezone.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'modified_at'   => array(
-					'description' => __( 'The date the notification was last modified, in the GMT timezone.', 'masteriyo' ),
+					'description' => __( 'Notification modified date, in the GMT timezone.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'expire_at'     => array(
-					'description' => __( 'The date the notification was last expire, in the GMT timezone.', 'masteriyo' ),
+					'description' => __( 'Notification expired date, in the GMT timezone.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),

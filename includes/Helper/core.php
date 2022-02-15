@@ -2687,6 +2687,7 @@ function masteriyo_generate_self_hosted_lesson_video_url( $lesson_id ) {
 	if ( is_null( $lesson ) ) {
 		return '';
 	}
+
 	$url = add_query_arg(
 		array(
 			'masteriyo_lesson_vid' => 'yes',
@@ -2695,7 +2696,8 @@ function masteriyo_generate_self_hosted_lesson_video_url( $lesson_id ) {
 		),
 		home_url( '/' )
 	);
-	return apply_filters( 'masteriyo_self_hosted_lesson_video_url', $url, $lesson );
+
+	return apply_filters( 'masteriyo_self_hosted_lesson_video_url', trim( $url ), $lesson );
 }
 
 /**

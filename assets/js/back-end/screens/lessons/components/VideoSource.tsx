@@ -63,6 +63,7 @@ const VideoSource: React.FC<Props> = (props) => {
 	const onDelete = () => {
 		setVideoId(null);
 		setValue('video_source_url', ' ');
+		setValue('video_source_id', 0);
 	};
 
 	return (

@@ -24,7 +24,7 @@ import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import BackToBuilder from '../../components/common/BackToBuilder';
 import Header from '../../components/common/Header';
@@ -51,6 +51,7 @@ const EditLesson = () => {
 	const lessonAPI = new API(urls.lessons);
 	const courseAPI = new API(urls.courses);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+	const queryClient = useQueryClient();
 
 	const courseQuery = useQuery<CourseDataMap>(
 		[`course${courseId}`, courseId],
@@ -66,6 +67,7 @@ const EditLesson = () => {
 		(data: LessonSchema) => lessonAPI.update(lessonId, data),
 		{
 			onSuccess: () => {
+				queryClient.invalidateQueries(`section${lessonId}`);
 				toast({
 					title: __('Lesson Updated', 'masteriyo'),
 					isClosable: true,

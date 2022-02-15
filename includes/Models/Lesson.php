@@ -420,7 +420,7 @@ class Lesson extends Model {
 	 */
 	public function get_video_source_url( $context = 'view' ) {
 		$source     = $this->get_video_source( 'edit' );
-		$source_url = $this->get_prop( 'video_source_url', $context );
+		$source_url = trim( $this->get_prop( 'video_source_url', $context ) );
 
 		if ( 'edit' === $context ) {
 			return $source_url;
@@ -689,7 +689,7 @@ class Lesson extends Model {
 	 * @param string $video_source_url Video source url.
 	 */
 	public function set_video_source_url( $video_source_url ) {
-		$this->set_prop( 'video_source_url', $video_source_url );
+		$this->set_prop( 'video_source_url', trim( $video_source_url ) );
 	}
 
 	/**

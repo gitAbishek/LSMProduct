@@ -44,6 +44,7 @@ return array_unique(
 			'Masteriyo\Providers\MigratorServiceProvider',
 			'Masteriyo\Providers\NotificationServiceProvider',
 			'Masteriyo\Providers\RewriteServiceProvider',
+			'Masteriyo\Providers\AjaxServiceProvider',
 		)
 	)
 );

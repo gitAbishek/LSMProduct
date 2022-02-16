@@ -5,6 +5,7 @@
  * @package Masteriyo
  *
  * @since 1.0.0
+ * @since x.x.x Removed static keyword.
  */
 
 namespace Masteriyo;
@@ -25,30 +26,90 @@ class Ajax {
 	/**
 	 * Actions.
 	 *
-	 * @static
 	 * @since 1.0.0
+	 * @since x.x.x Removed static keyword.
 	 *
 	 * @var array
 	 */
 	private static $actions = array();
 
 	/**
+	 * Ajax Handlers.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var array
+	 */
+	private $handlers = array();
+
+	/**
 	 * Initialize
 	 *
-	 * @static
 	 * @since 1.0.0
+	 * @since x.x.x Removed static keyword.
 	 */
-	public static function init() {
-		self::init_hooks();
+	public function init() {
+		$this->init_hooks();
+		$this->init_handlers();
+	}
+
+	/**
+	 * Initialize ajax handlers.
+	 *
+	 * @since x.x.x
+	 */
+	public function init_handlers() {
+		$namespace = 'Masteriyo\\AjaxHandle';
+
+		$handlers = array_unique(
+			apply_filters(
+				'masteriyo_ajax_handlers',
+				array(
+					"{$namespace}\\LoginAjaxHandler",
+					"{$namespace}\\CheckoutAjaxHandler",
+					"{$namespace}\\ReviewNoticeAjaxHandler",
+				)
+			)
+		);
+
+		$handlers = array_filter(
+			$handlers,
+			function( $handler ) {
+				return class_exists( $handler );
+			}
+		);
+
+		foreach ( $handlers as $handler ) {
+			$object = new $handler();
+			if ( is_callable( array( $object, 'register' ) ) ) {
+				$object->register();
+				$this->handlers[ $object->name ] = $object;
+			}
+		}
+	}
+
+	/**
+	 * Return ajax handler by action/handle.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param string $action Ajax Handler action.
+	 *
+	 * @return Masteriyo\Abstracts\AjaxHandler|null
+	 */
+	public function get_handler( $action ) {
+		if ( isset( $this->handlers[ $action ] ) ) {
+			return $this->handlers[ $action ];
+		}
+
+		return null;
 	}
 
 	/**
 	 * Initialize hooks.
 	 *
-	 * @static
 	 * @since 1.0.0
-	 *
-	 * @return void
+	 * @deprecated x.x.x
 	 */
 	private static function init_hooks() {
 		self::$actions = apply_filters(
@@ -81,6 +142,8 @@ class Ajax {
 	 * Login a user.
 	 *
 	 * @since 1.0.0
+	 * @deprecated
+	 * @since x.x.x Moved to LoginAjaxHandler class.
 	 */
 	public static function login() {
 		if ( isset( $_POST['nonce'] ) ) {
@@ -154,6 +217,8 @@ class Ajax {
 	 * Review notice action.
 	 *
 	 * @since 1.4.0
+	 * @deprecated x.x.x
+	 * @since x.x.x Moved to ReviewNoticeAjaxHandler.
 	 */
 	public static function review_notice() {
 		if ( ! isset( $_POST['nonce'] ) ) {
@@ -196,23 +261,4 @@ class Ajax {
 			);
 		}
 	}
-
-	/**
-	 * Test ajax function.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
-	 */
-	public static function test() {
-		$course_query = new CourseQuery();
-		$courses      = $course_query->get_courses(
-			array(
-				'page'   => 1,
-				'status' => 'publish',
-			)
-		);
-	}
 }
-
-Ajax::init();

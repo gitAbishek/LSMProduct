@@ -81,7 +81,7 @@ class Masteriyo {
 		EmailHooks::init();
 		RestApi::init();
 		AdminMenu::init();
-		Ajax::init();
+		masteriyo( 'ajax' )->init();
 		ScriptStyle::init();
 
 		masteriyo( 'blocks' )->init();

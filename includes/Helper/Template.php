@@ -1345,10 +1345,10 @@ if ( ! function_exists( 'masteriyo_course_category_description' ) ) {
 			return;
 		}
 
-		?>
-		<p class="masteriyo-courses-header__description">
-			<?php echo esc_html( $term->description ); ?>
-		</p>
-		<?php
+		$html  = '<p class="masteriyo-courses-header__description">';
+		$html .= wp_kses_post( $term->description );
+		$html .= '</p>';
+
+		echo wp_kses_post( $html );
 	}
 }

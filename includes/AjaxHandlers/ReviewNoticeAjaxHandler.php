@@ -3,6 +3,7 @@
  * ReviewNotice Ajax handler.
  *
  * @since x.x.x
+ * @package Masteriyo\AjaxHandlers
  */
 
 namespace Masteriyo\AjaxHandlers;

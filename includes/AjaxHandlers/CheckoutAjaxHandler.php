@@ -2,8 +2,8 @@
 /**
  * Checkout Ajax handler.
  *
- * @since 1.0.0
- *
+ * @since x.x.x
+ * @package Masteriyo\AjaxHandlers
  */
 
 namespace Masteriyo\AjaxHandlers;
@@ -39,7 +39,7 @@ class CheckoutAjaxHandler extends AjaxHandler {
 	 */
 	public function checkout() {
 		masteriyo_maybe_define_constant( 'MASTERIYO_CHECKOUT', true );
-		masteriyo( 'checkout' )->process();
+		masteriyo( 'checkout' )->process_checkout();
 		wp_die( 0 );
 	}
 }

@@ -59,7 +59,7 @@ class Ajax {
 	 * @since x.x.x
 	 */
 	public function init_handlers() {
-		$namespace = 'Masteriyo\\AjaxHandle';
+		$namespace = 'Masteriyo\\AjaxHandlers';
 
 		$handlers = array_unique(
 			apply_filters(
@@ -81,9 +81,10 @@ class Ajax {
 
 		foreach ( $handlers as $handler ) {
 			$object = new $handler();
+
 			if ( is_callable( array( $object, 'register' ) ) ) {
 				$object->register();
-				$this->handlers[ $object->name ] = $object;
+				$this->handlers[ $object->action ] = $object;
 			}
 		}
 	}

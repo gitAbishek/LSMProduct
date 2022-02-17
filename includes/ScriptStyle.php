@@ -148,78 +148,94 @@ class ScriptStyle {
 	private static function init_scripts() {
 		$suffix = self::get_asset_suffix();
 
-		$account_src = self::get_asset_url( "/assets/js/build/masteriyo-account{$suffix}.js" );
-		$admin_src   = self::get_asset_url( "/assets/js/build/masteriyo-backend{$suffix}.js" );
-		$learn_src   = self::get_asset_url( "/assets/js/build/masteriyo-interactive{$suffix}.js" );
+		$account_src         = self::get_asset_url( "/assets/js/build/masteriyo-account{$suffix}.js" );
+		$admin_src           = self::get_asset_url( "/assets/js/build/masteriyo-backend{$suffix}.js" );
+		$learn_src           = self::get_asset_url( "/assets/js/build/masteriyo-interactive{$suffix}.js" );
+		$single_course_src   = self::get_asset_url( "/assets/js/build/single-course{$suffix}.js" );
+		$login_form_src      = self::get_asset_url( "/assets/js/build/login-form{$suffix}.js" );
+		$checkout_src        = self::get_asset_url( "/assets/js/build/checkout{$suffix}.js" );
+		$ask_review_src      = self::get_asset_url( "/assets/js/build/ask-review{$suffix}.js" );
+		$jquery_block_ui_src = self::get_asset_url( "/assets/js/build/offline-payment{$suffix}.js" );
 
 		if ( masteriyo_is_development() ) {
-			$account_src = 'http://localhost:3000/dist/account.js';
-			$admin_src   = 'http://localhost:3000/dist/backend.js';
-			$learn_src   = 'http://localhost:3000/dist/interactive.js';
+			$account_src         = 'http://localhost:3000/dist/account.js';
+			$admin_src           = 'http://localhost:3000/dist/backend.js';
+			$learn_src           = 'http://localhost:3000/dist/interactive.js';
+			$single_course_src   = self::get_asset_url( '/assets/js/frontend/single-course.js' );
+			$login_form_src      = self::get_asset_url( '/assets/js/frontend/login-form.js' );
+			$checkout_src        = self::get_asset_url( '/assets/js/frontend/checkout.js' );
+			$ask_review_src      = self::get_asset_url( '/assets/js/frontend/ask-review.js' );
+			$jquery_block_ui_src = self::get_asset_url( '/assets/js/frontend/jquery-block-ui.js' );
 		}
 
 		self::$scripts = apply_filters(
 			'masteriyo_enqueue_scripts',
 			array(
-				'dependencies'  => array(
+				'dependencies'    => array(
 					'src'      => self::get_asset_url( "/assets/js/build/masteriyo-dependencies{$suffix}.js" ),
 					'context'  => array( 'admin', 'public' ),
 					'callback' => function() {
 						return masteriyo_is_production() && ( masteriyo_is_admin_page() || masteriyo_is_learn_page() || ( is_user_logged_in() && masteriyo_is_account_page() ) );
 					},
 				),
-				'blocks'        => array(
+				'blocks'          => array(
 					'src'           => self::get_asset_url( "/assets/js/build/blocks{$suffix}.js" ),
 					'context'       => 'blocks',
 					'deps'          => array_merge( self::get_asset_deps( 'blocks' ), array( 'jquery', 'wp-dom-ready', 'wp-hooks', 'wp-keyboard-shortcuts' ) ),
 					'register_only' => true,
 				),
-				'admin'         => array(
+				'admin'           => array(
 					'src'      => $admin_src,
 					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-backend' ), array( 'wp-core-data', 'wp-components', 'wp-element' ) ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
 				),
-				'single-course' => array(
-					'src'      => self::get_asset_url( "/assets/js/build/single-course{$suffix}.js" ),
+				'single-course'   => array(
+					'src'      => $single_course_src,
 					'deps'     => array( 'jquery' ),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_single_course_page',
 				),
-				'account'       => array(
+				'account'         => array(
 					'src'      => $account_src,
 					'deps'     => self::get_asset_deps( 'masteriyo-account' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'is_user_logged_in',
 				),
-				'login-form'    => array(
-					'src'      => self::get_asset_url( "/assets/js/build/login-form{$suffix}.js" ),
+				'login-form'      => array(
+					'src'      => $login_form_src,
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_load_login_form_assets',
 				),
-				'checkout'      => array(
-					'src'      => self::get_asset_url( "/assets/js/build/checkout{$suffix}.js" ),
-					'deps'     => array( 'jquery' ),
+				'checkout'        => array(
+					'src'      => $checkout_src,
+					'deps'     => array( 'jquery', 'masteriyo-jquery-block-ui' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_checkout_page',
 				),
-				'ask-review'    => array(
-					'src'      => self::get_asset_url( "/assets/js/build/ask-review{$suffix}.js" ),
+				'ask-review'      => array(
+					'src'      => $ask_review_src,
 					'deps'     => array( 'jquery' ),
 					'version'  => self::get_version(),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_show_review_notice',
 				),
-				'learn'         => array(
+				'learn'           => array(
 					'src'      => $learn_src,
 					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-interactive' ), array( 'wp-data', 'wp-core-data', 'wp-components', 'wp-element' ) ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
 					'callback' => 'masteriyo_is_learn_page',
+				),
+				'jquery-block-ui' => array(
+					'src'      => $jquery_block_ui_src,
+					'version'  => self::get_version(),
+					'context'  => 'public',
+					'callback' => 'masteriyo_is_checkout_page',
 				),
 			)
 		);
@@ -241,6 +257,7 @@ class ScriptStyle {
 				'public'        => array(
 					'src'     => self::get_asset_url( "/assets/css/public{$suffix}.css" ),
 					'has_rtl' => false,
+					'deps'    => array( 'common' ),
 					'context' => 'public',
 				),
 				'dependencies'  => array(
@@ -816,10 +833,10 @@ class ScriptStyle {
 					),
 				),
 				'checkout'      => array(
-					'name' => 'mto_checkout_params',
+					'name' => '_MASTERIYO_CHECKOUT_',
 					'data' => array(
-						'ajax_url'            => admin_url( 'admin-ajax.php' ),
-						'checkout_url'        => '/?masteriyo-ajax=checkout',
+						'ajaxURL'             => admin_url( 'admin-ajax.php' ),
+						'checkoutURL'         => add_query_arg( array( 'action' => 'masteriyo_checkout' ), admin_url( 'admin-ajax.php' ) ),
 						'i18n_checkout_error' => esc_html__( 'Error processing checkout. Please try again.', 'masteriyo' ),
 						'is_checkout'         => true,
 						'mto_ajax_url'        => '/?masteriyo-ajax=%%endpoint%%',

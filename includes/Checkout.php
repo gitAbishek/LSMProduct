@@ -629,7 +629,7 @@ class Checkout {
 			do_action( 'masteriyo_checkout_order_created', $order );
 
 			return $order_id;
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			if ( $order && is_a( $order, 'Masteriyo\Models\Order' ) ) {
 				do_action( 'masteriyo_checkout_order_exception', $order );
 			}
@@ -649,12 +649,9 @@ class Checkout {
 		}
 
 		// Only print notices if not reloading the checkout, otherwise they're lost in the page reload.
-		if ( ! is_null( $this->session->get( 'reload_checkout' ) ) ) {
-			$messages = masteriyo_print_notices( true );
-		}
+		$messages = masteriyo_display_all_notices( true );
 
 		$response = array(
-			'result'   => 'failure',
 			'messages' => isset( $messages ) ? $messages : '',
 			'refresh'  => is_null( $this->session->get( 'refresh_totals' ) ),
 			'reload'   => is_null( $this->session->get( 'reload_checkout' ) ),
@@ -663,7 +660,7 @@ class Checkout {
 		$this->session->remove( 'refresh_totals' );
 		$this->session->remove( 'reload_checkout' );
 
-		wp_send_json( $response );
+		wp_send_json_error( $response, 400 );
 	}
 
 	/**

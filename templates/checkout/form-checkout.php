@@ -36,7 +36,6 @@ if ( ! is_user_logged_in() ) {
 }
 
 ?>
-
 <div class="masteriyo-checkout" id="masteriyo-checkout">
 	<form
 		name="checkout" method="post" class="masteriyo-w-100 masteriyo-container masteriyo-checkout--form masteriyo-checkout"
@@ -57,4 +56,3 @@ if ( ! is_user_logged_in() ) {
 </div>
 <?php
 	do_action( 'masteriyo_after_checkout_form' );
-

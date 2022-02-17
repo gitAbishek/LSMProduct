@@ -23,8 +23,15 @@ function masteriyo_add_notice( $message, $notice_type = 'success', $data = array
  * Print all notice.
  *
  * @since 1.0.0
+ * @since x.x.x Added $echo parameter.
  */
-function masteriyo_display_all_notices() {
+function masteriyo_display_all_notices( $echo = false ) {
+	if ( $echo ) {
+		ob_start();
+		masteriyo( 'notice' )->display_all();
+		return ob_get_clean();
+	}
+
 	masteriyo( 'notice' )->display_all();
 }
 

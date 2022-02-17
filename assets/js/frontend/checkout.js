@@ -1,36 +1,85 @@
+/* eslint-disable */
+/* global _MASTERIYO_CHECKOUT_ */
+
 jQuery(function ($) {
-	// Bail if the global checkout paramaters doesn't exits.
-	if (typeof mto_checkout_params === 'undefined') {
+	// Bail if the global checkout parameters doesn't exits.
+	if (typeof _MASTERIYO_CHECKOUT_ === 'undefined') {
 		return false;
 	}
 
-	var checkout_form = {
-		$checkout_form: $('form.masteriyo-checkout'),
+	/**
+	 * Return WordPress spinner.
+	 *
+	 * @returns string
+	 */
+	function getSpinner() {
+		return '<span class="spinner" style="visibility:visible"></span>';
+	}
+
+	function getBlockLoadingConfiguration() {
+		return {
+			message: getSpinner(),
+			css: {
+				'border':'',
+				'width': '0%'
+			},
+			overlayCSS: {
+				background: '#fff',
+				opacity: 0.6
+			}
+		}
+	}
+
+	var checkoutForm = {
+		$form: $('form.masteriyo-checkout'),
+
+		/**
+		 * Return ajax URL.
+		 *
+		 * @returns string
+		 */
+		getAjaxURL: function () {
+			return _MASTERIYO_CHECKOUT_.ajaxURL;
+		},
+
+		/**
+		 * Return checkout URL.
+		 *
+		 * @returns string
+		 */
+		getCheckoutURL: function () {
+			return _MASTERIYO_CHECKOUT_.checkoutURL;
+		},
+
+		/**
+		 * Initialize.
+		 */
 		init: function () {
+			$(document.body).on('update_checkout', this.updateCheckout);
+			$(document.body).on('init_checkout', this.initCheckout);
+
 			// Payment methods
-			this.$checkout_form.on(
+			this.$form.on(
 				'click',
 				'input[name="payment_method"]',
-				this.payment_method_selected
+				this.paymentMethodSelected
 			);
 
 			// Prevent HTML5 validation which can conflict.
-			this.$checkout_form.attr('novalidate', 'novalidate');
+			this.$form.attr('novalidate', 'novalidate');
 
 			// Form submission
-			this.$checkout_form.on('submit', this.submit);
+			this.$form.on('submit', this.submit);
 
-			this.init_payment_methods();
+			this.initPaymentMethods();
 
 			// Update on page load
-			if (true === mto_checkout_params.is_checkout) {
-				$(document.body).trigger('init_checkout');
+			if (true === _MASTERIYO_CHECKOUT_.is_checkout) {
+				$(document.body).trigger('initCheckout');
 			}
 		},
-		init_payment_methods: function () {
-			var $payment_methods = this.$checkout_form.find(
-				'input[name="payment_method"]'
-			);
+		initPaymentMethods: function () {
+			var $payment_methods = this.$form.find('input[name="payment_method"]');
 
 			// If there is one method, we can hide the radio input
 			if (1 === $payment_methods.length) {
@@ -38,8 +87,8 @@ jQuery(function ($) {
 			}
 
 			// If there was a previously selected method, check that one.
-			if (checkout_form.selected_payment_method) {
-				$('#' + checkout_form.selected_payment_method).prop('checked', true);
+			if (checkoutForm.selectedPaymentMethod) {
+				$('#' + checkoutForm.selectedPaymentMethod).prop('checked', true);
 			}
 
 			// If there are none selected, select the first.
@@ -63,13 +112,17 @@ jQuery(function ($) {
 			// Trigger click event for selected method
 			$payment_methods.filter(':checked').eq(0).trigger('click');
 		},
-		get_payment_method: function () {
-			return this.$checkout_form
-				.find('input[name="payment_method"]:checked')
-				.val();
+
+		/**
+		 * Return payment method title.
+		 *
+		 * @return Payment method title.
+		 */
+		getPaymentMethod: function () {
+			return this.$form.find('input[name="payment_method"]:checked').val();
 		},
 
-		payment_method_selected: function (e) {
+		paymentMethodSelected: function (e) {
 			e.stopPropagation();
 
 			if ($('.payment-methods input.input-radio').length > 1) {
@@ -95,23 +148,38 @@ jQuery(function ($) {
 				);
 			}
 
-			var selected_payment_method = $(
+			var selectedPaymentMethod = $(
 				'.masteriyo-checkout input[name="payment_method"]:checked'
 			).attr('id');
 
-			if (selected_payment_method !== this.selected_payment_method) {
-				$(document.body).trigger('payment_method_selected');
+			if (selectedPaymentMethod !== this.selectedPaymentMethod) {
+				$(document.body).trigger('paymentMethodSelected');
 			}
 
-			this.selected_payment_method = selected_payment_method;
+			this.selectedPaymentMethod = selectedPaymentMethod;
 		},
-		init_checkout: function () {
+
+		/**
+		 * Initialize checkout.
+		 */
+		initCheckout: function () {
 			$(document.body).trigger('update_checkout');
 		},
-		reset_update_checkout_timer: function () {
-			clearTimeout(checkout_form.updateTimer);
+
+		/**
+		 * Reset update checkout timer.
+		 */
+		resetUpdateCheckoutTimer: function () {
+			clearTimeout(checkoutForm.updateTimer);
 		},
-		is_valid_json: function (raw_json) {
+
+		/**
+		 * Return true if the json is valid.
+		 *
+		 * @param {string} raw_json
+		 * @returns
+		 */
+		isValidJson: function (raw_json) {
 			try {
 				var json = JSON.parse(raw_json);
 
@@ -120,16 +188,204 @@ jQuery(function ($) {
 				return false;
 			}
 		},
-		update_checkout: function (event, args) {
+
+		/**
+		 * Update checkout.
+		 *
+		 * @param {} event
+		 * @param {*} args
+		 */
+		updateCheckout: function (event, args) {
 			// Small timeout to prevent multiple requests when several fields update at the same time
-			checkout_form.reset_update_checkout_timer();
-			checkout_form.updateTimer = setTimeout(
-				checkout_form.update_checkout_action,
+			checkoutForm.resetUpdateCheckoutTimer();
+			checkoutForm.updateTimer = setTimeout(
+				checkoutForm.updateCheckoutAction,
 				'5',
 				args
 			);
 		},
+
+		/**
+		 * Modern browsers have their own standard generic messages that they will display.
+		 * Confirm, alert, prompt or custom message are not allowed during the unload event
+		 * Browsers will display their own standard messages
+		 *
+		 * @param {*} event
+		 * @returns
+		 */
+		handleUnloadEvent: function (event) {
+			// Check if the browser is Internet Explorer
+			if (navigator.userAgent.indexOf('MSIE') !== -1 || !!document.documentMode) {
+				// IE handles unload events differently than modern browsers
+				event.preventDefault();
+				return undefined;
+			}
+
+			return true;
+		},
+
+		/**
+		 * Attach unload events on submit.
+		 */
+		attachUnloadEventsOnSubmit: function () {
+			$(window).on('beforeunload', this.handleUnloadEvent);
+		},
+
+		/**
+		 * Detach unload events on submit.
+		 */
+		detachUnloadEventsOnSubmit: function () {
+			$(window).off('beforeunload', this.handleUnloadEvent);
+		},
+
+		/**
+		 * Display error message.
+		 */
+		submitError: function (errorMessage) {
+			$(
+				'.masteriyo-NoticeGroup-checkout, .masteriyo-error, .masteriyo-message'
+			).remove();
+
+			checkoutForm.$form.prepend(
+				'<div class="masteriyo-NoticeGroup masteriyo-NoticeGroup-checkout">' +
+					errorMessage +
+					'</div>'
+			); // eslint-disable-line max-len
+
+			checkoutForm.$form
+				.find('.input-text, select, input:checkbox')
+				.trigger('validate')
+				.trigger('blur');
+
+			checkoutForm.scrollToNotices();
+
+			$(document.body).trigger('checkout_error', [errorMessage]);
+		},
+
+		/**
+		 * Scroll to notices.
+		 */
+		scrollToNotices: function () {
+			var scrollElement = $(
+				'.masteriyo-NoticeGroup-updateOrderReview, .masteriyo-NoticeGroup-checkout'
+			);
+
+			if (!scrollElement.length) {
+				scrollElement = $('form.masteriyo-checkout');
+			}
+
+			if (scrollElement.length) {
+				$('html, body').animate(
+					{
+						scrollTop: scrollElement.offset().top - 100,
+					},
+					1000
+				);
+			}
+		},
+
+		/**
+		 * Handle fail checkout form submission.
+		 *
+		 * @param {*} jqXHR
+		 * @param {*} textStatus
+		 * @param {*} errorThrown
+		 */
+		handleFormSubmissionFailure: function (jqXHR, textStatus, errorThrown) {
+			// Detach the unload handler that prevents a reload / redirect.
+			checkoutForm.detachUnloadEventsOnSubmit();
+
+			try {
+				error = jqXHR.responseJSON;
+				checkoutForm.submitError(
+					'<div class="masteriyo-error">' + error.data.messages + '</div>'
+				);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+
+		/**
+		 * Handle successful checkout form submission.
+		 *
+		 * @param {*} response
+		 * @param {*} textStatus
+		 * @param {*} jqXHR
+		 */
+		handleFormSubmissionSuccess: function (response, textStatus, jqXHR) {
+			// Detach the unload handler that prevents a reload / redirect
+			checkoutForm.detachUnloadEventsOnSubmit();
+
+			try {
+				if ( 'success' === response.result && checkoutForm.$form.triggerHandler('checkout_place_order_success', response) !== false ) {
+					if ( -1 === response.redirect.indexOf('https://') || -1 === response.redirect.indexOf('http://') ) {
+						window.location = response.redirect;
+					} else {
+						window.location = decodeURI(response.redirect);
+					}
+				} else if ('failure' === response.result) {
+					throw 'Result failure';
+				} else {
+					throw 'Invalid response';
+				}
+			} catch (err) {
+				// Reload page
+				if (true === response.reload) {
+					window.location.reload();
+					return;
+				}
+
+				// Trigger update in case we need a fresh nonce
+				if (true === response.refresh) {
+					$(document.body).trigger('update_checkout');
+				}
+
+				// Add new errors
+				if (response.messages) {
+					checkoutForm.submitError(response.messages);
+				}
+			}
+		},
+		/**
+		 * Handle checkout form submission.
+		 */
+		submit: function (event) {
+			console.log('Checkout form submission');
+
+			if (checkoutForm.$form.is('.processing')) {
+				return false;
+			}
+
+			if (false !== checkoutForm.$form.triggerHandler('checkout_place_order') && false !== checkoutForm.$form.triggerHandler( 'checkout_place_order_' + checkoutForm.getPaymentMethod())) {
+				// Attach event to block reloading the page when the form has been submitted
+				checkoutForm.attachUnloadEventsOnSubmit();
+
+				// Perform checkout operation.
+				$.ajax({
+					type: 'POST',
+					url: checkoutForm.getCheckoutURL(),
+					dataType: 'json',
+					data: checkoutForm.$form.serialize(),
+					beforeSend: function (jqXHR) {
+						checkoutForm.$form.addClass('processing').block(getBlockLoadingConfiguration());
+					},
+					success: function (response, textStatus, jqXHR) {
+						checkoutForm.handleFormSubmissionSuccess(response,textStatus,jqXHR);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						checkoutForm.handleFormSubmissionFailure(jqXHR,textStatus,errorThrown);
+					},
+					complete: function (jqXHR, textStatus) {
+						// Detach the unload handler that prevents a reload / redirect
+						checkoutForm.detachUnloadEventsOnSubmit();
+						checkoutForm.$form.removeClass('processing').unblock();
+					},
+				});
+			}
+
+			return false;
+		},
 	};
 
-	checkout_form.init();
+	checkoutForm.init();
 });

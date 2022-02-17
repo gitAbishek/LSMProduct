@@ -112,6 +112,25 @@ class User extends Model {
 		return get_avatar_url( $this->get_id(), $args );
 	}
 
+	/**
+	 * Get User's course archive page URL.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string
+	 */
+	public function get_course_archive_url() {
+		$url = get_author_posts_url( $this->get_id() );
+		$url = add_query_arg(
+			array(
+				'post_type' => 'mto-course',
+			),
+			$url
+		);
+
+		return $url;
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Getters
@@ -812,9 +831,9 @@ class User extends Model {
 		}
 		$roles = (array) $roles;
 
-		if ( is_array( $roles ) && ! empty( $roles ) && ! empty( $wp_roles->roles ) ) {
+		if ( is_array( $roles ) && ! empty( $roles ) && ! empty( $GLOBALS['wp_roles']->roles ) ) {
 			foreach ( $roles as $role ) {
-				if ( ! in_array( $role, array_keys( $wp_roles->roles ), true ) ) {
+				if ( ! in_array( $role, array_keys( $GLOBALS['wp_roles']->roles ), true ) ) {
 					throw new ModelException( 'user_invalid_roles', __( 'Invalid roles', 'masteriyo' ) );
 				}
 			}

@@ -18,6 +18,17 @@ add_filter( 'admin_body_class', 'masteriyo_add_admin_body_class' );
 add_filter( 'body_class', 'masteriyo_add_body_class', 10, 2 );
 
 /**
+ * Course category archive.
+ */
+add_action( 'masteriyo_after_course_category_main_content', 'masteriyo_archive_navigation' );
+add_action( 'masteriyo_course_category_description', 'masteriyo_course_category_description' );
+
+/**
+ * Instructor archive.
+ */
+add_action( 'masteriyo_after_instructor_archive_main_content', 'masteriyo_archive_navigation' );
+
+/**
  * Course Archive.
  */
 add_action( 'masteriyo_after_main_content', 'masteriyo_archive_navigation' );

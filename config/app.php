@@ -43,6 +43,7 @@ return array_unique(
 			'Masteriyo\Providers\QuizAttemptServiceProvider',
 			'Masteriyo\Providers\MigratorServiceProvider',
 			'Masteriyo\Providers\NotificationServiceProvider',
+			'Masteriyo\Providers\RewriteServiceProvider',
 		)
 	)
 );

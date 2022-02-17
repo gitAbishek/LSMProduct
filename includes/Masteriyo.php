@@ -87,6 +87,7 @@ class Masteriyo {
 		masteriyo( 'blocks' )->init();
 		masteriyo( 'order-notes' );
 		masteriyo( 'query.frontend' );
+		masteriyo( 'rewrite' )->init();
 
 		$this->define_tables();
 
@@ -147,8 +148,6 @@ class Masteriyo {
 		$this->setup_wizard();
 
 		$this->handle_paypal_ipn();
-
-		add_rewrite_endpoint( 'course', EP_PAGES | EP_ROOT, 'course_name' );
 
 		do_action( 'masteriyo_init' );
 	}
@@ -308,6 +307,13 @@ class Masteriyo {
 			$template = masteriyo( 'template' )->locate( 'archive-course.php' );
 		} elseif ( masteriyo_is_learn_page() ) {
 			$template = $this->handle_learn_page();
+		}
+
+		if ( is_tax( 'course_cat' ) ) {
+			$template = masteriyo_locate_template( 'archive-course-category.php' );
+		}
+		if ( is_author() ) {
+			$template = masteriyo_locate_template( 'archive-instructor-courses.php' );
 		}
 
 		return $template;

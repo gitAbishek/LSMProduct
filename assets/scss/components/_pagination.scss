@@ -4,7 +4,7 @@
 	border-radius: $border_radius_8;
 	background: var(--masteriyo-color-white);
 	box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.05);
-	margin: auto;
+	margin: $spacing_12px auto;
 
 	.prev,
 	.next {

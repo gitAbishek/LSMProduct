@@ -131,7 +131,17 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 	 * @return string
 	 */
 	function masteriyo_page_title( $echo = true ) {
-		if ( is_search() ) {
+		if ( is_author() ) {
+			// Queue the first post to know the archive author.
+			the_post();
+
+			$author = get_the_author();
+			/* translators: %s: Author */
+			$page_title = sprintf( __( 'Instructor | %s', 'masteriyo' ), esc_html( $author ) );
+
+			// Since we called the_post() above, we need to rewind the loop back.
+			rewind_posts();
+		} elseif ( is_search() ) {
 			/* translators: %s: search query */
 			$page_title = sprintf( __( 'Search results: &ldquo;%s&rdquo;', 'masteriyo' ), get_search_query() );
 
@@ -328,6 +338,8 @@ function masteriyo_add_body_class( $classes, $class ) {
 		$classes[] = 'masteriyo notranslate masteriyo-interactive-page';
 	} elseif ( masteriyo_is_account_page() ) {
 		$classes[] = 'masteriyo masteriyo-account-page';
+	} elseif ( is_tax( 'course_cat' ) ) {
+		$classes[] = 'masteriyo masteriyo-course-category-page';
 	}
 
 	if ( $post ) {
@@ -1317,5 +1329,26 @@ if ( ! function_exists( 'masteriyo_template_show_account_approved_notice' ) ) {
 				)
 			);
 		}
+	}
+}
+
+if ( ! function_exists( 'masteriyo_course_category_description' ) ) {
+	/**
+	 * Display course category description in course category archive page.
+	 *
+	 * @since x.x.x
+	 */
+	function masteriyo_course_category_description() {
+		$term = get_queried_object();
+
+		if ( ! is_object( $term ) || ! isset( $term->description ) ) {
+			return;
+		}
+
+		?>
+		<p class="masteriyo-courses-header__description">
+			<?php echo esc_html( $term->description ); ?>
+		</p>
+		<?php
 	}
 }

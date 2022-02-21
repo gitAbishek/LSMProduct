@@ -155,7 +155,7 @@ class ScriptStyle {
 		$login_form_src      = self::get_asset_url( "/assets/js/build/login-form{$suffix}.js" );
 		$checkout_src        = self::get_asset_url( "/assets/js/build/checkout{$suffix}.js" );
 		$ask_review_src      = self::get_asset_url( "/assets/js/build/ask-review{$suffix}.js" );
-		$jquery_block_ui_src = self::get_asset_url( "/assets/js/build/offline-payment{$suffix}.js" );
+		$jquery_block_ui_src = self::get_asset_url( "/assets/js/build/jquery-block-ui{$suffix}.js" );
 
 		if ( masteriyo_is_development() ) {
 			$account_src         = 'http://localhost:3000/dist/account.js';

@@ -112,7 +112,7 @@ const Sidebar = () => {
 						_activeLink={navActiveStyles}
 						to={routes.courses}>
 						<ListIcon fontSize="md" mr="3" as={BiBook} />
-						{__('Enrolled Courses')}
+						{__('Enrolled Courses', 'masteriyo')}
 					</Link>
 				</ListItem>
 				<ListItem>
@@ -126,7 +126,7 @@ const Sidebar = () => {
 						_activeLink={navActiveStyles}
 						to={routes.user.profile}>
 						<ListIcon fontSize="md" mr="3" as={BiUser} />
-						{__('Profile')}
+						{__('Profile', 'masteriyo')}
 					</Link>
 				</ListItem>
 
@@ -137,14 +137,14 @@ const Sidebar = () => {
 						_activeLink={navActiveStyles}
 						to={routes.order.list}>
 						<ListIcon fontSize="md" mr="3" as={BiHistory} />
-						{__('Order History')}
+						{__('Order History', 'masteriyo')}
 					</Link>
 				</ListItem>
 
 				<ListItem>
 					<Link sx={navLinkStyles} href={localized.urls.logout}>
 						<ListIcon fontSize="md" mr="3" as={BiLogOut} />
-						{__('Logout')}
+						{__('Logout', 'masteriyo')}
 					</Link>
 				</ListItem>
 			</List>

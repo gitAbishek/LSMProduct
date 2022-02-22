@@ -56,7 +56,7 @@ const Dashboard: React.FC = () => {
 					<Row gutterWidth={30}>
 						<Col sm={12} md={4}>
 							<CountBox
-								title="Enrolled Courses"
+								title={__('Enrolled Courses', 'masteriyo')}
 								count={enrolledCoursesCount}
 								icon={<Icon as={BsBook} fontSize="xl" />}
 								colorScheme="cyan"
@@ -64,7 +64,7 @@ const Dashboard: React.FC = () => {
 						</Col>
 						<Col sm={12} md={4}>
 							<CountBox
-								title="In Progress Courses"
+								title={__('In Progress Courses', 'masteriyo')}
 								count={inProgressCoursesCount}
 								icon={<Icon as={BsBookHalf} fontSize="xl" />}
 								colorScheme="blue"
@@ -72,7 +72,7 @@ const Dashboard: React.FC = () => {
 						</Col>
 						<Col sm={12} md={4}>
 							<CountBox
-								title="Completed Courses"
+								title={__('Completed Courses', 'masteriyo')}
 								count={completedCoursesCount}
 								icon={<Icon as={HiAcademicCap} fontSize="2xl" />}
 								colorScheme="green"

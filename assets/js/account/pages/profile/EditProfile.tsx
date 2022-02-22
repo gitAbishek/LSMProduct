@@ -218,7 +218,8 @@ const EditProfile: React.FC = () => {
 												borderColor="gray.100"
 												py="6">
 												{__('Billing', 'masteriyo')}
-												<Tooltip label={__('Copy from the profile')}>
+												<Tooltip
+													label={__('Copy from the profile', 'masteriyo')}>
 													<IconButton
 														fontSize="md"
 														variant="link"

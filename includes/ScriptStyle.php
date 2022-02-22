@@ -525,6 +525,7 @@ class ScriptStyle {
 
 		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations( 'masteriyo-learn', 'masteriyo', Constants::get( 'MASTERIYO_LANGUAGES' ) );
+			wp_set_script_translations( 'masteriyo-account', 'masteriyo', Constants::get( 'MASTERIYO_LANGUAGES' ) );
 		}
 
 		self::load_custom_inline_styles();

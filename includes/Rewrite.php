@@ -4,7 +4,7 @@
  *
  * @package Masteriyo
  *
- * @since x.x.x
+ * @since 1.4.3
  */
 
 namespace Masteriyo;
@@ -16,7 +16,7 @@ class Rewrite {
 	/**
 	 * Initialize rewrite handlers.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function init() {
 		$this->init_hooks();
@@ -25,7 +25,7 @@ class Rewrite {
 	/**
 	 * Initialize hooks.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	protected function init_hooks() {
 		add_action( 'init', array( $this, 'add_rewrite_tags' ), 20 );
@@ -37,7 +37,7 @@ class Rewrite {
 	/**
 	 * Add course name endpoint to be used in learn page.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function add_course_name_endpoint() {
 		add_rewrite_endpoint( 'course', EP_PAGES | EP_ROOT, 'course_name' );
@@ -46,7 +46,7 @@ class Rewrite {
 	/**
 	 * Add WP rewrite tag for author slug.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function add_rewrite_tags() {
 		add_rewrite_tag( '%masteriyo_author_role%', '(instructor|author)' );
@@ -55,7 +55,7 @@ class Rewrite {
 	/**
 	 * Override WP rewrite for author slug.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function rewrite_overrides() {
 		$GLOBALS['wp_rewrite']->author_base = '%masteriyo_author_role%';
@@ -64,7 +64,7 @@ class Rewrite {
 	/**
 	 * Add 'instructor' to author slug.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 *
 	 * @param string $link    The author link with user role as author base.
 	 * @param int    $user_id The user id.

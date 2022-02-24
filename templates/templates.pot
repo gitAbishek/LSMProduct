@@ -1,0 +1,633 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-02-24T16:12:53+05:45\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
+
+#: account/courses.php:15
+msgid "Active Courses"
+msgstr ""
+
+#. translators: %s: course progress in percentage
+#: account/courses.php:67
+#: account/dashboard.php:119
+msgid "%s Completed"
+msgstr ""
+
+#: account/courses.php:92
+#: account/dashboard.php:140
+msgid "Continue"
+msgstr ""
+
+#: account/courses.php:101
+msgid "You haven't enrolled in any courses yet!"
+msgstr ""
+
+#: account/courses.php:107
+msgid "All Courses"
+msgstr ""
+
+#: account/courses.php:161
+msgid "Start Course"
+msgstr ""
+
+#: account/courses.php:172
+msgid "No courses yet!"
+msgstr ""
+
+#: account/dashboard.php:13
+msgid "Hello"
+msgstr ""
+
+#: account/dashboard.php:16
+msgid "Welcome to your dashboard here you can view your overview and your stats."
+msgstr ""
+
+#: account/dashboard.php:22
+msgid "View Profile"
+msgstr ""
+
+#: account/dashboard.php:41
+msgid "In Progress"
+msgstr ""
+
+#: account/dashboard.php:48
+#: checkout/order-summary.php:20
+msgid "Courses"
+msgstr ""
+
+#: account/dashboard.php:54
+msgid "Continue Studying"
+msgstr ""
+
+#: account/dashboard.php:57
+msgid "Show All"
+msgstr ""
+
+#: account/dashboard.php:134
+msgid "Started on"
+msgstr ""
+
+#: account/dashboard.php:148
+msgid "No active courses."
+msgstr ""
+
+#: account/edit-account.php:20
+msgid "Edit Profile"
+msgstr ""
+
+#: account/edit-account.php:21
+msgid "Password & Security"
+msgstr ""
+
+#: account/edit-account.php:33
+#: account/form-signup.php:46
+#: account/instructor-registration.php:46
+msgid "Username"
+msgstr ""
+
+#: account/edit-account.php:39
+#: account/form-signup.php:31
+#: account/instructor-registration.php:31
+#: account/view-account.php:31
+#: checkout/form-billing.php:29
+msgid "First Name"
+msgstr ""
+
+#: account/edit-account.php:44
+#: account/form-signup.php:39
+#: account/instructor-registration.php:39
+#: account/view-account.php:32
+#: checkout/form-billing.php:50
+msgid "Last Name"
+msgstr ""
+
+#: account/edit-account.php:50
+#: account/view-account.php:30
+msgid "Email"
+msgstr ""
+
+#: account/edit-account.php:55
+#: account/view-account.php:33
+msgid "Address"
+msgstr ""
+
+#: account/edit-account.php:61
+#: account/view-account.php:34
+msgid "City"
+msgstr ""
+
+#: account/edit-account.php:66
+#: account/view-account.php:35
+msgid "State"
+msgstr ""
+
+#: account/edit-account.php:73
+#: account/view-account.php:36
+msgid "Zip Code"
+msgstr ""
+
+#: account/edit-account.php:78
+#: account/view-account.php:37
+msgid "Country"
+msgstr ""
+
+#: account/edit-account.php:87
+msgid "Save"
+msgstr ""
+
+#: account/edit-account.php:93
+#: account/edit-account.php:112
+msgid "Change Password"
+msgstr ""
+
+#: account/edit-account.php:97
+msgid "Current Password"
+msgstr ""
+
+#: account/edit-account.php:102
+msgid "New Password"
+msgstr ""
+
+#: account/edit-account.php:107
+#: account/form-signup.php:70
+#: account/instructor-registration.php:70
+msgid "Confirm Password"
+msgstr ""
+
+#: account/form-login.php:19
+msgid "Sign In"
+msgstr ""
+
+#: account/form-login.php:24
+#: account/form-reset-password-request.php:22
+msgid "Username or Email"
+msgstr ""
+
+#: account/form-login.php:29
+#: account/form-signup.php:62
+#: account/instructor-registration.php:62
+msgid "Password"
+msgstr ""
+
+#: account/form-login.php:37
+msgid "Remember me"
+msgstr ""
+
+#: account/form-login.php:43
+msgid "Forgot your password?"
+msgstr ""
+
+#: account/form-login.php:50
+msgid "Sign in"
+msgstr ""
+
+#: account/form-login.php:54
+msgid "Don't have an account?"
+msgstr ""
+
+#: account/form-login.php:59
+msgid "Sign Up Now"
+msgstr ""
+
+#: account/form-reset-password-request.php:17
+msgid "Reset Password"
+msgstr ""
+
+#: account/form-reset-password-request.php:18
+msgid "Enter your user account's verified email address and we will send you a password reset link."
+msgstr ""
+
+#: account/form-reset-password-request.php:28
+msgid "Send Reset Email"
+msgstr ""
+
+#: account/form-reset-password-request.php:33
+#: account/form-reset-password.php:46
+msgid "Go back to sign-in"
+msgstr ""
+
+#: account/form-reset-password.php:25
+#: account/form-reset-password.php:31
+msgid "New password"
+msgstr ""
+
+#: account/form-reset-password.php:26
+msgid "Enter a new password below."
+msgstr ""
+
+#: account/form-reset-password.php:35
+msgid "Re-enter new password."
+msgstr ""
+
+#: account/form-reset-password.php:41
+msgid "Reset"
+msgstr ""
+
+#: account/form-signup.php:22
+msgid "Create Your Account"
+msgstr ""
+
+#: account/form-signup.php:54
+#: account/instructor-registration.php:54
+#: checkout/form-billing.php:73
+msgid "Email Address"
+msgstr ""
+
+#: account/form-signup.php:79
+#: account/instructor-registration.php:79
+msgid "Register"
+msgstr ""
+
+#: account/form-signup.php:84
+#: account/instructor-registration.php:84
+msgid "Registration complete."
+msgstr ""
+
+#: account/instructor-registration.php:22
+msgid "Become an instructor"
+msgstr ""
+
+#: account/order-history.php:48
+msgctxt "hash before order number"
+msgid "#"
+msgstr ""
+
+#. translators: 1: Formatted order total 2: Total order items
+#: account/order-history.php:64
+msgid "%1$s for %2$s item"
+msgid_plural "%1$s for %2$s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: Order action url 2: Order action class 3: Order action title 4:Order action name
+#: account/order-history.php:85
+msgid "<a href=\"%1$s\" class=\"%2$s\" title=\"%3$s\">%4$s</a>"
+msgstr ""
+
+#: account/order-history.php:107
+msgid "Browse courses"
+msgstr ""
+
+#: account/order-history.php:108
+msgid "No order has been made yet."
+msgstr ""
+
+#: account/reset-password-confirmation.php:27
+msgid "A password reset email has been sent to the email address on file for your account, but may take several minutes to show up in your inbox. Please wait at least 10 minutes before attempting another reset."
+msgstr ""
+
+#. translators: 1: order number 2: order date 3: order status
+#: account/view-order.php:26
+msgid "Order #%1$s was placed on %2$s and is currently %3$s."
+msgstr ""
+
+#: account/view-order.php:35
+msgid "Order updates"
+msgstr ""
+
+#: account/view-order.php:59
+msgid "Order details"
+msgstr ""
+
+#: account/view-order.php:64
+msgid "course"
+msgstr ""
+
+#: account/view-order.php:65
+#: checkout/order-summary.php:35
+msgid "Total"
+msgstr ""
+
+#: account/view-order.php:149
+#: emails/customer-addresses.php:26
+msgid "Billing address"
+msgstr ""
+
+#: account/view-order.php:152
+#: emails/customer-addresses.php:29
+msgid "N/A"
+msgstr ""
+
+#: checkout/form-billing.php:22
+msgid "Payment Details"
+msgstr ""
+
+#. translators: %s: account page link
+#: checkout/form-checkout.php:19
+msgid "You must be %1$slogged in%2$s to checkout."
+msgstr ""
+
+#: checkout/order-summary.php:16
+msgid "Your Order"
+msgstr ""
+
+#: checkout/order-summary.php:21
+#: checkout/order-summary.php:31
+msgid "Subtotal"
+msgstr ""
+
+#: checkout/payment.php:24
+msgid "Please enable one or more payment gateways."
+msgstr ""
+
+#: checkout/payment.php:27
+msgid "Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements."
+msgstr ""
+
+#: checkout/thankyou.php:23
+#: checkout/thankyou.php:65
+msgid "Thank you. Your order has been received."
+msgstr ""
+
+#: checkout/thankyou.php:38
+msgid "Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction. Please attempt your purchase again."
+msgstr ""
+
+#: checkout/thankyou.php:43
+msgid "Pay"
+msgstr ""
+
+#: checkout/thankyou.php:47
+msgid "Account"
+msgstr ""
+
+#: checkout/thankyou.php:71
+msgid "Order number:"
+msgstr ""
+
+#: checkout/thankyou.php:76
+msgid "Date:"
+msgstr ""
+
+#: checkout/thankyou.php:82
+msgid "Email:"
+msgstr ""
+
+#: checkout/thankyou.php:88
+msgid "Total:"
+msgstr ""
+
+#: checkout/thankyou.php:94
+msgid "Payment method:"
+msgstr ""
+
+#: content-related-posts.php:30
+msgid "Related Courses"
+msgstr ""
+
+#: course-searchform.php:23
+msgid "Search for:"
+msgstr ""
+
+#: course-searchform.php:28
+msgid "Search courses&hellip;"
+msgstr ""
+
+#: course-searchform.php:29
+#: course-searchform.php:30
+msgctxt "submit button"
+msgid "Search"
+msgstr ""
+
+#. translators: %s: Customer username
+#. translators: %s: Customer first name
+#. translators: %s: Username
+#: emails/customer-new-account.php:30
+#: emails/order-completed.php:23
+#: emails/order-on-hold.php:21
+#: emails/reset-password.php:26
+msgid "Hi %s,"
+msgstr ""
+
+#. translators: %1$s: Site title, %2$s: Username, %3$s: account link
+#: emails/customer-new-account.php:37
+msgid "Thanks for creating an account on %1$s. You can access your account area and view your courses, account details, and more from %2$s"
+msgstr ""
+
+#. translators: %s: Customer billing full name
+#: emails/new-order.php:24
+msgid "You’ve received the following order from %s:"
+msgstr ""
+
+#. translators: %1$s: Order number, %2$s: Customer full name.
+#: emails/order-cancelled.php:23
+msgid "Notification to let you know &mdash; order #%1$s belonging to %2$s has been cancelled:"
+msgstr ""
+
+#: emails/order-completed.php:24
+msgid "We have finished processing your order."
+msgstr ""
+
+#. translators: %s: Order ID.
+#: emails/order-details.php:25
+msgid "[Order #%s]"
+msgstr ""
+
+#: emails/order-details.php:33
+msgid "Product"
+msgstr ""
+
+#: emails/order-details.php:34
+msgid "Quantity"
+msgstr ""
+
+#: emails/order-details.php:35
+msgid "Price"
+msgstr ""
+
+#: emails/order-details.php:68
+msgid "Note:"
+msgstr ""
+
+#: emails/order-on-hold.php:22
+msgid "Thanks for your order. It’s on-hold until we confirm that payment has been received. In the meantime, here’s a reminder of what you ordered:"
+msgstr ""
+
+#. translators: %s: Site name
+#: emails/reset-password.php:31
+msgid "Someone has requested a new password for the following account on %s:"
+msgstr ""
+
+#. translators: %s: Username
+#: emails/reset-password.php:36
+msgid "Username: %s"
+msgstr ""
+
+#: emails/reset-password.php:40
+msgid "If you didn't make this request, just ignore this email. If you'd like to proceed:"
+msgstr ""
+
+#: emails/reset-password.php:47
+msgid "Click here to reset your password."
+msgstr ""
+
+#: enroll-button.php:33
+msgid "Buy Now"
+msgstr ""
+
+#: enroll-button.php:41
+msgid "Sorry, students limit reached. Course closed for enrollment."
+msgstr ""
+
+#: notices/ask-review.php:17
+msgid "Love using LMS by Masteriyo?"
+msgstr ""
+
+#: notices/ask-review.php:35
+msgid "Sure, I'd love to"
+msgstr ""
+
+#: notices/ask-review.php:38
+msgid "Maybe later"
+msgstr ""
+
+#: notices/ask-review.php:41
+msgid "I already did"
+msgstr ""
+
+#: notices/review-deleted.php:14
+msgid "This review was deleted."
+msgstr ""
+
+#. translators: %s: Username
+#: single-course/author-and-rating.php:27
+msgid "by %s"
+msgstr ""
+
+#: single-course/course-review-form.php:24
+msgid "Create a new review."
+msgstr ""
+
+#: single-course/course-review-form.php:30
+msgid "Title"
+msgstr ""
+
+#: single-course/course-review-form.php:34
+msgid "Rating"
+msgstr ""
+
+#: single-course/course-review-form.php:43
+msgid "Content"
+msgstr ""
+
+#: single-course/course-review-form.php:48
+msgid "Submit"
+msgstr ""
+
+#. translators: %s: Achor tag html with text "logged in"
+#: single-course/course-review-form.php:60
+msgid "You must be %s to submit a review."
+msgstr ""
+
+#: single-course/course-review-form.php:65
+msgid "logged in"
+msgstr ""
+
+#: single-course/course-review-reply.php:50
+#: single-course/course-review.php:45
+msgid "Edit"
+msgstr ""
+
+#: single-course/course-review-reply.php:51
+#: single-course/course-review.php:46
+#: single-course/modals.php:28
+msgid "Delete"
+msgstr ""
+
+#: single-course/course-review.php:65
+msgid "Reply"
+msgstr ""
+
+#. translators: %d: Enrolled  students count
+#: single-course/course-stats.php:42
+msgctxt "Enrolled Students Count"
+msgid "%s Student"
+msgid_plural "%s Students"
+msgstr[0] ""
+msgstr[1] ""
+
+#: single-course/curriculum.php:30
+#: single-course/tab-handles.php:25
+msgid "Curriculum"
+msgstr ""
+
+#. translators: %d: Course sections count
+#: single-course/curriculum.php:36
+msgctxt "Sections Count"
+msgid "%s Section"
+msgid_plural "%s Sections"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: Course lessons count
+#. translators: %d: Section lessons count
+#: single-course/curriculum.php:45
+#: single-course/curriculum.php:91
+msgctxt "Lessons Count"
+msgid "%s Lesson"
+msgid_plural "%s Lessons"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: Course quiz count
+#. translators: %d: Section quizzes count
+#: single-course/curriculum.php:54
+#: single-course/curriculum.php:100
+msgctxt "Quizzes Count"
+msgid "%s Quiz"
+msgid_plural "%s Quizzes"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: Lecture hours
+#: single-course/curriculum.php:64
+msgid "%s Duration"
+msgstr ""
+
+#: single-course/curriculum.php:74
+msgid "Expand All"
+msgstr ""
+
+#: single-course/highlights.php:25
+msgid "This course includes"
+msgstr ""
+
+#: single-course/modals.php:24
+msgid "Deleting Course Review"
+msgstr ""
+
+#: single-course/modals.php:25
+msgid "Are you sure? You can't restore this back"
+msgstr ""
+
+#: single-course/modals.php:27
+msgid "Cancel"
+msgstr ""
+
+#: single-course/reviews-stats.php:27
+msgid "out of"
+msgstr ""
+
+#. translators: %d: Course comments count
+#: single-course/reviews-stats.php:36
+msgctxt "Course reviews"
+msgid "%s user rating"
+msgid_plural "%s user ratings"
+msgstr[0] ""
+msgstr[1] ""
+
+#: single-course/tab-handles.php:22
+msgid "Overview"
+msgstr ""
+
+#: single-course/tab-handles.php:29
+msgid "Reviews"
+msgstr ""

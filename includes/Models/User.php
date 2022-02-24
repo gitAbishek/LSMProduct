@@ -115,7 +115,7 @@ class User extends Model {
 	/**
 	 * Get User's course archive page URL.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 *
 	 * @return string
 	 */

@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.4.2
+**Stable tag**: 1.4.3
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,12 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.4.3 - 24-02-2022
+
+- Fix - String translation in Account page.
+- Enhancement - Added course categories archive page.
+- Enhancement - Added instructor course archive page.
 
 ### 1.4.2 - 15-02-2022
 

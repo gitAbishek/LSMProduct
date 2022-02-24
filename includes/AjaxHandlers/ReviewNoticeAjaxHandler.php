@@ -2,7 +2,7 @@
 /**
  * ReviewNotice Ajax handler.
  *
- * @since x.x.x
+ * @since 1.4.3
  * @package Masteriyo\AjaxHandlers
  */
 
@@ -18,7 +18,7 @@ class ReviewNoticeAjaxHandler extends AjaxHandler {
 	/**
 	 * ReviewNotice ajax action.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 * @var string
 	 */
 	public $action = 'masteriyo_review_notice';
@@ -26,7 +26,7 @@ class ReviewNoticeAjaxHandler extends AjaxHandler {
 	/**
 	 * Process review notice ajax request.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function register() {
 		add_action( "wp_ajax_{$this->action}", array( $this, 'process' ) );
@@ -35,7 +35,7 @@ class ReviewNoticeAjaxHandler extends AjaxHandler {
 	/**
 	 * Process ajax handler review notice.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function process() {
 		if ( ! isset( $_POST['nonce'] ) ) {

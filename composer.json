@@ -1,7 +1,7 @@
 {
   "name": "masteriyo/masteriyo",
   "description": "An WordPress LMS plugin",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "homepage": "https://example.com",
   "license": "GPL-2.0-or-later",
   "type": "wordpress-plugin",
@@ -63,7 +63,7 @@
     "spatie/phpunit-watcher": "^1.23",
     "vlucas/phpdotenv": "^5.4",
     "wp-cli/db-command": "^2.0",
-    "wp-cli/i18n-command": "^2.2",
+    "wp-cli/i18n-command": "^v2.2.13",
     "wp-cli/wp-cli": "^2.4",
     "wp-coding-standards/wpcs": "^2.3",
     "wp-phpunit/wp-phpunit": "^5.8",

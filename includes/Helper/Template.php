@@ -1336,7 +1336,7 @@ if ( ! function_exists( 'masteriyo_course_category_description' ) ) {
 	/**
 	 * Display course category description in course category archive page.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	function masteriyo_course_category_description() {
 		$term = get_queried_object();

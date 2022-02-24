@@ -1,0 +1,5705 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-02-24T16:12:43+05:45\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
+
+#: Abstracts/FileRestriction.php:71
+#: FileRestrictions/LessonVideoRestriction.php:67
+#: FileRestrictions/LessonVideoRestriction.php:76
+msgid "File not found."
+msgstr ""
+
+#: Abstracts/Order.php:348
+msgid "Invalid parent ID."
+msgstr ""
+
+#: Abstracts/Order.php:910
+msgid "Total:"
+msgstr ""
+
+#: Abstracts/OrderItemRepository.php:145
+#: Repository/OrderItemCourseRepository.php:47
+#: Repository/OrderItemRepository.php:153
+msgid "Invalid order item."
+msgstr ""
+
+#: Activation.php:44
+msgctxt "Page slug"
+msgid "courses"
+msgstr ""
+
+#: Activation.php:45
+msgctxt "Page title"
+msgid "Courses"
+msgstr ""
+
+#: Activation.php:50
+msgctxt "Page slug"
+msgid "account"
+msgstr ""
+
+#: Activation.php:51
+msgctxt "Page title"
+msgid "Account"
+msgstr ""
+
+#: Activation.php:56
+msgctxt "Page slug"
+msgid "checkout"
+msgstr ""
+
+#: Activation.php:57
+msgctxt "Page title"
+msgid "Checkout"
+msgstr ""
+
+#: Activation.php:62
+msgctxt "Page slug"
+msgid "learn"
+msgstr ""
+
+#: Activation.php:63
+msgctxt "Page title"
+msgid "Learn"
+msgstr ""
+
+#: Activation.php:68
+msgctxt "Page slug"
+msgid "instructor-registration"
+msgstr ""
+
+#: Activation.php:69
+msgctxt "Page title"
+msgid "Instructor Registration"
+msgstr ""
+
+#: AdminMenu.php:57
+#: AdminMenu.php:58
+#: Models/Order/Order.php:1446
+#: Models/Order/Order.php:1447
+msgid "Masteriyo"
+msgstr ""
+
+#: AdminMenu.php:68
+#: AdminMenu.php:69
+#: Masteriyo.php:207
+#: PostType/Course.php:36
+#: PostType/Course.php:64
+msgid "Courses"
+msgstr ""
+
+#: AdminMenu.php:77
+#: AdminMenu.php:78
+msgid "Categories"
+msgstr ""
+
+#: AdminMenu.php:86
+#: AdminMenu.php:87
+#: FrontendQuery.php:224
+#: PostType/Order.php:34
+#: PostType/Order.php:62
+msgid "Orders"
+msgstr ""
+
+#: AdminMenu.php:95
+#: AdminMenu.php:96
+msgid "Quiz Attempts"
+msgstr ""
+
+#: AdminMenu.php:104
+#: AdminMenu.php:105
+msgid "Users"
+msgstr ""
+
+#: AdminMenu.php:113
+#: AdminMenu.php:114
+#: Masteriyo.php:271
+msgid "Settings"
+msgstr ""
+
+#: Ajax.php:153
+#: Ajax.php:236
+#: AjaxHandlers/LoginAjaxHandler.php:45
+#: AjaxHandlers/ReviewNoticeAjaxHandler.php:53
+msgid "Invalid nonce. Maybe you should reload the page."
+msgstr ""
+
+#: Ajax.php:156
+#: AjaxHandlers/LoginAjaxHandler.php:48
+msgid "Missing login credentials."
+msgstr ""
+
+#: Ajax.php:164
+#: AjaxHandlers/LoginAjaxHandler.php:56
+msgid "Username cannot be empty."
+msgstr ""
+
+#: Ajax.php:167
+#: AjaxHandlers/LoginAjaxHandler.php:59
+msgid "Password cannot be empty."
+msgstr ""
+
+#: Ajax.php:181
+#: AjaxHandlers/LoginAjaxHandler.php:73
+msgid "No user found with the given email address."
+msgstr ""
+
+#: Ajax.php:191
+#: AjaxHandlers/LoginAjaxHandler.php:83
+msgid "Incorrect password. Please try again."
+msgstr ""
+
+#: Ajax.php:198
+#: AjaxHandlers/LoginAjaxHandler.php:90
+msgid "Signed in successfully."
+msgstr ""
+
+#: Ajax.php:212
+#: Ajax.php:228
+#: AjaxHandlers/LoginAjaxHandler.php:104
+#: AjaxHandlers/ReviewNoticeAjaxHandler.php:44
+msgid "Nonce is required."
+msgstr ""
+
+#: Blocks.php:53
+msgid "Masteriyo LMS"
+msgstr ""
+
+#. translators: %s: product name
+#: Cart/Cart.php:234
+msgid "%s has been removed from your cart because it can no longer be purchased. Please contact us if you need assistance."
+msgstr ""
+
+#. translators: %1$s: product name. %2$s product permalink
+#: Cart/Cart.php:251
+msgid "%1$s has been removed from your cart because it has since been modified. You can add it back to your cart <a href=\"%2$s\">here</a>."
+msgstr ""
+
+#. translators: %d item count
+#: Cart/Cart.php:405
+msgid "%d item from your previous order is currently unavailable and could not be added to your cart."
+msgid_plural "%d items from your previous order are currently unavailable and could not be added to your cart."
+msgstr[0] ""
+msgstr[1] ""
+
+#: Cart/Cart.php:418
+msgid "The cart has been filled with the items from your previous order."
+msgstr ""
+
+#: Cart/Cart.php:603
+msgid "Get cart should not be called before the wp_loaded action."
+msgstr ""
+
+#: Cart/Cart.php:711
+msgid "An item which is no longer available was removed from your cart."
+msgstr ""
+
+#: Cart/Cart.php:861
+msgid "Sorry, students limit reached. Course closed for enrollment."
+msgstr ""
+
+#: Cart/Cart.php:874
+msgid "Sorry, this course cannot be purchased."
+msgstr ""
+
+#: Cart/Fees.php:75
+msgid "Fee"
+msgstr ""
+
+#: Cart/Fees.php:83
+msgid "Fee has already been added."
+msgstr ""
+
+#: Checkout.php:116
+msgid "We were unable to process your order, please try again."
+msgstr ""
+
+#. translators: %s: courses page url
+#: Checkout.php:128
+msgid "Sorry, your session has expired. <a href=\"%s\" class=\"masteriyo-backward\">Return to courses page</a>."
+msgstr ""
+
+#: Checkout.php:162
+msgid "Unable to create order."
+msgstr ""
+
+#: Checkout.php:363
+msgid "Please read and accept the terms and conditions to proceed with your order."
+msgstr ""
+
+#: Checkout.php:370
+msgid "Invalid payment method."
+msgstr ""
+
+#. translators: ISO 3166-1 alpha-2 country code
+#: Checkout.php:414
+msgid "'%s' is not a valid country code."
+msgstr ""
+
+#. translators: %s: field name
+#: Checkout.php:420
+msgctxt "checkout-validation"
+msgid "Billing %s"
+msgstr ""
+
+#. translators: %1$s: field name, %2$s finder.eircode.ie URL
+#: Checkout.php:433
+msgid "%1$s is not valid. You can look up the correct Eircode <a target=\"_blank\" href=\"%2$s\">here</a>."
+msgstr ""
+
+#. translators: %s: field name
+#: Checkout.php:440
+msgid "%s is not a valid postcode / ZIP."
+msgstr ""
+
+#. translators: %s: phone number
+#: Checkout.php:449
+msgid "%s is not a valid phone number."
+msgstr ""
+
+#. translators: %s: email address
+#: Checkout.php:459
+msgid "%s is not a valid email address."
+msgstr ""
+
+#. translators: 1: state field 2: valid states
+#: Checkout.php:479
+msgid "%1$s is not valid. Please enter one of the following: %2$s"
+msgstr ""
+
+#. translators: %s: field name
+#: Checkout.php:486
+msgid "%s is a required field."
+msgstr ""
+
+#: Cli/Migration.php:35
+msgid "Invalid filesystem credentials."
+msgstr ""
+
+#: Cli/Migration.php:83
+msgid "Migration name is required."
+msgstr ""
+
+#. translators: Migration file name.
+#: Cli/Migration.php:104
+msgid "%s migrated successfully."
+msgstr ""
+
+#: Cli/Migration.php:111
+msgid "Nothing to migrate."
+msgstr ""
+
+#: Cli/Migration.php:113
+msgid "Migrations ran successfully."
+msgstr ""
+
+#. translators: Migration file name.
+#: Cli/Migration.php:135
+msgid "Successful %s rollback."
+msgstr ""
+
+#: Cli/Migration.php:142
+msgid "Nothing to rollback."
+msgstr ""
+
+#: Cli/Migration.php:144
+msgid "Successful migrations rollback."
+msgstr ""
+
+#: Cli/Migration.php:159
+msgid "Migrations reset successfully."
+msgstr ""
+
+#: Countries.php:446
+msgid "to the"
+msgstr ""
+
+#: Countries.php:446
+msgid "to"
+msgstr ""
+
+#: Countries.php:462
+msgid "the"
+msgstr ""
+
+#: Countries.php:475
+msgid "VAT"
+msgstr ""
+
+#: Countries.php:475
+msgid "Tax"
+msgstr ""
+
+#: Countries.php:488
+msgid "(incl. VAT)"
+msgstr ""
+
+#: Countries.php:488
+msgid "(incl. tax)"
+msgstr ""
+
+#: Countries.php:501
+msgid "(ex. VAT)"
+msgstr ""
+
+#: Countries.php:501
+msgid "(ex. tax)"
+msgstr ""
+
+#: Countries.php:715
+msgid "First name"
+msgstr ""
+
+#: Countries.php:722
+msgid "Last name"
+msgstr ""
+
+#: Countries.php:775
+#: Countries.php:829
+#: Countries.php:862
+#: Countries.php:887
+#: Countries.php:1013
+#: Countries.php:1060
+#: Countries.php:1141
+#: Countries.php:1150
+#: Countries.php:1268
+#: Countries.php:1309
+#: Countries.php:1380
+msgid "Province"
+msgstr ""
+
+#: Countries.php:788
+msgid "Suburb"
+msgstr ""
+
+#: Countries.php:791
+#: Countries.php:1155
+#: Countries.php:1165
+#: Countries.php:1336
+msgid "Postcode"
+msgstr ""
+
+#: Countries.php:794
+#: Countries.php:1051
+#: Countries.php:1160
+#: Countries.php:1331
+msgid "State"
+msgstr ""
+
+#: Countries.php:810
+#: Countries.php:870
+msgid "Canton"
+msgstr ""
+
+#: Countries.php:820
+#: Countries.php:1229
+#: Countries.php:1322
+#: Countries.php:1349
+msgid "District"
+msgstr ""
+
+#: Countries.php:859
+msgid "Postal code"
+msgstr ""
+
+#: Countries.php:882
+#: Countries.php:947
+#: Countries.php:982
+#: Countries.php:1169
+msgid "Region"
+msgstr ""
+
+#: Countries.php:971
+msgid "Department"
+msgstr ""
+
+#: Countries.php:979
+msgid "Town / District"
+msgstr ""
+
+#: Countries.php:1008
+#: Countries.php:1022
+#: Countries.php:1217
+#: Countries.php:1339
+msgid "County"
+msgstr ""
+
+#: Countries.php:1019
+msgid "Eircode"
+msgstr ""
+
+#: Countries.php:1048
+msgid "Pin code"
+msgstr ""
+
+#: Countries.php:1065
+msgid "Town / City / Post Office"
+msgstr ""
+
+#: Countries.php:1069
+#: RestApi/Controllers/Version1/SettingsController.php:394
+msgid "Postal Code"
+msgstr ""
+
+#: Countries.php:1073
+msgid "Parish"
+msgstr ""
+
+#: Countries.php:1090
+msgid "Prefecture"
+msgstr ""
+
+#: Countries.php:1116
+#: Countries.php:1198
+#: Countries.php:1276
+msgid "Municipality"
+msgstr ""
+
+#: Countries.php:1182
+msgid "State / Zone"
+msgstr ""
+
+#: Countries.php:1292
+msgid "Municipality / District"
+msgstr ""
+
+#: Countries.php:1318
+msgid "Town / Village"
+msgstr ""
+
+#: Countries.php:1328
+msgid "ZIP"
+msgstr ""
+
+#: Countries.php:1443
+msgid "Phone"
+msgstr ""
+
+#: Countries.php:1454
+msgid "Email address"
+msgstr ""
+
+#: Emails/CustomerNewAccountEmail.php:108
+msgid "User registered in {site_title}"
+msgstr ""
+
+#: Emails/CustomerNewAccountEmail.php:119
+msgid "New user registered."
+msgstr ""
+
+#: Emails/CustomerNewAccountEmail.php:130
+#: Emails/NewOrderEmail.php:196
+#: Emails/OrderCancelledEmail.php:206
+#: Emails/OrderCompletedEmail.php:192
+#: Emails/OrderOnHoldEmail.php:192
+#: Emails/ResetPasswordEmail.php:143
+msgid "Thanks for reading."
+msgstr ""
+
+#: Emails/NewOrderEmail.php:174
+msgid "New order in {site_title}"
+msgstr ""
+
+#: Emails/NewOrderEmail.php:185
+#: PostType/Order.php:42
+msgid "New Order"
+msgstr ""
+
+#: Emails/OrderCancelledEmail.php:184
+msgid "Order cancelled — {site_title}"
+msgstr ""
+
+#: Emails/OrderCancelledEmail.php:195
+msgid "Order cancelled"
+msgstr ""
+
+#: Emails/OrderCompletedEmail.php:170
+msgid "Order completed — {site_title}"
+msgstr ""
+
+#: Emails/OrderCompletedEmail.php:181
+msgid "Order completed"
+msgstr ""
+
+#: Emails/OrderOnHoldEmail.php:170
+msgid "Order on hold — {site_title}"
+msgstr ""
+
+#: Emails/OrderOnHoldEmail.php:181
+msgid "Order on hold"
+msgstr ""
+
+#: Emails/ResetPasswordEmail.php:121
+msgid "Password Reset Request for {site_title}"
+msgstr ""
+
+#: Emails/ResetPasswordEmail.php:132
+msgid "Password Reset Request"
+msgstr ""
+
+#: FileRestrictions/LessonVideoRestriction.php:34
+#: FileRestrictions/LessonVideoRestriction.php:49
+msgid "You are not allowed to access this file."
+msgstr ""
+
+#: FileRestrictions/LessonVideoRestriction.php:89
+#: FileRestrictions/LessonVideoRestriction.php:92
+#: FileRestrictions/LessonVideoRestriction.php:95
+#: FileRestrictions/LessonVideoRestriction.php:98
+msgid "Invalid URL"
+msgstr ""
+
+#: FormHandler/ChangePasswordFormHandler.php:43
+#: FormHandler/ChangePasswordFormHandler.php:123
+#: FormHandler/InstructorRegistrationFormHandler.php:206
+#: FormHandler/PasswordResetFormHandler.php:44
+#: FormHandler/PasswordResetFormHandler.php:154
+#: FormHandler/RegistrationFormHandler.php:197
+#: FormHandler/RequestPasswordResetFormHandler.php:44
+#: FormHandler/RequestPasswordResetFormHandler.php:139
+msgid "Nonce is missing."
+msgstr ""
+
+#: FormHandler/ChangePasswordFormHandler.php:47
+#: FormHandler/ChangePasswordFormHandler.php:127
+#: FormHandler/InstructorRegistrationFormHandler.php:45
+#: FormHandler/InstructorRegistrationFormHandler.php:209
+#: FormHandler/PasswordResetFormHandler.php:48
+#: FormHandler/PasswordResetFormHandler.php:157
+#: FormHandler/RegistrationFormHandler.php:37
+#: FormHandler/RegistrationFormHandler.php:200
+#: FormHandler/RequestPasswordResetFormHandler.php:47
+#: FormHandler/RequestPasswordResetFormHandler.php:142
+msgid "Invalid nonce"
+msgstr ""
+
+#: FormHandler/ChangePasswordFormHandler.php:61
+msgid "Your password was changed successfully."
+msgstr ""
+
+#: FormHandler/ChangePasswordFormHandler.php:67
+#: FormHandler/ChangePasswordFormHandler.php:106
+#: FormHandler/PasswordResetFormHandler.php:75
+#: FormHandler/PasswordResetFormHandler.php:107
+#: FormHandler/PasswordResetFormHandler.php:135
+#: FormHandler/RequestPasswordResetFormHandler.php:99
+#: FormHandler/RequestPasswordResetFormHandler.php:122
+msgid "Error"
+msgstr ""
+
+#: FormHandler/ChangePasswordFormHandler.php:82
+msgid "Please fill out all password fields."
+msgstr ""
+
+#: FormHandler/ChangePasswordFormHandler.php:85
+msgid "Please enter your current password."
+msgstr ""
+
+#: FormHandler/ChangePasswordFormHandler.php:88
+msgid "Your current password is incorrect."
+msgstr ""
+
+#: FormHandler/ChangePasswordFormHandler.php:91
+msgid "Please enter a new password."
+msgstr ""
+
+#: FormHandler/ChangePasswordFormHandler.php:94
+#: FormHandler/ChangePasswordFormHandler.php:97
+msgid "Please re-enter your new password."
+msgstr ""
+
+#: FormHandler/InstructorRegistrationFormHandler.php:112
+#: FormHandler/RegistrationFormHandler.php:103
+msgid "Your account was created successfully and a password has been sent to your email address."
+msgstr ""
+
+#: FormHandler/InstructorRegistrationFormHandler.php:114
+#: FormHandler/RegistrationFormHandler.php:105
+msgid "Your account was created successfully. Your login details have been sent to your email address."
+msgstr ""
+
+#: FormHandler/InstructorRegistrationFormHandler.php:133
+#: FormHandler/RegistrationFormHandler.php:124
+msgid "Username is required."
+msgstr ""
+
+#: FormHandler/InstructorRegistrationFormHandler.php:137
+#: FormHandler/RegistrationFormHandler.php:128
+msgid "Email is required."
+msgstr ""
+
+#: FormHandler/InstructorRegistrationFormHandler.php:141
+#: FormHandler/RegistrationFormHandler.php:132
+msgid "Email is invalid."
+msgstr ""
+
+#: FormHandler/InstructorRegistrationFormHandler.php:145
+#: FormHandler/RegistrationFormHandler.php:136
+msgid "First name is required."
+msgstr ""
+
+#: FormHandler/InstructorRegistrationFormHandler.php:149
+#: FormHandler/RegistrationFormHandler.php:140
+msgid "Last name is required."
+msgstr ""
+
+#: FormHandler/InstructorRegistrationFormHandler.php:154
+#: FormHandler/RegistrationFormHandler.php:145
+msgid "Password is required.."
+msgstr ""
+
+#: FormHandler/InstructorRegistrationFormHandler.php:158
+#: FormHandler/PasswordResetFormHandler.php:92
+#: FormHandler/RegistrationFormHandler.php:149
+msgid "Confirm password is required..."
+msgstr ""
+
+#: FormHandler/InstructorRegistrationFormHandler.php:162
+msgid "The passwords doesn't match."
+msgstr ""
+
+#: FormHandler/PasswordResetFormHandler.php:52
+msgid "Your password has been reset successfully."
+msgstr ""
+
+#: FormHandler/PasswordResetFormHandler.php:89
+msgid "Password is required."
+msgstr ""
+
+#: FormHandler/PasswordResetFormHandler.php:95
+msgid "The passwords doesn't match"
+msgstr ""
+
+#: FormHandler/PasswordResetFormHandler.php:125
+msgid "This key is invalid or has already been used. Please reset your password again if needed."
+msgstr ""
+
+#: FormHandler/RegistrationFormHandler.php:153
+msgid "The passwords do not match."
+msgstr ""
+
+#: FormHandler/RequestPasswordResetFormHandler.php:61
+#: FormHandler/RequestPasswordResetFormHandler.php:74
+msgid "Invalid username or email"
+msgstr ""
+
+#: FormHandler/RequestPasswordResetFormHandler.php:80
+msgid "Password reset is not allowed for this user."
+msgstr ""
+
+#: FormHandler/RequestPasswordResetFormHandler.php:113
+msgid "Enter a username or email address."
+msgstr ""
+
+#: FrontendQuery.php:214
+msgid "Pay for order"
+msgstr ""
+
+#: FrontendQuery.php:217
+msgid "Order received"
+msgstr ""
+
+#. translators: %s: page
+#: FrontendQuery.php:222
+msgid "Orders (page %d)"
+msgstr ""
+
+#. translators: %s: order number
+#: FrontendQuery.php:230
+msgid "Order #%s"
+msgstr ""
+
+#: FrontendQuery.php:233
+msgid "Downloads"
+msgstr ""
+
+#: FrontendQuery.php:236
+msgid "Account details"
+msgstr ""
+
+#: FrontendQuery.php:239
+msgid "Addresses"
+msgstr ""
+
+#: FrontendQuery.php:242
+msgid "Payment methods"
+msgstr ""
+
+#: FrontendQuery.php:245
+msgid "Add payment method"
+msgstr ""
+
+#: FrontendQuery.php:249
+msgid "Set password"
+msgstr ""
+
+#: FrontendQuery.php:251
+msgid "Lost password"
+msgstr ""
+
+#: Gateways/Offline/Offline.php:54
+msgid "Offline"
+msgstr ""
+
+#: Gateways/Offline/Offline.php:55
+msgid "Have your customers pay with cash (or by other means) upon delivery."
+msgstr ""
+
+#: Gateways/Offline/Offline.php:79
+msgid "Payment to be made offline."
+msgstr ""
+
+#. translators: %s: currency code.
+#: Gateways/Paypal/IpnHandler.php:157
+msgid "Validation error: PayPal currencies do not match (code %s)."
+msgstr ""
+
+#. translators: %s: Amount.
+#: Gateways/Paypal/IpnHandler.php:175
+msgid "Validation error: PayPal amounts do not match (gross %s)."
+msgstr ""
+
+#. translators: %s: email address .
+#: Gateways/Paypal/IpnHandler.php:194
+msgid "Validation error: PayPal IPN response from a different email address (%s)."
+msgstr ""
+
+#: Gateways/Paypal/IpnHandler.php:228
+msgid "IPN payment completed."
+msgstr ""
+
+#: Gateways/Paypal/IpnHandler.php:231
+#: Gateways/Paypal/PdtHandler.php:133
+msgid "Payment authorized. Change payment status to processing or complete to capture funds."
+msgstr ""
+
+#. translators: %s: Pending reason.
+#: Gateways/Paypal/IpnHandler.php:234
+#: Gateways/Paypal/PdtHandler.php:136
+msgid "Payment pending (%s)."
+msgstr ""
+
+#. translators: %s: payment status.
+#: Gateways/Paypal/IpnHandler.php:261
+#: Gateways/Paypal/IpnHandler.php:330
+#: Gateways/Paypal/IpnHandler.php:351
+msgid "Payment %s via IPN."
+msgstr ""
+
+#. translators: %s: order link.
+#: Gateways/Paypal/IpnHandler.php:311
+msgid "Payment for cancelled order %s received."
+msgstr ""
+
+#. translators: %s: order ID.
+#: Gateways/Paypal/IpnHandler.php:313
+msgid "Order #%s has been marked paid by PayPal IPN, but was previously cancelled. Admin handling required."
+msgstr ""
+
+#. translators: %s: order link.
+#: Gateways/Paypal/IpnHandler.php:334
+msgid "Payment for order %s refunded."
+msgstr ""
+
+#. translators: %1$s: order ID, %2$s: reason code.
+#: Gateways/Paypal/IpnHandler.php:336
+msgid "Order #%1$s has been marked as refunded - PayPal reason code: %2$s"
+msgstr ""
+
+#. translators: %s: order link.
+#: Gateways/Paypal/IpnHandler.php:355
+msgid "Payment for order %s reversed."
+msgstr ""
+
+#. translators: %1$s: order ID, %2$s: reason code.
+#: Gateways/Paypal/IpnHandler.php:357
+msgid "Order #%1$s has been marked on-hold due to a reversal - PayPal reason code: %2$s"
+msgstr ""
+
+#. translators: %s: order link.
+#: Gateways/Paypal/IpnHandler.php:372
+msgid "Reversal cancelled for order #%s."
+msgstr ""
+
+#. translators: %1$s: order ID, %2$s: order link.
+#: Gateways/Paypal/IpnHandler.php:375
+msgid "Order #%1$s has had a reversal cancelled. Please check the status of payment and update the order status accordingly here: %2$s"
+msgstr ""
+
+#: Gateways/Paypal/Paypal.php:68
+msgid "Proceed to PayPal"
+msgstr ""
+
+#: Gateways/Paypal/Paypal.php:69
+msgid "PayPal Standard"
+msgstr ""
+
+#. translators: %s: Link to Masteriyo system status page
+#: Gateways/Paypal/Paypal.php:71
+msgid "PayPal Standard redirects customers to PayPal to enter their payment information."
+msgstr ""
+
+#. translators: %s: Link to PayPal sandbox testing guide page
+#: Gateways/Paypal/Paypal.php:89
+msgid "SANDBOX ENABLED. You can use sandbox testing accounts only. See the <a href=\"%s\">PayPal Sandbox Testing Guide</a> for more details."
+msgstr ""
+
+#: Gateways/Paypal/Paypal.php:155
+msgid "PayPal acceptance mark"
+msgstr ""
+
+#: Gateways/Paypal/Paypal.php:158
+msgid "What is PayPal?"
+msgstr ""
+
+#: Gateways/Paypal/Paypal.php:364
+msgid "Refund failed."
+msgstr ""
+
+#. translators: 1: Refund amount, 2: Refund ID
+#: Gateways/Paypal/Paypal.php:383
+msgid "Refunded %1$s - Refund ID: %2$s"
+msgstr ""
+
+#. translators: %s: Paypal gateway error message
+#: Gateways/Paypal/Paypal.php:408
+msgid "Payment could not be captured: %s"
+msgstr ""
+
+#. translators: 1: Amount, 2: Authorization ID, 3: Transaction ID
+#: Gateways/Paypal/Paypal.php:419
+msgid "Payment of %1$s was captured - Auth ID: %2$s, Transaction ID: %3$s"
+msgstr ""
+
+#. translators: 1: Authorization ID, 2: Payment status
+#: Gateways/Paypal/Paypal.php:425
+msgid "Payment could not be captured - Auth ID: %1$s, Status: %2$s"
+msgstr ""
+
+#: Gateways/Paypal/Paypal.php:443
+msgid "Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you. Log into your PayPal account to view transaction details."
+msgstr ""
+
+#. translators: 1: Payment amount
+#: Gateways/Paypal/PdtHandler.php:119
+msgid "Validation error: PayPal amounts do not match (amt %s)."
+msgstr ""
+
+#: Gateways/Paypal/PdtHandler.php:129
+msgid "PDT payment completed."
+msgstr ""
+
+#: Gateways/Paypal/Request.php:276
+#: Helper/Order.php:257
+#: PostType/Order.php:35
+msgid "Order"
+msgstr ""
+
+#: Gateways/Paypal/Request.php:477
+msgid "Item"
+msgstr ""
+
+#: Helper/core.php:731
+msgid "h"
+msgstr ""
+
+#: Helper/core.php:732
+msgid "m"
+msgstr ""
+
+#: Helper/core.php:733
+msgid "0m"
+msgstr ""
+
+#: Helper/core.php:1137
+msgid "United Arab Emirates dirham"
+msgstr ""
+
+#: Helper/core.php:1138
+msgid "Afghan afghani"
+msgstr ""
+
+#: Helper/core.php:1139
+msgid "Albanian lek"
+msgstr ""
+
+#: Helper/core.php:1140
+msgid "Armenian dram"
+msgstr ""
+
+#: Helper/core.php:1141
+msgid "Netherlands Antillean guilder"
+msgstr ""
+
+#: Helper/core.php:1142
+msgid "Angolan kwanza"
+msgstr ""
+
+#: Helper/core.php:1143
+msgid "Argentine peso"
+msgstr ""
+
+#: Helper/core.php:1144
+msgid "Australian dollar"
+msgstr ""
+
+#: Helper/core.php:1145
+msgid "Aruban florin"
+msgstr ""
+
+#: Helper/core.php:1146
+msgid "Azerbaijani manat"
+msgstr ""
+
+#: Helper/core.php:1147
+msgid "Bosnia and Herzegovina convertible mark"
+msgstr ""
+
+#: Helper/core.php:1148
+msgid "Barbadian dollar"
+msgstr ""
+
+#: Helper/core.php:1149
+msgid "Bangladeshi taka"
+msgstr ""
+
+#: Helper/core.php:1150
+msgid "Bulgarian lev"
+msgstr ""
+
+#: Helper/core.php:1151
+msgid "Bahraini dinar"
+msgstr ""
+
+#: Helper/core.php:1152
+msgid "Burundian franc"
+msgstr ""
+
+#: Helper/core.php:1153
+msgid "Bermudian dollar"
+msgstr ""
+
+#: Helper/core.php:1154
+msgid "Brunei dollar"
+msgstr ""
+
+#: Helper/core.php:1155
+msgid "Bolivian boliviano"
+msgstr ""
+
+#: Helper/core.php:1156
+msgid "Brazilian real"
+msgstr ""
+
+#: Helper/core.php:1157
+msgid "Bahamian dollar"
+msgstr ""
+
+#: Helper/core.php:1158
+msgid "Bitcoin"
+msgstr ""
+
+#: Helper/core.php:1159
+msgid "Bhutanese ngultrum"
+msgstr ""
+
+#: Helper/core.php:1160
+msgid "Botswana pula"
+msgstr ""
+
+#: Helper/core.php:1161
+msgid "Belarusian ruble (old)"
+msgstr ""
+
+#: Helper/core.php:1162
+msgid "Belarusian ruble"
+msgstr ""
+
+#: Helper/core.php:1163
+msgid "Belize dollar"
+msgstr ""
+
+#: Helper/core.php:1164
+msgid "Canadian dollar"
+msgstr ""
+
+#: Helper/core.php:1165
+msgid "Congolese franc"
+msgstr ""
+
+#: Helper/core.php:1166
+msgid "Swiss franc"
+msgstr ""
+
+#: Helper/core.php:1167
+msgid "Chilean peso"
+msgstr ""
+
+#: Helper/core.php:1168
+msgid "Chinese yuan"
+msgstr ""
+
+#: Helper/core.php:1169
+msgid "Colombian peso"
+msgstr ""
+
+#: Helper/core.php:1170
+msgid "Costa Rican col&oacute;n"
+msgstr ""
+
+#: Helper/core.php:1171
+msgid "Cuban convertible peso"
+msgstr ""
+
+#: Helper/core.php:1172
+msgid "Cuban peso"
+msgstr ""
+
+#: Helper/core.php:1173
+msgid "Cape Verdean escudo"
+msgstr ""
+
+#: Helper/core.php:1174
+msgid "Czech koruna"
+msgstr ""
+
+#: Helper/core.php:1175
+msgid "Djiboutian franc"
+msgstr ""
+
+#: Helper/core.php:1176
+msgid "Danish krone"
+msgstr ""
+
+#: Helper/core.php:1177
+msgid "Dominican peso"
+msgstr ""
+
+#: Helper/core.php:1178
+msgid "Algerian dinar"
+msgstr ""
+
+#: Helper/core.php:1179
+msgid "Egyptian pound"
+msgstr ""
+
+#: Helper/core.php:1180
+msgid "Eritrean nakfa"
+msgstr ""
+
+#: Helper/core.php:1181
+msgid "Ethiopian birr"
+msgstr ""
+
+#: Helper/core.php:1182
+msgid "Euro"
+msgstr ""
+
+#: Helper/core.php:1183
+msgid "Fijian dollar"
+msgstr ""
+
+#: Helper/core.php:1184
+msgid "Falkland Islands pound"
+msgstr ""
+
+#: Helper/core.php:1185
+msgid "Pound sterling"
+msgstr ""
+
+#: Helper/core.php:1186
+msgid "Georgian lari"
+msgstr ""
+
+#: Helper/core.php:1187
+msgid "Guernsey pound"
+msgstr ""
+
+#: Helper/core.php:1188
+msgid "Ghana cedi"
+msgstr ""
+
+#: Helper/core.php:1189
+msgid "Gibraltar pound"
+msgstr ""
+
+#: Helper/core.php:1190
+msgid "Gambian dalasi"
+msgstr ""
+
+#: Helper/core.php:1191
+msgid "Guinean franc"
+msgstr ""
+
+#: Helper/core.php:1192
+msgid "Guatemalan quetzal"
+msgstr ""
+
+#: Helper/core.php:1193
+msgid "Guyanese dollar"
+msgstr ""
+
+#: Helper/core.php:1194
+msgid "Hong Kong dollar"
+msgstr ""
+
+#: Helper/core.php:1195
+msgid "Honduran lempira"
+msgstr ""
+
+#: Helper/core.php:1196
+msgid "Croatian kuna"
+msgstr ""
+
+#: Helper/core.php:1197
+msgid "Haitian gourde"
+msgstr ""
+
+#: Helper/core.php:1198
+msgid "Hungarian forint"
+msgstr ""
+
+#: Helper/core.php:1199
+msgid "Indonesian rupiah"
+msgstr ""
+
+#: Helper/core.php:1200
+msgid "Israeli new shekel"
+msgstr ""
+
+#: Helper/core.php:1201
+msgid "Manx pound"
+msgstr ""
+
+#: Helper/core.php:1202
+msgid "Indian rupee"
+msgstr ""
+
+#: Helper/core.php:1203
+msgid "Iraqi dinar"
+msgstr ""
+
+#: Helper/core.php:1204
+msgid "Iranian rial"
+msgstr ""
+
+#: Helper/core.php:1205
+msgid "Iranian toman"
+msgstr ""
+
+#: Helper/core.php:1206
+msgid "Icelandic kr&oacute;na"
+msgstr ""
+
+#: Helper/core.php:1207
+msgid "Jersey pound"
+msgstr ""
+
+#: Helper/core.php:1208
+msgid "Jamaican dollar"
+msgstr ""
+
+#: Helper/core.php:1209
+msgid "Jordanian dinar"
+msgstr ""
+
+#: Helper/core.php:1210
+msgid "Japanese yen"
+msgstr ""
+
+#: Helper/core.php:1211
+msgid "Kenyan shilling"
+msgstr ""
+
+#: Helper/core.php:1212
+msgid "Kyrgyzstani som"
+msgstr ""
+
+#: Helper/core.php:1213
+msgid "Cambodian riel"
+msgstr ""
+
+#: Helper/core.php:1214
+msgid "Comorian franc"
+msgstr ""
+
+#: Helper/core.php:1215
+msgid "North Korean won"
+msgstr ""
+
+#: Helper/core.php:1216
+msgid "South Korean won"
+msgstr ""
+
+#: Helper/core.php:1217
+msgid "Kuwaiti dinar"
+msgstr ""
+
+#: Helper/core.php:1218
+msgid "Cayman Islands dollar"
+msgstr ""
+
+#: Helper/core.php:1219
+msgid "Kazakhstani tenge"
+msgstr ""
+
+#: Helper/core.php:1220
+msgid "Lao kip"
+msgstr ""
+
+#: Helper/core.php:1221
+msgid "Lebanese pound"
+msgstr ""
+
+#: Helper/core.php:1222
+msgid "Sri Lankan rupee"
+msgstr ""
+
+#: Helper/core.php:1223
+msgid "Liberian dollar"
+msgstr ""
+
+#: Helper/core.php:1224
+msgid "Lesotho loti"
+msgstr ""
+
+#: Helper/core.php:1225
+msgid "Libyan dinar"
+msgstr ""
+
+#: Helper/core.php:1226
+msgid "Moroccan dirham"
+msgstr ""
+
+#: Helper/core.php:1227
+msgid "Moldovan leu"
+msgstr ""
+
+#: Helper/core.php:1228
+msgid "Malagasy ariary"
+msgstr ""
+
+#: Helper/core.php:1229
+msgid "Macedonian denar"
+msgstr ""
+
+#: Helper/core.php:1230
+msgid "Burmese kyat"
+msgstr ""
+
+#: Helper/core.php:1231
+msgid "Mongolian t&ouml;gr&ouml;g"
+msgstr ""
+
+#: Helper/core.php:1232
+msgid "Macanese pataca"
+msgstr ""
+
+#: Helper/core.php:1233
+msgid "Mauritanian ouguiya"
+msgstr ""
+
+#: Helper/core.php:1234
+msgid "Mauritian rupee"
+msgstr ""
+
+#: Helper/core.php:1235
+msgid "Maldivian rufiyaa"
+msgstr ""
+
+#: Helper/core.php:1236
+msgid "Malawian kwacha"
+msgstr ""
+
+#: Helper/core.php:1237
+msgid "Mexican peso"
+msgstr ""
+
+#: Helper/core.php:1238
+msgid "Malaysian ringgit"
+msgstr ""
+
+#: Helper/core.php:1239
+msgid "Mozambican metical"
+msgstr ""
+
+#: Helper/core.php:1240
+msgid "Namibian dollar"
+msgstr ""
+
+#: Helper/core.php:1241
+msgid "Nigerian naira"
+msgstr ""
+
+#: Helper/core.php:1242
+msgid "Nicaraguan c&oacute;rdoba"
+msgstr ""
+
+#: Helper/core.php:1243
+msgid "Norwegian krone"
+msgstr ""
+
+#: Helper/core.php:1244
+msgid "Nepalese rupee"
+msgstr ""
+
+#: Helper/core.php:1245
+msgid "New Zealand dollar"
+msgstr ""
+
+#: Helper/core.php:1246
+msgid "Omani rial"
+msgstr ""
+
+#: Helper/core.php:1247
+msgid "Panamanian balboa"
+msgstr ""
+
+#: Helper/core.php:1248
+msgid "Sol"
+msgstr ""
+
+#: Helper/core.php:1249
+msgid "Papua New Guinean kina"
+msgstr ""
+
+#: Helper/core.php:1250
+msgid "Philippine peso"
+msgstr ""
+
+#: Helper/core.php:1251
+msgid "Pakistani rupee"
+msgstr ""
+
+#: Helper/core.php:1252
+msgid "Polish z&#x142;oty"
+msgstr ""
+
+#: Helper/core.php:1253
+msgid "Transnistrian ruble"
+msgstr ""
+
+#: Helper/core.php:1254
+msgid "Paraguayan guaran&iacute;"
+msgstr ""
+
+#: Helper/core.php:1255
+msgid "Qatari riyal"
+msgstr ""
+
+#: Helper/core.php:1256
+msgid "Romanian leu"
+msgstr ""
+
+#: Helper/core.php:1257
+msgid "Serbian dinar"
+msgstr ""
+
+#: Helper/core.php:1258
+msgid "Russian ruble"
+msgstr ""
+
+#: Helper/core.php:1259
+msgid "Rwandan franc"
+msgstr ""
+
+#: Helper/core.php:1260
+msgid "Saudi riyal"
+msgstr ""
+
+#: Helper/core.php:1261
+msgid "Solomon Islands dollar"
+msgstr ""
+
+#: Helper/core.php:1262
+msgid "Seychellois rupee"
+msgstr ""
+
+#: Helper/core.php:1263
+msgid "Sudanese pound"
+msgstr ""
+
+#: Helper/core.php:1264
+msgid "Swedish krona"
+msgstr ""
+
+#: Helper/core.php:1265
+msgid "Singapore dollar"
+msgstr ""
+
+#: Helper/core.php:1266
+msgid "Saint Helena pound"
+msgstr ""
+
+#: Helper/core.php:1267
+msgid "Sierra Leonean leone"
+msgstr ""
+
+#: Helper/core.php:1268
+msgid "Somali shilling"
+msgstr ""
+
+#: Helper/core.php:1269
+msgid "Surinamese dollar"
+msgstr ""
+
+#: Helper/core.php:1270
+msgid "South Sudanese pound"
+msgstr ""
+
+#: Helper/core.php:1271
+msgid "S&atilde;o Tom&eacute; and Pr&iacute;ncipe dobra"
+msgstr ""
+
+#: Helper/core.php:1272
+msgid "Syrian pound"
+msgstr ""
+
+#: Helper/core.php:1273
+msgid "Swazi lilangeni"
+msgstr ""
+
+#: Helper/core.php:1274
+msgid "Thai baht"
+msgstr ""
+
+#: Helper/core.php:1275
+msgid "Tajikistani somoni"
+msgstr ""
+
+#: Helper/core.php:1276
+msgid "Turkmenistan manat"
+msgstr ""
+
+#: Helper/core.php:1277
+msgid "Tunisian dinar"
+msgstr ""
+
+#: Helper/core.php:1278
+msgid "Tongan pa&#x2bb;anga"
+msgstr ""
+
+#: Helper/core.php:1279
+msgid "Turkish lira"
+msgstr ""
+
+#: Helper/core.php:1280
+msgid "Trinidad and Tobago dollar"
+msgstr ""
+
+#: Helper/core.php:1281
+msgid "New Taiwan dollar"
+msgstr ""
+
+#: Helper/core.php:1282
+msgid "Tanzanian shilling"
+msgstr ""
+
+#: Helper/core.php:1283
+msgid "Ukrainian hryvnia"
+msgstr ""
+
+#: Helper/core.php:1284
+msgid "Ugandan shilling"
+msgstr ""
+
+#: Helper/core.php:1285
+msgid "United States (US) dollar"
+msgstr ""
+
+#: Helper/core.php:1286
+msgid "Uruguayan peso"
+msgstr ""
+
+#: Helper/core.php:1287
+msgid "Uzbekistani som"
+msgstr ""
+
+#: Helper/core.php:1288
+msgid "Venezuelan bol&iacute;var"
+msgstr ""
+
+#: Helper/core.php:1289
+msgid "Bol&iacute;var soberano"
+msgstr ""
+
+#: Helper/core.php:1290
+msgid "Vietnamese &#x111;&#x1ed3;ng"
+msgstr ""
+
+#: Helper/core.php:1291
+msgid "Vanuatu vatu"
+msgstr ""
+
+#: Helper/core.php:1292
+msgid "Samoan t&#x101;l&#x101;"
+msgstr ""
+
+#: Helper/core.php:1293
+msgid "Central African CFA franc"
+msgstr ""
+
+#: Helper/core.php:1294
+msgid "East Caribbean dollar"
+msgstr ""
+
+#: Helper/core.php:1295
+msgid "West African CFA franc"
+msgstr ""
+
+#: Helper/core.php:1296
+msgid "CFP franc"
+msgstr ""
+
+#: Helper/core.php:1297
+msgid "Yemeni rial"
+msgstr ""
+
+#: Helper/core.php:1298
+msgid "South African rand"
+msgstr ""
+
+#: Helper/core.php:1299
+msgid "Zambian kwacha"
+msgstr ""
+
+#: Helper/core.php:1328
+msgctxt "slug"
+msgid "course"
+msgstr ""
+
+#: Helper/core.php:1329
+msgctxt "slug"
+msgid "course-category"
+msgstr ""
+
+#: Helper/core.php:1330
+msgctxt "slug"
+msgid "course-tag"
+msgstr ""
+
+#: Helper/core.php:1331
+msgctxt "slug"
+msgid "course-difficulty"
+msgstr ""
+
+#: Helper/core.php:1332
+msgctxt "slug"
+msgid "lesson"
+msgstr ""
+
+#: Helper/core.php:1333
+msgctxt "slug"
+msgid "quiz"
+msgstr ""
+
+#: Helper/core.php:1334
+msgctxt "slug"
+msgid "section"
+msgstr ""
+
+#: Helper/core.php:1407
+msgctxt "slug"
+msgid "uncategorized"
+msgstr ""
+
+#: Helper/core.php:1792
+msgid "Dashboard"
+msgstr ""
+
+#: Helper/core.php:1796
+msgid "My Courses"
+msgstr ""
+
+#: Helper/core.php:1800
+msgid "Account Details"
+msgstr ""
+
+#: Helper/core.php:1804
+msgid "Edit Account"
+msgstr ""
+
+#: Helper/core.php:1808
+msgid "My Order History"
+msgstr ""
+
+#: Helper/core.php:1812
+msgid "Logout"
+msgstr ""
+
+#: Helper/core.php:2034
+msgid "Please provide a valid email address."
+msgstr ""
+
+#: Helper/core.php:2038
+msgid "An account is already registered with your email address."
+msgstr ""
+
+#: Helper/core.php:2049
+msgid "Please enter a valid account username."
+msgstr ""
+
+#: Helper/core.php:2053
+msgid "An account is already registered with that username. Please choose another."
+msgstr ""
+
+#: Helper/core.php:2064
+msgid "Please enter an account password."
+msgstr ""
+
+#: Helper/core.php:2090
+msgid "Registration failed."
+msgstr ""
+
+#: Helper/core.php:2261
+msgid "Masteriyo Courses Page"
+msgstr ""
+
+#: Helper/core.php:2265
+msgid "Masteriyo Account Page"
+msgstr ""
+
+#: Helper/core.php:2269
+msgid "Masteriyo Checkout Page"
+msgstr ""
+
+#: Helper/core.php:2273
+msgid "Masteriyo Learn Page"
+msgstr ""
+
+#: Helper/core.php:2277
+msgid "Masteriyo Instructor Registration Page"
+msgstr ""
+
+#: Helper/core.php:2668
+msgid "Self Hosted"
+msgstr ""
+
+#: Helper/core.php:2669
+msgid "YouTube"
+msgstr ""
+
+#: Helper/core.php:2670
+msgid "Vimeo"
+msgstr ""
+
+#: Helper/course.php:128
+msgid "Placeholder"
+msgstr ""
+
+#: Helper/Format.php:302
+msgid "Free"
+msgstr ""
+
+#: Helper/Notice.php:14
+#: Helper/Notice.php:48
+msgid "This function should not be called before masteriyo_init."
+msgstr ""
+
+#: Helper/Order.php:80
+msgctxt "Order status"
+msgid "Pending payment"
+msgstr ""
+
+#. translators: %s: number of orders
+#: Helper/Order.php:87
+msgid "Pending payment <span class=\"count\">(%s)</span>"
+msgid_plural "Pending payment <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Helper/Order.php:90
+msgctxt "Order status"
+msgid "On hold"
+msgstr ""
+
+#. translators: %s: number of orders
+#: Helper/Order.php:96
+msgid "On hold <span class=\"count\">(%s)</span>"
+msgid_plural "On hold <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Helper/Order.php:99
+msgctxt "Order status"
+msgid "Completed"
+msgstr ""
+
+#. translators: %s: number of orders
+#: Helper/Order.php:105
+msgid "Completed <span class=\"count\">(%s)</span>"
+msgid_plural "Completed <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Helper/Order.php:108
+msgctxt "Order status"
+msgid "Cancelled"
+msgstr ""
+
+#. translators: %s: number of orders
+#: Helper/Order.php:114
+msgid "Cancelled <span class=\"count\">(%s)</span>"
+msgid_plural "Cancelled <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Helper/Order.php:117
+msgctxt "Order status"
+msgid "Refunded"
+msgstr ""
+
+#. translators: %s: number of orders
+#: Helper/Order.php:123
+msgid "Refunded <span class=\"count\">(%s)</span>"
+msgid_plural "Refunded <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Helper/Order.php:126
+msgctxt "Order status"
+msgid "Failed"
+msgstr ""
+
+#. translators: %s: number of orders
+#: Helper/Order.php:132
+msgid "Failed <span class=\"count\">(%s)</span>"
+msgid_plural "Failed <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Helper/Order.php:258
+msgid "Date"
+msgstr ""
+
+#: Helper/Order.php:259
+msgid "Status"
+msgstr ""
+
+#: Helper/Order.php:260
+msgid "Total"
+msgstr ""
+
+#: Helper/Order.php:261
+msgid "Actions"
+msgstr ""
+
+#: Helper/Order.php:285
+msgid "Pay"
+msgstr ""
+
+#: Helper/Order.php:290
+msgid "View"
+msgstr ""
+
+#: Helper/Order.php:295
+msgid "Cancel"
+msgstr ""
+
+#. translators: %s: Author
+#: Helper/Template.php:140
+msgid "Instructor | %s"
+msgstr ""
+
+#. translators: %s: search query
+#: Helper/Template.php:146
+msgid "Search results: &ldquo;%s&rdquo;"
+msgstr ""
+
+#. translators: %s: page number
+#: Helper/Template.php:150
+msgid "&nbsp;&ndash; Page %s"
+msgstr ""
+
+#: Helper/Template.php:534
+msgid "You are not allowed to view this content."
+msgstr ""
+
+#. translators: Cart total order
+#: Helper/Template.php:910
+msgid "Confirm Payment"
+msgstr ""
+
+#: Helper/Template.php:1328
+msgid "You need to be approved by the administrator before you can create courses."
+msgstr ""
+
+#: Helper/user-course.php:44
+msgctxt "User Course status"
+msgid "Active"
+msgstr ""
+
+#: Install.php:95
+msgid "Beginner"
+msgstr ""
+
+#: Install.php:96
+msgid "Intermediate"
+msgstr ""
+
+#: Install.php:97
+msgid "Expert"
+msgstr ""
+
+#: Masteriyo.php:231
+msgid "Docs"
+msgstr ""
+
+#: Masteriyo.php:232
+msgid "View Masteriyo documentation"
+msgstr ""
+
+#: Masteriyo.php:236
+msgid "Community Support"
+msgstr ""
+
+#: Masteriyo.php:237
+msgid "Visit community forums"
+msgstr ""
+
+#: Masteriyo.php:241
+msgid "Rate the plugin ★★★★★"
+msgstr ""
+
+#: Masteriyo.php:242
+msgid "Rate the plugin."
+msgstr ""
+
+#: Masteriyo.php:272
+msgid "View Masteriyo settings"
+msgstr ""
+
+#: Masteriyo.php:340
+msgid "This password reset key is for a different user account. Please log out and try again."
+msgstr ""
+
+#: Masteriyo.php:410
+msgid "Minimum WordPress version required for Masteriyo to work is v5.0."
+msgstr ""
+
+#: Models/Course.php:1307
+msgid "Buy Now"
+msgstr ""
+
+#: Models/Course.php:1318
+msgid "Start Course"
+msgstr ""
+
+#: Models/Course.php:1329
+msgid "Continue"
+msgstr ""
+
+#: Models/Course.php:1340
+msgid "Completed"
+msgstr ""
+
+#: Models/Course.php:1408
+msgid "Read more"
+msgstr ""
+
+#: Models/Course.php:1411
+msgid "Add_to_cart Now"
+msgstr ""
+
+#. translators: %s: Course title
+#: Models/Course.php:1426
+msgid "Read more about &ldquo;%s&rdquo;"
+msgstr ""
+
+#. translators: %s: Course title
+#: Models/Course.php:1430
+msgid "Enroll &ldquo;%s&rdquo; course"
+msgstr ""
+
+#. translators: 1: first name 2: last name
+#: Models/Order/Order.php:110
+msgctxt "full name"
+msgid "%1$s %2$s"
+msgstr ""
+
+#: Models/Order/Order.php:135
+msgid "Update status event failed."
+msgstr ""
+
+#. translators: 1: old order status 2: new order status
+#: Models/Order/Order.php:163
+msgid "Order status changed from %1$s to %2$s."
+msgstr ""
+
+#. translators: %s: new order status
+#: Models/Order/Order.php:190
+msgid "Order status set to %s."
+msgstr ""
+
+#: Models/Order/Order.php:196
+msgid "Error during status transition."
+msgstr ""
+
+#: Models/Order/Order.php:1355
+msgid "Payment method:"
+msgstr ""
+
+#: Models/Order/Order.php:1373
+msgid "Refund"
+msgstr ""
+
+#: Models/Order/OrderItemCourse.php:134
+#: RestApi/Controllers/Version1/CourseReviewsController.php:721
+#: RestApi/Controllers/Version1/FaqsController.php:447
+#: RestApi/Controllers/Version1/LessonsController.php:697
+#: RestApi/Controllers/Version1/QuestionsController.php:806
+#: RestApi/Controllers/Version1/QuizesController.php:241
+#: RestApi/Controllers/Version1/SectionsController.php:514
+msgid "Invalid course ID"
+msgstr ""
+
+#: Models/Order/OrderItemCourse.php:222
+msgid "Invalid course"
+msgstr ""
+
+#: Models/User.php:830
+#: Models/User.php:837
+msgid "Invalid roles"
+msgstr ""
+
+#: PostType/Course.php:34
+msgctxt "Course General Name"
+msgid "Courses"
+msgstr ""
+
+#: PostType/Course.php:35
+msgctxt "Course Singular Name"
+msgid "Course"
+msgstr ""
+
+#: PostType/Course.php:37
+#: Repository/CourseRepository.php:77
+msgid "Course"
+msgstr ""
+
+#: PostType/Course.php:38
+msgid "Course Archives"
+msgstr ""
+
+#: PostType/Course.php:39
+msgid "Course Attributes"
+msgstr ""
+
+#: PostType/Course.php:40
+msgid "Parent Course:"
+msgstr ""
+
+#: PostType/Course.php:41
+msgid "All Courses"
+msgstr ""
+
+#: PostType/Course.php:42
+#: PostType/Lesson.php:31
+#: PostType/Order.php:40
+#: PostType/Question.php:35
+#: PostType/Quiz.php:43
+#: PostType/Section.php:41
+msgid "Add New Item"
+msgstr ""
+
+#: PostType/Course.php:43
+#: PostType/Lesson.php:32
+#: PostType/Order.php:41
+#: PostType/Question.php:36
+#: PostType/Quiz.php:44
+#: PostType/Section.php:42
+msgid "Add New"
+msgstr ""
+
+#: PostType/Course.php:44
+msgid "New Course"
+msgstr ""
+
+#: PostType/Course.php:45
+msgid "Edit Course"
+msgstr ""
+
+#: PostType/Course.php:46
+msgid "Update Course"
+msgstr ""
+
+#: PostType/Course.php:47
+msgid "View Course"
+msgstr ""
+
+#: PostType/Course.php:48
+msgid "View Courses"
+msgstr ""
+
+#: PostType/Course.php:49
+msgid "Search Course"
+msgstr ""
+
+#: PostType/Course.php:50
+#: PostType/Lesson.php:39
+#: PostType/Order.php:48
+#: PostType/Question.php:43
+#: PostType/Quiz.php:51
+#: PostType/Section.php:49
+msgid "Not found"
+msgstr ""
+
+#: PostType/Course.php:51
+#: PostType/Lesson.php:40
+#: PostType/Order.php:49
+#: PostType/Question.php:44
+#: PostType/Quiz.php:52
+#: PostType/Section.php:50
+msgid "Not found in Trash."
+msgstr ""
+
+#: PostType/Course.php:52
+#: PostType/Lesson.php:41
+#: PostType/Order.php:50
+#: PostType/Question.php:45
+#: PostType/Quiz.php:53
+#: PostType/Section.php:51
+msgid "Featured Image"
+msgstr ""
+
+#: PostType/Course.php:53
+#: PostType/Lesson.php:42
+#: PostType/Order.php:51
+#: PostType/Question.php:46
+#: PostType/Quiz.php:54
+#: PostType/Section.php:52
+msgid "Set featured image"
+msgstr ""
+
+#: PostType/Course.php:54
+#: PostType/Lesson.php:43
+#: PostType/Order.php:52
+#: PostType/Question.php:47
+#: PostType/Quiz.php:55
+#: PostType/Section.php:53
+msgid "Remove featured image"
+msgstr ""
+
+#: PostType/Course.php:55
+#: PostType/Lesson.php:44
+#: PostType/Order.php:53
+#: PostType/Question.php:48
+#: PostType/Quiz.php:56
+#: PostType/Section.php:54
+msgid "Use as featured image"
+msgstr ""
+
+#: PostType/Course.php:56
+msgid "Insert into course"
+msgstr ""
+
+#: PostType/Course.php:57
+msgid "Uploaded to this course"
+msgstr ""
+
+#: PostType/Course.php:58
+msgid "Courses list"
+msgstr ""
+
+#: PostType/Course.php:59
+msgid "Courses list navigation"
+msgstr ""
+
+#: PostType/Course.php:60
+msgid "Filter courses list"
+msgstr ""
+
+#: PostType/Course.php:65
+msgid "Courses Description"
+msgstr ""
+
+#: PostType/Lesson.php:23
+msgctxt "Lesson General Name"
+msgid "Lessons"
+msgstr ""
+
+#: PostType/Lesson.php:24
+msgctxt "Lesson Singular Name"
+msgid "Lesson"
+msgstr ""
+
+#: PostType/Lesson.php:25
+#: PostType/Lesson.php:53
+msgid "Lessons"
+msgstr ""
+
+#: PostType/Lesson.php:26
+#: Repository/LessonRepository.php:61
+msgid "Lesson"
+msgstr ""
+
+#: PostType/Lesson.php:27
+msgid "Lesson Archives"
+msgstr ""
+
+#: PostType/Lesson.php:28
+msgid "Lesson Attributes"
+msgstr ""
+
+#: PostType/Lesson.php:29
+msgid "Parent Lesson:"
+msgstr ""
+
+#: PostType/Lesson.php:30
+msgid "All Lessons"
+msgstr ""
+
+#: PostType/Lesson.php:33
+msgid "New Lesson"
+msgstr ""
+
+#: PostType/Lesson.php:34
+msgid "Edit Lesson"
+msgstr ""
+
+#: PostType/Lesson.php:35
+msgid "Update Lesson"
+msgstr ""
+
+#: PostType/Lesson.php:36
+msgid "View Lesson"
+msgstr ""
+
+#: PostType/Lesson.php:37
+msgid "View Lessons"
+msgstr ""
+
+#: PostType/Lesson.php:38
+msgid "Search Lesson"
+msgstr ""
+
+#: PostType/Lesson.php:45
+msgid "Insert into lesson"
+msgstr ""
+
+#: PostType/Lesson.php:46
+msgid "Uploaded to this lesson"
+msgstr ""
+
+#: PostType/Lesson.php:47
+msgid "Lessons list"
+msgstr ""
+
+#: PostType/Lesson.php:48
+msgid "Lessons list navigation"
+msgstr ""
+
+#: PostType/Lesson.php:49
+msgid "Filter lessons list"
+msgstr ""
+
+#: PostType/Lesson.php:54
+msgid "Lessons Description"
+msgstr ""
+
+#: PostType/Order.php:32
+msgctxt "Order General Name"
+msgid "Orders"
+msgstr ""
+
+#: PostType/Order.php:33
+msgctxt "Order Singular Name"
+msgid "Order"
+msgstr ""
+
+#: PostType/Order.php:36
+msgid "Order Archives"
+msgstr ""
+
+#: PostType/Order.php:37
+msgid "Order Attributes"
+msgstr ""
+
+#: PostType/Order.php:38
+msgid "Parent Order:"
+msgstr ""
+
+#: PostType/Order.php:39
+msgid "All Orders"
+msgstr ""
+
+#: PostType/Order.php:43
+msgid "Edit Order"
+msgstr ""
+
+#: PostType/Order.php:44
+msgid "Update Order"
+msgstr ""
+
+#: PostType/Order.php:45
+msgid "View Order"
+msgstr ""
+
+#: PostType/Order.php:46
+msgid "View Orders"
+msgstr ""
+
+#: PostType/Order.php:47
+msgid "Search Order"
+msgstr ""
+
+#: PostType/Order.php:54
+msgid "Insert into order"
+msgstr ""
+
+#: PostType/Order.php:55
+msgid "Uploaded to this order"
+msgstr ""
+
+#: PostType/Order.php:56
+msgid "Orders list"
+msgstr ""
+
+#: PostType/Order.php:57
+msgid "Orders list navigation"
+msgstr ""
+
+#: PostType/Order.php:58
+msgid "Filter orders list"
+msgstr ""
+
+#: PostType/Order.php:63
+msgid "Orders Description"
+msgstr ""
+
+#: PostType/Question.php:27
+msgctxt "Question General Name"
+msgid "Questions"
+msgstr ""
+
+#: PostType/Question.php:28
+msgctxt "Question Singular Name"
+msgid "Question"
+msgstr ""
+
+#: PostType/Question.php:29
+#: PostType/Question.php:57
+msgid "Questions"
+msgstr ""
+
+#: PostType/Question.php:30
+#: Repository/QuestionRepository.php:69
+msgid "Question"
+msgstr ""
+
+#: PostType/Question.php:31
+msgid "Question Archives"
+msgstr ""
+
+#: PostType/Question.php:32
+msgid "Question Attributes"
+msgstr ""
+
+#: PostType/Question.php:33
+msgid "Parent Question:"
+msgstr ""
+
+#: PostType/Question.php:34
+msgid "All Questions"
+msgstr ""
+
+#: PostType/Question.php:37
+msgid "New Question"
+msgstr ""
+
+#: PostType/Question.php:38
+msgid "Edit Question"
+msgstr ""
+
+#: PostType/Question.php:39
+msgid "Update Question"
+msgstr ""
+
+#: PostType/Question.php:40
+msgid "View Question"
+msgstr ""
+
+#: PostType/Question.php:41
+msgid "View Questions"
+msgstr ""
+
+#: PostType/Question.php:42
+msgid "Search Question"
+msgstr ""
+
+#: PostType/Question.php:49
+msgid "Insert into question"
+msgstr ""
+
+#: PostType/Question.php:50
+msgid "Uploaded to this question"
+msgstr ""
+
+#: PostType/Question.php:51
+msgid "Questions list"
+msgstr ""
+
+#: PostType/Question.php:52
+msgid "Questions list navigation"
+msgstr ""
+
+#: PostType/Question.php:53
+msgid "Filter questions list"
+msgstr ""
+
+#: PostType/Question.php:58
+msgid "Questions Description"
+msgstr ""
+
+#: PostType/Quiz.php:35
+msgctxt "Quiz General Name"
+msgid "Quizzes"
+msgstr ""
+
+#: PostType/Quiz.php:36
+msgctxt "Quiz Singular Name"
+msgid "Quiz"
+msgstr ""
+
+#: PostType/Quiz.php:37
+#: PostType/Quiz.php:65
+msgid "Quizzes"
+msgstr ""
+
+#: PostType/Quiz.php:38
+#: Repository/QuizRepository.php:67
+msgid "Quiz"
+msgstr ""
+
+#: PostType/Quiz.php:39
+msgid "Quiz Archives"
+msgstr ""
+
+#: PostType/Quiz.php:40
+msgid "Quiz Attributes"
+msgstr ""
+
+#: PostType/Quiz.php:41
+msgid "Parent Quiz:"
+msgstr ""
+
+#: PostType/Quiz.php:42
+msgid "All Quizzes"
+msgstr ""
+
+#: PostType/Quiz.php:45
+msgid "New Quiz"
+msgstr ""
+
+#: PostType/Quiz.php:46
+msgid "Edit Quiz"
+msgstr ""
+
+#: PostType/Quiz.php:47
+msgid "Update Quiz"
+msgstr ""
+
+#: PostType/Quiz.php:48
+msgid "View Quiz"
+msgstr ""
+
+#: PostType/Quiz.php:49
+msgid "View Quizzes"
+msgstr ""
+
+#: PostType/Quiz.php:50
+msgid "Search Quiz"
+msgstr ""
+
+#: PostType/Quiz.php:57
+msgid "Insert into quiz"
+msgstr ""
+
+#: PostType/Quiz.php:58
+msgid "Uploaded to this quiz"
+msgstr ""
+
+#: PostType/Quiz.php:59
+msgid "Quizzes list"
+msgstr ""
+
+#: PostType/Quiz.php:60
+msgid "Quizzes list navigation"
+msgstr ""
+
+#: PostType/Quiz.php:61
+msgid "Filter quizzes list"
+msgstr ""
+
+#: PostType/Quiz.php:66
+msgid "Quizzes Description"
+msgstr ""
+
+#: PostType/Section.php:33
+msgctxt "Section General Name"
+msgid "Sections"
+msgstr ""
+
+#: PostType/Section.php:34
+msgctxt "Section Singular Name"
+msgid "Section"
+msgstr ""
+
+#: PostType/Section.php:35
+#: PostType/Section.php:63
+msgid "Sections"
+msgstr ""
+
+#: PostType/Section.php:36
+msgid "Section"
+msgstr ""
+
+#: PostType/Section.php:37
+msgid "Section Archives"
+msgstr ""
+
+#: PostType/Section.php:38
+msgid "Section Attributes"
+msgstr ""
+
+#: PostType/Section.php:39
+msgid "Parent Section:"
+msgstr ""
+
+#: PostType/Section.php:40
+msgid "All Sections"
+msgstr ""
+
+#: PostType/Section.php:43
+msgid "New Section"
+msgstr ""
+
+#: PostType/Section.php:44
+msgid "Edit Section"
+msgstr ""
+
+#: PostType/Section.php:45
+msgid "Update Section"
+msgstr ""
+
+#: PostType/Section.php:46
+msgid "View Section"
+msgstr ""
+
+#: PostType/Section.php:47
+msgid "View Sections"
+msgstr ""
+
+#: PostType/Section.php:48
+msgid "Search Section"
+msgstr ""
+
+#: PostType/Section.php:55
+msgid "Insert into section"
+msgstr ""
+
+#: PostType/Section.php:56
+msgid "Uploaded to this section"
+msgstr ""
+
+#: PostType/Section.php:57
+msgid "Sections list"
+msgstr ""
+
+#: PostType/Section.php:58
+msgid "Sections list navigation"
+msgstr ""
+
+#: PostType/Section.php:59
+msgid "Filter sections list"
+msgstr ""
+
+#: PostType/Section.php:64
+msgid "Sections Description"
+msgstr ""
+
+#: Repository/AbstractRepository.php:394
+msgctxt "Comma-separated list of search stopwords in your language"
+msgid "about,an,are,as,at,be,by,com,for,from,how,in,is,it,of,on,or,that,the,this,to,was,what,when,where,who,will,with,www"
+msgstr ""
+
+#: Repository/CourseCategoryRepository.php:92
+msgid "Invalid course_cat"
+msgstr ""
+
+#: Repository/CourseDifficultyRepository.php:87
+msgid "Invalid course_difficulty."
+msgstr ""
+
+#: Repository/CourseProgressItemRepository.php:261
+msgid "Invalid course progress item ID."
+msgstr ""
+
+#: Repository/CourseProgressRepository.php:231
+msgid "Invalid course progress."
+msgstr ""
+
+#: Repository/CourseQuestionAnswerRepository.php:124
+msgid "Invalid Course Question Answer."
+msgstr ""
+
+#: Repository/CourseRepository.php:121
+msgid "Invalid course."
+msgstr ""
+
+#: Repository/CourseReviewRepository.php:130
+msgid "Invalid Course Review."
+msgstr ""
+
+#: Repository/CourseTagRepository.php:87
+msgid "Invalid course_tag."
+msgstr ""
+
+#: Repository/FaqRepository.php:96
+msgid "Invalid FAQ."
+msgstr ""
+
+#: Repository/LessonRepository.php:102
+msgid "Invalid lesson."
+msgstr ""
+
+#: Repository/NotificationRepository.php:90
+msgid "Invalid notification."
+msgstr ""
+
+#: Repository/OrderItemCourseRepository.php:67
+msgid "Order item not found."
+msgstr ""
+
+#: Repository/OrderRepository.php:128
+msgid "Invalid order."
+msgstr ""
+
+#. translators: %s: Order date
+#: Repository/OrderRepository.php:538
+msgid "Order &ndash; %s"
+msgstr ""
+
+#. translators: %s: Order date
+#: Repository/OrderRepository.php:538
+msgctxt "Order date parsed by strftime"
+msgid "%1$b %2$d, %Y @ %I:%M %p"
+msgstr ""
+
+#: Repository/QuestionRepository.php:107
+msgid "Invalid question."
+msgstr ""
+
+#: Repository/QuizAttemptRepository.php:49
+msgid "Invalid quiz attempt."
+msgstr ""
+
+#: Repository/QuizRepository.php:106
+msgid "Invalid quiz."
+msgstr ""
+
+#: Repository/SectionRepository.php:97
+msgid "Invalid section."
+msgstr ""
+
+#. translators: %s: Class method name.
+#: Repository/SettingRepository.php:94
+msgid "Method '%s' not implemented."
+msgstr ""
+
+#: Repository/UserCourseRepository.php:192
+msgid "Invalid user course."
+msgstr ""
+
+#: Repository/UserRepository.php:133
+msgid "Invalid user."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:88
+#: RestApi/Controllers/Store/CartItemsController.php:353
+#: RestApi/Controllers/Store/CheckoutController.php:88
+#: RestApi/Controllers/Store/CheckoutController.php:353
+#: RestApi/Controllers/Version1/BlocksController.php:85
+#: RestApi/Controllers/Version1/CourseBuilderController.php:97
+#: RestApi/Controllers/Version1/CourseCategoriesController.php:71
+#: RestApi/Controllers/Version1/CourseDifficultiesController.php:77
+#: RestApi/Controllers/Version1/CourseProgressController.php:114
+#: RestApi/Controllers/Version1/CourseProgressController.php:393
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:99
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:376
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:102
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:304
+#: RestApi/Controllers/Version1/CourseReviewsController.php:102
+#: RestApi/Controllers/Version1/CourseReviewsController.php:373
+#: RestApi/Controllers/Version1/CoursesController.php:102
+#: RestApi/Controllers/Version1/CoursesController.php:151
+#: RestApi/Controllers/Version1/CoursesController.php:499
+#: RestApi/Controllers/Version1/CourseTagsController.php:77
+#: RestApi/Controllers/Version1/FaqsController.php:108
+#: RestApi/Controllers/Version1/FaqsController.php:268
+#: RestApi/Controllers/Version1/LessonsController.php:99
+#: RestApi/Controllers/Version1/LessonsController.php:328
+#: RestApi/Controllers/Version1/NotificationsController.php:92
+#: RestApi/Controllers/Version1/NotificationsController.php:228
+#: RestApi/Controllers/Version1/OrderItemsController.php:103
+#: RestApi/Controllers/Version1/OrderItemsController.php:284
+#: RestApi/Controllers/Version1/OrdersController.php:112
+#: RestApi/Controllers/Version1/OrdersController.php:156
+#: RestApi/Controllers/Version1/OrdersController.php:393
+#: RestApi/Controllers/Version1/QuestionsController.php:125
+#: RestApi/Controllers/Version1/QuestionsController.php:482
+#: RestApi/Controllers/Version1/QuizAttemptsController.php:84
+#: RestApi/Controllers/Version1/QuizBuilderController.php:97
+#: RestApi/Controllers/Version1/QuizesController.php:113
+#: RestApi/Controllers/Version1/QuizesController.php:162
+#: RestApi/Controllers/Version1/QuizesController.php:181
+#: RestApi/Controllers/Version1/QuizesController.php:976
+#: RestApi/Controllers/Version1/RestTermsController.php:91
+#: RestApi/Controllers/Version1/SectionsController.php:108
+#: RestApi/Controllers/Version1/SectionsController.php:304
+#: RestApi/Controllers/Version1/UserCoursesController.php:122
+#: RestApi/Controllers/Version1/UserCoursesController.php:425
+#: RestApi/Controllers/Version1/UsersController.php:126
+#: RestApi/Controllers/Version1/UsersController.php:422
+msgid "Unique identifier for the resource."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:117
+#: RestApi/Controllers/Store/CheckoutController.php:117
+#: RestApi/Controllers/Version1/CourseProgressController.php:143
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:128
+#: RestApi/Controllers/Version1/CoursesController.php:131
+#: RestApi/Controllers/Version1/OrdersController.php:141
+#: RestApi/Controllers/Version1/QuizesController.php:142
+#: RestApi/Controllers/Version1/SectionsController.php:137
+#: RestApi/Controllers/Version1/UserCoursesController.php:151
+msgid "Whether to bypass trash and force deletion."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:138
+#: RestApi/Controllers/Store/CheckoutController.php:138
+#: RestApi/Controllers/Version1/LessonsController.php:152
+msgid "Limit result set to lessons with a specific slug."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:144
+#: RestApi/Controllers/Store/CheckoutController.php:144
+#: RestApi/Controllers/Version1/LessonsController.php:158
+msgid "Limit result set to lessons assigned a specific status."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:151
+#: RestApi/Controllers/Store/CheckoutController.php:151
+#: RestApi/Controllers/Version1/LessonsController.php:165
+msgid "Limit result set to lessons assigned a specific category ID."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:157
+#: RestApi/Controllers/Store/CheckoutController.php:157
+#: RestApi/Controllers/Version1/LessonsController.php:171
+msgid "Limit result set to lessons assigned a specific tag ID."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:163
+#: RestApi/Controllers/Store/CheckoutController.php:163
+#: RestApi/Controllers/Version1/LessonsController.php:177
+msgid "Limit result set to lessons assigned a specific difficulty ID."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:359
+#: RestApi/Controllers/Version1/LessonsController.php:334
+msgid "Lesson name"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:364
+#: RestApi/Controllers/Store/CheckoutController.php:364
+#: RestApi/Controllers/Version1/LessonsController.php:339
+msgid "Lesson slug"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:369
+#: RestApi/Controllers/Store/CheckoutController.php:369
+#: RestApi/Controllers/Version1/LessonsController.php:344
+msgid "Lesson URL"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:376
+#: RestApi/Controllers/Store/CheckoutController.php:376
+#: RestApi/Controllers/Version1/LessonsController.php:351
+msgid "The date the lesson was created, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:381
+#: RestApi/Controllers/Store/CheckoutController.php:381
+#: RestApi/Controllers/Version1/LessonsController.php:356
+msgid "The date the lesson was created, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:386
+#: RestApi/Controllers/Store/CheckoutController.php:386
+#: RestApi/Controllers/Version1/LessonsController.php:361
+msgid "The date the lesson was last modified, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:392
+#: RestApi/Controllers/Store/CheckoutController.php:392
+#: RestApi/Controllers/Version1/LessonsController.php:367
+msgid "The date the lesson was last modified, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:398
+#: RestApi/Controllers/Store/CheckoutController.php:398
+#: RestApi/Controllers/Version1/LessonsController.php:373
+msgid "Lesson status (post status)."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:405
+#: RestApi/Controllers/Store/CheckoutController.php:405
+msgid "Featured lesson"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:411
+#: RestApi/Controllers/Store/CheckoutController.php:411
+#: RestApi/Controllers/Version1/CoursesController.php:564
+#: RestApi/Controllers/Version1/LessonsController.php:380
+msgid "Catalog visibility"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:418
+#: RestApi/Controllers/Store/CheckoutController.php:418
+#: RestApi/Controllers/Version1/LessonsController.php:387
+msgid "Lesson description"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:423
+#: RestApi/Controllers/Store/CheckoutController.php:423
+#: RestApi/Controllers/Version1/LessonsController.php:392
+msgid "Lesson short description"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:428
+#: RestApi/Controllers/Store/CheckoutController.php:428
+#: RestApi/Controllers/Version1/CoursesController.php:603
+#: RestApi/Controllers/Version1/LessonsController.php:397
+msgid "Allow reviews."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:434
+#: RestApi/Controllers/Store/CheckoutController.php:434
+#: RestApi/Controllers/Version1/CoursesController.php:609
+#: RestApi/Controllers/Version1/LessonsController.php:403
+msgid "Reviews average rating."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:440
+#: RestApi/Controllers/Store/CheckoutController.php:440
+#: RestApi/Controllers/Version1/LessonsController.php:409
+msgid "Amount of reviews that the lesson has."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:446
+#: RestApi/Controllers/Store/CheckoutController.php:446
+#: RestApi/Controllers/Version1/LessonsController.php:415
+msgid "Lesson parent ID"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:451
+#: RestApi/Controllers/Store/CheckoutController.php:451
+#: RestApi/Controllers/Version1/CoursesController.php:633
+msgid "List of categories."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:458
+#: RestApi/Controllers/Store/CheckoutController.php:458
+#: RestApi/Controllers/Version1/CoursesController.php:640
+msgid "Category ID"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:463
+#: RestApi/Controllers/Store/CheckoutController.php:463
+#: RestApi/Controllers/Version1/CourseCategoriesController.php:77
+#: RestApi/Controllers/Version1/CoursesController.php:645
+msgid "Category name"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:469
+#: RestApi/Controllers/Store/CheckoutController.php:469
+#: RestApi/Controllers/Version1/CoursesController.php:651
+msgid "Category slug"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:478
+#: RestApi/Controllers/Store/CheckoutController.php:478
+#: RestApi/Controllers/Version1/CoursesController.php:660
+msgid "List of tags"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:485
+#: RestApi/Controllers/Store/CheckoutController.php:485
+#: RestApi/Controllers/Version1/CoursesController.php:667
+msgid "Tag ID"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:490
+#: RestApi/Controllers/Store/CheckoutController.php:490
+#: RestApi/Controllers/Version1/CoursesController.php:672
+#: RestApi/Controllers/Version1/CourseTagsController.php:83
+msgid "Tag name"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:496
+#: RestApi/Controllers/Store/CheckoutController.php:496
+#: RestApi/Controllers/Version1/CoursesController.php:678
+msgid "Tag slug"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:505
+#: RestApi/Controllers/Store/CheckoutController.php:505
+#: RestApi/Controllers/Version1/LessonsController.php:433
+msgid "Menu order, used to custom sort lessons."
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:510
+#: RestApi/Controllers/Store/CheckoutController.php:510
+#: RestApi/Controllers/Version1/LessonsController.php:443
+msgid "Video source"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:515
+#: RestApi/Controllers/Store/CheckoutController.php:515
+#: RestApi/Controllers/Version1/LessonsController.php:450
+msgid "Video source URL"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:520
+#: RestApi/Controllers/Store/CheckoutController.php:520
+#: RestApi/Controllers/Version1/LessonsController.php:455
+msgid "Video playback time"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:525
+#: RestApi/Controllers/Store/CheckoutController.php:525
+#: RestApi/Controllers/Version1/CourseReviewsController.php:458
+#: RestApi/Controllers/Version1/CoursesController.php:760
+#: RestApi/Controllers/Version1/LessonsController.php:489
+#: RestApi/Controllers/Version1/OrderItemsController.php:320
+#: RestApi/Controllers/Version1/OrdersController.php:651
+#: RestApi/Controllers/Version1/QuestionsController.php:587
+#: RestApi/Controllers/Version1/QuizesController.php:1091
+#: RestApi/Controllers/Version1/SectionsController.php:365
+#: RestApi/Controllers/Version1/UsersController.php:616
+msgid "Meta data"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:532
+#: RestApi/Controllers/Store/CheckoutController.php:532
+#: RestApi/Controllers/Version1/CourseReviewsController.php:465
+#: RestApi/Controllers/Version1/CoursesController.php:767
+#: RestApi/Controllers/Version1/LessonsController.php:496
+#: RestApi/Controllers/Version1/OrderItemsController.php:327
+#: RestApi/Controllers/Version1/OrdersController.php:658
+#: RestApi/Controllers/Version1/QuestionsController.php:594
+#: RestApi/Controllers/Version1/QuizesController.php:1098
+#: RestApi/Controllers/Version1/SectionsController.php:372
+#: RestApi/Controllers/Version1/UsersController.php:623
+msgid "Meta ID"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:538
+#: RestApi/Controllers/Store/CheckoutController.php:538
+#: RestApi/Controllers/Version1/CourseReviewsController.php:471
+#: RestApi/Controllers/Version1/CoursesController.php:773
+#: RestApi/Controllers/Version1/LessonsController.php:502
+#: RestApi/Controllers/Version1/OrderItemsController.php:333
+#: RestApi/Controllers/Version1/OrdersController.php:664
+#: RestApi/Controllers/Version1/QuestionsController.php:600
+#: RestApi/Controllers/Version1/QuizesController.php:1104
+#: RestApi/Controllers/Version1/SectionsController.php:378
+#: RestApi/Controllers/Version1/UsersController.php:629
+msgid "Meta key"
+msgstr ""
+
+#: RestApi/Controllers/Store/CartItemsController.php:543
+#: RestApi/Controllers/Store/CheckoutController.php:543
+#: RestApi/Controllers/Version1/CourseReviewsController.php:476
+#: RestApi/Controllers/Version1/CoursesController.php:778
+#: RestApi/Controllers/Version1/LessonsController.php:507
+#: RestApi/Controllers/Version1/OrderItemsController.php:338
+#: RestApi/Controllers/Version1/OrdersController.php:669
+#: RestApi/Controllers/Version1/QuestionsController.php:605
+#: RestApi/Controllers/Version1/QuizesController.php:1109
+#: RestApi/Controllers/Version1/SectionsController.php:383
+#: RestApi/Controllers/Version1/UsersController.php:634
+msgid "Meta value"
+msgstr ""
+
+#: RestApi/Controllers/Store/CheckoutController.php:359
+msgid "Lesson name."
+msgstr ""
+
+#: RestApi/Controllers/Version1/BlocksController.php:90
+msgid "Generated CSS for the post/page."
+msgstr ""
+
+#: RestApi/Controllers/Version1/BlocksController.php:115
+msgid "Sorry, you are not allowed to update blocks CSS."
+msgstr ""
+
+#: RestApi/Controllers/Version1/BlocksController.php:151
+msgid "Invalid post ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:34
+#: RestApi/Controllers/Version1/CrudController.php:672
+msgid "Limit results to those matching a string."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:39
+msgid "Limit response to comments published after a given ISO8601 compliant date."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:45
+msgid "Limit result set to comments assigned to specific user IDs. Requires authorization."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:53
+msgid "Ensure result set excludes comments assigned to specific user IDs. Requires authorization."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:62
+msgid "Limit result set to that from a specific author email. Requires authorization."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:68
+#: RestApi/Controllers/Version1/CommentsController.php:74
+msgid "Limit response to comments published before a given ISO8601 compliant date."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:80
+#: RestApi/Controllers/Version1/CrudController.php:690
+#: RestApi/Controllers/Version1/RestTermsController.php:469
+msgid "Ensure result set excludes specific IDs."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:89
+msgid "Limit result set to specific IDs."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:98
+#: RestApi/Controllers/Version1/CrudController.php:708
+msgid "Offset the result set by a specific number of items."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:103
+#: RestApi/Controllers/Version1/CourseProgressController.php:224
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:215
+#: RestApi/Controllers/Version1/CrudController.php:714
+#: RestApi/Controllers/Version1/NotificationsController.php:187
+#: RestApi/Controllers/Version1/QuizAttemptsController.php:145
+#: RestApi/Controllers/Version1/RestTermsController.php:495
+#: RestApi/Controllers/Version1/UserCoursesController.php:218
+msgid "Order sort attribute ascending or descending."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:113
+#: RestApi/Controllers/Version1/CourseProgressController.php:232
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:223
+#: RestApi/Controllers/Version1/CrudController.php:721
+#: RestApi/Controllers/Version1/NotificationsController.php:170
+#: RestApi/Controllers/Version1/QuizAttemptsController.php:132
+#: RestApi/Controllers/Version1/UserCoursesController.php:226
+#: RestApi/Controllers/Version1/UsersController.php:176
+msgid "Sort collection by object attribute."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:127
+msgid "Limit result set to comments of specific parent IDs."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:136
+msgid "Ensure result set excludes specific parent IDs."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:145
+msgid "Limit result set to comments assigned to specific post IDs."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:154
+msgid "Limit result set to comments assigned a specific status. Requires authorization."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:161
+msgid "The password for the post if it is password protected."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:191
+#: RestApi/Controllers/Version1/CommentsController.php:220
+#: RestApi/Controllers/Version1/CommentsController.php:249
+#: RestApi/Controllers/Version1/CommentsController.php:278
+#: RestApi/Controllers/Version1/CommentsController.php:309
+#: RestApi/Controllers/Version1/CourseChildrenController.php:116
+#: RestApi/Controllers/Version1/CourseProgressController.php:537
+#: RestApi/Controllers/Version1/CourseProgressController.php:560
+#: RestApi/Controllers/Version1/CourseProgressController.php:583
+#: RestApi/Controllers/Version1/CourseProgressController.php:617
+#: RestApi/Controllers/Version1/CourseProgressController.php:648
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:568
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:591
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:614
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:637
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:660
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:488
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:531
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:564
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:597
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:652
+#: RestApi/Controllers/Version1/CourseReviewsController.php:620
+#: RestApi/Controllers/Version1/CourseReviewsController.php:649
+#: RestApi/Controllers/Version1/CourseReviewsController.php:678
+#: RestApi/Controllers/Version1/CourseReviewsController.php:753
+#: RestApi/Controllers/Version1/CourseReviewsController.php:808
+#: RestApi/Controllers/Version1/FaqsController.php:423
+#: RestApi/Controllers/Version1/FaqsController.php:479
+#: RestApi/Controllers/Version1/FaqsController.php:525
+#: RestApi/Controllers/Version1/LessonsController.php:673
+#: RestApi/Controllers/Version1/LessonsController.php:729
+#: RestApi/Controllers/Version1/LessonsController.php:775
+#: RestApi/Controllers/Version1/NotificationsController.php:633
+#: RestApi/Controllers/Version1/NotificationsController.php:661
+#: RestApi/Controllers/Version1/NotificationsController.php:691
+#: RestApi/Controllers/Version1/NotificationsController.php:721
+#: RestApi/Controllers/Version1/OrderItemsController.php:484
+#: RestApi/Controllers/Version1/OrderItemsController.php:541
+#: RestApi/Controllers/Version1/OrderItemsController.php:589
+#: RestApi/Controllers/Version1/OrderItemsController.php:638
+#: RestApi/Controllers/Version1/OrderItemsController.php:690
+#: RestApi/Controllers/Version1/OrdersController.php:829
+#: RestApi/Controllers/Version1/OrdersController.php:877
+#: RestApi/Controllers/Version1/OrdersController.php:938
+#: RestApi/Controllers/Version1/OrdersController.php:971
+#: RestApi/Controllers/Version1/OrdersController.php:1004
+#: RestApi/Controllers/Version1/PostsController.php:40
+#: RestApi/Controllers/Version1/PostsController.php:81
+#: RestApi/Controllers/Version1/PostsController.php:110
+#: RestApi/Controllers/Version1/PostsController.php:150
+#: RestApi/Controllers/Version1/PostsController.php:192
+#: RestApi/Controllers/Version1/QuestionsController.php:195
+#: RestApi/Controllers/Version1/QuestionsController.php:782
+#: RestApi/Controllers/Version1/QuestionsController.php:838
+#: RestApi/Controllers/Version1/QuestionsController.php:884
+#: RestApi/Controllers/Version1/QuestionsController.php:928
+#: RestApi/Controllers/Version1/QuizBuilderController.php:136
+#: RestApi/Controllers/Version1/QuizBuilderController.php:395
+#: RestApi/Controllers/Version1/QuizesController.php:213
+#: RestApi/Controllers/Version1/SectionChildrenController.php:116
+#: RestApi/Controllers/Version1/SectionsController.php:490
+#: RestApi/Controllers/Version1/SectionsController.php:546
+#: RestApi/Controllers/Version1/SectionsController.php:592
+#: RestApi/Controllers/Version1/SettingsController.php:118
+#: RestApi/Controllers/Version1/SettingsController.php:137
+#: RestApi/Controllers/Version1/SettingsController.php:156
+#: RestApi/Controllers/Version1/UserCoursesController.php:562
+#: RestApi/Controllers/Version1/UserCoursesController.php:585
+#: RestApi/Controllers/Version1/UserCoursesController.php:614
+#: RestApi/Controllers/Version1/UserCoursesController.php:643
+#: RestApi/Controllers/Version1/UserCoursesController.php:674
+#: RestApi/Controllers/Version1/UsersController.php:839
+#: RestApi/Controllers/Version1/UsersController.php:873
+#: RestApi/Controllers/Version1/UsersController.php:903
+#: RestApi/Controllers/Version1/UsersController.php:933
+#: RestApi/Controllers/Version1/UsersController.php:974
+msgid "Sorry, the permission object for this resource is null."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:200
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:542
+#: RestApi/Controllers/Version1/CourseReviewsController.php:656
+#: RestApi/Controllers/Version1/OrderItemsController.php:521
+#: RestApi/Controllers/Version1/OrdersController.php:855
+#: RestApi/Controllers/Version1/OrdersController.php:888
+#: RestApi/Controllers/Version1/PostsController.php:59
+#: RestApi/Controllers/Version1/QuestionsController.php:202
+#: RestApi/Controllers/Version1/UsersController.php:850
+msgid "Sorry, you are not allowed to read resources."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:227
+#: RestApi/Controllers/Version1/CourseChildrenController.php:123
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:509
+#: RestApi/Controllers/Version1/CourseReviewsController.php:627
+#: RestApi/Controllers/Version1/OrderItemsController.php:567
+#: RestApi/Controllers/Version1/PostsController.php:88
+#: RestApi/Controllers/Version1/QuestionsController.php:957
+#: RestApi/Controllers/Version1/QuizBuilderController.php:143
+#: RestApi/Controllers/Version1/RestTermsController.php:167
+#: RestApi/Controllers/Version1/SectionChildrenController.php:123
+#: RestApi/Controllers/Version1/UserCoursesController.php:592
+#: RestApi/Controllers/Version1/UsersController.php:880
+msgid "Sorry, you cannot list resources."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:256
+#: RestApi/Controllers/Version1/CourseProgressController.php:595
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:575
+#: RestApi/Controllers/Version1/FaqsController.php:434
+#: RestApi/Controllers/Version1/LessonsController.php:684
+#: RestApi/Controllers/Version1/OrderItemsController.php:616
+#: RestApi/Controllers/Version1/OrdersController.php:949
+#: RestApi/Controllers/Version1/PostsController.php:128
+#: RestApi/Controllers/Version1/QuestionsController.php:793
+#: RestApi/Controllers/Version1/QuizBuilderController.php:402
+#: RestApi/Controllers/Version1/RestTermsController.php:187
+#: RestApi/Controllers/Version1/SectionsController.php:501
+#: RestApi/Controllers/Version1/UserCoursesController.php:621
+#: RestApi/Controllers/Version1/UsersController.php:910
+msgid "Sorry, you are not allowed to create resources."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:287
+#: RestApi/Controllers/Version1/CourseProgressController.php:657
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:630
+#: RestApi/Controllers/Version1/CourseReviewsController.php:786
+#: RestApi/Controllers/Version1/FaqsController.php:503
+#: RestApi/Controllers/Version1/LessonsController.php:753
+#: RestApi/Controllers/Version1/OrderItemsController.php:668
+#: RestApi/Controllers/Version1/OrdersController.php:982
+#: RestApi/Controllers/Version1/PostsController.php:170
+#: RestApi/Controllers/Version1/QuestionsController.php:862
+#: RestApi/Controllers/Version1/SectionsController.php:570
+#: RestApi/Controllers/Version1/UserCoursesController.php:683
+#: RestApi/Controllers/Version1/UsersController.php:951
+msgid "Sorry, you are not allowed to delete resources."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CommentsController.php:318
+#: RestApi/Controllers/Version1/CourseProgressController.php:626
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:671
+#: RestApi/Controllers/Version1/CourseReviewsController.php:841
+#: RestApi/Controllers/Version1/FaqsController.php:549
+#: RestApi/Controllers/Version1/LessonsController.php:799
+#: RestApi/Controllers/Version1/OrderItemsController.php:730
+#: RestApi/Controllers/Version1/OrdersController.php:1028
+#: RestApi/Controllers/Version1/PostsController.php:212
+#: RestApi/Controllers/Version1/QuestionsController.php:908
+#: RestApi/Controllers/Version1/SectionsController.php:616
+#: RestApi/Controllers/Version1/UserCoursesController.php:652
+#: RestApi/Controllers/Version1/UsersController.php:985
+msgid "Sorry, you are not allowed to update resources."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:138
+msgid "Course contents(quiz, lesson)"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:146
+msgid "Course content ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:152
+msgid "Course content name."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:157
+msgid "Course content permalink."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:162
+msgid "Course content type."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:167
+msgid "Course content menu order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:172
+msgid "Course content parent id."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:180
+msgid "Course sections."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:188
+msgid "Course section ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:194
+msgid "Course section name."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:199
+msgid "Course section permalink."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:204
+msgid "Course section type."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:209
+msgid "Course section menu order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:214
+msgid "Course section parent id."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:222
+msgid "Course section order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseBuilderController.php:250
+#: RestApi/Controllers/Version1/CourseBuilderController.php:535
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:610
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:661
+#: RestApi/Controllers/Version1/CourseReviewsController.php:217
+#: RestApi/Controllers/Version1/CourseReviewsController.php:766
+#: RestApi/Controllers/Version1/CourseReviewsController.php:821
+#: RestApi/Controllers/Version1/CrudController.php:125
+#: RestApi/Controllers/Version1/CrudController.php:235
+#: RestApi/Controllers/Version1/CrudController.php:558
+#: RestApi/Controllers/Version1/FaqsController.php:493
+#: RestApi/Controllers/Version1/FaqsController.php:539
+#: RestApi/Controllers/Version1/LessonsController.php:743
+#: RestApi/Controllers/Version1/LessonsController.php:789
+#: RestApi/Controllers/Version1/OrderItemsController.php:497
+#: RestApi/Controllers/Version1/OrderItemsController.php:703
+#: RestApi/Controllers/Version1/OrdersController.php:843
+#: RestApi/Controllers/Version1/QuestionsController.php:222
+#: RestApi/Controllers/Version1/QuestionsController.php:852
+#: RestApi/Controllers/Version1/QuestionsController.php:898
+#: RestApi/Controllers/Version1/QuizBuilderController.php:228
+#: RestApi/Controllers/Version1/QuizBuilderController.php:425
+#: RestApi/Controllers/Version1/QuizesController.php:635
+#: RestApi/Controllers/Version1/QuizesController.php:1274
+#: RestApi/Controllers/Version1/SectionsController.php:560
+#: RestApi/Controllers/Version1/SectionsController.php:606
+msgid "Invalid ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseCategoriesController.php:85
+#: RestApi/Controllers/Version1/CourseDifficultiesController.php:91
+#: RestApi/Controllers/Version1/CourseTagsController.php:91
+msgid "An alphanumeric identifier for the resource unique to its type."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseCategoriesController.php:93
+msgid "The ID for the parent of the resource."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseCategoriesController.php:98
+#: RestApi/Controllers/Version1/CourseDifficultiesController.php:99
+#: RestApi/Controllers/Version1/CourseTagsController.php:99
+msgid "HTML description of the resource."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseCategoriesController.php:106
+msgid "Category archive display type."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseCategoriesController.php:113
+#: RestApi/Controllers/Version1/CourseDifficultiesController.php:107
+#: RestApi/Controllers/Version1/CourseTagsController.php:107
+msgid "Term order, used to custom sort the resource."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseCategoriesController.php:118
+#: RestApi/Controllers/Version1/CourseDifficultiesController.php:112
+#: RestApi/Controllers/Version1/CourseTagsController.php:112
+msgid "Number of published courses for the resource."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseChildrenController.php:146
+#: RestApi/Controllers/Version1/RestTermsController.php:536
+msgid "Limit result set to resources assigned to a specific course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseDifficultiesController.php:83
+#: RestApi/Controllers/Version1/CoursesController.php:699
+msgid "Difficulty name."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:162
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:147
+#: RestApi/Controllers/Version1/UserCoursesController.php:170
+msgid "Paginate the course progress."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:171
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:156
+#: RestApi/Controllers/Version1/UserCoursesController.php:179
+msgid "Limit course progress per page."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:180
+#: RestApi/Controllers/Version1/CourseProgressController.php:399
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:172
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:388
+#: RestApi/Controllers/Version1/QuizAttemptsController.php:120
+#: RestApi/Controllers/Version1/UserCoursesController.php:188
+#: RestApi/Controllers/Version1/UserCoursesController.php:431
+msgid "User ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:188
+#: RestApi/Controllers/Version1/CourseProgressController.php:404
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:310
+#: RestApi/Controllers/Version1/CourseReviewsController.php:379
+#: RestApi/Controllers/Version1/FaqsController.php:306
+#: RestApi/Controllers/Version1/LessonsController.php:421
+#: RestApi/Controllers/Version1/QuestionsController.php:540
+#: RestApi/Controllers/Version1/QuizesController.php:998
+#: RestApi/Controllers/Version1/SectionsController.php:348
+#: RestApi/Controllers/Version1/UserCoursesController.php:436
+msgid "Course ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:195
+msgid "User activity status."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:203
+#: RestApi/Controllers/Version1/CourseProgressController.php:210
+#: RestApi/Controllers/Version1/CourseProgressController.php:217
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:194
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:201
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:208
+#: RestApi/Controllers/Version1/UserCoursesController.php:204
+#: RestApi/Controllers/Version1/UserCoursesController.php:211
+msgid "Limit response to resources started after a given ISO8601 compliant date."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:409
+#: RestApi/Controllers/Version1/UserCoursesController.php:447
+msgid "Course progress status."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:415
+#: RestApi/Controllers/Version1/UserCoursesController.php:453
+msgid "Course progress start date in GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:421
+#: RestApi/Controllers/Version1/UserCoursesController.php:459
+msgid "Course progress modified date in GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:427
+msgid "Course progress complete date in GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:712
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:712
+#: RestApi/Controllers/Version1/UserCoursesController.php:733
+msgid "User ID is invalid."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:722
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:722
+msgid "Student cannot access other's course progress."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:752
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:764
+#: RestApi/Controllers/Version1/UserCoursesController.php:773
+#: RestApi/Controllers/Version1/UserCoursesController.php:782
+msgid "Course ID is invalid."
+msgstr ""
+
+#. translators: %s: item id
+#. translators: %s: item type
+#: RestApi/Controllers/Version1/CourseProgressController.php:782
+#: RestApi/Controllers/Version1/CourseProgressController.php:791
+msgid "Missing parameter(s): %s"
+msgstr ""
+
+#. translators: %s: item type
+#: RestApi/Controllers/Version1/CourseProgressController.php:800
+#: RestApi/Controllers/Version1/CourseProgressController.php:818
+msgid "Invalid parameter(s): %s"
+msgstr ""
+
+#. translators: %s: item types
+#: RestApi/Controllers/Version1/CourseProgressController.php:806
+msgid "item_type is not of type %s"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressController.php:822
+msgid "completed is not of type boolean"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:165
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:382
+msgid "Course progress ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:179
+msgid "Course progress (lesson, quiz) item type."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:187
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:405
+msgid "Course progress item completed."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:393
+msgid "Lesson/Quiz ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:399
+msgid "Course progress ( Lesson, Quiz) item type."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:410
+msgid "Course progress item start date in GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:416
+msgid "Course progress item complete date in GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:422
+msgid "Course progress item update date in GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:788
+msgid "Invalid item ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseProgressItemsController.php:876
+msgid "Course progress item ID is invalid."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:132
+#: RestApi/Controllers/Version1/UsersController.php:156
+msgid "Required to be true, as the resource does not support trashing."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:157
+msgid "Limit result set to comments assigned to specific course IDs."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:316
+msgid "Course question answerer user's name."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:321
+msgid "Course question-answerer user Email."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:326
+msgid "Course question answerer user URL."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:331
+msgid "The IP address of the question answerer."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:336
+#: RestApi/Controllers/Version1/CourseReviewsController.php:405
+#: RestApi/Controllers/Version1/CoursesController.php:529
+msgid "The date the course was created, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:341
+msgid "Course question answer content."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:346
+msgid "Course question answer status."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:353
+msgid "Course question answer agent."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:358
+msgid "Course question answer parent."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:363
+msgid "The user ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:368
+msgid "True if this course qa belongs to the current user."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:495
+msgid "You must be logged in to ask question."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseQuestionAnswersController.php:620
+#: RestApi/Controllers/Version1/CourseReviewsController.php:776
+#: RestApi/Controllers/Version1/RestTermsController.php:249
+msgid "Sorry, you are not allowed to delete this resource."
+msgstr ""
+
+#. translators: %s: post type
+#: RestApi/Controllers/Version1/CourseReviewsController.php:230
+#: RestApi/Controllers/Version1/CrudController.php:593
+msgid "The %s has already been deleted."
+msgstr ""
+
+#. translators: %s: post type
+#: RestApi/Controllers/Version1/CourseReviewsController.php:239
+msgid "The %s could not be deleted."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:384
+msgid "Course Reviewer Author."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:389
+msgid "Course Reviewer Author Email."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:394
+msgid "Course Reviewer Author URL."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:399
+msgid "The IP address of the reviewer"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:411
+msgid "Course Review Description."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:416
+msgid "Course Review Title."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:421
+msgid "Course Review Content."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:427
+msgid "Course Review rating."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:432
+msgid "Course Review Status."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:437
+msgid "Course Review Agent."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:442
+msgid "Course Review Type."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:447
+msgid "Course Review Parent."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:452
+msgid "The User ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:689
+msgid "Sorry, you are not allowed to create course reviews."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:699
+msgid "Sorry, author_id cannot be empty or zero."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:709
+msgid "Sorry, you are not allowed to create course reviews for others."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:731
+msgid "Sorry, you cannot create review for your own course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:831
+msgid "Sorry, you are not allowed to update this resource."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CourseReviewsController.php:851
+msgid "Sorry, you cannot move a review to another course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:136
+msgid "Whether to delete the children(sections, lessons, quizzes and questions) under the course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:182
+msgid "Limit result set to courses with a specific slug."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:189
+msgid "Limit result set to courses assigned a specific status."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:197
+msgid "Limit result set to featured courses."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:204
+msgid "List courses with specific price."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:210
+msgid "List courses with specific price type (free or paid)."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:217
+#: RestApi/Controllers/Version1/QuestionsController.php:272
+msgid "Limit result set to courses assigned a specific category ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:224
+#: RestApi/Controllers/Version1/QuestionsController.php:278
+msgid "Limit result set to courses assigned a specific tag ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:231
+msgid "Limit result set to courses assigned a specific difficulty ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:505
+#: RestApi/Controllers/Version1/LessonsController.php:427
+#: RestApi/Controllers/Version1/OrdersController.php:621
+#: RestApi/Controllers/Version1/QuizesController.php:1004
+#: RestApi/Controllers/Version1/SectionsController.php:354
+msgid "Course name"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:510
+msgid "Course slug"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:515
+msgid "Course URL"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:522
+msgid "Course Preview URL"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:534
+msgid "The date the course was created, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:539
+msgid "The date the course was last modified, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:545
+msgid "The date the course was last modified, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:551
+msgid "Course status (post status)."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:558
+msgid "Featured course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:571
+msgid "Course description."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:576
+msgid "Course short description."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:581
+msgid "Current course price."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:587
+msgid "Course regular price."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:592
+msgid "Course sale price."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:597
+msgid "Course price type."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:615
+msgid "Amount of reviews that the course have."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:621
+#: RestApi/Controllers/Version1/QuestionsController.php:534
+msgid "Course parent ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:626
+#: RestApi/Controllers/Version1/LessonsController.php:438
+msgid "Course featured image."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:687
+msgid "Course difficulty"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:694
+msgid "Difficulty ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:705
+msgid "Difficulty slug."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:714
+msgid "Menu order, used to custom sort courses."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:719
+msgid "Course enrollment limit. Default unlimited."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:725
+msgid "Course duration (minutes)."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:731
+msgid "Course access mode"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:738
+msgid "Course billing cycle (1d, 2w, 3m, 4y)."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:743
+msgid "Course show curriculum. ( True = Visible to all, False = Visible to only enrollees)"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:749
+msgid "Course highlights"
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:754
+msgid "Course WordPress edit link."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CoursesController.php:1038
+#: RestApi/Controllers/Version1/OrdersController.php:1299
+msgid "Invalid ID."
+msgstr ""
+
+#. translators: %s: Class method name.
+#: RestApi/Controllers/Version1/CrudController.php:64
+#: RestApi/Controllers/Version1/CrudController.php:94
+#: RestApi/Controllers/Version1/CrudController.php:109
+#: Taxonomy/Taxonomy.php:123
+msgid "Method '%s' not implemented. Must be overridden in subclass."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CrudController.php:160
+msgid "Failed to read an object!"
+msgstr ""
+
+#. translators: %s: post type
+#: RestApi/Controllers/Version1/CrudController.php:183
+msgid "Cannot create existing %s."
+msgstr ""
+
+#. translators: %s: post type
+#: RestApi/Controllers/Version1/CrudController.php:586
+msgid "The %s does not support trashing."
+msgstr ""
+
+#. translators: %s: post type
+#: RestApi/Controllers/Version1/CrudController.php:603
+msgid "The %s cannot be deleted."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CrudController.php:655
+msgid "Current page of the collection."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CrudController.php:663
+msgid "Maximum number of items to be returned in result set."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CrudController.php:678
+msgid "Limit response to resources published after a given ISO8601 compliant date."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CrudController.php:684
+msgid "Limit response to resources published before a given ISO8601 compliant date."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CrudController.php:699
+#: RestApi/Controllers/Version1/RestTermsController.php:478
+msgid "Limit result set to specific ids."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CrudController.php:738
+msgid "Limit result set to those of particular parent IDs."
+msgstr ""
+
+#: RestApi/Controllers/Version1/CrudController.php:747
+msgid "Limit result set to all items except those of a particular parent ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/DataController.php:216
+msgid "Invalid country code."
+msgstr ""
+
+#: RestApi/Controllers/Version1/FaqsController.php:274
+msgid "FAQ title."
+msgstr ""
+
+#: RestApi/Controllers/Version1/FaqsController.php:279
+msgid "The date the FAQ was created, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/FaqsController.php:284
+msgid "The date the FAQ was created, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/FaqsController.php:289
+msgid "The date the FAQ was last modified, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/FaqsController.php:295
+msgid "The date the FAQ was last modified, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/FaqsController.php:301
+msgid "FAQ content."
+msgstr ""
+
+#: RestApi/Controllers/Version1/FaqsController.php:311
+msgid "Sort order, used to custom sort FAQs."
+msgstr ""
+
+#: RestApi/Controllers/Version1/FaqsController.php:457
+msgid "Sorry, you are not allowed to create FAQs for other's course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/InstructorsController.php:82
+msgid "Whether the instructor is approved or not."
+msgstr ""
+
+#: RestApi/Controllers/Version1/InstructorsController.php:106
+msgid "Instructor approved."
+msgstr ""
+
+#: RestApi/Controllers/Version1/LessonsController.php:146
+msgid "Limit lessons by course id."
+msgstr ""
+
+#: RestApi/Controllers/Version1/LessonsController.php:460
+msgid "Attachments"
+msgstr ""
+
+#: RestApi/Controllers/Version1/LessonsController.php:467
+msgid "Attachment ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/LessonsController.php:473
+msgid "Attachment title"
+msgstr ""
+
+#: RestApi/Controllers/Version1/LessonsController.php:479
+msgid "Attachment URL"
+msgstr ""
+
+#: RestApi/Controllers/Version1/LessonsController.php:707
+msgid "Sorry, you are not allowed to create lesson for others course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:134
+msgid "Notification for User ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:140
+#: RestApi/Controllers/Version1/NotificationsController.php:251
+msgid "Notification created by."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:146
+#: RestApi/Controllers/Version1/NotificationsController.php:256
+msgid "Notification code."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:152
+#: RestApi/Controllers/Version1/NotificationsController.php:273
+msgid "Notification level."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:158
+#: RestApi/Controllers/Version1/NotificationsController.php:267
+msgid "Notification type."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:164
+#: RestApi/Controllers/Version1/NotificationsController.php:261
+msgid "Notification status."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:194
+msgid "Paginate the notifications."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:202
+#: RestApi/Controllers/Version1/OrderItemsController.php:161
+#: RestApi/Controllers/Version1/QuizAttemptsController.php:160
+msgid "Limit items per page."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:234
+msgid "Notification title"
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:240
+msgid "Notification description."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:246
+msgid "Notification user ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:280
+msgid "Notification action OK."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:285
+msgid "Notification action cancel."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:290
+msgid "Notification action 1."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:295
+msgid "Notification action 2."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:300
+msgid "Notification action 3."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:305
+msgid "Notification created date, in the GMT timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:310
+msgid "Notification modified date, in the GMT timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/NotificationsController.php:316
+msgid "Notification expired date, in the GMT timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrderItemsController.php:147
+msgid "Filter order items by order ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrderItemsController.php:154
+msgid "Paginate the order items."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrderItemsController.php:290
+msgid "Order ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrderItemsController.php:295
+msgid "Product ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrderItemsController.php:300
+msgid "Order item name"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrderItemsController.php:305
+msgid "Order item type"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrderItemsController.php:310
+msgid "Quantity"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrderItemsController.php:315
+msgid "Total amount of the order item."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrderItemsController.php:509
+#: RestApi/Controllers/Version1/OrderItemsController.php:555
+msgid "Could not read the order object."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrderItemsController.php:606
+#: RestApi/Controllers/Version1/OrderItemsController.php:658
+#: RestApi/Controllers/Version1/OrderItemsController.php:720
+msgid "Invalid order ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:187
+msgid "Limit result set to orders assigned a specific status."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:196
+msgid "Limit result set to orders assigned a specific customer."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:203
+msgid "Limit result set to orders assigned a specific course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:399
+msgid "Order URL"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:406
+msgid "The date the Order was created, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:412
+msgid "The date the Order was created, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:418
+msgid "The date the Order was last modified, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:424
+msgid "The date the Order was last modified, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:430
+msgid "Order status"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:437
+msgid "Total amount of the order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:443
+msgid "Currency"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:449
+msgid "Expiry date of this order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:455
+msgid "Customer ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:460
+msgid "Payment method."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:466
+msgid "Payment method title."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:472
+msgid "Transaction ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:477
+msgid "Date of payment."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:483
+msgid "Date of order completion."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:489
+msgid "Method of order creation."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:495
+msgid "Customer IP address"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:501
+msgid "Customer user agent"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:507
+msgid "Version of Masteriyo which last updated the order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:513
+msgid "Order key"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:519
+msgid "Note left by customer during checkout."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:524
+msgid "MD5 hash of cart items to ensure orders are not modified."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:530
+msgid "Order billing details."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:536
+msgid "Order billing first name."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:541
+#: RestApi/Controllers/Version1/OrdersController.php:615
+msgid "Order billing last name."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:546
+msgid "Order billing company name."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:551
+#: RestApi/Controllers/Version1/OrdersController.php:556
+msgid "Order billing address 1."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:561
+msgid "Order billing address 2."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:566
+msgid "Order billing city."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:571
+msgid "Order billing post code."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:576
+msgid "Order billing country."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:581
+msgid "Order billing state."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:586
+msgid "Order billing email address."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:591
+msgid "Order billing phone number."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:598
+msgid "Set whether the payment is done."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:604
+msgid "Course items data"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:610
+msgid "Item ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:626
+msgid "Quantity ordered."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:633
+msgid "Course total (before discounts)."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:638
+msgid "Course total (after discounts)."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:643
+msgid "Course price"
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:1018
+msgid "Sorry, you are not allowed to change the owner of the order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:1092
+msgid "Customer ID is invalid."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:1158
+msgid "Order item ID provided is not associated with order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/OrdersController.php:1192
+msgid "Course ID or SKU is required."
+msgstr ""
+
+#: RestApi/Controllers/Version1/PostsController.php:118
+#: RestApi/Controllers/Version1/PostsController.php:158
+#: RestApi/Controllers/Version1/PostsController.php:200
+msgid "Sorry, you are not approved by the manager."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:166
+#: RestApi/Controllers/Version1/QuizBuilderController.php:175
+msgid "Question ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:173
+msgid "Chosen answer or answers."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:227
+msgid "The answer is correct."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:228
+msgid "The answer is incorrect."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:248
+#: RestApi/Controllers/Version1/SectionsController.php:167
+msgid "Limit result by course id."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:256
+msgid "Limit result set to questions assigned a specific status."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:264
+msgid "Limit result set to questions assigned a specific type."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:488
+#: RestApi/Controllers/Version1/QuizBuilderController.php:181
+msgid "Question name"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:493
+msgid "Question slug"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:498
+msgid "Question URL"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:505
+msgid "The date the question was created, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:510
+msgid "The date the question was created, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:515
+msgid "The date the question was last modified, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:521
+msgid "The date the question was last modified, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:527
+msgid "Question status (post status)."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:546
+msgid "Menu order, used to custom sort questions."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:551
+msgid "Question description."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:556
+msgid "Question short description."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:561
+#: RestApi/Controllers/Version1/QuizBuilderController.php:191
+msgid "Question type."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:567
+msgid "Whether the question is required or not."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:572
+msgid "Given answer list for the question."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:577
+msgid "Points for the correct answer."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:582
+msgid "Whether to the answers."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuestionsController.php:816
+msgid "Sorry, you are not allowed to create question for others course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizAttemptsController.php:114
+msgid "Quiz ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizAttemptsController.php:126
+msgid "Quiz attempt status."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizAttemptsController.php:152
+msgid "Paginate the quiz attempts."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizBuilderController.php:167
+msgid "Quiz contents (question)"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizBuilderController.php:186
+msgid "Question permalink"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizBuilderController.php:196
+msgid "Question menu order"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizBuilderController.php:201
+#: RestApi/Controllers/Version1/QuizesController.php:992
+msgid "Quiz parent ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:147
+msgid "Whether to delete the children(questions) under the quiz."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:186
+msgid "Data for checking answers (chosen answers list)."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:223
+msgid "Invalid Quiz ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:231
+msgid "The maximum number of attempts for the quiz have been reached."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:249
+msgid "Please sign in to start the quiz."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:259
+msgid "Sorry, you are not allowed to start quiz. Please enroll a course first."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:285
+msgid "Invalid Quiz."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:293
+msgid "Quiz is not started."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:316
+msgid "Limit result set to quizzes with a specific slug."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:322
+msgid "Limit result set to quizzes assigned a specific status."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:329
+msgid "Limit results by course id."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:335
+msgid "Limit result set to quizzes assigned a specific category ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:341
+msgid "Limit result set to quizzes assigned a specific tag ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:347
+msgid "Limit result set to quizzes assigned a specific difficulty ID."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:723
+msgid "Quiz attempt not found."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:737
+msgid "Something went wrong with the course. Please check if a quiz attached with the course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:745
+msgid "You are not allowed to read other's quiz attempts"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:982
+msgid "Quiz name"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:987
+msgid "Quiz slug"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1010
+msgid "Menu order, used to custom sort quizzes."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1015
+msgid "Quiz URL"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1022
+msgid "The date the quiz was created, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1027
+msgid "The date the quiz was created, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1032
+msgid "The date the quiz was last modified, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1038
+msgid "The date the quiz was last modified, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1044
+msgid "Quiz status (post status)."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1051
+msgid "Quiz description"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1056
+msgid "Quiz short description"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1061
+msgid "Quiz pass points"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1067
+msgid "Quiz total points"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1073
+msgid "Quiz duration (seconds)"
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1079
+msgid "Quiz attempts allowed."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1085
+#: RestApi/Controllers/Version1/SettingsController.php:319
+msgid "Quiz questions per page."
+msgstr ""
+
+#: RestApi/Controllers/Version1/QuizesController.php:1294
+msgid "Sorry, you are not allowed to create quiz for others course."
+msgstr ""
+
+#. translators: %s: items limit
+#: RestApi/Controllers/Version1/RestController.php:182
+msgid "Unable to accept more than %s items for this request."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestController.php:331
+#: RestApi/Controllers/Version1/RestController.php:349
+#: RestApi/Controllers/Version1/RestController.php:372
+#: RestApi/Controllers/Version1/RestController.php:415
+msgid "An invalid setting value was passed."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestController.php:475
+msgid "List of created resources."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestController.php:483
+msgid "List of updated resources."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestController.php:491
+msgid "List of delete resources."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:75
+msgid "Name for the resource."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:117
+msgid "Required to be true, as resource does not support trashing."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:207
+msgid "Sorry, you cannot view this resource."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:227
+msgid "Sorry, you are not allowed to edit this resource."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:269
+msgid "Sorry, you are not allowed to batch manipulate this resource."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:288
+msgid "Taxonomy does not exist."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:298
+msgid "Resource does not exist."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:488
+msgid "Page of the items."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:506
+msgid "Sort collection by resource attribute."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:522
+msgid "Whether to hide resources not assigned to any courses."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:529
+msgid "Limit result set to resources assigned to a specific parent."
+msgstr ""
+
+#: RestApi/Controllers/Version1/RestTermsController.php:542
+msgid "Limit result set to resources with a specific slug."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SectionChildrenController.php:146
+msgid "Limit result set to resources assigned to a specific section."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SectionsController.php:142
+msgid "Whether to delete the children(lessons, quizzes and questions) under the section."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SectionsController.php:310
+msgid "Section name"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SectionsController.php:315
+msgid "The date the section was created, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SectionsController.php:320
+msgid "The date the section was created, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SectionsController.php:325
+msgid "The date the section was last modified, in the site's timezone."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SectionsController.php:331
+msgid "The date the section was last modified, as GMT."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SectionsController.php:337
+msgid "Section description"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SectionsController.php:342
+msgid "Section parent ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SectionsController.php:360
+msgid "Menu order, used to custom sort sections."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SectionsController.php:524
+msgid "Sorry, you are not allowed to create section for others course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:181
+msgid "Group setting or single setting."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:218
+#: RestApi/Controllers/Version1/SettingsController.php:368
+msgid "General Settings"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:224
+#: RestApi/Controllers/Version1/SettingsController.php:256
+msgid "Styling"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:230
+msgid "Primary color"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:236
+msgid "Theme"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:243
+msgid "Widgets CSS"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:250
+msgid "Courses Settings"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:262
+msgid "Enable course search."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:267
+msgid "Courses per page."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:272
+msgid "Courses per row."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:277
+msgid "Course thumbnail size."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:287
+msgid "Single course settings."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:293
+msgid "Single course display settings."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:298
+msgid "Enable course review."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:307
+msgid "Quiz Setting"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:313
+msgid "Quiz display settings."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:328
+msgid "Learn page settings"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:334
+msgid "Learn page general settings."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:340
+msgid "Learn page logo id."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:347
+msgid "Learn page display settings."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:353
+msgid "Enable questions answers in learn page."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:362
+msgid "Payments Settings"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:374
+msgid "Address Line 1"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:379
+msgid "Address Line 2"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:384
+msgid "City Name"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:389
+msgid "Country Name"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:401
+msgid "Currency Settings"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:407
+msgid "Currency Code"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:414
+msgid "Position of Currency"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:421
+msgid "Thousand Separator"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:427
+msgid "Decimal Separator"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:433
+msgid "Number of Decimals"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:442
+msgid "Enable offline payment."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:447
+msgid "Offline payment title which the user sees during checkout."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:452
+msgid "Offline payment description which the user sees during checkout."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:457
+msgid "Offline payment instructions."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:464
+msgid "Enable standard paypal."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:469
+msgid "Paypal title which the user sees during checkout."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:474
+msgid "Paypal description which the user sees during checkout."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:479
+msgid "Enable IPN email notifications."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:485
+msgid "Enable sandbox/sandbox mode on paypal."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:490
+msgid "Paypal email."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:495
+msgid "Paypal receiver email."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:500
+msgid "Paypal identity token."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:505
+msgid "Paypal invoice prefix."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:511
+msgid "Paypal payment action."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:518
+msgid "Paypal image url."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:523
+msgid "Enable log."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:529
+msgid "Paypal sandbox API username."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:534
+msgid "Paypal sandbox API password."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:539
+msgid "Paypal sandbox API signature."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:544
+msgid "Paypal live API username."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:549
+msgid "Paypal live API password."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:554
+msgid "Paypal live API signature."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:562
+msgid "Email Setting"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:568
+msgid "Email send from."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:573
+msgid "Email address to send email."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:578
+msgid "Default content for email."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:583
+msgid "Email header image."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:588
+msgid "Email footer text."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:595
+msgid "Enable new order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:600
+#: RestApi/Controllers/Version1/SettingsController.php:696
+msgid "Recipients email address."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:608
+msgid "New order email subject."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:613
+msgid "New order email heading."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:618
+msgid "New order email content."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:625
+msgid "Enable processing order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:630
+msgid "Processing order email subject."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:635
+msgid "Processing order email heading."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:640
+msgid "Processing order email content."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:647
+msgid "Enable completed order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:652
+msgid "Completed order email subject."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:657
+msgid "Completed order email heading."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:662
+msgid "Completed order email content."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:669
+msgid "Enable on hold order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:674
+msgid "On hold order email subject."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:679
+msgid "On hold order email heading."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:684
+msgid "On hold order email content."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:691
+msgid "Enable cancelled order."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:704
+msgid "Cancelled order email subject."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:709
+msgid "Cancelled order email heading."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:714
+msgid "Cancelled order email content."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:721
+msgid "Enable enrolled course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:726
+msgid "Enrolled course email subject."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:731
+msgid "Enrolled course email heading."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:736
+msgid "Enrolled course email content."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:743
+msgid "Enable completed course."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:748
+msgid "Completed course email subject."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:753
+msgid "Completed course email heading."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:758
+msgid "Completed course email content."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:765
+msgid "Enable become an instructor."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:770
+msgid "Become an instructor email subject."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:775
+msgid "Become an instructor email heading."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:780
+msgid "Become an instructor email content."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:788
+msgid "Advance setting"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:793
+msgid "Pages Setting"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:799
+msgid "Account page ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:804
+msgid "Archive course page ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:809
+msgid "Checkout page ID"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:817
+msgid "Checkout endpoints"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:822
+msgid "Pay endpoint"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:827
+msgid "Order received endpoint."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:832
+msgid "Add payment method endpoint."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:837
+msgid "Delete payment method endpoint."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:842
+msgid "Set default payment method endpoint."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:849
+msgid "Account endpoints"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:854
+msgid "Orders endpoint"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:859
+msgid "View order endpoint."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:864
+msgid "My courses endpoint."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:869
+msgid "Edit account endpoint."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:874
+msgid "Payment methods endpoint."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:879
+msgid "Lost password endpoint."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:884
+msgid "Logout endpoint."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:891
+msgid "Permalinks"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:897
+msgid "Course category base"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:902
+msgid "Course tag base"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:907
+msgid "Course difficulty base"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:912
+msgid "Single course permalink"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:917
+msgid "Course lessons permalink"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:922
+msgid "Course quizzes permalink"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:927
+msgid "Course sections permalink"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:934
+msgid "Debug"
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:940
+msgid "Enable template debug."
+msgstr ""
+
+#: RestApi/Controllers/Version1/SettingsController.php:945
+msgid "Enable debug."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UserCoursesController.php:196
+msgid "User course status"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UserCoursesController.php:442
+msgid "Item type (e.g. Course)"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UserCoursesController.php:743
+msgid "User cannot access other's course progress."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:193
+msgid "Limit result set to users matching at least one specific role provided. Accepts CSV list or single role."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:428
+msgid "User login username."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:434
+msgid "User login old password."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:439
+msgid "User login password."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:444
+#: RestApi/Controllers/Version1/UsersController.php:481
+msgid "User nickname"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:449
+msgid "User email"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:454
+msgid "Site url of the user."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:459
+msgid "User date created"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:465
+msgid "User activation key."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:471
+msgid "User status"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:476
+msgid "Display name"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:486
+msgid "User first name"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:491
+msgid "User last name"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:496
+msgid "User description"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:501
+msgid "Enable rich editing."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:507
+msgid "Enable syntax highlighting."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:513
+msgid "Enable comment shortcuts."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:519
+msgid "Mark the user as spam. Multi site only."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:525
+msgid "Use SSL."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:531
+msgid "Whether to show the admin bar on the frontend."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:537
+msgid "User specific locale"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:542
+msgid "User role"
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:548
+msgid "User billing details."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:554
+msgid "User billing first name."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:559
+msgid "User billing last name."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:564
+msgid "User billing company name."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:569
+#: RestApi/Controllers/Version1/UsersController.php:574
+msgid "User billing address 1."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:579
+msgid "User billing address 2."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:584
+msgid "User billing city."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:589
+msgid "User billing post code."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:594
+msgid "User billing country."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:599
+msgid "User billing state."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:604
+msgid "User billing email address."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:609
+msgid "User billing phone number."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:942
+msgid "Sorry, you cannot delete yourself."
+msgstr ""
+
+#: RestApi/Controllers/Version1/UsersController.php:995
+msgid "Sorry, invalid old password."
+msgstr ""
+
+#: Roles.php:27
+msgid "Masteriyo Instructor"
+msgstr ""
+
+#: Roles.php:31
+msgid "Masteriyo Student"
+msgstr ""
+
+#: ScriptStyle.php:781
+msgid "Save"
+msgstr ""
+
+#: ScriptStyle.php:782
+msgid "Saving..."
+msgstr ""
+
+#: ScriptStyle.php:783
+msgid "Your profile was updated successfully."
+msgstr ""
+
+#: ScriptStyle.php:806
+msgid "Sign In"
+msgstr ""
+
+#: ScriptStyle.php:807
+msgid "Signing In..."
+msgstr ""
+
+#: ScriptStyle.php:820
+msgid "Type CONFIRM to proceed."
+msgstr ""
+
+#: ScriptStyle.php:821
+msgid "Try again"
+msgstr ""
+
+#: ScriptStyle.php:822
+msgid "Submit"
+msgstr ""
+
+#: ScriptStyle.php:823
+msgid "Update"
+msgstr ""
+
+#: ScriptStyle.php:824
+msgid "Delete"
+msgstr ""
+
+#: ScriptStyle.php:825
+msgid "Submitting..."
+msgstr ""
+
+#: ScriptStyle.php:826
+msgid "Deleting..."
+msgstr ""
+
+#: ScriptStyle.php:827
+msgid "Reply to"
+msgstr ""
+
+#: ScriptStyle.php:828
+msgid "Edit reply"
+msgstr ""
+
+#: ScriptStyle.php:829
+msgid "Edit review"
+msgstr ""
+
+#: ScriptStyle.php:830
+msgid "Submitted successfully."
+msgstr ""
+
+#: ScriptStyle.php:831
+msgid "Updated successfully."
+msgstr ""
+
+#: ScriptStyle.php:832
+msgid "Deleted successfully."
+msgstr ""
+
+#: ScriptStyle.php:841
+msgid "Error processing checkout. Please try again."
+msgstr ""
+
+#: Setup/Onboard.php:53
+msgid "Masteriyo Onboard"
+msgstr ""
+
+#: Setup/Onboard.php:144
+msgid "Masteriyo LMS - Onboarding"
+msgstr ""
+
+#: Shortcodes/AccountShortcode.php:82
+#: Shortcodes/InstructorRegistrationShortcode.php:77
+msgid "Password reset email has been sent."
+msgstr ""
+
+#: Shortcodes/AccountShortcode.php:93
+#: Shortcodes/InstructorRegistrationShortcode.php:89
+msgid "This key is invalid or has already been used. Please request to reset your password again if needed."
+msgstr ""
+
+#: Taxonomy/Course/Category.php:54
+msgctxt "Taxonomy General Name"
+msgid "Course Categories"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:55
+msgctxt "Taxonomy Singular Name"
+msgid "Course Category"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:56
+msgid "Course Category"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:57
+msgid "All Course Categories"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:58
+msgid "Parent Course Category"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:59
+msgid "Parent Course Category:"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:60
+msgid "New Course Category Name"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:61
+msgid "Add New Course Category"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:62
+msgid "Edit Course Category"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:63
+msgid "Update Course Category"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:64
+msgid "View Course Category"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:65
+msgid "Separate course categories with commas"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:66
+msgid "Add or remove course categories"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:67
+#: Taxonomy/Course/Difficulty.php:68
+#: Taxonomy/Course/Tag.php:67
+#: Taxonomy/Course/Visibility.php:58
+msgid "Choose from the most used"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:68
+msgid "Popular Course Categories"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:69
+msgid "Search Course Categories"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:70
+#: Taxonomy/Course/Difficulty.php:71
+#: Taxonomy/Course/Tag.php:70
+#: Taxonomy/Course/Visibility.php:61
+msgid "Not Found"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:71
+msgid "No course categories"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:72
+msgid "Course Categories list"
+msgstr ""
+
+#: Taxonomy/Course/Category.php:73
+msgid "Course Categories list navigation"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:43
+msgid "Course Difficulties"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:55
+msgctxt "Taxonomy General Name"
+msgid "Course Difficulties"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:56
+msgctxt "Taxonomy Singular Name"
+msgid "Course Difficulty"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:57
+msgid "Course Difficulty"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:58
+msgid "All Course Difficulties"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:59
+msgid "Parent Course Difficulty"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:60
+msgid "Parent Course Difficulty:"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:61
+msgid "New Course Difficulty Name"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:62
+msgid "Add New Course Difficulty"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:63
+msgid "Edit Course Difficulty"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:64
+msgid "Update Course Difficulty"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:65
+msgid "View Course Difficulty"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:66
+msgid "Separate course difficulties with commas"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:67
+msgid "Add or remove course difficulties"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:69
+msgid "Popular Course Difficulties"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:70
+msgid "Search Course Difficulties"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:72
+msgid "No course difficulties"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:73
+msgid "Course Difficulties list"
+msgstr ""
+
+#: Taxonomy/Course/Difficulty.php:74
+msgid "Course Difficulties list navigation"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:54
+msgctxt "Taxonomy General Name"
+msgid "Course Tags"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:55
+msgctxt "Taxonomy Singular Name"
+msgid "Course Tag"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:56
+msgid "Course Tag"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:57
+msgid "All Course Tags"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:58
+msgid "Parent Course Tag"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:59
+msgid "Parent Course Tag:"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:60
+msgid "New Course Tag Name"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:61
+msgid "Add New Course Tag"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:62
+msgid "Edit Course Tag"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:63
+msgid "Update Course Tag"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:64
+msgid "View Course Tag"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:65
+msgid "Separate course tags with commas"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:66
+msgid "Add or remove course tags"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:68
+msgid "Popular Course Tags"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:69
+msgid "Search Course Tags"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:71
+msgid "No course tags"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:72
+msgid "Course Tags list"
+msgstr ""
+
+#: Taxonomy/Course/Tag.php:73
+msgid "Course Tags list navigation"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:45
+msgctxt "Taxonomy General Name"
+msgid "Course Visibilities"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:46
+msgctxt "Taxonomy Singular Name"
+msgid "Course Visibility"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:47
+msgid "Course Visibility"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:48
+msgid "All Course Visibilities"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:49
+msgid "Parent Course Visibility"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:50
+msgid "Parent Course Visibility:"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:51
+msgid "New Course Visibility Name"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:52
+msgid "Add New Course Visibility"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:53
+msgid "Edit Course Visibility"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:54
+msgid "Update Course Visibility"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:55
+msgid "View Course Visibility"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:56
+msgid "Separate course visibilities with commas"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:57
+msgid "Add or remove course visibilities"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:59
+msgid "Popular Course Visibilities"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:60
+msgid "Search Course Visibilities"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:62
+msgid "No course visibilities"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:63
+msgid "Course Visibilities list"
+msgstr ""
+
+#: Taxonomy/Course/Visibility.php:64
+msgid "Course Visibilities list navigation"
+msgstr ""
+
+#. translators: %s template
+#: Template.php:111
+msgid "%s does not exist."
+msgstr ""
+
+#: Template.php:128
+msgid "action_args should not be overwritten when calling get_template."
+msgstr ""

@@ -5,7 +5,7 @@
  * @package Masteriyo
  *
  * @since 1.0.0
- * @since x.x.x Removed static keyword.
+ * @since 1.4.3 Removed static keyword.
  */
 
 namespace Masteriyo;
@@ -27,7 +27,7 @@ class Ajax {
 	 * Actions.
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Removed static keyword.
+	 * @since 1.4.3 Removed static keyword.
 	 *
 	 * @var array
 	 */
@@ -46,7 +46,7 @@ class Ajax {
 	 * Initialize
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Removed static keyword.
+	 * @since 1.4.3 Removed static keyword.
 	 */
 	public function init() {
 		// $this->init_hooks();
@@ -56,7 +56,7 @@ class Ajax {
 	/**
 	 * Initialize ajax handlers.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function init_handlers() {
 		$namespace = 'Masteriyo\\AjaxHandlers';
@@ -92,7 +92,7 @@ class Ajax {
 	/**
 	 * Return ajax handler by action/handle.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 *
 	 * @param string $action Ajax Handler action.
 	 *
@@ -110,7 +110,7 @@ class Ajax {
 	 * Initialize hooks.
 	 *
 	 * @since 1.0.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.4.3
 	 */
 	private static function init_hooks() {
 		self::$actions = apply_filters(
@@ -144,7 +144,7 @@ class Ajax {
 	 *
 	 * @since 1.0.0
 	 * @deprecated
-	 * @since x.x.x Moved to LoginAjaxHandler class.
+	 * @since 1.4.3 Moved to LoginAjaxHandler class.
 	 */
 	public static function login() {
 		if ( isset( $_POST['nonce'] ) ) {
@@ -218,8 +218,8 @@ class Ajax {
 	 * Review notice action.
 	 *
 	 * @since 1.4.0
-	 * @deprecated x.x.x
-	 * @since x.x.x Moved to ReviewNoticeAjaxHandler.
+	 * @deprecated 1.4.3
+	 * @since 1.4.3 Moved to ReviewNoticeAjaxHandler.
 	 */
 	public static function review_notice() {
 		if ( ! isset( $_POST['nonce'] ) ) {

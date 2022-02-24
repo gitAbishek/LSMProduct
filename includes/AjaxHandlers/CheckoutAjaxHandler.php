@@ -2,7 +2,7 @@
 /**
  * Checkout Ajax handler.
  *
- * @since x.x.x
+ * @since 1.4.3
  * @package Masteriyo\AjaxHandlers
  */
 
@@ -18,7 +18,7 @@ class CheckoutAjaxHandler extends AjaxHandler {
 	/**
 	 * Checkout ajax action.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 * @var string
 	 */
 	public $action = 'masteriyo_checkout';
@@ -26,7 +26,7 @@ class CheckoutAjaxHandler extends AjaxHandler {
 	/**
 	 * Process checkout ajax request.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function register() {
 		add_action( "wp_ajax_{$this->action}", array( $this, 'checkout' ) );
@@ -35,7 +35,7 @@ class CheckoutAjaxHandler extends AjaxHandler {
 	/**
 	 * Process ajax checkout form.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function checkout() {
 		masteriyo_maybe_define_constant( 'MASTERIYO_CHECKOUT', true );

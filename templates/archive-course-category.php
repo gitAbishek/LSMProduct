@@ -19,14 +19,14 @@ get_header( 'course-category' );
 /**
  * Wrapper div opening.
  *
- * @since x.x.x
+ * @since 1.4.3
  */
 echo '<div class="masteriyo-w-100 masteriyo-container">';
 
 /**
  * Hook: masteriyo_before_course_category_header.
  *
- * @since x.x.x
+ * @since 1.4.3
  */
 do_action( 'masteriyo_before_course_category_header' );
 
@@ -44,7 +44,7 @@ do_action( 'masteriyo_before_course_category_header' );
 	 *
 	 * @hooked masteriyo_course_category_description - 10
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	do_action( 'masteriyo_course_category_description' );
 	?>
@@ -54,7 +54,7 @@ do_action( 'masteriyo_before_course_category_header' );
 /**
  * Hook: masteriyo_after_course_category_header.
  *
- * @since x.x.x
+ * @since 1.4.3
  */
 do_action( 'masteriyo_after_course_category_header' );
 ?>
@@ -65,7 +65,7 @@ if ( masteriyo_course_loop() ) {
 	/**
 	 * Hook: masteriyo_before_course_category_loop.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	do_action( 'masteriyo_before_course_category_loop' );
 
@@ -78,7 +78,7 @@ if ( masteriyo_course_loop() ) {
 			/**
 			 * Hook: masteriyo_course_category_loop.
 			 *
-			 * @since x.x.x
+			 * @since 1.4.3
 			 */
 			do_action( 'masteriyo_course_category_loop' );
 
@@ -93,14 +93,14 @@ if ( masteriyo_course_loop() ) {
 	 *
 	 * @hooked masteriyo_pagination - 10
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	do_action( 'masteriyo_after_course_category_loop' );
 } else {
 	/**
 	 * Hook: masteriyo_no_courses_found.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	do_action( 'masteriyo_no_courses_found' );
 }
@@ -108,16 +108,15 @@ if ( masteriyo_course_loop() ) {
 /**
  * Hook: masteriyo_after_course_category_main_content.
  *
- * @since x.x.x
+ * @since 1.4.3
  */
 do_action( 'masteriyo_after_course_category_main_content' );
 
 /**
  * Wrapper div closing.
  *
- * @since x.x.x
+ * @since 1.4.3
  */
 echo '</div>';
 
 get_footer( 'course-category' );
-

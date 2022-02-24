@@ -2,7 +2,7 @@
 /**
  * Login Ajax handler.
  *
- * @since x.x.x
+ * @since 1.4.3
  *
  * @package Masteriyo\AjaxHandlers
  */
@@ -19,7 +19,7 @@ class LoginAjaxHandler extends AjaxHandler {
 	/**
 	 * Login ajax action.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 * @var string
 	 */
 	public $action = 'masteriyo_login';
@@ -27,7 +27,7 @@ class LoginAjaxHandler extends AjaxHandler {
 	/**
 	 * Register ajax handler.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function register() {
 		add_action( "wp_ajax_nopriv_{$this->action}", array( $this, 'login' ) );
@@ -36,7 +36,7 @@ class LoginAjaxHandler extends AjaxHandler {
 	/**
 	 * Process login ajax request.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function login() {
 		if ( isset( $_POST['nonce'] ) ) {

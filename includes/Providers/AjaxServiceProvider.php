@@ -2,7 +2,7 @@
 /**
  * Ajax service provider.
  *
- * @since x.x.x
+ * @since 1.4.3
  */
 
 namespace Masteriyo\Providers;
@@ -15,7 +15,7 @@ use League\Container\ServiceProvider\AbstractServiceProvider;
 /**
  * Ajax service provider.
  *
- * @since x.x.x
+ * @since 1.4.3
  */
 class AjaxServiceProvider extends AbstractServiceProvider {
 	/**
@@ -25,7 +25,7 @@ class AjaxServiceProvider extends AbstractServiceProvider {
 	 * this service provider must have an alias added
 	 * to this array or it will be ignored
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 *
 	 * @var array
 	 */
@@ -40,7 +40,7 @@ class AjaxServiceProvider extends AbstractServiceProvider {
 	 * that you need to, but remember, every alias registered
 	 * within this method must be declared in the `$provides` array.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.3
 	 */
 	public function register() {
 		$this->getContainer()->add( 'ajax', Ajax::class, true );

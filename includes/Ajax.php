@@ -49,7 +49,7 @@ class Ajax {
 	 * @since x.x.x Removed static keyword.
 	 */
 	public function init() {
-		$this->init_hooks();
+		// $this->init_hooks();
 		$this->init_handlers();
 	}
 

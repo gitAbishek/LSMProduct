@@ -29,7 +29,7 @@ class ReviewNoticeAjaxHandler extends AjaxHandler {
 	 * @since x.x.x
 	 */
 	public function register() {
-		add_action( "wp_ajax_{$this->action}", array( $this, '' ) );
+		add_action( "wp_ajax_{$this->action}", array( $this, 'process' ) );
 	}
 
 	/**
@@ -42,7 +42,8 @@ class ReviewNoticeAjaxHandler extends AjaxHandler {
 			wp_send_json_error(
 				array(
 					'message' => __( 'Nonce is required.', 'masteriyo' ),
-				)
+				),
+				400
 			);
 			return;
 		}
@@ -78,7 +79,8 @@ class ReviewNoticeAjaxHandler extends AjaxHandler {
 			wp_send_json_error(
 				array(
 					'message' => $e->getMessage(),
-				)
+				),
+				400
 			);
 		}
 	}

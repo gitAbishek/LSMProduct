@@ -705,8 +705,6 @@ class OrdersController extends PostsController {
 		// Customer ID.
 		if ( isset( $request['customer_id'] ) ) {
 			$order->set_customer_id( $request['customer_id'] );
-		} else {
-			$order->set_customer_id( get_current_user_id() );
 		}
 
 		// Set payment method.

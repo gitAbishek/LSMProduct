@@ -55,7 +55,8 @@ if ( masteriyo_is_production() && ! file_exists( dirname( __FILE__ ) . '/assets/
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				unset( $_GET['activate'] );
 			}
-		}
+		},
+		0
 	);
 
 	return;
@@ -91,26 +92,26 @@ if ( ! file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 	return;
 }
 
+if ( ! function_exists( 'masteriyo' ) ) {
+	/**
+	 * Bootstrap the application.
+	 */
+	$GLOBALS['masteriyo'] = require_once dirname( __FILE__ ) . '/bootstrap/app.php';
 
-/**
- * Bootstrap the application.
- */
-$GLOBALS['masteriyo'] = require_once dirname( __FILE__ ) . '/bootstrap/app.php';
+	/**
+	 * Return the service container.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $class Class name or alias.
+	 * @return Masteriyo\Masteriyo
+	 */
+	function masteriyo( $class = 'app' ) {
+		global $masteriyo;
 
+		return empty( $class ) ? $masteriyo : $masteriyo->get( $class );
+	}
 
-// Initialize the application.
-$masteriyo->get( 'app' );
-
-/**
- * Return the service container.
- *
- * @since 1.0.0
- *
- * @param string $class Class name or alias.
- * @return Masteriyo\Masteriyo
- */
-function masteriyo( $class = 'app' ) {
-	global $masteriyo;
-
-	return empty( $class ) ? $masteriyo : $masteriyo->get( $class );
+	// Initialize the application.
+	$GLOBALS['masteriyo']->get( 'app' );
 }

@@ -152,7 +152,7 @@ class Setting extends Model {
 			),
 			'widgets_css'   => '',
 			'review_notice' => array(
-				'time_to_ask'  => null,
+				'time_to_ask'  => '',
 				'reviewed'     => false,
 				'closed_count' => 0,
 			),

@@ -24,6 +24,8 @@ const ReviewNotice: React.FC = () => {
 	const handleNotice = (masteriyo_action: string) => {
 		setIsShowNotice(false);
 
+		localized.show_review_notice = 'no';
+
 		const formData = new FormData();
 
 		formData.append('action', 'masteriyo_review_notice');
@@ -38,8 +40,8 @@ const ReviewNotice: React.FC = () => {
 	};
 
 	return (
-		<Container maxW="container.xl">
-			<Collapse in={isShowNotice}>
+		<Collapse in={isShowNotice} style={{ width: '100%' }}>
+			<Container maxW="container.xl">
 				<Stack background="white" p="6" spacing="4" shadow="box">
 					<HStack align="flex-start" spacing="4">
 						<Icon width="12" height="12" fill="red" as={BiHeart} />
@@ -108,8 +110,8 @@ const ReviewNotice: React.FC = () => {
 						</Button>
 					</ButtonGroup>
 				</Stack>
-			</Collapse>
-		</Container>
+			</Container>
+		</Collapse>
 	);
 };
 

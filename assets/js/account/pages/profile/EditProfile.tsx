@@ -350,6 +350,41 @@ const EditProfile: React.FC = () => {
 													)}
 												</FormControl>
 											</Stack>
+											<Stack direction="row" spacing="8">
+												<FormControl
+													isInvalid={!!errors?.billing?.company_name}>
+													<FormLabel>
+														{__('Company Name', 'masteriyo')}
+													</FormLabel>
+													<Input
+														type="type"
+														defaultValue={
+															userDataQuery?.data?.billing.company_name
+														}
+														{...register('billing.company_name')}
+													/>
+													{errors?.billing?.company_name && (
+														<FormErrorMessage>
+															{errors?.billing?.company_name.message}
+														</FormErrorMessage>
+													)}
+												</FormControl>
+												<FormControl isInvalid={!!errors?.billing?.company_id}>
+													<FormLabel>{__('Company ID', 'masteriyo')}</FormLabel>
+													<Input
+														type="type"
+														defaultValue={
+															userDataQuery?.data?.billing.company_id
+														}
+														{...register('billing.company_id')}
+													/>
+													{errors?.billing?.company_id && (
+														<FormErrorMessage>
+															{errors?.billing?.company_id.message}
+														</FormErrorMessage>
+													)}
+												</FormControl>
+											</Stack>
 											<Spacer />
 											<ButtonGroup>
 												<Button

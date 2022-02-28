@@ -560,7 +560,8 @@ export interface UserSchema {
 	billing: {
 		first_name: string;
 		last_name: string;
-		company: string;
+		company_name: string;
+		company_id: string;
 		address_1: string;
 		address_2: string;
 		city: string;

@@ -76,7 +76,8 @@ class User extends Model {
 		// Billing details.
 		'billing_first_name'   => '',
 		'billing_last_name'    => '',
-		'billing_company'      => '',
+		'billing_company_name' => '',
+		'billing_company_id'   => '',
 		'billing_address_1'    => '',
 		'billing_address_2'    => '',
 		'billing_city'         => '',
@@ -450,7 +451,7 @@ class User extends Model {
 	}
 
 	/**
-	 * Get user's billing company.
+	 * Get user's billing company name.
 	 *
 	 * @since  1.0.0
 	 *
@@ -458,8 +459,21 @@ class User extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_billing_company( $context = 'view' ) {
-		return $this->get_prop( 'billing_company', $context );
+	public function get_billing_company_name( $context = 'view' ) {
+		return $this->get_prop( 'billing_company_name', $context );
+	}
+
+	/**
+	 * Get user's billing company id.
+	 *
+	 * @since  x.x.x
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_billing_company_id( $context = 'view' ) {
+		return $this->get_prop( 'billing_company_id', $context );
 	}
 
 	/**
@@ -867,15 +881,27 @@ class User extends Model {
 	}
 
 	/**
-	 * Set user's billing company.
+	 * Set user's billing company name.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $company User's billing company.
+	 * @param string $company User's billing company name.
 	 * @return void
 	 */
-	public function set_billing_company( $company ) {
-		$this->set_prop( 'billing_company', $company );
+	public function set_billing_company_name( $company ) {
+		$this->set_prop( 'billing_company_name', $company );
+	}
+
+	/**
+	 * Set user's billing company id.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param string $company User's billing company id.
+	 * @return void
+	 */
+	public function set_billing_company_id( $company ) {
+		$this->set_prop( 'billing_company_id', $company );
 	}
 
 	/**

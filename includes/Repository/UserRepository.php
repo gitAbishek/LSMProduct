@@ -51,7 +51,8 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		// Billing fields.
 		'billing_first_name'   => '_billing_first_name',
 		'billing_last_name'    => '_billing_last_name',
-		'billing_company'      => '_billing_company',
+		'billing_company_name' => '_billing_company_name',
+		'billing_company_id'   => '_billing_company_id',
 		'billing_address_1'    => '_billing_address_1',
 		'billing_address_2'    => '_billing_address_2',
 		'billing_city'         => '_billing_city',

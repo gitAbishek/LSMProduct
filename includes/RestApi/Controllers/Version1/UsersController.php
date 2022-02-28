@@ -343,17 +343,18 @@ class UsersController extends PostsController {
 			'locale'               => $user->get_locale( $context ),
 			'roles'                => $user->get_roles( $context ),
 			'billing'              => array(
-				'first_name' => $user->get_billing_first_name( $context ),
-				'last_name'  => $user->get_billing_last_name( $context ),
-				'company'    => $user->get_billing_company( $context ),
-				'address_1'  => $user->get_billing_address_1( $context ),
-				'address_2'  => $user->get_billing_address_2( $context ),
-				'city'       => $user->get_billing_city( $context ),
-				'postcode'   => $user->get_billing_postcode( $context ),
-				'country'    => $user->get_billing_country( $context ),
-				'state'      => $user->get_billing_state( $context ),
-				'email'      => $user->get_billing_email( $context ),
-				'phone'      => $user->get_billing_phone( $context ),
+				'first_name'   => $user->get_billing_first_name( $context ),
+				'last_name'    => $user->get_billing_last_name( $context ),
+				'company_name' => $user->get_billing_company_name( $context ),
+				'company_id'   => $user->get_billing_company_id( $context ),
+				'address_1'    => $user->get_billing_address_1( $context ),
+				'address_2'    => $user->get_billing_address_2( $context ),
+				'city'         => $user->get_billing_city( $context ),
+				'postcode'     => $user->get_billing_postcode( $context ),
+				'country'      => $user->get_billing_country( $context ),
+				'state'        => $user->get_billing_state( $context ),
+				'email'        => $user->get_billing_email( $context ),
+				'phone'        => $user->get_billing_phone( $context ),
 			),
 			'avatar_url'           => $user->get_avatar_url(),
 		);
@@ -549,63 +550,68 @@ class UsersController extends PostsController {
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'       => 'object',
-						'first_name' => array(
+						'type'         => 'object',
+						'first_name'   => array(
 							'description' => __( 'User billing first name.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'last_name'  => array(
+						'last_name'    => array(
 							'description' => __( 'User billing last name.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'company'    => array(
+						'company_name' => array(
 							'description' => __( 'User billing company name.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'address_1'  => array(
+						'company_id'   => array(
+							'description' => __( 'User billing company id.', 'masteriyo' ),
+							'type'        => 'string',
+							'context'     => array( 'view', 'edit' ),
+						),
+						'address_1'    => array(
 							'description' => __( 'User billing address 1.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'address_1'  => array(
+						'address_1'    => array(
 							'description' => __( 'User billing address 1.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'address_2'  => array(
+						'address_2'    => array(
 							'description' => __( 'User billing address 2.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'city'       => array(
+						'city'         => array(
 							'description' => __( 'User billing city.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'postcode'   => array(
+						'postcode'     => array(
 							'description' => __( 'User billing post code.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'country'    => array(
+						'country'      => array(
 							'description' => __( 'User billing country.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'state'      => array(
+						'state'        => array(
 							'description' => __( 'User billing state.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'email'      => array(
+						'email'        => array(
 							'description' => __( 'User billing email address.', 'masteriyo' ),
 							'type'        => 'email',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'phone'      => array(
+						'phone'        => array(
 							'description' => __( 'User billing phone number.', 'masteriyo' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
@@ -768,8 +774,12 @@ class UsersController extends PostsController {
 			$user->set_billing_last_name( $request['billing']['last_name'] );
 		}
 
-		if ( isset( $request['billing']['company'] ) ) {
-			$user->set_billing_company( $request['billing']['company'] );
+		if ( isset( $request['billing']['company_name'] ) ) {
+			$user->set_billing_company_name( $request['billing']['company_name'] );
+		}
+
+		if ( isset( $request['billing']['company_id'] ) ) {
+			$user->set_billing_company_id( $request['billing']['company_id'] );
 		}
 
 		if ( isset( $request['billing']['address_1'] ) ) {

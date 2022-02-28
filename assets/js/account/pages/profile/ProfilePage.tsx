@@ -134,6 +134,14 @@ const ProfilePage = () => {
 									<Td>{__('Address 2', 'masteriyo')}</Td>
 									<Td>{data?.billing?.address_2}</Td>
 								</Tr>
+								<Tr>
+									<Td>{__('Company Name', 'masteriyo')}</Td>
+									<Td>{data?.billing?.company_name}</Td>
+								</Tr>
+								<Tr>
+									<Td>{__('Company ID', 'masteriyo')}</Td>
+									<Td>{data?.billing?.company_id}</Td>
+								</Tr>
 							</Tbody>
 						</Table>
 					</Stack>

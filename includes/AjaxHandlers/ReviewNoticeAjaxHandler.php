@@ -54,25 +54,34 @@ class ReviewNoticeAjaxHandler extends AjaxHandler {
 			}
 
 			$action = isset( $_POST['masteriyo_action'] ) ? sanitize_text_field( $_POST['masteriyo_action'] ) : null;
+			$notice = get_option( 'masteriyo_review_notice', array() );
+			$notice = wp_parse_args(
+				$notice,
+				array(
+					'time_to_ask'  => time() + WEEK_IN_SECONDS,
+					'reviewed'     => false,
+					'closed_count' => 0,
+				)
+			);
 
 			if ( 'review_received' === $action ) {
-				masteriyo_set_setting( 'general.review_notice.reviewed', true );
+				$notice['reviewed'] = true;
 			}
 
 			if ( 'remind_me_later' === $action ) {
-				masteriyo_set_setting( 'general.review_notice.time_to_ask', time() + DAY_IN_SECONDS );
+				$notice['time_to_ask'] = time() + DAY_IN_SECONDS;
 			}
 
 			if ( 'close_notice' === $action ) {
-				$closed_count = absint( masteriyo_get_setting( 'general.review_notice.closed_count' ) );
-
-				masteriyo_set_setting( 'general.review_notice.time_to_ask', time() + DAY_IN_SECONDS );
-				masteriyo_set_setting( 'general.review_notice.closed_count', $closed_count + 1 );
+				$notice['closed_count'] = $notice['closed_count'] + 1;
+				$notice['time_to_ask']  = time() + DAY_IN_SECONDS;
 			}
 
 			if ( 'already_reviewed' === $action ) {
-				masteriyo_set_setting( 'general.review_notice.reviewed', true );
+				$notice['reviewed'] = true;
 			}
+
+			update_option( 'masteriyo_review_notice', $notice, true );
 
 			wp_send_json_success();
 		} catch ( \Exception $e ) {

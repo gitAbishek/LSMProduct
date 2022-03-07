@@ -854,30 +854,33 @@ if ( ! function_exists( 'masteriyo_is_show_review_notice' ) ) {
 	 * @return boolean
 	 */
 	function masteriyo_is_show_review_notice() {
-		$reviewed = masteriyo_get_setting( 'general.review_notice.reviewed' );
+		$current_time   = time();
+		$default_notice = array(
+			'time_to_ask'  => $current_time + WEEK_IN_SECONDS,
+			'reviewed'     => false,
+			'closed_count' => 0,
+		);
+		$notice         = get_option( 'masteriyo_review_notice', array() );
 
-		if ( $reviewed ) {
+		if ( empty( $notice ) ) {
+			update_option( 'masteriyo_review_notice', $default_notice, true );
+		}
+
+		$notice = wp_parse_args( $notice, $default_notice );
+
+		// Do not show notice if already reviewed or the notice has been dismissed 2 or more times.
+		if ( $notice['reviewed'] || $notice['closed_count'] >= 2 ) {
 			return false;
 		}
 
-		$closed_count = absint( masteriyo_get_setting( 'general.review_notice.closed_count' ) );
-		$time_to_ask  = masteriyo_get_setting( 'general.review_notice.time_to_ask' );
-		$current_time = time();
-
-		if ( empty( $time_to_ask ) ) {
-			$time_to_ask = $current_time + WEEK_IN_SECONDS;
-			masteriyo_set_setting( 'general.review_notice.time_to_ask', $time_to_ask );
-		}
-		if ( $closed_count >= 2 ) {
+		if ( $notice['time_to_ask'] > $current_time ) {
 			return false;
 		}
 
-		if ( $time_to_ask > $current_time ) {
-			return false;
-		}
 		if ( is_super_admin() || current_user_can( 'manage_masteriyo' ) ) {
 			return true;
 		}
+
 		return false;
 	}
 }

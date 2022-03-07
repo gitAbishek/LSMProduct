@@ -116,14 +116,11 @@ class Ajax {
 		self::$actions = apply_filters(
 			'masteriyo_ajax_actions',
 			array(
-				'login'         => array(
+				'login' => array(
 					'priv'   => array( __CLASS__, 'login' ),
 					'nopriv' => array( __CLASS__, 'login' ),
 				),
-				'review_notice' => array(
-					'priv' => array( __CLASS__, 'review_notice' ),
-				),
-				'test'          => array(
+				'test'  => array(
 					'priv'   => array( __CLASS__, 'test' ),
 					'nopriv' => array( __CLASS__, 'test' ),
 				),
@@ -212,54 +209,5 @@ class Ajax {
 				'message' => __( 'Nonce is required.', 'masteriyo' ),
 			)
 		);
-	}
-
-	/**
-	 * Review notice action.
-	 *
-	 * @since 1.4.0
-	 * @deprecated 1.4.3
-	 * @since 1.4.3 Moved to ReviewNoticeAjaxHandler.
-	 */
-	public static function review_notice() {
-		if ( ! isset( $_POST['nonce'] ) ) {
-			wp_send_json_error(
-				array(
-					'message' => __( 'Nonce is required.', 'masteriyo' ),
-				)
-			);
-			return;
-		}
-
-		try {
-			if ( ! wp_verify_nonce( $_POST['nonce'], 'masteriyo_review_notice_nonce' ) ) {
-				throw new Exception( __( 'Invalid nonce. Maybe you should reload the page.', 'masteriyo' ) );
-			}
-			$action = isset( $_POST['masteriyo_action'] ) ? sanitize_text_field( $_POST['masteriyo_action'] ) : null;
-
-			if ( 'review_received' === $action ) {
-				masteriyo_set_setting( 'general.review_notice.reviewed', true );
-			}
-			if ( 'remind_me_later' === $action ) {
-				masteriyo_set_setting( 'general.review_notice.time_to_ask', time() + DAY_IN_SECONDS );
-			}
-			if ( 'close_notice' === $action ) {
-				$closed_count = absint( masteriyo_get_setting( 'general.review_notice.closed_count' ) );
-
-				masteriyo_set_setting( 'general.review_notice.time_to_ask', time() + DAY_IN_SECONDS );
-				masteriyo_set_setting( 'general.review_notice.closed_count', $closed_count + 1 );
-			}
-			if ( 'already_reviewed' === $action ) {
-				masteriyo_set_setting( 'general.review_notice.reviewed', true );
-			}
-
-			wp_send_json_success();
-		} catch ( Exception $e ) {
-			wp_send_json_error(
-				array(
-					'message' => $e->getMessage(),
-				)
-			);
-		}
 	}
 }

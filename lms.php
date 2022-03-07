@@ -18,14 +18,57 @@ use Masteriyo\Masteriyo;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'MASTERIYO_SLUG', 'masteriyo' );
-define( 'MASTERIYO_VERSION', '1.4.3' );
-define( 'MASTERIYO_PLUGIN_FILE', __FILE__ );
-define( 'MASTERIYO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-define( 'MASTERIYO_PLUGIN_DIR', dirname( __FILE__ ) );
-define( 'MASTERIYO_ASSETS', dirname( __FILE__ ) . '/assets' );
-define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
-define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
+/**
+ * @since x.x.x Auto deactivation of free plugin.
+ */
+if ( in_array( 'learning-management-system-pro/lms.php', get_option( 'active_plugins', array() ), true ) ) {
+	add_action(
+		'admin_init',
+		function() {
+			deactivate_plugins( 'learning-management-system/lms.php', true );
+
+			if ( isset( $_GET['activate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				unset( $_GET['activate'] );
+			}
+		},
+		0
+	);
+
+	return;
+}
+
+if ( ! defined( 'MASTERIYO_SLUG' ) ) {
+	define( 'MASTERIYO_SLUG', 'masteriyo' );
+}
+
+if ( ! defined( 'MASTERIYO_VERSION' ) ) {
+	define( 'MASTERIYO_VERSION', '1.0.0' );
+}
+
+if ( ! defined( 'MASTERIYO_PLUGIN_FILE' ) ) {
+	define( 'MASTERIYO_PLUGIN_FILE', __FILE__ );
+}
+
+if ( ! defined( 'MASTERIYO_PLUGIN_BASENAME' ) ) {
+	define( 'MASTERIYO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+}
+
+if ( ! defined( 'MASTERIYO_PLUGIN_DIR' ) ) {
+	define( 'MASTERIYO_PLUGIN_DIR', dirname( __FILE__ ) );
+}
+
+if ( ! defined( 'MASTERIYO_ASSETS' ) ) {
+	define( 'MASTERIYO_ASSETS', dirname( __FILE__ ) . '/assets' );
+}
+
+if ( ! defined( 'MASTERIYO_TEMPLATES' ) ) {
+	define( 'MASTERIYO_TEMPLATES', dirname( __FILE__ ) . '/templates' );
+}
+
+if ( ! defined( 'MASTERIYO_LANGUAGES' ) ) {
+	define( 'MASTERIYO_LANGUAGES', dirname( __FILE__ ) . '/i18n/languages' );
+}
 
 /**
  * Include the autoloader.

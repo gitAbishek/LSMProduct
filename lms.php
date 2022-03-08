@@ -43,7 +43,7 @@ if ( ! defined( 'MASTERIYO_SLUG' ) ) {
 }
 
 if ( ! defined( 'MASTERIYO_VERSION' ) ) {
-	define( 'MASTERIYO_VERSION', '1.0.0' );
+	define( 'MASTERIYO_VERSION', '1.4.3' );
 }
 
 if ( ! defined( 'MASTERIYO_PLUGIN_FILE' ) ) {

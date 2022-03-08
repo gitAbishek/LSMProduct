@@ -139,7 +139,7 @@ const ProfilePage = () => {
 									<Td>{data?.billing?.company_name}</Td>
 								</Tr>
 								<Tr>
-									<Td>{__('Company ID', 'masteriyo')}</Td>
+									<Td>{__('Company VAT Number', 'masteriyo')}</Td>
 									<Td>{data?.billing?.company_id}</Td>
 								</Tr>
 							</Tbody>

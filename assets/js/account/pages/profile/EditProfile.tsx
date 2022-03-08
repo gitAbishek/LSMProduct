@@ -370,7 +370,7 @@ const EditProfile: React.FC = () => {
 													)}
 												</FormControl>
 												<FormControl isInvalid={!!errors?.billing?.company_id}>
-													<FormLabel>{__('Company ID', 'masteriyo')}</FormLabel>
+													<FormLabel>{__('Company VAT Number', 'masteriyo')}</FormLabel>
 													<Input
 														type="type"
 														defaultValue={

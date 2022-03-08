@@ -14,9 +14,9 @@ const Description: React.FC<Props> = (props) => {
 		<FormControl>
 			<FormLabel>{__('Course Description', 'masteriyo')}</FormLabel>
 			<Editor
+				id="mto-course-description"
 				name="description"
 				defaultValue={defaultValue}
-				hasImageUpload={true}
 			/>
 		</FormControl>
 	);

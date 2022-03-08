@@ -124,6 +124,7 @@ class Masteriyo {
 		add_action( 'admin_notices', array( $this, 'add_review_notice' ) );
 		add_action( 'in_admin_header', array( $this, 'hide_admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', 'wp_enqueue_media' );
+		add_action( 'admin_enqueue_scripts', 'wp_enqueue_editor' );
 
 		add_action( 'cli_init', array( 'Masteriyo\Cli\Cli', 'register' ) );
 

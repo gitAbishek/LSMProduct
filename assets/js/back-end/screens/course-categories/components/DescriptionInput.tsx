@@ -5,20 +5,18 @@ import Editor from '../../../components/common/Editor';
 
 interface Props {
 	defaultValue?: string;
-	hasImageUpload?: boolean;
 }
 
 const DescriptionInput: React.FC<Props> = (props) => {
-	const { defaultValue, hasImageUpload } = props;
+	const { defaultValue } = props;
 
 	return (
 		<FormControl>
 			<FormLabel>{__('Description', 'masteriyo')}</FormLabel>
 			<Editor
+				id="mto-category-description"
 				name="description"
 				defaultValue={defaultValue}
-				hasImageUpload={hasImageUpload}
-				size="md"
 			/>
 		</FormControl>
 	);

@@ -797,7 +797,6 @@ class CoursesController extends PostsController {
 	 * @return WP_Error|Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		global $masteriyo;
 
 		$id     = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
 		$course = masteriyo( 'course' );
@@ -810,12 +809,12 @@ class CoursesController extends PostsController {
 
 		// Post title.
 		if ( isset( $request['name'] ) ) {
-			$course->set_name( wp_filter_post_kses( $request['name'] ) );
+			$course->set_name( sanitize_text_field( $request['name'] ) );
 		}
 
 		// Post content.
 		if ( isset( $request['description'] ) ) {
-			$course->set_description( wp_filter_post_kses( $request['description'] ) );
+			$course->set_description( $request['description'] );
 		}
 
 		// Post excerpt.
@@ -830,7 +829,7 @@ class CoursesController extends PostsController {
 
 		// Post slug.
 		if ( isset( $request['slug'] ) ) {
-			$course->set_slug( $request['slug'] );
+			$course->set_slug( sanitize_title( $request['slug'] ) );
 		}
 
 		// Author/Instructor.

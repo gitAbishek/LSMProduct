@@ -1,5 +1,6 @@
 import urls from '../constants/urls';
 import http from './http';
+import { formatParams } from './utils';
 
 class PagesAPI {
 	uri: string;
@@ -8,9 +9,13 @@ class PagesAPI {
 		this.uri = `${urls.wpPages}`;
 	}
 
-	async list() {
+	async list(
+		query: any = {
+			per_page: -1,
+		}
+	) {
 		return http({
-			path: this.uri,
+			path: `${this.uri}?${formatParams(query)}`,
 			method: 'get',
 		}).then((res: any) => res);
 	}

@@ -21,43 +21,43 @@ if (!process.env.WORDPRESS_URL && process.env.DEVELOPMENT) {
 const fileList = {
 	database: {
 		src: 'database/**/*',
-		dest: 'build/database',
+		dest: `build/${pkg.name}/database`,
 	},
 	includes: {
 		src: 'includes/**/*',
-		dest: 'build/includes',
+		dest: `build/${pkg.name}/includes`,
 	},
 	assets: {
 		src: ['assets/**/*', '!assets/js/src/**/*', '!assets/scss/**/*'],
-		dest: 'build/assets',
+		dest: `build/${pkg.name}/assets`,
 	},
 	templates: {
 		src: 'templates/**/*',
-		dest: 'build/templates',
+		dest: `build/${pkg.name}/templates`,
 	},
 	i18n: {
 		src: 'i18n/**/*',
-		dest: 'build/i18n',
+		dest: `build/${pkg.name}/i18n`,
 	},
 	config: {
 		src: 'config/**/*',
-		dest: 'build/config',
+		dest: `build/${pkg.name}/config`,
 	},
 	bootstrap: {
 		src: 'bootstrap/**/*',
-		dest: 'build/bootstrap',
+		dest: `build/${pkg.name}/bootstrap`,
 	},
 	composer: {
 		src: ['composer.json', 'composer.lock'],
-		dest: 'build',
+		dest: `build/${pkg.name}/`,
 	},
 	npm: {
 		src: ['package.json', 'package.lock'],
-		dest: 'build',
+		dest: `build/${pkg.name}/`,
 	},
 	other: {
 		src: ['readme.txt', 'changelog.txt', 'lms.php'],
-		dest: 'build',
+		dest: `build/${pkg.name}/`,
 	},
 };
 
@@ -170,7 +170,9 @@ const copyToBuild = [
 ];
 
 function runComposerInBuild() {
-	return exec('cd build && composer install --no-dev --optimize-autoloader');
+	return exec(
+		`cd build/${pkg.name}/ && composer install --no-dev --optimize-autoloader`
+	);
 }
 
 function compressBuildWithoutVersion() {

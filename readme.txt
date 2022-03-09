@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
 Tested up to: 5.9.1
 Requires PHP: 7.0
-Stable tag: 1.4.3
+Stable tag: 1.4.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -197,12 +197,17 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
 
-= 1.4.3 - 24-02-2022 =
+= 1.4.4 - 09-03-2022 =
+- Enhancement - Replaced tiptap editor with WordPress TinyMCE Editor.
+- Enhancement - Added Company Name and Company VAT Number on user profile billing details.
+- Fix - Extra space created by review notice in the header section.
+- Fix - Only 10 pages being listed in page setup of global settings.
+- Tweak - Added Masteriyo Pro compatibility.
 
+= 1.4.3 - 24-02-2022 =
 - Fix - String translation in Account page.
 - Enhancement - Added course categories archive page.
 - Enhancement - Added instructor course archive page.
-
 
 = 1.4.2 - 15-02-2022 =
 - Fix - Add a link to an image in course categories shortcode or blocks.

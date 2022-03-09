@@ -70,7 +70,7 @@ const ReviewNotice: React.FC = () => {
 									textDecoration="underline">
 									here
 								</Link>
-								<Text>if you have any query. - Sanjip Shah</Text>
+								<Text>if you have any query. - Masteriyo Team</Text>
 							</HStack>
 						</Stack>
 						<Icon

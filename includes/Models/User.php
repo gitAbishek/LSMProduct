@@ -466,7 +466,7 @@ class User extends Model {
 	/**
 	 * Get user's billing company id.
 	 *
-	 * @since  x.x.x
+	 * @since  1.4.4
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
@@ -895,7 +895,7 @@ class User extends Model {
 	/**
 	 * Set user's billing company id.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.4
 	 *
 	 * @param string $company User's billing company id.
 	 * @return void

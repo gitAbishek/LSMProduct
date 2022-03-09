@@ -8,11 +8,11 @@
 
 **Requires at least**: 5.0
 
-**Tested up to**: 5.9
+**Tested up to**: 5.9.1
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.4.3
+**Stable tag**: 1.4.4
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,14 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.4.4 - 09-03-2022
+
+- Enhancement - Replaced tiptap editor with WordPress TinyMCE Editor.
+- Enhancement - Added Company Name and Company VAT Number on user profile billing details.
+- Fix - Extra space created by review notice in the header section.
+- Fix - Only 10 pages being listed in page setup of global settings.
+- Tweak - Added Masteriyo Pro compatibility.
 
 ### 1.4.3 - 24-02-2022
 

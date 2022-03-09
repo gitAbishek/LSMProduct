@@ -844,7 +844,7 @@ function masteriyo_snake_to_kebab( $text ) {
  *
  * e.g. <ul><li></li></ul>
  *
- * @since x.x.x
+ * @since 1.4.4
  *
  * @param string $highlights
  * @return string

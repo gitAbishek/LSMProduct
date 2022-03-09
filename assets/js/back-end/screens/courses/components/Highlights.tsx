@@ -18,7 +18,6 @@ const Highlights: React.FC<Props> = (props) => {
 		.replaceAll('<p>', '')
 		.replaceAll('</p>', '');
 
-	console.log(formattedDefaultValue);
 	return (
 		<FormControl>
 			<FormLabel>{__('Course Highlights', 'masteriyo')}</FormLabel>

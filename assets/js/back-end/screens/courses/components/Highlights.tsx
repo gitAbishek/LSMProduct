@@ -12,6 +12,13 @@ const Highlights: React.FC<Props> = (props) => {
 	const { setValue } = useFormContext();
 	const { defaultValue } = props;
 
+	const formattedDefaultValue = defaultValue
+		?.replaceAll('<ul>', '')
+		.replaceAll('</ul>', '')
+		.replaceAll('<p>', '')
+		.replaceAll('</p>', '');
+
+	console.log(formattedDefaultValue);
 	return (
 		<FormControl>
 			<FormLabel>{__('Course Highlights', 'masteriyo')}</FormLabel>
@@ -21,12 +28,18 @@ const Highlights: React.FC<Props> = (props) => {
 				borderColor="gray.200"
 				shadow="input"
 				rounded="sm"
-				h="28"
-				pl="5">
+				minH="28"
+				pl="5"
+				sx={{
+					ul: {
+						listStyleType: 'disc',
+					},
+				}}>
 				<RichText
-					tagName={'ul'}
+					identifier="values"
+					tagName="ul"
 					multiline="li"
-					value={defaultValue || ''}
+					value={formattedDefaultValue || ''}
 					onChange={(val) => setValue('highlights', val)}
 				/>
 			</Box>

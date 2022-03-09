@@ -33,6 +33,7 @@ const Highlights: React.FC<Props> = (props) => {
 				sx={{
 					ul: {
 						listStyleType: 'disc',
+						outline: 'none',
 					},
 				}}>
 				<RichText

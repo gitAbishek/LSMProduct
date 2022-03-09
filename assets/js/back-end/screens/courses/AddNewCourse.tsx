@@ -27,7 +27,7 @@ import CourseSetting from '../builder/component/CourseSetting';
 import Categories from './components/Categories';
 import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
-import Hightlights from './components/Highlights';
+import Highlights from './components/Highlights';
 import Name from './components/Name';
 
 const AddNewCourse: React.FC = () => {
@@ -130,7 +130,7 @@ const AddNewCourse: React.FC = () => {
 												</Box>
 												<Box w="400px" bg="white" p="10" shadow="box">
 													<Stack direction="column" spacing="6">
-														<Hightlights />
+														<Highlights />
 														<Categories />
 														<FeaturedImage size="masteriyo_thumbnail" />
 													</Stack>

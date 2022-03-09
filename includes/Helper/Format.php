@@ -838,3 +838,21 @@ function masteriyo_kebab_to_snake( $text ) {
 function masteriyo_snake_to_kebab( $text ) {
 	return str_replace( ' ', '', str_replace( '_', '-', $text ) );
 }
+
+/**
+ * Format course highlights.
+ *
+ * e.g. <ul><li></li></ul>
+ *
+ * @since x.x.x
+ *
+ * @param string $highlights
+ * @return string
+ */
+function masteriyo_format_course_highlights( $highlights ) {
+	if ( ! masteriyo_starts_with( '<ul>', $highlights ) ) {
+		$highlights = '<ul>' . $highlights . '</ul>';
+	}
+
+	return $highlights;
+}

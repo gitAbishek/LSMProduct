@@ -7,7 +7,8 @@ import { useFormContext } from 'react-hook-form';
 interface Props {
 	defaultValue?: string;
 }
-const Hightlights: React.FC<Props> = (props) => {
+
+const Highlights: React.FC<Props> = (props) => {
 	const { setValue } = useFormContext();
 	const { defaultValue } = props;
 
@@ -20,8 +21,10 @@ const Hightlights: React.FC<Props> = (props) => {
 				borderColor="gray.200"
 				shadow="input"
 				rounded="sm"
+				h="28"
 				pl="5">
 				<RichText
+					tagName={'ul'}
 					multiline="li"
 					value={defaultValue || ''}
 					onChange={(val) => setValue('highlights', val)}
@@ -31,4 +34,4 @@ const Hightlights: React.FC<Props> = (props) => {
 	);
 };
 
-export default Hightlights;
+export default Highlights;

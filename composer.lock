@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8b0ef2596ca5d9bd39a91b720b4b93d",
+    "content-hash": "c86db887be9aa4a165f09ae951af3773",
     "packages": [
         {
             "name": "league/container",
@@ -2643,7 +2643,8 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/refs/tags/5.9.1"
+                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/refs/tags/5.9.1",
+                "reference": "5.9.1"
             },
             "require": {
                 "php": ">=5.3.2",

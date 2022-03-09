@@ -1,8 +1,5 @@
 import { Box, FormControl, FormLabel } from '@chakra-ui/react';
-import Document from '@tiptap/extension-document';
-import Dropcursor from '@tiptap/extension-dropcursor';
-import { EditorContent, useEditor } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
+import { RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -13,18 +10,6 @@ interface Props {
 const Hightlights: React.FC<Props> = (props) => {
 	const { setValue } = useFormContext();
 	const { defaultValue } = props;
-	const CustomDocument = Document.extend({
-		content: 'bulletList',
-	});
-
-	const editor = useEditor({
-		extensions: [StarterKit, Dropcursor, CustomDocument],
-		content: defaultValue,
-	});
-
-	editor?.on('update', () => {
-		setValue('highlights', editor?.getHTML());
-	});
 
 	return (
 		<FormControl>
@@ -35,14 +20,12 @@ const Hightlights: React.FC<Props> = (props) => {
 				borderColor="gray.200"
 				shadow="input"
 				rounded="sm"
-				sx={{
-					'.ProseMirror': {
-						minH: '100px',
-						py: '2',
-						px: '4',
-					},
-				}}>
-				<EditorContent editor={editor} />
+				pl="5">
+				<RichText
+					multiline="li"
+					value={defaultValue || ''}
+					onChange={(val) => setValue('highlights', val)}
+				/>
 			</Box>
 		</FormControl>
 	);

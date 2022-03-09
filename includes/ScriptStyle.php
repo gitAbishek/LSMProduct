@@ -186,7 +186,7 @@ class ScriptStyle {
 				),
 				'admin'           => array(
 					'src'      => $admin_src,
-					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-backend' ), array( 'wp-core-data', 'wp-components', 'wp-element' ) ),
+					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-backend' ), array( 'wp-core-data', 'wp-components', 'wp-element', 'wp-editor' ) ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
 				),

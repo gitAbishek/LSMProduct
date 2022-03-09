@@ -1,8 +1,8 @@
 import { Textarea } from '@chakra-ui/react';
 import React, { PropsWithChildren } from 'react';
-import { WPLocalized } from '../../utils/global';
 import { isUndefined } from '../../utils/utils';
 
+const { wp, addEventListener, removeEventListener } = window as any;
 class WPEditor extends React.Component<PropsWithChildren<any>, any> {
 	constructor(props: PropsWithChildren<any>) {
 		super(props);
@@ -15,25 +15,24 @@ class WPEditor extends React.Component<PropsWithChildren<any>, any> {
 	}
 
 	componentDidMount() {
-		this.initEditor();
+		if (document.readyState === 'complete') {
+			this.initEditor();
+		} else {
+			addEventListener('DOMContentLoaded', this.initEditor);
+		}
 	}
 
 	componentWillUnmount() {
-		(window as any).tinymce.execCommand(
-			'mceRemoveControl',
-			true,
-			`#${this.state.id}`
-		);
-		WPLocalized.editor.remove(this.state.id);
-		(window as any).tinymce.remove(this.state.editor);
+		removeEventListener('DOMContentLoaded', this.initEditor);
+		wp.editor.remove(this.state.id);
 	}
 
 	initEditor(id = null) {
 		const $this = this;
 		id = null !== this.state.id ? this.state.id : $this.props.id;
 
-		if (!isUndefined(WPLocalized) && !isUndefined(WPLocalized.editor)) {
-			WPLocalized.editor.initialize(`${id}`, {
+		if (!isUndefined(wp) && !isUndefined(wp.editor)) {
+			wp.editor.initialize(`${id}`, {
 				tinymce: {
 					wpautop: true,
 					plugins:

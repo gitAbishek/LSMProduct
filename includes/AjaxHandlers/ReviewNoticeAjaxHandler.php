@@ -9,6 +9,7 @@
 namespace Masteriyo\AjaxHandlers;
 
 use Masteriyo\Abstracts\AjaxHandler;
+use Masteriyo\Exceptions\RestException;
 use WP_Error;
 
 /**
@@ -66,7 +67,7 @@ class ReviewNoticeAjaxHandler extends AjaxHandler {
 				$notice['closed_count'] = $notice['closed_count'] + 1;
 				$notice['time_to_ask']  = time() + DAY_IN_SECONDS;
 			} else {
-				throw new WP_Error( 'masteriyo_invalid_action',  __( 'Invalid action name!', 'masteriyo' ) );
+				throw new RestException( 'masteriyo_invalid_action',  __( 'Invalid action name!', 'masteriyo' ) );
 			}
 
 			// Update review notice only if there is any changes.

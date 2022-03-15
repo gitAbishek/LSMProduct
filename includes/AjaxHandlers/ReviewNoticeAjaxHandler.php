@@ -9,6 +9,7 @@
 namespace Masteriyo\AjaxHandlers;
 
 use Masteriyo\Abstracts\AjaxHandler;
+use WP_Error;
 
 /**
  * ReviewNotice ajax handler.
@@ -54,34 +55,24 @@ class ReviewNoticeAjaxHandler extends AjaxHandler {
 			}
 
 			$action = isset( $_POST['masteriyo_action'] ) ? sanitize_text_field( $_POST['masteriyo_action'] ) : null;
-			$notice = get_option( 'masteriyo_review_notice', array() );
-			$notice = wp_parse_args(
-				$notice,
-				array(
-					'time_to_ask'  => time() + WEEK_IN_SECONDS,
-					'reviewed'     => false,
-					'closed_count' => 0,
-				)
-			);
 
-			if ( 'review_received' === $action ) {
+			$notice = $this->get_notice_setting();
+
+			if ( 'review_received' === $action || 'already_reviewed' === $action ) {
 				$notice['reviewed'] = true;
-			}
-
-			if ( 'remind_me_later' === $action ) {
+			} elseif ( 'remind_me_later' === $action ) {
 				$notice['time_to_ask'] = time() + DAY_IN_SECONDS;
-			}
-
-			if ( 'close_notice' === $action ) {
+			} elseif ( 'close_notice' === $action ) {
 				$notice['closed_count'] = $notice['closed_count'] + 1;
 				$notice['time_to_ask']  = time() + DAY_IN_SECONDS;
+			} else {
+				throw new WP_Error( 'masteriyo_invalid_action',  __( 'Invalid action name!', 'masteriyo' ) );
 			}
 
-			if ( 'already_reviewed' === $action ) {
-				$notice['reviewed'] = true;
+			// Update review notice only if there is any changes.
+			if ( array_diff( $notice, $this->get_notice_setting() ) ) {
+				update_option( 'masteriyo_review_notice', $notice, true );
 			}
-
-			update_option( 'masteriyo_review_notice', $notice, true );
 
 			wp_send_json_success();
 		} catch ( \Exception $e ) {
@@ -92,5 +83,25 @@ class ReviewNoticeAjaxHandler extends AjaxHandler {
 				400
 			);
 		}
+	}
+
+	/**
+	 * Return notice setting.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return array
+	 */
+	protected function get_notice_setting() {
+		$notice = get_option( 'masteriyo_review_notice', array() );
+
+		return wp_parse_args(
+			$notice,
+			array(
+				'time_to_ask'  => time() + WEEK_IN_SECONDS,
+				'reviewed'     => false,
+				'closed_count' => 0,
+			)
+		);
 	}
 }

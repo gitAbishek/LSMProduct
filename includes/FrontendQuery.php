@@ -324,7 +324,7 @@ class FrontendQuery {
 			$q->is_comment_feed = false;
 		}
 
-		// Special check for coursess with the COURSE POST TYPE ARCHIVE on front.
+		// Special check for courses with the COURSE POST TYPE ARCHIVE on front.
 		if ( current_theme_supports( 'masteriyo' ) && $q->is_page() && 'page' === get_option( 'show_on_front' ) && absint( $q->get( 'page_id' ) ) === masteriyo_get_page_id( 'courses' ) ) {
 			// This is a front-page courses.
 			$q->set( 'post_type', 'mto-course' );
@@ -408,7 +408,7 @@ class FrontendQuery {
 		// Store reference to this query.
 		$this->course_query = $q;
 
-		// Additonal hooks to change WP Query.
+		// Additional hooks to change WP Query.
 		// add_filter( 'posts_clauses', array( $this, 'price_filter_post_clauses' ), 10, 2 );
 		add_filter( 'the_posts', array( $this, 'handle_get_posts' ), 10, 2 );
 
@@ -626,5 +626,17 @@ class FrontendQuery {
 	 */
 	public function remove_add_to_cart_pagination( $url ) {
 		return remove_query_arg( 'add-to-cart', $url );
+	}
+
+	/**
+	 * Is the front page a page we define?
+	 *
+	 * @since x.x.x
+	 *
+	 * @param int $page_id Page ID.
+	 * @return bool
+	 */
+	private function page_on_front_is( $page_id ) {
+		return absint( get_option( 'page_on_front' ) ) === absint( $page_id );
 	}
 }

@@ -342,16 +342,20 @@ abstract class Model {
 	 * Delete an object, set the ID to 0, and return result.
 	 *
 	 * @since  1.0.0
+	 * @since  x.x.x $children parameter is removed and replaced with $args parameter.
+	 *
 	 * @param  bool $force_delete Should the date be deleted permanently.
 	 * @return bool result
 	 */
-	public function delete( $force_delete = false, $children = false ) {
+	public function delete( $force_delete = false, $args = array() ) {
 		if ( $this->repository ) {
 			$this->repository->delete(
 				$this,
-				array(
-					'force_delete' => $force_delete,
-					'children'     => $children,
+				wp_parse_args(
+					$args,
+					array(
+						'force_delete' => $force_delete,
+					)
 				)
 			);
 			$this->set_id( 0 );

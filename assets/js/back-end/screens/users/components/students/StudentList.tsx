@@ -150,6 +150,12 @@ const StudentList: React.FC<Props> = (props) => {
 									'Are you sure? You can’t restore after deleting.',
 									'masteriyo'
 								)}
+								<Text fontSize="12px" color="gray.500" mt="4">
+									{__(
+										'*Please note that all course progresses and quiz attempts of this user will be deleted.',
+										'masteriyo'
+									)}
+								</Text>
 							</AlertDialogBody>
 							<AlertDialogFooter>
 								<ButtonGroup>

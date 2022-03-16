@@ -117,6 +117,9 @@ class UsersController extends PostsController {
 			)
 		);
 
+		/**
+		 * @since x.x.x Added reassign parameter.
+		 */
 		register_rest_route(
 			$this->namespace,
 			'/' . $this->rest_base . '/(?P<id>[\d]+)',
@@ -150,10 +153,15 @@ class UsersController extends PostsController {
 					'callback'            => array( $this, 'delete_item' ),
 					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
 					'args'                => array(
-						'force' => array(
+						'force'    => array(
 							'default'     => true,
 							'type'        => 'boolean',
 							'description' => __( 'Required to be true, as the resource does not support trashing.', 'masteriyo' ),
+						),
+						'reassign' => array(
+							'default'     => null,
+							'type'        => array( 'integer', 'null' ),
+							'description' => __( 'Reassign posts and links to new User ID.', 'masteriyo' ),
 						),
 					),
 				),

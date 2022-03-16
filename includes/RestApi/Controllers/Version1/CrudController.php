@@ -549,10 +549,9 @@ abstract class CrudController extends RestController {
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function delete_item( $request ) {
-		$force    = isset( $request['force'] ) ? (bool) $request['force'] : true;
-		$children = isset( $request['children'] ) ? (bool) $request['children'] : true;
-		$object   = $this->get_object( (int) $request['id'] );
-		$result   = false;
+		$force  = isset( $request['force'] ) ? (bool) $request['force'] : true;
+		$object = $this->get_object( (int) $request['id'] );
+		$result = false;
 
 		if ( ! $object || 0 === $object->get_id() ) {
 			return new \WP_Error( "masteriyo_rest_{$this->object_type}_invalid_id", __( 'Invalid ID', 'masteriyo' ), array( 'status' => 404 ) );
@@ -577,7 +576,7 @@ abstract class CrudController extends RestController {
 
 		// If we're forcing, then delete permanently.
 		if ( $force ) {
-			$object->delete( $force, $children );
+			$object->delete( $force, $request->get_params() );
 			$result = 0 === $object->get_id();
 		} else {
 			// If we don't support trashing for this type, error out.
@@ -593,7 +592,7 @@ abstract class CrudController extends RestController {
 					return new \WP_Error( 'masteriyo_rest_already_trashed', sprintf( __( 'The %s has already been deleted.', 'masteriyo' ), $this->object_type ), array( 'status' => 410 ) );
 				}
 
-				$object->delete( $force, $children );
+				$object->delete( $force, $request->get_params() );
 				$result = 'trash' === $object->get_status();
 			}
 		}

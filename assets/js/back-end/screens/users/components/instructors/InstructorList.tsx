@@ -8,6 +8,7 @@ import {
 	Box,
 	Button,
 	ButtonGroup,
+	HStack,
 	Icon,
 	IconButton,
 	Link,
@@ -15,6 +16,9 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
+	Radio,
+	RadioGroup,
+	Select,
 	Stack,
 	Text,
 	Tooltip,
@@ -29,7 +33,7 @@ import {
 	BiTrash,
 } from 'react-icons/bi';
 import { FaCheckCircle } from 'react-icons/fa';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
 import { Td, Tr } from 'react-super-responsive-table';
 import { infoIconStyles } from '../../../../config/styles';
@@ -48,24 +52,64 @@ const InstructorList: React.FC<Props> = (props) => {
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const queryClient = useQueryClient();
 	const usersAPI = new API(urls.instructors);
+	const allUsersAPI = new API(urls.users);
 	const cancelDeleteModalRef = useRef<any>();
 	const toast = useToast();
+	const [reassignID, setReassignID] = useState(0);
+	const usersQuery = useQuery(
+		'allUsers',
+		() =>
+			allUsersAPI.list({
+				per_page: -1,
+				order: 'asc',
+				orderby: 'display_name',
+			}),
+		{
+			onSuccess: (data: any) => {
+				// Set first user id to reassign ID as it is selected on top of option.
+				setReassignID(data?.data?.[0]?.id || 0);
+			},
+		}
+	);
 
-	const deleteUser = useMutation((id: number) => usersAPI.delete(id), {
-		onSuccess: () => {
-			setDeleteModalOpen(false);
-			toast({
-				title: __('User deleted successfully.', 'masteriyo'),
-				description: `#${data.id} ${__(
-					' has been deleted successfully.',
-					'masteriyo'
-				)}`,
-				isClosable: true,
-				status: 'success',
-			});
-			queryClient.invalidateQueries('instructorsList');
-		},
-	});
+	const renderUsersOption = () => {
+		try {
+			return usersQuery?.data?.data.map(
+				(user: { id: number; display_name: string; nicename: string }) => {
+					// Do not include same user in the users option.
+					if (user.id === data.id) {
+						return;
+					}
+					return (
+						<option value={user.id} key={user.id}>
+							{user.display_name} ({user.nicename})
+						</option>
+					);
+				}
+			);
+		} catch (error) {
+			return;
+		}
+	};
+
+	const deleteUser = useMutation(
+		(id: number) => usersAPI.delete(id, { reassign: reassignID }),
+		{
+			onSuccess: () => {
+				setDeleteModalOpen(false);
+				toast({
+					title: __('User deleted successfully.', 'masteriyo'),
+					description: `#${data.id} ${__(
+						' has been deleted successfully.',
+						'masteriyo'
+					)}`,
+					isClosable: true,
+					status: 'success',
+				});
+				queryClient.invalidateQueries('instructorsList');
+			},
+		}
+	);
 
 	const onDeletePress = () => {
 		setDeleteModalOpen(true);
@@ -165,17 +209,54 @@ const InstructorList: React.FC<Props> = (props) => {
 					isOpen={isDeleteModalOpen}
 					onClose={onDeleteModalClose}
 					isCentered
+					size="xl"
 					leastDestructiveRef={cancelDeleteModalRef}>
 					<AlertDialogOverlay>
 						<AlertDialogContent>
 							<AlertDialogHeader>
-								{__('Delete User')} {data?.display_name}
+								{__('Delete User', 'masteriyo')} {data?.display_name}
 							</AlertDialogHeader>
 							<AlertDialogBody>
-								{__(
-									'Are you sure? You can’t restore after deleting.',
-									'masteriyo'
-								)}
+								<Text fontSize="14px">
+									{__(
+										'What should be done with content owned by this user?',
+										'masteriyo'
+									)}
+								</Text>
+								<RadioGroup defaultValue="reassign" mt="4" mb="4">
+									<Stack spacing="3">
+										<HStack>
+											<Radio
+												value="reassign"
+												onChange={() =>
+													queryClient.invalidateQueries('allUsers')
+												}>
+												<Text>
+													{__('Attribute all content to:', 'masteriyo')}
+												</Text>
+											</Radio>
+											<Select
+												size="sm"
+												w="xs"
+												value={reassignID}
+												bg="none !important"
+												onChange={(e: any) => setReassignID(e.target.value)}>
+												{renderUsersOption()}
+											</Select>
+										</HStack>
+										<Radio value="" onChange={() => setReassignID(0)}>
+											<Text color="red.400">
+												{__('Delete all content.', 'masteriyo')}
+											</Text>
+										</Radio>
+									</Stack>
+								</RadioGroup>
+								<Text fontSize="12px" color="gray.500">
+									{__(
+										'*Please note that all course progresses and quiz attempts of this user will be deleted and cannot be transfer.',
+										'masteriyo'
+									)}
+								</Text>
 							</AlertDialogBody>
 							<AlertDialogFooter>
 								<ButtonGroup>
@@ -188,7 +269,7 @@ const InstructorList: React.FC<Props> = (props) => {
 									<Button
 										colorScheme="red"
 										onClick={onDeleteConfirm}
-										isLoading={deleteUser.isLoading}>
+										isLoading={deleteUser.isLoading || usersQuery.isFetching}>
 										{__('Delete', 'masteriyo')}
 									</Button>
 								</ButtonGroup>

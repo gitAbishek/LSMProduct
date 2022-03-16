@@ -239,16 +239,40 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 			$args
 		);
 
+		$args['reassign'] = ( 0 === $args['reassign'] ) ? null : $args['reassign'];
+
 		if ( ! $id ) {
 			return;
 		}
 
-		do_action( 'masteriyo_before_delete_' . $object_type, $id, $user );
+		/**
+		 * Fires immediately before a user is deleted from the database.
+		 *
+		 * @since 1.0.0
+		 * @since x.x.x Added the `$args['reassign']` parameter.
+		 *
+		 * @param int      $id       ID of the user to delete.
+		 * @param WP_User  $user     WP_User object of the user to delete.
+		 * @param int|null $reassign ID of the user to reassign posts and links to.
+		 *                           Default null, for no reassignment.
+		 */
+		do_action( 'masteriyo_before_delete_' . $object_type, $id, $user, $args['reassign'] );
 		wp_delete_user( $id, $args['reassign'] );
 
 		$user->set_id( 0 );
 
-		do_action( 'masteriyo_after_delete_' . $object_type, $id, $user );
+		/**
+		 * Fires immediately after a user is deleted from the database.
+		 *
+		 * @since 1.0.0
+		 * @since x.x.x Added the `$args['reassign']` parameter.
+		 *
+		 * @param int      $id       ID of the user to delete.
+		 * @param WP_User  $user     WP_User object of the user to delete.
+		 * @param int|null $reassign ID of the user to reassign posts and links to.
+		 *                           Default null, for no reassignment.
+		 */
+		do_action( 'masteriyo_after_delete_' . $object_type, $id, $user, $args['reassign'] );
 	}
 
 	/**

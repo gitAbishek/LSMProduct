@@ -1,27 +1,32 @@
-import { Box, Center, Heading, Icon } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
-import React, { Component, PropsWithChildren } from 'react';
+import { Box, Center, Code, Icon, Stack } from '@chakra-ui/react';
+import React, { Component, ErrorInfo, PropsWithChildren } from 'react';
 import { Five0Five } from '../constants/images';
 
 class ErrorBoundary extends Component<PropsWithChildren<any>, any> {
 	constructor(props: PropsWithChildren<any>) {
 		super(props);
-		this.state = { hasError: false };
+		this.state = { error: null, errorInfo: null };
 	}
 
-	static getDerivedStateFromError() {
-		return { hasError: true };
+	public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+		this.setState({
+			error: error,
+			errorInfo: errorInfo,
+		});
 	}
 
 	render() {
-		if (this.state.hasError) {
+		if (this.state.error) {
 			return (
-				<Center h="90vh">
+				<Center minH="90vh">
 					<Box textAlign="center">
 						<Icon as={Five0Five} w="300px" h="180px" />
-						<Heading fontSize="lg" fontWeight="normal">
-							{__('Something went wrong.', 'masteriyo')}
-						</Heading>
+						<Stack direction="column" align="center">
+							<Code>{this.state.error.toString()}</Code>
+							<Code maxW="3xl" colorScheme="red" p="8">
+								{this.state.errorInfo.componentStack}
+							</Code>
+						</Stack>
 					</Box>
 				</Center>
 			);

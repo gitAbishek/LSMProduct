@@ -342,7 +342,7 @@ class CoursesController extends PostsController {
 		}
 
 		$data = array(
-			'id'                => $course->get_id(),
+			// 'id'                => $course->get_id(),
 			'name'              => wp_specialchars_decode( $course->get_name( $context ) ),
 			'slug'              => $course->get_slug( $context ),
 			'permalink'         => $course->get_permalink(),

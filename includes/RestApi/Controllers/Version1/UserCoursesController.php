@@ -543,7 +543,7 @@ class UserCoursesController extends CrudController {
 		return array(
 			'objects' => $objects,
 			'total'   => (int) $query->found_rows,
-			'pages'   => (int) ceil( count( $objects ) / (int) $query_args['per_page'] ),
+			'pages'   => (int) ceil( $query->found_rows / (int) $query_args['per_page'] ),
 		);
 	}
 

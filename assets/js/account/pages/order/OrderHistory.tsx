@@ -1,17 +1,29 @@
 import { Heading, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
+import MasteriyoPagination from '../../../back-end/components/common/MasteriyoPagination';
 import urls from '../../../back-end/constants/urls';
 import NoOrdersNotice from '../../../back-end/screens/orders/components/NoOrdersNotice';
-import { SkeletonOrdersList } from '../../../back-end/skeleton';
+import { SkeletonAccountOrdersList } from '../../../back-end/skeleton';
 import API from '../../../back-end/utils/api';
+import { isEmpty } from '../../../back-end/utils/utils';
 import OrderList from '../../components/OrderList';
+interface FilterParams {
+	per_page?: number;
+	page?: number;
+	status?: string;
+	after?: string;
+	before?: string;
+}
 
 const OrderHistory: React.FC = () => {
+	const [filterParams, setFilterParams] = useState<FilterParams>({});
 	const ordersAPI = new API(urls.orders);
-	const ordersQuery = useQuery('ordersList', () => ordersAPI.list());
+	const ordersQuery = useQuery(['ordersList', filterParams], () =>
+		ordersAPI.list(filterParams)
+	);
 
 	return (
 		<Stack direction="column" spacing="8" width="full">
@@ -30,16 +42,23 @@ const OrderHistory: React.FC = () => {
 					</Tr>
 				</Thead>
 				<Tbody>
-					{ordersQuery.isLoading && <SkeletonOrdersList />}
-					{ordersQuery.isSuccess && ordersQuery?.data?.data.length === 0 ? (
+					{ordersQuery.isLoading && <SkeletonAccountOrdersList />}
+					{ordersQuery.isSuccess && isEmpty(ordersQuery?.data?.data) ? (
 						<NoOrdersNotice />
 					) : (
-						ordersQuery?.data?.data.map((order: any) => (
+						ordersQuery?.data?.data?.map((order: any) => (
 							<OrderList key={order.id} data={order} />
 						))
 					)}
 				</Tbody>
 			</Table>
+			{ordersQuery.isSuccess && !isEmpty(ordersQuery?.data?.data) ? (
+				<MasteriyoPagination
+					metaData={ordersQuery?.data?.meta}
+					setFilterParams={setFilterParams}
+					perPageText={__('Orders Per Page:', 'masteriyo')}
+				/>
+			) : null}
 		</Stack>
 	);
 };

@@ -1,16 +1,26 @@
 import { Heading, SimpleGrid, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import MasteriyoPagination from '../../../back-end/components/common/MasteriyoPagination';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
+import { isEmpty } from '../../../back-end/utils/utils';
 import CourseItem from '../../components/CourseItem';
 import { MyCoursesSchema } from '../../schemas';
 
+interface FilterParams {
+	per_page?: number;
+	page?: number;
+}
+
 const EnrolledCourses: React.FC = () => {
+	const [filterParams, setFilterParams] = useState<FilterParams>({});
 	const courseAPI = new API(urls.myCourses);
-	const myCourseQuery = useQuery(['myCourses'], () => courseAPI.list());
+	const myCourseQuery = useQuery(['myCourses', filterParams], () =>
+		courseAPI.list(filterParams)
+	);
 
 	if (myCourseQuery.isSuccess) {
 		return (
@@ -19,10 +29,17 @@ const EnrolledCourses: React.FC = () => {
 					{__('Enrolled Courses', 'masteriyo')}
 				</Heading>
 				<SimpleGrid columns={3} spacing="6">
-					{myCourseQuery?.data?.data.map((myCourse: MyCoursesSchema) => {
+					{myCourseQuery?.data?.data?.map((myCourse: MyCoursesSchema) => {
 						return <CourseItem key={myCourse.id} courseData={myCourse} />;
 					})}
 				</SimpleGrid>
+				{myCourseQuery.isSuccess && !isEmpty(myCourseQuery?.data?.data) ? (
+					<MasteriyoPagination
+						metaData={myCourseQuery?.data?.meta}
+						setFilterParams={setFilterParams}
+						perPageText={__('Courses Per Page:', 'masteriyo')}
+					/>
+				) : null}
 			</Stack>
 		);
 	}

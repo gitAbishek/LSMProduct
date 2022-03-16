@@ -539,12 +539,12 @@ class LessonsController extends PostsController {
 
 		// Post title.
 		if ( isset( $request['name'] ) ) {
-			$lesson->set_name( wp_filter_post_kses( $request['name'] ) );
+			$lesson->set_name( sanitize_text_field( $request['name'] ) );
 		}
 
 		// Post content.
 		if ( isset( $request['description'] ) ) {
-			$lesson->set_description( wp_filter_post_kses( $request['description'] ) );
+			$lesson->set_description( $request['description'] );
 		}
 
 		// Post excerpt.

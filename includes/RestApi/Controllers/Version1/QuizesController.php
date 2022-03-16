@@ -1141,17 +1141,17 @@ class QuizesController extends PostsController {
 
 		// Quiz title.
 		if ( isset( $request['name'] ) ) {
-			$quiz->set_name( wp_filter_post_kses( $request['name'] ) );
+			$quiz->set_name( sanitize_text_field( $request['name'] ) );
 		}
 
 		// Quiz content.
 		if ( isset( $request['description'] ) ) {
-			$quiz->set_description( wp_filter_post_kses( $request['description'] ) );
+			$quiz->set_description( $request['description'] );
 		}
 
 		// Quiz excerpt.
 		if ( isset( $request['short_description'] ) ) {
-			$quiz->set_short_description( wp_filter_post_kses( $request['short_description'] ) );
+			$quiz->set_short_description( wp_kses_post( $request['short_description'] ) );
 		}
 
 		// Quiz status.

@@ -819,7 +819,7 @@ class CoursesController extends PostsController {
 
 		// Post excerpt.
 		if ( isset( $request['short_description'] ) ) {
-			$course->set_short_description( wp_filter_post_kses( $request['short_description'] ) );
+			$course->set_short_description( wp_kses_post( $request['short_description'] ) );
 		}
 
 		// Post status.

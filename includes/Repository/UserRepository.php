@@ -249,7 +249,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		 * Fires immediately before a user is deleted from the database.
 		 *
 		 * @since 1.0.0
-		 * @since x.x.x Added the `$args['reassign']` parameter.
+		 * @since 1.4.5 Added the `$args['reassign']` parameter.
 		 *
 		 * @param int      $id       ID of the user to delete.
 		 * @param WP_User  $user     WP_User object of the user to delete.
@@ -265,7 +265,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		 * Fires immediately after a user is deleted from the database.
 		 *
 		 * @since 1.0.0
-		 * @since x.x.x Added the `$args['reassign']` parameter.
+		 * @since 1.4.5 Added the `$args['reassign']` parameter.
 		 *
 		 * @param int      $id       ID of the user to delete.
 		 * @param WP_User  $user     WP_User object of the user to delete.

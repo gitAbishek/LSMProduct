@@ -8,11 +8,11 @@
 
 **Requires at least**: 5.0
 
-**Tested up to**: 5.9.1
+**Tested up to**: 5.9.2
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.4.4
+**Stable tag**: 1.4.5
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,13 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.4.5 - 16-03-2022
+
+- Enhancement - Display proper error message on the backend while 505 error.
+- Enhancement - Added pagination on order history and enrolled course on the account page.
+- Enhancement - Support transfer content of instructors to others while deleting.
+- Fix - Iframe not being displayed in lesson and quiz.
 
 ### 1.4.4 - 09-03-2022
 

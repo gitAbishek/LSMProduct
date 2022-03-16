@@ -2,9 +2,9 @@
 Contributors: Masteriyo, sanjiv-saha
 Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
-Tested up to: 5.9.1
+Tested up to: 5.9.2
 Requires PHP: 7.0
-Stable tag: 1.4.4
+Stable tag: 1.4.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,6 +13,12 @@ WordPress LMS & e-Learning plugin to create and sell online courses. Easy quiz c
 == Description ==
 
 ### Best Free WordPress LMS & eLearning Plugin - Masteriyo LMS
+
+👉 [Masteriyo Site](https://masteriyo.com/wordpress-lms/)
+👉 [View Demo](https://demo.masteriyo.com/elearning/)
+👉 [Documentation](https://docs.masteriyo.com/)
+👉 [Masteriyo LMS Pro](https://masteriyo.com/wordpress-lms/pricing/)
+👉 [Give a Try](https://demo.tastewp.com/learning-management-system) (Clicking this link creates a demo where you can test Masteriyo.)
 
 Masteriyo LMS is the most user-friendly and most powerful WordPress LMS solution to create and sell online courses. Comes with a super-fast and minimalist course builder that lets you make online course easily and quickly. And, absolutely no coding is required.
 
@@ -29,8 +35,6 @@ Not to mention, this great eLearning software lets you make brilliant learning p
 Built with passionate instructors and eager students in mind, Masteriyo is indeed a revolutionary learning management system (LMS) for WordPress!
 
 You may teach anything, you may not have any coding skills, but you can easily build an online teaching website with Masteriyo and help your students succeed.
-
-[Masteriyo Site](https://masteriyo.com/wordpress-lms/) | [Demo](https://demo.masteriyo.com/elearning/) | [Documentation](https://docs.masteriyo.com/)
 
 ### Masteriyo WordPress Learning Management System (LMS) Features
 Masteriyo LMS is power-packed with incredible LMS features to help you create an online learning platform.
@@ -196,6 +200,12 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.4.5 - 16-03-2022 =
+- Enhancement - Display proper error message on the backend while 505 error.
+- Enhancement - Added pagination on order history and enrolled course on the account page.
+- Enhancement - Support transfer content of instructors to others while deleting.
+- Fix - Iframe not being displayed in lesson and quiz.
 
 = 1.4.4 - 09-03-2022 =
 - Enhancement - Replaced tiptap editor with WordPress TinyMCE Editor.

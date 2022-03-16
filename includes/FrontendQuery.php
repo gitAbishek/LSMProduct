@@ -631,7 +631,7 @@ class FrontendQuery {
 	/**
 	 * Is the front page a page we define?
 	 *
-	 * @since x.x.x
+	 * @since 1.4.5
 	 *
 	 * @param int $page_id Page ID.
 	 * @return bool

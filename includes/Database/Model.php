@@ -342,7 +342,7 @@ abstract class Model {
 	 * Delete an object, set the ID to 0, and return result.
 	 *
 	 * @since  1.0.0
-	 * @since  x.x.x $children parameter is removed and replaced with $args parameter.
+	 * @since  1.4.5 $children parameter is removed and replaced with $args parameter.
 	 *
 	 * @param  bool $force_delete Should the date be deleted permanently.
 	 * @return bool result

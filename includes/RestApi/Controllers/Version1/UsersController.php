@@ -118,7 +118,7 @@ class UsersController extends PostsController {
 		);
 
 		/**
-		 * @since x.x.x Added reassign parameter.
+		 * @since 1.4.5 Added reassign parameter.
 		 */
 		register_rest_route(
 			$this->namespace,

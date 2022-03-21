@@ -48,12 +48,12 @@ trait Singleton {
 	 *
 	 * @since 1.0.0
 	 */
-	private function __clone() {}
+	public function __clone() {}
 
 	/**
 	 * Prevent unserializing.
 	 *
 	 * @since 1.0.0
 	 */
-	private function __wakeup() {}
+	public function __wakeup() {}
 }

@@ -279,7 +279,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		$search_criteria[] = $wpdb->prepare( 'activity_type = %s', 'course_progress' );
 
 		// Construct where clause part.
-		if ( ! empty( $query_vars['user_id'] ) ) {
+		if ( isset( $query_vars['user_id'] ) ) {
 			$search_criteria[] = $wpdb->prepare( 'user_id = %d', $query_vars['user_id'] );
 		}
 

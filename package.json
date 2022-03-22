@@ -12,7 +12,7 @@
     "@types/react-datepicker": "4.1.7",
     "@wordpress/api-fetch": "5.2.6",
     "@wordpress/i18n": "4.2.4",
-    "chakra-ui-steps": "0.2.2",
+    "chakra-ui-steps": "1.6.2",
     "classnames": "2.3.1",
     "focus-visible": "5.2.0",
     "framer-motion": "^4",

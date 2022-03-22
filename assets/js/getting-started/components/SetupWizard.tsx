@@ -55,7 +55,12 @@ const SetupWizard: React.FC = () => {
 		<FormProvider {...methods}>
 			<Container maxW="container.md">
 				<form onSubmit={methods.handleSubmit(onSubmit)}>
-					<Steps colorScheme="blue" size="sm" mb={5} activeStep={activeStep}>
+					<Steps
+						colorScheme="blue"
+						size="sm"
+						mb={5}
+						activeStep={activeStep}
+						labelOrientation="vertical">
 						{steps.map(({ label, StepContent }) => (
 							<Step label={label} key={label}>
 								<StepContent
